@@ -23,25 +23,23 @@
    "elementary": false
   },
   {
-   "text": "Apply rawModuleScalar_source_class_formula to the first three factors. Postcompose its equality with the forgotten module coefficient and scalar coefficient factors using congrArg. Combine the expansion with this equality by transitivity and Category.assoc. Present raw class inputs and outputs at their native derived Hom types using the concrete identity functions in def-sbc-raw-class-native-morphisms. These return the input element itself; unfolding their identity bodies makes no mathematical change.",
+   "text": "Apply rawModuleScalar_source_class_formula to the first three factors. Postcompose its equality with the forgotten module coefficient and scalar coefficient factors using congrArg. Combine the expansion with this equality by transitivity and Category.assoc.",
    "uses": [
-    "lem-sbc-raw-module-scalar-source-class-formula",
-    "def-sbc-raw-class-native-morphisms"
+    "lem-sbc-raw-module-scalar-source-class-formula"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sbc-raw-module-scalar-hom-composite-formula",
-  "lem-sbc-raw-module-scalar-source-class-formula",
-  "def-sbc-raw-class-native-morphisms"
+  "lem-sbc-raw-module-scalar-source-class-formula"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "V3",
-  "date": "2026-10-21",
-  "document": "Stacks Project; existing raw-map calculations with explicit native class values",
-  "place": "Tags 03FD, 03D7 and 03Q8; identity presentation of the same classes and unchanged categorical equations"
+  "group": "G2",
+  "date": "2026-10-25",
+  "document": "Stacks Project",
+  "place": "Tags 03D7 and 03Q8; source, class and coefficient factor calculation of lem-sbc-raw-module-abelian-hom-map-naturality; existing canonical upstream proof in lean/WeilConjectures/AlgebraicGeometry/RawModuleAbelianHomSourceFormula.lean"
  },
  "mathlib_searches": [
   {
@@ -91,15 +89,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomSourceFormula",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleAbelianHomSourceFormula.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomSourceFormula",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleAbelianHomSourceFormula.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleAbelianHomMap_source_formula",
-  "statement": "theorem rawModuleAbelianHomMap_source_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    rawAbelianClassMorphism (A.hom ≫ k)\n      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U\n      (rawModuleAbelianHomMap Λ k G q U A\n        ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z)) =\n    rawModuleScalarSourcePrefix Λ k G q U A B f z ≫\n      ((RawModuleScalarComparison.derivedPullbackIso Λ f.left).inv.app\n          (((DerivedCategory.Plus.singleFunctor _ 0).obj\n            ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦(q : ℤ)⟧) ≫\n        (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map\n          (moduleCoefficientFactorNative Λ G (q : ℤ) A B f) ≫\n        scalarCoefficientFactor Λ A.hom G (q : ℤ))",
+  "statement": "theorem rawModuleAbelianHomMap_source_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    rawModuleAbelianHomMap Λ k G q U A\n      ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z) =\n    rawModuleScalarSourcePrefix Λ k G q U A B f z ≫\n      ((moduleAbelianDerivedUpperStarIso Λ f.left).hom.app\n          (((DerivedCategory.Plus.singleFunctor _ 0).obj\n            ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦(q : ℤ)⟧) ≫\n        (moduleAbelianForget Λ A.left).mapDerivedCategoryPlus.map\n          (moduleCoefficientFactor Λ G (q : ℤ) A B f) ≫\n        scalarCoefficientFactor Λ A.hom G (q : ℤ))",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-21",
-  "note": "Presentation repair only: rawModuleClassMorphism and rawAbelianClassMorphism return their inputs at the definitionally equal derived Hom types. The mathematical statement, binders and degree conventions are unchanged. The coefficient factor is also presented at the named raw-complex endpoints by moduleCoefficientFactorNative, which returns the canonical factor itself."
+  "by": "G2",
+  "date": "2026-10-25",
+  "note": "Retire the unclaimed Sheaf duplicate and use the existing canonical upstream theorem. Unfolding the identity raw-class views, RawModuleScalarComparison.forget, moduleCoefficientFactorNative and the inverse comparison abbreviation recovers exactly the same categorical equation, with unchanged binders and hypotheses."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -112,16 +110,27 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-aa2a9",
-  "group": "V3",
-  "result": "fix",
-  "landing": "20261021T061739-L-1825145",
+  "reviewer": "C-9dbc6",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T060830-L-2376591",
   "kind": "interface",
-  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
+  "note": "independent cc review: 4 node lean.statement records vs WeilConjectures upstream declarations (verbatim); retired Sheaf statements vs upstream via identity views/abbrevs (derivedPullbackIso.inv = moduleAbelianDerivedUpperStarIso.hom); importer graph of the 5 withdrawn modules (chain-internal only); non-lean/proof node fields vs clone (identical)"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "statement_change": {
   "date": "2026-10-21",
   "by": "V3 stage 2",

@@ -1,0 +1,387 @@
+{
+ "id": "lem-trf-separable-valued-completion-factors",
+ "kind": "statement",
+ "title": "Completed factors of a finite separable rank-one valued extension",
+ "statement": "Let $F$ be a field with a nontrivial nonarchimedean real absolute value $|\\cdot|:F\\to\\mathbf R_{\\geq0}$ (that is, $|a|=0$ exactly for $a=0$, $|ab|=|a||b|$, $|a+b|\\leq\\max(|a|,|b|)$, and some $a$ has $|a|\\notin\\{0,1\\}$) [def-weil-field], let $A=\\{a\\in F:|a|\\leq1\\}$ be its valuation ring [def-trf-valuation-ring], and let $E/F$ be finite separable [def-weil-pbc-separable-algebraic-extension]. Put $C=\\{x\\in E:x\\text{ satisfies a monic polynomial in }A[T]\\}$, the integral closure [def-weil-pbc-integral-closure]. There are finitely many distinct maximal ideals $\\mathfrak m_1,\\ldots,\\mathfrak m_r$ of $C$, with $r\\geq1$, and these are all its maximal ideals. The rings $C_{\\mathfrak m_i}$ are exactly the valuation rings of $E$ extending $A$, and their residue fields are $C/\\mathfrak m_i$. Each is induced by a unique absolute value $|\\cdot|_i$ extending that of $F$; write $E_i$ for this valued field and $\\widehat E_i$ for its metric completion (the field of equivalence classes of Cauchy sequences, with the extended absolute value, in which $E_i$ is dense). For the metric completion $\\widehat F$ of $F$, the canonical map\n$$E\\otimes_F\\widehat F\\longrightarrow\\prod_{i=1}^r\\widehat E_i,\\qquad x\\otimes a\\longmapsto(xa)_i$$\nis an isomorphism of $\\widehat F$-algebras. The valuation ring $\\widehat A$ of $\\widehat F$ is henselian [def-weil-pbc-henselian-terminology]. In every finite extension of $\\widehat F$ its integral closure is the unique valuation ring extending $\\widehat A$. In $\\widehat E_i$ it is the ring of elements of absolute value at most one. If $x\\in C$ generates $E$ over $F$, then its monic minimal polynomial $f$ belongs to $A[T]$ and factors in $\\widehat F[T]$ as $f=\\prod_i f_i$, where $f_i\\in\\widehat A[T]$ is the monic minimal polynomial of the image $x_i\\in\\widehat E_i$, of degree $[\\widehat E_i:\\widehat F]$. Every root of $f_i$ in an algebraic closure endowed with the extending absolute value has absolute value $|x|_i$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 2.2.1, proof, printed pp. 11--12: semilocal normalization, completed tensor-product decomposition, factors f_i and henselianity of the complete field. Primary text https://arxiv.org/html/0707.3953v3#S2.SS2."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "First normalize any valuation ring $W$ in an algebraic extension $H/F$ with $W\\cap F=A$. Order $\\Gamma=H^\\times/W^\\times$ multiplicatively, so $[z]\\leq1$ means $z\\in W$. The subgroup $F^\\times/A^\\times$ identifies with $|F^\\times|$. By [lem-trf-valuation-value-group-torsion], every $\\gamma=[z]$ has $\\gamma^n=[a]$ for some $n>0$ and $a\\in F^\\times$. Define $w(z)=|a|^{1/n}$ and $w(0)=0$. This is independent of choices: if also $\\gamma^m=[b]$, then $a^m/b^n\\in W^\\times\\cap F=A^\\times$, so $|a|^m=|b|^n$. Taking common powers proves multiplicativity and order preservation, strictly so because $|a|=1$ forces $\\gamma^n=1$ and an ordered group is torsion-free. The valuation-ring inequality for classes follows directly from $z/t\\in W\\Rightarrow(z+t)/t\\in W$; thus $w(z+t)\\leq\\max(w(z),w(t))$. Its unit ball is exactly $W$ and it extends $|\\cdot|$. Any other extending absolute value with unit ball $W$ is $1$ on $W^\\times$ and must satisfy $w(z)^n=|a|$, proving uniqueness. This argument needs algebraicity, not separability.",
+   "uses": [
+    "lem-trf-valuation-value-group-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, valuation equivalence and finite algebraic extensions; explicit normalization argument"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-valuation-normalization-localizations] to $A\\subset F\\subset E$. It gives that $C$ is a nonzero domain with fraction field $E$, a nonempty set of maximal ideals, and the bijection $\\mathfrak m\\mapsto C_{\\mathfrak m}$ onto extending valuation rings. Step 1 makes these equivalently the extending real absolute values. For a maximal $\\mathfrak m$, reduction gives $C_{\\mathfrak m}/\\mathfrak mC_{\\mathfrak m}\\cong C/\\mathfrak m$: an element $s\\notin\\mathfrak m$ already has invertible residue in the field $C/\\mathfrak m$, so $c/s$ maps to $\\bar c/\\bar s$. We prove finiteness of this set below, without assuming that $C$ is finite over $A$.",
+   "uses": [
+    "lem-trf-valuation-normalization-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1, paragraph preceding Lemma 2.1.2; Proposition 2.2.1, converse, first paragraph"
+   }
+  },
+  {
+   "text": "Put $K=\\widehat F$ and $N=E\\otimes_F K$. By [def-weil-vector-space-scalar-extension], $N$ has dimension $d=[E:F]\\geq1$ over $K$; by [lem-weil-pbc-finite-separable-tensor-field-reduced] it is reduced. It is Noetherian: an ascending chain of ideals is a chain of subspaces, whose dimensions increase at every strict inclusion and are bounded by $d$. Multiplication by a nonzerodivisor is an injective endomorphism of this finite-dimensional space, hence surjective, so the nonzerodivisor is a unit. Therefore $Q(N)=N$. Apply [lem-weil-pbc-reduced-noetherian-total-ring-fractions] to obtain a $K$-algebra decomposition $N\\cong\\prod_{j=1}^t L_j$ with $t\\geq1$ and every $L_j/K$ finite. The maps preserve $K$ because the cited decomposition is compatible with the maps from $N$. Every map $E\\to L_j$, $e\\mapsto\\pi_j(e\\otimes1)$, is a unital field map, hence injective.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, completed separable algebra; algebraic construction of its field factors"
+   }
+  },
+  {
+   "text": "Give each $L_j$ the extending nonarchimedean absolute value of [lem-trf-spectral-norm-algebraic-extension]. It is complete by [lem-per-finite-normed-space-complete], since $K$ is complete, its norm is nontrivial on $F$, and $L_j/K$ is finite. Use [lem-zl-finite-separable-tensor-primitive-presentation] with $k=F$, $K=\\widehat F$: there is a primitive $\\alpha\\in E$ such that $N=K[\\alpha\\otimes1]$ (interchange tensor factors in the displayed presentation). Consequently $L_j=K[\\alpha_j]$. If $y=\\sum_{h=0}^n b_h\\alpha_j^h$, choose $a_{h,m}\\in F$ converging to each $b_h\\in K$. Then $\\sum_h a_{h,m}\\alpha_j^h$ lies in the image of $E$ and its distance to $y$ is at most $\\max_h|a_{h,m}-b_h|\\,|\\alpha_j|^h$, tending to zero. Thus $E$ is dense in $L_j$. The map from its metric completion sends a Cauchy class $[e_m]$ to $\\lim_m e_m$ in $L_j$; definiteness of the distance gives injectivity, density gives surjectivity, and limits preserve addition and multiplication. It is therefore a $K$-algebra isomorphism from the completion for the restricted absolute value to $L_j$.",
+   "uses": [
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-per-finite-normed-space-complete",
+    "lem-zl-finite-separable-tensor-primitive-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, proof: identify each algebraic factor with the corresponding completion"
+   }
+  },
+  {
+   "text": "Conversely take any extending absolute value $v$ on $E$ and let $H$ be its metric completion. Sending a Cauchy sequence in $F$ to the same sequence in $E$ embeds $K$ isometrically into $H$. The map $q_v:N\\to H$, $e\\otimes b\\mapsto eb$, is a unital $K$-algebra map. In the product decomposition of Step 3 its coordinate idempotents are orthogonal and sum to $1$. A field has only idempotents $0,1$, so exactly one maps to $1$. Hence $q_v$ factors through a field embedding $L_j\\hookrightarrow H$. Its image is finite-dimensional over $K$ with the norm inherited from $H$, and is complete by [lem-per-finite-normed-space-complete]. It is closed: any sequence from the image converging in $H$ is Cauchy there, converges in the image by completeness, and the two limits agree. Since the image contains the dense subfield $E$, it equals $H$. The pullback of the norm of $H$ to $L_j$ agrees with its spectral norm by [lem-sfb-algebraic-absolute-value-unique], since both extend the given norm on the complete field $K$. Therefore $v$ is precisely the restriction constructed in Step 4.",
+   "uses": [
+    "lem-per-finite-normed-space-complete",
+    "lem-sfb-algebraic-absolute-value-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, proof: all completed valuations arise from algebraic factors"
+   }
+  },
+  {
+   "text": "Different $j$ give different restrictions to $E$. Indeed, if two restrictions agreed, the maps of Step 4 would identify both $L_j$ and $L_k$ with the same Cauchy completion by isomorphisms fixing $E$ and $K$. The induced maps $N\\to H$ would agree on every $e\\otimes b$, hence have the same kernel. But a coordinate idempotent is in exactly one of the two coordinate kernels, a contradiction. Steps 4--5 give a bijection between the finite nonempty set of factors and the absolute values; Step 2 identifies this set with all maximal ideals of $C$. Enumerate it by $i=1,\\ldots,r$. Combining the coordinate isomorphisms identifies $N$ with $\\prod_i\\widehat E_i$, and its $i$th component sends $e\\otimes b$ to $eb$ because each identification fixes $E$ and $K$. This proves the specified canonical algebra isomorphism, not just an abstract isomorphism of products.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, displayed completed tensor-product decomposition"
+   }
+  },
+  {
+   "text": "For henselianity put $R=\\widehat A=\\{b\\in K:|b|\\leq1\\}$ and $\\mathfrak n=\\{|b|<1\\}$. The valuation inequalities show that $R$ is a local ring with maximal ideal $\\mathfrak n$: precisely its norm-one elements are units. Let $g\\in R[T]$ be monic and $\\bar a$ a simple root of its residue polynomial. Choose a lift $a_0\\in R$, so $\\rho=|g(a_0)|<1$ and $|g'(a_0)|=1$. If $g(a_0)=0$ we are done; otherwise set $a_{n+1}=a_n-g(a_n)/g'(a_n)$. For $a,h\\in R$, binomial expansion gives $g(a+h)=g(a)+g'(a)h+h^2 B$ and $g'(a+h)-g'(a)=hD$ with $B,D\\in R$. Induction therefore gives $a_n\\in R$, $|g'(a_n)|=1$, $|g(a_n)|\\leq\\rho^{2^n}$ and $|a_{n+1}-a_n|\\leq\\rho^{2^n}$. The ultrametric inequality makes $(a_n)$ Cauchy, since for $m>n$ the distance is at most $\\rho^{2^n}$. Its limit $a$ exists in $K$, lies in the closed unit ball, satisfies $g(a)=0$ by the polynomial continuity estimate, and $|a-a_0|\\leq\\rho<1$. Thus it lifts $\\bar a$. Apply [lem-weil-pbc-henselian-local-root-lifting] to conclude that $R$ is henselian in the stated idempotent-lifting sense.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1 analytic fields are henselian; explicit Newton iteration and Stacks 04GG root criterion"
+   }
+  },
+  {
+   "text": "Let $H/K$ now be any finite extension, including inseparable ones. By [lem-trf-spectral-norm-algebraic-extension] it has a spectral absolute value $s$. Step 1, applied with base $K$, normalizes every valuation ring extending $R$. By [lem-sfb-algebraic-absolute-value-unique], every such normalized absolute value is $s$, so its ring is $W=\\{z:s(z)\\leq1\\}$. Apply [lem-trf-valuation-normalization-localizations] to the integral closure $D$ of $R$ in $H$. Its maximal ideals are nonempty and their localizations are exactly these extending valuation rings, with unique maximal ideal for each such ring. Thus $D$ has one maximal ideal and $D=D_{\\mathfrak n_D}=W$. Taking $H=\\widehat E_i$ is legitimate by Steps 3--6, which proved this field is finite over $K$. Its existing absolute value equals $s$ by uniqueness; hence $D$ is its closed unit ball, as claimed.",
+   "uses": [
+    "lem-trf-spectral-norm-algebraic-extension",
+    "lem-sfb-algebraic-absolute-value-unique",
+    "lem-trf-valuation-normalization-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "§2.1 unique extension for henselian valued fields; Proposition 2.2.1 integral-closure assertion"
+   }
+  },
+  {
+   "text": "Suppose $x\\in C$ and $E=F(x)$. By [lem-weil-pbc-valuation-ring-normal], $A$ is integrally closed, and $C$ has fraction field $E$ by Step 2. Applying [lem-sfb-integral-minpoly-fraction-descent] to $A\\subset C$ shows that the monic minimal polynomial $f$ of $x$ belongs to $A[T]$. Let $d=\\deg f$. By [lem-weil-pbc-minimal-polynomial-quotient-field-iso], $E=F[x]$ and $1,x,\\ldots,x^{d-1}$ is a basis (division by the monic $f$ spans the quotient; a relation of smaller degree contradicts minimality). By [def-weil-vector-space-scalar-extension] its tensor images form a $K$-basis of $N$. Thus evaluation $K[T]\\to N$, $T\\mapsto x\\otimes1$, is surjective with kernel $(f)$, and projection to $L_i=\\widehat E_i$ is surjective with kernel $(f_i)$, where $f_i$ is the monic minimal polynomial of $x_i$. The same quotient-basis argument gives $\\deg f_i=[L_i:K]$.",
+   "uses": [
+    "lem-weil-pbc-valuation-ring-normal",
+    "lem-sfb-integral-minpoly-fraction-descent",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, minimal polynomial and its completed factors; Stacks 00H7 normal-domain descent"
+   }
+  },
+  {
+   "text": "Each $f_i$ divides $f$, by division with remainder and minimality at $x_i$. A minimal polynomial is irreducible: a nontrivial factorization would give a smaller-degree vanishing factor in the field $L_i$. The ideals $(f_i)$ are distinct, because the coordinate kernels in $N$ are distinct and $K[T]\\to N$ is surjective. Hence these distinct monic irreducibles are pairwise coprime; repeated Euclidean division (Bezout) gives $\\prod_i f_i\\mid f$. On the other hand, $\\sum_i\\deg f_i=\\sum_i[L_i:K]=\\dim_KN=d$, by the product decomposition and Step 9's basis. Since all polynomials are monic, $f=\\prod_i f_i$. The image $x_i$ is integral over $R$ because the monic relation for $x\\in C$ maps from $A[T]$ to $R[T]$. Its integral closure $D_i\\subset L_i$ is the valuation ring from Step 8 and has fraction field $L_i$. Normality of $R$ by [lem-weil-pbc-valuation-ring-normal] and [lem-sfb-integral-minpoly-fraction-descent] applied to $R\\subset D_i$ give $f_i\\in R[T]$.",
+   "uses": [
+    "lem-weil-pbc-valuation-ring-normal",
+    "lem-sfb-integral-minpoly-fraction-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, factors f_i; Stacks 00H7"
+   }
+  },
+  {
+   "text": "Fix an algebraic closure $\\Omega$ of $K$ with an extending absolute value, and any root $\\beta\\in\\Omega$ of $f_i$. The polynomial-quotient isomorphism of [lem-weil-pbc-minimal-polynomial-quotient-field-iso] identifies $L_i=K(x_i)$ with $K[T]/(f_i)$. Evaluation at $\\beta$ gives a field embedding $\\sigma:L_i\\hookrightarrow\\Omega$ sending $x_i$ to $\\beta$. Pulling back the given absolute value along $\\sigma$ gives an absolute value on $L_i$ extending that of $K$. By [lem-sfb-algebraic-absolute-value-unique] it equals the norm already on $L_i$, so $|\\beta|=|x_i|=|x|_i$. This includes $x=0$ when $E=F$; in that case the polynomial is $T$ and the equality is $0=0$.",
+   "uses": [
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+    "lem-sfb-algebraic-absolute-value-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, proof: absolute values of conjugate roots of f_i"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-valuation-value-group-torsion",
+  "lem-trf-valuation-normalization-localizations",
+  "def-weil-vector-space-scalar-extension",
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-trf-spectral-norm-algebraic-extension",
+  "lem-per-finite-normed-space-complete",
+  "lem-zl-finite-separable-tensor-primitive-presentation",
+  "lem-sfb-algebraic-absolute-value-unique",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-sfb-integral-minpoly-fraction-descent",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin §2.1 and Proposition 2.2.1, read in the primary HTML at https://arxiv.org/html/0707.3953v3#S2.SS2; full assembly and Newton argument written by NJ; the named PDF is absent locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite separable extension of a rank one valued field the tensor product with its completion is the product of completions at all extensions of the valuation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"NumberField.instRankOneValuedAdicCompletion\", \"module\": \"Mathlib/NumberTheory/NumberField/FinitePlaces\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] →\\n    [inst_1 : NumberField K] →\\n      (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)) → Valued.v.RankOne\", \"doc\": \"The adic completion of a number field $ K $ at a finite place $ v $ is equipped with a rank one valuation. This valuation, induced by the discrete valuation associated to the height one prime ideal co\"}\n  {\"name\": \"NumberField.InfinitePlace.Completion.instAlgebra\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Completion\", \"type\": \"{K : Type u_1} → [inst : Field K] → (v : NumberField.InfinitePlace K) → Algebra K v.Completion\", \"doc\": \"The completion of a number field $ K $ at an infinite place $ v $, equipped with the absolute value induced by $ v $, forms a canonical $ K $-algebra structure. This structure is inherited from the em\"}\n  {\"name\": \"Valuation.instRankOneCompletion\", \"module\": \"Mathlib/RingTheory/Valuation/RankOne\", \"type\": \"{K : Type u_3} →\\n  [inst : Field K] →\\n    {Γ : Type u_4} →\\n      [inst_1 : LinearOrderedCommGroupWithZero Γ] → (v : Valuation K Γ) → [h : v.RankOne] → Valued.v.RankOne\", \"doc\": \"If $v$ is a rank one valuation on a field $K$ with values in a linearly ordered commutative group with zero $\\\\Gamma$, then its canonical extension to the completion of $K$ is also a rank one valuation\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  {x : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v}, Valued.v x = Valued.extension x\", \"doc\": \"For any element $x$ in the adic completion of the fraction field $K$ of a Dedekind domain $R$ at a height one prime ideal $v$, the valuation $v(x)$ coincides with the extension of the original discret\"}\n  {\"name\": \"NumberField.FinitePlace.embedding\", \"module\": \"Mathlib/NumberTheory/NumberField/FinitePlaces\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] →\\n    [inst_1 : NumberField K] →\\n      (v : IsDedekindDomain.HeightOneSpectrum (NumberField.RingOfIntegers K)) →\\n        WithVal (IsDedekindDomain.HeightOneSpectrum.valuation K v) →+*\\n          IsDedekindDomain.HeightOneSpectrum.adicCompletion K v\", \"doc\": \"The canonical ring homomorphism from the valuation ring $\\\\text{WithVal}(v)$ associated with a finite place $v$ of a number field $K$ to the adic completion of $K$ at $v$. This homomorphism preserves a\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        {S : Type u_3} →\\n          [inst_2 : Field K] →\\n            [inst_3 : CommSemiring S] →\\n              [inst_4 : Algebra R K] →\\n                [inst_5 : IsFractionRing R K] →\\n                 \", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the adic completion of $ K $ with respect to the valuation induced by $ v $ carries an algebra structure over\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) {S : Type u_3} [inst_2 : Field K]\\n  [inst_3 : CommSemiring S] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K]\\n  (v : IsDedekindDomain.HeightOneSpectrum R) [inst_6 : Algebra S K],\\n  ⇑(algebraMap S (IsDedekindDomain\", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the algebra map from a base ring $ S $ to the adic completion of $ K $ with respect to $ v $ is equal to the \"}\n  {\"name\": \"Valued.extensionValuation\", \"module\": \"Mathlib/Topology/Algebra/Valued/ValuedField\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] →\\n    {Γ₀ : Type u_2} →\\n      [inst_1 : LinearOrderedCommGroupWithZero Γ₀] → [hv : Valued K Γ₀] → Valuation (UniformSpace.Completion K) Γ₀\", \"doc\": \"The valuation $ v $ on a field $ K $ is extended to its uniform space completion $ \\\\hat{K} $ by defining $ \\\\hat{v} : \\\\hat{K} \\\\to \\\\Gamma_0 $ as the unique extension of $ v $ along the dense embedding $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a valuation ring in a finite separable extension is semilocal and completion splits as product of the completed valued extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal\", \"module\": \"Mathlib/Topology/Algebra/Valued/WithVal\", \"type\": \"∀ {Γ₀ : Type u_2} [inst : LinearOrderedCommGroupWithZero Γ₀] {K : Type u_3} [inst_1 : Field K] (v : Valuation K Γ₀)\\n  (R : Type u_4) [inst_2 : CommRing R] [inst_3 : Algebra R K] [IsIntegralClosure R ℤ K],\\n  IsIntegralClosure R ℤ (WithVal v)\", \"doc\": \"If $ R $ is a commutative ring equipped with a valuation $ v $, then the ring $ R $ with valuation, denoted $ \\\\text{WithVal}(v) $, inherits the commutative ring structure from $ R $. This instance ass\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  {x : IsDedekindDomain.HeightOneSpectrum.adicCompletion K v}, Valued.v x = Valued.extension x\", \"doc\": \"For any element $x$ in the adic completion of the fraction field $K$ of a Dedekind domain $R$ at a height one prime ideal $v$, the valuation $v(x)$ coincides with the extension of the original discret\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              (v : IsDedekindDomain.HeightOneSpectrum R) →\\n                Algebra R ↥(IsDed\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $ and a height one prime ideal $ v $, the adic completion integers of $ K $ at $ v $ form an $ R $-algebra. This structure equips the valuation subr\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              (v : IsDedekindDomain.HeightOneSpectrum R) →\\n                ValuationSubring \", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of all elements in the completion whose valuation is less than o\"}\n  {\"name\": \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/NumberTheory/NumberField/FinitePlaces\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [inst_1 : IsDedekindDomain A] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra A K] [inst_4 : IsFractionRing A K] (v : IsDedekindDomain.HeightOneSpectrum A),\\n  IsDiscreteValuationRing ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v)\", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of elements with valuation less than or equal to 1, is a discret\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        {S : Type u_3} →\\n          [inst_2 : Field K] →\\n            [inst_3 : CommSemiring S] →\\n              [inst_4 : Algebra R K] →\\n                [inst_5 : IsFractionRing R K] →\\n                 \", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the adic completion of $ K $ with respect to the valuation induced by $ v $ carries an algebra structure over\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) {S : Type u_3} [inst_2 : Field K]\\n  [inst_3 : CommSemiring S] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K]\\n  (v : IsDedekindDomain.HeightOneSpectrum R) [inst_6 : Algebra S K],\\n  ⇑(algebraMap S (IsDedekindDomain\", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the algebra map from a base ring $ S $ to the adic completion of $ K $ with respect to $ v $ is equal to the \"}\n  {\"name\": \"Valuation.HasExtension.instIsLocalHomValuationInteger\", \"module\": \"Mathlib/RingTheory/Valuation/Extension\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {ΓR : Type u_6} [inst_1 : LinearOrderedCommGroupWithZero ΓR] {vR : Valuation R ΓR}\\n  {S : Type u_9} {ΓS : Type u_10} [inst_2 : CommRing S] [inst_3 : LinearOrderedCommGroupWithZero ΓS]\\n  [inst_4 : Algebra R S] [IsLocalHom (algebraMap R S)] {vS : Valuation S ΓS} [i\", \"doc\": \"Given a commutative ring $ R $, a commutative $ R $-algebra $ S $, and valuations $ v_R: R \\\\to \\\\Gamma_R $ and $ v_S: S \\\\to \\\\Gamma_S $ where $ v_S $ extends $ v_R $, if the canonical algebra map $ R \\\\t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "UniformSpace.Completion, Algebra.TensorProduct",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Algebra.TensorProduct'",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle rejected the identifier; second semantic phrasing and source grep also read"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(tensorProduct|tensor_product|equiv.*prod)|henselian.*[Vv]alu|[Vv]alu.*henselian",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"319\", \"text\": \"given by `AdicCompletion.ofTensorProduct` is an isomorphism. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a nonarchimedean field is henselian and a finite separable algebra splits into completions at the extensions of the valuation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Valuation.Completion\", \"module\": \"Mathlib.Topology.Algebra.Valued.WithVal\", \"type\": \"{Γ₀ : Type u_2} →\\n  [inst : LinearOrderedCommGroupWithZero Γ₀] → {R : Type u_3} → [inst_1 : Ring R] → Valuation R Γ₀ → Type u_3\", \"doc\": \"The completion of a ring $ R $ equipped with a valuation $ v $ into a linearly ordered commutative group with zero $ \\\\Gamma_0 $, constructed as the uniform space completion of $ R $ using the non-Arch\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] (I : Ideal R) [IsAdicComplete I R] : HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"AbsoluteValue.Completion\", \"module\": \"Mathlib.Analysis.Normed.Field.WithAbs\", \"type\": \"{K : Type u_3} → [inst : Field K] → AbsoluteValue K ℝ → Type u_3\", \"doc\": \"Given a field $ K $ equipped with an absolute value into $ \\\\mathbb{R} $, this constructs the uniform space completion of $ K $ with respect to the uniformity induced by the absolute value. The complet\"}\n  {\"name\": \"Valued.extension\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \": hat K → Γ₀\", \"doc\": \"The valuation $ v $ on a field $ K $ is extended to its uniform space completion $ \\\\hat{K} $ by defining $ \\\\hat{v} : \\\\hat{K} \\\\to \\\\Gamma_0 $ as the unique extension of $ v $ along the dense embedding $\"}\n  {\"name\": \"Valued.extensionValuation\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \": Valuation (hat K) Γ₀\", \"doc\": \"The valuation $ v $ on a field $ K $ is extended to its uniform space completion $ \\\\hat{K} $ by defining $ \\\\hat{v} : \\\\hat{K} \\\\to \\\\Gamma_0 $ as the unique extension of $ v $ along the dense embedding $\"}\n  {\"name\": \"Valued.completable\", \"module\": \"Mathlib.Topology.Algebra.Valued.ValuedField\", \"type\": \": CompletableTopField K\", \"doc\": \"A valued field $ K $ is completable with respect to its uniform structure induced by the valuation to a linearly ordered commutative group with zero.\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(K : Type*) [Field K] : HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"IsNonarchimedeanLocalField.instCompleteSpace\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": CompleteSpace K\", \"doc\": \"A field $ K $ equipped with a valuative relation and a uniform space structure is a non-Archimedean local field if it is complete and its additive group operations are uniformly continuous.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian|spectralNorm|norm_le_one.*[Ii]ntegral",
+   "results": "{\"t\": \"2026-10-24T08:37:33Z\", \"tool\": \"grep\", \"query\": \"henselian|spectralNorm|norm_le_one.*[Ii]ntegral\", \"sub\": \"Analysis/Normed/Field\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\", \"Mathlib/Analysis/Normed/Field/Krasner.lean\"], \"digest\": \"b1166ea9ae4a8192\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of a complete nonarchimedean normed field has a unique extending absolute value given by the spectral norm",
+   "results": "{\"t\": \"2026-10-24T08:37:36Z\", \"tool\": \"leanfinder\", \"query\": \"A finite extension of a complete nonarchimedean normed field has a unique extending absolute value given by the spectral norm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"spectralNorm_unique_field_norm_ext\", \"spectralNorm.normedField\", \"spectralNorm.nontriviallyNormedField\", \"spectralNorm_eq_invariantExtension\", \"spectralNorm_unique\", \"spectralMulAlgNorm\", \"spectralMulAlgNorm_def\", \"IsUltrametricDist.invariantExtension\"], \"digest\": \"62803c08b9bb6b47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "spectralNorm, IsScalarTower",
+   "results": "{\"t\": \"2026-10-24T08:38:45Z\", \"tool\": \"loogle\", \"query\": \"spectralNorm, IsScalarTower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"spectralNorm.eq_of_tower\"], \"digest\": \"7e60f8927a861d4c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite separable extension tensor completion product completions extending valuations",
+   "results": "{\"t\": \"2026-10-24T08:39:41Z\", \"tool\": \"leansearch\", \"query\": \"finite separable extension tensor completion product completions extending valuations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.extensionValuation\", \"Valued.extension\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"Valued.valuedCompletion\", \"separableClosure\", \"AbsoluteValue.Completion\", \"Valuation.HasExtension.mk\", \"Valuation.Completion\"], \"digest\": \"83e5e8a315f1f8c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite separable algebra over a field is a finite product of finite separable field extensions",
+   "results": "{\"t\": \"2026-10-24T08:39:44Z\", \"tool\": \"leanfinder\", \"query\": \"Finite separable algebra over a field is a finite product of finite separable field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyUnramified.isSeparable\", \"Field.instNeZeroFinSepDegree\", \"Field.exists_primitive_element\", \"Field.finSepDegree_eq_finrank_iff\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"Algebra.isSeparable_self\", \"Algebra.IsSeparable\"], \"digest\": \"d5e4a862d812d638\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectral norm is a multiplicative nonarchimedean absolute value extending the norm on a complete nontrivially normed field to any algebraic extension",
+   "results": "{\"t\": \"2026-10-24T08:41:07Z\", \"tool\": \"leanfinder\", \"query\": \"The spectral norm is a multiplicative nonarchimedean absolute value extending the norm on a complete nontrivially normed field to any algebraic extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"spectralMulAlgNorm\", \"spectralAlgNorm\", \"spectralMulAlgNorm_def\", \"spectralNorm.normedField\", \"spectralAlgNorm_def\", \"spectralNorm.normedSpace\", \"spectralAlgNorm_mul\", \"algNormFromConst\"], \"digest\": \"c1f415303ea101a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel|Henselian",
+   "results": "{\"t\": \"2026-10-24T08:42:27Z\", \"tool\": \"grep\", \"query\": \"hensel|Henselian\", \"sub\": \"Analysis\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "spectralMulAlgNorm",
+   "results": "{\"t\": \"2026-10-24T08:42:28Z\", \"tool\": \"loogle\", \"query\": \"spectralMulAlgNorm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"spectralMulAlgNorm\", \"spectralMulAlgNorm_def\", \"spectralNorm.spectralMulAlgNorm_eq_of_mem_roots\", \"spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots\"], \"digest\": \"094bb32cd6c46dde\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "algebraic extension complete nonarchimedean field spectral norm multiplicative absolute value",
+   "results": "{\"t\": \"2026-10-24T08:42:28Z\", \"tool\": \"leansearch\", \"query\": \"algebraic extension complete nonarchimedean field spectral norm multiplicative absolute value\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"spectralNorm.normedField\", \"norm_le_spectralNorm\", \"spectralNorm_unique_field_norm_ext\", \"spectralAlgNorm\", \"spectralNorm.nontriviallyNormedField\", \"spectralNorm_unique_of_finiteDimensional_normal\", \"spectralAlgNorm_mul\", \"spectralNorm.normedSpace\"], \"digest\": \"b10916463e749f3d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "def spectralMulAlgNorm|theorem spectralNorm_extends|theorem isNonarchimedean_spectralNorm",
+   "results": "{\"t\": \"2026-10-24T08:43:20Z\", \"tool\": \"grep\", \"query\": \"def spectralMulAlgNorm|theorem spectralNorm_extends|theorem isNonarchimedean_spectralNorm\", \"sub\": \"Analysis/Normed/Unbundled\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\"], \"digest\": \"ddea5a27a8e12dae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "UniformSpace.Completion, TensorProduct",
+   "results": "{\"t\": \"2026-10-24T08:43:20Z\", \"tool\": \"loogle\", \"query\": \"UniformSpace.Completion, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite separable extension of a nonarchimedean field tensoring with the completion gives the product of completions at every extension of its absolute value",
+   "results": "{\"t\": \"2026-10-24T08:43:22Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite separable extension of a nonarchimedean field tensoring with the completion gives the product of completions at every extension of its absolute value\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.InfinitePlace.Completion.instAlgebra\", \"AbsoluteValue.Completion.extensionEmbedding_of_comp\", \"NumberField.InfiniteAdeleRing\", \"NumberField.InfinitePlace.Completion\", \"NumberField.InfiniteAdeleRing.instAlgebra\", \"NumberField.InfinitePlace.Completion.extensionEmbedding_coe\", \"NumberField.InfinitePlace.Completion.instNormedField\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\"], \"digest\": \"ef22c82c723c1984\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full item; component hits are reused through existing DAG nodes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valued-decompletion-etale",
+  "date": "2026-10-24",
+  "group": "Q81"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proposition 2.2.1 and its proof, printed p. 11; preliminary facts on completions used there; Lemma 2.1.6 for the etale terminology. Supporting decompletion input: Proposition 2.2.1, proof, printed pp. 11--12: semilocal normalization, completed tensor-product decomposition, factors f_i and henselianity of the complete field. Primary text https://arxiv.org/html/0707.3953v3#S2.SS2.",
+   "via": [
+    "lem-trf-valued-decompletion-etale",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-separable-valued-completion-factors",
+  "worker": "stage1",
+  "summary": "Preserved every clause of the statement. Reused existing normalization, value-group torsion, spectral norm, finite-dimensional completeness, tensor-reducedness, total-fraction decomposition, primitive presentation, henselian root criterion and minimal-polynomial nodes. Explicitly identifies factors with Cauchy completions and proves the canonical formula, henselianity by Newton iteration, and all polynomial clauses. No new nodes or leaves.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proposition 2.2.1 and its proof, printed p. 11; preliminary facts on completions used there; Lemma 2.1.6 for the etale terminology. Supporting decompletion input: Proposition 2.2.1, proof, printed pp. 11--12: semilocal normalization, completed tensor-product decomposition, factors f_i and henselianity of the complete field. Primary text https://arxiv.org/html/0707.3953v3#S2.SS2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-separable-tensor-field-reduced",
+    "why": "Generic algebraic or valuation input in the completed-field argument; the unit supplies no replacement for this statement. See the step and the citation quote for the exact use."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic algebraic or valuation input in the completed-field argument; the unit supplies no replacement for this statement. See the step and the citation quote for the exact use."
+   },
+   {
+    "node": "lem-zl-finite-separable-tensor-primitive-presentation",
+    "why": "Generic algebraic or valuation input in the completed-field argument; the unit supplies no replacement for this statement. See the step and the citation quote for the exact use."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic algebraic or valuation input in the completed-field argument; the unit supplies no replacement for this statement. See the step and the citation quote for the exact use."
+   },
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "Generic algebraic or valuation input in the completed-field argument; the unit supplies no replacement for this statement. See the step and the citation quote for the exact use."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-separable-tensor-field-reduced",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-zl-finite-separable-tensor-primitive-presentation",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-valuation-ring-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-c74c795b8",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-c74c795b8 (reviewer sub-agent of L); spot-checked: I read the item statement, all 11 steps, every cited statement and the report. The local Temkin 0707.3953v3 PDF is absent (the worker's WANTED entry is correct), so I read Prop. 2.2.1 and §2.1 on arXiv HTML. The item clauses (semilocal normalization, \\hat K⊗F ≅ ∏\\hat F_i, f = ∏f_i, henselian completion) match the source, and the statement is unchanged. The proof is correct step by step. Step 1: the value-group torsion normalization is well defined, multiplicative, ultrametric and unique. Step 3: N is reduced, Artinian and a product of finite fields. Steps 4-6: spectral norm, completeness, density from the primitive presentation, the idempotent argument for the converse, distinct coordinate kernels, and the canonical map. Step 7: Newton iteration with |g(a_n)| ≤ ρ^{2^n}, valid for nondiscrete values and in characteristic p, then the 04GG root-lifting node. Step 8: unique extension in finite H/K. Steps 9-10: minimal-polynomial descent over the normal valuation ring, coprime distinct f_i and the degree count. Step 11: the embedding at any root with uniqueness. Small cases tested: E=F, complete F, Q(i)/Q at a split p, ramified, characteristic p, nondiscrete values. Mechanical finding: Steps 2 and 8 and tool_uses cite lem-per-valuation-normalization-localizations, which is line 1963 of side-live route-pivot-dropped.txt (Q09, 10-19 artin-gabber chain). The report is silent about this, and it is the only dropped id in the 203-node closure. The delivery uses only the generic Bourbaki VI §8.6 prolongation classification and nothing of the forbidden Q̄/Gabber route. No live node states that classification (I checked the nagata, trf, sfb and DVR nodes and Mathlib Valuation/*). FIX: new unsplit statement-only lem-trf-valuation-normalization-localizations, with the same self-contained statement, live stmt_deps, the actual recorded searches plus my Mathlib grep, created.item = this item and the blueprint ancestor lem-trf-local-term-locality. All 6 citations in the item are repointed to it and its tool_uses entry is removed. The recomputed closure has 0 dropped ids. The remaining pbc/zl tool_uses are generic and accepted.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableValuedCompletionFactors",
+  "declaration": "WeilConjectures.separable_valued_completion_factors",
+  "file": "lean/Sheaf/FieldTheory/SeparableValuedCompletionFactors.lean",
+  "statement": "theorem separable_valued_completion_factors (F : Type u) [NontriviallyNormedField F] [IsUltrametricDist F] (A : ValuationSubring F) (hA : ∀ a : F, a ∈ A ↔ ‖a‖ ≤ 1) (E : Type v) [Field E] [Algebra F E] [FiniteDimensional F E] [Algebra.IsSeparable F E] : ∃ Â : ValuationSubring (Completion F), (∀ a : Completion F, a ∈ Â ↔ ‖a‖ ≤ 1) ∧ HenselianLocalRing Â ∧ (∀ (H : Type (max u w)) [Field H] [Algebra (Completion F) H] [FiniteDimensional (Completion F) H], ∃ W : ValuationSubring H, W.comap (algebraMap (Completion F) H) = Â ∧ (∀ z : H, z ∈ W ↔ IsIntegral Â z) ∧ ∀ W' : ValuationSubring H, W'.comap (algebraMap (Completion F) H) = Â → W' = W) ∧ ∃ r : ℕ, 0 < r ∧ ∃ m : Fin r ≃ MaximalSpectrum (integralClosure A E), ∃ W : Fin r → ValuationSubring E, (∀ (i : Fin r) (z : E), z ∈ W i ↔ ∃ c s : integralClosure A E, s ∉ (m i).asIdeal ∧ z = (c : E) / (s : E)) ∧ (∀ V : ValuationSubring E, V.comap (algebraMap F E) = A ↔ ∃ i : Fin r, V = W i) ∧ (∀ i : Fin r, ∃ e : IsLocalRing.ResidueField (W i) ≃+* ((integralClosure A E) ⧸ (m i).asIdeal), ∀ (c : integralClosure A E) (w : W i), (w : E) = (c : E) → e (IsLocalRing.residue (W i) w) = Ideal.Quotient.mk (m i).asIdeal c) ∧ ∃ b : Fin r → AbsoluteValue E ℝ, (∀ i : Fin r, (∀ a : F, b i (algebraMap F E a) = ‖a‖) ∧ (∀ x y : E, b i (x + y) ≤ max (b i x) (b i y)) ∧ (∀ z : E, b i z ≤ 1 ↔ z ∈ W i) ∧ ∀ b' : AbsoluteValue E ℝ, (∀ a : F, b' (algebraMap F E a) = ‖a‖) → (∀ z : E, b' z ≤ 1 ↔ z ∈ W i) → b' = b i) ∧ ∃ j : ∀ i : Fin r, Completion F →+* (b i).Completion, (∀ (i : Fin r) (a : Completion F), j i a = Completion.map ((WithAbs.equiv (b i)).symm.toRingHom.comp (algebraMap F E)) a) ∧ (∀ (i : Fin r) (z : (b i).Completion), @IsIntegral Â (b i).Completion _ _ (((j i).comp Â.subtype).toAlgebra) z ↔ ‖z‖ ≤ 1) ∧ ∃ Φ : @AlgEquiv (Completion F) (E ⊗[F] Completion F) (∀ i : Fin r, (b i).Completion) _ _ _ (Algebra.TensorProduct.rightAlgebra) (RingHom.pi j).toAlgebra, (∀ (x : E) (a : Completion F) (i : Fin r), Φ (x ⊗ₜ[F] a) i = (x : (b i).Completion) * j i a) ∧ ∀ x : E, x ∈ integralClosure A E → IntermediateField.adjoin F {x} = ⊤ → ∃ f : Polynomial A, f.Monic ∧ f.map (algebraMap A F) = minpoly F x ∧ ∃ g : Fin r → Polynomial Â, (∀ i : Fin r, (g i).Monic ∧ (g i).map (algebraMap Â (Completion F)) = @minpoly (Completion F) (b i).Completion _ _ (j i).toAlgebra (x : (b i).Completion) ∧ (g i).natDegree = @Module.finrank (Completion F) (b i).Completion _ _ (j i).toAlgebra.toModule) ∧ (minpoly F x).map (algebraMap F (Completion F)) = ∏ i : Fin r, (g i).map (algebraMap Â (Completion F)) ∧ ∀ (Ω : Type (max u w)) [Field Ω] [Algebra (Completion F) Ω] [IsAlgClosure (Completion F) Ω] (c : AbsoluteValue Ω ℝ), (∀ a : Completion F, c (algebraMap (Completion F) Ω a) = ‖a‖) → ∀ (i : Fin r) (β : Ω), Polynomial.aeval β ((g i).map (algebraMap Â (Completion F))) = 0 → c β = b i x",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer fix (Q42 second reader, 2026-10-24): the residue-field clause stated only Nonempty (ResidueField (W i) ≃+* C ⧸ m_i), an abstract isomorphism; the node (step 2: c/s ↦ c̄/s̄) and the citer lem-trf-valued-decompletion-etale use the canonical reduction identification. The isomorphism is now existential and pinned on every element of C: e (residue w) = Ideal.Quotient.mk m_i c whenever (w : E) = c. No other clause changed.",
+  "fixed_by": "NT-stage2-cc-46209336e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46209336e",
+  "group": "Q42",
+  "result": "fix",
+  "note": "Read node, 5 stmt_dep records, Temkin Prop 2.2.1 source place, module, report (Worker report + Second reading by Q42 present), WithAbs/ValuationSubring Mathlib sources, citers. All clauses match (hypotheses, Fin r ≃ MaximalSpectrum C, localization subrings, extending valuation rings, unique ultrametric |.|_i, Completion.map-pinned j_i, unit-ball integral closure, canonical AlgEquiv pinned on pure tensors, HenselianLocalRing Â, every finite H/F̂ unique extending valuation ring, minpoly f∈A[T]=∏g_i with degree/root-norm clauses; universes max u w sound; edge cases E=F, x=0, char p covered). Finding (H3): residue-field clause was only Nonempty (ResidueField (W i) ≃+* C/m_i), an abstract iso; node step 2 and citer lem-trf-valued-decompletion-etale use the canonical reduction. FIX: ∃ e pinned by e (residue w) = Ideal.Quotient.mk m_i c whenever (w:E)=c; record statement verbatim. nt_compile --json of fixed file: 5.3 s, clean."
+ }
+}

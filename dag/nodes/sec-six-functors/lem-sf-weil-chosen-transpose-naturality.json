@@ -1,0 +1,111 @@
+{
+ "id": "lem-sf-weil-chosen-transpose-naturality",
+ "kind": "statement",
+ "title": "Contravariant naturality of the normalized three-transpose Weil map",
+ "statement": "Fix D,C,E,S,W,X,Y,f,cf,cy,cx with the same geometric and coefficient hypotheses as the specified chosen-duality exchange. For every supplied normalized Data d and every Weil pair omega over Y, the components transposeComponent at omega are contravariantly natural in M: for v:M to N in the opposite pair category, Hom(F(v),1) followed by the component at N equals the component at M followed by Q Hom(v,1). This only asserts the naturality square for the original three transposes; no dualizing choices, comparison substitution or final exchange is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/lem-sf-tensor-hom.proof.md",
+  "place": "Item DAG Step 6: lem-sf-tensor-hom Steps 1--2, first-variable naturality of the projection/evaluation and adjunction chain."
+ },
+ "stmt_deps": [
+  "def-sf-weil-chosen-exchange-data",
+  "sk-def-sf-operations"
+ ],
+ "proof": [
+  {
+   "text": "For a Weil arrow $u:M\\to N$, put $A_M=R\\mathcal Hom_Y(FM,\\omega_Y)$ and $a_u=R\\mathcal Hom_Y(Fu,1):A_N\\to A_M$. The internal-Hom bifunctor and the natural tensor--Hom adjunction of [sk-def-sf-operations](i) give evaluation dinaturality\n$$\\operatorname{ev}_{FM}(1\\otimes a_u)=\\operatorname{ev}_{FN}(Fu\\otimes1).$$\nNaturality of the specified projection isomorphism [fix-prop-projection-formula] now gives the equality on $F(M\\otimes PA_N)$\n$$b_M F(1_M\\otimes P a_u)=b_N F(u\\otimes1_{PA_N}).$$\nApply the exceptional Hom bijection, the tensor--Hom bijection natural in its first variable, and the ordinary Hom bijection. Their naturality turns the left side into $\\tau_M a_u$ and the right side into $Q(R\\mathcal Hom_X(u,1_{G\\omega_Y}))\\tau_N$. Thus\n$$\\tau_M a_u=Q(R\\mathcal Hom_X(u,1_{G\\omega_Y}))\\tau_N,$$\nwhich is precisely contravariant naturality of $\\tau$. The pair adjunctions are the restrictions of these same bijections (Steps 2, 4, 5), so the equality is an equality of Weil morphisms. This argument uses only naturality of the already cited bijections and of the specified projection map.",
+   "uses": [
+    "sk-def-sf-operations",
+    "fix-prop-projection-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "fix-prop-projection-formula",
+  "sk-def-sf-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-tensor-hom/lem-sf-tensor-hom.proof.md",
+  "place": "Item DAG Step 6: lem-sf-tensor-hom Steps 1--2, first-variable naturality of the projection/evaluation and adjunction chain."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Frobenius fixed pairs internal Hom adjunction evaluation contravariant naturality",
+   "results": "ihom.ev, ihom.ev_naturality_assoc and Adjunction.homEquiv_naturality_left/right and square variants. These are generic tools, not normalized sheaf Frobenius constructions.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "homEquiv, homEquiv_unit, homEquiv_counit and comp_homEquiv. Used in the completed ordinary_maps proof; no normalized construction or first-variable chain naturality.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|tensorHom.*naturality; local HomLift|transposeComponent|WeilChosenDualityExchange",
+   "results": "Mathlib adjunction naturality formulas; source and project searches find the existing assigned interfaces only. PodHomChainUncurriedTransport and HomChainPairingNaturality are finite-Tor presentations and target-variable assertions, not this supplied Weil-pair first-variable chain.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilChosenDualityExchange",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Item DAG Step 6: lem-sf-tensor-hom Steps 1--2, first-variable naturality of the projection/evaluation and adjunction chain.",
+   "via": [
+    "lem-sf-weil-chosen-duality-exchange",
+    "lem-sf-weil-upper-shriek-verdier-conjugate"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilChosenTransposeNaturality",
+  "file": "lean/Sheaf/Paper/WeilChosenTransposeNaturality.lean",
+  "declaration": "WeilConjectures.WeilChosenDualityExchange.weil_chosen_transpose_naturality",
+  "declarations": [
+   "WeilConjectures.WeilChosenDualityExchange.weil_chosen_transpose_naturality"
+  ],
+  "statement": "theorem weil_chosen_transpose_naturality (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (S : SixFunctorOperationDatum D C E 1 (Nat.le_refl 1)) (W : CommonLifts D C S.closure.commonStage) (X Y : Models D) [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] (f : X ⟶ Y) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] (cf : Compactification f.hom.left) (cy : Compactification (structureMap D Y).hom.left) (cx : Compactification (f ≫ structureMap D Y).hom.left) (d : Data D C S.closure W X Y f cf cy cx) (omega : Pair D C Y) {M N : (Pair D C X)ᵒᵖ} (v : M ⟶ N) : ((W.supportFunctor f cf (geometricCompactification D f cf)).op ⋙ (Functor.curry.obj d.homY.hom).flip.obj omega).map v ≫ transposeComponent (exceptionalAdjunction W f cf (geometricCompactification D f cf)) (ordinaryAdjunction W f) (Functor.curry.obj (W.tensorFunctor X)) (Functor.curry.obj (W.tensorFunctor Y)) d.homX.hom d.homY.hom d.homX.closed d.homY.closed d.projection omega N.unop = transposeComponent (exceptionalAdjunction W f cf (geometricCompactification D f cf)) (ordinaryAdjunction W f) (Functor.curry.obj (W.tensorFunctor X)) (Functor.curry.obj (W.tensorFunctor Y)) d.homX.hom d.homY.hom d.homX.closed d.homY.closed d.projection omega M.unop ≫ ((Functor.curry.obj d.homX.hom).flip.obj ((W.exceptionalFunctor f cf (geometricCompactification D f cf)).obj omega) ⋙ W.directFunctor f).map v",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d87eb",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T122702-L-1796890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d87eb",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T122702-L-1796890",
+  "kind": "interface",
+  "note": "independent cc review: relocated interface block vs clone d6dfe898 (verbatim substring); item signature vs clone; two new sorry statements vs item node Steps 1,4,5,6 and the carrier normalizations of Data/HomLift; node proof_deps vs step uses; #print axioms in /tmp sandbox vs published"
+ }
+}

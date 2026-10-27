@@ -1,0 +1,287 @@
+{
+ "id": "lem-trf-scheme-descent-cocycle-etale-relation",
+ "kind": "statement",
+ "title": "A scheme descent cocycle gives an etale equivalence relation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $\\{u_i:U_i\\to S\\}_{i\\in I}$ a jointly surjective etale covering [def-weil-pbc-etale-site]. Let $f_i:X_i\\to U_i$ be schemes over its members. Put $U_{ij}=U_i\\times_SU_j$ and $R_{ij}=X_i\\times_{U_i}U_{ij}$, with projection $p_i:R_{ij}\\to X_i$ [def-pc-fibre-product]. Suppose given isomorphisms $\\theta_{ij}:R_{ij}\\xrightarrow{\\sim}R_{ji}$ interchanging the two base projections. Their restrictions along $U_i\\to U_{ii}$ are identities, and, after the canonical pullbacks to $U_i\\times_SU_j\\times_SU_k$, they satisfy $\\theta_{jk}\\circ\\theta_{ij}=\\theta_{ik}$. Form the scheme coproducts $V=\\coprod_iX_i$ and $R=\\coprod_{i,j}R_{ij}$ [lem-weil-pbc-scheme-coproduct-family], with inclusions $\\iota_i:X_i\\to V$. Define $s,t:R\\to V$ on $R_{ij}$ by $s=\\iota_i\\circ p_i$ and $t=\\iota_j\\circ p_j\\circ\\theta_{ij}$. Then $s,t$ are etale [def-weil-etale-morphism], and $(s,t):R\\to V\\times_SV$ is a monomorphism identifying $R(T)$ with an equivalence relation on $V(T)$ for every $S$-scheme $T$.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WW (spaces theorem-presentation), construction of the input etale equivalence relation from a scheme descent cocycle; the diagonal identity and triple-overlap cocycle. This is the relation-construction argument of the parent, not the quotient-existence theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The coproduct mapping property in [lem-weil-pbc-scheme-coproduct-family] gives the structure maps $V\\to S$, $R\\to S$ and the stated $s,t$ from their component maps. The base-projection compatibility of $\\theta_{ij}$ says that both component maps have the same composite to $S$, so $(s,t):R\\to V\\times_SV$ exists by [def-pc-fibre-product]. That same universal property identifies $R_{ij}$ with $X_i\\times_SU_j$: a map into either scheme is a pair $(x,b)$ with $x:T\\to X_i$, $b:T\\to U_j$ and $u_if_ix=u_jb$. In these coordinates $p_i(x,b)=x$. Define $\\tau_{ij}(x,b)=p_j\\theta_{ij}(x,b)$. The two base maps of $\\theta_{ij}(x,b)\\in R_{ji}(T)$ are $b$ and $f_ix$, so $f_j\\tau_{ij}(x,b)=b$ and its other coordinate is $f_ix$. These are morphism identities, by the uniqueness clause of the fibre-product property.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023W (definition-descent-datum-for-family-of-morphisms), cocycle on triple overlaps; direct functor-of-points verification using schemes.tex Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), and groupoids.tex Tag 022P (definition-equivalence-relation)."
+   }
+  },
+  {
+   "text": "Each $p_i:R_{ij}\\to X_i$ is the base change of the etale map $u_j:U_j\\to S$ along $u_if_i:X_i\\to S$, using the identification in step 1. Hence [lem-weil-pbc-etale-scheme-base-change] makes $p_i$ etale. The analogous assertion holds for $p_j:R_{ji}\\to X_j$. The inclusions $X_i\\to V$ are open immersions by [lem-weil-pbc-scheme-coproduct-family]; the isomorphisms $\\theta_{ij}$ are open immersions by [def-weil-open-immersion], since their image is their whole target. Apply clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation] to obtain etaleness of both $R_{ij}\\xrightarrow{p_i}X_i\\to V$ and $R_{ij}\\xrightarrow{\\theta_{ij}}R_{ji}\\xrightarrow{p_j}X_j\\to V$. Finally the $R_{ij}$ are open subschemes covering $R$, again by the coproduct statement. Applying [lem-weil-pbc-etale-local-on-source] to that open cover shows that $s$ and $t$ are etale.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO (lemma-base-change-etale), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale), and 02GJ (lemma-etale-characterize)."
+   }
+  },
+  {
+   "text": "Restrict two arrows to R with equal endpoints along the pullback of the coproduct open cover, twice, using [lem-weil-pbc-scheme-coproduct-family] and [lem-weil-pbc-scheme-morphism-gluing]. On one such piece they factor through R_ij and R_kl. If i differs from k or j differs from l, disjointness of coproduct components makes the piece empty. Otherwise cancel the monic coproduct inclusions to obtain equal source projections and equal transported target projections. The first base-interchange identity gives equal other base coordinates. Apply the universal property [def-pc-fibre-product] twice to get equal arrows into R_ij. Open-cover hom-ext gives global equality. Applying this endpoint uniqueness to arrows whose composites with the displayed pullback lift agree proves the required monomorphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023W (definition-descent-datum-for-family-of-morphisms), cocycle on triple overlaps; direct functor-of-points verification using schemes.tex Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), and groupoids.tex Tag 022P (definition-equivalence-relation)."
+   }
+  },
+  {
+   "text": "For every i construct delta_i:X_i -> R_ii from the pair (identity_X_i,f_i) by [def-pc-fibre-product]. Its two base coordinates coincide, so the diagonal identity gives both endpoints equal to the coproduct inclusion X_i -> V. By [lem-weil-pbc-scheme-coproduct-family], the maps delta_i followed by R_ii -> R assemble to d:V -> R with s d=t d=identity_V. For any test point a:T -> V the composite d a is a reflexive arrow. This uses the same diagonal arrows as the open-partition argument but assembles them before precomposing with a.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023W (definition-descent-datum-for-family-of-morphisms), cocycle on triple overlaps; direct functor-of-points verification using schemes.tex Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), and groupoids.tex Tag 022P (definition-equivalence-relation)."
+   }
+  },
+  {
+   "text": "For every (i,j), construct c:R_ij -> R_ii from (p_i,p_i f_i) using [def-pc-fibre-product]. Apply the (i,j,i) cocycle to identity_R_ij, theta_ij and c. Base interchange verifies its last coordinate hypothesis. The diagonal identity for c implies p_i theta_ji theta_ij=p_i. Assemble theta_ij followed by R_ji -> R to beta:R -> R using [lem-weil-pbc-scheme-coproduct-family]. Its source is the old target and its target is the old source by the displayed identity. Composing a relation arrow with beta proves symmetry on every test scheme.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023W (definition-descent-datum-for-family-of-morphisms), cocycle on triple overlaps; direct functor-of-points verification using schemes.tex Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), and groupoids.tex Tag 022P (definition-equivalence-relation)."
+   }
+  },
+  {
+   "text": "For two composable relation arrows r,q on T, pull back the coproduct open cover along r and refine each member by the coproduct open cover pulled back along q, using [lem-weil-pbc-scheme-coproduct-family] and [def-weil-open-immersion]. On each piece r factors through R_ij and q through R_kl. If j differs from k the piece is empty by disjointness, so any map to R suffices. If j=k, cancel X_j -> V in the equality of middle endpoints. By base interchange and the two fibre-product conditions, the pair (source of r,other base coordinate of q) defines c into R_il by [def-pc-fibre-product]. The (i,j,l) cocycle says that its transported endpoint equals the target of q. Thus c followed by R_il -> R has the required endpoints. Choose these local maps; on intersections they have the same endpoints, so the uniqueness proved in step 3 makes them equal. Apply [lem-weil-pbc-scheme-morphism-gluing] and its hom-ext clause to obtain the global composite arrow. Together with steps 3--5 this proves the claimed equivalence relation, also when the index type or a test scheme is empty.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023W (definition-descent-datum-for-family-of-morphisms), cocycle on triple overlaps; direct functor-of-points verification using schemes.tex Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), and groupoids.tex Tag 022P (definition-equivalence-relation)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 023W (definition-descent-datum-for-family-of-morphisms), explicit verification of the input to spaces.tex Tag 02WW; groupoids.tex Tag 022P and schemes.tex Tags 01JB and 01JC. Lean realization by M6: coproduct-assembled diagonal and reversal maps; common pullback open cover for local composition and uniqueness-based gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale descent datum of schemes defines an etale equivalence relation on their disjoint union",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Pretopology X.Etale\", \"doc\": \"The Grothendieck pretopology on the category of schemes over a base scheme $ X $, defined by covering families consisting of jointly surjective étale morphisms. This pretopology uses the étale propert\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → (i : D.J) × ↥(D.U i) → (i : D.J) × ↥(D.U i) → Prop\", \"doc\": \"A binary relation on the disjoint union of carrier sets of objects $U(i)$ in the gluing data diagram, where two elements $(i,a)$ and $(j,b)$ are related if there exists an element $x$ in the intersect\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a scheme equivalence relation from isomorphisms over double overlaps satisfying a cocycle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).t' x y z = AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the coherence morphism $t'$ in the glued cover data constructed from $\\\\mathcal{U}$ coincides with the morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 y z x)\\n        (AlgebraicGeometry.Scheme.Cover.gluedC\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the composition of the morphisms $\\\\text{gluedCoverT}'(x,y,z)$, $\\\\text{gluedCoverT}'(y,z,x)$, and $\\\\text{glu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → (i : D.J) × ↥(D.U i) → (i : D.J) × ↥(D.U i) → Prop\", \"doc\": \"A binary relation on the disjoint union of carrier sets of objects $U(i)$ in the gluing data diagram, where two elements $(i,a)$ and $(j,b)$ are related if there exists an element $x$ in the intersect\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover_t\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x x_1 : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).t x x_1 = (CategoryTheory.Limits.pullbackSymmetry (𝒰.f x) (𝒰.f x_1)).hom\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$ and any indices $x, x_1$ in the index set $I_0(\\\\mathcal{U})$, the transpose morphism $t(x, x_1)$ in the glued cover data constructed from $\\\\mathcal{U}$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 y z x)\\n        (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the composition of morphisms between triple pullbacks constructed via associativity and symmetry isomorphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → AlgebraicGeometry.Scheme.GlueData\", \"doc\": \"This definition constructs gluing data for schemes using an open cover $\\\\mathcal{U}$ of a scheme $X$. It specifies: (1) an index set $I_0$ for the cover, (2) a functor assigning each index to a scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 y z x)\\n        (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the composition of the morphisms $\\\\text{gluedCoverT}'(x,y,z)$, $\\\\text{gluedCoverT}'(y,z,x)$, and $\\\\text{glue\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.cocycle\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (i j k : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.t' 𝒰 f g i j k)\\n      (\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the symmetry-and-pasting morphisms $t'\\\\mathcal{\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, \"relation\"",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*datum|equivalenceRelation|EquivalenceRelation",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme descent cocycle over an etale cover gives an etale equivalence relation on the coproduct of charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.sigmaOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"{σ : Type v} → (g : σ → AlgebraicGeometry.Scheme) → [inst : Small.{u, v} σ] → (∐ g).OpenCover\", \"doc\": \"Given a small type $\\\\sigma$ and a function $g : \\\\sigma \\\\to \\\\text{Scheme}$ assigning a scheme to each element of $\\\\sigma$, this constructs the open cover of the coproduct (disjoint union) scheme $\\\\copr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \": Scheme.GlueData.{u}\", \"doc\": \"This definition constructs gluing data for schemes using an open cover $\\\\mathcal{U}$ of a scheme $X$. It specifies: (1) an index set $I_0$ for the cover, (2) a functor assigning each index to a scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"(a b : Σ i, ((D.U i).carrier : Type _)) : Prop\", \"doc\": \"A binary relation on the disjoint union of carrier sets of objects $U(i)$ in the gluing data diagram, where two elements $(i,a)$ and $(j,b)$ are related if there exists an element $x$ in the intersect\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle\", \"module\": \"Mathlib.AlgebraicGeometry.Gluing\", \"type\": \"(x y z : 𝒰.I₀) : gluedCoverT' 𝒰 x y z ≫ gluedCoverT' 𝒰 y z x ≫ gluedCoverT' 𝒰 z x y = 𝟙 _\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the composition of the morphisms $\\\\text{gluedCoverT}'(x,y,z)$, $\\\\text{gluedCoverT}'(y,z,x)$, and $\\\\text{glu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.cocycle\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"(i j k : 𝒰.I₀) : t' 𝒰 f g i j k ≫ t' 𝒰 f g j k i ≫ t' 𝒰 f g k i j = 𝟙 _\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the symmetry-and-pasting morphisms $t'\\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \": Scheme.GlueData.{u}\", \"doc\": \"This constructs gluing data for schemes using pullbacks associated to an open cover $\\\\mathcal{U}$ of a scheme $X$ and morphisms $f: X \\\\to Z$, $g: Y \\\\to Z$. The data includes: (1) an index set $J = \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"(i j k : 𝒰.I₀) :\\n  t' 𝒰 f g i j k ≫ t' 𝒰 f g j k i ≫ t' 𝒰 f g k i j ≫ pullback.fst _ _ ≫ pullback.snd _ _ =\\n    pullback.fst _ _ ≫ pullback.snd _ _\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j, k \\\\in \\\\mathcal{U}.I_0$, the composition of the symmetry-adjusted pullback isomorphisms $t'$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale descent datum of schemes defines an etale equivalence relation on their disjoint union",
+   "results": "{\"t\": \"2026-10-23T09:32:39Z\", \"tool\": \"leanfinder\", \"query\": \"An etale descent datum of schemes defines an etale equivalence relation on their disjoint union\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.GlueData\"], \"digest\": \"4f8aae45a2f23a0c\"}; Read the returned hits. Open-cover gluing and etale site definitions do not state the arbitrary etale descent-cocycle relation construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*datum|equivalenceRelation|EquivalenceRelation",
+   "results": "{\"t\": \"2026-10-23T09:33:32Z\", \"tool\": \"grep\", \"query\": \"descent.*datum|equivalenceRelation|EquivalenceRelation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits. Open-cover gluing and etale site definitions do not state the arbitrary etale descent-cocycle relation construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme descent cocycle over an etale cover gives an etale equivalence relation on the coproduct of charts",
+   "results": "{\"t\": \"2026-10-23T09:33:32Z\", \"tool\": \"leansearch\", \"query\": \"A scheme descent cocycle over an etale cover gives an etale equivalence relation on the coproduct of charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.sigmaOpenCover\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle\", \"AlgebraicGeometry.Scheme.Pullback.cocycle\", \"AlgebraicGeometry.Scheme.Pullback.gluing\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"b05d61b8f7fc0d7c\"}; Read the returned hits. Open-cover gluing and etale site definitions do not state the arbitrary etale descent-cocycle relation construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, \"relation\"",
+   "results": "{\"t\": \"2026-10-23T09:33:32Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, \\\"relation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits. Open-cover gluing and etale site definitions do not state the arbitrary etale descent-cocycle relation construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a scheme equivalence relation from isomorphisms over double overlaps satisfying a cocycle",
+   "results": "{\"t\": \"2026-10-23T09:33:42Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a scheme equivalence relation from isomorphisms over double overlaps satisfying a cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_t\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_snd\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_fst\", \"AlgebraicGeometry.Scheme.Pullback.cocycle\"], \"digest\": \"9a72be1d4a894227\"}; Read the returned hits. Open-cover gluing and etale site definitions do not state the arbitrary etale descent-cocycle relation construction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def Rel|structure GlueData|def glueMorphisms|theorem hom_ext",
+   "results": "Gluing.lean:91 GlueData requires open immersions; :241 Rel is on underlying carrier points, not arbitrary T-points for etale descent; :448 glueMorphisms and :460 hom_ext are the already-existing DAG gluing leaf. Source read at lines 80-110, 225-255, 440-470.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polarized-scheme-etale-descent",
+  "date": "2026-10-22",
+  "group": "Q98"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Additional input to the descent sentence: Stacks Spaces Descent Tag 0D3C, together with Tags 02WW and 04W8, for effective descent of a scheme with a relatively ample invertible module. Extracted argument: parent proof step 1 (construction of the etale equivalence relation).",
+   "via": [
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-scheme-descent-cocycle-etale-relation",
+  "worker": "stage1",
+  "summary": "Preserved the statement and wrote the explicit cocycle argument. Reused existing coproduct, fibre-product, open-immersion, scheme-morphism-gluing and etale permanence/locality nodes; no new nodes. Verified arbitrary disconnected test schemes by a disjoint open partition, rather than treating their maps into coproducts as single-component maps. The item is not an exact Lean attachment or Mathlib leaf.",
+  "blueprint": "Realizes the extracted relation-construction argument of lem-trf-polarized-scheme-etale-descent, step 1, in the ancestry from lem-trf-local-term-locality: construction of the input etale equivalence relation before taking the quotient. The current latest blueprint gives the contracting-correspondence route; this auxiliary scheme-descent calculation does not replace that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic existence and disjoint open-cover properties of arbitrary scheme coproducts; no node of sk-i-curve-zero supplies these categorical scheme constructions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-ee04f03bb",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-ee04f03bb (reviewer sub-agent of L); spot-checked: I read the item in full: statement, all 6 steps, sources and split_report. I read the statements of all 10 cited nodes, all of them status-mathlib leaves (coproduct, fibre product, open immersion, étale base change 02GO, composition/cancellation, local on source 02GJ, morphism gluing), and the parent and its consumer lem-trf-etale-relation-quotient. The item's conclusion (s,t étale; mono R→V×_SV; equivalence relation on R(T) for every T/S) is exactly that consumer's input and matches Groupoids 022P. The cocycle order agrees with Descent 023W (descent.tex 8177ff). 02WW is only the later quotient theorem, and proof_origin is correctly marked agent. Step checks: step 1 identifies R_ij ≅ X_i×_SU_j by pullback pasting and gets f_jτ_ij=b from the base swap; elementary is justified. Step 2 uses étaleness of u_j only (f_i arbitrary), iso ⇒ open immersion, cancellation clauses (1)-(2), and local-on-source over the arbitrary cover {R_ij}. Step 3 forces the coordinates (a_i,f_jb_j) on the disjoint partition T_ij and gets uniqueness by gluing; categorical mono follows from test objects over S. Step 4 uses the diagonal identity of θ_ii for reflexivity. Step 5 pulls back the (i,j,i) cocycle along (f_ix,v,f_ix), where the pr_02 part is diagonal so θ_ii=id. Step 6 pulls back the triple cocycle along (x,f_jy,f_kz), which exists over S, to get τ_ik(x,f_kz)=z. Edge cases checked: empty I, disconnected T, singleton non-mono cover, non-separated or infinite data. The joint-surjectivity hypothesis is unused here but harmless. Duplicate search (rg -L for equivalence relation + cocycle, and for 023W/02WW) found nothing that states this construction. There are no new nodes. All deps are leaves, so there is no route issue; the coproduct tool_use is accepted but superfluous. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeDescentCocycleEtaleRelation",
+  "declaration": "AlgebraicGeometry.SchemeDescentCocycle.etale_relation",
+  "declarations": [
+   "AlgebraicGeometry.SchemeDescentCocycle.overlap",
+   "AlgebraicGeometry.SchemeDescentCocycle.projection",
+   "AlgebraicGeometry.SchemeDescentCocycle.otherBase",
+   "AlgebraicGeometry.SchemeDescentCocycle.structureMap",
+   "AlgebraicGeometry.SchemeDescentCocycle.sourceMap",
+   "AlgebraicGeometry.SchemeDescentCocycle.targetMap",
+   "AlgebraicGeometry.SchemeDescentCocycle.etale_relation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeDescentCocycleEtaleRelation.lean",
+  "statement": "theorem etale_relation [hu : ∀ i, Etale (u i)] (hcover : ∀ x : S, ∃ (i : I) (y : U i), u i y = x) (θ : ∀ i j, overlap u f i j ≅ overlap u f j i) (hbase : ∀ i j, (θ i j).hom ≫ projection u f j i ≫ f j = otherBase u f i j ∧ (θ i j).hom ≫ otherBase u f j i = projection u f i j ≫ f i) (hdiagonal : ∀ (T : Scheme.{u}) (i : I) (a : T ⟶ overlap u f i i), a ≫ projection u f i i ≫ f i = a ≫ otherBase u f i i → a ≫ (θ i i).hom ≫ projection u f i i = a ≫ projection u f i i) (hcocycle : ∀ (T : Scheme.{u}) (i j k : I) (a : T ⟶ overlap u f i j) (b : T ⟶ overlap u f j k) (c : T ⟶ overlap u f i k), a ≫ (θ i j).hom ≫ projection u f j i = b ≫ projection u f j k → a ≫ projection u f i j = c ≫ projection u f i k → b ≫ otherBase u f j k = c ≫ otherBase u f i k → b ≫ (θ j k).hom ≫ projection u f k j = c ≫ (θ i k).hom ≫ projection u f k i) : Etale (sourceMap u f) ∧ Etale (targetMap u f θ) ∧ ∃ h : sourceMap u f ≫ structureMap u f = targetMap u f θ ≫ structureMap u f, Mono (pullback.lift (sourceMap u f) (targetMap u f θ) h) ∧ ∀ T : Over S, Equivalence (fun a b : T ⟶ Over.mk (structureMap u f) ↦ ∃ r : T.left ⟶ ∐ fun ij : I × I ↦ overlap u f ij.1 ij.2, r ≫ sourceMap u f = a.left ∧ r ≫ targetMap u f θ = b.left)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The six proof-free abbreviations name precisely the iterated fibre products, their projections, and the canonical coproduct maps already specified by this node; they introduce no independent notion. Diagonal normalization and the triple-overlap cocycle are written on all test schemes, equivalently by Yoneda. The equality witness in the conclusion types the canonical map to V ×_S V."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-173a7a12c",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps, module, report (Worker report + Second reading by Q38 present). Node diff vs side-live: only lean added. Clause check: étale+jointly-surjective cover (hcover = union-of-ranges), overlap = X_i ×_{U_i}(U_i×_S U_j) exactly, hbase both base-interchange clauses, hdiagonal = θ_ii|diag = id on T-points (equivalent to parent's theta_identity, not stronger), hcocycle = θ_jk∘θ_ij=θ_ik on triple overlap in i→j→k order (remaining coords forced by hbase), s/t/structure maps via Sigma.desc as displayed; conclusion Etale s ∧ Etale t ∧ Mono (s,t) into V×_S V ∧ ∀ T : Over S, Equivalence of R(T)-relation, same format the consumer EtaleRelationQuotient takes as input. lean.statement verbatim in file. Edge cases: empty I, non-mono single cover, disconnected/nonreduced T. No hollow defs, sorry only in theorem, docstrings with source/blueprint/6 steps. Non-blocking: I : Type u size convention (coproduct interface needs Small.{u}; parent's I : Type v will need reindexing), overlap abbrevs duplicate downstream parent's polarizedOverlap helpers (reuse would create a cycle). No recompile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261026T082516-L-2183661",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

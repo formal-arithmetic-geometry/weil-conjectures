@@ -1,0 +1,209 @@
+{
+ "id": "lem-sf-scalar-pullback-unique-derived-descent",
+ "kind": "statement",
+ "title": "Unique normalized derived descent of a scalar pullback chain map",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "Fix a prime ell, finite extensions E,L of Q_ell, an embedding iota:E to L, schemes X,Y and a scheme morphism g:X to Y. Use the actual ordinary and derived scalar functors and their canonical counits from [lem-weil-finite-free-completed-scalar-comparison], and the normalized pullback comparisons from [def-pur-integral-derived-operations]. Suppose ordinary scalar extension on Y sends good complexes to good complexes and its universal derived counit is invertible on every complex over Y. Then every natural chain transformation from A_E followed by scalar extension on X to scalar extension on Y followed by A_L descends to a unique natural transformation Lg_E followed by derived scalar extension on X to derived scalar extension on Y followed by Lg_L satisfying the exact equation [def-sf-scalar-pullback-strict-cone-data]. No invertibility of the chain transformation and no K-flatness of A_E(P) are assumed.",
+ "stmt_deps": [
+  "def-sf-scalar-pullback-strict-cone-data",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04VG, localization universal property; good-complex localization in Tags 06YS and 06YT; Steps 8–9 of lem-weil-scalar-pullback-strict-cone-naturality."
+ },
+ "proof": [
+  {
+   "text": "Lift scalar extension on good E-complexes to good L-complexes using the good-preservation hypothesis. Its canonical derived scalar counit on Y is invertible by hypothesis and natural, so its components form eta: q_E followed by derived scalar extension is isomorphic to the lifted good scalar functor followed by q_L. Use the existing good-complex localization theorem to regard q_E as a localization at the restricted quasi-isomorphisms.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, localization universal property; good-complex localization in Tags 06YS and 06YT; Steps 8–9 of lem-weil-scalar-pullback-strict-cone-naturality."
+   }
+  },
+  {
+   "text": "On good representatives compose the normalized E-pullback comparison, the X scalar counit and the localization of the supplied chain map to form a. Compose eta with the L-pullback comparison to form an isomorphism b from the restricted target derived functor. Insert explicit functor associators and the lift/inclusion comparison so that the functor expressions have the stated parentheses.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, localization universal property; good-complex localization in Tags 06YS and 06YT; Steps 8–9 of lem-weil-scalar-pullback-strict-cone-naturality."
+   }
+  },
+  {
+   "text": "Apply the proved localization_descent_with_comparison helper, which uses fully faithful precomposition along q_E, to a and b. It gives a unique tau with tau(q_E P) followed by b(P) equal to a(P).",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, localization universal property; good-complex localization in Tags 06YS and 06YT; Steps 8–9 of lem-weil-scalar-pullback-strict-cone-naturality."
+   }
+  },
+  {
+   "text": "Compute the components of a and b. Every inserted associator has identity components; normalize the canonical scalar counits using their model-counit equalities. The resulting equation is exactly ScalarPullbackDescentFormula. Proof irrelevance identifies any supplied good-complex proof with the chosen lift proof. Conversely every transformation satisfying that displayed equation satisfies the localization helper equation, so the same uniqueness applies.",
+   "uses": [
+    "def-sf-scalar-pullback-strict-cone-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, localization universal property; good-complex localization in Tags 06YS and 06YT; Steps 8–9 of lem-weil-scalar-pullback-strict-cone-naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-sf-scalar-pullback-strict-cone-data",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J3",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04VG, localization universal property; good-complex localization in Tags 06YS and 06YT; Steps 8–9 of lem-weil-scalar-pullback-strict-cone-naturality."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localization_descent_with_comparison",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-27",
+   "verdict": "Use the generic localization API through the existing proved project helper; Mathlib has no exact specialized scalar-pullback counit equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": {
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft"
+    ],
+    "digest": "59ab625b708f174b"
+   },
+   "date": "2026-10-27",
+   "verdict": "Use the generic localization API through the existing proved project helper; Mathlib has no exact specialized scalar-pullback counit equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique descent of a natural transformation along localization with an invertible comparison on representatives",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Localization.liftNatTrans",
+     "CategoryTheory.Localization.StrictUniversalPropertyFixedTarget.lift",
+     "CategoryTheory.Localization.instLiftingInverseUniq",
+     "CategoryTheory.Localization.instLiftingFunctorUniq",
+     "CategoryTheory.Localization.compUniqInverse",
+     "CategoryTheory.Localization.natTrans_ext",
+     "CategoryTheory.Localization.Construction.natTransExtension",
+     "CategoryTheory.Localization.isoUniqFunctor"
+    ],
+    "digest": "1696f75d16441522"
+   },
+   "date": "2026-10-27",
+   "verdict": "Use the generic localization API through the existing proved project helper; Mathlib has no exact specialized scalar-pullback counit equation."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarPullbackStrictConeNaturality",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "The ancestor is the geometric Frobenius transport comparison. This is the unique localization descent part, Steps 8–9 of the strict scalar/pullback cone naturality proof; no new blueprint unit or alternative unit route is introduced.",
+   "via": [
+    "lem-weil-scalar-pullback-strict-cone-naturality",
+    "lem-weil-specified-pullback-comparison-alpha",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarPullbackUniqueDerivedDescent",
+  "file": "lean/Sheaf/Paper/ScalarPullbackUniqueDerivedDescent.lean",
+  "declaration": "WeilConjectures.scalarPullbackDescent_existsUnique",
+  "declarations": [
+   "WeilConjectures.scalarPullbackDescent_existsUnique"
+  ],
+  "statement": "theorem scalarPullbackDescent_existsUnique\n    {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)\n    (good : ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,\n      integralOperationsGoodComplex l L Y\n        ((completedOrdinaryScalarComplex l E L ι Y).obj P.obj))\n    (counit : ∀ P : CochainComplex (integralTowerModules l E Y) ℤ,\n      IsIso (completedScalarCounit l E L ι Y P))\n    (δ : integralOperationsPullbackComplexFunctor l E g ⋙\n        completedOrdinaryScalarComplex l E L ι X ⟶\n      completedOrdinaryScalarComplex l E L ι Y ⋙\n        integralOperationsPullbackComplexFunctor l L g) :\n    ∃! τ : integralDerivedPullback l E g ⋙ completedDerivedScalarExtension l E L ι X ⟶\n        completedDerivedScalarExtension l E L ι Y ⋙ integralDerivedPullback l L g,\n      ScalarPullbackDescentFormula l E L ι g δ τ",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "worker": "J3",
+  "item": "Sheaf.Paper.ScalarPullbackStrictConeNaturality",
+  "summary": "A proved intermediate module for the unique derived-descent step, separated after generic cone and explicit-associator improvements to satisfy the 60-second per-file limit. No sorry is added.",
+  "blueprint": "The ancestor is the geometric Frobenius transport comparison. This is the unique localization descent part, Steps 8–9 of the strict scalar/pullback cone naturality proof; no new blueprint unit or alternative unit route is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-eebdd",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T123457-L-2304317",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-eebdd",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T123457-L-2304317",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published (byte-identical signature); moved 13-def block vs published item (byte-identical); new nodes' lean.statement vs Lean signatures; both direct importers compiled against delivered modules; #print axioms"
+ }
+}

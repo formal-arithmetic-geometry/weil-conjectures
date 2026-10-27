@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-smooth-curve-function-field-p-basis",
+ "kind": "statement",
+ "title": "A smooth curve function field has a singleton p-basis",
+ "statement": "Let $k$ be an algebraically closed field of characteristic $p>0$ [def-weil-field], [def-weil-algebraic-closure], [def-pc-field-characteristic], where $p$ is prime. Let $C$ be a smooth integral $k$-curve of dimension one [def-sc-curves], [def-pc-integral-scheme], and put $K=k(C)$ [def-sc-function-field], with its given inclusion $k\\hookrightarrow K$ [def-pc-field-extension]. Write $K^p=\\{x^p:x\\in K\\}$, a subfield of $K$, and let $(\\Omega_{K/k},\\mathrm d)$ be its module of Kähler differentials [def-weil-pbc-kahler-differentials]. Then $k\\subseteq K^p$, $\\dim_K\\Omega_{K/k}=1$, and there is $t\\in K$ such that $(\\mathrm dt)$ is a $K$-basis of $\\Omega_{K/k}$ and $(1,t,\\ldots,t^{p-1})$, indexed by $0\\leq j<p$, is a $K^p$-basis of $K$. In particular $[K:K^p]=p$ [def-pc-field-tower]. Properness is not assumed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCY (curves-lemma-inseparable-deg-p-smooth), proof, second paragraph, the dimension-one differential and p-basis calculation; more-algebra.tex Tag 07P2 (more-algebra-lemma-p-basis), existence and equivalence (a)-(b)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-characteristic",
+  "def-sc-curves",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-kahler-differentials",
+  "def-pc-field-tower"
+ ],
+ "proof": [
+  {
+   "text": "For every $a\\in k$, the nonconstant polynomial $X^p-a$ has a root $b\\in k$ by algebraic closedness, so $a=b^p$ also in $K$. Thus $k\\subseteq K^p$ and the compositum $kK^p$ equals $K^p$. Here $K^p$ is a subfield: in characteristic $p$ one has $x^p+y^p=(x+y)^p$, $x^py^p=(xy)^p$, $-x^p=(-x)^p$, and $(x^p)^{-1}=(x^{-1})^p$ for $x\\ne0$.",
+   "uses": [
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07P1 (definition-p-basis) and 07P2 (lemma-p-basis): coefficient subfield kK^p; specialization to algebraically closed k."
+   }
+  },
+  {
+   "text": "The curve $C$ is a separated integral $k$-scheme of finite type of dimension one, smooth over $k$, i.e. a smooth curve over the field $k$ in the sense of [lem-sfb-smooth-curve-generic-differentials]; its generic point $\\eta$ gives $K=k(C)=\\mathcal O_{C,\\eta}$ with the $k$-algebra structure of the structure morphism, which is the given inclusion $k\\hookrightarrow K$. The last clause of [lem-sfb-smooth-curve-generic-differentials] says that $\\Omega_{K/k}$ is nonzero of dimension one over $K$. Choose $v\\ne0$ in $\\Omega_{K/k}$; then $(v)$ is a $K$-basis and $\\dim_K\\Omega_{K/k}=1$.",
+   "uses": [
+    "lem-sfb-smooth-curve-generic-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCY (lemma-inseparable-deg-p-smooth), proof, second paragraph: 'Since X is a smooth curve we know that Omega_{K/k} is a vector space of dimension 1 over K'."
+   }
+  },
+  {
+   "text": "The empty family in $K$ is $p$-independent over $k$: its sole bounded monomial is $1$, which is linearly independent over the field $kK^p=K^p$. Apply [lem-weil-pbc-p-independent-extends-to-p-basis] to this family, obtaining $(t_i)_{i\\in I}$ whose bounded finitely supported monomials form a $K^p$-basis of $K$. The characteristic of $K$ is $p$ because $k\\hookrightarrow K$. Apply [lem-weil-pbc-p-basis-differentials-basis] to the extension $K/k$ and this monomial basis. It gives a $K$-basis $(\\mathrm dt_i)_{i\\in I}$ of $\\Omega_{K/k}$.",
+   "uses": [
+    "lem-weil-pbc-p-independent-extends-to-p-basis",
+    "lem-weil-pbc-p-basis-differentials-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P2 (lemma-p-basis), existence by extending the empty p-independent family and implication (a) implies (b)."
+   }
+  },
+  {
+   "text": "The index set $I$ is nonempty, since otherwise the span of $(\\mathrm dt_i)$ would be zero, contradicting $v\\ne0$. Choose $i_0\\in I$. In the basis $(v)$ write $\\mathrm dt_i=a_i v$; every $a_i$ is nonzero since a basis vector is nonzero. If $j\\ne i_0$, the equality $a_j\\mathrm dt_{i_0}-a_{i_0}\\mathrm dt_j=0$ is a relation in the basis $(\\mathrm dt_i)$ with nonzero coefficients, a contradiction. Thus $I=\\{i_0\\}$, and for $t=t_{i_0}$ the vector $\\mathrm dt$ alone is a $K$-basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07P2 (lemma-p-basis), elementary dimension-one consequence of (a) implies (b); curves.tex Tag 0CCY, second paragraph of proof."
+   }
+  },
+  {
+   "text": "For the singleton index set $I=\\{i_0\\}$, a bounded exponent family $E$ is specified uniquely by $j=E(i_0)$, with $0\\le j<p$, and its monomial is $t^j$. Reindex the monomial basis from step 3 by these integers. It is exactly $(1,t,\\ldots,t^{p-1})$, so $K$ has dimension $p$ over $K^p$. By the definition of field degree [def-pc-field-tower] this says $[K:K^p]=p$. None of the preceding steps used properness.",
+   "uses": [
+    "def-pc-field-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07P1 (definition-p-basis) and 07P2 (lemma-p-basis), bounded monomial basis for a singleton; curves.tex Tag 0CCY, second paragraph, degree calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-sfb-smooth-curve-generic-differentials",
+  "lem-weil-pbc-p-independent-extends-to-p-basis",
+  "lem-weil-pbc-p-basis-differentials-basis",
+  "def-pc-field-tower"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CCY (lemma-inseparable-deg-p-smooth), second paragraph: dimension-one differentials of the smooth curve (the unit's node lem-sfb-smooth-curve-generic-differentials) followed by more-algebra.tex Tag 07P2. Algebraic closedness identifies kK^p with K^p. No properness is used in this local calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pBasis|p_basis|finrank.*[Kk]aehler|[Kk]aehler.*finrank|functionField.*[Dd]ifferential",
+   "results": "25 hits; Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean, Mathlib/Dynamics/TopologicalEntropy/NetEntropy.lean, Mathlib/Dynamics/TopologicalEntropy/NetEntropy.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth cotangent bases require a presentation and do not give the one-variable p-basis of an arbitrary curve function field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth integral curve has a function field with one dimensional module of Kahler differentials and degree p over the subfield of p-th powers",
+   "results": "8 hits; Algebra.FormallySmooth.projective_kaehlerDifferential, IsIntegralCurveAt, IsIntegralCurveOn, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, Algebra.formallySmooth_iff, Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation, Algebra.FormallySmooth.casesOn",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth cotangent bases require a presentation and do not give the one-variable p-basis of an arbitrary curve function field"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.finrank",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth cotangent bases require a presentation and do not give the one-variable p-basis of an arbitrary curve function field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The function field K of a smooth integral curve over a perfect field of characteristic p has one-dimensional Kahler differentials and a p-basis with one element, so K has basis 1,t,...,t^(p-1) over K^p",
+   "results": "8 hits; Algebra.SubmersivePresentation.basisKaehler, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, Differential.differentialFiniteDimensional, Algebra.SubmersivePresentation.basisKaehler_apply, Algebra.Generators.toKaehler_cotangentSpaceBasis, Algebra.SubmersivePresentation.basisKaehlerOfIsCompl, KaehlerDifferential.mvPolynomialBasis",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth cotangent bases require a presentation and do not give the one-variable p-basis of an arbitrary curve function field"
+  },
+  {
+   "tool": "grep",
+   "query": "p[Bb]asis|p_basis|finrank.*[Kk]aehler|[Kk]aehler.*finrank",
+   "results": "5 hits; Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/RingTheory/LinearDisjoint.lean; directory Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth cotangent bases require a presentation and do not give the one-variable p-basis of an arbitrary curve function field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A one dimensional smooth integral algebraic curve has a rational function t whose powers 1,t,...,t^(p-1) are a basis of its function field over pth powers in positive characteristic",
+   "results": "8 hits; WeierstrassCurve.Affine.CoordinateRing.basis_apply, WeierstrassCurve.Affine.FunctionField, FunctionField, WeierstrassCurve.Affine.CoordinateRing.coe_basis, WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq, WeierstrassCurve.Affine.CoordinateRing.basis_one, WeierstrassCurve.Affine.CoordinateRing.basis, WeierstrassCurve.Affine.CoordinateRing.basis_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-smooth cotangent bases require a presentation and do not give the one-variable p-basis of an arbitrary curve function field"
+  },
+  {
+   "tool": "grep",
+   "query": "p[Bb]asis|p_basis|finrank.*[Kk]aehler|[Kk]aehler.*finrank",
+   "results": "5 hits; Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/RingTheory/LinearDisjoint.lean, Mathlib/RingTheory/LinearDisjoint.lean; directory Mathlib/RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth presentation ranks and general separability or power-basis lemmas do not assert the singleton p-basis of a curve function field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth integral curve function field K in characteristic p has basis 1,t,...,t^(p-1) over its subfield of pth powers",
+   "results": "8 hits; Module.Basis.mapPowExpCharPowOfIsSeparable, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType, Algebra.adjoin.powerBasisAux, IntermediateField.adjoin.powerBasis, Algebra.FormallySmooth.of_perfectField, PerfectClosure.instPerfectField, IntermediateField.powerBasisAux, Algebra.adjoin.powerBasis",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth presentation ranks and general separability or power-basis lemmas do not assert the singleton p-basis of a curve function field"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.finrank",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth presentation ranks and general separability or power-basis lemmas do not assert the singleton p-basis of a curve function field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The function field of a smooth integral curve over an algebraically closed field of characteristic p has a singleton p-basis and dimension one Kahler differentials",
+   "results": "8 hits; Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, Algebra.IsStandardSmooth.free_kaehlerDifferential, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, IsLocalRing.finrank_CotangentSpace_eq_one, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth presentation ranks and general separability or power-basis lemmas do not assert the singleton p-basis of a curve function field"
+  },
+  {
+   "tool": "grep",
+   "query": "p[Bb]asis|p_basis|pth.*basis|finrank.*frobenius|finrank.*pow",
+   "results": "25 hits; Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/Galois/Infinite.lean, Mathlib/FieldTheory/KummerPolynomial.lean, Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/KummerExtension.lean; directory Mathlib/FieldTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth presentation ranks and general separability or power-basis lemmas do not assert the singleton p-basis of a curve function field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separably generated field extension of transcendence degree one over a perfect field in positive characteristic the p-degree is p and the relative differentials have a basis dt",
+   "results": "8 hits; Differential.differentialFiniteDimensional, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top, Differential.differentialAlgebraFiniteDimensional, Algebra.Generators.toKaehler_cotangentSpaceBasis, Algebra.SubmersivePresentation.basisKaehler, exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, Algebra.SubmersivePresentation.basisCotangent",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth presentation ranks and general separability or power-basis lemmas do not assert the singleton p-basis of a curve function field"
+  },
+  {
+   "tool": "grep",
+   "query": "rank_kaehlerDifferential|free_kaehlerDifferential|iff_exists_basis_kaehlerDifferential",
+   "results": "9 hits; Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; directory Mathlib/RingTheory/Smooth",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth presentation ranks and general separability or power-basis lemmas do not assert the singleton p-basis of a curve function field"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-relative-frobenius-degree",
+  "date": "2026-10-22",
+  "group": "Q160"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Separation of the inseparable part before applying Riemann--Hurwitz (Stacks 0CD2). Within this auxiliary argument, Stacks 0CD2 proof, final sentence: identify the purely inseparable curve map with iterated relative Frobenius using 0CCZ. The relative-Frobenius degree input of Stacks 0CCY, first paragraph, iterated using 0CCG. Extracts original steps 4-5: localization of smooth differentials at the generic point and the singleton p-basis degree calculation.",
+   "via": [
+    "lem-sfb-smooth-curve-relative-frobenius-degree",
+    "lem-sfb-purely-inseparable-curve-frobenius",
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-curve-function-field-p-basis",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved through the unit's generic-differential node (dim_K Omega_{K/k}=1), an existing relative p-basis extension theorem, and the existing p-basis differential theorem. Wrote the singleton-index and bounded-exponent reindexing arguments explicitly; no new nodes. (Reviewer FIX: the inline re-derivation of dim_K Omega_{K/k}=1 through 02G1/00RT was replaced by a citation of lem-sfb-smooth-curve-generic-differentials.)",
+  "blueprint": "Realizes the inherited auxiliary high-genus-cover/Frobenius degree argument under det-thm-sf-ctf-stability-direct-images, proof (3): the generic differential and p-basis calculation extracted in lem-sfb-smooth-curve-relative-frobenius-degree. Read the current latest blueprint direct-images proof; it supplies the surrounding compactification/constructibility route, while the detailed field calculation is Stacks 0CCY and 07P2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-p-independent-extends-to-p-basis",
+    "why": "Generic field-theory tool (Stacks 07P2, extension of a p-independent family); no node of the unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-p-basis-differentials-basis",
+    "why": "Generic field-theory tool (Stacks 07P2 (a)=>(b)); no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-p-independent-extends-to-p-basis",
+  "lem-weil-pbc-p-basis-differentials-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-28d9a7b11",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-28d9a7b11 (reviewer sub-agent of L); spot-checked: I read the item in full. It has six steps and no new nodes, and its statement is unchanged; I also read Stacks 0CCY (proof, second paragraph) and 07P1/07P2. The statement is true: it needs k algebraically closed so that kK^p=K^p (k=F_p(s), K=k(u) is a counterexample otherwise), and it does not need properness. Small cases A^1 and G_m give t=u, and for p=2 the basis is 1,u. Step checks: step 1 (X^p-a, including a=0, and K^p is a subfield) is correct. Steps 2-3 (dim_eta C=1, 02G1 rank-one affine W, localization at A minus 0) are correct as written. Step 4 starts from the empty family, which is p-independent; the extension node gives a monomial K^p-basis and the 07P2 (a)=>(b) node gives the differential basis. I checked both nodes' hypotheses, characteristic p and coefficient field kK^p. Step 5: if the index set had two elements i0, j, then a_j dt_{i0} - a_{i0} dt_j = 0 would be a nontrivial relation, so it is a singleton. Step 6 reindexes the basis to 1,...,t^{p-1} and gets [K:K^p]=p. Fault (C5/C7): steps 2-3 re-derive dim_K Omega_{K/k}=1 through tools of other units (sk-prop-jacobian, and sk-thm-p1 for 02G1/00RT). The item's own unit already has the split, reviewed node lem-sfb-smooth-curve-generic-differentials, which is on base and does not depend on the item; it states exactly that Omega_{F/k} is nonzero of dimension one for a smooth curve over a field, which is the 0CCY sentence the item realizes. Repair in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-curve-function-field-p-basis.json: steps 2-3 become one step citing that node, with its def-pc-curve hypotheses checked and v!=0 chosen. The 'step 4' reference is renumbered to step 3. proof_deps is now the union of the step citations. proof_origin and the split_report summary are updated. tool_uses now lists only the two generic sk-thm-p1 p-basis tools (07P2), which are accepted. The statement and stmt_deps are untouched. The duplicate search found no node stating the singleton p-basis for a curve field.; 1 file(s) fixed by the reviewer"
+ }
+}

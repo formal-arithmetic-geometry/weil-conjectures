@@ -1,0 +1,132 @@
+{
+ "id": "lem-trf-bundle-section-rank-zero-affine-normalization",
+ "kind": "statement",
+ "title": "Affine rank-zero identity-counit normalization",
+ "statement": "In the finite-ring bundle setting [def-trf-bundle-section-orientation-data] with rank zero, fix e:E≅S with e.hom=π and e.inv=z. Assume the specified identity-adjunction comparison c=bundleSectionRankZeroComparison(e) is invertible. For any twist transport t, normalized projective-line adjunction family D, and affine frame over V⊆S, the restriction of c inverse followed by the section chart comparison is the base coefficient pullback followed by inverse chart coefficient comparison and the zero-section pullback of the affine adjunct. This is the one-frame inverse-map normalization equation, without the existence of e or a comparison with an arbitrary normalized orientation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4; parent orientation node proof Step 4"
+ },
+ "stmt_deps": [
+  "def-trf-bundle-section-orientation-data"
+ ],
+ "proof": [
+  {
+   "text": "At stage zero the affine tower and projection are the base and its identity, the ordered adjunction is Adjunction.id, and its counit is the identity. The frame section is the identity since its composite with the projection is identity.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction",
+    "def-trf-bundle-section-orientation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the frame square with the square identifying E with S via e. Compact-support exchange pasting and its identity equation identify the exceptional mates. The zero-stage coefficient descent and base coefficient pullback are the canonical pullback identity and constant-unit comparisons. Cancel unitors to obtain the displayed equation. These are canonical identity laws also for empty schemes and zero rings.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "def-trf-bundle-section-orientation-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "def-weil-pbc-composite-adjunction",
+  "def-trf-bundle-section-orientation-data",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 4, expanded at the indicated parent step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "mate of a composite commuting square equals composite mates for adjunctions",
+   "results": "mateEquiv_square and mateEquiv give formal categorical tools, not this scheme section-component identity.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction composed with the identity adjunction has the same counit under canonical unitors",
+   "results": "Adjunction.comp_counit_app and Adjunction.id_counit give formal identity laws; no specified bundle section comparison.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso, CategoryTheory.Functor.mapIso",
+   "results": "Functor.mapIso and its hom/inv lemmas; no scheme section comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUpperShriekBaseChangeMap.*(comp|trans)|[Rr]ank[Zz]ero",
+   "results": "Only rank-zero linear-algebra hits in Mathlib. Library search finds VectorTraceGeometry.zero_isIso, unboundedEtaleCompactSupport_baseChange_comp/id, and bundleSectionComparison definitions; no existing statement of this component identity.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingBundleSectionOrientation",
+  "date": "2026-10-25",
+  "group": "J2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Step 4, Affine rank-zero identity-counit normalization",
+   "via": [
+    "lem-trf-finite-ring-bundle-section-orientation",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BundleSectionRankZeroAffineNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/BundleSectionRankZeroAffineNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.bundleSectionRankZero_affineNormalization",
+  "statement": "theorem bundleSectionRankZero_affineNormalization (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))\n    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank 0]\n    (e : VectorBundleZeroSection.scheme S 0 M ≅ S)\n    (hp : e.hom = VectorBundleZeroSection.π S 0 M)\n    (hz : e.inv = VectorBundleZeroSection.zero S 0 M)\n    [IsIso (bundleSectionRankZeroComparison A S M e hz)]\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    (V : S.Opens) (hV : IsAffine V.toScheme)\n    (f : VectorBundleZeroSection.Trivialization S 0 M V) :\n    (ordinaryFinitePullback A V.ι).map\n        (inv (bundleSectionRankZeroComparison A S M e hz)) ≫\n        bundleSectionChartComparison A S 0 M V f =\n      (vectorIntegrationBaseCoefficientPullback A N hA t V.ι hS 0).hom ≫\n        (bundleSectionChartCoefficient N A hA t S hS 0 M V f).inv ≫\n        (ordinaryFinitePullback A (bundleSectionChartZero S 0 M V f)).map\n          (bundleSectionAffineAdjunct N hN A hA t D V.toScheme\n            (affineTracePullbackInvertible N V.ι hS) 0)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261025T143446-L-1017800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261025T143446-L-1017800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

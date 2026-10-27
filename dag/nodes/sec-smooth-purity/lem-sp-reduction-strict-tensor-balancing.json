@@ -1,0 +1,130 @@
+{
+ "id": "lem-sp-reduction-strict-tensor-balancing",
+ "kind": "statement",
+ "title": "Strict ordinary and total tensor balancing for normalized reduction",
+ "statement": "For a prime ell, finite E/Q_ell, a scheme T, a coefficient-tower realization D and its specified normalized reduction r, ordinary simultaneous reduction on the actual sequence site admits natural inverse tensor balancing isomorphisms. There is a natural isomorphism from the total tensor of the two reduced complexes to reduction of their total tensor. Its summand is the inverse ordinary comparison followed by reduction of the original summand. The forward ordinary comparison sends (x tensor y) tensor a to (x tensor 1) tensor (y tensor a), and its inverse sends (x tensor a) tensor (y tensor b) to (x tensor y) tensor ab. All comparisons are morphisms of strict sequence-site systems, with the actual quotient transitions, without boundedness or flatness assumptions. This is Nonempty (SpReductionStrictTensor l E T D r).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL (sites-modules.tex), 07A4, 0G7E and 0D6D; blueprint/latest integral direct-image proof (3)."
+ },
+ "stmt_deps": [
+  "def-sp-reduction-monoidal-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the normalized ordinary reduction with extension along the ringed sequence projection, using level scalar models and the specified quotient transitions on generating local tensors. This identifies ordinary functors on whole strict systems.",
+   "uses": [
+    "lem-pur-sequence-site-completion-projection",
+    "det-sp-reduction-tower-normalized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define forward and inverse ordinary balancing by (x tensor y) tensor a maps to (x tensor 1) tensor (y tensor a), and (x tensor a) tensor (y tensor b) maps to (x tensor y) tensor ab. R-balancing and A_n-balancing make these maps well-defined. Tensor generation and sheafification descend them; moving a across the balanced tensor proves both inverse identities. Their naturality is checked on generators.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A quotient h preserves 1 and products, hence the maps commute with horizontal transitions. Extend inverse balancing to each summand of the signed direct-sum total. The two differential components have coefficients 1 and (-1)^p on both sides. The inverse extends similarly. The coproduct universal property proves naturality and the summand equation, before localization.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-site-completion-projection",
+  "det-sp-reduction-tower-normalized",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), refined from the existing eight-step proof of lem-sp-reduction-derived-monoidal-tower."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars strong monoidal K flat complexes of sheaf modules",
+   "results": "8 hits: light condensed monoidal structures and ordinary module flatness; no coherent derived reduction system comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CoreMonoidal\"",
+   "results": "CoreMonoidal and its structural projections and constructors only.",
+   "date": "2026-10-25",
+   "verdict": "Generic monoidal interface; no normalized reduction-system comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension of scalars to inverse systems preserves tensor products with K flat representative comparisons",
+   "results": "8 hits: ordinary module flatness, direct-limit tensor maps, and Kan-extension exactness.",
+   "date": "2026-10-25",
+   "verdict": "No match for the derived system comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "sp_reduction_derived_monoidal|kFlat_total_tensor_model|changeOfRings_isKFlat_independentCoefficients",
+   "results": "Mathlib service: 0 hits. Local rg: existing total-tensor and scalar-extension lemmas supply the two representative-class proofs. No existing strict reduction balancing, normalized descent or geometric square theorem.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the two existing representative-class theorems; state only the three missing comparison steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityReductionDerivedMonoidalTower",
+  "date": "2026-10-25",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-reduction-derived-monoidal-tower",
+   "place": "Comparison interfaces and original proof steps 1--8",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityReductionStrictTensor",
+  "file": "lean/Sheaf/Paper/SmoothPurityReductionStrictTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_reduction_strict_tensor_balancing",
+  "statement": "theorem sp_reduction_strict_tensor_balancing (D : SpCoefficientTowersAbelian l E T)\n    (r : SpReductionTower l E T D) : Nonempty (SpReductionStrictTensor l E T D r)",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpReductionStrictTensor",
+   "AlgebraicGeometry.ProEtale.sp_reduction_strict_tensor_balancing"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0d5a4",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T164359-L-1006995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0d5a4",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T164359-L-1006995",
+  "kind": "interface",
+  "note": "independent cc review: item theorem's assembly proof and the 47 relocated interface declarations (byte-identical to the clone apart from blueprint tags) against node lem-sp-reduction-derived-monoidal-tower, the new def node and the three new sorry nodes (strict balancing, descent, geometric square)"
+ }
+}

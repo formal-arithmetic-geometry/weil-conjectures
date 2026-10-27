@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-continuous-finite-etale-lattice-sheet-charts",
+ "kind": "statement",
+ "title": "Simultaneous normalized charts for the embedded sheet lattices",
+ "statement": "Fix prime l, a finite normed Q_l-extension E that is totally disconnected, and A=continuousIntegers(l,E). Let X be any scheme, P a locally finite free internal E_X-module, p:U→X a finite etale surjection, M a locally finite free internal A_U-module, and e:Ext(A_U→E_U)M≅p*P. There is a pro-etale scheme cover C such that each Y=C_s has a rank r, a positive sheet number d, maps t_j:Y→U with pt_j=g=C.f(s) and a coproduct splitting of U×_X Y given by (t_j,id). There are full A-lattices L_j⊂E^r, each with an A-basis also an E-basis, and a continuous-function presentation c of Res(A_Y→E_Y)g*P with values in E^r. On every B in Y_proet, the range of the encoded actual sheet map of [def-sfb-finite-etale-lattice-sheet-maps], transported through c_B, is exactly the range of C(|B|,L_j)→C(|B|,E^r). No trace or image of a sum is involved.",
+ "stmt_deps": [
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "def-sfb-finite-etale-lattice-sheet-maps",
+  "def-sfb-continuous-function-module-presentation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraph 2: trivialize L and make all finitely many embedded sheet lattices constant on a common refinement"
+ },
+ "proof": [
+  {
+   "text": "Apply the continuous sheet-matrix coordinates theorem. It supplies finite etale splittings, continuous matrices for the actual sheet embeddings, and rational frames on every open restriction.",
+   "uses": [
+    "lem-sfb-continuous-finite-etale-sheet-matrices"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral subring of E contains the open norm ball around zero and is therefore open as an additive subgroup. Apply continuousMatrixCoset_neighborhood to each of the finitely many matrices at a point and intersect the resulting open neighbourhoods. All sheet cosets are constant on this common open neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-lattice-matrix-neighborhoods",
+    "def-weil-pbc-continuous-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a constant invertible matrix g define its lattice by the condition that g inverse times the vector has all coordinates in A. The map A^r→L given by g and its inverse coordinate map give inverse linear equivalences. Transport the standard integral basis and the standard rational basis; their columns agree. Equal right integral cosets define equal such submodules: integral matrices and their inverses preserve A^r. Thus the variable inverse-coordinate test becomes pointwise membership in each fixed full lattice. The range of continuous functions into a submodule is exactly the functions with pointwise values in it, by the induced topology.",
+   "uses": [
+    "lem-sfb-continuous-lattice-sum",
+    "lem-weil-pbc-matrix-lattice-coset-invariance"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Form the Zariski cover by these common open neighbourhoods, weaken it to a pro-etale cover, and bind it with the matrix-coordinate cover. Use the restricted rational presentation, specified splitting and range equations on each member. Empty X uses the empty cover and the empty-vector argument also treats rank zero.",
+   "uses": [
+    "lem-sfb-continuous-finite-etale-sheet-matrices"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-finite-etale-sheet-matrices",
+  "lem-weil-pbc-lattice-matrix-neighborhoods",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-sfb-continuous-lattice-sum",
+  "lem-weil-pbc-matrix-lattice-coset-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraph 2: trivialize L and make all finitely many embedded sheet lattices constant on a common refinement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "simultaneous local constant lattice charts for finite etale sheet embeddings",
+   "results": "ChartedSpace.atlas; ChartedSpaceCore.atlas; Topology.IsOpenEmbedding.singletonChartedSpace.congr_simp; CondensedSet.LocallyConstant.functorFullyFaithful; RingHom.Etale.propertyIsLocal; Topology.IsOpenEmbedding.singletonChartedSpace; AlgebraicGeometry.Scheme.Etale; Manifold.IsImmersionAt.writtenInCharts",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local constant charts for embedded lattices in a locally free continuous coefficient module",
+   "results": "Profinite.NobelingProof.Nobeling_aux; Profinite.NobelingProof.GoodProducts.Basis; IsLocalFrameOn.eventually_eq_sum_coeff_smul; IsLocalFrameOn.coeff; LocallyConstant.freeOfProfinite; IsLocalFrameOn.coeff_apply_of_mem; IsLocalFrameOn; IsLocalFrameOn.generating",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*sheet|sheet.*lattice|trace.*[Ii]mage in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Sites",
+   "results": "No matching declarations. Repository search found the existing lattice-class and trace-image results in different coefficient/module encodings, and no simultaneous normalized sheet-chart or internal trace-range transport theorem. Blueprint searches for sheet lattice, embedded lattices, lattice sheet, and trace image found no separate blueprint nodes.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleTraceImageCharts",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, paragraph 2: trivialize L and make all finitely many embedded sheet lattices constant on a common refinement",
+   "via": [
+    "lem-sfb-continuous-finite-etale-trace-image-charts",
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousFiniteEtaleLatticeSheetCharts",
+  "file": "lean/Sheaf/Paper/ContinuousFiniteEtaleLatticeSheetCharts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousFiniteEtaleLattice_sheet_charts",
+  "statement": "theorem continuousFiniteEtaleLattice_sheet_charts\n    (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]\n    [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [TotallyDisconnectedSpace E] (X : Scheme.{u})\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj E) X))\n    (hP : LocallyFree (condensedRingObj (Profinite.continuousMapRingObj E) X) P)\n    {U : Scheme.{u}} (p : U ⟶ X) [IsFinite p] [Etale p] [Surjective p]\n    (M : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})\n      (condensedRingObj (integralCoeff l E) U))\n    (hM : LocallyFree (condensedRingObj (integralCoeff l E) U) M)\n    (e : (Mod.extendScalars (coefficientMap (integralScalarMap l E) U)).obj M ≅\n      (upperStar (Profinite.continuousMapRingObj E) p).obj P) :\n    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,\n      ∃ (r d : ℕ) (_ : 0 < d) (t : Fin d → (C.X s ⟶ U))\n        (w : ∀ j, t j ≫ p = C.f s),\n        Nonempty (IsColimit (Cofan.mk (pullback p (C.f s))\n          (fun j ↦ pullback.lift (t j) (𝟙 (C.X s)) (by simpa using w j)))) ∧\n      ∃ L : Fin d → Submodule (continuousIntegers l E) (Fin r → E),\n        (∀ j, ∃ b : Module.Basis (Fin r) (continuousIntegers l E) (L j),\n          ∃ c : Module.Basis (Fin r) E (Fin r → E), ∀ i, (b i : Fin r → E) = c i) ∧\n      ∃ c : ContinuousFunctionPresentation (C.X s) (continuousIntegers l E) (Fin r → E)\n          ((Mod.comap (coefficientMap (integralScalarMap l E) (C.X s))).obj\n            ((upperStar (Profinite.continuousMapRingObj E) (C.f s)).obj P)),\n        ∀ (j : Fin d) (B : (C.X s).ProEt),\n          Set.range (fun x ↦ c.sections B\n            (((continuousRingModuleEquivalence (C.X s) (continuousIntegers l E)).functor.map\n              (finiteEtaleLatticeSheetEmbedding (integralScalarMap l E) P p M e\n                (C.f s) (t j) (w j))).val.app (op B) x)) =\n            Set.range (continuousLatticeInclusion (continuousIntegers l E) (L j) B.left)",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-26",
+  "note": "Original public signature retained verbatim. The proof uses the concrete presented range internally and its proved defining equation only at the final conversion."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T071254-L-3908089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261026T130714-L-3495016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

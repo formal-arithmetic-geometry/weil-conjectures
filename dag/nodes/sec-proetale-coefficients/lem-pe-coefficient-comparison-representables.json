@@ -1,0 +1,119 @@
+{
+ "id": "lem-pe-coefficient-comparison-representables",
+ "kind": "lemma",
+ "title": "Large-index continuity of etale representables",
+ "statement": "For a scheme X in universe u, an affine etale presentation P of det-pe-classical-definition-continuity-map indexed by a small cofiltered category in universe u+1, and an etale object V in the coefficient-sized model of def-weil-pbc-site-comparison-morphism, the covariant hom functor from the corresponding opposite pro-etale object preserves the colimit diagram (P.diagram followed by AsSmall.up).op. Equivalently, maps from the affine limit to V factor through a stage and equality is detected at a later stage. The coefficient-model size max(v,u+1) is independent of the scheme universe.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-describe-pullback-from-etale and lemma-limit-pullback (Tag 099S); finite-presentation limit criterion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-definition-continuity-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the sheaf-valued Yoneda equivalences and the comparison adjunction to construct an isomorphism from the inverse image of the lifted etale representable at V to the lifted pro-etale representable at its inclusion. The hom equivalences are natural in the target sheaf, so Coyoneda.ext constructs this isomorphism with no new mathematical assumption.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the essential-image characterization det-pe-classical-sheaves-image to this isomorphism. Its IsClassical conclusion applies directly to the given affine presentation indexed in universe u+1, and makes the continuityMap of the lifted pro-etale representable bijective. Therefore the specified restriction cocone is colimiting, by IsColimit.ofPointIso applied to the chosen colimit.",
+   "uses": [
+    "det-pe-classical-sheaves-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A colimit cocone of sets is jointly surjective; its equality relation for a filtered diagram is eventual equality at one later stage. Transfer these two properties from the lifted pro-etale representable to the coefficient-sized opposite hom sets by ULift.up and ULift.down and the opposite-hom equivalence. Types.FilteredColimit.isColimitOf' then proves that coyoneda sends the opposite presentation cone to a colimit. Reflect the given limit along Scheme.ProEt.forget and preserve it along AsSmall.up; apply preservesColimit_of_preserves_colimit_cocone to that opposite cone. This uses the original larger index and keeps the coefficient universe independent.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-sheaves-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099S; categorical reduction to the existing essential-image characterization of classical sheaves (det-pe-classical-sheaves-image), via sheaf Yoneda and the comparison adjunction; independent universe lifts handled in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of an etale sheaf on the proetale site sends affine cofiltered limits of etale schemes to filtered colimits of modules",
+   "results": "['AlgebraicGeometry.Scheme.Etale.forget', 'AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful', 'Condensed.lanSheafProfinite', 'CondensedMod.ofSheafProfinite', 'LightCondMod.ofSheafLightProfinite', 'Condensed.profiniteSolid', 'LightProfinite.hasSheafify', 'AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit']",
+   "date": "2026-10-26",
+   "verdict": "The closest geometric theorem is Scheme.preservesColimit_yoneda, whose index is universe u. The source comparison continuity and affine-basis sheafification theorems fix coefficient hom-universe u+1. Neither gives the required simultaneous index/coefficient sizes. Generic colimit transport lemmas are used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit_comparisonUpperStar_mapCocone|coefficient.*continuous|preservesColimit_yoneda",
+   "results": "['Mathlib/NumberTheory/Padics/MahlerBasis.lean', 'Mathlib/Topology/ContinuousMap/Polynomial.lean', 'Mathlib/CategoryTheory/Presentable/Basic.lean', 'Mathlib/CategoryTheory/Presentable/Basic.lean', 'Mathlib/CategoryTheory/Presentable/Basic.lean', 'Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean', 'Mathlib/Analysis/Analytic/Composition.lean', 'Mathlib/RingTheory/MvPowerSeries/PiTopology.lean']",
+   "date": "2026-10-26",
+   "verdict": "The closest geometric theorem is Scheme.preservesColimit_yoneda, whose index is universe u. The source comparison continuity and affine-basis sheafification theorems fix coefficient hom-universe u+1. Neither gives the required simultaneous index/coefficient sizes. Generic colimit transport lemmas are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimit",
+   "results": "['CategoryTheory.Limits.PreservesColimit', 'CategoryTheory.Limits.preservesColimit_subsingleton', 'CategoryTheory.Limits.PreservesColimitsOfShape.preservesColimit', 'CategoryTheory.Limits.PreservesColimitsOfShape.mk', \"CategoryTheory.Limits.PreservesColimit.mk'\", 'CategoryTheory.Limits.instHasColimitCompOfPreservesColimit', 'CategoryTheory.Limits.reflectsColimit_of_reflectsIsomorphisms', 'CategoryTheory.Limits.preservesColimit_of_iso_diagram']",
+   "date": "2026-10-26",
+   "verdict": "The closest geometric theorem is Scheme.preservesColimit_yoneda, whose index is universe u. The source comparison continuity and affine-basis sheafification theorems fix coefficient hom-universe u+1. Neither gives the required simultaneous index/coefficient sizes. Generic colimit transport lemmas are used in the parent proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientComparisonContinuity",
+  "date": "2026-10-26",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "classicality detail: continuity of etale inverse images, large-index continuity of etale representables",
+   "via": [
+    "lem-pe-coefficient-comparison-continuity",
+    "lem-pe-coefficient-stratified-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonRepresentableContinuity",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonRepresentableContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientComparison_representable_preservesColimit",
+  "statement": "theorem coefficientComparison_representable_preservesColimit (X : Scheme.{u})\n    {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]\n    (P : AffinePresentation X I)\n    (V : (Scheme.smallModelComparisonEtaleSite.{u, v} X)ᵒᵖ) :\n    PreservesColimit (P.diagram ⋙ AsSmall.up).op\n      (coyoneda.obj (op ((Scheme.smallModelComparisonInclusion.{u, v} X).op.obj V)))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261025T202345-L-2710045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261026T001120-L-4170092",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

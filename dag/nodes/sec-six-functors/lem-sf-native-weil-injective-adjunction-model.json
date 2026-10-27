@@ -1,0 +1,435 @@
+{
+ "id": "lem-sf-native-weil-injective-adjunction-model",
+ "kind": "statement",
+ "title": "Native Weil underived adjunction and K-injective direct-image model",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}k_0$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $f_0:X_0\\to Y_0$ be a separated finite-type morphism between separated finite-type $k_0$-schemes. Use the actual coefficient sheaves $B_T$, module categories $\\mathcal A_T$, Frobenius functors $P_T=F_T^*$ and abelian fixed-pair categories $\\mathcal W_T=\\mathcal A_T^{F_T^*}$ of [def-sf-native-weil-derived-framework], with its small-site and larger-universe convention. For $T=X,Y$, the category $\\mathcal A_T$ of $B_T$-module objects in sheaves of $\\Omega$-vector spaces is equivalent, preserving kernels, to the category of sheaves of $B_T$-modules. The categories $\\mathcal A_T$ and $\\mathcal W_T$ are Grothendieck abelian [def-sp-grothendieck-abelian], $P_T$ is an additive autoequivalence, and the forgetful functor $U_T:\\mathcal W_T\\to\\mathcal A_T$ is exact and conservative. Every cochain complex in $\\mathcal W_T$ admits a quasi-isomorphism to a K-injective complex (every chain map from an acyclic complex is null-homotopic).\n\nWrite $L=\\bar f^*$ and $R=\\bar f_*$ for the actual module inverse and direct images with the framework's coefficient map. Their specified adjunction, with unit $\\eta$ and counit $\\varepsilon$, lifts through the framework's Frobenius comparisons to an additive adjunction $F_0:\\mathcal W_Y\\rightleftarrows\\mathcal W_X:G_0$ whose carrier unit and counit are $\\eta$ and $\\varepsilon$. These $F_0,G_0$ are precisely the underived native Weil inverse and direct images. The functor $F_0$ is exact, and termwise $G_0$ carries K-injectives in $\\mathcal W_X$ to K-injectives in $\\mathcal W_Y$.\n\nPut $Q_T:K(\\mathcal W_T)\\to D(\\mathcal W_T)$ for localization of cochain complexes modulo homotopy. The termwise homotopy adjunction sends $[u:F_0M\\to I]$ to $[G_0u\\circ\\eta_M]$, with inverse $[v:M\\to G_0I]\\mapsto[\\varepsilon_I\\circ F_0v]$. The actual ambient pullback is $f^*=D(F_0)$. The actual ambient direct image is the total right derived functor $RG_0=Rf_*$ with universal comparison $\\beta:Q_YG_0\\Rightarrow Rf_*Q_X$ of [def-sfb-right-derived-functor]. Its components $\\beta_I$ are invertible at K-injective $I$. For every K-injective resolution $r:J\\to I$, the canonical computation isomorphism is\n$$c_r=\\beta_I^{-1}\\circ Rf_*(Q_Xr):Rf_*(Q_XJ)\\xrightarrow{\\sim}Q_YG_0I.$$\nFor every homotopy-class map $v:I\\to I'$ between K-injectives, the computation respects maps by\n$$Rf_*(Q_Xv)\\circ\\beta_I=\\beta_{I'}\\circ Q_Y(G_0v).$$\nAll resolutions here are in the abelian Weil categories, without replacing $D(\\mathcal W_T)$ by fixed pairs in another derived category. No bounded constructible restriction or derived adjunction is asserted.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives), native Weil specialization; injectives.tex Tags 079Q (remark-existence-D), 079P (theorem-K-injective-embedding-grothendieck); native underived functors in lean/WeilConjectures/WeilSheaf/Category.lean:128-150,437-460 and UpperStarLowerStarAdjunction.lean:99-125. Agent-assembled native statement, extracted from returned proof steps 1-3, with derived-comparison naturality from step 6."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sfb-right-derived-functor",
+  "def-sp-grothendieck-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For $T=X,Y$, put $S=\\underline\\Omega$ on the stipulated small site. By [def-sf-native-weil-derived-framework], $B_T$ is a sheaf of commutative $S$-algebras and the ambient tensor is over $S$. Apply [lem-pc-sites-sheaf-tensor-bilinear-universal] with $\\mathcal O=S$: an internal action $B_T\\otimes_S M\\to M$ is exactly a restriction-compatible $S$-bilinear pairing $(b,m)\\mapsto bm$. Its unit and associativity identities are precisely $1m=m$ and $(bb')m=b(b'm)$ on sections. Conversely a sheaf of $B_T$-modules has its $S$-action by restriction along $S\\to B_T$, and its sectionwise multiplication gives that tensor action. An internal module morphism is precisely a $B_T$-linear sheaf map. These constructions are mutually inverse on objects and maps; the recovered $S$-action is the original one since $(s1)m=sm$. The kernel consists of the same local sections killed by the map, with the restricted action, so this equivalence preserves kernels.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), paragraph defining sheaf tensor by bilinear maps, following lemma-sheafification-tensor; agent application with base ring sheaf underline Omega"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ring-sheaves-grothendieck] to the small representative site and the actual commutative ring sheaf $B_T$. The size hypothesis holds in the larger coefficient universe stipulated by [def-sf-native-weil-derived-framework]. Step 1 transfers its abelian structure, colimits, exact filtered colimits and generator to $\\mathcal A_T$: an equivalence carries universal cones and cocones to universal ones, carries kernels and cokernels to kernels and cokernels, and its Hom bijections carry a generator to a generator. Hence $\\mathcal A_T$ is Grothendieck abelian. By [lem-sf-native-adic-pullback-frobenius-mates], $P_T$ is an additive autoequivalence. Specialize [lem-sf-fixed-pair-derived-forget-comparison] to $\\mathcal C=\\mathcal D=\\mathcal A_T$, both endofunctors $P_T$, and $L=\\mathrm{id}$ with identity exchange. Its first paragraph gives that $\\mathcal W_T$ is Grothendieck abelian and $U_T$ is exact and conservative. This uses the abelian fixed-pair category, not a category of fixed pairs formed after localization.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-native-adic-pullback-frobenius-mates",
+    "lem-sf-fixed-pair-derived-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079B (definition-grothendieck-conditions); native fixed-pair implementation lean/WeilConjectures/WeilSheaf/Category.lean:128-148 and CategoryTheory/Endofunctor/IsoAlgebra.lean:isGrothendieckAbelian"
+   }
+  },
+  {
+   "text": "For the given $f_0$, [lem-sf-native-adic-pullback-frobenius-mates] supplies additive $L\\dashv R$, exact $L$, and the actual comparisons $e:P_XL\\cong LP_Y$, $b:P_YR\\cong RP_X$, including the assertion that $b$ is the mate of $e^{-1}$. Thus [lem-sf-fixed-pair-adjunction-lift] applies with $\\mathcal C=\\mathcal A_Y$, $\\mathcal D=\\mathcal A_X$, $F=P_Y$, $G=P_X$. Its lifts send $(M,\\phi)$ to $(LM,L(\\phi)e_M)$ and $(N,\\psi)$ to $(RN,R(\\psi)b_N)$, exactly the functors in [def-sf-native-weil-derived-framework]. It gives $F_0\\dashv G_0$ with carrier unit $\\eta$ and counit $\\varepsilon$. Both lifts are additive because their maps are the additive carrier maps and addition is inherited from carriers. Since $\\mathcal A_X,\\mathcal A_Y$ are Grothendieck abelian by step 2 and have Hom sets small in the framework's coefficient universe, they have all small limits and colimits by [lem-sfb-grothendieck-filtered-finite-limits], so [lem-sf-fixed-pair-created-abelian-structure] applies to $(\\mathcal A_T,P_T)$: forgetting reflects exactness. Since $U_XF_0=LU_Y$ and both $L,U_Y$ are exact, $F_0$ preserves short exact sequences, hence is exact.",
+   "uses": [
+    "lem-sf-native-adic-pullback-frobenius-mates",
+    "lem-sf-fixed-pair-adjunction-lift",
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-fixed-pair-created-abelian-structure",
+    "lem-sfb-grothendieck-filtered-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/UpperStarLowerStarAdjunction.lean",
+    "place": "ProEtaleWeilSheaf.upperStarLowerStarAdjunction and carrier unit/counit formulas, lines 99-125; Category.lean:437-460 for the exact lifted inverse image"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-grothendieck-k-injective] to each Grothendieck abelian category $\\mathcal W_T$ from step 2. Every complex has a quasi-isomorphism to a K-injective complex inside this very abelian category. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $\\mathcal A=\\mathcal W_X$, $\\mathcal B=\\mathcal W_Y$, $u=G_0$, $v=F_0$. The additive adjunction and exactness of $v$ were established in step 3. Consequently termwise $G_0$ sends every K-injective Weil complex to a K-injective Weil complex.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives); injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck)"
+   }
+  },
+  {
+   "text": "The termwise unit and counit of step 3 are chain maps by naturality with each differential. For a chain map $u:F_0M\\to I$, set $T(u)=G_0u\\circ\\eta_M$; for $v:M\\to G_0I$, set $S(v)=\\varepsilon_I\\circ F_0v$. The triangle identities and naturality give $ST(u)=u$ and $TS(v)=v$ degreewise. These formulas descend to chain homotopy: if $u-u'=d_Ih+h d_{F_0M}$, with $h^n:F_0M^n\\to I^{n-1}$, then $G_0(h)\\eta_M$ is a homotopy from $T(u)$ to $T(u')$, by additivity and naturality of $\\eta$; if $v-v'=d_{G_0I}k+k d_M$, then $\\varepsilon_I F_0(k)$ is a homotopy from $S(v)$ to $S(v')$. The same degreewise naturality makes $T,S$ natural in chain maps of both variables, hence in their homotopy classes. This proves precisely the stated homotopy adjunction and its two formulas. No injectivity or boundedness is needed for this step.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/WeilSheaf/UpperStarLowerStarAdjunction.lean",
+    "place": "ProEtaleWeilSheaf.upperStarLowerStarAdjunction and carrier unit/counit formulas, lines 99-125; Category.lean:437-460 for the exact lifted inverse image"
+   }
+  },
+  {
+   "text": "Since $F_0$ is exact, [lem-sf-exact-functor-derived-triangulated] gives its termwise descent $D(F_0)$. It is the actual ambient $f^*$ by [def-sf-native-weil-derived-framework]. For additive $G_0$, [lem-trf-additive-homotopy-triangulated] gives the triangulated functor $K(G_0)$; localization $Q_Y$ is triangulated by [def-weil-abstract-derived-category]. Apply [lem-weil-pbc-kinjective-total-derived] to $Q_YK(G_0)$, using the resolutions of step 4. Its total right derived functor exists and the universal comparison is invertible on K-injectives. By [def-sfb-right-derived-functor] this is $(RG_0,\\beta)$; the framework's $Rf_*$ denotes this very total right derivation. Thus $\\beta:Q_YG_0\\Rightarrow Rf_*Q_X$, with each $\\beta_I$ invertible at K-injective $I$.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-sf-native-weil-derived-framework",
+    "lem-trf-additive-homotopy-triangulated",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies); definition of total right-derived comparison"
+   }
+  },
+  {
+   "text": "For a resolution $r:J\\to I$, localization makes $Q_Xr$ invertible; applying $Rf_*$ and composing with $\\beta_I^{-1}$ therefore gives the canonical isomorphism $c_r=\\beta_I^{-1}Rf_*(Q_Xr)$. It has source $Rf_*(Q_XJ)$ and target $Q_YG_0I$. Naturality of the comparison transformation at any homotopy-class map $v:I\\to I'$ reads $Rf_*(Q_Xv)\\circ\\beta_I=\\beta_{I'}\\circ Q_Y(G_0v)$, exactly the asserted equation. These arguments use only the localization and the universal comparison already obtained in step 6 and apply to arbitrary unbounded complexes. All resolutions remain in $\\mathcal W_T$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies); definition of total right-derived comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sf-native-adic-pullback-frobenius-mates",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-sfb-grothendieck-filtered-finite-limits",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-trf-additive-homotopy-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 08BJ, 070Y, 070K, combined with injectives.tex Tag 079P and the native Frobenius-mate lift; assembly of existing DAG statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryRightDerivedAdjunction|derivedUpperStarLowerStarAdjunction|ProEtaleWeilSheaf",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf adjunctions and condensed Grothendieck instances do not supply the specified native adic fixed-pair adjunction, exactness and its K-injective model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KInjective\", \"adjunction\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf adjunctions and condensed Grothendieck instances do not supply the specified native adic fixed-pair adjunction, exactness and its K-injective model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For native pro-etale Weil sheaves of locally finite continuous l-adic modules the Frobenius equivariant inverse image is an exact left adjoint and the direct image computes on K-injective resolutions",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "CondensedMod.LocallyConstant.adjunction",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "Condensed.profiniteSolid",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous",
+     "SheafOfModules.PullbackConstruction.adjunction"
+    ],
+    "digest": "5e7a75e4fff01489"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf adjunctions and condensed Grothendieck instances do not supply the specified native adic fixed-pair adjunction, exactness and its K-injective model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Native adic Weil module sheaves have an exact inverse image left adjoint to direct image with a K-injective model for total right derivation",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+     "SheafOfModules.pullback",
+     "CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify",
+     "SheafOfModules.pushforwardPushforwardAdj"
+    ],
+    "digest": "630d0f2b5d0c36f9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf adjunctions and condensed Grothendieck instances do not supply the specified native adic fixed-pair adjunction, exactness and its K-injective model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Abelian Frobenius fixed pairs of locally finite l-adic pro-etale modules are Grothendieck and their specified pullback pushforward adjunction has exact pullback and K-injective direct image",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor",
+     "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat"
+    ],
+    "digest": "a028dc7804822c9f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module-sheaf adjunctions and condensed Grothendieck instances do not supply the specified native adic fixed-pair adjunction, exactness and its K-injective model"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|IsoAlgebra|IsGrothendieckAbelian",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+     "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+     "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+     "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean",
+     "Mathlib/CategoryTheory/Abelian/FreydMitchell.lean",
+     "Mathlib/CategoryTheory/Abelian/FreydMitchell.lean",
+     "Mathlib/CategoryTheory/Abelian/FreydMitchell.lean",
+     "Mathlib/CategoryTheory/Abelian/FreydMitchell.lean"
+    ],
+    "digest": "7725b1cd9e32e345"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions or injective-object lemmas do not state the native fixed-pair Grothendieck and unbounded K-injective model with its specified comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact additive left adjoint on abelian equivariant sheaf categories has a right adjoint preserving K-injective complexes",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms",
+     "CategoryTheory.Adjunction.map_injective",
+     "CategoryTheory.HasSheafify.isLeftExact",
+     "CategoryTheory.Injective.injective_of_adjoint",
+     "CochainComplex.isKInjective_of_iso",
+     "CategoryTheory.constantSheafΓAdj",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Sheaf.instPreservesSheafificationOfIsLeftAdjoint"
+    ],
+    "digest": "7bf9e8bf42731f0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions or injective-object lemmas do not state the native fixed-pair Grothendieck and unbounded K-injective model with its specified comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra, CategoryTheory.Adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions or injective-object lemmas do not state the native fixed-pair Grothendieck and unbounded K-injective model with its specified comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a sheaf of algebras in vector space sheaves and Grothendieck Frobenius fixed pairs compute right derived pushforward by K-injectives",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.unitToPushforwardObjUnit",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat",
+     "SheafOfModules.bijective_pushforwardSections",
+     "SheafOfModules.sheafificationCompPullback"
+    ],
+    "digest": "0c1a2ddd82e00d67"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions or injective-object lemmas do not state the native fixed-pair Grothendieck and unbounded K-injective model with its specified comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius fixed pairs of sheaves of modules form a Grothendieck category and an exact pullback left adjoint gives K-injective direct image models",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.instIsLeftAdjointPullback",
+     "SheafOfModules.instIsRightAdjointPushforward",
+     "SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+     "SheafOfModules.sheafificationCompPullback",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat"
+    ],
+    "digest": "396a051bf6fc451c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions or injective-object lemmas do not state the native fixed-pair Grothendieck and unbounded K-injective model with its specified comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.conjugateEquiv_pullbackId_hom",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit"
+    ],
+    "digest": "89e277e5458598cf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf adjunctions or injective-object lemmas do not state the native fixed-pair Grothendieck and unbounded K-injective model with its specified comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-derived-weil-pullback-pushforward-adjunction",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, last Hom bijection: underived native equivariant adjunction and its K-injective computation; returned derived-Weil-adjunction proof steps 1-3 (and comparison equation in step 6).",
+   "via": [
+    "lem-sf-derived-weil-pullback-pushforward-adjunction",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-weil-injective-adjunction-model",
+  "worker": "stage1",
+  "summary": "Verified all clauses using existing generic and native nodes. Wrote the module-action equivalence and homotopy transpose explicitly, specialized the native mate-compatible adjunction, and derived the canonical computation formula by localization and comparison naturality. No new nodes and no statement change.",
+  "blueprint": "fix-lem-tensor-adjunction.proof.md Step 1, final Hom bijection: underived native exact adjunction and K-injective computation supplying its ambient derived input.",
+  "tool_uses": [
+   {
+    "node": "def-sf-native-weil-derived-framework",
+    "why": "General categorical tool applied after verifying its hypotheses; no replacement of the native unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General small-ringed-site Grothendieck theorem, applied to the actual native coefficient ring; it does not replace any geometric or coefficient-route step."
+   },
+   {
+    "node": "lem-sf-fixed-pair-derived-forget-comparison",
+    "why": "Its first paragraph supplies the generic Grothendieck and exact conservative forgetful theorem for additive autoequivalences, instantiated at the native Frobenius."
+   },
+   {
+    "node": "lem-sf-fixed-pair-created-abelian-structure",
+    "why": "General categorical tool applied after verifying its hypotheses; no replacement of the native unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "General universal total right-derived existence and K-injective computation theorem, with the native Weil category as its input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sf-native-weil-derived-framework",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-bcdb5a1f4",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-bcdb5a1f4 (reviewer sub-agent of L); spot-checked: I read the item, its seven steps and every cited statement in full. Statement and stmt_deps are unchanged, there are no new nodes, and this is not a re-split.\n\nSteps checked:\n- Step 1: the \\underline Ω-module action equivalence via lem-pc-sites-sheaf-tensor-bilinear-universal (any commutative ring sheaf) is checked, and the original S-action is recovered by (s1)m=sm.\n- Step 2: lem-weil-pbc-ring-sheaves-grothendieck holds in the 𝒱-small site convention of def-weil-pbc-proetale-site. P_T is an additive autoequivalence, as stated in the mates node. The first paragraph of lem-sf-fixed-pair-derived-forget-comparison gives 𝒲_T Grothendieck abelian and U exact and conservative.\n- Step 3: e and b match the diagrammatic convention of lem-sf-fixed-pair-adjunction-lift with C=𝒜_Y, F=P_Y, G=P_X. The mate formula is literally identical, and the lifts are the framework's.\n- Step 4: Stacks 08BJ (derived.tex:9857) is applied with u=G_0, v=F_0 exact.\n- Step 5: the homotopy transfer was recomputed using G_0F_0(d)η=ηd.\n- Steps 6-7: the directions of β and the types of c_r are checked against def-sfb-right-derived-functor and the framework's Rf_*.\n\nFIX (C1/E1): step 3 applies lem-sf-fixed-pair-created-abelian-structure, which assumes all small limits and colimits. Step 2 gave only the Grothendieck conditions, which do not include limits. Step 3 now cites the Mathlib leaf lem-sfb-grothendieck-filtered-finite-limits, as forget-comparison step 1 does, and proof_deps is updated. The fixed file is fixes/dag/nodes/sec-six-functors/lem-sf-native-weil-injective-adjunction-model.json.\n\nBatch 5:\n- lem-trf-additive-homotopy-triangulated is a Mathlib leaf (an additive functor induces a triangulated K(F)), a general fact. Accepted.\n- lem-sf-native-adic-pullback-frobenius-mates reaches lem-trf-iterated-square-mates, a generic mate/conjugate Mathlib leaf. Accepted.\n\nNeither is a step of the trace formula or of Poincaré duality.\n\nI accept the tool_uses: the forget-comparison and created-abelian fixed-pair lemmas are generic categorical tools. All other cited nodes are in-route, Mathlib leaves, Lean-closed, or definitions.\n\nStacks tags 03EK, 079B, 079P, 08BJ, 070Y and 070K are verified. The report's '03EW generating family' is a mislabel in the report only; no change needed.\n\nEdge cases checked with no clause failing: empty scheme, identity f, identity Frobenius, zero complex.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeInjectiveAdjunctionModel",
+  "declaration": "AlgebraicGeometry.nativeWeilInjectiveAdjunctionModel",
+  "declarations": [
+   "AlgebraicGeometry.nativeAdicFunctions_isSheaf",
+   "AlgebraicGeometry.nativeAdicCoefficientRing",
+   "AlgebraicGeometry.nativeWeilCategoryModel",
+   "AlgebraicGeometry.nativeWeilInjectiveAdjunctionModel",
+   "AlgebraicGeometry.nativeWeilDerivedDirectImageModel"
+  ],
+  "file": "lean/Sheaf/WeilSheaf/NativeInjectiveAdjunctionModel.lean",
+  "statement": "theorem nativeWeilInjectiveAdjunctionModel : (ProEtaleWeilSheaf.upperStar k₀ l f).Additive ∧ (ProEtaleWeilSheaf.lowerStar k₀ l f).Additive ∧ PreservesFiniteLimits (ProEtaleWeilSheaf.upperStar k₀ l f) ∧ PreservesFiniteColimits (ProEtaleWeilSheaf.upperStar k₀ l f) ∧ (ProEtaleWeilSheaf.lowerStar k₀ l f).PreservesKInjectiveComplexes ∧ (∀ M : ProEtaleWeilSheaf k₀ l Y, ((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l f).unit.app M).hom.f = (ProEtale.adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap f (comp_over f _))).unit.app M.carrier) ∧ (∀ I : ProEtaleWeilSheaf k₀ l X, ((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l f).counit.app I).hom.f = (ProEtale.adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap f (comp_over f _))).counit.app I.carrier) ∧ (∀ (M : HomotopyCategory (ProEtaleWeilSheaf k₀ l Y) (ComplexShape.up ℤ)) (I : HomotopyCategory (ProEtaleWeilSheaf k₀ l X) (ComplexShape.up ℤ)), (∀ a : ((ProEtaleWeilSheaf.upperStar k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)).obj M ⟶ I, ((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)).homEquiv M I a = ((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)).unit.app M ≫ ((ProEtaleWeilSheaf.lowerStar k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)).map a) ∧ (∀ b : M ⟶ ((ProEtaleWeilSheaf.lowerStar k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)).obj I, (((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)).homEquiv M I).symm b = ((ProEtaleWeilSheaf.upperStar k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)).map b ≫ ((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l f).mapHomotopyCategory (ComplexShape.up ℤ)).counit.app I))",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are stated across the three model theorems. The ring-valued coefficient is a transparent bundling of the recorded actual algebra presheaf; its sheaf-condition proof is separately named. The underived and homotopy adjunctions are the existing native constructions. The actual rightDerivedFunctor pair is identified, uniquely and preserving its unit, with the recorded def-sfb-right-derived-functor pair for every arbitrary-resolution witness; this expresses its universal property without changing the framework functor. Named includes retain every separated finite-type and characteristic hypothesis on the morphism theorems."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-868a6552b",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read the item, the 3 stmt_deps, the side framework sources (upperStarLowerStarAdjunction carrier rfl lemmas, Adjunction.mapHomotopyCategory with its quotient unit/counit lemmas, rightDerivedFunctor/Unit in RightDerivedFunctor/Defs.lean, PreservesKInjectiveComplexes, adicFunctionsAlgPresheaf and adicConstantSheaf) and Stacks 08BJ/079P/079Q/070K/070Y. Every clause matches: the category model (equivalence with SheafOfModules over the actual locally finite function ring, Grothendieck A_T and W_T, Frobenius additive autoequivalence, exact conservative forget, unbounded K-injective resolutions with no Mono condition); the specified adjunction with carrier eta/epsilon, additivity, F0 exact, G0 PreservesKInjectiveComplexes; the homotopy transposes via the genuine termwise mapHomotopyCategory adjunction; Rf_* = framework rightDerivedFunctor with exists-unique unit-compatible iso to the def-sfb pair (same shape as its _unique theorem); beta iso at K-injectives; c_r hom pinned as Rf_*(Qr) ≫ inv beta_I; naturality equation in correct order. All hypotheses are retained via include and there is no universe equation. nativeAdicCoefficientRing is real data with no duplicate in the side-live/live trees; its sorry'd sheaf-condition helper is true. No name clashes; statement verbatim; docstrings with source and blueprint; all proofs sorry. Advisory: the equivalence is existential (as the node says); the homEquiv formulas are general adjunction formulas resting on the genuine construction; some framework owners are outside stmt_deps. No compile run (no file changed)."
+ }
+}

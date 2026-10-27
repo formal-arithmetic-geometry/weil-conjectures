@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-locally-closed-module-extension-binary",
+ "kind": "statement",
+ "title": "Objectwise normalized binary comparison of fixed extension models",
+ "statement": "Let $b:T\\hookrightarrow S$ and $a:S\\hookrightarrow X$ be coefficient immersions [def-sfb-locally-closed-module-extension-data] and $M$ a module sheaf on $T$ [def-weil-sheaf-of-modules-category]. Write $F_a,F_b,F_{ab}$ for their fixed models and $r$ for their fixed restriction comparisons [def-sfb-locally-closed-module-extension-model]. There exists an isomorphism $e:F_a(F_bM)\\cong F_{ab}M$ such that $(ab)^*(e);r_{ab,M}=\\operatorname{pullComp}_{a,b,F_aF_bM};b^*(r_{a,F_bM});r_{b,M}$. This is an objectwise existence assertion for a single pair and a single input module; uniqueness and naturality are proved by the parent assembly.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "proetale.tex Tag 09AH (lemma-ses-associated-to-open); schemes.tex Tag 02V0 (lemma-composition-immersion). Steps 3--8 of the assigned node, including the mixed open/closed interchange and shrinking."
+ },
+ "stmt_deps": [
+  "def-sfb-locally-closed-module-extension-data",
+  "def-sfb-locally-closed-module-extension-model",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The open-restriction-counit lemma gives $h^{-1}c_*\\cong c_{W,*}h_S^{-1}$ for a closed $c:S\\hookrightarrow V$ and an open $h:W\\hookrightarrow V$, with $S_W=S\\times_VW$, and gives compatibility with the actual closed counit. For opens $j:U\\hookrightarrow X$, $q:W\\hookrightarrow X$, the extension presheaf restricted to $W$ is the extension presheaf for $U\\times_XW\\hookrightarrow W$: a test object over $W$ factors through $U$ precisely when it factors through the intersection. The unique summand and its sections agree, and otherwise both values are zero. Slice sheafification commutes with restriction; the module actions agree by the unique extension property of module sheafification. Hence $q^{-1}j_!\\cong(U\\times_XW\\hookrightarrow W)_!(U\\times_XW\\to U)^{-1}$. This proves only open restriction calculations, not arbitrary closed base change.",
+   "uses": [
+    "lem-sfb-proetale-open-restriction-counit",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-cbc-sieve-slice-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "proof (2), open-slice calculations for mixed compositions; Stacks sites-modules.tex Tag 03DI and slice sheafification compatibility"
+   }
+  },
+  {
+   "text": "Pure open extensions compose canonically: for opens $h:W\\hookrightarrow V$ and $v:V\\hookrightarrow X$, $v_!h_!$ and $(vh)_!$ are both left adjoint to $h^{-1}v^{-1}\\cong(vh)^{-1}$. Apply the unit-compatible-left-adjoint comparison to obtain $v_!h_!\\cong(vh)_!$. All adjunctions here are open adjunctions; the comparison restricts to the identity on $W$, since its defining unit equation becomes the two open restriction identifications. Pure closed direct images compose by the evaluation formula $M(S\\times_V(V\\times_XE))\\cong M(S\\times_XE)$; the fibre-product associativity map is the identity after the canonical restriction identifications on $S$. Composition of open immersions is open from the definition, and composition of closed immersions is closed: on affine opens the two surjective ring maps compose to a surjection. These are the elementary geometric cases of Stacks Tag 02V0.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "proof (2), pure open and pure closed composition; schemes.tex Tag 02V0 and proetale.tex Tags 09AA, 09BN"
+   }
+  },
+  {
+   "text": "Here is the shrinking argument for a closed factor. Let $c:S\\hookrightarrow V$ be closed and $h:W\\hookrightarrow V$ open containing the image of $S$; write $d:S\\hookrightarrow W$ for its restriction. Apply the closed-subset realization theorem to $V\\setminus W$, obtaining a closed immersion $e:D\\hookrightarrow V$ with that image. Since $D$ is disjoint from $S$, its map to $V$ factors through the open $V\\setminus S$. The cross-vanishing $(V\\setminus S)^{-1}c_*=0$, followed by inverse-image composition, gives $e^{-1}c_*M=0$. The localization sequence for $h,e$ therefore identifies $h_!h^{-1}c_*M\\xrightarrow{\\sim}c_*M$. Step 3 identifies $h^{-1}c_*M=d_*M$. We have obtained a natural isomorphism $h_!d_*\\cong c_*$ restricting to the identity on $S$: the open counit restricts to the inverse open unit by its triangle identity, and the closed restriction comparison is the counit of Step 1. In the actual identified-coefficient presentation, use the proved support criterion for the open counit in lem-sfb-proetale-identified-open-closed.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-weil-pbc-proetale-ringed-open-comparison",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-sfb-proetale-identified-open-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "proof (2), factorization comparison by shrinking an ambient open"
+   }
+  },
+  {
+   "text": "For two factorizations $a=v c=v'c'$, use the open subscheme $W=V\\times_XV'$ of $X$. Both maps from $S$ to $V,V'$ factor through $W$, and $d:S\\hookrightarrow W$ is closed, being the restriction of $c$ (equivalently $c'$) to this open. Step 5 identifies $c_*\\cong(W\\hookrightarrow V)_!d_*$ and $c'_*\\cong(W\\hookrightarrow V')_!d_*$. Step 4 therefore identifies both extension functors with $(W\\hookrightarrow X)_!d_*$. These are normalized isomorphisms: their restrictions to $S$, using $r_a$, are the identity. This proves factorization independence without a composite adjunction. Step 2 shows that the normalized comparison is unique, so comparisons via a further intersection agree and satisfy the cocycle law. The topology and scheme structure used here are literal open restrictions of the given closed immersions, not an inference that an arbitrary morphism factors through a closed subscheme merely from its image.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "proof (2), independence of the closed-then-open factorization"
+   }
+  },
+  {
+   "text": "Suppose $a=iu$ with $i:Z\\hookrightarrow X$ closed and $u:S\\hookrightarrow Z$ open. The subspace topology gives an open $j:V\\hookrightarrow X$ with $S=Z\\times_XV$; write $d:S\\hookrightarrow V$ and $A=j_!d_*M$. Inverse-image composition, the open unit and the closed counit give $\\sigma:u^{-1}i^{-1}A\\xrightarrow{\\sim}M$. Realize $X\\setminus V$ as a closed subscheme $e:D\\hookrightarrow X$. Its pullback $f:B=Z\\times_XD\\hookrightarrow Z$ complements $u$, and $f^{-1}i^{-1}A=t^{-1}e^{-1}j_!d_*M=0$ for $t:B\\to D$. For $k:X\\setminus Z\\hookrightarrow X$, Step 3 gives $k^{-1}A=j'_!k'^{-1}d_*M=0$, where $k':V\\setminus S\\hookrightarrow V$ and $j':V\\setminus S\\hookrightarrow X\\setminus Z$; the last equality is closed cross-vanishing. Step 1 checks that $k,u$ are quasi-compact. The supported-reconstruction lemma applies to these two vanishing restrictions and $\\sigma$, giving a natural isomorphism $\\theta:A\\xrightarrow{\\sim}i_*u_!M$ with its explicit restriction equation. The open-restriction-counit lemma identifies the closed counit in $\\sigma$ with the restriction of the counit for $i$. Thus that equation says precisely that $\\theta$ restricts to the identity on $S$ under $r_a$. Step 6 identifies this normalized comparison with the chosen $a_!$. The actual tensor-pullback/direct-image reconstruction, normalized restriction equation, uniqueness and naturality are supplied by the fully proved lem-sfb-proetale-identified-supported-reconstruction; it avoids a change to the additive module-object presentation.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-site-morphism-composition",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-sfb-proetale-open-restriction-counit",
+    "lem-sfb-proetale-identified-supported-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "proof (2), mixed open/closed factorization; localization sequence of Stacks Tag 09AH"
+   }
+  },
+  {
+   "text": "Let $a=v c:S\\hookrightarrow X$ and $b=w d:T\\hookrightarrow S$, with $v,w$ open and $c,d$ closed. Lift the open $W\\subset S$ defining $w$ to an open $V'\\subset V$ by the subspace topology for the closed immersion $c$. This gives a cartesian square $c w=h e$, with $h:V'\\hookrightarrow V$ open and $e:W=S\\times_VV'\\hookrightarrow V'$ closed. Step 7 supplies $c_*w_!\\cong h_!e_*$. Hence\n$$a_!b_!=v_!c_*w_!d_*\\cong v_!h_!e_*d_*\\cong(vh)_!(ed)_*.$$\nHere $vh$ is open and $ed$ is closed by Step 4, so the last functor is extension by zero for the exhibited factorization of $ab$. Compare it to the chosen $(ab)_!$ using Step 6; the result is $\\gamma_{a,b}$. Every map in the construction restricts to the identity on $T$, proving its normalization. In particular $a_!b_!$ lies in the same essential image as $(ab)_!$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "proof (2), compatibility with arbitrary mixed compositions; schemes.tex Tag 02V0 open-lifting argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proetale-open-restriction-counit",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-cbc-sieve-slice-sheafification",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-site-morphism-composition",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-sfb-proetale-identified-open-closed",
+  "lem-sfb-proetale-identified-supported-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E5",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "proetale.tex Tag 09AH (lemma-ses-associated-to-open); schemes.tex Tag 02V0 (lemma-composition-immersion). Steps 3--8 of the assigned node, including the mixed open/closed interchange and shrinking."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "locally closed immersion extension by zero normalized composition of sheaves of modules",
+   "date": "2026-10-26",
+   "results": "8 hits; AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Modules.restrict, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, ModuleCat.Tilde.res_const, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, ModuleCat.Tilde.res_apply",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "9cd61669a58cdb12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extensionByZero\"",
+   "date": "2026-10-26",
+   "results": "0 hits; ",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyClosed.*extension|extensionByZero.*[Cc]omp",
+   "date": "2026-10-26",
+   "results": "0 hits; ",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact fully faithful extension by zero for a locally closed immersion and normalized composition",
+   "date": "2026-10-26",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsClosedImmersion.comp_iff, AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion, AlgebraicGeometry.IsImmersion.comp, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.IsClosedImmersion.comp, AlgebraicGeometry.IsOpenImmersion.comp",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "c4398a3a8b83e4bd"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction normalized natural isomorphism fully faithful functor associativity unit laws",
+   "date": "2026-10-26",
+   "results": "8 hits; CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Functor.FullyFaithful.homNatIso, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.Adjunction.instIsIsoAppUnitObjOfFaithfulOfFull, CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit, CategoryTheory.Adjunction.restrictFullyFaithful",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "2ecad34d2bbd804a"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|unit_conjugateEquiv_symm|fullyFaithfulROfIsIsoCounit",
+   "date": "2026-10-26",
+   "results": "21 hits; Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "verdict": "No exact arbitrary-coefficient pro-etale locally closed construction or coherence theorem. Generic adjunction uniqueness and full faithfulness are used.",
+   "digest": "b5a0ffa458083a8a"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyClosedModuleExtensionCoherence",
+  "group": "E5",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "proetale.tex Tag 09AH (lemma-ses-associated-to-open); schemes.tex Tag 02V0 (lemma-composition-immersion). Steps 3--8 of the assigned node, including the mixed open/closed interchange and shrinking.",
+   "via": [
+    "lem-sfb-locally-closed-module-extension-coherence",
+    "lem-sfb-locally-closed-extension-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocallyClosedModuleExtensionBinary",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyClosedModuleExtensionBinary.lean",
+  "declaration": "AlgebraicGeometry.Scheme.locallyClosedModel_binary_exists",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.locallyClosedModel_binary_exists",
+   "AlgebraicGeometry.Scheme.LocallyClosedModelComposition"
+  ],
+  "statement": "theorem locallyClosedModel_binary_exists {S X T : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S) (M : proEtaleRingModules T.scheme T.ring) : ∃ e : a.modelExtension.obj (b.modelExtension.obj M) ≅ (a.comp b).modelExtension.obj M, LocallyClosedObjectNormalization (a.comp b).modelExtension (a.comp b).pull (a.comp b).modelRestriction (LocallyClosedCompositeRestrictionMap a.modelExtension b.modelExtension a.pull b.pull (a.comp b).pull a.modelRestriction b.modelRestriction (a.pullComp b) M) e",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-884ed",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T065537-L-3071508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-884ed",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T065537-L-3071508",
+  "kind": "interface",
+  "note": "independent cc review: 6 delivered modules + item node/new nodes/change record vs clone sheaf-dag; old vs new normalization fields (definitionally equal formulas); 3 direct importers compiled against the delivery (all OK); #print axioms (sorryAx only on item via the 3 new obligations; model sorry-free)"
+ }
+}

@@ -1,0 +1,356 @@
+{
+ "id": "lem-per-zariski-proper-surjection-interchange",
+ "kind": "statement",
+ "title": "Interchange a finite open covering and local proper surjections",
+ "statement": "Let $S$ be a reduced Noetherian scheme [def-pc-reduced-scheme, def-weil-pbc-noetherian-ring], where Noetherian means admitting a finite affine cover by spectra of Noetherian rings. Let $S=\\bigcup_{i=1}^r U_i$ be a finite Zariski open cover [def-weil-open-immersion]. For each $i$, let $z_i:Z_i\\to U_i$ be proper and surjective [def-weil-proper-morphism, def-weil-surjective-morphism], and assume that the composite $Z_i\\to S$ is an object of $\\operatorname{alt}/S$ [def-per-ordinary-alteration-topology]. Then there exist an object $Y\\to S$ of $\\operatorname{alt}/S$, proper and surjective, and, for every $i$, a $U_i$-morphism $Y\\times_SU_i\\to Z_i$ [def-pc-fibre-product]. In particular the inverse images of the $U_i$ are a finite open cover of $Y$ whose maps to $S$ factor through the $Z_i$. The schemes $S$ and $Y$ may have several irreducible components; no integrality or quasi-excellence hypothesis is imposed. If $S$ is empty, $r=0$ and $Y=\\varnothing$ are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Theorem 3.2.1, proof for parameter 1, printed p.29: compactify the local proper surjections, take their product and its dominant reduced part (II 1.2.5 and Proposition 1.2.8). For a reducible base, add the reduced closed complement S minus U_i to each compactification before taking the product; this retains surjectivity without assuming every U_i dense."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "def-per-ordinary-alteration-topology",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For each $i$ apply [lem-per-open-proper-dense-compactification] to $Z_i\\to U_i\\hookrightarrow S$. Its hypotheses are exactly the given properness and membership of $Z_i\\to S$ in $\\operatorname{alt}/S$. Obtain a proper $b_i:B_i\\to S$ with $B_i\\times_SU_i\\simeq Z_i$. For every component-generic point $s$ of $S$, $(B_i)_s$ is finite over $\\kappa(s)$, and is empty if $s\\notin U_i$.",
+   "uses": [
+    "lem-per-open-proper-dense-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1, ordinary-case proof, p.29: compactification and its restriction to the original open."
+   }
+  },
+  {
+   "text": "Let $C_i$ be the reduced induced closed subscheme of $S$ on $S\\setminus U_i$, using [lem-weil-pbc-reduced-induced-closed-subscheme]. It is proper over $S$ by [lem-weil-pbc-closed-immersion-proper]. Form $W_i=B_i\\amalg C_i$ over $S$ by [lem-weil-pbc-scheme-coproduct-family]; it is proper by [lem-weil-pbc-proper-coproduct]. Its image contains $U_i$, because $B_i|_{U_i}\\simeq Z_i\\to U_i$ is surjective, and contains $S\\setminus U_i$ through $C_i$. Thus $W_i\\to S$ is surjective. The closed complement has empty inverse image over $U_i$, so $W_i|_{U_i}\\simeq Z_i$. Adding this summand is necessary when $U_i$ misses an irreducible component of $S$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-proper-coproduct",
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1 ordinary proof, p.29, compactifications; extension to a reducible base by adjoining the reduced closed complement."
+   }
+  },
+  {
+   "text": "For every component-generic $s$, the fibre $(C_i)_s$ is a closed subscheme of $\\operatorname{Spec}\\kappa(s)$, by the closed-immersion base-change clause of [lem-weil-pbc-proper-fp-permanence], hence either that field spectrum or empty: on this affine the defining ideal has quotient $\\kappa(s)/I$ with $I=0$ or $I=\\kappa(s)$. Base change of the coproduct identifies $(W_i)_s$ with $(B_i)_s\\amalg(C_i)_s$ [lem-sc-etale-fibre-product-base-change-coproduct]. The first summand is affine with finite-dimensional coordinate algebra by [lem-weil-pbc-finite-over-field-affine-finite-dim]. By [lem-weil-pbc-finite-affine-coproduct-spectrum] the coproduct has coordinate algebra the product of that algebra and $\\kappa(s)$ or the zero ring. This is finite-dimensional, so $(W_i)_s\\to\\operatorname{Spec}\\kappa(s)$ is finite by the affine definition [def-weil-finite-integral-morphism].",
+   "uses": [
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.6, p.25, finite generic fibres of the product; closed-complement summands are computed over a field."
+   }
+  },
+  {
+   "text": "Set $P_0=S$ and $P_k=P_{k-1}\\times_SW_k$ for $1\\leq k\\leq r$, using [def-pc-fibre-product]. Inductively $P_k\\to P_{k-1}$ is the base change of the proper surjection $W_k\\to S$. By [lem-weil-pbc-proper-fp-permanence] and [lem-weil-pbc-surjective-base-change] it is proper and surjective. Composition preserves properness, and composition of surjective functions is surjective. Starting with the identity $P_0\\to S$, this proves $P=P_r\\to S$ proper and surjective. At every generic $s$, $(P_k)_s\\simeq(P_{k-1})_s\\times_{\\kappa(s)}(W_k)_s$ by the universal property. Starting with $\\operatorname{Spec}\\kappa(s)$, [lem-weil-pbc-finite-morphism-permanence] and [lem-weil-pbc-finite-composition] prove inductively that every $(P_k)_s$ is finite. These assertions include $r=0$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1 ordinary proof, p.29, product of compactifications; II 1.2.6 for finite generic fibre."
+   }
+  },
+  {
+   "text": "Let $Y=P_{\\mathrm{md}}$ be the dominant reduced part of [lem-per-dominant-part-coreflection]. The base $S$ is reduced, so $S_{\\mathrm{md}}=S$; the proper-surjection clause applied to $P\\to S$ gives a proper surjection $Y\\to S$. The same statement makes $Y$ reduced, finite type over $S$, and maximally dominant, and identifies $Y_s$ with $((P)_s)_{\\mathrm{red}}$. To check the remaining finite residue-field condition, write the finite generic fibre $P_s=\\operatorname{Spec}A$ with $A$ finite-dimensional over $K=\\kappa(s)$ [lem-weil-pbc-finite-over-field-affine-finite-dim]. Every prime quotient of $A$ is a finite-dimensional domain, hence a field by [lem-weil-pbc-finite-dimensional-domain-is-field]. Thus all primes are maximal; by [lem-weil-pbc-spec-irreducible-closed-subsets-primes] there are no strict chains of nonempty irreducible closed subsets, so the fibre has dimension zero, and its reduced closed subscheme $Y_s$ also has dimension zero. It is finite type over $K$, so [lem-weil-pbc-finite-type-dim-zero-artinian] makes it finite discrete. Each point is isolated; [lem-weil-pbc-isolated-fibre-point-residue-finite] applied to $Y\\to S$ now proves the finite residue-field condition at every generic point of $Y$. Consequently $Y\\to S$ is an object of $\\operatorname{alt}/S$ by [def-per-ordinary-alteration-topology].",
+   "uses": [
+    "lem-per-dominant-part-coreflection",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "lem-weil-pbc-isolated-fibre-point-residue-finite",
+    "def-per-ordinary-alteration-topology",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.5 and Proposition 1.2.8, pp.25--26, applied as in II 3.2.1, p.29."
+   }
+  },
+  {
+   "text": "Compose $Y\\hookrightarrow P$ with the $i$th product projection $P\\to W_i$. After base change to $U_i$, [def-pc-fibre-product] gives a $U_i$-morphism $Y\\times_SU_i\\to W_i\\times_SU_i\\simeq Z_i$; the last identification is the one constructed in step 2, since the complement summand restricts to the empty scheme [lem-sc-etale-fibre-product-base-change-coproduct]. Put $V_i=Y\\times_SU_i$. By [lem-weil-pbc-open-immersion-base-change] these are the inverse-image open subschemes, and they cover $Y$: for any $y\\in Y$, its image in $S$ belongs to some $U_i$, whence $y\\in V_i$. All the maps have been constructed over $S$, so their composites $V_i\\to S$ factor through $Z_i\\to S$. If $S$ is empty then all these schemes are empty, and with $r=0$ the construction gives $P_0=S$ and $Y=\\varnothing$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 3.2.1 ordinary proof, p.29, opens and projection to the ith local proper cover."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-per-ordinary-alteration-topology",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "lem-per-dominant-part-coreflection",
+  "lem-per-open-proper-dense-compactification",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-isolated-fibre-point-residue-finite",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-coproduct",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II 3.2.1 ordinary-case proof, p.29, together with II 1.2.5--1.2.8; complement summands supply the reducible-base extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-zariski-proper-surjection-interchange: Given a finite open cover Ui of a reduced Noetherian scheme and proper surjections Zi to Ui which are generically finite, a proper generically finite surjection Y to X has maps Y restricted to Ui to Zi",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being surjective for morphisms of schemes is Zariski local at the target. That is, if a morphism $ f: X \\\\to Y $ is surjective, then for any Zariski covering sieve on $ Y $, there exist\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on morphism properties in the category of schemes, asserting that the property is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.JointlySurjective\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on precoverages of the category of schemes, asserting that for every scheme $X$, the covering sieves assigned to $X$ consist of families of morphisms with codomain $X$ whose images cover $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general Zariski or etale covers, local morphism properties, or normalization; none supplies the finite-surjective etale splitting or the compactification interchange asserted here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-zariski-proper-surjection-interchange: Proper surjective maps over members of a finite Zariski cover are dominated by one global proper surjective generically finite scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {ι : Sort u_1} (U : ι → Y.Opens),\\n  iSup U = ⊤ → (∀ (i : ι), P (f ∣_ U i)) → P f\", \"doc\": \"If a morphism property $P$ is Zariski local at the target, and if a morphism $f : X \\to Y$ satisfies $P$ on each open set $U_i$ of a covering (i.e., $\\\\bigcup U_i = Y$), then $f$ itself satisfies $P$.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtSource.of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {ι : Sort u_1} (U : ι → X.Opens),\\n  iSup U = ⊤ → (∀ (i : ι), P (CategoryTheory.CategoryStruct.comp (U i).ι f)) → P f\", \"doc\": \"For any Zariski-local property $ P $ on schemes, if a family of open subsets $ U_i $ of a scheme $ X $ covers $ X $ (i.e., $ \\\\sup U_i = X $), and $ P $ holds for the morphism $ f $ composed with the i\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{ι} (U : ι → Y.Opens) (hU : iSup U = ⊤) (H : ∀ i, P (f ∣_ U i)) : P f\", \"doc\": \"For a morphism $f$ of schemes, if the target is covered by an indexed family of open subsets $\\\\{U_i\\\\}$ (i.e., $\\\\bigcup U_i = Y$), and if the restriction of $f$ to each $U_i$ satisfies property $P$, th\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtSource.of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{ι} (U : ι → X.Opens) (hU : iSup U = ⊤) (H : ∀ i, P ((U i).ι ≫ f)) : P f\", \"doc\": \"If $ P $ is a Zariski-local morphism property at the source, $ \\\\{U_i\\\\} $ is an open cover of a scheme $ X $ such that $ \\\\bigcup U_i = X $, and $ P $ holds for the composition of the inclusion $ U_i \\\\h\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_range_subset_iSup\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [P.RespectsRight AlgebraicGeometry.IsOpenImmersion] {ι : Type u_1}\\n  (U : ι → Y.Opens),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.bas\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target, and the image of the underlying continuous map of a morphism $ f: X \\to Y $ is contained in the union of open subsets $ U_i $ of $ Y $, then\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtSource.iff_of_iSup_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {ι : Sort u_1} (U : ι → X.Opens),\\n  iSup U = ⊤ → (P f ↔ ∀ (i : ι), P (CategoryTheory.CategoryStruct.comp (U i).ι f))\", \"doc\": \"For a Zariski-local-at-source morphism property $P$ on schemes, if a family of open subsets $\\\\{U_i\\\\}$ of the source scheme $X$ covers $X$ (i.e., their union is the entire space), then $P$ holds for a \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general Zariski or etale covers, local morphism properties, or normalization; none supplies the finite-surjective etale splitting or the compactification interchange asserted here."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsOpenImmersion",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general Zariski or etale covers, local morphism properties, or normalization; none supplies the finite-surjective etale splitting or the compactification interchange asserted here."
+  },
+  {
+   "tool": "grep",
+   "query": "compactif|refin.*[Pp]roper|[Pp]roper.*refin",
+   "results": "[grep] OK 23 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"87\", \"text\": \"  refine (MorphismProperty.cancel_left_of_respectsIso (P := @IsClosedImmersion)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"293\", \"text\": \"    refine (HasAffineProperty.iff_of_isAffine (P := MorphismProperty.isomorphisms Scheme)).mpr ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"line\": \"548\", \"text\": \"  refine NatIso.ofComponents (fun M ↦ ObjectProperty.isoMk _ ?_) ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"95\", \"text\": \"  refine ((MorphismProperty.injective CommRingCat).cancel_right_of_respectsIso _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"97\", \"text\": \"  refine ((MorphismProperty.injective CommRingCat).cancel_left_of_respectsIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Small.lean\", \"line\": \"257\", \"text\": \"    refine ⟨𝒰.toPresieveOverProp fun i ↦ MorphismProperty.Comma.prop _, ?_, ?_⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"215\", \"text\": \"    refine (MorphismProperty.arrow_mk_iso_iff (.isomorphisms _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"167\", \"text\": \"  refine HasRingHomProperty.descendsAlong _ _ _ _ ?_ ?_ h\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"185\", \"text\": \"  refine MorphismProperty.of_isPullback_of_descendsAlong (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"line\": \"119\", \"text\": \"  refine HasAffineProperty.of_iSup_eq_top (P := MorphismProperty.isomorphisms Scheme)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"line\": \"291\", \"text\": \"  refine (HasAffineProperty.iff_of_isAffine (P := .isomorphisms _)).trans <|\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine.lean\", \"line\": \"323\", \"text\": \"  refine congr($(HasAffineProperty.eq_targetAffineLocally\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"106\", \"text\": \"  refine hasAffineProperty.coprodDesc_affineAnd RingHom.isIntegral_respectsIso ?_ _ _ ‹_› ‹_›\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"161\", \"text\": \"  refine HasAffineProperty.coprodDesc_affineAnd inferInstance RingHom.finite_respectsIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"line\": \"188\", \"text\": \"  refine AffineTargetMorphismProperty.diagonal_of_openCover_source _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean\", \"line\": \"146\", \"text\": \"  refine HasAffineProperty.of_openCover (P := targetAffineLocally Q) 𝒱 fun i ↦ ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"line\": \"283\", \"text\": \"  refine MorphismProperty.of_isPullback\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"165\", \"text\": \"    refine (MorphismProperty.cancel_left_of_respectsIso _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"line\": \"171\", \"text\": \"  refine (MorphismProperty.cancel_left_of_respectsIso _ (pullbackSpecIso K R S).inv _).mp ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"line\": \"116\", \"text\": \"  refine (MorphismProperty.cancel_right_of_respectsIso @Flat _ Y.isoSpec.hom).mp ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"223\", \"text\": \"    refine (MorphismProperty.cancel_right_of_respectsIso @LocallyQuasiFinite _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"253\", \"text\": \"  refine (MorphismProperty.arrow_mk_iso_iff _ (Arrow.isoMk ?_ ?_ ?_)).mp (hf x)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"367\", \"text\": \"  refine HasRingHomProperty.stalkMap ?_ ‹_› x\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general Zariski or etale covers, local morphism properties, or normalization; none supplies the finite-surjective etale splitting or the compactification interchange asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-zariski-proper-surjection-interchange: Compactify proper morphisms over open subsets and take the dominant part of their product to interchange open covers with proper covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"The property of a morphism of schemes being proper is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is proper, then for any Zariski covering sieve $ S $ on $ Y $, there exis\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.inst\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : S.OpenCover), AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"Any open cover of a scheme, defined as a collection of open immersion morphisms whose images form a jointly surjective family, satisfies the quasi-compactness condition for pre-zero hypercovers.\"}\n  {\"name\": \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being surjective for morphisms of schemes is Zariski local at the target. That is, if a morphism $ f: X \\\\to Y $ is surjective, then for any Zariski covering sieve on $ Y $, there exist\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_isOpenMap\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K],\\n  (∀ (i : 𝒰.I₀), IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f i).base)) →\\n    AlgebraicGeometry.QuasiCompactCo\", \"doc\": \"If $ S $ is a scheme equipped with a jointly surjective precoverage $ K $, and $ \\\\mathcal{U} $ is a $ K $-cover of $ S $ such that every morphism $ \\\\mathcal{U}.f(i) $ in the cover is an open map, then\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (AlgebraicGeometry.Scheme.Hom.cover f hf).toPreZeroHypercover\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\\\{f\\\\}$ forms a quasi-compact covering sieve in the precovera\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general Zariski or etale covers, local morphism properties, or normalization; none supplies the finite-surjective etale splitting or the compactification interchange asserted here."
+  },
+  {
+   "tool": "grep",
+   "query": "compactif|alteration|dominantPart",
+   "results": "1 hits; returned names/files: [\"Mathlib/AlgebraicGeometry/Birational/Composition.lean\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned local morphism-property, dominance and cover facts do not assert this compactification or common domination theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-zariski-proper-surjection-interchange: Interchange a finite Zariski open cover and proper surjective local alterations using compactifications and their fibre product",
+   "results": "8 hits; returned names/files: [\"AlgebraicGeometry.IsZariskiLocalAtSource.of_iSup_eq_top\", \"AlgebraicGeometry.IsLocalAtSource.of_iSup_eq_top\", \"AlgebraicGeometry.IsLocalAtTarget.of_iSup_eq_top\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top\", \"AlgebraicGeometry.IsLocalAtSource.iff_of_iSup_eq_top\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.IsZariskiLocalAtSource.iff_of_iSup_eq_top\", \"AlgebraicGeometry.Scheme.zariskiPretopology\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned local morphism-property, dominance and cover facts do not assert this compactification or common domination theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.IsOpenImmersion",
+   "results": "0 hits; returned names/files: []",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned local morphism-property, dominance and cover facts do not assert this compactification or common domination theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-zariski-proper-surjection-interchange: A finite open covering with local proper surjective generically finite maps admits a global proper surjective generically finite common domination",
+   "results": "8 hits; returned names/files: [\"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\"]",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned local morphism-property, dominance and cover facts do not assert this compactification or common domination theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-ordinary-alteration-proper-refinement",
+  "date": "2026-10-24",
+  "group": "Q111"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor lem-per-artin-gabber-affine-curve, purity/regular-local-model input via the ordinary weak uniformization branch; ILO II 3.2.1 ordinary-case proof: Expose II Theorem 3.2.1, proof for parameter 1, printed p.29: compactify the local proper surjections, take their product and its dominant reduced part (II 1.2.5 and Proposition 1.2.8). For a reducible base, add the reduced closed complement S minus U_i to each compactification before taking the product; this retains surjectivity without assuming every U_i dense.",
+   "via": [
+    "lem-per-ordinary-alteration-proper-refinement",
+    "lem-per-qe-weak-uniformization-cover",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-zariski-proper-surjection-interchange",
+  "worker": "stage1",
+  "summary": "Checked ILO II 1.2.5--1.2.8 and ordinary-case proof of II 3.2.1. Retained the statement, isolated the single-local-map compactification comparison with finite generic fibres, reused dominant-part coreflection, and explicitly adjoined reduced complements for non-dense opens on reducible bases. Constructed product and all local factorization maps; no integrality or quasi-excellence used.",
+  "blueprint": "Purity/ordinary weak-uniformization branch below lem-per-artin-gabber-affine-curve, through lem-per-ordinary-alteration-proper-refinement: interchange the Zariski and proper generators by the compactification/product/dominant-part argument.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-sc-etale-fibre-product-base-change-coproduct",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-residue-finite",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-proper-coproduct",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic scheme-theoretic tool for the compactification/product construction (properness, finite fibres, coproducts or the fibre-product universal property); the Fourier/perverse unit does not state this scheme lemma."
+   },
+   {
+    "node": "def-pc-scheme-fibre",
+    "why": "Generic scheme fibre, open base-change or affine-spectrum tool; this unit has no replacement for the cited statement."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic scheme fibre, open base-change or affine-spectrum tool; this unit has no replacement for the cited statement."
+   },
+   {
+    "node": "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "why": "Generic scheme fibre, open base-change or affine-spectrum tool; this unit has no replacement for the cited statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-isolated-fibre-point-residue-finite",
+  "lem-weil-pbc-proper-coproduct",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-surjective-base-change",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-67a83f5e1",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-67a83f5e1 (reviewer sub-agent of L); spot-checked: I read ILO Exposé II: Theorem 3.2.1 and its ℓ=1 proof (p.29), 1.1.7 and 1.2.2 (p.24), and 1.2.5, 1.2.6 and 1.2.8 (pp.25-26), plus Stacks 0F41 (flat.tex theorem-nagata). The item's statement is the same as on the base and matches how lem-per-ordinary-alteration-proper-refinement uses it in step 4. The six steps follow ILO's construction: compactify each local map, form the product, take the dominant part. The one addition is the reduced complement S∖U_i joined to each compactification in step 2. This is correct and needed on a reducible base: with S = Spec k ⊔ Spec k′ and U = Spec k, the compactification alone does not cover S. Every cited statement says what its step takes from it: the coproduct base-change lemma, closed-immersion and proper-coproduct properness, base change of closed immersions and proper maps, surjective base change, finite permanence and composition, finite-over-field affine, finite-dimensional domain is a field, dimension-0 finite type is discrete, and isolated fibre point has finite residue field. Step 5 uses dominant-part-coreflection exactly as stated: general Noetherian base, S_md = S because S is reduced, the proper-surjection clause, and Y_s = (P_s)_red. The new node lem-per-open-proper-dense-compactification is true. I checked it myself: Nagata gives a dense compactification; Z → B_U is open, proper and dense, hence an isomorphism; B_s is empty off U because every generic point of B lies in Z; and Z_s is finite by 1.1.7. The empty cases also hold. It has a statement only, with three kinds of search recorded. It is not a duplicate of det-nagata-theorem-dense, lem-sfb-over-compactification-composite-cartesian (which has no generic-fibre clauses) or lem-per-finite-generic-dominant-parts (integral base), and it does not restate the item. Batch-5 check: def-per-ordinary-alteration-topology reaching def-trf-strict-normal-crossings-boundary is a general definition, not part of the trace-formula or duality proofs, and the item's statement already cited it on the base, so it is acceptable. Artin-Gabber check: lem-per-artin-gabber-affine-curve no longer reaches the item, the coreflection node or qe-weak-uniformization-cover (BFS: unreached). The item is reached through the sk-thm-sf-package / sfb Gabber-alteration chain, so the 2026-10-19 restriction on artin-gabber and its three children does not apply. dominant-part-coreflection is a reviewed generic ILO 1.2.5/1.2.8 lemma, justified at step 5. I accept all 19 generic scheme tool_uses. No SGA source is cited. No changes."
+ }
+}

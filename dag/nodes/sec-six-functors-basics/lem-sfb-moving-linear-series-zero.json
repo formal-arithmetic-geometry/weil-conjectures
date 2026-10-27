@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-moving-linear-series-zero",
+ "kind": "statement",
+ "title": "Moving zeros of a restricted linear series outside a fixed cluster",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], and let $X$ be a nonempty projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-pure-dimension]. Let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module], let $V\\subseteq H^0(X,L)$ be a finite-dimensional $k$-linear subspace, where $H^0$ means global sections [def-sc-ringed-space-module-cohomology], and let $\\Gamma$ be an irreducible component with its reduced closed-subscheme structure [def-weil-irreducible-components, def-pc-reduced-scheme]. Write $L|_\\Gamma$ for tensor restriction [def-pc-module-pullback]. Assume $\\dim_k\\operatorname{im}(V\\to H^0(\\Gamma,L|_\\Gamma))\\ge2$. Let $Z\\subseteq X$ be a zero-dimensional closed subscheme [def-weil-closed-immersion, def-kun-topological-krull-dimension]. There are finitely many proper $k$-linear subspaces $W_1,\\ldots,W_t\\subsetneq V$, including $\\{0\\}$ among them, such that for every $s\\in V\\setminus\\bigcup_iW_i$ there is a closed point $x\\in\\Gamma\\setminus|Z|$ at which $s$ vanishes. Vanishing means that the image of the germ $s_x$ in the one-dimensional residue-field vector space $L_x\\otimes_{\\mathcal O_{X,x}}\\kappa(x)$ is zero [def-weil-residue-field]. Thus the exceptional set is contained in a finite union of proper linear subspaces; its complement is a nonempty Zariski open of the affine space $V$ in any basis.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B40 (lemma-check-invertible-sheaf-trivial), with the normalization and fixed-divisor corollary formulated by the worker; moving-point input serving Franciosi--Tenni Lemma 3.3 Step 1, printed p.236, and Lemma 3.2. The corollary is not claimed verbatim in Stacks."
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-kun-topological-krull-dimension",
+  "def-pc-module-pullback",
+  "def-pc-reduced-scheme",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-weil-pure-dimension",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "The reduced component $\\Gamma$ is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme], and has dimension one by pure dimensionality. Compose its closed immersion in $X$ with the given projective embedding of $X$; [lem-weil-pbc-closed-immersion-comp] makes $\\Gamma$ H-projective over $k$; it is also quasi-compact, being closed in the quasi-compact $\\mathbf P^N_k$, so $\\Gamma$ is projective in the convention of [lem-pc-projective-proper], hence proper (in particular separated and of finite type) by that node. The normalization $\\nu:C\\to\\Gamma$ is finite, surjective and birational, with $C$ a smooth proper integral curve, by [lem-sc-normalization-properties]. Here $k$ is perfect: in positive characteristic each element has a $p$th root because $k$ is algebraically closed. Let $M=\\nu^*(L|_\\Gamma)$. This is invertible, since tensor pullback of each local rank-one trivialization is again a rank-one trivialization.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-pure-dimension",
+    "def-kun-projective",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-pc-projective-proper",
+    "lem-sc-normalization-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic); normalization of an integral curve, followed by smoothness over the perfect field"
+   }
+  },
+  {
+   "text": "Let $\\rho:V\\to H^0(C,M)$ be restriction followed by pullback and put $U=\\operatorname{im}\\rho$. Pullback $H^0(\\Gamma,L|_\\Gamma)\\to H^0(C,M)$ is injective: a section pulling back to zero is zero at the generic point by birationality; on every affine trivialization its coefficient lies in a domain and injects into that domain's fraction field, so is zero. Consequently $U$ is finite-dimensional and $\\dim_k U\\ge2$. By [lem-pc-zero-dimensional-closed-subscheme-finite], $Z$ is finite over $k$. By [lem-weil-pbc-finite-closed-map-finite-fibres], its support is a finite set of closed points, and $T=\\nu^{-1}(|Z|\\cap\\Gamma)$ is finite and consists of closed points of $C$.",
+   "uses": [
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH (lemma-algebraic-scheme-dim-0); the section injection is the affine domain calculation"
+   }
+  },
+  {
+   "text": "$C$ is a smooth connected curve over $k$: it is nonempty, connected and one-dimensional by Step 1, of finite type over $k$ because $\\nu$ is finite and $\\Gamma$ is of finite type, and separated because $\\nu$ is separated [lem-weil-pbc-finite-closed-map-finite-fibres](1) and $\\Gamma$ is. Apply [lem-sc-smooth-connected-curve-local-rings] to $C$: it is Noetherian and integral, its closed-point rings are discrete valuation rings, and its generic local ring is a field, so all local rings are regular. The divisor calculus [lem-pc-regular-curve-divisor-calculus](2) associates to every nonzero $u\\in U$ an effective divisor $D_u$ and an isomorphism $\\mathcal O_C(D_u)\\simeq M$. By the degree homomorphism of [def-sc-pic0], every such divisor has the same integer degree $d=\\deg[M]=\\sum_P\\operatorname{ord}_P(u)$. Since $U\\ne0$, $d\\ge0$. There are only finitely many effective divisors supported on $T$ with degree $d$: each coefficient is an integer between $0$ and $d$. Denote by $\\mathcal E$ this finite set; it is allowed to be empty.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-pc-regular-curve-divisor-calculus",
+    "def-sc-pic0",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BE8 (lemma-normal-c1-injective), 0BE9 (lemma-local-rings-UFD-c1-bijective); compare varieties.tex Tag 0B40 and its effective-divisor proof"
+   }
+  },
+  {
+   "text": "For each $D\\in\\mathcal E$ realized as $D_u$ for some $0\\ne u\\in U$, choose one such $u_D$. If $D_v=D_u$ then the rational function $v/u$ has order zero at every closed point. In the local generators of [lem-pc-regular-curve-divisor-calculus], both $v/u$ and its inverse lie in every local ring. Equivalently the valuation definition of $\\mathcal O_C(0)$ and $\\mathcal O_C(0)=\\mathcal O_C$ in clause (1) give global sections of $\\mathcal O_C$. By [lem-sc-global-functions], $v/u\\in k^*$. Conversely nonzero scalar multiples have the same divisor. Thus the nonzero sections realizing $D$ form exactly $k^*u_D$, and $\\ell_D=ku_D\\subset U$ is a line.",
+   "uses": [
+    "lem-pc-regular-curve-divisor-calculus",
+    "lem-sc-global-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BE8 proof: order-zero rational functions are units; varieties.tex Tag 0BUG (lemma-proper-geometrically-reduced-global-sections)"
+   }
+  },
+  {
+   "text": "Take as exceptional subspaces $\\ker\\rho$, all $\\rho^{-1}(\\ell_D)$ for the realized $D\\in\\mathcal E$, and $\\{0\\}$. They are linear subspaces and proper: $\\rho$ surjects onto $U$, which has dimension at least two, while $\\ell_D$ has dimension one. If $s$ lies outside them, $u=\\rho(s)\\ne0$ and $D_u$ is not supported on $T$, since otherwise $D_u\\in\\mathcal E$ and $s\\in\\rho^{-1}(\\ell_{D_u})$. Thus some closed point $y\\notin T$ has $\\operatorname{ord}_y(u)>0$, which means that $u$ vanishes in the residue fibre at $y$ by the local uniformizer description.",
+   "uses": [
+    "lem-pc-regular-curve-divisor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BE8, 0BE9: elementary assembly of the divisor classification and the surjective linear map"
+   }
+  },
+  {
+   "text": "Put $x=\\nu(y)$, viewed also as a point of $X$. It is closed because $\\nu$ is finite and hence closed [lem-weil-pbc-finite-closed-map-finite-fibres], and $\\Gamma$ is closed in $X$. It lies outside $|Z|$ since $y\\notin T$. In a local frame of $L$ at $x$, the fibre value of $u$ at $y$ is the image of the coefficient of $s$ under the field injection $\\kappa(x)\\to\\kappa(y)$. Its being zero forces that coefficient to be zero in $\\kappa(x)$. This is precisely the required vanishing of $s$ at $x$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OR (lemma-zero-scheme): residue-fibre vanishing; explicit local coefficient calculation under pullback"
+   }
+  },
+  {
+   "text": "In any basis of $V$, a linear subspace is the common zero set of finitely many linear forms, so the complement of this finite union is Zariski open. It is nonempty by [lem-pc-finite-linear-avoidance]. Its infinite-field hypothesis holds: if $k$ were finite, the nonconstant polynomial $1+\\prod_{a\\in k}(t-a)$ would have no root in $k$, contrary to algebraic closedness. This proves also the final affine-space assertion.",
+   "uses": [
+    "lem-pc-finite-linear-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-finite-linear-avoidance.proof.md",
+    "place": "Coordinate-linear-functional proof of finite linear avoidance"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-pc-integral-scheme",
+  "def-sc-pic0",
+  "def-weil-pure-dimension",
+  "lem-pc-finite-linear-avoidance",
+  "lem-pc-projective-proper",
+  "lem-pc-regular-curve-divisor-calculus",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-sc-global-functions",
+  "lem-sc-normalization-properties",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Agent assembly from normalization (0BXR), divisor calculus (divisors.tex 0BE8, 0BE9), degree and proper global functions (0BUG); consistent with the effective-divisor argument of 0B40, rather than claimed verbatim there"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "moving.*zero|linear.*series|basepoint|base.point.free",
+   "results": "{\"t\": \"2026-10-23T18:02:36Z\", \"tool\": \"grep\", \"query\": \"moving.*zero|linear.*series|basepoint|base.point.free\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read actual hits; structure-sheaf zero loci, localization, meromorphic functions, elliptic-curve ideals and unrelated algebra do not assert moving zeros of restricted line-bundle sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf on a projective integral curve with two independent global sections has moving zeros outside a finite set",
+   "results": "{\"t\": \"2026-10-23T18:02:36Z\", \"tool\": \"leansearch\", \"query\": \"An invertible sheaf on a projective integral curve with two independent global sections has moving zeros outside a finite set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.Scheme.zeroLocus\", \"AlgebraicGeometry.Scheme.zeroLocus_def\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"Projectivization.Independent.recOn\", \"Projectivization.Independent.casesOn\"], \"digest\": \"956bcb4d0f5dfed1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read actual hits; structure-sheaf zero loci, localization, meromorphic functions, elliptic-curve ideals and unrelated algebra do not assert moving zeros of restricted line-bundle sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"section\"",
+   "results": "{\"t\": \"2026-10-23T18:02:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.algebra_section_section_basicOpen\", \"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.intersectionOfLocallyDirected_f\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_sectionsOfPresieve\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sectionsOfPresieve\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.generate_presieveOfSections\"], \"digest\": \"bd23f47550522782\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read actual hits; structure-sheaf zero loci, localization, meromorphic functions, elliptic-curve ideals and unrelated algebra do not assert moving zeros of restricted line-bundle sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "General sections of a moving linear series on a projective integral curve have a zero in any prescribed nonempty open subset",
+   "results": "{\"t\": \"2026-10-23T18:02:37Z\", \"tool\": \"leanfinder\", \"query\": \"General sections of a moving linear series on a projective integral curve have a zero in any prescribed nonempty open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.Proj.zero_apply\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.zero_mem'\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.evaluation_eq_zero_iff_notMem_basicOpen\"], \"digest\": \"f7c0146d08ffde88\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read actual hits; structure-sheaf zero loci, localization, meromorphic functions, elliptic-curve ideals and unrelated algebra do not assert moving zeros of restricted line-bundle sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle with at least two global sections on a proper integral curve has a positive moving divisor whose general member avoids any finite collection of points",
+   "results": "{\"t\": \"2026-10-23T18:03:12Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle with at least two global sections on a proper integral curve has a positive moving divisor whose general member avoids any finite collection of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"MeromorphicNFOn.zero_set_eq_divisor_support\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"Ideal.exist_integer_multiples_notMem\", \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\"], \"digest\": \"bc1f2dbb9d31bd78\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read actual hits; structure-sheaf zero loci, localization, meromorphic functions, elliptic-curve ideals and unrelated algebra do not assert moving zeros of restricted line-bundle sections"
+  },
+  {
+   "tool": "grep",
+   "query": "moving.*zero|linear.series|fixed.*divisor|divisor.*section",
+   "results": "{\"t\": \"2026-10-23T19:13:23Z\", \"tool\": \"grep\", \"query\": \"moving.*zero|linear.series|fixed.*divisor|divisor.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits concern affine structure-sheaf zero loci, Dedekind element support, arithmetic class groups or projective charts, not line-bundle sections on a proper curve with fixed zero support"
+  },
+  {
+   "tool": "leansearch",
+   "query": "General sections of a line bundle on a projective curve with two independent sections have zeros outside a prescribed finite set",
+   "results": "{\"t\": \"2026-10-23T19:13:23Z\", \"tool\": \"leansearch\", \"query\": \"General sections of a line bundle on a projective curve with two independent sections have zeros outside a prescribed finite set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zeroLocus\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.RingedSpace.zeroLocus_isClosed\", \"AlgebraicGeometry.Scheme.zeroLocus_def\", \"AlgebraicGeometry.RingedSpace.zeroLocus_singleton\", \"IsLocalFrameOn.coeff_apply_zero_at\", \"AlgebraicGeometry.Scheme.zeroLocus_map\"], \"digest\": \"75d5cdf7ecae61ff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits concern affine structure-sheaf zero loci, Dedekind element support, arithmetic class groups or projective charts, not line-bundle sections on a proper curve with fixed zero support"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"divisor\", \"section\"",
+   "results": "{\"t\": \"2026-10-23T19:13:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"divisor\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits concern affine structure-sheaf zero loci, Dedekind element support, arithmetic class groups or projective charts, not line-bundle sections on a proper curve with fixed zero support"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a projective integral curve, sections of a line bundle with zeros supported on a fixed finite set lie in finitely many one dimensional subspaces",
+   "results": "{\"t\": \"2026-10-23T19:13:24Z\", \"tool\": \"leanfinder\", \"query\": \"On a projective integral curve, sections of a line bundle with zeros supported on a fixed finite set lie in finitely many one dimensional subspaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClassGroup.finsetApprox\", \"IsDedekindDomain.HeightOneSpectrum.Support.finite\", \"AlgebraicGeometry.sectionInBasicOpen\", \"FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.zero_mem'\", \"WeierstrassCurve.Affine.CoordinateRing.smul_basis_eq_zero\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"04d681f5f75b9dbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits concern affine structure-sheaf zero loci, Dedekind element support, arithmetic class groups or projective charts, not line-bundle sections on a proper curve with fixed zero support"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional vector space of rational sections on a proper smooth curve has only finitely many lines of sections with zeros supported on a finite set",
+   "results": "{\"t\": \"2026-10-23T19:14:12Z\", \"tool\": \"leanfinder\", \"query\": \"A finite dimensional vector space of rational sections on a proper smooth curve has only finitely many lines of sections with zeros supported on a finite set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClassGroup.fintypeOfAdmissibleOfFinite\", \"ClassGroup.finsetApprox\", \"FunctionField.classNumber\", \"ClassGroup.fintypeOfAdmissibleOfAlgebraic\", \"IsDedekindDomain.HeightOneSpectrum.Support.finite\", \"FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers\", \"WeierstrassCurve.Affine.FunctionField\", \"ax_grothendieck_zeroLocus\"], \"digest\": \"2f3fd348052a78b5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: actual hits concern affine structure-sheaf zero loci, Dedekind element support, arithmetic class groups or projective charts, not line-bundle sections on a proper curve with fixed zero support"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-extremal-cluster-moving-component",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch. Supporting input: Theorem 3.7, inequality (9), printed pp.242--246, specialized to reduced nodal curves; numerical two-connectedness is boundary-node length; Lemma 3.3, pp.236--238: moving on the same component forces residual length two and p_a-1 sections; reduced nodal specialization. Supporting moving-point input: on a component with at least two restricted sections, a general section has a zero outside the fixed cluster (Lemma 3.3 Step 1).",
+   "via": [
+    "lem-sfb-extremal-cluster-moving-component",
+    "lem-sfb-subcanonical-splitting-clifford-bound",
+    "lem-sfb-nodal-two-connected-clifford",
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-moving-linear-series-zero",
+  "worker": "stage1",
+  "summary": "Proved the moving-zero assertion by normalization, finite degree-d effective divisors on the inverse image of the fixed finite support, and uniqueness of a section with specified divisor up to scalar. Reused existing nodes throughout; no new nodes. Checked singular points by an explicit residue-field injection, and included the zero subspace. Statement unchanged.",
+  "blueprint": "Preserves the inherited ancestry through extremal-cluster-moving-component: supplies its general-section zero away from the fixed cluster, using normalization and fixed-divisor classification for the moving-point input. Current latest blueprint direct-image unit was read; no change of its route.",
+  "tool_uses": [
+   {
+    "node": "def-kun-projective",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "def-pc-integral-scheme",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "def-sc-pic0",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "def-weil-pure-dimension",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "lem-pc-finite-linear-avoidance",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "lem-pc-regular-curve-divisor-calculus",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "lem-sc-global-functions",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "lem-sc-normalization-properties",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic prerequisite used in the stated normalization/divisor/finite-linear-avoidance argument; this unit contains no alternative statement of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-projective",
+  "def-pc-integral-scheme",
+  "def-sc-pic0",
+  "def-weil-pure-dimension",
+  "lem-pc-finite-linear-avoidance",
+  "lem-pc-projective-proper",
+  "lem-pc-regular-curve-divisor-calculus",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-sc-global-functions",
+  "lem-sc-normalization-properties",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-12c5a3f71",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-12c5a3f71 (reviewer sub-agent of L); spot-checked: Verdict FIX: the moving-zero proof is correct and I made two small hypothesis repairs. Read the 7-step proof with no new nodes, every cited statement, and Stacks 0B40 (varieties l.9935) and 0BXR (l.4903); the other tags and the blueprint linear-avoidance proof exist under the cited labels. The argument works: normalize the component, the zero divisors D_u have fixed degree, only finitely many effective divisors of that degree lie over T = nu^-1(|Z| ∩ Γ), and each divisor fixes its section up to k* (divisor-calculus (1) plus lem-sc-global-functions). The inverse images of those lines, ker rho and {0} are proper because dim U >= 2. A zero y outside T gives the vanishing point x = nu(y), since the local map gives coefficient in m_x. Small cases tested: Z empty; d = 0, which the hypothesis excludes; P1 with O(1); a nodal Γ with Z the node; large ker rho. The use by lem-sfb-extremal-cluster-moving-component matches the statement. No duplicate node found by rg -L. The 13 tool_uses are generic and accepted. Batch-5 check: lem-sc-global-functions (H^0(O_C)=k) is a basic curve fact; its route to the trace-formula chapter ends at the general definition def-trf-schematically-dense-open. It is neither a trace-formula or Poincaré-duality statement nor a step of their proofs, so it is outside the assumptions and no RETURN is due. Fixes (E1 hygiene) in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-moving-linear-series-zero.json. Step 1 now notes Γ is quasi-compact, as lem-pc-projective-proper's convention (def-pc-projective-morphism) requires; def-kun-projective does not include it. Step 3 now checks that C is a smooth connected curve (finite type and separated, citing lem-weil-pbc-finite-closed-map-finite-fibres(1)), as lem-sc-smooth-connected-curve-local-rings requires. Statement and deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MovingLinearSeriesZero",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_moving_linear_series_zero",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.restrictedLinearSeriesImage",
+   "AlgebraicGeometry.Scheme.Modules.exists_moving_linear_series_zero"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MovingLinearSeriesZero.lean",
+  "statement": "theorem exists_moving_linear_series_zero (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [Nonempty X] [IsReduced X] [IsHProjective (X ↘ Spec (.of k))] (hdim : X.IsPureDimension 1) (L : X.Modules) [L.IsInvertible] (V : Submodule k (ProjectiveSpace.fieldSections k L)) [FiniteDimensional k V] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsReduced C] (i : C ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))] (hC : Set.range i ∈ irreducibleComponents X) (hV : 2 ≤ Module.finrank k (restrictedLinearSeriesImage k i L V)) (Z : Scheme.{u}) (j : Z ⟶ X) [IsClosedImmersion j] (hZ : topologicalKrullDim Z ≤ 0) : ∃ S : Finset (Submodule k V), (⊥ : Submodule k V) ∈ S ∧ (∀ W ∈ S, W ≠ ⊤) ∧ (∀ s : V, (∀ W ∈ S, s ∉ W) → ∃ x : X, IsClosed ({x} : Set X) ∧ x ∈ Set.range i ∧ x ∉ Set.range j ∧ residueValue (M := L) (U := ⊤) s.val x trivial = 0) ∧ (∃ s : V, ∀ W ∈ S, s ∉ W) ∧ (∀ (n : ℕ) (b : Module.Basis (Fin n) k V), ∃ U : TopologicalSpace.Opens (PrimeSpectrum (MvPolynomial (Fin n) k)), ∀ s : V, (∀ W ∈ S, s ∉ W) ↔ PrimeSpectrum.comap (MvPolynomial.eval (fun a ↦ b.repr s a)) (IsLocalRing.closedPoint k) ∈ U)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing fieldSections vector space, the section-normalized tensor-pullback adjunction, and the residue-fibre value residueValue of def-weil-pbc-module-residue-fiber (the germ tensored with 1 along Scheme.residue; reviewer FIX replaced the delivered duplicate sectionResidueValue). The local helper restrictedLinearSeriesImage contains real data. The image is expressed as the span of the actual restriction values, which equals their image by k-linearity; no extra hypothesis on a restriction map is imposed. The last clause expresses openness in every finite basis by inverse image from the polynomial prime spectrum.",
+  "fixed_by": "NT-stage2-cc-7ff3e962c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ff3e962c",
+  "group": "N5",
+  "result": "fix",
+  "note": "Statement matches node clause by clause (alg. closed k; nonempty reduced IsHProjective pure-dim-1 X; invertible L; finite-dim V in fieldSections; reduced component via closed immersion with range in irreducibleComponents; real span image with finrank>=2; closed Z with topologicalKrullDim<=0 incl. empty/nonreduced; Finset of proper subspaces containing bottom; closed zero on Gamma outside |Z|; nonempty complement; Zariski open in every Fin n basis via comap(eval) of closedPoint). H4: delivered sectionResidueValue duplicates Scheme.Modules.residueValue (def-weil-pbc-module-residue-fiber, ResidueFiber.lean:45, identical body). FIX: fixes/MovingLinearSeriesZero.lean uses residueValue (M := L) (U := ⊤) s.val x trivial, imports ResidueFiber, drops unused ResidueField/FlatPullbackStalk/ModuleCat.Stalk/ChangeOfRings imports and open scoped ChangeOfRings, step 6 cites the residue-fiber node; fixes/lem-sfb-moving-linear-series-zero.lean-record.json gives the verbatim statement, declarations without the dup, updated note. nt_compile --json clean 2.0 s (control copy errors); refit_record no notes/refusals. Advisory: residue-fiber node and fieldSections owner (theorem lem-sfb-m-regular-coherent-sheaf-consequences) not in stmt_deps."
+ }
+}

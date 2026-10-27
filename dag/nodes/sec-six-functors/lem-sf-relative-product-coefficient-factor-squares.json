@@ -1,0 +1,206 @@
+{
+ "id": "lem-sf-relative-product-coefficient-factor-squares",
+ "kind": "statement",
+ "title": "Coefficient and proper comparison squares for relative-product factors",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\geq1$, $k=\\overline{\\mathbf F}_{p^a}$, a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$ and a uniformizer $\\varpi_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, and fix the six-functor datum [def-sf-datum] for these parameters. Integral pullbacks and tensors are completed; field coefficients use rationalization and a common finite coefficient field. Let $B$ be a separated finite-type $k$-scheme, let $f:X\\to B$ and $g:Y\\to B$ be separated finite-type morphisms, and let $K\\in D^b_{ctf}(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$. Write $T=X\\times_BY$, $u:T\\to X$, $v:T\\to Y$, $h=fu=gv$, $P=Lu^*K$, $Q=Rf_!K$ and $H=P\\otimes^L_\\Lambda Lv^*L$. Define the following objects of $D^b_{ctf}(B,\\Lambda)$:\n$$\\begin{aligned}\nD_0&=Rh_!H,&D_1&=Rg_!Rv_!H,\\\\\nD_2&=Rg_!(Rv_!P\\otimes^L L),&D_3&=Rg_!(Lg^*Q\\otimes^L L),\\\\\nD_4&=Rg_!(L\\otimes^L Lg^*Q),&D_5&=Rg_!L\\otimes^L Q,\\\\\nD_6&=Q\\otimes^L Rg_!L.\n\\end{aligned}$$\nLet $d_i:D_i\\to D_{i+1}$, for $0\\leq i<6$, be, in order,\n$$\\alpha_{g,v,H}^{-1},\\quad Rg_!(\\operatorname{PF}_{v,P,L}^{-1}),\\quad Rg_!(\\operatorname{Ex}_{!,K}^{-1}\\otimes1_L),\\quad Rg_!(\\sigma_{Lg^*Q,L}),\\quad\\operatorname{PF}_{g,L,Q}^{-1},\\quad\\sigma_{Rg_!L,Q}.$$\nHere $\\alpha$ is the supplied composition comparison (A4), $\\operatorname{Ex}_{!,K}:Lg^*Rf_!K\\to Rv_!Lu^*K$ is (A2) for $(u,v,f,g)$, $\\operatorname{PF}$ is [def-sf-pf], and $\\sigma$ is tensor symmetry. Each $d_i$ is natural in both $K$ and $L$. Let $C$ be an admissible coefficient comparison: a derived finite reduction at a finite or integral stage, rationalization from $\\mathcal O_E$ to $E$, or scalar extension through a finite coefficient extension or into $\\overline{\\mathbf Q}_\\ell$ at a common finite field. Denote the changed objects and factors by $D_i^C,d_i^C$, and let $c_i:C_B(D_i)\\xrightarrow{\\sim}D_i^C$ be the canonical comparisons obtained by applying the datum's coefficient comparisons to the displayed operations. For every $0\\leq i<6$ the individual factor square commutes:\n$$c_{i+1}\\circ C_B(d_i)=d_i^C\\circ c_i.$$\nFor every proper structural morphism among $f,g,v,h$, replace its compact-support functor by the direct image through the specified proper identification. Each $d_i$ is identified with the corresponding proper-normalized factor. In particular, when $f$ is proper, so is $v$, and the exchange factor is the inverse of the specified proper-base-change exchange; at finite coefficients the proper identification has the identity-open normalization. Projection factors agree with the direct-image projection factors whenever their morphism is proper. These factor identifications respect the same coefficient comparisons.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Naturality, finite reduction, scalar extension and proper-identification sentence after the displayed relative map; returned proof step 6"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-pc-fibre-product",
+  "def-sf-pf",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-pur-finite-pullback-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the core coefficient-factor subclaim for the first conjunct. The naturality equation for each factor is the component of the natural isomorphism R.factors cg ch at Prod.mkHom a b.",
+   "uses": [
+    "new-sf-relative-product-factor-squares-core",
+    "def-sf-relative-product-factors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the already constructed proper-coordinate existence theorem for both presentations.",
+   "uses": [
+    "def-sf-relative-product-factors"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proper-compatibility core subclaim for the final universal proper-normalization and proper-factor-square conjunct.",
+   "uses": [
+    "new-sf-relative-product-proper-compatibility-core",
+    "def-sf-relative-product-factors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-relative-product-factors",
+  "new-sf-relative-product-factor-squares-core",
+  "new-sf-relative-product-proper-compatibility-core"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Strict decomposition into the coefficient-square and proper-compatibility subclaims, followed by naturality and existing proper-coordinate existence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient reduction and scalar extension commute with compact support composition exchange projection formula natural transformations proper identification",
+   "results": "[leanfinder] OK 8 hit(s); LightCondensed.ihomPoints_symm_comp [Mathlib/Condensed/Light/InternallyProjective]; Profinite.NobelingProof.GoodProducts.square_commutes [Mathlib/Topology/Category/Profinite/Nobeling/Successor]; CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso [Mathlib/Condensed/Discrete/LocallyConstant]; Profinite.IndexFunctor.map_comp_π_app [Mathlib/Topology/Category/Profinite/Product]; CompactlySupportedContinuousMap.compLinearMap [Mathlib/Topology/ContinuousMap/CompactlySupported]; LightCondMod.hom_naturality_apply [Mathlib/Condensed/Light/Module]; Profinite.NobelingProof.CC_comp_zero [Mathlib/Topology/Category/Profinite/Nobeling/Successor]; LightCondensed.isColimitLocallyConstantPresheafDiagram_desc_apply [Mathlib/Condensed/Discrete/Colimit]",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the specified derived compact-support coefficient and proper comparison factor squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"baseChange\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the specified derived compact-support coefficient and proper comparison factor squares"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|LowerShriek|scalarExtension.*exchange",
+   "results": "[grep] OK 0 hit(s); ; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the specified derived compact-support coefficient and proper comparison factor squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of derived compact support comparison factors with coefficient change and proper pushforward",
+   "results": "[leansearch] OK 8 hit(s); HasCompactSupport.comp_smul [Mathlib.Topology.Algebra.ConstMulAction]; HasCompactSupport.smul_left [Mathlib.Topology.Algebra.Support]; HasCompactSupport.comp_homeomorph [Mathlib.Topology.Algebra.Support]; HasCompactSupport.deriv [Mathlib.Analysis.Calculus.Deriv.Support]; HasCompactSupport.smul_right [Mathlib.Topology.Algebra.Support]; CompactlySupportedContinuousMap.coe_smul [Mathlib.Topology.ContinuousMap.CompactlySupported]; HasCompactSupport.mul_left [Mathlib.Topology.Algebra.Support]; TestFunction.coe_ofSupportedIn [Mathlib.Analysis.Distribution.TestFunction]",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the specified derived compact-support coefficient and proper comparison factor squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality coefficient comparison squares for inverse composition projection formula and proper base change factors",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.iso_hom_naturality [Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic]; AlgebraicGeometry.Scheme.Pullback.t'_fst_snd [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_snd_snd [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst [Mathlib/AlgebraicGeometry/Pullbacks]; AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst [Mathlib/AlgebraicGeometry/Pullbacks]; CategoryTheory.GlueData.t'_inv [Mathlib/CategoryTheory/GlueData]",
+   "date": "2026-10-22",
+   "verdict": "no match: none states the specified derived compact-support coefficient and proper comparison factor squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient reduction scalar extension naturality inverse projection formula compact support composition and exchange factor squares",
+   "results": "Profinite.NobelingProof.GoodProducts.square_commutes; Profinite.NobelingProof.Linear_CC'₁; Profinite.NobelingProof.Linear_CC'₀; Profinite.NobelingProof.πs'; Algebra.Generators.CotangentSpace.fst_compEquiv; Profinite.NobelingProof.CC_comp_zero; Profinite.NobelingProof.GoodProducts.smaller_factorization; Algebra.Generators.CotangentSpace.compEquiv_symm_inr",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the six-functor coefficient/proper factor assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"baseChange\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the six-functor coefficient/proper factor assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|LowerShriek|scalarExtension.*exchange",
+   "results": "No hits [Mathlib/CategoryTheory]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the six-functor coefficient/proper factor assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of derived compact support factor morphisms with change of coefficient rings and proper direct image",
+   "results": "HasCompactSupport.comp_homeomorph; SheafOfModules.sheafificationCompPullback; CompactlySupportedContinuousMap.instSMulCommClass; ContDiffMapSupportedIn.coe_smul; ContDiffMapSupportedIn.toFun_eq_coe; HasCompactSupport.comp_isClosedEmbedding; ContDiffMapSupportedIn.coe_coeHom; SheafOfModules.pushforwardComp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the six-functor coefficient/proper factor assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric monoidal change of coefficients preserves the composition exchange and projection formula maps in a six functor datum",
+   "results": "CategoryTheory.Functor.relativelyRepresentable.symmetry_symmetry_assoc; CategoryTheory.MonoidalCategory.externalProductSwap; CategoryTheory.GradedObject.symmetricCategory; CategoryTheory.Monoidal.functorCategorySymmetric; CategoryTheory.Functor.relativelyRepresentable.symmetry_fst; CategoryTheory.GradedObject.Monoidal.symmetry; CategoryTheory.Localization.Monoidal.map_hexagon_reverse; CategoryTheory.Functor.relativelyRepresentable.symmetry_snd",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the six-functor coefficient/proper factor assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-kunneth-relative",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Naturality, finite reduction, scalar extension and proper-identification sentence after the displayed relative map; returned proof step 6",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-relative-product-coefficient-factor-squares",
+  "worker": "stage1",
+  "summary": "Expanded the six separate coefficient squares using the explicitly assumed datum axioms, inverse-square cancellation, naturality of whiskering and tensor symmetry. Specified proper normalization and its coefficient square; reused the existing proper-coincidence, projection-coherence and proper base-change nodes. No new nodes or statement changes.",
+  "blueprint": "The six arrows of the displayed relative map and the naturality/finite-reduction/scalar-extension/proper-identification sentence following it. Steps 1-5 treat the individual natural and coefficient factors; steps 6-8 treat their proper identifications.",
+  "tool_uses": [
+   {
+    "node": "cor-cbc-proper-coincidence",
+    "why": "The unit explicitly uses the proper-identification unit; this node gives its specified identity-open exchange normalization."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic comparison tool: its statement supplies the coefficient comparisons of primitive tensor and adjunction maps, including completed and transported domains; no new geometric route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-cbc-proper-coincidence",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-846778157",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-846778157 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps against main-20261015 sk-thm-sf-kunneth-relative (_section six-arrow composite and the 'finite reduction, scalar extension, Rf_!≅Rf_* for proper f' sentence; .proof.md Steps 1-4) and the full statements of def-sf-datum (A2-A5), def-fix-six-functor-datum, def-exchange-projection, def-sf-pf, prop-sf-pf-coherence, cor-cbc-proper-coincidence, lem-fix-operation-reduction, lem-weil-pbc-proper-base-change and lem-cbc-proetale-extension-zero-base-change. There are no new nodes; the statement and stmt_deps are unchanged; no SGA. Steps 1-4 are correct: inverse-square cancellation plus A5 applied to A4/A3/A2, with the outer comparisons c_i checked. Step 5 checks the Koszul sign of the tensor symmetry directly, which is legitimate because the datum's categories are concrete. Step 6: the proper clause of prop-sf-pf-coherence is an identification with the direct-image projection formula, not mere invertibility. Step 8: the conjugation chain is correct. Fault C4 in step 7: it claimed cor-cbc-proper-coincidence gives the proper exchange equality on the pro-etale side, but that node proves it only on the etale sites and on the pro-etale side only defines alpha^proet, while the datum is pro-etale. FIX: step 7 now computes Ex_!^{c0}=Rv_*(beta)Ex_{*,f} with j=id at all stages (naturality of Ex_* along a_X, and a_T∘beta=Lu^*(a_X) for the identity open immersion). It cites cor-cbc only for the identity-open normalization, adds def-fix-six-functor-datum (where rho is fixed as j=id, p=f) to uses, and updates proof_deps. Edge cases checked: K=0, identity C, g=id, only h proper, f proper ⇒ v proper, odd shifts. Not duplicates: lem-pur-relative-product-geometric-factors, lem-coef-symmetric-relative-product-comparison, lem-sf-kunneth-coherence, base-change sibling. Tool uses accepted: lem-fix-operation-reduction (generic comparison tool); cor-cbc-proper-coincidence (already in the route via sk-prop-sf-comp-proper). Batch-5: prop-sf-pf-coherence reaches lem-pod-derived-exact-square-composition, a generic lemma pasting derived squares of exact functors, filed under sec-poincare-duality by a Lean split. Projection-formula coherence is neither given by the trace-formula or Poincare-duality assumptions nor a step of their proofs, so it is genuinely outside them; accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeProductCoefficientFactorSquares",
+  "declaration": "WeilConjectures.relative_product_coefficient_factor_squares",
+  "declarations": [
+   "WeilConjectures.relative_product_presentation_exists",
+   "WeilConjectures.relative_product_proper_coordinates_exists",
+   "WeilConjectures.relative_product_coefficient_factor_squares"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeProductCoefficientFactorSquares.lean",
+  "statement": "theorem relative_product_coefficient_factor_squares {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E E' : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] [Field E'] [Algebra (Padic C.l) E'] [FiniteDimensional (Padic C.l) E'] {n n' : ℕ} {hn : 1 ≤ n} {hn' : 1 ≤ n'} {S : SixFunctorDatum D C E n hn} {S' : SixFunctorDatum D C E' n' hn'} {s s' : PodCoefficientStage} {Q : SixFunctorCompactifiedSquare D} [IsSeparated Q.Y.obj.hom] [IsSeparated Q.f.hom.left] [IsSeparated Q.g.hom.left] [IsSeparated Q.g'.hom.left] [IsSeparated Q.f'.hom.left] (R : RelativeProductPresentation S s Q) (R' : RelativeProductPresentation S' s' Q) (A : RelativeProductCoefficientData R R') (_admissible : A.RecordedComparison) (cg : Compactification Q.g.hom.left) (ch : Compactification (Q.f' ≫ Q.g).hom.left) : A.FactorSquares cg ch ∧ (∀ (i : Fin 6) K K' L L' (a : K ⟶ K') (b : L ⟶ L'), ((relativeProductTerms Q cg ch i.castSucc).eval R.coordinates.operations R.coordinates.tensor).map (Prod.mkHom a b) ≫ (R.factors cg ch i).hom.app (K', L') = (R.factors cg ch i).hom.app (K, L) ≫ ((relativeProductTerms Q cg ch i.succ).eval R.coordinates.operations R.coordinates.tensor).map (Prod.mkHom a b)) ∧ Nonempty (RelativeProductProperCoordinates R.coordinates) ∧ Nonempty (RelativeProductProperCoordinates R'.coordinates) ∧ (∀ (J : RelativeProductProperCoordinates R.coordinates) (J' : RelativeProductProperCoordinates R'.coordinates), R.ProperNormalization J ∧ R'.ProperNormalization J' ∧ A.ProperComparisonNormalization J J' ∧ A.ProperFactorSquares J J' cg ch)",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "§1(B): recorded module is absent in the live source and published build. Restore its three reviewed theorem interfaces from the immutable reviewed source 9b9a43ec1, and extract its construction definitions without changing their data into the new owning definition module RelativeProductFactors. Replace the theorem-only selector import with the landed definition-owned selectors. The three theorem statements and proof docstrings are unchanged. Only this lean record changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a7bdbfc1",
+  "group": "N7",
+  "result": "pass",
+  "note": "Statement matches node at all four stages: canonical six-factor composite pinned by the normalized presentation (A4, PF, Ex, signed symmetry), iso + naturality, recorded coefficient square for the same A, proper conjugation for any selected proper occurrences, arbitrary Cartesian base-change cube with pinned primitive comparisons (existence concluded), closed-subscheme RΓc derived-iso formula with ordinary restrictions. Statement field unchanged; lean.statement verbatim; no hollow defs; only theorems sorry. Restored Q51 module (dropped by red build b3f31b5, JSON left dangling) is a valid §1(B) repair: diff vs 138b6bd shows only imports, blueprint tags and the two _exists theorems moved. Advisories: (1) Q18 base-change lemma (landed 03:19, before base de7d98) has parallel theorem-owned RelativeProductBaseChange.* defs; report's 'no live module' is out of date; rebind later. (2) Five uncited definition-node owners used by the item helpers (def-pur-completed-pullback-tensor-comparison, def-sfb-proetale-tensor-model, def-weil-finite-torsion-constructibility, def-weil-point-fd-qlbar-category, def-pur-finite-pullback-tensor-comparison, the last cited by the new def node); def-sf-rational-common-tensor-symmetries is uncited by the def node. (3) Closed formula is a Nonempty iso. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T210502-L-3538219",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,327 @@
+{
+ "id": "lem-per-ind-etale-qcqs-direct-image-base-change",
+ "kind": "statement",
+ "title": "Ind-etale base change for qcqs ordinary etale derived direct image",
+ "statement": "Let $A$ be a commutative ring, and use sheaves of modules over the constant ring sheaf $A$ on small etale sites [def-weil-pbc-constant-sheaf, def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category]. Let $f:X\\to S$ be a quasi-compact and quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions], and let $u:S'\\to S$ be affine and locally ind-etale: on affine charts its ring maps are filtered colimits of etale algebras of finite presentation [def-weil-pbc-ind-etale-algebra]. Set $X'=X\\times_SS'$ with projections $v:X'\\to X$ and $f':X'\\to S'$ [def-pc-fibre-product]. On bounded-below ordinary derived categories [def-weil-pbc-derived-categories], use exact inverse images $u^*,v^*$ and right derived direct images $Rf_*,Rf'_*$ [def-weil-pbc-inverse-image, def-weil-pbc-direct-image]. For every $K\\in D^+(X_{\\mathrm{et}},A)$ the canonical module-linear exchange morphism\n$$u^*Rf_*K\\longrightarrow Rf'_*v^*K$$\nis an isomorphism in $D^+(S'_{\\mathrm{et}},A)$. Here canonical exchange means the adjunction mate of $f'^*u^*Rf_*K\\cong v^*f^*Rf_*K\\to v^*K$, the last arrow being the pulled-back ordinary counit [def-weil-pbc-derived-exchange, lem-weil-pbc-exchange-forget-coefficients]. No constructibility, Noetherian, finite-type, or coefficient-invertibility hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9 (theorem-higher-direct-images), its derived-category strict-local stalk formula and remark-stalk-fibre; canonical exchange of sites-cohomology.tex Tag 07A7 (remark-base-change). Agent-formulated consequence using invariance of strict localizations under ind-etale maps (algebra.tex Tags 05WR and 0GIP)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-pc-fibre-product",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-exchange-forget-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Transport the common-universe ind-etale predicate back along the two ULift ring isomorphisms. The ind-etale morphism property respects isomorphisms. On each affine chart use proAffineEtale_iff_appTop to obtain exactly the hypothesis of indEtale_strictLocal_invariance. At any geometric point x of S′ this gives a pointed isomorphism e:S′_(x) -> S_(gx). Its Spec.preimage a has Spec.map a=e.hom, and faithfulness of Spec identifies the evaluation equation with the ring equation required by the stalk comparison.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05WR and 0GIP; transport along ring isomorphisms is elementary"
+   }
+  },
+  {
+   "text": "For an arbitrary Cartesian square, use the argument of the strict-local stalk criterion in a private helper, retaining the actual square rather than its reversed chosen pullback. Give the strict henselization rings their local structures, identify the small and canonical strict localizations via smallStrictHenselizationColimitIso_toBase, and factor the geometric points through their residue fields using strictHenselizationClosedLift_over. Apply exists_addEquiv_strictHenselization_abelian_stalkExchange and exists_addEquiv_strictLocal_abelian_total_exchange. Their two equations conjugate the degree-q exchange stalk to cohomology pullback on the strict-local fibre products.",
+   "uses": [
+    "lem-weil-pbc-abelian-stalk-exchange-localization",
+    "lem-weil-pbc-strict-local-abelian-total-exchange",
+    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, and Tag 03Q9"
+   }
+  },
+  {
+   "text": "The map between strict-local fibre products is pullback.map of the isomorphism Spec.map a and two identities, hence is invertible. Cohomology pullback along an isomorphism is bijective by the proved topological-invariance theorem. The private stalk criterion makes the original exchange stalk invertible. Transfer to universe-lifted stalks through uliftSheafFiberIso and apply the conservative geometric-point family. This proves degree-q exchange for every abelian sheaf and q>=0, with no torsion condition.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0EZU, 03PU and 03SI (only the isomorphism special case)"
+   }
+  },
+  {
+   "text": "Exact inverse image preserves every lower cohomology bound, using mapDerivedCategoryPlusHomologyFunctorIso. Right derived direct image also preserves every lower bound by isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE. Thus both exchange functors preserve every lower bound. On a sheaf in degree zero both sides have zero negative cohomology; the unique morphism between zero objects is invertible. Together with Step 3, cohomology detection proves exchange on every sheaf in degree zero.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 05TC(1) and Tag 03Q1(1)"
+   }
+  },
+  {
+   "text": "Use the existing shift compatibility and triangulated structures of the derived exchange and its two functors. Apply heart_test_bounded_below to each bounded-below abelian complex, using Step 4 for both lower-bound hypotheses and for exchange on its cohomology sheaves in degree zero. This is finite Postnikov induction followed by truncation, and needs neither preservation of injectives by inverse image nor an underived degree-zero exchange comparison. Finally apply the concluding equivalence of exchange_forget_coefficients to the chosen fibre-product square and the given module-valued complex K.",
+   "uses": [
+    "lem-weil-pbc-heart-test-bounded-below",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J5 and 05TC (truncation), Tags 0D6J and 07A7 (coefficient comparison)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-abelian-stalk-exchange-localization",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-heart-test-bounded-below",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
+  "lem-weil-pbc-strict-local-abelian-total-exchange",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex; literature/stacks-project/derived.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "V4 stage-3 Lean proof: the strict-local calculation of Tags 03Q9/0EZU for the actual Cartesian square; ind-etale strict-local invariance; proved bounded-below heart test instead of acyclic-resolution comparison. Existing target and unit statements are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ind.etale|indEtale|IndEtale|derived.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*derived",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphism properties, structure-sheaf modules, or site coverage, not this derived small-etale coefficient-sheaf comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image of etale module sheaves commutes with pro etale inverse image for bounded below complexes",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.sheafificationCompPullback, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphism properties, structure-sheaf modules, or site coverage, not this derived small-etale coefficient-sheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"baseChange\"",
+   "results": "2 hits; CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small, CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphism properties, structure-sheaf modules, or site coverage, not this derived small-etale coefficient-sheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism the canonical derived direct image base change map is an isomorphism after any locally ind etale base change",
+   "results": "8 hits; AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphism properties, structure-sheaf modules, or site coverage, not this derived small-etale coefficient-sheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward commutes with inverse image when the geometric strict local schemes on the base are unchanged by a pro etale morphism",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern scheme morphism properties, structure-sheaf modules, or site coverage, not this derived small-etale coefficient-sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "ind.etale|indEtale|IndEtale|derived.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*derived",
+   "results": "7 hits; Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/Solvable.lean, Mathlib/Algebra/Lie/CartanCriterion.lean, Mathlib/Algebra/Lie/CartanCriterion.lean; ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern Zariski structure-sheaf modules, scheme properties, Lie derived series, or precoverage, and do not state ordinary etale derived ind-etale base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"baseChange\"",
+   "results": "2 hits; CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small, CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange; ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern Zariski structure-sheaf modules, scheme properties, Lie derived series, or precoverage, and do not state ordinary etale derived ind-etale base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image of etale module sheaves commutes with pro etale inverse image for bounded below complexes",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.sheafificationCompPullback, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern Zariski structure-sheaf modules, scheme properties, Lie derived series, or precoverage, and do not state ordinary etale derived ind-etale base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism derived direct image of arbitrary bounded below etale module complexes commutes with affine locally ind etale base change",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget, AlgebraicGeometry.Scheme.Hom.flat_appLE; ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern Zariski structure-sheaf modules, scheme properties, Lie derived series, or precoverage, and do not state ordinary etale derived ind-etale base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward commutes with inverse image when the geometric strict local schemes on the base are unchanged by a pro etale morphism",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardCongr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, SheafOfModules.pushforwardComp_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr; ",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern Zariski structure-sheaf modules, scheme properties, Lie derived series, or precoverage, and do not state ordinary etale derived ind-etale base change."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-ind-etale-closed-support-base-change",
+  "date": "2026-10-24",
+  "group": "Q28"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Expose XVII, Definition 1.1.1 (geometric costalk as strict-local supported cohomology) and Definition 1.4.1 (the two vertical costalk isomorphisms after strict localization and closed restriction); these supply the locality input to the ancestor proof Step 3. Ordinary direct-image base change for the complementary open immersion, before comparing the support triangles.",
+   "via": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-per-codimension-one-costalk-reduction",
+    "def-per-potential-dualizing",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-ind-etale-qcqs-direct-image-base-change",
+  "worker": "stage1",
+  "summary": "Keep the statement unchanged. Reuse the existing ind-etale strict-local invariance and unrestricted sheaf-level stalk criterion, then pass to bounded-below complexes using inverse-image acyclicity of injectives and the existing acyclic-unit and termwise-mate statements. No new nodes.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, latest proof Step 3, its open-closed boundary/recollement comparison. This item supplies ordinary direct-image locality for the complementary open before the closed-support comparison, via lem-per-ind-etale-closed-support-base-change; it does not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Step 2: universal property of the fibre product to build w and its inverse; generic scheme notion."
+   },
+   {
+    "node": "def-sp-acyclic",
+    "why": "Step 5: definition of f'_*-acyclic objects; generic homological notion."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Steps 4 and 6: definition, left exactness and K-injective computation of Rf_*; generic etale notion."
+   },
+   {
+    "node": "lem-sbc-right-derived-base-change-zero-unit",
+    "why": "Step 4: degree-zero unit equation for derived base change of a transformation; generic homological algebra."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Step 2: strict localizations are invariant under locally ind-etale maps (05WR/0GIP, Olivier); pure commutative algebra, no node of sk-p-dl-a1-perverse states it."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-termwise",
+    "why": "Steps 4 and 6: derived exchange mate computed termwise on an injective resolution; generic etale exchange formalism."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-injective-vanishing",
+    "why": "Step 5: higher derived functors vanish on injectives; generic homological algebra."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Step 6: bounded-below injective representatives are K-injective; generic homological algebra."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Step 1: module-linear exchange agrees with the abelian exchange after forgetting coefficients; generic."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-strict-local-cohomology-stalk-criterion",
+    "why": "Step 3: Stacks 0EZU strict-local stalk criterion for the degree-q exchange; generic etale cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "Step 4: degree-zero augmentation R^0F=F; generic homological algebra."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Step 3: functoriality (composition) of cohomology pullbacks; generic site cohomology."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Step 3: geometric stalks are conservative on abelian etale sheaves; generic."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Steps 4 and 6: etale inverse image is exact; generic."
+   },
+   {
+    "node": "src-right-derived-functor-plus-acyclic-unit",
+    "why": "Step 6: acyclic bounded-below complexes compute the right derived functor; generic homological algebra."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Step 6: derived maps into a K-injective complex are chain maps up to homotopy (reviewer fix); generic homological algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-6556c05f5",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-6556c05f5 (reviewer sub-agent of L); spot-checked: Read the item in full (no new nodes; statement kept verbatim), each cited node's statement and Stacks 03Q9 (etale-cohomology.tex l.8015) / 0EZU (l.16497). The statement is true: geometric stalks at t are RGamma(X x_S S'_(t)) and RGamma(X x_S S_(s)), and S'_(t) ~= S_(s) for affine locally ind-etale u. Checked edge cases: u=id, strict localization, empty S'/X, A=0, K a sheaf, Z-coefficients. Steps 1, 2, 3 and 5 are correct. Step 3 applies the 0EZU criterion to the qcqs f, uses w an isomorphism through pullback composition (4), then conservativity. Step 5 gets acyclicity of v^{-1}I without claiming v^{-1} preserves injectives. Fix 1 (C4/E5), step 4: H^0 of the derived-exchange mate was identified with R^0e of lem-sbc-right-derived-base-change-zero-unit with no citation; it now cites lem-weil-pbc-derived-exchange-termwise and writes out the unit-equation inference. Fix 2 (E5), step 6: Q(f'_*(j)) invertible was implicit; the step now chooses J bounded-below injective, gets j via lem-weil-pbc-kinjective-hom-derived (Mathlib leaf, added), and shows Q(f'_*j) invertible by naturality of alpha with alpha_P (acyclic-unit) and alpha_J invertible. The tool_uses why-lines, mechanically truncated and naming a 'perverse Fourier unit', are rewritten; all 16 generic tool uses are accepted. Batch 5: lem-trf-ind-etale-strict-local-invariance is pure commutative algebra (05WR/0GIP, Olivier 092Z). Its 261-node closure contains only its own two algebra sub-lemmas from sec-trace-formula and no Poincare node. Neither assumption leaf gives it, so it is genuinely outside the assumptions and accepted. No cycle; no duplicate (the related lem-weil-pbc-exchange-strict-local-cohomology is only the 0EZU iff); no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndEtaleQcqsDirectImageBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_affine_locally_indEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/IndEtaleQcqsDirectImageBaseChange.lean",
+  "statement": "theorem isIso_derivedBaseChangeMapPlus_of_affine_locally_indEtale (A : Type (u + 1)) [CommRing A] {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) [QuasiCompact f] [QuasiSeparated f] [IsAffineHom g] (hlocal : ∀ (t : S'), ∃ (V : S'.Opens) (U : S.Opens), t ∈ V ∧ IsAffine V.toScheme ∧ IsAffine U.toScheme ∧ ∃ e : V.toScheme ⟶ U.toScheme, e ≫ U.ι = V.ι ≫ g ∧ RingHom.IndEtaleAcrossUniverses e.appTop.hom) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) : IsIso ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} A) (IsPullback.of_hasPullback f g).toCommSq).app K)",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b83f9237",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Clause-by-clause match: A:Type(u+1) with ModuleCat-valued sheaves, same convention as recorded exchange_forget_coefficients; QuasiCompact+QuasiSeparated f; IsAffineHom g; hlocal = affine charts at each point with RingHom.IndEtaleAcrossUniverses on Γ(U)→Γ(V) (recorded ind-etale predicate, same chart shape as indEtale_strictLocal_invariance; existential form is weakest and still true); canonical pullback square, fst=v, snd=f'; conclusion IsIso of recorded derivedBaseChangeMapPlus (ModuleCat A) .app K for all K in D+, stated in the derived category. Only the lean field of the item node changed; statement verbatim in file; only sorry is the theorem proof; docstrings carry sources, blueprint id and 6 proof steps; imports exist in side-live; no duplicate found; edge cases (empty S', empty X, A=0, A=ℤ, g=id) covered; universes bound. No recompile (no file changed). Stage-3 note: bridge ring-map ind-etale to proAffineEtale via proAffineEtale_Spec_iff."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T083321-L-2322469",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

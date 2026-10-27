@@ -1,0 +1,168 @@
+{
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Construction (4.1) before Proposition 4.3, pp. 8-9; naturality implicit in Corollary 4.4(2), expanded by the worker"
+ },
+ "id": "def-zl-component-derived-square-data",
+ "kind": "definition",
+ "title": "Data of the actual component inverse images and their ordinary coherence",
+ "statement": "For a commutative condensed ring Λ and affine schemes, use the actual component-site and profinite-slice inverse images and the pulled-back coefficient rings [def-zl-condensed-lisse-evaluation-model]. Corner, Slice and Square record their adjunctions, normalized mates and scalar transport; TensorLift records a derived strong symmetric tensor structure with monoidal localization. System records the complete derived comparison. OrdinarySystem records only the ordinary corners, slices, squares and their identity and composition equations on module sheaves. TensorSystem over an OrdinarySystem records its edge TensorLifts and monoidality of Square.theta.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-pe-spectral-components-profinite",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "lem-zl-component-relative-profinite-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-zl-component-lift-base-change",
+  "def-zl-condensed-lisse-evaluation-model",
+  "def-zl-profinite-test-projection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "HRS construction (4.1); data constructions unchanged. Ordinary and derived functor result types are explicit. Derived functor and comparison bodies remain folded; generic tensor and coherence predicates retain the original equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor preserves dualizable objects",
+   "results": "8 hits; ['CategoryTheory.hasRightDualOfEquivalence', 'CategoryTheory.hasLeftDualOfEquivalence', 'CategoryTheory.Monoidal.functorHasRightDual', 'CategoryTheory.Monoidal.functorHasLeftDual', 'CategoryTheory.exactPairingOfFaithful', 'CategoryTheory.ExactPairing.ofFaithful', 'CategoryTheory.rigidCategoryOfEquivalence', 'CategoryTheory.Monoidal.rigidFunctorCategory']",
+   "date": "2026-10-25",
+   "verdict": "Generic exact-functor localization and monoidal-duality APIs found. None supplies the component-specific normalized ordinary construction or its complete tensor descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits; ['CategoryTheory.Functor.mapDerivedCategory', 'CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt', 'CategoryTheory.Functor.mapDerivedCategoryIdIso', 'CategoryTheory.Functor.mapDerivedCategorySingleFunctor', 'CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory', 'CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory', 'CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt', 'CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId']",
+   "date": "2026-10-25",
+   "verdict": "Generic exact-functor localization and monoidal-duality APIs found. None supplies the component-specific normalized ordinary construction or its complete tensor descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image functors induce coherent symmetric monoidal functors on unbounded derived categories",
+   "results": "8 hits; ['CategoryTheory.symmetricCategoryOfFullyFaithful', 'CategoryTheory.MorphismProperty.instIsMonoidalInverseImageOfMonoidalOfRespectsIso', 'CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctorSymmOfInverse', 'AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux', 'CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_inv', 'CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.inverse_obj', 'CategoryTheory.Monoidal.instMonoidalTransportedFunctorEquivalenceTransported', 'CategoryTheory.Equivalence.monoidalOfPrecompInverse']",
+   "date": "2026-10-25",
+   "verdict": "Generic exact-functor localization and monoidal-duality APIs found. None supplies the component-specific normalized ordinary construction or its complete tensor descent."
+  },
+  {
+   "tool": "grep",
+   "query": "componentTests|mapDerivedCategory.*Monoidal|IsDualizable.map",
+   "results": "Searched Mathlib, WeilConjectures and Sheaf. Found IsDualizable.map, MapDerivedCategoryMate coherence, and generic ringed derived tensor comparisons.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the three component-specific steps. Blueprint search component square found no node; derived composition found only pur713-def-pull-composition-module-underived, which is an underived convention."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ComponentDerivedPullbackSquare",
+  "group": "D9",
+  "date": "2026-10-25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Corollary 4.4(1)-(2). Re-split: old Step 5, coefficient-compatible isomorphism of actual inverse images, with the ordinary derived monoidal comparison used in old Steps 4 and 6. Stage-3 decomposition: Data of the actual component inverse images and their ordinary coherence",
+   "via": [
+    "lem-zl-component-derived-pullback-square",
+    "lem-zl-condensed-henselian-lisse-rigidity",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ComponentDerivedSquareData",
+  "file": "lean/Sheaf/Paper/ComponentDerivedSquareData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.OrdinarySystem",
+  "statement": "structure OrdinarySystem (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.componentDirect",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.componentDirectMonoidal",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.componentAdjunction",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.slicePointAdjunction",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.absoluteAdjunction",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Corner",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Corner.modules",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Corner.modulesAdditive",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.sliceDirect",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.sliceDirectMonoidal",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.sliceInverse",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.sliceAdjunction",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Slice",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Slice.modules",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Corner.modulesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Corner.modulesFiniteColimits",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Slice.modulesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Slice.modulesFiniteColimits",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Slice.modulesAdditive",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Corner.derived",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Slice.derived",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.schemeUnderlying",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Square",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.leftPath",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.rightPath",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Square.theta",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Corner.modulesMonoidal",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Slice.modulesMonoidal",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.TensorLift",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.SliceIdentity",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.SliceComposition",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.SliceIdentity.derived",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.SliceComposition.derived",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.schemeIdentity",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.schemeComposition",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.Square.monoidal",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.System",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.OrdinarySystem",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.TensorSystem",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.tensorSquareMonoidal",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.squareIdentity",
+   "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.squareComposition"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-012c7",
+  "group": "D9",
+  "result": "fix",
+  "landing": "20261025T100935-L-3640985",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-106e7",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261025T164948-L-1144847",
+  "kind": "interface",
+  "note": "independent cc review: item proof (module lift of the normalized abelian square) vs OrdinarySystem; 3 new sorry statements vs the pinned Square/Slice data and component_lift_base_change coherence; changes to the unclaimed ComponentDerivedSquareData (irreducible/explicit types/generic predicates) vs the old equations; 4 unclaimed adapted modules + 6 unchanged dependent modules compiled against the delivery"
+ }
+}

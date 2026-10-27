@@ -1,0 +1,261 @@
+{
+ "id": "lem-a1-fppf-kernel-pair-quotient-descent",
+ "kind": "statement",
+ "title": "Descent of a base structure and the fppf quotient of a kernel pair",
+ "statement": "Let $S,U,R,M$ be schemes [def-pc-scheme], let $a:U\\to S$ and $b:R\\to S$ be structure morphisms, and let $s,t:R\\to U$ satisfy $as=at=b$. Suppose $q:U\\to M$ is finite locally free [def-pc-finite-locally-free] and surjective, $qs=qt$, and the induced morphism $k:R\\to U\\times_MU$ is an isomorphism with projections $s,t$ [def-pc-fibre-product]. There is a unique morphism $m:M\\to S$ with $mq=a$. The singleton $\\{q\\}$ is both an fppf covering [def-pc-fppf-site] and an fpqc covering [def-weil-pbc-fpqc-covering]. Every fppf covering of schemes is an fpqc covering, and representable presheaves are fppf sheaves. Relative to the descended structure $m$, put $P(H)=U(H)/R(H)$ for $S$-schemes $H$, where $U(H)=\\operatorname{Hom}_S(H,U)$ and the relation identifies $u,v$ exactly when $(u,v)$ is the image of an $H$-point of $R$. This is an equivalence relation, and the canonical natural map $P\\to h_M$, $h_M(H)=\\operatorname{Hom}_S(H,M)$, is injective on every $H$. It is locally surjective: each $H\\to M$ lifts to $U$ after the fppf covering $H\\times_MU\\to H$. Consequently this canonical map exhibits $h_M$ as the fppf sheafification of $P$ [def-weil-pbc-sheafification]. Work in a universe containing the chosen big site and its morphism sets [def-weil-size-convention]; the conclusion can equivalently be expressed by the universal property of sheafification into any fppf sheaf.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03C5 (lemma-criterion-quotient-representable), applied in the first paragraph of Tag 03BM (proposition-finite-flat-equivalence); descent.tex Tag 023Q (lemma-fpqc-universal-effective-epimorphisms)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-sheafification",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of finite locally free, $q$ is flat and locally of finite presentation. Together with its assumed surjectivity, this is exactly the definition of the singleton fppf covering $\\{q:U\\to M\\}$. The fppf-to-fpqc covering lemma makes this an fpqc covering as well and proves the assertion about every fppf covering.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc); definition of fppf coverings, Tag 021L"
+   }
+  },
+  {
+   "text": "Put k = (s,t):R → U×_M U. For any x,y:Z → U with xq=yq, the morphism r=(x,y)k⁻¹ satisfies rs=x and rt=y. Hence xa=rs a=rb=rt a=ya. Mathlib’s EffectiveEpi instance for the fppf cover q therefore supplies m = EffectiveEpi.desc q a, with qm=a. Its Epi instance gives uniqueness by cancellation. Set Q:U→M in Over S using this equation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms)"
+   }
+  },
+  {
+   "text": "Mathlib proves fpqc subcanonicity from representable descent and obtains fppf subcanonicity by inclusion of the topologies. Subcanonical.isSheaf_of_isRepresentable gives every absolute representable sheaf. The proved subcanonical_over instance gives subcanonicity on Over S, and GrothendieckTopology.uliftYoneda supplies the required sheaf on the slice in the enlarged universe.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, representable sheaf condition; topologies.tex Tag 022C"
+   }
+  },
+  {
+   "text": "For x,y:H → U in Over S, the lift r=(x,y)k⁻¹ from step 2 is over S because rb=rs a=xa. It follows that existence of r with rs=x and rt=y is equivalent to xQ=yQ. Equality of Q-images makes this relation an equivalence relation. Define η using coequalizer.desc applied to uliftYoneda.map Q, whose equalizing equation follows from sQ=tQ. The projection π is epi, its components are epi in Type, and therefore each π_H is surjective. Write two quotient sections as π_H(x),π_H(y). Equality of their η-images gives xQ=yQ and hence a common r. Evaluating the coequalizer equation at r proves π_H(x)=π_H(y), establishing injectivity.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C5 (lemma-criterion-quotient-representable), condition (3), with the assumed kernel-pair isomorphism"
+   }
+  },
+  {
+   "text": "For f:H → M in Over S, map its pullback square with Q along Over.forget S. This functor preserves connected limits, so the resulting square of schemes is a pullback. Flatness, surjectivity and local finite presentation of q are stable under this pullback. The underlying first projection is thus an fppf cover. Evaluate πη=uliftYoneda.map Q at the second projection; the pullback equation identifies the result with the restriction of f along the first projection.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C5, condition (2); topologies.tex Tag 021O (lemma-fppf), part (3)"
+   }
+  },
+  {
+   "text": "Let G be a sheaf and α:P → G. Put β=πα and let z in G(U) be its Yoneda section. The coequalizer equation gives s* z=t* z. For any p₁,p₂:Z → U with p₁Q=p₂Q, step 4 supplies r with rs=p₁ and rt=p₂, so naturality gives p₁* z=p₂* z. The singleton {Q} covers in the slice: fppfTopology.over S is the topology generated by fppfPrecoverage.comap (Over.forget S), and the image of this singleton is {q}. The singleton sheaf condition therefore supplies y in G(M) with Q* y=z. Let γ:h_M → G be the Yoneda transformation of y. Naturality of the Yoneda equivalence gives (uliftYoneda.map Q)γ=β, so cancellation of π proves ηγ=α.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C5, expanded sheaf gluing argument for the quotient universal property"
+   }
+  },
+  {
+   "text": "For uniqueness, if ηγ₁=ηγ₂ then precomposition with π and πη=uliftYoneda.map Q give (uliftYoneda.map Q)γ₁=(uliftYoneda.map Q)γ₂. Yoneda identifies this equality with equality of the restrictions to U of the corresponding sections of G(M). The separatedness part of the singleton sheaf condition for {Q} makes these sections equal. The Yoneda equivalence then gives γ₁=γ₂. This proves the required bijection and hence the sheafification universal property, with no additional descent or sheafification theorem.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C5, conclusion; sites.tex Tag 00WH (proposition-sheafification-adjoint), universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-fppf-covering-base-change",
+  "def-weil-pbc-sheafification",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03C5 (lemma-criterion-quotient-representable), with the kernel-pair and quotient arguments written directly; descent.tex Tag 023Q implemented using Mathlib EffectiveEpi and subcanonicity; singleton sheaf condition and Yoneda implement the universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free surjective scheme morphism with a prescribed kernel pair represents the fppf quotient and descends a compatible structure morphism uniquely",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) →\\n        (D ⟶ (CategoryTheory.Functor.const I).obj S) → (X ⟶ S) → Type (u + 1)\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this inductive type encode\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"The function obtained by applying the forgetful functor from the category of schemes to the category of sets to the pullback comparison morphism is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ in the category of schemes, the comparison morphism induced by the forgetful functor from schemes to types is surjective. This means that every compat\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give generic kernel pairs, coherent topologies or affine transition limits; none gives the fppf/fpqc scheme-cover and descended-base quotient criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf cover is an effective epimorphism of representable sheaves and its target is the sheafification of the quotient by its kernel pair",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D)\\n  [F.PreservesFiniteEffectiveEpiFamilies] [F.ReflectsFiniteEffectiveEpiFamilies] [inst_4 : F.Full] [inst_5 : F.Faithful]\\n  [inst_6 : F.Effe\", \"doc\": \"A sieve $ S $ on an object $ X $ in a precoherent category $ \\\\mathcal{C} $ belongs to the Grothendieck topology induced by the coherent topology if and only if there exists a finite effective epimorph\"}\n  {\"name\": \"CategoryTheory.coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C] {X : C}\\n  (S : CategoryTheory.Sieve X),\\n  S ∈ (CategoryTheory.coherentTopology C) X ↔\\n    ∃ α, ∃ (_ : Finite α), ∃ Y π, CategoryTheory.EffectiveEpiFamily Y π ∧ ∀ (a : α), S.arrows (π a)\", \"doc\": \"For a precoherent category $ \\\\mathcal{C} $ and an object $ X $ in $ \\\\mathcal{C} $, a sieve $ S $ on $ X $ is in the coherent Grothendieck topology on $ \\\\mathcal{C} $ if and only if there exists a fini\"}\n  {\"name\": \"CategoryTheory.coherentTopology.mem_sieves_of_hasEffectiveEpiFamily\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C] {X : C}\\n  (S : CategoryTheory.Sieve X),\\n  (∃ α, ∃ (_ : Finite α), ∃ Y π, CategoryTheory.EffectiveEpiFamily Y π ∧ ∀ (a : α), S.arrows (π a)) →\\n    S ∈ (CategoryTheory.coherentTopology C) X\", \"doc\": \"For a precoherent category $\\\\mathcal{C}$, if a sieve $S$ on an object $X$ contains a finite effective epimorphic family $(Y_a \\\\to X)_{a \\\\in \\\\alpha}$ (with $\\\\alpha$ finite), then $S$ is a covering siev\"}\n  {\"name\": \"CategoryTheory.isSheaf_coherent\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentSheaves\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C]\\n  (P : CategoryTheory.Functor Cᵒᵖ (Type w)),\\n  CategoryTheory.Presieve.IsSheaf (CategoryTheory.coherentTopology C) P ↔\\n    ∀ (B : C) (α : Type) [Finite α] (X : α → C) (π : (a : α) → X a ⟶ B),\\n     \", \"doc\": \"A presheaf $ P $ is a sheaf with respect to the coherent topology on a category $ \\\\mathcal{C} $ if and only if for every object $ B $ in $ \\\\mathcal{C} $, every finite effective epimorphic family $ \\\\{X\"}\n  {\"name\": \"CategoryTheory.regularTopology.exists_effectiveEpi_iff_mem_induced\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) [F.PreservesEffectiveEpis]\\n  [F.ReflectsEffectiveEpis] [inst_4 : F.Full] [inst_5 : F.Faithful] [inst_6 : F.EffectivelyEnough]\\n  [inst_7 : C\", \"doc\": \"For an object $X$ in category $\\\\mathcal{C}$ and a sieve $S$ on $X$, the following are equivalent: (1) There exists an effective epimorphism $\\\\pi: Y \\\\to X$ such that $\\\\pi$ belongs to the arrows of $S$;\"}\n  {\"name\": \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryExtensive C] [inst_3 : CategoryTheory.Limits.HasLimitsOfShape ℕᵒᵖ C],\\n  (∀ (G : CategoryTheory.Functor ℕᵒᵖ C),\\n      (∀ (n : ℕ), CategoryTheory.EffectiveEpi (G.map (Cate\", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a coherent Grothendieck topology, given a sheaf-valued functor $F : \\\\mathbb{N}^{\\\\text{op}} \\\\to \\\\text{Sh}(\\\\mathcal{C}, \\\\text{Type}\\\\, v)$ and a limit cone $c$ o\"}\n  {\"name\": \"CategoryTheory.Sieve.effectiveEpimorphic_family\", \"module\": \"Mathlib/CategoryTheory/Sites/EffectiveEpimorphic\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {B : C} {α : Type u_2} (X : α → C)\\n  (π : (a : α) → X a ⟶ B),\\n  (CategoryTheory.Presieve.ofArrows X π).EffectiveEpimorphic ↔ CategoryTheory.EffectiveEpiFamily X π\", \"doc\": \"A presieve generated by a family of morphisms to an object $ B $ is effective epimorphic if and only if the family itself forms an effective epimorphic family. This establishes that the effective epim\"}\n  {\"name\": \"CategoryTheory.coherentTopology.instIsCoverDense\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (F : CategoryTheory.Functor C D) [F.EffectivelyEnough]\\n  [inst_3 : CategoryTheory.Precoherent D], F.IsCoverDense (CategoryTheory.coherentTopology D)\", \"doc\": \"For a precoherent category $\\\\mathcal{C}$, the coherent Grothendieck topology on $\\\\mathcal{C}$ ensures that the inclusion functor from $\\\\mathcal{C}$ to its category of sheaves is cover-dense. This mean\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give generic kernel pairs, coherent topologies or affine transition limits; none gives the fppf/fpqc scheme-cover and descended-base quotient criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf quotient sheaf of a scheme kernel pair and descent of a structure morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.RegularEpi.desc'\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.RegularMono\", \"type\": \"{W : C} {f : X ⟶ Y} (hf : RegularEpi f) (k : X ⟶ W) (h : hf.left ≫ k = hf.right ≫ k) : { l : Y ⟶ W // f ≫ l = k }\", \"doc\": \"Let $f: X \\\\to Y$ be a regular epimorphism. By definition, $f$ is the coequalizer of a pair of parallel morphisms, denoted `hf.left` and `hf.right`. This function implements the universal property of t\"}\n  {\"name\": \"CategoryTheory.IsKernelPair\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.KernelPair\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → {R X Y : C} → (X ⟶ Y) → (R ⟶ X) → (R ⟶ X) → Prop\", \"doc\": \"Given a morphism $f : X \\to Y$ in a category $\\\\mathcal{C}$, the kernel pair of $f$ is a pair of morphisms $R \\rightrightarrows X$ such that the square formed by these morphisms and $f$ satisfies the uni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f f_1 : X.Hom (AlgebraicGeometry.Spec A)) (e_f : f = f_1)\\n  (I : Ideal ↑A)\\n  (hI :\\n    I ≤\\n      RingHom.ker\\n        (CommRingCat.Hom.hom (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop))),\\n  f.liftQuotient I \", \"doc\": \"Given schemes $X$ and $\\\\operatorname{Spec}(A)$ for a commutative ring $A$, if two morphisms $f,f_1 : X \\\\to \\\\operatorname{Spec}(A)$ are equal and an ideal $I \\\\subseteq A$ satisfies $I \\\\subseteq \\\\ker(\\\\G\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(f : X.Hom Y) : IdealSheafData Y\", \"doc\": \"For a morphism of schemes $f : X \\\\to Y$, the kernel of $f$ is the ideal sheaf data on $Y$ constructed from the kernels of the ring homomorphisms on sections over affine open sets. Specifically, for ea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(Y : Scheme.{u}) : (Over Y)ᵒᵖ ⥤ IdealSheafData Y\", \"doc\": \"The functor assigns to each object in the opposite category of the over category over a scheme $ Y $ the kernel of its structure morphism as an ideal sheaf on $ Y $. For morphisms, it maps a morphism \"}\n  {\"name\": \"CategoryTheory.regularEpiOfKernelPair\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.RegularMono\", \"type\": \"{B X : C} (f : X ⟶ B) [HasPullback f f] (hc : IsColimit (Cofork.ofπ f pullback.condition)) : RegularEpi f\", \"doc\": \"Given a morphism $ f : X \\to B $ in a category $\\\\mathcal{C}$, if the pullback (kernel pair) of $ f $ with itself exists and the induced cofork formed by the pullback projections is a colimit (i.e., $ f\"}\n  {\"name\": \"TopCat.effectiveEpiStructOfQuotientMap\", \"module\": \"Mathlib.Topology.Category.TopCat.EffectiveEpi\", \"type\": \"{B X : TopCat.{u}} (π : X ⟶ B) (hπ : IsQuotientMap π) : EffectiveEpiStruct π\", \"doc\": \"Given a quotient map $\\\\pi: X \\\\to B$ in the category of topological spaces, this constructs the effective epimorphism structure on $\\\\pi$. Specifically, $\\\\pi$ coequalizes its kernel pair (the pullback o\"}\n  {\"name\": \"CategoryTheory.IsKernelPair.lift'\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.KernelPair\", \"type\": \"{S : C} (k : IsKernelPair f a b) (p q : S ⟶ X) (w : p ≫ f = q ≫ f) : { t : S ⟶ R // t ≫ a = p ∧ t ≫ b = q }\", \"doc\": \"In a category $\\\\mathcal{C}$, given a morphism $f : X \\\\to Y$ with kernel pair $R \\\\rightrightarrows X$ (defined by morphisms $a,b : R \\\\to X$), for any object $S$ and morphisms $p,q : S \\\\to X$ satisfying\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give generic kernel pairs, coherent topologies or affine transition limits; none gives the fppf/fpqc scheme-cover and descended-base quotient criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppfTopology\", \"coequalizer\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give generic kernel pairs, coherent topologies or affine transition limits; none gives the fppf/fpqc scheme-cover and descended-base quotient criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*(coequal|quotient|effectiveEpi)|kernelPair.*[Ss]heaf|[Ss]heaf.*kernelPair",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give generic kernel pairs, coherent topologies or affine transition limits; none gives the fppf/fpqc scheme-cover and descended-base quotient criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*(coequal|quotient|effectiveEpi)|kernelPair.*[Ss]heaf|[Ss]heaf.*kernelPair",
+   "results": "{\"t\": \"2026-10-23T04:09:16Z\", \"tool\": \"grep\", \"query\": \"fppf.*(coequal|quotient|effectiveEpi)|kernelPair.*[Ss]heaf|[Ss]heaf.*kernelPair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic coherent/regular site facts, sheafification constructions and scheme-property descent do not state this combined fppf scheme-kernel-pair quotient with descended base structure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppfTopology\", \"coequalizer\"",
+   "results": "{\"t\": \"2026-10-23T04:09:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"fppfTopology\\\", \\\"coequalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic coherent/regular site facts, sheafification constructions and scheme-property descent do not state this combined fppf scheme-kernel-pair quotient with descended base structure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf cover of schemes target is sheafification of quotient by kernel pair",
+   "results": "{\"t\": \"2026-10-23T04:09:17Z\", \"tool\": \"leansearch\", \"query\": \"Fppf cover of schemes target is sheafification of quotient by kernel pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.sheafify\", \"CategoryTheory.GrothendieckTopology.sheafification\", \"CategoryTheory.GrothendieckTopology.sheafify\", \"AlgebraicGeometry.Scheme.Cover.Over\", \"AlgebraicGeometry.Scheme.Cover\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"CategoryTheory.Sheaf.sheafifyCocone\", \"CategoryTheory.Sheaf.image_val\"], \"digest\": \"afb598b42c79a203\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic coherent/regular site facts, sheafification constructions and scheme-property descent do not state this combined fppf scheme-kernel-pair quotient with descended base structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free surjective scheme morphism descends any compatible structure morphism and represents the fppf sheaf quotient by its kernel pair",
+   "results": "{\"t\": \"2026-10-23T04:09:24Z\", \"tool\": \"leanfinder\", \"query\": \"A finite locally free surjective scheme morphism descends any compatible structure morphism and represents the fppf sheaf quotient by its kernel pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"CategoryTheory.coherentTopology.isLocallySurjective_iff\"], \"digest\": \"c9fc47ecd40bdf9d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic coherent/regular site facts, sheafification constructions and scheme-property descent do not state this combined fppf scheme-kernel-pair quotient with descended base structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf covering is an effective epimorphism and the quotient of its kernel pair is the representable sheaf of its target",
+   "results": "{\"t\": \"2026-10-23T04:10:41Z\", \"tool\": \"leanfinder\", \"query\": \"An fppf covering is an effective epimorphism and the quotient of its kernel pair is the representable sheaf of its target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.EqualizerCondition\", \"CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced\", \"CategoryTheory.Presieve.EffectiveEpimorphic\", \"CategoryTheory.Functor.effectiveEpiOverObj\", \"CategoryTheory.isSheaf_coherent\", \"CategoryTheory.coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily\", \"CategoryTheory.Sieve.EffectiveEpimorphic\", \"CategoryTheory.Functor.effectiveEpiOver\"], \"digest\": \"5348253731ba7534\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic coherent/regular site facts, sheafification constructions and scheme-property descent do not state this combined fppf scheme-kernel-pair quotient with descended base structure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-flat-affine-relation-quotient",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting affine-quotient argument: Stacks Tag 03C5 (lemma-criterion-quotient-representable), applied in the first paragraph of Tag 03BM (proposition-finite-flat-equivalence); descent.tex Tag 023Q (lemma-fpqc-universal-effective-epimorphisms). Returned item steps 13.",
+   "via": [
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-fppf-kernel-pair-quotient-descent",
+  "worker": "stage1",
+  "summary": "Seven explicit steps using existing covering and representable-descent nodes. The kernel-pair argument and set-valued sheafification universal property are written out directly; no new nodes or statement changes. Checked empty schemes, torsors without global lifts, arbitrary base S, and all cited statements.",
+  "blueprint": "Supports lem-a1-affine-hc0 through its recorded affine-relation quotient chain: application of groupoids Tag 03C5 to the finite locally free quotient of Tag 03BM. Retains the recorded blueprint ancestor and via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-8b64d0f0c",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-8b64d0f0c (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement; the steps follow Stacks Tag 03C5. The delivery changes only the item and the report. It adds no new nodes, and the statement is unchanged from the base copy in the Q128 snapshot. Every step checks out. Step 2: a p1 k = b = a p2 k, cancel k, and representable descent along {q} with target S gives the unique m. Step 3: representable presheaves are fppf sheaves, and a second descent with target S makes the glued map an S-map. Step 4: r = k^{-1}(u,v), so the relation is equality of q-images, ι is well defined and injective, and r is over S. Step 5: base change makes T = H×_M U → H a covering; v is over S because a v = m f p. Steps 6-7: I checked the gluing, naturality, the factorization β∘ι = α and its uniqueness. This uses only the universal property in def-weil-pbc-sheafification, so C4 holds. Edge cases checked: M empty, q = id, field-extension torsors with no global section, and S with no further hypotheses. No duplicates found, no SGA citations, and all cited non-definition nodes are Mathlib leaves, so no tool_uses entry is needed. Batch-5: lem-trf-fppf-covering-is-fpqc (fppfPrecoverage_le_fpqcPrecoverage) and lem-trf-fppf-covering-base-change (Precoverage.mem_coverings_of_isPullback) are Mathlib leaves with empty proof_deps. They are general site facts, outside both the trace-formula and Poincaré-duality assumptions and their proofs, so I accept both. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfKernelPairQuotientDescent",
+  "declaration": "AlgebraicGeometry.fppf_kernelPair_quotient_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfKernelPairQuotientDescent.lean",
+  "statement": "theorem fppf_kernelPair_quotient_descent {S U R M : Scheme.{u}} (a : U ⟶ S) (b : R ⟶ S) (s t : Over.mk b ⟶ Over.mk a) (q : U ⟶ M) [q.IsFiniteLocallyFree] [Surjective q] (hqs : s.left ≫ q = t.left ≫ q) [IsIso (pullback.lift s.left t.left hqs)] : Presieve.singleton q ∈ Scheme.fppfPrecoverage M ∧ Presieve.singleton q ∈ Scheme.fpqcPrecoverage M ∧ Scheme.fppfPrecoverage ≤ Scheme.fpqcPrecoverage ∧ (∀ X : Scheme.{u}, Presheaf.IsSheaf Scheme.fppfTopology (yoneda.obj X)) ∧ ∃ m : M ⟶ S, ∃ hq : q ≫ m = a, (∀ m' : M ⟶ S, q ≫ m' = a → m' = m) ∧ (∀ H : Over S, Equivalence (fun x y : H ⟶ Over.mk a ↦ ∃ r : H ⟶ Over.mk b, r ≫ s = x ∧ r ≫ t = y)) ∧ Presheaf.IsSheaf (Scheme.fppfTopology.over S) (uliftYoneda.{max (u + 1) v}.obj (Over.mk m)) ∧ ∃ η : coequalizer (uliftYoneda.{max (u + 1) v}.map s) (uliftYoneda.{max (u + 1) v}.map t) ⟶ uliftYoneda.{max (u + 1) v}.obj (Over.mk m), coequalizer.π (uliftYoneda.{max (u + 1) v}.map s) (uliftYoneda.{max (u + 1) v}.map t) ≫ η = uliftYoneda.{max (u + 1) v}.map (Over.homMk q hq : Over.mk a ⟶ Over.mk m) ∧ (∀ H : (Over S)ᵒᵖ, Function.Injective (η.app H)) ∧ (∀ (H : Over S) (f : H ⟶ Over.mk m), Presieve.singleton (pullback.fst f (Over.homMk q hq : Over.mk a ⟶ Over.mk m)).left ∈ Scheme.fppfPrecoverage H.left ∧ η.app (op (pullback f (Over.homMk q hq : Over.mk a ⟶ Over.mk m))) ((coequalizer.π (uliftYoneda.{max (u + 1) v}.map s) (uliftYoneda.{max (u + 1) v}.map t)).app (op (pullback f (Over.homMk q hq : Over.mk a ⟶ Over.mk m))) (ULift.up (pullback.snd f (Over.homMk q hq : Over.mk a ⟶ Over.mk m)))) = ULift.up (pullback.fst f (Over.homMk q hq : Over.mk a ⟶ Over.mk m) ≫ f)) ∧ ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type (max (u + 1) v)), Function.Bijective (fun k : uliftYoneda.{max (u + 1) v}.obj (Over.mk m) ⟶ G.obj ↦ η ≫ k)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d2a7e548",
+  "group": "Q46",
+  "result": "pass",
+  "note": "I read the item, all 7 statement-dependency records, the module, the report, the Mathlib Fpqc and Yoneda declarations, and Stacks Tags 03C5 and 03BM. Every hypothesis is exact: s,t are maps over S; q is finite locally free and surjective; IsIso of pullback.lift s t is the kernel-pair condition. Every clause is present: {q} is an fppf and an fpqc covering; fppf ≤ fpqc; absolute representables are fppf sheaves; there is a unique m with mq = a; the Hom_S relation is an Equivalence; P is the coequalizer of Yoneda maps with η pinned by π ≫ η = uliftYoneda.map (homMk q hq); η is injective on every H; the local lift is on the cover H ×_M U → H with an explicit evaluation; h_M is a sheaf; precomposition with η is bijective into every fppf sheaf at Type (max (u+1) v). The statement is verbatim the file signature, the only sorry is the theorem's proof, and the docstrings carry the source place and blueprint id. The node differs from live only in lean; no new nodes; the citer finite-flat-affine-relation-quotient is the affine special case, not a duplicate. Edge cases checked: empty U and M, q = id, empty or non-affine H, arbitrary S. Not recompiled, per instructions. One advisory: the citer uses Type u, which follows from this statement by ULift. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T091432-L-3342123",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

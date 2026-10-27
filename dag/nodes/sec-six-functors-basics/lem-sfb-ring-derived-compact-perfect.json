@@ -1,0 +1,350 @@
+{
+ "id": "lem-sfb-ring-derived-compact-perfect",
+ "kind": "statement",
+ "title": "Compact objects in the derived category of a ring are perfect",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $A$ be a commutative ring and let $D(A)$ denote the unbounded derived category of $A$-modules [def-weil-abstract-derived-category], with small coproducts represented by termwise direct sums of complexes. Let $E\\in D(A)$ be compact [def-pc-compact-object], meaning that for every small family $(M_i)_{i\\in I}$ the canonical map $\\bigoplus_{i\\in I}\\operatorname{Hom}_{D(A)}(E,M_i)\\to\\operatorname{Hom}_{D(A)}(E,\\bigoplus_{i\\in I}M_i)$ is bijective. Then $E$ is perfect [def-pc-perfect-ring-complex]: there is a bounded cochain complex $F^\\bullet$ of finitely generated projective $A$-modules and an isomorphism $E\\cong F^\\bullet$ in $D(A)$. Equivalently its terms can be taken to be direct summands of finite free $A$-modules: for every degree $r$ there are $n_r\\geq0$ and $A$-linear maps $F^r\\xrightarrow{i_r}A^{n_r}\\xrightarrow{p_r}F^r$ with $p_ri_r=1$. No Noetherian hypothesis on $A$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07LT, proposition-perfect-is-compact, implication (2) to (1), with definition-perfect for the bounded finite-projective model."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-pc-compact-object",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a complex $K^\\bullet$ representing $E$. For $n\\geq0$ form $T_n$ with zero terms below $n$, term $K^n/\\operatorname{im}d^{n-1}$ in degree $n$, and terms $K^r$ for $r>n$, with the induced differentials. The canonical quotient maps give a chain map $K^\\bullet\\to\\bigoplus_{n\\geq0}T_n$: in degree $r$ only $0\\leq n\\leq r$ can contribute. By [lem-pc-derived-module-direct-sums] the termwise sum $\\bigoplus_{n\\geq0}T_n$ with the images of its coprojections is the coproduct in $D(A)$, so compactness [def-pc-compact-object] expresses its derived image as a finite sum of maps through individual summands. Projecting to an index $n$ outside that finite set gives the zero morphism $E\\to Q(T_n)$. For every $r\\geq n$ its cohomology map is the identity on $H^r(K)$, by the displayed quotient construction and [def-weil-abstract-derived-category]. Hence $H^r(E)=0$ for every $r\\geq n$. In particular choose an upper cohomological bound $b=n-1$.",
+   "uses": [
+    "def-pc-compact-object",
+    "def-weil-abstract-derived-category",
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07LT, proposition-perfect-is-compact, converse, first paragraph (canonical lower truncations)."
+   }
+  },
+  {
+   "text": "Replace $K$ by the complex $C$ equal to $K$ below $b$, to $\\ker(d_K^b)$ in degree $b$, and to zero above $b$. Its inclusion into $K$ is a quasi-isomorphism: it preserves cohomology through degree $b$ and both cohomologies vanish above $b$. Apply [lem-sfb-subcategory-left-resolution] to $C$, with $\\mathcal P$ the class of all free $A$-modules, including zero. Every module is a quotient of the free module on its underlying set, by sending the generator labelled $x$ to $x$, so the covering hypothesis holds. We obtain a quasi-isomorphism $P\\to C$ with free terms and $P^r=0$ for $r>b$. Thus $Q(P)\\cong E$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sfb-subcategory-left-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07LT, converse, bounded-above free replacement; derived.tex Tag 05T7, lemma-subcategory-left-resolution (1), after explicit good upper truncation."
+   }
+  },
+  {
+   "text": "Let $L_m=\\sigma_{\\geq-m}P$ for $m\\geq0$, the complex equal to $P$ in degrees $r\\geq-m$ and zero below. The inclusions $t_m:L_m\\to L_{m+1}$ have degreewise union $P$. Put $B=\\bigoplus_mL_m$, and let $s$ carry the $m$th summand to the $(m+1)$st by $t_m$. The maps $1-s:B\\to B$ and $B\\to P$ (sum of the inclusions) form a short exact sequence of complexes. Indeed the first nonzero coordinate proves injectivity of $1-s$; modulo its image an element of finite support is moved to a single sufficiently late coordinate, where it is zero exactly when its image in $P$ is zero. Every element of $P$ lies in a sufficiently late $L_m$, giving surjectivity. By [lem-weil-pbc-complex-ses-triangle] this gives the telescope distinguished triangle $Q(B)\\xrightarrow{1-s}Q(B)\\to Q(P)\\to Q(B)[1]$. Since termwise sums compute the coproducts of $D(A)$ [lem-pc-derived-module-direct-sums], $Q(B)=\\bigoplus_mQ(L_m)$ with $Q(1-s)$ as $1-\\mathrm{shift}$, and [lem-pc-compact-hom-hocolim] applies to the compact $E$. The isomorphism $E\\to Q(P)$ factors through some $Q(L_m)$. Compose the inclusion with $Q(P)\\cong E$ to obtain maps $\\varphi:E\\to Q(L_m)$ and $\\psi:Q(L_m)\\to E$ with $\\psi\\varphi=1_E$. This $L_m$ is bounded and free, but its ranks need not yet be finite.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-compact-hom-hocolim",
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07LT, converse, stupid truncations and factorization of the identity; Tag 07LR, lemma-commutes-with-countable-sums, telescope calculation; derived.tex Tag 094A."
+   }
+  },
+  {
+   "text": "Fix bounds $[a,b]$ for this bounded free complex $L$. We induct on $c=a,a+1,\\ldots,b+1$, maintaining maps $E\\xrightarrow{\\varphi}Q(L)\\xrightarrow{\\psi}E$ with composite $1_E$, the same bounds, free terms, and finite free terms in degrees $r<c$. At $c=a$ the last condition is vacuous. For the induction step $c\\leq b$, choose a basis $L^c=\\bigoplus_{\\lambda\\in\\Lambda}A$. The images of the finitely many basis vectors of $L^{c-1}$ have support in a finite subset $S_0\\subset\\Lambda$ (if $c=a$, the source is zero). Consequently projection in degree $c$ defines a chain map $\\pi_0:L\\to\\bigoplus_{\\lambda\\notin S_0}A[-c]$: its only chain-map condition is $\\pi_0d^{c-1}=0$. The termwise sum $\\bigoplus_{\\lambda\\notin S_0}A[-c]$ is the coproduct of the $A[-c]$ in $D(A)$ [lem-pc-derived-module-direct-sums], so compactness [def-pc-compact-object] says $Q(\\pi_0)\\varphi$ factors through a finite subcoproduct indexed by $S_1\\subset\\Lambda\\setminus S_0$. Enlarge $S_0$ to $S=S_0\\cup S_1$. The resulting projection $\\pi:L\\to\\bigoplus_{\\lambda\\notin S}A[-c]$ satisfies $Q(\\pi)\\varphi=0$, because it kills every summand in the finite factorization.",
+   "uses": [
+    "def-pc-compact-object",
+    "lem-pc-derived-module-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07LT, converse, finite-basis induction paragraph, through the enlargement of the finite subset."
+   }
+  },
+  {
+   "text": "Let $L'=\\ker\\pi$ degreewise. It agrees with $L$ except that $(L')^c=A^S$, and its inherited differentials make it a subcomplex since $\\pi$ is a chain map. Projection $\\pi$ is surjective in every degree, so [lem-weil-pbc-complex-ses-triangle] gives the distinguished triangle $Q(L')\\xrightarrow{j}Q(L)\\xrightarrow{Q(\\pi)}\\bigoplus_{\\lambda\\notin S}A[-c]\\to Q(L')[1]$. Apply clause (ii) of [lem-weil-pbc-hom-into-triangle-exact] with $W=E$ to the equality $Q(\\pi)\\varphi=0$. It supplies $\\varphi':E\\to Q(L')$ with $j\\varphi'=\\varphi$. Set $\\psi'=\\psi j$; then $\\psi'\\varphi'=\\psi\\varphi=1_E$. The new complex has unchanged bounds, all terms remain free, and now every term in degree $r<c+1$ is finite free. This proves the induction step. After $b-a+1$ steps, the identity of $E$ factors through a bounded finite free complex $F$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07LT, converse, kernel triangle and lifting in the finite-basis induction."
+   }
+  },
+  {
+   "text": "Write the resulting maps as $i:E\\to Q(F)$ and $p:Q(F)\\to E$ with $pi=1_E$. Complete $i$ to a distinguished triangle $E\\xrightarrow{i}Q(F)\\to C\\xrightarrow{\\delta}E[1]$, using the triangulated structure in [def-weil-abstract-derived-category]. Applying the zero-composite clause of [lem-weil-pbc-hom-into-triangle-exact] to its rotated triangle gives $i[1]\\delta=0$ (the rotation sign is irrelevant to zero). Multiplying by $p[1]$ gives $\\delta=0$. Hence [lem-pc-derived-zero-third-split] gives $Q(F)\\cong E\\oplus C$. The finite free terms of $F$ are finitely generated projective: generators are the standard basis, and any map from a finite free module lifts along a surjection by lifting its basis images, as in [def-weil-pbc-projective-module]. Thus $Q(F)$ is perfect by [def-pc-perfect-ring-complex]. Applying [lem-sf-perfect-ring-summand] proves that $E$ is perfect, which by the same definition supplies the required bounded finite projective model.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-pc-derived-zero-third-split",
+    "def-weil-pbc-projective-module",
+    "def-pc-perfect-ring-complex",
+    "lem-sf-perfect-ring-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07LT, final converse paragraph; Tag 066S, lemma-summands-perfect. The existing retraction is converted to a biproduct by the zero-third-map splitting lemma instead of splitting a new idempotent."
+   }
+  },
+  {
+   "text": "For the final equivalent formulation, let $M$ be any finitely generated projective term in the bounded model. Choose a finite set of generators, giving a surjection $q:A^n\\to M$. The lifting characterization in [def-weil-pbc-projective-module], applied to $1_M$, gives $i:M\\to A^n$ with $qi=1_M$; take $p=q$. Conversely, for a specified pair $i:M\\to A^n$, $p:A^n\\to M$ with $pi=1$, the elements $p(e_j)$ generate $M$, and a map $f:M\\to N$ lifts along a surjection $N'\\to N$ by first lifting the basis images of $fp:A^n\\to N$ and then composing the lift with $i$. Thus $M$ is finitely generated projective. Applying this separately to every term proves the stated equivalence, including rank zero outside the bounded interval.",
+   "uses": [
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07LT and Definition 0656, definition-perfect; elementary finite-generator/projective splitting argument (algebra.tex Tag 00NX)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object",
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-module-direct-sums",
+  "lem-sfb-subcategory-left-resolution",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-compact-hom-hocolim",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-pc-derived-zero-third-split",
+  "def-weil-pbc-projective-module",
+  "def-pc-perfect-ring-complex",
+  "lem-sf-perfect-ring-summand"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07LT, proposition-perfect-is-compact, implication (2) to (1); the finite-projective splitting equivalence is expanded, and the existing retract is split using the zero-third-map lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compact object in the unbounded derived category of modules over a ring is represented by a bounded complex of finitely generated projective modules",
+   "results": "Hits: instHasExtModuleCatOfSmall, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, CochainComplex.IsKProjective, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CochainComplex.isKProjective_of_projective, DerivedCategory.IsGE",
+   "date": "2026-10-24",
+   "verdict": "no match: derived-category existence, cohomological boundedness and K-projectivity do not imply a finite projective model for a compact object."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompactObject|compact.*projective|projective.*compact|[Pp]erfect",
+   "results": "0 hits; Mathlib/Algebra/Homology",
+   "date": "2026-10-24",
+   "verdict": "no match: derived-category existence, cohomological boundedness and K-projectivity do not imply a finite projective model for a compact object."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An object in the derived category of modules over a ring is compact if and only if it is isomorphic to a bounded complex of finitely generated projective modules",
+   "results": "Hits: HasDerivedCategory, HasDerivedCategory.standard, DerivedCategory, IsProjective.iff_projective, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, ModuleCat.enoughProjectives, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, ModuleCat.projective_of_categoryTheory_projective",
+   "date": "2026-10-24",
+   "verdict": "no match: derived-category existence, cohomological boundedness and K-projectivity do not imply a finite projective model for a compact object."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: derived-category existence, cohomological boundedness and K-projectivity do not imply a finite projective model for a compact object."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes of modules over any ring are exactly compact objects of its derived category",
+   "results": "Hits: instHasExtModuleCatOfSmall, CategoryTheory.hasExt_iff, DerivedCategory, CategoryTheory.hasExt_of_hasDerivedCategory, HasDerivedCategory, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-24",
+   "verdict": "no match: derived-category existence, cohomological boundedness and K-projectivity do not imply a finite projective model for a compact object."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompactObject|compact.*projective|projective.*compact|[Pp]erfect",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "Algebra/Homology"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give derived-category existence, bounds or K-projectivity, not compact-to-finite-projective replacement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect complexes of modules over a ring are exactly the compact objects of the derived category",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HasDerivedCategory",
+     "HasDerivedCategory.standard",
+     "DerivedCategory",
+     "HomologicalComplexUpToQuasiIso",
+     "HomologicalComplexUpToQuasiIso.Q",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt",
+     "instHasExtModuleCatOfSmall"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give derived-category existence, bounds or K-projectivity, not compact-to-finite-projective replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObject\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give derived-category existence, bounds or K-projectivity, not compact-to-finite-projective replacement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact object in the unbounded derived category of modules over a ring is represented by a bounded complex of finitely generated projective modules",
+   "results": {
+    "hits": 8,
+    "top": [
+     "instHasExtModuleCatOfSmall",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "CochainComplex.IsKProjective",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+     "CochainComplex.isKProjective_of_projective",
+     "DerivedCategory.IsGE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give derived-category existence, bounds or K-projectivity, not compact-to-finite-projective replacement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactness in the derived category implies existence of a bounded finite projective complex",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+     "DerivedCategory.IsLE",
+     "CochainComplex.IsKProjective",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits give derived-category existence, bounds or K-projectivity, not compact-to-finite-projective replacement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-compact-objects-perfect",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09M8, proposition-compact-is-perfect, compact-to-perfect implication. Affine reduction in Tag 09M8, through perfect.tex Tag 09M1, final paragraph: the module derived-category compact/perfect theorem, more-algebra.tex Tag 07LT.",
+   "via": [
+    "lem-sfb-space-compact-objects-perfect",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ring-derived-compact-perfect",
+  "worker": "Q88",
+  "summary": "Followed Stacks 07LT compact-to-perfect: explicit truncation bound, bounded-above free resolution, telescope retraction, degreewise finite-support induction and splitting of the final retract. Reused existing support nodes; no new node. Statement and statement dependencies retained. Mathlib searches rerun and read with a second phrasing.",
+  "blueprint": "Realizes the inherited affine ring prerequisite to Proof (3) of det-thm-sf-ctf-stability-direct-images, via 0CRV, 09M8 and 09M1: the 07LT compact-to-perfect implication. The supplied ancestor command reports None; retained the inherited from.node=null and via chain, with its already precise from.place. Searched the whole blueprint for compact/perfect, 07LT, bounded/free and 066S; none states this ring implication.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-subcategory-left-resolution",
+    "why": "Generic free resolution of a term-bounded complex (05T7), after explicit good truncation; no node of this unit supplies this supporting ring/triangulated-category fact."
+   },
+   {
+    "node": "lem-pc-compact-hom-hocolim",
+    "why": "Generic compact Hom telescope factorization (094A); no node of this unit supplies this supporting ring/triangulated-category fact."
+   },
+   {
+    "node": "lem-sf-perfect-ring-summand",
+    "why": "Generic closure of ring-perfect complexes under direct sums splitting (066S); no node of this unit supplies this supporting ring/triangulated-category fact."
+   },
+   {
+    "node": "lem-pc-derived-module-direct-sums",
+    "why": "Generic fact (Stacks 07D9/0A5L) that termwise direct sums of complexes of A-modules are the coproducts of D(A), needed to apply compactness in steps 1, 4 and the telescope lemma in step 3; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-subcategory-left-resolution",
+  "lem-pc-compact-hom-hocolim",
+  "lem-sf-perfect-ring-summand",
+  "lem-pc-derived-module-direct-sums"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-7f153027a",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-7f153027a (reviewer sub-agent of L); spot-checked: Read Stacks 07LT (2)=>(1) in full, plus 0656 and 0A5L. The item's 7 steps follow 07LT correctly. Step 1: good truncations T_n, with H^n(T_n)=H^n(K) checked. Step 2: tau_{<=b} then 05T7 with free modules (needs term-bounded input, satisfied). Step 3: the telescope SES is checked; 0152 gives the triangle and 094A the factorization. Steps 4-5: the finite-support induction with a correct invariant; 0149(ii) gives the lift and psi'phi'=1. Step 6: the split-triangle variant of the idempotent step is valid (delta=0 via p[1]i[1]=1, zero-third split, then 066S). Step 7: f.g. projective <=> retract of A^n. Edge cases checked: zero ring, E=0, b<=-1, c=a, S exhausting Lambda. No duplicate: the 07LT hits are Noetherian scheme versions or the converse. No cycle, no SGA, statement unchanged. Accepted tool_uses: 05T7, 094A, 066S. FIX (C1): steps 1, 3 and 4 used, without a citation, the fact that termwise direct sums are coproducts in D(A). They now cite the existing reviewed node lem-pc-derived-module-direct-sums (07D9/0A5L), which is added to uses, proof_deps and split_report.tool_uses. Steps 1 and 4 are set to elementary=false. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-ring-derived-compact-perfect.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.RingDerivedCompactPerfect",
+  "declaration": "DerivedCategory.isPerfectRingComplex_of_isCompactObject",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/RingDerivedCompactPerfect.lean",
+  "statement": "theorem isPerfectRingComplex_of_isCompactObject {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)] (E : DerivedCategory (ModuleCat.{u} A)) (hE : IsCompactObject.{u} E) : IsPerfectRingComplex E ∧ ∃ (F : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ), F.IsStrictlyGE a ∧ F.IsStrictlyLE b ∧ (∀ r : ℤ, ∃ (n : ℕ) (i : F.X r →ₗ[A] (Fin n → A)) (p : (Fin n → A) →ₗ[A] F.X r), p.comp i = LinearMap.id) ∧ Nonempty (E ≅ Q.obj F)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc72c6c59",
+  "group": "N7",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and Stacks 07LT (2)=>(1): CommRing A only; IsCompactObject.{u} E is exactly the canonical direct-sum Hom bijectivity over small families; first conjunct is the recorded IsPerfectRingComplex E; second conjunct gives a bounded model with p.comp i = id retractions of Fin n -> A, n=0 allowed. Localization universe w independent; no extra hypotheses; zero ring, E=0, empty family and negative degrees covered. lean.statement is verbatim the file signature; body is sorry only; docstrings carry the source places, blueprint id and 7 proof steps; all dependency records match side-live; imports exist; Worker report and Second reading sections present. No compile because no file changed. Maintainer note: a private theorem compact_perfect in RingDerivedDualizablePerfect.lean:377 already proves the first conjunct (not citable, not a duplicate notion; stage 3 could reuse it)."
+ }
+}

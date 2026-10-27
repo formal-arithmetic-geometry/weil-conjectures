@@ -1,0 +1,259 @@
+{
+ "id": "lem-per-varying-site-system-injective-resolutions",
+ "kind": "statement",
+ "title": "Bounded-below injective resolutions in a category of varying-site coefficient systems",
+ "statement": "Let $I$ be a small category and let $\\mathcal C_i$ be small sites [def-weil-size-convention, def-weil-pbc-sites-and-cohomology]. For every $a:j\\to i$ give a morphism of sites $f_a:\\mathcal C_j\\to\\mathcal C_i$, with exact additive inverse image on abelian sheaves [lem-weil-pbc-site-pullback-abelian-exact], and give the canonical identity and composition identifications satisfying their coherence laws. Define $\\mathscr S$ to have objects $(F_i,\\phi_a)$, where $F_i\\in\\operatorname{Ab}(\\mathcal C_i)$ and $\\phi_a:f_a^{-1}F_i\\to F_j$ obey the identity and cocycle laws; a morphism $(F,\\phi)\\to(G,\\psi)$ is a family $h_i:F_i\\to G_i$ satisfying $h_j\\phi_a=\\psi_a f_a^{-1}(h_i)$. Then $\\mathscr S$ is an abelian category [def-sp-abelian] whose kernels and cokernels are computed at every $i$. It has enough injectives [def-sp-injective-resolutions], and each evaluation $\\operatorname{ev}_i:\\mathscr S\\to\\operatorname{Ab}(\\mathcal C_i)$ is exact and sends injective objects to injective objects. For every integer $b$ and every cochain complex $K$ of $\\mathscr S$ with $K^n=0$ for $n<b$, there is a degreewise monomorphic quasi-isomorphism $s:K\\to J$ of system complexes [def-weil-abstract-derived-category], with $J^n=0$ for $n<b$ and every $J^n$ injective in $\\mathscr S$. In particular all $J_i^n$ are injective abelian sheaves and all $s_i:K_i\\to J_i$ are quasi-isomorphisms. No filteredness, finite-cover hypothesis, or colimit site is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EXZ, lemma-colim-sites-injective, product-of-right-adjoints construction; combined with derived.tex Tag 013K, lemma-injective-resolutions-exist (3). The abelian system-category and evaluation formulation is an agent generalization of the same construction to a small index category."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-per-varying-site-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-per-varying-site-system-abelian-componentwise to obtain an Abelian structure, additive exact evaluations and the two componentwise universal-property criteria. The statement is used without alteration.",
+   "uses": [
+    "lem-per-varying-site-system-abelian-componentwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+   }
+  },
+  {
+   "text": "Construct products of systems directly. At j take the product of the component sheaves. The a-transition has each projection equal to inverse image of the corresponding component projection followed by its transition. Projection tests, naturality of e.unit and e.comp and the component system laws prove identity and cocycle. The component projections are system maps; the componentwise product lift is compatible and is the unique such lift, again by projection tests. This constructs HasProducts for all index sets in universe u, including the empty set.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+   }
+  },
+  {
+   "text": "Take the mono-preserving left adjoint from lem-per-varying-site-system-evaluation-adjoints. The right-adjoint injectivity lemma proves that evaluation carries injective systems to injective component sheaves.",
+   "uses": [
+    "lem-per-varying-site-system-evaluation-adjoints",
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 09WG (5)-(7) and 09WH, free evaluation construction, generalized to arbitrary small categories and specified inverse-image coherence; cofree construction from sites-cohomology.tex Tag 0EXZ."
+   }
+  },
+  {
+   "text": "For a system F choose injective embeddings u_i:F_i→A_i in the abelian sheaf categories. Choose the right evaluation adjoints R_i and their adjunctions from lem-per-varying-site-system-evaluation-adjoints. Exact evaluation preserves monomorphisms, so the right-adjoint injectivity lemma makes R_i A_i injective. The system G=∏_i R_i A_i is injective by product-injectives. Let f:F→G have i-projection the adjunct of u_i. If x≫f=y≫f, project to R_i A_i and transpose; naturality of the Hom bijection gives ev_i(x)≫u_i=ev_i(y)≫u_i. Cancel u_i. Equality at every i is equality of compatible families, so x=y and f is monic. This constructs an InjectivePresentation of every F, hence EnoughInjectives. The same argument works when I is empty by extensionality of empty families.",
+   "uses": [
+    "lem-per-varying-site-system-evaluation-adjoints",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-exc-rg-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-product-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0EXZ, lemma-colim-sites-injective, category of systems; agent generalization to specified coherent inverse images over any small category."
+   }
+  },
+  {
+   "text": "Apply the existing bounded-below monomorphic injective-resolution theorem with the given b and K. Its complex J and map s have the required lower bound, injective terms, component monomorphisms and system quasi-isomorphism. Evaluation preserves injectives by the preceding argument, giving the injective component terms. Additive evaluation preserves finite limits and colimits, hence homology, and therefore takes s to a quasi-isomorphism at every vertex. No hypothesis on filtering or a colimit site has been used.",
+   "uses": [
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist (3), applied to the system category; homology.tex Tag 010N for homology under exact evaluation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-varying-site-system-abelian-componentwise",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-per-varying-site-system-evaluation-adjoints",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-product-injectives",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0EXZ product-of-cofree construction, formulated via adjunction naturality; spaces-simplicial.tex Tags 09WG, 09WH; derived.tex Tag 013K(3). The abelian and specified-coherence adjoint constructions are isolated into two strict structural steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded below complexes of systems of abelian sheaves on varying sites admit compatible injective resolutions with injective terms at every site",
+   "results": "{\"t\": \"2026-10-24T10:56:39Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded below complexes of systems of abelian sheaves on varying sites admit compatible injective resolutions with injective terms at every site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instHasInjectiveResolutions\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CochainComplex.cm5b.I_X\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolution\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CochainComplex.isKInjective_of_injective\"], \"digest\": \"f5845adfcb0ae2a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic object injective resolutions and K-injectivity are present, but no category of varying-site systems with enough injectives and injective-preserving evaluation is supplied; constructing that category and these properties is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "injectiveResolution|InjectiveResolution|injective.*[Ss]ystem",
+   "results": "{\"t\": \"2026-10-24T10:57:12Z\", \"tool\": \"grep\", \"query\": \"injectiveResolution|InjectiveResolution|injective.*[Ss]ystem\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\"], \"digest\": \"d6515b392b4ae6e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic object injective resolutions and K-injectivity are present, but no category of varying-site systems with enough injectives and injective-preserving evaluation is supplied; constructing that category and these properties is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A category of sections of a diagram of sheaf categories with exact inverse images has enough injectives and exact evaluation preserving injectives",
+   "results": "{\"t\": \"2026-10-24T10:57:12Z\", \"tool\": \"leansearch\", \"query\": \"A category of sections of a diagram of sheaf categories with exact inverse images has enough injectives and exact evaluation preserving injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.eval_section_injective_of_eventually_injective\", \"CategoryTheory.sheafSections\", \"CategoryTheory.Sheaf.hasExactColimitsOfShape\", \"TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective\", \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"CategoryTheory.sheafSectionsNatIsoEvaluation\", \"CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf\", \"CategoryTheory.sheafSectionsNatIsoEvaluation_inv_app\"], \"digest\": \"dd76c90f49abdf07\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic object injective resolutions and K-injectivity are present, but no category of varying-site systems with enough injectives and injective-preserving evaluation is supplied; constructing that category and these properties is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-24T10:57:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.InjectiveResolution, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.InjectiveResolution.extMk_hom\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc\"], \"digest\": \"95700b6626edfba6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic object injective resolutions and K-injectivity are present, but no category of varying-site systems with enough injectives and injective-preserving evaluation is supplied; constructing that category and these properties is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective objects and bounded below injective resolutions in the total topos of an indexed family of sites with geometric transition morphisms",
+   "results": "{\"t\": \"2026-10-24T10:57:13Z\", \"tool\": \"leanfinder\", \"query\": \"Injective objects and bounded below injective resolutions in the total topos of an indexed family of sites with geometric transition morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"CategoryTheory.InjectiveResolution.injective\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolutions\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolution\", \"CategoryTheory.InjectiveResolution.self\", \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"CategoryTheory.injectiveResolution\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\"], \"digest\": \"8b6d12eadb9755e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic object injective resolutions and K-injectivity are present, but no category of varying-site systems with enough injectives and injective-preserving evaluation is supplied; constructing that category and these properties is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "total.*[Ss]ite|[Ss]ite.*[Ss]ystem|[Ss]ystem.*[Ss]heaf",
+   "results": "{\"t\": \"2026-10-24T11:00:40Z\", \"tool\": \"grep\", \"query\": \"total.*[Ss]ite|[Ss]ite.*[Ss]ystem|[Ss]ystem.*[Ss]heaf\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic object injective resolutions and K-injectivity are present, but no category of varying-site systems with enough injectives and injective-preserving evaluation is supplied; constructing that category and these properties is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category of abelian sheaf systems with exact inverse image transition functors has enough injectives and evaluation preserves injectives",
+   "results": "{\"t\": \"2026-10-24T11:23:50Z\", \"tool\": \"leanfinder\", \"query\": \"A category of abelian sheaf systems with exact inverse image transition functors has enough injectives and evaluation preserves injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.sheafIsAbelian\", \"CategoryTheory.IsGrothendieckAbelian.enoughInjectives\", \"instAbelianCondensedMod\", \"CategoryTheory.Sheaf.isLocallyInjective_forget\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex\"], \"digest\": \"6f9c6f5ae1f76e01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf injectivity and ordinary injective resolutions do not construct the varying-site system category or the required evaluation properties."
+  },
+  {
+   "tool": "grep",
+   "query": "([Vv]arying|[Ss]ystem|[Ss]ection).*([Ii]njective|[Aa]djoint)|([Ii]njective|[Aa]djoint).*([Vv]arying|[Ss]ystem)",
+   "results": "{\"t\": \"2026-10-24T11:24:19Z\", \"tool\": \"grep\", \"query\": \"([Vv]arying|[Ss]ystem|[Ss]ection).*([Ii]njective|[Aa]djoint)|([Ii]njective|[Aa]djoint).*([Vv]arying|[Ss]ystem)\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\"], \"digest\": \"6ad968bd74bc1eb6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf injectivity and ordinary injective resolutions do not construct the varying-site system category or the required evaluation properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Enough injectives in categories of varying site sheaf systems, bounded below degreewise monomorphic injective resolutions and injective preserving evaluation",
+   "results": "{\"t\": \"2026-10-24T11:24:20Z\", \"tool\": \"leansearch\", \"query\": \"Enough injectives in categories of varying site sheaf systems, bounded below degreewise monomorphic injective resolutions and injective preserving evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.of\", \"CategoryTheory.IsGrothendieckAbelian.enoughInjectives\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolutions\", \"CategoryTheory.Injective\", \"CategoryTheory.HasInjectiveResolutions.mk\", \"CategoryTheory.InjectiveResolution.of_def\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolution\", \"CategoryTheory.HasInjectiveResolutions\"], \"digest\": \"8033282a958c42a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf injectivity and ordinary injective resolutions do not construct the varying-site system category or the required evaluation properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-24T11:24:20Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.InjectiveResolution, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic sheaf injectivity and ordinary injective resolutions do not construct the varying-site system category or the required evaluation properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-finite-cover-derived-sections-continuity",
+  "date": "2026-10-24",
+  "group": "Q139"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The passage from finite-stage Leray to the limit spectral sequence in ILO XX 4.4, used in the completion part of proof Step 3 of the blueprint ancestor. Compatible resolutions used before applying continuity, refining the bounded-below derived-sections tool.",
+   "via": [
+    "lem-per-finite-cover-derived-sections-continuity",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-varying-site-system-injective-resolutions",
+  "worker": "stage1",
+  "summary": "Constructed the abelian system category and an actual monomorphic embedding into an injective system via cofree evaluation and products. Free evaluation ensures component injectivity; existing 013K (3) supplies the complex resolution. One new node isolates the two adjunction constructions, not any clause of the item.",
+  "blueprint": "The passage from finite-stage Leray to the limit spectral sequence in ILO XX 4.4, used in the completion part of proof Step 3 of the blueprint ancestor. Compatible resolutions used before applying continuity, refining the bounded-below derived-sections tool.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "General-site existence of sectionwise products for the cofree embedding."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "Generic bounded-below monomorphic injective-resolution theorem after the system category has enough injectives; no unit-specific replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-complex-injective-resolution-mono"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-8a4955613",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-8a4955613 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-varying-site-evaluation-adjoints, every cited statement, and Stacks 0EXZ (sites-cohomology.tex lemma-colim-sites-injective), 09WG (5)-(7) and 013K (3). Statement and stmt_deps are unchanged from the base. New node: I checked both adjunctions by hand. L_iA has component ⊕_{a:j→i} f_a^{-1}A, transitions go to the a∘c summand, and the Hom inverse is φ_a f_a^{-1}h. For R_iA = ∏_{a:i→j} f_{a,*}A, the transposed compatibility at k=i, b=id forces g^♭_{j,c} = h∘φ_c, so the adjunction holds by the cocycle law. Stacks' G_i = (∏_k R_kA_k)_i; the node's transition f_c^{-1}f_{cb,*} = f_c^{-1}f_{c,*}f_{b,*} followed by the counit corrects Stacks' f_b^{-1} typo. Small cases checked: empty I, empty Hom sets, discrete I, a single arrow, a one-object monoid. The node has statement only, is self-contained, cites size and site definitions, and has 5 searches. Not a duplicate: total-site-component-restriction is simplicial and free-only; semisimplicial-ringed-total-category is Δ_inj; colimit-of-sites-injective-system is cofiltered and componentwise only; arrow-product-transitions nodes give strict q_a without an adjunction. Item steps: (1) componentwise kernels and cokernels via site-pullback-abelian-exact, coimage→image iso is a system iso; (2) L_i preserves monos (sum = filtered colimit of finite subsums, exact by the filtered-colimits node), then right-adjoint-preserves-injectives, whose statement needs only mono preservation; (3) R_i preserves injectives because ev_i is exact; products are sectionwise by sheafification-exact (1); product-injectives holds in any abelian category; the (j,id) projection recovers u_j, so γ is monic; (4) 013K(3) with the same bound b, then componentwise injectivity and quasi-isomorphism via exact-functor-preserves-homology (c). No hypothesis is missing and no SGA source is used. The unit route reaches sk-thm-p1 and sk-thm-properbasechange, so the declared tool_uses are harmless; accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.VaryingSiteSystemInjectiveResolutions",
+  "declaration": "CategoryTheory.varyingSiteSystem_injective_resolutions",
+  "declarations": [
+   "CategoryTheory.varyingSiteSystem_injective_resolutions"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/VaryingSiteSystemInjectiveResolutions.lean",
+  "statement": "theorem varyingSiteSystem_injective_resolutions {I : Type u} [SmallCategory I] (D : VaryingSiteDiagram.{u} I) (e : VaryingSiteCoherence D) : ∃ (_ : Abelian (VaryingSiteSystem D e)), ∃ (_ : ∀ i : I, (VaryingSiteSystem.evaluation D e i).Additive), EnoughInjectives (VaryingSiteSystem D e) ∧ (∀ i : I, PreservesFiniteLimits (VaryingSiteSystem.evaluation D e i) ∧ PreservesFiniteColimits (VaryingSiteSystem.evaluation D e i) ∧ ∀ F : VaryingSiteSystem D e, Injective F → Injective (F.obj i)) ∧ (∀ (F G : VaryingSiteSystem D e) (h : F ⟶ G) (c : KernelFork h), Nonempty (IsLimit c) ↔ ∀ i : I, Nonempty (IsLimit ((VaryingSiteSystem.evaluation D e i).mapCone c))) ∧ (∀ (F G : VaryingSiteSystem D e) (h : F ⟶ G) (c : CokernelCofork h), Nonempty (IsColimit c) ↔ ∀ i : I, Nonempty (IsColimit ((VaryingSiteSystem.evaluation D e i).mapCocone c))) ∧ ∀ (b : ℤ) (K : CochainComplex (VaryingSiteSystem D e) ℤ), (∀ n : ℤ, n < b → IsZero (K.X n)) → ∃ (J : CochainComplex (VaryingSiteSystem D e) ℤ) (s : K ⟶ J), (∀ n : ℤ, n < b → IsZero (J.X n)) ∧ (∀ n : ℤ, Injective (J.X n)) ∧ (∀ n : ℤ, Mono (s.f n)) ∧ QuasiIso s ∧ (∀ (i : I) (n : ℤ), Injective ((J.X n).obj i)) ∧ ∀ i : I, QuasiIso (((VaryingSiteSystem.evaluation D e i).mapHomologicalComplex (ComplexShape.up ℤ)).map s)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be9c9afce",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Read item, new def node def-per-varying-site-system, all stmt_deps (IsSiteForCoverings, sitePullback_abelian_exact, Abelian, Injective, DerivedCategory/QuasiIso), both modules and report. Clause-by-clause match: small I and sites in common universe u per size convention; morphism of sites = Mathlib IsContinuous + set-level sheafPullback finite-limit exact (def (3)); additive/exact_limits fields implied (left adjoint; lem-weil-pbc-site-pullback-abelian-exact); coherence unit/comp laws checked by hand; transition/cocycle/Hom square directions correct; conclusion gives ∃Abelian, additive exact evaluations preserving injectives, kernel/cokernel limit iff componentwise, EnoughInjectives, bounded-below degreewise-mono injective qis resolution with componentwise injectivity and qis. Edge cases (empty I, empty Homs, noninvertible transitions, any b) fine. Item base diff: only lean record + new stmt_dep. No duplicate system category in project/Mathlib. lean.statement verbatim for both nodes; category laws are sorried Prop obligations listed in def node declarations with docstrings. Notes only: arbitrary coherent identifications generalize 'canonical' (theorem ∀ e, true); redundant exactness fields. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261026T092350-L-3426633",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

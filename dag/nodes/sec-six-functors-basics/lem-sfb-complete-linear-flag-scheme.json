@@ -1,0 +1,366 @@
+{
+ "id": "lem-sfb-complete-linear-flag-scheme",
+ "kind": "statement",
+ "title": "Projective complete flag scheme with its linear action",
+ "statement": "Let $k$ be a field [def-weil-field] and $n\\geq1$. For a commutative $k$-algebra $A$, a complete flag in $A^n$ means a sequence $0=F_0\\subset F_1\\subset\\cdots\\subset F_n=A^n$ of $A$-submodules such that, locally on $\\operatorname{Spec}A$, each $F_i$ is a direct summand free of rank $i$. Scalar extension sends a flag to the images of its submodules in the extended free module. This functor of $A$ is represented by a $k$-scheme $\\operatorname{Fl}_{n,k}$ [def-pc-scheme, def-pc-representable-functor]. The scheme is projective [def-pc-projective-morphism], proper [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism] over $k$. There is a $k$-scheme action of $\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group] on $\\operatorname{Fl}_{n,k}$ whose action on every algebra's points is $g\\cdot(F_i)_i=(gF_i)_i$. The action is associative and has identity acting trivially. Its $k$-points are exactly complete flags of $k$-linear subspaces in $k^n$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 7.29--7.30 and preceding flag functor, printed p.146; the natural GL action is the action on flags in the quotient construction. Properness and finite type are included in completeness of this projective algebraic scheme."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-representable-functor",
+  "def-pc-projective-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sc-general-linear-group",
+  "def-sfb-complete-linear-flag"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}k$. For $1\\leq i\\leq n$ apply lem-sfb-free-quotient-grassmann-projective with $(N,r)=(n,n-i)$, obtaining $G_i$ and its universal quotient $q_i:\\mathcal O_{G_i}^n\\twoheadrightarrow Q_i$. Let $K_i=\\ker(q_i)$. Locally trivialize $Q_i$ and lift its finitely many basis sections; after shrinking these lifts give a right inverse of $q_i$. Thus the quotient sequence splits locally. On such an affine open, use lem-weil-pbc-affine-tilde-gamma-adjunction to identify modules and quasi-coherent sheaves. Then $K_i$ is a direct summand of a finite free module, hence has a free-open cover by lem-weil-pbc-finite-projective-standard-free-cover; its rank is $i$, since a split decomposition into free modules has ranks adding to $n$ after passage to any residue field. In particular $K_n=\\mathcal O^n$ because $Q_n=0$. Pullback of a split decomposition remains a split decomposition: in local coordinates it is the same inclusion and projection matrices with coefficients mapped to the new ring. Consequently the pullback of $K_i$ is the kernel of the pulled-back quotient under EVERY base change; no flatness hypothesis is needed.",
+   "uses": [
+    "lem-sfb-free-quotient-grassmann-projective",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.30, Grassmannian input; quotient convention from Stacks constructions.tex Tag 089T (lemma-gkn-representable)."
+   }
+  },
+  {
+   "text": "Form $P=\\prod_{i=1}^n G_i$ over $S$ using def-pc-fibre-product, and denote the pulled-back universal quotients and kernels again by $Q_i,K_i$. For $1\\leq i<n$ let $d_i:K_i\\hookrightarrow\\mathcal O_P^n\\twoheadrightarrow Q_{i+1}$, and put $d=\\bigoplus_{i=1}^{n-1}d_i:\\bigoplus K_i\\to\\bigoplus Q_{i+1}$. Both bundles are finite locally free by step 1. On an affine open where they are free, lem-sc-affine-free-map-zero-locus gives a closed subscheme, locally of finite presentation, representing the condition that the pulled-back $d$ is zero. This condition restricts to opens and is local on the test scheme: a sheaf morphism is zero exactly when all its restrictions on an open cover are zero. Hence lem-sc-local-closed-locus-gluing applies, producing a closed immersion $c:Z\\hookrightarrow P$ such that $h:T\\to P$ factors through $Z$ exactly when $h^*d=0$. A direct sum of these maps is zero exactly when every $h^*d_i$ is zero. When $n=1$ these sums are zero bundles, the condition is vacuous, and $Z=P=S$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sc-affine-free-map-zero-locus",
+    "lem-sc-local-closed-locus-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.30, polynomial incidence conditions; scheme-theoretic implementation using the matrix-entry zero loci and gluing in Stacks perfect.tex Tag 0BDL (lemma-locally-closed-where-H0-locally-free)."
+   }
+  },
+  {
+   "text": "For every $S$-scheme $T$, maps $T\\to P$ are tuples of the quotient classes classified by the $G_i$, by def-pc-fibre-product and lem-sfb-free-quotient-grassmann-projective. Each quotient is determined up to quotient-preserving isomorphism by its embedded kernel. By step 1 these kernels are locally direct summands of ranks $i$. Moreover $h^*d_i=0$ means precisely that $K_i$ maps into $\\ker(\\mathcal O_T^n\\to Q_{i+1})=K_{i+1}$. Thus step 2 identifies maps $T\\to Z$ bijectively with flags of locally direct summand subbundles of $\\mathcal O_T^n$; append $K_0=0$. Conversely such subbundles give locally free quotients of ranks $n-i$ and therefore a map to $P$, and the inclusions give its unique factorization through $Z$. These constructions are inverse, since taking the kernel and taking the quotient by an embedded submodule are inverse on quotient classes. They commute with pullback by the local splitting calculation in step 1 and the Grassmannian's base-change clause. Set $\\operatorname{Fl}_{n,k}=Z$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-free-quotient-grassmann-projective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Flag functor and Proposition 7.29; Proposition 7.30, incidence realization. This gives the scheme-valued version of the functor, before restricting to affine schemes."
+   }
+  },
+  {
+   "text": "For $T=\\operatorname{Spec}A$, the unit and quasi-coherent counit of lem-weil-pbc-affine-tilde-gamma-adjunction identify $A$-modules with quasi-coherent modules on $T$, and lem-weil-pbc-spec-tilde-free-module identifies $\\widetilde{A^n}$ with $\\mathcal O_T^n$. This equivalence identifies submodules and quotient classes (kernels and cokernels are characterized by their universal properties). In particular it carries a submodule locally a free direct summand of rank $i$ to exactly such a subbundle, and conversely: restriction to $D(f)$ is localization by lem-weil-pbc-spec-module-tilde-sections, and these opens form a basis. Therefore step 3 gives exactly the algebra-valued functor in the statement, including its embedded submodules, not merely their abstract isomorphism classes. For $A\\to B$, lem-weil-pbc-tilde-pullback-base-change identifies pullback with tensoring by $B$. The split local inclusions of step 1 stay injective after tensoring, so their submodules become precisely the images in $B^n$ stipulated in the statement. Taking $A=k$, local direct summands are precisely linear subspaces of dimension $i$; these bijections give the asserted description of $k$-points.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-tilde-free-module",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-tilde-pullback-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I7 (lemma-compare-constructions), 01HV (lemma-spec-sheaves), 01IA (lemma-quasi-coherent-affine), 01IB (lemma-equivalence-quasi-coherent), 01I9 (lemma-widetilde-pullback); applied to Milne Proposition 7.29."
+   }
+  },
+  {
+   "text": "Each $G_i$ has a closed embedding into some finite projective space by lem-sfb-free-quotient-grassmann-projective, including $G_n=S=\\mathbf P^0_S$. Induct on the number $j\\geq1$ of factors to embed $\\prod_{i=1}^jG_i$ into a single projective space. The base case is the specified embedding of $G_1$. If the first $j$ factors embed in $\\mathbf P^a_S$ and $G_{j+1}$ embeds in $\\mathbf P^b_S$, the map of their product into $\\mathbf P^a_S\\times_S\\mathbf P^b_S$ factors into two base changes of these closed immersions, hence is closed by lem-weil-pbc-closed-immersion-base-change and lem-weil-pbc-closed-immersion-comp. Compose with lem-chow-segre to obtain an embedding into $\\mathbf P^{(a+1)(b+1)-1}_S$. This proves the induction, with no need to equalize the projective-space dimensions. Composing the resulting embedding of $P$ with $c:Z\\hookrightarrow P$ gives a closed embedding of $Z$ into finite projective space, again by the composition lemma. Thus $Z\\to S$ is H-projective in def-kun-projective.",
+   "uses": [
+    "lem-sfb-free-quotient-grassmann-projective",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-chow-segre",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.30, final product/closed-subvariety argument; Stacks constructions.tex Tag 01WD (lemma-segre-embedding)."
+   }
+  },
+  {
+   "text": "By lem-kun-projective-implies-proper applied to the embedding of step 5, $Z\\to S$ is proper. By def-weil-proper-morphism this includes finite type, and by def-weil-finite-type-morphism finite type includes quasi-compactness. Thus the embedding of step 5 together with quasi-compactness proves projectivity also in the statement's def-pc-projective-morphism convention. This proves all three geometric properties without imposing smoothness, algebraic closedness, or a restriction on the characteristic.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.30 (projective, hence complete), with Stacks morphisms.tex Tag 01WC (lemma-locally-projective-proper)."
+   }
+  },
+  {
+   "text": "Put $H=\\operatorname{GL}_{n,k}\\times_S Z$ using def-pc-fibre-product. The first projection supplies an invertible matrix $g$ of global functions on $H$, by the coordinates and inverted determinant in def-sc-general-linear-group. Pull the universal flag on $Z$ back along the second projection. The submodules $gK_i\\subseteq\\mathcal O_H^n$ are again a flag of locally free direct summands of ranks $i$: applying an invertible matrix to a local basis and its complement produces such a basis and complement for the image. Step 3 therefore supplies a unique morphism $a:H\\to Z$ classifying this flag. Pulling this construction to $\\operatorname{Spec}A$ yields exactly $(g,(F_i))\\mapsto(gF_i)$, by the naturality proved in steps 3--4 and the algebra-points formula in def-sc-general-linear-group. Thus the asserted action on every algebra's points is induced by a scheme morphism, rather than only by a pointwise set action.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.29 and preceding flag functor: the natural action by change of frame; expanded using the universal flag."
+   }
+  },
+  {
+   "text": "On $\\operatorname{GL}_{n,k}\\times_S\\operatorname{GL}_{n,k}\\times_S Z$, the pullback of the flag along $a\\circ(m\\times1)$ is $((gh)K_i)_i$, while that along $a\\circ(1\\times a)$ is $(g(hK_i))_i$. The multiplication formula in def-sc-general-linear-group gives equality as embedded submodules, since $(gh)v=g(hv)$. The injectivity of the classification bijection of step 3 therefore makes the two morphisms equal. Pulling back along the identity section gives $(1K_i)_i=(K_i)_i$, so the same uniqueness proves $a\\circ(e\\times1)=\\mathrm{id}_Z$. These are the associativity and identity diagrams of a scheme action. The calculation holds on these universal test schemes, not just on field-valued points, so it proves the scheme equalities in arbitrary characteristic and over nonreduced algebras as well.",
+   "uses": [
+    "def-sc-general-linear-group",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.29, natural GL action on the flag functor; multiplication and identity laws checked on the universal flags."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-free-quotient-grassmann-projective",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "lem-sc-affine-free-map-zero-locus",
+  "lem-sc-local-closed-locus-gluing",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-chow-segre",
+  "def-kun-projective",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-projective-morphism",
+  "def-sc-general-linear-group"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 7.29--7.30, printed p.146; incidence construction expanded scheme-theoretically with the cited existing DAG lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The functor of complete flags of locally direct summands of a finite dimensional vector space is represented by a projective scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Grassmannian.projective_quotient\", \"module\": \"Mathlib/RingTheory/Grassmannian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {M : Type v} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {k : ℕ}\\n  (self : Module.Grassmannian R M k), Module.Projective R (M ⧸ self.toSubmodule)\", \"doc\": \"For any commutative ring $ R $, any $ R $-module $ M $ with additive commutative group structure, and any natural number $ k $, if $ p $ is a rank $ k $ submodule of $ M $ (i.e., an element of the Gra\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"CategoryTheory.Functor Type vᵒᵖ (CategoryTheory.Functor AlgebraicGeometry.Scheme AlgebraicGeometry.Scheme)\", \"doc\": \"The functor assigns to each type $n$ in the opposite category of types the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$, and to each morphism $i: n \\\\to m$ in the opposite category the reindexing mo\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"Rep.diagonal_succ_projective\", \"module\": \"Mathlib/RepresentationTheory/Rep\", \"type\": \"∀ {k : Type u} [inst : CommRing k] {G : Type u} [inst_1 : Group G] {n : ℕ},\\n  CategoryTheory.Projective (Rep.diagonal k G (n + 1))\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the diagonal representation in $\\\\text{Rep}(k, G)$ constructed from $n + 1$ copies of a $k$-module is a projective object in the categor\"}\n  {\"name\": \"ProjectiveSpectrum\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubmonoidClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → Type u_1\", \"doc\": \"The projective spectrum of a graded ring $ A $, constructed from a commutative ring $ A $, a set-like additive submonoid structure $ \\\\sigma $ over $ A $, and a grading $ \\\\mathcal{A} : \\\\mathbb{N} \\\\to \\\\\"}\n  {\"name\": \"ProjectiveSpectrum.top\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubmonoidClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → TopCat\", \"doc\": \"The projective spectrum of a graded ring $ A $ is equipped with the Zariski topology, where closed sets are defined as zero loci of subsets of $ A $. Specifically, a closed set consists of all homogen\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type vᵒᵖ) (S : AlgebraicGeometry.Scheme),\\n  (AlgebraicGeometry.AffineSpace.functor.obj n).obj S = AlgebraicGeometry.AffineSpace (Opposite.unop n) S\", \"doc\": \"For any type $ n $ in the opposite category of types and any scheme $ S $, the affine space $ \\\\mathbb{A}^n_S $ obtained by applying the affine space functor's object mapping to $ n $ and $ S $ is equa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Grassmannian gives a module functor, with representability explicitly TODO in Mathlib/RingTheory/Grassmannian.lean; basis flags and projectivization sets do not give a projective flag scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flag\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Grassmannian gives a module functor, with representability explicitly TODO in Mathlib/RingTheory/Grassmannian.lean; basis flags and projectivization sets do not give a projective flag scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "flagScheme|flagVariety|flag_variety|flag.*projective|projective.*flag|Flag.*represent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Grassmannian gives a module functor, with representability explicitly TODO in Mathlib/RingTheory/Grassmannian.lean; basis flags and projectivization sets do not give a projective flag scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete flag variety over a field is projective and represents flags of locally free submodules with general linear group action",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Projectivization.generalLinearGroup_smul_def\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Action\", \"type\": \"(g : LinearMap.GeneralLinearGroup K V) (x : ℙ K V) :\\n  g • x = x.map g.toLinearEquiv.toLinearMap g.toLinearEquiv.injective\", \"doc\": \"For any invertible linear transformation $ g \\\\in \\\\mathrm{GL}(K, V) $ and any projective point $ x \\\\in \\\\mathbb{P}_K(V) $ (represented by a nonzero vector $ v \\\\in V $), the group action $ g \\\\cdot x $ is\"}\n  {\"name\": \"Module.Basis.toFlag_carrier\", \"module\": \"Mathlib.LinearAlgebra.Basis.Flag\", \"type\": \"∀ {K : Type u_1} {V : Type u_2} [inst : DivisionRing K] [inst_1 : AddCommGroup V] [inst_2 : Module K V] {n : ℕ}\\n  (b : Module.Basis (Fin n) K V), ↑b.toFlag = Set.range b.flag\", \"doc\": \"For a finite basis $ b $ of a module $ V $ over a division ring $ K $, this constructs an increasing sequence of submodules $ (V_0, V_1, \\\\ldots, V_n) $ where each $ V_k $ is the span of the first $ k \"}\n  {\"name\": \"Projectivization.Subspace\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Subspace\", \"type\": \"(K : Type u_1) → (V : Type u_2) → [inst : Field K] → [inst_1 : AddCommGroup V] → [Module K V] → Type u_2\", \"doc\": \"Given a field $ K $ and a vector space $ V $ over $ K $, this constructs the type of projective subspaces of $ V $, which are equivalence classes of non-zero vectors under scalar multiplication by non\"}\n  {\"name\": \"Module.Basis.toFlag\", \"module\": \"Mathlib.LinearAlgebra.Basis.Flag\", \"type\": \"(b : Basis (Fin n) K V) : Flag (Submodule K V)\", \"doc\": \"For a basis $ b $ of a module $ V $ over a division ring $ K $ indexed by $ \\\\mathrm{Fin}(n) $, this constructs an increasing sequence of submodules where each submodule is the span of the first $ k $ \"}\n  {\"name\": \"Module.Grassmannian.projective_quotient\", \"module\": \"Mathlib.RingTheory.Grassmannian\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {M : Type v} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {k : ℕ}\\n  (self : Module.Grassmannian R M k), Module.Projective R (M ⧸ self.toSubmodule)\", \"doc\": \"For any commutative ring $ R $, any $ R $-module $ M $ with additive commutative group structure, and any natural number $ k $, if $ p $ is a rank $ k $ submodule of $ M $ (i.e., an element of the Gra\"}\n  {\"name\": \"Module.Grassmannian.mk\", \"module\": \"Mathlib.RingTheory.Grassmannian\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {M : Type v} →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {k : ℕ} →\\n            (toSubmodule : Submodule R M) →\\n              Module.Finite R (M ⧸ toSubmodule) →\\n                Module.Projective R (M ⧸ toSubmodule) →\\n      \", \"doc\": \"Given a submodule $ P $ of the $ R $-module $ M $, this constructor forms an element of the Grassmannian $ \\text{Gr}(k,M) $ by verifying: (1) the quotient module $ M/P $ is finitely generated, (2) $ M/\"}\n  {\"name\": \"Projectivization.Subspace.noConfusionType\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Subspace\", \"type\": \"Sort u →\\n  {K : Type u_1} →\\n    {V : Type u_2} →\\n      [inst : Field K] →\\n        [inst_1 : AddCommGroup V] →\\n          [inst_2 : Module K V] →\\n            Projectivization.Subspace K V →\\n              {K' : Type u_1} →\\n                {V' : Type u_2} →\\n                  [inst' : Field K'] →\\n       \", \"doc\": \"Given a field $ K $ and a vector space $ V $ over $ K $, this constructs the type of projective subspaces of $ V $, which are equivalence classes of non-zero vectors under scalar multiplication by non\"}\n  {\"name\": \"Projectivization.Subspace.submodule\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Subspace\", \"type\": \": Projectivization.Subspace K V ≃o Submodule K V\", \"doc\": \"There is a canonical order isomorphism between the projective subspaces of a vector space $ V $ over a field $ K $ and the submodules of $ V $ that are closed under addition and scalar multiplication.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Grassmannian gives a module functor, with representability explicitly TODO in Mathlib/RingTheory/Grassmannian.lean; basis flags and projectivization sets do not give a projective flag scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of the general linear group by its upper triangular subgroup represents full flags and is proper",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Matrix.SpecialLinearGroup.discreteSpecialLinearGroupIntRange\", \"module\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups\", \"type\": \"∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n],\\n  DiscreteTopology ↥(Matrix.SpecialLinearGroup.mapGL ℝ).range\", \"doc\": \"The image of the special linear group over the integers $\\\\text{SL}(n, \\\\mathbb{Z})$ under the canonical inclusion into the general linear group over the real numbers $\\\\text{GL}(n, \\\\mathbb{R})$ is equip\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instTopologicalSpace\", \"module\": \"Mathlib/Topology/Instances/Matrix\", \"type\": \"{n : Type u_5} →\\n  {R : Type u_8} →\\n    [inst : Fintype n] →\\n      [inst_1 : DecidableEq n] →\\n        [inst_2 : CommRing R] → [TopologicalSpace R] → TopologicalSpace (Matrix.SpecialLinearGroup n R)\", \"doc\": \"The special linear group $\\\\mathrm{SL}(n, R)$ is equipped with the subspace topology inherited from the topology on the space of $n \\\\times n$ matrices over $R$. This topology is induced by viewing $\\\\ma\"}\n  {\"name\": \"Matrix.GLPos\", \"module\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs\", \"type\": \"(n : Type u) →\\n  (R : Type v) →\\n    [inst : DecidableEq n] →\\n      [inst_1 : Fintype n] →\\n        [inst_2 : CommRing R] → [inst_3 : LinearOrder R] → [IsStrictOrderedRing R] → Subgroup (GL n R)\", \"doc\": \"The subgroup of the general linear group $\\\\mathrm{GL}(n, R)$ consisting of invertible $n \\\\times n$ matrices whose determinants belong to the subgroup of strictly positive units in the commutative ring\"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max (max u v) v u)\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt\", \"module\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups\", \"type\": \"∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n],\\n  Topology.IsClosedEmbedding ⇑(Matrix.SpecialLinearGroup.mapGL ℝ)\", \"doc\": \"The canonical group homomorphism from the special linear group $\\\\mathrm{SL}(n, \\\\mathbb{Z})$ to the general linear group $\\\\mathrm{GL}(n, \\\\mathbb{R})$ induced by the ring homomorphism $\\\\mathbb{Z} \\\\to \\\\m\"}\n  {\"name\": \"instIsFiniteRelIndexGeneralLinearGroupAdjoinNegOne\", \"module\": \"Mathlib/NumberTheory/ModularForms/ArithmeticSubgroups\", \"type\": \"∀ {n : Type u_1} [inst : Fintype n] [inst_1 : DecidableEq n] {R : Type u_2} [inst_2 : Ring R] (𝒢 : Subgroup (GL n R)),\\n  𝒢.IsFiniteRelIndex 𝒢.adjoinNegOne\", \"doc\": \"For any subgroup $\\\\mathcal{G}$ of the general linear group $\\\\mathrm{GL}(n, R)$, the subgroup $\\\\mathcal{G}^{\\\\pm}$ obtained by adjoining additive inverses of elements in $\\\\mathcal{G}$ has finite relativ\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instDiscreteTopology\", \"module\": \"Mathlib/Topology/Instances/Matrix\", \"type\": \"∀ {n : Type u_5} {R : Type u_8} [inst : Fintype n] [inst_1 : DecidableEq n] [inst_2 : CommRing R]\\n  [inst_3 : TopologicalSpace R] [DiscreteTopology R], DiscreteTopology (Matrix.SpecialLinearGroup n R)\", \"doc\": \"If $ R $ is a commutative ring equipped with the discrete topology, then the special linear group $ \\\\mathrm{SL}(n, R) $ of $ n \\\\times n $ matrices with determinant 1 inherits the discrete topology as \"}\n  {\"name\": \"Subgroup.IsRegularAtInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"{R : Type u_1} → [inst : Ring R] → Subgroup (GL (Fin 2) R) → Prop\", \"doc\": \"A subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,R)$ is regular at infinity if its strict periods subgroup equals its periods subgroup, i.e., when $\\\\mathcal{G}.\\\\text{strictPeriods} = \\\\mathcal{G}.\\\\text{\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Module.Grassmannian gives a module functor, with representability explicitly TODO in Mathlib/RingTheory/Grassmannian.lean; basis flags and projectivization sets do not give a projective flag scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete flag functor of locally direct summand submodules is represented by a projective scheme with general linear group action",
+   "results": "Hits: AlgebraicGeometry.Proj, Module.Grassmannian.projective_quotient, Projectivization.mk''_submodule, ProjectiveSpectrum, ProjectiveSpectrum.top, Rep.standardComplex.x_projective, Rep.diagonal_succ_projective, Rep.instEnoughProjectives",
+   "date": "2026-10-24",
+   "verdict": "no match: order-theoretic flags, module Grassmannians and topological matrix groups do not represent the flag functor by a projective scheme. Mathlib/RingTheory/Grassmannian.lean lines 45--51 explicitly leave scheme Grassmannians and representability as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "flagScheme|flagVariety|flag_variety|flag.*projective|projective.*flag|Flag.*represent",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: order-theoretic flags, module Grassmannians and topological matrix groups do not represent the flag functor by a projective scheme. Mathlib/RingTheory/Grassmannian.lean lines 45--51 explicitly leave scheme Grassmannians and representability as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete flag variety represents chains of subbundles and is projective",
+   "results": "Hits: Flag.chain_le, Flag.maxChain, Flag.Chain', Flag.recOn, Flag.ofIsMaxChain, IsChain.exists_subset_flag, Module.Basis.isChain_range_flag, Flag.rec",
+   "date": "2026-10-24",
+   "verdict": "no match: order-theoretic flags, module Grassmannians and topological matrix groups do not represent the flag functor by a projective scheme. Mathlib/RingTheory/Grassmannian.lean lines 45--51 explicitly leave scheme Grassmannians and representability as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flag\", \"Scheme\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: order-theoretic flags, module Grassmannians and topological matrix groups do not represent the flag functor by a projective scheme. Mathlib/RingTheory/Grassmannian.lean lines 45--51 explicitly leave scheme Grassmannians and representability as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProjective",
+   "results": "No hits. loogle: unknown identifier 'AlgebraicGeometry.IsProjective'",
+   "date": "2026-10-24",
+   "verdict": "no match: order-theoretic flags, module Grassmannians and topological matrix groups do not represent the flag functor by a projective scheme. Mathlib/RingTheory/Grassmannian.lean lines 45--51 explicitly leave scheme Grassmannians and representability as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of the general linear group by its upper triangular subgroup represents full flags and is proper",
+   "results": "Hits: Matrix.SpecialLinearGroup.discreteSpecialLinearGroupIntRange, Matrix.SpecialLinearGroup.instTopologicalSpace, Matrix.GLPos, Matrix.ProjectiveSpecialLinearGroup, Matrix.SpecialLinearGroup.isClosedEmbedding_mapGLInt, instIsFiniteRelIndexGeneralLinearGroupAdjoinNegOne, Matrix.SpecialLinearGroup.instDiscreteTopology, Subgroup.IsRegularAtInfty",
+   "date": "2026-10-24",
+   "verdict": "no match: order-theoretic flags, module Grassmannians and topological matrix groups do not represent the flag functor by a projective scheme. Mathlib/RingTheory/Grassmannian.lean lines 45--51 explicitly leave scheme Grassmannians and representability as TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-solvable-triangular-embedding",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 22.2--22.4, printed pp.463--464, especially 22.4: End(V(lambda))=k and simplicity after extension; supporting scalar-extension criterion 4.19(b), printed p.90. Supporting input: Milne 22.2 and 22.18(b): obtain a multiplicity-one torus character before the scalar-endomorphism argument of 22.4. Supporting input: Proposition 16.52, forward implication, printed p.343, together with Proposition 16.2(a) implies (c), printed pp.324--325. Only the forward implication is used: its converse requires perfection. Supporting input for this split: Propositions 7.29--7.30 and preceding flag functor, printed p.146; the natural GL action is the action on flags in the quotient construction. Properness and finite type are included in completeness of this projective algebraic scheme.",
+   "via": [
+    "lem-sfb-split-solvable-triangular-embedding",
+    "lem-sfb-split-simple-multiplicity-one-weight",
+    "lem-sfb-split-simple-absolute-irreducibility",
+    "lem-sfb-split-charzero-weyl-character-identity",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-linear-flag-scheme",
+  "worker": "stage1",
+  "summary": "Read Milne 7.29--7.30 and the Stacks sources underlying the existing Grassmannian, zero-locus, gluing and projectivity nodes. Expanded the polynomial incidence argument to arbitrary schemes/algebras, checked arbitrary base change by local split quotient sequences, and constructed the scheme action from the universal flag. No new nodes, no statement change, no attachment.",
+  "blueprint": "Supporting flag-variety input in the recorded ancestor chain: det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-split-solvable-triangular-embedding; realizes Milne 7.29--7.30 exactly by Grassmannians, incidence equations and the natural GL action. The inherited blueprint.from.node is null, also returned as None by blueprint_refs.py ancestor; its place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Converts a locally split finite-free quotient kernel into a locally free bundle; the unit has no replacement for this generic commutative-algebra fact."
+   },
+   {
+    "node": "lem-sc-affine-free-map-zero-locus",
+    "why": "Cuts out the finite matrix of incidence maps scheme-theoretically on each free affine chart; this is a generic zero-locus tool, not a different route to flag varieties."
+   },
+   {
+    "node": "lem-sc-local-closed-locus-gluing",
+    "why": "Glues these local closed incidence schemes using the stated universal zero condition; no flag-specific gluing statement exists in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Identifies the specified algebra scalar extension with sheaf pullback."
+   },
+   {
+    "node": "lem-chow-segre",
+    "why": "Provides the single projective-space embedding of a finite product, as in Milne 7.30; no theorem of this unit replaces this generic tool."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Deduces properness from the constructed finite projective-space embedding; this is the generic projectivity tool used by the source."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-sc-affine-free-map-zero-locus",
+  "lem-sc-local-closed-locus-gluing",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-chow-segre",
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-bf2fddc08",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-bf2fddc08 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item and its report, no new nodes. Checked against Milne iAG2017 printed p.146 (the flag functor, Props 7.29-7.30), which the statement matches; not a target node, no SGA. All 8 steps hold against the full statements of the 20 cited nodes. (1) The Grassmannian G_S(n,n-i) quotient splits locally, its kernel is locally free of rank i by the free-cover node, and the kernel commutes with every base change because the sequence is split. (2) The zero locus of the sum of the maps K_i->Q_{i+1} is glued; the gluing node's restriction, locality and local-locus hypotheses were checked through the composition isomorphism of def-pc-module-pullback. (3)-(4) Flags are classified over all schemes, then over algebras by the tilde equivalence, localization on D(f) and theta for scalar extension; k-points are flags of k^n. (5) The product of the Grassmannians embeds by an induction with base and step, using two base changes of closed immersions and Segre with possibly different dimensions. (6) H-projective gives proper, hence finite type, hence quasi-compact, so projective in the def-pc convention. (7)-(8) The GL action comes from the universal invertible matrix on GLxZ; associativity and unit follow from the m^* and epsilon formulas and the uniqueness of step 3. Edge cases checked: n=1, A=0, any characteristic, non-flat extension. The grep -R search found no duplicate. lem-sfb-solvable-subgroup-flag-realization has a special-case clause (F algebraically closed, no action); advisory: that node could cite this item. Accepted tool_uses: the free-cover, zero-locus, gluing, tilde-pullback, Segre and projective-implies-proper nodes, all generic off-unit tools on the Milne route. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompleteLinearFlagScheme",
+  "declaration": "AlgebraicGeometry.exists_completeLinearFlagScheme",
+  "declarations": [
+   "AlgebraicGeometry.exists_completeLinearFlagScheme"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompleteLinearFlagScheme.lean",
+  "statement": "theorem exists_completeLinearFlagScheme (k : Type u) [Field k] (n : ℕ) (hn : 1 ≤ n) : ∃ (Fl : Over (Spec (.of k))) (e : ∀ A : CommAlgCat.{u} k, ((yoneda.obj Fl).obj (op ((algSpec (.of k)).obj (op A)))) ≃ CompleteLinearFlag A n) (a : ModObj (GeneralLinearGroup (LinearGroupSchemes.Index.{u} n) k) Fl), IsProjective Fl.hom ∧ IsProper Fl.hom ∧ (LocallyOfFiniteType Fl.hom ∧ QuasiCompact Fl.hom) ∧ (∀ (A B : CommAlgCat.{u} k) (f : A ⟶ B) (x : (algSpec (.of k)).obj (op A) ⟶ Fl) (i : Fin (n + 1)), ((e B ((algSpec (.of k)).map f.op ≫ x)).step i).toSubmodule = completeFlagScalarImage f.hom.toRingHom ((e A x).step i).toSubmodule) ∧ (∀ (A : CommAlgCat.{u} k) (g : (algSpec (.of k)).obj (op A) ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} n) k) (x : (algSpec (.of k)).obj (op A) ⟶ Fl) (i : Fin (n + 1)), ((e A (CartesianMonoidalCategory.lift g x ≫ a.smul)).step i).toSubmodule = (((e A x).step i).toSubmodule).map (GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} n) k A g).val.mulVecLin) ∧ (∀ F : Fin (n + 1) → Submodule k (LinearGroupSchemes.Index.{u} n → k), (Monotone F ∧ F 0 = ⊥ ∧ F (Fin.last n) = ⊤ ∧ ∀ i, Module.finrank k (F i) = i.val) ↔ ∃! x : (algSpec (.of k)).obj (op (CommAlgCat.of k k)) ⟶ Fl, ∀ i, ((e (CommAlgCat.of k k) x).step i).toSubmodule = F i)",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7004c1fb",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read item, new def-sfb-complete-linear-flag node, both modules, report and all 8 stmt_dep records; checked Mathlib Module.Grassmannian (089R quotient convention, ext), algSpec, upstream GeneralLinearGroup/GrpObj/homMulEquiv (MulEquiv, ψ(x_ij)), Index=ULift Fin, IsProjective/IsProper/LocallyOfFiniteType∧QuasiCompact conventions. All clauses match: field+n≥1 only; flags as Grassmannian steps (f.g. projective quotient rank n-i ⇔ local free summand rank i); scalar image = span of images (no flatness); natural bijections e on Spec A; projective/proper/finite type; ModObj action with explicit g·F_i=gF_i point formula; k-points iff clause. Edge cases n=1, A=0, non-flat, any char OK; single universe u. New def node fields per §5, real data, no sorry; no duplicate (completeFlagBundle and Borel flag nodes differ; Mathlib Grassmannian representability TODO). Item changes only lean + added stmt_dep; no theorem stmt_deps. Advisory: no rank def node cited in new node; solvable-subgroup-flag-realization could cite item. No compile (no file changed)."
+ }
+}

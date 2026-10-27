@@ -1,0 +1,135 @@
+{
+ "id": "lem-sp-shifted-single-reduction-detects-transition",
+ "kind": "statement",
+ "title": "Shifted single-object reduction squares detect actual strict transitions",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme T, and any recorded coefficient-tower datum A of det-sp-coefficient-towers-abelian. Let M,N be strict coefficient sheaf towers and s an integer. Given arbitrary level sheaf maps f_n:M_n→N_n, conjugate their shifted degree-zero singles by the canonical exact-evaluation single/shift comparisons to obtain g_n:ev_n(M[0][s])→ev_n(N[0][s]). If every canonical derived reduction square for g commutes, then f_n followed by the actual transition of N equals the actual transition of M followed by scalar restriction of f_m for every m≤n. No local freeness, cartesianness, invertibility of f, or invertibility of l on T is required.\n\nFormal statement:\n```lean\ntheorem shifted_single_reduction_detects_transition\n    {l : ℕ} [Fact l.Prime] {E : Type u} [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {T : Scheme.{t}}\n    (A : SpCoefficientTowersAbelian l E T) (M N : spCoefficientTowers l E T) (s : ℤ)\n    (f : ∀ n : ℕ,\n      (spCoefficientEvaluation l E T A.equivalence n).obj M ⟶\n        (spCoefficientEvaluation l E T A.equivalence n).obj N) :\n    letI := A.hasDerived\n    letI := A.equivalenceAdditive\n    letI := A.evaluationLimits\n    letI := A.evaluationColimits\n    let ev := fun n ↦ (spCoefficientEvaluation l E T A.equivalence n).mapDerivedCategory\n    let S := DerivedCategory.singleFunctor (spCoefficientTowers l E T) 0\n    let e := fun (P : spCoefficientTowers l E T) (n : ℕ) ↦\n      ((ev n).commShiftIso s).app (S.obj P) ≪≫\n        (shiftFunctor _ s).mapIso\n          (((spCoefficientEvaluation l E T A.equivalence n).mapDerivedCategorySingleFunctor\n            0).app P)\n    let g := fun n ↦ (e M n).hom ≫\n      ((DerivedCategory.singleFunctor _ 0).map (f n))⟦s⟧' ≫ (e N n).inv\n    (∀ {m n : ℕ} (h : m ≤ n),\n      (systemDerivedTensor A.scalar (spCoefficientCommRings l E T) h).map (g n) ≫\n          (A.reduction h).app ((S.obj N)⟦s⟧) =\n        (A.reduction h).app ((S.obj M)⟦s⟧) ≫ g m) →\n      ∀ {m n : ℕ} (h : m ≤ n),\n        f n ≫ (A.equivalence.functor.obj N).transition h =\n          (A.equivalence.functor.obj M).transition h ≫\n            (systemRestriction (spCoefficientCommRings l E T) h).map (f m)\n```",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1), a map of tower sheaves after removing the shift; expanded steps 3--4 of lem-sp-strict-line-heart-assembly; Stacks 015F, 03CZ, 06YY, 07A6"
+ },
+ "stmt_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Remove the common integer shift using the canonical scalar shift and the exact evaluation shift comparisons. The shift-compatibility theorem identifies the reductions on shifted single objects with the shifted reductions. Cancel the comparison isomorphisms and use faithfulness of the shift functor. This leaves the unshifted derived scalar square.",
+   "uses": [
+    "lem-sp-tower-reduction-shift-compatibility",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each m≤n, transpose the square through the derived adjunction in the supplied SystemScalarModel. Apply A.reduction_rep to degree-zero complexes. The transpose normalization of SystemScalarModel identifies each reduction with localization of the ordinary transpose of A.ordinaryReduction. A.ordinaryReduction_eq identifies that ordinary transpose with the actual strict transition. Naturality of the derived adjunction moves f_n to precomposition and f_m to scalar-restricted postcomposition. Exact restriction commutes with the single embedding. The resulting equality is precisely single(f_n ≫ transition_N) = single(transition_M ≫ Res(f_m)). Only the counit comparison is composed with, never inverted, so arbitrary M and N are allowed, including nonflat coefficient quotients.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-pur-system-scalar-model",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply faithfulness of the degree-zero single functor to obtain the displayed semilinear transition equation.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-reduction-shift-compatibility",
+  "lem-sf-exact-functor-derived-triangulated",
+  "det-sp-coefficient-towers-abelian",
+  "lem-pur-system-scalar-model",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1), a map of tower sheaves after removing the shift; expanded steps 3--4 of lem-sp-strict-line-heart-assembly; Stacks 015F, 03CZ, 06YY, 07A6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor adjunction detects commutativity of semilinear transition maps between shifted sheaves in degree zero",
+   "results": "8 hits, including SheafOfModules.map_ιFree_mapFree_hom_assoc, pushforwardSections_unitHomEquiv and sheaf monoidal comparison lemmas. None states reflection of strict semilinear transition compatibility by canonical derived reductions.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "12 hits, including full and faithful single functors and singleFunctorCompHomologyFunctorIso. The faithful single functor closes the final step, but does not give the normalized scalar transpose computation.",
+   "date": "2026-10-25",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*comm|detects_transition|single.*reduction|transition.*single|reduction_rep",
+   "results": "Searched lean/Sheaf/Paper and lean/Sheaf/CategoryTheory. TowerReductionShiftCompatibility gives the shift equation; SmoothPurityCoefficientTowersAbelian supplies the all-complex representative formula and ordinary transpose equation; SystemScalarModel supplies normalized cochain adjunction transposes. No declaration combines them into the claimed reflection implication. Blueprint-wide search for reduction transition found no matching blueprint node.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived scalar reduction square between shifted degree zero module sheaves implies compatibility of their underlying semilinear transition maps",
+   "results": "8 hits including AdicCompletion.transitionMap_comp_reduceModIdeal, LinearMap.CompatibleSMul and sheafification compatibility lemmas. No hit supplies the derived scalar-adjunction reflection statement for strict sheaf towers.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictLineHeartAssembly",
+  "date": "2026-10-25",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "(1), a map of tower sheaves after removing the shift; expanded steps 3--4 of lem-sp-strict-line-heart-assembly; Stacks 015F, 03CZ, 06YY, 07A6",
+   "via": [
+    "lem-sp-strict-line-heart-assembly",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictLineHeartReduction",
+  "file": "lean/Sheaf/Paper/StrictLineHeartReduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.shifted_single_reduction_detects_transition",
+  "statement": "theorem shifted_single_reduction_detects_transition\n    {l : ℕ} [Fact l.Prime] {E : Type u} [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {T : Scheme.{t}}\n    (A : SpCoefficientTowersAbelian l E T) (M N : spCoefficientTowers l E T) (s : ℤ)\n    (f : ∀ n : ℕ,\n      (spCoefficientEvaluation l E T A.equivalence n).obj M ⟶\n        (spCoefficientEvaluation l E T A.equivalence n).obj N) :\n    letI := A.hasDerived\n    letI := A.equivalenceAdditive\n    letI := A.evaluationLimits\n    letI := A.evaluationColimits\n    let ev := fun n ↦ (spCoefficientEvaluation l E T A.equivalence n).mapDerivedCategory\n    let S := DerivedCategory.singleFunctor (spCoefficientTowers l E T) 0\n    let e := fun (P : spCoefficientTowers l E T) (n : ℕ) ↦\n      ((ev n).commShiftIso s).app (S.obj P) ≪≫\n        (shiftFunctor _ s).mapIso\n          (((spCoefficientEvaluation l E T A.equivalence n).mapDerivedCategorySingleFunctor\n            0).app P)\n    let g := fun n ↦ (e M n).hom ≫\n      ((DerivedCategory.singleFunctor _ 0).map (f n))⟦s⟧' ≫ (e N n).inv\n    (∀ {m n : ℕ} (h : m ≤ n),\n      (systemDerivedTensor A.scalar (spCoefficientCommRings l E T) h).map (g n) ≫\n          (A.reduction h).app ((S.obj N)⟦s⟧) =\n        (A.reduction h).app ((S.obj M)⟦s⟧) ≫ g m) →\n      ∀ {m n : ℕ} (h : m ≤ n),\n        f n ≫ (A.equivalence.functor.obj N).transition h =\n          (A.equivalence.functor.obj M).transition h ≫\n            (systemRestriction (spCoefficientCommRings l E T) h).map (f m)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261025T143912-L-1106776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261025T143912-L-1106776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -32,160 +32,111 @@
  ],
  "proof": [
   {
-   "text": "Properness gives finite type and a closed-immersion diagonal, hence qcqs. Finite type over $k$ makes standing schemes Noetherian. The cited coefficient flatness makes extension exact and preserves lower bounds.",
+   "text": "For integral localization unfold rationalizationPushHom and apply localizedDirectImageComparison_isIso. Properness supplies qcqs. For a finite coefficient extension use isIso_derivedPushHom_padicSubfieldRingObjMap. For extension to the algebraic closure unpack the bounded-below witness N, install IsGE N and use isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE. These are the actual canonical derived push mates.",
    "uses": [
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "def-weil-closed-immersion",
-    "def-weil-quasi-separated-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "det-prop-sfb-cartesian-coefficients-finite-free",
-    "lem-sfb-qlbar-flat",
-    "lem-sfb-extend-scalars-preserves-homology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-    "place": "paragraph (1), hypotheses"
-   }
-  },
-  {
-   "text": "Apply the filtered-presentation criterion to $R=\\cO_E$, $S=E$, $P_n=R_Y$ with transition $\\ell$ and legs $\\ell^{-n}$. The coefficient-localization statement supplies this cocone; every stage projection is the tensor-unit identity. For $E\\to F$ use the existing finite-extension comparison. For $E\\to\\Qlb$ use $P_F=F_Y$ over the finite fields containing $E$; directedness makes these cofinal, and the ring colimit is a module colimit. The criterion for the one-object presentation of each $F_Y$ identifies its stage projection with the restricted finite-extension comparison, so every stage is invertible. This proves all of (1).",
-   "uses": [
-    "lem-sfb-coefficient-push-filtered-legs",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-localized-direct-image-comparison",
     "lem-sfb-subfield-push-iso",
-    "sk-prop-sfb-qlbar-colimit-x",
-    "sk-def-sfb-qlbar-condensed",
-    "lem-sfb-directed-ring-sheaf-module-colimit",
-    "lem-pd-module-ringed-topos-derived-comparison"
+    "lem-weil-pbc-condensed-qbar-bounded-push"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-    "place": "paragraph (1), three coefficient cases"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraphs (1)-(2), assembled from existing Lean comparisons"
    }
   },
   {
-   "text": "An integral generator has integral bounded constructible direct image. Part (1), scalar transitivity and preservation of constructibility by extension put its rational image in $\\Dbc$. Pushforward is exact and target $\\Dbc$ is triangulated, so induction on the finite cones and shifts generating the source proves (2).",
+   "text": "Apply rationalCoefficientPushforwardPreservation to the bundled bounded-constructible input. Its two coefficient cases are finiteness coefficients, so the existing boundedConstructible_rightDerivedLowerStar_obj applies.",
    "uses": [
-    "det-lem-integral-models-generators",
+    "lem-sfb-dc-lower-star-preserves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraphs (1)-(2), assembled from existing Lean comparisons"
+   }
+  },
+  {
+   "text": "For an integral bounded constructible pair, transport the coefficients by the proved continuous-function integer-ring isomorphism to the spectral integer-ring presentation, preserving bounded constructibility. The adic constructibility comparison identifies that predicate with constant-model bounded constructibility. Apply the projection clause of integralProperDirectImageAndFormulas. The coefficient/projection square and equivalence of scalar extension reflect invertibility back to the embedded integer coefficients.",
+   "uses": [
     "det-thm-sfb-proper-base-change-integral",
-    "lem-sfb-extend-scalars-bounded-constructible",
-    "lem-sfb-extend-to-qlbar-constructible",
-    "det-prop-scalar-six-pullback",
-    "lem-pc-right-derived-functor-triangulated",
-    "det-cor-coefficient-heart-ii-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-    "place": "paragraph (2), generator image and induction"
-   }
-  },
-  {
-   "text": "In a cartesian square $p'$ is proper. For an integral generator $K_0$, its pullback is integral $\\Dbc$. Apply coefficient-exchange mates using the exchange counit identity, coefficient counit identity and monoidal pull-comparison cube. Part (1) inverts both push comparisons; the integral theorem inverts exchange. Hence rational exchange is invertible on generators. For $\\cO_E\\to E\\to\\Qlb$, the coefficient cocycle identifies the composite comparison with the direct one. Part (2), pullback preservation and the restricted-adjunction definitions identify these with the $\\Dbc$ maps.",
-   "uses": [
-    "lem-sfb-derived-exchange-exact-normalization",
-    "lem-weil-pbc-proper-fp-permanence",
-    "det-lem-integral-models-operations",
-    "lem-weil-pbc-coefficient-exchange-mates",
-    "lem-weil-pbc-qbar-condensed-push-counit",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "det-thm-sfb-proper-base-change-integral",
-    "lem-pur-ringed-coefficient-projection-cocycle",
-    "det-prop-scalar-six-pullback",
-    "lem-sfb-dc-upper-star-preserves",
-    "def-sfb-dc-upper-star",
-    "def-sfb-dc-upper-star-comp",
-    "def-sfb-dc-lower-star",
-    "def-sfb-dc-upper-lower-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-    "place": "paragraph (3), exchange on generators"
-   }
-  },
-  {
-   "text": "For projection use the common-field lemma for a pair of Qlbar generators; E-generators already share $\\cO_E$. The integral tensor $H=K_0\\otimes^Lp^*M_0$ is bounded constructible. In the coefficient/projection square, part (1) inverts both push comparisons (for $\\cO_F\\to\\Qlb$ through $F$, the coefficient cocycle identifying the direct comparison with the composite, as in step 4) and the integral theorem inverts projection. All pull/tensor comparisons are invertible, so rational projection is invertible on these pairs.",
-   "uses": [
-    "lem-sfb-common-field-lattice-generators",
     "lem-sfb-coefficient-projection-square",
-    "det-lem-integral-models-operations",
-    "det-thm-sfb-proper-base-change-integral",
-    "lem-pur-ringed-coefficient-projection-cocycle"
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "lem-integral-coefficient-ext-comparison",
+    "lem-sfb-normed-coefficient-realization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-    "place": "paragraph (3), projection on generator pairs"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), rationalization of integral formulas; existing integral models replace generator induction"
    }
   },
   {
-   "text": "Exchange commutes with shifts by the ambient-normalization lemma; projection does so in both variables by the two ringed projection shift statements. Their isomorphism loci contain zero, are shift-stable and cone-stable by triangle two-out-of-three. Induct on finite generator constructions: once for exchange; for projection first in $K$ with a fixed $M$-generator, then in $M$ with arbitrary $K$. This proves (3) for the specified canonical maps.",
+   "text": "The scalar/projection square transports invertibility whenever the integral projection and the two push comparison components are invertible. The bounded constructible integral-to-E scalar functor is a localization, hence essentially surjective. Choose an integral model of each input, apply tensor and pullback preservation to its tensor input, use clause (1) for both push comparisons, and cancel the invertible scalar tensor and push factors. Naturality of the actual projection transformation transports the conclusion across the two input isomorphisms.",
    "uses": [
-    "lem-sfb-derived-exchange-exact-normalization",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sfb-ringed-projection-first-shift",
-    "lem-sf-triangle-two-out-of-three",
-    "det-lem-integral-models-generators",
-    "lem-pd-module-ringed-topos-derived-comparison"
+    "lem-sfb-coefficient-projection-square",
+    "thm-sfb-extend-scalars-localization",
+    "lem-sfb-dc-tensor-preserves",
+    "lem-sfb-dc-upper-star-preserves"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-    "place": "paragraph (3), one- and two-variable devissage"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), rationalization of integral formulas; existing integral models replace generator induction"
+   }
+  },
+  {
+   "text": "For algebraic-closure inputs, descend each bounded constructible object to a finite subextension. Take a finite compositum and extend both models to it. Scalar transitivity identifies their algebraic-closure extensions with the given inputs. The finite-field projection formula just proved and the two bounded coefficient push comparisons give invertibility by the same scalar/projection square; tensor closure supplies the second lower bound. Naturality transports across the two input isomorphisms.",
+   "uses": [
+    "lem-sfb-constructible-cocone-obj",
+    "lem-sfb-extend-subfield-constructible",
+    "def-sfb-derived-extend-comp-iso",
+    "lem-sfb-dc-tensor-preserves",
+    "lem-sfb-dc-upper-star-preserves",
+    "lem-weil-pbc-condensed-qbar-bounded-push",
+    "lem-sfb-coefficient-projection-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), rationalization of integral formulas; existing integral models replace generator induction"
+   }
+  },
+  {
+   "text": "Split the bundled rational coefficient equality into its two cases. In each case the conditional restriction has exactly the same functor, adjunction and unit-square-counit map as the existing finiteness-coefficient restriction: the preservation witnesses are proofs of the same proposition. Apply the existing proper base-change natural-transformation theorem and evaluate at the bounded constructible object.",
+   "uses": [
+    "nt-target-proetale-e",
+    "nt-target-proetale-qbar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), rationalization of integral formulas; existing integral models replace generator induction"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
-  "def-weil-closed-immersion",
-  "def-weil-quasi-separated-morphism",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "det-prop-sfb-cartesian-coefficients-finite-free",
-  "lem-sfb-qlbar-flat",
-  "lem-sfb-extend-scalars-preserves-homology",
-  "lem-sfb-coefficient-push-filtered-legs",
-  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-localized-direct-image-comparison",
   "lem-sfb-subfield-push-iso",
-  "sk-prop-sfb-qlbar-colimit-x",
-  "sk-def-sfb-qlbar-condensed",
-  "lem-sfb-directed-ring-sheaf-module-colimit",
-  "lem-pd-module-ringed-topos-derived-comparison",
-  "det-lem-integral-models-generators",
+  "lem-weil-pbc-condensed-qbar-bounded-push",
+  "lem-sfb-dc-lower-star-preserves",
   "det-thm-sfb-proper-base-change-integral",
-  "lem-sfb-extend-scalars-bounded-constructible",
-  "lem-sfb-extend-to-qlbar-constructible",
-  "det-prop-scalar-six-pullback",
-  "lem-pc-right-derived-functor-triangulated",
-  "det-cor-coefficient-heart-ii-triangulated",
-  "lem-sfb-derived-exchange-exact-normalization",
-  "lem-weil-pbc-proper-fp-permanence",
-  "det-lem-integral-models-operations",
-  "lem-weil-pbc-coefficient-exchange-mates",
-  "lem-weil-pbc-qbar-condensed-push-counit",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-pur-ringed-coefficient-projection-cocycle",
-  "lem-sfb-dc-upper-star-preserves",
-  "def-sfb-dc-upper-star",
-  "def-sfb-dc-upper-star-comp",
-  "def-sfb-dc-lower-star",
-  "def-sfb-dc-upper-lower-adjunction",
-  "lem-sfb-common-field-lattice-generators",
   "lem-sfb-coefficient-projection-square",
-  "lem-sfb-ringed-projection-first-shift",
-  "lem-sf-triangle-two-out-of-three"
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-integral-coefficient-ext-comparison",
+  "lem-sfb-normed-coefficient-realization",
+  "thm-sfb-extend-scalars-localization",
+  "lem-sfb-dc-tensor-preserves",
+  "lem-sfb-dc-upper-star-preserves",
+  "lem-sfb-constructible-cocone-obj",
+  "lem-sfb-extend-subfield-constructible",
+  "def-sfb-derived-extend-comp-iso",
+  "nt-target-proetale-e",
+  "nt-target-proetale-qbar"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-  "place": "paragraphs (1)-(3), expanding the rational paragraph of unit sk-thm-sfb-proper-base-change; formal tensor/adjunction calculations use Stacks 07A4, 07A6, 0B56, 0A8D"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "F1: integral models via scalar localization, the proved coefficient/projection square, finite-field descent, and the existing proper exchange theorems."
  },
  "mathlib_searches": [
   {
@@ -459,22 +410,12 @@
   "lem-pc-module-filtered-colimits-tensor",
   "lem-sf-derived-homology-long-exact",
   "lem-weil-pbc-right-adjoint-preserves-limits",
-  "det-prop-scalar-six-pullback",
-  "det-lem-integral-models-generators",
   "lem-sfb-extend-scalars-bounded-constructible",
   "lem-sfb-extend-to-qlbar-constructible",
   "lem-pc-right-derived-functor-triangulated",
   "det-cor-coefficient-heart-ii-triangulated",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-proper-fp-permanence",
-  "det-lem-integral-models-operations",
-  "lem-weil-pbc-coefficient-exchange-mates",
-  "lem-weil-pbc-adjunction-shift-compatibility-unique",
-  "lem-sf-triangulated-right-adjoint",
-  "lem-weil-pbc-commshift-nattrans-comp-whisker",
-  "lem-sf-triangle-two-out-of-three",
   "def-sfb-dc-lower-star",
   "def-sfb-dc-upper-lower-adjunction",
   "def-sfb-dc-upper-star",
@@ -487,15 +428,10 @@
   "def-weil-proper-morphism",
   "def-weil-quasi-separated-morphism",
   "det-def-sfb-base-change-morphism-bc",
-  "lem-pd-module-ringed-topos-derived-comparison",
-  "lem-pur-ringed-coefficient-projection-cocycle",
   "lem-sfb-dc-upper-star-preserves",
   "lem-sfb-directed-ring-sheaf-module-colimit",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sfb-ringed-projection-first-shift",
   "lem-sfb-subfield-push-iso",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-qbar-condensed-push-counit",
   "sk-def-sfb-base-change-morphism",
   "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-coefficient-change",
@@ -515,7 +451,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-dcdd9d92c (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes, every cited statement and the main-20261015 rational proof. The re-split is faithful. Of the 11 old steps: old 2 and 4 become the filtered-legs criterion; old 3 is the existing imported lem-sfb-subfield-push-iso; old 6 is covered by the existing push-counit node, the ringed monoidal-comparisons node and det-prop-scalar-six-pullback; old 7 and 10 become the exchange-normalization node plus existing projection-shift nodes; old 8 becomes the common-field node; old 9 becomes the projection-square node; old 5 and 11 stay as assembly steps 3 and 6. The four new nodes are statement-only and of comparable size, none restates a clause of the item, and the proof is 6 steps and 2585 chars. All four statements are true. (A) Bounded continuity via det-pe-bounded-continuity-direct-image, with the leg identity checked on the one-object and ell-tower cases. (B) Compositum F, then generators clause (3) with E:=F, then scalar-pullback clauses (2) and (3). (C) Both composites have matching types; this is the old step-9 transpose calculation. (D) Triangle identity, adjoint shifts, and agreement with det-def-sfb-base-change-morphism-bc. Steps 1-6 and the hypotheses of lem-weil-pbc-coefficient-exchange-mates are verified; I found no cycle and no duplicate (I opened lem-sfb-qlbar-push-iso-proper, lem-sp-direct-image-change-ring-transpose and the continuity nodes), and no SGA. One fault, fixed: step 5 inverts the direct O_F-to-Qlbar push comparisons by part (1) without citing the coefficient cocycle. I added lem-pur-ringed-coefficient-projection-cocycle to its uses and text; proof_deps is unchanged. Batch 5: lem-pd-module-ringed-topos-derived-comparison is general module-object/ringed-topos infrastructure (Stacks 07A4/07A6/0B56). It is not given by Poincare duality and cannot be replaced by that leaf, and three PASSed sfb nodes already cite it, so I accept it. The trf reach through def-sfb-dc-lower-star, the upper-lower adjunction, integral-models-generators and the base-change-morphism nodes is generic and already in the base item's closure; the closure diff adds no trf node. Accepted. Advisory: the existing lem-sfb-qlbar-push-iso-proper would give E-to-Qlbar directly, but the blueprint continuity route is legitimate.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.ProperBaseChangeRational",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_rationalizationPushHom_boundedBelow",
@@ -545,5 +492,15 @@
   "group": "NY",
   "result": "pass",
   "note": "Identical in Lean, node and report to the PASSed head 551619cf1e56, which was returned only for the 60 s library-export timeout. Read independently. The standing setting (char p>0, p≠ℓ, separated finite type over k, IsProper p.left bound in all six theorems, one universe u) matches the node. Clause 1 inverts the actual derivedPushHom maps O_E->E (flatness from the named padicIntegers_invertEll), F/E finite (E≤F) and E->Qlbar on t.plus (bounded-below) K. Clauses 2-3 take Λ exactly E or Qlbar by bundled Mon equality, use the recorded boundedConstructible predicate, the landed moduleObjectProjectionMap (Rp*K⊗M->Rp*(K⊗Lp*M), K and M independent) and boundedConstructibleBaseChangeOfPreserves on every IsPullback square with g arbitrary; the preservation proof is a Prop term. No hollow definition, sorry only, docstrings with source, blueprint id and steps 1-11, statement verbatim, stmt_deps gain only two landed nodes. Edge cases covered. Overlaps with upstream (finite and Qlbar comparisons proved, clause 2 sorry) are recorded in the report and are not second definitions. nt_compile --json: clean at 47.2, 49.1 and 59.5 s; timeouts at 60 s under load ~110. The ~10-12 s one-time compiled-output (.olean) cost comes from theorems naming specific-ring maps and no meaning-preserving fix was found. Land at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261025T143214-L-964671",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

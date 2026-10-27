@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-central-action-derived-vanishing",
+ "kind": "statement",
+ "title": "Central-action identity and derived-invariant vanishing",
+ "statement": "Let $R$ be a commutative condensed ring on the coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], let $J$ be a topological group, and let $\\mathcal A_R(J)$ consist of internal $R$-modules with an action of the condensed group $\\underline J(S)=C(S,J)$ [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Let $\\Gamma_J$ be the submodule of sections fixed after every profinite base change and let $R\\Gamma_J$ be its ordinary total right derived functor [def-weil-abstract-derived-category], with the action-category and derived-functor structures of [lem-sfb-condensed-derived-restriction-calculus]. For $N\\in\\mathcal A_R(J)$ and $z\\in J$ in the centre, let $z_N:N\\to N$ be the equivariant endomorphism acting on sections over $S$ by the constant map $S\\to J$ of value $z$. Then\n$$R\\Gamma_J(z_N[0])=\\mathrm{id}_{R\\Gamma_J(N[0])}.$$\nIf $z_N-\\mathrm{id}_N$ is an isomorphism of action modules, then $R\\Gamma_J(N[0])$ is a zero object of $D(\\operatorname{Mod}_R)$. No triviality, finite-dimensionality, compactness or discreteness assumption on $N$ or $J$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice analytic input; agent expansion, returned comparison proof step 4: central action on equivariant injective resolutions and vanishing for invertible difference. Agent-formulated extraction; not asserted to be a theorem stated in the blueprint."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-derived-restriction-calculus"
+ ],
+ "proof": [
+  {
+   "text": "For every action module $M$, define $z_M(S)(m)=c_z\\cdot m$, where $c_z:S\\to J$ is constant. This is $R(S)$-linear and commutes with restrictions. For $g\\in C(S,J)$, pointwise centrality gives $c_zg=gc_z$, hence $z_M(S)(g\\cdot m)=g\\cdot z_M(S)(m)$. Thus it is a morphism in the action category of [def-sfb-condensed-action-module]. Every equivariant $f:M\\to M\\prime$ satisfies $f z_M=z_{M\\prime}f$ by its defining equivariance, also for all test sets. In particular these operators commute with any equivariant differential and augmentation.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice input: explicit central equivariance and naturality; agent expansion"
+   }
+  },
+  {
+   "text": "The input $N[0]$ is bounded below. By [lem-sfb-condensed-action-injective-infrastructure], choose an equivariant quasi-isomorphism $s:N[0]\\to I^\\bullet$ with $I^\\bullet$ a bounded-below complex of injectives in $\\mathcal A_R(J)$, which is K-injective. The same statement identifies $R\\Gamma_J(N[0])$ with $\\Gamma_J I^\\bullet$ in the derived category via the invertible computation unit. Step 1 supplies the chain map $z_I$ with $z_I s=s z_N[0]$. No underlying-module injectivity or continuous-cochain comparison is used.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH (lemma-injective-acyclic) and 05TI (lemma-enough-injectives-right-derived); internal action-category hypotheses supplied by the cited infrastructure statement"
+   }
+  },
+  {
+   "text": "By the fully fixed section condition of [def-sfb-condensed-action-module], a section $m\\in\\Gamma_J(I^q)(S)$ is fixed in particular for the identity base change $S\\to S$ and the constant $c_z\\in C(S,J)$. Thus $z_{I^q}(m)=m$. The invariants inclusion is injective on sections and its functor restricts equivariant maps, so $\\Gamma_J(z_{I^q})$ is the identity in every degree. Consequently $\\Gamma_J(z_I)$ is the identity chain map, not merely a map inducing identities on cohomology.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), dense-lattice input: evaluate the normalized invariant-submodule condition at the constant central element; agent expansion"
+   }
+  },
+  {
+   "text": "Write $F=R\\Gamma_J$, and let $Q_A,Q_R$ be localization from action complexes and module complexes. In [def-sfb-right-derived-functor] the computation unit $\\eta:Q_R\\Gamma_{J,K}\\Rightarrow FQ_A$ is natural and $\\eta_I$ is invertible. Hence $F(Q_Az_I)\\eta_I=\\eta_I Q_R(\\Gamma_Jz_I)=\\eta_I$, so $F(Q_Az_I)=1$. Applying $FQ_A$ to $z_I s=s z_N[0]$ now gives $F(Q_As)F(z_N[0])=F(Q_As)$. Since $s$ is a quasi-isomorphism, $F(Q_As)$ is invertible. Cancel it to obtain the required equality $F(z_N[0])=1$ in the ordinary derived category.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies); explicit naturality and cancellation with the universal computation unit"
+   }
+  },
+  {
+   "text": "Assume $u=z_N-1_N$ is invertible in the action category and set $X=R\\Gamma_J(N[0])$. Additivity of the ordinary derived functor from [lem-sfb-condensed-action-injective-infrastructure] and step 4 give $R\\Gamma_J(u[0])=R\\Gamma_J(z_N[0])-1_X=0$. Functors preserve inverses, so this zero endomorphism is invertible; composing it with its inverse yields $1_X=0$. For every object $Y$, any $f:X\\to Y$ satisfies $f=f1_X=0$, and any $h:Y\\to X$ satisfies $h=1_Xh=0$. There is a zero morphism in each direction, so $X$ is both initial and terminal, hence a zero object.",
+   "uses": [
+    "lem-sfb-condensed-action-injective-infrastructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0159 (lemma-right-derived-properties); elementary additive-category zero-object argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice input; explicit central-action resolution argument and computation-unit cancellation. Generic derived constructions checked in Stacks derived.tex, Tags 05TH, 05TI, 0159, 070Y and 070K; no claim that the blueprint states the extracted lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A central group element acts as the identity on derived invariants of internal condensed modules and invertibility of its difference from identity forces vanishing",
+   "results": "8 hits: ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, groupCohomology.subtype_comp_d₀₁_apply, groupCohomology.d₀₁_ker_eq_invariants, Representation.IntertwiningMap.isIntertwiningMap_of_mem_center, groupCohomology.subtype_comp_d₀₁, ContinuousCohomology.instLinearActionTopModuleCatInvariants, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff, groupCohomology.map_1_one",
+   "date": "2026-10-22",
+   "verdict": "no match: intertwining and low-degree ordinary group-cohomology statements do not give the derived internal condensed-module identity and vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Group cohomology is zero if a central element acts on the coefficient module with invertible operator z minus one",
+   "results": "8 hits: groupCohomology.subtype_comp_d₀₁_apply, groupCohomology.map_1_one, groupCohomology.map₁_one, groupCohomology.d₀₁_eq_zero, groupCohomology.subtype_comp_d₀₁_assoc, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff, Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff, groupCohomology.subtype_comp_d₀₁",
+   "date": "2026-10-22",
+   "verdict": "no match: intertwining and low-degree ordinary group-cohomology statements do not give the derived internal condensed-module identity and vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"IsCentral\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: intertwining and low-degree ordinary group-cohomology statements do not give the derived internal condensed-module identity and vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "(central|center).*(cohomolog|invariant)|(cohomolog|invariant).*(central|center)",
+   "results": "6 hits: Mathlib/Probability/Distributions/Gaussian/Fernique.lean, Mathlib/Probability/Distributions/Gaussian/Fernique.lean, Mathlib/Probability/Distributions/Gaussian/Fernique.lean, Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/Lie/Loop.lean, Mathlib/Algebra/Lie/Loop.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: intertwining and low-degree ordinary group-cohomology statements do not give the derived internal condensed-module identity and vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived invariants vanish when a central group element minus identity is an invertible coefficient endomorphism",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(central|center).*(cohomolog|invariant)|(cohomolog|invariant).*(central|center)",
+   "results": "6 hits: Mathlib/Probability/Distributions/Gaussian/Fernique.lean, Mathlib/Probability/Distributions/Gaussian/Fernique.lean, Mathlib/Probability/Distributions/Gaussian/Fernique.lean, Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/Lie/Loop.lean, Mathlib/Algebra/Lie/Loop.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary representation, topological-module, finite-cyclic or low-degree facts do not state this internal condensed-module derived identity and vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"center\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary representation, topological-module, finite-cyclic or low-degree facts do not state this internal condensed-module derived identity and vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A central element acts trivially on derived invariants of a group action on sheaves of modules",
+   "results": "8 hits: Subgroup.center.smulCommClass_left, Rep.invariantsAdjunction, IsCentralScalar.mk, Representation.instIsTrivialSubtypeMemSubgroupSubmoduleInvariantsCompLinearMapIdSubtypeToInvariants, Representation.le_comap_invariants, Subgroup.instNormalCenter, Representation.invariants_eq_top, Rep.invariantsFunctor_obj_carrier",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary representation, topological-module, finite-cyclic or low-degree facts do not state this internal condensed-module derived identity and vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A central group element acts as the identity on the right derived invariants functor for internal modules over a condensed ring",
+   "results": "8 hits: ContinuousCohomology.instLinearActionTopModuleCatInvariants, ContinuousCohomology.invariants, Representation.IntertwiningMap.isIntertwiningMap_of_mem_center, Rep.instLinearModuleCatInvariantsFunctor, Rep.instPreservesZeroMorphismsModuleCatInvariantsFunctor, Rep.Tor_obj, Representation.IntertwiningMap.centralMul, Rep.invariantsAdjunction_unit_app",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary representation, topological-module, finite-cyclic or low-degree facts do not state this internal condensed-module derived identity and vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Group cohomology vanishes if a central element minus identity acts invertibly on the coefficient module",
+   "results": "8 hits: groupCohomology.map₁_one, groupCohomology.map_1_one, groupCohomology.coboundaries₁_eq_bot_of_isTrivial, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff, groupCohomology.d₀₁_eq_zero, Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff, groupCohomology.H2π_eq_zero_iff, groupCohomology.subtype_comp_d₀₁_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary representation, topological-module, finite-cyclic or low-degree facts do not state this internal condensed-module derived identity and vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "def invariants|def invariantsFunctor|def invariantsAdjunction|isIntertwiningMap_of_mem_center|def centralMul|map₁_one|map_1_one|groupCohomologyπEven_eq_zero_iff",
+   "results": "17 hits: Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary representation, topological-module, finite-cyclic or low-degree facts do not state this internal condensed-module derived identity and vanishing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dense-lattice-derived-invariants-comparison",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), ordinary direct-image stability: dense-lattice analytic input; action of constant central elements on the invariant complex of an equivariant injective resolution, used in the invertible T_i-1 case of lem-sfb-dense-lattice-derived-invariants-comparison step 2.",
+   "via": [
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-central-action-derived-vanishing",
+  "worker": "stage1",
+  "summary": "N7: retained the complete statement and its hypotheses; checked upstream source for an exact finished declaration and found none. Five explicit steps establish central equivariance on all profinite sections, choose an existing equivariant injective resolution, prove degreewise identity on invariants, use the natural computation unit to identify the actual derived morphism, and deduce zero-object vanishing from additivity. All prerequisites are existing nodes; no new nodes or Mathlib leaves. Mathlib searches, including two semantic phrasings and candidate source inspection, found no exact match.",
+  "blueprint": "Realizes the auxiliary dense-lattice invertible-difference case beneath paragraph (3) of the main-20261015 direct-images proof. The ancestor command reports None for this already broken imported creation chain; retained its null ancestor and via list and filled its precise place. The chapter and unit routes are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-43d4ae6a4",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-43d4ae6a4 (reviewer sub-agent of L); spot-checked: I read the item and all four proof citations in full. Live is still unsplit with the same statement and stmt_deps; the only change is a proof filling an imported Q62 node, with 0 new nodes. No repair note exists for this item; the re-split note applies to the parent dense-lattice comparison only. Step 1: z_M is R(S)-linear because the action lands in End_{R(S)}; it commutes with restrictions by naturality of the action; it is equivariant because c_z g = g c_z pointwise for central z; and equivariant maps commute with it. Step 2: lem-sfb-condensed-action-injective-infrastructure supplies a bounded-below injective, K-injective resolution s with an invertible computation unit. Step 3: fully fixed sections, taken at the identity base change and the constant c_z, give z=id on invariants; injectivity of the natural inclusion makes Γ(z_I) the identity chain map. Step 4: naturality of η from def-sfb-right-derived-functor (a definition, so the route restriction does not apply) gives F(Qz_I)=1; the composition order of F(Qs)F(Qz_N)=F(Qs) is right, and cancelling the iso F(Qs) gives the result. Step 5: additivity from the infrastructure gives 0 invertible, so 1_X=0 and X is a zero object. I tested trivial J or z=1, a ℚ-space with multiplication by 2, the zero ring and empty S; the hypothesis matches what the consumer step 2 supplies. A DAG scan for central/centre with invariants finds no duplicate, and there is no cycle. Stacks tags 05TH, 05TI, 0159, 070Y and 070K exist; the source is main-20261015 direct-images (3) and no SGA is used. No tool_uses and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedCentralActionDerivedVanishing",
+  "declaration": "CategoryTheory.CondensedDerivedRestriction.centralAction_derived_vanishing",
+  "declarations": [
+   "CategoryTheory.CondensedDerivedRestriction.existsUnique_centralAction",
+   "CategoryTheory.CondensedDerivedRestriction.centralAction",
+   "CategoryTheory.CondensedDerivedRestriction.centralAction_apply",
+   "CategoryTheory.CondensedDerivedRestriction.centralAction_derived_vanishing"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedCentralActionDerivedVanishing.lean",
+  "statement": "theorem centralAction_derived_vanishing (N : Equivariant A J) (z : J) (hz : ∀ g : J, z * g = g * z) : (derived A J).map ((DerivedCategory.singleFunctor (Equivariant A J) 0).map (centralAction N z hz)) = 𝟙 ((derived A J).obj ((DerivedCategory.singleFunctor (Equivariant A J) 0).obj N)) ∧ (IsIso (centralAction N z hz - 𝟙 N) → IsZero ((derived A J).obj ((DerivedCategory.singleFunctor (Equivariant A J) 0).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea0938e0d",
+  "group": "O2",
+  "result": "pass",
+  "note": "Every clause matches: CondensedBar.Ring.{u}, arbitrary topological group J : Type u, N : Equivariant A J, centrality hz : ∀ g, z*g = g*z. centralAction is the unique map acting on every section by N.act S (const S z), so it is pinned and the ∃! is provable. Γ_J is the invariants structure whose image is exactly the sections fixed after every base change; RΓ_J is derived A J = its rightDerivedFunctor. The identity conclusion is an equality in the derived category; vanishing is IsIso(z_N − 1) in the action category ⇒ IsZero, with subtraction from actionPreadditive. lean.statement verbatim, 4 declarations present, only the item lean differs from live, dependency records equal live, no new nodes or repairs, no duplicate, docstrings carry the source and the 5 steps, all theorems sorry, report sections present. Edge cases checked: z=1, trivial J, zero ring/N, empty S, non-Hausdorff J. Advisory: Equivariant/derived are owned by def-sfb-condensed-equivariant-bar-data and def-sfb-condensed-derived-invariants, reached only through the stage-1 theorem stmt_dep restriction-calculus; injective-infrastructure has no Lean record yet. No compile: no file changed."
+ }
+}

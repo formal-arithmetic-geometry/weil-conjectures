@@ -1,0 +1,374 @@
+{
+ "id": "lem-sfb-generic-theta-abel-cartier-pullback",
+ "kind": "statement",
+ "title": "Generic Cartier pullback of the translated negative theta divisor",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $C/k$ a smooth projective connected curve of genus $g\\geq1$ [def-sc-curves, def-kun-projective, def-sc-genus], $P\\in C(k)$, and $(J,\\varphi)$ a Jacobian with its representing isomorphism [def-sc-jacobian]. Write $f_P(Q)=[\\mathcal O_C(Q-P)]$. For $0\\leq r\\leq g$, let $C^{(r)}$ be the scheme of effective degree-$r$ divisors, $f_P^{(r)}(D)=[\\mathcal O_C(D-rP)]$ its Abel morphism, and $W_r$ its scheme-theoretic image, as in [lem-sfb-symmetric-abel-image-geometry]. Put $\\Theta=W_{g-1}$ and $\\Theta^-=[-1]_J^*\\Theta$. For $a\\in J(k)$ write $t_a(x)=x+a$ and $\\Theta^-+a=t_{-a}^*\\Theta^-$. There exists a dense open subscheme $U\\subseteq J$ such that, for every $a\\in U(k)$, exactly one effective divisor $D(a)$ of degree $g$ maps to $a$ under $f_P^{(g)}$, this divisor is a sum of $g$ distinct points, and\n$$f_P^*(\\Theta^-+a)=D(a)$$\nas effective Cartier divisors on $C$ (closed subschemes locally cut out by a non-zero-divisor) [def-pc-divisor-line-bundle], where $\\Theta^-+a$ is an effective Cartier divisor on $J$ and the left side is its scheme-theoretic inverse image under $f_P$. In particular,\n$$f_P^*\\mathcal O_J(\\Theta^-+a)\\cong\\mathcal O_C(D(a)).$$\nDivisors on $C$ are as in [def-sc-divisor], the invertible module $\\mathcal O_J(\\Theta^-+a)$ associated with an effective Cartier divisor is that of [def-pc-divisor-line-bundle], invertible sheaves are as in [def-sc-invertible-module], and sheaf pullback is [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III Lemma 6.7, printed pp.105–106, including density of U and equality as Cartier divisors; notation for the translated inversion image of Theta immediately before Theorem 6.6."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-genus",
+  "def-sc-jacobian",
+  "lem-sfb-symmetric-abel-image-geometry",
+  "def-sc-divisor",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-divisor-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Write $H_r=C^{(r)}$ and $a_r=f_P^{(r)}$. The curve $C$ is integral with discrete valuation local rings by [lem-sc-smooth-connected-curve-local-rings], proper by [lem-pc-projective-proper], and geometrically integral by [prop-pc-xk-integral]. The Hilbert schemes $H_r$ are smooth proper varieties by [thm-pc-hilb-curves] and geometrically integral by [lem-sc-hilb-geometrically-integral]; they are locally Noetherian by [lem-weil-pbc-smooth-scheme-over-field-regular]. The fixed Jacobian is an abelian variety [def-sc-jacobian, def-sc-abelian-variety]; [lem-sc-abelian-variety-characterization] makes $J$ integral, and [lem-weil-pbc-smooth-scheme-over-field-regular] makes it locally Noetherian. It is quasi-compact since it is proper. By [lem-sfb-symmetric-abel-image-geometry], $\\Theta=W_{g-1}$ is integral and an effective Cartier divisor, and $a_g:H_g\\to J$ and $a_{g-1}:H_{g-1}\\to\\Theta$ are birational. The closed subscheme $\\Theta$ is locally Noetherian: on an affine open of $J$ its ring is a quotient of a Noetherian ring. It is proper by [lem-weil-pbc-closed-immersion-proper].",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-pc-projective-proper",
+    "prop-pc-xk-integral",
+    "thm-pc-hilb-curves",
+    "lem-sc-hilb-geometrically-integral",
+    "def-sc-jacobian",
+    "def-sc-abelian-variety",
+    "lem-sc-abelian-variety-characterization",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, first paragraph, using III 5.1(a); Stacks 0B9I (pic-proposition-hilb-d)."
+   }
+  },
+  {
+   "text": "The map $C\\to\\operatorname{Spec}k$ is flat by [lem-pc-flat-field], locally of finite presentation by [def-sbc-smooth-morphisms], and universally open by [lem-weil-pbc-flat-lfp-open]. Apply [lem-sfb-integral-pullback-geometric-flat-open] with second factor $H_{g-1}$ and then $\\Theta$: both $X=C\\times H_{g-1}$ and $Y=C\\times\\Theta$ are integral. They are proper over $k$: use [lem-weil-pbc-proper-base-change] for one projection and [lem-weil-pbc-proper-composition] for the structure map. Define $h=1_C\\times a_{g-1}:X\\to Y$ and $\\psi:Y\\to J$ by $\\psi(Q,b)=f_P(Q)+b$. The three maps $a_g,a_{g-1},\\psi$ are proper by [lem-weil-pbc-proper-over-separated], since their sources are proper over $k$ and their targets are separated (for $\\Theta$, this follows already from its properness). In particular the Abel maps have closed image [lem-weil-pbc-proper-closed-image]. Their birationality makes their images dense, so they are surjective. By [lem-weil-pbc-surjective-base-change], $h$ and every base change of $h$ are surjective.",
+   "uses": [
+    "lem-pc-flat-field",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sfb-integral-pullback-geometric-flat-open",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, degree-comparison map C times Theta to J; Stacks 01S1 (morphisms-lemma-base-change-surjective)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-birational-generic-isomorphism-open] to the proper birational Abel maps. Their targets are Noetherian: $J$ is quasi-compact and locally Noetherian, and $\\Theta$ is closed in $J$. Obtain dense opens $V_g\\subset J$ and $V_{g-1}\\subset\\Theta$ over whose full inverse images the respective maps are isomorphisms. In particular each $a\\in V_g(k)$ has a unique effective degree-$g$ divisor $D(a)$. Moreover $h$ is an isomorphism over $C\\times V_{g-1}$, a nonempty open in the integral scheme $Y$. Its inverse image is nonempty open in the integral scheme $X$, so $h$ identifies their generic points and function fields.",
+   "uses": [
+    "lem-sfb-birational-generic-isomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, zero-dimensional Abel-fibre open; III 5.1(a); Stacks 0BAJ (morphisms-lemma-birational-isomorphism-over-dense-open)."
+   }
+  },
+  {
+   "text": "We also need a nonempty open $R_g\\subset H_g$ of reduced divisors. If $g=1$, take $R_1=H_1=C$. If $g\\geq2$, let $\\beta:C\\times H_{g-2}\\to H_g$, $(Q,E)\\mapsto2Q+E$, be the composite of $(Q,E)\\mapsto(Q,Q+E)$ with $(Q,F)\\mapsto Q+F$, both given by the addition morphisms of [lem-pc-hilb-addition] (applied to the separated smooth morphism $C\\to\\operatorname{Spec}k$ of relative dimension $1$, all of whose Hilbert functors are representable by [thm-pc-hilb-curves]); on rational points they add the divisor of a rational point, so $\\beta(Q,E)=2Q+E$ for rational $Q,E$. Its source is proper by [lem-weil-pbc-proper-base-change, lem-weil-pbc-proper-composition]; hence $\\beta$ is proper by [lem-weil-pbc-proper-over-separated] and has closed image by [lem-weil-pbc-proper-closed-image]. Put $R_g=H_g\\setminus\\beta(C\\times H_{g-2})$. It is nonempty: [lem-pc-rational-points-dense] and the integral dimension-one curve imply that, after deleting any finite set of closed points, a rational point remains. Inductively choose $g$ distinct points. Their sum cannot equal $2Q+E$, by the nonnegative coefficients of effective divisors [def-sc-divisor]. Over algebraically closed $k$, every closed point of any fibre of $\\beta$ is rational, by [lem-sc-lft-over-field-jacobson-space, lem-weil-pbc-closed-point-residue-field-base]. Consequently a degree-$g$ divisor lies in this image precisely when it has a repeated point; thus $R_g(k)$ consists exactly of sums of $g$ distinct points. Since $H_g$ is integral, $R_g$ is dense.",
+   "uses": [
+    "thm-pc-hilb-curves",
+    "lem-pc-hilb-addition",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-pc-rational-points-dense",
+    "def-sc-divisor",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, removal of the images of repeated-point diagonals; Stacks 0B9I (pic-proposition-hilb-d), addition morphisms."
+   }
+  },
+  {
+   "text": "Let $\\alpha:X=C\\times H_{g-1}\\to H_g$ be the addition morphism of [lem-pc-hilb-addition] (with $d=g-1$, the factors swapped), sending a $T$-point $(Q,E)$ to the scheme-theoretic sum $Q+E$, whose ideal is the product of the ideals of $E$ and of the graph of $Q$. It is finite locally free of rank $g$ by [lem-pc-hilb-addition], the case $(1,g-1)$ of the rank $\\binom g1$ of [thm-pc-hilb-curves]. The Abel formulas give the equality of morphisms $\\psi h=a_g\\alpha$: tensoring $\\mathcal O_C(Q-P)$ and $\\mathcal O_C(E-(g-1)P)$ gives $\\mathcal O_C(Q+E-gP)$. This is an identity of families, hence of morphisms by the representing isomorphism [def-sc-jacobian], not just an identity on rational points. Above $V_g$, $a_g$ is an isomorphism, so $(\\psi h)^{-1}(V_g)\\to V_g$ is finite locally free of rank $g$. Over the generic point $\\eta$ of $J$, $h_\\eta$ is surjective by [lem-weil-pbc-surjective-base-change]. Its source is finite over $k(\\eta)$, so the underlying generic fibre of $\\psi$ is finite as well.",
+   "uses": [
+    "thm-pc-hilb-curves",
+    "lem-pc-hilb-addition",
+    "def-sc-jacobian",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, degree calculation; Stacks 0B9I, addition H_1 times H_(g-1) to H_g, replaces the equivalent factorial degree calculation."
+   }
+  },
+  {
+   "text": "The proper map $\\psi$ is quasi-compact, quasi-separated and of finite type. Apply [lem-weil-pbc-generic-finite-morphism-open-neighborhood] using its finite generic fibre, then [lem-sbc-generic-flatness] on the resulting integral base open. Shrink further to an affine neighbourhood $F$ of $\\eta$ with a finite free basis of rank $n$ supplied by [lem-sbc-finite-flat-affine-basis]. In fact $n=g$. To check this without a fibre-rank inequality, use [lem-sc-integral-function-field-affine-fraction] to identify the function field of either integral source with the fraction field of any nonempty affine open. For a finite dominant map of integral affine schemes, tensoring the finite domain algebra with the base fraction field is a finite-dimensional domain, hence a field (multiplication by each nonzero element is injective and therefore surjective); it is thus the source fraction field. Consequently $n=[k(Y):k(J)]$. Similarly the rank-$g$ composite over $V_g$ gives $g=[k(X):k(J)]$. The birational map $h$ identified these fields over $k(J)$ in Step 3, so $n=g$. Thus $\\psi^{-1}(F)\\to F$ is finite locally free of rank $g$.",
+   "uses": [
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "lem-sbc-generic-flatness",
+    "lem-sbc-finite-flat-affine-basis",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, final paragraph: replace the unproved normal-base fibre-rank bound by shrinking to a finite flat open. Stacks 02NW (morphisms-lemma-generically-finite), 052A (morphisms-proposition-generic-flatness), 02KB (morphisms-lemma-finite-flat)."
+   }
+  },
+  {
+   "text": "The isomorphism $a_g^{-1}(V_g)\\simeq V_g$ carries $R_g\\cap a_g^{-1}(V_g)$ to a nonempty open $V_g^{\\mathrm{red}}\\subset J$: the intersection is nonempty since $H_g$ is integral and both opens are nonempty. Put $U=F\\cap V_g^{\\mathrm{red}}$. This is nonempty, open and dense since $J$ is integral. Every $a\\in U(k)$ has its unique divisor $D(a)=P_1+\\cdots+P_g$ with all $P_i$ distinct, and the fibre $E_a=Y\\times_J\\{a\\}$ of $\\psi$ is finite of $k$-vector-space rank $g$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, intersect the degree-comparison open with the unique reduced-divisor open."
+   }
+  },
+  {
+   "text": "The first projection identifies $E_a$ with the closed subscheme $f_P^{-1}(\\Theta^-+a)$ of $C$. Indeed for every test scheme $T$, its pairs $(Q,b)$ satisfy $b\\in\\Theta(T)$ and $f_P(Q)+b=a_T$; eliminating $b$ gives $a_T-f_P(Q)\\in\\Theta(T)$, equivalently $f_P(Q)\\in\\Theta^-+a$. These constructions are inverse and functorial, so the identification is scheme-theoretic [def-pc-fibre-product]. The base change of $h$ onto $E_a$ is surjective by [lem-weil-pbc-surjective-base-change]. Its source is $\\alpha^{-1}(D(a))$, since $a_g$ is an isomorphism above $a$. By the effective-divisor description of rational points in [thm-pc-hilb-curves] and the formula $\\alpha(Q,E)=Q+E$ on rational points of [lem-pc-hilb-addition], its rational points are exactly $(P_i,D(a)-P_i)$, $1\\leq i\\leq g$. All its points are closed and rational, since it is finite over algebraically closed $k$ [lem-weil-pbc-closed-point-residue-field-base]. Their images in $E_a\\subset C$ are the distinct $P_i$. Surjectivity therefore shows that the support of $E_a$ is exactly $\\{P_1,\\ldots,P_g\\}$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-surjective-base-change",
+    "thm-pc-hilb-curves",
+    "lem-pc-hilb-addition",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, support calculation and identification of the incidence fibre with the inverse-image subscheme; Stacks 01S1."
+   }
+  },
+  {
+   "text": "Write $E_a=\\operatorname{Spec}B$. This is a finite $k$-algebra of dimension $g$ with $g$ distinct rational points. Evaluation $B\\to k^g$ is surjective: for each $i\\ne j$, choose $c_{ij}$ in the maximal ideal of $P_j$ but not that of $P_i$, and divide by its nonzero value at $P_i$; the product over $j\\ne i$ has evaluation the $i$th standard basis vector. Equal dimensions now make evaluation an isomorphism. Thus $E_a$ is the reduced closed subscheme on these points. By [lem-sc-smooth-connected-curve-local-rings], at $P_i$ its ideal is the maximal ideal of a discrete valuation ring, generated by a uniformizer, and elsewhere it is the unit ideal. This proves that $E_a$ is the effective Cartier divisor $\\sum_i[P_i]=D(a)$, including each multiplicity. Inversion and translation are scheme isomorphisms, so their pullbacks of the local non-zero-divisor equations of $\\Theta$ are again such equations; hence $\\Theta^-+a$ is effective Cartier too [def-pc-divisor-line-bundle].",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, equality as Cartier divisors: rank g and g distinct support points force all multiplicities to be one."
+   }
+  },
+  {
+   "text": "Finally, on an open of $J$ with Cartier equation $s$ for $\\Theta^-+a$, the ideal has basis $s$ and its dual has basis $s^\\vee$. Its pullback has the corresponding basis, and the ideal of $E_a$ has basis $f_P^\\#s$, a non-zero-divisor by Step 9. Send the pulled-back dual basis to $(f_P^\\#s)^\\vee$. If an equation changes to $us$ for a unit $u$, both dual bases change by $(f_P^\\#u)^{-1}$, so these isomorphisms glue. By [def-pc-divisor-line-bundle, def-pc-module-pullback] this gives $f_P^*\\mathcal O_J(\\Theta^-+a)\\simeq\\mathcal O_C(E_a)$. Substitute $E_a=D(a)$ and use [lem-pc-divisor-line-bundle-agrees-sc] for the curve divisor convention. No flatness of the Abel embedding is asserted or needed.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "def-pc-module-pullback",
+    "lem-pc-divisor-line-bundle-agrees-sc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III 6.7, associated invertible sheaves, by the local Cartier-ideal definition (Stacks 0C4U)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-pc-projective-proper",
+  "prop-pc-xk-integral",
+  "thm-pc-hilb-curves",
+  "lem-pc-hilb-addition",
+  "lem-sc-hilb-geometrically-integral",
+  "def-sc-jacobian",
+  "def-sc-abelian-variety",
+  "lem-sc-abelian-variety-characterization",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sfb-symmetric-abel-image-geometry",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-pc-flat-field",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sfb-integral-pullback-geometric-flat-open",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-birational-generic-isomorphism-open",
+  "lem-pc-rational-points-dense",
+  "def-sc-divisor",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-sbc-generic-flatness",
+  "lem-sbc-finite-flat-affine-basis",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-pc-fibre-product",
+  "def-pc-divisor-line-bundle",
+  "def-pc-module-pullback",
+  "lem-pc-divisor-line-bundle-agrees-sc"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "III Lemma 6.7, printed pp.105-106, with the equivalent Hilbert-addition rank calculation from Stacks 0B9I and generic-flatness shrinking (052A)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For the Jacobian of a genus g smooth projective curve, on a dense open set a has a unique reduced effective divisor D of degree g and the inverse image of the translate of the negative theta divisor by a under the Abel map is D",
+   "results": "8 hits; actual results: WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, WeierstrassCurve.Affine.Point.toClass_apply, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.Point.toClass, WeierstrassCurve.Affine.CoordinateRing.XYIdeal', WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂, WeierstrassCurve.Affine.Point.toClass_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give Weierstrass point/class-group formulas, scheme fibre-product maps, or analytic theta functions, not a Cartier pullback theorem for the Jacobian of an arbitrary-genus curve."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The theta divisor on a Jacobian pulls back along the Abel Jacobi curve map to the generic effective divisor of degree equal to the genus",
+   "results": "8 hits; actual results: WeierstrassCurve.Jacobian, WeierstrassCurve.toJacobian, WeierstrassCurve.Jacobian.Point.toAffineAddEquiv_apply, jacobiTheta, WeierstrassCurve.Jacobian.addMap, jacobiTheta₂_term, jacobiTheta_T_sq_smul, WeierstrassCurve.Jacobian.toAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give Weierstrass point/class-group formulas, scheme fibre-product maps, or analytic theta functions, not a Cartier pullback theorem for the Jacobian of an arbitrary-genus curve."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"theta\"",
+   "results": "0 hits; actual results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give Weierstrass point/class-group formulas, scheme fibre-product maps, or analytic theta functions, not a Cartier pullback theorem for the Jacobian of an arbitrary-genus curve."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetric.*power|theta.*divisor|Abel.*map",
+   "results": "0 hits; actual results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give Weierstrass point/class-group formulas, scheme fibre-product maps, or analytic theta functions, not a Cartier pullback theorem for the Jacobian of an arbitrary-genus curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback to a curve of a general translate of the theta divisor on its Jacobian is the unique reduced effective divisor of degree the genus",
+   "results": "8 hits; actual top results: WeierstrassCurve.Jacobian.baseChange_add, WeierstrassCurve.Jacobian.map_add, WeierstrassCurve.Jacobian.map_equation, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.Point.toClass, WeierstrassCurve.Affine.Point.map; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass-coordinate formulas do not give the arbitrary-genus scheme-theoretic Cartier pullback"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic translated negative theta divisor on an arbitrary genus Jacobian has scheme theoretic inverse image the unique degree g divisor on the curve",
+   "results": "8 hits; actual top results: WeierstrassCurve.Jacobian.negMap_eq, MeromorphicOn.divisor_fun_inv, WeierstrassCurve.Jacobian.addZ_neg, WeierstrassCurve.Jacobian.neg_of_Z_eq_zero', WeierstrassCurve.Jacobian.negMap, WeierstrassCurve.Jacobian.neg_smul_equiv, WeierstrassCurve.Jacobian.neg_smul, WeierstrassCurve.Jacobian.nonsingular_neg; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass negation and analytic meromorphic divisors do not state this theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"theta\", \"divisor\"",
+   "results": "0 hits; actual top results: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "theta.*divisor|Abel.?Jacobi|symmetric.*power",
+   "results": "0 hits; actual top results: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: zero hits in Mathlib/AlgebraicGeometry"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-theta-poincare-pullback",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: The normalized theta difference bundle pulls back to the Picard family. Milne III 6.8 proof, first sentence: apply III 6.7 on its dense open U; retain the scheme multiplicities, not merely the support.",
+   "via": [
+    "lem-sfb-theta-poincare-pullback",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-generic-theta-abel-cartier-pullback",
+  "worker": "stage1",
+  "summary": "Retained the statement. Followed Milne III 6.7: a birational Abel open and deletion of repeated divisors give unique reduced D(a); Hilbert divisor addition has rank g; its birational comparison with C times Theta gives a finite flat rank-g open of the incidence map. Identified each incidence fibre scheme-theoretically with the negative-theta translate pullback, and used rank g plus g points to prove reducedness and Cartier multiplicity one. The final line-bundle comparison is written in local equations, without falsely assuming f_P flat. One new Mathlib leaf for integral products; no new unsplit assertions.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: The normalized theta difference bundle pulls back to the Picard family. Milne III 6.8 proof, first sentence: apply III 6.7 on its dense open U; retain the scheme multiplicities, not merely the support. Steps 1-10 supply Milne III 6.7, the supporting generic Cartier identity needed before III 6.8. The ancestor command returns None; inherited null ancestor and via chain are preserved. Latest blueprint checked at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic scheme or Picard geometry tool in Milne III 6.7: Smooth connected curves: integral, local rings at closed points are DVRs. Used exactly as stated in the numbered proof steps, below the fixed alteration and level-structure route; no same-unit node supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic scheme or Picard geometry tool in Milne III 6.7: A scheme smooth over a field is regular. Used exactly as stated in the numbered proof steps, below the fixed alteration and level-structure route; no same-unit node supplies this fact."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Generic scheme or Picard geometry tool in Milne III 6.7: Finite generic fibers become a finite morphism near the generic points. Used exactly as stated in the numbered proof steps, below the fixed alteration and level-structure route; no same-unit node supplies this fact."
+   },
+   {
+    "node": "lem-sbc-generic-flatness",
+    "why": "Generic scheme or Picard geometry tool in Milne III 6.7: Generic flatness for a finite type morphism to an integral scheme. Used exactly as stated in the numbered proof steps, below the fixed alteration and level-structure route; no same-unit node supplies this fact."
+   },
+   {
+    "node": "lem-sbc-finite-flat-affine-basis",
+    "why": "Generic scheme or Picard geometry tool in Milne III 6.7: A finite flat section algebra has a finite basis on an affine neighbourhood of each target point.. Used exactly as stated in the numbered proof steps, below the fixed alteration and level-structure route; no same-unit node supplies this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-sbc-generic-flatness",
+  "lem-sbc-finite-flat-affine-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-a2c9c18f3",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-a2c9c18f3 (reviewer sub-agent of L); spot-checked: I read Milne III 6.7 and the notation before 6.6 (printed pp.101-106) in full, together with all 10 steps, every cited statement and the new node. Statement and stmt_deps are identical to live, where the item is still unsplit. Sign check: Theta^-+a = t_{-a}^*Theta^- and the fibre condition f_P(Q)+b=a both reduce to a-f_P(Q) in Theta. The statement asks for a dense U rather than Milne's largest U; Milne 6.8, the only consumer, uses just a dense open. The report's counterexample to Milne's sentence 'U normal implies fibre rank <= g' is correct (B=A+(x,y)t, t^2=x, special fibre of dimension 3). The delivery avoids that sentence: it shrinks U to a generic-flat free open (Step 6), and its argument that n=[k(Y):k(J)]=[k(X):k(J)]=g is correct. Steps 8-10 check out: the T-point identification with f_P^{-1}(Theta^-+a), support via the surjective base change of h, reducedness from g rational points in a dimension-g algebra (evaluation onto k^g surjective), Cartier multiplicity one from the DVR local rings, and the local line-bundle comparison without assuming f_P flat. g=1 and g=2 were checked. New Mathlib leaf: exact match with Integral.lean lines 105-109 (GeometricallyIntegral as defined at l.37-41); I searched the DAG for duplicates and found none. Batch-5: prop-pc-xk-integral, thm-pc-hilb-curves and lem-sc-hilb-geometrically-integral reach only generic trf geometry (the schematically-dense-open definition and proper-finite-fibre-finite-near). They are not part of the trace formula or Poincare duality, so I accept them. FIX (C4): Steps 4, 5 and 8 cited thm-pc-hilb-curves for alpha: C x H_{g-1} -> H_g, (Q,E) -> Q+E, finite locally free of rank g, and for beta=2Q+E. The current statement (3) of that node gives only some morphism H_{d1} x H_{d2} -> H_{d1+d2}; it does not identify H_1 with C and does not give the addition formula. The repair cites the closed node lem-pc-hilb-addition (Stacks 0B9G, pic.tex l.569) in those three steps and adds it to proof_deps; its hypotheses hold for C over Spec k. Corrected item file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-generic-theta-abel-cartier-pullback.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericThetaAbelCartierPullback",
+  "declaration": "AlgebraicGeometry.exists_dense_open_genericThetaAbelCartierPullback",
+  "declarations": [
+   "AlgebraicGeometry.IsPointedHilbertAbelMap",
+   "AlgebraicGeometry.translatedNegativeThetaIdeal",
+   "AlgebraicGeometry.exists_dense_open_genericThetaAbelCartierPullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericThetaAbelCartierPullback.lean",
+  "statement": "theorem exists_dense_open_genericThetaAbelCartierPullback {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsHProjective f] (g : ℕ) (hg : f.genus = g) (hgpos : 1 ≤ g) (P : Spec (.of k) ⟶ C) (hP : P ≫ f = 𝟙 _) (J : Over (Spec (.of k))) [GrpObj J] (hJ : @IsJacobian k _ C f _ _ _ (pointedAbelGeometricIntegrality f) J _) (eJ : (picardFunctorDegree f 0).obj.RepresentableBy J) (heJ : IsPicardZeroMul f eJ) (N : C.Pic) (hN : Nonempty ((fromSkeleton C.Modules).obj N.val ≅ P.ker.toModules)) (fP : Over.mk f ⟶ J) (hfP : ∀ (T : Over (Spec (.of k))) (Q : T ⟶ Over.mk f), ∃ (LQ : (pullback f T.hom).Pic), Nonempty ((fromSkeleton _).obj LQ.val ≅ (pullback.lift Q.left (𝟙 T.left) Q.w).ker.toModulesᵛ) ∧ ∃ hQ : LQ * Scheme.Pic.map (pullback.fst f T.hom) N ∈ (picardSubfunctorDegree f 0).obj (op T), eJ.homEquiv (Q ≫ fP) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f 0).toFunctor).app (op T) ⟨LQ * Scheme.Pic.map (pullback.fst f T.hom) N, hQ⟩) (H₀ : Over (Spec (.of k))) (e₀ : (hilbertPresheaf f (g - 1)).RepresentableBy H₀) (a₀ : H₀ ⟶ J) (ha₀ : IsPointedHilbertAbelMap f J eJ N (g - 1) H₀ e₀ a₀) (H : Over (Spec (.of k))) (eH : (hilbertPresheaf f g).RepresentableBy H) (aG : H ⟶ J) (haG : IsPointedHilbertAbelMap f J eJ N g H eH aG) : ∃ U : J.left.Opens, Dense (U : Set J.left) ∧ ∀ a : Over.mk (𝟙 (Spec (.of k))) ⟶ J, Set.range a.left ⊆ U → (∃! d : Over.mk (𝟙 (Spec (.of k))) ⟶ H, d ≫ aG = a) ∧ ∀ d : Over.mk (𝟙 (Spec (.of k))) ⟶ H, d ≫ aG = a → ∃ D : C.Divisor, 0 ≤ D ∧ Scheme.Divisor.degree C D = (g : ℤ) ∧ (∃ p : Fin g → closedPoints C, Function.Injective p ∧ D = ∑ i : Fin g, Finsupp.single (p i) 1) ∧ (eH.homEquiv d).val.comap (inv (pullback.fst f (𝟙 _))) = D.prod (fun q n ↦ Scheme.IdealSheafData.vanishingIdeal ⟨{q.val}, q.prop⟩ ^ n.toNat) ∧ (translatedNegativeThetaIdeal J a₀.left.ker a).IsInvertible ∧ ((translatedNegativeThetaIdeal J a₀.left.ker a).comap fP.left).IsInvertible ∧ (translatedNegativeThetaIdeal J a₀.left.ker a).comap fP.left = D.prod (fun q n ↦ Scheme.IdealSheafData.vanishingIdeal ⟨{q.val}, q.prop⟩ ^ n.toNat) ∧ Nonempty ((Scheme.Modules.tensorPullback fP.left).obj (translatedNegativeThetaIdeal J a₀.left.ker a).toModulesᵛ ≅ D.moduleOfSmoothConnectedCurve k C f)",
+  "branch": "sheaf-dag",
+  "by": "Q106",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05fb08bbc",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Checked against Milne III 6.7 (pp.105-106) and the notation before Thm 6.6. Hypotheses are identical to exists_pointedAbel_image_geometry; hfP and IsPointedHilbertAbelMap are equivalent to the dependency's family formulas and determine fP and the Abel maps uniquely (no arbitrary maps). Theta = a0.left.ker; translatedNegativeThetaIdeal pulls back along x -> a*x^{-1}, i.e. t_{-a}^*[-1]^*Theta (sign checked). All conclusion clauses present: dense U, exists-unique Hilbert point, D identified via inv(pullback.fst f (1)), g distinct points with coefficient 1, IsInvertible for both ideals, ideal equality with multiplicities (genuine Mathlib ideal product, = Divisor.idealSheaf), tensorPullback(I^dual) iso moduleOfSmoothConnectedCurve. g=1, any characteristic and universe u covered. Helpers non-hollow with docstrings; 10-step proof docstring; sorry only; lean.statement verbatim; node differs from the source clones only in lean; no name clashes; report sections present. Not recompiled (no change); worker reports a clean compile."
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-tensor-model-iso",
+ "kind": "statement",
+ "title": "Normalized natural isomorphism from the published tensor to a supplied tensor model",
+ "statement": "Let $C$ be a category with objects in universe $u+1$ and morphisms in universe $u$, essentially small in universe $u+1$. Let $J$ be a Grothendieck topology on $C$ and $R$ a sheaf of commutative rings in universe $u+1$. Use the module-sheaf category and its standard unbounded derived category $D(R)$ [def-weil-abstract-derived-category]. Let $a$ be a TensorModel $R$ [lem-weil-pbc-ringed-projection-restriction], with bifunctor $T$ and natural representative comparison $r$ on pairs of flat-term K-flat cochain complexes. Write $T_0$ for the published derived tensor [lem-weil-pbc-site-derived-tensor-descent], and $c_{P,Q}:Q\\operatorname{Tot}(P,Q)\\cong T_0(QP,QQ)$ for representativeIso [lem-weil-pbc-kflat-fixed-tensor-triangulated]. There exists a natural isomorphism $e:T_0\\cong T$ such that, for every pair of resolving complexes $P,Q$, $c_{P,Q}$ followed by $e_{QP,QQ}$ is exactly $r_{P,Q}$. No shift, boundedness, pullback, or nonzero-coefficient hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, definition-derived-tor and preceding independence construction; normalized comparison of flat-term K-flat representatives."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+ ],
+ "proof": [
+  {
+   "text": "Apply the normalized-isomorphism clause of cochain tensor model rigidity to the supplied bifunctor and its representative comparison. This gives e and equality of natural transformations on the product of the resolving cochain category. The supplied TensorModel and the rigidity theorem use definitionally identical coefficient universes, tensor functors, K-flatness and termwise flatness predicates.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical cochain representative arrow is representativeIso. Unfold their displayed definitions: the quotient-to-derived isomorphism has identity components; the initial identity and the published tensor applied to the product identity cancel by functoriality. Both remaining arrows are the same homotopy tensor comparison followed by the same resolving comparison. Evaluate the equality from step 1 at P,Q and substitute this equality of representative arrows.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-cochain-tensor-model-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, definition-derived-tor and preceding independence argument, implemented as a specialization of the proved cochain tensor model rigidity theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived tensor model identified on flat K flat cochain representatives has a unique natural isomorphism to the published derived tensor functor",
+   "results": "8 hits: Tor and Tor-prime declarations and mapDerivedCategorySingleFunctor; none is the normalized unbounded tensor comparison. Direct source search found the proved cochain_tensor_model_rigidity.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing cochain tensor model rigidity theorem; the new theorem only aligns its representative arrow with the fixed K-flat tensor interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "results": "7 hits including FullyFaithful.preimageIso and its hom/inv lemmas.",
+   "date": "2026-10-27",
+   "verdict": "Generic lifting machinery; the existing cochain rigidity statement already provides the required normalized isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "cochain_tensor_model_rigidity|representativeIso|ringedProjectionTensorModelIso",
+   "results": "7 Mathlib hits, all unrelated Subobject representative isomorphisms. Direct rg and the full source reading found cochain_tensor_model_rigidity and KFlatFixedTensor.representativeIso.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib specialization; align the two existing project interfaces by their definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionTensorExact",
+  "date": "2026-10-27",
+  "group": "E7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Proof, first paragraph: exact tensor and triangulated-thick closure; normalized tensor-model identification used to transfer fixed-factor exactness.",
+   "via": [
+    "lem-weil-pbc-proetale-projection-mate-slice-presentation",
+    "lem-weil-pbc-ringed-projection-tensor-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionTensorModelIso",
+  "file": "lean/Sheaf/Paper/RingedProjectionTensorModelIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.ringedProjectionTensorModelIso",
+  "statement": "theorem ringedProjectionTensorModelIso (a : TensorModel R) :\n    ∃ e : SheafOfModules.siteDerivedTensorIndependentCoefficients J R ≅ a.functor,\n      ∀ (P Q : CochainComplex (Mod R) ℤ) (hp : resolving R P) (hq : resolving R Q),\n        (SheafOfModules.KFlatFixedTensor.representativeIso R P Q hp.1 hq.1 hp.2 hq.2).hom ≫\n          e.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) =\n            a.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)",
+  "branch": "sheaf-dag",
+  "by": "E7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261027T034635-L-3668614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261027T034635-L-3668614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

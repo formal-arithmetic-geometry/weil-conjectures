@@ -1,0 +1,280 @@
+{
+ "id": "lem-weil-point-automorphism-derived-transport-inverse",
+ "kind": "statement",
+ "title": "Explicit inverse of the specified derived point-automorphism transport",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$ and $A_n=R/\\varpi^n$, $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$, and let $g:s\\to s$ be ANY scheme automorphism [def-weil-scheme-morphism-properties]. Use the small pro-etale site [def-weil-pbc-proetale-site], the finite constant coefficient sheaf or completed coefficient sheaf $\\Lambda_s$, for $\\Lambda=A_n$ or $R$ [def-weil-completed-integral-coefficients], and its ordinary unbounded derived module category [def-weil-abstract-derived-category]. Write $G=g^{-1}$ with the coefficient action transported by $c_\\Lambda^{-1}$, $P=Lg^*$ and $\\kappa_N:GN\\to PN$ for the SPECIFIED comparison of [def-weil-inverse-image-pullback-comparison]. For $\\Lambda=A_n$ allow every $N\\in D(s_{\\mathrm{proet}},A_n)$; for $\\Lambda=R$ allow every derived-complete $N\\in D(s_{\\mathrm{proet}},R)$ [def-weil-derived-complete]. No boundedness, constructibility, finite Tor amplitude or Weil structure is required.\n\nLet $U=(s,\\mathrm{id})$, $V=(s,g)$, and let $\\operatorname{ins}_{g,N}:N(V)\\to\\Gamma(s,GN)$ be the actual inverse-image colimit coprojection followed by sheafification, termwise on a representative complex, as in [lem-weil-point-automorphism-restriction-natural]. Let $E_{g,N}:\\Gamma(s,GN)\\xrightarrow{\\sim}N(V)$ be the evaluation identification of [lem-weil-proetale-isomorphism-inverse-image]. Then $\\operatorname{ins}_{g,N}^{-1}=E_{g,N}$, and\n$$\\rho_{g,N}=\\operatorname{res}_{g^{-1}}\\circ E_{g,N}:\\Gamma(s,GN)\\longrightarrow\\Gamma(s,N)$$\nis the two-sided inverse of $\\sigma^g_N=\\operatorname{ins}_{g,N}\\circ\\operatorname{res}_g$. These are $\\Lambda$-linear maps and are natural in derived morphisms, with sections taken through the exact derived sections functor [lem-weil-point-proetale-sections-exact].\n\nThe specified $\\kappa_N$ is invertible. At finite coefficients its inverse $\\delta_N$ is represented by $x\\otimes b\\mapsto c_{A_n}^{-1}(b)x$. Integrally, with the actual completion unit $u_N:N\\to\\widehat N$ and whole-cone normalization $\\theta_{g,N}:PN\\xrightarrow{\\sim}G\\widehat N$ of [lem-weil-isomorphism-derived-pullback-comparison-normalization], its inverse is $\\delta_N=G(u_N)^{-1}\\theta_{g,N}$, as a map of the ENTIRE derived objects. In particular the specified composite\n$$t^g_N=\\Gamma(s,\\kappa_N)\\sigma^g_N:\\Gamma(s,N)\\longrightarrow\\Gamma(s,PN)$$\nhas the two-sided inverse $\\rho_{g,N}\\Gamma(s,\\delta_N)$ in $D(\\Lambda)$, natural in $N$.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), (1.1.10)-(1.1.11), (1.1.14), printed pp. 150-153; explicit coefficient-category verification is agent work extracted from the returned proof of lem-weil-frobenius-cohomology-transport-iso; Point-transport factor of each first arrow marked isomorphism in the two displayed composites; returned proof steps 1-3 and finite/integral part of step 4."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-derived-complete",
+  "lem-weil-point-automorphism-restriction-natural",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "def-weil-frobenius-point-transport"
+ ],
+ "proof": [
+  {
+   "text": "Apply the evaluation isomorphism for the site equivalence to $U$: $(GN)(U)\\cong N(V)$. The restriction-naturality lemma identifies the ACTUAL colimit insertion followed by sheafification with the identity in these coordinates. Hence $E_{g,N}\\operatorname{ins}_{g,N}=1$ and $\\operatorname{ins}_{g,N}E_{g,N}=1$ termwise, and the insertion is invertible with inverse $E_{g,N}$. These identities commute with differentials because evaluation and insertion are natural in the sheaf.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-point-automorphism-restriction-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First arrows of the two displayed cohomology composites; explicit point factor and inverse, agent argument."
+   }
+  },
+  {
+   "text": "In the slice site $g:V\\to U$ has inverse $g^{-1}:U\\to V$: indeed $g\\circ g^{-1}=1_s$ and $1_s\\circ g=g$. Contravariant functoriality gives $\\operatorname{res}_{g^{-1}}\\operatorname{res}_g=1_{N(U)}$ and $\\operatorname{res}_g\\operatorname{res}_{g^{-1}}=1_{N(V)}$. With $\\rho=\\operatorname{res}_{g^{-1}}E$ and $\\sigma=\\operatorname{ins}\\operatorname{res}_g$, substitute the insertion identities to obtain $\\rho\\sigma=1$ and $\\sigma\\rho=1$. The restriction-naturality lemma makes $\\sigma$ $\\Lambda$-linear for the transported action, so its inverse $\\rho$ is linear: apply $\\sigma$ to $\\rho(by)$ and $b\\rho(y)$ and cancel. Restriction and evaluation are linear over constant scalars as well, so insertion and its inverse have this linearity.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First arrows of the two displayed cohomology composites; explicit point factor and inverse, agent argument."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-finite-comparison-complex-isomorphism] to the specified finite comparison on every complex. Its inverse delta is a natural chain map: derive naturality of the comparison from its adjunction-unit section formula, then invert the natural isomorphism. Linearity of delta and the formula kappa(x)=the restricted generator give delta(b times generator(x))=c inverse(b) times x. The two inverse identities are those of this natural isomorphism.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-finite-comparison-complex-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First arrows of the two displayed cohomology composites; explicit point factor and inverse, agent argument."
+   }
+  },
+  {
+   "text": "Use coefficientDerivedSystemEvaluationCalculus to obtain a coherent calculus S. The existing comparison-naturality theorem supplies a natural theta on all ambient objects with kappa followed by theta equal to G of the actual S.adjunction unit; it packages the normalization lemma without choosing a complete input. The reconstruction theorem makes the unit invertible on every derived-complete N. Hence kappa_N is invertible. Take Delta_N to be its inverse isomorphism, and epsilon_N to be G of the unit isomorphism. Cancellation gives Delta_N.hom=theta_N followed by epsilon_N.inv, and naturality of the inverse follows by cancelling kappa on both sides of its naturality square.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-isomorphism-comparison-natural",
+    "lem-pur-normalized-actual-reconstruction-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First arrows of the two displayed cohomology composites; explicit point factor and inverse, agent argument."
+   }
+  },
+  {
+   "text": "Repeat the proved algebraically-closed-field ring-retraction argument with independent site and coefficient universes; this is also the argument of the current point-sections exactness node. Evaluation preserves epimorphisms by the affine weak-contractibility theorem, and kernels sectionwise. Restriction of scalars preserves finite limits and colimits by reflection to underlying abelian groups. Apply the exact-functor derived natural-isomorphism and composition comparisons to sigma. The representative formula is their localization formula. Uniqueness follows from cancellation on every Q(N) and Localization.natTrans_ext. For the finite comparison, localize the natural chain isomorphism and use the same localization formula for both hom and inverse.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-weil-point-automorphism-restriction-natural",
+    "lem-weil-pbc-wcontractible-geometric-criterion",
+    "lem-weil-pbc-wcontractible-affine-weakly-contractible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First arrows of the two displayed cohomology composites; explicit point factor and inverse, agent argument."
+   }
+  },
+  {
+   "text": "Put $t=\\Gamma(\\kappa)\\sigma$ and $r=\\rho\\Gamma(\\delta)$. Functoriality of sections and the identities already proved give $rt=\\rho\\Gamma(\\delta\\kappa)\\sigma=\\rho\\sigma=1$ and $tr=\\Gamma(\\kappa)\\sigma\\rho\\Gamma(\\delta)=\\Gamma(\\kappa\\delta)=1$. Finite-level naturality of $\\kappa,\\delta$ follows from the natural scalar-extension isomorphism; integral naturality follows from the normalization lemma. Together with step 5 these give naturality of $t$ and $r$ in derived morphisms. All maps are $\\Lambda$-linear. None of the steps imposes constructibility, a Tor bound, boundedness, or a Weil structure; derived completeness was used only for the integral inverse in step 4.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "lem-weil-isomorphism-comparison-natural"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+    "place": "First arrows of the two displayed cohomology composites; explicit point factor and inverse, agent argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-automorphism-restriction-natural",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-finite-comparison-complex-isomorphism",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-isomorphism-comparison-natural",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-wcontractible-geometric-criterion",
+  "lem-weil-pbc-wcontractible-affine-weakly-contractible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
+  "place": "Existing six-step transport argument, formalized using exact evaluation, localization, existing comparison naturality/reconstruction, and the finite comparison isomorphism sublemma (V2, 2026-10-25)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an automorphism of an algebraically closed point, the restriction insertion and completed derived pullback comparison have an explicit inverse on derived complete constructible complexes",
+   "results": "AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι; AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc; AlgebraicGeometry.Scheme.restrictFunctorΓ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic component results do not state the specified pro-etale transport/exchange on these coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme automorphism induces an invertible linear map on derived sections at an algebraically closed point through inverse image and derived complete pullback",
+   "results": "AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; AlgebraicGeometry.Scheme.inv_appTop; AlgebraicGeometry.Scheme.Hom.inv_appTop; AlgebraicGeometry.Scheme.stalkMap_hom_inv; AlgebraicGeometry.Scheme.Hom.stalkMap_inv_hom_apply; AlgebraicGeometry.Scheme.Hom.inv_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic component results do not state the specified pro-etale transport/exchange on these coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"pullback\"",
+   "results": "CategoryTheory.instFinitaryExtensiveSheafOfHasPullbacksOfHasSheafify; CategoryTheory.instAdhesiveSheafOfHasPullbacksOfHasPushoutsOfHasSheafify; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; CategoryTheory.GrothendieckTopology.overPullback; CategoryTheory.GrothendieckTopology.overMapPullback; CategoryTheory.GrothendieckTopology.overMapPullbackCongr; CategoryTheory.Sheaf.toPushforwardOverPullback; CategoryTheory.GrothendieckTopology.overMapPullbackId",
+   "date": "2026-10-22",
+   "verdict": "no match: generic component results do not state the specified pro-etale transport/exchange on these coefficient categories"
+  },
+  {
+   "tool": "grep",
+   "query": "pointTransport|automorphism.*[Tt]ransport|[Tt]ransport.*automorphism",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: generic component results do not state the specified pro-etale transport/exchange on these coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse of completed derived pullback comparison along an isomorphism on derived complete complexes of sheaves",
+   "results": "CategoryTheory.Limits.instIsIsoPullbackComparison; CategoryTheory.ChosenPullbacksAlong.isoInv; CategoryTheory.Functor.sheafPushforwardContinuousIso_inv; CategoryTheory.ChosenPullbacksAlong.iso_pullback_obj; CategoryTheory.Functor.leftDerivedNatIso_inv; CategoryTheory.ChosenPullbacksAlong.isoInv_pullback_obj_hom; CategoryTheory.Functor.rightDerivedNatIso_inv; HomologicalComplex.Hom.isoApp_inv",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary pullback comparisons and inverse components of derived natural isomorphisms do not identify the specified completed comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Explicit inverse of inverse image insertion restriction and completed derived pullback for a scheme automorphism at an algebraically closed point",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι; AlgebraicGeometry.Scheme.Hom.preimageIso_inv_ι; AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι_assoc; AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map; AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv; AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme restriction and structure-sheaf module formulas do not state the pro-etale completed-coefficient assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "completion|completed|adic",
+   "results": "Mathlib/CategoryTheory/Sites/Pretopology.lean; Mathlib/CategoryTheory/Sites/Grothendieck.lean; Mathlib/CategoryTheory/Sites/Grothendieck.lean; searched Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-22",
+   "verdict": "No match: the point transport search has no hits; completion hits in Sites only concern topology terminology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of schemes gives an inverse to the comparison from inverse image to completed derived pullback of pro etale module complexes",
+   "results": "AlgebraicGeometry.Scheme.inv_appTop; AlgebraicGeometry.Scheme.Hom.inv_appTop; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τl; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl; AlgebraicGeometry.Scheme.Modules.inv_app; AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Hom.inv_app; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme restriction and structure-sheaf module formulas do not state the pro-etale completed-coefficient assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-frobenius-cohomology-transport-iso",
+  "date": "2026-10-22",
+  "group": "Q78"
+ },
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Point-transport factor of each first arrow marked isomorphism in the two displayed composites; returned proof steps 1-3 and finite/integral part of step 4.",
+   "via": [
+    "lem-weil-frobenius-cohomology-transport-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-point-automorphism-derived-transport-inverse",
+  "worker": "stage1",
+  "summary": "Q114 reused the existing evaluation, restriction, scalar-extension, exact-sections, and whole-cone normalization statements; wrote the two inverse compositions and derived naturality without new nodes. Statement unchanged.",
+  "blueprint": "Realizes the point-transport factor of the first arrows marked isomorphism in def-weil-global-geometric-frobenius, through lem-weil-frobenius-cohomology-transport-iso; steps 1-2 invert insertion/restriction, 3-4 invert the specified comparison, 5-6 pass to derived sections and compose.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic site-isomorphism evaluation and coefficient-ring isomorphism; the unit has no replacement for this exact identification."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic change of scalars along a ring-sheaf isomorphism, used for the finite comparison; the unit has no scalar-extension calculation."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exact evaluation on an algebraically closed point, needed for unbounded derived sections; the unit does not prove it."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "why": "Generic whole-cone normalization of completed pullback under a scheme isomorphism; needed for the specified map, not supplied by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-37ad558b1",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-37ad558b1 (reviewer sub-agent of L); spot-checked: First split (no repair note) of the unsplit node, which has 0 new nodes. Its statement and inherited fields are byte-identical to side-live, and all 13 dependencies exist; review_split's 'no such node' messages are the chapter-symlink artifact. There is no cycle and no SGA source. Step 1: the clause-1 evaluation E: (GN)(U)≅N(V), together with restriction-natural's 'ins is the identity under that identification', gives ins=E^{-1}. Step 2 (elementary): in the slice, g:V→U and g^{-1}:U→V compose to the identity both ways, so ρσ=σρ=1; ρ is linear by cancellation from σ(bx)=c^{-1}(b)σ(x). Step 3: the scalar-extension lemma with R=g^{-1}(A_n)_s, S=(A_n)_s and c=c_{A_n} (clause 3) gives M⊗S=g^*N^i and M^{(c)}=GN^i, and its inverse m↦η(m⊗1) is exactly κ^i of def part (a). Step 4: the normalization lemma's hypotheses hold (X=Y=s, ℓ≠p), and its derived-complete sentence gives the inverse G(u_N)^{-1}θ. Step 5: the sections lemma applies over algebraically closed k for both ring sheaves, and naturality of ρ is derived by cancellation. Step 6 composition checked. Small case n=1, N=Λ_s: rt(b)=b. Deligne Weil II (1.1.7) and (1.1.10) at pp.150–151 were read (transport de structure), so proof_origin agent is correct. The four declared tool_uses are generic, are actually used, and were already stmt_deps; I accept them."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointAutomorphismDerivedTransportInverse",
+  "declaration": "AlgebraicGeometry.ProEtale.point_automorphism_integral_transport_inverse",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.pointRestrictionSections_exact",
+   "AlgebraicGeometry.ProEtale.pointRestrictionSections_preservesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.pointRestrictionSections_preservesFiniteColimits",
+   "AlgebraicGeometry.ProEtale.pointInverseSections",
+   "AlgebraicGeometry.ProEtale.pointInverseSectionsFactors",
+   "AlgebraicGeometry.ProEtale.pointInverseRestriction",
+   "AlgebraicGeometry.ProEtale.pointInverseEvaluation",
+   "AlgebraicGeometry.ProEtale.pointInverseInsertion",
+   "AlgebraicGeometry.ProEtale.pointInverseRestrictionArrow",
+   "AlgebraicGeometry.ProEtale.point_automorphism_sections_inverse",
+   "AlgebraicGeometry.ProEtale.pointInverseSigmaIso",
+   "AlgebraicGeometry.ProEtale.point_automorphism_finite_transport_inverse",
+   "AlgebraicGeometry.ProEtale.point_automorphism_integral_transport_inverse"
+  ],
+  "file": "lean/Sheaf/Paper/PointAutomorphismDerivedTransportInverse.lean",
+  "statement": "theorem point_automorphism_integral_transport_inverse : ∃ S : CoefficientDerivedSystemCalculus l E (Spec (.of D.k)), Nonempty (CoefficientDerivedSystemCoherence l E (Spec (.of D.k)) S) ∧ ∃ θ : ∀ M : DerivedCategory (integralTowerModules l E (Spec (.of D.k))), (integralDerivedPullback l E g).obj M ≅ (inverseImageIntegralDerived l E g).obj ((S.reduction ⋙ coefficientSequenceLimit l E (Spec (.of D.k))).obj M), (∀ M : DerivedCategory (integralTowerModules l E (Spec (.of D.k))), inverseImagePullbackComparisonDerived l E g (frobeniusPointPrimeUnit D l hl) (frobeniusPointPrimeUnit D l hl) M ≫ (θ M).hom = (inverseImageIntegralDerived l E g).map (S.adjunction.unit.app M)) ∧ (∀ (M M' : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))) (f : M ⟶ M'), (integralDerivedPullback l E g).map f ≫ (θ M').hom = (θ M).hom ≫ (inverseImageIntegralDerived l E g).map ((S.reduction ⋙ coefficientSequenceLimit l E (Spec (.of D.k))).map f)) ∧ ∃ Δ : ∀ N : DerivedCategory (integralTowerModules l E (Spec (.of D.k))), IsDerivedCompleteUnrestricted l E (Spec (.of D.k)) N → ((integralDerivedPullback l E g).obj N ≅ (inverseImageIntegralDerived l E g).obj N), (∀ (N : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))) (hN : IsDerivedCompleteUnrestricted l E (Spec (.of D.k)) N), (Δ N hN).inv = inverseImagePullbackComparisonDerived l E g (frobeniusPointPrimeUnit D l hl) (frobeniusPointPrimeUnit D l hl) N ∧ ∃ ε : (inverseImageIntegralDerived l E g).obj N ≅ (inverseImageIntegralDerived l E g).obj ((S.reduction ⋙ coefficientSequenceLimit l E (Spec (.of D.k))).obj N), ε.hom = (inverseImageIntegralDerived l E g).map (S.adjunction.unit.app N) ∧ (Δ N hN).hom = (θ N).hom ≫ ε.inv) ∧ (∀ (N N' : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))) (hN : IsDerivedCompleteUnrestricted l E (Spec (.of D.k)) N) (hN' : IsDerivedCompleteUnrestricted l E (Spec (.of D.k)) N') (v : N ⟶ N'), (integralDerivedPullback l E g).map v ≫ (Δ N' hN').hom = (Δ N hN).hom ≫ (inverseImageIntegralDerived l E g).map v) ∧ ∃ T : ∀ N : DerivedCategory (integralTowerModules l E (Spec (.of D.k))), IsDerivedCompleteUnrestricted l E (Spec (.of D.k)) N → ((pointInverseSections l E D hl none).obj N ≅ (pointInverseSections l E D hl none).obj ((integralDerivedPullback l E g).obj N)), (∀ (N : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))) (hN : IsDerivedCompleteUnrestricted l E (Spec (.of D.k)) N), (T N hN).hom = (pointInverseSigmaIso l E D hl g none).hom.app N ≫ (pointInverseSections l E D hl none).map (inverseImagePullbackComparisonDerived l E g (frobeniusPointPrimeUnit D l hl) (frobeniusPointPrimeUnit D l hl) N) ∧ (T N hN).inv = (pointInverseSections l E D hl none).map (Δ N hN).hom ≫ (pointInverseSigmaIso l E D hl g none).inv.app N) ∧ (∀ (N N' : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))) (hN : IsDerivedCompleteUnrestricted l E (Spec (.of D.k)) N) (hN' : IsDerivedCompleteUnrestricted l E (Spec (.of D.k)) N') (v : N ⟶ N'), (pointInverseSections l E D hl none).map v ≫ (T N' hN').hom = (T N hN).hom ≫ (pointInverseSections l E D hl none).map ((integralDerivedPullback l E g).map v) ∧ (pointInverseSections l E D hl none).map ((integralDerivedPullback l E g).map v) ≫ (T N' hN').inv = (T N hN).inv ≫ (pointInverseSections l E D hl none).map v)",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-984fc0730",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed b5b95a9b (H13/H2), repaired exactly as prescribed. The dependency node lem-weil-point-proetale-sections-exact is now byte-identical to side-live (NB's PointProEtaleSectionsExact record). The PointRestrictionSectionsExact module is removed. pointRestrictionSections_exact (sorry, with source and blueprint docstrings) and its two instances are moved into the item module in a section with independent universes t and u, and listed in the item's lean.declarations (13, unique). The item module's import is swapped to PointProEtaleSectionsExact; the transport theorems, pointInverseRestriction (.choose of the restriction-natural theorem) and pointInverseSigmaIso are unchanged from the head whose mathematics was checked clause by clause, and I re-confirmed them against the node (sigma/rho, finite delta formula c^-1(b)x, integral Delta = theta then G(unit)^-1, T = sigma then Gamma(kappa) with inverse Gamma(delta) then rho, naturality, completeness only for the integral inverse). The statement is verbatim in the file; the report has the Worker report and Second reading by NP sections and the universe reason. No name collision in live. Advisory: plain pointRestriction* defs come from a stage-1 theorem stmt_dep that is genuinely used (.choose); def-trf-point-restriction-coordinates could also be cited later. No compile: no file changed; the delivery reports a clean scompile (9.3 s) and a dry run OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T144207-L-1205858",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

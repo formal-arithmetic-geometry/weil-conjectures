@@ -139,7 +139,32 @@
   "item": "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "Field.exists_p_basis"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "Field.exists_p_basis",
+     "module": "WeilConjectures.FieldTheory.ExistsPBasis",
+     "lines": [
+      37,
+      104
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -177,5 +202,48 @@
   "landing": "20261012T202240-L-704681",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $p$ be a prime number, $k$ a field [def-weil-field] of characteristic $p$, and $k^p=\\{a^p:a\\in k\\}$, a subfield of $k$. Then there is a family $(t_i)_{i\\in I}$ of elements of $k$ (a $p$-basis of $k$) such that the monomials $t^E=\\prod_{i\\in I}t_i^{e_i}$, where $E=(e_i)_{i\\in I}$ runs over the families of integers $0\\le e_i<p$ with $e_i=0$ for all but finitely many $i$, form a basis of $k$ as a vector space over $k^p$.",
+  "proof": [
+   {
+    "text": "($k^p$ and $p$-independent subsets.) Since $p=0$ in $k$, the map $F:k\\to k$, $a\\mapsto a^p$, is a ring homomorphism: it is multiplicative, and $(a+b)^p=a^p+b^p$ because the binomial coefficients $\\binom pj$, $0<j<p$, are divisible by the prime $p$. So $k^p=F(k)$ is a subring of $k$, and a subfield since $(a^p)^{-1}=(a^{-1})^p$ for $a\\ne0$. For $c$ in the prime field $\\mathbf F_p\\subseteq k$ we have $c^p=c$, so $\\mathbf F_p\\subseteq k^p$. For a subset $S\\subseteq k$ let $\\mathcal M(S)$ be the set of families $E=(e_s)_{s\\in S}$ of integers $0\\le e_s<p$, almost all $0$, and $s^E=\\prod_{s\\in S}s^{e_s}$. Call $S$ $p$-independent if the family $(s^E)_{E\\in\\mathcal M(S)}$ is linearly independent over $k^p$: whenever $\\sum_{E}a_Es^E=0$ with $a_E\\in k^p$, almost all $0$, all $a_E=0$. For $S'\\subseteq S$, extension by zero identifies $\\mathcal M(S')$ with the $E\\in\\mathcal M(S)$ vanishing outside $S'$, with the same monomials. The lemma asserts that some $S$ is $p$-independent and its monomials span $k$ over $k^p$ (then take $I=S$, $t_i=i$). ([def-weil-field]).",
+    "uses": [
+     "def-weil-field"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(A maximal $p$-independent subset, by Zorn's lemma.) Let $\\mathcal P$ be the set of $p$-independent subsets of $k$. Every chain $\\mathcal C\\subseteq\\mathcal P$ has an upper bound in $\\mathcal P$. If $\\mathcal C=\\emptyset$, take $\\emptyset\\in\\mathcal P$: $\\mathcal M(\\emptyset)=\\{0\\}$ and its only monomial $1\\ne0$ is independent over the field $k^p$. If $\\mathcal C\\ne\\emptyset$, let $U=\\bigcup\\mathcal C$, which contains every member of $\\mathcal C$; we show $U\\in\\mathcal P$. Let $\\sum_{E\\in\\mathcal F}a_Eu^E=0$ with $\\mathcal F\\subseteq\\mathcal M(U)$ finite and $a_E\\in k^p$. The union of the supports of the $E\\in\\mathcal F$ is a finite set $\\{u_1,\\dots,u_r\\}\\subseteq U$ with $u_j\\in S_j\\in\\mathcal C$. As any two members of $\\mathcal C$ are comparable for inclusion, by induction on $r$ one of $S_1,\\dots,S_r$ (any member of $\\mathcal C$ if $r=0$), call it $S_0$, contains all the others, hence all $u_j$. So every $E\\in\\mathcal F$ is the extension by zero of an element of $\\mathcal M(S_0)$, distinct $E$ giving distinct elements, with the same monomial, and the relation is a $k^p$-linear relation among monomials of $S_0\\in\\mathcal P$; hence all $a_E=0$, and $U\\in\\mathcal P$. By Zorn's lemma (applied to $\\mathcal P$ ordered by inclusion) there is a maximal $T\\in\\mathcal P$: $T$ is $p$-independent, and no $p$-independent subset of $k$ strictly contains $T$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(The $k^p$-span $L$ of the monomials of $T$ is a subfield of $k$.) Let $L=\\{\\sum_{E\\in\\mathcal M(T)}a_Et^E: a_E\\in k^p,\\ \\text{almost all }0\\}$. It is a $k^p$-subspace of $k$ containing $k^p$ ($E=0$) and $T$ ($E$ the indicator of $t\\in T$). For $E,E'\\in\\mathcal M(T)$, $t^Et^{E'}=\\prod_{t\\in T}t^{e_t+e'_t}$; for each $t$ with $e_t+e'_t\\ge p$ write $t^{e_t+e'_t}=t^p\\cdot t^{e_t+e'_t-p}$ with $t^p\\in k^p$ and $0\\le e_t+e'_t-p<p$. Hence $t^Et^{E'}=c\\,t^{E''}$ with $c\\in k^p$ and $E''\\in\\mathcal M(T)$, and by bilinearity of the product $L$ is closed under multiplication: $L$ is a subring of $k$. For a finite $G\\subseteq T$ let $L_G\\subseteq L$ be the $k^p$-span of the $t^E$ with $E$ vanishing outside $G$; the same computation (with $E''$ vanishing outside $G$) shows that $L_G$ is a subring, and it is spanned over $k^p$ by the at most $p^{|G|}$ monomials, so finite-dimensional. Let $0\\ne y\\in L$; $y$ lies in $L_G$ for $G$ the union of the supports of the finitely many $E$ occurring in $y$. Multiplication by $y$ is a $k^p$-linear map $L_G\\to L_G$, injective since $k$ is a field, hence surjective (rank–nullity in the finite-dimensional $k^p$-space $L_G$), so $yz=1$ for some $z\\in L_G\\subseteq L$. Thus $L$ is a subfield of $k$ with $k^p\\subseteq L$ and $T\\subseteq L$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(An element outside $L$ has degree $p$ over $L$.) Let $t\\in k$ with $t\\notin L$, and $c=t^p\\in k^p\\subseteq L$. Then $t$ is algebraic over $L$, a root of the nonzero polynomial $X^p-c\\in L[X]$. Hence the subfield $L(t)$ is finite over $L$ and, with $e=[L(t):L]\\ge1$, the elements $1,t,\\dots,t^{e-1}$ form an $L$-basis of $L(t)$. Expressing $t^e$ in this basis gives a monic $m\\in L[X]$ of degree $e$ with $m(t)=0$, and every $g\\in L[X]$ with $g(t)=0$ is divisible by $m$ in $L[X]$ (write $g=qm+r$ with $\\deg r<e$; $r(t)=0$ forces $r=0$ by the independence of $1,\\dots,t^{e-1}$). In particular $m$ divides $X^p-c$, and $X^p-c=X^p-t^p=(X-t)^p$ in $k[X]$ ($p\\mid\\binom pj$ for $0<j<p$). So $m(Y+t)\\,h(Y)=Y^p$ in $k[Y]$ for some $h\\in k[Y]$. Let $a,b$ be the least degrees of a nonzero coefficient of $g(Y):=m(Y+t)$ and of $h$; since $k$ is a domain, the product of the lowest terms is the lowest term of $gh=Y^p$, so $a+b=p$, and likewise $\\deg g+\\deg h=p$. As $a\\le\\deg g$ and $b\\le\\deg h$, $a=\\deg g=e$, so $g$ is a monic monomial, $g=Y^e$, and $m=(X-t)^e$; in particular $e\\le p$. The coefficient of $X^{e-1}$ in $(X-t)^e$ is $-e\\,t$, and it lies in $L$. If $e<p$, then $e\\cdot1$ is a nonzero element of $\\mathbf F_p\\subseteq k^p\\subseteq L$ (Step 1), hence invertible in $L$, and $t\\in L$, a contradiction. So $e=p$: the elements $1,t,\\dots,t^{p-1}$ are linearly independent over $L$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(The maximal $T$ spans: $L=k$.) Suppose $t\\in k$ with $t\\notin L$. Then $t\\notin T$ (as $T\\subseteq L$), and $T'=T\\cup\\{t\\}$ is $p$-independent: $\\mathcal M(T')$ consists of the pairs $(E,j)$ with $E\\in\\mathcal M(T)$ and $0\\le j<p$, with monomial $t^E t^j$. Given $\\sum_{(E,j)}a_{E,j}t^Et^j=0$ with $a_{E,j}\\in k^p$, almost all $0$, put $b_j=\\sum_Ea_{E,j}t^E\\in L$; then $\\sum_{j<p}b_jt^j=0$, so all $b_j=0$ by Step 4, and then all $a_{E,j}=0$ because $T$ is $p$-independent (Step 2). So $T'\\in\\mathcal P$ strictly contains $T$, contradicting the maximality of $T$ (Step 2). Hence every $t\\in k$ lies in $L$, i.e. $L=k$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(Conclusion.) Let $I=T$ and $t_i=i$ for $i\\in T$, so that the families $E$ of the statement are the elements of $\\mathcal M(T)$. The monomials $t^E$, $E\\in\\mathcal M(T)$, are linearly independent over $k^p$ (Step 2: $T$ is $p$-independent) and span $L=k$ over $k^p$ (Steps 3 and 5). Hence they form a basis of $k$ over $k^p$: $(t_i)_{i\\in I}$ is a $p$-basis of $k$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

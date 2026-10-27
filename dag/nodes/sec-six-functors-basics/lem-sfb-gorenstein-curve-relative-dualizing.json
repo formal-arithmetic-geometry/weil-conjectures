@@ -1,0 +1,393 @@
+{
+ "id": "lem-sfb-gorenstein-curve-relative-dualizing",
+ "kind": "statement",
+ "title": "Relative dualizing line of an arbitrary nodal family",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and let $f:X\\to T$ be proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] and of finite presentation [def-sbc-locally-finite-presentation]. Assume every geometric fibre is nonempty, reduced, pure of dimension one and at worst nodal: at a singular geometric point its completed local ring is $\\Omega[[u,v]]/(uv)$, as in [def-weil-geometric-fibre, def-weil-pure-dimension, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. The relative dualizing sheaf $\\omega_{X/T}$ exists and is invertible [def-sc-invertible-module]. Here the relative dualizing sheaf means $H^{-1}(f^!\\mathcal O_T)$, where $f^!$ is the right adjoint of derived direct image on derived quasi-coherent modules; the relative dualizing complex is canonically $f^!\\mathcal O_T\\simeq\\omega_{X/T}[1]$. For every morphism $a:T'\\to T$, with $X'=X\\times_TT'$ and $b:X'\\to X$, there is a canonical isomorphism $b^*\\omega_{X/T}\\simeq\\omega_{X'/T'}$, compatible with composition of base changes and isomorphisms of families. On the smooth locus it is the module of relative differentials. In particular its restriction to a fibre is that fibre's Serre-duality module. No Noetherian, smooth-generic-fibre, irreducibility, stability or fixed-genus hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 0E6R, lemma-gorenstein-dualizing, and the relative dualizing complex discussion immediately preceding it; nodal fibres are Gorenstein. Arbitrary-base nodal specialization of this lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-sc-invertible-module",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-a1-relative-differentials-pullback-map",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sfb-flat-lci-base-change",
+  "def-sfb-flat-lci-adjunction-system",
+  "def-sfb-lci-curve-fundamental-class"
+ ],
+ "proof": [
+  {
+   "text": "Let $x\\in X$, $s=f(x)$, $V=\\operatorname{Spec}R\\ni s$ an affine open and $U'=\\operatorname{Spec}B'\\subseteq f^{-1}(V)$ an affine open containing $x$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation] $B'$ is a finitely presented $R$-algebra, so $S=B'\\otimes_R\\kappa(s)$ is a finite type $\\kappa(s)$-algebra and $\\operatorname{Spec}S=U'\\cap X_s$ [lem-weil-pbc-open-preimage-fibre-product, lem-weil-pbc-fibre-product-affine-spectra]. The geometric fibre $X_{\\bar s}=X\\times_T\\operatorname{Spec}\\overline{\\kappa(s)}$ [def-weil-geometric-fibre] is locally of finite type [lem-weil-pbc-qcqs-morphism-permanence](3), pure of dimension one, with closed points smooth or nodes; by (1) implies (2) of [lem-trf-nodal-curve-lci-criterion] it has an affine open cover by spectra of local complete intersections over $\\overline{\\kappa(s)}$. The preimage of $U'$ in $X_{\\bar s}$ is the affine open $\\operatorname{Spec}(S\\otimes_{\\kappa(s)}\\overline{\\kappa(s)})$ (same two lemmas), so [lem-trf-lci-affine-open-locality] makes $S\\otimes_{\\kappa(s)}\\overline{\\kappa(s)}$ a local complete intersection over $\\overline{\\kappa(s)}$, and [lem-weil-pbc-lci-field-change] makes $S$ a local complete intersection over $\\kappa(s)$. By [lem-trf-lci-pointwise-criterion] its localization $\\mathcal O_{X_s,x}$ is a complete-intersection local ring over $\\kappa(s)$. As $f$ is flat and locally finitely presented, [lem-trf-syntomic-pointwise-local-model] gives a chart $U=\\operatorname{Spec}B\\ni x$ over $V$, $B=P/(h_1,\\ldots,h_c)$, $P=R[t_1,\\ldots,t_n]$, a relative global complete intersection. Its nonempty fibres have dimension $n-c$ by [def-weil-pbc-relative-global-complete-intersection]. The fibre over $s$ is a nonempty open of $X_s$, and [lem-sc-fibre-dimension-after-base-change] identifies its local dimensions with those of the pure one-dimensional $X_{\\bar s}$; thus $n=c+1$. Only the geometric fibre over $\\overline{\\kappa(s)}$ is used; no dualizing datum is presumed.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-lci-affine-open-locality",
+    "lem-weil-pbc-lci-field-change",
+    "lem-trf-lci-pointwise-criterion",
+    "lem-trf-syntomic-pointwise-local-model",
+    "def-weil-pbc-relative-global-complete-intersection",
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SJ (lemma-lci-field-change); morphisms.tex Tags 01TQ, 01UE and 01UG; curves.tex Tag 0C4E (lemma-nodal-lci)."
+   }
+  },
+  {
+   "text": "The equations on each chart are Koszul-regular. Indeed [lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence] makes them regular in $P_{\\mathfrak q}$ for every prime containing $I=(h_1,\\ldots,h_c)$, and [lem-weil-pbc-regular-sequence-koszul-regular] makes the localized Koszul complex exact in positive degrees. At a prime not containing $I$, some $h_j$ is a unit: on the wedge basis of [def-weil-pbc-koszul-complex], exterior multiplication by $h_j^{-1}e_j$ is a contraction, since $d(h_j^{-1}e_j\\wedge z)+h_j^{-1}e_j\\wedge dz=z$. By [lem-weil-pbc-localization-module-exact], localization commutes with the kernels, images and quotients defining Koszul homology, so its positive homology vanishes at every prime. Such a module is zero: if $0\\ne m$, choose a maximal ideal containing its proper annihilator; $m/1=0$ there would give $s m=0$ for an $s$ outside that ideal, a contradiction. This proves Koszul regularity globally, without asserting that regularity at one prime spreads over a non-Noetherian ring. Finally [lem-weil-pbc-relative-global-complete-intersection-conormal-free] identifies the classes of the $h_j$ with a basis of $I/I^2$, of rank $c$.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-relative-global-complete-intersection-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D2 (lemma-relative-global-complete-intersection-koszul), complete localization argument; algebra.tex Tag 00SV."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proper-flat-dualizing-polynomial-model] to the proper, flat, finitely presented $f$ and set $K=f^!\\mathcal O_T$. On the chart in step 1 it is $R\\operatorname{Hom}_P(B,\\Omega^n_{P/R})[n]$ as a $B$-complex, with the normalized ordered polynomial-refinement comparisons specified by that node. The hypotheses of the unconditional local assertion of [lem-trf-lci-koszul-duality-determinant-comparison] hold by steps 1--2, with $d=1$ and conormal rank $c=n-1$. Its map $\\rho_i$ sends the unshifted derived Hom to $i_*D_i[-c]$, respecting the $B$-action, where $D_i=(\\bigwedge^c I/I^2)^\\vee\\otimes\\bigwedge^n i^*\\Omega^1_{P/T}$. Shifting by $[n]$ gives $D_i[1]$. Only the arbitrary-base local comparison is used; the theorem's final Noetherian global assertion is not used.",
+   "uses": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-trf-lci-koszul-duality-determinant-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E2X, 0E4P, 0BV2 and 0BQZ; arbitrary-base proper comparison as specified in the cited prerequisite."
+   }
+  },
+  {
+   "text": "By [lem-trf-lci-cotangent-presentation], the conormal models $E_i=[I/I^2\\to i^*\\Omega^1_{P/T}]$ have canonical comparisons $\\lambda_i:E_i\\simeq L_{X/T}|_{U_i}$. Thus $L_{X/T}$ is perfect of amplitude $[-1,0]$. Apply [lem-trf-two-term-perfect-determinant]: $D=\\det L_{X/T}$ is invertible and the model comparisons give $\\alpha_i:D_i\\simeq D|_{U_i}$, with transitions $\\det(\\lambda_j^{-1}\\lambda_i)$. The normalized Koszul comparison in step 3 states exactly that these are the transitions between the polynomial duality models, shifted by $[1]$. Applying $H^{-1}$ therefore gives compatible local maps $H^{-1}(K)|_{U_i}\\simeq D|_{U_i}$. Glue these maps and their inverses by [lem-weil-pbc-glue-sheaves-of-modules](1). For $q\\ne-1$, step 3 gives $H^q(K)|_{U_i}=0$ on every chart; every stalk is zero and [pqf-lem-sheaf-zero-stalks] gives $H^q(K)=0$. Apply [lem-sf-derived-concentrated-single] with $r=-1$ to obtain $K\\simeq H^{-1}(K)[1]$. Hence $\\omega_f:=H^{-1}(K)\\simeq D$ is invertible and $K\\simeq\\omega_f[1]$. The maps glued here are module-sheaf maps, not arbitrary derived maps.",
+   "uses": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-lci-koszul-duality-determinant-comparison",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "pqf-lem-sheaf-zero-stalks",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ, normalized Koszul comparisons; sheaves.tex Tags 04TN and 00AN; derived.tex Tag 08J5."
+   }
+  },
+  {
+   "text": "For $a:T'\\to T$ and $b:X'\\to X$, flatness makes the square Tor-independent: the affine $R$-module $B$ is flat, so $B\\otimes_R^{\\mathbf L}R'=B\\otimes_RR'$. Hence [lem-trf-lci-cotangent-presentation] gives $Lb^*L_{X/T}\\simeq L_{X'/T'}$, respecting composition and local models. The pullback comparison of [lem-trf-two-term-perfect-determinant] gives $\\beta_a:b^*D_f\\simeq D_{f_a}$ with these compatibilities. Properness, flatness and finite presentation persist by [lem-weil-pbc-proper-fp-permanence], [lem-weil-pbc-flat-morphism-base-change] and [lem-weil-pbc-qcqs-morphism-permanence](3). Charts base change: for a chart $U=\\operatorname{Spec}B$, $B=R[t_1,\\ldots,t_n]/(h_1,\\ldots,h_c)$, over $V=\\operatorname{Spec}R$ and an affine open $V'=\\operatorname{Spec}R'\\subseteq a^{-1}(V)$, the open $b^{-1}(U)\\cap f_a^{-1}(V')$ is $U\\times_VV'=\\operatorname{Spec}(B\\otimes_RR')$ by [lem-weil-pbc-open-preimage-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra], and [lem-weil-pbc-relative-global-complete-intersection-base-change] presents it as $R'[t_1,\\ldots,t_n]/(h'_1,\\ldots,h'_c)$, a relative global complete intersection with the same $n=c+1$. These charts cover $X'$. Steps 2--4 use only such charts and properness, flatness and finite presentation, so they apply to $f_a$. Write $\\phi_f:\\omega_f\\simeq D_f$ and define $\\gamma_a=\\phi_{f_a}^{-1}\\beta_a b^*\\phi_f$. For successive base changes the intermediate factors $b_2^*(\\phi_{f_a}\\phi_{f_a}^{-1})$ cancel; the cocycle for $\\beta$ gives the cocycle for $\\gamma$. Naturality of the intrinsic cotangent complex and determinant gives compatibility with family isomorphisms. On the smooth locus the cotangent statement gives $L\\simeq\\Omega^1[0]$. The smooth relative dimension there is one by step 1; [lem-sc-smooth-omega-finite-locally-free] makes $\\Omega^1$ locally free of rank one; the determinant's two-term formula gives $D\\simeq\\bigwedge^1\\Omega^1=\\Omega^1$.",
+   "uses": [
+    "lem-sc-smooth-omega-finite-locally-free",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-relative-global-complete-intersection-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ, Tor-independent base change; perfect.tex Tag 0FJY, determinant pullback; curves.tex Tag 0C4D."
+   }
+  },
+  {
+   "text": "For any field-valued point $\\operatorname{Spec}k\\to T$, steps 2--4 apply to $f_k:X_k\\to\\operatorname{Spec}k$ by step 5. For every quasi-coherent $F$ on $X_k$, full faithfulness of degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful], the shift $K_{f_k}\\simeq\\omega_{f_k}[1]$ and the right-adjoint property supplied by [lem-sfb-proper-flat-dualizing-polynomial-model] give natural bijections\n$$\\operatorname{Hom}(F,\\omega_{f_k})=\\operatorname{Hom}_{D(X_k)}(F[1],K_{f_k})\\simeq\\operatorname{Hom}_{D(k)}(R\\Gamma(X_k,F)[1],k[0]).$$\nThe module $k$ is injective among $k$-vector spaces: a linear map from a subspace extends by choosing a complementary subspace and setting it to zero there. Apply [new-stage3-derived-homology-injective-bijective] to the last derived Hom. Since $H^0(R\\Gamma(F)[1])=H^1(X_k,F)$, it equals $\\operatorname{Hom}_k(H^1(X_k,F),k)$. This is the defining Serre-duality property, natural in $F$, so $\\omega_{f_k}$ is the fibre's dualizing module. The isomorphism $b^*\\omega_f\\simeq\\omega_{f_k}$ from step 5 proves the asserted restriction statement over every residue field, without requiring an algebraically closed field.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "new-stage3-derived-homology-injective-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Relative-Serre-duality display after Tag 0E6Q; derived.tex Tag 06XS for degree-zero full faithfulness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-lci-affine-open-locality",
+  "lem-weil-pbc-lci-field-change",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-trf-syntomic-pointwise-local-model",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "lem-trf-lci-koszul-duality-determinant-comparison",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "pqf-lem-sheaf-zero-stalks",
+  "lem-sf-derived-concentrated-single",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "new-stage3-derived-homology-injective-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli-curves.tex",
+  "place": "Tags 0E6P--0E6R and following relative Serre-duality display; cycle-free lci/Koszul assembly using more-algebra.tex Tag 07D2 and the proper polynomial-model prerequisite."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented family of geometrically connected nodal curves has an invertible relative dualizing sheaf compatible with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative duality for Gorenstein curves dualizing line bundle base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.toDual_comp_apply\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"For any $ f \\\\in \\\\text{Dual}_R(V) $ and $ v \\\\in V $, the composition of the dual map under base change from $ R $ to $ A $ with the canonical inclusion $ j: V \\\\to W $ satisfies $ \\\\text{ibc.toDual}(f)(j\"}\n  {\"name\": \"IsBaseChange.dual\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"Given an $ R $-module $ V $ and its base change $ W = V \\\\otimes_R A $ along an $ R $-algebra $ A $, the base change induces an $ R $-linear map from the dual module $ \\\\text{Hom}_R(V, R) $ to the dual \"}\n  {\"name\": \"IsBaseChange.toDual_apply\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"For any R-linear functional $ f $ on $ V $, the dual map induced by base change to $ A $ satisfies $ \\\\text{toDual}(f) = (f_{A}) \\\\circ \\\\text{equiv} $, where $ f_{A} $ is the base change of $ f $ to $ A\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n  {\"name\": \"IsBaseChange.toDualBaseChange\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"{R : Type u_1} →\\n  [inst : CommSemiring R] →\\n    {V : Type u_2} →\\n      [inst_1 : AddCommMonoid V] →\\n        [inst_2 : Module R V] →\\n          {W : Type u_3} →\\n            [inst_3 : AddCommMonoid W] →\\n              [inst_4 : Module R W] →\\n                {A : Type u_4} →\\n                  [inst_5 : \", \"doc\": \"The linear equivalence between the tensor product of an $ R $-algebra $ A $ with the dual module $ \\text{Dual}_R V $ and the dual module $ \\text{Dual}_A W $, establishing that base change commutes with \"}\n  {\"name\": \"IsBaseChange.toDualBaseChange_tmul\", \"module\": \"Mathlib/LinearAlgebra/Dual/BaseChange\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {V : Type u_2} [inst_1 : AddCommMonoid V] [inst_2 : Module R V] {W : Type u_3}\\n  [inst_3 : AddCommMonoid W] [inst_4 : Module R W] {A : Type u_4} [inst_5 : CommSemiring A] [inst_6 : Algebra R A]\\n  [inst_7 : Module A W] [inst_8 : IsScalarTower R A W] {j : V →ₗ[\", \"doc\": \"For an $ R $-algebra $ A $, dual module $ V^* = \\\\text{Dual}_R V $, and base-changed module $ W = A \\\\otimes_R V $, the linear equivalence $ \\\\text{toDualBaseChange}: A \\\\otimes_R V^* \\\\to \\\\text{Dual}_A W \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  (F : Type u) →\\n    (K : Type v) →\\n      [inst : CommRing R] →\\n        [inst_1 : Field F] →\\n          [inst_2 : Field K] →\\n            {W' : WeierstrassCurve.Affine R} →\\n              [inst_3 : DecidableEq F] →\\n                [inst_4 : DecidableEq K] →\\n                  [inst_5 : Al\", \"doc\": \"Given fields $F$ and $K$ equipped with an $R$-algebra structure and satisfying the scalar tower compatibility condition $R \\to F \\to K$, this function defines a group homomorphism from the set of points\"}\n  {\"name\": \"WeierstrassCurve.Affine.baseChange_slope\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : Algebra R S] [inst_5 : DecidableEq F]\\n  [inst_6 : DecidableEq K] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [IsScalarT\", \"doc\": \"For an affine Weierstrass curve $ W' $ over a field $ F $, given an $ S $-algebra homomorphism $ f : F → K $, the slope of two points $ (x_1, y_1) $ and $ (x_2, y_2) $ computed after base change to $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|dualizingSheaf|Gorenstein.*[Cc]urve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper flat finitely presented family of geometrically connected nodal curves has an invertible relative dualizing sheaf compatible with arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] [LocallyOfFinitePresentation f] : UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations do not state this scheme-theoretic assertion; see report for candidate assessment"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat finitely presented nodal curve family over any scheme has an invertible relative dualizing sheaf and dualizing complex equal to that sheaf shifted by one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative (@AlgebraicGeometry.IsSmoothOfRelativeDimension 0)\", \"doc\": \"The property of being a smooth morphism of relative dimension zero is multiplicative. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are smooth morphisms of relative dimension zero, then their composit\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality nodal curves relative dualizing line arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  {S : Type s} →\\n    {F : Type u} →\\n      {K : Type v} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Field F] →\\n              [inst_3 : Field K] →\\n                {W' : WeierstrassCurve.Affine R} →\\n                  [inst_4 : DecidableEq F] →\\n\", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, this function defines a group homomorphism from the se\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F},\\n  W.Nonsingular x y →\\n    WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C (W.negY x y)) *\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x (Polynomial.C y) =\\n      WeierstrassCurve.Affine.Coordinate\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$, the product of the ideals generated by $(X - x, Y - (-y - a_1 x - a_3))$ and $(X - x, Y - y)$ in the coordinate rin\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F},\\n  W.Equation x₁ y₁ →\\n    W.Equation x₂ y₂ →\\n      ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂) →\\n        WeierstrassCurve.Affine.CoordinateRing.XYIdeal W x₂ (Polynomial.C y₂) =\\n          WeierstrassCurve.Af\", \"doc\": \"For two distinct points $(x_1, y_1)$ and $(x_2, y_2)$ on an affine Weierstrass curve $W$ over a field $F$ that are not symmetric with respect to the curve's group law (i.e., $y_1 \\neq -y_2 - a_1 x_2 - \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|dualizingSheaf|Gorenstein.*[Cc]urve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper flat finitely presented family of nodal curves has relative dualizing complex equal to an invertible sheaf shifted by one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.QuasicoherentData\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme smoothness, flatness, ordinary module pushforward/pullback adjunctions and linear algebra do not assert coherent derived duality or its polynomial model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ten-canonical-hilbert-parameter",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family.",
+   "via": [
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-gorenstein-curve-relative-dualizing",
+  "worker": "stage1",
+  "summary": "Restored assignment found. Reused existing arbitrary-base nodal dualizing statements rather than duplicating them; proved the missing derived shift by regular charts and normalized Koszul duality, with one general proper-flat polynomial-model input. Statement unchanged. Searched the item and new input with all required services and two semantic phrasings; checked source hypotheses, disconnected fibres, non-Noetherian bases, signs and overlaps. Repair of the returned head b2c021761b7: rebased through the delivery overlay onto the current live unsplit item, reread all proof and statement dependencies, confirmed all twelve quotations still agree, and expanded the stalkwise vanishing and transported base-change cocycle arguments. The single-degree truncation input is now a Mathlib leaf, so its obsolete off-unit tool declaration is removed. Resumed current-baseline review: opened the newly added same-tag coinduction-polynomial-refinement statement, distinguished its algebraic functor comparison from the required global intrinsic proper-duality model, and revalidated all twelve citations against the current DAG. Repair on 2026-10-23: reread the changed proper-nodal dependency, refreshed its three verbatim quotations, and replaced the connected-nodal definition reference in the item by the four actual geometric-fibre, pure-dimension, completion and power-series definitions; no hypothesis changed. Distinguished the new locally Noetherian supplied-pair localization lemma from the arbitrary-base proper-duality existence prerequisite. Current live dependencies now make proper-nodal-dualizing-base-change depend on this item. Removed that circular input and its nodal datum. Constructed syntomic polynomial charts independently, proved their Koszul regularity by the full Tag 07D2 localization argument, identified the proper dualizing object with the intrinsic determinant, transported its base-change comparisons, and proved fibre Serre duality directly from the adjunction. No further node is created; existing derived-single full faithfulness and injective-target homology supply the categorical tools. Final current-baseline repair replaces the determinant-descent lemma by the cotangent presentation and determinant functor themselves, avoiding an additional normalization hypothesis. Finite-presentation base change is cited from qcqs-morphism-permanence(3); geometric fibre assumptions persist by fibre-product reassociation. Final current-baseline repair replaces the determinant-descent lemma by the cotangent presentation and determinant functor themselves, avoiding an additional normalization hypothesis. Finite-presentation base change is cited from qcqs-morphism-permanence(3); geometric fibre assumptions persist by fibre-product reassociation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Relative dualizing line of an arbitrary nodal family.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-nodal-curve-lci-criterion",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-trf-lci-pointwise-criterion",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-trf-syntomic-pointwise-local-model",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-trf-lci-koszul-duality-determinant-comparison",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-trf-lci-cotangent-presentation",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-trf-two-term-perfect-determinant",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "pqf-lem-sheaf-zero-stalks",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-sc-smooth-omega-finite-locally-free",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "new-stage3-derived-homology-injective-bijective",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-trf-lci-affine-open-locality",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   },
+   {
+    "node": "lem-weil-pbc-lci-field-change",
+    "why": "General local complete-intersection, determinant, or coherent derived-category tool; the proof specifies the part used and verifies its hypotheses, independently of the alteration or moduli route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nodal-curve-lci-criterion",
+  "lem-trf-lci-pointwise-criterion",
+  "lem-trf-syntomic-pointwise-local-model",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-weil-pbc-relative-global-complete-intersection-conormal-free",
+  "lem-trf-lci-koszul-duality-determinant-comparison",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "pqf-lem-sheaf-zero-stalks",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "new-stage3-derived-homology-injective-bijective",
+  "lem-trf-lci-affine-open-locality",
+  "lem-weil-pbc-lci-field-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-863e83257",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-863e83257 (reviewer sub-agent of L); spot-checked: I read the whole item (6 steps), the one new node lem-sfb-proper-flat-dualizing-polynomial-model (byte-identical to 1c08 and 49a6) and the report. I read every cited statement in full. Sources read: moduli-curves 0E6R with the 0E6P/0E6Q relative-Serre-duality display, curves 0C4E, algebra 00SJ and 00SV, and duality 0E2X, lemma-flat-proper-relative-dualizing, 0E4P and 0BV2. No SGA source is cited. The re-route is justified: lem-sfb-proper-nodal-dualizing-base-change and seven other nodes now cite the item, so the old datum route would be a cycle (C6). The closure of the fixed proof_deps (about 2900 nodes) does not contain the item. Statement change: def-trf-nodal-geometric-fibres, which imports connected fibres, is replaced by def-weil-geometric-fibre, def-weil-pure-dimension, def-weil-pbc-adic-completion and def-weil-pbc-multivariate-power-series. The statement is no weaker and the report names the change, so I accept it. FIX (E1/E3, one fault appearing in two steps): the statement now gives geometric fibres only over the chosen algebraic closure of kappa(y). (a) Step 1 used (1)=>(2) of lem-trf-syntomic-geometric-fibres-affine-criterion, which needs every algebraically closed Omega. I re-proved it with lfp-affine-opens, nodal-curve-lci-criterion on X_sbar, lem-trf-lci-affine-open-locality and lem-weil-pbc-lci-field-change (00SJ), giving the lci fibre ring, then the pointwise criterion, the local model and n=c+1. Both added nodes are on live; lem-trf-lci-geometric-chart-descent is not on live, so I did not use it. (b) Step 5 claimed that a geometric fibre of f_a is a geometric fibre of f; that is false unless kappa(y')/kappa(y) is algebraic. I replaced it by base-changing the rgci charts: U x_V V' = Spec(B (x)_R R') by the open-preimage and affine fibre-product lemmas, and lem-weil-pbc-relative-global-complete-intersection-base-change (00SS) shows it is again an rgci with the same n=c+1. Steps 2-4 then apply to f_a. Step 6 now refers to steps 2-4. The other steps are correct. Step 2: Koszul regularity holds over an arbitrary base by local regularity at primes containing I, an explicit contraction elsewhere, and localization exactness. Step 3: the unconditional part of the Koszul comparison applies with d=1 and shift [-c][n]=[1]; only cohomology sheaves are used, so no D(B)-level lift is needed. Step 4: the determinant transitions det(lambda_j^-1 lambda_i) match the model transitions, and both nodes use the same normalization (dual of t-a tensor d(t-a) maps to 1). The H^-1 maps glue by glue-sheaves(1), and concentrated-single with r=-1 gives K = omega[1]. Step 5 (otherwise): Tor-independence from flatness, cotangent and determinant base change, the gamma cocycle, and smooth locus det = Omega^1. Step 6: full faithfulness, the adjunction and the injective target k give the Serre-duality module over every field. New node: statement only, all notions cited, true. Over a qcqs base it is 0A9E/0E4P with 0BV2 and the Omega^n normalization. Over an arbitrary base, existence of f^! is the item's own presupposition. Checked cases: n=0, smooth, non-CM, empty base. Not a duplicate: lem-sfb-proper-flat-space-derived-duality has no polynomial models; the trf polynomial-chart, pair-localization and rigidity nodes are locally Noetherian; the def-trf-polynomial-duality-* nodes are predicates only. It is not a clause of the item. Batch-5 flags: nodal-curve-lci-criterion (0C4E), syntomic criterion (01UD, no longer cited after the fix), lci-pointwise (01UG), syntomic-pointwise-local-model (01UE), lci-koszul-duality-determinant-comparison (0BQZ), lci-cotangent-presentation (08SL), two-term-perfect-determinant (0FJX) and def-trf-coherent-relative-dualizing-pair (0E2T) are all general commutative-algebra or coherent-duality tools. Neither assumption gives them, and the closure contains no trace-formula theorem, no Poincare-duality theorem and no nt-assume leaf. Only generic pod derived tools appear. I accept them. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-gorenstein-curve-relative-dualizing.json. Only proof steps 1, 5 and 6, proof_deps and tool_uses changed; every step is under 2000 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GorensteinCurveRelativeDualizing",
+  "declaration": "AlgebraicGeometry.exists_nodalRelativeDualizingSystem",
+  "declarations": [
+   "AlgebraicGeometry.NodalRelativeDualizingAdjunction",
+   "AlgebraicGeometry.NodalRelativeDualizingAdjunction.complex",
+   "AlgebraicGeometry.NodalRelativeDualizingSystem",
+   "AlgebraicGeometry.exists_nodalRelativeDualizingSystem"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GorensteinCurveRelativeDualizing.lean",
+  "statement": "theorem exists_nodalRelativeDualizingSystem {X T : Scheme.{u}} (f : X ⟶ T) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (hfibres : ∀ y : T, Nonempty ↥(pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField y) (AlgebraicClosure (T.residueField y)))) ≫ T.fromSpecResidueField y)) ∧ IsReduced (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField y) (AlgebraicClosure (T.residueField y)))) ≫ T.fromSpecResidueField y)) ∧ (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField y) (AlgebraicClosure (T.residueField y)))) ≫ T.fromSpecResidueField y)).IsPureDimension 1 ∧ ∀ x : ↥(pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField y) (AlgebraicClosure (T.residueField y)))) ≫ T.fromSpecResidueField y)), x ∉ (pullback.snd (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField y) (AlgebraicClosure (T.residueField y)))) ≫ T.fromSpecResidueField y)).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField y) (AlgebraicClosure (T.residueField y)))) ≫ T.fromSpecResidueField y)).presheaf.stalk x)) ((pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField y) (AlgebraicClosure (T.residueField y)))) ≫ T.fromSpecResidueField y)).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) (AlgebraicClosure (T.residueField y)) ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) (AlgebraicClosure (T.residueField y))) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) (AlgebraicClosure (T.residueField y)))}))) : Nonempty (NodalRelativeDualizingSystem f)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs H2/H3: uses existing:true definition nodes for the cartesian carrier and the supplied normalized adjunction/fundamental-class predicates. The same omega and baseChange fields are now the line and comparisons of a normalized adjunction system, and fundamental satisfies its chart cofactor/Jacobian normalization. The actual right adjoint, H^-1 and normalized shifted-complex comparison, invertibility, coherent arbitrary base change and natural field Serre duality are retained. No theorem node is used merely as the carrier of these definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7d58daa2",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery after 64d0 RETURN. H2 fixed: theorem stmt_dep lem-trf-flat-lci-canonical-adjunction replaced by three existing:true def nodes (def-sfb-flat-lci-base-change, def-sfb-flat-lci-adjunction-system, def-sfb-lci-curve-fundamental-class). All declarations exist in live FlatLCICanonicalAdjunction/LCICurveFundamentalClass, statements verbatim, stmt_deps exist, no competing owner on live. H3 fixed: new localIso + adjunction_normalization (IsNormalized) + fundamental_normalization (IsCurveFundamentalClass) on the system's own literal. The 64d0 lambda_B rescaling with fixed charts now fails the cofactor equation, and the branchwise smooth-locus twist is excluded; the system is unique up to automorphism of the line, so baseChange is canonical. Advisory: homologyIso omega = H^-1(f^!O) is pinned only up to one global unit per record (transport of the whole structure); accepted because the node only calls base change canonical and no node pins an f^! chart comparison. Signature, hypotheses and the clauses accepted in 64d0 unchanged; only sorry is the theorem; docstrings/blueprint ok; no compile (no FIX)."
+ }
+}

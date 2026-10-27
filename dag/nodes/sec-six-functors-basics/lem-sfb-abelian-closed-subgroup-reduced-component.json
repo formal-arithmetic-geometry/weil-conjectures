@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-abelian-closed-subgroup-reduced-component",
+ "kind": "statement",
+ "title": "Reduced identity components of closed abelian subgroups",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety], and let $H\\hookrightarrow A$ be a closed subgroup scheme [def-sc-group-scheme-subgroup]. Then $H_{\\mathrm{red}}$ is a subgroup scheme, and its connected component $B=(H_{\\mathrm{red}})^0$ containing the identity is an abelian variety, embedded as a closed subgroup of $A$. One has $\\dim B=\\dim H$. In particular, if $\\dim B=0$, the structure morphism $H\\to\\operatorname{Spec}k$ is finite, including when $H$ is nonreduced.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 1.35 and discussion before Proposition 1.37 (components and dimension), Proposition 1.38 and Corollary 1.39 (reduced subgroup over a perfect field); smoothness of reduced groups: Stacks groupoids.tex Tag 047P, lemma-reduced-group-scheme-prefect-field-characteristic-p-smooth, and its characteristic-zero companion; Milne AV I Proposition 8.1 uses this abelian subvariety."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-connected-scheme",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "By [def-sc-abelian-variety], $A$ is proper over $k$. Apply [lem-weil-pbc-closed-immersion-proper] first to $H\\hookrightarrow A$, and then to the reduction $i:G=H_{\\mathrm{red}}\\hookrightarrow H$ of [lem-weil-pbc-reduction-universal-homeomorphism]. Thus $H$ and $G$ are proper, hence of finite type by [def-weil-proper-morphism]. Since $\\operatorname{Spec}k$ is Noetherian (a field has only the ideals $0$ and $k$), [lem-weil-pbc-finite-type-over-noetherian] makes $G$ Noetherian. The reduction node gives reducedness of $G$.",
+   "uses": [
+    "def-sc-abelian-variety",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W5/01W3, lemma-closed-immersion-proper/lemma-composition-proper; 01T6, lemma-finite-type-noetherian; 054M, lemma-reduction-universal-homeomorphism"
+   }
+  },
+  {
+   "text": "The field $k$ is perfect: in positive characteristic every $a\\in k$ has a $p$th root because $T^p-a$ has a root; characteristic zero is the other case in [lem-kun-geometric-reduced-perfect]. That node applied to the reduced finite-type scheme $G$ gives geometric reducedness and flatness over $k$. Apply [lem-sfb-flat-geometrically-reduced-pullback] with $Y=T=G$ and $S=\\operatorname{Spec}k$. The hypotheses are exactly the preceding geometric reducedness and flatness, and the reduced locally Noetherian property from step 1. Thus $G\\times_kG$ is reduced.",
+   "uses": [
+    "lem-kun-geometric-reduced-perfect",
+    "lem-sfb-flat-geometrically-reduced-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 020I/035Z, lemma-perfect-reduced and lemma-geometrically-reduced-any-base-change; the hint in groupoids.tex Tag 047R"
+   }
+  },
+  {
+   "text": "Restrict the multiplication of $H$ along $i\\times i:G\\times_kG\\to H\\times_kH$. Its reduced source from step 2 lets [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] factor this map to $H$ through $i:G\\to H$. The same statement factors the inverse restricted to $G$ and the unit from the reduced scheme $\\operatorname{Spec}k$. These restrictions satisfy the group axioms: composing either side of each associativity, unit or inverse identity with $i$ gives the corresponding identity in $H$. A closed immersion is a monomorphism (on affine opens a map into its quotient ring, if it exists, is uniquely determined), so those equalities hold in $G$. Thus $G$ is a group scheme and $i$ a homomorphism. Together with $H\\hookrightarrow A$, this proves the reduced-subgroup clause.",
+   "uses": [
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.38 and Corollary 1.39, printed p.18; groupoids.tex Tag 047R, lemma-reduced-subgroup-scheme-perfect, with its omitted details expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-neutral-component-translates] to the finite-type group scheme $G$. Its identity component $B$ is a connected open subscheme and a closed subgroup scheme of $G$. Step 2 supplies the hypothesis of [lem-sfb-geometrically-reduced-group-smooth], so $G\\to\\operatorname{Spec}k$ is smooth. Apply [lem-weil-pbc-smooth-restrict-open-subschemes](a) with source open $B$ and the entire target to obtain smoothness of $B$.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-sfb-geometrically-reduced-group-smooth",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, proposition-connected-component; Tags 047N/047P, smoothness; morphisms.tex Tag 01V6, lemma-smooth-characterize"
+   }
+  },
+  {
+   "text": "The closed immersion $B\\hookrightarrow G$ and properness of $G$ imply properness of $B$ by [lem-weil-pbc-closed-immersion-proper]. Together with connectedness and smoothness from step 4, [def-sc-abelian-variety] says precisely that $B$ is an abelian variety. The three closed immersions $B\\hookrightarrow G\\hookrightarrow H\\hookrightarrow A$ compose to a closed immersion by [lem-weil-pbc-closed-immersion-products], and their group homomorphisms compose. Thus this is the required closed abelian subgroup of $A$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-sc-abelian-variety",
+    "lem-weil-pbc-closed-immersion-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3/01W5, proper closed subschemes; definition of abelian variety in groupoids.tex Tag 03RO"
+   }
+  },
+  {
+   "text": "By [lem-sfb-group-neutral-component-translates], $G$ is a finite disjoint union of clopen components, each isomorphic to $B$. Every irreducible closed subset of $G$ lies in one component: meeting a clopen component and its complement would disconnect it. Consequently every strict chain of nonempty irreducible closed subsets lies in one component. The supremum of these chain lengths is therefore $\\dim B$, by [def-kun-topological-krull-dimension] and the translation isomorphisms; $B$ is itself a component. The homeomorphism $|G|\\to|H|$ supplied by [lem-weil-pbc-reduction-universal-homeomorphism] carries these chains bijectively, so $\\dim H=\\dim G=\\dim B$. This uses the topology and does not discard nilpotents by assuming $H$ reduced.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-reduction-universal-homeomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.35 and dimension discussion before Proposition 1.37, printed p.17; reduction homeomorphism: Stacks Tag 054M"
+   }
+  },
+  {
+   "text": "If $\\dim B=0$, step 6 gives $\\dim H=0$ for the topological Krull dimension. Since $H$ is nonempty (it has the unit point), [lem-pc-scheme-dimension-local-rings] identifies this with $\\sup_{x\\in H}\\dim\\mathcal O_{H,x}$, so $\\dim H=0$ also in the sense of [def-pc-dimension] used by the next node. Step 1 established properness of $H$ without any reducedness assumption. Apply [lem-pc-dim-zero-finite-over-field] to this proper zero-dimensional $k$-scheme $H$. It gives that $H\\to\\operatorname{Spec}k$ is finite, including the nonreduced case.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings",
+    "def-pc-dimension",
+    "lem-pc-dim-zero-finite-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, lemma-algebraic-scheme-dim-0, algebraic case; dimension comparison: properties.tex Tag 04MU, lemma-dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-dimension",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-proper-morphism",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-pc-dim-zero-finite-over-field",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sfb-flat-geometrically-reduced-pullback",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Assembly of Propositions 1.34/1.38 and Corollaries 1.35/1.39, pp.16-18, with the Stacks smoothness and dimension-zero facts recorded in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reduced identity component of a closed subgroup scheme of an abelian variety over an algebraically closed field is an abelian variety of the same dimension as the subgroup",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.IsReduced, WeierstrassCurve.Affine.Point.instAddCommGroup, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, WeierstrassCurve.Affine.Point.toClass_apply, WeierstrassCurve.Jacobian.Point.instAddCommGroup, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.affine_isReduced_iff, WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: Mathlib AlgebraicGeometry.smooth_of_grpObj in Group/Smooth.lean:64 gives smoothness once geometric reducedness and the group structure are supplied, but not construction of the reduced identity subgroup, its dimension, or its proper finite zero-dimensional conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup of a proper smooth connected group scheme has smooth reduced identity component over a perfect field",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.IsReduced, Subgroup.connectedComponentOfOne, OpenNormalSubgroup.instIsClosedCoePathComponentOne, Subgroup.Normal.pathComponentOne, Subgroup.pathComponentOne, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, OpenNormalAddSubgroup.instIsClosedCoePathComponentZero",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: Mathlib AlgebraicGeometry.smooth_of_grpObj in Group/Smooth.lean:64 gives smoothness once geometric reducedness and the group structure are supplied, but not construction of the reduced identity subgroup, its dimension, or its proper finite zero-dimensional conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAbelianVariety\"",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: Mathlib AlgebraicGeometry.smooth_of_grpObj in Group/Smooth.lean:64 gives smoothness once geometric reducedness and the group structure are supplied, but not construction of the reduced identity subgroup, its dimension, or its proper finite zero-dimensional conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]educed.*[Ss]ubgroup|[Ss]ubgroup.*[Rr]educed|identityComponent",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: Mathlib AlgebraicGeometry.smooth_of_grpObj in Group/Smooth.lean:64 gives smoothness once geometric reducedness and the group structure are supplied, but not construction of the reduced identity subgroup, its dimension, or its proper finite zero-dimensional conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReduced|identityComponent|connectedComponent",
+   "results": "1 hits; recorded top results: Mathlib/AlgebraicGeometry/Group/Smooth.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: Mathlib AlgebraicGeometry.smooth_of_grpObj in Group/Smooth.lean:64 gives smoothness once geometric reducedness and the group structure are supplied, but not construction of the reduced identity subgroup, its dimension, or its proper finite zero-dimensional conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced closed connected subgroup of an abelian variety over a perfect field is an abelian subvariety",
+   "results": "8 hits; recorded top results: ClosedSubgroup.recOn, ClosedSubgroup.ctorIdx, ClosedSubgroup, ClosedAddSubgroup.instAddSubgroupClass, ClosedAddSubgroup.ext_iff, ClosedAddSubgroup, ClosedSubgroup.isClosed', ClosedSubgroup.toSubgroup_injective",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: Mathlib AlgebraicGeometry.smooth_of_grpObj in Group/Smooth.lean:64 gives smoothness once geometric reducedness and the group structure are supplied, but not construction of the reduced identity subgroup, its dimension, or its proper finite zero-dimensional conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma smooth_of_grpObj",
+   "results": "Mathlib/AlgebraicGeometry/Group/Smooth.lean:40, private smooth_of_grpObj_of_isAlgClosed; line 64, public AlgebraicGeometry.smooth_of_grpObj, assuming GeometricallyReduced. Both declarations were read.",
+   "date": "2026-10-22",
+   "verdict": "no match for the full reduced-identity-component statement; smoothness after supplying a geometrically reduced group is only one part"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]educed.*[Ss]ubgroup|[Ss]ubgroup.*[Rr]educed|identityComponent",
+   "results": "{\"t\": \"2026-10-23T09:53:51Z\", \"tool\": \"grep\", \"query\": \"[Rr]educed.*[Ss]ubgroup|[Ss]ubgroup.*[Rr]educed|identityComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match; smoothness alone is Mathlib smooth_of_grpObj; component subgroup construction and dimension/finiteness assembly are additional."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced neutral component of a subgroup of an abelian variety is an abelian variety",
+   "results": "{\"t\": \"2026-10-23T09:53:52Z\", \"tool\": \"leansearch\", \"query\": \"The reduced neutral component of a subgroup of an abelian variety is an abelian variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced.recOn\", \"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"Subgroup.toCommGroup\", \"AlgebraicGeometry.IsReduced\", \"Subgroup.normal_of_comm\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"SubgroupClass.toCommGroup\"], \"digest\": \"9ff264bb9163eb23\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match; smoothness alone is Mathlib smooth_of_grpObj; component subgroup construction and dimension/finiteness assembly are additional."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAbelianVariety\"",
+   "results": "{\"t\": \"2026-10-23T09:53:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAbelianVariety\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match; smoothness alone is Mathlib smooth_of_grpObj; component subgroup construction and dimension/finiteness assembly are additional."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of an abelian variety has reduced identity component an abelian subvariety of equal dimension and dimension zero implies finite",
+   "results": "{\"t\": \"2026-10-23T09:53:59Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subgroup scheme of an abelian variety has reduced identity component an abelian subvariety of equal dimension and dimension zero implies finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"Subgroup.connectedComponentOfOne\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"isConnected_compl_of_one_lt_codim\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"Submodule.connectedComponentIn_eq_self_of_one_lt_codim\", \"AlgebraicGeometry.affine_isReduced_iff\"], \"digest\": \"c7604cd638ebe5f9\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match; smoothness alone is Mathlib smooth_of_grpObj; component subgroup construction and dimension/finiteness assembly are additional."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed subgroups of proper connected smooth group schemes over algebraically closed fields have an abelian reduced neutral component",
+   "results": "{\"t\": \"2026-10-23T09:55:33Z\", \"tool\": \"leanfinder\", \"query\": \"Closed subgroups of proper connected smooth group schemes over algebraically closed fields have an abelian reduced neutral component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"Subgroup.Normal.pathComponentOne\", \"Subgroup.pathComponentOne\", \"OpenNormalAddSubgroup.instIsClosedCoePathComponentZero\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"OpenNormalSubgroup.pathComponentOne\", \"TopologicalAbelianization\"], \"digest\": \"e822cc6e662188e6\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match; smoothness alone is Mathlib smooth_of_grpObj; component subgroup construction and dimension/finiteness assembly are additional."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-polarization-calculus",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: Reduced identity components of closed abelian subgroups.",
+   "via": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-closed-subgroup-reduced-component",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Restricted the group laws explicitly to the reduction using geometric reducedness and the reduced-pullback node; assembled the neutral component, properness, smoothness, topological dimension and nonreduced dimension-zero finiteness. Two supporting nodes: the Mathlib smoothness leaf and the finite-type group component/translation theorem.",
+  "blueprint": "Preserves the inherited det-thm-sf-ctf-stability-direct-images (3) alteration/level-structure route through lem-sfb-abelian-polarization-calculus. Supplies its reduced closed abelian subgroup input; no unit step is replaced. The ancestor command reports None, retained in from.node.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic scheme-theoretic input for the reduced subgroup construction; the level-structure unit has no statement supplying this fact. It supports the inherited route without replacing a unit step."
+   },
+   {
+    "node": "lem-pc-dim-zero-finite-over-field",
+    "why": "Generic scheme-theoretic input for the reduced subgroup construction; the level-structure unit has no statement supplying this fact. It supports the inherited route without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-products",
+    "why": "Generic scheme-theoretic input for the reduced subgroup construction; the level-structure unit has no statement supplying this fact. It supports the inherited route without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme-theoretic input for the reduced subgroup construction; the level-structure unit has no statement supplying this fact. It supports the inherited route without replacing a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic scheme-theoretic input for the reduced subgroup construction; the level-structure unit has no statement supplying this fact. It supports the inherited route without replacing a unit step."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic comparison (Stacks 04MU) of the topological Krull dimension computed in step 6 with the local-ring dimension of def-pc-dimension required by lem-pc-dim-zero-finite-over-field; no node of the level-structure unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-geometric-reduced-perfect",
+  "lem-pc-dim-zero-finite-over-field",
+  "lem-weil-pbc-closed-immersion-products",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-8eca363d0",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-8eca363d0 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, with every cited statement. The proof follows Milne iAG2017, Prop 1.34, Cor 1.35, the dimension paragraph before 1.37, and Prop 1.38 / Cor 1.39 (pp.16-18). I also checked Stacks 0B7R (groupoids.tex:1013) and the Mathlib source of smooth_of_grpObj (Group/Smooth.lean:30-31, 64). No SGA source is cited. Mechanical finding: step 2 cited the dropped node lem-per-flat-geometrically-reduced-pullback (Q75, under the artin-gabber chain). Here it is only a generic Mathlib fact about reduced fibre products, applied to G×_k G, with no Qbar/adic, duality, t-structure, Gabber or de Jong input. So it does not violate the route, but I repointed the citation to lem-sfb-flat-geometrically-reduced-pullback. That node has the identical statement, sits in the item's own unit, is a reviewed Mathlib leaf, and was created to replace the dropped one. Its hypotheses fit (Y=T=G, flat and geometrically reduced over k, G reduced Noetherian). Second fault (C1/C4): step 7 applied lem-pc-dim-zero-finite-over-field, whose dimension is the local-ring one (def-pc-dimension), to the topological dimension that step 6 computes. I added the existing reviewed node lem-pc-scheme-dimension-local-rings (Stacks 04MU) and def-pc-dimension to step 7, and declared it as a tool use. Steps 1-6 check out: properness via closed immersions; perfect field ⇒ geometrically reduced and flat; factorization of the group law through the reduced source with i a monomorphism; smoothness restricted to the open neutral component; properness and connectedness give an abelian variety; topological chains confined to clopen translated components plus the reduction homeomorphism give dim H = dim B. New node lem-sfb-geometrically-reduced-group-smooth is an exact Mathlib leaf. New node lem-sfb-group-neutral-component-translates is true (Noetherian finitely many clopen components; 0B7R subgroup; Nullstellensatz rational points; translations), was tested on α_p, μ_p, E[p] and A×ℤ/2, and duplicates nothing in the DAG (lem-wf-algebraic-component-cosets covers GL(V) only); neither new node restates an item clause. No cycle. The corrected item is under fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.ClosedSubgroupReducedComponent",
+  "declaration": "AlgebraicGeometry.closedSubgroup_reduced_identityComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/ClosedSubgroupReducedComponent.lean",
+  "statement": "theorem closedSubgroup_reduced_identityComponent (k : Type u) [Field k] [IsAlgClosed k] (A H : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] [GrpObj H] (i : H ⟶ A) [IsClosedSubgroupScheme i] : ∃ gR : GrpObj (GrpObj.reduced H), IsClosedSubgroupScheme (GrpObj.reducedι H) ∧ ∃ U : (GrpObj.reduced H).left.Opens, (U : Set (GrpObj.reduced H).left) = connectedComponent (GrpObj.onePoint (GrpObj.reduced H)) ∧ ∃ gB : GrpObj (Over.mk (U.ι ≫ (GrpObj.reduced H).hom)), IsAbelianVariety (Over.mk (U.ι ≫ (GrpObj.reduced H).hom)) ∧ IsClosedSubgroupScheme ((Over.homMk U.ι : Over.mk (U.ι ≫ (GrpObj.reduced H).hom) ⟶ GrpObj.reduced H) ≫ GrpObj.reducedι H ≫ i) ∧ topologicalKrullDim U.toScheme = topologicalKrullDim H.left ∧ (topologicalKrullDim U.toScheme = 0 → IsFinite H.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a13f1bc5",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Only change: item lean record plus new module ClosedSubgroupReducedComponent.lean; node otherwise identical to live and lean.statement verbatim equal to the file signature. Hypotheses exact (IsAlgClosed k, GrpObj+IsAbelianVariety A, GrpObj H, IsClosedSubgroupScheme i), nothing added. Conclusions: ∃ gR with IsClosedSubgroupScheme reducedι (H_red = nilradical subscheme); ∃ U open = connectedComponent onePoint; ∃ gB, IsAbelianVariety and IsClosedSubgroupScheme of the actual composite B→H_red→H→A; topologicalKrullDim U = topologicalKrullDim H.left; dim 0 → IsFinite H.hom for nonreduced H. Existential structures are uniquely determined by mono inclusions and are not arbitrary; the canonical instances (Reduced.lean, identityComponent) need LOFT/QC that are not synthesizable from the hypotheses. Edge cases H=A, trivial, α_p/μ_p, disconnected checked. Docstrings carry source place, blueprint id and 7 proof steps; sorry only; no defs. Advisory: onePoint/IsFinite owners outside stmt_deps. No compile run (no file changed)."
+ }
+}

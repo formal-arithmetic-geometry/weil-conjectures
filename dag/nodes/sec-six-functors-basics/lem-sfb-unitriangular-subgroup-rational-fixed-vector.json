@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+ "kind": "statement",
+ "title": "Rational fixed vectors for arbitrary unitriangular subgroup schemes",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $U$ be an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Suppose there are $n\\geq1$ and a closed immersion [def-weil-closed-immersion] of group schemes $U\\hookrightarrow\\mathcal U_{n,k}$, where $\\mathcal U_{n,k}(A)$ consists of upper triangular $n\\times n$ matrices with diagonal entries $1$, with matrix multiplication, for every commutative $k$-algebra $A$. Let $d\\geq1$ and let $\\rho:U\\to\\operatorname{GL}_{d,k}$ be a homomorphism of group schemes, a rational representation [def-sc-general-linear-group]. Then there exists $0\\ne v\\in k^d$ such that, for every commutative $k$-algebra $A$ and every $u\\in U(A)$, $\\rho_A(u)(1\\otimes v)=1\\otimes v$ in $A\\otimes_k k^d$. No smoothness, reducedness, connectedness, perfectness or characteristic assumption is made.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 14.5(b) implies (a), printed pp.281–282; the definition preceding Proposition 14.3, printed p.280: fixed vector means invariant for the rational representation, not only for k-points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-general-linear-group",
+  "def-sfb-unitriangular-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=k[x_{ij}:1\\leq i<j\\leq n]$. Giving a $k$-algebra map $P\\to R$ is exactly giving all strictly upper entries of a unitriangular matrix over $R$, naturally in $R$. Thus $\\mathcal U_{n,k}=\\operatorname{Spec}P$. The matrix multiplication formula on the universal pair of matrices gives\n$$\\Delta_P(x_{ij})=x_{ij}\\otimes1+1\\otimes x_{ij}+\\sum_{i<l<j}x_{il}\\otimes x_{lj},\\qquad\\epsilon_P(x_{ij})=0.$$\nThese are the coordinate Hopf maps, and $\\Delta_P$ preserves products and units.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-affine-spectrum",
+    "def-sc-general-linear-group",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(b) implies (c), printed p.281, equation (92): coordinate presentation and multiplication formula."
+   }
+  },
+  {
+   "text": "Assign $x_{ij}$ weight $j-i$ and let $F_r\\subseteq P$ be the span of monomials of weight at most $r$. Positive weights imply $F_0=k1$; every polynomial is a finite sum of monomials, so $\\bigcup_rF_r=P$. In each term of $\\Delta_P(x_{ij})$ the two weights add to $j-i$, including $(l-i)+(j-l)=j-i$. Expanding the product of these expressions for a monomial of weight $s$ gives only tensors of monomials with weights $a,b$ satisfying $a+b=s$. If $s\\leq r$, each such term lies in $F_a\\otimes F_{r-a}$. By linearity,\n$$\\Delta_P(F_r)\\subseteq\\sum_{a=0}^rF_a\\otimes F_{r-a}.$$\nFor $n=1$, $P=k$ and $F_r=k$ for every $r$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(b) implies (c), printed p.281, weight assignment following (92) and its monomial-product calculation."
+   }
+  },
+  {
+   "text": "Write $B=k[U]$. The given closed immersion into $\\operatorname{Spec}P$ induces a surjective $k$-algebra map $q:P\\twoheadrightarrow B$. Compatibility of the immersion with multiplication and identity gives $\\Delta_Bq=(q\\otimes q)\\Delta_P$ and $\\epsilon_Bq=\\epsilon_P$. Set $C_r=q(F_r)$. These subspaces are increasing and exhaustive by surjectivity, $C_0=k1_B$, and applying $q\\otimes q$ to the inclusion in step 2 gives\n$$\\Delta_B(C_r)\\subseteq\\sum_{a=0}^r C_a\\otimes C_{r-a}.$$\nMoreover $\\Delta_B(1_B)=1_B\\otimes1_B$ and $\\epsilon_B(1_B)=1$. In particular $1_B\\ne0$, since the counit takes it to $1\\in k$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(b) implies (c), printed p.281, first sentence: pass to the image filtration in the coordinate quotient; Stacks Tag 01QO, affine closed immersions, as explicitly included in def-weil-closed-immersion."
+   }
+  },
+  {
+   "text": "Let $V=k^d$. The representation-comodule dictionary applied to the given affine finite-type group scheme $U$ and homomorphism $\\rho$ supplies $c:V\\to V\\otimes_kB$ with $(c\\otimes1)c=(1\\otimes\\Delta_B)c$ and $(1\\otimes\\epsilon_B)c=1_V$. The coalgebra of $B$, the filtration $C_r$ of step 3, and $g=1_B$ satisfy every hypothesis of the filtered-coalgebra lemma. Since $d\\geq1$, $V\\ne0$. Applying that lemma yields $0\\ne v\\in k^d$ with $c(v)=v\\otimes1_B$.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "lem-sfb-filtered-coalgebra-nonzero-coinvariant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(c) implies (a), printed pp.281–282; Remark 4.1, equations (24)–(25), printed p.84, for conversion to the comodule."
+   }
+  },
+  {
+   "text": "For every commutative $k$-algebra $R$ and every $u\\in U(R)$, let $x:B\\to R$ be its algebra map. The dictionary's evaluation formula sends $c(v)=v\\otimes1_B$ to $\\rho_R(u)(v\\otimes1)=v\\otimes x(1_B)=v\\otimes1$. Under the tensor flip $v\\otimes a\\mapsto a\\otimes v$, whose inverse is the same flip, this is precisely $\\rho_R(u)(1\\otimes v)=1\\otimes v$ in $R\\otimes_k k^d$. The chosen nonzero vector is over $k$ and works for all $R,u$.",
+   "uses": [
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition preceding Proposition 14.3, printed p.280; Remark 4.1, printed p.84, evaluation formula for the rational action, not merely k-points."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-sc-general-linear-group",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-sfb-filtered-coalgebra-nonzero-coinvariant",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 14.5(b) implies (c) implies (a), printed pp.281–282; rational fixed vectors as in the definition preceding Proposition 14.3, printed p.280."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Uu]nipotent|[Uu]nitriangular|[Cc]oconnected",
+   "results": "Search returned 8 hits: Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/LinearAlgebra/Projectivization/PSL/Stabilizer.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean. Read relevant source: invariants are defined for abstract group elements and invtSubmodule is the lattice of stable submodules; closed-immersion criteria concern a supplied morphism, not existence of another embedding over the smaller field.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite dimensional representation of a unipotent algebraic group scheme has a nonzero fixed vector",
+   "results": "Search returned 8 hits: Representation.invariants_eq_inter, Rep.instInjective, Representation.averageMap_invariant, Representation.mem_invariants, FDRep.finrank_hom_simple_simple, Representation.invariants, Representation.invtSubmodule.nontrivial_iff, Representation.invariants_eq_top. Read relevant source: invariants are defined for abstract group elements and invtSubmodule is the lattice of stable submodules; closed-immersion criteria concern a supplied morphism, not existence of another embedding over the smaller field.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"IsUnipotent\"",
+   "results": "Search returned 0 hits: . Read relevant source: invariants are defined for abstract group elements and invtSubmodule is the lattice of stable submodules; closed-immersion criteria concern a supplied morphism, not existence of another embedding over the smaller field.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of a unitriangular group has a nonzero invariant vector in every nonzero finite dimensional rational representation",
+   "results": "Search returned 8 hits: Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice, Representation.invtSubmodule.nontrivial_iff, FDRep.instProjectiveOfNeZeroCastCard, groupCohomology.Hilbert90.aux_ne_zero, FDRep.instInjectiveOfNeZeroCastCard, Representation.instIsTrivialSubtypeMemSubgroupSubmoduleInvariantsCompLinearMapIdSubtypeToInvariants, Rep.instInjective, Rep.instProjective. Read relevant source: invariants are defined for abstract group elements and invtSubmodule is the lattice of stable submodules; closed-immersion criteria concern a supplied morphism, not existence of another embedding over the smaller field.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup scheme of the upper unitriangular group has a nonzero rational invariant vector in every nonzero representation",
+   "results": "8 hits: Subgroup.IsRegularAtInfty, IsSl2Triple.HasPrimitiveVectorWith.ne_zero, Subgroup.mem_strictPeriods_iff, groupCohomology.Hilbert90.aux_ne_zero, IsSl2Triple.HasPrimitiveVectorWith.exists_nat, Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular, IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_ne_zero_of_eq_nat, LieModule.exists_nontrivial_weightSpace_of_isSolvable. Read Invariants.lean:73–90 and Submodule.lean:35–61: these define fixed spaces or the lattice of stable submodules of an abstract-group representation, without the rational group-scheme existence theorem. PSL/Stabilizer.lean:31–50 gives an abstract matrix subgroup, and Biprod.unipotentUpper at Biproducts.lean:748 is a biproduct automorphism. Lie-algebra results require different hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every rational representation of a subgroup scheme of upper unitriangular matrices has a nonzero fixed vector",
+   "results": "8 hits: Representation.invariants, Representation.le_comap_invariants, Representation.invtSubmodule.nontrivial_iff, Representation.invariants_eq_inter, Rep.instInjective, Representation.invariants_eq_top, Rep.quotientToInvariantsFunctor_obj_V, Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice. Read Invariants.lean:73–90 and Submodule.lean:35–61: these define fixed spaces or the lattice of stable submodules of an abstract-group representation, without the rational group-scheme existence theorem. PSL/Stabilizer.lean:31–50 gives an abstract matrix subgroup, and Biprod.unipotentUpper at Biproducts.lean:748 is a biproduct automorphism. Lie-algebra results require different hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"invariants\"",
+   "results": "12 hits: Representation.invariants, Representation.invariants_eq_top, Representation.invariants_eq_inter, Representation.mem_invariants, Representation.mem_invariants_iff_of_forall_mem_zpowers, Representation.mem_linHom_invariants_iff_isIntertwining, Representation.le_comap_invariants, Representation.toInvariants. Read Invariants.lean:73–90 and Submodule.lean:35–61: these define fixed spaces or the lattice of stable submodules of an abstract-group representation, without the rational group-scheme existence theorem. PSL/Stabilizer.lean:31–50 gives an abstract matrix subgroup, and Biprod.unipotentUpper at Biproducts.lean:748 is a biproduct automorphism. Lie-algebra results require different hypotheses. No exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-to-multiplicative-trivial",
+  "date": "2026-10-23",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.6 proof, first paragraph and Note 16.8: uniqueness and maximality of the diagonal kernel; present proof steps 2, 4 and 5. Supporting input in this split: Milne 14.16 and 14.18(a): the one-dimensional pullbacks of the torus coordinate characters have a rational fixed vector, using 14.5(b)⇒(a).",
+   "via": [
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+  "worker": "stage1",
+  "summary": "Q60 checked Milne 14.5(b)⇒(c)⇒(a), kept the statement without smoothness or reducedness assumptions, wrote the coordinate quotient and weighted-monomial filtration explicitly, reused the rational representation/comodule dictionary and coordinate Hopf algebra, and isolated only the genuinely non-elementary general filtered-coalgebra comodule lemma. All new searches were run through msearch.py and each proof citation is quoted in citations.json.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.6 proof, first paragraph and Note 16.8: uniqueness and maximality of the diagonal kernel; present proof steps 2, 4 and 5. Supporting input in this split: Milne 14.16 and 14.18(a): the one-dimensional pullbacks of the torus coordinate characters have a rational fixed vector, using 14.5(b)⇒(a). The present five steps realize Milne 14.5(b)⇒(c)⇒(a) within this inherited supporting route, specifically the rational fixed-vector input to Milne 14.18(a). Current blueprint direct-images proof (3) supplies the enclosing compactification/direct-image route; none of its unit steps is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-df3b70cce",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-df3b70cce (reviewer sub-agent of L); spot-checked: Read Milne AG 2017 pp.280-282 (text before Prop 14.3, Def 14.4 with (91), proof of Thm 14.5 (b)=>(c)=>(a) with (92)). Item statement unchanged and true: rational fixed vector for any closed subgroup scheme of U_n over any field, with no smoothness hypothesis. Step 1: recomputed Delta(x_ij) from unitriangular matrix multiplication; it matches (92), with eps(x_ij)=0. Step 2: weight bigrading of P(x)P gives Delta(F_r) in sum F_a(x)F_{r-a}; F_0=k; n=1 gives P=k. Step 3: def-weil-closed-immersion contains the 01QO affine quotient, so q:P->B is surjective; the group-scheme homomorphism gives Delta_B q=(q(x)q)Delta_P; the image filtration satisfies (91), including nonreduced (alpha_p) and nonhomogeneous (Z/p) quotients; 1_B is nonzero because eps(1)=1. Step 4: the dictionary's hypotheses hold and its finite-dimensional clause gives the coaction; C=B, g=1_B, C_r=q(F_r) and V=k^d with d>=1 meet every hypothesis of the new node. Step 5: the dictionary's explicit evaluation formula plus the tensor flip gives the A-point statement with one v over k. New node lem-sfb-filtered-coalgebra-nonzero-coinvariant is the coalgebra-only core of 14.5(c)=>(a) and is self-contained with no proof (B1-B4). I re-proved it: V_r exhaustive; V_r=0 makes (f_r(x)1)f_r injective, and it kills V_{r+1} by coassociativity and (91); counit gives w=v. I also tested it on kg, on G_a with a 2-dim comodule, and on the excluded cases G_m and mu_p. It is not a restatement of the item: steps 1-3 (b=>c) and 4-5 stay in the item. No duplicate in the DAG or clones after checking coalgebra-group-like-independent, comodule-finite-subcomodule, finite-comodule-coefficient-coalgebra, coalgebra-finite-subcoalgebra, unitriangular-coordinate-filtration, unipotent-matrix-group-fixed-vector, geometric-unipotence-invariant-descent and rational-fixed-space-base-change. Mathlib has no Comodule or coconnected (my own grep; recorded searches cover all three kinds). proof_deps equals the union of uses. No SGA. Route: only same-unit statements or definitions/Mathlib leaves; no tool_uses. Live and side-live still show the item unsplit, so nothing supersedes this delivery. Advisory: blueprint.from.node is null, a base-era fault inherited through the created.item chain (via list correct); the item statement's tensor product is uncited (base text; step 5 cites def-weil-pbc-module-tensor-product). No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.UnitriangularRationalFixedVector",
+  "declaration": "AlgebraicGeometry.exists_rational_fixed_vector_of_unitriangular_closedImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/UnitriangularRationalFixedVector.lean",
+  "statement": "theorem exists_rational_fixed_vector_of_unitriangular_closedImmersion {k : Type u} [Field k] (U : Over (Spec (.of k))) [GrpObj U] [IsAffine U.left] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] (n : ℕ) (hn : 1 ≤ n) (i : U ⟶ UnitriangularGroup.scheme k n) [IsMonHom i] [IsClosedImmersion i.left] (d : ℕ) (hd : 1 ≤ d) (ρ : U ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} d) k) [IsMonHom ρ] : ∃ v : LinearGroupSchemes.Index.{u} d → k, v ≠ 0 ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (x : points U A), (Matrix.GeneralLinearGroup.toLin' ((Pi.basisFun k (LinearGroupSchemes.Index.{u} d)).baseChange A) (GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} d) k A (x ≫ ρ))).toLinearEquiv (1 ⊗ₜ[k] v) = 1 ⊗ₜ[k] v",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f89267f6",
+  "group": "NK",
+  "result": "pass",
+  "note": "Item clauses match the Lean exactly: field k; affine GrpObj U over Spec k; finite type as LocallyOfFiniteType+QuasiCompact (recorded form); closed group immersion (IsMonHom + IsClosedImmersion i.left) into the new UnitriangularGroup.scheme k n with n>=1; d>=1 and IsMonHom rho into upstream GeneralLinearGroup (Index d) k; a single nonzero v : Index d -> k fixed by toLin'(baseChange basis)(homMulEquiv(x≫rho)) on 1⊗v for every A : Type u and x : points U A. The action convention matches the landed RationalRepresentationComoduleDictionary. Item node changed only in lean and the added stmt_dep. New def node def-sfb-unitriangular-group-scheme: P = MvPolynomial over strictly upper positions; comul = matrix product (Milne eq. 92, checked n=2,3); counit sends upper entries to 0; antipode = finite geometric series (correct since N^n=0); Spec via algSpec with the monoidal comparison; GrpObj pinned by unique existence on all three data fields; no sorry data; no existing U_n in Mathlib, WeilConjectures, Sheaf or DAG def nodes; node fields follow H12. Edge cases n=0/1, d=1, char p (alpha_p, Z/p), zero algebra, universes all fine. No files changed, no compile run (worker compile evidence relied on). Advisory: two proof-only imports in the item module; no Lean declaration identifying the points with unitriangular matrices; item TeX does not cite the new node."
+ }
+}

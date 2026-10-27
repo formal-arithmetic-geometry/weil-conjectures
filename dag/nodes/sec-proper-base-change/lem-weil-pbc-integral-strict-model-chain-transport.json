@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-integral-strict-model-chain-transport",
+ "kind": "statement",
+ "title": "Natural unit-normalized coefficient comparison of strict integral towers",
+ "statement": "Let l be prime, E/Q_l finite and h:U to T arbitrary. Given a normalized ordinary pullback identification a [def-weil-pbc-proper-integral-ordinary-data], there is a natural isomorphism t, on all flat-term K-flat complexes, from the actual pulled reduction tower (converted from complexes of towers to towers of complexes) to the ordinary finite-pullback tower followed by coefficient restriction. For every good complex P and every level n, the tensor-unit-normalized augmentation after a.moduleIso and t(P,n) is coefficient restriction of ordinaryIntegralQuotientAugmentation(P,n). This statement compares strict towers only; it asserts no Roos comparison, no derived natural isomorphism and no resolution formula.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Remark 6.8.15; Stacks 03D3, 06YY, 099N(5). Original strict-model matching proof step 1."
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-proper-integral-ordinary-data",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-sf-ordinary-integral-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved same-site integralCoefficientStrictTowerComparison on U. Its finite coefficient adjunction squares assemble by epimorphic quotient units, and its degreewise augmentation formula is available on every cochain complex.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-strict-tower-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing quotient-unit-normalized ordinary completed-coefficient pullback/reduction isomorphism stratumModuleReductionIso, transporting completedModulePullback by completedModulePullback_eq_exact. Whisker it by coefficient restriction on T, then compose with reduction of a.moduleIso.inv. Lift this module-level natural isomorphism degreewise with the generic chainTripleMapIso and convert complexes of towers to towers of complexes. In its augmentation equation, naturality of the target reduction unit moves a.moduleIso.inv to the left, where it cancels a.moduleIso.hom. This gives the actual pulled tower compared with reduction of the transported ordinary pullback, with the prescribed augmentation.",
+   "uses": [
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same-site comparison on U to the ordinary pulled complex. Compose with ordinaryAmbientComplexIso and the published IntegralAmbient.pullTowerIso. Naturality of the slice quotient augmentation identifies this composite augmentation with ordinaryAugmentation, hence with ordinaryIntegralQuotientAugmentation by its unique generator normalization. Functoriality of scalar restriction combines these equations. Finally restrict the natural isomorphism to the full subcategory of good complexes. The construction already applies to every complex, and uses no derived comparison, Roos limit, or resolution formula.",
+   "uses": [
+    "def-sf-ordinary-integral-pullback-construction",
+    "lem-tw-integral-quotient-augmentation",
+    "lem-pur-normalized-integral-pullback-tower",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-coefficient-strict-tower-comparison",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "def-weil-pbc-completed-pullback",
+  "def-sf-ordinary-integral-pullback-construction",
+  "lem-tw-integral-quotient-augmentation",
+  "lem-pur-normalized-integral-pullback-tower",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Remark 6.8.15; Stacks 03D3, 03EL and 099N(5). Q7: assemble unit-normalized ordinary adjunction squares and use the existing strict pullback tower comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a ring sheaf isomorphism commutes with tensor reduction towers and their natural mapping cone, preserving tensor unit sections",
+   "results": "Eight basic scalar-restriction and tensor results, but no normalized tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ring sheaf isomorphism scalar restriction commutes with sheaf tensor products and strict inverse towers with prescribed tensor unit augmentations",
+   "results": "Basic SheafOfModules restriction and presheaf tensor maps only.",
+   "date": "2026-10-27",
+   "verdict": "No matching normalized statement."
+  },
+  {
+   "tool": "grep",
+   "query": "PbcIntegralRoosTransportCoordinates|pbcIntegralActualTowerCounit; restrictScalars; mappingCone.mapHomologicalComplexIso",
+   "results": "Local searches find the actual tower and augmentation definitions, the parent obligation, and completedReductionOrdinaryComparison at individual finite levels. IntegralAugmentedQuotientTowers supplies a different constant/completed presentation; its public statement has additional finite-field geometric hypotheses. The project scalarRoosMap and podReindexingRoosComparison solve the entire cone part, which is proved in this delivery. No existing declaration gives the remaining natural strict tower comparison between these two published coefficient presentations with the prescribed augmentation. Blueprint search for strict coefficient transport returns zero nodes.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing cone comparison and leave only the tensor comparison of entire strict towers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictModelMatchingExists",
+  "date": "2026-10-27",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice proof paragraph: identification of ordinary integral pullback and the actual quotient-tower completion comparison; original ordinary-input proof steps 5–7. Parent comparison step(s) 2–3. Bhatt--Scholze Remark 6.8.15; Stacks 03D3, 06YY, 099N(5). Original strict-model matching proof step 1.",
+   "via": [
+    "lem-weil-pbc-integral-strict-model-matching",
+    "lem-weil-pbc-proper-integral-strict-model-comparison",
+    "lem-weil-pbc-proper-integral-ordinary-inputs",
+    "lem-weil-pbc-realization-completed-mate",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralStrictModelChainTransport",
+  "file": "lean/Sheaf/Paper/IntegralStrictModelChainTransport.lean",
+  "declaration": "WeilConjectures.pbc_integral_strict_model_chain_transport",
+  "statement": "theorem pbc_integral_strict_model_chain_transport\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T)\n    (a : PbcProperIntegralPullbackIdentification l E h) :\n    ∃ t : (integralOperationsGoodComplex l E T).ι ⋙\n        pbcIntegralActualTowerFunctor l E h ⋙\n          HomologicalComplex.complexOfFunctorsToFunctorToComplex ≅\n      (integralOperationsGoodComplex l E T).ι ⋙\n        integralOperationsPullbackTowerFunctor l E h ⋙\n          (Functor.whiskeringRight ℕᵒᵖ _ _).obj (pbcIntegralTransportComplex U l E),\n      ∀ (P : (integralOperationsGoodComplex l E T).FullSubcategory) (n : ℕ),\n        (NatTrans.mapHomologicalComplex a.moduleIso.hom (.up ℤ)).app P.obj ≫\n            pbcIntegralActualTowerAugmentation l E h P.obj n ≫\n              (t.hom.app P).app (op n) =\n          (pbcIntegralTransportComplex U l E).map\n            (((ordinaryIntegralQuotientAugmentation l E h).app P.obj).app (op n))",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.pbc_integral_strict_model_chain_transport",
+   "WeilConjectures.pbcIntegralActualTowerFunctor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T034711-L-3676011",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T123522-L-2315271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

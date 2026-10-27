@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-rosenlicht-product-unit-factorization",
+ "kind": "statement",
+ "title": "Rosenlicht factorization of units on a product of integral varieties",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $X,Y$ be nonempty integral separated schemes of finite type over $F$ [def-pc-scheme, def-pc-integral-scheme, def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion. For every invertible regular function $u\\in\\Gamma(X\\times_FY,\\mathcal O)^\\times$, there are $a\\in\\Gamma(X,\\mathcal O_X)^\\times$ and $b\\in\\Gamma(Y,\\mathcal O_Y)^\\times$ such that $u=\\operatorname{pr}_X^*a\\,\\operatorname{pr}_Y^*b$. An invertible regular function is a global section with a multiplicative inverse; equivalently it is a morphism to $\\mathbf G_m$ [def-sc-gm-ga]. More precisely, for any $x_0\\in X(F)$ and $y_0\\in Y(F)$ there is an equality of regular functions $$u(x,y)=u(x,y_0)\\,u(x_0,y)\\,u(x_0,y_0)^{-1}.$$ The product is the scheme fibre product [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.48, printed pp.246--247, especially identity (79); Remark 12.50, printed p.247. The statement concerns scheme fibre products, not cartesian products of rings."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose any prescribed $x_0\\in X(F)$ and $y_0\\in Y(F)$. Such points exist: the Jacobson-space lemma gives a closed point in any nonempty affine open of each scheme, and the closed-point residue-field lemma identifies its residue field with $F$. Set $c=u(x_0,y_0)\\in F^\\times$ and define the global unit\n$$w=u\\,c\\,(\\operatorname{pr}_X^*u(-,y_0))^{-1}(\\operatorname{pr}_Y^*u(x_0,-))^{-1}.$$\nPullback is a ring map, so all factors are units. Direct cancellation gives $w(x,y_0)=1$ and $w(x_0,y)=1$ as regular functions on the two slices.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, pp.246--247, identity (79); agent-written affine bounded-inverse proof of the same normalization identity, instead of the printed boundary-divisor proof."
+   }
+  },
+  {
+   "text": "Use the finite-type affine covers to choose $x_0\\in U=\\operatorname{Spec}A\\subseteq X$ and $y_0\\in T=\\operatorname{Spec}B\\subseteq Y$ with $A,B$ finitely generated $F$-algebras. Both are domains by integrality. By the open-fibre-product lemma, $U\\times_F T$ is the open subscheme $\\operatorname{pr}_X^{-1}(U)\\cap\\operatorname{pr}_Y^{-1}(T)$ of $X\\times_FY$, compatibly with the projections, so $w$ and $w^{-1}$ restrict to it. The affine fibre-product theorem identifies $\\Gamma(U\\times_F T,\\mathcal O)$ with $A\\otimes_F B$, including both projection maps. Write the restrictions of $w$ and $w^{-1}$ as finite sums of pure tensors. Let $V,W\\subseteq A$ be the spans of their respective first coordinates. For every $y\\in T(F)$, evaluation on the second tensor coordinate gives $w_y\\in A^\\times$ with $w_y\\in V$ and $w_y^{-1}\\in W$. The bounded-inverse unit-lines lemma gives finitely many possibilities for $F w_y$. Since $w_y(x_0)=1$, each such line has at most one representative occurring among these $w_y$. Thus the set of sections $w_y$ itself is finite and nonempty; denote its distinct members by $f_1,\\ldots,f_s$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-bounded-inverse-unit-lines"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, pp.246--247, identity (79); agent-written affine bounded-inverse proof of the same normalization identity, instead of the printed boundary-divisor proof."
+   }
+  },
+  {
+   "text": "Choose a basis $a_1,\\ldots,a_r$ of $V$ and write $w=\\sum_i a_i\\otimes b_i$ and $f_j=\\sum_i c_{ij}a_i$, with $b_i\\in B$ and $c_{ij}\\in F$. Put $I_j=(b_i-c_{ij})_i\\subseteq B$. For every $y\\in T(F)$, the equality $w_y=f_j$ for some $j$ says $I_j$ vanishes at $y$, by independence of the $a_i$. If every $I_j$ were nonzero, choose $0\\ne h_j\\in I_j$. The product $\\prod_j h_j$ would vanish at every $F$-point of $T$, hence be zero by the affine Nullstellensatz vanishing principle, contradicting that $B$ is a domain. Consequently some $I_j=0$. Then $w=f_j\\otimes1$; evaluation at $y_0$ and $w(-,y_0)=1$ give $f_j=1$. Hence $w=1$ on $U\\times_F T$.",
+   "uses": [
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, pp.246--247, identity (79); agent-written affine bounded-inverse proof of the same normalization identity, instead of the printed boundary-divisor proof."
+   }
+  },
+  {
+   "text": "For each $y\\in T(F)$, the global section $w(-,y)-1$ on $X$ restricts to zero on $U$. Its germ in the function field is therefore zero, so injectivity of sections into the function field gives $w(-,y)=1$ on all of $X$. Now fix any $x\\in X(F)$. The section $w(x,-)-1$ on $Y$ vanishes at every $F$-point of $T$, so its restriction to the reduced affine $T$ is zero by the affine vanishing principle. Injectivity into the function field of $Y$ then gives $w(x,-)=1$ globally. Thus $w(x,y)=1$ for all $(x,y)\\in X(F)\\times Y(F)$.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, pp.246--247, identity (79); agent-written affine bounded-inverse proof of the same normalization identity, instead of the printed boundary-divisor proof."
+   }
+  },
+  {
+   "text": "Let $P=\\operatorname{Spec}C$ and $Q=\\operatorname{Spec}D$ range through finite-type affine covers of $X$ and $Y$. By the open-fibre-product lemma each $P\\times_FQ$ is the open subscheme $\\operatorname{pr}_X^{-1}(P)\\cap\\operatorname{pr}_Y^{-1}(Q)$ of $X\\times_FY$, compatibly with the projections. These products cover $X\\times_FY$: any point belongs to the intersection of the inverse images of one such $P$ and one such $Q$. On $P\\times_F Q$, write $w-1=\\sum_i e_i\\otimes d_i\\in C\\otimes_F D$ with the finitely many $e_i$ linearly independent, collecting coefficients in a basis of their span. For any $y\\in Q(F)$, the element $\\sum_i d_i(y)e_i\\in C$ vanishes at every $x\\in P(F)$, by the preceding step. The affine vanishing principle on the reduced ring $C$ makes it zero, and independence gives $d_i(y)=0$ for every $i$. The same principle on the reduced ring $D$ gives $d_i=0$. Hence $w-1=0$ on every product chart, and by the sheaf axiom $w=1$ globally.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, pp.246--247, identity (79); agent-written affine bounded-inverse proof of the same normalization identity, instead of the printed boundary-divisor proof."
+   }
+  },
+  {
+   "text": "Expanding $w=1$ and multiplying by its unit denominators yields\n$$u(x,y)=u(x,y_0)u(x_0,y)c^{-1}.$$\nTake $a=u(-,y_0)$ and $b=u(x_0,-)c^{-1}$. These are global units, since they are pullbacks of the unit $u$ times a nonzero scalar. The displayed equality is $u=\\operatorname{pr}_X^*a\\operatorname{pr}_Y^*b$. The construction began with arbitrary prescribed basepoints, so it proves the asserted identity for every pair of basepoints.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.48, pp.246--247, identity (79); agent-written affine bounded-inverse proof of the same normalization identity, instead of the printed boundary-divisor proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-sfb-bounded-inverse-unit-lines",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sc-integral-scheme-stalks-in-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.48, pp.246--247, identity (79); agent-written affine bounded-inverse proof of the same normalization identity, instead of the printed boundary-divisor proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Invertible regular functions on a product of integral varieties split as products of functions on factors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Pi.isRegular_iff\", \"module\": \"Mathlib/Algebra/Regular/Pi\", \"type\": \"∀ {ι : Type u_1} {R : ι → Type u_3} [inst : (i : ι) → Mul (R i)] {a : (i : ι) → R i},\\n  IsRegular a ↔ ∀ (i : ι), IsRegular (a i)\", \"doc\": \"For any function $ a $ in the product type $ \\\\prod_i R_i $, $ a $ is a regular element if and only if each component $ a(i) $ is regular in the corresponding structure $ R_i $.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.const_mul_rev\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f g : R) (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hu₁ : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl) (hu₂ : ∀ x ∈ U, f ∈ x.asIdeal.primeCompl),\\n  AlgebraicGeometry.StructureSheaf.const R f g U hu₁ * AlgebraicGeometry.StructureSheaf.const R g \", \"doc\": \"For elements $f, g$ in a commutative ring $R$ and an open set $U$ in the prime spectrum of $R$ satisfying conditions $hu₁$ and $hu₂$, the product of the constant sections with values $f$ and $g$ over \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"{ι : Type u} →\\n  (R : ι → CommRingCat) →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing } ⟶ X) →\\n        (i : ι) → AlgebraicGeometry.Spec (R i) ⟶ X\", \"doc\": \"Given a morphism from the spectrum of the product ring $\\\\prod_i R_i$ to a scheme $X$, this function constructs the corresponding family of morphisms from each spectrum $\\\\operatorname{Spec}(R_i)$ to $X\"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_injective\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [QuasiSeparatedSpace ↥X],\\n  Function.Injective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $ X $ is a quasi-separated scheme, then the decomposition map associating to each morphism $ \\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X $ the corresponding family of morphisms $ \\\\{\\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f g₁ g₂ : R) (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hu₁ : ∀ x ∈ U, g₁ ∈ x.asIdeal.primeCompl) (hu₂ : ∀ x ∈ U, g₂ ∈ x.asIdeal.primeCompl),\\n  AlgebraicGeometry.StructureSheaf.const R g₁ g₂ U hu₂ * AlgebraicGeometry.StructureSheaf.co\", \"doc\": \"For constants $f, g_1, g_2$ in a commutative ring $R$ and an open set $U$ in the prime spectrum $\\\\operatorname{Spec}(R)$, the product of the constant sections $\\\\operatorname{const}_R(g_1, g_2, U)$ and\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.const_mul_cancel\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (f g₁ g₂ : R) (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hu₁ : ∀ x ∈ U, g₁ ∈ x.asIdeal.primeCompl) (hu₂ : ∀ x ∈ U, g₂ ∈ x.asIdeal.primeCompl),\\n  AlgebraicGeometry.StructureSheaf.const R f g₁ U hu₁ * AlgebraicGeometry.StructureSheaf.con\", \"doc\": \"For a commutative ring $R$, in the structure sheaf on its prime spectrum $\\\\operatorname{Spec}(R)$, if $f, g_1, g_2 \\\\in R$ and $U \\\\subseteq \\\\operatorname{Spec}(R)$ is an open set satisfying conditions \"}\n  {\"name\": \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/PointsPi\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  Function.Surjective (AlgebraicGeometry.pointsPi R X)\", \"doc\": \"If $X$ is an affine scheme, then the decomposition map from morphisms $\\\\operatorname{Spec}(\\\\prod_i R_i) \\\\to X$ to families of morphisms $\\\\{\\\\operatorname{Spec}(R_i) \\\\to X\\\\}_{i \\\\in I}$ is surjective. In\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: units of a cartesian product of rings or abstract multiplicative characters do not state factorization of regular units on a scheme fibre product"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rosenlicht units theorem normalized invertible function on connected algebraic group is a character",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MulChar.ofUnitHom\", \"module\": \"Mathlib/NumberTheory/MulChar/Basic\", \"type\": \"{R : Type u_1} → [inst : CommMonoid R] → {R' : Type u_2} → [inst_1 : CommMonoidWithZero R'] → (Rˣ →* R'ˣ) → MulChar R R'\", \"doc\": \"Given commutative monoids $R$ and $R'$ with zero, and a monoid homomorphism $f : R^\\times \\to R'^\\times$ between their groups of invertible elements, this constructs a multiplicative character $\\\\chi : R \"}\n  {\"name\": \"MulChar.exists_apply_ne_one_iff_exists_monoidHom\", \"module\": \"Mathlib/NumberTheory/MulChar/Duality\", \"type\": \"∀ {M : Type u_1} {R : Type u_2} [inst : CommMonoid M] [inst_1 : CommRing R] (a : Mˣ), (∃ χ, χ ↑a ≠ 1) ↔ ∃ φ, φ a ≠ 1\", \"doc\": \"For a unit element $ a $ in a monoid $ M $, there exists a multiplicative character $ \\\\chi : M \\\\to R $ (to a commutative monoid with zero $ R $) satisfying $ \\\\chi(a) \\\\neq 1 $ if and only if there exis\"}\n  {\"name\": \"MulChar.toUnitHom_eq\", \"module\": \"Mathlib/NumberTheory/MulChar/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommMonoid R] {R' : Type u_2} [inst_1 : CommMonoidWithZero R'] (χ : MulChar R R'),\\n  χ.toUnitHom = MulChar.equivToUnitHom χ\", \"doc\": \"There is a bijective correspondence between multiplicative characters from a commutative monoid $ R $ to a commutative monoid with zero $ R' $ and monoid homomorphisms from the group of units $ R^\\time\"}\n  {\"name\": \"MulChar.ofUnitHom_eq\", \"module\": \"Mathlib/NumberTheory/MulChar/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommMonoid R] {R' : Type u_2} [inst_1 : CommMonoidWithZero R'] (χ : Rˣ →* R'ˣ),\\n  MulChar.ofUnitHom χ = MulChar.equivToUnitHom.symm χ\", \"doc\": \"There is a canonical equivalence between the type of multiplicative characters $\\\\chi : R \\\\to R'$ (where $R$ is a commutative monoid and $R'$ is a commutative monoid with zero) and the type of monoid h\"}\n  {\"name\": \"MulChar.toUnitHom\", \"module\": \"Mathlib/NumberTheory/MulChar/Basic\", \"type\": \"{R : Type u_1} → [inst : CommMonoid R] → {R' : Type u_2} → [inst_1 : CommMonoidWithZero R'] → MulChar R R' → Rˣ →* R'ˣ\", \"doc\": \"Given a multiplicative character $ \\\\chi $ from a commutative monoid $ R $ to a commutative monoid with zero $ R' $, this function constructs the monoid homomorphism from the group of units of $ R $ to\"}\n  {\"name\": \"MulChar.mulEquiv_units\", \"module\": \"Mathlib/NumberTheory/MulChar/Duality\", \"type\": \"∀ (M : Type u_1) (R : Type u_2) [inst : CommMonoid M] [inst_1 : CommRing R] [Finite M]\\n  [HasEnoughRootsOfUnity R (Monoid.exponent Mˣ)], Nonempty (MulChar M R ≃* Mˣ)\", \"doc\": \"There exists a multiplicative equivalence between the multiplicative characters from a commutative monoid $ M $ to a commutative monoid with zero $ R $ and the group of units $ M^\\times $ of $ M $. Thi\"}\n  {\"name\": \"MulChar.ofUnitHom_coe\", \"module\": \"Mathlib/NumberTheory/MulChar/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommMonoid R] {R' : Type u_2} [inst_1 : CommMonoidWithZero R'] (f : Rˣ →* R'ˣ) (a : Rˣ),\\n  (MulChar.ofUnitHom f) ↑a = ↑(f a)\", \"doc\": \"Given a monoid homomorphism $ f : R^\\\\times \\\\to R'^\\\\times $ between the unit groups of commutative monoids with zero $ R $ and $ R' $, and a unit $ a \\\\in R^\\\\times $, the multiplicative character $ \\\\chi\"}\n  {\"name\": \"MulChar.coe_equivToUnitHom\", \"module\": \"Mathlib/NumberTheory/MulChar/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommMonoid R] {R' : Type u_2} [inst_1 : CommMonoidWithZero R'] (χ : MulChar R R') (a : Rˣ),\\n  ↑((MulChar.equivToUnitHom χ) a) = χ ↑a\", \"doc\": \"For any multiplicative character $\\\\chi : R \\\\to R'$ and any invertible element $a \\\\in R^\\\\times$, the evaluation of the corresponding unit group homomorphism $\\\\text{equivToUnitHom}(\\\\chi)$ at $a$ equals \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: units of a cartesian product of rings or abstract multiplicative characters do not state factorization of regular units on a scheme fibre product"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"units\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: units of a cartesian product of rings or abstract multiplicative characters do not state factorization of regular units on a scheme fibre product"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|regular.*character|unit.*product",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: units of a cartesian product of rings or abstract multiplicative characters do not state factorization of regular units on a scheme fibre product"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Units on product of integral varieties Rosenlicht lemma",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulEquiv.prodUnits\", \"module\": \"Mathlib.Algebra.Group.Prod\", \"type\": \": (M × N)ˣ ≃* Mˣ × Nˣ\", \"doc\": \"For any monoids $M$ and $N$, the group of units $(M \\\\times N)^\\\\times$ is canonically isomorphic to the product group $M^\\\\times \\\\times N^\\\\times$. This isomorphism maps a unit $(u, v) \\\\in M^\\\\times \\\\time\"}\n  {\"name\": \"Prod.isUnit_iff\", \"module\": \"Mathlib.Algebra.Group.Prod\", \"type\": \"{x : M × N} : IsUnit x ↔ IsUnit x.1 ∧ IsUnit x.2\", \"doc\": \"An element $(a, b)$ in the product monoid $M \\\\times N$ is a unit if and only if $a$ is a unit in $M$ and $b$ is a unit in $N$.\"}\n  {\"name\": \"Prod.instSubsingletonUnits\", \"module\": \"Mathlib.Algebra.Group.Prod\", \"type\": \"[Subsingleton Mˣ] [Subsingleton Nˣ] : Subsingleton (M × N)ˣ\", \"doc\": \"Given two monoids $M$ and $N$, the group of units of their product monoid $M \\\\times N$ is canonically isomorphic to the product of their individual groups of units $M^\\\\times \\\\times N^\\\\times$. This mea\"}\n  {\"name\": \"Pi.isUnit_iff\", \"module\": \"Mathlib.Algebra.Group.Pi.Units\", \"type\": \": IsUnit x ↔ ∀ i, IsUnit (x i)\", \"doc\": \"An element $x$ in the product monoid $\\\\prod_{i \\\\in I} M_i$ is a unit if and only if each component $x(i)$ is a unit in the corresponding monoid $M_i$.\"}\n  {\"name\": \"IsUnit.apply\", \"module\": \"Mathlib.Algebra.Group.Pi.Units\", \"type\": \"∀ {ι : Type u_1} {M : ι → Type u_2} [inst : (i : ι) → Monoid (M i)] {x : (i : ι) → M i},\\n  IsUnit x → ∀ (i : ι), IsUnit (x i)\", \"doc\": \"If $x$ is a unit in the product monoid $\\\\prod_{i \\\\in \\\\iota} M_i$, then for every index $i$, the component $x_i$ is a unit in the monoid $M_i$.\"}\n  {\"name\": \"MulEquiv.piUnits\", \"module\": \"Mathlib.Algebra.Group.Pi.Units\", \"type\": \": (Π i, M i)ˣ ≃* Π i, (M i)ˣ\", \"doc\": \"There is a multiplicative equivalence between the group of units of a product monoid $\\\\prod_{i \\\\in I} M_i$ and the product of the groups of units of each component monoid $M_i$. Specifically, a functi\"}\n  {\"name\": \"Units.mk0_prod\", \"module\": \"Mathlib.Algebra.BigOperators.GroupWithZero.Finset\", \"type\": \"[CommGroupWithZero G₀] (s : Finset ι) (f : ι → G₀) (h) :\\n  Units.mk0 (∏ i ∈ s, f i) h = ∏ i ∈ s.attach, Units.mk0 (f i) fun hh ↦ h (Finset.prod_eq_zero i.2 hh)\", \"doc\": \"In a commutative group with zero $ G_0 $, given a finite set $ s $ and a function $ f : \\\\iota \\\\to G_0 $, if the product $ \\\\prod_{i \\\\in s} f(i) $ is non-zero, then the unit corresponding to this produc\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"(U : Opens X) (f : X.presheaf.obj (op U)) (x : X) (hx : x ∈ U) (h : IsUnit (X.presheaf.germ U x hx f)) :\\n  ∃ (V : Opens X) (i : V ⟶ U) (_ : x ∈ V), IsUnit (X.presheaf.map i.op f)\", \"doc\": \"In a ringed space $X$ with sheaf of commutative rings, if the germ of a section $f$ at a point $x$ (viewed in the stalk at $x$) is a unit, then there exists an open neighborhood $V$ of $x$ contained i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: units of a cartesian product of rings or abstract multiplicative characters do not state factorization of regular units on a scheme fibre product"
+  },
+  {
+   "tool": "grep",
+   "query": "Rosenlicht|exists_units_eq_tmul|units.*tensorProduct",
+   "results": "{\"t\": \"2026-10-23T19:39:03Z\", \"tool\": \"grep\", \"query\": \"Rosenlicht|exists_units_eq_tmul|units.*tensorProduct\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme pullback descriptions and unit orders do not give Rosenlicht factorization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rosenlicht invertible regular functions on product varieties",
+   "results": "{\"t\": \"2026-10-23T19:39:04Z\", \"tool\": \"leansearch\", \"query\": \"Rosenlicht invertible regular functions on product varieties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Prod.isRegular_mk\", \"Pi.isLeftRegular_iff\", \"Prod.isLeftRegular_mk\", \"instRegularSpaceProd\", \"Pi.isRegular_iff\", \"IsRegular.prodMk\", \"IsRegular.and_of_mul_of_mul\", \"Prod.isAddRegular_mk\"], \"digest\": \"f7f1e77c38546c75\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme pullback descriptions and unit orders do not give Rosenlicht factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every unit on the scheme product of integral varieties over an algebraically closed field factors as a product of pullbacks of units",
+   "results": "{\"t\": \"2026-10-23T19:39:06Z\", \"tool\": \"leanfinder\", \"query\": \"Every unit on the scheme product of integral varieties over an algebraically closed field factors as a product of pullbacks of units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.pointsPi\", \"AlgebraicGeometry.Scheme.Pullback.SpecOfPoint\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\"], \"digest\": \"ed65d42b8b8fcb71\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme pullback descriptions and unit orders do not give Rosenlicht factorization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsUnit\"",
+   "results": "{\"t\": \"2026-10-23T19:39:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"IsUnit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.basicOpen_of_isUnit\", \"AlgebraicGeometry.Scheme.Modules.isUnit_algebraMap_end_of_le_basicOpen\", \"AlgebraicGeometry.Scheme.ord_of_isUnit\", \"AlgebraicGeometry.Scheme.ordHom_of_isUnit\"], \"digest\": \"594a51d1a3a7b03d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme pullback descriptions and unit orders do not give Rosenlicht factorization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-borel-characteristic-picard-sequence",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Characteristic sequence of a Borel quotient. Supporting input: Rosenlicht factorization of units on a product of integral varieties.",
+   "via": [
+    "lem-sfb-borel-characteristic-picard-sequence",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rosenlicht-product-unit-factorization",
+  "worker": "stage1",
+  "summary": "Read Milne Proposition 12.48 and Remark 12.50; no exact upstream attachment found. Give an agent-written affine proof via finite-dimensional inverse-pair unit lines, followed by the coefficient-ideal argument, extension along integral factors, and a two-factor affine vanishing test. One new unsplit auxiliary statement; reuse existing affine Nullstellensatz, fibre-product and generic-section nodes. Repair doubled TeX escapes only; no mathematical change to the statement.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Characteristic sequence of a Borel quotient. Supporting input: Rosenlicht factorization of units on a product of integral varieties. All steps realize the Rosenlicht prerequisite of the Borel characteristic sequence; the bounded-inverse argument is below the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic foundational algebraic geometry used for the affine proof of the Rosenlicht prerequisite; this unit has no separate version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic foundational algebraic geometry used for the affine proof of the Rosenlicht prerequisite; this unit has no separate version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic foundational algebraic geometry used for the affine proof of the Rosenlicht prerequisite; this unit has no separate version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-fibre-product",
+    "why": "Generic Mathlib-leaf foundational algebraic geometry: identifies the product of affine opens with the open intersection of the projection preimages in X x_F Y (reviewer addition); this unit has no separate version of this tool."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic foundational algebraic geometry used for the affine proof of the Rosenlicht prerequisite; this unit has no separate version of this tool."
+   },
+   {
+    "node": "lem-sc-integral-scheme-stalks-in-function-field",
+    "why": "Generic foundational algebraic geometry used for the affine proof of the Rosenlicht prerequisite; this unit has no separate version of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sc-integral-scheme-stalks-in-function-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-bce2fe81f",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-bce2fe81f (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Prop 12.48 (printed pp.246-247, identity (79)) and Remark 12.50. The item's hypotheses (integral, separated, finite type over algebraically closed F) match Milne's irreducible varieties, and the statement changed only in its TeX escapes. The arbitrary-basepoint identity is correct. Read the agent-written affine proof step by step. Step 1: slice normalization w with w(x,y0)=1 and w(x0,y)=1, using jacobson-space and closed-point-residue-field. Step 2: on A⊗B, w_y lies in V and its inverse in W; the new lemma bounds the lines, and w_y(x0)=1 makes the set {w_y} finite. Step 3: coefficient ideals I_j; if all were nonzero, the product of nonzero elements would vanish on T(F), which Nullstellensatz clause 2 and the domain hypothesis forbid; so w=f_j⊗1=1. Step 4: generic-germ injectivity (clause 1 of integral-scheme-stalks) plus Nullstellensatz give w=1 on X(F)×Y(F). Step 5: chartwise two-variable vanishing and the sheaf axiom. Step 6: cancellation. All of this is correct. New node lem-sfb-bounded-inverse-unit-lines is true and self-contained. Proof checked from the report: Segre incidence scheme (01WD), it misses P(ker m) in a domain, so it is affine and proper, hence finite (01WN). Tested on V=0, Laurent monomials and F(t); F[ε]/ε² shows the domain hypothesis is needed. Tags 01WD, 01WN and 0EKE were checked against their labels. Not a clause of the item; no duplicate found (checked hopf-bilinear-image-dimension, integral-units-finite-valuation-map, relatively-closed-constants-units-fg, affine-unit-quotient). Declared tool_uses are accepted: generic mathlib leaves and the imported Nullstellensatz node. FIX (C1): steps 2 and 5 restrict w to U×_F T and P×_F Q as opens of X×_F Y, but no cited node identifies these products with pr_X^{-1}∩pr_Y^{-1}. Added the mathlib leaf lem-weil-pbc-open-fibre-product, with one sentence each, to steps 2 and 5, proof_deps and split_report.tool_uses. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RosenlichtProductUnitFactorization",
+  "declaration": "AlgebraicGeometry.rosenlicht_product_unit_factorization",
+  "declarations": [
+   "AlgebraicGeometry.rosenlichtSliceX",
+   "AlgebraicGeometry.rosenlichtSliceY",
+   "AlgebraicGeometry.rosenlicht_product_unit_factorization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RosenlichtProductUnitFactorization.lean",
+  "statement": "theorem rosenlicht_product_unit_factorization (F : Type u) [Field F] [IsAlgClosed F] (X Y : Scheme.{u}) (f : X ⟶ Spec (.of F)) (g : Y ⟶ Spec (.of F)) [IsIntegral X] [IsIntegral Y] [IsSeparated f] [IsSeparated g] [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType g] [QuasiCompact g] (u : (Γ(pullback f g, ⊤))ˣ) : (∃ (a : (Γ(X, ⊤))ˣ) (b : (Γ(Y, ⊤))ˣ), u = Units.map (pullback.fst f g).appTop.hom.toMonoidHom a * Units.map (pullback.snd f g).appTop.hom.toMonoidHom b) ∧ (∀ (x₀ : Spec (.of F) ⟶ X) (y₀ : Spec (.of F) ⟶ Y) (hx : x₀ ≫ f = 𝟙 (Spec (.of F))) (hy : y₀ ≫ g = 𝟙 (Spec (.of F))), u = Units.map (pullback.fst f g).appTop.hom.toMonoidHom (Units.map (rosenlichtSliceX f g y₀ hy).appTop.hom.toMonoidHom u) * Units.map (pullback.snd f g).appTop.hom.toMonoidHom (Units.map (rosenlichtSliceY f g x₀ hx).appTop.hom.toMonoidHom u) * Units.map (pullback.fst f g ≫ f).appTop.hom.toMonoidHom ((Units.map (x₀ ≫ rosenlichtSliceX f g y₀ hy).appTop.hom.toMonoidHom u)⁻¹))",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53700c02f",
+  "group": "NX",
+  "result": "pass",
+  "note": "Clause-by-clause match of node lem-sfb-rosenlicht-product-unit-factorization (Milne iAG Prop 12.48 (79), Rem 12.50): F IsAlgClosed; X,Y Scheme.{u} over Spec F with IsIntegral (includes nonempty), IsSeparated, LocallyOfFiniteType+QuasiCompact; u : Γ(pullback f g,⊤)ˣ; conjunct 1 ∃ a b with u = fst^*a·snd^*b via Units.map appTop; conjunct 2 ∀ F-rational sections x₀,y₀ (x₀≫f=𝟙, y₀≫g=𝟙): u = fst^*(sliceX^*u)·snd^*(sliceY^*u)·(fst≫f)^*((x₀≫sliceX)^*u)⁻¹, constant from Γ(Spec F), so no arbitrary scalar. Slice helpers are canonical pullback.lift data with source/blueprint docstrings, listed in lean.declarations. lean.statement verbatim equals the file signature; node differs from live only in lean; stmt_dep records consistent (IsAlgClosed via mathlib_match; G_m module imported, no copy). No duplicate in the live tree or Mathlib; proof-only imports exist. Edge cases: empty excluded by IsIntegral, singular/any characteristic covered, single forced universe. Proof sorry only; docstrings carry the source and the 6 proof steps; report has Worker report and Second reading by NX. No file changed, so no compile."
+ }
+}

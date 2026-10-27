@@ -1,0 +1,149 @@
+{
+ "id": "lem-pur-supported-projective-chern-comparison",
+ "kind": "statement",
+ "title": "Supported infinity Chern class before the projective adjunction",
+ "statement": "Let $\\ell$ be a prime, $E/\\mathbf Q_\\ell$ a finite extension and $n\\geq0$. Put $A=\\mathcal O_E/(\\varpi_E^{n+1})$, lifted to the sheaf universe as in [def-pur-finite-site-coordinates]. Let $S$ be a Noetherian scheme with $\\ell$ invertible, let $P=\\mathbf P^1_S$ and suppose the infinity section $i:S\\hookrightarrow P$ has invertible ideal. Fix $r\\geq0$ with $\\ell^{r+1}A=0$ and put $L_{P,r}=\\mu_{\\ell^{r+1},P}^{\\mathrm{et}}\\otimes_{\\mathbf Z/\\ell^{r+1}}A$. Let $C_P$ be the canonical exact derived comparison. Let $x^e:A_P\\to L_{P,r}[2]$ be the Chern arrow of the ordinary projective-line trace datum [def-amb-p1-trace]. Let $x^p:C_PA_P\\to C_PL_{P,r}[2]$ be the composite called projectiveChern in [def-pur-supported-projective-chern]: the constant comparison, the supported Cartier unit, the Cartier Kummer morphism, and the inverse of the fixed root-projection comparison twistDerived. Then $x^p=C_P(x^e)$. This equality is on $P$ before either projective direct image or adjunction, and includes the empty base and zero coefficient ring.",
+ "stmt_deps": [
+  "def-pur-supported-projective-chern",
+  "def-amb-p1-trace",
+  "def-pur-finite-site-coordinates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.md",
+  "place": "The supported map has image c1(O_T(D)) after forgetting support. Apply to infinity and O(infinity)=O(1), with def-amb-p1-trace and the root-projection normalization. The positive ordinary Chern class is specified in thm-amb-p1-decomposition.md."
+ },
+ "proof": [
+  {
+   "text": "For the infinity divisor, the two projective charts exhibit its dual ideal as O(1): its local equation is a coordinate on the chart containing infinity and a unit on the complementary chart, and the dual frames have the transition of ProjectiveSpace.twist 1. Hence its supported Kummer Chern class after forgetting support is the ordinary positive Kummer class of O(1). This remains valid for arbitrary base rings, not just fields.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "def-pc-projective-space-twist",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the Ext class k and normalized sheaf comparison q given by CartierKummerChern, the Chern clause of cartier_kummer_map. Its integral-generator forgetful class equals the supported Chern class of Step 1. The ordinaryFiniteClass map is injective on P1_S, since the Noetherian scheme P1_S is qcqs. The chern specification of projectiveLineTraceDatum therefore identifies k.hom with its chern arrow.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "lem-asd-ordinary-finite-class-comparison",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both q and twistComparison have the same root-projection normalization. Apply finiteTate_local_root_tensors_hom_ext to their homs: each sends every scalar root tensor, after any local lift to the infinite root tower, to the identical pro-etale generator. This gives equality of their homs, and hence of isomorphisms. Degree one is used here; no primitive root or flatness of A over Z/ell^(r+1) is needed.",
+   "uses": [
+    "lem-pur-finite-tate-local-root-tensors-ext",
+    "lem-amb-finite-tate-site-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Ext.hom to the CartierKummerChern realization equation, using Ext composition and exact-functor realization compatibility. Its left side is the canonical constant comparison followed by the supported Cartier unit and cartierKummerMap; its right side is comparison of k.hom followed by the single-functor and shifted comparison of q. Substitute Steps 2 and 3. Postcompose by twistDerived.inv and cancel twistDerived.hom followed by its inverse. The resulting equality is exactly projectiveChern = comparison.map datum.chern. Empty schemes and zero rings satisfy the same equality because the argument uses identities and canonical sheaf maps only.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "def-pur-supported-projective-chern",
+    "def-pur-finite-site-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Forgetting the relative trivialization gives the Chern class; final paragraph scalar extension. Expanded into Ext realization, normalized root comparison, and the infinity divisor chart identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.hom",
+   "results": "12 hits: CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.ext, CategoryTheory.Abelian.Ext.ext_iff, CategoryTheory.Abelian.Ext.mk₀_hom, CategoryTheory.Abelian.Ext.comp_hom, CategoryTheory.Abelian.Ext.zero_hom, CategoryTheory.Abelian.Ext.neg_hom, CategoryTheory.Abelian.Ext.add_hom. No statement compares these supported and ordinary projective-line Chern arrows. Ext realization lemmas are generic glue only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CartierKummerChern|projectiveChern",
+   "results": "0 hits: . No statement compares these supported and ordinary projective-line Chern arrows. Ext realization lemmas are generic glue only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Chern class of the infinity divisor on projective line is comparison of the ordinary etale Kummer class of O(1)",
+   "results": "8 hits: AlgebraicGeometry.Proj.one_apply, WeierstrassCurve.Projective.PointClass, WeierstrassCurve.Affine.CoordinateRing.XClass, WeierstrassCurve.Affine.Point.toClass_zero, WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.Point.toClass_apply, WeierstrassCurve.Jacobian.PointClass, WeierstrassCurve.Affine.Point.toClass_eq_zero. No statement compares these supported and ordinary projective-line Chern arrows. Ext realization lemmas are generic glue only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first Chern class of the infinity divisor on a projective line is the Kummer Chern class of O(1)",
+   "results": "8 hits: OnePoint.smul_infty_eq_ite, MeromorphicOn.divisor_inv, WeierstrassCurve.ψ_one, OnePoint.smul_infty_def, KaehlerDifferential.kerTotal_mkQ_single_algebraMap_one, groupCohomology.shortComplexH1_f, ClassGroup.mk_eq_one_iff, Projectivization. No statement compares these supported and ordinary projective-line Chern arrows. Ext realization lemmas are generic glue only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorIntegrationSiteComparison",
+  "date": "2026-10-26",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Statement: every map involved was normalized by the Kummer generator; proof: inverse diagonal identification, vector-bundle trace at the normal bundle endpoint. This splits the pre-adjunction Chern identification in lem-pur-vector-integration-site-comparison.",
+   "via": [
+    "lem-pur-vector-integration-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedProjectiveChernComparison",
+  "file": "lean/Sheaf/Paper/SupportedProjectiveChernComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.supportedProjectiveChern_comparison",
+  "statement": "theorem supportedProjectiveChern_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (n : ℕ) (S : Scheme.{u}) [IsNoetherian S]\n    (hS : IsUnit (l : Γ(S, ⊤))) (hI : (ProjectiveLine.infinity S).ker.IsInvertible)\n    (r : ℕ)\n    (hA : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0) :\n    projectiveChern l E n S hS hI r hA =\n      (comparison (Scheme.finiteTateCoefficient l E n) (ProjectiveLine S)).map\n        (Etale.projectiveLineTraceDatum (l ^ (r + 1))\n          (pow_pos (Fact.out : l.Prime).pos _) _ hA S\n          (by simpa only [Nat.cast_pow] using hS.pow (r + 1))).chern",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-26"
+ },
+ "proof_deps": [
+  "def-amb-p1-trace",
+  "def-pc-divisor-line-bundle",
+  "def-pc-projective-space-twist",
+  "def-pur-finite-site-coordinates",
+  "def-pur-supported-projective-chern",
+  "lem-amb-cartier-kummer-map",
+  "lem-amb-finite-tate-site-descent",
+  "lem-asd-ordinary-finite-class-comparison",
+  "lem-pur-finite-tate-local-root-tensors-ext"
+ ],
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261025T202406-L-2713318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261025T202406-L-2713318",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

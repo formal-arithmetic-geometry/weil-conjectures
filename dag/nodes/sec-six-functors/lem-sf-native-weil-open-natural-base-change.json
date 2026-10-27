@@ -1,0 +1,254 @@
+{
+ "id": "lem-sf-native-weil-open-natural-base-change",
+ "kind": "statement",
+ "title": "Natural open base change for native derived Weil modules",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Use the native coefficient sheaves $B_{\\bar T}$, abelian Weil categories $\\mathcal W_T$, their ordinary derived categories $D(\\mathcal W_T)$, bounded constructible full subcategories $\\mathrm{WC}^{\\mathrm{der}}(T)$, and the actual equivariant operations of [def-sf-native-weil-derived-framework]. Let\n$$\\begin{array}{ccc}U'&\\xrightarrow{v}&U\\\\ j'\\downarrow&&\\downarrow j\\\\ T'&\\xrightarrow{u}&T\\end{array}$$\nbe a cartesian square [def-weil-pbc-cartesian-square] of locally finite-type $k_0$-schemes [def-weil-finite-type-morphism] and $k_0$-morphisms, with $j$ a quasi-compact open immersion [def-weil-open-immersion], and $u$ arbitrary. Write $J_j$ and $J_{j'}$ for the termwise extensions by zero on ordinary derived categories associated to the native equivariant sheaf extensions by zero. There is a natural isomorphism\n$$u^*J_j\\ \\cong\\ J_{j'}v^*:D(\\mathcal W_U)\\longrightarrow D(\\mathcal W_{T'}).$$\nThe underlying sheaf-level comparison before passage to complexes is the base-change comparison for the localized ringed pro-etale sites with coefficient maps induced by precomposition of locally finite functions. It commutes with the Frobenius comparison maps defining the four native lifts; thus the displayed isomorphism, including its inverse, lies in the native equivariant derived categories. No constructibility or absolute separatedness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6, label lemma-shriek-base-change, and its cited general ringed-site localization: sites-modules.tex Tag 04J0, label lemma-localize-morphism-ringed-sites. Agent formulation for native Frobenius-equivariant modules and termwise derived functors; exactness is supplied separately by lem-sf-native-weil-basic-comparisons."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Lift the actual geometric-fibre open adjunction with IsoAlgebra.mapOfNatIsoLeftAdjunction. Its inputs are adicOpenImmersionLowerShriekAdjunction, adicUpperStarLowerStarAdjunction, mateEquiv_adicUpperStarGeometricFiberMapCompFrobeniusIso_inv, and the Frobenius-compatible adicOpenImmersionLowerShriekToLowerStar. The identity adicOpenImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowerStar supplies the required inverse-counit normalization. This constructs nativeOpenAdjunction: the specified native extensionByZero is left adjoint to the specified native upperStar, with no change of Frobenius action.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-fixed-pair-adjunction-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change: uniqueness of the left adjoints of the localization/direct-image comparison; the native source APIs named in each step implement the same argument."
+   }
+  },
+  {
+   "text": "Construct nativeOpenBaseChangeMap as the inverse mate of ProEtaleWeilSheaf.lowerStarSquareIso, using the existing native upperStarLowerStarAdjunction for the two open maps. It is already a natural transformation of native fixed-pair categories. Expand the mate component into the unit, the square comparison, and the counit. The source-library formulas lowerStarCompIso_hom_app_hom_f, lowerStarCompIso_inv_app_hom_f, lowerStarCongr_hom_app_hom_f and upperStarLowerStarAdjunction_unit_app_hom_f/counit_app_hom_f show that its carrier is exactly ProEtale.adicBaseChangeMap on the geometric-fibre square. Two elementary congruence identities cancel the congruences introduced by geometricFiberMap_comp. Thus no additional Frobenius equation is assumed.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change: uniqueness of the left adjoints of the localization/direct-image comparison; the native source APIs named in each step implement the same argument."
+   }
+  },
+  {
+   "text": "The chosen pullback identification gives IsPullback.of_iso_pullback. Scheme.Hom.isPullback_geometricFiberMap_of_isPullback transports it to the geometric fibres. The existing ProEtale.isIso_adicBaseChangeMap_of_isPullback applies there: it is the module lift of the weakly-etale sheaf base-change theorem, identified on carriers by adicBaseChangeMap_app_hom. Both geometric-fibre open immersions are weakly etale. Applying the exact conservative native carrier to every component therefore proves that nativeOpenBaseChangeMap is invertible. This uses neither properness of the horizontal map nor constructibility of its argument.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+    "lem-sf-native-weil-constructible-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change: uniqueness of the left adjoints of the localization/direct-image comparison; the native source APIs named in each step implement the same argument."
+   }
+  },
+  {
+   "text": "Compose nativeOpenAdjunction for j with the native pullback/direct-image adjunction for u. Its right adjoint is u_* followed by j^*. Transport this adjunction by the invertible nativeOpenBaseChangeMap to the right adjoint j′^* followed by v_*. This is also the right adjoint of v^* followed by j′_!, by composing the adjunction for v with nativeOpenAdjunction for j′. Mathlib Adjunction.leftAdjointUniq supplies the native natural isomorphism j_! followed by u^* isomorphic to v^* followed by j′_!. This is the same Hom-chain as Stacks 03S6, performed inside the native hearts; both its hom and inverse are fixed-pair morphisms.",
+   "uses": [
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change: uniqueness of the left adjoints of the localization/direct-image comparison; the native source APIs named in each step implement the same argument."
+   }
+  },
+  {
+   "text": "Native extensionByZero and upperStar are additive and preserve finite limits and finite colimits by their existing source-library instances. Apply Functor.mapDerivedCategoryNatIso to the heart isomorphism, then compose with the inverse Functor.mapDerivedCategoryCompIso on the left and Functor.mapDerivedCategoryCompIso on the right. This proves the unchanged assertion on ordinary unbounded derived categories of all native Weil sheaves. No quasi-compactness of j′, boundedness of the input, constructibility or absolute separatedness was used. The constructed comparison is packaged in the proved private nativeOpenDerivedBaseChangeIso, and the public theorem applies it to the pullback supplied by the chosen Cartesian square.",
+   "uses": [
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "lem-sf-native-weil-clopen-sheaf-comparison",
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-sfb-exact-derived-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change: uniqueness of the left adjoints of the localization/direct-image comparison; the native source APIs named in each step implement the same argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-coefficient-site-weakly-etale-base-change",
+  "lem-sf-native-weil-constructible-abelian",
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "lem-sf-native-weil-clopen-sheaf-comparison",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-sfb-exact-derived-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6, lemma-shriek-base-change; E3, 2026-10-27: native adjunction and mate construction using existing source-library APIs, followed by uniqueness of left adjoints and exact derived descent. Private carrier calculations follow the proved helpers in Sheaf.WeilSheaf.NativeOpenProperInterchange; its theorem and module are not imported."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change of extension by zero on ordinary derived categories of native Frobenius equivariant pro etale module sheaves for a cartesian open immersion square",
+   "results": "Logged 2026-10-26T11:17:30Z: 8 hits. SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality. ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero and inverse image commute naturally for sheaves of modules on localized ringed sites",
+   "results": "Logged 2026-10-26T11:17:29Z: 8 hits. AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, SheafOfModules.over, SheafOfModules.sheafificationCompPullback, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective, FractionalIdeal.extended_zero, PresheafOfModules.Sheafify.module, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, ModuleCat.tildeInModuleCat. ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "Logged 2026-10-26T11:17:29Z: 0 hits. . ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|shriek.*base.*change",
+   "results": "Logged 2026-10-26T11:17:28Z: 0 hits. . ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|shriek.*base.*change",
+   "results": "Logged 2026-10-26T12:16:24Z: ",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state extension-by-zero base change in native equivariant categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "Logged 2026-10-26T12:16:24Z: ",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state extension-by-zero base change in native equivariant categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural base change of extension by zero for modules on localized ringed sites and Frobenius equivariant derived sheaves",
+   "results": "Logged 2026-10-26T12:16:25Z: SheafOfModules.map_ιFree_mapFree_hom, ModuleCat.Tilde.Localizations, ModuleCat.Tilde.openToLocalization, ModuleCat.tilde, ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop, ModuleCat.Tilde.toOpen, ModuleCat.tildeInModuleCat, PresheafOfModules.Sheafify.module",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state extension-by-zero base change in native equivariant categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback commutes with extension by zero in a cartesian square of ringed topoi",
+   "results": "Logged 2026-10-26T12:16:42Z: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-26",
+   "verdict": "no match: the returned declarations do not state extension-by-zero base change in native equivariant categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism pullback extension by zero Frobenius equivariant sheaves modules",
+   "results": "Logged 2026-10-26T12:17:20Z: service unavailable: ",
+   "date": "2026-10-26",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-compact-base-change",
+  "date": "2026-10-26",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package, Clause (4), extension-by-zero base-change factor of the compactification calculation, made explicit in sk-prop-sf-cbc/_section.md and lem-cbc-extension-zero-base-change.proof.md.",
+   "via": [
+    "lem-sf-native-weil-compact-base-change"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sf-native-weil-open-natural-base-change",
+  "worker": "stage1",
+  "summary": "Constructed the actual localized ringed-site sheaf comparison by the explicit Hom chain, verified the Frobenius equation by identity-on-evaluations and mate pasting, lifted the map and inverse to fixed pairs, and derived the exact native functors. Statement unchanged; all auxiliary assertions already have DAG nodes; no new nodes.",
+  "blueprint": "Native extension-by-zero factor of prop-functor-package clause (4), following the open factor of sk-prop-sf-cbc and lem-cbc-extension-zero-base-change.proof.md; uses general ringed-site localization rather than geometric-stalk detection for finite coefficients.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the open pro-etale site with a localized site; the unit open base-change route requires this tool with native coefficient sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic localization comparison for arbitrary ring sheaves; the unit open base-change route requires this tool with native coefficient sheaves."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic extension-by-zero adjunction for arbitrary localized ringed sites; the unit open base-change route requires this tool with native coefficient sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic tensor module inverse-image adjunction; the unit open base-change route requires this tool with native coefficient sheaves."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Generic exact derived functor comparison; the unit open base-change route requires this tool with native coefficient sheaves."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sfb-exact-derived-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NB-19785db32",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-19785db32 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item only, no new nodes. Its statement and stmt_deps are unchanged, and the base item had no proof (not a re-split). The proof is the route of Stacks 03S6 (etale-cohomology.tex lemma-shriek-base-change) through 04J0 (sites-modules.tex lemma-localize-morphism-ringed-sites), with the steps written out. Step 1: localize-ringed-site-morphism applied to the pro-etale morphism of sites with V=Ū and u(Ū)≅Ū' by the cartesian square; the weakly-etale localization identifies the slices with Ū_proet and Ū'_proet; I checked that the restricted coefficient map is precomposition for v̄; E is the identity on evaluations, as the cited statement says. Step 2: the ringed-topoi adjunction and the site-restriction adjunction match the framework's tensor-formula pullback and its sheafified extension by zero exactly; I checked the Yoneda construction of a, b and their inverse identities. Step 3: the Frobenius equation follows from mate pasting (1)–(3), with the restriction and direct-image faces commuting on evaluations. It is compressed but concrete, and reading the framework's extension-by-zero comparison as the mate of restriction is the canonical meaning. Step 4: I checked the fixed-pair morphism algebra, for b and for its inverse. Step 5: exactness of the native lifts holds for arbitrary u and both opens, from pullback-exact-lisse, from For being exact and conservative (constructible-abelian), and from the clopen-sheaf comparison. Step 6: the exact-derived natural-iso and composition nodes apply on unbounded D. Edge cases checked: U empty, j = id, u = id, and u with image disjoint from U. The coefficient category is the native framework, not identified with finite coefficients, and it matches the parent's use in compact-base-change. No duplicate: open-proper-interchange is the proper-direction statement, and the cbc and trf open nodes have finite coefficients. No cycle, no SGA. The off-unit uses are generic tools on the unit route or declared in tool_uses; I accept them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeOpenNaturalBaseChange",
+  "declaration": "AlgebraicGeometry.nativeWeilOpenNaturalBaseChange",
+  "file": "lean/Sheaf/WeilSheaf/NativeOpenNaturalBaseChange.lean",
+  "statement": "theorem nativeWeilOpenNaturalBaseChange (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {U' U T' T : Scheme.{u}} [U'.Over (Spec (CommRingCat.of k₀))] [U.Over (Spec (CommRingCat.of k₀))] [T'.Over (Spec (CommRingCat.of k₀))] [T.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U' ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (T' ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))] (v : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (u : T' ⟶ T) [v.IsOver (Spec (CommRingCat.of k₀))] [j'.IsOver (Spec (CommRingCat.of k₀))] [j.IsOver (Spec (CommRingCat.of k₀))] [u.IsOver (Spec (CommRingCat.of k₀))] [IsOpenImmersion j'] [IsOpenImmersion j] [QuasiCompact j] (sq : ChosenCartesianSquare v j' j u) : Nonempty ((ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategory ⋙ (ProEtaleWeilSheaf.upperStar k₀ l u).mapDerivedCategory ≅ (ProEtaleWeilSheaf.upperStar k₀ l v).mapDerivedCategory ⋙ (ProEtaleWeilSheaf.extensionByZero k₀ l j').mapDerivedCategory)",
+  "branch": "NA",
+  "by": "NA",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-205d65bc8",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read the item, the 4 stmt_deps and the module against ProEtaleWeilSheaf.extensionByZero (OpenImmersion.lean:45), ProEtaleWeilSheaf.upperStar (Category.lean:447) and ChosenCartesianSquare (g'=v, f'=j', f=j, g=u: orientation matches). Hypotheses: finite k0, prime l with ringChar≠l, 4x LocallyOfFiniteType over k0, IsOver morphisms, j qc open immersion, u arbitrary; no constructibility, separatedness or universe restriction. Conclusion: Nonempty (J_j⋙u^* ≅ v^*⋙J_j') on the unbounded ordinary derived categories via termwise mapDerivedCategory, correct direction. Advisory: [IsOpenImmersion j'] is implied by the square and needed to type J_j'. Nonempty follows family practice (NativeBasicComparisons) and the only citer, compact-base-change, uses existence only. No duplicate: NativeOpenProperInterchange has only private, different helpers. Docstrings carry source, blueprint and the 6 proof steps; sorry only; statement verbatim; Worker report and Second reading by NA present. Not compiled (no change; delivery compile relied on)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261026T222627-L-675351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

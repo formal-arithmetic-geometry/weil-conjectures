@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-coefficient-endomorphism-preserves-independence",
+ "kind": "statement",
+ "title": "Coefficient field embeddings preserve independence in a direct sum",
+ "statement": "Let $k$ be a field [def-weil-field] and let $\\sigma:k\\to k$ be an injective unital ring homomorphism. Let $I$ be any set, and write $k^{(I)}$ for the $k$-vector space of finitely supported functions $I\\to k$, with pointwise addition and scalar multiplication. Define $T_\\sigma:k^{(I)}\\to k^{(I)}$ by $T_\\sigma(v)(i)=\\sigma(v(i))$. Let $m\\geq0$ and $v_1,\\ldots,v_m\\in k^{(I)}$. If $\\sum_{j=1}^m c_jv_j=0$ for $c_j\\in k$ implies every $c_j=0$, then $\\sum_{j=1}^m c_jT_\\sigma(v_j)=0$ for $c_j\\in k$ also implies every $c_j=0$. No surjectivity hypothesis is imposed on $\\sigma$. The empty family and empty coordinate set are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent algebraic refinement supporting Proposition 14.50, printed p.296, and the homogeneous Frobenius-module prerequisite in the vector-group argument. This refinement is not stated in Milne; its independent argument is recorded in the delivery report. No Stacks tag is asserted. Independence argument: applying Frobenius to coefficients in a chosen free-module coordinate system, before shifting the exponent of F."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Let $S=\\bigcup_{j=1}^m\\operatorname{supp}(v_j)$, a finite subset of $I$, and let $u_j=v_j|_S\\in k^S$. A relation $\\sum_j c_ju_j=0$ extends by zero to $\\sum_j c_jv_j=0$, since each $v_j$ vanishes outside $S$. Thus the $u_j$ are independent over $k$. Also $\\sigma(0)=0$, so each $T_\\sigma(v_j)$ vanishes outside $S$, and its restriction to $S$ is $\\sigma\\circ u_j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent refinement supporting Proposition 14.50, printed p.296; finite support reduction; written here, not asserted in Milne."
+   }
+  },
+  {
+   "text": "Put $K=\\sigma(k)\\subseteq k$. This is a field: it contains $0,1$, is closed under addition, negatives and multiplication by the ring-homomorphism laws, and the inverse of a nonzero $\\sigma(a)$ is $\\sigma(a^{-1})$, since $a\\ne0$. Thus the inclusion gives a field extension $k/K$. Define $w_j\\in K^S$ by $w_j(i)=\\sigma(u_j(i))$. For a relation $\\sum_j d_jw_j=0$ with $d_j\\in K$, choose $c_j\\in k$ with $d_j=\\sigma(c_j)$. For every $i\\in S$, the relation reads $\\sigma(\\sum_j c_ju_j(i))=0$. Injectivity of $\\sigma$ gives $\\sum_j c_ju_j=0$, hence every $c_j=0$ by step 1 and every $d_j=0$. Therefore the $w_j$ are independent over $K$.",
+   "uses": [
+    "def-weil-field",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent refinement supporting Proposition 14.50, printed p.296; elementary image-field and coefficient-relation argument; written here, not asserted in Milne."
+   }
+  },
+  {
+   "text": "Enumerate the finite set $S$ by $\\{1,\\ldots,n\\}$, where $n=|S|$. Apply [lem-weil-linear-independence-field-extension] to the field inclusion $K\\subseteq k$ and the $m$ vectors $w_j\\in K^n$ obtained by that enumeration. Its hypotheses hold by step 2, and it permits $n=0$ and $m=0$. Its conclusion makes the images of the $w_j$ independent over $k$. These images are exactly $\\sigma\\circ u_j$ coordinate by coordinate; returning to the indexing set $S$ merely reindexes the same equations.",
+   "uses": [
+    "lem-weil-linear-independence-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent refinement supporting Proposition 14.50, printed p.296; scalar-extension step supplied by the existing Mathlib leaf linearIndependent_algebraMap_comp_iff, Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean:43-47."
+   }
+  },
+  {
+   "text": "Given $\\sum_j c_jT_\\sigma(v_j)=0$ with $c_j\\in k$, restrict to $S$. Step 3 gives $c_j=0$ for every $j$, which is the required conclusion. The argument never chooses a preimage of an arbitrary element of $k$: only coefficients in $K=\\sigma(k)$ are lifted in step 2. If $m=0$, the conclusion is vacuous. If $I$ or $S$ is empty, independence of the original zero vectors forces $m=0$ (otherwise the coefficient $1$ at one index gives a nonzero relation).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent refinement supporting Proposition 14.50, printed p.296; assembly and empty cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-weil-field",
+  "lem-weil-linear-independence-field-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Independent elementary coefficient argument supporting the homogeneous refinement of Proposition 14.50, printed p.296; scalar extension is the existing Mathlib leaf lem-weil-linear-independence-field-extension. Milne does not state this refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Linearly independent vectors remain linearly independent after Frobenius acts on every coordinate over an imperfect field",
+   "results": "{\"t\": \"2026-10-24T09:37:45Z\", \"tool\": \"leanfinder\", \"query\": \"Linearly independent vectors remain linearly independent after Frobenius acts on every coordinate over an imperfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearIndependent.map_of_isPurelyInseparable_of_isSeparable\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable'\", \"linearIndependent_pow\", \"FixedPoints.linearIndependent_smul_of_linearIndependent\", \"Ideal.FinrankQuotientMap.linearIndependent_of_nontrivial\", \"IntermediateField.LinearDisjoint.linearIndependent_left\", \"IntermediateField.LinearDisjoint.linearIndependent_right\"], \"digest\": \"21344605aeb58d8c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent, \"map\"",
+   "results": "{\"t\": \"2026-10-24T09:37:46Z\", \"tool\": \"loogle\", \"query\": \"LinearIndependent, \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.linearIndependent_iff_of_injOn\", \"LinearMap.linearIndependent_iff_of_disjoint\", \"linearIndependent_finset_map_embedding_subtype\", \"LinearIndependent.map_injOn\", \"LinearIndependent.map'\", \"LinearMap.linearIndependent_iff\", \"LinearIndependent.map\", \"LinearIndependent.map_of_injective_injectiveₛ\"], \"digest\": \"e659137ad4270f63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "grep",
+   "query": "mapPowExpChar|map.*[Ii]ndependent|linearIndependent.*map",
+   "results": "{\"t\": \"2026-10-24T09:37:46Z\", \"tool\": \"grep\", \"query\": \"mapPowExpChar|map.*[Ii]ndependent|linearIndependent.*map\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Transvection/Generation.lean\", \"Mathlib/LinearAlgebra/Transvection/Generation.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/Localization.lean\", \"Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean\", \"Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean\", \"Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean\", \"Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean\"], \"digest\": \"77cd6320cb85030d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left multiplication by F on a finite free left Frobenius skew polynomial module preserves finite k linearly independent families without perfectness",
+   "results": "{\"t\": \"2026-10-24T09:39:11Z\", \"tool\": \"leanfinder\", \"query\": \"Left multiplication by F on a finite free left Frobenius skew polynomial module preserves finite k linearly independent families without perfectness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.FinrankQuotientMap.linearIndependent_of_nontrivial\", \"LinearIndependent.map_of_isPurelyInseparable_of_isSeparable\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable'\", \"LinearIndependent.map_pow_expChar_pow_of_isSeparable\", \"exists_linearIndependent_algEquiv_apply\", \"FiniteField.minpoly_frobeniusAlgHom\", \"IntermediateField.LinearDisjoint.linearIndependent_mul'\", \"FiniteField.orderOf_frobeniusAlgHom\"], \"digest\": \"4ff9af12da43bb6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a free module over k_sigma[F], every finite linearly independent family over k remains linearly independent after applying F",
+   "results": "{\"t\": \"2026-10-24T09:39:11Z\", \"tool\": \"leansearch\", \"query\": \"In a free module over k_sigma[F], every finite linearly independent family over k remains linearly independent after applying F\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearIndependent.map'\", \"LinearMap.linearIndependent_iff\", \"LinearIndependent.of_comp\", \"LinearIndepOn.id_image\", \"ModuleCat.free\", \"LinearIndepOn.image_of_comp\", \"linearIndepOn_iff_image\", \"LinearIndependent.map_injOn\"], \"digest\": \"c0d2b655f7c213a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "loogle",
+   "query": "SkewPolynomial, LinearIndependent",
+   "results": "{\"t\": \"2026-10-24T09:39:12Z\", \"tool\": \"loogle\", \"query\": \"SkewPolynomial, LinearIndependent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent|LinearIndependent|Basis",
+   "results": "{\"t\": \"2026-10-24T09:39:12Z\", \"tool\": \"grep\", \"query\": \"linearIndependent|LinearIndependent|Basis\", \"sub\": \"Algebra/SkewPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Applying an injective field homomorphism coefficientwise to finitely supported vectors preserves linear independence over the target field",
+   "results": "{\"t\": \"2026-10-24T09:40:20Z\", \"tool\": \"leanfinder\", \"query\": \"Applying an injective field homomorphism coefficientwise to finitely supported vectors preserves linear independence over the target field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearIndependent.map_of_injective_injective\", \"LinearIndependent.map_of_injective_injectiveₛ\", \"LinearIndependent.comp\", \"LinearIndependent.of_linearIndepOn_range\", \"LinearIndependent.map_injOn\", \"LinearIndependent.map'\", \"linearIndepOn_range_iff\", \"LinearIndepOn.map_injOn\"], \"digest\": \"4022d6ae6074dd65\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an injective field endomorphism sigma and finite independent vectors in a direct sum of copies of k, the coefficientwise sigma images are k linearly independent",
+   "results": "{\"t\": \"2026-10-24T09:40:21Z\", \"tool\": \"leansearch\", \"query\": \"For an injective field endomorphism sigma and finite independent vectors in a direct sum of copies of k, the coefficientwise sigma images are k linearly independent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.linearIndependent_iff\", \"LinearIndependent.map_of_injective_injectiveₛ\", \"LinearIndependent.map'\", \"LinearIndependent.map_of_surjective_injective\", \"LinearIndependent.comp\", \"LinearIndepOn.map_injOn\", \"linearIndepOn_iff_image\", \"LinearIndepOn.comp_of_image\"], \"digest\": \"6af68261fde24c20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent, Finsupp",
+   "results": "{\"t\": \"2026-10-24T09:40:22Z\", \"tool\": \"loogle\", \"query\": \"LinearIndependent, Finsupp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearIndependent.repr\", \"LinearIndependent.finsuppLinearCombination_injective\", \"linearIndependent_iff_injective_finsuppLinearCombination\", \"LinearIndependent.linearCombinationEquiv\", \"not_linearIndependent_iff_finsupp\", \"linearIndependent_iff_ker\", \"LinearIndependent.repr_range\", \"linearIndependent_iff\"], \"digest\": \"cef609fbc46d4a7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent.*map|map.*linearIndependent|map.*LinearIndependent",
+   "results": "{\"t\": \"2026-10-24T09:40:22Z\", \"tool\": \"grep\", \"query\": \"linearIndependent.*map|map.*linearIndependent|map.*LinearIndependent\", \"sub\": \"LinearAlgebra/Finsupp\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Finsupp/VectorSpace.lean\", \"Mathlib/LinearAlgebra/Finsupp/VectorSpace.lean\"], \"digest\": \"2f0bf0994080e81c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary linear-map independence does not apply to a nonsurjective semilinear map; the reverse-variance map_of_injective_injective lemma has a different scalar compatibility. The separable field-extension power lemmas concern field elements, not coordinatewise maps of arbitrary finite-support vectors."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent.*map|map.*linearIndependent|map.*LinearIndependent",
+   "results": "{\"t\": \"2026-10-24T09:59:42Z\", \"tool\": \"grep\", \"query\": \"linearIndependent.*map|map.*linearIndependent|map.*LinearIndependent\", \"sub\": \"LinearAlgebra/Matrix\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full direct-sum statement: the generic linear-map lemmas do not supply nonsurjective coefficient extension; finite support reduction and image-field coefficient lifting are still needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Applying a field embedding coordinatewise to a matrix preserves linear independence of its columns",
+   "results": "{\"t\": \"2026-10-24T09:59:42Z\", \"tool\": \"leansearch\", \"query\": \"Applying a field embedding coordinatewise to a matrix preserves linear independence of its columns\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.linearIndependent_iff\", \"LinearMap.mapMatrix\", \"LinearIndependent.map'\", \"LinearIndependent.map_of_injective_injectiveₛ\", \"LinearIndependent.map_of_injective_injective\", \"linearIndependent_equiv'\", \"LinearMap.linearIndepOn_iff_of_injOn\", \"LinearIndependent.map_of_surjective_injectiveₛ\"], \"digest\": \"8bb0e68aeeed9560\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full direct-sum statement: the generic linear-map lemmas do not supply nonsurjective coefficient extension; finite support reduction and image-field coefficient lifting are still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent, RingHom",
+   "results": "{\"t\": \"2026-10-24T09:59:42Z\", \"tool\": \"loogle\", \"query\": \"LinearIndependent, RingHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"LinearIndependent.localization_localization\", \"LinearMap.linearIndependent_of_isOrthoᵢ\", \"LinearIndependent.algebraMap_comp_iff\", \"Transcendental.linearIndependent_sub_inv\", \"IntermediateField.LinearDisjoint.linearIndependent_right'\", \"IntermediateField.LinearDisjoint.of_basis_right'\", \"IntermediateField.LinearDisjoint.linearIndependent_mul'\", \"IntermediateField.LinearDisjoint.of_basis_mul'\"], \"digest\": \"d9edcb855c2d1a57\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full direct-sum statement: the generic linear-map lemmas do not supply nonsurjective coefficient extension; finite support reduction and image-field coefficient lifting are still needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Applying an injective field homomorphism to all coordinates of finitely supported vectors preserves linear independence over the target field",
+   "results": "{\"t\": \"2026-10-24T09:59:43Z\", \"tool\": \"leanfinder\", \"query\": \"Applying an injective field homomorphism to all coordinates of finitely supported vectors preserves linear independence over the target field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearIndependent.map_of_injective_injective\", \"LinearIndependent.map_of_injective_injectiveₛ\", \"LinearIndependent.of_linearIndepOn_range\", \"LinearIndependent.comp\", \"LinearIndependent.map_injOn\", \"linearIndepOn_range_iff\", \"LinearIndependent.map'\", \"LinearIndepOn.map_injOn\"], \"digest\": \"23df956fb72994f3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full direct-sum statement: the generic linear-map lemmas do not supply nonsurjective coefficient extension; finite support reduction and image-field coefficient lifting are still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "linearIndependent_algebraMap_comp_iff",
+   "results": "{\"t\": \"2026-10-24T10:00:55Z\", \"tool\": \"loogle\", \"query\": \"linearIndependent_algebraMap_comp_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"linearIndependent_algebraMap_comp_iff\"], \"digest\": \"a6868a6c88f6ff19\"}",
+   "date": "2026-10-24",
+   "verdict": "ingredient match: linearIndependent_algebraMap_comp_iff (BaseChange.lean:43-47) states the existing leaf lem-weil-linear-independence-field-extension; cite that leaf after finite support and image-field reduction. Not a one-line match for the full Finsupp statement."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent_algebraMap_comp_iff|[Ll]inearIndependent.*mapRange|linearIndependent.*mapRange|mapRange.*[Ll]inearIndependent",
+   "results": "{\"t\": \"2026-10-24T10:00:55Z\", \"tool\": \"grep\", \"query\": \"linearIndependent_algebraMap_comp_iff|[Ll]inearIndependent.*mapRange|linearIndependent.*mapRange|mapRange.*[Ll]inearIndependent\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\", \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean\"], \"digest\": \"8221bf867b25aecd\"}",
+   "date": "2026-10-24",
+   "verdict": "ingredient match: linearIndependent_algebraMap_comp_iff (BaseChange.lean:43-47) states the existing leaf lem-weil-linear-independence-field-extension; cite that leaf after finite support and image-field reduction. Not a one-line match for the full Finsupp statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear independence of finitely supported functions is preserved by extension of the coefficient field and applying algebraMap to each value",
+   "results": "{\"t\": \"2026-10-24T10:01:00Z\", \"tool\": \"leanfinder\", \"query\": \"Linear independence of finitely supported functions is preserved by extension of the coefficient field and applying algebraMap to each value\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.LinearDisjoint.linearIndependent_right'\", \"IntermediateField.LinearDisjoint.linearIndependent_right\", \"LinearIndependent.iff_fractionRing\", \"IntermediateField.LinearDisjoint.linearIndependent_left\", \"Finsupp.linearIndependent_single\", \"linearIndependent_toLinearMap\", \"DFinsupp.linearIndependent_single\", \"Finsupp.linearIndependent_single_iff\"], \"digest\": \"b8fb9267912662ad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the full direct-sum statement: the generic linear-map lemmas do not supply nonsurjective coefficient extension; finite support reduction and image-field coefficient lifting are still needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-equivariant-frobenius-module-basis",
+  "date": "2026-10-24",
+  "group": "Q44"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Linearization of split-torus actions on vector groups. Present split: Agent-formulated graded algebra input for the vector-group paragraph of Conrad--Lichtenstein, Linear Algebraic Groups I, Appendix D.3, proof of Theorem D.3.2, printed p.86 (the paragraph invoking CGP B.4.3). The ungraded freeness input is Milne Proposition 14.50, printed p.296; the homogeneous refinement is not asserted to be that proposition. WANTED locally: Conrad notes and CGP, Appendix B.4. No Stacks tag is asserted. Supporting algebra in this split: Independence argument: applying Frobenius to coefficients in a chosen free-module coordinate system, before shifting the exponent of F. Present split: restrict the finite union of supports; lift relations only over the image subfield; apply the existing finite-coordinate scalar-extension leaf; return to the original coordinates.",
+   "via": [
+    "lem-sfb-torus-equivariant-frobenius-module-basis",
+    "lem-sfb-torus-vector-group-linearization",
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-coefficient-endomorphism-preserves-independence",
+  "worker": "stage1",
+  "summary": "Finite common-support restriction reduces to finite-coordinate vectors. Independence is transported to the image subfield by lifting only image coefficients, then extended to k with the existing Mathlib leaf. Statement unchanged; no new nodes; no surjectivity assumption. Existing searches retained and seven actual Q147 searches appended.",
+  "blueprint": "Realizes the coefficient-independence prerequisite of lem-sfb-torus-equivariant-frobenius-module-basis, step 4 (before shifting the exponent of F), supporting det-thm-sf-ctf-stability-direct-images, proof (3). The current latest blueprint direct-images companion is read; the inherited blueprint ancestor is null, as blueprint_refs.py ancestor reports, and its via chain is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-b38ea16be",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-b38ea16be (reviewer sub-agent of L); spot-checked: I read the item and all 4 steps in full; the delivery has no new nodes. The statement is unchanged and true. I tested it with k=F_p(t) and σ(t)=t^p (not surjective), with m=0 and I=∅, and with a dependent family that does not meet the hypothesis. Step 1 restricts to the finite common support S, and extension by zero keeps independence. Step 2 shows K=σ(k) is a subfield, using σ(a)^{-1}=σ(a^{-1}). It lifts only coefficients in K, then injectivity and step 1 give independence over K. It cites def-weil-field and def-pc-field-extension, and their statements cover this. Step 3 cites the Mathlib leaf lem-weil-linear-independence-field-extension: for K⊆L and n,k≥0, independence over L holds iff it holds over K. I checked linearIndependent_algebraMap_comp_iff in Mathlib BaseChange.lean:43-47; its hypotheses (Finite ι', FaithfulSMul, IsDomain) hold for fields. Step 4 restricts a k-relation to S and handles the edge cases. The parent's step 4 (lem-sfb-torus-equivariant-frobenius-module-basis) uses the item with σ=Frobenius on the (i,q) coordinates, which matches the item's hypotheses. In Milne iAG p.296 (PDF p.308), Prop 14.50 is about k[F] ideals and submodules being free. As the item says, Milne does not state this lemma, and proof_origin is agent. I found no SGA source and no cycle. A whole-DAG title and phrase search found no duplicate. Minor point, not a fault: the report says it wrote citations.json, but that file is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.CoefficientEndomorphismIndependence",
+  "declaration": "Finsupp.linearIndependent_mapRange_ringHom",
+  "file": "lean/Sheaf/LinearAlgebra/CoefficientEndomorphismIndependence.lean",
+  "statement": "theorem linearIndependent_mapRange_ringHom {k : Type u} [Field k] (σ : k →+* k) (hσ : Function.Injective σ) {I : Type v} (m : ℕ) (w : Fin m → I →₀ k) (hw : LinearIndependent k w) : LinearIndependent k (fun j : Fin m => Finsupp.mapRange σ σ.map_zero (w j))",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba32b53ef",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Clause-by-clause match: Field k, σ : k →+* k with Function.Injective (redundant for a field but node-stated, harmless), I : Type v with no extra instances, I →₀ k with T_σ = Finsupp.mapRange σ σ.map_zero, m : ℕ with w : Fin m → I →₀ k, LinearIndependent k hypothesis and conclusion over k. No surjectivity assumed; m=0 and empty I covered. Checked true by hand (incl. F_p(t) Frobenius). lean.statement verbatim in file; universes bound; no statement_change, new nodes or defs. Docstrings give source place, blueprint id and all 4 proof steps; proof is sorry only. No Mathlib or live clash (map_of_injective_injective needs σ⁻¹). Report has Worker report and Second reading by Q50 (self-read, disclosed). Live node has no lean record. No recompile: no file changed; worker server compile clean."
+ }
+}

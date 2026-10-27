@@ -1,0 +1,264 @@
+{
+ "id": "lem-a1-smooth-curve-closed-stalk-structure",
+ "kind": "statement",
+ "title": "Closed-point local structure and differential rank on a smooth integral curve",
+ "statement": "Let $k$ be a field and $X$ a separated integral scheme of finite type over $k$ of dimension one [def-pc-curve], smooth over $k$ [def-sbc-smooth-morphisms]. Let $x\\in X$ be a closed point. Put $A=\\mathcal O_{X,x}$, with its $k$-algebra structure induced by the structure morphism. Then $\\dim A=1$ [def-weil-pbc-krull-dimension-ring], and every open neighbourhood $N$ of $x$ has topological Krull dimension $1$, so $\\dim_xX=1$ [def-kun-dimension]. The ring $A$ is regular local [def-weil-regular-scheme], hence Noetherian, and is a discrete valuation ring [def-sc-discrete-valuation-ring]. The module of Kähler differentials $\\Omega_{A/k}$ [def-weil-pbc-kahler-differentials] is free of rank one: there exists an $A$-linear isomorphism $A\\xrightarrow{\\sim}\\Omega_{A/k}$. No separability assumption on $\\kappa(x)/k$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1E, lemma-uniformizer-works, first and last proof sentences: the DVR assertion and rank-one differential module; old Steps 1–3 of lem-a1-uniformizer-differential-basis, including both dimension conventions"
+ },
+ "stmt_deps": [
+  "def-pc-curve",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-dimension",
+  "def-weil-regular-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pc-scheme-dimension-local-rings], the dimension-one hypothesis in [def-pc-curve] gives topological Krull dimension $\\dim X=1$. Integrality makes $X$ irreducible and nonempty by [lem-pc-integral-scheme-irreducible]. Apply [lem-sc-scheme-sober] to the irreducible closed subset $X$ to obtain a generic point $\\eta$, with $\\overline{\\{\\eta\\}}=X$. We have $\\eta\\ne x$: otherwise closedness of $x$ gives $X=\\{x\\}$, whose only nonempty irreducible closed subset is itself, so its dimension is zero, a contradiction.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings",
+    "def-pc-curve",
+    "lem-pc-integral-scheme-irreducible",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 04MU (lemma-dimension), 01ON (lemma-characterize-integral); Schemes Tag 01IS (lemma-scheme-sober); dimension clarification for Curves Tag 0C1E (lemma-uniformizer-works)"
+   }
+  },
+  {
+   "text": "Since $x\\in\\overline{\\{\\eta\\}}$ and $x\\ne\\eta$, the chain $x,\\eta$ has length one. By [lem-sc-scheme-stalk-dimension-generalization-chains], $\\dim A\\geq1$; by [lem-pc-scheme-dimension-local-rings], $\\dim A\\leq\\dim X=1$. Thus $\\dim A=1$. For any open neighbourhood $N$ of $x$, $\\eta\\in N$ (otherwise the closed complement of $N$ contains $\\eta$ and hence $X$). Its closure in $N$ is $N$, so $N$ is irreducible. The strict chain $\\{x\\}\\subsetneq N$ of nonempty irreducible closed subsets of $N$ gives $\\dim N\\geq1$. By [lem-weil-pbc-open-subspace-dimension-monotone], $\\dim N\\leq\\dim X=1$. Every such $N$ therefore has dimension one, and [def-kun-dimension] gives $\\dim_xX=1$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "def-kun-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IZ (lemma-codimension-local-ring), Tag 04MU (lemma-dimension); Topology Tag 0055 (definition-Krull) and following open-subspace remark"
+   }
+  },
+  {
+   "text": "Choose an affine open neighbourhood $U=\\operatorname{Spec}B$ of $x$, and let $\\mathfrak q$ represent $x$. The restriction $U\\to\\operatorname{Spec}k$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. Hence $B$ is a smooth $k$-algebra by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. By [lem-weil-pbc-smooth-over-field-regular-local], $B_{\\mathfrak q}$ is regular local. The $k$-algebra identification $A\\cong B_{\\mathfrak q}$ supplied by the germ localization in [lem-weil-pbc-affine-open-stalk-localization] makes $A$ regular local, hence Noetherian by [def-weil-regular-scheme]. Its dimension is one by step 2, so [lem-sc-regular-dim1-dvr] makes it a discrete valuation ring.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-regular-scheme",
+    "lem-sc-regular-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TT (lemma-characterize-smooth-over-field), final assertion; Tag 00PD (lemma-characterize-dvr), regular dimension-one case; Morphisms Tag 01V6 (lemma-smooth-characterize); Schemes Tag 01HV (lemma-spec-sheaves)"
+   }
+  },
+  {
+   "text": "For the structure morphism $f:X\\to\\operatorname{Spec}k$, the fibre over the unique point of $\\operatorname{Spec}k$ is $X$: the residue field there is $k$, so the fibre is $X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}k$ with the identity as second map. Thus its dimension at $x$ is one by step 2. Apply [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] to obtain an affine neighbourhood $W=\\operatorname{Spec}C$ of $x$ with $\\Omega_{C/k}=Ce$ freely on one generator $e$. Here the target affine neighbourhood is necessarily all of $\\operatorname{Spec}k$. Let $\\mathfrak p$ represent $x$. By [lem-weil-pbc-affine-open-stalk-localization], $A\\cong C_{\\mathfrak p}$ as $k$-algebras. By [lem-weil-pbc-kahler-differentials-localization], $\\Omega_{A/k}\\cong(\\Omega_{C/k})_{\\mathfrak p}$. The isomorphism $C_{\\mathfrak p}\\to(Ce)_{\\mathfrak p}$ sends $c/s$ to $ce/s$; its inverse sends $ce/s$ to $c/s$. These formulas are well-defined because equality of module fractions is the same equality of coefficients in the free basis $e$. Composing gives an $A$-linear isomorphism $A\\cong\\Omega_{A/k}$. All these maps use the original structure map $k\\to A$; no condition on $\\kappa(x)/k$ has been used.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1 (lemma-smooth-omega-finite-locally-free), with Tag 01UT (lemma-differentials-affine); Algebra Tag 00RT (lemma-differentials-localize), part (2); Curves Tag 0C1E (lemma-uniformizer-works), final proof sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-dimension-local-rings",
+  "def-pc-curve",
+  "lem-pc-integral-scheme-irreducible",
+  "lem-sc-scheme-sober",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "def-kun-dimension",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-dim1-dvr",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C1E (lemma-uniformizer-works), first and last proof sentences, with their inputs Algebra 00TT/00PD, Properties 04MU/02IZ, Morphisms 02G1 and Algebra 00RT made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(stalk|localRing).*(isDiscreteValuationRing|kaehler|Kaehler)|IsIntegralCurve.*Smooth",
+   "results": "{\"t\": \"2026-10-22T07:53:18Z\", \"tool\": \"grep\", \"query\": \"(stalk|localRing).*(isDiscreteValuationRing|kaehler|Kaehler)|IsIntegralCurve.*Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\"], \"digest\": \"a09bf4b30aa2adba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent dimension and standard-smooth presentation results do not give the closed-point dimension, regular stalk and localized differential rank together under these scheme hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-22T07:53:19Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent dimension and standard-smooth presentation results do not give the closed-point dimension, regular stalk and localized differential rank together under these scheme hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth integral curve has a discrete valuation local ring with a rank one module of Kahler differentials at every closed point",
+   "results": "{\"t\": \"2026-10-22T07:53:19Z\", \"tool\": \"leansearch\", \"query\": \"A smooth integral curve has a discrete valuation local ring with a rank one module of Kahler differentials at every closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\", \"IsDiscreteValuationRing.toIsLocalRing\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"of_isDiscreteValuationRing\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"IsDiscreteValuationRing.isRankOneDiscrete\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\"], \"digest\": \"384113429d684ae4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent dimension and standard-smooth presentation results do not give the closed-point dimension, regular stalk and localized differential rank together under these scheme hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a closed point of a smooth integral curve over a field the local ring is a discrete valuation ring and its module of Kahler differentials is free of rank one",
+   "results": "{\"t\": \"2026-10-22T07:53:30Z\", \"tool\": \"leanfinder\", \"query\": \"At a closed point of a smooth integral curve over a field the local ring is a discrete valuation ring and its module of Kahler differentials is free of rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"IsLocalRing.subsingleton_cotangentSpace_iff\", \"Algebra.IsSmoothAt\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\"], \"digest\": \"869d465aba2f97ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent dimension and standard-smooth presentation results do not give the closed-point dimension, regular stalk and localized differential rank together under these scheme hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "(smooth|Smooth).*(regular|Regular|rank|Rank)|rank.*(stalk|differential)",
+   "results": "{\"t\": \"2026-10-22T07:59:20Z\", \"tool\": \"grep\", \"query\": \"(smooth|Smooth).*(regular|Regular|rank|Rank)|rank.*(stalk|differential)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"644d4455b51d43ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent dimension and standard-smooth presentation results do not give the closed-point dimension, regular stalk and localized differential rank together under these scheme hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a nonsingular one dimensional integral scheme over a field every closed point has stalk dimension one and Kahler differential module isomorphic to the stalk",
+   "results": "{\"t\": \"2026-10-22T07:59:31Z\", \"tool\": \"leanfinder\", \"query\": \"On a nonsingular one dimensional integral scheme over a field every closed point has stalk dimension one and Kahler differential module isomorphic to the stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"AlgebraicGeometry.stalkClosedPointIso\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\"], \"digest\": \"93d7b205d5a36e56\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cotangent dimension and standard-smooth presentation results do not give the closed-point dimension, regular stalk and localized differential rank together under these scheme hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "(stalk|localRing).*(isDiscreteValuationRing|kaehler|Kaehler)|IsIntegralCurve.*Smooth",
+   "results": "{\"t\": \"2026-10-24T00:27:05Z\", \"tool\": \"grep\", \"query\": \"(stalk|localRing).*(isDiscreteValuationRing|kaehler|Kaehler)|IsIntegralCurve.*Smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/DiscreteValuationRing/TFAE.lean\"], \"digest\": \"383d0da140076edf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give DVR cotangent-space criteria, standard-smooth differential rank, or integral-scheme stalk instances; none gives all clauses of this smooth integral-curve closed-stalk statement by one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth integral curve closed point stalk regular dimension one rank one Kahler differential module",
+   "results": "{\"t\": \"2026-10-24T00:27:05Z\", \"tool\": \"leansearch\", \"query\": \"Smooth integral curve closed point stalk regular dimension one rank one Kahler differential module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.KaehlerDifferential\", \"KaehlerDifferential\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"KaehlerDifferential.D_apply\", \"Module.rankAtStalk_self\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"KaehlerDifferential.module'\", \"KaehlerDifferential.fromIdeal\"], \"digest\": \"725ccf6145e872a5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give DVR cotangent-space criteria, standard-smooth differential rank, or integral-scheme stalk instances; none gives all clauses of this smooth integral-curve closed-stalk statement by one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-24T00:27:05Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give DVR cotangent-space criteria, standard-smooth differential rank, or integral-scheme stalk instances; none gives all clauses of this smooth integral-curve closed-stalk statement by one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a closed point of a smooth integral curve over any field the local ring has dimension one is regular and a DVR and its Kahler differentials are free of rank one",
+   "results": "{\"t\": \"2026-10-24T00:27:06Z\", \"tool\": \"leanfinder\", \"query\": \"At a closed point of a smooth integral curve over any field the local ring has dimension one is regular and a DVR and its Kahler differentials are free of rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.IsSmoothAt\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.IsStandardSmooth.of_basis_kaehlerDifferential\"], \"digest\": \"c1587bf146966fcf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give DVR cotangent-space criteria, standard-smooth differential rank, or integral-scheme stalk instances; none gives all clauses of this smooth integral-curve closed-stalk statement by one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "(smooth|Smooth).*(regular|Regular|rank|Rank)|rank.*(stalk|differential)",
+   "results": "{\"t\": \"2026-10-24T00:27:25Z\", \"tool\": \"grep\", \"query\": \"(smooth|Smooth).*(regular|Regular|rank|Rank)|rank.*(stalk|differential)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"644d4455b51d43ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give DVR cotangent-space criteria, standard-smooth differential rank, or integral-scheme stalk instances; none gives all clauses of this smooth integral-curve closed-stalk statement by one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The local ring of a nonsingular one dimensional integral finite type scheme at a closed point is a DVR and every open neighbourhood has dimension one",
+   "results": "{\"t\": \"2026-10-24T00:27:29Z\", \"tool\": \"leanfinder\", \"query\": \"The local ring of a nonsingular one dimensional integral finite type scheme at a closed point is a DVR and every open neighbourhood has dimension one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"IsDiscreteValuationRing.TFAE\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"AlgebraicGeometry.instFieldCarrierFunctionField\"], \"digest\": \"539041b33bdd3fc5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give DVR cotangent-space criteria, standard-smooth differential rank, or integral-scheme stalk instances; none gives all clauses of this smooth integral-curve closed-stalk statement by one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-uniformizer-differential-basis",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-curve",
+   "place": "Proof of lem-a1-finite-map-curve, third paragraph: \"Thus $df\\neq0$, which makes the finite function-field extension $k_0(\\overline C)/k_0(f)$ separable.\" Local geometric and differential-rank inputs of the uniformizer calculation, via lem-a1-uniformizer-differential-basis.",
+   "via": [
+    "lem-a1-uniformizer-differential-basis"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-smooth-curve-closed-stalk-structure",
+  "worker": "stage1",
+  "summary": "Retained the statement and all imported fields. Wrote four complete steps from existing generic tools: reconcile dimension conventions and choose the generic point; compute the closed stalk dimension and every neighbourhood dimension; obtain regularity on a smooth affine chart and apply the regular-dimension-one DVR theorem; choose and explicitly localize a one-element differential basis. Searched the live project for an exact completed declaration, and Mathlib by both phrasings and all required tools: no whole-item match. No new nodes are needed. Closedness is used for the strict dimension-one chain; no algebraically closed/perfect base field or separable residue assumption is introduced.",
+  "blueprint": "Realizes the local-ring and differential-rank inputs of the third paragraph of lem-a1-finite-map-curve, through the first/last proof sentences of Stacks 0C1E and the first step of lem-a1-uniformizer-differential-basis. The current blueprint uses the perfect-field function-field calculation; this existing auxiliary node records the valid local curve facts used by the imported uniformizer route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic comparison of topological scheme dimension with the supremum of stalk dimensions, needed for both bounds in steps 1–2; this unit supplies no comparison of the dimension conventions."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic dictionary between smooth affine scheme maps and smooth ring maps used on an affine chart in step 3; the unit supplies no affine smoothness dictionary."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic regularity of a localized smooth algebra over an arbitrary field, used in step 3 without any residue-separability hypothesis; the unit supplies no such algebra theorem."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic local basis theorem for smooth differentials of rank equal to fibre dimension, used in step 4; the unit supplies no differential-rank theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-0528c0e21",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-0528c0e21 (reviewer sub-agent of L); spot-checked: First stage-1 split: the imported proof was empty and there is no repair or re-split note, so the 2026-10-21 re-split rule does not apply. One commit, item plus report, no new nodes. Statement and stmt_deps are kept. The statement is true with no separability hypothesis on kappa(x)/k: Stacks 0C1E (curves.tex:2412) gets the DVR from 00TT (algebra.tex:38609, smoothness over a field gives regular local rings) and free rank one from 02G1 (morphisms.tex:7214). Small cases checked: A^1_k at (T), where Omega is generated by dT; an inseparable point (T^p-a) over F_p(a), where the stalk is still a DVR with Omega free on dT but d(T^p-a)=0, so the item rightly makes no uniformizer claim; and the generic point (a field of dimension 0), so closedness is needed and is used. Step 1: 04MU, 01ON and 01IS give dim X=1 and a generic point eta different from x; checked. Step 2: the 02IZ chain x,eta gives dim A>=1 and the supremum gives <=1; every open neighbourhood contains eta and is irreducible, open-subspace monotonicity bounds it by 1, and def-kun-dimension then gives dim_x X=1; checked. Step 3: smooth restriction to an affine open, the 01V6 smooth-ring-map dictionary, 00TT and the 01HV stalk localization show A is regular local and Noetherian; lem-sc-regular-dim1-dvr is Lean-closed (sorry-free in slopmaster2), so A is a DVR. Step 4: the 02G1 node applied to X->Spec k (the fibre over the only point is X, so the fibre dimension is 1), then the stalk localization and 00RT(2) give Omega_{A/k}, with the explicit maps written out. Duplicate scan: smooth-connected-curve-local-rings needs an algebraically closed field; the sfb smooth-trait node has a DVR base; the generic-differentials and normal-separable-point-smooth nodes differ. No duplicate. Accepted tool_uses: lem-pc-scheme-dimension-local-rings, lem-weil-pbc-smooth-ring-map-iff-smooth-affine, lem-weil-pbc-smooth-over-field-regular-local, lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension. All are generic Stacks black boxes, the unit supplies none, and the unit route is not replaced. No SGA citation. The blueprint from.place sentence was checked in main-20261015."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.SmoothCurveClosedStalkStructure",
+  "declaration": "AlgebraicGeometry.smooth_curve_closed_stalk_structure",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SmoothCurveClosedStalkStructure.lean",
+  "statement": "theorem smooth_curve_closed_stalk_structure (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsIntegralCurve f] [Smooth f] (x : X) (hx : IsClosed ({x} : Set X)) : ringKrullDim (X.presheaf.stalk x) = 1 ∧ (∀ N : X.Opens, x ∈ N → topologicalKrullDim N = 1) ∧ topologicalKrullDimAt x = 1 ∧ IsRegularLocalRing (X.presheaf.stalk x) ∧ IsNoetherianRing (X.presheaf.stalk x) ∧ IsDiscreteValuationRing (X.presheaf.stalk x) ∧ Nonempty ((X.presheaf.stalk x) ≃ₗ[X.presheaf.stalk x] @KaehlerDifferential k (X.presheaf.stalk x) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ X.presheaf.germ ⊤ x trivial).hom.toAlgebra))",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b7f70831",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Single new module plus report; node unchanged except lean (diffed vs clones/live), no new nodes, item not taken by another group. Every clause matches the node via the recorded declarations: IsIntegralCurve (separated, finite type, integral, topologicalKrullDim X = 1), Mathlib Smooth, closed point hx, ringKrullDim stalk = 1, all open neighbourhoods topologicalKrullDim N = 1, topologicalKrullDimAt x = 1, Mathlib IsRegularLocalRing, IsNoetherianRing, IsDiscreteValuationRing, Nonempty (A ≃ₗ[A] Ω) with the structure-map algebra (ΓSpecIso.inv ≫ f.appTop ≫ germ), not a free binder. No separability assumption; universes forced by Spec (.of k); hx needed (generic point). Checked against Stacks 0C1E (curves.tex:2412); Ω_{X/k,x} vs Ω_{A/k} identified by node step 4 (00RT). Statement verbatim; docstrings have source place, blueprint id and the 4 proof steps; one sorry; both report sections present. No duplicate found (local_dvr_base_change needs IsAlgClosed and proper). No file changed, so no compile."
+ }
+}

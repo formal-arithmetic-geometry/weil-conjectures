@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-space-universal-fibre-transcendence-bound",
+ "kind": "statement",
+ "title": "Uniform bound on all chart residue transcendence degrees after arbitrary base change",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], algebraic spaces [def-trf-algebraic-space], the universes of [def-weil-size-convention], sheaf fibre products [lem-trf-space-fibre-products-etale-covers], quasi-coherent modules [def-trf-space-quasi-coherent-module], and tensor pullback [def-trf-space-etale-module-functors]. Use chartwise local finite type and local finite presentation [def-sfb-space-morphism-properties]. Finite presentation means locally of finite presentation, quasi-compact, with quasi-compact diagonal. A module of finite type is locally finitely generated on etale scheme charts; a finitely presented module has locally an exact presentation $\\mathcal O^r\\to\\mathcal O^s\\to M\\to0$ with $r,s$ finite. Let $Y$ be an affine scheme and $f:X\\to Y$ a finite type morphism of algebraic spaces with quasi-compact diagonal. There exists an integer $D\\geq0$ such that for every scheme $B\\to Y$, every representable etale scheme chart $a:U\\to X\\times_YB$, and every $u\\in U$ with image $v\\in B$, one has $\\operatorname{trdeg}_{\\kappa(v)}\\kappa(u)\\leq D$ [def-weil-residue-field, def-kun-transcendence-degree]. Empty fibres impose no condition. The same $D$ works for all $B$ and all charts, which need not be quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX1 (theorem-flat-dimension-n-representable), proof, paragraph beginning “In particular the situation is local”: bounded fibre dimensions over an affine base, combined with chartwise transcendence degrees in Tag 0CWS."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-morphism-properties",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product",
+  "def-sfb-space-dimension-flat-condition"
+ ],
+ "proof": [
+  {
+   "text": "Write $Y=\\operatorname{Spec}R$. The quasi-compactness in [def-sfb-space-morphism-properties], tested on the identity of the affine target, says that $|X|$ is quasi-compact. Apply [lem-sfb-qc-space-affine-etale-atlas] to choose a representable surjective etale atlas $W=\\operatorname{Spec}A\\to X$. The composite $W\\to Y$ is locally of finite type by the chart test in [def-sfb-space-morphism-properties], using the identity chart of $Y$. By [lem-weil-pbc-lft-affine-pairs], $A$ is generated as an $R$-algebra by finitely many elements $a_1,\\ldots,a_D$. Fix this $D\\geq0$ before making any base change. If $X$ is empty, take the empty atlas, $A=0$, and $D=0$.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 03H6 (lemma-quasi-compact-affine-cover); Tag 01T2 (lemma-locally-finite-type-characterize)."
+   }
+  },
+  {
+   "text": "Let $B\\to Y$ be arbitrary and $w\\in W_B=W\\times_Y B$ lie over $v\\in B$. Choose an affine neighbourhood $\\operatorname{Spec}C\\subseteq B$ of $v$, represented by a prime $\\mathfrak p\\subset C$. By [lem-weil-pbc-fibre-product-affine-spectra], $w$ corresponds to a prime $\\mathfrak q\\subset A\\otimes_R C$ contracting to $\\mathfrak p$. The localization and residue-field formulas of [def-weil-pbc-localization-at-prime] give $\\kappa(w)=\\operatorname{Frac}((A\\otimes_R C)/\\mathfrak q)$: localization inverts precisely the nonzero elements of this domain. In this field the copy of $C/\\mathfrak p$ extends to its fraction field $\\kappa(v)$. Every tensor is a polynomial in the images $\\bar a_i$ with coefficients in $C$, so $\\kappa(w)=\\kappa(v)(\\bar a_1,\\ldots,\\bar a_D)$. Set $s=\\{\\bar a_1,\\ldots,\\bar a_D\\}$. Every element is $x/y$ with $x,y\\in\\kappa(v)[s]$ and $y\\ne0$, hence satisfies the nonzero polynomial $yT-x$. Thus [lem-sfb-algebraic-adjoin-transcendence-bound] applies to the field $\\kappa(w)$ over $\\kappa(v)$ and yields $\\operatorname{trdeg}_{\\kappa(v)}\\kappa(w)\\leq |s|\\leq D$. This calculation uses no finite type assumption on $C$ or $B$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-pbc-localization-at-prime",
+    "lem-sfb-algebraic-adjoin-transcendence-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/fields.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes); Tag 030F (lemma-transcendence-degree), generating-set argument, with its cited Mathlib ring generalization."
+   }
+  },
+  {
+   "text": "Now fix an arbitrary representable etale chart $U\\to X_B$ and $u\\in U$ over $v$. By [lem-trf-space-fibre-products-etale-covers], the base-changed atlas $W_B\\to X_B$ is surjective etale. The scheme $T=U\\times_{X_B}W_B$ therefore has etale projections $T\\to U$ and $T\\to W_B$, and the first is surjective. Choose $t\\in T$ above $u$, with image $w\\in W_B$. Both $w$ and $u$ map to $v$. Restrict each projection to an affine neighbourhood of $t$ inside the inverse image of an affine neighbourhood of its image. Its affine ring map is etale by the affine-chart characterization in [def-weil-etale-morphism]. Apply [lem-weil-pbc-etale-algebra-residue-field-separable] to these two ring maps. It gives finite separable, in particular algebraic, extensions $\\kappa(t)/\\kappa(u)$ and $\\kappa(t)/\\kappa(w)$. All residue maps commute with the structural map from $\\kappa(v)$ because the square is a fibre product.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex; literature/stacks-project/morphisms.tex",
+    "place": "Sheaf fibre products and representable etale base change; Tags 02GI (definition-etale) and 02GL (lemma-etale-over-field), part (2)."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-transcendence-degree-tower] to $\\kappa(v)\\subseteq\\kappa(u)\\subseteq\\kappa(t)$ and to $\\kappa(v)\\subseteq\\kappa(w)\\subseteq\\kappa(t)$. The two algebraic upper extensions have transcendence degree zero, so $\\operatorname{trdeg}_{\\kappa(v)}\\kappa(u)=\\operatorname{trdeg}_{\\kappa(v)}\\kappa(t)=\\operatorname{trdeg}_{\\kappa(v)}\\kappa(w)\\leq D$ by step 2. The atlas and its generators were chosen before $B$, $U$ and $u$, so this is the required uniform bound. Empty fibres have no points to check, and no quasi-compactness of $U$ was used.",
+   "uses": [
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex; literature/stacks-project/spaces-flat.tex",
+    "place": "Transcendence-degree tower formula; Tag 0CX1 (theorem-flat-dimension-n-representable), bounded-fibre-dimension paragraph, with the chart interpretation of Tag 0CWS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sfb-algebraic-adjoin-transcendence-bound",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-kun-transcendence-degree-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX1, proof paragraph beginning “In particular the situation is local”: the omitted uniform bound is expanded using Tags 03H6, 01T2, 01I4, 030F and 02GL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebraic space over an affine scheme has a uniform bound on residue transcendence degrees in all fibres after arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (P : Ideal S) [inst_4 : P.IsPrime] [inst_5 : P.LiesOver p] [Algebra.QuasiFiniteAt R P],\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsLocalRing R] [inst_2 : CommRing S]\\n  [inst_3 : IsLocalRing S] [inst_4 : Algebra R S] [IsLocalHom (algebraMap R S)] [Module.Finite R S],\\n  Finite (IsLocalRing.ResidueField R) → Finite (IsLocalRing.ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}\n  {\"name\": \"trdeg_lt_aleph0\", \"module\": \"Mathlib/RingTheory/AlgebraicIndependent/TranscendenceBasis\", \"type\": \"∀ {R : Type u_1} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [IsDomain R]\\n  [fin : Algebra.FiniteType R S], Algebra.trdeg R S < Cardinal.aleph0\", \"doc\": \"If $ R $ is a domain and $ S $ is a finitely generated $ R $-algebra, then the transcendence degree of $ S $ over $ R $ is finite.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universally bounded fibre dimensions for quasi compact locally finite type algebraic spaces over affine schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [QuasiCompact f] (y : Y) : CompactSpace (f.fiber y)\", \"doc\": \"Given a quasi-compact morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is a compact space.\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsAffineHom f] (y : Y) : IsAffine (f.fiber y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [LocallyOfFiniteType f] : JacobsonSpace (f.fiber y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[UniversallyClosed f] : QuasiCompact f\", \"doc\": \"Every universally closed morphism of schemes is quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is universally closed (i.e., all base changes of $ f $ induce closed maps on the und\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trdeg\", \"FiniteType\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"trdeg_lt_aleph0_of_finiteType\", \"module\": \"Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis\", \"type\": \" {R : Type u_1} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [IsDomain R] [fin : Algebra.FiniteType R S] : Algebra.trdeg R S < Cardinal.aleph0\", \"doc\": \"\"}\n  {\"name\": \"instFinTrdegOfEssFiniteType\", \"module\": \"Mathlib.FieldTheory.FinTrdeg\", \"type\": \" (K : Type u_1) (L : Type u_2) [Field K] [Field L] [Algebra K L] [Algebra.EssFiniteType K L] : FinTrdeg K L\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "fibre.*dimension.*bound|fiber.*dimension.*bound|trdeg.*bound",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally bounded fibre dimensions for quasi compact locally finite type algebraic spaces over affine schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] (y : ↥Y),\\n  CompactSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a quasi-compact morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is a compact space.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme/ring/module facts do not state this algebraic-space or complete-devissage assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebraic space over an affine scheme has uniformly bounded residue transcendence degrees after every base change",
+   "results": "[leanfinder] OK 8 hit(s); trdeg_lt_aleph0, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, Algebra.QuasiFinite.instFiniteResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.AffineSpace.not_isIntegralHom",
+   "date": "2026-10-24",
+   "verdict": "no match: only ring/scheme results or no hits; none states the algebraic-space uniform bound over all base changes and charts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trdeg\", \"adjoin\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "no match: only ring/scheme results or no hits; none states the algebraic-space uniform bound over all base changes and charts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform bound on transcendence degrees of residue fields in fibres of a finite type algebraic space over an affine base",
+   "results": "[leansearch] OK 8 hit(s); Algebra.trdeg, trdeg_lt_aleph0, AlgebraicIndependent.cardinalMk_le_trdeg, lift_trdeg_le_of_surjective, IsTranscendenceBasis.lift_cardinalMk_eq, Algebra.IsAlgebraic.trdeg_le_cardinalMk, IsTranscendenceBasis.lift_cardinalMk_eq_trdeg, trdeg_eq_zero",
+   "date": "2026-10-24",
+   "verdict": "no match: only ring/scheme results or no hits; none states the algebraic-space uniform bound over all base changes and charts"
+  },
+  {
+   "tool": "grep",
+   "query": "fibre.*dimension.*bound|fiber.*dimension.*bound|trdeg.*bound",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-24",
+   "verdict": "no match: only ring/scheme results or no hits; none states the algebraic-space uniform bound over all base changes and charts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pure-dimension-flatness-representability",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX1 (theorem-flat-dimension-n-representable), proof, paragraph beginning “In particular the situation is local”: bounded fibre dimensions over an affine base, combined with chartwise transcendence degrees in Tag 0CWS.",
+   "via": [
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-universal-fibre-transcendence-bound",
+  "worker": "stage1",
+  "summary": "Expanded the bounded-fibre-dimension input by an affine etale atlas, its finite algebra generators, the explicit tensor/residue fraction calculation after arbitrary base change, and a common etale refinement of an arbitrary chart. Reused all prerequisite nodes; no new nodes and no statement change. Verified small cases and all citation statements.",
+  "blueprint": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX1 (theorem-flat-dimension-n-representable), proof, paragraph beginning “In particular the situation is local”: bounded fibre dimensions over an affine base, combined with chartwise transcendence degrees in Tag 0CWS. The four steps expand precisely the bounded-fibre-dimension subinput, retaining the inherited compactification/direct-image route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre-product and etale-cover base-change calculus, needed to compare the fixed atlas with an arbitrary chart."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-3c421b24f",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-3c421b24f (reviewer sub-agent of L); spot-checked: First delivery. The statement and stmt_deps are byte-identical to the base (diffed against clones/live). There are no new nodes and no cycle. Source: Stacks 0CX1 (spaces-flat l.2027-2030) asserts bounded fibre dimension without proof, and the split supplies that bound in chart form (0CWS). Step tags 03H6, 01T2, 01I4, 030F and 02GL checked in tags/tags. Step 1: def-sfb-proper-curve-moduli defines quasi-compactness by pulling back along affines, which on id_Y gives |X| quasi-compact. lem-sfb-qc-space-affine-etale-atlas then gives an affine atlas Spec A. The chart test with b = id_Y makes Spec A -> Y locally of finite type, and lem-weil-pbc-lft-affine-pairs gives A finitely generated over R. D is fixed before B is chosen. Step 2: Spec(A⊗C) is open in W_B, κ(w) = κ(v)(ā_i), and yT - x gives algebraicity over κ(v)[s]. The Mathlib leaf trdeg_le_cardinalMk then gives trdeg ≤ D, with no finiteness assumed on C. Step 3: W_B ≅ W×_X X_B is surjective étale by lem-trf-space-fibre-products-etale-covers. T = U×W_B is a scheme with T->U surjective and T->W_B étale (def-trf-algebraic-space). The affine restrictions are étale ring maps, and the étale residue-field lemma makes κ(t) algebraic over both κ(u) and κ(w), all compatibly over κ(v). Step 4: the tower formula gives equality of the transcendence degrees. Edge cases tested: empty X or B, affine d-space (D = d, sharp), non-Noetherian C, non-quasi-compact charts. Batch-5 finding: lem-sfb-qc-space-affine-etale-atlas reaches sec-trace-formula only through the general definition def-trf-algebraic-space, already a base stmt_dep and not part of the trace-formula or Poincaré proofs, so it is acceptable. lem-trf-space-fibre-products-etale-covers is generic calculus and also a base stmt_dep. tool_use lem-trf-space-fibre-products-etale-covers (generic fibre-product calculus) accepted. No SGA source cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceUniversalFibreTranscendenceBound",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_universal_fibre_transcendence_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceUniversalFibreTranscendenceBound.lean",
+  "statement": "theorem exists_universal_fibre_transcendence_bound (Y : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) [IsAffine Y.left] (X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace Y) (hf : MapIsFiniteType f) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) : ∃ D : ℕ, ∀ (B : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (g : B ⟶ Y) (U : (enlargedFibreProduct f (dimensionFlatBaseMap g)).EtaleSite) (x : (enlargedFibreProduct f (dimensionFlatBaseMap g)).etaleForget.obj U), @Algebra.trdeg (B.left.residueField ((dimensionFlatChartMap f g U).left x)) (((enlargedFibreProduct f (dimensionFlatBaseMap g)).etaleForget.obj U).residueField x) _ _ (((dimensionFlatChartMap f g U).left).residueFieldMap x).hom.toAlgebra ≤ (D : Cardinal.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8edbf4ad7",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Clause-by-clause match to node and Stacks 0CX1 (spaces-flat l.2027-2030) / 0CWS: affine Y via [IsAffine Y.left]; f finite type via MapIsFiniteType (recorded chartwise def); qc diagonal via MapIsQuasiCompact (pullback.diagonal f.hom.hom); ∃ D : ℕ quantified before B, g, U (EtaleSite of the actual enlargedFibreProduct, no qc) and point x; trdeg_{κ(v)} κ(u) ≤ D with the canonical residueFieldMap algebra of dimensionFlatChartMap, identical to the landed dimensionFlatCondition expression. Universe u only, no extra assumptions. Edge cases ok (empty X/B, 0-dim fibres, A^d sharp, non-Noetherian B, non-qc charts). Node diff vs clones/side-live: only lean + 3 added stmt_deps (def-trf-scheme-algebraic-space, def-sfb-space-sheaf-fibre-product, def-sfb-space-dimension-flat-condition), all definition nodes landed before base, no cycle. lean.statement verbatim; single theorem, whole proof sorry; docstrings have source, blueprint and 4 proof steps; report has Worker report + Second reading by Q45. No recompile (no file changed); worker reports clean scompile + preflight OK. Advisory: MapIsQuasiCompact owner def-sfb-proper-curve-moduli not a stmt_dep (standard inline qc-diagonal form, accepted before; S2 fix cannot add stmt_deps). No fixes."
+ }
+}

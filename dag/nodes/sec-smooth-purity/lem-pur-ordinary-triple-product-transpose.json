@@ -1,0 +1,237 @@
+{
+ "id": "lem-pur-ordinary-triple-product-transpose",
+ "kind": "statement",
+ "title": "Triple ordinary external-product transposes without a six-functor datum",
+ "statement": "Use the finite coefficient field and ring $k,A=A_{E,n}$ of [def-pur-conventions]. All schemes are separated finite-type $k$-schemes, and all maps are separated of finite type [def-weil-scheme-morphism-properties]. Work in the ordinary unbounded constant-$A$ module derived categories on small pro-etale sites, with the canonical pullbacks $Lu^*$, direct images $Ru_*$, adjunctions $Lu^*\\dashv Ru_*$, derived tensor and signed symmetry $\\sigma$ [def-weil-derived-pullback-tensor-hom, def-weil-pbc-proetale-operations]. Write $P\\boxtimes Q=L\\pi_1^*P\\otimes_A^LL\\pi_2^*Q$ on a fibre product [def-pc-fibre-product], and insert the canonical pullback, tensor and direct-image composition comparisons.\n\nFor maps $u:U\\to B$, $v:V\\to B$, write $W=U\\times_BV$, with projections $r,t$ and $w=ur=vt$. For objects $P,Q$, put $F=Ru_*P$, $G=Rv_*Q$, and define the actual ordinary product\n$$\\Omega_{u,v}(P,Q)=c_{v,t}^{-1}Rv_*\\bigl(\\pi_{t,Lr^*P,Q}(\\operatorname{Ex}_{*,u,v,P}\\otimes1_Q)\\bigr)Rv_*(\\sigma_{Q,Lv^*F})\\pi_{v,Q,F}\\sigma_{F,G}.$$\nHere $\\pi$ and $\\operatorname{Ex}_*$ are precisely the counit-defined maps [def-exchange-projection], and $c_{v,t}:Rw_*\\xrightarrow{\\sim}Rv_*Rt_*$ is the canonical compositor [lem-weil-derived-direct-image-composition]. Its codomain is $Rw_*(P\\boxtimes Q)$.\nLet $f_i:X_i\\to B$ and $M_i\\in D(X_{i,\\mathrm{proet}},A)$, $i=1,2,3$, be arbitrary. Put $F_i=Rf_{i*}M_i$, $f_{ij}:X_i\\times_BX_j\\to B$, and $v:X_1\\times_BX_2\\times_BX_3\\to B$, with projections $r_i$ to $X_i$. Define\n$$\\Theta_L=\\Omega_{f_{12},f_3}(M_1\\boxtimes M_2,M_3)(\\Omega_{f_1,f_2}(M_1,M_2)\\otimes1),$$\n$$\\Theta_R=\\Omega_{f_1,f_{23}}(M_1,M_2\\boxtimes M_3)(1\\otimes\\Omega_{f_2,f_3}(M_2,M_3)).$$\nAfter the canonical associators both have source $F_1\\otimes F_2\\otimes F_3$ and target $Rv_*(Lr_1^*M_1\\otimes Lr_2^*M_2\\otimes Lr_3^*M_3)$. Their transposes under $Lv^*\\dashv Rv_*$ are both the specified map\n$$Lv^*(F_1\\otimes F_2\\otimes F_3)\\xrightarrow{\\sim}\\bigotimes_{i=1}^3 Lr_i^*Lf_i^*F_i\\xrightarrow{\\bigotimes_{i=1}^3 Lr_i^*\\varepsilon_{f_i,M_i}}\\bigotimes_{i=1}^3Lr_i^*M_i.$$\nThus $\\Theta_L=\\Theta_R$. No properness, boundedness, constructibility, invertibility of exchange or projection, compact-support functor, exceptional adjoint or abstract six-functor datum is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Single proof paragraph, clauses (ii) and (i): 'PF o (Ex_! tensor 1) is the transpose of the pulled-back counit tensored with the identity ... the symmetric map given by the two counits', iterated to three factors; agent-formulated concrete finite-coefficient refinement, with the ordinary maps defined by counits; no abstract datum is assumed."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-proetale-operations",
+  "def-pc-fibre-product",
+  "def-exchange-projection",
+  "lem-weil-derived-direct-image-composition",
+  "def-pur-finite-forward-tensor-symmetry",
+  "def-pur-finite-ordinary-product"
+ ],
+ "proof": [
+  {
+   "text": "For each nested product, transposition commutes with source precomposition, direct-image postcomposition and equality transport. Apply the binary product transpose to the outer product. Naturality of the tensor comparison and pullback compositor moves the inner product into its adjunction transpose. Apply the binary product transpose to that inner product as well. This gives the two nested binary evaluations, with the same source associator and equality transports as the original definitions.",
+   "uses": [
+    "def-pur-ordinary-product-transpose-data",
+    "lem-pur-ordinary-binary-product-transpose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clauses (i)--(ii): the two-counit transpose and associativity of the projection formula; concrete ordinary unbounded fixed-scalar refinement."
+   }
+  },
+  {
+   "text": "Apply the left and right comparison equations to the three actual pushforward objects and their adjunction counits. Their common arbitrary-map evaluation specializes definitionally to ordinaryTripleCounit, proving the first two conjuncts.",
+   "uses": [
+    "lem-pur-ordinary-triple-left-comparison",
+    "lem-pur-ordinary-triple-right-comparison",
+    "def-pur-ordinary-product-transpose-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clauses (i)--(ii): the two-counit transpose and associativity of the projection formula; concrete ordinary unbounded fixed-scalar refinement."
+   }
+  },
+  {
+   "text": "The inverse adjunction Hom equivalence is injective. Transitivity of the two transpose equalities gives equality of the actual iterated products, the final conjunct.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Clauses (i)--(ii): the two-counit transpose and associativity of the projection formula; concrete ordinary unbounded fixed-scalar refinement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-ordinary-product-transpose-data",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-ordinary-binary-product-transpose",
+  "lem-pur-ordinary-triple-left-comparison",
+  "lem-pur-ordinary-triple-right-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clauses (i)--(ii): the two-counit transpose and associativity of the projection formula; concrete ordinary unbounded fixed-scalar refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of both iterated ordinary proper external products of three derived sheaves is the tensor of the three adjunction counits",
+   "results": "8 hits: CategoryTheory.MonoidalCategory.prodCompExternalProduct_inv_app, CategoryTheory.MonoidalCategory.prodCompExternalProduct_hom_app, CategoryTheory.MonoidalCategory.prodCompExternalProduct, CategoryTheory.MonoidalCategory.externalProductCompDiagIso, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.frobeniusMorphism, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc.  Read the actual results. Ordinary sheaf composition, diagram external tensors, Over-category adjoints and generic monoidal counit laws do not state the specified geometric derived product comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under three pullback pushforward adjunctions the two composites of binary external product maps have the same triple counit transpose",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit, CategoryTheory.ExponentiableMorphism.coev_ev.  Read the actual results. Ordinary sheaf composition, diagram external tensors, Over-category adjoints and generic monoidal counit laws do not state the specified geometric derived product comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of a proper derived pushforward external product follows from its transpose being three pulled back counits",
+   "results": "8 hits: SheafOfModules.pushforward_assoc, PresheafOfModules.pushforward_assoc, CategoryTheory.Limits.pullbackPullbackLeftIsPullback, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom_assoc, CategoryTheory.Limits.pullbackAssoc, CategoryTheory.Limits.pullbackPullbackRightIsPullback, CategoryTheory.Limits.pullbackAssocIsPullback, CategoryTheory.Limits.pullbackAssocSymmIsPullback.  Read the actual results. Ordinary sheaf composition, diagram external tensors, Over-category adjoints and generic monoidal counit laws do not state the specified geometric derived product comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"tensor\"",
+   "results": "12 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor, CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor_assoc, CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor, CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor_assoc, CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse, CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse.  Read the actual results. Ordinary sheaf composition, diagram external tensors, Over-category adjoints and generic monoidal counit laws do not state the specified geometric derived product comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*tensor|tensor.*counit",
+   "results": "24 hits: Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Pi/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean, Mathlib/CategoryTheory/Monoidal/Comon_.lean.  Read the actual results. Ordinary sheaf composition, diagram external tensors, Over-category adjoints and generic monoidal counit laws do not state the specified geometric derived product comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary unbounded derived sheaves on pro etale sites the ordinary external product constructed from exchange and projection has transpose the tensor of the two pullback pushforward counits",
+   "results": "[\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"].  Read the actual returned types; underived module pullback, Over-category counits, abstract monoidal adjunction laws, and adjunction triples do not identify the specified ordinary pro-etale external product. Checked Monoidal/Functor.lean:1036, Adjunction/Basic.lean:580--588, and Sheaf/PullbackContinuous.lean:190--215 for the closest generic infrastructure.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*tensor|tensor.*counit",
+   "results": "[\"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Multifunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean\", \"Mathlib/CategoryTheory/Monoidal/End.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\"].  Read the actual returned types; underived module pullback, Over-category counits, abstract monoidal adjunction laws, and adjunction triples do not identify the specified ordinary pro-etale external product. Checked Monoidal/Functor.lean:1036, Adjunction/Basic.lean:580--588, and Sheaf/PullbackContinuous.lean:190--215 for the closest generic infrastructure.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two iterated ordinary external products of three unbounded derived sheaves have transpose equal to the tensor of three adjunction counits",
+   "results": "[\"CategoryTheory.Adjunction.Triple.leftToRight_eq_counits\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app\", \"CategoryTheory.Adjunction.Triple.leftToRight_app_obj\", \"CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app\", \"CategoryTheory.Adjunction.Triple.rightToLeft_eq_counits\", \"CategoryTheory.Pi.closedCounit\", \"CategoryTheory.MonoidalCategory.DayConvolution.corepresentableBy₂'_homEquiv\"].  Read the actual returned types; underived module pullback, Over-category counits, abstract monoidal adjunction laws, and adjunction triples do not identify the specified ordinary pro-etale external product. Checked Monoidal/Functor.lean:1036, Adjunction/Basic.lean:580--588, and Sheaf/PullbackContinuous.lean:190--215 for the closest generic infrastructure.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"tensor\"",
+   "results": "[\"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counit_app_tensor_assoc\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor\", \"CategoryTheory.Equivalence.functor_map_μ_inverse_comp_counitIso_hom_app_tensor_assoc\", \"CategoryTheory.Equivalence.counitInv_app_tensor_comp_functor_map_δ_inverse\", \"CategoryTheory.Equivalence.counitIso_inv_app_tensor_comp_functor_map_δ_inverse\"].  Read the actual returned types; underived module pullback, Over-category counits, abstract monoidal adjunction laws, and adjunction triples do not identify the specified ordinary pro-etale external product. Checked Monoidal/Functor.lean:1036, Adjunction/Basic.lean:580--588, and Sheaf/PullbackContinuous.lean:190--215 for the closest generic infrastructure.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Under three pullback pushforward adjunctions both iterations of the counit defined binary external product of derived sheaves have the same tensor of three counits as transpose",
+   "results": "[\"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc\", \"CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom\", \"SheafOfModules.pullbackComp\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp\"].  Read the actual returned types; underived module pullback, Over-category counits, abstract monoidal adjunction laws, and adjunction triples do not identify the specified ordinary pro-etale external product. Checked Monoidal/Functor.lean:1036, Adjunction/Basic.lean:580--588, and Sheaf/PullbackContinuous.lean:190--215 for the closest generic infrastructure.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-even-line-product-integration-symmetry",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Step 3: concrete associativity underlying reassociation before the even-sign calculation; relative-product coherence proof, triple ordinary counit calculation",
+   "via": [
+    "lem-pur-even-line-product-integration-symmetry"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-ordinary-triple-product-transpose",
+  "worker": "stage1",
+  "summary": "Q06 retains the full statement, supplies the two explicit binary transpose calculations, applies the normalized ordinary compositor, and computes both triple parenthesizations. Reuses existing geometry, tensor and compositor nodes; creates no new node. Actual logged searches found no exact Mathlib match.",
+  "blueprint": "prop-pur-affine-space-composition-law proof Steps 3--4, via lem-pur-even-line-product-integration-symmetry: supplies the ordinary three-factor reassociation underlying the sign calculation. Latest lem-sf-kunneth-coherence proof clauses (i)--(ii): explicit two-counit transpose iterated to three factors.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic scheme base-change stability, used only to check the product projections satisfy the hypotheses of the ordinary transpose tools."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type composition, used only to check double and triple structure maps are finite type."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Only clause (e), separatedness under composition, is used; no properness assertion is applied."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Only its ambient unbounded finite-coefficient naturality, signed symmetry, associator and composition clauses are used, not its higher-coefficient preservation assertions."
+   },
+   {
+    "node": "lem-pur-ordinary-derived-composite-transpose",
+    "why": "Generic normalized ordinary derived-compositor identity, applied with t then v, to calculate the actual binary product transpose."
+   },
+   {
+    "node": "lem-pod-finite-system-pullback-coherence",
+    "why": "Generic coherence: only its three-map cocycle for the canonical pro-etale module-pullback composition comparisons, evaluated at one level of a constant coefficient sequence; no system or integral assertion is used. No node of the sk-prop-an route states this cocycle for c_{h,k}."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-39676ae58",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-39676ae58 (reviewer sub-agent of L); spot-checked: I read the whole item, all 8 steps, every cited node's statement, unit sk-prop-an and its route, the blueprint lem-sf-kunneth-coherence proof (clauses i/ii) and the prop-pur-affine-space-composition-law Steps 1-4. Compared with live, the statement and stmt_deps are unchanged. The item is still unsplit on live and side-live, there are no new nodes, no SGA citations, and the blueprint from/via fields are correct. I re-derived the arithmetic. Step 3: the projection transpose is a_t by the triangle identity, and the exchange transpose is L_r(eps_u)theta. Step 4: the symmetry compatibility plus sigma-sigma=1 gives (1⊗eps_v)mu_v. Step 5: the composite-transpose node applies with f=t, g=v, w=Psi, v=H and the same K-injective compositor, and theta∘alpha_{t,v}=alpha_{r,u} gives rho=(alpha⊗alpha)mu_w. One fault (C4/C1): Steps 6-7 identify the iterated source comparisons with the specified triple comparison. That needs the three-map cocycle of the pro-etale pullback-composition isomorphisms (L_v≅L_q12 L_f12≅L_q12 L_pi1 L_f1 against L_v≅L_r1 L_f1, and likewise for q23 and the Step-1 product isomorphism). Neither lem-pur-derived-pullback-tensor-iso nor lem-weil-pbc-proetale-derived-pullback-composition states it, and no node on the sk-prop-an route does. The FIX makes Steps 6 and 7 cite lem-pod-finite-system-pullback-coherence for the cocycle U_j(a_hk)a_{j,kh}=a_{j,h}U_k a_{hj,k}, taken at level n for the constant sequence A_m=A, where its a_hk is identified with c_hk. They also cite lem-weil-pbc-proetale-derived-pullback-composition. Both steps are now non-elementary; proof_deps and tool_uses are updated, with the coherence node recorded as an off-route generic tool. Statement unchanged and no cycle. Edge cases checked: identity maps, zero objects, empty schemes, odd degrees with the Koszul signs kept, unbounded inputs, n=1. Advisory: lem-sf-proper-triple-counit-transpose has the same unstated cocycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SmoothPurity.OrdinaryTripleProductTranspose",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ordinaryTripleProductTranspose",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ordinaryTripleProductTranspose"
+  ],
+  "file": "lean/Sheaf/SmoothPurity/OrdinaryTripleProductTranspose.lean",
+  "statement": "theorem ordinaryTripleProductTranspose (B₀ X₁₀ X₂₀ X₃₀ : Over (Spec (CommRingCat.of P.field.k))) [IsSeparated B₀.hom] [LocallyOfFiniteType B₀.hom] [QuasiCompact B₀.hom] [IsSeparated X₁₀.hom] [LocallyOfFiniteType X₁₀.hom] [QuasiCompact X₁₀.hom] [IsSeparated X₂₀.hom] [LocallyOfFiniteType X₂₀.hom] [QuasiCompact X₂₀.hom] [IsSeparated X₃₀.hom] [LocallyOfFiniteType X₃₀.hom] [QuasiCompact X₃₀.hom] (f₁₀ : X₁₀ ⟶ B₀) (f₂₀ : X₂₀ ⟶ B₀) (f₃₀ : X₃₀ ⟶ B₀) [IsSeparated f₁₀.left] [LocallyOfFiniteType f₁₀.left] [QuasiCompact f₁₀.left] [IsSeparated f₂₀.left] [LocallyOfFiniteType f₂₀.left] [QuasiCompact f₂₀.left] [IsSeparated f₃₀.left] [LocallyOfFiniteType f₃₀.left] [QuasiCompact f₃₀.left] (d₀ : OrdinaryTripleProductDiagram f₁₀.left f₂₀.left f₃₀.left) (K₀ : P.ordinaryCategory X₁₀.left) (L₀ : P.ordinaryCategory X₂₀.left) (M₀ : P.ordinaryCategory X₃₀.left) : ((P.ordinaryAdj (d₀.a ≫ (d₀.p₂ ≫ f₂₀.left))).homEquiv _ _).symm (P.ordinaryTripleLeft d₀ K₀ L₀ M₀) = P.ordinaryTripleCounit d₀ K₀ L₀ M₀ ∧ ((P.ordinaryAdj (d₀.a ≫ (d₀.p₂ ≫ f₂₀.left))).homEquiv _ _).symm (P.ordinaryTripleRight d₀ K₀ L₀ M₀) = P.ordinaryTripleCounit d₀ K₀ L₀ M₀ ∧ P.ordinaryTripleLeft d₀ K₀ L₀ M₀ = P.ordinaryTripleRight d₀ K₀ L₀ M₀",
+  "branch": "newtargets-dag",
+  "by": "Q137",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9e4d2b99",
+  "group": "Q137",
+  "result": "pass",
+  "note": "Re-delivery repairing the 1821b320 RETURN (§2 #2/#3 ownership). The item .lean differs only by an added import of Sheaf.Paper.FiniteForwardProductSymmetry. Item JSON: only stmt_deps changed; the theorem node lem-pur-finite-product-compactification is replaced by new existing:true def nodes def-pur-finite-forward-tensor-symmetry (finiteForwardTensorSymmetryNat/finiteForwardTensorSymmetry) and def-pur-finite-ordinary-product (finiteProductOrdinary/finiteProductOrdinaryProjection). Read both bodies in side-live. sigma is the leftDerived2Lift of the flipped signed homotopy braiding through mu, and component (L,K) has source K⊗L. Omega is sigma_{F,G}, pi_b, Rb_*(sigma ∘ Ex⊗1), Rb_*(pi_t), c^{-1}, factor for factor the node formula with no inverted exchange/projection. Lean statements are verbatim in their modules and the item statement is verbatim in its file. No other node owns these declarations; the item is not superseded on live/side-live; one sorry; report sections present. Earlier review's full item checks (hypotheses, Theta_L/Theta_R, three-counit transpose, four-cone diagram, universes, edge cases) still hold. No compile (no fix). Advisory: A1 sigma duplicates def-pur-localized-derived-tensor-braiding (derivedTensorKoszulSymmetry, same lift pattern), already landed by Q28, so an identification lemma is welcome. A2 the sigma node's generic-V list omits UpperStarPreservesFlat (holds for Mod(A)). A3 Omega uses upstream derivedBaseChangeMap/rightDerivedLowerStarProjectionMap rather than the SuppliedExchangeProjection records."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-aec81",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261025T211038-L-3767432",
+  "kind": "interface",
+  "note": "independent cc review: Data moved verbatim (script diff) and item signature byte-identical to the clone; item proof assembled from 3 new sorry statements (binary transpose, left/right comparisons), each checked true against canonical pullback/tensor comparison coherence; #print axioms on scratch concat: sorryAx only from the 3 holes"
+ }
+}

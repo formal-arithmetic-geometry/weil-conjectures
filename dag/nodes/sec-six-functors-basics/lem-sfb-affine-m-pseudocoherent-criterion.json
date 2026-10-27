@@ -1,0 +1,359 @@
+{
+ "id": "lem-sfb-affine-m-pseudocoherent-criterion",
+ "kind": "statement",
+ "title": "Fixed-degree pseudo-coherence under the affine derived equivalence",
+ "statement": "Let $A$ be a commutative ring, $Y=\\operatorname{Spec}A$ a scheme [def-pc-scheme], $m\\in\\mathbf Z$, and $M\\in D(A)$ [def-weil-abstract-derived-category]. Let $\\widetilde M\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ be the image of $M$ under the equivalence of [lem-pc-affine-qcoh-derived-equivalence], induced by associating a quasi-coherent sheaf termwise to a representative complex [def-pc-derived-category]. Then $\\widetilde M$ is $m$-pseudo-coherent on $Y$ [def-sfb-m-pseudo-coherent-complex] if and only if $M$ is $m$-pseudo-coherent as an object of $D(A)$ [def-pc-ring-m-pseudo-coherent]. There is no Noetherian hypothesis and no boundedness assumption on a representative of $M$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E7, lemma-pseudo-coherent-affine, m-pseudo-coherent clause"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-derived-category",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-pc-ring-m-pseudo-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Write F_B for the affine equivalence over a commutative ring B. By [new-affine-derived-tilde-homology-comparison], naturally in a derived morphism u, H^j(F_B(u)) is the associated-sheaf map of H^j(u). The associated-sheaf functor is fully faithful by parts (1),(2) of [lem-weil-pbc-affine-tilde-gamma-adjunction], and preserves cokernels by part (4). Thus it preserves and reflects isomorphisms and surjections: preservation of surjections follows by applying it to a zero cokernel; for reflection, if v,w agree after a module map h whose associated-sheaf map is epic, their associated-sheaf maps agree by cancellation, hence v=w by faithfulness. This tests exactly categorical epimorphisms, which for modules are surjections. Consequently F_B preserves and reflects the cohomological conditions in degrees j>m and j=m, for arbitrary derived morphisms.",
+   "uses": [
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, lemma-affine-compare-bounded, cohomology calculation; Tag 08E7, both implications"
+   }
+  },
+  {
+   "text": "Suppose M is m-pseudo-coherent. Unpack [def-pc-ring-m-pseudo-coherent] to obtain a bounded finite free complex E and a derived map u:Q(E)\\to M with the required cohomology isomorphisms and surjection. Apply [lem-pc-affine-qcoh-derived-equivalence] to u. Its source is Q(\\widetilde E). The associated sheaf of A is the structure sheaf (apply [lem-weil-pbc-spec-module-tilde-sections] with N=A); preservation of finite direct sums in [lem-weil-pbc-affine-tilde-gamma-adjunction](4) identifies the terms of \\widetilde E with finite free sheaves. It is zero outside the same finite interval, hence strictly perfect by [def-pc-perfect-complex]. Step 1 gives the required cohomology conditions. The single open Y and this map therefore witness [def-sfb-m-pseudo-coherent-complex].",
+   "uses": [
+    "def-pc-ring-m-pseudo-coherent",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-perfect-complex",
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E7, lemma-pseudo-coherent-affine, first sentence of proof"
+   }
+  },
+  {
+   "text": "For the converse choose a representative complex N of M. The affine equivalence identifies \\widetilde M with Q(\\widetilde N). For each x\\in Y, [def-sfb-m-pseudo-coherent-complex] supplies an open W\\ni x, a strictly perfect complex P on W, and a derived map \\alpha:Q(P)\\to Q(\\widetilde N)|_W inducing isomorphisms above m and a surjection at m. Its terms are retracts of finite free sheaves and vanish outside a finite interval, by [def-pc-perfect-complex]. Apply [lem-pc-finite-retract-sheaves-affine-trivialization] to the finite set of degrees in that interval: there is an affine V\\ni x inside W on which all its nonzero terms become finite free simultaneously. Terms outside the interval are already zero and free of rank zero.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-sfb-m-pseudo-coherent-complex",
+    "def-pc-perfect-complex",
+    "lem-pc-finite-retract-sheaves-affine-trivialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E7, converse: local strictly perfect approximations and refinement making their finitely many terms free"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-localization-away-basic-open](i) choose f_x with x\\in D(f_x)\\subseteq V. Restrict P and \\alpha further to D(f_x). Restriction preserves kernels by [lem-weil-pbc-module-restriction-open-immersion-limits] and cokernels by [lem-weil-pbc-module-restriction-open-immersion-colimits](1), so it preserves the quotient ker(d^j)/im(d^{j-1}) defining H^j; for an open inclusion j:W'\\to W one has j^{-1}\\mathcal O_W=\\mathcal O_{W'}, so by [def-pc-derived-pullback] Lj^* is termwise restriction of a K-flat resolution \\mathcal P^\\bullet\\to E; restriction is exact, so j^{-1}\\mathcal P^\\bullet\\to j^{-1}E is a quasi-isomorphism and Lj^*E is the termwise restriction of E, compatibly with composing the restrictions Y\\supseteq W\\supseteq D(f_x). Thus the restricted map still has the same cohomology conditions. Restricting a finite free sheaf gives a finite free sheaf, by restricting its finite tuple sections; the finite degree interval is unchanged. All such D(f_x) cover Y. Quasi-compactness in [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii) gives a finite subcover D(f_1),\\ldots,D(f_r), and part (i) says (f_1,\\ldots,f_r)=A.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-module-restriction-open-immersion-limits",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E7, converse: finite standard-open refinement; restriction computation using Tags 01AH, 01AJ"
+   }
+  },
+  {
+   "text": "Fix one member D(f_i) of this finite cover and put B=A_{f_i}. By [lem-weil-pbc-principal-localization-open-immersion] it is the open subscheme Spec(B) with its structure sheaf. We can therefore regard the restricted bounded finite free complex P_i and its approximation map as living on Spec(B). The target Q(\\widetilde N)|_{D(f_i)} is canonically Q(\\widetilde{N\\otimes_A B}). Explicitly, on the basis of opens D(g/1) of Spec(B) (every element of B is g/f_i^a and f_i is a unit), its degree-n sections are (N^n)_{f_i g} by [lem-weil-pbc-spec-module-tilde-sections]; the associated sheaf of N^n\\otimes_A B has those same modules, with n/f_i^a mapped to the identical fraction. The restriction maps agree by that node's restriction formula. These maps and their inverses glue on the basis, commute with differentials by functoriality in module maps, and give the asserted isomorphism of complexes. This is a comparison of actual complexes, hence also an isomorphism in the derived category.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E7, local affine module identification; Tags 01HV (sections and restrictions), 01I3 (standard open affine)"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-affine-finite-free-sheaf-complex-lift] over B to P_i. It gives a bounded-above finite free module complex E_i and an actual complex isomorphism \\widetilde E_i\\simeq P_i. It is also bounded below: outside the finite degree interval of P_i, \\widetilde{E_i^j}=0, so E_i^j=0 because E_i^j\\simeq\\Gamma(\\operatorname{Spec}B,\\widetilde{E_i^j}) by [lem-weil-pbc-affine-tilde-gamma-adjunction](2). If literal zero terms are desired, replace these zero objects by the zero module and conjugate differentials through the degreewise isomorphisms. Now compose the derived image of this complex isomorphism with the map of Step 5. Fullness of the affine equivalence [lem-pc-affine-qcoh-derived-equivalence] over B gives a derived map Q(E_i)\\to Q(N\\otimes_A B) whose image is that composite. Both endpoints have quasi-coherent cohomology, so the map belongs to the full subcategory D_QCoh. Step 1 reflects its cohomology isomorphisms above m and surjection at m. The bounded finite free E_i and this map witness m-pseudo-coherence of Q(N\\otimes_A B) by [def-pc-ring-m-pseudo-coherent]. No chain-map representative of this derived map is needed.",
+   "uses": [
+    "lem-pc-affine-finite-free-sheaf-complex-lift",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-pc-ring-m-pseudo-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E7, converse: finite free affine approximations; Tag 06Z0 for fullness on derived morphisms"
+   }
+  },
+  {
+   "text": "For every i, Step 6 gives m-pseudo-coherence of the localized representative N\\otimes_A A_{f_i}, and Step 4 gives the unit ideal condition. Apply the fixed-m clause of [lem-pc-ring-pseudo-coherent-localization-glue] to conclude that N, hence M, is m-pseudo-coherent. This uses the fixed degree m throughout, not an assertion for all m. If A is the zero ring, Y is empty and D(A) is the zero category; the zero complex and the unique map give the ring-side witness and the empty covering gives the sheaf-side witness. The argument for nonempty Y uses boundedness only of the approximating P_i and E_i, never of N; no Noetherian hypothesis occurs.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-localization-glue",
+    "def-pc-ring-m-pseudo-coherent",
+    "def-sfb-m-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E7, converse, final invocation of Tag 066D, lemma-glue-pseudo-coherent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-perfect-complex",
+  "def-pc-ring-m-pseudo-coherent",
+  "def-sfb-m-pseudo-coherent-complex",
+  "lem-pc-affine-finite-free-sheaf-complex-lift",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-finite-retract-sheaves-affine-trivialization",
+  "lem-pc-ring-pseudo-coherent-localization-glue",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "new-affine-derived-tilde-homology-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E7, lemma-pseudo-coherent-affine, fixed-m proof; use fullness of Tag 06Z0 on derived morphisms after finite-free refinement instead of the unnecessary local chain-map realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|[sS]trictly.?[pP]erfect|IsMPseudoCoherent",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On an affine scheme degreewise m pseudo coherence of a quasi coherent complex is equivalent to m pseudo coherence of derived global sections",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.IsAffine.casesOn, SheafOfModules.IsQuasicoherent.casesOn, AlgebraicGeometry.IsLocallyArtinian.isArtinianRing_of_isAffine, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent.recOn, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.rec",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of the derived category of modules admits a bounded finite free approximation above degree m exactly when its associated sheaf complex on Spec admits local strictly perfect approximations",
+   "results": "OK: 8 hits; DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine scheme Spec A a complex M of A modules is m pseudo coherent if and only if the associated complex of quasi coherent sheaves is m pseudo coherent",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.Scheme.Modules.instAbelian, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*pseudo.?coher|pseudo.?coher.*relative",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern underived quasicoherence, finite presentation, affine morphism properties or derived cohomological support; none states the fixed-degree finite-free approximation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|IsMPseudoCoherent",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are underived sheaf finiteness, categories of scheme modules or unrelated affine equivalences, not fixed-degree pseudo-coherence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine derived equivalence preserves and reflects m pseudo coherence defined by bounded finite free approximations",
+   "results": "OK: 8 hits; CategoryTheory.Equivalence.precoherent, ContinuousAffineEquiv.prodCongr_toAffineEquiv, AffineEquiv.coe_linear, AffineEquiv.coe_coe, AffineEquiv.casesOn, term_≃ᵃ[_]_, CategoryTheory.Equivalence.precoherent_isSheaf_iff, AffineEquiv.noConfusionType; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are underived sheaf finiteness, categories of scheme modules or unrelated affine equivalences, not fixed-degree pseudo-coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are underived sheaf finiteness, categories of scheme modules or unrelated affine equivalences, not fixed-degree pseudo-coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any integer m a complex of modules on an affine scheme Spec A is m pseudo coherent if and only if its associated sheaf complex is m pseudo coherent",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj, AlgebraicGeometry.Scheme.Modules.isSheaf, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.instCategory, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.isFinitePresentation, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are underived sheaf finiteness, categories of scheme modules or unrelated affine equivalences, not fixed-degree pseudo-coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded finite free approximation to an unbounded module complex above an integer m exists exactly when finite free sheaf approximations exist locally on its affine spectrum",
+   "results": "OK: 8 hits; SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.Presentation.IsFinite; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are underived sheaf finiteness, categories of scheme modules or unrelated affine equivalences, not fixed-degree pseudo-coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-m-pseudocoherence-derived-sections",
+  "date": "2026-10-24",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, first paragraph: etale neighbourhoods of all x suffice. Scheme input in Tag 0CSX, implication (2) to (1): source descent over a fixed scheme base (Tag 0CSN). Supporting input: Tag 0CSN proof, finite locally free case: applying lemma-finite-morphism-relative-pseudo-coherence to the pulled-back complex. Tag 09UK proof: translation to affine derived section modules, using the quasi-coherent form 09VF of 09UJ. Supporting input: Tag 09VF proof, last sentence: the fixed-m clause of Tag 08E7 identifies absolute pseudo-coherence on polynomial affine space with that of its module complex.",
+   "via": [
+    "lem-sfb-relative-m-pseudocoherence-derived-sections",
+    "lem-sfb-finite-relative-pseudocoherent-pushforward",
+    "lem-sfb-relative-pseudocoherence-fppf-descent",
+    "lem-sfb-space-relative-pseudocoherence-etale-locality",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-m-pseudocoherent-criterion",
+  "worker": "stage1",
+  "summary": "Proved both fixed-degree directions of Tag 08E7 with existing nodes only. Explained cohomology preservation/reflection, finite simultaneous local trivialization, restriction and localization comparison, boundedness of lifted approximants, and finite standard-open gluing. The full pseudo-coherence affine criterion is not used: it does not contain the fixed-m clause. No statement change, new node, Lean edit or compile.",
+  "blueprint": "Inherited blueprint ancestry has null from.node (confirmed by blueprint_refs.py ancestor); retained it rather than inventing an ancestor. Realizes the recorded supporting input to det-thm-sf-ctf-stability-direct-images proof (3), via Tag 09VF and the fixed-m clause of Tag 08E7. Read the current latest blueprint unit and direct-images proof.",
+  "tool_uses": [
+   {
+    "node": "new-affine-derived-tilde-homology-comparison",
+    "why": "Step 1 needs the natural cohomology comparison for arbitrary derived arrows, over A and every A_f; no unit-specific node gives it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Steps 1,2,6 need ordinary affine full faithfulness, the global-sections unit and preservation of finite sums/cokernels."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Steps 2,3,6 need the unbounded affine derived equivalence and fullness for approximation morphisms."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Steps 2,5 identify the structure sheaf and restriction to a principal open by the specified fraction maps."
+   },
+   {
+    "node": "lem-pc-finite-retract-sheaves-affine-trivialization",
+    "why": "Step 3 trivializes all finitely many nonzero approximation terms on a common neighbourhood; this does not assert pseudo-coherence."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Steps 4,5 need the standard-open basis and its localization-spectrum description."
+   },
+   {
+    "node": "lem-weil-pbc-module-restriction-open-immersion-limits",
+    "why": "Step 4 needs kernel preservation for exact restriction of module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "why": "Step 4 needs cokernel preservation for exact restriction of module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Step 4 needs a finite standard subcover and the unit-ideal condition."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "Step 5 needs Spec(A_f) identified with D(f) as an open subscheme, including its structure sheaf."
+   },
+   {
+    "node": "lem-pc-affine-finite-free-sheaf-complex-lift",
+    "why": "Step 6 needs an actual complex isomorphism lifting the finite free sheaf approximant; lower boundedness is then proved explicitly."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-localization-glue",
+    "why": "Step 7 uses the fixed-m ring gluing theorem, the algebraic tool expressly invoked by 08E7."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-finite-retract-sheaves-affine-trivialization",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-module-restriction-open-immersion-limits",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-pc-affine-finite-free-sheaf-complex-lift",
+  "lem-pc-ring-pseudo-coherent-localization-glue"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-7ba6b5529",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-7ba6b5529 (reviewer sub-agent of L); spot-checked: Read Stacks Tag 08E7 (perfect.tex l.2223, fixed-m clause) and all 7 steps against the statements of the 15 cited nodes. The item statement and stmt_deps are unchanged from the earlier Q117 snapshot, where the item was unsplit. There are no new nodes, no SGA citations and no cycle (the parent is the only node that cites the item). Steps 1-7 are correct. Step 1: the homology comparison plus the fully faithful, cokernel-preserving tilde functor give preservation and reflection of the degree-m conditions. Step 2: tilde of a bounded finite free complex is strictly perfect, so the single open Y is a witness. Step 3: the retract-trivialization node applies to the finite set of nonzero degrees. Step 4: standard-open basis, finite cover and unit ideal. Step 5: restricting tilde N to D(f) equals tilde(N_f), computed on the basis. Step 6: the lift node gives an actual complex isomorphism; the lower bound is proved from the tilde/Gamma unit; fullness of the affine equivalence over A_f replaces the source's chain-map realisation (08C9), which is valid. Step 7: the fixed-m glue clause applies. Edge cases checked: zero ring (empty spectrum), rank-zero terms, unbounded N, arbitrary m. Duplicate check: lem-pc-affine-pseudo-coherent-criterion (full pseudo-coherence only), the principal sheaf-model and transport nodes (object isomorphisms only) and lem-sc-affine-pseudo-coherent-lift do not state the fixed-m criterion. The 12 tool_uses are accepted as generic affine tools. FIX (C1): Step 4 treated the derived restriction Lj^* in def-sfb-m-pseudo-coherent-complex as termwise restriction without citing anything. Added [def-pc-derived-pullback] to Step 4's uses and to proof_deps, with a sentence: for an open inclusion j^{-1}O = O, so the K-flat clause and exactness of restriction make Lj^* termwise restriction, compatibly with composites. The fix is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-affine-m-pseudocoherent-criterion.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineMPseudoCoherentCriterion",
+  "declaration": "AlgebraicGeometry.affine_mPseudoCoherent_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineMPseudoCoherentCriterion.lean",
+  "statement": "theorem affine_mPseudoCoherent_iff (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ U : (Spec (.of A)).Opens, HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] (m : ℤ) (M : DerivedCategory (ModuleCat.{u} A)) : Scheme.IsMPseudoCoherent (Spec (.of A)) m ((schemeDerivedQCohProperty (Spec (.of A))).ι.obj ((exists_affineQCohDerivedEquivalence.{u, wA, wY} A).choose.functor.obj M)) ↔ DerivedCategory.IsMPseudoCoherent m M",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f65c9e273",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Read the node, the six stmt_dep records, the live Scheme.IsMPseudoCoherent source and the delivered module. Each clause matches: A is a CommRing with no extra hypotheses; Y = Spec(.of A); m : ℤ is shared by both predicates; M is an arbitrary D(A) object; M̃ = ι(exists_affineQCohDerivedEquivalence.choose.functor.obj M), which is determined up to iso by the tilde ⋙ Q conjunct, and IsMPseudoCoherent is iso-invariant; the iff is between the recorded scheme and ring predicates. wA and wY are independent, and the open-subscheme instances are exactly those the predicate needs. The node differs from side-live only in lean, and lean.statement is verbatim. All imports resolve, and all six stmt_deps are used. No H4 duplicate (isPseudoCoherent_affine_iff covers all degrees). The 7-step proof docstring and the source/blueprint docstrings are present; the proof is sorry only, with no new definitions. Both report sections are present. Edge cases A=0, M=0, sign of m and unbounded M checked. No file changed and no compile run; the worker reports a clean scompile."
+ }
+}

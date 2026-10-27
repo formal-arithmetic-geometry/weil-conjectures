@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-normal-big-cell-character-functions",
+ "kind": "statement",
+ "title": "Normality and character functions on the open Bruhat cell",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type, with no nontrivial smooth connected normal unipotent subgroup. Unipotent means unipotent matrices in a faithful representation at geometric points. Fix a split maximal torus $T_H$, a Borel subgroup $B_H$, unipotent radical $U_H$, projection $p_H:B_H\\to T_H$, and roots and coroots as in [lem-sfb-reductive-borel-pair-structure]. Write $w_0$ for the Weyl group element reversing the positive roots, choose a representative $n_0\\in N_H(T_H)(F)$, and put $C=U_Hn_0B_H$. Here $N_H(T_H)$ is the subgroup normalizing $T_H$, the Weyl group is $N_H(T_H)(F)/T_H(F)$, and $(w\\chi)(t)=\\chi(n^{-1}tn)$. Multiplication $U_H\\times_F B_H\\to H$, $(u,b)\\mapsto u n_0 b$, is an open immersion with dense image $C$. The coordinate ring $R=F[H]$ is a domain integrally closed in its fraction field $F(H)$ (every element of $F(H)$ satisfying a monic polynomial over $R$ belongs to $R$). Here $F(H)=\\mathcal O_{H,\\eta}$ is the function field at the generic point [def-sc-function-field]. Restriction embeds $R$ and $\\Gamma(C,\\mathcal O_C)$ into $F(H)$. For every character $\\chi:T_H\\to\\mathbf G_m$, the formula\n$$f_\\chi(u n_0 b)=\\bigl((w_0\\chi)(p_H(b))\\bigr)^{-1}$$\ndefines an invertible regular function on $C$, hence a nonzero element of $F(H)$, with $f_{\\chi+\\psi}=f_\\chi f_\\psi$. If $f_\\chi$ belongs to $R$, then, under left translation $(a f)(g)=f(a^{-1}g)$, it satisfies\n$$u f_\\chi=f_\\chi,\\qquad t f_\\chi=\\chi(t)f_\\chi,\\qquad f_\\chi(gb)=\\bigl((w_0\\chi)(p_H(b))\\bigr)^{-1}f_\\chi(g)$$\nfor $u\\in U_H(A)$, $t\\in T_H(A)$, $g\\in H(A)$ and $b\\in B_H(A)$, for every commutative $F$-algebra $A$. In particular its extension lies in the rational left-translation module $E_{B_H}(w_0\\chi)$ defined by this last right-equivariance identity. Rational means a coaction into $V\\otimes_F F[H]$ satisfying coassociativity and the counit identity.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 1.35 and the smoothness discussion before Proposition 1.26 (integrality and regularity); Theorem 21.73(b), Definition 21.72; proof of Proposition 22.22 and Lemmas 22.23--22.25, pp.469--470. The scheme-level character identities are the displayed calculations in the proof of 22.22."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sc-function-field",
+  "def-sfb-rank-one-root-interfaces",
+  "def-sfb-rational-highest-weight-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-bruhat-longest-cell-charts] to $H,T_H,B_H$: its reductivity and algebraically closed field hypotheses are precisely ours. It gives geometric integrality of $H$ and $w_0^2=1$. For the specified representative $n_0$, [lem-sfb-longest-weyl-open-cell] gives the dense open immersion $j:U_H\\times_F B_H\\to H$, $j(u,b)=un_0b$. Thus every point of $C$ over every $F$-algebra has unique coordinates $(u,b)$. By [lem-sfb-reductive-borel-pair-structure], $B_H=U_H\\rtimes T_H$, $p_H$ is a homomorphism with kernel $U_H$ and restriction $1$ on $T_H$. In particular $T_H$ normalizes $U_H$.",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-longest-weyl-open-cell",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 22.22 and Lemma 22.23, printed pp.468–469; scheme-level construction written out."
+   }
+  },
+  {
+   "text": "The structure morphism of $H$ is smooth over the field $F$. Apply [lem-weil-pbc-smooth-scheme-over-field-regular], which has no dimension hypothesis, to see that $H$ is regular and locally Noetherian. Clause (1) of [rem-pc-regular-normal] then makes every $\\mathcal O_{H,x}$ an integrally closed domain. No curve-only normality lemma is being used.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056S, lemma-smooth-regular; literature/stacks-project/properties.tex, Tag 0569, lemma-regular-normal."
+   }
+  },
+  {
+   "text": "Since $H$ is nonempty, integral and affine, [lem-sc-integral-function-field-affine-fraction] identifies $K=F(H)$ with the fraction field of the domain $R=F[H]$. By [lem-sc-integral-scheme-stalks-in-function-field], sections on $H$ and on the nonempty open $C$ inject into $K$, and $K$ is also the fraction field of every $\\mathcal O_{H,x}$. Let $z\\in K$ satisfy a monic polynomial over $R$. Mapping its coefficients into $\\mathcal O_{H,x}$ shows that $z$ is integral over that local ring. Step 2 therefore puts $z$ in its image in $K$, for every $x\\in H$. Apply [lem-sc-function-field-sections-glue] with $X=H$ and its open set equal to $H$: it supplies a global section with germ $z$. This is precisely $z\\in R$, proving the asserted integral closedness and both restriction embeddings.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-sc-function-field-sections-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 22.22 and Lemma 22.23, printed pp.468–469; scheme-level construction written out."
+   }
+  },
+  {
+   "text": "Put $q=(w_0\\chi)\\circ p_H:B_H\\to\\mathbf G_m$. Both factors are group-scheme homomorphisms. The morphism $q^{-1}\\circ\\operatorname{pr}_{B_H}\\circ j^{-1}:C\\to\\mathbf G_m$ is consequently an invertible regular function, with exactly the asserted values $q(b)^{-1}$. Here inversion is inversion in $\\mathbf G_m$, not a possible division by a zero section; [def-sc-gm-ga] identifies its coordinate with an invertible Laurent variable. This constructs $f_\\chi$. It is nonzero since it is a unit on the nonempty $C$. Addition of characters is pointwise multiplication, so the same construction gives $f_{\\chi+\\psi}=f_\\chi f_\\psi$ on $C$ and hence in $K$ by step 3.",
+   "uses": [
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 22.22 and Lemma 22.23, printed pp.468–469; scheme-level construction written out."
+   }
+  },
+  {
+   "text": "Compute on $C$, over an arbitrary commutative $F$-algebra. For $v\\in U_H$, left multiplication by $v^{-1}$ changes $(u,b)$ to $(v^{-1}u,b)$, so leaves $f_\\chi$ fixed. Right multiplication by $b_0\\in B_H$ changes $(u,b)$ to $(u,bb_0)$, so multiplies its value by $q(b_0)^{-1}$. For $t\\in T_H$, set $s=n_0^{-1}t^{-1}n_0\\in T_H$. The identity\n$$t^{-1}un_0b=(t^{-1}ut)n_0(sb)$$\nis an identity of morphisms, with $t^{-1}ut\\in U_H$. Since $p_H(sb)=s p_H(b)$, its value is $q(s)^{-1}f_\\chi(un_0b)$. Now\n$$q(s)=(w_0\\chi)(n_0^{-1}t^{-1}n_0)=\\chi(n_0^{-2}t^{-1}n_0^2)=\\chi(t)^{-1}.$$\nIndeed $w_0^2=1$ from [lem-sfb-bruhat-longest-cell-charts] implies $n_0^2\\in T_H(F)$, and the torus is commutative. This gives the weight $\\chi$, including the sign and inverse in the statement. The kernel and projection assertions used in these computations are exactly [lem-sfb-reductive-borel-pair-structure].",
+   "uses": [
+    "lem-sfb-bruhat-longest-cell-charts",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 22.22 and Lemma 22.23, printed pp.468–469; scheme-level construction written out."
+   }
+  },
+  {
+   "text": "Suppose now $f_\\chi\\in R$. The three desired identities are equalities of regular functions respectively on $U_H\\times_F H$, $T_H\\times_F H$, and $H\\times_F B_H$. Their restrictions to the corresponding products with $C$ agree by step 5. These restrictions are injective: $C\\simeq U_H\\times_F B_H$ is affine, since both subgroups are closed in affine $H$. By [lem-sc-integral-scheme-stalks-in-function-field], restriction $R\\to S=\\Gamma(C,\\mathcal O_C)$ is injective (both maps to $K$ agree). The affine-product coordinate formula of [lem-weil-pbc-fibre-product-affine-spectra] identifies each restriction with tensoring $R\\to S$ with the coordinate vector space of the other factor. Such tensoring is injective: choose an $F$-basis of that vector space, making the map a direct sum of copies of $R\\to S$. Thus the identities hold on the entire products. Evaluating these equal morphisms at $A$-points proves them for every $A$, including nonreduced algebras.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 22.22 and Lemma 22.23, printed pp.468–469; scheme-level construction written out."
+   }
+  },
+  {
+   "text": "For completeness the ambient left-translation action is rational, and restricts to the stated subspace. The coordinate Hopf maps of [lem-sfb-affine-group-coordinate-hopf] give\n$$\\delta_L:R\\to R\\otimes_F R,\\quad\\delta_L(f)(g,a)=f(a^{-1}g).$$\nExplicitly, if $\\Delta f=\\sum f_1\\otimes f_2$, then $\\delta_L f=\\sum f_2\\otimes S(f_1)$. The group identities $(ab)^{-1}=b^{-1}a^{-1}$ and $1^{-1}g=g$ yield the coassociativity and counit identities by pullback. Let $\\rho_B(f)(g,b)=f(gb)$ and $D(f)=\\rho_B(f)-f\\otimes q^{-1}$. Then $E=\\ker D$ is exactly $E_{B_H}(w_0\\chi)$. Left and right translations commute: $a^{-1}(gb)=(a^{-1}g)b$. Pulling this equality back shows that $\\delta_L(E)\\subseteq\\ker(D\\otimes1_R)$, with tensor factors reordered. Choose a basis of the last vector space $R$; coefficientwise $D$ vanishes precisely when all coefficients lie in $E$. Hence this kernel is $E\\otimes_F R$. The coaction therefore restricts to $E$ and inherits its two identities. Step 6 puts our extended $f_\\chi$ in $E$, with the required $U_H$-invariance and $T_H$-weight. No finite-dimensionality or characteristic-zero assumption was used.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 22.22 and Lemma 22.23, printed pp.468–469; scheme-level construction written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bruhat-longest-cell-charts",
+  "lem-sfb-longest-weyl-open-cell",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-function-field-sections-glue",
+  "def-sc-gm-ga",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-affine-group-coordinate-hopf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne, 21.72–21.85 and 22.21–22.23; explicit normality assembly and universal-algebra coaction argument supplement the printed proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The coordinate ring of a smooth connected algebraic group is a normal domain and characters define rational semi invariant functions on its big cell",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instIsDomain\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R], IsDomain W'.CoordinateRing\", \"doc\": \"If $ R $ is a domain, then the coordinate ring of an affine Weierstrass curve over $ R $, defined as the quotient ring $ R[X, Y] $ modulo the ideal generated by the Weierstrass polynomial $ Y^2 + (a_1\"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [IsAlgClosed k] [inst_3 : Fintype G]\\n  [inst_4 : Invertible ↑(Fintype.card G)] (V W : FDRep k G) [CategoryTheory.Simple V] [CategoryTheory.Simple W],\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.instAlgebra\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [inst : CommRing R] → {W' : WeierstrassCurve.Affine R} → Algebra R W'.CoordinateRing\", \"doc\": \"The coordinate ring of an affine Weierstrass curve over a commutative ring $ R $ is an $ R $-algebra, inheriting the structure from the polynomial ring $ R[X, Y] $ modulo the ideal generated by the We\"}\n  {\"name\": \"FDRep.char_mul_comm\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Monoid G] (V : FDRep k G) (g h : G),\\n  V.character (h * g) = V.character (g * h)\", \"doc\": \"For any finitely generated representation $V$ of a monoid $G$ over a field $k$, and for any elements $g, h \\\\in G$, the character evaluated at the product $hg$ is equal to the character evaluated at th\"}\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(R : CommRingCat) → [inst : IsDomain ↑R] → Algebra ↑R ↑(AlgebraicGeometry.Spec R).functionField\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the function field of the scheme $ \\\\operatorname{Spec}(R) $ (defined as the stalk of the structure sheaf at the generic point of $ \\\\operatorn\"}\n  {\"name\": \"FDRep.average_char_eq_finrank_invariants\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [inst_2 : Fintype G]\\n  [inst_3 : Invertible ↑(Fintype.card G)] (V : FDRep k G),\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g = ↑(Module.finrank k ↥(Representation.invariants V.ρ))\", \"doc\": \"For a finite group $ G $ and a finitely generated representation $ V $ of $ G $ over a commutative ring $ k $, the average of the character values of $ V $ over all elements of $ G $, computed as $ \\\\f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational function on the big Bruhat cell whose positive power is regular extends to the whole reductive group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Subgroup.isRegularAtInfty_of_neg_one_mem\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {𝒢 : Subgroup (GL (Fin 2) R)}, -1 ∈ 𝒢 → 𝒢.IsRegularAtInfty\", \"doc\": \"If the subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,R)$ contains $-1$, then $\\\\mathcal{G}$ is regular at infinity, meaning its strict periods subgroup equals its periods subgroup ($\\\\mathcal{G}.\\\\text{s\"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For any matrix $ x $ in the Geck construction Lie algebra associated with a root pairing $ P $, the conjugation of $ x $ by the block matrix $ \\\\omega = \\\\begin{bmatrix} I_S & 0 \\\\\\\\ 0 & P \\\\end{bmatrix} $\"}\n  {\"name\": \"LieModule.exists_isRegular\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [inst_5 : AddCommGroup M] [inst_6 : Module R M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule R L M] [inst_9 : Module.Finit\", \"doc\": \"If $ R $ is an infinite commutative ring, then there exists an element $ x $ in the Lie algebra $ L $ over $ R $ such that $ x $ is a regular element in the Lie module $ M $. Here, a regular element $\"}\n  {\"name\": \"LieAlgebra.exists_isRegular\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [IsDomain R] [Infinite R], ∃ x, LieAlgebra.IsRegular R x\", \"doc\": \"For any infinite commutative ring $ R $, there exists a regular element $ x $ in the Lie algebra $ L $ over $ R $. An element $ x $ is regular if its adjoint action $ \\\\text{ad}_x $ has a non-vanishing\"}\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"LieAlgebra.exists_isRegular_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [IsDomain R],\\n  ↑(Module.finrank R L) ≤ Cardinal.mk R → ∃ x, LieAlgebra.IsRegular R x\", \"doc\": \"If the finite rank of a Lie algebra $ L $ over a commutative ring $ R $ is less than or equal to the cardinality of $ R $, then there exists a regular element $ x $ in $ L $. A regular element is one \"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"In the Geck construction for a root pairing, the ω-conjugated Lie submodule $\\\\omega\\\\text{-ConjLieSubmodule}(N)$ equals the entire Lie module (denoted $\\\\top$) if and only if the original Lie submodule \"}\n  {\"name\": \"LieModule.exists_isRegular_of_finrank_le_card\", \"module\": \"Mathlib/Algebra/Lie/Rank\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : Module.Finite R L] [inst_4 : Module.Free R L] [inst_5 : AddCommGroup M] [inst_6 : Module R M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule R L M] [inst_9 : Module.Finit\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ a finitely generated $ R $-module. If the finite rank of $ M $ satisfies $ \\\\operatorname{finrank}_R(M) \\\\leq |R| $, then there exists an element $ x \\\\in L \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsIntegrallyClosed\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (R : Type u_1) [CommRing R] : Prop\", \"doc\": \"`R` is integrally closed if all integral elements of `Frac(R)` are also elements of `R`.\\n\\nThis definition uses `FractionRing R` to denote `Frac(R)`. See `isIntegrallyClosed_iff`\\nif you want to choose \"}\n  {\"name\": \"Field.instIsIntegrallyClosed\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (K : Type u_1) [Field K] : IsIntegrallyClosed K\", \"doc\": \"Any field is integral closed.\"}\n  {\"name\": \"IsIntegrallyClosedIn.inst\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] : IsIntegrallyClosedIn R R\", \"doc\": \"\"}\n  {\"name\": \"IsIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (R : Type u_1) (A : Type u_2) [CommRing R] [CommRing A] [Algebra R A] : Prop\", \"doc\": \"`R` is integrally closed in `A` if all integral elements of `A` are also elements of `R`.\"}\n  {\"name\": \"isIntegrallyClosed_iff_isIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] (K : Type u_4) [CommRing K] [Algebra R K] [IsFractionRing R K] : IsIntegrallyClosed R ↔ IsIntegrallyClosedIn R K\", \"doc\": \"`R` is integrally closed iff it is the integral closure of itself in its field of fractions.\"}\n  {\"name\": \"IsIntegrallyClosed.instIsIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] {K : Type u_3} [CommRing K] [Algebra R K] [ifr : IsFractionRing R K] [iic : IsIntegrallyClosed R] : IsIntegralClosure R R K\", \"doc\": \"Note that this is not a duplicate instance, since `IsIntegrallyClosed R` is instead defined\\nas `IsIntegrallyClosed R R (FractionRing R)`.\"}\n  {\"name\": \"isIntegrallyClosed_iff_isIntegralClosure\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] (K : Type u_4) [CommRing K] [Algebra R K] [IsFractionRing R K] : IsIntegrallyClosed R ↔ IsIntegralClosure R R K\", \"doc\": \"`R` is integrally closed iff it is the integral closure of itself in its field of fractions.\"}\n  {\"name\": \"IsIntegrallyClosed.of_isIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (R : Type u_4) (K : Type u_5) [CommRing R] [Field K] [Algebra R K] [FaithfulSMul R K] [IsIntegrallyClosedIn R K] : IsIntegrallyClosed R\", \"doc\": \"\"}\n  {\"name\": \"IsIntegrallyClosed.of_equiv\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] (f : R ≃+* S) [h : IsIntegrallyClosed R] : IsIntegrallyClosed S\", \"doc\": \"\"}\n  {\"name\": \"IsIntegrallyClosed.of_isIntegrallyClosed_of_isIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" (R : Type u_1) (S : Type u_2) [CommRing R] [CommRing S] [Algebra R S] [IsDomain S] [FaithfulSMul R S] [IsIntegrallyClosed S] [IsIntegrallyClosedIn R S] : IsIntegrallyClosed R\", \"doc\": \"\"}\n  {\"name\": \"AlgEquiv.isIntegrallyClosedIn\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} [CommRing R] {A : Type u_2} {B : Type u_3} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] (e : A ≃ₐ[R] B) : IsIntegrallyClosedIn R A ↔ IsIntegrallyClosedIn R B\", \"doc\": \"Being integrally closed is preserved under algebra isomorphisms.\"}\n  {\"name\": \"IsIntegrallyClosedIn.algebraMap_eq_of_integral\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IntegrallyClosed\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] [IsIntegrallyClosedIn R A] {x : A} : IsIntegral R x → ∃ y, (algebraMap R A) y = x\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "big.cell|Bruhat|semiInvariant|semi_invariant",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/Lattice.lean\", \"line\": \"23\", \"text\": \"`ι → K` by the homothety relation, one obtains the vertices of what is called the Bruhat-Tits tree\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Big cell semi invariant character functions on a reductive algebraic group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.le_comap_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(g : G) : (invariants <| ρ.comp S.subtype) ≤ (invariants <| ρ.comp S.subtype).comap (ρ g)\", \"doc\": \"For every group element $ g \\\\in G $, the submodule of vectors invariant under the action of subgroup $ S $ is contained within the preimage under $ \\\\rho(g) $ of itself, i.e., $ V^S \\\\subseteq (\\\\rho(g))\"}\n  {\"name\": \"FDRep.char_conj\", \"module\": \"Mathlib.RepresentationTheory.Character\", \"type\": \"(V : FDRep k G) (g : G) (h : G) : V.character (h * g * h⁻¹) = V.character g\", \"doc\": \"For any finitely generated representation $V$ of a group $G$ over a field $k$, and for all elements $g,h \\\\in G$, the character $\\\\chi_V$ satisfies $\\\\chi_V(hgh^{-1}) = \\\\chi_V(g)$. This reflects the inva\"}\n  {\"name\": \"FDRep.character\", \"module\": \"Mathlib.RepresentationTheory.Character\", \"type\": \"(V : FDRep k G) (g : G)\", \"doc\": \"Let $k$ be a field and $G$ be a monoid. For a finite-dimensional representation $V$ of $G$ over $k$, with corresponding monoid homomorphism $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, the character $\\\\chi_V$ is a\"}\n  {\"name\": \"MeasureTheory.Measure.modularCharacterFun\", \"module\": \"Mathlib.MeasureTheory.Group.ModularCharacter\", \"type\": \"(g : G) : ℝ≥0\", \"doc\": \"For a locally compact topological group $ G $ with Haar measure $ \\\\mu $, the modular character function assigns to each element $ g \\\\in G $ the non-negative real number $ c $ such that the pushforward\"}\n  {\"name\": \"MeasureTheory.Measure.addModularCharacterFun\", \"module\": \"Mathlib.MeasureTheory.Group.ModularCharacter\", \"type\": \"{G : Type u_1} →\\n  [inst : TopologicalSpace G] → [inst_1 : AddGroup G] → [IsTopologicalAddGroup G] → [LocallyCompactSpace G] → G → NNReal\", \"doc\": \"The function assigns to each element $ g $ in a locally compact topological additive group $ G $ a non-negative real number representing the scalar factor by which the additive Haar measure changes un\"}\n  {\"name\": \"Representation.mem_invariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(v : V) : v ∈ invariants ρ ↔ ∀ g : G, ρ g v = v\", \"doc\": \"For a commutative semiring $k$, a group $G$, and a $k$-module $V$ equipped with a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, an element $v \\\\in V$ belongs to the invariant submodule $V^G$ if and o\"}\n  {\"name\": \"AddChar.linearIndependent\", \"module\": \"Mathlib.Analysis.Fourier.FiniteAbelian.Orthogonality\", \"type\": \"[Finite G] : LinearIndependent R ((⇑) : AddChar G R → G → R)\", \"doc\": \"For a finite additive group $G$ and a ring $R$, the set of additive characters $\\\\chi : G \\\\to R$ (group homomorphisms from $G$ to the multiplicative group of $R$) is linearly independent over $R$. That\"}\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib.RepresentationTheory.Character\", \"type\": \"(V W : FDRep k G) [Simple V] [Simple W] :\\n  ⅟(Fintype.card G : k) • ∑ g : G, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then ↑1 else ↑0\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group representations, root pairings, Lie algebra weights and integral-closure lemmas do not state this algebraic-group scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular functions from torus characters on the open Bruhat cell of a reductive algebraic group and their semi invariance identities",
+   "results": "{\"t\": \"2026-10-23T15:02:14Z\", \"tool\": \"leanfinder\", \"query\": \"Regular functions from torus characters on the open Bruhat cell of a reductive algebraic group and their semi invariance identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.average_char_eq_finrank_invariants\", \"MeasureTheory.Measure.modularCharacterFun\", \"FDRep.char_orthonormal\", \"MeasureTheory.Measure.modularCharacter\", \"MeasureTheory.Measure.modularCharacterFun_map_mul\", \"FDRep.char_linHom\", \"MeasureTheory.distribHaarChar\", \"LieModule.exists_isRegular\"], \"digest\": \"2ad5c28300340128\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the logged hits; integral-domain criteria and abstract character/Haar-measure declarations do not construct Bruhat-cell functions or prove the reductive group scheme assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "Bruhat|big.cell|semiInvariant|semi_invariant",
+   "results": "{\"t\": \"2026-10-23T15:03:58Z\", \"tool\": \"grep\", \"query\": \"Bruhat|big.cell|semiInvariant|semi_invariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/Lattice.lean\"], \"digest\": \"f5278a47a6485886\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the logged hits; integral-domain criteria and abstract character/Haar-measure declarations do not construct Bruhat-cell functions or prove the reductive group scheme assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Character functions on the big Bruhat cell of a reductive group are left unipotent invariant and torus weight vectors",
+   "results": "{\"t\": \"2026-10-23T15:03:58Z\", \"tool\": \"leansearch\", \"query\": \"Character functions on the big Bruhat cell of a reductive group are left unipotent invariant and torus weight vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.char_conj\", \"FDRep.character\", \"MulChar.ext\", \"MeasureTheory.Measure.addModularCharacterFun\", \"FDRep.char_orthonormal\", \"AddChar.linearIndependent\", \"MulChar.ext_iff\", \"MulChar.casesOn\"], \"digest\": \"cd9e0fdcadde5e09\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the logged hits; integral-domain criteria and abstract character/Haar-measure declarations do not construct Bruhat-cell functions or prove the reductive group scheme assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\"",
+   "results": "{\"t\": \"2026-10-23T15:03:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegrallyClosed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsIntegrallyClosed\", \"Field.instIsIntegrallyClosed\", \"IsIntegrallyClosedIn.inst\", \"IsIntegrallyClosedIn\", \"isIntegrallyClosed_iff_isIntegrallyClosedIn\", \"IsIntegrallyClosed.instIsIntegralClosure\", \"isIntegrallyClosed_iff_isIntegralClosure\", \"IsIntegrallyClosed.of_isIntegrallyClosedIn\"], \"digest\": \"e48874180cb4864e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the logged hits; integral-domain criteria and abstract character/Haar-measure declarations do not construct Bruhat-cell functions or prove the reductive group scheme assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group has an integrally closed coordinate domain and regular semi invariant functions from its dense Bruhat cell",
+   "results": "{\"t\": \"2026-10-23T15:03:59Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine algebraic group has an integrally closed coordinate domain and regular semi invariant functions from its dense Bruhat cell\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"Algebra.IsInvariant.isIntegral_of_profinite\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"Algebra.IsInvariant.isIntegral\", \"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial\"], \"digest\": \"c27de1bc0c601275\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the logged hits; integral-domain criteria and abstract character/Haar-measure declarations do not construct Bruhat-cell functions or prove the reductive group scheme assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dominant-character-highest-line",
+  "date": "2026-10-23",
+  "group": "Q80"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Nonvanishing of rho section modules by a highest-weight matrix coefficient in the Steinberg endomorphism detection input. Milne 22.20 proof: Corollary 1.35 and the smoothness discussion before Proposition 1.26 (integrality and regularity); Theorem 21.73(b), Definition 21.72; proof of Proposition 22.22 and Lemmas 22.23--22.25, pp.469--470. The scheme-level character identities are the displayed calculations in the proof of 22.22.",
+   "via": [
+    "lem-sfb-dominant-character-highest-line",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-big-cell-character-functions",
+  "worker": "stage1",
+  "summary": "Reused all geometric inputs already in the DAG; constructed the character units, computed the weights and right covariance explicitly, extended identities by injective tensor restriction, and verified rationality by a kernel calculation. No new nodes. Corrected doubled TeX escapes and specified the function field without changing the mathematical statement.",
+  "blueprint": "The inherited alteration/GIT/highest-weight prerequisite chain under det-thm-sf-ctf-stability-direct-images (3), as recorded in blueprint.from.place: Milne 22.22 open cell and 22.23 normal function-field input. The current latest blueprint gives no separate node for these character functions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Dimension-free geometric tool: smooth over a field implies regular; used on H, with no replacement of a unit-level proof route."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic regular-to-normal implication, used only after regularity of H is established."
+   },
+   {
+    "node": "lem-sc-function-field-sections-glue",
+    "why": "Generic sheaf gluing of an element of an integral scheme function field regular at every point; used for global integral closedness, with no curve hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine-product coordinate formula, used to express restriction to a product with the open cell as a tensor map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "rem-pc-regular-normal",
+  "lem-sc-function-field-sections-glue",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-e39f41f79",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-e39f41f79 (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item, all 11 cited statements and Milne iAG2017 Prop. 22.22 and Lemma 22.23 (pp. 469–470). The delivery is one commit with the item and the report and no new nodes; no re-split note exists. The statement matches live except one added sentence, F(H)=O_{H,eta}, with def-sc-function-field added to stmt_deps; nothing was weakened, and proof_deps equal the union of the step uses. Step 1: bruhat-longest-cell-charts gives the involution w_0 and geometric integrality; longest-weyl-open-cell gives the open immersion for every n_0; borel-pair gives B=U⋊T and that p has kernel U. Step 2: smooth over a field gives regular, and rem-pc-regular-normal (1) gives normal stalks. Step 3: integral closedness via the affine fraction field, the stalk fraction fields and gluing with U=H; correct. Step 4: the unit q^{-1}∘pr_B∘j^{-1} and f_{χ+ψ}=f_χ f_ψ. Step 5: I recomputed s=n_0^{-1}t^{-1}n_0 and (w_0χ)(s)=χ(t)^{-1}, using n_0^2∈T(F); this gives weight χ. Step 6: C≅U×B is affine, restriction is tensoring the injective map R→S over a field, so the identities hold over nonreduced A as well. Step 7: δ_L f=Σ f_2⊗S(f_1) is a left coaction under the V⊗F[H] convention, and ker(D⊗1)=E⊗R. Small cases: for SL_2, f_χ=a^m (a the lower-left entry of u n_0 b) with left weight t^m, and it does not extend when m<0, consistent with the conditional; the torus and trivial-group cases also check. No duplicate found in the DAG. Accepted tool_uses: the smooth-regular, regular-normal, function-field gluing and affine-product nodes, all generic. Batch-5 flag: lem-trf-fppf-covering-base-change (Tag 021O, fppf coverings stable under base change) is a general site fact, not part of either assumed statement or its proof, so no RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NormalBigCellCharacterFunctions",
+  "declaration": "AlgebraicGeometry.normal_big_cell_character_functions",
+  "declarations": [
+   "AlgebraicGeometry.NormalBigCell.chart",
+   "AlgebraicGeometry.NormalBigCell.value",
+   "AlgebraicGeometry.NormalBigCell.chartFunction",
+   "AlgebraicGeometry.NormalBigCell.leftCoaction",
+   "AlgebraicGeometry.normal_big_cell_character_functions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NormalBigCellCharacterFunctions.lean",
+  "statement": "theorem normal_big_cell_character_functions {F : Type u} [Field F] [IsAlgClosed F] (H T B U : Grp (Over (Spec (.of F)))) (hH : ReductiveTorusCentralizer.IsReductive H) (iT : T ⟶ H) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (iB : B ⟶ H) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) (iU : U ⟶ B) (hU : IsClosedSubgroupScheme iU.hom.hom ∧ IsNormalSubgroupScheme iU.hom.hom ∧ Smooth U.X.hom ∧ ConnectedSpace U.X.left ∧ SolvableGroupStructure.IsUnipotent U ∧ ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) (p : B ⟶ T) (hp : j ≫ p = 𝟙 T) (hker : IsPullback iU.hom.hom (toUnit U.X) p.hom.hom η[T.X]) (aB : ModObj T.X B.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φplus : Finset (RankOneRoots.Character T)) (hΦplus : ∀ χ : RankOneRoots.Character T, χ ∈ Φplus ↔ χ.hom.hom ≠ 1 ∧ @TorusCharacterTangent.weightSpace F _ T B aB χ ≠ ⊥) (n₀ : RankOneRoots.normalizer iT) (s : Aut T) (hs : ∀ (A : Over (Spec (.of F))) (t : A ⟶ T.X), t ≫ s.hom.hom.hom ≫ iT.hom.hom = (toUnit A ≫ n₀.val) * (t ≫ iT.hom.hom) * (toUnit A ≫ n₀.val)⁻¹) (hlong : Set.image (fun χ : RankOneRoots.Character T ↦ s.inv.hom.hom ≫ χ.hom.hom) (Φplus : Set _) = Set.image (fun χ : RankOneRoots.Character T ↦ χ.hom.hom⁻¹) (Φplus : Set _)) : IsOpenImmersion (NormalBigCell.chart iU iB n₀.val).left ∧ DenseRange (NormalBigCell.chart iU iB n₀.val).left ∧ ∃ (_ : IsIntegral H.X.left) (_ : IsAffine H.X.left) (_ : Nonempty (⊤ : H.X.left.Opens)), IsDomain Γ(H.X.left, ⊤) ∧ IsIntegrallyClosed Γ(H.X.left, ⊤) ∧ IsFractionRing Γ(H.X.left, ⊤) H.X.left.functionField ∧ Function.Injective (H.X.left.germToFunctionField ⊤) ∧ ∃ (C : H.X.left.Opens) (_ : Nonempty C) (e : (U.X ⊗ B.X).left ≅ C.toScheme), e.hom ≫ C.ι = (NormalBigCell.chart iU iB n₀.val).left ∧ Function.Injective (H.X.left.germToFunctionField C) ∧ ∃ f : RankOneRoots.Character T → (Γ(H.X.left, C))ˣ, (∀ χ, e.hom.appTop (C.topIso.inv (f χ).val) = NormalBigCell.chartFunction (U := U) p s χ) ∧ (∀ χ, H.X.left.germToFunctionField C (f χ).val ≠ 0) ∧ (∀ χ ψ ξ : RankOneRoots.Character T, ξ.hom.hom = χ.hom.hom * ψ.hom.hom → f ξ = f χ * f ψ) ∧ (∀ (χ : RankOneRoots.Character T) (r : Γ(H.X.left, ⊤)), H.X.left.germToFunctionField ⊤ r = H.X.left.germToFunctionField C (f χ).val → (∀ (A : CommAlgCat.{u} F) (u : StandardGroupSchemes.affine F A ⟶ U.X) (t : StandardGroupSchemes.affine F A ⟶ T.X) (g : StandardGroupSchemes.affine F A ⟶ H.X) (b : StandardGroupSchemes.affine F A ⟶ B.X), NormalBigCell.value A ((u ≫ iU.hom.hom ≫ iB.hom.hom)⁻¹ * g) r = NormalBigCell.value A g r ∧ NormalBigCell.value A ((t ≫ iT.hom.hom)⁻¹ * g) r = RankOneRoots.multiplicativeValue A (t ≫ χ.hom.hom) * NormalBigCell.value A g r ∧ NormalBigCell.value A (g * (b ≫ iB.hom.hom)) r = RankOneRoots.multiplicativeValue A ((b ≫ p.hom.hom ≫ s.inv.hom.hom ≫ χ.hom.hom)⁻¹) * NormalBigCell.value A g r)) ∧ (∀ χ : RankOneRoots.Character T, ∃ (E : Submodule F Γ(H.X.left, ⊤)) (δ : E →ₗ[F] E ⊗[F] Γ(H.X.left, ⊤)), (∀ r : Γ(H.X.left, ⊤), r ∈ E ↔ ∀ (A : CommAlgCat.{u} F) (g : StandardGroupSchemes.affine F A ⟶ H.X) (b : StandardGroupSchemes.affine F A ⟶ B.X), NormalBigCell.value A (g * (b ≫ iB.hom.hom)) r = RankOneRoots.multiplicativeValue A ((b ≫ p.hom.hom ≫ s.inv.hom.hom ≫ χ.hom.hom)⁻¹) * NormalBigCell.value A g r) ∧ E.subtype.rTensor Γ(H.X.left, ⊤) ∘ₗ δ = NormalBigCell.leftCoaction H ∘ₗ E.subtype ∧ HopfAction.Coassociative F Γ(H.X.left, ⊤) E δ ∧ HopfAction.Counital F Γ(H.X.left, ⊤) E δ ∧ ∀ r : Γ(H.X.left, ⊤), H.X.left.germToFunctionField ⊤ r = H.X.left.germToFunctionField C (f χ).val → r ∈ E)",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary definitions have explicit data: the multiplication chart, evaluation, inverse Laurent-coordinate pullback and canonical left Hopf coaction. The theorem uses inverse conjugation by the specified normalizer representative to render w₀ on characters. It characterizes E by right covariance over all algebras and pins its rational coaction to canonical left translation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ff4d4b2b",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_deps, the module and the dependency declarations (RankOneRoots, RationalHighestWeight Hopf instance, HopfAction Coassociative/Counital, bruhat_longest_cell_charts, reductive_borel_pair_structure). Hypotheses reuse the Borel-pair/Bruhat interface verbatim; U=R_u(B), p and the kernel are pinned; Φ+ = nonzero Lie(B) weights; s is pinned to conjugation by n₀ and hlong characterises w₀ uniquely. Conclusions: chart open immersion/dense; H integral and affine, R normal domain with Frac = functionField; injective germs; C pinned by e; f_χ units pinned to chartFunction (inverse in G_m), nonzero, multiplicative. Recomputed the weight f(t⁻¹g)=χ(t)f(g) via n₀²∈T and the right covariance q(b)⁻¹. E is characterised exactly; δ is unique by injective rTensor; leftCoaction=(1⊗S)∘comm∘Δ satisfies the right-comodule laws. Edge cases: trivial/torus, SL2 m<0, zero character, char p, zero/nonreduced A, universes u. Node differs from live only in lean + 2 landed, used stmt_deps; statement verbatim; definitions non-hollow; only the theorem is sorry; docstrings, report sections and line lengths OK. No file changed, no compile."
+ }
+}

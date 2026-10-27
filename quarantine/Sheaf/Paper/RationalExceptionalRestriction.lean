@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.Paper.RationalRestrictionGlue
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 import Sheaf.Paper.CompactificationLocalizing
-import Sheaf.Paper.ContinuousQbarExceptionalPreservation
 import Mathlib.CategoryTheory.Adjunction.Restrict
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
@@ -71,13 +70,7 @@ Proof:
    closed support and finite-cover gluing. The predicate equality of
    det-def-localizing-closure-ctf-equals-bc on X supplies finite Tor amplitude.
    Both invocations use only their finite-extension alternatives.
-3. For C(-, Qbar_ell), apply
-   lem-sfb-continuous-qbar-exceptional-preservation with the same f, c, h, G and
-   supplied adjunction. This isolates the geometric preservation component for
-   this coefficient; no identification with the finite-subextension-valued ring
-   is asserted. The lemma follows the unit's same affine-factorization,
-   affine-space-purity, closed-support and finite-cover route.
-4. Every property in the intersection defining sk-def-localizing-closure contains
+3. Every property in the intersection defining sk-def-localizing-closure contains
    Dctf, giving its full inclusion constantModelFiniteTorToLocalizing. Use the
    preservation statements to lift the two original functors to Dctf. The
    equalities after these full inclusions hold by reflexivity, including maps.
@@ -98,8 +91,7 @@ theorem rationalExceptional_preserves_constructibleFiniteTor
     (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
     [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) ∨
-      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ))))
+    (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)))
     (c : Compactification.BoundaryCompactification f)
     (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y
       ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
@@ -128,38 +120,34 @@ theorem rationalExceptional_preserves_constructibleFiniteTor
     (Y ↘ Spec (.of k))
   have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated
     (Y ↘ Spec (.of k))
-  have hadmissible : IsLocalizingAdmissibleCoefficient ℓ Λ := by
-    rcases _hΛ with hE | hQ
-    · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, hE⟩)))
-    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl hQ)))))
+  have hadmissible : IsLocalizingAdmissibleCoefficient ℓ Λ :=
+    Or.inr (Or.inr (Or.inr (Or.inl ⟨E, _hΛ⟩)))
   have hF := (compactification_localizing Λ ℓ k f c hadmissible).2.2.2
   have hG : ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory,
       (constantModelBoundedConstructible Λ Y K.obj ∧
         DerivedCategory.finiteTorAmplitude _ K.obj) →
       constantModelBoundedConstructible Λ X (G.obj K).obj ∧
         DerivedCategory.finiteTorAmplitude _ (G.obj K).obj := by
-    rcases _hΛ with hE | hQ
-    · have hcoeff :
-          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
-          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
-          (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
-            Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨
-            Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
-          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) :=
-        Or.inr (Or.inr (Or.inl ⟨E, Or.inr hE⟩))
-      have hEqX := (localizingClosure_ctf_equals_bc ℓ X Λ hcoeff).1.2.2.1
-      have hcoeff' : Nonempty (Mon.mk Λ ≅ Mon.mk
-          ((sheafCompose (coherentTopology Profinite.{u})
-            (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-              (Profinite.padicSubfieldCondensedRing ℓ E.1))) ∨
-          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) := Or.inl hE
-      obtain ⟨_, _, _, hGbc, _⟩ :=
-        (rationalRestrictionGlue.{u, u} Λ ℓ E.1 hcoeff' k (ringChar k)
-          (Fact.out : ringChar k ≠ ℓ) f c h G _adj).2
-      intro K hK
-      exact (congrFun hEqX _).mpr (hGbc K hK.1)
-    · exact continuousQbarExceptional_preserves_constructibleFiniteTor
-        Λ ℓ k f hQ c h G _adj
+    have hE := _hΛ
+    have hcoeff :
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+        (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) :=
+      Or.inr (Or.inr (Or.inl ⟨E, Or.inr hE⟩))
+    have hEqX := (localizingClosure_ctf_equals_bc ℓ X Λ hcoeff).1.2.2.1
+    have hcoeff' : Nonempty (Mon.mk Λ ≅ Mon.mk
+        ((sheafCompose (coherentTopology Profinite.{u})
+          (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+            (Profinite.padicSubfieldCondensedRing ℓ E.1))) ∨
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) := Or.inl hE
+    obtain ⟨_, _, _, hGbc, _⟩ :=
+      (rationalRestrictionGlue.{u, u} Λ ℓ E.1 hcoeff' k (ringChar k)
+        (Fact.out : ringChar k ≠ ℓ) f c h G _adj).2
+    intro K hK
+    exact (congrFun hEqX _).mpr (hGbc K hK.1)
   refine ⟨hG, ?_⟩
   let F₀ : ConstantModelConstructibleFiniteTor Λ X ⥤
       ConstantModelConstructibleFiniteTor Λ Y :=

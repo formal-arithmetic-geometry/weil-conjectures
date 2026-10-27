@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-space-reduced-map-closed-factorization",
+ "kind": "statement",
+ "title": "Factoring reduced algebraic spaces through closed subspaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X,Y$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Let $i:Z\\hookrightarrow X$ be a closed subspace. A closed subspace means a subfunctor whose inclusion becomes a closed immersion on every scheme test [def-weil-closed-immersion]. Assume $Y$ is reduced, meaning that its etale scheme charts have no nonzero nilpotents in their local rings. For every $S$-morphism $f:Y\\to X$, there is a morphism $g:Y\\to Z$ with $ig=f$ if and only if $|f|(|Y|)\\subseteq |Z|$ in the atlas point topology [def-a1-space-point-topology]. Such a factorization is unique.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03JJ (lemma-map-into-reduction); uniqueness because a closed subspace is a subsheaf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "If $f=i\\circ g$, then $|f|(y)=|i|(|g|(y))$ for every point class $y$, so the point-image containment is necessary. Since $Z\\subseteq X$ is a subfunctor, each $Z(T)\\to X(T)$ is injective. Consequently two morphisms $Y\\to Z$ with composite $f$ agree on every scheme test and are equal. It remains to construct a factorization from the point-image containment.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JJ (lemma-map-into-reduction), proof; source-atlas pullback form of the same scheme-local argument."
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas $b:V\\to Y$ using [def-trf-algebraic-space]. By the assumed meaning of reducedness, $V$ is reduced. The closed subspace $Z$ is an algebraic space over $S$ by [def-sfb-space-closed-subspace] (a subfunctor with closed-immersion inclusion is equivalently an algebraic space with that property). Put $C=V\\times_{X,f\\circ b}Z$ and let $c:C\\to V$ be the projection. The scheme-test definition of the closed subspace makes $C$ a scheme and $c$ a closed immersion. Apply the arbitrary-base-change point-image identity of [lem-a1-space-point-open-calculus] to $Z\\to X$ and $f\\circ b:V\\to X$: its image is $|f\\circ b|^{-1}(|Z|)=|V|$, by the assumed containment. Thus $c$ is surjective on scheme points.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-space-closed-subspace",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JJ (lemma-map-into-reduction), proof; source-atlas pullback form of the same scheme-local argument."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to the closed immersion $c:C\\to V$ and the identity of the reduced scheme $V$. The preceding surjectivity is exactly the required image containment. It gives $s:V\\to C$ with $c\\circ s=1_V$. This $s$ is over $S$ because $c$ is over $S$ and $c\\circ s=1_V$. Composing $s$ with $C\\to Z$ gives $k:V\\to Z$ satisfying $i\\circ k=f\\circ b$ by the defining pullback equation.",
+   "uses": [
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JJ (lemma-map-into-reduction), proof; source-atlas pullback form of the same scheme-local argument."
+   }
+  },
+  {
+   "text": "For every $S$-scheme $T$ and $y\\in Y(T)$, [lem-a1-representable-etale-fppf-local-lifting] applied to $b$ gives an fppf covering $v:T^{\\prime}\\to T$ and $a:T^{\\prime}\\to V$ with $b(a)=y|_{T^{\\prime}}$. Set $z^{\\prime}=k(a)\\in Z(T^{\\prime})$. Both restrictions of $z^{\\prime}$ to $T^{\\prime}\\times_TT^{\\prime}$ have image $f(y)$ restricted there, so they coincide by the sectionwise injectivity of $Z\\subseteq X$. Since $Z$ is an algebraic space [def-sfb-space-closed-subspace], hence an fppf sheaf [def-trf-algebraic-space], its sheaf axiom gives a unique $z\\in Z(T)$; its image is $f(y)$ since these sections of the sheaf $X$ agree on the cover. The unique-lift property makes the assignment $y\\mapsto z$ commute with every restriction $T_1\\to T$, since restriction of $z$ is a lift of $f(y)|_{T_1}$. These assignments therefore define an $S$-morphism $g:Y\\to Z$ with $i\\circ g=f$.",
+   "uses": [
+    "lem-a1-representable-etale-fppf-local-lifting",
+    "def-trf-algebraic-space",
+    "def-sfb-space-closed-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JJ (lemma-map-into-reduction), proof; source-atlas pullback form of the same scheme-local argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-sfb-space-closed-subspace",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-a1-representable-etale-fppf-local-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03JJ (lemma-map-into-reduction), proof: scheme-local factorization and descent through a subsheaf. Use the closed pullback to a source atlas and apply Schemes Tag 0356 to its identity; spell out the final sheaf descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A reduced algebraic space map factors through a closed subspace exactly when its point image is contained in that closed subspace",
+   "results": "{\"t\": \"2026-10-23T21:10:50Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced algebraic space map factors through a closed subspace exactly when its point image is contained in that closed subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.Scheme.Hom.range_subset_ker_support\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal\", \"AlgebraicGeometry.Scheme.Hom.toImage\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\"], \"digest\": \"58ad2abc7faaa869\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and scheme-only candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88, Morphisms/ClosedImmersion.lean:210-218 and Morphisms/SchemeTheoreticallyDominant.lean:38-78; none states this algebraic-space assertion. Extending a scheme theorem by etale descent is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.lift",
+   "results": "{\"t\": \"2026-10-23T21:10:51Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion.lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\"], \"digest\": \"1219668b4934169f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and scheme-only candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88, Morphisms/ClosedImmersion.lean:210-218 and Morphisms/SchemeTheoreticallyDominant.lean:38-78; none states this algebraic-space assertion. Extending a scheme theorem by etale descent is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|factor.*reduc|reduc.*factor",
+   "results": "{\"t\": \"2026-10-23T21:10:51Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|factor.*reduc|reduc.*factor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and scheme-only candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88, Morphisms/ClosedImmersion.lean:210-218 and Morphisms/SchemeTheoreticallyDominant.lean:38-78; none states this algebraic-space assertion. Extending a scheme theorem by etale descent is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms from reduced algebraic spaces factor through closed subspaces containing their topological image",
+   "results": "{\"t\": \"2026-10-23T21:10:51Z\", \"tool\": \"leansearch\", \"query\": \"Morphisms from reduced algebraic spaces factor through closed subspaces containing their topological image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.Scheme.Hom.isClosedEmbedding\", \"AlgebraicGeometry.IsClosedImmersion.base_closed\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\"], \"digest\": \"e3571236b7c7e513\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and scheme-only candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88, Morphisms/ClosedImmersion.lean:210-218 and Morphisms/SchemeTheoreticallyDominant.lean:38-78; none states this algebraic-space assertion. Extending a scheme theorem by etale descent is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|reduced.*factor|factor.*reduced",
+   "results": "{\"t\": \"2026-10-23T21:37:59Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|reduced.*factor|factor.*reduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all semantic hits are scheme morphisms or locally ringed space morphisms; IsClosedImmersion.lift and lift_fac in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:210,215 require a kernel inclusion and do not state the algebraic-space result. The grep found no AlgebraicSpace or reduced-factorization declarations. A second semantic phrasing returned only scheme candidates again."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced algebraic spaces have a unique lift through a closed immersion containing their topological image",
+   "results": "{\"t\": \"2026-10-23T21:37:59Z\", \"tool\": \"leansearch\", \"query\": \"Reduced algebraic spaces have a unique lift through a closed immersion containing their topological image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp\", \"AlgebraicGeometry.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\"], \"digest\": \"2d9b7a5bd1c17f03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all semantic hits are scheme morphisms or locally ringed space morphisms; IsClosedImmersion.lift and lift_fac in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:210,215 require a kernel inclusion and do not state the algebraic-space result. The grep found no AlgebraicSpace or reduced-factorization declarations. A second semantic phrasing returned only scheme candidates again."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.lift",
+   "results": "{\"t\": \"2026-10-23T21:37:59Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion.lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\"], \"digest\": \"1219668b4934169f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all semantic hits are scheme morphisms or locally ringed space morphisms; IsClosedImmersion.lift and lift_fac in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:210,215 require a kernel inclusion and do not state the algebraic-space result. The grep found no AlgebraicSpace or reduced-factorization declarations. A second semantic phrasing returned only scheme candidates again."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a reduced algebraic space factors through a closed subspace if its image on points lies in that subspace",
+   "results": "{\"t\": \"2026-10-23T21:38:01Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a reduced algebraic space factors through a closed subspace if its image on points lies in that subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.Scheme.Hom.toImage\", \"AlgebraicGeometry.IsOpenImmersion.lift\", \"AlgebraicGeometry.Scheme.Hom.imageι\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder\"], \"digest\": \"631917f9c638f622\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all semantic hits are scheme morphisms or locally ringed space morphisms; IsClosedImmersion.lift and lift_fac in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:210,215 require a kernel inclusion and do not state the algebraic-space result. The grep found no AlgebraicSpace or reduced-factorization declarations. A second semantic phrasing returned only scheme candidates again."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a reduced source algebraic space and a closed immersion, containment of the point image gives a unique factorization by descent from schemes",
+   "results": "{\"t\": \"2026-10-23T21:38:37Z\", \"tool\": \"leanfinder\", \"query\": \"For a reduced source algebraic space and a closed immersion, containment of the point image gives a unique factorization by descent from schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\", \"AlgebraicGeometry.IsOpenImmersion.lift_uniq\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.ext_of_isDominant\"], \"digest\": \"234f3b73095c6934\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: all semantic hits are scheme morphisms or locally ringed space morphisms; IsClosedImmersion.lift and lift_fac in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:210,215 require a kernel inclusion and do not state the algebraic-space result. The grep found no AlgebraicSpace or reduced-factorization declarations. A second semantic phrasing returned only scheme candidates again."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-dense-open-stacked-valuation",
+  "date": "2026-10-24",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 089J (lemma-weak-chow); H-quasi-projectivity is the quasi-compact immersion in morphisms.tex Tag 01VW (definition-quasi-projective), (2). Universal surjectivity uses spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective). Supporting input to Tag 089J, proof of the properness claim: refined valuative criterion. Tag 089G (lemma-refined-valuative-criterion-universally-closed), proof from equation-start-with through the definition of C, before invoking assumption (4); affine-chart reduction uses Tag 089F, valuation probe Tag 089B, flat scheme-image base change Tag 089E, and stacking Tag 088Z (algebra-lemma-stack-valuation-rings). Supporting input: proof after equation-start-with: reduced valuation/field maps factor through reductions.",
+   "via": [
+    "lem-sfb-space-dense-open-stacked-valuation",
+    "lem-sfb-space-dense-open-valuative-proper",
+    "lem-sfb-space-weak-chow",
+    "lem-sfb-space-eventually-proper",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-reduced-map-closed-factorization",
+  "worker": "stage1",
+  "summary": "Proved the necessity and uniqueness directly from point classes and the subfunctor condition. For existence, pull the closed subspace back to a reduced source atlas, use the existing point-base-change and scheme reduced-source factorization statements to construct a local lift, and descend it explicitly with the existing fppf local-lifting statement. No new nodes or statement changes. Retained the inherited searches and added five searches actually run for Q12; their candidates are scheme-only.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 089J (lemma-weak-chow); H-quasi-projectivity is the quasi-compact immersion in morphisms.tex Tag 01VW (definition-quasi-projective), (2). Universal surjectivity uses spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective). Supporting input to Tag 089J, proof of the properness claim: refined valuative criterion. Tag 089G (lemma-refined-valuative-criterion-universally-closed), proof from equation-start-with through the definition of C, before invoking assumption (4); affine-chart reduction uses Tag 089F, valuation probe Tag 089B, flat scheme-image base change Tag 089E, and stacking Tag 088Z (algebra-lemma-stack-valuation-rings). Supporting input: proof after equation-start-with: reduced valuation/field maps factor through reductions. The four steps supply the reduced-source closed-factorization prerequisite; the inherited nearest blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor. Latest det-thm-sf-ctf-stability-direct-images proof (3) was read.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Use only the arbitrary-base-change point-image equality to test the pullback closed immersion on atlas points; this is a generic geometric tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Use its general scheme factorization assertion on the reduced source atlas; no node of this unit supplies the scheme theorem."
+   },
+   {
+    "node": "lem-a1-representable-etale-fppf-local-lifting",
+    "why": "Use the fppf covering and local section lifts for a representable surjective etale atlas; this supplies the cover for elementary subsheaf descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-a1-representable-etale-fppf-local-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-905bf658c",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-905bf658c (reviewer sub-agent of L); spot-checked: I read Stacks 03JJ (spaces-properties l.1502-1528), Definition immersion (spaces l.1923-1948), Lemma 02WD and Schemes 0356. The statement agrees with 03JJ. Uniqueness is an added clause and holds by subfunctor injectivity. The inline definition of 'closed subspace' omits Stacks' 'Z is an algebraic space' clause; the two definitions are equivalent by def-sfb-space-closed-subspace, so the target is not weakened. Steps 1 and 3 check out (Schemes 0356 applied to the closed immersion c and id_V, section over S, k = pr_Z∘s). Steps 2 and 4 check out except for one C4 citation fault. Step 2 applies lem-a1-space-point-open-calculus, a lemma about algebraic spaces, to Z, and step 4 uses the fppf sheaf axiom of Z. Both cite def-trf-algebraic-space, which says nothing about subfunctors of X (Stacks 02WD is not in that statement). FIX: steps 2 and 4 now cite the same-unit node def-sfb-space-closed-subspace (already on the base), whose statement says such a subfunctor is equivalently an algebraic space; the node is added to proof_deps and nothing else changes. Edge cases checked: Y empty, Z = X, Z empty, nonreduced Z allowed, Spec k[eps] shows reducedness is needed. No duplicate in the DAG. No new nodes. The three tool_uses are generic (03H4, 0262, Schemes 0356) and accepted. Batch-5: both flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space, which the item already has as a stmt_dep and which is not part of the trace formula or Poincare duality, so they are accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

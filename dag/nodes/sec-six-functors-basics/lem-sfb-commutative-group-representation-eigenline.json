@@ -1,0 +1,229 @@
+{
+ "id": "lem-sfb-commutative-group-representation-eigenline",
+ "kind": "statement",
+ "title": "A commutative algebraic group has a common eigenline in every nonzero rational module",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be an affine group scheme [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism]. Let $V$ be a finite-dimensional $k$-vector space and $r:G\\to\\operatorname{GL}(V)$ a homomorphism of group schemes, where $\\operatorname{GL}(V)$ is the general linear group [def-sc-general-linear-group] after choosing a basis. A subspace $W\\subseteq V$ is $G$-stable if $r_A(g)(A\\otimes_kW)\\subseteq A\\otimes_kW$ for every commutative $k$-algebra $A$ and $g\\in G(A)$. A character is a group-scheme homomorphism $\\chi:G\\to\\mathbf G_m$, with $\\mathbf G_m=\\operatorname{GL}_1$. Assume that $G$ is commutative, meaning that its multiplication is unchanged by interchanging the factors. If $V\\ne0$, then $V$ has a one-dimensional $G$-stable subspace $L$. Its restricted action is a character: there exists $\\chi:G\\to\\mathbf G_m$ such that $r_A(g)(1\\otimes v)=\\chi_A(g)(1\\otimes v)$ for every $A,g$ and $v\\in L$. No smoothness or connectedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 16.14, printed p.329, together with Definition 16.1, printed p.324; one-dimensional subrepresentation is the definition of an eigenvector there."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-general-linear-group"
+ ],
+ "proof": [
+  {
+   "text": "Choose a basis of $V$, and put $B=k[G]$. By affine-spectrum functoriality [def-weil-affine-spectrum] and the point description of [def-sc-general-linear-group], the universal point $u\\in G(B)$ corresponds to $1_B$, and its image is an invertible matrix $R=(b_{ab})$ over $B$. For $g\\in G(A)$ corresponding to $f_g:B\\to A$, naturality says $r_A(g)=(f_g(b_{ab}))$. Take a basis $c_1,\\ldots,c_m$ of the finite-dimensional $k$-span of the finitely many entries $b_{ab}$. Write $b_{ab}=\\sum_i t_{i,ab}c_i$ with $t_{i,ab}\\in k$, and let $T_i=(t_{i,ab})$. Thus $R=\\sum_i c_iT_i$ and $r_A(g)=\\sum_i f_g(c_i)(T_i)_A$. This is a finite matrix expansion, with no density argument.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, universal point and matrix coefficients; explicit finite coefficient expansion."
+   }
+  },
+  {
+   "text": "Form the commutative $k$-algebra $C=B\\otimes_kB$ using [lem-weil-pbc-algebra-tensor-pushout-universal-property](1). The maps $b\\mapsto b\\otimes1$ and $b\\mapsto1\\otimes b$ give points $u_1,u_2\\in G(C)$. Commutativity of $G$ [def-sc-group-scheme] implies $u_1u_2=u_2u_1$, so their representation matrices commute. Expanding gives $\\sum_{i,j}(c_i\\otimes c_j)(T_iT_j-T_jT_i)=0$. Extend the linearly independent $c_i$ to a $k$-basis of $B$, and let $\\ell_i:B\\to k$ be its coordinate maps. For every matrix entry apply the linear map $B\\otimes_kB\\to k$, $b\\otimes b\\prime\\mapsto\\ell_i(b)\\ell_j(b\\prime)$, supplied by [def-weil-pbc-module-tensor-product]. This extracts exactly the corresponding entry of $T_iT_j-T_jT_i$. Hence $T_iT_j=T_jT_i$ for all $i,j$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-sc-group-scheme",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, p.84, matrix formula (25), together with Lemma 16.11, p.327; explicit two-universal-points coefficient calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-commuting-endomorphisms-common-eigenvector] to the finite family $(T_i)$: its field is algebraically closed by hypothesis, $V$ is finite-dimensional and nonzero, and step 2 proves all required commutations. Obtain $v\\ne0$ with $T_i(v)=\\lambda_i v$ for every $i$. Put $L=kv$ and $a=\\sum_i\\lambda_i c_i\\in B$. For every commutative $k$-algebra $A$ and $g\\in G(A)$, step 1 now gives $r_A(g)(1\\otimes v)=f_g(a)(1\\otimes v)$. By $A$-linearity this preserves $A\\otimes_k L$, and $\\dim_kL=1$.",
+   "uses": [
+    "lem-sfb-commuting-endomorphisms-common-eigenvector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.11, p.327; Definition 16.1, p.324, applied to the universal coefficient operators rather than only rational points."
+   }
+  },
+  {
+   "text": "Choose a basis of $V$ beginning with $v$. In this basis the universal matrix has first column $(a,0,\\ldots,0)^t$. Applying the same stable-line formula to $u^{-1}\\in G(B)$ shows that its inverse has first column $(b,0,\\ldots,0)^t$ for some $b\\in B$. Multiplying gives $ab=1$, so $a$ is a unit. Consequently the regular-function map $k[t,t^{-1}]\\to B$, $t\\mapsto a$, $t^{-1}\\mapsto b$, defines a scheme morphism $\\chi:G\\to\\mathbf G_m=\\operatorname{GL}_1$ by [def-weil-affine-spectrum] and [def-sc-general-linear-group]. For any $A,g$, its value is $\\chi_A(g)=f_g(a)\\in A^\\times$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, p.84; characters and eigenspaces, section 4(g), pp.91–92; explicit rank-one matrix construction."
+   }
+  },
+  {
+   "text": "For any $A$ and $g,h\\in G(A)$, applying $r_A(gh)=r_A(g)r_A(h)$ to $1\\otimes v$ gives $\\chi_A(gh)=\\chi_A(g)\\chi_A(h)$: equality of coefficients follows because $1\\otimes v$ is a member of a basis of $A\\otimes_kV$. The identity matrix similarly gives $\\chi_A(1)=1$. Thus $\\chi$ is a group-scheme homomorphism by the functor-of-points formulation of [def-sc-group-scheme]. The formula of step 3 extends to every $w\\in L$ by $k$-linearity and is exactly the required character formula. All calculations were over arbitrary algebras, so neither reducedness nor smoothness nor connectedness was used.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 16.1, p.324; section 4(g), pp.91–92, character action formula; conclusion of Corollary 16.14, p.329."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-sc-general-linear-group",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-commuting-endomorphisms-common-eigenvector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit coefficient-matrix proof of Corollary 16.14 using Remark 4.1 and Lemma 16.11; avoids the smoothness hypothesis of Proposition 16.12 and the structural classification in Theorem 16.13."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional representation of a commutative affine algebraic group over an algebraically closed field has a one dimensional invariant subspace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k]\\n  [NeZero ↑(Fintype.card G)] (V : FDRep k G), CategoryTheory.Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"IsSimpleModule.finrank_eq_one_of_isMulCommutative\", \"module\": \"Mathlib/RepresentationTheory/AlgebraRepresentation/Basic\", \"type\": \"∀ (A : Type u_1) (V : Type u_2) (k : Type u_3) [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A]\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : Module A V] [IsScalarTower k A V] [IsSimpleModule A V]\\n  [FiniteDimensional k V] [IsAlgClosed k] [IsMulCommutative A], Module.finrank k\", \"doc\": \"If $ A $ is a commutative algebra, then the finite rank of the simple module $ V $ over the field $ k $ is equal to 1, i.e., $\\\\dim_k V = 1$.\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] [IsAlgClosed k] (V W : FDRep k G) [CategoryTheory.Simple V]\\n  [CategoryTheory.Simple W], Module.finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"FDRep.instFiniteDimensionalCarrierVFGModuleCat\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] (V : FDRep k G), FiniteDimensional k ↑V.V\", \"doc\": \"For any field $ k $, monoid $ G $, and object $ V $ in the category $ \\\\text{FDRep}_k(G) $ of finitely generated $ k $-modules with $ G $-action, the underlying vector space of $ V $ is finite-dimensio\"}\n  {\"name\": \"FDRep.average_char_eq_finrank_invariants\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [inst_2 : Fintype G]\\n  [inst_3 : Invertible ↑(Fintype.card G)] (V : FDRep k G),\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g = ↑(Module.finrank k ↥(Representation.invariants V.ρ))\", \"doc\": \"For a finite group $ G $ and a finitely generated representation $ V $ of $ G $ over a commutative ring $ k $, the average of the character values of $ V $ over all elements of $ G $, computed as $ \\\\f\"}\n  {\"name\": \"FDRep.instFiniteDimensionalHom\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] (V W : FDRep k G), FiniteDimensional k (V ⟶ W)\", \"doc\": \"For any field $ k $ and monoid $ G $, and for any two finitely generated representations $ V $ and $ W $ of $ G $ over $ k $, the space of $ k $-linear maps from $ V $ to $ W $ that commute with the $\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group and associative-algebra representations do not identify rational group-scheme invariant subspaces, in particular for nonreduced group schemes. IsSimpleModule.finrank_eq_one_of_isMulCommutative in Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean:39 is a candidate ingredient, not a one-line specialization of this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commutative algebraic group over an algebraically closed field has only one dimensional simple rational representations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSimpleModule.finrank_eq_one_of_isMulCommutative\", \"module\": \"Mathlib.RepresentationTheory.AlgebraRepresentation.Basic\", \"type\": \"[IsMulCommutative A] : Module.finrank k V = 1\", \"doc\": \"If $ A $ is a commutative algebra, then the finite rank of the simple module $ V $ over the field $ k $ is equal to 1, i.e., $\\\\dim_k V = 1$.\"}\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"[NeZero (Fintype.card G : k)] (V : FDRep k G) : Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"simple_of_finrank_eq_one\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Simple\", \"type\": \"{k : Type*} [Field k] [Algebra k R] {V : ModuleCat R} (h : finrank k V = 1) : Simple V\", \"doc\": \"Let $ k $ be a field, $ R $ a $ k $-algebra, and $ V $ a left $ R $-module. If the finite rank of $ V $ as a $ k $-module is 1, then $ V $ is a simple $ R $-module. This means that every nonzero $ R $\"}\n  {\"name\": \"Representation.isIrreducible_iff\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} {V : Type u_3} [inst : Monoid G] [inst_1 : Field k] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V), ρ.IsIrreducible ↔ IsSimpleOrder (Subrepresentation ρ)\", \"doc\": \"A representation $\\\\rho$ of a monoid $G$ on a vector space $V$ over a field $k$ is irreducible if and only if the poset of subrepresentations of $\\\\rho$ forms a simple order, meaning the only $G$-invari\"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"[CharZero k] (V : FDRep k G) : Simple V ↔ ∑ g : G, V.character g * V.character g⁻¹ = Fintype.card G\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"Representation.irreducible_iff_isSimpleModule_asModule\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \": IsIrreducible ρ ↔ IsSimpleModule k[G] ρ.asModule\", \"doc\": \"A representation $\\\\rho$ of a monoid $G$ over a field $k$ is irreducible if and only if the underlying module $\\\\rho.asModule$, viewed as a module over the monoid algebra $k[G]$, is a simple module (i.e\"}\n  {\"name\": \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"module\": \"Mathlib.RepresentationTheory.Maschke\", \"type\": \": IsSemisimpleModule k[G] V\", \"doc\": \"The monoid algebra $ k[G] $ is semisimple, meaning it can be expressed as a direct sum of simple submodules.\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib.RepresentationTheory.FDRep\", \"type\": \"[IsAlgClosed k] (V W : FDRep k G) [Simple V] [Simple W] : finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group and associative-algebra representations do not identify rational group-scheme invariant subspaces, in particular for nonreduced group schemes. IsSimpleModule.finrank_eq_one_of_isMulCommutative in Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean:39 is a candidate ingredient, not a one-line specialization of this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"IsSimpleModule\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"Representation.IsIrreducible.instIsSimpleModuleMonoidAlgebraAsModule\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} [Monoid G] [Field k] [AddCommGroup V] [Module k V] (ρ : Representation k G V) [ρ.IsIrreducible] : IsSimpleModule (MonoidAlgebra k G) ρ.asModule\", \"doc\": \"\"}\n  {\"name\": \"Representation.irreducible_iff_isSimpleModule_asModule\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} {V : Type u_3} [Monoid G] [Field k] [AddCommGroup V] [Module k V] (ρ : Representation k G V) : ρ.IsIrreducible ↔ IsSimpleModule (MonoidAlgebra k G) ρ.asModule\", \"doc\": \"\"}\n  {\"name\": \"Representation.isSimpleModule_iff_irreducible_ofModule\", \"module\": \"Mathlib.RepresentationTheory.Irreducible\", \"type\": \" {G : Type u_1} {k : Type u_2} [Monoid G] [Field k] (M : Type u_5) [AddCommGroup M] [Module (MonoidAlgebra k G) M] : IsSimpleModule (MonoidAlgebra k G) M ↔ (Representation.ofModule M).IsIrreducible\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group and associative-algebra representations do not identify rational group-scheme invariant subspaces, in particular for nonreduced group schemes. IsSimpleModule.finrank_eq_one_of_isMulCommutative in Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean:39 is a candidate ingredient, not a one-line specialization of this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "commutative.*(representation|eigenvector)|CommGroup.*IsSimpleModule|common.*eigen",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Reflection.lean\", \"line\": \"41\", \"text\": \"  commutative ring. This is used to define reflection representations of Coxeter groups.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean\", \"line\": \"36\", \"text\": \"commonly stated as trace is the sum of eigenvalues and determinant is the product of eigenvalues.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"15\", \"text\": \"have a common eigenvector for the action of all elements of the Lie algebra.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/LieTheorem.lean\", \"line\": \"237\", \"text\": \"have a common eigenvector for the action of all elements of the Lie algebra.\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"line\": \"311\", \"text\": \"/-- Given a representation `A` of a commutative monoid `G`, the map `ρ_A(g)` is a representation\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"line\": \"14\", \"text\": \"Let `k` be a commutative ring, `G` a group and `A` a `k`-linear `G`-representation. Given\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean\", \"line\": \"13\", \"text\": \"Given a commutative ring `k`, a group homomorphism `f : G →* H`, a `k`-linear `G`-representation\"}\n  {\"file\": \"Mathlib/RepresentationTheory/FiniteIndex.lean\", \"line\": \"15\", \"text\": \"Given a commutative ring `k`, a finite index subgroup `S ≤ G`, and a `k`-linear `S`-representation\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean\", \"line\": \"14\", \"text\": \"Let `k` be a commutative ring, `G` a group and `A` a `k`-linear `G`-representation. Given\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean\", \"line\": \"14\", \"text\": \"Given a commutative ring `k`, a group homomorphism `f : G →* H`, a `k`-linear `H`-representation\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group and associative-algebra representations do not identify rational group-scheme invariant subspaces, in particular for nonreduced group schemes. IsSimpleModule.finrank_eq_one_of_isMulCommutative in Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean:39 is a candidate ingredient, not a one-line specialization of this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative algebraic group representations over an algebraically closed field contain a common eigenline for every nonzero finite dimensional module",
+   "results": "8 hits: FDRep.simple_iff_end_is_rank_one; Module.End.instInhabitedEigenvaluesOfIsAlgClosedOfFiniteDimensionalOfNontrivial; FDRep.finrank_hom_simple_simple; LieModule.instIsTriangularizableOfIsAlgClosed; Module.End.exists_eigenvalue; FDRep.simple_iff_char_is_norm_one; IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed; FDRep.instProjectiveOfNeZeroCastCard.",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group or associative-algebra representations and single operators do not supply a group-scheme invariant line; passing from rational group-scheme modules, including nonreduced groups, requires an additional theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"CommGroup\"",
+   "results": "Search returned 4 hits: Representation.instAddCommGroupAsModule, Representation.instAddCommGroupAsModuleFinsuppMonoidAlgebraFree, Representation.IntertwiningMap.instAddCommGroup, Representation.Coinvariants.instAddCommGroup",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group representations or affine schemes, not scheme-theoretic rational subrepresentations for arbitrary nonreduced affine groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nonzero rational representation of a commutative affine group scheme over an algebraically closed field has a one dimensional subrepresentation including nonreduced group schemes",
+   "results": "Search returned 8 hits: FDRep.simple_iff_end_is_rank_one, FDRep.finrank_hom_simple_simple, Rep.instProjective, FDRep.instProjectiveOfNeZeroCastCard, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group representations or affine schemes, not scheme-theoretic rational subrepresentations for arbitrary nonreduced affine groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero rational representation of a commutative affine group scheme over an algebraically closed field contains a one dimensional subrepresentation",
+   "results": "Search returned 8 hits: Rep.instInjective, subsingleton_rat_module, Subrepresentation.toSubmodule, Representation.invtSubmodule.instNontrivialSubtypeSubmoduleMemSublattice, AlgebraicGeometry.AffineScheme, Representation.invariants, AlgebraicGeometry.isAffine_affineScheme, Representation.instAddCommGroupAsModule",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract group representations or affine schemes, not scheme-theoretic rational subrepresentations for arbitrary nonreduced affine groups."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lie-kolchin-triangular-embedding",
+  "date": "2026-10-23",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, first sentence: triangularize over the algebraic closure, in present proof step 1. In the Lie–Kolchin proof: Corollary 16.14 supplies the commutative quotient/base case.",
+   "via": [
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-commutative-group-representation-eigenline",
+  "worker": "stage1",
+  "summary": "Preserved the all-algebras statement, expanded the universal action into finitely many coefficient endomorphisms, proved those commute over the tensor square, applied a strictly linear-algebra common-eigenvector node, and constructed the regular character and its multiplicativity explicitly. No smoothness, connectedness or characteristic-zero hypothesis was introduced.",
+  "blueprint": "Supports the Lie–Kolchin commutative base/quotient case already identified in blueprint.from.place, ultimately the alteration input of det-thm-sf-ctf-stability-direct-images proof (3). The current latest blueprint was read. The ancestry tool returns null, retained faithfully.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic algebra tensor-product construction gives the commutative algebra and two embeddings used for universal points; no replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-ec5a8178e",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-ec5a8178e (reviewer sub-agent of L); spot-checked: Read Milne Cor 16.14 (p.329, no smoothness hypothesis), Lemma 16.11 (p.327, set S of commuting endomorphisms, induction through the S-stable eigenspace V_a) and Def 16.1. The item's statement is unchanged and agrees with the source. I re-derived each step. Step 1: the universal matrix R=Σc_iT_i over a basis of the finite span of the entries (affine-spectrum and GL point statements). Step 2: u1u2=u2u1 in G(B⊗B) gives Σ(c_i⊗c_j)[T_i,T_j]=0, and ℓ_i⊗ℓ_j extracts each coefficient, so the T_i commute. Step 3: the new node gives v, and r_A(g)(1⊗v)=f_g(a)(1⊗v). Step 4: R^{-1}e1=b e1, so ab=1, a is a unit and χ comes from k[t,t^-1]→B. Step 5: multiplicativity by comparing the e1 coordinate over any A. Nothing uses smoothness or reducedness, so nonreduced G such as α_p are covered. New node lem-sfb-commuting-endomorphisms-common-eigenvector: true, statement only, self-contained, field and finite-dimensional notions cited. Tested on I empty, one operator, commuting nilpotents in characteristic p, and the real rotation (algebraic closure needed). It is not a restatement of the item. rg -L found no duplicate: lem-wf-solvable-common-eigenvector and sk-lem-walg-lie-eigenvector are Lie results that need characteristic 0. Mathlib LieTheorem.lean:166 needs CharZero, and Weights/Linear.lean:241 is not a one-line specialization, so unsplit is correct. No SGA. Unit and chapter unchanged. Accepted tool_use: lem-weil-pbc-algebra-tensor-pushout-universal-property (generic Mathlib-leaf tensor algebra)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CommutativeGroupRepresentationEigenline",
+  "declaration": "AlgebraicGeometry.GeneralLinearGroup.exists_eigenline_of_isCommMonObj",
+  "file": "lean/Sheaf/AlgebraicGeometry/CommutativeGroupRepresentationEigenline.lean",
+  "statement": "theorem exists_eigenline_of_isCommMonObj {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [IsCommMonObj G] [IsAffine G.left] [LocallyOfFiniteType G.hom] {V : Type v} [AddCommGroup V] [Module k V] [FiniteDimensional k V] [Nontrivial V] {n : Type u} [Fintype n] [DecidableEq n] (b : Module.Basis n k V) (r : G ⟶ GeneralLinearGroup n k) [IsMonHom r] : ∃ L : Submodule k V, Module.finrank k L = 1 ∧ ∃ χ : G ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} 1) k, IsMonHom χ ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (g : (Spec (.of A)).asOver (Spec (.of k)) ⟶ G), (∀ z ∈ LinearMap.range (L.subtype.baseChange A), (Matrix.GeneralLinearGroup.toLin' (b.baseChange A) (homMulEquiv n k A (g ≫ r))).toLinearEquiv z ∈ LinearMap.range (L.subtype.baseChange A)) ∧ ∀ x ∈ L, (Matrix.GeneralLinearGroup.toLin' (b.baseChange A) (homMulEquiv n k A (g ≫ r))).toLinearEquiv (1 ⊗ₜ[k] x) = ((homMulEquiv (LinearGroupSchemes.Index.{u} 1) k A (g ≫ χ) : Matrix (LinearGroupSchemes.Index.{u} 1) (LinearGroupSchemes.Index.{u} 1) A) ⟨0⟩ ⟨0⟩) • (1 ⊗ₜ[k] x)",
+  "branch": "sheaf-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-911f85c2a",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Read item, 5 stmt_dep records (byte-identical to side-live; item differs only in lean), the module and the report (Worker report + Second reading by Q42 present). Clause match: Field+IsAlgClosed; Over(Spec k) with GrpObj+IsCommMonObj (mul_comm = braiding∘μ=μ)+IsAffine+LocallyOfFiniteType (QuasiCompact implied by affine source/target); FiniteDimensional+Nontrivial V in universe v; arbitrary Fintype basis, r : G ⟶ upstream GeneralLinearGroup n k with IsMonHom; ∃ L finrank 1 ∧ ∃ χ : G ⟶ GL(Index 1) (node defines G_m=GL_1) IsMonHom ∧ ∀ A:Type u comm k-alg, ∀ g: stability of range(L.subtype.baseChange A) under toLin'(b.baseChange A)(homMulEquiv(g≫r)) and scalar formula via the (0,0) entry of homMulEquiv(g≫χ) for all x∈L. Edge cases V=0 excluded as in node, dim 1, A=0, nonreduced G (α_p), any characteristic. lean.statement verbatim; single sorry; source+blueprint docstrings with 5 proof steps; GL not duplicated; no eigenline duplicate found; proof import exists in live. No file changed, no compile."
+ }
+}

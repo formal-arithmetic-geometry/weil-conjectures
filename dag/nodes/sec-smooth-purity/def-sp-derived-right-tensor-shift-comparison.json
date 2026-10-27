@@ -1,0 +1,96 @@
+{
+ "id": "def-sp-derived-right-tensor-shift-comparison",
+ "kind": "definition",
+ "title": "Canonical natural comparison for a shift in the right derived tensor factor",
+ "statement": "Let $\\Lambda$ be a commutative ring, X an arbitrary scheme, K an object of the ordinary unbounded derived category of small-etale $\\Lambda$-module sheaves [def-weil-pbc-derived-categories], and a an integer. Define the natural isomorphism $(-)\\otimes^L K[a]\\simeq ((-)\\otimes^L K)[a]$ [def-kun-derived-tensor] by the commutation of left tensor by the variable object M with the shift a, evaluated at K. Naturality in M is the compatibility of the derived tensor bifunctor with shifts in each variable. This is the ModuleCat(Lambda) specialization of the existing source-library derivedTensorRightShiftIso.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The final adjunction: canonical proper forget-supports comparison and shifting the right tensor factor."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Attachment of a previously implemented source-library construction; WeilConjectures/SixFunctors/Etale/Derived/Shift.lean, lines 129-142: NatIso.ofComponents of the commShiftIso with its proved naturality. No new construction is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring on the right with a shifted object in a derived category is naturally isomorphic to tensoring then shifting",
+   "results": "8 Mathlib hits: CategoryTheory.Functor.CommShift.OfComp.iso, CategoryTheory.Functor.isoShift, CategoryTheory.MonoidalOpposite.tensorRightIso, CategoryTheory.Adjunction.LeftAdjointCommShift.iso', CategoryTheory.Adjunction.RightAdjointCommShift.iso', CategoryTheory.MonoidalOpposite.tensorRightUnmopIso, HomologicalComplex.rightUnitor', CategoryTheory.Adjunction.RightAdjointCommShift.iso. Exact existing source-library declaration found and read: AlgebraicGeometry.Etale.derivedTensorRightShiftIso.",
+   "date": "2026-10-26",
+   "verdict": "source match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "12 Mathlib hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore. Exact existing source-library declaration found and read: AlgebraicGeometry.Etale.derivedTensorRightShiftIso.",
+   "date": "2026-10-26",
+   "verdict": "source match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedTensorRightShiftIso|commShift₂CurriedTensor",
+   "results": "0 Mathlib hits: . Exact existing source-library declaration found and read: AlgebraicGeometry.Etale.derivedTensorRightShiftIso.",
+   "date": "2026-10-26",
+   "verdict": "source match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.FiniteP1AdjunctionOfIntegrals",
+  "date": "2026-10-26",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-amb-affine-space-adjunction",
+   "place": "Proof, first paragraph: proper projective-line adjunction, written with its final shifted right tensor factor.",
+   "via": [
+    "lem-sp-finite-p1-adjunction-of-integrals",
+    "lem-normalized-projective-line-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Shift",
+  "declaration": "AlgebraicGeometry.Etale.derivedTensorRightShiftIso",
+  "statement": "noncomputable def derivedTensorRightShiftIso\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :\n    derivedTensorRight A X (K⟦a⟧) ≅ derivedTensorRight A X K ⋙ shiftFunctor _ a",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26",
+  "note": "WeilConjectures/SixFunctors/Etale/Derived/Shift.lean, lines 129-142: NatIso.ofComponents of the commShiftIso with its proved naturality. No new construction is introduced. The node uses its ModuleCat(Lambda) specialization; the coefficient-category hypotheses are inferred for modules."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T001219-L-4176382",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T001219-L-4176382",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

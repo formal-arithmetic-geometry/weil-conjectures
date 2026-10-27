@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-reduced-scheme-single-point-residue-factorization",
+ "kind": "statement",
+ "title": "Reduced scheme maps with one-point image factor through the residue field",
+ "statement": "Let $Y$ and $X$ be schemes [def-pc-scheme], with $Y$ reduced [def-pc-reduced-scheme]. Let $f:Y\\to X$ be a morphism and $x\\in X$ a point such that $f(|Y|)\\subseteq\\{x\\}$. Write $\\kappa(x)$ for the residue field [def-weil-residue-field] and $i_x:\\operatorname{Spec}\\kappa(x)\\to X$ for the canonical residue-field morphism [lem-weil-pbc-morphism-from-spec-field, def-weil-affine-spectrum]. There exists a morphism $h:Y\\to\\operatorname{Spec}\\kappa(x)$ with $i_x\\circ h=f$. The scheme $Y$ may be empty or non-quasi-compact, and no Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0H1M (lemma-factor-through-point), statement and affine-ring hint."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-residue-field",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}A\\subseteq X$ containing $x$. Since $f^{-1}(U)=Y$, restriction of the sheaf map of $f$ gives a morphism $f_U:Y\\to U$ whose composite with $U\\hookrightarrow X$ is $f$: on each open $W\\subseteq U$ use the original map $\\mathcal O_X(W)\\to\\mathcal O_Y(f^{-1}W)$, with its original local stalk maps. Let $\\mathfrak p\\subset A$ correspond to $x$. The affine-open stalk identification gives $\\mathcal O_{X,x}\\cong A_{\\mathfrak p}$, compatible with germs, and hence $\\kappa(x)\\cong A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$. Choose an arbitrary affine open covering $Y=\\bigcup_iV_i$, $V_i=\\operatorname{Spec}B_i$. Reducedness makes every $B_i$ reduced. Write $\\varphi_i:A\\to B_i$ for the map induced by $f_U|_{V_i}$. No finite subcover is chosen.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-residue-field",
+    "def-pc-reduced-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H1M (lemma-factor-through-point), affine-local hint; details supplied by Q131."
+   }
+  },
+  {
+   "text": "Fix $i$ and $a\\in\\mathfrak p$. The germ $a_x$ belongs to the maximal ideal of $\\mathcal O_{X,x}\\cong A_{\\mathfrak p}$. For every $v\\in V_i$ we have $f(v)=x$, so the local stalk map of $f$ sends $a_x$ into the maximal ideal of $\\mathcal O_{Y,v}$. Compatibility with germs says that this is the germ of $\\varphi_i(a)$; consequently $\\varphi_i(a)$ has zero value in $\\kappa(v)$ for every $v\\in V_i$. The affine scheme $V_i$ is quasi-compact, so the cited vanishing-section lemma makes $\\varphi_i(a)$ nilpotent. Since $B_i$ is reduced, $\\varphi_i(a)=0$. Thus $\\mathfrak p\\subseteq\\ker\\varphi_i$. Quasi-compactness is used only for this individual affine open, not for $Y$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-residue-field",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H1M (lemma-factor-through-point), affine-local hint; details supplied by Q131."
+   }
+  },
+  {
+   "text": "For $s\\in A\\setminus\\mathfrak p$, its germ $s_x$ is a unit by the affine-open stalk localization. Ring homomorphisms send units to units, so the germ of $\\varphi_i(s)$ is a unit at every $v\\in V_i$. At the point of $V_i=\\operatorname{Spec}B_i$ corresponding to a prime $\\mathfrak q$, its germ lies outside the maximal ideal precisely when $\\varphi_i(s)\\notin\\mathfrak q$, by the same stalk identification. Hence $D(\\varphi_i(s))=\\operatorname{Spec}B_i$. Clause (ii) of the cited basic-open criterion implies that $\\varphi_i(s)$ is a unit of $B_i$. This argument also applies to the zero ring: its spectrum is empty and its sole element is a unit.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H1M (lemma-factor-through-point), affine-local hint; details supplied by Q131."
+   }
+  },
+  {
+   "text": "By clause (d) of the prime-residue-field algebra lemma, steps 2 and 3 supply a ring map $\\lambda_i:\\kappa(\\mathfrak p)\\to B_i$ with $\\lambda_i\\circ\\pi=\\varphi_i$, where $\\pi:A\\to A_{\\mathfrak p}\\to\\kappa(\\mathfrak p)$. Clause (2) of the affine residue-point lemma identifies $\\kappa(\\mathfrak p)$ with $\\kappa(x)$ and says that $i_x$ factors through $U$ as Spec of this $\\pi$. Define $h_i:V_i\\to\\operatorname{Spec}\\kappa(x)$ as Spec of $\\lambda_i$ after that identification. The composite $i_x\\circ h_i$ factors through $U$ and induces $\\lambda_i\\circ\\pi=\\varphi_i$ on $A$. Affine-spectrum duality therefore gives $i_x\\circ h_i=f|_{V_i}$. This uses the algebra lemma with codomain $B_i$, which may be the zero ring; it assumes no field structure on $B_i$.",
+   "uses": [
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H1M (lemma-factor-through-point), affine-local hint; details supplied by Q131."
+   }
+  },
+  {
+   "text": "Cover each intersection $V_i\\cap V_j$ by affine opens $W=\\operatorname{Spec}C$; the intersection itself need not be affine or quasi-compact. The restrictions $h_i|_W,h_j|_W$ correspond to ring maps $\\kappa(\\mathfrak p)\\to C$. By step 4 their composites with $\\pi:A\\to\\kappa(\\mathfrak p)$ are the same map, namely the one induced by $f_U|_W$. Clause (c) of the prime-residue-field algebra lemma applies to any commutative codomain $C$ and makes these ring maps equal. Affine-spectrum duality gives $h_i|_W=h_j|_W$. The equality clause of the scheme-morphism gluing lemma on the affine covering of $V_i\\cap V_j$ gives $h_i|_{V_i\\cap V_j}=h_j|_{V_i\\cap V_j}$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-prime-residue-field-algebra",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H1M (lemma-factor-through-point), affine-local hint; details supplied by Q131."
+   }
+  },
+  {
+   "text": "The compatible $h_i$ glue to $h:Y\\to\\operatorname{Spec}\\kappa(x)$ by the scheme-morphism gluing lemma. Step 4 gives $(i_x\\circ h)|_{V_i}=f|_{V_i}$ for every $i$, so the equality part of that lemma gives $i_x\\circ h=f$. If $Y$ is empty, use its empty open covering: the same gluing statement gives the unique morphism to $\\operatorname{Spec}\\kappa(x)$ and equality of the two maps to $X$. All coverings above may be infinite, and no Noetherian hypothesis was used.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0H1M (lemma-factor-through-point), affine-local hint; details supplied by Q131."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "lem-weil-pbc-qc-scheme-vanishing-section-nilpotent",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-field-point-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0H1M (lemma-factor-through-point): the source omits the proof and suggests the affine-ring argument. Q131 supplies the vanishing, units, quotient, uniqueness, and gluing details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "factor.*[Rr]esidue|[Rr]esidue.*factor|range.*singleton",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field hits concern field-source maps or the canonical residue morphism, not arbitrary reduced sources; specTargetImageFactorization factors through an image subring rather than the residue field"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.residueField",
+   "results": "1 hits: AlgebraicGeometry.ext_of_fromSpecResidueField_eq",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field hits concern field-source maps or the canonical residue morphism, not arbitrary reduced sources; specTargetImageFactorization factors through an image subring rather than the residue field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced scheme morphism with image contained in one point factors through the residue field of that point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.over_def, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field hits concern field-source maps or the canonical residue morphism, not arbitrary reduced sources; specTargetImageFactorization factors through an image subring rather than the residue field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduced schemes mapping constantly to a point admit a unique morphism to its residue field spectrum",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.Scheme.over_def, AlgebraicGeometry.Scheme.fromSpecResidueField_apply, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.range_fromSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field hits concern field-source maps or the canonical residue morphism, not arbitrary reduced sources; specTargetImageFactorization factors through an image subring rather than the residue field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a reduced scheme whose image is contained in a singleton factors through the residue field at that point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField, AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.fromSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field hits concern field-source maps or the canonical residue morphism, not arbitrary reduced sources; specTargetImageFactorization factors through an image subring rather than the residue field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"factor\"",
+   "results": "4 hits: AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.specTargetImageFactorization_comp, AlgebraicGeometry.specTargetImageFactorization_comp_assoc, AlgebraicGeometry.specTargetImageFactorization_app_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field hits concern field-source maps or the canonical residue morphism, not arbitrary reduced sources; specTargetImageFactorization factors through an image subring rather than the residue field"
+  },
+  {
+   "tool": "grep",
+   "query": "factor.*[Pp]oint|[Rr]educed.*[Ss]ingleton|[Ss]ingleton.*[Rr]educed",
+   "results": "3 hits: Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Artinian.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: residue-field hits concern field-source maps or the canonical residue morphism, not arbitrary reduced sources; specTargetImageFactorization factors through an image subring rather than the residue field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced scheme morphism whose image lies in a single point factors through the residue field of that point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.over_def, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.range_fromSpecResidueField; read the output and the relevant ResidueField/Ideal.lean source.",
+   "date": "2026-10-23",
+   "verdict": "no match: canonical residue-point maps and field-source factorization do not cover arbitrary reduced sources; Ideal.ResidueField.lift additionally requires both p to be killed and its complement to map to units, established in steps 2 and 3."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.residueField",
+   "results": "1 hits: AlgebraicGeometry.ext_of_fromSpecResidueField_eq; read the output and the relevant ResidueField/Ideal.lean source.",
+   "date": "2026-10-23",
+   "verdict": "no match: canonical residue-point maps and field-source factorization do not cover arbitrary reduced sources; Ideal.ResidueField.lift additionally requires both p to be killed and its complement to map to units, established in steps 2 and 3."
+  },
+  {
+   "tool": "grep",
+   "query": "factor.*[Rr]esidue|[Rr]esidue.*factor|range.*singleton",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean; read the output and the relevant ResidueField/Ideal.lean source.",
+   "date": "2026-10-23",
+   "verdict": "no match: canonical residue-point maps and field-source factorization do not cover arbitrary reduced sources; Ideal.ResidueField.lift additionally requires both p to be killed and its complement to map to units, established in steps 2 and 3."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a reduced scheme that is constant on points factors through the residue field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField; read the output and the relevant ResidueField/Ideal.lean source.",
+   "date": "2026-10-23",
+   "verdict": "no match: canonical residue-point maps and field-source factorization do not cover arbitrary reduced sources; Ideal.ResidueField.lift additionally requires both p to be killed and its complement to map to units, established in steps 2 and 3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced commutative ring map with singleton spectrum image factors through the prime residue field",
+   "results": "8 hits: PrimeSpectrum.residueField_specComap, PrimeSpectrum.residueField_comap, Ideal.ResidueField.liftₐ, IsLocalRing.PrimeSpectrum.comap_residue, RingHom.EssFiniteType.residueFieldMap, Ideal.ResidueField.lift, Ideal.ResidueField.mapₐ, Ideal.ResidueField.map; read the output and the relevant ResidueField/Ideal.lean source.",
+   "date": "2026-10-23",
+   "verdict": "no match: canonical residue-point maps and field-source factorization do not cover arbitrary reduced sources; Ideal.ResidueField.lift additionally requires both p to be killed and its complement to map to units, established in steps 2 and 3."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reduced-singleton-field-factorization",
+  "date": "2026-10-23",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Topology of rational points of quasi-separated algebraic spaces. Supporting input: Reduced singleton-image maps factor through a field monomorphism. Supporting the reduction in Tag 0H1T: Reduced scheme maps with one-point image factor through the residue field.",
+   "via": [
+    "lem-sfb-reduced-singleton-field-factorization",
+    "lem-sfb-qs-space-rational-point-topology",
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reduced-scheme-single-point-residue-factorization",
+  "worker": "stage1",
+  "summary": "Expanded the omitted proof of Stacks 0H1M: zero residue values kill p on each reduced affine chart, pointwise units invert its complement, the existing prime-residue-field algebra lemma constructs and uniquely determines the lifts, and arbitrary affine refinements of overlaps permit gluing. Reused existing Mathlib leaves and the closed affine residue-point computation; no new nodes and no global quasi-compactness, separatedness, or Noetherian hypotheses.",
+  "blueprint": "Supporting input for the alteration branch of det-thm-sf-ctf-stability-direct-images (3), inherited via the item's recorded chain, culminating in Stacks 0H1T and 0H1M. Read the current latest direct-images proof; it does not separately state this elementary scheme prerequisite. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor confirms; preserved the inherited place and via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-862443d01",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-862443d01 (reviewer sub-agent of L); spot-checked: Read Stacks morphisms.tex Tag 0H1M (lemma-factor-through-point, l.15600): the proof is omitted and only an affine-ring hint is given. The item statement and stmt_deps are byte-identical to live/side-live, which are still unsplit with no repair note. The delivery is one commit with no new nodes, and proof_deps equals the union of the steps' uses. Every cited node is status mathlib or Lean-closed (lem-weil-pbc-spec-field-point-residue-field), so these are tool uses and the unit route is unchanged; no SGA citation. Step 1: f^{-1}U=Y, so f factors through U by restricting sheaf maps (elementary); kappa(x)=A_p/pA_p via affine-open-stalk-localization (c). Step 2: a in p goes into m_v at every v, so it vanishes on the qc affine V_i, is nilpotent by the qc vanishing lemma, and is 0 because B_i is reduced. Step 3: s not in p gives a unit at every stalk, so D(phi(s))=Spec B_i and phi(s) is a unit by clause (ii). Step 4: clause (d) with codomain B_i (the zero ring allowed) gives lambda_i, and clause (2) plus Spec full faithfulness gives i_x h_i = f|V_i. Step 5: overlaps are covered by affine W, with no affineness of V_i∩V_j assumed; clause (c) and gluing equality give h_i=h_j there. Step 6: gluing over an arbitrary or empty cover. Edge cases checked: Y empty, B_i=0, non-closed x with non-qc Y, and Spec k[e]/e^2 (shows reducedness is needed). DAG duplicate search (0H1M/0H1T, reduced+kappa+factor) found only the parent algebraic-space version and a gerbe lemma, neither of which restates the item. Mathlib grep for IsReduced with residue/singleton found no existence lemma for an arbitrary reduced source."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReducedSchemeSinglePointResidueFactorization",
+  "declaration": "AlgebraicGeometry.exists_factor_through_residueField_of_isReduced_of_range_subset_singleton",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedSchemeSinglePointResidueFactorization.lean",
+  "statement": "theorem exists_factor_through_residueField_of_isReduced_of_range_subset_singleton {Y X : Scheme.{u}} [IsReduced Y] (f : Y ⟶ X) (x : X) (himage : Set.range f ⊆ {x}) : ∃ h : Y ⟶ Spec (X.residueField x), h ≫ X.fromSpecResidueField x = f",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ca6ae012",
+  "group": "NK",
+  "result": "pass",
+  "note": "Statement matches Stacks 0H1M (morphisms.tex l.15601) and the node clause by clause: [IsReduced Y], Set.range f ⊆ {x} (containment keeps empty Y), ∃ h, h ≫ X.fromSpecResidueField x = f (canonical i_x per lem-weil-pbc-morphism-from-spec-field mathlib_match, correct order); no extra binders, no uniqueness added. Item node differs from live/side-live only in lean; 5 statement-dependency node copies identical to side-live; lean.statement verbatim in file; sorry-only proof, no definitions, source/blueprint docstrings with the 6 proof steps; imported WeilConjectures SpecFieldPointResidueField module exists. Mathlib/project search found no duplicate (ReducedSingletonFieldFactorization is the downstream algebraic-space result). Report sections present. No compile (no change)."
+ }
+}

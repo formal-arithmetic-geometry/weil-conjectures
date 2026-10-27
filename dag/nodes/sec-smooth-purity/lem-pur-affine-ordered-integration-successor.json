@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-affine-ordered-integration-successor",
+ "kind": "statement",
+ "title": "One-coordinate contraction for the independent integration transpose",
+ "statement": "Fix a finite purity setting \\(P\\) [def-pur-conventions], a scheme \\(Y\\), and a separated finite-type structure map \\(a_Y:Y\\to\\operatorname{Spec}k\\). Let \\(K\\in D^+(Y,A)\\) have a retained ordinary constructible finite-Tor representative \\(K_e\\) and realization isomorphism \\(e_K\\). Write \\(P_d\\) for its independently constructed integration transpose [def-pur-affine-ordered-integration-data]. For every \\(d\\ge0\\), \\(P_{d+1}=I_d;\\operatorname{lineSource}(P_d);\\Gamma_{\\mathrm{line},Rp_d^!K};c_d^{-1}\\), with the canonical source reassociation and actual inverse exceptional compositor of [def-pur-affine-space-comparison]. The line comparison is evaluated at the actual exceptional target, with its recorded stage representative. This asserts the single-coordinate equation only.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final paragraph: ordered affine-line transposes and canonical reassociations; expanded parent proof Steps 3--8."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-ordered-integration-data",
+  "def-pur-affine-space-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify the inverse exceptional transpose at each positive stage with F_d(sourceComparison_d);augmentation_d by the defining unique-HEq transport and the inverse Hom formula. SourceComparison also supplies the ordered source etale origin.",
+   "uses": [
+    "def-pur-affine-ordered-integration-data",
+    "lem-pur-affine-ordered-transpose-counit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At d=0 the preceding integration transpose is the identity. Use the first orderedEvaluation_contraction equation. Inverse-transpose the two sides through the restricted exceptional Hom bijection. Counit normalization of the standing line comparison and equality-transport compatibility of the counit identify the right side, with exactly the specified identityCompositeMap. Injectivity gives the base successor.",
+   "uses": [
+    "lem-pur-affine-ordered-evaluation-contraction",
+    "def-pur-affine-space-comparison",
+    "lem-pur-affine-ordered-first-line-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a positive d use composite_transpose at p_d, the explicit ordered source representative and the previous integration transpose. The exceptionalComposite HEq specification identifies its inverse mate with the one in theta. Inverse-transpose the desired equation; use the second orderedEvaluation_contraction equation, the composite_transpose identity, and the previous-stage inverse transpose. Associativity of composition gives the equality; injectivity of the restricted Hom equivalence proves the successor.",
+   "uses": [
+    "lem-pur-affine-ordered-evaluation-contraction",
+    "lem-pur-affine-line-composite-transpose",
+    "def-pur-affine-space-comparison",
+    "def-pur-affine-ordered-integration-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-ordered-integration-data",
+  "def-pur-affine-space-comparison",
+  "lem-pur-affine-line-composite-transpose",
+  "lem-pur-affine-ordered-evaluation-contraction",
+  "lem-pur-affine-ordered-transpose-counit",
+  "lem-pur-affine-ordered-first-line-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final paragraph, factored into coefficient evaluation contraction and the existing line composite-transpose theorem; dimension zero uses the actual identity-compositor normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact support projection formula commutes with composition of morphisms and comparison of etale and proetale sites",
+   "results": "Eight hits in condensed sheaves, scheme sections, and categorical naturality; no normalized affine integration transpose or site-compositor identity. Project search found the existing AffineSpacePurityComparison, CoordinateLineAdjunction, CoordinateSectionArrows, OrderedAffineComparisonNaturality and AffineLineCompositeTranspose APIs.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match; reuse project constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"comp\"",
+   "results": "Adjunction.comp, comp_map_bijective_iff, map_comp_bijective_iff and triangle identities. These supply abstract adjunction composition, not the normalized trace contraction or affine coefficient coordinates.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Tt]race|[Ii]ntegration.*[Tt]ranspose|lineComparison",
+   "results": "No Mathlib hits for the affine trace or line comparison constructions. Both project roots were searched; the source maps already exist and are relocated verbatim rather than recreated.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOrderedIntegrationTransposes",
+  "date": "2026-10-26",
+  "group": "J7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Final paragraph: ordered affine-line transposes and canonical reassociations; expanded parent proof Steps 3--8.",
+   "via": [
+    "lem-pur-affine-ordered-integration-transposes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineOrderedIntegrationSuccessor",
+  "file": "lean/Sheaf/Paper/AffineOrderedIntegrationSuccessor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.integrationTranspose_successor",
+  "statement": "theorem integrationTranspose_successor (P : WeilConjectures.PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]\n    (K : Plus (AffineLinePurity.Ring P) Y)\n    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)\n    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)\n    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) (d : ℕ) :\n    integrationTranspose P Y aY K Ke hKe eK (d + 1) =\n      (sourceReassociation P Y aY K.obj d).hom ≫\n        (lineSource P (iteratedAffineLine Y d)).map\n          (integrationTranspose P Y aY K Ke hKe eK d) ≫\n        exceptionalLine P Y aY K Ke hKe eK d ≫ exceptionalComposite P Y aY K d",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bff03",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T070110-L-3382120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T195816-L-3264799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

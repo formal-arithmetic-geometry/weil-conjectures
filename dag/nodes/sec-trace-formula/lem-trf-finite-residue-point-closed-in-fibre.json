@@ -16,55 +16,51 @@
  ],
  "proof": [
   {
-   "text": "Put T=X_s and let ξ be the point of T induced by x. By stability of locally finite type under base change, the second projection T→Spec κ(s) is locally of finite type. To prove that ξ is closed, let y be any specialization of ξ in T and choose an affine open U⊂T containing y. Opens are stable under generalization, so U also contains ξ.",
+   "text": "Set T = f.fiber (f x) and a = f.asFiberHom x : Spec κ(x) → T. Mathlib asFiberHom_fiberToSpecResidueField identifies a followed by the fibre structure map with Spec.map (f.residueFieldMap x), using residue-field point naturality in the canonical pullback lift. Install the algebra structure coming from this residue field map. FiniteDimensional gives Module.Finite and hence Algebra.FiniteType, so HasRingHomProperty.Spec_iff makes this composite locally of finite type. Mathlib locallyOfFiniteType_of_comp then makes a locally of finite type.",
    "uses": [
     "def-pc-scheme-fibre",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-residue-field-point-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TE and 01TF; shorter Mathlib argument using the canonical field-valued point and the Jacobson finite-morphism criterion (Morphisms/Finite.lean)."
+   }
+  },
+  {
+   "text": "Base-change stability makes T locally of finite type over Spec κ(f x), so the Mathlib fibre instance gives JacobsonSpace T. The source Spec κ(x) is reduced and has one point. Apply Mathlib isFinite_iff_locallyOfFiniteType_of_jacobsonSpace to conclude IsFinite a.",
+   "uses": [
     "lem-weil-pbc-lft-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01TE and 01TF: the affine-local proof that algebraic (hence finite) residue extensions make a point closed in the fibre, with the locally-finite-type converse."
+    "place": "Tags 01TE and 01TF; shorter Mathlib argument using the canonical field-valued point and the Jacobson finite-morphism criterion (Morphisms/Finite.lean)."
    }
   },
   {
-   "text": "The restriction U→Spec κ(s) is of finite type: the affine-pair criterion gives a finitely generated κ(s)-algebra for its coordinate ring, and the affine source is quasi-compact. The fibre stalk quotient identifies the local ring of ξ in T with the quotient of the local ring of x by the maximal ideal of κ(s), hence identifies κ_T(ξ) with κ_X(x) and its κ(s)-map. The open immersion U→T preserves this residue field by residue-field naturality. Therefore κ_U(ξ) is finite over κ(s), and the finite-type-over-a-field closed-point criterion makes ξ closed in U.",
+   "text": "A finite scheme morphism is a closed map, so a.isClosedMap.isClosed_range gives that the image of a is closed in T. Mathlib range_asFiberHom identifies this image with the singleton {f.asFiber x}, which proves the conclusion.",
    "uses": [
-    "lem-weil-pbc-lft-affine-pairs",
-    "def-weil-finite-type-morphism",
-    "lem-sbc-scheme-fibre-stalk-quotient",
-    "lem-weil-pbc-residue-field-point-naturality",
-    "lem-kun-closed-point-field"
+    "def-pc-scheme-fibre"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01TE and 01TF: the affine-local proof that algebraic (hence finite) residue extensions make a point closed in the fibre, with the locally-finite-type converse."
-   }
-  },
-  {
-   "text": "Since y lies in U and in the closure of {ξ} in T, while ξ is closed in U, we get y=ξ. Thus ξ has no proper specialization. For a scheme this is equivalent to the singleton {ξ} being closed, so the point induced by x is closed in X_s.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01TE and 01TF: the affine-local proof that algebraic (hence finite) residue extensions make a point closed in the fibre, with the locally-finite-type converse."
+    "place": "Tags 01TE and 01TF; shorter Mathlib argument using the canonical field-valued point and the Jacobson finite-morphism criterion (Morphisms/Finite.lean)."
    }
   }
  ],
  "proof_deps": [
   "def-pc-scheme-fibre",
-  "lem-weil-pbc-lft-base-change",
-  "lem-weil-pbc-lft-affine-pairs",
   "def-weil-finite-type-morphism",
-  "lem-sbc-scheme-fibre-stalk-quotient",
   "lem-weil-pbc-residue-field-point-naturality",
-  "lem-kun-closed-point-field"
+  "lem-weil-pbc-lft-base-change"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tags 01TE and 01TF, especially the reduction to an affine neighbourhood and the maximal-ideal argument."
+  "place": "Tags 01TE and 01TF; shorter Mathlib argument using the canonical field-valued point and the Jacobson finite-morphism criterion (Morphisms/Finite.lean). H5, 2026-10-23: direct proof from Mathlib without affine localization or stalk quotients."
  },
  "mathlib_searches": [
   {
@@ -156,10 +152,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-kun-closed-point-field",
-  "lem-sbc-scheme-fibre-stalk-quotient"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -186,5 +179,26 @@
   "result": "pass",
   "note": "Lean statement matches node clause by clause: f : X ⟶ S [LocallyOfFiniteType f], fibre f.fiber (f x), induced point f.asFiber x, FiniteDimensional via the algebra from (f.residueFieldMap x).hom.toAlgebra, conclusion IsClosed {f.asFiber x}; no extra hypotheses or universe restriction. Mathlib grep: only quasi-finite / Jacobson criteria, not this statement, so the new module is justified. Gates: only sorry, source+blueprint docstrings with the proof steps, both report sections, lean.statement verbatim, only the lean field changed. nt_compile --json clean in 3.4 s (warn.sorry=false in lakefile; a deliberate-error copy confirmed diagnostics surface). Stale stage-1 created.item is outside stage 2."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261023T102911-L-3002670",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

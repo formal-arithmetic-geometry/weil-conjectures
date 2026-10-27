@@ -1,0 +1,148 @@
+{
+ "id": "lem-pbc-scalar-tensor-construction",
+ "kind": "statement",
+ "title": "Construction of finite coefficient extension",
+ "statement": "Let l be prime. Coefficient fields are finite extensions of Q_l with specified Q_l-algebra embeddings. Use the actual completed coefficient sheaves and raw rationalizations of [def-weil-l-adic-coefficient-extension] and [def-weil-pbc-rational-category]. Schemes supporting a constructible rational category are assumed noetherian, finite-dimensional, with l invertible; ambient operation comparisons are for arbitrary scheme morphisms g : X → Y in the actual ambient derived categories. For a prime l, finite extensions E and F of Q_l, a specified Q_l-algebra embedding i : E → F, and a noetherian finite-dimensional scheme T on which l is invertible, the residue-normalized map of completed integer coefficient sheaves defines ambient derived tensor. It preserves complete constructibility. Its restriction is semilinear for the integer embedding and its uniquely balanced maps on raw rational Hom modules preserve identities and composition, hence define the rational coefficient-extension functor.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Order 1307; existing scalar-extension component, relocated without changing signatures or proofs."
+ },
+ "stmt_deps": [
+  "lem-pbc-scalar-triangulation-adapters",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-rational-category"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the given field embedding to the lifted valuation rings. The source uniformizer ideal maps into the target one, so the same-index positive quotient map is well-defined. The quotient maps commute with transitions. Apply the completed coefficient limit universal property to obtain the unique map with these projections.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ambient derived tensor for this coefficient map. Finite-free completed coefficient comparison and the stratified constructible transport lemma preserve the three integral membership conditions; restricting along the full inclusion therefore gives the integral functor.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-finite-free-constructible-scalar-transport",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed constant-section square implies semilinearity of restriction of scalars. Adjunction and exact derived localization transfer that equation to tensor. The normalized coefficient ring isomorphisms give the localized scalar map. The universal property of balanced tensor products gives its unique additive Hom map. On pure tensors multiplication and functoriality prove identities and composition, and induction on tensor sums proves the general equations.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-finite-free-constructible-scalar-transport",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Compilation partition of the already stated and partially proved scalar-extension package; unchanged mathematical argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of l adic coefficient fields on constructible derived sheaves commutes with direct image and base change",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum algebraMap_adicCompletion, adicCompletion algebra structures, BDeRhamPlus and BDeRham. These concern coefficient rings, not constructible derived sheaf functors.",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.associator, CategoryTheory.Functor.CommShift",
+   "results": "0 hits; unknown identifier CategoryTheory.MonoidalCategory.associator",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension|changeOfRings|ChangeOfRings",
+   "results": "0 hits in Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension for constructible adic sheaves and coherent base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PbcScalarExtension",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-scalar-extension",
+   "place": "Existing companion declarations; compilation partition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.PbcScalarTensor",
+  "file": "lean/Sheaf/Paper/PbcScalarTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbcRationalScalarHom_laws",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcEmbeddingIntegerMap",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingIntegerMap_quotient_kernel",
+   "AlgebraicGeometry.Scheme.pbcScalarQuotientMap",
+   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap_exists",
+   "AlgebraicGeometry.Scheme.pbcScalarCoefficientMap",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientTensor",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingAmbientTensor_preserves",
+   "AlgebraicGeometry.Scheme.pbcEmbeddingIntegralTensor",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarHom_exists",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarHom",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarHom_laws",
+   "AlgebraicGeometry.Scheme.pbcRationalScalarExtension"
+  ],
+  "statement": "theorem pbcRationalScalarHom_laws : (∀ K : PbcRationalDerivedCategory l E T hDim hInv, pbcRationalScalarHom l E F i T hDim hInv K.obj K.obj (𝟙 K) = 𝟙 (ScalarLocalization.mk ((pbcEmbeddingIntegralTensor l E F i T hDim hInv).obj K.obj))) ∧ (∀ (K L M : PbcRationalDerivedCategory l E T hDim hInv) (f : K ⟶ L) (g : L ⟶ M), pbcRationalScalarHom l E F i T hDim hInv K.obj M.obj (f ≫ g) = pbcRationalScalarHom l E F i T hDim hInv K.obj L.obj f ≫ pbcRationalScalarHom l E F i T hDim hInv L.obj M.obj g)",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "Existing declarations moved verbatim from PbcScalarExtension, with local reducibility scope and import changes only. No new mathematical statement or proof hole."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-196ec",
+  "group": "E5",
+  "result": "fix",
+  "landing": "20261027T021315-L-2755681",
+  "kind": "interface",
+  "note": "independent cc review: The 152 declarations of the clone's original PbcScalarExtension (2c77716690b) against the 12 delivered modules: identical text, and identical public types, hints and def values in the compiled environment (only generated proof-lemma names differ); all 60 direct importers compiled against the delivered modules (57 OK; 2 slow but just as slow against the published version)"
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "id": "def-coef-adjunction-evaluation",
+ "kind": "definition",
+ "title": "Evaluation comparisons preserving both adjunction maps",
+ "status": "split",
+ "statement": "Let $X,Y,x,y$ be categories and let $L:X\\to Y$ and $R:Y\\to X$ have a specified adjunction $a:L\\dashv R$, with unit $\\eta$ and counit $\\epsilon$. Let $l:x\\to y$ and $r:y\\to x$ have a specified adjunction $b:l\\dashv r$, with unit $\\eta^b$ and counit $\\epsilon^b$ [def-weil-pbc-adjunction-mate]. For functors $E:X\\to x$ and $F:Y\\to y$, an adjunction evaluation datum consists of natural isomorphisms $\\lambda:F\\circ L\\cong l\\circ E$ and $\\rho:E\\circ R\\cong r\\circ F$ such that, for every $A\\in X$ and $B\\in Y$, $r(\\lambda_A)\\circ\\rho_{LA}\\circ E(\\eta_A)=\\eta^b_{EA}$ and $\\epsilon^b_{FB}\\circ l(\\rho_B)=F(\\epsilon_B)\\circ\\lambda_{RB}^{-1}$. Both isomorphisms are part of the datum, and both equations concern the units and counits of the specified adjunctions; no existence of such a datum is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Final paragraph: finite units and counits commute with transitions before the derived limit; categorical evaluation interface used in the ordinary-system refinement. Existing structure source: Zheng Lemma 4.10; Mathlib Adjunction.Mates."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation comparisons of adjoint functors preserving the unit and counit as natural isomorphisms",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.counitAsIsoOfIso",
+     "CategoryTheory.Adjunction.whiskerLeftLCounitIsoOfIsIsoUnit",
+     "CategoryTheory.Adjunction.mkOfUnitCounit_counit",
+     "CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+     "CategoryTheory.Endofunctor.Adjunction.AlgCoalgEquiv.counitIso",
+     "CategoryTheory.Adjunction.toEquivalence",
+     "CategoryTheory.Adjunction.toEquivalence_unitIso_hom_app",
+     "CategoryTheory.Adjunction.CoreHomEquivUnitCounit.mk"
+    ],
+    "digest": "cab57681c19a7d4f"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface: hits provide adjunction ingredients; bind the existing project structure instead of redeclaring it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction evaluation comparison isomorphisms compatible with both unit and counit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.unit_comp_map_eq_iff",
+     "CategoryTheory.conjugateEquiv_apply_app",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_hom_app",
+     "CategoryTheory.Adjunction.leftAdjointCompIso_hom",
+     "CategoryTheory.Adjunction.leftAdjointCompIso",
+     "CategoryTheory.Adjunction.comp_homEquiv",
+     "CategoryTheory.Equivalence.adjointify_η_ε_assoc",
+     "CategoryTheory.Adjunction.leftAdjointUniq_trans_app"
+    ],
+    "digest": "ebf4b009731cf860"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface: hits provide adjunction ingredients; bind the existing project structure instead of redeclaring it."
+  },
+  {
+   "tool": "grep",
+   "query": "AdjunctionEvaluation|evaluation.*adjunction|adjunction.*evaluation",
+   "results": {
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+     "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+     "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+     "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+     "Mathlib/CategoryTheory/Adjunction/Evaluation.lean"
+    ],
+    "digest": "4e6417e0a7f5bf55"
+   },
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib interface: hits provide adjunction ingredients; bind the existing project structure instead of redeclaring it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n AdjunctionEvaluation lean/Sheaf lean/WeilConjectures lean/.lake/packages/mathlib/Mathlib dag/lean_names_upstream.json; rg -l AdjunctionEvaluation dag/nodes; python3 tools/blueprint_refs.py search AdjunctionEvaluation",
+   "results": "Exact structure in lean/Sheaf/Paper/SemilinearDerivedSections.lean:93, with four fields left, right, unit, counit. No Mathlib or WeilConjectures declaration of that interface. DAG hits: lem-coef-semilinear-derived-sections (theorem owner), lem-pur-adjunction-evaluation-composition, lem-asd-internal-adjunction-evaluation-mate-core, lem-asd-internal-adjunction-evaluation, lem-sp-varying-ring-proper-open-pasting (all theorem nodes, no definition owner). Blueprint search: 0 blueprint nodes match.",
+   "date": "2026-10-22",
+   "verdict": "Existing project definition lacks a definition-node binding; attach this new node with existing: true."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-system-adjunction-transpose-coherence",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Final proof paragraph: finite units and counits before taking the derived limit; the evaluation comparison data for the ordinary-system adjunctions.",
+   "via": [
+    "lem-coef-system-adjunction-transpose-coherence",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.SemilinearDerivedSections",
+  "declaration": "WeilConjectures.SemilinearSections.AdjunctionEvaluation",
+  "statement": "structure AdjunctionEvaluation (E : X ⥤ x) (F : Y ⥤ y)\n    {L : X ⥤ Y} {R : Y ⥤ X} (adj : L ⊣ R)\n    {l : x ⥤ y} {r : y ⥤ x} (level : l ⊣ r)",
+  "branch": "sheaf-dag",
+  "by": "Q104",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition-node ownership for the existing plain structure at SemilinearDerivedSections.lean:93. The four fields are precisely the two natural isomorphisms and the unit and counit evaluation equations; the semilinearDerivedSections theorem conclusion is not used. Existing:true follows brief-stage2 sections 1(A) and 5: retain the single existing definition in its published module rather than duplicate or relocate it."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f1342a9b6",
+  "group": "Q104",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f1342a9b6",
+  "group": "Q104",
+  "result": "pass",
+  "note": "The H2 fault of return L is repaired. The item's stmt_deps now cite the new def node def-coef-adjunction-evaluation instead of the theorem node lem-coef-semilinear-derived-sections; the theorem stays in proof_deps. The new node is an existing:true binding of the plain structure SemilinearSections.AdjunctionEvaluation (SemilinearDerivedSections.lean:93). Its signature is verbatim, its λ/ρ isomorphisms and unit/counit equations match the four fields in direction and inverses, it asserts no existence, its only stmt_dep is def-weil-pbc-adjunction-mate (no cycle), and no other owner or duplicate notion exists in live dag/nodes or lean/Sheaf. The Lean module and the item's statement, proof, proof_deps and lean.statement are byte-identical to the previously reviewed head 79ff73e7, whose objects, three conjuncts, edge cases and gates were all found correct; I re-read the coherence formulas to confirm. Advisory only: the structure's docstring still names the old blueprint node, and the structure uses a single category universe k (already accepted). No file changed, so no compile was run."
+ }
+}

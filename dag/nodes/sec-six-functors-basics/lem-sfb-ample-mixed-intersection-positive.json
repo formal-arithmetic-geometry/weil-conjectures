@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-ample-mixed-intersection-positive",
+ "kind": "statement",
+ "title": "Positivity of mixed ample intersection numbers",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a nonempty proper $k$-scheme [def-weil-proper-morphism] of dimension $d\\geq1$ [def-kun-topological-krull-dimension], and let $L_1,\\ldots,L_d$ be ample invertible $\\mathcal O_X$-modules [def-sc-invertible-module, def-weil-pbc-ample-invertible-module]. Then the intersection number of [def-sc-intersection-number] satisfies\n$$(L_1\\cdots L_d\\cdot X)>0.$$\nThe modules may be different, and $X$ need not be reduced, integral, equidimensional or smooth.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEV, lemma-ample-positive, applied with Z=X; statement and induction proof. The nonempty hypothesis is explicit here, as required by the definition of the intersection number."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-intersection-number"
+ ],
+ "proof": [
+  {
+   "text": "First record the closed-restriction convention used below. If $i:Z\\hookrightarrow Y$ is a nonempty closed subscheme of a proper $k$-scheme, then $Z$ is proper by [lem-weil-pbc-closed-immersion-proper]. The affine characterization in [def-weil-closed-immersion] makes $i$ affine, so [lem-weil-pbc-pullback-ample-invertible] makes every $i^*M_j$ ample when $M_j$ is ample. For any tensor product $M=\\bigotimes_j M_j^{\\otimes n_j}$, which is an invertible $\\mathcal O_Y$-module, the canonical map $i_*\\mathcal O_Z\\otimes M\\to i_*i^*M$ is an isomorphism by [lem-pc-closed-immersion-coherent-cohomology] applied to $\\mathcal F=\\mathcal O_Z$ (the schemes are of finite type over $k$, hence Noetherian): on each open trivializing the finitely many invertible modules it is $i_*\\mathcal O_Z\\otimes\\mathcal O_Y\\to i_*\\mathcal O_Z$, multiplication, whose inverse sends $a$ to $a\\otimes1$. The same node, applied to the coherent module $i^*M$ on $Z$, gives $H^q(Y,i_*i^*M)\\cong H^q(Z,i^*M)$ for every $q$; these are the module cohomology groups of [def-pc-euler-characteristic], and the isomorphisms are natural, hence commute with multiplication by scalars of $k$ and are $k$-linear. Consequently their Euler polynomials agree, and [def-sc-intersection-number] gives $(M_1\\cdots M_e\\cdot Z)=(i^*M_1\\cdots i^*M_e\\cdot Z)$, where the right side is computed intrinsically on $Z$. This also applies to the empty list when $e=0$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "def-pc-euler-characteristic",
+    "def-sc-intersection-number"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEP, definition-intersection-number, displayed equality and following explanation; Tag 0BEV, reduction from X to Z"
+   }
+  },
+  {
+   "text": "Prove simultaneously for every integer $e\\geq0$, every nonempty proper $k$-scheme $Y$ of dimension $e$, and every list of $e$ ample invertible modules on $Y$, that its mixed intersection number is positive. Induct on $e$. For $e=0$, [def-sc-intersection-number] says that the empty intersection is $\\chi(Y,\\mathcal O_Y)$. Apply [lem-pc-chi-zero-dim-support] to the coherent module $\\mathcal O_Y$, whose support is $Y$: this is $\\dim_k\\Gamma(Y,\\mathcal O_Y)$. The unit section is nonzero since $Y$ has a point with a nonzero local ring. Thus $k\\to\\Gamma(Y,\\mathcal O_Y)$ is injective and this dimension is at least one. This proves the base case over every field.",
+   "uses": [
+    "def-sc-intersection-number",
+    "lem-pc-chi-zero-dim-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV, induction base d=0 using Tag 0AYT, lemma-chi-tensor-finite"
+   }
+  },
+  {
+   "text": "Let $e>0$ and assume the asserted positivity for all nonempty proper schemes of dimension $e-1$. For a scheme $Y$ of dimension $e$ and a list $M_1,\\ldots,M_e$, apply [lem-sc-top-dimensional-reduction-intersection] with $Z=Y$. It expresses the intersection as $\\sum_j m_j(M_1\\cdots M_e\\cdot Y_j)$ over the reduced integral top-dimensional components, with $m_j>0$. There is at least one such component, since $\\dim Y=e$; the finite top-component list in that lemma has maximum dimension $e$. Step 1 makes each $Y_j$ proper, each restricted $M_i$ ample, and identifies the ambient and intrinsic numbers. It therefore suffices to prove positivity for an integral $Y$ of dimension $e$. This is a reduction within the current induction step, not an appeal to induction in the same dimension.",
+   "uses": [
+    "lem-sc-top-dimensional-reduction-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV, reduction to integral Z via Tag 0BES, lemma-intersection-number-in-terms-of-components"
+   }
+  },
+  {
+   "text": "Now $Y$ is integral and nonempty. Choose $y\\in Y$. By [def-weil-pbc-ample-invertible-module], applied to $M_1$ at $y$, there are $r\\geq1$ and $s\\in\\Gamma(Y,M_1^{\\otimes r})$ such that $y\\in Y_s$ and $Y_s$ is affine. In particular $s\\ne0$. Put $N=M_1^{\\otimes r}$. Repeated tensor additivity from [lem-sfb-top-intersection-multilinear] gives $(N M_2\\cdots M_e\\cdot Y)=r(M_1M_2\\cdots M_e\\cdot Y)$, by induction on the positive integer $r$. Since $r>0$, proving positivity of the left side proves positivity of the required number. The other $e-1$ modules have not been changed.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-sfb-top-intersection-multilinear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV, positive tensor power using Tag 0BER and an affine nonvanishing open using Properties Tag 01PS"
+   }
+  },
+  {
+   "text": "The zero scheme $D=Z(s)$ is nonempty. Indeed, if it were empty, the nonvanishing locus would be all of $Y$, making $Y$ affine. Then [lem-sc-proper-affine-finite-general] makes $Y$ finite over $k$, and [lem-weil-pbc-finite-over-field-affine-finite-dim] gives $Y\\cong\\operatorname{Spec}B$ with $B$ finite-dimensional over $k$. Every prime quotient $B/\\mathfrak p$ is a finite-dimensional domain: multiplication by a nonzero element is injective, hence surjective, so the quotient is a field. Every prime is therefore maximal and $\\dim Y=0$, contradicting $e>0$. The underlying support of $Z(s)$ is exactly $Y\\setminus Y_s$: in a local trivialization both conditions say that the coefficient of $s$ belongs to the point's prime ideal.",
+   "uses": [
+    "lem-sc-proper-affine-finite-general",
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "def-pc-zero-scheme",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV, nonemptiness of Z(s), using Morphisms Tag 01WN, lemma-finite-proper"
+   }
+  },
+  {
+   "text": "Since $Y$ is integral and $s\\ne0$, [lem-pc-nonzero-section-integral-cartier] makes $D$ an effective Cartier divisor. Apply [lem-sc-intersection-effective-cartier] with ambient scheme and closed subscheme both $Y$, first module $N$, remaining modules $M_2,\\ldots,M_e$, and divisor $D=Z(s)$. Its zero-section clause supplies $N\\cong\\mathcal O_Y(D)$, and its integral alternative applies without any prior dimension assertion about $D$. It gives that $D$ is proper with $\\dim D=e-1$ and that $(N M_2\\cdots M_e\\cdot Y)=(M_2\\cdots M_e\\cdot D)$. By Step 1, the right side is the intrinsic intersection for the ample restrictions $M_2|_D,\\ldots,M_e|_D$.",
+   "uses": [
+    "lem-pc-nonzero-section-integral-cartier",
+    "lem-sc-intersection-effective-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV, regular zero divisor and its dimension; Tag 0BEU, lemma-numerical-intersection-effective-Cartier-divisor"
+   }
+  },
+  {
+   "text": "The induction hypothesis now applies to the nonempty proper scheme $D$ of dimension $e-1$ and its $e-1$ ample restricted modules. Its intersection number is positive, including the empty-list case when $e=1$. Step 6 and the positive scalar $r$ in Step 4 give positivity for integral $Y$. Substituting these positive numbers into the sum with positive multiplicities in Step 3 gives positivity for arbitrary $Y$. This completes the induction. Take $Y=X$ and $e=d$ to obtain the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEV, final induction step and assembly after component reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "def-pc-euler-characteristic",
+  "def-sc-intersection-number",
+  "lem-pc-chi-zero-dim-support",
+  "lem-sc-top-dimensional-reduction-intersection",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-top-intersection-multilinear",
+  "lem-sc-proper-affine-finite-general",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "def-pc-zero-scheme",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-sc-intersection-effective-cartier"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEV, lemma-ample-positive, with the closed-restriction equality after Definition 0BEP expanded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mixed intersection number of ample line bundles on a proper scheme over a field is strictly positive",
+   "results": "8 hits: NumberField.mixedEmbedding.fundamentalCone.ne_zero_of_mem_integerSet, NumberField.mixedEmbedding.minkowskiBound_lt_top, NumberField.mixedEmbedding.fundamentalCone.norm_pos_of_mem, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, NumberField.mixedEmbedding.norm_nonneg, NumberField.mixedEmbedding.fundamentalCone.normAtPlace_pos_of_mem, NumberField.mixedEmbedding.exists_ne_zero_mem_ideal_lt, NumberField.mixedEmbedding.normAtPlace_nonneg",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern number-field mixed embeddings, ample subsets of vector spaces or scheme morphisms; no intersection-number theorem for ample invertible sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection of d ample invertible sheaves with a nonempty d dimensional proper scheme has positive degree",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_basicOpen_le_affine_inter, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern number-field mixed embeddings, ample subsets of vector spaces or scheme morphisms; no intersection-number theorem for ample invertible sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ample line bundles have positive top mixed intersection multiplicity on projective varieties over arbitrary fields",
+   "results": "8 hits: Height.mulHeight₁_pos, Height.mulHeight_pos, AmpleSet.of_one_lt_codim, ampleSet_univ, Height.mulHeight₁_ne_zero, NumberField.mixedEmbedding.minkowskiBound_pos, ChevalleyThm.MvPolynomialC.degBound_pos, NumberField.mixedEmbedding.convexBodyLT'Factor_ne_zero",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern number-field mixed embeddings, ample subsets of vector spaces or scheme morphisms; no intersection-number theorem for ample invertible sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ample invertible sheaves have positive intersection product on any proper variety",
+   "results": "8 hits: AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.RingedSpace.basicOpen_mul, FractionalIdeal.sup_mul_inf, AlgebraicGeometry.Proj.mul_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern number-field mixed embeddings, ample subsets of vector spaces or scheme morphisms; no intersection-number theorem for ample invertible sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"intersection\", \"ample\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern number-field mixed embeddings, ample subsets of vector spaces or scheme morphisms; no intersection-number theorem for ample invertible sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "intersectionNumber|intersection_number|mixedIntersection|Hilbert.*degree",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern number-field mixed embeddings, ample subsets of vector spaces or scheme morphisms; no intersection-number theorem for ample invertible sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "intersectionNumber|intersection_number|mixedIntersection|mixed_intersection",
+   "results": "{\"t\": \"2026-10-24T03:13:28Z\", \"tool\": \"grep\", \"query\": \"intersectionNumber|intersection_number|mixedIntersection|mixed_intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits concern heights, proper morphisms, root systems or unrelated polynomial bounds; none defines or proves mixed ample intersection positivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ample invertible sheaves have strictly positive mixed intersection product on proper varieties",
+   "results": "{\"t\": \"2026-10-24T03:13:28Z\", \"tool\": \"leansearch\", \"query\": \"Ample invertible sheaves have strictly positive mixed intersection product on proper varieties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper\", \"ConvexCone.strictlyPositive\", \"ampleSet_empty\", \"NumberField.mixedEmbedding.fundamentalCone.ne_zero_of_mem_integerSet\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_inf\", \"AlgebraicGeometry.IsProper.mk\"], \"digest\": \"ffc548a151d8b754\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits concern heights, proper morphisms, root systems or unrelated polynomial bounds; none defines or proves mixed ample intersection positivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"intersection\", \"ample\"",
+   "results": "{\"t\": \"2026-10-24T03:13:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"intersection\\\", \\\"ample\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits concern heights, proper morphisms, root systems or unrelated polynomial bounds; none defines or proves mixed ample intersection positivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The mixed intersection number of ample line bundles on a nonempty proper scheme over a field is positive",
+   "results": "{\"t\": \"2026-10-24T03:13:29Z\", \"tool\": \"leanfinder\", \"query\": \"The mixed intersection number of ample line bundles on a nonempty proper scheme over a field is positive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Height.mulHeight₁_pos\", \"Height.mulHeight_pos\", \"NumberField.mixedEmbedding.minkowskiBound_pos\", \"NumberField.mixedEmbedding.convexBodyLT'Factor_ne_zero\", \"NumberField.mixedEmbedding.convexBodyLTFactor_ne_zero\", \"NumberField.mixedEmbedding.convexBodySumFactor_ne_zero\", \"Height.mulHeight₁_ne_zero\", \"Height.mulHeight.ne_zero\"], \"digest\": \"fc293b0629464f11\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits concern heights, proper morphisms, root systems or unrelated polynomial bounds; none defines or proves mixed ample intersection positivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient of n1 times nd in the multivariate Euler characteristic polynomial of ample invertible sheaves is positive",
+   "results": "{\"t\": \"2026-10-24T03:14:03Z\", \"tool\": \"leanfinder\", \"query\": \"The coefficient of n1 times nd in the multivariate Euler characteristic polynomial of ample invertible sheaves is positive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.degBound_pos\", \"ChevalleyThm.MvPolynomialC.numBound\", \"RootPairing.Base.IsPos\", \"Height.mulHeight_pos\", \"Height.mulHeight₁_pos\", \"NumberField.mixedEmbedding.minkowskiBound_pos\", \"ChevalleyThm.numBound\", \"ChevalleyThm.MvPolynomialC.numBound_succ\"], \"digest\": \"6935095806fa30b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned hits concern heights, proper morphisms, root systems or unrelated polynomial bounds; none defines or proves mixed ample intersection positivity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ample-polarization-positive-spectrum",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting intersection-theory input for lem-sfb-ample-polarization-positive-spectrum, mixed positivity in its coefficient argument; Stacks Tag 0BEV, lemma-ample-positive, statement and dimension-induction proof. The historical abelian-polarization alteration chain in via is retained.",
+   "via": [
+    "lem-sfb-ample-polarization-positive-spectrum",
+    "lem-sfb-abelian-symmetric-ample-endomorphism-span",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ample-mixed-intersection-positive",
+  "worker": "stage1",
+  "summary": "Read Stacks 0BEV and all cited node statements. Wrote the mixed dimension induction, with the dimension-zero base, component reduction, tensor-power scaling, an affine section open, nonempty Cartier cut, and induction on the cut. Expanded the ambient-to-intrinsic comparison using closed-subspace cohomology and the finite-over-field dimension-zero argument. All supporting statements already exist: no new nodes, no statement changes, and no Lean attachment.",
+  "blueprint": "This node is a created auxiliary with blueprint ancestor null, as blueprint_refs.py ancestor reports. It supplies mixed coefficient positivity to lem-sfb-ample-polarization-positive-spectrum along the existing via chain. Read the current latest sk-thm-sf-ctf-stability section (the six functors on Dctf); no claim is made that it contains intersection theory, and its route is unchanged. No blueprint node states this full mixed theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Affine pullback preserves absolute ampleness, used for closed restrictions; the six-functor unit supplies no theorem about ample invertible modules."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Generic closed-immersion comparison for coherent modules (projection isomorphism i_*F⊗L≅i_*(F⊗i^*L) and H^q(Y,i_*F)≅H^q(X,F)), used to identify the ambient and intrinsic Euler polynomials; no such coherent comparison is given by this six-functor unit."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Generic coherent Euler-characteristic theorem in dimension zero, needed for the base of the Stacks intersection induction; no clause of the six-functor unit states it."
+   },
+   {
+    "node": "lem-sc-top-dimensional-reduction-intersection",
+    "why": "Generic intersection formula with positive generic multiplicities, needed for nonreduced and nonequidimensional schemes; the six-functor unit has no intersection theory."
+   },
+   {
+    "node": "lem-pc-nonzero-section-integral-cartier",
+    "why": "Generic scheme-theoretic Cartier criterion for a nonzero section on an integral scheme; no clause of the six-functor unit supplies it."
+   },
+   {
+    "node": "lem-sc-intersection-effective-cartier",
+    "why": "Generic intersection formula for a Cartier cut, including properness and the integral dimension-drop clause; used in the same Stacks 0BEV route, not as a replacement of a six-functor step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-chi-zero-dim-support",
+  "lem-sc-top-dimensional-reduction-intersection",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-sc-intersection-effective-cartier"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-9d2766c9a",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-9d2766c9a (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes and its statement is identical to live; live still shows the item as unsplit, so no other group has superseded it. Source: Stacks varieties.tex 10580-10619 (0BEV), and the seven steps follow its proof exactly. Step 2 is the base case e=0 via lem-pc-chi-zero-dim-support (0AYT): chi = dim_k Gamma, which is at least 1 because Y is nonempty. Step 3 uses the full mixed formula of lem-sc-top-dimensional-reduction-intersection (0BES) with every m_j>0, and does not use its equal-module sentence. Step 4 replaces L_1 by a power through lem-sfb-top-intersection-multilinear, which multiplies the number by r, not r^e. Step 5 shows Z(s) is nonempty: otherwise Y is affine, hence finite by 01WN, hence dim 0. Step 6 makes Z(s) an effective Cartier divisor (02OR, integral case) and applies 0BEU, using its integral alternative and not its def-sc-ample clause (b). Step 7 is the induction and is elementary. Edge cases checked: e=1, nonreduced Y, components of lower dimension, finite fields; I found no false step. FIX in Step 1: the item cited lem-sc-cohomology-closed-immersion-pushforward, which is about abelian sheaf cohomology on topological spaces. def-pc-euler-characteristic uses O-module higher direct images, and nothing cited justified that the two agree. The step now cites lem-pc-closed-immersion-coherent-cohomology, which gives the projection isomorphism and H^q(Y,i_*F) = H^q(Z,F) for coherent F on Noetherian schemes, together with def-pc-euler-characteristic. proof_deps and the tool_uses entry are updated to match, and the new citation creates no cycle and reaches no trace-formula or Poincare node. Batch-5 flags: lem-trf-rational-sequence-polynomial-forward-difference (00JZ forward differences, a Lean-closed polynomial fact, reached through the Snapper polynomial in def-sc-intersection-number) and lem-trf-polynomial-infinite-evaluation-identity (a Mathlib leaf, Polynomial.eq_of_infinite_eval_eq) are generic polynomial algebra. Neither is part of the trace-formula or Poincare-duality statement or proof, so I accept both. The other tool_uses (0892, 0AYT, 0BES, 02OR, 0BEU) are generic tools the unit does not supply, used on the source's own route, and I accept them. No SGA citation. No duplicate of the mixed statement exists: lem-sc-positive-ample-hilbert-degree covers only equal modules.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleMixedIntersectionPositive",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.intersectionNumber_pos_of_isAmple",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleMixedIntersectionPositive.lean",
+  "statement": "theorem intersectionNumber_pos_of_isAmple (k : Type u) [Field k] (X : Scheme.{u}) [Nonempty X] [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (d : ℕ) (_hd : 1 ≤ d) (hdim : topologicalKrullDim X = ((d : ℕ∞) : WithBot ℕ∞)) (L : Fin d → X.Modules) [∀ j : Fin d, (L j).IsInvertible] (_hL : ∀ j : Fin d, IsAmple X (L j)) : 0 < intersectionNumber k X X (𝟙 X) d hdim L",
+  "branch": "sheaf-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd75a943b",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Only the module, node lean record and report delivered; live lean is null, no supersession. Clause check against node and Stacks 0BEV (varieties.tex lemma-ample-positive, Z=X): Field k, X.Over + IsProper (X ↘ Spec k), Nonempty X, d:ℕ with 1≤d and topologicalKrullDim X = d, L : Fin d → X.Modules invertible, ∀ j Scheme.Modules.IsAmple X (L j) (absolute 01PS, not relative AlgebraicGeometry.IsAmple), conclusion 0 < intersectionNumber k X X (𝟙 X) d hdim L matches def-sc-intersection-number with Z=X. No extra hypotheses; single universe u forced by intersectionNumber API. Edge cases: d=0 excluded by node, empty X excluded, nonreduced/reducible allowed. No duplicate (grep intersectionNumber/selfIntersectionNumber; hilbert-degree node is equal-module only). lean.statement verbatim in file; docstrings have source place, blueprint tag and 7 proof steps; only sorry; all proof imports exist. Report has Worker report and Second reading by Q122. No fixes; no compile needed."
+ }
+}

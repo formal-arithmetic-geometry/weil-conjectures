@@ -6,11 +6,6 @@ Authors: SHEAF group NX
 module
 
 public import WeilConjectures.PoincareDuality.Poincare
-public import Sheaf.Targets.SmoothPurityQbar
-public import Sheaf.Targets.PoincareTateBoundedConstructible
-public import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
-import Mathlib.CategoryTheory.Monoidal.Closed.Basic
-import Mathlib.CategoryTheory.Monoidal.Category
 
 /-!
 # Poincaré duality as the trace of the compact-support cup product
@@ -59,7 +54,11 @@ theorem uncurry_poincareMap_of_smooth
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
     (p : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d p.left] :
-    uncurry (poincareMap ℓ p d) = cupProduct ℓ p d ≫ trace ℓ p d :=
-  sorry
+    uncurry (poincareMap ℓ p d) = cupProduct ℓ p d ≫ trace ℓ p d := by
+  exact Verdier.uncurry_poincareMap
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ p)
+    (boundedConstructibleUpperShriekAdjunction _ ℓ p)
+    (boundedConstructibleExceptionalProjection _ ℓ p)
+    (boundedConstructibleSmoothPurityIso ℓ p d)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

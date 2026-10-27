@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-finite-datum-semilocal-generalizations",
+ "kind": "statement",
+ "title": "Invariant semilocal generalization subscheme for a finite descent datum",
+ "statement": "Let $q:Q\\to S$ be a finite surjective morphism of affine schemes [def-pc-scheme, def-weil-finite-integral-morphism]. Let $Z\\to Q$ be a Noetherian scheme (locally Noetherian and quasi-compact) [pqf-def-locnoeth] with a descent datum $D$ relative to $Q/S$ [def-pd-descent-datum]. Put $R=Z\\times_SQ$ [def-pc-fibre-product]; let $r_0:R\\to Z$ be its projection and $r_1:R\\to Z$ the transport map defined by $D$. Let $E\\subseteq |Z|$ be a finite subset with $r_0^{-1}(E)=r_1^{-1}(E)$. Suppose $E$ is contained in a quasi-affine open subscheme of $Z$, meaning an open subscheme isomorphic to a quasi-compact open subscheme of an affine scheme [def-weil-open-immersion]. There exist an affine scheme $L$ and a quasi-compact flat monomorphism $j:L\\to Z$ [def-weil-flat-morphism] whose image is exactly $\\operatorname{Gen}_Z(E)$, the set of points which specialize to at least one point of $E$. Monomorphism means that the diagonal $L\\to L\\times_ZL$ is an isomorphism; quasi-compact means that inverse images of affine opens are quasi-compact. The two pullbacks of $j$ along $r_0$ and $r_1$ agree as subfunctors of $h_R$. In particular this image contains $E$ and is stable under generalization. The affine scheme $L$ is semilocal (its coordinate ring has finitely many maximal ideals). Empty $E$ is allowed, and no flatness of $q$ is assumed.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Raynaud, Theorem 4.1 proof, beginning of reduction 6 (p.5-21), and Lemma 4.3 (p.5-17); the quasi-affine version uses the finite-set affine-neighbourhood argument. Primary scan read at https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf; archival copy WANTED. Auxiliary Stacks Tags 00E3 (algebra.tex lemma-spec-localization) and 00DS (algebra.tex lemma-silly)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "If $E=\\varnothing$, take $L=\\operatorname{Spec}(0)=\\varnothing$. The map to $Z$ is flat vacuously, is a monomorphism because every test scheme has at most one map to the empty scheme, and is quasi-compact because every inverse image is empty. Its two pullbacks are empty. The zero ring has no maximal ideals. This proves every assertion in this case. Henceforth enumerate the nonempty finite set $E=\\{e_1,\\ldots,e_n\\}$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-flat-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization), zero-ring case; elementary empty-scheme argument"
+   }
+  },
+  {
+   "text": "Choose a quasi-affine open $W\\subseteq Z$ containing $E$ and identify it with an open subscheme of $\\operatorname{Spec}C$. Write its closed complement as $V(I)$ and let $\\mathfrak p_i$ represent $e_i$ in $\\operatorname{Spec}C$. Since $\\mathfrak p_i\\notin V(I)$, $I\\not\\subseteq\\mathfrak p_i$ for each $i$. Prime avoidance [lem-weil-pbc-prime-avoidance] gives $f\\in I$ outside every $\\mathfrak p_i$. Then $E\\subseteq D(f)\\subseteq W$. The principal open $D(f)$ is affine by clause (0) of [lem-weil-pbc-affine-ideals-closed-subscheme]. Its image in $Z$ is an affine open $U=\\operatorname{Spec}A$ containing $E$. Thus the quasi-affine hypothesis supplies the affine chart needed for the construction; no affine intersection assertion about $Z$ is used.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DS (lemma-silly), applied to the ideal of the complement; principal-open affineness from schemes.tex Tag 01I3 (lemma-standard-open-affine)."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q_i\\subset A$ be the primes of $e_i$ in $U$. Put $M=A\\setminus\\bigcup_i\\mathfrak q_i$, a multiplicative subset since every $\\mathfrak q_i$ is prime, and set $L=\\operatorname{Spec}(M^{-1}A)$. By [lem-weil-pbc-localization-spectrum-embedding], $h:L\\to U$ identifies its point set with the primes $\\mathfrak q$ disjoint from $M$. Disjointness says $\\mathfrak q\\subseteq\\bigcup_i\\mathfrak q_i$, and prime avoidance [lem-weil-pbc-prime-avoidance], applied to the ideal $\\mathfrak q$, says precisely that $\\mathfrak q\\subseteq\\mathfrak q_i$ for some $i$. In a spectrum, $\\overline{\\{\\mathfrak q\\}}=V(\\mathfrak q)$ directly from the definition of Zariski closed sets, so these are exactly the generalizations of the $e_i$. Every generalization in $Z$ of a point in $E$ lies in the open $U$, and specialization in $U$ is the induced relation from $Z$. Consequently the image of $j:L\\xrightarrow{h}U\\hookrightarrow Z$ is $H=\\operatorname{Gen}_Z(E)$. This contains $E$ and is stable under generalization by transitivity of specialization.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization) and 00DS (lemma-silly)"
+   }
+  },
+  {
+   "text": "The same embedding shows that $M^{-1}A$ has finitely many maximal ideals: its primes, ordered by inclusion, correspond to the primes of $A$ contained in at least one $\\mathfrak q_i$. Indeed an embedding preserves specialization, which in spectra is inclusion by the preceding calculation. A maximal member of this set must equal one of the $\\mathfrak q_i$, since it is contained in one and that prime itself belongs to the set. Conversely any inclusion-maximal member of the finite family $\\{\\mathfrak q_i\\}$ is maximal in this set. Thus the maximal ideals of $M^{-1}A$ are indexed exactly by those maximal members, of which there are at most $n$. No assumption that the original points are closed or mutually incomparable is needed.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E3 (lemma-spec-localization); elementary maximal-element argument from step 3"
+   }
+  },
+  {
+   "text": "By [lem-sfb-localization-spectrum-flat-monomorphism], $h$ is flat and monic. The open inclusion $U\\hookrightarrow Z$ is monic and induces isomorphisms on local rings by [def-weil-open-immersion]. Therefore $j$ is monic (cancel successively), and is flat: each structural local ring map for $j$ is the local map for $h$ precomposed with a ring isomorphism, so its flat-module condition is the same [def-weil-flat-morphism]. The affine scheme $L$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. The locally Noetherian scheme $Z$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], so [lem-weil-pbc-qcqs-morphism-permanence](1) implies that $j:L\\to Z$ is quasi-compact. This verifies the morphism properties in the statement.",
+   "uses": [
+    "lem-sfb-localization-spectrum-flat-monomorphism",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OY (lemma-locally-Noetherian-quasi-separated); schemes.tex Tags 03GI (lemma-quasi-compact-permanence), 01HE (open immersion); localization flat monomorphism as cited"
+   }
+  },
+  {
+   "text": "Both $r_i:R\\to Z$ are finite. For $r_0$ this is base change of $q$ by $Z\\to S$, by [lem-weil-pbc-finite-morphism-permanence](a). The isomorphism defining $D$ [def-pd-descent-datum] identifies $R=\\mathrm{pr}_0^*Z$ with $\\mathrm{pr}_1^*Z$ over $Q\\times_SQ$; under this identification $r_1$ is the projection of the latter pullback to $Z$, again a base change of $q$. Finite morphisms are closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. For either $r_i$, continuity implies $\\operatorname{Gen}_R(r_i^{-1}E)\\subseteq r_i^{-1}H$. Conversely, if $r_i(t)\\in H$, choose $e\\in E$ to which $r_i(t)$ specializes. The specialization-lifting statement [lem-trf-closed-map-specializing] supplies a specialization $t\\leadsto t_e$ with $r_i(t_e)=e$. Thus $t\\in\\operatorname{Gen}_R(r_i^{-1}E)$. Hence $r_i^{-1}H=\\operatorname{Gen}_R(r_i^{-1}E)$. The assumed equality $r_0^{-1}E=r_1^{-1}E$ now gives $r_0^{-1}H=r_1^{-1}H$. Only closedness, not flatness, of the relation maps was used.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pd-descent-datum",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-trf-closed-map-specializing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Lemma 4.3, printed p.5-17; Theorem 4.1 reduction 6, p.5-21. Specialization lifting: Stacks topology.tex Tag 0066 (lemma-closed-open-map-specialization), part (1)"
+   }
+  },
+  {
+   "text": "For $i=0,1$, put $P_i=R\\times_{r_i,Z,j}L$ with projection $j_i:P_i\\to R$. These are monomorphisms: two lifts with the same map to $R$ have equal maps to $L$ by monicity of $j$, and are equal by the fibre-product universal property. They are flat by [lem-weil-pbc-flat-morphism-base-change] and quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](3). Their images are $r_i^{-1}H$ by [lem-weil-pbc-base-change-image]. These images agree by step 6. The uniqueness assertion of [lem-sfb-qc-flat-monomorphism-ringed-image] therefore gives an isomorphism $P_0\\simeq P_1$ over $R$. Equivalently the subfunctors agree: for every $T\\to R$, its factorization through $j_0$ exists exactly when its image lies in $r_0^{-1}H$, and likewise for $j_1$ by the factorization clause of that same node. The two conditions coincide and each factorization is unique. This is the required equality inside $h_R$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-base-change-image",
+    "lem-sfb-qc-flat-monomorphism-ringed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Lemma 4.3, p.5-17, using Proposition 1.2(i) and Corollary 1.3, p.5-02. Stacks morphisms.tex Tag 01U9 (lemma-base-change-flat) and schemes.tex Tag 01K5 (quasi-compact base change)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-sfb-localization-spectrum-flat-monomorphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-trf-closed-map-specializing",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-base-change-image",
+  "lem-sfb-qc-flat-monomorphism-ringed-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Inherited strict-local trait descent branch below direct-image step (3); explicit assembly following Raynaud Theorem 4.1 reduction 6 and Lemma 4.3 (primary scan read online, archival copy WANTED), with Stacks localization and prime avoidance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite invariant subset of a scheme with finite descent relation contained in an affine open defines an invariant affine semilocal flat monomorphism",
+   "results": "{\"t\": \"2026-10-24T14:50:34Z\", \"tool\": \"leanfinder\", \"query\": \"A finite invariant subset of a scheme with finite descent relation contained in an affine open defines an invariant affine semilocal flat monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"30cb79428317e526\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness, finite maps and flat-monomorphism criteria do not construct the invariant semilocalization or compare its two pullbacks."
+  },
+  {
+   "tool": "grep",
+   "query": "semilocal|semi.local|invariant.*monomorphism|monomorphism.*invariant",
+   "results": "{\"t\": \"2026-10-24T14:57:15Z\", \"tool\": \"grep\", \"query\": \"semilocal|semi.local|invariant.*monomorphism|monomorphism.*invariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness, finite maps and flat-monomorphism criteria do not construct the invariant semilocalization or compare its two pullbacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant finite subset contained in an affine open defines an invariant quasi-compact flat monomorphism by semilocalization",
+   "results": "{\"t\": \"2026-10-24T14:57:15Z\", \"tool\": \"leansearch\", \"query\": \"An invariant finite subset contained in an affine open defines an invariant quasi-compact flat monomorphism by semilocalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_appLE\", \"Module.Flat.localizedModule\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap\", \"AlgebraicGeometry.affineOpensRestrict\", \"AlgebraicGeometry.IsFinite.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\"], \"digest\": \"dcb055f7c9c59781\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness, finite maps and flat-monomorphism criteria do not construct the invariant semilocalization or compare its two pullbacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, CategoryTheory.Mono",
+   "results": "{\"t\": \"2026-10-24T14:57:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, CategoryTheory.Mono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left_of_ringHomFlat\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"6ffb5a0f1afddb97\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness, finite maps and flat-monomorphism criteria do not construct the invariant semilocalization or compare its two pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite orbit of a finite scheme descent datum has an invariant semilocal affine localization containing all generalizations of the orbit",
+   "results": "{\"t\": \"2026-10-24T14:57:16Z\", \"tool\": \"leanfinder\", \"query\": \"A finite orbit of a finite scheme descent datum has an invariant semilocal affine localization containing all generalizations of the orbit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.Scheme.affineOpenCover_idx\"], \"digest\": \"9b2bd73d782090e4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness, finite maps and flat-monomorphism criteria do not construct the invariant semilocalization or compare its two pullbacks."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*orbit|orbit.*finite|semilocal|semi.local",
+   "results": "{\"t\": \"2026-10-24T14:58:13Z\", \"tool\": \"grep\", \"query\": \"finite.*orbit|orbit.*finite|semilocal|semi.local\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flatness, finite maps and flat-monomorphism criteria do not construct the invariant semilocalization or compare its two pullbacks."
+  },
+  {
+   "tool": "grep",
+   "query": "semilocal|semi.local|invariant.*monomorphism|monomorphism.*invariant",
+   "results": "{\"t\": \"2026-10-24T15:47:18Z\", \"tool\": \"grep\", \"query\": \"semilocal|semi.local|invariant.*monomorphism|monomorphism.*invariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general flatness, finite morphisms, localization or finite-presentation open-immersion criteria; none states invariant semilocalization for a finite descent datum."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semilocalization at finitely many points of a scheme is invariant under a finite scheme descent relation",
+   "results": "{\"t\": \"2026-10-24T15:47:19Z\", \"tool\": \"leansearch\", \"query\": \"Semilocalization at finitely many points of a scheme is invariant under a finite scheme descent relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"PrimeSpectrum.isLocalization_away_iff_atPrime_of_basicOpen_eq_singleton\", \"instFinitePresentationAway\", \"Module.Finite.instLocalizationLocalizedModule\"], \"digest\": \"468dc4592651d50b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general flatness, finite morphisms, localization or finite-presentation open-immersion criteria; none states invariant semilocalization for a finite descent datum."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, CategoryTheory.Mono",
+   "results": "{\"t\": \"2026-10-24T15:47:19Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Flat, CategoryTheory.Mono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_left_of_ringHomFlat\", \"AlgebraicGeometry.mono_pushoutSection_of_isCompact_of_flat_right_of_ringHomFlat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\"], \"digest\": \"6ffb5a0f1afddb97\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general flatness, finite morphisms, localization or finite-presentation open-immersion criteria; none states invariant semilocalization for a finite descent datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant finite subset in a quasi affine open of a scheme defines a semilocal affine flat monomorphism stable under a finite descent datum",
+   "results": "{\"t\": \"2026-10-24T15:47:20Z\", \"tool\": \"leanfinder\", \"query\": \"An invariant finite subset in a quasi affine open of a scheme defines a semilocal affine flat monomorphism stable under a finite descent datum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\"], \"digest\": \"0fc16cc4515d8050\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general flatness, finite morphisms, localization or finite-presentation open-immersion criteria; none states invariant semilocalization for a finite descent datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism with descent datum the generalizations of a saturated finite set of points form an invariant affine semilocal scheme",
+   "results": "{\"t\": \"2026-10-24T15:47:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite morphism with descent datum the generalizations of a saturated finite set of points form an invariant affine semilocal scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\"], \"digest\": \"3b394d59644cf715\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern general flatness, finite morphisms, localization or finite-presentation open-immersion criteria; none states invariant semilocalization for a finite descent datum."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-orbit-finite-diagram-approximation",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent branch; Raynaud Theorem 4.1 finite-diagram reductions, below lem-sfb-integral-descent-invariant-quasiaffine-charts. Start of reduction 6 and Lemma 4.3: construction and invariance of the affine semilocal generalization subscheme.",
+   "via": [
+    "lem-sfb-integral-orbit-finite-diagram-approximation",
+    "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-datum-semilocal-generalizations",
+  "worker": "stage1",
+  "summary": "Q104 retains the statement and gives seven steps: empty case, prime-avoidance affine neighbourhood, explicit localization and its image, semilocality, flat monomorphism and quasi-compactness, closed-map lifting of specializations, and equality of the two pullback subfunctors. All supporting nodes already exist; no new nodes or Lean files.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) strict-local trait branch, specifically Raynaud reduction 6 and Lemma 4.3 as recorded in blueprint.from.place. The ancestor search returns None, which is retained; the current latest blueprint was read and no chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-9ea136280",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-9ea136280 (reviewer sub-agent of L); spot-checked: I read the item's statement, which is unchanged, all 7 steps and every cited statement in full. The delivery adds no new nodes. No re-split note is attached to the item. Step checks: (1) For E empty, Spec 0 is empty and every assertion holds vacuously. (2) The open lies in Spec C with complement V(I). Prime avoidance gives f in I outside every p_i, so D(f) sits inside W. D(f) is affine by clause (0) of lem-weil-pbc-affine-ideals-closed-subscheme (Stacks 00DS lemma-silly, 01I3 lemma-standard-open-affine). (3) The localization embedding plus prime avoidance applied with J=q show that the image is the set of primes contained in some q_i. These are exactly Gen_Z(E), because generalizations of points of U stay in the open set U (Stacks 00E3). (4) The prime poset of M^{-1}A has its maximal elements among the q_i, so it has at most n maximal ideals. (5) h is flat and a monomorphism by lem-sfb-localization-spectrum-flat-monomorphism, which needs no finiteness. Composing with the open immersion keeps j flat and monic. j is quasi-compact by qcqs-permanence (1), since Z is quasi-separated as a locally Noetherian scheme. (6) r_0 and r_1 are both base changes of q, r_1 through the descent isomorphism, so both are finite and hence closed maps. Specializations lift along them (Stacks 0066(1)), which gives r_i^{-1}H = Gen(r_i^{-1}E), and the two agree. (7) The pullbacks P_i are quasi-compact flat monomorphisms with equal images, by base-change-image. The factorization criterion of lem-sfb-qc-flat-monomorphism-ringed-image then makes the two subfunctors equal. Small cases tested: E empty, E a single generic point, comparable points, zero ring. Batch 5: lem-trf-closed-map-specializing is a pure point-set topology lemma: status mathlib (IsClosedMap.specializingMap), with no stmt_deps or proof_deps. It lies outside both the trace-formula and Poincare-duality assumptions and their proofs, so I accepted it. The Raynaud PDF is not in the literature directory (the worker filed a WANTED request). The argument is self-contained and I verified it against Stacks. No SGA is used and I found no duplicates. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantAffineSemilocalGeneralizations",
+  "declaration": "AlgebraicGeometry.exists_invariant_affine_semilocal_generalizations",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantAffineSemilocalGeneralizations.lean",
+  "statement": "theorem exists_invariant_affine_semilocal_generalizations {Q S Z : Scheme.{u}} [IsAffine Q] [IsAffine S] (q : Q ⟶ S) [IsFinite q] [Surjective q] (z : Z ⟶ Q) [IsNoetherian Z] (D : Over.DescentDatum q (Over.mk z)) (E : Set Z) (hE : E.Finite) (hInvariant : (pullback.fst (z ≫ q) q) ⁻¹' E = D.toHom ⁻¹' E) (hQuasiAffine : ∃ W : Z.Opens, E ⊆ (W : Set Z) ∧ ∃ (A : Scheme.{u}) (i : W.toScheme ⟶ A), IsAffine A ∧ IsOpenImmersion i ∧ QuasiCompact i) : ∃ (L : Scheme.{u}) (j : L ⟶ Z), IsAffine L ∧ QuasiCompact j ∧ Flat j ∧ Mono j ∧ Set.range j = {x : Z | ∃ e ∈ E, x ⤳ e} ∧ (∀ (T : Scheme.{u}) (a : T ⟶ pullback (z ≫ q) q), (∃ b : T ⟶ L, b ≫ j = a ≫ pullback.fst (z ≫ q) q) ↔ (∃ b : T ⟶ L, b ≫ j = a ≫ D.toHom)) ∧ E ⊆ Set.range j ∧ StableUnderGeneralization (Set.range j) ∧ Finite (MaximalSpectrum Γ(L, ⊤))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d029a451d",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Node diff vs side-live: only the lean field; lean.statement matches the file verbatim. Every clause checked. Finite surjective q between affines, no flatness; IsNoetherian Z = locally Noetherian + compact. R = pullback (z≫q) q, r0 = pullback.fst, r1 = D.toHom (canonical transport of the universal point, read in side-live DescentDatum.lean). Quasi-affine hypothesis (open immersion into an affine A, QuasiCompact i) is equivalent to the node's. Conclusion: IsAffine L, QuasiCompact/Flat/Mono j; range j = {x | ∃ e∈E, x ⤳ e} (right orientation); subfunctor equality as a factorization iff for all T in Scheme.{u}; E ⊆ range; StableUnderGeneralization; Finite MaximalSpectrum (zero ring allowed). Edge cases: E empty, comparable or non-closed points, empty schemes, non-flat q all allowed; single universe u. All 7 stmt_deps are definitions; no new defs; proof is sorry only; source and blueprint docstrings and step-by-step proof present; Worker report and Second reading sections present. Proof plan steps 1-7 mathematically sound. No changes, so no compile. No findings."
+ }
+}

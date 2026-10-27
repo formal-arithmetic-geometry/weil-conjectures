@@ -1,0 +1,200 @@
+{
+ "id": "lem-sfb-unipotent-to-multiplicative-trivial",
+ "kind": "statement",
+ "title": "No homomorphisms from unipotent groups to groups of multiplicative type",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$; subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms] and [def-weil-connected-scheme]. A group scheme $V$ is called unipotent if after extension to an algebraic closure [def-weil-algebraic-closure] it admits a closed immersion into the group of upper triangular matrices with every diagonal entry $1$. For smooth $V$ this is equivalent to every geometric point being a unipotent matrix in a faithful representation, meaning $(u-I)^N=0$ for some $N\\geq1$. A group scheme $D$ is of multiplicative type if after extension to an algebraic closure it is isomorphic to a closed subgroup of $(\\mathbf G_m)^r$ for some $r\\geq0$, with $\\mathbf G_m$ as in [def-sc-gm-ga]. Unipotence and multiplicative type are preserved by, and can be tested after, any field extension. Every group-scheme homomorphism $f:V\\to D$ from a unipotent group scheme $V$ to a group scheme $D$ of multiplicative type is trivial: for every commutative $k$-algebra $A$ and $v\\in V(A)$ one has $f_A(v)=1$. There is no smoothness or connectedness hypothesis on $V$ or $D$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.18(a), printed p.284; Corollary 14.9 and Corollary 14.12, printed pp.282–283, for field-extension invariance and smooth geometric-point comparison; Definition 12.17 and Theorem 12.23, printed pp.236,240, for multiplicative type under scalar extension."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-weil-algebraic-closure",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "First verify the field-extension assertion for both geometric embedding conditions. Let $K/k$ be any field extension, let $F=\\bar k$, and choose an algebraic closure $\\Omega$ of $K$. By [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed], the inclusion $k\\to\\Omega$ extends to $F\\to\\Omega$. The two ways of extending a group from $k$ to $\\Omega$ agree: [lem-weil-pbc-fibre-product-affine-spectra] identifies their coordinates by $(B\\otimes_k F)\\otimes_F\\Omega\\simeq B\\otimes_k\\Omega\\simeq(B\\otimes_k K)\\otimes_K\\Omega$. For each fixed $n\\geq1$, a closed embedding into $\\mathcal U_{n,F}$ exists if and only if one exists after extension to $\\Omega$, by [lem-sfb-algclosed-group-embedding-existence-descent]. The same argument applies to $\\mathbf G_{m,F}^r$ for each $r\\geq0$. The targets have polynomial, respectively Laurent polynomial, coordinate presentations, so are affine of finite type, including the trivial target at $r=0$. Since $\\Omega$ is an algebraic closure of $K$, existence over $\\Omega$ is exactly the definition for the original group over $K$. Thus unipotence and multiplicative type are both preserved and reflected by $K/k$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-algclosed-group-embedding-existence-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.9, p.282; Definition 12.17, p.236. Agent assembly from finite-presentation existence descent."
+   }
+  },
+  {
+   "text": "For the smooth comparison, suppose $V$ is smooth and every geometric point is unipotent in a supplied faithful representation. Apply [lem-sfb-geometric-unipotence-unitriangular-embedding] to obtain a closed embedding into $\\mathcal U_n$ over $k$, hence over $\\bar k$, proving geometric unipotence. Conversely, a unitriangular closed embedding $i:V_{\\bar k}\\hookrightarrow\\operatorname{GL}_{n,\\bar k}$ has $(i(u)-I)^n=0$ for every $u\\in V(\\bar k)$: the product of $n$ strictly upper triangular matrices is zero. Given any other faithful representation $\\rho$ of $V$, extend it to $\\bar k$ and apply [lem-sfb-rational-representation-unipotent-point] with faithful representation $i$ and representation $\\rho_{\\bar k}$. Every $\\rho(u)$ is unipotent. In particular a faithful geometric representation exists (namely $i$), and whenever a faithful representation is specified the criterion agrees with it. Only the converse from geometric points invoked smoothness.",
+   "uses": [
+    "lem-sfb-geometric-unipotence-unitriangular-embedding",
+    "lem-sfb-rational-representation-unipotent-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.12, p.283; Corollary 14.10 and Section 9.19."
+   }
+  },
+  {
+   "text": "Now work over $F=\\bar k$. Choose the defining closed embeddings $i:V_F\\hookrightarrow\\mathcal U_{n,F}$ and $j:D_F\\hookrightarrow\\mathbf G_{m,F}^r$. For each coordinate $a=1,\\ldots,r$, the composite $\\chi_a=\\operatorname{pr}_a\\circ j\\circ f_F:V_F\\to\\mathbf G_m=\\operatorname{GL}_1$ is a rational representation on $F$. Apply [lem-sfb-unitriangular-subgroup-rational-fixed-vector] with $d=1$ to obtain $v_a\\ne0$ fixed over every $F$-algebra $A$. The equation $\\chi_{a,A}(u)v_a=v_a$ implies $\\chi_{a,A}(u)=1$, since $v_a$ is a nonzero scalar of the field and remains invertible in $A$. Thus $j_A(f_{F,A}(u))=(1,\\ldots,1)=j_A(1)$ for every $A,u$. A closed immersion is injective on $A$-points: its coordinate map is surjective, so two algebra maps agreeing after it agree everywhere [def-weil-closed-immersion, def-weil-affine-spectrum]. Consequently $f_F$ is the identity-valued morphism. This also covers $r=0$, since the target product then has one point over every $A$.",
+   "uses": [
+    "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The representation argument of Proposition 14.16 and Corollary 14.18(a), p.284; Theorem 14.5, pp.281–282."
+   }
+  },
+  {
+   "text": "Descend equality of the two morphisms, not just equality on geometric points. Write $B=k[V]$ and $C=k[D]$. By [def-weil-affine-spectrum] it suffices to show that $f^*:C\\to B$ is the same as the identity-valued map $c\\mapsto\\epsilon_D(c)1_B$. By [lem-weil-pbc-fibre-product-affine-spectra], step 3 gives $(f^*(c)-\\epsilon_D(c)1_B)\\otimes1=0$ in $B\\otimes_k F$ for every $c$. The map $B\\to B\\otimes_k F$ is injective: choose a $k$-linear functional $\\lambda:F\\to k$ with $\\lambda(1)=1$ by extending $1$ to a basis; $1_B\\otimes\\lambda$ is a left inverse. Hence $f^*(c)=\\epsilon_D(c)1_B$. Evaluating this equality on any $k$-algebra $A$ proves $f_A(v)=1$ for every $v\\in V(A)$. None of these steps imposed smoothness or connectedness on either group.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.18(a), p.284, with explicit faithful field-extension detection on affine coordinates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-algclosed-group-embedding-existence-descent",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding",
+  "lem-sfb-rational-representation-unipotent-point",
+  "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-sc-gm-ga"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 14.18(a), p.284, via the rational-representation argument of 14.16 and 14.5; field-extension test assembled with finite-presentation existence descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism from a unipotent affine algebraic group scheme to a group scheme of multiplicative type is trivial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Grp.uniqueHomFromTrivial\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Grp_\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.CartesianMonoidalCategory C] →\\n      (A : CategoryTheory.Grp C) → Unique (CategoryTheory.Grp.trivial C ⟶ A)\", \"doc\": \"In any Cartesian monoidal category $\\\\mathcal{C}$, for every group object $A$ in $\\\\mathcal{C}$, the trivial group object constructed from the unit object $I$ admits a unique group homomorphism to $A$, \"}\n  {\"name\": \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"module\": \"Mathlib/CategoryTheory/Monoidal/CommGrp_\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.CartesianMonoidalCategory C] →\\n      [inst_2 : CategoryTheory.BraidedCategory C] →\\n        (A : CategoryTheory.CommGrp C) → Unique (CategoryTheory.CommGrp.trivial C ⟶ A)\", \"doc\": \"In any Cartesian braided category $\\\\mathcal{C}$, for every commutative group object $A$ in $\\\\mathcal{C}$, the trivial commutative group object constructed from the unit object $\\\\mathbf{1}_\\\\mathcal{C}$\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_containsIdentities\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.RespectsIso fun {R S\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and the induced ring homomorphism to satisfy a property $ Q $, and if $ Q $ is invariant under ring isomorphisms and\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.homOfVector f v)\\n      (AlgebraicGeometry.AffineSpace.toSpecMvPoly n S) =\\n    (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEqu\", \"doc\": \"For a scheme $ S $ and index set $ n $, the composition of the morphism $ \\\\text{homOfVector}(f, v) $ with the projection $ \\\\mathbb{A}^n_S \\\\to \\\\mathbb{A}^n_\\\\mathbb{Z} $ equals the inverse equivalence $\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n      CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) →\\n    (∀ (i : n),\\n        (CategoryTheory\", \"doc\": \"If two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over $S$ agree on their composition with the structure morphism $\\\\mathbb{A}^n_S \\\\to S$ and induce identical maps on all coordina\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  f = g ↔\\n    CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n        CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) ∧\\n      ∀ (i : n),\\n        \", \"doc\": \"Two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over a base scheme $S$ are equal if and only if (1) their compositions with the canonical morphism $\\\\mathbb{A}^n_S \\\\to S$ are equal\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_id\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.AffineSpace.map n (CategoryTheory.CategoryStruct.id S) =\\n    CategoryTheory.CategoryStruct.id (AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"The induced morphism on affine spaces by the identity morphism on a scheme $ S $ is the identity morphism on the affine space $ \\\\mathbb{A}^n_S $. Symbolically, $ \\\\text{map}(n, \\\\text{id}_S) = \\\\text{id}\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unique maps from the trivial group object, affine-space maps and abstract units do not show that all maps from a unipotent group scheme to a group of multiplicative type vanish."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There are no nontrivial algebraic group morphisms from a unitriangular group to a torus or diagonalizable group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"module\": \"Mathlib.CategoryTheory.Monoidal.CommGrp_\", \"type\": \"(A : CommGrp C) : Unique (trivial C ⟶ A)\", \"doc\": \"In any Cartesian braided category $\\\\mathcal{C}$, for every commutative group object $A$ in $\\\\mathcal{C}$, the trivial commutative group object constructed from the unit object $\\\\mathbf{1}_\\\\mathcal{C}$\"}\n  {\"name\": \"CategoryTheory.Grp.uniqueHomFromTrivial\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Grp_\", \"type\": \"(A : Grp C) : Unique (trivial C ⟶ A)\", \"doc\": \"In any Cartesian monoidal category $\\\\mathcal{C}$, for every group object $A$ in $\\\\mathcal{C}$, the trivial group object constructed from the unit object $I$ admits a unique group homomorphism to $A$, \"}\n  {\"name\": \"CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"module\": \"Mathlib.GroupTheory.FiniteAbelian.Duality\", \"type\": \"{a : G} (ha : a ≠ 1) : ∃ φ : G →* Mˣ, φ a ≠ 1\", \"doc\": \"For any non-identity element $ a $ in a commutative group $ G $, and given a commutative monoid $ M $ containing sufficiently many roots of unity, there exists a monoid homomorphism $ \\\\varphi : G \\\\to \"}\n  {\"name\": \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsAlgClosed K] : IsTriangularizable K L M\", \"doc\": \"Given a commutative ring $ R $, a Lie algebra $ L $ over $ R $, and an $ R $-module $ M $ equipped with a compatible Lie module structure over $ L $, if the field $ K $ is algebraically closed, then $\"}\n  {\"name\": \"Subgroup.ofUnits_injective\", \"module\": \"Mathlib.Algebra.Group.Submonoid.Units\", \"type\": \": Function.Injective (ofUnits (M := M))\", \"doc\": \"The canonical inclusion homomorphism from subgroups of the group of units $ M^\\times $ to submonoids of $ M $ is injective, meaning that distinct subgroups of $ M^\\times $ map to distinct submonoids of \"}\n  {\"name\": \"val_toUnits_apply\", \"module\": \"Mathlib.Algebra.Group.Units.Equiv\", \"type\": \"∀ {G : Type u_5} [inst : Group G] (x : G), ↑(toUnits x) = x\", \"doc\": \"For any group $ G $ and any element $ x \\\\in G $, the canonical map from the unit $ \\\\text{toUnits}(x) $ to $ G $ yields $ x $.\"}\n  {\"name\": \"Units.coeHom\", \"module\": \"Mathlib.Algebra.Group.Units.Hom\", \"type\": \": Mˣ →* M\", \"doc\": \"The canonical monoid homomorphism from the group of units $M^\\times$ to the monoid $M$, defined by mapping each invertible element to its underlying element in $M$. This homomorphism preserves the mult\"}\n  {\"name\": \"NonUnitalAlgHom.to_mulHom_injective\", \"module\": \"Mathlib.Algebra.Algebra.NonUnitalHom\", \"type\": \"{f g : A →ₛₙₐ[φ] B} (h : (f : A →ₙ* B) = (g : A →ₙ* B)) : f = g\", \"doc\": \"The conversion from non-unital algebra homomorphisms to multiplicative homomorphisms is injective, meaning that if two non-unital algebra homomorphisms become equal as multiplicative homomorphisms, th\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unique maps from the trivial group object, affine-space maps and abstract units do not show that all maps from a unipotent group scheme to a group of multiplicative type vanish."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: unique maps from the trivial group object, affine-space maps and abstract units do not show that all maps from a unipotent group scheme to a group of multiplicative type vanish."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent.*(multiplicative|diagonalizable|torus)|IsUnipotent",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: unique maps from the trivial group object, affine-space maps and abstract units do not show that all maps from a unipotent group scheme to a group of multiplicative type vanish."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-perfect-solvable-unipotent-torus",
+  "date": "2026-10-23",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.6 proof, first paragraph and Note 16.8: uniqueness and maximality of the diagonal kernel; present proof steps 2, 4 and 5.",
+   "via": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-unipotent-to-multiplicative-trivial",
+  "worker": "stage1",
+  "summary": "Kept all statement clauses. Reused the smooth geometric comparison; split nonsmooth rational fixed vectors and algebraically closed existence descent into two statement-only inputs. Coordinate characters prove vanishing on all algebra points; affine coordinate injectivity descends equality.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), supporting alteration/moduli/PGL chain recorded in blueprint.from.place, then Milne 16.6 first paragraph and Note 16.8: uniqueness/maximality of the diagonal kernel. Steps 1–2 realize geometric conventions; steps 3–4 prove the required vanishing. The imported ancestor record currently has from.node=null; its exact textual provenance and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-cb81b4adb",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-cb81b4adb (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, Milne iAG2017 pp.280-284 (14.3, 14.5 with proof, 14.9, 14.10-14.12, 14.16, 14.18) and Stacks 01ZM (2)-(3) and 00FV. The item statement and stmt_deps are byte-identical to base, so nothing was weakened. The item is unsplit in live and side-live, with no repair note. Step 1: the IsAlgClosed.lift leaf gives F=k-bar into Omega; base change proves preservation and the new descent node proves reflection, for U_n and for G_m^r including r=0. Step 2: lem-sfb-geometric-unipotence-unitriangular-embedding (smooth case) and lem-sfb-rational-representation-unipotent-point (converse, any faithful rep) are used exactly as stated. Step 3: a character of V_F has a nonzero fixed scalar v from the new fixed-vector node with d=1, so it is identically 1; the closed immersion is injective on A-points, so f_F is trivial; r=0 is covered. Step 4 is elementary: B to B tensor F is injective via a functional lambda with lambda(1)=1, which gives scheme-theoretic equality. The route differs from Milne's image argument but is valid, and is marked by: agent. New node lem-sfb-unitriangular-subgroup-rational-fixed-vector is Milne 14.5(b)=>(a), true for nonsmooth U (checked on alpha_p in U_2 and on Z/pZ). It is not a duplicate: the existing smooth fixed-vector node gives only K-point fixedness, which is vacuous for alpha_p. New node lem-sfb-algclosed-group-embedding-existence-descent is true: spread the surjective Hopf map to a finitely generated R inside L, then specialise at a maximal ideal with R/m=F by 00FV. It claims existence only and duplicates neither lem-weil-pbc-descend-closed-immersion nor the Galois-descent node. Neither new node restates a clause of the item; both are statement-only with four kinds of search. No SGA, no off-unit tool uses. blueprint.from.node=null is inherited from the base chain. Advisory: def-sfb-tori-multiplicative-type now exists with the same meaning as the item's inline definition; the statement is unchanged, so no fix was made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnipotentToMultiplicativeTrivial",
+  "declaration": "AlgebraicGeometry.UnipotentGroup.hom_to_multiplicativeType_trivial",
+  "declarations": [
+   "AlgebraicGeometry.UnipotentGroup.HasUnitriangularEmbedding",
+   "AlgebraicGeometry.UnipotentGroup.IsGeometricallyUnipotent",
+   "AlgebraicGeometry.UnipotentGroup.HasFaithfulGeometricallyUnipotentRepresentation",
+   "AlgebraicGeometry.UnipotentGroup.isGeometricallyUnipotent_baseChange_iff",
+   "AlgebraicGeometry.UnipotentGroup.isMultiplicativeType_baseChange_iff",
+   "AlgebraicGeometry.UnipotentGroup.isGeometricallyUnipotent_iff_geometric_points",
+   "AlgebraicGeometry.UnipotentGroup.hom_to_multiplicativeType_trivial"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnipotentToMultiplicativeTrivial.lean",
+  "statement": "theorem hom_to_multiplicativeType_trivial {k : Type u} [Field k] (V D : Grp (Over (Spec (.of k)))) [IsAffine V.X.left] [IsAffine D.X.left] [LocallyOfFiniteType V.X.hom] [QuasiCompact V.X.hom] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom] (hV : IsGeometricallyUnipotent V) (hD : MultiplicativeType.IsMultiplicativeType D) (f : V ⟶ D) (A : Type u) [CommRing A] [Algebra k A] (v : (Spec (.of A)).asOver (Spec (.of k)) ⟶ V.X) : v ≫ f.hom.hom = 1",
+  "branch": "newtargets-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The geometric embedding terminology explicitly defined by this statement includes nonsmooth groups; the existing SolvableGroupStructure.IsUnipotent includes smoothness and cannot encode it. The helpers render the definitions in this node using the existing GeneralLinearGroup. MultiplicativeType.IsMultiplicativeType, splitTorus and baseChange are reused. All three substantive assertions of the node are stated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da6a78ffc",
+  "group": "Q141",
+  "result": "pass",
+  "note": "The item statement matches the node: affine finite-type V and D over a field k, no smoothness or connectedness hypothesis, and v ≫ f = 1 for every k-algebra A in Type u and every A-point. IsGeometricallyUnipotent is a closed subgroup embedding into GL_n over AlgebraicClosure k with diagonal 1 and lower entries 0 at every algebra point (unitriangular, includes nonsmooth groups; the existing IsUnipotent is smooth-only, so this is not an H4 duplicate). Multiplicative type reuses MultiplicativeType.IsMultiplicativeType literally (rank 0 allowed). Both base-change iff theorems hold for any field extension. The smooth criterion requires [Smooth] and an existential faithful representation, equivalent by proof step 2. lean.statement is verbatim. The only node changes are the lean record and the added stmt_dep def-sfb-tori-multiplicative-type, which is landed on the base (permitted by brief-stage2 §177). Definitions have real content, theorems are sorry, source and blueprint docstrings are present, no name clash in side-live, and the report sections are present. Not recompiled per instructions."
+ }
+}

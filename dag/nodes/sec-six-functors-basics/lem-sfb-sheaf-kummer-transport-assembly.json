@@ -1,0 +1,149 @@
+{
+ "id": "lem-sfb-sheaf-kummer-transport-assembly",
+ "kind": "statement",
+ "title": "Kummer transport assembly on an arbitrary scheme",
+ "statement": "For a prime ell invertible on a scheme W, let D be a simultaneous derived reduction for constant p-adic scalar extension [def-sfb-diagonal-system-interface]. Let S be any abelian sheaf, Q_n any finite-coefficient sheaves, g_n:S to the underlying Q_n, and delta an Ext^1 class from S to comparison units. Fix predicates sourceNorm and finiteClass. Assume the canonical source counit a is an isomorphism, each ordinary source quotient has an isomorphism satisfying sourceNorm, and every such normalized isomorphism satisfies the generator equation with g_n. Assume finiteClass holds for the p-adic restriction of every residue-linear e whose scalar adjunct is minus delta followed by the compared Kummer unit. Then normalizedBoundaryTarget holds with sourceNorm, finiteClass, the actual roots tower and its canonical root normalization. The strict Kummer target is supplied by [lem-sfb-kummer-strict-target-transport].",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-kummer-strict-target-transport",
+  "lem-sfb-canonical-sheaf-ext",
+  "def-sfb-kummer-sheaf-conclusion",
+  "def-sfb-kummer-sheaf-class-condition",
+  "def-sfb-kummer-sheaf-predicates"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (3)--(4), formal combination of arbitrary normalized source quotients with strict Kummer target transport."
+ },
+ "proof": [
+  {
+   "text": "Specialize the abstract abelian categories to abelian sheaves, constant p-adic module sheaves and finite residue module sheaves on W. Use the named canonical abelian, small-Ext, additive and exact-functor witnesses.",
+   "uses": [
+    "def-sfb-diagonal-system-interface",
+    "def-sfb-geo-cartier-interface",
+    "lem-sfb-canonical-sheaf-ext",
+    "def-sfb-kummer-sheaf-conclusion",
+    "def-sfb-kummer-sheaf-class-condition",
+    "def-sfb-kummer-sheaf-predicates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Supply the actual strict target from Kummer strict target transport on W. Its roots normalization and compared unit are exactly those in the conclusion.",
+   "uses": [
+    "lem-sfb-kummer-strict-target-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each level combine the given source isomorphism with its generator equation. Apply the proved generic transport assembly with the strict target and the finite-class implication. Its evaluation equation substitutes the exact-functor image into the finite predicate, retaining both original predicates and the same strict system.",
+   "uses": [
+    "lem-sfb-kummer-transport-assembly"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-system-interface",
+  "def-sfb-geo-cartier-interface",
+  "lem-sfb-canonical-sheaf-ext",
+  "def-sfb-kummer-sheaf-conclusion",
+  "def-sfb-kummer-sheaf-class-condition",
+  "lem-sfb-kummer-strict-target-transport",
+  "lem-sfb-kummer-transport-assembly",
+  "def-sfb-kummer-sheaf-predicates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Steps (3)--(4), formal combination of arbitrary normalized source quotients with strict Kummer target transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Assemble a normalized source quotient and a Kummer target in the derived category of inverse systems of sheaves, preserving the finite class predicate",
+   "results": "8 hits: LightCondensed.ofSheafLightProfinite, CondensedMod.ofSheafProfinite, LightCondAb.ofSheafLightProfinite, SheafOfModules.Presentation.IsFinite, LightCondensed.ofSheafForgetLightProfinite, LightCondMod.ofSheafLightProfinite, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index and coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map. These construct other sheaves or limits, not this normalized Ext transport.",
+   "date": "2026-10-27",
+   "verdict": "No exact library match; prove the assembly directly from the strict-target data fields and substitute its evaluation equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"mapExactFunctor\"",
+   "results": "11 hits in Mathlib.Algebra.Homology.DerivedCategory.Ext.Map, including mapExactFunctor, id_mapExactFunctor, mapExactFunctor_mk₀, mapExactFunctor_comp, mapExactFunctor_extClass, comp_mapExactFunctor and the natural-transformation, zero and addition formulas. They supply Ext functoriality, not the project-specific assembly.",
+   "date": "2026-10-27",
+   "verdict": "No exact library match; prove the assembly directly from the strict-target data fields and substitute its evaluation equation."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedBoundaryTarget|kummer_transport_assembly",
+   "results": "0 hits from msearch. The sandbox generic kummer_transport_assembly is the exact logical input; no scheme-specialized project declaration exists.",
+   "date": "2026-10-27",
+   "verdict": "No exact library match; prove the assembly directly from the strict-target data fields and substitute its evaluation equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules, the full Ext class is uniquely determined by its scalar adjunct; use this before exact restriction of scalars and combine the normalized source and Kummer target",
+   "results": "8 hits: SheafOfModules.restrictScalars, Ext.instModule, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, SheafOfModules.PullbackConstruction.adjunction, Ext.smul_eq_comp_mk₀. These give scalar adjunctions and Ext structure, not this project-specific Cartier uniqueness or Kummer assembly.",
+   "date": "2026-10-27",
+   "verdict": "Use the actual full Cartier characterization and exact-functor image already in the project; prove the formal sign and assembly implications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalKummerReduction",
+  "group": "M2",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Steps (3)--(4), formal combination of arbitrary normalized source quotients with strict Kummer target transport.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SheafKummerTransportAssembly",
+  "file": "lean/Sheaf/Paper/SheafKummerTransportAssembly.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sheaf_kummer_transport_assembly",
+  "statement": "theorem sheaf_kummer_transport_assembly (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    [HasExt.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W))\n    (S : DiagonalAb W)\n    (Q : ∀ n, Sheaf (Scheme.ProEt.topology W)\n      (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)))\n    (g : ∀ n, S ⟶ (cartierForget (diagonalResidue.{u} ℓ n) W).obj (Q n))\n    (δ : Ext.{u + 1} S ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf) 1)\n    {sourceNorm : sheafKummerSourcePredicate ℓ W D S Q}\n    {finiteClass : sheafKummerFinitePredicate ℓ W Q}\n    (a : D.T.obj ((DerivedCategory.singleFunctor _ 0).obj S) ≅\n      (DerivedCategory.singleFunctor _ 0).obj (D.ordinary.E.obj S))\n    (ha : a.hom = diagonalDerivedSingleCounit ℓ (diagonalScalarExtension ℓ W) D S)\n    (hs : ∀ n, ∃ s : (D.ordinary.E.obj S).obj (op n) ≅\n      (diagonalFiniteToPadic ℓ n W).obj (Q n), sourceNorm n s)\n    (hg : ∀ n s, sourceNorm n s →\n      HEq ((diagonalScalarAdjunction ℓ W).unit.app S ≫\n        (diagonalForget ℓ W).map ((D.ordinary.π n).app S ≫ s.hom)) (g n))\n    (hc : sheafKummerClassCondition ℓ W hW S Q g δ finiteClass) :\n    sheafKummerConclusion ℓ W hW D S Q δ sourceNorm finiteClass a",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

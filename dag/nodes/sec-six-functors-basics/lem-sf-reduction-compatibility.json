@@ -1,0 +1,92 @@
+{
+ "id": "lem-sf-reduction-compatibility",
+ "kind": "statement",
+ "title": "Finite reduction commutes with pullback and compact-support direct image",
+ "statement": "Let $\\Lambda$ be a commutative ring and $J\\subseteq\\Lambda$ an ideal. For a\nscheme $W$ let $(\\Lambda/J)_W$ be the constant sheaf of $\\Lambda$-modules with\nvalue $\\Lambda/J$, placed in degree $0$, and let\n\n$$\n\\rho_W=-\\otimes^L_\\Lambda(\\Lambda/J)_W:\\ D(W_{\\Et},\\Lambda)\\longrightarrow D(W_{\\Et},\\Lambda)\n$$\n\nbe the *reduction modulo $J$* on the derived category of sheaves of\n$\\Lambda$-modules on the small étale site [def-weil-pbc-derived-categories],\nformed with the derived tensor product [def-weil-derived-pullback-tensor-hom].\nThe reduction $\\rho_WK$ is kept as a complex of $\\Lambda$-modules.\n\n1. For every morphism of schemes $f:X\\to Y$ there is an isomorphism of functors\n$$\nLf^*\\circ\\rho_Y\\cong\\rho_X\\circ Lf^*:\\ D(Y_{\\Et},\\Lambda)\\to D(X_{\\Et},\\Lambda),\n$$\nnamely the monoidality isomorphism\n$Lf^*\\bigl(L\\otimes^L_\\Lambda(\\Lambda/J)_Y\\bigr)\\cong Lf^*L\\otimes^L_\\Lambda Lf^*(\\Lambda/J)_Y$\nfollowed by the identification $Lf^*(\\Lambda/J)_Y\\cong(\\Lambda/J)_X$.\n1. Let $f:X\\to Y$ be a morphism with a compactification\n$c=(X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y)$\n[def-nagata-compactification], and let $Rf^c_!=Rr_*\\circ j_!$ be the\ncompact-support direct image computed with $c$ [def-amb-etale-compact-support].\nFor $K\\in D(X_{\\Et},\\Lambda)$ let\n$$\n\\rho_Y(Rf^c_!K)=Rf^c_!K\\otimes^L_\\Lambda(\\Lambda/J)_Y\\longrightarrow\nRf^c_!\\bigl(K\\otimes^L_\\Lambda Lf^*(\\Lambda/J)_Y\\bigr)\\cong Rf^c_!(\\rho_XK)\n$$\nbe the projection map of $c$ at $(K,(\\Lambda/J)_Y)$\n[lemma-weil-pbc-projection-formula-compactified], followed by\n$Lf^*(\\Lambda/J)_Y\\cong(\\Lambda/J)_X$; it is natural in $K$. If $\\Lambda$ is\nfinite, this comparison is an isomorphism for every $K$. In particular, for\n$\\Lambda$ finite and $f$ admitting a compactification,\n$\\rho_Y\\circ Rf_!\\cong Rf_!\\circ\\rho_X$ for the compact-support direct image\n$Rf_!$ formed with the chosen compactification of $f$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-sf-reduction-compatibility.md",
+  "place": "node lem-sf-reduction-compatibility, order 2771"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-nagata-compactification",
+  "def-amb-etale-compact-support",
+  "lemma-weil-pbc-projection-formula-compactified"
+ ],
+ "proof": [
+  {
+   "text": "(1) The derived pullback is computed termwise and is strong monoidal for the\nderived tensor product [def-weil-derived-pullback-tensor-hom]; applied to\n$L\\otimes^L_\\Lambda(\\Lambda/J)_Y$ this gives the first isomorphism, natural in\n$L$. The pullback of a constant sheaf placed in degree $0$ is the constant sheaf\nwith the same value, which gives $Lf^*(\\Lambda/J)_Y\\cong(\\Lambda/J)_X$.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(2) Naturality holds because the comparison is a composite of natural maps.\nWrite $N=(\\Lambda/J)_Y$. By [lemma-weil-pbc-projection-formula-compactified]\nthe projection map of $c$ at $(K,N)$ is the composite of the projection map\n$\\pi_{r,j_!K,N}:Rr_*(j_!K)\\otimes^L_\\Lambda N\\to Rr_*(j_!K\\otimes^L_\\Lambda Lr^*N)$\nof the proper piece [lemma-weil-pbc-projection-formula-proper-piece] with\n$Rr_*$ applied to the inverse of the open-piece isomorphism\n$j_!(K\\otimes^L_\\Lambda Lj^*Lr^*N)\\cong j_!K\\otimes^L_\\Lambda Lr^*N$\n[lemma-weil-pbc-projection-formula-open-piece]. The open-piece map is an\nisomorphism for every $N$. If $\\Lambda$ is finite, it is torsion, and the\nprojection map of the proper morphism $r$ is an isomorphism for all arguments\nby the proper projection formula [lem-amb-proper-coproducts-projection]. Hence\nthe projection map of $c$ at $(K,N)$ is an isomorphism, and so is its\ncomposite with the isomorphism\n$Rf^c_!(K\\otimes^L_\\Lambda Lf^*N)\\cong Rf^c_!(K\\otimes^L_\\Lambda(\\Lambda/J)_X)$\ncoming from (1). Taking $c$ to be the chosen compactification of $f$ gives the\nlast assertion.",
+   "uses": [
+    "lemma-weil-pbc-projection-formula-compactified",
+    "lemma-weil-pbc-projection-formula-proper-piece",
+    "lemma-weil-pbc-projection-formula-open-piece",
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lemma-weil-pbc-projection-formula-compactified",
+  "lemma-weil-pbc-projection-formula-proper-piece",
+  "lemma-weil-pbc-projection-formula-open-piece",
+  "lem-amb-proper-coproducts-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-sf-reduction-compatibility.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2771,
+ "blueprint_uses": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-nagata-compactification",
+  "def-amb-etale-compact-support",
+  "lemma-weil-pbc-projection-formula-compactified",
+  "lemma-weil-pbc-projection-formula-open-piece",
+  "lemma-weil-pbc-projection-formula-proper-piece",
+  "lem-amb-proper-coproducts-projection"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.reductionModIdeal",
+  "AlgebraicGeometry.Etale.leftDerivedUpperStarReductionModIdealIso",
+  "AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar",
+  "AlgebraicGeometry.Etale.rightDerivedLowerShriekReductionModIdealMap",
+  "AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap",
+  "AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Etale.reductionModIdeal",
+  "AlgebraicGeometry.Etale.leftDerivedUpperStarReductionModIdealIso",
+  "AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_leftDerivedUpperStar",
+  "AlgebraicGeometry.Etale.rightDerivedLowerShriekReductionModIdealMap",
+  "AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap",
+  "AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "lem-sf-reduction-compatibility",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-pf-reduction"
+}

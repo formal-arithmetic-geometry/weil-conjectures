@@ -18,103 +18,50 @@
  ],
  "proof": [
   {
-   "text": "Use the small representatives of the sites in [def-weil-size-convention], in a universe also containing the covering index set and the section sets and products used in descent. Put $\\mathcal C=T_{\\mathrm{Et}}$ and take its terminal object $T\\to T$. The given family covers that object, and fibre products exist in $\\mathcal C$, by [def-weil-pbc-etale-site]. By [lem-weil-pbc-etale-site-localization-open], $\\mathcal C/T_a$ is the small etale site of $T_a$, and likewise on all overlaps. Thus the given $M_a$ and their transitions are sheaves and maps on the slice sites required for descent. Under these equivalences the structure sheaves agree: on an object $W\\to T_a$ both assign $\\Gamma(W,\\mathcal O_W)$, with the same restrictions. Relocalization in [def-pur-localized-ringed-site] gives the same identifications on repeated slices; the slice over the terminal object is $\\mathcal C$ itself.",
+   "text": "Apply lem-trf-fine-log-etale-descent-existence to D and the given jointly surjective etale family. This supplies M, its fineness, a labelled gluing e, and the conditional fs conclusion. This is exactly the construction-and-locality portion of the old plan; no uniqueness is assumed.",
    "uses": [
-    "def-weil-size-convention",
+    "lem-trf-fine-log-etale-descent-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, p. 69; Expose VIII 3.3.4(ii), 3.3.8, pp. 107--108; Stacks sites.tex, Tags 04TR and 04TQ. Existence only: steps 1--4 of lem-trf-fine-log-structure-etale-descent."
+   }
+  },
+  {
+   "text": "Prove the arbitrary-prelog morphism clause directly from Mathlib. Joint surjectivity gives CoversTop by Scheme.ofArrows_mem_smallEtaleTopology_iff at the terminal etale object. The local natural transformations form compatible sections of presheafHom A B, a sheaf since B is a sheaf. FamilyOfElementsOnObjects.IsCompatible.existsUnique_section and presheafHomSectionsEquiv give a global natural transformation with precisely those local components. To verify the structural-map equation, use the same Hom-sheaf separatedness with the multiplicative structure sheaf as target; it is a sheaf by Scheme.isSheaf_etaleStructurePresheaf and preservation of limits by forget₂ CommRingCat CommMonCat. This proof works for arbitrary prelog sheaves and never uses a log axiom.",
+   "uses": [
     "def-weil-pbc-etale-site",
-    "lem-weil-pbc-etale-site-localization-open",
     "def-pur-localized-ringed-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00XZ, section-localize; Definition 00Y0, definition-localize; Lemma 03EH, lemma-relocalize; specialization to the small etale sites"
+    "place": "Tag 04TQ, lemma-glue-maps; the sheaf of natural transformations packages the sectionwise gluing argument."
    }
   },
   {
-   "text": "Forget the monoid operations for the moment. Apply the existence clause of [lem-pe-set-sheaf-cover-descent] to the underlying set sheaves of $M_a$ and their given transition isomorphisms $\\phi_{ab}$. The assumed cocycle is exactly its cocycle, including repeated indices. Obtain a sheaf of sets $M$ and isomorphisms $e_a:M|_{T_a}\\xrightarrow{\\sim}M_a$ with $e_b=\\phi_{ab}e_a$ on every double overlap. These identifications induce the specified descent datum, rather than only isomorphic unlabelled local objects.",
+   "text": "For two labelled gluings e of M and f of N, define the local comparison f_a^{-1} e_a sectionwise as a multiplicative natural transformation over the structure sheaf. Naturality follows from the two gluing naturality equations, and overlap equality follows by cancelling f_b in D.transition(e_a)=e_b and D.transition(f_a)=f_b. The morphism gluing just proved supplies h:M->N. Repeat in the reverse direction to get i:N->M. Their composites restrict to identities, hence are identities by separatedness of the Hom sheaf. Package h and i as the required prelog isomorphism. Any other isomorphism respecting the labels has the same local components by cancellation of f_a; Hom-sheaf separatedness gives equality of hom maps and thus of the isomorphisms. Combine with the existence and fs witnesses from the first step.",
    "uses": [
-    "lem-pe-set-sheaf-cover-descent"
+    "def-trf-fine-log-etale-descent-datum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TR, lemma-glue-sheaves, with the gluing datum immediately preceding it"
-   }
-  },
-  {
-   "text": "For $W\\to T$ etale put $W_a=W\\times_TT_a$. For $s,t\\in M(W)$, transport their restrictions by $e_a$, multiply in $M_a(W_a)$, and transport back. The resulting sections of $M(W_a)$ agree on double overlaps because $\\phi_{ab}$ is a monoid homomorphism. The equalizer condition of [def-weil-pbc-etale-sheaf-of-sets] gives a unique product in $M(W)$; glue the local identity sections in the same way. These operations commute with restriction, since each proposed restriction is the unique section with the indicated local values. Associativity, commutativity and both identity laws hold after restriction to every $W_a$, hence hold in $M(W)$ by the injective part of the same equalizer condition. Thus $M$ is a sheaf of commutative monoids and each $e_a$ is a monoid isomorphism. The local maps $\\alpha_a e_a:M|_{T_a}\\to\\mathcal O_T|_{T_a}$ agree on overlaps by the assumed compatibility of structure maps. The morphism clause of [lem-pe-set-sheaf-cover-descent] glues them to $\\alpha:M\\to\\mathcal O_T$. Its multiplication and identity equations hold locally, so the same separatedness argument proves that $\\alpha$ is a monoid homomorphism.",
-   "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-pe-set-sheaf-cover-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ, lemma-glue-maps; monoid operations and their equations obtained sectionwise from the sheaf equalizer condition"
-   }
-  },
-  {
-   "text": "Check the log condition of [def-trf-fs-log-blowup] directly. For an etale object $W$ and $v\\in\\mathcal O_T(W)^\\times$, its restriction to $W_a$ has a unique preimage $m_a\\in M(W_a)$ under $\\alpha$, since $(M_a,\\alpha_a)$ is a log structure and $e_a$ is a monoid isomorphism. On every double overlap the two preimages agree by that same local uniqueness. The sheaf condition [def-weil-pbc-etale-sheaf-of-sets] glues them to $m\\in M(W)$, and separatedness gives $\\alpha(m)=v$. If two such preimages existed, their restrictions would be equal on all $W_a$, so they would be equal. Consequently the natural map $\\alpha^{-1}(\\mathcal O_T^\\times)\\to\\mathcal O_T^\\times$ is bijective on every object and therefore is an isomorphism of monoid sheaves. This makes $(M,\\alpha)$ a log structure.",
-   "uses": [
-    "def-trf-fs-log-blowup",
-    "def-weil-pbc-etale-sheaf-of-sets"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1, printed p. 69; verification of the defining log condition under the sheaf gluing used in Expose VIII, 3.3.8"
-   }
-  },
-  {
-   "text": "For each $a$ choose an etale covering $\\{V_{a\\lambda}\\to T_a\\}$ on which $M_a$ has its given fine charts. Composite coverings cover in the site [def-weil-pbc-etale-site], so the $V_{a\\lambda}\\to T$ form an etale covering. On each member transport its chart $P_{a\\lambda}\\to M_a|_{V_{a\\lambda}}$ through $e_a^{-1}$. This is a chart for $M$: its composite to the structure sheaf is unchanged and its chart map is followed by an isomorphism of monoid sheaves. In particular the stalkwise pushout map in [def-trf-fs-log-blowup] is the old chart isomorphism followed by the stalk of $e_a^{-1}$. Each $P_{a\\lambda}$ is still finitely generated and integral. Thus $M$ is fine. If the local charts were fine saturated, exactly the same charts remain saturated, so $M$ is fs. No single global chart, or Zariski-local chart, is asserted.",
-   "uses": [
-    "def-weil-pbc-etale-site",
-    "def-trf-fs-log-blowup"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Expose VI, 1.1, printed p. 69; Expose VIII, Remark 3.3.4(ii) and 3.3.8, printed p. 107"
-   }
-  },
-  {
-   "text": "For the moreover clause apply the morphism clause of [lem-pe-set-sheaf-cover-descent] to the underlying set sheaves of $A,B$ and the maps $u_a$. It gives a unique set-sheaf map $u:A\\to B$. For $s,t\\in A(W)$ the sections $u(st)$ and $u(s)u(t)$ restrict to equal sections on $W_a$, by the homomorphism property of $u_a$; hence they are equal by [def-weil-pbc-etale-sheaf-of-sets]. The same argument gives $u(1)=1$ and $\\beta u=\\alpha$. Thus $u$ is the required monoid-sheaf map over the structure sheaf, and uniqueness already follows from uniqueness as a set-sheaf map. This argument assumes only the stated sheaf and monoid axioms of $A,B$, so it also applies when the source is an inverse-image monoid sheaf with the specified composite structure map; no log axiom for the source is used.",
-   "uses": [
-    "lem-pe-set-sheaf-cover-descent",
-    "def-weil-pbc-etale-sheaf-of-sets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ, lemma-glue-maps, on the slice over the terminal object; the monoid and structure-map equations checked sectionwise"
-   }
-  },
-  {
-   "text": "Finally let $(N,\\gamma)$ be another fine log structure with identifications $f_a:N|_{T_a}\\xrightarrow{\\sim}M_a$ inducing this datum. The monoid-sheaf maps $f_a^{-1}e_a:M|_{T_a}\\to N|_{T_a}$ agree on double overlaps and commute with the structure maps. By the moreover argument just proved (using the morphism clause of [lem-pe-set-sheaf-cover-descent]) they glue uniquely to a monoid-sheaf map $h:M\\to N$ over $\\mathcal O_T$. Glue the inverses $e_a^{-1}f_a$ in the same way. Both composites restrict to identity maps; uniqueness in that same morphism clause makes both composites identities. Hence $h$ is an isomorphism, and every isomorphism compatible with the identifications has precisely these local maps, so equals $h$. This proves uniqueness in the asserted, identification-preserving sense.",
-   "uses": [
-    "lem-pe-set-sheaf-cover-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 04TQ, lemma-glue-maps; uniqueness of the gluing and gluing of the inverse maps"
+    "place": "Tag 04TQ, lemma-glue-maps, applied to the comparison maps and their inverses."
    }
   }
  ],
  "proof_deps": [
   "def-pur-localized-ringed-site",
-  "def-trf-fs-log-blowup",
-  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-trf-fine-log-etale-descent-datum",
   "def-weil-pbc-etale-site",
-  "def-weil-size-convention",
-  "lem-pe-set-sheaf-cover-descent",
-  "lem-weil-pbc-etale-site-localization-open"
+  "lem-trf-fine-log-etale-descent-existence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose VIII, 3.3.8 descent invocation, expanded using Stacks Tags 04TR (lemma-glue-sheaves) and 04TQ (lemma-glue-maps); fine/fs locality as in Expose VI, 1.1"
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 04TR and 04TQ: existence is split off, while arbitrary-morphism gluing and labelled uniqueness are proved through the Mathlib Hom sheaf."
  },
  "mathlib_searches": [
   {
@@ -281,10 +228,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-fine-log-structure-etale-descent",
   "worker": "stage1",
-  "summary": "Expanded the omitted fine-log-structure descent argument through existing effective descent for set sheaves. Constructed monoid operations and the structure map, verified the log-unit condition sectionwise, retained the actual local charts to prove fine/fs locality, and proved the arbitrary-monoid morphism clause and identification-preserving uniqueness. No new nodes; no statement change.",
+  "summary": "Repair of the human-ordered re-split: unchanged statement; three independent statement-only nodes now carry monoid operations and structural-map gluing, local log-unit and fine/fs chart checks, and arbitrary monoid morphism/isomorphism gluing. All seven old arguments are retained verbatim and allocated in report.md. The parent retains site localization and set-sheaf descent and assembles the three inputs in under 3000 characters. Live-DAG promotion repair: rechecked all cited interfaces and retained quotations against the current DAG; distinguished the three newly reported 04TQ-sharing nodes in six explicit report comparisons. Delivery rebases the retained split onto current origin/sheaf-dag while preserving live maintainer metadata. Renewed promotion repair of returned branch head 28adf947b8c: compared the retained returned item with the current read-clone item (identical), reread every proof and statement dependency, and verified all nine citation quotations. The first retry dry run rebased the delivery and passed server preflight at 30fc5e643aa; the final delivery validates this updated repair record on its freshly fetched base. Current retry: initial dry run completed without pushing and found two additional same-04TQ candidates. Read both statements and added four explicit comparisons for adic-heart defects and locally finite-free evaluation biduality. Returned-item and current read-clone record remain identical; reread all cited interfaces and checked all nine verbatim quotations. The retained six-step assembly and three children need no mathematical change; delivery rebases them onto its freshly fetched server DAG. Promotion repair renewed on 2026-10-23: the initial required dry run fetched the server DAG, rebuilt the delivery and passed preflight at 89486248614. Compared every field of the current read-clone item with returned-item.json (no differences), and reread every external proof and statement dependency plus all three retained child statements. All nine step/node quotations remain verbatim; the unchanged six-step assembly totals 2936 characters. Rechecked Stacks 03EH/04TQ/04TR and ILO VI 1.1, VIII 3.3.4(ii), 3.3.8 against the current blueprint snapshot 7284bb09daf97437d544c51882b325f9c52cd345. No mathematical interface changed, so the repair preserves the approved argument and live metadata; report.md records the current comparison, verification and promotion requirement rather than submitting an unexplained unchanged re-push. Current return rechecked after initial dry run 770ff96d11e (exit 0): the retained returned record still equals the current read-clone item in every field. Reread all external dependency statements and the three child interfaces; all nine quotations match. Reopened Stacks 03EH/04TQ/04TR and ILO VI 1.1, VIII 3.3.4(ii), 3.3.8, and checked the latest blueprint unit and ancestor. The repaired delivery preserves the approved mathematics and adds the current rebase-review evidence to report.md before final server validation and push.",
   "blueprint": "Realizes the strict-etale descent input in Expose VIII 3.3.8 reached from lem-trf-local-term-locality through the recorded ancestry; generic sheaf descent is a tool, not a replacement of the contracting-correspondence route.",
   "tool_uses": [
    {
@@ -297,17 +244,14 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pe-set-sheaf-cover-descent",
-  "lem-weil-pbc-etale-site-localization-open"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q52-ff338c48b",
-  "group": "Q52",
+  "reviewer": "NT-cc-Q77-06511e30f",
+  "group": "Q77",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ff338c48b (reviewer sub-agent of L); spot-checked: FIX for one small fault: stmt_deps listed def-weil-pbc-etale-sheaf-of-sets and def-pur-localized-ringed-site twice. The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-fine-log-structure-etale-descent.json; nothing else changed. I read the item in full; there are no new nodes. I read the statements of all nine cited nodes, the parent lem-trf-polarized-fine-log-etale-descent and its five steps that cite the item. In ILO (arXiv 1207.3648) I read Expose VI 1.1 (p. 69: fine/fs are defined by etale-local charts) and Expose VIII 3.3.4(ii) and 3.3.8 (p. 107: 'The general case now follows by descent...'). The statement is true, matches the source's use and is not weakened. Small cases tried: empty cover, identity cover, trivial log structure, repeated cover indices. The arbitrary-monoid morphism clause is ordinary gluing of maps, and the parent needs it for inverse-image sheaves. Step 1: the localized site is identified with the small etale site of T_a with the same topology, the structure sheaves agree, and T is terminal so C/T=C. Step 2: lem-pe-set-sheaf-cover-descent applies as stated, including a=b. Step 3: the monoid operations and alpha glue because phi_ab is multiplicative and alpha_b phi_ab=alpha_a. Step 4: the log axiom is checked sectionwise by unique local preimages; it is correctly marked elementary. Step 5: charts transported through e_a^{-1} keep the same monoid P, so fine and saturated are kept; elementary. Step 6: the morphism clause uses no log axiom. Step 7: uniqueness preserves the identifications, by gluing the inverse as well. proof_deps equals the union of uses, and no dependency closure contains the item, so there is no cycle. Accepted tool_uses: lem-pe-set-sheaf-cover-descent (generic Stacks 04TR/04TQ gluing) and lem-weil-pbc-etale-site-localization-open (generic site localization). Both are used as black boxes and replace no step of sk-i-curve-zero. No duplicate exists in the DAG. The repeated mathlib_searches records are cosmetic and left as they are.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-06511e30f (reviewer sub-agent of L); spot-checked: No fixes needed. This is the sixth push of the same three-node re-split. The five earlier pushes (a67d6cfa, 28adf947, 426a3475, 1e25deac, 9b36d01b) all PASSed, and landing returned each as a side completion that was never promoted to the live DAG. Compared field by field with 9b36: the item differs only in split_report.summary (a new dated rebase paragraph), the three new nodes (lem-trf-monoid-sheaf-structure-gluing, lem-trf-log-condition-fine-chart-locality, lem-trf-monoid-sheaf-morphism-gluing) are identical in every field, and the report only adds a dated section. Nothing supersedes this delivery: clones/live and side-live still hold the 7-step base, none of the new node ids exists there, and the re-split repair note is still released. All 10 cited external statements are byte-identical to the 9b36 snapshot. The parent proof has 6 steps totalling 2936 characters, and proof_deps equals the union of the step uses. The new nodes are statement-only and of similar size (1302, 1546 and 1059 characters). Old steps 1-2 stay in the parent, old step 3 goes to structure-gluing, old steps 4-5 to chart-locality, and old steps 6-7 to morphism-gluing. I re-checked the mathematics: the monoid structure and alpha glue through the labelled e_a and separatedness; the log-unit isomorphism and charts are local, and the composite V->T_a->T is a covering; in step 6, f_b^{-1}e_b=f_a^{-1}e_a, and the isomorphism and uniqueness clauses apply. Small cases hold: identity cover, empty cover, repeated indices, the fine non-saturated monoid <2,3>, non-integral sources and trivial R. Sources: Stacks sites.tex lemma-glue-maps (04TQ, line 5638), lemma-glue-sheaves (04TR) and lemma-relocalize, plus ILO VI 1.1 and VIII 3.3.4(ii)/3.3.8 as cited; no SGA is cited. Duplicate scan of the 150 nodes new to the base since 9b36: lem-trf-fine-monoid-local-smooth-charts, lem-trf-monoscheme-smooth-local-charts and lem-trf-zariski-prelog-logification-comparison are not duplicates of the new nodes. Q16 lem-trf-log-morphism-fixed-map-etale-lifting is a special case of morphism-gluing; this is advisory only. Accepted tool_uses: lem-pe-set-sheaf-cover-descent and lem-weil-pbc-etale-site-localization-open, both generic. Maintainer note: L must promote this completion into the live DAG, otherwise the re-push loop continues."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FineLogEtaleDescent",
@@ -327,5 +271,26 @@
   "result": "pass",
   "note": "Read the item node, all 7 stmt deps, the new def-trf-fine-log-etale-descent-datum node and module, the item module, report.md, FineSaturatedLogBlowup (EtaleLogStructure/IsChart/IsFineSaturated) and EtaleOver.overToEtale, plus ILO VIII 3.3.8 pp.107-108 and VI 1.1. Every clause matches with no stronger assumptions: IsLocallyNoetherian T, free index universe v, pointwise jointly surjective cover; the datum has natural alpha-compatible transitions on all two-lift test objects (equivalent to double overlaps by the pullback property), a diagonal and a cocycle over all triples; existence of a fine M with a labelled Gluing; a unique Iso compatible with the identifications (f∘h=e); fs implication via the existing IsFineSaturated; arbitrary EtalePrelogStructure morphism gluing via Sheaf.over LocalHom with ∃! Hom. IsFine is the IsFineSaturated pattern with FG plus integral (Grothendieck-group injectivity), not hollow. No duplicates in Mathlib, side or live. The node changes only lean and stmt_deps; lean.statement is verbatim in both files; the 8 declarations exist with docstrings; the only proof is sorry. Edge cases checked: empty ι, repeated indices and lifts, geometric-point lifting, non-saturated charts, non-log prelog sources. nt_compile.py on both files: clean, rc 0 (10.1 s, 2.6 s). The report has both required sections. Cosmetic only: an unused public PushforwardContinuous import."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T081947-L-2110689",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

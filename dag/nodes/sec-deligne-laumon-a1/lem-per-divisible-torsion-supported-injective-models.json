@@ -1,0 +1,383 @@
+{
+ "id": "lem-per-divisible-torsion-supported-injective-models",
+ "kind": "statement",
+ "title": "Supported finite torsion layers of a divisible-sheaf injective resolution",
+ "statement": "Let $i:Z\\hookrightarrow X$ be a closed immersion of Noetherian schemes [def-weil-closed-immersion], with open complement $j:U\\hookrightarrow X$. Use ordinary small-etale module sheaves and derived categories [def-weil-pbc-derived-categories]. Fix a prime $\\ell$ and an abelian sheaf $M$ on $X_{\\mathrm{et}}$ such that multiplication by $\\ell$ is an epimorphism of sheaves. Let $M[0]\\to I^\\bullet$ be any injective resolution in abelian sheaves [def-sp-injective-resolutions], with $I^q=0$ for $q<0$. For $r\\geq1$ put $A_r=\\mathbf Z/\\ell^r\\mathbf Z$, $F_r=\\ker(\\ell^r:M\\to M)$, and define actual subcomplexes\n$$J_r^\\bullet=\\ker(\\ell^r:I^\\bullet\\to I^\\bullet),\\qquad K_r^\\bullet=i^{-1}\\ker(J_r^\\bullet\\to j_*j^{-1}J_r^\\bullet),\\qquad E_r^\\bullet=\\Gamma(Z,K_r^\\bullet).$$\nThe supported kernel is [def-pur-etale-supported-kernel]. The augmentation $F_r[0]\\to J_r^\\bullet$ is an injective resolution in $A_r$-module sheaves. Every term of $K_r$ is injective over $A_r$, and the natural derived comparison is an isomorphism\n$$QK_r\\xrightarrow{\\sim}i_r^!F_r$$\nin $D^+(Z_{\\mathrm{et}},A_r)$, for the closed-support adjoint of [def-per-closed-support-plus-adjunction]. For $m\\geq0$, sending $1$ to a global cocycle gives a natural isomorphism\n$$H^m(E_r)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(Z_{\\mathrm{et}},A_r)}(A_{r,Z},i_r^!F_r[m]).$$\nFor every $a,b\\geq1$, the inclusions and multiplication maps give degreewise short exact sequences\n$$0\\to J_a\\xrightarrow{\\mathrm{incl}}J_{a+b}\\xrightarrow{\\ell^a}J_b\\to0,\\qquad 0\\to K_a\\xrightarrow{\\mathrm{incl}}K_{a+b}\\xrightarrow{\\ell^a}K_b\\to0,\\qquad 0\\to E_a\\xrightarrow{\\mathrm{incl}}E_{a+b}\\xrightarrow{\\ell^a}E_b\\to0.$$\nThe first two are sequences of $A_{a+b}$-module complexes with restricted outer scalars. For $N\\geq r$, the map $K_N\\to K_r$ is multiplication by $\\ell^{N-r}$, and $K_r\\to K_N$ is inclusion; the same holds for $J$ and $E$. Under the displayed comparisons these are the maps induced by $F_N\\xrightarrow{\\ell^{N-r}}F_r$ and $F_r\\hookrightarrow F_N$. More precisely, the comparisons identify the scalar restriction of $QK_r$ to $A_N$ with $i_N^!(\\operatorname{Res}_{A_N\\to A_r}F_r)$, agree with the comparison at $r=N$, and identify the displayed short exact coefficient rows with the derived closed-support images of the corresponding rows of the $F_r$. These identifications respect composition of coefficient maps and the closed-adjunction counits.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DD7 (lemma-torsion), first paragraph: injective abelian sheaves are divisible on sections; etale-cohomology.tex Tag 09XQ (lemma-sections-with-support-acyclic), supported adjunction and preservation of injectives. Agent-derived finite torsion-layer refinement of these facts, used in place of the Godement model in ILO Expose XVI Proposition 3.3.2, printed p.245."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-sp-injective-resolutions",
+  "def-pur-etale-supported-kernel",
+  "def-per-closed-support-plus-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Sectionwise divisibility. If $T$ is an injective abelian sheaf and $V$ is an object of its site, represent $s\\in T(V)$ by $f:\\mathbf Z[V]\\to T$ using [lem-trf-site-free-sheaf-sections]. Multiplication by a positive integer $n$ is monic on the free abelian presheaf on $V$: in each free basis its kernel consists of integer coefficients $c$ with $nc=0$, hence $c=0$. It remains monic after sheafification by [lem-weil-pbc-sheafification-exact]. Injectivity [def-sp-injective-resolutions] extends $f$ along this monomorphism to $h:\\mathbf Z[V]\\to T$ with $h\\circ n=f$. The section corresponding to $h$ has $n$ times itself equal to $s$. Thus $T(V)$ is divisible, in particular for $V=X$ or $Z$.",
+   "uses": [
+    "lem-trf-site-free-sheaf-sections",
+    "lem-weil-pbc-sheafification-exact",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, lemma-torsion, first paragraph; finite-exponent refinement written by Q56."
+   }
+  },
+  {
+   "text": "The torsion complexes resolve the torsion sheaves. Step 1 gives the degreewise short exact sequence $0\\to J_r\\to I\\xrightarrow{\\ell^r}I\\to0$. Since $H^0(I)=M$, $H^q(I)=0$ for $q\\ne0$, and $\\ell^r:M\\to M$ is epic (compose the given epimorphism $r$ times), the long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] gives $H^0(J_r)=F_r$ and $H^q(J_r)=0$ for $q\\ne0$. The identification in degree zero is precisely the kernel augmentation. For injectivity over $A_r$, let $B\\hookrightarrow C$ be a monomorphism of $A_r$-module sheaves and $B\\to I^q[\\ell^r]$ a map. Forget the scalars and extend its composite $B\\to I^q$ to $C\\to I^q$ by injectivity. Since $\\ell^r C=0$, the extension lands in the kernel $I^q[\\ell^r]$ and is $A_r$-linear (an additive map between sheaves killed by $\\ell^r$ commutes with integer scalars). This proves that $F_r[0]\\to J_r$ is an injective resolution over $A_r$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, lemma-torsion, first paragraph; finite-exponent refinement written by Q56."
+   }
+  },
+  {
+   "text": "Supported terms. Write $H(T)=i^{-1}\\ker(T\\to j_*j^{-1}T)$ and put $T^q=H(I^q)$. By [lem-pur-etale-supported-kernel-adjunction], $i_*$ is exact on abelian sheaves and left adjoint to $H$. Hence for a monomorphism $G'\\hookrightarrow G$ of abelian sheaves on $Z$, the map $i_*G'\\to i_*G$ is a monomorphism, and the natural bijections $\\operatorname{Hom}_Z(G,T^q)\\cong\\operatorname{Hom}_X(i_*G,I^q)$ turn the surjective restriction for the injective $I^q$ [def-sp-injective-resolutions] into surjectivity of $\\operatorname{Hom}_Z(G,T^q)\\to\\operatorname{Hom}_Z(G',T^q)$. Thus $T^q$ is an injective abelian sheaf on $Z$ (the proof of Stacks 09XQ). Sectionwise kernels [lem-weil-pbc-sheafification-exact] and exactness of $i^{-1}$ [prop-weil-pbc-inverse-image-exact] identify $H(I^q[\\ell^r])$ with $H(I^q)[\\ell^r]$: both kernels first impose support on $Z$ and then impose $\\ell^r=0$, in either order. Hence $K_r^q=T^q[\\ell^r]$, compatibly with differentials and inclusions. The extension argument of step 2, now on $Z$ with target $T^q$, proves that $K_r^q$ is injective over $A_r$.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-sheafification-exact",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, support adjunction and its derived functor; finite-coefficient refinement written by Q56."
+   }
+  },
+  {
+   "text": "The fixed-ring comparison. The category of $A_r$-module sheaves has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Apply [lem-weil-pbc-right-derived-plus-injective](2) to $H$ and the resolution in step 2. It gives the natural isomorphism $QH(J_r)\\simeq RH(F_r[0])$. The adjoint in [def-per-closed-support-plus-adjunction] is this right derived supported functor, with the support-inclusion counit. Consequently this is the required $QK_r\\simeq i_r^!F_r$. In particular its counit is induced by $i_*K_r\\to J_r$ and the augmentation $F_r[0]\\to J_r$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-per-closed-support-plus-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, support adjunction and its derived functor; finite-coefficient refinement written by Q56."
+   }
+  },
+  {
+   "text": "Cocycles and derived morphisms. Since $K_r$ is bounded below and termwise injective, [lem-weil-pbc-bounded-below-injectives-kinjective] and [lem-weil-pbc-kinjective-hom-derived] identify maps $A_{r,Z}[0]\\to QK_r[m]$ in $D$ with chain maps modulo chain homotopy. The free-module universal property [lem-trf-free-module-sheaf-universal-property], for the terminal sheaf of sets and coefficient sheaf $A_{r,Z}$, identifies $\\operatorname{Hom}(A_{r,Z},K_r^q)$ with $\\Gamma(Z,K_r^q)$ by evaluation at $1$. A chain map from $A_{r,Z}[0]$ to $K_r[m]$ is therefore a global degree-$m$ cocycle. A chain homotopy changes it by a boundary (the possible shift sign has the same image subgroup). Taking the quotient gives $H^m(E_r)$ and the asserted isomorphism, with inverse given by sending $1$ to a representative cocycle. Compose with step 4 to obtain the displayed target. All identifications commute with chain maps.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-trf-free-module-sheaf-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, support adjunction and its derived functor; finite-coefficient refinement written by Q56."
+   }
+  },
+  {
+   "text": "Exact coefficient rows. For any divisible abelian group $D$ and $a,b\\geq1$, the kernel of $\\ell^a:D[\\ell^{a+b}]\\to D[\\ell^b]$ is $D[\\ell^a]$. Given $y\\in D[\\ell^b]$, choose $x\\in D$ with $\\ell^ax=y$; then $\\ell^{a+b}x=\\ell^by=0$. Thus this row is short exact. Apply this calculation to the divisible groups $I^q(V)$ from step 1, for every etale $V\\to X$, to obtain the $J$ row. Apply it to $T^q(V)$ for every etale $V\\to Z$, with $T^q$ injective by step 3, to obtain the $K$ row. Finally apply it to $T^q(Z)$ and use $E_r^q=\\Gamma(Z,T^q[\\ell^r])=T^q(Z)[\\ell^r]$ (kernels of sheaves are sectionwise [lem-weil-pbc-sheafification-exact]) to obtain the $E$ row. All maps commute with differentials because they are integer multiplications or inclusions of their kernels. These are $A_{a+b}$-linear rows after scalar restriction. This proves surjectivity on supported sections directly, without applying a nonexact functor to a short exact row.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, lemma-torsion, first paragraph; finite-exponent refinement written by Q56."
+   }
+  },
+  {
+   "text": "The sheaf coefficient rows themselves are short exact. The same kernel calculation as in step 6 applies locally to $M$: given $y\\in F_b(V)$, local surjectivity of $\\ell^a:M\\to M$ supplies a covering and lifts $x$ with $\\ell^ax=y$; each lift lies in $F_{a+b}$ since $\\ell^{a+b}x=0$. Here local surjectivity is exactly the sheaf-epimorphism criterion [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective]. Thus $0\\to F_a\\to F_{a+b}\\xrightarrow{\\ell^a}F_b\\to0$ is short exact. The kernel augmentations give a commuting diagram from this row, concentrated in degree zero, to the $J$ row of step 6. Both vertical inclusions and multiplication maps are literally restrictions of those on $M\\to I$.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DD7, lemma-torsion, first paragraph; finite-exponent refinement written by Q56."
+   }
+  },
+  {
+   "text": "Restriction of coefficients. Fix $N\\geq r$; restriction $\\operatorname{Res}$ along $A_N\\to A_r$ keeps underlying abelian sheaves, so it is exact and commutes with $H$ and $\\Gamma$. On $A_N$-module sheaves $H$ is additive and left exact (a kernel followed by the exact $i^{-1}$ [prop-weil-pbc-inverse-image-exact]); with enough injectives [lem-weil-pbc-module-sheaves-enough-injectives] its derived functors $R^pH$ over $A_N$ vanish on injectives for $p>0$ and have long exact sequences [lem-weil-pbc-derived-functor-long-exact]. Claim: for all $q$ and $1\\leq s\\leq N$ the $A_N$-sheaf $J_s^q=I^q[\\ell^s]$ is $H$-acyclic over $A_N$. For $s=N$ it is injective over $A_N$ by step 2. For $s<N$, step 6 with $a=s$, $b=N-s$ gives the short exact sequence $0\\to J_s^q\\to J_N^q\\xrightarrow{\\ell^s}J_{N-s}^q\\to0$ of $A_N$-sheaves. By step 3, $H$ sends its last map to $\\ell^s:T^q[\\ell^N]\\to T^q[\\ell^{N-s}]$, an epimorphism by the $K$ row of step 6. The long exact sequence and $R^pH(J_N^q)=0$ for $p>0$ give $R^1H(J_s^q)=0$ and $R^{p+1}H(J_s^q)\\cong R^pH(J_{N-s}^q)$ for $p\\geq1$. Induction on $p$, for all $1\\leq t\\leq N$ at once, proves the claim. Hence $\\operatorname{Res}F_r[0]\\to\\operatorname{Res}J_r$ is a bounded-below resolution by $H$-acyclic $A_N$-sheaves, and [sk-thm-acyclicity] makes the canonical comparison $\\alpha$ of [lem-weil-pbc-right-derived-plus-injective] an isomorphism $Q\\operatorname{Res}K_r=QH(\\operatorname{Res}J_r)\\simeq i_N^!(\\operatorname{Res}F_r)$, $i_N^!$ being this derived supported functor by [def-per-closed-support-plus-adjunction]. Together with step 4 this gives $\\operatorname{Res}(i_r^!F_r)\\simeq\\operatorname{Res}QK_r\\simeq i_N^!(\\operatorname{Res}F_r)$. Both comparisons are induced by the same support inclusion $i_*K_r\\to J_r$ and augmentation, so they respect the closed-adjunction counits; for $r=N$ the restriction is the identity and this is step 4. Naturality of $\\alpha$ gives naturality in chain maps of such resolutions.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "sk-thm-acyclicity",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-per-closed-support-plus-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, lemma-sections-with-support-acyclic, and the derived functor of sections with support defined after it; dimension shifting along the torsion rows, written by Q56 in place of the Godement coefficient compatibility of ILO XVI Proposition 3.3.2, printed p.245."
+   }
+  },
+  {
+   "text": "Maps and rows in a common coefficient category. Fix $N$ and regard all $J_s,K_s$ for $s\\leq N$ as $A_N$-complexes. Step 8 makes their supported comparisons natural in their chain maps, even though the restricted $J_s$ need only be support-acyclic. For $N\\geq r$ the maps on $J$ are the kernel inclusion and multiplication by $\\ell^{N-r}$, lifting exactly $F_r\\hookrightarrow F_N$ and $F_N\\xrightarrow{\\ell^{N-r}}F_r$. Applying $H$ and then $\\Gamma$ gives the asserted $K$ and $E$ maps. For a coefficient row set $N=a+b$. The augmentation diagram of step 7 is a morphism of degreewise short exact rows. Its associated distinguished triangles and their connecting maps are natural by [lem-weil-pbc-complex-ses-triangle]. To check the connecting arrow as well, use the usual cone of $J_a\\to J_{a+b}$. Its terms are finite sums of support-acyclic terms, and $H$ is additive, so applying $H$ to this cone gives the cone of $K_a\\to K_{a+b}$. The cone-to-$J_b$ quasi-isomorphism becomes an isomorphism after deriving $H$; [sk-thm-acyclicity] identifies this map with the cone-to-$K_b$ map. This identifies the entire $K$ triangle, including its connecting arrow, with the derived supported coefficient triangle. The cocycle identifications of step 5 give the corresponding $E$ maps. Finally, successive inclusions compose as inclusions, successive reductions multiply as $\\ell^{N-s}\\ell^{s-r}=\\ell^{N-r}$, and any composite of the coefficient chain maps is sent to its composite by $H$ and $\\Gamma$. Naturality in step 8 therefore gives composition compatibility. The support inclusions commute with every one of these maps, which gives precisely the asserted compatibility with closed-adjunction counits.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "sk-thm-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.3.2, printed p.245: coefficient-compatible supported models. The injective torsion-layer refinement is written by Q56 using Stacks Tags 0DD7 and 09XQ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-site-free-sheaf-sections",
+  "lem-weil-pbc-sheafification-exact",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-per-closed-support-plus-adjunction",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-trf-free-module-sheaf-universal-property",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "sk-thm-acyclicity",
+  "lem-weil-pbc-complex-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DD7 (lemma-torsion), together with etale-cohomology.tex Tag 09XQ (lemma-sections-with-support-acyclic); agent-derived finite torsion refinement for ILO XVI Proposition 3.3.2, printed p.245."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Torsion layers of an injective resolution of a divisible etale abelian sheaf compute finite coefficient cohomology with closed supports",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CochainComplex.cm5b.I\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [CategoryTheory.EnoughInjectives C] → CochainComplex C ℤ → CochainComplex C ℤ\", \"doc\": \"A cochain complex in an abelian category $\\\\mathcal{C}$ with enough injectives, where each object $X^n$ is the injective replacement of $K.X^n$ and all differential morphisms between objects are zero m\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ}\\n  (f : X ⟶ R.cocomplex.X n) (m : ℕ) (hm : n + 1 = m)\\n  (hf : CategoryTheory.CategoryStruct.comp f (R.cocomple\", \"doc\": \"Given objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with an injective resolution $R$ of $Y$, a morphism $f: X \\\\to R^{\\\\bullet}_n$ satisfying the cocycle condition $f \\\\circ d^n = 0$ defines a\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.HasExt C] →\\n        {X Y : C} →\\n          (R : CategoryTheory.InjectiveResolution Y) →\\n            {n : ℕ} →\\n              CategoryTheory.Abelian.Ext X Y n ≃\\n        \", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with an injective resolution $R$ of $Y$, there is a natural equivalence between the $n$-th Ext group $\\\\mathrm{Ext}^n(X,Y)$ and the $n$-th c\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.InjectiveResolution X), R.cochainComplex.IsLE 0\", \"doc\": \"The cochain complex associated to an injective resolution, when extended from natural number indices to integer indices by assigning zero objects to negative positions, satisfies the support condition\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generic injective resolutions, kernel/splitting criteria, or ordinary cohomology; none identifies finite torsion layers of one divisible-sheaf resolution with supported finite-coefficient derived objects and exact coefficient rows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of multiplication by a prime power on an injective resolution of a divisible sheaf gives compatible injective resolutions over ZMod",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.cm5b.instInjectiveXIntI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ),\\n  CategoryTheory.Injective ((CochainComplex.cm5b.I K).X n)\", \"doc\": \"For each integer $ n $, the object $ (I K).X(n) $ in the cochain complex $ I K $ constructed via injective replacements is an injective object in the abelian category $ \\\\mathcal{C} $. This follows fro\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Preadditive C] {X : C} (R : CategoryTheory.InjectiveResolution X) (n : ℤ),\\n  CategoryTheory.Injective (R.cochainComplex.X n)\", \"doc\": \"For each integer $ n $, the object $ X_n $ in the cochain complex associated with an injective resolution is injective. This includes assigning zero objects to negative indices, which are trivially in\"}\n  {\"name\": \"CochainComplex.cm5b.I\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [CategoryTheory.EnoughInjectives C] → CochainComplex C ℤ → CochainComplex C ℤ\", \"doc\": \"A cochain complex in an abelian category $\\\\mathcal{C}$ with enough injectives, where each object $X^n$ is the injective replacement of $K.X^n$ and all differential morphisms between objects are zero m\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.descFSucc\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {Y Z : C} →\\n        (I : CategoryTheory.InjectiveResolution Y) →\\n          (J : CategoryTheory.InjectiveResolution Z) →\\n            (n : ℕ) →\\n              (g : J.cocomplex.X n ⟶ I.cocomplex.\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, given injective resolutions $I$ and $J$ of objects $Y$ and $Z$, and morphisms $g: J^{(n)} \\\\to I^{(n)}$ and $g': J^{(n+1)} \\\\to I^{(n+1)}$ satisfying the commutativ\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.kernelFork\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Injective/Resolution\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n        {Z : C} → (I : CategoryTheory.InjectiveResolution Z) → CategoryTheory.Limits.KernelFork (I.cocomplex.d 0 1)\", \"doc\": \"The kernel fork for the first differential $d^{0,1}$ in the cochain complex associated with an injective resolution, constructed using the inclusion morphism $\\\\iota$ from the single-term cochain compl\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (Z : C) (n : ℕ),\\n  CategoryTheory.Injective ((CategoryTheory.InjectiveResolution.ofCocomplex Z).X n)\", \"doc\": \"For any natural number $n$, the object at position $n$ in the cochain complex constructed by the injective resolution $\\\\text{ofCocomplex } Z$ is an injective object in the abelian category.\"}\n  {\"name\": \"CochainComplex.cm5b.I_X\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (K : CochainComplex C ℤ) (n : ℤ),\\n  (CochainComplex.cm5b.I K).X n = CategoryTheory.Injective.under (K.X n)\", \"doc\": \"For any cochain complex $ K $ in an abelian category $ \\\\mathcal{C} $ with enough injectives, and for every integer $ n $, the object $ X^n $ in the cochain complex $ I $ constructed via the CM5b facto\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.of\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{u_2, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [CategoryTheory.EnoughInjectives C] → (Z : C) → CategoryTheory.InjectiveResolution Z\", \"doc\": \"Given an object $ Z $ in an abelian category $ \\\\mathcal{C} $ that has enough injectives, this function constructs an injective resolution of $ Z $, which is a cochain complex where each term is an inj\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generic injective resolutions, kernel/splitting criteria, or ordinary cohomology; none identifies finite torsion layers of one divisible-sheaf resolution with supported finite-coefficient derived objects and exact coefficient rows"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, Sheaf",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Sheaf'\n",
+   "date": "2026-10-24",
+   "verdict": "no match: query parsed with unknown identifier Sheaf; corrected in the second Loogle query"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, \"kernel\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.epiWithInjectiveKernel_iff_of_isZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.EpiWithInjectiveKernel\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {X Y : C} (f : X ⟶ Y) (hY : CategoryTheory.Limits.IsZero Y) : CategoryTheory.Abelian.epiWithInjectiveKernel f ↔ CategoryTheory.Injective X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Abelian.epiWithInjectiveKernel_iff\", \"module\": \"Mathlib.CategoryTheory.Abelian.EpiWithInjectiveKernel\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {X Y : C} (g : X ⟶ Y) : CategoryTheory.Abelian.epiWithInjectiveKernel g ↔ ∃ I, ∃ (_ : CategoryTheory.Injective I), ∃ f, ∃ (w : CategoryTheory.CategoryStruct.comp f g = 0), Nonempty { X₁ := I, X₂ := X, X₃ := Y, f := f, \", \"doc\": \"A morphism `g : X ⟶ Y` is epi with an injective kernel iff there exists a morphism\\n`f : I ⟶ X` with `I` injective such that `f ≫ g = 0` and\\nthe short complex `I ⟶ X ⟶ Y` has a splitting.\"}\n  {\"name\": \"CochainComplex.degreewiseEpiWithInjectiveKernel_iff_of_isZero\", \"module\": \"Mathlib.Algebra.Homology.Factorizations.Basic\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (hL : CategoryTheory.Limits.IsZero L) : CochainComplex.degreewiseEpiWithInjectiveKernel f ↔ ∀ (n : ℤ), CategoryTheory.Injective (K.X n)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generic injective resolutions, kernel/splitting criteria, or ordinary cohomology; none identifies finite torsion layers of one divisible-sheaf resolution with supported finite-coefficient derived objects and exact coefficient rows"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*[Ii]njective|[Ii]njective.*torsion|divisible.*[Ss]heaf|[Ss]heaf.*divisible",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"line\": \"721\", \"text\": \"  rw [isTorsionFree_iff_faithfulSMul, faithfulSMul_iff_algebraMap_injective,\"}\n  {\"file\": \"Mathlib/NumberTheory/Cyclotomic/Basic.lean\", \"line\": \"762\", \"text\": \"  isTorsionFree_iff_algebraMap_injective.mpr (adjoin_algebra_injective n A K)\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Tower.lean\", \"line\": \"454\", \"text\": \"theorem lsmul_injective [Module.IsTorsionFree A M] {x : A} (hx : x ≠ 0) :\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Basic.lean\", \"line\": \"461\", \"text\": \"  (FaithfulSMul.algebraMap_injective R A).moduleIsTorsionFree _\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Basic.lean\", \"line\": \"486\", \"text\": \"lemma isTorsionFree_iff_algebraMap_injective : IsTorsionFree R A ↔ Injective (algebraMap R A) := by\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Basic.lean\", \"line\": \"487\", \"text\": \"  rw [isTorsionFree_iff_faithfulSMul, faithfulSMul_iff_algebraMap_injective]\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Basic.lean\", \"line\": \"492\", \"text\": \"alias NoZeroSMulDivisors.iff_algebraMap_injective := isTorsionFree_iff_algebraMap_injective\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Ramification.lean\", \"line\": \"236\", \"text\": \"  have := IsMulTorsionFree.pow_right_injective₀ (by rwa [one_eq_top]) h₂ this\"}\n  {\"file\": \"Mathlib/Algebra/Quaternion.lean\", \"line\": \"474\", \"text\": \"  (addEquivProd ..).injective.moduleIsTorsionFree _ fun _ _ ↦ rfl\"}\n  {\"file\": \"Mathlib/Algebra/Module/TransferInstance.lean\", \"line\": \"84\", \"text\": \"  extract_lets; exact (e.linearEquiv R).injective.moduleIsTorsionFree _ (by simp)\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Basic.lean\", \"line\": \"386\", \"text\": \"  isTorsionFree_iff_algebraMap_injective.mpr <| algebraMap.injective K L\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/Basic.lean\", \"line\": \"107\", \"text\": \"  coe_injective.moduleIsTorsionFree _ coe_smul\"}\n  {\"file\": \"Mathlib/Algebra/Ring/NonZeroDivisors.lean\", \"line\": \"28\", \"text\": \"theorem IsLeftRegular.pow_injective [IsMulTorsionFree R]\"}\n  {\"file\": \"Mathlib/Algebra/Ring/NonZeroDivisors.lean\", \"line\": \"41\", \"text\": \"theorem IsRightRegular.pow_injective {M : Type*} [Monoid M] [IsMulTorsionFree M] {x : M}\"}\n  {\"file\": \"Mathlib/Algebra/Ring/NonZeroDivisors.lean\", \"line\": \"46\", \"text\": \"theorem IsMulTorsionFree.pow_right_injective {M : Type*} [CancelMonoid M] [IsMulTorsionFree M]\"}\n  {\"file\": \"Mathlib/Algebra/Ring/NonZeroDivisors.lean\", \"line\": \"54\", \"text\": \"theorem IsMulTorsionFree.pow_right_injective₀ {M : Type*} [MonoidWithZero M] [IsLeftCancelMulZero M]\"}\n  {\"file\": \"Mathlib/Algebra/Ring/NonZeroDivisors.lean\", \"line\": \"55\", \"text\": \"    [IsMulTorsionFree M] {x : M} (hx : x ≠ 1) (hx' : x ≠ 0) : Function.Injective (fun n ↦ x ^ n) :=\"}\n  {\"file\": \"Mathlib/Algebra/Module/Torsion/Free.lean\", \"line\": \"40\", \"text\": \"/-- An `R`-module `M` is torsion-free if scalar multiplication by an element `r : R` is injective if\"}\n  {\"file\": \"Mathlib/Algebra/Module/Torsion/Free.lean\", \"line\": \"53\", \"text\": \"/-- Pullback an `IsTorsionFree` instance along an injective function. -/\"}\n  {\"file\": \"Mathlib/Algebra/Module/Torsion/Free.lean\", \"line\": \"54\", \"text\": \"lemma Function.Injective.moduleIsTorsionFree [IsTorsionFree R N] (f : M → N) (hf : f.Injective)\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Units/Basic.lean\", \"line\": \"221\", \"text\": \"  · let e := ((torsion K).equivMapOfInjective (Units.complexEmbedding φ)\"}\n  {\"file\": \"Mathlib/Algebra/Module/Torsion/Basic.lean\", \"line\": \"763\", \"text\": \"  Subtype.coe_injective.distribMulAction (torsion' R M S).subtype.toAddMonoidHom fun (_ : S) _ =>\"}\n  {\"file\": \"Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean\", \"line\": \"95\", \"text\": \"  apply Submodule.map_injective_of_injective (Submodule.subtype_injective (torsionBySet A M ↑J))\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/Basic.lean\", \"line\": \"98\", \"text\": \"theorem Ideal.torsionMapQuot_injective (hI₁ : absNorm I ≠ 1)\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Ideal/Basic.lean\", \"line\": \"100\", \"text\": \"    Function.Injective (torsionMapQuot I) := by\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generic injective resolutions, kernel/splitting criteria, or ordinary cohomology; none identifies finite torsion layers of one divisible-sheaf resolution with supported finite-coefficient derived objects and exact coefficient rows"
+  },
+  {
+   "tool": "grep",
+   "query": "Injective|torsion|divisible",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"line\": \"115\", \"text\": \"  Φ.skyscraperPresheafHomEquiv.symm.injective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"13\", \"text\": \"public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"97\", \"text\": \"instance (F : Sheaf J AddCommGrpCat.{w}) {n : ℕ} [Injective F] : Subsingleton (H F (n + 1)) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"98\", \"text\": \"  subsingleton_of_forall_eq 0 fun x ↦ (Ext.eq_zero_of_injective x)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"120\", \"text\": \"  apply (Ext.mk₀_bijective _ G).injective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"132\", \"text\": \"  apply (H.equiv₀ G hT).injective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/ReflectsPrecoherent.lean\", \"line\": \"41\", \"text\": \"      apply F.map_injective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"52\", \"text\": \"  apply (AddCommGrpCat.biprodIsoProd _ _).addCommGroupIsoToAddEquiv.injective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\", \"line\": \"91\", \"text\": \"  Ext.biprodAddEquiv.injective (by cat_disch)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"85\", \"text\": \"      exact F.map_injective (by simp)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"185\", \"text\": \"      exact F.map_injective (by simp)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/ReflectsPreregular.lean\", \"line\": \"38\", \"text\": \"    · apply F.map_injective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"line\": \"12\", \"text\": \"# Morphisms of sheaves factor as a locally surjective followed by a locally injective morphism\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"line\": \"15\", \"text\": \"followed by an injective map, we obtain that any morphism of sheaves in `Sheaf J A`\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"line\": \"17\", \"text\": \"a locally injective morphism (which is mono).\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"line\": \"35\", \"text\": \"  [HasFunctorialSurjectiveInjectiveFactorization A]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/EpiMono.lean\", \"line\": \"40\", \"text\": \"/-- The class of locally injective morphisms of sheaves, see `Sheaf.IsLocallyInjective`. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"line\": \"83\", \"text\": \"  Function.Injective.completeLattice Precoverage.coverings (fun _ _ hab ↦ Precoverage.ext hab)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"line\": \"139\", \"text\": \"  -- Because `f` needs not be injective, the indexing type is a sum.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Precoverage.lean\", \"line\": \"160\", \"text\": \"  -- Because `f` and `g` need not be injective, the indexing type is a sigma of sums.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Hypercover/One.lean\", \"line\": \"629\", \"text\": \"  apply Equiv.injective (s₁ (i := s₀.symm (s₀ i)) (j := s₀.symm (s₀ j)))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"line\": \"150\", \"text\": \"  apply (ℱ.1.mapIso e.op).toEquiv.injective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverPreserving.lean\", \"line\": \"154\", \"text\": \"      (F.map_injective <| by simpa using! he)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/LocallyInjective.lean\", \"line\": \"14\", \"text\": \"# Locally injective morphisms of (pre)sheaves\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/LocallyInjective.lean\", \"line\": \"18\", \"text\": \"`Presheaf.IsLocallyInjective J φ` for a morphism `φ : F₁ ⟶ F₂` in the category\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generic injective resolutions, kernel/splitting criteria, or ordinary cohomology; none identifies finite torsion layers of one divisible-sheaf resolution with supported finite-coefficient derived objects and exact coefficient rows"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective sheaf resolution of an ell divisible sheaf has injective finite torsion layers and exact closed support coefficient sequences",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.self\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Resolution\", \"type\": \"[Injective Z] : InjectiveResolution Z\", \"doc\": \"Given an injective object $Z$ in a category $\\\\mathcal{C}$ with zero object and zero morphisms, this constructs an injective resolution of $Z$ by taking the cochain complex that places $Z$ at index $0$\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.of\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{u_2, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [CategoryTheory.EnoughInjectives C] → (Z : C) → CategoryTheory.InjectiveResolution Z\", \"doc\": \"Given an object $ Z $ in an abelian category $ \\\\mathcal{C} $ that has enough injectives, this function constructs an injective resolution of $ Z $, which is a cochain complex where each term is an inj\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.of_def\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (Z : C),\\n  CategoryTheory.InjectiveResolution.of Z =\\n    { cocomplex := CategoryTheory.InjectiveResolution.ofCocomplex Z, injective := ⋯, hasHomology := ⋯\", \"doc\": \"Given an object $ Z $ in an abelian category $ \\\\mathcal{C} $ that has enough injectives, this function constructs an injective resolution of $ Z $, which is a cochain complex where each term is an inj\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Resolution\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.Limits.HasZeroObject C] → [CategoryTheory.Limits.HasZeroMorphisms C] → C → Type (max u v)\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a zero object and zero morphisms, the type of injective resolutions of an object in $\\\\mathcal{C}$.\"}\n  {\"name\": \"CategoryTheory.injectiveResolution\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"(Z : C) [HasInjectiveResolution Z] : InjectiveResolution Z\", \"doc\": \"For an object $ Z $ in a category with injective resolutions, this provides an injective resolution of $ Z $ by selecting an element from the nonempty type of such resolutions.\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \": CochainComplex C ℕ\", \"doc\": \"This definition constructs an injective resolution as a cochain complex in an abelian category with enough injectives. Given an object $ Z $, it recursively builds a cochain complex indexed by $ \\\\math\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.mk\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Resolution\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroObject C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n        {Z : C} →\\n          (cocomplex : CochainComplex C ℕ) →\\n            autoParam (∀ (n : ℕ), CategoryTheory.Injective (c\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero object and zero morphisms, an object $Z$, and a cochain complex $\\\\text{cocomplex}$ in $\\\\mathcal{C}$ with natural number indices, this constructor forms an inje\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"(n : ℕ) : Injective ((ofCocomplex Z).X n)\", \"doc\": \"For any natural number $n$, the object at position $n$ in the cochain complex constructed by the injective resolution $\\\\text{ofCocomplex } Z$ is an injective object in the abelian category.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give generic injective resolutions, kernel/splitting criteria, or ordinary cohomology; none identifies finite torsion layers of one divisible-sheaf resolution with supported finite-coefficient derived objects and exact coefficient rows"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion|divisible|supported",
+   "results": "{\"t\": \"2026-10-24T03:19:24Z\", \"tool\": \"grep\", \"query\": \"torsion|divisible|supported\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern generic K-injective complexes, sheaf cohomology or algebraic module support, not the combined finite-exponent supported model and coefficient compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "torsion kernels of injective abelian sheaves are injective over quotient integer rings and compute closed supports",
+   "results": "{\"t\": \"2026-10-24T03:19:25Z\", \"tool\": \"leansearch\", \"query\": \"torsion kernels of injective abelian sheaves are injective over quotient integer rings and compute closed supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.support_subset_of_injective\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"Submodule.instModuleQuotientIdealSpanSingletonSetSubtypeMemTorsionBy\", \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"CategoryTheory.Abelian.epiWithInjectiveKernel_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"Ideal.torsionMapQuot_apply\"], \"digest\": \"874d543412b7f095\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern generic K-injective complexes, sheaf cohomology or algebraic module support, not the combined finite-exponent supported model and coefficient compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-24T03:19:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Injective, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat\"], \"digest\": \"0128cac2e6bb1b2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern generic K-injective complexes, sheaf cohomology or algebraic module support, not the combined finite-exponent supported model and coefficient compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion layers of a divisible etale sheaf injective resolution compute closed supported derived cohomology",
+   "results": "{\"t\": \"2026-10-24T03:19:26Z\", \"tool\": \"leanfinder\", \"query\": \"Finite torsion layers of a divisible etale sheaf injective resolution compute closed supported derived cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CochainComplex.cm5b.I\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.InjectiveResolution.instInjectiveXIntCochainComplex\"], \"digest\": \"a43e96a116a76ee8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern generic K-injective complexes, sheaf cohomology or algebraic module support, not the combined finite-exponent supported model and coefficient compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels of prime power multiplication on one injective complex give coefficient exact supported complexes",
+   "results": "{\"t\": \"2026-10-24T03:19:27Z\", \"tool\": \"leanfinder\", \"query\": \"Kernels of prime power multiplication on one injective complex give coefficient exact supported complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"HomologicalComplex.isSupported_iff\", \"HomologicalComplex.exactAt_of_isSupported\", \"CochainComplex.isKInjective_of_injective_aux\", \"HomologicalComplex.IsSupportedOutside.exactAt\", \"HomologicalComplex.IsSupported.exactAt\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"Module.support_of_exact\"], \"digest\": \"9c193748d1c2da87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern generic K-injective complexes, sheaf cohomology or algebraic module support, not the combined finite-exponent supported model and coefficient compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-gysin-coefficient-cone-triangles",
+  "date": "2026-10-24",
+  "group": "Q42"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, Proposition 3.3.2, printed p.245: compatible Godement cocycles for the fundamental classes and triangles C(mu) -> C(mu+nu) -> C(nu); coefficient compatibility of Proposition 3.3.1. Technical replacement: torsion layers of one divisible-sheaf injective resolution supply strict coefficient-exact supported models; no fundamental class or cone is asserted.",
+   "via": [
+    "lem-per-gysin-coefficient-cone-triangles",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-divisible-torsion-supported-injective-models",
+  "worker": "stage1",
+  "summary": "Q56 retained the statement and supplied nine proof steps using existing nodes only. Proved sectionwise divisibility explicitly, used kernel resolutions and the abelian support adjunction, proved coefficient-row exactness before applying support or sections, and proved scalar restriction by H-acyclicity of the restricted torsion layers (dimension shifting along the torsion rows) and acyclic resolutions. No new nodes or Lean files. Reviewer FIX (cc, 2026-10-24): steps 3 and 8 no longer cite lem-per-etale-closed-sheaf-internal-adjunction and lem-per-etale-godement-supported-exact-model, which stay excluded by the 2026-10-19 route pivot (coord/route-pivot-dropped.txt).",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (duality): the inherited finite-torsion regular-pair refinement, specifically ILO Expose XVI Proposition 3.3.2, printed p.245, compatible supported coefficient models. Steps 1-7 construct and verify the injective torsion-layer replacement; steps 8-9 prove finite-ring scalar and counit normalization directly from the torsion layers. The current latest ancestor proof was read; the item does not alter the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Steps 3 and 8 use exact inverse image only to move the torsion kernel through i inverse image and to see that the supported functor is left exact. The perverse unit does not supply this general site-functor property."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Steps 4 and 8 check the enough-injectives hypothesis of the right-derived comparison and of the derived long exact sequence for ordinary finite-coefficient sheaves. This is categorical infrastructure for the prescribed supported model."
+   },
+   {
+    "node": "lem-trf-free-module-sheaf-universal-property",
+    "why": "Step 5 uses the free-module universal property at the terminal sheaf to identify Hom from the constant rank-one module with global sections. No trace-formula argument is used."
+   },
+   {
+    "node": "sk-thm-acyclicity",
+    "why": "Steps 8 and 9 need the canonical derived comparison on bounded-below support-acyclic resolutions after scalar restriction. This generic acyclic-resolution theorem replaces no step of the perverse unit."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Step 3 uses the abelian support adjunction i_* -| i^!_0 with exact i_* to see that supported kernels of injective abelian sheaves are injective (Stacks 09XQ). The perverse unit has no own node for this ordinary adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Step 8 uses the long exact sequence of right derived functors for the dimension shift proving support-acyclicity of the restricted torsion layers. Generic homological algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-trf-free-module-sheaf-universal-property",
+  "sk-thm-acyclicity",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-6067c9cda",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-6067c9cda (reviewer sub-agent of L); spot-checked: All nine steps check out, with no new nodes and the statement unchanged. Sources read: Stacks 0DD7 (sites-cohomology l.4218, injective sheaves divisible on sections), Stacks 09XQ (etale-cohomology l.14023, support adjunction preserves injectives, then RH_Z), and ILO XVI Prop 3.3.2 printed p.245 (Godement, motivation only). The item sits under gysin-coefficient-cone-triangles → gabber-regular-pair-purity → sfb-ramified-cartier-supported-purity, not under artin-gabber-affine-curve. Small cases checked: Z empty, Z=X, M=0, M=Q_l/Z_l, N=r, a=b=1. Fault (both are C-type citations of excluded nodes): step 3 cited lem-per-etale-closed-sheaf-internal-adjunction and step 8 cited lem-per-etale-godement-supported-exact-model. Both remain dropped in coord/route-pivot-dropped.txt (2026-10-19 artin-gabber section, l.1517-1518). The Q84 re-admission of 2026-10-24 keeps every unlisted exclusion, and the gysin repair note forbids citing still-excluded prerequisites. No non-excluded node states the scalar-restriction compatibility of i^!. FIX in fixes/dag/nodes/sec-deligne-laumon-a1/<item>.json: (1) Step 3 now cites lem-pur-etale-supported-kernel-adjunction and writes out the 09XQ injectivity argument. (2) Step 8 proves H-acyclicity over A_N of every J_s^q (s<=N) by dimension shifting along 0->J_s->J_N->J_{N-s}->0, using lem-weil-pbc-derived-functor-long-exact and surjectivity from the step-6 K row. sk-thm-acyclicity and the alpha of right-derived-plus-injective then give the counit-compatible Res i_r^! = i_N^! Res. This also drops the size-convention and geometric-stalk citations. proof_deps and split_report tool_uses updated accordingly. Batch 5: lem-trf-site-free-sheaf-sections and lem-trf-free-module-sheaf-universal-property are generic site/free-module facts, accepted. The Godement node (whose closure reaches generic trf comonad lemmas) is no longer cited. Artin-gabber route: the item is outside that node's closure; the two dropped citations are removed as above.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DivisibleTorsionSupportedInjectiveModels",
+  "declaration": "AlgebraicGeometry.Etale.DivisibleTorsion.supported_injective_models",
+  "declarations": [
+   "AlgebraicGeometry.Etale.DivisibleTorsion.A",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.finiteA",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.Mod",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.Ab",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.forget",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.quotient",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.res",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.H",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.Q",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.single",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.sections",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.Layer",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.J",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.K",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.E",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.augmentation",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.derivedUnit",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.Layers",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.Jr",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.Kr",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.ar",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.Fr",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.QKr",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.map",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.unitSheaf",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.evalOne",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.cocycleMap",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.CocycleComparison",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.coefficientMate",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.SupportRestriction",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.supportComplexIso",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.singleIso",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.sourceRestrictionIso",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.row",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.connecting",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.q",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.supportShift",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.RowComparison",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.rowIncl",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.rowRed",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.supportRow",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.sectionRow",
+   "AlgebraicGeometry.Etale.DivisibleTorsion.supported_injective_models"
+  ],
+  "file": "lean/Sheaf/Paper/DivisibleTorsionSupportedInjectiveModels.lean",
+  "statement": "theorem supported_injective_models {Z X : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z] (i : Z ⟶ X) [IsClosedImmersion i] (l : ℕ) [Fact l.Prime] (M : Ab X) [Epi (l • 𝟙 M)] (I : CochainComplex.Plus (Ab X)) [I.obj.IsStrictlyGE 0] (_hI : ∀ q : ℤ, Injective (I.obj.X q)) (a : single (Ab X) M ⟶ I) (_ha : QuasiIso a.hom) : ∃ T : Layers X l, (∀ r : ℕ+, QuasiIso (augmentation (T.layer r) a).hom ∧ (∀ q : ℤ, Injective ((J (T.layer r) I).obj.X q)) ∧ (∀ q : ℤ, Injective ((K i (T.layer r) I).obj.X q))) ∧ ∃ (c : ∀ r : ℕ+, (Q (Mod Z l r)).obj (K i (T.layer r) I) ≅ (closedSupportPlus (A.{u} l r) i).obj ((Q (Mod X l r)).obj (single _ ((T.layer r).functor.obj M)))) (d : ∀ (N r : ℕ+) (h : r ≤ N), QKr i T I h ≅ (closedSupportPlus (A.{u} l N) i).obj ((Q (Mod X l N)).obj (Fr T M h))) (s : ∀ (N r : ℕ+) (h : r ≤ N), SupportRestriction i l h), (∀ r : ℕ+, (c r).hom ≫ (closedSupportPlus (A.{u} l r) i).map ((Q (Mod X l r)).map (augmentation (T.layer r) a)) = derivedUnit i l r (J (T.layer r) I)) ∧ (∀ (N r : ℕ+) (h : r ≤ N), (d N r h).hom ≫ (closedSupportPlus (A.{u} l N) i).map ((Q (Mod X l N)).map (ar T a h)) = derivedUnit i l N (Jr T I h)) ∧ (∀ r : ℕ+, CocycleComparison i (T.layer r) I _ (c r)) ∧ (∀ (N r : ℕ+) (h : r ≤ N), (res Z l h).mapDerivedCategoryPlusFactorsh.hom.app ((HomotopyCategory.Plus.quotient _).obj (K i (T.layer r) I)) ≫ (Q (Mod Z l N)).map (supportComplexIso i (s N r h) T I).hom ≫ (d N r h).hom = (res Z l h).mapDerivedCategoryPlus.map (c r).hom ≫ coefficientMate i l h _ ≫ (closedSupportPlus (A.{u} l N) i).map (sourceRestrictionIso T M h).hom) ∧ (∀ (N r t : ℕ+) (hr : r ≤ N) (ht : t ≤ N) (f : (T.layer r).functor ⋙ res X l hr ⟶ (T.layer t).functor ⋙ res X l ht), (Q (Mod Z l N)).map ((H i l N).mapCochainComplexPlus.map (map f I)) ≫ (d N t ht).hom = (d N r hr).hom ≫ (closedSupportPlus (A.{u} l N) i).map ((Q (Mod X l N)).map (map f (single (Ab X) M)))) ∧ (∀ (N r t v₀ : ℕ+) (hr : r ≤ N) (ht : t ≤ N) (hv : v₀ ≤ N) (f : (T.layer r).functor ⋙ res X l hr ⟶ (T.layer t).functor ⋙ res X l ht) (g : (T.layer t).functor ⋙ res X l ht ⟶ (T.layer v₀).functor ⋙ res X l hv), map f I ≫ map g I = map (f ≫ g) I) ∧ (∀ a₀ b₀ : ℕ+, ∃ (wI : (map (T.incl (N := a₀ + b₀) (r := a₀) (Nat.le_add_right (a₀ : ℕ) (b₀ : ℕ))) I).hom ≫ (map (T.red (N := a₀ + b₀) (r := b₀) (Nat.le_add_left (b₀ : ℕ) (a₀ : ℕ))) I).hom = 0) (wM : (map (T.incl (N := a₀ + b₀) (r := a₀) (Nat.le_add_right (a₀ : ℕ) (b₀ : ℕ))) (single (Ab X) M)).hom ≫ (map (T.red (N := a₀ + b₀) (r := b₀) (Nat.le_add_left (b₀ : ℕ) (a₀ : ℕ))) (single (Ab X) M)).hom = 0), ∃ (hJ : (row T I a₀ b₀ wI).ShortExact) (hK : (supportRow i (row T I a₀ b₀ wI)).ShortExact) (hF : (row T (single (Ab X) M) a₀ b₀ wM).ShortExact), (sectionRow i (row T I a₀ b₀ wI)).ShortExact ∧ RowComparison i l (a₀ + b₀) (Jr T I (N := a₀ + b₀) (r := a₀) (Nat.le_add_right (a₀ : ℕ) (b₀ : ℕ))) (J (T.layer (a₀ + b₀)) I) (Jr T I (N := a₀ + b₀) (r := b₀) (Nat.le_add_left (b₀ : ℕ) (a₀ : ℕ))) (Fr T M (N := a₀ + b₀) (r := a₀) (Nat.le_add_right (a₀ : ℕ) (b₀ : ℕ))) (J (T.layer (a₀ + b₀)) (single (Ab X) M)) (Fr T M (N := a₀ + b₀) (r := b₀) (Nat.le_add_left (b₀ : ℕ) (a₀ : ℕ))) (rowIncl T I a₀ b₀) (rowRed T I a₀ b₀) wI (rowIncl T (single (Ab X) M) a₀ b₀) (rowRed T (single (Ab X) M) a₀ b₀) wM (ar T a (N := a₀ + b₀) (r := a₀) (Nat.le_add_right (a₀ : ℕ) (b₀ : ℕ))) ((T.layer (a₀ + b₀)).functor.mapCochainComplexPlus.map a) (ar T a (N := a₀ + b₀) (r := b₀) (Nat.le_add_left (b₀ : ℕ) (a₀ : ℕ))) hJ hF hK)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The integer-indexed resolution is arbitrary, zero below zero. Kernel-functor presentations are fixed by their universal property and inclusions. Derived-unit, evaluation-at-one, counit-mate and connecting-arrow normalizations are explicit; the scalar-restricted complexes are support images in the common coefficient ring, identified with restricted K by the counit-normalized SupportRestriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49e15b949",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read node (only lean differs from live; statement/stmt_deps unchanged), module, report (Worker report + Second reading present), all 5 stmt_deps and the ClosedSupportPlusAdjunction / closedUpperShriek / RestrictScalarsLowerStar sources. Hypotheses match exactly: IsNoetherian X,Z, IsClosedImmersion with the canonical complement, Fact l.Prime, Epi (l•𝟙 M), arbitrary ℤ-indexed injective resolution strictly ≥0 with quasi-iso augmentation, ℕ+ for r,a,b, ℕ for m, A = ULift.{u+1} ZMod(l^r) matching the dependency's Type (u+1). Every quantified choice is pinned: Layers by the kernel IsLimit plus incl/red normalizations (unique: monic, forget faithful); c and d by the derivedUnit normalization (closedSupportPlus = rightDerivedFunctorPlus of closedUpperShriek); SupportRestriction by its counit equation; CocycleComparison by evalOne/cocycleMap on every cocycle (each cycle has a χ); RowComparison e_i by unit normalization, plus the connecting-arrow equation with closedSupportPlusCommShift. Naturality for every coefficient nat-trans checked true by hand. Edge cases Z empty, Z=X, M=0, r=1, a=b=1, N=r, char ℓ covered. Statement verbatim; declaration list exact; lines ≤100; one sorry; docstrings with source and blueprint, theorem docstring has the 9 steps; no duplicate found. Advisories: global finiteA instance, tautological composition clause, ℤ-indexed rendering instead of InjectiveResolution, short names in the item namespace. No file changed, so no compile."
+ }
+}

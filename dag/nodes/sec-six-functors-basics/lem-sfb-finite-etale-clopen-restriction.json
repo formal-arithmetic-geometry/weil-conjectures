@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-finite-etale-clopen-restriction",
+ "kind": "statement",
+ "title": "Finite etale restriction to a nonempty clopen source over an irreducible base",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme], with $X$ irreducible [def-weil-irreducible-components]. Let $p:Y\\to X$ be finite etale [def-weil-finite-integral-morphism, def-weil-etale-morphism]. Let $U\\subseteq Y$ be a nonempty subset that is both open and closed, endowed with its open subscheme structure, and let $j:U\\hookrightarrow Y$ be its inclusion [def-weil-open-immersion]. Then $j$ is a closed immersion [def-weil-closed-immersion], and $p\\circ j:U\\to X$ is finite etale and surjective [def-weil-surjective-morphism]. No normality, integrality or Noetherian hypothesis on either scheme is assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035C (lemma-closed-immersion-finite), 01WK (lemma-composition-finite), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale), 01WN (lemma-finite-proper), and 03WT (lemma-etale-open): restriction to a clopen source subset, followed by the open-and-closed image argument over an irreducible target."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The inclusion $j:U\\hookrightarrow Y$ is an immersion: it factors as the identity closed immersion $U\\to U$ followed by the given open immersion, using the definition of immersion [def-weil-closed-immersion]. Its image is exactly the closed subset $U$. Apply [lem-weil-pbc-immersion-closed-image-closed-immersion] to conclude that $j$ is a closed immersion.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IQ (lemma-immersion-when-closed), applied to the inclusion of a clopen open subscheme."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-finite], the closed immersion $j$ is finite. Since $p$ is finite, [lem-weil-pbc-finite-composition] gives that $q=p\\circ j$ is finite. Since $j$ is an open immersion and $p$ is etale, clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation] give that $j$ and then $q$ are etale.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035C (lemma-closed-immersion-finite), 01WK (lemma-composition-finite), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale)."
+   }
+  },
+  {
+   "text": "Put $A=q(U)\\subseteq X$. Apply [lem-weil-pbc-finite-closed-map-finite-fibres], clause (1), to the finite morphism $q$ and the closed subset equal to its entire source; this shows that $A$ is closed. Apply [lem-weil-pbc-etale-morphism-open-map] to the etale morphism $q$ and its entire source, which is open; this shows that $A$ is open. Choose $u\\in U$ using the assumed nonemptiness; then $q(u)\\in A$, so $A$ is nonempty.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WN (lemma-finite-proper) and 03WT (lemma-etale-open): finite maps are closed and etale maps are open."
+   }
+  },
+  {
+   "text": "Both $A$ and $X\\setminus A$ are closed and $X=A\\cup(X\\setminus A)$. By the closed-cover definition of irreducibility [def-weil-irreducible-components], either $A=X$ or $X\\setminus A=X$. The second alternative contradicts $q(u)\\in A$ from step 3. Thus $q(U)=X$, which is exactly surjectivity by [def-weil-surjective-morphism]. Along with steps 1 and 2 this proves every assertion.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004V (definition-irreducible-components): a cover by two closed subsets is trivial."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-weil-irreducible-components",
+  "def-weil-surjective-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of Tags 035C, 01WK, 02GP, 02GN, 01WN, 03WT with Schemes Tag 01IQ and the definition of irreducibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty open and closed subscheme of a finite etale cover of an irreducible scheme is finite etale and surjective",
+   "results": "8 hits; Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.Etale, Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+   "date": "2026-10-22",
+   "verdict": "No match: restriction to target opens is different from a clopen SOURCE restriction. GeometricallyIrreducible implies surjectivity under stronger fibre hypotheses absent here; none of the hits supplies the finite etale clopen restriction and its surjectivity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of finite etale morphism to a nonempty clopen subscheme over an irreducible base is surjective finite etale",
+   "results": "8 hits; AlgebraicGeometry.morphismRestrict, AlgebraicGeometry.Scheme.Hom.resLE, AlgebraicGeometry.morphismRestrict_base, AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.IsSeparated.instMorphismRestrict, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.Scheme.PartialMap.restrict",
+   "date": "2026-10-22",
+   "verdict": "No match: restriction to target opens is different from a clopen SOURCE restriction. GeometricallyIrreducible implies surjectivity under stronger fibre hypotheses absent here; none of the hits supplies the finite etale clopen restriction and its surjectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale morphism with irreducible target maps each nonempty clopen source subset onto the target",
+   "results": "8 hits; Algebra.isOpen_etaleLocus, image_mem_irreducibleComponents_of_isPreirreducible_fiber, AlgebraicGeometry.isOpenMap_of_generalizingMap, irreducibleComponentsEquivOfIsPreirreducibleFiber, Algebra.QuasiFiniteAt.isClopen_singleton, preimage_mem_irreducibleComponents_of_isPreirreducible_fiber, AlgebraicGeometry.IsEtale.of_comp, Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-22",
+   "verdict": "No match: restriction to target opens is different from a clopen SOURCE restriction. GeometricallyIrreducible implies surjectivity under stronger fibre hypotheses absent here; none of the hits supplies the finite etale clopen restriction and its surjectivity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"IsClopen\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: restriction to target opens is different from a clopen SOURCE restriction. GeometricallyIrreducible implies surjectivity under stronger fibre hypotheses absent here; none of the hits supplies the finite etale clopen restriction and its surjectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Ee]tale|[Ee]tale.*clopen|[Ii]rreducible.*[Ss]urjective|[Ss]urjective.*[Ii]rreducible",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "No match: restriction to target opens is different from a clopen SOURCE restriction. GeometricallyIrreducible implies surjectivity under stronger fibre hypotheses absent here; none of the hits supplies the finite etale clopen restriction and its surjectivity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty clopen source restriction of a finite etale morphism over an irreducible scheme is finite etale and surjective",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Etale, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsFinite",
+   "date": "2026-10-23",
+   "verdict": "No exact match or one-line specialization: the item combines closedness of the source inclusion, stability under composition and a nonempty clopen image argument; the hits do not state all clauses. The geometrically irreducible-fibre surjectivity instance needs hypotheses not available here."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Ee]tale|[Ee]tale.*clopen|[Ii]rreducible.*[Ss]urjective|[Ss]urjective.*[Ii]rreducible",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean; subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "No exact match or one-line specialization: the item combines closedness of the source inclusion, stability under composition and a nonempty clopen image argument; the hits do not state all clauses. The geometrically irreducible-fibre surjectivity instance needs hypotheses not available here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale map from a nonempty clopen subscheme to an irreducible scheme is surjective",
+   "results": "8 hits; AlgebraicGeometry.Surjective.mk, AlgebraicGeometry.Scheme.Hom.surjective, AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range, AlgebraicGeometry.Surjective, AlgebraicGeometry.surjective_iff, AlgebraicGeometry.Surjective.surj, AlgebraicGeometry.range_eq_univ, AlgebraicGeometry.IsFinite.recOn",
+   "date": "2026-10-23",
+   "verdict": "No exact match or one-line specialization: the item combines closedness of the source inclusion, stability under composition and a nonempty clopen image argument; the hits do not state all clauses. The geometrically irreducible-fibre surjectivity instance needs hypotheses not available here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsClopen\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "No exact match or one-line specialization: the item combines closedness of the source inclusion, stability under composition and a nonempty clopen image argument; the hits do not state all clauses. The geometrically irreducible-fibre surjectivity instance needs hypotheses not available here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale morphism has clopen image and is surjective if its source is nonempty and its target is connected",
+   "results": "8 hits; CategoryTheory.PreGaloisCategory.surjective_of_nonempty_fiber_of_isConnected, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.QuasiFiniteAt.isClopen_singleton",
+   "date": "2026-10-23",
+   "verdict": "No exact match or one-line specialization: the item combines closedness of the source inclusion, stability under composition and a nonempty clopen image argument; the hits do not state all clauses. The geometrically irreducible-fibre surjectivity instance needs hypotheses not available here."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective_of|IsClopen|IsClosedImmersion.of_isPreimmersion",
+   "results": "13 hits; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean; subdirectory Mathlib/AlgebraicGeometry/Morphisms",
+   "date": "2026-10-23",
+   "verdict": "No exact match or one-line specialization: the item combines closedness of the source inclusion, stability under composition and a nonempty clopen image argument; the hits do not state all clauses. The geometrically irreducible-fibre surjectivity instance needs hypotheses not available here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-etale-normal-generic-components",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, etaleness of normalization off the branch points: select the field factor defined by the chosen radicals, rather than assuming all the binomials are irreducible. Extracted argument: returned steps 3--4: closedness of a clopen source inclusion, restriction of finiteness and etaleness, and surjectivity from open-and-closed nonempty image.",
+   "via": [
+    "lem-sfb-finite-etale-normal-generic-components",
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-etale-clopen-restriction",
+  "worker": "stage1",
+  "summary": "Proved the clopen inclusion closed using the existing immersion criterion, composed finite and etale morphisms, and used the nonempty clopen image argument. Reused existing Mathlib leaves throughout; created no nodes. Searched the project for an exact attachment and Mathlib with two semantic phrasings, Loogle and grep. Corrected the null blueprint ancestor to the named imported ancestor already documented in from.place. No mathematical statement changed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images clause (3), the recorded alteration auxiliary chain: finite etale normal generic components, restriction to a nonempty clopen component. Steps 1--2 justify restriction and step 3--4 prove surjectivity; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-d6dcc34d9",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-d6dcc34d9 (reviewer sub-agent of L); spot-checked: The item statement is unchanged and true. Irreducibility is needed: Spec k⊔Spec k with p=id and U one copy gives a proper image. Nonemptiness is needed: U=∅ is not surjective. Y=∅ and U=Y were also checked. No new nodes. Step 1: id_U is a closed immersion by def-weil-closed-immersion, so j=j∘id is an immersion with closed image U, and the iff in lem-weil-pbc-immersion-closed-image-closed-immersion (Stacks 01IQ, schemes.tex l.1849) makes it a closed immersion. Step 2: closed-immersion-finite and finite-composition give q finite; etale-composition-cancellation (1),(2) gives q etale (02GP/02GN). Step 3: finite maps are closed by finite-closed-map-finite-fibres (1) (01WN) and etale maps are open by etale-morphism-open-map (03WT), so q(U) is clopen and nonempty. Step 4 is correctly elementary: the two-closed-set definition of irreducibility (004V) gives q(U)=X. proof_deps equal the union of the step uses; no SGA. Setting blueprint.from.node to det-thm-sf-ctf-stability-direct-images, an imported blueprint node already named in from.place, is a harmless record repair. No duplicate: lem-weil-pbc-finite-etale-clopen-restriction-rank covers only the finite-etale restriction, not the closed-immersion or surjectivity clauses, and the item is pre-existing; the parent normal-generic-components step 3 uses it as intended. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleClopenRestrictionSurjective",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_clopen_restriction_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleClopenRestrictionSurjective.lean",
+  "statement": "theorem Scheme.finiteEtale_clopen_restriction_surjective {X Y : Scheme.{u}} [IrreducibleSpace X] (p : Y ⟶ X) [IsFinite p] [Etale p] (U : Y.Opens) (hU : IsClosed (U : Set Y)) (hne : (U : Set Y).Nonempty) : IsClosedImmersion U.ι ∧ IsFinite (U.ι ≫ p) ∧ Etale (U.ι ≫ p) ∧ Surjective (U.ι ≫ p)",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcefc6754",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Lean statement matches every node clause: Scheme.{u} X Y, [IrreducibleSpace X] (nonempty, as the node's definition requires), p with [IsFinite p] [Etale p], U : Y.Opens with IsClosed and Nonempty, conclusions IsClosedImmersion U.ι ∧ IsFinite/Etale/Surjective (U.ι ≫ p). No extra hypotheses or universe restriction. lean.statement is verbatim in the file; the only change to the item node vs live is its lean field; the 7 stmt_dep records match the declarations used. Edge cases checked: U/Y/X empty, U = Y, two-point counterexample showing irreducibility is needed. Not a duplicate: the project's finiteEtale_clopen_restriction_rank lacks the irreducibility, closed-immersion and surjectivity parts; no Mathlib match. Docstrings carry the source tags, blueprint id and four proof steps; proof is sorry only; no definitions; no pro-etale content. Not recompiled (no file changed); worker reports a clean compile. No findings."
+ }
+}

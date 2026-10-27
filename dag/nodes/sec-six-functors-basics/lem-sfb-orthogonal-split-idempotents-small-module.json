@@ -1,0 +1,422 @@
+{
+ "id": "lem-sfb-orthogonal-split-idempotents-small-module",
+ "kind": "statement",
+ "title": "Split idempotents orthogonal on a module force independent families and a cardinality bound",
+ "statement": "Let $K$ be a field [def-weil-field], let $D$ be a unital $K$-algebra, and let $Q$ be a unital left $D$-module with the induced $K$-vector-space structure. Let $I$ be any set, and let $u_i,r_i\\in D$ for $i\\in I$ satisfy $r_iu_i=1_D$. Put $p_i=u_ir_i$ and suppose that for distinct $i,j$ the product $p_ip_j$ acts as zero on $Q$: $(p_ip_j)x=0$ for every $x\\in Q$. For every $0\\ne q\\in Q$, the family $(u_iq)_{i\\in I}$ is $K$-linearly independent, meaning that every finite relation $\\sum_{i\\in F}t_i u_iq=0$ has $t_i=0$ for all $i\\in F$. Moreover, for every spanning set $W\\subseteq Q$ (every vector is a finite $K$-linear combination of elements of $W$), there is an injection $I\\to W$ whenever $Q\\ne0$. In particular, if $I$ is uncountable and $Q$ has a countable spanning set [def-sfb-countable-set], then $Q=0$. No topology on $Q$, faithfulness of the $D$-action, or equality $p_ip_j=0$ inside $D$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent coefficient auxiliary: returned reconstruction proof steps 8–9, independent vectors from split idempotents and the spanning-set cardinality contradiction. Agent-formulated extraction from the returned proof; exact external reference WANTED, intended proof in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-countable-set"
+ ],
+ "proof": [
+  {
+   "text": "Fix $q\\ne0$ and put $x_i=u_iq$. The module identities give $r_ix_i=(r_iu_i)q=q$, so $x_i\\ne0$, and $p_ix_i=u_i(r_iu_i)q=x_i$. For $i\\ne j$, therefore, $p_ix_j=p_i(p_jx_j)=(p_ip_j)x_j=0$ by the assumed annihilation on $Q$. These are identities of actions on $Q$; no vanishing product in $D$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary extracted in the reconstruction proof: returned steps 8–9. The blueprint supplies no external proof of this auxiliary. Action identities."
+   }
+  },
+  {
+   "text": "Consider a finite relation $\\sum_{i\\in F}t_ix_i=0$ and fix $k\\in F$. Action by a fixed element of $D$ is $K$-linear, since scalars from $K$ are central in the $K$-algebra $D$ and the $K$-action on $Q$ is induced. Applying $p_k$ to the relation and using step 1 gives $t_kx_k=0$. Applying $r_k$ gives $t_kq=0$. If $t_k\\ne0$, multiplication by its inverse in the field [def-weil-field] would give $q=0$, a contradiction. Thus every $t_k=0$, which proves precisely the stated finite-relation form of linear independence.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary extracted in the reconstruction proof: returned steps 8–9. The blueprint supplies no external proof of this auxiliary. Isolation of each coefficient in a finite relation."
+   }
+  },
+  {
+   "text": "If $Q\\ne0$, choose $q\\ne0$ and apply [lem-sfb-independent-family-spanning-cardinality] to the $K$-vector space $Q$, the independent family $v_i=x_i$ from step 2, and the given spanning set $W$. Its hypotheses allow arbitrary index sets and arbitrary spanning sets, and its conclusion is exactly an injection $I\\to W$ (with universe lifts understood).",
+   "uses": [
+    "lem-sfb-independent-family-spanning-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary extracted in the reconstruction proof: returned steps 8–9. The blueprint supplies no external proof of this auxiliary. Spanning-set cardinality bound."
+   }
+  },
+  {
+   "text": "Now suppose $I$ is uncountable and a countable set $W$ spans $Q$. If $Q\\ne0$, step 3 gives an injection $f:I\\to W$. By [def-sfb-countable-set], countability of $W$ gives an injection $g:W\\to\\mathbf N$. The composite $g\\circ f$ is injective: equality of its values first implies equality of the $f$-values, then equality of their indices. This contradicts uncountability of $I$ in the same definition. Hence $Q=0$.",
+   "uses": [
+    "def-sfb-countable-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary extracted in the reconstruction proof: returned steps 8–9. The blueprint supplies no external proof of this auxiliary. Countability contradiction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-countable-set",
+  "def-weil-field",
+  "lem-sfb-independent-family-spanning-cardinality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent coefficient auxiliary extracted in the reconstruction proof: returned steps 8–9. The blueprint supplies no external proof of this auxiliary. Explicit module-action calculation, followed by the existing Mathlib spanning-cardinality leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A countably spanned module over an algebra cannot have uncountably many pairwise orthogonal idempotents each equivalent to the identity acting nontrivially",
+   "results": {
+    "t": "2026-10-22T06:02:22Z",
+    "tool": "leanfinder",
+    "query": "A countably spanned module over an algebra cannot have uncountably many pairwise orthogonal idempotents each equivalent to the identity acting nontrivially",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CompleteOrthogonalIdempotents",
+     "CompleteOrthogonalIdempotents.option",
+     "DirectSum.completeOrthogonalIdempotents_idempotent",
+     "CompleteOrthogonalIdempotents.of_prod_one_sub",
+     "CompleteOrthogonalIdempotents.iff_ortho_complete",
+     "completeOrthogonalIdempotents_iff",
+     "OrthogonalIdempotents.option",
+     "CompleteOrthogonalIdempotents.toOrthogonalIdempotents"
+    ],
+    "digest": "f6040939b1e79d3b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite complete orthogonal idempotents, category-theoretic splitting and inner-product orthogonality do not give the independent family from split operators orthogonal only on an arbitrary module; the spanning-cardinality theorem is an existing input for the intended proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent, IsIdempotentElem",
+   "results": {
+    "t": "2026-10-22T06:02:23Z",
+    "tool": "loogle",
+    "query": "LinearIndependent, IsIdempotentElem",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite complete orthogonal idempotents, category-theoretic splitting and inner-product orthogonality do not give the independent family from split operators orthogonal only on an arbitrary module; the spanning-cardinality theorem is an existing input for the intended proof."
+  },
+  {
+   "tool": "grep",
+   "query": "(orthogonal|idempoten).*(countab|independen|cardinal)|(countab|independen|cardinal).*(orthogonal|idempoten)",
+   "results": {
+    "t": "2026-10-22T06:02:23Z",
+    "tool": "grep",
+    "query": "(orthogonal|idempoten).*(countab|independen|cardinal)|(countab|independen|cardinal).*(orthogonal|idempoten)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Order/CountableSupClosed.lean",
+     "Mathlib/LinearAlgebra/BilinearForm/Orthogonal.lean",
+     "Mathlib/Analysis/InnerProductSpace/Subspace.lean",
+     "Mathlib/Analysis/InnerProductSpace/Subspace.lean"
+    ],
+    "digest": "263532e8b25fe3df"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite complete orthogonal idempotents, category-theoretic splitting and inner-product orthogonality do not give the independent family from split operators orthogonal only on an arbitrary module; the spanning-cardinality theorem is an existing input for the intended proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uncountably many split idempotents whose pairwise products annihilate a countably dimensional unital module force the module to vanish",
+   "results": {
+    "t": "2026-10-22T06:02:23Z",
+    "tool": "leansearch",
+    "query": "Uncountably many split idempotents whose pairwise products annihilate a countably dimensional unital module force the module to vanish",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "DirectSum.idempotent",
+     "CategoryTheory.IsIdempotentComplete.idempotents_split",
+     "CategoryTheory.Idempotents.isIdempotentComplete_of_abelian",
+     "CategoryTheory.Limits.splitEpiOfIdempotentCoequalizer",
+     "DirectSum.decompose_eq_mul_idempotent",
+     "iSupIndep.fintypeNeBotOfFiniteDimensional",
+     "CategoryTheory.IsIdempotentComplete.mk",
+     "CompleteOrthogonalIdempotents.of_subsingleton"
+    ],
+    "digest": "4df1b05ccae11115"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite complete orthogonal idempotents, category-theoretic splitting and inner-product orthogonality do not give the independent family from split operators orthogonal only on an arbitrary module; the spanning-cardinality theorem is an existing input for the intended proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Applying mutually orthogonal idempotent operators to nonzero vectors gives a linearly independent family larger than a countable spanning set",
+   "results": {
+    "t": "2026-10-22T06:02:36Z",
+    "tool": "leanfinder",
+    "query": "Applying mutually orthogonal idempotent operators to nonzero vectors gives a linearly independent family larger than a countable spanning set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InnerProductSpace.span_gramSchmidt_Iio",
+     "InnerProductSpace.span_gramSchmidt_Iic",
+     "DirectSum.IsInternal.subordinateOrthonormalBasisIndex",
+     "DirectSum.IsInternal.subordinateOrthonormalBasis_subordinate",
+     "Profinite.NobelingProof.GoodProducts.linearIndependent_comp_of_eval",
+     "InnerProductSpace.mem_span_gramSchmidt",
+     "DirectSum.IsInternal.subordinateOrthonormalBasisIndex_def",
+     "InnerProductSpace.gramSchmidt_mem_span"
+    ],
+    "digest": "4c4e6ac9e7a0cf29"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite complete orthogonal idempotents, category-theoretic splitting and inner-product orthogonality do not give the independent family from split operators orthogonal only on an arbitrary module; the spanning-cardinality theorem is an existing input for the intended proof."
+  },
+  {
+   "tool": "grep",
+   "query": "(idempoten|orthogonal).*(LinearIndependent|linearIndependent)|linearIndependent_le_span",
+   "results": {
+    "t": "2026-10-22T06:02:36Z",
+    "tool": "grep",
+    "query": "(idempoten|orthogonal).*(LinearIndependent|linearIndependent)|linearIndependent_le_span",
+    "sub": "LinearAlgebra",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean"
+    ],
+    "digest": "796abf86b410d853"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite complete orthogonal idempotents, category-theoretic splitting and inner-product orthogonality do not give the independent family from split operators orthogonal only on an arbitrary module; the spanning-cardinality theorem is an existing input for the intended proof."
+  },
+  {
+   "tool": "grep",
+   "query": "linearIndependent_le_span|linearIndependent.*(projection|idempotent)|orthogonal.*linearIndependent",
+   "results": {
+    "t": "2026-10-22T12:17:33Z",
+    "tool": "grep",
+    "query": "linearIndependent_le_span|linearIndependent.*(projection|idempotent)|orthogonal.*linearIndependent",
+    "sub": "LinearAlgebra",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean",
+     "Mathlib/LinearAlgebra/Dimension/StrongRankCondition.lean"
+    ],
+    "digest": "796abf86b410d853"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: spanning-cardinality hits require independence as input (already available as lem-sfb-independent-family-spanning-cardinality), and finite-span variants do not prove independence from the split operators."
+  },
+  {
+   "tool": "grep",
+   "query": "(orthogonal|idempoten).*(LinearIndependent|linearIndependent)|(LinearIndependent|linearIndependent).*(orthogonal|idempoten)",
+   "results": {
+    "t": "2026-10-22T12:17:33Z",
+    "tool": "grep",
+    "query": "(orthogonal|idempoten).*(LinearIndependent|linearIndependent)|(LinearIndependent|linearIndependent).*(orthogonal|idempoten)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration found by this pattern; the separate semantic searches and second phrasing were also read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split injections with pairwise orthogonal image projections give linearly independent vectors in a module",
+   "results": {
+    "t": "2026-10-22T12:17:34Z",
+    "tool": "leansearch",
+    "query": "Split injections with pairwise orthogonal image projections give linearly independent vectors in a module",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.linearIndependent_of_isOrthoᵢ",
+     "LinearMap.BilinForm.linearIndependent_of_iIsOrtho",
+     "Module.Basis.ofSplitExact",
+     "LinearIndepOn_iff_linearIndepOn_image_injOn",
+     "LinearIndependent",
+     "linearIndependent_of_ne_zero_of_inner_eq_zero",
+     "OrthogonalFamily.independent",
+     "Orthonormal.linearIndependent"
+    ],
+    "digest": "c80e8e50aa73d524"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits require a sesquilinear/bilinear form or an inner product, none of which is part of this item; they do not supply the split-operator action calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent, IsIdempotentElem",
+   "results": {
+    "t": "2026-10-22T12:17:34Z",
+    "tool": "loogle",
+    "query": "LinearIndependent, IsIdempotentElem",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration found by this pattern; the separate semantic searches and second phrasing were also read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear independence of vectors separated by projections and bound by cardinality of a spanning family",
+   "results": {
+    "t": "2026-10-22T12:17:38Z",
+    "tool": "leanfinder",
+    "query": "Linear independence of vectors separated by projections and bound by cardinality of a spanning family",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.GoodProducts.linearIndependent_comp_of_eval",
+     "linearIndependent_le_span'",
+     "linearIndependent_le_span_aux'",
+     "Profinite.NobelingProof.GoodProducts.linearIndependent",
+     "exists_linearIndependent'",
+     "linearIndependent_bounded_of_finset_linearIndependent_bounded",
+     "Profinite.NobelingProof.GoodProducts.linearIndependentAux",
+     "linearIndependent_of_top_le_span_of_card_le_finrank"
+    ],
+    "digest": "705e485a4f596681"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: spanning-cardinality hits require independence as input (already available as lem-sfb-independent-family-spanning-cardinality), and finite-span variants do not prove independence from the split operators."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of split idempotents orthogonal on a module gives linearly independent translates of every nonzero vector and cardinality bounded by any spanning set",
+   "results": {
+    "t": "2026-10-22T12:17:39Z",
+    "tool": "leanfinder",
+    "query": "A family of split idempotents orthogonal on a module gives linearly independent translates of every nonzero vector and cardinality bounded by any spanning set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "linearIndependent_le_span'",
+     "linearIndependent_le_span_aux'",
+     "linearIndependent_le_span_finset",
+     "Profinite.NobelingProof.GoodProducts.linearIndependent_comp_of_eval",
+     "Profinite.NobelingProof.GoodProducts.linearIndependentAux",
+     "exists_linearIndependent'",
+     "linearIndependent_bounded_of_finset_linearIndependent_bounded",
+     "linearIndependent_of_top_le_span_of_card_le_finrank"
+    ],
+    "digest": "a54d26bbdd87e84c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: spanning-cardinality hits require independence as input (already available as lem-sfb-independent-family-spanning-cardinality), and finite-span variants do not prove independence from the split operators."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-countable-endomorphism-module-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent coefficient auxiliary: returned reconstruction proof steps 8–9, independent vectors from split idempotents and the spanning-set cardinality contradiction.",
+   "via": [
+    "lem-sfb-countable-endomorphism-module-reconstruction",
+    "lem-sfb-supported-lattice-norm-projection",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-orthogonal-split-idempotents-small-module",
+  "worker": "stage1",
+  "summary": "Statement and statement dependencies preserved. Four steps give the action identities, isolate every coefficient of a finite relation using p_k then r_k, apply the existing independent-family/spanning-cardinality Mathlib leaf, and compose injections to obtain the countability contradiction. No new nodes: the action and scalar-inverse computations are elementary. Rechecked the exact statements of both definition citations and the cardinality leaf; retained all inherited searches and appended six actual Q57 searches. No finished project declaration or whole-item Mathlib match was found.",
+  "blueprint": "Main-20261015 direct-images proof paragraph (3), agent coefficient auxiliary inherited from lem-sfb-countable-endomorphism-module-reconstruction, returned steps 8–9: independent translates under split idempotents and the small-spanning-set contradiction. The ancestor tool reports None; inherited blueprint.from and via remain intact. Whole-blueprint searches for split idempotents, orthogonal idempotents, linearly independent, and spanning cardinality found no equivalent blueprint statement. This auxiliary has no external proof in that paragraph; its proof is marked agent-written."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-85f74ed59",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-85f74ed59 (reviewer sub-agent of L); spot-checked: Pass with no changes. The delivery is one commit with 0 new nodes; the statement, stmt_deps, created and blueprint chain are kept; there is no re-split note and no SGA citation. Step 1: r_i x_i=q, p_i x_i=x_i and p_i x_j=(p_ip_j)x_j=0 use only the module axiom and the action-level hypothesis. Step 2: D acts K-linearly because K is central; applying p_k then r_k gives t_k q=0, and def-weil-field's inverse gives t_k=0. Both steps are elementary and correct. Step 3: lem-sfb-independent-family-spanning-cardinality has exactly these hypotheses (any I, independence as finite relations, any spanning W) and concludes an injection I→W; its Mathlib leaf linearIndependent_le_span'' was read at StrongRankCondition.lean:288-291, and there is no cycle. Step 4: def-sfb-countable-set is an injection into N, and composing injections contradicts uncountability. The only citer, countable-endomorphism-module-reconstruction step 5, supplies exactly the item's hypotheses. Edge cases checked: Q=0, I empty, a singleton I, empty F, empty spanning W, noncommutative D and positive characteristic. The duplicate search over the snapshot DAG found only categorical idempotent and retract nodes, which state nothing like this. The source, direct-images proof paragraph (3), only motivates the auxiliary, and the node marks its proof as agent-written with an external reference still WANTED. No tool_uses are needed."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.OrthogonalSplitIdempotentsSmallModule",
+  "declaration": "Module.orthogonal_split_idempotents_small_module",
+  "file": "lean/Sheaf/LinearAlgebra/OrthogonalSplitIdempotentsSmallModule.lean",
+  "statement": "theorem orthogonal_split_idempotents_small_module (K : Type u) [Field K] (D : Type v) [Ring D] [Algebra K D] (Q : Type w) [AddCommGroup Q] [Module D Q] [Module K Q] [IsScalarTower K D Q] (I : Type t) (u r : I → D) (_hsplit : ∀ i : I, r i * u i = 1) (_horthogonal : ∀ (i j : I), i ≠ j → ∀ x : Q, ((u i * r i) * (u j * r j)) • x = 0) : (∀ q : Q, q ≠ 0 → LinearIndependent K (fun i : I ↦ u i • q)) ∧ (∀ W : Set Q, Submodule.span K W = ⊤ → Nontrivial Q → ∃ f : I → W, Function.Injective f) ∧ (¬ Countable I → (∃ W : Set Q, Countable W ∧ Submodule.span K W = ⊤) → Subsingleton Q)",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86aedd890",
+  "group": "N9",
+  "result": "pass",
+  "note": "Checked every clause against the node: Field K; Ring D with Algebra K D, not assumed commutative; Module D Q, Module K Q and IsScalarTower K D Q is exactly the induced K-structure; I : Type t arbitrary; r i * u i = 1 in the right order; ((u i*r i)*(u j*r j)) • x = 0 for i ≠ j, action-level only. Conclusions: LinearIndependent K (u · • q) for q ≠ 0 (same as the finite-relation form); Nontrivial Q → injective I → ↥W for every spanning W; ¬Countable I plus a countable spanning W → Subsingleton Q. Universes u v w t are independent. The statement is true; the cardinality step is Mathlib linearIndependent_le_span'' (StrongRankCondition.lean:288). The citer countable-endomorphism-module-reconstruction steps 5–9 supply exactly these hypotheses. Edge cases (empty or one-element I, Q = 0, empty W, zero D, non-commutative D, non-faithful action, any characteristic) are covered. lean.statement matches the file verbatim; one sorry; source and blueprint docstrings with all 4 proof steps; the node changes only its lean record; stmt_deps are Mathlib matches; no new nodes or definitions; no duplicate found; the report has both sections. No compile run (nothing changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T041121-L-1006900",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Module.orthogonal_split_idempotents_small_module"
+  ],
+  "sorry_after": []
+ }
+}

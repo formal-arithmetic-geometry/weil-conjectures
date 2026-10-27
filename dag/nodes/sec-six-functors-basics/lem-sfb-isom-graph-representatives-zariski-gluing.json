@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-isom-graph-representatives-zariski-gluing",
+ "kind": "statement",
+ "title": "Zariski gluing of separated finitely presented isomorphism graph representatives",
+ "statement": "Let $S,X,Y$ be schemes and $X\\to S$, $Y\\to S$ separated morphisms [def-pc-scheme, def-weil-proper-morphism]. For an $S$-scheme $T$, write $X_T=X\\times_ST$, $Y_T=Y\\times_ST$ [def-pc-fibre-product] and let $F(T)=\\operatorname{Isom}_T(X_T,Y_T)$, with transition maps the canonical pullbacks of isomorphisms. Let $(U_i)_{i\\in I}$ be a set-indexed open cover of $S$. Suppose that for each $i$ there is a separated finitely presented $U_i$-scheme $J_i$ [def-sbc-locally-finite-presentation], together with bijections $\\operatorname{Hom}_{U_i}(T,J_i)\\simeq F(T)$ for every $T\\to U_i$, natural in all $U_i$-morphisms of test schemes. Assume these bijections identify a point with the closed graph $D\\subset X_T\\times_TY_T$ of its isomorphism: both projections $p_X:D\\to X_T$, $p_Y:D\\to Y_T$ are invertible, the associated map is $p_Y\\circ p_X^{-1}$, and every such closed subscheme gives exactly one point [def-weil-closed-immersion]. Then $F$ is a Zariski sheaf: compatible isomorphisms on any open cover of $T$ glue uniquely, including their inverses. The subfunctor $F_i\\subset F$ consisting of elements for which $T\\to S$ factors through $U_i$ is represented by $J_i$ as an $S$-scheme; its inclusion is representable by the open immersion $T\\times_SU_i\\hookrightarrow T$ after pullback by any element of $F(T)$ [def-weil-open-immersion]. There is a separated finitely presented $S$-scheme $J$ representing $F$, with natural representing isomorphisms $J\\times_SU_i\\simeq J_i$. The overlap identifications and the global representing bijection preserve the closed graphs and the formula $p_Y\\circ p_X^{-1}$ in both directions. For every morphism $S'\\to S$, the pullback $J\\times_SS'$ represents $T\\mapsto\\operatorname{Isom}_T((X\\times_SS')\\times_{S'}T,(Y\\times_SS')\\times_{S'}T)$ on $S'$-schemes, with exactly the same graphs and inverse projection formula. Here finite presentation means locally of finite presentation, quasi-compact and quasi-separated. The cover need not be finite, and there is no Noetherian hypothesis on $S$, $S'$ or any test scheme.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 01JB (lemma-glue), gluing scheme morphisms and inverse identities; Tag 01JJ (lemma-glue-functors), open-subfunctor representability; moduli-curves.tex Tag 0DSQ (lemma-curves-diagonal-separated-fp), target-local separatedness and finite presentation. This is parent proof steps 7, 8 and 9 with the local graph representatives as hypotheses."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-sfb-relative-isom-graph-classification"
+ ],
+ "proof": [
+  {
+   "text": "Let $T=\\bigcup_a V_a$ and let $f_a:X_{V_a}\\simeq Y_{V_a}$ be compatible isomorphisms. The schemes $X_{V_a}$ and $Y_{V_a}$ are the inverse-image open covers of $X_T$ and $Y_T$: identify the relevant pullbacks by their universal properties, and apply base change of open immersions. Regard the $f_a$ as maps into $Y_T$ and glue them by morphism gluing to $f:X_T\\to Y_T$. The inverses agree on overlaps, since the inverse of a fixed isomorphism is unique, so they similarly glue to $g:Y_T\\to X_T$. The composites $gf$ and $fg$ restrict to identities on these covers; morphism uniqueness makes them identities globally. The structure-map equality making $f$ a $T$-map is also checked on the cover. The same uniqueness proves uniqueness of the glued isomorphism. Thus $F$ is a Zariski sheaf, including for the empty test scheme.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), mapping property for maps out; 01JY (lemma-base-change-immersion)."
+   }
+  },
+  {
+   "text": "For a test $T\\to S$, an $S$-map $T\\to J_i$ can exist only if $T\\to S$ factors through $U_i$. Such a factorization is unique, since an open subscheme inclusion is a monomorphism (a map into its open ringed subspace has its underlying map and sheaf map uniquely prescribed). In that case $S$-maps to $J_i$ are precisely $U_i$-maps, so the given bijection represents $F_i$. Given $\\xi\\in F(T)$, the fibre product $h_T\\times_F F_i$ evaluated at $R/S$ consists exactly of maps $h:R\\to T$ whose composite to $S$ factors through $U_i$; the second component must be $h^*\\xi$. The fibre-product universal property identifies this with $\\operatorname{Hom}_S(R,T\\times_SU_i)$. Its projection is the base change of $U_i\\hookrightarrow S$, hence open. The opens $T_i=T\\times_SU_i$ cover $T$, and $\\xi|_{T_i}\\in F_i(T_i)$, proving the covering assertion.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ (lemma-glue-functors), hypotheses (2)(a)--(c); Tag 01JY (lemma-base-change-immersion)."
+   }
+  },
+  {
+   "text": "Put $U_{ij}=U_i\\cap U_j$ and $J_{ij}=J_i\\times_{U_i}U_{ij}$. For every $T/U_{ij}$ the fibre-product universal property and the given natural bijections identify both $\\operatorname{Hom}_{U_{ij}}(T,J_{ij})$ and $\\operatorname{Hom}_{U_{ij}}(T,J_{ji})$ with $F(T)$. Their composite is a natural bijection, hence Yoneda full faithfulness gives an isomorphism $\\theta_{ij}:J_{ij}\\simeq J_{ji}$. It is characterized by preserving the classified isomorphism. The reverse transformation is its inverse. On triple intersections $\\theta_{jk}\\theta_{ij}$ and $\\theta_{ik}$ induce the same map on every test point, namely the identity on its element of $F(T)$; faithfulness gives the cocycle identity. Likewise $\\theta_{ii}=1$. These checks use no choice of coordinates or a finite subcover.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ (lemma-glue-functors), construction of overlap isomorphisms and verification of their cocycle; categories.tex Tag 001P (lemma-yoneda)."
+   }
+  },
+  {
+   "text": "Apply scheme gluing along the base open cover to the schemes $J_i/U_i$ and the isomorphisms $\\theta_{ij}$ just constructed. Its hypotheses are exactly the identity and triple-intersection equalities from the previous step. This gives an $S$-scheme $J$ with $J\\times_SU_i\\simeq J_i$, compatible with $\\theta_{ij}$. The induced maps $j_i:J_i\\to J$ identify $J_i$ with the inverse-image opens of $U_i$: they are pullbacks of $U_i\\hookrightarrow S$. In particular they are open immersions and their images cover $J$.",
+   "uses": [
+    "lem-galois-glue",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes); relative gluing as stated by lem-galois-glue."
+   }
+  },
+  {
+   "text": "Let $u_i\\in F(J_i)$ correspond to $1_{J_i}$. By naturality and the definition of $\\theta_{ij}$, $u_i|_{J_{ij}}=\\theta_{ij}^*u_j$. The sheaf property proved in step 1 glues them to $u\\in F(J)$. Define $\\beta_T(a)=a^*u$ for an $S$-map $a:T\\to J$. Given $\\xi\\in F(T)$, on $T_i=T\\times_SU_i$ the local representing bijection gives a unique map $a_i:T_i\\to J_i$. On $T_i\\cap T_j$ the maps factor into $J_{ij},J_{ji}$ and satisfy $a_j=\\theta_{ij}a_i$, because they classify the same restriction of $\\xi$. Their composites with $j_i,j_j$ agree, so morphism gluing produces $a:T\\to J$ and gives $a^*u=\\xi$ by step 1. Conversely any such $a$ must restrict to these unique local maps, because $J_i=J\\times_SU_i$; morphism uniqueness proves uniqueness of $a$. Finally $(ah)^*u=h^*(a^*u)$ for every $h:T'\\to T$, so $\\beta$ is natural and restricts to the prescribed bijections on $U_i$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ (lemma-glue-functors), last two proof paragraphs: universal element and unique representing morphism."
+   }
+  },
+  {
+   "text": "The restriction of $J\\to S$ over $U_i$ is $J_i\\to U_i$, which is separated and locally of finite presentation by hypothesis. Target-open locality gives these two properties for $J\\to S$. Every $J_i\\to U_i$ is also quasi-compact, since it is of finite presentation; target-open locality of quasi-compactness therefore gives quasi-compactness of $J\\to S$. Since a separated morphism is quasi-separated, $J\\to S$ is quasi-separated. Thus it is of finite presentation in precisely the stated sense: locally of finite presentation, quasi-compact and quasi-separated. Neither target-locality statement requires the cover to be finite or $S$ to be quasi-compact or Noetherian.",
+   "uses": [
+    "lem-sfb-separated-lfp-target-open-locality",
+    "lem-pc-quasi-compact-local-on-target",
+    "lem-pc-separated-quasi-separated",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TQ (lemma-locally-finite-presentation-characterize); schemes.tex Tag 01KK (definition-separated), paragraph following it; spaces-morphisms.tex Tag 03KG (lemma-quasi-compact-local), clause (6)."
+   }
+  },
+  {
+   "text": "For an isomorphism $f\\in F(T)$, the projection $X_T\\times_TY_T\\to X_T$ is the base change of $Y\\to S$ along $X_T\\to S$, using the fibre-product universal property. It is separated. Its section $(1,f):X_T\\to X_T\\times_TY_T$ is therefore a closed immersion. This is the closed graph $\\Gamma_f$; its projections are $1_{X_T}$ and $f$, so it has both projections invertible. Conversely, if a closed subscheme $j:D\\hookrightarrow X_T\\times_TY_T$ has invertible projections $p_X,p_Y$, then $f=p_Yp_X^{-1}$ is an isomorphism and $j p_X^{-1}=(1,f)$ by equality of the two product projections. Thus $D$ and $\\Gamma_f$ are the same closed subobject, with the asserted inverse formula. On each $U_i$ the bijections use exactly this graph by hypothesis. Step 3 preserves $f$, and step 5 restricts to the given bijections, so both the overlap identifications and $\\beta$ preserve these graphs in both directions.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-section-separated-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01KU (lemma-separated-permanence), clause (3), and 01KT (lemma-section-immersion); Tag 01JJ (lemma-glue-functors), matching of the universal elements."
+   }
+  },
+  {
+   "text": "Fix any $S'\\to S$ and any $T/S'$. The fibre-product universal property gives $\\operatorname{Hom}_{S'}(T,J\\times_SS')\\simeq\\operatorname{Hom}_S(T,J)$. Compose with $\\beta_T$. The same universal property identifies $(X\\times_SS')\\times_{S'}T$ with $X\\times_ST$, and likewise for $Y$, so the result is exactly the required isomorphism set on $S'$. All identifications preserve projections and are natural in $T$. For a further test change $h:T'\\to T$, the pullback of $(1,f)$ is $(1,h^*f)$ by its two projections, and it is closed by base change of closed immersions. Pullback preserves composition and identities, so $(h^*p_X)h^*(p_X^{-1})=1$ and $h^*(p_X^{-1})(h^*p_X)=1$; uniqueness of inverse gives $h^*(p_X^{-1})=(h^*p_X)^{-1}$. Consequently $h^*(p_Yp_X^{-1})=(h^*p_Y)(h^*p_X)^{-1}$. This proves the claimed arbitrary-base-change graph and inverse-formula compatibility without imposing a finiteness condition on $h$ or $S'$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP (definition-fibre-product), universal property; Tag 01JY (lemma-base-change-immersion), closed case (also morphisms.tex Tag 01QR)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-weil-open-immersion",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-galois-glue",
+  "lem-sfb-separated-lfp-target-open-locality",
+  "lem-pc-quasi-compact-local-on-target",
+  "lem-pc-separated-quasi-separated",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), 01JJ (lemma-glue-functors), specialized to the relative Isom functor; properties by 01TQ, 03KG and separatedness locality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local separated finitely presented graph representatives of the isomorphism functor glue on a Zariski base cover to a scheme with natural graph bijections and arbitrary base change compatibility",
+   "results": "{\"t\": \"2026-10-22T06:00:10Z\", \"tool\": \"leanfinder\", \"query\": \"Local separated finitely presented graph representatives of the isomorphism functor glue on a Zariski base cover to a scheme with natural graph bijections and arbitrary base change compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.Cover.gluedCover\"], \"digest\": \"b1ace052ab4a8637\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: LocalRepresentability.isRepresentable (Sites/Representability.lean:210) assumes a sheaf and representable open inclusions, does not establish them for the relative Isom functor, and does not assert finite-presentation descent or graph/base-change compatibility. These require the argument being extracted."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Isom presheaf of schemes is a Zariski sheaf and its local graph scheme representatives descend with separatedness and finite presentation",
+   "results": "{\"t\": \"2026-10-22T06:00:09Z\", \"tool\": \"leanfinder\", \"query\": \"The Isom presheaf of schemes is a Zariski sheaf and its local graph scheme representatives descend with separatedness and finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf\", \"AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.Scheme.Hom.isIso_toPshHom\"], \"digest\": \"4851aeefb66c782e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: LocalRepresentability.isRepresentable (Sites/Representability.lean:210) assumes a sheaf and representable open inclusions, does not establish them for the relative Isom functor, and does not assert finite-presentation descent or graph/base-change compatibility. These require the argument being extracted."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsRepresentable\"",
+   "results": "{\"t\": \"2026-10-22T05:59:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsRepresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\"], \"digest\": \"8e9df89e7e20334a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: LocalRepresentability.isRepresentable (Sites/Representability.lean:210) assumes a sheaf and representable open inclusions, does not establish them for the relative Isom functor, and does not assert finite-presentation descent or graph/base-change compatibility. These require the argument being extracted."
+  },
+  {
+   "tool": "grep",
+   "query": "isomFunctor|IsomScheme|isomScheme|graph.*[Rr]epresent|[Rr]epresent.*graph",
+   "results": "{\"t\": \"2026-10-22T05:59:59Z\", \"tool\": \"grep\", \"query\": \"isomFunctor|IsomScheme|isomScheme|graph.*[Rr]epresent|[Rr]epresent.*graph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: LocalRepresentability.isRepresentable (Sites/Representability.lean:210) assumes a sheaf and representable open inclusions, does not establish them for the relative Isom functor, and does not assert finite-presentation descent or graph/base-change compatibility. These require the argument being extracted."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski descent of the graph representation of relative scheme isomorphisms preserves separatedness and finite presentation",
+   "results": "{\"t\": \"2026-10-22T05:59:59Z\", \"tool\": \"leansearch\", \"query\": \"Zariski descent of the graph representation of relative scheme isomorphisms preserves separatedness and finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsSeparated.instResLE\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\"], \"digest\": \"bb621ff1ddaac7d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: LocalRepresentability.isRepresentable (Sites/Representability.lean:210) assumes a sheaf and representable open inclusions, does not establish them for the relative Isom functor, and does not assert finite-presentation descent or graph/base-change compatibility. These require the argument being extracted."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isRepresentable|def yonedaIsoSheaf|isSheaf.*[Ii]som|sheaf.*[Ii]som",
+   "results": "{\"t\": \"2026-10-22T06:00:33Z\", \"tool\": \"grep\", \"query\": \"theorem isRepresentable|def yonedaIsoSheaf|isSheaf.*[Ii]som|sheaf.*[Ii]som\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\"], \"digest\": \"cca1e6b62432ec4e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: LocalRepresentability.isRepresentable (Sites/Representability.lean:210) assumes a sheaf and representable open inclusions, does not establish them for the relative Isom functor, and does not assert finite-presentation descent or graph/base-change compatibility. These require the argument being extracted."
+  },
+  {
+   "tool": "grep",
+   "query": "isomFunctor|IsomScheme|isomScheme|graph.*[Rr]epresent|[Rr]epresent.*graph",
+   "results": "{\"t\": \"2026-10-23T04:13:25Z\", \"tool\": \"grep\", \"query\": \"isomFunctor|IsomScheme|isomScheme|graph.*[Rr]epresent|[Rr]epresent.*graph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give generic gluing, local representability and Yoneda maps; they do not state the Isom sheaf property, separated finite-presentation descent and graph/base-change clauses together. Read Representability.lean:49--58, 181--211; isRepresentable assumes the sheaf and relatively open-cover hypotheses established here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski gluing of local representing schemes for isomorphisms with graph compatibility and finite presentation",
+   "results": "{\"t\": \"2026-10-23T04:13:25Z\", \"tool\": \"leansearch\", \"query\": \"Zariski gluing of local representing schemes for isomorphisms with graph compatibility and finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Cover.glueMorphisms\", \"AlgebraicGeometry.Scheme.LocalRepresentability.toGlued\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\"], \"digest\": \"3dd40ca6047aad1e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give generic gluing, local representability and Yoneda maps; they do not state the Isom sheaf property, separated finite-presentation descent and graph/base-change clauses together. Read Representability.lean:49--58, 181--211; isRepresentable assumes the sheaf and relatively open-cover hypotheses established here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsRepresentable\"",
+   "results": "{\"t\": \"2026-10-23T04:13:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsRepresentable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\"], \"digest\": \"8e9df89e7e20334a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give generic gluing, local representability and Yoneda maps; they do not state the Isom sheaf property, separated finite-presentation descent and graph/base-change clauses together. Read Representability.lean:49--58, 181--211; isRepresentable assumes the sheaf and relatively open-cover hypotheses established here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative isomorphism functor of two separated schemes has local graph representatives that glue over a Zariski base cover with separated finite presentation and arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T04:13:35Z\", \"tool\": \"leanfinder\", \"query\": \"The relative isomorphism functor of two separated schemes has local graph representatives that glue over a Zariski base cover with separated finite presentation and arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J\", \"AlgebraicGeometry.Scheme.GlueData.Rel\"], \"digest\": \"006143fe80eb2fc2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give generic gluing, local representability and Yoneda maps; they do not state the Isom sheaf property, separated finite-presentation descent and graph/base-change clauses together. Read Representability.lean:49--58, 181--211; isRepresentable assumes the sheaf and relatively open-cover hypotheses established here."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem isRepresentable|def yonedaIsoSheaf|isSheaf.*[Ii]som|sheaf.*[Ii]som",
+   "results": "{\"t\": \"2026-10-23T04:15:14Z\", \"tool\": \"grep\", \"query\": \"theorem isRepresentable|def yonedaIsoSheaf|isSheaf.*[Ii]som|sheaf.*[Ii]som\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\"], \"digest\": \"cca1e6b62432ec4e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give generic gluing, local representability and Yoneda maps; they do not state the Isom sheaf property, separated finite-presentation descent and graph/base-change clauses together. Read Representability.lean:49--58, 181--211; isRepresentable assumes the sheaf and relatively open-cover hypotheses established here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The presheaf of isomorphisms between base changes of two schemes is a Zariski sheaf represented by gluing local separated finitely presented graph schemes",
+   "results": "{\"t\": \"2026-10-23T04:15:20Z\", \"tool\": \"leanfinder\", \"query\": \"The presheaf of isomorphisms between base changes of two schemes is a Zariski sheaf represented by gluing local separated finitely presented graph schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.Pullback.gluing\"], \"digest\": \"3774275113ca91c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give generic gluing, local representability and Yoneda maps; they do not state the Isom sheaf property, separated finite-presentation descent and graph/base-change clauses together. Read Representability.lean:49--58, 181--211; isRepresentable assumes the sheaf and relatively open-cover hypotheses established here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-curve-isom-graphs",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; Zariski gluing and arbitrary-base-change assembly, parent old proof steps 7, 8 and 9",
+   "via": [
+    "lem-sfb-projective-curve-isom-graphs",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-isom-graph-representatives-zariski-gluing",
+  "worker": "stage1",
+  "summary": "Q37 checked the full statement against Stacks gluing and relative graph constructions. Preserved the statement, supplied eight explicit steps using existing nodes only, checked every cited statement and arbitrary-base-change inverse formula, and recorded genuine Mathlib searches. No new nodes are needed.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Isomorphism graphs of projective flat curves; Zariski gluing and arbitrary-base-change assembly, parent old proof steps 7, 8 and 9; realizes the Zariski assembly previously in parent proof steps 7--9, without revisiting the curve/Hilbert inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-glue",
+    "why": "Generic effective gluing of schemes over a base open cover, after explicitly constructing the overlap isomorphisms and cocycle; this is the scheme-gluing tool inside the prescribed graph route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-glue"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-70b9ad85d",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-70b9ad85d (reviewer sub-agent of L); spot-checked: The statement, stmt_deps and blueprint fields are identical to the NB-era copy, so the target is not weakened. This is not a 21 Oct re-split (there is no repair note), there are no new nodes and nothing cites SGA. proof_deps equals the union of the step uses, and the searches cover all three tools. The proof is Stacks 01JJ (lemma-glue-functors, proof from schemes.tex l.2909) specialised to the relative case, with 01JB/01JC gluing. Steps: (1) the sheaf property follows from scheme-morphism-gluing existence and uniqueness, with X_{V_a} opened by base change and inverses glued. (2) The open-subfunctor representability is an elementary universal-property calculation. (3) θ_ij comes from Yoneda full faithfulness in Sch/U_ij, which also gives the cocycle. (4) lem-galois-glue applies with P_i×_YY_j=J_ij, and the j_i are open by base change. (5) The universal element is glued; existence and uniqueness of the representing map follow because u|J_i=u_i. (6) Separatedness and lfp come from the in-unit target-locality node, qc from qc-local-on-target, and separated implies qs; the cover may be arbitrary. (7) The graph is a section of the separated base change X_T×_SY→X_T, and D=Γ_{p_Y p_X^{-1}}. (8) Base change via universal properties, closed-immersion base change and uniqueness of inverses. I tested the empty base, infinite covers, non-qc overlaps, repeated indices and empty X/Y. The DAG grep for 01JJ, Isom and representable-by-open-immersions found no duplicate. I accept the declared tool use of lem-galois-glue (sk-prop-h2, generic Zariski gluing). Advisory: the inherited source field calls 0DSQ (the Curves-stack diagonal) a target-locality result, which describes it loosely, and blueprint.from.node is null, inherited from NB."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsomGraphRepresentativesZariskiGluing",
+  "declaration": "AlgebraicGeometry.exists_isom_graph_representatives_zariski_gluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsomGraphRepresentativesZariskiGluing.lean",
+  "statement": "theorem exists_isom_graph_representatives_zariski_gluing {S X Y : Scheme.{u}} (x : X ⟶ S) (y : Y ⟶ S) [IsSeparated x] [IsSeparated y] (I : Type v) (U : I → Scheme.{u}) (b : ∀ i : I, U i ⟶ S) [∀ i : I, IsOpenImmersion (b i)] (hcover : ∀ s : S, ∃ (i : I) (t : U i), b i t = s) (Jᵢ : ∀ i : I, Over (U i)) [∀ i : I, IsSeparated (Jᵢ i).hom] [∀ i : I, LocallyOfFinitePresentation (Jᵢ i).hom] [∀ i : I, QuasiCompact (Jᵢ i).hom] [∀ i : I, QuasiSeparated (Jᵢ i).hom] (eᵢ : ∀ (i : I) (T : Over (U i)), (T ⟶ Jᵢ i) ≃ relativeIsomorphisms x y ((Over.map (b i)).obj T)) (hnatural : ∀ (i : I) (T' T : Over (U i)) (h : T' ⟶ T) (a : T ⟶ Jᵢ i), RelativeIsomorphisms.Restricts ((Over.map (b i)).map h) (eᵢ i T' (h ≫ a)) (eᵢ i T a)) (hgraphs : ∀ (i : I) (T : Over (U i)), IsRelativeIsomGraphClassification (eᵢ i T)) : IsRelativeIsomZariskiSheaf.{u, w} x y ∧ ∃ (J : Over S) (E : RelativeIsomGraphRepresentation x y J), IsSeparated J.hom ∧ LocallyOfFinitePresentation J.hom ∧ QuasiCompact J.hom ∧ QuasiSeparated J.hom ∧ ∃ j : ∀ i : I, (Over.map (b i)).obj (Jᵢ i) ⟶ J, (∀ i : I, IsOpenImmersion (j i).left ∧ IsPullback (j i).left (Jᵢ i).hom J.hom (b i)) ∧ (∃ χ : ∀ i : I, (Over.pullback (b i)).obj J ≅ Jᵢ i, ∀ i : I, (χ i).hom.left ≫ (j i).left = pullback.fst J.hom (b i)) ∧ (∀ (i : I) (T : Over (U i)) (a : T ⟶ Jᵢ i), E.equiv ((Over.map (b i)).obj T) ((Over.map (b i)).map a ≫ j i) = eᵢ i T a) ∧ (∀ (i : I) (T : Over S) (ξ : relativeIsomorphisms x y T), IsOpenImmersion (pullback.snd (j i).left ((E.equiv T).symm ξ).left) ∧ ∃ c : pullback (j i).left ((E.equiv T).symm ξ).left ≅ pullback T.hom (b i), c.hom ≫ pullback.fst T.hom (b i) = pullback.snd (j i).left ((E.equiv T).symm ξ).left ∧ c.hom ≫ pullback.snd T.hom (b i) = pullback.fst (j i).left ((E.equiv T).symm ξ).left ≫ (Jᵢ i).hom) ∧ (∀ (B : Scheme.{u}) (b' : B ⟶ S), ∃ EB : RelativeIsomGraphRepresentation (pullback.snd x b') (pullback.snd y b') ((Over.pullback b').obj J), ∀ (T : Over B) (a : T ⟶ (Over.pullback b').obj J), (relativeIsomBaseChangeIso x b' T).hom ≫ (E.equiv ((Over.map b').obj T) (((Over.mapPullbackAdj b').homEquiv T J).symm a)).hom.left = (EB.equiv T a).hom.left ≫ (relativeIsomBaseChangeIso y b' T).hom ∧ (relativeIsomBaseChangeIso y b' T).hom ≫ (E.equiv ((Over.map b').obj T) (((Over.mapPullbackAdj b').homEquiv T J).symm a)).inv.left = (EB.equiv T a).inv.left ≫ (relativeIsomBaseChangeIso x b' T).hom ∧ relativeIsomGraph (EB.equiv T a) ≫ relativeIsomGraphBaseChangeMap x y b' T = (relativeIsomBaseChangeIso x b' T).hom ≫ relativeIsomGraph (E.equiv ((Over.map b').obj T) (((Over.mapPullbackAdj b').homEquiv T J).symm a)))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2905154e2",
+  "group": "NH",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: separated x,y; a set-indexed cover by open immersions; Jᵢ separated, locally finitely presented, quasi-compact and quasi-separated; natural bijections eᵢ with forward and inverse squares; graph classification in both directions into X_T ×_T Y_T with ideal equality. Conclusions: the Zariski sheaf property at an independent universe w; global J with E, the same four properties, open charts j i as pullbacks of b i, χ, E∘j_i=eᵢ, and pullback of a chart along any ξ = T ×_S U_i; base change for any B with the representation fixed by relativeIsomBaseChangeIso (forward, inverse and graph equations). The new def node def-sfb-relative-isom-graph-classification has 8 real declarations with docstrings and is not a duplicate: the Isom type equals the parent's inline type, and relativeMorphismGraph / doubleGraphMap have a different ambient. lean.statement matches the file exactly, the node statement is unchanged from live, the docstrings carry all 8 proof steps, and the only sorry is the theorem. Edge cases checked: empty base/cover/test, infinite covers, non-reduced test schemes, universes u/v/w. No files changed and no compile run. Note: overlap identifications θ_ij are not named in the Lean; their graph preservation follows from E∘j_i=eᵢ."
+ }
+}

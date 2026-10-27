@@ -1,0 +1,468 @@
+{
+ "id": "lem-per-rational-scalar-balanced-localization",
+ "kind": "statement",
+ "title": "Balanced localization and raw fraction comparison for finite coefficients",
+ "statement": "Let $\\ell$ be prime and $E\\subset L$ finite extensions of $\\mathbf Q_\\ell$, with valuation rings $A_F=\\mathcal O_F$ and chosen uniformizers $t_F$ for $F=E,L$ [def-weil-l-adic-coefficient-extension]. Let $X$ be a noetherian finite-dimensional scheme on which $\\ell$ is invertible. On its small pro-etale site put $B_{F,X}=\\varprojlim_{n\\geq1}(A_F/t_F^n)_X$ and $F_X=B_{F,X}[1/t_F]$ [def-weil-pbc-proetale-site, def-weil-pbc-adic-coefficient-datum]. Use sheaves of modules, sheaf tensor products and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-abstract-derived-category]. Write $\\mathcal C_F(X)=D^b_c(X,A_F)$ for the completed integral category with compatible etale-origin witnesses, $Q_F:\\mathcal C_F(X)\\to\\mathcal R_F(X)=\\mathcal C_F(X)[1/t_F]$ for raw rationalization [def-weil-pbc-bounded-constructible-complete, def-weil-pbc-rational-category], and $J_{F,X}(Q_FK)=F_X\\otimes^L_{B_{F,X}}K$, $J_{F,X}(f/t_F^n)=t_F^{-n}(F_X\\otimes^L f)$ [lem-per-rational-module-realization-functor]. Let $C_X=B_{L,X}\\otimes^L_{B_{E,X}}-$, with constructible restriction and raw rationalization $T_{L/E,X}$ [prop-weil-pbc-scalar-extension].\n\nThe integral coefficient map $i_X:B_{E,X}\\to B_{L,X}$ is normalized by $\\pi^L_n i_X=(\\iota_n)_X\\pi^E_n$, where $\\iota_n:A_E/t_E^n\\to A_L/t_L^n$ comes from inclusion. For every scheme map $g:X'\\to X$ between schemes with the same hypotheses, the coefficient maps $c_{F,g}:g^{-1}B_{F,X}\\to B_{F,X'}$ defined by finite projections [def-weil-pbc-completed-pullback] satisfy\n$$i_{X'}c_{E,g}=c_{L,g}g^{-1}i_X.$$\nUnder continuous coefficient realization this square is precomposition by the geometric projection commuting with postcomposition by $E\\hookrightarrow L$ [lem-weil-pbc-continuous-coefficient-realizations]. Its localization preserves the coefficient units; every nonzero constant of $E$ has inverse its constant reciprocal in $L_X$.\n\nFor $K\\in\\mathcal C_E(X)$ set $U_XK=L_X\\otimes^L_{B_{E,X}}K$. There are specified natural isomorphisms\n$$s_K:L_X\\otimes^L_{B_{L,X}}C_XK\\xrightarrow{\\sim}U_XK,\\qquad t_K:L_X\\otimes^L_{E_X}(E_X\\otimes^L_{B_{E,X}}K)\\xrightarrow{\\sim}U_XK.$$\nThey are the derived tensor composition comparisons: on every flat-term K-flat representative $P$ [def-pc-kflat-complex, lem-pc-kflat-resolution], scalar extension remains flat-term K-flat and both comparisons multiply the adjacent coefficient factors, $(l\\otimes b)\\otimes p\\mapsto lb\\otimes p$, with inverses inserting $1$. These formulas are independent of representatives and natural for all derived morphisms. The components $t_K^{-1}s_K$ define a natural isomorphism $\\theta_{L/E,X}:J_{L,X}T_{L/E,X}\\xrightarrow{\\sim}(L_X\\otimes^L_{E_X}-)J_{E,X}$ on raw rationalizations. Its naturality for $f/t_E^n$ is integral naturality multiplied by $t_E^{-n}$. More precisely, if $t_E^r(t_E^mf-t_E^nh)=0$, the images of $f/t_E^n$ and $h/t_E^m$ coincide after multiplying the resulting equality by $t_E^{-r-m-n}$; no torsion-free Hom hypothesis is imposed. Its inverse has components $s_K^{-1}t_K$.\n\nFor finite towers $E\\subset L\\subset M$ the successive $\\theta$ comparisons agree with the direct comparison under the specified raw scalar associators of [prop-weil-pbc-scalar-extension]. On the common K-flat models both flattened routes are $m\\otimes l\\otimes p\\mapsto ml\\otimes p$. For four nested fields the pentagon has flattened value $nml\\otimes p$. For equality fields the literally identity raw scalar functor has the multiplication unitor comparison. These are equations of natural transformations on raw fractions as well as integral morphisms.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition); Bhatt--Scholze Lemma 6.8.2 and Proposition 6.8.14; parent retained steps 1-4"
+ },
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-rational-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-kflat-resolution",
+  "lem-per-rational-module-realization-functor",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "The restriction of $|\\cdot|_L$ to $E$ is $|\\cdot|_E$ by uniqueness of the extended absolute value. Thus inclusion carries $A_E$ into $A_L$ and $t_E$ into its maximal ideal. The DVR assertion gives $t_E=u t_L^e$ for a unit $u\\in A_L$ and $e\\geq1$. Consequently $t_E^nA_E$ maps into $t_L^nA_L$, so the maps $\\iota_n$ exist and commute with quotient transitions. Their constant-sheaf maps and the projections of $B_{E,X}$ give a compatible family into $(A_L/t_L^n)_X$, hence the map $i_X$ with the required normalization. For the square with $g$, compose both routes with $\\pi^L_n$. By the defining finite projections of $c_{F,g}$ they become the same map: inverse image of $\\pi^E_n$, then the constant coefficient map induced by $\\iota_n$, and the canonical inverse-image identification of constant sheaves. Naturality here just says that a locally constant section labelled $a$ is sent to the section labelled $\\iota_n(a)$ on either route. The inverse-limit universal property now gives $i_{X'}c_{E,g}=c_{L,g}g^{-1}i_X$. In Lean, continuity is obtained by applying the already proved integralScalar_absoluteValue to the field algebra embedding and then using isometry continuity. The finite-projection characterization is pbcScalarCoefficientMap_exists; the geometric square follows from limit.hom_ext and naturality of the finite constant-coefficient maps.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59; finite-projection normalization, with the coefficient valuation facts explicitly cited"
+   }
+  },
+  {
+   "text": "Use the continuous-function identifications of the integral inverse limits and their sheaf localizations. Postcomposition by $A_E\\hookrightarrow A_L$ has projections $(\\iota_n)_X\\pi^E_n$, so uniqueness into the inverse limit identifies it with $i_X$. The continuous coefficient realization intertwines coefficient postcomposition; geometric pullback is precomposition by the projection, which commutes with postcomposition by inclusion. Reduction modulo $t_F^n$ commutes with precomposition, so this geometric map has finite components $c_{g,n}g^{-1}\\pi^F_n$. Uniqueness into the inverse limit therefore identifies it with the particular $c_{F,g}$ of Step 1. On constants both operations send $1$ to $1$. In $L_X$, the constant section with value $a\\in E^\\times$ has inverse the constant section with value $a^{-1}\\in L$, since their pointwise products are $1$. In particular $t_E$ is invertible there. The induced localized map is explicitly $b/t_E^n\\mapsto i_X(b)t_E^{-n}$ locally; it is well defined by the fraction relation, is unital, and agrees under continuous realization with postcomposition by $E\\hookrightarrow L$. Thus the integral square localizes to the asserted unit-preserving square. For the geometric normalization, the finite_normalization fields identify each finiteIso with the canonical constant-sheaf comparison: sheafification uniqueness reduces this identification to constant sections. The integral_normalization fields then identify the completed projections with pointwise residue reduction. Naturality of the canonical constant comparison under pullback gives the finite squares, and the continuous residue cone limit gives their integral square. The localized coefficient square is obtained from the retained rationalBalancedIntegralNormalization statement and the two inclusion_normalization fields. Constant reciprocals use the sheafification adjunction and multiplicativity of the embedding; composition and the rational geometric square use pointwise postcomposition and continuousCoefficientPullback_naturality directly.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-pbc-continuous-coefficient-pullback-composition",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-continuous-coefficient-completion",
+    "lem-weil-pbc-continuous-coefficient-pullback-isIso",
+    "lem-weil-pbc-continuous-coefficient-general-pullback-isIso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1),(2), pp. 58-59; explicit precomposition/postcomposition computation"
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat representative $P$ of $K$ by the K-flat resolution theorem. Apply K-flat pullback preservation to the identity underlying topos with each of the coefficient maps $B_{E,X}\\to B_{L,X}$, $B_{E,X}\\to E_X$, $B_{L,X}\\to L_X$, and $E_X\\to L_X$. Each scalar extension of the relevant flat-term K-flat complex is again flat-term K-flat. Thus successive derived extensions can all be computed by successive ordinary sheaf tensors on these models. This invokes no flatness of a finite quotient coefficient map and imposes no boundedness on $P$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat; resolution used in Tag 0D6D, lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "Apply the canonical successive-derived-scalar comparison first to $B_{E,X}\\to B_{L,X}\\to L_X$ and then to $B_{E,X}\\to E_X\\to L_X$. These are the specified $s_K$ and $t_K$, with common target $U_XK$. With coefficient factors written on the left, their maps are $(l\\otimes b)\\otimes p\\mapsto lb\\otimes p$ and $(l\\otimes e)\\otimes p\\mapsto le\\otimes p$; the inverses send $l\\otimes p$ to $(l\\otimes1)\\otimes p$. The coefficient factors have degree zero, so this convention introduces no sign. The formulas respect the balancing relations and commute with the differential, and the composites are the identity by balancing against $1$. Importantly, the cited comparison is already natural on the entire derived category, not only for chain maps between chosen models. Its canonical K-flat computation, together with the change-of-rings independence of resolutions, identifies these displayed chain maps with that comparison for every $P$. Hence the formulas are independent of representatives and natural for all derived morphisms. The arbitrary-derived-morphism naturality clause is proved directly by identifying pbcReductionNormalization.hom with the component of Adjunction.leftAdjointCompIso and applying naturality of that natural transformation.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; Tag 0G7E, lemma-pullback-K-flat, specialized to coefficient maps"
+   }
+  },
+  {
+   "text": "On $\\mathcal C_E(X)$ form $\\eta_K=t_K^{-1}s_K$, with inverse $s_K^{-1}t_K$. The actual integral scalar functor restricts and rationalizes to $T_{L/E,X}$, while $J_{F,X}$ has exactly the displayed scalar-localization and fraction formulas. Therefore the two integral functors connected by $\\eta$ are the restrictions of $J_{L,X}T_{L/E,X}$ and $(L_X\\otimes^L_{E_X}-)J_{E,X}$. They are semilinear from $A_E$ to $L$: a coefficient scalar moves across the balancing relation, and degree-zero scalar multiplication commutes with the derived comparisons. By Step 2 the image of $t_E$ is a unit in $L$. Apply semilinear scalar localization with target $D(L_X)$, viewed as an $L$-linear category and localized at $1$. It extends $\\eta$ and its inverse uniquely to the raw rational category. This gives $\\theta$ with the stated components, and its naturality equation at $f/t_E^n$ is the integral naturality equation multiplied by $t_E^{-n}$. No change of objects or idempotent completion is involved. Given the retained component naturality statement, NatIso.ofComponents constructs theta. The stated existence and uniqueness follows by equality of the hom components, using extensionality of isomorphisms and natural transformations.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-per-rational-module-realization-functor",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), pp. 61-62; agent expansion of the balanced comparison on raw fractions"
+   }
+  },
+  {
+   "text": " Work in the raw localized Hom module itself, before applying either realization functor. Let c be the image of t and v its specified localization reciprocal. Apply the R-linear localization map to t^r(t^m f-t^n h)=0. The unit c^r can be cancelled in this localized module, yielding c^m Q(f)=c^n Q(h). Multiply the desired equation v^n Q(f)=v^m Q(h) by the unit c^(m+n); using c^a v^a=1 reduces it to that cross equation. Apply the map function of each of the two functors to this single equality. No faithfulness, semilinearity or torsion-free property of the integral Hom module is used.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CO, definition-localization; explicit equality-of-fractions computation for module Hom groups"
+   }
+  },
+  {
+   "text": "For $E\\subset L\\subset M$, compute the diagram on a flat-term K-flat $B_{E,X}$-model. The integral coefficient associators identify successive scalar extension with direct scalar extension by the normalized multiplication comparison. The successive-derived-scalar comparison is natural in the coefficient maps and its iterated comparisons agree. Flattening to $M_X\\otimes^L_{B_{E,X}}K$, both routes therefore send $m\\otimes l\\otimes p$ to $ml\\otimes p$ (any intervening integral coefficient factor is multiplied into the same product). Since these are equal chain maps under the canonical computation comparisons, they give equal derived natural transformations. The specified raw associators are the rationalizations of these balanced comparisons, so the semilinear localization theorem preserves this equation, including whiskering: the same square commutes on every raw fraction. For the normalized tower, a general category-theoretic conjugation calculation transports the raw tower equation along the three specified pbcStageNormalization isomorphisms. The proof uses naturality of the inverse middle normalization and of the raw theta, with cancellation of inverse components.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, iterated coefficient-map specialization; raw associators as specified in prop-weil-pbc-scalar-extension"
+   }
+  },
+  {
+   "text": "With four nested fields, flatten every parenthesization to the final coefficient sheaf tensored with the original $P$. The five routes around the pentagon all multiply the three degree-zero coefficient entries and send $n\\otimes m\\otimes l\\otimes p$ to $nml\\otimes p$; associativity of ring multiplication gives their equality. The iterated-comparison clause identifies these chain maps with the canonical derived comparisons. For an equality extension, the chosen raw functor is literally the identity; use the multiplication unitor to identify $B_{E,X}\\otimes^L_{B_{E,X}}K$ with $K$. Then $t_K^{-1}s_K$ is the comparison to $E_X\\otimes^L_{E_X}J_EK$, with inverse multiplication, and the unit diagrams reduce to $1x=x=x1$. Localization preserves these identity, composite and whiskered equations, so the pentagon and unit equations hold as natural-transformation equations on the raw rational categories as well. For the normalized identity, keep the ordinary and derived multiplication witnesses from rationalBalancedIdentity. At equal fields pbcStageNormalization is the raw tensor unit followed by the equality-to-identity transport. Functoriality and the inverse-component equations cancel the raw unit, giving exactly the required equality transport.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; elementary multiplication/unit calculation on the canonical models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-scalar-localization",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-ring-localization-away",
+  "lem-pc-kflat-resolution",
+  "lem-per-rational-module-realization-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "lem-weil-pbc-continuous-coefficient-general-pullback-isIso",
+  "lem-weil-pbc-continuous-coefficient-pullback-composition",
+  "lem-weil-pbc-continuous-coefficient-pullback-isIso",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E (lemma-pullback-K-flat) and 0D6D (lemma-derived-pullback-composition), with Bhatt--Scholze Lemma 6.8.2 and Proposition 6.8.14(2); explicit finite-projection, fraction and coherence expansion; D9 partial proof: direct normalized-adjunction naturality, raw localized-Hom fraction cancellation, finite constant-sheaf normalization, and formal transport of the raw tower and unit comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*(scalar|tensor).*localiz|localiz.*(scalar|tensor).*derived",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary sheaf pullback, algebraic tensor associators and ordinary adic completion do not state this normalized unbounded derived comparison on completed coefficient sheaves and raw rationalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Balanced derived tensor comparison for finite l adic coefficient extension commutes with localization of raw constructible Hom groups",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AdicCompletion.ofTensorProduct_naturality",
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "AdicCompletion.ofTensorProduct",
+     "AdicCompletion.ofTensorProduct_tmul",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+     "AdicCompletion.ofTensorProductEquivOfPiFintype",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary sheaf pullback, algebraic tensor associators and ordinary adic completion do not state this normalized unbounded derived comparison on completed coefficient sheaves and raw rationalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For completed coefficient sheaves of finite l adic fields the derived tensor associator yields a natural comparison on localized constructible Hom groups",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HomologicalComplex.associator",
+     "CategoryTheory.Localization.Monoidal.associator",
+     "AdicCompletion.ofTensorProductEquivOfPiFintype",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "CategoryTheory.sheafHom",
+     "instMonoidalClosedLightCondSet",
+     "instCartesianMonoidalCategoryCondensedSet"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary sheaf pullback, algebraic tensor associators and ordinary adic completion do not state this normalized unbounded derived comparison on completed coefficient sheaves and raw rationalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": {
+    "hits": 5,
+    "top": [
+     "SheafOfModules.pullbackComp",
+     "SheafOfModules.pullback_comp_id",
+     "SheafOfModules.pullback_id_comp",
+     "SheafOfModules.pullback_assoc",
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary sheaf pullback, algebraic tensor associators and ordinary adic completion do not state this normalized unbounded derived comparison on completed coefficient sheaves and raw rationalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization at a uniformizer commutes with extension of scalars in unbounded derived categories of sheaf modules and descends to fraction morphisms",
+   "results": {
+    "hits": 8,
+    "top": [
+     "ModuleCat.Tilde.openToLocalization",
+     "ModuleCat.Tilde.toOpen",
+     "ModuleCat.localizedModule_functor",
+     "ModuleCat.Tilde.Localizations",
+     "ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop",
+     "ModuleCat.localizedModule_functor_map",
+     "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap",
+     "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary sheaf pullback, algebraic tensor associators and ordinary adic completion do not state this normalized unbounded derived comparison on completed coefficient sheaves and raw rationalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars for completed coefficient sheaves commutes with rationalization and has coherent tensor associators",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CommRingCat.moduleCatExtendScalarsPseudofunctor",
+     "ModuleCat.extendScalars_assoc",
+     "Algebra.TensorProduct.instCompatibleSMulRat",
+     "ModuleCat.extendScalars_assoc'",
+     "ModuleCat.extendScalars_assoc_assoc",
+     "SMulCommClass.rat",
+     "AdicCompletion.instSMul",
+     "ModuleCat.extendRestrictScalarsAdj"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern ordinary module or sheaf scalar extension, ordinary localization/completion or monoidal structures; they do not state the completed-coefficient unbounded derived comparison with its raw fraction and field-tower normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Balanced derived tensor comparison for finite l adic coefficient extension and raw rational localization of morphisms",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "IsLocalizedModule.map_lTensor",
+     "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+     "AdicCompletion.ofTensorProduct_naturality",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+     "AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype",
+     "Algebra.tensorH1CotangentOfIsLocalization_toLinearMap",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern ordinary module or sheaf scalar extension, ordinary localization/completion or monoidal structures; they do not state the completed-coefficient unbounded derived comparison with its raw fraction and field-tower normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived categories of sheaf modules tensor composition isomorphism for two coefficient ring maps natural on localization fractions",
+   "results": {
+    "hits": 8,
+    "top": [
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instMonoidalCategoryLightCondMod",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instMonoidalLightCondSetLightCondModFree",
+     "CategoryTheory.Localization.Monoidal.tensorBifunctorIso",
+     "CategoryTheory.Sheaf.monoidalCategory",
+     "CategoryTheory.Localization.Monoidal.tensor_comp"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern ordinary module or sheaf scalar extension, ordinary localization/completion or monoidal structures; they do not state the completed-coefficient unbounded derived comparison with its raw fraction and field-tower normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rational-realization-scalar-coherence",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Finite coefficient extension and mixed realization coherence. Retained item proof steps 15, 16. Re-split argument: Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition); Bhatt--Scholze Lemma 6.8.2 and Proposition 6.8.14; parent retained steps 1-4.",
+   "via": [
+    "lem-per-rational-realization-scalar-coherence",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-rational-scalar-balanced-localization",
+  "worker": "stage1",
+  "summary": "Split the unchanged statement using existing K-flat preservation, derived scalar-composition and semilinear localization nodes. Made finite-projection normalization, ramification, scalar reciprocals, resolution-independent derived naturality, torsion-aware fraction descent and tower/unit/pentagon formulas explicit. No new nodes.",
+  "blueprint": "lem-per-smooth-pullback-t-exact, first proof paragraph: cohomology sheaves of Lf^*K are pullbacks; this supplies the coefficient-extension compatibility of the rational continuous realization before the degree-zero calculation. It expands the balanced-localization input of lem-per-rational-realization-scalar-coherence (retained parent steps 1-4).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "Uniqueness of absolute values checks compatibility of the coefficient inclusion; no perverse-unit result supplies local-field coefficient facts."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Uniformizer decomposition checks finite quotient coefficient maps even with ramification; a local-field tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Identifies inverse-limit coefficient rings and their localizations with continuous-function sheaves; used only for coefficient normalization."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Identifies coefficient postcomposition with the actual continuous realization map; a coefficient-sheaf normalization tool."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-pullback-composition",
+    "why": "Gives geometric precomposition and coefficient postcomposition compatibility for continuous-function sheaves."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies flat-term K-flat representatives in unbounded module-sheaf derived categories, a general resolution tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Supplies K-flat and flat-term preservation for coefficient maps via the identity underlying topos."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Gives the general normalized derived scalar-composition isomorphism, full derived naturality and iterated coherence; specializes to the two coefficient chains here."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Gives canonical resolution-independent K-flat computations for the unbounded derived scalar functors."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Pins the actual integral functor, its raw restriction and its specified coefficient associators; it is already a statement dependency of this item."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "General fraction-descent theorem for semilinear functors, transformations and equations; no perverse-unit result replaces this algebraic localization argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-coefficient-pullback-composition",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-derived-change-of-rings",
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-e44e5d928",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-e44e5d928 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 8 steps, no new nodes), the statements of all 23 cited nodes, and the sources. Sources checked: Stacks sites-cohomology l.3508 0G7E (needs K-flat plus flat terms, matching lem-weil-pbc-ringed-topos-kflat-pullback) and l.3658 0D6D; Bhatt-Scholze Lemma 6.8.2(1) p.58 and Prop 6.8.14 pp.61-62; no SGA. Step 1: absolute-value uniqueness and DVR(5) give t_E=u t_L^e with e>=1, so iota_n is defined even with ramification; the square with g follows from the finite-projection definition of c_g, naturality of constant inverse image, and limit uniqueness. Step 2: the continuous identifications hold for noetherian X and X'; the geometric map is matched to c_{F,g} through finite components; reciprocals of constants are pointwise. Steps 3-4: flat-term K-flat preservation with the identity topos; lem-sfb-successive-derived-quotient-normalization gives exactly s and t, their multiplication/insertion formulas, naturality and iterated coherence; lem-pur-derived-change-of-rings gives resolution independence. Step 5: semilinear localization with R=A_E, S=L, t=t_E, u=1; ramified fraction check J_L(C f/t_E^n)=t_E^{-n}(L(x)C f) matches the unique extension. Step 6: torsion-aware fraction relation is correct. Steps 7-8: associators are the balancing comparisons of prop-weil-pbc-scalar-extension; equal K-flat chain maps give equal derived transformations; T_{E/E}=id with the unitor. Cycle check: no cycle; proof_deps equals the union of uses. No duplicate found in a DAG search for theta-type comparisons. The item is a strict ingredient of its parent, not a restatement. Accepted all 11 declared tool_uses (generic local-field, continuous-coefficient, K-flat, change-of-rings, successive-scalar and semilinear-localization tools). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalScalarBalancedLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.rationalScalarBalancedLocalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.rationalBalancedEmbedding_continuous",
+   "AlgebraicGeometry.Scheme.rationalBalancedCoefficient",
+   "AlgebraicGeometry.Scheme.rationalBalancedIntegralCoefficients",
+   "AlgebraicGeometry.Scheme.rationalBalancedCoefficient_sections",
+   "AlgebraicGeometry.Scheme.rationalBalancedCoefficient_square",
+   "AlgebraicGeometry.Scheme.rationalBalancedS",
+   "AlgebraicGeometry.Scheme.rationalBalancedT",
+   "AlgebraicGeometry.Scheme.rationalBalancedComponent",
+   "AlgebraicGeometry.Scheme.rationalBalancedComponent_naturality",
+   "AlgebraicGeometry.Scheme.rationalBalancedTheta",
+   "AlgebraicGeometry.Scheme.rationalBalancedOrdinaryComp",
+   "AlgebraicGeometry.Scheme.rationalBalancedTensorModels",
+   "AlgebraicGeometry.Scheme.rationalBalancedFractions",
+   "AlgebraicGeometry.Scheme.rationalBalancedCoefficient_comp",
+   "AlgebraicGeometry.Scheme.rationalBalancedTower",
+   "AlgebraicGeometry.Scheme.rationalBalancedPentagon",
+   "AlgebraicGeometry.Scheme.rationalBalancedIdentity",
+   "AlgebraicGeometry.Scheme.rationalBalancedNormalizedTower",
+   "AlgebraicGeometry.Scheme.rationalBalancedGeometricMap",
+   "AlgebraicGeometry.Scheme.rationalBalancedIntegralGeometricMap",
+   "AlgebraicGeometry.Scheme.rationalBalancedGeometricSquare",
+   "AlgebraicGeometry.Scheme.rationalBalancedGeometricNormalization",
+   "AlgebraicGeometry.Scheme.rationalBalancedIntegralNormalization",
+   "AlgebraicGeometry.Scheme.rationalBalancedDerivedNaturality",
+   "AlgebraicGeometry.Scheme.rationalBalancedNormalizedIdentity",
+   "AlgebraicGeometry.Scheme.rationalScalarBalancedLocalization"
+  ],
+  "file": "lean/Sheaf/Paper/RationalScalarBalancedLocalization.lean",
+  "statement": "theorem rationalScalarBalancedLocalization : ∃! theta : pbcRationalScalarExtension l E F i X Fact.out Fact.out ⋙ sF.J ≅ sE.J ⋙ pbcDerivedExtend (rationalBalancedCoefficient l E F i X), ∀ K : PbcRationalDerivedCategory l E X Fact.out Fact.out, theta.app K = rationalBalancedComponent l E F i X sE sF K",
+  "branch": "sheaf-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The primary theorem fixes the raw comparison by all its specified components. Companion declarations state the finite-projection and continuous normalizations, both tensor computations and inverse formulas, arbitrary-derived naturality, torsion-aware raw fraction descent, tower and pentagon equations, and literal identity normalization. All data definitions use existing canonical coefficient, tensor, adjunction, and raw-localization constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b5c9d0bd",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Only the item node changed versus side-live (lean record added; stmt_deps, statement and proof as landed at stage 1). Statement is verbatim in the file; the 26 declarations equal the file. 18 theorems are all sorry with source/blueprint docstrings; the 8 defs have real data; the continuity proof needed by a def is a named theorem. All 14 stmt_dep modules are publicly imported. Clauses match: i_X normalization and the g-square via completedCoefficientMap (stated for arbitrary schemes, more general and true); continuous postcomposition and precomposition normalizations; units and reciprocals for a≠0; the square pins coef as the localization of i_X; s,t = pbcReductionNormalization with common target L_X⊗_{B_E}K; multiply/insert-1 formulas, K-flat/flat-term preservation and counit computation on every flat-term K-flat P; naturality for all derived maps; θ = s;t⁻¹ with only the recorded J object transports, and the primary ∃! is naturality on all raw fractions; fraction descent without a torsion-free assumption; tower, pentagon and unitor/literal-identity equations with the specified raw associators. Edge cases checked: ramified, equal fields, empty X, r=m=n=0, torsion, unbounded P. Not compiled (review rule). Advisories: the second reading is the worker's self-check under the dispatcher policy; the fractions clause is automatic in the raw category and the pentagon reduces to J of the raw associator pentagon; base-era use of non-stmt_dep owners (bounded-constructible-tower, continuous-ring-functions-sheaf, etc.) and theorem stmt_deps supplying plain defs, not fixable at stage 2."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261026T235846-L-1461716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

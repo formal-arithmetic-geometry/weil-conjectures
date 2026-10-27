@@ -1,0 +1,126 @@
+{
+ "id": "def-zl-weil-geometric-fiber-properties",
+ "kind": "definition",
+ "title": "Geometric-fibre properties below Weil compact-support realization",
+ "statement": "For a finite-field datum D [def-weil-finite-field-fiber], geometric base change of a finite-type k₀-scheme has its canonical structure map to Spec(k), is locally finite type and quasi-compact. The geometric map [def-zl-weil-ind-sheaf-category] respects these structure maps and preserves separatedness, local finite type, quasi-compactness, properness and open immersions. For any prime l≠D.p the image of l is a unit in D.k. These are canonical property proofs, with no new geometric or coefficient data.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "source": {
+  "document": "Stacks Project Tags 01T6, 01K0, 01L4, 01W4 and 01JU; finite-field characteristic",
+  "place": "MorphismProperty.overPullbackMap, the Over structure equation, and the prime-unit criterion in characteristic p."
+ },
+ "proof": [
+  {
+   "text": "Use the pullback second projection for the geometric structure map. Apply Mathlib base-change stability via MorphismProperty.overPullbackMap to every listed morphism property. The Over morphism equation proves compatibility with the structure maps. The structure-map finite-type and quasi-compactness instances are reused from the existing SfCommonStageWeilCohomology base-change API rather than duplicated.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-zl-weil-ind-sheaf-category",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The cardinality formula gives characteristic D.p in D.k₀ and its injective inclusion gives that characteristic in D.k. Since l is a different prime, its image is nonzero in D.k, hence a unit.",
+   "uses": [
+    "def-weil-finite-field-fiber"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project Tags 01T6, 01K0, 01L4, 01W4 and 01JU; finite-field characteristic",
+  "place": "MorphismProperty.overPullbackMap, the Over structure equation, and the prime-unit criterion in characteristic p."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally finite type quasi compact proper open immersion morphism stable under base change",
+   "results": "8 hits including isOpenImmersion_stableUnderBaseChange, IsProper.isStableUnderBaseChange and IsSeparated.isStableUnderBaseChange.",
+   "date": "2026-10-25",
+   "verdict": "Reuse these Mathlib instances via overPullbackMap."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "results": "12 generic derived functor hits; geometric proofs instead use direct Mathlib declarations.",
+   "date": "2026-10-25",
+   "verdict": "No derived input needed for these elementary helpers."
+  },
+  {
+   "tool": "grep",
+   "query": "MorphismProperty.overPullbackMap|charP_of_card_eq_prime_pow",
+   "results": "Direct source reads of the existing item and WeilIndSheafCategory supplied all original proofs.",
+   "date": "2026-10-25",
+   "verdict": "Reuses existing elementary arguments; no geometric hole introduced."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompactSupportCohomology",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "First paragraph, the proper/open construction of higher compact-support images. Geometric-fibre properties below Weil compact-support realization",
+   "via": [
+    "def-zl-weil-compact-support-cohomology",
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilGeometricFiberProperties",
+  "file": "lean/Sheaf/Paper/WeilGeometricFiberProperties.lean",
+  "declaration": "WeilConjectures.zlRealizationPrimeUnit",
+  "statement": "theorem zlRealizationPrimeUnit : IsUnit (l : D.k)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.zlRealizationFiberMap_isOver",
+   "WeilConjectures.zlRealizationFiberMap_separated",
+   "WeilConjectures.zlRealizationFiberMap_finiteType",
+   "WeilConjectures.zlRealizationFiberMap_quasiCompact",
+   "WeilConjectures.zlRealizationPrimeUnit",
+   "WeilConjectures.zlRealizationFiberMap_isProper",
+   "WeilConjectures.zlRealizationFiberMap_isOpenImmersion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T041146-L-1034267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T041146-L-1034267",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

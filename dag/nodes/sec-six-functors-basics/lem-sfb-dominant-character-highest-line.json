@@ -1,0 +1,223 @@
+{
+ "id": "lem-sfb-dominant-character-highest-line",
+ "kind": "statement",
+ "title": "Dominant characters occur on Borel-stable highest-weight lines",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning a smooth connected affine group scheme of finite type with no nontrivial smooth connected normal unipotent subgroup. Unipotent means that all geometric points are unipotent matrices in a faithful linear representation. Fix a split maximal torus $T$ and a Borel subgroup $B\\supseteq T$ with unipotent radical $U$, projection $p:B\\to T$, simple roots $\\Delta$ and coroots as in [lem-sfb-reductive-borel-pair-structure]. Let $\\lambda:T\\to\\mathbf G_m$ be a character with $\\langle\\lambda,\\alpha^\\vee\\rangle\\ge0$ for every $\\alpha\\in\\Delta$, and put $\\widetilde\\lambda=\\lambda\\circ p$. There exist a nonzero finite-dimensional rational $G$-module $V$ and $0\\ne v\\in V$ such that $$b\\cdot(v\\otimes1)=\\widetilde\\lambda(b)(v\\otimes1)\\quad\\text{for every commutative }F\\text{-algebra }A\\text{ and }b\\in B(A).$$ Rational means that $V$ has an $F$-linear coaction $V\\to V\\otimes_F F[G]$ satisfying coassociativity and the counit identity, equivalently a group-scheme representation on $V$. The line $Fv$ is thus $B$-stable with character $\\widetilde\\lambda$ and $U$ acts trivially on it. This holds in every characteristic and for the trivial group.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 22.2 and 22.3 (pp.463--464), Proposition 22.17 and Theorem 22.20 (pp.467--468); positive system attached to B as in 21.35."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sfb-rational-highest-weight-data",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "First treat a semisimple simply connected group $S$ with the given Borel pair. For each fundamental character $\\omega_i$, take the rational big-cell function $f_i=f_{\\omega_i}$ and the integer $d_i>0$ and regular function $h_i$ supplied by the two cited inputs. Their restrictions satisfy $f_i^{d_i}=h_i$. Since both lie in $F(S)$ and restriction is injective, this equality holds in $F(S)$. Hence $f_i$ is integral over $F[S]$: it is a root of the monic polynomial $X^{d_i}-h_i$. Integral closedness gives $f_i\\in F[S]$. It is nonzero, lies in $E_{B_S}(w_0\\omega_i)$, and is fixed by $U_S$ with $T_S$-weight $\\omega_i$, by the character-function input. Hence $bf_i=\\widetilde\\omega_i(b)f_i$ for $b\\in B_S(A)$: write $b=ut$ with $u\\in U_S(A)$ and $t=p_S(b)$, using $B_S=U_S\\rtimes T_S$, so $bf_i=u(tf_i)=\\omega_i(t)f_i$. No extraction of a field-theoretic root or division by $d_i$ is involved.",
+   "uses": [
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-fundamental-ray-regular-power",
+    "lem-sfb-normal-big-cell-character-functions",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.25 proof, printed p.469."
+   }
+  },
+  {
+   "text": "The space $E_{B_S}(w_0\\omega_i)$ is the section space of the homogeneous invertible coherent sheaf $\\mathcal L_{w_0\\omega_i}$ on $S/B_S$. The quotient is proper and finite type over $F$. Apply proper coherent cohomology finiteness to $S/B_S\\to\\operatorname{Spec}F$ in degree zero; its Noetherian base is the spectrum of a field. Thus this is a finite-dimensional rational $S$-module $V_i$. It contains the nonzero $f_i$ from step 1. The character-function input gives the rational action, so finite dimensionality here does not assert semisimplicity in positive characteristic.",
+   "uses": [
+    "lem-sfb-homogeneous-line-bundle-sections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-pc-coherent-hi",
+    "lem-sfb-normal-big-cell-character-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.25; Section 18c and Definition 22.21; proper coherent finiteness Stacks Tags 02O5, 02O6."
+   }
+  },
+  {
+   "text": "For any dominant character $\\mu$ of $T_S$, write $\\mu=\\sum_i m_i\\omega_i$ using the weight-lattice basis; $m_i=\\langle\\mu,\\alpha_i^\\vee\\rangle\\ge0$. Set $V_S=\\bigotimes_i V_i^{\\otimes m_i}$ and $v_S=\\bigotimes_i f_i^{\\otimes m_i}$. Tensor the coactions; the Hopf multiplication gives the diagonal action and coassociativity follows from its multiplicativity. The module is finite-dimensional. Choose linear forms taking each $f_i$ to $1$; their tensor product takes $v_S$ to $1$, so $v_S\\ne0$. For every $F$-algebra $A$, the diagonal action gives $b v_S=\\prod_i\\widetilde\\omega_i(b)^{m_i}v_S=\\widetilde\\mu(b)v_S$. Empty tensor products are $F$ and $1$; thus this also handles $S=1$ and $\\mu=0$.",
+   "uses": [
+    "lem-sfb-simply-connected-character-lattice"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.26 and final proof of Theorem 22.20, printed p.470."
+   }
+  },
+  {
+   "text": "For general $G$, take the faithfully flat cover $q:H=Z\\times_F S\\to G$ with finite central kernel, $Z=\\mathbf G_m^r$ a split torus and $S$ semisimple simply connected. The group $H$ is smooth, connected, affine and of finite type: $H\\to S$ is smooth by the torus-projection node, hence $H\\to\\operatorname{Spec}F$ is smooth by composition with the smooth $S$; the same node makes $L[\\mathbf Z^r]$ a domain for every field $L\\supseteq F$, so $Z$ is geometrically connected and the product-components node makes $H$ connected; $F[H]=F[Z]\\otimes_FF[S]$ is finitely generated. So the compatibility node applies; it makes $H$ reductive. Lift the specified Borel pair using it, obtaining $B_H=Z\\times B_S$, $T_H=Z\\times T_S$ and $K=\\ker(q)\\subseteq T_H$. Write $q_T^*\\lambda=(\\eta,\\mu)$, where $\\eta$ and $\\mu$ are its restrictions to the two factors: a character on a product is their product because $(z,t)=(z,1)(1,t)$. Pairing compatibility makes $\\mu$ dominant. Apply step 3 to $S$ and $\\mu$ and let $Z$ act by the one-dimensional character $\\eta$. The resulting finite-dimensional rational $H$-module $V$ contains $v=1\\otimes v_S\\ne0$ with $B_H$-character $q^*\\widetilde\\lambda$; this follows from compatibility of the Borel projections and the diagonal action. Since $K\\subseteq B_H$ and $q|_K=1$, its full scheme-theoretic action fixes $v$.",
+   "uses": [
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-trf-split-lattice-torus-projection",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-geometrically-connected-product-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Final proof of Theorem 22.20; Proposition 21.60 and 22.12, pp.442,465,470."
+   }
+  },
+  {
+   "text": "Take the rational $H$-submodule $W$ generated by $v$. The descent node makes it a finite-dimensional rational $G$-module on the same vector space, with $v\\ne0$. The $B$-eigenvector identity can be tested after the faithfully flat cover $B_H\\to B$. Concretely, for $b\\in B(A)$ form the nonzero faithfully flat $A$-algebra $A'$ of its pullback torsor, over which $b$ has a lift $b_H$. Step 4 gives $b v=\\widetilde\\lambda(b)v$ in $W\\otimes_F A'$. Faithful flatness detects equality, so the identity holds in $W\\otimes_F A$. (For $A=0$ it is immediate.) This proves the required identity for every $A$. As $\\widetilde\\lambda|_U=1$, $U$ acts trivially on $Fv$; and the scalar identity proves that this line is $B$-stable. For $G=1$ all constructions reduce to $W=F$, $v=1$.",
+   "uses": [
+    "lem-sfb-central-kernel-cyclic-representation-descent",
+    "lem-sfb-central-isogeny-borel-root-compatibility",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 22.20 final reduction and 22.12; scheme-level descent by Lemma 5.15 and Theorem 5.13."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-simply-connected-character-lattice",
+  "lem-sfb-fundamental-ray-regular-power",
+  "lem-sfb-normal-big-cell-character-functions",
+  "lem-sfb-homogeneous-line-bundle-sections",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-pc-coherent-hi",
+  "lem-sfb-reductive-torus-simply-connected-cover",
+  "lem-sfb-central-isogeny-borel-root-compatibility",
+  "lem-sfb-central-kernel-cyclic-representation-descent",
+  "lem-trf-split-lattice-torus-projection",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-geometrically-connected-product-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proof of Theorem 22.20, Lemmas 22.24--22.26, pp.469--470; finite dimensionality via proper coherent H^0 in place of taking a simple quotient."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For every dominant character of a split reductive algebraic group there is a finite dimensional rational representation with a Borel stable highest weight line",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a nilpotent Lie algebra $ \\\\mathfrak{g} $, the supremum (sum) of all generalized weight spaces $ \\\\text{Gen}_\\\\chi(M) $ associated to weights $ \\\\chi $ equals \"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a commutative ring $ K $, the supremum (sum) of all generalized weight spaces associated to weight functions $ \\\\chi : L \\\\to K $ equals the entire module $ \"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {L : Type u_2} [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] {V : Type u_3}\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [LieModule.IsTriangularizable k L V] (A : LieIde\", \"doc\": \"Let $ V $ be a triangularizable Lie module over a Lie algebra $ \\\\mathfrak{g} $ over a field $ k $. If $ A $ is a coatom Lie ideal of $ \\\\mathfrak{g} $ (i.e., a maximal proper Lie ideal) and the weight \"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (L : Type u_2) [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] (V : Type u_3)\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [Nontrivial V] [LieAlgebra.IsSolvable L] [LieMod\", \"doc\": \"Let $\\\\mathfrak{g}$ be a solvable Lie algebra over a field $k$, and let $V$ be a triangularizable $\\\\mathfrak{g}$-module. Then there exists a linear functional $\\\\chi \\\\in \\\\mathfrak{g}^*$ (the dual space \"}\n  {\"name\": \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  {H : LieSubalgebra R L} (α χ : ↥H → R) [inst_7 : H.IsCartanSubalgebra] [inst_8\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain, a principal ideal ring, and has characteristic zero. Let $ M $ be a torsion-free, Noetherian $ R $-module. For a non-zero weight $ \\\\alpha : \"}\n  {\"name\": \"LieModule.finite_genWeightSpace_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"If $ M $ is a Noetherian $ R $-module over a nilpotent Lie algebra $ \\\\mathfrak{g} $, then the set of weight functions $ \\\\chi : \\\\mathfrak{g} \\\\to R $ for which the generalized weight space $ \\\\text{Gen}_\"}\n  {\"name\": \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"For a Noetherian module $ M $ over a commutative ring $ R $, and for any element $ x $ in a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $ acting on $ M $, the set of scalars $ \\\\chi \\\\in R $ for whi\"}\n  {\"name\": \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ₁ χ₂ : L → R) [IsAddTorsionFree R] [IsDomai\", \"doc\": \"There exist integers $p < 0$ and $q > 0$ such that the generalized weight spaces of the Lie module $M$ associated to the weight functions $p \\\\cdot \\\\chi_1 + \\\\chi_2$ and $q \\\\cdot \\\\chi_1 + \\\\chi_2$ are bo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie algebra weight spaces and highest-weight Young tableaux do not give rational representations of reductive algebraic groups in arbitrary characteristic"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of highest weight representations of algebraic groups in arbitrary characteristic with a one dimensional highest weight eigenspace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_lieIdeal\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ {k : Type u_1} [inst : Field k] {L : Type u_2} [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] {V : Type u_3}\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [LieModule.IsTriangularizable k L V] (A : LieIde\", \"doc\": \"Let $ V $ be a triangularizable Lie module over a Lie algebra $ \\\\mathfrak{g} $ over a field $ k $. If $ A $ is a coatom Lie ideal of $ \\\\mathfrak{g} $ (i.e., a maximal proper Lie ideal) and the weight \"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/LieTheorem\", \"type\": \"∀ (k : Type u_1) [inst : Field k] (L : Type u_2) [inst_1 : LieRing L] [inst_2 : LieAlgebra k L] (V : Type u_3)\\n  [inst_3 : AddCommGroup V] [inst_4 : Module k V] [inst_5 : LieRingModule L V] [inst_6 : LieModule k L V] [CharZero k]\\n  [Module.Finite k V] [Nontrivial V] [LieAlgebra.IsSolvable L] [LieMod\", \"doc\": \"Let $\\\\mathfrak{g}$ be a solvable Lie algebra over a field $k$, and let $V$ be a triangularizable $\\\\mathfrak{g}$-module. Then there exists a linear functional $\\\\chi \\\\in \\\\mathfrak{g}^*$ (the dual space \"}\n  {\"name\": \"LieModule.exists_nontrivial_weightSpace_of_isNilpotent\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (k : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field k] [inst_5 : LieAlgebra k L] [inst_6 : Module k M]\\n  [Module.Finite k M] [inst_8 : LieModule k L M] [LieModule.LinearWeights k L\", \"doc\": \"Let $ k $ be a field, $ L $ a nilpotent Lie algebra over $ k $, and $ M $ a finite-dimensional, nontrivial $ k $-module equipped with compatible Lie module and linear weight structures over $ L $, suc\"}\n  {\"name\": \"LieModule.exists_forall_lie_eq_smul\", \"module\": \"Mathlib/Algebra/Lie/Weights/Linear\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [LieModule.LinearWeights R L M] [IsNoetherian\", \"doc\": \"Let $ R $ be a commutative ring, $ L $ a nilpotent Lie algebra over $ R $, and $ M $ an abelian group equipped with compatible $ R $-module and Lie module structures over $ L $. If $ M $ is a Noetheri\"}\n  {\"name\": \"LieModule.Weight.exists_ne_zero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ : LieModule.Weight R L M), ∃ x ∈ LieModule\", \"doc\": \"For any weight $\\\\chi$ of a Lie module $M$ over a nilpotent Lie ring $L$ over a commutative ring $R$, the generalized weight space associated with $\\\\chi$ contains at least one non-zero element, i.e., $\"}\n  {\"name\": \"LieModule.exists_genWeightSpace_smul_add_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ₁ χ₂ : L → R) [IsAddTorsionFree R] [IsDomai\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and given weight functions $\\\\chi_1, \\\\chi_2 : \\\\mathfrak{g} \\\\to R$, there exists a positive integer $k$\"}\n  {\"name\": \"LieModule.Weight.genWeightSpace_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ : LieModule.Weight R L M), LieModule.genWe\", \"doc\": \"For any weight $\\\\chi$ in a Lie module $M$ over a nilpotent Lie ring $L$, the generalized weight space associated to $\\\\chi$ is not equal to the trivial submodule $\\\\{0\\\\}$, i.e., $\\\\text{genWeightSpace}_M\"}\n  {\"name\": \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Chain\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (χ₁ χ₂ : L → R) [IsAddTorsionFree R] [IsDomai\", \"doc\": \"There exist integers $p < 0$ and $q > 0$ such that the generalized weight spaces of the Lie module $M$ associated to the weight functions $p \\\\cdot \\\\chi_1 + \\\\chi_2$ and $q \\\\cdot \\\\chi_1 + \\\\chi_2$ are bo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie algebra weight spaces and highest-weight Young tableaux do not give rational representations of reductive algebraic groups in arbitrary characteristic"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"highestWeight\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"SemistandardYoungTableau.highestWeight\", \"module\": \"Mathlib.Combinatorics.Young.SemistandardTableau\", \"type\": \" (μ : YoungDiagram) : SemistandardYoungTableau μ\", \"doc\": \"The \\\"highest weight\\\" SSYT of a given shape has all i's in row i, for each i.\"}\n  {\"name\": \"SemistandardYoungTableau.highestWeight_apply\", \"module\": \"Mathlib.Combinatorics.Young.SemistandardTableau\", \"type\": \" {μ : YoungDiagram} {i j : ℕ} : (SemistandardYoungTableau.highestWeight μ) i j = if (i, j) ∈ μ then i else 0\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie algebra weight spaces and highest-weight Young tableaux do not give rational representations of reductive algebraic groups in arbitrary characteristic"
+  },
+  {
+   "tool": "grep",
+   "query": "highestWeight|highest.weight|dominant.*character|BorelSubgroup",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"34\", \"text\": \"- `SemistandardYoungTableau.highestWeight (μ : YoungDiagram)`: the semistandard Young tableau whose\"}\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"129\", \"text\": \"/-- The \\\"highest weight\\\" SSYT of a given shape has all i's in row i, for each i. -/\"}\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"130\", \"text\": \"def highestWeight (μ : YoungDiagram) : SemistandardYoungTableau μ where\"}\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"139\", \"text\": \"theorem highestWeight_apply {μ : YoungDiagram} {i j : ℕ} :\"}\n  {\"file\": \"Mathlib/Combinatorics/Young/SemistandardTableau.lean\", \"line\": \"140\", \"text\": \"    highestWeight μ i j = if (i, j) ∈ μ then i else 0 :=\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Basis/Prod.lean\", \"line\": \"236\", \"text\": \"  inductive argument using highest weights) but in fact it follows very easily from\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie algebra weight spaces and highest-weight Young tableaux do not give rational representations of reductive algebraic groups in arbitrary characteristic"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every dominant weight of a split reductive algebraic group is the highest weight of a simple rational representation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieModule.coe_genWeightSpace_of_top\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"(χ : L → R) : (genWeightSpace M (χ ∘ (⊤ : LieSubalgebra R L).incl) : Submodule R M) = genWeightSpace M χ\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the generalized weight space associated with $\\\\chi\"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsTriangularizable K L M] : ⨆ χ : L → K, genWeightSpace M χ = ⊤\", \"doc\": \"For a triangularizable Lie module $ M $ over a commutative ring $ K $, the supremum (sum) of all generalized weight spaces associated to weight functions $ \\\\chi : L \\\\to K $ equals the entire module $ \"}\n  {\"name\": \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"[Nontrivial M] :\\n  IsSimpleModule R[P.weylGroup] P.weylGroupRootRep.asModule ↔\\n    ∀ (q : Submodule R M), (∀ i, q ∈ invtSubmodule (P.reflection i)) → q ≠ ⊥ → q = ⊤\", \"doc\": \"Let $ R $ be a commutative ring and $ P $ a root pairing over $ R $ with underlying $ R $-module $ M $. Assume $ M $ is nontrivial. The $ R[P.\\\\text{WeylGroup}] $-module structure on $ M $ induced by t\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"module\": \"Mathlib.Algebra.Lie.Weights.IsSimple\", \"type\": \"[IsSimple K L] : (rootSystem H).IsIrreducible\", \"doc\": \"For a simple Lie algebra $ L $ over a field $ K $, the root system associated with $ L $ via the non-degenerate Killing form is irreducible.\"}\n  {\"name\": \"LieAlgebra.IsKilling.span_weight_isNonZero_eq_top\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \": span K ({α : Weight K H L | α.IsNonZero}.image (Weight.toLinear K H L)) = ⊤\", \"doc\": \"The span of the linear maps associated with non-zero weights in the Lie module equals the entire space of linear maps from the Lie algebra $\\\\mathfrak{h}$ to the commutative ring $R$, i.e., $\\\\mathrm{sp\"}\n  {\"name\": \"LieAlgebra.IsKilling.span_weight_eq_top\", \"module\": \"Mathlib.Algebra.Lie.Weights.Killing\", \"type\": \": span K (range (Weight.toLinear K H L)) = ⊤\", \"doc\": \"The span of the linear maps associated with weights in the Lie algebra module equals the entire module, i.e., $\\\\mathrm{span}_K(\\\\{\\\\chi \\\\mid \\\\chi \\\\in \\\\mathrm{Weight}(L)\\\\}) = L$, where $K$ is the base fi\"}\n  {\"name\": \"RootPairing.isSimpleModule_weylGroupRootRep\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"[P.IsIrreducible] : IsSimpleModule R[P.weylGroup] P.weylGroupRootRep.asModule\", \"doc\": \"If a root pairing $ P $ is irreducible, then the module associated with the Weyl group representation of $ P $ over the group ring $ R[P.\\text{WeylGroup}] $ is a simple module, meaning its only submodu\"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top'\", \"module\": \"Mathlib.Algebra.Lie.Weights.Basic\", \"type\": \"[IsTriangularizable K L M] : ⨆ χ : Weight K L M, genWeightSpace M χ = ⊤\", \"doc\": \"For a triangularizable Lie module $ M $ over a nilpotent Lie algebra $ \\\\mathfrak{g} $, the supremum (sum) of all generalized weight spaces $ \\\\text{Gen}_\\\\chi(M) $ associated to weights $ \\\\chi $ equals \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Lie algebra weight spaces and highest-weight Young tableaux do not give rational representations of reductive algebraic groups in arbitrary characteristic"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-section-modules",
+  "date": "2026-10-23",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Nonvanishing of rho section modules by a highest-weight matrix coefficient in the Steinberg endomorphism detection input.",
+   "via": [
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dominant-character-highest-line",
+  "worker": "stage1",
+  "summary": "Split highest-weight line existence through regular powers on fundamental rays, normal big-cell character functions, central-cover Borel/root compatibility and rational cyclic-submodule descent. Reused the existing simply connected lattice, torus cover and coherent section finiteness nodes; wrote tensor assembly explicitly. No mathematical statement change, no Lean attachment. Corrected doubled TeX escapes in the statement.",
+  "blueprint": "The latest blueprint direct-images proof (3) is the inherited ancestor context; the null ancestor reported by blueprint_refs.py is retained with its full via chain. This representation-theoretic supporting input is the Milne 22.20 construction needed by the existing rho-section module matrix coefficient. New nodes identify its 22.24/22.25, 23.5 and 5.13 inputs.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic proper coherent H^0 finiteness over Spec F, used for the finite-dimensional rational section modules; no representation-theory node in this unit states coherent cohomology finiteness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-coherent-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-5dd20cd28",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-5dd20cd28 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 22.14–22.27 (pp.466–470), Theorem 5.13 and Lemma 5.15 (pp.101–102) and 23.1–23.5 (pp.484–485), the item, the 4 new nodes and every cited statement. The route is 22.24/22.25 (fundamental-ray node), 22.23 (integral closedness), finite H^0 (lem-pc-coherent-hi in place of taking a simple quotient), 22.26 (tensor products), Z×S cover, central-isogeny compatibility, then 5.13/5.15 descent. It is sound. The new nodes are true, not duplicates (searched with rg -L) and strictly smaller than the item. Small-case checks: the SL_2 sign (u n_0 b has (2,1)-entry ω(b)), and SL_2→PGL_2 in characteristic 2 (μ_2 kernel; coroot pairing preserved because q(α)=1). FIX 1 (E1): the compatibility node now assumes H only smooth, connected, affine and of finite type, and concludes that H is reductive. Step 4 now proves Z×S is smooth, connected and of finite type by citing lem-trf-split-lattice-torus-projection, lem-trf-smooth-composition and lem-weil-pbc-geometrically-connected-product-components. FIX 2: step 1 now derives b f_i = ω̃_i(b) f_i from B=U⋊T, citing lem-sfb-reductive-borel-pair-structure. Batch 5: lem-pc-coherent-hi (reaches def-trf-schematically-dense-open, a definition) and the torus-cover node (reaches lem-trf-split-lattice-torus-projection) are generic. They are outside the trace-formula and Poincaré duality statements and are already used in this unit, so both are accepted; I also accept the coherent-hi tool_use. No SGA source is used.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.DominantCharacterHighestLine",
+  "declaration": "AlgebraicGeometry.RationalHighestWeight.dominant_character_highest_line",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/DominantCharacterHighestLine.lean",
+  "statement": "theorem dominant_character_highest_line {F : Type u} [Field F] [IsAlgClosed F] (G T B U : Grp (Over (Spec (.of F)))) [IsAffine G.X.left] [IsAffine B.X.left] [IsAffine U.X.left] (hG : ReductiveTorusCentralizer.IsReductive G) (iT : T ⟶ G) (iB : B ⟶ G) (j : T ⟶ B) (iU : U ⟶ B) (p : B ⟶ T) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (hB : IsBorelGroupScheme iB.hom.hom) (hj : j ≫ iB = iT) (hUclosed : IsClosedSubgroupScheme iU.hom.hom) (hUnormal : IsNormalSubgroupScheme iU.hom.hom) (hUsmooth : Smooth U.X.hom) (hUconnected : ConnectedSpace U.X.left) (hUunipotent : SolvableGroupStructure.IsUnipotent U) (hUmax : ∀ (N : Grp (Over (Spec (.of F)))) (iN : N ⟶ B), IsClosedSubgroupScheme iN.hom.hom → IsNormalSubgroupScheme iN.hom.hom → Smooth N.X.hom → ConnectedSpace N.X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = iN) (hp : j ≫ p = 𝟙 T) (hker : IsPullback iU.hom.hom (toUnit U.X) p.hom.hom η[T.X]) (hdecomp : IsIso ((fst U.X T.X ≫ iU.hom.hom) * (snd U.X T.X ≫ j.hom.hom))) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (haG : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ CategoryTheory.GrpObj.conj G.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ CategoryTheory.GrpObj.conj B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) (hpositive : ∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) (act : RankOneRoots.Weyl iT →* Aut T) (hact : ∀ (n : RankOneRoots.normalizer iT) (A : Over (Spec (.of F))) (t : A ⟶ T.X), t ≫ (act (QuotientGroup.mk n)).hom.hom.hom ≫ iT.hom.hom = (toUnit A ≫ n.val) * (t ≫ iT.hom.hom) * (toUnit A ≫ n.val)⁻¹) (s : b.support → RankOneRoots.Weyl iT) (hs : ∀ (α : b.support) (χ : RankOneRoots.Character T), (act (s α)).inv ≫ χ = (P.reflection α.val (Additive.ofMul χ)).toMul) (lam : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) (hdominant : ∀ α : b.support, 0 ≤ P.toLinearMap (Additive.ofMul lam) (P.coroot α)) : ∃ (V : Type u) (_ : AddCommGroup V) (_ : Module F V) (_ : FiniteDimensional F V) (c : V →ₗ[F] V ⊗[F] coordinateAlgebra G), HopfAction.Coassociative F (coordinateAlgebra G) V c ∧ HopfAction.Counital F (coordinateAlgebra G) V c ∧ ∃ v : V, v ≠ 0 ∧ (coordinateMap iB).toLinearMap.lTensor V (c v) = v ⊗ₜ[F] characterElement (p ≫ lam) ∧ IsStable ((coordinateMap iB).toLinearMap.lTensor V ∘ₗ c) (F ∙ v) ∧ v ∈ invariants c (iU ≫ iB)",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of 96406c7b0b1c H3: hact pins the Weyl action to normalizer conjugation and hs identifies every simple-root reflection on every character. Thus the dominance coroots are the actual group coroots even with a central torus. The repaired Borel-pair dependency supplies these data. Universal coaction eigenidentity, line stability and radical invariance are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d98e667e7",
+  "group": "NS",
+  "result": "pass",
+  "note": "Item theorem matches node and Milne 22.20/21.11: all Borel-pair clauses pinned; act/hact/s/hs force P.coroot = actual coroot (Weyl reflection with α↦−α is s_α; perfect pairing), so the 96406c7b H3 counterexample is excluded. Conclusion: universal B-eigen coaction identity, Fv stable, v U-invariant, v≠0, finite-dimensional; not stronger or weaker; edge cases (G=1, tori, λ=0, char p, A=0/nonreduced) and universe u OK; statement verbatim. §1(B) CanonicalReductiveBorelPairStructure re-exports the old module and is a clause-for-clause superset with the normalizer Weyl pin; only sorry; no Lean users of old declarations. F1 maintainer note: the rebound record of lem-sfb-reductive-borel-pair-structure drops declarations [reductive_borel_pair_structure, semisimpleGroupScheme_isReductive], so the semisimple⇒reductive clause is unrecorded. Restore declarations=[canonical_reductive_borel_pair_structure, reductive_borel_pair_structure, semisimpleGroupScheme_isReductive] at landing (stage-2 fixes cannot add record names). No compile run (no file changed).; reverted the delivery's change of existing node(s) lem-sfb-reductive-borel-pair-structure (--revert-nodes; kept as on sheaf-dag)"
+ }
+}

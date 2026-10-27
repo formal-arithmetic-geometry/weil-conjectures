@@ -1,0 +1,236 @@
+{
+ "id": "lem-pur-supported-source-system-cup-calculus",
+ "kind": "statement",
+ "title": "Supported source system cup calculus",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small relative to its universe of ordinary module sheaves, with $\\mathcal O$ commutative [def-weil-sheaf-of-modules-category]. Use its derived category, signed cochain total tensor and K-flat derived tensor [def-weil-abstract-derived-category, def-pc-tensor-complex-sheaves, lem-weil-pbc-site-derived-tensor-descent]. Let $S$ be a set with an associative commutative operation $\\wedge$. For each $c\\in S$ let $P_c$ be a flat degree-zero sheaf [def-pc-flat-sheaf-modules]. Suppose specified isomorphisms $\\mu_{c,d}:P_c\\otimes^LP_d\\xrightarrow{\\sim}P_{c\\wedge d}$ satisfy $\\mu_{c\\wedge d,e}(\\mu_{c,d}\\otimes1)=\\mu_{c,d\\wedge e}(1\\otimes\\mu_{d,e})$ after reassociation, and $\\mu_{d,c}\\sigma=\\mu_{c,d}$ after label interchange. Let $L_r$ ($r\\in\\mathbf Z$) be flat degree-zero invertible sheaves, with associative isomorphisms $h_{r,s}:L_r\\otimes^LL_s\\xrightarrow{\\sim}L_{r+s}$ satisfying $h_{s,r}\\sigma=h_{r,s}$.\n\nUse $B_{a,b}$ and the fixed shift comparison $t_{a,b}$ of [lem-pur-shifted-tensor-morphism-calculus]. For $f:P_c\\to L_r[a]$ and $g:P_d\\to L_s[b]$, define\n$$f\\star g=h_{r,s}[a+b]B_{a,b}(f,g)\\mu_{c,d}^{-1}:P_{c\\wedge d}\\to L_{r+s}[a+b].$$\nThen $\\star$ is additive in each variable, associative, and $f\\star g=(-1)^{ab}g\\star f$ after the specified label and weight identifications, for arbitrary integer degrees and weights.\n\nLet $u$ be a morphism to a second such ringed topos with exact module pullback $U=u^*$ and its canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Suppose a label map $c\\mapsto c'$ preserves $\\wedge$ and isomorphisms $b_c:UP_c\\cong P'_{c'}$, $\\tau_r:UL_r\\cong L'_r$ satisfy $b_{c\\wedge d}U\\mu_{c,d}=\\mu'_{c',d'}(b_c\\otimes b_d)$ and $\\tau_{r+s}Uh_{r,s}=h'_{r,s}(\\tau_r\\otimes\\tau_s)$. Define $U^\\# f=\\tau_r[a](Uf)b_c^{-1}$ with canonical shift comparisons. Then\n$$U^\\#(f\\star g)=(U^\\# f)\\star'(U^\\# g).$$\nThis is an equality for the specified tensor comparisons on all derived morphisms, not merely on cohomology classes represented by pure tensors.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPL (lemma-cup-product-associative) and 0FPM (lemma-cup-product-commutative); source-system and shift-sign refinement of lem-pur-supported-cup-functoriality Steps 3 and 5, formulated by the agent."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-shifted-tensor-morphism-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Apply shiftedTensorMorphismCalculus_local to the flat source sheaves for both additivity equations. Compose the resulting equalities with mu inverse and shifted h, using bilinearity of composition. Prove naturality of B under precomposition by bifunctoriality, and under shifted postcomposition by naturality of shiftedTensorCanonicalComparison. These identities hold for all derived objects; tensor closure of degree-zero sources is unnecessary.",
+   "uses": [
+    "lem-pur-shifted-tensor-morphism-calculus",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPL/0FPM; elementary naturality and additivity assembly from the cited normalized tensor calculus."
+   }
+  },
+  {
+   "text": "Use the two B naturality identities to expand both nested cups. Precompose with the isomorphism tensor(mu(c,d),1) followed by mu(c*d,e), and cancel the source inverses. The source associativity hypothesis changes the right source composite to the canonical derived associator followed by tensor(1,mu(d,e)); cancel its inverse. Apply the associativity clause of shiftedTensorMorphismCalculus_local to the three original flat sources. Commute degree transports past shifted coefficient maps by equality induction. Finally apply the shift functor to h_assoc, postcomposed by the inverse weight transport; the composite degree and weight transport is exactly the displayed conclusion.",
+   "uses": [
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPL, lemma-cup-product-associative; explicit coefficient/source-system assembly of the shifted-Hom associativity identity."
+   }
+  },
+  {
+   "text": "Precompose the desired symmetry identity with mu(c,d). Derive sigma(Pc,Pd)=mu(c,d) followed by the label transport and mu(d,c) inverse from mu_comm. Rewrite h_comm under the shift functor and apply the symmetry clause of shiftedTensorMorphismCalculus_local. Bilinearity moves the Koszul integer scalar through composition. Equality induction commutes the degree interchange past shifted h; functoriality identifies the remaining weight and degree transports.",
+   "uses": [
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPM, lemma-cup-product-commutative; explicit graded symmetry assembly, using the signed-Hom identity instead of the omitted relative-cup proof."
+   }
+  },
+  {
+   "text": "Extract the two-shift coherence equation from shiftedTensorMorphismCalculus. Expand B, use that coherence and naturality of the exact tensor comparison to obtain its pullback equation on arbitrary derived sources. Precompose the required cup identity by U(mu(c,d)) followed by the source pullback comparison. Expand the cup and its pullback, cancel the source inverses, and rewrite hb. Naturality of the shift comparison moves U(h) past it; h_tau rewrites the coefficient composite. Apply the B pullback equation. The precomposition naturality of B moves the two source comparisons through B and cancels their inverses. Postcomposition naturality moves the two coefficient comparisons through B, leaving exactly the pulled-back cup.",
+   "uses": [
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPL/0FPM; agent-written exact-pullback source/coefficient substitution, using the cited canonical comparison identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPL and 0FPM; V2 Lean assembly of the existing normalized shifted-Hom calculus, retaining all four source-system steps and all explicit label, weight and degree transports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Graded cup product of derived morphisms from flat source sheaves indexed by intersections with associative symmetric multiplication is bilinear associative graded commutative natural under exact monoidal pullback",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Sheaf.symmetricCategory [Mathlib/CategoryTheory/Sites/Monoidal]; CategoryTheory.Sheaf.tensorProd_isSheaf [Mathlib/CategoryTheory/Sites/CartesianMonoidal]; CategoryTheory.Sheaf.monoidalCategory [Mathlib/CategoryTheory/Sites/Monoidal]; CategoryTheory.Sheaf.braidedCategory [Mathlib/CategoryTheory/Sites/Monoidal]; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite [Mathlib/CategoryTheory/Sites/CartesianClosed]; LightCondensed.instMonoidalLightCondSetLightCondModFree [Mathlib/Condensed/Light/Monoidal]; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf [Mathlib/CategoryTheory/Sites/Monoidal]; PresheafOfModules.Monoidal.tensorObj_map_tmul [Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal]",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary graded tensor algebra and general monoidal sheaves do not give this derived Hom product for normalized flat source systems, with shifts and exact pullback"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor of shifted derived morphisms with coherent source coefficient multiplication has Koszul cup product sign and exact functor naturality",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Tor'_map_app [Mathlib/CategoryTheory/Monoidal/Tor]; CategoryTheory.Tor_map [Mathlib/CategoryTheory/Monoidal/Tor]; CategoryTheory.Tor'_obj_map [Mathlib/CategoryTheory/Monoidal/Tor]; HomologicalComplex.unit_tensor_d₁ [Mathlib/Algebra/Homology/Monoidal]; CategoryTheory.Tor'_obj_obj [Mathlib/CategoryTheory/Monoidal/Tor]; CategoryTheory.Tor [Mathlib/CategoryTheory/Monoidal/Tor]; CategoryTheory.Tor' [Mathlib/CategoryTheory/Monoidal/Tor]; CategoryTheory.Tor_obj [Mathlib/CategoryTheory/Monoidal/Tor]",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary graded tensor algebra and general monoidal sheaves do not give this derived Hom product for normalized flat source systems, with shifts and exact pullback"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.Shift",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Shift'; ",
+   "date": "2026-10-22",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.Shift'"
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|gradedComm|graded_comm",
+   "results": "[grep] OK 10 hit(s); Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean:30 [* `TensorProduct.gradedComm`: the symmetric braiding operator on the tensor product of]; Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean:70 [section gradedComm]; Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean:75 [/-- Auxiliary construction used to build `TensorProduct.gradedComm`.]; Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean:78 [def gradedCommAux : DirectSum _ 𝒜ℬ →ₗ[R] DirectSum _ ℬ𝒜 :=]; Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean:85 [theorem gradedCommAux_lof_tmul (i j : ι) (a : 𝒜 i) (b : ℬ j) :]; Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean:365 [    (auxEquiv R 𝒜 ℬ ≪≫ₗ gradedComm R _ _ ≪≫ₗ (auxEquiv R ℬ 𝒜).symm)]; Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean:368 [      simp_rw [auxEquiv_one, gradedComm_one, auxEquiv_symm_one])]; Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean:371 [      simp_rw [auxEquiv_mul, gradedComm_gradedMul, LinearEquiv.symm_apply_eq,]; Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean:372 [        ← gradedComm_gradedMul, auxEquiv_mul, LinearEquiv.apply_symm_apply, gradedComm_gradedMul])]; Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean:375 [    auxEquiv R ℬ 𝒜 (comm 𝒜 ℬ x) = gradedComm R (𝒜 ·) (ℬ ·) (auxEquiv R 𝒜 ℬ x) :=]",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary graded tensor algebra and general monoidal sheaves do not give this derived Hom product for normalized flat source systems, with shifts and exact pullback"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported cup product morphisms derived tensor Koszul sign pullback",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"shift\"",
+   "results": "OK, 0 hits; no names matching both strings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cup product on Hom from a commutative system of flat source sheaves to invertible coefficient sheaves shifted in a derived category is associative graded commutative and natural for exact pullback",
+   "results": "8 hit(s): CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.symmetricCategory, CategoryTheory.Sheaf.monoidalCategory, SheafOfModules.pullback_assoc, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.braidedCategory, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary graded tensor modules, ordinary monoidal sheaves, complex-level shift constraints, or abstract shift commutators do not state this derived ringed-site Hom product with coherent flat source systems and exact-pullback naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"shift\"",
+   "results": "0 hit(s): ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary graded tensor modules, ordinary monoidal sheaves, complex-level shift constraints, or abstract shift commutators do not state this derived ringed-site Hom product with coherent flat source systems and exact-pullback naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "cupProduct|cup_product|gradedComm|graded_comm",
+   "results": "10 hit(s): Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean, Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary graded tensor modules, ordinary monoidal sheaves, complex-level shift constraints, or abstract shift commutators do not state this derived ringed-site Hom product with coherent flat source systems and exact-pullback naturality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of shifted derived morphisms with coherent commutative coefficient and source multiplications defines a natural graded commutative cup product",
+   "results": "8 hit(s): TensorProduct.algebraMap_gradedMul, TensorProduct.gradedComm, TensorProduct.gradedMul, GradedTensorProduct.tmul, AlgCat.instMonoidalCategory.tensorHom, CategoryTheory.GradedObject.Monoidal.tensorHom, TensorProduct.gradedComm_gradedMul, GradedTensorProduct.comm",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary graded tensor modules, ordinary monoidal sheaves, complex-level shift constraints, or abstract shift commutators do not state this derived ringed-site Hom product with coherent flat source systems and exact-pullback naturality"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorShift|cup|gradedComm",
+   "results": "5 hit(s): Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean; subdirectory Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary graded tensor modules, ordinary monoidal sheaves, complex-level shift constraints, or abstract shift commutators do not state this derived ringed-site Hom product with coherent flat source systems and exact-pullback naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal derived category the product of shifted Hom groups using associative source comultiplications and target multiplications is biadditive associative and Koszul commutative",
+   "results": "8 hit(s): CategoryTheory.CommShift₂Setup.int, CategoryTheory.CommShift₂Setup.int_ε, DerivedCategory.instCommShiftCochainComplexIntQ, CategoryTheory.CommShift₂Setup.hε, CategoryTheory.CommShift₂Setup.int_z, CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, CategoryTheory.GradedObject.symmetricCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary graded tensor modules, ordinary monoidal sheaves, complex-level shift constraints, or abstract shift commutators do not state this derived ringed-site Hom product with coherent flat source systems and exact-pullback naturality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-supported-cup-functoriality",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Proof 'Permutations': 'the exterior products sit in even degree, so the Künneth symmetry has sign +1'; and pullback of the products at the endpoints in 'Elementary shears'.",
+   "via": [
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-supported-source-system-cup-calculus",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Four elementary assembly steps derive naturality and additivity, expand the associative composites, apply the signed swap, and substitute the pullback compatibility equations. Reused the existing shifted-Hom calculus and derived tensor constraints; no new node, no Lean attachment, no source or route change. Searched the project source, all blueprint nodes, DAG, and Mathlib.",
+  "blueprint": "lem-pur-frame-independence, proof Permutations (even-degree sign +1), Unit multiples (additivity), and Elementary shears (pullback of endpoint products), via lem-pur-supported-cup-functoriality. The item remains the abstract source-system calculation underlying those operations.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NU-5a4e89fad",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-5a4e89fad (reviewer sub-agent of L); spot-checked: I read the item and all four steps in full; I applied no fixes and found no faults. Statement, stmt_deps, source and blueprint fields are identical to live/side-live, where the item is unsplit; there are no new nodes and no repair note. proof_deps is exactly the union of the step uses. No SGA. Both lem-pur dependencies are in unit sk-prop-a1-kummer and def-weil-abstract-derived-category is a Mathlib leaf, so no tool_uses. Sources: Stacks sites-cohomology.tex:8421-8491, 0FPL/0FPM (relative-cup diagrams; 0FPM proof omitted), honestly marked proof_origin by agent; blueprint lem-pur-frame-independence.proof.md:32-33 (Permutations, Elementary shears). Steps: Step 1 naturality comes from bifunctoriality and naturality of t in lem-pur-derived-tensor-additive-constraints, the same (-1)^{bp} t as the shifted calculus; additivity comes from B additivity and the additive derived category. Step 2: I expanded both sides to H_L[N]B(B(f,g),k)M_L^{-1} and H_R[N]B(f,B(g,k))M_R^{-1}; the cited ternary identity and the two reassociation hypotheses match them. Step 3: I checked the direction sigma mu_{c,d}^{-1}=mu_{d,c}^{-1}; with h_{s,r}sigma=h_{r,s} this gives (-1)^{ab}g*f. Step 4: inverting b_{c^d}Umu=mu'(b_c(x)b_d), plus the cited Lu*B=B(Lu*f,Lu*g) and Step 1 naturality on the primed site, gives U#f*'U#g, with flat sources preserved. Edge cases checked: a=b=0, odd degrees, negative weights, characteristic 2, repeated labels, identity pullback, point site, zero maps. Duplicate scan: the only other DAG statement with a (-1)^{ab} cup and pullback is the parent lem-pur-supported-cup-functoriality, which cites the item."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedSourceSystemCupCalculus",
+  "declaration": "SheafOfModules.supportedSourceSystemCupCalculus",
+  "declarations": [
+   "SheafOfModules.SupportedCupSystem",
+   "SheafOfModules.supportedCup",
+   "SheafOfModules.supportedSourceSystemCupCalculus",
+   "SheafOfModules.supportedCupSourcePullback",
+   "SheafOfModules.supportedCupWeightPullback",
+   "SheafOfModules.supportedCupPullback",
+   "SheafOfModules.supportedSourceSystemCupPullback"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedSourceSystemCupCalculus.lean",
+  "statement": "theorem supportedSourceSystemCupCalculus (c d e : A) (r s t a b j : ℤ) (f f' : shiftedDegreeZero R (F.P c) ⟶ (shiftedDegreeZero R (F.L r))⟦a⟧) (g g' : shiftedDegreeZero R (F.P d) ⟶ (shiftedDegreeZero R (F.L s))⟦b⟧) (k : shiftedDegreeZero R (F.P e) ⟶ (shiftedDegreeZero R (F.L t))⟦j⟧) : supportedCup R T F (f + f') g = supportedCup R T F f g + supportedCup R T F f' g ∧ supportedCup R T F f (g + g') = supportedCup R T F f g + supportedCup R T F f g' ∧ supportedCup R T F (supportedCup R T F f g) k = eqToHom (congrArg (fun x ↦ shiftedDegreeZero R (F.P x)) (mul_assoc c d e)) ≫ supportedCup R T F f (supportedCup R T F g k) ≫ eqToHom (congrArg₂ (fun x n ↦ (shiftedDegreeZero R (F.L x))⟦n⟧) (add_assoc r s t).symm (add_assoc a b j).symm) ∧ supportedCup R T F f g = ((-1 : ℤ) ^ (a * b).natAbs) • (eqToHom (congrArg (fun x ↦ shiftedDegreeZero R (F.P x)) (mul_comm c d)) ≫ supportedCup R T F g f ≫ eqToHom (congrArg₂ (fun x n ↦ (shiftedDegreeZero R (F.L x))⟦n⟧) (add_comm s r) (add_comm b a)))",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The two theorems jointly state every local and exact-pullback clause. SupportedCupSystem packages precisely the flat degree-zero source and invertible coefficient systems with associative symmetric multiplications. All maps use the dependency’s canonical normalized shifted tensor, associator, symmetry and exact-pullback comparisons. The definitions contain actual data; the theorem proofs alone are postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58542a0f0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "First S2 delivery; vs side-live only the node's lean field changed. All clauses match the node and dependency: mu/h with associativity and symmetry (canonical derivedTensorAssociator/Symmetry plus eqToHom transports, directions checked), flatness and ordinary invertibility, supportedCup = mu⁻¹ ≫ shiftedTensorB ≫ h⟦a+b⟧, additivity both sides, associativity and (-1)^(ab).natAbs commutativity with mul/add transports. Pullback: the dependency's exact interface (hobj/hmap, the unique shiftedExactTensorPullback, κ), φ : A →ₙ* B, bP/τ, hb/hτ, U^# with canonical single/commShift maps, conclusion with φ.map_mul transport. Checked by hand that associativity, commutativity and pullback follow from the dependency's clauses. Same-universe second site is inherited from the dependency. 7 declarations with source/blueprint docstrings, 2 sorry, statement verbatim, imports = stmt_dep modules plus one proof_dep plain import, lines ≤100. No compile re-run (worker reports clean); no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261024T191452-L-389386",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

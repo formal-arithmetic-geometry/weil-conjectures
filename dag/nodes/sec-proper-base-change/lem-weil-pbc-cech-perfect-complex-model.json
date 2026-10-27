@@ -1,0 +1,120 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-cech-perfect-complex-model",
+ "kind": "statement",
+ "title": "Completeness of the finite-projective model on the intrinsic small site",
+ "statement": "For a scheme T, a Noetherian commutative ring A in the coefficient universe, an ideal I, and a complex P of finite projective A-modules, the termwise completed constant model on completedCechSite T is locally ringed-ideal complete for the first finite projection. No boundedness hypothesis is needed for this multiplication-difference criterion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+ },
+ "stmt_deps": [
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-completed-cech-site-transport"
+ ],
+ "proof": [
+  {
+   "text": "Transfer exact countable products from every actual pro-etale slice through the small-site and slice equivalences. Apply the generic finite-projective retract criterion. Its coefficient-ring premise is the multiplication-difference calculation for the finite quotient tower: the scalar is nilpotent at each quotient. Each term of P is a retract of a finite free module, giving the other premise.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction",
+    "lem-weil-pbc-proetale-multiplication-difference-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-weil-pbc-proetale-multiplication-difference-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex realized in completed constant sheaves is derived complete",
+   "results": "Inspected completion and condensed-module hits; none identifies the actual intrinsic Koszul unit.",
+   "date": "2026-10-27",
+   "verdict": "Use the project coefficient comparison and reflector APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedCompleteIntrinsic",
+   "results": "No declaration in Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "Project-specific predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*constant.*[Ii]ntrinsic|[Ii]ntrinsic.*perfect.*model",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex of completed constant modules is derived complete",
+   "results": "AdicCompletion, IsAdicComplete and elementary algebraic completeness hits; no site or derived comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project finite-projective and coefficient APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPerfectChartComplete",
+  "date": "2026-10-27",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "The termwise finite-projective model completeness calculation.",
+   "via": [
+    "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "lem-weil-pbc-integral-perfect-chart-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechPerfectComplexModel",
+  "file": "lean/Sheaf/Paper/CechPerfectComplexModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CechPerfectModel.cech_model_complete",
+  "statement": "theorem cech_model_complete (T : Scheme.{u})\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)\n    (P : CochainComplex (ModuleCat.{u + 1} A) ℤ)\n    (hP : ∀ q : ℤ, Module.Finite A (P.X q) ∧ Module.Projective A (P.X q)) :\n    ConstantCompletion.IsComplete\n      (ConstantCompletion.projection (completedCechTopology T) A I 0)\n      ((ConstantCompletion.Q _).obj (AdicPerfectModel.model (completedCechTopology T) I P))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T012920-L-2347218",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T012920-L-2347218",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

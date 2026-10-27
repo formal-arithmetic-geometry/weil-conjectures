@@ -1,0 +1,175 @@
+{
+ "id": "lem-sfb-kummer-line-twisting",
+ "kind": "statement",
+ "title": "Tensor and internal Hom by the actual scalar-extended Kummer line",
+ "statement": "Let l be prime, E a finite extension of Q_l, and T a noetherian scheme on which l is invertible. For every existing Chern data c [def-sp-tower-class-chern], the actual sheaf lineModule obtained by scalar extension of its rootModule admits Twisting [def-sp-tower-class-twisting]: tensor by that very line is an additive exact equivalence whose inverse is internal Hom from that same line, with the specified coevaluation, evaluation and coefficient-unit formulas. No existence or normalization of Chern morphisms is asserted.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-twisting"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), local rank-one root module and scalar extension; sk-prop-diagonal-tower/_section.md, Tate-twist paragraph"
+ },
+ "proof": [
+  {
+   "text": "Apply kummerRoot_rank_one to c.reduction.forget, c.rootModule and c.rootForget. This establishes rank one for the integral module, independently of every derived Chern arrow. Scalar extension preserves invertibility by scalarExtensionDual_localIsomorphism. The two sectionwise change-of-rings constructions agree; c.scalar.model.obj_eq identifies their value with exactly lineModule. Transport invertibility along this equality and use the rank-one/invertible equivalence.",
+   "uses": [
+    "lem-sfb-kummer-root-rank-one",
+    "lem-sp-scalar-extension-dual-local-iso",
+    "def-sp-tower-class-chern"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), local rank-one root module and scalar extension; sk-prop-diagonal-tower/_section.md, Tate-twist paragraph"
+   }
+  },
+  {
+   "text": "Form the actual right adjoint homFunctor(lineModule) on the ringed sequence site. SiteTensorHom.equiv supplies its tensor/Hom bijection; equiv_naturality and a componentwise computation prove the two naturality equations. Adjunction.mkOfHomEquiv therefore gives the ordinary adjunction with the fixed tensor functor positive. The local rank-one criterion gives a covering sieve of unit trivializations. Apply evaluation_inverse_pair to obtain an isomorphism from lineModule tensor its actual internal dual to the unit. BraidedCategory.tensorRightEquivalence and siteSheafTensorRightIso show that positive is an equivalence.",
+   "uses": [
+    "lem-sf-site-tensor-hom-equiv",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-sp-tower-class-twisting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), local rank-one root module and scalar extension; sk-prop-diagonal-tower/_section.md, Tate-twist paragraph"
+   }
+  },
+  {
+   "text": "Upgrade that very adjunction by Adjunction.toEquivalence. The functor is definitionally positive, and its inverse on objects and maps is definitionally internal Hom. The unit is currying of the tensor identity: equiv_apply at the identity slice gives coevaluation x,y ↦ x tensor y. Applying equiv to its inverse at the identity gives evaluation phi tensor y ↦ phi(y). Replace the endpoint HEq witnesses by equalities and use these formulas. Equivalences preserve finite limits and colimits and are additive in the abelian categories. scalarTensorLeftUnitor gives the required coefficient-unit isomorphism, and scalarTensorLeftUnitor_tmul proves its exact multiplication normalization. These data fill every field of Twisting with no remaining hole in the item.",
+   "uses": [
+    "lem-sf-site-tensor-hom-equiv",
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-sp-tower-class-twisting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), local rank-one root module and scalar extension; sk-prop-diagonal-tower/_section.md, Tate-twist paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-kummer-root-rank-one",
+  "lem-sp-scalar-extension-dual-local-iso",
+  "def-sp-tower-class-chern",
+  "lem-sf-site-tensor-hom-equiv",
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-sp-tower-class-twisting",
+  "lem-sp-scalar-extension-binary-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), local rank-one root module and scalar extension; sk-prop-diagonal-tower/_section.md, Tate-twist paragraph; G6 Lean construction via the actual tensor/Hom adjunction, with integral rank one isolated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensoring sheaves of modules with a locally free rank one sheaf is an equivalence with inverse internal Hom from that sheaf",
+   "results": "8 hits: lTensorHomEquivHomLTensor, dualTensorHomEquiv, Module.Invertible.rTensorEquiv, ModuleCat.monoidalClosedHomEquiv, rTensorHomEquivHomRTensor, dualTensorHomEquivOfBasis, CategoryTheory.tensorLeftHomEquiv, SheafOfModules.freeHomEquiv",
+   "date": "2026-10-27",
+   "verdict": "No match for this statement on actual ringed systems and its fixed comparison maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules locally free of rank one has tensor product functor inverse to internal Hom, with canonical evaluation and coevaluation",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.freeHomEquiv_symm_comp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv, LightCondensed.instMonoidalClosedLightCondMod, SheafOfModules.freeHomEquiv_freeMap",
+   "date": "2026-10-27",
+   "verdict": "No corresponding theorem on the actual sheaf systems with the specified maps."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_normalizedKummerReduction|finiteChernNormalization_of_normalized|nonempty_kummerLineTwisting",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No matching specialized theorem in Mathlib; the project definitions and generic categorical APIs are used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceChernTwistExistence",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): compatible primitive-root cover and the ordinary tensor/Hom line twist",
+   "via": [
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerLineTwisting",
+  "file": "lean/Sheaf/Paper/KummerLineTwisting.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.nonempty_kummerLineTwisting",
+  "statement": "theorem nonempty_kummerLineTwisting (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤))) (c : Chern l E T) :\n    Nonempty (Twisting l E c)",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DiagonalTraceChernTwistExistence",
+  "worker": "stage3",
+  "summary": "Separate a proper step of normalized integral reduction, scalar unit normalization, finite evaluation or line twisting; retain the simultaneous-system argument and fixed signs.",
+  "blueprint": "proof (1): compatible primitive-root cover and the ordinary tensor/Hom line twist",
+  "tool_uses": [
+   {
+    "node": "det-def-sp-tate-twist-locally-free",
+    "why": "Only clause (1), the common primitive-root cover and compatible generators."
+   },
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Uniqueness of the finite constant-quotient action makes the root comparison linear."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "The ordinary tensor/internal-Hom adjunction, specialized to the actual line."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T012844-L-2340165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T021327-L-2757561",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

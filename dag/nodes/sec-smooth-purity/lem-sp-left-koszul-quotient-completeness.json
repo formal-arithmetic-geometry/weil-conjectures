@@ -1,0 +1,183 @@
+{
+ "id": "lem-sp-left-koszul-quotient-completeness",
+ "kind": "statement",
+ "title": "Quotient completeness from the actual left Koszul unit",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $T$, and the left-Koszul functor $C$ and unit $u$ over its completed integral coefficient sheaf [def-sp-power-torsion-limit-models]. Let $M$ be any unbounded strict complex and suppose $u_M:M\\to C(M)$ is a quasi-isomorphism. There exist a flat-term K-flat complex $P$, a quasi-isomorphism $f:P\\to M$, its localization isomorphism $e_P:Q(P)\\cong Q(M)$ with hom Q(f), and an isomorphism $s:Q(C(M))\\cong Q(\\mathsf R_j(P\\otimes_R (O/\\pi^{j+1})_T))$ in the actual scalar-extension-and-restriction model [def-pur-integral-derived-operations]. They obey $Q(u_M)s=e_P^{-1}Q(\\mathrm{roosUnit}_P)$ and, after every unshifted quotient projection, $Q(u_M)s Q(\\mathrm{ev}_j)=e_P^{-1}Q(\\mathrm{augmentation}_{P,j})$. The actual derived quotient tower has a product and a distinguished Roos triangle with first object Q(M), first-map components $e_P^{-1}Q(\\mathrm{augmentation}_{P,j})$, and second map one minus shift. Finally Q(M) is derived complete in the unrestricted integral coefficient convention [def-weil-derived-complete], equivalently IntegralOnSlice.IsComplete at the none slice. No strict outer tower or nilpotence hypothesis occurs here.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+ },
+ "stmt_deps": [
+  "def-sp-power-torsion-limit-models",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-complete",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Completed uniformizer multiplication is regular and its power quotients are the actual finite coefficient sheaves. Choose one flat-term K-flat resolution f:P to M. Apply the strict Koszul/quotient bridge with this P and the normalized ordinary scalar-extension presentation; both span maps are quasi-isomorphisms. Identify localization with Q using quotientCompQhIso and the two strict Roos models by their identical product cone maps. The span gives s and both displayed normalization equations.",
+   "uses": [
+    "lem-sp-ell-coefficient-fiber",
+    "lem-pc-kflat-resolution",
+    "lem-sp-koszul-quotient-strict-resolution-bridge",
+    "def-sp-power-torsion-limit-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+   }
+  },
+  {
+   "text": "Since u_M is a quasi-isomorphism, kappa=e_P inverse followed by Q(roosUnit_P) is invertible. The strict quotient tower has its distinguished Roos triangle. Transport its first object through kappa: replace its first map a by kappa a and its connecting morphism d by d followed by the shifted inverse of kappa. Projection to j gives the already identified canonical quotient component. The middle arrow stays one minus shift.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-derived-complete",
+    "def-sp-power-torsion-limit-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+   }
+  },
+  {
+   "text": "For the none slice, the scalar-extension tower on P equals the legacy integral reduction tower on that same P, and its augmentation equals the legacy unit. Choose a finite auxiliary field of characteristic distinct from ell; the completed coefficient sheaf is independent of this auxiliary choice. The preceding transported triangle with this resolution is the witness required by IsDerivedCompleteUnrestricted, which defines IsComplete at none.",
+   "uses": [
+    "def-weil-derived-complete",
+    "def-pur-integral-derived-operations",
+    "def-sp-power-torsion-limit-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-sp-power-torsion-limit-models",
+  "def-weil-derived-complete",
+  "lem-pc-kflat-resolution",
+  "lem-sp-ell-coefficient-fiber",
+  "lem-sp-koszul-quotient-strict-resolution-bridge",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of unbounded complexes using Koszul complexes and homotopy inverse limits",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HasDerivedCategory",
+     "HasDerivedCategory.standard",
+     "HomologicalComplex.instHasLimit",
+     "DerivedCategory",
+     "HomologicalComplexUpToQuasiIso",
+     "HomologicalComplex.instHasLimitsOfShape",
+     "HomologicalComplexUpToQuasiIso.Q",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the canonical Koszul completion unit is a quasi isomorphism then the quotient reduction tower gives a distinguished Roos triangle and derived completeness",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE",
+     "DerivedCategory.mem_distTriang_iff",
+     "DerivedCategory.left_fac_of_isStrictlyGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isLE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.complete|[Kk]oszul|[Rr]oos",
+   "results": {
+    "subdirectory": "",
+    "count": 3,
+    "hits": [
+     "Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean",
+     "Mathlib/RingTheory/Regular/RegularSequence.lean",
+     "Mathlib/Algebra/Homology/LocalCohomology.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "No match for this specified sheaf-coefficient Koszul/Roos comparison. The hits give general derived-category, tensor-unit or ordinary adic-completion infrastructure, not the normalized maps here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PowerTorsionSheafLimitComplete",
+  "date": "2026-10-25",
+  "group": "Y6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Completeness sentence, principal Koszul calculation and canonical quotient projections; Bhatt--Scholze, Lemmas 3.4.12 and 3.5.4--3.5.7.",
+   "via": [
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PowerTorsionKoszulQuotientCompleteness",
+  "file": "lean/Sheaf/Paper/PowerTorsionKoszulQuotientCompleteness.lean",
+  "declaration": "WeilConjectures.PowerTorsionLimit.left_koszul_quotient_completeness",
+  "statement": "theorem left_koszul_quotient_completeness\n    (M : CochainComplex (integralTowerModules l E T) ℤ)\n    (hu : QuasiIso (unit l E T M)) :\n        ∃ (P : (IntegralOnSlice.Good l E T none).FullSubcategory)\n          (f : P.obj ⟶ M)\n          (eP : DerivedCategory.Q.obj P.obj ≅ DerivedCategory.Q.obj M)\n          (s : DerivedCategory.Q.obj ((completion l E T).obj M) ≅\n            DerivedCategory.Q.obj ((roos l E T).obj\n              ((IntegralOnSlice.tower l E T none).obj P.obj))),\n          QuasiIso f ∧ eP.hom = DerivedCategory.Q.map f ∧\n          DerivedCategory.Q.map (unit l E T M) ≫ s.hom =\n            eP.inv ≫ DerivedCategory.Q.map (IntegralOnSlice.roosUnit l E T none P.obj) ∧\n          (∀ j : ℕ,\n            DerivedCategory.Q.map (unit l E T M) ≫ s.hom ≫\n                DerivedCategory.Q.map (evaluation l E T\n                  ((IntegralOnSlice.tower l E T none).obj P.obj) j) =\n              eP.inv ≫ DerivedCategory.Q.map\n                (((IntegralOnSlice.augmentation l E T none).app P.obj).app (op j))) ∧\n          (∃ (hprod : HasProduct (fun j : ℕ ↦\n                (IntegralOnSlice.derivedTower l E T none P).obj (op j))),\n            (fun [_hp : HasProduct (fun j : ℕ ↦\n                (IntegralOnSlice.derivedTower l E T none P).obj (op j))] ↦\n            ∃ (p : DerivedCategory.Q.obj M ⟶\n                ∏ᶜ fun j : ℕ ↦ (IntegralOnSlice.derivedTower l E T none P).obj (op j))\n            (δ : (∏ᶜ fun j : ℕ ↦\n                (IntegralOnSlice.derivedTower l E T none P).obj (op j)) ⟶\n              (DerivedCategory.Q.obj M)⟦(1 : ℤ)⟧),\n            IsDerivedLimitTriangle\n              (fun j : ℕ ↦ (IntegralOnSlice.derivedTower l E T none P).map\n                (homOfLE j.le_succ).op) (DerivedCategory.Q.obj M) p δ ∧\n            ∀ j : ℕ, p ≫ Pi.π _ j = eP.inv ≫ DerivedCategory.Q.map\n              (((IntegralOnSlice.augmentation l E T none).app P.obj).app (op j)))\n              (_hp := hprod)) ∧\n          IntegralOnSlice.IsComplete l E T none\n            (DerivedCategory.Q.obj M)",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4bce",
+  "group": "Y6",
+  "result": "fix",
+  "landing": "20261025T164846-L-1111894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4bce",
+  "group": "Y6",
+  "result": "fix",
+  "landing": "20261025T164846-L-1111894",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to published; moved Models defs diffed verbatim vs old item module; 3 new sorry statements read against nodes and the inherited item statement (sign (-1)^{pq} recomputed, nilpotent s^r=0 argument, K-flat span); #print axioms on scratch compile of all 5 modules (sorryAx only via the new steps)"
+ }
+}

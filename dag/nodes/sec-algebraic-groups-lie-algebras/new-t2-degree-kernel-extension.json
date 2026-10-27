@@ -1,0 +1,103 @@
+{
+ "id": "new-t2-degree-kernel-extension",
+ "kind": "statement",
+ "title": "Abstract group extension from an integer degree kernel",
+ "statement": "Let G,M be groups, d:G→Z a surjective group homomorphism and s an element of degree one. Given f:ker(d)→M and T in M satisfying T f(u) T⁻¹=f(sus⁻¹), there is a unique homomorphism rho:G→M restricting to f and sending s to T. Explicitly rho(w)=f(w s^(-d(w))) T^d(w). This is a group-theoretic statement independent of schemes, sheaves, and their fundamental representations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-purity-real-sheaves/sk-d-real-weil/lem-wf-weil-fundamental-representation.proof.md",
+  "place": "The abstract extension, first three paragraphs"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Every w has the unique decomposition u s^n, n=d(w). Induct on positive and negative integers to obtain T^n f(u) T^(-n)=f(s^n u s^(-n)). Multiply two decompositions to prove multiplicativity. The kernel and degree-one formulas are the cases n=0 and u=1,n=1. Any other homomorphism has the same values on every decomposition, proving uniqueness. This is already the complete proved Lean implementation in the attached upstream module.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "T2",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-purity-real-sheaves/sk-d-real-weil/lem-wf-weil-fundamental-representation.proof.md",
+  "place": "The abstract extension, first three paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical geometric stalk action of a lisse l-adic sheaf is continuous and descends to a finite coefficient field; path transport commutes with sheaf morphisms and pullback",
+   "results": "Eight hits, all generic pullback/stalk APIs; no normalized etale adic path compatibility theorem.",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; use existing categorical naturality and scalar-extension APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits including NatTrans.naturality; this applies once a natural isomorphism with the recorded path components is identified.",
+   "date": "2026-10-25",
+   "verdict": "Generic naturality API only."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleAlgebraicPath|etaleWeilFrobenius|etaleGeometricRep|NatTrans.naturality|isoOfNatIso_hom_π|generalLinearEquiv",
+   "results": "Read the item, its consumers, FibreFunctorLinearTransport, IntegralFibrePathConstruction, AlgebraicFibrePathConstruction, RationalFibrePathConstruction, and Mathlib. No existing theorem states the two compatibility equations. The upstream Monodromy module proves the abstract group extension and uniqueness.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the proved group lift; split only the two missing path squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleWeilFundamentalRepresentation",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-fundamental-representation",
+   "place": "Abstract group extension from an integer degree kernel in the geometric and Weil fundamental representation construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-geometry",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+  "declaration": "AlgebraicGeometry.Monodromy.DegreeDatum.lift",
+  "declarations": [
+   "AlgebraicGeometry.Monodromy.DegreeDatum.lift",
+   "AlgebraicGeometry.Monodromy.DegreeDatum.lift_apply_of_mem_ker",
+   "AlgebraicGeometry.Monodromy.DegreeDatum.lift_degreeOneElement",
+   "AlgebraicGeometry.Monodromy.DegreeDatum.eq_lift"
+  ],
+  "statement": "def lift : W →* M",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8ebdc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T123853-L-1910906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8ebdc",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T123853-L-1910906",
+  "kind": "interface",
+  "note": "independent cc review: item statements byte-identical to published; EtaleAdicPathData prefix verbatim vs published item lines 1-413; two new sorry squares checked against lisseAlgebraicFiberFunctor/AutomorphismFiberIso definitions and algebraicFibrePathIso; 15 direct importers compiled against delivered modules; #print axioms"
+ }
+}

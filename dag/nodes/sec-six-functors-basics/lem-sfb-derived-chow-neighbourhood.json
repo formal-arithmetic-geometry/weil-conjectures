@@ -1,0 +1,434 @@
+{
+ "id": "lem-sfb-derived-chow-neighbourhood",
+ "kind": "statement",
+ "title": "Derived Chow neighbourhood with a pseudo-coherent kernel",
+ "statement": "Let $A$ be a commutative ring, let $X\\to\\operatorname{Spec}A$ be separated and of finite presentation [def-pc-scheme, def-pc-morphism-conventions], and let $x\\in X$. There exist an open neighbourhood $U\\subseteq X$ of $x$, an integer $n\\geq0$, an open $V\\subseteq P=\\mathbf P^n_A$ [def-pc-projective-space-twist], a finitely presented closed immersion $h:Z\\hookrightarrow T=X\\times_A P$ [def-weil-closed-immersion, def-pc-fibre-product], a point $z\\in Z$, and $E\\in D(\\mathcal O_T)$ [def-pc-derived-category], with the following properties. Writing $b:Z\\to X$ and $c:Z\\to P$ for the projections, $b^{-1}(U)\\to U$ is an isomorphism and $b(z)=x$; $c^{-1}(V)\\to V$ is a closed immersion; and $b^{-1}(U)=c^{-1}(V)$ contains $z$. Moreover $E|_{X\\times_A V}\\simeq(h_*\\mathcal O_Z)[0]|_{X\\times_A V}$ [def-pc-derived-direct-image], $E$ is pseudo-coherent [def-pur-pseudo-coherent-complex], and $H^j(E)_t=0$ for every integer $j$ and every $t\\in T\\setminus h(Z)$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSJ, lemma-derived-chow, clauses (1)--(6)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-direct-image",
+  "def-pc-projective-space-twist",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-pur-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use [lemma-nagata-noetherian-inverse-system-affine] to write $\\operatorname{Spec}A$ as the limit of the spectra of its finitely generated integer subalgebras. Apply [lem-weil-pbc-finite-presentation-family-descent] to the singleton family $X$. Apply [lem-weil-pbc-descend-separated] to its structure morphism, increasing the stage so it is separated. This gives a finite type $\\mathbf Z$-subalgebra $A_0\\subseteq A$, a separated finitely presented $X_0/A_0$, and $X\\simeq X_0\\times_{A_0}A$. All stages are affine (hence qcqs) and the descended source is qcqs, as required by the separatedness descent node. Let $x_0$ be the image of $x$.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-presentation-family-descent",
+    "lem-weil-pbc-descend-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSJ, lemma-derived-chow, first paragraph, noetherian approximation"
+   }
+  },
+  {
+   "text": "First construct the data over $A_0$. The scheme $\\operatorname{Spec}A_0$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since it is finite type over $\\mathbf Z$; the same node makes $X_0$ Noetherian. Choose an affine open $U_0$ containing $x_0$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], its coordinate ring is finitely presented over $A_0$, hence finitely generated. Apply [lem-chow-affine-immersion] to obtain $j:U_0\\hookrightarrow P_0=\\mathbf P^n_{A_0}$. The projection $P_0\\to\\operatorname{Spec}A_0$ is proper by [lemma-nagata-projective-space-base-change-proper], hence separated and finite type by [def-weil-proper-morphism]; the Noetherian node also makes $P_0$ Noetherian. By [lem-sfb-finite-type-composition-base-change], $T_0=X_0\\times_{A_0}P_0$ is finite type over $X_0$, so is Noetherian by the same Noetherian node.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-chow-affine-immersion",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSJ, lemma-derived-chow, second paragraph, affine embedding and final paragraph, Noetherian ambient scheme"
+   }
+  },
+  {
+   "text": "Let $Z_0$ be the scheme-theoretic image of $(\\mathrm{id}_{U_0},j):U_0\\to T_0$ [def-nagata-scheme-theoretic-image]. The open inclusion $U_0\\hookrightarrow X_0$ is quasi-compact by [lem-sfb-noetherian-open-closed-finite-presentation]. Apply [lemma-nagata-scheme-image-partial-section], using separatedness of $P_0/A_0$, to obtain $b_0^{-1}(U_0)\\simeq U_0$, identified with the original graph. Thus there is exactly one $z_0$ above $x_0$.",
+   "uses": [
+    "def-nagata-scheme-theoretic-image",
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "lemma-nagata-scheme-image-partial-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSJ, lemma-derived-chow, second paragraph, graph closure and first projection"
+   }
+  },
+  {
+   "text": "Let $Y_0\\subseteq P_0$ be the scheme-theoretic image of $j$. The immersion $j$ is the closed immersion $U_0\\hookrightarrow\\mathbf A^n_{A_0}$ followed by the open immersion $\\mathbf A^n_{A_0}\\hookrightarrow P_0$ into the Noetherian $P_0$, so it is quasi-compact by [lem-sfb-noetherian-open-closed-finite-presentation]. By [lemma-nagata-immersion-open-in-scheme-image], it identifies $U_0$ with an open $J_0\\subseteq Y_0$. By the minimal property [lemma-nagata-scheme-theoretic-closure-minimal], $Z_0$ lies in the closed subscheme $X_0\\times_{A_0}Y_0$ (closed by [lem-weil-pbc-closed-immersion-base-change]) and is the image there of the same graph: a closed subscheme there is also closed in $T_0$, so the two minimal images coincide. Interchange the two factors and apply [lemma-nagata-scheme-image-partial-section] with open $J_0\\subseteq Y_0$ and separated $X_0/A_0$. It gives $c_0^{-1}(J_0)\\simeq J_0$, again the original graph. Choose an open $V_0\\subseteq P_0$ whose intersection with $Y_0$ is $J_0$; such an open exists by the subspace topology. Then $c_0^{-1}(V_0)=b_0^{-1}(U_0)$ as open subschemes of $Z_0$, since both equal the graph, and $c_0^{-1}(V_0)\\to V_0$ is the closed immersion $Y_0\\cap V_0\\hookrightarrow V_0$.",
+   "uses": [
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lemma-nagata-scheme-theoretic-closure-minimal",
+    "lemma-nagata-scheme-image-partial-section",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSJ, lemma-derived-chow, third paragraph, second graph closure and choice of V"
+   }
+  },
+  {
+   "text": "Write $h_0:Z_0\\hookrightarrow T_0$. Since $T_0$ is Noetherian, [lem-sfb-noetherian-open-closed-finite-presentation] (with the open immersion the identity) makes $h_0$ finitely presented; $Z_0$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], as a closed immersion is finite type. Put $E_0=(h_{0,*}\\mathcal O_{Z_0})[0]$. The structure sheaf $\\mathcal O_{Z_0}$ is quasi-coherent of finite type, hence coherent on the locally Noetherian $Z_0$ by [pqf-lem-coherent-ft-locnoeth]. By [lem-pc-closed-immersion-coherent-cohomology] its pushforward is coherent. Hence [lem-sc-coherent-pseudo-coherent] makes $E_0$ pseudo-coherent. It is zero on $T_0\\setminus h_0(Z_0)$ by the definition of ordinary pushforward. Its restriction to $X_0\\times_{A_0}V_0$ is precisely the degree-zero pushforward of the structure sheaf of $W_0=c_0^{-1}(V_0)$.",
+   "uses": [
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-sc-coherent-pseudo-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSJ, lemma-derived-chow, final paragraph, coherent closed kernel"
+   }
+  },
+  {
+   "text": "Pull back $U_0,V_0,Z_0$ to $A$, set $n$ equal to the integer just constructed, and denote the resulting closed immersion by $h:Z\\hookrightarrow T=X\\times_A P$. Projective spaces commute with base change by [lemma-nagata-projective-space-base-change-pullback]. Closed immersions remain closed by [lem-weil-pbc-closed-immersion-base-change]. Finiteness of presentation also persists: locally the finitely generated ideal $(f_1,\\ldots,f_r)$ defining $h_0$ pulls back to the ideal generated by the images of those same $f_i$; its closed immersion is affine and thus quasi-compact and quasi-separated. The inverse images of $U_0,V_0$ agree in $Z$ by associativity of fibre products, and the restricted isomorphism and closed immersion pull back to the required ones. In particular $b^{-1}(U)\\simeq U$ gives a unique $z$ over the chosen $x$, and this point belongs to $c^{-1}(V)$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSJ, lemma-derived-chow, first paragraph, base change of the geometric data"
+   }
+  },
+  {
+   "text": "Let $q:T\\to T_0$ be the projection and set $E=Lq^*E_0$ [def-pc-derived-pullback]. Locally represent $E_0$ by a bounded-above finite free complex, as in [def-pur-pseudo-coherent-complex]. It is K-flat by [lem-pc-bounded-above-flat-kflat], so its termwise pullback computes the derived pullback and remains bounded-above finite free. Thus $E$ is pseudo-coherent. Restrictions of derived pullback commute with this calculation, or equivalently with derived-pullback composition [lem-pc-ringed-spaces-derived-pullback-composition]. The complement $T\\setminus h(Z)$ is exactly $q^{-1}(T_0\\setminus h_0(Z_0))$ by the inverse-image construction of a closed subscheme. Since $E_0$ is zero on the latter open, $E$ is zero on the former; in particular every $H^j(E)_t$ there is zero.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSJ, lemma-derived-chow, first paragraph, pseudo-coherence and support under derived pullback"
+   }
+  },
+  {
+   "text": "It remains to identify $E$ on the whole open $X\\times_A V$, not merely on $U\\times_A V$. Apply [lem-sfb-relative-flat-closed-kernel-base-change] with $S_0=\\operatorname{Spec}A_0$, $S=\\operatorname{Spec}A$, $Y_0=V_0$, and $i_0:W_0\\hookrightarrow X_0\\times_{A_0}V_0$. Its two flatness hypotheses hold: $W_0\\to X_0$ is the open immersion $U_0\\hookrightarrow X_0$ (its local ring maps are identities), while $V_0\\to\\operatorname{Spec}A_0$ is flat because the projective standard charts are polynomial algebras by [lem-weil-pbc-projective-space-standard-charts], and their structural maps are flat by [lem-nagata-polynomial-projection-flat]; their open restrictions are flat on stalks, or by [lem-pc-affine-flat-module-localization-preserves-flatness]. By derived-pullback composition, the left side of the comparison is $E|_{X\\times_A V}$; the right side is the degree-zero pushforward of $\\mathcal O_{W}$ for $W=Z\\cap(X\\times_A V)$. Ordinary pushforward restricted to an open is pushforward of the restriction, directly on sections. This is $(h_*\\mathcal O_Z)[0]|_{X\\times_A V}$ and proves the remaining clause.",
+   "uses": [
+    "lem-sfb-relative-flat-closed-kernel-base-change",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-nagata-polynomial-projection-flat",
+    "lem-pc-affine-flat-module-localization-preserves-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CSJ, lemma-derived-chow, first paragraph, Tor-independent square and clause (5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-descend-separated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-chow-affine-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-nagata-scheme-theoretic-image",
+  "lem-sfb-noetherian-open-closed-finite-presentation",
+  "lemma-nagata-scheme-image-partial-section",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-scheme-theoretic-closure-minimal",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-sc-coherent-pseudo-coherent",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "def-pc-derived-pullback",
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sfb-relative-flat-closed-kernel-base-change",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-pc-affine-flat-module-localization-preserves-flatness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CSJ, lemma-derived-chow, full proof; correct the final display to the entire open X times V"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Chow lemma a separated finitely presented scheme has locally a projective modification with pseudo coherent kernel supported on its graph",
+   "results": "8 hits: AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.IsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.IsProper.of_comp_of_isSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Chow lemma local projective embedding and pseudo coherent complex restricting to the structure sheaf of a graph",
+   "results": "8 hits: ComplexShape.Embedding.homRestrict.f, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.isPreimmersion_eq_inf, AlgebraicGeometry.Scheme.instQuasiCompactToImage, HomologicalComplex.stupidTrunc, CochainComplex.ConnectData.restrictionLEIso_hom_f, AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.chow|Fourier.Mukai|pseudo.?coherent",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an arbitrary ring construct a pseudo coherent complex on X times projective space agreeing locally with a closed graph near a chosen point",
+   "results": "8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary sheaf pushforward, projective spectra or flat morphisms; none states this derived pseudo-coherence or graph-kernel assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|tor.independen|derived.chow|PseudoCoherent",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Chow lemma separated finitely presented scheme pseudo coherent kernel supported on graph",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.IsSeparated. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"baseChange\"",
+   "results": "12 hits: CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact, Algebra.Extension.toBaseChange_toRingHom, Algebra.Generators.baseChange, Algebra.Generators.baseChange_val, Algebra.Generators.baseChangeFromBaseChange, Algebra.Generators.baseChangeToBaseChange, Algebra.Generators.baseChangeFromBaseChange_apply. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback of a closed immersion structure sheaf under relative flat product base change is the structure sheaf of the inverse image without flatness of the base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independent closed immersion structure sheaf derived pullback base change",
+   "results": "8 hits: AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independent closed immersion base change gives an isomorphism between derived inverse image of its pushforward structure sheaf and the pushforward of the pulled back structure sheaf",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finitely presented scheme over a ring has a projective graph modification locally isomorphic near a chosen point and a pseudo coherent complex on the product restricting to that graph",
+   "results": "8 hits: AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Proj. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scheme base change, closed immersions, Proj geometry or Kan extensions, not the derived structure-sheaf comparison under relative flatness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudocoherent-tensor-relative-criterion",
+  "date": "2026-10-23",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSL (lemma-characterize-pseudo-coherent). Supporting argument in Tag 0CSL: Tag 0CSJ, lemma-derived-chow, clauses (1)--(6)",
+   "via": [
+    "lem-sfb-pseudocoherent-tensor-relative-criterion",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-derived-chow-neighbourhood",
+  "worker": "stage1",
+  "summary": "Followed Tag 0CSJ through finite-type integer descent, two scheme-theoretic graph images, the Noetherian coherent kernel, and arbitrary derived base change. Reused the existing graph and coherence nodes; isolated one general relative-flat closed-kernel derived comparison, not the Chow existence assertion. Explicitly verified support and the full X times V restriction. The item statement is unchanged.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), via the inherited algebraic auxiliary chain: the supporting 0CSJ argument for 0CSL; steps realize every paragraph of Tag 0CSJ, retaining the inherited null blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Noetherian approximation of an affine scheme. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-family-descent",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Common-stage descent of finite families of finitely presented schemes. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-descend-separated",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Separatedness descends to a finite stage of a limit. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: A morphism locally of finite presentation is of finite presentation on every pair of affine opens. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-chow-affine-immersion",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: An affine scheme of finite type immerses into projective space. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Projective space is proper over its base. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Finite-type morphisms are stable under composition and base change. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-partial-section",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Scheme-theoretic image of a partial section. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lemma-nagata-immersion-open-in-scheme-image",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: [stacks-project]. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lemma-nagata-scheme-theoretic-closure-minimal",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Minimality of the scheme-theoretic closure. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Base change of a closed immersion is a closed immersion. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Coherent modules under a closed immersion. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-sc-coherent-pseudo-coherent",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Coherent modules on Noetherian schemes are pseudo-coherent. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Projective space commutes with base change. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Bounded-above flat complexes are K-flat. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Composition of derived pullbacks. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Standard charts and coordinate sections of projective space over a scheme. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-nagata-polynomial-projection-flat",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Flatness of an arbitrary polynomial projection. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: Localizing a flat module over an algebra. It supplies no replacement of the constructible six-functor unit route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "General algebraic-geometric tool used in the auxiliary Stacks 0CSJ proof: on a locally Noetherian scheme quasi-coherent of finite type equals coherent (Stacks 01XZ), applied to the structure sheaf of Z_0. It supplies no replacement of the constructible six-functor unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-descend-separated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-chow-affine-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "lemma-nagata-scheme-image-partial-section",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-scheme-theoretic-closure-minimal",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-sc-coherent-pseudo-coherent",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N8-3bd0c7f05",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-3bd0c7f05 (reviewer sub-agent of L); spot-checked: I read the full statement and proof of Stacks Tag 0CSJ (more-morphisms.tex), plus 0CTA and 0E23. The item states clauses (1)-(6) with nothing weakened. In clones/live the item is still unsplit with an identical statement, so the delivery is not superseded. There is no re-split note and no SGA citation. The report's source-error remark is correct: Stacks' final display concludes on U×V, but clause (5) needs X×V, and step 8 applies the comparison on the whole X_0×V_0. Steps 1-8 follow 0CSJ: Noetherian descent via 01ZM(1) and 01ZQ (qcqs hypotheses checked), the affine embedding into P^n, two graph closures via 0CNG (qc open immersions and separated factors checked), V with V∩Y=J_0, the coherent kernel via 08E8, base change of the data, a K-flat argument in place of 09U7 for pseudo-coherence and support, and clause (5) via the new node (W_0→X_0 flat as the open U_0, V_0→A_0 flat through polynomial charts). The new node lem-sfb-relative-flat-closed-kernel-base-change is exactly 0CTA+0E23 applied to O_{W_0}. I checked it on affines: (A⊗B⊗R')⊗^L_{A⊗B}C ≅ (A⊗R')⊗_A C. I also tested W_0 empty, a = identity and a non-flat X_0. It is statement-only, self-contained and searched seven times. It does not duplicate lem-sfb-flat-families-tor-independent (that needs both maps flat over one base) or the perfect-complex Tor-independence nodes, and it does not restate the item. I accept the 20 declared tool_uses. FIX, 2 C1 faults: (1) step 4 claimed j is quasi-compact without a citation; it now cites lem-sfb-noetherian-open-closed-finite-presentation (closed then open immersion into a Noetherian scheme). (2) Step 5 argued inline that O_{Z_0} is coherent, which does not follow in a few lines from the definition; it now cites the existing pqf-lem-coherent-ft-locnoeth (01XZ), with a tool_uses entry and proof_deps = union of uses, and no cycle. Statement, stmt_deps and the new node are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedChowNeighbourhood",
+  "declaration": "AlgebraicGeometry.Scheme.exists_derivedChow_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedChowNeighbourhood.lean",
+  "statement": "theorem exists_derivedChow_neighbourhood [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ (Y : Scheme.{u}) (W : Y.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))] (A : CommRingCat.{u}) (X : Scheme.{u}) (f : X ⟶ Spec A) [IsSeparated f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (x : X) : ∃ (U : X.Opens) (n : ℕ) (V : (Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (n + 1))) A).Opens) (Z : Scheme.{u}) (h : Z ⟶ pullback f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) (z : Z) (E : schemeDerivedCategory (pullback f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A))), x ∈ U ∧ IsClosedImmersion h ∧ LocallyOfFinitePresentation h ∧ QuasiCompact h ∧ QuasiSeparated h ∧ IsIso ((h ≫ pullback.fst f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) ∣_ U) ∧ (h ≫ pullback.fst f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) z = x ∧ IsClosedImmersion ((h ≫ pullback.snd f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) ∣_ V) ∧ (h ≫ pullback.fst f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) ⁻¹ᵁ U = (h ≫ pullback.snd f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) ⁻¹ᵁ V ∧ z ∈ (h ≫ pullback.fst f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) ⁻¹ᵁ U ∧ Nonempty ( (SheafOfModules.overFunctor.{u} (moduleRings (pullback f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)).toRingedSpace) ((pullback.snd f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) ⁻¹ᵁ V)).mapDerivedCategory.obj E ≅ (SheafOfModules.overFunctor.{u} (moduleRings (pullback f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)).toRingedSpace) ((pullback.snd f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) ⁻¹ᵁ V)).mapDerivedCategory.obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)).toRingedSpace)) 0).obj ((Modules.pushforward h).obj (SheafOfModules.unit (moduleRings Z.toRingedSpace))))) ∧ IsPseudoCoherent (pullback f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)) E ∧ ∀ (j : ℤ) (t : (pullback f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A) : Scheme.{u})), t ∉ Set.range h → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (pullback f (Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) A)).toRingedSpace)) j).obj E).val.presheaf t))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc8368a49",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, Stacks 0CSJ statement+proof, module, report. Clause-by-clause: A any CommRingCat; f separated + LFP+QC+QS (= fp convention); U∋x; n:ℕ; V open of Proj A[x0..xn] (projectiveSpaceOverAffine, ULift (Fin (n+1)) keeps dimension); h closed immersion+LFP+QC+QS into pullback f (P→Spec A); IsIso (b∣_U), b z = x; IsClosedImmersion (c∣_V); b⁻¹U = c⁻¹V ∋ z; derived-category Nonempty iso via overFunctor.mapDerivedCategory on whole snd⁻¹V = X×V with singleFunctor 0 of ordinary h_*O_Z (matches source (b,c)_*O_Z, not U×V); IsPseudoCoherent T E; ∀ j:ℤ, t∉range h → stalk of H^j(E) subsingleton. Quantifier order matches; HasDerivedCategory families are the standard project binders. Edge cases n=0, X empty, A=0, non-Noetherian A, negative degrees fine. lean.statement verbatim; only lean field changed vs side-live; lines ≤100; docstrings with source/blueprint and 8 proof steps; sorry only; no defs; name fresh (homonym only in AlgebraicSpace namespace); no pro-etale. Notes: P modelled by projectiveSpaceOverAffine (recorded decl of def-nagata-affine-proj, literal to dep text) rather than ℙ(n;S) of the twist record — harmless, no twist used; Second-reading section is the standard stub. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-smooth-cover-flat-lfp-descent",
+ "kind": "statement",
+ "title": "Flatness and local finite presentation descend through a smooth source cover",
+ "statement": "Let $S$ be a scheme and let $A\\xrightarrow{h}B\\xrightarrow{g}C$ be morphisms of algebraic stacks over $S$, both representable by algebraic spaces. Suppose $h$ is smooth and surjective. Then $g$ is flat if $gh$ is flat, and $g$ is locally of finite presentation if $gh$ is locally of finite presentation. These two assertions are separate and require no quasi-compactness of $h$. An algebraic stack means a stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas; stacks, 2-fibre products, and representability use [def-sfb-stable-pointed-moduli-groupoids], [def-trf-algebraic-space]. Smoothness, flatness and local finite presentation are tested after scheme base change on etale scheme charts [def-sbc-smooth-morphisms], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation]. Surjectivity means that every field-valued point of the target lifts after some extension of its field.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex; literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 06M2 (lemma-check-property-after-precomposing), tau=smooth; source locality of flatness and local finite presentation: Tags 06ET (lemma-flat-fpqc-local-source) and 06EV (lemma-locally-finite-presentation-fppf-local-source)."
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-surjective-moduli-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix a scheme $T$ and a map $T\\to C$. Set $Y=B\\times_C T$ and $X=A\\times_C T$. Representability of $g$ makes $Y$ an algebraic space. The canonical equivalence $X\\simeq Y\\times_B A$ and [lem-sfb-representable-pullback-over-space], applied to $h$ and $Y\\to B$, make $X$ an algebraic space too. Thus $gh$ is representable as well. By [lem-sfb-stack-chartwise-smooth-etale-calculus], the base change $p:X\\to Y$ of $h$ is smooth and surjective. Write $P$ for flatness or, separately, local finite presentation, and suppose $gh$ has $P$. The defining scheme-base-change test gives $P(X\\to T)$.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06M2, lemma-check-property-after-precomposing, proof: scheme base change; algebraic.tex Tag 0300"
+   }
+  },
+  {
+   "text": "Choose a surjective etale scheme chart $a:U\\to Y$, and put $W=X\\times_Y U$. This is an algebraic space by [lem-sfb-representable-pullback-over-space], applied to $p$ and $U\\to Y$. Choose a surjective etale scheme chart $b:V\\to W$. The chartwise calculus shows that $W\\to U$ is smooth and surjective, $W\\to X$ is etale, and hence the scheme map $v:V\\to U$ is smooth and surjective. In particular $v$ is flat and locally of finite presentation. The composite $V\\to W\\to X\\to T$ has $P$: its first two maps are etale and therefore have $P$, and $X\\to T$ has $P$. These assertions use base change and composition from [lem-sfb-stack-chartwise-smooth-etale-calculus]; their agreement with the scheme notions is the scheme comparison in [lem-sfb-space-etale-presentation-property-criterion], using [lem-sfb-scheme-etale-source-target-properties]. If $f:U\\to T$ is induced by $Y\\to T$, associativity of the fibre products identifies that composite with $f\\circ v$.",
+   "uses": [
+    "lem-sfb-representable-pullback-over-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "lemma-transfer-from-schemes, proof; spaces-morphisms.tex Tag 03MJ, lemma-local-source-target"
+   }
+  },
+  {
+   "text": "In the flatness case apply [lem-pc-flat-source-descent] to the scheme maps $V\\xrightarrow{v}U\\xrightarrow{f}T$: $v$ is flat and surjective and $fv$ is flat, so $f$ is flat. In the local-finite-presentation case use the singleton family $\\{v:V\\to U\\}$ in [lem-trf-lfp-fppf-source-locality]: $v$ is flat, locally of finite presentation and surjective, and $fv$ is locally of finite presentation, so $f$ is locally of finite presentation. The flatness argument has not assumed $gh$ to be locally of finite presentation, and the latter argument has not assumed $gh$ to be flat.",
+   "uses": [
+    "lem-pc-flat-source-descent",
+    "lem-trf-lfp-fppf-source-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 036K and 036N, lemma-flat-fpqc-local-source and lemma-locally-finite-presentation-fppf-local-source"
+   }
+  },
+  {
+   "text": "For either choice of $P$, [lem-sfb-scheme-etale-source-target-properties] says that $P$ is etale local on source-and-target. In [lem-sfb-space-etale-presentation-property-criterion] use the presentation diagram for $Y\\to T$ with source $U\\to Y$, target $\\operatorname{id}_T$, and scheme map $f:U\\to T$. Its source chart is surjective and $P(f)$ was proved, so $Y\\to T$ has $P$. This holds for every scheme $T\\to C$, hence $g$ has $P$ by its defining test. No step required either chart or $h$ to be quasi-compact; the two scheme descent statements used in step 3 impose no such hypothesis.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06M2, final implication; spaces-morphisms.tex Tag 03MJ, lemma-local-source-target"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-pc-flat-source-descent",
+  "lem-sfb-representable-pullback-over-space",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-lfp-fppf-source-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 06M2, lemma-check-property-after-precomposing; spaces-descent.tex lemma-transfer-from-schemes with Tags 06ET and 06EV, expanded using existing scheme-source descent nodes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of algebraic spaces is open and flatness and local finite presentation of a representable morphism of algebraic stacks descend after a smooth surjective morphism on its source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth surjective covers detect flat locally finitely presented morphisms of stacks and take opens to opens",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"IsOpenMap\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?stack|algebraic.?space|smooth.*[Oo]pen",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"43\", \"text\": \"  rw [← Scheme.Hom.smoothLocus_eq_top_iff, ← TopologicalSpace.Opens.coe_eq_univ,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"line\": \"35\", \"text\": \"every smooth monomorphism is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"77\", \"text\": \"    rw [smooth_iff, affineLocally_iff_forall_isAffineOpen]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"80\", \"text\": \"A morphism of schemes is smooth if and only if for each `x : X` there exists an affine open\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"120\", \"text\": \"instance : MorphismProperty.Respects @Smooth @IsOpenImmersion :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"136\", \"text\": \"  exists_isStandardSmoothOfRelativeDimension : ∀ (x : X), ∃ (U : Y.Opens) (_ : IsAffineOpen U)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"246\", \"text\": \"lemma formallySmooth_stalkMap_iff {f : X ⟶ Y} {x : X} (U : Y.Opens)\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"99\", \"text\": \"instance smoothSheaf.coeFun (U : (Opens (TopCat.of M))ᵒᵖ) :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"104\", \"text\": \"/-- The object of `smoothSheaf IM I M N` for the open set `U` in `M` is\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"107\", \"text\": \"lemma smoothSheaf.obj_eq (U : (Opens (TopCat.of M))ᵒᵖ) :\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"108\", \"text\": \"    (smoothSheaf IM I M N).presheaf.obj U = C^∞⟮IM, (unop U : Opens M); I, N⟯ := rfl\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"125\", \"text\": \"def smoothSheaf.evalAt (x : TopCat.of M) (U : OpenNhds x)\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Module/Ball/Homeomorph.lean\", \"line\": \"121\", \"text\": \"/-- If `r > 0`, then `OpenPartialHomeomorph.univBall c r` is a smooth open partial homeomorphism\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ContMDiff/Atlas.lean\", \"line\": \"341\", \"text\": \"/-- This is a smooth analogue of `OpenPartialHomeomorph.continuousWithinAt_writtenInExtend_iff`. -/\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Riemannian/Basic.lean\", \"line\": \"447\", \"text\": \"    γ_smooth.continuous.continuousWithinAt <| mem_of_superset (v_open.mem_nhds this) hv\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/BumpFunction.lean\", \"line\": \"218\", \"text\": \"/-- If `f` is a smooth bump function and `s` closed subset of the support of `f` (i.e., of the open\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/ContDiff/Operations.lean\", \"line\": \"985\", \"text\": \"because the set of points of `C^∞`-smoothness of `f` is not guaranteed to be open. -/\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/SmoothEmbedding.lean\", \"line\": \"23\", \"text\": \"* `IsSmoothEmbedding.of_opens`: the inclusion of an open subset `s → M` of a smooth manifold\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/PartitionOfUnity.lean\", \"line\": \"283\", \"text\": \"/-- If `f` is a smooth partition of unity on a set `s : Set M` subordinate to a family of open sets\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/PartitionOfUnity.lean\", \"line\": \"607\", \"text\": \"  -- Obtain a smooth partition of unity subordinate to this open cover.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"29\", \"text\": \"  it is standard smooth on a standard open containing `p`.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"153\", \"text\": \"/-- If `S` is `R`-smooth, there exists a cover by basic opens `D(sᵢ)` such that\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"24\", \"text\": \"- `Algebra.isOpen_smoothLocus` : The smooth locus is open.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"43\", \"text\": \"See `Algebra.basicOpen_subset_smoothLocus_iff_smooth` and `Algebra.isOpen_smoothLocus`.\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"124\", \"text\": \"lemma isOpen_smoothLocus [FinitePresentation R A] : IsOpen (smoothLocus R A) := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth morphism of algebraic spaces is open and flatness and local finite presentation of a representable morphism of algebraic stacks descend after a smooth surjective morphism on its source",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the assertion for algebraic spaces or algebraic stacks and their etale local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?stack|algebraic.?space|of_comp_of_flat_of_surjective",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphisms or module flatness, not representable morphisms of algebraic stacks; base-change descent is not source-precomposition descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness and local finite presentation of representable morphisms of algebraic stacks descend along a smooth surjective cover of the source",
+   "results": "OK 8 hit(s): AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, Algebra.IsStandardSmooth.finitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphisms or module flatness, not representable morphisms of algebraic stacks; base-change descent is not source-precomposition descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"Surjective\"",
+   "results": "OK 12 hit(s): Module.FaithfullyFlat.lTensor_surjective_iff_surjective, PrimeSpectrum.comap_surjective_of_faithfullyFlat, Module.FaithfullyFlat.of_comap_surjective, Ideal.comap_surjective_of_faithfullyFlat, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, AlgebraicGeometry.Flat.epi_of_flat_of_surjective, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphisms or module flatness, not representable morphisms of algebraic stacks; base-change descent is not source-precomposition descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness and local finite presentation of representable morphisms of algebraic stacks descend along a smooth surjective cover of the source",
+   "results": "OK 8 hit(s): AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphisms or module flatness, not representable morphisms of algebraic stacks; base-change descent is not source-precomposition descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposing a representable stack morphism with a smooth epimorphism detects flatness or being locally finitely presented",
+   "results": "OK 8 hit(s): AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.Flat, CategoryTheory.compatiblePreservingOfFlat, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphisms or module flatness, not representable morphisms of algebraic stacks; base-change descent is not source-precomposition descent."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSmooth|LocallyOfFinitePresentation|DescendsAlong",
+   "results": "OK 5 hit(s): 20, 22, 24, 26, 28",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern scheme morphisms or module flatness, not representable morphisms of algebraic stacks; base-change descent is not source-precomposition descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-fibre-regular-slice-flat",
+  "date": "2026-10-22",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Fibrewise regular equations cut a flat slice of a stack presentation. Supporting input: Flatness and local finite presentation descend through a smooth source cover.",
+   "via": [
+    "lem-sfb-stack-fibre-regular-slice-flat",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-cover-flat-lfp-descent",
+  "worker": "stage1",
+  "summary": "Reduced the representable stack assertion explicitly to scheme source descent through two etale charts. Reused the existing chart calculus, presentation criterion, scheme flat source descent and fppf source locality of local finite presentation; no new nodes. Checked the two clauses independently and used no quasi-compactness. The statement is unchanged.",
+  "blueprint": "Supporting input in the inherited from.place: det-thm-sf-ctf-stability-direct-images proof (3), through the stable-curve moduli and regular-slice prerequisites. The latest blueprint direct-images proof (3) has no standalone equivalent of this descent lemma; same_as is empty.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-lfp-fppf-source-locality",
+    "why": "Generic scheme-source descent for local finite presentation, used after chart reduction; no node of this unit gives this scheme theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-lfp-fppf-source-locality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-638335e42",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-638335e42 (reviewer sub-agent of L); spot-checked: Read Stacks 06M2 (stacks-properties lemma-check-property-after-precomposing) and spaces-descent lemma-transfer-from-schemes, 06ET and 06EV. The item statement is unchanged from the base and agrees with them hypothesis by hypothesis; it is true. The delivery creates no new nodes. Step 1 matches the proof of 06M2: Y=B×_C T is a space because g is representable; X≃Y×_B A is a space by the representable-pullback node (Tag 0300); the base change of h is smooth and surjective by the chart calculus node. Step 2 builds the charts U→Y and V→W=X×_Y U as in transfer-from-schemes. Smoothness of v in the scheme sense comes from the presentation criterion's scheme comparison together with the etale-locality node. Surjectivity of v comes from the calculus node's chart test with the identity chart. That V→T has P follows from etale composites and composition stability. Step 3 uses flat source descent (v flat and surjective) and 036N with the singleton family; neither assumes quasi-compactness, and the flat and lfp branches stay independent. Step 4 applies clause (2) of the presentation criterion with b=id_T. Edge cases: empty schemes are allowed, no finite subcover is needed, and surjectivity is used where it is necessary. The DAG grep for 06M2, 06ET, 06EV, 036K and 036N found no duplicate. No SGA. Batch 5: def-trf-algebraic-space, reached through the chart calculus node, is only the general definition of an algebraic space; lem-trf-lfp-fppf-source-locality is generic Stacks 036N. Neither is an assumed statement or part of the proof of the trace formula or Poincare duality, so both are accepted. The tool_use of the 036N node from unit sk-i-curve-zero is accepted because no node of this unit gives it. Maintainer note: the base item's inherited blueprint.from.node is null, which is not a fault of this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothCoverFlatLfpDescent",
+  "declaration": "CategoryTheory.smooth_cover_flat_lfp_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCoverFlatLfpDescent.lean",
+  "statement": "theorem smooth_cover_flat_lfp_descent {S : Scheme.{u}} {A : BasedCategory.{v₁, w₁} (Over S)} {B : BasedCategory.{v₂, w₂} (Over S)} {C : BasedCategory.{v₃, w₃} (Over S)} (hA : IsAlgebraicModuliStack A) (hB : IsAlgebraicModuliStack B) (hC : IsAlgebraicModuliStack C) (h : BasedFunctor A B) (g : BasedFunctor B C) (hh : IsRepresentableByAlgebraicSpaces h) (hg : IsRepresentableByAlgebraicSpaces g) (hsmooth : ModuliSpaceTest @Smooth h) (hsurj : IsSurjectiveModuliMap h) : (ModuliSpaceTest @Flat (h.comp g) → ModuliSpaceTest @Flat g) ∧ (ModuliSpaceTest @LocallyOfFinitePresentation (h.comp g) → ModuliSpaceTest @LocallyOfFinitePresentation g)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair of returned head 21b9728fb2f8: stmt_deps cites def-sfb-surjective-moduli-map, the landed existing:true owner of the plain IsSurjectiveModuliMap predicate, instead of lem-sfb-stack-chartwise-smooth-etale-calculus. The theorem remains in proof_deps. The other two added definition nodes own IsAlgebraicModuliStack and ModuliSpaceTest. Lean module and mathematical statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27133f06d",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 21b9728fb2f8: stmt_deps now cite def-sfb-surjective-moduli-map (landed existing:true def owner of plain def IsSurjectiveModuliMap) instead of theorem lem-sfb-stack-chartwise-smooth-etale-calculus, which stays in proof_deps; other added stmt_deps def-sfb-algebraic-moduli-stack and def-sfb-dm-stack-morphism-properties are landed def owners. Node diff vs live: only lean and appended def stmt_deps. Lean file byte-identical to returned head; independently checked against Stacks 06M2 (stacks-properties.tex:528) with 06ET/06EV: S, A/B/C IsAlgebraicModuliStack, h/g IsRepresentableByAlgebraicSpaces, ModuliSpaceTest @Smooth h, IsSurjectiveModuliMap h, two independent implications Flat/LocallyOfFinitePresentation for h.comp g; read ModuliSpaceTest/IsSurjectiveModuliMap/IsAlgebraicModuliStack definitions; no qc, independent stack universes; edge cases (empty B, empty A excluded, identities, non-qc cover) fine. lean.statement verbatim; docstrings with source+blueprint+4 proof steps; sorry only; no defs; private imports exist on live; report sections present. No compile (no file changed)."
+ }
+}

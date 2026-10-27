@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Put $N=B\\otimes_A M$. Apply [lem-trf-projective-countable-decomposition] over $B$ to obtain $N\\cong\\bigoplus_{i\\in I}Q_i$, with every $Q_i$ countably generated and projective. Regard this as a fixed coordinate decomposition of $N$. By [lem-weil-pbc-well-ordering-theorem], well-order the underlying set of $M$, and write its elements as $(e_\\alpha)_{\\alpha<\\kappa}$ in that order, where $\\kappa$ is the order type. We construct a continuous increasing filtration $(M_\\alpha)_{\\alpha\\le\\kappa}$ of $M$ such that $B\\otimes_A M_\\alpha$, embedded in $N$, is a coordinate sum $\\bigoplus_{i\\in I_\\alpha}Q_i$. Every successor quotient will be countably generated projective. The construction and its verification are given in Steps 3--8.",
+   "text": "Put $N=B\\otimes_A M$. By [lem-trf-projective-countable-decomposition], choose a set $I$, countably generated projective $B$-modules $Q_i$ and $\\theta:N\\cong\\bigoplus_{i\\in I}Q_i$ (invert the displayed isomorphism there). By [lem-weil-pbc-well-ordering-theorem], well-order the underlying set of $M$; let $\\kappa$ be its order type.",
    "uses": [
     "lem-trf-projective-countable-decomposition",
     "lem-weil-pbc-well-ordering-theorem"
@@ -26,98 +26,43 @@
    }
   },
   {
-   "text": "We record the tensor identifications used in the construction. Faithful flatness makes $B$ flat over $A$ by [def-weil-pbc-faithfully-flat-ring-map]. Thus [lem-weil-pbc-flat-tensor-exact] identifies $B\\otimes_A U$ with a submodule of $N$ for every $A$-submodule $U\\subseteq M$. Applying [lem-weil-pbc-tensor-right-exact] to $U\\to M\\to M/U\\to0$ identifies $B\\otimes_A(M/U)$ with $N/(B\\otimes_A U)$, by $b\\otimes(m+U)\\mapsto(b\\otimes m)+(B\\otimes_A U)$. The same two results apply to any submodule of $M/U$ and to $0\\to U\\to V\\to V/U\\to0$ for $U\\subseteq V\\subseteq M$. In particular, if $B\\otimes_A U=\\bigoplus_{i\\in H}Q_i$, projection to the remaining coordinates gives $B\\otimes_A(M/U)\\cong\\bigoplus_{i\\notin H}Q_i$. Its kernel consists exactly of families supported in $H$, and every remaining-coordinate family lifts by inserting zeros.",
+   "text": "For $H\\subseteq I$, let $D_H$ consist of families supported in $H$ [def-trf-coordinate-submodule], and put $T(U)=\\theta(\\operatorname{im}(B\\otimes_A U\\to N))$. Apply [lem-trf-coordinate-projective-successor] with the original faithfully flat map, the countably generated projective factors of step 1, and each $U,H,x$ with $T(U)=D_H$ and $x\\notin U$. It gives $V\\supseteq U$ containing $x$, with countably generated projective quotient $V/U$ and $T(V)=D_{H\\cup J}$ for $J\\subseteq I\\setminus H$. Taking $H^{+}=H\\cup J\\supseteq H$ verifies the successor property in step 3.",
    "uses": [
-    "def-weil-pbc-faithfully-flat-ring-map",
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-tensor-right-exact"
+    "def-trf-coordinate-submodule",
+    "lem-trf-coordinate-projective-successor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05A9, successor paragraph: flatness and the quotient after tensoring; Tags 00HB, 00HD and 00DF"
+    "place": "Tag 05A9, theorem-ffdescent-projectivity, successor paragraph"
    }
   },
   {
-   "text": "Start with $M_0=0$ and $I_0=\\varnothing$. At a limit ordinal $\\lambda\\le\\kappa$ put $M_\\lambda=\\bigcup_{\\alpha<\\lambda}M_\\alpha$. At a successor stage where $M_\\alpha=M$, keep $M_{\\alpha+1}=M$ and $I_{\\alpha+1}=I_\\alpha$, and take the successor quotient to be zero. Otherwise choose the least element $x\\in M\\setminus M_\\alpha$ in the fixed well-order. Steps 5--7 give the successor construction. These are choices from sets of submodules and linear maps, so transfinite recursion on the set ordinal $\\kappa+1$ constructs the filtration once the successor and limit assertions are verified.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05A9, initial, limit and successor clauses of the transfinite recursion"
-   }
-  },
-  {
-   "text": "At a limit $\\lambda$, each element of $B\\otimes_A M_\\lambda$ is a finite sum $\\sum_r b_r\\otimes m_r$, with all the finitely many $m_r$ in some common $M_\\alpha$, $\\alpha<\\lambda$. This uses the finite-tensor-expression assertion of [def-weil-pbc-module-tensor-product]. Therefore its image in $N$ is exactly the union of the earlier tensor images. The coordinate submodules are increasing. We may discard any indices with $Q_i=0$ at the start, so their indexing subsets are increasing as well. Their union is exactly the coordinate sum indexed by $I_\\lambda=\\bigcup_{\\alpha<\\lambda}I_\\alpha$: a family has finite support, so all its support indices lie in one earlier $I_\\alpha$. This verifies the required invariant at limits, without an additional theorem on tensor products and colimits.",
+   "text": "Apply [lem-trf-coordinate-projective-exhaustion] to $\\theta$, the well-order from step 1 and the successor property verified in step 2. Obtain an increasing filtration $(M_\\alpha)_{\\alpha\\leq\\kappa}$ with $M_0=0$, $M_\\kappa=M$, unions at every nonzero limit, and countably generated projective quotients $P_\\alpha=M_{\\alpha+1}/M_\\alpha$ for all $\\alpha<\\kappa$. This includes zero quotients at any constant stages.",
    "uses": [
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05A9, limit-ordinal paragraph"
-   }
-  },
-  {
-   "text": "At a nonconstant successor stage, put $L=M/M_\\alpha$ and let $\\bar x\\ne0$ be the image of the least missing element. Step 2 gives $B\\otimes_A L\\cong\\bigoplus_{i\\notin I_\\alpha}Q_i$. The cyclic submodule $C=A\\bar x\\subseteq L$ is countably generated. Apply [lem-trf-countable-submodule-adapted-to-base-change-sum] to this decomposition and $C$. It gives a countably generated $P\\subseteq L$ containing $\\bar x$ and $J\\subseteq I\\setminus I_\\alpha$, whose tensor image is $\\bigoplus_{j\\in J}Q_j$. Flat tensor exactness in Step 2 makes $B\\otimes_A P\\to B\\otimes_A L$ injective, so $B\\otimes_A P$ itself is identified with that coordinate sum, not merely a quotient of it.",
-   "uses": [
-    "lem-trf-countable-submodule-adapted-to-base-change-sum"
+    "lem-trf-coordinate-projective-exhaustion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05A9, successor paragraph, invoking Tag 05A8, lemma-adapted-submodule"
+    "place": "Tag 05A9, theorem-ffdescent-projectivity, recursion, limit and exhaustion paragraphs"
    }
   },
   {
-   "text": "The module $B\\otimes_A P$ is projective: its inclusion in $N$ and the coordinate projection back to the $J$-coordinates are split maps, so [lem-weil-pbc-projective-direct-summand] applies to the projective $B$-module $N$. If $(p_n)$ is a countable generating family of $P$, the elements $1\\otimes p_n$ generate $B\\otimes_A P$ over $B$: expand each pure tensor $b\\otimes p$ after writing $p$ as a finite $A$-linear combination of the $p_n$. The tensor-product presentation [def-weil-pbc-module-tensor-product] justifies this expansion and that pure tensors generate. Consequently [lem-trf-countable-projective-faithfully-flat-descent], for this same faithfully flat map $A\\to B$ and the module $P$, gives that $P$ is projective over $A$.",
+   "text": "For every $\\alpha<\\kappa$, the quotient sequence $0\\to M_\\alpha\\xrightarrow{\\iota_\\alpha}M_{\\alpha+1}\\to P_\\alpha\\to0$ is short exact by [def-weil-pbc-quotient-module]. Its quotient is projective by step 3, so [lem-weil-pbc-ses-projective-quotient-splits] supplies $r_\\alpha:M_{\\alpha+1}\\to M_\\alpha$ with $r_\\alpha\\circ\\iota_\\alpha=\\mathrm{id}_{M_\\alpha}$. Apply [lem-trf-split-transfinite-module-filtration] with $R=A$, $X=M$, $X_\\alpha=M_\\alpha$, and the set ordinal $\\kappa$. Step 3 supplies the increasing family, zero initial stage, endpoint and limit unions, and these maps supply every successor retraction. Thus $M\\cong\\bigoplus_{\\alpha<\\kappa}P_\\alpha$.",
    "uses": [
-    "lem-weil-pbc-projective-direct-summand",
-    "def-weil-pbc-module-tensor-product",
-    "lem-trf-countable-projective-faithfully-flat-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05A9, successor paragraph, invoking Tag 05A6, lemma-ffdescent-countable-projectivity"
-   }
-  },
-  {
-   "text": "Define $M_{\\alpha+1}$ as the inverse image of $P$ under $M\\to L$. Thus $M_{\\alpha+1}/M_\\alpha\\cong P$ and $x\\in M_{\\alpha+1}$. The quotient map restricts to a surjection $M_{\\alpha+1}\\to P$ with kernel $M_\\alpha$. Step 2, applied to this sequence, says that the image of $B\\otimes_A M_{\\alpha+1}$ in $N$ maps onto the $J$-coordinate sum in $N/(B\\otimes_A M_\\alpha)$, and has kernel $B\\otimes_A M_\\alpha$. It is therefore precisely the inverse image of that sum, namely $\\bigoplus_{i\\in I_\\alpha\\cup J}Q_i$: lift a desired quotient element to the image and subtract; the difference lies in the already contained kernel. This establishes the successor invariant. Because $P$ is projective by Step 6, [lem-weil-pbc-ses-projective-quotient-splits] gives a section $s_\\alpha:P\\to M_{\\alpha+1}$. Put $F_\\alpha=\\operatorname{im}(s_\\alpha)$; then $M_{\\alpha+1}=M_\\alpha\\oplus F_\\alpha$, and $F_\\alpha\\cong P$ is projective by [lem-weil-pbc-projective-direct-summand]. At a constant stage set $F_\\alpha=0$, also projective by the lifting definition.",
-   "uses": [
+    "def-weil-pbc-quotient-module",
     "lem-weil-pbc-ses-projective-quotient-splits",
-    "lem-weil-pbc-projective-direct-summand",
-    "def-weil-pbc-projective-module"
+    "lem-trf-split-transfinite-module-filtration"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05A9, successor paragraph: preimage, quotient and splitting"
+    "place": "Tag 05A9, theorem-ffdescent-projectivity, successor splitting and final direct-sum decomposition"
    }
   },
   {
-   "text": "The filtration exhausts $M$ at stage $\\kappa$. Indeed, transfinite induction proves that $e_\\beta\\in M_\\alpha$ whenever $\\beta<\\alpha\\le\\kappa$. At a successor stage all earlier elements are already present. If $e_\\alpha$ is missing, it is the least missing element and Step 7 adds it; if it is present there is nothing to prove for it. At a limit stage the claim follows from the union definition. Thus every element $e_\\beta$ is in $M_{\\beta+1}\\subseteq M_\\kappa$, and $M_\\kappa=M$. This also shows that no recursion over a proper class of ordinals is needed.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05A9, final paragraph: exhaustion of M by the least-missing-element construction"
-   }
-  },
-  {
-   "text": "The chosen complements give $M\\cong\\bigoplus_{\\alpha<\\kappa}F_\\alpha$. To verify this, use transfinite induction on $\\gamma\\le\\kappa$ for the assertion that the addition map $\\bigoplus_{\\alpha<\\gamma}F_\\alpha\\to M_\\gamma$ is an isomorphism. It holds at $0$. At a successor it follows by adjoining the split complement from Step 7. At a limit, every element belongs to an earlier $M_\\delta$, hence has a finite expansion in the earlier complements; a finite relation among complements has all its indices below a common $\\delta<\\gamma$, so its coefficients vanish by the earlier-stage injectivity. These are exactly surjectivity and injectivity for the direct sum of [def-weil-pbc-direct-sum-modules]. Apply the assertion at $\\gamma=\\kappa$ and use Step 8.",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05A9, final displayed direct-sum decomposition (Kaplansky devissage)"
-   }
-  },
-  {
-   "text": "Each $F_\\alpha$ is projective by Step 7, so [lem-weil-pbc-projective-direct-sum-family] makes $\\bigoplus_{\\alpha<\\kappa}F_\\alpha$ projective. Transport projectivity along the isomorphism of Step 9 using clause (2) of [lem-weil-pbc-projective-direct-summand]. Hence $M$ is projective over $A$, as asserted.",
+   "text": "Every $P_\\alpha$ is projective, so [lem-weil-pbc-projective-direct-sum-family] makes $\\bigoplus_{\\alpha<\\kappa}P_\\alpha$ projective. Clause (2) of [lem-weil-pbc-projective-direct-summand], applied to the isomorphism in step 4, gives projectivity of $M$.",
    "uses": [
     "lem-weil-pbc-projective-direct-sum-family",
     "lem-weil-pbc-projective-direct-summand"
@@ -132,22 +77,19 @@
  "proof_deps": [
   "lem-trf-projective-countable-decomposition",
   "lem-weil-pbc-well-ordering-theorem",
-  "def-weil-pbc-faithfully-flat-ring-map",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-tensor-right-exact",
-  "def-weil-pbc-module-tensor-product",
-  "def-weil-pbc-direct-sum-modules",
-  "lem-trf-countable-submodule-adapted-to-base-change-sum",
-  "lem-weil-pbc-projective-direct-summand",
-  "lem-trf-countable-projective-faithfully-flat-descent",
+  "def-trf-coordinate-submodule",
+  "lem-trf-coordinate-projective-successor",
+  "lem-trf-coordinate-projective-exhaustion",
+  "def-weil-pbc-quotient-module",
   "lem-weil-pbc-ses-projective-quotient-splits",
-  "def-weil-pbc-projective-module",
-  "lem-weil-pbc-projective-direct-sum-family"
+  "lem-trf-split-transfinite-module-filtration",
+  "lem-weil-pbc-projective-direct-sum-family",
+  "lem-weil-pbc-projective-direct-summand"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 05A9, theorem-ffdescent-projectivity, using Tags 058Y, 05A8 and 05A6; the transfinite construction and final decomposition are written out"
+  "place": "Tag 05A9, theorem-ffdescent-projectivity, successor and transfinite construction separated into two tasks; Tag 058V for the existing split-filtration decomposition"
  },
  "mathlib_searches": [
   {
@@ -261,19 +203,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-local-projective-faithfully-flat-descent",
   "worker": "stage1",
-  "summary": "Retained the full arbitrary-module statement of Stacks 05A9. Reused Kaplansky decomposition and the existing Mathlib leaves for tensor exactness, well-ordering, projective summands, split sequences and projective direct sums. Added only the two statement-only 05A6/05A8 inputs. Wrote the transfinite recursion, quotient and coordinate-image checks, countability, exhaustion and direct-sum isomorphism explicitly. No Lean writing or compilation.",
-  "blueprint": "Realizes the final projectivity descent used by lem-trf-local-noetherian-fibres-projective (05FS), within the existing from.place semistable-alteration/flattening chain below lem-trf-local-term-locality. The three-level route and ancestor are retained."
+  "summary": "Repair of the 7013-character proof: two new statement-only tasks separate the coordinate/projective successor enlargement from the set-sized recursion, coordinate limit verification and exhaustion. Reused the existing split transfinite filtration theorem for the final direct sum. All ten old arguments are mapped and retained verbatim in report.md. Item statement and Lean metadata unchanged. Landing-return repair: compared the retained returned baseline with the current shared DAG, reread every assembly citation and new-node definition dependency, and rebased through deliver.py. Made the coordinate notation and image map explicit in assembly step 2 and added its definition citation. Retained the released stage-1 repair order, the two statement-only tasks and all current maintainer/Lean fields. Final current-base review: made the successor retractions and their identity explicit in assembly step 4; all citation quotations checked against current statements. Resumed landing-return repair on 2026-10-23: reread every current assembly citation, preserved the two new statements and logged searches, and made the faithful-flat/factor hypotheses in step 2 and all substitutions in the split-filtration application of step 4 explicit. Recorded the newly present countable-coordinate exhaustion result as distinct from the ordinal tensor-image filtration.",
+  "blueprint": "Retains the existing semistable-alteration/flattening projectivity-descent route below lem-trf-local-term-locality. The two refinements serve the 05A9 subargument of the existing from.place; no change to the unit or chapter route."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q96-d161447fb",
-  "group": "Q96",
+  "reviewer": "NT-cc-Q101-3c174d3fd",
+  "group": "Q101",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-d161447fb (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited DAG statements, unit/chapter route, and Stacks Tags 05A6, 05A8, 05A9 in full. Verified hypotheses, tensor maps, projective descent steps, edge cases, duplicate searches, Mathlib searches, and route constraints. Wrote review.md; no repairs or tool-use exceptions required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-3c174d3fd (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and Stacks algebra.tex in full (05A9 at 22462-22513, 05A6/05A8 at 22407-22460, 058V at 20405-20460). The item statement is exactly 05A9. Both new nodes are byte-identical to those in the three earlier heads (748af46a, 6335fec6, c730d27d); against c730d27d only the wording of assembly steps 2 and 4 changed (explicit substitutions for the successor and 058V applications). Statement, stmt_deps and lean record are unchanged. Assembly is 2233 characters. Step 1: the countable decomposition gives projective, countably generated factors; the well-order is a Mathlib leaf. Step 2: the successor node's hypotheses (faithful flatness, countably generated projective Q_i, T(U)=D_H, x not in U) hold; H'=H∪J gives the exhaustion hypothesis. Step 3: exhaustion gives M_0=0, M_kappa=M, limit unions and countably generated projective quotients. Step 4: the ses-splits node gives a retraction r∘i=id, which is exactly the hypothesis of the 058V split-filtration node. Step 5: the direct-sum-family node and summand clause (2) finish. All ten old steps are accounted for: old 2/5/6 and the invariant half of old 7 are in the successor node (flat quotient identification, 05A8 on A·x̄, B⊗P a projective summand, 05A6, preimage V). Old 3/4/8 are in the exhaustion node (recursion, finite-tensor and finite-support limits, least-missing exhaustion). Old 9 is the 058V node and old 10 is step 5; nothing was summarised. I checked both new statements myself: the successor statement and its 'moreover' clause hold, and the source's slip Im(P⊗S→M⊗S) is corrected to the quotient. The exhaustion statement holds without flatness. Edge cases M=0, I empty, Q_i=0, constant stages, A=B and the zero ring all behave. The nodes are statement-only with six logged searches each and correct created/blueprint.from fields. rg -L over the DAG finds no duplicate (countable-coordinate-closure, countable-successor-coordinate-exhaustion, Kaplansky summand and the ML/05A6 nodes all differ). No cycle, all in unit sk-i-curve-zero, no tool_uses, no SGA. No fixes. Note for the maintainer: this is the fourth PASS of the same split; the landing returns concern promoting the side completion, not this delivery."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -294,5 +236,16 @@
   "existing": false,
   "note": "Section 1(B) interface repair: the published source was a legacy non-module file, so a module-system consumer could not import its recorded theorem (Lean: cannot import non-`module` Sheaf.TraceFormula.LocalProjectiveFaithfullyFlatDescent from `module`). Preserve the declaration, signature, docstring and sorry proof exactly; add the module header, public statement-dependency imports, and exposed public section so the same theorem can be imported by the item. No mathematical statement changes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

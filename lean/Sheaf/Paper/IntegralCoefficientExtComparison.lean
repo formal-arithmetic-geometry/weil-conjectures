@@ -10,7 +10,7 @@ public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.IntegralDerivedCoefficientData
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels

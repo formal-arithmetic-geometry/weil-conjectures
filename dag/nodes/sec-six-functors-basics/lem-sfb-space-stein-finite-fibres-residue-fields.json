@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-space-stein-finite-fibres-residue-fields",
+ "kind": "statement",
+ "title": "Finiteness of Stein fibres and their residue fields for algebraic spaces",
+ "statement": "Let $A$ be a commutative ring, $T=\\operatorname{Spec}A$ a scheme [def-pc-scheme, def-weil-affine-spectrum], and $f:X\\to T$ a proper morphism from an algebraic space [def-trf-algebraic-space, def-sfb-space-morphism-properties]. Put $B=\\Gamma(X_{\\mathrm{et}},\\mathcal O_X)$, the ring of global sections of the small etale structure sheaf, with its $A$-algebra structure given by pullback, and let $\\pi:\\operatorname{Spec}B\\to T$ be the induced scheme map. For every $t\\in T$, the point inverse image $\\pi^{-1}(\\{t\\})$ is finite. For every $z$ in that inverse image the residue field extension $\\kappa(z)/\\kappa(t)$ is finite-dimensional [def-weil-residue-field, def-pc-field-extension]. Point spaces have the atlas topology [def-a1-space-point-topology]. No Noetherian hypothesis on $A$, flatness, finite-presentation or reducedness hypothesis on $f$, or scheme-representability hypothesis on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0E1C, lemma-stein-universally-closed-residue-fields, specialized to proper f; the construction is Tag 0A19, lemma-stein-universally-closed."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "def-a1-space-point-topology",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-affine-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-stein-factorization-affine] to the given proper $f$. Its evaluation map $q:X\\to Z=\\operatorname{Spec}B$ satisfies $f=\\pi q$, its ring map $A\\to B$ is integral, and every fibre over $\\operatorname{Spec}\\kappa(z)\\to Z$ is nonempty. In particular $|q|$ is surjective: a field-valued point of this fibre represents a point of $X$ mapping to $z$. Only these clauses of the factorization node are used; geometric connectedness is not needed.",
+   "uses": [
+    "lem-sfb-space-stein-factorization-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1C, lemma-stein-universally-closed-residue-fields, first two sentences; integral surjective factor from Tag 0A19, lemma-stein-universally-closed (available in the existing stronger Tag 0A1C node)."
+   }
+  },
+  {
+   "text": "Fix $t\\in T$, put $k=\\kappa(t)$ and $C=\\pi^{-1}(\\{t\\})\\subseteq|Z|$. The points of $Z$ are primes of $B$, and $\\pi$ sends a prime to its inverse image in $A$ [def-weil-affine-spectrum]. By [lem-weil-pbc-integral-incomparability], distinct primes in $C$ cannot contain each other. In the Zariski topology a prime $\\mathfrak q\\,\\!{}^\\prime$ lies in $\\overline{\\{\\mathfrak q\\}}=V(\\mathfrak q)$ exactly when $\\mathfrak q\\subseteq\\mathfrak q\\,\\!{}^\\prime$. Consequently $V(\\mathfrak q)\\cap C=\\{\\mathfrak q\\}$ for every $\\mathfrak q\\in C$; in particular there are no distinct points of $C$ related by specialization.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1C, first sentence of proof; Algebra Tag 00GT, lemma-integral-no-inclusion."
+   }
+  },
+  {
+   "text": "Form $X_t=X\\times_T\\operatorname{Spec}k$, which is an algebraic space by [lem-trf-space-fibre-products-etale-covers]. Properness includes finite type [def-sfb-space-morphism-properties]. Base-change stability in [lem-sfb-stack-finite-type-calculus], whose statement explicitly agrees with the ordinary algebraic-space notion, makes $X_t\\to\\operatorname{Spec}k$ finite type. Its quasi-compactness, tested on the quasi-compact scheme $\\operatorname{Spec}k$, says that $X_t$ admits a surjective etale map from a quasi-compact scheme; by the last clause of [lem-a1-space-finite-affine-subatlas] its point space $|X_t|$ is quasi-compact. The map $X_t\\to X\\xrightarrow q Z$ has image exactly $C$: one inclusion follows from $f=\\pi q$; for the other, choose $x\\in|X|$ mapping to $z\\in C$ by step 1, and apply the point-fibre-product surjectivity of [lem-a1-space-point-open-calculus] to $X\\to T\\leftarrow\\operatorname{Spec}k$. It supplies a point of $X_t$ projecting to $x$, hence mapping to $z$. Every point map used here is continuous by the same node.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-a1-space-point-open-calculus",
+    "lem-a1-space-finite-affine-subatlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1C, proof: surjection from the fibre and its finite type; Properties of Spaces Tag 03H4, lemma-points-cartesian; Stacks Morphisms Tag 06FU, lemma-base-change-finite-type."
+   }
+  },
+  {
+   "text": "Choose a scheme atlas of $X_t$ as in [def-trf-algebraic-space]. Refine it to a disjoint union of affine schemes by [lem-a1-space-atlas-open-refinement-pullback]. Apply [lem-a1-space-finite-affine-subatlas] to the quasi-compact point space from step 3. This gives finitely many affine schemes $U_j=\\operatorname{Spec}R_j$ whose coproduct maps to $X_t$ by a representable surjective etale map; by [lem-a1-space-point-open-calculus] this map is surjective on points, so the maps $|U_j|\\to|X_t|$ are jointly surjective. Composing with $X_t\\to Z$ gives scheme morphisms $h_j:U_j\\to Z$, since a map between representable sheaves is the corresponding scheme map. Their point images cover $C$, by step 3. The chart test of [def-sfb-space-morphism-properties], with target chart the identity of $\\operatorname{Spec}k$, makes each $U_j\\to\\operatorname{Spec}k$ locally of finite type.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-atlas-open-refinement-pullback",
+    "lem-a1-space-finite-affine-subatlas",
+    "def-sfb-space-morphism-properties",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1C, Noetherian fibre sentence, expanded on finite affine charts; Properties of Spaces Tags 03FX, lemma-cover-by-union-affines, and 03E4, lemma-quasi-compact-space."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-lft-affine-pairs], $R_j$ is a finitely generated $k$-algebra. The field $k$ is Noetherian: a nonzero ideal contains an invertible element and hence $1$, so its only ideals are $(0)$ and $(1)$. Therefore [lem-weil-pbc-finite-type-algebra-noetherian] makes $R_j$ Noetherian. The single affine open $U_j$ satisfies [pqf-def-locnoeth], and $U_j$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]; thus it is a Noetherian scheme. Applying [lem-sc-noetherian-closed-subset-finite-components] to the closed subset $E=U_j$ writes $U_j$ as a finite union of irreducible components. By [lem-sc-scheme-sober] each nonempty component has a generic point $\\eta_{j,a}$. There are only finitely many such generic points over all $j$, and every $u\\in U_j$ lies in $\\overline{\\{\\eta_{j,a}\\}}$ for at least one $a$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1C, Noetherian fibre sentence and omitted topological argument, expanded via affine charts; Algebra Tag 00FN, lemma-Noetherian-permanence; Properties Tag 0BA8, lemma-Noetherian-irreducible-components; Schemes Tag 01IS, lemma-scheme-sober."
+   }
+  },
+  {
+   "text": "For $z\\in C$, choose $j$ and $u\\in U_j$ with $h_j(u)=z$ (step 4), then choose $\\eta_{j,a}$ specializing to $u$ (step 5). Continuity of the scheme map $h_j$ gives $h_j(u)\\in\\overline{\\{h_j(\\eta_{j,a})\\}}$. Both points belong to $C$, so step 2 forces $z=h_j(\\eta_{j,a})$. Thus $C$ is contained in the image of the finite set of generic points from step 5. The reverse containment follows because each chart maps into $C$. Hence $C$ is finite. This supplies the topological argument omitted in Tag 0E1C: it uses generic points of the scheme charts and never assumes that an arbitrary Noetherian topological space is sober.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1C, proof, sentence “A topological argument (omitted) now shows ...”, explicitly filled using steps 2--5."
+   }
+  },
+  {
+   "text": "Now fix $z\\in C$ and choose a chart $h_j$ whose image contains $z$. Write $\\mathfrak q_z$ for the prime of $B$ corresponding to $z$. The subset $E_j=h_j^{-1}(V(\\mathfrak q_z))$ is closed in $U_j$, and by step 2 and $h_j(U_j)\\subseteq C$ it equals $h_j^{-1}(\\{z\\})$; it is nonempty. By [lem-sfb-finite-type-points-detect-open], choose a finite type point $u\\in E_j$, meaning that $\\operatorname{Spec}\\kappa(u)\\to U_j$ is of finite type. Composing it with the locally finite type scheme map $U_j\\to\\operatorname{Spec}k$ is locally of finite type by clause (e) of [lem-weil-pbc-proper-fp-permanence]. Apply [lem-sfb-finite-type-field-point-characterization] to this composite. Since the target is the one-point scheme $\\operatorname{Spec}k$, it gives $[\\kappa(u):k]<\\infty$. This uses a finite type point in a closed subset of an actual scheme chart, so no assumption about closed rational points or representability of $X$ is made.",
+   "uses": [
+    "lem-sfb-finite-type-points-detect-open",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-field-point-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1C, proof, choice of a finite type point and field-finiteness argument; scheme-chart version using Morphisms Tags 02J4, lemma-enough-finite-type-points, 01T3, lemma-composition-finite-type, and 01TA, lemma-point-finite-type."
+   }
+  },
+  {
+   "text": "The scheme morphism $h_j$ induces an embedding $\\kappa(z)\\hookrightarrow\\kappa(u)$ on residue fields [def-weil-residue-field]. It is an embedding over $k=\\kappa(t)$: the maps $U_j\\to Z\\to T$ and $U_j\\to\\operatorname{Spec}k\\to T$ agree, so their local-ring maps and residue maps agree; the latter factors through the canonical residue map at $t$. Regard $\\kappa(z)$ as a $k$-linear subspace of $\\kappa(u)$. Any $k$-linearly independent family in it remains independent under the injection, hence has size at most $\\dim_k\\kappa(u)$, which is finite by step 7. Therefore $[\\kappa(z):\\kappa(t)]<\\infty$. If $C$ is empty there is no $z$ to treat; if $X$ is empty the atlas and the finite sets above can all be empty. The argument only used Noetherianity of finite type algebras over $k$, and imposed no Noetherian, reducedness, flatness or finite-presentation hypothesis on the original base or morphism.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0E1C, last sentence of proof: the intermediate residue-field extension is finite; linear-independence argument written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-stein-factorization-affine",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-a1-space-point-open-calculus",
+  "def-trf-algebraic-space",
+  "lem-a1-space-atlas-open-refinement-pullback",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-sfb-finite-type-points-detect-open",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-field-point-characterization",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0E1C, lemma-stein-universally-closed-residue-fields; its omitted topological argument is supplied on finite affine charts using Tags 03FX, 03E4, 00FN, 0BA8 and 01IS. The last paragraph is executed on these charts via Tags 02J4 and 01TA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The spectrum of the global sections of a proper algebraic space over an affine scheme has finite fibres with finite residue field extensions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.IsFinite (AlgebraicGeometry.Spec.map f) ↔ (CommRingCat.Hom.hom f).Finite\", \"doc\": \"For commutative rings $R$ and $S$, a ring homomorphism $f : R \\to S$ induces a morphism of schemes $\\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R)$. This morphism is finite if and only if the ring ho\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"finite_fiber\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff_isFinite_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f] : AlgebraicGeometry.LocallyQuasiFinite f ↔ ∀ (x : ↥Y), AlgebraicGeometry.IsFinite (AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField f x)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "stein|globalSections.*[Ff]inite|[Ff]inite.*globalSections",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In the integral Stein factor of a proper morphism of algebraic spaces there are finitely many points over each base point and finite residue extensions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFinite.instFiniteResidueField\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[QuasiFinite R S] (P : Ideal R) [P.IsPrime] (Q : Ideal S) [Q.IsPrime] [Q.LiesOver P] :\\n  Module.Finite P.ResidueField Q.ResidueField\", \"doc\": \"For a quasi-finite algebra $ S $ over a commutative ring $ R $, if $ Q $ is a prime ideal in $ S $ lying over a prime ideal $ P $ in $ R $, then the residue field of $ Q $ is a finite extension of the\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsFinite f] (y : Y) : (f ⁻¹' { y }).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"(p : Ideal R) [p.IsPrime] (P : Ideal S) [P.IsPrime] [P.LiesOver p] [QuasiFiniteAt R P] :\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \"[FormallyUnramified R S] : Module.Finite (ResidueField R) (ResidueField S)\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ (Spec <| .of K)) [IsIntegral X] [UniversallyClosed f] [LocallyOfFiniteType f] : f.appTop.hom.Finite\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For X proper over Spec A and B equal to global functions on X each fibre of Spec B to Spec A is a finite set and its residue fields are finite dimensional",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.SpecMap_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  AlgebraicGeometry.IsFinite (AlgebraicGeometry.Spec.map f) ↔ (CommRingCat.Hom.hom f).Finite\", \"doc\": \"For commutative rings $R$ and $S$, a ring homomorphism $f : R \\to S$ induces a morphism of schemes $\\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R)$. This morphism is finite if and only if the ring ho\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme, ring, or topology results do not state the assertion for algebraic spaces or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "stein|globalSections.*[Ff]inite|[Ff]inite.*globalSections",
+   "results": "{\"t\": \"2026-10-23T22:09:13Z\", \"tool\": \"grep\", \"query\": \"stein|globalSections.*[Ff]inite|[Ff]inite.*globalSections\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits only concern schemes (including integral schemes over fields), or assume the map is already finite/quasi-finite; they do not prove the algebraic-space global-sections statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed quasi separated algebraic space locally of finite type over an affine scheme has a Stein factor with finitely many points and finite residue fields over each base point",
+   "results": "{\"t\": \"2026-10-23T22:09:14Z\", \"tool\": \"leansearch\", \"query\": \"A universally closed quasi separated algebraic space locally of finite type over an affine scheme has a Stein factor with finitely many points and finite residue fields over each base point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\"], \"digest\": \"6e59ff1d5f0ca1d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits only concern schemes (including integral schemes over fields), or assume the map is already finite/quasi-finite; they do not prove the algebraic-space global-sections statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stein\", \"finite\"",
+   "results": "{\"t\": \"2026-10-23T22:09:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"stein\\\", \\\"finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits only concern schemes (including integral schemes over fields), or assume the map is already finite/quasi-finite; they do not prove the algebraic-space global-sections statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper algebraic space X over Spec A, the spectrum of global functions has finite point fibres and finite residue field extensions",
+   "results": "{\"t\": \"2026-10-23T22:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper algebraic space X over Spec A, the spectrum of global functions has finite point fibres and finite residue field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.SpecMap_iff\", \"AlgebraicGeometry.instIsProperOfIsFinite\"], \"digest\": \"c4c7fb6c7df77a03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits only concern schemes (including integral schemes over fields), or assume the map is already finite/quasi-finite; they do not prove the algebraic-space global-sections statement."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_appTop_of_universallyClosed|finite_preimage_singleton|finite_residueField|finiteResidueField",
+   "results": "{\"t\": \"2026-10-23T22:14:41Z\", \"tool\": \"grep\", \"query\": \"finite_appTop_of_universallyClosed|finite_preimage_singleton|finite_residueField|finiteResidueField\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"94ac3bd26fc66065\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits only concern schemes (including integral schemes over fields), or assume the map is already finite/quasi-finite; they do not prove the algebraic-space global-sections statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral affine Stein factor of a proper morphism from an algebraic space has finite fibres even when the base ring is not Noetherian",
+   "results": "{\"t\": \"2026-10-23T22:14:42Z\", \"tool\": \"leanfinder\", \"query\": \"The integral affine Stein factor of a proper morphism from an algebraic space has finite fibres even when the base ring is not Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"ae17d4e12aa8deba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits only concern schemes (including integral schemes over fields), or assume the map is already finite/quasi-finite; they do not prove the algebraic-space global-sections statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-flat-proper-components-lower-semicontinuous",
+  "date": "2026-10-24",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness. Supporting input: Etale neighbourhood carrying one proper smooth fibre component. Further prerequisite: Final shrinking after the proper open has been spread to an etale neighbourhood: Tag 0E1E keeps the number of geometric connected components equal to one. Supporting input: Tag 0E1E proof, first sentence invoking Tag 0E1D; persistence of components without reducedness. Current latest blueprint: sk-thm-sf-ctf-stability-direct-images.proof.md (3), proper direct-image input; retained historical alteration-chain provenance, with this split supplying the Tag 0E1D auxiliary component-persistence input only. Supporting input: Tag 0E1C, lemma-stein-universally-closed-residue-fields, specialized to proper f; the construction is Tag 0A19, lemma-stein-universally-closed.",
+   "via": [
+    "lem-sfb-space-flat-proper-components-lower-semicontinuous",
+    "lem-sfb-space-proper-flat-geometric-component-count",
+    "lem-sfb-smooth-space-proper-component-neighbourhood",
+    "lem-sfb-smooth-group-proper-neutral",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-stein-finite-fibres-residue-fields",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0E1C and supplied the omitted topology argument via a finite affine subatlas, Noetherian chart rings, generic points and integral incomparability. Residue finiteness uses scheme finite type points in a closed inverse image. Statement unchanged; all prerequisites already exist; no new nodes.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), proper direct-image clause; inherited from.place records the historical component-persistence prerequisite through Tag 0E1D. This split supplies its 0E1C finite Stein fibre input. blueprint_refs.py ancestor returns None; retained that null ancestor and the complete inherited provenance. No unit-level route replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of algebraic-space fibre products, used to form X_t; no unit clause supplies this foundational construction."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-fibre-product surjectivity and continuity, used only for the map of fibre points; not a purity or Rankin argument."
+   },
+   {
+    "node": "lem-a1-space-atlas-open-refinement-pullback",
+    "why": "Generic affine refinement of a scheme atlas, independent of the purity application in its filing unit."
+   },
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Generic finite-subcover selection for a quasi-compact algebraic space; this unit contains no duplicate atlas lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-atlas-open-refinement-pullback",
+  "lem-a1-space-finite-affine-subatlas"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-2827d5b98",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-2827d5b98 (reviewer sub-agent of L); spot-checked: Read Stacks 0E1C, 0A19 and 0A1C in spaces-more-morphisms.tex; 0A1C does not use 0E1C, so citing the factorization node here cannot cause a cycle. The item is 0E1C specialized to proper f: proper gives quasi-separated, finite type and universally closed. Statement, stmt_deps and blueprint fields are unchanged against side-live/live, where the item is unsplit. This is a first split with no repair note, so the re-split rule does not apply. No new nodes. I read all 20 cited statements. Step 1 uses factorization-affine only for integrality of A->B and nonempty fibres, not for finiteness, so it does not restate the item. Step 2 is integral incomparability, giving V(q) ∩ C = {q}. Step 3 forms X_t, gets finite type by base change and im = C by point-fibre-product surjectivity. Steps 4-6 supply the omitted topological argument: a finite affine subatlas, Noetherian R_j, components and generic points on scheme charts, then continuity plus step 2. Step 7 takes a finite type point in the closed set h_j^{-1}(z), composes to Spec k and gets [κ(u):k] < ∞. Step 8 embeds κ(z) into κ(u) over k. Edge cases checked: A = 0, X empty, empty fibre, nonreduced or reducible charts, P^1_A. No duplicate: the scheme version lem-weil-pbc-stein-finite-fibres-residue-fields is about schemes only. proof_deps equals the union of the step uses, and the DAG stays acyclic. The four tool_uses (trf fibre products and three a1 atlas/point nodes) are generic foundations; I accept them. Batch-5: none of the five flagged citations reaches the trace formula or Poincaré duality. The fibre-product node is a general construction; the stack-finite-type-calculus and a1 closures reach def-trf-algebraic-space and trf foundational geometry only. All are outside the assumptions. FIX for two missing citations, C3/C4. Step 3 went from finite type to a quasi-compact |X_t| without a citation; it now cites the last clause of lem-a1-space-finite-affine-subatlas. Step 4 claimed point surjectivity of the subatlas without a citation; it now cites lem-a1-space-point-open-calculus. Both nodes were already in proof_deps, which is unchanged. The whole corrected item is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-stein-finite-fibres-residue-fields.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSteinFiniteFibresResidueFields",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.steinAffineProjection_finite_fibres_residueFields",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSteinFiniteFibresResidueFields.lean",
+  "statement": "theorem steinAffineProjection_finite_fibres_residueFields (A : Type u) [CommRing A] (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (f : X ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec (.of A))))) (hf : MapIsProper f) (t : Spec (.of A)) : ((Spec.map (@CommRingCat.ofHom A (RingCat.sectionsSubring X.smallStructureRings.obj) inferInstance (@Subring.toCommRing (∀ T : X.SmallEtaleModelᵒᵖ, X.smallStructureSheaf.obj.obj T) inferInstance (RingCat.sectionsSubring X.smallStructureRings.obj)) (affineGlobalScalar A (Over.mk (specULiftZIsTerminal.from (Spec (.of A)))) (Iso.refl _) X f))) ⁻¹' {t}).Finite ∧ ∀ z : Spec (@CommRingCat.of (RingCat.sectionsSubring X.smallStructureRings.obj) (@Subring.toCommRing (∀ T : X.SmallEtaleModelᵒᵖ, X.smallStructureSheaf.obj.obj T) inferInstance (RingCat.sectionsSubring X.smallStructureRings.obj))), (Spec.map (@CommRingCat.ofHom A (RingCat.sectionsSubring X.smallStructureRings.obj) inferInstance (@Subring.toCommRing (∀ T : X.SmallEtaleModelᵒᵖ, X.smallStructureSheaf.obj.obj T) inferInstance (RingCat.sectionsSubring X.smallStructureRings.obj)) (affineGlobalScalar A (Over.mk (specULiftZIsTerminal.from (Spec (.of A)))) (Iso.refl _) X f))) z = t → (Scheme.Hom.residueFieldMap (Spec.map (@CommRingCat.ofHom A (RingCat.sectionsSubring X.smallStructureRings.obj) inferInstance (@Subring.toCommRing (∀ T : X.SmallEtaleModelᵒᵖ, X.smallStructureSheaf.obj.obj T) inferInstance (RingCat.sectionsSubring X.smallStructureRings.obj)) (affineGlobalScalar A (Over.mk (specULiftZIsTerminal.from (Spec (.of A)))) (Iso.refl _) X f))) z).hom.Finite",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: the statement explicitly uses RingCat.sectionsSubring of the recorded small ringed model, its canonical pointwise commutative structure, and Spec.map of affineGlobalScalar. Only their definition nodes are added to stmt_deps; the factorization theorem remains a proof dependency only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4eddb220",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 8b68d584cac6 fixes that fault: stmt_deps now gains the landed definition nodes def-sfb-space-small-ringed-model and def-sfb-space-affine-global-sections instead of the factorization theorem, which stays in proof_deps only. Node diff against side-live: only the new lean record and the 2 stmt_deps; lean.statement verbatim in the file. B = RingCat.sectionsSubring X.smallStructureRings.obj with an explicit Subring.toCommRing, the same term as the factorization theorem's ring instance; pi = Spec.map of the canonical affineGlobalScalar. MapIsProper gives the source's 0E1C hypotheses with nothing extra. Conclusions (fibre over t finite; for z over t, residueFieldMap finite) match the node in quantifier order. Edge cases A=0, X empty, empty fibres, inseparable or degree-1 extensions, P^n checked; single universe u. No definitions, proof sorry only, source and blueprint docstrings with the 8-step proof present; all Sheaf imports exist; report sections present. No file changed, so no compile."
+ }
+}

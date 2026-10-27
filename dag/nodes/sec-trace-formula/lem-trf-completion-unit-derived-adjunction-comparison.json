@@ -1,0 +1,148 @@
+{
+ "id": "lem-trf-completion-unit-derived-adjunction-comparison",
+ "kind": "statement",
+ "title": "Normalize the derived tensor adjunction for a fixed coefficient calculus",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme W on which l is invertible. Let S be a coefficient derived system calculus with its coherence [lem-coef-derived-system-evaluation-calculus], and let M be any OrdinaryModel [def-trf-completion-unit-models]. Suppose c identifies the termwise limit functor with roosLimitFunctor, with every degreewise projection equal to the corresponding ordinary limit projection. Let eta be a right-derived unit for the fixed coefficientConstantTowerLimit, normalized on every K-injective tower J by eta_J followed by rightDerivedFunctorObjQIso_J equal to Q(c_J inverse). Define systemLimitUnit as Q(M.limitComparison), followed by eta after tower restriction, followed by coefficientConstantTowerLimit applied to the inverse exact-restriction localization factor. This composite is invertible on every K-injective system. There exists a universal left-derived comparison epsilon from Q followed by S.reduction to M.quotient followed by Q, invertible on every flat-term K-flat complex. Its finite evaluation is S.reductionEvaluation followed by the fixed coefficientFiniteReductionModel, including the ordinary M.evaluation and exact-evaluation localization factors. For every chain map a from M.quotient(Q) to I, its transpose under S.adjunction after epsilon equals Q of the ordinary chain transpose followed by systemLimitUnit_I. No ordinary-model existence, tower-unit existence or Roos isomorphism is asserted.",
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "07A6 lemma-adjoint, 0D6E lemma-derived-pushforward-composition, derived.tex 09T5 lemma-derived-adjoint-functors; adjunction-mate normalization in canonical-model steps 2--3."
+ },
+ "proof": [
+  {
+   "text": "Apply restricted_limit_acyclic to a K-injective tower resolution of the restriction of a K-injective system I. The given eta normalization makes eta invertible on the resolution. Naturality and cancellation of the images of the two quasi-isomorphisms make eta invertible at the restricted tower, so the displayed composite systemLimitUnit is invertible at I. The K-injective derivability structure then makes this composite a universal right-derived comparison.",
+   "uses": [
+    "lem-trf-completion-unit-restriction-acyclicity",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use finite scalar extension preservation of quasi-isomorphisms on K-flat complexes, M.evaluation, exact evaluation localization factors, and S.isIso_iff_evaluations to prove that M.tensor inverts such quasi-isomorphisms. Flat-term K-flat resolutions form a resolving class in the homotopy category. Construct its universal left-derived functor with leftDerived_from_resolvingClass and use derivedAdjunctionOfResolvingClass with the composite right comparison. This gives the normalized Hom equation for every chain map, not just resolutions.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-sfb-resolving-derived-adjunction-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the new left adjoint and S.reduction via Adjunction.leftAdjointUniq. Precompose the left comparison by this isomorphism. Its unit-compatibility equation transports the chain-map Hom equation to S.adjunction; the Kan-extension transport lemma preserves universality, and compositions of isomorphisms preserve K-flat computation.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the transported Hom equation to the identity of M.quotient(Q) to obtain its normalized unit equation. Apply finiteComparison_of_unit to that equation. Combine this finite equality with the already constructed universal comparison, its K-flat computation, the full Hom equation, and the K-injective system computation.",
+   "uses": [
+    "lem-trf-completion-unit-finite-mate-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-restriction-acyclicity",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-trf-completion-unit-finite-mate-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "07A6, 0941 and 0D6E; derived.tex 09T5. Explicit resolving-class construction and left-adjoint uniqueness transport by G7; two proper substeps retained as separate obligations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived tensor limit adjunction comparison normalized at finite evaluations of sheaves and K-flat complexes",
+   "results": "Search returned generic scalar-extension adjunctions, sheaf pullback adjunctions and derived adjunction APIs. None states the fixed coefficient normalization.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; use generic APIs in the stated proof plan."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "comparison of derived adjunction on K-flat complexes with specified finite evaluation counit projections",
+   "results": "Search returned generic scalar adjunctions / derived adjunction counit formulas, not the coefficient-sequence interface.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "OrdinaryModel|systemLimitUnit|derivedAdjunctionComparison|leftAdjointUniq|derived.*homEquiv",
+   "results": "Read CompletionUnitModels, SequenceProjectionDerivedAdjunction, SequencePushforwardLimitProjections, ResolvingDerivedAdjunction and Mathlib Adjunction/Unique. No matching specialized theorem. Whole-blueprint search for ordinary tensor adjunction and derived adjunction normalization returned zero nodes.",
+   "date": "2026-10-26",
+   "verdict": "The generic sequence theorems require the fixed-site and scalar-comparison transport recorded here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletionUnitCanonicalModels",
+  "date": "2026-10-26",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "07A6 lemma-adjoint, 0D6E lemma-derived-pushforward-composition, derived.tex 09T5 lemma-derived-adjoint-functors; adjunction-mate normalization in canonical-model steps 2--3.",
+   "via": [
+    "lem-trf-completion-unit-canonical-models",
+    "lem-trf-completion-unit-strict-quotient-model",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "module": "Sheaf.Paper.CompletionUnitDerivedAdjunctionComparison",
+  "file": "lean/Sheaf/Paper/CompletionUnitDerivedAdjunctionComparison.lean",
+  "declaration": "WeilConjectures.CompletionUnit.derivedAdjunctionComparison_exists",
+  "statement": "theorem derivedAdjunctionComparison_exists\n    [∀ x : W, Invertible (l : W.residueField x)]\n    (S : CoefficientDerivedSystemCalculus l E W)\n    (_coherence : CoefficientDerivedSystemCoherence l E W S)\n    (M : OrdinaryModel l E W)\n    (c : (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤\n      scalarReductionSource l E W).mapHomologicalComplex (.up ℤ) ≅ roosLimitFunctor)\n    (_hc : ∀ (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)\n      (n : ℕ) (p : ℤ),\n      (c.hom.app Z ≫ limit.π Z.asFunctor (op n)).f p = limit.π (Z.X p) (op n))\n    (η : roosLimitFunctor ⋙ DerivedCategory.Q ⟶\n      DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W)\n    (_hηnorm : ∀ (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)\n      [J.IsKInjective], η.app J ≫\n        ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤\n          scalarReductionSource l E W).rightDerivedFunctorObjQIso J).hom =\n        DerivedCategory.Q.map (c.inv.app J))\n    (_hη : (coefficientConstantTowerLimit l E W).IsRightDerivedFunctor η\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ scalarReductionSource l E W) (.up ℤ))) :\n    (∀ (I : CochainComplex (coefficientSequenceModules l E W) ℤ),\n      I.IsKInjective → IsIso ((systemLimitUnit l E W M η).app I)) ∧\n    ∃ (ε : DerivedCategory.Q ⋙ S.reduction ⟶ M.quotient l E W ⋙ DerivedCategory.Q),\n      S.reduction.IsLeftDerivedFunctor ε\n        (HomologicalComplex.quasiIso (scalarReductionSource l E W) (.up ℤ)) ∧\n      (∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ),\n        Q.IsKFlatIndependentCoefficients → (∀ p : ℤ, (Q.X p).IsFlatOnSite) →\n          IsIso (ε.app Q)) ∧\n      (∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ)\n        (hQ : Q.IsKFlatIndependentCoefficients)\n        (_hflat : ∀ p : ℤ, (Q.X p).IsFlatOnSite) (n : ℕ),\n        (coefficientSequenceDerivedEvaluation l E W n).map (ε.app Q) ≫\n            (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app\n              ((M.quotient l E W).obj Q) ≫\n            DerivedCategory.Q.map\n              ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app Q) =\n          (S.reductionEvaluation n).hom.app (DerivedCategory.Q.obj Q) ≫\n            (coefficientFiniteReductionModel l E W Q hQ n).hom) ∧\n      (∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ)\n        (I : CochainComplex (coefficientSequenceModules l E W) ℤ)\n        (a : (M.quotient l E W).obj Q ⟶ I),\n        S.adjunction.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I)\n            (ε.app Q ≫ DerivedCategory.Q.map a) =\n          DerivedCategory.Q.map\n              ((M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv Q I a) ≫\n            (systemLimitUnit l E W M η).app I)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-26",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.CompletionUnit.systemLimitUnit",
+   "WeilConjectures.CompletionUnit.derivedAdjunctionComparison_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T023704-L-594737",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261026T065823-L-3252510",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

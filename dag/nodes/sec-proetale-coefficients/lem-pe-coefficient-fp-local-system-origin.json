@@ -1,0 +1,126 @@
+{
+ "id": "lem-pe-coefficient-fp-local-system-origin",
+ "kind": "lemma",
+ "title": "Etale origin of coefficient-sized finitely presented local systems",
+ "statement": "Let X be a scheme and A a commutative ring in an independent coefficient universe. Let F be a fixed-scalar module sheaf on the equivalent coefficient-sized pro-etale site. Suppose that, over every object, a covering sieve locally identifies F with constant finitely presented A-modules. Then F is in the essential image of the canonical fixed-scalar etale/pro-etale comparison inverse image. No Noetherian hypothesis is imposed. The sites and comparison are those of [def-weil-pbc-site-comparison-morphism] and [def-sfb-affine-locally-constructible-proetale-modules]; finite presentation is [def-sc-finitely-presented-module].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, lemma-compare-locally-constant; transport the torsor proof to coefficient-sized equivalent sites"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply coefficientFpLocalSystem_etaleCover to obtain etale objects V_i whose pro-etale images cover the final object, with constant finitely presented slice models of F.",
+   "uses": [
+    "lem-pe-coefficient-fp-local-system-etale-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each chart apply coefficientComparison_counit_isIso_of_constant_over to its actual slice isomorphism. Finite presentation is unnecessary for this counit calculation. Mathlib Sheaf.isIso_of_coversTop then makes the global canonical comparison counit at F invertible.",
+   "uses": [
+    "lem-pe-coefficient-comparison-constant-chart-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the canonical sectionwise comparison direct image of F as the etale antecedent. The isomorphism asIso of its comparison counit is exactly an isomorphism from the prescribed comparison inverse image to F; this witnesses essential-image membership.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-coefficient-fp-local-system-etale-cover",
+  "lem-pe-coefficient-comparison-constant-chart-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099Y, etale constant charts followed by invertibility of the comparison counit tested on those charts; B8 Lean assembly using Sheaf.isIso_of_coversTop"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pro-etale module sheaf locally constant on each stratum of a finite constructible stratification is classical and its affine inverse limit continuity map is an isomorphism",
+   "results": "['CompHausLike.LocallyConstantModule.functor', 'LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor', 'LightCondMod.LocallyConstant.functorIsoDiscreteAux₂', 'CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor', 'LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat', 'LightCondMod.isDiscrete_tfae', 'LightCondMod.LocallyConstant.functorIsoDiscreteComponents', 'LightCondMod.ofSheafLightProfinite']",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuityMap\"",
+   "results": "[]",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison_essImage_of_stratification|coefficientStratified|proEtaleComparisonSets_continuous",
+   "results": "[]",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented locally constant proetale module descends to the etale site, and etale origin is stable under finite stratifications and continuous on affine cofiltered limits.",
+   "results": "['Algebra.Etale.finitePresentation', 'SheafOfModules.isFinitePresentation', 'SheafOfModules.IsFinitePresentation.mk', 'SheafOfModules.IsFinitePresentation', 'SheafOfModules.quasicoherentDataOfIsFinitePresentation', 'Profinite.exists_locallyConstant', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget', 'SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation']",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientStratifiedContinuity",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "proof first sentence: finite local-system comparison handles one stratum",
+   "via": [
+    "lem-pe-coefficient-stratified-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientFpLocalSystemOrigin",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientFpLocalSystemOrigin.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientFpLocalSystem_essImage",
+  "statement": "theorem coefficientFpLocalSystem_essImage (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A))\n    (hF : ∀ V : Scheme.coefficientProEtaleSiteModel.{u, v} X,\n      ∃ S : Sieve V, S ∈ Scheme.coefficientProEtaleModelTopology.{u, v} X V ∧\n        ∀ (U : Scheme.coefficientProEtaleSiteModel.{u, v} X) (f : U ⟶ V), S f →\n          ∃ M : ModuleCat.{max v (u + 1)} A, Module.FinitePresentation A M ∧\n            Nonempty (F.over U ≅\n              (constantSheaf ((Scheme.coefficientProEtaleModelTopology.{u, v} X).over U)\n                (ModuleCat.{max v (u + 1)} A)).obj M)) :\n    (Functor.sheafPullbackConstruction.sheafPullback\n      (Scheme.smallModelComparisonInclusion.{u, v} X) (ModuleCat.{max v (u + 1)} A)\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X)).essImage F",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T180758-L-4033505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T201447-L-2525296",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

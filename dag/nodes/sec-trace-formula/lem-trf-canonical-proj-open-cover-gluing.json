@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-canonical-proj-open-cover-gluing",
+ "kind": "statement",
+ "title": "Canonical section algebras and open Proj maps glue over an affine base cover",
+ "statement": "Let $h:Z\\to S$ be a quasi-compact separated morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism, def-weil-proper-morphism], and let $N$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module]. Let $S=\\bigcup_{i\\in I}U_i$ be an affine open covering, put $Z_i=h^{-1}(U_i)$, $h_i:Z_i\\to U_i$, and $N_i=N|_{Z_i}$. Tensor powers use [def-pur-sheaf-tensor-product], direct image means $h_*F(V)=\\Gamma(h^{-1}(V),F)$, and $h^*$ is module pullback [def-pc-module-pullback]. For each $i$, suppose the canonical section algebra $\\mathcal A_i=\\bigoplus_{d\\geq0}(h_i)_*N_i^{\\otimes d}$ is a quasi-coherent graded algebra [def-weil-pbc-quasi-coherent-algebra, def-weil-pbc-graded-sheaf-structures], and let $\\psi_i:h_i^*\\mathcal A_i\\to\\bigoplus_{d\\geq0}N_i^{\\otimes d}$ be its adjunction evaluation. For such an evaluation, $U(\\psi_i)$ denotes the union of the loci where a positive-degree component is surjective, and $r_i:U(\\psi_i)\\to\\operatorname{Proj}_{U_i}(\\mathcal A_i)$ denotes its canonical map [lem-trf-space-line-module-proj-map, def-nagata-relative-proj]. Assume $U(\\psi_i)=Z_i$ and every $r_i$ is an open immersion [def-weil-open-immersion]. Then $\\mathcal A=\\bigoplus_{d\\geq0}h_*N^{\\otimes d}$ is a quasi-coherent graded $\\mathcal O_S$-algebra. For its adjunction evaluation $\\psi$, there are canonical graded isomorphisms $\\mathcal A|_{U_i}\\simeq\\mathcal A_i$ identifying the restricted evaluation with $\\psi_i$ and, under $\\operatorname{Proj}_S(\\mathcal A)\\times_SU_i\\simeq\\operatorname{Proj}_{U_i}(\\mathcal A_i)$, identifying the restricted generation loci and canonical maps with $U(\\psi_i)$ and $r_i$. Consequently $U(\\psi)=Z$, and $r_{N,\\psi}:Z\\to\\operatorname{Proj}_S(\\mathcal A)$ is an open immersion. All section algebras, evaluations and canonical maps in these comparisons are the ordinary Zariski scheme constructions.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ (lemma-characterize-relatively-ample), section-algebra and canonical-map paragraphs in (3) implies (5); constructions.tex Tag 01O9 (lemma-invertible-map-into-relative-proj)(3); spaces-divisors.tex Tag 0D2Z (lemma-invertible-map-into-relative-proj)(3); spaces-properties.tex Tag 03LX (lemma-pushforward-etale-base-change-modules)."
+ },
+ "stmt_deps": [
+  "def-nagata-relative-proj",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-proper-morphism",
+  "lem-trf-space-line-module-proj-map",
+  "def-sfb-relative-section-algebra-canonical-map",
+  "def-sc-tensor-pullback-power-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply exists_section_algebra_open_cover_descent to construct A and choose the normalized coefficientwise open comparisons D_i. Their section formulas are definitionally canonicalSectionOpenPull, so each pair is the existing OpenComparison structure.",
+   "uses": [
+    "lem-trf-section-algebra-open-cover-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply section_canonical_map_open_descent to A, D_i and their section formulas, using the given full local generation and canonical maps. This supplies full global generation, a canonical map r and each restriction equation.",
+   "uses": [
+    "lem-trf-section-canonical-map-open-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each i, D_i.isPullback identifies its Proj comparison as a base change of U_i → S, so the comparison is an open immersion. The restriction equation and the assumed openness of r_local i show that inclusion_i followed by r is an open immersion.",
+   "uses": [
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If r(x)=r(y), the structural equation r followed by A.relProjHom = h gives h(x)=h(y). Choose U_i containing h(x); both x and y lie in h inverse U_i. The composite inclusion_i followed by r is an open immersion, so injectivity on that open gives x=y. Every x belongs to such an inverse-image open on which r is an open immersion. Apply IsOpenImmersion.of_forall_source_exists. Package the already constructed section comparisons and their equations.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-injective-local-source"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-trf-section-algebra-open-cover-descent",
+  "lem-trf-section-canonical-map-open-descent",
+  "lem-weil-pbc-open-immersion-injective-local-source",
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VJ (3) implies (5), with section-algebra/evaluation steps isolated in two strictly smaller statements and the final open-immersion gluing proved in Lean using the base-change and injective-local-source APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sectionAlgebra|section_algebra|generation[Ll]ocus|[Pp]roj.*[Ee]valuation|canonical.*[Pp]roj",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"23\", \"text\": \"  The canonical isomorphism `Proj A |_ D₊(f) ≅ Spec (A_f)₀`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"132\", \"text\": \"/-- The canonical map `(A_f)₀ ⟶ Γ(Proj A, D₊(f))`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"137\", \"text\": \"/-- The canonical map `Proj A |_ D₊(f) ⟶ Spec (A_f)₀`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"157\", \"text\": \"/-- The canonical isomorphism `Proj A |_ D₊(f) ≅ Spec (A_f)₀`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"172\", \"text\": \"/-- The canonical isomorphism `(A_f)₀ ≅ Γ(Proj A, D₊(f))`\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections and its morphismRestrict lemma concern one graded ring mapping to global functions, not the relative graded section sheaf, tensor-power evaluation, or their Zariski/etale comparison. Read ProjectiveSpectrum/Basic.lean:435-515. Standard chart open immersions do not state the gluing assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact separated scheme morphism the canonical section algebra evaluation and relative Proj map restrict over an open cover and glue full generation and open immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A)\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n                { carrier := HomogeneousLocalization.Awa\", \"doc\": \"The theorem establishes the associativity of composed morphisms involving the structure sheaf on the projective spectrum $\\\\text{Proj}(A)$ of a graded ring $A$. Specifically, it asserts that for an ope\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A)\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n                { carrier := HomogeneousLocalization.Awa\", \"doc\": \"For any open set $U$ in the projective spectrum $\\\\text{Proj}(A)$, the composition of the structure sheaf restriction map $\\\\mathcal{O}_{\\\\text{Proj}(A)}(D_+(f)) \\\\to \\\\mathcal{O}_{\\\\text{Proj}(A)}(U)$ with\"}\n  {\"name\": \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  {x x' : ↑(X.presheaf.obj (Opposite.op ⊤))} {t t' : A} {d d' : ℕ} {H : f t = x}\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a scheme $X$, and homogeneous elements $t \\\\in \\\\mathcal{A}_d$ and $t' \\\\in \\\\mathcal{A}_{d'}$ with $d, d' > 0$, if there exists $s \\\\in \\\\mathcal{A}_n$ such that $t \\\\cdot\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a homogeneous element $t \\\\in \\\\mathcal{A}_d$ with $d > 0$, and a global section $x$ such that $f(t) = x$, this morphism constructs a scheme map from the basic open su\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤),\\n  CategoryTheo\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ over a commutative ring $A$, a scheme $X$, and a ring homomorphism $f : A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ such that the image of the irrelevant ideal $\\\\mathcal{I} \\\\subs\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections and its morphismRestrict lemma concern one graded ring mapping to global functions, not the relative graded section sheaf, tensor-power evaluation, or their Zariski/etale comparison. Read ProjectiveSpectrum/Basic.lean:435-515. Standard chart open immersions do not state the gluing assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical relative Proj open immersion from a line bundle descends from open restrictions of the graded section algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m),\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m →\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a global section $f$, and a positive integer $n$ with $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism $\\\\text{fromOfGlobalSections}(\\\\mathcal{A}, f, hf)$ to the b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a homogeneous element $t \\\\in \\\\mathcal{A}_d$ with $d > 0$, and a global section $x$ such that $f(t) = x$, this morphism constructs a scheme map from the basic open su\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  (hf : Ideal.map f (HomogeneousIdeal.irrelevant 𝒜).toIdeal = ⊤) {r : A} {n : ℕ}\", \"doc\": \"For a graded ring $\\\\mathcal{A}$, a positive integer $n$, and an element $r \\\\in \\\\mathcal{A}_n$, the restriction of the morphism induced by global sections composed with the preimage of the basic open s\"}\n  {\"name\": \"AlgebraicGeometry.Proj.basicOpenToSpec_SpecMap_awayMap\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Proj.basicOpenToSpec 𝒜 x)\\n     \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$, the composition of the morphism $D_+(f) \\\\to \\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ with the scheme morphism induced by the homogeneous l\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {X : AlgebraicGeometry.Scheme} (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤)))\\n  {x x' : ↑(X.presheaf.obj (Opposite.op ⊤))} {t t' : A} {d d' : ℕ} {H : f t = x}\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$, a scheme $X$, and homogeneous elements $t \\\\in \\\\mathcal{A}_d$ and $t' \\\\in \\\\mathcal{A}_{d'}$ with $d, d' > 0$, if there exists $s \\\\in \\\\mathcal{A}_n$ such that $t \\\\cdot\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections and its morphismRestrict lemma concern one graded ring mapping to global functions, not the relative graded section sheaf, tensor-power evaluation, or their Zariski/etale comparison. Read ProjectiveSpectrum/Basic.lean:435-515. Standard chart open immersions do not state the gluing assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible module canonical relative Proj map is an open immersion if its generation locus is full and canonical maps on an open cover are open immersions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": IsOpenImmersion (Proj.awayι 𝒜 f f_deg hm)\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] : IsImmersion f\", \"doc\": \"Any open immersion between schemes is an immersion. Specifically, if a morphism $ f: X \\to Y $ of schemes satisfies the open immersion condition (being a topological open embedding with stalk isomorphi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.basic_open_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {R : CommRingCat} (f : ↑R),\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap (↑R) (Localization.Away f))))\", \"doc\": \"For any commutative ring $R$ and any element $f \\\\in R$, the morphism of affine schemes $\\\\operatorname{Spec}(R_f) \\\\to \\\\operatorname{Spec}(R)$ induced by the localization map $R \\\\to R_f$ is an open imme\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": IsOpenImmersion hU.fromSpec\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, the morphism from $ \\\\operatorname{Spec}(\\\\Gamma(U)) $ to $ X $ constructed by composing the canonical isomorphism $ \\\\operatorname{Spec}(\\\\Gamma(U)) \\\\co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{R : CommRingCat.{u}} (f : R) : IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away f))))\", \"doc\": \"The morphism from the spectrum of the localization of a commutative ring $ R $ at an element $ f $ to the spectrum of $ R $ is an open immersion. This corresponds to the inclusion of the principal ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[X.IsQuasiAffine] : IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover.instIsOpenImmersionF\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.AffineOpenCover) (j : 𝒰.I₀) : IsOpenImmersion (𝒰.f j)\", \"doc\": \"For any scheme $X$ and its affine open cover $\\\\mathcal{U}$, each morphism $\\\\mathcal{U}.f(j)$ from the affine scheme $\\\\operatorname{Spec}(R_j)$ (associated to index $j$) to $X$ is an open immersion. Th\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{X : TopCat} (Y : LocallyRingedSpace) {f : X ⟶ Y.carrier} (hf : IsOpenEmbedding f) : IsOpenImmersion (Y.ofRestrict hf)\", \"doc\": \"Given a locally ringed space $ Y $, an open subset $ X $ of its underlying topological space, and a continuous open embedding $ f: X \\to Y $, the canonical morphism from the restricted locally ringed s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections and its morphismRestrict lemma concern one graded ring mapping to global functions, not the relative graded section sheaf, tensor-power evaluation, or their Zariski/etale comparison. Read ProjectiveSpectrum/Basic.lean:435-515. Standard chart open immersions do not state the gluing assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Meta.DSimp.Config.proj\", \"module\": \"Init.MetaTypes\", \"type\": \" (self : Lean.Meta.DSimp.Config) : Bool\", \"doc\": \"When `true` (default: `true`), reduces projections of structure constructors.\"}\n  {\"name\": \"Lean.Meta.Simp.Config.proj\", \"module\": \"Init.MetaTypes\", \"type\": \" (self : Lean.Meta.Simp.Config) : Bool\", \"doc\": \"When `true` (default: `true`), reduces projections of structure constructors.\"}\n  {\"name\": \"Lean.Parser.Sym.DSimp.proj\", \"module\": \"Init.Sym.DSimp.DSimprocDSL\", \"type\": \" : Lean.ParserDescr\", \"doc\": \"Projection reduction.\"}\n  {\"name\": \"Std.Sat.AIG.denote_projected_entry\", \"module\": \"Std.Sat.AIG.Lemmas\", \"type\": \" {α : Type} [Hashable α] [DecidableEq α] {assign : α → Bool} {entry : Std.Sat.AIG.Entrypoint α} : ⟦assign, { aig := entry.aig, ref := entry.ref }⟧ = ⟦assign, entry⟧\", \"doc\": \"\"}\n  {\"name\": \"Std.Sat.AIG.denote_projected_entry'\", \"module\": \"Std.Sat.AIG.Lemmas\", \"type\": \" {α : Type} [Hashable α] [DecidableEq α] {assign : α → Bool} {entry : Std.Sat.AIG.Entrypoint α} : ⟦assign, { aig := entry.aig, ref := { gate := entry.ref.gate, invert := entry.ref.invert, hgate := ⋯ } }⟧ = ⟦assign, entry⟧\", \"doc\": \"\"}\n  {\"name\": \"Lean.Expr.isProj\", \"module\": \"Lean.Expr\", \"type\": \" : Lean.Expr → Bool\", \"doc\": \"Return `true` if the given expression is a projection `.proj ..`\"}\n  {\"name\": \"Lean.Expr.projExpr!\", \"module\": \"Lean.Expr\", \"type\": \" : Lean.Expr → Lean.Expr\", \"doc\": \"\"}\n  {\"name\": \"Lean.Expr.projIdx!\", \"module\": \"Lean.Expr\", \"type\": \" : Lean.Expr → ℕ\", \"doc\": \"\"}\n  {\"name\": \"Lean.Expr.updateProj!\", \"module\": \"Lean.Expr\", \"type\": \" (e newExpr : Lean.Expr) : Lean.Expr\", \"doc\": \"\"}\n  {\"name\": \"Lean.mkProj\", \"module\": \"Lean.Expr\", \"type\": \" (structName : Lean.Name) (idx : ℕ) (struct : Lean.Expr) : Lean.Expr\", \"doc\": \"`.proj structName idx struct` is now the preferred form.\"}\n  {\"name\": \"Lean.mkProjEx\", \"module\": \"Lean.Expr\", \"type\": \" : Lean.Name → ℕ → Lean.Expr → Lean.Expr\", \"doc\": \"\"}\n  {\"name\": \"Lean.Expr.proj\", \"module\": \"Lean.Expr\", \"type\": \" (typeName : Lean.Name) (idx : ℕ) (struct : Lean.Expr) : Lean.Expr\", \"doc\": \"Projection-expressions. They are redundant, but are used to create more compact\\nterms, speed up reduction, and implement eta for structures.\\nThe type of `struct` must be a one-constructor inductive ty\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections and its morphismRestrict lemma concern one graded ring mapping to global functions, not the relative graded section sheaf, tensor-power evaluation, or their Zariski/etale comparison. Read ProjectiveSpectrum/Basic.lean:435-515. Standard chart open immersions do not state the gluing assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "results": {
+    "t": "2026-10-22T06:03:43Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.Proj.fromOfGlobalSections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Proj.fromOfGlobalSections",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_resLE",
+     "AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict"
+    ],
+    "digest": "9f7f2582f547b9be"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Proj.fromOfGlobalSections and its morphismRestrict lemma concern one graded ring mapping to global functions, not the relative graded section sheaf, tensor-power evaluation, or their Zariski/etale comparison. Read ProjectiveSpectrum/Basic.lean:435-515. Standard chart open immersions do not state the gluing assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionAlgebra|section_algebra|relativeProj|relProj|fromOfGlobalSections_morphismRestrict",
+   "results": "OK 2 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned absolute Proj chart maps and open-immersion inclusions do not state the relative graded tensor-power section-algebra/evaluation comparison. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:435-510. The generic locality result is already the DAG leaf lem-weil-pbc-open-immersion-injective-local-source."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "results": "OK 6 hits: AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero, AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned absolute Proj chart maps and open-immersion inclusions do not state the relative graded tensor-power section-algebra/evaluation comparison. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:435-510. The generic locality result is already the DAG leaf lem-weil-pbc-open-immersion-injective-local-source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Proj canonical morphism from evaluation of tensor powers of an invertible sheaf is compatible with open restriction and is an open immersion locally on the base",
+   "results": "OK 8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict, AlgebraicGeometry.Scheme.Hom.app_appIso_inv, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.IsOpenImmersion.ofRestrict, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict, AlgebraicGeometry.Scheme.Opens.instIsOpenImmersionι, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned absolute Proj chart maps and open-immersion inclusions do not state the relative graded tensor-power section-algebra/evaluation comparison. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:435-510. The generic locality result is already the DAG leaf lem-weil-pbc-open-immersion-injective-local-source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graded section sheaf algebra of powers of a line bundle and its canonical relative Proj morphism commute with restriction to opens of the base",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc, AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι, AlgebraicGeometry.Proj.awayMap_awayToSection",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned absolute Proj chart maps and open-immersion inclusions do not state the relative graded tensor-power section-algebra/evaluation comparison. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:435-510. The generic locality result is already the DAG leaf lem-weil-pbc-open-immersion-injective-local-source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A canonical morphism to relative Proj associated to a graded map into powers of an invertible sheaf is an open immersion when its base open restrictions are open immersions",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned absolute Proj chart maps and open-immersion inclusions do not state the relative graded tensor-power section-algebra/evaluation comparison. Read Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:435-510. The generic locality result is already the DAG leaf lem-weil-pbc-open-immersion-injective-local-source."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-scheme-relative-ample-affine-cover",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The polarized descent input in the specialization chain below lem-trf-local-term-locality, through lem-trf-algebraic-space-ample-local: its scheme-base-change step invokes Stacks 0893. This node supplies the affine-open-cover criterion 01VJ (3) implies (1) used at the beginning and end of the proof of 0893. Re-split of lem-trf-scheme-relative-ample-affine-cover: old proof steps 5-6, comparison of section algebras/evaluations and descent of the open canonical map.",
+   "via": [
+    "lem-trf-scheme-relative-ample-affine-cover",
+    "lem-trf-scheme-relative-ample-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-canonical-proj-open-cover-gluing",
+  "worker": "stage1",
+  "summary": "Kept the statement and its Zariski scheme interpretation. Proved section-algebra restriction and evaluation compatibility directly from definitions, used the existing relative Proj base-change and canonical-map nodes, and supplied the injectivity check needed by the existing Mathlib open-immersion locality leaf. No new nodes.",
+  "blueprint": "Realizes the existing from.place: polarized descent specialization below lem-trf-local-term-locality via lem-trf-scheme-relative-ample-affine-cover, old proof steps 5-6, comparison of section algebras/evaluations and the open canonical map.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NA-df88e340d",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-df88e340d (reviewer sub-agent of L); spot-checked: I read the item in full; I made no changes. The delivery has no new nodes. Compared with the live node, which is still unsplit, it changes only proof, proof_deps, proof_origin, mathlib_searches, status and split_report; the statement and stmt_deps are unchanged. There is no repair note for the item. It is the old steps 5-6 of the Q20 re-split of lem-trf-scheme-relative-ample-affine-cover, and the parent's step 3 cites it consistently. Sources read: Stacks 01VJ, proof of (3)=>(5); constructions 01O9 (1)-(3); Mathlib IsOpenImmersion.of_forall_source_exists, Morphisms/OpenImmersion.lean:87-95. Step 1 (elementary, correct): (h_*F)|_{U_i}=(h_i)_*(F|_{Z_i}); sheaf tensor products and direct sums restrict to opens; quasi-coherence of A follows from the affine-neighbourhood definition in pqf-def-coherent. Step 2 (elementary, correct): unwinding the counit on stalks identifies the restricted psi with psi_i through beta_i. Step 3 uses lemma-nagata-relative-proj-exists and lemma-nagata-relative-proj-base-change-arbitrary (both Lean-closed) and lem-trf-space-line-module-proj-map (same unit), whose arbitrary-square clause and scheme clause give U(psi) cap Z_i=U(psi_i) and identify r restricted to Z_i with r_i; then U(psi)=Z. Step 4: from pi r=h, r is injective, and on each Z_i it is an open immersion; this meets exactly the hypotheses of the existing Mathlib leaf. The quasi-compact and separated hypotheses are kept although unused; this is no weakening. Edge cases checked: empty S or cover, singleton cover, infinite cover, non-affine overlaps, A_0 not equal to O_S, and P^1_S with O(1) over a two-chart affine line. No node in the DAG states this gluing; I read the candidates from rg over 01VJ and 01O9. No SGA citation and no tool_uses. Advisory: N^{tensor 0}=O_Z is a convention, since def-pur-sheaf-tensor-product only defines powers m>=1."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CanonicalProjOpenCoverGluing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.canonical_proj_open_cover_gluing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.canonicalSectionOpenPull",
+   "AlgebraicGeometry.Scheme.Modules.RelativeSectionAlgebra.OpenComparison",
+   "AlgebraicGeometry.Scheme.Modules.canonical_proj_open_cover_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalProjOpenCoverGluing.lean",
+  "statement": "theorem canonical_proj_open_cover_gluing {Z S : Scheme.{u}} (h : Z ⟶ S) [QuasiCompact h] [IsSeparated h] (N : Z.Modules) [N.IsInvertible] {I : Type v} (U : I → S.Opens) (_hU : ∀ i : I, IsAffineOpen (U i)) (_hcover : iSup U = ⊤) (A_local : ∀ i : I, RelativeSectionAlgebra (h ∣_ U i) ((tensorPullback (h ⁻¹ᵁ U i).ι).obj N)) (_hgen : ∀ i : I, (A_local i).GeneratesEverywhere) (r_local : ∀ i : I, (h ⁻¹ᵁ U i).toScheme ⟶ (A_local i).data.relProj) (_hcanonical : ∀ i : I, (A_local i).IsCanonicalMap (r_local i)) (_hopen : ∀ i : I, IsOpenImmersion (r_local i)) : ∃ A : RelativeSectionAlgebra h N, A.GeneratesEverywhere ∧ ∃ r : Z ⟶ A.data.relProj, A.IsCanonicalMap r ∧ IsOpenImmersion r ∧ ∀ i : I, ∃ D : A.OpenComparison (U i) (A_local i), (h ⁻¹ᵁ U i).ι ≫ r = r_local i ≫ D.data.relProjComparison",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of return at 1fb9beba172e: imports the definitions-only relative section algebra interface, owned including GeneratesEverywhere by def-sfb-relative-section-algebra-canonical-map; explicitly cites this owner and def-sc-tensor-pullback-power-comparison. Mathematical signature unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cde049339",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 1fb9 (H2: GeneratesEverywhere owned only by a theorem node, import cycle, missing def stmt_deps). Lean byte-identical to 1fb9 except imports: now RelativeSectionAlgebraCanonicalMap (definitions-only module landed by maintenance N9 1792851621; def-sfb-relative-section-algebra-canonical-map owns all 4 decls incl. GeneratesEverywhere) and SquareZeroTensorBoundaryComparisons (owner of boundaryPullbackPowIso). Node diff vs side-live: only stmt_deps +def-sfb-relative-section-algebra-canonical-map +def-sc-tensor-pullback-power-comparison and the lean record; lean.statement verbatim in file; dep node copies identical to live. No import of the criterion theorem module; its importers are all downstream. No helper name collisions. Mathematics (QC+separated h, invertible N, arbitrary affine cover, pinned RelativeSectionAlgebra, GeneratesEverywhere = U(psi)=Z, IsCanonicalMap, OpenComparison section_eq, relProjComparison map equation) unchanged and correct per 01VJ (3)=>(5)/01O9(3). Edge cases OK. Report has Worker report and Second reading. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T080823-L-1608203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,325 @@
+{
+ "id": "lem-sfb-square-zero-complex-obstruction",
+ "kind": "statement",
+ "title": "Canonical obstruction to lifting a complex across a square-zero quotient",
+ "statement": "Let $R'\\twoheadrightarrow R$ be a surjection of commutative rings with kernel $J$ satisfying $J^2=0$, regarded as an $R$-module by multiplication. Use the derived category of ordinary modules [def-weil-abstract-derived-category]. Write $D^-(R)$ for its objects with $H^i=0$ for all sufficiently large $i$, and $-\\otimes_R^{\\mathbf L}-$ for the total tensor of K-flat resolutions [def-pc-module-kflat-complex]. For every $C\\in D^-(R)$ there is a canonical morphism\n$$\\omega_{R'/R}(C):C\\longrightarrow(C\\otimes_R^{\\mathbf L}J)[2].$$\nIt vanishes if and only if there exists $C'\\in D^-(R')$ with an isomorphism $C'\\otimes_{R'}^{\\mathbf L}R\\cong C$. It is natural in $C$: for $u:C\\to D$ one has $\\omega(D)u=(u\\otimes1)[2]\\omega(C)$. For any flat ring map $R'\\to U'$ [def-weil-pbc-flat-ring-map], set $U=U'\\otimes_{R'}R$ and $J_U=JU'$. Under the canonical identifications $J\\otimes_R U\\cong J_U$ and $(C\\otimes_R^{\\mathbf L}J)\\otimes_R^{\\mathbf L}U\\cong(C\\otimes_R^{\\mathbf L}U)\\otimes_U^{\\mathbf L}J_U$, the scalar extension of $\\omega_{R'/R}(C)$ equals $\\omega_{U'/U}(C\\otimes_R^{\\mathbf L}U)$. Here ordinary tensor products and their canonical maps are [def-weil-pbc-module-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 0DYR, lemma-canonical-class-algebra, (1)-(3); its proof produces a bounded-above free lift. The base-change clause here is restricted to flat R′→U′."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Choose a complex $K$ representing $C$. Choose $b$ with $H^i(C)=0$ for $i>b$. By [lem-weil-pbc-truncation-cohomology] the inclusion $\\tau_{\\le b}K\\to K$ of the chosen complex $K$ induces isomorphisms on $H^i$ for $i\\le b$, and both sides have $H^i=0$ for $i>b$, so it is a quasi-isomorphism; and $(\\tau_{\\le b}K)^n=0$ for $n>b$. Apply [lem-sfb-subcategory-left-resolution] to ordinary $R$-modules, the class of all free modules (it contains the zero module, and the free module on the underlying set surjects onto any module), $a=b$ and $\\tau_{\\le b}K$. Composing gives a free complex $P$ with $P^n=0$ for $n>b$, a quasi-isomorphism $P\\to K$, and hence an isomorphism $QP\\cong C$. A map from a free module lifts across a surjection by lifting the images of its basis; tensoring an exact sequence with a free module gives a direct sum of copies of it, which is exact. Thus its terms are projective and flat. By [lem-pc-module-bounded-flat-kflat], $P$ is K-flat, so $P\\otimes_R J$ represents $C\\otimes_R^{\\mathbf L}J$.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-sfb-subcategory-left-resolution",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0DYR, lemma-canonical-class-algebra, proof"
+   }
+  },
+  {
+   "text": "Write $P^n=R^{(B_n)}$ and take $F^n=R'^{(B_n)}$, with $B_n$ empty above the bound. The basis identifies $JF^n=J^{(B_n)}=P^n\\otimes_R J$ and $F^n/JF^n=P^n$. Lift each $d_P^n$ to $d'^n:F^n\\to F^{n+1}$ by choosing lifts of the finitely supported image of each basis vector. The composite $d'^{n+1}d'^n$ lands in $JF^{n+2}$, since its reduction is zero, and kills $JF^n$, since it is $R'$-linear and $J^2=0$. It therefore induces $w_P^n:P^n\\to P^{n+2}\\otimes_R J$. Associativity gives $d'^{n+2}(d'^{n+1}d'^n)=(d'^{n+2}d'^{n+1})d'^n$. Restriction of $d'$ to $JF$ is $d_P\\otimes1$, hence $(d_P^{n+2}\\otimes1)w_P^n=w_P^{n+1}d_P^n$. Thus $w_P:P\\to(P\\otimes_R J)[2]$ is a chain map (the shift by two has positive differential), using [def-weil-abstract-derived-category] and the tensor maps of [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0DYR, lemma-canonical-class-algebra, proof"
+   }
+  },
+  {
+   "text": "For a chain map $a:P\\to V$ between bounded-above free models, lift its components to $a'^n:F^n\\to G^n$ as above, where $e'$ lifts the differential of $V$. The defect $b'^n=e'^na'^n-a'^{n+1}d'^n$ reduces to zero and kills $JF^n$; denote its factor $b^n:P^n\\to V^{n+1}\\otimes_R J$. Expanding and cancelling the middle terms gives\n$$e'^{n+1}b'^n+b'^{n+1}d'^n=e'^{n+1}e'^na'^n-a'^{n+2}d'^{n+1}d'^n.$$\nOn the ideal submodules this is exactly\n$$w_V^na^n-(a^{n+2}\\otimes1)w_P^n=(d_V^{n+1}\\otimes1)b^n+b^{n+1}d_P^n.$$\nThe right side is the chain-homotopy formula for maps to $(V\\otimes_R J)[2]$, with homotopy component $b^n$ landing in its degree $n-1$. Therefore the two maps agree after localization [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0DYR, lemma-canonical-class-algebra, proof"
+   }
+  },
+  {
+   "text": "Free terms are projective by the basis-lifting argument in Step 1. Consequently [lem-pc-ring-derived-map-representative] represents every derived morphism between the free models by a chain map and identifies equality with chain homotopy. Apply Step 3 to such a representative to obtain naturality. Apply it to the identity chain map with two different choices of graded lifts and lifted differentials to obtain independence of those choices. For two models of the same $C$, represent their derived comparison isomorphism by a chain map using the same bijection; its tensor with $J$ is the derived tensor of that comparison, since both models are K-flat. Step 3 then identifies their classes under the prescribed comparisons with $C$ and $C\\otimes_R^{\\mathbf L}J$. This defines the canonical morphism $\\omega_{R'/R}(C)$ and proves $\\omega(D)u=(u\\otimes1)[2]\\omega(C)$ for every $u:C\\to D$.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0DYR, lemma-canonical-class-algebra, proof"
+   }
+  },
+  {
+   "text": "Suppose $\\omega(C)=0$. The injectivity in [lem-pc-ring-derived-map-representative], applied to the bounded-above projective source $P$ and target $(P\\otimes_R J)[2]$, makes $w_P$ null-homotopic. Thus there are $g^n:P^n\\to P^{n+1}\\otimes_R J$ with\n$$w_P^n=(d_P^{n+1}\\otimes1)g^n+g^{n+1}d_P^n.$$\nLet $\\widetilde g^n:F^n\\to F^{n+1}$ be the composite through $P^n$, then $g^n$, then $JF^{n+1}\\subset F^{n+1}$. It kills $JF^n$ and lands in $JF^{n+1}$, so $\\widetilde g^{n+1}\\widetilde g^n=0$. For $D^n=d'^n-\\widetilde g^n$, expansion yields\n$$D^{n+1}D^n=d'^{n+1}d'^n-d'^{n+1}\\widetilde g^n-\\widetilde g^{n+1}d'^n=0$$\nby the displayed homotopy equation and the identifications of Step 2. Therefore $(F,D)$ is a bounded-above free $R'$-complex reducing exactly to $P$. By [lem-pc-module-bounded-flat-kflat] over $R'$, its ordinary reduction computes derived reduction. Its image $C'\\in D^-(R')$ has $C'\\otimes_{R'}^{\\mathbf L}R\\cong C$.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0DYR, lemma-canonical-class-algebra, proof"
+   }
+  },
+  {
+   "text": "Conversely suppose $C'\\in D^-(R')$ with $C'\\otimes_{R'}^{\\mathbf L}R\\cong C$. The truncation and free-resolution argument of Step 1 over $R'$, by [lem-weil-pbc-truncation-cohomology] and [lem-sfb-subcategory-left-resolution] for the class of free $R'$-modules, gives a bounded-above free representative $F$ of $C'$. It is K-flat by [lem-pc-module-bounded-flat-kflat], so $F\\otimes_{R'}R$ is a bounded-above free representative of $C$. In constructing its obstruction choose $F$ itself and its genuine differential. Its consecutive differentials compose to zero; all curvature components are zero. Independence of choices from Step 4 now gives $\\omega(C)=0$.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-sfb-subcategory-left-resolution",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0DYR, lemma-canonical-class-algebra, proof"
+   }
+  },
+  {
+   "text": "Let $R'\\to U'$ be flat and $U=U'/JU'$. By [lem-weil-pbc-flat-tensor-exact] and [lem-weil-pbc-tensor-right-exact], tensoring $0\\to J\\to R'\\to R\\to0$ with $U'$ gives $0\\to J\\otimes_{R'}U'\\to U'\\to U\\to0$. Its first image is $J_U=JU'$, whose square is zero. The balancing relations in [def-weil-pbc-module-tensor-product] identify $J\\otimes_{R'}U'$ with $J\\otimes_R U$: $j\\otimes u'$ maps to $j\\otimes\\bar u'$, with inverse given by lifting $\\bar u'$; changing a lift by $JU'$ contributes zero because $J^2=0$. For every $R$-module $N$ the same balancing gives $N\\otimes_R U\\cong N\\otimes_{R'}U'$. Hence $U$ is flat over $R$ by the injection criterion [def-weil-pbc-flat-ring-map]. Flat tensor exactness identifies kernels, images and their quotients after tensoring, so tensoring complexes with $U$ preserves quasi-isomorphisms. Thus termwise tensor with $U$ computes derived tensor with $U$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0DYR, lemma-canonical-class-algebra, proof"
+   }
+  },
+  {
+   "text": "Use the models $P,F,d'$ of Step 2. The complex $P_U=P\\otimes_R U$ is bounded-above free over $U$, and $F_U^n=F^n\\otimes_{R'}U'$ with differential lifts $d'^n\\otimes1$ is a choice for its obstruction construction. On each basis vector, $(d'^{n+1}\\otimes1)(d'^n\\otimes1)=(d'^{n+1}d'^n)\\otimes1$, so the resulting curvature is $w_P\\otimes_R1_U$ under $J\\otimes_R U\\cong J_U$ from Step 7. The chain isomorphism\n$$(P\\otimes_R J)\\otimes_R U\\longrightarrow(P\\otimes_R U)\\otimes_U J_U,\\qquad (p\\otimes j)\\otimes u\\longmapsto(p\\otimes1)\\otimes ju$$\nhas inverse $(p\\otimes u)\\otimes(j\\otimes v)\\mapsto(p\\otimes j)\\otimes uv$; both are well-defined by the balancing relations [def-weil-pbc-module-tensor-product] and commute with differentials. By Step 7 the left side computes the scalar extension of $C\\otimes_R^{\\mathbf L}J$; by [lem-pc-module-bounded-flat-kflat] for $P_U$, the right side computes $(C\\otimes_R^{\\mathbf L}U)\\otimes_U^{\\mathbf L}J_U$. The degree-two shift introduces no sign. This is exactly the asserted canonical scalar-extension equality, now independent of choices by Step 4.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/defos.tex",
+    "place": "Tag 0DYR, lemma-canonical-class-algebra, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-sfb-subcategory-left-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-ring-derived-map-representative",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/defos.tex",
+  "place": "Tag 0DYR, lemma-canonical-class-algebra, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "obstruction|square.?zero.*lift|lift.*square.?zero",
+   "results": "1 hits in Mathlib/Algebra/Homology: Mathlib/Algebra/Homology/ModelCategory/Injective.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Ext classes, homotopies, and derivations of algebra maps do not construct the canonical obstruction to deforming a complex across a change of coefficient ring. Read DerivedCategory/Ext/Basic.lean:12-23, ModelCategory/Injective.lean:118-139, and RingTheory/Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex over a square zero quotient ring has a canonical degree two obstruction to lifting its differentials",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc_comp_assoc, liftOfDerivationToSquareZero, CochainComplex.cochainComplex_d_succ_succ_zero, derivationToSquareZeroEquivLift, CategoryTheory.ShortComplex.RightHomologyData.liftH.congr_simp, CategoryTheory.ShortComplex.RightHomologyData.ofHasKernel_Q, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp, derivationToSquareZeroEquivLift_symm_apply_apply_coe",
+   "date": "2026-10-23",
+   "verdict": "no match: Ext classes, homotopies, and derivations of algebra maps do not construct the canonical obstruction to deforming a complex across a change of coefficient ring. Read DerivedCategory/Ext/Basic.lean:12-23, ModelCategory/Injective.lean:118-139, and RingTheory/Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"obstruction\"",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "no match: Ext classes, homotopies, and derivations of algebra maps do not construct the canonical obstruction to deforming a complex across a change of coefficient ring. Read DerivedCategory/Ext/Basic.lean:12-23, ModelCategory/Injective.lean:118-139, and RingTheory/Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a square zero ring extension the canonical Ext two obstruction of a bounded above complex vanishes if and only if the complex lifts to the derived category, naturally under scalar extension",
+   "results": "8 hits: CategoryTheory.hasExt_iff, CategoryTheory.ProjectiveResolution.extMk_eq_zero_iff, isZero_Ext_succ_of_projective, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extMk_eq_zero_iff, CategoryTheory.ProjectiveResolution.extMk_zero, CategoryTheory.InjectiveResolution.extMk_zero, CategoryTheory.ProjectiveResolution.extMk_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: Ext classes, homotopies, and derivations of algebra maps do not construct the canonical obstruction to deforming a complex across a change of coefficient ring. Read DerivedCategory/Ext/Basic.lean:12-23, ModelCategory/Injective.lean:118-139, and RingTheory/Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "grep",
+   "query": "SquareZero|square.zero|deformation",
+   "results": "0 hits in Mathlib/Algebra/Homology/DerivedCategory: none",
+   "date": "2026-10-23",
+   "verdict": "no match: Ext classes, homotopies, and derivations of algebra maps do not construct the canonical obstruction to deforming a complex across a change of coefficient ring. Read DerivedCategory/Ext/Basic.lean:12-23, ModelCategory/Injective.lean:118-139, and RingTheory/Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifting a bounded above complex of free modules to a square zero extension of its coefficient ring is obstructed by the square of lifted differentials in degree two",
+   "results": "8 hits: derivationToSquareZeroOfLift, liftOfDerivationToSquareZero, derivationToSquareZeroEquivLift, liftOfDerivationToSquareZero_apply, Algebra.Generators.H1Cotangent.δ_eq_δAux, liftOfDerivationToSquareZero_mk_apply, derivationToSquareZeroOfLift_apply, Algebra.formallySmooth_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: Ext classes, homotopies, and derivations of algebra maps do not construct the canonical obstruction to deforming a complex across a change of coefficient ring. Read DerivedCategory/Ext/Basic.lean:12-23, ModelCategory/Injective.lean:118-139, and RingTheory/Derivation/ToSquareZero.lean:81,116."
+  },
+  {
+   "tool": "grep",
+   "query": "obstruction|square.?zero.*lift|lift.*square.?zero",
+   "results": "1 hits: Mathlib/Algebra/Homology/ModelCategory/Injective.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebra derivations, general tensor constructions, Ext definitions and model-category liftings do not state the square-zero ring-change obstruction for a bounded-above module complex. Two semantic phrasings were checked; related sources read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"obstruction\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebra derivations, general tensor constructions, Ext definitions and model-category liftings do not state the square-zero ring-change obstruction for a bounded-above module complex. Two semantic phrasings were checked; related sources read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lifting a complex of modules across a square zero quotient ring is obstructed by a natural Ext two class",
+   "results": "8 hits: TrivSqZeroExt.lift, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc_comp_assoc, CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc.congr_simp, CategoryTheory.ProjectiveResolution.liftHomotopyZeroZero_comp, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne.congr_simp, CategoryTheory.ShortComplex.Exact.lift_f, TrivSqZeroExt.liftEquivOfComm",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebra derivations, general tensor constructions, Ext definitions and model-category liftings do not state the square-zero ring-change obstruction for a bounded-above module complex. Two semantic phrasings were checked; related sources read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero ring extension has a canonical degree two obstruction to lifting a bounded above complex, given by the squares of lifted differentials",
+   "results": "8 hits: derivationToSquareZeroOfLift, liftOfDerivationToSquareZero, Algebra.Extension.homInfinitesimal, derivationToSquareZeroEquivLift, liftOfDerivationToSquareZero_apply, Algebra.Extension.infinitesimal, Algebra.Generators.H1Cotangent.δ, liftOfDerivationToSquareZero_mk_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebra derivations, general tensor constructions, Ext definitions and model-category liftings do not state the square-zero ring-change obstruction for a bounded-above module complex. Two semantic phrasings were checked; related sources read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The square of arbitrary lifted differentials of a free complex gives a natural morphism from the complex to its derived tensor with the square zero ideal shifted by two",
+   "results": "8 hits: HomologicalComplex.tensor_unit_d₂, HomologicalComplex.unit_tensor_d₁, HomologicalComplex.ιTensorObj, derivationToSquareZeroOfLift, HomologicalComplex.HasTensor, Derivation.liftKaehlerDifferential_apply, Algebra.Generators.H1Cotangent.δ, HomologicalComplex.homologicalComplexToDGO_obj_d",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned algebra derivations, general tensor constructions, Ext definitions and model-category liftings do not state the square-zero ring-change obstruction for a bounded-above module complex. Two semantic phrasings were checked; related sources read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-module-lift-formal-neighbourhood",
+  "date": "2026-10-23",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. Existence-only comparison before the tangent action adjusts the chosen completed lift. Square-zero linear deformation comparison used in the polynomial-presentation proof of Stacks 0DZ3 (correct square-zero portion of 0DZ2). Canonical obstruction invoked in the square-zero portion of Stacks 0DZ2, after translating flat module lifts to derived lifts.",
+   "via": [
+    "lem-sfb-flat-module-lift-formal-neighbourhood",
+    "lem-sfb-completion-reflects-flat-liftability",
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-square-zero-complex-obstruction",
+  "worker": "stage1",
+  "summary": "Followed the complete free-model proof of Stacks 0DYR. Wrote the curvature, morphism-defect and correction identities explicitly; reused existing bounded-above resolution, homotopy-to-derived bijection, K-flatness and flat/right-exact tensor nodes. No new nodes and no statement change. Checked canonical choices, both lifting directions and the specified flat scalar-extension clause.",
+  "blueprint": "Realizes the existing from.place: canonical obstruction prerequisite for the square-zero part of Stacks 0DZ2 beneath det-thm-sf-ctf-stability-direct-images (3). Read the current latest blueprint; no blueprint node states this module deformation assertion. The inherited ancestor is null and is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-cohomology",
+    "why": "Canonical truncation of a cohomologically bounded-above module complex to an actually bounded-above one (Steps 1, 6); generic homological algebra, no route replacement."
+   },
+   {
+    "node": "lem-sfb-subcategory-left-resolution",
+    "why": "Stacks 05T7(1) free resolution of a bounded-above module complex over R and R' (Steps 1, 6); replaces a batch-5-flagged trace-formula citation."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ordinary module K-flatness permits the free representatives to compute derived tensors."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Exact flat tensoring identifies the base-changed square-zero ideal and computes tensor on complexes."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Right exactness supplies the quotient at the end of the base-changed square-zero sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-sfb-subcategory-left-resolution",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-eb908cac6",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-eb908cac6 (reviewer sub-agent of L); spot-checked: Read Stacks 0DYR (defos.tex, lemma-canonical-class-algebra) statement and full proof; all 8 steps checked against the cited statements. Curvature factorization, chain-map identity, defect expansion e'b'+b'd'=e'e'a'-a'd'd' (the source's (L')^{n+2} target is a typo for n+1, as the report says), (d'-g~)^2=0 with signs, choice-independence and naturality via the Mathlib leaf lem-pc-ring-derived-map-representative (K(P,E)->D bijection), the converse from a free model of C', flat base change of J (0->J(x)U'->U'->U->0, J(x)_{R'}U'=J(x)_R U, U flat over R, needed because P(x)J is not K-flat) and the explicit iso (P(x)J)(x)U = P_U(x)_U J_U are all correct. Statement, stmt_deps, source and blueprint are unchanged, there are no new nodes and no SGA. Small cases J=0, C=0, a one-degree free module, and k[t]/t^4->k[t]/t^2 with maps t,t (nonzero obstruction) are fine. Duplicate search for 0DYR/05T7/square-zero lifting: lem-sc-complex-lift-class-projective, lem-weil-pbc-nilpotent-marked-free-complex-lift and lem-sc-pseudo-coherent-lift-stably-free-complex are not the obstruction class; the parent cites the item, so there is no cycle. Batch-5 flag: lem-trf-resolving-class-derived-descent is generic (Stacks 0794/05T7), but its blueprint via chain puts it in the trace-formula proof tree, and no assumption leaf replaces it. A clean non-trf route exists, so I made one FIX: Steps 1 and 6 now cite lem-weil-pbc-truncation-cohomology (Mathlib leaf: tau_{<=b}K->K is a qis when H^{>b}=0) plus lem-sfb-subcategory-left-resolution (05T7(1), class of free modules), over R and R'. Neither closure reaches sec-trace-formula or sec-poincare-duality. Step 1 now says flatness of free modules means preserving exact sequences, and proof_deps and split_report.tool_uses are updated (the trf id is removed everywhere). Accepted tool_uses are these two plus lem-pc-module-bounded-flat-kflat, lem-weil-pbc-flat-tensor-exact and lem-weil-pbc-tensor-right-exact, all generic module algebra.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SquareZeroComplexObstruction",
+  "declaration": "ModuleCat.exists_squareZeroComplexObstruction",
+  "declarations": [
+   "ModuleCat.obstructionCoefficientComplex",
+   "ModuleCat.obstructionTensorComplex",
+   "ModuleCat.obstructionTensorComparison",
+   "ModuleCat.IsSquareZeroComplexObstruction",
+   "ModuleCat.obstructionCoefficientBaseChange",
+   "ModuleCat.obstructionExactFlatExtension",
+   "ModuleCat.obstructionFlatExtensionIso",
+   "ModuleCat.obstructionScalarShift",
+   "ModuleCat.obstructionBaseChangeComparison",
+   "ModuleCat.exists_squareZeroComplexObstruction"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SquareZeroComplexObstruction.lean",
+  "statement": "theorem exists_squareZeroComplexObstruction {Rp R : Type u} [CommRing Rp] [CommRing R] (q : Rp →+* R) (hq : Function.Surjective q) (hJ : RingHom.ker q ^ 2 = ⊥) (J : ModuleCat.{u} R) (j : J →+ Rp) (hj : Function.Injective j) (hker : Set.range j = RingHom.ker q) (haction : ∀ (a : Rp) (x : J), j (q a • x) = a * j x) : ∃ ω : ∀ C : DerivedCategory (ModuleCat.{u} R), (∃ b : ℤ, C.IsLE b) → (C ⟶ (C ⊗ DerivedCategory.Q.obj (obstructionCoefficientComplex J))⟦(2 : ℤ)⟧), (∀ C hC, IsSquareZeroComplexObstruction q J j C (ω C hC)) ∧ (∀ C hC, ω C hC = 0 ↔ ∃ Cp : DerivedCategory (ModuleCat.{u} Rp), (∃ b : ℤ, Cp.IsLE b) ∧ Nonempty ((ordinaryDerivedExtendScalars q).obj Cp ≅ C)) ∧ (∀ (C D : DerivedCategory (ModuleCat.{u} R)) hC hD (f : C ⟶ D), f ≫ ω D hD = ω C hC ≫ (f ▷ DerivedCategory.Q.obj (obstructionCoefficientComplex J))⟦(2 : ℤ)⟧') ∧ (∀ (Up U : Type u) [CommRing Up] [CommRing U] (qp : Up →+* U) (f : Rp →+* Up) (g : R →+* U) (_hqp : Function.Surjective qp) (_hJU : RingHom.ker qp ^ 2 = ⊥) (_hf : f.Flat) (_hsquare : IsPushout (CommRingCat.ofHom q) (CommRingCat.ofHom f) (CommRingCat.ofHom g) (CommRingCat.ofHom qp)) (JU : ModuleCat.{u} U) (jU : JU →+ Up) (_hjU : Function.Injective jU) (_hkerU : Set.range jU = RingHom.ker qp) (_hactionU : ∀ (a : Up) (x : JU), jU (qp a • x) = a * jU x) (C : DerivedCategory (ModuleCat.{u} R)) (hC : ∃ b : ℤ, C.IsLE b), ∃ hg : g.Flat, ∃ θ : (extendScalars g).obj J ≅ JU, (∀ (a : Up) (x : J), jU (θ.hom (qp a ⊗ₜ[R, g] x)) = a * f (j x)) ∧ IsIso (obstructionBaseChangeComparison g hg J JU θ C) ∧ (∃ b : ℤ, ((ordinaryDerivedExtendScalars g).obj C).IsLE b) ∧ ∃ ωU : (ordinaryDerivedExtendScalars g).obj C ⟶ ((ordinaryDerivedExtendScalars g).obj C ⊗ DerivedCategory.Q.obj (obstructionCoefficientComplex JU))⟦(2 : ℤ)⟧, IsSquareZeroComplexObstruction qp JU jU _ ωU ∧ (ordinaryDerivedExtendScalars g).map (ω C hC) ≫ obstructionBaseChangeComparison g hg J JU θ C = ωU)",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The canonical obstruction is characterized by IsSquareZeroComplexObstruction on every bounded-above free model and every lifted differential, using the published lax tensor comparison of Q. Arbitrary square-zero kernels are encoded as quotient-module J with injective additive j identifying its image with ker(q) and prescribing its quotient action. The additional landed statement dependency supplies ordinaryDerivedExtendScalars and its normalized monoidal structure; no new derived operation is defined. Flat base change asserts existence of the canonical coefficient isomorphism pinned on pure tensors, invertibility of the actual derived comparison, preservation of bounded-aboveness and equality with the curvature-normalized obstruction over U."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ab8494d7",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Read the node, Stacks 0DYR, the 5 stmt_dep records, the delivered module and the OrdinaryDerivedChangeOfRings dependency module. Mechanical finding: ordinaryDerivedExtendScalars is (Classical.choice nonempty_ordinaryDerivedChangeOfRings).F, an object built from the theorem's conclusion, so the item genuinely depends on lem-pur-derived-change-of-rings; PASS on that point. The kernel presentation (j injective, range = ker q, quotient action) is exactly ker q. IsSquareZeroComplexObstruction pins ω uniquely: it quantifies over all free models, lifts and differentials, i is fixed by its pure-tensor formula and injective, the curvature satisfies i(w(px)) = d(dx), the [2] shift has no sign, and the K-flat comparison is invertible. The vanishing iff is exact (D⁻(R′) is equivalent to the source's D(R′)). Naturality matches the node. Flat base change uses a CommRingCat pushout (argument order checked); θ is pinned on generators; the comparison uses δ, the counit, single and θ, with the shift transported along the unique counit-compatible iso to mapDerivedCategory; ω_U is pinned by the same predicate. Universes are a single u. Live node: no lean record; the delta is lean plus the landed stmt_dep only. The statement is verbatim, all 10 declarations are present, docstrings are OK, sorry only in the main theorem, no line over 100 characters, plain imports match the proof_deps. No duplicate notion found. Not recompiled (no change)."
+ }
+}

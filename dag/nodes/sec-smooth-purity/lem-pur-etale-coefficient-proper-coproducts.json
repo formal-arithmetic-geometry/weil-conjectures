@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-etale-coefficient-proper-coproducts",
+ "kind": "statement",
+ "title": "Proper finite-coefficient coproducts in the ringed-site presentation",
+ "statement": "Let $O$ be a commutative ring, $t\\in O$, and $g:V\\to T$ a proper morphism of locally Noetherian quasi-compact schemes [def-weil-proper-morphism, pqf-def-locnoeth, def-weil-pbc-scheme-conventions]. Let $A$ be a normalized ordinary etale coefficient-system image for $g$ [def-pur-coefficient-system-image-data]. Fix $n\\in\\mathbf N$ such that $O/(t)^{n+1}$ is finite. For any universal derived level image $D$ of the ordinary adjunction $A_n^*\\dashv A_{n,*}$ in that interface, its direct functor $D.\\mathrm{direct}$ preserves coproducts indexed by every type in the sheaf universe. This applies to the actual constant quotient ring sheaves, with their recorded derived-localization choices.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "lemma-proper-mod-n-direct-sums (0F0D), transported along the constant-ring module equivalence and uniqueness of the universal total derived functor; Zheng, Construction 4.1."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-coefficient-system-image-data",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Identify modules over each constant quotient ring sheaf with sheaves of modules over the quotient ring. The normalized geometric inverse-image comparison gives the ordinary adjunction square, and uniqueness of right adjoints identifies ordinary direct images compatibly with counits.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-sfb-constant-scalar-geometric-adjunctions",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact equivalences induce equivalences of unbounded derived categories. The normalized total right-derived units identify D.direct with the usual derived direct image conjugated by those equivalences, by uniqueness of right-derived functors, or on K-injective representatives.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-ring proper derived coproduct theorem to g. Equivalences preserve all existing coproducts, and colimit preservation transports across natural isomorphisms. This proves the result for every family, including the empty family.",
+   "uses": [
+    "lem-amb-proper-coproducts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-sfb-constant-scalar-geometric-adjunctions",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-derived-exact-equivalence-squares",
+  "lem-amb-proper-coproducts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "lemma-proper-mod-n-direct-sums (0F0D), transported along the constant-ring module equivalence and uniqueness of the universal total derived functor; Zheng, Construction 4.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper derived direct image for finite constant coefficient ring sheaves preserves coproducts under equivalence to module valued sheaves",
+   "results": "Eight results about condensed module colimits and module sheafification; none states proper etale direct-image preservation in this presentation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesColimitsOfShape, CategoryTheory.Equivalence",
+   "results": "One hit: CategoryTheory.Limits.preservesColimitsOfShape_of_equiv, which changes the indexing category and does not supply the geometric comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientSystem.*Linear|constantRingModuleRestriction|proper_rightDerivedLowerStar_preservesCoproducts",
+   "results": "Zero hits in the search service. Local rg separately finds constantRingModuleRestriction and the proper fixed-module theorem, but not the requested system construction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper unbounded etale direct image preserves coproducts for finite coefficients transported along an exact equivalence of module sheaf categories",
+   "results": "Eight hits including PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, IsGrothendieckAbelian.ab4OfSize, sheaf finite coproducts and sheaf equivalences; none identifies the normalized proper derived image in the ringed-site presentation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleTowerBrownAdjunction",
+  "date": "2026-10-24",
+  "group": "E3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Steps 2–3; the corresponding construction, scalar or finite-level coproduct step of lem-pur-etale-tower-brown-adjunction.",
+   "via": [
+    "lem-pur-etale-tower-brown-adjunction",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleCoefficientProperCoproducts",
+  "file": "lean/Sheaf/Paper/EtaleCoefficientProperCoproducts.lean",
+  "declaration": "AlgebraicGeometry.etaleCoefficientProper_coproducts",
+  "statement": "theorem etaleCoefficientProper_coproducts\n    (O : Type (u + 1)) [CommRing O] (t : O)\n    {V T : Scheme.{u}} (g : V ⟶ T) [IsProper g]\n    [IsLocallyNoetherian V] [CompactSpace V]\n    [IsLocallyNoetherian T] [CompactSpace T]\n    (A : StrictEtaleOrdinaryImage O t g) (n : ℕ)\n    [Finite (O ⧸ (Ideal.span ({t} : Set O)) ^ (n + 1))]\n    (D : CoefficientDerivedImage (A.lift n).modules (A.right n) (A.levelAdj n))\n    (I : Type (u + 1)) :\n    PreservesColimitsOfShape (Discrete I) D.direct",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261024T014529-L-2212573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261024T014529-L-2212573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

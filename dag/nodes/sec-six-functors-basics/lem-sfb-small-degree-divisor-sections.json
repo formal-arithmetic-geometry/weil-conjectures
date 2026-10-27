@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-small-degree-divisor-sections",
+ "kind": "statement",
+ "title": "Section counts for degree-one and general small effective divisors",
+ "statement": "Let $k$ be algebraically closed [def-weil-field, def-weil-algebraic-closure], and let $C/k$ be a smooth projective connected curve [def-sc-curves, def-kun-projective] of genus $g\\geq1$ [def-sc-genus]. Divisors and $\\mathcal O_C(D)$ use [def-sc-divisor], and $h^0(C,\\mathcal L):=\\dim_kH^0(C,\\mathcal L)$ uses [pqf-def-cohomology]. For every $Q\\in C(k)$ one has $h^0(C,\\mathcal O_C([Q]))=1$. For every integer $0\\leq r\\leq g$ there exists an effective divisor $D$ of degree $r$ on $C$ such that $h^0(C,\\mathcal O_C(D))=1$. For $r=0$ one may take the zero divisor.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III proof of Proposition 2.3, pp.92–93 (no distinct linearly equivalent degree-one divisors in positive genus), and Lemma 5.2(a),(b), pp.101–102 (successively lowering h^1 and applying Riemann–Roch)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-genus",
+  "def-sc-divisor",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pc-projective-proper] the curve is proper. By [lem-sc-smooth-connected-curve-local-rings] it is Noetherian and integral, with DVRs at closed points and a generic point $\\eta$; thus it is a regular curve. By [lem-sc-divisor-module-local], every $\\mathcal O_C(D)$ is invertible and $\\mathcal O_C(0)=\\mathcal O_C$. Degrees in [def-sc-pic0] give $\\deg\\mathcal O_C(D)=\\deg D$. Write $h^i(D)=\\dim_kH^i(C,\\mathcal O_C(D))$. Serre duality [thm-sc-serre-duality-curve] supplies finite dimensionality and vanishing above degree one. Riemann--Roch [lem-sc-riemann-roch] therefore reads $h^0(D)-h^1(D)=\\deg D+1-g$. For $D=0$, the definition [def-sc-genus] gives $h^1(0)=g$, so $h^0(0)=1$. This already proves the $r=0$ assertion.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-divisor-module-local",
+    "def-sc-pic0",
+    "thm-sc-serre-duality-curve",
+    "lem-sc-riemann-roch",
+    "def-sc-genus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter III, p.101, paragraph before Lemma 5.2 and its proof on p.102: Riemann--Roch, duality, and D_0=0; Stacks curves.tex Tags 0BS2 (lemma-duality-dim-1), 0BS6 (lemma-rr)."
+   }
+  },
+  {
+   "text": "Fix $Q\\in C(k)$ and put $L=\\mathcal O_C([Q])$. The rational function $1$ is a nonzero global section by [def-sc-divisor], so $h^0(L)\\geq1$. If $g=1$, [def-sc-pic0] gives $\\deg L=1=2g-1$ and [lem-sc-riemann-roch-large-degree] gives $h^0(L)=1+1-g=1$. If $g\\geq2$, apply [lem-sfb-linear-series-degree-dimension-bound] to the nonzero finite-dimensional space $U=H^0(C,L)$, with $q=h^0(C,L)$ and $d=1$; [lem-pc-degree-agrees-sc] identifies its degree convention with this divisor degree. That node gives a number $0\\leq a\\leq1$ and $q\\leq\\max\\{a+1-g,a/2+1\\}\\leq3/2$. As $q$ is a positive integer, $q=1$. This proves the degree-one clause for every $Q$, not just a general point.",
+   "uses": [
+    "def-sc-divisor",
+    "def-sc-pic0",
+    "lem-sc-riemann-roch-large-degree",
+    "lem-sfb-linear-series-degree-dimension-bound",
+    "lem-pc-degree-agrees-sc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter III, proof of Proposition 2.3, pp.92--93: positive-genus degree-one assertion; agent reconstruction using the existing linear-series bound for g>=2 and the existing Riemann--Roch large-degree formula for g=1."
+   }
+  },
+  {
+   "text": "Put $\\omega=\\Omega^1_{C/k}$, invertible by [lem-sc-canonical-sheaf]. For an effective divisor $D$, set $N_D=\\omega\\otimes\\mathcal O_C(D)^{-1}$. The inverse is the dual by [lem-sc-invertible-dual]; tensor products use [def-pur-sheaf-tensor-product]. This is invertible: local generators of its two factors tensor to a generator. Locally at a closed point $P$, if $D$ has coefficient $n_P$ and $t$ is a uniformizer, [lem-sc-divisor-module-local] gives $\\mathcal O_C(D)_P=t^{-n_P}\\mathcal O_{C,P}$ and its inverse $t^{n_P}\\mathcal O_{C,P}$. Increasing $n_Q$ by one therefore identifies $N_{D+[Q]}$ with the subsheaf of $N_D$ whose sections have value zero in the fibre $N_D(Q):=(N_D)_Q/\\mathfrak m_Q(N_D)_Q$ at $Q$. Away from $Q$ the inclusion is the identity; at $Q$ its image is $t(N_D)_Q$. These local descriptions glue because each is the kernel of restriction to that fibre. Thus on global sections $H^0(C,N_{D+[Q]})$ is exactly the kernel of evaluation $H^0(C,N_D)\\to N_D(Q)$.",
+   "uses": [
+    "lem-sc-canonical-sheaf",
+    "lem-sc-invertible-dual",
+    "def-pur-sheaf-tensor-product",
+    "lem-sc-divisor-module-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Local divisor-module calculation used in Milne III Lemma 5.2(a), p.102; invertible modules locally free of rank one, and the local quotient by the maximal ideal. No cohomology exact-sequence theorem is being assumed."
+   }
+  },
+  {
+   "text": "Suppose $h^1(D)>0$. By [thm-sc-serre-duality-curve], $h^0(C,N_D)=h^1(D)$, so choose a nonzero global section $s$ of $N_D$. By [lem-sc-invertible-module-generic-stalk], its generic germ is nonzero. Trivialize $N_D$ near $\\eta$ and write $s=a e$; shrink this open to the nonvanishing locus of $a$. It is a nonempty open on which $s$ generates $N_D$. By [lem-pc-rational-points-dense] choose a $k$-rational point $Q$ in that open. Its fibre $N_D(Q)$ has dimension one over $k$, and $s(Q)\\ne0$. Consequently evaluation onto that fibre is surjective. The kernel description of step 3 and finite-dimensional rank--nullity give $h^0(C,N_{D+[Q]})=h^0(C,N_D)-1$. Applying [thm-sc-serre-duality-curve] to $\\mathcal O_C(D+[Q])$ now gives $h^1(D+[Q])=h^1(D)-1$. Notice that $Q$ is chosen after $D$; no uniform open in a parameter space is needed.",
+   "uses": [
+    "thm-sc-serre-duality-curve",
+    "lem-sc-invertible-module-generic-stalk",
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter III, Lemma 5.2(a), pp.101--102: a nonzero section of the dual line bundle is nonvanishing on a nonempty open; evaluation there has rank one."
+   }
+  },
+  {
+   "text": "For $0\\leq j\\leq g$ inductively construct an effective $D_j$ of degree $j$ with $h^1(D_j)=g-j$. Start with $D_0=0$, as in step 1. If $j<g$, then $g-j>0$ and step 4 supplies $Q_j\\in C(k)$ with $h^1(D_j+[Q_j])=g-j-1$. Set $D_{j+1}=D_j+[Q_j]$; effectiveness and degree $j+1$ follow from the coefficient-sum definition [def-sc-divisor]. This establishes the induction, including $j=g$, where no further decrease is requested. For the prescribed integer $0\\leq r\\leq g$, choose $D=D_r$. The Riemann--Roch identity established in step 1 gives $h^0(D_r)=r+1-g+(g-r)=1$.",
+   "uses": [
+    "def-sc-divisor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter III, proof of Lemma 5.2(b), p.102: repeat (a) starting with D_0=0 and substitute h^1=g-r into Riemann--Roch."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-divisor-module-local",
+  "def-sc-pic0",
+  "thm-sc-serre-duality-curve",
+  "lem-sc-riemann-roch",
+  "def-sc-genus",
+  "def-sc-divisor",
+  "lem-sc-riemann-roch-large-degree",
+  "lem-sfb-linear-series-degree-dimension-bound",
+  "lem-pc-degree-agrees-sc",
+  "lem-sc-canonical-sheaf",
+  "lem-sc-invertible-dual",
+  "def-pur-sheaf-tensor-product",
+  "lem-sc-invertible-module-generic-stalk",
+  "lem-pc-rational-points-dense"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III Proposition 2.3 and Lemma 5.2(a),(b), pp.92--93,101--102; the degree-one proof uses an existing Clifford/linear-series bound and the genus-one Riemann--Roch case; point selection and induction follow Milne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth projective curve of positive genus every degree one effective divisor has exactly one independent section and general effective divisors of degree at most genus have h0 equal one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FunctionField.classNumber\", \"module\": \"Mathlib/NumberTheory/ClassNumber/FunctionField\", \"type\": \"(Fq : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Field Fq] →\\n      [Fintype Fq] →\\n        [inst_2 : Field F] →\\n          [inst_3 : Algebra (Polynomial Fq) F] →\\n            [inst_4 : Algebra (RatFunc Fq) F] →\\n              [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] →\\n                [FunctionFiel\", \"doc\": \"The class number is defined as the cardinality of the class group of the ring of integers $\\\\mathcal{O}_F$ (the integral closure of $\\\\mathbb{F}_q[X]$) in a function field $F$ over the finite field $\\\\ma\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_apply\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] (P : W.Point),\\n  WeierstrassCurve.Affine.Point.toClass P =\\n    match P with\\n    | WeierstrassCurve.Affine.Point.zero => 0\\n    | WeierstrassCurve.Affine.Point.some h =>\\n      Additive.ofMul (ClassGroup.mk (Weiers\", \"doc\": \"The function maps each point $ P $ on an affine Weierstrass curve $ W $ over a field to an element in the additive class group of $ W $'s coordinate ring. The zero point maps to the additive identity,\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x y : F}\\n  (h : W.Nonsingular x y),\\n  WeierstrassCurve.Affine.Point.toClass (WeierstrassCurve.Affine.Point.some h) =\\n    ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h)\", \"doc\": \"For any commutative domain $ R $, its class group — defined as the quotient of the group of invertible fractional ideals by the subgroup of principal fractional ideals — forms an abelian group under i\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_eq_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] (P : W.Point),\\n  WeierstrassCurve.Affine.Point.toClass P = 0 ↔ P = 0\", \"doc\": \"For any point $ P $ on an affine Weierstrass curve over a field, the image of $ P $ under the additive homomorphism to the class group of the coordinate ring is zero if and only if $ P $ is the zero p\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern function-field class numbers, Weierstrass curves, analytic meromorphic divisors, or smooth-algebra ranks, not these section counts for arbitrary-genus curves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "General effective divisors of degree at most genus on a smooth projective curve have no nonconstant global sections",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MeromorphicOn.divisor\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"(f : 𝕜 → E) (U : Set 𝕜) : Function.locallyFinsuppWithin U ℤ\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, this constructs the divisor of $ f $ as a locally finite fo\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ (Spec <| .of K)) [IsIntegral X] [UniversallyClosed f] [LocallyOfFiniteType f] : f.appTop.hom.Finite\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"MeromorphicOn.divisor_apply\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"{f : 𝕜 → E} (hf : MeromorphicOn f U) (hz : z ∈ U) : divisor f U z = (meromorphicOrderAt f z).untop₀\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, and for any point $ z \\\\in U $, the coefficient of the divis\"}\n  {\"name\": \"MeromorphicOn.divisor_def\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"(f : 𝕜 → E) (U : Set 𝕜) : divisor f U z = if MeromorphicOn f U ∧ z ∈ U then (meromorphicOrderAt f z).untop₀ else 0\", \"doc\": \"For a meromorphic function $ f : \\\\mathbb{K} \\\\to E $ on a set $ U \\\\subseteq \\\\mathbb{K} $ (where $ \\\\mathbb{K} $ is a nontrivially normed field and $ E $ is a normed vector space over $ \\\\mathbb{K} $), th\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"{U : Opens (ProjectiveSpectrum.top 𝒜)} (f : ∀ x : U, at x.1) : Prop\", \"doc\": \"A function $ f $ defined on an open set $ U $ of the projective spectrum is a section of the structure sheaf if there exists a degree $ i $, homogeneous elements $ r, s $ of degree $ i $ in the graded\"}\n  {\"name\": \"MeromorphicOn.divisor_const\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"(e : E) : divisor (fun _ ↦ e) U = 0\", \"doc\": \"For any constant meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, the divisor of $ f $ is the zero divisor. This h\"}\n  {\"name\": \"MeromorphicOn.divisor_restrict\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"{f : 𝕜 → E} {V : Set 𝕜} (hf : MeromorphicOn f U) (hV : V ⊆ U) : (divisor f U).restrict hV = divisor f V\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, the restriction of the divisor of $ f $ on $ U $ to a subse\"}\n  {\"name\": \"MeromorphicOn.divisor_fun_smul\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"{f₁ : 𝕜 → 𝕜} {f₂ : 𝕜 → E} (h₁f₁ : MeromorphicOn f₁ U) (h₁f₂ : MeromorphicOn f₂ U)\\n  (h₂f₁ : ∀ z ∈ U, meromorphicOrderAt f₁ z ≠ ⊤) (h₂f₂ : ∀ z ∈ U, meromorphicOrderAt f₂ z ≠ ⊤) :\\n  divisor (fun z ↦ f₁ z • f₂ z) U = divisor f₁ U + divisor f₂ U\", \"doc\": \"For meromorphic functions $ f_1 $ and $ f_2 $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, if the meromorphic order of $ f_1 $ and $ f_2 \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern function-field class numbers, Weierstrass curves, analytic meromorphic divisors, or smooth-algebra ranks, not these section counts for arbitrary-genus curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"genus\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern function-field class numbers, Weierstrass curves, analytic meromorphic divisors, or smooth-algebra ranks, not these section counts for arbitrary-genus curves"
+  },
+  {
+   "tool": "grep",
+   "query": "Riemann.Roch|riemannRoch|nonspecial|nonspecial|h0.*divisor",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern function-field class numbers, Weierstrass curves, analytic meromorphic divisors, or smooth-algebra ranks, not these section counts for arbitrary-genus curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic nonspecial effective divisors have h1 equal genus minus degree by Riemann Roch",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FunctionField.classNumber\", \"module\": \"Mathlib/NumberTheory/ClassNumber/FunctionField\", \"type\": \"(Fq : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Field Fq] →\\n      [Fintype Fq] →\\n        [inst_2 : Field F] →\\n          [inst_3 : Algebra (Polynomial Fq) F] →\\n            [inst_4 : Algebra (RatFunc Fq) F] →\\n              [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] →\\n                [FunctionFiel\", \"doc\": \"The class number is defined as the cardinality of the class group of the ring of integers $\\\\mathcal{O}_F$ (the integral closure of $\\\\mathbb{F}_q[X]$) in a function field $F$ over the finite field $\\\\ma\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Nontrivial S]\\n  [Algebra.IsStandardSmooth R S] (n : ℕ), Algebra.IsStandardSmoothOfRelativeDimension n R S ↔ Module.rank S Ω[S⁄R] = ↑n\", \"doc\": \"For a non-trivial commutative ring $ S $ that is a standard smooth algebra over a commutative ring $ R $, $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $ if and only if the r\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Nontrivial S] (n : ℕ)\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], Module.rank S Ω[S⁄R] = ↑n\", \"doc\": \"If $ S $ is a non-trivial commutative ring that is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then the rank of the module of Kähler differentials $ \\\\Omega_{S/\"}\n  {\"name\": \"Algebra.SubmersivePresentation.rank_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] [Nontrivial S] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Module.rank S Ω[S⁄R] = ↑P.dimension\", \"doc\": \"For a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the rank of the module of Kähler differentials $ \\\\Omega_{S/R} $ over $ S $ equals the dimension of $\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → [Algebra.IsStandardSmooth R S] → ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.toClass_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x y : F}\\n  (h : W.Nonsingular x y),\\n  WeierstrassCurve.Affine.Point.toClass (WeierstrassCurve.Affine.Point.some h) =\\n    ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h)\", \"doc\": \"For any commutative domain $ R $, its class group — defined as the quotient of the group of invertible fractional ideals by the subgroup of principal fractional ideals — forms an abelian group under i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern function-field class numbers, Weierstrass curves, analytic meromorphic divisors, or smooth-algebra ranks, not these section counts for arbitrary-genus curves"
+  },
+  {
+   "tool": "grep",
+   "query": "Riemann.Roch|riemannRoch|nonspecial|h0.*divisor",
+   "results": "{\"t\": \"2026-10-23T09:49:34Z\", \"tool\": \"grep\", \"query\": \"Riemann.Roch|riemannRoch|nonspecial|h0.*divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/NoZeroSMulDivisors/Defs.lean\"], \"digest\": \"59a62316fc6054a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Weierstrass-curve points, analytic meromorphic divisors, function-field class groups, smooth-algebra ranks or an unrelated NoZeroSMulDivisors lemma; none states these arbitrary-genus section counts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An effective divisor of degree at most the genus of a smooth projective curve can be chosen with h0 equal to one",
+   "results": "{\"t\": \"2026-10-23T09:49:34Z\", \"tool\": \"leansearch\", \"query\": \"An effective divisor of degree at most the genus of a smooth projective curve can be chosen with h0 equal to one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"MeromorphicOn.divisor\", \"PowerSeries.IsWeierstrassDivisorAt\", \"MeromorphicOn.divisor_def\", \"MeromorphicOn.divisor_zpow\", \"MeromorphicOn.divisor_apply\", \"WeierstrassCurve.ψ_zero\", \"Polynomial.hilbertPoly_eq_zero_of_le_rootMultiplicity_one\"], \"digest\": \"805fb3dd8ed88e2e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Weierstrass-curve points, analytic meromorphic divisors, function-field class groups, smooth-algebra ranks or an unrelated NoZeroSMulDivisors lemma; none states these arbitrary-genus section counts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"genus\"",
+   "results": "{\"t\": \"2026-10-23T09:49:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"genus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Weierstrass-curve points, analytic meromorphic divisors, function-field class groups, smooth-algebra ranks or an unrelated NoZeroSMulDivisors lemma; none states these arbitrary-genus section counts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth projective curve of positive genus every degree one effective divisor has exactly one independent section and there are effective divisors of every degree at most genus with exactly one section",
+   "results": "{\"t\": \"2026-10-23T09:49:39Z\", \"tool\": \"leanfinder\", \"query\": \"On a smooth projective curve of positive genus every degree one effective divisor has exactly one independent section and there are effective divisors of every degree at most genus with exactly one section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.Point.toClass_some\", \"FunctionField.classNumber\", \"WeierstrassCurve.Affine.Point.toClass_apply\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.Point.nonsingular\"], \"digest\": \"c35dae4211538f3e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Weierstrass-curve points, analytic meromorphic divisors, function-field class groups, smooth-algebra ranks or an unrelated NoZeroSMulDivisors lemma; none states these arbitrary-genus section counts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic nonspecial effective divisors have h1 equal genus minus degree by Riemann Roch",
+   "results": "{\"t\": \"2026-10-23T09:53:24Z\", \"tool\": \"leanfinder\", \"query\": \"Generic nonspecial effective divisors have h1 equal genus minus degree by Riemann Roch\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField.classNumber\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential\", \"Algebra.SubmersivePresentation.rank_kaehlerDifferential\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"Algebra.IsStandardSmooth.relativeDimension\", \"WeierstrassCurve.Affine.Point.toClass_some\"], \"digest\": \"8d72993d4bdf5905\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are Weierstrass-curve points, analytic meromorphic divisors, function-field class groups, smooth-algebra ranks or an unrelated NoZeroSMulDivisors lemma; none states these arbitrary-genus section counts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symmetric-abel-image-geometry",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Pointed Abel maps, their divisor images, and the universal Picard family. Proof prerequisite: Chapter III proof of Proposition 2.3, pp.92–93 (no distinct linearly equivalent degree-one divisors in positive genus), and Lemma 5.2(a),(b), pp.101–102 (successively lowering h^1 and applying Riemann–Roch).",
+   "via": [
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-small-degree-divisor-sections",
+  "worker": "stage1",
+  "summary": "Unchanged statement. No new nodes: existing degree-dimension bound proves the degree-one clause for g>=2, with large-degree Riemann--Roch for g=1. Wrote out the local evaluation kernel and the point-by-point h1-decreasing induction, including r=0 and r=g. Read all cited statements and local sources; no attachment found.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route, through the pointed Abel-image geometry prerequisite: Milne III Proposition 2.3 and Lemma 5.2, exactly the places in blueprint.from.place. Current blueprint/latest direct-image proof (3) retains the direct-image route. The inherited blueprint ancestor chain resolves to null under blueprint_refs.py ancestor; no ancestor metadata was invented.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic regular-curve and DVR facts used in step 1; no same-unit node replaces this existing geometric tool."
+   },
+   {
+    "node": "lem-sc-divisor-module-local",
+    "why": "Local t^{-n} description and invertibility of the actual divisor modules, used in steps 1 and 3; generic divisor-calculus tool."
+   },
+   {
+    "node": "lem-sc-invertible-module-generic-stalk",
+    "why": "Injectivity into the generic stalk ensures a nonzero global section is nonzero on a nonempty open in step 4; generic line-bundle tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-divisor-module-local",
+  "lem-sc-invertible-module-generic-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-5eb8ad485",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-5eb8ad485 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. Shape (A): one commit changing only the item and its report, no new nodes. Statement, stmt_deps and blueprint are identical to live; the item is still unsplit with an empty proof on live and side-live, and no repair or re-split note names it. Source: Milne AV Ch. III, proof of Prop. 2.3 (pp. 92-93) and Lemma 5.2(a),(b) (pp. 101-102), read in the local PDF; the statement agrees, and asking only for existence of D is weaker than Milne's open U, which the citer accepts. Step 1: properness, local rings, invertibility of O(D) with O(0)=O, deg O(D)=deg D, vanishing of H^q outside 0<=q<=1 from Serre duality, and RR(1) with g=h^1(O) give h^0(0)=1. Step 2: 1 is a nonzero section of O([Q]). For g=1, large-degree RR (1>=2g-1) gives h^0=1. For g>=2, the existing linear-series bound with U=H^0(L), using lem-pc-degree-agrees-sc for its degree convention, gives q<=max{a+1-g,a/2+1}<=3/2, so q=1. The bound does not depend on the item (closure checked). Step 3 (elementary): checked myself that the dual of the inclusion O(D) into O(D+Q) has image t times the old stalk at Q and is the identity elsewhere, so H^0(N_{D+Q}) is the kernel of evaluation at the fibre at Q. Step 4: Serre duality gives h^0(N_D)=h^1(D)>0; a nonzero section has nonzero generic germ, so its nonvanishing locus is a nonempty open containing a rational point (rational-points-dense; alg. closed is separably closed); evaluation is onto the 1-dim fibre and rank-nullity lowers h^1 by one. Q may lie in Supp D. Step 5: explicit induction deg D_j=j, h^1(D_j)=g-j, base D_0=0, then RR gives h^0=1. Edge cases r=0, r=g, g=1 and repeated points checked; g=0 is excluded by the hypothesis and needed (P^1). C/D/E: every non-elementary fact cites a node whose statement gives it; no node is used for its proof. The three tool_uses (lem-sc-smooth-connected-curve-local-rings, lem-sc-divisor-module-local, lem-sc-invertible-module-generic-stalk) are generic tools and accepted. Duplicate search (rg -L over dag/nodes) found no node stating the item. Batch 5: all five flagged citations (Serre duality on curves, RR, large-degree RR, linear-series bound, degree agreement) are coherent cohomology of curves, not the trace formula, Poincare duality or steps of their proofs. Each reaches sec-trace-formula only through def-trf-schematically-dense-open, a general definition, so they are outside the assumptions."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmallDegreeDivisorSections",
+  "declaration": "AlgebraicGeometry.Scheme.smallDegreeDivisor_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmallDegreeDivisorSections.lean",
+  "statement": "theorem smallDegreeDivisor_sections {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsHProjective f] (g : ℕ) (hg : f.genus = g) (hgpos : 1 ≤ g) : (∀ Q : {q : Spec (.of k) ⟶ C // q ≫ f = 𝟙 _}, Module.finrank k ((RingedSpace.moduleCohomology C.toRingedSpace 0 ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj (Divisor.moduleOfSmoothConnectedCurve k C f (Finsupp.single (pointEquivClosedPoint f Q) 1 : C.Divisor))) = 1) ∧ (∀ r : ℤ, 0 ≤ r → r ≤ (g : ℤ) → ∃ D : C.Divisor, (∀ P : closedPoints C, 0 ≤ D P) ∧ Divisor.degree C D = r ∧ Module.finrank k ((RingedSpace.moduleCohomology C.toRingedSpace 0 ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj (D.moduleOfSmoothConnectedCurve k C f)) = 1) ∧ Module.finrank k ((RingedSpace.moduleCohomology C.toRingedSpace 0 ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj ((0 : C.Divisor).moduleOfSmoothConnectedCurve k C f)) = 1",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-778833850",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Shape (A): one new module, Sheaf.AlgebraicGeometry.SmallDegreeDivisorSections, with a single sorried theorem; node identical to side-live except lean; lean.statement verbatim in the file. Clause by clause: IsAlgClosed k; IsConnectedCurve+Smooth+IsHProjective f (the stmt_dep records, no properness added); f.genus = g >= 1 (recorded genus = h0(Omega), the equivalent form def-sc-genus allows); Q as a k-section through Mathlib pointEquivClosedPoint; [Q] = Finsupp.single in C.Divisor; O(D) = Divisor.moduleOfSmoothConnectedCurve; h0 = finrank k of moduleCohomology 0 restricted along f (pqf-def-cohomology, same convention as landed GiesekerPotentialStability); second conjunct for r:Z in [0,g] gives an effective D of degree r with h0 = 1; third conjunct is h0(O(0)) = 1. Milne AV III Prop 2.3 proof and Lemma 5.2 read in the PDF; the node keeps only existence (weaker than Milne's open), and the Lean matches the node. Edge cases r=0, r=g, g=1, repeated points; g=0 excluded as in the node; single universe u as required by moduleOfSmoothConnectedCurve. Docstrings give the source place, the blueprint id and the 5 proof steps; no hollow definitions or local proofs; proof-dep imports private and all present. rg finds no existing declaration. No file changed, so no compile."
+ }
+}

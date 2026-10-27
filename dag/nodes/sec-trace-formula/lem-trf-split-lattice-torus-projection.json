@@ -1,0 +1,216 @@
+{
+ "id": "lem-trf-split-lattice-torus-projection",
+ "kind": "statement",
+ "title": "Smooth split-lattice torus projections and reduced products",
+ "statement": "Let $k$ be a field and $L$ an abelian group with a finite integral basis $b_1,\\ldots,b_r$, $r\\geq0$. Let $A=k[L]=\\bigoplus_{l\\in L}ke^l$, with $e^le^{l'}=e^{l+l'}$, let $T=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $Y$ be any $k$-scheme. The projection $\\pi:T\\times_kY\\to Y$ [def-pc-fibre-product] is smooth [def-sbc-smooth-morphisms] and has a section induced by $A\\to k$, $e^l\\mapsto1$; in particular it is surjective on underlying points. Thus $T$ is smooth over $k$.\n\nFor each extension field $K/k$ the canonical $K$-algebra map $A\\otimes_kK\\simeq K[L]$, $e^l\\otimes c\\mapsto ce^l$, is an isomorphism and $K[L]$ is an integral domain. For every reduced commutative $k$-algebra $R$, the ring $R\\otimes_k A$ is reduced (its only nilpotent element is zero). Consequently if $Y$ is reduced [def-pc-reduced-scheme], then $T\\times_kY$ is reduced. These assertions allow arbitrary characteristic, reducible or empty $Y$, the zero ring $R$, and rank zero.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.2.12(i), printed p.104, and the torus product in 3.2.19, p.106. Re-split of returned parent Steps 7--9: square-zero unit lifting, identity section, geometric reducedness and reduced-base product. Reduced-base algebra input is the existing lem-trf-geometrically-reduced-base-change, rather than a duplicate of that lemma."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Transport UniqueSums along the injective integral basis representation L -> (Fin r ->₀ Z), then apply Mathlib AddMonoidAlgebra IsDomain. Mathlib AddMonoidAlgebra.scalarTensorEquiv, composed with the K-linear tensor symmetry commRight, constructs A tensor K equiv K[L] with the required monomial formula. These are explicit proved constructions, with no choice from an unproved existence statement.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved source-library theorem isReduced_tensorProduct_of_forall_residueField (WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced). Every residue-field tensor of R with A is the group algebra of L over that residue field by scalarTensorEquiv, hence is reduced by the domain argument. Thus R tensor A is reduced for every reduced R, including the zero ring. The source theorem proves the joint residue-field detection using basis coordinates; no finite generation or perfectness is assumed.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pull the affine cover of reduced Y back along the projection. For each affine component Spec R, use Spec.map_surjective to write its structure map as Spec of a ring map k -> R, then use pullbackLeftPullbackSndIso and pullbackSpecIso to identify the pulled-back component with Spec(A tensor R). Tensor symmetry and the preceding step make this ring reduced; affine_isReduced_iff and IsReduced.of_openCover prove reducedness of the product. Apply this also when Y is the spectrum of any extension field to obtain GeometricallyReduced for T -> Spec k.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-reduced-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Module.Finite.of_basis makes L a finite Z-module, hence a finitely generated additive group. Mathlib AddMonoidAlgebra.finiteType_iff_group_fg gives finite type for A. Its canonical Hopf-algebra structure supplies the group scheme on Spec A. The Mathlib theorem AlgebraicGeometry.smooth_of_grpObj now proves smoothness of T over k from its finite type and geometric reducedness. Smoothness is stable under base change, proving the asserted projection smooth. This shorter argument replaces the square-zero lifting calculation below the unit level.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The specified augmentation is an algebra homomorphism, so its composite with the scalar inclusion is the identity. Contravariance of Spec gives epsilon composed with T -> Spec k equal to the identity. Pair y composed with epsilon and the identity of Y by pullback.lift. The projection identities give both required section equations; evaluating the second projection identity at any point of Y proves surjectivity. Rank zero and empty Y require no case split. Combine these statements with the domain, scalar-extension and reducedness results above.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-affine-scheme-reduced-iff"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib.AlgebraicGeometry.Group.Smooth; WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced",
+  "place": "Shorter proof of ILO VIII 3.2.12(i) and 3.2.19: smooth_of_grpObj, scalarTensorEquiv, finiteType_iff_group_fg, and isReduced_tensorProduct_of_forall_residueField; affine-cover and augmentation assembly by E8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-split-lattice-torus-projection: The group algebra torus of a finite free abelian group over a field has smooth surjective projection after any base change and its product with a reduced scheme is reduced",
+   "results": "OK: 8 hits; AlgebraicGeometry.pointsPi_surjective, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.SubmersivePresentation.cotangentComplexAux_surjective, Algebra.Smooth.exists_finiteType, Algebra.FormallySmooth.iff_split_injection, Algebra.Generators.CotangentSpace.map_ofComp_surjective, AlgebraicGeometry.pointsPi_surjective_of_isAffine, Algebra.Smooth.exists_subalgebra_finiteType",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general smoothness, reduced-stalk or Laurent localization primitives, not the full split-lattice torus projection and reduced-base product assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(Laurent|MonoidAlgebra).*(smooth|reduced)|(smooth|reduced).*(Laurent|MonoidAlgebra)",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general smoothness, reduced-stalk or Laurent localization primitives, not the full split-lattice torus projection and reduced-base product assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaurentPolynomial\", \"Smooth\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general smoothness, reduced-stalk or Laurent localization primitives, not the full split-lattice torus projection and reduced-base product assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Laurent group algebra torus smooth surjective projection reduced product over a reduced scheme",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsReduced.mk, IsLocalization.algebraMap_pi_surjective_of_isLocalization, Algebra.FormallySmooth.iff_of_surjective, LaurentSeries.LaurentSeriesAlgEquiv, AlgebraicGeometry.isReduced_of_isReduced_stalk, LaurentPolynomial.isLocalization, Algebra.FormallySmooth.instTensorProduct, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general smoothness, reduced-stalk or Laurent localization primitives, not the full split-lattice torus projection and reduced-base product assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any reduced algebra R over a field k and free abelian group L of finite rank the scheme Spec R[L] is reduced and the map to Spec R is smooth with the section sending all monomials to one",
+   "results": "OK: 8 hits; Algebra.IsStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.Smooth, RingHom.IsStandardSmoothOfRelativeDimension, RingHom.IsStandardSmoothOfRelativeDimension.toAlgebra, Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general smoothness, reduced-stalk or Laurent localization primitives, not the full split-lattice torus projection and reduced-base product assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra|LaurentPolynomial).*(Smooth|IsReduced)|(Smooth|IsReduced).*(MonoidAlgebra|AddMonoidAlgebra|LaurentPolynomial)",
+   "results": "{\"t\": \"2026-10-23T09:28:18Z\", \"tool\": \"grep\", \"query\": \"(MonoidAlgebra|AddMonoidAlgebra|LaurentPolynomial).*(Smooth|IsReduced)|(Smooth|IsReduced).*(MonoidAlgebra|AddMonoidAlgebra|LaurentPolynomial)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic smoothness and one-variable Laurent localization are ingredients; no hit states all clauses for a finite-basis group algebra and arbitrary reduced base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Laurent polynomial algebra in finitely many variables defines a smooth torus whose product with a reduced scheme is reduced",
+   "results": "{\"t\": \"2026-10-23T09:28:18Z\", \"tool\": \"leansearch\", \"query\": \"A Laurent polynomial algebra in finitely many variables defines a smooth torus whose product with a reduced scheme is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial\", \"LaurentPolynomial.isLocalization\", \"LaurentPolynomial.T\", \"Polynomial.toLaurentAlg_apply\", \"Algebra.mvPolynomial\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\", \"LaurentPolynomial.mk'_eq\", \"Algebra.smoothLocus\"], \"digest\": \"24d7f0291b5175a8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic smoothness and one-variable Laurent localization are ingredients; no hit states all clauses for a finite-basis group algebra and arbitrary reduced base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T09:28:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidAlgebra\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic smoothness and one-variable Laurent localization are ingredients; no hit states all clauses for a finite-basis group algebra and arbitrary reduced base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The torus with coordinate ring the group algebra of a finite free abelian group is smooth over any field and its product with every reduced scheme is reduced",
+   "results": "{\"t\": \"2026-10-23T09:28:23Z\", \"tool\": \"leanfinder\", \"query\": \"The torus with coordinate ring the group algebra of a finite free abelian group is smooth over any field and its product with every reduced scheme is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.id\", \"Algebra.Smooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.smoothLocus_eq_univ\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"1256db5c2e95d469\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic smoothness and one-variable Laurent localization are ingredients; no hit states all clauses for a finite-basis group algebra and arbitrary reduced base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a field k and a finite rank free abelian group L the group ring k[L] is geometrically reduced and Spec k[L] is smooth with a rational identity point",
+   "results": "{\"t\": \"2026-10-23T09:29:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a field k and a finite rank free abelian group L the group ring k[L] is geometrically reduced and Spec k[L] is smooth with a rational identity point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.id\", \"Algebra.IsGeometricallyReduced\", \"Algebra.IsStandardSmooth\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"Algebra.instSmoothOfIsStandardSmooth\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.instIsStandardSmoothOfRelativeDimensionOfNatNatOfSubsingleton\"], \"digest\": \"34d144a9f4a97914\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic smoothness and one-variable Laurent localization are ingredients; no hit states all clauses for a finite-basis group algebra and arbitrary reduced base."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-toric-realization-finite-type",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Remark 3.1.4 and 3.1.10(ii), Proposition 3.2.2 and 3.2.4--3.2.5, printed pp.98--100,103; smooth torus input in 2.3.16--2.3.17 and application in 3.2.19. No Stacks tag states the complete monoscheme realization assertion. New subargument: Expose VIII, Lemma 3.2.12(i), printed p.104, and the torus product in 3.2.19, p.106. Re-split of returned parent Steps 7--9: square-zero unit lifting, identity section, geometric reducedness and reduced-base product. Reduced-base algebra input is the existing lem-trf-geometrically-reduced-base-change, rather than a duplicate of that lemma.",
+   "via": [
+    "lem-trf-toric-realization-finite-type",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-split-lattice-torus-projection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing Laurent-coordinate presentation, monoid-algebra domain, geometrically reduced base-change and affine reducedness nodes. Wrote out global affine square-zero lifting, the augmentation section and the scalar-extension inverse. No new nodes, Lean edits or compiles. Checked all citations and degenerate cases.",
+  "blueprint": "Inherited historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through the monoidal-resolution chain: realizes returned toric-realization Steps 7--9 (square-zero lifting, identity section, geometric reducedness and reduced products), using ILO VIII 3.2.12(i) and 3.2.19. The newest blueprint no longer contains that old branch; this split supplies the assigned existing auxiliary item without altering the current unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-d398556ea",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-d398556ea (reviewer sub-agent of L); spot-checked: First split of a live-unsplit item. There are no new nodes and no repair note. The statement, stmt_deps, source and blueprint are byte-identical to live; only the proof fields changed. Source: ILO VIII 3.2.12(i), p.104 ('Part (i) is obvious'), and 3.2.19, p.106; proof_origin agent is correct. Step 1 uses only the unconditional clauses of lem-trf-lattice-torus-coordinates-action: the Laurent isomorphism, the arbitrary-Y affine charts Spec(R⊗k[L]), and local finite presentation. Step 2 is a correct, elementary square-zero lift: v·w(1−d)=1−d²=1. The k-structure comes through Y, the map is paired through def-pc-fibre-product, and no chart factorization is assumed. Step 3: the augmentation section gives surjectivity; T smooth follows with Y=Spec k. Step 4: the explicit inverse α/β, orientation A⊗K. Step 5: the monoid-algebra-domain statement applies over K with G=L and Q=⟨b_i⟩, including r=0; this feeds the hypothesis of geometrically-reduced-base-change exactly (any reduced R, no finiteness). Step 6: affine-reduced-iff on the Step 1 cover. proof_deps equals the union of uses. There is no cycle (closure traversed). rg -L searches found no duplicate. There is no SGA text. Edge cases checked: r=0, R=0, empty or reducible Y, characteristic 2, inseparable K."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitLatticeTorusProjection",
+  "declaration": "AlgebraicGeometry.split_lattice_torus_projection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitLatticeTorusProjection.lean",
+  "statement": "theorem split_lattice_torus_projection (k : Type u) [Field k] (L : Type u) [AddCommGroup L] (r : ℕ) (_b : Module.Basis (Fin r) ℤ L) (Y : Scheme.{u}) (y : Y ⟶ Spec (.of k)) : Smooth (pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap k (AddMonoidAlgebra k L)))) y) ∧ (∃ s : Y ⟶ pullback (Spec.map (CommRingCat.ofHom (algebraMap k (AddMonoidAlgebra k L)))) y, s ≫ pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap k (AddMonoidAlgebra k L)))) y = 𝟙 Y ∧ s ≫ pullback.fst (Spec.map (CommRingCat.ofHom (algebraMap k (AddMonoidAlgebra k L)))) y = y ≫ Spec.map (CommRingCat.ofHom (AddMonoidAlgebra.lift k k L 1).toRingHom)) ∧ Surjective (pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap k (AddMonoidAlgebra k L)))) y) ∧ Smooth (Spec.map (CommRingCat.ofHom (algebraMap k (AddMonoidAlgebra k L)))) ∧ (∀ (K : Type (max u v)) [Field K] [Algebra k K], (∃ e : @AlgEquiv K (AddMonoidAlgebra k L ⊗[k] K) (AddMonoidAlgebra K L) _ _ _ (Algebra.TensorProduct.rightAlgebra (R := k)) _, ∀ (l : L) (c : K), e (AddMonoidAlgebra.single l (1 : k) ⊗ₜ[k] c) = AddMonoidAlgebra.single l c) ∧ IsDomain (AddMonoidAlgebra K L)) ∧ (∀ (R : Type (max u w)) [CommRing R] [Algebra k R] [_root_.IsReduced R], _root_.IsReduced (R ⊗[k] AddMonoidAlgebra k L)) ∧ (IsReduced Y → IsReduced (pullback (Spec.map (CommRingCat.ofHom (algebraMap k (AddMonoidAlgebra k L)))) y))",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c79cb70e",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Lean statement matches every node clause: smooth pullback.snd, the section pinned to the augmentation (lift k k L 1, argument order checked in Mathlib), Surjective, T smooth over k, a K-linear AlgEquiv (rightAlgebra) A⊗K≃K[L] fixed by single l 1⊗c ↦ single l c plus IsDomain K[L], reduced R ⊗[k] A for all reduced R, and IsReduced Y → IsReduced pullback. No extra hypotheses; the basis hypothesis is required. Edge cases r=0, empty or reducible Y, R=0, char 2 and inseparable K covered; universes harmless (L has a finite basis, K and R in max-universes). lean.statement verbatim; report has both required sections; sorry only, no new defs, docstrings carry source, blueprint id and the 6 proof steps; proof-dependency imports exist in side-live; no duplicate found by rg. Not recompiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261026T081700-L-2040462",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

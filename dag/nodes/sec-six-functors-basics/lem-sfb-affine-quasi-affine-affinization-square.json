@@ -1,0 +1,94 @@
+{
+ "id": "lem-sfb-affine-quasi-affine-affinization-square",
+ "kind": "statement",
+ "title": "Affine morphisms over quasi-affine schemes and their canonical affinization square",
+ "statement": "Let $f:P\\to Q$ be an affine morphism [pqf-def-affine-morphism] of schemes [def-pc-scheme]. Assume $Q$ is quasi-affine, meaning isomorphic to a quasi-compact open subscheme of an affine scheme. Then $P$ is quasi-affine. Write $C=\\Gamma(P,\\mathcal O_P)$, $D=\\Gamma(Q,\\mathcal O_Q)$, and $f^*:D\\to C$ for pullback of sections. Let $j_P:P\\to\\operatorname{Spec}C$ and $j_Q:Q\\to\\operatorname{Spec}D$ be the canonical morphisms corresponding to the identity maps on sections [lem-weil-pbc-morphism-into-affine-scheme, def-weil-affine-spectrum]. These are open immersions [def-weil-open-immersion], and the square with top arrow $j_P$, left arrow $f$, right arrow $\\operatorname{Spec}(f^*)$ and bottom arrow $j_Q$ is cartesian [def-pc-fibre-product]. In particular $(\\operatorname{Spec}(f^*))^{-1}(j_Q(Q))=j_P(P)$ as open subschemes of $\\operatorname{Spec}C$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 07RN (lemma-approximate), fourth paragraph: the canonical-affinization inverse-image property underlying descent of the principal opens. Exact generic statements: Mathlib/AlgebraicGeometry/QuasiAffine.lean, lines 93, 115-145, 147-150."
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "def-pc-scheme",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine morphism to a quasi affine scheme has quasi affine source and its square with the canonical maps to spectra of global sections is cartesian",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ, AlgebraicGeometry.AffineTargetMorphismProperty, AlgebraicGeometry.affineAnd, AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.IsAffineHom, AlgebraicGeometry.AffineTargetMorphismProperty.of",
+   "date": "2026-10-23",
+   "verdict": "match: the source-quasi-affineness and cartesian-square clauses are separate Mathlib declarations; see mathlib_match."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ",
+   "results": "1 hits: AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ",
+   "date": "2026-10-23",
+   "verdict": "match: the source-quasi-affineness and cartesian-square clauses are separate Mathlib declarations; see mathlib_match."
+  },
+  {
+   "tool": "grep",
+   "query": "isPullback_toSpecΓ_toSpecΓ|preimage_opensRange_toSpecΓ|of_isAffineHom",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-23",
+   "verdict": "match: the source-quasi-affineness and cartesian-square clauses are separate Mathlib declarations; see mathlib_match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of canonical affinization open along the spectrum of global sections of an affine morphism is the canonical source open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ, AlgebraicGeometry.IsAffineOpen.fromSpec_top, AlgebraicGeometry.Scheme.map_PrimeSpectrum_basicOpen_of_affine, AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_self, AlgebraicGeometry.IsAffineOpen.fromSpec_preimage_basicOpen', AlgebraicGeometry.IsAffineOpen.preimage, AlgebraicGeometry.IsAffineHom.isAffine_preimage, AlgebraicGeometry.IsAffineOpen.fromSpec_app_self_apply",
+   "date": "2026-10-23",
+   "verdict": "match: the source-quasi-affineness and cartesian-square clauses are separate Mathlib declarations; see mathlib_match."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom",
+  "file": "Mathlib/AlgebraicGeometry/QuasiAffine.lean",
+  "how": "exact clause by clause: IsQuasiAffine.of_isAffineHom at line 93; the canonical maps are open by instIsOpenImmersionToSpecΓOfIsQuasiAffine at lines 46-49; Scheme.isPullback_toSpecΓ_toSpecΓ at lines 115-145; Scheme.preimage_opensRange_toSpecΓ at lines 147-150. All names have prefix AlgebraicGeometry.Scheme.",
+  "line": 93
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-approximation-prescribed-open",
+  "date": "2026-10-24",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 07SU (proposition-approximate); Noetherian stages by spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian) over Spec Z, and finite type quasi-compactness. New supporting input: Tag 07RN (lemma-approximate), all clauses; cofinality of alpha follows from the constructed directed set J = coproduct P_i in the final proof paragraph; Tag 07RN, fourth paragraph: inverse images of canonical quasi-affine opens in spectra of global sections",
+   "via": [
+    "lem-sfb-scheme-approximation-prescribed-open",
+    "lem-sfb-space-absolute-noetherian-approximation",
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "id": "lem-per-trait-kummer-divisorial-log-etale",
+ "kind": "statement",
+ "title": "Canonical divisorial log-etale map from a rank-one Kummer presentation",
+ "statement": "Let A and B be strictly henselian discrete valuation domains [def-sc-discrete-valuation-ring], in one scheme universe, with an injective algebra map A -> B. Let n>0 be a unit of A, pi a uniformizer of A and tau a uniformizer of B, with tau^n=pi. Suppose evaluation at tau gives an A-algebra equivalence A[X]/(X^n-pi) -> B [def-weil-polynomial-ring]. Then there are locally Noetherian fs log schemes SB and T [def-trf-fs-log-blowup], isomorphisms of their schemes to Spec B and Spec A, and a log morphism q:SB -> T. Their log monoid sheaves, over their structural maps, are isomorphic to the canonical divisorial log presheaves for Spec Frac B -> Spec B and Spec Frac A -> Spec A. The underlying q is exactly Spec(A -> B) under the specified isomorphisms, and q is log etale [def-per-fs-log-smooth-etale]. This statement makes no group-action, completeness or mixed-characteristic assumption.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 2.1-2.2, pp.71-72, standard Kummer etale covers; XVI 3.7, p.254; step 8 of lem-per-tame-trait-quotient-log-etale"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-trf-fs-log-blowup",
+  "def-per-fs-log-smooth-etale"
+ ],
+ "proof": [
+  {
+   "text": "On Spec C, for C=A,B, use the divisorial presheaf for the actual generic-point inclusion. A section is a regular function whose pullback to the generic fibre is invertible. These form a sheaf: regular functions glue uniquely along etale covers, and invertibility is etale local and hence descends. The structural map is the actual inclusion in the multiplicative structure sheaf; its preimage over the units is exactly the sheaf of units. Pullback along the injective map A -> B preserves these sections, since it gives the compatible generic-field map. Thus it supplies the canonical log morphism over the spectrum map. The following chart computation proves the structures are fs and the morphism is log etale.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 2.1--2.2, printed pp.71--72; rank-one Kummer chart calculated explicitly."
+   }
+  },
+  {
+   "text": "A uniformizer $a$ of either strictly henselian DVR $C=A,B$ gives the chart $\\mathbf N\\to C$, $1\\mapsto a$, for its canonical divisorial log structure. Indeed at the closed geometric point the sections-to-stalk bijection [lem-weil-pbc-sets-strictly-henselian-open-sections-stalk] identifies that log monoid with $C\\setminus\\{0\\}$; every such element is uniquely $a^r c$ with $r\\geq0$, $c\\in C^\\times$. At the generic point $a$ is a unit and both log structures are trivial. These verify exactly the logification stalk test of [def-trf-fs-log-blowup]; $\\mathbf N$ is fine and saturated. With $a=\\pi,\\tau$, the assumed uniformizer equation gives a compatible chart $\\mathbf N\\xrightarrow{\\times n}\\mathbf N$ for $\\operatorname{Spec}B\\to\\operatorname{Spec}A$. Its group map has zero kernel and cokernel $\\mathbf Z/n\\mathbf Z$ of invertible order. By [lem-weil-pbc-fibre-product-affine-spectra], the comparison target has coordinate ring $A\\otimes_{\\mathbf Z[z]}\\mathbf Z[x]=A[x]/(x^n-\\pi)$, where $z\\mapsto\\pi$ and $z\\mapsto x^n$; this tensor identity follows by sending $x$ to its class and the inverse map by the two structure homomorphisms. The comparison is the assumed evaluation isomorphism. An isomorphism is etale [def-weil-etale-morphism], so the chart definition [def-per-fs-log-smooth-etale] proves log etaleness.",
+   "uses": [
+    "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-etale-morphism",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 2.1--2.2, printed pp.71--72; rank-one Kummer chart calculated explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-fs-log-smooth-etale",
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 2.1-2.2, pp.71-72, standard Kummer etale covers; XVI 3.7, p.254; step 8 of lem-per-tame-trait-quotient-log-etale; explicit expansion of the algebra and rank-one chart calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Kummer polynomial presentation B equals A X modulo X power n minus a uniformizer defines a log etale map of canonical divisorial log structures of strictly henselian discrete valuation rings",
+   "results": "RingHom.Etale; RingHom.FormallyEtale; Algebra.FormallyEtale.of_isLocalization; adjoinRootXPowSubCEquiv; StandardEtalePresentation.mk. Ordinary etale or field-theoretic facts only.",
+   "date": "2026-10-26",
+   "verdict": "no match for this statement; component results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank one Kummer chart log etale canonical divisorial log structures on discrete valuation rings",
+   "results": "IsDiscreteValuationRing.isRankOneDiscrete; Valuation.IsRankOneDiscrete.generator; IsLocalRing.finrank_CotangentSpace_eq_one_iff; StandardEtalePair. No logarithmic realization theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match for this statement; component results only"
+  },
+  {
+   "tool": "grep",
+   "query": "LogEtale|logEtale|Kummer|kummer",
+   "results": "Mathlib field Kummer extensions and Kummer-Dedekind theory; no log geometry. Direct project/DAG searches found FSLogSmoothEtale definitions, generic strict etale transport and more general KummerStrictLocalStandardModel, not the canonical divisorial construction from a rank-one polynomial presentation.",
+   "date": "2026-10-26",
+   "verdict": "no match for this statement; component results only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TameTraitQuotientLogEtale",
+  "date": "2026-10-26",
+  "group": "F6"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "ILO VI 2.1-2.2, pp.71-72, standard Kummer etale covers; XVI 3.7, p.254; step 8 of lem-per-tame-trait-quotient-log-etale",
+   "via": [
+    "lem-per-tame-trait-quotient-log-etale",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TraitKummerDivisorialLogEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitKummerDivisorialLogEtale.lean",
+  "declaration": "AlgebraicGeometry.trait_kummer_divisorial_logEtale",
+  "statement": "theorem trait_kummer_divisorial_logEtale\n    (A B : Type u) [CommRing A] [CommRing B] [IsDomain A] [IsDomain B]\n    [IsDiscreteValuationRing A] [IsDiscreteValuationRing B]\n    [IsStrictlyHenselianLocalRing A] [IsStrictlyHenselianLocalRing B]\n    [Algebra A B] (hinj : Function.Injective (algebraMap A B))\n    (n : ℕ) (hn : 0 < n) (hunit : IsUnit (n : A))\n    (pi : A) (hpi : Irreducible pi) (tau : B) (htau : Irreducible tau)\n    (hpow : tau ^ n = algebraMap A B pi)\n    (e : (A[X] ⧸ Ideal.span {X ^ n - C pi}) ≃ₐ[A] B)\n    (he : ∀ Q : A[X], e (Ideal.Quotient.mk _ Q) = aeval tau Q) :\n    ∃ (SB T : FineSaturatedLogScheme.{u})\n      (eB : SB.scheme ≅ Spec (.of B))\n      (eT : T.scheme ≅ Spec (.of A))\n      (q : EtaleLogHom SB T),\n      (∃ e : SB.logStructure.monoidSheaf.obj ≅ divisorialLogPresheaf\n          (Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫ eB.inv),\n        e.hom ≫ divisorialStructuralMap\n          (Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B))) ≫ eB.inv) =\n            SB.logStructure.alpha) ∧\n      (∃ e : T.logStructure.monoidSheaf.obj ≅ divisorialLogPresheaf\n          (Spec.map (CommRingCat.ofHom (algebraMap A\n            (FractionRing A))) ≫ eT.inv),\n        e.hom ≫ divisorialStructuralMap\n          (Spec.map (CommRingCat.ofHom (algebraMap A\n            (FractionRing A))) ≫ eT.inv) =\n              T.logStructure.alpha) ∧\n      q.base ≫ eT.hom = eB.hom ≫\n        Spec.map (CommRingCat.ofHom (algebraMap A B)) ∧\n      q.IsLogEtale",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
+    "why": "The same generic algebra or log-chart input already used in the accepted parent plan, restricted to this component; no unit route is bypassed."
+   },
+   {
+    "node": "def-trf-fs-log-blowup",
+    "why": "The same generic algebra or log-chart input already used in the accepted parent plan, restricted to this component; no unit route is bypassed."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T091522-L-3349634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T091522-L-3349634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

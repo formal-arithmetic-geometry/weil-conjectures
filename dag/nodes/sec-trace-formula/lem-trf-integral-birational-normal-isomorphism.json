@@ -1,0 +1,241 @@
+{
+ "id": "lem-trf-integral-birational-normal-isomorphism",
+ "kind": "statement",
+ "title": "Integral birational morphisms to a normal integral scheme are isomorphisms",
+ "statement": "Let $Z$ and $T$ be integral schemes [def-pc-integral-scheme], with generic points $\\eta_Z$ and $\\eta_T$ [def-sc-generic-point]. Let $p:Z\\to T$ be an integral morphism [def-weil-finite-integral-morphism], meaning that for each affine open $U=\\operatorname{Spec}A\\subseteq T$ its inverse image is affine, $p^{-1}U=\\operatorname{Spec}B$, and $A\\to B$ is integral. Assume $p(\\eta_Z)=\\eta_T$ and the induced homomorphism of function fields $k(T)=\\mathcal O_{T,\\eta_T}\\to\\mathcal O_{Z,\\eta_Z}=k(Z)$ [def-sc-function-field] is an isomorphism. Suppose every local ring of $T$ is an integrally closed domain [def-weil-pbc-normal-ring]. Then $p$ is an isomorphism of schemes. The morphism $p$ is not assumed finite, and no Noetherian or finite-presentation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AB1, label lemma-finite-birational-over-normal, integral (not necessarily finite) variant and its complete affine proof.",
+  "url": "https://stacks.math.columbia.edu/tag/0AB1"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-finite-integral-morphism",
+  "def-sc-function-field",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Let $U\\subseteq T$ be a nonempty affine open and put $V=p^{-1}(U)$, $A=\\mathcal O_T(U)$ and $B=\\mathcal O_Z(V)$. By the definition of an integral morphism [def-weil-finite-integral-morphism], $V$ is affine and $u:A\\to B$ is integral. By [lem-sc-integral-function-field-affine-fraction], $\\eta_T\\in U$; hence $\\eta_Z\\in V$ by $p(\\eta_Z)=\\eta_T$, so $V$ is nonempty. Apply that same node to $(T,U)$ and $(Z,V)$: $A,B$ are domains and the germ maps $\\alpha:A\\hookrightarrow k(T)$ and $\\beta:B\\hookrightarrow k(Z)$ identify these fields as their respective fraction fields. Write $\\phi:k(T)\\xrightarrow{\\sim}k(Z)$ for the given stalk homomorphism. Naturality of the germ maps gives $\\beta u=\\phi\\alpha$: both send a section on $U$ to its pulled-back germ at $\\eta_Z$. Thus $u$ is injective. Via $\\alpha$ and $\\phi^{-1}\\beta$ regard $A\\subseteq B\\subseteq K=k(T)$; this inclusion of $A$ in $B$ is precisely $u$, and $K$ is a fraction field of $A$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, label lemma-finite-birational-over-normal, proof (integral variant)."
+   }
+  },
+  {
+   "text": "For any maximal ideal $\\mathfrak m$ of $A$, let $t\\in U$ be its corresponding point. By [lem-weil-pbc-affine-open-stalk-localization](c), $A_{\\mathfrak m}\\cong\\mathcal O_{T,t}$ through the germ map. The latter ring is an integrally closed domain by hypothesis. The meaning of integral closedness [def-weil-pbc-normal-ring] is invariant under a ring isomorphism: apply the isomorphism to the coefficients and the root of each monic equation. Consequently every $A_{\\mathfrak m}$ is a normal domain. Since $A$ is a domain, [lem-weil-pbc-normal-domain-of-local-normal] applies and shows that $A$ is integrally closed in $K$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-normal-domain-of-local-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030B, label lemma-normality-is-local, (3) implies (1), as used by Morphisms Tag 0AB1; affine stalk identification: Schemes Tag 01HV, label lemma-spec-sheaves, (6)."
+   }
+  },
+  {
+   "text": "For $b\\in B$, integrality of $u$ means that $b$ satisfies a monic polynomial $b^d+\\sum_{i<d}u(a_i)b^i=0$ with $a_i\\in A$ [def-weil-finite-integral-morphism]. Under $B\\hookrightarrow K$, the same equation has coefficients $a_i$. Integral closedness of $A$ [def-weil-pbc-normal-ring] therefore puts the image of $b$ in $A$. Choose $a\\in A$ with that image. Injectivity of $B\\hookrightarrow K$ gives $b=u(a)$. Thus $u$ is surjective as well as injective, so its inverse is a ring homomorphism (apply injectivity to the addition and multiplication identities). The induced map on global sections of $p_U:V\\to U$ is $u$. Both schemes are affine, so [lem-sc-affine-global-sections-iso] makes $p_U$ an isomorphism.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-normal-ring",
+    "lem-sc-affine-global-sections-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, label lemma-finite-birational-over-normal, proof (integral variant)."
+   }
+  },
+  {
+   "text": "Cover $T$ by its nonempty affine opens $U_i$, and let $s_i:U_i\\to p^{-1}(U_i)$ be the inverses supplied by Step 3, viewed also as maps to $Z$. On $W=U_i\\cap U_j$, each $s_i|_W$ and $s_j|_W$ lands in $p^{-1}(W)$ because its composite with $p$ is the inclusion of $W$. The restriction of $p_{U_i}$ to $p^{-1}(W)$ is an isomorphism to $W$ (restrict its inverse); both maps are its inverses, so they agree by uniqueness of an inverse. By [lem-weil-pbc-scheme-morphism-gluing], the $s_i$ glue to $s:T\\to Z$. On every $U_i$, $p s$ is the identity, so the uniqueness clause of that node gives $p s=\\mathrm{id}_T$. The opens $p^{-1}(U_i)$ cover $Z$, and $s p$ restricts to $s_i p_{U_i}=\\mathrm{id}$ on each; the same uniqueness clause gives $s p=\\mathrm{id}_Z$. Therefore $s$ is the inverse of $p$. No intersection $U_i\\cap U_j$ is asserted affine, and no finite subcover is used.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, final sentence, with the inverse-gluing argument written out; Schemes Tag 01JJ (label lemma-glue-functors), proof gluing the local morphisms, and Sheaves Tag 00AN (label lemma-mapping-property-glue)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-normal-ring",
+  "lem-sc-affine-global-sections-iso",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AB1, label lemma-finite-birational-over-normal, proof (integral variant)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral birational morphism between integral schemes to a normal scheme is an isomorphism without Noetherian hypotheses",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"} Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 285-302: instIsIsoToNormalizationOfIsIntegralHom concerns the arrow from the source to its relative normalization, not the given integral morphism to a normal target. Morphisms/Integral.lean supplies stability and affine criteria, not the claimed isomorphism. The local integrally-closed-ring criteria from RingTheory do not by themselves give the scheme comparison or its gluing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski main theorem integral birational normal base isomorphism integrally closed local rings same fraction fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"Algebra.ZariskisMainProperty.of_isIntegral\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [p.IsPrime] [Algebra.IsIntegral R S], Algebra.ZariskisMainProperty R p\", \"doc\": \"If $ S $ is an integral extension of $ R $, then every prime ideal $ \\\\mathfrak{p} \\\\subseteq S $ satisfies Zariski's Main Theorem property: there exists an element $ r $ in the integral closure of $ R \"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {s : Set S},\\n  Ideal.span s = ⊤ →\\n    ∀ (Sᵣ : ↑s → Type u_4) [inst_5 : (r : ↑s) → CommRing (Sᵣ r)] [inst_6 : (r : ↑s) → Algebra S (Sᵣ r)]\\n   \", \"doc\": \"Let $R$ and $S$ be commutative rings, with $S$ being an $R$-algebra, and let $B$ be another $R$-algebra. For a ring $A$ and an $A$-algebra $C$, let $\\\\overline{C}^A$ denote the integral closure of $A$ \"}\n  {\"name\": \"IsLocalization.Away.integralClosure\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] [inst_2 : Algebra R S] {Rf : Type u_5}\\n  {Sf : Type u_6} [inst_3 : CommRing Rf] [inst_4 : CommRing Sf] [inst_5 : Algebra R Rf] [inst_6 : Algebra S Sf]\\n  [inst_7 : Algebra Rf Sf] [inst_8 : Algebra R Sf] [IsScalarTower R S Sf] [\", \"doc\": \"If $ R_f $ and $ S_f $ are localizations of $ R $ and $ S $ at $ f $ and $ \\\\text{algebraMap}(R,S)(f) $ respectively, then the integral closure of $ R_f $ in $ S_f $ is the localization of the integral\"}\n  {\"name\": \"IsLocalization.integralClosure\", \"module\": \"Mathlib/RingTheory/Localization/Integral\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] [inst_2 : Algebra R S] {Rf : Type u_5}\\n  {Sf : Type u_6} [inst_3 : CommRing Rf] [inst_4 : CommRing Sf] [inst_5 : Algebra R Rf] [inst_6 : Algebra S Sf]\\n  [inst_7 : Algebra Rf Sf] [inst_8 : Algebra R Sf] [IsScalarTower R S Sf] [\", \"doc\": \"For a commutative semiring $ R $, its localization $ R_f $ at a submonoid $ M $, and an $ R $-algebra $ S $ with localization $ S_f $, the integral closure of $ R_f $ in $ S_f $ is the localization of\"}\n  {\"name\": \"IsIntegrallyClosed.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_1 : (P : Ideal R) → [inst : P.IsMaximal] → CommRing (Rₚ P)]\\n  [inst_2 : (P : Ideal R) → [inst_2 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_3 : P.IsMaximal], IsLocalization.AtPrime (Rₚ P) P] \", \"doc\": \"Let $ R $ be an integral domain. If for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ itself is integrally c\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (M : Submonoid R) [IsLocalization M S],\\n  Function.Bijective ⇑(TensorProduct.toIntegralClosure R S B)\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at a submonoid $ M $, then the canonical map from the tensor product of the integral closure of $ R $ in $ B $ with $ S $ over $ R $ to the\"}\n  {\"name\": \"IsIntegrallyClosed.of_localization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDomain R],\\n  (∀ (p : Ideal R), p ≠ ⊥ → ∀ [inst_2 : p.IsMaximal], IsIntegrallyClosed (Localization.AtPrime p)) →\\n    IsIntegrallyClosed R\", \"doc\": \"If $ R $ is an integral domain and for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is integrally closed in its fraction field, then $ R $ is integrally closed in\"} Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 285-302: instIsIsoToNormalizationOfIsIntegralHom concerns the arrow from the source to its relative normalization, not the given integral morphism to a normal target. Morphisms/Integral.lean supplies stability and affine criteria, not the claimed isomorphism. The local integrally-closed-ring criteria from RingTheory do not by themselves give the scheme comparison or its gluing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(birational.*(normal|[Ii]so)|[Ii]so.*birational|[Ii]ntegralHom.*[Ii]so|[Ii]so.*[Ii]ntegralHom)",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"127\", \"text\": \"    rw [← cancel_left_of_respectsIso (P := @IsIntegralHom) X.isoSpec.inv] at H\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"line\": \"147\", \"text\": \"    rw [← cancel_left_of_respectsIso (P := @IsIntegralHom) X.isoSpec.inv]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"206\", \"text\": \"  rw [← MorphismProperty.cancel_left_of_respectsIso @IsIntegralHom e.inv,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"207\", \"text\": \"    ← MorphismProperty.cancel_right_of_respectsIso @IsIntegralHom _ U.2.isoSpec.hom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"287\", \"text\": \"instance [IsIntegralHom f] : IsIso f.toNormalization := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"470\", \"text\": \"    rw [← MorphismProperty.cancel_left_of_respectsIso @IsIntegralHom (SpecIso n R).inv,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"471\", \"text\": \"      SpecIso_inv_over, HasAffineProperty.iff_of_isAffine (P := @IsIntegralHom)] at h\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"21\", \"text\": \"- `Scheme.Birational X Y`: `X` and `Y` are birational, i.e. there exists a `PartialIso X Y`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"179\", \"text\": \"/-- `X` and `Y` are birational if there exists a partial isomorphism between them. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"181\", \"text\": \"def Birational (X Y : Scheme.{u}) : Prop := Nonempty (PartialIso X Y)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"183\", \"text\": \"/-- Choose a partial isomorphism witnessing that `X` and `Y` are birational. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"184\", \"text\": \"noncomputable def Birational.partialIso {X Y : Scheme.{u}} (h : Birational X Y) :\"} Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 285-302: instIsIsoToNormalizationOfIsIntegralHom concerns the arrow from the source to its relative normalization, not the given integral morphism to a normal target. Morphisms/Integral.lean supplies stability and affine criteria, not the claimed isomorphism. The local integrally-closed-ring criteria from RingTheory do not by themselves give the scheme comparison or its gluing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]ormal|[Ii]ntegrally[Cc]losed",
+   "results": "[grep] OK 0 hit(s) Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 285-302: instIsIsoToNormalizationOfIsIntegralHom concerns the arrow from the source to its relative normalization, not the given integral morphism to a normal target. Morphisms/Integral.lean supplies stability and affine criteria, not the claimed isomorphism. The local integrally-closed-ring criteria from RingTheory do not by themselves give the scheme comparison or its gluing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral morphism of integral schemes inducing an isomorphism of function fields is an isomorphism if target has integrally closed local rings",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"IsIso\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f] : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"[Stacks Tag 03GP](https://stacks.math.columbia.edu/tag/03GP)\"} Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 285-302: instIsIsoToNormalizationOfIsIntegralHom concerns the arrow from the source to its relative normalization, not the given integral morphism to a normal target. Morphisms/Integral.lean supplies stability and affine criteria, not the claimed isomorphism. The local integrally-closed-ring criteria from RingTheory do not by themselves give the scheme comparison or its gluing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\", \"IsIso\"",
+   "results": "[loogle] OK 0 hit(s) Read Mathlib/AlgebraicGeometry/Normalization.lean, lines 285-302: instIsIsoToNormalizationOfIsIntegralHom concerns the arrow from the source to its relative normalization, not the given integral morphism to a normal target. Morphisms/Integral.lean supplies stability and affine criteria, not the claimed isomorphism. The local integrally-closed-ring criteria from RingTheory do not by themselves give the scheme comparison or its gluing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"IsIso\"",
+   "results": "OK; 1 hits; top: ['AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom']; . Read the hits and Normalization.lean:285-305: IsIso f.toNormalization is about the map to relative normalization, not f. The integral-morphism affine criterion is only a definition; no hit gives the normal-target isomorphism. Second phrasing confirms the same distinction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*normal|isIso.*birational|isomorphisms.*IsZariskiLocalAtTarget",
+   "results": "OK; 1 hits; top: ['Mathlib/AlgebraicGeometry/Geometrically/Basic.lean']; . Read the hits and Normalization.lean:285-305: IsIso f.toNormalization is about the map to relative normalization, not f. The integral-morphism affine criterion is only a definition; no hit gives the normal-target isomorphism. Second phrasing confirms the same distinction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral birational morphism of integral schemes to a normal scheme is an isomorphism",
+   "results": "OK; 8 hits; top: ['AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc', 'AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc', 'AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc', 'AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization']; . Read the hits and Normalization.lean:285-305: IsIso f.toNormalization is about the map to relative normalization, not f. The integral-morphism affine criterion is only a definition; no hit gives the normal-target isomorphism. Second phrasing confirms the same distinction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral birational morphism to a normal integral scheme is an isomorphism",
+   "results": "OK; 8 hits; top: ['AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization', 'AlgebraicGeometry.IsIntegralHom.instUniversallyClosed', 'AlgebraicGeometry.IsIntegralHom.hasAffineProperty', 'AlgebraicGeometry.IsIntegralHom.mk', 'AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage', 'AlgebraicGeometry.IsIntegralHom', 'AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme']; . Read the hits and Normalization.lean:285-305: IsIso f.toNormalization is about the map to relative normalization, not f. The integral-morphism affine criterion is only a definition; no hit gives the normal-target isomorphism. Second phrasing confirms the same distinction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral extension of normal domains with the same fraction field is an isomorphism on affine schemes",
+   "results": "OK; 8 hits; top: ['AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom', 'AlgebraicGeometry.Scheme.Hom.normalization.hom_ext', 'AlgebraicGeometry.IsIntegralHom.hasAffineProperty', 'AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization', 'AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization', 'AlgebraicGeometry.IsIntegralHom.toIsAffineHom', 'AlgebraicGeometry.affine_isIntegral_iff']; . Read the hits and Normalization.lean:285-305: IsIso f.toNormalization is about the map to relative normalization, not f. The integral-morphism affine criterion is only a definition; no hit gives the normal-target isomorphism. Second phrasing confirms the same distinction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "birational|IsIntegrallyClosed|IsIntegralHom",
+   "results": "OK; 5 hits; top: ['200', '201', '206', '207', '212']; . Read the hits and Normalization.lean:285-305: IsIso f.toNormalization is about the map to relative normalization, not f. The integral-morphism affine criterion is only a definition; no hit gives the normal-target isomorphism. Second phrasing confirms the same distinction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proper-normal-geometric-connectedness",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: Temkin stable-modification input, specifically Lemma 4.3.2, p. 29, retaining semistability of the modified pair.; local geometric input to the repaired marking-globalization argument: the unmarked smooth-target exceptional-tree case of Temkin Lemma 4.4.2. Numerical proof of the unmarked smooth-target exceptional-fibre assertion, following Temkin Lemma 4.4.2. Auxiliary input: the Zariski connectedness applications to the proper source over the valuation base and to the proper birational modification. Extracted argument: Integral-birational-normal comparison used by Stacks 0AY8 in the auxiliary connectedness argument; returned item Step 2 and the integral-closure and local-to-global arguments of Step 5.",
+   "via": [
+    "lem-trf-proper-normal-geometric-connectedness",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-integral-birational-normal-isomorphism",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Four-step affine proof of Stacks 0AB1 for integral, not necessarily finite, morphisms. Reused existing nodes for affine function fields, affine stalk localization, normality from maximal localizations, affine isomorphisms and scheme-morphism gluing. Wrote the common-field inclusions, the monic-equation argument and both inverse-gluing identities explicitly. No new nodes. Mathlib normalization hits concern a different arrow and do not state this item.",
+  "blueprint": "Fills the inherited lem-trf-local-term-locality proof (1)-(2) geometric auxiliary branch, through proper-normal-geometric-connectedness: precisely the integral-birational-normal comparison identified in blueprint.from.place. Read the current latest ancestor proof, chapter and unit; this basic scheme-theory lemma supplies the existing branch without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-f27cf7ad4",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-f27cf7ad4 (reviewer sub-agent of L); spot-checked: Read the item and its full 4-step proof. Read Stacks 0AB1 (morphisms.tex:14630-14646, 'finite (or even integral)'). Its hypotheses match the item's: integral schemes, p(η_Z)=η_T plus an isomorphism of function fields, every local ring of T a normal domain, an integral morphism. Statement and stmt_deps are byte-identical to live. Live and side-live still have the item unsplit, and there is no repair note. All 7 proof citations are Mathlib leaves (IsIntegralHom, functionField_isFractionRing_of_isAffineOpen, affine-open stalk localization (c), IsIntegrallyClosed.of_localization_maximal, the affine global-sections iso, glueMorphisms), so there is no route issue and no tool_uses. Each cited statement gives what its step takes. Step 1: V is nonempty because η_T∈U; βu=φα is the definition of the stalk map; injectivity follows. Step 2: t=ι_U(m), clause (c) gives A_m≅O_{T,t} normal, then the max-localization criterion applies with no Noetherian condition. Step 3: the monic equation of b is mapped into K, giving b=u(a), and the affine iso leaf finishes. Step 4: local inverses agree on U_i∩U_j as inverses of the same restricted iso; the uniqueness clause gives ps=id and sp=id; no affine overlaps are used. proof_deps equals the union of uses. No new nodes. Edge cases checked: cusp normalization, Spec L→Spec k, Spec Z[1/2]→Spec Z. The finite case lem-trf-finite-birational-normal-iso is a special case of the pre-existing item, not a duplicate; advisory only. Mathlib grep finds no match."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralBirationalNormalIsomorphism",
+  "declaration": "AlgebraicGeometry.isIso_of_integral_birational_normal",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralBirationalNormalIsomorphism.lean",
+  "statement": "theorem isIso_of_integral_birational_normal {Z T : Scheme.{u}} [IsIntegral Z] [IsIntegral T] (p : Z ⟶ T) [IsIntegralHom p] (hgeneric : p (genericPoint Z) = genericPoint T) (hbirational : Function.Bijective ((T.presheaf.stalkCongr (Inseparable.of_eq hgeneric)).inv ≫ p.stalkMap (genericPoint Z) : T.functionField ⟶ Z.functionField)) (hnormal : ∀ t : T, IsDomain (T.presheaf.stalk t) ∧ IsIntegrallyClosed (T.presheaf.stalk t)) : IsIso p",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c5552f03",
+  "group": "Q120",
+  "result": "pass",
+  "note": "The Lean statement matches the node and Stacks 0AB1 (integral variant) clause by clause: IsIntegral Z/T, IsIntegralHom p (no finiteness), hgeneric, hbirational = Bijective of the canonical stalkCongr.inv ≫ stalkMap map k(T)→k(Z) (direction checked against Mathlib Stalks.lean:408), hnormal = IsDomain ∧ IsIntegrallyClosed of every stalk as the def-weil-pbc-normal-ring record prescribes, conclusion IsIso p. No Noetherian, finite-presentation or finite hypothesis; one arbitrary universe u. Same shape as the landed isIso_of_finite_birational_normal, with IsIntegralHom in place of IsFinite. Node copy differs from side-live only in lean; lean.statement verbatim in the file; proof is sorry only; docstrings carry Tag 0AB1, the blueprint id and the 4 proof steps; no definitions introduced; report has both required sections. Edge cases checked: empty scheme, Spec L→Spec k, cusp normalization, Spec Z[1/2]→Spec Z, non-Noetherian normal domains. No findings; not recompiled per instructions (worker reports clean compiles)."
+ }
+}

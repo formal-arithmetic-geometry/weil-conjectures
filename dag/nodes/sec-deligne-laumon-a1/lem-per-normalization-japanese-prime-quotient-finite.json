@@ -1,0 +1,229 @@
+{
+ "id": "lem-per-normalization-japanese-prime-quotient-finite",
+ "kind": "statement",
+ "title": "Prime quotient of a normalization over a Japanese base quotient is finite",
+ "statement": "Let $R$ be a commutative Noetherian integral domain [def-weil-pbc-noetherian-ring], with fraction field $K$, let $L/K$ be a finite field extension [def-pc-field-extension], and let $T\\subseteq L$ be the integral closure of $R$ in $L$ [def-weil-pbc-integral-closure]. Let $P\\subset T$ be a prime ideal and put $p=P\\cap R$, the inverse image under $R\\to T$. If the domain $R/p$ is Japanese (N-2) [def-weil-pbc-japanese-domain], then $T/P$ is a finitely generated $R/p$-module [def-weil-finitely-generated-module] for the injective map $R/p\\to T/P$ induced by $R\\to T$. No Noetherianity of $T$, normality of $R$, separability of $L/K$, or completeness hypothesis is imposed.",
+ "source": {
+  "document": "https://www.numdam.org/article/BSMF_1975__103__103_0.pdf",
+  "place": "Marot, Sur les anneaux universellement japonais, Bulletin de la SMF 103 (1975), Lemma 1.1, printed p.104; standing hypotheses immediately above the lemma. DOI 10.24033/bsmf.1795. Read online; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=R/p$ and $B=T/P$. The map $A\\to B$ is injective: a class $r+p$ maps to zero exactly when $r\\in P\\cap R=p$. Since $P$ is prime, $B$ is a domain, and its subring $A$ is a domain. Apply [lem-weil-pbc-surjective-image-noetherian] to the quotient map $R\\twoheadrightarrow A$ to see that $A$ is Noetherian. Write $k=\\operatorname{Frac}(A)$ and $E=\\operatorname{Frac}(B)$; the injection extends to $k\\hookrightarrow E$ by $a/b\\mapsto a/b$, since nonzero denominators stay nonzero.",
+   "uses": [
+    "lem-weil-pbc-surjective-image-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+    "place": "Marot (1975), Lemma 1.1 and standing hypotheses, printed p.104 (PDF p.3). Read online; local literature copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-almost-finite-residue-field-degree] with its $F=L$, $C=T$, $Q=P$. Its base $R$ is a Noetherian domain and $L/K$ is finite by hypothesis. Every element of $T$ is integral over $R$ because $T$ is the integral closure. The lemma gives $[E:k]<\\infty$, without assuming that $T$ is Noetherian or finite over $R$.",
+   "uses": [
+    "lem-trf-almost-finite-residue-field-degree",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+    "place": "Marot (1975), Lemma 1.1 and standing hypotheses, printed p.104 (PDF p.3). Read online; local literature copy WANTED."
+   }
+  },
+  {
+   "text": "Let $D$ be the integral closure of $A$ in $E$. For $t\\in T$, choose a monic relation $t^n+r_{n-1}t^{n-1}+\\cdots+r_0=0$ with $r_i\\in R$. Reducing modulo $P$ gives $(t+P)^n+(r_{n-1}+p)(t+P)^{n-1}+\\cdots+(r_0+p)=0$. Thus each element of $B$ lies in $D$ by [def-weil-pbc-integral-closure], and $B$ is an $A$-submodule of $D$. Since $A$ is Japanese and $E/k$ is finite, the definition [def-weil-pbc-japanese-domain] says exactly that $D$ is a finitely generated $A$-module.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+    "place": "Marot (1975), Lemma 1.1 and standing hypotheses, printed p.104 (PDF p.3). Read online; local literature copy WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-submodule-finite] to the Noetherian ring $A$, its finite module $D$, and the $A$-submodule $B\\subseteq D$. It follows that $B=T/P$ is a finitely generated $A=R/p$-module for the injection of Step 1, as required.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK, lemma-Noetherian-basic, second assertion; the last sentence of Marot Lemma 1.1, printed p.104."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-trf-almost-finite-residue-field-degree",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://www.numdam.org/item/10.24033/bsmf.1795.pdf",
+  "place": "Explicit assembly of Marot Lemma 1.1, printed p.104, using the existing general residue-degree lemma in place of the finite birational reduction. Source read online; local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-per-normalization-japanese-prime-quotient-finite: quotient of integral closure by a prime is finite over the Japanese quotient of the base domain",
+   "results": "OK 8 hits; Ring.instIsIntegrallyClosedNormalClosure, algebra_finiteType_of_liesOver, instIsIntegralQuotientIdeal, primesOver_finite, Algebra.QuasiFinite.finite_primesOver, Ring.instFiniteNormalClosure_1, Ideal.Quotient.isDomain, Algebra.QuasiFinite.iff_finite_primesOver",
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.finite requires an integrally closed base and a separable field extension (DedekindDomain/IntegralClosure.lean:147-177); module_finite_of_liesOver already assumes the entire algebra module finite (Finiteness/Quotient.lean:21-23). Quasi-finite residue field lemmas assume finite type/quasi-finiteness. None gives Marot Lemma 1.1."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralClosure\", \"Quotient\", \"Finite\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.finite requires an integrally closed base and a separable field extension (DedekindDomain/IntegralClosure.lean:147-177); module_finite_of_liesOver already assumes the entire algebra module finite (Finiteness/Quotient.lean:21-23). Quasi-finite residue field lemmas assume finite type/quasi-finiteness. None gives Marot Lemma 1.1."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Qq]uotient|[Qq]uotient.*finite|[Jj]apanese|[Nn]agata",
+   "results": "OK 0 hits; ; directory RingTheory/IntegralClosure",
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.finite requires an integrally closed base and a separable field extension (DedekindDomain/IntegralClosure.lean:147-177); module_finite_of_liesOver already assumes the entire algebra module finite (Finiteness/Quotient.lean:21-23). Quasi-finite residue field lemmas assume finite type/quasi-finiteness. None gives Marot Lemma 1.1."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalization-japanese-prime-quotient-finite: For a Noetherian domain R and integral closure T in a finite fraction field extension, a prime P of T with Japanese R/(P intersection R) has T/P module finite over R/(P intersection R)",
+   "results": "OK 8 hits; IsIntegralClosure.finite, module_finite_of_liesOver, algebra_finiteType_of_liesOver, Algebra.QuasiFinite.instFiniteResidueField, Ring.instFiniteNormalClosure_1, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Ring.instFiniteNormalClosure, primesOver_finite",
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.finite requires an integrally closed base and a separable field extension (DedekindDomain/IntegralClosure.lean:147-177); module_finite_of_liesOver already assumes the entire algebra module finite (Finiteness/Quotient.lean:21-23). Quasi-finite residue field lemmas assume finite type/quasi-finiteness. None gives Marot Lemma 1.1."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalization-japanese-prime-quotient-finite: Marot Lemma 1.1 finiteness of prime quotients of normalization when the contracted quotient is Japanese N2",
+   "results": "OK 8 hits; Algebra.QuasiFinite.finite_primesOver, primesOver_finite, AlgHom.IsArithFrobAt.finite_quotient, instFintypeElemIdealPrimesOver, Algebra.QuasiFinite.iff_finite_primesOver, Algebra.quasiFinite_iff, Algebra.QuasiFiniteAt, Algebra.QuasiFinite.instFiniteResidueField",
+   "date": "2026-10-24",
+   "verdict": "no match: IsIntegralClosure.finite requires an integrally closed base and a separable field extension (DedekindDomain/IntegralClosure.lean:147-177); module_finite_of_liesOver already assumes the entire algebra module finite (Finiteness/Quotient.lean:21-23). Quasi-finite residue field lemmas assume finite type/quasi-finiteness. None gives Marot Lemma 1.1."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalization-japanese-prime-quotient-finite: quotient of integral closure in finite field extension by prime finite over Japanese base quotient",
+   "results": "OK 8 hits; primesOver_finite, instFiniteQuotientRingOfIntegersIdealOfNumberFieldOfIsMaximal, Ideal.Factors.finiteDimensional_quotient_pow, algebra_finiteType_of_liesOver, AlgHom.IsArithFrobAt.finite_quotient, instFintypeElemIdealPrimesOver, Algebra.QuasiFinite.instFiniteResidueField, module_finite_of_liesOver",
+   "date": "2026-10-24",
+   "verdict": "no match: module_finite_of_liesOver (Mathlib/RingTheory/Finiteness/Quotient.lean:23) assumes the whole algebra module finite; algebra_finiteType_of_liesOver gives only algebra finite type. IsIntegralClosure.finite (DedekindDomain/IntegralClosure.lean:174) requires an integrally closed base and separability; finite_residueField (QuasiFinite/Weakly.lean:122) assumes weak quasi-finiteness. Read these hypotheses; none proves the item."
+  },
+  {
+   "tool": "grep",
+   "query": "[Jj]apanese|[Nn]agata|residueField.*[Ff]inite|[Ff]inite.*residueField",
+   "results": "OK 25 hits; Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/NoetherNormalization.lean, Mathlib/RingTheory/RingHom/QuasiFinite.lean, Mathlib/RingTheory/QuasiFinite/Polynomial.lean; directory RingTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: module_finite_of_liesOver (Mathlib/RingTheory/Finiteness/Quotient.lean:23) assumes the whole algebra module finite; algebra_finiteType_of_liesOver gives only algebra finite type. IsIntegralClosure.finite (DedekindDomain/IntegralClosure.lean:174) requires an integrally closed base and separability; finite_residueField (QuasiFinite/Weakly.lean:122) assumes weak quasi-finiteness. Read these hypotheses; none proves the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralClosure\", \"Quotient\", \"Finite\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: module_finite_of_liesOver (Mathlib/RingTheory/Finiteness/Quotient.lean:23) assumes the whole algebra module finite; algebra_finiteType_of_liesOver gives only algebra finite type. IsIntegralClosure.finite (DedekindDomain/IntegralClosure.lean:174) requires an integrally closed base and separability; finite_residueField (QuasiFinite/Weakly.lean:122) assumes weak quasi-finiteness. Read these hypotheses; none proves the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-normalization-japanese-prime-quotient-finite: prime quotient of normalization finite over Japanese domain quotient",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, algebra_finiteType_of_liesOver, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, Algebra.QuasiFinite.casesOn, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, Algebra.QuasiFinite.iff_finite_primesOver, Ideal.Quotient.isDomain, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc",
+   "date": "2026-10-24",
+   "verdict": "no match: module_finite_of_liesOver (Mathlib/RingTheory/Finiteness/Quotient.lean:23) assumes the whole algebra module finite; algebra_finiteType_of_liesOver gives only algebra finite type. IsIntegralClosure.finite (DedekindDomain/IntegralClosure.lean:174) requires an integrally closed base and separability; finite_residueField (QuasiFinite/Weakly.lean:122) assumes weak quasi-finiteness. Read these hypotheses; none proves the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalization-japanese-prime-quotient-finite: integral closure prime quotient module finite Japanese ring Marot lemma",
+   "results": "OK 8 hits; primesOver_finite, instFintypeElemIdealPrimesOver, module_finite_of_liesOver, Algebra.QuasiFinite.instFiniteResidueField, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFiniteAt, Ring.instFiniteNormalClosure_1, Ring.instFiniteNormalClosure",
+   "date": "2026-10-24",
+   "verdict": "no match: module_finite_of_liesOver (Mathlib/RingTheory/Finiteness/Quotient.lean:23) assumes the whole algebra module finite; algebra_finiteType_of_liesOver gives only algebra finite type. IsIntegralClosure.finite (DedekindDomain/IntegralClosure.lean:174) requires an integrally closed base and separability; finite_residueField (QuasiFinite/Weakly.lean:122) assumes weak quasi-finiteness. Read these hypotheses; none proves the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-noetherian-normalization-finite",
+  "date": "2026-10-24",
+  "group": "Q147"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Theorem 5.1, Step 1 (1-1)–(1-4), printed pp.7–8; finite normalization properties recalled in Step 2, (5.3), and Step 3. Auxiliary input: Theorem 5.1 Step 1 (1-3), printed p.8, and Appendix A, printed p.15: Marot’s lifting property for Nagata rings (reference [8]). Marot lifting input, Proposition 2.3: Marot (1975), Proposition 2.1, printed p.106: Noetherianity of T implies both conditions (2a) and (2b); Nagata R/J implies universally Japanese by Stacks Tag 0334 (proposition-nagata-universally-japanese). This is the application in Proposition 2.3, printed p.107. Marot Proposition 2.1, first proof paragraph: apply Lemma 1.1 to prime quotients of the normalization above the closed fibre.",
+   "via": [
+    "lem-per-adic-noetherian-normalization-finite",
+    "lem-per-adic-nagata-lifting",
+    "lem-per-qe-normal-counterexample-reduction",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-normalization-japanese-prime-quotient-finite",
+  "worker": "stage1",
+  "summary": "Read Marot Lemma 1.1, verified every hypothesis and retained the statement. Reused the already reviewed general residue-degree node instead of creating a duplicate; wrote the monic-polynomial reduction explicitly and concluded using Japanese N-2 and the existing Noetherian-submodule leaf. Four steps, no new nodes.",
+  "blueprint": "Realizes the auxiliary Marot Lemma 1.1 input identified in blueprint.from.place, below lem-per-artin-gabber-affine-curve Step 3 through the completion/Nagata-lifting chain; latest blueprint Step 3 read.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-almost-finite-residue-field-degree",
+    "why": "General commutative-algebra tool supplying finite residue degree for an integral subring of a finite fraction-field extension, precisely Nagata (33.10) cited by Marot Lemma 1.1. No node of this unit supplies that result; this is an auxiliary input below the fixed unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-almost-finite-residue-field-degree"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-df8ec3662",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-df8ec3662 (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes and the statement, stmt_deps and ancestry are unchanged; only the proof (4 steps) is new. Step 1: the map R/p→T/P is injective because P∩R=p, and lem-weil-pbc-surjective-image-noetherian makes A=R/p Noetherian. Step 2: lem-trf-almost-finite-residue-field-degree, applied with F=L, C=T, Q=P, makes Frac(T/P)/Frac(R/p) finite; every hypothesis matches. Step 3: reducing monic relations mod P puts B inside D, the integral closure of A in E, and the N-2 definition makes D finite over A. Step 4: by lem-weil-pbc-noetherian-submodule-finite (Stacks 00IK, algebra.tex:12154), B is finite over A. Edge cases P=0, R a field, inseparable L/K and maximal P all work. The only citer (lem-per-adic-noetherian-normalization-finite step 3) matches the statement. No duplicate: lem-per-japanese-quotients-noetherian-normalization and the tate-quotient lemmas state different results. Batch-5 flag: the cited trf node is generic commutative algebra. Its 178-node closure contains only algebra lemmas and definitions, with no trace-formula or Poincaré statement and no cycle back to the item, so I accept it as the declared tool_use; it is not a trace-formula step that would need the assumption leaf. There is no local copy of Marot, so I could not check the online source at Lemma 1.1, but the statement is proved here from cited nodes. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalizationJapanesePrimeQuotientFinite",
+  "declaration": "RingTheory.normalization_primeQuotient_finite_of_isN2",
+  "file": "lean/Sheaf/RingTheory/NormalizationJapanesePrimeQuotientFinite.lean",
+  "statement": "theorem normalization_primeQuotient_finite_of_isN2 (R : Type u) (K : Type v) (L : Type w) [CommRing R] [IsDomain R] [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K] [Field L] [Algebra K L] [Algebra R L] [IsScalarTower R K L] [FiniteDimensional K L] (P : Ideal (integralClosure R L)) [P.IsPrime] (hJapanese : IsN2 (R ⧸ P.comap (algebraMap R (integralClosure R L))) (FractionRing (R ⧸ P.comap (algebraMap R (integralClosure R L))))) : Module.Finite (R ⧸ P.comap (algebraMap R (integralClosure R L))) ((integralClosure R L) ⧸ P)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd209fb9f",
+  "group": "N5",
+  "result": "pass",
+  "note": "Every clause of RingTheory.normalization_primeQuotient_finite_of_isN2 matches the node and Marot Lemma 1.1: Noetherian domain R, IsFractionRing R K, finite L/K with R→K→L scalar tower, T = integralClosure R L, prime P, p = P.comap, IsN2 (R⧸p) (FractionRing (R⧸p)) via the recorded JapaneseDomain decl, conclusion Module.Finite (R⧸p) (T⧸P) via the canonical quotientAlgebra. Nothing stronger is assumed; universes u/v/w are independent and bound. Edge cases P=0, R a field, L=K, inseparable L/K and maximal P are covered. Only the lean field differs from the live node; the recorded statement appears verbatim once; the stmt_dep modules are publicly imported; the proof-only trf import exists in live. Body is sorry; docstrings carry the source place, blueprint id and four proof steps; no duplicate found. Compile not re-run, per instructions."
+ }
+}

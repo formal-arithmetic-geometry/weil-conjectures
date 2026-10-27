@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-affine-unit-transpose-coordinates",
+ "kind": "statement",
+ "title": "Coefficient-unit coordinates for the ordinary affine integration transpose",
+ "statement": "For a finite purity datum [def-pur-conventions], a separated finite-type k-scheme T, and d >= 0, define the ordinary affine trace as the ordered counit of [lem-amb-affine-space-top-trace], with its canonical affine coefficient descent inverted. Let affineTranspose be its ordinary exceptional adjunct after exact site comparison and the HEq identification of the two recursive tower models. This map equals orderedSourceIso.hom followed by the recorded bounded integrationTranspose [lem-pur-affine-ordered-integration-transposes] at the coefficient unit, followed by orderedTargetIso.hom. All coordinate maps are those of [def-pur-vector-chart-comparison-coordinates]. There is no bundle or frame in this assertion. The statement includes d=0 and empty T.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Second paragraph, ordinary affine-counit adjunct; canonical tensor-unit and comparison-unit coordinates, before identifying that adjunct with ordered purity."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-amb-affine-space-top-trace",
+  "def-pur-vector-chart-comparison-coordinates",
+  "lem-pur-affine-ordered-integration-transposes"
+ ],
+ "proof": [
+  {
+   "text": "Form the ordinary ordered trace by the inverse coefficient descent, inverse compact-support tower compositor and ordered adjunction counit, and transpose it under the ordinary compact-support adjunction. Exact comparison gives affineTransposeRaw. Induction identifies both recursive tower/projection pairs; HEq uniquely fixes affineTranspose.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "def-pur-vector-chart-comparison-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the coefficient unit, apply the bounded site transpose formula to the realized ordinary trace. The coefficient-first projection is the tensor-unit identification, as follows by transposing its proper/open projection definition and applying the adjunction triangles. Cancel it against the right unitor in projectionTensorTrace. The comparison target is the ordinary exceptional target followed by its comparison-unit image. The ordered target coordinates cancel that image. SourceComparison and orderedSourceIso cancel by pullback-unit coherence and tensor-action associativity, factor by factor. This proves the equation with the recorded ordered integrationTranspose. At zero, use the counit-normalized identity exceptional adjunction; empty schemes satisfy the same equations.",
+   "uses": [
+    "lem-pur-bounded-site-adjunction-transpose",
+    "lem-pur-affine-ordered-integration-transposes",
+    "lem-pur-vector-integration-site-comparison",
+    "def-pur-vector-chart-comparison-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "def-pur-vector-chart-comparison-coordinates",
+  "lem-pur-bounded-site-adjunction-transpose",
+  "lem-pur-affine-ordered-integration-transposes",
+  "lem-pur-vector-integration-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Second paragraph: restriction to a trivializing open is the adjunct of the affine-space counit. Expanded using the canonical definitions and stated adjunction comparison lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint transpose of vector bundle integration restricts on a linear chart to the ordered affine line purity comparison",
+   "results": "8 hits: hom_chart, inCoordinates_apply_eq₂, VectorBundleCore.inCoordinates_eq, ContinuousLinearMap.inCoordinates_eq, inTangentCoordinates_eq, ContinuousLinearMap.inCoordinates, Pretrivialization.continuousLinearMap, TangentBundle.continuousLinearMapAt_trivializationAt_eq_core",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.homEquiv_naturality_left\"",
+   "results": "5 hits: CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_left_symm, CategoryTheory.Adjunction.homEquiv_naturality_left_square, CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff, CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorBundle.*(purity|integration)|affineSpace.*(trace|purity)|TateTwist",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary affine integration adjunction transpose agrees with the bounded site transpose at the coefficient unit, and commutes with root power exponent transitions",
+   "results": "8 hits: CategoryTheory.Adjunction.shift_unit_app, TopCat.Presheaf.pushforwardToOfIso, CategoryTheory.Adjunction.toCat_unit_toNatTrans, AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine, CategoryTheory.Adjunction.commShift_op, CategoryTheory.Adjunction.CommShift.commShift_unit, CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso, CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app",
+   "date": "2026-10-25",
+   "verdict": "No exact match: general adjunction identities or topological bundles do not state this finite-coefficient scheme comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorIntegrationChartComparison",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-finite-coefficient-smooth-purity",
+   "place": "Second paragraph, ordinary affine-counit adjunct; canonical tensor-unit and comparison-unit coordinates, before identifying that adjunct with ordered purity.",
+   "via": [
+    "lem-pur-vector-integration-chart-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorIntegrationUnitTranspose",
+  "file": "lean/Sheaf/Paper/VectorIntegrationUnitTranspose.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationChart.affineTranspose_unit_coordinates",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VectorIntegrationChart.affineTransposeRaw",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationChart.affineTranspose_existsUnique",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationChart.affineTranspose",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationChart.affineTranspose_unit_coordinates"
+  ],
+  "statement": "theorem affineTranspose_unit_coordinates (P : WeilConjectures.PurityFiniteSetting.{u})\n    (T : Scheme.{u}) [IsNoetherian T] (aT : T ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT] (d : ℕ) :\n    affineTranspose P T aT d P.level (annihilates P) =\n      (orderedSourceIso P T d).hom ≫\n        AffineOrderedIntegration.integrationTranspose P T aT (unitPlus P T)\n          (Etale.ordinaryFiniteUnit (Ring P) T) (unit_properties P T).2 (Iso.refl _) d ≫\n        (orderedTargetIso P T d).hom",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5e63f",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T122442-L-1772857",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5e63f",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T122442-L-1772857",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-vector-integration-chart-comparison and 3 new sorry statements vs Coordinates extraction (verbatim diff vs clone), existsUnique_vectorIntegrationGluing, ordinaryTraceRaw/integrationTranspose, IntegrationAffineEquations; node stmt refs vs stmt_deps"
+ }
+}

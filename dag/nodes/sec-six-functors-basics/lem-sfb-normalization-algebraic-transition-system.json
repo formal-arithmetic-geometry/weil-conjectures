@@ -1,0 +1,380 @@
+{
+ "id": "lem-sfb-normalization-algebraic-transition-system",
+ "kind": "statement",
+ "title": "Injective normalization systems and faithful flatness over finite algebraic stages",
+ "statement": "Let $A\\to B$ be an injective local map of discrete valuation rings [def-sc-discrete-valuation-ring], with fraction fields $K\\subseteq L$ [def-pc-field-extension], and let $P/K$ be algebraic [def-weil-algebraic-element]. Let $I$ be the set of intermediate fields $K\\subseteq F\\subseteq P$ finite-dimensional over $K$, ordered by inclusion. For $Q=F\\in I$ or $Q=P$, put $E_Q=(L\\otimes_KQ)_{\\mathrm{red}}$, $R_Q=\\overline A^{\\,Q}$, $C_Q=\\overline B^{\\,E_Q}$ and $T_Q=B\\otimes_AR_Q$ [def-weil-pbc-integral-closure, def-weil-pbc-module-tensor-product]; the bar denotes integral closure, and reduction is quotient by all nilpotents. All transition maps are induced by field inclusions and multiplication. Then $I$ is nonempty and directed, the transition maps on $E_Q,R_Q,C_Q$ are injective, and the canonical maps\n$$\\varinjlim_{F\\in I}R_F\\longrightarrow R_P,\\qquad \\varinjlim_{F\\in I}C_F\\longrightarrow C_P,\\qquad \\varinjlim_{F\\in I}T_F\\longrightarrow T_P$$\nare isomorphisms [def-weil-pbc-category-colimit]. For every $F\\in I$, $R_F\\to R_P$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map]. If $a$ and $b$ are uniformizers of $A$ and $B$, respectively, then $R_F[1/a]=F$ canonically, and the multiplication map $T_F[1/b]\\to E_F$ is surjective [def-weil-ring-localization-away]. A uniformizer means a generator of the maximal ideal. The map $T_Q\\to C_Q$ makes $C_Q$ integral over $T_Q$. No Noetherianity of $R_P$, finiteness of $C_P/T_P$, essential finite type of $B/A$, or separability is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II, proposition-epp-essentially-finite-type, paragraph beginning By construction, the field ... is a filtered colimit; transition-system refinement written by the agent. Faithful flatness uses Tag 0AUW, lemma-dedekind-torsion-free-flat (1), together with Krull-Akizuki and integral lying-over in algebra.tex."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Finite supports of fields. The field $K$ belongs to $I$. Given $F,G\\in I$, choose finite $K$-bases of both. Their union consists of finitely many elements of the algebraic extension $P/K$, so [lem-weil-pbc-algebraic-generators-finite-extension] makes the field they generate finite over $K$. It contains $F$ and $G$, proving directedness. The same lemma applied to one element shows that every $x\\in P$ belongs to some $F\\in I$. Thus $P=\\bigcup_F F$. All intermediate fields are subsets of the fixed set $P$, so this is a small directed index set in a universe containing $P$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GH, lemma-algebraic-finitely-generated; application to the filtered finite subfields in Tag 09II"
+   }
+  },
+  {
+   "text": "Injectivity of the reduced tensor diagram. For intermediate fields $F\\subseteq G\\subseteq P$, [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives inverse maps\n$$(L\\otimes_K F)\\otimes_F G\\longrightarrow L\\otimes_K G,\\quad (l\\otimes f)\\otimes g\\longmapsto l\\otimes fg,$$\nand $l\\otimes g\\mapsto(l\\otimes1)\\otimes g$; the balancing relations and pure tensors verify both compositions. Under this identification the raw transition is scalar extension along $F\\subseteq G$, hence injective by [lem-sfb-field-extension-tensor-injective]. If a raw tensor $z$ becomes nilpotent after this injection, some $z^n$ maps to zero, so $z^n=0$. Consequently the induced transition $E_F\\to E_G$ is injective, also for $G=P$. Field inclusions give injective maps $R_F\\to R_G$; the injections $E_F\\to E_G$ restrict to injective maps $C_F\\to C_G$, because the same monic polynomial over $B$ still vanishes [def-weil-pbc-integral-closure]. These maps preserve identities and compositions since their formulas do.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-field-extension-tensor-injective",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, filtered-normalization paragraph; explicit injectivity refinement"
+   }
+  },
+  {
+   "text": "The first normalization colimit. If $x\\in R_P$, Step 1 places $x$ in some finite field $F\\subseteq P$. A monic equation for $x$ over $A$ is an equality already in $F$, since $F\\to P$ is injective. Thus $x\\in R_F$, proving $R_P=\\bigcup_F R_F$. Conversely every $R_F$ maps into $R_P$ by the same monic equation [def-weil-pbc-integral-closure]. This union is a ring colimit: a compatible family of ring maps $h_F:R_F\\to U$ defines $h(x)=h_F(x)$ for a stage containing $x$; directedness makes this independent of the choice, and computing sums and products at a common stage proves that $h$ is the unique ring map extending the family. This verifies the universal property [def-weil-pbc-category-colimit] and hence the first claimed canonical isomorphism.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, displayed colimit A prime 1 = colim A_i; expanded directed-union verification"
+   }
+  },
+  {
+   "text": "The second normalization colimit. Every element of $L\\otimes_K P$ is a finite sum $\\sum_j l_j\\otimes p_j$ [def-weil-pbc-module-tensor-product]. Step 1 puts the finitely many $p_j$ into one finite field $F$, so every element of the quotient $E_P$ comes from $E_F$. Together with Step 2 this identifies $E_P$ with the union of the injective system $E_F$. If $c\\in C_P$, choose a representative $e\\in E_F$ of $c$. A monic equation over $B$ annihilating $c$ also annihilates $e$: its value in $E_F$ maps to zero in $E_P$, and that map is injective. Thus $e\\in C_F$ [def-weil-pbc-integral-closure]. Conversely an element integral over $B$ at a stage remains so in $E_P$. Therefore $C_P=\\bigcup_F C_F$. The common-stage formula $h(c)=h_F(c)$ from Step 3 gives the universal ring cocone and the second canonical isomorphism [def-weil-pbc-category-colimit]. This argument does not assume that the raw tensors are reduced.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, displayed colimit B prime 1 = colim B_i; expanded finite-support and monic-equation descent"
+   }
+  },
+  {
+   "text": "The tensor colimit as rings. Let $h_F:T_F\\to U$ be any compatible family of ring maps. Their restrictions along $B\\to T_F$ coincide, since any two stages have a common successor; write the common map as $u:B\\to U$. Their restrictions along $R_F\\to T_F$ glue by Step 3 to a ring map $v:R_P\\to U$. The maps $u,v$ agree on $A$. By [lem-weil-pbc-algebra-tensor-pushout-universal-property] there is a unique ring map $h:T_P\\to U$ with $h(b\\otimes r)=u(b)v(r)$. It restricts to $h_F$, since both maps agree on the two tensor factors. Conversely any extension of all $h_F$ must have these restrictions on $B$ and $R_P$, so the same tensor universal property makes it equal to $h$. This proves that the specified cocone $(T_P,(T_F\\to T_P))$ is colimiting, and proves the third canonical isomorphism [def-weil-pbc-category-colimit]. No injectivity of tensor transitions is needed.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CV and 00DD, tensor universal property and tensor-colimit argument, in the algebra diagram of Tag 09II"
+   }
+  },
+  {
+   "text": "The finite normalizations are Dedekind. By [def-sc-discrete-valuation-ring], $A$ is a nonfield local principal ideal domain. It is Noetherian since each ideal has one generator. Choose a generator $a\\ne0$ of its nonzero maximal ideal. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], every nonzero element is a unit times a power of $a$. Any nonzero prime contains a nonzero nonunit, hence contains $a$, so it is the maximal ideal. The chain $(0)\\subsetneq(a)$ therefore proves that $A$ has dimension one. For each finite $F/K$, all hypotheses of [lem-sc-integral-closure-dedekind-surjective-fibres] now hold. Its conclusion says that $R_F$ is a Noetherian integrally closed domain of dimension one. In particular it is a Dedekind domain, without requiring $R_F$ to be finite over $A$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-sc-integral-closure-dedekind-surjective-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD, lemma-characterize-dvr, and 09IG, lemma-integral-closure-Dedekind"
+   }
+  },
+  {
+   "text": "Faithful flatness at every finite stage. The inclusion $R_F\\subseteq R_P\\subseteq P$ makes $R_P$ torsion-free over $R_F$: a product of two nonzero elements in the field $P$ cannot vanish. Step 6 and [lem-sfb-dedekind-torsionfree-module-flat] show that $R_F\\to R_P$ is flat. Every element of $R_P$ satisfies a monic polynomial over $A$, hence over $R_F$ [def-weil-pbc-integral-closure]; thus this inclusion is integral. By [lem-weil-pbc-integral-injective-lying-over] it is surjective on prime spectra. Applying [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] proves faithful flatness. Neither finite generation nor Noetherianity of the target module $R_P$ enters the argument.",
+   "uses": [
+    "lem-sfb-dedekind-torsionfree-module-flat",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW, lemma-dedekind-torsion-free-flat (1), and algebra.tex Tags 00GQ and 00HQ"
+   }
+  },
+  {
+   "text": "Inverting a base uniformizer. [lem-weil-pbc-dvr-unit-times-uniformizer-power] implies $A[1/a]=K$: every fraction denominator in $A$ is a unit times a power of $a$. For $x\\in F\\subseteq P$, algebraicity [def-weil-algebraic-element] gives a monic equation $x^n+\\sum_{i<n}c_i x^i=0$ over $K$ (divide a nonzero polynomial by its leading coefficient). Choose $N\\geq0$ so that every $a^N c_i\\in A$. Then $y=a^N x$ satisfies\n$$y^n+\\sum_{i<n}c_i a^{N(n-i)}y^i=0,$$\nwhose coefficients belong to $A$. Thus $y\\in R_F$ [def-weil-pbc-integral-closure] and $x=y/a^N\\in R_F[1/a]$. The comparison into $F$ is injective by the fraction equality in [def-weil-ring-localization-away], since $R_F\\subseteq F$ and $a\\ne0$. It is therefore the claimed canonical isomorphism $R_F[1/a]\\cong F$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-algebraic-element",
+    "def-weil-pbc-integral-closure",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD and the monic denominator-clearing calculation underlying integral localization, Tag 0307"
+   }
+  },
+  {
+   "text": "The localized multiplication map. The same unit-times-power result [lem-weil-pbc-dvr-unit-times-uniformizer-power] gives $B[1/b]=L$. Since $A\\to B$ is local and injective, the image of $a$ is a nonzero nonunit, so it equals $ub^e$ for a unit $u\\in B$ and $e\\geq1$. It is consequently invertible in $T_F[1/b]$ [def-weil-ring-localization-away]. Every raw tensor is a finite sum $\\sum_j l_j\\otimes x_j$ [def-weil-pbc-module-tensor-product]. Write $l_j=v_j/b^{m_j}$ with $v_j\\in B$ and, by Step 8, $x_j=r_j/a^{n_j}$ with $r_j\\in R_F$. The element\n$$\\sum_j (v_j\\otimes r_j)b^{-m_j}a^{-n_j}\\ \\in T_F[1/b]$$\nmaps to that raw tensor and therefore to its class in $E_F$. The multiplication map exists by the tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] and extends to the localization since $b$ is a unit in the $L$-algebra $E_F$. This proves its surjectivity, even when $L\\otimes_K F$ has nilpotents.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II normalization tensor diagram; explicit localized multiplication calculation using Tag 00PD"
+   }
+  },
+  {
+   "text": "The integral map $T_Q\\to C_Q$. For $Q=F$ or $P$, the image of each $r\\in R_Q$ in $E_Q$ satisfies the image over $B$ of its monic equation over $A$. Thus it lies in $C_Q$; the image of $B$ also lies there, and $C_Q$ is a subring by [def-weil-pbc-integral-closure]. These compatible maps from $B$ and $R_Q$ define the multiplication map $T_Q\\to C_Q$ by [lem-weil-pbc-algebra-tensor-pushout-universal-property]. For $c\\in C_Q$, a monic equation over $B$ becomes a monic equation over $T_Q$ by mapping each coefficient $v\\in B$ to $v\\otimes1$. It still annihilates $c$. Hence every element of $C_Q$ is integral over $T_Q$. This proves integrality of the specified map, without asserting its injectivity or finiteness.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GI, definition-integral-ring-map, 00GO, lemma-integral-closure-is-ring, and 00CV, tensor universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-field-extension-tensor-injective",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sfb-dedekind-torsionfree-module-flat",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "def-weil-algebraic-element",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II, filtered-normalization paragraph, expanded and generalized to arbitrary algebraic P/K; faithful flatness assembled from Tags 09IG, 0AUW, 00GQ, 00HQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]ntegral[Cc]losure.*[Cc]olimit|[Cc]olimit.*[Ii]ntegral[Cc]losure|[Dd]edekind.*[Tt]orsion|[Tt]orsion.*[Dd]edekind",
+   "results": "{\"t\": \"2026-10-24T06:59:58Z\", \"tool\": \"grep\", \"query\": \"[Ii]ntegral[Cc]losure.*[Cc]olimit|[Cc]olimit.*[Ii]ntegral[Cc]losure|[Dd]edekind.*[Tt]orsion|[Tt]orsion.*[Dd]edekind\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\"], \"digest\": \"4ad1bb1bbe23724d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the integral-closure finiteness results require finite separable extensions and do not give the normalization diagram. Module.Flat.instOfIsDedekindDomainOfIsTorsionFree gives only flatness; the union, prime-surjectivity and reduced tensor transitions remain. The unquoted FaithfullyFlat Loogle identifier was unknown; the corrected substring query also returned no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure in an algebraic field extension is the directed union of finite intermediate integral closures",
+   "results": "{\"t\": \"2026-10-24T06:59:59Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure in an algebraic field extension is the directed union of finite intermediate integral closures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.of_isIntegrallyClosed\", \"NumberField.RingOfIntegers.instIsIntegralClosure\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"algebraicClosure.isIntegralClosure\", \"Ring.NormalClosure\", \"integralClosure.isIntegralClosure\", \"instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure\", \"integralClosure\"], \"digest\": \"55c26fe3018c89fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the integral-closure finiteness results require finite separable extensions and do not give the normalization diagram. Module.Flat.instOfIsDedekindDomainOfIsTorsionFree gives only flatness; the union, prime-surjectivity and reduced tensor transitions remain. The unquoted FaithfullyFlat Loogle identifier was unknown; the corrected substring query also returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "integralClosure, FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-24T06:59:59Z\", \"tool\": \"loogle\", \"query\": \"integralClosure, FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'FaithfullyFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the integral-closure finiteness results require finite separable extensions and do not give the normalization diagram. Module.Flat.instOfIsDedekindDomainOfIsTorsionFree gives only flatness; the union, prime-surjectivity and reduced tensor transitions remain. The unquoted FaithfullyFlat Loogle identifier was unknown; the corrected substring query also returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral inclusion of an algebraic normalization over a Dedekind domain is faithfully flat",
+   "results": "{\"t\": \"2026-10-24T07:00:03Z\", \"tool\": \"leanfinder\", \"query\": \"Integral inclusion of an algebraic normalization over a Dedekind domain is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instFaithfulSMulNormalClosure\", \"Ring.instFiniteNormalClosure_1\", \"Ring.instFiniteNormalClosure\", \"Ring.instIsDedekindDomainNormalClosure\", \"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"IsIntegralClosure.isDedekindDomain\", \"TensorProduct.toIntegralClosure_injective_of_flat\"], \"digest\": \"c254d3f9152fd501\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the integral-closure finiteness results require finite separable extensions and do not give the normalization diagram. Module.Flat.instOfIsDedekindDomainOfIsTorsionFree gives only flatness; the union, prime-surjectivity and reduced tensor transitions remain. The unquoted FaithfullyFlat Loogle identifier was unknown; the corrected substring query also returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closures in finite subextensions form an injective filtered union, and normalization of a DVR in an algebraic extension is faithfully flat over each finite-stage integral closure",
+   "results": "{\"t\": \"2026-10-24T07:00:07Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closures in finite subextensions form an injective filtered union, and normalization of a DVR in an algebraic extension is faithfully flat over each finite-stage integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.instFiniteNormalClosure\", \"Ring.instFiniteNormalClosure_1\", \"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"integralClosure.isFractionRing_of_finite_extension\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"IsIntegralClosure.finite\", \"Ring.DimensionLEOne.integralClosure\"], \"digest\": \"12c061657646f5f3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the integral-closure finiteness results require finite separable extensions and do not give the normalization diagram. Module.Flat.instOfIsDedekindDomainOfIsTorsionFree gives only flatness; the union, prime-surjectivity and reduced tensor transitions remain. The unquoted FaithfullyFlat Loogle identifier was unknown; the corrected substring query also returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"FaithfullyFlat\"",
+   "results": "{\"t\": \"2026-10-24T07:04:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"FaithfullyFlat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the integral-closure finiteness results require finite separable extensions and do not give the normalization diagram. Module.Flat.instOfIsDedekindDomainOfIsTorsionFree gives only flatness; the union, prime-surjectivity and reduced tensor transitions remain. The unquoted FaithfullyFlat Loogle identifier was unknown; the corrected substring query also returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]ntegral[Cc]losure.*[Cc]olimit|[Cc]olimit.*[Ii]ntegral[Cc]losure|[Dd]edekind.*[Tt]orsion|[Tt]orsion.*[Dd]edekind",
+   "results": "{\"t\": \"2026-10-24T07:29:40Z\", \"tool\": \"grep\", \"query\": \"[Ii]ntegral[Cc]losure.*[Cc]olimit|[Cc]olimit.*[Ii]ntegral[Cc]losure|[Dd]edekind.*[Tt]orsion|[Tt]orsion.*[Dd]edekind\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/AtPrime/Extension.lean\", \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas.lean\"], \"digest\": \"9b333b0d9ed37163\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply finite-extension integral-closure properties or torsion-free flatness, but none states the reduced tensor diagram, both integral-closure colimits, the tensor colimit, and faithful flatness at arbitrary algebraic stages. Existing DAG leaves supply the individual tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"FaithfullyFlat\"",
+   "results": "{\"t\": \"2026-10-24T07:29:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"FaithfullyFlat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply finite-extension integral-closure properties or torsion-free flatness, but none states the reduced tensor diagram, both integral-closure colimits, the tensor colimit, and faithful flatness at arbitrary algebraic stages. Existing DAG leaves supply the individual tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closures in finite subextensions form an injective directed union, and the closure in an algebraic extension is faithfully flat over each finite normalization of a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T07:29:43Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closures in finite subextensions form an injective directed union, and the closure in an algebraic extension is faithfully flat over each finite normalization of a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.algebra\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed\", \"Ring.instFiniteNormalClosure_1\", \"Ring.instFiniteNormalClosure\", \"integralClosure.isFractionRing_of_finite_extension\", \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"Ring.DimensionLEOne.integralClosure\"], \"digest\": \"9e8c32cbea766edb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply finite-extension integral-closure properties or torsion-free flatness, but none states the reduced tensor diagram, both integral-closure colimits, the tensor colimit, and faithful flatness at arbitrary algebraic stages. Existing DAG leaves supply the individual tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure in an algebraic field extension is the directed union of finite intermediate integral closures",
+   "results": "{\"t\": \"2026-10-24T07:30:41Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure in an algebraic field extension is the directed union of finite intermediate integral closures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.of_isIntegrallyClosed\", \"NumberField.RingOfIntegers.instIsIntegralClosure\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"algebraicClosure.isIntegralClosure\", \"Ring.NormalClosure\", \"integralClosure.isIntegralClosure\", \"instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure\", \"integralClosure\"], \"digest\": \"55c26fe3018c89fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply finite-extension integral-closure properties or torsion-free flatness, but none states the reduced tensor diagram, both integral-closure colimits, the tensor colimit, and faithful flatness at arbitrary algebraic stages. Existing DAG leaves supply the individual tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a discrete valuation ring in an arbitrary algebraic extension is the filtered union of finite normalizations and is faithfully flat over each finite stage",
+   "results": "{\"t\": \"2026-10-24T07:30:42Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a discrete valuation ring in an arbitrary algebraic extension is the filtered union of finite normalizations and is faithfully flat over each finite stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationSubring.algebra\", \"Ring.DimensionLEOne.integralClosure\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"Valuation.Integers.integrallyClosed\", \"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"Ring.DimensionLEOne.isIntegralClosure\", \"integralClosure.isFractionRing_of_finite_extension\", \"Ring.instFiniteNormalClosure\"], \"digest\": \"c1331c9b67761dab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply finite-extension integral-closure properties or torsion-free flatness, but none states the reduced tensor diagram, both integral-closure colimits, the tensor colimit, and faithful flatness at arbitrary algebraic stages. Existing DAG leaves supply the individual tools."
+  },
+  {
+   "tool": "grep",
+   "query": "isFractionRing_of_finite_extension|flat_iff_torsion_eq_bot|instance \\[IsDedekindDomain R\\] \\[IsTorsionFree R M\\]",
+   "results": "{\"t\": \"2026-10-24T07:33:02Z\", \"tool\": \"grep\", \"query\": \"isFractionRing_of_finite_extension|flat_iff_torsion_eq_bot|instance \\\\[IsDedekindDomain R\\\\] \\\\[IsTorsionFree R M\\\\]\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/NormalClosure.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\", \"Mathlib/RingTheory/Flat/TorsionFree.lean\"], \"digest\": \"7331ec525afb4896\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply finite-extension integral-closure properties or torsion-free flatness, but none states the reduced tensor diagram, both integral-closure colimits, the tensor colimit, and faithful flatness at arbitrary algebraic stages. Existing DAG leaves supply the individual tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-normalization-algebraic-model",
+  "date": "2026-10-24",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Finite-stage descent of the solution obtained only after the perfect-residue algebraic preparation. Tag 09II final three paragraphs: the finite algebra model needed before descending residue separability. Supporting input: Injective normalization systems and faithful flatness over finite algebraic stages.",
+   "via": [
+    "lem-sfb-finite-normalization-algebraic-model",
+    "lem-sfb-dvr-normalized-finite-stage-descent",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normalization-algebraic-transition-system",
+  "worker": "stage1",
+  "summary": "Proved all clauses in ten explicit steps, reusing existing DAG nodes throughout; no new nodes. Wrote finite-support reduced-tensor and monic descent arguments, the universal ring cocone for tensors, the Dedekind/lying-over faithful-flatness argument, and uniformizer denominator formulas. The statement is unchanged; added the existing algebra-tensor ring structure to statement dependencies.",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images (3), through the recorded creation chain and the finite-stage descent following Epp preparation. Read latest main-20261024 direct-image proof (3); it does not itself state this auxiliary algebra lemma. blueprint_refs ancestor returns None, retained verbatim; whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Step 6 uses only the general Tag 09IG conclusion that normalization of a dimension-one Noetherian domain in a finite field extension is Dedekind. This is an algebra tool for the historical finite-stage normalization route; no node of the current unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-closure-dedekind-surjective-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-59f8ce56d",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-59f8ce56d (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged and the proof has 10 steps, with no new nodes. Its base proof was empty, so no earlier argument could have been shortened. Each step checked. (1) The 09GH leaf gives directedness and covering. (2) The tensor associativity comes from the pushout node; field-extension tensor injectivity with B=L⊗_K F over F applies, and the reduced maps stay injective because z^n mapping to 0 forces z^n=0. (3) and (4) Union arguments, where the monic equation descends through injectivity of E_F→E_P. (5) The ring-colimit universal property for T, with u=v on A and uniqueness from pushout clause (3). (6) The DVR is Noetherian and has dimension one by the unit-times-power leaf, so 09IG makes R_F Dedekind. (7) R_P is torsion-free over R_F, so 0AUW(1) gives flatness; integrality with 00GQ and 00HQ then gives faithful flatness. (8) The coefficients c_i a^{N(n-i)} lie in A because n-i≥1. (9) Locality gives a=ub^e with e≥1, and the explicit preimage proves surjectivity. (10) Integrality follows by mapping coefficients v to v⊗1. Small cases tested: P=K; B=A; a purely inseparable nonreduced tensor over F_p(s); ramification t↦u^e; infinite algebraic P. Source checked: Stacks more-algebra Tag 09II, the paragraph 'By construction, the field K'_1 is a filtered colimit', and 0AUW(1). The cited leaves match their sources. Accepted tool_use: lem-sc-integral-closure-dedekind-surjective-fibres, a general Krull–Akizuki algebra tool from sec-curve-estimates. The DAG search found no duplicate: lem-sfb-dvr-normalized-finite-stage-descent and lem-sfb-directed-tensor-integral-embedding differ, and the item does not restate its parent lem-sfb-finite-normalization-algebraic-model. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalizationAlgebraicTransitionSystem",
+  "declaration": "Algebra.NormalizationTransition.normalization_algebraic_transition_system",
+  "declarations": [
+   "Algebra.NormalizationTransition.reducedTensor",
+   "Algebra.NormalizationTransition.reducedMap",
+   "Algebra.NormalizationTransition.closureMap",
+   "Algebra.NormalizationTransition.secondClosureMap",
+   "Algebra.NormalizationTransition.tensorMap",
+   "Algebra.NormalizationTransition.finiteStages",
+   "Algebra.NormalizationTransition.firstTransition",
+   "Algebra.NormalizationTransition.firstToApex",
+   "Algebra.NormalizationTransition.firstLaws",
+   "Algebra.NormalizationTransition.firstDiagram",
+   "Algebra.NormalizationTransition.firstCocone",
+   "Algebra.NormalizationTransition.secondTransition",
+   "Algebra.NormalizationTransition.secondToApex",
+   "Algebra.NormalizationTransition.secondLaws",
+   "Algebra.NormalizationTransition.secondDiagram",
+   "Algebra.NormalizationTransition.secondCocone",
+   "Algebra.NormalizationTransition.tensorTransition",
+   "Algebra.NormalizationTransition.tensorToApex",
+   "Algebra.NormalizationTransition.tensorLaws",
+   "Algebra.NormalizationTransition.tensorDiagram",
+   "Algebra.NormalizationTransition.tensorCocone",
+   "Algebra.NormalizationTransition.multiplicationMap",
+   "Algebra.NormalizationTransition.multiplication_mem_closure",
+   "Algebra.NormalizationTransition.multiplicationToClosure",
+   "Algebra.NormalizationTransition.normalization_algebraic_transition_system"
+  ],
+  "file": "lean/Sheaf/RingTheory/NormalizationAlgebraicTransitionSystem.lean",
+  "statement": "theorem normalization_algebraic_transition_system [IsDomain A] [IsDomain B] [IsDiscreteValuationRing A] [IsDiscreteValuationRing B] [IsFractionRing A K] [IsFractionRing B L] [Algebra.IsAlgebraic K P] [IsLocalHom (algebraMap A B)] (hinj : Function.Injective (algebraMap A B)) : Nonempty (finiteStages (K := K) P) ∧ (∀ F G : finiteStages (K := K) P, ∃ H : finiteStages (K := K) P, F ≤ H ∧ G ≤ H) ∧ (∀ (F G : finiteStages (K := K) P) (h : F ≤ G), Function.Injective (reducedMap (L := L) (IntermediateField.inclusion h)) ∧ Function.Injective (firstTransition A P F G h) ∧ Function.Injective (secondTransition (L := L) B P F G h)) ∧ (∀ F : finiteStages (K := K) P, Function.Injective (reducedMap (L := L) F.1.val) ∧ Function.Injective (firstToApex A P F) ∧ Function.Injective (secondToApex (L := L) B P F)) ∧ Nonempty (IsColimit (firstCocone (K := K) A P)) ∧ Nonempty (IsColimit (secondCocone (K := K) (L := L) B P)) ∧ Nonempty (IsColimit (tensorCocone (K := K) A B P)) ∧ (∀ F : finiteStages (K := K) P, (firstToApex A P F).FaithfullyFlat) ∧ (∀ (a : A) (b : B), IsLocalRing.maximalIdeal A = Ideal.span {a} → IsLocalRing.maximalIdeal B = Ideal.span {b} → ∀ F : finiteStages (K := K) P, IsLocalization.Away (algebraMap A (integralClosure A F.1) a) F.1 ∧ ∃ m : Localization.Away (algebraMap B (B ⊗[A] integralClosure A F.1) b) →+* reducedTensor K L F.1, m.comp (algebraMap (B ⊗[A] integralClosure A F.1) (Localization.Away (algebraMap B (B ⊗[A] integralClosure A F.1) b))) = (multiplicationMap (K := K) (L := L) A B F.1).toRingHom ∧ Function.Surjective m) ∧ (∀ F : finiteStages (K := K) P, (multiplicationToClosure (K := K) (L := L) A B F.1).toRingHom.IsIntegral) ∧ (multiplicationToClosure (K := K) (L := L) A B P).toRingHom.IsIntegral",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical reduced-tensor and integral-closure maps, finite-stage diagrams and fixed apex cocones are constructed in this module. The theorem states all clauses. Colimit comparisons are expressed by Nonempty (IsColimit canonicalCocone), and the first canonical localization comparison by IsLocalization.Away. The second localized map is fixed by its restriction to the explicit multiplication map, which uniquely determines it. Auxiliary law theorems supply only proof fields of the displayed canonical constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10d118d46",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Read node, 9 stmt_dep records (all Mathlib leaves), full module, report (Worker report + Second reading present). Hypotheses exact: DVRs+IsLocalHom+injective, IsFractionRing K/L with scalar towers (no extra restriction), Algebra.IsAlgebraic K P; 5 independent universes. Objects: E_Q = L⊗_K Q mod nilradical, R_Q/C_Q = integralClosure, T_Q = B⊗_A R_Q; transitions are real mapIntegralClosure/tensor maps at IntermediateField.inclusion and F.val. All clauses present: nonempty, directed, E/R/C injectivity (stages and into P, none claimed for T), Nonempty IsColimit of the canonical inclusion cocones, RingHom.FaithfullyFlat R_F→R_P, IsLocalization.Away via the inclusion R_F→F, ∃ m restricting to multiplicationMap and surjective (unique by localization UP), IsIntegral of multiplicationToClosure for F and P. No hollow defs; sorried law/mem theorems have proof docstrings; lean.statement verbatim (script check); no duplicate in side-live Sheaf/WeilConjectures. Edge cases P=K, B=A, infinite P, inseparable nilpotent tensor, ramification checked. No compile (no change)."
+ }
+}

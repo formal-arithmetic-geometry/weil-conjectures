@@ -1,0 +1,146 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0A3D(2), proof by Tag 0A37, eventual-vanishing half"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-punctured-neighborhood-cohomology-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K4",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 0A37 and 0A3D (2); topological setup from Topology Tags 0A31, 0902, 0AP0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cohomology class on an intersection of compact open neighborhoods lifts to some neighborhood",
+   "results": "Eight hits for continuous-map lifting and scheme basic opens; none for sheaf cohomology.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit_exists_rep\"",
+   "results": "Concrete.colimit_exists_rep and isColimit_exists_rep provide the group-level representation step, but no topological cohomology continuity.",
+   "date": "2026-10-24",
+   "verdict": "reuse for the parent proof only"
+  },
+  {
+   "tool": "grep",
+   "query": "puncturedNeighborhood.*(lift|zero)|spectralLimit_cohomology_(class_lift|eventual_zero)",
+   "results": "No punctured-neighborhood specialization. Local source reads identify the two existing general spectral-limit cohomology declarations; their coefficient presentation must still be constructed.",
+   "date": "2026-10-24",
+   "verdict": "general spectral-limit halves are applicable after restriction setup"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PuncturedNeighborhoodCohomologyColimit",
+  "date": "2026-10-24",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+   "place": "Independent eventual-vanishing part of the continuity argument in proof step 5",
+   "via": [
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-punctured-neighborhood-cohomology-eventual-zero",
+ "title": "Eventual vanishing on punctured neighborhoods",
+ "statement": "Let T be a spectral space, Z a closed subset with compact open complement, A an abelian sheaf on T, and q a natural number. Let D be the punctured-neighborhood cohomology diagram and C its canonical restriction cocone [def-weil-pbc-punctured-neighborhood-cohomology-diagram]. If x in D_N maps to zero under C_N, there is a compact open neighborhood M contained in N such that the restriction D(N→M)(x) is zero.",
+ "proof": [
+  {
+   "text": "Construct the explicit reverse-inclusion system, prove directedness and spectrality of stages and transition inclusions, and identify its topological limit with the punctured generalizations.",
+   "uses": [
+    "lem-weil-pbc-punctured-neighborhood-spectral-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved puncturedGeneralizations_spectral theorem of the concrete spectral-system module to provide the spectral-space instance on the punctured generalizations.",
+   "uses": [
+    "lem-weil-pbc-punctured-neighborhood-spectral-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the restriction coefficient presentation and its cohomology comparison isomorphisms. The normalized pullback families are the canonical ones; their IsPullback proofs are the choose_spec of the existing existence theorem.",
+   "uses": [
+    "lem-weil-pbc-punctured-neighborhood-coefficient-presentation",
+    "def-weil-pbc-topological-object-cohomology-pullback",
+    "lem-weil-pbc-site-cohomology-pullback-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the class by eH and its zero-image equation by eL. Apply the general spectral-limit eventual-zero theorem to obtain a later index and a zero transition class.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-cohomology-eventual-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient-presentation transition equation identifies the resulting zero class with eH applied to the ordinary restriction. Cancel the injective isomorphism eH and use the reverse-inclusion inequality to construct the required opposite-category arrow.",
+   "uses": [
+    "lem-weil-pbc-punctured-neighborhood-coefficient-presentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-punctured-neighborhood-spectral-system",
+  "lem-weil-pbc-punctured-neighborhood-coefficient-presentation",
+  "def-weil-pbc-topological-object-cohomology-pullback",
+  "lem-weil-pbc-site-cohomology-pullback-exists",
+  "lem-weil-pbc-spectral-limit-cohomology-eventual-zero"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.PuncturedNeighborhoodCohomologyEventualZero",
+  "file": "lean/Sheaf/Topology/PuncturedNeighborhoodCohomologyEventualZero.lean",
+  "declaration": "TopCat.puncturedNeighborhood_cohomology_eventual_zero",
+  "declarations": [
+   "TopCat.puncturedNeighborhood_cohomology_eventual_zero"
+  ],
+  "statement": "theorem puncturedNeighborhood_cohomology_eventual_zero {T : Type u} [TopologicalSpace T] [SpectralSpace T] (Z : Set T) (hZ : IsClosed Z) (hU : IsCompact Zᶜ) (A : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u}) (q : ℕ) (N : (compactOpenNeighborhoods Z)ᵒᵖ) (x : (puncturedNeighborhoodCohomologyDiagram Z hZ A q).obj N) (hx : ((puncturedNeighborhoodCohomologyCocone Z hZ A q).ι.app N).hom x = 0) : ∃ (M : (compactOpenNeighborhoods Z)ᵒᵖ) (f : N ⟶ M), ((puncturedNeighborhoodCohomologyDiagram Z hZ A q).map f).hom x = 0",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T020608-L-2624606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261025T123233-L-1845227",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

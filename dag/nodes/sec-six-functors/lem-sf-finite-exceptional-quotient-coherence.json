@@ -1,0 +1,112 @@
+{
+ "id": "lem-sf-finite-exceptional-quotient-coherence",
+ "kind": "statement",
+ "title": "Coherence of finite exceptional quotient mates",
+ "statement": "Under the same finite-field, coefficient and geometric hypotheses as [def-sf-finite-exceptional-constructions], let b denote the specified mate of the inverse compact-support comparison q. For m≥n≥t, Q_X(n,t)(b(m,n,L)), followed by b(n,t,Q_Y(m,n)L) and G_t of the Y scalar associator, equals the X scalar associator at G_m L followed by b(m,t,L). For n=m, b(n,n,L) followed by G_n of the Y scalar multiplication unit equals the X scalar multiplication unit at G_n L. The associators are reassoc and the units are selfReduction of [def-sf-finite-exceptional-constructions]; all indices denote positive coefficient exponents.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Paragraph 2: coherent duality comparisons and identification of their adjunction maps"
+ },
+ "stmt_deps": [
+  "def-sf-finite-exceptional-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Specialize comparison_composition to the three actual finite quotient changes and quotient_comp. Conjugate by finiteImageIso at each level: naturality moves the middle endpoint isomorphisms across scalar extension and they cancel. Fully faithful restriction gives the q cocycle with precisely reassoc at both endpoints. Specialize comparison_identity and quotient_id for the q identity with precisely selfReduction.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take inverses of the q cocycle, then transpose under the three normalized adjunctions. The inverse Hom bijection sends v to F(v) followed by the counit. Naturality of q moves the first transposed component across the second q inverse; the triangle identities cancel the intermediate adjunction. Mate pasting yields exactly the b cocycle. The same computation on the identity q equation gives the b multiplication-unit equation. Neither step requires b invertible.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-dualizing-quotient-mates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "def-weil-pbc-adjunction-mate",
+  "lem-coef-dualizing-quotient-mates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Paragraph 2: coherent duality comparisons and identification of their adjunction maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image on finite Tor constructible sheaves commutes with quotient reduction of coefficients, with compatible identity and composition maps",
+   "results": "Eight hits including Equivalence.sheafCongrPrecoherent_inverse_map_val_app and SheafOfModules.pushforwardComp_inv_app_val_app; these concern underived site equivalences and pushforward, not exceptional coefficient reduction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertibility and coherent quotient cocycle for finite exceptional inverse image coefficient change as the adjoint mate of compact support scalar comparison",
+   "results": "Eight hits including ContinuousCohomology.MultiInd.complex and LightCondensed.ihomPoints_symm_comp; no exceptional inverse image or finite coefficient cocycle.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|coefficientCounitMate|comparison_comp",
+   "results": "Mathlib has generic mateEquiv_counit, unit_mateEquiv and mateEquiv_vcomp; these prove the formal identities but do not assert invertibility or the scalar normalization of finite exceptional mates.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteExceptional",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-exceptional",
+   "place": "Paragraph 2: coherent duality comparisons and identification of their adjunction maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteExceptionalQuotientCoherence",
+  "file": "lean/Sheaf/SixFunctors/FiniteExceptionalQuotientCoherence.lean",
+  "declaration": "WeilConjectures.FiniteExceptional.exceptional_quotient_coherence",
+  "statement": "theorem exceptional_quotient_coherence :\n    (∀ {m n t : ℕ} (h : n ≤ m) (k : t ≤ n)\n      (L : (domain l E Y m).FullSubcategory),\n      (Q l E X k).map ((b l E D hl f c h).app L) ≫\n          (b l E D hl f c k).app ((Q l E Y h).obj L) ≫\n          (G l E D hl f c t).map ((reassoc l E Y h k).hom.app L) =\n        (reassoc l E X h k).hom.app ((G l E D hl f c m).obj L) ≫\n          (b l E D hl f c (k.trans h)).app L) ∧\n    (∀ (n : ℕ) (L : (domain l E Y n).FullSubcategory),\n      (b l E D hl f c (le_refl n)).app L ≫\n          (G l E D hl f c n).map ((selfReduction l E Y n).hom.app L) =\n        (selfReduction l E X n).hom.app ((G l E D hl f c n).obj L))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-92de4",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164236-L-981366",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-92de4",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164236-L-981366",
+  "kind": "interface",
+  "note": "independent cc review: FiniteExceptionalData vs published FiniteExceptional.lean (verbatim names, signatures, bodies, imports); split theorems vs conjuncts 2-4 of finite_exceptional; 12 direct importers compiled against sandbox build"
+ }
+}

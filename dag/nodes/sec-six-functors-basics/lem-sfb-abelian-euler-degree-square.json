@@ -1,0 +1,442 @@
+{
+ "id": "lem-sfb-abelian-euler-degree-square",
+ "kind": "statement",
+ "title": "Degree of the line-bundle homomorphism is the Euler-characteristic square",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $A/k$ be an abelian variety [def-sc-abelian-variety] of dimension $g\\geq1$ [def-kun-topological-krull-dimension], and let $L$ be an invertible $\\mathcal O_A$-module [def-sc-invertible-module]. Write $\\chi(A,M)=\\sum_{i\\geq0}(-1)^i\\dim_kH^i(A,M)\\in\\mathbf Z$ for coherent Zariski Euler characteristic [def-pc-euler-characteristic]; for an invertible $M$ this is a finite sum of finite dimensions. Let $\\phi_L:A\\to A^\\vee$ be the homomorphism $x\\mapsto[t_x^*L\\otimes L^{-1}]$ of [lem-sfb-abelian-polarization-calculus]. For a group-scheme homomorphism $h:A\\to A^\\vee$ [def-sc-group-scheme], set $d(h)=\\dim_k\\Gamma(\\ker h,\\mathcal O_{\\ker h})$ if $h$ is an isogeny [def-sc-isogeny], and set $d(h)=0$ otherwise. Then $$d(\\phi_L)=\\chi(A,L)^2\\quad\\text{in }\\mathbf Z.$$ No ampleness or finite-kernel hypothesis is imposed on $L$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Theorem 11.1(a), printed p.54 (PDF p.60), with the degree-zero convention preceding Theorem 10.9, printed p.46 (PDF p.52)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-pc-euler-characteristic",
+  "lem-sfb-abelian-polarization-calculus",
+  "def-sc-group-scheme",
+  "def-sc-isogeny"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-abelian-variety-projective] choose a projective embedding of $A$ and let $H$ be the pullback of $\\mathcal O(1)$. Thus $H$ is very ample and in particular ample. Its coordinate sections have affine nonvanishing opens covering $A$: these are the closed subschemes cut out by $A$ in the standard affine charts of projective space. Hence $H$ is also ample in the absolute affine-locus sense used below. Put $M_n=L\\otimes H^{\\otimes n}$ for $n\\geq0$. The variety $A$ is proper and Noetherian, and these invertible modules are coherent (locally they are free of rank one over the Noetherian structure sheaf). The finiteness assertion in [lem-pc-euler-characteristic-well-defined] makes all their Euler characteristics well defined.",
+   "uses": [
+    "lem-sc-abelian-variety-projective",
+    "def-sc-ample",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-pc-euler-characteristic-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I, Theorem 6.4 (projectivity); elementary choice of a very ample sheaf and affine projective charts; coherent finiteness as cited."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-coherent-twist-global-generation] to the ample $H$ and the coherent module $L$. For every sufficiently large $n\\geq1$, $F_n=L\\otimes H^{\\otimes(n-1)}$ is globally generated. Fix $x\\in A$. Choose a section $s$ of $H$ whose affine nonvanishing chart contains $x$, and a generating section $t$ of $F_n$ nonzero at $x$. Then $s\\otimes t$ is a section of $H\\otimes F_n=M_n$ and [lem-sc-tensor-section-affine-open] gives $A_{s\\otimes t}=A_s\\cap A_t$, affine and containing $x$. Thus the affine-locus condition holds for $M_n$ at every point. By [lem-pc-ample-affine-loci-criterion], $M_n$ is ample. This proves eventual ampleness directly; it is not an additional prerequisite node.",
+   "uses": [
+    "lem-weil-pbc-coherent-twist-global-generation",
+    "lem-sc-tensor-section-affine-open",
+    "lem-pc-ample-affine-loci-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Elementary affine-locus argument of Tag 0890, lemma-ample-tensor-globally-generated, using the cited generation and affine intersection statements."
+   }
+  },
+  {
+   "text": "For every sufficiently large $n$, the generating sections of $F_n$ in step 2 and the coordinate sections of $H$ give a tensor section of $M_n$ nonzero at the identity. By [lem-sc-abelian-variety-characterization], $A$ is integral. Thus [lem-pc-nonzero-section-integral-cartier] and [lem-pc-zero-scheme-divisor-iso] give an effective Cartier divisor $E_n$ with $M_n\\cong\\mathcal O_A(E_n)$. Its ampleness from step 2 now implies, by the effective-divisor clause of [lem-sfb-abelian-polarization-calculus], that $f_n=\\phi_{M_n}$ is an isogeny. The same reasoning with a nonzero coordinate section of $H$ proves that $\\phi_H$ is an isogeny. This uses neither theta-group representations nor the Euler-square identity.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "lem-pc-nonzero-section-integral-cartier",
+    "lem-pc-zero-scheme-divisor-iso",
+    "lem-sfb-abelian-polarization-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.1 and Remark 8.2; effective-divisor criterion applied after producing an actual section."
+   }
+  },
+  {
+   "text": "Put $a:A\\to\\operatorname{Spec}k$ and fix one of these $M=M_n$. By [lem-sc-smooth-omega-finite-locally-free], $V=e_A^*\\Omega^1_{A/k}$ has dimension $g$. The identity in [lem-sfb-group-scheme-differentials-from-identity] gives $\\Omega^1_{A/k}\\cong\\mathcal O_A\\otimes_kV$. Choose a basis of $V$; its top wedge trivializes $\\omega_A=\\bigwedge^g\\Omega^1_{A/k}$. Now [lem-sc-smooth-proper-relative-dualizing-general] gives $a^!k\\cong\\mathcal O_A[g]$, where $a^!$ is the right adjoint of $R\\Gamma(A,-)$. For every integer $j$ its adjunction gives\n$$\\operatorname{Hom}_{D(A)}(M,\\mathcal O_A[g+j])\\cong\\operatorname{Hom}_{D(k)}(R\\Gamma(A,M),k[j]).$$\nTensoring by the invertible module $M^{-1}$ identifies the left side with $H^{g+j}(A,M^{-1})$: tensoring by $M$ and $M^{-1}$ are mutually inverse exact functors, hence mutually inverse on complexes and their derived categories. The right side has dimension $\\dim_k H^{-j}(A,M)$: a bounded complex of finite-dimensional vector spaces splits, by choosing complements to boundaries in cycles and to cycles in each term, into its cohomology and contractible two-term complexes. Taking the alternating dimension sums and reindexing $i=g+j$ gives\n$$\\chi(A,M^{-1})=(-1)^g\\chi(A,M).$$\nThis is a direct adjunction calculation with the cited dualizing object, independent of abelian Riemann–Roch.",
+   "uses": [
+    "lem-sc-smooth-omega-finite-locally-free",
+    "lem-sfb-group-scheme-differentials-from-identity",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BRT, lemma-smooth-proper; specialize its right-adjoint identification to the field and use the invariant differential frame."
+   }
+  },
+  {
+   "text": "Keep $M=M_n$, write $f=\\phi_M$ and $K=\\ker f$, with inclusion $i:K\\hookrightarrow A$. On $A\\times A$ put\n$$\\Lambda=m^*M\\otimes p_1^*M^{-1}\\otimes p_2^*M^{-1}.$$\nThe normalized-family identity of [lem-sfb-abelian-polarization-calculus] identifies $\\Lambda$ with $(1\\times f)^*\\mathcal P_A$ (a constant one-dimensional factor may be trivialized). By [lem-sc-isogeny-degree], $f$ is finite flat. Apply [lem-weil-pbc-flat-base-change-resolution-iso] to $p_2:A\\times A^\\vee\\to A^\\vee$ and the flat base change $f$. The derived comparison is an isomorphism because its maps on all cohomology sheaves are precisely the isomorphisms in that statement; flat pullback is exact. Together with [lem-sfb-poincare-coherent-transform] this gives\n$$Rp_{2*}\\Lambda\\simeq f^*(e_*k)[-g]\\simeq i_*\\mathcal O_K[-g].$$\nThe last identification is local tensor algebra: if $J$ is the identity ideal on an affine base chart, its pullback is the module $B\\otimes_C(C/J)=B/JB$ defining the scheme-theoretic fibre. Thus the whole kernel, including nilpotents, occurs.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sc-isogeny-degree",
+    "lem-weil-pbc-flat-base-change-resolution-iso",
+    "lem-sfb-poincare-coherent-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "§16 pp.151–152: flat base change of the §13 Poincare calculation; Stacks Tag 02KH is supplied by the existing base-change node."
+   }
+  },
+  {
+   "text": "The line module $M$ is perfect. The projection formula [lem-sbc-ringed-site-perfect-projection-formula] applied to $p_2$ therefore identifies\n$$Rp_{2*}(\\Lambda\\otimes p_2^*M)\\simeq(i_*\\mathcal O_K\\otimes M)[-g]\\simeq i_*(i^*M)[-g].$$\nThe second isomorphism is the finite projection map of [lem-sfb-finite-map-locally-free-euler-comparison], for $i$. The same node gives $\\chi(A,i_*N)=\\chi(K,N)$ for $N=i^*M$ and $\\mathcal O_K$. The finite $k$-scheme $K$ is Noetherian and zero-dimensional: its affine coordinate algebra is finite-dimensional, and its domain quotients are fields. By [lem-sc-zero-dim-noetherian-finite-discrete] its points are open singletons. Restrict a local frame of $N$ to each singleton and glue the frames over this disjoint open cover; thus $N\\cong\\mathcal O_K$, even when $K$ is nonreduced. By [lem-pc-affine-vanishing], $\\chi(K,N)=\\dim_k\\Gamma(K,\\mathcal O_K)=d(f)$. Composition of derived direct images [lem-pc-ringed-spaces-derived-direct-image-composition] permits taking $R\\Gamma$ of these identities, and the shift contributes $(-1)^g$. Consequently\n$$\\chi(A\\times A,\\Lambda)=\\chi(A\\times A,\\Lambda\\otimes p_2^*M)=(-1)^g d(f).$$",
+   "uses": [
+    "lem-sbc-ringed-site-perfect-projection-formula",
+    "lem-sfb-finite-map-locally-free-euler-comparison",
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "lem-pc-affine-vanishing",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "§16 pp.151–152: twisting a finite-support direct image does not change its Euler characteristic; projection, finite-map Euler comparison and composition are cited explicitly."
+   }
+  },
+  {
+   "text": "The tensor product $\\Lambda\\otimes p_2^*M$ is $m^*M\\otimes p_1^*M^{-1}$. The map $u:A\\times A\\to A\\times A$, $(x,y)\\mapsto(x+y,x)$, is an isomorphism with inverse $(v,w)\\mapsto(w,v-w)$. It pulls $p_1^*M\\otimes p_2^*M^{-1}$ back to this tensor product. Change of coordinates by this isomorphism preserves coherent cohomology. Apply [lem-sc-picard-kunneth-qcoh] with the coherent modules $M$ and $M^{-1}$: $A$ is quasi-compact and separated, hence has affine diagonal. Taking the finite alternating dimension sums gives\n$$\\chi(A\\times A,\\Lambda\\otimes p_2^*M)=\\sum_{r,s}(-1)^{r+s}\\dim H^r(A,M)\\dim H^s(A,M^{-1})=\\chi(A,M)\\chi(A,M^{-1}).$$\nStep 4 makes this $(-1)^g\\chi(A,M)^2$. Compare with step 6 and cancel $(-1)^g$. We have proved $d(\\phi_{M_n})=\\chi(A,M_n)^2$ for every sufficiently large $n$.",
+   "uses": [
+    "lem-sc-picard-kunneth-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+    "place": "§16 pp.151–152: the automorphism (m,p1), coherent Kunneth (Stacks Tag 0BED), and the inverse-bundle Euler sign."
+   }
+  },
+  {
+   "text": "The representing Picard functor in [lem-sfb-abelian-polarization-calculus] has tensor product as addition. For invertible modules $B,C$, the identity\n$$t_x^*(B\\otimes C)\\otimes(B\\otimes C)^{-1}\\cong(t_x^*B\\otimes B^{-1})\\otimes(t_x^*C\\otimes C^{-1})$$\nholds functorially on every test scheme and respects the rigidifications. Thus the represented homomorphisms satisfy $\\phi_{B\\otimes C}=\\phi_B+\\phi_C$. Inducting on $n$ gives $\\phi_{M_n}=\\phi_L+n\\phi_H$ for $n\\geq0$. This is an identity of group-scheme homomorphisms, obtained from families, not just from their values on $k$-points.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §§5 and 8: tensor product in the represented Picard group functor; direct substitution in the translation family."
+   }
+  },
+  {
+   "text": "Step 3 gives an isogeny $\\phi_H:A\\to A^\\vee$. The last assertion of [lem-sfb-simple-isogeny-decomposition] supplies an isogeny $q:A^\\vee\\to A$. Put $a=q\\circ\\phi_L$ and $b=q\\circ\\phi_H$ in $\\operatorname{End}_k(A)$. In the rational endomorphism space, take the subspace spanned by $a\\otimes1,b\\otimes1$, of dimension at most two. On any basis of that subspace, [lem-sfb-abelian-degree-polynomial] represents degree by a rational polynomial. Substitute the coordinates of $(a+nb)\\otimes1$ into this polynomial. Each coordinate is affine linear in $n$, so the substitution gives $Q\\in\\mathbf Q[T]$ with $Q(n)=d(a+nb)$ for every integer $n$. No independence of $a,b$ is assumed.",
+   "uses": [
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-degree-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I, Remark 8.6 (quasi-inverse isogeny), Remark 10.11 and Proposition 10.13 (degree polynomial); affine-linear substitution written out."
+   }
+  },
+  {
+   "text": "The varieties $A,A^\\vee,A$ have the same positive dimension by [lem-sfb-abelian-polarization-calculus]. Apply [lem-sfb-isogeny-postcomposition-degree] to $h=\\phi_{M_n}$ and $u=q$. It gives\n$$Q(n)=d(q\\phi_{M_n})=(\\deg q)d(\\phi_{M_n})\\qquad(n\\geq0),$$\nincluding those $n$ for which $\\phi_{M_n}$ is not an isogeny. Since $q$ is an isogeny, $c=\\deg q$ is positive: its finite kernel contains its identity section, so its coordinate algebra has positive dimension. Set $D(T)=c^{-1}Q(T)$. Then $D(n)=d(\\phi_{M_n})$ for every $n\\geq0$, in particular $D(0)=d(\\phi_L)$.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-isogeny-postcomposition-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I §7 and Remark 8.6, including the zero convention before Theorem 10.9; use the cited postcomposition lemma also in the non-isogeny case."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-snapper-numerical-polynomial] to the proper $k$-scheme $A$, the coherent module $L$, and the single invertible sheaf $H$. It gives a numerical polynomial $P\\in\\mathbf Q[T]$ with $P(n)=\\chi(A,L\\otimes H^{\\otimes n})$ for all integers $n$, so in particular $P(0)=\\chi(A,L)$.",
+   "uses": [
+    "lem-sc-snapper-numerical-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEL, lemma-numerical-polynomial-from-euler, with one twisting sheaf."
+   }
+  },
+  {
+   "text": "By step 7, $D(n)-P(n)^2=0$ for every sufficiently large integer $n$. These give infinitely many distinct rational roots. A nonzero polynomial over $\\mathbf Q$ has at most its degree many roots (successively divide by $T-n$), so $D=P^2$. Evaluating at $0$ yields $d(\\phi_L)=D(0)=P(0)^2=\\chi(A,L)^2$. The equality holds in $\\mathbf Q$ and hence in $\\mathbf Z$ since both sides are integers. This also covers $d(\\phi_L)=0$, without assuming $L$ is ample or $\\phi_L$ an isogeny.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Agent polynomial-interpolation assembly completing I Theorem 11.1(a), with the degree-zero convention before Theorem 10.9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-variety-projective",
+  "def-sc-ample",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "lem-sc-tensor-section-affine-open",
+  "lem-pc-ample-affine-loci-criterion",
+  "lem-sc-abelian-variety-characterization",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-pc-zero-scheme-divisor-iso",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-sfb-group-scheme-differentials-from-identity",
+  "lem-sc-smooth-proper-relative-dualizing-general",
+  "lem-sc-isogeny-degree",
+  "lem-weil-pbc-flat-base-change-resolution-iso",
+  "lem-sfb-poincare-coherent-transform",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-sfb-finite-map-locally-free-euler-comparison",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-pc-affine-vanishing",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-sc-picard-kunneth-qcoh",
+  "lem-sfb-simple-isogeny-decomposition",
+  "lem-sfb-abelian-degree-polynomial",
+  "lem-sfb-isogeny-postcomposition-degree",
+  "lem-sc-snapper-numerical-polynomial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/WANTED-mumford-abelian-varieties.pdf",
+  "place": "Mumford, Abelian Varieties, III §16 pp.151–152, using the RR-independent §13 Poincare calculation. Book scan read online; local copy WANTED. Agent assembly retains the previously checked ample-twist and polynomial-interpolation extension to arbitrary L; all prerequisites except the new Poincare calculation already exist in the DAG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|eulerChar|riemannRoch|riemann_roch",
+   "results": "0 hits; top: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of the dual abelian variety map associated to a line bundle is its Euler characteristic squared",
+   "results": "8 hits; top: LinearEquiv.dualMap, LinearMap.det_dualMap, Module.Dual.congr_apply_apply, LinearMap.dualMap, LinearEquiv.dualMap_symm, LinearEquiv.dualMap_apply, IncidenceAlgebra.eulerChar_orderDual, LinearMap.dualMap_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\"",
+   "results": "12 hits; top: ComplexShape.EulerCharSigns, ComplexShape.EulerCharSigns.χ, GradedObject.eulerChar, HomologicalComplex.eulerChar, ComplexShape.EulerCharSigns.mk, ComplexShape.EulerCharSigns.χ_next, HomologicalComplex.homologyEulerChar, ComplexShape.eulerCharSignsDownNat",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary invertible sheaf L on an abelian variety the degree of phi L is the square of the coherent Euler characteristic with degree zero for non isogenies",
+   "results": "8 hits; top: WeierstrassCurve.natDegree_Φ, WeierstrassCurve.natDegree_Φ_le, WeierstrassCurve.natDegree_ΨSq, WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_ΨSq_pos, WeierstrassCurve.natDegree_ΨSq_le, WeierstrassCurve.natDegree_preΨ'_le",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite kernel length of a nondegenerate line bundle homomorphism to the dual abelian variety equals chi L squared",
+   "results": "8 hits; top: RootPairing.finrank_range_polarization_eq_finrank_span_coroot, Module.Dual.finrank_ker_add_one_of_ne_zero, RootPairing.finrank_rootSpan_map_polarization_eq_finrank_corootSpan, Module.length_of_free_of_finite, Module.length_of_free, ClassGroup.cardM, FDRep.char_one, RootPairing.finrank_rootSpanIn",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern division polynomials, abstract linear duality, root pairings, ordinary complex or poset Euler characteristics, tensor algebra, or analytic Riemann integration; none states this identity for line bundles on abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an abelian variety and any invertible sheaf L the degree of phi L equals the square of its coherent Euler characteristic",
+   "results": "Returned: WeierstrassCurve.natDegree_Φ, WeierstrassCurve.natDegree_Φ_le, WeierstrassCurve.natDegree_ΨSq, WeierstrassCurve.natDegree_preΨ, WeierstrassCurve.natDegree_preΨ', WeierstrassCurve.natDegree_ΨSq_le, WeierstrassCurve.natDegree_preΨ_le, WeierstrassCurve.natDegree_preΨ'_le.",
+   "date": "2026-10-23",
+   "verdict": "no match: elliptic division-polynomial degree, root-pairing polarization and incidence-algebra Euler characteristic are different notions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: elliptic division-polynomial degree, root-pairing polarization and incidence-algebra Euler characteristic are different notions."
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|thetaGroup|eulerChar",
+   "results": "No hits. Source scope: Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-23",
+   "verdict": "no match: elliptic division-polynomial degree, root-pairing polarization and incidence-algebra Euler characteristic are different notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "degree of the polarization of a line bundle on an abelian variety equals Euler characteristic squared",
+   "results": "Returned: IncidenceAlgebra.eulerChar, RootPairing.Polarization_apply, RootPairing.polarizationEquiv_toLinearMap, RootPairing.polarizationEquiv_apply, RootPairing.toLinearMap_apply_apply_Polarization, RootPairing.ker_polarization_eq_ker_rootForm, RootPairing.PolarizationEquiv.congr_simp, RootPairing.PolarizationIn_eq.",
+   "date": "2026-10-23",
+   "verdict": "no match: elliptic division-polynomial degree, root-pairing polarization and incidence-algebra Euler characteristic are different notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Riemann Roch degree polarization is the square of the Euler characteristic including degenerate invertible sheaves",
+   "results": "Returned: RootPairing.PolarizationIn_eq, RootPairing.PolarizationIn, RootPairing.PolarizationIn_apply, RootPairing.toLinearMap_apply_PolarizationIn, RootPairing.finrank_range_polarization_eq_finrank_span_coroot, RootPairing.four_nsmul_coPolarization_compl_polarization_apply_root, RootPairing.rootForm_self_smul_coroot, RootPairing.prod_rootFormIn_smul_coroot_mem_range_PolarizationIn.",
+   "date": "2026-10-23",
+   "verdict": "no match: elliptic division-polynomial degree, root-pairing polarization and incidence-algebra Euler characteristic are different notions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-line-bundle-degree-square",
+  "date": "2026-10-23",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Theorem 11.1(a),(b), printed p.54, with the zero-degree convention for non-isogenies preceding Theorem 10.9, printed p.46. Combine the degree/Euler-characteristic square formula with abelian Riemann–Roch; the identity applies to arbitrary invertible sheaves. Supporting input: Theorem 11.1(a): separate the coherent Euler-characteristic square identity from the top-intersection normalization.",
+   "via": [
+    "lem-sfb-abelian-line-bundle-degree-square",
+    "lem-sfb-abelian-trace-intersection",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-abelian-euler-degree-square",
+  "worker": "stage1",
+  "summary": "Repair of D1/D4/E1: removed the circular H0 irreducibility input and both unused theta nodes. The ample-twist case is proved by the Poincare direct-image calculation, existing flat base change and projection formula, finite-kernel Euler calculation, coherent Kunneth and a direct adjunction derivation of the Serre inverse-bundle sign. Existing degree and Snapper interpolation steps are retained. One new statement-only derived Poincare prerequisite; statement and zero-degree convention unchanged.",
+  "blueprint": "The inherited provenance has no imported blueprint ancestor (blueprint_refs ancestor prints None). The split realizes the recorded supporting clause Milne I Theorem 11.1(a), coherent Euler-square identity before top-intersection normalization. Latest blueprint searched through literature/blueprint/latest (main-20261023-1620); no theta-group duplicate found. Repair: the free node-level supporting identity is now proved by Mumford §16, with its independent §13 calculation; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-abelian-variety-projective",
+    "why": "Choose an ample embedding; this generic projectivity theorem is not replaced by a node of the current unit."
+   },
+   {
+    "node": "lem-pc-euler-characteristic-well-defined",
+    "why": "Coherent finiteness on proper schemes; needed to interpret Euler sums, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-twist-global-generation",
+    "why": "Serre eventual generation for arbitrary coherent modules; used only to make large twists ample."
+   },
+   {
+    "node": "lem-sc-tensor-section-affine-open",
+    "why": "Affine nonvanishing intersection for sections of invertible sheaves; enables the explicit elementary ample-twist argument."
+   },
+   {
+    "node": "lem-pc-ample-affine-loci-criterion",
+    "why": "Convert the explicit affine chart cover into proper-scheme ampleness."
+   },
+   {
+    "node": "lem-sc-snapper-numerical-polynomial",
+    "why": "General proper coherent Euler polynomial; no current-unit node gives the same generic input."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Integrality of the abelian variety, used to turn a nonzero section into an effective Cartier divisor."
+   },
+   {
+    "node": "lem-pc-nonzero-section-integral-cartier",
+    "why": "Generic nonzero-section Cartier criterion; supplies the hypothesis of the effective-divisor ampleness criterion."
+   },
+   {
+    "node": "lem-pc-zero-scheme-divisor-iso",
+    "why": "Generic section/divisor line-module identification."
+   },
+   {
+    "node": "lem-sc-smooth-omega-finite-locally-free",
+    "why": "Rank of relative differentials for a smooth morphism."
+   },
+   {
+    "node": "lem-sfb-group-scheme-differentials-from-identity",
+    "why": "Invariant differential trivialization on any group scheme."
+   },
+   {
+    "node": "lem-sc-smooth-proper-relative-dualizing-general",
+    "why": "General smooth proper right-adjoint formula; used for the Serre Euler sign, not for etale Poincare duality."
+   },
+   {
+    "node": "lem-sc-isogeny-degree",
+    "why": "Finite flatness of an isogeny, needed for coherent flat base change."
+   },
+   {
+    "node": "lem-weil-pbc-flat-base-change-resolution-iso",
+    "why": "General qcqs coherent flat base change; not a proper etale base-change theorem."
+   },
+   {
+    "node": "lem-sbc-ringed-site-perfect-projection-formula",
+    "why": "General ringed-site projection formula for a line module."
+   },
+   {
+    "node": "lem-sfb-finite-map-locally-free-euler-comparison",
+    "why": "Generic coherent finite-map Euler and projection comparison."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic topology of a finite zero-dimensional scheme, used to trivialize a line module on the finite kernel."
+   },
+   {
+    "node": "lem-pc-affine-vanishing",
+    "why": "General quasi-coherent Zariski cohomology vanishing on an affine scheme."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "why": "General module derived composition, used to take global sections of the Poincare transform."
+   },
+   {
+    "node": "lem-sc-picard-kunneth-qcoh",
+    "why": "Coherent Zariski Kunneth over a field, not the etale Kunneth or Poincare-duality target."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-abelian-variety-projective",
+  "lem-pc-euler-characteristic-well-defined",
+  "lem-weil-pbc-coherent-twist-global-generation",
+  "lem-sc-tensor-section-affine-open",
+  "lem-pc-ample-affine-loci-criterion",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-sc-abelian-variety-characterization",
+  "lem-pc-nonzero-section-integral-cartier",
+  "lem-pc-zero-scheme-divisor-iso",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-sfb-group-scheme-differentials-from-identity",
+  "lem-sc-smooth-proper-relative-dualizing-general",
+  "lem-sc-isogeny-degree",
+  "lem-weil-pbc-flat-base-change-resolution-iso",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-sfb-finite-map-locally-free-euler-comparison",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-pc-affine-vanishing",
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-sc-picard-kunneth-qcoh"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-049a5a224",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-049a5a224 (reviewer sub-agent of L); spot-checked: Re-delivery answering the 999ec8e9 RETURN (D1/D4/E1, circular theta-irreducibility route). It now follows the Mumford §16 route that return named. Both theta nodes are removed, and the statement, stmt_deps and convention are unchanged from 999ec8e9. Source checks: Milne AV I Thm 11.1(a), printed p.54, local PDF, matches the item with the d=0 convention for non-isogenies; Mumford §13/§16 is not local and is recorded as WANTED with proof_origin=agent. The §13 Poincaré calculation R^i p2*P=0 for i≠g and R^g p2*P≅k(0̂) comes before Riemann–Roch, so the circularity is gone. I checked all 12 steps against the cited statements. Step 3: a nonzero section gives an effective Cartier divisor, and the ample⇔isogeny clause then gives the isogeny. Step 4: a^!k≅O[g] plus adjunction gives χ(M⁻¹)=(−1)^gχ(M). Step 5: flat base change along the finite flat f gives f*(e_*k)=O_K, nilpotents included. Step 6: projection formula, finite-map Euler comparison, trivial i*M on the finite K, and affine vanishing give χ=(−1)^g d(f). Step 7: the shear (x+y,x) is correct and Künneth applies (A separated). Steps 8–12 (interpolation) are as in the previous review. New node lem-sfb-poincare-coherent-transform is true. Small cases: g=0 gives k, an elliptic curve gives R^1=k(0) and χ(P)=−1, and characteristic p is fine. It has no input L, so it is strictly smaller than the item. Form B1–B9 is satisfied, and no DAG or blueprint duplicate exists (polarization-calculus and space-poincare-calculus carry no cohomology computation). No cycle: no proof_dep closure reaches the item. All 18 off-unit statements are declared in tool_uses and accepted as generic. Batch-5 flags: def-trf-schematically-dense-open, trf differential base change, def-pod-ring-scalar-extension, trf smooth / finite-locally-free composition, trf polynomial identity, trf forward difference and trf relative Proj are all generic definitions or lemmas. None is a step of the trace formula or of Poincaré duality, and coherent Serre duality and Künneth are not étale PD. No fixes."
+ }
+}

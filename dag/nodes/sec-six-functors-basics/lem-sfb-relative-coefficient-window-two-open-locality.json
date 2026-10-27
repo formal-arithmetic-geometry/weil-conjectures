@@ -1,0 +1,380 @@
+{
+ "id": "lem-sfb-relative-coefficient-window-two-open-locality",
+ "kind": "statement",
+ "title": "Two-open locality of finite-window coefficient approximation",
+ "statement": "Let $B$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $B\\to A$ any map of commutative rings, and $Y\\to\\operatorname{Spec}B$ a separated finite type morphism of schemes [def-pc-scheme, def-pc-morphism-conventions]. For a quasi-compact open subscheme $W\\subseteq Y$ and a $B$-algebra $D$, write $W_D=W\\times_{\\operatorname{Spec}B}\\operatorname{Spec}D$ [def-pc-fibre-product]. Define the proposition $\\mathcal P(W)$ as follows. For every commutative finite type $B$-algebra $D$ with a specified map $D\\to A$ over $B$, every $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{W_A})$ pseudo-coherent relative to $\\operatorname{Spec}A$ [def-pc-derived-category, def-sfb-relative-pseudo-coherent-complex], and every $a\\in\\mathbf Z$, there exist a finite type $D$-algebra $D'$ with a factorization $D\\to D'\\to A$ and $F\\in D(\\mathcal O_{W_{D'}})$ with bounded coherent cohomology [pqf-def-coherent], and a morphism $\\gamma:F\\to R\\pi_*K$ [def-pc-derived-direct-image], where $\\pi:W_A\\to W_{D'}$ is projection. Put $q:W_{D'}\\to\\operatorname{Spec}D'$ and $M=\\widetilde A[0]$ on $\\operatorname{Spec}D'$ [lem-weil-pbc-spec-module-tilde-sections]. The morphism\n$$\\theta:Lq^*M\\otimes^{\\mathbf L}F\\longrightarrow R\\pi_*K$$\nis defined by adjunction [lem-pc-ringed-spaces-derived-adjoint] from\n$$L\\pi^*(Lq^*M\\otimes^{\\mathbf L}F)\\simeq L(q\\pi)^*M\\otimes^{\\mathbf L}L\\pi^*F\\longrightarrow\\mathcal O_{W_A}\\otimes^{\\mathbf L}K\\simeq K,$$\nusing the given $A$-structure and the transpose of $\\gamma$ [def-pc-derived-pullback, def-pc-scheme-derived-tensor-structure]. Its cone [def-weil-triangulated-category] has quasi-coherent cohomology and zero cohomology sheaves in every degree $i\\geq a$. There is no flatness requirement on $B\\to A$, $D\\to A$ or $D'\\to A$.\nIf $U,V\\subseteq Y$ are quasi-compact opens and $\\mathcal P(U)$, $\\mathcal P(V)$ and $\\mathcal P(U\\cap V)$ hold, then $\\mathcal P(U\\cup V)$ holds. This is an implication from approximation on the three smaller opens; it does not assert existence of approximations on them.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-formulated prerequisite for the unnumbered Kiehl assertion following Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. This assertion is not stated or proved by that tag. Primary Kiehl (1972) descente source WANTED; no numbered source theorem is claimed."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-sfb-relative-coefficient-window-approximation"
+ ],
+ "proof": [
+  {
+   "text": "Fix $W=U\\cup V$ and an arbitrary $D,K,a$ in $\\mathcal P(W)$. Take a finite affine open cover $W=\\bigcup_j W_j$, $W_j=\\operatorname{Spec}R_j$. Each $R_j$ is finite type over $B$ by the affine-pairs criterion. Thus $S_j=R_j\\otimes_B D$ is finite type over $D$; choose a finite polynomial surjection $Q_j=D[x_1,\\ldots,x_{s_j}]\\twoheadrightarrow S_j$. These charts cover $W_D$ and their $A$-base changes cover $W_A$. The latter have rings $S_j\\otimes_D A$. Relative pseudo-coherence, for every integer $m$ and these particular polynomial embeddings, makes their pushforwards $m$-pseudo-coherent for every $m$. All-$m$ pseudo-coherence is absolute pseudo-coherence by its definition. By the affine equivalence, affine pushforward calculation and affine pseudo-coherence criterion, the corresponding $K_j$ restricted to $Q_{j,A}=A[x_1,\\ldots,x_{s_j}]$ are pseudo-coherent. The ring $D$ is Noetherian because it is finite type over $B$.",
+   "uses": [
+    "lem-pqf-finite-affine-cover-qc-open",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite downward induction for the two-open prerequisite of the unnumbered Kiehl assertion after Tag 0CSD. Primary descente source WANTED; affine comparison: Tags 08DW, 08DX, 08E7; relative charts: 09UJ, 09VC; obstruction finiteness: 066E, 064K, 064U, 064R, 064S."
+   }
+  },
+  {
+   "text": "Each polynomial restriction of $K_j$ has a bounded-above finite-free representative, hence $H^i(K_j)=0$ above an integer $b_j$. For a nonempty cover take $b=\\max_j b_j$; then $H^i(K)=0$ for $i>b$, because its restrictions to the covering opens vanish. If $W$ is empty, take $D'=D$, $F=0$ and $\\gamma=0$, which proves the assertion there. For nonempty $W$, start at $N=b+1$ with coefficient ring $D$, $F=0$ and $\\gamma=0$. The normalized map is $0\\to R\\pi_*K$. Affine pushforward is t-exact, so its cone vanishes for all $i\\geq N$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sc-affine-derived-pushforward-t-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite downward induction for the two-open prerequisite of the unnumbered Kiehl assertion after Tag 0CSD. Primary descente source WANTED; affine comparison: Tags 08DW, 08DX, 08E7; relative charts: 09UJ, 09VC; obstruction finiteness: 066E, 064K, 064U, 064R, 064S."
+   }
+  },
+  {
+   "text": "The induction invariant at $N$ is a finite type $D$-algebra $E$ factoring to $A$, a bounded-coherent $F$ on $W_E$, and $\\gamma:F\\to R\\pi_*K$ whose normalized scalar-action cone is quasi-coherent and vanishes for $i\\geq N$. Keep the fixed covering $W_j$ throughout. At a stage, replace $D$ by $E$, $S_j$ by $R_j\\otimes_B E$ and $Q_j$ by $E[x_1,\\ldots,x_{s_j}]$. These are Noetherian. The affine equivalence gives $L_j$ from $F$ on this chart. Its cohomology is bounded and finite over $S_j$: coherence implies finite type, and associated sheaves identify finite generators on an affine. The same generators work over the quotient's polynomial source $Q_j$. The Noetherian cohomology criterion gives a bounded-above finite-free $Q_j$-representative $P_j$ of $L_j$ after restriction.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-weil-pbc-affine-finite-type-generating-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite downward induction for the two-open prerequisite of the unnumbered Kiehl assertion after Tag 0CSD. Primary descente source WANTED; affine comparison: Tags 08DW, 08DX, 08E7; relative charts: 09UJ, 09VC; obstruction finiteness: 066E, 064K, 064U, 064R, 064S."
+   }
+  },
+  {
+   "text": "Every term of $P_j$ is free over $E$ (use the monomial basis of $Q_j$), so $P_j$ is K-flat over $E$ as well as over $Q_j$. Consequently $Q_{j,A}\\otimes_{Q_j}P_j=A\\otimes_E P_j$ computes the restricted coefficient tensor and is bounded-above finite free over $Q_{j,A}$. Let $\\theta_j$ be its extension--restriction counit map to $K_j$ induced by $\\gamma$. The affine pullback/tensor formulas identify the restriction of $Lq^*\\widetilde A\\otimes^{\\mathbf L}F$ with $A\\otimes_E^{\\mathbf L}L_j$: the cancellation is $(S_j\\otimes_E^{\\mathbf L}A)\\otimes_{S_j}^{\\mathbf L}L_j\\simeq A\\otimes_E^{\\mathbf L}L_j$. Affine pushforward is restriction of scalars: on a basic open its sections are the localized module, and the affine pushforward resolution lemma identifies this termwise description with derived pushforward. Under these comparisons the transpose defining $\\theta$ and the counit defining $\\theta_j$ both apply $\\gamma$ and multiply by the given scalar in $A$. Thus their cones have the same underlying cohomology after restriction to $Q_j$. This uses no flatness of $E\\to A$ or $E\\to S_j$.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite downward induction for the two-open prerequisite of the unnumbered Kiehl assertion after Tag 0CSD. Primary descente source WANTED; affine comparison: Tags 08DW, 08DX, 08E7; relative charts: 09UJ, 09VC; obstruction finiteness: 066E, 064K, 064U, 064R, 064S."
+   }
+  },
+  {
+   "text": "Both source and target of $\\theta_j$ are pseudo-coherent over $Q_{j,A}$: for the source use the explicit representative in step 4, for the target use step 1 with the same variables. Apply all-$m$ pseudo-coherence and the cone lemma (source parameter $m+1$, target parameter $m$) to see that $C_j=\\operatorname{Cone}(\\theta_j)$ is $m$-pseudo-coherent for every $m$. By the invariant and step 4, $H^i(C_j)=0$ for $i\\geq N$. In particular it vanishes for $i>N-1$. Top-cohomology finiteness at $m=N-1$ says $H^{N-1}(C_j)$ is a finite $Q_{j,A}$-module. This does not assert finiteness over $A$, which need not be Noetherian.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "lem-sc-cone-pseudo-coherent",
+    "lem-sc-finite-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite downward induction for the two-open prerequisite of the unnumbered Kiehl assertion after Tag 0CSD. Primary descente source WANTED; affine comparison: Tags 08DW, 08DX, 08E7; relative charts: 09UJ, 09VC; obstruction finiteness: 066E, 064K, 064U, 064R, 064S."
+   }
+  },
+  {
+   "text": "Apply global single-degree coefficient cancellation to $X=W_E$, its fixed affine charts, $F,\\gamma,K$ and $n=N-1$. Step 3 supplies its Noetherian and bounded-coherence hypotheses; steps 4--5 supply precisely its polynomial-chart cone hypotheses. The morphism $W_E\\to\\operatorname{Spec}E$ is separated finite type: the diagonal of $W/B$ is the restriction of the closed diagonal of $Y/B$ (restrict its local quotient presentations), and its finite affine chart rings are finite type. Apply separated finite-type base-change permanence to $W/B$ and $\\operatorname{Spec}E\\to\\operatorname{Spec}B$. The lemma returns a finite type $E$-algebra $E'$ factoring to $A$, and $F',\\gamma'$ with normalized cone quasi-coherent and zero for $i\\geq N-1$. The base-changed scheme is $(W_E)_{E'}=W_{E'}$. A generating list for $E/D$ followed by one for $E'/E$ generates $E'/D$. This is the invariant at $N-1$.",
+   "uses": [
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite downward induction for the two-open prerequisite of the unnumbered Kiehl assertion after Tag 0CSD. Primary descente source WANTED; affine comparison: Tags 08DW, 08DX, 08E7; relative charts: 09UJ, 09VC; obstruction finiteness: 066E, 064K, 064U, 064R, 064S."
+   }
+  },
+  {
+   "text": "If $a\\leq b+1$, perform $b+1-a$ improvements. If $a>b+1$, retain the initial zero model. The result is a finite type $D$-algebra $D'$, a bounded-coherent $F$ on $W_{D'}$ and the required $\\gamma$, with exactly the scalar-action normalization specified in the item, and cone zero in all degrees $i\\geq a$. This proves $\\mathcal P(U\\cup V)$. The argument proves this for any quasi-compact $W$; in particular it proves the stated conditional implication. It does not replace derived coefficient tensor by ordinary geometric base change, or assert that the independently chosen approximations on $U$ and $V$ already have isomorphic overlaps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent-written finite downward induction for the two-open prerequisite of the unnumbered Kiehl assertion after Tag 0CSD. Primary descente source WANTED; affine comparison: Tags 08DW, 08DX, 08E7; relative charts: 09UJ, 09VC; obstruction finiteness: 066E, 064K, 064U, 064R, 064S."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sc-affine-derived-pushforward-t-exact",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-sc-cone-pseudo-coherent",
+  "lem-sc-finite-cohomology",
+  "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-written finite downward induction for the two-open prerequisite of the unnumbered Kiehl assertion after Tag 0CSD. Primary descente source WANTED; affine comparison: Tags 08DW, 08DX, 08E7; relative charts: 09UJ, 09VC; obstruction finiteness: 066E, 064K, 064U, 064R, 064S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "descend.*[Cc]omplex|[Cc]omplex.*descend|glue.*[Dd]erived|[Dd]erived.*glue",
+   "results": "Hits read: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing finite window approximations to complexes by coherent complexes over Noetherian coefficient models on two open subschemes",
+   "results": "Hits read: AlgebraicGeometry.Scheme.GlueData, TopCat.GlueData.mk', AlgebraicGeometry.Scheme.GlueData.glued, AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued, AlgebraicGeometry.LocallyRingedSpace.GlueData, AlgebraicGeometry.Scheme.Pullback.gluing, AlgebraicGeometry.Scheme.Pullback.gluedIsLimit, TopCat.GlueData.ofOpenSubsets. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"glue\"",
+   "results": "Hits read: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski locality of finite degree Noetherian descent approximation for relatively pseudo coherent sheaf complexes, gluing on a cover by two quasi compact opens",
+   "results": "Hits read: AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instIsLocallyNoetherianXScheme, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.isLocallyNoetherian_iff_openCover, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris induction for approximation of sheaf complexes by bounded coherent complexes over finite coefficient rings, with nonflat derived coefficient tensor and normalized maps to a given target",
+   "results": "Hits read: CategoryTheory.GrothendieckTopology.MayerVietorisSquare, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, SheafOfModules.isFinitePresentation, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not assert finite-window nonflat derived coefficient approximation or its gluing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two open locality for finite window nonflat coefficient approximations of relatively pseudo coherent derived sheaf complexes by bounded coherent models",
+   "results": "{\"t\": \"2026-10-23T22:15:26Z\", \"tool\": \"leanfinder\", \"query\": \"Two open locality for finite window nonflat coefficient approximations of relatively pseudo coherent derived sheaf complexes by bounded coherent models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\"], \"digest\": \"8d68a32ada1a4c86\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern local finite generation, ordinary derived cones, injective factorization or shifts; none gives nonflat finite-coefficient approximation or one-degree sheaf obstruction cancellation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"glue\"",
+   "results": "{\"t\": \"2026-10-23T22:15:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"glue\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern local finite generation, ordinary derived cones, injective factorization or shifts; none gives nonflat finite-coefficient approximation or one-degree sheaf obstruction cancellation"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|coefficient.?window|[Dd]escente",
+   "results": "{\"t\": \"2026-10-23T22:15:27Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|coefficient.?window|[Dd]escente\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern local finite generation, ordinary derived cones, injective factorization or shifts; none gives nonflat finite-coefficient approximation or one-degree sheaf obstruction cancellation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient descent approximations of relatively pseudo coherent complexes of sheaves on a union of two opens",
+   "results": "{\"t\": \"2026-10-23T22:15:27Z\", \"tool\": \"leansearch\", \"query\": \"Finite coefficient descent approximations of relatively pseudo coherent complexes of sheaves on a union of two opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.QuasicoherentData.I\"], \"digest\": \"8c98125804c489fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern local finite generation, ordinary derived cones, injective factorization or shifts; none gives nonflat finite-coefficient approximation or one-degree sheaf obstruction cancellation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+  "date": "2026-10-24",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage.",
+   "via": [
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-coefficient-window-two-open-locality",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved the required implication by a finite downward induction valid on any quasi-compact open: finite polynomial charts bound the target above, Noetherian coherent models give polynomial pseudo-coherent tensor sources, and cone finiteness supplies the hypotheses of one global single-degree cancellation prerequisite. The only new node is that one-degree obstruction tool, without pseudo-coherence assumptions or arbitrary-window conclusion, and is statement-only. No exact gluing of independently chosen approximations or flatness is assumed. Kiehl primary descente source remains WANTED.",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images proof (3) / Kiehl descente prerequisite chain in blueprint.from.place; the current blueprint does not state this coefficient lemma. The ancestor tool returns None, as already recorded on the item. All-m relative charts and one-degree obstruction induction serve the same sheaf descente input. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic affine ring criterion for locally finite type morphisms, used only to obtain the polynomial presentations. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine derived category dictionary used for local module computations. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-pc-affine-pushforward-resolution-quasi-iso",
+    "why": "Generic affine unbounded pushforward comparison, needed to identify restriction of scalars on polynomial charts. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic affine pseudo-coherence criterion translating relative polynomial embeddings. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-sc-affine-derived-pushforward-t-exact",
+    "why": "Generic affine t-exactness used for the initial cohomology bound. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence criterion on Noetherian affine charts. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian ring criterion 066E giving the polynomial finite-free model. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic 064K K-flatness of bounded-above flat module complexes, retaining nonflat coefficients. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine derived tensor and pullback comparisons, not an alternative six-functor route. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "Generic derived adjunction to compare the stipulated scalar-action normalization. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "why": "Generic ring all-m criterion for applying cone finiteness. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-sc-cone-pseudo-coherent",
+    "why": "Generic ring cone closure 064R. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-sc-finite-cohomology",
+    "why": "Generic ring top-cohomology finiteness 064S. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic affine associated-sheaf localization dictionary. The unit has no separate assertion of this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-finite-type-generating-sections",
+    "why": "Generic affine finite-type module criterion, supplying finite module cohomology from coherent sheaves."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic scheme permanence under coefficient base change; this is a tool and does not replace any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pushforward-resolution-quasi-iso",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-sc-affine-derived-pushforward-t-exact",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "lem-sc-cone-pseudo-coherent",
+  "lem-sc-finite-cohomology",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-9a0b6d312",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-9a0b6d312 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no faults; nothing was changed. The item statement is unchanged: it is byte-equal to side-live, where the item is still unsplit; the new id is absent and there is no repair note. Steps 1-7 check out. Step 1: relative pseudo-coherence gives a pseudo-coherent A[x]-model on the base-changed polynomial charts, via the all-affine-charts node, the 08CB definition, the affine pushforward dictionary and the affine criterion. Step 2: the bound b, then the zero model, whose cone is Rπ_*K; π is affine and t-exact on unbounded D_QCoh. Step 3: the Noetherian charts give the polynomial model P_j through the 01XZ node, finite generating sections and 066E. Step 4: P_j is free over E, hence K-flat (064K), and clauses (1)-(3) of the tilde-tensor node identify the chart source with A⊗^L_E L_j = Q_{j,A}⊗^L L_j; no flatness is used. Step 5: 064R(1) with parameters m+1 and m, then 064S(1) at m=N-1, gives a finite top obstruction over Q_{j,A}; indices checked. Step 6: every hypothesis of the new node holds with X=W_E and n=N-1 (separated finite type by base change), and its output is the invariant at N-1. Step 7: elementary iteration. The proof establishes P(W) for every quasi-compact W, so the three premises go unused; that still proves the stated implication, and the target is not weakened. Sources: Stacks perfect.tex 0CSD and the paragraph after it (it only says 'See Kiehl'). Both files are honestly marked agent-formulated with Kiehl WANTED; no SGA is cited. New node lem-sfb-sheaf-single-degree-coefficient-cancellation: B1-B9 hold (statement-only, self-contained, five real searches, blueprint fields consistent). It is the non-affine generalization of Q50's affine lem-sfb-single-degree-coefficient-cone-cancellation, not a duplicate and not a restatement of its parent. I believe it is true; the proof sketch is in review.md: lift a coherent G that surjects onto the finite-type sheaf H^n, use the fact that Hom out of pseudo-coherent objects commutes with bounded-below colimits to descend to a finite-type D'', take the cone and the octahedral axiom, then restore boundedness by D^-(Coh)=D^-_Coh with a stupid truncation. Edge cases checked: empty X, A=0, trivial top obstruction, Z→F_p and k[ε]→k. I accept all 16 generic tool_uses. Maintainer note: the parent's open-induction (its step 6) is now logically redundant, but the parent remains correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeCoefficientWindowTwoOpenLocality",
+  "declaration": "AlgebraicGeometry.relativeCoefficientWindow_twoOpenLocality",
+  "declarations": [
+   "AlgebraicGeometry.relativeCoefficientWindow_twoOpenLocality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeCoefficientWindowTwoOpenLocality.lean",
+  "statement": "theorem relativeCoefficientWindow_twoOpenLocality {B A : CommRingCat.{u}} [IsNoetherianRing B] (b : B ⟶ A) {Y : Scheme.{u}} (f : Y ⟶ Spec B) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (U V : Y.Opens) (hU : IsCompact (U : Set Y)) (hV : IsCompact (V : Set Y)) (hPU : HasRelativeCoefficientWindowApproximation (U.ι ≫ f) b) (hPV : HasRelativeCoefficientWindowApproximation (V.ι ≫ f) b) (hPUV : HasRelativeCoefficientWindowApproximation ((U ⊓ V).ι ≫ f) b) : HasRelativeCoefficientWindowApproximation ((U ⊔ V).ι ≫ f) b",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5b2bcf87",
+  "group": "Q28",
+  "result": "fix",
+  "note": "Statement correct clause by clause: Noetherian B, arbitrary b, Y separated finite type (IsSeparated+LOFT+QC), quasi-compact U,V, implication P(U),P(V),P(U∩V) → P(U∪V). P: finite-type D,D' factoring through A; K QCoh and pseudo-coherent relative to Spec A; any a; F bounded coherent; real projection π. θ uses only pinned constructions (canonicalSchemeDerivedAdjunction, unique K-flat tensor comparison τ, canonicalSinglePullbackMap, multiplication a⊗b↦ab); no flatness. Existential distinguished-triangle cone is iso-invariant. Edge cases (empty or disjoint opens, A=0, ℤ→𝔽_p, all a) and pilot gates OK; lean.statement verbatim for both records. FIX (H2 ownership): new def node cited theorems lem-pc-scheme-derived-mate-evaluation and lem-pc-canonical-single-pullback-comparison for plain defs; swapped to the on-base def owners def-sfb-canonical-scheme-derived-adjunction-composition and def-weil-pbc-canonical-single-pullback-map; canonicalDerivedSquareComparison (no def owner) written out in coefficientWindowScalar from canonicalDerivedPullbackComposition; grouped citations split so check_new_node returns []. Fixed module compiles clean (nt_compile --json, 4.7 s). Item module and item node unchanged. Advisory: tildePullbackIso is uncited but canonical with no choice."
+ }
+}

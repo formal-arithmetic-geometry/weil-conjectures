@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-augmented-resolution-extension-cone-lift",
+ "kind": "statement",
+ "title": "The cone lift attached to a lifted augmentation through an extension",
+ "statement": "Let $\\mathcal E$ be an abelian category [def-sp-abelian], with the complexes, ordinary derived category, shifts, localization $Q$ and cone convention of [def-weil-abstract-derived-category], in the universes of [def-weil-size-convention]. Let $X,N,E$ be objects of $\\mathcal E$. Let $P$ be a cochain complex with $P^i=0$ for $i>0$, put $P_n=P^{-n}$ and $\\partial_n=d_P^{-n}$ for $n\\geq1$, and let $e:P\\to X[0]$ be a quasi-isomorphism. Let $0\\to N\\xrightarrow{i}E\\xrightarrow{p}X\\to0$ be a short exact sequence of objects [def-weil-pbc-exact-sequence] and let $\\ell:P_0\\to E$ satisfy $p\\ell=e^0$.\n\nThere is a unique $f:P_1\\to N$ with $if=\\ell\\partial_1$, and $f\\partial_2=0$. Let $\\bar f:P\\to N[1]$ have sole possibly nonzero component $f$ in degree $-1$. The cone $C(i)$ of $i:N[0]\\to E[0]$ has $N$ in degree $-1$, $E$ in degree zero, and differential $i$. Its projection is $\\operatorname{pr}:C(i)\\to N[1]$ (so the cone triangle arrow is $-\\operatorname{pr}$). The map $v:C(i)\\to X[0]$ given by $p$ in degree zero is a quasi-isomorphism: $H^{-1}(C(i))=0$, $H^0(C(i))\\cong X$ through $p$, and all other cohomology objects vanish. The components $\\kappa^{-1}=f$, $\\kappa^0=\\ell$, and zero in other degrees define a cochain map $\\kappa:P\\to C(i)$ satisfying\n$$v\\kappa=e,\\qquad \\operatorname{pr}\\kappa=\\bar f.$$\nConsequently $Q(\\kappa)=Q(v)^{-1}Q(e)$ in $D(\\mathcal E)$. These assertions hold for arbitrary such $P,e,\\ell$, with no projectivity assumption on the terms of $P$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image, internal bar normalization: old roof-adjunction proof step 13 (kernel cocycle and two-term-cone lifting diagram), isolated for arbitrary augmented resolutions. Agent-extracted statement from the reviewed roof-adjunction argument; a direct internal-category reference is WANTED where applicable."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Because $e$ is a cochain map, $e^0\\partial_1=0$. Thus $p\\ell\\partial_1=e^0\\partial_1=0$. Apply [lem-weil-pbc-abelian-short-exact-kernel] to the given short exact sequence with $T=P_1$ and $\\varphi=\\ell\\partial_1$. It gives a unique $f:P_1\\to N$ with $if=\\ell\\partial_1$. The short exactness hypotheses and monicity of $i$ are exactly those of [def-weil-pbc-exact-sequence].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-abelian-short-exact-kernel",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0106 (definition-kernel), 010E (definition-exact); kernel universal property applied to the augmentation chain equation."
+   }
+  },
+  {
+   "text": "The complex identity gives i(f∂₂)=ℓ∂₁∂₂=0. Monicity of i gives f∂₂=0. Construct the degree-one cocycle α from P to N[0] by HomComplex.Cocycle.toSingleMk, with sole component f in degree -1. After the cone lift κ is constructed, define fbar as κ followed by minus the cone triangle arrow. The triangle arrow is minus projection, so the component formula for mappingCone.lift shows that fbar has component f in degree -1; its other components vanish because N[1] is zero in those degrees. This uses the shift and cochain-map definitions of [def-weil-abstract-derived-category] and monicity from [def-weil-pbc-exact-sequence].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), with the shift and cochain-map definitions; elementary component calculation."
+   }
+  },
+  {
+   "text": "In the cone convention of [def-weil-abstract-derived-category], C(i) has N in degree -1, E in degree zero, differential i, and triangle arrow minus projection. Define β as the degree-zero cochain with component ℓ. The identity if=ℓ∂₁ gives δβ+αi=0 by HomComplex.Cochain.δ_toSingleMk and toSingleMk_postcomp. Apply mappingCone.lift to α and β to obtain κ. Its first and second projections in degrees -1 and zero are f and ℓ, respectively. In all other degrees the cone terms are zero, so κ has zero components. The map v is mappingCone.descShortComplex of the single-degree image of the given sequence [def-weil-pbc-exact-sequence]. Its degree-zero component is the second projection followed by p, by the two summand identities for descShortComplex.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone); Tag 0152 (lemma-derived-canonical-delta-functor), preceding cone comparison and its negative projection convention."
+   }
+  },
+  {
+   "text": "The category of cochain complexes is abelian by [lem-weil-pbc-cochain-complexes-degreewise-exact]. The single-degree functor preserves finite limits and colimits, so ShortComplex.ShortExact.map_of_exact maps the given sequence to a short exact sequence of complexes. This directly supplies the short exactness needed in [lem-pc-cone-short-exact-quasi-iso], applied via mappingCone.quasiIso_descShortComplex. Thus v is a quasi-isomorphism. For r≠0, transport the zero homology of X[0] across the isomorphism H^r(v). In degree zero, compose the isomorphism H^0(v) with singleObjHomologySelfIso. These are the homology and quasi-isomorphism constructions of [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), preceding construction of the cone quasi-isomorphism; degreewise exactness is Tag 0114 (homology-lemma-cat-cochain-abelian)."
+   }
+  },
+  {
+   "text": "The sole possibly nonzero component of $v\\kappa$ is $p\\ell=e^0$ in degree zero, so $v\\kappa=e$. The sole possibly nonzero component of $\\operatorname{pr}\\kappa$ is $f$ in degree $-1$, so $\\operatorname{pr}\\kappa=\\bar f$. Apply the localization functor of [def-weil-abstract-derived-category]: $Q(v)Q(\\kappa)=Q(e)$, and $Q(v)$ is invertible because $v$ is a quasi-isomorphism. Left multiplication by its inverse gives $Q(\\kappa)=Q(v)^{-1}Q(e)$. These arguments used only the supplied lift $\\ell$, the short exact sequence, and cochain equations, so apply to every stated $P,e,\\ell$ without projective terms.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category); functoriality and inverse cancellation in the localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-abelian-short-exact-kernel",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-pc-cone-short-exact-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 014E, 0152 (cone and short exact sequence comparison), 05RU (localization); E7 implements kernel factorization, HomComplex.toSingleMk, mappingCone.lift, and exactness of the single-degree functor, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "triangleOfSESδ|triangleOfSESDelta|mappingCone.*[Ll]ift|[Ll]ift.*mappingCone",
+   "results": "{\"t\": \"2026-10-22T06:05:49Z\", \"tool\": \"grep\", \"query\": \"triangleOfSESδ|triangleOfSESDelta|mappingCone.*[Ll]ift|[Ll]ift.*mappingCone\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5b.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5b.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\"], \"digest\": \"52a106d93194f822\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.lift and its component identities construct a map from supplied compatible cochains; they do not also construct the kernel cocycle from an augmentation lift and identify the two-term cone quasi-isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Short exact sequence boundary roof minus cone projection chain lift of augmented resolution",
+   "results": "{\"t\": \"2026-10-22T06:05:49Z\", \"tool\": \"leansearch\", \"query\": \"Short exact sequence boundary roof minus cone projection chain lift of augmented resolution\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone",
+   "results": "{\"t\": \"2026-10-22T06:05:51Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.mappingCone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.fst\", \"CochainComplex.mappingCone.snd\", \"CochainComplex.mappingCone.inl\", \"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.descCochain\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingCone.liftCochain_snd\", \"CochainComplex.mappingCone.inl_descCochain\"], \"digest\": \"c635c86b913ff8c6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.lift and its component identities construct a map from supplied compatible cochains; they do not also construct the kernel cocycle from an augmentation lift and identify the two-term cone quasi-isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmentation of a nonnegative chain resolution and a lift through a short exact sequence define a chain map to its mapping cone with prescribed projection",
+   "results": "{\"t\": \"2026-10-22T06:06:04Z\", \"tool\": \"leanfinder\", \"query\": \"An augmentation of a nonnegative chain resolution and a lift through a short exact sequence define a chain map to its mapping cone with prescribed projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.p\", \"CochainComplex.mappingCone.desc\", \"CochainComplex.cm5b.i\", \"CochainComplex.mappingCone.lift_f\", \"CochainComplex.mappingCone.ofHom_lift\", \"CochainComplex.mappingCone.desc_f\", \"CochainComplex.mappingCone.lift_fst\", \"CochainComplex.mappingCone.inl\"], \"digest\": \"298e264f8c873e0f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.lift and its component identities construct a map from supplied compatible cochains; they do not also construct the kernel cocycle from an augmentation lift and identify the two-term cone quasi-isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category a lift from degree zero of an augmented resolution through an extension gives a map into the two term cone compatible with augmentation and projection",
+   "results": "{\"t\": \"2026-10-22T06:07:26Z\", \"tool\": \"leanfinder\", \"query\": \"In an abelian category a lift from degree zero of an augmented resolution through an extension gives a map into the two term cone compatible with augmentation and projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.descFOne\", \"CategoryTheory.InjectiveResolution.descFZero\", \"CategoryTheory.InjectiveResolution.ι'\", \"CategoryTheory.InjectiveResolution.descFSucc\", \"CategoryTheory.InjectiveResolution.desc\", \"CochainComplex.mappingCone.ofHom_lift\", \"CochainComplex.mappingCone.lift_desc_f\", \"CategoryTheory.ProjectiveResolution.π'\"], \"digest\": \"be46720305fcb897\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone.lift and its component identities construct a map from supplied compatible cochains; they do not also construct the kernel cocycle from an augmentation lift and identify the two-term cone quasi-isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*lift|lift.*mappingCone|quasiIso_descShortComplex",
+   "results": "{\"t\": \"2026-10-23T09:49:37Z\", \"tool\": \"grep\", \"query\": \"mappingCone.*lift|lift.*mappingCone|quasiIso_descShortComplex\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/Factorizations/CM5b.lean\"], \"digest\": \"6c762368c53688fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: mappingCone.lift assumes a supplied compatible cocycle; it does not construct f from the augmentation lift. The cone quasi-isomorphism is already the existing Mathlib leaf lem-pc-cone-short-exact-quasi-iso. Kernel factorization and the component checks still assemble these results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lift of an augmentation through an extension defines a cocycle and a cochain map to the cone of the kernel inclusion",
+   "results": "{\"t\": \"2026-10-23T09:49:38Z\", \"tool\": \"leansearch\", \"query\": \"A lift of an augmentation through an extension defines a cocycle and a cochain map to the cone of the kernel inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.ofHom_lift\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingCone.lift\", \"CochainComplex.mappingCone.liftCocycle\", \"CochainComplex.mappingCone.liftCocycle_coe\", \"CochainComplex.mappingCone.lift_f_fst_v\", \"CochainComplex.mappingCone.lift_f\", \"CochainComplex.mappingCone.liftHomotopy\"], \"digest\": \"fe457462216e5e67\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: mappingCone.lift assumes a supplied compatible cocycle; it does not construct f from the augmentation lift. The cone quasi-isomorphism is already the existing Mathlib leaf lem-pc-cone-short-exact-quasi-iso. Kernel factorization and the component checks still assemble these results."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.lift",
+   "results": "{\"t\": \"2026-10-23T09:49:38Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.mappingCone.lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.lift_snd\", \"CochainComplex.mappingCone.lift\", \"CochainComplex.mappingCone.ofHom_lift\", \"CochainComplex.mappingCone.lift_f_snd_v\", \"CochainComplex.mappingCone.lift_f_snd_v_assoc\", \"CochainComplex.mappingCone.lift_fst\", \"CochainComplex.mappingCone.lift_f_fst_v\", \"CochainComplex.mappingCone.lift_f_fst_v_assoc\"], \"digest\": \"9c36787d754c1e43\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: mappingCone.lift assumes a supplied compatible cocycle; it does not construct f from the augmentation lift. The cone quasi-isomorphism is already the existing Mathlib leaf lem-pc-cone-short-exact-quasi-iso. Kernel factorization and the component checks still assemble these results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lift of the augmentation of a nonpositive cochain complex through a short exact sequence factors its first differential through the kernel and defines a map to the two term mapping cone",
+   "results": "{\"t\": \"2026-10-23T09:49:44Z\", \"tool\": \"leanfinder\", \"query\": \"A lift of the augmentation of a nonpositive cochain complex through a short exact sequence factors its first differential through the kernel and defines a map to the two term mapping cone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.lift\", \"CochainComplex.mappingCone.lift_desc_f\", \"CochainComplex.mappingCone.descShortComplex\", \"CochainComplex.mappingCone.lift_f_fst_v\", \"CochainComplex.mappingCone.lift_fst\", \"CochainComplex.mappingCone.liftCochain_descCochain\", \"CochainComplex.mappingCone.lift_f_snd_v\", \"CochainComplex.mappingCone.lift_snd\"], \"digest\": \"d6029fe6faa1f996\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: mappingCone.lift assumes a supplied compatible cocycle; it does not construct f from the augmentation lift. The cone quasi-isomorphism is already the existing Mathlib leaf lem-pc-cone-short-exact-quasi-iso. Kernel factorization and the component checks still assemble these results."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category the kernel of a surjection gives a cocycle from a chosen degree zero lift of a resolution and a compatible morphism to the mapping cone of the inclusion",
+   "results": "{\"t\": \"2026-10-23T09:51:02Z\", \"tool\": \"leanfinder\", \"query\": \"In an abelian category the kernel of a surjection gives a cocycle from a chosen degree zero lift of a resolution and a compatible morphism to the mapping cone of the inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective\", \"CochainComplex.mappingCone.liftCocycle\", \"CochainComplex.cm5b.i\", \"CochainComplex.mappingCone.descCocycle\", \"CochainComplex.mappingCone.liftCocycle_coe\", \"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\", \"CochainComplex.mappingCone.descCocycle_coe\", \"CochainComplex.mappingCone.lift\"], \"digest\": \"c6b994e0d0f94f87\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: mappingCone.lift assumes a supplied compatible cocycle; it does not construct f from the augmentation lift. The cone quasi-isomorphism is already the existing Mathlib leaf lem-pc-cone-short-exact-quasi-iso. Kernel factorization and the component checks still assemble these results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-bar-roof-adjunction",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, internal bar normalization: old roof-adjunction proof step 13 (kernel cocycle and two-term-cone lifting diagram), isolated for arbitrary augmented resolutions.",
+   "via": [
+    "lem-sfb-internal-bar-roof-adjunction",
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-augmented-resolution-extension-cone-lift",
+  "worker": "stage1",
+  "summary": "Constructed the unique kernel cocycle, checked every potentially nonzero chain equation, reused the existing short-exact-cone Mathlib leaf for v, and cancelled Q(v) to obtain the derived identity. No new nodes. Added the existing short-exact-sequence definition to statement dependencies; no mathematical statement change.",
+  "blueprint": "Realizes paragraph (3), open direct image, internal bar normalization: the extension cone diagram in the ancestor roof-adjunction proof (now its step 5). The latest blueprint gives the ambient direct-image route, not this extracted algebraic argument. Retained the imported null nearest-ancestor result and via chain printed by blueprint_refs.py ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-e57714729",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-e57714729 (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes, and live and side-live still have the item unsplit with an empty proof, so the delivery is neither superseded nor under a re-split note. The only statement change adds the [def-weil-pbc-exact-sequence] citation and stmt_dep; the mathematics is unchanged. I checked every step against the cited statements. Step 1: the degree -1 chain equation of e gives e^0∂_1=0, and the kernel leaf lem-weil-pbc-abelian-short-exact-kernel gives a unique f with if=ℓ∂_1. Step 2: since i is mono, f∂_2=0, and f̄ is a chain map (the degree -2 equation is the only nontrivial one). Step 3: inserting i into the cone C(f)^r=L^r⊕K^{r+1} with matrix [[d_L,f],[0,-d_K]] from def-weil-abstract-derived-category gives C^{-1}=N and C^0=E with differential i. The degree -1 and -2 equations of κ and v, and pr, all check. This agrees with Stacks 014E and with the construction before 0152, where the triangle arrow is -p. Step 4: lem-weil-pbc-cochain-complexes-degreewise-exact(2) and lem-pc-cone-short-exact-quasi-iso apply, and the leaf's canonical map is exactly v; directly, H^{-1}=ker i=0 and H^0=coker i≅X. Step 5: vκ=e and prκ=f̄ hold componentwise, and cancelling Q(v) gives Q(κ)=Q(v)^{-1}Q(e). The parent lem-sfb-internal-bar-roof-adjunction step 5 uses exactly this, plus the retained hypothesis that e is a quasi-isomorphism. Small cases checked: split E, N=0, and Z-2->Z->Z/2 with P=[Z-2->Z] (κ=id). The rg -L duplicate search found nothing equivalent (lem-sc-complex-lift-cone-cokernel and lem-pe-principal-reduction-cone-calculus are different statements). All non-definition dependencies are Mathlib leaves, there is no cycle, no SGA source is used and there are no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AugmentedResolutionExtensionConeLift",
+  "declaration": "CochainComplex.augmentedResolution_extension_cone_lift",
+  "file": "lean/Sheaf/Algebra/Homology/AugmentedResolutionExtensionConeLift.lean",
+  "statement": "theorem augmentedResolution_extension_cone_lift {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] (S : ShortComplex C) (hS : S.ShortExact) (P : CochainComplex C ℤ) (hP : ∀ r : ℤ, 0 < r → IsZero (P.X r)) (e : P ⟶ (single C (ComplexShape.up ℤ) 0).obj S.X₃) [QuasiIso e] (ell : P.X 0 ⟶ S.X₂) (hell : ell ≫ S.g = e.f 0 ≫ (singleObjXSelf (ComplexShape.up ℤ) 0 S.X₃).hom) : ∃ f : P.X (-1) ⟶ S.X₁, (f ≫ S.f = P.d (-1) 0 ≫ ell) ∧ (∀ f' : P.X (-1) ⟶ S.X₁, f' ≫ S.f = P.d (-1) 0 ≫ ell → f' = f) ∧ P.d (-2) (-1) ≫ f = 0 ∧ ∃ fbar : P ⟶ ((single C (ComplexShape.up ℤ) 0).obj S.X₁)⟦(1 : ℤ)⟧, (fbar.f (-1) ≫ (CochainComplex.shiftFunctorObjXIso ((single C (ComplexShape.up ℤ) 0).obj S.X₁) 1 (-1) 0 (by decide)).hom ≫ (singleObjXSelf (ComplexShape.up ℤ) 0 S.X₁).hom = f) ∧ (∀ r : ℤ, r ≠ -1 → fbar.f r = 0) ∧ ∃ kappa : P ⟶ mappingCone ((single C (ComplexShape.up ℤ) 0).map S.f), (kappa.f (-1) ≫ (mappingCone.fst ((single C (ComplexShape.up ℤ) 0).map S.f)).1.v (-1) 0 (by decide) ≫ (singleObjXSelf (ComplexShape.up ℤ) 0 S.X₁).hom = f) ∧ (kappa.f 0 ≫ (mappingCone.snd ((single C (ComplexShape.up ℤ) 0).map S.f)).v 0 0 (by decide) ≫ (singleObjXSelf (ComplexShape.up ℤ) 0 S.X₂).hom = ell) ∧ (∀ r : ℤ, r ≠ -1 → r ≠ 0 → kappa.f r = 0) ∧ kappa ≫ mappingCone.descShortComplex (S.map (single C (ComplexShape.up ℤ) 0)) = e ∧ kappa ≫ (-(mappingCone.triangle ((single C (ComplexShape.up ℤ) 0).map S.f)).mor₃) = fbar ∧ QuasiIso (mappingCone.descShortComplex (S.map (single C (ComplexShape.up ℤ) 0))) ∧ (∀ r : ℤ, r ≠ 0 → IsZero ((mappingCone ((single C (ComplexShape.up ℤ) 0).map S.f)).homology r)) ∧ IsIso (homologyMap (mappingCone.descShortComplex (S.map (single C (ComplexShape.up ℤ) 0))) 0 ≫ (singleObjHomologySelfIso (ComplexShape.up ℤ) 0 S.X₃).hom) ∧ ∃ vIso : DerivedCategory.Q.obj (mappingCone ((single C (ComplexShape.up ℤ) 0).map S.f)) ≅ DerivedCategory.Q.obj ((single C (ComplexShape.up ℤ) 0).obj S.X₃), vIso.hom = DerivedCategory.Q.map (mappingCone.descShortComplex (S.map (single C (ComplexShape.up ℤ) 0))) ∧ DerivedCategory.Q.map kappa = DerivedCategory.Q.map e ≫ vIso.inv",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b93dc621",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Every node clause matches a Lean clause; no extra assumptions or universe restriction. Cone sign checked in Mathlib: differential N→E is +i (inl_v_d) and triangle.mor₃ = homOf((-fst).rightShift 1 0), so -mor₃ is pr. v is Mathlib's descShortComplex = desc S.f 0 S.g, not an arbitrary map. Derived identity is an iso with hom = Q.map v and Q.map kappa = Q.map e ≫ vIso.inv. Recorded statement matches the file verbatim; docstrings carry source place, blueprint tag and proof plan; proof is sorry only; report has both sections. Node differs from side-live only by the new lean field; item not yet stated live; no new nodes; no duplicate found in lean/Sheaf or Mathlib. Edge cases N=0, X=0, P in degree 0 only, split E, infinite non-projective P all covered. No compile run; no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261026T081642-L-2032986",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

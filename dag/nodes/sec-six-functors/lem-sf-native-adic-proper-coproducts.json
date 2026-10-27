@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-native-adic-proper-coproducts",
+ "kind": "statement",
+ "title": "Native proper direct image preserves coproducts on the bounded constructible hull",
+ "statement": "Let $k$ be a field, let $\\ell$ be prime with $\\operatorname{char}k\\ne\\ell$, let $a_Y:Y\\to\\operatorname{Spec}k$ be a Noetherian scheme over $k$, and let $p:Z\\to Y$ be proper [def-weil-proper-morphism]. On the small pro-etale site of each scheme T use the actual native locally finite coefficient ring $B_T$ and heart $\\mathcal A_T=\\operatorname{Mod}(B_T)$ of [def-sf-native-weil-derived-framework]. Let $\\mathcal C_Z\\subset D(\\mathcal A_Z)$ be the bounded complexes with native constructible cohomology and let $\\mathcal L_Z=\\operatorname{Loc}(\\mathcal C_Z)$ be their full replete localizing hull [def-weil-triangulated-subcategory, def-weil-size-convention]. For every indexing type I in Type (u+1), the functor $\\mathcal L_Z\\hookrightarrow D(\\mathcal A_Z)\\xrightarrow{R(p_*^{\\mathrm{adic}})}D(\\mathcal A_Y)$ preserves coproducts indexed by I. The total right derived functor is the ordinary native one; the assertion does not claim preservation on all ambient objects or membership of its outputs in a target hull. No absolute separatedness of Y or Z is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Proper direct image bullet; native coefficient specialization in steps 1 and 6--10 of lem-sf-locally-finite-adic-compact-support-sums."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-sf-native-weil-derived-framework",
+  "def-weil-triangulated-subcategory",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Properness over Noetherian Y makes Z Noetherian [lem-weil-pbc-finite-type-over-noetherian]. Let E_Z and E_Y be the specified exact native encodings and their unbounded derived functors [lem-sf-native-adic-encoding-ordinary-operations]. Apply [lem-sf-native-adic-encoding-bounded-constructible] to the native bounded constructible generators. Since the derived equivalence is triangulated and preserves coproducts, ObjectProperty.localizingClosure_le_inverseImage carries the native hull into the condensed bounded constructible hull. Lift E_Z to these full subcategories; inclusion reflects colimits, so this lift preserves coproducts.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sf-native-adic-encoding-ordinary-operations",
+    "lem-sf-native-adic-encoding-bounded-constructible",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sfb-proper-serre-heart-qbar] to aY and p. Use the proved source-library theorem ProperLowerStarHeartHypotheses.preservesColimitsOfShape in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts to obtain coproduct preservation of the condensed proper direct image restricted to its bounded constructible hull. Compose with the lifted E_Z from step 1.",
+   "uses": [
+    "lem-sfb-proper-serre-heart-qbar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the specified NativeEncoding.derivedPushComparison by the native source-hull inclusion. It identifies the functor of step 2 with the native restricted proper direct image followed by E_Y. Equivalences reflect colimits, so reflection through E_Y proves the assertion for the original native right derived direct image, including the empty coproduct.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-subcategory",
+  "lem-sf-native-adic-encoding-bounded-constructible",
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "lem-sfb-proper-serre-heart-qbar",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Lean proof by the fixed native encoding, generator comparison, condensed proper coproduct theorem, and reflection by the target derived equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The right derived proper direct image of native adic sheaves preserves coproducts on the localizing hull of bounded constructible complexes",
+   "results": "General derived-functor and sheaf pushforward interfaces only; no native constructible-hull theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper derived pushforward preserves arbitrary coproducts of complexes in the localizing closure of bounded constructible adic sheaves",
+   "results": "General coproduct, exactness and bounded-complex results only; inspected local source ProperLowerStarCoproducts gives the condensed version, not native coefficient transport.",
+   "date": "2026-10-27",
+   "verdict": "Native transport obligation remains."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctor",
+   "results": "Unknown identifier in the Mathlib service: the construction is in the adopted source library.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "native proper coproduct; PreservesColimitsOfShape rightDerivedFunctor; localizingClosure; adicLowerStar",
+   "results": "Searched Mathlib, lean/Sheaf, lean/WeilConjectures and the DAG. The adopted ProperLowerStarCoproducts theorem is for condensed module objects. No native proper coproduct theorem; NativeAdicCompactSupportSums is the parent composite obligation.",
+   "date": "2026-10-27",
+   "verdict": "New proper-factor statement, strictly below the compact-support composite."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeAdicCompactSupportSums",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Supplied anchor lem-a1-local-boundary-duality, steps 1–2: exceptional adjunction; current cor-coef-verdier-weil-equivariance, final paragraph: First two bullet points and final paragraph: open extension and proper direct image on the localizing hulls. Agent-formulated version for the native locally-finite coefficient sheaf and finite-type schemes without absolute separatedness; this precise coefficient/domain variant is the unsplit obligation, not an invocation of the stronger whole-ambient assertion. Proper-factor coproduct assertion; no open extension or target-hull assertion.",
+   "via": [
+    "lem-sf-locally-finite-adic-compact-support-sums",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeAdicProperCoproducts",
+  "file": "lean/Sheaf/Paper/NativeAdicProperCoproducts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.nativeAdicProper_preservesCoproducts",
+  "statement": "theorem nativeAdicProper_preservesCoproducts\n    (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hl : ringChar k ≠ l)\n    {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (CommRingCat.of k)) [IsNoetherian Y]\n    (p : Z ⟶ Y) [IsProper p] (I : Type (u + 1)) :\n    PreservesColimitsOfShape (Discrete I)\n      ((DerivedCategory.boundedAdicConstructible l Z).localizingClosure.ι ⋙\n        (adicLowerStar l p).rightDerivedFunctor)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T235954-L-1475329",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T235954-L-1475329",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

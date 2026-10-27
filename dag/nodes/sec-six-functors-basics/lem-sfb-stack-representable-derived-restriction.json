@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-stack-representable-derived-restriction",
+ "kind": "statement",
+ "title": "Derived restriction of representable stack direct image to a scheme test",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. For a scheme $S$ [def-pc-scheme] and an algebraic stack $\\mathcal Z/S$ [def-sfb-algebraic-moduli-stack], its big etale site has all objects and arrows of the fibred category in [def-sfb-stack-quasi-coherent-algebra], with coverings lying over jointly surjective etale scheme maps. Its structure sheaf is $\\mathcal O_{\\mathcal Z}(z)=\\Gamma(U,\\mathcal O_U)$ for $z$ over $U$. Use module sheaves [def-weil-sheaf-of-modules-category]. For $h:\\mathcal A\\to\\mathcal Z$, direct image has value $(h_*N)(z)=\\Gamma(\\mathcal A\\times_{\\mathcal Z}U,N|_{\\mathcal A\\times_{\\mathcal Z}U})$; restrictions are induced by base change, and pullback of a module along a stack morphism means precomposition. Higher direct images are computed by injective resolutions in all module sheaves [def-sp-injective-resolutions]. Let $f:\\mathcal X\\to\\mathcal Y$ be representable by algebraic spaces, meaning every scheme $U\\to\\mathcal Y$ has algebraic-space fibre product $\\mathcal X\\times_{\\mathcal Y}U$ [def-trf-algebraic-space]. Let $y:V\\to\\mathcal Y$ be a scheme test object, put $Z=\\mathcal X\\times_{\\mathcal Y}V$, and write $p:Z\\to\\mathcal X$ and $f_V:Z\\to V$. For a big etale module sheaf $G$ on $\\mathcal Y$, let $r_yG$ denote the precomposition of $G$ by $y$ followed by restriction to $V_{\\mathrm{et}}$; for a big etale module sheaf $F$ on $\\mathcal X$, define $r_pF$ similarly, precomposing by $p$ and restricting to the small etale site of the algebraic space $Z$; both functors extend termwise to complexes. Use the canonical small-etale module functors [def-trf-space-etale-module-functors]. The functors $r_y$ and $r_p$ are exact, and there is a canonical natural isomorphism $r_y(Rf_*F)\\simeq R(f_V)_{\\mathrm{et},*}(r_pF)$ in $D(\\operatorname{Mod}(\\mathcal O_{V_{\\mathrm{et}}}))$ [def-weil-abstract-derived-category]. Here $F$ is placed in degree zero. The isomorphism is the canonical restriction/base-change comparison, not a choice of an abstract isomorphism. For a flat test arrow $b:V\\to V^{\\prime}$ over $\\mathcal Y$, with $a:Z\\to Z^{\\prime}$ the induced map and $p^{\\prime}:Z^{\\prime}\\to\\mathcal X$, it identifies the comparison $Lb^*r_{y^{\\prime}}(Rf_*F)\\to r_y(Rf_*F)$, induced termwise (on $f_*$ of an injective resolution of $F$) by the restriction maps of $f_*$ along the arrow $y\\to y^{\\prime}$ of $\\mathcal Y$ lying over $b$, with the composite $Lb^*R(f_{V^{\\prime}})_{\\mathrm{et},*}(r_{p^{\\prime}}F)\\to R(f_V)_{\\mathrm{et},*}(La^*r_{p^{\\prime}}F)\\to R(f_V)_{\\mathrm{et},*}(r_pF)$, where the first arrow is the canonical derived base-change morphism and the second comes from the coefficient comparison of $F$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075P, lemma-compare-representable-morphism-cohomology, module case; its canonical comparison is the composite of Tags 075H (lemma-base-change-higher-direct-images) and 075N (lemma-compare-morphism-cohomology). Exactness of restriction is used in the preceding proof of lemma-compare-morphism-cohomology. Naturality is the functoriality of these comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $y_b^*,p_b^*$ for big-site precomposition and $\\pi_V,\\pi_Z$ for the ringed big-small morphisms of [lem-sfb-space-big-small-ringed-comparison]. The exact precompositions of [lem-sfb-stack-big-etale-derived-base-change] give $r_y=\\pi_{V,*}y_b^*$ and $r_p=\\pi_{Z,*}p_b^*$. Exactness of $\\pi_*$ in the first citation proves that both composites are exact. These are the specified restriction functors since on an etale scheme chart they evaluate the original sheaf at its composite with $y$ or $p$.",
+   "uses": [
+    "lem-sfb-space-big-small-ringed-comparison",
+    "lem-sfb-stack-big-etale-derived-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 073M, 075H and 075N, exactness of the restriction functors."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stack-big-etale-derived-base-change] to the cartesian square with bottom $y$: its canonical map $y_b^*Rf_*F\\to R(f_V)_*p_b^*F$ is invertible. The map $f_V$ is between algebraic spaces by representability of $f$, so [lem-sfb-space-big-small-ringed-comparison] gives $\\pi_Vf_V\\cong(f_V)_s\\pi_Z$. Apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the two paths. Since the two $\\pi_*$ are exact, [lem-weil-pbc-exact-functor-derived-functor] identifies their right derived functors with termwise restriction. This yields the canonical isomorphism $\\pi_{V,*}R(f_V)_*\\cong R(f_V)_{s,*}\\pi_{Z,*}$. Compose it with restriction of the big-site base-change map to define $\\Theta_y:r_yRf_*F\\xrightarrow{\\sim}R(f_V)_{s,*}r_pF$. Every map used is natural; this is exactly the composite constructing the module comparison in Tag 075P.",
+   "uses": [
+    "lem-sfb-stack-big-etale-derived-base-change",
+    "lem-sfb-space-big-small-ringed-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075P via Tags 075H and 075N; sites-cohomology.tex Tag 0D6E."
+   }
+  },
+  {
+   "text": "We record the resolution normalization of this particular composite. Let $t_y:r_yf_*\\cong(f_V)_{s,*}r_p$ be the ordinary chart-section comparison, obtained from the underived big-site base change and $t_{f_V}$ in [lem-sfb-space-big-small-ringed-comparison]. Write $\\eta^h_P:Q(h_*P)\\to Rh_*(QP)$ for the resolution transformation of [def-sfb-right-derived-functor]. On a bounded below complex $P$ the construction of step 2 satisfies\n$$\\Theta_{y,QP}\\,r_y(\\eta^f_P)=\\eta^{(f_V)_s}_{r_pP}\\,Q(t_{y,P}).\\tag{*}$$\nIndeed the big-site map satisfies this unit equation by [lem-sfb-flat-ringed-exchange-resolution-unit], since big precomposition is exact. The composition isomorphisms have the K-injective normalization in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]: resolve a pushed complex and apply the next direct image to that resolution map. Consequently their composite with the original resolution map is the resolution map for the composite path. Apply the exact $\\pi_*$ and the ordinary $t_{f_V}$ to this equality to obtain (*). Equivalently [lem-sfb-exact-square-right-derived-unit] characterizes this same transformation uniquely by (*); this also fixes its normalization on non-injective $r_pP$. At an injective resolution $F\\to I$ the map $r_y\\eta^f_I$ is invertible, so (*) completely specifies the comparison used here.",
+   "uses": [
+    "lem-sfb-space-big-small-ringed-comparison",
+    "def-sfb-right-derived-functor",
+    "lem-sfb-flat-ringed-exchange-resolution-unit",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-exact-square-right-derived-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 075H, 075N, 075P with the resolution-normalized composition of sites-cohomology.tex Tag 0D6E."
+   }
+  },
+  {
+   "text": "Let $b:V\\to V'$ be the flat test arrow and $a:Z\\to Z'$ its base change. By [lem-sfb-stack-chartwise-smooth-etale-calculus], $a$ is flat. The structure modules for $b$ and $a$ are flat over the inverse-image rings by [lem-sfb-space-flat-etale-ringed-comparison]. In each tensor-pullback formula of [def-trf-space-etale-module-functors], transported inverse image is exact by [lem-trf-geometric-inverse-image-exact], and tensoring with this flat structure module is exact by [def-pc-flat-sheaf-modules]. Thus $b^*,a^*$ are exact. By [lem-weil-pbc-exact-functor-derived-functor], $Lb^*,La^*$ are computed termwise, including on the complexes in (*).",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-flat-etale-ringed-comparison",
+    "def-trf-space-etale-module-functors",
+    "lem-trf-geometric-inverse-image-exact",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "The flat-pullback convention of sites-cohomology.tex Tag 0735; spaces-morphisms.tex Tag 073C; sites-modules.tex Tag 04JC."
+   }
+  },
+  {
+   "text": "Put $h=(f_V)_s$, $h'=(f_{V'})_s$. For any big-site module complex $P$, let $\\rho^0_{b,P}:b^*r_{y'}f_*P\\to r_yf_*P$, $c_{a,P}:a^*r_{p'}P\\to r_pP$, and $e:b^*h'_*\\to h_*a^*$ be ordinary restriction, coefficient comparison, and small-site exchange. The ordinary comparisons in [lem-sfb-space-big-small-ringed-comparison] give\n$$t_{y,P}\\rho^0_{b,P}=h_*(c_{a,P})\\,e_{r_{p'}P}\\,b^*(t_{y',P}).\\tag{**}$$\nTo check this equality on an etale scheme $T\\to V$, project both sides to a scheme chart $U\\to Z\\times_VT$. A local tensor $s\\otimes m$ on either side maps to $s$ times the restriction of $m$ along the same composite $U\\to Z'\\to\\mathcal X$. The composition law for restriction and pullback of functions makes these equal. The chart-projection characterization of $t$ makes the equality one of module morphisms. This is a direct calculation and imposes no quasi-coherence.",
+   "uses": [
+    "lem-sfb-space-big-small-ringed-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 073N and 076R: compatible-section comparison and coefficient maps."
+   }
+  },
+  {
+   "text": "Choose an injective resolution $F\\to I$. For the small-etale square, [lem-sfb-flat-ringed-exchange-resolution-unit] applied to $r_{p'}I$ gives\n$$\\beta_{Qr_{p'}I}\\,b^*(\\eta^{h'}_{r_{p'}I})=\\eta^h_{a^*r_{p'}I}\\,Q(e_{r_{p'}I}).$$\nUse (*) for $y,y'$ and naturality of $\\eta^h$ for $c_{a,I}$. The right-hand composite in the claimed compatibility, precomposed with the invertible $b^*r_{y'}\\eta^f_I$, becomes\n$$\\eta^h_{r_pI}\\,Q\\big(h_*(c_{a,I})e_{r_{p'}I}b^*(t_{y',I})\\big).$$\nThe left-hand composite becomes $\\eta^h_{r_pI}Q(t_{y,I}\\rho^0_{b,I})$. They are equal by (**), so cancel the invertible precomposition. Exactness identifies $Qr_{p'}I$ with $r_{p'}F$ and $Qr_pI$ with $r_pF$; the coefficient map becomes the specified $La^*r_{p'}F\\to r_pF$. The left restriction map is termwise restriction on $f_*I$, exactly as in the statement. Thus the equality holds for the actual derived base-change map, without claiming that either restricted resolution is injective.",
+   "uses": [
+    "lem-sfb-flat-ringed-exchange-resolution-unit",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075P, naturality of the canonical comparison, expanded using sites-cohomology.tex Tag 0736."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-big-small-ringed-comparison",
+  "lem-sfb-stack-big-etale-derived-base-change",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-flat-ringed-exchange-resolution-unit",
+  "lem-sfb-exact-square-right-derived-unit",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-flat-etale-ringed-comparison",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-geometric-inverse-image-exact",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075P, assembling Tags 075H and 075N; expanded resolution-unit and flat-arrow compatibility from sites-cohomology.tex Tags 0736 and 0D6E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "representable.*cohomology|compare.*morphism.*cohomology|AlgebraicStack",
+   "results": "{\"t\": \"2026-10-23T13:57:56Z\", \"tool\": \"grep\", \"query\": \"representable.*cohomology|compare.*morphism.*cohomology|AlgebraicStack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and small-etale restriction definitions do not identify derived pushforward on the big stack site with small-etale pushforward"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a representable morphism of algebraic stacks derived direct image restricted to a scheme test object agrees with small etale derived direct image of its base change",
+   "results": "{\"t\": \"2026-10-23T13:57:56Z\", \"tool\": \"leansearch\", \"query\": \"For a representable morphism of algebraic stacks derived direct image restricted to a scheme test object agrees with small etale derived direct image of its base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.morphismRestrict\"], \"digest\": \"94ddf314558e8713\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and small-etale restriction definitions do not identify derived pushforward on the big stack site with small-etale pushforward"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-23T13:57:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and small-etale restriction definitions do not identify derived pushforward on the big stack site with small-etale pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable morphism of algebraic stacks derived direct image restricted to a scheme test object agrees with small etale derived direct image of its base change",
+   "results": "{\"t\": \"2026-10-23T13:57:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a representable morphism of algebraic stacks derived direct image restricted to a scheme test object agrees with small etale derived direct image of its base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv\"], \"digest\": \"9c014e9597ede41c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and small-etale restriction definitions do not identify derived pushforward on the big stack site with small-etale pushforward"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Big to small etale restriction of total derived pushforward for representable stack morphisms",
+   "results": "{\"t\": \"2026-10-23T13:57:58Z\", \"tool\": \"leanfinder\", \"query\": \"Big to small etale restriction of total derived pushforward for representable stack morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\"], \"digest\": \"9095e21a9ea4fd2c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and small-etale restriction definitions do not identify derived pushforward on the big stack site with small-etale pushforward"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|compare.*morphism.*cohomology|representable.*derived",
+   "results": "{\"t\": \"2026-10-23T21:16:41Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|compare.*morphism.*cohomology|representable.*derived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and etale topology declarations do not give the canonical big-stack/small-algebraic-space derived direct-image comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a representable morphism of algebraic stacks derived direct image restricted to a scheme test is small etale derived direct image, compatible with flat base change",
+   "results": "{\"t\": \"2026-10-23T21:16:41Z\", \"tool\": \"leansearch\", \"query\": \"For a representable morphism of algebraic stacks derived direct image restricted to a scheme test is small etale derived direct image, compatible with flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\"], \"digest\": \"b82772c35d32b55f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and etale topology declarations do not give the canonical big-stack/small-algebraic-space derived direct-image comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-23T21:16:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerived\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and etale topology declarations do not give the canonical big-stack/small-algebraic-space derived direct-image comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a representable morphism of algebraic stacks derived direct image restricted to a scheme test is small etale derived direct image, compatible with flat base change",
+   "results": "{\"t\": \"2026-10-23T21:16:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a representable morphism of algebraic stacks derived direct image restricted to a scheme test is small etale derived direct image, compatible with flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.instIsLocallyDirectedCompSchemeOverOverTopMorphismPropertyForgetForgetForget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\"], \"digest\": \"c82f6280e1cd3c3d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and etale topology declarations do not give the canonical big-stack/small-algebraic-space derived direct-image comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Big to small etale restriction of derived pushforward for algebraic stacks and canonical base change comparisons",
+   "results": "{\"t\": \"2026-10-23T21:17:44Z\", \"tool\": \"leanfinder\", \"query\": \"Big to small etale restriction of derived pushforward for algebraic stacks and canonical base change comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"755ae017259247cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and etale topology declarations do not give the canonical big-stack/small-algebraic-space derived direct-image comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-higher-images-flat-comparison",
+  "date": "2026-10-23",
+  "group": "Q160"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Derived restriction of representable stack direct image to a scheme test.",
+   "via": [
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-representable-derived-restriction",
+  "worker": "stage1",
+  "summary": "Expanded the 075P module proof through existing big-site derived base change, ordinary ringed big-small comparison, and normalized derived composition. Two statement-only inputs isolate the ordinary 073M/073N ringed geometry and the general flat-exchange resolution-unit equation. Proved flat-arrow compatibility by a chart-section equality and an explicit resolution-unit calculation. The statement is unchanged; no injective preservation by module restriction is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Derived restriction of representable stack direct image to a scheme test. The latest sk-thm-sf-ctf-stability-direct-images.proof.md clause (3) is the owning route; this is the supporting stack-cohomology input inherited through the recorded via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ringed-topos composition theorem used in the 075N proof; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor localization, used to compute exact restrictions and flat pullbacks termwise."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic exactness of geometric inverse image on transported modules."
+   },
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Definition of flat module sheaf used to check exact tensor pullback."
+   },
+   {
+    "node": "def-trf-space-etale-module-functors",
+    "why": "Canonical small-etale module functors and tensor formula, used as definitions."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Universal right-derived resolution transformation and invertibility on K-injectives, used as generic machinery."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-trf-geometric-inverse-image-exact",
+  "def-pc-flat-sheaf-modules",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-right-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-f34f0a8fe",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-f34f0a8fe (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, and checked them against stacks-sheaves 073M/073N/075H/075L/075N/075P and sites-cohomology 0736/07A7/0D6E. The statement and stmt_deps are byte-identical to side-live, where the item is still unsplit, so no other group has superseded it. Steps 1-2 follow 075N(2)/075P exactly: precomposition and pi_* are exact, the 075H big-site isomorphism is used, then the 0D6E composition and Rpi_*=pi_*. The step never uses injective preservation, which 075L says fails for modules. Step 3, the unit equation (*): the new flat-unit node applies because big precomposition is exact. The composition normalization extends from K-injectives to arbitrary P by naturality, and the instantiation of the exact-square uniqueness node is correct. Step 4: a is the flat base change of b; flat-etale-ringed-comparison, geometric-inverse-image-exact and the definition of flatness make b^* and a^* exact. Steps 5-6: I redid the chart identity and the resolution-unit cancellation and they hold. New node flat-ringed-exchange-resolution-unit is true (horizontal mate form; it needs only g^*, g'^* exact) and matches 0736/07A7. It is not lem-trf-bounded-below-derived-mate-model, which needs the vertical L exact. New node space-big-small-ringed-comparison is 073M/073N plus big-etale coefficient maps. The existing fppf coefficient nodes do not cover big-etale modules. Neither new node restates a clause of the item. Tool uses (0D6E composition, exact-functor derived functor, geometric inverse image, flat definition, small-etale functors, right-derived definition) are generic and accepted. Batch-5: every flagged citation reaches only definitions, algebraic-space foundations or the Mathlib leaf CategoryTheory.Localization.essSurj, never a step of the trace formula or Poincare duality, so all are OK. No SGA. Advisory only: the inherited flat-clause wording has no bracket citation for the derived base-change morphism."
+ }
+}

@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "By the direct-summand characterization in [def-weil-pbc-projective-module], realize $P$ as a submodule of a free module $F$ with an $R$-linear retraction $\\pi:F\\to P$, $\\pi|_P=1_P$. Put $Q=\\ker\\pi$; then $f=\\pi(f)+(f-\\pi(f))$ gives $F=P\\oplus Q$. Choose a basis of $F$ as in [def-weil-pbc-free-module]. If $x=0$, take $G=0$, whose basis is empty, and $H=P$. Henceforth assume $x\\ne0$.",
+   "text": "By the direct-summand characterization in [def-weil-pbc-projective-module], identify $P$ with a submodule of a free module $F$ and take an $R$-linear map $\\pi:F\\to P$ restricting to $1_P$. Then $F=P\\oplus\\ker\\pi$, since $f=\\pi(f)+(f-\\pi(f))$ uniquely. If $x=0$, take $G=0$, with empty basis [def-weil-pbc-free-module], and $H=P$. Assume $x\\ne0$ and regard $\\pi$ also as an endomorphism of $F$.",
    "uses": [
     "def-weil-pbc-projective-module",
     "def-weil-pbc-free-module"
@@ -21,84 +21,50 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0592, lemma-projective-freeness-criteria, proof: first sentence and the zero-element case"
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof; assembly step 1"
    }
   },
   {
-   "text": "Among all bases of this fixed ambient module $F$, choose one $\\mathcal B$ for which the finite support of $x$ has least cardinality $n$, using [def-weil-pbc-free-module] and the least-element property of $\\mathbb N$. Enumerate this support by $e_1,\\ldots,e_n$, so $x=\\sum_i a_i e_i$. For every $j$, $a_j$ is not an $R$-linear combination of the other $a_i$. Indeed, if $a_j=\\sum_{i\\ne j}a_i c_i$, replace $e_i$ by $e_i+c_i e_j$ for $i\\ne j$ in this finite support, and fix $e_j$ and the remaining basis vectors. The inverse replacement subtracts $c_i e_j$, so this is still a basis. In this basis $x=\\sum_{i\\ne j}a_i(e_i+c_i e_j)$, with support at most $n-1$, contrary to the choice of $n$.",
+   "text": "Apply [lem-trf-minimal-support-fixed-vector-coordinates] to $F,x,\\pi$; its hypothesis $\\pi(x)=x$ holds because $x\\in P$. Obtain the basis $\\mathcal B$, its finite support $e_1,\\ldots,e_n$, the irredundant coefficients $a_i$, $T$, and the expansions $y_i=\\pi(e_i)=\\sum_j b_{ij}e_j+t_i$. In particular $y_i\\in P$, $x=\\sum_i a_i y_i$, and $a_j=\\sum_i a_i b_{ij}$.",
    "uses": [
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0592, lemma-projective-freeness-criteria, proof: first paragraph, minimal support over all bases and elementary basis shear"
-   }
-  },
-  {
-   "text": "Put $y_i=\\pi(e_i)\\in P$. Split the basis coordinates of each $y_i$ as $y_i=\\sum_{j=1}^n b_{ij}e_j+t_i$, with $t_i$ in the span of $\\mathcal B\\setminus\\{e_1,\\ldots,e_n\\}$, using [def-weil-pbc-free-module]. Since $\\pi(x)=x$, we have $x=\\sum_i a_i y_i$. Comparing the $e_j$-coordinates gives $a_j=\\sum_i a_i b_{ij}$ for every $j$.",
-   "uses": [
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0592, lemma-projective-freeness-criteria, proof: second paragraph and the coefficient comparison in the last paragraph"
-   }
-  },
-  {
-   "text": "Let $\\mathfrak m$ be the unique maximal ideal of $R$. By [lem-weil-pbc-local-ring-unit-criterion], the nonunits are exactly the elements of $\\mathfrak m$. The relations in step 3 imply $1-b_{jj}$ is a nonunit: if it were a unit, $(1-b_{jj})a_j=\\sum_{i\\ne j}a_i b_{ij}$ would express $a_j$ using the other coefficients, contradicting step 2. Thus $1-b_{jj}\\in\\mathfrak m$, so $b_{jj}\\notin\\mathfrak m$ (otherwise their sum $1$ lies in this proper ideal), and $b_{jj}$ is a unit. Likewise for $i\\ne j$, if $b_{ij}$ were a unit, the equality $b_{ij}a_i=(1-b_{jj})a_j-\\sum_{k\\ne i,j}a_k b_{kj}$ would express $a_i$ using the other coefficients. Hence every off-diagonal $b_{ij}$ belongs to $\\mathfrak m$.",
-   "uses": [
-    "lem-weil-pbc-local-ring-unit-criterion"
+    "lem-trf-minimal-support-fixed-vector-coordinates"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0592, lemma-projective-freeness-criteria, proof: last paragraph, minimality forces unit diagonal and nonunit off-diagonal"
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof; assembly step 2"
    }
   },
   {
-   "text": "Let $A=(b_{ij})$. In the Leibniz formula [def-weil-pbc-matrix-determinant], the identity permutation contributes the unit $u=\\prod_i b_{ii}$. Every other permutation moves some index, so its product has an off-diagonal factor in $\\mathfrak m$; its signed product is in $\\mathfrak m$. Therefore $\\det A=u+v$ with $v\\in\\mathfrak m$. If $\\det A$ belonged to $\\mathfrak m$, then $u=(\\det A)-v$ would too, contradicting the unit criterion [lem-weil-pbc-local-ring-unit-criterion]. Thus $\\det A$ is a unit. The adjugate identities [lem-weil-pbc-matrix-adjugate-identity] show explicitly that $(\\det A)^{-1}\\operatorname{adj}(A)$ is a two-sided inverse of $A$. This writes out the local matrix argument at the end of Tag 0592 without introducing a new lemma.",
+   "text": "The ring $R$ is local and the tuple $a_i$ is irredundant, so [lem-trf-local-irredundant-relation-matrix] applies to $B=(b_{ij})$ and the relations just obtained. It gives an inverse of $B$. Apply [lem-trf-finite-block-basis-replacement] to the same ambient basis, support, vectors $y_i$, coefficients $b_{ij}$, and tails $t_i\\in T$. It supplies a basis of $G=\\sum_i R y_i$ and the decomposition $F=G\\oplus T$.",
    "uses": [
-    "def-weil-pbc-matrix-determinant",
-    "lem-weil-pbc-local-ring-unit-criterion",
-    "lem-weil-pbc-matrix-adjugate-identity"
+    "lem-trf-local-irredundant-relation-matrix",
+    "lem-trf-finite-block-basis-replacement"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0592, lemma-projective-freeness-criteria, proof: last sentence, determinant is a unit and adjugate gives inverse"
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof; assembly step 3"
    }
   },
   {
-   "text": "Let $E$ be the span of $e_1,\\ldots,e_n$ and $T$ the span of the remaining original basis vectors; thus $F=E\\oplus T$ by [def-weil-pbc-free-module]. Define $U:F\\to F$ by $U(e_i)=y_i$ and by fixing the other basis vectors. On a finite-coordinate vector $c=(c_i)$ and $t\\in T$, its formula is $U(c,t)=(Cc,Dc+t)$, where $(Cc)_j=\\sum_i b_{ij}c_i$ and $Dc=\\sum_i c_i t_i$. The operator $C$ is the transpose of $A$ and has inverse the transpose of the inverse from step 5 (transpose reverses products by the entrywise formula). Consequently $(c,t)\\mapsto(C^{-1}c,t-DC^{-1}c)$ is an inverse of $U$, as direct substitution verifies both composites. It follows from uniqueness of expansions in the old basis that $y_1,\\ldots,y_n$ together with the remaining original basis vectors form a basis of $F$.",
+   "text": "Since every $y_i$ lies in $P$, $G\\subseteq P$. Put $H=P\\cap T$. For $p\\in P$, the unique expansion $p=g+t$ in $F=G\\oplus T$ has $t=p-g\\in P\\cap T=H$. The uniqueness in $F$ proves uniqueness in $P$, hence $P=G\\oplus H$. Step 2 gives $x=\\sum_i a_i y_i\\in G$, and the basis of $G$ from step 3 makes $G$ free [def-weil-pbc-free-module]. This also covers arbitrary ambient rank; the zero case was handled in step 1.",
    "uses": [
     "def-weil-pbc-free-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0592, lemma-projective-freeness-criteria, proof: second paragraph, the basis replacement automorphism, with its inverse written out"
-   }
-  },
-  {
-   "text": "Let $G=\\sum_i R y_i=U(E)$, which is contained in $P$, and keep $T$ from step 6. The new basis [def-weil-pbc-free-module] gives $F=G\\oplus T$ and makes $G$ finite free with basis $y_1,\\ldots,y_n$. For each $p\\in P$, write uniquely $p=g+t$ in this decomposition of $F$. Since $g\\in G\\subseteq P$, also $t=p-g\\in P\\cap T$. Conversely $G\\cap(P\\cap T)=0$, so $H=P\\cap T$ gives $P=G\\oplus H$. Finally $x=\\sum_i a_i y_i\\in G$ by step 3. Together with the zero case of step 1, these are all clauses of the item, without any finite-generation hypothesis on $P$.",
-   "uses": [
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0592, lemma-projective-freeness-criteria, proof: second paragraph, the free submodule and its complement inside P"
+    "place": "Tag 0592, lemma-projective-freeness-criteria, proof; assembly step 4"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-projective-module",
   "def-weil-pbc-free-module",
-  "lem-weil-pbc-local-ring-unit-criterion",
-  "def-weil-pbc-matrix-determinant",
-  "lem-weil-pbc-matrix-adjugate-identity"
+  "lem-trf-minimal-support-fixed-vector-coordinates",
+  "lem-trf-local-irredundant-relation-matrix",
+  "lem-trf-finite-block-basis-replacement"
  ],
  "proof_origin": {
   "by": "document",
@@ -176,19 +142,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-projective-element-free-summand",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged and split the full Stacks 0592 proof into seven steps. Wrote out minimality over all ambient bases, the elementary shear inverse, the coefficient relations proving the local matrix hypotheses, the determinant calculation, the block-coordinate inverse, and the explicit complement inside P. Reused existing local-unit, determinant and adjugate nodes; no new nodes are needed. Checked zero elements, arbitrary-rank ambient modules and nonreduced local coefficients.",
-  "blueprint": "Realizes the existing blueprint.from.place chain from lem-trf-local-term-locality through the flattening input and 05FQ/0593 to 0592: steps 1-2 are its first paragraph, steps 3,6-7 its second paragraph, and steps 4-5 its last paragraph. The source route and unit are unchanged."
+  "summary": "Repaired the returned 4195-character proof by extracting three statement-only independent lemmas: minimal-support fixed-vector coordinates (old steps 2-3), local irredundant relation matrix (old steps 4-5), and finite-block basis replacement (old step 6 and the ambient free-summand part of step 7). The unchanged statement has a 1572-character assembly retaining the embedding/zero case and explicit intersection complement. The full old arguments and their allocation remain in report.md. Retained the recorded searches and all three nonmatch verdicts. For the live-DAG promotion return, revalidated on 2026-10-23 against the current parent, all cited statements, chapter/unit and Stacks 0592; every quote remains exact. Renewed DAG/blueprint searches found only an additional incidental relative-affinization hit, now distinguished in the report. The delivery is rebuilt on the current server base; no changed statement or hypothesis requires altering the approved mathematical split.",
+  "blueprint": "Keeps the existing lem-trf-local-term-locality -> flattening -> 05FQ -> 0593 -> 0592 route. New coordinates node realizes 0592 paragraphs 1 and 2 plus coefficient comparison in paragraph 3; relation matrix realizes the remainder of paragraph 3; basis replacement realizes the basis automorphism of paragraph 2; the parent retains the explicit complement inside P."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q110-dcddff2ab",
-  "group": "Q110",
+  "reviewer": "NT-cc-Q112-24151c428",
+  "group": "Q112",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-dcddff2ab (reviewer sub-agent of L); spot-checked: Read all seven steps and cited statements against Stacks 0592, 05CF, 00E9 and 07DQ. Minimal-support, determinant, transpose/inverse and complement arguments are valid; small-case checks passed. No new nodes, cycles, forbidden machinery or long non-elementary steps. Detailed review written to review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-24151c428 (reviewer sub-agent of L); spot-checked: Fourth delivery of the same split, after 7b2a680b, 4afd3610 and 66d2441280f0. Compared with the 66d2 snapshot, the three new nodes are byte-identical and the item differs only in split_report date and summary. The report adds a renewed revalidation and not-duplicate entries against lem-a1-relative-affinization-compatible-charts, which is an incidental 0592 hit about scheme charts. I re-read the mathematics in full on this head. Source: Stacks algebra.tex Tag 0592 lemma-projective-freeness-criteria, all three paragraphs. Re-split rule: the seven base steps are all kept. Old 2-3 became minimal-support-fixed-vector-coordinates (least support, shear irredundancy, a_j=Σ_i a_i b_ij). Old 4-5 became local-irredundant-relation-matrix (1-b_jj in m, b_jj unit, b_ij in m off the diagonal, det = unit + m, inverse V). Old 6 and the ambient half of old 7 became finite-block-basis-replacement (U(c,t)=(Bᵀc,Dc+t) with inverse, replaced basis, F=G⊕T). Old 1 and H=P∩T stay as the two elementary assembly steps. The children are of comparable size and none restates the item. The 1572-character proof is a short assembly. Each step's hypotheses hold where it is applied: π(x)=x because x∈P; the index convention a_j=Σ_i a_i b_ij is the same in both children; the block lemma gets the same 𝓑, e_i, T and t_i; def-projective states the split pair i,s; def-free allows an empty basis. All three child statements are true. Checked cases: n=0, n=1 over dual numbers (a=ε, b=1+ε), R=0 (vacuous), infinite rank, zero divisors (no cancellation is used). B1-B9 hold: statement-only, self-contained, the cited defs define the notions, tag plus label, five logged searches each, blueprint.from=lem-trf-local-term-locality with the correct via. A whole-DAG scan (irredundant, minimal support, unit diagonal, basis replacement, free direct summand, off-diagonal) found no duplicate. No cycle (the only citer is 0593), no SGA, no tool_uses. Advisory only: proof_origin still mentions the 00E9/adjugate expansion, which now belongs to the matrix child. Maintainer: this unchanged split was refused three times only for 'side completion never promoted'; please promote or land it. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -208,5 +174,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

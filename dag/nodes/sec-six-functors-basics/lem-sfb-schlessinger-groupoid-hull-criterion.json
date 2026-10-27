@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-schlessinger-groupoid-hull-criterion",
+ "kind": "statement",
+ "title": "Schlessinger hull criterion and rigidity for deformation groupoids",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $\\mathrm{Art}_k$ be the category of commutative Artinian local $k$-algebras with specified residue field $k$ and local $k$-homomorphisms inducing its identity. Artinian means descending chains of ideals stabilize. Let $\\mathcal D$ be a pseudofunctor from $\\mathrm{Art}_k$ to groupoids (categories whose arrows are invertible), with $\\mathcal D(k)$ equivalent to the one-object one-arrow category. Assume that for every $A_1\\to A\\leftarrow A_2$ with $A_2\\to A$ surjective, restriction induces an equivalence\n$$\\mathcal D(A_1\\times_A A_2)\\simeq\\mathcal D(A_1)\\times_{\\mathcal D(A)}\\mathcal D(A_2).$$\nThe groupoid on the right has triples $(x_1,x_2,\\alpha:x_1|_A\\cong x_2|_A)$ and pairs of arrows commuting with $\\alpha$. Put $F(A)=\\pi_0\\mathcal D(A)$, the set of isomorphism classes. Its tangent space $T=F(k[\\epsilon]/(\\epsilon^2))$ has the deformation vector operations: scalar multiplication is induced by $\\epsilon\\mapsto a\\epsilon$; addition is obtained by the displayed equivalence over $k$, followed by the homomorphism $k\\oplus(k\\oplus k)\\to k[\\epsilon]/(\\epsilon^2)$ sending $(a,(b,c))$ to $a+(b+c)\\epsilon$. Suppose $\\dim_kT<\\infty$. There exist a complete Noetherian local $k$-algebra $(B,\\mathfrak m_B)$ with residue field $k$ [def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion] and a natural map $\\eta:h_B\\to F$, where $h_B(A)=\\operatorname{Hom}_{k,\\mathrm{loc},\\mathrm{cont}}(B,A)$ and continuity uses maximal-ideal-adic topologies, such that\n$$h_B(A')\\longrightarrow h_B(A)\\times_{F(A)}F(A')$$\nis surjective for every surjection $A'\\to A$, and $\\eta:T h_B\\to T$ is a $k$-linear isomorphism. Such a map is called a hull. Let $x_\\epsilon$ be the pullback to $k[\\epsilon]/(\\epsilon^2)$ of an object over $k$, and let $\\operatorname{Inf}(\\mathcal D)$ be its automorphism group. If $\\operatorname{Inf}(\\mathcal D)$ is trivial, every hull $h_B\\to F$ is a natural isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tags 06J7 (lemma-RS-implies-S1-S2), 06IX (theorem-miniversal-object-existence), 06IZ (remark-compose-minimal-into-iso-classes), 06K0 (lemma-infdef-trivial), 06JL (lemma-minimal-smooth-morphism-functors). Coefficient ring Lambda=k, so Der_k(k,k)=0."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-nagata-category",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-sfb-artin-deformation-test-category",
+  "def-sfb-artin-square-zero-transport",
+  "def-sfb-classical-deformation-hull"
+ ],
+ "proof": [
+  {
+   "text": "Take $R=k$ in the test-category definition. The hypothesis on $\\mathcal D$ is exactly predeformation plus (RS). The tangent-tensor lemma identifies $F(k[W])$ with $T\\otimes_k W$, naturally in finite-dimensional $W$. Choose a basis $\\theta_1,\\ldots,\\theta_d$ of $T$. Apply the completed-polynomial lemma with $P=k[X_1,\\ldots,X_d]$, augmentation $X_i\\mapsto0$, completion $S$ and maximal ideal $\\mathfrak m$. Put $J_1=\\mathfrak m$, $J_2=\\mathfrak m^2$. Its Artinian-map bijection identifies $S/J_2=k[k^d]$: maps to any test algebra killing products of the $X_i$ are exactly maps from this square-zero algebra. Choose $\\xi_1\\in\\mathcal D(k)$ and $\\xi_2\\in\\mathcal D(S/J_2)$ representing $\\sum_i\\theta_i\\otimes e_i$, with its unique restriction isomorphism to $\\xi_1$. A local map $S\\to k[\\epsilon]$ is uniquely specified by $X_i\\mapsto a_i\\epsilon$, and sends this class to $\\sum_i a_i\\theta_i$. This is a linear bijection, including $d=0$.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-rs-tangent-tensor",
+    "lem-sfb-artin-completed-polynomial-test-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IW (lemma-versal-object-existence), Steps 1--2; classical-case refinement in Tag 06IX (theorem-miniversal-object-existence)."
+   }
+  },
+  {
+   "text": "Suppose $n\\geq2$, $\\mathfrak m^n\\subseteq J_n\\subseteq J_{n-1}$ and compatible objects through $\\xi_n\\in\\mathcal D(S/J_n)$ have been chosen. The ring $S/(\\mathfrak mJ_n)$ is Artinian by the completed-polynomial lemma, since $\\mathfrak m^{n+1}\\subseteq\\mathfrak mJ_n$. The kernel of its surjection to $S/J_n$ is killed by its maximal ideal. Apply the minimal-liftable-ideal lemma to $\\xi_n$. Taking inverse images in $S$ gives $\\mathfrak mJ_n\\subseteq J_{n+1}\\subseteq J_n$ and an object $\\xi_{n+1}$ restricting isomorphically to $\\xi_n$. Retain that isomorphism. This preserves $\\mathfrak m^{n+1}\\subseteq J_{n+1}$. Its crucial leastness property is: if $\\mathfrak mJ_n\\subseteq K\\subseteq J_n$ and $\\xi_n$ lifts to $S/K$, then $J_{n+1}\\subseteq K$. Starting with step 1 constructs the entire compatible system.",
+   "uses": [
+    "lem-sfb-artin-completed-polynomial-test-ring",
+    "lem-sfb-artin-minimal-liftable-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IW (lemma-versal-object-existence), induction; Tag 06SZ (lemma-largest-closed-where-lift)."
+   }
+  },
+  {
+   "text": "Put $J=\\bigcap_{n\\geq1}J_n$ and $B=S/J$. The complete-local-quotient lemma makes $B$ Noetherian complete local with residue field $k$. The descending-ideal lemma applies to $\\mathfrak m^n\\subseteq J_n$ and makes $(J_n/J)$ cofinal with the maximal-ideal powers of $B$. The formal-filtration comparison gives a formal object $\\xi$ on $B$, whose evaluation over $S/J_n$ is compatibly $\\xi_n$. In particular it defines a natural transformation $\\eta:h_B\\to F$ by taking isomorphism classes of evaluations. For any local map $B\\to A$, nilpotence of $\\mathfrak m_A$ ensures that some maximal-ideal power of $B$ maps to zero; hence it is continuous and the evaluation is defined. Since $J\\subseteq J_2=\\mathfrak m^2$, every tangent map of $S$ kills $J$. Thus tangent maps of $B$ and $S$ coincide, and the evaluation clause identifies their tangent map to $T$ with the linear bijection of step 1.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-sfb-artin-descending-ideal-adic-topology",
+    "lem-sfb-artin-formal-filtration-comparison",
+    "lem-sfb-artin-local-test-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IW (lemma-versal-object-existence), passage to the limit; classical-case tangent refinement in Tag 06IX."
+   }
+  },
+  {
+   "text": "To test the ring-lifting condition for versality, let $A'\\twoheadrightarrow A$ be a small extension, $a:B\\to A$ a local $k$-map and $y\\in\\mathcal D(A')$ with a specified comparison $y|_A\\cong\\xi_a$. Nilpotence and cofinality in step 3 let $a$ factor through $S/J_n\\to A$ for some $n\\geq2$. The comparison identifies $\\xi_a$ with the image of $\\xi_n$. The test-algebra lemma gives $E=(S/J_n)\\times_A A'$ and a small extension $p:E\\twoheadrightarrow S/J_n$. By (RS), the triple $(\\xi_n,y,\\text{comparison})$ lifts to an object in $\\mathcal D(E)$ restricting to $\\xi_n$. If $p$ has a section, $B\\to S/J_n\\to E\\to A'$ is already the required ring lift of $a$. Otherwise $p$ is essential by the small-extension-essential lemma.",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra",
+    "lem-sfb-artin-formal-filtration-comparison",
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-small-extension-essential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IW (lemma-versal-object-existence), versality argument through the section case."
+   }
+  },
+  {
+   "text": "In the nonsplit case, lift $S\\to S/J_n\\to A$ to $h:S\\to A'$ by the completed-polynomial lemma. Then $g:S\\to E$, $s\\mapsto(s\\bmod J_n,h(s))$, is local, residue-preserving, and surjective by the complete-source clause of essentiality. For $K=\\ker(g)$ we have $K\\subseteq J_n$. Moreover $g(J_n)\\subseteq\\ker(p)$, which is killed by the maximal ideal of $E$; locality gives $\\mathfrak mJ_n\\subseteq K$. The object over $E=S/K$ supplied in step 4 lifts $\\xi_n$, so the leastness in step 2 gives $J_{n+1}\\subseteq K$. Therefore $g$ factors through $S/J_{n+1}$; precompose its projection to $A'$ with $B\\to S/J_{n+1}$ to lift $a$. This checks the underlying-ring condition of the tangent-ring-lift criterion. Step 3 gives its tangent surjectivity; that criterion supplies the comparison isomorphism extending the prescribed one and gives versality for all Artinian surjections. Passing to isomorphism classes proves the asserted surjectivity of $h_B(A')\\to h_B(A)\\times_{F(A)}F(A')$, so together with step 3 this is a hull.",
+   "uses": [
+    "lem-sfb-artin-completed-polynomial-test-ring",
+    "lem-sfb-artin-small-extension-essential",
+    "lem-sfb-artin-minimal-liftable-ideal",
+    "lem-sfb-artin-tangent-ring-lift-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tags 06IW (lemma-versal-object-existence), final argument, and 06IU (lemma-versal-criterion); passing to classes as in 06IZ (remark-compose-minimal-into-iso-classes)."
+   }
+  },
+  {
+   "text": "Assume now $\\operatorname{Inf}(\\mathcal D)=0$. For any $x\\in\\mathcal D(A)$ factor $A\\twoheadrightarrow k$ into small extensions by the test-algebra lemma. At each stage the automorphism-kernel lemma says the kernel of automorphism reduction is a torsor under $0\\otimes_k I=0$, hence has a single element, necessarily the identity. Thus each reduction map on automorphism groups is injective. Their composite maps to the trivial automorphism group over $k$, so $\\operatorname{Aut}(x)=1$. Any two arrows between fixed objects therefore agree, since their quotient is an automorphism. For $P=A_1\\times_A A_2$, compatible isomorphism classes in $F(A_1)\\times_{F(A)}F(A_2)$ admit an isomorphism over $A$ by the meaning of equality of classes. This isomorphism is unique. Triples with the same component classes are uniquely isomorphic, since their component arrows commute over $A$ by uniqueness. The (RS) equivalence consequently gives a bijection $F(P)\\cong F(A_1)\\times_{F(A)}F(A_2)$. Also $F(k)$ is a singleton. Thus $F$ satisfies the set-valued hypotheses of the lift-torsor lemma.",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra",
+    "lem-sfb-schlessinger-automorphism-kernel",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tags 06JY (lemma-lifted-automorphisms-torsor), 06JZ (lemma-infaut-trivial), 06K0 (lemma-infdef-trivial)."
+   }
+  },
+  {
+   "text": "Let $\\rho:h_C\\to F$ be any hull. Local maps from $C$ to Artinian targets are continuous: a local map sends a high maximal-ideal power to zero, by nilpotence of the target maximal ideal. Thus compatible maps to $A_1,A_2$ define a unique local continuous map to their ring fibre product, coordinatewise. Hence $h_C$ preserves these fibre products and $h_C(k)$ is a singleton. Regard $h_C$ and $F$ as discrete groupoid-valued pseudofunctors. Their marked lift classes are exactly their ordinary set fibres, since the only isomorphisms are identities. Apply the marked-lift-torsor lemma to them and $\\rho$. Its tangent map is an isomorphism by the definition of a hull. For a small extension $p:A'\\twoheadrightarrow A$, assume $\\rho_A$ is bijective. Given $z\\in F(A')$, choose the unique $u\\in h_C(A)$ with $\\rho_A(u)=F(p)(z)$. Hull smoothness supplies a lift $u'\\in h_C(A')$ mapping to $z$, proving surjectivity. If two lifts have the same image, their restrictions agree by injectivity over $A$. The nonempty fibres over that restriction and its image are torsors by the lemma, and the map is equivariant for the isomorphism $T h_C\\otimes_k I\\to T F\\otimes_k I$. If the lifts differ by $v$, their common image forces $(d\\rho\\otimes1)(v)=0$, so $v=0$ and the lifts agree. This proves injectivity. Start with $A=k$, where both sets are singletons, and induct along a factorization of any $A\\twoheadrightarrow k$ into small extensions. Every $\\rho_A$ is bijective; the inverses are natural by naturality of $\\rho$, proving the last clause for every hull.",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra",
+    "lem-sfb-deformation-marked-lift-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06JL (lemma-minimal-smooth-morphism-functors), its induction proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-artin-rs-tangent-tensor",
+  "lem-sfb-artin-completed-polynomial-test-ring",
+  "lem-sfb-artin-minimal-liftable-ideal",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-sfb-artin-descending-ideal-adic-topology",
+  "lem-sfb-artin-formal-filtration-comparison",
+  "lem-sfb-artin-local-test-algebra",
+  "lem-sfb-artin-small-extension-essential",
+  "lem-sfb-artin-tangent-ring-lift-criterion",
+  "lem-sfb-schlessinger-automorphism-kernel",
+  "lem-sfb-deformation-marked-lift-torsor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tags 06IW and 06IX, classical case Lambda=k: the initial tangent basis gives an isomorphism already; Tags 06IZ, 06JY, 06JZ, 06K0, and the induction proof of 06JL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A deformation groupoid satisfying Rim Schlessinger with finite dimensional tangent space has a hull; zero infinitesimal automorphisms imply prorepresentability",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyEtale R A], Algebra.FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formally smooth ring homomorphisms and groupoid definitions do not give Schlessinger hull existence or rigidity of deformation groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schlessinger\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formally smooth ring homomorphisms and groupoid definitions do not give Schlessinger hull existence or rigidity of deformation groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|miniversal|deformationHull|versalFormal",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formally smooth ring homomorphisms and groupoid definitions do not give Schlessinger hull existence or rigidity of deformation groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A groupoid valued deformation functor on Artinian local algebras has a miniversal formal object with tangent isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Grpd.objects\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Grpd.Basic\", \"type\": \": Grpd.{v, u} ⥤ Type u\", \"doc\": \"The functor from the category of groupoids to the category of types, which maps each groupoid to its underlying type and each functor between groupoids to the corresponding function on their underlyin\"}\n  {\"name\": \"CategoryTheory.Groupoid.noConfusion\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"{P : Sort u_1} →\\n  {obj : Type u} →\\n    {t : CategoryTheory.Groupoid obj} →\\n      {obj' : Type u} →\\n        {t' : CategoryTheory.Groupoid obj'} → obj = obj' → t ≍ t' → CategoryTheory.Groupoid.noConfusionType P t t'\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"CategoryTheory.Groupoid.noConfusionType\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"Sort u_1 → {obj : Type u} → CategoryTheory.Groupoid obj → {obj' : Type u} → CategoryTheory.Groupoid obj' → Sort u_1\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"CategoryTheory.Grpd\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Grpd.Basic\", \"type\": \"Type (max (u + 1) u (v + 1))\", \"doc\": \"The category whose objects are groupoids and morphisms are functors between them, constructed using the bundled structure for categories of mathematical objects.\"}\n  {\"name\": \"CategoryTheory.Groupoid\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"Type u → Type (max u (v + 1))\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"CategoryTheory.SmallGroupoid\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"(C : Type u) : Type (u + 1)\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"CategoryTheory.instIsGroupoid\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"{C : Type u} [Groupoid.{v} C] : IsGroupoid C\", \"doc\": \"Every groupoid is a category in which every morphism is an isomorphism.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formally smooth ring homomorphisms and groupoid definitions do not give Schlessinger hull existence or rigidity of deformation groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schlessinger criterion for existence of a hull and prorepresentability of deformation functors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: formally smooth ring homomorphisms and groupoid definitions do not give Schlessinger hull existence or rigidity of deformation groupoids"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-scheme-deformation-hull",
+  "date": "2026-10-23",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Hull and tangent space of the deformation functor of a proper scheme. Supporting input: the abstract Schlessinger input of examples-defos Tag 0ET5; no scheme-specific hypothesis.",
+   "via": [
+    "lem-sfb-proper-scheme-deformation-hull",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-schlessinger-groupoid-hull-criterion",
+  "worker": "stage1",
+  "summary": "Direct seven-step classical Schlessinger construction reusing existing completion, least-ideal, cofinality, tangent-tensor and versality-criterion nodes. One strictly smaller statement-only input for automorphism kernels, reusing the concurrently landed marked-lift-torsor node; rigidity proved by induction for every hull. No statement changed.",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/deformation prerequisite route. The latest direct-images proof is read; this item supports the local deformation hull within that inherited route. Nearest imported blueprint ancestor is null, as blueprint_refs.py ancestor reports; retain the recorded via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-46e73fec0",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-46e73fec0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-schlessinger-automorphism-kernel and every cited statement in full, against Stacks formal-defos 06IW (full proof), 06JX, 06JY (statement and proof), 06JZ, 06K0 and the 06JL induction. Steps 1-5 follow 06IW with Lambda=R=k. Here J_2=m^2, so the tangent map is the bijection of the classical 06IX case: maps X_i->a_i eps give sum a_i theta_i by the 1-tensor-lambda naturality of rs-tangent-tensor. In the induction, S/mJ_n is Artinian because m^{n+1} is contained in mJ_n, which is contained in m, and the least liftable ideal is applied correctly. In the limit, J is contained in m^2 and is proper; complete-local-quotient, 06SE cofinality and 06H6 evaluation then apply. For versality, E=S/J_n x_A A' is a small extension; the section case gives the lift, otherwise the complete-source essential clause makes g surjective. K=ker g lies in J_n and contains mJ_n, so leastness gives J_{n+1} in K. The tangent-ring-lift criterion then gives versality, and passing to iso classes gives the hull. Step 6 (Inf=0): the kernel node on each small extension gives injective reductions, so Aut(x)=1, and RS then gives the set-valued fibre-product bijection. Step 7 is the 06JL induction through the marked-lift-torsor node (Q49, on base) on discrete groupoids, for every hull. The new node matches 06JX+06JY: since D(k) is trivial, Inf_{x0}=Aut(x_eps). I tested it on I=0 and on the one-object D with Aut=1+m_A, where the kernel 1+I is k tensor I; it is not elementary and not a clause of the parent. A DAG search finds no abstract duplicate; rs-versal-formal-object is stated over S-schemes and lacks the tangent bijection. The item's statement is unchanged; it is still unsplit on live and side-live, and there is no repair note. The route is fine: sk-thm-p1 is in the unit's uses closure. There is no SGA citation. Batch-5 flag: the link from minimal-liftable-ideal to lem-trf-vector-subspace-complement is a Mathlib-leaf linear-algebra fact (subspaces have complements), generic and not part of the trace-formula or Poincare-duality proofs, so it is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchlessingerGroupoidHullCriterion",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.schlessinger_groupoid_hull_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchlessingerGroupoidHullCriterion.lean",
+  "statement": "theorem schlessinger_groupoid_hull_criterion {k : Type u} [Field k] (D : CofibredGroupoids.{u, v, w} k k) (hpre : IsPredeformation D) (hRS : IsRimSchlessinger D) [AddCommGroup (tangentSet D)] [Module k (tangentSet D)] (hoperations : HasClassicalTangentOperations D) [FiniteDimensional k (tangentSet D)] : (∃ (B : CompleteLocalAlgebra k k) (η : ClassicalClassMap D B), IsClassicalHull η) ∧ (∀ x₀ : fibre D (residueTest (R := k) (k := k)), Subsingleton (Aut ((push D (classicalZeroArrow (k := k))).obj x₀)) → ∀ (B : CompleteLocalAlgebra k k) (η : ClassicalClassMap D B), IsClassicalHull η → IsClassicalClassIso η)",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-832a02cf2",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Re-delivery after H2/H12 RETURN at ce8ccc3e8aeb; Lean files byte-identical to the returned head. New def node def-sfb-artin-square-zero-transport has an existing:true record for squareZeroMap/isoClassesMap in ArtinRSTangentTensor (signature verbatim, TeX matches bodies and variable context, stmt_deps = cited ids, all §5 fields correct). Item and def-sfb-classical-deformation-hull now cite it instead of theorem lem-sfb-artin-rs-tangent-tensor, which stays a proof_dep only. Item differs from base only in lean and stmt_deps (adds existing test-category node plus the two new def nodes). Mathematics re-read clause by clause and unchanged correct; only sorry is the item proof; no hollow defs; statement fields verbatim. No compile needed (no file changed)."
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-sfb-adic-perfect-reduction-models-compatibility",
+ "kind": "statement",
+ "title": "Compatible derived comparisons for ordinary adic quotient models",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "statement": "Let X,A,J,U,P,a,b satisfy the same hypotheses as lem-sfb-adic-perfect-reduction-models: X is a scheme, A a coefficient-universe commutative ring, J an ideal, U a coefficient pro-etale object with exact terminal evaluation on set sheaf epimorphisms, and P an integer cochain complex of finite projective A-modules strictly supported in [a,b]. With R_n,C_n,alpha_n and the actual completed constant derived object T as in def-sfb-adic-perfect-reduction-model-complexes, there exist isomorphisms r_n from the actual derived reductions rho_n(T) to Q(C_n). For every n, extend(tau_n)(r_(n+1)) followed by the universal K-flat computation comparison and Q(alpha_n) equals the actual derived balancing isomorphism at T followed by r_n. No K-projectivity assertion is included.",
+ "stmt_deps": [
+  "def-sfb-adic-perfect-reduction-model-complexes",
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C6 and 06YY; Tag 099M for successor scalar reassociation."
+ },
+ "proof": [
+  {
+   "text": "Identify the actual local complex with the slice restriction of AdicPerfectModel.model by the existing proved constantPresentationIso and the functorial mapHomologicalComplex comparison. The existing private theorem AdicPerfectModel.model_kflat in AdicPerfectModelCompleteReduction gives K-flatness of the completed constant complex from the upper bound and projective terms. Apply ringedSite_restriction_exact_kflat and transport acyclicity of total tensor across the local chain isomorphism. This needs neither weak contractibility nor a lower bound.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction",
+    "lem-sfb-ringed-site-restriction-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The factorization mapDerivedCategoryFactors for exact overFunctor identifies the restriction of adicResidueConstantPerfect with Q of adicPerfectLocalComplex. Extend that isomorphism to level n and compose with the invertible K-flat computation counit supplied by derivedExtension. These composites define r_n. They use the given functors and their canonical counits, without choosing arbitrary witnesses.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize adicFiniteExtendComp_existsUnique.choose_spec to the local K-flat complex, transporting the composite coefficient map along adicPerfectQuotientScalarStep_comp. This gives the normalized counit equation for exactly the ordinary balancing chain isomorphism adicPerfectQuotientStep. Naturality of adicFiniteExtendComp at the comparison from the actual restricted derived object to Q of the local complex transports that equation to T. Functoriality of maps and associativity of composition give the stated successor square.",
+   "uses": [
+    "lem-sfb-adic-constructible-finite-reductions",
+    "def-sfb-adic-perfect-reduction-model-complexes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sfb-adic-constructible-finite-reductions",
+  "def-sfb-adic-perfect-reduction-model-complexes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ and 06YY, with lemma-restriction-K-flat (Tag 0E8K); proetale.tex Tags 09C6 and 099M for the actual quotient system. Existing proved K-flat model and normalized scalar-composition APIs, assembled by W3, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor maps a bounded above cochain complex to a bounded above cochain complex and projective terms imply K projective",
+   "results": "CochainComplex.isKProjective_of_projective. No theorem realizing the concrete quotient terms as projectives on the coefficient slice.",
+   "date": "2026-10-26",
+   "verdict": "Use the bounded-above criterion; isolate the termwise sheaf calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective",
+   "results": "isKProjective_of_projective, isKProjective_of_iso, and homotopy invariance. None gives termwise projectivity for this realization.",
+   "date": "2026-10-26",
+   "verdict": "The general criterion is sufficient after termwise projectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "Projective.of_retract|projective_of_retract|map_isStrictlySupported|isKProjective_of_projective",
+   "results": "HomologicalComplex.map_isStrictlySupported preserves the bound; CochainComplex.isKProjective_of_projective supplies K-projectivity. Source search found sf_weakly_contractible_projective for the large pro-etale site, not the coefficient-site slice in this statement.",
+   "date": "2026-10-26",
+   "verdict": "General ingredients exist; the concrete coefficient-slice projectivity remains."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "D4",
+  "item": "Sheaf.Paper.AdicPerfectReductionModels",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-perfect-reduction-models",
+   "place": "Intermediate statement for its proof.",
+   "via": [
+    "lem-sfb-adic-perfect-reduction-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectReductionModelsCompatibility",
+  "file": "lean/Sheaf/Paper/AdicPerfectReductionModelsCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectReductionModels_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicPerfectReductionModels_compatibility"
+  ],
+  "statement": "theorem adicPerfectReductionModels_compatibility (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X)\n    (_hU : AdicResidueSliceWeaklyContractible.{u, v} X U)\n    (P : CochainComplex (ModuleCat.{max v (u + 1)} A) ℤ)\n    (a b : ℤ) (_ha : P.IsStrictlyGE a) (_hb : P.IsStrictlyLE b)\n    (_hP : ∀ i : ℤ, Module.Finite A (P.X i) ∧ Module.Projective A (P.X i)) :\n    let R := fun n : ℕ ↦\n      (finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U\n    let C : (n : ℕ) → Cx (R n) := fun n ↦ adicPerfectQuotientComplex.{u, v} X J U P n\n    let R₀ := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U\n    let ρ : (n : ℕ) → D R₀ ⥤ D (R n) := fun n ↦ adicResidueLocalReduction.{u, v} X J U n\n    let T : D R₀ := (adicResidueRestriction\n      (completed (coefficientProEtaleModelTopology.{u, v} X) A J) U).obj\n        (adicResidueConstantPerfect.{u, v} X J P)\n    ∃ r : ∀ n : ℕ, (ρ n).obj T ≅ (Q (R n)).obj (C n),\n      ∀ n : ℕ,\n        (extend (adicPerfectQuotientScalarStep.{u, v} X J U n)).map (r (n + 1)).hom ≫\n            (extendComparison (adicPerfectQuotientScalarStep.{u, v} X J U n)).app\n              (C (n + 1)) ≫\n            (Q (R n)).map (adicPerfectQuotientStep.{u, v} X J U P n).hom =\n          (adicPerfectDerivedQuotientStep.{u, v} X J U n).hom.app T ≫ (r n).hom",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-94abe",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T065433-L-2969140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T104457-L-834360",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

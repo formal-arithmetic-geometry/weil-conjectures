@@ -1,0 +1,122 @@
+{
+ "id": "def-sf-finite-composition-coefficients",
+ "kind": "definition",
+ "title": "Lifted finite coefficient rings and quotient reduction for composition",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and let $E/\\mathbf Q_\\ell$ be a finite extension with its fixed valuation ring $\\mathcal O_E$ and chosen uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. For each positive integer $n$, use the finite coefficient ring $A_n=\\mathcal O_E/(\\varpi)^n$ in the standard constant-coefficient universe: when $E$ has universe $u$, put $\\widetilde A_n=\\operatorname{ULift}^{u+1}(A_n)$ and equip it with the finiteness instance transported along the canonical equivalence $\\widetilde A_n\\simeq A_n$. For positive integers $m,n$ with $n\\le m$, define $\\widetilde A_m\\to\\widetilde A_n$ to be the universe lift of the quotient factor homomorphism induced by the identity of $\\mathcal O_E$, using $(\\varpi)^m\\subseteq(\\varpi)^n$. This is the specified coefficient reduction used by the compact-support composition comparisons.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.md",
+  "place": "The coefficient rings A,B and quotient reductions in the displayed counit-defined mate and quotient cocycle; global finite-field convention def-weil-finite-field-fiber.md, final coefficient-ring paragraph. Existing specialization: CompactCoefficientComposition.lean, lines 79-98."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteCompositionReduction|finiteCompositionCoefficient|coefficientExtensionRing|Ideal.Quotient.factor",
+   "results": "{\"t\": \"2026-10-22T12:05:21Z\", \"tool\": \"grep\", \"query\": \"finiteCompositionReduction|finiteCompositionCoefficient|coefficientExtensionRing|Ideal.Quotient.factor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/NilpotentKer.lean\", \"Mathlib/RingTheory/Finiteness/NilpotentKer.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Operations.lean\", \"Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean\"], \"digest\": \"53f515b23c450d1b\"}",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing specialized definitions in Sheaf.SixFunctors.CompactCoefficientComposition; Mathlib has generic quotient factor maps, not this named coefficient specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite extension of the l-adic numbers quotient valuation ring powers of uniformizer quotient reduction homomorphism",
+   "results": "{\"t\": \"2026-10-22T12:05:22Z\", \"tool\": \"leansearch\", \"query\": \"Finite extension of the l-adic numbers quotient valuation ring powers of uniformizer quotient reduction homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.Uniformizer.val\", \"PadicInt.instIsDiscreteValuationRing\", \"Valued.extension\", \"Ideal.quotientRangePowQuotSuccInclusionEquiv\", \"Padic.coe_withValRingEquiv_symm\", \"ValuationSubring.valuation\", \"Padic.valuation\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\"], \"digest\": \"6f109b011cd4b5c2\"}",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing specialized definitions in Sheaf.SixFunctors.CompactCoefficientComposition; Mathlib has generic quotient factor maps, not this named coefficient specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical quotient reduction map between positive uniformizer-power finite coefficient rings with universe lift",
+   "results": "{\"t\": \"2026-10-22T12:05:32Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical quotient reduction map between positive uniformizer-power finite coefficient rings with universe lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.mk_untilt_eq_coeff_zero\", \"PreTilt.mk_comp_untilt_eq_coeff_zero\", \"PreTilt.untiltFun\", \"PreTilt.coeff\", \"PreTilt.exists_smodEq_untiltAux\", \"PreTilt.untiltAux_smodEq_untiltFun\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PreTilt.untilt\"], \"digest\": \"32bebcc3a6c403fd\"}",
+   "date": "2026-10-22",
+   "verdict": "Reuse the existing specialized definitions in Sheaf.SixFunctors.CompactCoefficientComposition; Mathlib has generic quotient factor maps, not this named coefficient specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l finiteCompositionCoefficient|finiteCompositionReduction dag/nodes; python3 tools/blueprint_refs.py search finiteCompositionReduction; rg -n finiteCompositionReduction|finiteCompositionCoefficient lean/WeilConjectures lean/Sheaf",
+   "results": "Only lem-sf-compact-coefficient-composition names these declarations in the DAG; blueprint search: 0 blueprint nodes match. No WeilConjectures definition. Sheaf.SixFunctors.CompactCoefficientComposition defines finiteCompositionCoefficient at line 83 and finiteCompositionReduction at line 90; CoefDualizingConstruction only uses the map. No definition node owns these two specialized declarations.",
+   "date": "2026-10-22",
+   "verdict": "Add definition ownership with existing:true; introduce no duplicate Lean construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dualizing-open-mate",
+  "date": "2026-10-22",
+  "group": "Q140"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Positive finite coefficient rings and quotient coefficient homomorphism in the counit-defined mate and its open restriction.",
+   "via": [
+    "lem-coef-dualizing-open-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompactCoefficientComposition",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCompositionReduction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteCompositionCoefficient",
+   "AlgebraicGeometry.ProEtale.finiteCompositionReduction"
+  ],
+  "statement": "def finiteCompositionReduction (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (m n : ℕ+) (hmn : n ≤ m) :\n    ULift.{u + 1} (Padic.coefficientExtensionRing l E m) →+*\n      ULift.{u + 1} (Padic.coefficientExtensionRing l E n)",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition ownership requested by independent review of 68085c7d2f8e, point 1 (H2). Reuses the unchanged existing finiteness-instance transport and RingHom.ulift of Ideal.Quotient.factor. Neither construction uses the compact-support composition theorem. The source declaration docstrings retain their original blueprint tag; no Lean file is copied or changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca276a62a",
+  "group": "Q140",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca276a62a",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Re-delivery of the 68085c7d RETURN. DualizingOpenMate.lean is byte-identical (sha256 17da65a7), so the earlier full maths review stands: globalMate, localAdjunction, localInverse, restrictedMate, three Formula conjuncts, Domain not stronger, single sorry, statement verbatim. H2 F1 fixed: new def node def-sf-finite-composition-coefficients (existing:true on the unchanged CompactCoefficientComposition) owns finiteCompositionCoefficient and finiteCompositionReduction. Its signature is verbatim, the NL statement matches the lifted quotient factor map (applied in the right direction, level n to level m), its only stmt_dep is def-weil-l-adic-coefficient-extension, there is no cycle, and the source exists. The theorem stays in proof_deps. F2 fixed: lem-pur-derived-change-of-rings replaced by def-weil-pbc-witness-compatibility, which owns pbcFixedScalarExtension (target of the scalarExtension abbrev). Mechanical finding: lem-coef-etale-open-comparison-data is genuine, because openScalarRestriction = asIso via the node's @[instance] theorem openScalarRestrictionMap_isIso and r_W uses it, so PASS on that point. Report has Worker report and Second reading sections. Advisory: the d_L = openIso rendering is documented in the report only, not the docstring. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f8ed0",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T164929-L-1133303",
+  "kind": "interface",
+  "note": "independent cc review: delivered item and new EtaleRestrictionCompositor module vs clone, nodes and unit sk-prop-sf-biduality-general (realized empty); signatures unchanged; 5 direct importers compiled against the delivered modules; axioms checked",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.finiteCoefficient_compactSupport_composition",
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_compactSupport_composition"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.finiteCoefficient_compactSupport_composition"
+  ]
+ }
+}

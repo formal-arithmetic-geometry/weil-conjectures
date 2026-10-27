@@ -1,0 +1,138 @@
+{
+ "id": "lem-route-rational-transition-exact-of-integral",
+ "kind": "statement",
+ "title": "Normalized rational scalar exactness from an exact integral transition",
+ "statement": "Let ell be prime, let p be a natural number with ell != p, let E and L be finite extensions of Q_ell, let i:E -> L be a Q_ell-algebra homomorphism, and let Y be any scheme. Use the intrinsic integral categories [def-weil-derived-complete-integral-detailed] and the recorded raw rational categories, scalar extension functors and localizations [def-weil-rationalization-karoubi]. Give the integral scalar extension T a fixed coherent integer-shift comparison and assume it preserves distinguished triangles [def-weil-triangulated-category]. Give the rational scalar extension F a coherent integer-shift comparison c. Suppose that for every rational object K its degree-one component c_{1,K} is heterogeneously equal, with the published object identifications, to Q_L(t_{1,K.obj}). Then F preserves distinguished triangles for this specified comparison c. No idempotent completion or condition on Y relative to p is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Intrinsic scalar exactness argument retained by lem-route-transition-exact, proof steps 3 and 4: the normalized rational transition on integral images and invariance under triangle isomorphism."
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Let T be the specified integral scalar extension and F the specified rational extension. Put Q=Q_E and Qprime=Q_L. The published object formula and pure-tensor formula give a natural isomorphism c:Q followed by F isomorphic to T followed by Qprime. Its components are the identity transports of the published object equalities. Naturality follows by evaluating the pure-tensor formula at scalar one and removing the endpoint transports using heterogeneous equality.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The recorded localization comparison in degree one is the identity transport, and the hypothesis says that the degree-one comparison of F is Qprime applied to that of T. Substitute these three normalizations in the comparison square of c. Both sides are heterogeneously equal to Qprime(t_1), so the square commutes. The zero/addition equations and inverse shifts extend compatibility from one to every integer.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The functor T is triangulated by hypothesis and Qprime is triangulated by the recorded rationalization theorem. Thus their composite is triangulated. Transport this fact through c, whose shift compatibility was proved in the previous step, to see that Q followed by F preserves distinguished integral triangles.",
+   "uses": [
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every distinguished rational triangle is isomorphic to Q of a distinguished integral triangle. Apply the triangle functor of F to this isomorphism and compose with the standard comparison between the triangle functors of a composite and a composite of triangle functors. Its target is distinguished by the previous step. Closure of distinguished triangles under isomorphism proves the assertion for the original rational triangle. This argument also covers repeated fields, identity coefficient maps, and the empty scheme.",
+   "uses": [
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-triangulated-category",
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Intrinsic scalar exactness argument retained by lem-route-transition-exact, proof steps 3 and 4: the normalized rational transition on integral images and invariance under triangle isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational scalar extension with an integral exact model and normalized shift at one preserves distinguished triangles",
+   "results": "{\"t\": \"2026-10-27T12:02:52Z\", \"tool\": \"leanfinder\", \"query\": \"A rational scalar extension with an integral exact model and normalized shift at one preserves distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.triangle_map_exists\", \"CategoryTheory.Triangulated.TStructure.triangle_iso_exists\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle_distinguished\", \"DerivedCategory.mem_distTriang_iff\", \"HomotopyCategory.Pretriangulated.shift_distinguished_triangle\", \"CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished\", \"CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished\"], \"digest\": \"4b3d6680477e2875\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for the intrinsic scalar-extension normalization statement. Reuse the triangulated-functor comparison and mapTriangleCompIso APIs; the identity-at-one normalization and rational image-triangle descent are the additional argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isTriangulated_iff_of_iso",
+   "results": "{\"t\": \"2026-10-27T12:02:51Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.isTriangulated_iff_of_iso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isTriangulated_iff_of_iso\"], \"digest\": \"9c4e0dc19831cead\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for the intrinsic scalar-extension normalization statement. Reuse the triangulated-functor comparison and mapTriangleCompIso APIs; the identity-at-one normalization and rational image-triangle descent are the additional argument."
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated_of_precomp|mapTriangleCompIso",
+   "results": "{\"t\": \"2026-10-27T12:02:51Z\", \"tool\": \"grep\", \"query\": \"isTriangulated_of_precomp|mapTriangleCompIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Basic.lean\", \"Mathlib/CategoryTheory/Triangulated/Functor.lean\", \"Mathlib/CategoryTheory/Triangulated/Functor.lean\", \"Mathlib/CategoryTheory/Triangulated/Functor.lean\"], \"digest\": \"dcf61589f618f74a\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match for the intrinsic scalar-extension normalization statement. Reuse the triangulated-functor comparison and mapTriangleCompIso APIs; the identity-at-one normalization and rational image-triangle descent are the additional argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact integral scalar extension induces an exact rational scalar extension when the shift comparison is normalized on integral images.",
+   "results": "{\"t\": \"2026-10-27T12:47:18Z\", \"tool\": \"leansearch\", \"query\": \"An exact integral scalar extension induces an exact rational scalar extension when the shift comparison is normalized on integral images.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"IsAlgebraic.restrictScalars_of_isIntegral\", \"IsIntegral.ratCast_iff\", \"galLiftEquiv_apply\", \"Algebra.isIntegral_norm\", \"NumberField.RingOfIntegers.instIsScalarTower_1\", \"IntermediateField.coe_extendScalars\"], \"digest\": \"d0a4d5a79e5e435c\"}",
+   "date": "2026-10-27",
+   "verdict": "The eight hits concern ordinary module scalar extension, algebraic integral elements, and number fields. None states exactness for the intrinsic rational triangulated scalar extension with the specified shift comparison. The proof uses the existing triangulated-functor and localization APIs instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfAlgebraicallyClosedCoefficients",
+  "date": "2026-10-27",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-route-transition-exact",
+   "place": "Rational integral-image descent, proof steps 3 and 4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "tool_uses": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfRationalScalarExactOfIntegral",
+  "file": "lean/Sheaf/Paper/SfRationalScalarExactOfIntegral.lean",
+  "declaration": "WeilConjectures.sfRationalScalarExactOfIntegral",
+  "statement": "theorem sfRationalScalarExactOfIntegral\n    (p l : ℕ) [Fact l.Prime] (hl : l ≠ p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (i : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})\n    [t : (sfConstructibleIntegralScalarExtension p l hl E L i Y).CommShift ℤ]\n    [ht : (sfConstructibleIntegralScalarExtension p l hl E L i Y).IsTriangulated]\n    [s : (sfRationalScalarExtension l E Y p hl L i).CommShift ℤ]\n    (hs : ∀ K : sfRationalConstructibleCategory l E Y,\n      HEq (((sfRationalScalarExtension l E Y p hl L i).commShiftIso (1 : ℤ)).hom.app K)\n        ((sfRationalConstructibleLocalization l L Y).map\n          (((sfConstructibleIntegralScalarExtension p l hl E L i Y).commShiftIso\n            (1 : ℤ)).hom.app K.obj))) :\n    (sfRationalScalarExtension l E Y p hl L i).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T131505-L-2946408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T131505-L-2946408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

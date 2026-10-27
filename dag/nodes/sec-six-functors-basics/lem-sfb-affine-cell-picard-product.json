@@ -1,0 +1,406 @@
+{
+ "id": "lem-sfb-affine-cell-picard-product",
+ "kind": "statement",
+ "title": "Picard groups of products with an affine-cell proper variety",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure]. Let $X$ be a smooth proper geometrically integral $F$-scheme [def-pc-scheme], [def-sbc-smooth-morphisms], [def-weil-proper-morphism], [def-pc-geometrically-irreducible]. Suppose that $X$ contains a dense open subscheme $U\\cong\\mathbf A^d_F$ for some $d\\geq0$ [def-weil-open-immersion], [def-sbc-affine-space]; dense means its closure is all of $X$. Let $T$ be a smooth geometrically integral separated finite-type $F$-scheme [def-weil-finite-type-morphism]. Geometrically integral means nonempty and integral after every field extension. For any scheme $Y$, write $\\operatorname{Pic}(Y)$ for the abelian group of isomorphism classes of invertible $\\mathcal O_Y$-modules, with addition induced by tensor product; invertible means Zariski locally free of rank one [def-sc-invertible-module]. For the projections $p_X:X\\times_F T\\to X$ and $p_T:X\\times_F T\\to T$ [def-pc-fibre-product], tensor pullback [def-pc-module-pullback] induces an isomorphism of abelian groups\n$$\\operatorname{Pic}(X)\\oplus\\operatorname{Pic}(T)\\xrightarrow{\\sim}\\operatorname{Pic}(X\\times_F T),\\qquad ([M],[N])\\longmapsto[p_X^*M\\otimes p_T^*N].$$\nIn particular, if $t_0\\in T(F)$ and an invertible sheaf $H$ on $X\\times_F T$ has $H|_{X\\times\\{t_0\\}}\\cong L$ for an invertible sheaf $L$ on $X$, then $H\\cong p_X^*L\\otimes p_T^*N$ for some invertible sheaf $N$ on $T$.",
+ "source": {
+  "document": "literature/stacks-project/chow.tex",
+  "place": "Agent-formulated product consequence of Tag 02TT (lemma-pullback-affine-fibres-surjective), Tag 02RX (lemma-restrict-to-open), and the identification Cl=CH in section-divisor-invertible-sheaf; divisors.tex Tag 0BE9 (lemma-local-rings-UFD-c1-bijective). Smoothness gives regular local factorial rings. The boundary argument extends Milne Lemma 18.21, printed p.392, to products; its full argument is retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-pc-geometrically-irreducible",
+  "def-weil-open-immersion",
+  "def-sbc-affine-space",
+  "def-weil-finite-type-morphism",
+  "def-sc-invertible-module",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-sc-picard-group",
+  "lem-sc-pic-group",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Both $X$ and $T$ are regular and locally Noetherian by [lem-weil-pbc-smooth-scheme-over-field-regular]. They are separated and of finite type over $F$ (for $X$ these follow from properness). By [lem-weil-pbc-qcqs-over-affine] they are quasi-compact and quasi-separated, hence Noetherian. By [lem-sc-separated-over-affine-scheme-separated] they are also separated over $\\operatorname{Spec}\\mathbf Z$. Their structure morphisms are locally of finite presentation by [lem-pc-smooth-flat], and therefore of finite presentation. Choose $x_0\\in U(F)$ as the origin of the specified affine cell and choose $t_*\\in T(F)$ by [lem-pc-rational-points-dense], since $T$ is nonempty and $F$ is algebraically closed.",
+   "uses": [
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-pc-smooth-flat",
+    "lem-pc-rational-points-dense"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056S, lemma-smooth-regular; finite type and separated conventions; rational points as in the cited density lemma."
+   }
+  },
+  {
+   "text": "Put $W=X\\times_FT$. Both projections are smooth by [lem-pc-proper-base-change], flat and locally of finite presentation by [lem-pc-smooth-flat], and universally open by [lem-weil-pbc-flat-lfp-open]. They are of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence], applied to the finite-presentation structure maps of step 1. The projection $p_X$ is separated and of finite type by [lem-pod-separated-finite-type-base-change]; composition with $X\\to\\operatorname{Spec}F$ is of finite type by [lem-sfb-finite-type-composition-base-change]. Its geometric fibres are the base changes of $T$, hence nonempty and integral. Apply [lem-sfb-smooth-integral-fibre-vertical-divisors] with base $X$ and dense open $U$: $W$ is regular and locally Noetherian, and $W_U=U\\times_FT$ is dense. Moreover $W$ is integral by [lem-sfb-integral-pullback-geometric-flat-open], with $X\\to\\operatorname{Spec}F$ the geometrically integral flat universally open morphism and $T$ the integral locally Noetherian base.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-smooth-integral-fibre-vertical-divisors",
+    "lem-sfb-integral-pullback-geometric-flat-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON, lemma-dimension-base-fibre-equals-total, as packaged by the cited vertical-divisor lemma; smooth and finite-presentation base change."
+   }
+  },
+  {
+   "text": "Identify $A=W_U=\\mathbf A^d_T$ and let $q:A\\to T$ be projection. It is smooth by [sbc-lem-affine-space-smooth]. It is separated and of finite presentation: over each affine $\\operatorname{Spec}R\\subset T$ it is $\\operatorname{Spec}R[z_1,\\ldots,z_d]\\to\\operatorname{Spec}R$, with the displayed finite polynomial presentation; its diagonal is cut out by $z_i-z_i'$. Every fibre after any field extension is affine space over a field, and is nonempty and integral because a polynomial ring over a field is a domain. Applying [lem-sfb-smooth-integral-fibre-vertical-divisors] with base $T$ and dense open $T$ gives regularity and local Noetherianity of $A$. It is quasi-compact since it has the finite affine cover obtained from a finite affine cover of $T$. For integrality apply [lem-sfb-integral-pullback-geometric-flat-open] to $\\mathbf A^d_F\\to\\operatorname{Spec}F$ and $T$, using [lem-pc-smooth-flat] and [lem-weil-pbc-flat-lfp-open].",
+   "uses": [
+    "def-sbc-affine-space",
+    "sbc-lem-affine-space-smooth",
+    "lem-sfb-smooth-integral-fibre-vertical-divisors",
+    "lem-sfb-integral-pullback-geometric-flat-open",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BDA, lemma-open-subscheme-UFD, for affine-space fibres; polynomial presentation and the cited smooth/regular geometric inputs."
+   }
+  },
+  {
+   "text": "The schemes $W$ and $A$ are separated over $F$: under the product identifications, the diagonal of $W$ is defined by imposing the two closed diagonal conditions for $X$ and $T$, and the diagonal of $A\\to T$ is the polynomial diagonal of step 3. These conditions are closed immersions on affine charts (the corresponding ring maps are the evident quotient maps). Composing the two diagonal conditions proves separatedness of the structure maps to $F$. Thus [lem-sc-separated-over-affine-scheme-separated] makes them separated over $\\operatorname{Spec}\\mathbf Z$. Since $W$ is of finite type over $F$, it is quasi-compact, and with its established local Noetherianity it is Noetherian. Both $A$ and $W$ are therefore regular integral Noetherian separated schemes of finite type over $F$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KK, definition-separated: explicit product and composite diagonal calculation; Tag 01KU, lemma-separated-permanence."
+   }
+  },
+  {
+   "text": "Let $H$ be any invertible sheaf on $W$. For $K=F(T)$, the generic fibre of $q$ is $\\mathbf A^d_K$, so [lem-sfb-affine-space-invertible-trivial], applied over the field $K$, trivializes $H|_{\\mathbf A^d_K}$. Apply [lem-sfb-smooth-generic-trivial-line-descent] to $q:A\\to T$ and $H|_A$. Its hypotheses were verified in steps 1, 3 and 4; surjectivity follows also from the zero section. It gives an invertible sheaf $N$ on $T$ and $H|_A\\cong q^*N$. Put $H'=H\\otimes(p_T^*N)^{-1}$, which is trivial on $A$. Tensor products, duals and pullbacks of these locally rank-one modules are again locally rank one: in a local basis their modules are the coefficient ring, and evaluation sends the basis and its dual to $1$.",
+   "uses": [
+    "lem-sfb-affine-space-invertible-trivial",
+    "lem-sfb-smooth-generic-trivial-line-descent",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BDA, lemma-open-subscheme-UFD; generic-fibre descent as in the cited 00ON/0AGA vertical-divisor consequence."
+   }
+  },
+  {
+   "text": "Choose a trivialization $s$ of $H'$ over the dense open $A$. It is a nonzero rational section on the integral $W$. By [lem-sfb-regular-space-divisor-line-dictionary], its Weil divisor $D_W=\\operatorname{div}(s)$ is a finite integral sum of prime divisors, has support outside $A$ (the section is everywhere a generator on $A$), and $H'\\cong\\mathcal O_W(D_W)$. Apply [lem-sfb-smooth-integral-fibre-vertical-divisors] to $p_X:W\\to X$ and $U\\subset X$. All its hypotheses were checked in steps 1 and 2. Its supported-divisor isomorphism gives a divisor $D_X$ on $X$ supported outside $U$ with $D_W=p_X^*D_X$. The dictionary gives the invertible $M=\\mathcal O_X(D_X)$, and its flat-pullback compatibility gives $p_X^*M\\cong\\mathcal O_W(p_X^*D_X)\\cong H'$. Hence $H\\cong p_X^*M\\otimes p_T^*N$.",
+   "uses": [
+    "lem-sfb-regular-space-divisor-line-dictionary",
+    "lem-sfb-smooth-integral-fibre-vertical-divisors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AGA, lemma-weil-divisor-is-cartier-UFD, and Tag 0BE9, lemma-local-rings-UFD-c1-bijective; the supported prime-divisor correspondence is the cited vertical-divisor lemma, based on algebra.tex Tag 00ON."
+   }
+  },
+  {
+   "text": "The map in the statement is well-defined on isomorphism classes and is a group homomorphism. Indeed the pullback formula of [def-pc-module-pullback] commutes with tensor products: locally the identification is $(a\\otimes m)\\otimes(b\\otimes n)\\mapsto ab\\otimes(m\\otimes n)$, with inverse $c\\otimes(m\\otimes n)\\mapsto(c\\otimes m)\\otimes(1\\otimes n)$. The balanced relations verify the two inverse formulas, which agree on overlaps. Associativity and commutativity of tensor products of local rank-one modules then identify the image of a sum with the tensor product of the images. Step 6 proves surjectivity.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tensor pullback formula and its elementary balanced-tensor identities."
+   }
+  },
+  {
+   "text": "If $p_X^*M\\otimes p_T^*N\\cong\\mathcal O_W$, pull back along $x\\mapsto(x,t_*)$. By the composite-pullback identity of [def-pc-module-pullback] this gives $M\\otimes\\mathcal O_X\\cong\\mathcal O_X$, because the fibre $N_{t_*}$ is a one-dimensional $F$-vector space and a choice of a nonzero vector trivializes its constant pullback. Thus $M$ is trivial. Pulling back along $t\\mapsto(x_0,t)$ similarly shows that $N$ is trivial. This proves injectivity, hence the homomorphism of step 7 is an isomorphism.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Composite pullback and pullback of a one-dimensional vector space; the two chosen rational-point sections."
+   }
+  },
+  {
+   "text": "Finally suppose $t_0\\in T(F)$ and $H|_{X\\times\\{t_0\\}}\\cong L$. By step 6 write $H\\cong p_X^*M\\otimes p_T^*N$. Pull back along $x\\mapsto(x,t_0)$ and trivialize the one-dimensional vector space $N_{t_0}$ as in step 8. This gives $L\\cong M$. Substituting this isomorphism gives $H\\cong p_X^*L\\otimes p_T^*N$, as required.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Elementary rational-fibre restriction of the external tensor product from step 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-pc-smooth-flat",
+  "lem-pc-rational-points-dense",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-smooth-integral-fibre-vertical-divisors",
+  "lem-sfb-integral-pullback-geometric-flat-open",
+  "def-sbc-affine-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-sfb-affine-space-invertible-trivial",
+  "lem-sfb-smooth-generic-trivial-line-descent",
+  "def-pc-module-pullback",
+  "lem-sfb-regular-space-divisor-line-dictionary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Agent assembly of Tag 0BDA affine-space triviality, the existing generic-fibre line-descent node (00ON/0AGA), the existing supported-divisor pullback node, and the 0BE9/0AGA Cartier-line dictionary. This refines the original 02TT/02RX boundary argument without changing its geometric route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth proper geometrically integral variety containing a dense open affine space and a smooth connected base T every line bundle on X times T is an external tensor product",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  Nontrivial ↑T.tensor\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, the pushout $T.tensor$ in the category of commutative rings constructed from the residue field maps is\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"Given a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the morphisms $\\\\operatorname{Spec}(\\\\kappa(T.x)) \\to \\\\operatorname{Spec}(T.tensor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the Spec maps of the left/right inclusions into the pushout of residue fields $T.te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} → {g : Y ⟶ S} → AlgebraicGeometry.Scheme.Pullback.Triplet f g → CommRingCat\", \"doc\": \"For a pullback triplet in the category of schemes with morphisms $f: X \\\\to S$ and $g: Y \\\\to S$, this constructs the pushout in the category of commutative rings formed by composing the inverse residue\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {T T' : AlgebraicGeometry.Scheme.Pullback.Triplet f g}\\n  (h : T = T'),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr h).hom) T.SpecTensorTo =\\n    T'.SpecTensor\", \"doc\": \"Given two pullback triplets $ T $ and $ T' $ for morphisms $ f: X \\\\to S $ and $ g: Y \\\\to S $ in the category of schemes, if $ T = T' $, then the composition of the morphism $ \\\\operatorname{Spec}(T.ten\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ S} →\\n    {g : Y ⟶ S} → {T₁ T₂ : AlgebraicGeometry.Scheme.Pullback.Triplet f g} → T₁ = T₂ → (T₁.tensor ≅ T₂.tensor)\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $f:X\\\\to S$ and $g:Y\\\\to S$, if two pullback triplets $T_1$ and $T_2$ are equal, then their associated tensor pushouts in the category of commutative rings are isomo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} {x : AlgebraicGeometry.Scheme.Pullback.Triplet f g},\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr ⋯ = CategoryTheory.Iso.refl x.tensor\", \"doc\": \"For any pullback triplet $T$ in the category of schemes, applying the tensor congruence construction to the reflexive equality $T = T$ yields the identity isomorphism on the associated tensor pushout \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: tensor products of modules, abstract ring Picard groups and unrelated coproduct names do not identify Picard groups of these scheme products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group of a product of a smooth rational proper variety with a smooth variety is the direct sum of the two Picard groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instCommGroupPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → CommGroup (CommRing.Pic R)\", \"doc\": \"For any commutative semiring $ R $, its Picard group $ \\\\mathrm{Pic}(R) $, which consists of isomorphism classes of invertible semimodules over $ R $ under tensor product, forms an abelian group. The g\"}\n  {\"name\": \"CommRing.Pic.mk_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {M : Type u_5} {N : Type u_6} [inst_1 : AddCommMonoid M] [inst_2 : Module R M]\\n  [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : Module.Invertible R M] [inst_6 : Module.Invertible R N],\\n  CommRing.Pic.mk R (TensorProduct R M N) = CommRing.Pic.mk R M \", \"doc\": \"For any invertible $ R $-semimodules $ M $ and $ N $, the class of their tensor product $ M \\\\otimes_R N $ in the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the product of their individual classes, i\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → Subgroup (CommRing.Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"CommRing.Pic.mul_eq_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (M N : CommRing.Pic R),\\n  M * N = CommRing.Pic.mk R (TensorProduct R M.AsModule N.AsModule)\", \"doc\": \"For any commutative semiring $ R $ and elements $ M, N $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group multiplication satisfies $ M \\\\cdot N = [M \\\\otimes_R N] $, where $ [M \\\\otimes_R N] $ denotes \"}\n  {\"name\": \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u_7) [inst : CommRing R] [Finite (MaximalSpectrum R)], Subsingleton (CommRing.Pic R)\", \"doc\": \"If the maximal spectrum of a commutative ring is finite, then its Picard group is trivial (i.e., contains only the identity element).\"}\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} {x y : F} (h : W.Nonsingular x y),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' ⋯) *\\n      ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h) =\\n    1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: tensor products of modules, abstract ring Picard groups and unrelated coproduct names do not identify Picard groups of these scheme products."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"prod\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Finset.prodPiCons\", \"module\": \"Mathlib.Data.Finset.Insert\", \"type\": \" {α : Type u_1} {s : Finset α} [DecidableEq α] (f : α → Type u_3) {a : α} (has : a ∉ s) (x : f a × ((i : α) → i ∈ s → f i)) (i : α) : i ∈ Finset.cons a s has → f i\", \"doc\": \"Combine a product with a pi type to pi of cons.\"}\n  {\"name\": \"AddSubgroup.noncommPiCoprod_range\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {G : Type u_1} [AddGroup G] {ι : Type u_2} {H : ι → AddSubgroup G} [Fintype ι] {hcomm : Pairwise fun i j => ∀ (x y : G), x ∈ H i → y ∈ H j → AddCommute x y} : (AddSubgroup.noncommPiCoprod hcomm).range = ⨆ i, H i\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.noncommPiCoprod_range\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {G : Type u_1} [Group G] {ι : Type u_2} {H : ι → Subgroup G} [Fintype ι] {hcomm : Pairwise fun i j => ∀ (x y : G), x ∈ H i → y ∈ H j → Commute x y} : (Subgroup.noncommPiCoprod hcomm).range = ⨆ i, H i\", \"doc\": \"\"}\n  {\"name\": \"AddMonoidHom.noncommPiCoprod\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {M : Type u_1} [AddMonoid M] {ι : Type u_2} [Fintype ι] {N : ι → Type u_3} [(i : ι) → AddMonoid (N i)] (ϕ : (i : ι) → N i →+ M) (hcomm : Pairwise fun i j => ∀ (x : N i) (y : N j), AddCommute ((ϕ i) x) ((ϕ j) y)) : ((i : ι) → N i) →+ M\", \"doc\": \"The canonical homomorphism from a family of additive monoids. See also\\n`LinearMap.lsum` for a linear version without the commutativity assumption.\"}\n  {\"name\": \"MonoidHom.noncommPiCoprod\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {M : Type u_1} [Monoid M] {ι : Type u_2} [Fintype ι] {N : ι → Type u_3} [(i : ι) → Monoid (N i)] (ϕ : (i : ι) → N i →* M) (hcomm : Pairwise fun i j => ∀ (x : N i) (y : N j), Commute ((ϕ i) x) ((ϕ j) y)) : ((i : ι) → N i) →* M\", \"doc\": \"The canonical homomorphism from a family of monoids.\"}\n  {\"name\": \"AddSubgroup.noncommPiCoprod\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {G : Type u_1} [AddGroup G] {ι : Type u_2} {H : ι → AddSubgroup G} [Fintype ι] (hcomm : Pairwise fun i j => ∀ (x y : G), x ∈ H i → y ∈ H j → AddCommute x y) : ((i : ι) → ↥(H i)) →+ G\", \"doc\": \"The canonical homomorphism from a family of additive subgroups where elements from\\ndifferent subgroups commute\"}\n  {\"name\": \"Subgroup.noncommPiCoprod\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {G : Type u_1} [Group G] {ι : Type u_2} {H : ι → Subgroup G} [Fintype ι] (hcomm : Pairwise fun i j => ∀ (x y : G), x ∈ H i → y ∈ H j → Commute x y) : ((i : ι) → ↥(H i)) →* G\", \"doc\": \"The canonical homomorphism from a family of subgroups where elements from different subgroups\\ncommute\"}\n  {\"name\": \"AddMonoidHom.noncommPiCoprodEquiv\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {M : Type u_1} [AddMonoid M] {ι : Type u_2} [Fintype ι] {N : ι → Type u_3} [(i : ι) → AddMonoid (N i)] [DecidableEq ι] : { ϕ // Pairwise fun i j => ∀ (x : N i) (y : N j), AddCommute ((ϕ i) x) ((ϕ j) y) } ≃ (((i : ι) → N i) →+ M)\", \"doc\": \"The universal property of `MonoidHom.noncommPiCoprod`\\n\\nGiven monoid morphisms `φᵢ : Nᵢ → M` whose images pairwise commute,\\nthere exists a unique monoid morphism `φ : Πᵢ Nᵢ → M` that induces the `φᵢ`,\\n\"}\n  {\"name\": \"MonoidHom.noncommPiCoprodEquiv\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {M : Type u_1} [Monoid M] {ι : Type u_2} [Fintype ι] {N : ι → Type u_3} [(i : ι) → Monoid (N i)] [DecidableEq ι] : { ϕ // Pairwise fun i j => ∀ (x : N i) (y : N j), Commute ((ϕ i) x) ((ϕ j) y) } ≃ (((i : ι) → N i) →* M)\", \"doc\": \"The universal property of `MonoidHom.noncommPiCoprod`\\n\\nGiven monoid morphisms `φᵢ : Nᵢ → M` whose images pairwise commute,\\nthere exists a unique monoid morphism `φ : Πᵢ Nᵢ → M` that induces the `φᵢ`,\\n\"}\n  {\"name\": \"AddMonoidHom.noncommPiCoprod_range\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {G : Type u_1} [AddGroup G] {ι : Type u_2} {H : ι → Type u_3} [(i : ι) → AddGroup (H i)] (ϕ : (i : ι) → H i →+ G) [Fintype ι] {hcomm : Pairwise fun i j => ∀ (x : H i) (y : H j), AddCommute ((ϕ i) x) ((ϕ j) y)} : (AddMonoidHom.noncommPiCoprod ϕ hcomm).range = ⨆ i, (ϕ i).range\", \"doc\": \"\"}\n  {\"name\": \"MonoidHom.noncommPiCoprod_range\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {G : Type u_1} [Group G] {ι : Type u_2} {H : ι → Type u_3} [(i : ι) → Group (H i)] (ϕ : (i : ι) → H i →* G) [Fintype ι] {hcomm : Pairwise fun i j => ∀ (x : H i) (y : H j), Commute ((ϕ i) x) ((ϕ j) y)} : (MonoidHom.noncommPiCoprod ϕ hcomm).range = ⨆ i, (ϕ i).range\", \"doc\": \"\"}\n  {\"name\": \"AddMonoidHom.noncommPiCoprod_single\", \"module\": \"Mathlib.GroupTheory.NoncommPiCoprod\", \"type\": \" {M : Type u_1} [AddMonoid M] {ι : Type u_2} [Fintype ι] {N : ι → Type u_3} [(i : ι) → AddMonoid (N i)] (ϕ : (i : ι) → N i →+ M) {hcomm : Pairwise fun i j => ∀ (x : N i) (y : N j), AddCommute ((ϕ i) x) ((ϕ j) y)} [DecidableEq ι] (i : ι) (y : N i) : (AddMonoidHom.noncommPiCoprod ϕ hcomm) (Pi.single i\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: tensor products of modules, abstract ring Picard groups and unrelated coproduct names do not identify Picard groups of these scheme products."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]icard.*(prod|homotopy)|[Pp]ic.*polynomial|[Pp]icard.*[Aa]ffine[Ss]pace",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/Algebra/Tropical/BigOperators.lean\", \"line\": \"19\", \"text\": \"for expressing that evaluation of tropical polynomials are the minimum over a finite piecewise\"}\n  {\"file\": \"Mathlib/Data/Nat/Cast/Defs.lean\", \"line\": \"54\", \"text\": \"Some discussion is [on Zulip here](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/.E2.9C.94.20Polynomial.2Ecoeff.20example/near/395438147).\"}\n  {\"file\": \"Mathlib/Tactic/OfNat.lean\", \"line\": \"20\", \"text\": \"Some discussion is [on Zulip here](https://leanprover.zulipchat.com/#narrow/stream/287929-mathlib4/topic/.E2.9C.94.20Polynomial.2Ecoeff.20example/near/395438147).\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Module/Basic.lean\", \"line\": \"38\", \"text\": \"See https://leanprover.zulipchat.com/#narrow/stream/144837-PR-reviews/topic/.2315065.20polynomial.20modules\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Splits.lean\", \"line\": \"285\", \"text\": \"/-- Pick a root of a polynomial that splits. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Local.lean\", \"line\": \"29\", \"text\": \"(typically satisfied when `P` is the localization of a polynomial ring of finite type)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Local.lean\", \"line\": \"66\", \"text\": \"(typically satisfied when `P` is the localization of a polynomial ring of finite type)\"}\n  {\"file\": \"Mathlib/Analysis/ODE/PicardLindelof.lean\", \"line\": \"571\", \"text\": \"      rw [picard_eq_of_hasDerivAt (hf.continuousOn.mono (prod_subset_prod_left this))\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: tensor products of modules, abstract ring Picard groups and unrelated coproduct names do not identify Picard groups of these scheme products."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line bundles on product smooth rational proper variety split as external tensor products",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.prodRight\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Prod\", \"type\": \": M₁ ⊗[R] (M₂ × M₃) ≃ₗ[S] (M₁ ⊗[R] M₂) × (M₁ ⊗[R] M₃)\", \"doc\": \"Let $R$ be a commutative semiring and $S$ be an $R$-algebra. Let $M_1$ be an $S$-module that is also an $R$-module with compatible scalar multiplications (i.e., `IsScalarTower R S M₁`). Let $M_2$ and \"}\n  {\"name\": \"TensorProduct.prodLeft\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Prod\", \"type\": \": (M₁ × M₂) ⊗[R] M₃ ≃ₗ[S] (M₁ ⊗[R] M₃) × (M₂ ⊗[R] M₃)\", \"doc\": \"For modules $M_1, M_2$ over a commutative semiring $R$ and another $R$-module $M_3$, there is a linear equivalence between the tensor product $(M_1 \\\\times M_2) \\\\otimes_R M_3$ and the product of tensor\"}\n  {\"name\": \"TensorProduct.piLeft\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Pi\", \"type\": \": (∀ i, M i) ⊗[R] N ≃ₗ[R] ∀ i, M i ⊗[R] N\", \"doc\": \"For a commutative semiring $ R $, the tensor product $ \\\\left(\\\\prod_{i} M_i\\\\right) \\\\otimes_R N $ is linearly equivalent to $ \\\\prod_{i} (M_i \\\\otimes_R N) $, with the equivalence respecting the $ R $-mod\"}\n  {\"name\": \"TensorProduct.piRight\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Pi\", \"type\": \": N ⊗[R] (∀ i, M i) ≃ₗ[S] ∀ i, N ⊗[R] M i\", \"doc\": \"For commutative semirings $R$ and $S$ with $S$ an $R$-algebra, an $S$-module $N$ with compatible $R$-module structure, and a finite index type $\\\\iota$ with $R$-modules $M_i$, there is an $S$-linear eq\"}\n  {\"name\": \"FiberBundle.prod_trivializationAt'\", \"module\": \"Mathlib.Topology.FiberBundle.Constructions\", \"type\": \"∀ {B : Type u_1} [inst : TopologicalSpace B] (F₁ : Type u_2) [inst_1 : TopologicalSpace F₁] (E₁ : B → Type u_3)\\n  [inst_2 : TopologicalSpace (Bundle.TotalSpace F₁ E₁)] (F₂ : Type u_4) [inst_3 : TopologicalSpace F₂]\\n  (E₂ : B → Type u_5) [inst_4 : TopologicalSpace (Bundle.TotalSpace F₂ E₂)] [inst_5 :\", \"doc\": \"For two fiber bundles $ E_1 $ and $ E_2 $ over a common base space $ B $, the trivialization of their product bundle $ E_1 \\\\times^b E_2 $ at a point $ b \\\\in B $ is equal to the product of the triviali\"}\n  {\"name\": \"VectorBundle.prod\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \"[VectorBundle 𝕜 F₁ E₁] [VectorBundle 𝕜 F₂ E₂] : VectorBundle 𝕜 (F₁ × F₂) (E₁ ×ᵇ E₂)\", \"doc\": \"Given two vector bundles $ E_1 $ and $ E_2 $ over a common base space $ B $ with fibers $ F_1 $ and $ F_2 $, their product bundle $ E_1 \\\\times^b E_2 $ is a vector bundle over $ B $ with fiber $ F_1 \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] : FormallySmooth B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally smooth $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally smooth $ B $-algebra.\"}\n  {\"name\": \"Trivialization.coordChangeL_prod\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \"[e₁.IsLinear 𝕜] [e₁'.IsLinear 𝕜] [e₂.IsLinear 𝕜] [e₂'.IsLinear 𝕜] ⦃b⦄\\n  (hb : (b ∈ e₁.baseSet ∧ b ∈ e₂.baseSet) ∧ b ∈ e₁'.baseSet ∧ b ∈ e₂'.baseSet) :\\n  ((e₁.prod e₂).coordChangeL 𝕜 (e₁'.prod e₂') b : F₁ × F₂ →L[𝕜] F₁ × F₂) =\\n    (e₁.coordChangeL 𝕜 e₁' b : F₁ →L[𝕜] F₁).prodMap (e₂.coordChangeL 𝕜 e₂'\", \"doc\": \"Given two linear trivializations $ e_1 $ and $ e_2 $ of vector bundles over a nontrivially normed field $ \\\\mathbb{K} $, their product trivialization $ e_1 \\\\times e_2 $ is also linear with respect to t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: tensor products of modules, abstract ring Picard groups and unrelated coproduct names do not identify Picard groups of these scheme products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth integral variety the Picard group is invariant under taking the product with affine space",
+   "results": "Actual search output read: 8 hits; CommRing.relPic, instCommGroupPic, AlgebraicGeometry.AffineSpace, CommRing.relPic_eq_top, AlgebraicGeometry.AffineSpace.not_isIntegralHom, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', WeierstrassCurve.Affine.Point.toClass_some, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, affine-space structure morphisms, abstract tensor-product distribution and unrelated coproduct/homotopy names do not state Picard splitting for this scheme product."
+  },
+  {
+   "tool": "grep",
+   "query": "(Pic|picard).*(homotopy|affineSpace|polynomial)|(homotopy|affineSpace|polynomial).*(Pic|picard)",
+   "results": "Actual search output read: 25 hits; Mathlib/AlgebraicTopology/DoldKan/Faces.lean, Mathlib/AlgebraicTopology/DoldKan/Faces.lean, Mathlib/AlgebraicTopology/DoldKan/Degeneracies.lean, Mathlib/AlgebraicTopology/EilenbergSteenrod.lean, Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean, Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean, Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean, Mathlib/AlgebraicTopology/Quasicategory/TwoTruncated.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, affine-space structure morphisms, abstract tensor-product distribution and unrelated coproduct/homotopy names do not state Picard splitting for this scheme product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth integral scheme over a field pullback to affine space over that scheme is an isomorphism on Picard groups",
+   "results": "Actual search output read: 8 hits; AlgebraicGeometry.AffineSpace.over_over, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.Scheme.Pullback.affine_hasPullback, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, affine-space structure morphisms, abstract tensor-product distribution and unrelated coproduct/homotopy names do not state Picard splitting for this scheme product."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Polynomial\"",
+   "results": "Actual search output read: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, affine-space structure morphisms, abstract tensor-product distribution and unrelated coproduct/homotopy names do not state Picard splitting for this scheme product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every line bundle on affine space over a regular integral scheme is pulled back from the base scheme",
+   "results": "Actual search output read: 8 hits; AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.over_over, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, affine-space structure morphisms, abstract tensor-product distribution and unrelated coproduct/homotopy names do not state Picard splitting for this scheme product."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|CommRing.Pic",
+   "results": "Actual search output read: 3 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, affine-space structure morphisms, abstract tensor-product distribution and unrelated coproduct/homotopy names do not state Picard splitting for this scheme product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Line bundles on product smooth rational proper variety split as external tensor products",
+   "results": "Actual search output read: 8 hits; TensorProduct.prodRight, TensorProduct.prodLeft, TensorProduct.piLeft, TensorProduct.piRight, FiberBundle.prod_trivializationAt', VectorBundle.prod, Algebra.FormallySmooth.instTensorProduct, Trivialization.coordChangeL_prod",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, affine-space structure morphisms, abstract tensor-product distribution and unrelated coproduct/homotopy names do not state Picard splitting for this scheme product."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"prod\"",
+   "results": "Actual search output read: 12 hits; Finset.prodPiCons, AddSubgroup.noncommPiCoprod_range, Subgroup.noncommPiCoprod_range, AddMonoidHom.noncommPiCoprod, MonoidHom.noncommPiCoprod, AddSubgroup.noncommPiCoprod, Subgroup.noncommPiCoprod, AddMonoidHom.noncommPiCoprodEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, affine-space structure morphisms, abstract tensor-product distribution and unrelated coproduct/homotopy names do not state Picard splitting for this scheme product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group of a product with a smooth proper variety containing a dense affine space is the direct sum of the Picard groups",
+   "results": "Actual search output read: 8 hits; instCommGroupPic, CommRing.relPic, CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, CommRing.relPic_eq_top, CommRing.Pic.mk_tensor, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', Submodule.mulExact_unitsToPic_mapAlgebra, CommRing.Pic",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard groups, affine-space structure morphisms, abstract tensor-product distribution and unrelated coproduct/homotopy names do not state Picard splitting for this scheme product."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flag-projective-linear-system",
+  "date": "2026-10-24",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.22 (Iversen 1976, 2.7), printed pp.392--393, under the standing split connected group-variety hypothesis (automatic over F); definitions 18.1 and 18.7. Supporting Proposition 18.22 input: Proposition 18.22, proof, printed p.393, paragraph beginning Let V, and 18.12--18.13, printed p.390: projective complete-linear-system maps and the homogeneous tautological line (Iversen 1976, 1.2--1.3). Supporting complete-linear-system argument: product Picard splitting makes the inverse-translation family of a flag line bundle locally constant up to a parameter line.",
+   "via": [
+    "lem-sfb-flag-projective-linear-system",
+    "lem-sfb-picard-trivial-multiplicative-cover",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-cell-picard-product",
+  "worker": "stage1",
+  "summary": "Unchanged statement; complete nine-step product Picard proof using existing generic-fibre descent, affine-space triviality, supported-divisor pullback, and regular divisor-line dictionary. No new nodes. Verified all cited statements and their hypotheses, including absolute separatedness, regularity, integrality, finite presentation and rational-point sections.",
+  "blueprint": "Read latest sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and its direct-images proof (3). This auxiliary product-Picard argument supports the inherited flag complete-linear-system input of the alteration/moduli chain recorded in blueprint.from.place. Preserve the inherited null ancestor and via chain, since blueprint_refs ancestor returns None; no chapter/unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Regularity over a field, a generic geometric tool. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic quasi-compactness and quasi-separatedness over an affine base. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "lem-sc-separated-over-affine-scheme-separated",
+    "why": "Absolute separatedness needed by the divisor dictionary. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Flatness and local finite presentation of the smooth projections. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Existence of a rational point of the nonempty smooth parameter scheme. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Smoothness of the two product projections. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Universal openness for the existing integral pullback tool. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Finite presentation of the product projections. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Separatedness and finite type of a product projection. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Finite type of the total product. No node of the present unit supplies this foundational fact."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Smoothness of affine space over the parameter base. No node of the present unit supplies this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-pc-smooth-flat",
+  "lem-pc-rational-points-dense",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-5f4badb41",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-5f4badb41 (reviewer sub-agent of L); spot-checked: Read every step, all 19 cited statements and the Stacks places: 02TT chow.tex l.5651, 0BDA divisors.tex l.7187, 0BE9 divisors.tex l.6908, 056S varieties.tex. The item statement is byte-identical to the live unsplit node. Live is still unsplit, there is no repair note, and the delivery has no new nodes. The proof is correct. Steps 2/3: vertical-divisors is applied to p_X with V=U and to A^d_T→T with V=T. Its hypotheses all hold: base regular and locally Noetherian; separated, smooth, fp; nonempty integral geometric fibres. integral-pullback is used with X→Spec F flat, universally open and geometrically integral, and T integral and locally Noetherian. Step 5: the descent node's hypotheses (regular, integral, separated, finite-type S=T and Y=A; smooth surjective; geometrically integral fibres) are verified. Affine-space triviality is applied over K=F(T); the node is stated over any field. Step 6: the dictionary needs W regular, Noetherian and separated, and gets it from steps 2/4. The supported-divisor isomorphism gives D_X. The flat Cartier-pullback clause gives p_X^*O(D_X)≅H'. Steps 7-9 are genuinely elementary: injectivity comes from pulling back along the sections (id,t_*) and (x_0,id) with the composite-pullback clause. Edge cases d=0, T=Spec F and X=P^1 check out. Advisory: step 4 does not cite composition again for finite type of A over F; it is cited in step 2. Grep found no product-Picard/seesaw duplicate. The 11 tool_uses are generic scheme foundations; accepted. Batch-5: both flagged nodes (smooth-integral-fibre-vertical-divisors, regular-space-divisor-line-dictionary) reach 181 sec-trace-formula/sec-poincare-duality nodes. All are def/lem foundations (algebraic-space definition, fppf/étale descent, UFD/height-one, projective-bundle calculus; units sk-i-curve-zero, sk-i-additivity, sk-d-weil, sk-lem-finite). There is no thm/sk/nt node, no trace-formula or Poincaré statement, and no cycle. These are general foundations outside both assumptions, so they are accepted. lem-pod-separated-finite-type-base-change is likewise a generic Mathlib leaf. No SGA is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineCellPicardProduct",
+  "declaration": "AlgebraicGeometry.affineCellPicardProduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineCellPicardProduct.lean",
+  "statement": "theorem affineCellPicardProduct (F : Type u) [Field F] [IsAlgClosed F] (X T : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of F)) (g : T ⟶ Spec (CommRingCat.of F)) [Smooth f] [IsProper f] [GeometricallyIntegral f] [Smooth g] [GeometricallyIntegral g] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (d : ℕ) (U : X.Opens) (hU : Dense (U : Set X)) (cell : U.toScheme ≅ AffineSpace (ULift.{u} (Fin d)) (Spec (CommRingCat.of F))) (hcell : cell.hom ≫ (AffineSpace (ULift.{u} (Fin d)) (Spec (CommRingCat.of F)) ↘ Spec (CommRingCat.of F)) = U.ι ≫ f) : ∃ e : (X.Pic × T.Pic) ≃* (pullback f g).Pic, (∀ (M : X.Pic) (N : T.Pic), e (M, N) = Scheme.Pic.map (pullback.fst f g) M * Scheme.Pic.map (pullback.snd f g) N) ∧ (∀ (t₀ : Spec (CommRingCat.of F) ⟶ T) (ht₀ : t₀ ≫ g = 𝟙 _) (H : (pullback f g).Modules) (L : X.Modules), H.IsInvertible → L.IsInvertible → Nonempty ((Scheme.Modules.tensorPullback (pullback.lift (𝟙 X) (f ≫ t₀) ((Category.id_comp f).trans (((Category.assoc f t₀ g).trans ((congrArg (f ≫ ·) ht₀).trans (Category.comp_id f))).symm)))).obj H ≅ L) → ∃ N : T.Modules, N.IsInvertible ∧ Nonempty (H ≅ (Scheme.Modules.tensorPullback (pullback.fst f g)).obj L ⊗ (Scheme.Modules.tensorPullback (pullback.snd f g)).obj N))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e9b818af8",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Every clause matches the node: alg-closed F:Type u; X with Smooth/IsProper/GeometricallyIntegral f; dense U ≅ AffineSpace (ULift (Fin d)) over F via hcell; T with Smooth/GeometricallyIntegral/IsSeparated/LOFT+QC g; ∃ e : X.Pic × T.Pic ≃* Pic(X×_F T) with every value fixed as Pic.map fst M * Pic.map snd N (ordinary pullback, same classes as tensor pullback via the recorded tensorOrdinaryPullbackIso); final clause over every t₀ with t₀≫g=𝟙 and invertible H, L restricted along lift(𝟙, f≫t₀) ⇒ ∃ invertible N with H ≅ p_X^*L ⊗ p_T^*N. Edge cases d=0, empty X/T (excluded by geometric integrality), T=Spec F, X=P1 and universes OK. Statement byte-identical to live; only lean and stmt_deps changed; the three added stmt_deps are existing nodes with lean records (brief l.177); lean.statement verbatim. Mechanical theorem-stmt_dep finding on lem-sc-pic-group: ≃* and * need Scheme.Pic.instCommGroup, which is that lemma's recorded constructed instance and is owned by no def node → genuine dependency, PASS on point (Q31 791a precedent). No new defs; sorry only; docstrings carry the source and all 9 proof steps; searches recorded; no duplicate notion; imports exist in live. Advisory: the tensor-ordinary comparison stmt_dep is cited but not used in the signature. No compile (no file changed)."
+ }
+}

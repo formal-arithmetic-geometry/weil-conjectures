@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-dvr-tame-unramified-compositum-permanence",
+ "kind": "statement",
+ "title": "Unramified and tame extensions under arbitrary local DVR base extension",
+ "statement": "Let $R\\hookrightarrow S$ be an injective local homomorphism of discrete valuation rings [def-sc-discrete-valuation-ring], with fraction fields $F\\subseteq E$ and common residue characteristic $p>0$, where $p$ is prime. Let $T/F$ be a finite separable field extension [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension]. Put $C=\\operatorname{IntCl}_T(R)$ [def-weil-pbc-integral-closure]. For each maximal ideal $\\mathfrak n$ of $C$, write $e_{\\mathfrak n}$ for the positive integer satisfying $\\mathfrak m_R C_{\\mathfrak n}=\\mathfrak m_{C_{\\mathfrak n}}^{e_{\\mathfrak n}}$, and write $k_{\\mathfrak n}=C/\\mathfrak n$ [def-weil-pbc-localization-at-prime]. The algebra $T\\otimes_F E$ [def-weil-pbc-module-tensor-product] is a finite product of fields $\\prod_i U_i$. Write $D_i=\\operatorname{IntCl}_{U_i}(S)$. For every maximal ideal $\\mathfrak q$ of $D_i$, the ring $(D_i)_{\\mathfrak q}$ is a DVR, the inclusion $S\\hookrightarrow(D_i)_{\\mathfrak q}$ is local, and its residue extension is finite. If all $e_{\\mathfrak n}=1$ and all $k_{\\mathfrak n}/(R/\\mathfrak m_R)$ are separable, then for every $i,\\mathfrak q$ one has $\\mathfrak m_S(D_i)_{\\mathfrak q}=\\mathfrak m_{(D_i)_{\\mathfrak q}}$ and $(D_i/\\mathfrak q)/(S/\\mathfrak m_S)$ is separable. If instead all $e_{\\mathfrak n}$ are prime to $p$ and the same residue extensions are separable, then every new ramification index, defined by $\\mathfrak m_S(D_i)_{\\mathfrak q}=\\mathfrak m_{(D_i)_{\\mathfrak q}}^{e_{i,\\mathfrak q}}$, is prime to $p$ and every new residue extension is separable. Local means that the inverse image of the maximal ideal is the maximal ideal. No finiteness, completeness, or separability assumption on $S/R$ is made.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EXY, lemma-tame-goes-up, assertions (1) and (2), with the finite separable normalization facts in Tag 09E8, remark-finite-separable-extension; definitions of tame and unramified immediately before Tag 0EXR."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "First, for any field extension $E/F$, a finite separable $T/F$ is etale, and remains etale over $E$ by base change. Apply the etale-algebra-over-a-field theorem to obtain $T\\otimes_FE=\\prod_iU_i$, with each $U_i/E$ finite separable. The base-change citation applies to the singleton cover $\\operatorname{Spec}T\\to\\operatorname{Spec}F$, which is surjective because its rings are nonzero fields. We will use this same conclusion for other finite separable field extensions below.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, lemma-tame-goes-up, opening paragraph"
+   }
+  },
+  {
+   "text": "Apply the finite case (a) of the algebraic-normalization structure theorem with the identity DVR map $S\\to S$ and the field extension $U_i/E$. It gives the DVR localizations $(D_i)_{\\mathfrak q}$ and finite residue extensions over $S/\\mathfrak m_S$. Their structural maps from $S$ are injective and local: maximal ideals contract to $\\mathfrak m_S$, and denominators outside the contracted prime are units. Their fraction fields are $U_i$. Explicitly, for $x\\in U_i$ choose a monic equation over $E$ and a power $s$ of a uniformizer of $S$ making all coefficients of the equation for $sx$ integral; then $sx\\in D_i$, so $x\\in\\operatorname{Frac}(D_i)$. The same observations apply to $C_{\\mathfrak n}$ over $R$. This proves all unconditional clauses.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09E8 and 09EM, finite normalization branches"
+   }
+  },
+  {
+   "text": "Suppose the original indices are one and the original residue extensions are separable. Fix $V=(D_i)_{\\mathfrak q}$. The map $T\\to U_i$ sends $C$ into $D_i$: a monic equation over $R$ is a monic equation over $S$. Contract $\\mathfrak m_V$ to $\\mathfrak n\\subset C$. This prime contains a nonzero uniformizer of $R$, so it is maximal by the dimension-one assertion of the normalization structure theorem. Localization gives a local injection $C_{\\mathfrak n}\\to V$. The finite-separable-fraction theorem makes $C_{\\mathfrak n}$ essentially of finite type over $R$. Its index-one equality and separable residue extension therefore give $\\Omega_{C_{\\mathfrak n}/R}=0$ by the local unramified criterion.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-sbc-dvr-finite-separable-fraction-ess-finite-type",
+    "lem-sfb-essentially-finite-type-local-unramified-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, case (1), expressed using the local criterion instead of a global etale model"
+   }
+  },
+  {
+   "text": "Apply the unramified compositum theorem with its $(R,V,A,T)$ equal to $(R,C_{\\mathfrak n},S,(D_i)_{\\mathfrak q})$ and its field equal to $U_i$. The maps and locality were checked above. Its algebra-generation hypothesis holds: the field factor $U_i$ is generated by the images of $E$ and $T$, since each pure tensor maps to the product of these images. Moreover $E=S[1/\\pi]$ for a uniformizer $\\pi$ of $R$: writing its nonzero image as a unit times a positive power of an $S$-uniformizer proves this equality. Since $T$ contains $1/\\pi$, the $S$-algebra generated by $T$ already contains $E$. The theorem gives essential finite type and zero differentials for $S\\to(D_i)_{\\mathfrak q}$. The local criterion gives precisely the required maximal-ideal equality and separable residue extension. Thus the whole unramified assertion is proved for arbitrary local DVR base extension; it may now be applied to other DVR pairs.",
+   "uses": [
+    "lem-sbc-dvr-unramified-compositum-base-change",
+    "lem-sfb-essentially-finite-type-local-unramified-criterion",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, case (1)"
+   }
+  },
+  {
+   "text": "Now suppose the original extension is tame. Choose a uniformizer $\\pi$ of $R$. Uniformizer-root domination supplies $m\\geq1$ prime to $p$, a finite separable $T'/F$ containing $T$ and $F_m=F(a)$ with $a^m=\\pi$, such that $T'/F_m$ is unramified over the DVR $R_m=R[a]$. Its residue field is $R/\\mathfrak m_R$. This is an auxiliary extension, not a replacement of the field factors whose conclusion we must prove.",
+   "uses": [
+    "lem-sfb-tame-extension-uniformizer-root-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, case (2), using Tag 0EXW"
+   }
+  },
+  {
+   "text": "Fix a factor $U=U_i$ and a maximal ideal $\\mathfrak q$ of $D=\\operatorname{IntCl}_U(S)$. The algebra $T'\\otimes_TU$ is nonzero (tensor a $T$-basis of $T'$), finite etale over $U$, and hence has a field factor $W$. It contains $U$ and $T'$ compatibly over $T$ and is generated by them. Let $J=\\operatorname{IntCl}_W(S)$. The inclusion $D\\subseteq J$ is integral, since each element of $J$ already satisfies a monic equation over $S\\subseteq D$. Lying over gives a prime $\\mathfrak r$ of $J$ above $\\mathfrak q$; it is maximal and $J_{\\mathfrak r}$ is a DVR by the normalization structure theorem, since $W/E$ is finite separable. Write $Z=J_{\\mathfrak r}$. Then $D_{\\mathfrak q}\\to Z$ is an injective local map.",
+   "uses": [
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-sfb-dvr-algebraic-normalization-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, first omitted detail: lift each chosen branch before descending"
+   }
+  },
+  {
+   "text": "Inside $W$ put $L=E(a)$ and $B=\\operatorname{IntCl}_L(S)$; contract $\\mathfrak m_Z$ to $\\mathfrak b\\subset B$. Then $B_{\\mathfrak b}$ is a DVR with fraction field $L$ and the induced map $R_m\\to B_{\\mathfrak b}$ is local: $a^m=\\pi$ lies in its maximal ideal, so $a$ does too. It is injective as a map of subrings of $W$. The field $W$ is a factor of $T'\\otimes_{F_m}L$: its image contains $U=E\\cdot T$ and $T'$, hence generates $W$, and a finite-dimensional domain over $L$ is a field. Apply the already proved unramified assertion (steps 2–4) to $R_m\\to B_{\\mathfrak b}$ and $T'/F_m$. It follows that $Z/B_{\\mathfrak b}$ has index one and separable residue extension. To identify the selected localization, use transitivity of integrality to identify normalization first over $S$ and then over $B$, and integral-closure localization to pass to $B_{\\mathfrak b}$; contraction of $\\mathfrak r$ then gives exactly $Z$.",
+   "uses": [
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-weil-pbc-integral-transitive",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, case (2), unramified extension over the selected root-field branch"
+   }
+  },
+  {
+   "text": "It remains to bound the index and residue extension of $L/E$. Write $\\pi=u\\theta^t$ in $S$, where $\\theta$ is a uniformizer, $u$ a unit, and $t\\geq1$. Put $g=\\gcd(m,t)$, $h=m/g$, $d=t/g$. Choose $y$ with $y^h=\\theta$ in an algebraic extension of $L$, put $V=L(y)$, and set $z=a/y^d$. Then $z^m=u$ and $a=zy^d$, so $V=E(y,z)$. By the uniformizer-root-algebra theorem $S_y=S[y]$ is a DVR with uniformizer $y$, fraction field $E(y)$, and residue field $S/\\mathfrak m_S$ (reduce its presentation modulo $y$). The unit-binomial theorem says $S_y[Z]/(Z^m-u)$ is finite etale. Its generic field factor selected by $Z\\mapsto z$ is precisely $V$. The normal-generic-components theorem identifies the corresponding component with $H=\\operatorname{IntCl}_V(S_y)$ and makes it finite etale over $S_y$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "lem-sbc-dvr-uniformizer-root-algebra",
+    "lem-sfb-unit-binomial-finite-etale",
+    "lem-sfb-finite-etale-normal-generic-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, last paragraph: explicit binomial chart and its normalization"
+   }
+  },
+  {
+   "text": "The ring $H$ is also the integral closure of $S$ in $V$: $S_y/S$ is integral, so transitivity gives one inclusion, while a monic equation over $S$ is also one over $S_y$. By lying over choose a maximal ideal $\\mathfrak h$ of $H$ above $\\mathfrak b$ of $B$; here $H/B$ is integral because its elements are integral over $S$. Put $Q=H_{\\mathfrak h}$. It is a DVR by the normalization structure theorem. Since $H/S_y$ is etale, the etale maximal-ideal and residue-field theorems give $\\mathfrak m_{S_y}Q=\\mathfrak m_Q$ and a finite separable residue extension. Consequently $y$ is a uniformizer of $Q$, and $\\theta=y^h$ has valuation $h$ in $Q$.",
+   "uses": [
+    "lem-weil-pbc-integral-transitive",
+    "lem-weil-pbc-integral-injective-lying-over",
+    "lem-sfb-dvr-algebraic-normalization-structure",
+    "lem-weil-pbc-etale-prime-generates-maximal",
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, last omitted detail: choose a chart branch above the specified branch"
+   }
+  },
+  {
+   "text": "Let $b=e(B_{\\mathfrak b}/S)$ and $c=e(Q/B_{\\mathfrak b})$, both positive. If $\\beta$ is a uniformizer of $B_{\\mathfrak b}$, write $\\theta=v\\beta^b$ there with $v$ a unit; then in $Q$ it gives $h=bc$. Thus $b\\mid h\\mid m$, so $p\\nmid b$. The local injection $B_{\\mathfrak b}\\to Q$ embeds its residue field into that of $Q$. Every element of this subfield is separable over $S/\\mathfrak m_S$, since its minimal polynomial divides a separable polynomial for the same element in the larger field. Hence $B_{\\mathfrak b}/S$ has separable residue extension. Together with step 7, the valuation formula in a DVR gives $e(Z/S)=b\\cdot1=b$, and transitivity of separable algebraic extensions gives separability of $\\kappa(Z)/\\kappa(S)$.",
+   "uses": [
+    "lem-zl-separable-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, end of proof; explicit index and residue computations"
+   }
+  },
+  {
+   "text": "Finally apply the same valuation calculation to the tower $S\\to D_{\\mathfrak q}\\to Z$. The positive index $e(D_{\\mathfrak q}/S)$ divides $e(Z/S)$ and is therefore prime to $p$. The residue field $D/\\mathfrak q$ embeds into $\\kappa(Z)$, so its elements are separable over $S/\\mathfrak m_S$ by the minimal-polynomial argument of step 10. Its degree is finite by step 2. The original factor $U_i$ and the prime $\\mathfrak q$ were arbitrary; this gives every required tame branch, including the case $m=1$. No hypothesis on the degree, completeness or separability of $S/R$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EXY, subextension descent (the first omitted detail)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-dvr-finite-separable-fraction-ess-finite-type",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-sbc-dvr-unramified-compositum-base-change",
+  "lem-sfb-dvr-algebraic-normalization-structure",
+  "lem-sfb-essentially-finite-type-local-unramified-criterion",
+  "lem-sfb-finite-etale-normal-generic-components",
+  "lem-sfb-tame-extension-uniformizer-root-domination",
+  "lem-sfb-unit-binomial-finite-etale",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-integral-transitive",
+  "lem-zl-separable-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EXY, lemma-tame-goes-up, complete proof with both omitted branch-selection/descent details written explicitly; local unramified case via the existing compositum theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An unramified or tamely ramified finite separable extension of a discrete valuation field remains unramified or tamely ramified in every field compositum branch after any local DVR base extension",
+   "results": "8 hits; IsUnramifiedAtInfinitePlaces.trans, IsUnramifiedAtInfinitePlaces.top, Algebra.Unramified.comp, Algebra.IsUnramifiedAt.of_liesOver, NumberField.InfinitePlace.IsUnramified.comap, NumberField.InfinitePlace.IsUnramified.of_restrictScalars, Algebra.IsUnramifiedAt.comp, IsUnramifiedAtInfinitePlaces.bot. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-theoretic unramified baseChange and ramificationIdx_eq_one do not state normalized-field-branch permanence, and do not give the tame clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For local extensions of discrete valuation rings unramified field extensions stay unramified and tame field extensions stay tame under extension of the base valued field",
+   "results": "8 hits; IsUnramifiedAtInfinitePlaces.trans, IsUnramifiedAtInfinitePlaces.top, NumberField.InfinitePlace.IsUnramified.of_restrictScalars, IsUnramifiedAtInfinitePlaces.bot, NumberField.InfinitePlace.IsUnramified.comap, Algebra.IsUnramifiedAt.of_liesOver, IsUnramifiedAtInfinitePlaces, NumberField.InfinitePlace.IsUnramified.comap_algHom. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-theoretic unramified baseChange and ramificationIdx_eq_one do not state normalized-field-branch permanence, and do not give the tame clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unramified or tamely ramified finite separable extension of a discrete valuation field remains unramified or tamely ramified in every field compositum branch after any local DVR base extension",
+   "results": "8 hits; Algebra.Unramified.baseChange, Algebra.FormallyUnramified.iff_isSeparable, Algebra.Unramified, Algebra.Unramified.comp, Algebra.Unramified.formallyUnramified, Algebra.IsUnramifiedAt.of_restrictScalars, Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, Algebra.FormallyUnramified.comp. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-theoretic unramified baseChange and ramificationIdx_eq_one do not state normalized-field-branch permanence, and do not give the tame clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For local extensions of discrete valuation rings unramified field extensions stay unramified and tame field extensions stay tame under extension of the base valued field",
+   "results": "8 hits; Algebra.Unramified.baseChange, Algebra.IsUnramifiedAt.of_restrictScalars, IsUnramifiedAtInfinitePlaces.bot, IsUnramifiedAtInfinitePlaces.top, IsUnramifiedAtInfinitePlaces.isUnramified, Valuation.HasExtension.instIsLocalHomValuationInteger, Valuation.HasExtension.ofComapInteger, Valuation.HasExtension.casesOn. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-theoretic unramified baseChange and ramificationIdx_eq_one do not state normalized-field-branch permanence, and do not give the tame clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.IsUnramifiedAt",
+   "results": "0 hits; . ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-theoretic unramified baseChange and ramificationIdx_eq_one do not state normalized-field-branch permanence, and do not give the tame clause."
+  },
+  {
+   "tool": "grep",
+   "query": "tame.*(baseChange|base_change|compositum)|unramified.*(compositum|baseChange)|ramificationIdx.*coprime",
+   "results": "3 hits; Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/RingTheory/RingHom/Etale.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring-theoretic unramified baseChange and ramificationIdx_eq_one do not state normalized-field-branch permanence, and do not give the tame clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unramified and tame finite separable field extensions remain unramified and tame on every normalized branch after arbitrary local extension of discrete valuation rings",
+   "results": "8 hits: Algebra.IsUnramifiedAt.of_liesOver, IsUnramifiedAtInfinitePlaces.top, IsUnramifiedAt.of_liesOver_of_ne_bot, IsUnramifiedAtInfinitePlaces.trans, IsUnramifiedAtInfinitePlaces, IsUnramifiedAtInfinitePlaces.bot, NumberField.InfinitePlace.IsUnramified.comap, Algebra.IsUnramifiedAt.comp",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified algebra base change and local criteria do not cover normalized tame branches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unramified and tame extensions of discrete valuation fields are preserved under arbitrary extension of the base valued field",
+   "results": "8 hits: Algebra.Unramified.baseChange, IsUnramifiedAtInfinitePlaces.top, IsUnramifiedAtInfinitePlaces.bot, Algebra.IsUnramifiedAt.of_restrictScalars, NumberField.InfinitePlace.IsUnramified.comap_algHom, Algebra.Unramified.comp, NumberField.InfinitePlace.IsUnramified.comap, NumberField.InfinitePlace.IsUnramified.of_restrictScalars",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified algebra base change and local criteria do not cover normalized tame branches."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.IsUnramifiedAt",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified algebra base change and local criteria do not cover normalized tame branches."
+  },
+  {
+   "tool": "grep",
+   "query": "tame.*(baseChange|base_change|compositum)|unramified.*compositum",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified algebra base change and local criteria do not cover normalized tame branches."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-normal-ramification-filtration",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through lem-sfb-epp-finite-coefficient-triple: Stacks 09F8 lemma-special-case, normal-closure/inertia paragraph and the following induction paragraph. The latest blueprint direct-image proof (3) no longer contains this historical auxiliary algebra argument. Supporting input: unramified/tame permanence in the branchwise induction",
+   "via": [
+    "lem-sfb-epp-normal-ramification-filtration",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-tame-unramified-compositum-permanence",
+  "worker": "stage1",
+  "summary": "Read Stacks 0EXY, 0EXW, 09E8 and local normalization inputs. Statement unchanged. Proved unconditional branch structure, unramified permanence via the existing local compositum theorem, and tame permanence by uniformizer-root domination plus an explicit binomial chart. Lifted arbitrary chosen primes by lying over and descended indices and residue separability explicitly. Two new nodes: the 0EXW domination statement and a general local unramified criterion which is a Mathlib leaf.",
+  "blueprint": "Historical supporting algebra under det-thm-sf-ctf-stability-direct-images proof (3), inherited through the existing created.item chain. The latest blueprint direct-image proof (3) no longer includes that historical Epp route; its source tag and existing ancestry are preserved. blueprint_refs ancestor returns None. Searches for tame, tamely ramified, unramified, root of a uniformizer, and local ring found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-dvr-finite-separable-fraction-ess-finite-type",
+    "why": "Generic field, normalization, etale, or local DVR algebra tool used in the Stacks 0EXY argument; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-sbc-dvr-uniformizer-root-algebra",
+    "why": "Generic field, normalization, etale, or local DVR algebra tool used in the Stacks 0EXY argument; it does not replace any six-functor unit step."
+   },
+   {
+    "node": "lem-sbc-dvr-unramified-compositum-base-change",
+    "why": "Generic field, normalization, etale, or local DVR algebra tool used in the Stacks 0EXY argument; it does not replace any six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-dvr-finite-separable-fraction-ess-finite-type",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-sbc-dvr-unramified-compositum-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-13b9f87bb",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-13b9f87bb (reviewer sub-agent of L); spot-checked: I read Stacks 0EXY (lemma-tame-goes-up, both omitted details), 0EXW with its proof, 09EV, 09E8 and the definitions of tame/unramified. The item statement is unchanged and matches 0EXY(1),(2) and 09E8. There is no repair note, so the re-split rule does not apply. Steps 1-4: the T⊗E product, normalization-structure case (a) with identity S→S, then C_n ess. finite type → Ω=0 via the new criterion. The unramified-compositum node hypotheses all hold: generation follows from E=S[1/π_R] and the surjectivity of the pure tensors. Steps 5-11: 0EXW domination, then a lift of the prescribed (U_i,q) to (W,r) by lying over. Clause (1), proved in steps 2-4 for arbitrary data, is applied to R_m→B_b (local because a^m=π ∈ b). Z is identified via transitivity plus integral-closure localization. Binomial chart: z^m=u checked, S_y is a DVR, m is a unit, normal-generic-components gives H. The valuation computation h=bc gives b|m. Residue separability goes by subfield plus lem-zl transitivity, then descends to D_q. Edge cases checked: m=1, m|t, several factors, arbitrary κ_S/κ_R. New nodes: (1) the 0EXW domination node is a true, self-contained statement, not a restated clause, and has no DAG duplicate (rg for 0EXW, Abhyankar, root-of-π, tame nodes). (2) The ess.-finite-type local unramified criterion is an exact Mathlib leaf, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq at LocalRing.lean:117-121 (variables at 44 and 53); it generalizes the trf stalk node. The sbc DVR tools in split_report.tool_uses are acceptable generic local algebra. One implicit fact: maximal ideals of D_i contract to m_S because D_i is integral over S; this is elementary. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrTameUnramifiedCompositumPermanence",
+  "declaration": "RingTheory.dvr_tame_unramified_compositum_permanence",
+  "file": "lean/Sheaf/RingTheory/DvrTameUnramifiedCompositumPermanence.lean",
+  "statement": "theorem dvr_tame_unramified_compositum_permanence (R : Type uR) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (S : Type uS) [CommRing S] [IsDomain S] [IsDiscreteValuationRing S] [Algebra R S] [FaithfulSMul R S] [IsLocalHom (algebraMap R S)] (F : Type uF) [Field F] [Algebra R F] [IsFractionRing R F] (E : Type uE) [Field E] [Algebra S E] [IsFractionRing S E] [Algebra F E] [Algebra R E] [IsScalarTower R F E] [IsScalarTower R S E] (p : ℕ) (hp : p.Prime) [CharP (IsLocalRing.ResidueField R) p] [CharP (IsLocalRing.ResidueField S) p] (T : Type uT) [Field T] [Algebra F T] [FiniteDimensional F T] [Algebra.IsSeparable F T] [Algebra R T] [IsScalarTower R F T] : ∃ (n : ℕ) (U : Fin n → Type (max uT uE)) (_ : ∀ i, Field (U i)) (_ : ∀ i, Algebra E (U i)) (_ : ∀ i, Algebra S (U i)) (_ : ∀ i, IsScalarTower S E (U i)), Nonempty (@AlgEquiv E (T ⊗[F] E) (∀ i, U i) _ _ _ Algebra.TensorProduct.rightAlgebra _) ∧ ∀ (i : Fin n) (q : Ideal (integralClosure S (U i))) [q.IsMaximal], ∃ (_ : IsLocalHom (algebraMap S (Localization.AtPrime q))), IsDiscreteValuationRing (Localization.AtPrime q) ∧ Module.Finite (IsLocalRing.ResidueField S) q.ResidueField ∧ ((∀ (v : Ideal (integralClosure R T)) [v.IsMaximal], ∃ (_ : IsLocalHom (algebraMap R (Localization.AtPrime v))), (IsLocalRing.maximalIdeal R).map (algebraMap R (Localization.AtPrime v)) = IsLocalRing.maximalIdeal (Localization.AtPrime v) ∧ Algebra.IsSeparable (IsLocalRing.ResidueField R) v.ResidueField) → (IsLocalRing.maximalIdeal S).map (algebraMap S (Localization.AtPrime q)) = IsLocalRing.maximalIdeal (Localization.AtPrime q) ∧ Algebra.IsSeparable (IsLocalRing.ResidueField S) q.ResidueField) ∧ ((∀ (v : Ideal (integralClosure R T)) [v.IsMaximal], ∃ (_ : IsLocalHom (algebraMap R (Localization.AtPrime v))) (e : ℕ), 0 < e ∧ Nat.Coprime e p ∧ (IsLocalRing.maximalIdeal R).map (algebraMap R (Localization.AtPrime v)) = IsLocalRing.maximalIdeal (Localization.AtPrime v) ^ e ∧ Algebra.IsSeparable (IsLocalRing.ResidueField R) v.ResidueField) → ∃ e : ℕ, 0 < e ∧ Nat.Coprime e p ∧ (IsLocalRing.maximalIdeal S).map (algebraMap S (Localization.AtPrime q)) = IsLocalRing.maximalIdeal (Localization.AtPrime q) ^ e ∧ Algebra.IsSeparable (IsLocalRing.ResidueField S) q.ResidueField)",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d224ad02",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Read the item node, all 6 Mathlib-matched stmt_deps, Stacks 0EXY, the tame/unramified definitions and 09E8, the module and report.md (real Worker report and Second reading sections). Every hypothesis matches: DVRs; injective (FaithfulSMul) and local R→S; fraction fields with towers R F E and R S E pinning F→E; prime residue char p on both residue fields; T/F finite separable; C=integralClosure R T. The E-AlgEquiv decomposition T⊗[F]E ≅ Π U_i (canonical right algebra) is existential, which is equivalent because factors are unique up to E-isomorphism; the S-action is pinned by the S E U_i tower. Unconditional clauses: local hom, DVR, finite residue extension. Unramified clause: ideal equality plus separability. Tame clause: positive e coprime to p with the ideal-power equality plus separability. The antecedents' local-hom witnesses always hold (C/R integral), so no extra hypothesis. Universes bound, statement verbatim. Edge cases: R=S, T=F, e=1, nonlocal normalizations, n=0 impossible. H4: upstream DvrTame*/Abhyankar/compositum theorems need finiteness or root data, so no existing match; live node unrecorded, no duplicate module. No definitions, sorry only, source and blueprint docstrings present, imports exist. Non-blocking: the proof-step docstring TeX lost its backslashes and $ signs (content complete); regenerate in stage 3. No compile run (no file changed)."
+ }
+}

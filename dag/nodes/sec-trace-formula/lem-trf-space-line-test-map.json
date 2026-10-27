@@ -1,0 +1,151 @@
+{
+ "id": "lem-trf-space-line-test-map",
+ "kind": "statement",
+ "title": "Unique canonical relative-Proj morphism on a generating scheme test",
+ "statement": "Let S be a scheme, F a presheaf on S-schemes, T an S-scheme, f:F→h_T, A affine-basis graded algebra data on T, L a coherent cartesian family of invertible modules on F-tests, and ψ a graded line map [def-trf-space-line-module-proj-input]. For a scheme test W with ψ.generationSet W equal to all of W, there exists a unique morphism q:W→Proj_T(A) over S such that q is over T and, after every further scheme test V→W, every affine base open C and every trivialization e of L_V, any scalar ring homomorphism α agreeing with the homogeneous components of ψ and carrying the irrelevant ideal to the unit ideal gives V→W→Proj_T(A)=Proj.fromOfGlobalSections(α) followed by the relative-Proj chart embedding. This is the predicate IsCanonicalTestMap defined in the attached module. The result includes empty schemes and requires no finite generation or degree-one generation.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NK and 01O9, construction and uniqueness of the morphism from the generation locus."
+ },
+ "stmt_deps": [
+  "def-trf-space-line-module-proj-input"
+ ],
+ "proof": [
+  {
+   "text": "Cover W by affine opens above affine base opens on which the invertible module has a frame. Transport the homogeneous images to scalars. The unit and multiplication laws and the direct-sum decomposition extend them to a ring homomorphism. Shrink around positive-degree generators; their scalar images are units, so the irrelevant ideal maps to the unit ideal. Apply Proj.fromOfGlobalSections on each such open, followed by the relative-Proj chart embedding.",
+   "uses": [
+    "def-trf-space-line-module-proj-input",
+    "def-sc-invertible-module",
+    "lemma-nagata-relative-proj-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK and 01O9, construction and uniqueness of the morphism from the generation locus."
+   }
+  },
+  {
+   "text": "Changing the frame scales degree n by the nth power of a unit and hence preserves every degree-zero homogeneous fraction. The restriction laws of ψ and the relative-Proj chart equations identify maps after an affine base refinement. Cover arbitrary intersections by affine refinements; equality of the fraction maps gives the overlap equations. Glue to obtain q, and use the degree-zero scalar equation to show it is over T.",
+   "uses": [
+    "def-trf-space-line-module-proj-input",
+    "lemma-nagata-relative-proj-exists",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK and 01O9, construction and uniqueness of the morphism from the generation locus."
+   }
+  },
+  {
+   "text": "For an arbitrary further test, cartesian coherence identifies its line and powers with the specified tensor pullbacks. Naturality gives the same homogeneous fractions on the inverse images of the generating cover. This proves the required test formula. Conversely the formula fixes q on trivializing affine generator opens, which cover W. Morphism equality on an open cover proves uniqueness, also for the empty cover.",
+   "uses": [
+    "def-trf-space-line-module-proj-input",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NK and 01O9, construction and uniqueness of the morphism from the generation locus."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "def-trf-space-line-module-proj-input",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lemma-nagata-relative-proj-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01NK and 01O9, construction and uniqueness of the morphism from the generation locus."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "graded algebra homomorphism into tensor powers invertible module canonical morphism relative Proj generation locus",
+   "results": "Search succeeded; candidates: AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec. No theorem with the stated cartesian-test-family interface.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A graded map into tensor powers of a line bundle gives a unique canonical morphism from its generation locus to relative Proj, compatible with coefficientwise base change",
+   "results": "Search succeeded; candidates: AlgebraicGeometry.Proj.fromOfGlobalSections, GradedTensorProduct.hom_ext_iff, AlgebraicGeometry.Proj.awayι.congr_simp, AlgebraicGeometry.Proj.awayι_toSpecZero, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.toSpecZero. No theorem with the stated cartesian-test-family interface.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|unit_pow_mul|GradedBaseChange",
+   "results": "Search succeeded; candidates: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean. No theorem with the stated cartesian-test-family interface.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.SpaceLineModuleProjMap",
+  "date": "2026-10-23",
+  "group": "N4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Generation-open and relative-Proj construction in the polarized-descent helper under local-term locality; the same argument as the assigned parent, expressed on cartesian scheme tests.",
+   "via": [
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.SpaceLineTestMap",
+  "file": "lean/Sheaf/TraceFormula/SpaceLineTestMap.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.existsUnique_space_line_test_map",
+  "statement": "theorem existsUnique_space_line_test_map {S : Scheme.{u}}\n    {F : (Over S)ᵒᵖ ⥤ Type u} {T : Over S} {f : F ⟶ yoneda.obj T}\n    {A : T.left.GradedAlgebraData} {L : TestLineFamily F}\n    (hL : L.IsCoherent) (ψ : GradedLineMap f A L)\n    (W : SchemeTests F) (hW : ψ.generationSet W = Set.univ) :\n    ∃! q : W.left ⟶ projOver T A, ψ.IsCanonicalTestMap W q",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261023T151908-L-421279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261023T151908-L-421279",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

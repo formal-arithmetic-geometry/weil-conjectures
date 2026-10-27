@@ -207,7 +207,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-89d510cd6 (reviewer sub-agent of L); spot-checked: Read all seven steps, dependency statements, cited sources, and unit/chapter route. Localization, cone descent, and coefficient comparisons check out. Corrected two off-route preservation citations using existing on-route statements and repaired stale unit-metadata reporting. Statement unchanged; no new nodes. Review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.RationalLocalizedHom",
   "declaration": "AlgebraicGeometry.ProEtale.RationalLocalizedHom.rationalLocalizedHom",
@@ -263,5 +274,35 @@
   "landing": "20261021T225101-L-3764898",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $E/\\Ql$ be finite and $T$ a scheme. Every object of $\\Dbc(T,E)$ is\nisomorphic to $K_0[1/\\ell]$ for some $K_0\\in\\Dbc(T,\\mathcal O_E)$, and for\n$K_0,L_0\\in\\Dbc(T,\\mathcal O_E)$ and $q\\in\\mathbf Z$ the natural map\n\n$$\n\\Hom(K_0,L_0[q])\\otimes_{\\mathcal O_E}E\\xrightarrow{\\ \\sim\\ }\n\\Hom_{\\Dbc(T,E)}\\bigl(K_0[1/\\ell],L_0[1/\\ell][q]\\bigr)\n$$\n\nis an isomorphism. Moreover, for $f:X\\to Y$ separated of finite type,\n$f^*(K_0[1/\\ell])=(f^*K_0)[1/\\ell]$ and\n$Rf_{!}(M_0[1/\\ell])\\simeq(Rf_{!,\\mathcal O_E}M_0)[1/\\ell]$ in $\\Dbc(Y,E)$.",
+  "proof": [
+   {
+    "text": "*Essential surjectivity* is the existence of integral models for rational\nconstructible complexes ([sk-lem-integral-models], (4), with\n[sk-thm-sfb-rationalization-comparison]), a consequence of the condensed\ndefinition of $\\Dbc(T,E)$.",
+    "uses": [
+     "sk-lem-integral-models"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Hom groups.* $L_0[1/\\ell]$ is the colimit of\n$L_0\\xrightarrow{\\ell}L_0\\xrightarrow{\\ell}\\cdots$, and $\\Hom(K_0,-[q])$ commutes\nwith this sequential colimit (Hom out of an integral constructible complex\ncommutes with such colimits, by the Ext-continuity lemma for integral\ncoefficients). The colimit of $\\Hom(K_0,L_0[q])\\xrightarrow{\\ell}\\Hom(K_0,L_0[q])\\to\\cdots$\nis $\\Hom(K_0,L_0[q])\\otimes_{\\mathcal O_E}\\mathcal O_E[1/\\ell]=\\Hom(K_0,L_0[q])\\otimes_{\\mathcal O_E}E$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Functors.* Pullback is exact and commutes with colimits, so\n$f^*(K_0[1/\\ell])=(f^*K_0)[1/\\ell]$. For $Rf_!$, with a compactification\n$f=\\bar f\\circ j$: $Rf_{!,\\mathcal O_E}M_0=R\\bar f_*j_!M_0$ by\n[det-sp-integral-direct-image-tower]; $j_!$ commutes with colimits, and $R\\bar f_*$\ncommutes with the colimit along $\\ell$ on bounded constructible objects (bounded\ncontinuity of the direct image). Hence\n$Rf_!(M_0[1/\\ell])=R\\bar f_*j_!(\\operatorname{colim}_\\ell M_0)\\simeq\\operatorname{colim}_\\ell R\\bar f_*j_!M_0=(Rf_{!,\\mathcal O_E}M_0)[1/\\ell]$.",
+    "uses": [
+     "det-sp-integral-direct-image-tower"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

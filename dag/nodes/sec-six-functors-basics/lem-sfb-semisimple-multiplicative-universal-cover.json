@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-semisimple-multiplicative-universal-cover",
+ "kind": "statement",
+ "title": "Multiplicative simply connected covering of a semisimple algebraic group",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H$ be a semisimple $F$-group scheme [def-sc-group-scheme]. There exist a semisimple simply connected $F$-group scheme $\\widetilde H$ and a multiplicative isogeny $\\pi:\\widetilde H\\to H$ with central kernel. Here a semisimple group is a smooth connected affine group scheme of finite type with no nontrivial smooth connected solvable normal closed subgroup scheme; solvable means that its successive derived subgroup schemes eventually become trivial. Simply connected means that every surjective homomorphism $H_1\\to\\widetilde H$ from a semisimple group scheme $H_1$ with finite central scheme-theoretic kernel is an isomorphism. A multiplicative isogeny means a homomorphism whose pullback on coordinate algebras is faithfully flat and whose scheme-theoretic kernel is finite and of multiplicative type. Faithfully flat means that extension of scalars is exact and detects zero modules. Finite means having finite-dimensional coordinate algebra. A finite group scheme is of multiplicative type if, after extension to an algebraic closure, it is diagonalizable: it is isomorphic to $D(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$, with comultiplication $e_m\\mapsto e_m\\otimes e_m$ on the group-algebra basis. Central means commuting with every group element after every scalar extension. The trivial semisimple group is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 18.25 and Remark 18.27, printed p.393; Definitions 18.5 and 18.7, printed pp.388--389; Lemma 19.14 and Proposition 19.15, printed pp.400--401. A universal covering is a multiplicative isogeny; its source is semisimple by 19.14."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-finite-diagonalizable-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-picard-trivial-multiplicative-cover] to the smooth connected affine finite-type group $H$. Obtain a smooth connected $P$ and a multiplicative isogeny $\\pi:P\\to H$ with $\\operatorname{Pic}(P)=0$. By [lem-sfb-semisimple-isogeny-invariance], $P$ is semisimple: the target $H$ is semisimple and the kernel of $\\pi$ is finite. Put $N=\\ker\\pi$.",
+   "uses": [
+    "lem-sfb-picard-trivial-multiplicative-cover",
+    "lem-sfb-semisimple-isogeny-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.22; Theorem 18.25; Lemma 19.14 (proof)."
+   }
+  },
+  {
+   "text": "For $N\\cong\\operatorname{Spec}F[M]$ with $M$ finite, its characters are exactly the basis elements $e^m$: pullback of the coordinate $t$ of $\\mathbf G_m$ is an element $a$ with $\\Delta(a)=a\\otimes a$ and $\\varepsilon(a)=1$, and conversely such an element defines a character (its inverse is the image under the antipode). Apply [lem-sfb-group-algebra-group-like-basis]. Thus $X^*(N)\\cong M$ is finite. This uses the affine spectrum correspondence [def-weil-affine-spectrum] and the displayed group law [def-sc-gm-ga], and applies to nonreduced $N$.",
+   "uses": [
+    "lem-sfb-group-algebra-group-like-basis",
+    "def-weil-affine-spectrum",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4 and the evaluation formula following it, printed p.232."
+   }
+  },
+  {
+   "text": "By [lem-sfb-semisimple-characters-trivial], $X^*(H)=0$. The exact sequence [lem-sfb-character-picard-isogeny-sequence] for $\\pi$ therefore makes restriction $X^*(P)\\to X^*(N)$ injective. Its target is finite by step 2, whereas its source is torsion free by [lem-sfb-connected-group-characters-torsion-free]. Every element of the source has finite order by this injection, and hence is zero. Thus $X^*(P)=0$, in addition to $\\operatorname{Pic}(P)=0$.",
+   "uses": [
+    "lem-sfb-semisimple-characters-trivial",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-connected-group-characters-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 18.25, proof; Proposition 18.18."
+   }
+  },
+  {
+   "text": "To check the stated simply connected condition, let $q:Q\\to P$ be any surjective homomorphism from a semisimple $Q$ with finite central kernel $K$. By [lem-sfb-semisimple-central-isogeny-multiplicative], $q$ is multiplicative and faithfully flat. Apply [lem-sfb-character-picard-isogeny-sequence] to $q$. Since $X^*(P)=0=\\operatorname{Pic}(P)$, restriction identifies $X^*(Q)$ with $X^*(K)$. The former is torsion free by [lem-sfb-connected-group-characters-torsion-free], and the latter is finite by the calculation in step 2 applied to $K$. Hence both groups vanish. Write $K=D(M_K)$ as supplied by multiplicativity: step 2 identifies $X^*(K)$ with $M_K$, so $M_K=0$ and $K=D(0)=1$ scheme-theoretically.",
+   "uses": [
+    "lem-sfb-semisimple-central-isogeny-multiplicative",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-connected-group-characters-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.19, proof, combined with Proposition 19.15."
+   }
+  },
+  {
+   "text": "For every commutative $F$-algebra $A$, the base change $Q\\times_P Q\\to Q$ of $q$ is an isomorphism: the inverse to its second projection sends $x$ to $(x,x)$, since any pair $(y,x)$ with $q(y)=q(x)$ has $yx^{-1}\\in K(A)=1$. The formulas are natural in $A$ and define inverse scheme maps. Apply [lem-weil-pbc-fpqc-descend-isomorphism] with $h=q:Q\\to P$ and $\\varphi=q$: the cover is flat and surjective by step 4 and quasi-compact since it is a morphism of affine schemes. Therefore $q$ is an isomorphism. This proves the required simply connected condition on $P$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.19, final implication; Corollary 3.35, printed p.75; Stacks 02L4 (lemma-descending-property-isomorphism)."
+   }
+  },
+  {
+   "text": "The identity of $H$ is a multiplicative isogeny (identity extension of scalars and trivial kernel $D(0)$). Apply [lem-sfb-multiplicative-isogeny-composition] to $\\pi$ and this identity: its conclusion makes the kernel of $\\pi$ central. Taking $\\widetilde H=P$ now gives all clauses. The argument includes $H=1$; equivalently its cover can be the identity of the trivial group. No reducedness of either finite kernel was used.",
+   "uses": [
+    "lem-sfb-multiplicative-isogeny-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 18.2; Definitions 18.5, 18.7; Remark 18.27."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-picard-trivial-multiplicative-cover",
+  "lem-sfb-semisimple-isogeny-invariance",
+  "lem-sfb-group-algebra-group-like-basis",
+  "def-weil-affine-spectrum",
+  "def-sc-gm-ga",
+  "lem-sfb-semisimple-characters-trivial",
+  "lem-sfb-character-picard-isogeny-sequence",
+  "lem-sfb-connected-group-characters-torsion-free",
+  "lem-sfb-semisimple-central-isogeny-multiplicative",
+  "lem-weil-pbc-fpqc-descend-isomorphism",
+  "lem-sfb-multiplicative-isogeny-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 18.25, proof, through Propositions 18.22 and 18.18; Proposition 18.19 argument and Proposition 19.15; Lemma 19.14 proof. Descent of the final isomorphism uses Stacks 02L4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every semisimple affine algebraic group has a simply connected semisimple universal covering by a multiplicative central isogeny",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSimple R L], LieAlgebra.IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.sSup_atoms_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.IsSemisimple R L], sSup {I | IsAtom I} = ⊤\", \"doc\": \"In a semisimple Lie algebra $ L $ over a commutative ring $ R $, the supremum (sum) of all atoms (minimal non-zero Lie submodules) in the lattice of $ L $-submodules equals the entire module $ L $. Th\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.booleanGenerators\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], IsCompactlyGenerated.BooleanGenerators {I | IsAtom I}\", \"doc\": \"The set of atomic Lie ideals in a semisimple Lie algebra forms a set of Boolean generators for the complete lattice of Lie submodules. This means the set is closed under finite meets, joins, and compl\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Lie algebras, abstract groups, semisimple rings or Galois categories, not the asserted structure of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a simply connected covering group with finite diagonalizable central kernel for a semisimple group scheme over an algebraically closed field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    (F : CategoryTheory.Functor C FintypeCat) →\\n      [CategoryTheory.GaloisCategory C] →\\n        (G : Type u_1) →\\n          [inst_2 : Group G] →\\n            [(X : C) → MulAction G (F.obj X).carrier] →\\n              [inst : TopologicalS\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι, ∃ (x : Finite ι), ∃ f x, ∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a finite coproduct of connected objects. Specifically, there exists a finite set $\\\\iota$, a family of connected objec\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι f g x, (∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)) ∧ Finite ι\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a colimit of finitely many connected objects. Specifically, there exists a finite index set $\\\\iota$, a family of conn\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : TopologicalSpace G] [inst_5 : IsTopologicalGroup G]\\n  [i\", \"doc\": \"In the context of a Galois category $\\\\mathcal{C}$ with a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$ and a compact topological group $G$ equipped with a multiplicative action on each $F(X)$, this con\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (A : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected A], Finite (CategoryTheory.Aut A)\", \"doc\": \"In a pre-Galois category, the automorphism group of any connected object is a finite group.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, a compact topological group $G$, and a multiplicative action of $G$ on each $F(X)$ for $X \\\\in \\\\mathcal{C}$, this \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Lie algebras, abstract groups, semisimple rings or Galois categories, not the asserted structure of affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\", \"SimplyConnected\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration for multiplicative isogenies or the stated algebraic-group structure theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "universalCover.*[Gg]roup|simplyConnected.*[Ss]emisimple|[Ss]emisimple.*[Ss]imply[Cc]onnected|multiplicativeIsogeny",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration for multiplicative isogenies or the stated algebraic-group structure theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semisimple algebraic group admits a simply connected central cover with finite kernel of multiplicative type",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsSemisimple.isSimple_of_isAtom\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"(I : LieIdeal R L) (hI : IsAtom I) : IsSimple R I\", \"doc\": \"Let $ R $ be a commutative ring and $ L $ a semisimple Lie algebra over $ R $. If $ I $ is a Lie ideal of $ L $ that is an atom in the lattice of Lie ideals (i.e., $ I $ is non-zero and contains no no\"}\n  {\"name\": \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"module\": \"Mathlib.RepresentationTheory.Maschke\", \"type\": \"[AddGroup G] : IsSemisimpleRing (AddMonoidAlgebra k G)\", \"doc\": \"For any additive group $ G $, the monoid algebra $ k[G] $ over a ring $ k $ is a semisimple ring.\"}\n  {\"name\": \"IsSimpleGroup.finite\", \"module\": \"Mathlib.GroupTheory.SpecificGroups.Cyclic\", \"type\": \": Finite α\", \"doc\": \"The group $\\\\alpha$ is finite.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsSimple R L] : IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"module\": \"Mathlib.RepresentationTheory.Maschke\", \"type\": \": IsSemisimpleModule k[G] V\", \"doc\": \"The monoid algebra $ k[G] $ is semisimple, meaning it can be expressed as a direct sum of simple submodules.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"CSA.isSimple\", \"module\": \"Mathlib.Algebra.BrauerGroup.Defs\", \"type\": \"∀ {K : Type u} [inst : Field K] (self : CSA K), IsSimpleRing ↑self.toAlgCat\", \"doc\": \"For any field $ K $ and any central simple algebra $ A $ over $ K $, the underlying ring structure of $ A $ is simple, meaning it contains no nontrivial two-sided ideals.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Lie algebras, abstract groups, semisimple rings or Galois categories, not the asserted structure of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every semisimple affine algebraic group admits a simply connected semisimple covering by an isogeny with finite diagonalizable central kernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.IsSemisimple.booleanGenerators\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], IsCompactlyGenerated.BooleanGenerators {I | IsAtom I}\", \"doc\": \"The set of atomic Lie ideals in a semisimple Lie algebra forms a set of Boolean generators for the complete lattice of Lie submodules. This means the set is closed under finite meets, joins, and compl\"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSemisimpleRing R] [FiniteDimensional F R],\\n  ∃ n d, (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[F] (i : Fin n) → Matrix (Fin (d i)) (Fin (d i)) F)\", \"doc\": \"Let `F` be an algebraically closed field and `R` be a finite-dimensional semisimple algebra over `F`. Then there exists a natural number `n` and a sequence of positive integers $d_0, d_1, \\\\ldots, d_{n\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSimple R L], LieAlgebra.IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of universal covering of semisimple group schemes in arbitrary characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.finite_of_isSemisimpleRing\", \"module\": \"Mathlib/RingTheory/Jacobson/Artinian\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FiniteType R A] [IsJacobsonRing R] [IsSemisimpleRing A], Module.Finite R A\", \"doc\": \"If $ R $ is a Jacobson ring and $ A $ is a semisimple ring, then $ A $ is a finitely generated $ R $-module.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι f g x, (∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)) ∧ Finite ι\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a colimit of finitely many connected objects. Specifically, there exists a finite index set $\\\\iota$, a family of conn\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F] (X : C)\\n  [CategoryTheory.PreGaloisCategory.IsConnected X], ∃ A x, CategoryTheory.PreGaloisCategory.IsG\", \"doc\": \"For any connected object $ X $ in a pre-Galois category $ \\\\mathcal{C} $, there exists a Galois object $ A $ in $ \\\\mathcal{C} $ and a morphism $ A \\\\to X $.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"module\": \"Mathlib/CategoryTheory/Galois/Decomposition\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C] (X : C),\\n  ∃ ι, ∃ (x : Finite ι), ∃ f x, ∀ (i : ι), CategoryTheory.PreGaloisCategory.IsConnected (f i)\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$, every object $X$ admits a decomposition as a finite coproduct of connected objects. Specifically, there exists a finite set $\\\\iota$, a family of connected objec\"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"module\": \"Mathlib/RingTheory/SimpleModule/IsAlgClosed\", \"type\": \"∀ (F : Type u_1) (R : Type u_2) [inst : Field F] [IsAlgClosed F] [inst_2 : Ring R] [inst_3 : Algebra F R]\\n  [IsSemisimpleRing R] [FiniteDimensional F R],\\n  ∃ n d, (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[F] (i : Fin n) → Matrix (Fin (d i)) (Fin (d i)) F)\", \"doc\": \"Let `F` be an algebraically closed field and `R` be a finite-dimensional semisimple algebra over `F`. Then there exists a natural number `n` and a sequence of positive integers $d_0, d_1, \\\\ldots, d_{n\"}\n  {\"name\": \"RingHom.isSemisimpleRing_of_surjective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S),\\n  Function.Surjective ⇑f → ∀ [IsSemisimpleRing R], IsSemisimpleRing S\", \"doc\": \"If $ R $ is a semisimple ring and $ f : R \\\\to S $ is a surjective ring homomorphism, then $ S $ is also a semisimple ring.\"}\n  {\"name\": \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\", \"module\": \"Mathlib/RingTheory/SimpleModule/WedderburnArtin\", \"type\": \"∀ (R₀ : Type u_1) (R : Type u) [inst : CommSemiring R₀] [inst_1 : Ring R] [inst_2 : Algebra R₀ R] [IsSemisimpleRing R]\\n  [Module.Finite R₀ R],\\n  ∃ n D d x x_1,\\n    ∃ (_ : ∀ (i : Fin n), Module.Finite R₀ (D i)),\\n      (∀ (i : Fin n), NeZero (d i)) ∧ Nonempty (R ≃ₐ[R₀] (i : Fin n) → Matrix (Fin (d i))\", \"doc\": \"Let `R` be an algebra over a commutative ring `R₀`. If `R` is a semisimple ring and is finitely generated as an `R₀`-module, then `R` is isomorphic as an `R₀`-algebra to a finite direct product of mat\"}\n  {\"name\": \"instIsReducedOfIsSemisimpleRing\", \"module\": \"Mathlib/RingTheory/Jacobson/Semiprimary\", \"type\": \"∀ (R : Type u_5) [inst : CommRing R] [IsSemisimpleRing R], IsReduced R\", \"doc\": \"Every commutative semisimple ring is reduced, meaning it contains no nonzero nilpotent elements.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Isogeny\", \"SimplyConnected\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicativeIsogeny|simplyConnected.*[Ss]emisimple|[Ss]emisimple.*universalCover",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every semisimple affine algebraic group admits a simply connected semisimple covering by an isogeny with finite diagonalizable central kernel",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"MulEquiv.isSimpleGroup_congr\", \"module\": \"Mathlib.GroupTheory.Subgroup.Simple\", \"type\": \"{H : Type*} [Group H] (e : G ≃* H) : IsSimpleGroup G ↔ IsSimpleGroup H\", \"doc\": \"Let $G$ and $H$ be groups, and let $e : G \\\\simeq H$ be a group isomorphism. Then $G$ is a simple group (having no nontrivial normal subgroups) if and only if $H$ is a simple group.\"}\n  {\"name\": \"MulEquiv.isSimpleGroup\", \"module\": \"Mathlib.GroupTheory.Subgroup.Simple\", \"type\": \"{H : Type*} [Group H] [IsSimpleGroup H] (e : G ≃* H) : IsSimpleGroup G\", \"doc\": \"If $G$ and $H$ are groups and there exists a group isomorphism $e : G \\\\simeq H$, then $G$ is a simple group if and only if $H$ is a simple group. In particular, if $H$ is simple and $e : G \\\\simeq H$ i\"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsSimple R L] : IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"module\": \"Mathlib.RepresentationTheory.Maschke\", \"type\": \"[AddGroup G] : IsSemisimpleRing (AddMonoidAlgebra k G)\", \"doc\": \"For any additive group $ G $, the monoid algebra $ k[G] $ over a ring $ k $ is a semisimple ring.\"}\n  {\"name\": \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"module\": \"Mathlib.RepresentationTheory.Maschke\", \"type\": \": IsSemisimpleModule k[G] V\", \"doc\": \"The monoid algebra $ k[G] $ is semisimple, meaning it can be expressed as a direct sum of simple submodules.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.rec\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {motive : LieAlgebra.IsSemisimple R L → Sort u} →\\n            ((sSup_atoms_eq_top : sSup {I | IsAtom I} = ⊤) →\\n                (sSupIndep_isAtom : sSupIndep {I | I\", \"doc\": \"This recursor allows defining functions or proving properties about semisimple Lie algebras by recursion on their decomposition into simple ideals. Given a semisimple Lie algebra $ L $ over a commutat\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Killing\", \"type\": \"[IsKilling K L] [Module.Finite K L] : IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not state this theorem for affine group schemes; abstract groups, Lie algebras and ring Picard groups do not specialize to it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-torus-simply-connected-cover",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group.",
+   "via": [
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semisimple-multiplicative-universal-cover",
+  "worker": "stage1",
+  "summary": "Followed Milne character--Picard proof; exposed Picard-killing cover, character exact sequence, character torsion and semisimple isogeny inputs as six statement-only nodes. Reused the group-like Mathlib leaf, fpqc isomorphism descent and multiplicative composition. Statement unchanged; all kernels scheme-theoretic.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. The six steps expand its Milne universal-cover prerequisite by the proof of Theorem 18.25.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-isomorphism",
+    "why": "Generic descent of an isomorphism along the faithfully flat affine homomorphism q; not a substitute for the unit route, which has no such descent lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-740b8dda4",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-740b8dda4 (reviewer sub-agent of L); spot-checked: Read the item, its six steps and all six new statement-only nodes in full, checked against Milne iAG2017 printed pp.388-393 and 400-401 (18.7, 18.18, 18.19, 18.22, 18.25, 18.27, 19.14, 19.15); also located 5.47, 12.38 and 21.50. The steps follow Milne's proof of 18.25: 18.22 gives the Picard-killing cover; 19.14 makes that cover semisimple (the direction was checked in the source text); X*(H)=0 plus the 18.18 sequence and torsion-freeness give X*(P)=0. For simple connectedness, 19.15 makes any central cover of semisimple groups a multiplicative isogeny, and the 18.19 argument gives a trivial kernel, as a scheme. Step 5 writes the inverse of Q x_P Q -> Q explicitly, then uses fpqc descent of isomorphisms: q is flat, surjective and affine, so quasi-compact. Step 6 gets a central kernel from the composition node's stated conclusion, applied to pi and id_H. Step 2 (characters of D(M) = M via the group-like leaf) is genuinely elementary. Small cases tested: H=1, PGL_2 (Pic=Z/2), SL_p->PGL_p with kernel mu_p in char p, characters of mu_p, tori and G_a. Duplicate search (rg -L over dag/nodes for semisimple, characters, torsion-free, Picard, isogeny) found nothing. reductive-centre-multiplicative-type (Q02) is related but not a duplicate. reductive-torus-simply-connected-cover is the item's parent, not a duplicate. No child restates the item. Shape is clean: created.item, null blueprint ancestor inherited, single-escaped TeX, statement-only nodes. Accepted tool_use: lem-weil-pbc-fpqc-descend-isomorphism (Mathlib leaf, Stacks 02L4). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemisimpleMultiplicativeUniversalCover",
+  "declaration": "AlgebraicGeometry.exists_semisimple_multiplicative_universalCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemisimpleMultiplicativeUniversalCover.lean",
+  "statement": "theorem exists_semisimple_multiplicative_universalCover {F : Type u} [Field F] [IsAlgClosed F] (H : Over (Spec (.of F))) [GrpObj H] (hH : IsSemisimpleGroupScheme H) : ∃ (Htilde : Over (Spec (.of F))) (_ : GrpObj Htilde), IsSemisimpleGroupScheme Htilde ∧ (∀ (H1 : Over (Spec (.of F))) [GrpObj H1], IsSemisimpleGroupScheme H1 → ∀ (q : H1 ⟶ Htilde) [IsMonHom q], Surjective q.left → IsFinite (GrpObj.ker q).hom → (∀ (T : Over (Spec (.of F))) (x : T ⟶ GrpObj.ker q) (g : T ⟶ H1), (x ≫ GrpObj.kerι q) * g = g * (x ≫ GrpObj.kerι q)) → IsIso q) ∧ ∃ (pi : Htilde ⟶ H) (_ : IsMonHom pi), pi.left.appTop.hom.FaithfullyFlat ∧ IsFinite (GrpObj.ker pi).hom ∧ IsFiniteDiagonalizableGroupScheme (GrpObj.ker pi) ∧ ∀ (T : Over (Spec (.of F))) (x : T ⟶ GrpObj.ker pi) (g : T ⟶ Htilde), (x ≫ GrpObj.kerι pi) * g = g * (x ≫ GrpObj.kerι pi)",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-824732e6f",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Clause-by-clause match with node/Milne 18.25+18.27 (19.14, 19.15): IsAlgClosed F; H semisimple GrpObj over Spec F; ∃ Htilde semisimple; simply connected = every surjective IsMonHom q from semisimple H1 with IsFinite ker and centrality on all F-scheme points is IsIso; pi with appTop FaithfullyFlat, IsFinite ker, IsFiniteDiagonalizableGroupScheme ker, central on all T-points. No extra hypotheses or universe restriction; trivial group allowed; mu_p/char p, tori/G_a edge cases OK. Encoding identical to landed siblings multiplicativeIsogeny_comp / semisimpleCentralIsogeny_multiplicative / simplyConnected_multiplicative_lifting. lean.statement verbatim; node diff = lean + stmt_deps +def-sfb-semisimple-group-scheme +def-sfb-finite-diagonalizable-group-scheme (both used, both landed 2026-10-23 before delivery). Single sorry theorem, docstrings with source/blueprint and 6 proof steps, imports exist, report sections present. No compile rerun; no files changed."
+ }
+}

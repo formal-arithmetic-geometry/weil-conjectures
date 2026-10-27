@@ -235,18 +235,36 @@
   "file": "lean/Sheaf/RingTheory/JTwoFiniteAlgebraCriterion.lean",
   "statement": "theorem isOpen_regularLocus_of_finite_algebras (R : Type u) [CommRing R] [IsNoetherianRing R] (hfinite : ∀ (B : Type (max u v)) [CommRing B] [Algebra R B] [Module.Finite R B], IsOpen {q : PrimeSpectrum B | IsRegularLocalRing (Localization.AtPrime q.asIdeal)}) (C : Type (max u v)) [CommRing C] [Algebra R C] [Algebra.FiniteType R C] : IsOpen {q : PrimeSpectrum C | IsRegularLocalRing (Localization.AtPrime q.asIdeal)}",
   "branch": "newtargets-dag",
-  "by": "Q10",
-  "date": "2026-10-18",
+  "by": "Q102",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.JTwoFiniteAlgebraCriterion deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Restores the statement module removed as dead on 2026-10-20; the current assignment explicitly requests this node. The old declaration is absent from current Lean sources. Statement unchanged."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e80823e30",
-  "group": "Q10",
+  "reviewer": "NT-stage2-cc-00df8ed5c",
+  "group": "Q102",
   "result": "pass",
-  "note": "Statement matches Stacks 07PC (3)=>(1) and the node clause by clause: IsNoetherianRing, Module.Finite, PrimeSpectrum/Localization.AtPrime/IsRegularLocalRing, Algebra.FiniteType (instance form of the recorded RingHom.FiniteType). Conclusion at v=0 is exactly the J-2 clause of IsQuasiExcellent. No extra hypotheses. B and C both in Type (max u v), the same universe pattern as isOpen_regularLocus_of_residueField_finite_models, so the proof route works with no vacuity. Edge cases (R=0, B or C zero, C=R, any characteristic) covered. No duplicate found (side lean/Sheaf grep; the delivery's Mathlib searches). Statement field verbatim; single sorry; source and blueprint docstrings with all six proof steps; report has both sections. nt_compile --json clean (4.0 s, 8.3 s), and a broken-copy control fails as expected."
+  "note": "Item is on route-pivot-dropped.txt (10-19 section, l.1654) and its module on dropped-modules.txt (l.1486), but BFS from nt-target-* reaches it via lem-per-complete-local-excellence ... lem-sfb-field-log-smooth-gabber-modification ... thm-weil-final-betti, so I judged it on its merits. The restored statement is verbatim in the file and whitespace-equal to Q10's 2026-10-19 PASSed/landed record; node unchanged except the lean field. It matches 07PC (3)=>(1) clause by clause: IsNoetherianRing, Module.Finite B, PrimeSpectrum/Localization.AtPrime/IsRegularLocalRing, Algebra.FiniteType C. At v=0 the conclusion is the J-2 clause of IsQuasiExcellent; the max u v universes are harmless and match the residue-field criterion. Edge cases covered. No name clash or upstream duplicate; no imported module is dropped; single sorry; docstrings carry the source place, blueprint id and six steps. The report's second reading is by the same worker (advisory). I compiled nothing because I changed nothing. Maintainer note: the module is still on route-pivot-dropped-modules.txt, so a future importer hits route_pivot_fails (c)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/JTwoFiniteAlgebraCriterion.lean",
+  "module": "Sheaf.RingTheory.JTwoFiniteAlgebraCriterion",
+  "declaration": "isOpen_regularLocus_of_finite_algebras",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

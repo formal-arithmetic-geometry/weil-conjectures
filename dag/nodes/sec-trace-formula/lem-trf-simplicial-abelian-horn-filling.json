@@ -10,9 +10,64 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The operators are those of [def-weil-pbc-simplicial-object], and all are homomorphisms. Applying the contravariant functor $G$ to [lem-weil-pbc-simplex-face-face-identity] gives $d_i d_j=d_{j-1}d_i$ for $i<j$ whenever typed. We also use $d_i s_j=s_{j-1}d_i$ for $i<j$, $d_j s_j=d_{j+1}s_j=1$, and $d_i s_j=s_j d_{i-1}$ for $i>j+1$. These mixed identities follow directly from the defining order maps: $\\delta_i(t)=t+\\mathbf1_{t\\geq i}$ and $\\sigma_j(t)=t-\\mathbf1_{t>j}$. In $\\sigma_j\\delta_i(t)$ substitute the first expression into the second. If $i<j$, the result is $t+\\mathbf1_{t\\geq i}-\\mathbf1_{t\\geq j}$, also the value of $\\delta_i\\sigma_{j-1}(t)$; if $i=j$ or $i=j+1$, the added and subtracted indicators agree, giving $t$; if $i>j+1$, the result is $t+\\mathbf1_{t\\geq i}-\\mathbf1_{t>j}$, also the value of $\\delta_{i-1}\\sigma_j(t)$. Thus the respective order maps agree on every element; contravariance and preservation of identity give the asserted mixed identities. This is the elementary order-map computation of Stacks 0167(2)--(4), not an invocation of a reconstruction theorem.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "lem-weil-pbc-simplex-face-face-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof; additive specialization, with the relations of Tag 0167, lemma-relations-face-degeneracy."
+   }
+  },
+  {
+   "text": "First handle $n=1$. There is exactly one prescribed face, say $a_i\\in G_0$ with $i\\ne k$. Set $u=s_0a_i$. Both $d_0s_0$ and $d_1s_0$ are the identity by Step 1, so $d_i u=a_i$. No face map with source $G_0$ or compatibility equation is used. Henceforth assume $n\\geq2$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof; additive specialization, with the relations of Tag 0167, lemma-relations-face-degeneracy."
+   }
+  },
+  {
+   "text": "Restrict the horn family to $0\\leq i<k$. For $i<j<k$, neither index is the missing index, so the original compatibility supplies exactly $d_i a_j=d_{j-1}a_i$. Apply [lem-trf-simplicial-abelian-prefix-correction] with the same $n\\geq2$, $0\\leq k\\leq n$, and initial element $v=0\\in G_n$. Its invariant at $r=k$ gives $d_i v_k=a_i$ for all $i<k$. This is precisely the starting hypothesis needed for the descending induction. If $k=0$, its initial and terminal element is $v_0=0$ and this hypothesis is empty. The prefix theorem imposes no condition on its initial element: the $r=0$ invariant has no indices, so starting at zero requires no vanishing assumption on $G$.",
+   "uses": [
+    "lem-trf-simplicial-abelian-prefix-correction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, second paragraph: ascending correction."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-simplicial-abelian-descending-correction] to the original horn family, with $v=v_k$. Its compatibility is the original compatibility; Step 3 supplies its only extra hypothesis, the prescribed lower faces of $v$. The resulting sequence starts with $w_n=v_k$, for which the upper-face condition $i>n$ is empty. At a transition $n\\geq r>k$, $a_r$ is prescribed and $0\\leq r-1\\leq n-1$, so its correction $s_{r-1}(a_r-d_rw_r)$ is typed. The cited invariant preserves faces $i<k$ and $i>r$ and sets face $r$, yielding the next invariant. After $n-k$ transitions take $u=w_k$; the terminal invariant gives $d_i u=a_i$ for $i<k$ or $k<i\\leq n$, exactly the desired faces. If $k=n$ there are zero transitions and $u=v_k$; if $k=0$ no lower-face assertion is needed.",
+   "uses": [
+    "lem-trf-simplicial-abelian-descending-correction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, third paragraph: descending correction and its final invariant."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-simplex-face-face-identity",
+  "lem-trf-simplicial-abelian-prefix-correction",
+  "lem-trf-simplicial-abelian-descending-correction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, additive specialization: explicit order-map identities and degree one, then assembly of the separately queued ascending and descending correction inductions."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +103,52 @@
    "results": "8 hits; top=['HomotopicalAlgebra.fibrantObjects', 'HomotopicalAlgebra.FibrantObject.instIsFibrantObjι', 'SSet.KanComplex.hornFilling', 'HomotopicalAlgebra.FibrantObject.instIsFibrantObjFibrantObjects', 'SSet.KanComplex', 'HomotopicalAlgebra.IsFibrant', 'HomotopicalAlgebra.FibrantObject', 'HomotopicalAlgebra.isStableUnderProductsOfShape_fibrations']; note=; digest=bb241ae9d09b152f. Actual hits read from msearch output.",
    "date": "2026-10-19",
    "verdict": "no match: SSet.KanComplex.hornFilling and exists_lift_of_kanComplex assume the Kan property (KanComplex.lean:44-60); neither establishes it for simplicial abelian groups. Loogle returns Kan extensions and DoldKan reflection of isomorphisms. The grep hits concern DoldKan equivalences and contain no group horn-filling theorem. The second semantic phrasing returns simplex face/degeneracy and pointed-Kan multiplication declarations, not the asserted compatible-face existence."
+  },
+  {
+   "tool": "grep",
+   "query": "simplicial.*(group|module).*kan|kan.*(simplicial|group|module)",
+   "results": "{\"t\": \"2026-10-22T04:21:53Z\", \"tool\": \"grep\", \"query\": \"simplicial.*(group|module).*kan|kan.*(simplicial|group|module)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/DoldKan/EquivalenceAdditive.lean\", \"Mathlib/AlgebraicTopology/DoldKan/GammaCompN.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Normalized.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Compatibility.lean\", \"Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean\", \"Mathlib/AlgebraicTopology/DoldKan/FunctorN.lean\", \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean\", \"Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean\"], \"digest\": \"5b89758077725b6c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KanComplex.hornFilling and exists_lift_of_kanComplex assume KanComplex (Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean:44,55); DoldKan equivalences, Kan extensions and pointed-simplex multiplication structures do not establish fillers for arbitrary simplicial abelian groups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every simplicial abelian group is a Kan complex",
+   "results": "{\"t\": \"2026-10-22T04:21:53Z\", \"tool\": \"leansearch\", \"query\": \"Every simplicial abelian group is a Kan complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex\", \"SSet.instQuasicategoryOfKanComplex\", \"CategoryTheory.Idempotents.DoldKan.N_map\", \"CategoryTheory.Abelian.DoldKan.Γ\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId\", \"SSet.toTop\", \"CategoryTheory.Idempotents.DoldKan.N_obj\", \"AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom\"], \"digest\": \"76fe7f47abed878b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KanComplex.hornFilling and exists_lift_of_kanComplex assume KanComplex (Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean:44,55); DoldKan equivalences, Kan extensions and pointed-simplex multiplication structures do not establish fillers for arbitrary simplicial abelian groups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Kan\"",
+   "results": "{\"t\": \"2026-10-22T04:21:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Kan\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.instIsLeftKanExtensionOppositeTruncatedSimplexCategoryObjSkAppTruncatedUnitSkAdjTruncation\", \"CategoryTheory.SimplicialObject.instIsRightKanExtensionOppositeTruncatedSimplexCategoryObjCoskAppTruncatedCounitCoskAdjTruncation\", \"AlgebraicTopology.DoldKan.instReflectsIsomorphismsSimplicialObjectKaroubiChainComplexNatN₁\", \"AlgebraicTopology.DoldKan.instReflectsIsomorphismsKaroubiSimplicialObjectChainComplexNatN₂\", \"AlgebraicTopology.DoldKan.instIsIsoFunctorSimplicialObjectKaroubiNatTrans\", \"AlgebraicTopology.DoldKan.instIsIsoFunctorKaroubiSimplicialObjectNatTrans\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isRightKanExtension\", \"CategoryTheory.SimplicialObject.IsCoskeletal.isUniversalOfIsRightKanExtension\"], \"digest\": \"8c1edd69442a98b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KanComplex.hornFilling and exists_lift_of_kanComplex assume KanComplex (Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean:44,55); DoldKan equivalences, Kan extensions and pointed-simplex multiplication structures do not establish fillers for arbitrary simplicial abelian groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every compatible horn in a simplicial abelian group admits a filler",
+   "results": "{\"t\": \"2026-10-22T04:22:01Z\", \"tool\": \"leanfinder\", \"query\": \"Every compatible horn in a simplicial abelian group admits a filler\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.KanComplex.hornFilling\", \"SSet.Quasicategory.hornFilling'\", \"SSet.KanComplex\", \"SSet.quasicategory_of_filler\", \"SSet.Quasicategory.hornFilling\", \"SSet.horn₃₂.exists_desc\", \"SSet.horn₃₁.exists_desc\", \"SSet.instQuasicategoryOfKanComplex\"], \"digest\": \"cde5848404ff538e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KanComplex.hornFilling and exists_lift_of_kanComplex assume KanComplex (Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean:44,55); DoldKan equivalences, Kan extensions and pointed-simplex multiplication structures do not establish fillers for arbitrary simplicial abelian groups."
+  },
+  {
+   "tool": "grep",
+   "query": "hornFilling|exists_lift_of_kanComplex|AddCommGrpCat.*Kan|KanComplex.*AddCommGrpCat",
+   "results": "{\"t\": \"2026-10-22T04:22:08Z\", \"tool\": \"grep\", \"query\": \"hornFilling|exists_lift_of_kanComplex|AddCommGrpCat.*Kan|KanComplex.*AddCommGrpCat\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/Quasicategory/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean\"], \"digest\": \"3f60ebb9748c5ada\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KanComplex.hornFilling and exists_lift_of_kanComplex assume KanComplex (Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean:44,55); DoldKan equivalences, Kan extensions and pointed-simplex multiplication structures do not establish fillers for arbitrary simplicial abelian groups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given compatible faces except face k in a simplicial group construct an n simplex by successive degeneracy corrections",
+   "results": "{\"t\": \"2026-10-22T04:22:19Z\", \"tool\": \"leanfinder\", \"query\": \"Given compatible faces except face k in a simplicial group construct an n simplex by successive degeneracy corrections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.MulStruct.δ_map_of_gt\", \"SSet.PtSimplex.MulStruct.δ_map_of_lt\", \"SSet.PtSimplex.MulStruct.δ_succ_castSucc_map\", \"SSet.PtSimplex.MulStruct.δ_castSucc_castSucc_map\", \"SSet.PtSimplex.RelStruct.δ_map_of_gt\", \"SSet.PtSimplex.RelStruct.δ_map_of_lt\", \"SSet.PtSimplex.MulStruct.δ_succ_succ_map\", \"SimplexCategoryGenRel.faces.δ\"], \"digest\": \"890b7a200ddb8fce\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: KanComplex.hornFilling and exists_lift_of_kanComplex assume KanComplex (Mathlib/AlgebraicTopology/SimplicialSet/KanComplex.lean:44,55); DoldKan equivalences, Kan extensions and pointed-simplex multiplication structures do not establish fillers for arbitrary simplicial abelian groups."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
@@ -83,5 +180,49 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-simplicial-abelian-horn-filling",
+  "worker": "stage1",
+  "summary": "Landing-refusal repair after initial dry run e618f25b081. Rebased the retained two-node induction split on the current live item, preserving all fields except proof, proof_deps, proof_origin and split_report. Returned head and live item still agree; both new correction nodes are absent from live. Reopened all four cited statements, checked all five literal quotations, reread Stacks 08NZ/0167 and retained search results, and verified small cases and degree bounds. Clarified in Step 3 that arbitrary initialization needs no vanishing hypothesis: the initial prefix invariant is empty. The parent has four assembly steps below 3000 characters, replacing live seven steps; both independent induction jobs remain statement-only. The full original argument and previous reports/searches are retained. No Lean written or compiler invoked.",
+  "blueprint": "Preserves the inherited auxiliary route under lem-trf-local-term-locality (1)--(2), via cotangent-resolution coherence and boundary lifting. Realizes the 08NZ invocation in Stacks 08P1 through its ascending and descending inductions. Current chapter, unit and ancestor texts read only through literature/blueprint/latest, main 7284bb09daf97437d544c51882b325f9c52cd345. The latest locality proof still cites contracting-correspondence specialization; this delivery concerns its inherited auxiliary simplicial input and changes no ancestor statement or unit route. Both new blueprint.from links retain the ancestor and exact respective 08NZ paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-018c77b1b",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-018c77b1b (reviewer sub-agent of L); spot-checked: Both new node files are byte-identical (sha256) to those in the earlier PASSed runs 8bc8 through 93e2. Against 93e2 the item differs only in split_report and one added sentence in Step 3: since the r=0 invariant has no indices, starting at v=0 needs no vanishing assumption on G. That sentence is true. I reread Stacks simplicial.tex 5755-5803 (08NZ: the horn equations, the ascending and the descending paragraph) and found the additive specialization matches; with v=0 the sequence gives v_1=s_0 a_0, the source's u^0. Step 1: the indicator computation correctly gives the three mixed sigma-delta identities, and the face-face identity comes from lem-weil-pbc-simplex-face-face-identity. Step 2: for n=1, u=s_0 a_i. Prefix node, checked by hand: d_i e_r = d_{r-1}(a_i - d_i v_r) = 0 for i<r, d_i s_r = s_{r-1} d_i, d_r s_r = 1, and s_r is legal since r<k<=n. Descending node, checked by hand: lower faces use s_{r-2}, legal because i<k<r forces r>=2; upper faces use d_{i-1} b_r = d_r(a_i - d_i w_r) = 0 and d_i s_{r-1} = s_{r-1} d_{i-1}; and d_r s_{r-1} = 1. Steps 3 and 4 match the hypotheses and invariants of the two nodes. Edge cases checked: n=1, n=2 with k=1, k=0, k=n, zero and constant groups. Re-split rule: old step 3 is now the prefix node, old steps 4-6 the descending node, old step 7 the assembly (2287 characters, no step over 2000); nothing was shortened and neither node restates the item. Duplicates: none among the five other 08NZ nodes or the 138 node files added to the base since 93e2. No SGA, no route change, no tool_uses, no fixes. Maintainer: this split has passed many identical times; please promote it to live."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialAbelianHornFilling",
+  "declaration": "CategoryTheory.SimplicialObject.exists_horn_filler",
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialAbelianHornFilling.lean",
+  "statement": "theorem exists_horn_filler (G : SimplicialObject AddCommGrpCat.{u}) (n : ℕ) (k : Fin (n + 2)) (a : (i : Fin (n + 2)) → i ≠ k → G _⦋n⦌) (hcompat : match n, k, a with | 0, _, _ => True | m + 1, k, a => ∀ (i j : Fin (m + 2)), i ≤ j → ∀ (hi : i.castSucc ≠ k) (hj : j.succ ≠ k), G.δ i (a j.succ hj) = G.δ j (a i.castSucc hi)) : ∃ u : G _⦋n + 1⦌, ∀ (i : Fin (n + 2)) (hi : i ≠ k), G.δ i u = a i hi",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea4945cc0",
+  "group": "NV",
+  "result": "pass",
+  "note": "Lean statement matches the node and Stacks 08NZ clause by clause: arbitrary-universe SimplicialObject AddCommGrpCat; dimension n+1 covers every N>=1; k : Fin (n+2) includes both endpoints; family a indexed by i != k; hcompat is True at n=0, and for n=m+1 (i.castSucc, j.succ) with i<=j is a bijection onto pairs p<q, giving d_p a_q = d_{q-1} a_p in the orientation of Mathlib delta_comp_delta, adjacent case included; conclusion is existence with no uniqueness and no condition on the missing face. Edge cases checked: N=1, N=2 with k=1, endpoints k=0 and k=N, zero and constant groups. Gates: no definitions, only sorry; docstrings give the source place and blueprint id and follow the 7 proof steps; both imports used; lean.statement verbatim in the file; nothing pro-etale. Mathlib has no theorem that simplicial groups are Kan. I changed no file, so no compile; the worker's report records a clean compile. Advisory: the dependent match in hcompat makes the k=0 use in the parent need a case split on n."
+ }
 }

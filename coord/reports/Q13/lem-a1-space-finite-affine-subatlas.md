@@ -1,0 +1,39 @@
+## Worker report
+
+Files written: `dag/nodes/sec-purity-real-sheaves/lem-a1-space-finite-affine-subatlas.json` (statement, split; no exact Mathlib match), `citations.json`, and this report. The proof has six steps and 2748 characters. No new nodes and no new Mathlib leaves. The statement and its four statement dependencies are unchanged; every inherited field and search is retained. `searches.jsonl` records the searches made in this attempt.
+
+Attachments: none. Searches of `lean/WeilConjectures/` for the exact blueprint id, AlgebraicSpace, finite affine atlas and finite subatlas found no declaration covering the item. The broader project theorem on etale open images does not supply a completed upstream attachment for this item.
+
+WANTED: none. All sources used are present in `literature/stacks-project/`.
+
+The original node is statement-only, not disputed. Its source 03E4 proves the quasi-compact atlas criterion but compresses the finite selection into the sentence choosing a quasi-compact open of an atlas. The present split writes out selection of whole affine components for the prescribed disjoint-union atlas, proves compactness by restricting an arbitrary open cover to the finitely many components, and justifies restriction of the atlas on every scheme test. The independent continuous-surjection clause is included. No unfinished part of this one-level split remains; its existing unsplit dependency `lem-a1-space-point-open-calculus` is reused as permitted by stage 1.
+
+## Sources and searches
+
+Read `spaces-properties.tex`, Tag 03E4, `lemma-quasi-compact-space`, statement and whole proof, and Tag 03FX, `lemma-cover-by-union-affines`, statement and whole proof. The hypotheses of 03E4 are just a base scheme and an algebraic space; the chosen atlas in this item additionally has specified affine components. Thus its finite-component form follows the same route, without imposing quasi-separatedness, finite type, nonemptiness or Noetherian conditions. Also read 03H5 (`lemma-characterize-surjective`), 03IR (`lemma-etale-open`), Schemes 01JY (`lemma-base-change-immersion`), Morphisms 02GJ (`lemma-etale-characterize`, especially its final assertion), Topology 04Z9 (`lemma-image-quasi-compact`, first part with proof), and Algebra 00E8 (`lemma-quasi-compact`, spectrum compactness with proof). Tag-label pairs were checked in `tags/tags`.
+
+DAG searches found the existing affine-scheme compactness, continuous-image compactness, open-immersion base-change and etale-open-restriction leaves. In particular these are reused rather than copied into new nodes. Whole-blueprint searches for `finite affine`, `compact`, `subatlas` and `03E4` found no blueprint node stating the item. `blueprint_refs.py ancestor` gives `lem-a1-affine-hc0`, matching the inherited ancestry. Read its current main-20261015 proof: the geometric branch is auxiliary infrastructure inherited through the etale-open-image split, not a proposed replacement for the unit's Rankin--Selberg route. The chapter and unit records are unchanged; this item is not the unit's key node.
+
+Actual Mathlib searches used LeanFinder with two phrasings, LeanSearch, Loogle on AlgebraicSpace/CompactSpace, and source grep for algebraic spaces/finite subatlases. All services answered. The semantic hits are finite affine covers of schemes, including `instIsAffineXSchemeFiniteSubcover` and `isCompact_iff_finite_and_eq_biUnion_affineOpens`; these require a scheme target and do not give the algebraic-space point-topology statement. Loogle and the algebraic-space source grep have no hits. The known scheme affine-compactness declarations were also located in the source. The inherited searches remain recorded separately from this attempt's logged queries.
+
+## Not duplicates
+
+No new nodes. The existing `lem-a1-space-affine-etale-cover` constructs an unrestricted disjoint affine atlas, whereas this item selects finitely many whole components from an already prescribed atlas under quasi-compactness. `lem-a1-space-affine-atlas-open-cover` covers a space by possibly infinitely many open subspaces admitting affine atlases, without the finite-subatlas assertion. The parent `lem-a1-space-etale-open-image` uses this item for its atlas criterion, so is not cited back. None of those nodes is used to conceal the conclusion in a renamed child.
+
+## Review by Q13
+
+I read each cited node's statement, not its proof, against the source passages above. There are no new node statements to review under B1-B9. The item's objects, topology and open subschemes are introduced in its statement using its four actual definition dependencies. Its TeX is unchanged, and source tags are paired with their labels.
+
+Step 1 uses the definition of a representable etale transformation from `def-trf-algebraic-space`: every scheme base change is a scheme with etale projection. `lem-weil-pbc-open-immersion-base-change` states that the pullback of the open inclusion is an open immersion. `lem-a1-etale-open-restriction` states exactly that restricting an etale scheme morphism to compatible opens stays etale; here the target open is the whole test scheme. The displayed pullback identification is checked on pairs of test sections, not assumed from a comparison lemma. This resolves the potential C1 gap in the compressed phrase "still etale".
+
+Step 2 uses two explicit clauses of `lem-a1-space-point-open-calculus`: a representable etale map is open on points, and representable surjectivity is equivalent to point surjectivity. The input components are open subschemes by the item's stipulated coproduct topology, and step 1 has already proved their restricted maps representable etale. Their images cover because the original atlas is surjective and every source point belongs to a component. No quasi-compactness of the original infinite coproduct is assumed.
+
+Step 3 is an application of the hypothesis that an open cover has a finite subcover, followed by unions and restrictions of the given scheme's structure sheaf. The restricted union has exactly the selected disjoint component restrictions. These operations are elementary and introduce no separate auxiliary assertion requiring a new node.
+
+Step 4 uses only the quasi-compactness clause of `lem-weil-pbc-affine-scheme-qcqs`, whose statement explicitly covers every affine scheme. Quasi-separatedness in that existing lemma is not used. The elementary finite-union argument is written out on arbitrary open covers, rather than citing a tag without a node. Finiteness of D_0, not finiteness of D, is used here.
+
+Step 5 reuses step 1 for representability and etaleness; point-open-calculus supplies exactly the point-surjective-to-representably-surjective direction. It does not assert a sheaf factorization just from image containment, nor assume that surjectivity on rational points over each fixed field is the relevant criterion.
+
+Step 6 uses `lem-weil-pbc-continuous-image-quasi-compact` for compactness of the image, with equality to the whole target supplied by the assumed surjectivity. For the particular atlas it uses the continuity and representable-surjectivity clauses of point-open-calculus. It needs no converse topology assertion. All uses in all steps have verbatim statement evidence in `citations.json`.
+
+I checked E1-E7 on the empty algebraic space (take D_0 empty), an empty component, a one-component atlas, a nonempty target with an infinite affine component atlas, and a surjective map with empty source (forcing empty target). The argument uses no affine-intersection claim and no separatedness of S or Z. A finite selected set may include redundant or empty components without affecting any step. Every step is below 2000 characters; no long inline comparison is hidden. No statement correction, route departure or unavailable literature was needed. There is no second worker in this direct-delivery workflow; this is Q13's review for the maintainer's independent reading.

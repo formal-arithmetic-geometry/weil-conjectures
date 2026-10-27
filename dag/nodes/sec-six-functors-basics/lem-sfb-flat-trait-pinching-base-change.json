@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-flat-trait-pinching-base-change",
+ "kind": "statement",
+ "title": "Flat trait pinching and arbitrary scalar extension",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and let $X,Z,T$ be flat $S$-schemes [def-weil-flat-morphism]. Let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion] and $j:Z\\to T$ a finite $S$-morphism [def-weil-finite-integral-morphism]. Suppose an affine open $U\\subseteq X$ contains $i(Z)$. Let $P=X\\amalg_ZT$ be a pushout in the category of all schemes [def-weil-pbc-category-colimit], with maps $a:X\\to P$, $b:T\\to P$, and $c=ai=bj$. Then $P\\to S$ is flat. For every commutative $R$-algebra $R'$, with $S'=\\operatorname{Spec}R'$, the base-changed square $Z_{S'}\\to X_{S'}$, $Z_{S'}\\to T_{S'}$, $X_{S'}\\to P_{S'}$, $T_{S'}\\to P_{S'}$ is again a pushout of schemes [def-pc-base-change]. This assertion includes nonflat $R'$ and zero rings. More explicitly, $P$ has a simultaneous affine cover with coordinate rings $Q=A\\times_D E$, where the rings of the inverse images in $X,Z,T$ are respectively $A,D,E$, $A\\to D$ is surjective, and the fibre product has coordinatewise operations. The sequence of $R$-modules $$0\\longrightarrow Q\\longrightarrow A\\oplus E\\xrightarrow{(u,v)\\mapsto\\bar u-j^*v}D\\longrightarrow0$$ is short exact, $Q$ is $R$-flat, and the canonical algebra map $$Q\\otimes_RR'\\longrightarrow (A\\otimes_RR')\\times_{D\\otimes_RR'}(E\\otimes_RR')$$ is an isomorphism for every $R'$. These identifications give the base-changed pushout square on each chart and agree on all open restrictions. No properness, finite-type, etaleness, surjectivity of $j$, or fibre-dimension assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Agent extraction of old step 4: Tags 0E25 (proposition-pushout-along-closed-immersion-and-integral), 0ET0 (lemma-basic-example-pushout); algebra.tex Tag 00HL (lemma-flat-tor-zero); more-algebra.tex Tag 0AUW (lemma-dedekind-torsion-free-flat)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "The finite morphism $j$ is integral by [lem-weil-pbc-finite-iff-integral-lft]. The given affine open containing all of $i(Z)$ contains every $i(j^{-1}(t))$, including empty fibres. Thus [lem-sfb-ferrand-scheme-pushout] applies. Its pushout is uniquely isomorphic, respecting $X,T,Z$, to the given $P$ by [def-weil-pbc-category-colimit]; the same uniqueness identifies the induced map to $S$. Use its simultaneous affine cover $W=\\operatorname{Spec}Q$ with inverse-image rings $A,E,D$, $A\\twoheadrightarrow D$, and $Q=A\\times_DE$. This already supplies the coordinatewise ring structure asserted in the statement.",
+   "uses": [
+    "lem-weil-pbc-finite-iff-integral-lft",
+    "lem-sfb-ferrand-scheme-pushout",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25, proposition-pushout-along-closed-immersion-and-integral, affine-cover paragraph; morphisms.tex Tag 01WJ, lemma-finite-integral"
+   }
+  },
+  {
+   "text": "Fix a chart and write $\\alpha:A\\twoheadrightarrow D$ and $\\beta:E\\to D$. The inclusion $Q\\to A\\oplus E$ is injective, its image is exactly the kernel of the $R$-linear difference map $\\delta(u,v)=\\alpha(u)-\\beta(v)$, and $\\delta$ is surjective: lift any $d\\in D$ to $u\\in A$ and use $(u,0)$. This proves the displayed short exact sequence directly; the difference map is used as a module map, not as a ring homomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25, affine fibre-product description; direct kernel calculation"
+   }
+  },
+  {
+   "text": "The affine criterion [lem-weil-pbc-flat-morphism-affine-criterion] applied to the inverse-image opens in the flat $S$-schemes $X,T,Z$ gives $R$-flatness of $A,E,D$. For $0\\ne r\\in R$, multiplication by $r$ on $R$ is injective since $R$ is a domain [def-sc-discrete-valuation-ring]. Tensoring this injection with $A$ or $E$ is injective by [def-weil-pbc-flat-ring-map]; under $R\\otimes_RA=A$ and $R\\otimes_RE=E$ it is multiplication by $r$. Therefore $r(u,v)=0$ in the submodule $Q\\subseteq A\\oplus E$ forces $u=v=0$. The DVR is a PID by the cited definition, so [lem-weil-pbc-pid-torsion-free-module-flat] makes $Q$ flat. Now [lem-weil-pbc-flat-ring-map-iff-flat-affine] makes each $W\\to S$ flat. These opens cover $P$, and the local rings of an open subscheme at its points are the same local rings as in $P$; hence $P\\to S$ is flat by [def-weil-flat-morphism].",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW, lemma-dedekind-torsion-free-flat (1); morphisms.tex Tag 01U5, lemma-flat-characterize; algebra.tex Tag 00HB, definition-flat"
+   }
+  },
+  {
+   "text": "Let $R'$ be any commutative $R$-algebra. Since the last term $D$ of step 2 is $R$-flat, [lem-weil-pbc-flat-quotient-tensor-injective] applies with $N=R'$ and preserves the entire short exact sequence. Interchanging tensor factors gives $0\\to Q\\otimes_RR'\\to (A\\oplus E)\\otimes_RR'\\to D\\otimes_RR'\\to0$. No flatness of $R'$ is used: it is flatness of the quotient $D$ that supplies the initial zero.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL, lemma-flat-tor-zero"
+   }
+  },
+  {
+   "text": "The module isomorphism $(A\\oplus E)\\otimes_RR'\\simeq(A\\otimes_RR')\\oplus(E\\otimes_RR')$ sends $(u,v)\\otimes r'$ to $(u\\otimes r',v\\otimes r')$; its inverse is the sum of the maps from the two summand inclusions. They are inverse on pure tensors and hence on sums. Under it the last map in step 4 is $\\alpha\\otimes1-\\beta\\otimes1$. Its kernel is precisely the underlying module of $(A\\otimes_RR')\\times_{D\\otimes_RR'}(E\\otimes_RR')$. Exactness therefore makes the canonical map from $Q\\otimes_RR'$ to that fibre product bijective. Its formula $(u,v)\\otimes r'\\mapsto(u\\otimes r',v\\otimes r')$ preserves the unit and products of pure tensors, and then all products by distributivity. It is consequently the asserted algebra isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HL, lemma-flat-tor-zero, applied to the difference-map sequence; elementary identification of its kernel"
+   }
+  },
+  {
+   "text": "Base change of the affine chart and its inverse images has rings $Q\\otimes_RR'$, $A\\otimes_RR'$, $E\\otimes_RR'$, $D\\otimes_RR'$ with the canonical tensor maps, by [lem-weil-pbc-fibre-product-affine-spectra]. The map $\\alpha\\otimes1$ is surjective: lift each first factor of each pure tensor in a finite sum. Step 5 and [lem-sfb-affine-closed-pinching-pushout] thus give a pushout in the category of all schemes over every $W_{S'}$. These are open subschemes of $P_{S'}$ by [lem-weil-pbc-open-immersion-base-change] and cover it, since every point projects into some $W$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-affine-closed-pinching-pushout",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0, lemma-basic-example-pushout; schemes.tex Tags 01I4/01JQ, affine fibre products"
+   }
+  },
+  {
+   "text": "For $h=(u,v)\\in Q$, [lem-sfb-ring-fibre-product-spectrum] identifies the inverse-image rings over the principal open $D(h)\\subseteq W$ with $A_u,E_v,D_{\\alpha(u)}$ and identifies $Q_h$ with their fibre product. The comparison of step 5 restricts to the same comparison there: both composites with its two projections are the tensor maps of the coordinate projections. Thus the maps agree by the defining equality of pairs in a fibre product. Repeating steps 3--6 on this affine open is valid because the three source opens still belong to the original flat schemes. Principal opens contained in $W\\cap V$ cover each chart intersection by [lem-weil-pbc-spec-localization-away-basic-open]; their pullbacks cover the corresponding intersection after scalar extension. Given compatible maps $X_{S'}\\to H$ and $T_{S'}\\to H$ to any scheme $H$, step 6 gives a unique map $W_{S'}\\to H$ on each chart. On these principal-open refinements the maps from different charts agree by the local pushout uniqueness. By [lem-weil-pbc-scheme-morphism-gluing] they agree on the intersections and glue uniquely to $P_{S'}\\to H$. This is the global pushout universal property. The same restriction argument gives agreement on every open, without assuming chart intersections affine. If $R'=0$, all base-changed rings and schemes are zero and empty respectively, and every calculation and universal property above still holds.",
+   "uses": [
+    "lem-sfb-ring-fibre-product-spectrum",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0E25 and 0ET0; more-algebra.tex Tag 01Z8, lemma-diagram-localize; open-cover gluing as in lemma-pushout-fpqc-local"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-flat-ring-map",
+  "lem-sfb-affine-closed-pinching-pushout",
+  "lem-sfb-ferrand-scheme-pushout",
+  "lem-sfb-ring-fibre-product-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0E25 and 0ET0 assembled with algebra.tex 00HL and more-algebra.tex 0AUW; explicit elementary tensor-kernel and open-cover argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Ferrand pushout of schemes flat over a discrete valuation ring along a flat closed subscheme is flat and commutes with arbitrary scalar extension",
+   "results": "{\"t\": \"2026-10-22T06:13:34Z\", \"tool\": \"leanfinder\", \"query\": \"A Ferrand pushout of schemes flat over a discrete valuation ring along a flat closed subscheme is flat and commutes with arbitrary scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.comp\"], \"digest\": \"2596e41f480582f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scheme pullbacks and tensor-limit preservation for a flat scalar extension do not give a Ferrand pushout after an arbitrary, possibly nonflat scalar extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor product of a fibre product of flat algebras along a surjection is the fibre product of the tensor products if the common quotient is flat",
+   "results": "{\"t\": \"2026-10-22T06:14:50Z\", \"tool\": \"leansearch\", \"query\": \"The tensor product of a fibre product of flat algebras along a surjection is the fibre product of the tensor products if the common quotient is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instTensorProduct\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.of_flat_tensorProduct\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"TensorProduct.map_injective_of_flat_flat\", \"TensorProduct.LinearIndepOn.tmul_of_flat_left\", \"Module.FaithfullyFlat.instTensorProduct\", \"AlgHom.tensorEqualizerEquiv_apply\"], \"digest\": \"864d841e6a44c09d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scheme pullbacks and tensor-limit preservation for a flat scalar extension do not give a Ferrand pushout after an arbitrary, possibly nonflat scalar extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T06:14:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1\", \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian_1\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact\"], \"digest\": \"50564000fa929136\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scheme pullbacks and tensor-limit preservation for a flat scalar extension do not give a Ferrand pushout after an arbitrary, possibly nonflat scalar extension."
+  },
+  {
+   "tool": "grep",
+   "query": "Ferrand|pinch|flat.*pushout|pushout.*flat",
+   "results": "{\"t\": \"2026-10-22T06:14:28Z\", \"tool\": \"grep\", \"query\": \"Ferrand|pinch|flat.*pushout|pushout.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"cd16f458acb185fe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: flat scheme pullbacks and tensor-limit preservation for a flat scalar extension do not give a Ferrand pushout after an arbitrary, possibly nonflat scalar extension."
+  },
+  {
+   "tool": "grep",
+   "query": "Ferrand|pinch|flat.*pushout|pushout.*flat",
+   "results": "{\"t\": \"2026-10-23T09:30:46Z\", \"tool\": \"grep\", \"query\": \"Ferrand|pinch|flat.*pushout|pushout.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"cd16f458acb185fe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat pullbacks and flat-scalar equalizer equivalences do not assert preservation of this scheme pushout for arbitrary nonflat scalar extension; kerLTensorEquivOfSurjective is only the module-kernel input already covered by the cited exact-sequence node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a fibre product of algebras along a surjection with flat common quotient preserves the fibre product for any scalar extension",
+   "results": "{\"t\": \"2026-10-23T09:30:46Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring a fibre product of algebras along a surjection with flat common quotient preserves the fibre product for any scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Algebra.Smooth.baseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"RingHom.SurjectiveOnStalks.tensorProductMap\", \"AlgHom.tensorEqualizerEquiv_apply\", \"Algebra.Unramified.baseChange\", \"LinearMap.tensorEqLocusEquiv\"], \"digest\": \"6d2b5a50a045a3e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat pullbacks and flat-scalar equalizer equivalences do not assert preservation of this scheme pushout for arbitrary nonflat scalar extension; kerLTensorEquivOfSurjective is only the module-kernel input already covered by the cited exact-sequence node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T09:30:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1\", \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian\", \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian_1\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact\"], \"digest\": \"50564000fa929136\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat pullbacks and flat-scalar equalizer equivalences do not assert preservation of this scheme pushout for arbitrary nonflat scalar extension; kerLTensorEquivOfSurjective is only the module-kernel input already covered by the cited exact-sequence node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme pushout along a closed immersion and a finite morphism of flat schemes over a DVR is flat and is preserved by arbitrary base change",
+   "results": "{\"t\": \"2026-10-23T09:30:52Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme pushout along a closed immersion and a finite morphism of flat schemes over a DVR is flat and is preserved by arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"b85833225f3a9c62\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat pullbacks and flat-scalar equalizer equivalences do not assert preservation of this scheme pushout for arbitrary nonflat scalar extension; kerLTensorEquivOfSurjective is only the module-kernel input already covered by the cited exact-sequence node."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorEqualizerEquiv|tensorEqLocusEquiv|PreservesFiniteLimits",
+   "results": "{\"t\": \"2026-10-23T09:34:58Z\", \"tool\": \"grep\", \"query\": \"tensorEqualizerEquiv|tensorEqLocusEquiv|PreservesFiniteLimits\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\", \"Mathlib/RingTheory/Flat/Equalizer.lean\"], \"digest\": \"c237b8c04e5dc679\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat pullbacks and flat-scalar equalizer equivalences do not assert preservation of this scheme pushout for arbitrary nonflat scalar extension; kerLTensorEquivOfSurjective is only the module-kernel input already covered by the cited exact-sequence node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pinching schemes: tensor the kernel of the difference map from A direct sum B onto a flat algebra C to preserve the ring fibre product under nonflat base change",
+   "results": "{\"t\": \"2026-10-23T09:35:01Z\", \"tool\": \"leanfinder\", \"query\": \"Pinching schemes: tensor the kernel of the difference map from A direct sum B onto a flat algebra C to preserve the ring fibre product under nonflat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.kerTensorProductMapIdToAlgHomEquiv\", \"AlgHom.tensorEqualizerEquiv_apply\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"Algebra.kerTensorProductMapIdToAlgHomEquiv_symm_apply\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\"], \"digest\": \"c5c789ccb0b046b9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme flat pullbacks and flat-scalar equalizer equivalences do not assert preservation of this scheme pushout for arbitrary nonflat scalar extension; kerLTensorEquivOfSurjective is only the module-kernel input already covered by the cited exact-sequence node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-etale-branch-pinching",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Projective nodal pinching along finite etale double branches; old proof step 4 (DVR torsion-free flatness, flat-last-term exactness, comparison of all base-changed affine charts)",
+   "via": [
+    "lem-sfb-trait-etale-branch-pinching",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-trait-pinching-base-change",
+  "worker": "stage1",
+  "summary": "Reused the existing Ferrand simultaneous affine cover, PID torsion-free flatness and flat-quotient tensor exactness. Wrote the exact difference-map sequence, the algebra comparison on pure tensors, and the principal-open overlap/gluing argument. No new nodes, statement change or attachment. Checked nonflat and zero scalar extensions and non-surjective j.",
+  "blueprint": "Realizes the inherited trait-pinching prerequisite, old step 4, of the recorded det-thm-sf-ctf-stability-direct-images route. Latest blueprint now assembles proper/open direct images; this existing downstream algebraic prerequisite is retained, with no unit-route change."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-b2319d7a4",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-b2319d7a4 (reviewer sub-agent of L); spot-checked: I read the item, all 16 cited statements, and the Stacks sources: 0E25 situation (3) and proposition, 0ET0, lemma-pushout-fpqc-local, 01Z8 lemma-diagram-localize, 0AUW, 00HL, 01U5 and 01WJ; every source tag matches its label. Against live, only the proof fields changed; statement and stmt_deps are verbatim. There are no new nodes, no repair note and no cycle. Route is clean: the three cited statements that are not Mathlib leaves (ferrand-scheme-pushout, affine-closed-pinching-pushout, ring-fibre-product-spectrum) are split and reviewed in the item's own unit sk-thm-sf-ctf-stability; the rest are Mathlib leaves. Step 1: j finite gives j integral, and the single affine U containing i(Z) meets Ferrand hypothesis (3); the cover and A→D surjective come from that node's statement, and colimit uniqueness identifies the given P. Step 2: the exact sequence is elementary, onto via (u,0). Step 3: the affine criterion gives A, E, D flat over R; the domain property and flatness make Q torsion-free; the DVR definition gives every ideal principal, so the PID lemma makes Q flat; P is then flat by the stalkwise definition. Step 4: tensor exactness uses only flatness of D, never of R'. Step 5: the kernel is the fibre product, and the comparison is the tensor of the two projection ring maps. Step 6: affine spectra, the all-schemes affine pinching pushout (α⊗1 onto) and open-immersion base change give the charts. Step 7: principal-open refinements of W∩V via ring-fibre-product-spectrum, then gluing; affine overlaps are not assumed. Edge cases checked: R'=0, R'=R/π, Z empty, j not surjective, X=Z. Duplicate search (pushout, pinching, 0E25, 0ET0): etale-affine-pinching-descent covers only flat base change, and the other candidates are different statements."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatTraitPinchingBaseChange",
+  "declaration": "AlgebraicGeometry.flat_trait_pinching_base_change",
+  "declarations": [
+   "AlgebraicGeometry.FlatTraitPinchingAlgebra",
+   "AlgebraicGeometry.PinchingPushoutOnOpens",
+   "AlgebraicGeometry.flat_trait_pinching_base_change"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTraitPinchingBaseChange.lean",
+  "statement": "theorem flat_trait_pinching_base_change (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (Z X T P : Over (Spec (CommRingCat.of R))) (i : Z ⟶ X) (j : Z ⟶ T) (a : X ⟶ P) (b : T ⟶ P) [Flat Z.hom] [Flat X.hom] [Flat T.hom] [IsClosedImmersion i.left] [IsFinite j.left] (U : X.left.Opens) (hU : IsAffineOpen U) (hiU : Set.range i.left ⊆ U) (hs : IsPushout i.left j.left a.left b.left) : Flat P.hom ∧ (∃ (ι : Type u) (W : ι → P.left.Opens), iSup W = ⊤ ∧ ∀ k : ι, IsAffineOpen (W k) ∧ IsAffineOpen (a.left ⁻¹ᵁ W k) ∧ IsAffineOpen (b.left ⁻¹ᵁ W k) ∧ IsAffineOpen ((i.left ≫ a.left) ⁻¹ᵁ W k) ∧ Function.Surjective (i.left.app (a.left ⁻¹ᵁ W k)).hom ∧ FlatTraitPinchingAlgebra R Γ(P.left, W k) Γ(X.left, a.left ⁻¹ᵁ W k) Γ(T.left, b.left ⁻¹ᵁ W k) Γ(Z.left, (i.left ≫ a.left) ⁻¹ᵁ W k) (((Scheme.ΓSpecIso (CommRingCat.of R)).inv ≫ P.hom.appLE ⊤ (W k) (by simp)).hom) (a.left.app (W k)).hom (b.left.app (W k)).hom (i.left.app (a.left ⁻¹ᵁ W k)).hom (j.left.appLE (b.left ⁻¹ᵁ W k) ((i.left ≫ a.left) ⁻¹ᵁ W k) (le_of_eq (congrArg (fun f : Z.left ⟶ P.left ↦ f ⁻¹ᵁ W k) hs.w))).hom) ∧ ∀ (R' : Type u) [CommRing R'] [Algebra R R'], ∃ h' : IsPushout ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).map i).left ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).map j).left ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).map a).left ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).map b).left, PinchingPushoutOnOpens ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).map i).left ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).map j).left ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).map a).left ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R R')))).map b).left h'.w",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28d01dd45",
+  "group": "N8",
+  "result": "pass",
+  "note": "Only the item lean field and the new module FlatTraitPinchingBaseChange.lean changed; lean.statement matches the file signature exactly. Every hypothesis matches the node (DVR, flat Over objects, closed immersion, finite j, affine U ⊇ range i, IsPushout in Scheme) with nothing stronger. Every conclusion clause matches: Flat P.hom; affine cover with actual section rings, A→D surjective, injectivity/Function.Exact/surjectivity of the difference map, Module.Flat R Q, equalizer AlgEquiv pinned to (f q, g q), and for every R' (no flatness or nontriviality) the tensor AlgEquiv pinned on pure tensors. The base-changed IsPushout via Over.pullback (the def-pc-base-change convention) and the open-restriction pushout clause are true (Stacks 0E25 construction restricts to opens) and have the same form as the reviewed exists_ferrand_scheme_pushout. Edge cases R'=0, R'=R/π, Z empty, j not surjective and P empty are covered; R' in universe u is forced by Scheme.{u}. Helpers are real Prop definitions, the only sorry is the proof, docstrings carry sources and the blueprint id, no name clash. No compile (no file changed); worker reports a clean scompile and dry run."
+ }
+}

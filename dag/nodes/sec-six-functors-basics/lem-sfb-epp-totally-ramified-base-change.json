@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-epp-totally-ramified-base-change",
+ "kind": "statement",
+ "title": "Totally ramified base change",
+ "statement": "Let $A\\to B$ be an injective local map of complete DVRs with fraction fields $K\\subseteq L$, and suppose $\\mathfrak m_AB=\\mathfrak m_B$ [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring, def-pc-field-extension]. Let $K_1/K$ be finite separable [def-weil-pbc-separable-algebraic-extension], and let $A_1$ be the integral closure of $A$ in $K_1$ [def-weil-pbc-integral-closure]. Suppose $A_1/\\mathfrak m_{A_1}=A/\\mathfrak m_A$ and $\\mathfrak m_AA_1=\\mathfrak m_{A_1}^{[K_1:K]}$ (total ramification). Then $L\\otimes_KK_1$ is a field, $B\\otimes_AA_1$ is its integral closure of $B$ and is a complete DVR, and $\\mathfrak m_{A_1}(B\\otimes_AA_1)=\\mathfrak m_{B\\otimes_AA_1}$ [def-weil-pbc-module-tensor-product]. The residue field of $B\\otimes_AA_1$ is the residue field of $B$. Local means pulling back maximal ideals, and finite means finite-dimensional.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified; completeness is a harmless strengthening of its hypotheses."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $n=[K_1:K]\\geq1$. The DVR $A$ is a principal ideal domain, hence Noetherian by [lem-weil-pbc-pid-noetherian-normal]; being local and complete, it is Nagata by [lem-weil-pbc-complete-local-nagata]. Applying [def-weil-pbc-nagata-ring] at the prime $(0)$ and [def-weil-pbc-japanese-domain] to the finite extension $K_1/K$, $A_1$ is a finite $A$-module. By [lem-weil-pbc-integral-closure-finite-extension-normal], $A_1$ is a domain with fraction field $K_1$. The domain clause of [lem-weil-pbc-finite-over-complete-local-product] makes $A_1$ local. By [lem-sc-dvr-dimension-one], $A$ is a Noetherian local domain of dimension $1$, so [lem-sfb-finite-normalization-local-dvr] (with $D=A$, $C=A_1$) gives a prime $\\mathfrak q\\subset A_1$ over $\\mathfrak m_A$, maximal, with $(A_1)_{\\mathfrak q}$ a DVR and $\\mathfrak m_{(A_1)_{\\mathfrak q}}\\cap A=\\mathfrak m_A$. As $A_1$ is local, $\\mathfrak q=\\mathfrak m_{A_1}$ and every element outside $\\mathfrak q$ is already a unit, so $(A_1)_{\\mathfrak q}=A_1$: thus $A_1$ is a DVR and $A\\to A_1$ is local. Choose uniformizers $\\pi\\in A$ and $t\\in A_1$. Apply [lem-sfb-totally-ramified-uniformizer-presentation] using the given residue-field isomorphism and $\\mathfrak m_AA_1=\\mathfrak m_{A_1}^n$. It gives $A_1=A[T]/(P)$ and $K_1=K[T]/(P)$ under $T\\mapsto t$, with $P=T^n+\\sum_{i<n}a_iT^i$, $a_i\\in\\pi A$ and $a_0=\\pi u$ for $u\\in A^\\times$.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-complete-local-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-sc-dvr-dimension-one",
+    "lem-sfb-finite-normalization-local-dvr",
+    "lem-sfb-totally-ramified-uniformizer-presentation",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: choice of uniformizers and the Eisenstein presentation; finiteness, locality and DVR property of A_1 via Algebra Tags 032W, 0325 and the finite-normalization localization (More on Algebra 09EM (1))"
+   }
+  },
+  {
+   "text": "The equality $\\mathfrak m_AB=\\mathfrak m_B$ says that the image of $\\pi$ generates $\\mathfrak m_B$, so it is a uniformizer of $B$. The image of $u$ is a unit. In a DVR a uniformizer times a unit is not in the square of its maximal ideal: cancellation from $\\pi u=\\pi^2b$ would make $\\pi$ a unit. Thus the image $P_B\\in B[T]$ satisfies every hypothesis of [lem-sfb-eisenstein-quotient-dvr]. Consequently $C=B[T]/(P_B)$ is a DVR with maximal ideal $(x)$, where $x$ is the class of $T$.",
+   "uses": [
+    "lem-sfb-eisenstein-quotient-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: P remains Eisenstein because pi is a uniformizer of B"
+   }
+  },
+  {
+   "text": "There is a canonical $B$-algebra isomorphism $B\\otimes_AA_1\\cong C$: it sends $b\\otimes q(t)$ to $bq(x)$; its inverse sends constants $b$ to $b\\otimes1$ and $x$ to $1\\otimes t$. The polynomial relation makes both maps well-defined, and they are inverse on constants and the generator. The same formulas over $K\\to L$ identify $L\\otimes_KK_1$ with $L[T]/(P_L)=C[1/\\pi]$, since every nonzero denominator in $B$ is a unit times a power of $\\pi$ by [lem-weil-pbc-dvr-unit-times-uniformizer-power], so $B[1/\\pi]=L$. By [lem-weil-pbc-monic-quotient-free] this localization has dimension $n$ over $L$. It is a nonzero domain because $C$ is a domain and $\\pi\\ne0$ in $C$ (the monic quotient basis makes $B\\to C$ injective). Hence [lem-weil-pbc-finite-dimensional-domain-is-field] makes it a field $L_1$. Since it contains $C$ and consists of fractions of $C$, it is $\\operatorname{Frac}(C)$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: tensor presentations and the asserted field L_1; the fraction-field identification is written out"
+   }
+  },
+  {
+   "text": "The residue quotient is $C/(x)=B[T]/(P_B,T)=B/(a_0)=B/(\\pi)$, with the constant map giving the isomorphism. Thus $\\mathfrak m_C\\cap B=\\mathfrak m_B$, and $B\\to C\\subset L_1$ is local. By [lem-weil-pbc-monic-quotient-free], $C$ is a finite $B$-module; $B$ is Noetherian [lem-weil-pbc-pid-noetherian-normal], local and complete, and $C$ is a domain, so the domain clause of [lem-weil-pbc-finite-over-complete-local-product] shows that $C$ is complete for its maximal ideal. $C$ is integral over $B$ (finite) and lies in $L_1=\\operatorname{Frac}(C)$ (Step 3). Conversely, an element of $L_1$ integral over $B$ is integral over $C\\supseteq B$, and $C$ is normal as a principal ideal domain [lem-weil-pbc-pid-noetherian-normal], so it lies in $C$. Hence $C$ is the integral closure of $B$ in $L_1$ [def-weil-pbc-integral-closure]. Finally $\\mathfrak m_{A_1}=(t)$ and the tensor presentation sends $t$ to $x$, so $\\mathfrak m_{A_1}C=(x)=\\mathfrak m_C$. The residue quotient above is the claimed unchanged residue field.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "def-weil-pbc-integral-closure",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof: normalization identification and weak unramifiedness; completeness via Algebra Tag 0325 (lemma-quotient-complete-local)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-complete-local-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sc-dvr-dimension-one",
+  "lem-sfb-finite-normalization-local-dvr",
+  "lem-sfb-totally-ramified-uniformizer-presentation",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-eisenstein-quotient-dvr",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ramification index one for a DVR extension persists after finite separable totally ramified base extension and the tensor product is a DVR",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsUnramifiedAt.of_liesOver\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a Dedekind domain $ S $, and let $ P $ be a prime ideal in a domain $ T $ that is torsion-free as an $ S $-module. If $ T $ is of essential finite type over $ S $, which \"}\n  {\"name\": \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a commutative ring $ S $, and let $ P $ be a prime ideal in a commutative ring $ T $ lying over $ p $ (i.e., $ P \\\\cap S = p $). Suppose $ S $ and $ T $ are finitely gener\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsNoetherianRing S] [Algebra.IsUnramifiedAt R p],\\n  p ≠ ⊥ → ∀ [IsDomain S] [Algebra.EssFiniteType R S], Ideal.ramificationIdx (algebraMap R S) (Ideal.under R p) p = \", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal S}\\n  [inst_3 : p.IsPrime] [IsDedekindDomain S] [Algebra.EssFiniteType R S] [IsDomain R] [Module.Finite ℤ R] [CharZero R]\\n  [Algebra.IsIntegral R S],\\n  p ≠ ⊥ → (Algebra.IsUnramifiedAt R p ↔ Ide\", \"doc\": \"Let $ S $ be a Dedekind domain that is an essentially finite type algebra over a domain $ R $, where $ R $ is finitely generated as a $ \\\\mathbb{Z} $-module, has characteristic zero, and $ S $ is integ\"}\n  {\"name\": \"Ideal.ramificationIdx_algebra_tower\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] [IsDedekindDomain S]\\n  [IsDedekindDomain T] {p : Ideal R} {P : Ideal S} {Q : Ideal T} [hpm : P.I\", \"doc\": \"In a tower of Dedekind domain extensions $ R \\\\subseteq S \\\\subseteq T $, if $ \\\\mathfrak{p} \\\\subseteq R $, $ \\\\mathfrak{P} \\\\subseteq S $, and $ \\\\mathfrak{Q} \\\\subseteq T $ are prime ideals with $ \\\\mathfra\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] [inst_2 : Algebra R S] {p : Ideal R} {P : Ideal S}\\n  [inst_3 : P.IsPrime] [IsNoetherianRing S],\\n  Ideal.map (algebraMap R S) p ≤ P →\\n    P ≠ ⊥ →\\n      P.primeCompl ≤ nonZeroDivisors S →\\n        Ideal.map (algebraMap R (Localizatio\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ Noetherian, $ p $ a prime ideal of $ R $, and $ P $ a prime ideal of $ S $. If the image of $ p $ under the ring homomorphism $ R \\to S $ is containe\"}\n  {\"name\": \"Algebra.IsUnramifiedAt\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"Given a prime ideal $ q $ in a commutative ring $ A $, this proposition asserts that the localization of $ A $ at the complement of $ q $ is formally unramified over the base commutative ring $ R $. I\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (P : Ideal B)\\n  [inst_7 : P.IsPrime] [Algebra.IsUnramifiedAt R P], Algebra.IsUnramifiedAt A P\", \"doc\": \"Let $ R \\\\to A \\\\to B $ be ring homomorphisms, and let $ \\\\mathfrak{p} $ be a prime ideal of $ B $. If $ B $ is unramified over $ R $ at $ \\\\mathfrak{p} $, then $ B $ is also unramified over $ A $ at $ \\\\m\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base change assumes the full unramified property; our weakly unramified map allows inseparable and transcendental residue extensions. Eisenstein irreducibility alone is not the asserted normalization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eisenstein base change of a weakly unramified DVR has integral closure equal to the tensor product and unchanged residue field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsUnramifiedAt.of_restrictScalars\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (P : Ideal B)\\n  [inst_7 : P.IsPrime] [Algebra.IsUnramifiedAt R P], Algebra.IsUnramifiedAt A P\", \"doc\": \"Let $ R \\\\to A \\\\to B $ be ring homomorphisms, and let $ \\\\mathfrak{p} $ be a prime ideal of $ B $. If $ B $ is unramified over $ R $ at $ \\\\mathfrak{p} $, then $ B $ is also unramified over $ A $ at $ \\\\m\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_map_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S] (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [inst_5 : q.IsPrime]\\n  [inst_6 : q.LiesOver p],\\n  Algebra.IsUnramifiedAt R q ↔\\n    Algebra.IsSeparable p.ResidueField q.Resi\", \"doc\": \"Given local rings $ R $ and $ S $ where the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with an algebra structure over the residue field of $ R \"}\n  {\"name\": \"Algebra.IsUnramifiedAt.comp\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is unramified over $ R $ at a prime ideal $ p $, and $ B $ is unramified over $ A $ at a prime ideal $ P $ lying over $ p $, then $ B $ is unramified over $ R $ at $ P $. This holds under the\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField_1\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)]\\n  [Algebra.FormallyUnramified R S], Algebra.FormallyUnramified (IsLocalRing.ResidueField R) (IsLocalRing.Residue\", \"doc\": \"If $ S $ is formally unramified over $ R $, then the residue field of $ S $ is formally unramified over the residue field of $ R $. This instance asserts that the formal unramified property of a local\"}\n  {\"name\": \"Algebra.IsUnramifiedAt.of_liesOver\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Unramified\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra S T] [inst_5 : Algebra R T] [IsScalarTower R S T] (p : Ideal S) (P : Ideal T)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"Let $ p $ be a prime ideal in a Dedekind domain $ S $, and let $ P $ be a prime ideal in a domain $ T $ that is torsion-free as an $ S $-module. If $ T $ is of essential finite type over $ S $, which \"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S],\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (IsLocalRing.ResidueFiel\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"Algebra.Unramified.baseChange\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u_2) (B : Type u_3) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Unramified R A], Algebra.Unramified B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an unramified algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the base change $ B \\\\otimes_R A $ is an unramified algebra over $ B $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base change assumes the full unramified property; our weakly unramified map allows inseparable and transcendental residue extensions. Eisenstein irreducibility alone is not the asserted normalization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ramification index one for a DVR extension persists after finite separable totally ramified base extension and the tensor product is a DVR",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.ramificationIdxIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"{A : Type*} [CommRing A] (p : Ideal A) (B : Type*) [CommRing B] [Algebra A B] : ℕ\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a commutative ring $A$ and a ring extension $A \\\\to B$, this function returns the ramification index of $\\\\mathfrak{p}$ in $B$, defined as the supremum of all natural\"}\n  {\"name\": \"Algebra.Unramified.baseChange\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[Unramified R A] : Unramified B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an unramified algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the base change $ B \\\\otimes_R A $ is an unramified algebra over $ B $.\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Unramified\", \"type\": \"{p : Ideal S} [p.IsPrime] [IsNoetherianRing S] [IsUnramifiedAt R p] (hp : p ≠ ⊥) [IsDomain S] [EssFiniteType R S] :\\n  e(p|R) = 1\", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[Algebra R S] {p : Ideal R} {P : Ideal S} [P.IsPrime] [IsNoetherianRing S] (hpP : map (algebraMap R S) p ≤ P)\\n  (hp : P ≠ ⊥) (hp' : P.primeCompl ≤ nonZeroDivisors S)\\n  (H : p.map (algebraMap R (Localization.AtPrime P)) = maximalIdeal (Localization.AtPrime P)) :\\n  ramificationIdx (algebraMap R S) p P\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ Noetherian, $ p $ a prime ideal of $ R $, and $ P $ a prime ideal of $ S $. If the image of $ p $ under the ring homomorphism $ R \\to S $ is containe\"}\n  {\"name\": \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Unramified\", \"type\": \"{p : Ideal S} [p.IsPrime] [IsDedekindDomain S] [EssFiniteType R S] [IsDomain R] [Module.Finite ℤ R] [CharZero R]\\n  [Algebra.IsIntegral R S] (hp : p ≠ ⊥) : Algebra.IsUnramifiedAt R p ↔ e(p|R) = 1\", \"doc\": \"Let $ S $ be a Dedekind domain that is an essentially finite type algebra over a domain $ R $, where $ R $ is finitely generated as a $ \\\\mathbb{Z} $-module, has characteristic zero, and $ S $ is integ\"}\n  {\"name\": \"Ideal.ramificationIdxIn_eq_ramificationIdx\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \": ramificationIdxIn p B = ramificationIdx (algebraMap A B) p P\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a commutative ring $A$ and a ring extension $A \\\\to B$, the ramification index of $\\\\mathfrak{p}$ in $B$ (defined as the supremum of all natural numbers $n$ such that\"}\n  {\"name\": \"Ideal.ramificationIdx_le_finrank\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[NoZeroSMulDivisors R S] {p : Ideal R} [p.IsMaximal] (P : Ideal S) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver p] :\\n  p.ramificationIdx (algebraMap R S) P ≤ Module.finrank K L\", \"doc\": \"For a ring homomorphism $ f: R \\\\to S $, let $ p $ be a maximal ideal in $ R $, and let $ P $ be a prime ideal in $ S $ lying over $ p $ (i.e., $ P \\\\cap R = p $). If there are no zero divisors in the s\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base change assumes the full unramified property; our weakly unramified map allows inseparable and transcendental residue extensions. Eisenstein irreducibility alone is not the asserted normalization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Polynomial.IsEisensteinAt",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base change assumes the full unramified property; our weakly unramified map allows inseparable and transcendental residue extensions. Eisenstein irreducibility alone is not the asserted normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]isenstein|[Tt]otally[Rr]amified|weakly.unramified",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Polynomial.Eisenstein.Basic\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean\", \"line\": \"28\", \"text\": \"is *Distinguished at `I`* if `f` is monic and `IsWeaklyEisensteinAt I`.\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean\", \"line\": \"32\", \"text\": \"    extends f.IsWeaklyEisensteinAt I where\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean\", \"line\": \"39\", \"text\": \"  ⟨hf.toIsWeaklyEisensteinAt.mul hf'.toIsWeaklyEisensteinAt, hf.monic.mul hf'.monic⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.Polynomial.Eisenstein.Criterion\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"line\": \"13\", \"text\": \"# Eisenstein polynomials\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"line\": \"16\", \"text\": \"*Eisenstein at `𝓟`* if `f.leadingCoeff ∉ 𝓟`, `∀ n, n < f.natDegree → f.coeff n ∈ 𝓟` and\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"line\": \"17\", \"text\": \"`f.coeff 0 ∉ 𝓟 ^ 2`. In this file we gather miscellaneous results about Eisenstein polynomials.\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"line\": \"20\", \"text\": \"* `Polynomial.IsEisensteinAt f 𝓟`: the property of being Eisenstein at `𝓟`.\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"line\": \"12\", \"text\": \"/-! # The Eisenstein criterion\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"line\": \"14\", \"text\": \"- `Polynomial.generalizedEisenstein` :\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"line\": \"28\", \"text\": \"We give in `Archive.Examples.Eisenstein` an explicit example\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"line\": \"31\", \"text\": \"* `Polynomial.irreducible_of_eisenstein_criterion` : the classic Eisenstein criterion.\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"line\": \"66\", \"text\": \"private lemma generalizedEisenstein_aux {q f g : R[X]} {p : ℕ}\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"line\": \"14\", \"text\": \"# Eisenstein polynomials\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"line\": \"16\", \"text\": \"In this file we gather more miscellaneous results about Eisenstein polynomials\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"line\": \"19\", \"text\": \"* `mem_adjoin_of_smul_prime_pow_smul_of_minpoly_isEisensteinAt`: let `K` be the field of fraction\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"line\": \"21\", \"text\": \"  power basis `B` such that the minimal polynomial of `B.gen` is Eisenstein at `p`. Given `z : L`\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"line\": \"46\", \"text\": \"theorem cyclotomic_comp_X_add_one_isEisensteinAt [hp : Fact p.Prime] :\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.RingTheory.Polynomial.Eisenstein.Distinguished\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base change assumes the full unramified property; our weakly unramified map allows inseparable and transcendental residue extensions. Eisenstein irreducibility alone is not the asserted normalization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a discrete valuation ring polynomial ring by a monic Eisenstein polynomial is a discrete valuation ring with uniformizer the class of the variable",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient of a discrete valuation ring polynomial ring by a monic Eisenstein polynomial is a discrete valuation ring with uniformizer the class of the variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WittVector.isDiscreteValuationRing\", \"PreTilt.isDomain\", \"StandardEtalePair.Ring\", \"Polynomial.idealX\", \"Polynomial.IsDistinguishedAt.toIsWeaklyEisensteinAt\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\"], \"digest\": \"cc0535234cf3be21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure in a finite totally ramified extension of a complete discrete valuation field is generated by any uniformizer whose minimal polynomial is Eisenstein",
+   "results": "{\"t\": \"2026-10-24T07:03:48Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure in a finite totally ramified extension of a complete discrete valuation field is generated by any uniformizer whose minimal polynomial is Eisenstein\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"mem_adjoin_of_smul_prime_smul_of_minpoly_isEisensteinAt\", \"mem_adjoin_of_smul_prime_pow_smul_of_minpoly_isEisensteinAt\", \"Valuation.Uniformizer.is_generator\", \"Valuation.IsUniformizer.is_generator\", \"Valuation.Uniformizer.val\", \"Valuation.exists_pow_Uniformizer\", \"Valuation.Uniformizer.instCoeSubtypeMemSubringInteger\", \"Valuation.pow_Uniformizer_is_pow_generator\"], \"digest\": \"631da3769b3048b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsEisensteinAt|[Tt]otally[Rr]amified|monogenic",
+   "results": "{\"t\": \"2026-10-24T07:04:23Z\", \"tool\": \"grep\", \"query\": \"IsEisensteinAt|[Tt]otally[Rr]amified|monogenic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\"], \"digest\": \"8b6a6fb797ec22d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Polynomial.IsEisensteinAt",
+   "results": "{\"t\": \"2026-10-24T07:04:24Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Polynomial.IsEisensteinAt\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]isenstein|[Tt]otally[Rr]amified",
+   "results": "{\"t\": \"2026-10-24T07:04:56Z\", \"tool\": \"grep\", \"query\": \"[Ee]isenstein|[Tt]otally[Rr]amified\", \"sub\": \"NumberTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/TsumDivisorsAntidiagonal.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"Mathlib/NumberTheory/ModularForms/Derivative.lean\"], \"digest\": \"2d5ab42a2415c683\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]sDiscreteValuationRing|[Ii]ntegrallyClosed|[Mm]inpoly",
+   "results": "{\"t\": \"2026-10-24T07:04:56Z\", \"tool\": \"grep\", \"query\": \"[Ii]sDiscreteValuationRing|[Ii]ntegrallyClosed|[Mm]inpoly\", \"sub\": \"RingTheory/Polynomial/Eisenstein\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\"], \"digest\": \"44168768649ed517\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral closure in a totally ramified finite extension of a complete discrete valuation field is generated by a uniformizer with Eisenstein minimal polynomial",
+   "results": "{\"t\": \"2026-10-24T07:04:56Z\", \"tool\": \"leansearch\", \"query\": \"An integral closure in a totally ramified finite extension of a complete discrete valuation field is generated by a uniformizer with Eisenstein minimal polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure.isIntegrallyClosedOfFiniteExtension\", \"integralClosure.AlgebraIsIntegral\", \"mem_adjoin_of_smul_prime_smul_of_minpoly_isEisensteinAt\", \"integralClosure\", \"integralClosure.isIntegralClosure\", \"integralClosure.isIntegral\", \"Ring.NormalClosure\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\"], \"digest\": \"00a56ef4ea13f0e3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a monic Eisenstein polynomial over a discrete valuation ring the quotient is a discrete valuation ring with uniformizer the root",
+   "results": "{\"t\": \"2026-10-24T07:04:57Z\", \"tool\": \"leansearch\", \"query\": \"For a monic Eisenstein polynomial over a discrete valuation ring the quotient is a discrete valuation ring with uniformizer the root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.generalizedEisenstein\", \"AdjoinRoot.isAdjoinRootMonic.congr_simp\", \"Polynomial.Monic.isEisensteinAt_of_mem_of_notMem\", \"AdjoinRoot.isAdjoinRootMonic\", \"Polynomial.IsDistinguishedAt.mk\", \"AdjoinRoot.isAdjoinRootMonic_root_eq_root\", \"Valuation.IsUniformizer.not_isUnit\", \"Polynomial.IsWeaklyEisensteinAt.pow_natDegree_le_of_aeval_zero_of_monic_mem_map\"], \"digest\": \"1e5ccb1fcaa8ca0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A totally ramified finite extension of complete DVRs admits a power basis consisting of powers of a uniformizer and an Eisenstein minimal polynomial",
+   "results": "{\"t\": \"2026-10-24T07:04:57Z\", \"tool\": \"leanfinder\", \"query\": \"A totally ramified finite extension of complete DVRs admits a power basis consisting of powers of a uniformizer and an Eisenstein minimal polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.powerBasis'\", \"AdjoinRoot.powerBasis\", \"PowerBasis.ofAdjoinEqTop'\", \"PowerBasis\", \"Algebra.adjoin.powerBasis'\", \"PowerBasis.ofGenMemAdjoin'\", \"Algebra.adjoin.powerBasis'_gen\", \"IntermediateField.powerBasisAux\"], \"digest\": \"3854e196687c1c4f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining a root of an Eisenstein polynomial to a discrete valuation ring gives a local principal ideal domain with maximal ideal generated by the root",
+   "results": "{\"t\": \"2026-10-24T07:04:58Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining a root of an Eisenstein polynomial to a discrete valuation ring gives a local principal ideal domain with maximal ideal generated by the root\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.span_maximal_of_irreducible\", \"Irreducible.maximalIdeal_eq\", \"Valuation.IsUniformizer.is_generator\", \"Valuation.Uniformizer.is_generator\", \"instIsPrincipalIdealRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomainDvr\", \"Valuation.Integers.maximalIdeal_eq_setOf_le_v_algebraMap\", \"AdjoinRoot.isDomain_of_prime\"], \"digest\": \"549e1928654565ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weakly unramified extension of complete discrete valuation rings remains weakly unramified after totally ramified finite separable base change and its tensor is normal",
+   "results": "{\"t\": \"2026-10-24T07:05:21Z\", \"tool\": \"leanfinder\", \"query\": \"A weakly unramified extension of complete discrete valuation rings remains weakly unramified after totally ramified finite separable base change and its tensor is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Unramified.baseChange\", \"Algebra.FormallyUnramified.base_change\", \"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"Algebra.Unramified\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"Algebra.Unramified.comp\", \"Algebra.IsUnramifiedAt.comp\", \"Algebra.Unramified.formallyUnramified\"], \"digest\": \"dfc5838a82a77707\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weakly unramified extension of DVRs remains weakly unramified after finite totally ramified separable base change",
+   "results": "{\"t\": \"2026-10-24T07:06:05Z\", \"tool\": \"leansearch\", \"query\": \"A weakly unramified extension of DVRs remains weakly unramified after finite totally ramified separable base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Unramified.baseChange\", \"Algebra.IsUnramifiedAt.of_restrictScalars\", \"IsUnramifiedAtInfinitePlaces.bot\", \"Algebra.Unramified.comp\", \"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"Algebra.IsUnramifiedAt.comp\"], \"digest\": \"9cf208ff516c22c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-24T07:06:05Z\", \"tool\": \"loogle\", \"query\": \"AdjoinRoot, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  },
+  {
+   "tool": "grep",
+   "query": "span_maximal_of_irreducible|isDomain_of_prime|powerBasis",
+   "results": "{\"t\": \"2026-10-24T07:07:00Z\", \"tool\": \"grep\", \"query\": \"span_maximal_of_irreducible|isDomain_of_prime|powerBasis\", \"sub\": \"RingTheory/AdjoinRoot.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"15\", \"368\", \"374\", \"515\", \"562\"], \"digest\": \"f68cdf710dfd6b05\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: unramified base-change assumes more than index one; the other hits are polynomial or valuation components only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-finite-coefficient-triple",
+  "date": "2026-10-24",
+  "group": "Q62"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Finite coefficient triple in Epp elimination. Source subargument: Tag 09ER, lemma-weakly-unramified-goes-up-along-totally-ramified; completeness is a harmless strengthening of its hypotheses.",
+   "via": [
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-epp-totally-ramified-base-change",
+  "worker": "stage1",
+  "summary": "Read Tag 09ER and exposed its two hidden inputs as statement-only lemmas. Tensor presentations and residue/ideal maps are explicit. Reused complete finite normalization for both locality at A_1 and completeness/normalization at C, and existing monic quotient and finite-dimensional domain leaves. Reviewer FIX (2026-10-24): steps 1 and 4 repointed from route-pivot-dropped lem-per-complete-dvr-finite-normalization to 032W, 0325, lem-sfb-finite-normalization-local-dvr and PID normality.",
+  "blueprint": "Historical support of det-thm-sf-ctf-stability-direct-images (3), through the recorded creation chain; current latest proof (3) has no Epp lemma. This split realizes Tag 09ER first paragraph and final sentence, without asserting this algebra lemma is a current blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "General monic quotient basis for dimension and coefficient injection; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "General DVR denominator decomposition, used only to identify B[1/pi] with its fraction field."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic complete-local Nagata theorem (032W): module finiteness of A_1 over A; no node of this unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic finite-over-complete-local theorem (0325), domain clause: A_1 local in Step 1 and C complete in Step 4; no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-2af33baaa",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-2af33baaa (reviewer sub-agent of L); spot-checked: Read the whole item, both new nodes and every cited statement. Checked against Stacks more-algebra 09ER (l.34487, including its proof). The item faithfully strengthens 09ER: it adds completeness of A and B and the conclusions 'complete' and 'residue field unchanged'; nothing is weakened. Mechanical finding: steps 1 and 4 cited lem-per-complete-dvr-finite-normalization, which is route-pivot-dropped (line 1453 of the drop list; Q132 node under the dropped Q144 chain). The use is generic algebra, nothing on the artin-gabber forbidden list, but the delivery's tool_use declaration did not justify citing a dropped id. FIX repoints both steps to non-dropped nodes. Step 1: pid-noetherian-normal, then complete-local-nagata (032W) and the N-2 definition give A_1 finite; integral-closure-finite-extension-normal gives domain with Frac K_1; the 0325 domain clause gives local; dvr-dimension-one plus lem-sfb-finite-normalization-local-dvr give that (A_1)_q is a DVR, and (A_1)_q=A_1 because A_1 is local. Step 4: 0325 makes C complete (C finite free over B by monic-quotient-free, and a domain); C is the integral closure of B because it is finite over B and normal as a PID with Frac C=L_1. After the fix the item closure has 208 nodes and none is drop-listed. Added tool_uses for 032W/0325 (sk-thm-p1, generic) and removed the dropped entry. Steps 2 and 3 (π stays a uniformizer of B, so P_B is Eisenstein; B⊗A_1≅B[T]/(P_B); L⊗K_1=C[1/π] is a field equal to Frac C) are correct as delivered. New nodes are true and not duplicates. uniformizer-presentation: S finite by separability, S=R[t] by Nakayama and equal residue fields, v(N t)=1. eisenstein-quotient-dvr: C finite free, local with m=(π,x)=(x), x not nilpotent, so 00PD gives a DVR; the cases n=1, T^p-π and T²-p were checked. lem-sbc-dvr-uniformizer-root-algebra (X^n-π) is only a special case, and the Eisenstein irreducibility node gives only irreducibility. Statement, stmt_deps and the new nodes are unchanged; the fix is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-epp-totally-ramified-base-change.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TotallyRamifiedBaseChange",
+  "declaration": "IsDiscreteValuationRing.totally_ramified_base_change",
+  "file": "lean/Sheaf/RingTheory/TotallyRamifiedBaseChange.lean",
+  "statement": "theorem totally_ramified_base_change (A : Type u) (B : Type v) (K : Type w) (L : Type x) (K₁ : Type y) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] [Field K] [Field L] [Field K₁] [Algebra A B] [IsLocalHom (algebraMap A B)] [Algebra A K] [IsFractionRing A K] [Algebra B L] [IsFractionRing B L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [IsScalarTower A B L] [Algebra K K₁] [Algebra A K₁] [IsScalarTower A K K₁] [FiniteDimensional K K₁] [Algebra.IsSeparable K K₁] [IsLocalRing (integralClosure A K₁)] (hinj : Function.Injective (algebraMap A B)) (hweak : (IsLocalRing.maximalIdeal A).map (algebraMap A B) = IsLocalRing.maximalIdeal B) (hres : ∃ e : IsLocalRing.ResidueField A ≃+* IsLocalRing.ResidueField (integralClosure A K₁), ∀ a : A, e (IsLocalRing.residue A a) = IsLocalRing.residue (integralClosure A K₁) (algebraMap A (integralClosure A K₁) a)) (hram : (IsLocalRing.maximalIdeal A).map (algebraMap A (integralClosure A K₁)) = IsLocalRing.maximalIdeal (integralClosure A K₁) ^ Module.finrank K K₁) : IsField (L ⊗[K] K₁) ∧ (∃ e : (B ⊗[A] integralClosure A K₁) ≃ₐ[B] integralClosure B (L ⊗[K] K₁), ∀ (b : B) (a : integralClosure A K₁), (e (b ⊗ₜ[A] a) : L ⊗[K] K₁) = algebraMap B L b ⊗ₜ[K] (a : K₁)) ∧ ∃ (hC : IsDomain (B ⊗[A] integralClosure A K₁)) (hDVR : IsDiscreteValuationRing (B ⊗[A] integralClosure A K₁)), IsAdicComplete (@IsLocalRing.maximalIdeal (B ⊗[A] integralClosure A K₁) _ hDVR.toIsLocalRing) (B ⊗[A] integralClosure A K₁) ∧ (IsLocalRing.maximalIdeal (integralClosure A K₁)).map Algebra.TensorProduct.includeRight.toRingHom = @IsLocalRing.maximalIdeal (B ⊗[A] integralClosure A K₁) _ hDVR.toIsLocalRing ∧ ∃ e : IsLocalRing.ResidueField B ≃+* @IsLocalRing.ResidueField (B ⊗[A] integralClosure A K₁) _ hDVR.toIsLocalRing, ∀ b : B, e (IsLocalRing.residue B b) = @IsLocalRing.residue (B ⊗[A] integralClosure A K₁) _ hDVR.toIsLocalRing (algebraMap B (B ⊗[A] integralClosure A K₁) b)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b08b566cf",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Stacks 09ER (more-algebra.tex l.34489-34519) and the item node read clause by clause against IsDiscreteValuationRing.totally_ramified_base_change. Hypotheses match: complete DVRs, injective local A->B, compatible fraction fields with scalar towers, m_A B = m_B, finite separable K1/K, A1 = integralClosure A K1, residue iso compatible with residues, total ramification with exponent finrank. Conclusions match: IsField (L ⊗[K] K1); B-algebra iso to integralClosure B (L⊗K1) fixed on pure tensors; DVR existentials plus IsAdicComplete; m_A1 maps onto m_C via includeRight; residue iso compatible with algebraMap. The [IsLocalRing (integralClosure A K1)] Prop binder follows from the other hypotheses (proof step 1, 0325) and is needed to state m_A1, so accepted with a maintainer note. lean.statement verbatim; node differs from live only in lean; six stmt_deps are existing Mathlib declarations; independent universes; no collision; docstrings carry source place, blueprint id and proof steps; both report sections present; sorry only; no file changed, so no compile."
+ }
+}

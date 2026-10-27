@@ -1,0 +1,107 @@
+{
+ "id": "def-sf-etale-sheaf-scalar-extension",
+ "kind": "definition",
+ "title": "Ordinary scalar extension of small etale module sheaves",
+ "status": "split",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $A,B$ commutative rings, and $\\varphi:A\\to B$ a ring homomorphism. On sheaves of modules on the small etale site [def-weil-pbc-etale-sheaves], define $E_{\\varphi,T}:\\operatorname{Sh}(T_{\\mathrm{et}},A)\\to\\operatorname{Sh}(T_{\\mathrm{et}},B)$ by postcomposing with $B\\otimes_A-$ and sheafifying [def-weil-pbc-sheafification]. Its specified scalar adjunction $E_{\\varphi,T}\\dashv\\operatorname{Res}_{\\varphi,T}$ is induced by the ordinary module extension/restriction adjunction and sheafification. These are the existing functor etaleSheafExtendScalars and adjunction etaleSheafExtendScalarsAdjunction; no flatness, boundedness, or finite-coefficient assumption is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK: extension of scalars by sheafified tensor product and its scalar adjunction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical ordinary and derived scalar extension for module sheaves on small etale sites and open immersion extension by zero scalar comparison",
+   "results": "{\"t\": \"2026-10-22T11:02:56Z\", \"tool\": \"leansearch\", \"query\": \"Canonical ordinary and derived scalar extension for module sheaves on small etale sites and open immersion extension by zero scalar comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"PresheafOfModules.Sheafify.smul.congr_simp\", \"ModuleCat.extendRestrictScalarsAdj\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"PresheafOfModules.Sheafify.smulCandidate\", \"PresheafOfModules.Sheafify.SMulCandidate.ctorIdx\", \"PresheafOfModules.Sheafify.SMulCandidate.h\", \"SheafOfModules.restrictScalars\"], \"digest\": \"08c532eadb11af26\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides general scalar-extension and adjunction ingredients, not these small-etale constructions; reuse published project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-22T11:02:56Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides general scalar-extension and adjunction ingredients, not these small-etale constructions; reuse published project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleSheafExtendScalars|openScalarRestrictionMap|openScalarExtension|openRestrictScalarsIso",
+   "results": "{\"t\": \"2026-10-22T11:02:56Z\", \"tool\": \"grep\", \"query\": \"etaleSheafExtendScalars|openScalarRestrictionMap|openScalarExtension|openRestrictScalarsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "Mathlib provides general scalar-extension and adjunction ingredients, not these small-etale constructions; reuse published project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l etaleSheafExtendScalars|openScalarRestrictionMap|openScalarExtension|openRestrictScalarsIso dag/nodes; rg in lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search open coefficient; blueprint_refs.py search scalar extension",
+   "results": "Existing definitions: WeilConjectures/SixFunctors/ProEtale/ScalarExtension.lean:79,85, and Sheaf/SixFunctors/EtaleOpenTensorDefs.lean:48-155. DAG definition records have no ownership of these declarations: def-pur-scalar-pullback-representative-data owns scalarSheafPullbackIso, not etaleSheafExtendScalars. The open constructions occur in the theorem record lem-coef-etale-open-comparison-data. def-sp-etale-kflat-realization already owns etaleKFlat; def-weil-pbc-witness-compatibility already owns pbcFixedScalarExtension, and are cited rather than re-owned. Blueprint search open coefficient: 0; scalar extension: 71 broader matches, no definition of these exact constructions.",
+   "date": "2026-10-22",
+   "verdict": "Add ownership records only, with existing:true; no new Lean definition or module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dualizing-open-tensor",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Proof paragraphs 2-3: canonical coefficient/open maps used in the open-locality tensor and evaluation calculation.",
+   "via": [
+    "lem-coef-dualizing-open-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ScalarExtension",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleSheafExtendScalars",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.etaleSheafExtendScalars",
+   "AlgebraicGeometry.ProEtale.etaleSheafExtendScalarsAdjunction"
+  ],
+  "statement": "noncomputable def etaleSheafExtendScalars :\n    Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R) ⥤\n      Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} S)",
+  "branch": "slopmaster2",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Ownership of the unchanged existing ordinary small-etale scalar-extension functor and its actual adjunction, not of a comparison theorem. The source section binds universe u, rings R S : Type (u + 1), their CommRing instances, φ : R →+* S and X : Scheme.{u}."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf356c1a7",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf356c1a7",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 499e163e4002; both return points fixed. F1: new def-sf-etale-open-scalar-data (existing:true on unchanged EtaleOpenTensorDefs) owns derivedRestriction, derivedExtension, openRestrictScalarsIso, openScalarRestrictionZero/ExtensionZero, openDerivedRestrictScalarsIso, openScalarExtension, openScalarRestrictionMap; its statement matches the leftAdjointUniq/mateEquiv constructions; record statement verbatim. evaluation now uses openScalarRestrictionMap (defeq to the old asIso.hom), so the isIso theorem is not needed; lem-coef-etale-open-comparison-data dropped; etaleKFlat cited via def-sp-etale-kflat-realization. F2: T_Y=Etale.scalarExtension (abbrev of pbcFixedScalarExtension) cites def-weil-pbc-witness-compatibility; new def-sf-etale-sheaf-scalar-extension owns small-etale etaleSheafExtendScalars and its adjunction (Stacks 03EK, verbatim lines 79-81). No duplicates: def-sp-open-scalar-operations is pro-etale. Only Lean change is that one term; changed dep records equal side-live. Clauses, edge cases (U empty, U=Y, m=n, non-flat Z/l^2->Z/l, a=b), docstrings and the single sorry checked. Advisory: small-etale extension-by-zero adjunctions are owned only by theorem nodes (base-era gap, maintainer note). No compile (no file changed)."
+ }
+}

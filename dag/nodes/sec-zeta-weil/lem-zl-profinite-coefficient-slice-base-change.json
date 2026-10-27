@@ -1,0 +1,140 @@
+{
+ "id": "lem-zl-profinite-coefficient-slice-base-change",
+ "kind": "statement",
+ "title": "Derived coefficient extension under profinite slice restriction",
+ "statement": "Let Lambda be a commutative condensed ring and S any profinite set. Let R=Lambda(*), K the actual profinite slice topology, O=Lambda restricted to the slice, A its terminal section ring. Define d:constant_K R -> O as constant(profiniteScalarMap R->A) followed by the terminal constant-section counit. For every unbounded complex of module sheaves over constant R on the profinite point, coefficient extension to Lambda followed by internal-module transport and slice mapMod is naturally isomorphic to commutativeConstantSliceRestriction [lem-zl-commutative-constant-slice-restriction] followed by the universal derived coefficient extension along d and the slice internal-module equivalence. This is a comparison before applying constant realization of ordinary R-modules; it asserts no scalar extension to A.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Equations (3.1)-(3.2), Remark 3.2; Stacks Cohomology on Sites 06YY and 07A4"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model",
+  "lem-zl-commutative-constant-slice-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Apply profinite_coefficient_slice_ordinary to the two actual fixed models and the definitional direct scalar map, obtaining an ordinary natural isomorphism tau.",
+   "uses": [
+    "lem-zl-profinite-coefficient-slice-ordinary"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact localized-site restriction preserves K-flat complexes. Transport its output along constantSheafOverIso. Scalar restriction along a ring-sheaf isomorphism preserves K-flatness: its restricted regular module is isomorphic to the source regular module, hence flat, so apply flat scalar restriction. The regular-module isomorphism is constructed sectionwise from the inverse ring isomorphism; flatness is transported using the explicit site-tensor to monoidal-tensor comparison. This proves K-flat preservation for commutativeConstantSliceRestriction.",
+   "uses": [
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose the original cochain counit with exact internal-module transport and actual slice mapMod. Precompose the slice counit with exact constant-slice restriction and postcompose with the exact slice equivalence; use tau to identify the two ordinary targets. Descend these transformations through the full and essentially surjective homotopy quotient. On every flat-term K-flat resolving object both are isomorphisms, by the fixed models computes fields and step 2. Site-derived-tensor descent presents the entire derived category as the localization of this resolving full subcategory. Fully faithful whiskering along that localization lifts the ratio of the two isomorphisms uniquely to a natural isomorphism on the entire derived category. Finally apply mapDerivedCategoryCompIso to express the left functor in exactly the stated form.",
+   "uses": [
+    "def-zl-condensed-lisse-evaluation-model",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-profinite-coefficient-slice-ordinary",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-zl-condensed-lisse-evaluation-model",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "D9",
+  "date": "2026-10-25",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Remark 3.2; Stacks 06YY, 07A4 and 0E8K",
+  "note": "Lean proof of the unbounded derived lift from the ordinary slice comparison. Uses the existing localization of flat-term K-flat objects and existing slice K-flat theorem; no general ringed-topos pullback theorem or new resolving existence assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a slice site commutes with constant modules and extension of scalars for sheaves of modules",
+   "results": "SheafOfModules.restrictScalars, SheafOfModules.over, ModuleCat.extendRestrictScalarsAdj; no commutative-coefficient slice comparison.",
+   "date": "2026-10-25",
+   "verdict": "Use sheafification and restriction interfaces; no exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sheaves of modules commute with restriction to slice site and coefficient ring comparison",
+   "results": "PresheafOfModules.restrictScalarsCompToPresheaf, SheafOfModules.restrictScalars_obj_val, SheafOfModules.freeFunctorCompPullbackIso; no exact module-coefficient comparison.",
+   "date": "2026-10-25",
+   "verdict": "Related building blocks, not the asserted comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheafOverIso\"",
+   "results": "No results from the search service; the adopted source defines constantSheafOverIso.",
+   "date": "2026-10-25",
+   "verdict": "Reuse source theorem; module linearity still needs proof."
+  },
+  {
+   "tool": "grep",
+   "query": "overPullback|constantSheafOver|slice.*coefficient|coefficient.*slice",
+   "results": "Mathlib Sites.Over and CoverLifting, source ConstantSheafOver; no natural isomorphism for the fixed derived coefficient models.",
+   "date": "2026-10-25",
+   "verdict": "Construct the comparison from the named interfaces."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CondensedProfiniteScalarCompatibility",
+  "date": "2026-10-25",
+  "group": "P8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Scalar realization (3.1)-(3.2), Remark 3.2: Equations (3.1)-(3.2), Remark 3.2; Stacks Cohomology on Sites 06YY and 07A4",
+   "via": [
+    "lem-zl-condensed-profinite-scalar-compatibility",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProfiniteCoefficientSliceBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProfiniteCoefficientSliceBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.profinite_coefficient_slice_base_change",
+  "statement": "theorem profinite_coefficient_slice_base_change : let e := InternalAbelianSheafModule.sectionModuleEquivalence (coherentTopology Profinite.{u}) Λ.X let eS := InternalAbelianSheafModule.sectionModuleEquivalence ((coherentTopology Profinite.{u}).over S) (profiniteCoefficient Λ.X S) letI := Functor.additive_of_preserves_binary_products e.inverse letI := Functor.additive_of_preserves_binary_products eS.inverse let f := ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} S).mapMod Λ.X letI := Functor.additive_of_preserves_binary_products f Nonempty ((condensedScalarExtensionModel Λ.X).T ⋙ e.inverse.mapDerivedCategory ⋙ f.mapDerivedCategory ≅ (commutativeConstantSliceRestriction (coherentTopology Profinite.{u}) (condensedScalarRing Λ.X) S).mapDerivedCategory ⋙ (profiniteDirectScalarModel Λ S).T ⋙ eS.inverse.mapDerivedCategory)",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261025T095725-L-3472945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T122746-L-1803377",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

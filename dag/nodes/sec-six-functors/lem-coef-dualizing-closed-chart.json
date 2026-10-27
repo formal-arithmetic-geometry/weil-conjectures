@@ -1,0 +1,332 @@
+{
+ "id": "lem-coef-dualizing-closed-chart",
+ "kind": "statement",
+ "title": "Affine closed charts with exact pushforward and normalized dualizing composition",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$, and $1\\le m\\le n$. Set $A=\\mathcal O_E/(\\varpi^n)$, $B=\\mathcal O_E/(\\varpi^m)$ [def-weil-finite-field-fiber]. For a separated finite-type $k$-scheme $Y$ [def-weil-proper-morphism, def-weil-finite-type-morphism], write $a_Y:Y\\to s=\\operatorname{Spec}k$, $F_{Y,R}=Ra_{Y,R!}\\dashv G_{Y,R}=a_{Y,R}^{\\times}$, $\\omega_{Y,R}=G_{Y,R}R_s$, and $\\varepsilon_{Y,R}:F_{Y,R}\\omega_{Y,R}\\to R_s$, for $R=A,B$, on ordinary small etale module derived categories [def-weil-pbc-derived-categories, def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Let $T_Y=-\\otimes_A^LB$ [def-kun-derived-tensor], and denote the canonical compact-support coefficient comparison by $c_{Y,K}:T_sF_{Y,A}K\\to F_{Y,B}T_YK$ [lem-fix-compact-support-coefficient-change]. Here bounded constructible finite-Tor means constructible cohomology, zero outside a finite interval, and integers $a\\le b$ such that tensoring with every degree-zero module sheaf has cohomology only in $[a,b]$ [def-weil-pbc-constructible-complexes, def-kun-tor-amplitude]. Let $Y$ be affine. There are $r\\ge0$ and a closed immersion $i:Y\\hookrightarrow P=\\mathbf A^r_k$ with $a_Y=pi$, where $p:P\\to s$ is projection [def-weil-closed-immersion]. This is a finite proper finite-type morphism. For its identity-open compactification the functor $Ri_{R!}=Ri_{R*}$ is exact termwise $i_{R*}$ on the whole ordinary derived categories, and $H^q(i_{R*}L)=i_{R*}H^q(L)$. Its ordinary right adjoint $I_R=Ri_R^!$ [lem-exc-closed-ambient] preserves bounded-below objects. There are canonical counit-compatible identifications $\\omega_{Y,R}\\cong I_R\\omega_{P,R}$ and $\\varepsilon_{Y,R}=\\varepsilon_{P,R}\\circ F_{P,R}(e_{R,\\omega_{P,R}})$, where $e_{R,H}:i_{R*}I_RH\\to H$ is the closed exceptional counit and $F_Y\\cong F_Pi_*$ is the bounded-below compact-support composition comparison [lem-amb-etale-compact-comparisons, def-weil-pbc-composite-adjunction]. Both representing objects in this last identification are bounded below independently of coefficient change.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Proof paragraph 2: choose an affine open and a closed embedding, then compose ambient right adjoints; extraction of the expanded retained stage-1 proof, steps 7,8"
+ },
+ "stmt_deps": [
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-weil-closed-immersion",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "def-weil-proper-morphism",
+  "lem-amb-etale-compact-comparisons",
+  "lem-exc-closed-ambient",
+  "lem-fix-compact-support-coefficient-change",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof": [
+  {
+   "text": "Write $Y=\\operatorname{Spec}D$. By [lem-pc-affine-finite-type-algebra], $D$ is a finite-type $k$-algebra. By [def-weil-pbc-finite-type-algebra], choose a surjection $v:k[x_1,\\ldots,x_r]\\twoheadrightarrow D$, allowing $r=0$. The affine description in [def-sbc-affine-space] and the contravariant spectrum construction [def-weil-affine-spectrum] give $i:Y\\to P=\\mathbf A^r_k$ over $s$. The singleton affine cover of $P$ satisfies [lem-weil-pbc-closed-immersion-affine-cover-criterion], since its inverse image is the affine scheme $Y$ and its section map is $v$. Thus $i$ is closed and $pi=a_Y$.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "def-sbc-affine-space",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T2 (lemma-locally-finite-type-characterize) and 01QO (lemma-closed-immersion), affine criterion"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-immersion-finite], $i$ is finite; by [lem-weil-pbc-closed-immersion-proper](a), it is proper and of finite type. Therefore $(\\operatorname{id}_Y,i)$ is the identity-open compactification. The polynomial projection $p$ is finite type by [def-weil-finite-type-morphism]: its affine presentation has the finite generators $x_1,\\ldots,x_r$. It is separated in the sense of [def-weil-proper-morphism] by [lem-weil-pbc-affine-source-morphism-separated], since its source $P=\\operatorname{Spec}k[x_1,\\ldots,x_r]$ is affine by [def-sbc-affine-space]. Thus $P$ too is a separated finite-type $k$-scheme. These arguments include the zero ring $D=0$ (empty $Y$) and $r=0$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-sbc-affine-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Paragraph 2, geometric prerequisites for the affine closed factorization"
+   }
+  },
+  {
+   "text": "The rings $A$ and $B$ are finite commutative rings by the finite coefficient-ring clause of [def-weil-l-adic-coefficient-extension]. Apply [lem-weil-boundary-etale-adjunction-restriction] separately to $a_Y:Y\\to s$ and $p:P\\to s$. Its hypotheses hold by steps 1–2; $s$ is a separated finite-type $k$-scheme, and each coefficient is one of its positive finite stages. It supplies Noetherianity, compactifications, and the ordinary etale adjunctions $F_{Y,R}\\dashv G_{Y,R}$ and $F_{P,R}\\dashv G_{P,R}$, whose two functors preserve $D^+$. In particular $R_s$ is in degree zero, so both $\\omega_{Y,R}$ and $\\omega_{P,R}$ lie in $D^+$ before any coefficient-change assertion is made.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-boundary-etale-adjunction-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Paragraph 2, bounded-below domains for composing ambient right adjoints"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-etale-supported-kernel-adjunction] to the closed immersion $i$. Its statement gives exactness of $i_*$ for abelian etale sheaves. This also proves exactness for constant-$R$ module sheaves: [def-weil-pbc-direct-image] identifies the underlying abelian direct image, while [def-weil-sheaf-of-modules-category] computes module kernels sectionwise and module cokernels by sheafifying the sectionwise cokernel. These are the same underlying abelian kernels and cokernels, with induced $R$-actions; forgetting the action reflects their exactness. Hence applying module $i_*$ to a short exact sequence is exact after forgetting scalars and therefore exact as a module sequence. This argument applies to every module sheaf, with no constructibility hypothesis.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "def-weil-pbc-direct-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic), support adjunction; sites-modules.tex Tag 03DA (lemma-abelian), exact forgetful functor"
+   }
+  },
+  {
+   "text": "For the exact additive functor just obtained, [lem-weil-pbc-exact-functor-derived-factorization] identifies its unbounded derived functor with termwise $i_*$. Equivalently, if $L\\to J$ is a K-injective resolution, its image $i_*L\\to i_*J$ is a quasi-isomorphism, so the derived direct image computed by $i_*J$ is represented by $i_*L$ itself. The identity open extension is the identity on sheaves and complexes; thus the compactification formula of [def-amb-etale-compact-support] gives $Ri_{R!}=Ri_{R*}=i_{R*}$ on the whole ordinary derived category. Finally [lem-weil-pbc-exact-functor-complex-cohomology] gives the natural equality, read as its canonical isomorphism, $H^q(i_{R*}L)\\cong i_{R*}H^q(L)$ for every integer $q$ and every unbounded $L$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), all complexes compute the unbounded derived functor; homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "By [lem-exc-closed-ambient], the termwise derived direct image has the ordinary right adjoint $I_R=Ri_R^!$, with counit $e_R$. Apply clause (1) of [lem-pur-exact-derived-adjunction-bounds] to the exact sheaf functor of step 4 and its termwise realization of step 5. It shows $I_R(D^{\\ge a})\\subset D^{\\ge a}$ for every integer $a$, hence $I_R$ preserves $D^+$. In particular $I_R\\omega_{P,R}$ is bounded below by step 3. This establishes the second representing object independently of changing coefficients.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-pur-exact-derived-adjunction-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Paragraph 2, closed exceptional right adjoint and its independently verified lower bound"
+   }
+  },
+  {
+   "text": "Apply [lem-amb-etale-compact-comparisons] to $Y\\xrightarrow iP\\xrightarrow ps$. The schemes are Noetherian by step 3; all morphisms are separated finite type by steps 1–2, and the compactifications are available by step 3 (and the identity-open one for $i$). It gives the canonical bounded-below isomorphism $F_{P,R}i_{R*}\\cong F_{Y,R}$, since $Ri_{R!}=i_{R*}$ by step 5. The ambient adjunctions restrict to these full $D^+$ subcategories: steps 3, 5 and 6 show that every functor involved preserves them, so their Hom bijections and counits are literally the ambient ones.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Paragraph 2, compact-support composition comparison on bounded-below inputs"
+   }
+  },
+  {
+   "text": "Compose $i_{R*}\\dashv I_R$ with $F_{P,R}\\dashv G_{P,R}$ on $D^+$ using [def-weil-pbc-composite-adjunction]. For every $L\\in D^+(Y_{\\mathrm{et}},R)$ its Hom bijections are $\\operatorname{Hom}_s(F_{Y,R}L,R_s)\\cong\\operatorname{Hom}_P(i_{R*}L,\\omega_{P,R})\\cong\\operatorname{Hom}_Y(L,I_R\\omega_{P,R})$, where the first arrow uses step 7. Thus $G_{Y,R}|_{D^+}$ and $I_RG_{P,R}|_{D^+}$ are right adjoints to the same left functor. By [det-sp-unique-right-adjoint], their comparison is the unique counit-compatible natural isomorphism. At $R_s$ it gives $\\theta_R:\\omega_{Y,R}\\xrightarrow{\\sim}I_R\\omega_{P,R}$. The composite counit formula in [def-weil-pbc-composite-adjunction] says precisely $\\varepsilon_{Y,R}=\\varepsilon_{P,R}\\circ F_{P,R}(e_{R,\\omega_{P,R}})\\circ F_{Y,R}(\\theta_R)$, using $F_Y\\cong F_Pi_*$. After identifying the representing objects by $\\theta_R$, this is the stated formula. Both objects were proved bounded below in steps 3 and 6, so this comparison uses no coefficient-change isomorphism.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+    "place": "Paragraph 2 and paragraph 3, composition of right adjoints and structural counit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-sbc-affine-space",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-proper-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-etale-compact-comparisons",
+  "lem-exc-closed-ambient",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-weil-boundary-etale-adjunction-restriction",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-finite-dualizing.proof.md",
+  "place": "Paragraph 2, expanded using cited Stacks and categorical nodes; paragraph 3 for the counit normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine finite type scheme embeds as a closed subscheme of affine space and exact etale pushforward identifies bounded below closed adjoints with structural dualizing objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.essImage_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, AlgebraicGeometry.Scheme.Spec.essImage X ↔ AlgebraicGeometry.IsAffine X\", \"doc\": \"A scheme $X$ is in the essential image of the contravariant Spec functor from the opposite category of commutative rings to schemes if and only if $X$ is an affine scheme. In other words, the essentia\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Spec_essSurj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.AffineScheme.Spec.EssSurj\", \"doc\": \"The contravariant Spec functor from the category of commutative rings to affine schemes is essentially surjective, meaning every affine scheme is isomorphic to the prime spectrum $\\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Closed immersion geometry is in Mathlib, but no returned declaration includes exact constant-coefficient small-etale pushforward, its D+ right-adjoint bound, and the specified structural counit comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion exact etale direct image right adjoint cohomological bound composite counit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction_counit_app\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (f : (CategoryTheory.Over Y)ᵒᵖ),\\n  Y.kerAdjunction.counit.app f =\\n    (CategoryTheory.Over.homMk (AlgebraicGeometry.Scheme.Hom.toImage (Opposite.unop f).hom) ⋯).op\", \"doc\": \"For any scheme $Y$ and any morphism $f$ in the opposite category of the over category over $Y$, the counit of the adjunction between the kernel functor and the subscheme functor at $f$ is the morphism\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is a closed immersion if the underlying continuous map is a closed embedding and the induced maps on stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : X.Modules) (U : X.Opens) :\\n  ((restrictAdjunction f).counit.app M).app U = M.presheaf.map (eqToHom (f.preimage_image_eq U).symm).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\mathbf{Mod}(\\\\mathcal{O}_Y) \\\\to \\\\mathbf{Mod}(\\\\mathcal{O}_X)$ and $f_*: \\\\mathbf{Mod}(\\\\mathcal{O}_X) \\\\to \\\\mathbf{O}_Y)$ be the restriction and\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{f : X ⟶ Y} : IsClosedImmersion f ↔ IsAffineHom f ∧ ∀ U : Y.Opens, IsAffineOpen U → Function.Surjective (f.app U)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is a closed immersion if and only if it is an affine morphism and for every affine open subset $U$ of $Y$, the induced ring homomorphism on sections $\\\\mathcal{O}_Y(U\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ restrictFunctor f ≅ 𝟭 _\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsPreimmersion f] (hf : IsClosed (Set.range f)) : IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Closed immersion geometry is in Mathlib, but no returned declaration includes exact constant-coefficient small-etale pushforward, its D+ right-adjoint bound, and the specified structural counit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"Being a closed immersion is local at the target.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"Being a closed immersion is stable under base change.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.respectsIso\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"Composition with an isomorphism preserves closed immersions.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instSubschemeι\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) : AlgebraicGeometry.IsClosedImmersion I.subschemeι\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `X ⟶ Y` is a closed immersion if the underlying\\ntopological map is a closed embedding and the induced stalk maps are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [h : AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Closed immersions are locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsAffineHom f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.IsIso f] : AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"Isomorphisms are closed immersions.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instOfIsEmptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [IsEmpty ↥X] (f : X ⟶ Y) : AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Closed immersion geometry is in Mathlib, but no returned declaration includes exact constant-coefficient small-etale pushforward, its D+ right-adjoint bound, and the specified structural counit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion|closedImmersion",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"87\", \"text\": \"  refine (MorphismProperty.cancel_left_of_respectsIso (P := @IsClosedImmersion)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"98\", \"text\": \"  rw [← MorphismProperty.cancel_right_of_respectsIso (P := @IsClosedImmersion) _ e₁.hom,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"99\", \"text\": \"    ← MorphismProperty.cancel_left_of_respectsIso (P := @IsClosedImmersion) e₂.inv]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"105\", \"text\": \"    IsClosedImmersion.spec_of_surjective\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"248\", \"text\": \"  isClosedImmersion_diagonal := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"283\", \"text\": \"  have : IsClosedImmersion g := MorphismProperty.pullback_snd _ _ inferInstance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"285\", \"text\": \"    rw [@HasAffineProperty.iff_of_isAffine @IsClosedImmersion] at this\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"315\", \"text\": \"  · rw [@HasAffineProperty.iff_of_isAffine @IsClosedImmersion] at this\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"57\", \"text\": \"/-- See `AlgebraicGeometry.IsClosedImmersion.SpecMap_residue` for the stronger result that\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"line\": \"137\", \"text\": \"  { lift s := IsClosedImmersion.lift (subschemeι _) (hc.lift ((Cone.postcompose ι).obj s)) (by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PointsPi.lean\", \"line\": \"85\", \"text\": \"  have : IsClosedImmersion g := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PointsPi.lean\", \"line\": \"89\", \"text\": \"  obtain ⟨I, e, rfl⟩ := IsClosedImmersion.Spec_iff.mp this\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"35\", \"text\": \"instance (G : Over (Spec (.of K))) [GrpObj G] : IsClosedImmersion η[G].left :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"36\", \"text\": \"  isClosedImmersion_of_comp_eq_id (Y := Spec (.of K)) G.hom η[G].left (by simp)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"53\", \"text\": \"  have : IsClosedImmersion ((lift η[G] η[G]).left ≫ (fst G G).left) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"54\", \"text\": \"    simpa using inferInstanceAs (IsClosedImmersion η[G].left)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"55\", \"text\": \"  have : IsClosedImmersion (lift η[G] η[G]).left := .of_comp _ (g := (fst G G).left)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"line\": \"36\", \"text\": \"      rw [isClosed_singleton_iff_isClosedImmersion] at hx\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"line\": \"71\", \"text\": \"    have := isClosedImmersion_of_comp_eq_id _ _ p.2\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"80\", \"text\": \"lemma ker_fst_of_isClosedImmersion (i : Z ⟶ Y) (f : X ⟶ Y) [IsClosedImmersion i] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"89\", \"text\": \"lemma _root_.AlgebraicGeometry.isPullback_of_isClosedImmersion\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"91\", \"text\": \"    [IsClosedImmersion iX] [IsClosedImmersion iY]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean\", \"line\": \"96\", \"text\": \"  refine IsClosedImmersion.isIso_of_ker_eq iX (pullback.fst f iY) _ (by simp) ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"27\", \"text\": \"Some instances are in `Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion` and\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Closed immersion geometry is in Mathlib, but no returned declaration includes exact constant-coefficient small-etale pushforward, its D+ right-adjoint bound, and the specified structural counit comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "exact|adjunction|rightAdjoint",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"65\", \"text\": \"  exact GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"74\", \"text\": \"    exact isSheaf_zariskiTopology_continuousMapPresheaf _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"81\", \"text\": \"      exact congr($(h (pullback.fst (Spec.map f) (Spec.map f))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"98\", \"text\": \"    exact (Continuous.connectedComponentsLift_unique _ _ (by simp)).symm\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"line\": \"119\", \"text\": \"  exact isSheaf_fpqcTopology_continuousMapPresheaf _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"line\": \"74\", \"text\": \"    exact ⟨j, b.left u, by simp [← fac]⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"line\": \"112\", \"text\": \"      ext1; exact b.comp_algebraMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"56\", \"text\": \"  exact Sheaf.isGrothendieckAbelian_of_essentiallySmall (ProEt.topology X) Ab.{u + 1}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"line\": \"85\", \"text\": \"  exact Functor.map_isZero _ (isZero_ellAdicSheaf_of_isEmpty _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"43\", \"text\": \"  · exact Presieve.isSheaf_of_le _ zariskiTopology_le_propQCTopology hF\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"46\", \"text\": \"    exact Cover.mem_propQCTopology _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"54\", \"text\": \"        exact this (𝒰.pullback₂ (T.affineCover.f i)) ⟨_, rfl⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"59\", \"text\": \"        exact this (𝒰.pullback₂ _) ⟨_, rfl⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"69\", \"text\": \"          exact this _ (.ofQuasiCompactCover 𝒰' (qc := by dsimp [𝒰']; infer_instance))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"line\": \"66\", \"text\": \"    exact X.isClosedUnderIsomorphisms_quasiCompactCover\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"line\": \"92\", \"text\": \"  exact .of_isOpenMap fun i ↦ hP _ (Scheme.Cover.map_prop E i)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"line\": \"123\", \"text\": \"  exact precoverage_mono h\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"line\": \"134\", \"text\": \"  exact 𝒰.mem₀.1\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean\", \"line\": \"166\", \"text\": \"    induction i <;> exact 𝒰.map_prop _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"line\": \"64\", \"text\": \"  exact Precoverage.generate_mem_toGrothendieck (bot_mem_precoverage _ X)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"67\", \"text\": \"    exact Limits.pullback.condition\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"76\", \"text\": \"    exact h (𝓤.f j) (.mk j)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"89\", \"text\": \"    exact MorphismProperty.precoverage_monotone fun X Y f hf ↦ f.isOpenEmbedding\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"119\", \"text\": \"    exact i.elim\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"line\": \"121\", \"text\": \"    exact CoproductDisjoint.isPullback_of_isInitial\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Closed immersion geometry is in Mathlib, but no returned declaration includes exact constant-coefficient small-etale pushforward, its D+ right-adjoint bound, and the specified structural counit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion exact etale direct image right adjoint cohomological bound composite counit in ordinary etale derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"CategoryTheory.Adjunction.derived'_counit\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Closed immersion geometry is in Mathlib, but no returned declaration includes exact constant-coefficient small-etale pushforward, its D+ right-adjoint bound, and the specified structural counit comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine finite type scheme embeds as a closed subscheme of affine space with exact etale direct image and counit compatible composite right adjoints",
+   "results": "Actual search output: 8 hits; AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.essImage_Spec, AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι",
+   "date": "2026-10-22",
+   "verdict": "no match: returned geometry and abstract sheaf adjunctions do not state the exact small-etale closed pushforward and normalized structural dualizing comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion|closedImmersion",
+   "results": "Actual search output: 0 hits; . Directory: AlgebraicGeometry/Sites",
+   "date": "2026-10-22",
+   "verdict": "no match: returned geometry and abstract sheaf adjunctions do not state the exact small-etale closed pushforward and normalized structural dualizing comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact etale pushforward along closed immersion and right adjoint bounded below",
+   "results": "Actual search output: 8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.restrictFunctor, SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: returned geometry and abstract sheaf adjunctions do not state the exact small-etale closed pushforward and normalized structural dualizing comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, CategoryTheory.Adjunction",
+   "results": "Actual search output: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned geometry and abstract sheaf adjunctions do not state the exact small-etale closed pushforward and normalized structural dualizing comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On small etale derived module categories a closed embedding has exact pushforward whose right adjoint preserves lower bounds; dualizing objects compose with normalized counits",
+   "results": "Actual search output: 8 hits; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, PresheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: returned geometry and abstract sheaf adjunctions do not state the exact small-etale closed pushforward and normalized structural dualizing comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-finite-dualizing",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "lem-coef-finite-dualizing",
+   "place": "Proof paragraph 2: choose an affine open and a closed embedding, then compose ambient right adjoints",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-dualizing-closed-chart",
+  "worker": "stage1",
+  "summary": "Constructed the affine closed chart from a finite polynomial presentation, transferred abelian exactness to constant module coefficients, identified unbounded termwise direct image, proved the right-adjoint bound before comparing bounded-below representing objects, and expanded the composite counit equation. No new nodes; statement unchanged.",
+  "blueprint": "lem-coef-finite-dualizing proof paragraph 2 and the composite-counit sentence of paragraph 3.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Supplies the prescribed bounded-below compact-support composition comparison. No step of the unit is replaced."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Supplies the ordinary unbounded closed right adjoint used by the prescribed factorization. No step of the unit is replaced."
+   },
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Converts an affine finite-type k-scheme to its finitely generated coordinate algebra, needed for the blueprint closed chart. No step of the unit is replaced."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Supplies exact abelian small-etale closed direct image, then transferred explicitly to constant module coefficients. No step of the unit is replaced."
+   },
+   {
+    "node": "lem-pur-exact-derived-adjunction-bounds",
+    "why": "Supplies the general exact-left-adjoint lower-bound result, prior to identifying dualizing objects. No step of the unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-compact-comparisons",
+  "lem-exc-closed-ambient",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-exact-derived-adjunction-bounds"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NH-398213ec0",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-398213ec0 (reviewer sub-agent of L); spot-checked: I read the item in full: an 8-step split with no new nodes, the statement and stmt_deps unchanged. Context: created by O4's PASSed re-split of lem-coef-finite-dualizing, which mapped old parent steps 7-8 here. Every argument of those old steps reappears. Live and side-live still hold the item unsplit, so it is not superseded. Nothing cited is in the drop list, there is no SGA and no cycle. The route follows main-20261015 lem-coef-finite-dualizing paragraph 2 and the composite-counit sentence of paragraph 3. Step checks: (1) affine finite-type gives D finite type, a polynomial surjection, and a closed immersion by the 01QO affine-cover criterion on the singleton cover. (2) i is finite and proper; p is of finite type. (3) lem-weil-boundary-etale-adjunction-restriction (same unit) gives Noetherianity, compactifications and D+-preserving adjunctions for a_Y and p, so omega_Y and omega_P are in D+. (4) Supported-kernel adjunction gives abelian exactness of i_*; this transfers to modules through the forgetful-compatible module direct image and the abelian module kernels and cokernels. (5) The exact-functor factorization plus the K-injective formula of def-amb-etale-compact-support give Ri_! = termwise i_*, unbounded, and H^q commutes. (6) Exact-derived-adjunction-bounds(1); I re-derived the orthogonality, so I preserves D^{>=a}. (7) Compact-support composition on D+ for finite Lambda; compactifiability checked against def-asd-compactifiable. (8) Composite adjunction plus unique right adjoint on D+; the theta-counit equation checks out. Edge cases r=0, Y empty, m=n and singular Y all hold. I accept the tool_uses lem-amb-etale-compact-comparisons and lem-pur-etale-supported-kernel-adjunction. FIX (C1/C4): step 2 argued separatedness of p via P x_s P = Spec k[x,y] and the diagonal quotient, which no cited node states. I replaced that with the Mathlib leaf lem-weil-pbc-affine-source-morphism-separated applied to the affine P, and recomputed proof_deps. Advisory: the statement carries unused inherited setup (T_Y, c_{Y,K}, finite-Tor). The report mentions a citations.json that is not in the commit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefDualizingClosedChart",
+  "declaration": "AlgebraicGeometry.Etale.exists_coefDualizingClosedChart",
+  "declarations": [
+   "AlgebraicGeometry.Etale.coefClosedChartPlusPushforwardIso",
+   "AlgebraicGeometry.Etale.coefClosedChartComposition",
+   "AlgebraicGeometry.Etale.coefClosedChartCompositeCounit",
+   "AlgebraicGeometry.Etale.CoefClosedChartProperties",
+   "AlgebraicGeometry.Etale.CoefClosedChartNormalization",
+   "AlgebraicGeometry.Etale.CoefClosedChartAt",
+   "AlgebraicGeometry.Etale.exists_coefDualizingClosedChart"
+  ],
+  "file": "lean/Sheaf/Paper/CoefDualizingClosedChart.lean",
+  "statement": "theorem exists_coefDualizingClosedChart (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of D.k)) [IsAffine Y] [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] : ∃ (r : ℕ) (i : Y ⟶ AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k))), IsClosedImmersion i ∧ ∀ [hi : IsClosedImmersion i], i ≫ (AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)) ↘ Spec (.of D.k)) = aY ∧ IsFinite i ∧ IsProper i ∧ LocallyOfFiniteType i ∧ QuasiCompact i ∧ ∀ h : i ≫ (AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)) ↘ Spec (.of D.k)) = aY, CoefClosedChartAt l E m hm i D.k (AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)) ↘ Spec (.of D.k)) aY h ∧ CoefClosedChartAt l E n (hm.trans hmn) i D.k (AffineSpace (ULift.{u} (Fin r)) (Spec (.of D.k)) ↘ Spec (.of D.k)) aY h",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Closed chart existence for both positive coefficient levels, with exact unbounded closed pushforward, natural cohomology comparison, independently verified lower bounds, and the unique structural-counit-compatible dualizing isomorphism. Helpers assemble the recorded canonical bounded-below compact-support composition and package exactly the clauses of this node. The coefficient lift is the common small-etale universe convention of the recorded boundary-adjunction dependency. No mathematical statement, dependency record, or source proof is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eee8a428e",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read the node, all 14 stmt_deps, the module, the report, the side-live upstream declarations and both citers (closed-descent, parent finite-dualizing). Node diff vs side-live: lean record only; lean.statement verbatim. Every hypothesis matches the node, with nothing stronger (FiniteFieldDatum, l prime, l≠p, E/Q_l finite, 1≤m≤n, affine separated finite-type Y). Every clause is rendered: closed chart into A^r with i≫p=aY, i finite/proper/finite type, i_* exact, identity-open R_!=Ri_*=termwise i_*, H^q commutation together with the derived iso, I preserves D+, ω_Y, ω_P and Iω_P bounded below, at both levels m and n. The θ clause is ∃! with the counit equation through the canonical composition (identity-open→chosen PlusIso, rightDerivedLowerShriekPlusCompIso, Congr), which is a bijection on Hom sets, so not hollow. Edge cases (empty Y, r=0, m=n=1, unbounded L, all q) are covered; universes unrestricted beyond the ULift.{u+1} coefficient convention. No H4 duplicate (boundaryDualizingEtaleIso is the R(f)^! mate, a different notion). Docstrings, imports (plain imports = proof deps), line width ≤94 and report sections OK. Advisory: identity_open, derived_pushforward and cohomology are Nonempty isos; citers only use existence and lower bounds (Q19 precedent); redundant LFT/QC next to IsProper; unused inherited T/c/Tor notation; the parent lem-coef-finite-dualizing lean record names a missing module (unrelated). Not recompiled per instruction; worker reports a clean 8.9 s compile."
+ }
+}

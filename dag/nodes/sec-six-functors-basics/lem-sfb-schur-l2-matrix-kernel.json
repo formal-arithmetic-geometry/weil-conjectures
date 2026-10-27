@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-schur-l2-matrix-kernel",
+ "kind": "statement",
+ "title": "Schur bound for a measurable matrix integral kernel",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $m\\geq1$ and $p,q\\geq0$ be integers, and let $G:\\mathbf R^m\\times\\mathbf R^m\\to\\operatorname{Hom}_{\\mathbf C}(\\mathbf C^p,\\mathbf C^q)$ be Lebesgue measurable, with the Euclidean operator norm on matrices. Suppose $a,b\\geq0$ are finite real numbers and $$\\int\\|G(x,y)\\|\\,dy\\leq a\\quad\\text{for almost every }x,\\qquad\\int\\|G(x,y)\\|\\,dx\\leq b\\quad\\text{for almost every }y.$$ For each $h\\in L^2(\\mathbf R^m;\\mathbf C^p)$, the integral $$Th(x)=\\int G(x,y)h(y)\\,dy$$ is absolutely convergent for almost every $x$ and determines an $L^2(\\mathbf R^m;\\mathbf C^q)$ class independent of representatives. It defines a bounded complex-linear map with $$\\|Th\\|_2\\leq\\sqrt{ab}\\,\\|h\\|_2.$$ Here $L^2$ consists of measurable functions of finite squared-norm integral modulo almost-everywhere equality.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Choose a measurable representative $h$ of the input class and put $k(x,y)=\\|G(x,y)\\|$, $v(y)=\\|h(y)\\|$ and $H(x,y)=G(x,y)h(y)$. Use Borel measure spaces with their Lebesgue measures; The completion clause of the parameter-measurability node gives almost everywhere measurable representatives of the Lebesgue-measurable functions for these Borel measures. The parameter-measurability node makes $G$, $h$ and the lifted map $(x,y)\\mapsto h(y)$ almost everywhere strongly measurable. The finite-dimensional matrix space and $\\mathbf C^p,\\mathbf C^q$, regarded as real Banach spaces, are separable, also in dimension zero. Continuous operations on their simple approximations show that $k$, $v$, $H$ and $k(x,y)v(y)^2$ are almost everywhere measurable (and the vector map $H$ almost everywhere strongly measurable): apply the operation to the pair of simple approximations and pass to its pointwise limit outside their null sets. The same node gives almost everywhere strongly measurable sections of $H$ and of $G$. Lebesgue measure on $\\mathbf R^m$ is sigma-finite, using the countable cover by bounded cubes.",
+   "uses": [
+    "lem-sfb-measurable-parameter-bochner-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  },
+  {
+   "text": "All integrals of nonnegative functions in this step are extended integrals, so no integrability is assumed in interchanging them. Set $U(x)=\\int_y^- k(x,y)v(y)^2\\,dy$. The Tonelli node gives its almost everywhere measurability and $$\\int_x^-U(x)\\,dx=\\int_y^-v(y)^2\\left(\\int_x^-k(x,y)\\,dx\\right)dy\\leq b\\int_y v(y)^2\\,dy=b\\|h\\|_2^2<\\infty.$$ Extraction of the finite constant $v(y)^2$ in the inner integral and of $b$ in the outer integral, and the inequality from the almost-everywhere column bound, are the scalar and order clauses of that node. Its finiteness clause implies $U(x)<\\infty$ almost everywhere. Intersect this full-measure set with the row-bound set and the section-measurability sets of step 1. On this intersection let $u(x)$ be the real value of $U(x)$, and set $u=0$ elsewhere. This is a nonnegative Lebesgue-measurable function and $\\int u\\leq b\\|h\\|_2^2$. The row integral $R(x)=\\int k(x,y)\\,dy$ is finite and at most $a$ there.",
+   "uses": [
+    "lem-sfb-tonelli-nonnegative-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  },
+  {
+   "text": "For each $x$ in that full-measure set, the real functions $s_x(y)=\\sqrt{k(x,y)}$ and $t_x(y)=\\sqrt{k(x,y)}v(y)$ are measurable and square integrable, with $\\|s_x\\|_2^2=R(x)$ and $\\|t_x\\|_2^2=u(x)$. Apply the scalar clause of the existing real $L^2$ Cauchy–Schwarz node (fibre rank $1$): $$\\int k(x,y)v(y)\\,dy=\\int|s_x(y)t_x(y)|\\,dy\\leq\\sqrt{R(x)}\\sqrt{u(x)}\\leq\\sqrt a\\sqrt{u(x)}.$$ It also asserts integrability of this product. The identities $s_x^2=k$ and $t_x^2=kv^2$ use only $k,v\\geq0$. This argument involves no division and includes $R(x)=0$ and $u(x)=0$.",
+   "uses": [
+    "lem-sfb-real-l2-hilbert-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  },
+  {
+   "text": "The definition of the operator norm gives $\\|H(x,y)\\|\\leq k(x,y)v(y)$ pointwise. Apply the vector Bochner majorant node to the integrable majorant from step 3 and the almost everywhere strongly measurable section from step 1. Thus $\\int_yH(x,y)\\,dy$ is absolutely convergent for almost every $x$, and its norm is at most $\\sqrt a\\sqrt{u(x)}$. The parameter-integral node makes $J(x)=\\int_yH(x,y)\\,dy$, with zero for a nonintegrable section, almost everywhere strongly measurable. Its values on the exceptional null set do not affect its class. Squaring the estimate and using nonnegative integral monotonicity and constant extraction yields $$\\int\\|J(x)\\|^2\\,dx\\leq a\\int u(x)\\,dx\\leq ab\\|h\\|_2^2.$$ Hence $J$ defines the required $L^2$ output, and taking nonnegative square roots gives $\\|J\\|_2\\leq\\sqrt{ab}\\,\\|h\\|_2$.",
+   "uses": [
+    "lem-sfb-vector-integral-majorant-linearity",
+    "lem-sfb-measurable-parameter-bochner-integral",
+    "lem-sfb-tonelli-nonnegative-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  },
+  {
+   "text": "If $h$ and $h'$ represent the same input class, choose a null set $N$ such that $h(y)=h'(y)$ off $N$. For every fixed $x$, the two integrands $G(x,y)h(y)$ and $G(x,y)h'(y)$ agree for every $y\\notin N$. The almost-everywhere congruence clause of the Bochner node therefore identifies their integrals wherever the formula is used; in particular the two almost-everywhere defined outputs give the same $L^2$ class. Thus the construction descends to the quotient by almost-everywhere equality.",
+   "uses": [
+    "lem-sfb-vector-integral-majorant-linearity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  },
+  {
+   "text": "For two inputs $h_1,h_2$ and $c\\in\\mathbf C$, intersect the full-measure sets on which the integrals for $h_1,h_2,h_1+h_2,ch_1$ are absolutely convergent. Matrix linearity gives $G(h_1+h_2)=Gh_1+Gh_2$ and $G(ch_1)=cGh_1$ pointwise; the Bochner additivity and scalar clauses give $T(h_1+h_2)=Th_1+Th_2$ and $T(ch_1)=cTh_1$ as classes. The estimate of step 4 gives boundedness of this complex-linear map. If $a=0$ or $b=0$ it forces the zero output class; no strict positivity was used. If $p=0$ or $q=0$, the relevant integrand is identically zero and the same formulas and all preceding bounds remain valid.",
+   "uses": [
+    "lem-sfb-vector-integral-majorant-linearity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: Part I §3.B, Theorem 3.6, printed p.13 (PDF page 25). Agent-supplied analytic prerequisite; the source PDF could not be fetched online during this split."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-measurable-parameter-bochner-integral",
+  "lem-sfb-tonelli-nonnegative-product",
+  "lem-sfb-real-l2-hilbert-pairing",
+  "lem-sfb-vector-integral-majorant-linearity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "Agent proof of the Schur analytic prerequisite; Demailly Part I §3.B, Theorem 3.6 is WANTED locally, not read. The actual cited integration inputs were checked in the pinned Mathlib sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Schur test integral kernel with bounded row and column integrals defines bounded L2 operator",
+   "results": "{\"t\": \"2026-10-24T03:27:52Z\", \"tool\": \"leanfinder\", \"query\": \"Schur test integral kernel with bounded row and column integrals defines bounded L2 operator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.integrable_of_bilin_of_bdd_right\", \"ContinuousLinearMap.integrable_of_bilin_of_bdd_left\", \"SchwartzMap.integralCLM\", \"ContinuousLinearMap.lpPairing_eq_integral\", \"Real.integrable_prod_sub\", \"ContinuousLinearMap.norm_holder_apply_apply_le\", \"MeasureTheory.Integrable.op_fst_snd\", \"ContinuousLinearMap.memLp_of_bilin\"], \"digest\": \"95c683da146ec296\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Holder pairings, L1 integrals, or the convolution integrand; none gives the two marginal kernel criterion and the L2 operator estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral operator dominated by a translation invariant integrable kernel is bounded on L2 by the L1 norm of the kernel",
+   "results": "{\"t\": \"2026-10-24T03:27:14Z\", \"tool\": \"leansearch\", \"query\": \"An integral operator dominated by a translation invariant integrable kernel is bounded on L2 by the L1 norm of the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.norm_setToFun_le_mul_norm\", \"MeasureTheory.norm_setToFun_le\", \"MeasureTheory.continuous_setToFun\", \"MeasureTheory.setToFun\", \"MeasureTheory.norm_setToFun_le'\", \"MeasureTheory.L1.norm_setToL1_le_norm_setToL1SCLM\", \"MeasureTheory.norm_setToFun_le_mul_norm'\", \"MeasureTheory.L1.norm_setToL1_le\"], \"digest\": \"e0232b797ff8d1b2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Holder pairings, L1 integrals, or the convolution integrand; none gives the two marginal kernel criterion and the L2 operator estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schur integral operator test bounded integrals of absolute kernel along rows and columns imply an L2 operator norm bound",
+   "results": "{\"t\": \"2026-10-24T03:29:16Z\", \"tool\": \"leansearch\", \"query\": \"Schur integral operator test bounded integrals of absolute kernel along rows and columns imply an L2 operator norm bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.norm_setToFun_le_mul_norm\", \"MeasureTheory.norm_setToFun_le_mul_norm'\", \"SchwartzMap.integralCLM\", \"MeasureTheory.norm_setToFun_le'\", \"MeasureTheory.norm_setToFun_le\", \"MeasureTheory.L1.norm_setToL1_le_norm_setToL1SCLM\", \"MeasureTheory.L1.SimpleFunc.norm_Integral_le_one\", \"Matrix.instL2OpNormedSpace\"], \"digest\": \"90166999d26be319\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Holder pairings, L1 integrals, or the convolution integrand; none gives the two marginal kernel criterion and the L2 operator estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"convolution\", \"eLpNorm\"",
+   "results": "{\"t\": \"2026-10-24T03:27:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"convolution\\\", \\\"eLpNorm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"MeasureTheory.eLpNorm_convolution_integrand_le\"], \"digest\": \"2a99191b5661a835\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Holder pairings, L1 integrals, or the convolution integrand; none gives the two marginal kernel criterion and the L2 operator estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "Schur|convolution.*(norm|Lp)|eLpNorm.*convolution",
+   "results": "{\"t\": \"2026-10-24T03:27:50Z\", \"tool\": \"grep\", \"query\": \"Schur|convolution.*(norm|Lp)|eLpNorm.*convolution\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Matrix/Order.lean\", \"Mathlib/Analysis/Matrix/Order.lean\", \"Mathlib/Analysis/InnerProductSpace/Spectrum.lean\", \"Mathlib/Analysis/Calculus/BumpFunction/SmoothApprox.lean\", \"Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean\", \"Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean\", \"Mathlib/Analysis/Calculus/BumpFunction/Convolution.lean\", \"Mathlib/Analysis/Fourier/Convolution.lean\"], \"digest\": \"c29385030e798d0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Holder pairings, L1 integrals, or the convolution integrand; none gives the two marginal kernel criterion and the L2 operator estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "^theorem.*convolution.*(Lp|norm)|^theorem.*eLpNorm.*convolution",
+   "results": "{\"t\": \"2026-10-24T03:28:12Z\", \"tool\": \"grep\", \"query\": \"^theorem.*convolution.*(Lp|norm)|^theorem.*eLpNorm.*convolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Convolution.lean\", \"Mathlib/Analysis/Convolution.lean\", \"Mathlib/Analysis/Convolution.lean\", \"Mathlib/Analysis/Convolution.lean\", \"Mathlib/Analysis/Convolution.lean\"], \"digest\": \"0c360a57458f7552\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Holder pairings, L1 integrals, or the convolution integrand; none gives the two marginal kernel criterion and the L2 operator estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schur test measurable matrix kernel bounded integrals rows columns bounded operator on L2 with norm sqrt a b",
+   "results": "{\"t\": \"2026-10-24T03:58:54Z\", \"tool\": \"leanfinder\", \"query\": \"Schur test measurable matrix kernel bounded integrals rows columns bounded operator on L2 with norm sqrt a b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.integrable_of_bilin_of_bdd_right\", \"Real.integrable_prod_sub\", \"Matrix.l2_opNorm_def\", \"Matrix.l2_opNNNorm_def\", \"Matrix.l2_opNNNorm_mulVec\", \"Matrix.l2_opNorm_mulVec\", \"Matrix.l2_opNorm_toEuclideanCLM\", \"ContinuousLinearMap.integrable_of_bilin_of_bdd_left\"], \"digest\": \"2be6a57293bcd58c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Schur name gives matrix complements and group theory; semantic searches give L1 Bochner bounds, bilinear integrability or matrix operator norms, not the two-marginal L2 integral-kernel theorem. Two phrasings were tried and hits read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schur test for a measurable kernel defines bounded operator on L2",
+   "results": "{\"t\": \"2026-10-24T03:58:51Z\", \"tool\": \"leansearch\", \"query\": \"Schur test for a measurable kernel defines bounded operator on L2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Measurable.lintegral_kernel_prod_left'\", \"SchwartzMap.integralCLM\", \"MeasureTheory.StronglyMeasurable.integral_kernel_prod_left\", \"ProbabilityTheory.measurableSet_integrable\", \"SchwartzMap.integralCLM.congr_simp\", \"MeasureTheory.StronglyMeasurable.integral_kernel_prod_left'\", \"MeasureTheory.StronglyMeasurable.integral_kernel_prod_right\", \"MeasureTheory.memLp_two_iff_integrable_sq\"], \"digest\": \"2d7eef5b0792cd03\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Schur name gives matrix complements and group theory; semantic searches give L1 Bochner bounds, bilinear integrability or matrix operator norms, not the two-marginal L2 integral-kernel theorem. Two phrasings were tried and hits read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schur\"",
+   "results": "{\"t\": \"2026-10-24T03:58:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Schur\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Matrix.schur_complement_eq₁₁\", \"Matrix.schur_complement_eq₂₂\", \"Subgroup.SchurZassenhausInduction.step7\"], \"digest\": \"8e58752d53acd820\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Schur name gives matrix complements and group theory; semantic searches give L1 Bochner bounds, bilinear integrability or matrix operator norms, not the two-marginal L2 integral-kernel theorem. Two phrasings were tried and hits read."
+  },
+  {
+   "tool": "grep",
+   "query": "Schur|schur",
+   "results": "{\"t\": \"2026-10-24T03:58:50Z\", \"tool\": \"grep\", \"query\": \"Schur|schur\", \"sub\": \"MeasureTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Schur name gives matrix complements and group theory; semantic searches give L1 Bochner bounds, bilinear integrability or matrix operator norms, not the two-marginal L2 integral-kernel theorem. Two phrasings were tried and hits read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral operator with kernel K and uniformly bounded row and column L1 norms has norm on L2 at most geometric mean Schur bound",
+   "results": "{\"t\": \"2026-10-24T04:00:51Z\", \"tool\": \"leanfinder\", \"query\": \"Integral operator with kernel K and uniformly bounded row and column L1 norms has norm on L2 at most geometric mean Schur bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.L1.norm_Integral_le_one\", \"MeasureTheory.L1.nnnorm_Integral_le_one\", \"MeasureTheory.L1.norm_setToL1_le_mul_norm'\", \"MeasureTheory.norm_setToFun_le_mul_norm'\", \"MeasureTheory.norm_setToFun_le_mul_norm\", \"ContinuousLinearMap.integrable_of_bilin_of_bdd_left\", \"MeasureTheory.L1.norm_setToL1_le_mul_norm\", \"MeasureTheory.L1.norm_setToL1_le_norm_setToL1SCLM\"], \"digest\": \"7e8b77a60350108d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Schur name gives matrix complements and group theory; semantic searches give L1 Bochner bounds, bilinear integrability or matrix operator norms, not the two-marginal L2 integral-kernel theorem. Two phrasings were tried and hits read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral operator satisfies L2 bound by geometric mean of uniform row and column integrals of kernel",
+   "results": "{\"t\": \"2026-10-24T04:00:50Z\", \"tool\": \"leansearch\", \"query\": \"Integral operator satisfies L2 bound by geometric mean of uniform row and column integrals of kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeasureTheory.norm_setToFun_le_mul_norm\", \"MeasureTheory.norm_setToFun_le'\", \"MeasureTheory.norm_setToFun_le\", \"Matrix.l2_opNorm_mul\", \"MeasureTheory.norm_setToFun_le_mul_norm'\", \"MeasureTheory.L1.SimpleFunc.norm_Integral_le_one\", \"MeasureTheory.setToFun\", \"SchwartzMap.integralCLM\"], \"digest\": \"c887f5e91ffc0699\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the Schur name gives matrix complements and group theory; semantic searches give L1 Bochner bounds, bilinear integrability or matrix operator norms, not the two-marginal L2 integral-kernel theorem. Two phrasings were tried and hits read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symbol-operator-sobolev-boundedness",
+  "date": "2026-10-24",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Sobolev boundedness of bundle symbol operators. Supporting Fourier-estimate input: Schur bound for a measurable matrix integral kernel.",
+   "via": [
+    "lem-sfb-symbol-operator-sobolev-boundedness",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-schur-l2-matrix-kernel",
+  "worker": "stage1",
+  "summary": "Proved Schur by Tonelli on k(x,y)||h(y)||² and scalar L2 Cauchy–Schwarz on sqrt(k) and sqrt(k)||h||. Reused the existing real L2 node; reused the concurrently landed Tonelli leaf and added two generic Mathlib integration leaves, with exact declaration lines. Checked absolute convergence, measurability, quotient descent, complex linearity, zero constants and zero fibre ranks. Statement unchanged.",
+  "blueprint": "Analytic prerequisite below lem-sfb-symbol-operator-sobolev-boundedness, step 2 (frequency kernel Schur estimate); inherited blueprint.from.place traces to det-thm-sf-ctf-stability-direct-images proof (3). tools/blueprint_refs.py ancestor reports node=None for this existing ancestor chain; retained that inherited value and its via list. This split changes only the analytic prerequisite, not the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NS-b6ecba179",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-b6ecba179 (reviewer sub-agent of L); spot-checked: I read the item and both new Mathlib leaves in full and found nothing to fix; no files changed, no nodes dropped. The item statement is unchanged from live, where it is still unsplit, and is a true Schur test. Small cases checked: 1_{[0,1]^2} with a=b=1, 1_{|x-y|<=1} with a=b=2, a or b = 0, p or q = 0. Step by step: step 1 gets a.e. measurability of G and h from NullMeasurable.aemeasurable (AEMeasurable.lean:388) and sections from prodMk_left and comp_snd (Prod.lean:136-153). Step 2 uses the clauses of the landed Tonelli leaf on ||G|| itself, so the row and column bounds apply directly. Step 3 applies the scalar clause of the real L2 leaf to sqrt(k) and sqrt(k)v, with no division. Step 4 uses Integrable.mono' (Integrable.lean:101), norm_integral_le_of_norm_le (Bochner/Basic.lean:947) and integral_prod_right' (Prod.lean:142, which needs no global integrability), giving ||Th||^2 <= ab||h||^2. Step 5 uses integral_congr_ae at every x. Step 6 uses integral_add on the integrability sets and integral_smul. I read every cited Mathlib declaration and its hypotheses match. Each new node is self-contained, has no proof and records LeanSearch, LeanFinder or Loogle, and grep searches. Neither restates the item. No Schur node exists in the DAG. lem-sfb-integrable-majorant-estimate is the scalar special case. lem-sfb-euclidean-bochner-integral-calculus overlaps partly but lacks complex homogeneity and the a.e. section and completion clauses, so this Mathlib-leaf overlap is advisory only. All citations are Mathlib leaves, so there is no route issue and no tool_uses. No SGA is used. Maintainer note: blueprint.from.node is null and the inherited from.place is unrelated ILO / de Jong text; this comes from the base ancestor chain, not from this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.MeasureTheory.SchurL2MatrixKernel",
+  "declaration": "MeasureTheory.exists_schurL2MatrixKernel",
+  "file": "lean/Sheaf/MeasureTheory/SchurL2MatrixKernel.lean",
+  "statement": "theorem exists_schurL2MatrixKernel (m p q : ℕ) (hm : 1 ≤ m) (G : EuclideanSpace ℝ (Fin m) × EuclideanSpace ℝ (Fin m) → EuclideanSpace ℂ (Fin p) →L[ℂ] EuclideanSpace ℂ (Fin q)) (hG : @NullMeasurable _ _ _ (borel (EuclideanSpace ℂ (Fin p) →L[ℂ] EuclideanSpace ℂ (Fin q))) G (volume.prod volume)) (a b : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b) (hrow : ∀ᵐ x ∂volume, ∫⁻ y, ‖G (x, y)‖ₑ ≤ ENNReal.ofReal a) (hcol : ∀ᵐ y ∂volume, ∫⁻ x, ‖G (x, y)‖ₑ ≤ ENNReal.ofReal b) : ∃ T : Lp (EuclideanSpace ℂ (Fin p)) 2 (volume : Measure (EuclideanSpace ℝ (Fin m))) →L[ℂ] Lp (EuclideanSpace ℂ (Fin q)) 2 (volume : Measure (EuclideanSpace ℝ (Fin m))), ∀ h : Lp (EuclideanSpace ℂ (Fin p)) 2 (volume : Measure (EuclideanSpace ℝ (Fin m))), ‖T h‖ ≤ Real.sqrt (a * b) * ‖h‖ ∧ ∀ f : EuclideanSpace ℝ (Fin m) → EuclideanSpace ℂ (Fin p), f =ᵐ[volume] h → (∀ᵐ x ∂volume, Integrable (fun y ↦ G (x, y) (f y)) volume) ∧ (T h : EuclideanSpace ℝ (Fin m) → EuclideanSpace ℂ (Fin q)) =ᵐ[volume] (fun x ↦ ∫ y, G (x, y) (f y))",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b13e022cb",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Clause-by-clause check of MeasureTheory.exists_schurL2MatrixKernel against the node. EuclideanSpace + volume = Lebesgue; kernel values →L[ℂ] = Hom_ℂ with Euclidean operator norm; NullMeasurable wrt volume.prod volume = Lebesgue measurability, with explicit borel equal to Mathlib's ContinuousLinearMap.instMeasurableSpace (borel _); row/column bounds via lintegral ≤ ofReal a/b, so finiteness is included; Lp 2 in- and outputs; ∃ T →L[ℂ] with ‖T h‖ ≤ √(ab)‖h‖ and, for every representative f =ᵐ h, a.e. Integrable sections and T h =ᵐ ∫ G(x,y)(f y). T is determined, so no arbitrary choice. Edge cases p=0/q=0, a=0/b=0, m=1 and null-set representative changes are covered; no extra hypotheses or universes. lean.statement matches the file verbatim; the node differs from live only in its lean field; stmt_deps [def-weil-field] is adequate; docstrings carry the source place, blueprint tag and proof steps; sorry only, no definitions; no Mathlib or project duplicate or name clash; report has Worker report and Second reading by Q36. Not recompiled (no change). No findings."
+ }
+}

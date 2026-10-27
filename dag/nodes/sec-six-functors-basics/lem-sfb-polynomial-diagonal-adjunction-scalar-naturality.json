@@ -1,0 +1,315 @@
+{
+ "id": "lem-sfb-polynomial-diagonal-adjunction-scalar-naturality",
+ "kind": "statement",
+ "title": "Scalar naturality of the polynomial-diagonal adjunction reduction",
+ "statement": "Let $R\\to A$ be a flat finitely presented homomorphism of commutative Noetherian rings [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra, def-weil-pbc-noetherian-ring], and let $R\\to R'$ be any homomorphism with $R'$ Noetherian. Fix a presentation $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ [def-weil-pbc-mv-polynomial-ring]. Put $A'=A\\otimes_RR'$, $P'=P\\otimes_RR'$, $Q=A\\otimes_RA$, $Q'=A'\\otimes_{R'}A'$, and $p_1(a)=a\\otimes1$. Work in ordinary module derived categories [def-weil-abstract-derived-category], with derived tensor [lem-pc-derived-tensor-second-factor-functor] and Hom [def-pur-derived-internal-hom]. Set $C=C_A^P(\\Omega^n_{P/R})[n]$ and $C'=C_{A'}^{P'}(\\Omega^n_{P'/R'})[n]$, where coinduction has its precomposition action [def-trf-derived-coinduction] and the ordered differential volume identifies the coefficient lines [def-weil-pbc-kahler-differentials, def-weil-pbc-exterior-algebra]. Let $c:C\\otimes_A^{\\mathbf L}A'\\to C'$ be the counit-mate exchange of [lem-sfb-perfect-coinduction-tor-independent-exchange], with this coefficient identification and shift.\nFor $T\\in D(A)$ set $T'=T\\otimes_A^{\\mathbf L}A'$, $T_1=T\\otimes_{A,p_1}^{\\mathbf L}Q$ and $T'_1=T'\\otimes_{A',p'_1}^{\\mathbf L}Q'$. Suppose $T$ is pseudo-coherent over $A$ [def-pc-ring-pseudo-coherent-complex] and has finite Tor amplitude over $R$, and $T'$ has the analogous properties over $A'$ and $R'$. Finite Tor amplitude means that derived tensor with any base-ring module has cohomology in a fixed finite interval. The polynomial-diagonal derived reduction of [lem-trf-polynomial-diagonal-rhom-reduction], after the ordered-volume identification, induces natural bijections\n$$\\rho_T:\\operatorname{Hom}_{D(Q)}(A[0],T_1)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(A)}(C,T),\\qquad\n\\rho'_{T'}:\\operatorname{Hom}_{D(Q')}(A'[0],T'_1)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(A')}(C',T').$$\nThey can be chosen simultaneously with the following specified normalization: $\\rho_C$ sends the diagonal class of the normalized polynomial-chart pair on $\\operatorname{Spec}A/\\operatorname{Spec}R$ [lem-trf-relative-duality-polynomial-chart] to $1_C$, and likewise for $C'$. For every $v:A[0]\\to T_1$, with $v'$ its derived extension along $Q\\to Q'$ under $A\\otimes_Q^{\\mathbf L}Q'\\simeq A'$ and $T_1\\otimes_Q^{\\mathbf L}Q'\\simeq T'_1$, one has\n$$\\rho'_{T'}(v')=(\\rho_T(v)\\otimes_A^{\\mathbf L}A')\\circ c^{-1}.$$\nThis asserts naturality of the whole morphism adjunction for arbitrary $T$ with these properties; it asserts no global sheaf gluing or proper-duality comparison.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Agent scalar-naturality refinement of Tag 0E2E (lemma-relative-dualizing-noetherian) and the generator assertion of Tag 0E2F (lemma-base-change-relative-dualizing); ordered coefficient normalization of Tag 0BZI (section-relative-dualizing-complex-algebraic), footnote, and Tag 0BZJ (lemma-well-defined). The full naturality square is not stated verbatim in these sources."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pur-derived-internal-hom",
+  "def-trf-derived-coinduction",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-exterior-algebra",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-trf-polynomial-diagonal-rhom-reduction",
+  "lem-trf-relative-duality-polynomial-chart",
+  "def-sfb-polynomial-koszul-diagonal-data"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient line is free on the ordered volume, so the objects $C,C'$ are the polynomial dualizing objects of [lem-trf-algebraic-shriek-relative-perfect]. In particular they are allowable targets and $\\operatorname{End}_{D(A)}(C)=A$, with $a$ acting as $a1_C$, and likewise over $A'$, by taking $H^0$ using [lem-pur-rhom-global-sections]. The primed ring is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]: the base-changed presentation exhibits it as a finite-type $R'$-algebra. Its finite presentation is obtained by extending the finitely many defining relations; its flatness follows directly by identifying $N\\otimes_{R'}A'$ with $N\\otimes_RA$ and applying [def-weil-pbc-flat-ring-map] to an injection of $R'$-modules. Thus both applications have the required flat finite-type Noetherian hypotheses.",
+   "uses": [
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZW (lemma-relative-dualizing-algebraic), (1)(c), (2)(a); sites-cohomology.tex Tag 08JA (lemma-section-RHom-over-U); algebra.tex Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "The map $c$ is invertible. Indeed [lem-trf-flat-polynomial-quotient-perfect] makes $A[0]$ perfect over $P$. To verify Tor independence with $P'$, resolve $R'$ freely over $R$. Tensoring that resolution with the $R$-flat modules $P$ and $A$ remains exact by [lem-weil-pbc-flat-tensor-exact]; the first tensor is a free $P$-resolution of $P'$, whose tensor with $A$ is the second tensor. Its higher homology vanishes, which is Tor independence by [def-weil-pbc-tor-modules]. Apply [lem-sfb-perfect-coinduction-tor-independent-exchange] with its rings $(P,A,T)=(P,A,P')$ and coefficient $\\Omega^n_{P/R}[n]$. Its counit characterization is precisely the specified $c$, including the ordered coefficient identification.",
+   "uses": [
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-tor-modules",
+    "lem-sfb-perfect-coinduction-tor-independent-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZP (lemma-bc-surjection), counit-defined equation-base-change; more-algebra.tex Tags 068X (lemma-perfect-over-polynomial-ring), 0661 (lemma-base-change-comparison)."
+   }
+  },
+  {
+   "text": "Choose the affine normalized chart classes $\\xi:A\\to C_1$ and $\\xi':A'\\to C'_1$ by [lem-sfb-polynomial-koszul-diagonal-class], with its letter $B$ replaced by our $A$. Multiplication by each class is an isomorphism onto the corresponding derived diagonal Hom; taking $H^0$ by [lem-pur-rhom-global-sections] says these Hom groups are free rank one on $\\xi,\\xi'$. These choices are normalized polynomial-chart pairs as required by [lem-trf-relative-duality-polynomial-chart]: their objects are its displayed polynomial models, their diagonal maps satisfy its pair condition, and their refinement comparisons have its ordered contraction $\\operatorname{dual}(t-a)\\otimes d(t-a)\\mapsto1$. We select these pairs on the two affine schemes; no comparison with an independently chosen global pair is needed. The scalar-extension clause of the Koszul-class node gives the exact equality $c_1\\bar\\xi=\\xi'$, where $\\bar\\xi$ is the derived extension of $\\xi$ along $Q\\to Q'$ and $c_1=c\\otimes_{A',p'_1}^{\\mathbf L}Q'$. Its comparison is the evaluation-counit comparison used in step 2, not an unspecified isomorphism.",
+   "uses": [
+    "lem-sfb-polynomial-koszul-diagonal-class",
+    "lem-pur-rhom-global-sections",
+    "lem-trf-relative-duality-polynomial-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Agent assembly of the specified ordered graph construction underlying Tag 0E2E (lemma-relative-dualizing-noetherian), Tag 0E2F (lemma-base-change-relative-dualizing), and Tags 0BZI/0BZJ (section-relative-dualizing-complex-algebraic, lemma-well-defined)."
+   }
+  },
+  {
+   "text": "Take $H^0$ of [lem-trf-polynomial-diagonal-rhom-reduction], using [lem-pur-rhom-global-sections] on the one-point site. Restriction along $p_1$ retains the underlying cohomology, so this gives $A$-linear bijections $s_T:\\operatorname{Hom}_{D(Q)}(A,T_1)\\to\\operatorname{Hom}_{D(A)}(C,T)$ natural in every allowable $T$. Apply this also at $T=C$, which is allowable by step 1. Steps 1 and 3 identify its source and target as free rank-one $A$-modules with bases $\\xi$ and $1_C$. Hence $s_C(\\xi)=u1_C$ for a unit $u\\in A$: its inverse linear bijection supplies an inverse scalar. Define $\\rho_T(v)=s_T(v)\\circ(u^{-1}1_C)$. These remain natural bijections induced by the reduction after this fixed normalization, and $\\rho_C(\\xi)=1_C$. Perform the identical normalization independently over $A'$ to obtain $\\rho'$. This defines them simultaneously for all allowable targets.",
+   "uses": [
+    "lem-trf-polynomial-diagonal-rhom-reduction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Agent degree-zero assembly of the polynomial-diagonal reduction; degree-zero identification: sites-cohomology.tex Tag 08JA (lemma-section-RHom-over-U). Scalar normalization as in duality.tex Tag 0E2W (lemma-uniqueness-relative-dualizing)."
+   }
+  },
+  {
+   "text": "Naturality in a morphism $f:C\\to T$ gives $\\rho_T(f_1\\xi)=f\\rho_C(\\xi)=f$, where $f_1=f\\otimes_{A,p_1}^{\\mathbf L}Q$. Since $\\rho_T$ is bijective, for every $v$ we therefore have the explicit inverse formula $v=f_1\\xi$ with $f=\\rho_T(v)$. The primed formula is identical. This uses naturality between allowable objects only: both $C$ and $T$ have the required properties.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Elementary naturality of the preceding Hom bijections, evaluated on the chosen universal element."
+   }
+  },
+  {
+   "text": "Extend $v=f_1\\xi$ along $Q\\to Q'$. Functoriality of derived scalar extension [lem-pc-derived-tensor-second-factor-functor], under the tensor identifications in the statement, gives $v'=(f\\otimes_A^{\\mathbf L}A')_1\\bar\\xi$. Step 3 gives $\\bar\\xi=c_1^{-1}\\xi'$, so\n$$v'=\\bigl((f\\otimes_A^{\\mathbf L}A')\\circ c^{-1}\\bigr)_1\\xi'.$$\nApply the primed inverse formula of step 5. This yields exactly $\\rho'_{T'}(v')=(\\rho_T(v)\\otimes_A^{\\mathbf L}A')\\circ c^{-1}$. The object $T'$ is allowable by the stated assumption. If $A=0$ or $A'=0$, the corresponding categories and Hom modules have one element; every formula still holds, with the unique identity morphism. For $n=0$ the volume and graph contractions are empty, hence are identities; no sign or positive-dimension assumption entered.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Elementary application of functoriality to the class equality in Tag 0E2F (lemma-base-change-relative-dualizing), with the counit-mate normalization from step 3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-tor-modules",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "lem-sfb-polynomial-koszul-diagonal-class",
+  "lem-trf-relative-duality-polynomial-chart",
+  "lem-trf-polynomial-diagonal-rhom-reduction",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Normalized universal-element argument combining Tags 0BZW, 0E2E, 0E2F, 0BZP and ordered polynomial normalization 0BZI/0BZJ; morphism identification from sites-cohomology.tex Tag 08JA. The full naturality square is an agent assembly, not a verbatim Stacks claim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal.*dualizing|dualizing.*base|relativeDualizing|relative_dualizing",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change preserves the normalized diagonal class of a coherent relative dualizing complex of a flat family",
+   "results": "OK: 8 hits; IsSMulRegular.of_flat_of_isBaseChange, Module.Dual.baseChange_baseChange, IsBaseChange.toDualBaseChange, Module.Flat.isBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, Module.Dual.baseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"baseChange\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical diagonal generator for a flat finitely presented algebra defined by polynomial derived duality is preserved by arbitrary Noetherian base change",
+   "results": "OK: 8 hits; Algebra.SubmersivePresentation.baseChange, Algebra.PreSubmersivePresentation.baseChange_jacobian, Algebra.PreSubmersivePresentation.baseChange_toPresentation, Algebra.PreSubmersivePresentation.baseChange, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply, Algebra.FinitePresentation.baseChange, RingHom.finitePresentation_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial coinduction evaluation counit and diagonal fundamental class commute with tensor extension of the base ring",
+   "results": "OK: 8 hits; Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, PolynomialLaw.one_tmul_ground, MvPolynomial.aeval_one_tmul, polyEquivTensor_apply, PolynomialLaw.one_tmul_ground_apply', PolynomialLaw.toFun_eq_rTensor_φ_toFun', PolynomialLaw.ground_apply, PolyEquivTensor.invFun",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of the derived tensor Hom adjunction polynomial graph Koszul reduction with extension of the coefficient ring",
+   "results": "OK: 8 hits; ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, PolynomialLaw.isCompat_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived polynomial diagonal reduction from Hom on the diagonal to Hom from a relative dualizing complex commutes with base extension and the counit mate comparison",
+   "results": "OK: 8 hits; CategoryTheory.coev_expComparison, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, ModuleCat.homEquiv_extendScalarsComp, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.diagonal_Spec_map, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.coev_naturality",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under scalar extension of the polynomial diagonal derived tensor Hom adjunction with normalized relative dualizing class",
+   "results": "OK: 8 hits; PolynomialLaw.toFun'_eq_of_diagram, PolynomialLaw.toFun_eq_rTensor_φ_toFun', PolynomialLaw.isCompat_apply, PolynomialLaw.isCompat, PolynomialLaw.isCompat', PolynomialLaw.toFun'_eq_of_inclusion, PolynomialLaw.isCompat_apply', polyEquivTensor_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar adjunctions, polynomial laws or generic Ext identifications, not the normalized polynomial-diagonal derived naturality square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"baseChange\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar adjunctions, polynomial laws or generic Ext identifications, not the normalized polynomial-diagonal derived naturality square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative dualizing diagonal fundamental class induces an adjunction natural under arbitrary extension of the base ring",
+   "results": "OK: 8 hits; ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.extendRestrictScalarsAdj, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.RestrictionCoextensionAdj.unit'",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar adjunctions, polynomial laws or generic Ext identifications, not the normalized polynomial-diagonal derived naturality square."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|relative_dualizing|polynomial.*diagonal.*adjunction|diagonal.*coinduction",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar adjunctions, polynomial laws or generic Ext identifications, not the normalized polynomial-diagonal derived naturality square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural equivalence from Hom of a relative dualizing complex to Hom of the diagonal is determined by its universal class and commutes with base change",
+   "results": "OK: 8 hits; CategoryTheory.Abelian.Ext.homEquiv_chgUniv, CharacterModule.dual_rTensor_conj_homEquiv, LightCondensed.ihomPoints_symm_apply, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.Abelian.Ext.homLinearEquiv, ModuleCat.monoidalClosedHomEquiv, CategoryTheory.Abelian.Ext.homLinearEquiv_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give ordinary scalar adjunctions, polynomial laws or generic Ext identifications, not the normalized polynomial-diagonal derived naturality square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-duality-polynomial-base-change",
+  "date": "2026-10-23",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Proper nodal dualizing line over an arbitrary base. Within that prerequisite: steps 6-8 and 12-13 of lem-sfb-proper-nodal-dualizing-base-change, the identification of the relative dualizing module with the Koszul adjunction line at a Noetherian stage and its compatibility with both base-change comparison systems. General prerequisite: the intrinsic relative-duality base-change map has the normalized polynomial derived-Hom expression, before the nodal Koszul computation. Auxiliary input: Naturality, for arbitrary relative-perfect targets, of the algebraic polynomial-diagonal adjunction; use the identity morphism only afterwards.",
+   "via": [
+    "lem-sfb-relative-duality-polynomial-base-change",
+    "lem-sfb-nodal-dualizing-adjunction-line-comparison",
+    "lem-sfb-proper-nodal-dualizing-base-change",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-diagonal-adjunction-scalar-naturality",
+  "worker": "stage1",
+  "summary": "Reused the existing polynomial Koszul diagonal-class scalar compatibility and polynomial-diagonal RHom reduction. Normalized the latter by its universal element, then proved the entire arbitrary-target scalar naturality square by the explicit inverse formula. No new nodes and no Lean changes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Proper nodal dualizing line over an arbitrary base. Within that prerequisite: steps 6-8 and 12-13 of lem-sfb-proper-nodal-dualizing-base-change, the identification of the relative dualizing module with the Koszul adjunction line at a Noetherian stage and its compatibility with both base-change comparison systems. General prerequisite: the intrinsic relative-duality base-change map has the normalized polynomial derived-Hom expression, before the nodal Koszul computation. Auxiliary input: Naturality, for arbitrary relative-perfect targets, of the algebraic polynomial-diagonal adjunction; use the identity morphism only afterwards. This split proves the stated local algebraic prerequisite by normalized universal elements. Latest blueprint consulted at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3).",
+  "tool_uses": [
+   {
+    "node": "lem-trf-algebraic-shriek-relative-perfect",
+    "why": "Relative perfection and the scalar endomorphism isomorphism for the polynomial model; no node of this unit states these algebraic facts."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "The degree-zero RHom/morphism identification on the one-point site, used as a generic derived-category tool."
+   },
+   {
+    "node": "lem-trf-flat-polynomial-quotient-perfect",
+    "why": "Perfectness over the chosen polynomial algebra to verify the hypotheses of the counit-mate exchange."
+   },
+   {
+    "node": "lem-trf-relative-duality-polynomial-chart",
+    "why": "The meaning of the normalized polynomial-chart pair and its ordered refinement convention; no global descent or proper-duality comparison is used."
+   },
+   {
+    "node": "lem-trf-polynomial-diagonal-rhom-reduction",
+    "why": "The existing natural derived isomorphism that supplies the representing Hom bijections before scalar normalization."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Functoriality of derived scalar extension on composed morphisms; a generic tensor tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-algebraic-shriek-relative-perfect",
+  "lem-pur-rhom-global-sections",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-trf-relative-duality-polynomial-chart",
+  "lem-trf-polynomial-diagonal-rhom-reduction",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-5e2108d77",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-5e2108d77 (reviewer sub-agent of L); spot-checked: The delivery has 0 new nodes and leaves the statement and stmt_deps unchanged; the base item had no proof and there is no re-split note. I read all 6 steps. Step 1: relative-perfect (0BZW) and rhom-global-sections give End(C)=A·1_C; the primed flat/fp/Noetherian hypotheses are verified correctly. Step 2: A[0] is P-perfect, and Tor independence of (A,P') over P holds by a free R-resolution of R' (correct for non-flat R→R'); the exchange node's γ is exactly c. Step 3: from the Koszul-class node, Hom_{D(Q)}(A,C_1) is free of rank one on ξ_P, and its scalar-extension clause gives c_1ξ̄=ξ'. Reading 'the normalized chart pair class' as ξ_P is the only true reading, since the chart node is existential in ξ_f; the 'can be chosen' wording allows it, so the target is not weakened. Step 4: s_C(ξ)=u·1_C with u a unit, and normalizing by u^{-1} keeps naturality (checked). Steps 5–6: the universal-element inverse v=(ρv)_1ξ with functoriality gives the square, and the direction of c^{-1} is correct. Edge cases checked: A=0, n=0, identity base change, R'=R/I, A=R[t]/(t^2). Stacks 0E2E/0E2F checked at dualizing.tex l.5440/5474: they assert only that a generator base-changes to a generator; the source field rightly calls the square an agent assembly. No SGA. No duplicate found. Batch-5: I walked the closures of lem-trf-algebraic-shriek-relative-perfect, lem-trf-flat-polynomial-quotient-perfect and lem-sfb-polynomial-koszul-diagonal-class (which reaches def-trf-derived-coinduction). They contain only module-level coinduction/Tor/perfectness algebra, with no trace-formula or Poincaré statement or proof step and no target; all are generic and accepted. Advisory: the affine sheaf↔module translation in step 3 is implicit, and citer lem-sfb-relative-duality-polynomial-base-change step 4 must itself ensure the global ξ_f|U equals ξ_P."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PolynomialDiagonalAdjunctionScalarNaturality",
+  "declaration": "AlgebraicGeometry.polynomial_diagonal_adjunction_scalar_naturality",
+  "declarations": [
+   "AlgebraicGeometry.polynomialDiagonalAdjunctionTargets",
+   "AlgebraicGeometry.polynomial_diagonal_adjunction_scalar_naturality"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PolynomialDiagonalAdjunctionScalarNaturality.lean",
+  "statement": "theorem polynomial_diagonal_adjunction_scalar_naturality {R B S D : Type u} [CommRing R] [CommRing B] [Algebra R B] [CommRing S] [CommRing D] [Algebra S D] [IsNoetherianRing R] [IsNoetherianRing B] [IsNoetherianRing S] (hflat : RingHom.Flat (algebraMap R B)) [Algebra.FinitePresentation R B] (C : PolynomialKoszulChart R B) (E : PolynomialKoszulChart S D) (hC : Function.Bijective C.coordinates) (hE : Function.Bijective E.coordinates) (F : KoszulDiagonalChartChange C E) (hbase : IsPushout (CommRingCat.ofHom (algebraMap R B)) (CommRingCat.ofHom F.base) (CommRingCat.ofHom F.ring) (CommRingCat.ofHom (algebraMap S D))) (hquotient : IsPushout (CommRingCat.ofHom C.quotient.toRingHom) (CommRingCat.ofHom F.ambient) (CommRingCat.ofHom F.ring) (CommRingCat.ofHom E.quotient.toRingHom)) : ∃ (c : (relativeDualizingDerivedExtension F.ring).obj C.model ≅ E.model) (κ : C.diagonalHom ≅ koszulDiagonalUnit B) (κ' : E.diagonalHom ≅ koszulDiagonalUnit D), F.IsComparison c ∧ IsKoszulDiagonalNormalization C κ ∧ IsKoszulDiagonalNormalization E κ' ∧ IsIso (relativeDualizingModuleClassMap R B C.firstPullback (C.diagonalClass κ)) ∧ IsIso (relativeDualizingModuleClassMap S D E.firstPullback (E.diagonalClass κ')) ∧ ∃ (ρ : ∀ (T : DerivedCategory (ModuleCat.{u} B)), polynomialDiagonalAdjunctionTargets R B T → (relativeDualizingModuleDiagonal R B ⟶ relativeDualizingModuleFirstPullback R B T) ≃ (C.model ⟶ T)) (ρ' : ∀ (T : DerivedCategory (ModuleCat.{u} D)), polynomialDiagonalAdjunctionTargets S D T → (relativeDualizingModuleDiagonal S D ⟶ relativeDualizingModuleFirstPullback S D T) ≃ (E.model ⟶ T)), (∀ (T U : DerivedCategory (ModuleCat.{u} B)) (hT : polynomialDiagonalAdjunctionTargets R B T) (hU : polynomialDiagonalAdjunctionTargets R B U) (f : T ⟶ U) (v : relativeDualizingModuleDiagonal R B ⟶ relativeDualizingModuleFirstPullback R B T), ρ U hU (v ≫ (relativeDualizingDerivedExtension (Algebra.TensorProduct.includeLeft : B →ₐ[R] B ⊗[R] B).toRingHom).map f) = ρ T hT v ≫ f) ∧ (∀ (T U : DerivedCategory (ModuleCat.{u} D)) (hT : polynomialDiagonalAdjunctionTargets S D T) (hU : polynomialDiagonalAdjunctionTargets S D U) (f : T ⟶ U) (v : relativeDualizingModuleDiagonal S D ⟶ relativeDualizingModuleFirstPullback S D T), ρ' U hU (v ≫ (relativeDualizingDerivedExtension (Algebra.TensorProduct.includeLeft : D →ₐ[S] D ⊗[S] D).toRingHom).map f) = ρ' T hT v ≫ f) ∧ (∃ h : polynomialDiagonalAdjunctionTargets R B C.model, ρ C.model h (C.diagonalClass κ) = 𝟙 C.model) ∧ (∃ h : polynomialDiagonalAdjunctionTargets S D E.model, ρ' E.model h (E.diagonalClass κ') = 𝟙 E.model) ∧ ∃ (h : F.diagonalRing.comp (Algebra.TensorProduct.includeLeft : B →ₐ[R] B ⊗[R] B).toRingHom = (Algebra.TensorProduct.includeLeft : D →ₐ[S] D ⊗[S] D).toRingHom.comp F.ring) (d : (relativeDualizingDerivedExtension F.diagonalRing).obj (relativeDualizingModuleDiagonal R B) ≅ relativeDualizingModuleDiagonal S D), F.IsDiagonalComparison d ∧ ∀ (T : DerivedCategory (ModuleCat.{u} B)) (hT : polynomialDiagonalAdjunctionTargets R B T) (hT' : polynomialDiagonalAdjunctionTargets S D ((relativeDualizingDerivedExtension F.ring).obj T)) (v : relativeDualizingModuleDiagonal R B ⟶ relativeDualizingModuleFirstPullback R B T), ρ' ((relativeDualizingDerivedExtension F.ring).obj T) hT' (d.inv ≫ (relativeDualizingDerivedExtension F.diagonalRing).map v ≫ (koszulDiagonalExtensionSquare (Algebra.TensorProduct.includeLeft : B →ₐ[R] B ⊗[R] B).toRingHom F.ring F.diagonalRing (Algebra.TensorProduct.includeLeft : D →ₐ[S] D ⊗[S] D).toRingHom h).hom.app T) = c.inv ≫ (relativeDualizingDerivedExtension F.ring).map (ρ T hT v)",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed ordered polynomial Koszul chart model, normalized graph class and evaluation-counit comparison. Bijective coordinates encode ordinary polynomial presentations; pushouts encode the tensor-algebra carriers. Both natural Hom-equivalence families are quantified before the target and normalized at the two dualizing objects. The diagonal extension and first-pullback identifications are canonical scalar mates, and the final equation is for every allowable target and every diagonal morphism. The helper is only the conjunction of the existing pseudo-coherence and finite base-ring Tor-amplitude predicates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2172a666",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Matched every clause of the node to the Lean, using the live definitions in PolynomialKoszulDiagonalData. Hypotheses: R, B, S Noetherian, B flat and finitely presented over R; nothing assumed on D and no flatness of R->R'. Bijective chart coordinates plus F.coordinate and F.ambient_comm make P' the coefficient extension of P; hbase gives A'; hquotient is implied by the other hypotheses (redundant, not a restriction). c is pinned by IsComparison through the restriction/coinduction adjunct, d by IsDiagonalComparison (b -> F.ring b, then the single mate), kappa by IsKoszulDiagonalNormalization. rho and rho' are forced to be unique by naturality plus rho_C(xi)=1, so stating them existentially is not weaker. v' uses the canonical koszulDiagonalExtensionSquare; c.inv runs in the right direction. The allowable-target helper is the conjunction of IsPseudoCoherent and finiteTorAmplitude over R, matching the node's inline definition. Added stmt_dep def-sfb-polynomial-koszul-diagonal-data is landed, with no cycle. Statement field equals the file signature exactly; one sorry; source and blueprint docstrings present; all imports exist. Edge cases checked: n=0, A=0 or A'=0, T=0, identity base change, R'=R/I, non-smooth A, single universe u. Not recompiled: no file changed."
+ }
+}

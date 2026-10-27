@@ -1,0 +1,103 @@
+{
+ "id": "lem-sf-projection-tensor-normalization-descent",
+ "kind": "statement",
+ "title": "Tensor descent with the inverse representative normalization",
+ "statement": "Let q:K→D and q′:H→E be functors, F:K→H and LF:D→E with a factor isomorphism eps:q⋙LF≅F⋙q′. Let P and S be representative subcategories with F carrying P into S. Assume precomposition by the product of P.ι⋙q is fully faithful. For tensor functors t,t′ on representatives and T,T′ on the target categories, let r,r′ be the representative tensor identifications and b the natural comparison F(t(X,Y))≅t′(F(X),F(Y)). There is a unique comparison a:T⋙LF≅(LF×LF)⋙T′ such that LF(r) followed by a, the two factor maps eps and the inverse r′ equals eps on the tensor followed by q′(b).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Coefficient presentation of the projection map; the explicit quotient augmentation is the one of Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5, as retained in def-sf-projection-tensor-coefficient-comparison"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply tensorComparisonDescent to the natural isomorphism with components b and the factor isomorphism eps. Every component of eps and its tensor evaluation is invertible, supplying the descent hypotheses.",
+   "uses": [
+    "lem-weil-pbc-tensor-comparison-descent-representatives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The descent equation becomes the required equation by postcomposition with the inverse target representative isomorphism. Conversely cancel that inverse to recover the descent equation. Transfer both existence and uniqueness along this equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tensor-comparison-descent-representatives"
+ ],
+ "proof_origin": "D6, 2026-10-27: extracted a fully proved helper from the item after generic categorical proof interfaces removed expensive unfolding; the extraction preserves the original statement and proof route.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unique tensor comparison descent normalized by inverse representative isomorphism",
+   "results": "Eight results about monoidal normalization; no normalized representative descent theorem.",
+   "date": "2026-10-27",
+   "verdict": "Extract the existing proved wrapper of the project descent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.tensorComparisonDescent",
+   "results": "No Mathlib hit; this name is a project theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project theorem, with its normalization converted by cancellation."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedTensorDescent",
+   "results": "No Mathlib matches. The item already contains the proved private helper.",
+   "date": "2026-10-27",
+   "verdict": "Extract that proof without adding a hole."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionTensorCoefficientComparison",
+  "date": "2026-10-27",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Projection-formula proof step 13: canonical comparison of the framework and PBC tensor presentations, including representative normalization and the ordinary/completed tensor comparison.",
+   "via": [
+    "def-sf-projection-tensor-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionTensorNormalization",
+  "file": "lean/Sheaf/Paper/ProjectionTensorNormalization.lean",
+  "declaration": "WeilConjectures.ProjectionTensorNormalization.normalizedTensorDescent",
+  "statement": "theorem normalizedTensorDescent\n    {K : Type u₁} [Category.{v₁} K] {H : Type u₂} [Category.{v₂} H]\n    {D : Type u₃} [Category.{v₃} D] {E : Type u₄} [Category.{v₄} E]\n    (q : K ⥤ D) (q' : H ⥤ E) (F : K ⥤ H) (LF : D ⥤ E)\n    (eps : q ⋙ LF ≅ F ⋙ q')\n    (P : ObjectProperty K) (S : ObjectProperty H)\n    (hF : ∀ X, P X → S (F.obj X))\n    (ff : ((Functor.whiskeringLeft (P.FullSubcategory × P.FullSubcategory) (D × D) E).obj\n      ((P.ι ⋙ q).prod (P.ι ⋙ q))).FullyFaithful)\n    (t : K × K ⥤ K) (t' : H × H ⥤ H)\n    (T : D × D ⥤ D) (T' : E × E ⥤ E)\n    (r : (P.ι.prod P.ι) ⋙ t ⋙ q ≅ ((P.ι ⋙ q).prod (P.ι ⋙ q)) ⋙ T)\n    (r' : (S.ι.prod S.ι) ⋙ t' ⋙ q' ≅ ((S.ι ⋙ q').prod (S.ι ⋙ q')) ⋙ T')\n    (b : ∀ Z : K × K, F.obj (t.obj Z) ≅ t'.obj ((F.prod F).obj Z))\n    (hb : ∀ {X Y : K × K} (f : X ⟶ Y),\n      F.map (t.map f) ≫ (b Y).hom = (b X).hom ≫ t'.map ((F.prod F).map f)) :\n    ∃! a : T ⋙ LF ≅ (LF.prod LF) ⋙ T',\n      ∀ X Y : P.FullSubcategory,\n        LF.map (r.hom.app (X, Y)) ≫ a.hom.app (q.obj X.obj, q.obj Y.obj) ≫\n            T'.map (Prod.mkHom (eps.hom.app X.obj) (eps.hom.app Y.obj)) ≫\n            r'.inv.app (⟨F.obj X.obj, hF X.obj X.property⟩,\n              ⟨F.obj Y.obj, hF Y.obj Y.property⟩) =\n          eps.hom.app (t.obj (X.obj, Y.obj)) ≫ q'.map ((b (X.obj, Y.obj)).hom)",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T194738-L-2534206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T194738-L-2534206",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

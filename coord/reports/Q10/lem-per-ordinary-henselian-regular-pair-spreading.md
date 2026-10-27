@@ -1,0 +1,77 @@
+# Q10 stage-1 report
+
+Item: lem-per-ordinary-henselian-regular-pair-spreading
+Date: 2026-10-24
+
+## Files written
+
+- dag/nodes/sec-deligne-laumon-a1/lem-per-ordinary-henselian-regular-pair-spreading.json: statement split into 13 proof steps; no statement or statement-dependency change; Mathlib searches found no match.
+- citations.json: verbatim statement quotations for every use in every proof step.
+- report.md: this report.
+- searches.jsonl: produced by the required msearch.py commands, whose results were read. write_split.py is a sandbox-only preparation script.
+
+New nodes: 0. Mathlib leaves: 0. Every supporting lemma was already in the live DAG.
+
+## Attachments
+
+None. Searched lean/WeilConjectures for the blueprint id and for henselian regularity, normal crossings, alterations and generic finite morphisms. The returned generic-fibre and henselian-root declarations do not state this prescribed ordinary-cover and marked-diagram assertion. No declaration covers every clause of the item.
+
+## WANTED
+
+None. The item source and the Stacks source needed for its limit arguments are present locally.
+
+## Problems found and repaired
+
+The item statement is retained exactly. Its proof was empty. The nearby split lem-per-henselian-regular-pair-spreading is valuable material but assumes a prime invertible on the original base. It is not a citation for the present item. Similarly, lem-per-ind-etale-alteration-object-degree-descent has that hypothesis, so applying it globally without checking the prime would be E1/C4. Step 6 applies only its object conclusion on D(2) with prime 2 and D(3) with prime 3, then checks the conclusion locally on their union. Thus no prime assumption is added and no new almost-duplicate node is necessary.
+
+The existing alteration-site-localization and cover-calculus statements are phrased with a prime parameter. Only their underlying category statements are used. Step 3 explains separately why the category equivalence carries the ordinary generators to the same ordinary generators. No prime-to-a-prime topology claim is substituted for ordinary covering.
+
+Local regular coordinates do not themselves make each labelled global boundary component integral. Step 9 removes the other open-and-closed components after the final etale change. Step 10 then shrinks the base using the proper witness, so this removal preserves the covering. This avoids asserting a covering after an arbitrary source restriction, and avoids splitting an integral boundary component by a subsequent etale base change.
+
+No STATEMENT-DISPUTED finding, no change to the unit route, and no SGA source used. The proof is marked agent-written because the D(2)/D(3) specialization and explicit assembly were supplied here, following ILO's route.
+
+## Not duplicates
+
+No new nodes are proposed. Whole-DAG searches by henselization, regular descent, normal crossings, finite diagrams, ordinary alteration, relevant Stacks tags, and generic finiteness found the existing interfaces used below. tools/blueprint_refs.py ancestor identified lem-per-artin-gabber-affine-curve; its whole-blueprint searches for hensel, spreading, normal crossings, etale neighborhood and generically finite found no alternate blueprint statement of this prescribed marked-family spreading assertion. Read the current latest blueprint chapter and unit, and the ancestor's current proof Step 3. The item's existing blueprint.from place and same_as=[] are retained; split_report identifies the regular local-model reduction it implements. The unit key node is not this item, so no unit record is edited.
+
+## Review by Q10
+
+I read ILO Expose II, printed pp.24--29 for the alteration category, its fibre products and generators and the ordinary proper/Zariski refinement; pp.31--34 for the proper-witness shrinking argument (4.1.1) and the henselian descent proof (4.3.3). I also read III Proposition 6.2 and the first proof paragraph, printed pp.43--44. Those passages descend the family and its standard covering witness to a residue-preserving pointed etale neighborhood and then arrange regularity and strict normal crossings. Stacks limits.tex was read at Tags 01ZM (lemma-descend-finite-presentation), 01ZP (lemma-descend-closed-immersion-finite-presentation), 0EUU (lemma-descend-open-immersion), 07RR (lemma-descend-surjective), 081F (lemma-eventually-proper), and 05F4 (lemma-limit-contained-in-constructible), including Situation 081D; algebra.tex at 04GN (lemma-henselization); and etale.tex at 0BI9 and 0BIA (definition-strict-normal-crossings and lemma-strict-normal-crossings). I checked the tag/label mapping in tags/tags. No new node needs an additional source review.
+
+I opened and read the statement of every cited DAG node. The following is my substantive check of each step against those statements, rather than an inference from their names or proofs.
+
+1. The ordinary pointed-neighbourhood limit node provides the directed affine system, henselian local limit, local structural map and residue identifications. It does not identify an arbitrarily specified henselization, so the proof constructs both local maps, using the henselization definition and the unique pointed etale retractions. The etale base-change node supplies the etaleness needed for those retractions. Etale cancellation supplies the transition maps' etaleness. Neither a strict henselization nor a geometric residue-field extension is substituted.
+
+2. Etale reducedness and quasi-excellent finite-type stability give the neighborhood hypotheses. Quasi-excellent localization is stated for arbitrary multiplicative subsets and applies to the local ring at t. Henselian-normal-completion preparation explicitly gives a reduced excellent Noetherian H even for the possibly reducible initial local ring. Finite-type-over-Noetherian, locally-Noetherian-quasi-separated and locally-finite-type/finite-presentation give exactly the required finiteness. qcqs permanence and the finite-type cancellation clause of proper-fp-permanence ensure these hypotheses also apply to maps between models. In particular sources need not be separated for diagram descent.
+
+3. The component finiteness, component-cover and reduced-induced-closed-subscheme nodes give the finite family B_c and its reduced structure. Their integrality follows from irreducibility and reducedness. Finite-type quasi-excellent stability applies to each closed component. The alteration calculus supplies categorical reduced dominant fibre products; the localization node supplies the category equivalence. The equivalence identifies the ordinary generators because the underlying schemes and maps are identical, and the ordinary topology definition and sieve pullback axiom justify the actual covering used here. I explicitly avoided reading an ordinary-topology theorem into the prime-to-ell topology clause.
+
+4. Ordinary-alteration-proper-refinement is applicable only to nonempty integral quasi-excellent Noetherian bases, which Step 3 supplies. Its statement explicitly gives the proper surjection, finite generic field extension, finite Zariski cover, indices and leaf maps. Those leaf maps reach the prescribed X_i through the categorical pullback projections. The coproduct node gives the disjoint union; finite disjoint union properness is checked directly with the proper definition after every base change. Proper-fp-permanence supplies composition with the component closed immersions. Generic residue degrees and reducedness show the witness schemes are actual alteration objects; no regularity of this witness is claimed.
+
+5. The three clauses of thm-pd-spreading-out provide object descent, morphism descent and eventual equality separately. Actual fibre products, together with descended inverse isomorphisms and equations, preserve the full intersection diagram. The closed/open immersion limit nodes say precisely those properties descend. The finite-family joint-surjectivity node says precisely that a finite family covers at a later stage; it is not used as a statement about open immersions. Eventually-proper and descend-surjective give the two distinct properties of p_a. Every system has affine transitions, every model is qcqs, and every model map is locally of finite presentation as verified in Step 2.
+
+6. I checked the entire statement of ind-etale-alteration-object-degree-descent, particularly the invertible-prime hypothesis and the persistent object conclusion. Restricting to a principal open retains affineness, reducedness, Noetherianness, quasi-excellence and etale transitions; the open-limit clause of limit-affine-transition identifies the limits. An alteration object restricted to a base open remains one by its explicit generic-point definition. The lemma applies on D(2) and D(3), and one common upper index works for both. The equations 3-2=1 show these opens cover even in mixed characteristic. Reducedness is local, and each component generic point is checked in one containing open. This is a short specialization of an existing stronger lemma, not a new mathematical node, and uses none of its degree conclusions.
+
+7. Ind-etale stability includes the assertion that any map between two ind-etale R-algebras is ind-etale, which is what is needed for U_a to H. Henselization-prime-ind-etale states that R to H is ind-etale. Base change supplies the locally ind-etale source projections. The coordinate-locus statement explicitly includes openness, the regular/SNC coordinate condition for the prescribed boundary, and equality of the pulled-back locus. The given Noetherian source hypothesis is checked. Its open locus is constructible on the Noetherian model. Constructible-limit containment gives eventual inclusion; the coordinate-locus invariance clause gives the equations everywhere at the later stage. No mere openness of the regular locus is used to claim boundary transversality.
+
+8. The symmetric difference is constructible and has empty inverse image, so the exact hypothesis of constructible-limit containment holds for its complement. This proves equality of supports, rather than equality of closed subscheme structures for an arbitrary Z. Coordinate-locus invariance, proper permanence, open-immersion base change and base-change-image supply exactly the persistence statements used. The proof stops making etale base changes before choosing a global integral component.
+
+9. Regular-normal explicitly says a regular Noetherian scheme is a finite disjoint union of integral open-and-closed components. The nonempty prescribed integral boundary component can meet exactly one of their pullbacks. Removing the others removes no limit points. On the resulting open a retained nonempty integral component stays integral. The strict-normal-crossings definition requires radical effective Cartier boundary, integral distinct labels, regular intersections and the local codimension equation; the coordinate equations established in Step 7 supply each clause, including the empty intersection and empty-boundary cases. The Noetherian-open lemma ensures the final open sources are still Noetherian.
+
+10. The good leaf preimages are opens of the proper witness, whose closed complement has closed image by the cited definition of proper, not by an unquoted comparison theorem. Base-change-image applies to an arbitrary subset K and shows this image misses the chosen point because its residue field is unchanged. The affine open W exists inside its open complement. Proper permanence and surjective base change preserve the witness. This is the explicit argument of II 4.1.1 applied to the already chosen source restrictions.
+
+11. The Noetherian-open and qcqs permanence nodes make the source open immersions quasi-compact. The qc-open-finite-type node and finite-type composition/base change give actual finite-type objects, not just locally finite-type objects. Generic points and reducedness are inherited under these open restrictions. The ordinary-topology definition supplies the two types of generators and the topos definition supplies transitivity and maximal sieves. The proof spells out how their composite covers and how a larger sieve then covers. Thus the leaf maps certify the original indexed family, rather than replacing it by a different family.
+
+12. The open restrictions are etale by etale-composition-cancellation and have quasi-compact separated source maps, so the finite-presentation convention applies. Proper-fp-permanence has exactly the composition clauses used here. Dominant-part-coreflection has an etale comparison clause, applied with the reduced base T itself: this proves that W has no vertical irreducible component. The etale residue-field node supplies finiteness at its generic points. This checks the extra conclusion T' is an object of alt/T as well as its etale neighborhood properties.
+
+13. This is elementary assembly from the previous steps: all points of a local spectrum generalize its closed point, so the map factors through any open containing its image. This recovers the specified diagram, residue field, exact supports and local equations after open restriction. It introduces no additional existence or descent theorem.
+
+I checked B1--B10: no new unsplit nodes are being delivered; the item's own objects and definition dependencies were already explicit; TeX is single-escaped; searches are precisely the logged msearch commands and all services returned actual results; no Mathlib leaf is asserted; blueprint references and project attachment search were checked. For C1--C8, every non-elementary interface is in uses with a verbatim quotation in citations.json, proof_deps is their exact union, citations refer to statements rather than proofs, and generic off-unit tools are declared in split_report.tool_uses. For D1--D5, no clause was relabelled as a new node, the steps contain the limit construction and covering argument, and no circular use of the parent or the prime-invertible spreading item occurs. For E1--E7, I checked Noetherian/qcqs/finite-presentation hypotheses, the ordinary rather than strict henselization, the actual scheme-theoretic intersections, exact support rather than scheme equality, and the order of shrinking versus etale base change.
+
+Small cases: characteristic 2 uses D(3), characteristic 3 uses D(2), and mixed characteristic is covered by their union; empty principal opens are allowed by the existing object-descent node. Dimension-zero H and Z empty give empty boundaries, and the parameter-locus node explicitly allows the empty product. Empty X_i are descended as empty schemes. Nonempty integral boundary labels cannot vanish under the final restriction because their entire prescribed base change survives; empty intersections remain handled by the coordinate equations. Reducible reduced T_h is treated componentwise before assembling a proper witness. No global dimension bound, domain assumption on T, or invertible prime was introduced.
+
+All thirteen steps have fewer than 2000 characters (maximum 1320), and each multi-clause passage is a finite assembly of explicitly cited existing interfaces. No hidden new lemma is left in a long step. Server review_split passed before report preparation; the full deliver.py --no-push preflight will also run before delivery.
+
+## Unfinished work
+
+None within this one-level stage-1 split. Existing cited unsplit nodes remain their own items. No Lean was written or compiled and no repository or launcher file was edited.

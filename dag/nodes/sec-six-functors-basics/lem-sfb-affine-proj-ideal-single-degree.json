@@ -1,0 +1,423 @@
+{
+ "id": "lem-sfb-affine-proj-ideal-single-degree",
+ "kind": "statement",
+ "title": "A finite set in one graded piece defining a finitely presented Proj quotient",
+ "statement": "Let $R$ be a commutative ring and $A=\\bigoplus_{n\\geq0}A_n$ a commutative unital nonnegatively graded $R$-algebra, so $R\\to A_0$ is part of the data [def-weil-pbc-algebra-hom-quotient, def-weil-pbc-graded-sheaf-structures]. Let $I=\\bigoplus_{n\\geq0}I_n\\subseteq A$ be a homogeneous ideal, meaning $I_n=I\\cap A_n$ and $A_mI_n\\subseteq I_{m+n}$. Assume $P=\\operatorname{Proj}(A)$ [def-pc-proj] is quasi-compact and the quotient-induced closed immersion $\\operatorname{Proj}(A/I)\\hookrightarrow P$ [prop-nagata-relative-proj-functoriality] is of finite presentation, meaning locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated. Then there exist $d>0$ and a finite list $g_1,\\ldots,g_r\\in I_d$, with $r\\geq0$, such that, putting $F=Rg_1+\\cdots+Rg_r\\subseteq I_d$ and writing $FA$ for its generated homogeneous ideal, the quotient-induced closed subschemes of $P$ satisfy $$\\operatorname{Proj}(A/FA)=\\operatorname{Proj}(A/I).$$ No finite generation of $A$ over $R$ or $A_0$, of $I$, or of any component $A_n$ is assumed, and $R\\to A_0$ need not be an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0802, lemma-closed-subscheme-proj-finite, proof on an affine base: choose the numerators inside the prescribed homogeneous ideal I and put them in one positive degree. This formulation keeps that ideal as input; it does not assert the separate homogeneous-ideal recovery theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-pc-proj",
+  "prop-nagata-relative-proj-functoriality",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-homogeneous-quotient-proj"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-proj-standard-open-inclusion] (0), the positive homogeneous standard opens cover $P$. Quasi-compactness gives a finite subcover $P=\\bigcup_{i=1}^tD_+(f_i)$, with $f_i\\in A_{a_i}$ and $a_i>0$. If $P$ is empty, take $d=1$ and the empty list: both closed subschemes are empty. Henceforth $t>0$. Put $Z=\\operatorname{Proj}(A/I)$ and $\\mathcal J=\\ker(\\mathcal O_P\\to i_*\\mathcal O_Z)$. The ideal sheaf is quasi-coherent by [def-sbc-closed-immersion-ideal-sheaf]. By [lem-trf-closed-immersion-finite-presentation-ideal], the hypothesis on $i$ implies that $\\mathcal J$ is quasi-coherent and of finite type; that lemma requires neither Noetherianity nor separatedness of $P$.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-trf-closed-immersion-finite-presentation-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0802, lemma-closed-subscheme-proj-finite, finite standard-open cover and finite type of the ideal; Tag 01TV, morphisms-lemma-closed-immersion-finite-presentation."
+   }
+  },
+  {
+   "text": "For any homogeneous ideal $H\\subseteq A$, give $C=A/H$ its quotient grading and denote images by bars. Every positive homogeneous element of $C$ lifts to one of $A$, so $C_+$ equals the image-generated irrelevant ideal. Thus [lem-sfb-proj-map-standard-charts] applies to $A\\twoheadrightarrow C$: over $D_+(f)$ the quotient closed immersion has chart map $q_f:A_{(f),0}\\to C_{(\\bar f),0}$ sending $h/f^e$ to $\\bar h/\\bar f^e$. This map is surjective, since a numerator in $C_{ea}$ lifts to $A_{ea}$, where $a=\\deg f$. Its kernel is exactly the set of fractions $h/f^e$ with $h\\in H\\cap A_{ea}$. Indeed, if $b/f^e$ maps to zero, the localization relation [def-weil-ring-localization-away] gives $f^k b\\in H$ for some $k\\geq0$, and $b/f^e=(f^k b)/f^{e+k}$; the converse is immediate. The numerator is homogeneous of degree $(e+k)a$. These kernel fractions form an ideal. With $H=I$, this kernel is precisely $K_f=\\mathcal J(D_+(f))$.",
+   "uses": [
+    "lem-sfb-proj-map-standard-charts",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MY, lemma-morphism-proj (2), and the quotient/localization relation; the same chart kernel is used in the affine proof of Tag 0802."
+   }
+  },
+  {
+   "text": "The standard chart $D_+(f_i)$ is affine by [def-pc-proj]. Apply [lem-weil-pbc-quasi-coherent-finite-type-affine] (a) to $\\mathcal J$ there. It gives a finite generating list for the $A_{(f_i),0}$-ideal $K_{f_i}$. By step 2 and [def-nagata-homogeneous-localization-degree-zero], each generator has the form $h_{ij}/f_i^{e_{ij}}$ with $h_{ij}\\in I\\cap A_{e_{ij}a_i}$. Replacing numerator and denominator by $f_i h_{ij}$ and $f_i^{e_{ij}+1}$ if necessary, take every $e_{ij}>0$, without changing any fraction or its membership in $I$. A zero ideal may have the empty generating list.",
+   "uses": [
+    "def-pc-proj",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0802, lemma-closed-subscheme-proj-finite, homogeneous numerators h_{i,j,k}; Properties Tag 01PB, lemma-finite-type-module."
+   }
+  },
+  {
+   "text": "Let $L=\\prod_{i=1}^t a_i>0$ and let $E$ be the maximum of $0$ and all the finitely many $e_{ij}$. Set $d=L(E+1)>0$. Then $a_i\\mid d$ and $d/a_i\\geq e_{ij}$ for every pair. Define $$g_{ij}=h_{ij}f_i^{d/a_i-e_{ij}}\\in I_d.$$ The degree equality is $e_{ij}a_i+(d/a_i-e_{ij})a_i=d$, and ideal membership follows from $h_{ij}\\in I$. Take $F$ to be the $R$-span of this finite family, and $H=FA$. The degree-zero image of $R$ makes this an $R$-submodule of $I_d$, and $H\\subseteq I$ is homogeneous: decomposing each coefficient into its homogeneous components decomposes every sum of products with a $g_{ij}$ into elements of $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0802, lemma-closed-subscheme-proj-finite, choose a common positive degree and multiply h by a power of f; on the affine base F is the finite R-span."
+   }
+  },
+  {
+   "text": "Fix $i$. Applying the kernel description of step 2 to $H$ gives an ideal $K'_{f_i}\\subseteq K_{f_i}$ because $H\\subseteq I$. On the other hand, for every chosen generator of $K_{f_i}$, $$h_{ij}/f_i^{e_{ij}}=g_{ij}/f_i^{d/a_i}\\in K'_{f_i}.$$ The equality follows by multiplying numerator and denominator by $f_i^{d/a_i-e_{ij}}$. Hence every generator lies in $K'_{f_i}$ and $K'_{f_i}=K_{f_i}$. This uses all chosen $g_{ij}$ together: those coming from other charts cause no problem because they too lie in $I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0802, lemma-closed-subscheme-proj-finite, final assertion that the constructed F is a solution: equality of chart ideals."
+   }
+  },
+  {
+   "text": "By [prop-nagata-relative-proj-functoriality] (3), the homogeneous quotient $A\\twoheadrightarrow A/H$ gives a closed subscheme of $P$. By [def-weil-closed-immersion], on the affine chart $D_+(f_i)$ this closed subscheme is defined by the kernel $K'_{f_i}$; the original $Z$ is defined by $K_{f_i}$. By [def-sbc-closed-immersion-ideal-sheaf], both ideal sheaves restrict on this affine chart to the associated sheaves of these kernel ideals. Step 5 therefore identifies their restrictions and their quotient structure sheaves. The charts cover $P$, so the ideal subsheaves agree (sections agree if they agree after restriction to a cover). Thus $\\operatorname{Proj}(A/FA)=\\operatorname{Proj}(A/I)$ as closed subschemes of $P$. Enumerating the $g_{ij}$ gives the required finite list, including the empty list if every $K_{f_i}=0$.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0802, lemma-closed-subscheme-proj-finite, final sentence; affine closed-immersion description in Morphisms Tag 01QO, lemma-closed-immersion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-trf-closed-immersion-finite-presentation-ideal",
+  "lem-sfb-proj-map-standard-charts",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-ring-localization-away",
+  "def-pc-proj",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "prop-nagata-relative-proj-functoriality",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0802, lemma-closed-subscheme-proj-finite, proof on a single affine base with the prescribed homogeneous ideal. The quotient kernel calculation is written out; the finite R-span replaces the global finite-type extension step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a homogeneous ideal I in a graded R algebra with quasi compact Proj and finitely generated associated ideal sheaf there are finitely many elements of I in one positive degree defining the same closed subscheme",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Proj.openCoverOfISupEqTop",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal",
+     "ProjectiveSpectrum.vanishingIdeal",
+     "AlgebraicGeometry.Proj",
+     "ProjectiveSpectrum.asHomogeneousIdeal",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous",
+     "AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "e66a5e3f0c781c3f",
+    "source_read": "Read Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean:137,157,212 and ProjectiveSpectrum/Topology.lean:87-108,305-309. Ideal.homogeneous_span and Ideal.IsHomogeneous.iff_exists give homogeneous generation, not finitely many same-degree equations with the same scheme structure. ProjectiveSpectrum/Proper.lean concerns finite generation of the entire algebra, a hypothesis absent here."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousIdeal\", \"FG\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c",
+    "source_read": "Read Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean:137,157,212 and ProjectiveSpectrum/Topology.lean:87-108,305-309. Ideal.homogeneous_span and Ideal.IsHomogeneous.iff_exists give homogeneous generation, not finitely many same-degree equations with the same scheme structure. ProjectiveSpectrum/Proper.lean concerns finite generation of the entire algebra, a hypothesis absent here."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]omogeneous.*[Ff]inite|[Ff]inite.*[Hh]omogeneous|[Ii]deal.*[Pp]roj",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean"
+    ],
+    "n_hits": 11,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "ec5ec22c3df7d52c",
+    "source_read": "Read Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean:137,157,212 and ProjectiveSpectrum/Topology.lean:87-108,305-309. Ideal.homogeneous_span and Ideal.IsHomogeneous.iff_exists give homogeneous generation, not finitely many same-degree equations with the same scheme structure. ProjectiveSpectrum/Proper.lean concerns finite generation of the entire algebra, a hypothesis absent here."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous ideal whose sheaf on a quasi compact Proj is of finite type can be replaced by finitely many homogeneous elements of the same positive degree",
+   "results": {
+    "hits": [
+     "HomogeneousIdeal",
+     "Ideal.homogeneous_span",
+     "HomogeneousIdeal.radical",
+     "Ideal.homogeneousCore",
+     "Ideal.IsHomogeneous.iff_exists",
+     "AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.openCoverOfISupEqTop",
+     "Ideal.homogeneousCore'"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "065674822bcdb5ca",
+    "source_read": "Read Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean:137,157,212 and ProjectiveSpectrum/Topology.lean:87-108,305-309. Ideal.homogeneous_span and Ideal.IsHomogeneous.iff_exists give homogeneous generation, not finitely many same-degree equations with the same scheme structure. ProjectiveSpectrum/Proper.lean concerns finite generation of the entire algebra, a hypothesis absent here."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a graded ring with quasi compact projective spectrum a finite type sheaf ideal is generated by homogeneous numerators in a common degree",
+   "results": {
+    "hits": [
+     "ProjectiveSpectrum.asHomogeneousIdeal",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.num_mem_carrier_iff",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal",
+     "ProjectiveSpectrum.vanishingIdeal",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "fe814db98b641768",
+    "source_read": "Read Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean:137,157,212 and ProjectiveSpectrum/Topology.lean:87-108,305-309. Ideal.homogeneous_span and Ideal.IsHomogeneous.iff_exists give homogeneous generation, not finitely many same-degree equations with the same scheme structure. ProjectiveSpectrum/Proper.lean concerns finite generation of the entire algebra, a hypothesis absent here."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a homogeneous ideal in a graded ring with quasi compact Proj and finitely presented closed quotient, finitely many homogeneous elements of a common positive degree define the same closed subscheme",
+   "results": {
+    "hits": [
+     "ProjectiveSpectrum.ext",
+     "ProjectiveSpectrum.ext_iff",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal",
+     "AlgebraicGeometry.Proj",
+     "ProjectiveSpectrum.asHomogeneousIdeal",
+     "ProjectiveSpectrum.vanishingIdeal",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "6b726a9e360d6fe7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideals and Proj chart constructions only; no finite common-degree equations for the prescribed ideal under these hypotheses. Read ProjectiveSpectrum/Basic.lean lines 62-98, Proper.lean lines 137-147, Homogeneous/Ideal.lean lines 58-110, and HomogeneousLocalization.lean lines 949-962, 1003-1012. The finite-type localization results assume finite generation of the whole algebra, absent here; the span theorem concerns a generating family of the entire algebra, not this ideal."
+  },
+  {
+   "tool": "grep",
+   "query": "([Pp]roj.*[Ii]deal|[Ii]deal.*[Pp]roj|[Hh]omogeneous.*[Ff]inite)",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean"
+    ],
+    "n_hits": 16,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry/ProjectiveSpectrum",
+    "digest": "5eb0980d1d7ec67f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideals and Proj chart constructions only; no finite common-degree equations for the prescribed ideal under these hypotheses. Read ProjectiveSpectrum/Basic.lean lines 62-98, Proper.lean lines 137-147, Homogeneous/Ideal.lean lines 58-110, and HomogeneousLocalization.lean lines 949-962, 1003-1012. The finite-type localization results assume finite generation of the whole algebra, absent here; the span theorem concerns a generating family of the entire algebra, not this ideal."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type homogeneous ideal sheaf on a quasi compact projective spectrum is defined by finitely many equations of equal positive degree",
+   "results": {
+    "hits": [
+     "HomogeneousIdeal.irrelevant",
+     "Ideal.IsHomogeneous",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType",
+     "Ideal.isHomogeneous_iff_forall_subset",
+     "AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'",
+     "AlgebraicGeometry.Scheme.IdealSheafData",
+     "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf",
+     "HomogeneousIdeal"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "35d40aa79d240f58"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideals and Proj chart constructions only; no finite common-degree equations for the prescribed ideal under these hypotheses. Read ProjectiveSpectrum/Basic.lean lines 62-98, Proper.lean lines 137-147, Homogeneous/Ideal.lean lines 58-110, and HomogeneousLocalization.lean lines 949-962, 1003-1012. The finite-type localization results assume finite generation of the whole algebra, absent here; the span theorem concerns a generating family of the entire algebra, not this ideal."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousLocalization\", \"Ideal\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideals and Proj chart constructions only; no finite common-degree equations for the prescribed ideal under these hypotheses. Read ProjectiveSpectrum/Basic.lean lines 62-98, Proper.lean lines 137-147, Homogeneous/Ideal.lean lines 58-110, and HomogeneousLocalization.lean lines 949-962, 1003-1012. The finite-type localization results assume finite generation of the whole algebra, absent here; the span theorem concerns a generating family of the entire algebra, not this ideal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated ideal in degree zero homogeneous localization is generated by fractions of homogeneous elements of one sufficiently divisible positive degree",
+   "results": {
+    "hits": [
+     "HomogeneousLocalization.Away.span_mk_prod_pow_eq_top",
+     "HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal",
+     "HomogeneousLocalization.Away.finiteType",
+     "HomogeneousLocalization.Away.mk_surjective",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal",
+     "AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "ef33b5954a798bd3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideals and Proj chart constructions only; no finite common-degree equations for the prescribed ideal under these hypotheses. Read ProjectiveSpectrum/Basic.lean lines 62-98, Proper.lean lines 137-147, Homogeneous/Ideal.lean lines 58-110, and HomogeneousLocalization.lean lines 949-962, 1003-1012. The finite-type localization results assume finite generation of the whole algebra, absent here; the span theorem concerns a generating family of the entire algebra, not this ideal."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proj-finite-degree-equations",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Stacks 085M, proof, affine-scheme reduction citing 0802: find a finite type submodule of I_d restricted to the affine etale atlas. This serves the inherited Chow-modification prerequisite of the current blueprint det-thm-sf-ctf-stability-direct-images, proof (3), compactification. The ancestry command returns None for the inherited created.item chain.",
+   "via": [
+    "lem-sfb-space-proj-finite-degree-equations",
+    "lem-sfb-space-blowup-finite-degree-ideal-descent",
+    "lem-sfb-space-compose-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-proj-ideal-single-degree",
+  "worker": "stage1",
+  "summary": "Read Stacks 0802 and its 01TV/01PB prerequisites. Preserved the statement, including the prescribed ideal and arbitrary degree-zero base map. Wrote the quotient chart kernel calculation and the finite common-degree construction explicitly. Reused the general finite-type ideal and affine-module lemmas, and added only one Mathlib leaf for the general Proj map chart formulas. No project attachment or finite-generation assumption on A was used.",
+  "blueprint": [
+   "Stacks 085M affine reduction citing 0802: finite-type submodule of I_d on the affine atlas; inherited prerequisite of the current det-thm-sf-ctf-stability-direct-images proof (3), compactification. Existing ancestry returns None and remains unchanged."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Step 1 uses the standard-open basis for arbitrary graded rings to extract a finite cover; this is a generic Proj tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-closed-immersion-finite-presentation-ideal",
+    "why": "Step 1 uses the general 01TV criterion to obtain a finite-type quasi-coherent ideal; no same-unit node supplies the scheme criterion."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Step 3 uses the generic affine 01PB equivalence to obtain finite chart-ideal generators, not the projective-line proof route."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Step 6 uses only the closed immersion induced by a graded surjection, as a generic Proj construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-trf-closed-immersion-finite-presentation-ideal",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-be901e02e",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-be901e02e (reviewer sub-agent of L); spot-checked: I read Stacks 0802 (divisors, lemma-closed-subscheme-proj-finite) and 01MY (constructions, lemma-morphism-proj), and the item, the new node and every cited statement in full. The item is the affine-base 0802 proof with the homogeneous ideal I given, and its statement is unchanged. Step by step: (1) a finite standard-open cover from the basis clause (0) of lem-weil-pbc-proj-standard-open-inclusion, and J of finite type from 01TV (lem-trf-closed-immersion-finite-presentation-ideal). (2) Through the new leaf, the positive-degree chart kernel is the set of fractions with numerator in H, using f^k b ∈ H and b/f^e = f^k b/f^{e+k}; the degree-1 node lem-sfb-homogeneous-quotient-chart-kernel does not apply, and the delivery correctly does not cite it. (3) Finitely many chart generators from 01PB clause (a). (4) d=L(E+1) gives a_i | d and d/a_i > e_ij, and g_ij ∈ I_d. (5) K'=K. (6) Ideal sheaves equal on a cover, so the closed subschemes are equal, structure sheaves included. Edge cases checked: P empty, empty chart lists, I=A, nilpotent f_i, the zero ring, all degrees even. New node lem-sfb-proj-map-standard-charts is an exact Mathlib leaf: Proj.map (Functor.lean:148, hypothesis ℬ₊ ≤ 𝒜₊.map f), map_preimage_basicOpen (:160), awayι_comp_map (:192), Away.map_mk (HomogeneousLocalization.lean:730); I read all the lines. It is not a duplicate: I grepped 01MY/0802 and the declaration names across the DAG and checked lem-sfb-homogeneous-quotient-chart-kernel, lem-sfb-space-relative-proj-quotient-closed-immersion, lem-weil-pbc-projective-morphism-chart-preimage, lem-nagata-proj-affine-restriction and prop-nagata-relative-proj-functoriality. Batch-5 flag on lem-trf-closed-immersion-finite-presentation-ideal: accepted. It is generic 01TV with generic weil-pbc/sbc proof_deps, gives neither assumption leaf and is no step of the trace-formula or Poincaré-duality proofs; it is the DAG's only 01TV owner. I accept the four declared generic tool_uses. The blueprint from.node is null, inherited from the 085M chain. No SGA citations. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineProjIdealSingleDegree",
+  "declaration": "AlgebraicGeometry.exists_affineProjIdeal_single_degree",
+  "declarations": [
+   "AlgebraicGeometry.exists_affineProjIdeal_single_degree"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineProjIdealSingleDegree.lean",
+  "statement": "theorem exists_affineProjIdeal_single_degree (R : Type v) [CommRing R] (A : Type u) [CommRing A] [Algebra R A] (𝒜 : ℕ → Submodule R A) [GradedAlgebra 𝒜] (I : HomogeneousIdeal 𝒜) [CompactSpace (Proj 𝒜)] [LocallyOfFinitePresentation (homogeneousQuotientProjι 𝒜 I)] : ∃ (d : ℕ) (_hd : 0 < d) (r : ℕ) (g : Fin r → 𝒜 d), (∀ j : Fin r, (g j : A) ∈ I) ∧ ∃ H : HomogeneousIdeal 𝒜, H.toIdeal = Ideal.span (Submodule.span R (Set.range (fun j : Fin r ↦ (g j : A))) : Set A) ∧ ∃ e : Proj (homogeneousQuotientPiece 𝒜 H) ≅ Proj (homogeneousQuotientPiece 𝒜 I), e.hom ≫ homogeneousQuotientProjι 𝒜 I = homogeneousQuotientProjι 𝒜 H",
+  "branch": "sheaf-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c4105314",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Read Stacks 0802, item, new node def-sfb-homogeneous-quotient-proj, all stmt_dep records and both modules. Every clause matches the node: R/A in independent universes with an arbitrary R→A0, HomogeneousIdeal I, CompactSpace (Proj 𝒜), LocallyOfFinitePresentation of the quotient closed immersion (qc+qs automatic), ∃ d>0, Fin r → 𝒜 d in I, H.toIdeal = span of the R-span, iso over P commuting with both closed immersions (equality of closed subschemes). The new node's pieces are the actual images. Its ∃! GradedAlgebra .choose is canonical because Decomposition is Subsingleton, so it is not hollow. Its map is the canonical Proj.map of the surjection. It is not a duplicate: the existing quotient gradings cover only polynomial rings. Record fields follow §5 and both statements are verbatim in the files. The item only gains the new stmt_dep. Docstrings and sorry-only proofs are fine. Edge cases (empty P, I=A, I=0, even gradings) are covered. Advisory only: two stmt_dep modules are imported publicly but not needed. No fixes; no recompile."
+ }
+}

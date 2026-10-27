@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-open-system-unit-sections",
+ "kind": "statement",
+ "title": "Finite evaluation of the ordinary open-system unit",
+ "statement": "For the Operations o of [def-sf-open-semilinear-tensor-model-data], transport sequence sections through eqToHom o.systemsFunctor.symm and apply o.openSystems.ordinaryAdjunction.unit, defining systemUnit. Assume restrictionEvaluation is the identity on underlying sections. For every sequence module N, finite index n, pro-etale V over X, arrow a from V to the open object and section x of the slice evaluation of N, extensionEvaluation n sends systemUnit(x) to the original finiteExtensionSection(x). The support module also proves horizontal naturality and finite-summand naturality for these explicitly constructed sections.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 03EK (section-tensor-product) and 0E8I (lemma-j-shriek-and-tensor); horizontal compatibility in sites-cohomology.tex, section-inverse-systems, before lemma-derived-limit-is-ok (0941)."
+ },
+ "stmt_deps": [
+  "def-sf-open-semilinear-tensor-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the recorded unit_evaluation to a section transported through the literal system pushforward. The identity-on-sections restrictionEvaluation assumption removes the intermediate restriction isomorphism. The section specifications of eqToHom and transportEvaluation identify the transported finite section with the given finite pushforward section. Naturality of the localized finite adjunction unit moves this transport through the unit, and localizedSystemAdjunction_existsUnique identifies that unit section with its prescribed direct-sum/sheafification summand, namely finiteExtensionSection. Horizontal compatibility is presheaf naturality of the transport and unit, and finite summand naturality is naturality of the same localized unit. No surjectivity, nonempty-open assumption or change of coefficient level is needed.",
+   "uses": [
+    "def-sf-open-semilinear-tensor-model-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-open-semilinear-tensor-model-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI--03DJ; sectionwise naturality of adjunction units and evaluation of inverse systems preceding 0941. U6 extracts the fully proved system-unit calculus from the direct quotient-square proof to keep both files comfortably below 60 seconds after optimizing the carrier definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with extension of scalars for sheaves of modules, preserving adjunction units",
+   "results": "Eight hits, including SheafOfModules.PullbackConstruction.adjunction, unitToPushforwardObjUnit and pushforwardPushforwardAdj_unit_app_val_app. No normalized finite open scalar comparison or transition square.",
+   "date": "2026-10-27",
+   "verdict": "The adjunction API is available, but not the specialized normalized comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\"",
+   "results": "Twelve hits, including leftAdjointUniq and unit_leftAdjointUniq_hom_app.",
+   "date": "2026-10-27",
+   "verdict": "Use adjoint uniqueness in finite coefficient transport; the specialized statement is absent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero and quotient scalar extension for module sheaves commute, compatibly with inverse system transitions",
+   "results": "Eight hits concerning congruence quotients, scalar towers and sheafified module actions; no open scalar comparison.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*pushforward|pushforward.*changeOfRings|changeOfRings.*localized|localized.*changeOfRings; TensorComparison l E j o",
+   "results": "The grep service returned zero hits. Separate local rg searches found the finite TensorComparison interface, the generic SemilinearSliceScalarGenerators theorem, and the proved systemIsoOfEvaluation_exists assembly lemma. No existing normalized comparison of these supplied open transports was found.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing interfaces and generic generator theorem. Finite transport and the quotient square are separate remaining steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenScalarTransitionCompatibility",
+  "date": "2026-10-27",
+  "group": "U6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-scalar-transition-compatibility",
+   "place": "The system-unit normalization and horizontal naturality in proof step 2.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenSystemUnitSections",
+  "file": "lean/Sheaf/SixFunctors/OpenSystemUnitSections.lean",
+  "declaration": "WeilConjectures.OpenSemilinearTensor.systemUnit_evaluation",
+  "declarations": [
+   "WeilConjectures.OpenSemilinearTensor.transportedSection",
+   "WeilConjectures.OpenSemilinearTensor.systemUnit",
+   "WeilConjectures.OpenSemilinearTensor.systemUnit_evaluation"
+  ],
+  "statement": "theorem systemUnit_evaluation\n    (hrestriction : ∀ (n : ℕ) N V x,\n      HEq ((((o.openSystems.restrictionEvaluation n).hom.app N).val.app V) x) x)\n    (N : coefficientSequenceModules l E U) (n : ℕ) (V : X.ProEt)\n    (a : V ⟶ IntegralOpenReduction.openObject j)\n    (x : ((coefficientSequenceEvaluation l E U n).obj N).val.obj\n      (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a)))) :\n    ((IntegralOpenReduction.extensionEvaluation l E j o n).hom.app N).val.app (op V)\n        (systemUnit l E j o N n (Over.mk a) x) =\n      IntegralOpenReduction.finiteExtensionSection l E j o n\n        ((coefficientSequenceEvaluation l E U n).obj N) V a x",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261027T050647-L-251067",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261027T050647-L-251067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

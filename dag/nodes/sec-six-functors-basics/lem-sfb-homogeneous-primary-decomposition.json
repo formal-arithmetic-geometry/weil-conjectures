@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-homogeneous-primary-decomposition",
+ "kind": "statement",
+ "title": "Homogeneous primary decomposition of a polynomial ideal, with localization data",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\ge0$, and $B=k[x_0,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring] with its total-degree grading [def-pc-standard-graded-algebra]. Let $I\\subseteq B$ be a homogeneous ideal, meaning that every homogeneous component of each element of $I$ lies in $I$. The ring $B$ is Noetherian, meaning every ideal is finitely generated. There are finitely many proper homogeneous ideals $Q_1,\\ldots,Q_s$ such that $I=\\bigcap_{a=1}^s Q_a$, each $Q_a$ is primary, the radicals $\\mathfrak p_a=\\sqrt{Q_a}$ are distinct homogeneous prime ideals, and this intersection is irredundant. Here primary means $uv\\in Q_a$, $u\\notin Q_a$ imply $v^h\\in Q_a$ for some $h\\ge1$; $\\sqrt Q=\\{b:b^h\\in Q\\text{ for some }h\\ge1\\}$. Every prime minimal among those containing $I$ occurs among the $\\mathfrak p_a$. For every $a$ there is $h_a\\ge1$ with $\\mathfrak p_a^{h_a}\\subseteq Q_a$. For every prime $\\mathfrak p\\supseteq I$, localization [def-weil-pbc-localization-at-prime] gives\n$$IB_{\\mathfrak p}=\\bigcap_{\\mathfrak p_a\\subseteq\\mathfrak p}Q_aB_{\\mathfrak p};$$\nif $\\mathfrak p_a\\not\\subseteq\\mathfrak p$ then $Q_aB_{\\mathfrak p}=B_{\\mathfrak p}$. In particular if $\\mathfrak p=\\mathfrak p_b$ is minimal over $I$, then $IB_{\\mathfrak p_b}=Q_bB_{\\mathfrak p_b}$. The empty intersection is $B$, so $I=B$ is included with $s=0$.",
+ "source": {
+  "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+  "place": "Theorem 20.27, Appendix: Homogeneity, printed p.123; Exercises 20.25-20.26; primary localization in Chapter 18. Local PDF WANTED; read the authors online PDF https://web.mit.edu/18.705/www/13Ed.pdf. Stacks algebra.tex Tag 00JM (section-proj), homogeneous ideal and Proj conventions; the graded primary-decomposition assertion itself is the cited textbook theorem, not attributed to a Stacks tag."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-standard-graded-algebra",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-polynomial-ring-field-regular-ring] with n+1 variables to obtain that B is Noetherian. If I=B, choose the empty family: its intersection is B, there is no prime containing I, and all other assertions are vacuous. Henceforth I is proper. By [lem-per-noetherian-primary-decomposition], write I as a finite intersection of proper primary ideals P_j; the family is nonempty because I is proper.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-per-noetherian-primary-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Theorem 20.27, first sentence of proof; Theorem 18.21, printed p.109."
+   }
+  },
+  {
+   "text": "For each P_j take its homogeneous core H_j from [lem-sfb-primary-homogeneous-core]. The total-degree decomposition of B is a nonnegative grading and step 1 supplies Noetherianity. Thus H_j is proper, homogeneous and primary. If f lies in I, each component f_d lies in I and hence in P_j; the explicit core formula gives f in H_j. Conversely H_j is contained in P_j, so intersection_j H_j is contained in intersection_j P_j=I. Therefore I=intersection_j H_j.",
+   "uses": [
+    "lem-sfb-primary-homogeneous-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Theorem 20.27, homogeneous-core construction; Exercise 20.26."
+   }
+  },
+  {
+   "text": "For each H_j its radical p_j is a homogeneous ideal by [lem-sfb-homogeneous-ideal-radical]. It is proper since 1^h=1 cannot belong to H_j. To see primality directly, suppose uv belongs to p_j and u does not. Choose m>=1 with u^m v^m in H_j. Then u^m is not in H_j, and primaryness yields (v^m)^h in H_j for some h>=1, so v is in p_j. Thus every p_j is a homogeneous prime.",
+   "uses": [
+    "lem-sfb-homogeneous-ideal-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Exercise 20.25; elementary primary-radical argument (Chapter 18)."
+   }
+  },
+  {
+   "text": "Group the H_j by equal radicals. For a nonempty group with common radical p, put K=intersection_j H_j. This is homogeneous and proper. Its radical is p: membership in radical K implies membership in every radical H_j; conversely for v in p choose v^{h_j} in H_j and take h=max_j h_j to obtain v^h in K. If uv is in K and u is not in K, choose j with u not in H_j. Primaryness gives v in p=radical K, hence a positive power of v in K. Thus K is primary. Replacing each group by K keeps the intersection I and gives distinct homogeneous prime radicals.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Theorem 20.27; Chapter 18, elementary combination of primary factors with the same radical."
+   }
+  },
+  {
+   "text": "From the finite list of grouped factors repeatedly delete a factor whenever deleting it leaves the intersection unchanged. Each deletion strictly decreases the number of factors, so this terminates. The remaining list Q_1,...,Q_s still intersects to I, still has homogeneous proper primary factors and distinct radicals, and is irredundant by the stopping rule. Since I is proper the list is not empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Theorem 20.27; irredundancy by finite deletion."
+   }
+  },
+  {
+   "text": "Let p be any prime containing I. If no Q_a were contained in p, choose q_a in Q_a outside p for each a. The finite product of the q_a lies in every Q_a and hence I, yet is outside p by primality, a contradiction. Consequently some Q_a is contained in p. For x in p_a choose x^h in Q_a; since Q_a is contained in p, primality implies x in p. Therefore p_a is contained in p. If p is minimal among primes containing I, then I is contained in p_a, and p_a is prime by step 3, so p=p_a. This proves occurrence of every minimal prime.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Chapter 18, minimal primes of a finite primary decomposition; explicit finite-product argument."
+   }
+  },
+  {
+   "text": "Fix a. Because B is Noetherian by step 1, the ideal p_a is finitely generated. Apply [lem-weil-pbc-fg-ideal-radical-power] to the ideals p_a and Q_a of B: the required containment p_a contained in radical Q_a is equality by definition. It gives h_a>=1 with p_a^{h_a} contained in Q_a.",
+   "uses": [
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Stacks Tag 00IM, lemma-Noetherian-power; finite-generation form of its proof."
+   }
+  },
+  {
+   "text": "Fix a prime p containing I and S=B minus p. For an ideal J, a fraction r/s belongs to JB_p exactly when tr belongs to J for some t in S. Indeed the fractions j/u with j in J form an ideal (addition uses numerator vj+uj_prime, multiplication uses numerator bj), so they are exactly the extension of J. If r/s=j/u, the fraction equivalence in [def-weil-pbc-localization-at-prime] supplies v in S with v(ur-sj)=0, whence vu r=vs j belongs to J. Conversely tr in J gives r/s=(tr)/(ts).",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Chapter 12, localization membership; direct fraction argument from the definition."
+   }
+  },
+  {
+   "text": "Extension is monotone, so IB_p is contained in every Q_aB_p. Conversely, if r/s lies in all Q_aB_p, step 8 gives t_a outside p with t_a r in Q_a. Put t=product_a t_a, still outside p; then tr lies in all Q_a and hence I, so r/s is in IB_p by step 8. Thus IB_p=intersection_a Q_aB_p. If p_a is not contained in p, choose z in p_a outside p. Some z^h lies in Q_a; it is invertible in B_p, so Q_aB_p=B_p. Removing exactly these unit factors proves the asserted localization formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Proposition 18.24 and Lemma 18.23, printed pp.109-110; explicit finite-denominator argument."
+   }
+  },
+  {
+   "text": "If p=p_b is minimal over I and p_a is contained in p_b, then I is contained in the prime p_a, so minimality gives p_a=p_b. Distinctness of the radicals forces a=b. The localization formula therefore has the single remaining factor Q_bB_{p_b}, giving IB_{p_b}=Q_bB_{p_b}.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+    "place": "Theorem 18.25, printed p.110; specialization of the localization formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-per-noetherian-primary-decomposition",
+  "lem-sfb-homogeneous-ideal-radical",
+  "lem-sfb-primary-homogeneous-core",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/altman-kleiman-a-term-of-commutative-algebra.pdf",
+  "place": "Theorem 20.27, Exercise 20.26 with its solution and Exercise 20.25, Chapters 18 and 12; agent-written finite-product and denominator details. Local PDF WANTED; authors online PDF read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every homogeneous ideal in a standard graded polynomial ring over a field has a finite irredundant primary decomposition by homogeneous primary ideals with distinct prime radicals",
+   "results": "{\"t\": \"2026-10-23T11:12:55Z\", \"tool\": \"leanfinder\", \"query\": \"Every homogeneous ideal in a standard graded polynomial ring over a field has a finite irredundant primary decomposition by homogeneous primary ideals with distinct prime radicals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous.radical_eq\", \"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.isPrime_iff\", \"Ideal.IsPrime.homogeneousCore\", \"HomogeneousIdeal.radical\", \"Ideal.IsHomogeneous.radical\", \"HomogeneousIdeal.coe_radical\", \"HomogeneousIdeal.irrelevant_eq_span\"], \"digest\": \"d32376fb0c8b440d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary primary decomposition is in Submodule.isLasker (RingTheory/Lasker.lean:299); homogeneous core, homogeneous radicals and the prime-core theorem do not give homogeneous primary factors. Read GradedAlgebra/Radical.lean:135-152 and Lasker.lean:39-64,110-124,200-237,285-300. No returned declaration states this graded decomposition with its primary factors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomogeneous\", \"IsPrimary\"",
+   "results": "{\"t\": \"2026-10-23T11:13:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsHomogeneous\\\", \\\"IsPrimary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary primary decomposition is in Submodule.isLasker (RingTheory/Lasker.lean:299); homogeneous core, homogeneous radicals and the prime-core theorem do not give homogeneous primary factors. Read GradedAlgebra/Radical.lean:135-152 and Lasker.lean:39-64,110-124,200-237,285-300. No returned declaration states this graded decomposition with its primary factors."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*[Pp]rimary|[Pp]rimary.*homogeneous|primary.*[Dd]ecomposition",
+   "results": "{\"t\": \"2026-10-23T11:14:16Z\", \"tool\": \"grep\", \"query\": \"homogeneous.*[Pp]rimary|[Pp]rimary.*homogeneous|primary.*[Dd]ecomposition\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/IsPrimary.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\"], \"digest\": \"0cf1353e00f36336\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary primary decomposition is in Submodule.isLasker (RingTheory/Lasker.lean:299); homogeneous core, homogeneous radicals and the prime-core theorem do not give homogeneous primary factors. Read GradedAlgebra/Radical.lean:135-152 and Lasker.lean:39-64,110-124,200-237,285-300. No returned declaration states this graded decomposition with its primary factors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous ideal of a Noetherian graded ring admits a minimal primary decomposition with homogeneous primary components",
+   "results": "{\"t\": \"2026-10-23T11:14:17Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous ideal of a Noetherian graded ring admits a minimal primary decomposition with homogeneous primary components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous\", \"Ideal.IsMinimalPrimaryDecomposition\", \"HomogeneousIdeal\", \"HomogeneousIdeal.irrelevant\", \"Ideal.IsMinimalPrimaryDecomposition.primary\", \"Ideal.IsHomogeneous.isPrime_iff\", \"Ideal.IsHomogeneous.radical\", \"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\"], \"digest\": \"34a937aeb35d1a8f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary primary decomposition is in Submodule.isLasker (RingTheory/Lasker.lean:299); homogeneous core, homogeneous radicals and the prime-core theorem do not give homogeneous primary factors. Read GradedAlgebra/Radical.lean:135-152 and Lasker.lean:39-64,110-124,200-237,285-300. No returned declaration states this graded decomposition with its primary factors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lasker Noether theorem for graded ideals homogeneous primary decomposition",
+   "results": "{\"t\": \"2026-10-23T11:14:19Z\", \"tool\": \"leanfinder\", \"query\": \"Lasker Noether theorem for graded ideals homogeneous primary decomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.radical_eq\", \"Ideal.IsHomogeneous.iff_exists\", \"Ideal.IsHomogeneous\", \"Ideal.IsHomogeneous.isPrime_iff\", \"Ideal.homogeneousHull_eq_iSup\", \"Ideal.homogeneousCore'_eq_sSup\", \"Ideal.homogeneousCore_eq_sSup\"], \"digest\": \"f2dcb41f692161d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary primary decomposition is in Submodule.isLasker (RingTheory/Lasker.lean:299); homogeneous core, homogeneous radicals and the prime-core theorem do not give homogeneous primary factors. Read GradedAlgebra/Radical.lean:135-152 and Lasker.lean:39-64,110-124,200-237,285-300. No returned declaration states this graded decomposition with its primary factors."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousCore|isPrimary|IsPrimary",
+   "results": "{\"t\": \"2026-10-23T11:14:59Z\", \"tool\": \"grep\", \"query\": \"homogeneousCore|isPrimary|IsPrimary\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\"], \"digest\": \"633e72647cdb3e33\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary primary decomposition is in Submodule.isLasker (RingTheory/Lasker.lean:299); homogeneous core, homogeneous radicals and the prime-core theorem do not give homogeneous primary factors. Read GradedAlgebra/Radical.lean:135-152 and Lasker.lean:39-64,110-124,200-237,285-300. No returned declaration states this graded decomposition with its primary factors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If Q is a primary ideal then its homogeneous core generated by homogeneous elements in Q is primary",
+   "results": "{\"t\": \"2026-10-23T11:14:59Z\", \"tool\": \"leansearch\", \"query\": \"If Q is a primary ideal then its homogeneous core generated by homogeneous elements in Q is primary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.homogeneousCore'\", \"Ideal.homogeneousCore\", \"Ideal.IsPrime.homogeneousCore\", \"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.mem_homogeneousCore_of_homogeneous_of_mem\", \"Ideal.IsPrime.isPrimary\", \"Ideal.IsHomogeneous.isPrime_iff\", \"Ideal.homogeneousCore'_le\"], \"digest\": \"46a82a900033feeb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary primary decomposition is in Submodule.isLasker (RingTheory/Lasker.lean:299); homogeneous core, homogeneous radicals and the prime-core theorem do not give homogeneous primary factors. Read GradedAlgebra/Radical.lean:135-152 and Lasker.lean:39-64,110-124,200-237,285-300. No returned declaration states this graded decomposition with its primary factors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homogeneous core of a primary ideal in a nonnegatively graded commutative ring is primary",
+   "results": "{\"t\": \"2026-10-23T11:15:02Z\", \"tool\": \"leanfinder\", \"query\": \"The homogeneous core of a primary ideal in a nonnegatively graded commutative ring is primary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsPrime.homogeneousCore\", \"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.isPrime_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"Ideal.homogeneousCore\", \"Ideal.homogeneousCore'\", \"Ideal.mem_homogeneousCore_of_homogeneous_of_mem\", \"Ideal.toIdeal_homogeneousCore_le\"], \"digest\": \"ae8a1ca1b173c9d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary primary decomposition is in Submodule.isLasker (RingTheory/Lasker.lean:299); homogeneous core, homogeneous radicals and the prime-core theorem do not give homogeneous primary factors. Read GradedAlgebra/Radical.lean:135-152 and Lasker.lean:39-64,110-124,200-237,285-300. No returned declaration states this graded decomposition with its primary factors."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Pp]rimary|radical.*pow|pow.*radical|isLasker",
+   "results": "{\"t\": \"2026-10-23T11:37:08Z\", \"tool\": \"grep\", \"query\": \"exists.*[Pp]rimary|radical.*pow|pow.*radical|isLasker\", \"sub\": \"RingTheory/Lasker.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"19\", \"20\", \"25\", \"31\"], \"digest\": \"27dab20eb784aa18\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary primary decomposition is in Submodule.isLasker (RingTheory/Lasker.lean:299); homogeneous core, homogeneous radicals and the prime-core theorem do not give homogeneous primary factors. Read GradedAlgebra/Radical.lean:135-152 and Lasker.lean:39-64,110-124,200-237,285-300. No returned declaration states this graded decomposition with its primary factors."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*[Pp]rimary|[Pp]rimary.*homogeneous|primary.*[Dd]ecomposition",
+   "results": "{\"t\": \"2026-10-23T13:01:46Z\", \"tool\": \"grep\", \"query\": \"homogeneous.*[Pp]rimary|[Pp]rimary.*homogeneous|primary.*[Dd]ecomposition\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"Mathlib/RingTheory/IsPrimary.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\"], \"digest\": \"a63bf2e76520af5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous ideal in a Noetherian graded ring has a primary decomposition by homogeneous ideals",
+   "results": "{\"t\": \"2026-10-23T13:01:47Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous ideal in a Noetherian graded ring has a primary decomposition by homogeneous ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousIdeal.irrelevant\", \"HomogeneousIdeal\", \"Ideal.IsHomogeneous\", \"Ideal.IsHomogeneous.radical\", \"Ideal.IsHomogeneous.radical_eq\", \"Ideal.IsHomogeneous.isPrime_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"Ideal.IsHomogeneous.toIdeal_homogeneousHull_eq_self\"], \"digest\": \"9b1a78ca69b2e667\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHomogeneous\", \"IsPrimary\"",
+   "results": "{\"t\": \"2026-10-23T13:01:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsHomogeneous\\\", \\\"IsPrimary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homogeneous core of a primary ideal in a nonnegatively graded Noetherian commutative ring is primary",
+   "results": "{\"t\": \"2026-10-23T13:01:48Z\", \"tool\": \"leanfinder\", \"query\": \"The homogeneous core of a primary ideal in a nonnegatively graded Noetherian commutative ring is primary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsPrime.homogeneousCore\", \"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.isPrime_iff\", \"Ideal.homogeneousCore'\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"Ideal.homogeneousCore'_eq_sSup\", \"Ideal.homogeneousCore_eq_sSup\"], \"digest\": \"073246aa5fc3ff4a\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousCore|isPrimary|IsPrimary",
+   "results": "{\"t\": \"2026-10-23T13:09:40Z\", \"tool\": \"grep\", \"query\": \"homogeneousCore|isPrimary|IsPrimary\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\", \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal.lean\"], \"digest\": \"070ee94a307e082e\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem Ideal.IsHomogeneous.radical|IsPrimary.*isPrime|isPrime_radical",
+   "results": "{\"t\": \"2026-10-23T13:09:40Z\", \"tool\": \"grep\", \"query\": \"theorem Ideal.IsHomogeneous.radical|IsPrimary.*isPrime|isPrime_radical\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"Mathlib/RingTheory/Ideal/IsPrimary.lean\", \"Mathlib/RingTheory/Ideal/IsPrimary.lean\", \"Mathlib/RingTheory/Ideal/IsPrimary.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean\", \"Mathlib/RingTheory/Lasker.lean\"], \"digest\": \"90864cbb6b435129\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The radical of a graded ideal is graded",
+   "results": "{\"t\": \"2026-10-23T13:09:41Z\", \"tool\": \"leansearch\", \"query\": \"The radical of a graded ideal is graded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousIdeal.radical\", \"Ideal.IsHomogeneous.radical\", \"Ideal.IsHomogeneous.radical_eq\", \"Ideal.radical_isRadical\", \"Ideal.radical\", \"HomogeneousIdeal.coe_radical\", \"Ideal.IsRadical\", \"Ideal.IsHomogeneous.iSup₂\"], \"digest\": \"4e70b22b8b9305a0\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.IsHomogeneous.radical",
+   "results": "{\"t\": \"2026-10-23T13:09:41Z\", \"tool\": \"loogle\", \"query\": \"Ideal.IsHomogeneous.radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Ideal.IsHomogeneous.radical\"], \"digest\": \"d70356922e33c7de\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The radical of a homogeneous ideal in a nonnegatively graded commutative ring is homogeneous",
+   "results": "{\"t\": \"2026-10-23T13:09:42Z\", \"tool\": \"leanfinder\", \"query\": \"The radical of a homogeneous ideal in a nonnegatively graded commutative ring is homogeneous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousIdeal.radical\", \"Ideal.IsHomogeneous.radical\", \"HomogeneousIdeal.coe_radical\", \"Ideal.IsHomogeneous.radical_eq\", \"Ideal.homogeneousCore\", \"HomogeneousIdeal.isHomogeneous\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"Ideal.IsHomogeneous.top\"], \"digest\": \"7ae93c5b645efd25\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A primary ideal remains primary after replacing it by the ideal generated by its homogeneous elements",
+   "results": "{\"t\": \"2026-10-23T13:09:43Z\", \"tool\": \"leanfinder\", \"query\": \"A primary ideal remains primary after replacing it by the ideal generated by its homogeneous elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.IsPrime.homogeneousCore\", \"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"Ideal.IsHomogeneous.isPrime_iff\", \"ProjectiveSpectrum.instIsPrimeToIdealNatAsHomogeneousIdeal\", \"Ideal.homogeneousCore'\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"Ideal.homogeneousCore\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\"], \"digest\": \"af12811f59bb8581\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ideal generated by the homogeneous elements of a primary ideal in a graded Noetherian ring is primary",
+   "results": "{\"t\": \"2026-10-23T13:13:14Z\", \"tool\": \"leansearch\", \"query\": \"The ideal generated by the homogeneous elements of a primary ideal in a graded Noetherian ring is primary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.homogeneousCore\", \"Ideal.homogeneousCore'\", \"Ideal.IsPrime.homogeneousCore\", \"Ideal.homogeneous_span\", \"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.homogeneous\", \"Ideal.homogeneousHull\"], \"digest\": \"5521beeb57554d34\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: local Lasker.lean gives ordinary primary decomposition, and GradedAlgebra/Radical.lean gives homogeneous radicals and prime cores, not homogeneous primary cores. Homogeneous radicals are isolated as a Mathlib leaf below."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-component-primary-complement-separation",
+  "date": "2026-10-23",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, steps (2)--(3), printed p.14; agent explicit leading-coefficient version of the component-projection estimates. The multiple-component estimate is the coefficient 2e+1/2 in Gieseker, Lectures on Moduli of Curves, Proposition 1.0.3, printed pp.30--36. Local PDFs WANTED. Supporting prerequisite: Proposition 1.0.3, technical claim on printed pp.32--33 and its primary-decomposition proof on pp.36--37; agent formulation also records the complementary Hilbert slope and permits the empty complement; algebra input to the primary-decomposition proof: homogeneous factors in one projective coordinate ring, retaining embedded factors.",
+   "via": [
+    "lem-sfb-component-primary-complement-separation",
+    "lem-sfb-component-projection-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-homogeneous-primary-decomposition",
+  "worker": "stage1",
+  "summary": "Follow Altman--Kleiman 20.27 through ordinary primary factors and their homogeneous cores; reuse existing polynomial Noetherianity and radical-power leaves. Create only the primary-core lemma and the homogeneous-radical Mathlib leaf. Give explicit merging, irredundancy, minimal-prime and localization arguments, including I=B. Statement unchanged.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3): supporting algebra for the existing alteration/moduli/Gieseker dependency route recorded in blueprint.from.place. No replacement of the unit route; the ancestor command returns None, preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-1c328e5c2",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-1c328e5c2 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. The item statement and stmt_deps are identical to the base, where the item was unsplit, so this is a first split and not a re-split; tool_uses is empty and no SGA source is used. Steps: 1. The regular-ring leaf over any field gives Noetherianity of B, and lem-per-noetherian-primary-decomposition gives finite proper primary factors; I=B is handled first. 2. Taking homogeneous cores gives I = intersection of the H_j, using the component formula. 3. The radicals are homogeneous by the Mathlib leaf (I checked Ideal.IsHomogeneous.radical at Radical.lean:165-168), and primality is proved directly. 4-6. Grouping by radical with the max-exponent argument, the deletion process and the prime-avoidance product are correct elementary steps. 7. lem-weil-pbc-fg-ideal-radical-power applies to the finitely generated p_a. 8-10. The extension criterion follows from the fraction equivalence that def-weil-pbc-localization-at-prime actually states, and the denominator product and minimal-prime steps are correct. Checks: I tested (x^2,xy)=(x)∩(x^2,y) at (x) and at (x,y), and also I=0 and (x^r). New node lem-sfb-primary-homogeneous-core is true: I proved it myself (√Q*=P*, every associated prime of R/Q* is homogeneous and equal to P*). It is self-contained, strictly smaller than the item and not in Mathlib. I could not open Altman-Kleiman Ex. 20.26 (no local PDF, online copy 403), so I accept the source place on the mathematics. No duplicates found in the DAG. Mechanical finding (dropped-route node lem-per-noetherian-primary-decomposition): it is justified at step 1. That node is a status-mathlib Lasker-Noether leaf (Submodule.isLasker, Lasker.lean:299) using none of the techniques the 2026-10-19 note forbids. Its only tie to the dropped route is its blueprint.via, and this item uses only its general statement. Maintainer note: keep or re-home it as a Mathlib leaf if the route cleanup deletes it, otherwise this item and lem-sfb-component-primary-complement-separation lose a citation."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HomogeneousPrimaryDecomposition",
+  "declaration": "MvPolynomial.homogeneous_primary_decomposition",
+  "file": "lean/Sheaf/RingTheory/HomogeneousPrimaryDecomposition.lean",
+  "statement": "theorem homogeneous_primary_decomposition (k : Type u) [Field k] (n : ℕ) (I : Ideal (MvPolynomial (Fin (n + 1)) k)) (hI : @Ideal.IsHomogeneous _ _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) k) _ _ gradedAlgebra I) : IsNoetherianRing (MvPolynomial (Fin (n + 1)) k) ∧ ∃ (s : ℕ) (Q : Fin s → Ideal (MvPolynomial (Fin (n + 1)) k)), I = ⨅ a, Q a ∧ (∀ a, Q a ≠ ⊤ ∧ @Ideal.IsHomogeneous _ _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) k) _ _ gradedAlgebra (Q a) ∧ (Q a).IsPrimary ∧ (Q a).radical.IsPrime ∧ @Ideal.IsHomogeneous _ _ _ _ _ _ (homogeneousSubmodule (Fin (n + 1)) k) _ _ gradedAlgebra (Q a).radical) ∧ Function.Injective (fun a => (Q a).radical) ∧ (∀ a, (⨅ (b : Fin s) (_ : b ≠ a), Q b) ≠ I) ∧ (∀ p ∈ I.minimalPrimes, ∃ a, (Q a).radical = p) ∧ (∀ a, ∃ h : ℕ, 1 ≤ h ∧ (Q a).radical ^ h ≤ Q a) ∧ (∀ (p : Ideal (MvPolynomial (Fin (n + 1)) k)) [p.IsPrime], I ≤ p → I.map (algebraMap _ (Localization.AtPrime p)) = ⨅ (a : Fin s) (_ : (Q a).radical ≤ p), (Q a).map (algebraMap _ (Localization.AtPrime p)) ∧ (∀ a, ¬ (Q a).radical ≤ p → (Q a).map (algebraMap _ (Localization.AtPrime p)) = ⊤) ∧ (∀ b, p = (Q b).radical → I.IsMinimalPrime p → I.map (algebraMap _ (Localization.AtPrime p)) = (Q b).map (algebraMap _ (Localization.AtPrime p))))",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb79e7f40",
+  "group": "O2",
+  "result": "pass",
+  "note": "Every node clause matched the Lean: Noetherian conclusion, finite Fin s family, I = ⨅ Q, proper/homogeneous/primary factors, homogeneous prime radicals, injective radicals, irredundancy, minimal primes covered, positive radical-power bound, and the three localization clauses (⨅ body parses at prec 60, so the ∧ conjuncts split correctly and → scopes over all three). Grading is Mathlib's homogeneousSubmodule with gradedAlgebra (total degree); Ideal.IsHomogeneous is the same notion as in the def-pc Standard module. Edge cases checked: I=⊤ with s=0, I=0, n=0, any characteristic, embedded-component example. Item node equals live except lean; lean.statement is verbatim; docstrings carry source, blueprint and the 10 steps; only proof is sorry; no defs; lines ≤100; plain imports are exactly the proof-dep Mathlib leaf modules; no duplicate in Mathlib or the project. Advisory only: the public Standard import is unused by the statement but required as the stmt_dep module. No compile: no file changed."
+ }
+}

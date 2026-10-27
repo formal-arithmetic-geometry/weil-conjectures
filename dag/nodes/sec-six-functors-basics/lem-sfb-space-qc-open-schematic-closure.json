@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-space-qc-open-schematic-closure",
+ "kind": "statement",
+ "title": "Schematic closure of a quasi-compact open subspace",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with atlas topology on field-valued point classes [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A geometric point is a map $\\operatorname{Spec}\\Omega\\to X$ from an algebraically closed field [def-weil-geometric-point], and its geometric fibre is the sheaf fibre product with this map. Quasi-compact means quasi-compact on scheme tests, or, for a space, that every open cover has a finite subcover. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. Separated for a morphism means that its diagonal is representable by closed immersions [def-weil-closed-immersion]. Etale means representable etale on scheme tests [def-trf-algebraic-space, def-weil-etale-morphism]. Integral means representable and integral on scheme tests [def-weil-finite-integral-morphism]; in particular its pullback to an affine scheme is affine. Open immersions are representable by open immersions on scheme tests [def-weil-open-immersion]. Let $j:O\\hookrightarrow B$ be a quasi-compact open immersion. There is a smallest closed subspace $C\\hookrightarrow B$ through which $j$ factors, called its schematic closure. The map $O\\to C$ is a quasi-compact open immersion, its image is topologically dense in $C$, and $\\mathcal O_C\\to j_*\\mathcal O_O$ is injective; this last property is called schematic density. Formation of $C$ commutes with etale base change on $B$, hence with restriction to every open subspace of $B$. In particular, over an open subspace $V\\subseteq B$ in which $O$ is closed, one has $C\\times_BV=O\\times_BV$ as closed subspaces of $V$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image), and definition-scheme-theoretically-dense."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal I=\\ker(\\mathcal O_B\\to j_*\\mathcal O_O)$. An open immersion is separated: its relative diagonal is an isomorphism, since it is an inclusion of subfunctors; an isomorphism is a closed immersion on every scheme test. Thus the quasi-compact separated direct-image theorem makes $j_*\\mathcal O_O$ quasi-coherent. The structure sheaf is quasi-coherent (its local presentation has one generator and no relations), so the kernel theorem makes $\\mathcal I$ quasi-coherent. It is an ideal because it is the kernel of a ring map. Let $c:C=V(\\mathcal I)\\hookrightarrow B$ be the closed subspace supplied by the ideal correspondence.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image), specialized to the quasi-compact open immersion; Tag 03MB (lemma-closed-immersion-ideals)."
+   }
+  },
+  {
+   "text": "The composite $\\mathcal I\\to j_*\\mathcal O_O$ is zero, so the factorization criterion gives $q:O\\to C$ with $cq=j$. If $D\\hookrightarrow B$ is any closed subspace through which $j$ factors, its defining ideal $\\mathcal J$ maps to zero in $j_*\\mathcal O_O$. Therefore $\\mathcal J\\subseteq\\mathcal I$. The inclusion-reversing correspondence gives $C\\subseteq D$. This proves existence and minimality; two minimal closed subspaces are equal as subfunctors.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image), specialized to the quasi-compact open immersion; Tag 03MB (lemma-closed-immersion-ideals)."
+   }
+  },
+  {
+   "text": "For an etale map $g:B\\prime\\to B$, the direct-image restriction comparison identifies the ring map for $j\\prime:O\\times_BB\\prime\\to B\\prime$ with the restriction of the ring map for $j$. Kernels are computed on sections, and restricting to the localized etale site keeps those same sections. Hence its kernel is $\\mathcal I|_{B\\prime}$. By the base-change clause of the ideal correspondence this cuts out $C\\times_BB\\prime$. The argument of Steps 1--2 on $B\\prime$ applies: $j\\prime$ is a quasi-compact open immersion, because every scheme test is a scheme test for $j$. Thus this closed subspace is exactly its schematic closure. For an open restriction the identical calculation works on the full subsite of charts mapping into that open: the ring map and its kernel have exactly the same sections there. This proves commutation with open restriction directly.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image), specialized to the quasi-compact open immersion; Tag 03MB (lemma-closed-immersion-ideals)."
+   }
+  },
+  {
+   "text": "Taking the open restriction $O\\to B$ in Step 3 gives $C\\times_BO=O$: the restricted kernel is the kernel of the identity of $\\mathcal O_O$, hence zero. Equivalently the square with $q:O\\to C$ and $j:O\\to B$ is cartesian. Consequently $q$ is an open immersion, and is quasi-compact: after any scheme test $T\\to C$ its pullback is the pullback of the quasi-compact open immersion $j$ along $T\\to C\\to B$. Both assertions follow directly from the scheme-test definitions.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image), specialized to the quasi-compact open immersion; Tag 03MB (lemma-closed-immersion-ideals)."
+   }
+  },
+  {
+   "text": "Apply the same direct-image and kernel theorems to the quasi-compact open immersion $q$ to obtain a quasi-coherent ideal $\\mathcal K=\\ker(\\mathcal O_C\\to q_*\\mathcal O_O)$. The closed subspace $D=V(\\mathcal K)\\hookrightarrow C$ contains the factorization of $O$, by the zero-map criterion. Its composite with $c$ is a closed subspace of $B$: on scheme tests, successive quotients $A\\twoheadrightarrow A/I\\twoheadrightarrow (A/I)/J$ are a quotient of $A$. Minimality from Step 2 gives $C\\subseteq D$, while by construction $D\\subseteq C$. Thus $D=C$ and the ideal correspondence gives $\\mathcal K=0$. This is the required injection $\\mathcal O_C\\to q_*\\mathcal O_O$.",
+   "uses": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image), specialized to the quasi-compact open immersion; Tag 03MB (lemma-closed-immersion-ideals)."
+   }
+  },
+  {
+   "text": "If the image of $O$ were not dense in $C$, its closure would have a nonempty open complement $W$. Choose a nonempty affine etale scheme chart $T\\to C$ lying over $W$, using an atlas and an affine open containing a point above $W$. Then $T\\times_CO$ is empty. Evaluating the injection of Step 5 at $T$ gives an injection $\\Gamma(T,\\mathcal O_T)\\to\\Gamma(\\varnothing,\\mathcal O)=0$. This forces $1=0$, so $T$ is empty, a contradiction. Here the direct-image section formula is precisely compatible sections over $T\\times_CO$. Hence the image is topologically dense.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image), specialized to the quasi-compact open immersion; Tag 03MB (lemma-closed-immersion-ideals)."
+   }
+  },
+  {
+   "text": "Finally let $V\\subseteq B$ be an open subspace for which $O\\times_BV\\hookrightarrow V$ is closed. By Step 3, $C\\times_BV$ is the smallest closed subspace through which this inclusion factors. The given closed subspace $O\\times_BV$ itself is such a factor, so $C\\times_BV\\subseteq O\\times_BV$; the defining factorization gives the reverse inclusion. They are equal as closed subspaces of $V$.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image), specialized to the quasi-compact open immersion; Tag 03MB (lemma-closed-immersion-ideals)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 082X (lemma-scheme-theoretic-image), 082Z (lemma-quasi-compact-scheme-theoretic-image), specialized to the quasi-compact open immersion; Tag 03MB (lemma-closed-immersion-ideals)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact open subspace of an algebraic space has a schematic closure which commutes with etale base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥Y] (f g : X ⟶ Y),\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.equalizer.ι f g)\", \"doc\": \"If $ Y $ is a quasi-separated scheme, then the equalizer morphism $ \\\\iota $ of any two morphisms $ f, g : X \\\\to Y $ is quasi-compact. This follows from the property that in a quasi-separated space, th\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X],\\n  AlgebraicGeometry.QuasiCompact\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any quasi-separated scheme $ X $, the diagonal morphism $ X \\to X \\times X $ (constructed as the product of the identity morphism with itself) is quasi-compact. This follows from the definition of q\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hY : QuasiSeparatedSpace ↥Y] [AlgebraicGeometry.QuasiSeparated f],\\n  QuasiSeparatedSpace ↥X\", \"doc\": \"If $ Y $ is a quasi-separated topological space and the morphism $ f: X \\\\to Y $ of schemes is quasi-separated, then the underlying topological space of $ X $ is also quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"If a morphism $ f $ of schemes is quasi-compact, then the induced morphism from $ X $ to the image subscheme of $ f $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥X], AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-compact. This morphism is constructed by gluing local normalization maps defined via integral closure\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme theoretic image of a quasi compact morphism of algebraic spaces is dense and commutes with restriction to open subspaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"For any quasi-compact morphism $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme $ f.\\text{image} $ is dominant. This means the set-theoretic image of $ f $ is dense in t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"If a morphism $ f $ of schemes is quasi-compact, then the induced morphism from $ X $ to the image subscheme of $ f $ is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompact (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is quasi-compact, then its restriction to any open subset $ V $ of $ Y $ remains quasi-compact. Specifically, the morphism $ f|_V: f^{-1}(V) \\to V $ inherits the \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is an immersion and quasi-compact, then the induced morphism from $ X $ to the image subscheme $ f.\\text{image} $ is an open immersion. This means the morphism $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → AlgebraicGeometry.Scheme\", \"doc\": \"For a morphism $ f $ of schemes, the image is defined as the closed subscheme associated to the kernel ideal sheaf of $ f $. This subscheme is constructed by gluing local affine models $ \\\\operatorname\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → X ⟶ AlgebraicGeometry.Scheme.Hom.image f\", \"doc\": \"The morphism from scheme $X$ to the image subscheme $f.\\\\text{image}$ constructed by gluing local morphisms over an open cover of $Y$. For each affine open subset $U \\\\subseteq Y$, it uses the pullback \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.restrict_hom\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) (U : X.Opens) (hU : Dense ↑U) (hU' : U ≤ f.domain),\\n  (f.restrict U hU hU').hom = CategoryTheory.CategoryStruct.comp (X.homOfLE hU') f.hom\", \"doc\": \"For schemes $X$ and $Y$, if $f$ is a partial map from $X$ to $Y$ with domain containing a dense open subset $U \\\\subseteq X$, then the morphism associated to the restriction of $f$ to $U$ is the compos\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.imageι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Hom.image f ⟶ Y\", \"doc\": \"The canonical morphism from the closed subscheme defined by the kernel ideal sheaf of a morphism $ f $ to the target scheme $ Y $, constructed via gluing local affine models $ \\\\operatorname{Spec}(\\\\mat\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace, schemeTheoreticImage",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicSpace'",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schemeTheoreticImage|schematicClosure",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "schematic closure of a quasi compact open in an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{U : Set X} : IsCompact U ∧ IsOpen U ↔ ∃ s : Set X.affineOpens, s.Finite ∧ U = ⋃ i ∈ s, i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both quasi-compact and open if and only if there exists a finite collection $ s $ of affine open subsets of $ X $ such that $ U $ is the union of all elements in $ \"}\n  {\"name\": \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"{U : X.Opens} : IsCompact (X := X) U ↔ ∃ s : Set X.affineOpens, s.Finite ∧ U = ⨆ i ∈ s, (i : X.Opens)\", \"doc\": \"An open subset $ U $ of a scheme $ X $ is quasi-compact if and only if there exists a finite set $ S $ of affine open subsets of $ X $ such that $ U $ equals the union of all elements in $ S $.\"}\n  {\"name\": \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : Set ↥X}, IsCompact U ∧ IsOpen U ↔ ∃ s, s.Finite ∧ U = ⋃ i ∈ s, ↑↑i\", \"doc\": \"A subset $ U $ of a scheme $ X $ is both compact and open if and only if there exists a finite set $ s $ of affine open subsets of $ X $ such that $ U $ is the union of these affine open subsets.\"}\n  {\"name\": \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"[IsAffine X] {U : Set X} : IsCompact U ∧ IsOpen U ↔ ∃ s : Set Γ(X, ⊤), s.Finite ∧ U = ⋃ i ∈ s, X.basicOpen i\", \"doc\": \"For an affine scheme $ X $, an open subset $ U $ is compact and open if and only if there exists a finite set $ S $ of global sections of the structure sheaf on $ X $ such that $ U $ is the union of t\"}\n  {\"name\": \"AlgebraicGeometry.isCompact_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsCompact (U : Set X)) (f : Γ(X, U)) : IsCompact (X.basicOpen f : Set X)\", \"doc\": \"For a scheme $X$, if $U$ is a compact open subset of $X$ and $f$ is a section of the structure sheaf over $U$, then the basic open subset of $X$ defined by $f$ (i.e., the set of points in $U$ where th\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : CategoryTheory.PreZeroHypercover S} [self : AlgebraicGeometry.QuasiCompactCover 𝒰]\\n  {U : S.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U\", \"doc\": \"For a scheme $ S $ and a quasi-compact pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, if $ U $ is an affine open subset of $ S $, then $ U $ is covered by the images of finitely many compact open subse\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.isCompact_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiCompact f] (U : Set ↥Y),\\n  IsOpen U → IsCompact U → IsCompact (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' U)\", \"doc\": \"For any quasi-compact morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an open and compact subset, then the preimage $ f^{-1}(U) $ is compact in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isCompact\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": IsCompact (U : Set X)\", \"doc\": \"Every affine open subset $ U $ of a scheme $ X $ is compact in the topological sense, meaning that every non-trivial filter on $ U $ has a cluster point within $ U $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.image",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.Scheme\", \"doc\": \"The scheme-theoretic image of a morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.imageι\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : AlgebraicGeometry.Scheme.Hom.image f ⟶ Y\", \"doc\": \"The embedding from the scheme-theoretic image to the codomain.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : X ⟶ AlgebraicGeometry.Scheme.Hom.image f\", \"doc\": \"The morphism from the domain to the scheme-theoretic image.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImageAux\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : X ⟶ AlgebraicGeometry.Scheme.Hom.image f\", \"doc\": \"(Implementation): Use `Hom.toImage` instead which has better def-eqs.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] : AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] : AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toImage f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImageAux_spec\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toImageAux f) (AlgebraicGeometry.Scheme.Hom.imageι f) = f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_imageι\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toImage f) (AlgebraicGeometry.Scheme.Hom.imageι f) = f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_imageι_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toImage f) (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.imageι f) h) = CategoryTheory.CategoryStruct.comp f h\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] (x : ↥(AlgebraicGeometry.Scheme.Hom.image f)) : Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom ((TopCat.Presheaf.stalkFunctor CommRingCat x).map (AlgebraicGeometry.Scheme.Hom.toImage f).c))\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_app_injective\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : ↑Y.affineOpens) [AlgebraicGeometry.QuasiCompact f] : Function.Injective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.toImage f) ((TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.image\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : ↑Y.affineOpens) : AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.toImage f) ((TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.imageι f).base).obj ↑U) = CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.ker f)\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, not algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schemeTheoreticImage|schematicClosure",
+   "results": "{\"t\": \"2026-10-23T12:06:24Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|schemeTheoreticImage|schematicClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact open immersion of algebraic spaces has schematically dense closure",
+   "results": "{\"t\": \"2026-10-23T12:06:25Z\", \"tool\": \"leansearch\", \"query\": \"Quasi compact open immersion of algebraic spaces has schematically dense closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.QuasiCompact.mk\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.quasiCompact_iff\"], \"digest\": \"c96b4533d42d3ec0\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.image",
+   "results": "{\"t\": \"2026-10-23T12:06:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.image\", \"AlgebraicGeometry.Scheme.Hom.imageι\", \"AlgebraicGeometry.Scheme.Hom.toImage\", \"AlgebraicGeometry.Scheme.Hom.toImageAux\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.Scheme.Hom.toImageAux_spec\", \"AlgebraicGeometry.Scheme.Hom.toImage_imageι\"], \"digest\": \"7ac1a6882eb682e1\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic closure of a quasi compact open subspace of an algebraic space",
+   "results": "{\"t\": \"2026-10-23T12:06:29Z\", \"tool\": \"leanfinder\", \"query\": \"Schematic closure of a quasi compact open subspace of an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCompact_basicOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"AlgebraicGeometry.isRetrocompact_basicOpen\", \"AlgebraicGeometry.isCompact_iff_exists\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.isQuasiSeparated\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\"], \"digest\": \"face0c38521cfa87\"}; Read the returned scheme-only declarations: Scheme.IdealSheafData.subscheme (Subscheme.lean:454), subschemeι (:472), and IsClosedImmersion.overEquivIdealSheafData (ClosedImmersion.lean:180). They do not construct closed subspaces of arbitrary algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme statements do not specialize to arbitrary algebraic spaces in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-integral-scheme-cover",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: replace both compactifications by the schematic closure of their quasi-compact open.",
+   "via": [
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-qc-open-schematic-closure",
+  "worker": "stage1",
+  "summary": "Constructed the closure as the quasi-coherent kernel ideal, proved its minimality, etale base-change property, open quasi-compact factorization, schematic and topological density, and the closed-on-an-open consequence. One new statement-only node records the full 03MB ideal/closed-subspace correspondence missing from the existing forward-only 03MB/04CJ node.",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images (3) prerequisite chain; realizes the replacement by schematic closure in the proof of Tag 09YB. Read the current latest blueprint direct-image proof (3); this is a geometric prerequisite below its cited preservation inputs, without changing its route. The ancestor command returns None for the inherited created.item chain; retained that value and via list.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Generic 03M9 direct-image theorem for algebraic spaces; applied only to the separated quasi-compact open immersions j and q."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic 03LX localization comparison and its explicit section formula; used to identify kernel ideals after etale restriction and evaluate direct image."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic atlas-point topology calculus: continuity, open embeddings, and point images under fibre products, used only to choose a chart in a hypothetical open complement of the closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-03018c401",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-03018c401 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-space-ideal-closed-subspace-correspondence and every cited statement in full, against spaces-morphisms.tex 082X (l.2984), 082Z (1)-(4) (l.3033), 03MB (l.2216) and the paragraph after definition-inverse-image-closed-subspace (l.2294-2306). Shape: one commit; the item's statement and stmt_deps are identical to clones/live and side-live, where it is still unsplit; the new node's id is new; there is no repair note and no SGA. New node: faithful to 03MB. The bijection, V(I) by the factorization criterion and the base-change ideal im(h^*I->O_Y) are in the source, and the I->h_*O_T form follows by adjunction. Tested on the zero ideal, the unit ideal and Spec k[eps] with I=(eps). Not a duplicate: lem-sfb-space-closed-immersion-quasi-coherent-modules gives only the forward direction, and nothing else states the correspondence for spaces. Steps: 1 j is separated as a monomorphism, so 03M9 and the kernel lemma make I quasi-coherent. 2 minimality is a literal kernel inclusion plus the order-reversing bijection. 3 étale base change via the 03LX identity on sections, exact restriction and the étale ideal clause; the open case is direct or covered as étale. 4 C x_B O = O, so q is a quasi-compact open immersion by base change. 5 V(K) is closed in B by the affine composite, so minimality gives D = C and K = 0. 6 a nonempty affine étale T over W gives T x_C O empty (point calculus), so Gamma(T,O)->0 is injective, a contradiction. 7 two inclusions. Edge cases checked: O empty, O = B, O clopen, nilpotent-supported kernel, nonreduced C = B. Batch 5: the trf/a1 citations are general definitions and generic Stacks lemmas (02X2, 03LX, 03M9, 03H4/03BX); their closures contain no trace-formula, Poincaré-duality or assumption node; I accept them, and the split_report tool_uses records the three generic tools. Note: lem-sfb-stack-schematic-image-qc is a stronger stack generalization; the item's own elementary route is acceptable."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQcOpenSchematicClosure",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_qcOpen_schematicClosure",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQcOpenSchematicClosure.lean",
+  "statement": "theorem exists_qcOpen_schematicClosure {S : Scheme.{u}} {O B : AlgebraicSpace S} (j : O ⟶ B) (hj : IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left ∧ QuasiCompact p.left) j.hom.hom) : ∃ (C : AlgebraicSpace S) (c : C ⟶ B) (q : O ⟶ C), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) c.hom.hom ∧ q ≫ c = j ∧ (∀ (D : AlgebraicSpace S) (d : D ⟶ B), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) d.hom.hom → (∃ a : O ⟶ D, a ≫ d = j) → ∃ b : C ⟶ D, b ≫ d = c) ∧ IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left ∧ QuasiCompact p.left) q.hom.hom ∧ Dense (pointImage q.hom.hom) ∧ (∀ (V : C.EtaleSite) (a b : C.structureSheaf.obj.obj (op V)), (∀ (T : O.EtaleSite) (p : T.obj.left ⟶ V.obj.left), T.obj.hom ≫ q.hom.hom = yoneda.map p ≫ V.obj.hom → (Scheme.Γ.map p.left.op).hom a = (Scheme.Γ.map p.left.op).hom b) → a = b) ∧ (∀ (V : AlgebraicSpace S) (g : V ⟶ B), (IsEtale g.hom.hom ∨ IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) g.hom.hom) → IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (Limits.pullback.snd c.hom g.hom).hom ∧ (∀ (D : AlgebraicSpace S) (d : D ⟶ V), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) d.hom.hom → (∃ a : Limits.pullback j.hom g.hom ⟶ D.obj, a ≫ d.hom = Limits.pullback.snd j.hom g.hom) → ∃ b : Limits.pullback c.hom g.hom ⟶ D.obj, b ≫ d.hom = Limits.pullback.snd c.hom g.hom)) ∧ (∀ (V : AlgebraicSpace S) (g : V ⟶ B), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) g.hom.hom → IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (Limits.pullback.snd j.hom g.hom).hom → ∃ e : Limits.pullback c.hom g.hom ≅ Limits.pullback j.hom g.hom, e.hom ≫ Limits.pullback.snd j.hom g.hom = Limits.pullback.snd c.hom g.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0cdb4503",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; 10 stmt_dep nodes byte-identical; lean.statement verbatim in file. Read AlgebraicSpace (IsRepresentableWith = forall scheme test, exists pullback square with P; IsEtale; EtaleSite; structureSheaf = Gamma) and PointTopology (pointImage, final topology). The hypothesis is only qc open immersion on scheme tests. Clauses match node/082X/082Z: closed C with q≫c=j; smallest among closed D via b≫d=c; q qc open immersion; Dense(pointImage q); schematic density = injectivity Gamma(V)->Gamma(q^-1 V) for all etale V (T=O x_C V is an allowed chart, others factor through it; non-vacuous for empty preimage); etale/open base change: C x_B V closed and smallest closed factor of O x_B V; iso C x_B V ≅ O x_B V over V where O is closed. Edge cases: O empty, O=B, clopen O, nonreduced kernel, empty V. No duplicate in side-live Sheaf/WeilConjectures or Mathlib (Scheme.Hom.image is schemes only). Sorry-only, no defs, source/blueprint docstrings with 7 proof steps, universe u bound, autoImplicit false. Advisory H9: public imports Morphisms.Integral and IsAlgClosed.Basic are unused by the signature (convention-only stmt_deps), redundant and harmless. No compile, per the 2026-10-21 rule; no files changed."
+ }
+}

@@ -25,23 +25,27 @@
  ],
  "proof": [
   {
-   "text": "Use the standing separated finite-type scheme setting, and the pulled-back condensed coefficient rings, throughout; no replacement by the category of discrete rational sheaves is made. These schemes are qcqs. For $T=X,Y$, the rational cases of the finite-Tor comparison give $\\Dctf(T,\\Lambda)=\\Dbc(T,\\Lambda)$ and equality of their localizing closures. Thus all the subsequent localizing restriction and determination statements, formulated using $\\Dctf$, apply to precisely the categories in this statement.",
+   "text": "For the finite-extension theorem, realize the arbitrary universe-sized normed field E as the field range of IsAlgClosed.lift into the fixed PadicAlgCl ell. The algebra isomorphism onto its field range transports finite dimension. Pulling back the range norm gives an absolute value on E extending the p-adic norm, so spectralNorm_unique_field_norm_ext makes this isomorphism isometric. Its inverse is isometric as well. Postcomposition with these two maps constructs inverse morphisms between the universe-sized continuousCoefficientRingSheaf E and the adopted continuousMapRingSheaf of the finite intermediate field. Forgetting to abelian sheaves gives the required isomorphism of ring objects, preserving the multiplication. This is the cross-universe specialization of the normed coefficient realization argument, proved here as the private finite_coefficient_iso. Implemented finite-extension case: Use the standing separated finite-type scheme setting, and the pulled-back condensed coefficient rings, throughout; no replacement by the category of discrete rational sheaves is made. These schemes are qcqs. For $T=X,Y$, the rational cases of the finite-Tor comparison give $\\Dctf(T,\\Lambda)=\\Dbc(T,\\Lambda)$ and equality of their localizing closures. Thus all the subsequent localizing restriction and determination statements, formulated using $\\Dctf$, apply to precisely the categories in this statement. The equality between constant-model and adopted bounded constructibility is the finite-field clause of finiteCoefficientDescentTwoColimit transported by the exact coefficient equivalence, using constantModel_derived_comap_iff and bounded_comap_iff.",
    "uses": [
     "sk-def-sfb-dc-setting",
-    "det-def-localizing-closure-ctf-equals-bc"
+    "det-def-localizing-closure-ctf-equals-bc",
+    "sk-thm-sfb-qlbar-two-colimit",
+    "lem-sfb-condensed-coefficient-iso-constructible",
+    "lem-sfb-normed-coefficient-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
-    "place": "first paragraph: interpretation of the rational localizing categories"
+    "place": "first paragraph: interpretation of the rational localizing categories; coefficient identification as expanded in lem-sfb-normed-coefficient-realization"
    }
   },
   {
-   "text": "Apply the inverse-image restriction with $g=p$ and the proper-image restriction with $p$ as in the statement. The latter explicitly asserts that its hypotheses hold for $\\Lambda=E,\\Qlb$; it is not being applied only conditionally. Using Step 1, both functors are exact and preserve all small direct sums on the displayed localizing categories. Tensor closure, applied on both $X$ and $Y$, gives $A\\otimes^{\\mathbf L}p^*B\\in\\Loc(\\Dbc(X,\\Lambda))$ and $(Rp_*A)\\otimes^{\\mathbf L}B\\in\\Loc(\\Dbc(Y,\\Lambda))$. Applying $Rp_*$ to the former gives the other term in the target localizing category.",
+   "text": "Implemented finite-extension case: Apply the inverse-image restriction with $g=p$ and the proper-image restriction with $p$ as in the statement. The latter explicitly asserts that its hypotheses hold for $\\Lambda=E,\\Qlb$; it is not being applied only conditionally. Using Step 1, both functors are exact and preserve all small direct sums on the displayed localizing categories. Tensor closure, applied on both $X$ and $Y$, gives $A\\otimes^{\\mathbf L}p^*B\\in\\Loc(\\Dbc(X,\\Lambda))$ and $(Rp_*A)\\otimes^{\\mathbf L}B\\in\\Loc(\\Dbc(Y,\\Lambda))$. Applying $Rp_*$ to the former gives the other term in the target localizing category. ProperLocalizingHypotheses is transported along the coefficient isomorphism by properHypotheses_coefficientIso; the pullback constructibility helper applies to every commutative condensed coefficient ring. tensorClosureRational already accepts a coefficient-ring isomorphism.",
    "uses": [
     "det-proper-base-change-unbounded-pullback",
     "det-proper-image-localizing-proper",
-    "det-thm-sf-pf-field-tensor"
+    "det-thm-sf-pf-field-tensor",
+    "lem-sfb-condensed-coefficient-iso-constructible"
    ],
    "elementary": false,
    "source": {
@@ -50,7 +54,7 @@
    }
   },
   {
-   "text": "Derived tensor is exact in each variable by the ringed-topos tensor statement. It preserves direct sums in each variable: the closed structure supplies $C\\otimes^{\\mathbf L}-\\dashv\\RHom(C,-)$, and the coproduct universal property gives preservation; symmetry gives the other variable. Since the localizing subcategories are full and their coproducts are ambient coproducts, these properties restrict to them. Together with Step 2 this proves that both sides of the projection map, with either input fixed, are exact functors preserving direct sums.",
+   "text": "Implemented finite-extension case: Derived tensor is exact in each variable by the ringed-topos tensor statement. It preserves direct sums in each variable: the closed structure supplies $C\\otimes^{\\mathbf L}-\\dashv\\RHom(C,-)$, and the coproduct universal property gives preservation; symmetry gives the other variable. Since the localizing subcategories are full and their coproducts are ambient coproducts, these properties restrict to them. Together with Step 2 this proves that both sides of the projection map, with either input fixed, are exact functors preserving direct sums.",
    "uses": [
     "lem-weil-pbc-ringed-projection-mate-exact",
     "sk-def-sfb-derived-tensor-hom",
@@ -63,7 +67,7 @@
    }
   },
   {
-   "text": "The module pullback is the ringed-topos pullback. The Cartesian coefficient isomorphism identifies this pullback with exact inverse image, so in the present coefficient system the functor $Lp^*$ is the module pullback $p^*$.",
+   "text": "Implemented finite-extension case: The module pullback is the ringed-topos pullback. The Cartesian coefficient isomorphism identifies this pullback with exact inverse image, so in the present coefficient system the functor $Lp^*$ is the module pullback $p^*$.",
    "uses": [
     "def-sfb-module-upper-star",
     "sk-prop-sfb-cartesian-coefficients"
@@ -75,7 +79,7 @@
    }
   },
   {
-   "text": "Put $L=p^*$ and $R=Rp_*$. With derived counit $\\varepsilon:LR\\to1$, the canonical unbounded projection map $\\pi_{A,B}$ is the adjoint transpose of $L(RA\\otimes^{\\mathbf L}B)\\xrightarrow{\\mu}LRA\\otimes^{\\mathbf L}LB\\xrightarrow{\\varepsilon_A\\otimes1}A\\otimes^{\\mathbf L}LB$. The ringed projection-mate statement supplies this map for arbitrary unbounded inputs, natural in both variables, and states that it commutes with the canonical shift structures.",
+   "text": "Implemented finite-extension case: Put $L=p^*$ and $R=Rp_*$. With derived counit $\\varepsilon:LR\\to1$, the canonical unbounded projection map $\\pi_{A,B}$ is the adjoint transpose of $L(RA\\otimes^{\\mathbf L}B)\\xrightarrow{\\mu}LRA\\otimes^{\\mathbf L}LB\\xrightarrow{\\varepsilon_A\\otimes1}A\\otimes^{\\mathbf L}LB$. The ringed projection-mate statement supplies this map for arbitrary unbounded inputs, natural in both variables, and states that it commutes with the canonical shift structures.",
    "uses": [
     "lem-weil-pbc-ringed-projection-mate-exact"
    ],
@@ -86,7 +90,7 @@
    }
   },
   {
-   "text": "Give the exact functor $L$ its canonical shift isomorphisms and give $R$ the shift structure supplied by clause (iii) of the abstract adjunction-shift lemma. The unit and counit commute with these shifts, in particular $\\varepsilon_{A[1]}=\\varepsilon_A[1]\\circ e_{L,RA}\\circ L(e_{R,A})$. By the triangulated-right-adjoint statement, $R$ with this shift structure is exact; hence its restriction in Step 2 is exact on the full triangulated localizing subcategories.",
+   "text": "Implemented finite-extension case: Give the exact functor $L$ its canonical shift isomorphisms and give $R$ the shift structure supplied by clause (iii) of the abstract adjunction-shift lemma. The unit and counit commute with these shifts, in particular $\\varepsilon_{A[1]}=\\varepsilon_A[1]\\circ e_{L,RA}\\circ L(e_{R,A})$. By the triangulated-right-adjoint statement, $R$ with this shift structure is exact; hence its restriction in Step 2 is exact on the full triangulated localizing subcategories.",
    "uses": [
     "lem-weil-pbc-adjunction-shift-compatibility-unique",
     "lem-sf-triangulated-right-adjoint"
@@ -98,7 +102,7 @@
    }
   },
   {
-   "text": "The shift compatibility in the ringed projection-mate statement identifies the transpose at $(A[1],B)$ with the shift of the transpose at $(A,B)$, using the displayed counit formula and the shift compatibility of $\\mu$; the same argument at $(A,B[1])$ gives compatibility in the second variable. Naturality and these shift identities make the components on every distinguished triangle a morphism of triangles, including the connecting square. Thus the determination lemma applies to the actual canonical map, with exact structures for which both functors are exact.",
+   "text": "Implemented finite-extension case: The shift compatibility in the ringed projection-mate statement identifies the transpose at $(A[1],B)$ with the shift of the transpose at $(A,B)$, using the displayed counit formula and the shift compatibility of $\\mu$; the same argument at $(A,B[1])$ gives compatibility in the second variable. Naturality and these shift identities make the components on every distinguished triangle a morphism of triangles, including the connecting square. Thus the determination lemma applies to the actual canonical map, with exact structures for which both functors are exact.",
    "uses": [
     "lem-weil-pbc-ringed-projection-mate-exact",
     "lem-weil-pbc-adjunction-shift-compatibility-unique",
@@ -111,9 +115,10 @@
    }
   },
   {
-   "text": "If $A\\in\\Dbc(X,\\Lambda)$ and $B\\in\\Dbc(Y,\\Lambda)$, clause (3) of the rational proper-base-change theorem says precisely that this canonical proper projection formula map is an isomorphism. Its standing-scheme, properness, and rational-coefficient hypotheses hold here.",
+   "text": "Implemented finite-extension case: If $A\\in\\Dbc(X,\\Lambda)$ and $B\\in\\Dbc(Y,\\Lambda)$, clause (3) of the rational proper-base-change theorem says precisely that this canonical proper projection formula map is an isomorphism. Its standing-scheme, properness, and rational-coefficient hypotheses hold here. Apply the finite-subfield formula after internalScalarExtension; bounded_scalar preserves both bounded constructible inputs, and projection_isIso_of_coefficientIso reflects invertibility using the canonical coefficient projection square. canonical_projection_isIso identifies the published maps.",
    "uses": [
-    "det-thm-sfb-proper-base-change-rational"
+    "det-thm-sfb-proper-base-change-rational",
+    "lem-sfb-normed-coefficient-realization"
    ],
    "elementary": false,
    "source": {
@@ -122,7 +127,7 @@
    }
   },
   {
-   "text": "Fix $B\\in\\Dbc(Y,\\Lambda)$, so in particular $B\\in\\Loc(\\Dbc(Y,\\Lambda))$. By Steps 2--7 the functors $A\\mapsto (Rp_*A)\\otimes^{\\mathbf L}B$ and $A\\mapsto Rp_*(A\\otimes^{\\mathbf L}p^*B)$ have common codomain $\\Loc(\\Dbc(Y,\\Lambda))$, are exact and preserve direct sums, and $\\pi_{-,B}$ is a natural transformation of exact functors. Step 8 gives invertibility on $\\Dbc(X,\\Lambda)$. The determination lemma, using the equalities of Step 1, gives invertibility for every $A\\in\\Loc(\\Dbc(X,\\Lambda))$ and this bounded $B$.",
+   "text": "Implemented finite-extension case: Fix $B\\in\\Dbc(Y,\\Lambda)$, so in particular $B\\in\\Loc(\\Dbc(Y,\\Lambda))$. By Steps 2--7 the functors $A\\mapsto (Rp_*A)\\otimes^{\\mathbf L}B$ and $A\\mapsto Rp_*(A\\otimes^{\\mathbf L}p^*B)$ have common codomain $\\Loc(\\Dbc(Y,\\Lambda))$, are exact and preserve direct sums, and $\\pi_{-,B}$ is a natural transformation of exact functors. Step 8 gives invertibility on $\\Dbc(X,\\Lambda)$. The determination lemma, using the equalities of Step 1, gives invertibility for every $A\\in\\Loc(\\Dbc(X,\\Lambda))$ and this bounded $B$.",
    "uses": [
     "sk-lem-sf-determination"
    ],
@@ -133,7 +138,7 @@
    }
   },
   {
-   "text": "Now fix any $A\\in\\Loc(\\Dbc(X,\\Lambda))$. By Steps 2--7 both functors of $B$ are exact and preserve direct sums, with the same target localizing category, and $\\pi_{A,-}$ is a natural transformation of exact functors. By Step 9 it is an isomorphism for every bounded constructible $B$. Apply the determination lemma with source scheme $Y$ and target scheme $Y$, and the equalities of Step 1, to obtain invertibility for all $B\\in\\Loc(\\Dbc(Y,\\Lambda))$. This is the required isomorphism in the full target localizing category.",
+   "text": "Implemented finite-extension case: Now fix any $A\\in\\Loc(\\Dbc(X,\\Lambda))$. By Steps 2--7 both functors of $B$ are exact and preserve direct sums, with the same target localizing category, and $\\pi_{A,-}$ is a natural transformation of exact functors. By Step 9 it is an isomorphism for every bounded constructible $B$. Apply the determination lemma with source scheme $Y$ and target scheme $Y$, and the equalities of Step 1, to obtain invertibility for all $B\\in\\Loc(\\Dbc(Y,\\Lambda))$. This is the required isomorphism in the full target localizing category.",
    "uses": [
     "sk-lem-sf-determination"
    ],
@@ -142,28 +147,110 @@
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
     "place": "second paragraph: fix A arbitrary and extend in B"
    }
+  },
+  {
+   "text": "Implemented Qlbar case: Construct moduleObjectDerivedTensorComparison by the published leftDerivedUpperStarTensor, and prove its original summand and counit normalization through the existing generic comparison identification. Uniqueness preserves the original mathematical map. Unfolding only the outer mate definitions identifies moduleObjectProjectionMate with the adopted projectionMap component.",
+   "uses": [
+    "new-proetale-derived-module-pullback-monoidal",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
+    "place": "both paragraphs"
+   }
+  },
+  {
+   "text": "Implemented Qlbar case: For Qlbar use padicAlgClRingObj unchanged. The rational two-colimit comparison identifies constant-model bounded constructibility with adopted bounded constructibility.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
+    "place": "both paragraphs"
+   }
+  },
+  {
+   "text": "Implemented Qlbar case: Use localizingClosure_ctf_equals_bc on the qcqs standing schemes to identify Dctf with Dbc. The existing proper_image_localizing_proper_coefficients supplies preservation of generators and localizing coproducts. The exact pullback preserves constant-model bounded constructible objects. FieldTensor supplies bounded tensor closure on X and Y.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc",
+    "det-proper-image-localizing-proper",
+    "det-proper-base-change-unbounded-pullback",
+    "det-thm-sf-pf-field-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
+    "place": "both paragraphs"
+   }
+  },
+  {
+   "text": "Implemented Qlbar case: Compare the adopted Hom-universe localizing closure with the object-universe intersection. An existing coproduct has Hom-small nonzero support, as its coordinate idempotents inject into its endomorphisms. Drop zero summands and shrink the support to obtain closure under larger existing sums. In the converse direction lift the smaller index type and transport the coproduct along its discrete equivalence. Minimality then identifies the two closures. Lift each diagram of localizing objects along the full inclusion to obtain coproduct preservation by proper pushforward.",
+   "uses": [
+    "det-thm-sf-pf-adic-projection",
+    "det-def-localizing-closure-existence",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
+    "place": "both paragraphs"
+   }
+  },
+  {
+   "text": "Implemented Qlbar case: On bounded constructible inputs the rational proper-base-change theorem proves the published moduleObjectProjectionMap invertible. The existing adopted isIso_projectionMap_of_localizingBoundedConstructible applies determination first in A and then in B; its proof already supplies exactness and shift compatibility of the actual internal-module mate.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-rational",
+    "sk-lem-sf-determination",
+    "new-proetale-derived-module-pullback-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
+    "place": "both paragraphs"
+   }
+  },
+  {
+   "text": "Implemented Qlbar case: Tensor closure on Y puts Rp_*A tensor B in the target closure. Pullback closure and tensor closure on X put A tensor Lp^*B in the source closure, and proper pushforward puts its image in the target. Transfer the isomorphism of Step 5 through the equality of normalized and adopted mates. Fullness yields the asserted projection formula in the localizing subcategory.",
+   "uses": [
+    "det-thm-sf-pf-field-tensor",
+    "det-proper-image-localizing-proper",
+    "det-proper-base-change-unbounded-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
+    "place": "both paragraphs"
+   }
   }
  ],
  "proof_deps": [
   "def-sfb-module-upper-star",
   "det-def-localizing-closure-ctf-equals-bc",
+  "det-def-localizing-closure-existence",
   "det-proper-base-change-unbounded-pullback",
   "det-proper-image-localizing-proper",
+  "det-thm-sf-pf-adic-projection",
   "det-thm-sf-pf-field-tensor",
   "det-thm-sfb-proper-base-change-rational",
   "lem-sf-triangulated-right-adjoint",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "lem-sfb-normed-coefficient-realization",
   "lem-weil-pbc-adjunction-shift-compatibility-unique",
   "lem-weil-pbc-ringed-projection-mate-exact",
+  "new-proetale-derived-module-pullback-monoidal",
   "sk-def-localizing-closure",
   "sk-def-sfb-dc-setting",
   "sk-def-sfb-derived-tensor-hom",
   "sk-lem-sf-determination",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-thm-sfb-qlbar-two-colimit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
-  "place": "both paragraphs; expanded tensor coproduct argument and canonical-mate shift check using Stacks Tags 06YU, 07A4, 07A6, 0B56, 0A8D"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-localizing.proof.md",
+  "place": "Both cases implemented. U2 completes the finite-extension case using the existing coefficient-isomorphism transport and the shared localizing projection helper; P5 Qlbar proof and the two-variable determination route retained."
  },
  "mathlib_searches": [
   {
@@ -298,7 +385,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-3a178656a (reviewer sub-agent of L); spot-checked: I read the item, all ten steps and the statement of every one of the 14 cited nodes. The item statement is the same, character for character, as the blueprint main-20261015 statement of det-thm-sf-pf-field-localizing: Lambda = E or Qlbar, p proper, A and B in the localizing closures of Dbc. It is not weakened. The coefficient category is the layer-B module-object derived category, with Qlbar taken over finite subextensions. Step-by-step checks: Step 1: standing schemes are qcqs, so det-def-localizing-closure-ctf-equals-bc (2) gives Dctf=Dbc and equal localizing closures for E and Qlbar. Step 2: the unbounded-pullback node holds for any admissible coefficient. det-proper-image-localizing-proper states that its hypotheses hold for E and Qlbar in the standing setting. Tensor closure (2) of det-thm-sf-pf-field-tensor is applied on both X and Y. Step 3 is correctly marked elementary: tensor exactness comes from the ringed projection-mate statement, and tensor preserves direct sums because it is a left adjoint in the closed structure. Step 4: def-sfb-module-upper-star and clause (1) of the Cartesian-coefficients node identify Lp^* with p^*. Step 5 is the mate of (counit x 1) composed with mu, which matches Stacks 0B56 (sites-cohomology equation-projection-formula-map). Step 6: clause (iii) of the shift-compatibility node is a Mathlib leaf and gives the counit-compatible shift; lem-sf-triangulated-right-adjoint (Mathlib Adjunction.isTriangulated_rightAdjoint, also Stacks 0A8D) makes Rp_* exact with that shift. Step 7: the first-variable shift check is a cited diagram chase through the counit formula and the shift compatibility of mu. The second variable is exactly the shift-compatibility statement of the ringed lemma, including the connecting square. Step 8: clause (3) of det-thm-sfb-proper-base-change-rational has matching hypotheses. Its step 9 builds the same canonical mate, so the base case concerns the same map. Steps 9 and 10 apply sk-lem-sf-determination first for bounded B and all A, then for all B, as the blueprint does. Other checks: proof_deps equals the union of the step uses, every cited id exists and none is merged, there is no cycle, no SGA source is used, and there are no new nodes. The only other localizing projection formulas in the DAG are the O_E versions, so there is no duplicate. Small cases checked: p the identity, A or B zero, X empty, shifts and coproducts. I accept the 12 declared tool_uses. The repair of the 2026-10-17 return is complete: the old 2005-character step is now Steps 4-7, each 224-566 characters and separately cited. For the maintainer: units/sk-thm-sf-pf-field.json still holds the old master unit. The item still carries the 2026-10-16 reviewed record, which the merge should replace. The report mentions a citations.json that is not on the branch. No fixes were made."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.RationalLocalizingProjectionFormula",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_projectionMate_localizing_finiteExtension",
@@ -312,7 +410,7 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.isIso_projectionMate_localizing_padicAlgCl"
   ],
   "file": "lean/Sheaf/Paper/RationalLocalizingProjectionFormula.lean",
-  "statement": "theorem isIso_projectionMate_localizing_finiteExtension (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))) (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) Y))) (hA : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) X) A) (hB : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) Y) B) : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) Y) ((lowerStar (Profinite.continuousCoefficientRingObj E) p).rightDerivedFunctor.obj A ⊗ B) ∧ CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) Y) ((lowerStar (Profinite.continuousCoefficientRingObj E) p).rightDerivedFunctor.obj (A ⊗ (upperStar (Profinite.continuousCoefficientRingObj E) p).leftDerivedFunctor.obj B)) ∧ IsIso (moduleObjectProjectionMate (Profinite.continuousCoefficientRingObj E) p A B)",
+  "statement": "theorem isIso_projectionMate_localizing_finiteExtension (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))) (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) Y))) (hA : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) X) A) (hB : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) Y) B) : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) Y) ((lowerStar (Profinite.continuousCoefficientRingObj E) p).rightDerivedFunctor.obj A ⊗ B) ∧ CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) Y) ((lowerStar (Profinite.continuousCoefficientRingObj E) p).rightDerivedFunctor.obj (A ⊗ (@Functor.leftDerivedFunctor _ _ _ _ _ _ _ _ _ (hasTensorFourShortcut (Profinite.continuousCoefficientRingObj E) Y) (hasGoodTensorLeftShortcut (Profinite.continuousCoefficientRingObj E) Y) (hasGoodTensorRightShortcut (Profinite.continuousCoefficientRingObj E) Y) (upperStar (Profinite.continuousCoefficientRingObj E) p) (upperStarAdditiveShortcut (Profinite.continuousCoefficientRingObj E) p) inferInstance inferInstance (fun M ↦ @PreservesColimitsOfSize.preservesColimitsOfShape _ _ _ _ _ (preservesColimitsTensorLeftShortcut (Profinite.continuousCoefficientRingObj E) Y M) ℤ inferInstance) (fun M ↦ @PreservesColimitsOfSize.preservesColimitsOfShape _ _ _ _ _ (preservesColimitsTensorRightShortcut (Profinite.continuousCoefficientRingObj E) Y M) ℤ inferInstance) (flatResolutionModulesShortcut (Profinite.continuousCoefficientRingObj E) Y) (projectionModuleHasDerived (Profinite.continuousCoefficientRingObj E) Y) (projectionModuleHasDerived (Profinite.continuousCoefficientRingObj E) X) (preservesKFlatQuasiIso_upperStar (Profinite.continuousCoefficientRingObj E) p)).obj B)) ∧ IsIso (moduleObjectProjectionMate (Profinite.continuousCoefficientRingObj E) p A B)",
   "branch": "newtargets-dag",
   "by": "Q06",
   "date": "2026-10-18",
@@ -326,5 +424,15 @@
   "group": "Q06",
   "result": "pass",
   "note": "Fourth Q06 re-delivery of the item Q99 already merged (ledger 04:24). The only change from head fd1679da4a68 is a new report section (plus base-tree churn in blueprint-index.tsv); against the live tree only the module Authors line and lean.by changed (Q99->Q06). Earlier Q06 heads got reviewer PASS and were returned only for the 60 s sandbox compile timeout. Independent check: the node statement is the blueprint main-20261015 text verbatim; the Lean has the standing setting (prime ell, field k with char != ell, separated finite-type X,Y over k), IsProper p, E via continuousCoefficientRingObj and Qlbar via padicAlgClRingObj (finite subextensions), A,B in localizingClosure of constantModelBoundedConstructible (bounded with constructible cohomology, i.e. Dbc), and concludes both endpoint memberships plus IsIso of rightAdjointProjectionMap of the derived adjunction (homEquiv of mu then counit x 1, Stacks 0B56), with mu from a genuine unique-existence theorem. No stronger hypotheses, single universe u, no hollow definitions, sorry-only proofs, source/blueprint docstrings with the ten steps, lean.statement verbatim, all 7 declarations present. Edge cases (zero objects, empty schemes, p=id, E=Q_ell, ell=2, unbounded inputs) are fine. nt_compile --json: rc 0, 52.6 s at load 141, no diagnostics. No fixes; the change is credit only, so the lead may retire the claim instead of merging."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6051f",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T071205-L-3882322",
+  "kind": "interface",
+  "note": "independent cc review: delivered RationalLocalizingProjectionFormula (finite-extension hole closed via finite_coefficient_iso transport + shared localizing helper) against node det-thm-sf-pf-field-localizing, change record U2-rational-projection-explicit-tensor-proofs, and the 4 direct importers compiled against it (all exit 0)"
  }
 }

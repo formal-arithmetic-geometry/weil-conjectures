@@ -1,0 +1,120 @@
+{
+ "id": "lem-sf-common-stage-inclusion-tensor-model-naturality",
+ "kind": "statement",
+ "title": "Naturality of the finite-stage tensor model and the canonical inclusion tensorator",
+ "statement": "In the setting of [def-sf-common-stage-inclusion-tensor-model], the finite-stage model isomorphism is natural in K and L. For any a:K→K_prime and b:L→L_prime, the common tensor of i_E a and i_E b followed by the target model isomorphism equals the source model isomorphism followed by inclusion of the rational tensor of T_EE a and T_EE b. Compose this natural model isomorphism with the rational tensor of the two canonical scalar units, and invert, to obtain a natural isomorphism rationalTensor;i_E ≅ (i_E×i_E);commonTensor. The common tensor and its morphism formula are those of [def-weil-derived-pullback-tensor-hom], and the scalar units are those of [def-weil-algebraically-closed-coefficients].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and the common finite coefficient-field paragraph: flat extension of scalars respects the units, counits, associativity and specified projection mate."
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-inclusion-tensor-model",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Apply the common-stage tensor representative formula to the two arrows extended by T_EE. Express its representative using isoToStage. A general categorical cancellation lemma cancels the target model isomorphism and yields naturality. The scalar unit is a natural isomorphism, so product, whiskering and inversion construct the natural inclusion tensorator.",
+   "uses": [
+    "def-sf-common-stage-inclusion-tensor-model",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-common-stage-inclusion-tensor-model",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and the common finite coefficient-field paragraph: flat extension of scalars respects the units, counits, associativity and specified projection mate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor preserves a proper adjunction projection mate when it preserves the tensor pullback comparison and the adjunction counit",
+   "results": "Eight hits on categorical pullbacks, functorialityCounit, Frobenius mates and adjunctions. None gives this coefficient-stage comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "NatIso.ofComponents and its component formulas construct the natural tensorator; no common-stage projection-factor theorem.",
+   "date": "2026-10-27",
+   "verdict": "Generic construction used; no matching factor compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "stageTensor.*natur|commonProjectionTensorCompatibility; local Mathlib CategoryTheory/Adjunction and Functor/Currying; Sheaf/Paper/ExchangeProjectionSuppliedDomains",
+   "results": "Existing stageTensor specifies object components only. The supplied projection is literally a composite of the proper counit mate and proper image of open projection, with support identifications. No canonical common-stage factor square found.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing formula and isolate its two actual factors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionTensorCompatibility",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Compatibility paragraph of thm-sf-pf-field: the canonical tensor comparison and the proper/open factors of its projection mate. The created.item chain ends at a module name; no blueprint ancestor is returned by blueprint_refs.py.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStageInclusionTensorNaturality",
+  "file": "lean/Sheaf/Paper/CommonStageInclusionTensorNaturality.lean",
+  "declaration": "WeilConjectures.commonInclusionTensorModel_naturality",
+  "declarations": [
+   "WeilConjectures.commonInclusionTensorModel_naturality",
+   "WeilConjectures.commonInclusionTensorComparison"
+  ],
+  "statement": "theorem commonInclusionTensorModel_naturality\n    {K K' L L' : Stage l Ω W E} (a : K ⟶ K') (b : L ⟶ L') :\n    (commonStageDerivedTensor l Ω W).map\n        (Prod.mkHom ((inclusion (l := l) (Ω := Ω) (Y := W) E).map a)\n          ((inclusion (l := l) (Ω := Ω) (Y := W) E).map b)) ≫\n        (commonInclusionTensorModel l Ω W E K' L').hom =\n      (commonInclusionTensorModel l Ω W E K L).hom ≫\n        (inclusion (l := l) (Ω := Ω) (Y := W) E).map\n          ((rationalDerivedTensor l (Coefficient.{u} l Ω E) W).map\n            (Prod.mkHom (((stageSystem l Ω W).T (le_rfl : E ≤ E)).map a)\n              (((stageSystem l Ω W).T (le_rfl : E ≤ E)).map b)))",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T222546-L-668253",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T222546-L-668253",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

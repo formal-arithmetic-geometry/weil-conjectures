@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-ringed-bounded-below-descent-criterion",
+ "kind": "statement",
+ "title": "Bounded-below descent from an acyclic weak Serre heart",
+ "statement": "Let $f:(\\operatorname{Sh}(\\mathcal C),\\mathcal O)\\to(\\operatorname{Sh}(\\mathcal D),R)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism], with commutative ring sheaves on sites small relative to the module-sheaf universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Use module sheaves [def-weil-sheaf-of-modules-category], their ordinary unbounded derived categories and cohomology $H^j$ [def-weil-abstract-derived-category]. Let $\\mathcal A\\subset\\operatorname{Mod}(\\mathcal O)$ and $\\mathcal B\\subset\\operatorname{Mod}(R)$ be weak Serre subcategories, meaning strictly full subcategories containing zero and closed under kernels and cokernels of maps between their objects and under extensions. Write $D_{\\mathcal A}$ and $D_{\\mathcal B}$ for the full subcategories with all cohomology in these subcategories, and $D^+_{\\mathcal A}$ and $D^+_{\\mathcal B}$ for their bounded-below parts (cohomology zero in all degrees below some integer). Suppose $f^*$ is exact, induces an equivalence $\\mathcal B\\to\\mathcal A$, and the canonical derived unit $G\\to Rf_*f^*G$ is invertible for every $G\\in\\mathcal B$ in degree zero. Here $Rf_*$ is total derived direct image, computed by K-injective resolutions, and $f^*=Lf^*$ is termwise exact pullback with its canonical derived adjunction. Then these functors restrict to mutually quasi-inverse equivalences $f^*:D^+_{\\mathcal B}(R)\\rightleftarrows D^+_{\\mathcal A}(\\mathcal O):Rf_*$. The canonical derived unit on $D^+_{\\mathcal B}$ and counit on $D^+_{\\mathcal A}$ are isomorphisms. No local cohomological bound is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D7U, lemma-equivalence-bounded, statement and proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-exact-functor-complex-cohomology], $H^j(f^*L)\\cong f^*H^j(L)$. Thus exact pullback preserves the lower bound of $L$ and carries $D^+_{\\mathcal B}$ into $D^+_{\\mathcal A}$, because its restriction carries $\\mathcal B$ into $\\mathcal A$. Hypothesis on the canonical unit applies to every $H^j(L)\\in\\mathcal B$; [lem-sfb-ringed-unit-from-cohomology] therefore makes $\\eta_L$ invertible for every $L\\in D^+_{\\mathcal B}$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sfb-ringed-unit-from-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7U, lemma-equivalence-bounded, proof"
+   }
+  },
+  {
+   "text": "For $F\\in\\mathcal A$, choose $G\\in\\mathcal B$ and $\\alpha:f^*G\\xrightarrow{\\sim}F$ by the heart equivalence. The hypothesis $\\eta_G:G[0]\\xrightarrow{\\sim}Rf_*f^*G$ and $Rf_*\\alpha$ give $Rf_*F\\cong G[0]$. In particular $H^p(Rf_*F)=0$ for $p\\ne0$ and $H^0(Rf_*F)\\cong G\\in\\mathcal B$. The triangle identity gives $\\varepsilon_{f^*G}\\circ f^*(\\eta_G)=1_{f^*G}$, whence $\\varepsilon_{f^*G}=(f^*\\eta_G)^{-1}$. Naturality along $\\alpha$ makes $\\varepsilon_F$ invertible too. This uses the actual canonical derived adjunction assumed in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7U, lemma-equivalence-bounded, proof"
+   }
+  },
+  {
+   "text": "The small ringed-site hypothesis lets [prop-pur-kinjective-resolutions-exist] identify both module categories as Grothendieck abelian and provide the specified K-injective models. Module pullback and direct image are adjoint by [lem-weil-pbc-ringed-topoi-module-adjunction]. The right adjoint preserves limits by [lem-weil-pbc-right-adjoint-preserves-limits], so $f_*$ is left exact: it preserves kernels and finite products, the latter being finite biproducts in these additive module categories. These are the hypotheses needed for the spectral sequence in the next step.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7U, lemma-equivalence-bounded, proof"
+   }
+  },
+  {
+   "text": "Let $K\\in D^+_{\\mathcal A}$ have cohomology zero below $a$. The standard t-structure [def-sbc-standard-tstructure-derived-category] supplies a representative complex zero below $a$. Apply [thm-sp-truncation-e2] to $v=f_*$ and that representative. Its convergent spectral sequence has $E_2^{p,q}=H^p(Rf_*H^qK)$ for $p\\ge0$, zero for $p<0$, and abutment $H^{p+q}(Rf_*K)$. Step 2 makes every column except $p=0$ zero. Hence all differentials vanish. For total degree $n$ the stated finite exhaustive separated filtration has its only possible nonzero graded piece at $p=0$, namely $H^0(Rf_*H^nK)$; thus $H^n(Rf_*K)\\cong H^0(Rf_*H^nK)\\in\\mathcal B$. For $n<a$ that piece is zero. Consequently $Rf_*K\\in D^+_{\\mathcal B}$. No local cohomological bound or infinite-filtration convergence is used.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7U, lemma-equivalence-bounded, proof"
+   }
+  },
+  {
+   "text": "For every $q$, step 2 applied to $H^q(K)\\in\\mathcal A$ makes its canonical derived counit invertible. Since $K$ is bounded below and $f^*$ is exact, [lem-sfb-ringed-counit-from-cohomology] applies and proves that $\\varepsilon_K:f^*Rf_*K\\to K$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-counit-from-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7U, lemma-equivalence-bounded, proof"
+   }
+  },
+  {
+   "text": "Both functors now preserve the specified full subcategories. Restrict their canonical derived adjunction, unit and counit to these full subcategories; the hom bijections remain the same and the triangle identities remain valid. Step 1 gives its invertible unit and step 5 its invertible counit. Their inverses and the same triangle identities exhibit mutually quasi-inverse equivalences with precisely the asserted canonical unit and counit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D7U, lemma-equivalence-bounded, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-ringed-unit-from-cohomology",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "def-sbc-standard-tstructure-derived-category",
+  "thm-sp-truncation-e2",
+  "lem-sfb-ringed-counit-from-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D7U, lemma-equivalence-bounded, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded below derived equivalence induced by exact pullback equivalence on a Serre heart with vanishing higher direct images",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsSerreClassInverseImageOfPreservesFiniteLimitsOfPreservesFiniteColimits\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \"(F : D ⥤ C) [PreservesFiniteLimits F] [PreservesFiniteColimits F] : (P.inverseImage F).IsSerreClass\", \"doc\": \"Given an abelian category $\\\\mathcal{C}$, a Serre class $P$ on $\\\\mathcal{C}$, and a functor $F : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ that preserves both finite limits and finite colimits, the pullback of $P$ \"}\n  {\"name\": \"CategoryTheory.exactFunctor_le_leftExactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \": exactFunctor C D ≤ leftExactFunctor C D\", \"doc\": \"The set of exact functors from $\\\\mathcal{C}$ to $\\\\mathcal{D}$ is a subset of the set of left exact functors from $\\\\mathcal{C}$ to $\\\\mathcal{D}$.\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homEquiv\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"{n : ℕ} : Ext.{w} X Y n ≃ ShiftedHom ((singleFunctor C 0).obj X) ((singleFunctor C 0).obj Y) (n : ℤ)\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is equivalent to the hom-set in the derived category between the $ n $-shifted single-term cochain com\"}\n  {\"name\": \"CategoryTheory.IsPullback.exact_shortComplex'\", \"module\": \"Mathlib.CategoryTheory.Abelian.CommSq\", \"type\": \"(h : IsPullback t l r b) : h.shortComplex'.Exact\", \"doc\": \"In an abelian category, if a square is a pullback, then the associated short complex constructed from the commutative square using binary biproducts is exact. Specifically, the image of the first diff\"}\n  {\"name\": \"HasFibers.instIsEquivalenceFibFiberInducedFunctor\", \"module\": \"Mathlib.CategoryTheory.FiberedCategory.HasFibers\", \"type\": \": Functor.IsEquivalence (inducedFunctor p S)\", \"doc\": \"For a fibered functor $ p : \\\\mathcal{X} \\\\to \\\\mathcal{S} $ and an object $ S \\\\in \\\\mathcal{S} $, the induced functor from the fiber category $ \\\\text{Fib}_p(S) $ to the fiber $ \\\\mathcal{X}_S $ over $ S $\"}\n  {\"name\": \"CategoryTheory.HasExactLimitsOfShape.of_codomain_equivalence\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic\", \"type\": \"(J : Type*) [Category* J] {D : Type*} [Category* D] (e : C ≌ D) [HasLimitsOfShape J C] [HasExactLimitsOfShape J C] :\\n  haveI : HasLimitsOfShape J D := Adjunction.hasLimitsOfShape_of_equivalence e.inverse\\n  HasExactLimitsOfShape J D\", \"doc\": \"If categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ are equivalent, and $\\\\mathcal{C}$ has exact limits of shape $\\\\mathcal{J}$, then $\\\\mathcal{D}$ also has exact limits of shape $\\\\mathcal{J}$. This follows f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and abstract adjunction results do not turn an equivalence on weak Serre hearts into derived descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat morphism of ringed topoi induces equivalence on bounded below derived categories of weak Serre subcategories if pullback is an equivalence and derived unit is invertible on sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and abstract adjunction results do not turn an equivalence on weak Serre hearts into derived descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"equivalence\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and abstract adjunction results do not turn an equivalence on weak Serre hearts into derived descent"
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*equivalence|equivalence.*bounded|Serre.*derived",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"line\": \"41\", \"text\": \"/-- The weak equivalences in the category `CochainComplex.Plus C` of bounded\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: exact-functor localization and abstract adjunction results do not turn an equivalence on weak Serre hearts into derived descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback equivalence on weak Serre subcategories with derived unit isomorphisms induces bounded below derived equivalence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.isHomological_of_localization\", \"module\": \"Mathlib/CategoryTheory/Triangulated/HomologicalFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {A : Type u_3} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.HasShift C ℤ] [inst_2 : CategoryTheory.Category.{v_2, u_2} D]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.HasShift D ℤ]\\n  [inst_5 : CategoryTheory.P\", \"doc\": \"Let $\\\\mathcal{C}, \\\\mathcal{D}$ be pretriangulated categories and $\\\\mathcal{A}$ an abelian category. If $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a triangulated functor commuting with $\\\\mathbb{Z}$-indexed s\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"CategoryTheory.Functor.exact_tfae\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Abelian C]\\n  [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_4 : F.Additive],\\n  [∀ (S : CategoryTheory.ShortComplex C), \", \"doc\": \"For a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories, the following are equivalent: (1) $F$ preserves short exact sequences, (2) $F$ preserves exact complexes, (3) $F$ preserves \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"Given an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories that preserves finite limits/colimits and homology, this constructs the induced functor between the derived\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization, representatives, degree-zero derived comparisons or unrelated bounded objects; none propagates the canonical derived equivalence through all bounded-below cohomology objects"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat morphism of ringed topoi induces an equivalence on bounded below derived categories from an acyclic equivalence on hearts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": Flat f ↔ ∀ x, (f.stalkMap x).hom.Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization, representatives, degree-zero derived comparisons or unrelated bounded objects; none propagates the canonical derived equivalence through all bounded-below cohomology objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"equivalence\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization, representatives, degree-zero derived comparisons or unrelated bounded objects; none propagates the canonical derived equivalence through all bounded-below cohomology objects"
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*equivalence|equivalence.*bounded|Serre.*descent",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Topology/MetricSpace/GromovHausdorff.lean\", \"line\": \"734\", \"text\": \"to cover the spaces is uniformly bounded. This is an equivalence, but we only prove the\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"line\": \"41\", \"text\": \"/-- The weak equivalences in the category `CochainComplex.Plus C` of bounded\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Module/WeakDual.lean\", \"line\": \"60\", \"text\": \"* `WeakDual.isBounded_iff_isVonNBounded`: Equivalence of norm and weak-\\\\* boundedness for\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/LaxMilgram.lean\", \"line\": \"100\", \"text\": \"/-- The Lax-Milgram equivalence of a coercive bounded bilinear operator:\"}\n  {\"file\": \"Mathlib/ModelTheory/Syntax.lean\", \"line\": \"518\", \"text\": \"/-- An equivalence of bounded formulas given by an equivalence of terms and an equivalence of\"}\n  {\"file\": \"Mathlib/ModelTheory/Syntax.lean\", \"line\": \"693\", \"text\": \"/-- Maps a bounded formula's symbols along a language equivalence. -/\"}\n  {\"file\": \"Mathlib/Data/Set/Pairwise/Lattice.lean\", \"line\": \"142\", \"text\": \"/-- Equivalence between a disjoint bounded union and a dependent sum. -/\"}\n  {\"file\": \"Mathlib/Order/Category/BddLat.lean\", \"line\": \"162\", \"text\": \"/-- Constructs an equivalence between bounded lattices from an order isomorphism\"}\n  {\"file\": \"Mathlib/Order/Category/BddOrd.lean\", \"line\": \"170\", \"text\": \"/-- Constructs an equivalence between bounded orders from an order isomorphism between them. -/\"}\n  {\"file\": \"Mathlib/Order/Category/BddDistLat.lean\", \"line\": \"181\", \"text\": \"/-- Constructs an equivalence between bounded distributive lattices from an order isomorphism\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give localization, representatives, degree-zero derived comparisons or unrelated bounded objects; none propagates the canonical derived equivalence through all bounded-below cohomology objects"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-unbounded-descent-criterion",
+  "date": "2026-10-23",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: the general five-hypothesis unbounded criterion used in the proof of Stacks 0DHF; Tag 0D7V proof: the bounded-below equivalence before passing to truncations",
+   "via": [
+    "lem-sfb-ringed-unbounded-descent-criterion",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-bounded-below-descent-criterion",
+  "worker": "stage1",
+  "summary": "Verified Stacks 0D7U; separated the general bounded-below unit and counit detection inputs (0D7T/0D7S). The heart acyclicity and canonical counit are derived explicitly, and the existing finite-filtration truncation spectral sequence proves preservation of the cohomology subcategory. No statement change or local bound added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: the general five-hypothesis unbounded criterion used in the proof of Stacks 0DHF; Tag 0D7V proof: the bounded-below equivalence before passing to truncations; realizes the bounded-below prerequisite in 0D7V using 0D7U, its heart argument and spectral sequence. The imported created.item chain breaks at the historical Lean module name; ancestor tool currently returns None, retained faithfully.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic homological algebra input; no replacement is supplied by this unit."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General small ringed-site module Grothendieck property and K-injective existence, used to check the spectral-sequence hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic underived adjunction for arbitrary ringed topoi, used only to check left exactness of direct image."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Generic categorical limit preservation, to check left exactness of module direct image."
+   },
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "Generic homological algebra input; no replacement is supplied by this unit."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Generic bounded-below hypercohomology spectral sequence with finite convergence, explicitly used by Stacks 0D7U; the unit has no replacement for this general homological algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "def-sbc-standard-tstructure-derived-category",
+  "thm-sp-truncation-e2"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-a1a57c9f1",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-a1a57c9f1 (reviewer sub-agent of L); spot-checked: I read Stacks sites-cohomology.tex 0D7Q–0D7V in full. The item statement is unchanged and matches 0D7U: exact f^* stands for flatness, and the coefficient categories are Mod(O)/Mod(R) with the ordinary D^+. Nothing is weakened. All six steps check out against their cited statements. Step 1 uses exact-functor-complex-cohomology plus the 0D7T node, whose premise is exactly the heart hypothesis. Step 2 gets heart acyclicity and the canonical counit from the triangle identity and naturality along α, checked by hand. Step 3 gets f_* left exact and the Grothendieck/K-injective hypotheses from prop-pur-kinjective-resolutions-exist, the ringed-topoi module adjunction and right-adjoint limits. Step 4 uses the t-structure representative with thm-sp-truncation-e2 clauses 2, 5 and 6: the filtration is finite with only gr^0 nonzero, so H^n(Rf_*K)≅H^0(Rf_*H^nK)∈B. Step 5 uses the 0D7S node. Step 6 restricts the adjunction. The new nodes 0D7T/0D7S are self-contained, true by the source proofs and statement-only. They are strictly smaller than the item, not restatements, and I tested them on K=0, K=G[n], f=id and K with no upper bound. No duplicates in the snapshot or live. The closest generalization is lem-weil-pbc-heart-test-bounded-below. It is not a restatement, since applying it needs lem-pur-exact-derived-adjunction-bounds(1) and lem-sp-canonical-right-derived-adjunction-shift. Their workers should use that route. I accept the six generic tool_uses. The null from.node is inherited from base, and the report flags it (maintainer note). No SGA. The two grep search entries are duplicated (advisory). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedBoundedBelowDescent",
+  "declaration": "CategoryTheory.RingedToposMorphism.boundedBelowDescent",
+  "file": "lean/Sheaf/CategoryTheory/RingedBoundedBelowDescent.lean",
+  "statement": "theorem RingedToposMorphism.boundedBelowDescent {C D : Type u} [SmallCategory C] [SmallCategory D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (O : Sheaf J CommRingCat.{u}) (R : Sheaf K CommRingCat.{u}) [HasDerivedCategory.{wO} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O))] [HasDerivedCategory.{wR} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R))] (f : RingedToposMorphism ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O) ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (F : ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⥤ ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] (adj : F ⊣ f.modules) (Rf : DerivedCategory.{wO} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)) ⥤ DerivedCategory.{wR} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) (β : f.modules.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{wR} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ⟶ DerivedCategory.Q.{wO} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)) ⋙ Rf) (hRf : Rf.IsRightDerivedFunctor β (HomologicalComplex.quasiIso (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)) (.up ℤ))) (hKI : ∀ I : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)) ℤ, I.IsKInjective → IsIso (β.app I)) (d : F.mapDerivedCategory.{wR, wO} ⊣ Rf) (hd : ∀ P : CochainComplex (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ, d.unit.app (DerivedCategory.Q.{wR}.obj P) ≫ Rf.map (F.mapDerivedCategoryFactors.{wR, wO}.hom.app P) = DerivedCategory.Q.{wR}.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app P) ≫ β.app ((F.mapHomologicalComplex (.up ℤ)).obj P)) (A : ObjectProperty (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O))) (B : ObjectProperty (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) [hAContainsZero : A.ContainsZero] [hAIsClosedUnderIsomorphisms : A.IsClosedUnderIsomorphisms] [hAIsClosedUnderKernels : A.IsClosedUnderKernels] [hAIsClosedUnderCokernels : A.IsClosedUnderCokernels] [hAIsClosedUnderExtensions : A.IsClosedUnderExtensions] [hBContainsZero : B.ContainsZero] [hBIsClosedUnderIsomorphisms : B.IsClosedUnderIsomorphisms] [hBIsClosedUnderKernels : B.IsClosedUnderKernels] [hBIsClosedUnderCokernels : B.IsClosedUnderCokernels] [hBIsClosedUnderExtensions : B.IsClosedUnderExtensions] (eHeart : B.FullSubcategory ≌ A.FullSubcategory) (hHeart : eHeart.functor ⋙ A.ι ≅ B.ι ⋙ F) (hunit : ∀ G : ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R), B G → IsIso (d.unit.app ((DerivedCategory.singleFunctor.{wR} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) 0).obj G))) : (∃ e : (DerivedCategory.homologyProperty.{wR} B ⊓ (DerivedCategory.TStructure.t.{wR} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R))).plus).FullSubcategory ≌ (DerivedCategory.homologyProperty.{wO} A ⊓ (DerivedCategory.TStructure.t.{wO} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O))).plus).FullSubcategory, e.functor ⋙ (DerivedCategory.homologyProperty.{wO} A ⊓ (DerivedCategory.TStructure.t.{wO} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O))).plus).ι = (DerivedCategory.homologyProperty.{wR} B ⊓ (DerivedCategory.TStructure.t.{wR} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R))).plus).ι ⋙ F.mapDerivedCategory.{wR, wO} ∧ e.inverse ⋙ (DerivedCategory.homologyProperty.{wR} B ⊓ (DerivedCategory.TStructure.t.{wR} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R))).plus).ι = (DerivedCategory.homologyProperty.{wO} A ⊓ (DerivedCategory.TStructure.t.{wO} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O))).plus).ι ⋙ Rf) ∧ (∀ L : DerivedCategory.{wR} (ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R)), (DerivedCategory.homologyProperty.{wR} B ⊓ (DerivedCategory.TStructure.t.{wR} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj R))).plus) L → IsIso (d.unit.app L)) ∧ (∀ M : DerivedCategory.{wO} (ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)), (DerivedCategory.homologyProperty.{wO} A ⊓ (DerivedCategory.TStructure.t.{wO} (C := ringedSiteModules.{u, u, u, u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O))).plus) M → IsIso (d.counit.app M))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-949c938c0",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read node, 5 stmt_dep records (identical to live), Stacks 0D7U (sites-cohomology.tex 6390-6408), module and report (Worker report + Second reading sections present). All clauses match: ringed-topos f with comm. ring sheaves on SmallCategory sites at universe u (forced by RingedToposMorphism); exact F with adj : F ⊣ f.modules; Rf/β/hRf/hKI characterize the K-injective right derived direct image; d pinned by hd, exactly the Adjunction.derived unit equation behind mapDerivedCategoryRightDerivedAdjunction, satisfied by the canonical adjunction; weak Serre = ContainsZero+IsClosedUnderIsomorphisms/Kernels/Cokernels/Extensions; heart equivalence induced by F via hHeart; hunit on singleFunctor 0; D^+ = homologyProperty ⊓ t.plus; conclusion gives ∃ equivalence with functor = ι⋙FD and inverse = ι⋙Rf, plus d.unit/d.counit iso on D^+_B/D^+_A. Statement field verbatim; only lean field changed; no defs, proof only sorry, docstrings with source and blueprint and 6-step plan; imports exist. Edge cases (zero/whole subcategories, f=id, negative bounds, unbounded above) fine. No duplicate found. Not recompiled (no change). Nit: unused public import Grp.FilteredColimits."
+ }
+}

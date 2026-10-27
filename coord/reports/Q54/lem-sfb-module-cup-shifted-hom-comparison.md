@@ -1,0 +1,59 @@
+# Worker report — Q54
+
+1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-module-cup-shifted-hom-comparison.json` (item, split, statement unchanged); `dag/nodes/sec-six-functors-basics/lem-sfb-localization-tensorator-signed-shifts.json` (statement-only auxiliary, unsplit, no Mathlib match); `citations.json` (verbatim statements for every citation), and this report. `searches.jsonl` contains the actual msearch records. No Lean file was written or compiler run.
+2. Attachments: none. Searches of the project for the blueprint tag, module cup, and shifted cup found no declaration stating all clauses. Existing RingedSpace.moduleCohomology declarations provide only the resolution cohomology comparison. Existing étale constant-coefficient cup declarations have different coefficient categories and do not attach this item.
+3. WANTED: none.
+4. The imported item had no proof. Its normalization, target shifts, and absence of geometric/flatness assumptions need actual arguments. The proof now constructs the canonical comparison directly, rather than selecting any additive equivalence. No statement dispute or correction was needed. An initial citation to the Grothendieck-context `lem-sp-kinjective-computes` was replaced by the hypothesis-exact arbitrary-abelian-category criterion `lem-weil-pbc-bounded-below-injectives-kinjective`.
+5. No part of this one-level split is left unfinished. The signed lax-localization square is deliberately left as a searched statement-only child for a later worker. It is not the cup comparison itself.
+
+## Sources and searches
+
+I read cohomology.tex, section-cup-product (0FKU), the Hom-from-structure-sheaf construction and proof of lemma-second-cup-equals-first (0FP2), including the sign footnote, and lemma-diagrams-commute (0FKV), including its Godement/flasque reduction. I read derived.tex, lemma-K-injective (070I) and lemma-bounded-below-injectives-K-injective. For the child I read cohomology.tex, lemma-symmetric-monoidal-derived (0FPB), whose proof is omitted, and more-algebra.tex, item-shift-tensor. The source's shift convention is not silently imported: the child's displayed formula uses the item's shifted-first-degree convention. Its proof will be an agent expansion of K-flat derivation, not a claim that 0FPB literally states the square.
+
+The intended child argument is to express the canonical lax tensorator using K-flat replacements of K,L and their shifted replacements, compare the signed total maps there, and pass the resulting natural square through localization. Flat resolutions make the tensor of the replacement maps meaningful without asserting that the ordinary tensor of arbitrary quasi-isomorphisms is a quasi-isomorphism. This argument belongs here as a plan, not as a proof inside an unsplit node.
+
+I read the latest blueprint's sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md, especially (3). The item is a descendant supporting ordinary tensor cup identities far down the inherited alteration chain; it does not replace any chapter/unit route. `blueprint_refs.py ancestor` returns None; I retained the inherited null ancestor, precise place, and via chain. Whole-blueprint searches for cup, shifted Hom, shifted tensor, resolution comparison, tensor morphism, flat source, shifted flat, localization tensorator, and tensor shift localization produced no equivalent blueprint statement. DAG statement searches found the existing tools cited here and the related but narrower squares distinguished below.
+
+For the item and candidate child, msearch ran LeanFinder, LeanSearch, Loogle and Mathlib grep, with second phrasings. I read the returned hits, including SheafOfModules.unitHomEquiv (Sheaf.lean:178), its evaluation/naturality (183–192), and InjectiveResolution.extEquivCohomologyClass_symm_mk_hom (Injective/Ext.lean:47). These cover ingredients but do not assert the normalized ringed-space module-cohomology cup formula. The child searches returned derived functor shift comparisons, ordinary ring-localization tensor lemmas and abstract shift definitions, not the lax tensorator square. Neither node is a Mathlib leaf. Exact queries and outcomes, including empty Loogle/grep results, are recorded without invented searches. The earlier item's search records are retained.
+
+## Tool uses
+
+The split_report declares generic off-unit tools for enough injectives, the K-injective criterion and localization bijection, normalized resolution naturality, existence/realization/augmentation of computing pairings, the canonical native derived tensor comparison, and descent of signed shifts. These provide ordinary homological algebra and sheaf tensor infrastructure absent from the item's unit; they do not replace constructibility, alteration or direct-image arguments. No maintainer-owned tool_uses field was set.
+
+## Not duplicates
+
+lem-sfb-localization-tensorator-signed-shifts vs lem-sc-derived-tensor-right-coproducts: the shared 0FPB is a symmetric-monoidal background source; the existing statement preserves discrete coproducts and contains no shift/localization square.
+
+lem-sfb-localization-tensorator-signed-shifts vs lem-sc-scheme-derived-tensor-symmetry: the existing statement is naturality of the braiding, not compatibility of two integer shifts with the lax tensorator.
+
+lem-sfb-localization-tensorator-signed-shifts vs lem-sc-derived-internal-hom-adjunction: the existing statement is the closed adjunction and symmetry, with no signed localization square.
+
+lem-sfb-localization-tensorator-signed-shifts vs lem-sfb-single-tensor-augmentation-coherence: the existing statement concerns only single degree-zero sheaves and ordinary augmentation maps. The child concerns arbitrary complexes and arbitrary two-factor integer shifts and makes no assertion about cup products or augmentations.
+
+lem-sfb-localization-tensorator-signed-shifts vs lem-sc-scheme-tensor-shift-binary-localization-square: the existing square assumes a K-flat first complex and treats only its shift by one. The child compares the generally noninvertible lax tensorators on arbitrary K,L with two arbitrary shifts; nonflat computing resolutions are required here.
+
+lem-sfb-localization-tensorator-signed-shifts vs lem-sc-scheme-tensor-shift-localization-normalization: the existing statement assumes three K-flat complexes and gives two triple-tensor first-shift normalizations. It does not state the square for arbitrary nonflat pairs.
+
+lem-sfb-localization-tensorator-signed-shifts vs lem-weil-pbc-derived-tensor-shift-descent: the existing statement normalizes shifts on resolving models and one-variable tensor functors with a fixed K-flat complex. It does not explicitly state the square against the lax tensorator at arbitrary pairs of complexes. I did not take this missing assertion from its proof.
+
+lem-sfb-localization-tensorator-signed-shifts vs lem-sfb-module-cup-shifted-hom-comparison: the child concerns only localization and tensor shifts of arbitrary complexes; it neither represents module cohomology by Hom, nor normalizes coefficients/unit classes, nor identifies the ordinary cup. Steps 1–7 carry those arguments.
+
+## Review by Q54
+
+I reviewed delivery-errors B–E against the node files and source text. There is one real auxiliary statement, with introduced objects, explicit morphism types, inline meaning of the signed shift, dependencies defining each notion, no proof steps and no proof_deps. It is not an elementary cocycle identity or a repackaging of the cup conclusion. I retained the item statement, source, import/blueprint metadata and existing searches. Every step is under 2000 characters; the only concealed substantial comparison found during this review was separated as the signed tensorator child.
+
+Step 1 uses the enough-injectives statement for ordinary module sheaves, the arbitrary-abelian bounded-below injective criterion, and the actual definition of right-derived global sections. Those statements give exactly the objects and computing comparison used. Evaluation at 1 and its inverse r↦rz are written out, as is the identification of boundaries with homotopies. Shifting an injective complex keeps its terms injective and bounded below, so no shift-closure theorem is silently presumed.
+
+Step 2 uses the K-injective localization bijection, with K-injective targets supplied in Step 1, and the canonical resolution definition. It explicitly constructs the comparison arrow under the augmentations and cancels it, proving independence and the stipulated normalization rather than only existence of an equivalence.
+
+Step 3 again uses localization into K-injectives, then the normalized resolution-naturality statement: its square has the supplied augmentations and a representative comparison. It identifies the actual right-derived coefficient map. The degree-zero section and the section 1 are checked by cancellation; the identity is not deduced from an unspecified additive bijection.
+
+Step 4 uses the existence of a computing pairing for arbitrary module sheaves, its sectionwise realization, and the actual cochain augmentation equation. Each of these is explicitly in the cited statement, rather than only its proof. The native tensor statement supplies the canonical lax tensorator, and the single-tensor statement fixes m by flat augmentations. The displayed equation follows by tensorator naturality; it inverts only the individual localized augmentations, never their ordinary tensor.
+
+Step 5 uses the definition of computing resolution data (its comparison to an injective resolution gives the canonical class) and the definition of the ordinary unsigned cup (on every computing pairing it is the paired cocycle class). These are exactly the clauses copied into citations.json. Surjectivity of cohomology comparison gives representatives; the Leibniz identity makes the paired section closed. The formula for f,g follows by the augmentation equation and the Step 2 definition, so this is elementary assembly from established steps.
+
+Step 6 checks the only contributing chain-map degree: the first shifted degree is zero and the sign (-1)^(q·0) is +1. The realization acts on x tensor y by the paired cocycle. The cited tensor and shifted-morphism definitions fix the precise sign convention; the new child states the full lax-localization square, and the native tensor statement supplies naturality and the unit equation. This repairs the tempting but unjustified use of a K-flat-only shift square for the nonflat resolution complexes. The unit complex is K-flat directly since tensor by it is the identity.
+
+Step 7 substitutes the formulas already proved. The cited shift-descent statement explicitly gives naturality for arbitrary derived morphisms, including inverse quasi-isomorphisms, so moving the augmentations past t is licensed. The Step 4 augmentation equality gives the required target m. No extra theorem about cup products is invoked here.
+
+Small cases: p=q=0 gives the ordinary tensor of sections with no sign; p=0 or q=0 also gives sign +1 at the source degree. In the child a=b=0 gives the tensorator identity; a=0 or b=0 reduces to the corresponding single-factor square. For complexes concentrated in degrees r,s its comparison coefficient is (-1)^(b(r-a)), agreeing with the explicitly chosen shifted degree. Nonflat modules, for example Z/2 over Spec Z, are allowed: mu and m are never declared invertible, so Tor is retained. Zero sheaves and the empty scheme give zero groups and unique maps, with the zero object's identity equal to zero. No properness, separatedness, quasi-coherence, or flatness of coefficients was used. A read-only dependency walk found no path from any proposed dependency back to the item; the required server checks remain the authoritative mechanical verification.

@@ -1,0 +1,133 @@
+{
+ "id": "def-sf-completed-shriek-refinement-maps",
+ "kind": "definition",
+ "title": "Specified system compact-support functor and reverse refinement map",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a simultaneous system-operation package $o$ [def-sf-integral-system-operations], with its system interpretation [def-sf-integral-system-expression-domain]. For a scheme morphism $f:X\\to Y$ and a compactification $c=(j_c,p_c)$ [def-weil-compactifications-refinements], define the system compact-support functor $B_c=S_{p_c}\\circ J_{j_c}$ (first $J_{j_c}$, then $S_{p_c}$). Given a finite-field datum $D$ and normalized realization data $\\mathcal R$ [def-sf-integral-system-realization-data], and a refinement $r:c\\to d$ with quasi-compact $j_c,j_d$, define the reverse refinement transformation $B_d\\to B_c$ by inserting the inverse proper-image identity unitor before $J_{j_d}$, applying the specified proper/open map $\\Gamma$ for the commuting square with top $j_c$, left $1_X$, right $r$, bottom $j_d$, whiskering by $S_{p_d}$, and then applying the proper-image compositor $S_{p_d}\\circ S_r\\to S_{p_c}$, using $p_d r=p_c$. The identity unitor is the canonical system bridge followed by the intrinsic semilinear proper-image identity unitor. These are actual functor and natural-transformation constructions; no refinement law or invertibility assertion is included.",
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "def-sf-integral-system-realization-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7J: the specified proper/open map and the compactification system functor, before any finite evaluation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compact support strict integral coefficient systems and the canonical refinement transformation",
+   "results": "{\"t\": \"2026-10-24T19:34:42Z\", \"tool\": \"leansearch\", \"query\": \"Compact support strict integral coefficient systems and the canonical refinement transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactlySupportedContinuousMap.instFunLike\", \"CompactlySupported.term_→C_c_\", \"CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun\", \"CompactlySupportedContinuousMap.integralLinearMap\", \"MeasureTheory.LocallyIntegrable.integrable_smul_left_of_hasCompactSupport\", \"CompactlySupportedContinuousMap.recOn\", \"CompactlySupportedContinuousMap.integralPositiveLinearMap\", \"CompactlySupportedContinuousMap.casesOn\"], \"digest\": \"b30851f1fba7b3e0\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match for this construction; reuse the published project declaration with existing:true."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support strict integral coefficient systems canonical reverse refinement transformation",
+   "results": "{\"t\": \"2026-10-24T19:35:01Z\", \"tool\": \"leanfinder\", \"query\": \"Compact support strict integral coefficient systems canonical reverse refinement transformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BoxIntegral.IntegrationParams.GP\", \"BoxIntegral.IntegrationParams.gp_le\", \"BoxIntegral.IntegrationParams.RCond\", \"BoxIntegral.IntegrationParams.McShane\", \"BoxIntegral.IntegrationParams.MemBaseSet.unionComplToSubordinate\", \"BoxIntegral.IntegrationParams\", \"BoxIntegral.IntegrationParams.exists_memBaseSet_le_iUnion_eq\", \"BoxIntegral.IntegrationParams.rCond_of_bRiemann_eq_false\"], \"digest\": \"1c6a0c4375201d5f\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match for this construction; reuse the published project declaration with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "completedShriekF|completedShriekRefinement|refinementDiagramWords|refinementRestriction|finiteTorIntegralInclusion|coefficientPrimeUnit|inverseOrZero",
+   "results": "{\"t\": \"2026-10-24T19:34:58Z\", \"tool\": \"grep\", \"query\": \"completedShriekF|completedShriekRefinement|refinementDiagramWords|refinementRestriction|finiteTorIntegralInclusion|coefficientPrimeUnit|inverseOrZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match for this construction; reuse the published project declaration with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"^(def|theorem) (completedShriekF|completedShriekRefinement)\\b\" lean/WeilConjectures lean/Sheaf; scan dag/nodes lean records; blueprint_refs.py search completedShriekF",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/SixFunctors/CompletedShriekCompositionLaws.lean:64:def completedShriekF (o : Operations l E) {X Y : Scheme.{u}} {f : X ⟶ Y}\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/SixFunctors/CompletedShriekCompositionLaws.lean:115:def completedShriekRefinement {D : FiniteFieldDatum.{u}} {o : Operations l E}\nNo upstream definition. Existing theorem-node declaration lists contain the helpers, but no definition node owns them. Blueprint exact-name search: 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "Register the existing declarations requested by returned H2, without copying or changing Lean code."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-integral-normalized-refinement-pasting",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Existing explicit route: sk-thm-sf-tensor-hom. Proof, third Hom bijection Rf_! dashv Rf^!, and the final assertion of compatibility with finite reduction, scalar extension and shifts; constructible adjunction only, not the optional ambient datum. Extracted old coefficient-coherence proof steps 10. Definition interface: Specified system compact-support functor and reverse refinement map.",
+   "via": [
+    "lem-sf-integral-normalized-refinement-pasting",
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompletedShriekCompositionLaws",
+  "declaration": "WeilConjectures.IntegralSystemRealization.completedShriekF",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.completedShriekF",
+   "WeilConjectures.IntegralSystemRealization.completedShriekRefinement"
+  ],
+  "statement": "def completedShriekF (o : Operations l E) {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (c : Compactification f) : System l E X ⥤ System l E Y",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Returned H2 repair: definition ownership for exactly the listed published declarations. No theorem conclusion from the containing theorem node is used. The source and constructions are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e37cfac7",
+  "group": "Q58",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e37cfac7",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after the e923 H2 RETURN. The item module is byte-identical to e923, whose mathematics was reviewed in full and found correct. The item record changes only stmt_deps (plus the new lean record). The 4 theorem stmt_deps are replaced by 4 new existing:true def owners: def-sf-completed-shriek-refinement-maps (completedShriekF, completedShriekRefinement), def-sf-refinement-diagram-words (refinementDiagramWords), def-sf-integral-refinement-normalization-data (refinementRestriction, finiteTorIntegralInclusion, coefficientPrimeUnit, proved) and def-sf-inverse-or-zero (inverseOrZero). Signatures and prose match the side-live source; none is hollow; no duplicate owner on live; no cycle; brief §5 fields present. Every other identifier in the statement is owned by a def node in the stmt_dep closure. Advisory: sfCompactSupportFiniteIntegralFunctor is reached through def-weil-integral-rational-qbar-compact-support, as in five landed citers; the def-sf-refinement-diagram-words lean.statement overruns into the next declaration, an extractor artefact that is cosmetic. No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261026T023842-L-609052",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.IntegralSystemRealization.completedShriekAssociativity",
+   "WeilConjectures.IntegralSystemRealization.completedShriekFiniteEvaluation",
+   "WeilConjectures.IntegralSystemRealization.completedShriekIntegralComposition",
+   "WeilConjectures.IntegralSystemRealization.completedShriekSpecifiedIntegral",
+   "WeilConjectures.IntegralSystemRealization.completedShriekUnits"
+  ],
+  "sorry_after": [
+   "WeilConjectures.IntegralSystemRealization.completedShriekAssociativity",
+   "WeilConjectures.IntegralSystemRealization.completedShriekFiniteEvaluation",
+   "WeilConjectures.IntegralSystemRealization.completedShriekIntegralComposition",
+   "WeilConjectures.IntegralSystemRealization.completedShriekSpecifiedIntegral"
+  ]
+ }
+}

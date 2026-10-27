@@ -26,114 +26,70 @@
  ],
  "proof": [
   {
-   "text": "Write $r=(r_n)_n$ and $\\theta=(\\theta_n)_n$. The reductions satisfy $t_nr_{n+1}=r_n$: on a tensor generator this says that reducing $x\\otimes1$ once more gives $x\\otimes1$. Part (b) of [def-weil-inverse-image-pullback-comparison] gives $v_n\\theta_{n+1}=\\theta_n$ and that every $\\theta_n$ is a chain map over the completed coefficient sheaf. Thus $(1-s_D)\\Gamma(r)=0$ and $(1-s_C)\\theta=0$. With the displayed differential, $d(0,\\theta(w))=(0,\\theta(dw))$ and $d(0,\\Gamma(r)z)=(0,\\Gamma(r)dz)$. Consequently both specified zero-first-component lifts are chain maps; this uses equality in the strict towers before localization.",
+   "text": "The two reduction presentations are definitionally identical. For every complex P, apply [lem-trf-strict-quotient-unit-compatible], then the section-complex functor. After each product projection the reduction tuple composed with one minus shift is the nth unit minus the next unit followed by transition, hence zero. This proves augmentation_condition and constructs the specified zero shifted-coordinate lift without any goodness assumption.",
    "uses": [
-    "def-weil-inverse-image-pullback-comparison"
+    "lem-trf-strict-quotient-unit-compatible"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), explicit strict-cone comparison and localization calculation written by Q121"
-   }
+   "elementary": false
   },
   {
-   "text": "For a strict tower map $f:X_\\bullet\\to Y_\\bullet$ define $U_f((x_n))=(f_nx_n)$. Strictness gives $(1-s_Y)U_f=U_f(1-s_X)$, so $H(f)(b,a)=(U_fb,U_fa)$ commutes with $d(b,a)=(-db-(1-s_X)a,da)$. In particular this specifies $H(u)$ on both products. By [lem-weil-proetale-countable-products-exact], evaluation of the sheaf products is the product of the evaluations. Sections are additive and exact by [lem-weil-point-proetale-sections-exact], so they identify the finite direct sum and both differentials as well. Hence $c_C$ is a chain isomorphism, identity on the two products, and for every strict map of sheaf towers $f$ it satisfies $c_{C'}\\Gamma H(f)=H(\\Gamma f)c_C$.",
+   "text": "The mapping-cocone lift equations and product projection equations give both coordinates of augmentation and, directly from the construction in [def-weil-inverse-image-pullback-comparison], both coordinates of inverseImageRoosComparisonComplex. The normalized section comparison of [lem-trf-completed-stalk-reparametrization-coherence] and the diagonal Roos-map formulas reduce the unshifted coordinate equality to hv, and both shifted coordinates to zero. Product projections and the two cocone projections jointly determine a chain map. No clause of the separate cone-lifts-and-chain-naturality statement is needed. The proved generic Roos-map coordinate API of [lem-trf-point-quotient-augmentation-diagram] and product/cocone extensionality API of [lem-weil-finite-free-completed-scalar-comparison] supply these elementary identities; their larger final comparison packages are not applied.",
    "uses": [
-    "lem-weil-proetale-countable-products-exact",
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-trf-completed-stalk-reparametrization-coherence",
+    "lem-trf-point-quotient-augmentation-diagram",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-trf-point-transport-resolution-cancellation] to q. The representative formula characterizing integral point transport in [def-weil-frobenius-point-transport], at the identity representing isomorphism, identifies its resolution recipe with the specified integral transport. Substitute the strict comparison into the cancellation formula. Multiplication by the invertible derived section map of q gives the other derived identity; the strict sigma square is the cancellation lemma's third clause.",
+   "uses": [
+    "lem-trf-point-transport-resolution-cancellation",
+    "def-weil-frobenius-point-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a good quasi-isomorphism a, its image under the good-complex localization is invertible. The canonical targetComparison of [lem-trf-point-pullback-cone-localization], constructed from integral-operations well-definedness, exact point sections and the sections/Roos comparison, conjugates that image under completed pullback and sections to the actual diagonal sectionwise Roos map. Functors preserve isomorphisms, and Mathlib NatIso.isIso_map_iff proves pullbackRoof_isIso even without the non-characteristic hypothesis.",
+   "uses": [
+    "lem-trf-point-pullback-cone-localization",
+    "lem-pur-integral-operations-well-defined",
     "lem-weil-point-proetale-sections-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), explicit strict-cone comparison and localization calculation written by Q121"
-   }
+   "elementary": false
   },
   {
-   "text": "Evaluate the left side of the claimed strict equality on $z\\in\\Gamma(P)^i$. By the definitions of the lifts and of $c_C$, it is $(0,(\\Gamma(\\theta_n)\\sigma_Pz)_n)$. The assumed augmentation equations identify this with $(0,(u_n\\Gamma(r_n)z)_n)$. The diagonal formula in step 2 identifies the latter with $H(u)a_P(z)$. The first product component in degree $i-1$ is zero on both sides, not merely invisible under projection to a finite level. Equality degree by degree proves the asserted equality of chain maps.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), explicit strict-cone comparison and localization calculation written by Q121"
-   }
-  },
-  {
-   "text": "Clause (1) of [lem-weil-frobenius-point-transport-natural] applies to every complex of integral coefficient modules, without constructibility or completeness. For the chain map $q:P\\to N$ it gives $\\sigma_N\\Gamma(q)=\\Gamma(g^{-1}q)\\sigma_P$. By [lem-weil-point-proetale-sections-exact], $\\Gamma(q)$ is a quasi-isomorphism. The transported module inverse image in [def-weil-inverse-image-pullback-comparison] preserves quasi-isomorphisms, so $\\Gamma(g^{-1}q)$ is one too. Their classes are therefore invertible in the derived category.",
+   "text": "Reuse the already proved naturalIntegralTransport helper of [lem-weil-frobenius-point-transport-natural], whose components are the specified integral transport. Step 3 supplies its resolution formula. At the identity resolution, representativeComparison_eq identifies b_id with the canonical target comparison of [lem-trf-point-pullback-cone-localization], since all mapped identities are identities. Conjugating the ambient natural transformation by the source and target comparisons therefore gives a natural transformation on good complexes with components exactly coneArrow. No separate reconstruction of chain naturality or ambient descent is needed.",
    "uses": [
     "lem-weil-frobenius-point-transport-natural",
-    "lem-weil-point-proetale-sections-exact",
-    "def-weil-inverse-image-pullback-comparison"
+    "lem-trf-point-pullback-cone-localization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), explicit strict-cone comparison and localization calculation written by Q121"
-   }
+   "elementary": false
   },
   {
-   "text": "The ambient operation of [def-pur-integral-derived-operations] is represented on $q:P\\to N$ by $H(C_\\bullet)$. Its functorial representative comparisons and their independence are supplied by [lem-pur-integral-operations-well-defined](2). Composing that comparison with $c_C$ defines the asserted $b_q$. Under it, part (b) of [def-weil-inverse-image-pullback-comparison] gives $\\Gamma(\\kappa_N)=[\\Gamma\\widetilde\\theta_P][\\Gamma(g^{-1}q)]^{-1}$. Combine this formula with step 4 and then step 3:\n$$b_q\\iota_N[\\Gamma(q)]=[c_C\\Gamma\\widetilde\\theta_P][\\Gamma(g^{-1}q)]^{-1}\\sigma_N[\\Gamma(q)]=[c_C\\Gamma\\widetilde\\theta_P]\\sigma_P=[H(u)a_P].$$\nRight-compose with $[\\Gamma(q)]^{-1}$ for the second displayed identity. At this point only the resolution maps and $c_C$ have been inverted.",
-   "uses": [
-    "def-pur-integral-derived-operations",
-    "lem-pur-integral-operations-well-defined",
-    "def-weil-inverse-image-pullback-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), explicit strict-cone comparison and localization calculation written by Q121"
-   }
-  },
-  {
-   "text": "Assume now the stated chain naturality of $u(P)$. For a chain map $h:P\\to P'$ in the resolving class write $h_D,h_B,h_C$ for its induced tower maps. Reduction gives $\\Gamma(h_n)\\Gamma(r_n)=\\Gamma(r'_n)\\Gamma(h)$, since both maps send $x$ to $h(x)\\otimes1$. Similarly, the finite comparison $x\\mapsto x\\otimes1$ in [def-weil-inverse-image-pullback-comparison](a) gives $h_{C,n}\\theta_n=\\theta'_ng^{-1}h$. Thus $H(h_D)a_P=a_{P'}\\Gamma(h)$, and $H(h_C)\\widetilde\\theta_P=\\widetilde\\theta_{P'}g^{-1}h$, including zero first components. By the assumption $h_Bu(P)=u(P')h_D$ and the diagonal formula, putting $\\eta_P=[H(u(P))a_P]$ gives $[H(h_B)]\\eta_P=\\eta_{P'}[\\Gamma(h)]$. The maps $c_C$ commute with these comparisons by step 2.",
-   "uses": [
-    "def-weil-inverse-image-pullback-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), explicit strict-cone comparison and localization calculation written by Q121"
-   }
-  },
-  {
-   "text": "Use the small-site and module-universe convention of [def-weil-pbc-proetale-site]. By [lem-weil-pbc-site-derived-tensor-descent], localization of the homotopy category of flat-term K-flat module complexes at its quasi-isomorphisms is equivalent to the ambient $D(R)$. The source functor on this class is $P\\mapsto\\Gamma P$; its homotopy and quasi-isomorphism invariance follows from exact sections [lem-weil-point-proetale-sections-exact]. The target functor is $P\\mapsto\\Gamma H(C(P))$, identified with $H(B(P))$ by $c_C$. Its factorization through the derived category, quasi-isomorphism invariance and specified natural representative comparisons are exactly [lem-pur-integral-operations-well-defined](1),(2), followed by exact sections. Therefore the chain naturality equations of step 6 are also equations in the homotopy category. Apply [lem-weil-pbc-localization-universal-property](2),(3), with these two functors and the resolving-class localization, to extend $\\eta$ uniquely to a natural transformation of the ambient derived functors. This uses the equivalence for all flat-term K-flat objects, rather than assuming a chain lift between two arbitrarily chosen resolutions.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-pur-integral-operations-well-defined",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), explicit strict-cone comparison and localization calculation written by Q121"
-   }
-  },
-  {
-   "text": "Explicitly, for the stated roof put $S(h)=[\\Gamma(h)]$ and $T(h)=[H(h_B)]$. Both $S(a)$ and $T(a)$ are invertible by step 7. Naturality for $a:Q\\to P$ gives $T(a)^{-1}\\eta_P=\\eta_QS(a)^{-1}$. Hence\n$$T(b)T(a)^{-1}\\eta_P=T(b)\\eta_QS(a)^{-1}=\\eta_{P'}S(b)S(a)^{-1}.$$\nThis is the required square for $[b][a]^{-1}$, and step 7 ensures independence of its presentation. For a representative $q:P\\to N$, the descended component, expressed using $b_q$, is $\\eta_P[\\Gamma(q)]^{-1}$ by naturality. Step 5 identifies this with the specified $\\iota_N$. Uniqueness of the descent and the specified target comparisons then identify the expressions from any two representatives. The strict equality in step 3 and its derived versions therefore describe the same natural map. No step inverted $a_P$ or invoked completeness of $N$.",
+   "text": "Componentwise equality with the specified transport proves uniqueness of the natural transformation. For two resolutions, compose each formula of step 3 with its representative comparison inverse; both recipes equal that same transport. For the roof identity, apply the naturality square of coneArrow to a and b. Cancel the invertible source map of a, then cancel the target map with its inverse. This gives eta_P followed by T(a) inverse and T(b) equal to S(a) inverse, S(b), eta_Pprime. Identify T(a) inverse with pullbackRoofIso.inv. Only resolution maps and specified comparison isomorphisms are inverted.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "clause (3), explicit strict-cone comparison and localization calculation written by Q121"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-inverse-image-pullback-comparison",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-weil-frobenius-point-transport-natural",
-  "def-pur-integral-derived-operations",
+  "lem-trf-strict-quotient-unit-compatible",
+  "lem-trf-completed-stalk-reparametrization-coherence",
+  "lem-trf-point-transport-resolution-cancellation",
+  "def-weil-frobenius-point-transport",
   "lem-pur-integral-operations-well-defined",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-point-proetale-sections-exact",
+  "lem-trf-point-pullback-cone-localization",
+  "lem-weil-frobenius-point-transport-natural",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-trf-point-quotient-augmentation-diagram",
+  "lem-weil-finite-free-completed-scalar-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "clause (3), explicit cone and derived-roof argument supplementing the blueprint; resolving-class localization as in Stacks Tags 06YS, 0G7D, 06YU and the cited DAG statements"
+  "document": "literature/blueprint/latest/blueprint/sec-trace-formula/sk-d-weil/_section.md",
+  "place": "Integral Frobenius model clause (3), realization steps 5--6; strict coordinates, canonical resolution cancellation and conjugation of the already constructed ambient natural transport"
  },
  "mathlib_searches": [
   {
@@ -236,33 +192,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-trf-point-transport-cone-comparison-descent",
   "worker": "stage1",
-  "summary": "Q121 writes the two-product chain equality explicitly, cancels only the resolution quasi-isomorphism, and proves chain naturality and derived descent using existing resolving-class localization and operation-invariance statements. No new nodes. Corrected the reference for arbitrary N to the existing ambient completed pullback, retaining all hypotheses and conclusions.",
-  "blueprint": "prop-trf-rational-frobenius-integral-model proof clause (3): integral passage to the derived limit. This item supplies the actual comparison (b) on both cone components and its derived-roof naturality, as split off in the parent realization steps 5-6.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Sectionwise products identify both coordinates of the strict Roos cone; the unit has no such general sheaf-product theorem."
-   },
-   {
-    "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Exact point sections invert the resolution quasi-isomorphisms; no constructibility is required."
-   },
-   {
-    "node": "lem-pur-integral-operations-well-defined",
-    "why": "Uses invariance under good quasi-isomorphisms and the specified natural comparisons for ambient completed pullback, not a different purity route."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Only its resolving-class localization equivalence is used for arbitrary derived morphisms; the unit does not supply that generic localization theorem."
-   },
-   {
-    "node": "lem-weil-frobenius-point-transport-natural",
-    "why": "Only clause (1), ambient chain naturality of sigma, is used; no naturality of integral iota is presumed."
-   }
-  ]
+  "summary": "Repair of the batch5 re-split return: retain the item statement verbatim, and extract three separate statement-only arguments (strict cone lifts and chain naturality; resolution cancellation for the actual comparison; localization and roof descent). The five-step assembly is under 3000 characters. Original eight steps and their allocation are preserved verbatim in report.md. No Lean changes or compiler use.",
+  "blueprint": "Proof clause (3) of prop-trf-rational-frobenius-integral-model, derived-limit realization, through parent lem-trf-integral-point-transport-tower-realization steps 5-6. All eight returned steps are allocated to the new nodes or the explicit two-coordinate calculation retained in the assembly.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-proetale-countable-products-exact",
@@ -272,12 +207,12 @@
   "lem-weil-frobenius-point-transport-natural"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q121-4b91099d9",
-  "group": "Q121",
+  "reviewer": "NT-cc-Q134-8a0d12e4f",
+  "group": "Q134",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-4b91099d9 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and every cited statement in full: comparison (b) and (a), point-transport def, point-transport-natural (1), integral-operations-well-defined (1),(2), def-pur-integral-derived-operations, def-weil-derived-pullback-tensor-hom, sections-exact, countable-products-exact, site-derived-tensor-descent, localization universal property (Mathlib leaf). Also read the parent realization node with its re-split note, both siblings, and blueprint prop-trf-rational-frobenius-integral-model clause (3). The statement change is only a reference repair. Lg*N for arbitrary N is now typed by the ambient def-pur-integral-derived-operations, which is what comparison (b) itself already names; def-weil-derived-pullback-tensor-hom is kept as its restriction. No hypothesis was added or conclusion dropped, and stmt_deps match the references. Checked by hand: t_n r_{n+1}=r_n and v_nθ_{n+1}=θ_n make both zero-first-component lifts chain maps. c_C is the identity on sectionwise products and is natural. c_CΓ(θ̃_P)σ_P(z)=(0,(u_nΓ(r_n)z))=H(u)a_P(z), including the shifted component. σ_NΓ(q)=Γ(g⁻¹q)σ_P uses clause (1) only, which holds for all complexes. Γ(q) and Γ(g⁻¹q) are quasi-isomorphisms: k is algebraically closed and the transported inverse image is exact. Descent works because P_R→D(R) is a localization (site-descent equivalence) and both functors invert W_R (well-defined (1) plus exact Γ); then liftNatTrans and natTrans_ext apply. Roof algebra checked. Edge cases: R in degree 0 gives lim A_n=O_E with lim¹=0; R[1/ϖ] gives P_n=0 and a zero map, so the statement correctly claims no invertibility. No cycle (closure of 11870 nodes), no SGA, no duplicate found by grep. All five off-unit tool_uses accepted as generic. Advisory 1: step 5's formula for a non-chosen representative P relies on step 6's naturality of θ̃; step 8 supplies it, so the argument is complete but out of order. Advisory 2: step 2 re-proves the two-line c_X clause of the unsplit sibling lem-trf-point-sections-completion-cone; no duplicate node is created. No files changed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-8a0d12e4f (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full: comparison (a)/(b), def-weil-frobenius-point-transport, point-transport-natural (1), integral-operations-well-defined (1),(2), site-derived-tensor-descent, localization-universal-property, def-trf-point-sections-roos-comparison and lem-trf-point-sections-completion-cone. I also read blueprint main-20261015 prop-trf-rational-frobenius-integral-model.proof clause (3) and the live repair note (released 2026-10-22: at least 2 new nodes, proof at most 3000 characters). The live item still has the base 8-step proof, so no parallel re-split has landed. The statement and stmt_deps are byte-identical to live, and there is no SGA. Every old step is carried over. Old steps 1, 2 and 6 go to lem-trf-point-cone-lifts-chain-naturality (strict equalities, the lifts are chain maps, H(f) and natural c_X, chain naturality of a_P and θ̃, and e_P). Old steps 4 and 5 go to lem-trf-point-transport-resolution-cancellation (the σ square, the quasi-isomorphisms, and b_q ι_{N,q} = [c Γθ̃ σ_P][Γq]⁻¹, indexed by the resolution q). Old steps 7 and 8 go to lem-trf-point-pullback-cone-localization (S and T invert W_R, unique η̄ with b_q η̄ = η_P[Γq]⁻¹, and the roof square). Old step 3 is written out as elementary assembly step 2. The node statements are 2772, 3201 and 3305 characters, comparable in size, and none restates the item. The parent proof is 1980 characters. I checked by hand the cancellation algebra, the chain-map and naturality identities, the roof algebra, and the assembly's step 5: b_q is invertible and η̄_N equals ι_{N,q} for every q, so the identities hold for every q and are independent of q. This also clears the old ordering advisory. Hypotheses checked: k algebraically closed (Γ exact), g⁻¹ exact, flat-term K-flatness wherever operations-well-defined (1) is used, N arbitrary, no completeness, no inversion of a_P. Small cases: P=0, P=R in degree 0, q=id, η=0, identity roof. B1–B9 hold (statement-only, unsplit, refs equal stmt_deps, blueprint from/via correct), and there is no cycle. Advisories: the H(f)/c_X naturality clause in the cone-lifts node repeats the first paragraph of the sibling lem-trf-point-sections-completion-cone; the item's tool_uses still list the five old off-unit tools, which are maintainer-owned. No files changed."
  },
  "lean": {
   "module": "Sheaf.Paper.PointTransportConeComparisonDescent",
@@ -301,7 +236,10 @@
    "WeilConjectures.PointTransportCone.pointTransportConeComparison",
    "WeilConjectures.PointTransportCone.pullbackRoof_isIso",
    "WeilConjectures.PointTransportCone.pullbackRoofIso",
-   "WeilConjectures.PointTransportCone.pointTransportConeComparisonDescent"
+   "WeilConjectures.PointTransportCone.pointTransportConeComparisonDescent",
+   "WeilConjectures.PointTransportCone.reductionTower",
+   "WeilConjectures.PointTransportCone.pullbackTower",
+   "WeilConjectures.PointTransportCone.sections_map_isIso"
   ],
   "file": "lean/Sheaf/Paper/PointTransportConeComparisonDescent.lean",
   "statement": "theorem pointTransportConeComparisonDescent (hl : l ≠ D.p) (v : (integralOperationsGoodComplex l E (Spec (.of D.k))).ι ⋙ reductionTowers D l E ⟶ (integralOperationsGoodComplex l E (Spec (.of D.k))).ι ⋙ pullbackTowers D l E) (hv : ∀ (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (n : ℕ), frobeniusPointIntegralSigma D l E P.obj ≫ (sections D l E).map (inverseImageReductionTheta l E (frobeniusPointIso D).hom n P.obj) = reductionUnit D l E P.obj n ≫ (v.app P).app (op n)) : (∃! η : pointFibreIntegralAmbient D l E ⟶ integralDerivedPullback l E (frobeniusPointIso D).hom ⋙ pointFibreIntegralAmbient D l E, (∀ N : DerivedCategory (integralTowerModules l E (Spec (.of D.k))), η.app N = frobeniusPointTransportIntegral D l hl E N) ∧ (∀ (N : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (q : P.obj ⟶ N) [QuasiIso q], η.app (DerivedCategory.Q.obj N) ≫ (representativeComparison D l E N P q).hom = inv ((pointFibreIntegralAmbient D l E).map (DerivedCategory.Q.map q)) ≫ resolvedArrow D l E P.obj (v.app P))) ∧ (∀ (N : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (P P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (q : P.obj ⟶ N) (q' : P'.obj ⟶ N) [QuasiIso q] [QuasiIso q'], inv ((pointFibreIntegralAmbient D l E).map (DerivedCategory.Q.map q)) ≫ resolvedArrow D l E P.obj (v.app P) ≫ (representativeComparison D l E N P q).inv = inv ((pointFibreIntegralAmbient D l E).map (DerivedCategory.Q.map q')) ≫ resolvedArrow D l E P'.obj (v.app P') ≫ (representativeComparison D l E N P' q').inv) ∧ (∀ (P Q P' : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (a : Q ⟶ P) (b : Q ⟶ P') [QuasiIso a.hom], IsIso ((moduleQ l E).map (integralOperationsRoosMap ((pullbackTowers D l E).map a.hom))) ∧ (coneArrow D l E P.obj (v.app P) ≫ (pullbackRoofIso D l E P Q a).inv ≫ (moduleQ l E).map (integralOperationsRoosMap ((pullbackTowers D l E).map b.hom)) = inv ((moduleQ l E).map ((sections D l E).map a.hom)) ≫ (moduleQ l E).map ((sections D l E).map b.hom) ≫ coneArrow D l E P'.obj (v.app P')))",
@@ -318,5 +256,27 @@
   "group": "Q14",
   "result": "pass",
   "note": "Read node, report (Worker report + Second reading by Q14 present), module, and the exact declarations: sectionsRoos(_existsUnique), moduleQ, unrestrictedTowerUnit/Complex, unrestrictedIntegralComplexFunctor/Transition, scalarReductionExtension, inverseImageReductionTheta/RoosComparisonComplex/PullbackComparison, frobeniusPointIntegralSigma/TransportIntegral(_existsUnique), pointFibreIntegralAmbient. Every clause matches with directions checked, including the strict two-coordinate chain equality with zero shifted component, b_q via the specified pullback comparison, both derived identities, NatTrans chain naturality, unique descent equal to the actual iota, resolution independence and the explicit roof square; no completeness, no a_P inverse, no extra universe constraints. Mechanical theorem stmt_dep finding: c_C = CompletedStalk.sectionsRoos is the .choose of the postponed ∃! sectionsRoos_existsUnique of lem-trf-completed-stalk-reparametrization-coherence, a theorem-constructed object, so PASS on that point; moduleQ is only a Mathlib DerivedCategory.Q alias (advisory). def-weil-integral-reduction-tower existing:true record lists unrestrictedTowerUnit. No cycle; delta = lean + 2 stmt_deps; statement verbatim; all declarations present. reductionSectionModel_eq is definitional (both sides .choose of an identical change-of-rings term). Docstrings, source places, sorry-only proofs: ok. No compile (no change); worker reports 28.7 s and 56.1 s. Advisories: inline moduleQ, rfl for the model equation, 56 s close to the limit, redundant imports."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-86492",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261026T070744-L-3653604",
+  "kind": "interface",
+  "note": "independent cc review: item PointTransportConeComparisonDescent proofs vs node lem-trf-point-transport-cone-comparison-descent; adapted DerivedScalarExtensionRestrictionAdjunction vs published + importer compile §3b"
  }
 }

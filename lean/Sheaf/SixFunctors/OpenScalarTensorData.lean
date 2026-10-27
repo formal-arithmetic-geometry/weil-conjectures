@@ -246,14 +246,33 @@ def scalarComp {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
           (CommRingCat.ofHom (RingHom.ulift φ))
           (CommRingCat.ofHom (RingHom.ulift ψ))).symm)
 
-/-- Scalar multiplication gives the identity-coefficient unitor.
+/-- The canonical scalar identity is uniquely fixed to its original restriction-adjunction
+construction. This equality specification shields the derived localization from reduction.
+Source: Stacks 07A6 (blueprint: def-sp-open-scalar-tensor-data).
+Proof: the displayed isomorphism is a witness, and equality to it implies uniqueness. -/
+theorem scalarId_existsUnique (A : Type u) [CommRing A] (T : Scheme.{u}) :
+    ∃! e : scalar m (RingHom.id A) T ≅ 𝟭 (proEtaleDerivedCategory T A),
+      e = eqToIso (congrArg (fun a ↦ ((m T).scalar a).derived)
+    ((constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}).map_id
+      (CommRingCat.of (ULift.{u + 1, u} A)))) ≪≫
+    scalarHomExtensionId (m T) (proEtaleConstantRing T A) := by
+  exact ⟨_, rfl, fun _ h ↦ h⟩
+
+/-- The unit-normalized identity scalar isomorphism, with its original canonical value.
 Source: Stacks 07A6 (blueprint: def-sp-open-scalar-tensor-data). -/
 def scalarId (A : Type u) [CommRing A] (T : Scheme.{u}) :
     scalar m (RingHom.id A) T ≅ 𝟭 (proEtaleDerivedCategory T A) :=
-  eqToIso (congrArg (fun a ↦ ((m T).scalar a).derived)
+  (scalarId_existsUnique m A T).exists.choose
+
+/-- Explicit equation for the canonical scalar identity.
+Source: Stacks 07A6 (blueprint: def-sp-open-scalar-tensor-data).
+Proof: this is the defining equality of the uniquely specified identity isomorphism. -/
+theorem scalarId_eq (A : Type u) [CommRing A] (T : Scheme.{u}) :
+    scalarId m A T = eqToIso (congrArg (fun a ↦ ((m T).scalar a).derived)
     ((constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}).map_id
       (CommRingCat.of (ULift.{u + 1, u} A)))) ≪≫
-    scalarHomExtensionId (m T) (proEtaleConstantRing T A)
+    scalarHomExtensionId (m T) (proEtaleConstantRing T A) :=
+  (scalarId_existsUnique m A T).exists.choose_spec
 
 /-- All clauses of the open scalar normalization, on ordinary unbounded module
 categories. The projection maps and scalar tensor identifications are prescribed

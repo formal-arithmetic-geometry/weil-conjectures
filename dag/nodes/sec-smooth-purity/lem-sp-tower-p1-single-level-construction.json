@@ -1,0 +1,154 @@
+{
+ "id": "lem-sp-tower-p1-single-level-construction",
+ "kind": "statement",
+ "title": "Existence of exact singleton realizations and normalized comparisons",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a scheme $S$ on which $\\ell$ is invertible, and $n\\geq0$. For every projective-line presentation $p$, maps $d$, and etale-origin comparison record $h$ [lem-sp-tower-p1-etale-origin-comparisons], there exists SingleLevelComparisons [def-sp-tower-p1-single-level-data] at the finite ring $B_{n+1}$, whose finiteness is supplied by $p$. This asserts only existence of exact zero-off-n embeddings and their canonical normalized operation comparisons, with no assertion of finite or tower triangle identities.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levels, single-level realization and evaluation of the finite triangle words"
+ },
+ "stmt_deps": [
+  "def-sp-tower-p1-single-level-data",
+  "lem-sp-tower-p1-etale-origin-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "For a sheaf $N$ of $B_n$-modules on $T_{\\mathrm{proet}}$, define $s_{n,T}N$ by $(s_{n,T}N)_n=N$, $(s_{n,T}N)_m=0$ for $m\\ne n$, and all adjacent transitions zero. Every transition is semilinear: both $t_m(ax)$ and $\\bar a\\,t_m(x)$ are zero. Send a module map to that map in level $n$ and zero in all other levels. The transition squares commute, and identities and compositions are componentwise by [sk-def-sp-coefficient-towers]. Kernels and cokernels in the tower category are componentwise by [det-sp-coefficient-towers-abelian], so $s_{n,T}$ is additive and exact. Moreover $e_ns_{n,T}=1$, and $e_ms_{n,T}=0$ for $m\\ne n$. For comparison inverse image, [def-weil-pbc-site-comparison-morphism] gives its action on the underlying sheaf and every scalar operation. Exactness on abelian sheaves is [lem-weil-pbc-site-pullback-abelian-exact]; module kernels and cokernels carry the induced scalar actions and have the underlying abelian kernels and cokernels, so this also proves exactness of $\\nu_T^*$ on $B_n$-module sheaves.",
+   "uses": [
+    "sk-def-sp-coefficient-towers",
+    "det-sp-coefficient-towers-abelian",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levels, final paragraph; single-level test objects for the finite triangle identities"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-exact-functor-derived-triangulated] to the exact composite $s_{n,T}\\nu_T^*$. Its termwise application defines the exact derived functor $J_{n,T}$. Exactness carries quasi-isomorphisms to quasi-isomorphisms, so the construction is independent of representatives and acts on derived morphisms, not only on objects. On a representative $L^\\bullet$, its cohomology is $\\nu_T^*H^r(L^\\bullet)$ at level $n$ and zero elsewhere, because both functors preserve kernels and cokernels. Thus a lower cohomological bound for $L$ is also one for $J_{n,T}L$. The equalities $e_nJ_{n,T}=\\nu_T^*$ and $e_mJ_{n,T}=0$ for $m\\ne n$ follow termwise. The witness at $n$ is $(L,1)$ and at $m\\ne n$ is $(0,1)$ in the sense of [def-weil-pbc-etale-origin-witness]. Consequently the image lies in $\\mathscr C^+(T)$.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, applied to the exact singleton functor"
+   }
+  },
+  {
+   "text": "Use [lem-coef-semilinear-derived-sections] for the natural comparisons $e_nF\\simeq Rq_{*,B_n}e_n$ on pro-etale categories and $e_nq_\\bullet^*=q^{-1}e_n$, and for compatibility with tensor, composition and the specified adjunction-mate maps. Apply [lem-sp-tower-p1-etale-origin-comparisons] to pass, on etale-origin levels, to the corresponding ordinary etale operations through the specified comparison mate. Substituting $e_nJ_{n,P}=\\nu_P^*$ and $e_nJ_{n,S}=\\nu_S^*$ yields natural isomorphisms $a_L:e_nFJ_{n,P}L\\simeq\\nu_S^*F_nL$ and $b_H:e_nGJ_{n,S}H\\simeq\\nu_P^*G_nH$. Twists and the shift $[2]$ are included in that cited compatibility. The cited comparison lemma also says that $F,G$ preserve the displayed bounded-below etale-origin domains. Hence it applies again to $FJ_{n,P}L$, $GJ_{n,S}H$ and their iterates. Compose its natural comparisons to obtain those for $FG$ and $GF$. This uses only the level witnesses just constructed, not a compatible choice of etale representatives for a general tower; the cited lemma imposes no finite-Tor hypothesis.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sp-tower-p1-etale-origin-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+    "place": "Levels, final paragraph; single-level test objects for the finite triangle identities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sp-tower-p1-etale-origin-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md",
+  "place": "Levels, single-level realization and evaluation of the finite triangle words"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functor embedding sheaves into a single level of an inverse system with zero transitions and reflecting triangle identities",
+   "results": "CategoryTheory.Functor.IsHomological.mk; ComplexShape.Embedding.truncLEFunctor and truncGEFunctor; CategoryTheory.fullyFaithfulSheafToPresheaf. None constructs this varying-ring single-level comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Embed a sheaf at a single level of an inverse system with all other levels zero, then reflect adjunction triangle identities through a faithful functor",
+   "results": "CategoryTheory.constantSheafAdj_counit_w; constant sheaf adjunction and condensed sheaf comparison declarations. None states the single-level construction or its normalized composite-word squares.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleLevel|singleton|triangle.*reflect",
+   "results": "msearch: unrelated singleton-set and subsingleton hits. Local rg finds the assigned item and SystemSingletonScalarExtension; the latter is nonzero at lower levels, so does not supply the zero-off-n singleton.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerP1SingleLevelTriangles",
+  "date": "2026-10-25",
+  "group": "W4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Levels, single-level realization and evaluation of the finite triangle words",
+   "via": [
+    "lem-sp-tower-p1-single-level-triangles"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerP1SingleLevelConstruction",
+  "file": "lean/Sheaf/Paper/TowerP1SingleLevelConstruction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerP1.singleLevelConstruction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerP1.singleLevelConstruction"
+  ],
+  "statement": "theorem singleLevelConstruction (S : Scheme.{u}) (hS : IsUnit (l : Γ(S, ⊤)))\n    (p : Presentation l E S hS) (d : Maps l E p) (h : EtaleOriginComparisons l E p d) :\n    letI : Finite (SpTowerShriek.R l E n) := p.classes.base.finite n\n    Nonempty (SingleLevelComparisons l E n d h)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-95075",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T164647-L-1048928",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-95075",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T164647-L-1048928",
+  "kind": "interface",
+  "note": "independent cc review: delivered TowerP1SingleLevelData/Construction/Transport/Triangles + 4 nodes vs clone 919a934 item module and node; moved decls byte-identical, item signature identical; new sorries checked against FormulaLevelComparisons/levelComparisons/pushWord/originWord; sandbox run_set build rc 0, #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

@@ -1,0 +1,240 @@
+{
+ "id": "lem-fd-fixed-pair-equivalence-transport",
+ "kind": "statement",
+ "title": "Equivalence transport for invertible endofunctor fixed pairs",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be categories in a common sufficiently large universe [def-nagata-category], $F:\\mathcal C\\to\\mathcal C$ and $G:\\mathcal D\\to\\mathcal D$ endofunctors, $J:\\mathcal C\\simeq\\mathcal D$ an equivalence, and $b:J\\circ F\\xrightarrow{\\sim}G\\circ J$ a natural isomorphism (ordinary composition notation). Use the fixed-pair categories [def-weil-endofunctor-fixed-pair-category]. Then\n$$\\widetilde J:\\mathcal C^F\\simeq\\mathcal D^G,\\qquad (K,\\theta)\\longmapsto(JK,J(\\theta)\\circ b_K^{-1}),\\quad u\\longmapsto J(u)$$\nis an equivalence with the displayed underlying functor. For any two source pairs, the Hom bijection of $\\widetilde J$ is exactly the Hom bijection of $J$ restricted to intertwining arrows; explicitly, writing $\\psi_K=J(\\theta_K)b_K^{-1}$, for every $u:K\\to K'$ one has\n$$J(u)\\psi_K=\\psi_{K'}G(Ju)\\quad\\Longleftrightarrow\\quad u\\theta_K=\\theta_{K'}F(u).$$\nMoreover, for every target pair $(H,\\psi)$ and every isomorphism $v:JK\\xrightarrow{\\sim}H$, the unique arrow $\\theta:F K\\to K$ whose $J$-image is $v^{-1}\\psi G(v)b_K$ is invertible, with inverse the unique lift of $(v^{-1}\\psi G(v)b_K)^{-1}$; $v$ is an isomorphism from $\\widetilde J(K,\\theta)$ to $(H,\\psi)$. No equivalence assumption on $F$ or $G$ is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence: transport of Weil structures to the PBC coefficient category; returned proof steps 4–7; agent-written auxiliary, full inherited argument retained in report.md"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-quasi-inverse-hom-bijection] to the functor of $J$ and its quasi-inverse. Thus $u\\mapsto J(u)$ is bijective on each Hom set; in particular $J$ is full and faithful. Write all compositions in ordinary order. Since $\\theta_K$ and $b_K$ are invertible, $\\psi_K=J(\\theta_K)b_K^{-1}$ is invertible with inverse $b_KJ(\\theta_K^{-1})$. Hence $(JK,\\psi_K)$ is an object of the target fixed-pair category [def-weil-endofunctor-fixed-pair-category].",
+   "uses": [
+    "lem-sf-quasi-inverse-hom-bijection",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02C3 (categories-lemma-equivalence-categories), equivalence implies full faithfulness; elementary inverse formula"
+   }
+  },
+  {
+   "text": "For any $u:K\\to K\\prime$, naturality of $b$ reads $G(Ju)b_K=b_{K\\prime}J(Fu)$. Consequently\n$$J(u)\\psi_K=J(u\\theta_K)b_K^{-1},\\qquad\\psi_{K\\prime}G(Ju)=J(\\theta_{K\\prime}Fu)b_K^{-1}.$$\nCancel $b_K^{-1}$ and use the injectivity established in step 1. This proves the displayed equivalence of intertwining equations for every $u$, in both directions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence: explicit naturality calculation for fixed-pair transport"
+   }
+  },
+  {
+   "text": "By the morphism definition in [def-weil-endofunctor-fixed-pair-category], step 2 makes $u\\mapsto J(u)$ a map on fixed-pair morphisms. It preserves identities and composition because $J$ does, so together with step 1 it defines the displayed functor $\\widetilde J$. Given a target intertwining arrow between two image objects, the Hom bijection in step 1 gives a unique $u$; step 2 says that this $u$ intertwines the source structures. Thus the Hom bijection of $\\widetilde J$ is exactly the restriction of that of $J$ to intertwining arrows.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence: functoriality and restricted Hom bijection"
+   }
+  },
+  {
+   "text": "Fix any target pair $(H,\\psi)$ and any isomorphism $v:JK\\xrightarrow{\\sim}H$. The composite $w=v^{-1}\\psi G(v)b_K$ is an isomorphism $J(FK)\\to JK$: an explicit inverse is $b_K^{-1}G(v^{-1})\\psi^{-1}v$, since functors preserve compositions and identities. The functor $J$ is fully faithful by step 1, so [lem-cbc-fully-faithful-isomorphism-lift], applied to $FK,K$, gives a unique isomorphism $\\theta:FK\\xrightarrow{\\sim}K$ with $J(\\theta)=w$. By the Hom bijection in step 1 this is also the unique arrow with that image; and $J(\\theta^{-1})=w^{-1}$, so its inverse is precisely the unique lift asserted in the statement.",
+   "uses": [
+    "lem-cbc-fully-faithful-isomorphism-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence: lift the conjugated structure map, using FullyFaithful.isoEquiv (Mathlib/CategoryTheory/Functor/FullyFaithful.lean:217)"
+   }
+  },
+  {
+   "text": "For the lift in step 4, direct cancellation gives\n$$v\\psi_K=vJ(\\theta)b_K^{-1}=\\psi G(v).$$\nTherefore $v$ is a fixed-pair morphism. Multiplying this equality by $v^{-1}$ on the left and $G(v^{-1})$ on the right gives $v^{-1}\\psi=\\psi_KG(v^{-1})$. Thus $v^{-1}$ is also a fixed-pair morphism; their composites are the identity arrows by [def-weil-endofunctor-fixed-pair-category]. This proves the asserted fixed-pair isomorphism for every specified $v$.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence: check both directions of the lifted pair isomorphism"
+   }
+  },
+  {
+   "text": "For every $H$ choose $K=J^{-1}H$ and $v:JK\\xrightarrow{\\sim}H$ to be the component of the counit isomorphism of the given equivalence $J$. Steps 4 and 5 show that every target pair is isomorphic to an image pair. Step 3 proves bijectivity on Hom sets. Apply [lem-trf-fully-faithful-ess-surj-equivalence] (Stacks Tag 02C3, categories-lemma-equivalence-categories) to $\\widetilde J$, in the common sufficiently large universe stipulated in the statement. It gives an equivalence with this very functor. None of the constructions or cancellations used an inverse functor for $F$ or $G$.",
+   "uses": [
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02C3 (categories-lemma-equivalence-categories), fully faithful and essentially surjective implies equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-quasi-inverse-hom-bijection",
+  "def-weil-endofunctor-fixed-pair-category",
+  "lem-cbc-fully-faithful-isomorphism-lift",
+  "lem-trf-fully-faithful-ess-surj-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final coefficient-category sentence; general fixed-pair transport argument written by NR, with Stacks Tag 02C3 for the equivalence criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence J between categories commuting with endofunctors F and G by a natural isomorphism induces an equivalence of categories of pairs K with an isomorphism F K to K and intertwining arrows",
+   "results": "8 hits; CategoryTheory.Limits.HasColimit.isoOfEquivalence; CategoryTheory.Limits.reflexivePair.mkNatIso; CategoryTheory.Limits.HasLimit.isoOfEquivalence; CategoryTheory.Equivalence.changeFunctor; CategoryTheory.Equivalence.mkIso; CategoryTheory.Arrow.isoOfNatIso; CategoryTheory.Functor.isEquivalence_of_iso; CategoryTheory.Limits.CategoricalPullback.mkNatIso",
+   "date": "2026-10-22",
+   "verdict": "no match: equivalence of functor categories or noninvertible endofunctor algebras is not this equivalence of invertible fixed-pair categories with restricted Hom map"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|fullyFaithfulMapOfNatIso|mapOfNatIso",
+   "results": "1 hits; Mathlib/Algebra/Category/AlgCat/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: equivalence of functor categories or noninvertible endofunctor algebras is not this equivalence of invertible fixed-pair categories with restricted Hom map"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra'",
+   "date": "2026-10-22",
+   "verdict": "no match: equivalence of functor categories or noninvertible endofunctor algebras is not this equivalence of invertible fixed-pair categories with restricted Hom map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of invertible endofunctor algebras along an equivalence commuting with endofunctors is fully faithful and essentially surjective with Hom bijection the restriction of the underlying functor",
+   "results": "8 hits; CategoryTheory.Equivalence.fullyFaithfulFunctor; CategoryTheory.Equivalence.induced_functor; CategoryTheory.Equivalence.full_functor; CategoryTheory.Functor.FullyFaithful.mulEquivEnd; CategoryTheory.Equivalence.induced; CategoryTheory.Equivalence.fullyFaithfulToEssImage; CategoryTheory.Equivalence.fullyFaithfulInverse; CategoryTheory.Functor.FullyFaithful.mulEquivEnd_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: equivalence of functor categories or noninvertible endofunctor algebras is not this equivalence of invertible fixed-pair categories with restricted Hom map"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra",
+   "results": "12 hits; CategoryTheory.Endofunctor.Algebra; CategoryTheory.Endofunctor.instInhabitedAlgebraId; CategoryTheory.Endofunctor.Algebra.a; CategoryTheory.Endofunctor.Algebra.instCategory; CategoryTheory.Endofunctor.Algebra.instCategoryStruct; CategoryTheory.Endofunctor.Algebra.Hom; CategoryTheory.Endofunctor.Algebra.Hom.id; CategoryTheory.Endofunctor.Algebra.forget",
+   "date": "2026-10-22",
+   "verdict": "no match: equivalence of functor categories or noninvertible endofunctor algebras is not this equivalence of invertible fixed-pair categories with restricted Hom map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of categories of objects equipped with an invertible structure map from an endofunctor by conjugating the endofunctor using an equivalence of the base categories",
+   "results": "8 hits; CategoryTheory.Equivalence.congrLeftFunctor_map; CategoryTheory.Equivalence.congrLeft; CategoryTheory.Equivalence.induced_unitIso; CategoryTheory.Equivalence.Equivalence_mk'_unit; CategoryTheory.Equivalence.unitIso; CategoryTheory.Equivalence.trans; CategoryTheory.Equivalence.unit; CategoryTheory.Equivalence.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: equivalence of functor categories or noninvertible endofunctor algebras is not this equivalence of invertible fixed-pair categories with restricted Hom map"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|equivalenceOf.*Algebra|Algebra.*equivalenceOf",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern functor categories, adjunction mates, or noninvertible algebras for naturally isomorphic endofunctors on a single category; none states the complete transport and inverse-lift assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence transport of categories of fixed pairs with invertible endofunctor structure maps and explicit Hom bijection",
+   "results": "8 hits: CategoryTheory.Monoidal.Transported, CategoryTheory.Functor.FullyFaithful.homEquiv, CategoryTheory.Functor.FullyFaithful.isoEquiv, CategoryTheory.Iso.homCongr, CategoryTheory.StructuredArrow.commaMapEquivalence, CategoryTheory.InducedCategory.homEquiv, CategoryTheory.Functor.asEquivalence, CategoryTheory.Cat.isoOfEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern functor categories, adjunction mates, or noninvertible algebras for naturally isomorphic endofunctors on a single category; none states the complete transport and inverse-lift assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra, CategoryTheory.Equivalence",
+   "results": "2 hits: CategoryTheory.Endofunctor.Adjunction.algebraCoalgebraEquiv, CategoryTheory.Endofunctor.Algebra.equivOfNatIso",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern functor categories, adjunction mates, or noninvertible algebras for naturally isomorphic endofunctors on a single category; none states the complete transport and inverse-lift assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of categories commuting with two endofunctors induces an equivalence on objects with invertible structure maps from those endofunctors",
+   "results": "8 hits: CategoryTheory.Equivalence.congrLeft, Functor.mapEquiv, EquivFunctor.mapEquiv, CategoryTheory.Equivalence.changeFunctor, CategoryTheory.Equivalence.induced, CategoryTheory.Equivalence.inducedFunctorOfEquiv, EquivFunctor.mapEquiv_apply, CategoryTheory.Equivalence.induced_unitIso",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern functor categories, adjunction mates, or noninvertible algebras for naturally isomorphic endofunctors on a single category; none states the complete transport and inverse-lift assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugate endofunctors along equivalent categories have equivalent categories of invertible algebras",
+   "results": "8 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateEquiv, CategoryTheory.Equivalence.congrLeftFunctor_map, CategoryTheory.conjugateEquiv_symm_iso",
+   "date": "2026-10-22",
+   "verdict": "no match: candidates concern functor categories, adjunction mates, or noninvertible algebras for naturally isomorphic endofunctors on a single category; none states the complete transport and inverse-lift assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-frobenius-fixed-pair-comparison",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Final sentence: transport of Weil structures to the PBC coefficient category; returned proof steps 4–7",
+   "via": [
+    "lem-fd-frobenius-fixed-pair-comparison",
+    "lem-fd-rational-coefficient-category-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fd-fixed-pair-equivalence-transport",
+  "worker": "stage1",
+  "summary": "Retained the statement and inherited searches; added a complete six-step proof of fixed-pair transport. Naturality proves both directions of the intertwining test, the underlying Hom bijection restricts exactly, and the conjugated structure map lifts uniquely as an isomorphism with the specified inverse. Reused the existing general Hom-bijection, isomorphism-lift and equivalence-criterion Mathlib leaves; no new nodes.",
+  "blueprint": "Realizes the final coefficient-category sentence of def-fd-trace-function in main-20261015, via lem-fd-rational-coefficient-category-comparison and lem-fd-frobenius-fixed-pair-comparison: transport the whole Weil pair along an equivalence commuting with pullback. sk-def-trace has no proof steps and its route and the chapter are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-ca1c3df8e",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-ca1c3df8e (reviewer sub-agent of L); spot-checked: Read the item and every step in full; there are no new nodes and nothing is changed, so no fix files. The statement types check: psi_K=J(theta)b_K^{-1}:G(JK)->JK, and w=v^{-1}psi G(v)b_K:J(FK)->JK. Step 1: lem-sf-quasi-inverse-hom-bijection (Equivalence.fullyFaithfulFunctor) gives full faithfulness of J, and psi_K has inverse b_K J(theta^{-1}). Step 2: naturality gives b_{K'}^{-1}G(Ju)=J(Fu)b_K^{-1}, so both sides equal J(-)b_K^{-1}; cancelling and faithfulness give both directions. Step 3: the restricted Hom bijection follows by fullness. Step 4: lem-cbc-fully-faithful-isomorphism-lift (FullyFaithful.isoEquiv) applied to FK,K gives the unique lift theta, and J(theta^{-1})=w^{-1}. Step 5: v psi_K = psi G(v), and the v^{-1} condition was checked. Step 6: the counit gives essential surjectivity, then Functor.asEquivalence applies. proof_deps equals the union of uses and the elementary flags are honest. Edge cases tested: empty categories, identity data, a nonidentity central b (confirms b's orientation), and a constant non-equivalence F=G. No hypothesis on F or G is used. Stacks 02C3 (categories.tex:403-415) was read. The blueprint def-fd-trace-function lineage is agent-written and its route is unchanged; the unit sk-def-trace has no steps. Duplicate search over the DAG with rg -L for fixed-pair-category and asEquivalence: the adjunction-lift, functor-transport, strict-intertwiner, right-adjoint-comparison and pod mate-transport nodes are all different statements. Batch-5 citation lem-trf-fully-faithful-ess-surj-equivalence is accepted: it is a Mathlib leaf with empty closure stating the general Stacks 02C3 criterion, not a step of the trace formula or Poincare duality proofs. No off-unit statement is cited, so no tool_uses are needed. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FixedPairEquivalenceTransport",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_equivalence_transport",
+  "file": "lean/Sheaf/CategoryTheory/FixedPairEquivalenceTransport.lean",
+  "statement": "theorem fixedPair_equivalence_transport {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D] (F : C ⥤ C) (G : D ⥤ D) (J : C ≌ D) (b : F ⋙ J.functor ≅ J.functor ⋙ G) : (mapOfNatIso b.symm).IsEquivalence ∧ (∀ K : IsoAlgebra F, ((mapOfNatIso b.symm).obj K).carrier = J.functor.obj K.carrier ∧ ((mapOfNatIso b.symm).obj K).obj.str = b.inv.app K.carrier ≫ J.functor.map K.obj.str) ∧ (∀ (K K' : IsoAlgebra F) (f : K ⟶ K'), ((mapOfNatIso b.symm).map f).hom.f = J.functor.map f.hom.f) ∧ (∀ K K' : IsoAlgebra F, Function.Bijective ((mapOfNatIso b.symm).map : (K ⟶ K') → ((mapOfNatIso b.symm).obj K ⟶ (mapOfNatIso b.symm).obj K'))) ∧ (∀ (K K' : IsoAlgebra F) (u : K.carrier ⟶ K'.carrier), ((b.inv.app K.carrier ≫ J.functor.map K.obj.str) ≫ J.functor.map u = G.map (J.functor.map u) ≫ b.inv.app K'.carrier ≫ J.functor.map K'.obj.str) ↔ K.obj.str ≫ u = F.map u ≫ K'.obj.str) ∧ (∀ (H : IsoAlgebra G) (K : C) (v : J.functor.obj K ≅ H.carrier), ∃ θ : F.obj K ≅ K, (∀ t : F.obj K ⟶ K, J.functor.map t = b.hom.app K ≫ G.map v.hom ≫ H.obj.str ≫ v.inv ↔ t = θ.hom) ∧ (∀ t : K ⟶ F.obj K, J.functor.map t = v.hom ≫ H.str.inv ≫ G.map v.inv ≫ b.inv.app K ↔ t = θ.inv) ∧ ∃ e : (mapOfNatIso b.symm).obj (mk K θ) ≅ H, e.hom.hom.f = v.hom ∧ e.inv.hom.f = v.inv)",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06c286e96",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Item node unchanged except lean; statement verbatim; not landed or delivered elsewhere. IsoAlgebra = exact mathlib_match specialization of def-weil-endofunctor-fixed-pair-category (one notion). mapOfNatIso b.symm gives structure b.inv≫J(θ) = J(θ)b_K^{-1} (orientation checked). Clauses match the node: IsEquivalence, obj/map formulas, Hom bijectivity, intertwining iff for all u, unique lift θ of b≫G(v)≫ψ≫v⁻¹ with unique inverse lift v≫ψ⁻¹≫G(v⁻¹)≫b⁻¹, pair iso with underlying maps v/v⁻¹. No assumptions on F, G; general universes u,v,u',v'; edge cases (empty, identity, non-identity b, non-equivalence F, G, arbitrary v) OK. No existing transport theorem (fullyFaithfulMapOfNatIso, twistEquivalence, IsoAlgebraAdjunction differ); citer FrobeniusFixedPairComparison uses the same API and orientation. Docstrings carry the source, blueprint tag and 6 steps; sorry only. Advisory: plain IsoAlgebraFullyFaithful import is proof-only. No compile (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261023T102955-L-3027268",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.fixedPair_equivalence_transport"
+  ],
+  "sorry_after": []
+ }
+}

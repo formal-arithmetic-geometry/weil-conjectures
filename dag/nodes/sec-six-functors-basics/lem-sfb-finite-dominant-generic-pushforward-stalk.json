@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-finite-dominant-generic-pushforward-stalk",
+ "kind": "statement",
+ "title": "Generic stalk of the structure sheaf under a finite dominant morphism",
+ "statement": "Let $X,Y$ be integral schemes [def-pc-scheme, def-pc-integral-scheme], and let $f:X\\to Y$ be a finite morphism [def-weil-finite-integral-morphism] whose image is dense in $Y$. Write $\\eta_X,\\eta_Y$ for their generic points [def-sc-generic-point], and $k(X)=\\mathcal O_{X,\\eta_X}$ and $k(Y)=\\mathcal O_{Y,\\eta_Y}$ for their function fields [def-sc-function-field]. Equip $k(X)$ with the canonical $k(Y)$-algebra structure of the dominant morphism [def-sfb-dominant-function-field-map]. Let $\\mathcal F=f_*\\mathcal O_X$ be the sheaf of $\\mathcal O_Y$-algebras defined on an open $V\\subseteq Y$ by $\\mathcal F(V)=\\Gamma(f^{-1}V,\\mathcal O_X)$. Its stalk [def-weil-pbc-module-stalk] at $\\eta_Y$ is a $k(Y)$-algebra. The canonical map\n$$\\mathcal F_{\\eta_Y}\\longrightarrow k(X),$$\nwhich sends the germ of a section over $f^{-1}V$ to its germ at $\\eta_X$, is an isomorphism of $k(Y)$-algebras. No smoothness, normality, flatness, dimension, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYZ (lemma-degree-pullback-map-proper-curves), first sentence of the proof identifying the generic rank of the finite direct image with the function-field degree; the generic-stalk comparison used there, for finite dominant morphisms of integral schemes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-sfb-dominant-function-field-map",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood $V$ of $\\eta_Y$. Finiteness makes $U=f^{-1}V$ affine. Apply [lem-sfb-dominant-affine-germ-comparison]: with $A=\\Gamma(V,\\mathcal O_Y)$, $B=\\Gamma(U,\\mathcal O_X)$, $\\varphi:A\\to B$, $C=(f_*\\mathcal O_X)_{\\eta_Y}$ and its maps $j_A,j_B,\\iota,\\sigma,c,\\alpha$, both rings are domains, $\\varphi$ is injective, the generic prime of $V$ is zero, and $k(X)$ is the fraction field of $B$ through $j_B$. This lemma also gives $c\\iota=j_B$ and $c\\sigma=\\alpha$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-dominant-affine-germ-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CC1, lemma-dominant-between-integral, proof of (1)-(4): generic points, zero primes and injective affine maps; combined with sheaves.tex stalk construction (Tags 0078, 007J) for the explicit germ squares and their fraction formulas."
+   }
+  },
+  {
+   "text": "By [lem-sc-affine-pushforward-stalk-localization], the actual germ map $\\iota:B\\to C$ localizes $B$ at $S=\\varphi(A\\setminus\\{0\\})$: its affine-morphism hypothesis follows from finiteness, and its target prime is zero by step 1. Thus every element of $C$ has the form $\\iota(b)\\iota(\\varphi(a))^{-1}$ with $a\\ne0$. For $a\\ne0$, injectivity of $\\varphi$ and $j_B$ gives $j_B(\\varphi(a))\\ne0$. Since $c\\iota=j_B$, the image of that fraction is $j_B(b)j_B(\\varphi(a))^{-1}$.",
+   "uses": [
+    "lem-sc-affine-pushforward-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, lemma-affine-morphism-equivalence, proof: affine stalk calculation."
+   }
+  },
+  {
+   "text": "Finite implies integral by [pqf-lem-finite-integral-lft]. The affine monic-equation condition in [def-weil-finite-integral-morphism] therefore applies to $A\\to B$. Apply [lem-sfb-integral-localization-fraction-comparison] with this injection, $S=\\varphi(A\\setminus\\{0\\})$, the actual localization $\\iota:B\\to C$ of step 2 and the injective fraction map $j=j_B:B\\to k(X)$ of step 1. It makes its specified comparison $q:C\\to k(X)$ bijective. For each $b\\in B$ and $a\\ne0$, its formula and step 2 give $q(\\iota(b)\\iota(\\varphi(a))^{-1})=j_B(b)j_B(\\varphi(a))^{-1}=c(\\iota(b)\\iota(\\varphi(a))^{-1})$. Every element has this form. Also both ring maps extend $j_B$, since $c\\iota=j_B$ by step 1; hence the uniqueness clause of the same lemma identifies $q=c$. Thus the canonical germ map $c$ is bijective.",
+   "uses": [
+    "pqf-lem-finite-integral-lft",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-integral-localization-fraction-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GS, lemma-integral-over-field (2), algebraic background for the localized domain being a field. The explicit monic-equation inverse certificate and comparison with a specified fraction field are the agent expansion of old proof steps 5-6, rather than a formula quoted from this tag."
+   }
+  },
+  {
+   "text": "The scalar map for $C$ is $\\sigma$, and the prescribed scalar map for $k(X)$ is $\\alpha$. Step 1 gives $c\\sigma=\\alpha$ through the actual germ maps. Thus $c(\\sigma(h)z)=\\alpha(h)c(z)$ for $h\\in k(Y)$ and $z\\in C$. By step 3 let $t$ be the inverse of $c$. Applying $c$ and its injectivity gives $t(\\alpha(h)w)=\\sigma(h)t(w)$ for $w\\in k(X)$: both sides map to $\\alpha(h)w$. The same argument with sums, products and $1$ shows that $t$ is a unital ring map. Hence the actual canonical comparison and its inverse are maps of the prescribed $k(Y)$-algebras, as required.",
+   "uses": [
+    "lem-sfb-dominant-affine-germ-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CC1, lemma-dominant-between-integral, proof of (1)-(4): generic points, zero primes and injective affine maps; combined with sheaves.tex stalk construction (Tags 0078, 007J) for the explicit germ squares and their fraction formulas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-dominant-affine-germ-comparison",
+  "lem-sc-affine-pushforward-stalk-localization",
+  "pqf-lem-finite-integral-lft",
+  "lem-sfb-integral-localization-fraction-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Stacks 0AYZ generic rank sentence; reassembled from the dominant germ comparison, the existing affine localization calculation (0AVW), and the integral localization comparison (00GS background).",
+  "note": "The source omits this comparison argument. The affine calculation is cited as an existing node; the remaining polynomial identity and germ scalar check are written explicitly here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dominant morphism of integral schemes the generic stalk of the pushforward structure sheaf is the function field of the source as an algebra over the target function field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] → (x : ↥X) → Algebra ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and any point $x$ in $X$, the function field of $X$ is equipped with an algebra structure over the stalk of the structure sheaf at $x$. This algebra is defined via the sp\"}\n  {\"name\": \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (x : ↥X),\\n  IsFractionRing ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For any integral scheme $X$ and any point $x$ in $X$, the function field of $X$ is the fraction ring of the stalk of the structure sheaf at $x$. This means every non-zero divisor in the stalk becomes \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isScalarTower\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : IrreducibleSpace ↥X] (U : X.Opens) (x : ↥U) [inst_1 : Nonempty ↥↑U],\\n  IsScalarTower ↑(X.presheaf.obj (Opposite.op U)) ↑(X.presheaf.stalk ↑x) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, the ring of sections $\\\\Gamma(X, U)$ over $U$ is equipped with an algebra structure over the function field of $X$. This structure \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germToFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] → (U : X.Opens) → [h : Nonempty ↥↑U] → X.presheaf.obj (Opposite.op U) ⟶ X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, this is the morphism from the sections of the structure sheaf over $U$ to the function field of $X$, defined by taking the germ at\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: stalkPushforward constructs the map, and its isomorphism theorem assumes an inducing underlying map, which finite dominant maps need not have; FunctionField results concern the structure sheaf on one scheme, not the generic stalk of its finite direct image; none of the hits states this comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pushforward\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkPushforward\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C X) (x : ↑X) : ((TopCat.Presheaf.pushforward C f).obj F).stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ F.stalk x\", \"doc\": \"For a presheaf `F` on a space `X`, a continuous map `f : X ⟶ Y` induces a morphisms between the\\nstalk of `f _ * F` at `f x` and the stalk of `F` at `x`.\"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} {f : X ⟶ Y} (hf : Topology.IsInducing ⇑(CategoryTheory.ConcreteCategory.hom f)) (F : TopCat.Presheaf C X) (x : ↑X) : CategoryTheory.IsIso (TopCat.Presheaf.stalkPushforward C f F x)\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward.id\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X : TopCat} (ℱ : TopCat.Presheaf C X) (x : ↑X) : TopCat.Presheaf.stalkPushforward C (CategoryTheory.CategoryStruct.id X) ℱ x = (TopCat.Presheaf.stalkFunctor C x).map (TopCat.Presheaf.Pushforward.id ℱ).hom\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) : CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSpecializes ⋯) (TopCat.Presheaf.stalkPushforward C f\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward_germ\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C X) (U : TopologicalSpace.Opens ↑Y) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ U) : CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforwar\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C X) {x y : ↑X} (h : x ⤳ y) {Z : C} (h✝ : F.stalk x ⟶ Z) : CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pushforward C f).obj F).stalkSpecializes ⋯) (Categor\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward.comp\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y Z : TopCat} (ℱ : TopCat.Presheaf C X) (f : X ⟶ Y) (g : Y ⟶ Z) (x : ↑X) : TopCat.Presheaf.stalkPushforward C (CategoryTheory.CategoryStruct.comp f g) ℱ x = CategoryTheory.CategoryStruct.comp (TopCat.Presheaf.s\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.stalkPushforward_germ_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C X) (U : TopologicalSpace.Opens ↑Y) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ U) {Z : C} (h : F.stalk x ⟶ Z) : CategoryTheory.CategoryStruct.comp (\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) : CategoryTheory.CategoryStruct.comp (((TopCat.P\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) {Z : C} (h : F.stalk ((CategoryTheory.ConcreteCa\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_pullback_map_germToPullbackStalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V) : CategoryTheory.CategoryS\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_pullback_map_germToPullbackStalk_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V) {Z : C} (h : F.stalk ((Cat\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: stalkPushforward constructs the map, and its isomorphism theorem assumes an inducing underlying map, which finite dominant maps need not have; FunctionField results concern the structure sheaf on one scheme, not the generic stalk of its finite direct image; none of the hits states this comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*generic|generic.*pushforward|functionField.*stalk|stalk.*functionField",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"line\": \"130\", \"text\": \"  have : IsScalarTower ↑Γ(X, U) ↑(X.presheaf.stalk x) ↑X.functionField :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"81\", \"text\": \"noncomputable instance stalkFunctionFieldAlgebra [IrreducibleSpace X] (x : X) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"82\", \"text\": \"    Algebra (X.presheaf.stalk x) X.functionField := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"88\", \"text\": \"    [Nonempty U] : IsScalarTower Γ(X, U) (X.presheaf.stalk x) X.functionField := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"97\", \"text\": \"    algebraMap (X.presheaf.stalk x) X.functionField (X.presheaf.germ U x hx f) =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"line\": \"164\", \"text\": \"    IsFractionRing (X.presheaf.stalk x) X.functionField :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"517\", \"text\": \"    (f : Spec X.functionField ⟶ Y) (h : f ≫ sY = X.fromSpecStalk _ ≫ sX) : X ⤏ Y :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"521\", \"text\": \"    (f : Spec X.functionField ⟶ Y) (h : f ≫ sY = X.fromSpecStalk _ ≫ sX) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"540\", \"text\": \"    { f : Spec X.functionField ⟶ Y // f ≫ sY = X.fromSpecStalk _ ≫ sX } ≃\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: stalkPushforward constructs the map, and its isomorphism theorem assumes an inducing underlying map, which finite dominant maps need not have; FunctionField results concern the structure sheaf on one scheme, not the generic stalk of its finite direct image; none of the hits states this comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic rank of the direct image of the structure sheaf under a finite dominant morphism is the degree of the function field extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.finrank_quotient_map\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[IsDomain S] [IsDedekindDomain R] [Algebra K L] [Algebra R L] [IsScalarTower R K L] [IsScalarTower R S L]\\n  [hp : p.IsMaximal] [Module.Finite R S] : finrank (R ⧸ p) (S ⧸ map (algebraMap R S) p) = finrank K L\", \"doc\": \"Let $ R $ be a Dedekind domain, $ S $ a domain, $ K $ and $ L $ fields with $ L $ a finite extension of $ K $, and $ \\\\mathfrak{p} $ a maximal ideal of $ R $. Then, the finite rank of the quotient $ S \"}\n  {\"name\": \"IntermediateField.relfinrank_bot_left\", \"module\": \"Mathlib.FieldTheory.Relrank\", \"type\": \": relfinrank ⊥ A = finrank F A\", \"doc\": \"For any intermediate field $A$ containing the base field $F$, the relative finite rank of the base field $F$ and $A$ is equal to the finite rank (dimension) of $A$ as a module over $F$.\"}\n  {\"name\": \"IntermediateField.finrank_top'\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Adjoin.Basic\", \"type\": \": finrank F (⊤ : IntermediateField F E) = finrank F E\", \"doc\": \"The finite rank of the top intermediate field $ E $ over $ F $ is equal to the finite rank of the field extension $ E $ over $ F $. This equality holds because the top intermediate field corresponds t\"}\n  {\"name\": \"Subfield.lift_relrank_comap\", \"module\": \"Mathlib.FieldTheory.Relrank\", \"type\": \"(f : L →+* E) (B : Subfield L) : lift.{v} (relrank (A.comap f) B) = lift.{w} (relrank A (B.map f))\", \"doc\": \"For a ring homomorphism $ f : L \\\\to E $, and subfields $ A \\\\subseteq E $ and $ B \\\\subseteq L $, the relative rank (dimension) of the preimage $ f^{-1}(A) $ over $ B $ is equal to the relative rank of \"}\n  {\"name\": \"Field.insepDegree\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"(F : Type u) → (E : Type v) → [inst : Field F] → [inst_1 : Field E] → [Algebra F E] → Cardinal.{v}\", \"doc\": \"The inseparable degree of a field extension $ E $ over $ F $ is defined as the rank of $ E $ as a module over its separable closure in $ E $. This measures the dimension of $ E $ as a vector space ove\"}\n  {\"name\": \"Ideal.ramificationIdx_le_finrank\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[NoZeroSMulDivisors R S] {p : Ideal R} [p.IsMaximal] (P : Ideal S) [hP₁ : P.IsPrime] [hP₂ : P.LiesOver p] :\\n  p.ramificationIdx (algebraMap R S) P ≤ Module.finrank K L\", \"doc\": \"For a ring homomorphism $ f: R \\\\to S $, let $ p $ be a maximal ideal in $ R $, and let $ P $ be a prime ideal in $ S $ lying over $ p $ (i.e., $ P \\\\cap R = p $). If there are no zero divisors in the s\"}\n  {\"name\": \"RatFunc.finrank_ratFunc_ratFunc\", \"module\": \"Mathlib.FieldTheory.RatFunc.Basic\", \"type\": \": Module.finrank (RatFunc k) (RatFunc K) = Module.finrank k K\", \"doc\": \"For any field extension $ K $ of $ k $, the finite rank of the rational function field $ \\\\text{RatFunc}(K) $ as a module over $ \\\\text{RatFunc}(k) $ is equal to the finite rank of $ K $ as a module ove\"}\n  {\"name\": \"Subfield.lift_rank_comap\", \"module\": \"Mathlib.FieldTheory.Relrank\", \"type\": \"(f : L →+* E) : lift.{v} (Module.rank (A.comap f) L) = lift.{w} (relrank A f.fieldRange)\", \"doc\": \"For a ring homomorphism $ f : L \\to E $ between division rings and a subfield $ A $ of $ E $, the rank of the preimage subfield $ f^{-1}(A) $ of $ L $ is equal to the relative rank of $ A $ over the im\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: stalkPushforward constructs the map, and its isomorphism theorem assumes an inducing underlying map, which finite dominant maps need not have; FunctionField results concern the structure sheaf on one scheme, not the generic stalk of its finite direct image; none of the hits states this comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The generic localization of a finite domain algebra over a domain is its fraction field; identify this with the generic stalk of a finite scheme direct image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(R : CommRingCat) → [inst : IsDomain ↑R] → Algebra ↑R ↑(AlgebraicGeometry.Spec R).functionField\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the function field of the scheme $ \\\\operatorname{Spec}(R) $ (defined as the stalk of the structure sheaf at the generic point of $ \\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (R : CommRingCat) [inst : IsDomain ↑R], IsFractionRing ↑R ↑(AlgebraicGeometry.Spec R).functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (x : ↥X),\\n  IsFractionRing ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For any integral scheme $X$ and any point $x$ in $X$, the function field of $X$ is the fraction ring of the stalk of the structure sheaf at $x$. This means every non-zero divisor in the stalk becomes \"}\n  {\"name\": \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] → (x : ↥X) → Algebra ↑(X.presheaf.stalk x) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and any point $x$ in $X$, the function field of $X$ is equipped with an algebra structure over the stalk of the structure sheaf at $x$. This algebra is defined via the sp\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsIntegral X] (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [inst_1 : Nonempty ↥↑U], IsFractionRing ↑(X.presheaf.obj (Opposite.op U)) ↑X.functionField\", \"doc\": \"For an integral scheme $X$ and a non-empty affine open subset $U$ of $X$, the function field of $X$ is the fraction field of the ring of sections $\\\\Gamma(X, U)$. This follows from the fact that every \"}\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  [inst : IrreducibleSpace ↥X] →\\n    (U : X.Opens) → [Nonempty ↥↑U] → Algebra ↑(X.presheaf.obj (Opposite.op U)) ↑X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, the ring of sections $\\\\Gamma(X, U)$ over $U$ is equipped with an algebra structure over the function field of $X$. This algebra st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.functionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [IrreducibleSpace ↥X] → CommRingCat\", \"doc\": \"For an irreducible scheme $X$, the function field is defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$. This corresponds to the commutative ring obtained by takin\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: stalkPushforward constructs the map, and its isomorphism theorem assumes an inducing underlying map, which finite dominant maps need not have; FunctionField results concern the structure sheaf on one scheme, not the generic stalk of its finite direct image; none of the hits states this comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*generic|generic.*pushforward|stalkPushforward",
+   "results": "{\"ok\": true, \"n_hits\": 13, \"top\": [\"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/Topology/Sheaves/Stalks.lean\", \"Mathlib/Geometry/RingedSpace/OpenImmersion.lean\", \"Mathlib/Geometry/RingedSpace/Stalks.lean\", \"Mathlib/Geometry/RingedSpace/Stalks.lean\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern one-scheme fraction fields or construct the stalk comparison; none proves the finite-dominant generic direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The generic stalk of the direct image structure sheaf of a finite dominant scheme morphism is isomorphic to the function field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Scheme.Hom.stalkMap\", \"AlgebraicGeometry.Scheme.arrowStalkMapSpecIso\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.LocallyRingedSpace.Hom.stalkMap\", \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\", \"AlgebraicGeometry.Scheme.germToFunctionField\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern one-scheme fraction fields or construct the stalk comparison; none proves the finite-dominant generic direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pushforward\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"top\": [\"TopCat.Presheaf.stalkPushforward\", \"TopCat.Presheaf.stalkPushforward.stalkPushforward_iso_of_isInducing\", \"TopCat.Presheaf.stalkPushforward.id\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward\", \"TopCat.Presheaf.stalkPushforward_germ\", \"TopCat.Presheaf.stalkSpecializes_stalkPushforward_assoc\", \"TopCat.Presheaf.stalkPushforward.comp\", \"TopCat.Presheaf.stalkPushforward_germ_assoc\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: stalkPushforward constructs the map; its isomorphism theorem requires IsInducing, not implied by finite dominance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dominant morphism of integral schemes the stalk of the direct image structure sheaf at the generic point is the source function field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"AlgebraicGeometry.functionField_isScalarTower\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern one-scheme fraction fields or construct the stalk comparison; none proves the finite-dominant generic direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism between the localization of a finite domain algebra at nonzero base elements and its fraction field; apply to the generic direct image stalk",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing\", \"Localization.AtPrime.liftAlgebra\", \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatLocalizationToStalk\", \"instAlgebraAtPrimeFractionRing\", \"Localization.isLocalization_range_mapToFractionRing\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.StructureSheaf.stalkIso\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the localization and fraction-field declarations are algebraic ingredients, not the scheme pushforward-stalk comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsFractionRingLocalizationAlgebraMapSubmonoidPrimeComplFractionRing|isLocalization_range_mapToFractionRing|functionField_isFractionRing_of_affine",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/RingTheory/Localization/AsSubring.lean\"], \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: these declarations concern one-scheme fraction fields or construct the stalk comparison; none proves the finite-dominant generic direct-image comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-curve-bundle-pullback-degree",
+  "date": "2026-10-22",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Riemann--Hurwitz for the separable factor, retaining the full effective different in wild characteristic (Stacks 0C1B). Supporting lemma: Degree of an invertible sheaf pulled back along a proper curve map. In the supporting pullback-degree argument (Stacks 0AYZ), first sentence of the proof: identify the generic stalk of the finite direct image with the source function field.",
+   "via": [
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "lem-sfb-curve-riemann-hurwitz-numerical",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-dominant-generic-pushforward-stalk",
+  "worker": "stage1",
+  "summary": "Repaired the latest landing-only return (2026-10-23 04:12 UTC, head ea17cbdce6c), continuing the retained sandbox. The initial dry run acb26dd6329 passed on the current DAG; the current shared item still equals the pre-Q84 baseline and both helper ids remain absent. Re-read all current external proof statements, helper definition statements, original search results and source places. Step 3 now explicitly invokes the algebra helper's uniqueness clause: both the canonical germ map and the bijective comparison extend the actual fraction map j_B, so they coincide. The fraction calculation and prescribed-scalar inverse remain explicit. Both statement-only children and all search evidence are retained; statement, route and maintainer metadata are preserved. The final assembly remains below 3000 characters.",
+  "blueprint": "Realizes the finite direct-image generic rank input of the proper-curve pullback-degree calculation (Stacks 0AYZ), on the inherited det-thm-sf-ctf-stability-direct-images proof (3) high-genus alteration-support route. Inherited blueprint.from.node is null, as the ancestor command reports: this supporting chain is an added input, and its specified from.place and via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-pushforward-stalk-localization",
+    "why": "The existing generic affine stalk-localization tool is retained; no same-unit replacement supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-pushforward-stalk-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-65192bf69",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-65192bf69 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources myself. This is the fifth Q84 head under the released re-split order of 2026-10-21. The previous head ea17 was approved, then refused at landing as 'side completion never promoted'. Compared with ea17, both new nodes are byte-identical. In the item only step 3 changed: it now uses the algebra child's uniqueness clause, so q = c because both extend j_B, which is correct. Compared with the base, only proof, proof_deps, proof_origin and split_report changed. Sources: Stacks 0AYZ (varieties.tex:9896) uses dim_{κ(ξ)}(f_*O_X)_ξ, and the item statement matches it. 0CC1 (morphisms.tex:1408) gives zero generic primes and an injective affine map. 00GS (algebra.tex:7782) is background, and the certificate is labelled as the agent's expansion. 0AVW and 01WJ were checked too. No SGA is cited. Each old step has a home: steps 1-3 and 7 in lem-sfb-dominant-affine-germ-comparison, step 4 in the inherited tool lem-sc-affine-pushforward-stalk-localization (declared tool use, accepted), and steps 5-6 in lem-sfb-integral-localization-fraction-comparison. The two children have statements of 1760 and 1351 characters, and neither restates a clause of the item. The assembly is 2321 characters. I checked every hypothesis at each step: V is a nonempty affine and U = f^{-1}V is affine by finiteness; the prime of η_Y is (0); j_B(φ(a)) ≠ 0; finite implies integral; q = c by uniqueness; step 4 (the inverse of c is k(Y)-linear) is really elementary. I checked the geometric child for truth: closure plus density plus sobriety gives f(η_X) = η_Y, and the germ squares hold. I recomputed the algebra certificate: i < n, φ(a_i) + bd = 0, ι(b)(−ι(d)ι(φ(a_i))^{-1}) = 1, and q is injective and surjective. Small cases: the identity, inseparable field extensions, k[t^2,t^3] ⊂ k[t], and k[x] → k[x,t], where c is not surjective, consistent with the geometric child asserting no bijectivity. Both children carry B1-B7, all four kinds of search and the correct blueprint.from and via. The rg -L duplicate search found nothing that states either child: lem-trf-dominant-affine-chart-data needs locally of finite type and a Noetherian base, and lem-a1-nonconstant-curve-stalk-torsion-free is curve-only. Maintainer note: the only blocker is landing promotion, so please promote rather than return again."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteDominantGenericPushforwardStalk",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.finite_dominant_generic_pushforward_stalk",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.genericPushforwardStalkMap",
+   "AlgebraicGeometry.Scheme.Hom.finite_dominant_generic_pushforward_stalk"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDominantGenericPushforwardStalk.lean",
+  "statement": "theorem Scheme.Hom.finite_dominant_generic_pushforward_stalk {X Y : Scheme.{u}} [IsIntegral X] [IsIntegral Y] (f : X ⟶ Y) [IsFinite f] [IsDominant f] : Function.Bijective (f.genericPushforwardStalkMap) ∧ ∀ a : Y.functionField, f.genericPushforwardStalkMap (((TopCat.Presheaf.stalkFunctor CommRingCat (genericPoint Y)).map f.c) a) = @algebraMap Y.functionField X.functionField _ _ (Scheme.Hom.dominantFunctionFieldAlgebra f) a",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The canonical comparison is Mathlib stalkPushforward transported along the generic-point equality derived from dominance. Bijectivity and equality on the canonical scalar structure homomorphisms express precisely an isomorphism of k(Y)-algebras. The helper has real data and no postponed proofs; the theorem alone is sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9aa411151",
+  "group": "NC",
+  "result": "pass",
+  "note": "Only the lean record changed vs live; the statement matches the node clause by clause: IsIntegral X/Y, IsFinite f, IsDominant f, Scheme.functionField at genericPoint, F = pushforward CommRingCat f.base of X.presheaf, k(Y)-scalars via stalkFunctor.map f.c (the germ action of def-weil-pbc-module-stalk). Canonical map genericPushforwardStalkMap = stalkSpecializes(f ηX = ηY, proved from density) then Mathlib stalkPushforward: the real germ map, no sorry. Conclusion Bijective and agreement on scalars with algebraMap of the recorded dominantFunctionFieldAlgebra = isomorphism of k(Y)-algebras; the second conjunct reduces to functionFieldMap by naturality of stalkSpecializes, so it is true. Single universe u, no extra hypotheses. Source varieties.tex 9905-9911 (0AYZ) checked. No duplicate in project lean/ (stalkPushforward grep) or Mathlib (iso_of_isInducing needs inducing). lean.statement verbatim; 1 sorry; docstrings carry source, blueprint id and the 7 steps; no lines over 100 chars. No file changed, so no compile; worker reports clean scompile. Advisory: PresheafModuleStalkFunctor import unused (conventional stmt_dep import)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

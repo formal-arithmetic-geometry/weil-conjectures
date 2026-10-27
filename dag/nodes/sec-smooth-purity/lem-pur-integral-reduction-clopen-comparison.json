@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-integral-reduction-clopen-comparison",
+ "kind": "statement",
+ "title": "One positive integral reduction commutes with ordinary open restriction",
+ "statement": "Let l be prime, E a finite-dimensional extension of Q_l, and j:Y → X an open immersion of schemes. For each n≥0, derived extension from the completed integral coefficient sheaf on X to the constant quotient O_E/l^(n+1), followed by the published constant-ring derived inverse image along j, is naturally isomorphic to ordinary completed-integral derived restriction along j followed by the same quotient extension on Y. The functors and coefficients are those of def-weil-integral-derived-reduction, def-weil-completed-integral-coefficients and def-weil-pbc-proetale-operations. No tower, augmentation, transition, completeness or uniform bound is asserted. The ordinary completed restriction is the construction of [def-pur-clopen-integral-restriction].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.5.2 and Proposition 3.5.1(1), p. 24; finite-clopen application, augmented integral descent steps 2 and 5; Stacks Tags 06YY, 00XZ and 03CO."
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-integral-derived-reduction",
+  "def-weil-pbc-proetale-operations",
+  "def-pur-clopen-integral-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Identify ordinary open restriction with the inverse image on the localized pro-etale site, using the composition/pullback adjunction. The constant quotient coefficient comparison sends constant sections to the same constants. Restriction preserves the limit of the positive quotient coefficient sheaves, and uniqueness against all quotient projections identifies its completed comparison with clopenCompletionMap. Thus the square from completed coefficients to the n-th positive quotient commutes.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafified scalar extension commutes with this restriction: locally send s tensor x to restricted s tensor restricted x, with inverse from the inverse coefficient comparisons. These formulas commute with the differential on cochain complexes. Exact open restriction preserves quasi-isomorphisms and K-flat models. The universal property of derived scalar extension therefore descends this chain comparison to a natural isomorphism on all derived objects and all morphisms. Finally uniqueness of the left adjoint identifies the ordinary quotient restriction with proEtaleConstantRingPullback, giving precisely the two functors in the statement. Zero objects and the empty site obey the same formulas; neither flatness of the quotient map nor a bound on the complexes is used.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-clopen-unbounded-derived-localization",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-clopen-unbounded-derived-localization",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "J3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.5.2 and Proposition 3.5.1(1), p. 24; finite-clopen application, augmented integral descent steps 2 and 5; Stacks Tags 06YY, 00XZ and 03CO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with restriction along an open immersion for a sheaf of completed adic coefficient rings",
+   "results": "8 hits: Scheme.Modules.restrictFunctor, its adjunction and composition/counit isomorphisms; no derived completed-integral coefficient comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; the hits concern structure-sheaf modules on the Zariski site."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"iso\"",
+   "results": "12 hits including Functor.mapDerivedCategoryCompIso, mapDerivedCategoryIdIso and their localization lifts.",
+   "date": "2026-10-26",
+   "verdict": "Generic exact derived-functor comparison infrastructure only; no completed-integral coefficient square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(clopen|restriction)|(clopen|restriction).*scalar",
+   "results": "25 Mathlib hits on ordinary linear-algebra restriction of scalars and presheaf/sheaf coefficient change; no pro-etale integral reduction comparison.",
+   "date": "2026-10-26",
+   "verdict": "No direct match. Local search found the clopen scalar compositor and the finite-level constructibility theorem used in the route."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AugmentedIntegralDescent",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-clopen-augmented-integral-descent",
+   "place": "Step 5: compare one positive quotient with ordinary completed restriction before applying finite-level clopen bounds.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralReductionClopenComparison",
+  "file": "lean/Sheaf/Paper/IntegralReductionClopenComparison.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.integralReductionClopenComparison",
+  "statement": "theorem integralReductionClopenComparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {Y X : Scheme.{u}} (j : Y ⟶ X) [IsOpenImmersion j] (n : ℕ) :\n    Nonempty (scalarReductionDerivedExtension l E X n ⋙\n        proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E (n + 1)) j ≅\n      clopenIntegralDerivedRestriction l E j ⋙ scalarReductionDerivedExtension l E Y n)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T210741-L-3581578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T210741-L-3581578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

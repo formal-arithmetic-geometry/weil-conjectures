@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-quotient-section-pull-transport",
+ "kind": "statement",
+ "title": "Pullback realization for the same normalized section scalar models",
+ "statement": "For every morphism a of commutative condensed rings and scheme morphism f:X→Y, fix normalized ScalarSectionData cX and cY and an internal scalar/pullback isomorphism lam satisfying PullNormalized. There is a section scalar/pullback isomorphism barLam satisfying both PullSectionCondition and SectionPullNormalized of [def-sfb-quotient-section-tensor-data], using those same models. The ordinary comparison is the conjugate of the actual inverse pullIso, and the derived comparison is fixed by the model counits on every complex.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY, 0G7E, 07A4, 07A6; sites-modules.tex Tags 03EK and 03EL. Extracted from lem-sfb-quotient-section-tensor-normalization."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "conjugate the inverse of the ordinary internal pullIso by the two normalized\nordinary scalar comparisons and the fixed section pullback comparisons. This gives\nthe ordinary section balancing isomorphism, carrying inverse image of x tensor s\nto inverse image of x tensor inverse image of s. The ordinary comparison equation\nin SectionPullNormalized holds by construction. The geometric coefficient square\ncommutes by naturality of pullback from the point, so this formula respects scalars.\nBoth composites preserve flat-term K-flat resolutions. Derive the ordinary square\nusing the fixed pullback localization maps and the scalar model counits. This gives\nbarLam and its universal-counit computation square on all complexes. Conjugating\nthe given lam by the same comparisons has the same computation square, because\nPullNormalized fixes lam by the actual internal counits. Uniqueness of the derived\ncomparison identifies these maps, giving PullSectionCondition. No coefficient\nflatness, boundedness, nonemptiness or nonzero-module assumption is used.",
+   "uses": [
+    "lem-sfb-internal-scalar-pullback-normalization",
+    "lem-pd-section-derived-pushpull-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "lem-pd-section-derived-pushpull-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The parent proof steps, specialized to the actual condensed coefficient map and fixed internal/section comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars is monoidal and its canonical tensor comparison commutes with pullback and computation counits",
+   "results": "Ordinary module extension, its counit and pseudofunctor composition; monoidal adjunction counit. No exact match for the specified unbounded internal/section comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project generic derived-monoidal API and section comparison interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.leftDerivedTensorComparison",
+   "results": "Unknown identifier: a project declaration outside the Mathlib search environment.",
+   "date": "2026-10-27",
+   "verdict": "Read the existing project declaration directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars is a strong monoidal functor, computed on K-flat complexes by the tensor balancing map",
+   "results": "Tor, exact mapDerivedCategory, and ordinary tensor constructions; no direct normalized section comparison.",
+   "date": "2026-10-27",
+   "verdict": "Generic derived comparison found locally in WeilConjectures."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorNormalized|ScalarSectionNormalized|SectionPullNormalized",
+   "results": "Mathlib search has no matches. Local search finds the fixed project definitions, the restricted coefficient normalization and the downstream private canonicalScalarTensorIso computations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic computations without importing the circular downstream module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionTensorNormalization",
+  "date": "2026-10-27",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-tensor-normalization",
+   "place": "Separated construction and normalization steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionPullTransport",
+  "file": "lean/Sheaf/Paper/QuotientSectionPullTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport"
+  ],
+  "statement": "theorem section_pull_transport {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam) :\n    ∃ barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T,\n      PullSectionCondition a f cX cY lam barLam ∧\n        SectionPullNormalized a f cX cY barLam",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-75592",
+  "group": "T3",
+  "result": "fix",
+  "landing": "20261027T135442-L-3709173",
+  "kind": "interface",
+  "note": "independent cc review: Data split diffed byte-for-byte vs clone item (only blueprint tags differ); item proof vs ComparisonSpec; 3 holes vs plan steps 1/2-5/8; nodes vs Lean; 3 direct importers + all 11 delivered modules compiled in /tmp/t3rev (all OK); #print axioms clean except sorryAx via the 3 holes"
+ }
+}

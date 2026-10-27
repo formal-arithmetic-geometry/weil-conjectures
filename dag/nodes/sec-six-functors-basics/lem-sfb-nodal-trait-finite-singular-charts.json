@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-nodal-trait-finite-singular-charts",
+ "kind": "statement",
+ "title": "Finite singular set and pointed charts of a smooth-generic nodal trait curve",
+ "statement": "Let $R$ be a discrete valuation ring with uniformizer $\\pi$, fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-weil-affine-spectrum]. Let $f:X\\to S$ be flat and finitely presented [def-weil-flat-morphism, def-sbc-locally-finite-presentation], with smooth generic fibre [def-sbc-smooth-morphisms]. Suppose every nonempty geometric fibre is reduced of pure dimension one and every nonsmooth closed geometric point has completed local ring $\\Omega[[a,b]]/(ab)$, where $\\Omega$ is the algebraically closed geometric ground field [def-weil-geometric-fibre, def-pc-reduced-scheme, def-weil-pure-dimension, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series, def-weil-algebraic-closure]. No connectedness or nonemptiness of the geometric fibres is assumed. Then $X$ is Noetherian (quasi-compact and locally Noetherian) [pqf-def-locnoeth]. The nonsmooth locus of $f$ is a finite set of closed special-fibre points. Every point of the relative smooth locus has regular total-space local ring [def-weil-regular-scheme]. For every nonsmooth point $x$ there exist a local injective etale extension of DVRs $R\\to R'$ with $\\pi$ still a uniformizer, an integer $n\\geq1$, a pointed $R'$-scheme $(U,u)$ and etale $S$-maps $(X,x)\\leftarrow(U,u)\\to(M_n,o)$, where $M_n=\\operatorname{Spec}(R'[a,b]/(ab-\\pi^n))$ and $o=(\\pi,a,b)$ [def-weil-etale-morphism, def-weil-polynomial-ring]. For every such diagram $X$ is regular at $x$ if and only if $n=1$. Every local ring of $X$ has Krull dimension at most two, and every closed point of $X_k$ has total-space local dimension two [def-weil-pbc-krull-dimension-ring]. In particular the nonregular points form a finite set of closed special-fibre points, each admitting a diagram with $n\\geq2$. No excellence, completeness, perfection or characteristic restriction is imposed.",
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDE (lemma-blowup-at-worst-nodal), first paragraph; Tag 0CDD (lemma-etale-local-at-worst-nodal); Tag 0CDC (example-blowup), regularity and local dimension of the charts."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-geometric-fibre",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "pqf-def-locnoeth",
+  "def-weil-regular-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-algebraic-closure",
+  "def-trf-strict-semistable-curve",
+  "def-trf-completed-local-scalar-map"
+ ],
+ "proof": [
+  {
+   "text": "A DVR is Noetherian by [def-sc-discrete-valuation-ring]. Finite presentation includes quasi-compactness and local finite presentation by [def-sbc-locally-finite-presentation]; a finite polynomial presentation is in particular finite type. Thus [lem-weil-pbc-finite-type-over-noetherian] gives that $X$ is Noetherian. Its underlying space is Noetherian too: choose a finite affine cover, apply [lem-sc-affine-noetherian-underlying-space] on each member, and restrict any ascending chain of opens to these finitely many members. Each restriction stabilizes, hence the original chain stabilizes. We may use the nodal hypotheses at all nonsmooth geometric points, not just closed ones. Indeed, on an affine chart of a geometric fibre over $\\Omega$, a nonclosed point is a component generic point, since the reduced fibre is pure one-dimensional. Apply [lem-trf-generic-fibre-points-smooth] to that affine chart over $\\Omega$. It is flat and finitely presented over the field, is Noetherian by the finite-type theorem, and all its geometric fibres are reduced by the original geometric-fibre assumption. Its generic points are smooth. Therefore every nonsmooth geometric point is closed and satisfies exactly the assumed node equation.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-trf-generic-fibre-points-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE, lemma-blowup-at-worst-nodal, first paragraph; morphisms.tex Tag 01T6; varieties.tex Tag 056V."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nodal-family-fitting-singular], whose flatness, local finite presentation and geometric nodality hypotheses hold by assumption and step 1. Its closed subscheme $N=\\operatorname{Sing}(f)$ has underlying set exactly the nonsmooth locus, and $N\\to S$ is unramified. This set is contained in $X_k$: by the base-change clause of the same theorem for $S'=\\operatorname{Spec}K$, the underlying set of $\\operatorname{Sing}(f)\\times_S\\operatorname{Spec}K$, i.e. the set of points of $N$ over the generic point, is the nonsmooth locus of $X_K\\to\\operatorname{Spec}K$, which is empty because $X_K$ is smooth. By [lem-weil-pbc-unramified-base-change-open], $N_k\\to\\operatorname{Spec}k$ is unramified; [lem-trf-unramified-field-fibre-decomposition] identifies $N_k$ as a disjoint union of spectra of finite separable extensions of $k$. Thus its underlying topology is discrete. The special-fibre closed immersion identifies $|N_k|$ homeomorphically with all of $|N|$: every point of $N$ lies above the closed point of $S$. The closed subset $|N|\\subseteq|X|$ is quasi-compact (extend an open cover by its open complement and use quasi-compactness of $X$). Its singleton open cover therefore has a finite subcover. Each singleton is closed in the discrete subspace $|N|$, hence closed in $X$ because $|N|$ is closed. This proves the finite closed special-point assertion, including $N=\\varnothing$.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-weil-pbc-unramified-base-change-open",
+    "lem-trf-unramified-field-fibre-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE, first proof paragraph; curves.tex Tags 0C59/0C5B; morphisms.tex Tags 02GA/02G7."
+   }
+  },
+  {
+   "text": "Let $V\\subseteq X$ be the relative smooth locus supplied in step 2. Its nonempty fibres are pure one-dimensional: their geometric base changes are open subsets of the given pure one-dimensional geometric curves, hence have dimension one at every point; [lem-sc-fibre-dimension-after-base-change] gives the same local fibre dimensions before field extension. In the finite-type field setting this is the equidimensional-fibre formulation of relative dimension in [def-sbc-smooth-morphisms]. Apply [lem-sfb-smooth-trait-curve-local-properties] to $V\\to S$. Every $\\mathcal O_{X,x}=\\mathcal O_{V,x}$ for $x\\in V$ is regular and has dimension at most two; if $x$ is closed in $X_k$, it remains closed in $V_k$ and this dimension is exactly two. No assertion that every nonsmooth point is nonregular has been used.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-sbc-smooth-morphisms",
+    "lem-sfb-smooth-trait-curve-local-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 07NF/00ON; models.tex Tag 0CDE, first paragraph; morphisms.tex Tag 02FY."
+   }
+  },
+  {
+   "text": "For $x\\in N$, apply [lem-sfb-trait-nodal-etale-dvr-model]. Step 1 verifies its condition at every nonsmooth geometric point. Its smooth-generic clause gives an injective local etale DVR extension $R\\to R'$ with the original $\\pi$ still a uniformizer and etale $S$-maps $p:U\\to X$, $q:U\\to M_n$, with $p(u)=x$ and $n\\geq1$. These are precisely the required structural maps; it remains to check the image of $u$ under $q$, since the cited statement does not explicitly prescribe that image.",
+   "uses": [
+    "lem-sfb-trait-nodal-etale-dvr-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal; Tag 0CDE, first proof paragraph, smooth-generic exclusion."
+   }
+  },
+  {
+   "text": "Write $w=q(u)$. In $M_n$, $D(a)$ has ring $R'[a,a^{-1}]$ by eliminating $b=\\pi^n/a$, and likewise for $D(b)$. These opens are smooth over $R'$ directly by [def-sbc-smooth-morphisms]: a map from the finite presentation $R'[t,s]/(ts-1)$ to $B/I$, $I^2=0$, lifts by choosing lifts $t_0,s_0$ with $t_0s_0=1+i$ and replacing $s_0$ by $s_0(1-i)$. The etale map $\\operatorname{Spec}R'\\to S$ is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], so these opens are smooth over $S$ by [lem-trf-smooth-composition]. If $w$ belonged to either open, the pointwise smoothness equivalence in [lem-trf-etale-source-smoothness], first for $q$ and then for $p$, would make $f$ smooth at $x$, a contradiction. Thus both $a,b$ vanish at $w$. Since $u$ lies above the closed point of $S$ and $\\pi$ remains a uniformizer of the local ring $R'$, also $\\pi$ vanishes at $w$. The ideal $(\\pi,a,b)$ is maximal with quotient $k'$, so $w=o$ as required.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-trf-smooth-composition",
+    "lem-trf-etale-source-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, smooth Laurent charts; Tag 0CDE, choice of the nodal origin; descent.tex Tag 036U."
+   }
+  },
+  {
+   "text": "For any pointed diagram as in the statement, apply [lem-sfb-etale-stalk-invariants] to both $p$ at $u$ and $q$ at $u$. It gives regularity equivalences between $\\mathcal O_{X,x}$, $\\mathcal O_{U,u}$ and $\\mathcal O_{M_n,o}$, and equality of their Krull dimensions. Apply [lem-sfb-dvr-binomial-local-geometry] over the DVR $R'$ with uniformizer $\\pi$. It states that $\\dim\\mathcal O_{M_n,o}=2$ and that this ring is regular exactly for $n=1$. Hence $X$ is regular at $x$ if and only if $n=1$, in every such diagram, and $\\dim\\mathcal O_{X,x}=2$ at every nonsmooth point.",
+   "uses": [
+    "lem-sfb-etale-stalk-invariants",
+    "lem-sfb-dvr-binomial-local-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDC, example-blowup, first paragraph; more-algebra.tex Tags 07QP/0AH0, etale local dimension and regularity."
+   }
+  },
+  {
+   "text": "Every point lies either in $V$ or in $N$. Step 3 gives the local dimension bound and regularity on $V$, and step 6 gives dimension two on $N$; together they give the stated dimension assertions, including every closed point of $X_k$. The nonregular points are a subset of the finite closed special set $N$ of step 2. At such a point the chart of steps 4--5 has $n\\geq1$, and step 6 excludes $n=1$, so $n\\geq2$. Empty fibres, the empty scheme and disconnected fibres cause no change in any step. All inputs apply to arbitrary DVRs and arbitrary residue characteristic.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tags 0CDE/0CDC, conclusions from finite nodes and the local models."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-trf-generic-fibre-points-smooth",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-sc-fibre-dimension-after-base-change",
+  "def-sbc-smooth-morphisms",
+  "lem-sfb-smooth-trait-curve-local-properties",
+  "lem-sfb-trait-nodal-etale-dvr-model",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-trf-smooth-composition",
+  "lem-trf-etale-source-smoothness",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-sfb-dvr-binomial-local-geometry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tags 0CDE/0CDD/0CDC; assembly using the existing nodal Fitting locus and etale-stalk results, with the pointed-origin inference expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact flat nodal curve over a discrete valuation ring with smooth generic fibre has finitely many nonsmooth closed special points with etale equations xy equals a uniformizer power",
+   "results": "8 hits: WeierstrassCurve.IsMinimal, WeierstrassCurve.IsGoodReduction, WeierstrassCurve.minimal, WeierstrassCurve.exists_isMinimal, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, WeierstrassCurve.instIsMinimalMinimal, WeierstrassCurve.isGoodReduction_iff, WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-locus and standard-smooth etale-coordinate results do not give nodal finite singular sets, nodal equations or total-space dimension bounds; Weierstrass results concern only elliptic equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type nodal scheme over a trait, smooth over the generic point, the singular locus is a finite set and all closed special stalks have dimension two",
+   "results": "8 hits: Algebra.smoothLocus, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsSmoothAt, Algebra.IsStandardSmoothOfRelativeDimension.out",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-locus and standard-smooth etale-coordinate results do not give nodal finite singular sets, nodal equations or total-space dimension bounds; Weierstrass results concern only elliptic equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsRegular",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.IsRegular'",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-locus and standard-smooth etale-coordinate results do not give nodal finite singular sets, nodal equations or total-space dimension bounds; Weierstrass results concern only elliptic equations."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|ordinary.double|nonsmooth|singular.*finite",
+   "results": "Mathlib/AlgebraicGeometry: 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-locus and standard-smooth etale-coordinate results do not give nodal finite singular sets, nodal equations or total-space dimension bounds; Weierstrass results concern only elliptic equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite singular locus of a smooth generic nodal family over a discrete valuation ring",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented nodal curve over a discrete valuation ring with smooth generic fibre has finitely many singular points and etale local equations xy equals uniformizer power",
+   "results": "{\"t\": \"2026-10-23T04:34:28Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finitely presented nodal curve over a discrete valuation ring with smooth generic fibre has finitely many singular points and etale local equations xy equals uniformizer power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.minimal\", \"StandardEtalePair\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation\"], \"digest\": \"4d2389b1dca157e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction, standard etale coordinates and etale-implies-smooth do not give this arbitrary nodal-trait finite-locus and local-dimension statement."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|singular.*finite|finite.*singular",
+   "results": "{\"t\": \"2026-10-23T04:36:24Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|singular.*finite|finite.*singular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction, standard etale coordinates and etale-implies-smooth do not give this arbitrary nodal-trait finite-locus and local-dimension statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nodal curve over a DVR with smooth generic fibre has finitely many nonsmooth points and etale equations xy equals uniformizer power",
+   "results": "{\"t\": \"2026-10-23T04:36:24Z\", \"tool\": \"leansearch\", \"query\": \"A nodal curve over a DVR with smooth generic fibre has finitely many nonsmooth points and etale equations xy equals uniformizer power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.isGoodReduction_iff\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"WeierstrassCurve.IsGoodReduction.mk\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\"], \"digest\": \"3b7cc0b705d709ef\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction, standard etale coordinates and etale-implies-smooth do not give this arbitrary nodal-trait finite-locus and local-dimension statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-23T04:36:24Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.instSmooth\"], \"digest\": \"6b75871dca0c39eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction, standard etale coordinates and etale-implies-smooth do not give this arbitrary nodal-trait finite-locus and local-dimension statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite nonsmooth locus and dimension two local rings for a semistable curve over a trait",
+   "results": "{\"t\": \"2026-10-23T04:36:25Z\", \"tool\": \"leanfinder\", \"query\": \"Finite nonsmooth locus and dimension two local rings for a semistable curve over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.exists_isMinimal\"], \"digest\": \"14ed3d1dc2bac2f7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Weierstrass reduction, standard etale coordinates and etale-implies-smooth do not give this arbitrary nodal-trait finite-locus and local-dimension statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-regularization",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Regularization of smooth-generic nodal families; re-split of regularization: original steps 1--3 (finite singularities and local charts)",
+   "via": [
+    "lem-sfb-nodal-trait-regularization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-trait-finite-singular-charts",
+  "worker": "stage1",
+  "summary": "Statement unchanged. No new nodes: reuse the Fitting singular subscheme, smooth trait local properties, same-uniformizer DVR charts, binomial local geometry and etale stalk invariants. Prove finite nonsmooth support by a quasi-compact discrete special fibre; explicitly force the chart point to the origin; distinguish regular n=1 nodes from nonregular n>=2.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Regularization of smooth-generic nodal families; re-split of regularization: original steps 1--3 (finite singularities and local charts); realizes original regularization steps 1--3 on the unchanged ILO/de Jong branch. ancestor prints None, inherited as null; searches nodal and regular found no blueprint duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-presentation source over a Noetherian trait is Noetherian; generic scheme tool. No separate input of this unit supplies the generic fact."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Pass from affine Noetherian rings to the underlying Noetherian topology; generic tool. No separate input of this unit supplies the generic fact."
+   },
+   {
+    "node": "lem-trf-generic-fibre-points-smooth",
+    "why": "Reduced geometric curves are smooth at component generic points, verifying the closed-point hypothesis at all nonsmooth geometric points. No separate input of this unit supplies the generic fact."
+   },
+   {
+    "node": "lem-trf-nodal-family-fitting-singular",
+    "why": "Closed unramified Fitting singular subscheme with exactly the nonsmooth support; this generic nodal-family criterion proves finiteness without any projectivity hypothesis. No separate input of this unit supplies the generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-base-change-open",
+    "why": "Unramifiedness of the special fibre of the singular subscheme. No separate input of this unit supplies the generic fact."
+   },
+   {
+    "node": "lem-trf-unramified-field-fibre-decomposition",
+    "why": "Discreteness of an unramified scheme over a field, used with quasi-compactness for finiteness. No separate input of this unit supplies the generic fact."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Descend the geometric pure fibre dimension to the ordinary smooth fibres. No separate input of this unit supplies the generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "The etale DVR extension is smooth. No separate input of this unit supplies the generic fact."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Compose the explicit smooth Laurent open with the etale base extension. No separate input of this unit supplies the generic fact."
+   },
+   {
+    "node": "lem-trf-etale-source-smoothness",
+    "why": "Pointwise smoothness comparison across the two chart maps forces the chosen image to be the origin. No separate input of this unit supplies the generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-trf-generic-fibre-points-smooth",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-weil-pbc-unramified-base-change-open",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-trf-smooth-composition",
+  "lem-trf-etale-source-smoothness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-1857890f5",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-1857890f5 (reviewer sub-agent of L); spot-checked: Read the item and all 17 cited statements in full, plus models.tex 0CDE/0CDD/0CDC. No new nodes; the statement is unchanged from live and matches the first paragraph of 0CDE's proof plus the 0CDC dichotomy, checked on X empty, xy=π, xy=π^2 and xy=π^3. Steps 1 and 3-7 are correct. Step 1 applies 056V on an affine chart of X_Ω, so every nonsmooth geometric point is a closed node. Step 3 uses 02FY and the relative-dimension clause of the smooth definition, then smooth-trait-local-properties. Step 5 proves q(u)=o: D(a) and D(b) are smooth by a square-zero lift, then étale composition and the pointwise clause of 036U along both q and p. Step 6 uses étale stalk invariants and binomial local geometry over (R',π). One repair, in step 2 only: the inference 'Sing(f) lies in X_k because X_K is smooth' had no cited reason, so I rewrote it through the base-change clause (S'=Spec K) of the already cited Fitting node. Uses and deps are unchanged. Batch-5: walked the closure of each of the six flagged citations (generic-fibre-points-smooth, nodal-family-fitting-singular, unramified-field-fibre-decomposition, trait-nodal-etale-dvr-model, smooth-composition, etale-source-smoothness). They contain only generic trf commutative-algebra and nodal lemmas and definitions: no thm-trf, sk-, nt- or Poincaré-duality node, so nothing is part of the assumed trace formula or Poincaré duality. Accepted. No duplicate of the item in the DAG; dvr-nodal-etale-local-form duplicates only the chart node. The split_report.tool_uses entries are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalTraitFiniteSingularCharts",
+  "declaration": "AlgebraicGeometry.nodal_trait_finite_singular_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalTraitFiniteSingularCharts.lean",
+  "statement": "theorem nodal_trait_finite_singular_charts (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (π : R) (hπ : Irreducible π) (X : Scheme.{u}) (f : X ⟶ Spec (.of R)) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (hgeneric : Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))))) (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), IsReduced (pullback f g) ∧ (pullback f g).IsPureDimension 1) (hnodal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)) (z : ↥(pullback (C := Scheme.{u}) f g)), IsClosed ({z} : Set ↥(pullback f g)) → z ∉ (pullback.snd f g).smoothLocus → Nonempty (@AlgEquiv Ω (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f g).presheaf.stalk z)) ((pullback f g).presheaf.stalk z)) (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}) _ _ _ ((pullback.snd f g).completedLocalScalarMap z).toAlgebra inferInstance)) : IsNoetherian X ∧ Set.Finite {x : X | x ∉ f.smoothLocus} ∧ (∀ x : X, x ∉ f.smoothLocus → IsClosed ({x} : Set X) ∧ f x = IsLocalRing.closedPoint R) ∧ (∀ x : X, x ∈ f.smoothLocus → IsRegularLocalRing (X.presheaf.stalk x)) ∧ (∀ x : X, x ∉ f.smoothLocus → ∃ (R' : Type u) (_ : CommRing R') (_ : IsDomain R') (_ : IsDiscreteValuationRing R') (φ : R →+* R') (n : ℕ) (U : Scheme.{u}) (p : U ⟶ X) (q : U ⟶ (StrictSemistableModel.nodal (A := .of R') ((φ π) ^ n)).scheme) (v : U), Function.Injective φ ∧ IsLocalHom φ ∧ Etale (Spec.map (CommRingCat.ofHom φ)) ∧ Irreducible (φ π) ∧ 1 ≤ n ∧ Etale p ∧ Etale q ∧ p v = x ∧ p ≫ f = q ≫ (StrictSemistableModel.nodal (A := .of R') ((φ π) ^ n)).baseMap ≫ Spec.map (CommRingCat.ofHom φ) ∧ (StrictSemistableModel.nodal (A := .of R') ((φ π) ^ n)).baseMap (q v) = IsLocalRing.closedPoint R' ∧ ∀ i : Fin 2, Ideal.Quotient.mk _ (MvPolynomial.X i) ∈ (q v).asIdeal) ∧ (∀ (x : X), x ∉ f.smoothLocus → ∀ (R' : Type u) [CommRing R'] [IsDomain R'] [IsDiscreteValuationRing R'] (φ : R →+* R') (n : ℕ) (U : Scheme.{u}) (p : U ⟶ X) (q : U ⟶ (StrictSemistableModel.nodal (A := .of R') ((φ π) ^ n)).scheme) (v : U), Function.Injective φ → IsLocalHom φ → Etale (Spec.map (CommRingCat.ofHom φ)) → Irreducible (φ π) → 1 ≤ n → Etale p → Etale q → p v = x → p ≫ f = q ≫ (StrictSemistableModel.nodal (A := .of R') ((φ π) ^ n)).baseMap ≫ Spec.map (CommRingCat.ofHom φ) → (StrictSemistableModel.nodal (A := .of R') ((φ π) ^ n)).baseMap (q v) = IsLocalRing.closedPoint R' → (∀ i : Fin 2, Ideal.Quotient.mk _ (MvPolynomial.X i) ∈ (q v).asIdeal) → (IsRegularLocalRing (X.presheaf.stalk x) ↔ n = 1)) ∧ (∀ x : X, ringKrullDim (X.presheaf.stalk x) ≤ 2) ∧ (∀ z : f.fiber (IsLocalRing.closedPoint R), IsClosed ({z} : Set _) → ringKrullDim (X.presheaf.stalk (f.fiberι (IsLocalRing.closedPoint R) z)) = 2) ∧ Set.Finite {x : X | ¬ IsRegularLocalRing (X.presheaf.stalk x)} ∧ (∀ x : X, ¬ IsRegularLocalRing (X.presheaf.stalk x) → IsClosed ({x} : Set X) ∧ f x = IsLocalRing.closedPoint R ∧ ∃ (R' : Type u) (_ : CommRing R') (_ : IsDomain R') (_ : IsDiscreteValuationRing R') (φ : R →+* R') (n : ℕ) (U : Scheme.{u}) (p : U ⟶ X) (q : U ⟶ (StrictSemistableModel.nodal (A := .of R') ((φ π) ^ n)).scheme) (v : U), Function.Injective φ ∧ IsLocalHom φ ∧ Etale (Spec.map (CommRingCat.ofHom φ)) ∧ Irreducible (φ π) ∧ 2 ≤ n ∧ Etale p ∧ Etale q ∧ p v = x ∧ p ≫ f = q ≫ (StrictSemistableModel.nodal (A := .of R') ((φ π) ^ n)).baseMap ≫ Spec.map (CommRingCat.ofHom φ) ∧ (StrictSemistableModel.nodal (A := .of R') ((φ π) ^ n)).baseMap (q v) = IsLocalRing.closedPoint R' ∧ ∀ i : Fin 2, Ideal.Quotient.mk _ (MvPolynomial.X i) ∈ (q v).asIdeal)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ed167606",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 3c0f1286fc5f. Lean module byte-identical (cmp). Item node differs from live only in lean and stmt_deps. The theorem stmt_dep lem-trf-nodal-point-etale-locality is replaced by def-trf-completed-local-scalar-map; that record (existing:true, Q139) is identical to live and its body is the canonical composite, not hollow. def-trf-strict-semistable-curve also added; it is used in the signature. Statement verbatim. Mathematics re-read against 0CDE/0CDD/0CDC: DVR with irreducible π; Flat+LOFP+QC+QS; smooth generic fibre via FractionRing; hfib (empty fibres OK); hnodal at closed nonsmooth geometric points via canonical scalar map; origin pinned by closedPoint R' plus both coordinates in the prime; universal regular↔n=1; dim≤2 everywhere and =2 at fibre-closed points; finitely many nonregular points, each with an n≥2 chart. Single sorry, no axiom, docstrings with source/blueprint and 7 proof steps, not yet landed. No compile (no changed file)."
+ }
+}

@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.IntegralComparisonRealizationModels
 public import Sheaf.Paper.CompletedLineTensorCoherence
 public import Sheaf.Paper.QuotientSystemMixedCoherence
+import Sheaf.TraceFormula.ScalarModelIteratedStrictCalculation
+import all Sheaf.Paper.IntegralOperationsWellDefined
 
 /-! # Scalar model normalization before inverting completion
 
@@ -27,6 +29,12 @@ attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 universe u
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
+
+attribute [local irreducible] HasDerivedCategory.standard
+  integralComparisonSequenceScalarModel coefficientSequenceRestriction coefficientSequenceLimit
+  integralScalarExtensionOfUniverses completedDerivedScalarExtension
+  completedOrdinaryScalarComplex completedScalarCounit
+
 
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -83,6 +91,88 @@ theorem scalarModelAssociativity
           (SE.reduction.obj K)) =
     (CompletedLineTensor.associatorData l E X L ι F j).derived.hom.app K ≫
       (completedScalarComparison l E F (j.comp ι) X).app K ≫ bEF.realization.hom.app K := by
-  sorry
+  let B := completedDerivedScalarExtension l L F j X
+  let C := integralScalarExtensionOfUniverses l E L ι X
+  let D := integralScalarExtensionOfUniverses l L F j X
+  let A := integralComparisonDerivedSequenceScalar l E L ι X
+  let A' := integralComparisonDerivedSequenceScalar l L F j X
+  let T := coefficientSequenceLimit l F X
+  let α : completedDerivedScalarExtension l E L ι X ⋙ B ⟶
+      SE.reduction ⋙ integralComparisonDerivedSequenceScalar l E F (j.comp ι) X ⋙ T :=
+    Functor.whiskerRight (completedScalarComparison l E L ι X) B ≫
+      Functor.whiskerLeft C (completedScalarComparison l L F j X) ≫
+      Functor.whiskerRight bEL.realization.hom D ≫
+      Functor.whiskerLeft (SE.reduction ⋙ A ⋙ coefficientSequenceLimit l L X)
+        bLF.realization.hom ≫
+      Functor.whiskerLeft (SE.reduction ⋙ A)
+        (Functor.whiskerRight (Functor.whiskerRight SL.adjunction.counit A') T) ≫
+      Functor.whiskerLeft SE.reduction
+        (Functor.whiskerRight
+          (integralComparisonSystemScalarComposition l E L F ι j X).hom T)
+  let β : completedDerivedScalarExtension l E L ι X ⋙ B ⟶
+      SE.reduction ⋙ integralComparisonDerivedSequenceScalar l E F (j.comp ι) X ⋙ T :=
+    (CompletedLineTensor.associatorData l E X L ι F j).derived.hom ≫
+      completedScalarComparison l E F (j.comp ι) X ≫ bEF.realization.hom
+  have h : α = β := by
+    let Λ := integralOperationsGoodLocalization l E X
+    let W := (HomologicalComplex.quasiIso (integralTowerModules l E X) (.up ℤ)).inverseImage
+      (integralOperationsGoodComplex l E X).ι
+    let : Λ.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E X
+    apply Localization.natTrans_ext Λ W
+    intro P
+    obtain ⟨C₀, e, κ, hC⟩ := SE.reductionModel P.obj P.property.1 P.property.2
+    obtain ⟨q, hq, hn⟩ := bEF.normalization P C₀ e κ hC
+    let t := T.map
+        ((integralComparisonDerivedSequenceScalar l E F (j.comp ι) X).map e.hom) ≫
+      T.map ((integralComparisonSequenceScalarModel l E F (j.comp ι) X).ε.app C₀) ≫
+      (integralComparisonRoosBridge l F X ρF _).hom ≫
+      DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom)
+    change bEF.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫ t =
+      (integralScalarExtensionComparisonOfUniverses l E F (j.comp ι) X).hom.app P at hn
+    have : IsIso (bEF.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫ t) := by
+      rw [hn]
+      infer_instance
+    have : IsIso t := IsIso.of_isIso_comp_left
+      (bEF.realization.hom.app (DerivedCategory.Q.obj P.obj)) t
+    apply (cancel_mono t).1
+    have hs := scalarModelIteratedStrictCalculation l E L F ι j X
+      SE SL ρL ρF bEL bLF P C₀ e κ hC q hq
+    have hnorm : CompletedLineTensor.IsAssociatorNormalized l E X L ι F j
+        (CompletedLineTensor.associatorData l E X L ι F j) := by
+      unfold CompletedLineTensor.associatorData
+      exact (CompletedLineTensor.associatorData_existsUnique l E X L ι F j).exists.choose_spec
+    have ha := hnorm.2 P
+    have hc := (completedScalarComparison_existsUnique l E F (j.comp ι) X).exists.choose_spec P
+    change (completedScalarComparison l E F (j.comp ι) X).app
+      (DerivedCategory.Q.obj P.obj) ≫
+        (integralScalarExtensionComparisonOfUniverses l E F (j.comp ι) X).hom.app P = _ at hc
+    change α.app (DerivedCategory.Q.obj P.obj) ≫ t =
+      β.app (DerivedCategory.Q.obj P.obj) ≫ t
+    calc
+      α.app (DerivedCategory.Q.obj P.obj) ≫ t =
+          B.map (completedScalarCounit l E L ι X P.obj) ≫
+            completedScalarCounit l L F j X
+              ((completedOrdinaryScalarComplex l E L ι X).obj P.obj) ≫
+            DerivedCategory.Q.map
+              ((CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
+                (CompletedLineTensor.associatorData l E X L ι F j).sheaf).hom.app P.obj) ≫
+            DerivedCategory.Q.map
+              ((completedScalarChainComparison l E F (j.comp ι) X).app P.obj) := by
+        simpa only [α, t, B, C, D, A, A', T, NatTrans.comp_app,
+          Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_obj,
+          Category.assoc] using hs
+      _ = (CompletedLineTensor.associatorData l E X L ι F j).derived.hom.app
+          (DerivedCategory.Q.obj P.obj) ≫
+            (completedScalarComparison l E F (j.comp ι) X).app
+              (DerivedCategory.Q.obj P.obj) ≫
+            (integralScalarExtensionComparisonOfUniverses l E F (j.comp ι) X).hom.app P := by
+        rw [hc]
+        simpa only [B, Category.assoc] using congrArg
+          (fun f ↦ f ≫ DerivedCategory.Q.map
+            ((completedScalarChainComparison l E F (j.comp ι) X).app P.obj)) ha
+      _ = β.app (DerivedCategory.Q.obj P.obj) ≫ t := by
+        dsimp only [β, NatTrans.comp_app]
+        simp only [Category.assoc, hn]
+  exact congrArg (fun τ ↦ τ.app K) h
 
 end WeilConjectures

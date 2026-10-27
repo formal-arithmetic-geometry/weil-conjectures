@@ -1,0 +1,206 @@
+{
+ "id": "lem-sfb-profinite-clopen-pullback-bijective-open",
+ "kind": "statement",
+ "title": "Clopen pullback detects bijectivity and openness between profinite spaces",
+ "statement": "Use the universe conventions of [def-weil-size-convention]. Let $P,Q$ be compact Hausdorff totally disconnected topological spaces, where compact means that every open cover has a finite subcover, Hausdorff means that distinct points have disjoint open neighbourhoods, and totally disconnected means that every connected subset has at most one point. Let $h:P\\to Q$ be continuous. Write $\\operatorname{Clop}(Z)$ for the open and closed subsets of a space $Z$. Suppose that $h^{-1}:\\operatorname{Clop}(Q)\\to\\operatorname{Clop}(P)$ is bijective. Then $h$ is injective and surjective. For every clopen $U\\subseteq P$, its image $h(U)$ is the unique clopen $V\\subseteq Q$ with $h^{-1}(V)=U$. Moreover $h$ is open: $h(O)$ is open in $Q$ for every open subset $O\\subseteq P$. Empty spaces are allowed.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Agent separation and finite-subcover consequence of Tag 08ZZ (lemma-profinite-refine-open-covering), using its pointwise clopen-basis consequence. This statement is not the finite-refinement assertion of the tag."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "For distinct x,y in P, the complement of the closed singleton {y} is an open neighbourhood of x. The pointwise clopen basis [lem-weil-pbc-profinite-clopen-basis] gives a clopen U containing x and excluding y. Surjectivity of clopen pullback writes U as the inverse image of a target clopen V. Equal images of x and y would then imply y belongs to U, a contradiction. Hence h is injective.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent argument using the pointwise clopen-basis consequence of Tag 08ZZ (lemma-profinite-refine-open-covering), carried by lem-weil-pbc-profinite-clopen-basis."
+   }
+  },
+  {
+   "text": "The image h(P) is closed, because a continuous map from a compact space to a Hausdorff space is closed (Mathlib Continuous.isClosedMap). If q is missing from the image, its complement is an open neighbourhood of q. Apply [lem-weil-pbc-profinite-clopen-basis] to obtain a clopen V containing q and contained in that complement. Its inverse image is empty, hence equals the inverse image of the empty clopen. Injectivity of clopen pullback forces V to be empty, contradicting q in V. This proves surjectivity, including when P is empty.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent shorter closed-image version of the original finite-subcover argument, using Mathlib Continuous.isClosedMap and the pointwise clopen-basis consequence of Tag 08ZZ."
+   }
+  },
+  {
+   "text": "For a source clopen U, surjectivity of clopen pullback gives a target clopen V with inverse image U. Since h is surjective, the image of that inverse image is V, so h(U)=V is clopen and its inverse image is U. For any other target clopen W with inverse image U, the same image-of-preimage identity gives W=h(U). This proves all three clopen-image clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent set-theoretic identification of the image using the bijectivity established in steps 1 and 2."
+   }
+  },
+  {
+   "text": "Apply the clopen-basis criterion for an open map (Mathlib IsTopologicalBasis.isOpenMap_iff) to [lem-weil-pbc-profinite-clopen-basis]. Every basis clopen has open image by step 3. The criterion takes unions of basis elements and commutes their images with unions, including the empty union, so h is open.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Agent argument using the pointwise clopen-basis consequence of Tag 08ZZ (lemma-profinite-refine-open-covering), carried by lem-weil-pbc-profinite-clopen-basis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-clopen-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "M4 Lean proof using the pointwise clopen-basis consequence of Tag 08ZZ. The original finite-subcover surjectivity argument is shortened using Mathlib Continuous.isClosedMap; IsTopologicalBasis.isOpenMap_iff packages the original union-of-clopens argument. The declared clopen-basis dependency and all unit-level steps are retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(clopen|Clopen|Clopens).*(bijective|injective|surjective|homeomorph)|(bijective|injective|surjective).*(clopen|Clopen|Clopens)",
+   "results": "{\"t\": \"2026-10-22T05:56:58Z\", \"tool\": \"grep\", \"query\": \"(clopen|Clopen|Clopens).*(bijective|injective|surjective|homeomorph)|(bijective|injective|surjective).*(clopen|Clopen|Clopens)\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Topology/ClopenBox.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/Connected/Clopen.lean\"], \"digest\": \"de509452f3f43dd3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: compact-Hausdorff isomorphism results assume bijectivity on points, and the open-map homeomorphism constructor assumes openness as well; neither derives those properties from bijectivity of clopen inverse image. Stonean results have extremal-disconnectedness hypotheses absent here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClopen\", \"Bijective\"",
+   "results": "{\"t\": \"2026-10-22T05:56:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClopen\\\", \\\"Bijective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: compact-Hausdorff isomorphism results assume bijectivity on points, and the open-map homeomorphism constructor assumes openness as well; neither derives those properties from bijectivity of clopen inverse image. Stonean results have extremal-disconnectedness hypotheses absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map between compact Hausdorff totally disconnected spaces with bijective inverse image on clopen subsets is bijective and open",
+   "results": "{\"t\": \"2026-10-22T05:57:18Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous map between compact Hausdorff totally disconnected spaces with bijective inverse image on clopen subsets is bijective and open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.isoOfBijective\", \"LightProfinite.isIso_of_bijective\", \"CompHausLike.isIso_of_bijective\", \"ExtremallyDisconnected.homeoCompactToT2\", \"CompHausLike.isoOfBijective\", \"TopCat.isIso_of_bijective_of_isOpenMap\", \"isHomeomorph_iff_continuous_bijective\", \"CompactT2.ExtremallyDisconnected.projective\"], \"digest\": \"1a8550c5d15603e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: compact-Hausdorff isomorphism results assume bijectivity on points, and the open-map homeomorphism constructor assumes openness as well; neither derives those properties from bijectivity of clopen inverse image. Stonean results have extremal-disconnectedness hypotheses absent here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous map between profinite spaces inducing a bijection on clopen sets is bijective and open",
+   "results": "{\"t\": \"2026-10-22T05:57:24Z\", \"tool\": \"leansearch\", \"query\": \"A continuous map between profinite spaces inducing a bijection on clopen sets is bijective and open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.isIso_of_bijective_of_isOpenMap\", \"TopCat.isIso_of_bijective_of_isClosedMap\", \"IsHomeomorph.mk\", \"LightProfinite.isIso_of_bijective\", \"LightProfinite.isoOfBijective\", \"LightProfinite.isClosedMap\", \"Equiv.toHomeomorphOfContinuousOpen\", \"Equiv.toHomeomorphOfContinuousOpen_apply\"], \"digest\": \"0bd15b180c3f11be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: compact-Hausdorff isomorphism results assume bijectivity on points, and the open-map homeomorphism constructor assumes openness as well; neither derives those properties from bijectivity of clopen inverse image. Stonean results have extremal-disconnectedness hypotheses absent here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function between Stone spaces is injective and surjective when pullback on Boolean algebras of clopens is bijective, and it is an open map",
+   "results": "{\"t\": \"2026-10-22T05:57:41Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous function between Stone spaces is injective and surjective when pullback on Boolean algebras of clopens is bijective, and it is an open map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExtremallyDisconnected.homeoCompactToT2\", \"Stonean.stoneCechEquivalence\", \"Stonean.extremallyDisconnected_preimage\", \"Stonean.epi_iff_surjective\", \"CompHaus.Gleason\", \"Stonean.instProjective\", \"CompactT2.ExtremallyDisconnected.projective\", \"typeToStonean\"], \"digest\": \"515a438f2b5f625c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: compact-Hausdorff isomorphism results assume bijectivity on points, and the open-map homeomorphism constructor assumes openness as well; neither derives those properties from bijectivity of clopen inverse image. Stonean results have extremal-disconnectedness hypotheses absent here."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|Clopens).*(bijective|injective|surjective|homeomorph)|(bijective|injective|surjective).*(clopen|Clopens)",
+   "results": "{\"t\": \"2026-10-22T08:35:53Z\", \"tool\": \"grep\", \"query\": \"(clopen|Clopens).*(bijective|injective|surjective|homeomorph)|(bijective|injective|surjective).*(clopen|Clopens)\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Topology/ClopenBox.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/Connected/Clopen.lean\"], \"digest\": \"de509452f3f43dd3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected ClopenBox.lean:72 (finite unions of product clopens), DiscreteQuotient.lean:372-403 (encoding discrete quotients), Connected/Clopen.lean:607 (component equivalence); none proves the criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous map of profinite spaces with bijective pullback on clopen sets is a homeomorphism",
+   "results": "{\"t\": \"2026-10-22T08:35:54Z\", \"tool\": \"leansearch\", \"query\": \"A continuous map of profinite spaces with bijective pullback on clopen sets is a homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.isIso_of_bijective_of_isOpenMap\", \"TopCat.isIso_of_bijective_of_isClosedMap\", \"Equiv.toHomeomorphOfContinuousOpen\", \"LightProfinite.isIso_of_bijective\", \"LightProfinite.isoOfBijective\", \"IsHomeomorph.mk\", \"isHomeomorph_iff_continuous_isClosedMap_bijective\", \"IsHomeomorph.homeomorph\"], \"digest\": \"37c062fc94423a6c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected compact-Hausdorff homeomorphism constructors, which require pointwise bijectivity; the target must derive it from clopen pullback. Stonean tools require extremal disconnectedness; Profinite.toCompHausEquivalence is an adjunction, not this criterion. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClopen\", \"Bijective\"",
+   "results": "{\"t\": \"2026-10-22T08:35:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClopen\\\", \\\"Bijective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: zero hits for the two name fragments."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map between compact Hausdorff totally disconnected spaces whose inverse image on clopen subsets is bijective is bijective and open",
+   "results": "{\"t\": \"2026-10-22T08:35:55Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous map between compact Hausdorff totally disconnected spaces whose inverse image on clopen subsets is bijective is bijective and open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.isIso_of_bijective\", \"LightProfinite.isoOfBijective\", \"CompactT2.ExtremallyDisconnected.projective\", \"ExtremallyDisconnected.homeoCompactToT2\", \"isHomeomorph_iff_continuous_bijective\", \"CompHausLike.isoOfBijective\", \"CompHausLike.isIso_of_bijective\", \"Profinite.toCompHausEquivalence\"], \"digest\": \"f38641d99eb4a76a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected compact-Hausdorff homeomorphism constructors, which require pointwise bijectivity; the target must derive it from clopen pullback. Stonean tools require extremal disconnectedness; Profinite.toCompHausEquivalence is an adjunction, not this criterion. A second semantic phrasing was also searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of Stone spaces inducing an isomorphism on Boolean algebras of clopen subsets is a homeomorphism",
+   "results": "{\"t\": \"2026-10-22T08:36:35Z\", \"tool\": \"leanfinder\", \"query\": \"A map of Stone spaces inducing an isomorphism on Boolean algebras of clopen subsets is a homeomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.homeoOfIso\", \"CompHausLike.isoEquivHomeo\", \"CompHausLike.isoEquivHomeo_apply\", \"CompHausLike.isoOfBijective\", \"CompHausLike.isoOfHomeo\", \"CompHausLike.homeoOfIso_apply\", \"ExtremallyDisconnected.homeoCompactToT2\", \"Stonean.fullyFaithfulToCompHaus\"], \"digest\": \"c56c7c9bbfd3661d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected compact-Hausdorff homeomorphism constructors, which require pointwise bijectivity; the target must derive it from clopen pullback. Stonean tools require extremal disconnectedness; Profinite.toCompHausEquivalence is an adjunction, not this criterion. A second semantic phrasing was also searched."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-spectral-clopen-component-homeomorphism",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Generic restriction of continuous coefficient sections on a normal scheme; passage from generic clopen extension to the component-space comparison; original steps 4, 5 and 6: separate points by clopens, exclude missing points by a finite subcover, and identify images of clopens to prove openness",
+   "via": [
+    "lem-sfb-spectral-clopen-component-homeomorphism",
+    "lem-sfb-normal-generic-continuous-sections",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-profinite-clopen-pullback-bijective-open",
+  "worker": "stage1",
+  "summary": "Proved all clauses directly: clopen separation proves injectivity, a finite subcover excluding a missing target point proves surjectivity, the inverse-image bijection identifies clopen images, and the clopen basis proves openness. Reused the existing Mathlib clopen-basis leaf; no new nodes. Read both source and every cited statement, searched project Lean and the whole blueprint, and ran fresh logged Mathlib searches in two semantic phrasings. Statement unchanged.",
+  "blueprint": "Realizes original steps 4, 5 and 6 of lem-sfb-spectral-clopen-component-homeomorphism, preserved in the inherited blueprint.from.place: separate points by clopens, exclude missing points by a finite subcover, identify clopen images and prove openness. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor confirms; retain the via chain and same_as = []."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NF-2e92e8682",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-2e92e8682 (reviewer sub-agent of L); spot-checked: Read the item's 4 steps in full against Stacks topology.tex:4207-4229 (Tag 08ZZ, lemma-profinite-refine-open-covering; tags/tags:11392) and against the statement of the only cited node, lem-weil-pbc-profinite-clopen-basis (status mathlib; clopens form a basis of a compact Hausdorff totally disconnected space). The statement is identical to the item NO created for the parent lem-sfb-spectral-clopen-component-homeomorphism, so nothing was weakened. This is not a 2026-10-21 re-split: the item had no proof on the base. There are no new nodes and no cycle, because the parent cites the item and not the other way round. Step 1 (injectivity): Hausdorffness and a clopen basis set U with x∈U⊆A exclude x', and V with h^{-1}V=U separates h(x) from h(x'). Step 2 (surjectivity): if q∉h(P), clopens excluding q cover h(P); compactness gives finitely many, and their union W has h^{-1}W=h^{-1}Q, so W=Q by injectivity, a contradiction (the empty subcover is handled). Step 3: h(U)=V by step 2, and V is unique by injectivity. Step 4: O is a union of clopens, so h(O) is open. All steps are genuinely elementary. Small cases checked: empty P and/or Q, constant map 2→1 (not surjective on clopens), inclusion 1→2 (not injective on clopens), finite discrete spaces. A DAG-wide scan of clopen/profinite/bijective statements found no duplicate. The basis node from the other unit is a Mathlib leaf, so no tool_uses entry is needed. No SGA source is used. Minor: the report mentions a citations.json that is not in the commit and is not required. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfiniteClopenPullback",
+  "declaration": "bijective_and_isOpenMap_of_bijective_clopen_preimage",
+  "file": "lean/Sheaf/Topology/ProfiniteClopenPullback.lean",
+  "statement": "theorem bijective_and_isOpenMap_of_bijective_clopen_preimage {P : Type u} {Q : Type v} [TopologicalSpace P] [TopologicalSpace Q] [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P] [CompactSpace Q] [T2Space Q] [TotallyDisconnectedSpace Q] {h : P → Q} (hh : Continuous h) (hclop : Function.Bijective (fun V : TopologicalSpace.Clopens Q ↦ (⟨h ⁻¹' (V : Set Q), V.isClopen.preimage hh⟩ : TopologicalSpace.Clopens P))) : Function.Injective h ∧ Function.Surjective h ∧ (∀ U : TopologicalSpace.Clopens P, IsClopen (h '' (U : Set P)) ∧ h ⁻¹' (h '' (U : Set P)) = (U : Set P) ∧ ∀ V : TopologicalSpace.Clopens Q, h ⁻¹' (V : Set Q) = (U : Set P) → (V : Set Q) = h '' (U : Set P)) ∧ IsOpenMap h",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-930c04cc5",
+  "group": "NU",
+  "result": "pass",
+  "note": "Node diff vs live: only the lean record is added, and its statement matches the file verbatim. Every clause matches the node: P:Type u, Q:Type v; CompactSpace/T2Space/TotallyDisconnectedSpace on both; continuous h; Function.Bijective of the actual preimage map Clopens Q→Clopens P; injective ∧ surjective ∧ ∀U clopen, h''U is clopen with preimage U and is the unique such clopen ∧ IsOpenMap. No extra hypotheses and no Nonempty. The statement is true; the 4 proof steps are in the docstring. Edge cases checked: empty spaces, 2→1, 1→2, U=∅/P, O=∅. Source Stacks 08ZZ topology.tex:4207-4229 is cited as an agent consequence, with blueprint ids in both docstrings. No Mathlib or project duplicate (parent ClopenComponentHomeomorphism is a different statement). Plain import of the proof dependency's Separation.Profinite is required by the brief; no line over 100 characters; only sorry. No compile, since nothing was changed. Advisory: the second reading is the author's own reread."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261023T090720-L-705783",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

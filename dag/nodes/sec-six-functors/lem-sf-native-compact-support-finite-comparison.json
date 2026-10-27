@@ -1,0 +1,275 @@
+{
+ "id": "lem-sf-native-compact-support-finite-comparison",
+ "kind": "statement",
+ "title": "Normalized compact-support comparisons on finite rational inputs",
+ "statement": "Fix the same relative finite-type geometry, coefficient construction P and compactification c as in StageAction, a NativeGeometry for l, and a specified StageAction. There exist realizations of X, Y and c.Z and coefficient changes from each completed finite integral coefficient ring to the native ring, whose values equal the chosen realization coefficient maps at those three schemes. For each finite unlifted coefficient field E there is a natural isomorphism between the two compact-support realizations restricted to the E-stage inclusion. These stagewise isomorphisms respect every source isoToStage, including identity stages. The normalization certificate says that every common-stage natural isomorphism whose components are these finite-stage components satisfies the unchanged IntegralNormalization predicate, namely the original six-arrow scalar-mate equation on integral finite-Tor inputs. This assertion does not assert descent on arbitrary common-field Hom classes or preservation for arbitrary native constructible objects.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.7–6.8, especially Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15; agent decomposition of lem-sf-locally-finite-adic-compact-support-realization"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Write $R_{T,E}=\\varprojlim_n(\\mathcal O_E/\\varpi_E^n)_T$ and $E_T=R_{T,E}[1/\\varpi_E]$. Since $p$ is proper it is finite type, so $Z$ is finite type over $k$ as well. The finite-type Noetherian and dimension lemmas make $X,Z,Y$ Noetherian and finite dimensional; all have $\\ell$ invertible. An open subset of a Noetherian scheme is quasi-compact, so $j$ is quasi-compact. Choose the reduced closed complement to $j$. These are exactly the geometric hypotheses needed for the completed open and integral realization lemmas below. No argument uses separatedness of any structure map to $\\operatorname{Spec}k$.",
+   "uses": [
+    "def-weil-compactifications-refinements",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-closed-subset-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Sections 6.7–6.8, verification of the Noetherian hypotheses for the chosen compactification"
+   }
+  },
+  {
+   "text": "The coefficient identifications in [lem-per-continuous-rational-derived-realization] identify $E_T$ with continuous $E$-valued functions. Locally a function in $B_T$ has image in the span of finitely many elements $a_1,\\ldots,a_r\\in\\Omega$. That span is contained in the finite field $\\mathbf Q_\\ell(a_1,\\ldots,a_r)$, since each generator is algebraic. Conversely an $E$-valued function has locally finite-dimensional image. Thus, as sheaves, $B_T=\\varinjlim_E E_T$; this is a sheaf colimit, not a claim of one field for sections on arbitrary non-quasi-compact objects. By [sk-prop-sfb-qlbar-colimit-x] this identifies $B_T$ with the pulled-back finite-subextension-valued condensed ring. The maps are inclusions of the same functions, so they commute with restriction and coefficient inclusions. A $B_T$-module in sheaves of $\\Omega$-vector spaces is exactly a sheaf of $B_T$-modules: restrict its action along constant $\\Omega\\to B_T$ to recover the vector-space action; conversely the internal action is this same bilinear multiplication. These two constructions are inverse on objects and arrows.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and definitions of the finite-subextension and locally finite coefficient sheaves; explicit local finite-span argument"
+   }
+  },
+  {
+   "text": "Represent an input at a finite field $E$ by an integral $K\\in D^b_c(X,\\mathcal O_E)$ and put $L=j_!K$ for actual completed ringed extension by zero. [lem-sf-integral-open-reduction-comparison] says $L$ is derived complete and supplies its natural whole-system reduction comparison, whose $n$th value is $L_n\\cong j_!K_n$, respecting quotient transitions and the completion unit. The reductions of $K$ have a common bounded constructible interval by definition. [lem-sf-open-finite-constructibility-interval] puts $j_!K_n$ in that same interval. Hence $L$ belongs to the completed integral constructible category. The stratified-perfect characterization makes both $K$ and $L$ bounded as ordinary completed-module complexes; in particular $L$ is bounded below, as needed for rational scalar change. The residue-Tor lemma supplies uniform finite-level Tor bounds for both, as required for system realization.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-open-finite-constructibility-interval",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.13, Lemma 6.7.7, Proposition 6.6.11; open reduction and stratified-perfect comparisons as stated in the cited nodes"
+   }
+  },
+  {
+   "text": "Let $P_RK$ denote the integral compact-support functor for $c$. The system realization theorem, applied to $S_pJ_j$ and $S_p$ and to the open comparison of step 3, identifies $P_RK$ naturally with integral proper direct image of $L$. All intermediate constructibility hypotheses hold: the open object was checked in step 3, and [lem-sf-integral-direct-image-constructible] supplies constructibility and a common reduction bound for proper direct image; the residue-Tor lemma supplies its uniform Tor bound. This integral direct image is the actual $Rp_{*,R}L$. Indeed [prop-weil-pbc-direct-image-limits] identifies actual direct image of a complete object with the derived direct image of its strict quotient tower, including its completion map and quotient transitions. Its perfect-coefficient hypothesis holds because $\\mathcal O_E/\\varpi_E^n$ has the two-term finite free resolution $[\\mathcal O_E\\xrightarrow{\\varpi_E^n}\\mathcal O_E]$. We obtain a natural derived isomorphism $\\delta_K:P_RK\\xrightarrow{\\sim}Rp_{*,R}L$. These are whole-system functor comparisons, not identifications inferred from equality of finite reductions.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-coef-integral-residue-tor",
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6, Lemma 6.7.7 and Remark 6.8.15; Stacks Tag 0A07 (lemma-Rf-commutes-with-Rlim); specified system-to-integral comparison"
+   }
+  },
+  {
+   "text": "For any complete integral constructible $M$ on $Z$, the integral realization and direct-image-limit comparison of step 4 applied to the proper factor alone identify $Rp_*^{\\mathrm{int}}M$ with actual $Rp_{*,R}M$. It is bounded constructible by integral finiteness. The canonical localization mate of [lem-sfb-localized-direct-image-comparison] is an isomorphism\n$$E_Y\\otimes^L_{R_{Y,E}}Rp_{*,R}M\\ \\xrightarrow{\\sim}\\ Rp_{*,E}(E_Z\\otimes^L_{R_{Z,E}}M).$$\nHere $p$ is quasi-compact and quasi-separated because it is proper, and $M$ is bounded below by the stratified-perfect characterization. The coefficient identifications are step 2 and the given NativeGeometry supplies module transport. This lemma imposes no absolute separatedness, no site-perfectness, and no finite Tor assumption. Its transpose is the scalar extension of the $R$-coefficient counit. Thus it compares the specified raw rationalized proper functor with the actual rational-coefficient derived direct image, including naturality on derived arrows.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-sfb-localized-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), finite-field localization; Bhatt–Scholze Remark 6.8.15; the cited counit-normalized localization comparison"
+   }
+  },
+  {
+   "text": "For the same $M$ put $M_E=E_Z\\otimes^L_{R_{Z,E}}M$. This is bounded by the continuous rational realization. Apply [lem-weil-pbc-condensed-qbar-bounded-push] to proper $p$, finite field $E$, and this bounded-below ordinary $E$-module complex. With step 2 and NativeGeometry it gives the canonical isomorphism\n$$B_Y\\otimes^L_{E_Y}Rp_{*,E}M_E\\xrightarrow{\\sim}Rp_{*,B}(B_Z\\otimes^L_{E_Z}M_E).$$\nCombining this with step 5 yields $\\beta_M:J_YRp_*^{\\mathrm{stage}}(M[1/\\varpi_E])\\xrightarrow{\\sim}Rp_{*,B}J_Z(M[1/\\varpi_E])$. Reassociate the tensors using flat-term K-flat representatives: coefficient pullback preserves such representatives, and the rebracketing is $b\\otimes e\\otimes m\\mapsto be\\otimes m$, inverse $b\\otimes m\\mapsto b\\otimes1\\otimes m$. The flat coefficient calculus verifies the exactness required in the definition of derivedPushHom. By [def-sfb-derived-push-hom, def-sfb-mate-push-hom], its scalar-adjunction transpose is proper direct image of the scalar unit followed by the scalar-restriction comparison. [lem-weil-pbc-ring-sheaf-change-adjunction] identifies this with the geometric transpose given by extension of the proper counit. Thus both proper comparisons are counit mates. The pasted-mates counit formula identifies their composite with the counit mate for $R_{T,E}\\to B_T$, so $\\beta$ is the canonical scalar comparison, not an unspecified isomorphism.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "lem-weil-pbc-condensed-qbar-bounded-push",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-pasted-mates-counit-normalization",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "def-sfb-derived-push-hom",
+    "def-sfb-mate-push-hom",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; bounded-below proper coefficient-change theorem and the explicit counit mate pasting formula in the cited nodes"
+   }
+  },
+  {
+   "text": "The open scalar comparison is computed directly on a flat-term K-flat resolution $P\\to K$. By [lem-sf-ringed-open-total-tensor-kflat], $j_!P$ is K-flat and the chain tensor comparison gives\n$$B_Z\\otimes^L_{R_{Z,E}}j_!K\\xrightarrow{\\sim}j_!(B_X\\otimes^L_{R_{X,E}}K).$$\nThe restriction of $B_Z$ to $X$ is $B_X$, since both consist of the same locally finite functions on each site object over $X$; the same is true for $R_{Z,E}$. The tensor comparison is $b\\otimes[j_!m]\\mapsto j_!(b|_X\\otimes m)$ on the defining extension-by-zero generators, with inverse furnished by that same tensor isomorphism. Its chain naturality and K-flat resolution independence give a natural map on the localized derived categories. Step 3 identifies the integral open object with the stage open functor, so this is exactly $\\gamma:J_Zj_!^{\\mathrm{stage}}\\xrightarrow{\\sim}j_!J_X$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-open-total-tensor-kflat",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I; K-flat open comparison, with its explicit chain map"
+   }
+  },
+  {
+   "text": "For a finite-field input $A=K[1/\\varpi_E]$, use $\\delta$ from step 4 to identify its stage compact-support image with $Rp_*^{\\mathrm{stage}}j_!^{\\mathrm{stage}}A$. Define\n$$\\alpha_{c,A}=Rp_{*,B}(\\gamma_A)\\circ\\beta_{j_!^{\\mathrm{stage}}A}:J_YF^{\\mathrm{stage}}A\\longrightarrow Rp_{*,B}j_!J_XA,$$\nwhere the initial identification is the realized $\\delta$. Steps 5–7 make both displayed factors invertible, and step 4 fixes the same compactification and the same quotient transitions as the definition of $F^{\\mathrm{stage}}$. This is precisely the claimed proper comparison followed by the proper image of the open comparison. All maps are already natural on integral derived morphisms. If $u/\\varpi_E^n$ is a morphism in the raw rationalization, multiply the integral naturality square for $u$ by $\\varpi_E^{-n}$. The same square therefore commutes for every rationalized derived morphism; no idempotent completion is needed.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6, Proposition 6.8.14(2), Remark 6.8.15; composition and scalar localization of the previously constructed maps"
+   }
+  },
+  {
+   "text": "The normalized coefficient construction and rational coherence identify the finite-stage maps with the specified P rational operations and q. The common-field normalization of each realization and the completed scalar comparison show that these finite-stage isomorphisms respect isoToStage. Check the equation on integral representatives: both iterated scalar maps send b tensor a tensor m to ba tensor m and both units send m to 1 tensor m. The pasted counit identity identifies the proper factors. Naturality on integral numerators and inverse uniformizer powers extends the equation to every raw rational object. This yields the transition field of FiniteComparison, before descent to arbitrary common-field arrows. The finite integral formula depends only on the individual component at its input. Consequently every common-stage comparison with the prescribed components satisfies IntegralNormalization. This supplies the integral certificate without constructing the common-stage comparison; the separate naturality lemma supplies descent.",
+   "uses": [
+    "lem-sf-constructible-exceptional-coefficient-construction",
+    "lem-sf-constructible-exceptional-coefficient-coherence",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-sfb-pasted-mates-counit-normalization",
+    "lem-sf-locally-finite-adic-constructible-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sfb-derived-push-hom",
+  "def-sfb-mate-push-hom",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-integral-residue-tor",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-kflat-resolution",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-constructible-exceptional-coefficient-coherence",
+  "lem-sf-constructible-exceptional-coefficient-construction",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-locally-finite-adic-constructible-realization",
+  "lem-sf-open-finite-constructibility-interval",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "lem-sfb-localized-direct-image-comparison",
+  "lem-sfb-pasted-mates-counit-normalization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-weil-pbc-condensed-qbar-bounded-push",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-direct-image-limits",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "The existing native compact-support realization plan, separated into native geometry, rational stage action, finite-stage comparison, and common-stage descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compact support of constructible adic complexes commutes with realization by extension of scalars to the locally finite algebraic closure coefficient sheaf",
+   "results": "Eight results: compact support of functions, condensed sets and the p-adic complex field. No sheaf-derived compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence realizes a common finite coefficient field derived compact support functor as compact support in locally finite adic sheaves",
+   "results": "Eight results on condensed modules, free modules and locally constant modules; none supplies the native transport or the compact-support comparison.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.Morphism",
+   "results": "Unknown identifier in Mathlib; StageSystem is in the adopted source library.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib match; use the existing project stage system."
+  },
+  {
+   "tool": "grep",
+   "query": "locally_finite_adic_compact_support|NativeGeometry|rationalCocycle",
+   "results": "No Mathlib matches. Project rg located the assigned theorem, its consumers and CoefficientFieldCoherence.rationalCocycle.",
+   "date": "2026-10-27",
+   "verdict": "Project-specific coefficient comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicCompactSupportRealization",
+  "date": "2026-10-27",
+  "group": "C7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": null,
+   "place": "Current cor-coef-verdier-weil-equivariance, final common-field-comparisons paragraph; Bhatt--Scholze Remark 6.8.15. Normalized compact-support comparisons on finite rational inputs.",
+   "via": [
+    "lem-sf-locally-finite-adic-compact-support-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeCompactSupportFiniteComparison",
+  "file": "lean/Sheaf/Paper/NativeCompactSupportFiniteComparison.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_finite_comparison",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_compact_support_finite_comparison",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.CoefficientFamily",
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.FiniteComparison"
+  ],
+  "statement": "theorem native_compact_support_finite_comparison [G : NativeGeometry.{u} l] (stage : StageAction l D hl P c) : ∃ F : CoefficientFamily l c, Nonempty (FiniteComparison l D hl P c stage F)",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4750d",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261027T021303-L-2752918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-4750d",
+  "group": "C7",
+  "result": "fix",
+  "landing": "20261027T021303-L-2752918",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules/nodes + verbatim Data split (diff vs clone) + Brown adaptation timed (published orig 75 s main / 76 s vs delivery, adapted 8.9 s) + axioms + 6 importers OK"
+ }
+}

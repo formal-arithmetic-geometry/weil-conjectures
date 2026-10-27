@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-frobenius-normalized-localization-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Expanded DAG clause 4, generic augmentation and normalized descent.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized localization descent of an inverse",
+ "statement": "Let L:A→B localize W and let P be an iso-closed object property of B. Suppose F,G:B→C, H,I:A→C, b:L⋙F≅H, c:L⋙G≅I and a:H→I. For every representative X with P(LX), prescribe n_X:G(LX)≅F(LX) such that (b_X a_X c_X⁻¹)n_X=id. Then there is a unique natural isomorphism P.ι⋙G≅P.ι⋙F whose component on every such representative is n_X.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Expanded DAG clause 4, existing generic augmentation/localization proof; Mathlib mappingCocone.id_X and Localization.fullyFaithfulWhiskeringLeft."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Descend b.hom≫a≫c.inv using full faithfulness of whiskering along L. The normalization identifies its inverse on representatives. Essential surjectivity and iso-closedness give invertibility on P; invert the restricted transformation. Naturality and essential surjectivity also give uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Expanded DAG clause 4, existing generic augmentation/localization proof; Mathlib mappingCocone.id_X and Localization.fullyFaithfulWhiskeringLeft."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Expanded DAG clause 4, existing generic augmentation/localization proof; Mathlib mappingCocone.id_X and Localization.fullyFaithfulWhiskeringLeft."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism into a mapping cocone is determined by its two component maps, and an isomorphism descends uniquely from a localization",
+   "results": "Mapping-cone coordinate extensionality and general localization lemmas were returned. Use the existing cocone identity and the existing full-faithfulness argument.",
+   "date": "2026-10-27",
+   "verdict": "extract already proved generic argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.id_X",
+   "results": "The exact identity decomposition is in Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone.",
+   "date": "2026-10-27",
+   "verdict": "use id_X"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*ext|fullyFaithfulWhiskeringLeft",
+   "results": "Localization.Predicate defines the fully faithful whiskering functor. Local library search finds the complete generic proof already in the assigned module.",
+   "date": "2026-10-27",
+   "verdict": "extract and preserve proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrobeniusCoefficientTwistsCanonical",
+  "date": "2026-10-27",
+  "group": "B9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrobeniusNormalizedDescent",
+  "file": "lean/Sheaf/Paper/FrobeniusNormalizedDescent.lean",
+  "declaration": "WeilConjectures.FrobeniusCoefficientTwists.normalized_descent",
+  "statement": "theorem normalized_descent\n    {A B C : Type*} [Category A] [Category B] [Category C]\n    (L : A ⥤ B) (W : MorphismProperty A) [L.IsLocalization W]\n    (P : ObjectProperty B) [P.IsClosedUnderIsomorphisms]\n    (F G : B ⥤ C) (H I : A ⥤ C) (b : L ⋙ F ≅ H) (c : L ⋙ G ≅ I)\n    (a : H ⟶ I) (n : ∀ X, P (L.obj X) → (G.obj (L.obj X) ≅ F.obj (L.obj X)))\n    (hn : ∀ X (hX : P (L.obj X)),\n      (b.hom.app X ≫ a.app X ≫ c.inv.app X) ≫ (n X hX).hom = 𝟙 _) :\n    ∃! e : P.ι ⋙ G ≅ P.ι ⋙ F, ∀ X (hX : P (L.obj X)),\n      e.hom.app ⟨L.obj X, hX⟩ = (n X hX).hom",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-weil-frobenius-normalized-localization-descent",
+  "worker": "stage3",
+  "summary": "Existing proved generic helper extracted without adding a hole.",
+  "blueprint": "Expanded DAG clause 4, generic augmentation and normalized descent.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T222559-L-669977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T222559-L-669977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

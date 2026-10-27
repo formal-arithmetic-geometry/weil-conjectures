@@ -1,0 +1,160 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient first inverse projection formula compact support composition etale sum extension",
+   "results": "No relevant match: FormalMultilinearSeries.rightInv_coeff, MvPowerSeries.coeff_inv and Function.support_comp_eq_preimage.",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of tensor projection adjunction mate with composition of adjunctions",
+   "results": "comp_leftAdjointMate, comp_rightAdjointMate and Adjunction.map_μ_comp_counit_app_tensor_assoc are general mate tools; none identifies graph-normalized compact-support composition with sum-extension projection.",
+   "date": "2026-10-25",
+   "verdict": "Use general mate tools in the parent proof; no exact geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorMateInverseProjection|etalePrecompProjection|compactSupportProjectionMap in Mathlib, WeilConjectures, Sheaf and dag/nodes",
+   "results": "No existing declaration of either new name. Sheaf.AlgebraicGeometry.ShriekTensorComposition gives compactSupportProjectionMap_comp; EtaleSupportMapCompatibility gives the separate sum-extension comparison square. No combined coefficient-first square exists. Mathlib Adjunction/Mates.lean gives conjugateEquiv_counit.",
+   "date": "2026-10-25",
+   "verdict": "Reuse existing projection and normalization declarations in the new step; the combined square is missing."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.TensorMateEtalePrecomp",
+  "date": "2026-10-25",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Paragraph 3, projection followed by the composite etale counit.",
+   "via": [
+    "lem-asd-tensor-mate-etale-precomp"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "import_flags": [],
+ "id": "lem-asd-etale-precomp-projection",
+ "kind": "statement",
+ "title": "Normalized inverse projection square for etale precomposition",
+ "statement": "Let A be a finite commutative ring, u:U→X a separated finite-type etale morphism and f:X→S a separated finite-type morphism of Noetherian schemes; suppose f and h=u≫f are compactifiable [def-weil-pbc-derived-categories, def-asd-compactifiable, def-weil-etale-morphism, def-weil-finite-type-morphism, def-weil-proper-morphism, def-weil-pbc-noetherian-ring]. Fix a graph-normalized datum N [def-sp-etale-compact-support-normalization]. Set E=Du_!, F=Rf_!, H=Rh_!, V=u*, and c:EF≅H equal to the specified etaleAmbientLeftComparison for the chosen compactifications [def-sp-etale-adjoint-chart-comparison]. Let q_f,q_h be the coefficient-first inverse projections [def-asd-tensor-mate-inverse-projection], Q(B,M):E(VB⊗ᴸM)→B⊗ᴸEM the sum-extension tensor comparison [lem-asd-etale-sum-extension-tensor], and t_M:(Vf*K)⊗ᴸM→h*K⊗ᴸM induced by inverse pullback composition [lem-amb-unbounded-compact-support-comparisons]. For every unbounded K∈D(S_et,A) and M∈D(U_et,A), in Lean composition order, F(Q(f*K,M)) ≫ q_f(K,EM) ≫ (K⊗ᴸ-)(c_M) = c_(Vf*K⊗ᴸM) ≫ H(t_M) ≫ q_h(K,M). This statement involves no exceptional right adjoint or dualizing object.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-asd-compactifiable",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-sp-etale-compact-support-normalization",
+  "def-sp-etale-adjoint-chart-comparison",
+  "def-asd-tensor-mate-inverse-projection",
+  "lem-asd-etale-sum-extension-tensor",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use the proper/open tower for the chosen compactifications of f and h. Apply the projection composition and comparison theorems to identify its projection with that of h. Noetherian hypotheses allow a compactification of u by Nagata.",
+   "uses": [
+    "lem-amb-shriek-tensor-composition",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
+   }
+  },
+  {
+   "text": "The graph-normalized compact-support comparison for u identifies its projection with sum extension by etaleSupportMapCompatibility. Its sheaf comparison agrees with N because both extend each sheet section from its graph; embed into direct image to prove equality, then descend the specified homotopy formula. Transport the tower equation through this comparison.",
+   "uses": [
+    "lem-pur-etale-support-map-compatibility",
+    "lem-asd-etale-compact-support-normalization",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
+   }
+  },
+  {
+   "text": "Reorder the tensor factors by signed symmetries, transport left derived inverse image to exact inverse image, and invert the projections. Naturality and pullback-composition coherence give exactly the displayed square.",
+   "uses": [
+    "lem-kun-tensor-sym",
+    "lem-asd-etale-sum-extension-tensor",
+    "lem-amb-shriek-tensor-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-etale-sum-extension-tensor",
+  "lem-kun-tensor-sym",
+  "lem-pur-etale-support-map-compatibility",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.EtalePrecompProjection",
+  "file": "lean/Sheaf/SmoothPurity/EtalePrecompProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.etalePrecompProjection",
+  "statement": "theorem etalePrecompProjection\n    (A : Type (v + 1)) [CommRing A] [Finite A]\n    (N : EtaleCompactSupportNormalization A)\n    {U X S : Scheme.{v}} (u : U ⟶ X) (f : X ⟶ S)\n    [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]\n    [IsNoetherian U] [IsNoetherian X] [IsNoetherian S]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated (u ≫ f)] [LocallyOfFiniteType (u ≫ f)] [QuasiCompact (u ≫ f)]\n    [HasCompactification f] [HasCompactification (u ≫ f)]\n    (K : DerivedCategoryModule A S) (M : DerivedCategoryModule A U) :\n    let c := etaleAmbientLeftComparison A N u f\n      (HasCompactification.compactification f)\n      (HasCompactification.compactification (u ≫ f))\n    R(f)_![ModuleCat A].map\n        (etaleSumExtensionTensorComparison A u\n          ((f)^*[ModuleCat A].mapDerivedCategory.obj K) M) ≫\n        (tensorMateInverseProjection A f K).app\n          ((etaleLowerShriek (ModuleCat A) u inferInstance).mapDerivedCategory.obj M) ≫\n        ((derivedTensor (ModuleCat A) S).obj K).map (c.hom.app M) =\n      c.hom.app (((derivedTensor (ModuleCat A) U).obj\n          ((u)^*[ModuleCat A].mapDerivedCategory.obj\n            ((f)^*[ModuleCat A].mapDerivedCategory.obj K))).obj M) ≫\n        R(u ≫ f)_![ModuleCat A].map\n          (((derivedTensor (ModuleCat A) U).map\n            ((unboundedEtaleUpperStarCompIso A u f).inv.app K)).app M) ≫\n        (tensorMateInverseProjection A (u ≫ f) K).app M",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T144301-L-1223057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T144301-L-1223057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

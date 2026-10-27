@@ -1,0 +1,278 @@
+{
+ "id": "lem-pur-flat-support-chain-diagram",
+ "kind": "statement",
+ "title": "Flat-term tensor and the strict open-kernel cochain diagram",
+ "statement": "Let $j:U\\hookrightarrow P$ be an open immersion of schemes and let $A$ be a finite commutative ring [def-weil-pbc-scheme-conventions]. Work with integer cochain complexes of ordinary constant-$A$ module sheaves on the small etale sites [def-weil-pbc-derived-categories]. Apply the exact inverse-image adjunction $j^*\\dashv j_*$ termwise [prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-termwise-adjunction-homotopy], writing $r_K=\\eta_K:K\\to j_*j^*K$, $S(K)=\\ker r_K$ and $s_K:S(K)\\to K$ for every complex $K$.\n\nLet $Q,I,J$ be arbitrary, possibly unbounded cochain complexes on $P$, with every $Q^p$ flat, meaning that tensoring sheaves with $Q^p$ is exact [def-pc-flat-sheaf-modules]. Write $Q\\otimes K=\\operatorname{Tot}(Q\\otimes_A K)$ for direct-sum total tensor, with differential $d_Q\\otimes1+(-1)^p1\\otimes d_K$ on bidegree $(p,q)$ [def-pc-tensor-complex-sheaves]. Let $a:Q\\otimes I\\to J$ be any $A$-linear chain map. Put $C=j_*j^*I$, $C'=j_*j^*J$, and let $c_{Q,K}:j^*(Q\\otimes K)\\xrightarrow{\\sim}j^*Q\\otimes j^*K$ be the canonical cochain comparison [lem-pur-cochain-pullback-tensor-coherence]. Define\n$$h=j^*a\\,c_{Q,I}^{-1}(1\\otimes\\varepsilon^0_{j^*I})c_{Q,C},\\qquad v=j_*h\\,\\eta_{Q\\otimes C}:Q\\otimes C\\longrightarrow C',$$\nwhere $\\varepsilon^0:j^*j_*\\to1$ is the ordinary counit and compositions are read right to left.\n\nThe map $v$ is a chain map, satisfies $v(1\\otimes r_I)=r_Ja$, and on each total-degree summand is the ordinary adjunct of the displayed formula for $h$ on that summand. There is a unique chain map $u:Q\\otimes S(I)\\to S(J)$ satisfying $s_Ju=a(1\\otimes s_I)$. Thus $(u,a,v)$ is a strict morphism of the two kernel rows. If $r_I$ and $r_J$ are degreewise epimorphisms, then\n$$0\\to Q\\otimes S(I)\\to Q\\otimes I\\to Q\\otimes C\\to0,\\qquad 0\\to S(J)\\to J\\to C'\\to0$$\nare degreewise short exact sequences. The construction is natural even without these epimorphism hypotheses: for complexes $I',J'$, a chain map $a':Q\\otimes I'\\to J'$, and maps $f:I\\to I'$, $g:J\\to J'$ with $ga=a'(1\\otimes f)$, the induced maps between kernel rows commute with $(u,a,v)$ and $(u',a',v')$. This is a statement about actual $A$-linear cochain maps; neither K-flatness nor any second coefficient-ring action is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 093X, label lemma-restriction-along-monomorphism-surjective, support-row input; agent-written cochain refinement of the Locality comparison, extracted from returned lem-pur-etale-kflat-support-comparison Steps 2–4 and Step 8 naturality. Full argument and additional tensor sources retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "proof": [
+  {
+   "text": "The existing additive adjunction lifts termwise by Adjunction.mapHomologicalComplex. Its unit gives restriction; ShortComplex.kernelSequence constructs the actual kernel complex and kernel.map constructs its functorial maps. All definitions and public statements are unchanged.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian (sectionwise kernels); termwise unit naturality"
+   }
+  },
+  {
+   "text": "Prove the result first for any additive strong monoidal left adjoint between braided monoidal closed Grothendieck abelian categories. The existing mapHomologicalComplexδNatTrans is the canonical total comparison. Its naturality and the adjunction triangle identity show F(1 tensor restriction) followed by transpose equals F(a). Unit naturality then proves the right square.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, naturality; inverse-image adjunction triangle identities"
+   }
+  },
+  {
+   "text": "Compute the transpose on an individual total summand using map_ιMapBifunctor_mapBifunctorComparisonX, ιTensorObj_whiskerLeft_f and ιTensorObj_mapCochainComplexμIso_hom_f. The inverse comparison agrees with mapCochainComplexμIso.hom because their inverses have identical homs. Adjunction.homEquiv_naturality_left gives exactly the asserted ordinary summand adjunct. No preservation of sums by the right adjoint is used.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, cochain comparison; termwise adjunction and unit naturality"
+   }
+  },
+  {
+   "text": "The right square and the zero composite in the kernel row imply that (1 tensor s_I) followed by a is killed by restriction_J. Apply the kernel universal property in the category of complexes to construct the unique u. Thus its chain equation is automatic; uniqueness follows by cancelling the kernel inclusion.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian, kernel universal property; functorial total tensor"
+   }
+  },
+  {
+   "text": "When restriction is degreewise epic, the kernel sequence is short exact and its evaluation in every degree is short exact. For the top total row in degree n, form the Discrete diagram indexed by pairs (p,q) with p+q=n, with row Q^p tensor row(I)^q. Flatness and the braiding make every component short exact. Evaluation detects exactness in the functor category, using mapHomologyIso. The coproduct functor preserves short exactness by the Grothendieck abelian AB4 instances and ShortExact.map_of_exact. The coproduct row is identified with the degree-n total tensor row by its coproduct injections.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER, definition-flat (3); total differential as in def-pc-tensor-complex-sheaves"
+   }
+  },
+  {
+   "text": "Naturality of the comparison and counit identifies the two transposes associated to a,f,g,a'. Unit naturality gives naturality of rightMap. For kernel maps, compose both proposed paths with the final kernel inclusion, use kernel.lift_ι, the defining equations for u,u', and the hypothesis a followed by g equals (1 tensor f) followed by a'; cancel the inclusion. Specialize the proved generic diagram to the ordinary etale upperStarLowerStarAdjunction.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, naturality; adjunction naturality and sectionwise kernels"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "G6 Lean proof of the unchanged strict cochain diagram, using the ordinary strong-monoidal comparison API, adjunction naturality and triangle identities, kernel universal properties, and AB4 for the total direct sum; Tags 03DA, 03DB, 03ER and 07A4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat term total tensor of etale sheaf complexes preserves a short exact support sequence and the adjoint quotient map induces a unique natural morphism of kernels",
+   "results": "[leanfinder] OK 8 hit(s); KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.FaithfullyFlat.range_le_ker_of_exact_rTensor; Algebra.H1Cotangent.exact_δ_mapBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern single modules, generic short complexes or adjunctions, not the actual sheaf cochain kernel diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed open pair and a chain map from a tensor complex to an injective complex construct an exact diagram using the open adjunction unit and counit",
+   "results": "[leanfinder] OK 8 hit(s); Profinite.NobelingProof.succ_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CochainComplex.isKInjective_of_injective_aux; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.InjectiveResolution.exact₀; CategoryTheory.exact_f_d; CategoryTheory.InjectiveResolution.exact_succ; CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern single modules, generic short complexes or adjunctions, not the actual sheaf cochain kernel diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex, CochainComplex",
+   "results": "[loogle] OK 12 hit(s); CochainComplex.mk; CochainComplex.mappingCone.triangleRotateShortComplex; CochainComplex.triangleOfDegreewiseSplit; CochainComplex.trianglehOfDegreewiseSplit; CochainComplex.triangleOfDegreewiseSplit_obj₁; CochainComplex.triangleOfDegreewiseSplit_obj₂; CochainComplex.triangleOfDegreewiseSplit_obj₃; CochainComplex.cocycleOfDegreewiseSplit; CochainComplex.triangleOfDegreewiseSplit_mor₁; CochainComplex.triangleOfDegreewiseSplit_mor₂; CochainComplex.homOfDegreewiseSplit; CochainComplex.triangleOfDegreewiseSplit_mor₃",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern single modules, generic short complexes or adjunctions, not the actual sheaf cochain kernel diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*[Tt]ensor|[Tt]ensor.*support|[Tt]ensor.*[Ss]hort[Ee]xact",
+   "results": "[grep] OK 3 hit(s); Mathlib/RingTheory/LocalRing/Module.lean:112; Mathlib/LinearAlgebra/PiTensorProduct/DFinsupp.lean:13; Mathlib/LinearAlgebra/PiTensorProduct/DFinsupp.lean:33",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern single modules, generic short complexes or adjunctions, not the actual sheaf cochain kernel diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat term total tensor of etale sheaf complexes preserves a short exact support sequence and the adjoint quotient map induces a unique natural morphism of kernels",
+   "results": "[leansearch] OK 8 hit(s); Module.Flat.lTensor_exact; Module.Flat.rTensor_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.ker_lTensor_eq; Module.Flat.iff_lTensor_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern single modules, generic short complexes or adjunctions, not the actual sheaf cochain kernel diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat term total tensor of sheaf complexes preserves kernels and short exact sequences and defines the natural open restriction support diagram",
+   "results": "OK: 8 hits; Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, Module.Flat.iff_preservesFiniteLimits_tensorLeft, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic short-complex hits do not state the strict open-support cochain diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*[Tt]ensor|[Tt]ensor.*support|[Tt]ensor.*[Ss]hort[Ee]xact",
+   "results": "OK: 3 hits; Mathlib/LinearAlgebra/PiTensorProduct/DFinsupp.lean, Mathlib/LinearAlgebra/PiTensorProduct/DFinsupp.lean, Mathlib/RingTheory/LocalRing/Module.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic short-complex hits do not state the strict open-support cochain diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open immersion of etale topoi and a tensor chain map induce a natural commuting diagram of kernel support sequences",
+   "results": "OK: 8 hits; AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.isOpenImmersion_eq_inf, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mk, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.IsOpenImmersion.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic short-complex hits do not state the strict open-support cochain diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex, CochainComplex",
+   "results": "OK: 12 hits; CochainComplex.mk, CochainComplex.mappingCone.triangleRotateShortComplex, CochainComplex.triangleOfDegreewiseSplit, CochainComplex.trianglehOfDegreewiseSplit, CochainComplex.triangleOfDegreewiseSplit_obj₁, CochainComplex.triangleOfDegreewiseSplit_obj₂, CochainComplex.triangleOfDegreewiseSplit_obj₃, CochainComplex.cocycleOfDegreewiseSplit",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic short-complex hits do not state the strict open-support cochain diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor tensoring by a complex of flat sheaves preserves degreewise short exact sequences by exactness of direct sums",
+   "results": "OK: 8 hits; Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.FaithfullyFlat.lTensor_exact_iff_exact, Module.FaithfullyFlat.rTensor_exact_iff_exact, Module.Flat.lTensor_exact, Module.FaithfullyFlat.lTensor_reflects_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: module flatness and generic short-complex hits do not state the strict open-support cochain diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-kflat-support-comparison",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Finite-stage prerequisite of thm-pur-rational-and-qbar-purity, proof Steps 1–2; Locality closed-factor coefficient comparison. Tag 093X, label lemma-restriction-along-monomorphism-surjective, support-row input; agent-written cochain refinement of the Locality comparison, extracted from returned lem-pur-etale-kflat-support-comparison Steps 2–4 and Step 8 naturality. Full argument and additional tensor sources retained in report.md.",
+   "via": [
+    "lem-pur-etale-kflat-support-comparison",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-flat-support-chain-diagram",
+  "worker": "stage1",
+  "summary": "Constructed the actual kernel complexes, proved exactness of arbitrary total sums from the existing module-sheaf AB5 theorem, computed the strict quotient square by transposition, and proved unique kernel factorization and naturality. No new nodes and no statement change.",
+  "blueprint": "Finite-stage prerequisite of thm-pur-rational-and-qbar-purity Steps 1–2 and the coefficient-change compatibility of sk-thm-purity-transport: Locality closed-factor comparison; retained Q107 proof Steps 2–4 and strict naturality from Step 8. The ancestor tool reports null, retained faithfully.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Exact filtered colimits in ordinary constant-A small-etale module sheaves supply exact total sums. This is a general ambient-category input, not a purity-route replacement."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Only clause (a), the adjunction on actual cochain complexes with its natural unit and counit, is used; the purity unit has no alternate construction."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "The canonical signed cochain tensor comparison and its naturality are the existing general ringed-topos tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "The statement uses the ordinary constant-coefficient inverse-image adjunction, with the canonical coefficient identification; no derived comparison is invoked."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-92c7291e5",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-92c7291e5 (reviewer sub-agent of L); spot-checked: Read the whole item, its 9 cited statements, the parent lem-pur-etale-kflat-support-comparison and the Stacks sources (093X at sites-cohomology.tex:1962 is only motivation for the epimorphism hypotheses; 03DA and 03DB at sites-modules.tex:1358 for sectionwise kernels and exact filtered colimits; 03ER; 07A4 at sites-cohomology.tex:3684). No repair note exists for this item, so the 2026-10-21 re-split rule does not apply. There are no new nodes and the statement and stmt_deps are unchanged. Type check: h = j^*a c_{Q,I}^{-1}(1⊗ε^0_{j^*I}) c_{Q,C} maps j^*(Q⊗C) to j^*J, and v maps Q⊗C to C'. I recomputed every step. Step 5: the adjunct of v(1⊗r_I) is h j^*(1⊗r_I), which reduces to j^*a by the naturality of c and the triangle identity. Step 6: u is defined by kernel factorization and its chain equation is checked by cancelling s_J. Step 7: naturality in both arguments of c and ε gives h_{a'} j^*(1⊗Df) = j^*g h_a. Step 2: the AB5 node applies with T=P, Λ=A, and finite subsums give exact direct sums. Step 3: the flatness definition is applied with the tensor factors swapped. Small cases checked: j=id gives v=a and S=0; U empty gives u=a; Q=0; Q=A[0]; Q in a single degree gives the (−1)^p sign; unbounded complexes; r not epi. I searched the DAG for duplicates (lem-pur-etale-injective-support-sequence, lem-pur-support-exact, lem-exc-proetale-supported-kernel-complex, lem-pur-support-injective-exact-models) and none states this diagram. The declared tool uses (module-sheaf AB5, termwise adjunction clause (a), inverse-image module adjunction, cochain coherence) are accepted as generic black boxes. FIX (C3/C4): Steps 1 and 4 used the module adjunction j^*⊣j_* and the identification of j^* with module pullback along the ringed-topos morphism, which the cochain comparison needs. That is prop-weil-pbc-inverse-image-modules-exact (1)–(3), which no step cited although it is in stmt_deps and tool_uses. I added it to the uses of both steps with one explanatory sentence each and to proof_deps. Cosmetic: the \\prime forms in Step 7 are now plain primes. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-flat-support-chain-diagram.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatSupportChainDiagram",
+  "declaration": "AlgebraicGeometry.Etale.flatSupportChainDiagram",
+  "declarations": [
+   "AlgebraicGeometry.Etale.OpenSupport.comparison",
+   "AlgebraicGeometry.Etale.OpenSupport.restriction",
+   "AlgebraicGeometry.Etale.OpenSupport.row",
+   "AlgebraicGeometry.Etale.OpenSupport.transpose",
+   "AlgebraicGeometry.Etale.OpenSupport.rightMap",
+   "AlgebraicGeometry.Etale.OpenSupport.kernelMap",
+   "AlgebraicGeometry.Etale.OpenSupport.Diagram",
+   "AlgebraicGeometry.Etale.flatSupportChainDiagram"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatSupportChainDiagram.lean",
+  "statement": "theorem flatSupportChainDiagram (A : Type (u + 1)) [CommRing A] [Finite A] {U P : Scheme.{u}} (j : U ⟶ P) [IsOpenImmersion j] (Q I J : CochainComplex (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (_hQ : ∀ p : ℤ, exactFunctor _ _ (tensorRight (Q.X p))) (a : Q ⊗ I ⟶ J) : OpenSupport.Diagram (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j) Q I J a",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b10d7ddca",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Snapshot node differs from live/side-live only by the new lean record; lean.statement matches the file verbatim; no competing landing. Every clause matches the node: h = c_{Q,C}.hom ≫ (FQ ◁ ε_{FI}) ≫ c_{Q,I}.inv ≫ F.map a; v = η ≫ G.map h; right square; summand formula with unsigned δ/μ, no claim that j_* preserves sums; ∃! u with s_J u = a(1⊗s_I); epi hypotheses only in the degreewise ShortExact clause; naturality for arbitrary f,g with the kernelMap square for all u,u' satisfying the characterization. Flatness is exactFunctor (tensorRight Q^p), not K-flat; ModuleCat A sheaf tensor over A with (-1)^p sign; A : Type (u+1) Finite CommRing. Edge cases checked: Q/I/J = 0, zero ring, empty U, j = id, single-degree Q, non-epi units. Helper defs are real constructions; docstrings carry sources, blueprint tag and 7 proof steps; only the theorem is sorry. Advisory: the summand formula repeats tensorAdjunct of def-pur-etale-kflat-support-data (no competing map); c is the canonical strong-monoidal upperStar δ in the ModuleCat encoding rather than the ringed-site CochainPullback.comparison declaration, the same canonical map."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261023T231149-L-3554663",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

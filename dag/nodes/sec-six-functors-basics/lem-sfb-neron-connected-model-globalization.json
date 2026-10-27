@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-neron-connected-model-globalization",
+ "kind": "statement",
+ "title": "Globalizing local Néron models with a common connected model",
+ "statement": "Let $D$ be a Noetherian integrally closed domain of Krull dimension one, $K=\\operatorname{Frac}(D)$, and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. A commutative group scheme over a base has multiplication, inverse and identity morphisms over that base satisfying the commutative group identities. Separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. A scheme over a field $k$ is geometrically connected if its base change to every field extension of $k$ is connected [def-weil-connected-scheme]; a scheme over $S$ has geometrically connected fibres if its fibre over each point $s\\in S$ is geometrically connected over the residue field $\\kappa(s)$. Let $G$ be a smooth separated geometrically connected commutative finite-type $K$-group [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. A Néron lft-model of a smooth separated $K$-group $V$ means a smooth separated $S$-group $\\mathcal V$, with a specified generic group isomorphism $\\mathcal V_K\\simeq V$, such that restriction is a bijection $\\operatorname{Hom}_S(X,\\mathcal V)\\simeq\\operatorname{Hom}_K(X_K,V)$ for every smooth $S$-scheme $X$ [def-pc-base-change, def-sbc-smooth-morphisms]. It is only locally of finite type; finite type additionally requires quasi-compactness [def-weil-finite-type-morphism]. Suppose that for each maximal ideal $\\mathfrak m\\subset D$ there is a Néron lft-model $N_{\\mathfrak m}$ of $G$ over $\\operatorname{Spec}D_{\\mathfrak m}$, where localization is as in [def-weil-pbc-localization-at-prime]. Suppose also that there is a smooth separated commutative finite-type $S$-group scheme $B$ with geometrically connected fibres and a generic group identification $B_K\\simeq G$, together with group isomorphisms $B_{D_{\\mathfrak m}}\\simeq N_{\\mathfrak m}^0$ inducing that generic identification for every $\\mathfrak m$. Here $N_{\\mathfrak m}^0$ is the open subgroup whose geometric fibres are the connected components of the identity [def-weil-open-immersion]. Then there is a smooth separated commutative Néron lft-model $N$ of $G$ over $S$, whose localization at every $\\mathfrak m$ is $N_{\\mathfrak m}$, compatibly with the generic identifications, and with $N^0\\simeq B$. No finiteness assumption on the set of maximal ideals or on the component groups of the local models is imposed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Proposition 9, implication (b) to (a), printed pp.294–295 (PDF pp.300–301), with the component-chart gluing detailed in Proposition 7, printed p.293. Local PDF WANTED; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-open-immersion",
+  "def-weil-connected-scheme",
+  "def-sfb-neron-lft-model",
+  "def-sfb-relative-identity-component"
+ ],
+ "proof": [
+  {
+   "text": "Write $T_s=\\operatorname{Spec}D_{\\mathfrak m}$ for a closed point $s$. The only primes of $D_{\\mathfrak m}$ are $(0)$ and $\\mathfrak mD_{\\mathfrak m}$: a nonzero prime below $\\mathfrak m$ must equal it by dimension one. For $0\\ne a\\in\\mathfrak m$, the localization $D_{\\mathfrak m}[1/a]$ is therefore a domain with no nonzero prime, hence a field and equal to $K$. Thus the puncture of $T_s$ is the open generic point. Through the specified identification, regard $B_{T_s}=N_s^0$ as an open in $N_s$ containing its whole generic fibre $G$. Both $B$ and $B_{T_s}$ are quasi-compact, by finite type over an affine base. Let $W$ range over all quasi-compact opens of $N_s$ containing $B_{T_s}$. These form a set and cover $N_s$: adjoining any affine neighbourhood of any point to $B_{T_s}$ gives one. Their pairwise intersections are quasi-compact: $N_s$ is separated over the affine $T_s$, so intersections of its affine opens are affine; finite affine covers of $W,W'$ then give a finite affine cover of $W\\cap W'$. Each $W\\to T_s$ is smooth by restriction, separated because its diagonal is the restriction of that of $N_s$, and of finite presentation: it is locally of finite presentation by smoothness, quasi-compact over the affine base and quasi-separated by separatedness. The same argument makes $B\\to S$ of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Finite-presentation chart preparation for Tag 0BPA; BLR 10.1 Proposition 7, component neighbourhoods"
+   }
+  },
+  {
+   "text": "Fix $s$ and put $U_s=S\\setminus\\{s\\}$. Apply closed-point patching to $B|_{U_s}$ and $W$ over $T_s$, with their specified common generic fibre $G$. It gives an $S$-scheme $P_{s,W}$ of finite presentation, smooth and separated by the two property-detection clauses. The compatible pair consisting of the identity over $U_s$ and $B_{T_s}\\hookrightarrow W$ over $T_s$ lifts uniquely to an open immersion $B\\hookrightarrow P_{s,W}$. For $W\\subset W'$ the pair $(\\mathrm{id}_{B|_{U_s}},W\\hookrightarrow W')$ similarly gives an open immersion $P_{s,W}\\hookrightarrow P_{s,W'}$. For arbitrary $W,W'$, use $W\\cap W'$ for the intersection chart. All identifications and inclusions commute, because the patching functor is fully faithful: their restrictions over $U_s$ and $T_s$ commute. In particular the intersection of the two open images inside a common larger chart $P_{s,W\\cup W'}$ is $P_{s,W\\cap W'}$; after restriction this is the ordinary intersection on both pieces, and full faithfulness identifies the resulting fibre product. Here fibre products remain of finite presentation: affine-locally this is tensor-product base change and composition of finitely presented algebras, and the quasi-compact, quasi-separated clauses follow by their base-change and composition permanence.",
+   "uses": [
+    "lem-sfb-closed-point-fp-patching",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0BPA and its property clauses; construction of the spread charts"
+   }
+  },
+  {
+   "text": "Use $B$ and all $P_{s,W}$ as gluing charts. The overlap of two distinct charts with the same $s$ is $P_{s,W\\cap W'}$; for different closed points it is $B$. The overlap with the distinguished chart $B$ is $B$; each self-overlap is the whole chart. The same-$s$ cocycle and intersection equations follow from the inclusions into $P_{s,W\\cup W'\\cup W''}$ just constructed. If at least two closed points differ, the relevant mixed intersection is $B$, and every transition is the identity on $B$, so the equations hold there as well. The scheme-gluing theorem therefore produces a scheme $N$ with exactly these chart intersections. Their structure morphisms agree on the overlaps and glue to $N\\to S$. Smoothness is checked on the source charts by smooth-local-on-source; hence $N\\to S$ is smooth and in particular locally of finite type. Its generic fibre is $G$, since every chart has generic fibre $G$ and every overlap identifies that whole fibre. No finite subcover of this chart cover is asserted.",
+   "uses": [
+    "lem-sfb-closed-point-fp-patching",
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0BPA; Schemes Tags 01JA–01JC, gluing with the stated intersections"
+   }
+  },
+  {
+   "text": "For a fixed closed point $s$, the charts $P_{s,W}$ restrict over $T_s$ to the opens $W$ covering $N_s$. If $t\\ne s$, the morphism $T_s\\to S$ factors through $U_t$: its image is $\\{\\eta,s\\}$. Consequently every chart $P_{t,W}$ restricts to $B_{T_s}$. The overlap maps in this restricted cover are precisely the inclusions of the $W$ and of their common open $B_{T_s}$ in $N_s$. Glue these maps to obtain $N_{T_s}\\to N_s$, and glue the inverse open-chart maps to obtain its inverse. The two composites are identities on the covers, hence identities by uniqueness of gluing. Thus $N_{T_s}\\simeq N_s$ compatibly with $B$ and with $G$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 7, localization of the glued scheme"
+   }
+  },
+  {
+   "text": "We check the diagonal on every product of two charts. Its inverse image there is their specified overlap. For two charts with the same $s$, the overlap morphism to their product restricts over $U_s$ to the diagonal of $B|_{U_s}$, and over $T_s$ to $W\\cap W'\\to W\\times_{T_s}W'$, the restriction of the closed diagonal of $N_s$. Both are closed immersions. The overlap and product are of finite presentation over $S$, so closed-point patching detects that their global morphism is a closed immersion. For charts at different points $s,t$, the overlap is $B$. Over $U_s$ its map into $B\\times_S P_{t,W'}$ is the graph of $B\\hookrightarrow P_{t,W'}$; over $T_s$ it is the graph of $B_{T_s}\\hookrightarrow W$. Both graphs are closed: each is a section of a projection which is a base change of a separated chart. Closed-point patching again applies. Products involving the distinguished $B$ chart have the same graph argument, and self-products use the separated chart diagonal. Finally these chart products cover $N\\times_SN$, and closed immersions are local on the target, so $\\Delta_{N/S}$ is a closed immersion and $N$ is separated.",
+   "uses": [
+    "lem-sfb-closed-point-fp-patching",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 0BPA, 01ZP; explicit closed-overlap test for the diagonal"
+   }
+  },
+  {
+   "text": "Let $X$ be affine and smooth over $S$, and let $u_K:X_K\\to G$ be a morphism. At every closed $s$, the Néron property of $N_s$ and Step 4 give a unique extension $u_s:X_{T_s}\\to N$. Express $T_s$ as the limit of affine neighbourhoods of $s$; inside the affine $S$ the principal neighbourhoods $D(f)$ with $f\\notin\\mathfrak m_s$ are cofinal (every open containing $s$ contains such a principal open). They form a small directed set with affine transitions. Commutation with fibre products shows $X_{T_s}=\\varprojlim X_{D(f)}$. Each $X_{D(f)}$ is affine, hence qcqs. View $u_s$ as a section of $N\\times_SX\\to X$, which is locally of finite presentation since $N\\to S$ is smooth and finite presentation is preserved under base change. The pointed-section descent lemma gives an extension $u^{(s)}:X_{D(f_s)}\\to N$ for some $f_s\\notin\\mathfrak m_s$. Its generic fibre is $u_K$, because its pullback to $T_s$ is $u_s$. The opens $D(f_s)$ cover $S$: they contain every closed point, and each contains the generic point.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-limit-fibre-products",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sbc-pointed-section-stage-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 0GWT, 01ZM, 0EZJ; descent of the local Néron extensions"
+   }
+  },
+  {
+   "text": "The extensions of Step 6 agree. On a principal overlap $D(f_s f_t)$, fix a closed point $r$. After restriction to $T_r$, both maps equal the unique local Néron extension of $u_K$. Apply the locally-finite-type limit equality lemma to the affine schemes $X_{D(f_s f_t h)}$, where $h$ ranges over elements not in $\\mathfrak m_r$. Their limit is $X_{T_r}$ by the same two limit results as in Step 6; all transitions are affine, the index set is small, and $N\\to S$ is locally of finite type. It follows that the two maps agree on some smaller principal neighbourhood of $r$. These neighbourhoods cover the overlap (every nonempty principal open of this one-dimensional Noetherian domain contains either a closed point or is just the generic point; on the latter agreement is already known). Morphism-gluing uniqueness proves equality on the whole overlap, so the $u^{(s)}$ glue to an extension on $X$. The identical argument applied to any two global extensions proves uniqueness. For an arbitrary smooth $X$, take an affine open cover; these opens remain smooth. Apply the affine result, and compare on an affine open cover of every pairwise intersection. The extensions agree there by affine uniqueness and hence glue uniquely. This proves the Néron mapping property for all smooth schemes, without quasi-compactness assumptions on $X$ or $N$.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-limit-fibre-products",
+    "lem-weil-pbc-locally-finite-type-limit-map-equality",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01ZC, 0GWT; uniqueness and open-cover assembly of the mapping property"
+   }
+  },
+  {
+   "text": "Construct the group structure using the mapping property just proved. Products of smooth $S$-schemes are smooth: their projections are base changes of smooth morphisms and their structure maps are composites of smooth morphisms. Thus the generic multiplication $G\\times_KG\\to G$ extends uniquely from the smooth $N\\times_SN$ to $N$; generic inversion extends from $N$, and the identity extends from $S$. Associativity, inverse, identity and commutativity equations are equalities of maps from smooth powers of $N$ (or $N$ itself) to $N$; they hold generically and therefore hold by uniqueness. On localizing at $s$, these operations agree with those of $N_s$, because their domains there are smooth and both maps have the same generic fibre. The inclusion $B\\hookrightarrow N$ is a group homomorphism for the same reason, applied to $B\\times_SB$, $B$ and $S$. At the generic point $B_K=G$ is geometrically connected. At each closed $s$, Step 4 identifies $B_{T_s}$ with $N_s^0$ by hypothesis, so the geometric fibre of $B$ is exactly the identity component of that of $N$. These are all points of $S$. Hence the open subgroup $B$ is precisely $N^0$. The construction imposed no bound on the closed points or on the components.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 9 (b)⇒(a), completed group and identity-component verification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "lem-pc-proper-base-change",
+  "lem-sbc-pointed-section-stage-descent",
+  "lem-sfb-closed-point-fp-patching",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-locally-finite-type-limit-map-equality",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Expanded component-chart argument of 10.1 Proposition 7 and Proposition 9 (b)⇒(a); local PDF WANTED, primary scan read. The explicit patching/diagonal/limit arguments are written by Q63."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local Neron lft models over a Dedekind scheme glue globally if their identity components have a common smooth connected model",
+   "results": "{\"t\": \"2026-10-24T05:02:43Z\", \"tool\": \"leanfinder\", \"query\": \"Local Neron lft models over a Dedekind scheme glue globally if their identity components have a common smooth connected model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.glued\", \"AlgebraicGeometry.Scheme.GlueData\", \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.glued\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.OpenCover.glueMorphismsOverOfLocallyDirected\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData\"], \"digest\": \"a8687482da0d1dc0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global existence of a Neron locally finite type model from local Neron models and a common finite type identity component",
+   "results": "{\"t\": \"2026-10-24T05:02:37Z\", \"tool\": \"leansearch\", \"query\": \"Global existence of a Neron locally finite type model from local Neron models and a common finite type identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"AlgebraicGeometry.LocallyOfFiniteType.rec\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.recOn\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\"], \"digest\": \"09c9851e9bc793b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T05:02:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|[Nn]eron.*[Gg]lu",
+   "results": "{\"t\": \"2026-10-24T05:02:38Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|[Nn]eron.*[Gg]lu\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Globalize local smooth group models over all closed points of a Dedekind domain by spreading component charts and gluing their common identity subgroup",
+   "results": "{\"t\": \"2026-10-24T05:02:47Z\", \"tool\": \"leanfinder\", \"query\": \"Globalize local smooth group models over all closed points of a Dedekind domain by spreading component charts and gluing their common identity subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Units.instChartedSpace\", \"hasGroupoid_model_space\", \"contDiffGroupoid\", \"instNontrivialCarrierStalkCommRingCatPresheafSmoothSheafCommRing\", \"Units.instIsManifoldModelWithCornersSelf\", \"LieGroup\", \"IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion\", \"hasGroupoid_continuousGroupoid\"], \"digest\": \"1d3788b6c672b764\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-extension-neron-lft",
+  "date": "2026-10-24",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 9, implication (b) to (a), printed pp.294–295 (PDF pp.300–301), with the component-chart gluing detailed in Proposition 7, printed p.293.",
+   "via": [
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neron-connected-model-globalization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Replaced the absent proof by explicit finite-presentation charts, intersections, separatedness, localization, limit descent of local extensions and unique group-law extension. One general statement-only patching node replaces three rejected draft nodes which hid the construction. No project Lean attachment exists.",
+  "blueprint": "The historical det-thm-sf-ctf-stability-direct-images proof (3) trait-extension prerequisite is retained through its existing provenance chain. This supplies its BLR 10.1 Proposition 9 (b)⇒(a) subargument via Proposition 7, not a new route for the latest direct-images proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Use only clause (2), smoothness under base change, to make products of smooth test schemes smooth."
+   },
+   {
+    "node": "lem-sbc-pointed-section-stage-descent",
+    "why": "Spread a section over the local spectrum to an actual neighbourhood, with qcqs affine sources; generic spreading tool."
+   },
+   {
+    "node": "lem-weil-pbc-limit-fibre-products",
+    "why": "Identify the smooth test scheme after localization with the inverse limit of its neighbourhood restrictions; a general limit tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "why": "Express the closed-point local spectrum as the inverse limit of affine neighbourhoods; a general scheme-theoretic tool not supplied by the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-sbc-pointed-section-stage-descent",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-5a51b7d02",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-5a51b7d02 (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read the item and its single new node in full. New node lem-sfb-closed-point-fp-patching is Stacks 0BPA specialised to S=Spec D with D Noetherian (U->S is quasi-compact) and s closed. I checked its smooth/separated/open-immersion/closed-immersion detection against 0EY3 with no shrinking, 0C0C, 01ZQ, 0EUU and 01ZP (limits.tex l.1828-2010, 5002-5230). It is statement-only, cites a definition for every notion and records its searches. It is not a duplicate: lem-per-finite-point-fp-gluing only covers objects isomorphic to the base over U, and lem-sfb-neron-finite-complement-patching (NK) is a finite-type Néron statement, not general patching. It does not restate a clause of the item. BLR is absent from literature/, so proof_origin=agent is correct, and I checked the argument as a complete proof. Step 1: D_m[1/a]=K, B_{T_s}=N_s^0 contains G, the quasi-compact opens W are fp with qc intersections. Step 2: P_{s,W} via patching, open immersions by detection, intersections fp and identified by full faithfulness. Step 3: cocycle conditions checked for same-point and mixed-point charts; glue-schemes, morphism gluing and smooth-local-on-source apply. Step 4: T_s->S factors through U_t for t≠s, so N_{T_s}≅N_s. Step 5: the diagonal is a closed immersion on every chart product (restricted diagonal, or graphs as sections of separated base changes), and closed immersions are target-local. Step 6: X_{T_s}=lim X_{D(f)} over cofinal principal opens; pointed-section-stage-descent hypotheses checked. Step 7: locally-finite-type-limit-map-equality plus local Néron uniqueness, including the overlap={η} case and non-affine X. Step 8: group laws extend by uniqueness; B is an open subgroup with identity-component fibres, so B=N^0. Batch-5 flag: lem-trf-smooth-composition is the Mathlib leaf AlgebraicGeometry.smooth_comp, a generic fact that is neither part of nor proved through the trace formula or Poincaré duality, used only to make N×N smooth, so I accept it. Declared tool uses accepted: pc-proper-base-change clause 2, pointed-section-stage-descent, limit-fibre-products, local-ring-spec-limit; everything else cited is a Mathlib leaf. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NeronConnectedModelGlobalization",
+  "declaration": "AlgebraicGeometry.neron_connected_model_globalization",
+  "declarations": [
+   "AlgebraicGeometry.neronGenericPoint",
+   "AlgebraicGeometry.neronLocalization",
+   "AlgebraicGeometry.neronLocalizedGenericPoint",
+   "AlgebraicGeometry.neron_connected_model_globalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NeronConnectedModelGlobalization.lean",
+  "statement": "theorem neron_connected_model_globalization (D : Type u) [CommRing D] [IsDomain D] [IsNoetherianRing D] [IsIntegrallyClosed D] (hdim : ringKrullDim D = 1) (G : Grp (Over (Spec (.of (FractionRing D))))) [IsCommMonObj G.X] [Smooth G.X.hom] [IsSeparated G.X.hom] [GeometricallyConnected G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (B : Grp (Over (Spec (.of D)))) [IsCommMonObj B.X] [Smooth B.X.hom] [IsSeparated B.X.hom] [GeometricallyConnected B.X.hom] [LocallyOfFiniteType B.X.hom] [QuasiCompact B.X.hom] (eB : (Over.pullback (neronGenericPoint D)).mapGrp.obj B ≅ G) (L : ∀ m : MaximalSpectrum D, Grp (Over (Spec (.of (Localization.AtPrime m.asIdeal))))) (eL : ∀ m : MaximalSpectrum D, (Over.pullback (neronLocalizedGenericPoint D m)).mapGrp.obj (L m) ≅ G) (hL : ∀ m : MaximalSpectrum D, IsNeronLftModel (L m) G (eL m)) (jL : ∀ m : MaximalSpectrum D, (Over.pullback (neronLocalization D m)).obj B.X ⟶ (L m).X) (hjL : ∀ m : MaximalSpectrum D, IsRelativeIdentityComponent (jL m)) (hcompat : ∀ m : MaximalSpectrum D, (((Over.pullback (neronLocalizedGenericPoint D m)).map (jL m) ≫ (eL m).hom.hom.hom).left ≫ eB.inv.hom.hom.left ≫ pullback.fst B.X.hom (neronGenericPoint D)) = pullback.fst ((Over.pullback (neronLocalization D m)).obj B.X).hom (neronLocalizedGenericPoint D m) ≫ pullback.fst B.X.hom (neronLocalization D m)) : ∃ (N : Grp (Over (Spec (.of D)))) (eN : (Over.pullback (neronGenericPoint D)).mapGrp.obj N ≅ G), IsCommMonObj N.X ∧ IsNeronLftModel N G eN ∧ (∃ j : B.X ⟶ N.X, IsRelativeIdentityComponent j ∧ (Over.pullback (neronGenericPoint D)).map j ≫ eN.hom.hom.hom = eB.hom.hom.hom) ∧ ∀ m : MaximalSpectrum D, ∃ q : (Over.pullback (neronLocalization D m)).obj N.X ≅ (L m).X, IsMonHom q.hom ∧ (((Over.pullback (neronLocalizedGenericPoint D m)).map q.hom ≫ (eL m).hom.hom.hom).left ≫ eN.inv.hom.hom.left ≫ pullback.fst N.X.hom (neronGenericPoint D)) = pullback.fst ((Over.pullback (neronLocalization D m)).obj N.X).hom (neronLocalizedGenericPoint D m) ≫ pullback.fst N.X.hom (neronLocalization D m)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c759338c",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read the item node, the landed IsNeronLftModel, the new def-sfb-relative-identity-component node and module, the item module and report. All hypotheses match: D Noetherian, integrally closed, dim 1, K=FractionRing; G and B smooth, separated, geometrically connected (fibres), lft+qc, commutative; L m Neron lft over D_m via the canonical Mathlib algebra/IsFractionRing/IsScalarTower instances; jL with IsRelativeIdentityComponent is equivalent to B_m ≅ N_m^0. hcompat and the q equation compare first projections of maps over Spec K, equivalent to the canonical-iso equation. All conclusion clauses present (N commutative Neron lft model, j onto N^0 with generic compatibility, local q isomorphisms) with no finiteness assumed. New predicate is non-hollow, no owner found (GrpObj.identityComponent and groupFibreNeutralComponent need finite type), H12 fields OK. Item JSON differs from main only in lean and the added def stmt_deps. Statements verbatim, lines ≤100, docstrings and 8-step proof plan present, imports exist. Advisory: def-sc-group-scheme not cited directly (inline in node text; cited via both def deps). No compile run (no change made)."
+ }
+}

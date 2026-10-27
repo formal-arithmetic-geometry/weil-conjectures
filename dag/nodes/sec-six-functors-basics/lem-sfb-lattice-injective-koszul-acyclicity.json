@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-lattice-injective-koszul-acyclicity",
+ "kind": "statement",
+ "title": "Sectionwise injective acyclicity of the lattice Koszul functor",
+ "statement": "Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring], $r\\geq0$, $D=\\mathbf Z^r$, $\\mathcal M_R$ its internal module category [sk-def-sfb-module-objects], and $\\mathcal E_R=\\operatorname{Fun}(BD,\\mathcal M_R)$. Use a small coherent profinite site [def-weil-size-convention]. Let $L_\\bullet(R)\\to R$ be the translation-equivariant cubical complex of [lem-sfb-lattice-cubical-sheaf-resolution], with $L_a(R)=\\bigoplus_{|I|=a,v\\in D}R$ and its signed difference boundary. For $P\\in\\mathcal E_R$ with generator operators $T_i$, put\n$$K(P)^a=\\bigoplus_{|I|=a}P,\\qquad (dx)_J=\\sum_{i\\in J}(-1)^{\\#\\{j\\in J:j<i\\}}(T_i-1)x_{J\\setminus\\{i\\}}$$\nin degrees $0\\leq a\\leq r$ and zero elsewhere. These formulas define an additive functor $K:\\mathcal E_R\\to\\operatorname{Ch}^{[0,r]}(\\mathcal M_R)$, each degree functor is exact, and the inclusion of invariant sections gives a natural augmentation $e_P:P^D[0]\\to K(P)$.\n\nFor internal Hom [def-pur-sheaf-hom], define $\\underline{\\operatorname{Hom}}_{\\mathcal E_R}(L_a(R),P)$ to be the submodule of internal $R$-linear Hom fixed by the conjugation action of every $v\\in D$. Evaluation on the generators $[0,I]$ induces a natural isomorphism of cochain complexes, including their augmentations,\n$$\\underline{\\operatorname{Hom}}_{\\mathcal E_R}(L_\\bullet(R),P)\\cong K(P).$$\nThe inverse in degree $a$ sends $(x_I)$ to the equivariant map $[v,I]\\mapsto T^v x_I$. For an injective object $J$ of $\\mathcal E_R$ [def-sp-injective-resolutions], the augmented complex $J^D\\to K(J)^0\\to\\cdots\\to K(J)^r\\to0$ is exact on sections over every profinite site object, and $e_J$ is a quasi-isomorphism.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic discrete-lattice input to the tame-boundary calculation; returned lattice proof steps 3-4, section evaluation and signed Hom identification; sites-modules.tex Tag 03EV (lemma-j-shriek-flat), free test module, not projectivity."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-weil-size-convention",
+  "lem-sfb-lattice-cubical-sheaf-resolution",
+  "def-pur-sheaf-hom",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_i=T_i-1$. Since $A_iA_j=A_jA_i$, the two contributions deleting distinct $i,j$ from a subset in $d^2$ have opposite signs and the same operator; hence $d^2=0$. An equivariant map commutes with each $A_i$, so its componentwise maps define $K$ on morphisms and preserve addition. Each $K^a$ is a finite biproduct of the underlying module functor. Forgetting the action creates kernels and cokernels by [lem-sfb-lattice-cubical-sheaf-resolution]; finite biproducts preserve them componentwise, so $K^a$ is exact. An invariant element is killed by every $A_i$, giving the stated natural cochain map $e_P$.",
+   "uses": [
+    "lem-sfb-lattice-cubical-sheaf-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete lattice input: signed finite complex and invariant augmentation"
+   }
+  },
+  {
+   "text": "Write $H_a(P)=\\underline{\\operatorname{Hom}}_{\\mathcal E_R}(L_a(R),P)$: the conjugation-fixed part of the sheaf Hom [def-pur-sheaf-hom] of section-ring module sheaves, read through [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. That equivalence leaves sections unchanged, preserves coproducts and sends the regular module $R$ to the section-ring sheaf. For every internal module $Q$ with trivial action, the closed structure [lem-pc-sheaf-modules-tensor-closed] gives $\\operatorname{Hom}_R(Q,\\mathcal Hom(L_a(R),P))=\\operatorname{Hom}_R(L_a(R)\\otimes Q,P)$. By its naturality in $L_a(R)$ along $v$ and in $P$ along $T^v$, a map lands in the fixed part exactly when its transpose satisfies $b(v\\ell\\otimes q)=T^vb(\\ell\\otimes q)$. Since $-\\otimes Q$ is a left adjoint (by symmetry) it preserves the coproduct, and the unit isomorphism gives $L_a(R)\\otimes Q\\cong L_a(Q)$, $[v,I](1)\\otimes q\\mapsto[v,I](q)$, compatibly with translation and with the integral boundaries of [lem-sfb-lattice-cubical-sheaf-resolution]. A map from this coproduct is determined by maps $f_I:Q\\to P$ on $[0,I]$; equivariance forces its component on $[v,I]$ to be $T^vf_I$, and these formulas conversely define an equivariant map. Thus $H_a(P)$ is naturally the finite product, hence biproduct, of the copies of $P$ indexed by $I$, as internal modules by naturality in every test module $Q$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sfb-lattice-cubical-sheaf-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete lattice input: internal tensor-Hom transpose and equivariant free-generator coordinates"
+   }
+  },
+  {
+   "text": "Under step 2, precomposing $f$ with the boundary has value on $[0,J]$ equal to $\\sum_{i\\in J}(-1)^{\\#\\{j\\in J:j<i\\}}(T_i-1)f([0,J\\setminus\\{i\\}])$, by the boundary formula in [lem-sfb-lattice-cubical-sheaf-resolution]. This is exactly the displayed differential, with no further cochain sign. The augmentation sends an equivariant map $R\\to P$ to its composite with $\\epsilon$; its value at $[0,\\varnothing]$ is the invariant element $f(1)$. Consequently the degree identifications form the asserted augmented cochain isomorphism. The inverse on generalized elements is $[v,I]\\mapsto T^vx_I$; postcomposition and all test-module maps commute with it.",
+   "uses": [
+    "lem-sfb-lattice-cubical-sheaf-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete lattice input: signed Hom differential and augmentation normalization"
+   }
+  },
+  {
+   "text": "Fix any profinite site object $U$. Work with the section-ring sheaf using [def-weil-pbc-internal-abelian-sheaf-module-equivalence], whose equivalence leaves sections and restrictions unchanged. Let $Q_U$ be the sheafification of $V\\mapsto\\bigoplus_{\\varphi:V\\to U}R(V)$. By the universal property of module sheafification [def-weil-presheaf-modules-sheafification] and free representable evaluation [lem-weil-pbc-free-yoneda-presheaf-module], $\\operatorname{Hom}_R(Q_U,M)\\cong M(U)$ naturally in $M$, with a section $s$ corresponding to $[\\varphi]\\mapsto s|_\\varphi$. Give $Q_U$ the trivial lattice action. Step 2 now identifies $K(J)^a(U)$ with $\\operatorname{Hom}_{\\mathcal E_R}(L_a(Q_U),J)$, compatibly with the differentials by step 3. In degree minus one, the same evaluation identifies $J^D(U)$ with $\\operatorname{Hom}_{\\mathcal E_R}(Q_U,J)$. No projectivity of $Q_U$ or exactness of section evaluation is being used.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); Tag 03DI (lemma-extension-by-zero), equation-map-lower-shriek-OU-into-module; Remark 03EJ (remark-localize-presheaves)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-lattice-cubical-sheaf-resolution] with $Q=Q_U$. Its augmented complex is exact in $\\mathcal E_R$: it is split exact after forgetting the action, and that functor creates kernels and cokernels. For $1\\leq a\\leq r$, a cocycle $f:L_a(Q_U)\\to J$ vanishes on $\\operatorname{im}\\partial_{a+1}=\\ker\\partial_a$ (take $\\partial_{r+1}=0$ at the top). It therefore factors through $L_a(Q_U)/\\ker\\partial_a=\\operatorname{im}\\partial_a$. The inclusion $\\operatorname{im}\\partial_a\\hookrightarrow L_{a-1}(Q_U)$ is an equivariant monomorphism. Injectivity as defined in [def-sp-injective-resolutions] extends the factored map to $g:L_{a-1}(Q_U)\\to J$, and $g\\partial_a=f$. In degree zero a cocycle factors uniquely through the cokernel $\\epsilon:L_0(Q_U)\\to Q_U$, while precomposition with this epimorphism is injective. Thus the entire augmented Hom complex is exact. Step 4 gives the required exactness on $U$-sections.",
+   "uses": [
+    "lem-sfb-lattice-cubical-sheaf-resolution",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete lattice input: injective extension from the image of the cubical boundary"
+   }
+  },
+  {
+   "text": "This holds for every $U$. In degree zero the kernel is precisely $J^D$, since $d^0=(T_i-1)_i$. In positive degrees every cocycle section is a boundary section by step 5, so the kernel sheaf equals the image sheaf: the factorization through the kernel is already surjective on sections, hence in particular locally surjective. Thus $H^0(K(J))=J^D$ and $H^a(K(J))=0$ for $a\\ne0$; by [def-weil-abstract-derived-category] this says $e_J$ is a quasi-isomorphism. For $r=0$, $D=0$, $L_0(Q_U)=Q_U$ and $K(J)=J[0]$, and both augmentations are identities. The same formulas cover the empty $U$, zero module and zero ring.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), discrete lattice input: cohomology and rank-zero check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lattice-cubical-sheaf-resolution",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); explicit internal tensor-Hom and injective-extension argument using the existing cubical contraction for arbitrary Q. Section representation follows Stacks 03CY and 03DI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an injective equivariant sheaf module the finite Koszul complex of commuting automorphisms minus identity is a resolution of its invariants",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.standardResolution\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.ProjectiveResolution (Rep.trivial k G k)\", \"doc\": \"For a commutative ring $k$ and group $G$, this constructs a projective resolution of the trivial $G$-representation on $k$ within the category $\\\\text{Rep}(k, G)$. The resolution uses the standard chai\"}\n  {\"name\": \"Rep.barResolution\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) → [inst : CommRing k] → [inst_1 : Group G] → CategoryTheory.ProjectiveResolution (Rep.trivial k G k)\", \"doc\": \"For a commutative ring $ k $ and group $ G $, this constructs a projective resolution of the trivial $ G $-representation over $ k $ using the bar complex. The resolution is built from free $ k[G] $-m\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.resolution\", \"module\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : CommGroup G] →\\n        [Fintype G] →\\n          (g : G) → (∀ (x : G), x ∈ Subgroup.zpowers g) → CategoryTheory.ProjectiveResolution (Rep.trivial k G k)\", \"doc\": \"Let $G$ be a finite cyclic group with generator $g$, and let $k$ be a commutative ring. This definition constructs the standard projective resolution of the trivial $k[G]$-module $k$. The resolution i\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.resolution.π\", \"module\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : CommGroup G] →\\n        [inst_2 : Fintype G] →\\n          (g : G) →\\n            (Rep.FiniteCyclicGroup.chainComplexFunctor k g).obj (Rep.leftRegular k G) ⟶\\n              (ChainComplex.single₀ (Rep k G)).obj (Rep.trivial k G k)\", \"doc\": \"The morphism $\\\\pi$ maps the chain complex associated to the left regular representation of a finite cyclic group $G$ over a commutative ring $k$ to the single-term chain complex at degree 0 with the t\"}\n  {\"name\": \"Rep.barResolution_complex\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G], (Rep.barResolution k G).complex = Rep.barComplex k G\", \"doc\": \"For a commutative ring $ k $ and a group $ G $, the chain complex associated with the bar resolution of the trivial $ G $-representation over $ k $ coincides with the bar complex constructed from $ G \"}\n  {\"name\": \"Rep.standardComplex.x_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k : Type u) [inst : CommRing k] (G : Type u) [inst_1 : Group G] (n : ℕ),\\n  CategoryTheory.Projective ((Rep.standardComplex k G).X n)\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the $n$-th term of the standard chain complex in the category $\\\\text{Rep}(k, G)$ is a projective object. This term is the free $k$-modu\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : CommGroup G] →\\n      [inst_2 : Fintype G] →\\n        (A : Rep k G) →\\n          (g : G) →\\n            (hg : ∀ (x : G), x ∈ Subgroup.zpowers g) →\\n              HomologicalComplex.coinvariantsTensorObj A (Rep.FiniteCyclicGroup.resolution k g⁻¹ ⋯).co\", \"doc\": \"For a commutative ring $ k $, finite cyclic group $ G $, and representation $ A $, if every element of $ G $ lies in the cyclic subgroup generated by $ g $, then the chain complex formed by the coinva\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.resolution_complex\", \"module\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : CommGroup G] [inst_2 : Fintype G] (g : G)\\n  (hg : ∀ (x : G), x ∈ Subgroup.zpowers g),\\n  (Rep.FiniteCyclicGroup.resolution k g hg).complex =\\n    (Rep.FiniteCyclicGroup.chainComplexFunctor k g).obj (Rep.leftRegular k G)\", \"doc\": \"For a commutative ring $k$ and a finite cyclic group $G$ generated by an element $g$, the chain complex associated with the resolution of $G$ is equal to the chain complex obtained by applying the cha\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep projective resolutions and finite cyclic resolutions do not give sectionwise acyclicity of the lattice Koszul complex in internal sheaf modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"Injective\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep projective resolutions and finite cyclic resolutions do not give sectionwise acyclicity of the lattice Koszul complex in internal sheaf modules"
+  },
+  {
+   "tool": "grep",
+   "query": "(Koszul|koszul).*(injective|invariant)|(injective|invariant).*(Koszul|koszul)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep projective resolutions and finite cyclic resolutions do not give sectionwise acyclicity of the lattice Koszul complex in internal sheaf modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal equivariant Hom from the cubical lattice resolution into an injective object is exact on all sections and is the Koszul complex",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant injective internal module has acyclic generator difference complex computed by Hom from finite rank free lattice modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Rep.standardComplex.x_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k : Type u) [inst : CommRing k] (G : Type u) [inst_1 : Group G] (n : ℕ),\\n  CategoryTheory.Projective ((Rep.standardComplex k G).X n)\", \"doc\": \"For any commutative ring $k$, group $G$, and natural number $n$, the $n$-th term of the standard chain complex in the category $\\\\text{Rep}(k, G)$ is a projective object. This term is the free $k$-modu\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.moduleCatChainComplex\", \"module\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic\", \"type\": \"{k G : Type u} → [inst : CommRing k] → [inst_1 : CommGroup G] → [Fintype G] → Rep k G → G → ChainComplex (ModuleCat k) ℕ\", \"doc\": \"For a commutative ring $ k $ and finite cyclic group $ G $, this constructs a chain complex in the category of $ k $-modules where: (1) Each object is the module $ A $ itself; (2) The differential map\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.resolution\", \"module\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : CommGroup G] →\\n        [Fintype G] →\\n          (g : G) → (∀ (x : G), x ∈ Subgroup.zpowers g) → CategoryTheory.ProjectiveResolution (Rep.trivial k G k)\", \"doc\": \"Let $G$ be a finite cyclic group with generator $g$, and let $k$ be a commutative ring. This definition constructs the standard projective resolution of the trivial $k[G]$-module $k$. The resolution i\"}\n  {\"name\": \"ModuleCat.free_shortExact\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Free\", \"type\": \"∀ {R : Type u_3} [inst : Ring R] {S : CategoryTheory.ShortComplex (ModuleCat R)},\\n  S.ShortExact → ∀ [Module.Free R ↑S.X₁] [Module.Free R ↑S.X₃], Module.Free R ↑S.X₂\", \"doc\": \"In a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ of modules over a ring $R$, if both $X_1$ and $X_3$ are free modules, then the middle module $X_2$ is also a free module over $R$.\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.resolution.π\", \"module\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : CommGroup G] →\\n        [inst_2 : Fintype G] →\\n          (g : G) →\\n            (Rep.FiniteCyclicGroup.chainComplexFunctor k g).obj (Rep.leftRegular k G) ⟶\\n              (ChainComplex.single₀ (Rep k G)).obj (Rep.trivial k G k)\", \"doc\": \"The morphism $\\\\pi$ maps the chain complex associated to the left regular representation of a finite cyclic group $G$ over a commutative ring $k$ to the single-term chain complex at degree 0 with the t\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"Rep.FiniteCyclicGroup.resolution_complex\", \"module\": \"Mathlib/RepresentationTheory/Homological/FiniteCyclic\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : CommGroup G] [inst_2 : Fintype G] (g : G)\\n  (hg : ∀ (x : G), x ∈ Subgroup.zpowers g),\\n  (Rep.FiniteCyclicGroup.resolution k g hg).complex =\\n    (Rep.FiniteCyclicGroup.chainComplexFunctor k g).obj (Rep.leftRegular k G)\", \"doc\": \"For a commutative ring $k$ and a finite cyclic group $G$ generated by an element $g$, the chain complex associated with the resolution of $G$ is equal to the chain complex obtained by applying the cha\"}\n  {\"name\": \"IsSMulRegular.smulShortComplex_shortExact\", \"module\": \"Mathlib/RingTheory/Regular/Category\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {M : ModuleCat R} {r : R}, IsSMulRegular (↑M) r → (M.smulShortComplex r).ShortExact\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. If an element $r \\\\in R$ is regular for the scalar multiplication on $M$ (meaning the map $m \\\\mapsto r \\\\cdot m$ is injective), then the sequence \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep projective resolutions and finite cyclic resolutions do not give sectionwise acyclicity of the lattice Koszul complex in internal sheaf modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul complex of generator differences for an injective equivariant sheaf module over a free abelian group is exact on sections",
+   "results": "{\"t\": \"2026-10-23T04:09:18Z\", \"tool\": \"leanfinder\", \"query\": \"The Koszul complex of generator differences for an injective equivariant sheaf module over a free abelian group is exact on sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.H1Cotangent.exact_map_δ\", \"IsSMulRegular.smulShortComplex_shortExact\", \"ModuleCat.smulShortComplex_exact\", \"ChainComplex.alternatingConst_exactAt\"], \"digest\": \"03829b5b5badd29d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the internal lattice Koszul complex and its sectionwise injective acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"Exact\"",
+   "results": "{\"t\": \"2026-10-23T04:09:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"Injective\\\", \\\"Exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Function.Exact.comp_injective\", \"Function.MulExact.comp_injective\", \"LinearMap.exact_zero_iff_injective\", \"Function.Injective.comp_exact_iff_exact\", \"LinearMap.injective_iff_eq_zero_of_exact\", \"AddMonoidHom.exact_iff_of_surjective_of_bijective_of_injective\", \"MonoidHom.mulExact_iff_of_surjective_of_bijective_of_injective\", \"Function.Exact.splitInjectiveEquiv\"], \"digest\": \"9d2af8ea91992cdd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the internal lattice Koszul complex and its sectionwise injective acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective sheaf module with an action of a free abelian group has a sectionwise exact augmented Koszul complex",
+   "results": "{\"t\": \"2026-10-23T04:09:33Z\", \"tool\": \"leansearch\", \"query\": \"An injective sheaf module with an action of a free abelian group has a sectionwise exact augmented Koszul complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.mk.inj\", \"PresheafOfModules.Sheafify.SMulCandidate.mk.inj\", \"SheafOfModules.free\", \"CategoryTheory.ShortComplex.Exact.descToInjective\", \"SheafOfModules.GeneratingSections.mk.inj\", \"SheafOfModules.ιFree\", \"SheafOfModules.Presentation.mk.injEq\", \"CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ\"], \"digest\": \"a49c4d97745614f7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the internal lattice Koszul complex and its sectionwise injective acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant Hom from the cubical resolution of a free abelian group into an injective internal module computes invariants by a Koszul cochain complex",
+   "results": "{\"t\": \"2026-10-23T04:10:19Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant Hom from the cubical resolution of a free abelian group into an injective internal module computes invariants by a Koszul cochain complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.homResolutionIso\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"Rep.barResolution_complex\", \"Rep.FiniteCyclicGroup.resolution.π\", \"groupHomology.inhomogeneousChainsIso\", \"HomologicalComplex.coinvariantsTensorObj\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso\", \"Rep.barResolution\"], \"digest\": \"500ba638a875c847\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the internal lattice Koszul complex and its sectionwise injective acyclicity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-discrete-lattice-koszul-resolution",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic discrete-lattice input to the tame-boundary calculation; returned lattice proof steps 3-4, section evaluation and signed Hom identification; sites-modules.tex Tag 03EV (lemma-j-shriek-flat), free test module, not projectivity.",
+   "via": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lattice-injective-koszul-acyclicity",
+  "worker": "stage1",
+  "summary": "Verified all signed formulas and proved sectionwise acyclicity using the cubical resolution for the free test module Q_U, followed by extension from boundary images into an equivariantly injective object. No new nodes and no projectivity or exact-section assumption. Retained the statement and its searches.",
+  "blueprint": "Paragraph (3) of the main-20261015 direct-images proof: the algebraic discrete-lattice input below the tame-inertia calculation; explicit signed Hom coordinates and injective section test. The imported ancestry chain ends without a blueprint node (ancestor command returns None); retained that null ancestor and the precise existing place.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor-Hom adjunction for the sheaf Hom of def-pur-sheaf-hom named in the statement; used to represent the fixed Hom object (reviewer repair replacing the module-object internal Hom, which is not the statement's Hom)."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic equivalence preserving sections, needed to construct the free section test module."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Generic sheafification universal property used to represent evaluation on any site object."
+   },
+   {
+    "node": "lem-weil-pbc-free-yoneda-presheaf-module",
+    "why": "Generic free representable evaluation for a variable ring sheaf; no node of the lattice unit supplies it."
+   },
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Definition of equivariant injectivity used to extend a boundary-image map."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Definition of cohomology and quasi-isomorphism for the concluding exactness check."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-55cb68c65",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-55cb68c65 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited statement, main-20261015 direct-images proof paragraph (3) and the Stacks labels 03CY/03DI/03EV; no new nodes and no SGA. Steps 1, 3, 4, 5 and 6 are correct. Step 1: Koszul signs cancel, so d^2=0, and the degree functors are exact because forgetting the action creates kernels and cokernels. Step 3: f∘∂ on [0,J] is exactly the displayed differential with no extra sign, and the augmentation gives f(1). Step 4: Q_U, the sheafified free module on h_U, satisfies Hom(Q_U,M)=M(U) by sheafification plus free Yoneda. Step 5: the cubical resolution of Q_U is exact in E_R, and cocycles extend through im∂ into the injective J, with the degree-0 and top cases handled. Step 6: sectionwise exactness makes H^a=0 for a≠0 and H^0=J^D. Edge cases r=0, r=1, rank 2, empty U, zero module and zero ring all hold. C4 fault fixed in step 2: the statement's Hom is the sheaf Hom of def-pur-sheaf-hom, but the step used the different module-object Hom of def-sfb-modobj-internal-hom with no cited identification of the two. Rewrote step 2 through the section equivalence and lem-pc-sheaf-modules-tensor-closed (closed structure natural in all variables; −⊗Q preserves the coproduct; unit iso gives L_a(R)⊗Q≅L_a(Q)). Updated uses, proof_deps and split_report.tool_uses; no cycle. Statement unchanged. Blueprint from.node=null is an inherited gap in the created chain, accepted. lem-sfb-lattice-koszul-injective-normalization is a complex-level generalization, not a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeInjectiveKoszulAcyclicity",
+  "declaration": "Profinite.LatticeInjectiveKoszul.acyclicity",
+  "declarations": [
+   "Profinite.LatticeInjectiveKoszul.sectionEquivalence",
+   "Profinite.LatticeInjectiveKoszul.rawHom",
+   "Profinite.LatticeInjectiveKoszul.conjugationDifference",
+   "Profinite.LatticeInjectiveKoszul.fixedHom",
+   "Profinite.LatticeInjectiveKoszul.sectionMap",
+   "Profinite.LatticeInjectiveKoszul.generatorSection",
+   "Profinite.LatticeInjectiveKoszul.acyclicity"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeInjectiveKoszulAcyclicity.lean",
+  "statement": "theorem acyclicity (r : ℕ) : ∃ (K : KoszulModel R r), K.functor.Additive ∧ (∀ a : ℤ, exactFunctor _ _ (K.functor ⋙ HomologicalComplex.eval (Modules R) (.up ℤ) a)) ∧ ∃ (H : Equivariant R r ⥤ CochainComplex (SheafOfModules.{u + 1} ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ CommRingCat RingCat)).obj (InternalAbelianSheafModule.sectionRingSheaf (coherentTopology Profinite.{u}) R.X))) ℤ) (c : ∀ (P : Equivariant R r) (a : ℤ), (H.obj P).X a ≅ fixedHom R r a P) (e : H ≅ K.functor ⋙ (sectionEquivalence R).functor.mapHomologicalComplex (.up ℤ)), ∃ A : ((invariants R r ⋙ (sectionEquivalence R).functor) ⋙ HomologicalComplex.single _ (.up ℤ) 0) ⟶ H, (∀ P : Equivariant R r, A.app P ≫ e.hom.app P = (HomologicalComplex.singleMapHomologicalComplex (sectionEquivalence R).functor (.up ℤ) 0).inv.app ((invariants R r).obj P) ≫ ((sectionEquivalence R).functor.mapHomologicalComplex (.up ℤ)).map (K.augmentation.app P)) ∧ (∀ (P : Equivariant R r) (a : ℤ), (H.obj P).d a (a + 1) ≫ (c P (a + 1)).hom ≫ kernel.ι (conjugationDifference R r (a + 1) P) = (c P a).hom ≫ kernel.ι (conjugationDifference R r a P) ≫ SheafOfModules.homObjMap.{u + 1, u, u + 1, u + 1} (R := InternalAbelianSheafModule.sectionRingSheaf (coherentTopology Profinite.{u}) R.X) ((sectionEquivalence R).functor.map (LatticeCubical.incoming R r a (𝟙_ (Modules R)))) (𝟙 ((sectionEquivalence R).functor.obj P.V))) ∧ (∀ {P Q : Equivariant R r} (f : P ⟶ Q) (a : ℤ), (H.map f).f a ≫ (c Q a).hom ≫ kernel.ι (conjugationDifference R r a Q) = (c P a).hom ≫ kernel.ι (conjugationDifference R r a P) ≫ SheafOfModules.homObjMap.{u + 1, u, u + 1, u + 1} (R := InternalAbelianSheafModule.sectionRingSheaf (coherentTopology Profinite.{u}) R.X) (𝟙 _) ((sectionEquivalence R).functor.map f.hom)) ∧ (∀ (P : Equivariant R r) (a : ℤ) (U : Profinite.{u}) (x : ((sectionEquivalence R).functor.obj ((K.functor.obj P).X a)).val.obj (op U)) (v : Fin r → ℤ) (I : IntegralLatticeCubical.Directions r a), (((((e.inv.app P).f a ≫ (c P a).hom ≫ kernel.ι (conjugationDifference R r a P)).val.app (op U)) x).app (op (Over.mk (𝟙 U)))).hom (generatorSection R r a v I U) = sectionMap R (P.ρ (Multiplicative.ofAdd v)) U ((((sectionEquivalence R).functor.map ((K.coordinates P a).hom ≫ biproduct.π _ ⟨I.val, I.property⟩)).val.app (op U)) x)) ∧ (∀ (J : Equivariant R r) [Injective J], QuasiIso (K.augmentation.app J) ∧ (∀ U : Profinite.{u}, Function.Injective (sectionMap R ((K.augmentation.app J).f 0) U)) ∧ (∀ U : Profinite.{u}, Function.Exact (sectionMap R ((K.augmentation.app J).f 0) U) (sectionMap R ((K.functor.obj J).d 0 1) U)) ∧ (∀ (a : ℤ), 0 < a → ∀ U : Profinite.{u}, Function.Exact (sectionMap R ((K.functor.obj J).d (a - 1) a) U) (sectionMap R ((K.functor.obj J).d a (a + 1)) U)))",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-582fa9683",
+  "group": "N0",
+  "result": "fix",
+  "note": "Lean exact: R/Modules/Equivariant/r unrestricted match the dep records; KoszulModel pins signed differential, maps and invariant augmentation (∃ K also asserts existence); fixedHom = kernel of Pi.lift_v(homObjMap τ_{-v} T^v − 1) on recorded SheafOfModules.homObj, so fixed = equivariant; H differential = precomposition with incoming, no sign; H.map = postcomposition; e.inv≫c≫ι pinned on every generator ι_(v,I)(1) at Over.mk(𝟙 U) for all U and x, so H, c, e are not free; augmentation A determined by e and equals ε^* via the pinned inverse (advisory); injective J: QuasiIso plus sectionwise injectivity and exactness in all degrees, top surjection via the empty biproduct. Edge cases r=0, a outside [0,r], empty U, zero ring covered. Statement verbatim; only lean changed; defs real, sorry only in the theorem. Sole fault H11: same-worker second reading, fixed by fixes/lem-sfb-lattice-injective-koszul-acyclicity.report.md (worker report verbatim + independent reading). Advisory: KoszulModel helpers live in the module of the parent theorem whose proof_deps cite this item (rule-7 reverse import omission listed); move them to an existing:true def-node module before stage 3. No compile (no Lean changed)."
+ }
+}

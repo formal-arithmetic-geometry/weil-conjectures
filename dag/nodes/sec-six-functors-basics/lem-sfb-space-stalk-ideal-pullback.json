@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-space-stalk-ideal-pullback",
+ "kind": "statement",
+ "title": "Geometric stalk calculation for a square of square-zero closed immersions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $(f,f\\prime):(X\\hookrightarrow X\\prime)\\to(Y\\hookrightarrow Y\\prime)$ be a commutative square of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Both immersions are representable closed immersions [def-weil-closed-immersion], with square-zero ideal sheaves $\\mathcal J$ on $X\\prime$ and $\\mathcal I$ on $Y\\prime$. Identify the small etale sites across these thickenings, and regard $\\mathcal I$ and $\\mathcal J$, which are killed by their own ideals, as modules over $\\mathcal O_Y$ and $\\mathcal O_X$. Put $f^*\\mathcal I=\\mathcal O_X\\otimes_{f^{-1}\\mathcal O_Y}f^{-1}\\mathcal I$; the canonical ideal map $f^*\\mathcal I\\to\\mathcal J$ sends $a\\otimes j$ to $\\widetilde a\\,f\\prime{}^\\sharp(j)$ for any local lift $\\widetilde a$ of $a$ to $\\mathcal O_{X\\prime}$, independent of the lift because $\\mathcal J^2=0$. Modules are [def-weil-sheaf-of-modules-category] and tensor is [def-pur-sheaf-tensor-product]. A geometric point is a map from the spectrum of an algebraically closed field; its stalk is the colimit over pointed etale scheme neighbourhoods. Geometric stalk functors on any of these sites are exact and jointly detect isomorphisms of module sheaves. For each geometric point $\\bar x$ of $X$, put $\\bar y=f\\bar x$, $A\\prime=\\mathcal O_{Y\\prime,\\bar y}$, $B\\prime=\\mathcal O_{X\\prime,\\bar x}$, $A=\\mathcal O_{Y,\\bar y}$, $B=\\mathcal O_{X,\\bar x}$, $I=\\mathcal I_{\\bar y}$, and $J=\\mathcal J_{\\bar x}$. The stalk maps form a commutative square of rings with surjections $A\\prime\\twoheadrightarrow A$, $B\\prime\\twoheadrightarrow B$ whose kernels are $I,J$; in particular $A=A\\prime/I$, $B=B\\prime/J$, and $I^2=J^2=0$. There is a canonical identification $(f^*\\mathcal I)_{\\bar x}\\cong I\\otimes_A B$. Under it, the canonical ideal map has stalk $q:I\\otimes_A B\\to J$, $i\\otimes b\\mapsto f\\prime{}^\\sharp(i)\\widetilde b$, where $\\widetilde b\\in B\\prime$ is any lift. The ideal of $Y\\times_{Y\\prime}X\\prime$ in $X\\prime$ has stalk $IB\\prime$ at $\\bar x$. Consequently the given square is cartesian, i.e. the canonical morphism $X\\to Y\\times_{Y\\prime}X\\prime$ is an isomorphism, if and only if $J=IB\\prime$ at every such geometric point. Fibre products mean the sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. This statement imposes no flatness assumption.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 04K5 (theorem-exactness-stalks), 04K2 (lemma-stalk-pullback), 05VQ (lemma-stalk-pullback-quasi-coherent); sites-modules.tex Tags 04EQ (lemma-stalk-exact-modules), 05V5 (lemma-pullback-stalk); spaces-morphisms.tex Tags 03MB (lemma-closed-immersion-ideals), 0DK1 (lemma-stalk-push-closed); spaces-more-morphisms.tex Tag 05ZS (lemma-thickening-equivalence). The extended-ideal description is the quotient-ring calculation after an etale scheme base change."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-square-zero-extension-data",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-pointed-stalk-data",
+  "def-sfb-space-square-zero-stalk-data",
+  "def-sfb-space-stalk-quotient-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "For either immersion write $i:Z\\hookrightarrow T$. On affine etale scheme charts it is $\\operatorname{Spec}(R/K)\\hookrightarrow\\operatorname{Spec}R$ with $K^2=0$ by [def-weil-closed-immersion]. Every prime contains $K$, so it is a thickening. By [lem-sfb-space-thickening-base-change], every scheme test of $i$ is a surjective closed immersion; [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism] makes it integral and universally injective. Thus [lem-sfb-space-integral-radicial-etale-invariance] gives an equivalence of the categories of chartwise etale algebraic-space objects. It preserves and reflects coverings: each base-change projection along $i$ is a homeomorphism by the thickening base-change theorem, so joint surjectivity is equivalent before and after base change. This is an equivalence of the enlarged etale sites. Apply [lem-trf-space-enlarged-etale-ringed-site-model]: restriction to scheme objects identifies their sheaf topoi with the small etale topoi, and the morphism for $i$ is induced by this very base-change functor. Consequently inverse image and direct image for $i$ are inverse equivalences on underlying sheaves. This supplies the common site interpretation for both thickenings; the structure ring sheaves themselves are related by their quotient map, computed next.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-space-thickening-base-change",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-sfb-space-integral-radicial-etale-invariance",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 05ZH (theorem-topological-invariance) and 09ZX (lemma-base-change-thickening); spaces-properties.tex Tags 03G0, 03G1, 03G2 for enlarged/small etale site comparison and functoriality."
+   }
+  },
+  {
+   "text": "Continue with $i:Z\\hookrightarrow T$. For an affine etale chart $U=\\operatorname{Spec}R\\to T$, put $V=Z\\times_T U=\\operatorname{Spec}(R/K)$ by [def-weil-closed-immersion]. The section formula of [lem-trf-space-etale-module-pushforward-restriction], applied to $\\mathcal O_Z$, identifies $(i_*\\mathcal O_Z)(U)$ with $\\Gamma(V,\\mathcal O_V)=R/K$. The structure map on this chart is $R\\twoheadrightarrow R/K$. Every etale scheme object is covered by affine open objects, so the structure-sheaf map is locally surjective, hence surjective as a sheaf map. Its kernel is the defining ideal $\\mathcal L$. The site equivalence of Step 1 identifies $i_*\\mathcal O_Z$ with $\\mathcal O_Z$ on the common site: on each scheme test $U$ and its base change $V$, both are evaluated as $\\Gamma(V,\\mathcal O_V)$, compatibly with restriction. We obtain $0\\to\\mathcal I\\to\\mathcal O_{Y\\prime}\\to\\mathcal O_Y\\to0$ and $0\\to\\mathcal J\\to\\mathcal O_{X\\prime}\\to\\mathcal O_X\\to0$. Their ideal actions factor through the quotient ring sheaves, since a difference of two local lifts lies in the ideal and its product with that ideal is zero.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-trf-space-etale-module-pushforward-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB (lemma-closed-immersion-ideals), first proof paragraph; spaces-properties.tex, lemma-pushforward-etale-base-change-modules; affine quotient description from Tag 01QO."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-geometric-points-conservative], the specified neighbourhood colimits are points of each etale topos and jointly detect isomorphisms of sheaves of sets. By [lem-sfb-ringed-site-point-exact], applied to the normalized ringed-site presentations at these points, module stalks are exact. An inverse of a bijective module map on underlying sheaves respects scalar multiplication, so the same stalk family detects module isomorphisms. Apply exact stalks to the two sequences of Step 2. This gives the surjections $A\\prime\\twoheadrightarrow A$, $B\\prime\\twoheadrightarrow B$ with kernels $I,J$. The sheaf square commutes, hence so does the stalk square; thus the upper ring map takes $I$ into $J$. Every pair of ideal germs has representatives on a common neighbourhood, where their product is zero, so $I^2=J^2=0$. The quotient identifications $A\\cong A\\prime/I$ and $B\\cong B\\prime/J$ are the explicit maps $[a\\prime]\\mapsto a\\prime\\bmod I$ and $[b\\prime]\\mapsto b\\prime\\bmod J$, bijective by the kernel and surjectivity assertions.",
+   "uses": [
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-sfb-ringed-site-point-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04EQ (lemma-stalk-exact-modules); spaces-properties.tex Tags 04K0 and 04K5."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-geometric-points-conservative] to $f$ to identify the composite point with $\\bar y$. The pullback-stalk formula of [lem-sfb-ringed-topos-pullback-stalk] then gives $(f^*\\mathcal I)_{\\bar x}\\cong I\\otimes_A B$, with its canonical pure-tensor normalization. For local sections $a$ and $i$, take a lift $\\widetilde a$ along the locally surjective structure-sheaf quotient of Step 2 and set $a\\otimes i\\mapsto\\widetilde a f\\prime{}^\\sharp(i)$. Two lifts differ by a section of $\\mathcal J$, whose product with $f\\prime{}^\\sharp(i)\\in\\mathcal J$ is zero. This proves independence and gluing. Addition, scalar multiplication and the balancing relation hold after choosing lifts, because $f\\prime{}^\\sharp$ is a ring map and the square commutes. It therefore defines the asserted sheaf map. At the stalk every $b\\in B$ lifts to $\\widetilde b\\in B\\prime$ by Step 3. The pure-tensor normalization sends the stalk of this map to $q(i\\otimes b)=f\\prime{}^\\sharp(i)\\widetilde b$. Its independence from $\\widetilde b$ is again $J^2=0$.",
+   "uses": [
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-sfb-ringed-topos-pullback-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5 (lemma-pullback-stalk); spaces-properties.tex Tag 04K2(4); square-zero multiplication on the common sites."
+   }
+  },
+  {
+   "text": "Put $P_0=Y\\times_{Y\\prime}X\\prime$. By [lem-sfb-space-ideal-closed-subspace-correspondence], its closed-subspace ideal in $X\\prime$ is $\\mathcal K=\\operatorname{im}((f\\prime)^*\\mathcal I\\to\\mathcal O_{X\\prime})$. Apply [lem-sfb-space-geometric-points-conservative] and [lem-sfb-ringed-topos-pullback-stalk] to $f\\prime$: the source stalk is $I\\otimes_{A\\prime}B\\prime$, and multiplication sends $i\\otimes b\\prime$ to $f\\prime{}^\\sharp(i)b\\prime$. Exactness of module stalks [lem-sfb-ringed-site-point-exact] identifies $\\mathcal K_{\\bar x}$ with the image of this map. Its elements are precisely finite sums of these products, which is the extended ideal $IB\\prime$. No tensor-injectivity assertion is used.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-sfb-ringed-topos-pullback-stalk",
+    "lem-sfb-ringed-site-point-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB (lemma-closed-immersion-ideals) and paragraph after definition-inverse-image-closed-subspace; sites-modules.tex Tags 04EQ and 05V5."
+   }
+  },
+  {
+   "text": "The commuting square makes $X$ a subspace of $P_0$ over $X\\prime$, and $\\mathcal K\\subseteq\\mathcal J$: pulled-back sections of $\\mathcal I$ vanish after reduction to $X$. Every geometric point of $X\\prime$ factors uniquely through $X$, since on the closed-immersion scheme base change its map to a field kills the square-zero ideal. Thus [lem-sfb-space-geometric-points-conservative] detects whether $\\mathcal K\\hookrightarrow\\mathcal J$ is an isomorphism using exactly the points in the statement. By Step 5 this is equivalent to $IB\\prime=J$ at every $\\bar x$. By the bijection of [lem-sfb-space-ideal-closed-subspace-correspondence], equality $\\mathcal K=\\mathcal J$ is equivalent to equality of the two closed subspaces $P_0$ and $X$ of $X\\prime$. In that case the canonical map $X\\to P_0$ is the resulting isomorphism: a map over $X\\prime$ into a closed subspace is unique, since its scheme base changes are closed embeddings, hence monomorphisms. Conversely, a canonical isomorphism identifies their kernel ideals and hence gives the same equality. This proves the cartesian criterion without a flatness hypothesis.",
+   "uses": [
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03MB, inclusion-reversing bijection; spaces-properties.tex Tag 04K5. Quotient-ring argument for the square in Tag 06BH."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-sfb-space-thickening-base-change",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-sfb-space-integral-radicial-etale-invariance",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-sfb-space-geometric-points-conservative",
+  "lem-sfb-ringed-site-point-exact",
+  "lem-sfb-ringed-topos-pullback-stalk",
+  "lem-sfb-space-ideal-closed-subspace-correspondence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03MB and inverse-image-closed-subspace paragraph, combined with spaces-properties.tex Tags 04K0, 04K2, 04K5; sites-modules.tex Tags 04EQ, 05V5; spaces-more-morphisms.tex Tag 05ZS. The square-zero formula is the direct multiplication calculation in the quotient rings. The repair uses existing Tags 05ZS and 09ZX for the sites and the section-normalized etale direct-image comparison for the quotient exact sequences, independently of first-order ringed-description."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|conormal|[Ee]tale.*[Ff]lat",
+   "sub": "AlgebraicGeometry",
+   "results": "Search succeeded; 11 hits: Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/Etale.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, topological stalks or scheme closed immersions; none supplies the small-etale algebraic-space ideal and tensor-stalk identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conormal maps of closed immersions of algebraic spaces restrict functorially to etale scheme charts, which detect cartesian squares and flat morphisms",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, topological stalks or scheme closed immersions; none supplies the small-etale algebraic-space ideal and tensor-stalk identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsClosedImmersion",
+   "sub": "",
+   "results": "Search succeeded; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, topological stalks or scheme closed immersions; none supplies the small-etale algebraic-space ideal and tensor-stalk identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative square of closed immersions of algebraic spaces, flatness cartesianness and isomorphism of the conormal map can be tested on compatible etale affine scheme charts",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, topological stalks or scheme closed immersions; none supplies the small-etale algebraic-space ideal and tensor-stalk identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalks of etale structure sheaves of algebraic spaces are exact and commute with tensor pullback, and a closed square is cartesian precisely when the source ideal equals the extended target ideal at every geometric point",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.FormallyUnramified. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, topological stalks or scheme closed immersions; none supplies the small-etale algebraic-space ideal and tensor-stalk identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Tt]ensor|[Tt]ensor.*stalk|AlgebraicSpace",
+   "sub": "AlgebraicGeometry",
+   "results": "Search succeeded; 1 hits: Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, topological stalks or scheme closed immersions; none supplies the small-etale algebraic-space ideal and tensor-stalk identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact conservative geometric stalks on the small etale site of an algebraic space identify stalks of tensor pullback with tensor products and kernels of closed immersion quotients with ideal stalks",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: TopCat.Presheaf.stalkPullbackIso, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.PresheafedSpace.stalkMap.stalkIso. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, topological stalks or scheme closed immersions; none supplies the small-etale algebraic-space ideal and tensor-stalk identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "Presheaf.stalk, TensorProduct",
+   "sub": "",
+   "results": "Search succeeded; 0 hits: . loogle: unknown identifier 'Presheaf.stalk'",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, topological stalks or scheme closed immersions; none supplies the small-etale algebraic-space ideal and tensor-stalk identifications"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a square of square zero closed immersions of algebraic spaces, the stalk of the canonical ideal map is I tensor_A B to J sending i tensor b to f(i) times any lift of b, and cartesianness means J equals IB prime",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl, AlgebraicGeometry.IsClosedImmersion.lift, RingHom.SurjectiveOnStalks.exists_mul_eq_tmul, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo, KaehlerDifferential.End_equiv_aux. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion and ideal-sheaf results, including isPullback_of_isClosedImmersion, do not give the small-etale algebraic-space stalk and ideal comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, TensorProduct",
+   "sub": "",
+   "results": "Search succeeded; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion and ideal-sheaf results, including isPullback_of_isClosedImmersion, do not give the small-etale algebraic-space stalk and ideal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|stalk.*ideal.*pullback",
+   "sub": "AlgebraicGeometry",
+   "results": "Search succeeded; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion and ideal-sheaf results, including isPullback_of_isClosedImmersion, do not give the small-etale algebraic-space stalk and ideal comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Square zero closed immersions of algebraic spaces have quotient structure ring stalks and cartesian square exactly when the source ideal is the extended target ideal",
+   "sub": "",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.IsClosedImmersion.Spec_iff, AlgebraicGeometry.isClosedImmersion_iff, DividedPowers.OfSquareZero.dividedPowers, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot. ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme closed-immersion and ideal-sheaf results, including isPullback_of_isClosedImmersion, do not give the small-etale algebraic-space stalk and ideal comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-square-zero-flatness-criterion",
+  "date": "2026-10-23",
+  "group": "Q158"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 06BH (lemma-deform), both directions. Supporting input: the stalk and ideal comparisons underlying the etale-chart reduction in Tag 06BH.",
+   "via": [
+    "lem-sfb-space-square-zero-flatness-criterion",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-stalk-ideal-pullback",
+  "worker": "stage1",
+  "summary": "Repair of the returned cycle on current main: use existing integral-radicial topological invariance on enlarged etale sites, the enlarged/small ringed-site comparison, thickening base change and etale direct-image restriction. Six proof steps retain the full generator and extended-ideal calculations. One statement-only supporting node remains (lem-sfb-space-geometric-points-conservative); the ringed-point module calculus is taken from the existing lem-sfb-ringed-site-point-exact and lem-sfb-ringed-topos-pullback-stalk (review FIX); the ideal correspondence is reused from the current DAG. Statement and statement dependencies unchanged.",
+  "blueprint": "The inherited place refers to det-thm-sf-ctf-stability-direct-images (3), the alteration branch through 06BH. In the current latest blueprint the direct-image proof uses compactification and the preservation inputs. This item is a supporting infinitesimal calculation on the inherited branch, not a change to that route. blueprint_refs.py ancestor returns None because the created.item chain ends at the historical module name Sheaf.SixFunctors.CtfStabilityDirectImages; keep the computed null ancestor and its explicit inherited place."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-5bf27debf",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-5bf27debf (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Stacks sources: 04K0, 04K2, 04K5 (spaces-properties), 04EQ and 05V5 (sites-modules), 03MB (spaces-morphisms), 05ZH and 09ZX (spaces-more-morphisms). This is a re-delivery after the landing cycle closed-immersion-quasi-coherent-modules -> item -> first-order-ringed-description. The item statement and stmt_deps are unchanged, and a full traversal of the stmt_deps and proof_deps closure (396 nodes) no longer reaches the item, so the cycle is gone. Step 1 holds: on every scheme test a square-zero closed immersion is a surjective closed immersion, hence integral, universally injective and surjective; 05ZH then gives the EtSp equivalence, coverings correspond via 09ZX, and the enlarged-site model identifies the topoi. Step 2: the 03LX section formula gives (i_*O_Z)(U)=R/K, which yields the quotient sequences. Steps 3-6: the stalk kernels are I and J; the map q is well defined because two lifts differ by J and J^2=0; the stalk of the P_0 ideal is the image of I tensor over A' of B' (correctly over A', not A), which is IB'; the ideal bijection and the monomorphism argument finish the proof. Small cases agree with the criterion: k[eps]->k with B'=k is cartesian; k[x]/x^2 with t->0 is not. FIX: the new node lem-sfb-ringed-site-point-module-calculus duplicates two existing nodes: lem-sfb-ringed-topos-pullback-stalk (05V5, same pure-tensor normalization) and lem-sfb-ringed-site-point-exact (04EQ). I dropped it and repointed Steps 3-5 to those two nodes; proof_deps is the union of the step uses and the split_report summary is updated. Nothing else in the DAG cites the dropped node. lem-sfb-space-geometric-points-conservative is kept: the existing conservative-geometric-points and chart-comparison nodes (the latter only over Spec Z) do not state the 04K0 point adjunction that Steps 3-5 use. Batch-5 flags: def-trf-algebraic-space is a definition; thickening-base-change reaches the trace-formula chapter only through that definition; the enlarged etale ringed-site model (03G1/03G2/03G8) and etale pushforward restriction (03LX) are foundational facts about algebraic spaces. None is a trace-formula or Poincare-duality step, and the closure contains no assumption leaf. No SGA is cited and there are no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceStalkIdealPullback",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.squareZero_stalk_ideal_pullback",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SquareZeroSquareCalculation",
+   "AlgebraicGeometry.AlgebraicSpace.squareZero_stalk_ideal_pullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceStalkIdealPullback.lean",
+  "statement": "theorem squareZero_stalk_ideal_pullback {S : Scheme.{u}} {X Y X' Y' : AlgebraicSpace S} (f : X ⟶ Y) (f' : X' ⟶ Y') (i : X ⟶ X') (j : Y ⟶ Y') (h : f ≫ j = i ≫ f') (hi : IsSpaceFirstOrderThickening i) (hj : IsSpaceFirstOrderThickening j) : ∃ (T : ThickeningSiteModel i) (W : ThickeningSiteModel j) (I : SquareZeroIdeal W) (J : SquareZeroIdeal T), Nonempty (SquareZeroSquareCalculation f f' i j h T W I J)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The three new definition nodes own normalized pointed-neighbourhood colimit stalks, square-zero kernel modules and fibre-product restriction, and the ring-square/tensor comparison. This module assembles these presentations and asserts their existence with the complete geometric calculation. All comparisons carry germ or local-tensor normalizations; none is an arbitrary map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7cb93a71",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Read item node, source tags 04K0/04K2/04K5/04EQ/05V5/03MB/05ZS, all 4 delivered modules, the 3 new def nodes and the dependency declarations (ThickeningSiteModel, ChartRingMap.Reduces/InducedBy, moduleTensorPullback/moduleTensorSection, IsSpaceFirstOrderThickening). Every clause matches the node and is normalized on germs, charts or kernels, with colimit cocones for stalks. Clauses checked: ring square with surjections and kernels I,J; I^2=J^2=0; A'/I, B'/J identifications; (f^*I)_x = I⊗_A B with pure-tensor normalization; q(i⊗b)=f'#(i)b̃ for all lifts; ideal of Y×_{Y'}X' has stalk IB'; cartesian_iff over all geometric points; no flatness. The existential is not hollow. Edge cases OK (identity, empty X, k[ε]→k, k[t]/t²). Statements verbatim; dep records identical to live; no local proofs; docstrings present. FINDING H4: squareZeroPullbackSpace duplicated the landed enlargedFibreProduct (def-sfb-space-sheaf-fibre-product, existing:true, landed 12:14 UTC before base 16:15 UTC). FIX: fixes/SpaceSquareZeroStalkData.lean uses enlargedFibreProduct (public import EnlargedEtaleRingedSite); fixes/def-sfb-space-square-zero-stalk-data.json adds that stmt_dep, cites it and drops the declaration; report.md sentence updated. Item statement and stmt_deps unchanged. nt_compile --json of all 4 modules clean (6.6/9.7/41.5/19.6 s). Advisory: unused public CochainTensorUniverses import in item module."
+ }
+}

@@ -1,0 +1,407 @@
+{
+ "id": "lem-sfb-constant-hilbert-finite-locally-free",
+ "kind": "statement",
+ "title": "Constant projective Hilbert polynomial characterizes finite locally free families",
+ "statement": "Let $T$ be any scheme [def-pc-scheme], let $n,d\\geq0$ be integers, and let $i:Z\\hookrightarrow\\mathbf P^n_T$ be a closed immersion [def-weil-closed-immersion, def-kun-projective]. Assume that $p:Z\\to T$ is flat [def-weil-flat-morphism] and finitely presented, meaning locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated. For $t\\in T$, let $P_t$ be the Hilbert polynomial of the geometric fibre with its induced embedding: the polynomial eventually equal to the dimensions of the graded pieces of its homogeneous coordinate ring [def-sfb-projective-fibre-hilbert-polynomial]. Then $P_t=d$ for every $t\\in T$ if and only if $p$ is finite locally free of degree $d$ [def-pc-finite-locally-free]. Equivalently, $p$ is finite and $p_*\\mathcal O_Z$ is locally isomorphic to $\\mathcal O_T^{\\oplus d}$. No Noetherian, reducedness, or connectedness assumption on $T$ is made. Empty bases and $d=0$ are allowed; for $d=0$ these conditions say $Z=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02LS (lemma-characterize-finite), with morphisms.tex Tag 02KB (lemma-finite-flat); numerical input varieties.tex Tag 08AE (lemma-hilbert-polynomial-H0) and coherent.tex Tag 0B3J (lemma-coherent-support-dimension-0). The equivalence is the agent-written combination of these inputs and the existing projective Hilbert polynomial dimension theorem; see report.md."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-projective-fibre-hilbert-polynomial",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "The displayed embedding and the quasi-compactness assumed for $p$ make $p$ projective in both projective-space conventions cited here. Hence $p$ is proper, in particular locally of finite type. Fix $t\\in T$, put $k=\\kappa(t)$ and $X=Z_t$. Base change of the embedding gives $X\\hookrightarrow\\mathbf P^n_k$: the base-change definition of projective space identifies $(T\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^n_{\\mathbf Z})\\times_T\\operatorname{Spec}k$ with $\\mathbf P(\\{0,\\ldots,n\\};\\operatorname{Spec}k)=\\operatorname{Spec}k\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Proj}(\\mathbf Z[T_0,\\ldots,T_n])$ by its two projections. The affine Proj scalar-extension lemma, with $R=\\mathbf Z$, $S=k$, $A=\\mathbf Z[T_0,\\ldots,T_n]$ and the graded isomorphism $k\\otimes_{\\mathbf Z}A\\cong k[z_0,\\ldots,z_n]$, $c\\otimes T_j\\mapsto cz_j$, of the polynomial scalar-extension lemma, identifies this over $\\operatorname{Spec}k$ with $\\mathbf P^n_k=\\operatorname{Proj}(k[z_0,\\ldots,z_n])$. The closed-immersion base-change lemma applies. The projective field coordinate/Euler theorem gives a polynomial $Q_X$ equal to $\\chi(X,\\mathcal O_X(m))$ for every integer $m$ and to the eventual coordinate dimensions, and gives Noetherianity, quasi-compactness and coherence of $\\mathcal O_X$. If $X$ is nonempty, the Hilbert dimension theorem makes $Q_X$ nonzero and invariant under $k\\subseteq\\overline k$, so $Q_X=P_t$. If $X$ is empty, its base change is empty and both polynomials are zero. Thus $Q_X=P_t$ in all cases.",
+   "uses": [
+    "def-kun-projective",
+    "def-pc-projective-morphism",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "def-nagata-projective-space-base-change",
+    "lem-nagata-affine-proj-scalar-extension",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-projective-field-coordinate-euler-polynomial",
+    "lem-sfb-projective-hilbert-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WF (lemma-H-projective-base-change); projective properness; varieties.tex Tags 0BEM and 08AE, as in the cited field-polynomial nodes."
+   }
+  },
+  {
+   "text": "Assume $P_t=d$ for every $t$. For every nonempty residue fibre $X$, Step 1 and the Hilbert dimension theorem give $Q_X\\ne0$ and $\\dim X=\\deg Q_X=\\deg(d)=0$; here $d>0$ follows from $Q_X\\ne0$. In particular, when $d=0$ no residue fibre can be nonempty. For a nonempty fibre, apply the zero-dimensional discrete-topology lemma, using its locally Noetherian hypothesis supplied by Step 1. Its singleton opens cover $X$, and quasi-compactness from Step 1 gives a finite subcover, so $|X|$ is finite. Empty fibres are finite too.",
+   "uses": [
+    "lem-sfb-projective-hilbert-polynomial-dimension",
+    "lem-sfb-locally-noetherian-zero-dimensional-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAX (lemma-locally-Noetherian-dimension-0); varieties.tex Hilbert degree/dimension theorem."
+   }
+  },
+  {
+   "text": "The fibre projection identifies $|Z_t|$ with $p^{-1}(t)$, so Step 2 gives finite set-theoretic fibres. As $p$ is locally of finite type by Step 1, the finite-fibre criterion says $p$ is quasi-finite at every point over each $t$. Therefore $p$ is locally quasi-finite. Apply proper plus locally quasi-finite implies finite. This is the unrestricted-base criterion, not its locally Noetherian variant.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "pqf-lem-locqf-fibre-discrete",
+    "pqf-def-quasifinite",
+    "pqf-lem-proper-lqf-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LS (lemma-characterize-finite), (3) implies (1); morphisms.tex Tag 02NG (lemma-finite-fibre)."
+   }
+  },
+  {
+   "text": "For a nonempty residue fibre $X$, apply the zero-dimensional coherent-support vanishing theorem to $\\mathcal O_X$: it is coherent by Step 1 and its support is contained in the zero-dimensional space $X$. Thus $H^i(X,\\mathcal O_X)=0$ for $i>0$. At $m=0$, the twist is $\\mathcal O_X$, so the Euler formula and Step 1 give $d=Q_X(0)=\\dim_k\\Gamma(X,\\mathcal O_X)$. For an empty fibre the same equality holds because $Q_X=0$ and the section module is zero. With finiteness from Step 3 and the given flatness and local finite presentation, the definition of finite locally free degree now gives degree $d$. The finite-locally-free properties lemma consequently gives $p_*\\mathcal O_Z$ locally free of rank $d$.",
+   "uses": [
+    "lem-sfb-coherent-zero-dimensional-support",
+    "def-pc-euler-characteristic",
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
+    "def-pc-finite-locally-free",
+    "lem-pc-flf-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B3J (lemma-coherent-support-dimension-0); morphisms.tex Tag 02KB (lemma-finite-flat)."
+   }
+  },
+  {
+   "text": "Conversely assume $p$ is finite locally free of degree $d$. It is finite, flat and locally of finite presentation by definition, and $\\dim_{\\kappa(t)}\\Gamma(Z_t,\\mathcal O_{Z_t})=d$. Finiteness implies quasi-finiteness, hence finite set-theoretic fibres by the quasi-finite finite-fibre criterion. The finite-fibre lemma, applied to the locally finite type map $p$, makes every $Z_t$ discrete. In a nonempty discrete space every nonempty irreducible closed subset is a singleton, and strict chains of such subsets have length zero; thus $\\dim Z_t=0$. The Hilbert dimension theorem and Step 1 now give $\\deg Q_{Z_t}=0$, so $Q_{Z_t}$ is constant.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-finitefibres",
+    "pqf-lem-locqf-fibre-discrete",
+    "def-kun-topological-krull-dimension",
+    "lem-sfb-projective-hilbert-polynomial-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02NH (lemma-quasi-finite), 02NG (lemma-finite-fibre); varieties.tex Hilbert degree/dimension theorem."
+   }
+  },
+  {
+   "text": "For a nonempty residue fibre in Step 5, the coherent-support vanishing theorem applies to $\\mathcal O_{Z_t}$ as in Step 4. Hence $Q_{Z_t}(0)=\\chi(Z_t,\\mathcal O_{Z_t})=\\dim_{\\kappa(t)}\\Gamma(Z_t,\\mathcal O_{Z_t})=d$. As $Q_{Z_t}$ is constant, it is the constant polynomial $d$. If $Z_t$ is empty, its section module has dimension zero, forcing $d=0$, and $Q_{Z_t}=0=d$. By Step 1, in either case the geometric fibre polynomial $P_t$ is $d$.",
+   "uses": [
+    "lem-sfb-coherent-zero-dimensional-support",
+    "def-pc-euler-characteristic",
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B3J (lemma-coherent-support-dimension-0), combined with the fibre Euler-polynomial identity."
+   }
+  },
+  {
+   "text": "For the final equivalence, finite locally free of degree $d$ implies the asserted local description of $p_*\\mathcal O_Z$ by Step 4's cited properties lemma. Conversely suppose $p$ is finite and $p_*\\mathcal O_Z$ is locally $\\mathcal O_T^{\\oplus d}$. At $t$, choose an affine neighbourhood $V=\\operatorname{Spec}A$ inside a trivializing open. Since $p$ is finite, $p^{-1}V=\\operatorname{Spec}B$ and $B$ is free of rank $d$ over $A$. The affine fibre-sections formula identifies $\\Gamma(Z_t,\\mathcal O_{Z_t})$ with $B\\otimes_A\\kappa(t)=\\kappa(t)^{\\oplus d}$, so its dimension is $d$. Given the standing flatness and local finite presentation, the definition gives finite locally free of degree $d$.",
+   "uses": [
+    "lem-pc-flf-properties",
+    "def-weil-finite-integral-morphism",
+    "lem-pc-finite-affine-fibre-sections",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB (lemma-finite-flat), affine fibre calculation and finite locally free degree."
+   }
+  },
+  {
+   "text": "If $T$ is empty, existence of the map $Z\\to T$ forces $Z$ empty; the pointwise degree condition and the local rank-$d$ condition are both vacuous for every $d$. For any base and $d=0$, Step 2 makes every residue fibre empty, hence $Z$ has no point: a point $z$ would lie over $p(z)$ and determine a point of that fibre. Conversely $Z=\\varnothing$ has zero coordinate/Euler polynomial, is finite, flat and locally of finite presentation, and its pushforward is the zero module, locally $\\mathcal O_T^{\\oplus0}$. These assertions are checked on affine opens by the zero algebra and its empty spectrum. Thus the zero-degree interpretation includes empty bases.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-finite-integral-morphism",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB (lemma-finite-flat), degree-zero and empty-base cases by the affine definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-kun-topological-krull-dimension",
+  "def-nagata-projective-space-base-change",
+  "def-pc-euler-characteristic",
+  "def-pc-finite-locally-free",
+  "def-pc-module-pullback",
+  "def-pc-projective-morphism",
+  "def-pc-projective-space-twist",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-pc-finite-affine-fibre-sections",
+  "lem-pc-flf-properties",
+  "lem-pc-projective-proper",
+  "lem-sfb-coherent-zero-dimensional-support",
+  "lem-sfb-locally-noetherian-zero-dimensional-discrete",
+  "lem-sfb-projective-field-coordinate-euler-polynomial",
+  "lem-sfb-projective-hilbert-polynomial-dimension",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "pqf-def-quasifinite",
+  "pqf-lem-finite-qf",
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-lem-proper-lqf-finite",
+  "pqf-lem-qf-finitefibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Combination of Tag 02LS (lemma-characterize-finite), morphisms.tex Tag 02KB (lemma-finite-flat), coherent.tex Tag 0B3J and the existing Hilbert degree/dimension and field-coordinate/Euler theorems; residue-fibre argument written by Q90."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented closed subscheme of projective space has constant geometric fibre Hilbert polynomial d if and only if it is finite locally free of rank d",
+   "results": "[leanfinder] OK 8 hit(s); Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, Module.free_of_flat_of_finrank_eq, AlgebraicGeometry.Flat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.valuativeCriterion_existence",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPolynomial|hilbert_polynomial|HilbertScheme|hilbertScheme|hilbertFunctor",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective flat family with constant Hilbert polynomial d is finite locally free of degree d",
+   "results": "[leansearch] OK 8 hit(s); Polynomial.hilbertPoly, Module.Flat.of_projective, Module.free_of_flat_of_finrank_eq, AlgebraicGeometry.Flat.mk, Module.isLocallyConstant_rankAtStalk, Module.free_of_flat_of_isLocalRing, Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.Flat",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"IsFinite\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Hilbert functor of finite length subschemes supported in an open smooth curve is an open subscheme of the projective Hilbert scheme",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.AffineSpace.isOpenMap_over, AlgebraicGeometry.instIsOpenImmersionSigmaSpec, AlgebraicGeometry.Proj, AlgebraicGeometry.Polynomial.isOpen_imageOfDf, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom, AlgebraicGeometry.Scheme.Cover.fromGlued_isOpenEmbedding",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.*(polynomial|finite|rank)|(polynomial|finite|rank).*Hilbert",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed flat family in projective space with constant Hilbert polynomial is finite flat of that rank",
+   "results": "[leansearch] OK 8 hit(s); Polynomial.hilbertPoly, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion, AlgebraicGeometry.Flat.mk, RingHom.Flat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented projective morphism the geometric fibres have constant Hilbert polynomial d exactly when the morphism is finite locally free of degree d",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Flat, Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned signatures; none identifies constant geometric-fibre Hilbert polynomial with finite locally free rank. Polynomial.hilbertPoly is a polynomial construction, and module-flatness or Proj permanence results do not state this geometric equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPolynomial|hilbert_polynomial|HilbertScheme|hilbertScheme",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module projectivity/flatness, Proj permanence, projectivization cardinalities, or the generating-series polynomial construction; none states the equivalence for projective families. Read the returned signatures and Mathlib/RingTheory/Polynomial/HilbertPoly.lean, whose module TODO explicitly leaves graded-module Hilbert polynomials open."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.*(polynomial|finite|rank)|(polynomial|finite|rank).*Hilbert",
+   "results": "25 hits; Mathlib/NumberTheory/Dioph.lean, Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/Algebra/Module/LinearMap/End.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module projectivity/flatness, Proj permanence, projectivization cardinalities, or the generating-series polynomial construction; none states the equivalence for projective families. Read the returned signatures and Mathlib/RingTheory/Polynomial/HilbertPoly.lean, whose module TODO explicitly leaves graded-module Hilbert polynomials open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A projective flat finitely presented morphism has constant Hilbert polynomial d exactly when it is finite locally free of rank d",
+   "results": "8 hits; Polynomial.hilbertPoly, Module.Flat.of_projective, Module.Flat.projective_of_finitePresentation, Module.free_of_flat_of_finrank_eq, Module.isLocallyConstant_rankAtStalk, Module.finitePresentation_of_projective, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Module.free_of_flat_of_isLocalRing",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module projectivity/flatness, Proj permanence, projectivization cardinalities, or the generating-series polynomial construction; none states the equivalence for projective families. Read the returned signatures and Mathlib/RingTheory/Polynomial/HilbertPoly.lean, whose module TODO explicitly leaves graded-module Hilbert polynomials open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A constant Hilbert polynomial for projective fibres characterizes finite flat families of that degree",
+   "results": "8 hits; Polynomial.hilbertPoly, Polynomial.preHilbertPoly, Polynomial.hilbertPoly_zero_right, Polynomial.existsUnique_hilbertPoly, Polynomial.hilbertPoly_linearMap, Polynomial.hilbertPoly_zero_left, Polynomial.hilbertPoly_add_left, Polynomial.hilbertPoly_mul_one_sub_succ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module projectivity/flatness, Proj permanence, projectivization cardinalities, or the generating-series polynomial construction; none states the equivalence for projective families. Read the returned signatures and Mathlib/RingTheory/Polynomial/HilbertPoly.lean, whose module TODO explicitly leaves graded-module Hilbert polynomials open."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Flat\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module projectivity/flatness, Proj permanence, projectivization cardinalities, or the generating-series polynomial construction; none states the equivalence for projective families. Read the returned signatures and Mathlib/RingTheory/Polynomial/HilbertPoly.lean, whose module TODO explicitly leaves graded-module Hilbert polynomials open."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hilbert\", \"finrank\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module projectivity/flatness, Proj permanence, projectivization cardinalities, or the generating-series polynomial construction; none states the equivalence for projective families. Read the returned signatures and Mathlib/RingTheory/Polynomial/HilbertPoly.lean, whose module TODO explicitly leaves graded-module Hilbert polynomials open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented closed subscheme of projective space has constant fibre Hilbert polynomial d if and only if it is finite locally free of degree d",
+   "results": "8 hits; Module.Flat.projective_of_finitePresentation, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.fromOfGlobalSections, Module.freeLocus_eq_univ_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module projectivity/flatness, Proj permanence, projectivization cardinalities, or the generating-series polynomial construction; none states the equivalence for projective families. Read the returned signatures and Mathlib/RingTheory/Polynomial/HilbertPoly.lean, whose module TODO explicitly leaves graded-module Hilbert polynomials open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A zero dimensional projective scheme over a field has constant Hilbert polynomial equal to the vector space dimension of its global functions",
+   "results": "8 hits; Polynomial.hilbertPoly_zero_left, Polynomial.hilbertPoly_zero_right, Projectivization.card_of_finrank, Projectivization.card'', Projectivization.card, Projectivization.card', AlgebraicGeometry.Proj.zero_apply, Projectivization.isEmpty_of_subsingleton",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give module projectivity/flatness, Proj permanence, projectivization cardinalities, or the generating-series polynomial construction; none states the equivalence for projective families. Read the returned signatures and Mathlib/RingTheory/Polynomial/HilbertPoly.lean, whose module TODO explicitly leaves graded-module Hilbert polynomials open."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-smooth-divisor-parameter",
+  "date": "2026-10-23",
+  "group": "Q121"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Openness, boundedness and separation of the multidegree-zero locus. Finite-type parameter scheme for fixed-degree divisors in a smooth open curve. Numerical bridge: constant fibre Hilbert polynomial and finite locally free degree, before restricting support to the smooth open.",
+   "via": [
+    "lem-sfb-projective-smooth-divisor-parameter",
+    "lem-sfb-nodal-multidegree-zero-locus",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-constant-hilbert-finite-locally-free",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Eight-step residue-fibre proof with the geometric-polynomial comparison made explicit, proper/quasi-finite finiteness over arbitrary base, H^i=0 for the zero-dimensional coherent structure sheaf, and degree recovered by evaluating the full Euler polynomial at zero. Reused all required facts; no new nodes and no Lean attachment. Rechecked Mathlib in the prescribed logged services and checked empty fibres, empty bases, rank zero and nonreduced fibres.",
+  "blueprint": "Supports the existing ancestry place det-thm-sf-ctf-stability-direct-images, proof (3), ILO X Lemma 2.2/de Jong stable-curve reduction: the numerical bridge for finite-degree divisor parameter schemes before support is restricted to the smooth open. Latest blueprint direct-images proof and unit/chapter read; no route change. The local ancestor command prints None (the imported creation chain ends at a Lean-module identifier); the item already records the detailed place and its via chain, retained unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Properness of the displayed finite projective-space embedding; generic geometric tool, not an alternative to the alteration/moduli route. No node of this unit states this generic fact."
+   },
+   {
+    "node": "pqf-lem-locqf-fibre-discrete",
+    "why": "Finite-fibre criterion for a locally finite type scheme morphism, over arbitrary base. No node of this unit states this generic fact."
+   },
+   {
+    "node": "pqf-lem-finite-qf",
+    "why": "Finiteness implies quasi-finiteness, to obtain discrete finite residue fibres in the reverse direction. No node of this unit states this generic fact."
+   },
+   {
+    "node": "pqf-lem-qf-finitefibres",
+    "why": "Quasi-finiteness gives finite fibres, with no Noetherian base hypothesis. No node of this unit states this generic fact."
+   },
+   {
+    "node": "lem-pc-flf-properties",
+    "why": "Finite locally free degree d gives the specified rank-d pushforward. No node of this unit states this generic fact."
+   },
+   {
+    "node": "lem-pc-finite-affine-fibre-sections",
+    "why": "Affine tensor formula for fibre sections, for the equivalent pushforward formulation. No node of this unit states this generic fact."
+   },
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Identifies Spec k x_Z Proj Z[T_0..T_n] (the base-change model of projective space) with Proj k[z_0..z_n], the model in which the field coordinate/Euler and Hilbert dimension theorems are stated. Generic Proj scalar extension; no node of this unit states it. Added by reviewer FIX."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-finitefibres",
+  "lem-pc-flf-properties",
+  "lem-pc-finite-affine-fibre-sections",
+  "lem-nagata-affine-proj-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-a99f47dbd",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-a99f47dbd (reviewer sub-agent of L); spot-checked: I read the full 8-step split. There are no new nodes and the statement is unchanged. Sources checked: Stacks 02LS (finite ⇔ proper + locally quasi-finite, any base), 02KB (finite locally free ⇔ finite + flat + lfp) and 0B3J (H^i=0 for coherent sheaves with zero-dimensional support). Steps 2-8 are correct. Hypotheses: locally Noetherian and qc fibres come from the coordinate/Euler theorem; the Hilbert dimension theorem is applied only to nonempty fibres; empty fibres, d=0 and the empty base are handled. One fault (C4/C1): Step 1 identifies P(n;Spec k) = Spec k×_Z Proj Z[T] with Proj k[z], the model in which the field coordinate/Euler and Hilbert dimension theorems are stated, by appeal to the base-change definition alone. FIX: Step 1 now cites lem-nagata-affine-proj-scalar-extension and lem-weil-pbc-polynomial-scalar-extension and writes out the identification. Both are added to proof_deps, the nagata lemma gets a tool_uses entry, and neither creates a cycle. Batch-5 check: both flagged citations reach sec-trace-formula only through lem-trf-standard-graded-hilbert-function (Stacks 00K1, polynomial Hilbert function of graded modules). That is generic commutative algebra, not a step of the trace formula or of Poincaré duality, so it is accepted. The six declared tool_uses are generic and accepted. Small cases: a double point in P^1 gives d=2; P^n_T with n≥1 and mixed-rank bases are correctly excluded. No duplicates found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantHilbertFiniteLocallyFree",
+  "declaration": "AlgebraicGeometry.constant_hilbertPolynomial_iff_finiteLocallyFree",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantHilbertFiniteLocallyFree.lean",
+  "statement": "theorem constant_hilbertPolynomial_iff_finiteLocallyFree {Z T : Scheme.{u}} (n d : ℕ) (i : Z ⟶ ℙ(ULift.{u} (Fin (n + 1)); T)) [IsClosedImmersion i] [Flat (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T))] [LocallyOfFinitePresentation (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T))] [QuasiCompact (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T))] [QuasiSeparated (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T))] : (HasProjectiveFibreHilbertPolynomial (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T)) i (Over.mk (𝟙 T)) ⊥ (Polynomial.C (d : ℚ)) ↔ (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T)).IsFiniteLocallyFreeOfDegree d) ∧ ((i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T)).IsFiniteLocallyFreeOfDegree d ↔ IsFinite (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T)) ∧ SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((Scheme.Modules.pushforward (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T))).obj (SheafOfModules.unit Z.ringCatSheaf)) d) ∧ (d = 0 → ((i ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T)).IsFiniteLocallyFreeOfDegree d ↔ IsEmpty Z))",
+  "branch": "sheaf-dag",
+  "by": "Q41",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0892b680",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Item node changed only in lean; record complete, statement verbatim. Clauses match: arbitrary u, n, d; closed immersion into ℙ(ULift(Fin(n+1));T); p is the composite; flat, LFP, QC, QS. The fibre condition uses HasProjectiveFibreHilbertPolynomial p i (Over.mk (𝟙 T)) ⊥ (C d), whose family is canonically Z. Iff with IsFiniteLocallyFreeOfDegree d (finite+flat+LFP, fiberDegree = d). Second iff with IsFinite ∧ pushforward unit IsFiniteLocallyFreeOfRank.{u,u,u} d (same form as the landed flf-properties theorem). d=0 → (FLF ↔ IsEmpty Z). Edge cases (empty T, d=0, n=0, nonreduced fibres) correct. Only sorry, docstrings with source, blueprint and 8 steps, lines ≤89, imports exist, no duplicate found. Advisory: IsFinite, ProjectiveSpace, IsFiniteLocallyFreeOfRank and pushforward owners are not in stmt_deps; stage 2 cannot add them. Second reading by the worker. No file changed, so no compile."
+ }
+}

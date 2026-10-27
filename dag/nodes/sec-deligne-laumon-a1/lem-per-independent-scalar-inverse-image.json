@@ -1,0 +1,129 @@
+{
+ "id": "lem-per-independent-scalar-inverse-image",
+ "kind": "statement",
+ "title": "Scalar extension commutes with inverse image on independently sized sites",
+ "statement": "Let $C$ and $D$ be sites essentially small in a module universe $u$, with independent object and morphism universes. Let $F:\\operatorname{Sh}(C,\\mathrm{Set}_u)\\to\\operatorname{Sh}(D,\\mathrm{Set}_u)$ have right adjoint $V$ and preserve finite limits. Let $a_Y:A_Y\\to B_Y$ and $a_X:A_X\\to B_X$ be maps of sheaves of commutative rings. Specify algebraic inverse images $I_A,I_B$ for $F$ with coefficient pairs $(A_Y,A_X),(B_Y,B_X)$ [def-weil-pbc-algebraic-inverse-image], and assume their underlying ring isomorphisms make the coefficient square commute. For module sheaves [def-weil-sheaf-of-modules-category], let $T_Y$ and $T_X$ be any left adjoints of restriction of scalars along $a_Y$ and $a_X$, with units $\\eta_Y$ and $\\eta_X$. There is a natural isomorphism $e:I_B\\circ T_Y\\xrightarrow{\\sim}T_X\\circ I_A$. Writing $\\iota_I:F(|M|)\\xrightarrow{\\sim}|I(M)|$ for the inverse of the specified underlying-module comparison, it obeys $F(|\\eta_{Y,M}|);\\iota_{I_B,T_Y(M)};|e_M|=\\iota_{I_A,M};|\\eta_{X,I_A(M)}|$. No exactness or coefficient-flatness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback: adjunction proof of the inverse-image/scalar-extension comparison, with the operation transport of Tags 03D2 and 03D7"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Transport direct-image additive groups and module actions through the right adjoint V, using finite-product comparison isomorphisms. The adjunct of the ring inverse-image isomorphism is a ring homomorphism by naturality of the adjunction and the ring-operation graph equations. Restriction along this adjunct gives a functor P on BX-modules and its underlying set-sheaf comparison.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose maps from IA(M) to a restricted BX-module through F left adjoint to V. The binary-operation mate equations show that additivity and scalar linearity on the two sides are equivalent; the coefficient square supplies the scalar-action mate equation. Faithfulness of the forgetful functors restricts the set-sheaf equivalence to module hom sets, naturally in both variables. Applying this also to IB and the identity coefficient maps gives the second Hom equivalence.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose these Hom equivalences with the adjunctions for TY and TX. The two composite functors are left adjoints to the same right adjoint. The unique adjunction comparison is therefore a natural isomorphism. Its equation under the Hom equivalence, together with the underlying transpose equation, is precisely the stated unit normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL; generalized the Hom-adjunction argument used by lem-sfb-scalar-inverse-image-tower-diagram to independently sized sites and arbitrary scalar-extension left adjoints"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of inverse image coefficient ring identifications gives a unit normalized natural isomorphism between scalar extension and inverse image of module sheaves",
+   "results": "Free-module pullback and continuous-site pullback composition lemmas. None applies to the given arbitrary geometric inverse-image functor with independent site universes.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars for sheaves of modules commutes with inverse image of a geometric morphism",
+   "results": "Ordinary continuous-site pullback and free module formulas; no unit-normalized comparison for the specified algebraic inverse-image lift.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage|pullback.*change",
+   "results": "Mathlib module-sheaf pullback and localization APIs do not identify the specified arbitrary algebraic inverse images with their continuous-site specializations. The existing scalar-inverse-image tower theorem has same-universe sites.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits. Adjunction.leftAdjointUniq gives the final natural isomorphism once both composite module Hom adjunctions have been constructed. It does not itself construct or normalize the independent-site scalar/inverse-image Hom equivalences. The Lean proof uses this lemma in towerLeftComparison.",
+   "date": "2026-10-25",
+   "verdict": "partial match: final adjunction comparison used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizedPullbackTensorNormalization",
+  "date": "2026-10-24",
+  "group": "B6"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph of lem-per-smooth-pullback-t-exact: coefficient-realization compatibility for pullback. This lemma supplies the ordinary scalar-extension comparison in step 5 of lem-per-localized-pullback-tensor-normalization.",
+   "via": [
+    "lem-per-localized-pullback-tensor-normalization",
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ScalarInverseImageIndependent",
+  "file": "lean/Sheaf/CategoryTheory/ScalarInverseImageIndependent.lean",
+  "declaration": "SheafOfModules.ScalarIndependent.exists_scalarInverseImageIndependent",
+  "statement": "theorem exists_scalarInverseImageIndependent\n{SY : Type uC} {SX : Type uD} [Category.{vC} SY] [Category.{vD} SX]\n  [EssentiallySmall.{u} SY] [EssentiallySmall.{u} SX]\n  {JY : GrothendieckTopology SY} {JX : GrothendieckTopology SX}\n  {AY BY : Sheaf JY CommRingCat.{u}} {AX BX : Sheaf JX CommRingCat.{u}}\n  (F : Sheaf JY (Type u) ⥤ Sheaf JX (Type u))\n  (V : Sheaf JX (Type u) ⥤ Sheaf JY (Type u))\n  (adj : F ⊣ V) [PreservesFiniteLimits F]\n  (IA : AlgebraicInverseImage F AY AX) (IB : AlgebraicInverseImage F BY BX)\n  (aY : AY ⟶ BY) (aX : AX ⟶ BX)\n  (ha : F.map ((sheafCompose JY (CategoryTheory.forget CommRingCat.{u})).map aY) ≫\n    IB.ringUnderlying.hom = IA.ringUnderlying.hom ≫\n      (sheafCompose JX (CategoryTheory.forget CommRingCat.{u})).map aX)\n    (TY : SheafOfModules.{u}\n        ((sheafCompose JY (forget₂ CommRingCat.{u} RingCat.{u})).obj AY) ⥤\n      SheafOfModules.{u}\n        ((sheafCompose JY (forget₂ CommRingCat.{u} RingCat.{u})).obj BY))\n    (TX : SheafOfModules.{u}\n        ((sheafCompose JX (forget₂ CommRingCat.{u} RingCat.{u})).obj AX) ⥤\n      SheafOfModules.{u}\n        ((sheafCompose JX (forget₂ CommRingCat.{u} RingCat.{u})).obj BX))\n    (adjY : TY ⊣ restrictScalars.{u}\n      ((sheafCompose JY (forget₂ CommRingCat.{u} RingCat.{u})).map aY))\n    (adjX : TX ⊣ restrictScalars.{u}\n      ((sheafCompose JX (forget₂ CommRingCat.{u} RingCat.{u})).map aX)) :\n    ∃ e : TY ⋙ IB.modules ≅ IA.modules ⋙ TX,\n      ∀ M : SheafOfModules.{u}\n          ((sheafCompose JY (forget₂ CommRingCat.{u} RingCat.{u})).obj AY),\n        F.map ((toSheaf\n          ((sheafCompose JY (forget₂ CommRingCat.{u} RingCat.{u})).obj AY) ⋙\n            sheafCompose JY (CategoryTheory.forget AddCommGrpCat.{u})).map\n              (adjY.unit.app M)) ≫\n          IB.moduleUnderlying.inv.app (TY.obj M) ≫\n            (toSheaf ((sheafCompose JX (forget₂ CommRingCat.{u} RingCat.{u})).obj BX) ⋙\n              sheafCompose JX (CategoryTheory.forget AddCommGrpCat.{u})).map (e.hom.app M) =\n          IA.moduleUnderlying.inv.app M ≫\n            (toSheaf ((sheafCompose JX (forget₂ CommRingCat.{u} RingCat.{u})).obj AX) ⋙\n              sheafCompose JX (CategoryTheory.forget AddCommGrpCat.{u})).map\n                (adjX.unit.app (IA.modules.obj M))",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e3c27",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094904-L-3270161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e3c27",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094904-L-3270161",
+  "kind": "interface",
+  "note": "independent cc review: published vs delivered elaborated type of localizedPullbackTensorNormalization (identical up to level-max permutation and proof-irrelevant args; old text closed by exact new theorem); new node lean.statement vs ScalarInverseImageIndependent.lean (verbatim); axioms of both theorems clean"
+ }
+}

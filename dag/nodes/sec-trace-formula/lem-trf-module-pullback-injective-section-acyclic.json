@@ -14,11 +14,56 @@
   "def-trf-geometric-morphism",
   "def-weil-sheaf-of-modules-category",
   "def-sp-injective-resolutions",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "lem-trf-site-object-derived-sections-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-trf-free-representable-module-ext-evaluation] on $(\\mathcal C,R')$. Its common-universe hypotheses are those of the item, and its $E_U$ is exactly the stated sheafification with the same basis restrictions. It supplies module injective resolutions, the normalized natural additive identification $\\operatorname{Hom}_{R'}(E_U,N)=N(U)$, and $\\operatorname{Ext}_{R'}^p(E_U,N)\\cong H^p(U,N_{\\mathrm{ab}})$ for every module sheaf $N$. This is the Ext/evaluation identification used in Stacks Tag 07AC.",
+   "uses": [
+    "lem-trf-free-representable-module-ext-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AC, lemma-existence-derived-lower-shriek, Ext display."
+   }
+  },
+  {
+   "text": "Put $F=g^{-1}I$. By [lem-weil-pbc-continuous-cocontinuous-topos-adjunction], inverse image on set sheaves is precomposition and preserves finite products. Applying it to addition, zero, negation and scalar action therefore gives $R'(V)=R(uV)$ and $F(V)=I(uV)$, with restrictions $I(u(h))$. Apply [lem-trf-continuous-precomposition-injective-module-cech] to $u,R,I$: continuity and smallness are in the item, and $I$ is injective in modules. Thus $\\check H^p(\\mathcal U,F_{\\mathrm{ab}})=0$ for every source covering and every $p>0$, the covering-level vanishing in Tag 0D6X.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "lem-trf-continuous-precomposition-injective-module-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, covering-level argument."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-site-cech-vanishing-criterion] with $\\mathcal B=\\operatorname{Ob}(\\mathcal C)$ and all coverings. Every covering object and every chosen iterated fibre product belong to $\\mathcal B$; every covering refines itself by identities. Step 2 verifies the remaining positive Cech vanishing hypothesis, so $H^p(U,F_{\\mathrm{ab}})=0$ for all $p>0$. The comparison in step 1 gives $\\operatorname{Ext}_{R'}^p(E_U,g^{-1}I)=0$. Its normalized Hom identification and module-resolution convention also give the claimed right-derived evaluation interpretation. No injectivity of $F$ or of its underlying abelian sheaf is asserted.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6X, lemma-pullback-injective-pre-limp, all-coverings criterion; Tag 07AC, Ext display."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-free-representable-module-ext-evaluation",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-trf-continuous-precomposition-injective-module-cech",
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6X (lemma-pullback-injective-pre-limp), full Cech proof; Tag 07AC (lemma-existence-derived-lower-shriek), Ext/evaluation display; Tags 03FD and 03F3 specify the coefficient comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +99,45 @@
    "results": "8 hits: PresheafOfModules.instIsLocallyInjectiveToSheafify, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, PresheafOfModules.IsLocallyInjective, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.instAbelian, CategoryTheory.Sheaf.isLocallyInjective_forget, CategoryTheory.Presheaf.isLocallyInjective_of_injective, CategoryTheory.Sheaf.instIsGrothendieckAbelian. Digest ade6b43a87751b4d. Full outputs retained in lem-trf-module-pullback-injective-section-acyclic-search-4.txt.",
    "date": "2026-10-19",
    "verdict": "no match: sheafPullback and IsCocontinuous concern ordinary functors/local lifting; vanishing on an injective object does not imply vanishing after this non-injective-preserving inverse image. No hit states the module cohomology assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pre.?limp|cocontinuous.*injective|injective.*cocontinuous",
+   "results": "{\"t\": \"2026-10-22T04:23:01Z\", \"tool\": \"grep\", \"query\": \"pre.?limp|cocontinuous.*injective|injective.*cocontinuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\"], \"digest\": \"e7bb1aa157ec1fcb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the two hits concern local injectivity of presheaf morphisms, not injective module objects or higher cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCocontinuous\", \"Injective\"",
+   "results": "{\"t\": \"2026-10-22T04:23:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCocontinuous\\\", \\\"Injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no declaration contains both requested notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of an injective ringed site module along a continuous cocontinuous functor is acyclic for sections on each object",
+   "results": "{\"t\": \"2026-10-22T04:23:01Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of an injective ringed site module along a continuous cocontinuous functor is acyclic for sections on each object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso_inv_app_app\", \"SheafOfModules.bijective_pushforwardSections\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\"], \"digest\": \"f0d8649257ef2d7b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: pullback, pushforward and their adjunction formulas do not state object-section acyclicity after inverse image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a continuous and cocontinuous functor between small sites, inverse images of injective sheaves of modules have zero positive derived evaluation Ext from a free representable module sheaf",
+   "results": "{\"t\": \"2026-10-22T04:23:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a continuous and cocontinuous functor between small sites, inverse images of injective sheaves of modules have zero positive derived evaluation Ext from a free representable module sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_zero\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.hasExt_of_enoughInjectives\"], \"digest\": \"4cec047dd98836b9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general higher-derived vanishing requires the argument itself to be injective; no hit gives the required acyclicity of its inverse image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher right derived functors of object evaluation vanish on restriction of injective sheaves of modules along cover preserving and cover lifting functors",
+   "results": "{\"t\": \"2026-10-22T04:23:12Z\", \"tool\": \"leanfinder\", \"query\": \"Higher right derived functors of object evaluation vanish on restriction of injective sheaves of modules along cover preserving and cover lifting functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\"], \"digest\": \"33921e66dbf144b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general higher-derived vanishing requires the argument itself to be injective; no hit gives the required acyclicity of its inverse image."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-continuous-cocontinuous-derived-shriek",
@@ -90,5 +170,83 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-module-pullback-injective-section-acyclic",
+  "worker": "stage1",
+  "summary": "Rebased retained two-node re-split onto the current DAG after the landing-promotion return. Preserved the exact live statement, full statement-dependency plan, Lean/audit/reviewer metadata, sources and logged searches. The free-representable Ext packet retains original steps 1, 2 and 7; the continuous-precomposition Cech packet retains the covering argument of steps 3--5; the 1712-character item assembly supplies inverse-image identification, the all-coverings criterion and final Ext vanishing. Restored the live derived-sections statement dependency after reading its accepted Lean review and actual continuity-helper uses. Reread every assembly citation and verified all four verbatim certificates; the full original argument and allocation remain in report.md.",
+  "blueprint": "Retains the inherited lem-trf-local-term-locality ancestry and the sk-i-curve-zero unit. Realizes the auxiliary 0D6X Ext-vanishing input to lem-trf-continuous-cocontinuous-derived-shriek, reached through the inherited cotangent-transitivity/bar-resolution support chain; the blueprint unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "Generic continuous-cocontinuous inverse-image formula used exactly in the 0D6X Cech proof."
+   },
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "Generic all-coverings Cech-to-derived-cohomology criterion explicitly invoked by 0D6X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+  "lem-cbc-module-sheafification-underlying-sets",
+  "lem-weil-pbc-large-set-sheafification",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-pbc-cohomology-over-object-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-c35e66ce9",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-c35e66ce9 (reviewer sub-agent of L); spot-checked: Fourth push of this re-split. The earlier heads f9c8, 0606 and a960 were each FIXed and then lost through landing promotion refusals. Both new nodes are sha256-identical to a960. The item now restores the stmt_dep lem-trf-site-object-derived-sections-pullback (the landed Lean record needs it), which was the substance of the earlier FIXes. Apart from proof, proof_deps and split_report, every field equals live, including the statement. I read Stacks sites-cohomology.tex 9278-9307 (0D6X, statement and proof) and 9309-9395 (07AC, the Ext display and the Hom(j_{U!}O_U,H)=H(U) justification). No SGA is used. Re-split check against the live repair note: old steps 1, 2 and 7 went to A (lem-trf-free-representable-module-ext-evaluation): enough injectives, theta(alpha)=(alpha eta)_U(e_id) with its inverse and naturality, and Ext^q(E_U,M) = R^qGamma_Mod,U = H^q(U,M_ab). Old steps 4 and 5, with the sectionwise R_u and I_u from step 3, went to B (lem-trf-continuous-precomposition-injective-module-cech): c_t is an isomorphism by induction from (3)(b) against covering members; the face identity holds; I(c_t^{-1}) points the right way, because u(delta_j) c_t^{-1} = c_{t\\j}^{-1} delta_j makes the differentials commute; the statement is in derived form; vanishing comes from 03FC on (D,R). The item keeps g^{-1} = precomposition (topos-adjunction node), the all-coverings criterion (B=Ob(C), self-refinement, step 2) and the final Ext, in 1712 characters. proof_deps equals the union of uses. A (1809 characters) and B (1949) are comparable in size, and neither restates the item. Both statements are true; I tested a one-object site, R=0, I=0, u=id and empty T. There are no duplicates (rg over 07AC, 0D6X, 03FC, Ext/free-representable and Cech/precomposition) and no cycle (the closure of 154 nodes does not contain the item). The two off-unit tool uses are accepted. Advisory: A's second isomorphism repeats lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison, which A's proof should cite. Maintainer note: the top-level tool_uses still lists the 13 entries of the old proof, as live does; the merge should replace it with the two in split_report.tool_uses. If this landing is refused again, the delivery needs no further repair."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ModulePullbackInjectiveSectionAcyclic",
+  "declaration": "CategoryTheory.ModulePullbackInjective.section_acyclic",
+  "declarations": [
+   "CategoryTheory.ModulePullbackInjective.coefficients",
+   "CategoryTheory.ModulePullbackInjective.inverseImageRing",
+   "CategoryTheory.ModulePullbackInjective.inverseImage",
+   "CategoryTheory.ModulePullbackInjective.freeRepresentable",
+   "CategoryTheory.ModulePullbackInjective.homEvaluation",
+   "CategoryTheory.ModulePullbackInjective.section_acyclic"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/ModulePullbackInjectiveSectionAcyclic.lean",
+  "statement": "theorem section_acyclic {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (f : C ⥤ D) (hcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map f ∈ K (f.obj X)) (hpullback : ∀ (X Y Z : C) (S : Presieve X), S ∈ J X → ∀ (a : Y ⟶ X) (b : Z ⟶ X), S a → PreservesLimit (cospan a b) f) [f.IsCocontinuous J.toGrothendieck K.toGrothendieck] (R : Sheaf K.toGrothendieck CommRingCat.{u}) (I : ringedSiteModules.{u} (coefficients K R)) [Injective I] (U : C) : (∃ e : preadditiveCoyoneda.obj (op (freeRepresentable (inverseImageRing J K hJ hK f hcover hpullback R) U)) ≅ SheafOfModules.toSheaf (inverseImageRing J K hJ hK f hcover hpullback R) ⋙ sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U), ∀ (N : ringedSiteModules.{u} (inverseImageRing J K hJ hK f hcover hpullback R)) (a : freeRepresentable (inverseImageRing J K hJ hK f hcover hpullback R) U ⟶ N), (e.hom.app N) a = homEvaluation _ U N a) ∧ ∀ (p : ℕ), 0 < p → ∀ L : InjectiveResolution ((inverseImage J K hJ hK f hcover hpullback R).obj I), IsZero (((preadditiveCoyoneda.obj (op (freeRepresentable (inverseImageRing J K hJ hK f hcover hpullback R) U))) |>.mapHomologicalComplex (.up ℕ)).obj L.cocomplex |>.homology p)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Ext is rendered exactly in the node's stated injective-resolution convention: homology of the additive Hom complex for any module injective resolution. The first conjunct gives the natural additive Hom/evaluation identification, normalized by the actual sheafification/free-Yoneda bijection. All helper data are actual Mathlib constructions. The added landed dependency supplies only its public continuity helper, which derives Mathlib continuity from the exact covering hypotheses without additional assumptions; its DAG closure does not contain this item."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc5edd71d",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Clause by clause vs node and Stacks 0D6X: sites IsSiteForCoverings in universe u; continuity = hcover/hpullback (00WV, = clauses 2-3 of the special-cocontinuous def); cocontinuity = Mathlib IsCocontinuous (clause 1); R CommRingCat sheaf, R' = sheafPushforwardContinuous precomposition; I injective R-module in ringedSiteModules; g^-1 I = SheafOfModules.pushforward (identity ring map); E_U = sheafification of free on yoneda; Ext^p = homology of preadditiveCoyoneda(E_U) on every InjectiveResolution; natural Hom/evaluation iso pinned to sheafificationHomEquiv then freeYonedaEquiv; vanishing for p>0. Mechanical finding: the only use of theorem node lem-trf-site-object-derived-sections-pullback is the Prop SiteObjectDerivedSections.continuous (00WW), needed to type the pushforwards; it is not a definition and no def node owns a public equivalent (the proved one is private), so the dependency is genuine: PASS on that point. It is landed and creates no cycle. Item changed only lean/stmt_deps; dependency records identical to live; statement verbatim; plain imports = the 13 proof_dep modules; docstrings carry source, blueprint and the 8 proof steps; no hollow defs. Advisory: unused public import of the GeometricMorphism module; parent's lowerShriek abbrevs are the same terms. No file changed, so no compile; the worker reports clean compiles."
+ }
 }

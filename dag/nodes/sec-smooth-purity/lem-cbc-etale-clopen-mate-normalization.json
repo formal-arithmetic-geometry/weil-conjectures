@@ -1,0 +1,343 @@
+{
+ "id": "lem-cbc-etale-clopen-mate-normalization",
+ "kind": "statement",
+ "title": "The finite etale clopen mate has the proper-support resolution normalization",
+ "statement": "Let $\\Lambda$ be a finite commutative ring. Let $Q$ be a commutative square of schemes with $k:V\\hookrightarrow W$, $i:S\\hookrightarrow T$ quasi-compact open immersions, $r:V\\to S$, $p:W\\to T$ proper, and $pk=ir$. Put $W_S=W\\times_T S$ with projections $b:W_S\\to W$, $q:W_S\\to S$, and $s=(k,r):V\\to W_S$. Use module sheaves on the small etale sites, their bounded-below derived categories, exact extension by zero $J_j$, exact inverse image $G_u=u^{-1}$ and K-injective derived direct image $R_u=Ru_*$ [def-weil-pbc-derived-categories] [def-weil-pbc-direct-image] [def-weil-pbc-extension-by-zero]. Form the cartesian open comparison $G_pJ_i\\cong J_bG_q$ by transposing the open unit and let $\\pi_s:F\\to s_!s^{-1}F$ be the identity/zero projection of the clopen lift $s$. Let $\\alpha_Q$ be their composite with $J_bJ_sG_sG_q\\cong J_kG_r$. Let $\\delta_F:i_!r_*F\\cong p_*k_!F$ be the canonical proper-support composition identification, namely equality of these two subsheaves of $(ir)_*F=(pk)_*F$ keeping the underlying section [lem-cbc-proper-support-sheaf-composition]. Then the underived proper mate of $\\alpha_Q$ is exactly $\\delta$. For every $L\\in D^+(V_{et},\\Lambda)$, every K-injective representative $J$ of $L$, and every K-injective resolution $t:k_!J\\to I$, the derived proper mate of $\\alpha_Q$ is the morphism represented by\n$$i_!r_*J\\xrightarrow{\\delta_J}p_*k_!J\\xrightarrow{p_*t}p_*I.$$\nEquivalently, its transpose is represented by $p^{-1}i_!r_*J\\xrightarrow{\\alpha_Q}k_!r^{-1}r_*J\\xrightarrow{k_!\\varepsilon_r}k_!J\\xrightarrow{t}I$. Thus it is exactly the named normalized finite comparison of [lem-cbc-proper-open-interchange-coherence], including the refinement case $V=S$, $r=1_S$.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B (lemma-shriek-proper-and-open), first paragraph of proof; equality of the clopen adjunction mate with the support-normalized K-injective arrow, original parent proof step 13"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-cbc-proper-open-interchange-coherence"
+ ],
+ "proof": [
+  {
+   "text": "First verify the geometry of the lift s:V → W ×_T S. Its composite with the first pullback projection is k. That projection is open by base change of i, and IsOpenImmersion.of_comp therefore makes s open. Its composite with the second projection is r. That projection is proper by base change of p and hence separated, so IsProper.of_comp makes s proper. An open immersion is a preimmersion, and the proper map s has closed range; IsClosedImmersion.of_isPreimmersion therefore makes s a closed immersion. This proves lift_clopen without constructing another cartesian square. The identity/zero projection is the existing direct-image unit transported through the clopen open-to-direct comparison.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Geometry of the open special case of Tag 0F7B; Tags 01JY, 01W4 and 01W6 (proper-over-separated)."
+   }
+  },
+  {
+   "text": "The existing open-base-change unit equation identifies the transpose of the cartesian comparison. The clopen projection satisfies G_s(pi_s)=eta_s by the direct-image triangle identity. Naturality and the canonical upper-star and open-extension compositors then give the open-unit equation for alpha. Exactness descends alpha to the bounded-below and unbounded derived categories using their localization factorization isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-cbc-clopen-mate-composite",
+    "def-cbc-localized-clopen-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, first paragraph, comparison normalization; Tag 03S5 (open extension), with the explicit open-unit mate of the cited compatibility node."
+   }
+  },
+  {
+   "text": "For a module sheaf $F$, put $A=i_!r_*F$ and $h_F=(k_!\\varepsilon_{r,F})\\alpha_{Q,r_*F}:G_pA\\to k_!F$. Let $m_F:A\\to p_*k_!F$ be its $G_p\\dashv p_*$ transpose. Let $\\iota_k:k_!F\\hookrightarrow k_*F$ be the canonical inclusion. Under $G_k\\dashv k_*$, this inclusion transposes to the inverse open unit: on an etale object factoring through $V$, its section map is identity. By Step 2, the transpose of $p_*\\iota_k\\,m_F$ under the composite adjunction $G_kG_p\\dashv p_*k_*$ is therefore $\\varepsilon_{r,F}$ after $G_kG_pA\\cong G_rr_*F$. On the other hand, support composition says that $p_*\\iota_k\\,\\delta_F$ is exactly the inclusion $i_!r_*F\\hookrightarrow i_*r_*F=(ir)_*F=(pk)_*F$, keeping every section. Its composite-adjunction transpose is the same $\\varepsilon_{r,F}$: restriction to $S$ removes the open extension and the remaining transpose is the direct-image counit. Thus the two maps into $p_*k_*F$ agree. The map $p_*\\iota_k$ is monic, since direct image evaluates the monic inclusion on each etale test object. Cancel it to get $m_F=\\delta_F$.",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7B, 0F50 (lemma-f-shriek-composition) and 0F51 (lemma-proper-f-shriek); explicit adjunction check of the support inclusion."
+   }
+  },
+  {
+   "text": "The maps in Step 3 are natural in $F$. Consequently they commute with every differential of a complex $J$, and their degreewise equality is an equality of chain maps. In particular the termwise $G_p\\dashv p_*$ transpose of $\\delta_J:i_!r_*J\\to p_*k_!J$ is exactly\n$$h_J:G_pi_!r_*J\\xrightarrow{\\alpha_Q}k_!G_rr_*J\\xrightarrow{k_!\\varepsilon_r}k_!J.$$\nThis is also the defining transpose formula for the underived proper mate.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, displayed chain map in the first proof paragraph; termwise adjunction and its counit."
+   }
+  },
+  {
+   "text": "Use the unit and counit compatibility of the induced derived adjunctions, first on the homotopy category, to prove the derived-mate unit equation. Transfer this equation to complexes using quotientCompQhIso and exact-functor factorization. For a specified K-injective complex J, rightDerivedFunctorObjQIso identifies the right-derived unit at J with its inverse. This uses only the given K-injectivity of J and I; no preservation of K-injectivity, existence of replacements, or derived-Hom computation is required. Apply the already proved derivedExact_mateEquiv_app_fac to the exact-localized square. Reuse right_unit_Q, its naturality and K-injective value equation, and exact_factor_Q from UnboundedEtaleCompactSupportComparisons; the existing private elementary factorization proofs are reused through the proved derivedComplexUnitCompatibility conjunction.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-exact-derived-mate",
+    "lem-cbc-derived-complex-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, choice of J and I; Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K and 08BJ (lemma-adjoint-preserve-K-injectives)."
+   }
+  },
+  {
+   "text": "Apply the chain-level derived-mate unit equation to J and use naturality of the right-derived unit along the specified quasi-isomorphism t. Cancel its invertible unit at I and Q(t). The resulting formula is exactly Q(delta_J followed by p_*t), with the displayed source and target isomorphisms. Naturality in the representative isomorphism e gives the formula at every L. Independently, the termwise adjunction and the ordinary mate equality identify the transposeArrow with resolutionArrow degree by degree.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, first proof paragraph: the proper-support chain map followed by the chosen K-injective replacement."
+   }
+  },
+  {
+   "text": "The normalized finite comparison is characterized by its derived-unit equation. Apply right-derived uniqueness to this equation and the derived-mate unit equation to identify the bounded-below mate with the named comparison. Apply the same uniqueness argument to the canonical D+/D compatibility transformations; their right-derived units agree, and the exact-functor compatibility isomorphisms are the specified ones. This proves the ambient compatibility equation as well. The argument includes identity and refinement squares without additional hypotheses. Reuse the existing right_derived_plus_unit compatibility equation from UnboundedEtaleCompactSupportComparisons. The public normalized comparison keeps its original second coherence witness; the proof uses congruence of the bundled family projection equation internally.",
+   "uses": [
+    "lem-cbc-proper-open-interchange-coherence",
+    "def-cbc-proper-open-interchange-data",
+    "lem-cbc-derived-complex-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, first proof paragraph and its normalized refinement specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-sc-derived-adjunction-from-underived",
+  "def-cbc-clopen-mate-composite",
+  "def-cbc-proper-open-interchange-data",
+  "lem-pur-exact-derived-mate",
+  "def-cbc-localized-clopen-square",
+  "lem-cbc-derived-complex-unit-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, first proof paragraph. B5 stage 3: explicit open-unit and support-inclusion calculation; induced derived-adjunction unit/counit compatibility and localization factorization give a chain-level mate equation, K-injective value isomorphisms give every-representative formula, and right-derived uniqueness gives normalized D+ and ambient D compatibility. Return repair: the four duplicate private helpers are removed; their existing private declarations in UnboundedEtaleCompactSupportComparisons are reused through a proved conjunction interface, whose proof uses import all. The complex unit is the explicit quotient-unit-quotient composite. The comparison module is unchanged. No new mathematical result or dependency on the compact-support comparison theorem is introduced. The normalized comparison retains its original second coherence choice; a private proof conversion uses the bundled family equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative proper-open square and a finite coefficient ring, the proper-adjunction mate of the clopen alpha on bounded-below etale complexes equals the normalized proper-support sheaf comparison followed by a K-injective resolution.",
+   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, SheafOfModules.sheafificationCompPullback, CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CategoryTheory.Adjunction",
+   "results": "6 hits: AlgebraicGeometry.Scheme.Hom.opensFunctorAdjunction, AlgebraicGeometry.ΓSpec.adjunction, AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.algΓAlgSpecAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*open.*(comparison|mate)|shriek.*proper|properSupport",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a commutative proper-open square and a finite coefficient ring, the proper-adjunction mate of the clopen alpha on bounded-below etale complexes equals the normalized proper-support sheaf comparison followed by a K-injective resolution.",
+   "results": "8 hits: AlgebraicGeometry.toOpen_toSpecΓ_app_assoc, CategoryTheory.mateEquiv_square, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of proper support composition with the unit-counit mate for open immersions on bounded-below derived etale module categories",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, topological gluing or algebraic etaleness, not the full specified comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "properSupport|proper.*open.*mate|clopen.*mate",
+   "results": "Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, derived adjunctions or injective-resolution facts do not assert the geometric support-normalized comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate of pullback extension by zero and clopen projection equals the proper support direct image comparison on K injective complexes",
+   "results": "Hits: HasCompactSupport.tsupport_extend_zero, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.isKProjective_of_op, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, HomologicalComplex.instIsSupportedOfIsStrictlySupported, HomologicalComplex.isSupported_iff, HomologicalComplex.map_isStrictlySupported, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, derived adjunctions or injective-resolution facts do not assert the geometric support-normalized comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, derived adjunctions or injective-resolution facts do not assert the geometric support-normalized comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper open square clopen projection adjunction mate agrees with proper support composition and its K injective resolution map",
+   "results": "Hits: CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CochainComplex.cm5b.i_f_comp, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CochainComplex.cm5b.fac, CategoryTheory.InjectiveResolution.desc_commutes_assoc, CategoryTheory.InjectiveResolution.desc_commutes, CategoryTheory.InjectiveResolution.Hom.ι_comp_hom, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, derived adjunctions or injective-resolution facts do not assert the geometric support-normalized comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation between exact inverse image and extension by zero derived proper adjunction mate computed using K injective resolutions",
+   "results": "Hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: general mates, derived adjunctions or injective-resolution facts do not assert the geometric support-normalized comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-strict-tower-proper-open-calculus",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, last sentence: 'with the compatibility of the comparisons ... with the completed maps' — strict-tower open/proper comparison and coherence underlying the passage to derived limits; parent proof steps 13: The finite etale clopen mate has the proper-support resolution normalization",
+   "via": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-etale-clopen-mate-normalization",
+  "worker": "stage1",
+  "summary": "Proved the underived mate equality by the support inclusion and composite adjunction, then obtained the chain-level and every-K-injective formulas via termwise adjunction and K-injective Hom computations. Reused existing nodes throughout; no new lemma or statement change. Maintainer-reader FIX (Q118 review): Step 5 now cites the derived adjunction induced by the underived one [lem-sc-derived-adjunction-from-underived] to identify the derived counit with the chain counit on K-injective representatives; undeclared generic off-unit tools recorded in tool_uses.",
+  "blueprint": "thm-cbc-complete-proetale, final proof sentence on compatibility of comparisons with completed maps; realizes the finite normalization argument in parent lem-cbc-strict-tower-proper-open-calculus step 13.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic additive adjunction on complexes and homotopy classes. The compact-support unit has no substitute statement for this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic availability of K-injective resolutions for module sheaves. The compact-support unit has no substitute statement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic computation of total derived functors on arbitrary K-injectives. The compact-support unit has no substitute statement for this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of extension by zero along an open immersion of etale module sheaves, applied degreewise (Steps 2, 5); generic six-functor input with no substitute in the compact-support unit."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact module inverse image left adjoint to direct image on etale module sheaves (Steps 2, 3, 5); generic input with no substitute in the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Explicit adjunction j_! -| j^{-1} with its sectionwise counit, used to transpose the support inclusion (Step 3); generic input with no substitute in the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Right adjoints of exact functors preserve K-injective complexes, giving r_*J and p_*I K-injective (Step 5); generic homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-7c8539337",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-7c8539337 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are byte-identical to the live unsplit node that Q65 created on 2026-10-22; there are no new nodes and no repair note. I read the first proof paragraph of Stacks 0F7B (more-etale.tex, lemma-shriek-proper-and-open). Its arrow g_!f'_*J = f_*g'_!J -> f_*I matches the normalization in the item and in lem-cbc-proper-open-interchange-coherence. Steps 1-4, 6 and 7 hold as written. Step 1: V x_W W_S = V because i is a monomorphism, so s is open by open base change and proper by proper-over-separated; hence s is clopen. Step 2: the last clause of the underived-compatibility node applies with (j,j',g,g_U)=(i,b,p,q) and gives G_k alpha_Q = 1. Step 3: iota_k transposes to the inverse open unit, support composition makes p_*iota_k delta_F the inclusion into (ir)_*F, and p_*iota_k is monic, which gives m_F = delta_F. Step 4: the equality passes to complexes by naturality. Step 6: the transpose t h_J gives the mate (p_*t) delta_J. Step 7: the coherence node's normalization and its refinement clause give the comparison. I checked the cases V empty, a cartesian square, a point base with a clopen component, and r = 1. FIX: Step 5 claimed that 'the actual derived adjunction' is computed by the termwise hom bijection but cited nothing that fixes the derived adjunction G_p -| R_p for module sheaves. I added the Mathlib leaf lem-sc-derived-adjunction-from-underived (Adjunction.derived and derivedε_fac_app), whose counit is induced by the underived counit, so on K-injective representatives the derived counit is the chain counit. I also added exact-functor-derived-factorization to the step's uses. Separately, I recorded four undeclared generic off-unit tools in split_report.tool_uses: extension-by-zero-exact, inverse-image-modules-exact, extension-by-zero-adjunction and right-adjoint-preserves-kinjective, all already accepted as tools on other cbc nodes. Duplicate search: the pro-etale clopen projector and site-transport nodes, and the semilinear and asd nodes, state other things, and the first two would create a cycle. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleClopenMateNormalization",
+  "declaration": "AlgebraicGeometry.Etale.ClopenMateNormalization.etaleClopenMateNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.lift_clopen",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.projection",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.openCongr",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.alpha",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.mate",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.derivedAlpha",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.derivedAlphaPlus",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.derivedMate",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.derivedMatePlus",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.supportComparison",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.normalizedComparison",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.resolutionArrow",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.transposeArrow",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.sourceCompatibility",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.targetCompatibility",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.etaleClopenMateNormalization",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.etaleClopenMateResolution",
+   "AlgebraicGeometry.Etale.ClopenMateNormalization.alpha_app"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleClopenMateNormalization.lean",
+  "statement": "theorem etaleClopenMateNormalization [Finite Λ] {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) : mate Λ k r p i h = (supportComparison Λ k r p i h).hom ∧ derivedMatePlus Λ k r p i h = (normalizedComparison Λ k r p i h).hom ∧ ∀ L : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)), DerivedCategory.Plus.ι.map ((derivedMatePlus Λ k r p i h).app L) ≫ (targetCompatibility Λ k p L).hom = (sourceCompatibility Λ r i L).hom ≫ (derivedMate Λ k r p i h).app (DerivedCategory.Plus.ι.obj L)",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main normalization and etaleClopenMateResolution jointly render the node. Other declarations construct its prescribed alpha, proper mates, support comparison, resolution arrow and canonical representation transports; lift_clopen is the geometry assertion from proof step 1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52805dd99",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read node, all 12 stmt_deps, Stacks 0F7B proof para 1, item module and live deps (BaseChangeSquare, UpperLowerStar, PlusAdjunction, ProperOpenInterchangeCoherence). alpha = inverse cartesian open base-change map (conjugate of the open unit) + clopen projection (s-unit then inverse of s_!→s_*, closed range) + canonical compositors; mate = mateEquiv; delta and gamma via .choose of the stmt_dep coherence theorem, each pinned uniquely (support-inclusion equation with p_* iota_k monic; derived-unit condition), matching the node's subsheaf identification and named normalized comparison; derived mates use Adjunction.derived / derivedPlus induced by the ordinary adjunction; resolution theorem covers every L, every K-injective J (no lower bound), every K-injective resolution t, plus the chain transpose; D+/D compatibility clause. Hypotheses match the node (qc open k,i; proper r,p; no cartesian assumption); universes as in the deps; statement verbatim; node unchanged except lean; sorry-only proofs; source/blueprint docstrings; etale sites only. Edge cases: empty V/S, zero ring, cartesian, V=S r=id. No recompile (no file changed). Advisory: lift_clopen repeats proved squareLift_clopen (pro-etale StrictTower module, proof does not use QuasiCompact); proper-support-composition stmt_dep imported but unreferenced (delta characterized equivalently); coherence dep record expanded vs live named predicate (pre-existing, textually same conditions)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-88b21",
+  "group": "M6",
+  "result": "fix",
+  "landing": "20261027T050621-L-245698",
+  "kind": "interface",
+  "note": "independent cc review: item proof, beta/tail sorry statements and the additive EtaleClopenMateNormalization wrappers vs clone sheaf-dag sources, cbcClopenProjection/projection defs, DAG owner records; 3b importers 6/6 OK"
+ }
+}

@@ -164,7 +164,18 @@
    "elementary": null
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
@@ -202,15 +213,44 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-0d2d35d17 (reviewer sub-agent of L); spot-checked: Target and cited mathematics checked in full. Fixed proof bookkeeping: step 1 cites def-pc-fibre-product; step 3 cites both prior extension nodes and is marked non-elementary. Corrected DAG JSON is under fixes/dag/nodes/sec-smooth-base-change/. No nodes dropped.; 1 file(s) fixed by the reviewer"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
   "statement": "Let $S$ be a\nquasi-compact and\nquasi-separated integral\nnormal scheme with generic point $\\eta$. Let\n$C\\to S$ be a quasi-compact and quasi-separated\nsmooth morphism with\ngeometrically connected\nfibres, and fix a section $\\sigma:S\\to C$. Let $Z\\to C_\\eta$\nbe a finite etale\nGalois cover with group\n$G$, assume $|G|$ is\ninvertible on $S$, and assume $Z$ has a $\\kappa(\\eta)$-rational point\nmapping to $\\sigma(\\eta)$. Then there is a finite etale\nGalois cover\n$\\widetilde Z\\to C$ with group $G$ whose restriction to $C_\\eta$ is the\ngiven cover $Z\\to C_\\eta$.",
   "proof": [
    {
-    "text": "This is classical, Stacks Project, Fundamental Groups of Schemes, Lemma 58.31.9 ([Tag 0EZJ](https://stacks.math.columbia.edu/tag/0EZJ)): a finite etale Galois cover of the generic fibre whose group has order invertible on the base spreads out to a finite etale Galois cover of the whole smooth family with geometrically connected fibres. No separate proof is given.",
+    "text": "This is classical, Stacks Project, Fundamental Groups of Schemes, Lemma 58.31.9 ([Tag 0EZJ](https://stacks.math.columbia.edu/tag/0EZJ)): a finite etale Galois cover of the generic fibre whose group has order invertible on the base spreads out to a finite etale Galois cover of the whole smooth family with geometrically connected fibres.\n\nThe tame structure results (0EYG, 0EYH, 0EYI) and the purity and\ndepth-two extension results (0EYE, 0EY6, 0EY9) are quoted classical\ninputs; the assembly runs as follows.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Limit reduction.* For $S$ Noetherian the statement is\n0EYJ. In general write the qcqs integral normal $S$ as a\ncofiltered limit of Noetherian integral normal schemes; the qcqs\nmorphism $C\\to S$ of finite presentation, the section $\\sigma$, the\ncover $Z\\to C_\\eta$ and its $G$-action all descend to a finite stage,\nsmoothness and geometric connectedness of the fibres hold there after\nshrinking, and the cover produced at that stage pulls back to the one\nwanted over $S$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The trait case.* Let $S=\\Spec R$ with $R$ a discrete valuation\nring and closed point $s$. Then $C_s\\subset C$ is an effective\nCartier divisor, regular because it is smooth over a field, and\n$C_\\eta=C\\setminus C_s$. At a codimension-one point of $C_s$ the\nlocal ring is a discrete valuation ring, and for a finite Galois\nextension of its fraction field all ramification indices are equal to\none integer $e$ dividing $|G|$ (09EB); as $|G|$ is invertible\non $S$, so is $e$. Hence $Z$ is *tamely* ramified over $C$ in\ncodimension one. Let $Z'\\to C$ be the normalization of $C$ in $Z$.\nTameness makes it finite locally free, with\n$\\pi^{-1}(C_s)_{\\mathrm{red}}$ a regular effective Cartier divisor,\nand étale-locally on $C$ a disjoint union of standard tame covers\n$\\Spec A[x]/(x^e-f)\\to\\Spec A$ with $f$ a nonzerodivisor, $A/fA$\nregular and $e$ invertible (0EYG, 0EYH); the\n$G$-action extends to $Z'$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Where the section is used.* Apply the trait test\n0EYI to $t=\\sigma:\\Spec R\\to C$, whose scheme-theoretic\npreimage of $C_s$ is the reduced closed point. By hypothesis\n$Z_{\\sigma(\\eta)}$ has a $\\kappa(\\eta)$-rational point, and the\nsimply transitive $G$-action then makes that whole fibre a disjoint\nunion of copies of $\\Spec\\kappa(\\eta)$; so $Z'\\to C$ is finite\nétale over an open neighbourhood of $\\sigma(s)$. As $C_s$ is\nirreducible, that neighbourhood already contains its generic point,\nso $Z$ is *un*ramified over $C$ in codimension one, and purity\nacross a regular effective Cartier divisor (0EYE) extends it\nto a finite étale $\\widetilde Z\\to C$ with\n$\\widetilde Z|_{C_\\eta}=Z$. One checks étale-locally that\n$\\widetilde Z\\cong Z'$, so the $G$-action makes it Galois with group\n$G$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*From the trait to a Noetherian base: a maximal open.* Let\n$U\\subseteq S$ be maximal among the opens carrying a finite étale\nGalois cover with group $G$ restricting to $Z$ over $C_\\eta$; it\ncontains $\\eta$. Suppose $U\\neq S$ and let $s$ be a generic point of\nan irreducible component of $S\\setminus U$. Replace $S$ by\n$\\Spec\\mathcal O_{S,s}=\\Spec A$, so that $U$ becomes the punctured\nspectrum and $Y\\to C\\times_SU$ is the given cover. If $\\dim A=1$ the\ntrait case finishes it. So assume $\\dim A\\ge2$; normality gives\n$\\operatorname{depth}A\\ge2$ (031S), and flatness of $C\\to S$\npropagates this to $\\operatorname{depth}\\mathcal O_{C,x}\\ge2$ for\nevery $x$ over $s$ (0337).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Extension in depth $\\ge2$, and the local computation.* In that\ndepth the pushforward $\\mathcal B=j_*\\pi_*\\mathcal O_Y$ is a\nreflexive $\\mathcal O_C$-algebra and $Y'=\\underline\\Spec_C\\mathcal B$\nis the unique finite $Y'\\to C$ restricting to $Y$ over\n$C\\times_SU$ and of depth $\\ge2$ along the complement; it inherits\nthe $G$-action, is étale exactly where it is flat, and its\nformation commutes with flat base change (0EY6). Only its\nétaleness is in doubt, and it suffices to check it at the generic\npoint of $C_s$ (0EYB). Choose an affine $\\Spec B\\subseteq C$\naround $\\sigma(s)$, so $A\\to B$ is smooth with a section $\\sigma$\nwith kernel $I$; the $I$-adic completion is\n$B^\\wedge\\cong A[[x_1,\\dots,x_d]]$ (05D5), $B\\to B^\\wedge$ is\nflat, and the image of $\\Spec B^\\wedge\\to C$ contains the generic\npoint of $C_s$. Let $V\\subseteq\\Spec B^\\wedge$ be the preimage of\n$U$ and $W=Y\\times_{C\\times_SU}V$. The slice\n$V_0=V\\cap V(x_1,\\dots,x_d)$ is $\\sigma(U)\\cong U$, and\n$W_0=W\\times_VV_0$ is completely split over it — this is again the\n$\\kappa(\\eta)$-point hypothesis, propagated by the $G$-action. Full\nfaithfulness of $\\mathrm{F\\acute Et}_V\\to\\mathrm{F\\acute Et}_{V_0}$\nfor a power series ring over a local ring of depth $\\ge2$\n(0EY9) gives $W\\cong W_0\\times_UV$, so $W$ is a disjoint\nunion of copies of $V$; hence $Y'\\times_C\\Spec B^\\wedge$ is split and\n$Y'\\to C$ is étale where it had to be. Spreading $Y'$ out over a\nslightly larger open of $S$ (0BQ5, 0EY3)\ncontradicts the maximality of $U$, so $U=S$.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

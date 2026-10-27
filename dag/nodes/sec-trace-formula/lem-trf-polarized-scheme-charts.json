@@ -1,0 +1,176 @@
+{
+ "id": "lem-trf-polarized-scheme-charts",
+ "kind": "statement",
+ "title": "Scheme charts underlying polarized etale effectivity",
+ "statement": "Let $S$ be a scheme and let $D$ be a polarized descent datum [def-trf-polarized-scheme-etale-descent-datum] for a jointly surjective etale covering $\\{u_i:U_i\\to S\\}_{i\\in I}$, schemes $f_i:X_i\\to U_i$ and invertible modules $L_i$, with its given affine-local ampleness. The index set $I$ may lie in an independent universe. There exist a scheme $Y$, a map $g:Y\\to S$, and isomorphisms $e_i:Y\\times_SU_i\\simeq X_i$ satisfying $f_i e_i=\\operatorname{pr}_{U_i}$. Write $q_i=\\operatorname{pr}_Y e_i^{-1}$. On $R_{ij}=X_i\\times_{U_i}(U_i\\times_SU_j)$ with projection $p_i$, one has $q_i p_i=q_j p_j\\theta_{ij}$. This concludes only the underlying scheme and its prescribed scheme transitions: no global ordinary line module or comparison of line modules is asserted.",
+ "stmt_deps": [
+  "def-trf-polarized-scheme-etale-descent-datum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Spaces Tags 02WW and 02WV; Spaces Descent Tags 04W8 and 0D3C: construct the quotient space, descend the polarization, and apply relative ampleness to obtain only the underlying scheme with all original charts. Descent Tag 023Q recovers charts outside a chosen small subcover."
+ },
+ "proof": [
+  {
+   "text": "Choose, for each point of S, a member of the covering and a point above it. This gives a subfamily indexed in the scheme universe, still covering S. Restrict theta, lambda, the diagonal identities and the test-scheme cocycles to it. Dependencies: [def-trf-polarized-scheme-etale-descent-datum].",
+   "uses": [
+    "def-trf-polarized-scheme-etale-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Spaces Tags 02WW and 02WV; Spaces Descent Tags 04W8 and 0D3C: construct the quotient space, descend the polarization, and apply relative ampleness to obtain only the underlying scheme with all original charts. Descent Tag 023Q recovers charts outside a chosen small subcover."
+   }
+  },
+  {
+   "text": "Form the coproduct of its X charts and overlaps. Apply SchemeDescentCocycle.etale_relation: an overlap with equal base coordinates factors through the diagonal by pullback uniqueness, and the supplied four-map cocycle gives its three-map cocycle by constructing the fourth map with the pullback lift. The quotient sheaf of this small etale relation is an algebraic space by AlgebraicSpace.etale_relation_quotient, with the prescribed kernel pair. Dependencies: [lem-trf-scheme-descent-cocycle-etale-relation], [lem-trf-etale-relation-quotient], [def-trf-algebraic-space], [def-weil-pbc-sheafification].",
+   "uses": [
+    "lem-trf-scheme-descent-cocycle-etale-relation",
+    "lem-trf-etale-relation-quotient",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Spaces Tags 02WW and 02WV; Spaces Descent Tags 04W8 and 0D3C: construct the quotient space, descend the polarization, and apply relative ampleness to obtain only the underlying scheme with all original charts. Descent Tag 023Q recovers charts outside a chosen small subcover."
+   }
+  },
+  {
+   "text": "Apply scheme_descent_quotient_chart_isomorphism to recover the subfamily charts. For an arbitrary original index, base change to that U_i. Its overlaps with the subfamily cover U_i, and theta identifies the local quotient charts with the base changes of X_i. The cocycle makes these identifications agree; representable sheaf gluing makes them a unique isomorphism. Thus all original indices are retained. Dependencies: [lem-trf-scheme-descent-quotient-chart-isomorphism], [lem-weil-pbc-fpqc-representable-descent].",
+   "uses": [
+    "lem-trf-scheme-descent-quotient-chart-isomorphism",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Spaces Tags 02WW and 02WV; Spaces Descent Tags 04W8 and 0D3C: construct the quotient space, descend the polarization, and apply relative ampleness to obtain only the underlying scheme with all original charts. Descent Tag 023Q recovers charts outside a chosen small subcover."
+   }
+  },
+  {
+   "text": "Descend lambda on the small atlas by exists_lineModule_of_etale_descent. The identity and cocycle are exactly the given ones after the canonical tensor comparisons. Its ordinary restriction on each chart is the given L_i. Dependencies: [lem-trf-algebraic-space-invertible-descent].",
+   "uses": [
+    "lem-trf-algebraic-space-invertible-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Spaces Tags 02WW and 02WV; Spaces Descent Tags 04W8 and 0D3C: construct the quotient space, descend the polarization, and apply relative ampleness to obtain only the underlying scheme with all original charts. Descent Tag 023Q recovers charts outside a chosen small subcover."
+   }
+  },
+  {
+   "text": "The given ampleness over inverse images of affine base opens verifies representable_and_ample_of_etale_cover. The identity scheme test represents the algebraic space by Y over S. Transport its chart identifications to obtain e. Their kernel-pair identification gives the displayed theta equation. This argument also covers empty S and empty covers: their quotient and Y are empty. Dependencies: [lem-trf-algebraic-space-ample-local].",
+   "uses": [
+    "lem-trf-algebraic-space-ample-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Spaces Tags 02WW and 02WV; Spaces Descent Tags 04W8 and 0D3C: construct the quotient space, descend the polarization, and apply relative ampleness to obtain only the underlying scheme with all original charts. Descent Tag 023Q recovers charts outside a chosen small subcover."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-polarized-scheme-etale-descent-datum",
+  "lem-trf-scheme-descent-cocycle-etale-relation",
+  "lem-trf-etale-relation-quotient",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sheafification",
+  "lem-trf-scheme-descent-quotient-chart-isomorphism",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-algebraic-space-invertible-descent",
+  "lem-trf-algebraic-space-ample-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Spaces Tags 02WW and 02WV; Spaces Descent Tags 04W8 and 0D3C: construct the quotient space, descend the polarization, and apply relative ampleness to obtain only the underlying scheme with all original charts. Descent Tag 023Q recovers charts outside a chosen small subcover."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence of a scheme with specified etale base changes from a relatively ample invertible module descent cocycle",
+   "results": "{\"t\": \"2026-10-26T06:56:07Z\", \"tool\": \"leansearch\", \"query\": \"Existence of a scheme with specified etale base changes from a relatively ample invertible module descent cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"07b0cf80f963d857\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the fixed polarized chart interface; reuse general module descent and sheaf gluing where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible module with a compatible cocycle descends on a fixed scheme along an etale covering",
+   "results": "{\"t\": \"2026-10-26T06:56:09Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible module with a compatible cocycle descends on a fixed scheme along an etale covering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"caf470f32f47966a\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the fixed polarized chart interface; reuse general module descent and sheaf gluing where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "descent|descend",
+   "results": "{\"t\": \"2026-10-26T07:04:02Z\", \"tool\": \"grep\", \"query\": \"descent|descend\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Descent.lean\"], \"digest\": \"8c32db7b36fb7838\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the fixed polarized chart interface; reuse general module descent and sheaf gluing where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PolarizedSchemeEtaleDescent",
+  "date": "2026-10-26",
+  "group": "B7"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Additional input to the descent sentence: Stacks Spaces Descent Tag 0D3C, together with Tags 02WW and 04W8, for effective descent of a scheme with a relatively ample invertible module. Spaces Tags 02WW and 02WV; Spaces Descent Tags 04W8 and 0D3C: construct the quotient space, descend the polarization, and apply relative ampleness to obtain only the underlying scheme with all original charts. Descent Tag 023Q recovers charts outside a chosen small subcover.",
+   "via": [
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PolarizedSchemeCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolarizedSchemeCharts.lean",
+  "declaration": "AlgebraicGeometry.exists_polarizedSchemeCharts",
+  "declarations": [
+   "AlgebraicGeometry.exists_polarizedSchemeCharts"
+  ],
+  "statement": "theorem exists_polarizedSchemeCharts\n    {S : Scheme.{u}} {I : Type v} {U : I → Scheme.{u}}\n    {uMap : ∀ i, U i ⟶ S} {X : I → Scheme.{u}} {f : ∀ i, X i ⟶ U i}\n    {L : ∀ i, (X i).Modules} {hL : ∀ i, Scheme.Modules.IsInvertible (L i)}\n    (D : PolarizedSchemeEtaleDescentDatum S I U uMap X f L hL)\n    : ∃ (Y : Scheme.{u}) (g : Y ⟶ S) (e : ∀ i, pullback g (uMap i) ≅ X i),\n      (∀ i, (e i).hom ≫ f i = pullback.snd g (uMap i)) ∧\n        ∀ i j,\n          polarizedOverlapX U uMap X f i j ≫ (e i).inv ≫ pullback.fst g (uMap i) =\n            (D.theta i j).hom ≫ polarizedOverlapX U uMap X f j i ≫\n              (e j).inv ≫ pullback.fst g (uMap j)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23251",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T081113-L-1815856",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-23251",
+  "group": "B7",
+  "result": "fix",
+  "landing": "20261026T081113-L-1815856",
+  "kind": "interface",
+  "note": "independent cc review: 16 relocated defs in PolarizedSchemeEtaleDescentData vs published item (verbatim); item theorem header vs clone (identical); 3 new sorried statements vs their nodes and the item conclusion (true, weaker); direct importer PolarizedFineLogEtaleDescent compiled against the delivery (OK); item node fields vs clone"
+ }
+}

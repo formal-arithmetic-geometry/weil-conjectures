@@ -18,13 +18,15 @@ has a Lean statement, whatever its depth below the target):
      declaration is still a sorry, within the batch's own reach, not through an assumed node, another batch's target
      or a finished node). A sorried module in the targets' import closure that is neither is bypassed by the Lean
      route and is not an item (STATE["off_route"]); a module changed after the route was computed stays an item
-     until the next refresh;
+     until the next refresh when a progress walk has an open node in it, and a module new since the route's commit
+     when the bridge of tools/progress_reach.py reaches it (a node of it has a DAG parent in a batch's walk or the
+     priority walk; the human, 2026-10-26; STATE["split_dropped"] lists the others);
   3. every node in the dependencies (stmt_deps, proof_deps and the `uses` of the proof steps) of the node(s) it
      realizes has its Lean statement: a declaration of the library, a Mathlib leaf, a finished node or a node assumed
      by its batches (coord/assumed.tsv); dag_queue.Dag.waiting/stated (the human, 2026-10-17: the prover must see what
      is available before proving). Otherwise it is listed as "waiting for statements of dependencies" until stage 2
-     has stated those nodes. Exempt: a repair of a module without `sorry` (already proved, broken by an upstream change)
-     and an item already claimed (coord/claims; nothing is released here);
+     has stated those nodes. Exempt: a repair of an already proved module broken by an upstream change,
+     with no `sorry`; claims do not override dependency readiness;
   4. it is not listed in ~/upstream-pr/upstream-pending.tsv (the human, 2026-10-18: do not duplicate Orchestra's open
      PRs): the modules an open Orchestra branch or PR of the source library proves, written hourly from GitHub by the
      launcher's machine, outside the repository. The hold ends by itself when the module has no `sorry` left in live
@@ -41,7 +43,10 @@ The order of stage 3 after the rework items:
   3. the rest: the modules on the route first, then by the distance to the nearest route sorry (dependency steps in
      the DAG, ascending), ties nearest to a target first (fewest import steps from a target module; a module the
      targets do not import yet last), then by name.
-Without a complete route the import closure of the targets is used (STATE), as before 2026-10-17. `write` also puts
+Without a complete route the import closure of the targets is used (STATE), as before 2026-10-17.
+Priority roots (the human, 2026-10-25; coord/priority-roots.txt, tools/priority.py): the sorried modules on a root's own
+Lean route and the modules of its open DAG closure are stage-3 items as if they were on the route (same rules 3 and 4 and
+the rework hold), even when no batch target uses them yet; tools/tag_batches.py tags every item of the closure `priority`. `write` also puts
 the modules below a route sorry, per batch, into local/stage3-reach.json for tools/tag_batches.py.
 
 coord/queue.tsv lists stage 1 first, then 2, then 3. Within stage 1 the items nearest to a target come first; within
@@ -51,7 +56,8 @@ so the statements climb from Mathlib upward; stage 3 as above, its last column `
 the distance to the nearest route sorry otherwise. `claim.py next` without `--stage` takes from the head.
 """
 from __future__ import annotations
-import collections, pathlib, sys
+import collections, fcntl, os, pathlib, sys, time
+_T0 = time.time()   # the run reads its sources from here on (tools/queue_mark.py done_since)
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import leanindex as li  # noqa: E402
@@ -59,6 +65,9 @@ import dag_queue  # noqa: E402
 
 WORK = li.ROOT / "coord"
 STATE = {}   # how stage 3 was selected (route or closure) and the sorried closure modules left out
+NEEDED: dict[str, set[str]] = {}   # batch -> modules with an open node on its progress walk (empty: walk not run/failed)
+SPLIT: set[str] = set()      # the nodes of the modules new since the route's commit (progress_reach.split_since_route)
+ADMITTED: set[str] = set()   # those modules the bridge reaches from a batch's walk or the priority walk
 
 
 def analyse():
@@ -77,10 +86,6 @@ def analyse():
                 dist[i] = dist[x] + 1; dq.append(i)
     return imports, dist
 
-
-def claimed(m: str) -> bool:
-    """an item some group holds (coord/claims/<module>.lock, tools/claim.py): it stays an item whatever its dependencies"""
-    return (WORK / "claims" / (m.replace("/", "__") + ".lock")).is_file()
 
 
 FAR = 10**6   # the import distance of a module the targets do not import yet (below a route sorry, parent unproved)
@@ -104,9 +109,10 @@ def upstream_pending() -> dict[str, str]:
     return out
 
 
-def stage3(imports, dist, waiting: set[str], below: dict[str, dict[str, int]] | None = None):
+def stage3(imports, dist, waiting: set[str], below: dict[str, dict[str, int]] | None = None, extra=()):
     """items (kind rank, import distance, module, sorries, kind, route distance) and held (import distance, module, sorries).
-    `below`: batch -> {module: distance to the nearest route sorry} (tools/below_route.py; {} or None: route modules only)."""
+    `below`: batch -> {module: distance to the nearest route sorry} (tools/below_route.py; {} or None: route modules only).
+    `extra`: the modules of the priority closure (tools/priority.py), items as if on the route."""
     repairs = {}
     rp = WORK / "repairs.txt"
     if rp.exists():
@@ -127,13 +133,53 @@ def stage3(imports, dist, waiting: set[str], below: dict[str, dict[str, int]] | 
                 bdist[m] = k
     keep = set(dist)
     if route is not None:
-        keep = route["route"] | sorry_route.changed_in_batches(route, imports) | set(repairs)
+        changed = sorry_route.changed_in_batches(route, imports)
+        if NEEDED:
+            # 2026-10-26 (b69, route-only): a module of the import closure changed since the route counts only when a
+            # progress walk has an open node in it or it is new since the route's commit (a split-off file the route
+            # cannot know yet); before, every landing of an off-route module re-listed it until the next refresh.
+            import subprocess
+            old = subprocess.run(["git", "ls-tree", "-r", "--name-only", route.get("commit") or "HEAD", "--", "lean"],
+                                 cwd=li.ROOT, capture_output=True, text=True)
+            if old.returncode == 0 and route.get("commit"):
+                existed = {p[len("lean/"):-len(".lean")].replace("/", ".") for p in old.stdout.split() if p.endswith(".lean")}
+                need = set().union(*NEEDED.values())
+                STATE["changed_dropped"] = sorted(m for m in changed if m in existed and m not in need)
+                # 2026-10-26 (the human): a new module needs the bridge too (main(): ADMITTED, the rule of
+                # progress_reach.bridge_step); a module split off a parent on no batch's walk is no item
+                STATE["split_dropped"] = sorted(m for m in changed if m not in existed and m not in need and m not in ADMITTED)
+                changed = {m for m in changed if m in need or (m not in existed and m in ADMITTED)}
+        keep = route["route"] | changed | set(repairs)
+        # 2026-10-23: a target whose route walk failed (e.g. it imports a quarantined module with no compiled file) has
+        # no route at all; its whole import closure stays work, as without a route. Before, the batch-3 and batch-4
+        # targets' modules dropped out of the queue and their claims were released ("not on the sorry route").
+        failed = set(route.get("failed") or [])
+        if failed:
+            # the walk goes through quarantined modules too (their copies under quarantine/), whose imports the
+            # library scan does not see: the root that broke the route is usually below one of them
+            allimp = dict(imports)
+            for qf in (WORK.parent / "quarantine").rglob("*.lean"):
+                qm = ".".join(qf.relative_to(WORK.parent / "quarantine").with_suffix("").parts)
+                if qm not in allimp:
+                    try: allimp[qm] = li.imports_of(qf.read_text(errors="ignore"))
+                    except OSError: pass
+            seen, todo = set(), [t for t in failed if t in allimp]
+            while todo:
+                m = todo.pop()
+                if m in seen: continue
+                seen.add(m); todo.extend(x for x in allimp.get(m, ()) if x in allimp)
+            keep |= seen
+            STATE["route_failed"] = sorted(failed)
+        onroute = set(keep)
+        keep |= set(extra)
         STATE["off_route"] = sorted(m for m in dist if m not in keep and m not in bdist and li.file_of(m).is_file()
                                     and li.sorry_count(li.file_of(m).read_text(errors="ignore")))
     items, held = [], []
     pending = upstream_pending()
     STATE["pending"] = []   # (module, source): held for an open upstream PR, not items (the human, 2026-10-18)
-    for m in list(dist) + sorted(m for m in bdist if m not in dist):
+    if route is None:
+        onroute = set(keep); keep |= set(extra)
+    for m in list(dist) + sorted(m for m in bdist if m not in dist) + sorted(m for m in extra if m not in dist and m not in bdist):
         if m not in keep and m not in bdist:
             continue
         p = li.file_of(m)
@@ -149,13 +195,13 @@ def stage3(imports, dist, waiting: set[str], below: dict[str, dict[str, int]] | 
             # the human, 2026-10-18: an open Orchestra branch or PR of the source library proves this module; the
             # routine sync brings the proof. Held whether claimed or not; the hold ends when no sorry is left.
             STATE["pending"].append((m, pending[m])); continue
-        if m in waiting and not (kind == "repair" and n == 0) and not claimed(m):
+        if m in waiting and not (kind == "repair" and n == 0):
             # the human, 2026-10-17 (supersedes the launcher's 2026-10-14 rule that worked such modules anyway): a stage-3
             # item opens only when every node of its dependencies has a Lean statement, so that the prover sees what is
-            # available (stmt_deps and proof_deps, the human 2026-10-18). Exempt: a repair of a proved module (no sorry)
-            # and an item already claimed.
+            # available (stmt_deps and proof_deps, the human 2026-10-18). Exempt: a repair of a proved module (no sorry).
+            # A claim can predate a re-split that adds unstated dependencies; it does not make those statements exist.
             held.append((d, m, n)); continue
-        items.append((("repair", "disputed", "proof").index(kind), d, m, n, kind, 0 if m in keep else bdist[m]))
+        items.append((("repair", "disputed", "proof").index(kind), d, m, n, kind, 0 if m in onroute or m not in bdist else bdist[m]))
     items.sort(key=lambda x: (x[0], repairs[x[2]] if x[4] == "repair" else x[5], x[1], x[2])); held.sort()
     return items, held
 
@@ -190,7 +236,46 @@ def main() -> int:
         s2, why = nt_stage2.eligible(g, s2, why)
         if dist:
             below, route_t = below_route_reach(g)
-    items3, held = stage3(imports, dist, {m for m, _ in waiting}, below)
+            # 2026-10-26 (b69, route-only): the below-route walk descends below nodes whose own proof is written (it
+            # stops only at finished nodes or sorry-free MODULES) and counts a module when any reached node lives there,
+            # so a module whose sorries no target needs became an item (59 of 147 stage-3 landings 00:37-01:37 were on
+            # no batch's progress walk). A module is below a route sorry of batch N only when batch N's progress walk
+            # (tools/progress_reach.py, the measure of what the targets need) has an open node in it. A failed walk
+            # keeps the unfiltered reach.
+            try:
+                import progress_reach
+                # 2026-10-26 (the human): a module new since the route's commit is an item only when the bridge of the
+                # report walk reaches it (a node of it has a DAG parent in a batch's walk, done or not); before, every
+                # such module in the import closure was one, also those split off parents on no route. NEEDED stays
+                # the default walk (FIRST: each walk before the bridge).
+                SPLIT.update(progress_reach.split_nodes(g, progress_reach.split_since_route(imports)))
+                cls = progress_reach.classify(g, split=SPLIT)[0]
+                NEEDED.update({f"batch{b}": {m for i, k in c.items() if k not in ("done", "assumed")
+                                             and i in progress_reach.FIRST.get(b, ())
+                                             and (m := dag_queue.module_of(g.live.get(i) or {}))}
+                               for b, c in cls.items()})
+                # the new modules some walk reaches: through the bridge, or directly (a parent open in the walk)
+                ADMITTED.update(dag_queue.module_of(g.live[i]) for c in cls.values() for i in c if i in SPLIT)
+                below = {b: {m: k for m, k in v.items() if m in NEEDED.get(b, ())} for b, v in below.items()}
+            except Exception as e:
+                NEEDED.clear(); ADMITTED.clear()
+                print(f"progress walk failed, below-route reach not filtered: {e!r}", file=sys.stderr)
+    prio = set()
+    if g is not None:
+        try:   # the human, 2026-10-25: priority roots (coord/priority-roots.txt); a failure here never stops the queue
+            import priority
+            if priority.roots():
+                pnodes, prio = priority.closure(g, dag_queue, priority.roots())
+                if NEEDED and SPLIT:   # the same bridge from the priority walk's nodes
+                    import progress_reach
+                    seen = set(pnodes); new = progress_reach.bridge_step(g, seen, SPLIT, seen)
+                    while new:
+                        seen |= new
+                        ADMITTED.update(dag_queue.module_of(g.live[i]) for i in new)
+                        new = progress_reach.bridge_step(g, new, SPLIT, seen)
+        except Exception as e:
+            print(f"priority closure failed: {e!r}", file=sys.stderr)
+    items3, held = stage3(imports, dist, {m for m, _ in waiting}, below, prio)
     STATE["below"] = {b: sum(1 for x in items3 if x[5] > 0 and x[2] in mods) for b, mods in below.items()}
     # rework (the human, 2026-10-20): the quarantined modules first; whatever depends on one is not an item meanwhile
     import rework
@@ -207,8 +292,22 @@ def main() -> int:
         nb = (len(s1), len(s2), len(items3))
         # 2026-10-21 (the human): stage 1 is work in words, it needs no compiled Lean: a rework does not hold it back
         s2 = [x for x in s2 if x[2] not in blocked_n]
-        items3 = [x for x in items3 if x[2] not in blocked_m and x[2] not in rw_rows]
+        # 2026-10-24: a module with a rework row that is back in the library (the row waits for a verifying build) is
+        # an item again; only a module still in quarantine is not (766 stage-3 items were held back this way)
+        items3 = [x for x in items3 if x[2] not in blocked_m and not (x[2] in rw_rows and not rework.landed(x[2]))]
         STATE["blocked"] = (nb[0] - len(s1), nb[1] - len(s2), nb[2] - len(items3))
+    # 2026-10-27 (the human): a module failing in the RUNNING global build is a rework item at once (tools/early_red.py);
+    # once the quarantine at the end of the build has its coord/rework.tsv row, that row is the item (same name)
+    early = []
+    try:
+        import early_red
+        early = early_red.listed(rw_rows)
+    except Exception as e:  # noqa: BLE001 - a failure here never stops the queue
+        print(f"early red rows failed: {e!r}", file=sys.stderr)
+    if early:
+        _em = {m for m, _ in early}
+        items3 = [x for x in items3 if x[2] not in _em]
+        rw_clusters = [c for c in rw_clusters if c["item"] not in _em]
     STATE["rework"] = (len(rw_rows), len(rw_open))
     wfor = {}
     for m, c in waiting:
@@ -244,6 +343,10 @@ def main() -> int:
         except OSError: return ""
     rows = [(m, 3, "-", "", "retire-first", f"unblocks {n} rework roots")
             for m, n in sorted(rt_prio.items(), key=lambda x: (-x[1], x[0]))]
+    def _lsorry(m):
+        try: return li.sorry_count(li.file_of(m).read_text(errors="ignore"))
+        except OSError: return ""
+    rows += [(m, 3, "-", _lsorry(m), "rework", note) for m, note in early]   # tools/early_red.py: failing in the running build
     rows += [(c["item"], 3, "-", sum(qsorry(m) or 0 for m in c["members"]), "rework", f"root; {c.get('waiting', 0)} quarantined importers wait")
              for c in rw_clusters]
     # retire items (the human, 2026-10-20; coord/retire-items.tsv): after the rework items, before every other queue
@@ -259,10 +362,25 @@ def main() -> int:
     if route_t is not None:
         import below_route
         below_route.write_reach(below, route_t)   # the batch tags (tools/tag_batches.py) read what this run selected
-    with open(WORK / "queue.tsv", "w") as f:
-        f.write("# item\tstage\tdistance (to a target; to Mathlib in stage 2)\tsorry\tkind\tblockers (stage 2: open stage-2 nodes that wait for it through stmt_deps; stage 3: `route`, or the distance to the nearest route sorry)\n")
-        for r in rows:
-            f.write("\t".join(str(x) for x in r) + "\n")
+    # written whole then renamed: readers (the review service drops stage-2 deliveries the queue no longer lists) never
+    # see a half-written queue.
+    # The human, 2026-10-25: a delivery leaves the queue the moment it lands (tools/queue_mark.py done, called by the
+    # landing); this run read the tree before such a landing, so the items marked done since it started are dropped
+    # here, under the lock of tools/queue_mark.py (a finished item listed again was dispatched again within a minute)
+    import queue_mark as qm
+    with open(qm.LOCK, "w") as lk:
+        fcntl.flock(lk, fcntl.LOCK_EX)
+        try:
+            gone = qm.done_since(_T0)
+        except Exception as e:  # noqa: BLE001 - a failure here never stops the queue
+            print(f"queue_mark done_since failed: {e!r}", file=sys.stderr); gone = set()
+        if gone:
+            rows = [r for r in rows if (str(r[0]), str(r[1])) not in gone and (str(r[0]), "-") not in gone]
+        with open(WORK / "queue.tsv.tmp", "w") as f:
+            f.write("# item\tstage\tdistance (to a target; to Mathlib in stage 2)\tsorry\tkind\tblockers (stage 2: open stage-2 nodes that wait for it through stmt_deps; stage 3: `route`, or the distance to the nearest route sorry)\n")
+            for r in rows:
+                f.write("\t".join(str(x) for x in r) + "\n")
+        os.replace(WORK / "queue.tsv.tmp", WORK / "queue.tsv")
     with open(WORK / "queue.md", "w") as f:
         f.write(f"# Work queue\n\n{len(rows)} items; claim with `tools/claim.py next <group> [--stage N]`.\n\n")
         if rw_rows:

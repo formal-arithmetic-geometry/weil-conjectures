@@ -34,36 +34,30 @@
    }
   },
   {
-   "text": "Fix $x\\in N$ and choose the stated local-ring isomorphism $R\\cong k[[u,v]]/(uv)$. Evaluation on the axes embeds this ring in $P=k[[u]]\\times k[[v]]$: its kernel before quotienting consists exactly of the series all of whose terms are divisible by $uv$. Its image consists of the pairs with equal constant term, since such a pair $(f,g)$ is represented by $f(u)+g(v)-f(0)$. Put $s=(u,v)\\in R$. It is a non-zero-divisor. Every non-zero-divisor of $R$ has two nonzero components: if one component is zero, multiplication by a nonzero series on that axis annihilates it. Thus localization embeds $Q(R)$ in $k((u))\\times k((v))$. Conversely, for any pair of Laurent series $h$, choose $n$ so large that both components of $s^nh$ have zero constant term and no negative powers. Then $s^nh\\in R$, so $h=(s^nh)/s^n\\in Q(R)$. This proves the claimed total fraction ring directly.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I, and Tag 0CBW (lemma-split-node); explicit split-node algebra"
-   }
-  },
-  {
-   "text": "Let $e=(1,0)\\in Q(R)$; explicitly $e=(u,0)/s$. The relation $e^2=e$ makes it integral over $R$, and every $(f,g)\\in P$ is an $R$-linear combination of $1,e$: take $a=(g(0),g)\\in R$ and $b=(f-g(0),f(0)-g(0))\\in R$, so $(f,g)=a+be$. Hence $P=R[e]$ is integral over $R$. Each factor $k[[u]]$ and $k[[v]]$ is integrally closed by [lem-weil-pbc-power-series-normal-domain], applied to the Noetherian normal domain $k$ (a field has only two ideals and is its own fraction field). If $(h_1,h_2)\\in Q(R)$ satisfies a monic equation over $R$, project that equation to each factor. The factorwise normality forces $h_1\\in k[[u]]$ and $h_2\\in k[[v]]$. Therefore $P$ is exactly the integral closure of $R$, so it is $\\widehat C$ from Step 1.",
+   "text": "Fix $x\\in N$. Choose the stated ring isomorphism $\\widehat A\\cong k[[u,v]]/(uv)$. Apply [lem-trf-formal-node-axes-total-fractions] over the field $k$: it identifies this ring with $S=\\{(f,g)\\in k[[u]]\\times k[[v]]:f(0)=g(0)\\}$ and its total fractions with $L=k((u))\\times k((v))$. By [lem-trf-equal-constant-normalization-residue-quotient], the integral closure in $L$ is $P=k[[u]]\\times k[[v]]$, and $P/S$ is one-dimensional over the residue field of $S$ and is killed by its maximal ideal. Thus the integral closure $\\widehat C$ of Step 1 has $\\widehat C/\\widehat A$ free of rank one over the residue field of $\\widehat A$.",
    "uses": [
-    "lem-weil-pbc-power-series-normal-domain"
+    "lem-trf-formal-node-axes-total-fractions",
+    "lem-trf-equal-constant-normalization-residue-quotient"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I, and Tag 0CBW (lemma-split-node); explicit split-node algebra"
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I: explicit algebra of the split completed node."
    }
   },
   {
-   "text": "The map $P\\to k$, $(f,g)\\mapsto f(0)-g(0)$, is surjective and has kernel $R$ by Step 2. Multiplication by an element of $R$ acts on this difference by its common constant term. Thus $P/R$ is free of rank one over the residue field of $R$, and hence of $A$. That residue field is $k$ via the structural map by Step 1. Even if the chosen completed-ring isomorphism twists the scalar field, choosing a nonzero quotient vector gives an $A$-linear identification with this structural residue field. The $A$-linear comparison $M_x\\cong\\widehat C/R$ of Step 1 therefore identifies $M_x$ with $k$, killed by the maximal ideal of $A$. Consequently $\\mathscr S_x(M_x)$ is $i_{x,*}k$, where $i_x:\\operatorname{Spec}k\\hookrightarrow B$ is the closed point inclusion. Substituting these identifications in Step 1 gives $Q\\cong\\bigoplus_{x\\in N}i_{x,*}k$. The identifications can depend on the chosen ordering of the branches; the statement asserts an isomorphism, with no canonical branch ordering. Both a self-node and an intersection of distinct components give the same single quotient copy of $k$.",
-   "uses": [],
+   "text": "The first projection $\\widehat A\\to A/\\mathfrak m$ is surjective: lift a residue class by the compatible residues of an element of $A$. Its kernel is maximal, hence the unique maximal ideal of $\\widehat A$, since Step 2 identifies it with the local ring $S$. Hence the $A$-linear comparison $M_x\\cong\\widehat C/\\widehat A$ in [lem-trf-normalization-singular-skyscraper] makes $M_x$ a one-dimensional $A/\\mathfrak m$-space. That node identifies $A/\\mathfrak m$ structurally with $k$. Choosing a nonzero vector therefore gives $M_x\\cong k$ as $A$-modules, even if the completed-ring isomorphism twists $k$. By its stated sections-on-opens formula, $\\mathscr S_x(M_x)\\cong i_{x,*}k$. Substitution gives $Q\\cong\\bigoplus_{x\\in N}i_{x,*}k$. An ordering of the branches only chooses the isomorphism; a self-node and a crossing of distinct components each contribute one copy.",
+   "uses": [
+    "lem-trf-normalization-singular-skyscraper"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I, and Tag 0CBW (lemma-split-node); explicit split-node algebra"
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I: explicit algebra of the split completed node."
    }
   },
   {
-   "text": "The quotient $Q$ is coherent by Step 1 and supported on the finite set of closed points $N$ by Step 4. Apply [lem-pc-chi-zero-dim-support] with the given proper scheme $B$: it gives $H^j(B,Q)=0$ for $j>0$ and $\\chi(B,Q)=\\dim_k\\Gamma(B,Q)$. By the description of the skyscraper sections in Step 1 and the finite direct sum of Step 4, $\\Gamma(B,Q)=\\bigoplus_{x\\in N}k$. Its standard coordinate vectors form a basis of size $|N|=e$, so $\\chi(B,Q)=e$. When $N$ is empty the quotient is zero and the same calculation gives zero.",
+   "text": "The quotient $Q$ is coherent by Step 1 and supported on the finite set of closed points $N$ by Step 3. Apply [lem-pc-chi-zero-dim-support] with the given proper scheme $B$: it gives $H^j(B,Q)=0$ for $j>0$ and $\\chi(B,Q)=\\dim_k\\Gamma(B,Q)$. By the description of the skyscraper sections in Step 1 and the finite direct sum of Step 3, $\\Gamma(B,Q)=\\bigoplus_{x\\in N}k$. Its standard coordinate vectors form a basis of size $|N|=e$, so $\\chi(B,Q)=e$. When $N$ is empty the quotient is zero and the same calculation gives zero.",
    "uses": [
     "lem-pc-chi-zero-dim-support"
    ],
@@ -77,7 +71,8 @@
  "proof_deps": [
   "def-weil-proper-morphism",
   "lem-trf-normalization-singular-skyscraper",
-  "lem-weil-pbc-power-series-normal-domain",
+  "lem-trf-formal-node-axes-total-fractions",
+  "lem-trf-equal-constant-normalization-residue-quotient",
   "lem-pc-chi-zero-dim-support"
  ],
  "proof_origin": {
@@ -156,16 +151,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-nodal-normalization-quotient",
   "worker": "stage1",
-  "summary": "Preserved the item statement. Added one generic finite-type curve normalization/skyscraper theorem from Stacks 0C1R, without properness or nodality hypotheses. Proved the complete-node normalization and residue-field quotient explicitly in the item, citing existing power-series normality. Applied the existing zero-dimensional Euler lemma. Removed proof-only lemmas from stmt_deps and dropped the redundant local-quotient child.",
+  "summary": "Repair of the 2026-10-22 re-split return. Statement unchanged. Extracted two separate statement-only arbitrary-field algebra nodes: the axis embedding and total fractions, and the equal-constant subring integral closure/residue quotient. Retained the generic global normalization theorem, structural-residue-field assembly (including a ring isomorphism twisting scalars), and zero-dimensional Euler calculation. Original arguments are retained verbatim in report.md with their new locations.",
   "blueprint": "Realizes the numerical exceptional-fibre step in lem-trf-local-term-locality: the normalization exact sequence at split nodes and the one-dimensional node quotient used to compute the Euler defect.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-power-series-normal-domain",
-    "why": "Generic formal-power-series normality, applied to the field k to compute the integral closure of the completed node; no trace-unit route step is replaced."
-   },
    {
     "node": "lem-pc-chi-zero-dim-support",
     "why": "Generic coherent Euler/cohomology theorem for the quotient supported on finitely many closed points; no trace-unit node supplies this cohomology calculation."
@@ -177,12 +168,12 @@
   "lem-pc-chi-zero-dim-support"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q84-6da2177e0",
-  "group": "Q84",
+  "reviewer": "NT-cc-Q85-38f95e158",
+  "group": "Q85",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q84-6da2177e0 (reviewer sub-agent of L); spot-checked: Read both nodes and all five steps in full; checked Stacks 0C1R, 0C3V, 0C4A, 0CBW, power-series normality and zero-dimensional cohomology. Local computations, hypotheses and edge cases hold; no duplicate or restated split found. Both tool uses accepted. No long non-elementary steps or fixes. Full findings recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-38f95e158 (reviewer sub-agent of L); spot-checked: Re-split (note released 2026-10-22, 3905 chars over 5 steps). Item statement, stmt_deps and lean are byte-identical to live; only proof, proof_deps and split_report changed. The item is not superseded, not route-pivot dropped, and cites no SGA. Mapping: old step 1 → item step 1, verbatim. Old step 2 → lem-trf-formal-node-axes-total-fractions. Old step 3 plus the local part of step 4 → lem-trf-equal-constant-normalization-residue-quotient. The global part of step 4 (structural residue field, scalar-twist vector choice, S_x(M_x)=i_{x,*}k, substitution) → item step 3, now with an added argument that the kernel of the first projection Â→A/m is the unique maximal ideal. Old step 5 → item step 4, verbatim. Nothing shortened or dropped; the two new nodes are comparable (~870 and ~1000 chars of argument); item proof is 2712 chars. Source: Stacks curves.tex 0C4A Case I (A'=κ[[x,y]]/(x)×κ[[x,y]]/(y), δ 'verified by hand'), 0CBW, varieties 0C1R. Both new nodes checked by hand over an arbitrary field. Node 1: kernel (uv), image is the equal-constant pairs, a k-algebra isomorphism; non-zero-divisor iff both components nonzero (counterexample (0,b)(u,0)=0 otherwise); Q(R)≅k((u))×k((v)) via s^n h ∈ S. Node 2: P=S+Sε with a=(g(0),g), b=(f−g(0),f(0)−g(0)); integral closure is P by factorwise normality; S is local; d is S-linear, surjective, ker S, so P/S≅k with basis [ε]. Characteristic 2, non-closed k and N empty were tested. Item steps checked against the full statements of normalization-singular-skyscraper (hypotheses hold, A-linear M_x≅Ĉ/Â, residue field k) and chi-zero-dim-support; the ring-iso transport in step 2 is valid. B1–B9 form is fine: statement-only, unsplit, three search kinds, correct blueprint.from/via. Tool use lem-pc-chi-zero-dim-support accepted. Duplicates: lem-sfb-nodal-completed-normalization-model and the quadratic-series, derivation-descent and tangent-normalization nodes are not the same statements. Maintainer note: the pending sibling Q94 lem-trf-split-node-component-normalization contains the alg-closed special case of node 1 and the closure part of node 2 in its paragraph 2. Not a duplicate, but it could cite these after landing. The node-level tool_uses still lists power-series-normal-domain, which the item no longer cites (stale, advisory)."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.NodalNormalizationQuotient",
@@ -203,5 +194,16 @@
   "result": "pass",
   "note": "Clause-by-clause match of nodal_normalization_quotient against the node and Stacks 0C1R/0CBW/0C4A: hypotheses (IsAlgClosed, IsProper, IsReduced, ConnectedSpace, pure dim 1 via topologicalKrullDim on irreducibleComponents, ring iso of AdicCompletion with MvPowerSeries(Fin 2) k/(X0X1) at nonsmooth points; weaker than the source's k-algebra iso and handled by node step 4) and conclusions (N finite, IsFinite fromReducedNormalization, coherence of O_B, nu_*O and Q, ShortExact with the canonical unitToPushforwardObjUnit arrow, Q iso to the coproduct of i_x pushforwards with i_x uniquely characterized, support in N, eulerChar = N.ncard). The added stmt_dep def-weil-pbc-reduced-normalization is a landed node (allowed). lean.statement is verbatim in the file; docstrings carry the source place, blueprint tag and five proof steps; no definitions, only sorry. Edge cases N empty, B empty, self-node/crossing, char 2 and universes checked. nt_compile --json on the snapshot file: clean in 3.5 s. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

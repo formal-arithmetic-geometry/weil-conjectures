@@ -1,0 +1,416 @@
+{
+ "id": "lem-sfb-relative-hopf-counit-criterion",
+ "kind": "statement",
+ "title": "Counit of relative Hopf modules: injectivity criterion and surjectivity under a retraction",
+ "statement": "Let $k$ be a field [def-weil-field], $H$ a commutative Hopf $k$-algebra, and $A\\subseteq H$ a unital right coideal subalgebra, meaning $\\Delta(A)\\subseteq A\\otimes_kH$. Use the Hopf identities, quotient coalgebra $C=H/HA^+$, quotient map $\\pi$, and notion of relative Hopf module of [lem-sfb-relative-hopf-module-kernels]. Let $X$ be a relative Hopf module and write $R(X)=\\{x:\\alpha_X(x)=\\pi(1)\\otimes x\\}$, with inclusion $j_X:R(X)\\hookrightarrow X$, and let $\\mu_X:H\\otimes_AR(X)\\to X$, $h\\otimes x\\mapsto hx$, be the multiplication map. (1) $\\mu_X$ is injective if and only if $1_H\\otimes_Aj_X:H\\otimes_AR(X)\\to H\\otimes_AX$ is injective; this equivalence assumes neither flatness of $H$ over $A$ nor a retraction $H\\to A$. (2) If there is an $A$-linear map $E:H\\to A$ with $E|_A=1_A$, then $\\mu_X$ is surjective: every $x\\in X$ is a finite sum $\\sum h_tx_t$ with $h_t\\in H$ and $x_t\\in R(X)$.",
+ "source": {
+  "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+  "place": "Bichon, arXiv:2301.05480v2, Proposition 2.7, equivalence (a) iff (b), and its implication to (c) in the case of a conditional expectation (Lemma 2.6 situation), specialized to commutative algebras. The printed proof of (a) implies (c) asserts exactness of the tensored row H tensor_A R(X) -> H tensor_A X -> H tensor_A (C tensor X) without argument; surjectivity is stated here only under the retraction E, where the A-linear map (E tensor_A 1)kappa_X^{-1} splits that row. Read at https://arxiv.org/html/2301.05480v2; local PDF WANTED in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-sfb-relative-hopf-module-kernels"
+ ],
+ "proof": [
+  {
+   "text": "Put $i=1_H\\otimes_Aj_X$ and $T=\\kappa_X^{-1}\\alpha_X$. The coaction counit identity $(\\epsilon_C\\otimes1)\\alpha_X=1_X$ in [lem-sfb-relative-hopf-module-kernels] makes $\\alpha_X$, hence $T$, injective. The map $\\mu_X$ is well-defined by tensor balancing: $(ha)x=h(ax)$ for $a\\in A$. For $r\\in R(X)$, compatibility of the action and coaction gives\n$$\\alpha_X(\\mu_X(h\\otimes r))=\\alpha_X(hr)=\\sum\\pi(h_{(1)})\\otimes h_{(2)}r=\\kappa_X(i(h\\otimes r)).$$\nThe tensor generators and universal property of [def-weil-pbc-module-tensor-product] extend this equality to $\\alpha_X\\mu_X=\\kappa_Xi$. Thus $T\\mu_X=i$.",
+   "uses": [
+    "lem-sfb-relative-hopf-module-kernels",
+    "lem-sfb-coideal-canonical-tensor-isomorphism",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Bichon, arXiv:2301.05480v2, Proposition 2.7; displayed diagram expanded using Proposition 2.2 and Lemma 2.6. Online HTML https://arxiv.org/html/2301.05480v2, sections 2.2 and 2.4; local PDF unavailable."
+   }
+  },
+  {
+   "text": "Since $T$ is injective and $i=T\\mu_X$, injectivity of $\\mu_X$ implies injectivity of $i$. Conversely, $\\mu_X(w)=\\mu_X(w')$ implies $i(w)=i(w')$, so injectivity of $i$ implies $w=w'$. This proves (1), without using $E$ or flatness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Bichon, arXiv:2301.05480v2, Proposition 2.7; displayed diagram expanded using Proposition 2.2 and Lemma 2.6. Online HTML https://arxiv.org/html/2301.05480v2, sections 2.2 and 2.4; local PDF unavailable."
+   }
+  },
+  {
+   "text": "For (2), assume the stated retraction $E$. Let $Y=C\\otimes_kX$ with the diagonal $H$-action of [lem-sfb-coideal-canonical-tensor-isomorphism], put $\\nu(x)=\\pi(1)\\otimes x$, and put $\\delta=\\alpha_X-\\nu:X\\to Y$. The coaction $\\alpha_X$ is $H$-linear by compatibility in [lem-sfb-relative-hopf-module-kernels]. The map $\\nu$ is $A$-linear: for $a\\in A$, write $\\Delta(a)=\\sum a_{(1)}\\otimes a_{(2)}$ with $a_{(1)}\\in A$; since $a_{(1)}-\\epsilon(a_{(1)})1\\in A^+$, one has $\\pi(a_{(1)})=\\epsilon(a_{(1)})\\pi(1)$, so $a\\nu(x)=\\pi(1)\\otimes ax$. Thus $\\delta$ is $A$-linear and may be tensored over $A$.",
+   "uses": [
+    "lem-sfb-coideal-canonical-tensor-isomorphism",
+    "lem-sfb-relative-hopf-module-kernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Bichon, arXiv:2301.05480v2, Proposition 2.7; displayed diagram expanded using Proposition 2.2 and Lemma 2.6. Online HTML https://arxiv.org/html/2301.05480v2, sections 2.2 and 2.4; local PDF unavailable."
+   }
+  },
+  {
+   "text": "Write $D=1_H\\otimes_A\\delta$. Naturality of $\\kappa$ for the $H$-linear map $\\alpha_X:X\\to Y$ gives\n$$\\kappa_Y(1_H\\otimes_A\\alpha_X)=(1_C\\otimes_k\\alpha_X)\\kappa_X.$$\nFor the other term, direct evaluation on a tensor generator gives\n$$\\kappa_Y(1_H\\otimes_A\\nu)(h\\otimes x)=\\sum\\pi(h_{(1)})\\otimes\\pi(h_{(2)})\\otimes h_{(3)}x=(\\Delta_C\\otimes1_X)\\kappa_X(h\\otimes x).$$\nHere the middle expression uses the diagonal action on $Y$, and coassociativity of $H$ gives the three factors in that order; no cocommutativity is used. Consequently\n$$\\kappa_YDT=\\big((1_C\\otimes\\alpha_X)-(\\Delta_C\\otimes1_X)\\big)\\alpha_X=0$$\nby coassociativity of $\\alpha_X$. Injectivity of $\\kappa_Y$ gives $DT=0$. The cited canonical-isomorphism node applies to $Y$ as an $H$-module, without a flatness assumption.",
+   "uses": [
+    "lem-sfb-coideal-canonical-tensor-isomorphism",
+    "lem-sfb-relative-hopf-module-kernels",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Bichon, arXiv:2301.05480v2, Proposition 2.7; displayed diagram expanded using Proposition 2.2 and Lemma 2.6. Online HTML https://arxiv.org/html/2301.05480v2, sections 2.2 and 2.4; local PDF unavailable."
+   }
+  },
+  {
+   "text": "Define $e:H\\otimes_AX\\to X$ by $e(h\\otimes x)=E(h)x$ and $q=e\\kappa_X^{-1}:Y\\to X$. Balancing follows from $E(ha)=E(h)a$; commutativity also gives $E(ah)=aE(h)$, so $e$, and hence $q$, is $A$-linear. By [lem-sfb-coideal-coinvariant-projection], $q\\alpha_X=j_Xp_X$, where $p_X:X\\to R(X)$ is $A$-linear. Also $\\kappa_X(1\\otimes x)=\\pi(1)\\otimes x=\\nu(x)$ and $E(1)=1$, so $q\\nu=1_X$. Therefore\n$$q\\delta=j_Xp_X-1_X.$$\nFor $z=T(x)$, step 4 gives $Dz=0$. Applying $1_H\\otimes_Aq$ and using tensor compatibility with differences and composition yields\n$$0=(1_H\\otimes_Aq)Dz=(1_H\\otimes_A(j_Xp_X))z-z.$$\nThus $w=(1_H\\otimes_Ap_X)z\\in H\\otimes_AR(X)$ satisfies $iw=z$. This proves the needed lifting assertion directly; tensoring an arbitrary kernel sequence has not been assumed to preserve exactness.",
+   "uses": [
+    "lem-sfb-coideal-coinvariant-projection",
+    "lem-sfb-coideal-canonical-tensor-isomorphism",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Bichon, arXiv:2301.05480v2, Proposition 2.7; displayed diagram expanded using Proposition 2.2 and Lemma 2.6. Online HTML https://arxiv.org/html/2301.05480v2, sections 2.2 and 2.4; local PDF unavailable."
+   }
+  },
+  {
+   "text": "Step 1 and step 5 give $\\alpha_X\\mu_X(w)=\\kappa_Xi(w)=\\kappa_Xz=\\alpha_X(x)$. Apply $\\epsilon_C\\otimes1_X$ to conclude $\\mu_X(w)=x$. Every tensor is a finite sum of pure tensors by [def-weil-pbc-module-tensor-product]; absorb any $A$-coefficients into their $H$-factors. Writing $w=\\sum_t h_t\\otimes x_t$ with $x_t\\in R(X)$ therefore gives $x=\\sum_t h_tx_t$. This proves (2).",
+   "uses": [
+    "lem-sfb-relative-hopf-module-kernels",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Bichon, arXiv:2301.05480v2, Proposition 2.7; displayed diagram expanded using Proposition 2.2 and Lemma 2.6. Online HTML https://arxiv.org/html/2301.05480v2, sections 2.2 and 2.4; local PDF unavailable."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-hopf-module-kernels",
+  "lem-sfb-coideal-canonical-tensor-isomorphism",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-coideal-coinvariant-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+  "place": "Proposition 2.7 and Lemma 2.6, explicit retraction repair of the tensor-exactness argument; online HTML read, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For relative Hopf modules injectivity of the tensored coinvariant inclusion implies the counit multiplication map is bijective",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:09:57Z",
+    "tool": "leanfinder",
+    "query": "For relative Hopf modules injectivity of the tensored coinvariant inclusion implies the counit multiplication map is bijective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Invertible.rTensorInv_injective",
+     "Algebra.TensorProduct.includeRight_bijective",
+     "Module.Invertible.rTensor_bijective_iff",
+     "Module.Invertible.rTensor_injective_iff",
+     "Algebra.TensorProduct.includeLeft_bijective",
+     "TensorProduct.tacticHopf_tensor_induction_With__",
+     "Module.Invertible.lTensor_bijective_iff",
+     "Module.Invertible.lTensor_injective_iff"
+    ],
+    "digest": "03ba3c1c19ef75a2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: invertible-module tensor equivalences require an invertible module, absent here. HopfAlgebra.ofSurjective transfers a Hopf structure along a surjective bialgebra map. Group coinvariant quotient surjectivity does not state the relative Hopf-module counit criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hopf\", Function.Surjective",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:09:55Z",
+    "tool": "loogle",
+    "query": "\"Hopf\", Function.Surjective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "HopfAlgebra.ofSurjective"
+    ],
+    "digest": "766338a49540cd70"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: invertible-module tensor equivalences require an invertible module, absent here. HopfAlgebra.ofSurjective transfers a Hopf structure along a surjective bialgebra map. Group coinvariant quotient surjectivity does not state the relative Hopf-module counit criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]opf.*[Mm]odule|[Cc]oinvariant|[Cc]ounit.*[Ss]urjective",
+   "sub": "RingTheory",
+   "results": {
+    "t": "2026-10-23T21:09:55Z",
+    "tool": "grep",
+    "query": "[Hh]opf.*[Mm]odule|[Cc]oinvariant|[Cc]ounit.*[Ss]urjective",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Bialgebra/Basic.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Basic.lean",
+     "Mathlib/RingTheory/WittVector/Basic.lean",
+     "Mathlib/RingTheory/WittVector/Teichmuller.lean",
+     "Mathlib/RingTheory/WittVector/Teichmuller.lean"
+    ],
+    "digest": "a776f6e7114bb679"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: invertible-module tensor equivalences require an invertible module, absent here. HopfAlgebra.ofSurjective transfers a Hopf structure along a surjective bialgebra map. Group coinvariant quotient surjectivity does not state the relative Hopf-module counit criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induction from coinvariants surjects onto a relative Hopf module if its canonical counit is injective",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:09:55Z",
+    "tool": "leansearch",
+    "query": "Induction from coinvariants surjects onto a relative Hopf module if its canonical counit is injective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.instEpiModuleCatAppActionCoinvariantsMk",
+     "Representation.Coinvariants.induction_on",
+     "Rep.ind",
+     "Representation.Coinvariants.lift",
+     "Rep.coinvariantsFunctor",
+     "Rep.indMap_hom",
+     "Representation.ind",
+     "Rep.coinvariantsTensorIndInv_mk_tmul_indMk"
+    ],
+    "digest": "66d7a0db43fbfb01"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: invertible-module tensor equivalences require an invertible module, absent here. HopfAlgebra.ofSurjective transfers a Hopf structure along a surjective bialgebra map. Group coinvariant quotient surjectivity does not state the relative Hopf-module counit criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?Hopf|HopfModule|coideal|conditional.?expectation",
+   "sub": "RingTheory",
+   "results": {
+    "t": "2026-10-23T21:44:39Z",
+    "tool": "grep",
+    "query": "relative.?Hopf|HopfModule|coideal|conditional.?expectation",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Coalgebra/Quotient.lean",
+     "Mathlib/RingTheory/Coalgebra/Quotient.lean",
+     "Mathlib/RingTheory/Coalgebra/Quotient.lean"
+    ],
+    "digest": "f040fabff5a33c25"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: quotient coalgebras and coideal definitions only, not relative Hopf modules or their induction counit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a coideal subalgebra of a commutative Hopf algebra has a module retraction then every relative Hopf module is generated by its coinvariants",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:44:39Z",
+    "tool": "leansearch",
+    "query": "If a coideal subalgebra of a commutative Hopf algebra has a module retraction then every relative Hopf module is generated by its coinvariants",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Representation.Coinvariants.ker",
+     "Representation.Coinvariants.instModule",
+     "CoalgCat.moduleCat_of_toModuleCat",
+     "HopfAlgCat.instHopfAlgebra",
+     "HopfAlgCat.of_comul",
+     "CoalgCat.instComonObjModuleCatOfCarrier",
+     "HopfAlgebra.casesOn",
+     "CoalgCat.instCoalgebra"
+    ],
+    "digest": "cfb5028be64d0d6d"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: group representation coinvariants are quotients, not these coaction equalizers; coalgebra and HopfAlgCat instances do not assert either counit clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hopf\", \"counit\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:44:39Z",
+    "tool": "loogle",
+    "query": "\"Hopf\", \"counit\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "HopfAlgebra.counit_comp_antipode",
+     "HopfAlgebra.counit_antipode",
+     "HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit",
+     "HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit",
+     "commHopfAlgCatEquivCogrpCommAlgCat_counitIso_inv_app",
+     "commHopfAlgCatEquivCogrpCommAlgCat_counitIso_hom_app",
+     "HopfAlgCat.of_counit",
+     "CategoryTheory.HopfObj.antipode_counit"
+    ],
+    "digest": "49fd57f8eff8bb3e"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: antipode/counit Hopf axioms and categorical Hopf-object equivalences, not relative Hopf-module induction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A conditional expectation makes the counit from induced coaction invariants surjective",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:44:40Z",
+    "tool": "leanfinder",
+    "query": "A conditional expectation makes the counit from induced coaction invariants surjective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPolynomial.ACounit_surjective",
+     "Bialgebra.counit_surjective",
+     "PolynomialLaw.π_surjective",
+     "Rep.resCoindAdjunction_counit_app_hom_hom",
+     "Pi.counit_comp_finsuppLcoeFun",
+     "CategoryTheory.instEssSurjCoalgebraToComonadAdjComparison",
+     "CoalgCat.of_counit",
+     "Pi.counit_comp_dFinsuppCoeFnLinearMap"
+    ],
+    "digest": "7b1ddb08b7038b79"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: invertible or faithfully flat module results require extra hypotheses; ordinary bialgebra or polynomial counit surjectivity concerns a different map. Tensor-injectivity comparison alone is not the relative Hopf-module criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a relative Hopf module the multiplication counit is injective if and only if tensoring its coinvariant inclusion is injective",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:44:41Z",
+    "tool": "leanfinder",
+    "query": "For a relative Hopf module the multiplication counit is injective if and only if tensoring its coinvariant inclusion is injective",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Invertible.rTensor_injective_iff",
+     "LinearMap.rTensor_injective_iff_subtype",
+     "Module.Invertible.rTensorInv_injective",
+     "LinearMap.lTensor_inj_iff_rTensor_inj",
+     "Module.Invertible.lTensor_injective_iff",
+     "TensorProduct.forall_vanishesTrivially_iff_forall_rTensor_injective",
+     "Submodule.injective_tensorToSpan",
+     "Module.FaithfullyFlat.lTensor_injective_iff_injective"
+    ],
+    "digest": "1a557a055a6621fe"
+   },
+   "date": "2026-10-24",
+   "verdict": "No match: invertible or faithfully flat module results require extra hypotheses; ordinary bialgebra or polynomial counit surjectivity concerns a different map. Tensor-injectivity comparison alone is not the relative Hopf-module criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-coideal-faithfully-flat",
+  "date": "2026-10-24",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: Faithfully flat factorization of an affine group homomorphism. Theorem 3.31, printed pp.73--74; Definition 3.3, printed pp.65--66, and Definition 3.8, printed p.67, for the commutative Hopf algebra convention. Supporting argument: Theorem 3.31, printed pp.73--74, nilpotent-augmentation case: the explicitly asserted isomorphism A^(J) to B. The printed proof of injectivity has a gap: see report.md, Source error; this new node records the true statement only, not that argument. Repair input: faithful flatness from a supplied coideal retraction, replacing the invalid augmentation-ideal summand claim. Supporting construction for the coideal faithful-flatness repair: Bichon Proposition 2.7, implication (a) implies (b) and (c), specialized to commutative algebras.",
+   "via": [
+    "lem-sfb-split-coideal-faithfully-flat",
+    "lem-sfb-nilpotent-hopf-basis-lifting",
+    "lem-sfb-hopf-subalgebra-faithfully-flat",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-hopf-counit-criterion",
+  "worker": "stage1",
+  "summary": "Q111 read Bichon Propositions 2.2 and 2.7 and Lemma 2.6 online, checked all four cited node statements, and supplied six steps. The injectivity criterion follows from T mu = i with T injective. Surjectivity uses the explicit identity q delta = j p - id and DT = 0, avoiding an unjustified tensor-kernel exactness assertion. Existing input nodes suffice; no new nodes. Statement unchanged.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), supporting coideal faithful-flatness prerequisite along the chain in blueprint.from.place. This item realizes the Bichon counit argument in the parent split. The ancestor command returns None; retain the existing null from.node and full via chain. Whole-blueprint searches relative Hopf, Hopf module, coideal found no match.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-2dec3c17c",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-2dec3c17c (reviewer sub-agent of L); spot-checked: Shape: one commit holding the item, split in place, and its report; no new nodes. Statement, stmt_deps and source are identical to the live copy, where the node is still unsplit. There is no repair note, so the re-split rule does not apply. proof_deps equals the union of the step uses; no cycle (coinvariant-projection names this item only in its split_report); no SGA source; tool_uses empty (def-weil-pbc-module-tensor-product is a generic mathlib definition). I read the statements of relative-hopf-module-kernels, coideal-canonical-tensor-isomorphism, coideal-coinvariant-projection and def-weil-pbc-module-tensor-product. Step 1: alpha is injective by the counit identity, and alpha(hr) = sum pi(h1) tensor h2 r = kappa(h tensor r), so T mu = i. Step 2 follows because T is injective. Step 3: nu is A-linear because Delta(A) lies in A tensor H and pi(a1) = eps(a1) pi(1); alpha is H-linear by the compatibility axiom. Step 4: naturality of kappa plus kappa_Y(1 tensor nu) = (Delta_C tensor 1) kappa_X give DT = 0 by coassociativity of alpha; the same computation sits inside the proof of coinvariant-projection, but it is re-derived here, not cited, so C3 holds. Step 5: q = (E tensor 1) kappa^-1 is A-linear for the diagonal structure; q alpha = j p is the definition of p_X; q nu = 1 since E(1) = 1; so q delta = jp - 1 and z = i((1 tensor p)z). This avoids the exactness claim that Bichon's printed proof of Prop 2.7 asserts without argument. Step 6: apply eps_C tensor 1 to get mu(w) = x, then write w as a finite sum of pure tensors. Edge cases checked: X = 0, A = H, A = k, and H = k[t^{+-1}] with A = k[t^{+-n}]. Hypotheses match the parent split-coideal-faithfully-flat step 3. Duplicate search over dag/nodes found nothing. The Bichon PDF is not available locally (marked WANTED; the worker read the HTML online); the proof is agent-written and verified line by line."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeHopfCounitCriterion",
+  "declaration": "RelativeHopf.relativeHopfCounitCriterion",
+  "declarations": [
+   "RelativeHopf.CounitCriterionConclusions",
+   "RelativeHopf.relativeHopfCounitCriterion"
+  ],
+  "file": "lean/Sheaf/RingTheory/RelativeHopfCounitCriterion.lean",
+  "statement": "theorem relativeHopfCounitCriterion (hA : IsRightCoideal k H A) (S : H →ₐ[k] H) (hSleft : LinearMap.mul' k H ∘ₗ S.toLinearMap.rTensor H ∘ₗ Coalgebra.comul = Algebra.linearMap k H ∘ₗ Coalgebra.counit) (hSright : LinearMap.mul' k H ∘ₗ S.toLinearMap.lTensor H ∘ₗ Coalgebra.comul = Algebra.linearMap k H ∘ₗ Coalgebra.counit) : ∃ hJ : ((augmentationIdeal k H A).restrictScalars k).IsCoideal, CounitCriterionConclusions.{u, v, w} k H A (hJ := hJ)",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded relative Hopf-module data and canonical quotient coalgebra. The A-action on X is Mathlib’s canonical Subalgebra.moduleLeft restriction of its H-action. The existential coideal proof supplies the canonical coalgebra, without assuming flatness or a retraction in the injectivity clause. The retraction premise is internal to the surjectivity clause. All coinvariant submodule data are fixed by equality with the recorded coinvariant set; the multiplication map mu_X is Mathlib's LinearMap.liftBaseChange of R.subtype (h tensor r to h r); the delivered private copy counitMultiplication was removed by the maintainer review (H4).",
+  "fixed_by": "NT-stage2-cc-10ef5ca6b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10ef5ca6b",
+  "group": "Q127",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node and the recorded dependency Lean (RelativeHopfModuleData, RelativeHopfModuleKernels). Field, Hopf encoding (Bialgebra + S with antipode identities, as in the dependency), right coideal A, canonical quotient coalgebra via the Prop-valued ∃ hJ, Coaction, R(X) pinned by carrier equality, and clause (1) as an iff with no E or flatness are all correct. Clause (2) assumes only an A-linear retraction and gives surjectivity plus the Fin-n finite sum. Edge cases X=0, A=H, A=k, any characteristic and independent universes are fine. Node diff vs live is only the lean field; lean.statement is verbatim. F1 (H4): helper counitMultiplication rebuilds Mathlib LinearMap.liftBaseChange (h⊗r ↦ h•r, rfl). FIX: fixes/RelativeHopfCounitCriterion.lean drops the helper and uses R.subtype.liftBaseChange H, theorem statement unchanged; fixes/lem-sfb-relative-hopf-counit-criterion.lean-record.json lists the two remaining declarations and an updated note (refit_record: no notes, no refusals). nt_compile --json clean in 1.3 s."
+ }
+}

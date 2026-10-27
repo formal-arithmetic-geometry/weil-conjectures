@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-projection-unit-integration",
+ "kind": "statement",
+ "title": "Coordinate projection orientation equals the coefficient-unit integration mate",
+ "statement": "For a finite purity setting P, a separated finite-type k-scheme Y and d >= 0, let z be the exact comparison image of diagonalAffineMate for the normalized projective-line transport at P.diagonalExponent, followed by diagonalDualizingComparison inverse. Identify the two recursive tower/projection pairs by their coordinate recursion. Then the inverse of the specified diagonalDualizingObject on p_d is z. This is only a coefficient-unit orientation equation; no arbitrary coefficient K and no ordered purity comparison occurs. The HEq specification of z uniquely fixes its arrow. This specializes the normalization of [thm-pur-diagonal-dualizing-object], with the coordinates of [def-pur-projection-purity-coordinates].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Model diagonal/DNC integration normalization and final canonical reassociations."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-projection-purity-coordinates",
+  "thm-pur-diagonal-dualizing-object"
+ ],
+ "proof": [
+  {
+   "text": "Identify the dependent recursive tower/projection pairs by induction. In the unique ordinary representative of the diagonal orientation, specialize its coordinate normalization to the identity chart, with the actual projective-line trace transport and datum. The two Tate pullback constraints cancel; cancel the common exceptional etale-locality comparison and use the identity pullback isomorphism to get e.inverse = diagonalAffineMate. The comparison-unit characterization of the orientation gives its inverse after exact site comparison. Rank zero and the empty scheme obey the same unit equations.",
+   "uses": [
+    "thm-pur-diagonal-dualizing-object"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pur-diagonal-dualizing-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Model diagonal/DNC integration normalization and final canonical reassociations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor compatibility of exceptional integration transposes with the dualizing object",
+   "results": "8 hits, contraction and module-dual identities and tensorRightHomEquiv_tensor; no scheme exceptional functor normalization.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The smooth purity isomorphism for an affine space projection equals the iterated affine line integration transpose",
+   "results": "8 affine coordinate scheme formulas; no exceptional integration transpose. Loogle purity returned compiler IR declarations only.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|diagonalAffineMate|tensorTraceIntegrated; blueprint_refs search projection purity and tensor trace transpose",
+   "results": "Mathlib has no geometric purity comparison. Library has the generic tensor-trace identity and the normalized diagonal orientation, but not the present coordinate compatibility. Existing vector unit transpose statements import the item and cannot be its prerequisites.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionPurityAgreement",
+  "date": "2026-10-26",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Model diagonal/DNC integration normalization and final canonical reassociations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionUnitIntegration",
+  "file": "lean/Sheaf/Paper/ProjectionUnitIntegration.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.projection_diagonal_unit_integration",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.projectionUnitIntegrationRaw",
+   "WeilConjectures.PurityFiniteSetting.projectionUnitIntegration_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.projectionUnitIntegration",
+   "WeilConjectures.PurityFiniteSetting.projection_diagonal_unit_integration"
+  ],
+  "statement": "theorem projection_diagonal_unit_integration (P : PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (d : ℕ) :\n    letI := (projection_geometry Y d).1\n    letI := projection_smooth Y d\n    (P.diagonalDualizingObject d (iteratedAffineLineProj Y d) aY).inv =\n      projectionUnitIntegration P Y aY d",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0cb7",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261026T003152-L-150778",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d0cb7",
+  "group": "X3",
+  "result": "fix",
+  "landing": "20261026T003152-L-150778",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new sorried lemmas in ProjectionTensorIntegration against node lem-pur-projection-purity-agreement, smoothPurityMap/existsUnique_smoothPurityTensorMap and ordered_integration_transposes; 7 direct importers compiled"
+ }
+}

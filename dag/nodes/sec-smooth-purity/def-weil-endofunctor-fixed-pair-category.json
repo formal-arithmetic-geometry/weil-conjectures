@@ -48,7 +48,18 @@
   "item": "def-weil-weil-sheaf-complex",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": null,
  "reviewed": {
@@ -56,5 +67,27 @@
   "by": "L",
   "result": "pass",
   "note": "Mathlib leaf created by the split of def-weil-weil-sheaf-complex; the match was verified by the lead against the Mathlib source at that item's review"
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra",
+   "CategoryTheory.Endofunctor.IsoAlgebra.forget"
+  ],
+  "statement": "def IsoAlgebra (F : C ⥤ C) : Type max u v",
+  "branch": "slopmaster2",
+  "by": "Q26",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "The recorded Mathlib declaration Algebra F by itself permits noninvertible structure maps; its how field requests the full subcategory where the structure is invertible. The existing upstream IsoAlgebra F is exactly that full subcategory, with its canonical faithful forgetful functor. Bind this named specialization instead of creating a second definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19ddf52ff",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Item module byte-identical to 95ce8e89 (returned only for the H13 dep rebind, since fixed centrally by L commit e9483fc). Reread every clause against the node: Grothendieck W, exact conservative forget preserving Type-w coproducts, free = ∐ P^n M with successor structure, exact left adjoint; derived adjunction = landed mapExactDerivedCategory; θ pinned to Free.hom M 𝟙 n (negative n included); d unique and pinned on every summand (θ_n≫θ_{n-1}⁻¹ = P^{n-1}(φ), intertwining rechecked by hand); counit = θ_n per summand; short exact as complexes; dD/δ conjugated via the explicit comparison to Q.map d, the localized counit and triangleOfSESδ; triangle distinguished for all K; localizing-closure consequence with Type-w coproducts. Statement verbatim; 4 sorry theorems; no hollow defs; docstrings OK; IsoAlgebra existing:true binding correct (live lean null, no other owner). Maintainer note: delivery base 49fd0cb predates e9483fc, so its existing:true copy of def-weil-exact-derived-adjunction is stale; the merge guard fires and nt_parallel2 REVERT DEPENDENCY keeps L's record (pass --revert-nodes def-weil-exact-derived-adjunction if landing manually). The item uses only mapExactDerivedCategory, owned by L's record.; reverted the delivery's change of existing node(s) def-weil-exact-derived-adjunction (--revert-nodes; kept as on sheaf-dag)"
  }
 }

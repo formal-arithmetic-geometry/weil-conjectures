@@ -1,0 +1,154 @@
+{
+ "id": "lem-wf-normalized-koszul-fiber-unit-transport",
+ "kind": "statement",
+ "title": "A normalized coefficient comparison preserves the augmented Koszul fiber",
+ "statement": "For X,d,e as in def-wf-tensor-unit-square-data, p in A, and any natural isomorphism k of completed constants with their e-pullback satisfying NormalizedConstants, take arbitrary complexes U,V. There exist product and fiber isomorphisms delta,b satisfying NormalizedFiber for the prescribed beta(k), and H(unit(Tot(U tensor V))) followed by b equals alpha followed by unit(Tot(HU tensor HV)), as an equality of actual chain maps. Neither flatness nor passage to the derived category is part of this statement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+ },
+ "stmt_deps": [
+  "def-wf-tensor-unit-square-data"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of k identifies the Koszul transitions and its generator normalization fixes the degree-zero inclusion.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  },
+  {
+   "text": "The pure-tensor pullback formula and tensor-unitor equation identify the level units on each totalization inclusion.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pd-sheaf-scalar-extension-constraint-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  },
+  {
+   "text": "Automorphism pullback preserves the countable products. Construct delta from the canonical product comparison and beta; use projections to prove its one-minus-shift square and its augmentation equation.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  },
+  {
+   "text": "Apply the functorial shifted-cone comparison to the commuting differential square. It uses delta on both coordinates, carries the actual (u,0) unit to the target unit, and gives both NormalizedFiber coordinate equations.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pd-sheaf-scalar-extension-constraint-coherence",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-completed-koszul-product-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Penultimate sentence; original steps 1--4 of lem-wf-tensor-pullback-completion-unit-square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "unique generator normalized inverse image of constant modules extended to a completed coefficient ring sheaf",
+   "results": "ModuleCat.Tilde.const; SheafOfModules.Presentation.map_generators_I; no completed constant-module comparison",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq; unit_leftAdjointUniq_hom_app; these supply categorical uniqueness, not the coefficient normalization or strict Koszul unit",
+   "date": "2026-10-26",
+   "verdict": "useful construction API, no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*lift|tensorPullbackTotal",
+   "results": "Factorizations.CM5a mappingCocone.lift and lift_fst; no normalized augmented Koszul transport",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant module pullback tensor product natural isomorphism mapping cone unit",
+   "results": "8 hits, including SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal and generic categorical pullback cones; no completed-constant normalization or augmented Koszul fiber unit transport.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic pullback unit API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WfTensorPullbackCompletionUnitSquare",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-tensor-pullback-completion-unit-square",
+   "place": "Source argument separated into its coefficient-normalization and augmented-tower steps"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WfNormalizedKoszulFiberUnitTransport",
+  "file": "lean/Sheaf/Paper/WfNormalizedKoszulFiberUnitTransport.lean",
+  "declaration": "WeilConjectures.WfTensorUnitSquare.normalizedKoszulFiber_unit_transport",
+  "declarations": [
+   "WeilConjectures.WfTensorUnitSquare.normalizedKoszulFiber_unit_transport"
+  ],
+  "statement": "theorem normalizedKoszulFiber_unit_transport (p : A)\n    (k : constants X d ⋙ transport X d e ≅ constants X d)\n    (hk : NormalizedConstants X d e k)\n    (U V : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) :\n    ∃ (delta : (complexes X d e).obj (product X d p (tensor X d U V)) ≅\n        product X d p (tensor X d ((complexes X d e).obj U)\n          ((complexes X d e).obj V)))\n      (b : (complexes X d e).obj (fiber X d p (tensor X d U V)) ≅\n        fiber X d p (tensor X d ((complexes X d e).obj U)\n          ((complexes X d e).obj V))),\n      NormalizedFiber X d e p k U V delta b ∧\n      (complexes X d e).map (unit X d p (tensor X d U V)) ≫ b.hom =\n        (alpha X d e U V).hom ≫ unit X d p\n          (tensor X d ((complexes X d e).obj U) ((complexes X d e).obj V))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2fc77",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T202826-L-2756421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2fc77",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T202826-L-2756421",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item/normalization/transport modules vs clone a0aa732 item module (verbatim relocation; tensor/alpha abbrev→def, beta let-form) and item node vs clone node; sorry statement vs IntrinsicCompletionCompleted Koszul defs and ProEtaleCanonicalTensorPullback pure-tensor characterization"
+ }
+}

@@ -1,0 +1,244 @@
+{
+ "id": "lem-trf-etale-open-chart-morphism-descent",
+ "kind": "statement",
+ "title": "Descent of invariant opens together with compatible morphisms along an etale atlas",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X,Z$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $p:h_V\\to X$ be a representable surjective etale morphism from an $S$-scheme $V$. Let $R=V\\times_XV$ be the scheme representing the sheaf fibre product, with projections $s,t:R\\to V$ [def-trf-algebraic-space, def-pc-fibre-product]. Suppose $O\\subseteq V$ is an open subscheme such that $s^{-1}(O)=t^{-1}(O)=R_O$, and suppose $q:h_O\\to Z$ satisfies $q\\circ h_{s|_{R_O}}=q\\circ h_{t|_{R_O}}$. There is a unique open subspace $U\\subseteq X$ [def-a1-space-open-subspace] with $h_V\\times_XU=h_O$, and a unique morphism $r:U\\to Z$ with $r\\circ p|_O=q$. For every $S$-scheme $B$ and $a:h_B\\to X$, the fibre product $h_B\\times_XU$ is represented by the unique open subscheme $B_O\\subseteq B$ whose inverse image under the surjective etale scheme morphism $B\\times_XV\\to B$ is the inverse image of $O$ under $B\\times_XV\\to V$. If $a$ factors through $U$, the pullback of $r\\circ a$ to this cover equals the pullback of $q$. These descriptions commute with maps of scheme tests and characterize $r$ as a natural transformation. Pullback along $p|_O:h_O\\to U$ detects equality of morphisms $U\\to Z$. In particular, if $X,Z$ are over an $S$-scheme $T$ and $q$ is over $T$, then $r$ is over $T$. No quasi-compactness, separatedness, or affineness of $R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WU (lemma-finding-opens), invariant open quotient and scheme-test description; Properties of Spaces, spaces-properties.tex, Tag 03BZ (lemma-open-subspaces), invariant opens in an etale presentation. Morphism descent is the sheaf-condition argument used in Divisors on Spaces, Tag 0D2Z (lemma-invertible-map-into-relative-proj)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-open-subspace",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For every representing pullback of p along a scheme test, transport the etale and surjective projections provided separately by IsEtale and IsSurjective along the canonical Yoneda isomorphism between the representing schemes. The projection is therefore a single fppf cover. Its generated singleton sieve lies in the over topology. The pullback square then shows that p is locally surjective.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let i=h_O to h_V, f=i followed by p, A=range(f), and G=A.sheafify for the fppf topology. Use Mathlib Subfunctor.sheafify_isSheaf for the sheaf condition. First prove A.preimage(p)=range(i): a pair of sections with the same p-image lifts to R by its pullback universal property; invariance of O forces both projections into O, and the open immersion lifting property supplies the required factorization. Sheafification of subfunctors commutes with preimage, directly by naturality and equality of the membership sieves. Since i is monic and h_O is a sheaf by subcanonicity, its range is already a sheaf. Thus G.preimage(p)=range(i). The canonical factor pO:h_O to G gives a pullback square, proved from this equality.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fppf-site",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply fppf_local_open_subfunctor_descent to X, the explicit sheaf G, its sectionwise injective inclusion, locally surjective p, and the pullback isomorphism just constructed. Its representing open W(B,a) and isomorphism e(B,a) give G.preimage(a)=range(h_inclusion_W) and representability of G into X by open immersions. Thus U=(G,representability) is an OpenSubspace.",
+   "uses": [
+    "lem-trf-fppf-local-open-subfunctor-descent",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness of U, prove that a representable subfunctor of a sheaf is a sheaf. On a test section its representing monomorphism of schemes has local sections on the membership sieve. Subcanonicity glues those sections; monicity proves compatibility and identifies the glued composite with the identity. Therefore the original section belongs to the subfunctor. Locally surjective p detects equality of sheaf subfunctors: pull back a section to the image sieve of p, use equality of the preimages, and glue membership in the second subsheaf. This applies to every competing open subspace.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The compatibility of q on R implies it is constant on every sectionwise fibre of f, by the pullback universal property for R. Define a natural map d:range(f) to Z by choosing a preimage of each element; fibrewise compatibility proves independence and naturality. Mathlib Subfunctor.sheafifyLift extends d to r:G to Z and to_sheafifyLift gives pO followed by r=q. The range factor is sectionwise surjective; cancel it and apply to_sheafify_lift_unique to prove detection of equality for maps to every sheaf, hence uniqueness of r.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a chosen test pullback E, pull G.preimage(a)=h_W back along e. The pullback commutativity and G.preimage(p)=h_O identify its range with h_(v inverse O); open factorization proves the elementary preimage formula for ranges of open inclusions, and equality of these ranges implies equality of their opens. Surjectivity of e makes inverse image injective, giving uniqueness of W. The same preimage formula proves compatibility under every base change. For a test factoring through U, its v-section lies in G.preimage(p)=h_O; choose its open factor w and cancel the monic G-inclusion to identify the two maps into G. Composing with r gives the coverwise formula.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the detection argument to any algebraic-space target Z prime. For the relative-base conclusion use the representable sheaf h_T, a sheaf by subcanonicity, and compare r followed by z with the inclusion followed by x after pO. The assumed equality for q identifies them.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-trf-fppf-local-open-subfunctor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WU and spaces-properties.tex Tag 03BZ; morphism descent in spaces-divisors.tex Tag 0D2Z. Lean implementation uses Mathlib subfunctor sheafification and its lift/uniqueness API for the local-lift sheaf and gluing. All glue and scheme-test conclusions are proved in the item from the existing fppf-local-open-subfunctor-descent statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space with a surjective etale scheme atlas, an invariant open subscheme and a compatible morphism from it to another algebraic space descend uniquely",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.lift_uniq\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f]\\n  (H' :\\n    Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base) ⊆ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\\n  (l : Y ⟶ X), CategoryTheory.CategoryStruct.comp l f = g → l = Algebr\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes, and let $g: Z \\\\to Y$ be a morphism of schemes such that the range of its underlying continuous map is contained in the range of the underlying continu\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  (H' :\\n    Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base) ⊆ Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\\n  (l : Y ⟶ X),\\n  CategoryTheory.Categ\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of locally ringed spaces, and let $g: Z \\\\to Y$ be a morphism of locally ringed spaces. Suppose the image of the underlying continuous map of $g$ is contained in t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) {Y : AlgebraicGeometry.Scheme} (f₁ f₂ : X ⟶ Y),\\n  (∀ (x : 𝒰.I₀), CategoryTheory.CategoryStruct.comp (𝒰.f x) f₁ = CategoryTheory.CategoryStruct.comp (𝒰.f x) f₂) →\\n    f₁ = f₂\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$ and two morphisms $f_1, f_2: X \\\\to Y$ between schemes, if the compositions $\\\\mathcal{U}.f(x) \\\\circ f_1$ and $\\\\mathcal{U}.f(x) \\\\circ f_2$ are equal for\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.hom_ext_of_forall\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f g : X ⟶ Y),\\n  (∀ (x : ↥X), ∃ U, x ∈ U ∧ CategoryTheory.CategoryStruct.comp U.ι f = CategoryTheory.CategoryStruct.comp U.ι g) → f = g\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f, g: X \\\\to Y$ be two morphisms between them. If for every point $x \\\\in X$, there exists an open neighborhood $U$ of $x$ such that the restrictions of $f$ and $g$ \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|invariant.*[Oo]pen|[Oo]pen.*[Dd]escent",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"64\", \"text\": \"/-- Universally open satisfies fpqc descent. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"line\": \"131\", \"text\": \"/-- Being an open immersion satisfies fpqc descent. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"line\": \"13\", \"text\": \"We show the titular result `AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono` by fpqc descent.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend a saturated open subset and a morphism along an etale presentation of a sheaf with representable diagonal; characterize pullbacks on every test scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": HasPullback g f\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes and any morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.diagonalCover_map\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"(I) :\\n  (diagonalCover f 𝒰 𝒱).f I =\\n    pullback.map _ _ _ _ ((𝒱 I.fst).f _ ≫ pullback.fst _ _) ((𝒱 I.fst).f _ ≫ pullback.fst _ _) (𝒰.f _) (by simp)\\n      (by simp)\", \"doc\": \"Given schemes $X$ and $Y$, a morphism $f: X \\to Y$, an open cover $\\\\mathcal{U}$ of $Y$, and a compatible family of open covers $\\\\mathcal{V}$ of the pullback components, the morphism in the diagonal cov\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": HasPullback g f\", \"doc\": \"If $ f $ is an open immersion of presheafed spaces and $ g $ is a morphism with codomain matching that of $ f $, then the pullback of $ g $ along $ f $ exists in the category of presheafed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksPrecoverageOfHasPullbacks\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \"[P.HasPullbacks] : (precoverage P).HasPullbacks\", \"doc\": \"If a morphism property $ P $ on the category of schemes is closed under pullbacks (i.e., whenever two morphisms satisfy $ P $, their pullback exists and also satisfies $ P $), then the precoverage on \"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Constructors\", \"type\": \"(P) {Q} [HasAffineProperty P Q] {X Y U V : Scheme.{u}} {f : X ⟶ Y} {g : U ⟶ Y} [IsAffine U] [IsOpenImmersion g]\\n  {iV : V ⟶ X} {f' : V ⟶ U} (h : IsPullback iV f' f g) (H : P.diagonal f) : Q.diagonal f'\", \"doc\": \"Given a pullback square involving morphisms with affine targets, if the diagonal morphism of the original morphism satisfies property $P$, then the diagonal morphism of the pulled-back morphism satisf\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackFstOfRight\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": IsOpenImmersion (pullback.fst g f)\", \"doc\": \"If $ f $ is an open immersion of presheafed spaces and $ g $ is a morphism with codomain matching that of $ f $, then the pullback of $ g $ along $ f $ exists in the category of presheafed spaces.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|invariant.*[Oo]pen|[Oo]pen.*[Dd]escent",
+   "results": "Logged 3 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski gluing and do not give invariant-open and morphism descent for an algebraic-space etale atlas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Saturated open subfunctor and morphism descent along a surjective etale scheme presentation of an algebraic space",
+   "results": "Logged 8 hits: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.opensDiagram, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.instIsOpenImmersionF, AlgebraicGeometry.Scheme.restrictFunctor, AlgebraicGeometry.Scheme.Hom.opensFunctor.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski gluing and do not give invariant-open and morphism descent for an algebraic-space etale atlas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsOpenImmersion\"",
+   "results": "Logged 0 hits: .",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski gluing and do not give invariant-open and morphism descent for an algebraic-space etale atlas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invariant open in an etale atlas of an algebraic space and a compatible map into an fppf sheaf descend uniquely",
+   "results": "Logged 8 hits: AlgebraicGeometry.SheafedSpace.hom_stalk_ext, AlgebraicGeometry.Scheme.Etale, StandardEtalePresentation.mk.inj, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_uniq, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_uniq, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsOpenImmersion.lift_uniq.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski gluing and do not give invariant-open and morphism descent for an algebraic-space etale atlas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A saturated open subset of an etale presentation descends to an open algebraic subspace and compatible natural transformations glue by the sheaf equalizer",
+   "results": "Logged 8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map, AlgebraicGeometry.Scheme.LocalRepresentability.toGlued, AlgebraicGeometry.Scheme.LocalRepresentability.glueData, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U, AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes or Zariski gluing and do not give invariant-open and morphism descent for an algebraic-space etale atlas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-line-module-proj-map",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized-descent helper under lem-trf-local-term-locality: gluing of the open locus and the relative-Proj morphism; returned proof of lem-trf-space-line-module-proj-map, step 1 descent of invariant opens and all of step 2 descent on scheme tests and uniqueness.",
+   "via": [
+    "lem-trf-space-line-module-proj-map",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-etale-open-chart-morphism-descent",
+  "worker": "stage1",
+  "summary": "Construct the subfunctor of sections locally lifting to O, prove its atlas pullback is h_O using invariance, and invoke the existing fppf-local open-subfunctor descent lemma. Write out sectionwise descent of q, naturality, uniqueness, detection, and the relative-base condition. No new nodes or additional hypotheses; the statement is preserved verbatim.",
+  "blueprint": "Historical polarized-descent helper below lem-trf-local-term-locality through the existing full via chain: realizes descent of the invariant relative-Proj domain and chart morphism in lem-trf-space-line-module-proj-map. The current main-20261015 locality proof itself uses the contracting-correspondence route; this generic helper neither replaces that route nor asserts a new step in the current unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-3003f6103",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-3003f6103 (reviewer sub-agent of L); spot-checked: I read the 8-step zero-new-node split in full, and every step is mathematically correct. The statement and stmt_deps are byte-identical to the live unsplit node. The item, its citer lem-trf-space-line-module-proj-map and the cited lem-trf-fppf-local-open-subfunctor-descent are not on route-pivot-dropped.txt (live or side-live). There is no repair note or re-split note and no SGA citation. Step 1: the atlas pullback E_a=B×_X V→B is a single surjective etale cover, hence fppf, with no quasi-compactness needed. Step 2: the local-lift subfunctor G is a sheaf by covering composition and pullback plus the sheaf property of X. Step 3: h_V×_X G=h_O, because invariance s^{-1}O=t^{-1}O pushes the lifts through R into O and open immersions are monomorphisms. Step 4: every hypothesis of the cited lemma (F, G sheaves, α injective, local lifts, cartesian open h_W≅h_U×_F G) is checked, and its conclusions (unique W_{T,a}, cover independence, base change, open-immersion representability) give the B_O clause exactly. Step 5: uniqueness of U by two-sided inclusion of subfunctors through gluing in U'. Steps 6–7: r is glued on the single cover E_a, with the double overlap mapping to R_O; naturality comes from separatedness of Z, and r∘p|_O=q from the pair (v∘e_a,w_a). Step 8: detection via the injectivity half of the equalizer condition, with Z'=h_T for the relative clause. Stacks 03BZ (spaces-properties.tex:473) and 0D2Z (spaces-divisors.tex:2797) were checked in place; proof_origin=agent is honest. Edge cases O=∅, O=V, p=id and Z=∅ all behave as stated. Not a duplicate of lem-trf-etale-relation-finding-opens, lem-trf-invariant-open-image-pullback or lem-a1-etale-atlas-presentation. Advisory: lem-sfb-invariant-open-substack-descent (Q04, unsplit) is the stack-level analogue of the open part only, with no morphism descent, so it overlaps but is not a duplicate. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenChartMorphismDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_open_chart_morphism_descent",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.openChartObject",
+   "AlgebraicGeometry.AlgebraicSpace.openChartInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.etale_open_chart_morphism_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenChartMorphismDescent.lean",
+  "statement": "theorem etale_open_chart_morphism_descent {S : Scheme.{u}} (X Z : AlgebraicSpace S) (V : Over S) (p : yoneda.obj V ⟶ X.obj.obj) (hp : IsEtale p) (hsur : IsSurjective p) (R : Over S) (s t : R ⟶ V) (hR : IsPullback (yoneda.map s) (yoneda.map t) p p) (O : V.left.Opens) (hinv : s.left ⁻¹ᵁ O = t.left ⁻¹ᵁ O) (q : yoneda.obj (openChartObject V O) ⟶ Z.obj.obj) (hq : ∀ (B : Over S) (a b : B ⟶ openChartObject V O) (c : B ⟶ R), c ≫ s = a ≫ openChartInclusion V O → c ≫ t = b ≫ openChartInclusion V O → yoneda.map a ≫ q = yoneda.map b ≫ q) : ∃ U : OpenSubspace X, U.val.preimage p = Subfunctor.range (yoneda.map (openChartInclusion V O)) ∧ (∀ U' : OpenSubspace X, U'.val.preimage p = Subfunctor.range (yoneda.map (openChartInclusion V O)) → U' = U) ∧ ∃ pO : yoneda.obj (openChartObject V O) ⟶ U.val.toFunctor, pO ≫ U.val.ι = yoneda.map (openChartInclusion V O) ≫ p ∧ ∃ r : U.val.toFunctor ⟶ Z.obj.obj, pO ≫ r = q ∧ (∀ r' : U.val.toFunctor ⟶ Z.obj.obj, pO ≫ r' = q → r' = r) ∧ (∀ (B : Over S) (a : yoneda.obj B ⟶ X.obj.obj) (E : Over S) (e : E ⟶ B) (v : E ⟶ V), IsPullback (yoneda.map v) (yoneda.map e) p a → ∃ W : B.left.Opens, e.left ⁻¹ᵁ W = v.left ⁻¹ᵁ O ∧ (∀ W' : B.left.Opens, e.left ⁻¹ᵁ W' = v.left ⁻¹ᵁ O → W' = W) ∧ U.val.preimage a = Subfunctor.range (yoneda.map (openChartInclusion B W))) ∧ (∀ (B C : Over S) (a : yoneda.obj B ⟶ X.obj.obj) (f : C ⟶ B) (W : B.left.Opens), U.val.preimage a = Subfunctor.range (yoneda.map (openChartInclusion B W)) → U.val.preimage (yoneda.map f ≫ a) = Subfunctor.range (yoneda.map (openChartInclusion C (f.left ⁻¹ᵁ W)))) ∧ (∀ (B : Over S) (b : yoneda.obj B ⟶ U.val.toFunctor) (E : Over S) (e : E ⟶ B) (v : E ⟶ V), IsPullback (yoneda.map v) (yoneda.map e) p (b ≫ U.val.ι) → ∃ w : E ⟶ openChartObject V O, w ≫ openChartInclusion V O = v ∧ yoneda.map e ≫ b ≫ r = yoneda.map w ≫ q) ∧ (∀ (Z' : AlgebraicSpace S) (r₁ r₂ : U.val.toFunctor ⟶ Z'.obj.obj), pO ≫ r₁ = pO ≫ r₂ → r₁ = r₂) ∧ (∀ (T : Over S) (x : X.obj.obj ⟶ yoneda.obj T) (z : Z.obj.obj ⟶ yoneda.obj T), q ≫ z = yoneda.map (openChartInclusion V O) ≫ p ≫ x → r ≫ z = U.val.ι ≫ x)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc65b5ff5",
+  "group": "NH",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: atlas p with IsEtale/IsSurjective from the recorded framework; R given by IsPullback of representables (any representing R); invariance s⁻¹O=t⁻¹O; hq quantified over tests is equivalent to equality after s|R_O, t|R_O; unique OpenSubspace U with preimage p = range h(incl O); pO and unique r with pO≫r=q; scheme-test B_O clause for every representing square, with W unique (e surjective) and preimage = range; compatibility along f:C→B with f⁻¹W; factored-test coverwise description; detection for every algebraic space Z' (true: surjective étale = fppf cover); relative-over-T clause. No extra assumptions, single framework universe u, no unbound variables, statement verbatim, only sorry, docstrings with source/blueprint and 8-step proof. Node differs from live only by lean; not dropped, no repair note. Advisory: openChartObject/Inclusion duplicate Scheme.fppfPartitionOpen/Inclusion, which are owned by theorem node lem-trf-fppf-sheaf-coproduct-partition, so local helpers are correct; public Pullbacks/HasPullback imports are unused by the statement; SiteCoveringAxioms import is redundant. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261023T123935-L-1297848",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

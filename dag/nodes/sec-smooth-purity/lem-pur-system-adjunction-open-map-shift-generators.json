@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-system-adjunction-open-map-shift-generators",
+ "kind": "statement",
+ "title": "System adjunction/open-map shift generators",
+ "statement": "The component statement of the system adjunction/open-map shift theorem for generators.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "generator calculations in maps-used and coefficient-comparison sentences"
+ },
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-compactification-system-realization",
+  "def-pur-integral-operation-shift-data",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-system-primitive-comparison-shift",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply the corresponding shift compatibility, mate, whiskering and cancellation calculations from the listed dependencies on the simultaneous system site.",
+   "uses": [
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-sf-integral-compactification-system-realization",
+    "def-pur-integral-operation-shift-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-primitive-comparison-shift",
+  "lem-sf-integral-compactification-system-realization",
+  "def-pur-integral-operation-shift-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "generator calculations in maps-used and coefficient-comparison sentences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "system adjunction shift compatibility generators",
+   "result": "No existing declaration found."
+  },
+  {
+   "tool": "loogle",
+   "query": "SystemAdjunctionOpenShift generators",
+   "result": "No existing declaration found."
+  },
+  {
+   "tool": "grep",
+   "query": "systemAdjunctionOpenMapShift_generators",
+   "result": "Only this split declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SystemAdjunctionOpenMapShift",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-system-adjunction-open-map-shift",
+   "place": "generator calculations in maps-used and coefficient-comparison sentences",
+   "via": [
+    "lem-pur-system-adjunction-open-map-shift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SystemAdjunctionOpenMapShift",
+  "file": "lean/Sheaf/SixFunctors/SystemAdjunctionOpenMapShift.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.systemAdjunctionOpenMapShift_generators",
+  "statement": "theorem systemAdjunctionOpenMapShift_generators (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (o : Operations l E) (c : Compositors l E o) (a : OpenComparisons l E o c) : ∀ {A W : PrimitiveSystemScheme D} (e t : Expression.SlotContext (systemInterpretation l E o) A.obj W.obj) (τ : ∀ M : System l E A.obj.left, e.evaluate.obj M ⟶ t.evaluate.obj M), SystemAdjunctionOpenGenerator l E D o c a e t τ → ∀ (M : System l E A.obj.left), systemShiftContextDomain l E o e M → systemShiftContextDomain l E o t M → ∀ r : ℤ, τ (M⟦r⟧) ≫ (t.shift (systemShifts l E o) r M).hom = (e.shift (systemShifts l E o) r M).hom ≫ (τ M)⟦r⟧' ",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T012816-L-2333801",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T012816-L-2333801",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,344 @@
+{
+ "id": "lem-sf-native-adic-bounded-constructible-triangulated",
+ "kind": "statement",
+ "title": "Native adic bounded constructible complexes form a triangulated subcategory",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-algebraic-closure], with its extended absolute-value topology [def-weil-l-adic-coefficient-extension]. For every scheme $T$ [def-pc-scheme], on a small representative of $T_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], let $B_T(W)$ be the continuous functions $|W|\\to\\Omega$ whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-vector space, with restrictions by precomposition, and put $\\mathcal A(T)=\\operatorname{Mod}(B_T)$ [def-weil-sheaf-of-modules-category]. A module sheaf is constructible when Zariski locally it admits a finite partition into locally closed constructible subschemes [def-weil-locally-closed-subset, def-weil-constructible-subset] on each of which it is pro-etale locally $B^{\\oplus r}$, with $r$ finite and allowed to depend on the covering member. Write $D^b_c(\\mathcal A(T))$ for the full subcategory of the ordinary derived category [def-weil-abstract-derived-category] whose cohomology sheaves are constructible and vanish outside some finite integer interval. If $T$ is locally Noetherian [pqf-def-locnoeth], then $D^b_c(\\mathcal A(T))$ contains zero, is invariant under isomorphisms and all integer shifts, is closed under finite direct sums, and contains the third vertex of any distinguished triangle whenever it contains the other two vertices [def-weil-triangulated-category].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/LowerStar.lean",
+  "place": "Devissage, lines 108-115: the triangulated property of bounded constructible cohomology used by finiteLowerStar; coefficient-specific inputs are Abelian.lean, IsAdicConstructibleSheaf.kernel_cokernel (496-552), Extension.lean, IsAdicConstructibleSheaf.of_shortExact (319-340), and Constructible.lean, zero and finite products (325-341)."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset",
+  "pqf-def-locnoeth",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Work in the small site fixed in the statement. By [def-weil-sheaf-of-modules-category], $\\mathcal A(T)=\\operatorname{Mod}(B_T)$ is abelian; its kernels and cokernels are the ambient ones used below. Let $\\mathcal C(T)$ be the strictly full class of constructible module sheaves defined in the item. The zero sheaf is lisse of rank zero on the one-stratum partition $T$, locally at every point; on the empty scheme the condition is vacuous. Composing the given local trivializations with a sheaf isomorphism preserves all the witnesses, so this class contains zero and is invariant under isomorphisms.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Constructible.lean",
+    "place": "IsAdicConstructibleSheaf.of_iso and zero instance, lines 152-158 and 325-329"
+   }
+  },
+  {
+   "text": "For any two constructible sheaves $F,G$ and any $t\\in T$, intersect their open neighbourhoods admitting finite lisse partitions. By [lem-weil-pbc-affine-opens-basis] choose an affine open $V$ containing $t$ inside this intersection. The scheme $T$ is locally Noetherian, so [pqf-lem-affine-open-locnoeth] makes the coordinate ring of $V$ Noetherian; [lem-sc-affine-noetherian-underlying-space] then makes $|V|$ Noetherian. Each locally closed subspace of $V$ is Noetherian: represent an increasing chain of its opens by ambient opens and take their successive finite unions; the resulting increasing ambient chain stabilizes. Thus every stratum below has Noetherian underlying space. This is a local argument and imposes no quasi-compactness assumption on $T$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-sc-affine-noetherian-underlying-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "IsAdicConstructibleSheaf.kernel_cokernel, affine neighbourhood, lines 502-514"
+   }
+  },
+  {
+   "text": "Restrict the two partitions to $V$ by fibre products. For a stratum $\\iota:Z\\to U$ of either original partition, factor $\\iota$ as a closed immersion $Z\\to W$ followed by an open immersion $W\\to U$ [def-weil-closed-immersion]; then $Z\\times_UV\\to W\\cap V$ is a closed immersion by [lem-weil-pbc-closed-immersion-base-change] (base change along the open immersion $W\\cap V\\to W$) and $W\\cap V\\to V$ is an open immersion [def-weil-open-immersion], so $Z\\times_UV\\to V$ is an immersion with image $\\iota(Z)\\cap V$. Thus they remain finite partitions by locally closed subschemes; by [def-weil-constructible-subset] their images are constructible, since $V$ is Noetherian. Apply [lem-weil-pbc-constructible-stratification-intersection] to these partitions. It gives an actual common partition $i_a:S_a\\to V$ formed by fibre products, whose images are their intersections. By [lem-sf-native-adic-pullback-exact-lisse], restrictions of the two original lisse sheaves along the projections are lisse; its composition comparisons identify these with $i_a^*(F|_V)$ and $i_a^*(G|_V)$. The same node gives exactness of all these restriction functors, including restriction to $V$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-open-immersion",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-sf-native-adic-pullback-exact-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "Constructible section, common stratifications, lines 442-490"
+   }
+  },
+  {
+   "text": "We will compose finite stratifications of the $S_a$ with $S_a\\to V$. Here is the needed immersion argument, rather than an implicit identification of subset inclusions with scheme maps. Write an immersion $Y\\to V$ as a closed immersion $Y\\to U$ followed by an open immersion $U\\to V$, using [def-weil-closed-immersion]. For an immersion $Z\\to Y$, choose an open $W\\subset Y$ into which $Z$ is closed. Because $Y\\to U$ induces the subspace topology, there is an open $U'\\subset U$ with $W=Y\\times_U U'$. By [lem-weil-pbc-closed-immersion-base-change] the map $W\\to U'$ is closed, and by [lem-weil-pbc-closed-immersion-comp] so is $Z\\to U'$. Since $U'\\to V$ is open by [def-weil-open-immersion], the composite $Z\\to V$ is an immersion. Its image is locally closed, hence constructible in the Noetherian $V$ by [def-weil-constructible-subset]. Disjoint finite partitions composed in this way are still disjoint finite partitions: each point lies in one outer stratum and exactly one of its inner strata.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "def-weil-open-immersion",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 02V0, lemma-composition-immersion, final paragraph; explicit closed/open factorization"
+   }
+  },
+  {
+   "text": "Let $u:F\\to G$ be any morphism between constructible sheaves. On every $S_a$ of Step 3 apply [lem-sf-native-adic-lisse-kernel-strata] to the morphism $i_a^*(u|_V)$ between lisse sheaves. Its hypotheses hold because Step 2 gives Noetherian topology on $S_a$; no irreducibility or constant-rank hypothesis is needed. It provides finite lisse partitions for the kernel and for the cokernel separately. Exactness in [lem-sf-native-adic-pullback-exact-lisse] identifies these objects with restrictions of $\\ker u$ and $\\operatorname{coker}u$. The finite composite partitions are valid by Step 4. They witness constructibility of each sheaf near $t$. Since $t$ was arbitrary, both ambient kernel and cokernel belong to $\\mathcal C(T)$. We have not asserted closure under arbitrary subobjects.",
+   "uses": [
+    "lem-sf-native-adic-lisse-kernel-strata",
+    "lem-sf-native-adic-pullback-exact-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "IsAdicConstructibleSheaf.kernel_cokernel, lines 496-552"
+   }
+  },
+  {
+   "text": "Let $0\\to F\\to E\\to G\\to0$ be a short exact sequence in $\\mathcal A(T)$ with $F,G$ constructible. For each $t$, use the common finite partition of $V$ from Steps 2-3 for the end terms. By [lem-sf-native-adic-pullback-exact-lisse] the sequence restricted to each $S_a$ is short exact, and its two end terms are lisse. Apply [lem-sf-native-adic-lisse-extension] on $S_a$ to obtain that its middle term is lisse. Thus the very same finite partition witnesses constructibility of $E$ near $t$. This proves extension closure of $\\mathcal C(T)$; no global splitting of the sequence is required.",
+   "uses": [
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "lem-sf-native-adic-lisse-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Extension.lean",
+    "place": "IsAdicStratifiedLisseSheaf.of_shortExact and IsAdicConstructibleSheaf.of_shortExact, lines 290-340"
+   }
+  },
+  {
+   "text": "Steps 1, 5 and 6 establish exactly the hypotheses on the strictly full class $\\mathcal B$ in [lem-sbc-cohomology-in-weak-serre-subcategory], with $\\mathcal A=\\mathcal A(T)$ and $\\mathcal B=\\mathcal C(T)$. Apply its bounded-intersection clause. By [def-weil-pbc-bounded-derived-subcategories], belonging to $D^b(\\mathcal A(T))$ means that only finitely many cohomology objects are nonzero, equivalently they vanish outside a finite integer interval (enlarge to $[0,0]$ when all are zero). Therefore its bounded intersection is precisely the full subcategory $D^b_c(\\mathcal A(T))$ in the statement. The cited theorem gives strict fullness, zero, all shifts and, in the sense of [def-weil-triangulated-subcategory], that the middle vertex of a distinguished triangle with outer vertices in the subcategory is isomorphic to an object of it, hence lies in it by strict fullness. Rotation, as specified in [def-weil-triangulated-category], gives all three choices of the missing vertex.",
+   "uses": [
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-weil-triangulated-category",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, including bounded versions; weak-Serre hypotheses Tag 0754 in homology.tex"
+   }
+  },
+  {
+   "text": "For completeness, finite direct sums follow inside the same ambient derived category. For $K,L$ in the subcategory, take the identity triangles $K\\xrightarrow{1}K\\to0\\to K[1]$ and $0\\to L\\xrightarrow{1}L\\to0$, the second obtained by inverse rotation of the identity triangle for $L$; these are distinguished by [def-weil-triangulated-category]. Their binary direct sum is distinguished by [lem-weil-finite-sums-distinguished-triangles]. After the canonical zero-summand identifications this is $K\\to K\\oplus L\\to L\\to K[1]$. The two-out-of-three property proved in Step 7 gives $K\\oplus L$ in the subcategory. Induction gives every nonempty finite direct sum, and Step 1 gives the empty sum.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-finite-sums-distinguished-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, additive subcategory clause, and split triangle from sums of identity triangles"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-affine-opens-basis",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sc-affine-noetherian-underlying-space",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "def-weil-open-immersion",
+  "lem-sf-native-adic-lisse-kernel-strata",
+  "lem-sf-native-adic-lisse-extension",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-triangulated-category",
+  "lem-weil-finite-sums-distinguished-triangles",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+  "place": "Native constructible closure via lines 496-552 and Extension.lean:290-340; derived assembly from Stacks 06UQ and 0754."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded complexes with constructible cohomology of locally finite continuous Qbar l module sheaves form a triangulated subcategory on a locally noetherian scheme",
+   "results": "[leanfinder] OK 8 hit(s); DerivedCategory.TStructure.t Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.IsGE Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.isGE_Q_obj_iff Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.exists_iso_Q_obj_of_isGE Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.IsLE Mathlib/Algebra/Homology/DerivedCategory/TStructure",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, ObjectProperty.IsTriangulated",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'ObjectProperty.IsTriangulated'; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "adicConstructible|IsAdicConstructible|homologyProperty.*IsTriangulated",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible locally finite continuous l-adic module sheaves bounded derived category closed under distinguished triangles",
+   "results": "[leansearch] OK 8 hit(s); DerivedCategory.instIsTriangulated Mathlib.Algebra.Homology.DerivedCategory.Basic; AlgebraicGeometry.Scheme.Modules.instAbelian Mathlib.AlgebraicGeometry.Modules.Sheaf; SheafOfModules.instAbelian Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian; DerivedCategory.TStructure.t Mathlib.Algebra.Homology.DerivedCategory.TStructure; CategoryTheory.sheafIsAbelian Mathlib.CategoryTheory.Sites.Abelian; CategoryTheory.Triangulated.Localization.pretriangulated Mathlib.CategoryTheory.Localization.Triangulated; SheafOfModules.Finite.hasFiniteLimits Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits; SheafOfModules.hasLimitsOfSize Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels cokernels and extensions of constructible Qbar ell sheaves imply triangulated closure of bounded constructible complexes",
+   "results": "[leanfinder] OK 8 hit(s); DerivedCategory.TStructure.t Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.instIsTriangulated Mathlib/Algebra/Homology/DerivedCategory/Basic; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE Mathlib/Algebra/Homology/DerivedCategory/TStructure; DerivedCategory.isGE_Q_obj_iff Mathlib/Algebra/Homology/DerivedCategory/TStructure; CategoryTheory.Functor.instIsTriangulatedHomologicalKernel Mathlib/CategoryTheory/Triangulated/HomologicalFunctor; DerivedCategory.IsGE Mathlib/Algebra/Homology/DerivedCategory/TStructure",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this assertion for the locally finite continuous coefficient sheaf on the small pro-etale site; generic triangulated or abelian-sheaf results require additional coefficient and localization arguments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes of sheaves of locally finite continuous l-adic functions form a triangulated subcategory",
+   "date": "2026-10-22",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.TStructure.t",
+     "CategoryTheory.Functor.instIsTriangulatedHomologicalKernel",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "CategoryTheory.Triangulated.TStructure.IsGE",
+     "CategoryTheory.Triangulated.TStructure.IsLE",
+     "DerivedCategory.instIsLEObjSingleFunctor",
+     "DerivedCategory.IsLE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure and homological kernel results do not establish the native constructible kernel, cokernel and extension hypotheses; condensed-module hits do not state those native assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyProperty|bounded.*IsTriangulated",
+   "date": "2026-10-22",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "Algebra/Homology/DerivedCategory"
+   },
+   "verdict": "no match: generic derived t-structure and homological kernel results do not establish the native constructible kernel, cokernel and extension hypotheses; condensed-module hits do not state those native assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible cohomology locally finite continuous l-adic sheaves triangulated subcategory",
+   "date": "2026-10-22",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "CondensedSet.LocallyConstant.functorFullyFaithful",
+     "HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic",
+     "instCategoryLightCondensed",
+     "LightCondensed",
+     "LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "CategoryTheory.Triangulated.TStructure.mk"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure and homological kernel results do not establish the native constructible kernel, cokernel and extension hypotheses; condensed-module hits do not state those native assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyProperty",
+   "date": "2026-10-22",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'DerivedCategory.homologyProperty'",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure and homological kernel results do not establish the native constructible kernel, cokernel and extension hypotheses; condensed-module hits do not state those native assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels cokernels extensions of constructible sheaves over locally finite continuous algebraic closure l-adic coefficients",
+   "date": "2026-10-22",
+   "results": {
+    "hits": 8,
+    "top": [
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "CompHausLike.LocallyConstantModule.functor",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "Condensed.lanSheafProfinite",
+     "LightCondAb.ofSheafLightProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "CondensedMod.ofSheafCompHaus",
+     "LightCondMod.ofSheafLightProfinite"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure and homological kernel results do not establish the native constructible kernel, cokernel and extension hypotheses; condensed-module hits do not state those native assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-affine-finiteness-descent",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package proof, clause 3: triangulated closure needed for the conditional native proper finiteness descent, before the forgetting-Frobenius argument; the created.item chain has no imported blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-affine-finiteness-descent",
+    "lem-sf-native-weil-proper-sheaf-finiteness",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-adic-bounded-constructible-triangulated",
+  "worker": "stage1",
+  "summary": "Preserved the statement; proved the native weak-Serre hypotheses locally via existing exact pullback, lisse rank-stratification and extension nodes, then applied the existing generic bounded weak-Serre theorem. Finite sums are proved from sums of identity triangles. No new nodes. The earlier rejected attachment is not re-proposed.",
+  "blueprint": "Realizes the triangulated-closure input to prop-functor-package proof clause 3 in the existing native proper-finiteness chain. The ancestor tool reports null for this chain; retained the inherited explicit from.place and via. No change of unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic bounded derived closure after explicitly verifying all weak-Serre hypotheses for native module sheaves; the native package unit does not replace this abstract homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-cohomology-in-weak-serre-subcategory"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-6367131a2",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-6367131a2 (reviewer sub-agent of L); spot-checked: I read all 8 steps of the item against the Lean source and each cited statement. The statement matches the Lean definitions word for word: LowerStar.lean:107-115 bounded ⊓ homologyProperty(adicConstructibleSheaf) IsTriangulated under IsLocallyNoetherian, and Constructible.lean:115-158 Zariski-local finite immersion partitions with lisse i^*F. The coefficient sheaf is the native B_T, not a substitute. The proof is correct. Step 2 shows Noetherian |V| via affine basis, affine-open-locnoeth and affine-noetherian-space; the subspace claim was checked. Step 3 builds the common stratification, Step 4 composes immersions (Stacks 02V0), Step 5 applies kernel-strata, whose only hypothesis is Noetherian topology, with exactness of pullback, and Step 6 applies lisse-extension. Step 7 applies the weak-Serre theorem (Stacks 06UQ/0754, hypotheses: kernels and cokernels of maps between members, plus extensions) with its D^b clause, and Step 8 handles finite sums. Edge cases checked: empty T, zero sheaves, u=0 and u an isomorphism, unbounded ranks, non-quasi-compact T. The item creates no new nodes and I found no duplicate: native-weil-constructible-abelian needs a finite field and Frobenius objects. No SGA source is cited. The route is fine: sk-thm-properbasechange is in the unit's uses, and the weak-Serre tool_use (sk-rem-rest) is accepted. Batch-5: both flagged citations reach lem-trf-geometric-inverse-image-exact, which only states that inverse image along a geometric morphism is exact. That is a general topos fact, not part of the trace formula or Poincaré duality, so I accepted both. Fixes: (C1) Step 3 claimed without a citation that restricting the strata to the open V gives immersions; it now cites def-weil-closed-immersion, lem-weil-pbc-closed-immersion-base-change and def-weil-open-immersion with the factorization written out. (C4) Step 7 read the weak-Serre conclusion without citing def-weil-triangulated-subcategory, which gives the third vertex only up to isomorphism; I added the citation and a sentence on strict fullness. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Adic.Localization",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructibleAdic",
+  "statement": "instance ProEtale.DerivedCategory.isTriangulated_boundedConstructibleAdic (X : Scheme.{u})\n    [IsLocallyNoetherian X] :\n    (ProEtale.DerivedCategory.boundedConstructibleAdic l X).IsTriangulated",
+  "branch": "slopmaster2",
+  "by": "Q74",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing native adic instance, Localization.lean:69-72, with universe u and section variables {l : ℕ} [Fact l.Prime]. boundedConstructibleAdic is exactly the bounded intersection with homologyProperty (adicConstructibleSheaf l X). Its existing isomorphism-closure instance and Mathlib triangulated-subcategory API give actual two-out-of-three and finite direct sums. No additional field, characteristic, finite-type or quasi-compactness hypothesis. The coefficient sheaf uses locally finite continuous PadicAlgCl-valued functions, not condensed or discrete coefficients."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b71d6d7a9",
+  "group": "Q74",
+  "result": "pass",
+  "note": "existing:true record AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructibleAdic (side Adic/Localization.lean:66-72, olean published). Statement verbatim, qualified name correct, only the lean field changed vs live. Objects match the node: l prime, PadicAlgCl l = AlgebraicClosure Q_l (uncompleted), B_T = locallyFiniteFunctions, AdicSheaf = Mod over adicConstantSheaf on the small pro-etale site, IsAdicConstructibleSheaf/StratifiedLisse/Lisse match (Zariski-local, finite immersion partition, per-member rank), boundedConstructibleAdic = t.bounded ⊓ homologyProperty. Sole hypothesis IsLocallyNoetherian X, X : Scheme.{u}. IsTriangulated gives zero, Z-shifts and closed2; iso-closure (homologyProperty and adicConstructibleSheaf instances), closed1/3 and finite products come from existing instances. Edge cases ok; no duplicate notion; item not closed by another group. Advisory: could list the generic instances in declarations."
+ }
+}

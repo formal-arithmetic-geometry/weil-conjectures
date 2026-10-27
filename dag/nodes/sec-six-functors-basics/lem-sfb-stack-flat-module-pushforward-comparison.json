@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-stack-flat-module-pushforward-comparison",
+ "kind": "statement",
+ "title": "Flat-test comparison and tensor pairing for quasi-coherent module pushforward",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal X,\\mathcal Y$ be algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack]. Use their big fppf sites and structure sheaves from [def-sfb-stack-quasi-coherent-algebra], module sheaves from [def-weil-sheaf-of-modules-category], and quasi-coherent modules meaning modules locally presented by small sums of the structure sheaf. Let $f:\\mathcal X\\to\\mathcal Y$ be quasi-compact and quasi-separated [def-sfb-stack-qcqs-morphism], and use the module right adjoint $R_f$ and comparison $i_{f,F}$ of [lem-sfb-stack-qcqs-module-adjunction]. A scheme test $t:T\\to\\mathcal Y$ is flat when its scheme charts are flat [def-weil-flat-morphism]. If $t$ is flat, the map $$i_{f,F}(t):(R_fF)(t)\\xrightarrow{\\sim}\\Gamma(\\mathcal X\\times_{\\mathcal Y}T,F|_{\\mathcal X\\times_{\\mathcal Y}T})$$ is an isomorphism for every quasi-coherent module $F$. These comparisons are natural in $F$ and in arrows between flat tests. Use sheaf tensor products [def-pur-sheaf-tensor-product]. For quasi-coherent modules $F,G$ the canonical pairing $R_fF\\otimes R_fG\\to R_f(F\\otimes G)$ is the transpose of $f^*(R_fF\\otimes R_fG)\\simeq f^*R_fF\\otimes f^*R_fG\\xrightarrow{\\epsilon_F\\otimes\\epsilon_G}F\\otimes G$, where $\\epsilon$ is the adjunction counit. Under $i_f$ this pairing is the ordinary section tensor pairing into $f_*(F\\otimes G)$. The transpose $\\mathcal O_{\\mathcal Y}\\to R_f\\mathcal O_{\\mathcal X}$ of $f^*\\mathcal O_{\\mathcal Y}\\simeq\\mathcal O_{\\mathcal X}$ likewise agrees with pullback of regular functions under $i_f$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tag 0GQQ, lemma-direct-image-quasi-coherent-over-flat, degree zero; Tag 0GQR, remark-direct-image-quasi-coherent-tensor, canonical square with the naive cup product. The unit is the adjoint of the structure-ring map."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-stack-qcqs-morphism",
+  "lem-sfb-stack-qcqs-module-adjunction",
+  "def-weil-flat-morphism",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=f_*F$. By [lem-sfb-stack-quasi-coherent-scheme-restriction], the quasi-coherent $F$ is locally quasi-coherent and has all scheme-arrow tensor comparisons invertible, hence has flat comparison maps. Apply [lem-sfb-stack-higher-images-flat-comparison] with $i=0$: $H$ belongs to $\\mathcal L_{\\mathcal Y}$ of [lem-sfb-stack-lqc-coherator], and $H(t)=\\Gamma(\\mathcal X\\times_{\\mathcal Y}T,F|_{\\mathcal X\\times_{\\mathcal Y}T})$. Thus the coherator $QH$ and its counit $q_H$ are available.",
+   "uses": [
+    "lem-sfb-stack-quasi-coherent-scheme-restriction",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-lqc-coherator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 077A, proposition-direct-image-quasi-coherent, proof; Tag 0GQQ, lemma-direct-image-quasi-coherent-over-flat, reduction to the coherator."
+   }
+  },
+  {
+   "text": "The adjunction and compatibility statement of [lem-sfb-stack-qcqs-module-adjunction] say that composition with $i=i_{f,F}$ gives bijections $\\operatorname{Hom}(G,R_fF)\\simeq\\operatorname{Hom}(G,H)$ for quasi-coherent $G$: compose its transpose bijection with the ordinary module-sheaf bijection of [lem-weil-pbc-ringed-topoi-module-adjunction]. That ordinary adjunction applies by [lem-sfb-fibred-fppf-ringed-inverse-image]. Composition with $q=q_H$ gives the same bijections for $QH$ by [lem-sfb-stack-lqc-coherator]. Let $a:R_fF\\to QH$ and $b:QH\\to R_fF$ be the unique maps with $qa=i$ and $ib=q$. Then $q(ab)=q$ and $i(ba)=i$; injectivity of the respective bijections gives $ab=1$ and $ba=1$. Hence $a$ is an isomorphism and $i=qa$. These identities also make $a$ natural in $F$, by the uniqueness in the same bijections.",
+   "uses": [
+    "lem-sfb-stack-qcqs-module-adjunction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sfb-fibred-fppf-ringed-inverse-image",
+    "lem-sfb-stack-lqc-coherator"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 077A, proposition-direct-image-quasi-coherent, displayed Hom bijections: elementary comparison of their representing objects."
+   }
+  },
+  {
+   "text": "For flat $t:T\\to\\mathcal Y$, apply [lem-sfb-stack-coherator-flat-test-restriction] to $H$ from step 1. Its $q_H(t)$ is invertible; so is $a(t)$ from step 2. Therefore $i_{f,F}(t)=q_H(t)a(t)$ is invertible and has the required target. Naturality in $F$ and in arrows of flat tests is the restriction of the natural module-sheaf map $i$ in [lem-sfb-stack-qcqs-module-adjunction]; no flatness of the arrow between the tests is required.",
+   "uses": [
+    "lem-sfb-stack-coherator-flat-test-restriction",
+    "lem-sfb-stack-qcqs-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0GQQ, lemma-direct-image-quasi-coherent-over-flat, degree zero, using the coherator restriction of Tag 0GQK."
+   }
+  },
+  {
+   "text": "The structure module and tensor products of quasi-coherent modules are quasi-coherent by [lem-sfb-stack-qcoh-flat-atlas-exactness]. Apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to the ringed-topos map of [lem-sfb-fibred-fppf-ringed-inverse-image], using the fixed small-site universes. It gives the natural isomorphism $\\phi:f^*(R_fF\\otimes R_fG)\\simeq f^*R_fF\\otimes f^*R_fG$. Under the adjunction of [lem-sfb-stack-qcqs-module-adjunction], define $\\mu$ to be the transpose of $(\\epsilon_F\\otimes\\epsilon_G)\\phi$. This defines the stated canonical pairing and is functorial because all its defining maps and the transpose bijections are natural.",
+   "uses": [
+    "lem-sfb-stack-qcoh-flat-atlas-exactness",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-sfb-fibred-fppf-ringed-inverse-image",
+    "lem-sfb-stack-qcqs-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0GQR, remark-direct-image-quasi-coherent-tensor, canonical pairing; sites-modules.tex Tag 03EL, lemma-tensor-product-pullback, for the tensor comparison."
+   }
+  },
+  {
+   "text": "Write $c:f_*F\\otimes f_*G\\to f_*(F\\otimes G)$ for the sheaf map induced by the bilinear section map $(s,t)\\mapsto s\\otimes t$ on each fibre product. The tensor definition [def-pur-sheaf-tensor-product] extends this map from presheaf tensors by sheafification. By [lem-sfb-stack-qcqs-module-adjunction], $i_{f,F\\otimes G}\\mu$ is the ordinary adjunct of $(\\epsilon_F\\otimes\\epsilon_G)\\phi$, and $i_{f,F}$ is the ordinary adjunct of $\\epsilon_F$ (take $h=1$), likewise for $G$. At an object $x$ of $\\mathcal X$, the adjunct counit evaluates a section on the fibre product at its tautological object $x$. Consequently both the transpose of $c(i_{f,F}\\otimes i_{f,G})$ and $(\\epsilon_F\\otimes\\epsilon_G)\\phi$ send the pure tensor pulled back from $s,t$ to $\\epsilon_F(s)\\otimes\\epsilon_G(t)$. Pullback is precomposition with unchanged structure ring by [lem-sfb-fibred-fppf-ringed-inverse-image]; hence this is the defining pure-tensor comparison, and the maps agree on presheaf tensors, thus on their sheafifications. Injectivity of the ordinary adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] gives $i_{f,F\\otimes G}\\mu=c(i_{f,F}\\otimes i_{f,G})$. This comparison holds on all tests, without asserting $i$ invertible there.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-stack-qcqs-module-adjunction",
+    "lem-sfb-fibred-fppf-ringed-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0GQR, remark-direct-image-quasi-coherent-tensor, commutative square: elementary verification on bilinear sections of the adjoint-defined pairing."
+   }
+  },
+  {
+   "text": "Let $\\nu:\\mathcal O_{\\mathcal Y}\\to R_f\\mathcal O_{\\mathcal X}$ be the transpose of $f^*\\mathcal O_{\\mathcal Y}\\simeq\\mathcal O_{\\mathcal X}$, the structure-module identification of [lem-sfb-fibred-fppf-ringed-inverse-image]. By [lem-sfb-stack-qcqs-module-adjunction], $i_{f,\\mathcal O}\\nu$ is its ordinary module adjunct. For $t:T\\to\\mathcal Y$ this sends $r\\in\\Gamma(T,\\mathcal O_T)$ to the compatible family of its pullbacks on objects of $\\mathcal X\\times_{\\mathcal Y}T$: evaluation at each such object is the structure-ring map. This is exactly pullback of regular functions under the structure sheaf and global-section conventions of [def-sfb-stack-quasi-coherent-algebra].",
+   "uses": [
+    "lem-sfb-fibred-fppf-ringed-inverse-image",
+    "lem-sfb-stack-qcqs-module-adjunction",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0GQR, remark-direct-image-quasi-coherent-tensor, unit analogue; stacks-sheaves.tex Tag 06WE, equation-functoriality-sheaves-modules, structure-ring map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-quasi-coherent-scheme-restriction",
+  "lem-sfb-stack-higher-images-flat-comparison",
+  "lem-sfb-stack-lqc-coherator",
+  "lem-sfb-stack-qcqs-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sfb-fibred-fppf-ringed-inverse-image",
+  "lem-sfb-stack-coherator-flat-test-restriction",
+  "lem-sfb-stack-qcoh-flat-atlas-exactness",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-stack-quasi-coherent-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tags 0GQQ and 0GQR, with the adjunction characterization of Tag 077A and elementary bilinear-section verification of the pairing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent pushforward along qcqs morphism of algebraic stacks agrees with naive pushforward on flat scheme tests and tensor pairings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).r =\\n    (AlgebraicGeometry.Scheme.Modules.pushforward f.as.unop).toCatHom\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the right adjoint component of the pseudofunctor's action on $ f $ equals the pushforward functor $ f_* $ between the module categories of $ X $ and $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).hom.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      ((((AlgebraicGeometry.Scheme.Modules.pushforward f)\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.pushforwardCongr\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given continuous functors between sites with Grothendieck topologies and equal natural transformations $\\\\phi, \\\\psi : S \\\\to F_*R$ between sheaves of rings, this constructs a natural isomorphism between\"}\n  {\"name\": \"SheafOfModules.pushforward_obj_val\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betwee\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat chart comparison for quasi coherent direct image of modules on Artin stacks compatible with cup product",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.Flat f], AlgebraicGeometry.Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.\", \"doc\": \"Given a functor $ F $ between categories of sheaves of modules over ring sheaves $ R $ and $ S $, if $ F $ preserves colimits of discrete diagrams, then the composition of $ F $'s action on the inclus\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"baseChange\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|QCoh|quasicoherent.*(flat|baseChange)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent direct image on algebraic stacks flat test comparison with global sections tensor product",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; scheme module pushforwards and abstract sheaf-module predicates do not provide quasi-coherent pushforward or atlas descent on arbitrary algebraic stacks. The Loogle pushforward candidates require preservation of colimits on over-sites and a structure-sheaf isomorphism, hypotheses absent for a general qcqs stack map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-qcqs-algebra-direct-image",
+  "date": "2026-10-23",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: the adequate moduli space for the product, before the finiteness criterion; Q44 product-affinization proof: composition of the product projections and the structural map; affine Y to Spec k; Proposition 4.2.1(1): interpreting f_*A and f_*B as quasi-coherent algebras before applying Lemma 4.1.7 to g; Q125 split: flat-test module comparison and the tensor pairing underlying algebra multiplication",
+   "via": [
+    "lem-sfb-stack-qcqs-algebra-direct-image",
+    "lem-sfb-adequately-affine-composition",
+    "lem-sfb-adequate-product-affinization",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-flat-module-pushforward-comparison",
+  "worker": "stage1",
+  "summary": "Q140: reduced flat-test comparison to the general coherator flat-restriction lemma; identified the specified right adjoint by two universal bijections rather than borrowing a construction from a dependency proof; constructed the tensor pairing by transposition and verified both tensor and unit comparisons on sections. One new statement-only node. Statement unchanged.",
+  "blueprint": "Preserves the inherited alteration/moduli prerequisite route recorded in blueprint.from.place: Q125 module pushforward comparison before multiplication in the quasi-coherent algebra direct image. The current latest sk-thm-sf-ctf-stability section contains the high-level six-functor preservation assertion; this is a lower-level prerequisite, not a change of that unit. Ancestor tool returns null, retained as on the live item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ordinary module-sheaf adjunction compares the specified quasi-coherent adjunct with the coherator; no change of the geometric unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic underived ringed-topos tensor comparison constructs the stated transpose pairing; the unit contains no substitute for this tensor calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-5961ab561",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-5961ab561 (reviewer sub-agent of L); spot-checked: Read in full: the item and the new node lem-sfb-stack-coherator-flat-test-restriction, every cited statement, and the Stacks sources: stacks-cohomology 0778, 0779(2), definition-parasitic, 0GQK, 077A, 0GQQ, 0GQR, and sites-modules 03EL. The new node is 0GQK for H in L_Z. Stacks writes QCoh^fbc there; it means LQCoh^fbc. The node is true: the parasitic kernel and cokernel vanish on T_et because etale over a flat test is flat. Tested on H=0, on quasi-coherent H, on the identity test of a scheme, and on the non-flat origin test for A^2 minus 0, which is correctly excluded. It is statement-only, self-contained and not a duplicate: rg over coherator/parasitic/0GQK/0779/LQCoh finds only lqc-coherator, which has no flat-test invertibility. It does not restate a clause of the parent. Step 1: the scheme-restriction node plus higher-images at i=0 put f_*F in L_Y with the naive value formula. Step 2: a Yoneda argument from two statement-level bijections (the qcqs-adjunction 'i h = ordinary adjunct' clause plus the ordinary adjunction, and the coherator q-composition) gives R_fF iso Q(f_*F) with i=qa. It uses statements only, not the adjunction node's proof. Step 3: the new node plus a gives invertibility on flat tests, with naturality coming from i. Step 4: QCoh is closed under tensor (atlas-exactness) and the pullback-tensor iso applies on the small skeleton. Step 5: an elementary pure-tensor check with local generation and injectivity of the ordinary adjunction. Step 6: the unit is the structure-ring restriction. The statement is unchanged and the 0GQQ/0GQR coefficient category and comparison are respected. The tool_uses for the generic ringed-topoi adjunction and the tensor comparison are accepted. Batch-5: every flagged citation reaches the trf chapter only through general definitions (def-trf-algebraic-space, def-trf-space-quasi-coherent-module) or the general Zariski-etale quasi-coherent equivalence (03DX). None is a trace-formula or Poincare duality step. No SGA citation, no cycle, no fixes."
+ }
+}

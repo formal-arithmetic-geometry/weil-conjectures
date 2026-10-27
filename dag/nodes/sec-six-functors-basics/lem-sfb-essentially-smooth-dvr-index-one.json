@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-essentially-smooth-dvr-index-one",
+ "kind": "statement",
+ "title": "Essentially smooth local DVR extensions have ramification index one",
+ "statement": "Let $D$ be a discrete valuation ring [def-sc-discrete-valuation-ring], let $\\pi$ generate its maximal ideal, and put $S=\\operatorname{Spec}D$ and $k=D/(\\pi)$ [def-weil-affine-spectrum]. Let $X\\to S$ be smooth [def-pc-scheme, def-sbc-smooth-morphisms], and let $x$ lie over the closed point of $S$. Suppose $A=\\mathcal O_{X,x}$ is a discrete valuation ring and the induced map $D\\to A$ is local and injective. Here local means that the inverse image of the maximal ideal is the maximal ideal. Then $\\pi A=\\mathfrak m_A$, and the residue-field extension $\\kappa(x)/k$ [def-weil-residue-field] is separably generated: it admits a finite transcendence basis over which it is finite separable. In particular $\\kappa(x)\\otimes_k k'$ is reduced for every field extension $k'/k$. Equivalently, this is a ramification-one extension in the terminology that requires both a common uniformizer and a separable residue-field extension. No excellence, completeness, or perfection of $k$ is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.6 Definition 1 and the immediately following essentially-smooth characterization, printed p.78 (PDF p.84). Stacks algebra.tex Tags 00T4 (lemma-base-change-smooth), 00TT (lemma-characterize-smooth-over-field) for regular smooth fibres. Primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local BLR PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $s=(\\pi)$ and $Y=X_s$, and let $y$ be its point over $x$. The fibre-stalk quotient theorem gives $\\mathcal O_{Y,y}\\cong A/\\pi A$, compatibly with $k=D/(\\pi)$; here $D_{(\\pi)}=D$, since every element outside the maximal ideal of the local ring $D$ is already a unit. Smoothness gives geometrically reduced fibres: by definition $Y_\\Omega=Y\\times_k\\operatorname{Spec}\\Omega$ is reduced for every separably closed extension $\\Omega/k$. Claim (*): for every field extension $L/k$ and every affine open $\\operatorname{Spec}C'\\subseteq Y$, $C'\\otimes_kL$ is reduced. Let $\\Omega$ be an algebraic closure of $L$; it is algebraically closed, hence separably closed (a separable polynomial splits by extracting roots one at a time). $\\operatorname{Spec}(C'\\otimes_k\\Omega)=\\operatorname{Spec}C'\\times_k\\operatorname{Spec}\\Omega$ is the pullback of the open immersion $\\operatorname{Spec}C'\\hookrightarrow Y$ along $Y_\\Omega\\to Y$, so it is open in $Y_\\Omega$ and $C'\\otimes_k\\Omega$ is reduced by the section characterization. For a $k$-basis $(e_j)$ of $C'$, $C'\\otimes_kL=\\bigoplus_jLe_j\\subseteq\\bigoplus_j\\Omega e_j=C'\\otimes_k\\Omega$, so $C'\\otimes_kL$ is a subring of a reduced ring, hence reduced. Localization fact: a localization of a reduced ring is reduced, since $(a/s)^N=0$ gives some denominator $v$ with $va^N=0$, whence $(va)^N=0$, $va=0$ and $a/s=0$. With $L=k$, every affine open ring of $Y$ is reduced, and every stalk of $Y$ is a localization of one by the affine stalk localization theorem. Thus $A/\\pi A\\cong\\mathcal O_{Y,y}$ is reduced.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-sbc-normal-dominant-galois",
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-algebraic-closure",
+    "def-kun-separably-closed",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
+    "place": "Schemes Tag 0HA1 (lemma-local-ring-fibre); Morphisms Tag 01VB (lemma-base-change-smooth); Varieties Tag 056T (lemma-smooth-geometrically-normal)."
+   }
+  },
+  {
+   "text": "Choose a generator $t\\ne0$ of $\\mathfrak m_A$. The DVR factorization theorem gives $\\pi=ut^e$ with $u$ a unit and $e\\ge0$. Injectivity ensures $\\pi\\ne0$ in $A$, and locality gives $\\pi\\in\\mathfrak m_A$, so $e\\ge1$. If $e\\ge2$, the class of $t$ in $A/\\pi A$ is nilpotent since $t^e=u^{-1}\\pi$. It is nonzero: $t=\\pi a=ut^ea$ would give $1=ut^{e-1}a$ after cancellation in the domain $A$, making the nonunit $t$ a unit. This contradicts Step 1. Thus $e=1$, $\\pi A=tA=\\mathfrak m_A$, and the quotient identification in Step 1 identifies $\\mathcal O_{Y,y}$ with $F=\\kappa(x)$ as a $k$-algebra.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
+    "place": "Algebra Tag 00PD (lemma-characterize-dvr), final assertion; elementary nilpotent calculation in the quotient."
+   }
+  },
+  {
+   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}B$ of $x$ on which $B$ is finitely presented over $D$; this is possible by smoothness and the definition of local finite presentation. The affine base neighbourhood contains the closed point of the local scheme $\\operatorname{Spec}D$, so it is all of $\\operatorname{Spec}D$: a basic open containing that point is defined by a unit. The affine fibre is $\\operatorname{Spec}C$ with $C=B\\otimes_Dk=B/\\pi B$. It is an open neighbourhood of $y$ in $Y$: it is the pullback of the open immersion $U\\hookrightarrow X$. It is finitely presented over $k$ by base change, so choose finitely many algebra generators $c_1,\\ldots,c_n$ for $C$. If $\\mathfrak q$ represents $y$, the affine stalk localization theorem gives $C_{\\mathfrak q}\\cong\\mathcal O_{Y,y}=F$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
+    "place": "Morphisms Tag 01TP (definition-finite-presentation); Schemes Tag 01JQ (lemma-fibre-product-affines); Algebra Tag 05G5 (lemma-base-change-finiteness), (4); Schemes affine-stalk construction."
+   }
+  },
+  {
+   "text": "Let $L/k$ be any field extension. Claim (*) of Step 1, applied to the affine open $\\operatorname{Spec}C$ of Step 3, shows that $C\\otimes_kL$ is reduced. Localization commutes with tensor product: $F\\otimes_kL=C_{\\mathfrak q}\\otimes_kL$ is the localization of $C\\otimes_kL$ at the images of $C\\setminus\\mathfrak q$. Explicitly the comparison sends $(c\\otimes l)/s$ to $(c/s)\\otimes l$, with inverse $(c/s)\\otimes l\\mapsto(c\\otimes l)/s$; these formulas are multiplicative, so it is a ring isomorphism. By the localization fact of Step 1, $F\\otimes_kL$ is reduced for all $L$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
+    "place": "Algebra Tag 04KN (lemma-geometrically-reduced-permanence), localization argument; tensor comparison from Tags 00DK and 00D2."
+   }
+  },
+  {
+   "text": "If $k$ has positive characteristic, apply the geometrically reduced field-extension criterion to Step 4 to conclude that $F/k$ is separable in the nonalgebraic sense. If $k$ has characteristic zero, use characteristic-zero separability. Also $F$ is finitely generated as a field over $k$: the residue field of $C_{\\mathfrak q}$ is $\\operatorname{Frac}(C/\\mathfrak q)$, by the fraction description of localization; as $C_{\\mathfrak q}=F$ is already a field, this residue field is $F$. The images of $c_1,\\ldots,c_n$ generate $C/\\mathfrak q$ as a $k$-algebra and therefore generate its fraction field as a field. Applying the definition of nonalgebraic separability to the finitely generated intermediate field $F$ itself gives a separating transcendence basis $T$ of $F/k$. A finitely generated field extension has a finite transcendence basis, and all transcendence bases have the same cardinality; hence $T$ is finite. The extension $F/k(T)$ is separable algebraic and is generated as a field by the same finite tuple of images of the $c_i$. The algebraic-generators finiteness theorem makes it finite. This proves precisely the claimed finite separating transcendence basis. Together with Step 2 it is the stated ramification-one condition.",
+   "uses": [
+    "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-separable-field-extension",
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "def-kun-transcendence-degree",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
+    "place": "Algebra Tags 030W (lemma-characterize-separable-field-extensions), 00TX (lemma-characteristic-zero-local-smooth), 030O (definition-separable); Fields Tags 030F (lemma-transcendence-degree) and 09GH (lemma-algebraic-finitely-generated)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-sbc-normal-dominant-galois",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-algebraic-closure",
+  "def-kun-separably-closed",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-weil-residue-field",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-geometrically-reduced-extension-separable",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-algebraic-generators-finite-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of the smooth-fibre reducedness argument with Tags 00PD, 04KN, 030W, 030F and 09GH; BLR primary scan not locally present."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ramificationIdx.*smooth|smooth.*ramificationIdx|IsDiscreteValuationRing.*Smooth|Smooth.*IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-24T08:00:59Z\", \"tool\": \"grep\", \"query\": \"ramificationIdx.*smooth|smooth.*ramificationIdx|IsDiscreteValuationRing.*Smooth|Smooth.*IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.isUnramifiedAt_iff_map_eq and Ideal.ramificationIdx_eq_one_of_isUnramifiedAt require formal unramifiedness; a smooth local DVR extension can have positive residue transcendence degree, e.g. D[t] localized at (pi), and is not formally unramified. Neither those hits nor valuation uniformizer definitions prove this geometric consequence of smooth fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a discrete valuation ring A is a local ring of a smooth scheme over a DVR R and the map is local then every uniformizer of R is a uniformizer of A",
+   "results": "{\"t\": \"2026-10-24T08:01:00Z\", \"tool\": \"leansearch\", \"query\": \"If a discrete valuation ring A is a local ring of a smooth scheme over a DVR R and the map is local then every uniformizer of R is a uniformizer of A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuativeRel.uniformizer\", \"ValuationRing.isLocalRing\", \"IsDiscreteValuationRing.mk\", \"ValuativeRel.uniformizer.congr_simp\", \"IsDiscreteValuationRing.toIsLocalRing\", \"of_isDiscreteValuationRing\", \"Valuation.IsUniformizer\", \"Valuation.Uniformizer.mk'\"], \"digest\": \"96b4869f599e11b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.isUnramifiedAt_iff_map_eq and Ideal.ramificationIdx_eq_one_of_isUnramifiedAt require formal unramifiedness; a smooth local DVR extension can have positive residue transcendence degree, e.g. D[t] localized at (pi), and is not formally unramified. Neither those hits nor valuation uniformizer definitions prove this geometric consequence of smooth fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T08:01:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.isUnramifiedAt_iff_map_eq and Ideal.ramificationIdx_eq_one_of_isUnramifiedAt require formal unramifiedness; a smooth local DVR extension can have positive residue transcendence degree, e.g. D[t] localized at (pi), and is not formally unramified. Neither those hits nor valuation uniformizer definitions prove this geometric consequence of smooth fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At a generic point of the special fibre of a smooth morphism over a trait the local ring is an unramified DVR with separable residue extension",
+   "results": "{\"t\": \"2026-10-24T08:01:01Z\", \"tool\": \"leanfinder\", \"query\": \"At a generic point of the special fibre of a smooth morphism over a trait the local ring is an unramified DVR with separable residue extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.IsUnramifiedAt\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.unramifiedLocus\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.instFormallyUnramifiedResidueField_1\"], \"digest\": \"f53c6f6e249784c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.isUnramifiedAt_iff_map_eq and Ideal.ramificationIdx_eq_one_of_isUnramifiedAt require formal unramifiedness; a smooth local DVR extension can have positive residue transcendence degree, e.g. D[t] localized at (pi), and is not formally unramified. Neither those hits nor valuation uniformizer definitions prove this geometric consequence of smooth fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local injective map of discrete valuation rings essentially smooth over the base has ramification index one and separably generated residue field extension",
+   "results": "{\"t\": \"2026-10-24T08:01:04Z\", \"tool\": \"leanfinder\", \"query\": \"A local injective map of discrete valuation rings essentially smooth over the base has ramification index one and separably generated residue field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\"], \"digest\": \"b4c1539c0da8ee4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Algebra.isUnramifiedAt_iff_map_eq and Ideal.ramificationIdx_eq_one_of_isUnramifiedAt require formal unramifiedness; a smooth local DVR extension can have positive residue transcendence degree, e.g. D[t] localized at (pi), and is not formally unramified. Neither those hits nor valuation uniformizer definitions prove this geometric consequence of smooth fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "ramificationIdx.*smooth|smooth.*ramificationIdx|IsDiscreteValuationRing.*Smooth|Smooth.*IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-24T08:35:59Z\", \"tool\": \"grep\", \"query\": \"ramificationIdx.*smooth|smooth.*ramificationIdx|IsDiscreteValuationRing.*Smooth|Smooth.*IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer definitions and formally unramified criteria do not give smoothness-to-index-one; formal unramifiedness would exclude the allowed transcendental residue case D[t]_(pi)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A uniformizer of a discrete valuation ring remains a uniformizer in a local ring of a smooth scheme if that local ring is a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T08:35:59Z\", \"tool\": \"leansearch\", \"query\": \"A uniformizer of a discrete valuation ring remains a uniformizer in a local ring of a smooth scheme if that local ring is a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.IsUniformizer\", \"ValuativeRel.uniformizer\", \"Valuation.IsUniformizer.ne_zero\", \"Valuation.IsUniformizer.iff\", \"ValuativeRel.le_uniformizer_iff\", \"Valuation.IsUniformizer.of_associated\", \"Valuation.IsUniformizer.not_isUnit\", \"Valuation.Uniformizer.mk'\"], \"digest\": \"b6698b412abb79e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer definitions and formally unramified criteria do not give smoothness-to-index-one; formal unramifiedness would exclude the allowed transcendental residue case D[t]_(pi)."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-24T08:35:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer definitions and formally unramified criteria do not give smoothness-to-index-one; formal unramifiedness would exclude the allowed transcendental residue case D[t]_(pi)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local injective extension of discrete valuation rings arising from a smooth scheme has a common uniformizer and separably generated residue field extension",
+   "results": "{\"t\": \"2026-10-24T08:36:01Z\", \"tool\": \"leanfinder\", \"query\": \"A local injective extension of discrete valuation rings arising from a smooth scheme has a common uniformizer and separably generated residue field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.IsSmoothAt.exists_notMem_smooth\"], \"digest\": \"63964f9289046921\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer definitions and formally unramified criteria do not give smoothness-to-index-one; formal unramifiedness would exclude the allowed transcendental residue case D[t]_(pi)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism over a trait, a discrete valuation stalk above the closed point has ramification index one and geometrically reduced residue field",
+   "results": "{\"t\": \"2026-10-24T08:36:14Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth morphism over a trait, a discrete valuation stalk above the closed point has ramification index one and geometrically reduced residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.IsUnramifiedAt\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.unramifiedLocus\", \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\"], \"digest\": \"44b5954eb2248e22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: uniformizer definitions and formally unramified criteria do not give smoothness-to-index-one; formal unramifiedness would exclude the allowed transcendental residue case D[t]_(pi)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-integral-coset-specialization",
+  "date": "2026-10-24",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), existing alteration-route trait-extension prerequisite; BLR 10.1 Proposition 7 proof, printed pp.292–293 (PDF pp.298–299), strict-local coset quotient and compatibility with ramification-one extensions; 3.6 Definition 1, printed p.78, includes separable residue extension; supporting input: Essentially smooth local DVR extensions have ramification index one",
+   "via": [
+    "lem-sfb-torus-integral-coset-specialization",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-essentially-smooth-dvr-index-one",
+  "worker": "stage1",
+  "summary": "Proved common uniformizer by reducedness of the actual fibre stalk and an explicit DVR nilpotent contradiction; proved geometric reducedness of the resulting residue field through affine localization and then finite separating generation. Reused existing nodes throughout; no new nodes. Statement unchanged.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration-route trait-extension prerequisite, specifically the essentially-smooth ramification-one input in the BLR 10.1 Proposition 7 coset argument. Nearest blueprint ancestor is null as reported by blueprint_refs.py; preserved the inherited from record.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic fibre-stalk quotient dictionary, needed for A/pi A; no node of this unit states this general identification."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-fibre reducedness theorem, used only for the closed fibre; no same-unit version."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "why": "Generic field-separability criterion in positive characteristic; the unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-geometrically-reduced-extension-separable"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-23608510d",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-23608510d (reviewer sub-agent of L); spot-checked: I read the whole item, all five steps, and every cited node statement. I also read Stacks 0HA1 (schemes.tex:3545) and 030W (algebra.tex:10360); BLR is not available locally and the delivery has a WANTED line for it. The statement is true and not weakened. The proof is: x is a generic point of the smooth closed fibre, so A/πA is reduced; a nilpotent t̄ when e>=2 is impossible; and kappa(x)/k is separably generated through 030W, 030F and 09GH. I tested it on X=Spec D, D[t]_(π), an étale extension, π=t^e (non-smooth, where t̄ is a nonzero nilpotent), an imperfect k, and X empty. The delivery has no new nodes and I found no duplicate in the DAG. The three tool_uses (fibre-stalk quotient, smooth geometrically reduced fibres, geometrically reduced field implies separable) are generic tools and I accept them. One fault, fixed (B3/C4): steps 1 and 4 used 'geometrically reduced' with no definition node, as if Y_L were reduced for every field L/k. The DAG's definition (def-sbc-normal-dominant-galois) only covers separably closed extensions. The fixed step 1 proves claim (*): C'⊗_k L is reduced for every L and every affine open Spec C'⊆Y, via an algebraic closure Ω of L (lem-pc-algebraic-closure-exists-unique, def-weil-algebraic-closure, def-kun-separably-closed), openness of Spec(C'⊗Ω) in Y_Ω (affine fibre product and open-immersion base change), and the inclusion C'⊗L ⊆ C'⊗Ω by a basis. Step 1 then gets the reduced stalks by the reduced-localization argument, which I moved from step 4. Step 4 now cites (*) and keeps the tensor-localization lemma. proof_deps is recomputed; the statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

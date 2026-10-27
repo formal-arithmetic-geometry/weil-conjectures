@@ -1,0 +1,239 @@
+{
+ "id": "lem-pur-system-singleton-geometric-pullback",
+ "kind": "statement",
+ "title": "Geometric inverse image commutes with derived singleton extension",
+ "statement": "Let $u:\\mathscr X\\to\\mathscr Y$ be a geometric morphism of topoi presented by sites small in the module universe [def-weil-size-convention], [def-weil-pbc-ringed-topos-morphism]. Let $B_{Y,1}\\leftarrow B_{Y,2}\\leftarrow\\cdots$ be sheaves of commutative rings and set $B_{X,j}=u^{-1}B_{Y,j}$, including the pulled-back transitions. A strict system is a sequence of $B_{T,j}$-module sheaves with $B_{T,j+1}$-linear maps to the scalar restriction of level $j$ [lem-pur-system-ringed-sequence-site], [def-pc-sheaf-restrict-scalars]. Use ordinary unbounded derived categories of these systems and of level modules [def-weil-abstract-derived-category], [def-weil-sheaf-of-modules-category]. Write $G_B$ for exact termwise inverse image, $u_n^*$ for inverse image on $B_{Y,n}$-modules, $e_n^T$ for derived evaluation, and $L_n^T\\dashv e_n^T$ for the total left derived ordinary singleton extension [lem-pur-system-level-left-extension], [lem-pur-system-single-derived-extension]. Its ordinary value at $j\\le n$ is $B_{T,j}\\otimes_{B_{T,n}}Q$, and is zero at $j>n$.\n\nThere is a natural isomorphism of functors to the derived category of strict $B_X$-systems\n$$c_n:G_BL_n^Y\\xrightarrow{\\sim}L_n^Xu_n^*.$$\nFor a flat-term K-flat $B_{Y,n}$-complex $Q$ [def-pc-kflat-complex], [def-pc-flat-sheaf-modules], [def-pc-cochain-complex-modules], the ordinary singleton complex is K-flat with flat terms on the ringed sequence site. Both sides of $c_n$ are computed on that same $Q$. Its representative at $j\\le n$ is the canonical tensor/pullback map\n$$u_j^*(B_{Y,j}\\otimes_{B_{Y,n}}Q)\\longrightarrow B_{X,j}\\otimes_{B_{X,n}}u_n^*Q,$$\nand at $j>n$ it is the identity of zero. These representatives commute with the actual system transitions. At $j=n$, multiplication identifies $e_n^Xc_n$ with the identity of $u_n^*$. The isomorphisms also intertwine the canonical maps $L_n^T(B_{T,n}\\otimes^L_{B_{T,m}}(-))\\to L_m^T$ for $m\\ge n$ (the singleton maps whose below-$n$ components are the tensor associators and whose other components are zero), using the canonical scalar/pullback comparisons. No boundedness or coefficient-flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; derived singleton base-change isomorphism immediately before Lemma 4.10, printed p. 23.",
+  "note": "Agent extraction includes the representative and lower-singleton-map normalizations; the derived isomorphism is stated by Zheng."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-cochain-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-trf-geometric-morphism",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-pur-system-evaluation-topos"
+ ],
+ "proof": [
+  {
+   "text": "Apply the ordinary geometric comparison theorem, obtaining exact termwise inverse image and the two ordinary normalized comparisons. Transfer its concrete functor, exactness and evaluation fields to the unchanged public interface.",
+   "uses": [
+    "lem-pur-system-geometric-ordinary-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ringed-topos K-flat preservation, followed by the normalized identity scalar unit, proves that level inverse image preserves flat-term K-flat complexes. The identity coefficient-map case of singletonScalarExtension supplies the flat-term K-flat sequence-site model for each ordinary singleton. Apply it both before and after inverse image; no flat coefficient transition is assumed.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-system-singleton-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, preservation of flat-term K-flat complexes under ringed-topos pullback; Zheng Construction 4.1 for singleton extension."
+   }
+  },
+  {
+   "text": "Apply the normalized derived lifting theorem to these specified ordinary comparisons. Combine its four derived clauses and the four ordinary clauses with the independent flat-model result, giving every clause of SystemSingletonGeometricComparisons.",
+   "uses": [
+    "lem-pur-system-geometric-derived-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-geometric-ordinary-comparison",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-system-singleton-scalar-extension",
+  "lem-pur-system-geometric-derived-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and the sentence before Lemma 4.10, printed pp. 21 and 23. F9 separates the ordinary comparison and its normalized derived lift; the parent independently proves the common flat-term K-flat model clause using ringed-topos pullback and singleton scalar extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived singleton left extension of varying ring module systems commutes with geometric inverse image",
+   "results": "CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; ModuleCat.extendScalars_id_comp; ModuleCat.extendScalars_comp_id_assoc; ModuleCat.extendScalars_comp_id; ModuleCat.extendScalars_id_comp_assoc; CommRingCat.moduleCatExtendScalarsPseudofunctor; ModuleCat.extendScalars_assoc'; ModuleCat.extendScalarsComp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat.extendScalarsComp and evaluationAdjunctionRight do not give the derived ringed-sequence singleton comparison or its common K-flat model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change for left Kan extension from a selected index of semilinear sheaves of modules in derived categories",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; CommRingCat.moduleCatExtendScalarsPseudofunctor_map; CommRingCat.moduleCatExtendScalarsPseudofunctor; SheafOfModules.Presentation.map; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; Condensed.profiniteSolid; PresheafOfModules.pushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat.extendScalarsComp and evaluationAdjunctionRight do not give the derived ringed-sequence singleton comparison or its common K-flat model."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.evaluation",
+   "results": "CategoryTheory.constantPresheafAdj; SSet.chainComplexFunctorAdjunction; AlgebraicTopology.singularChainComplexFunctorAdjunction; CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat.extendScalarsComp and evaluationAdjunctionRight do not give the derived ringed-sequence singleton comparison or its common K-flat model."
+  },
+  {
+   "tool": "grep",
+   "query": "singleton.*(pullback|derived)|evaluationLeftAdjoint|single.*extension",
+   "results": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean; Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean; Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean; Mathlib/CategoryTheory/SmallObject/WellOrderInductionData.lean; Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat.extendScalarsComp and evaluationAdjunctionRight do not give the derived ringed-sequence singleton comparison or its common K-flat model."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left Kan extension from one level in ringed inverse systems commutes with pullback on the unbounded derived category",
+   "results": "none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "singleton.*(pullback|derived)|single.*extension|evaluationLeftAdjoint",
+   "results": "Mathlib/NumberTheory/Cyclotomic/Basic.lean; Mathlib/NumberTheory/Cyclotomic/Basic.lean; Mathlib/NumberTheory/Cyclotomic/Basic.lean; Mathlib/NumberTheory/Cyclotomic/Basic.lean; Mathlib/NumberTheory/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; inspected CategoryTheory/Adjunction/Evaluation.lean:38–70 (fixed-category evaluation adjunction), and Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:53–61 (ordinary continuous-site module adjunction).",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state derived singleton extension with varying ring coefficients, common K-flat models, and compatibility with system transitions and lower-singleton maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived left adjoint to evaluation of a ringed inverse system commutes with geometric pullback",
+   "results": "SheafOfModules.pullback; CategoryTheory.Functor.sheafPullback; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; TopCat.Sheaf.instIsLeftAdjointPullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.pullback",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state derived singleton extension with varying ring coefficients, common K-flat models, and compatibility with system transitions and lower-singleton maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.evaluation, CategoryTheory.Adjunction",
+   "results": "CategoryTheory.constantPresheafAdj; SSet.chainComplexFunctorAdjunction; AlgebraicTopology.singularChainComplexFunctorAdjunction; CategoryTheory.evaluationAdjunctionLeft; CategoryTheory.evaluationAdjunctionRight",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state derived singleton extension with varying ring coefficients, common K-flat models, and compatibility with system transitions and lower-singleton maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric inverse image commutes with derived singleton extension of inverse systems of sheaves of modules",
+   "results": "InverseSystem.globalEquiv_compatibility; InverseSystem.globalEquiv_naturality; CategoryTheory.evalEquiv_symm_apply; InverseSystem.piLTLim_symm_apply; TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd; TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst; TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff; InverseSystem.invLimEquiv_symm_apply_coe",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state derived singleton extension with varying ring coefficients, common K-flat models, and compatibility with system transitions and lower-singleton maps."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|evaluationAdjunctionRight|pullbackPushforwardAdjunction",
+   "results": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; inspected CategoryTheory/Adjunction/Evaluation.lean:38–70 (fixed-category evaluation adjunction), and Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:53–61 (ordinary continuous-site module adjunction).",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state derived singleton extension with varying ring coefficients, common K-flat models, and compatibility with system transitions and lower-singleton maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change for left Kan extension from one index of semilinear module sheaves with varying coefficient rings in unbounded derived categories",
+   "results": "Ext; localCohomology.diagram; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Functor.mapExtLinearMap; CategoryTheory.Functor.mapExtLinearMap_apply; CommRingCat.moduleCatExtendScalarsPseudofunctor; Condensed.profiniteSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state derived singleton extension with varying ring coefficients, common K-flat models, and compatibility with system transitions and lower-singleton maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-quotient-diagram-projection-evaluation",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 of thm-pur-rational-and-qbar-purity: independence of finite coefficient extension; sk-thm-sf-compatibility clause (7). Extracted from quotient-diagram-projection-evaluation, old proof step 2, comparison on the actual singleton extensions and its level-n and lower-singleton normalizations.",
+   "via": [
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-system-singleton-geometric-pullback",
+  "worker": "stage1",
+  "summary": "Q52 expanded the singleton inverse-image comparison into ordinary tensor, K-flat model, strict transition, derived mate, and lower-singleton compatibility arguments, using existing nodes only. No statement correction or new nodes. All cited statements were read, all searches were logged, and equality of derived maps is proved via whole-system cochain maps rather than conservativity of evaluation.",
+  "blueprint": "The extracted coefficient-compatibility auxiliary serves thm-pur-rational-and-qbar-purity (rational transport and finite coefficient-field extension), through the recorded ancestor chain, and sk-thm-sf-compatibility clause (7). Steps 1–2 supply the flat models; 3–5 establish geometric singleton comparison with level-n normalization; 6 verifies compatibility with the actual lower-singleton maps.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic exactness of geometric inverse image with the inverse-image ring, used at each level; no trace-formula result or alternative purity route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-0f745f372",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-0f745f372 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, no new nodes, and the item statement is identical to the base. The proof is six steps that cite only existing nodes, and I checked each cited statement. Source: Zheng, arXiv 1006.3810, Construction 4.1 (p. 21) gives e_{n!} as Λ_q⊗_{Λ_n}F below n and 0 above, and the sentence before Lemma 4.10 (p. 23) gives the base change Le_{n!}f^*≅f^{N*}Le_{n!}; the item uses its inverse and generalises it to arbitrary ring-sheaf towers. Step 1 is elementary: covers are vertical, so the sheaf tensor is computed level by level, and K-flatness and flatness follow levelwise via derived-evaluation and coproducts. Step 2 applies lem-weil-pbc-ringed-topos-kflat-pullback twice, with (identity topos, B_n→B_j) and (u, identity ring map); no flatness is needed. Step 3 takes θ from the inverse-image tensor comparison with its pure-tensor formula and checks B_{X,j}-linearity. Step 4 is an elementary pure-tensor check of the transition square and the unit at level n. Step 5 applies lem-pur-extension-evaluation-comparison with R1=e_n^Y, R2=e_n^X, H=G_B, G=u_n^*, τ=id and ι=θ^{-1}; the direction matches the Lean signature, hp is Step 2, res is lem-pc-kflat-resolution, and the representative comes from the transpose formula. Step 6 checks the lower-singleton maps with systemSingleTranspose, scalar-coherence associators and a whole-system cochain square, with the formulas written out. There is no cycle, and no SGA citation. The trf generic exactness node is accepted as a tool use, and it is declared. Not a duplicate of lem-pur-coefficient-system-derived-comparison or lem-sf-semilinear-evaluation-derived-adjunction. Edge cases checked: n=1, j>n, a nonflat Z/4→Z/2 transition, and the zero ring."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SystemSingletonGeometricPullback",
+  "declaration": "SheafOfModules.systemSingletonGeometricPullback",
+  "declarations": [
+   "SheafOfModules.systemGeometricUnderlying",
+   "SheafOfModules.SystemGeometricInverseImageData",
+   "SheafOfModules.SystemGeometricInverseImageData.levelFunctor",
+   "SheafOfModules.SystemGeometricInverseImageData.levelFunctorAdditive",
+   "SheafOfModules.SystemGeometricInverseImageData.levelFunctorLimits",
+   "SheafOfModules.SystemGeometricInverseImageData.levelFunctorColimits",
+   "SheafOfModules.SystemGeometricInverseImageData.derivedEvaluation",
+   "SheafOfModules.systemSingletonOrdinaryMultiplication",
+   "SheafOfModules.systemSingletonDerivedMultiplication",
+   "SheafOfModules.systemSingletonLowerMap",
+   "SheafOfModules.SystemSingletonGeometricComparisons",
+   "SheafOfModules.systemSingletonGeometricPullback"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SystemSingletonGeometricPullback.lean",
+  "statement": "theorem systemSingletonGeometricPullback (BY : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (BX : ℕᵒᵖ ⥤ Sheaf K CommRingCat.{w}) (u : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w))) (I : ∀ n : ℕ, AlgebraicInverseImage u.inverse (BY.obj (op n)) (BX.obj (op n))) (htransition : ∀ {m n : ℕ} (h : m ≤ n), u.inverse.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map (BY.map (homOfLE h).op)) ≫ (I m).ringUnderlying.hom = (I n).ringUnderlying.hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map (BX.map (homOfLE h).op)) (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY) (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX) : ∃ F : SystemGeometricInverseImageData BY BX u I, SystemSingletonGeometricComparisons SY TY SX TX F",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af9c6fe0c",
+  "group": "NA",
+  "result": "pass",
+  "note": "Item module SystemSingletonGeometricPullback read clause by clause against the node. F (termwise inverse image) is pinned by its evaluation isos to (I n).modules, its underlying transition equation and naturality. ordinary/tensor/comparison/scalar are pinned by tensor_evaluation, generalized pure-tensor generators on universal sections, above=0 on zero objects, the representative equation through the dependency comparison (iso on systemLevelKFlat) and scalar_representative through the model eps. The multiplication, derived_multiplication and lower_singleton square (transpose of systemSingleDerivedBelow.inv) match the node; flat_models uses the real sequence-site K-flat and flat predicates. No universe restriction: independent site universes, module universe w, GeometricMorphism + pinned AlgebraicInverseImage + htransition (RingedToposMorphism would force all universes equal). Mechanical finding: added theorem stmt_dep lem-pur-system-evaluation-topos supplies only the Prop instance strictSystemToSequenceAdditive, the theorem's own additivity conclusion, needed for mapHomologicalComplex in flat_models; genuine, PASS on point. lean.statement verbatim, single sorry, H8 six-step docstring, source and blueprint docstrings, both report sections present. No compile run: none required, no file changed. Advisories: systemSingleFunctor/Below/LevelAbove (lem-pur-system-ordinary-single-extension, proof_dep only) and systemSingleDerivedBelow (lem-pur-system-single-derived-evaluation, not cited) owners not in stmt_deps; the specialized AlgebraicInverseImage is used via the def-weil-pbc-algebraic-inverse-image re-export."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261025T122924-L-1818889",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

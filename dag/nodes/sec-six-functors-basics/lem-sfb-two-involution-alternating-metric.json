@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-two-involution-alternating-metric",
+ "kind": "statement",
+ "title": "Complete shortest-word classification for two distinct involutions of finite product order",
+ "statement": "Let $G$ be a group, meaning a set with associative multiplication, identity $1$ and two-sided inverses, and let $s,t\\in G$ satisfy $s\\ne1$, $t\\ne1$, $s\\ne t$ and $s^2=t^2=1$. Suppose $st$ has finite order $m$, meaning $m$ is the least positive integer such that $(st)^m=1$. Put $S=\\{s,t\\}$, a finite set [def-sfb-finite-infinite-set]. Let $H$ be the subgroup of all finite products of elements of $S$, and let $d(u)$ be the least length of such a word with product $u\\in H$. Write $B_s(k)$ and $B_t(k)$ for the alternating words of length $k$ in the alphabet $\\{s,t\\}$ beginning with $s$ and $t$, respectively, and let $b_s(k)$ and $b_t(k)$ be their products. Both words of length $0$ are empty. Then $m\\ge2$, and the following list contains every element of $H$ exactly once: $$1,\\quad b_s(k),b_t(k)\\ (1\\le k<m),\\quad w_0,$$ where $w_0=b_s(m)=b_t(m)$. One has $d(1)=0$, $d(b_s(k))=d(b_t(k))=k$ for $1\\le k<m$, and $d(w_0)=m$. The only shortest word for $1$ is the empty word; the only shortest word for $b_s(k)$, respectively $b_t(k)$, with $1\\le k<m$, is $B_s(k)$, respectively $B_t(k)$; the only shortest words for $w_0$ are $B_s(m)$ and $B_t(m)$. No deletion condition or presentation of $G$ is assumed.",
+ "source": {
+  "document": "literature/cashen-notes-on-coxeter-groups.pdf",
+  "place": "Comparison: Cashen, Notes on Coxeter groups, Chapter 2 §1, printed pp.27–29, rank-two dihedral examples. Local copy WANTED; author-hosted PDF read online. The formulation for an arbitrary pair of involutions and the binary word metric are agent-written; the elementary normal-form calculation is recorded in report.md. No Stacks tag states this abstract group fact.",
+  "url": "https://www.mat.univie.ac.at/~cashen/Notes_on_Coxeter_groups.pdf"
+ },
+ "stmt_deps": [
+  "def-sfb-finite-infinite-set"
+ ],
+ "proof": [
+  {
+   "text": "Put $r=st$. Since $r=1$ would give $t=s^{-1}=s$, one has $m\\ge2$. For each integer $n$, divide $n=qm+j$ with $0\\le j<m$; then $r^n=r^j$. Minimality of $m$ gives $r^n=1$ if and only if $j=0$. Consequently $r^a=r^b$ if and only if $m$ divides $a-b$. This uses only $r^m=1$ and cancellation; negative powers mean powers of $r^{-1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cashen-notes-on-coxeter-groups.pdf",
+    "place": "Agent-written cancellation and exponent calculation, steps 1–7; comparison only: Cashen, Chapter 2 §1, printed pp.27–29, Lemma 1.0.1 and Theorem 1.0.2. Local source WANTED. Step 1."
+   }
+  },
+  {
+   "text": "The involution equations give $r^{-1}=ts$ and $srs=ts=r^{-1}$. The element $s$ is not any power of $r$: if $s=r^a$, it commutes with $r$, so $r=srs=r^{-1}$ and $r^2=1$. Step 1 then gives $m=2$. Reducing $a$ modulo $2$ gives $s=1$ or $s=r$; the former is excluded and the latter gives $t=s^{-1}r=1$, also excluded. Hence $r^a\\ne r^b s$ for all integers $a,b$, since such an equality would put $s=r^{a-b}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cashen-notes-on-coxeter-groups.pdf",
+    "place": "Agent-written cancellation and exponent calculation, steps 1–7; comparison only: Cashen, Chapter 2 §1, printed pp.27–29, Lemma 1.0.1 and Theorem 1.0.2. Local source WANTED. Step 2."
+   }
+  },
+  {
+   "text": "Pair adjacent letters in each alternating word. For $a\\ge0$ its product is\n$$b_s(2a)=r^a,\\qquad b_t(2a)=r^{-a},\\qquad b_s(2a+1)=r^a s,\\qquad b_t(2a+1)=r^{-(a+1)}s.$$\nIndeed the even cases are $(st)^a$ and $(ts)^a$; the odd cases append $s$ and $t$, respectively, and $t=r^{-1}s$. For $m=2a$ the two length-$m$ products agree because their exponents differ by $m$; for $m=2a+1$ the odd formulas give the same conclusion. Call this common element $w_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cashen-notes-on-coxeter-groups.pdf",
+    "place": "Agent-written cancellation and exponent calculation, steps 1–7; comparison only: Cashen, Chapter 2 §1, printed pp.27–29, Lemma 1.0.1 and Theorem 1.0.2. Local source WANTED. Step 3."
+   }
+  },
+  {
+   "text": "Consider alternating words of lengths $k,l\\le m$. Opposite length parities cannot have equal products by step 2. With equal parity and the same initial letter, the exponent difference in step 3 has absolute value $|k-l|/2<m$, so step 1 forces $k=l$. With opposite initial letters the absolute exponent difference is $(k+l)/2$. If at least one word is nonempty, this is positive and at most $m$; it is divisible by $m$ exactly when $k+l=2m$, hence $k=l=m$. The empty word is represented by either initial-letter convention at length zero and is the single exception with difference zero. Thus among these words the only equal products come from the identical word, the two empty-word conventions, or the two length-$m$ words. In particular none of the positive-length words of length at most $m$ represents $1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cashen-notes-on-coxeter-groups.pdf",
+    "place": "Agent-written cancellation and exponent calculation, steps 1–7; comparison only: Cashen, Chapter 2 §1, printed pp.27–29, Lemma 1.0.1 and Theorem 1.0.2. Local source WANTED. Step 4."
+   }
+  },
+  {
+   "text": "Deleting an adjacent $ss$ or $tt$ preserves the product and reduces length by $2$. A word with no such pair alternates, since its alphabet has exactly the distinct letters $s,t$. If an alternating word has length $n>m$, replace its first $m$ letters by the other alternating length-$m$ block, using step 3. The final letter of the replaced block changes to the opposite letter. This new final letter equals the next letter of the original word, since that next letter was opposite to the old final letter. Delete this equal adjacent pair. The resulting word has the same product and length $n-2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cashen-notes-on-coxeter-groups.pdf",
+    "place": "Agent-written cancellation and exponent calculation, steps 1–7; comparison only: Cashen, Chapter 2 §1, printed pp.27–29, Lemma 1.0.1 and Theorem 1.0.2. Local source WANTED. Step 5."
+   }
+  },
+  {
+   "text": "Starting with any word, apply step 5 whenever it has an equal adjacent pair or is alternating of length greater than $m$. Each application reduces its nonnegative integer length by $2$, so the process terminates at an alternating word of length at most $m$ (possibly empty). Every element of $H$ has a word by its definition, and hence occurs in the displayed list. Step 4 proves that the list has no repetitions after the two length-$m$ products are recorded just once as $w_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cashen-notes-on-coxeter-groups.pdf",
+    "place": "Agent-written cancellation and exponent calculation, steps 1–7; comparison only: Cashen, Chapter 2 §1, printed pp.27–29, Lemma 1.0.1 and Theorem 1.0.2. Local source WANTED. Step 6."
+   }
+  },
+  {
+   "text": "A shortest word exists for each $u\\in H$ by taking the least of its nonempty set of representing lengths. Step 5 shows that every shortest word alternates and has length at most $m$. If $u=b_s(k)$ or $b_t(k)$ with $1\\le k<m$, step 4 forces such a shortest word to be the corresponding word $B_s(k)$ or $B_t(k)$, respectively; therefore its length is $k$ and it is unique. For $u=w_0$, step 4 forces length $m$ and initial letter $s$ or $t$. Both displayed length-$m$ words represent $u$, and both are shortest. For $u=1$, the empty word has length $0$, and every word of length $0$ is that same empty word. These give all asserted metric values and all shortest-word classifications.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/cashen-notes-on-coxeter-groups.pdf",
+    "place": "Agent-written cancellation and exponent calculation, steps 1–7; comparison only: Cashen, Chapter 2 §1, printed pp.27–29, Lemma 1.0.1 and Theorem 1.0.2. Local source WANTED. Step 7."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/cashen-notes-on-coxeter-groups.pdf",
+  "place": "Direct cancellation proof for an arbitrary pair of involutions; comparison with Cashen, Chapter 2 §1, pp.27–29; local copy WANTED. No Coxeter presentation is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The word metric of a group generated by two involutions is a cycle of length twice the order of their product",
+   "results": "{\"t\": \"2026-10-24T13:56:33Z\", \"tool\": \"leansearch\", \"query\": \"The word metric of a group generated by two involutions is a cycle of length twice the order of their product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"mul_notMem_of_orderOf_eq_two\", \"CoxeterSystem.length_mul_ge_max\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"CoxeterSystem.length_mul_ge_length_sub_length\", \"CoxeterSystem.length_mul_le\", \"CoxeterSystem.length_wordProd_le\", \"CoxeterSystem.prod_alternatingWord_eq_mul_pow\", \"inv_eq_self_of_orderOf_eq_two\"], \"digest\": \"39b9a679fe4a6232\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/GroupTheory/SpecificGroups/Dihedral.lean:30–40, 92–104, 123–203 and Coxeter/Basic.lean:153–162, 399–405, 518–545; Coxeter/Length.lean:237–261. DihedralGroup.equivSum is only a set equivalence for the predefined group, not an identification of an arbitrary generated subgroup or a shortest-word classification. Alternating-word product identities and the nonreduced-word bound assume a CoxeterSystem and do not state these geodesic conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DihedralGroup\"",
+   "results": "{\"t\": \"2026-10-24T13:56:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"DihedralGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DihedralGroup\", \"instDecidableEqDihedralGroup\", \"DihedralGroup.instGroup\", \"DihedralGroup.instInhabited\", \"DihedralGroup.instNontrivial\", \"DihedralGroup.r\", \"DihedralGroup.sr\", \"DihedralGroup.instInfiniteOfNatNat\"], \"digest\": \"3cca34619b66f14f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/GroupTheory/SpecificGroups/Dihedral.lean:30–40, 92–104, 123–203 and Coxeter/Basic.lean:153–162, 399–405, 518–545; Coxeter/Length.lean:237–261. DihedralGroup.equivSum is only a set equivalence for the predefined group, not an identification of an arbitrary generated subgroup or a shortest-word classification. Alternating-word product identities and the nonreduced-word bound assume a CoxeterSystem and do not state these geodesic conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two distinct nonidentity involutions whose product has finite order generate a dihedral group with alternating normal forms and cycle word metric",
+   "results": "{\"t\": \"2026-10-24T13:56:34Z\", \"tool\": \"leanfinder\", \"query\": \"Two distinct nonidentity involutions whose product has finite order generate a dihedral group with alternating normal forms and cycle word metric\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DihedralGroup\", \"DihedralGroup.Product\", \"DihedralGroup.instGroup\", \"DihedralGroup.sr\", \"DihedralGroup.r\", \"DihedralGroup.orderOf_sr\", \"DihedralGroup.not_commutative\", \"DihedralGroup.sr_mul_self\"], \"digest\": \"e8d606046a719738\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/GroupTheory/SpecificGroups/Dihedral.lean:30–40, 92–104, 123–203 and Coxeter/Basic.lean:153–162, 399–405, 518–545; Coxeter/Length.lean:237–261. DihedralGroup.equivSum is only a set equivalence for the predefined group, not an identification of an arbitrary generated subgroup or a shortest-word classification. Alternating-word product identities and the nonreduced-word bound assume a CoxeterSystem and do not state these geodesic conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"alternatingWord\"",
+   "results": "{\"t\": \"2026-10-24T13:57:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"alternatingWord\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CoxeterSystem.alternatingWord\", \"CoxeterSystem.length_alternatingWord\", \"CoxeterSystem.alternatingWord_succ\", \"CoxeterSystem.alternatingWord_succ'\", \"CoxeterSystem.listTake_alternatingWord\", \"CoxeterSystem.getElem_alternatingWord\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"CoxeterSystem.listTake_succ_alternatingWord\"], \"digest\": \"c514fd27826a0489\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/GroupTheory/SpecificGroups/Dihedral.lean:30–40, 92–104, 123–203 and Coxeter/Basic.lean:153–162, 399–405, 518–545; Coxeter/Length.lean:237–261. DihedralGroup.equivSum is only a set equivalence for the predefined group, not an identification of an arbitrary generated subgroup or a shortest-word classification. Alternating-word product identities and the nonreduced-word bound assume a CoxeterSystem and do not state these geodesic conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating words of length at most m are geodesics for two distinct involutions s t with order s t equal to m",
+   "results": "{\"t\": \"2026-10-24T13:57:47Z\", \"tool\": \"leanfinder\", \"query\": \"Alternating words of length at most m are geodesics for two distinct involutions s t with order s t equal to m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.not_isReduced_alternatingWord\", \"CoxeterSystem.length_alternatingWord\", \"CoxeterSystem.alternatingWord\", \"CoxeterSystem.prod_alternatingWord_eq_mul_pow\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"CoxeterSystem.listTake_alternatingWord\", \"CoxeterSystem.alternatingWord_succ\", \"CoxeterSystem.getElem_alternatingWord\"], \"digest\": \"c06722c7499c5cbf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/GroupTheory/SpecificGroups/Dihedral.lean:30–40, 92–104, 123–203 and Coxeter/Basic.lean:153–162, 399–405, 518–545; Coxeter/Length.lean:237–261. DihedralGroup.equivSum is only a set equivalence for the predefined group, not an identification of an arbitrary generated subgroup or a shortest-word classification. Alternating-word product identities and the nonreduced-word bound assume a CoxeterSystem and do not state these geodesic conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "sr_mul_self|r_one_pow_n|equivSum|orderOf_r_one",
+   "results": "{\"t\": \"2026-10-24T14:01:25Z\", \"tool\": \"grep\", \"query\": \"sr_mul_self|r_one_pow_n|equivSum|orderOf_r_one\", \"sub\": \"GroupTheory/SpecificGroups\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/SpecificGroups/Dihedral.lean\", \"Mathlib/GroupTheory/SpecificGroups/Dihedral.lean\", \"Mathlib/GroupTheory/SpecificGroups/Dihedral.lean\", \"Mathlib/GroupTheory/SpecificGroups/Dihedral.lean\", \"Mathlib/GroupTheory/SpecificGroups/Dihedral.lean\"], \"digest\": \"dca297de4068d96c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/GroupTheory/SpecificGroups/Dihedral.lean:30–40, 92–104, 123–203 and Coxeter/Basic.lean:153–162, 399–405, 518–545; Coxeter/Length.lean:237–261. DihedralGroup.equivSum is only a set equivalence for the predefined group, not an identification of an arbitrary generated subgroup or a shortest-word classification. Alternating-word product identities and the nonreduced-word bound assume a CoxeterSystem and do not state these geodesic conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shortest words in a group generated by two distinct involutions whose product has order m are alternating words of length at most m",
+   "results": "{\"t\": \"2026-10-24T14:21:43Z\", \"tool\": \"leanfinder\", \"query\": \"Shortest words in a group generated by two distinct involutions whose product has order m are alternating words of length at most m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.not_isReduced_alternatingWord\", \"CoxeterSystem.length_alternatingWord\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"CoxeterSystem.prod_alternatingWord_eq_mul_pow\", \"CoxeterSystem.length_wordProd_le\", \"CoxeterSystem.length\", \"CoxeterSystem.IsReduced\", \"CoxeterSystem.length_mul_ge_max\"], \"digest\": \"a9337b698d48d153\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Dihedral.lean:33–39,92–104,123–203 and Coxeter/Basic.lean:518–529, Coxeter/Length.lean:239–261. The former defines a fixed model, and the latter assumes a CoxeterSystem presentation; neither gives the arbitrary-pair shortest-word classification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DihedralGroup\"",
+   "results": "{\"t\": \"2026-10-24T14:21:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"DihedralGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DihedralGroup\", \"instDecidableEqDihedralGroup\", \"DihedralGroup.instGroup\", \"DihedralGroup.instInhabited\", \"DihedralGroup.instNontrivial\", \"DihedralGroup.r\", \"DihedralGroup.sr\", \"DihedralGroup.instInfiniteOfNatNat\"], \"digest\": \"3cca34619b66f14f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Dihedral.lean:33–39,92–104,123–203 and Coxeter/Basic.lean:518–529, Coxeter/Length.lean:239–261. The former defines a fixed model, and the latter assumes a CoxeterSystem presentation; neither gives the arbitrary-pair shortest-word classification."
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingWord|equivSum|orderOf_sr",
+   "results": "{\"t\": \"2026-10-24T14:22:13Z\", \"tool\": \"grep\", \"query\": \"alternatingWord|equivSum|orderOf_sr\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Length.lean\", \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"Mathlib/GroupTheory/Coxeter/Basic.lean\", \"Mathlib/GroupTheory/Coxeter/Basic.lean\"], \"digest\": \"0be16f924eeacac8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Dihedral.lean:33–39,92–104,123–203 and Coxeter/Basic.lean:518–529, Coxeter/Length.lean:239–261. The former defines a fixed model, and the latter assumes a CoxeterSystem presentation; neither gives the arbitrary-pair shortest-word classification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geodesic words for two involutions with finite order product form a dihedral cycle",
+   "results": "{\"t\": \"2026-10-24T14:22:14Z\", \"tool\": \"leansearch\", \"query\": \"Geodesic words for two involutions with finite order product form a dihedral cycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DihedralGroup.instGroup\", \"CoxeterSystem.wordProd_cons\", \"DihedralGroup\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"CoxeterSystem.wordProd_reverse\", \"CoxeterSystem.wordProd_braidWord_eq\", \"DihedralGroup.isCyclic_iff\", \"DihedralGroup.exponent\"], \"digest\": \"2976fe872c93e272\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Dihedral.lean:33–39,92–104,123–203 and Coxeter/Basic.lean:518–529, Coxeter/Length.lean:239–261. The former defines a fixed model, and the latter assumes a CoxeterSystem presentation; neither gives the arbitrary-pair shortest-word classification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two nontrivial involutions generate a dihedral subgroup with a unique reduced word except at the longest element",
+   "results": "{\"t\": \"2026-10-24T14:23:53Z\", \"tool\": \"leanfinder\", \"query\": \"Two nontrivial involutions generate a dihedral subgroup with a unique reduced word except at the longest element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CoxeterSystem.not_isReduced_alternatingWord\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"mul_notMem_of_orderOf_eq_two\", \"CoxeterSystem.prod_alternatingWord_eq_mul_pow\", \"CoxeterSystem.getElem_leftInvSeq_alternatingWord\", \"DihedralGroup.sr_mul_self\", \"CoxeterSystem.simple_mul_simple_pow\", \"CoxeterSystem.IsRightInversion\"], \"digest\": \"2607631246e916f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Dihedral.lean:33–39,92–104,123–203 and Coxeter/Basic.lean:518–529, Coxeter/Length.lean:239–261. The former defines a fixed model, and the latter assumes a CoxeterSystem presentation; neither gives the arbitrary-pair shortest-word classification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"alternatingWord\"",
+   "results": "{\"t\": \"2026-10-24T14:23:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"alternatingWord\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CoxeterSystem.alternatingWord\", \"CoxeterSystem.length_alternatingWord\", \"CoxeterSystem.alternatingWord_succ\", \"CoxeterSystem.alternatingWord_succ'\", \"CoxeterSystem.listTake_alternatingWord\", \"CoxeterSystem.getElem_alternatingWord\", \"CoxeterSystem.prod_alternatingWord_eq_prod_alternatingWord_sub\", \"CoxeterSystem.listTake_succ_alternatingWord\"], \"digest\": \"c514fd27826a0489\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Dihedral.lean:33–39,92–104,123–203 and Coxeter/Basic.lean:518–529, Coxeter/Length.lean:239–261. The former defines a fixed model, and the latter assumes a CoxeterSystem presentation; neither gives the arbitrary-pair shortest-word classification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-involution-two-descent-prefix",
+  "date": "2026-10-24",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Small centralizers and their homomorphism amalgamation. Supporting input: Theorem 6.2.4, printed pp.201--203, with identities (6.2.2)--(6.2.6) and the uniqueness paragraph immediately before them. This is the relation-level theorem, prior to Corollary 6.2.7. Supporting argument: Theorem 6.2.4 proof, first paragraph after its opening, printed p.202: construction of the normalizer map from torus/Weyl relations. Read Conrad online; local archival PDF WANTED. No Stacks tag states this normalizer presentation. Supporting combinatorial input: Milne Appendix C.11, printed p.610, full Coxeter presentation, before evaluating the lifted relators in the torus. Supporting abstract word-theoretic input to Milne C.11: the two-letter deletion characterization, after proving deletion from root signs. Rank-two prerequisite for the reduced-word comparison: two distinct left descents produce the common alternating prefix. Supporting input: Rank-two word calculation used after coset factorization: all elements and all shortest words for the subgroup generated by two involutions, without any descent hypothesis.",
+   "via": [
+    "lem-sfb-involution-two-descent-prefix",
+    "lem-sfb-involution-deletion-presentation",
+    "lem-sfb-based-root-datum-coxeter-presentation",
+    "lem-sfb-normalizer-torus-weyl-presentation",
+    "lem-sfb-pinned-root-relations-hom-criterion",
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-two-involution-alternating-metric",
+  "worker": "stage1",
+  "summary": "Seven elementary cancellation and exponent-arithmetic steps give the full classification without a presentation or deletion hypothesis. The statement and statement dependencies are unchanged; no new node is needed. Checked both parities, the empty word, m=2, and the distinction between arbitrary groups and Mathlib Coxeter systems.",
+  "blueprint": "The inherited ancestry is null, as tools/blueprint_refs.py ancestor reports. Retain its via chain. This proves the rank-two metric input used in lem-sfb-involution-two-descent-prefix, step 3, below the inherited det-thm-sf-ctf-stability-direct-images paragraph (3) alteration route; the current latest blueprint has no separate abstract dihedral-word statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-2bd615be1",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-2bd615be1 (reviewer sub-agent of L); spot-checked: PASS. I read the item, its stmt_dep def-sfb-finite-infinite-set and its parent lem-sfb-involution-two-descent-prefix in full; the parent's step 3 is the only citer. Compared with the base copy in clones/live, the statement, stmt_deps, source and blueprint are unchanged. Only proof, proof_origin, split_report, status and mathlib_searches differ, so no target was weakened. This is a first split, not a 2026-10-21 re-split. The proof has 7 elementary steps with no citations, and I checked each one by hand. Step 1: m>=2, and r^a=r^b exactly when m divides a-b. Step 2: s is not a power of r, using the case m=2; this separates the parities. Step 3: the alternating products are r^a, r^-a, r^a s and r^-(a+1) s, which gives b_s(m)=b_t(m)=w_0 for both parities of m. Step 4: collision cases. Same start letter gives exponent difference |k-l|/2<m. Opposite start letters give (k+l)/2, which lies in (0,m] unless both words are empty, so the only collision is k=l=m. Step 5: the ss/tt deletion and the length-m block swap with the boundary letter. Steps 6-7: termination, and a shortest word admits no move, which settles exhaustiveness, the d-values and uniqueness. The parent's step 3 uses exactly the list and the d-values, under hypotheses that match. No cycle, no new nodes. Duplicate search with rg -L over dag/nodes found only consumers that assume a presentation or a deletion condition. Mathlib's Coxeter alternatingWord lemmas (Basic.lean l.407-492) need a CoxeterSystem and would be circular here, so the item is correctly not a leaf. Cashen is cited honestly as a comparison only, with the local copy WANTED. My own brute-force check of all 678 ordered pairs of distinct non-identity involutions in S3, S4 and S5 (m from 2 to 6) found |H|=2m and exactly the stated shortest-word sets in every case, with 0 failures. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.TwoInvolutionAlternatingMetric",
+  "declaration": "Subgroup.two_involution_alternating_metric",
+  "declarations": [
+   "Subgroup.twoInvolutionWord",
+   "Subgroup.twoInvolutionWordLength",
+   "Subgroup.twoInvolutionShortestWords",
+   "Subgroup.twoInvolutionNormalForms",
+   "Subgroup.two_involution_alternating_metric"
+  ],
+  "file": "lean/Sheaf/GroupTheory/TwoInvolutionAlternatingMetric.lean",
+  "statement": "theorem two_involution_alternating_metric {G : Type u} [Group G] (s t : G) (hs : s ≠ 1) (ht : t ≠ 1) (hst : s ≠ t) (hs2 : s ^ 2 = 1) (ht2 : t ^ 2 = 1) (m : ℕ) (hm : 0 < m) (horder : orderOf (s * t) = m) : 2 ≤ m ∧ (twoInvolutionWord s t m).prod = (twoInvolutionWord t s m).prod ∧ (twoInvolutionNormalForms s t m).Nodup ∧ (∀ g : G, g ∈ closure ({s, t} : Set G) ↔ g ∈ twoInvolutionNormalForms s t m) ∧ twoInvolutionWordLength s t 1 = 0 ∧ twoInvolutionShortestWords s t 1 = {[]} ∧ (∀ k : ℕ, 1 ≤ k → k < m → twoInvolutionWordLength s t (twoInvolutionWord s t k).prod = k ∧ twoInvolutionWordLength s t (twoInvolutionWord t s k).prod = k ∧ twoInvolutionShortestWords s t (twoInvolutionWord s t k).prod = {twoInvolutionWord s t k} ∧ twoInvolutionShortestWords s t (twoInvolutionWord t s k).prod = {twoInvolutionWord t s k}) ∧ twoInvolutionWordLength s t (twoInvolutionWord s t m).prod = m ∧ twoInvolutionShortestWords s t (twoInvolutionWord s t m).prod = {twoInvolutionWord s t m, twoInvolutionWord t s m}",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7f3dfd8d",
+  "group": "NX",
+  "result": "pass",
+  "note": "Read node (only lean differs from side-live), stmt_dep def-sfb-finite-infinite-set (finiteness of {s,t} automatic, correctly not assumed), parent citer lem-sfb-involution-two-descent-prefix, Mathlib CoxeterSystem.alternatingWord (no CoxeterSystem argument; reverse of alternatingWord t s k starts with s = B_s(k)). Every clause matches: 0<m with orderOf(s*t)=m is exactly finite order m; H = Subgroup.closure {s,t}; d = sInf of lengths of {s,t}-lists; conclusions m>=2, b_s(m)=b_t(m), Nodup plus closure-membership iff for the list [1]++(b_s,b_t for 1<=k<m)++[b_s(m)], d(1)=0 with shortest words {[]}, d=k with singleton shortest sets for 1<=k<m, d(w0)=m with shortest words {B_s(m),B_t(m)} (distinct since s≠t). No presentation, deletion, generation or finiteness assumption; universe u free. Edge cases k=0, m=2, m=3; m=0 and m=1 excluded as in the node. Helpers are real data with source and blueprint docstrings; only sorry is the theorem proof; docstring carries all 7 steps; lean.statement matches the file verbatim; no duplicate in side-live lean/Sheaf or Mathlib. No compile run since no file changed; relying on the worker's clean compile. Minor: Subgroup namespace odd but harmless."
+ }
+}

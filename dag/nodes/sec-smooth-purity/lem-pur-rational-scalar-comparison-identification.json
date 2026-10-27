@@ -1,0 +1,278 @@
+{
+ "id": "lem-pur-rational-scalar-comparison-identification",
+ "kind": "statement",
+ "title": "Identification of localized smooth coefficient comparisons and their equations",
+ "statement": "Fix the finite-field and coefficient datum $p,a,q,k_0,k,\\ell,\\overline{\\mathbf Q}_\\ell$ of [def-pur-conventions], and let $f:X\\to Y$ be smooth separated of pure relative dimension $d\\geq0$ between separated finite-type $k$-schemes [def-sbc-smooth-morphisms, def-weil-scheme-morphism-properties]. For each finite $E/\\mathbf Q_\\ell$ in the fixed closure use the integral finite-Tor categories [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude] and their raw rationalizations with functors $Q_{E,W}$ ($W=X,Y$) [def-weil-pbc-rational-category]. Set\n$$H_E^{\\rm int}=Lf_{\\mathcal O_E}^*(-)(d)[2d],\\qquad G_E^{\\rm int}=Rf_{\\mathcal O_E}^!,$$\nusing [def-weil-derived-pullback-tensor-hom, def-coefficient-twists-detailed, def-weil-exceptional-inverse-image]. Suppose a simultaneous integral natural isomorphism $\\eta_E:H_E^{\\rm int}\\Rightarrow G_E^{\\rm int}$ and its exact integral coefficient comparisons $a^{\\rm int},b^{\\rm int}$ are given with all the equations of [lem-pur-adic-purity-scalar-naturality]. In particular $b^{\\rm int}$ is the adjoint transpose of scalar extension of the exceptional counit following the inverse compact-support comparison, and the scalar functor in those equations is ordinary tensor\n$$C_{F/E,W}(-)=(-)\\otimes^L_{\\widehat{\\mathcal O}_{E,W}}\\widehat{\\mathcal O}_{F,W}.$$\n\nOn these inputs the natural completion map $\\chi:C_{F/E,W}\\xrightarrow{\\sim}(-)\\otimes_{\\mathcal O_E}\\mathcal O_F$ identifies this functor with strict inverse-limit scalar extension [def-weil-integral-scalar-extension]. Under this identification the rational scalar functor $T_{F/E,W}$ of [prop-weil-pbc-scalar-extension] is $Q_{F,W}C_{F/E,W}$ on integral representatives, with its tensor associator and shift comparisons retained.\n\nThe localized $H_E^{\\rm int},G_E^{\\rm int}$ are naturally identified with the specified functors\n$$H_E=Lf_E^*(-)(d)[2d],\\qquad G_E=Rf_E^!$$\non the rational categories, including their map actions and shift comparisons. Localization of $a^{\\rm int},b^{\\rm int}$ gives exact natural isomorphisms\n$$a_{F/E}:T_{F/E,X}H_E\\xrightarrow{\\sim}H_FT_{F/E,Y},\\qquad b_{F/E}:T_{F/E,X}G_E\\xrightarrow{\\sim}G_FT_{F/E,Y}.$$\nHere $a$ is the specified pullback, tensor, twist and shift comparison, and $b$ is the counit-preserving exceptional mate for the coefficient-passage functor of [def-weil-exceptional-inverse-image], rather than a comparison chosen using a duality identification. They obey the unit, associator and shift equations of [prop-weil-pbc-scalar-extension]. Writing $\\eta_{E,Q_EK_0}=Q_E(\\eta_{E,K_0})$ for the localized transformation, their equations are\n$$b_{F/E,K}\\circ T_{F/E,X}(\\eta_{E,K})=\\eta_{F,T_{F/E,Y}K}\\circ a_{F/E,K},$$\n$$T_{F/E,X}(\\eta_{E,K}^{-1})\\circ b_{F/E,K}^{-1}=a_{F/E,K}^{-1}\\circ\\eta_{F,T_{F/E,Y}K}^{-1}.$$\nThese are equations of natural transformations on all rational morphisms; both respect identity coefficient extensions, successive coefficient extensions and shifts.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+  "place": "Steps 1 and 2, identify localization and finite field-extension comparisons before passing to Qbar (returned Steps 1c, 1d and 2); agent-extracted interface from the returned seven-step proof"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-pbc-rational-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "lem-pur-adic-purity-scalar-naturality",
+  "def-weil-integral-scalar-extension",
+  "prop-weil-pbc-scalar-extension",
+  "def-pur-canonical-purity-source-transports"
+ ],
+ "proof": [
+  {
+   "text": "Obtain normalized source localization with its exactness and shift structure, and obtain scalar localization with its component, shift, exactness, unit and associator normalization.",
+   "uses": [
+    "lem-pur-rational-source-localization",
+    "lem-pur-rational-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend gamma and a through those normalized identifications. This supplies eta, the canonical a, and the two localized comparison equations, retaining all shift compatibilities.",
+   "uses": [
+    "lem-pur-rational-comparison-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply forward purity and source coherence descent. Taking inverses of the forward equality of composed component isomorphisms gives the inverse square. Apply the final exceptional equations in the same coordinates for localization shift, counit transpose, unit and composition. Package these witnesses and equations into Result.",
+   "uses": [
+    "lem-pur-rational-purity-coherence-descent",
+    "lem-pur-rational-exceptional-final-equations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rational-source-localization",
+  "lem-pur-rational-scalar-localization",
+  "lem-pur-rational-comparison-descent",
+  "lem-pur-rational-purity-coherence-descent",
+  "lem-pur-rational-exceptional-final-equations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "(2)-(3), normalized localization and coefficient equations; formal inverse-square calculation in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of completed integral scalar extension identifies the exceptional inverse image comparison with the counit preserving adjunction mate and preserves the smooth purity square",
+   "results": "{\"t\": \"2026-10-22T06:05:52Z\", \"tool\": \"leanfinder\", \"query\": \"Rationalization of completed integral scalar extension identifies the exceptional inverse image comparison with the counit preserving adjunction mate and preserves the smooth purity square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.Localization.ε_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"CategoryTheory.Adjunction.Localization.η_app\"], \"digest\": \"4d9a9c532072dff2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the specified derived-complete constructible coefficient constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\", \"counit\"",
+   "results": "{\"t\": \"2026-10-22T06:05:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"conjugateEquiv\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_counit_symm\"], \"digest\": \"cc0ff5929eb8eb11\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the specified derived-complete constructible coefficient constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|purity.*scalar|scalar.*purity|completed.*[Ss]calar.*[Cc]omparison",
+   "results": "{\"t\": \"2026-10-22T06:05:33Z\", \"tool\": \"grep\", \"query\": \"smoothPurity|purity.*scalar|scalar.*purity|completed.*[Ss]calar.*[Cc]omparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the specified derived-complete constructible coefficient constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of integral exceptional inverse image scalar comparisons agrees with the rational adjunction mate and its coefficient associator",
+   "results": "{\"t\": \"2026-10-22T06:05:34Z\", \"tool\": \"leansearch\", \"query\": \"Localization of integral exceptional inverse image scalar comparisons agrees with the rational adjunction mate and its coefficient associator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.isIntegral_of_isIntegral_map\", \"isIntegral_localization\", \"Module.Basis.ofIsLocalizedModule_repr_apply\", \"Algebra.intNorm_eq_of_isLocalization\", \"instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"LinearMap.extendScalarsOfIsLocalizationEquiv_symm_apply\", \"IsLocalizedModule.mapExtendScalars\"], \"digest\": \"aedbb984eab56622\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the specified derived-complete constructible coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient field for constructible adic smooth pullback twist shift and upper shriek identifies ordinary tensor comparison with the strict inverse limit comparison",
+   "results": "{\"t\": \"2026-10-22T06:05:51Z\", \"tool\": \"leanfinder\", \"query\": \"Change of coefficient field for constructible adic smooth pullback twist shift and upper shriek identifies ordinary tensor comparison with the strict inverse limit comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\"], \"digest\": \"90f698601603d16b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not identify the specified derived-complete constructible coefficient constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "Rationalization|rationalization|smoothPurity|purity.*scalar",
+   "results": "{\"t\": \"2026-10-22T06:59:35Z\", \"tool\": \"grep\", \"query\": \"Rationalization|rationalization|smoothPurity|purity.*scalar\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization or module-sheaf declarations do not identify the specified completed constructible geometric operations and their purity equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Rationalization",
+   "results": "{\"t\": \"2026-10-22T06:59:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.Rationalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Rationalization'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: query returned no declarations because Rationalization is a project name; corrected by the subsequent counit query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing linear functors and natural transformations identifies the rational smooth purity scalar comparison with the adjunction mate preserving the exceptional counit",
+   "results": "{\"t\": \"2026-10-22T06:59:36Z\", \"tool\": \"leansearch\", \"query\": \"Localizing linear functors and natural transformations identifies the rational smooth purity scalar comparison with the adjunction mate preserving the exceptional counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Localization.Construction.natTransExtension\", \"CategoryTheory.Adjunction.localization\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Localization.functor_linear_iff\"], \"digest\": \"5e30cc0d64ce8745\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization or module-sheaf declarations do not identify the specified completed constructible geometric operations and their purity equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of a linear adjunction preserves its unit counit and the counit transpose comparison for extension of coefficient fields",
+   "results": "{\"t\": \"2026-10-22T06:59:39Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar localization of a linear adjunction preserves its unit counit and the counit transpose comparison for extension of coefficient fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.extendScalarsOfIsLocalization\", \"IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ\", \"LinearMap.extendScalarsOfIsLocalizationEquiv\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"LinearMap.extendScalarsOfIsLocalizationEquiv_apply\", \"IsLocalizedModule.mapExtendScalars\", \"IsLocalizedModule.mapExtendScalars_apply_apply\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\"], \"digest\": \"b0015d5aad9ea322\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization or module-sheaf declarations do not identify the specified completed constructible geometric operations and their purity equations"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_counit_app|def localization|conjugateEquiv_counit",
+   "results": "{\"t\": \"2026-10-22T07:06:54Z\", \"tool\": \"grep\", \"query\": \"localization_counit_app|def localization|conjugateEquiv_counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/FiniteProducts.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/HasLocalization.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\", \"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\"], \"digest\": \"bdf2044eec640b26\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization or module-sheaf declarations do not identify the specified completed constructible geometric operations and their purity equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization_counit_app",
+   "results": "{\"t\": \"2026-10-22T07:06:55Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.localization_counit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.localization_counit_app\"], \"digest\": \"e42f09ac4bfd48f2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization or module-sheaf declarations do not identify the specified completed constructible geometric operations and their purity equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For l adic constructible derived categories localization of integral smooth pullback Tate twist shift and exceptional inverse image gives the rational operations with coherent scalar extension comparisons",
+   "results": "{\"t\": \"2026-10-22T07:07:07Z\", \"tool\": \"leanfinder\", \"query\": \"For l adic constructible derived categories localization of integral smooth pullback Tate twist shift and exceptional inverse image gives the rational operations with coherent scalar extension comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\"], \"digest\": \"03e1bf598823be91\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic localization or module-sheaf declarations do not identify the specified completed constructible geometric operations and their purity equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-rational-and-qbar-purity",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Steps 1 and 2, identify localization and finite field-extension comparisons before passing to Qbar (returned Steps 1c, 1d and 2)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-rational-scalar-comparison-identification",
+  "worker": "stage1",
+  "summary": "O3 splits the supplied integral comparison identification in nine steps, using existing nodes only. Keeps statement and statement dependencies unchanged. Identifies actual completion, tensor associators and shifts; identifies rational functors on pure tensors; localizes the integral Hom bijection; pins the exceptional comparison by its counit transpose; proves all-arrow naturality and both purity equations and coherence. No duality-chosen comparison and no new nodes.",
+  "blueprint": "Nearest ancestor thm-pur-rational-and-qbar-purity, main-20261015 proof Step 1 (rationalizing the integral lattice map) and Step 2 (finite coefficient-extension compatibility before common-stage descent).",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic exact scalar localization of supplied linear functors and transformations; the purity unit needs this tool and has no alternative localization theorem."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Identifies the actual rational coefficient functor and its normalized tensor associator and shifts, not a new purity route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme hypothesis check for the existing coefficient categories."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimensionality check for finite-type schemes over a field."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "The actual ordinary-tensor to strict-tower completion isomorphism on complete inputs."
+   },
+   {
+    "node": "lem-fix-scalar-completion-associator",
+    "why": "Retains the specified quotient-cocone associator when comparing ordinary and strict scalar extension."
+   },
+   {
+    "node": "lem-weil-completed-scalar-chain-shift",
+    "why": "Retains the specified shift of the completion map."
+   },
+   {
+    "node": "lem-pur-adic-purity-scalar-naturality",
+    "why": "The integral comparison and purity equations are explicit hypotheses of this item."
+   },
+   {
+    "node": "prop-coef-integral-exceptional-adjoint",
+    "why": "Generic integral constructible adjunction whose linear Hom bijection is localized, without using its duality formula."
+   },
+   {
+    "node": "lem-coef-rational-operations",
+    "why": "Identifies the specified rational adjunction with coefficient passage while preserving units and counits."
+   },
+   {
+    "node": "lem-weil-integral-twist-scalar-coherence",
+    "why": "Generic coherence for the twist factor of the source comparison."
+   },
+   {
+    "node": "lem-sf-constructible-exceptional-coefficient-construction",
+    "why": "Generic normalized coefficient construction fixes the compact-support comparison and its exceptional counit transpose at integral and rational stages."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-fix-scalar-completion-associator",
+  "lem-weil-completed-scalar-chain-shift",
+  "lem-pur-adic-purity-scalar-naturality",
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-coef-rational-operations",
+  "lem-weil-integral-twist-scalar-coherence",
+  "lem-sf-constructible-exceptional-coefficient-construction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O3-1a3942927",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-1a3942927 (reviewer sub-agent of L); spot-checked: I read all nine steps in full, against the full statement of every cited node and the main-20261015 proof of thm-pur-rational-and-qbar-purity, Steps 1-2. This is the first delivery of this new node; live and side-live hold it unsplit and there is no repair note for it, so it is not superseded. The statement and stmt_deps are unchanged against live. proof_deps equals the union of the step uses. A traversal of the dependencies (about 16.6k nodes) never reaches the item or its parent. There is no SGA citation and every step is under 2000 characters. Step checks: (1) the finite-type-over-noetherian leaf and kun-dimension cover the scheme hypotheses, and ell is invertible since char k = p. (2) chi from finite-free-completed-scalar-comparison on complete inputs, the associator normalization a^I o I(chi) o chi = chi o a^C, the chain shift, and T = Q_F C from prop-weil-pbc-scalar-extension; for E=F the step keeps the completeness map and unitor before using T_{E/E}=id. (3) rational-transport gives the E-linear extension and the definitions give the map action u(x)lambda. (4) the integral Hom bijection of prop-coef-integral-exceptional-adjoint (separated X,Y) is O_E-linear, so tensoring with E gives the rational Homs; the counit is Q(eps). (5) localizing a, with twist coherence. (6) I checked the type of eps_F o P_F(b~) = T_Y(eps_E) o c^{-1} (P_F T_X G_E K -> T_Y K); it is the transpose form of def-weil-pbc-adjunction-mate, and injectivity gives b~ = b. Steps 7-9 are genuinely elementary: multiply by lambda and add, invert, and apply Q to the unit, associator and shift equations. Edge cases checked: E=F, ramified E in F, a chain E in F in L, d=0, empty schemes, K=0. FIX (E5): Step 6 only asserted that b is also the coefficient-passage comparison of def-weil-exceptional-inverse-image. The repair names that comparison beta, quotes its counit equation from lem-coef-rational-operations ('preserve ... counits, including under finite scalar extension'), and gets beta = b by the same injectivity. Only the text of Step 6 changes. The 12 declared tool_uses are generic scalar, adjunction and coherence calculus and are accepted. Maintainer note: prop-coef-integral-exceptional-adjoint's G_f and def-weil-exceptional-inverse-image's Rf^!_{O_E} share the object formula but name different coherent realizations; this is inherited and does not block this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalScalarComparisonIdentification",
+  "declaration": "WeilConjectures.RationalScalarComparisonIdentification.rationalScalarComparisonIdentification",
+  "declarations": [
+   "WeilConjectures.RationalScalarComparisonIdentification.Result",
+   "WeilConjectures.RationalScalarComparisonIdentification.rationalScalarComparisonIdentification"
+  ],
+  "file": "lean/Sheaf/Paper/RationalScalarComparisonIdentification.lean",
+  "statement": "theorem rationalScalarComparisonIdentification : Result D C f d S I",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c2a429cf",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the e965 H2 return. The item module is identical to e965 except that the IntegralLocalizingCompactSupport import is now non-public. The item node drops theorem stmt_dep det-prop-int-brown-construction and keeps def-pur-canonical-purity-source-transports; statement, proof and proof_deps are unchanged. Dependency repairs change only the lean records: pull/push are abbrevs of moduleDerivedPullback/Pushforward, checked literally equal to (upperStar Λ f).leftDerivedFunctor and (lowerStar Λ f).rightDerivedFunctor; @[no_expose] finiteProperExchange keeps its body and signature; FiniteProperBaseChange drops one local irreducible entry. Recorded signatures match the source. Independent reading of Result: SourceLocalizationNormalization pins hLocalization (good-line conjunct holds), so eta is the transport of Q(I.gamma); hShift is fixed by its shift compatibility; a = sourceScalar; b = system rationalComparison.b with the counit-transpose clause; scalarLocalization = Q(scalarBridge); the two PuritySquares match the node's displayed equations; unit, associator and shift clauses are present; edge cases E=F, chains, ramified extensions, d=0, empty schemes and integer shifts are covered; no hollow definitions; report sections present. Advisories: no_expose hides the mate body from stage-3 proofs in other modules (needs import all or an _eq lemma); uncited helper owners follow family precedent. No compile was run (no file changed); the worker reports a clean four-module compile and a passed dry run at 4ed7d68b928."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-a902c",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T122802-L-1807300",
+  "kind": "interface",
+  "note": "independent cc review: item Result + 28 moved defs vs published RationalScalarComparisonIdentification (byte-identical; coefficientTranspose rfl-equal in scratch compile); 5 new sorried helpers vs Result's conjuncts and pinning predicates; 7 node files vs Lean"
+ }
+}

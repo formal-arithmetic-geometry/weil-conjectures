@@ -1,0 +1,386 @@
+{
+ "id": "lem-sfb-root-tower-punctured-face-diagram",
+ "kind": "statement",
+ "title": "Normalized punctured root-tower coordinate-face diagram",
+ "statement": "Fix distinct primes $p,\\ell$, a characteristic-$p$ field $k$, a finite norm-topological extension $E/\\mathbf Q_\\ell$, and an algebraic closure $\\Omega\\supset E$ with its extended norm topology. For $F=E,\\Omega$ use the condensed ring $C_F(P)=C(P,F)$ of all continuous maps, its pullbacks $C_{F,X}=p_X^*C_F$, and internal modules and ordinary unbounded derived direct images [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull]. Sites are small pro-etale sites [def-weil-pbc-proetale-site].\nLet $Y$ be a regular separated finite-type $k$-scheme and $B\\to Y$ an affine etale chart with boundary the reduced strict normal crossings divisor $V(t_1\\cdots t_r)$, whose branches are exactly $V(t_d)$ [def-weil-regular-scheme, def-trf-strict-normal-crossings-boundary]. Let $U=\\operatorname{Spec}R\\to B$ be affine pro-etale, put $S=U\\times_B V(t_1,\\ldots,t_r)$, and set\n$$T=\\operatorname{Spec}\\left(\\varinjlim_{(n,p)=1}R[x_{d,n}]_{1\\le d\\le r}/(x_{d,n}^n-t_d)_d\\right).$$\nThe index consists of positive integers prime to $p$, ordered by divisibility, and the transition for $n\\mid m$ sends $x_{d,n}$ to $x_{d,m}^{m/n}$. Let $i:S\\to T$ set every root to zero. Partition $\\{1,\\ldots,r\\}=I_o\\sqcup I_i$ with $I_i\\ne\\varnothing$. Let $V\\subset U$ invert all outer parameters and let $W\\subset V$ invert all parameters. Put $T^\\circ=T\\times_UW$. Write $a:V\\hookrightarrow U$ and let $h:Z\\hookrightarrow V$ be the reduced closed complement of $W$ in $V$.\nLet $\\mathcal N$ be a finite-rank lisse $C_{F,T}$-module [def-sfb-lisse-coefficient-module]. For a profinite set $P$ let $\\mathcal N_P$ denote its pullbacks to $T[P]$ and its restrictions [def-sfb-profinite-test-objects]. Let $q_P:T[P]\\to U$ and $f_P:T^\\circ[P]\\to V$ be structural, and set $H_P=Rq_{P,*}\\mathcal N_P[0]$ and $K_P=Rf_{P,*}\\mathcal N_P[0]$.\nBoth $K_P$ and $H_P$ have zero cohomology in negative degrees.\nFor every nonempty $J\\subseteq I_i$ put $U_J=\\operatorname{Spec}(R/(t_j)_{j\\in J})$, $V_J=U_J\\times_U V$, with closed inclusions $g_J:U_J\\hookrightarrow U$, $d_J:V_J\\hookrightarrow V$. There are natural isomorphisms\n$$\\lambda_P:Ra_*K_P\\xrightarrow{\\sim}H_P,\\qquad \\mu_{J,P}:Ra_*d_{J,*}d_J^*K_P\\xrightarrow{\\sim}g_{J,*}g_J^*H_P.$$\nHere $\\lambda_P$ is the inverse of the pushed-forward actual open unit for $T^\\circ[P]\\hookrightarrow T[P]$, using canonical derived composition. If $u_{J,P}:K_P\\to d_{J,*}d_J^*K_P$ and $v_{J,P}:H_P\\to g_{J,*}g_J^*H_P$ are the actual closed units [lem-weil-pbc-proetale-ringed-open-closed], then\n$$\\mu_{J,P}\\circ Ra_*(u_{J,P})=v_{J,P}\\circ\\lambda_P.$$\nFor $J\\subseteq J'$ the isomorphisms $\\mu$ intertwine the actual successive closed restriction maps, so these equations identify the entire augmented finite face diagrams. They are natural in $P$, in maps of supplied lisse modules, and under pro-etale base change of $U$. They commute with root-tower automorphisms preserving the indicated faces and opens, with the supplied equivariant module actions, and with profinite families of such automorphisms: a family indexed by $Q$ gives equality on the entire $Q$-parametrized terms. Empty outer set, empty charts, and rank zero are included. No boundary trivialization or internal Hom comparison is assumed or concluded.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent expansion of root-tower inner-support proof steps 1–2: remove outer and inner punctures and identify the whole normalized coordinate-face diagram. Agent-formulated extracted obligation; not a verbatim assertion of the blueprint."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-proetale-site",
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-profinite-test-objects",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-sfb-test-map-derived-composition",
+  "def-sfb-coordinate-face-exchange-data",
+  "def-sfb-root-coordinate-open"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-internal-module-operations-transport] and [lem-weil-pbc-ring-sheaves-grothendieck] to work in Grothendieck module categories with their actual adjunctions. They have enough injectives by [lem-sp-grothendieck-enough-injectives]. By [lem-weil-pbc-left-exact-injective-resolution-degree-zero] choose injective resolutions of the degree-zero modules on $T[P]$ and $T^\\circ[P]$ supported in degrees $\\geq0$. They are K-injective by [lem-sp-kinjective-computes], and compute the ordinary unbounded direct images [sk-def-sfb-module-derived-pushpull]. The direct images are additive and left exact by [def-sfb-module-lower-star]. Applying them termwise leaves zero terms in negative degrees. Hence $H_P,K_P\\in D^{\\geq0}$.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-sp-kinjective-computes",
+    "sk-def-sfb-module-derived-pushpull",
+    "def-sfb-module-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent normalized face-diagram assembly, step 1"
+   }
+  },
+  {
+   "text": "Suppress $P$ in the notation. Put $T_V=T\\times_U V$, with $b:T_V[P]\\hookrightarrow T[P]$, $c:T^\\circ[P]\\hookrightarrow T_V[P]$, and $q_V:T_V[P]\\to V$. Write $A=Rq_{V,*}(b^*\\mathcal N_P)[0]$. [lem-sfb-root-tower-profinite-base-change] identifies these as the indicated root towers and opens. The units for $b$ and $bc$ are invertible by [lem-sfb-root-tower-puncture-invariance], with subsets $I_o$ and all indices. The unit for $c$ is their restriction to the outer open; the open-slice comparison [lem-sfb-module-direct-image-open-pasting], derived using [lem-sfb-kinjective-direct-image-open-word-model], identifies this restriction with the same actual unit by [lem-sfb-clean-open-unit-parametrized-exchange]. The required coefficient identifications are [lem-sfb-alpha-iso]. Thus their pushed units give isomorphisms $\\nu:H_P\\to Ra_*A$ and $\\kappa:A\\to K_P$. By [lem-sfb-derived-composition-adjunction-normalization] their composite $\\nu_{\\rm all}=(Ra_*\\kappa)\\nu$ is the pushed actual unit for $bc$. Define $\\lambda_P=\\nu_{\\rm all}^{-1}$.",
+   "uses": [
+    "lem-sfb-root-tower-profinite-base-change",
+    "lem-sfb-root-tower-puncture-invariance",
+    "lem-sfb-clean-open-unit-parametrized-exchange",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-sfb-module-direct-image-open-pasting",
+    "lem-sfb-kinjective-direct-image-open-word-model",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent normalized face-diagram assembly, step 2"
+   }
+  },
+  {
+   "text": "For $J\\subseteq I_i$ use the zero-root face $e_J:T_J[P]\\to T[P]$ and put $N_J=e_J^*\\mathcal N_P$, $H_J=Rq_{J,*}N_J[0]$. Write $T_{J,V}=T_J\\times_U V$, $b_J:T_{J,V}[P]\\hookrightarrow T_J[P]$, $a_J:V_J\\hookrightarrow U_J$, and $H_{J,V}=Rq_{J,V,*}(N_J|_{T_{J,V}[P]})[0]$. The restriction $N_J$ is lisse: exact coefficient pullback preserves its finite-free local trivializations, using [det-prop-sfb-module-pullback-exact-main] and [def-sfb-lisse-coefficient-module]. Apply [lem-sfb-residual-root-tower-local-charts] to $J$. On each resulting open chart $T_J[P]$ is a full root tower over an affine pro-etale regular SNC chart, and $b_J$ inverts precisely its active outer parameters. [lem-sfb-root-tower-puncture-invariance] makes its actual unit invertible there. Restriction to these opens commutes with derived direct images: apply the open-slice isomorphism [lem-sfb-module-direct-image-open-pasting] to K-injectives using [lem-sfb-kinjective-direct-image-open-word-model]; coefficient isomorphisms are [lem-sfb-alpha-iso]. The cone of the unit has zero cohomology on this open cover, hence its cohomology sheaves vanish by the sheaf gluing axiom. Therefore the unit is globally invertible. Pushing it gives $\\omega_J:H_J\\xrightarrow{\\sim}Ra_{J,*}H_{J,V}$.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "def-sfb-lisse-coefficient-module",
+    "lem-sfb-residual-root-tower-local-charts",
+    "lem-sfb-root-tower-puncture-invariance",
+    "lem-sfb-module-direct-image-open-pasting",
+    "lem-sfb-kinjective-direct-image-open-word-model",
+    "lem-sfb-alpha-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent normalized face-diagram assembly, step 3"
+   }
+  },
+  {
+   "text": "The counit-normalized isomorphisms of [lem-sfb-root-tower-coordinate-face], over $U$ and after restriction to $V$, are $\\beta_U:g_J^*H_P\\xrightarrow{\\sim}H_J$ and $\\beta_V:d_J^*A\\xrightarrow{\\sim}H_{J,V}$. For the latter restriction use the open-slice/K-injective comparisons of step 3; the node explicitly includes open restriction. Closed direct images are exact by [lem-weil-pbc-proetale-ringed-open-closed]: the complement of $U_J$ is the finite union $\\bigcup_{j\\in J}D(t_j)$ of quasi-compact principal opens, and the same holds in $V$. Set $\\tau_J$ to be the composite\n$$Ra_*d_{J,*}d_J^*K_P\\xrightarrow{Ra_*d_{J,*}d_J^*\\kappa^{-1}}Ra_*d_{J,*}d_J^*A\\xrightarrow{Ra_*d_{J,*}\\beta_V}g_{J,*}Ra_{J,*}H_{J,V}\\xrightarrow{g_{J,*}\\omega_J^{-1}}g_{J,*}H_J.$$\nThe middle arrow inserts $ad_J=g_Ja_J$ and [lem-sfb-derived-composition-adjunction-normalization]. Define $\\mu_{J,P}=(g_{J,*}\\beta_U^{-1})\\tau_J$. Every arrow is invertible, so this is the asserted derived isomorphism.",
+   "uses": [
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent normalized face-diagram assembly, step 4"
+   }
+  },
+  {
+   "text": "We check the normalization before inverting. Let $w_J:A\\to d_{J,*}d_J^*A$ be its actual closed unit. Naturality of that unit gives $d_{J,*}d_J^*\\kappa^{-1}\\circ u_{J,P}\\circ\\kappa=w_J$. Put $\\chi_J:Ra_*d_{J,*}H_{J,V}\\cong g_{J,*}Ra_{J,*}H_{J,V}$ for composition. The normalization clause of [lem-sfb-root-tower-coordinate-face] and mate pasting [lem-weil-pbc-mate-pasting] give\n$$\\chi_J(Ra_*d_{J,*}\\beta_V)(Ra_*w_J)\\nu=(g_{J,*}\\omega_J)(g_{J,*}\\beta_U)v_{J,P}.$$\nIndeed both sides are $Rq_{P,*}$ of the restriction unit from $\\mathcal N_P$ to the face $T_{J,V}[P]$: the left factors first through the outer open then its closed face; the right factors first through the closed face then its outer open. Under the composite adjunction both have transpose the identity of $\\mathcal N_P|_{T_{J,V}[P]}$. The coordinate-face node identifies the closed transpose with the actual closed unit; the composition-normalization node identifies the open composite with its actual unit. Thus the preceding equality is of the specified maps. Cancel $g_{J,*}\\omega_J$ and $g_{J,*}\\beta_U$, substitute $\\nu_{\\rm all}=Ra_*\\kappa\\nu$, and obtain $\\mu_{J,P}Ra_*(u_{J,P})\\nu_{\\rm all}=v_{J,P}$. Composing with $\\lambda_P$ proves the required equation.",
+   "uses": [
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent normalized face-diagram assembly, step 5"
+   }
+  },
+  {
+   "text": "For $J\\subseteq J'$ the coordinate-face node identifies successive $\\beta$ maps with restriction to the smaller zero-root face. Naturality of the open unit with respect to the closed-unit morphism identifies the two successive $\\omega$ maps. Mate pasting [lem-weil-pbc-mate-pasting] says that either route is the mate of the same pulled-back identity on $T_{J',V}[P]$. Inserting the definitions of $\\tau$ and $\\mu$ therefore identifies the actual successive closed restriction maps. Together with step 5 this proves the entire augmented finite diagram. No choice of a chart in step 3 enters these maps: that cover was used only to prove that the specified $\\omega_J$ is invertible.",
+   "uses": [
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent normalized face-diagram assembly, step 6"
+   }
+  },
+  {
+   "text": "The units used above and their inverses are natural in module maps by [lem-sfb-clean-open-unit-parametrized-exchange]. The puncture and coordinate-face nodes give the same assertions for parameter maps, pro-etale base change and equivariant actions. Composition and inversion preserve each commuting square, proving these assertions for $\\lambda$ and $\\mu$. For a profinite family $Q$ apply those very squares on $T[P][Q]$, its opens and its faces: [lem-sfb-root-tower-profinite-base-change] identifies them with the corresponding $P\\times Q$ terms. The cited nodes give equality on these entire terms; hence the composite formulas do too. For $I_o=\\varnothing$, $b,b_J$ and $\\nu,\\omega_J$ are identities. Empty faces or charts and rank zero give zero objects and the same equations; $r=0$ admits no partition with $I_i\\ne\\varnothing$. No boundary trivialization or internal Hom enters.",
+   "uses": [
+    "lem-sfb-clean-open-unit-parametrized-exchange",
+    "lem-sfb-root-tower-puncture-invariance",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-profinite-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent normalized face-diagram assembly, step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-sp-kinjective-computes",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-module-lower-star",
+  "lem-sfb-root-tower-profinite-base-change",
+  "lem-sfb-root-tower-puncture-invariance",
+  "lem-sfb-clean-open-unit-parametrized-exchange",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sfb-module-direct-image-open-pasting",
+  "lem-sfb-kinjective-direct-image-open-word-model",
+  "lem-sfb-alpha-iso",
+  "det-prop-sfb-module-pullback-exact-main",
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-residual-root-tower-local-charts",
+  "lem-sfb-root-tower-coordinate-face",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), one-term tame-boundary calculation; explicit assembly from existing puncture invariance and coordinate-face base change, with residual geometric charts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived direct images of a punctured Kummer root tower at coordinate closed faces commute with closed adjunction units",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Removing outer coordinate divisors from root towers preserves the closed face direct image diagram",
+   "results": "8 hits: BoxIntegral.Box.face_mk, BoxIntegral.Box.mapsTo_insertNth_face, SSet.stdSimplex.range_δ, SSet.stdSimplex.face_eq_ofSimplex, BoxIntegral.Box.face_lower, Affine.Simplex.range_face_reindex, SSet.stdSimplex.face_singleton_compl, SSet.stdSimplex.face_obj; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Kummer\", \"unit\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|rootTower).*(face|punctur)|(face|punctur).*rootTower",
+   "results": "0 hits: ; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coordinate restrictions of punctured parameter root towers with normalized closed adjunction units",
+   "results": "8 hits: RootPairing.restrictScalars_coe_root, PadicInt.unitCoeff, Complex.UnitDisc.instIsScalarTower_closedBall, RootPairing.restrictScalars'.congr_simp, RootPairing.prod_rootForm_smul_coroot_mem_range_domRestrict, stalkSkyscraperSheafAdjunction, Polynomial.instIsScalarTowerElemRootSet, AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not assert the normalized derived face diagram or finite filtered simplex criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived direct images of punctured Kummer root towers commute with coordinate face restriction and adjunction units",
+   "results": "8 hits: IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom, AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Kummer\", \"unit\"",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|rootTower).*(face|punctur)|(face|punctur).*rootTower",
+   "results": "0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived coordinate restrictions of punctured parameter root towers with normalized closed adjunction units",
+   "results": "8 hits: RootPairing.restrictScalars_coe_root, PadicInt.unitCoeff, Complex.UnitDisc.instIsScalarTower_closedBall, RootPairing.restrictScalars'.congr_simp, RootPairing.prod_rootForm_smul_coroot_mem_range_domRestrict, stalkSkyscraperSheafAdjunction, Polynomial.instIsScalarTowerElemRootSet, AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Removing coordinate divisors in an infinite root cover preserves the entire derived closed face diagram",
+   "results": "8 hits: RootPairing.EmbeddedG2.setOf_index_eq_univ, RootPairing.Iic_chainBotCoeff_eq, RootPairing.Base.exists_eq_sum_and_forall_sum_mem_of_isPos, RootPairing.Iic_chainTopCoeff_eq, ShrinkingLemma.PartialRefinement.apply_eq, ShrinkingLemma.PartialRefinement.exists_gt, RootPairing.setOf_root_sub_zsmul_mem_eq_Icc, ShrinkingLemma.PartialRefinement.mem_find_carrier_iff; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations do not give the residual SNC root-tower presentation or normalized derived face diagram"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-root-tower-inner-support",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent expansion of root-tower inner-support proof steps 1–2: remove outer and inner punctures and identify the whole normalized coordinate-face diagram.",
+   "via": [
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-root-tower-punctured-face-diagram",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Constructed the isomorphisms from existing puncture invariance and coordinate-face exchange; checked the actual-unit equality by transposition and the full nested-face and profinite-family compatibilities. One new statement-only geometric input treats disconnected residual faces and inactive unit roots, without restating a derived conclusion.",
+  "blueprint": "Main-20261015 direct-images proof paragraph (3): the open direct-image route only. This all-continuous extracted obligation is agent-formulated; inherited nearest blueprint ancestor is null. Steps 2–4 remove punctures and identify face terms; steps 5–7 normalize and compare the complete diagrams.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic small ringed-site Grothendieck property after the internal-module equivalence."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic existence of injectives in a Grothendieck category for the nonnegative resolution argument."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "Generic existence of an injective resolution supported in nonnegative degrees; no geometric route change."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic fact that bounded-below injective resolutions are K-injective, so they compute the unbounded derived image."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic composite derived adjunction with the actual unit/counit normalization."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic exact closed direct image and specified closed adjunction, with quasi-compact complements checked."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic categorical pasting of mates, used to compare the actual units rather than chosen isomorphic objects."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic exact equivalence with ring-sheaf modules, preserving actual adjunction units/counits."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic coefficient pullback identification needed for the K-injective open-word comparison."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness of the fixed-coefficient inverse image, used to pull back finite-free trivializations."
+   },
+   {
+    "node": "lem-sfb-module-direct-image-open-pasting",
+    "why": "Generic open-slice direct-image comparison and counit identity, not a replacement for the geometric puncture calculation."
+   },
+   {
+    "node": "lem-sfb-kinjective-direct-image-open-word-model",
+    "why": "Generic K-injective computation deriving the open-slice comparison on unbounded complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-sp-kinjective-computes",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-alpha-iso",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-sfb-module-direct-image-open-pasting",
+  "lem-sfb-kinjective-direct-image-open-word-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-4262565e7",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-4262565e7 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-residual-root-tower-local-charts, every cited statement, Stacks 0BIA (etale.tex line 2419) and 00UB/00UC, and main-20261015 direct-images paragraph (3). No SGA is cited. The item statement is unchanged against live. Seven steps. (1) Nonnegative-degree injective resolutions are K-injective and left-exact pushforward preserves degrees, so H_P, K_P lie in D^{>=0}. (2) lambda is the inverse of the pushed actual bc-unit: puncture-invariance with A=I_o and A=all, clean-open-unit restriction for c, and derived-composition normalization. (3) omega_J is invertible: N_J is lisse by exact pullback and alpha-iso; the new node's charts present T_J x W as a full tower in the active parameters L over an affine pro-etale base D_W, with b_J inverting prod over I_o∩L; puncture-invariance applies on each chart; the global statement follows by open-pasting, the K-injective word model and gluing. (4) mu: coordinate-face gives beta_U and beta_V; closed images are exact because the complement union of D(t_j) is quasi-compact; I checked the typing of tau. (5) The normalization equation holds as an equality of specified arrows, using the closed-adjunct clause of coordinate-face, mate-pasting and composition normalization. (6) and (7) are elementary: nested faces, naturalities and Q-families. The new node is true: at a point, the vanishing t-bar_d are part of a regular parameter system by the SNC dimension condition; shrinking makes the rest units and the components integral; unit roots are finite etale since n is prime to p; double colimit equals diagonal colimit. I tested it on the axes in A^2 and the empty-face case. It is not a duplicate of snc-universal-residual-charts, labelled-affine-stratum-charts, snc-root-local-presentation, snc-root-stage-system or unit-root-coordinate-tower-comparison, and it is not a restated clause of the parent. FIX (E1/C4 at step 3): the new node assumed B=Spec A regular separated finite type, but the item only has B->Y an affine etale chart of a regular Y, and nothing cited proves that etale over regular is regular. I restated the node's hypothesis in the item's form (Y regular separated finite type, B->Y affine etale chart [def-weil-etale-morphism]) and concluded that B and B_J are regular; def-weil-etale-morphism is added to stmt_deps. File: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-residual-root-tower-local-charts.json. Batch-5: all five flags reach def-trf-strict-normal-crossings-boundary, a general definition that is not part of the trace formula or Poincare duality, or reach it only through the definition def-sfb-full-parameter-root-tower; accepted. Generic tool_uses accepted: the Grothendieck module-category, enough-injectives, degree-zero resolution and K-injective nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RootTowerPuncturedFaceDiagram",
+  "declaration": "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.rootTower_punctured_face_diagram",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.Diagram",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.Face",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.full",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.punctured",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.faceTerm",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.openUnit",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.faceUnit",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.successive",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.normalization",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.nested",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.DiagramMap",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.FaceMap",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.openModuleMap",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.fullMap",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.puncturedMap",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.ambientMap",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.fullFaceMap",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.puncturedFaceMap",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.forward_naturality",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.inverse_naturality",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.outer",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.punctured_range",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.puncturedProjection",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.diagram_square",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.rootDiagram",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.rootFace",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.Assertion",
+   "AlgebraicGeometry.ProEtale.PuncturedFaceDiagram.rootTower_punctured_face_diagram"
+  ],
+  "file": "lean/Sheaf/Paper/RootTowerPuncturedFaceDiagram.lean",
+  "statement": "theorem rootTower_punctured_face_diagram (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (Ω : Type u) [NormedField Ω] [NormedAlgebra E Ω] [IsAlgClosure E Ω] (Y : Scheme.{u}) (y : Y ⟶ Spec (.of k)) [LocallyOfFiniteType y] [QuasiCompact y] [IsSeparated y] (hY : IsRegularScheme Y) (A : Type u) [CommRing A] (b : Spec (.of A) ⟶ Y) [Etale b] (r : ℕ) (s : Fin r → A) (H : (Spec (.of A)).IdealSheafData) (hH : IsStrictNormalCrossingsBoundary H) (hproduct : H = Scheme.IdealSheafData.ofIdealTop (Ideal.span {(Scheme.ΓSpecIso (CommRingCat.of A)).inv (∏ i, s i)})) (hbranches : Set.range (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({s i} : Set A)) = Set.image (Set.image Subtype.val) (irreducibleComponents (H.support : Set (Spec (.of A))))) (R : Type u) [CommRing R] (a : A →+* R) [WeaklyEtale (Spec.map (CommRingCat.ofHom a))] : Assertion p (fun i ↦ a (s i)) E ∧ Assertion p (fun i ↦ a (s i)) Ω",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair of immutable returned head 5b487df3c989: Lean source is byte-identical (SHA256 cbd39092c4e16f369ada3cd879c041fed90d3e5fdc5b4ff09050705bcef8130e). The two theorem-only statement dependencies are removed and retained in proof_deps. Shared test maps and normalized derived composition are cited through their existing definition-node owner; six face/exchange helpers and rootCoordinateOpen are cited through new existing:true definition nodes. The mathematical statement, proof plan and Lean declarations are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8e0322aa",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 5b487df3c989, which was returned only for H2. Lean byte-identical (sha cbd39092…); lean.statement and declarations unchanged, statement is a verbatim substring of the file; the earlier full maths reading stands. Against live the item differs only in stmt_deps and lean. Removed theorem stmt_deps lem-sfb-root-tower-coordinate-face and lem-sfb-root-tower-puncture-invariance; both kept in proof_deps. Added def-sfb-test-map-derived-composition (live, existing:true: Modules/upper/lower/adjunction/upperComp/lowerComp/test/testMap), new existing:true def-sfb-coordinate-face-exchange-data (exchange/squareUpper/towerProjection/baseIdeal/baseInclusion/testModuleComplex) and new existing:true def-sfb-root-coordinate-open (basicOpen of the ι-image of ∏_s t). Signatures verbatim and TeX faithful to the live bodies; new nodes cite only definition nodes. Every identifier the item uses from the two theorem modules is now owned by a definition node; neither module uses choose. Report sections present. H11 advisory only. No compile, since no file was changed."
+ }
+}

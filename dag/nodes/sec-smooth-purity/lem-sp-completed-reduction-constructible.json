@@ -1,0 +1,147 @@
+{
+ "id": "lem-sp-completed-reduction-constructible",
+ "kind": "statement",
+ "title": "Completed ell-power reduction preserves integral constructibility",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a Noetherian scheme $T$ on which $\\ell$ is invertible. For the normalized coefficient-tower interface $D$ and reduction construction $R$ of [det-sp-reduction-tower-normalized], transport reduction to the completed coefficient derived category as in [lem-sp-completed-tower-roos]. If $M$ satisfies $\\operatorname{sfIntegralConstructible}$ [def-weil-derived-complete-integral-detailed], then its transported reduction satisfies $\\operatorname{spNormalizedConstructibleTorTowers}$ [sk-def-sp-normalized-towers]: all levels have bounded constructible cohomology and finite Tor amplitude with one common cohomological interval and one common Tor interval, and every actual reduction map is invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Adjunction, Unit, Counit and Restriction paragraphs; Bhatt--Scholze Lemma 3.5.7"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-reduction-tower-normalized",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sp-completed-tower-roos"
+ ],
+ "proof": [
+  {
+   "text": "Unpack integral constructibility: all positive uniformizer reductions are intrinsically constructible in one common cohomological interval. Intrinsic finite torsion constructibility uses the same stratification and finite stalks as the pro-etale predicate.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-proetale-constructible-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the residue Tor theorem to a common interval containing residue cohomology. It provides one Tor interval for every uniformizer reduction. Write ell as a unit times pi^e and select levels e(n+1); the quotient ring isomorphisms preserve constructibility, cohomological bounds and Tor amplitude.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived evaluation comparisons of R identify the selected reductions with the actual completed reduction tower. Its transitions are normalized by R.normalized. These are precisely the two conjuncts of the normalized constructible finite-Tor tower predicate.",
+   "uses": [
+    "det-sp-reduction-tower-normalized",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-coef-integral-residue-tor",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-reduction-tower-normalized",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Normalization: Restriction paragraph, forward direction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor between full subcategories is an equivalence when an adjunction has invertible unit and counit",
+   "results": "Adjunction.toEquivalence and its functor/inverse equations; abstract restriction assembly only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse limit of strict sheaf module towers has distinguished Roos triangle with canonical projections",
+   "results": "Eight hits: derived-category fractions and triangleOfSES; no completed coefficient tower comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.toEquivalence",
+   "results": "Adjunction.toEquivalence and component formulas; abstract equivalence only.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derived.*[Cc]omplet|[Nn]ormalized.*[Tt]ower",
+   "results": "Three normalized field trace hits; none concerns derived module-sheaf towers.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityNormalizedEquivalence",
+  "date": "2026-10-25",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization: Restriction paragraph, forward direction",
+   "via": [
+    "det-sp-normalized-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityCompletedReductionConstructible",
+  "file": "lean/Sheaf/Paper/SmoothPurityCompletedReductionConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spCompletedReduction_constructible",
+  "statement": "theorem spCompletedReduction_constructible [∀ x : T, Invertible (l : T.residueField x)] [IsNoetherian T] (D : SpCoefficientTowersAbelian l E T) (R : SpReductionTower l E T D) (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T)) (hM : WeilConjectures.sfIntegralConstructible l E T M) : spNormalizedConstructibleTorTowers l E T D ((spCompletedReduction l E T D R).obj M)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c225",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261025T095827-L-3486300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c225",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261025T095827-L-3486300",
+  "kind": "interface",
+  "note": "independent cc review: moved defs byte-identical to clone; item sig/structure unchanged; 3 sorry lemmas vs item fields (all implied by item statement; Roos w/o Invertible true via coefficientConstantTower_roos); 5 direct importers compiled against delivered interface OK; #print axioms clean"
+ }
+}

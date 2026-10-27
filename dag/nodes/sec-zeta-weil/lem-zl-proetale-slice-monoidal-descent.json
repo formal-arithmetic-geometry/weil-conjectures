@@ -1,0 +1,144 @@
+{
+ "id": "lem-zl-proetale-slice-monoidal-descent",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Normalized monoidal descent to a pro-etale object",
+ "statement": "Given arbitrary pro-etale coefficient comparison data [def-zl-proetale-slice-comparison-data] and an ordinary inverse-image/restriction isomorphism with its distinguished-section normalization, there exist exact restriction and scalar-transport tensor descents, ordinary unit isomorphisms and their pure-generator and localization equations. Their ordinary isomorphism is the given one. The canonical derived pullback tensor comparison respects the specified Koszul symmetries. This is the monoidal part only, without any internal-Hom assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9, 08JB and 0FPT; normalized slice comparison in Hemo--Richarz--Scholbach Lemma 4.5."
+ },
+ "stmt_deps": [
+  "def-zl-proetale-slice-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied ordinary comparison and its section normalization. Identify the source small site with the literal slice via the canonical equivalence. The section equation fixes the ordinary map used in each tensor compatibility calculation.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the ordinary tensor comparison to the small site of U. Scalar transport is an exact equivalence with the same pure-tensor maps in both directions. The restriction unit is identity; the scalar unit is b. Extend these maps to signed total complexes and localize on K-flat representatives; the representative models determine the natural comparisons and exact squares.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the pullback tensor square both paths send (x tensor s) tensor (y tensor t) to b inverse(st) times (delta(x) tensor delta(y)). For units they agree by b delta_O=c. Equality on sheafified generators and the K-flat localization characterization identify them with the specified canonical comparisons. On bidegree (p,q) both symmetry routes send x tensor y to (-1)^(pq)y tensor x. The given coherence witnesses and localization extend the equality to all derived objects.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08J9, 08JB and 0FPT; normalized slice comparison in Hemo--Richarz--Scholbach Lemma 4.5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal equivalence between closed categories preserves internal Hom",
+   "results": "MonoidalClosed.ofEquiv_curry_def and uncurry_def; no theorem on the supplied CoefficientClosedStructure interface.",
+   "date": "2026-10-24",
+   "verdict": "Use full faithfulness, essential surjectivity and Yoneda to prove the supplied-interface mate invertible."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "date": "2026-10-24",
+   "verdict": "Relevant to the ordinary slice comparison; not the derived tensor or normalized closed mate."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRestriction.*[Ii]so|restrictScalars.*[Ee]quiv",
+   "results": "No remote match for the required derived closed comparison. Local search found the proved scalarRestriction_isEquivalence in RingIsomorphismTensorTransport.",
+   "date": "2026-10-24",
+   "verdict": "Reuse scalar equivalence and prove closed preservation abstractly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of unbounded derived module sheaves to a slice site commutes with internal Hom evaluation and tensor",
+   "results": "sheafHom, sheafHom', over and evaluation; no arbitrary-coefficient derived slice comparison.",
+   "date": "2026-10-24",
+   "verdict": "No matching normalized derived theorem; retain the separate sourced slice result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleCoefficientSliceClosedComparison",
+  "date": "2026-10-24",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Coefficient slice comparison: Normalized monoidal descent to a pro-etale object. Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3, pullback paragraph before (3.1); Definition 3.3 and Lemma 4.5, lisse assertion. Extracted Lemma 4.5 proof, monoidality and commutation with inner homomorphisms; coefficient-action identification and normalized closed comparison extracted from returned locality proof Steps 3 and 4.",
+   "via": [
+    "lem-zl-proetale-coefficient-slice-closed-comparison",
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSliceMonoidalDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSliceMonoidalDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleSlice_monoidal_descent",
+  "statement": "theorem proEtaleSlice_monoidal_descent {X : Scheme.{u}} (U : X.ProEt)\n    (O : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (B : Sheaf (ProEt.topology U.left) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage U.hom CommRingCat.{u + 1}).obj O ≅ B)\n    (delta : ProEtaleObjectRestrictionComparison U CommRingCat.{u + 1})\n    (S : CoefficientClosedStructure (proEtaleCoefficientHom X O))\n    (SR : CoefficientClosedStructure (proEtaleCoefficientHom U.left (proEtaleSliceRing U O)))\n    (SB : CoefficientClosedStructure (proEtaleCoefficientHom U.left B))\n    (T : CoefficientTensorModels.{u + 1, u + 1, u} (ProEt.topology X) O S)\n    (TR : CoefficientTensorModels.{u + 1, u + 1, u} (ProEt.topology U.left)\n      (proEtaleSliceRing U O) SR)\n    (TB : CoefficientTensorModels.{u + 1, u + 1, u} (ProEt.topology U.left) B SB)\n    (beta : @SymmetricCategory (DerivedCategory (proEtaleRingModules X O)) _ S.monoidal)\n    (betaB : @SymmetricCategory (DerivedCategory (proEtaleRingModules U.left B)) _ SB.monoidal)\n    (_coherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology X) O S T beta)\n    (_coherenceB : RingedDerivedTensorCoherence.{u + 1, u, u + 1}\n      (ProEt.topology U.left) B SB TB betaB)\n    (i : proEtaleRingModulePullback U.hom O B c ≅\n      proEtaleSliceModuleRestriction U O ⋙\n        ProEtaleCoefficientSliceComparison.e U O B c delta)\n    (hi : ∀ (N : proEtaleRingModules X O) (V : U.left.ProEt)\n      (m : N.val.obj\n        (op ((MorphismProperty.Over.map (f := U.hom) ⊤ U.prop).obj V))),\n      (i.hom.app N).val.app (op V)\n        (proEtaleSlicePullbackSection U O B c N V m) = m) :\n    ∃ d : ProEtaleCoefficientSliceComparison.TensorData U O B c delta S SR SB T TR TB,\n      d.ordinary = i ∧\n      ProEtaleCoefficientSliceComparison.TensorNormalized U O B c delta S SR SB T TR TB d ∧\n      ∀ L M : DerivedCategory (proEtaleRingModules X O),\n        (proEtaleRingDerivedPullback U.hom O B c).map\n            (beta.toBraidedCategory.braiding L M).hom ≫\n            (ProEtaleCoefficientSliceComparison.rho U O B c S SB T TB).hom.app (M, L) =\n          (ProEtaleCoefficientSliceComparison.rho U O B c S SB T TB).hom.app (L, M) ≫\n            (betaB.toBraidedCategory.braiding\n              ((proEtaleRingDerivedPullback U.hom O B c).obj L)\n              ((proEtaleRingDerivedPullback U.hom O B c).obj M)).hom",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-eb4d4",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261024T190843-L-114045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-eb4d4",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261024T190843-L-114045",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone node lean.statement (whitespace only); moved decls vs def-zl-proetale-slice-comparison-data declarations (full cover); Normalized old vs TensorNormalized-factored body (defeq by iota); sorry lemmas vs HRS 4.5 / Stacks 03EL, 07A4, 08JB; private helpers vs ScalarHomComparisonTower/RingIsomorphismTensorTransport statements (no word-for-word match)"
+ }
+}

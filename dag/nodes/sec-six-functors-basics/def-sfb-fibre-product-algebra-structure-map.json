@@ -1,0 +1,112 @@
+{
+ "id": "def-sfb-fibre-product-algebra-structure-map",
+ "kind": "definition",
+ "title": "Canonical algebra structure map between compatible ring fibre products",
+ "status": "split",
+ "statement": "Let $A,A',B,D,C'$ be commutative rings with identity and let $b:B\\to A$, $q:A'\\to A$, $d:B\\to D$ and $c:A'\\to C'$ be unital ring homomorphisms. Put $P=A\\otimes_B D$ and $Q=A\\otimes_{A'}C'$ [def-weil-pbc-module-tensor-product], with their usual tensor-product ring structures and canonical $A$-algebra structures. Let $\\varphi:P\\xrightarrow{\\sim}Q$ be an $A$-algebra isomorphism. Put $R=B\\times_A A'=\\{(x,y):b(x)=q(y)\\}$ and $E=D\\times_Q C'=\\{(z,w):\\varphi(1\\otimes z)=1\\otimes w\\}$, with coordinatewise ring operations. The canonical structure homomorphism $R\\to E$ is $(x,y)\\mapsto(d(x),c(y))$; equivalently it is the unique homomorphism whose two coordinate maps are $d$ and $c$ composed with the coordinate projections from $R$. No surjectivity hypothesis is needed to define this map, and zero rings are allowed.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Situation 08KH (situation-module-over-fibre-product) and Lemma 08KQ (lemma-properties-algebras-over-fibre-product), the structural map B prime to D prime in the opening construction. The pushout formulation defines this map even without surjectivity; when q is onto, Q canonically identifies with C prime / (ker q) C prime."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical ring homomorphism between fibre products induced by compatible algebra structure maps",
+   "results": "8 hits: Algebra.TensorProduct.piRightHom, AlgHom.prodMap, Algebra.TensorProduct.map, Algebra.TensorProduct.mapOfCompatibleSMul', Pi.algHom, Algebra.TensorProduct.mapOfCompatibleSMul, AlgebraicGeometry.stalkToFiberRingHom, algebraMap. None is this specialized map.",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; the project declaration structureMap is an exact existing construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback.map",
+   "results": "12 hits including CategoryTheory.Limits.pullback.map, pullback.map_id, pullback.map_isIso, pullback.map_comp and congrHom component identities. pullback.map is the general categorical construction underlying the specialized existing project definition.",
+   "date": "2026-10-24",
+   "verdict": "general categorical map available; exact project specialization reused rather than copied"
+  },
+  {
+   "tool": "grep",
+   "query": "def structureMap|def pullback.map",
+   "results": "msearch: 3 Mathlib hits, Topology/Algebra/RestrictedProduct/Basic.lean:129 and Analysis/Distribution/ContDiffMapSupportedIn.lean:489,555, all unrelated. Direct rg in lean/Sheaf and lean/WeilConjectures found the exact definition at lean/Sheaf/RingTheory/FibreProductAlgebraFlatPresentation.lean:46; no upstream duplicate. DAG rg for the full name found only the helper listed in the theorem node lean.declarations, no definition node. blueprint_refs.py search fibre product algebra found 23 unrelated blueprint statements; none defines this map.",
+   "date": "2026-10-24",
+   "verdict": "exact existing project definition; new definition-node record only, no Lean definition duplicated"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fibre-product-algebra-etale",
+  "date": "2026-10-24",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Geometric pushout construction and the two canonical recovery maps preceding the flatness argument in Stacks Tag 07W3. Supporting input: Tag 07VX: etaleness of the pushed-out relation projections; Tag 07SY: compatible etale covers lift. Supporting input: the affine ring calculation in Tag 07RX, using Tag 08KQ(5). Canonical R-algebra structure on E in the statement of lem-sfb-fibre-product-algebra-etale, before its etaleness assertion.",
+   "via": [
+    "lem-sfb-fibre-product-algebra-etale",
+    "lem-sfb-scheme-infinitesimal-etale-patching",
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreProductAlgebraFlatPresentation",
+  "declaration": "CommRingCat.FibreProductAlgebra.structureMap",
+  "statement": "def structureMap\n    {A A' B D C' : CommRingCat.{u}} (b : B ⟶ A) (q : A' ⟶ A)\n    (d : B ⟶ D) (c : A' ⟶ C') (φ : pushout b d ≅ pushout q c)\n    (hφ : pushout.inl b d ≫ φ.hom = pushout.inl q c) :\n    pullback b q ⟶ pullback (pushout.inr b d ≫ φ.hom) (pushout.inr q c)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing construction, read at lines 41-55. It uses pullback.map with the two algebra structure maps and the induced A-map. This definition has real data and does not choose data from flat_and_finitePresentation_iff. Records the previously unowned canonical notion without moving or copying its Lean declaration. When q is surjective the tensor-product pushout Q is canonically C prime / (ker q) C prime."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f35264c8",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f35264c8",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery fixing the earlier H2 RETURN (acccaed8): theorem stmt_dep lem-sfb-fibre-product-algebra-flat-presentation replaced by new existing:true def node def-sfb-fibre-product-algebra-structure-map; no other def node in live owns structureMap; signature verbatim vs live FibreProductAlgebraFlatPresentation.lean:46; real pullback.map body; node statement matches definition; only stmt_dep is the tensor-product node. Item node otherwise identical to live; Lean file byte-identical to previously accepted statement, rechecked vs Stacks 08KH/08KQ(5) (surjective q, A-algebra iso via hφ, Etale via Spec.map, no extra hypotheses, zero rings allowed). Report sections present. No fixes, no compile needed."
+ }
+}

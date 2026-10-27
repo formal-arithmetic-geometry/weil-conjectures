@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-integral-finite-extension-cocycles",
+ "kind": "statement",
+ "title": "Identity and composition equations of integral scalar duality comparisons",
+ "statement": "Fix D,l,E⊂L,X and coherent dualizing data wE,wL, and any normalized tensor-Hom presentations a,b [def-sf-integral-hom-reduction-models] whose evaluation counits are natural in the first tensor variable. The prescribed u,v,beta and the completion-conjugated unit/comp maps [def-sf-integral-finite-extension-core] satisfy IdentityConclusion for E and L, and CompositionConclusion for every further finite coefficient extension L→F, coherent dualizing datum wF and normalized tensor presentation c with the same first-variable evaluation naturality. These are the three comparison composition equations, the two associator unit equations and the associator pentagon on actual ambient maps. No isomorphism, finite reduction or double-dual assertion is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph: unit, composition and tensor associator equations for u, v and beta."
+ },
+ "stmt_deps": [
+  "def-sf-integral-finite-extension-core",
+  "def-sf-integral-hom-reduction-models",
+  "def-sf-coherent-integral-dualizing-datum"
+ ],
+ "proof": [
+  {
+   "text": "The scalar unit is multiplication and comp sends c tensor (b tensor x) to c*j(b) tensor x. Three successive coefficient multiplications agree on pure tensors, proving the unit and pentagon equations. The completion comparisons cancel at intermediate vertices and localization retains the equations.",
+   "uses": [
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-sf-integral-finite-extension-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite dualizing counit transposes satisfy the unit and cocycle equations by pasting compact-support scalar comparisons and exceptional counits. Pass through coherent total limit; the prescribed finite reductions and u_existsUnique identify the resulting maps with u.",
+   "uses": [
+    "lem-coef-finite-free-extension",
+    "lem-coef-finite-dualizing",
+    "lem-coef-semilinear-derived-sections",
+    "def-sf-integral-finite-extension-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the v composites after the same scalar associator. Both transposes are scalar extension of evaluation, giving equality. Postcompose with Hom into the u equation to get beta. Identity extension uses the identical calculation with multiplication as scalar unit. Representative normalization makes this independent of presentations and of basis choices.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "def-sf-integral-finite-extension-core"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-finite-extension-core",
+  "lem-coef-finite-dualizing",
+  "lem-coef-finite-free-extension",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-finite-extension.proof.md",
+  "place": "Final paragraph: unit, composition and tensor associator equations for u, v and beta."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free scalar extension of derived sheaves commutes with internal Hom, evaluation, identity and composition",
+   "results": "8 results: ModuleCat.extendScalarsComp, ordinary extension/restriction adjunction, free sheaves, pullback free generators. None states completed derived sheaf Hom, signed biduality or finite dualizing comparisons.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\", \"hom\"",
+   "results": "3 PresheafOfModulesOfCommRing tensorHom declarations; these give tensor on ordinary morphisms, not derived Hom scalar compatibility. LeanFinder additionally returned light condensed internal-Hom section formulas, not the completed coefficient theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|Verdier|dualizing",
+   "results": "msearch: generic triangulated/Verdier references only; no completed coefficient comparison. Project rg finds the existing Models, scalar Hom comparison, finite coefficient calculus and signedCalculus. They supply ingredients but not these three completed comparison conclusions. Blueprint search for finite extension internal Hom found no separate node.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefIntegralFiniteExtension",
+  "date": "2026-10-26",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-finite-extension",
+   "place": "Final paragraph: unit, composition and tensor associator equations for u, v and beta.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtensionCocycles",
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtensionCocycles.lean",
+  "declaration": "WeilConjectures.IntegralFiniteExtension.comparison_cocycles",
+  "statement": "theorem comparison_cocycles (a : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l E X)) (b : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l L X)) (hevalE : ∀ (K K' M : IntegralVerdier.Ambient l E X) (f : K' ⟶ K), a.tensor.map (Prod.mkHom (𝟙 K') ((IntegralHom.hom.{u, u} X (completedIntegralCommRingSheafUnrestricted l E X)).map (Prod.mkHom f.op (𝟙 M)))) ≫ (a.adjunction K').counit.app M = a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app M) (hevalL : ∀ (K K' M : IntegralVerdier.Ambient l L X) (f : K' ⟶ K), b.tensor.map (Prod.mkHom (𝟙 K') ((IntegralHom.hom.{u, u} X (completedIntegralCommRingSheafUnrestricted l L X)).map (Prod.mkHom f.op (𝟙 M)))) ≫ (b.adjunction K').counit.app M = b.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (b.adjunction K).counit.app M) : IdentityConclusion l E X D hl wE a ∧ IdentityConclusion l L X D hl wL b ∧ (∀ (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F] (j : L →ₐ[Padic l] F) (wF : DualizingDatum l X D hl F) (c : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l F X)), (∀ (K K' M : IntegralVerdier.Ambient l F X) (f : K' ⟶ K), c.tensor.map (Prod.mkHom (𝟙 K') ((IntegralHom.hom.{u, u} X (completedIntegralCommRingSheafUnrestricted l F X)).map (Prod.mkHom f.op (𝟙 M)))) ≫ (c.adjunction K').counit.app M = c.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (c.adjunction K).counit.app M) → CompositionConclusion l E L ι X D hl wE wL a b F j wF c)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50c18",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261025T203301-L-2800049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50c18",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261025T203301-L-2800049",
+  "kind": "interface",
+  "note": "independent cc review: item lem-coef-integral-finite-extension + 3 new sorried lemmas and Core relocation against clone (diffed verbatim), TensorPresentation/ReductionPresentation/SignedSymmetry fields and signedCalculus conjuncts"
+ }
+}

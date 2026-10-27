@@ -1,0 +1,240 @@
+{
+ "id": "lem-trf-free-map-colimit-split-lifts-tensor-injective",
+ "kind": "statement",
+ "title": "Tensor injectivity from eventually split lifts on finite basis spans",
+ "statement": "Let $R$ be a commutative ring, let $M$ be a free $R$-module with a chosen basis $(e_b)_{b\\in B}$, where $B$ may be empty or infinite [def-weil-pbc-free-module], and let $u:M\\to N$ be an $R$-linear map. Let $I$ be a small nonempty directed partially ordered set and $(F_i,t_{ij})_{i\\le j}$ a system of $R$-modules, with $t_{ii}=1$ and $t_{jk}t_{ij}=t_{ik}$, whose compatible maps $q_i:F_i\\to N$ exhibit $N$ as its colimit [def-weil-pbc-category-colimit]. For each finite subset $E\\subset B$, write $P_E=\\sum_{b\\in E}Re_b$ and let $a_E:P_E\\to M$ be inclusion. Assume that for every such $E$ there are $i_E\\in I$ and an $R$-linear map $v_E:P_E\\to F_{i_E}$ with $q_{i_E}v_E=ua_E$, and that for every $j\\ge i_E$ there is an $R$-linear map $s_{E,j}:F_j\\to P_E$ satisfying $s_{E,j}t_{i_Ej}v_E=1_{P_E}$. Then for every $R$-module $L$, the map $1_L\\otimes u:L\\otimes_RM\\to L\\otimes_RN$ is injective [def-weil-pbc-module-tensor-product]. The modules $F_i$ need not be free or flat, and the retractions need not commute with transitions or with changes of $E$.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FQ, lemma-universally-injective-local, proof: the finite basis support reduction and final tensor-colimit zero-detection argument (returned step 2 and step 7, including tensoring the retractions from step 6)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix an $R$-module $L$ and $x\\in L\\otimes_RM$ with $(1_L\\otimes u)(x)=0$. By the tensor-product construction, write $x=\\sum_{h=1}^n l_h\\otimes m_h$ (absorb scalar coefficients into $l_h$). Each $m_h$ has finite basis support; let $E$ be the union of those supports and regard $m_h$ as $p_h\\in P_E$. Then $y=\\sum_h l_h\\otimes p_h\\in L\\otimes_RP_E$ satisfies $(1_L\\otimes a_E)(y)=x$. For $n=0$ take $E=\\varnothing$ and $y=0$. Thus it suffices to prove $y=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FQ (lemma-universally-injective-local), proof: reduction to finitely generated direct summands; finite-support argument expanded using the basis and tensor-product definitions"
+   }
+  },
+  {
+   "text": "Tensor-colimit compatibility gives $N\\otimes_RL=\\varinjlim_i(F_i\\otimes_RL)$ with maps $q_i\\otimes1_L$. To put $L$ on the left, the bilinear map $(f,l)\\mapsto l\\otimes f$ induces the flip $F_i\\otimes_RL\\to L\\otimes_RF_i$, and reversing the factors defines its inverse. Both composites are identity on pure tensors, which generate. The flips commute with every transition and $q_i$, since both composites send $f\\otimes l$ to $l\\otimes t_{ij}(f)$ or $l\\otimes q_i(f)$. Hence $L\\otimes_RN$ with maps $1_L\\otimes q_i$ is the colimit of $(L\\otimes_RF_i,1_L\\otimes t_{ij})$.",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DD (lemma-tensor-products-commute-with-limits); Tag 00CX (lemma-tensor-product) for the explicitly constructed natural flips"
+   }
+  },
+  {
+   "text": "Choose $i=i_E$ and $v=v_E$ from the hypothesis and set $z=(1_L\\otimes v)(y)\\in L\\otimes_RF_i$. Functoriality gives $(1_L\\otimes q_i)(z)=(1_L\\otimes ua_E)(y)=(1_L\\otimes u)(x)=0$. Apply filtered-colimit zero detection to the colimit in step 2. Since $I$ is small, nonempty and directed, it yields $j\\ge i$ with $(1_L\\otimes t_{ij})(z)=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00D7 (lemma-zero-directed-limit), applied to the tensor diagram supplied by Tag 00DD"
+   }
+  },
+  {
+   "text": "For this $j$ the hypothesis supplies $s=s_{E,j}$ with $st_{ij}v=1_{P_E}$. Tensor composition and identities therefore give $y=(1_L\\otimes(st_{ij}v))(y)=(1_L\\otimes s)(1_L\\otimes t_{ij})(z)=0$, and consequently $x=(1_L\\otimes a_E)(y)=0$. A linear map with zero kernel is injective: apply this result to the difference of any two elements with equal images. This works for every $L$ and uses only this individual $s$, with no flatness assumption on $L$ or the $F_i$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05FQ (lemma-universally-injective-local), proof: tensor the split injections and pass to the colimit; the left-inverse calculation is written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05FQ (lemma-universally-injective-local), proof, finite-support reduction and final split-injection/tensor-colimit argument; zero detection made explicit using Algebra Tags 00DD and 00D7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]njective.*[Cc]olimit|[Cc]olimit.*[Ii]njective|[Pp]ure.*[Mm]ono",
+   "results": "0 hits; ; grep subdirectory Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: the colimit and finite-submodule lemmas do not state tensor injectivity from eventually split lifts of all finite basis restrictions"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.lTensor, Function.Injective",
+   "results": "12 hits; LinearMap.lTensor_inj_iff_rTensor_inj, Module.Flat.lTensor_preserves_injective_linearMap, Module.Flat.iff_lTensor_preserves_injective_linearMapₛ, Module.Flat.iff_lTensor_preserves_injective_linearMap, Module.Flat.iff_lTensor_preserves_injective_linearMap', Module.Flat.iff_lTensor_injectiveₛ, Module.FaithfullyFlat.lTensor_injective_iff_injective, LinearMap.lTensor_injective_of_exact_of_flat",
+   "date": "2026-10-22",
+   "verdict": "no match: the colimit and finite-submodule lemmas do not state tensor injectivity from eventually split lifts of all finite basis restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]njective|[Zz]ero|[Ll]ift",
+   "results": "5 hits; 104, 130, 132, 138, 145; grep subdirectory Mathlib/Algebra/Colimit/Module.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the colimit and finite-submodule lemmas do not state tensor injectivity from eventually split lifts of all finite basis restrictions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring a free module map into a directed colimit is injective if its restriction to every finite basis span has an eventually split lift to the diagram",
+   "results": "8 hits; Module.DirectLimit.lift_injective, AddCommGroup.DirectLimit.lift_injective, LinearMap.rTensor_injective_of_fg, TensorProduct.toDirectLimit, DirectLimit.Module.lift, Module.Flat.lTensor_preserves_injective_linearMap, DirectLimit.lift_injective, DirectLimit.mk_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: the colimit and finite-submodule lemmas do not state tensor injectivity from eventually split lifts of all finite basis restrictions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a free module to a directed colimit of modules is universally injective if each finite basis restriction factors through a stage and all later stage maps have a left inverse",
+   "results": "8 hits; Module.DirectLimit.lift_injective, Module.DirectLimit.exists_of₂, ModuleCat.directLimitIsColimit, Module.DirectLimit.exists_of, Ring.DirectLimit.lift_injective, Submodule.FG.directLimit, Ring.DirectLimit.of_injective, DirectLimit.lift_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: the colimit and finite-submodule lemmas do not state tensor injectivity from eventually split lifts of all finite basis restrictions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pure monomorphism from arbitrary rank free module obtained by finite basis spans and eventually split maps into a filtered direct limit of modules",
+   "results": "8 hits; Profinite.NobelingProof.succ_mono, ModuleCat.enoughInjectives, Submodule.FG.directLimit, ModuleCat.enoughProjectives, ModuleCat.FilteredColimits.M.mk_surjective, instEnoughInjectivesModuleCatOfSmall, Module.Finite.exists_comp_eq_id_of_projective, Module.projective_def'",
+   "date": "2026-10-22",
+   "verdict": "no match: the colimit and finite-submodule lemmas do not state tensor injectivity from eventually split lifts of all finite basis restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "lift_injective|of_injective|exists_of",
+   "results": "11 hits; Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Finiteness.lean, Mathlib/Algebra/Colimit/Ring.lean, Mathlib/Algebra/Colimit/Ring.lean; grep subdirectory Mathlib/Algebra/Colimit",
+   "date": "2026-10-22",
+   "verdict": "no match: the colimit and finite-submodule lemmas do not state tensor injectivity from eventually split lifts of all finite basis restrictions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free module map u to the colimit of a fixed directed module diagram is tensor injective if every finite basis span lifts to a stage and its transition to each later stage has an individual linear retraction",
+   "results": "8 hits; AdicCompletion.tensor_map_id_left_injective_of_injective, TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective, TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective, Module.free_of_lTensor_residueField_injective, LinearMap.rTensor_injective_of_fg, Submodule.FG.lTensor.directLimit_apply', Module.free_of_maximalIdeal_rTensor_injective, Submodule.FG.rTensor.directLimit_apply'",
+   "date": "2026-10-22",
+   "verdict": "no match: the colimit and finite-submodule lemmas do not state tensor injectivity from eventually split lifts of all finite basis restrictions"
+  },
+  {
+   "tool": "grep",
+   "query": "lift_injective|of_injective|exists_of",
+   "results": "11 hits; Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Finiteness.lean, Mathlib/Algebra/Colimit/Ring.lean, Mathlib/Algebra/Colimit/Ring.lean; grep subdirectory Mathlib/Algebra/Colimit",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit compatibility, finite-submodule reduction, or injectivity for a map OUT OF a colimit; none states the eventually split finite-basis-lift criterion INTO a colimit. Flatness results require additional hypotheses not present here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a free module into a filtered colimit is tensor injective when all finite basis restrictions have lifts that split after every later transition",
+   "results": "8 hits; Module.DirectLimit.lift_injective, LinearMap.rTensor_injective_of_fg, IsTensorProduct.map_id_injective_of_flat_left, TensorProduct.toDirectLimit, Module.FaithfullyFlat.lTensor_injective_iff_injective, TensorProduct.map_injective_of_flat_flat, LinearMap.lTensor_injective_of_exact_of_flat, Module.Invertible.lTensor_injective_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit compatibility, finite-submodule reduction, or injectivity for a map OUT OF a colimit; none states the eventually split finite-basis-lift criterion INTO a colimit. Flatness results require additional hypotheses not present here."
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.lTensor, Function.Injective",
+   "results": "12 hits; LinearMap.lTensor_inj_iff_rTensor_inj, Module.Flat.lTensor_preserves_injective_linearMap, Module.Flat.iff_lTensor_preserves_injective_linearMapₛ, Module.Flat.iff_lTensor_preserves_injective_linearMap, Module.Flat.iff_lTensor_preserves_injective_linearMap', Module.Flat.iff_lTensor_injectiveₛ, Module.FaithfullyFlat.lTensor_injective_iff_injective, LinearMap.lTensor_injective_of_exact_of_flat",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit compatibility, finite-submodule reduction, or injectivity for a map OUT OF a colimit; none states the eventually split finite-basis-lift criterion INTO a colimit. Flatness results require additional hypotheses not present here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear map from a free module into a directed colimit is universally tensor injective if every finite basis span lifts to a stage with split injections into every later stage",
+   "results": "8 hits; Module.DirectLimit.lift_injective, Submodule.FG.lTensor.directLimit_apply, Submodule.FG.lTensor.directLimit_apply', LinearMap.rTensor_injective_of_fg, Submodule.FG.rTensor.directedSystem, Submodule.FG.lTensor.directedSystem, Submodule.FG.rTensor.directLimit_apply', Submodule.FG.rTensor.directLimit_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit compatibility, finite-submodule reduction, or injectivity for a map OUT OF a colimit; none states the eventually split finite-basis-lift criterion INTO a colimit. Flatness results require additional hypotheses not present here."
+  },
+  {
+   "tool": "grep",
+   "query": "injective|split|lift",
+   "results": "4 hits; 49, 55, 62, 71; grep subdirectory Mathlib/LinearAlgebra/TensorProduct/DirectLimit.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit compatibility, finite-submodule reduction, or injectivity for a map OUT OF a colimit; none states the eventually split finite-basis-lift criterion INTO a colimit. Flatness results require additional hypotheses not present here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pure monomorphism criterion for maps out of arbitrary free modules using finite basis restrictions with eventually split lifts into a directed system",
+   "results": "8 hits; Profinite.NobelingProof.succ_mono, ModuleCat.instProjectiveObjFree, ModuleCat.enoughInjectives, Module.Flat.exists_factorization_of_comp_eq_zero_of_free, Module.Flat.exists_factorization_of_apply_eq_zero_of_free, DirectLimit.Module.lift_of, ModuleCat.enoughProjectives, ModuleCat.projective_of_free",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit compatibility, finite-submodule reduction, or injectivity for a map OUT OF a colimit; none states the eventually split finite-basis-lift criterion INTO a colimit. Flatness results require additional hypotheses not present here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-universal-injective-residue",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), 'Hence by Lemmas 05FQ and 05FT the map S^{⊕r}→N_p is R-universally injective' (Tag 05FQ). Supporting proof of Tag 05FQ: the finite basis support reduction and final tensor-colimit zero-detection argument (returned step 2 and step 7, including tensoring the retractions from step 6)",
+   "via": [
+    "lem-trf-local-universal-injective-residue",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-free-map-colimit-split-lifts-tensor-injective",
+  "worker": "stage1",
+  "summary": "NF checked Stacks 05FQ and Algebra 00DD/00D7, project Lean and Mathlib searches. Four steps explicitly reduce a kernel tensor to finite basis support, commute tensor with the given colimit, detect zero at a later stage, and apply that stage retraction. All non-elementary inputs are existing Mathlib leaves; no new nodes or statement changes. Empty bases, zero rings/modules and arbitrary nonflat diagram stages are covered.",
+  "blueprint": "Inherited ancestry: lem-trf-local-term-locality, old proof (1)--(2) semistable-alteration/flattening input, through the existing via chain; this item realizes the finite-support and final tensor-colimit part of Stacks 05FQ. The latest blueprint ancestor now presents the contracting-correspondence proof and no longer spells out this older flattening input; this delivery only splits the assigned algebra lemma and does not modify the ancestor or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-486b8b28a",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-486b8b28a (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery and found nothing to fix. It is a one-commit split from unsplit to split with 4 steps and no new nodes; the item's statement is unchanged, and no re-split repair note exists. Source: Stacks flat.tex Tag 05FQ (lemma-universally-injective-local), whose proof first reduces to finite direct summands of a free module and then uses stage maps that split for all later i' plus the fact that tensor commutes with colimits. The item states exactly that sub-argument with the colimit conclusion. The source's final display repeats N_{i'} where N is meant, a harmless typo. Step 1: finite basis support via the tensor and free-module definition nodes, correctly elementary, including n=0/E=∅. Step 2: lem-weil-pbc-tensor-commutes-with-colimits (Mathlib leaf) gives the right-tensor colimit; the flips are written out on generators and checked to commute with t_ij and q_i. Step 3: by functoriality (1⊗q_i)z=0, and lem-weil-pbc-filtered-colimit-modules-elementwise (Mathlib leaf; small filtered I, colimit in R-modules) gives j≥i with (1⊗t_ij)z=0. Step 4: y=(1⊗s)(1⊗t_ij)z=0 via composition and identity compatibility. Edge cases tested: B=∅, zero ring, L=0, singleton I, and non-flat F_i. The 'every j≥i_E' hypothesis is exactly what step 4 needs. The parent lem-trf-local-universal-injective-residue uses the item consistently, with the hypotheses supplied by lem-trf-residue-injective-finite-free-stage-retractions. rg -L duplicate search (05FQ, universally injective, split lift) found no node stating this criterion. Both non-definition cites are Mathlib leaves, so they are not on the unit route and need no tool_uses. No SGA. The split_report blueprint note on the newer ancestor proof is accurate."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FreeMapColimitSplitLiftsTensorInjective",
+  "declaration": "LinearMap.lTensor_injective_of_finite_basis_eventually_split_lifts",
+  "file": "lean/Sheaf/RingTheory/FreeMapColimitSplitLiftsTensorInjective.lean",
+  "statement": "theorem lTensor_injective_of_finite_basis_eventually_split_lifts {R : Type u} [CommRing R] {M : Type w} [AddCommGroup M] [Module R M] {B : Type z} (b : Module.Basis B R M) {I : Type v} [PartialOrder I] [Nonempty I] [IsDirectedOrder I] (F : I ⥤ ModuleCat.{max u v} R) (c : Cocone F) (hc : IsColimit c) (u : M →ₗ[R] c.pt) (hlifts : ∀ E : Finset B, ∃ (i : I) (f : Submodule.span R (b '' (E : Set B)) →ₗ[R] F.obj i), (c.ι.app i).hom.comp f = u.comp (Submodule.span R (b '' (E : Set B))).subtype ∧ ∀ (j : I) (h : i ≤ j), ∃ s : F.obj j →ₗ[R] Submodule.span R (b '' (E : Set B)), s.comp ((F.map (homOfLE h)).hom.comp f) = LinearMap.id) (L : Type t) [AddCommGroup L] [Module R L] : Function.Injective (u.lTensor L)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53442eeca",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Node clauses checked one by one against LinearMap.lTensor_injective_of_finite_basis_eventually_split_lifts: CommRing R; Module.Basis B R M with B arbitrary (empty/infinite allowed); PartialOrder+Nonempty+IsDirectedOrder I; F : I ⥤ ModuleCat R with t_ij = F.map (homOfLE h); Cocone c + IsColimit hc (recorded colimit-dep declarations); P_E = Submodule.span R (b '' E) with .subtype; hlifts gives the same i,f for all j ≥ i with individual s and no coherence; conclusion Function.Injective (u.lTensor L) for L in its own universe t. Not stronger or weaker; no flatness assumptions. Statement field verbatim (checked mechanically); node otherwise identical to live; no other landing of this item. Module universe max u v follows Mathlib's ModuleCatMax filtered-colimit convention, is transportable via ULift and is stated in the report; the citer local-universal-injective-residue can transport. Matches Stacks flat.tex 05FQ proof. Duplicate search found no match. No defs, sorry only, docstring has source + blueprint + 4 steps. Both report sections present. No file changed, so no compile."
+ }
+}

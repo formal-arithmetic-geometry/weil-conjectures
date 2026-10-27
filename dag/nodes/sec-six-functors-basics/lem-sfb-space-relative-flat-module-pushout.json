@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-space-relative-flat-module-pushout",
+ "kind": "statement",
+ "title": "Relative flat-module patching on a space over an infinitesimal scheme pushout",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Let $T_0\\hookrightarrow T_1$ be a nilpotent thickening of $S$-schemes, meaning a closed immersion [def-weil-closed-immersion] with ideal sheaf $I$ satisfying $I^n=0$ for some $n\\geq1$, and let $T_0\\to T_2$ be affine [pqf-def-affine-morphism]. Let $P=T_2\\amalg_{T_0}T_1$ be their scheme pushout, which is also their algebraic-space pushout [lem-sfb-space-affine-thickening-pushout]. Let $h:V\\to P$ be any algebraic-space morphism and put $V_i=V\\times_PT_i$ using [lem-trf-space-fibre-products-etale-covers]. Modules are quasi-coherent modules on the small etale ringed sites [def-trf-space-quasi-coherent-module]; all pullbacks below are tensor pullbacks [def-trf-space-etale-module-functors]. For a map $W\\to T$ to a scheme, flatness of a module over $T$ means that on etale scheme charts its Zariski stalk at $w$ is flat over $\\mathcal O_{T,t}$ for the image $t$ [def-pc-scheme-module-flat-over]. Restriction gives an equivalence from the category of quasi-coherent $\\mathcal O_V$-modules flat over $P$, with all module homomorphisms, to the category of triples $(M_2,M_1,\\alpha)$, where $M_i$ is a quasi-coherent $\\mathcal O_{V_i}$-module flat over $T_i$ for $i=1,2$, and $\\alpha:(V_0\\to V_2)^*M_2\\simeq(V_0\\to V_1)^*M_1$; arrows are pairs of module homomorphisms commuting with $\\alpha$. The functor sends $M$ to its two restrictions with the canonical pullback-composition comparison. If $h$ is locally of finite presentation on etale scheme charts [def-sfb-space-morphism-properties], then an object $M$ is of finite presentation as an $\\mathcal O_V$-module if and only if both restrictions $M_i$ are of finite presentation as $\\mathcal O_{V_i}$-modules. Finite presentation of a module means etale locally a cokernel of a map between finite rank free modules. No flatness of $h$, properness of a support, separatedness, quasi-compactness, or Noetherian hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 08KV, lemma-space-over-pushout-flat-modules, equivalence and part (b), restricted to scheme bases and finite-order thickenings. Correct the typographical X in clause (2)(b) to Xprime, and O_Y in (b) to O_V; see report.md."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "pqf-def-affine-morphism",
+  "lem-sfb-space-affine-thickening-pushout",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-flat-proper-coefficient",
+  "def-sfb-space-module-tensor-composition"
+ ],
+ "proof": [
+  {
+   "text": "Write $j_i:V_i\\to V$. Apply [lem-sfb-infinitesimal-pushout-affine-charts] to the identity pair over the scheme pushout $P$ (so its second pushout is again $P$). For every affine open $P_a=\\operatorname{Spec}R\\subset P$, the three base inverse images are affine, say $T_{2,a}=\\operatorname{Spec}B$, $T_{1,a}=\\operatorname{Spec}A'$ and $T_{0,a}=\\operatorname{Spec}A$, with $A'\\twoheadrightarrow A$ and $R=B\\times_A A'$. In particular all three $T_i\\to P$ are affine, by the defining affine-open test. Their base changes $j_i$ are affine by the same test: over $\\operatorname{Spec}D\\to P_a$, their inverse images have rings $D\\otimes_R B$, $D\\otimes_R A'$ and $D\\otimes_R A$. The affine-scheme computation is [lem-weil-pbc-fibre-product-affine-spectra], and does not identify $D$ with the fibre product of these rings.",
+   "uses": [
+    "lem-sfb-infinitesimal-pushout-affine-charts",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 08KV, affine reduction; More on Morphisms Tag 07RT (more-morphisms.tex, lemma-pushout-along-thickening), compatible affine opens"
+   }
+  },
+  {
+   "text": "Use affine etale charts $W=\\operatorname{Spec}D\\to V$ whose maps to $P$ land in some $P_a$. These charts cover $V$. By [lem-sfb-space-qcoh-affine-chart-calculus] and [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], a quasi-coherent module on any such chart is its ordinary section module; scheme pullback and etale tensor pullback agree. Apply [lem-pc-affine-pullback-chart-tensor-flat-stalks] with $X=W$, $U=W$, $Y=\\operatorname{Spec}R$ and $T=R$ via the identity. The canonical $R\\otimes_R L\\cong L$ identifies flatness of sections over $R$ with precisely the stalkwise flatness over $P_a$ in the stated definition of relative flatness. Apply the same test with $B,A'$ on the charts of $V_2,V_1$. By [lem-sfb-space-module-flat-point-chart-independence], stalkwise flatness at a point of $V$ over $P$ holds on every etale scheme chart through it as soon as it holds on one; the same applies over $T_2,T_1$ on $V_2,V_1$. Thus all subsequent statements about relative flatness can be checked on these section modules. No flatness of $R\\to D$ is used.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-affine-pullback-chart-tensor-flat-stalks",
+    "lem-sfb-space-module-flat-point-chart-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 08KV, affines etale over the source and base; Morphisms of Spaces Tag 05VU (spaces-morphisms.tex, lemma-flat-at-point)"
+   }
+  },
+  {
+   "text": "Tensor pullback preserves quasi-coherence by [lem-sfb-space-module-pullback-quasicoherent]. On the scheme charts, [lem-sfb-pointwise-module-flatness-base-change](1) gives stalkwise flatness over $T_i$ of the pullback of a module flat over $P$ on the charts $W\\times_V V_i$, which cover $V_i$; by [lem-sfb-space-module-flat-point-chart-independence] it is then flat over $T_i$ on every etale scheme chart of $V_i$. The comparison on $V_0$ and its compatibility with module maps are the pullback-composition isomorphism of [lem-trf-space-chart-adjunction-tensor-realization]. This defines the restriction functor $F$ on all objects and all module homomorphisms, with exactly the comparison specified in the statement.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-pointwise-module-flatness-base-change",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-sfb-space-module-flat-point-chart-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 08KV, displayed restriction functor"
+   }
+  },
+  {
+   "text": "For a triple $(M_2,M_1,\\alpha)$ put $M_0=(V_0\\to V_1)^*M_1$ and use $\\alpha$ for the map from the other restriction. Form the module sheaf $G(M_2,M_1,\\alpha)=j_{2,*}M_2\\times_{j_{0,*}M_0}j_{1,*}M_1$, the kernel of the difference of the two restriction maps from the direct sum. These maps are the adjoints of the restriction comparisons. By [lem-sfb-space-affine-module-base-change], the three direct images are quasi-coherent, and on an etale chart they identify canonically with the direct images from the three base-changed affine schemes. Kernels of quasi-coherent modules are quasi-coherent and are computed on affine charts by [lem-sfb-space-qcoh-affine-chart-calculus]. A compatible pair of module maps induces a map of these kernels, defining $G$ on arrows. This construction is global, so no choice of descent datum is needed.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-affine-module-base-change",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 08KV, first displayed formula of the proof"
+   }
+  },
+  {
+   "text": "On $W=\\operatorname{Spec}D$ of step 2 put $D_2=D\\otimes_R B$, $D_1=D\\otimes_R A'$, $D_0=D\\otimes_R A$, and let $N,M'$ be the sections of the two given restrictions. The comparison is $D_0$-linear and identifies $N\\otimes_B A$ with $M'\\otimes_{A'}A=M$. Tensor associativity here is given by $n\\otimes(d\\otimes a)\\mapsto dn\\otimes a$, inverse $n\\otimes a\\mapsto n\\otimes(1\\otimes a)$; for the quotient use [lem-weil-pbc-tensor-over-quotient-ring]. Step 4 identifies $G(W)$ with $K=N\\times_M M'$. By step 2, $N$ is flat over $B$ and $M'$ over $A'$. Hence [lem-sfb-flat-module-fibre-product-patching] makes $K$ flat over $R$. The isomorphisms [lem-sfb-patched-module-base-change] give $K\\otimes_R B\\cong N$ and $K\\otimes_R A'\\cong M'$; they are $D_2$- and $D_1$-linear since their formulas are $(n,m')\\otimes b\\mapsto bn$ and $(n,m')\\otimes a'\\mapsto a'm'$. Thus step 2, with [lem-sfb-space-module-flat-point-chart-independence] for the charts not of this form, proves relative flatness of $G$, and these maps give $FG\\cong\\mathrm{id}$. Their overlap is the given $\\alpha$, by the defining equation of the fibre product.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-sfb-flat-module-fibre-product-patching",
+    "lem-sfb-patched-module-base-change",
+    "lem-sfb-space-module-flat-point-chart-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 08KV, reduction to Tag 07RW, lemma-relative-flat-module-over-fibre-product; Tag 07RU, canonical recovery maps"
+   }
+  },
+  {
+   "text": "For a module $L$ flat over $P$, the two adjunction units define $L\\to GF(L)$. On the chart of step 2 this is $l\\mapsto(l\\otimes1,l\\otimes1)$, an isomorphism by the flat-module recovery assertion of [lem-sfb-flat-module-fibre-product-patching]. It is $D$-linear since both coordinates are. Its inverse commutes with restriction and module maps because the forward maps do and are invertible; hence the sheaf map is a natural isomorphism. The maps $FG\\to\\mathrm{id}$ of step 5 are likewise natural by [lem-sfb-patched-module-base-change]. In particular a compatible pair of homomorphisms lifts by applying the fibre-product map and the two recovery isomorphisms; a lift is unique because each flat source module is recovered as that fibre product. Consequently $F$ is fully faithful and essentially surjective, with quasi-inverse $G$, including all arrows required in the statement.",
+   "uses": [
+    "lem-sfb-flat-module-fibre-product-patching",
+    "lem-sfb-patched-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 08KV, quasi-inverse verification, expanding the omitted details"
+   }
+  },
+  {
+   "text": "Suppose $h$ is locally of finite presentation. At any point of an etale scheme chart of $V$, the chart definition [def-sfb-space-morphism-properties] and [def-sbc-locally-finite-presentation] allow affine neighbourhoods $W=\\operatorname{Spec}D$ and $P_a=\\operatorname{Spec}R$ with $D$ finitely presented over $R$. They may be chosen anew around each point; no claim that an arbitrary affine restriction is finitely presented is needed. If $M_1,M_2$ are finitely presented, [lem-sfb-space-qcoh-affine-chart-calculus] makes their section modules $M',N$ finitely presented over $D_1,D_2$. They are flat over $A',B$ by step 2. Apply [lem-sfb-relative-fp-module-fp-algebra-pushout] with $E=R$; the identity $R\\to R$ is flat directly from $-\\otimes_R R\\cong\\mathrm{id}$. It follows that $G(M_2,M_1,\\alpha)(W)=N\\times_M M'$ is finitely presented over $D$. The affine-chart criterion then proves finite presentation of $G$ on $V$, hence of its corresponding module by step 6.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-relative-fp-module-fp-algebra-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 08KV(b), reduction to Tag 08KP, hypothesis (3) with flat algebra equal to the base"
+   }
+  },
+  {
+   "text": "Conversely, tensor-pull a local finite presentation $\\mathcal O_V^m\\to\\mathcal O_V^n\\to L\\to0$ to either $V_i$. Tensor pullback is a left adjoint by [def-trf-space-etale-module-functors], so it preserves this cokernel and finite direct sums, and it sends $\\mathcal O_V$ to $\\mathcal O_{V_i}$ by $a\\otimes b\\mapsto ab$. The pulled-back etale neighbourhoods cover $V_i$ by [lem-trf-space-fibre-products-etale-covers]. They therefore give finite presentations of both restrictions. Together with step 7 this proves the asserted if and only if.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex",
+    "place": "Tag 08KV(b), forward implication"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-infinitesimal-pushout-affine-charts",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-affine-pullback-chart-tensor-flat-stalks",
+  "lem-sfb-space-module-flat-point-chart-independence",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-pointwise-module-flatness-base-change",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-sfb-space-affine-module-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-sfb-flat-module-fibre-product-patching",
+  "lem-sfb-patched-module-base-change",
+  "def-sfb-space-morphism-properties",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-relative-fp-module-fp-algebra-pushout",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 08KV, lemma-space-over-pushout-flat-modules, proof and part (b); omitted details expanded using the existing affine chart and ring patching statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on an algebraic space flat over a pushout along a thickening are equivalent to compatible pairs of flat modules",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.Flat\", \"doc\": \"The composition of two flat morphisms of schemes is also a flat morphism. Specifically, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern scheme morphisms, presentations on a single site, ordinary sheaf equivalences, or unrelated topology; none gives relative flat-module patching on algebraic spaces or the proper-support family equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing relatively flat quasi coherent modules over a fibre product of rings with surjective map and nilpotent kernel preserves finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"Module.FinitePresentation.prod\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"[Module.FinitePresentation R M] [Module.FinitePresentation R N] : Module.FinitePresentation R (M × N)\", \"doc\": \"Given a semiring $ R $ and two finitely presented $ R $-modules $ M $ and $ N $, the product module $ M \\times N $ is also finitely presented over $ R $. This follows from the component-wise definition\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf $\\\\mathcal{M}$ of modules over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, this recursor allows defining a function on the finite presentation condition of $\\\\mathcal{M}$ by s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern scheme morphisms, presentations on a single site, ordinary sheaf equivalences, or unrelated topology; none gives relative flat-module patching on algebraic spaces or the proper-support family equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"pullback\"",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \" {C : Type v₁} [CategoryTheory.SmallCategory C] {D : Type v₁} [CategoryTheory.SmallCategory D] (G : CategoryTheory.Functor C D) (A : Type u₁) [CategoryTheory.Category.{v₁, u₁} A] (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) {FA : A → A → Type u_1} {CA : A →\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Reduced\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.GeometricallyReduced f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.IsReduced Y] [AlgebraicGeometry.IsLocallyNoetherian Y] : AlgebraicGeometry.IsReduced (CategoryTheory.Limits.pullback f g)\", \"doc\": \"If `X` is geometrically reduced over `S`, and `Y` is both reduced and locally noetherian,\\nthen `X ×ₛ Y` is also reduced.\\n\\nTODO: get rid of the noetherian hypothesis.\"}\n  {\"name\": \"AlgebraicGeometry.instIsReducedPullbackSchemeOfGeometricallyReducedOfFlatOfIsLocallyNoetherian_1\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Reduced\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.GeometricallyReduced g] [AlgebraicGeometry.Flat g] [AlgebraicGeometry.IsReduced X] [AlgebraicGeometry.IsLocallyNoetherian X] : AlgebraicGeometry.IsReduced (CategoryTheory.Limits.pullback f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.GeometricallyIntegral f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.UniversallyOpen f] [AlgebraicGeometry.IsIntegral Y] [AlgebraicGeometry.IsLocallyNoetherian Y] : AlgebraicGeometry.IsIntegral (CategoryTheory.Limits.pu\", \"doc\": \"If `X` is geometrically integral and flat and universally open over `S` and `Y` is integral\\nand locally noetherian, then `X ×ₛ Y` is integral.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralPullbackSchemeOfGeometricallyIntegralOfFlatOfUniversallyOpenOfIsLocallyNoetherian_1\", \"module\": \"Mathlib.AlgebraicGeometry.Geometrically.Integral\", \"type\": \" {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.GeometricallyIntegral g] [AlgebraicGeometry.Flat g] [AlgebraicGeometry.UniversallyOpen g] [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.IsLocallyNoetherian X] : AlgebraicGeometry.IsIntegral (CategoryTheory.Limits.pu\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : (CategoryTheory.Over.pullback f).Faithful\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f] : (CategoryTheory.Over.pullback f).Faithful\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern scheme morphisms, presentations on a single site, ordinary sheaf equivalences, or unrelated topology; none gives relative flat-module patching on algebraic spaces or the proper-support family equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*module.*(fibre.product|fiber.product|pushout)|Milnor|patching",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/PoincareConjecture.lean\", \"line\": \"64\", \"text\": \"/-- The existence of an exotic 7-sphere (due to John Milnor) -/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern scheme morphisms, presentations on a single site, ordinary sheaf equivalences, or unrelated topology; none gives relative flat-module patching on algebraic spaces or the proper-support family equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Milnor patching for relative flat modules and finite presentation over an algebraic space on a nilpotent base pushout",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern scheme morphisms, presentations on a single site, ordinary sheaf equivalences, or unrelated topology; none gives relative flat-module patching on algebraic spaces or the proper-support family equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-pushout",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08LQ (lemma-coherent-RS-star), Situation 08KB (situation-coherent). Module gluing input in the final sentence of Stacks 08LQ: apply 08KV after fixing the map to B.",
+   "via": [
+    "lem-sfb-space-coherent-pushout",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-relative-flat-module-pushout",
+  "worker": "stage1",
+  "group": "Q65",
+  "summary": "Kept the statement unchanged. Expanded Stacks 08KV into base coordinates, chart flatness, restriction, the global fibre-product module, canonical recovery maps, equivalence on all morphisms, and finite presentation. Added only the 08KP flat-to-finitely-presented ambient-algebra input; existing 08KP node assumes a flat ambient algebra and is insufficient for arbitrary locally finitely presented h.",
+  "blueprint": "Read latest sec-six-functors-basics/sk-thm-sf-ctf-stability unit and direct-image proof, and retained the inherited coherent-family/alteration prerequisite route. blueprint_refs.py ancestor prints None; inherited from.node=null is preserved. Steps realize the inherited 08LQ coherent-family pushout input through 08KV after fixing the base map; no unit binding is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-pullback-chart-tensor-flat-stalks",
+    "why": "Generic affine section/stalk flatness comparison with identity base change; no algebraic-space definition alone states this scheme module criterion."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison for scheme charts and tensor pullback; used as a black box without replacing the unit route."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Canonical pullback-composition and etale restriction formulas, needed to identify the specified comparison rather than an unspecified isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-over-quotient-ring",
+    "why": "Generic quotient tensor isomorphism identifies the overlap M with M prime modulo I; a basic algebra tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic stability of etale coverings under base change, used only to pull local finite presentations to the two pieces."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-pullback-chart-tensor-flat-stalks",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-c52820b2e",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-c52820b2e (reviewer sub-agent of L); spot-checked: Read Stacks 08KV (spaces-pushouts.tex:1192) together with more-algebra 08KH, 08KK, 07RU, flat-module-over-fibre-product, 07RW and 08KP. The item statement is unchanged and byte-equal to live, which is still unsplit; it correctly fixes the source's typos (X should be X' in (2)(b), O_Y should be O_V). New node lem-sfb-relative-fp-module-fp-algebra-pushout is exactly 08KP with hypotheses (1)-(3). It is a strict generalization of lem-sfb-relative-fp-module-fibre-product, which is the case where D is flat. The item needs it because D=O(W) is only finitely presented over R=O(P_a); h is not flat. It is a real lemma, smaller than the item and not a restated clause. Small cases checked: A=0, I=0, zero modules, and k[ε], D=R[x]/(εx). Steps 1 and 4-8 check against the cited statements: affine charts with R=B×_A A', the 07U8 affine base change, the fibre-product quasi-inverse, the 07RU and flat-patching recovery maps, and the 08KP application with E=R. FIX (C1): steps 2, 3 and 5 pass from covering affine charts to arbitrary étale charts, and to charts of V_1 that do not come from V. That needs chart independence of pointwise flatness (Stacks 05VU, which step 2 names only as a tag). Added a citation of the existing same-unit node lem-sfb-space-module-flat-point-chart-independence in steps 2, 3 and 5 and updated proof_deps; it creates no cycle. Also corrected the source places of step 1 (07RT is in more-morphisms.tex) and step 2 (05VU is in spaces-morphisms.tex). Batch-5: the chart-calculus, pullback-quasicoherent and affine-base-change nodes reach sec-trace-formula only through def-trf-algebraic-space, a general definition. The trf Zariski/étale QCoh equivalence and pullback-composition nodes are generic module foundations, not steps of the trace formula or Poincaré duality. All are accepted. The five declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeFlatModulePushout",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.restriction_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.schemeMap",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.Diagram",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.FlatQCoh",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.ModuleTriple",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.AdmissibleTriple",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.FlatTriple",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.leftForget",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.rightForget",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.restrictionComparison",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeFlatModulePatching.restriction_equivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeFlatModulePushout.lean",
+  "statement": "theorem restriction_equivalence {S : Scheme.{u}} (D : Diagram S) [IsClosedImmersion D.i.left] [IsAffineHom D.a.left] (hnil : ∃ n : ℕ, 1 ≤ n ∧ D.i.left.ker ^ n = ⊥) (hpush : IsPushout D.a.left D.i.left D.j₂.left D.j₁.left) : ∃ E : FlatQCoh D.h ≌ FlatTriple D, ∃ (e₂ : E.functor ⋙ leftForget D ≅ ObjectProperty.ι _ ⋙ moduleTensorPullback D.r₂) (e₁ : E.functor ⋙ rightForget D ≅ ObjectProperty.ι _ ⋙ moduleTensorPullback D.r₁), (∀ M : FlatQCoh D.h, (moduleTensorPullback D.a₂).map (e₂.hom.app M) ≫ (restrictionComparison D M.obj).hom = (E.functor.obj M).obj.hom ≫ (moduleTensorPullback D.a₁).map (e₁.hom.app M)) ∧ (MapIsLocallyOfFinitePresentation D.h → ∀ M : FlatQCoh D.h, M.obj.IsFinitePresentation ↔ ((moduleTensorPullback D.r₂).obj M.obj).IsFinitePresentation ∧ ((moduleTensorPullback D.r₁).obj M.obj).IsFinitePresentation)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The theorem includes the equivalence with natural identifications of both component functors and their overlap compatibility, so its functor is restriction on every object and arrow up to a specified natural isomorphism. Its second conjunct is the finite-presentation iff under local finite presentation of h. Diagram only names arbitrary cartesian inverse images and their uniquely determined overlap maps. Categories and canonical comparisons are explicit helper constructions of this same node; existing relative-flatness, scheme-space and tensor-composition declarations are reused through their landed definition nodes. No node statement correction or new definition node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c61cc8eeb",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read Stacks 08KV (spaces-pushouts.tex) and every dependency declaration: ModuleIsFlatOver, MapIsLocallyOfFinitePresentation, moduleTensorPullback, moduleTensorComposition (+_existsUnique), schemeSpace, the IsQuasicoherent/QCoh predicate and Mathlib's IdealSheafData Pow (true ideal power on each affine). Hypotheses match exactly: closed immersion, ∃ n ≥ 1 with ker^n = ⊥, IsAffineHom, IsPushout in Scheme with the right orientation, arbitrary h, three pullback squares; a₂/a₁ are uniquely determined, so they add no hypothesis. FlatQCoh and the comma-based FlatTriple (qcoh, flat over t₂/t₁, IsIso α, all commuting pairs) are the node's two categories. ∃ E plus natural isos e₂/e₁ and the overlap equation against the canonical moduleTensorComposition comparison fix E.functor as restriction up to natural iso. The finite-presentation iff under local finite presentation of h is stated on the actual restrictions. Edge cases (n = 1, empty spaces, zero modules, non-flat h, universes) are covered and there are no extra hypotheses. Node differs from live only in lean and in three landed definition-node stmt_deps; lean.statement is verbatim; sorry-only proof; docstrings present; all imported modules exist; no parallel copy. Advisory: H11 second-reading section is a no-claim note under the direct-delivery policy; schemeMap is a trivial local wrapper."
+ }
+}

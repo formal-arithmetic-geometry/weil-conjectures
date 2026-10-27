@@ -1,0 +1,143 @@
+{
+ "id": "def-sfb-space-picard-presentation",
+ "kind": "definition",
+ "title": "Relative algebraic-space Picard sheaf by local line representatives",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ be an algebraic space over $S$ with its small etale module sheaves and line modules [def-trf-algebraic-space], and let $f:X\\to S$. Use canonical tensor pullback [def-trf-space-etale-module-functors], the actual scheme tests, fibre products $X_T$ and induced fibre maps of [def-sfb-space-proper-quot-functor], and the big fppf topology [def-pc-fppf-site]. Let $Q$ be an algebraic space over $S$ endowed with a natural commutative group law $G$ [def-sfb-smooth-integral-group-space]; no smoothness or integral-fibre property is part of the group-law datum. A relative Picard presentation on $(Q,G)$ consists of maps $c_T$ from actual line modules on $X_T$ to $Q(T)$, constant on module isomorphism classes and natural for the specified tensor pullback. Every section of $Q(T)$ is, on some fppf covering sieve, of the form $c_U(L)$. For two line modules $L,M$ on $X_T$, $c_T(L)=c_T(M)$ if and only if their canonical tensor pullbacks become isomorphic on some fppf covering sieve. Multiplication satisfies $c_T(L\\otimes M)=c_T(L)c_T(M)$, the trivial module has class $1$, and any tensor inverse (equivalently the dual line) has the inverse class. Tensor is the sheafified sectionwise tensor [def-pur-sheaf-tensor-product]. Its comparison with a small-carrier line module is expressed after the existing fully faithful sectionwise ULift transport to a universe containing the site [def-pur-cochain-coefficient-universe-transport], without imposing a size equality. The commutative regular-functions sheaf used here is the existing one of [def-sfb-space-quasi-coherent-algebra], with exactly the same section rings and restriction maps as the ring-valued structure sheaf. These local representative and local equality conditions identify $Q$ with the fppf sheafification of $T\\mapsto\\operatorname{Pic}(X_T)$ and fix its group operations.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-pc-fppf-site",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-smooth-integral-group-space",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-cochain-coefficient-universe-transport",
+  "def-sfb-space-quasi-coherent-algebra"
+ ],
+ "source": {
+  "document": "literature/stacks-project/quot.tex; literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Situation 0D25 (situation-pic); sheafification local representatives and local equality; Tag 03EK, tensor product"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relative Picard sheaf presentation by line modules and local equality on fppf covers",
+   "results": "8 hits: SheafOfModules.isFinitePresentation; SheafOfModules.Presentation.mk.injEq; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.IsFinitePresentation; CommRing.Pic.ext_iff and other general module results. No relative algebraic-space Picard sheaf presentation.",
+   "date": "2026-10-24",
+   "verdict": "General sheaf modules and ring Picard groups only; reuse existing components, no matching presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of line module isomorphism classes on algebraic space scheme fibres has local representatives and equality is local isomorphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.isSheaf; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; SheafOfModules.LocalGeneratorsData.X; SheafOfModules.LocalGeneratorsData.I; AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app; PresheafOfModules.homEquivOfIsLocallyBijective and general sheaf results.",
+   "date": "2026-10-24",
+   "verdict": "No relative Picard presentation; scheme and generic module interfaces are existing components."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"picardFunctor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib relative Picard functor."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|picardFunctor|relativePicard (msearch.py Mathlib)",
+   "results": "[grep] OK 23 hit(s): ring Picard groups, elliptic-curve comments, skeletal-category comment and Picard-Lindelof analysis. No relative algebraic-space Picard presentation.",
+   "date": "2026-10-24",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg Picard|picardFunctor|LineModule in lean/WeilConjectures and lean/Sheaf; rg -l relative.*Picard|Picard.*relative|Picard.*sheafification dag/nodes; blueprint_refs.py search \"relative Picard sheaf\"",
+   "results": "Upstream Picard.Defs and Picard.Group define scheme-family Picard functors. Sheaf FlatProperPicardAlgebraicSpace states scheme-family representability only. RingedSitePicardData defines general ringed-site line quotients, not relative-space sheafification. RegularGroupSpace defines the reused CommutativeSpaceGroup. No relative algebraic-space Picard presentation found. blueprint_refs.py: 0 blueprint nodes match relative Picard sheaf.",
+   "date": "2026-10-24",
+   "verdict": "New composite presentation, reusing all module/site/fibre/group ingredients. No copied quotient or site."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-picard-sheaf-representability",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Represent the unpointed sheaf before identifying it with the rigidified functor; use 0DNI for quasi-separatedness and local finite presentation. Relative Picard sheafification and tensor group law.",
+   "via": [
+    "lem-sfb-space-picard-sheaf-representability",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePicardPresentation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SpacePicardPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePicardPresentation.lean",
+  "statement": "structure SpacePicardPresentation (f : X ⟶ groupSpaceBase S) (Q : AlgebraicSpace S) (G : CommutativeSpaceGroup Q)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.picardLiftModule",
+   "AlgebraicGeometry.AlgebraicSpace.picardLineTensor",
+   "AlgebraicGeometry.AlgebraicSpace.picardRefinedTest",
+   "AlgebraicGeometry.AlgebraicSpace.picardRefinementMap",
+   "AlgebraicGeometry.AlgebraicSpace.SpacePicardPresentation"
+  ],
+  "fixed_by": "NT-stage2-cc-e01736283"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e01736283",
+  "group": "NK",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e01736283",
+  "group": "NK",
+  "result": "fix",
+  "note": "Item matches Stacks 0D25/0D2C/0DNI with B=S: proper, flat, fp incl. qc+qs; canonical moduleStructureMap iso for every S-scheme T; Q represents the fppf sheafification via locally_represented plus the locally_equal iff; group law pinned by tensor_class/unit_class with inverse forced; diagonal qc relative over S; lfp; no extra hypotheses, one universe u. Base dependency records unchanged; added stmt_deps all used; report sections present; proof is sorry only. H4: new node def-sfb-space-picard-presentation copied commStructureSheaf/commStructurePresheaf_isSheaf (owner def-sfb-space-quasi-coherent-algebra, on base) as picardCommStructure(_isSheaf). FIX: fixes/SpacePicardPresentation.lean uses commStructureSheaf; fixes/def-sfb-space-picard-presentation.json adds the stmt_dep and citation and trims declarations; check_new_node and check_lean_text clean; nt_compile --json of both modules exit 0 (14.4 s, 15.8 s). Advisories: MapIsQuasiCompact owner only transitive; picardLineTensor is a second space-module tensor realization besides Poincare.smallMonoidal."
+ }
+}

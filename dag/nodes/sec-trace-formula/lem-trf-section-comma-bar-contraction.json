@@ -1,0 +1,256 @@
+{
+ "id": "lem-trf-section-comma-bar-contraction",
+ "kind": "statement",
+ "title": "Vertical sections contract augmented comma bar complexes",
+ "statement": "Let $u:\\mathcal E\\to\\mathcal D$ and $s:\\mathcal D\\to\\mathcal E$ be functors between small categories in [def-weil-size-convention], with $us=1_{\\mathcal D}$, and let $\\eta:1_{\\mathcal E}\\Rightarrow su$ satisfy $u(\\eta_U)=1_{uU}$ for every $U$. Give the categories the identity-cover topology [def-weil-pbc-sites-and-cohomology]. Let $R$ be a commutative ring and $K:\\mathcal D^{op}\\to\\operatorname{Mod}_R$ a module presheaf [def-weil-sheaf-of-modules-category]. For $V\\in\\mathcal D$, let $\\mathcal I_V=(V\\downarrow u)$ have objects $(U,a:V\\to uU)$ and arrows $h:(U,a)\\to(U',a')$ with $u(h)a=a'$. Put $F_V(U,a)=K(uU)$. Let $\\mathcal J_V=(V\\downarrow\\mathcal D)$, with $H_V(W,a)=K(W)$, and define $p(U,a)=(uU,a)$, $s_V(W,a)=(sW,a)$. On the category bar complexes of [lem-trf-derived-colimit-bar] the induced chain maps satisfy\n$$K(p)K(s_V)=1,\\qquad K(s_V)K(p)\\simeq1.$$\nThey preserve the augmentations to $K(V)[0]$ whose degree-zero formulas are $((U,a),x)\\mapsto K(a)x$ and $((W,a),x)\\mapsto K(a)x$, respectively. The latter augmentation is a chain homotopy equivalence with inverse the degree-zero inclusion at $(V,1_V)$ and zero in the other degrees. Consequently the specified augmentation $K_{\\mathcal I_V}(F_V)\\to K(V)[0]$ is a chain homotopy equivalence, with inverse the degree-zero inclusion at $(sV,1_V)$; all assertions are natural in $K$. Here $\\simeq$ means chain homotopy, and $M[0]$ is the complex with $M$ in degree zero and zero elsewhere.\nThe augmentation conclusion also holds with coherent identifications in place of $us=1$: suppose $\\epsilon:us\\xrightarrow{\\sim}1_{\\mathcal D}$ is a natural isomorphism and $\\epsilon_{uU}\\circ u(\\eta_U)=1_{uU}$. Then take $s_V(W,a)=(sW,\\epsilon_W^{-1}a)$ and coefficient map $K(\\epsilon_W):K(W)\\to K(usW)$ for its bar map. The augmentation inverse in this case includes at $(sV,\\epsilon_V^{-1})$ using $K(\\epsilon_V)$.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QW (lemma-triangle-compute-lower-shriek), cases i=1,2: section/bar replacement of the fibred-category argument; sites-cohomology.tex Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), and lemma-initial-final. General vertical-section and coherent-identification formulation written by Q70."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-derived-colimit-bar"
+ ],
+ "proof": [
+  {
+   "text": "Write $C_I=K_{\\mathcal I_V}(F_V)$ and $C_J=K_{\\mathcal J_V}(H_V)$. On arrows $F_V(h)=K(u(h))$. The relation $u(h)a=a\\prime$ gives $K(a)K(u(h))=K(a\\prime)$; hence the proposed degree-zero maps are cocones. By the displayed bar differential their composites with $d:C^{-1}\\to C^0$ vanish, so they define chain maps $A_I:C_I\\to K(V)[0]$ and $A_J:C_J\\to K(V)[0]$. Smallness is inherited by the comma categories (objects and arrows are subsets of products of the given small sets), so every bar sum is permitted.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), and lemma-initial-final; explicit section and coefficient refinement by Q99 of cotangent.tex Tag 08QW (lemma-triangle-compute-lower-shriek), cases i=1,2."
+   }
+  },
+  {
+   "text": "First suppose $us=1$. The functors $p,s_V$ act on arrows by $u,s$, and $ps_V=1$. Since $F_V=p^{-1}H_V$ and $s_V^{-1}F_V=H_V$, the cited reindexing formula defines $P=K(p,1)$ and $B=K(s_V,1)$ and gives $PB=1$. The arrows $\\eta_U:(U,a)\\to(suU,a)$ form a natural transformation $1_{\\mathcal I_V}\\Rightarrow s_Vp$: the comma condition is $u(\\eta_U)a=a$ and naturality is that of $\\eta$. For this transformation, with $G=F_V$ and coefficient map $t=1$, the coefficient restriction is $F_V(\\eta_U)=K(1_{uU})=1$. The natural-transformation clause of the cited node therefore gives $BP\\simeq1$. The generator formulas also give $A_JP=A_I$ and $A_IB=A_J$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), and lemma-initial-final; explicit section and coefficient refinement by Q99 of cotangent.tex Tag 08QW (lemma-triangle-compute-lower-shriek), cases i=1,2."
+   }
+  },
+  {
+   "text": "Let $T=(V,1_V)$ in $\\mathcal J_V$. Its unique arrow to $(W,a)$ is $a$, so $T$ is initial. Define $i:K(V)[0]\\to C_J$ by degree-zero inclusion at $T$ and zero elsewhere; $A_Ji=1$. For $n\\ge0$ define $S_n:C_J^{-n}\\to C_J^{-n-1}$ by $(X_n\\to\\cdots\\to X_0,x)\\mapsto(T\\to X_n\\to\\cdots\\to X_0,x)$. Using the cited face convention, $d_0S_n=1$, $d_jS_n=S_{n-1}d_{j-1}$ for $n\\ge1$, $1\\le j\\le n+1$ (including the coefficient face), while $d_1S_0=iA_J$. The alternating sum gives $dS+Sd=1$ in negative degrees and $dS_0=1-iA_J$ in degree zero. Thus $iA_J\\simeq1$ and $A_J$ is the asserted chain homotopy equivalence.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), and lemma-initial-final; explicit section and coefficient refinement by Q99 of cotangent.tex Tag 08QW (lemma-triangle-compute-lower-shriek), cases i=1,2."
+   }
+  },
+  {
+   "text": "In the strict case put $b=Bi$. The identities already proved give $A_Ib=A_Ji=1$. Whisker the homotopy $iA_J\\simeq1$ by $B,P$: then $bA_I=BiA_JP\\simeq BP\\simeq1$. On degree zero $b$ includes at $(sV,1_V)$, and its other components vanish. This proves the specified inverse, rather than merely an abstract isomorphism.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), and lemma-initial-final; explicit section and coefficient refinement by Q99 of cotangent.tex Tag 08QW (lemma-triangle-compute-lower-shriek), cases i=1,2."
+   }
+  },
+  {
+   "text": "Now let $\\epsilon:us\\xrightarrow{\\sim}1$ be as stated. Keep $p$ and put $s_V(W,a)=(sW,\\epsilon_W^{-1}a)$, with arrow map $s$. Naturality of $\\epsilon^{-1}$ verifies its comma condition. Set $B=K(s_V,t)$ with $t_{(W,a)}=K(\\epsilon_W)$; naturality of $\\epsilon$ makes $t$ a natural coefficient map $H_V\\to s_V^{-1}F_V$. There is a natural transformation $\\alpha:ps_V\\Rightarrow1_{\\mathcal J_V}$ with component $\\epsilon_W$, so the cited bar homotopy gives $PB=K(ps_V,H_V(\\alpha))\\simeq1$. There is also $\\beta:1_{\\mathcal I_V}\\Rightarrow s_Vp$ with component $\\eta_U$: its comma condition follows from $u(\\eta_U)=\\epsilon_{uU}^{-1}$. For its coefficient map $t\\prime_{(U,a)}=K(\\epsilon_{uU})$ one has $F_V(\\beta_U)t\\prime_U=K(u(\\eta_U))K(\\epsilon_{uU})=1$. The cited natural-transformation clause and composition formula give $BP=K(s_Vp,t\\prime)\\simeq1$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), and lemma-initial-final; explicit section and coefficient refinement by Q99 of cotangent.tex Tag 08QW (lemma-triangle-compute-lower-shriek), cases i=1,2."
+   }
+  },
+  {
+   "text": "Here $A_JP=A_I$ as before, and $A_IB=A_J$ because on a degree-zero generator its coefficient map is $K(\\epsilon_W^{-1}a)K(\\epsilon_W)=K(a)$. Hence $b=Bi$ again has $A_Ib=1$ and $bA_I=BiA_JP\\simeq BP\\simeq1$. Its degree-zero formula is inclusion at $(sV,\\epsilon_V^{-1})$ with coefficient $K(\\epsilon_V)$, exactly as asserted. For a natural module map $\\theta:K\\to L$, the equation $\\theta_XK(f)=L(f)\\theta_Y$ for $f:X\\to Y$ shows that every coefficient formula above commutes with $\\theta$. The insertion $S$ leaves coefficients unchanged. The homotopies $BP\\simeq1$ and $PB\\simeq1$ may be taken to be the explicit prism homotopies $H_n=\\sum_r(-1)^rp_r$ of [lem-trf-coefficient-bar-prism-homotopy] for $(\\beta,t')$ and $(\\alpha,1)$; each $p_r$ inserts a component of $\\eta$ or $\\epsilon$ and applies the coefficient map $t'_{U_0}=K(\\epsilon_{uU_0})$, resp. the identity, so it commutes with $\\theta$. Thus the maps, contractions, and resulting assertions are natural in $K$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-coefficient-bar-prism-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), and lemma-initial-final; explicit section and coefficient refinement by Q99 of cotangent.tex Tag 08QW (lemma-triangle-compute-lower-shriek), cases i=1,2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-coefficient-bar-prism-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), and lemma-initial-final; explicit section and coefficient refinement by Q99 of cotangent.tex Tag 08QW (lemma-triangle-compute-lower-shriek), cases i=1,2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor with a section and a vertical natural transformation from the identity to the section composite contracts comma bar complexes of pulled back module presheaves",
+   "results": "8 hits; top returned names/files: PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullbackComp, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.freeFunctorCompPullbackIso, PresheafOfModules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_id_comp. The pullback and split-morphism hits do not state a coefficient-sensitive comma contraction. DoldKan.HomotopyEquivalence.lean:79 compares normalized Moore and alternating complexes, not a comma augmentation. SimplicialObject.augment constructs an augmentation without proving it a homotopy equivalence. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlternatingFaceMapComplex\", \"Homotopy\"",
+   "results": "5 hits; top returned names/files: AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId. The pullback and split-morphism hits do not state a coefficient-sensitive comma contraction. DoldKan.HomotopyEquivalence.lean:79 compares normalized Moore and alternating complexes, not a comma augmentation. SimplicialObject.augment constructs an augmentation without proving it a homotopy equivalence. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(bar|comma).*(contract|homotop)|(contract|homotop).*(bar|comma)",
+   "results": "0 hits; top returned names/files: none. The pullback and split-morphism hits do not state a coefficient-sensitive comma contraction. DoldKan.HomotopyEquivalence.lean:79 compares normalized Moore and alternating complexes, not a comma augmentation. SimplicialObject.augment constructs an augmentation without proving it a homotopy equivalence. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split retraction of categories gives a homotopy equivalence of augmented bar complexes with contravariant module coefficients",
+   "results": "8 hits; top returned names/files: CategoryTheory.SplitMono.retraction, CategoryTheory.retraction, CategoryTheory.Retract.splitEpi, CategoryTheory.ShortComplex.Splitting.r, CategoryTheory.ShortComplex.Splitting.ofExactOfRetraction, CategoryTheory.ShortComplex.Splitting.splitMono_f_retraction, CategoryTheory.Retract.splitMono_retraction, CategoryTheory.IsSplitEqualizer.rightRetraction. The pullback and split-morphism hits do not state a coefficient-sensitive comma contraction. DoldKan.HomotopyEquivalence.lean:79 compares normalized Moore and alternating complexes, not a comma augmentation. SimplicialObject.augment constructs an augmentation without proving it a homotopy equivalence. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An initial object contracts the augmented simplicial replacement complex of a presheaf to evaluation; vertical section gives comma deformation retraction",
+   "results": "8 hits; top returned names/files: CategoryTheory.SimplicialObject.augment_hom_app, CategoryTheory.SimplicialObject.augment_hom_zero, CategoryTheory.SimplicialObject.augment, CategoryTheory.SimplicialObject.augment_left, SSet.Augmented.stdSimplex_obj_hom_app, CategoryTheory.SimplicialObject.augment_right, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_zero, classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve. The pullback and split-morphism hits do not state a coefficient-sensitive comma contraction. DoldKan.HomotopyEquivalence.lean:79 compares normalized Moore and alternating complexes, not a comma augmentation. SimplicialObject.augment constructs an augmentation without proving it a homotopy equivalence. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex",
+   "results": "2 hits; top returned names/files: Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean, Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean. The pullback and split-morphism hits do not state a coefficient-sensitive comma contraction. DoldKan.HomotopyEquivalence.lean:79 compares normalized Moore and alternating complexes, not a comma augmentation. SimplicialObject.augment constructs an augmentation without proving it a homotopy equivalence. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(bar|comma).*(contract|homotop)|(contract|homotop).*(bar|comma)",
+   "results": "1 hits; returned names/files: Mathlib/AlgebraicTopology/ExtraDegeneracy.lean.  Full returned results read in search-0.txt through search-4.txt or the recorded grep output. ExtraDegeneracy.homotopyEquiv (ExtraDegeneracy.lean:415) assumes an extra-degeneracy structure; it does not construct the coefficient-sensitive comma retraction. The Dold-Kan comparison (HomotopyEquivalence.lean:79) compares two complexes rather than this augmentation. The representation and alternating-constant hits address special complexes, not arbitrary comma categories. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An initial object contracts the augmented simplicial replacement of a contravariant module presheaf to evaluation",
+   "results": "8 hits; returned names/files: CategoryTheory.Limits.initial.to, PresheafOfModules.evaluation, AugmentedSimplexCategory.tensorUnit, CategoryTheory.SimplicialObject.augment, CategoryTheory.SimplicialObject.Augmented, AugmentedSimplexCategory.instHasInitial, CategoryTheory.Limits.initialUnopOfTerminal, PresheafOfModules.evaluation_preservesFiniteLimits.  Full returned results read in search-0.txt through search-4.txt or the recorded grep output. ExtraDegeneracy.homotopyEquiv (ExtraDegeneracy.lean:415) assumes an extra-degeneracy structure; it does not construct the coefficient-sensitive comma retraction. The Dold-Kan comparison (HomotopyEquivalence.lean:79) compares two complexes rather than this augmentation. The representation and alternating-constant hits address special complexes, not arbitrary comma categories. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlternatingFaceMapComplex\", \"Homotopy\"",
+   "results": "5 hits; returned names/files: AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId.  Full returned results read in search-0.txt through search-4.txt or the recorded grep output. ExtraDegeneracy.homotopyEquiv (ExtraDegeneracy.lean:415) assumes an extra-degeneracy structure; it does not construct the coefficient-sensitive comma retraction. The Dold-Kan comparison (HomotopyEquivalence.lean:79) compares two complexes rather than this augmentation. The representation and alternating-constant hits address special complexes, not arbitrary comma categories. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a functor with a vertical natural transformation contracts the augmented comma category bar complex with contravariant module coefficients",
+   "results": "8 hits; returned names/files: classifyingSpaceUniversalCover.compForgetAugmented.toModule, classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule, Rep.standardComplex.compForgetAugmentedIso, Rep.standardComplex.forget₂ToModuleCat, AlgebraicTopology.AlternatingFaceMapComplex.ε, CategoryTheory.Idempotents.DoldKan.N, CategoryTheory.Abelian.DoldKan.N, AlgebraicTopology.DoldKan.Γ₀'.  Full returned results read in search-0.txt through search-4.txt or the recorded grep output. ExtraDegeneracy.homotopyEquiv (ExtraDegeneracy.lean:415) assumes an extra-degeneracy structure; it does not construct the coefficient-sensitive comma retraction. The Dold-Kan comparison (HomotopyEquivalence.lean:79) compares two complexes rather than this augmentation. The representation and alternating-constant hits address special complexes, not arbitrary comma categories. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extra degeneracy by an initial object gives a chain homotopy equivalence from category homology with presheaf coefficients to its value at the initial object",
+   "results": "8 hits; returned names/files: ChainComplex.alternatingConstHomotopyEquiv, Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyInvHomId, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv.  Full returned results read in search-0.txt through search-4.txt or the recorded grep output. ExtraDegeneracy.homotopyEquiv (ExtraDegeneracy.lean:415) assumes an extra-degeneracy structure; it does not construct the coefficient-sensitive comma retraction. The Dold-Kan comparison (HomotopyEquivalence.lean:79) compares two complexes rather than this augmentation. The representation and alternating-constant hits address special complexes, not arbitrary comma categories. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def homotopyEquiv|def alternatingConstHomotopyEquiv|def homotopyEquivNormalizedMooreComplex",
+   "results": "4 hits; returned names/files: Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence.lean, Mathlib/AlgebraicTopology/DoldKan/SplitSimplicialObject.lean, Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean.  Full returned results read in search-0.txt through search-4.txt or the recorded grep output. ExtraDegeneracy.homotopyEquiv (ExtraDegeneracy.lean:415) assumes an extra-degeneracy structure; it does not construct the coefficient-sensitive comma retraction. The Dold-Kan comparison (HomotopyEquivalence.lean:79) compares two complexes rather than this augmentation. The representation and alternating-constant hits address special complexes, not arbitrary comma categories. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-lower-shriek",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Extracted lower-shriek proof steps 3 and 4: comma retraction, coefficient-compatible prism homotopy, and initial-object augmented contraction.",
+   "via": [
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-section-comma-bar-contraction",
+  "worker": "stage1",
+  "summary": "Q99 checked Stacks 08QW, 08PG, 08PH and lemma-initial-final, reused the existing coefficient-sensitive bar functoriality and natural-transformation statement, and supplied the initial-object insertion contraction and all coherent coefficient equations. No new nodes, no statement change, and no project attachment.",
+  "blueprint": "Realizes the supporting lower-shriek computation within the existing blueprint.from chain from lem-trf-local-term-locality proof (1)--(2); specifically lem-trf-cotangent-lower-shriek steps 3--4, the comma section and augmentation contraction. No change to the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-3ff868c4b",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-3ff868c4b (reviewer sub-agent of L); spot-checked: Read the whole item: statement, 6 steps, statements of the cited nodes lem-trf-derived-colimit-bar, def-weil-size-convention, def-weil-pbc-sites-and-cohomology, def-weil-sheaf-of-modules-category, lem-trf-coefficient-bar-prism-homotopy and lem-trf-augmented-presheaf-bar-resolution, and the citer lem-trf-cotangent-lower-shriek step 2. Read Stacks 08QW cases i=1,2 (cotangent.tex:1290) and lemma-initial-final (sites-cohomology.tex:10189). The section route replaces Stacks' fibred-category argument; it is agent-written and recorded as such, and uses no SGA. No new nodes and no statement change; no re-split note applies. Re-derived every variance and equation: the step-1 cocone K(a)K(u(h))=K(u(h)a); step 2 PB=K(ps_V,1)=1 and BP≃1 via η_U with u(η_U)=1; the step-3 insertion faces d_0S=1, d_jS_n=S_{n-1}d_{j-1} (coefficient face included), d_1S_0=iA_J; step 4 b=Bi; step 5 naturality of ε^{-1} for the comma condition, t=K(ε_W) natural, α and β with u(η_U)=ε_{uU}^{-1} and K(uη_U)K(ε_{uU})=1; step 6 K(ε_W^{-1}a)K(ε_W)=K(a). Edge cases checked: empty E, terminal one-object category, K=0, coherent inverse at (sV,ε_V^{-1}). No duplicate in the DAG; the step-3 contraction equals the pointwise contraction of the augmented bar resolution under C_J≅B(K)(V), which is advisory only. Fault C3: step 6 took naturality of the homotopies from the proof of the bar node, whose statement only says 'chain homotopic'. Fixed by citing lem-trf-coefficient-bar-prism-homotopy (same unit, statement-only, no cycle), which gives the explicit H_n=Σ(-1)^r p_r; uses and proof_deps updated in fixes/dag/nodes/sec-trace-formula/lem-trf-section-comma-bar-contraction.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SectionCommaBarContraction",
+  "declaration": "CategoryTheory.sectionCommaBarContraction_exists",
+  "declarations": [
+   "CategoryTheory.sectionCommaBarProjection",
+   "CategoryTheory.sectionCommaBarSection",
+   "CategoryTheory.sectionCommaBarCoefficients",
+   "CategoryTheory.sectionCommaBarComplex",
+   "CategoryTheory.sectionCommaBarPoint",
+   "CategoryTheory.SectionCommaBarContraction",
+   "CategoryTheory.sectionCommaBarContraction_exists"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SectionCommaBarContraction.lean",
+  "statement": "theorem sectionCommaBarContraction_exists (B : CategoryColimitBarSystem.{u}) (f : E ⥤ D) (s : D ⥤ E) (ε : s ⋙ f ≅ 𝟭 D) (η : 𝟭 E ⟶ f ⋙ s) (vertical : ∀ U : E, f.map (η.app U) ≫ ε.hom.app (f.obj U) = 𝟙 (f.obj U)) (R : Type u) [CommRing R] (V : D) : Nonempty (SectionCommaBarContraction B f s ε R V)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary record expands the assertion into its canonical generator formulas, natural augmentations and specified inverse inclusions, strict retraction identities, and natural chain homotopies. The theorem works with every bar system satisfying the recorded dependency, without selecting any data from its postponed existence theorem. Strict equality is encoded by epsilon = eqToIso h; the general epsilon gives precisely the coherent-identification variant."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60246b9a2",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Read the node, the delivered SectionCommaBarContraction module, the dependency DerivedColimitBar (bar model and bar system fields) and Mathlib StructuredArrow.pre and map₂. Node identical to live except the new lean field; lean.statement matches the file verbatim; no duplicate names. Objects match the node: comma categories as StructuredArrow, coefficients K(uU), p = pre, s_V = map₂ (𝟙 V) ε.inv giving (sW, a ≫ ε⁻¹_W) with coefficient K(ε_W). The strict case is the specialisation ε = eqToIso h: PB = 1 and BP homotopic to the identity. The augmentation formulas K(a)x on degree-zero generators and both preservation squares are present. The inverses include at (V,1) and at (sV, ε_V⁻¹) with K(ε_V) and are zero in all other degrees, with inverse identities and homotopies. Naturality in K covers the maps and every homotopy component. The verticality hypothesis is exact. Maps are pinned by generator formulas and positive degrees are zero, so nothing is hollow and nothing is chosen from a postponed theorem. Docstrings carry source and blueprint, the theorem docstring carries the six proof steps, and the only proof is sorry. Edge cases (empty D or E, K = 0, identity arrows, nonzero degrees) are covered. Not recompiled because no file was changed. Minor note: the second-reading section is the author's own brief re-read."
+ }
+}

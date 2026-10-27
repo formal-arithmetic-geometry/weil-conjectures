@@ -1,0 +1,487 @@
+{
+ "id": "lem-sfb-constructible-closure-fibre-avoidance",
+ "kind": "statement",
+ "title": "A high fibre codimension constructible locus has fibrewise nonfull closure",
+ "statement": "Let $T$ be a nonempty scheme of finite type over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-weil-finite-type-morphism, def-weil-affine-spectrum], and put $D=\\dim T$. Let $q:X\\to T$ be a smooth surjective separated algebraic-space morphism of finite presentation, all of whose geometric fibres are pure of one dimension $r\\geq0$. For algebraic spaces [def-trf-algebraic-space], smoothness and local finite presentation are tested on etale scheme charts [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]; finite presentation also requires quasi-compactness and quasi-separatedness, and separatedness means that the diagonal is a closed immersion. A group algebraic space is an algebraic space with multiplication, inverse and identity morphisms over its base satisfying the group identities, without a commutativity assumption. A geometric fibre is the base change to an algebraically closed field at a point of the base; integral means reduced, irreducible and nonempty. Give point spaces the atlas topology [def-a1-space-point-topology], and use topological Krull dimension [def-kun-topological-krull-dimension], with the empty subset of dimension $-\\infty$. Let $Z\\subseteq|X|$ be constructible [def-weil-constructible-subset], and let $c$ be an integer with $c>D$. Suppose that, for every geometric point $t$ of $T$, the closure in $|X_t|$ of the inverse image of $Z$ has dimension at most $r-c$. Let $\\overline Z$ be the closure in $|X|$. Then $\\overline Z$ contains no whole geometric fibre of $q$. Consequently the open subspace $W=X\\setminus\\overline Z$ [def-a1-space-open-subspace] is smooth and surjective over $T$. This assertion does not require $q$ proper or $Z$ closed, and makes no claim that $\\overline Z$ commutes with base change.",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 4.6, printed p.144, final dimension-counting sentence: if n-g exceeds dim S the closure of the bad locus cannot contain the special fibre. This is the constructible-locus dimension estimate isolated from the group argument. Supporting dimension formula: Stacks morphisms.tex Tag 02JU (lemma-dimension-formula), and spaces-morphisms.tex Tag 0BAX (lemma-dimension-formula-general), on finite-type arithmetic bases. Local Deligne PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-a1-space-open-subspace",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-a1-space-point-topology",
+  "def-kun-topological-krull-dimension",
+  "def-weil-constructible-subset",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Put $n=r-c$. Since $T$ is nonempty and $c>\\dim T$, $D=\\dim T$ is finite and nonnegative. If $n<0$, the hypothesis makes the inverse image of $Z$ in every geometric fibre empty: a nonempty space has a length-zero irreducible closed chain. Any point of $Z$, represented by a field-valued point of $X$, persists after taking an algebraic closure of that field and would give a point of one of those inverse images. Thus $Z=\\varnothing$; then $W=X$ proves both conclusions. Henceforth assume $n\\geq0$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "def-weil-geometric-point",
+    "lem-pc-algebraic-closure-exists-unique"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055, definition-Krull, and the empty-locus case of the dimension count; algebraic closures: fields.tex Tag 09GT."
+   }
+  },
+  {
+   "text": "The arithmetic finite-type hypothesis makes $T$ Noetherian. Since $q$ is quasi-compact and $T$ is quasi-compact, $|X|$ is quasi-compact: take finitely many affine opens of $T$ and finite subcovers on their inverse images. Choose a representable surjective etale atlas $p:U\\to X$ with $U$ affine. The composite $f=q p:U\\to T$ is smooth, surjective, and locally of finite type, by the chartwise calculus. Thus $U$ is locally Noetherian; being affine it is quasi-compact, and its point space is Noetherian by the cited topology theorem (applied also to schemes as algebraic spaces).",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "pqf-lem-locnoeth-lft",
+    "lem-sfb-noetherian-space-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03H6 (lemma-quasi-compact-affine-cover) and 04ZF (Noetherian point topology); morphisms.tex Tag 01T6 for local Noetherianity."
+   }
+  },
+  {
+   "text": "In a Noetherian space every open is quasi-compact: among finite unions from an open covering choose a maximal union, using stabilization of ascending opens; if it is not the whole open, adjoining a covering member increases it. Consequently every inverse image under $f$ of an affine open of $T$ is quasi-compact. Since $f$ is locally of finite type, it is of finite type. Its ordinary and geometric fibres are therefore finite-type schemes over their fields. They are separated: $U$ is affine and hence separated over $\\operatorname{Spec}\\mathbf Z$, and the relative diagonal of $f$ is the pullback of the absolute diagonal of $U$ along $U\\times_TU\\to U\\times_{\\operatorname{Spec}\\mathbf Z}U$; base change gives the same assertion for its fibres.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Noetherian ascending-open condition; morphisms.tex finite-type base change. The relative diagonal calculation is from the definition of separatedness."
+   }
+  },
+  {
+   "text": "Let $E=|p|^{-1}(Z)$ and $H=\\overline E\\subseteq|U|$. Constructibility expresses $Z$ as a finite union of locally closed subsets; continuity of $|p|$ therefore gives the same kind of expression for $E$. Since $p$ is open and continuous, $H=|p|^{-1}(\\overline Z)$. Indeed continuity gives one inclusion, and for $u\\in|p|^{-1}(\\overline Z)$ every open neighbourhood $N$ of $u$ has open image $p(N)$ meeting $Z$, so $N$ meets $E$. Give $H$ its reduced induced closed subscheme structure. Its map $H\\to T$ is locally of finite type: its inclusion in $U$ is an immersion and hence locally of finite type, and compose with $f$.",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Constructible finite locally closed decomposition and the neighbourhood proof of inverse image of closure under an open continuous map; schemes.tex reduced induced closed subscheme."
+   }
+  },
+  {
+   "text": "Fix $t\\in T$, put $k=\\kappa(t)$, and choose an algebraic closure $\\Omega/k$. Write $U_t$, $U_{\\bar t}$, and $X_{\\bar t}$ for the fibres, and $E_t,E_{\\bar t},Z_{\\bar t}$ for the inverse images of $E,E,Z$. (Thus $E_{\\bar t}=p_{\\bar t}^{-1}(Z_{\\bar t})$.) The map $p_{\\bar t}:U_{\\bar t}\\to X_{\\bar t}$ is surjective etale. Let $B$ be the reduced closed subspace of $X_{\\bar t}$ supported on $\\overline{Z_{\\bar t}}$; by hypothesis $\\dim|B|\\leq n$. It is separated, hence quasi-separated: its diagonal is obtained from the diagonal of the separated space $X_{\\bar t}$ by the closed-subspace base-change calculation. The scheme $V=U_{\\bar t}\\times_{X_{\\bar t}}B$ is etale over $B$. On each scheme chart of $B$, etale maps are locally quasi-finite by the cited etale lemma and etale composition. The source-dimension inequality for locally quasi-finite maps therefore gives $\\dim V\\leq\\dim|B|\\leq n$. The closed support of $V$ in $U_{\\bar t}$ contains $E_{\\bar t}$, hence also its closure.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-a1-etale-space-locally-quasi-finite",
+    "lem-sfb-space-quasifinite-source-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03IQ, lemma-reduced-closed-subspace; decent-spaces.tex Tags 0ABW (lemma-dimension-local-ring-quasi-finite) and 0A4J (lemma-dimension-decent-space)."
+   }
+  },
+  {
+   "text": "For later comparisons use the following direct chain argument: if $A\\subseteq B$ are subspaces, taking closures in $B$ of a strict chain of irreducible closed subsets of $A$ keeps it irreducible, closed, and strict, since intersecting these closures with $A$ recovers the original chain. Hence $\\dim A\\leq\\dim B$; homeomorphisms preserve dimension by transporting chains both ways. Applied to the closed support in the previous step, this gives $\\dim\\overline{E_{\\bar t}}\\leq n$.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055, definition-Krull; the chain proof of subspace monotonicity and homeomorphism invariance is written out here."
+   }
+  },
+  {
+   "text": "Let $A_t$ be the reduced induced closed subscheme on $\\overline{E_t}\\subset U_t$. It is separated and of finite type over $k$: its inclusion is a closed immersion (locally finite type, with quasi-compact inverse images of affine opens), and $U_t$ is separated of finite type. The scalar-extension projection $v:U_{\\bar t}\\to U_t$ is open by universal openness over a field. The neighbourhood argument of step 4 gives $v^{-1}(\\overline{E_t})=\\overline{v^{-1}(E_t)}=\\overline{E_{\\bar t}}$. The closed-support base-change theorem identifies this inverse image with the point space of $(A_t)_\\Omega$. Field-extension dimension invariance, applied to the separated finite-type scheme $A_t$ viewed as an algebraic space, now gives $\\dim A_t=\\dim(A_t)_\\Omega\\leq n$. This uses openness only for this field extension, not a closure identity for an arbitrary base change.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sc-scheme-over-field-universally-open",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-field-extension-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0383, lemma-scheme-over-field-universally-open; spaces-morphisms.tex Tag 04NS, lemma-dimension-fibre-after-base-change; spaces-properties.tex Tag 03IQ for the closed support."
+   }
+  },
+  {
+   "text": "The closed subset $H$ of the Noetherian scheme $U$ has finitely many irreducible components $C_i$, with generic points $\\eta_i$. Each $\\eta_i$ belongs to $E$. To check this, remove the other components to obtain an open subset of $H$ containing $\\eta_i$ and contained in $C_i$; density of $E$ in $H$ then makes $E\\cap C_i$ dense in $C_i$. Express this intersection as a finite union of locally closed subsets. Irreducibility forces one of their closures to be all of $C_i$. That piece is open in its closure, so contains a dense open of $C_i$, and thus contains its generic point. This proves the claim without making any assertion about closure in a fibre.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005K, lemma-generic-point-in-constructible, with its finite-locally-closed proof written out; the finite-component isolation is explicit."
+   }
+  },
+  {
+   "text": "Fix a generic point $\\eta$ of $H$ and put $t=f(\\eta)$. By step 8 its corresponding point $u_t\\in U_t$ lies in $E_t$, so its irreducible closed point closure is contained in $|A_t|$ and has dimension at most $n$ by steps 6 and 7. The finite-type-over-a-field point-closure formula identifies its dimension with $\\operatorname{trdeg}_{\\kappa(t)}\\kappa_{U_t}(u_t)$. The fibre-point residue-field formula gives $\\kappa_{U_t}(u_t)=\\kappa_U(\\eta)$ compatibly over $\\kappa(t)$: in that formula the tensor product is $\\kappa_U(\\eta)\\otimes_{\\kappa(t)}\\kappa(t)\\simeq\\kappa_U(\\eta)$. The closed immersion $H\\hookrightarrow U$ induces an isomorphism on residue fields. Thus every component generic point of $H$ satisfies $\\operatorname{trdeg}_{\\kappa(t)}\\kappa_H(\\eta)\\leq n$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-weil-pbc-fibre-product-point-residue-field",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B1C, item-dimension-irreducible-trdeg in lemma-dimension-locally-algebraic; schemes.tex fibre-point residue-field formula."
+   }
+  },
+  {
+   "text": "Apply the generic-residue-field dimension bound to $H\\to T$. Its target is locally Noetherian by step 2, its morphism is locally of finite type by step 4, and step 9 supplies the bound at every irreducible-component generic point. With $d=D$ and $n=r-c$ it gives $\\dim H\\leq D+r-c<r$. Empty $H$ is included in the same inequality.",
+   "uses": [
+    "lem-sfb-generic-residue-transcendence-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAG, lemma-alteration-dimension-general, with the pointwise hypothesis established in step 9."
+   }
+  },
+  {
+   "text": "If $\\overline Z$ contained all of a geometric fibre $X_{\\bar t}$ over an algebraically closed field $\\Omega$, step 4 and closed-support base change would make the closed immersion $H_{\\bar t}\\hookrightarrow U_{\\bar t}$ have full underlying support. The geometric atlas dimension theorem gives $\\dim U_{\\bar t}=\\dim|X_{\\bar t}|=r$, since that fibre is nonempty and pure of dimension $r$. On the other hand, for $t$ its underlying point, the field-extension inequality gives $\\dim H_{\\bar t}\\leq\\dim H_t$, and the ordinary fibre homeomorphism identifies $|H_t|$ with a subspace of $|H|$, of dimension at most $\\dim H$ by step 6. Here $H_t$ is locally of finite type over $\\kappa(t)$ by base change. Thus $r=\\dim H_{\\bar t}\\leq\\dim H<r$, a contradiction. The argument covers arbitrary algebraically closed extensions, not only the closures chosen in step 5.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-etale-atlas-topological-dimension",
+    "lem-sf-field-extension-dimension-upper-bound",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0A4J, lemma-dimension-decent-space; algebra.tex Tag 00P3 for field extension; schemes.tex ordinary fibre topology."
+   }
+  },
+  {
+   "text": "The complement $W$ is an open subspace. On etale scheme charts its map to $T$ is the restriction of a smooth scheme morphism to an open subscheme, hence smooth by the cited open-immersion composition theorem; smoothness of $W\\to T$ is tested on these charts by the chartwise calculus. For surjectivity use the chart test of the chartwise calculus for the map $W\\to T$, which is representable by algebraic spaces: let $T'\\to T$ be a morphism from a scheme and $U'\\to W\\times_TT'$ a surjective etale scheme chart. For $t'\\in T'$ over $t\\in T$, choose an algebraically closed field $\\Omega$ containing $\\kappa(t')$; the geometric fibre of $W$ over the resulting geometric point $\\operatorname{Spec}\\Omega\\to T$ is nonempty by step 11. The point-space image/base-change criterion, applied first to $W\\to T$ and $\\operatorname{Spec}\\Omega\\to T'\\to T$, and then to $W\\to T$ and $T'\\to T$, puts $t'$ in the image of $|W\\times_TT'|\\to|T'|$. The chart $U'\\to W\\times_TT'$ is representable surjective, so its point map is surjective by the same calculus; hence $U'\\to T'$ is surjective, and $W\\to T$ is surjective. These statements also handle the case $Z=\\varnothing$ separated out in step 1.",
+   "uses": [
+    "def-a1-space-open-subspace",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VC (open immersions are smooth) and 01VA (composition of smooth maps); algebraic-space scheme tests and point-space surjectivity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-weil-geometric-point",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "pqf-lem-locnoeth-lft",
+  "lem-sfb-noetherian-space-topology",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-constructible-subset",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-sfb-space-quasifinite-source-dimension-bound",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-sfb-space-field-extension-dimension",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "def-pc-scheme-fibre",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-sfb-generic-residue-transcendence-dimension-bound",
+  "lem-sfb-space-etale-atlas-topological-dimension",
+  "lem-sf-field-extension-dimension-upper-bound",
+  "lem-weil-pbc-lft-base-change",
+  "def-a1-space-open-subspace",
+  "lem-pc-open-immersion-smooth-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent assembly of Tags 0BAG/0BAE with the etale and field-extension dimension comparisons recorded in each step; supplies the missing dimension-counting argument of Deligne Lemma 4.6. Deligne PDF is locally WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a finite type integer scheme of dimension D the closure of a constructible subset with fibre codimension greater than D contains no whole fibre of a smooth pure dimensional family",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → [inst : CommSemiring R] → PrimeSpectrum.ConstructibleSetData (Polynomial R) → ℕ\", \"doc\": \"For a constructible set data $ S $, the function $ \\\\text{degBound} $ computes the supremum over all basic constructible set data $ C $ in $ S $ of the sum over indices $ i $ of the degree of the polyn\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.coborderRange f).ι\", \"doc\": \"For any immersion $ f: X \\to Y $ of schemes, the inclusion morphism of the cobord of the image of $ f $ into $ Y $ is dominant. This means the image of this open subset is dense in $ Y $, as the cobord\"}\n  {\"name\": \"ChevalleyThm.chevalley_mvPolynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {n : ℕ} {M : Submodule ℤ R},\\n  1 ∈ M →\\n    ∀ (k : ℕ) (d : Multiset (Fin n)) (S : PrimeSpectrum.ConstructibleSetData (MvPolynomial (Fin n) R)),\\n      (∀ C ∈ S, C.n ≤ k) →\\n        (∀ C ∈ S,\\n            ∀ (j : Fin C.n),\\n              C.g j ∈\\n                MvPolyno\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, $ k $ a natural number, $ d $ a multiset of indices $\\\\{1, ..., n\\\\}$, and $ S $ a constructible set in the mul\"}\n  {\"name\": \"chevalley_mvPolynomial_mvPolynomial\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {m n : ℕ} (f : MvPolynomial (Fin n) R →ₐ[R] MvPolynomial (Fin m) R) (k : ℕ)\\n  (d : Multiset (Fin m)) (S : PrimeSpectrum.ConstructibleSetData (MvPolynomial (Fin m) R)),\\n  (∀ C ∈ S, C.n ≤ k) →\\n    (∀ C ∈ S, ∀ (j : Fin C.n), (C.g j).degrees ≤ d) →\\n      (∀ (i : Fin \", \"doc\": \"Given natural numbers $m, n, k$ and a multiset $d$ of indices in $\\\\{0, 1, ..., m-1\\\\}$, let $f: R[x_1, ..., x_n] \\\\to R[y_1, ..., y_m]$ be an $R$-algebra homomorphism between multivariate polynomial rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData.g\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → (self : PrimeSpectrum.BasicConstructibleSetData R) → Fin self.n → R\", \"doc\": \"A function assigning to each basic constructible set data in the prime spectrum of a ring a finite list of ring elements, indexed by the natural number $n$ associated with that data. For a given data \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"ChevalleyThm.chevalley_polynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_6} [inst : CommRing R] (M : Submodule ℤ R),\\n  1 ∈ M →\\n    ∀ (S : PrimeSpectrum.ConstructibleSetData (Polynomial R)),\\n      (∀ C ∈ S, ∀ (j : Fin C.n) (k : ℕ), (C.g j).coeff k ∈ M) →\\n        ∃ T,\\n          PrimeSpectrum.comap Polynomial.C '' S.toSet = T.toSet ∧\\n            ∀ C ∈ T, C.n ≤\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, and $ S $ a constructible set data in $ R[X] $ such that all coefficients of polynomials in $ S $ belong to $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: Chevalley constructibility alone and monotonicity of topological dimension do not control the fibres of a global closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension bound for closure of constructible subset using relative fibre dimension over finite type integer base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ChevalleyThm.chevalley_polynomialC\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity\", \"type\": \"{R : Type*} [CommRing R] (M : Submodule ℤ R) (hM : 1 ∈ M) (S : ConstructibleSetData R[X])\\n  (hS : ∀ C ∈ S, ∀ j k, (C.g j).coeff k ∈ M) :\\n  ∃ T : ConstructibleSetData R,\\n    comap Polynomial.C '' S.toSet = T.toSet ∧ ∀ C ∈ T, C.n ≤ S.degBound ∧ ∀ i, C.g i ∈ M ^ S.degBound ^ S.degBound\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, and $ S $ a constructible set data in $ R[X] $ such that all coefficients of polynomials in $ S $ belong to $\"}\n  {\"name\": \"topologicalKrullDim_subspace_le\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"(X : Type*) [TopologicalSpace X] (Y : Set X) : topologicalKrullDim Y ≤ topologicalKrullDim X\", \"doc\": \"For any topological space $ X $ and any subset $ Y $ of $ X $ equipped with the subspace topology, the Krull dimension of $ Y $ is less than or equal to the Krull dimension of $ X $. The Krull dimensi\"}\n  {\"name\": \"chevalley_mvPolynomial_mvPolynomial\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity\", \"type\": \"{m n : ℕ} (f : MvPolynomial (Fin n) R →ₐ[R] MvPolynomial (Fin m) R) (k : ℕ) (d : Multiset (Fin m))\\n  (S : ConstructibleSetData (MvPolynomial (Fin m) R)) (hSn : ∀ C ∈ S, C.n ≤ k) (hS : ∀ C ∈ S, ∀ j, (C.g j).degrees ≤ d)\\n  (hf : ∀ i, (f (.X i)).degrees ≤ d) :\\n  ∃ T : ConstructibleSetData (MvPolynomial\", \"doc\": \"Given natural numbers $m, n, k$ and a multiset $d$ of indices in $\\\\{0, 1, ..., m-1\\\\}$, let $f: R[x_1, ..., x_n] \\\\to R[y_1, ..., y_m]$ be an $R$-algebra homomorphism between multivariate polynomial rin\"}\n  {\"name\": \"ChevalleyThm.chevalley_mvPolynomialC\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ChevalleyComplexity\", \"type\": \"{M : Submodule ℤ R} (hM : 1 ∈ M) (k : ℕ) (d : Multiset (Fin n)) (S : ConstructibleSetData (MvPolynomial (Fin n) R))\\n  (hSn : ∀ C ∈ S, C.n ≤ k) (hS : ∀ C ∈ S, ∀ j, C.g j ∈ coeffsIn _ M ⊓ (degreesLE _ _ d).restrictScalars _) :\\n  ∃ T : ConstructibleSetData R,\\n    comap MvPolynomial.C '' S.toSet = T.toS\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, $ k $ a natural number, $ d $ a multiset of indices $\\\\{1, ..., n\\\\}$, and $ S $ a constructible set in the mul\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"Ring.DimensionLEOne.isIntegralClosure\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Basic\", \"type\": \"(B : Type*) [CommRing B] [IsDomain B] [Nontrivial R] [Algebra R A] [Algebra R B] [Algebra B A] [IsScalarTower R B A]\\n  [IsIntegralClosure B R A] [DimensionLEOne R] : DimensionLEOne B\", \"doc\": \"If $ R $ is a commutative ring with Krull dimension at most one, $ B $ is the integral closure of $ A $ over $ R $, and the necessary algebra and scalar tower conditions hold, then $ B $ also has Krul\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData.degBound\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet\", \"type\": \"(S : ConstructibleSetData R[X]) : ℕ\", \"doc\": \"For a constructible set data $ S $, the function $ \\\\text{degBound} $ computes the supremum over all basic constructible set data $ C $ in $ S $ of the sum over indices $ i $ of the degree of the polyn\"}\n  {\"name\": \"IsInducing.topologicalKrullDim_le\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"{f : Y → X} (hf : IsInducing f) : topologicalKrullDim Y ≤ topologicalKrullDim X\", \"doc\": \"If $ f : Y \\\\to X $ is an inducing map (i.e., the topology on $ Y $ is the coarsest making $ f $ continuous), then the topological Krull dimension of $ Y $ is less than or equal to the topological Krul\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: Chevalley constructibility alone and monotonicity of topological dimension do not control the fibres of a global closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"krullDim\", \"fiber\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No match: Chevalley constructibility alone and monotonicity of topological dimension do not control the fibres of a global closure."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]onstructible.*[Cc]losure|[Cc]losure.*[Dd]im|AlgebraicSpace",
+   "results": "[grep] OK 14 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"93\", \"text\": \"  [IsIntegralClosure B A L] [FiniteDimensional K L]\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"344\", \"text\": \"    [IsIntegralClosure S R L] [FiniteDimensional K L]\"}\n  {\"file\": \"Mathlib/Topology/Constructible.lean\", \"line\": \"225\", \"text\": \"    IsConstructible U := BooleanSubalgebra.subset_closure ⟨hUopen, hUcomp⟩\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"line\": \"414\", \"text\": \"  [IsScalarTower B L M] [IsScalarTower K L M] [IsIntegralClosure C A M] [FiniteDimensional K M]\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Basic.lean\", \"line\": \"82\", \"text\": \"nonrec instance integralClosure [Nontrivial R] [IsDomain A] [Algebra R A] [DimensionLEOne R] :\"}\n  {\"file\": \"Mathlib/FieldTheory/KrullTopology.lean\", \"line\": \"160\", \"text\": \"  simp only [normalClosure.is_finiteDimensional K E L, normalClosure.normal K E L, true_and]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/GaloisClosure.lean\", \"line\": \"115\", \"text\": \"    normalClosure.is_finiteDimensional k (IntermediateField.adjoin k (s : Set K)) K\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"159\", \"text\": \"    finiteDimensional := normalClosure.is_finiteDimensional k L K\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"252\", \"text\": \"    finiteDimensional := normalClosure.is_finiteDimensional k M K\"}\n  {\"file\": \"Mathlib/Analysis/Complex/ReImTopology.lean\", \"line\": \"192\", \"text\": \"theorem closure_reProdIm (s t : Set ℝ) : closure (s ×ℂ t) = closure s ×ℂ closure t := by\"}\n  {\"file\": \"Mathlib/Analysis/Complex/ReImTopology.lean\", \"line\": \"206\", \"text\": \"  simpa only [closure_Ici, frontier_Ici] using! frontier_reProdIm (Ici a) (Ici b)\"}\n  {\"file\": \"Mathlib/Analysis/Complex/PhragmenLindelof.lean\", \"line\": \"219\", \"text\": \"  · rw [closure_reProdIm, closure_Ioo hab.ne, closure_Ioo (neg_lt_self hR₀).ne]\"}\n  {\"file\": \"Mathlib/Analysis/Complex/PhragmenLindelof.lean\", \"line\": \"379\", \"text\": \"        simp [closure_reProdIm, mem_reProdIm]\"}\n  {\"file\": \"Mathlib/Analysis/Convex/Measure.lean\", \"line\": \"41\", \"text\": \"      (closure_minimal (subset_affineSpan _ _) (affineSpan ℝ s).closed_of_finiteDimensional)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No match: Chevalley constructibility alone and monotonicity of topological dimension do not control the fibres of a global closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closure of a constructible subset in a smooth family over a finite dimensional arithmetic base cannot contain a fibre if the fibre codimension exceeds the base dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → [inst : CommSemiring R] → PrimeSpectrum.ConstructibleSetData (Polynomial R) → ℕ\", \"doc\": \"For a constructible set data $ S $, the function $ \\\\text{degBound} $ computes the supremum over all basic constructible set data $ C $ in $ S $ of the sum over indices $ i $ of the degree of the polyn\"}\n  {\"name\": \"ChevalleyThm.chevalley_mvPolynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {n : ℕ} {M : Submodule ℤ R},\\n  1 ∈ M →\\n    ∀ (k : ℕ) (d : Multiset (Fin n)) (S : PrimeSpectrum.ConstructibleSetData (MvPolynomial (Fin n) R)),\\n      (∀ C ∈ S, C.n ≤ k) →\\n        (∀ C ∈ S,\\n            ∀ (j : Fin C.n),\\n              C.g j ∈\\n                MvPolyno\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, $ k $ a natural number, $ d $ a multiset of indices $\\\\{1, ..., n\\\\}$, and $ S $ a constructible set in the mul\"}\n  {\"name\": \"chevalley_mvPolynomial_mvPolynomial\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {m n : ℕ} (f : MvPolynomial (Fin n) R →ₐ[R] MvPolynomial (Fin m) R) (k : ℕ)\\n  (d : Multiset (Fin m)) (S : PrimeSpectrum.ConstructibleSetData (MvPolynomial (Fin m) R)),\\n  (∀ C ∈ S, C.n ≤ k) →\\n    (∀ C ∈ S, ∀ (j : Fin C.n), (C.g j).degrees ≤ d) →\\n      (∀ (i : Fin \", \"doc\": \"Given natural numbers $m, n, k$ and a multiset $d$ of indices in $\\\\{0, 1, ..., m-1\\\\}$, let $f: R[x_1, ..., x_n] \\\\to R[y_1, ..., y_m]$ be an $R$-algebra homomorphism between multivariate polynomial rin\"}\n  {\"name\": \"ChevalleyThm.chevalley_polynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_6} [inst : CommRing R] (M : Submodule ℤ R),\\n  1 ∈ M →\\n    ∀ (S : PrimeSpectrum.ConstructibleSetData (Polynomial R)),\\n      (∀ C ∈ S, ∀ (j : Fin C.n) (k : ℕ), (C.g j).coeff k ∈ M) →\\n        ∃ T,\\n          PrimeSpectrum.comap Polynomial.C '' S.toSet = T.toSet ∧\\n            ∀ C ∈ T, C.n ≤\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, and $ S $ a constructible set data in $ R[X] $ such that all coefficients of polynomials in $ S $ belong to $\"}\n  {\"name\": \"PrimeSpectrum.BasicConstructibleSetData.g\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → (self : PrimeSpectrum.BasicConstructibleSetData R) → Fin self.n → R\", \"doc\": \"A function assigning to each basic constructible set data in the prime spectrum of a ring a finite list of ring elements, indexed by the natural number $n$ associated with that data. For a given data \"}\n  {\"name\": \"PrimeSpectrum.exists_range_eq_of_isConstructible\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {s : Set (PrimeSpectrum R)},\\n  Topology.IsConstructible s → ∃ S x f, Set.range (PrimeSpectrum.comap f) = s\", \"doc\": \"For any constructible subset $ s $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, there exists a commutative ring $ S $ and a ring homomorphism $ f : R \\\\to S $ such that\"}\n  {\"name\": \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.coborderRange f).ι\", \"doc\": \"For any immersion $ f: X \\to Y $ of schemes, the inclusion morphism of the cobord of the image of $ f $ into $ Y $ is dominant. This means the image of this open subset is dense in $ Y $, as the cobord\"}\n  {\"name\": \"Topology.IsConstructible.preimage_of_isClosedEmbedding\", \"module\": \"Mathlib/Topology/Constructible\", \"type\": \"∀ {X : Type u_2} {Y : Type u_3} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : X → Y} {s : Set Y},\\n  Topology.IsClosedEmbedding f →\\n    IsCompact (Set.range f)ᶜ → Topology.IsConstructible s → Topology.IsConstructible (f ⁻¹' s)\", \"doc\": \"Let $ f : X → Y $ be a closed embedding of topological spaces. If the complement of the image of $ f $ is compact and $ s ⊆ Y $ is a constructible set (i.e., belongs to the Boolean algebra generated b\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Chevalley constructibility, smoothness, or elementary dimension monotonicity do not state closure fibre avoidance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible locus fibre codimension greater than base dimension implies global closure contains no whole smooth fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet\", \"type\": \"{R : Type*} [CommRing R] {s : Set (PrimeSpectrum R)} (hs : StableUnderSpecialization s) (hs' : IsConstructible s) :\\n  IsClosed s\", \"doc\": \"In the Zariski topology on the prime spectrum of a commutative ring $ R $, any constructible set that is stable under specialization is closed.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsSmoothOfRelativeDimension n f] : IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"Topology.IsLocallyConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space is locally constructible if, for every point $ x $, there exists an open neighborhood $ U $ of $ x $ such that the intersection $ U \\\\cap s $ is a constructible set. \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Chevalley constructibility, smoothness, or elementary dimension monotonicity do not state closure fibre avoidance"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"fiber\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Chevalley constructibility, smoothness, or elementary dimension monotonicity do not state closure fibre avoidance"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*closure|closure.*constructible|dimension.*fiber",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Topology/Constructible.lean\", \"line\": \"225\", \"text\": \"    IsConstructible U := BooleanSubalgebra.subset_closure ⟨hUopen, hUcomp⟩\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Chevalley constructibility, smoothness, or elementary dimension monotonicity do not state closure fibre avoidance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible subset with small dimensional fibres has global closure of dimension at most base dimension plus fibre dimension and therefore avoids containing full fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"chevalley_mvPolynomial_mvPolynomial\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {m n : ℕ} (f : MvPolynomial (Fin n) R →ₐ[R] MvPolynomial (Fin m) R) (k : ℕ)\\n  (d : Multiset (Fin m)) (S : PrimeSpectrum.ConstructibleSetData (MvPolynomial (Fin m) R)),\\n  (∀ C ∈ S, C.n ≤ k) →\\n    (∀ C ∈ S, ∀ (j : Fin C.n), (C.g j).degrees ≤ d) →\\n      (∀ (i : Fin \", \"doc\": \"Given natural numbers $m, n, k$ and a multiset $d$ of indices in $\\\\{0, 1, ..., m-1\\\\}$, let $f: R[x_1, ..., x_n] \\\\to R[y_1, ..., y_m]$ be an $R$-algebra homomorphism between multivariate polynomial rin\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData.degBound\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"{R : Type u_1} → [inst : CommSemiring R] → PrimeSpectrum.ConstructibleSetData (Polynomial R) → ℕ\", \"doc\": \"For a constructible set data $ S $, the function $ \\\\text{degBound} $ computes the supremum over all basic constructible set data $ C $ in $ S $ of the sum over indices $ i $ of the degree of the polyn\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"ChevalleyThm.chevalley_polynomialC\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity\", \"type\": \"∀ {R : Type u_6} [inst : CommRing R] (M : Submodule ℤ R),\\n  1 ∈ M →\\n    ∀ (S : PrimeSpectrum.ConstructibleSetData (Polynomial R)),\\n      (∀ C ∈ S, ∀ (j : Fin C.n) (k : ℕ), (C.g j).coeff k ∈ M) →\\n        ∃ T,\\n          PrimeSpectrum.comap Polynomial.C '' S.toSet = T.toSet ∧\\n            ∀ C ∈ T, C.n ≤\", \"doc\": \"Let $ R $ be a commutative ring, $ M $ a $\\\\mathbb{Z}$-submodule of $ R $ containing $ 1 $, and $ S $ a constructible set data in $ R[X] $ such that all coefficients of polynomials in $ S $ belong to $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {s : Set ↥Y},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' s)\", \"doc\": \"For any morphism $ f : X \\\\to Y $ of schemes and any constructible subset $ s \\\\subseteq Y $, the preimage $ f^{-1}(s) $ is a constructible subset of $ X $.\"}\n  {\"name\": \"PrimeSpectrum.exists_range_eq_of_isConstructible\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {s : Set (PrimeSpectrum R)},\\n  Topology.IsConstructible s → ∃ S x f, Set.range (PrimeSpectrum.comap f) = s\", \"doc\": \"For any constructible subset $ s $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, there exists a commutative ring $ S $ and a ring homomorphism $ f : R \\\\to S $ such that\"}\n  {\"name\": \"PrimeSpectrum.ConstructibleSetData.isConstructible_toSet\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (S : PrimeSpectrum.ConstructibleSetData R), Topology.IsConstructible S.toSet\", \"doc\": \"For any constructible set data $ S $ in the prime spectrum of a commutative semiring $ R $, the set $ S.toSet $ obtained by taking the union of basic constructible subsets defined by $ S $ is a constr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] {s : Set ↥X},\\n  Topology.IsLocallyConstructible s →\\n    Topology.IsLocallyConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and locally of finite presentation morphism of schemes. If $s$ is a locally constructible subset of $X$, then its image $f(s)$ is a locally constructible subset of \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Chevalley constructibility, smoothness, or elementary dimension monotonicity do not state closure fibre avoidance"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-finite-translate-cover",
+  "date": "2026-10-23",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Finite translates of a fibrewise nonempty open in a smooth group space. In Deligne 4.6: A high fibre codimension constructible locus has fibrewise nonfull closure.",
+   "via": [
+    "lem-sfb-group-finite-translate-cover",
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-constructible-closure-fibre-avoidance",
+  "worker": "stage1",
+  "summary": "Proved the closure dimension bound on an affine etale atlas by bounding the residue transcendence degrees at the generic points of the reduced closure. Explicitly descended the fibre bound using closed-support pullback, etale locally-quasi-finite dimension control, and openness and dimension invariance for field extension. Added only the general generic-point dimension inequality (0BAG) as a statement-only prerequisite. The item statement is unchanged.",
+  "blueprint": "The existing blueprint.from.place descendant route is retained: the final dimension count in the finite-translate input of Deligne Lemma 4.6, supporting the alteration/Picard branch of direct-images proof (3). Read the latest sk-thm-sf-ctf-stability-direct-images.proof.md and its unit; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "def-kun-topological-krull-dimension",
+    "why": "Generic definition used for the explicit dimension comparison on etale charts; it does not replace a six-functor unit step."
+   },
+   {
+    "node": "def-weil-geometric-point",
+    "why": "Generic definition used for the explicit dimension comparison on etale charts; it does not replace a six-functor unit step."
+   },
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "Existence of algebraic closures makes the geometric-point test and the fibre scalar extension possible; this unit has no different field-closure construction."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Makes the arithmetic base Noetherian; a generic scheme finiteness tool, not a six-functor assertion."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Makes the smooth scheme atlas locally Noetherian over the arithmetic base; the unit supplies no alternative local algebra theorem."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic definition used for the explicit dimension comparison on etale charts; it does not replace a six-functor unit step."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme, field, or algebraic-space tool used for the explicit dimension comparison on etale charts; it does not replace a six-functor unit step."
+   },
+   {
+    "node": "def-weil-constructible-subset",
+    "why": "Generic definition used for the explicit dimension comparison on etale charts; it does not replace a six-functor unit step."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Supplies etale openness, continuity and the point-space image criterion used for closure and final surjectivity; this is the generic space-topology interface."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Constructs the genuine reduced closed schemes H and A_t used in the dimension count; it is a generic scheme construction."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Supplies local finite type for the closed inclusions in the dimension argument; it is a generic morphism-property tool."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Supplies representability, etaleness and surjectivity after base change of the atlas; no trace-formula result is used."
+   },
+   {
+    "node": "lem-a1-etale-space-locally-quasi-finite",
+    "why": "On each scheme chart, supplies local quasi-finiteness of an etale scheme morphism, needed by the source-dimension comparison."
+   },
+   {
+    "node": "lem-sc-scheme-over-field-universally-open",
+    "why": "Supplies openness of scalar extension over a field for the proved closure identity; a generic geometric tool."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Supplies finite component isolation for the generic points of H; no cohomology theorem is used."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Supplies generic points of the irreducible closed components of H; a generic scheme-topology theorem."
+   },
+   {
+    "node": "def-pc-scheme-fibre",
+    "why": "Generic definition used for the explicit dimension comparison on etale charts; it does not replace a six-functor unit step."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Computes the dimension of a point closure over a field as its residue transcendence degree; this is the generic dimension input, not a curve-cohomology route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Identifies the fibre point residue field with the original residue field through the explicit tensor formula; a generic scheme fibre-product tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Identifies the residue field on H with that of U at the same point; a generic closed-immersion theorem."
+   },
+   {
+    "node": "lem-sf-field-extension-dimension-upper-bound",
+    "why": "Bounds the geometric fibre dimension of H by its ordinary fibre dimension in the contradiction; a generic scalar-extension inequality."
+   },
+   {
+    "node": "lem-weil-pbc-lft-base-change",
+    "why": "Makes H_t locally finite type over its residue field for the field-dimension theorem; a generic base-change property."
+   },
+   {
+    "node": "def-a1-space-open-subspace",
+    "why": "Generic definition used for the explicit dimension comparison on etale charts; it does not replace a six-functor unit step."
+   },
+   {
+    "node": "lem-pc-open-immersion-smooth-composition",
+    "why": "Proves smoothness after restricting q to the complementary open on scheme charts; no Picard-theory assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-topological-krull-dimension",
+  "def-weil-geometric-point",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-constructible-subset",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "def-pc-scheme-fibre",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-sf-field-extension-dimension-upper-bound",
+  "lem-weil-pbc-lft-base-change",
+  "def-a1-space-open-subspace",
+  "lem-pc-open-immersion-smooth-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-223afbd6d",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-223afbd6d (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 32 cited statements, and Stacks 0BAG (morphisms.tex l.13814) with its input 0BAE; the Deligne PDF is absent, which the delivery records honestly (agent proof_origin). The item statement is unchanged and true. Live and side-live still have the item unsplit, and it has no repair note. Steps 1-11 are correct and every hypothesis is checked. Step 2: 03H6 atlas from quasi-compact |X| (q and T quasi-compact), then 01T6 and 04ZF. Step 4: H=p^{-1}(Z-bar) because étale maps have open point maps. Step 5: B is quasi-separated, V→B is chartwise étale and so locally quasi-finite (03XU), and 0ABW/0A4J gives dim V ≤ n; the 03IQ base-change support clause gives E_t̄ ⊆ supp V. Step 7: the projection to U_t is open by 0383, and the 04NS hypotheses (separated, finite type) hold for A_t. Step 8: the 005K argument shows the component generic points of H lie in E. Step 9: 0B1C plus the 01JT residue identification κ(η)⊗κ(t)=κ(η). Step 10: the new 0BAG node gives dim H ≤ D+n < r. Step 11: 0A4J gives dim U_t̄ = r, then 00P3 and the fibre homeomorphism give r ≤ dim H, a contradiction, for any algebraically closed Ω. FIX (C4) in step 12: surjectivity of W→T cited only the a1 criterion, which covers representable maps, and W→T is not representable. Step 12 now cites lem-sfb-stack-chartwise-smooth-etale-calculus (already in proof_deps) and writes out the chart test: the a1 image/base-change clause is applied twice, then point surjectivity of the chart. The new node lem-sfb-generic-residue-transcendence-dimension-bound matches 0BAG hypothesis by hypothesis and holds on A^1, a point, disjoint unions and nondominant closed immersions. It is statement-only and self-contained. It generalizes lem-trf-closed-dominant-dimension (02JX: integral, dominant), is not a duplicate, and does not restate the item. Batch-5: all 10 flagged citations are general algebraic-space foundations (03H6, 04XB, 04ZF, 03EC, 03IQ, 03XU, 0ABW/0A4J, 04NS, 0A4J); the full closure contains no nt-assume leaf, no trace-transport node and no batch-4 target, so they lie outside both assumptions. No SGA is cited, and the tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleClosureFibreAvoidance",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.constructible_closure_geometric_fibre_avoidance",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleClosureFibreAvoidance.lean",
+  "statement": "theorem constructible_closure_geometric_fibre_avoidance (T : Over (Spec (.of (ULift.{u} ℤ)))) [Nonempty T.left] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] (D : ℕ) (hD : topologicalKrullDim T.left = (D : WithBot ℕ∞)) (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (q : X.obj.obj ⟶ yoneda.obj T) (hq : MapToSchemeIsLocally (@Smooth) X T q) (hsurj : Function.Surjective (mapPoint q)) (hsep : MapToSchemeIsSeparated X T q) (hlfp : MapToSchemeIsLocally (@LocallyOfFinitePresentation) X T q) (hqc : MapIsQuasiCompact q) (hqs : MapIsQuasiCompact (pullback.diagonal q)) (r : ℕ) (hpure : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T.left), ∀ C ∈ irreducibleComponents (Point (Limits.pullback q (yoneda.map (Over.homMk (U := Over.mk (t ≫ T.hom)) t rfl)))), topologicalKrullDim C = (r : WithBot ℕ∞)) (Z : Set (Point X.obj.obj)) (hZ : Topology.IsConstructible Z) (c : ℤ) (hc : (D : ℤ) < c) (hfibre : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T.left), topologicalKrullDim (closure (mapPoint (Limits.pullback.fst q (yoneda.map (Over.homMk (U := Over.mk (t ≫ T.hom)) t rfl))) ⁻¹' Z)) ≤ if c ≤ (r : ℤ) then (((r : ℤ) - c).toNat : WithBot ℕ∞) else ⊥) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T.left), ¬ Set.range (mapPoint (Limits.pullback.fst q (yoneda.map (Over.homMk (U := Over.mk (t ≫ T.hom)) t rfl)))) ⊆ closure Z) ∧ ∃ W : OpenSubspace X, pointImage W.val.ι = (closure Z)ᶜ ∧ (∀ (U : Over (Spec (.of (ULift.{u} ℤ)))) (a : yoneda.obj U ⟶ W.val.toFunctor), IsEtale a → Smooth (yoneda.preimage (a ≫ W.val.ι ≫ q)).left) ∧ Function.Surjective (mapPoint (W.val.ι ≫ q))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06622d088",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Clause-by-clause match of the Lean to the node. T is a nonempty finite-type Spec ℤ-scheme via LocallyOfFiniteType + QuasiCompact; D names topologicalKrullDim. q: X→h_T with chartwise Smooth and LFP, surjective on mapPoint (not the scheme-only IsSurjective), separated (diagonal closed immersions), qc, qs = qc diagonal. Purity is on irreducible components of the presheaf-pullback geometric fibres for all algebraically closed Ω:Type u. Z is IsConstructible; c:ℤ > D. The fibre closure bound is if c≤r then (r−c).toNat else ⊥, with no ℕ truncation. Conclusions: no geometric fibre range ⊆ closure Z, and ∃ OpenSubspace W with pointImage = (closure Z)ᶜ, chartwise smooth and point-surjective (canonical, not arbitrary). Added stmt_dep def-sfb-proper-curve-moduli is a landed def node owning mapPoint/MapTo* predicates. Statement verbatim; sorry only; source and blueprint docstrings; 12-step proof docstring; no local defs; imports exist; both report sections present. Edge cases r−c<0, r=0, r=c and empty Z checked. No change, so no compile."
+ }
+}

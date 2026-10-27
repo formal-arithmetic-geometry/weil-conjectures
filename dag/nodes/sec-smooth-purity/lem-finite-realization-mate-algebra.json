@@ -1,0 +1,144 @@
+{
+ "id": "lem-finite-realization-mate-algebra",
+ "kind": "statement",
+ "title": "Unit normalization and scalar transposition of a commuting realization cube",
+ "statement": "For arbitrary categories and adjunctions the following three algebraic identities hold. (1) Let E_A:A≌C and E_B:B≌D, a:S⊣U with S:C→D, and b:T⊣V with T:A→B. Given k:U E_A^{-1}≅E_B^{-1} V, define c:E_B U≅V E_A by inserting the counit of E_A, applying E_B k E_A, and cancelling E_B E_B^{-1} by its unit. If r:E_A S≅T E_B is the unit-preserving left-adjoint uniqueness comparison determined by k, then η_a(E_A X);U(r_X);c_{TX}=E_A(η_b(X)). (2) Let F_ZA,F_ZB,F_YA,F_YB and I_ZA,I_ZB,I_YA,I_YB be eight categories, with realization functors E_ZA,E_ZB,E_YA,E_YB from the F categories to the corresponding I categories. Let S_Z⊣U_Z and S_Y⊣U_Y be scalar adjunctions on I and T_Z⊣V_Z and T_Y⊣V_Y scalar adjunctions on F. Let P_A,P_B:I_Z→I_Y and Q_A,Q_B:F_Z→F_Y. Suppose r_Z:E_ZA S_Z≅T_Z E_ZB, r_Y:E_YA S_Y≅T_Y E_YB, c_Z:E_ZB U_Z≅V_Z E_ZA and c_Y:E_YB U_Y≅V_Y E_YA satisfy the unit equations in (1), and d_A:E_ZA P_A≅Q_A E_YA, d_B:E_ZB P_B≅Q_B E_YB, h:U_Z P_A≅P_B U_Y, t:V_Z Q_A≅Q_B V_Y satisfy P_A(c_Z(L));d_A(V_Z L);E_YA(t_L)=h(E_ZB L);U_Y(d_B(L));c_Y(Q_B L). Write α_K for the scalar transpose of P_A(η_Z(E_ZA K));h(S_Z E_ZA K), and β_K for the scalar transpose of Q_A(η_Z(K));t(T_Z K). Then α_K;P_B(r_Z(K));d_B(T_Z K)=S_Y(d_A(K));r_Y(Q_A K);E_YB(β_K). (3) Given geometric adjunctions L_A⊣Q_A,L_B⊣Q_B and scalar adjunctions T_Y⊣V_Y,T_Z⊣V_Z, suppose isomorphisms s:V_Y L_A≅L_B V_Z, e:L_A T_Z≅T_Y L_B and t:V_Z Q_A≅Q_B V_Y satisfy mate(T_Y⊣V_Y,T_Z⊣V_Z,e.hom)=s.hom and mate(L_B⊣Q_B,L_A⊣Q_A,s.hom)=t.inv. Then the scalar transpose of Q_A(η_Z(K));t(T_Z K) equals mate(L_A⊣Q_A,L_B⊣Q_B,e.inv)_K. Composition is written left to right. These identities impose no preservation, nonemptiness or exactness hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5: coefficient reduction; lem-finite-realization-scalar-mate, Steps 1 and 2; Stacks 0D6E, 0D6J and 07A6"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use the unit equation for leftAdjointUniq to identify its conjugate with k.inv. The iterated-mates identity and the explicit inverse mate formula identify its scalar mate with c.inv. The unit_mateEquiv equation, followed by c.hom, proves (1).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For (2), apply the injective scalar Hom-equivalence at Y and postcompose with c_Y. Replace the transpose followed by its unit by its defining map, move r_Z through h by naturality, apply the cube equation, and use (1) at Z. Naturality of d_A moves the fixed scalar unit to Y; naturality of c_Y and (1) at Y identify the other path. The remaining equality is the defining Hom-equivalence equation for β. All these operations are written and proved in Lean.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For (3), the iterated-mates formula identifies the conjugate of e.hom with t.inv. conjugateIsoEquiv sends inverses to inverses, so the iterated mate of e.inv is t.hom. Apply unit_mateEquiv and the scalar Hom-equivalence to obtain the displayed transpose.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5: coefficient reduction; lem-finite-realization-scalar-mate, Steps 1 and 2; Stacks 0D6E, 0D6J and 07A6",
+  "by": "agent Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(hcomp|vcomp)|conjugateEquiv",
+   "results": "{\"t\": \"2026-10-27T03:51:29Z\", \"tool\": \"grep\", \"query\": \"mateEquiv.*(hcomp|vcomp)|conjugateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/CategoryTheory/Shift/Adjunction.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\"], \"digest\": \"ab38cd35447b6a7d\"}",
+   "date": "2026-10-27",
+   "verdict": "generic identities only; no theorem for the specified realization cube"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-27T03:51:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-27",
+   "verdict": "generic identities only; no theorem for the specified realization cube"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of adjunction mates with equivalences of categories and commutative restriction squares",
+   "results": "{\"t\": \"2026-10-27T03:51:31Z\", \"tool\": \"leanfinder\", \"query\": \"Compatibility of adjunction mates with equivalences of categories and commutative restriction squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.mateEquiv_symm_apply\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"38e018af9a24a308\"}",
+   "date": "2026-10-27",
+   "verdict": "generic identities only; no theorem for the specified realization cube"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mates preserve a commuting cube of restriction comparisons under equivalences of categories",
+   "results": "{\"t\": \"2026-10-27T04:01:23Z\", \"tool\": \"leansearch\", \"query\": \"Adjunction mates preserve a commuting cube of restriction comparisons under equivalences of categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.Bicategory.mateEquiv\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction\", \"CategoryTheory.CommSq.right_adjoint\", \"CategoryTheory.Adjunction.restrictFullyFaithful\"], \"digest\": \"0ad86270f46cf492\"}",
+   "date": "2026-10-27",
+   "verdict": "generic identities only; no theorem for the specified realization cube"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A square normalized by K-injective resolutions commutes with equivalence of sheaf coefficient presentations and restriction of scalars",
+   "results": "{\"t\": \"2026-10-27T04:01:23Z\", \"tool\": \"leansearch\", \"query\": \"A square normalized by K-injective resolutions commutes with equivalence of sheaf coefficient presentations and restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.restrictHomEquivOfIsLocallySurjective\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.sheafificationHomEquiv\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective\"], \"digest\": \"07e1d870238cf356\"}",
+   "date": "2026-10-27",
+   "verdict": "generic identities only; no theorem for the specified realization cube"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRealizationScalarMate",
+  "date": "2026-10-27",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Step 5: coefficient reduction; lem-finite-realization-scalar-mate, Steps 1 and 2; Stacks 0D6E, 0D6J and 07A6",
+   "via": [
+    "lem-finite-realization-scalar-mate",
+    "lem-finite-proper-scalar-transport",
+    "lem-finite-compact-support-scalar-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRealizationMateAlgebra",
+  "file": "lean/Sheaf/Paper/FiniteRealizationMateAlgebra.lean",
+  "declaration": "CategoryTheory.realizationScalar_unit",
+  "declarations": [
+   "CategoryTheory.realizationRestrictionFromInverse",
+   "CategoryTheory.realizationScalar_unit",
+   "CategoryTheory.scalarTranspose_realization_cube",
+   "CategoryTheory.scalarTranspose_inverse_mate"
+  ],
+  "statement": "theorem realizationScalar_unit (X : A) :\n    a.unit.app (EA.functor.obj X) ≫\n        U.map ((((EA.toAdjunction.comp a).ofNatIsoRight k).leftAdjointUniq\n          (b.comp EB.toAdjunction)).hom.app X) ≫\n        (realizationRestrictionFromInverse EA EB k).hom.app (T.obj X) =\n      EA.functor.map (b.unit.app X)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T050656-L-253131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T050656-L-253131",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

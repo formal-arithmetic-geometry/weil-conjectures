@@ -100,7 +100,32 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_integral_model_finite_free_projector"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_integral_model_finite_free_projector",
+     "module": "WeilConjectures.AlgebraicGeometry.IntegralModelFiniteFreeProjector",
+     "lines": [
+      56,
+      145
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -132,5 +157,36 @@
   "landing": "20261012T085232-L-11530",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, $n\\geq0$, and $\\bar p$ an idempotent endomorphism of $(A/I)^n$. There exist a commutative integral $A$-algebra $B$, an $A$-algebra map $\\psi:B\\to\\operatorname{Mat}_n(A)$, and $y\\in B$ such that $y\\bmod IB$ is idempotent and the entrywise reduction of $\\psi(y)$ is the standard matrix of $\\bar p$.",
+  "proof": [
+   {
+    "text": "Lift the entries of the matrix $M$ of $\\bar p$ to a matrix $X\\in\\operatorname{Mat}_n(A)$, using surjectivity of $A\\to A/I$. Set $f=\\chi_X$, the characteristic polynomial of $X$, and $B=A[x]/(f)$. Since $f$ is monic of degree $n$, $B$ is a finite free $A$-module, hence integral over $A$. By Cayley–Hamilton $f(X)=0$, so the evaluation $A[x]\\to\\operatorname{Mat}_n(A)$, $x\\mapsto X$, factors through an $A$-algebra map $\\psi:B\\to\\operatorname{Mat}_n(A)$ with $\\psi(x)=X$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "In matrices over $(A/I)[t]$, write $S=t\\cdot1$ and $N$ for $M$ viewed as a constant matrix. Since $N^2=N$ and $SN=NS$, expansion gives $(S-N)(1-S-N)=(t-t^2)\\cdot1$. Taking determinants, $\\chi_M\\cdot\\det(1-S-N)=(t-t^2)^n$, so $\\chi_M$ divides $(t-t^2)^n$. This holds over every commutative ring, including the zero ring.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The quotient map $A/I\\to B/IB$ is well defined. The characteristic polynomial commutes with base change, so $f\\bmod I=\\chi_M$. Evaluation at the class $\\bar x$ of $x$ in $B/IB$ sends $f\\bmod I$ to zero because $f(x)=0$ in $B$. The divisibility of the preceding step therefore gives $(\\bar x-\\bar x^2)^{n+1}=0$; using the exponent $n+1$ instead of $n$ avoids a separate case for $n=0$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Put $y=1-(1-x^{n+1})^{n+1}$ in $B$. Since $\\bar x-\\bar x^2$ is nilpotent with $(\\bar x-\\bar x^2)^{n+1}=0$, the class of $y$ is idempotent. This formula follows by the geometric-sum identity: (z-z²)^N divides e-e² for e=1-(1-z^N)^N. Under the composite B → Mat_n(A) → Mat_n(A/I), x goes to M. Since M and 1-M equal every positive power of themselves, y goes to 1-(1-M)=M. This proves all the claims; no residue field or prime-spectrum lemmas occur.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

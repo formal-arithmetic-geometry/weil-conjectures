@@ -1,0 +1,138 @@
+{
+ "id": "lem-sf-open-factor-projection-realization",
+ "kind": "statement",
+ "title": "Fixed-presentation realization of completed open projection restriction",
+ "statement": "Use the finite-type open setting, augmented tensor data q and fixed Open data od of [def-sf-open-factor-fixed-data]. Given the Roos completion of the augmented tensor square in [lem-sf-open-projection-roos-completion], both q.tensorX.chi and q.tensorU.chi are invertible on every constructible pair. There is an ambient natural completed tensor/restriction isomorphism, whose quotient-unit equation is restriction_unit and whose restriction of gamma is gamma_restriction with precisely od.restrictionIso. These are equations of actual completed morphisms. This statement constructs neither Open data nor a Cartesian exchange. The signatures also use [def-weil-finite-field-fiber], [def-sf-pull-completion-comparison], [def-sf-tensor-completion-comparison], [def-weil-derived-complete-integral-detailed], [lem-sf-open-tensor-quotient-augmentation].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open factor; normalization of the completed open operations and their unit equations."
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "status": "split",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-pull-completion-comparison",
+  "def-sf-tensor-completion-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "def-sf-open-factor-fixed-data",
+  "lem-sf-open-tensor-quotient-augmentation",
+  "lem-sf-open-projection-roos-completion"
+ ],
+ "proof": [
+  {
+   "text": "Transport the normalized open coefficient identifications and the ordinary total-tensor comparison. The inverse-unit transpose identifies the ordinary map with openProjectionIso; the representative and augmentation equations identify its completion with the displayed gamma.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-open-projection-roos-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constructible tensor completion identifies the two-coordinate normalized chi with its invertible quotient-unit map on all constructible pairs. Restrict the entire strict quotient tensor system to obtain the ambient tensorRestriction and its unit equation.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-open-projection-roos-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the completed projection square. The ordinary inverse open-unit transpose restricts to identity. Restricted product comparison is identity on every projection, and the Roos comparison is identity on both coordinates. Cancel the invertible chi maps, obtaining exactly gamma_restriction.",
+   "uses": [
+    "lem-sf-open-projection-roos-completion",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-tensor-completion",
+  "lem-sf-open-projection-roos-completion",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-open-tensor-quotient-augmentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open factor; normalization of the completed open operations and their unit equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an open immersion commutes with derived completion and preserves the completion unit",
+   "results": "ContinuousLinearMap.extend_zero, SemiNormedGrp.completion.map_zero, AdicCompletion.map_zero and topological completion extensions; none is a ringed pro-etale derived open comparison.",
+   "date": "2026-10-25",
+   "verdict": "No match. The existing project open-factor lemmas are the appropriate inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion extension by zero commutes with derived completion and completed tensor projection and base change restrict to identity",
+   "results": "AdicCompletion.ofTensorProduct_naturality and ordinary scheme open restriction; no match for strict quotient-tower or completed unit normalization.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem; use the four existing open-factor lemmas and isolate their coefficient realization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "results": "Adjunction.fullyFaithfulLOfIsIsoUnit; Adjunction.restrictFullyFaithful. Generic tools only, no completed coefficient realization.",
+   "date": "2026-10-25",
+   "verdict": "No full match; unit naturality and isomorphism composition suffice for the formal assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "openFactorCoherence|OpenFactorCoherence.Open|OpenFactorCoherence.Tensor in lean/Sheaf, lean/WeilConjectures, dag/nodes; blueprint_refs search open factor / completed open / tensor restriction",
+   "results": "The assigned theorem is the only producer of its fixed Open structure. OpenTensorQuotient supplies Tensor; OpenProjectionRoos supplies a constructible-domain comparison in a different open presentation; OpenExchangeRoos uses pbcIntegralDatum. No fixed-presentation realization theorem found.",
+   "date": "2026-10-25",
+   "verdict": "The three statements are proper interface steps, not duplicates or a renamed copy of the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenFactorCoherence",
+  "date": "2026-10-25",
+  "group": "Y8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor; normalization of the completed open operations and their unit equations.",
+   "via": [
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenFactorProjectionRealization",
+  "file": "lean/Sheaf/SixFunctors/OpenFactorProjectionRealization.lean",
+  "declaration": "WeilConjectures.OpenFactorCoherence.openFactorProjectionRealization",
+  "statement": "theorem openFactorProjectionRealization\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    (SX : CoefficientDerivedSystemCalculus l E X)\n    (SU : CoefficientDerivedSystemCalculus l E U)\n    (o : IntegralOpenReduction.Operations l E j)\n    (st : IntegralOpenReduction.TensorComparison l E j o)\n    (AX : OpenSemilinearTensor.OrdinaryReduction l E X)\n    (AU : OpenSemilinearTensor.OrdinaryReduction l E U)\n    (m : OpenSemilinearTensor.Comparison l E j o SX SU AX AU st)\n    (c : IntegralOpenReduction.Comparison l E j o SX SU st)\n    (q : OpenTensorQuotient.Comparison l E j o SX SU AX AU st m c)\n    (F : FiniteFieldDatum.{u}) (hl : l ≠ F.p)\n    [U.Over (Spec (.of F.k))] [X.Over (Spec (.of F.k))]\n    [LocallyOfFiniteType (U ↘ Spec (.of F.k))] [QuasiCompact (U ↘ Spec (.of F.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of F.k))] [QuasiCompact (X ↘ Spec (.of F.k))]\n    [j.IsOver (Spec (.of F.k))]\n    (od : Open l E j)\n    (hc : OpenProjectionRoos.Completion l E j o SX SU AX AU st m c q) :\n    (∀ M N : D l E X, sfIntegralConstructible l E X M →\n      sfIntegralConstructible l E X N → IsIso ((q.tensorX.chi l E).app (M, N))) ∧\n    (∀ M N : D l E U, sfIntegralConstructible l E U M →\n      sfIntegralConstructible l E U N → IsIso ((q.tensorU.chi l E).app (M, N))) ∧\n    ∃ r : integralCompletedTensor.{u, u} l E X ⋙ star l E j ≅\n        ((star l E j).prod (star l E j)) ⋙ integralCompletedTensor.{u, u} l E U,\n      (∀ M N : D l E X, sfIntegralConstructible l E X M →\n        sfIntegralConstructible l E X N →\n        (star l E j).map ((q.tensorX.chi l E).app (M, N)) ≫ r.hom.app (M, N) =\n          (proEtaleCanonicalTensorComparison j ((completed l E).ring X)\n            ((completed l E).ring U) ((completed l E).pull j)\n            q.tensorX.ordinary q.tensorU.ordinary).hom.app (M, N) ≫\n              (q.tensorU.chi l E).app ((star l E j).obj M, (star l E j).obj N)) ∧\n      (∀ (K : D l E U) (P : D l E X), sfIntegralConstructible l E U K →\n        sfIntegralConstructible l E X P →\n        (star l E j).map (gamma l E od q.tensorU q.tensorX K P) ≫\n            od.restrictionIso.hom.app ((integralCompletedTensor.{u, u} l E U).obj\n              (K, (star l E j).obj P)) =\n          r.hom.app ((J l E j).obj K, P) ≫\n            (integralCompletedTensor.{u, u} l E U).map\n              (Prod.mkHom (od.restrictionIso.hom.app K) (𝟙 _)))",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-856b5",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T102004-L-3764455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-856b5",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T102004-L-3764455",
+  "kind": "interface",
+  "note": "independent cc review: OpenFactorCoherenceData vs published item lines 96-211 (byte-identical); the 3 realization statements vs the Assertion fields they fill and the pinning of Open/Pull/OrdinaryExchange/Tensor; the 3 direct importers compiled against the delivered modules (all OK); axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

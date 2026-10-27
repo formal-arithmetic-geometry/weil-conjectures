@@ -1,0 +1,236 @@
+{
+ "id": "lem-trf-cotangent-base-change-adjunct-formula",
+ "kind": "statement",
+ "title": "Resolution formula for the cotangent base-change adjunct",
+ "statement": "Let $A\\to C$, $A\\to A'$, $f:C\\to C'$ and $A'\\to C'$ be a commutative square of commutative rings. Let $P_\\bullet=P^{\\mathrm{std}}_\\bullet(C/A)$ and $R_\\bullet=P^{\\mathrm{std}}_\\bullet(C'/A')$ be the standard resolutions, and $t:P_\\bullet\\to R_\\bullet$ the square-induced semilinear map [lem-trf-cotangent-resolution-coherence]. Suppose that $P'_\\bullet=P_\\bullet\\otimes_A A'$, augmented by $p\\otimes a'\\mapsto f(\\epsilon(p))a'$, is a polynomial resolution of $C'$ over $A'$. Put $K=s(\\Omega^1_{P_\\bullet/A}\\otimes_{P_\\bullet}C)$, $K'=s(\\Omega^1_{P'_\\bullet/A'}\\otimes_{P'_\\bullet}C')$, and $K(R)=s(\\Omega^1_{R_\\bullet/A'}\\otimes_{R_\\bullet}C')$, with Kähler differentials [def-weil-pbc-kahler-differentials] and the nonpositive alternating-complex convention of that coherence node. Suppose $K$ is K-flat with flat $C$-module terms [def-pc-module-kflat-complex]. Write $Q$ for localization into ordinary-module derived categories [def-weil-abstract-derived-category], and $c_K:QK\\otimes_C^{\\mathbf L}C'\\xrightarrow{\\sim}Q(K\\otimes_C C')$ for the canonical computation map, using derived scalar extension [lem-trf-one-point-derived-ring-identification]. Let $\\theta:K\\otimes_C C'\\to K'$ be the differential chain map $(\\mathrm dp\\otimes c)\\otimes b'\\mapsto\\mathrm d(p\\otimes1)\\otimes f(c)b'$ and $u:K\\to\\operatorname{Res}_f(K\\otimes_C C')$, $x\\mapsto x\\otimes1$; tensor products mean [def-weil-pbc-module-tensor-product]. Then $h:P'_\\bullet\\to R_\\bullet$, $h(p\\otimes a')=t(p)a'$, is a morphism of augmented polynomial resolutions. If $c_{P'}:QK'\\xrightarrow{\\sim}L_{C'/A'}$ and $c_R:QK(R)\\xrightarrow{\\sim}L_{C'/A'}$ are the canonical comparisons, then $c_R QK(h)=c_{P'}$, and the standard functoriality morphism $\\gamma:L_{C/A}\\to\\operatorname{Res}_f L_{C'/A'}$ is represented by $c_R QK(h)Q(\\theta)Q(u)$, with target maps restricted along $f$. Under the normalized derived extension/restriction adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] transported to ordinary modules, its adjunct $\\beta$ satisfies the equality of morphisms in $D(C')$\n$$\\beta=c_R QK(h)Q(\\theta)c_K=c_{P'}Q(\\theta)c_K.$$\nNeither invertibility of $\\theta$ nor the derived-multiplication hypothesis is assumed in this assertion. Flat modules are as in [def-weil-pbc-flat-ring-map], and simplicial objects and their morphisms are as in [def-weil-pbc-simplicial-object].",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QL (section-functoriality), the standard-resolution map and its differential formula; Tag 08QQ (lemma-flat-base-change-cotangent-complex), identifying the induced morphism by scalar-extension adjunction."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-kahler-differentials",
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "lem-trf-one-point-derived-ring-identification",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [
+  {
+   "text": "Construct $h$ degreewise. Since $t_n$ is semilinear over $A\\to A'$, the assignment $p\\otimes a'\\mapsto t_n(p)a'$ is balanced: $t_n(ap)a'=t_n(p)\\alpha(a)a'$. It is additive, multiplicative and unital, hence gives an $A'$-algebra map $P_n\\otimes_A A'\\to R_n$. For every simplicial operator $\\sigma$, $R(\\sigma)h_n(p\\otimes a')=t_m(P(\\sigma)p)a'=h_m(P(\\sigma)p\\otimes a')$, using that $t$ is simplicial. The target augmentation sends $h_n(p\\otimes a')$ to $f(\\epsilon(p))a'$, the specified source augmentation. Thus $h$ is an augmented resolution morphism; both endpoints are polynomial resolutions by the hypotheses and the standard-resolution assertion.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), standard-resolution maps; Tag 08QQ (lemma-flat-base-change-cotangent-complex), the induced base-change morphism."
+   }
+  },
+  {
+   "text": "Apply the naturality of the canonical comparisons in [lem-trf-cotangent-resolution-coherence] over the single base ring $A'$, with target algebra $C'$, to the augmented resolution morphism $h:P'_\\bullet\\to R_\\bullet$ from Step 1. It gives exactly $c_R QK(h)=c_{P'}$. The hypothesis needed here is that $P'_\\bullet$ is a polynomial resolution, which is expressly assumed; no flatness of $A\\to A'$ or derived-multiplication condition is used.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), standard-resolution maps; Tag 08QQ (lemma-flat-base-change-cotangent-complex), the induced base-change morphism."
+   }
+  },
+  {
+   "text": "Let $g:K\\to\\operatorname{Res}_f K(R)$ be the differential map induced by the standard square map $t$. On the generators of its degree $-n$ term it sends $\\mathrm dp\\otimes c$ to $\\mathrm d(t_n(p))\\otimes f(c)$. The composite $K(h)\\theta u$ sends the same generator successively to $(\\mathrm dp\\otimes c)\\otimes1$, to $\\mathrm d(p\\otimes1)\\otimes f(c)$, and to $\\mathrm d(t_n(p))\\otimes f(c)$. Differentials are generated by $\\mathrm dp$ by their displayed quotient construction, and tensor products by pure tensors, so these maps agree in every degree. They commute with each face map, since applying a ring map and then $\\mathrm d$ sends $p$ to the differential of its image; therefore they commute with the alternating sums, with the same signs. Thus $g=K(h)\\theta u$ as chain maps. By the standard functoriality assertion and the canonical comparison to the target, $\\gamma=(\\operatorname{Res}_f c_R)Q(g)=c_R QK(h)Q(\\theta)Q(u)$; $QK=L_{C/A}$ by the standard-resolution definition.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), standard-resolution maps; Tag 08QQ (lemma-flat-base-change-cotangent-complex), the induced base-change morphism."
+   }
+  },
+  {
+   "text": "Use [lem-trf-one-point-derived-ring-identification] to evaluate the normalized sheaf coefficient adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction] on the singleton site at the rings $C$ and $C'$. It preserves the tensor computations, K-flatness, flat terms and the computation isomorphism $c_K$ appearing here. The assumed K-flatness and flat terms of $K$ therefore give the normalized adjunct formula for $g$ of Step 3. Its adjunct is $Q(v)c_K$, where $v:K\\otimes_C C'\\to K(R)$ sends $x\\otimes b'$ to $b' g(x)$. Put $w=K(h)\\theta$. This is $C'$-linear and $g(x)=w(x\\otimes1)$, so $v(x\\otimes b')=b' w(x\\otimes1)=w(x\\otimes b')$. Equality on pure tensors gives $v=w$. Naturality of the cited adjunction bijection in its target, applied to $c_R:QK(R)\\to L_{C'/A'}$, now shows that the adjunct of $\\gamma$ is $\\beta=c_R QK(h)Q(\\theta)c_K$. Substitution of Step 2 gives $\\beta=c_{P'}Q(\\theta)c_K$. The adjunction has no flat-ring-map or boundedness hypothesis, and the argument never inverts $\\theta$.",
+   "uses": [
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); derived.tex Tags 0FND (lemma-pre-derived-adjoint-functors) and 09T5 (lemma-derived-adjoint-functors), normalized on the singleton site."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-simplicial-object",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-one-point-derived-ring-identification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Explicit resolution-level assembly of Tags 08QL and 08QQ, using the existing resolution-comparison and normalized coefficient-adjunction nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived scalar extension adjunct of cotangent functoriality equals the map on polynomial differential resolutions followed by their canonical comparison",
+   "results": "8 hits; top=['Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Extension.CotangentSpace.map', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.H1Cotangent.map', 'Algebra.Extension.Cotangent.map', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', 'Algebra.Extension.tensorCotangentSpace', 'Algebra.Extension.cotangentComplex']; note=; digest=bdc464aca4e08462. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-114. The cotangentComplex and its scalar-extension identities concern a presentation-level linear map, not the full cotangent complex in an unbounded derived category or its normalized scalar-extension adjunct. No match for the resolution-comparison formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Identify the canonical cotangent base change morphism using the normalized derived tensor restriction adjunction on K-flat representatives",
+   "results": "8 hits; top=['KaehlerDifferential.tensorKaehlerEquiv', 'KaehlerDifferential.cotangentComplexBaseChange', 'Module.Dual.baseChange', 'KaehlerDifferential.mapBaseChange', 'KaehlerDifferential.tensorKaehlerEquivBase', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'IsBaseChange.toDualBaseChange', 'Ideal.mapCotangent']; note=; digest=cb3b360144bce023. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-114. The cotangentComplex and its scalar-extension identities concern a presentation-level linear map, not the full cotangent complex in an unbounded derived category or its normalized scalar-extension adjunct. No match for the resolution-comparison formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"adjunction\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-114. The cotangentComplex and its scalar-extension identities concern a presentation-level linear map, not the full cotangent complex in an unbounded derived category or its normalized scalar-extension adjunct. No match for the resolution-comparison formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*adjunct|cotangent.*adjunction|derived.*cotangent|cotangent.*derived",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53-114. The cotangentComplex and its scalar-extension identities concern a presentation-level linear map, not the full cotangent complex in an unbounded derived category or its normalized scalar-extension adjunct. No match for the resolution-comparison formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*adjunct|cotangent.*adjunction|simplicial.*cotangent",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read Extension/Cotangent/Basic.lean:53-114 and ModuleCat/ChangeOfRings.lean:756-789,905-917. Presentation-level differential maps and ordinary module adjunctions do not state this full derived cotangent resolution formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of derived extension restriction of scalars on a K flat complex is represented by x maps to x tensor one",
+   "results": "8 hits; top=['ModuleCat.extendRestrictScalarsAdj_unit_app_apply', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply', 'ModuleCat.ExtendRestrictScalarsAdj.unit', 'ModuleCat.ExtendRestrictScalarsAdj.Unit.map', 'ModuleCat.ExtendRestrictScalarsAdj.unit_app', \"ModuleCat.RestrictionCoextensionAdj.unit'\", 'ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply', 'RestrictScalars']; note=; digest=7f8cdacae73cf7e6. Read Extension/Cotangent/Basic.lean:53-114 and ModuleCat/ChangeOfRings.lean:756-789,905-917. Presentation-level differential maps and ordinary module adjunctions do not state this full derived cotangent resolution formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"baseChange\"",
+   "results": "12 hits; top=['KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange', 'KaehlerDifferential.cotangentComplexBaseChange', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.H1Cotangent.exact_δ_mapBaseChange', 'Algebra.Generators.H1Cotangent.liftBaseChange_range_le', 'Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat']; note=; digest=26327d97a6db9212. Read Extension/Cotangent/Basic.lean:53-114 and ModuleCat/ChangeOfRings.lean:756-789,905-917. Presentation-level differential maps and ordinary module adjunctions do not state this full derived cotangent resolution formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor adjunction sends a map from a K flat complex to restriction of scalars to the map x tensor b maps to b times g x",
+   "results": "8 hits; top=['ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply', 'ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply', 'ModuleCat.extendRestrictScalarsAdj_homEquiv_apply', 'LinearMap.tensorKerEquiv', 'ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat', 'ModuleCat.extendRestrictScalarsAdj_unit_app_apply', 'LinearMap.tensorKerEquiv_apply']; note=; digest=d2fbab366523e260. Read Extension/Cotangent/Basic.lean:53-114 and ModuleCat/ChangeOfRings.lean:756-789,905-917. Presentation-level differential maps and ordinary module adjunctions do not state this full derived cotangent resolution formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cotangent complex functoriality for a square of rings is computed by a map of simplicial polynomial differential resolutions and its derived extension of scalars adjunct",
+   "results": "8 hits; top=['Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.H1Cotangent.map', 'Algebra.Extension.H1Cotangent.map', 'Algebra.Extension.Cotangent.map', 'Algebra.Extension.CotangentSpace.map', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.CotangentSpace.map_comp_apply']; note=; digest=625a707618bdd970. Read Extension/Cotangent/Basic.lean:53-114 and ModuleCat/ChangeOfRings.lean:756-789,905-917. Presentation-level differential maps and ordinary module adjunctions do not state this full derived cotangent resolution formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-flat-base-change",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Full cotangent complex of a Koszul-regular quotient. Proof of Tag 08SJ: apply Tag 08QQ using the canonical derived tensor identification, not an assumption of flatness. Re-split: canonical cotangent functoriality and its derived adjunct; old proof steps 7--8.",
+   "via": [
+    "lem-trf-cotangent-flat-base-change",
+    "lem-trf-koszul-quotient-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cotangent-base-change-adjunct-formula",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Constructed the balanced augmented simplicial map explicitly, applied existing resolution-comparison naturality, checked the functorial differential factorization on generators, and computed its normalized derived adjunct. Reused existing inputs; no new nodes.",
+  "blueprint": "Auxiliary cotangent input on the recorded chain from lem-trf-local-term-locality, proof (1)--(2), through the Koszul-regular quotient and Tag 08QQ: realizes the former cotangent-flat-base-change proof steps 7--8 by identifying the actual adjunct. The latest blueprint locality proof is a geometric contracting-correspondence proof and does not separately state this ring-level formula.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic normalized unbounded coefficient adjunction, including its representative formula and target naturality. This is a scalar-extension tool in the ring-level auxiliary calculation; the trace-formula unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NK-7780687bb",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-7780687bb (reviewer sub-agent of L); spot-checked: I read the full split of lem-trf-cotangent-base-change-adjunct-formula (live: unsplit). It has no new nodes, and the statement and stmt_deps are unchanged from live. The four steps carry every argument of the old Q59 parent steps 7–8. Step 1: h is balanced by the semilinearity of t, multiplicative, simplicial and augmentation-compatible (coherence node plus the simplicial-object and tensor definitions). Step 2: the coherence node's naturality of comparisons for morphisms of augmented polynomial resolutions gives c_R QK(h)=c_{P'}. Step 3: K(h)θu agrees with the Stacks 08QL map g (cotangent.tex l.867) on the generators dp⊗c, which generate by the Kähler quotient presentation and pure tensors. Step 4: adjunction node clause (2), transported by the one-point identification (K-flat, flat terms, same c_K), gives v(x⊗b')=b'g(x)=w(x⊗b'); naturality in the target along c_R and then Step 2 give β=c_{P'}Q(θ)c_K. I tested the identity square, C=A, C'=0 and the non-flat case Z→F_p. No flatness, boundedness or θ-invertibility is used. Accepted tool use: lem-pur-sheaf-ring-derived-coefficient-adjunction, a generic scalar adjunction. Advisory: Step 3 takes the canonical comparison of a standard resolution with itself to be the identity, which is the Stacks 08QI convention also used by the retained statement. No SGA is cited; the Mathlib searches cover all three kinds."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentBaseChangeAdjunctFormula",
+  "declaration": "Algebra.CotangentResolution.cotangent_base_change_adjunct_formula",
+  "declarations": [
+   "Algebra.CotangentResolution.squareTensorAugmentation",
+   "Algebra.CotangentResolution.squareTensorInclusion",
+   "Algebra.CotangentResolution.squareTensorToTarget",
+   "Algebra.CotangentResolution.squareTensorComplex",
+   "Algebra.CotangentResolution.squareTensorTheta",
+   "Algebra.CotangentResolution.squareTensorUnit",
+   "Algebra.CotangentResolution.squareTensorDifferentialMap",
+   "Algebra.CotangentResolution.cotangent_base_change_adjunct_formula"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentBaseChangeAdjunctFormula.lean",
+  "statement": "theorem cotangent_base_change_adjunct_formula (C : Coherence.{u}) {f g : Arrow CommRingCat.{u}} (q : f ⟶ g) (hP : IsPolynomialResolution (squareTensorAugmentation q (C.standard f))) (hK : (HomologicalComplex.quasiIso (ModuleCat.{u} f.right) (.up ℤ)).kFlat (differentialComplex (C.differentials (C.standard f)))) (hflat : ∀ i : ℤ, Module.Flat f.right ((differentialComplex (C.differentials (C.standard f))).X i)) (L : DerivedCategory (ModuleCat.{u} f.right) ⥤ DerivedCategory (ModuleCat.{u} g.right)) (epsilon : DerivedCategory.Q ⋙ L ⟶ (ModuleCat.extendScalars q.right.hom).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (hL : L.IsLeftDerivedFunctor epsilon (HomologicalComplex.quasiIso (ModuleCat.{u} f.right) (.up ℤ))) (a : L ⊣ (ModuleCat.restrictScalars q.right.hom).mapDerivedCategory) (normalized : a.unit.app (cotangentComplex C f) ≫ (ModuleCat.restrictScalars q.right.hom).mapDerivedCategory.map (epsilon.app (differentialComplex (C.differentials (C.standard f)))) ≫ (ModuleCat.restrictScalars q.right.hom).mapDerivedCategoryFactors.hom.app (squareTensorComplex C q) = DerivedCategory.Q.map (squareTensorUnit C q)) : ∃ cK : L.obj (cotangentComplex C f) ≅ DerivedCategory.Q.obj (squareTensorComplex C q), cK.hom = epsilon.app (differentialComplex (C.differentials (C.standard f))) ∧ (DerivedCategory.Q.map (squareTensorDifferentialMap C q) ≫ (C.comparison (C.standard g) (C.standard_resolution g)).hom = (C.comparison (squareTensorAugmentation q (C.standard f)) hP).hom) ∧ (cotangentMap C q = DerivedCategory.Q.map (squareTensorUnit C q) ≫ (ModuleCat.restrictScalars q.right.hom).mapDerivedCategoryFactors.inv.app (squareTensorComplex C q) ≫ (ModuleCat.restrictScalars q.right.hom).mapDerivedCategory.map (DerivedCategory.Q.map (squareTensorTheta C q) ≫ DerivedCategory.Q.map (squareTensorDifferentialMap C q) ≫ (C.comparison (C.standard g) (C.standard_resolution g)).hom)) ∧ (((a.homEquiv _ _).symm (cotangentMap C q)) = cK.hom ≫ DerivedCategory.Q.map (squareTensorTheta C q) ≫ DerivedCategory.Q.map (squareTensorDifferentialMap C q) ≫ (C.comparison (C.standard g) (C.standard_resolution g)).hom) ∧ (((a.homEquiv _ _).symm (cotangentMap C q)) = cK.hom ≫ DerivedCategory.Q.map (squareTensorTheta C q) ≫ (C.comparison (squareTensorAugmentation q (C.standard f)) hP).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0db8d06b",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read node (only lean differs from live), module, report (Worker report + Second reading present), coherence interface (Augmentation, AugmentedMap, IsPolynomialResolution, DifferentialMap generator, Coherence.comparison/comparison_standard, cotangentMap), the other dependency records and Stacks 08QL/08QQ. Statement verbatim; declarations list = file. Clauses: P' = pointwise pushout with augmentation desc(ε≫q.right, g.hom) = f(ε p)a'; hP/hK/hflat exactly the node's hypotheses; c_K pinned to epsilon.app K; θ = chain adjunct of differentialMap(inclusion), u = adjunction unit; h = pushout.desc t.map R.base as AugmentedMap (𝟙 g); conjuncts c_R QK(h)=c_P', γ formula with factors.inv and restricted target, β = cK;Qθ;QK(h);c_R = cK;Qθ;c_P'. Normalization at QK pins homEquiv.symm at QK, so β is determined (covers the canonical normalized adjunction). Edge cases C'=0, identity square, A=C, empty/infinite variables, non-flat A→A'; universes u/u+1 as dependency. H4: Tor tensorAugmentation targets C⊗_A A', not C' (different object); CotangentFlatBaseChange.baseChangeAdjunction is in the downstream citer (cycle). No hollow defs; only the theorem is sorry; docstrings carry source+blueprint+proof steps. No recompile (worker's scompile clean). Advisories: second reading is a self-check; possible future factoring through tensorAugmentation."
+ }
+}

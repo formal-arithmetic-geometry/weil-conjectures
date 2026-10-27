@@ -84,11 +84,7 @@ private theorem scalar_power_eq
     (n : ℕ) :
     SheafOfModules.scalarTensorPower.{u + 1, u, u + 1} R M n =
       coefficientTwistPower.{u} X (R := R) M n := by
-  induction n using Nat.twoStepInduction with
-  | zero => rfl
-  | one => rfl
-  | more n _ ih =>
-    simp only [SheafOfModules.scalarTensorPower, coefficientTwistPower, ih]
+  rfl
 
 /-- The generic signed powers equal the original coefficient powers, as objects.
 Source: the two recursive definitions
@@ -96,7 +92,7 @@ Source: the two recursive definitions
 theorem power_eq_coefficient (L : scalarReductionSource.{u, u} l E X) (m : ℤ) :
     power l E X L m = coefficientTwistLine X
       (R := completedIntegralCommRingSheafUnrestricted.{u, u} l E X) L m := by
-  cases m <;> simp only [power, coefficientTwistLine, scalar_power_eq]
+  cases m <;> rfl
 
 /-- The generic finite powers equal the original finite coefficient powers, as objects.
 Source: the two recursive definitions
@@ -105,8 +101,7 @@ theorem finitePower_eq_coefficient
     (L : scalarReductionSource.{u, u} l E X) (n : ℕ) (m : ℤ) :
     finitePower l E X L n m = coefficientTwistLine X
       (R := integralCoefficientCommRingSheaf.{u, u} l E X n) (line l E X L n) m := by
-  cases m <;> simp only [finitePower, coefficientTwistLine, scalar_power_eq]
-  rfl
+  cases m <;> rfl
 
 /-- Tensor on the right by the signed integral line in the recorded ordinary model.
 Source: Stacks 06YU (blueprint: def-pur-integral-line-reduction-data). -/

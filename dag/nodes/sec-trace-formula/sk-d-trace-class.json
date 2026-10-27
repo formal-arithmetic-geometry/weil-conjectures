@@ -119,7 +119,22 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-trace-formula",
  "unit": "sk-d-trace-class",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.GeometricOperations.traceClass"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.GeometricOperations.traceClass"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "sk-d-trace-class",
@@ -134,5 +149,25 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-afaa18a67 (reviewer sub-agent of L); spot-checked: I read the item, the unit record and all six statement dependencies in full. I checked them against the current blueprint (main-20261015, identical to main-20261017): sk-d-trace-class order 2657, sk-d-pairing 2652, def-trf-trace-class 2653, lem-trf-trace-class-diagonal-pairing 2662 (statement and the opening of its proof), and sk-d-setup 2610. The node follows the current text: Tr_c(u) is defined as the supported pairing <u,1_K>_LV on F = C x_{XxX} X, it agrees with the Verdier class by the cited lemma, and integration stays a separate operation. The second reader replaced 'spectrum of a field' with the explicit chapter setting (k = F̄_q, A = O_E/ϖ^n, X geometric). sk-d-setup fixes this s for the whole chapter, and every DAG user of the item lies in that setting, so this is a binding, not a narrowing. The report's STATEMENT-DISPUTED heading overstates it: no source error is involved. Specialising sk-d-pairing to D = X, d = Δ, v = 1_K gives E = F, which matches the diagonal case of def-trf-supported-pairing. The comparison lemma's admissibility hypotheses hold automatically for geometric C and X by def-trf-admissibility, and the lemma does not cite the item, so there is no cycle. same_as [def-trf-trace-class] is correct. The item is a definition, so the empty proof and citations are right. There are no new nodes or tool_uses, no SGA citation, and the unit realized fields are correct. I read the slopmaster2 GeometricOperations.traceClass declaration (abstract package G, comparison with supportedPairing not formalised), and declining an exact attachment is defensible. Edge cases checked: C = ∅, u = 0, K = 0, identity correspondence, and X = s with K = A. No fixes were needed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Recall that a correspondence on $X$ is a morphism of $k$-schemes\n$c=(c_1,c_2):C\\to X\\times_sX$, that a cohomological correspondence on $(X,K)$,\nfor $K\\in\\Dctf(X,A)$, is a morphism $u:c_2^*K\\to c_1^!K$ in $\\Dctf(C,A)$, that\nthe fixed locus of $c$ is the closed subscheme\n$F_c=C\\times_{X\\times X,\\Delta_X}X$ with closed immersion $i_c:F_c\\to C$, and\nthat $\\mathcal H_c(K)=\\cHom_A(c_2^*K,c_1^!K)$.\n\nLet $u:c_2^*K\\to c_1^!K$ be a cohomological correspondence on $(X,K)$. By\nadjunction, $u$ is a section $A_C\\to\\mathcal H_c(K)$. Its composite with the\ntrace morphism of Lemma [sk-thm-sf-kunneth-verdier], transposed by\n$i_c^*\\dashv Ri_{c*}$, is the *trace class*, a morphism in\n$D(F_{c,\\mathrm{pro\\acute et}},A)$\n\n$$\n\\operatorname{Tr}_c(u):A_{F_c}\\longrightarrow\\omega_{F_c}.\n$$\n\nFor a proper $k$-scheme $B$, integration is the counit map\n\n$$\n\\int_B:H^0(B,\\omega_B)=H^0(Ra_{B!}a_B^!A_s)\\longrightarrow A.\n$$\n\nIf $B\\subset F_c$ is proper and open and closed, the *local term* of $u$ on\n$B$ is\n\n$$\n\\operatorname{LT}_B(u)=\\int_B\\operatorname{Tr}_c(u)|_B.\n$$\n\n*Complement.* The trace class is also the supported pairing of $u$ against the\ndiagonal identity. For $(X,K)$, the diagonal identity is the\nendocorrespondence with support $X$, support map $\\Delta_X:X\\to X\\times X$,\nidentity legs, and coefficient map $1_K$; its intersection with $(C,c,u)$ is\n$F_c=\\Fix(c)$. The contraction of [sk-d-pairing], applied to the supported\nclasses $\\widetilde u$ of $u$ and of $1_K$ and carried out over the Cartesian\nsquare $F_c=C\\times_{X\\times X}X$, lands directly on $F_c$, and\n\n$$\n\\Tr_c(u)=\\langle u,1_K\\rangle_{\\mathrm{LV}}:A_{F_c}\\longrightarrow\\omega_{F_c}.\n$$",
+  "proof": [
+   {
+    "text": "*Complement.* The trace class of the definition is the Verdier trace class:\nthe mate of $u$ followed by the trace map of external duality\n([def-trf-trace-class]). It agrees with the supported pairing\n$\\langle u,1_K\\rangle_{\\mathrm{LV}}$ by [lem-trf-trace-class-diagonal-pairing].",
+    "uses": [
+     "def-trf-trace-class",
+     "lem-trf-trace-class-diagonal-pairing"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

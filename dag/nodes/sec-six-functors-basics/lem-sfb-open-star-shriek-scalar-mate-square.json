@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-open-star-shriek-scalar-mate-square",
+ "kind": "statement",
+ "title": "Compatibility of open star-shriek exchange with the actual derived scalar mates",
+ "statement": "Let $\\lambda:A\\to B$ be a morphism of commutative condensed rings [sk-def-sfb-condensed-ring]. For every scheme $T$, use $A_T=p_T^*A$, $B_T=p_T^*B$ [sk-def-sfb-pulled-back-coefficients], their internal module categories [sk-def-sfb-module-objects], ordinary unbounded derived categories and direct images [sk-def-sfb-module-derived-pushpull], and $T_T=B_T\\otimes^L_{A_T}-$ [sk-def-sfb-derived-extension-of-scalars]. Let $j:V\\hookrightarrow X$ and $c:U\\hookrightarrow X$ be quasi-compact open immersions, set $W=V\\times_XU$, and let $a:W\\hookrightarrow U$, $b:W\\hookrightarrow V$ be the projections [def-weil-open-immersion]. Use exact extension by zero $b_!,c_!$ [def-sfb-module-open-lower-shriek]. Let $L$ be a finite-rank lisse $A_W$-module [def-sfb-lisse-coefficient-module] and put $L_A=L$, $L_B=B_W\\otimes_{A_W}L$.\n\nFor $R=A,B$, define $e_R:c_!Ra_{*,R}(L_R[0])\\to Rj_{*,R}b_!(L_R[0])$ as the $c_!\\dashv c^*$ adjunct of the inverse of the open-slice identification $c^*Rj_{*,R}b_!(L_R[0])\\simeq Ra_{*,R}(L_R[0])$. Do not assume $e_R$ invertible. For any morphism $f$, define $\\beta_{f,H}:T_{\\mathrm{target}}Rf_{*,A}H\\to Rf_{*,B}T_{\\mathrm{source}}H$ as the $f_B^*\\dashv Rf_{*,B}$ adjunct of the canonical scalar/pullback comparison followed by $T$ of the actual $A$-coefficient counit [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let $\\delta_d:T_{\\mathrm{target}}d_!\\simeq d_!T_{\\mathrm{source}}$ be the conjugate open-scalar isomorphism [def-sfb-derived-open-immersion-shriek-iso].\n\nThere is a canonical isomorphism $\\iota:T_W(L[0])\\simeq L_B[0]$ carrying the scalar unit to $x\\mapsto1\\otimes x$. Put $\\delta_{b,L}=b_!(\\iota)\\circ\\delta_b$ and define $\\Theta_a=(Ra_{*,B}\\iota)\\circ\\beta_{a,L[0]}$ and $\\Theta_j=(Rj_{*,B}\\delta_{b,L})\\circ\\beta_{j,b_!L[0]}$. Then the following equality holds in the ordinary derived category of $B_X$-modules:\n$$\\Theta_j\\circ T_X(e_A)=e_B\\circ c_!(\\Theta_a)\\circ\\delta_{c,Ra_{*,A}L[0]}.$$\nHere both sides have source $T_Xc_!Ra_{*,A}L[0]$ and target $Rj_{*,B}b_!L_B[0]$. The equality uses the specified units and counits, rather than arbitrary isomorphisms of endpoints. No flatness of $\\lambda$ is assumed. It includes $V=X$, $U=X$, $W=\\varnothing$, and rank zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), tame-boundary calculation, returned steps 1 and 8 with the open square of step 2: finite-free coefficient normalization and the actual star/shriek exchange scalar-mate square. Agent-extracted formal lemma."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "def-weil-open-immersion",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-lisse-coefficient-module",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "def-sfb-open-slice-shriek-exchange",
+  "def-sfb-derived-comap-upper-star-iso"
+ ],
+ "proof": [
+  {
+   "text": "Transport $L$ to the section-ring module category using [lem-sfb-internal-section-scalar-adjunction]. Its local trivializations are still finite free. Thus [lem-sfb-locally-free-derived-scalars] makes $L[0]$ K-flat and gives the canonical comparison $\\iota:T_WL[0]\\xrightarrow{\\sim}(B_W\\otimes_{A_W}L)[0]$. The first cited node identifies the specified scalar adjunctions, including their units, on K-flat representatives. Consequently the adjunct of this comparison is exactly $x\\mapsto1\\otimes x$, and it transports back to the required internal-module isomorphism. No flatness of $B_W$ over $A_W$ is used.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-sfb-locally-free-derived-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image coefficient compatibility; agent expansion using the cited normalized adjunction statements."
+   }
+  },
+  {
+   "text": "For $R=A,B$ and $M\\in D(W,R)$ write $P_R(M)=Ra_{*,R}M$, $Q_R(M)=Rj_{*,R}b_!M$, and $u_{d,R}:1\\xrightarrow{\\sim}d_R^*d_{!,R}$ for the actual open unit. Let $E_{R,N}:c_R^*Rj_{*,R}N\\to Ra_{*,R}b_R^*N$ be the actual exchange mate, and put $t_{R,M}=Ra_{*,R}(u_{b,R,M}^{-1})\\circ E_{R,b_!M}$. This is the open-slice isomorphism used in the statement. Here is the normalization check: [lem-sfb-alpha-iso] identifies all pulled-back coefficient rings; [lem-sfb-module-direct-image-open-pasting](a) gives the ordinary restriction isomorphism, and [lem-sfb-proetale-open-restriction-counit] gives its actual counit equation. Apply [lem-sfb-kinjective-direct-image-open-word-model](i),(iii) to the words $c^*j_*$ and $a_*b^*$; every letter preserves K-injectives, so this isomorphism and its counit equation descend to the ordinary unbounded categories. The descended equation identifies it with the actual derived mate, by the derived adjunction of [sk-def-sfb-module-derived-pushpull]. The invertible open units here are those specified in [lem-sfb-open-scalar-conjugate-normalization]. Thus $t_R$ is natural in $M$, and the definition of $e_R$ says exactly $c_R^*e_{R,M}\\circ u_{c,R,P_R(M)}=t_{R,M}^{-1}$.",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "lem-sfb-module-direct-image-open-pasting",
+    "lem-sfb-proetale-open-restriction-counit",
+    "lem-sfb-kinjective-direct-image-open-word-model",
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-sfb-open-scalar-conjugate-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image coefficient compatibility; agent expansion using the cited normalized adjunction statements."
+   }
+  },
+  {
+   "text": "Write $\\lambda_d:d_B^*T_{\\mathrm{target}}\\xrightarrow{\\sim}T_{\\mathrm{source}}d_A^*$ for the balanced scalar/pullback comparison, so its inverse is the $\\theta_d$ in [lem-sfb-open-scalar-conjugate-normalization]. For every input $H$ that node states, for the specified conjugate $\\delta_d$ rather than an arbitrary endpoint isomorphism,\n$$u_{d,B,T H}^{-1}\\circ d_B^*(\\delta_{d,H})=T(u_{d,A,H}^{-1})\\circ\\lambda_{d,d_{!,A}H}.$$\nInverting this equality and composing with $u_{d,B,T H}$ gives\n$$d_B^*(\\delta_{d,H}^{-1})\\circ u_{d,B,T H}=\\lambda_{d,d_{!,A}H}^{-1}\\circ T(u_{d,A,H}).$$\nWe will use the first equation for $b$ and the second for $c$. Both are identities on the entire unbounded category.",
+   "uses": [
+    "lem-sfb-open-scalar-conjugate-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image coefficient compatibility; agent expansion using the cited normalized adjunction statements."
+   }
+  },
+  {
+   "text": "Set $M=L[0]$. Apply [lem-sfb-scalar-geometric-exchange-rectangle] to $(f,c,f',a)=(j,c,a,b)$ and input $b_!M$; its $\\rho$ is our $\\beta$ by the identical counit definition. It gives\n$$Ra_{*,B}(\\lambda_b)\\circ E_B\\circ c_B^*(\\beta_{j,b_!M})=\\beta_{a,b_A^*b_!M}\\circ T_U(E_A)\\circ\\lambda_{c,Q_A(M)}.$$\nBy naturality of $E_B$, postcomposing with $Ra_{*,B}(u_{b,B,T_WM}^{-1})$ and inserting $c_B^*Rj_{*,B}(\\delta_{b,M})$ on the left replaces $Ra_{*,B}(\\lambda_b)$ by $Ra_{*,B}(T_Wu_{b,A,M}^{-1})$, using the first equation of step 3. Naturality of $\\beta_a$ at $u_{b,A,M}^{-1}$ therefore gives\n$$t_{B,T_WM}\\circ c_B^*(Rj_{*,B}(\\delta_{b,M})\\circ\\beta_{j,b_!M})=\\beta_{a,M}\\circ T_U(t_{A,M})\\circ\\lambda_{c,Q_A(M)}.$$\nNow postcompose with $Ra_{*,B}(\\iota)$ and use naturality of $t_B$ at $\\iota$. In the notation of the item this is\n$$t_{B,L_B[0]}\\circ c_B^*(\\Theta_j)=\\Theta_a\\circ T_U(t_{A,M})\\circ\\lambda_{c,Q_A(M)}.$$\nThese substitutions use only functoriality, the two displayed naturality squares, and the cited normalized rectangle; no comparison map $\\beta$ has been inverted.",
+   "uses": [
+    "lem-sfb-scalar-geometric-exchange-rectangle",
+    "lem-sfb-open-scalar-conjugate-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image coefficient compatibility; agent expansion using the cited normalized adjunction statements."
+   }
+  },
+  {
+   "text": "Put $P=P_A(M)$, $Q=Q_A(M)$, $\\tau=t_{A,M}$ and $\\tau'=t_{B,L_B[0]}$. Precompose both proposed arrows with $\\delta_{c,P}^{-1}$, obtaining arrows with source $c_{!,B}T_UP$. Apply the bijection $h\\mapsto c_B^*h\\circ u_{c,B,T_UP}$ of $c_{!,B}\\dashv c_B^*$. The transpose of the left side is\n$$c_B^*(\\Theta_j)\\circ c_B^*T_X(e_{A,M})\\circ c_B^*(\\delta_{c,P}^{-1})\\circ u_{c,B,T_UP}\n=c_B^*(\\Theta_j)\\circ\\lambda_{c,Q}^{-1}\\circ T_U(c_A^*e_{A,M}\\circ u_{c,A,P})\n=(\\tau')^{-1}\\circ\\Theta_a\\circ T_U(\\tau)\\circ T_U(\\tau^{-1})\n=(\\tau')^{-1}\\circ\\Theta_a.$$\nThe first equality uses step 3 and naturality of $\\lambda_c$ at $e_A$; the second uses step 4 and the defining adjunct equation in step 2. The transpose of the right side, after cancellation of $\\delta_c$, is\n$$c_B^*(e_{B,L_B[0]})\\circ c_B^*c_{!,B}(\\Theta_a)\\circ u_{c,B,T_UP}\n=c_B^*(e_{B,L_B[0]})\\circ u_{c,B,P_B(L_B[0])}\\circ\\Theta_a\n=(\\tau')^{-1}\\circ\\Theta_a.$$\nHere the first equality is naturality of the actual open unit. The transposes agree, so the Hom-bijection and then the isomorphism $\\delta_c$ give exactly the required equality.",
+   "uses": [
+    "lem-sfb-open-scalar-conjugate-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image coefficient compatibility; agent expansion using the cited normalized adjunction statements."
+   }
+  },
+  {
+   "text": "All formulas are identities of natural transformations on the ordinary unbounded categories and were specialized only at $M=L[0]$ and the normalized $\\iota$. For $V=X$ or $U=X$ the relevant identity-open comparisons give the same equations with identities. For $W=\\varnothing$ or local rank zero the inputs and their images are zero and the equations remain valid. At no point was $e_R$, $\\beta_a$, or $\\beta_j$ inverted, or a flatness condition on the coefficient map imposed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), direct-image coefficient compatibility; agent expansion using the cited normalized adjunction statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-locally-free-derived-scalars",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-module-direct-image-open-pasting",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-sfb-kinjective-direct-image-open-word-model",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-sfb-open-scalar-conjugate-normalization",
+  "lem-sfb-scalar-geometric-exchange-rectangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is the direct-image context, not a printed proof of this extracted square. Formal proof by the cited scalar/geometric rectangle, open conjugate normalization, and one explicit open-adjunction transpose calculation; supporting Stacks Tags 0D6G, 0B65, 07A4, 0E47."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical exchange from extension by zero of an open direct image to open direct image of extension by zero commutes with derived coefficient extension under the scalar adjunction mates",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsComp; ModuleCat.extendScalarsComp; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ExteriorAlgebra.toTrivSqZeroExt_comp_map; ComplexShape.Embedding.homRestrict_comp_extendMap; Function.ExtendByZero.linearMap_apply; Module.Baer.ExtensionOfMaxAdjoin.extensionToFun_wd; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions and Zariski restriction counits do not state the unbounded pro-etale star/shriek scalar-mate square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Adjunction\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions and Zariski restriction counits do not state the unbounded pro-etale star/shriek scalar-mate square"
+  },
+  {
+   "tool": "grep",
+   "query": "(lowerShriek|extensionByZero|extendByZero).*(scalar|mate|[Ee]xchange)|(scalar|mate|[Ee]xchange).*(lowerShriek|extensionByZero|extendByZero)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions and Zariski restriction counits do not state the unbounded pro-etale star/shriek scalar-mate square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the direct image coefficient comparison with the natural star shriek open exchange follows from commuting scalar restriction adjuncts and the direct image counit",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.ofRestrict_app; AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar adjunctions and Zariski restriction counits do not state the unbounded pro-etale star/shriek scalar-mate square"
+  },
+  {
+   "tool": "grep",
+   "query": "(lowerShriek|extensionByZero|extendByZero).*(scalar|mate)|(scalar|mate).*(lowerShriek|extensionByZero|extendByZero)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary adjunction, sheaf pushforward, ModuleCat scalar or Zariski restriction statements do not give the internal unbounded derived open star-shriek square with its specified scalar units and counits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with open star shriek exchange defined by adjunction counits",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary adjunction, sheaf pushforward, ModuleCat scalar or Zariski restriction statements do not give the internal unbounded derived open star-shriek square with its specified scalar units and counits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mateEquiv, CategoryTheory.Adjunction.conjugateEquiv",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Adjunction.mateEquiv'",
+   "date": "2026-10-22",
+   "verdict": "no match: query rejected for unknown identifier; corrected CategoryTheory.conjugateEquiv query was run separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of coefficients commutes with the adjunction mate from open extension by zero of a direct image to direct image of open extension by zero",
+   "results": "8 hits: TopCat.Sheaf.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.PresheafedSpace.ofRestrict_c_app, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary adjunction, sheaf pushforward, ModuleCat scalar or Zariski restriction statements do not give the internal unbounded derived open star-shriek square with its specified scalar units and counits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension and geometric base change satisfy a commuting rectangle of adjunction mates on derived sheaves",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackComp, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary adjunction, sheaf pushforward, ModuleCat scalar or Zariski restriction statements do not give the internal unbounded derived open star-shriek square with its specified scalar units and counits"
+  },
+  {
+   "tool": "grep",
+   "query": "(lemma|theorem|def) (pushforwardPushforwardAdj_counit_app_val_app|restrictAdjunction_counit_app_app|counit_app|conjugateEquiv)",
+   "results": "21 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean, Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary adjunction, sheaf pushforward, ModuleCat scalar or Zariski restriction statements do not give the internal unbounded derived open star-shriek square with its specified scalar units and counits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.conjugateEquiv",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Adjunction.conjugateEquiv'",
+   "date": "2026-10-22",
+   "verdict": "no match: query rejected for unknown identifier; corrected CategoryTheory.conjugateEquiv query was run separately"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "12 hits: CategoryTheory.conjugateEquiv, CategoryTheory.conjugateEquiv_id, CategoryTheory.conjugateEquiv_iso, CategoryTheory.conjugateEquiv_of_iso, CategoryTheory.conjugateEquiv_symm_id, CategoryTheory.conjugateEquiv_symm_iso, CategoryTheory.conjugateEquiv_symm_of_iso, CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match: these ordinary adjunction, sheaf pushforward, ModuleCat scalar or Zariski restriction statements do not give the internal unbounded derived open star-shriek square with its specified scalar units and counits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-continuous-algcl-tame-boundary-comparison",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), tame-boundary calculation, returned steps 1 and 8 with the open square of step 2: finite-free coefficient normalization and the actual star/shriek exchange scalar-mate square. Agent-extracted formal lemma.",
+   "via": [
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-open-star-shriek-scalar-mate-square",
+  "worker": "stage1",
+  "summary": "Q99: proved the normalized open star-shriek scalar square by existing generic mate and K-flat tools, followed by an explicit Hom-adjunction calculation. Kept the statement and all coefficient hypotheses, checked the identity-open, empty-overlap and rank-zero cases, and created no nodes. No exact project attachment or Mathlib match was found. All queries are recorded in the sandbox log.",
+  "blueprint": "The item is an agent-extracted formal sublemma for paragraph (3) of sk-thm-sf-ctf-stability-direct-images. Steps 1-2 fix finite-free input and the actual open-slice adjunct; steps 3-5 supply the normalized scalar square; step 6 checks degeneracies. This paragraph gives the direct-image route, not an existing detailed proof of the tame-boundary square. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports; its explicit from.place is retained. Whole-blueprint searches scalar mate, star shriek, open exchange, and locally free found no node stating this full arbitrary-condensed-coefficient square.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Transport the scalar adjunction, including the pure-tensor unit, between internal and sectionwise modules; no geometric route is replaced."
+   },
+   {
+    "node": "lem-sfb-locally-free-derived-scalars",
+    "why": "Compute the degree-zero scalar extension of the lisse input; a generic K-flat tool valid on arbitrary small sites."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Identify the pulled-back rings so all geometric inverse images are exact; a generic coefficient-system tool."
+   },
+   {
+    "node": "lem-sfb-module-direct-image-open-pasting",
+    "why": "Use the ordinary section-normalized restriction isomorphism for arbitrary condensed coefficients, not the restricted admissible-coefficient coherence theorem."
+   },
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Identify the ordinary restriction isomorphism with its actual counit mate."
+   },
+   {
+    "node": "lem-sfb-kinjective-direct-image-open-word-model",
+    "why": "Descend the restriction isomorphism and its normalization to unbounded categories on K-injective representatives."
+   },
+   {
+    "node": "lem-sfb-open-scalar-conjugate-normalization",
+    "why": "Use the actual open units and the restriction formula of the published scalar conjugate; the formal normalization is needed rather than endpoint isomorphisms."
+   },
+   {
+    "node": "lem-sfb-scalar-geometric-exchange-rectangle",
+    "why": "Apply the generic scalar/geometric mate rectangle to the given open square; this isolates the non-elementary interchange calculation without assuming scalar/direct-image invertibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-locally-free-derived-scalars",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-module-direct-image-open-pasting",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-sfb-kinjective-direct-image-open-word-model",
+  "lem-sfb-open-scalar-conjugate-normalization",
+  "lem-sfb-scalar-geometric-exchange-rectangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-29f82190a",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-29f82190a (reviewer sub-agent of L); spot-checked: Read the item proof, all 9 cited proof_deps statements and source §(3) of sk-thm-sf-ctf-stability-direct-images (main-20261015). The item is an agent-extracted sublemma, created by Q25 and flagged as such (proof_origin agent). It had no proof on base, the statement is unchanged and there are no new nodes. Recomputed the math. Step 3 is exactly lem-sfb-open-scalar-conjugate-normalization with lambda = theta^{-1} (the kflat normalization makes theta the inverse of Q(chi)), and its inversion is correct. Step 4: substituting (f,c,f',a)=(j,c,a,b), J=b_!M into lem-sfb-scalar-geometric-exchange-rectangle (rho = the item's beta) matches the node. Naturality of E_B, step 3 and naturality of beta_a, then naturality of t_B at iota, give t'∘c*Theta_j = Theta_a∘T(t_A)∘lambda_c, and I checked this. Step 5: both c_!-adjoint transposes after delta_c^{-1} equal t'^{-1}∘Theta_a. Step 1: lisse = finite-free cover, so locally-free-derived-scalars and internal-section-adjunction give iota with the unit 1⊗x and no flatness of B. Step 2: open pasting (a), the open counit node and the K-injective word model identify t with the actual derived mate. Small cases checked: V=X, U=X, W empty, rank 0, nonflat Z/4->Z/2. No cycle, no SGA. Not a duplicate: open-square-support-scalar-counit is scalar restriction on D^+ over a Noetherian base; transverse-tame-open-shriek-exchange uses one coefficient. Batch-5 flag: lem-pod-derived-exact-square-composition is generic homological algebra (derived pasting of exact-functor squares), not part of the trace formula or Poincare duality or their proofs, so accepted. tool_uses (8 generic coefficient/adjunction tools, including the unsplit generic rectangle) accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenStarShriekScalarMateSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.OpenStarShriekScalar.open_star_shriek_scalar_mate_square",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenStarShriekScalar.scalar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenStarShriekScalar.pullMate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenStarShriekScalar.beta",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenStarShriekScalar.thetaA",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenStarShriekScalar.thetaJ",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenStarShriekScalar.open_star_shriek_scalar_mate_square"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenStarShriekScalarMateSquare.lean",
+  "statement": "theorem open_star_shriek_scalar_mate_square {W V U X : Scheme.{u}} (b : W ⟶ V) (a : W ⟶ U) (j : V ⟶ X) (c : U ⟶ X) [IsOpenImmersion b] [IsOpenImmersion a] [IsOpenImmersion j] [IsOpenImmersion c] [QuasiCompact j] [QuasiCompact c] (sq : IsPullback b a j c) (L : TransverseTame.Modules A W) (_hL : IsLisseCoefficientModule A L) : ∃ (θj : D((j)^*⟦A⟧) ⋙ scalar φ V ≅ scalar φ X ⋙ D((j)^*⟦B⟧)) (θa : D((a)^*⟦A⟧) ⋙ scalar φ W ≅ scalar φ U ⋙ D((a)^*⟦B⟧)), θj.hom = pullMate φ j ∧ θa.hom = pullMate φ a ∧ ∃ ι : (scalar φ W).obj ((DerivedCategory.singleFunctor _ 0).obj L) ≅ (DerivedCategory.singleFunctor _ 0).obj ((Mod.extendScalars (coefficientMap φ W)).obj L), (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap φ W)).unit.app ((DerivedCategory.singleFunctor _ 0).obj L) ≫ D(Mod.comap (coefficientMap φ W)).map ι.hom ≫ ((Mod.comap (coefficientMap φ W)).mapDerivedCategorySingleFunctor 0).hom.app ((Mod.extendScalars (coefficientMap φ W)).obj L) = (DerivedCategory.singleFunctor _ 0).map ((Mod.extendRestrictAdjunction (coefficientMap φ W)).unit.app L) ∧ (scalar φ X).map (TransverseTame.exchange A sq ((DerivedCategory.singleFunctor _ 0).obj L)) ≫ thetaJ φ b j θj ι = (derivedOpenImmersionShriekIso φ c).hom.app ((moduleObjectDerivedPushforward A a).obj ((DerivedCategory.singleFunctor _ 0).obj L)) ≫ D((c)_!open⟦B⟧).map (thetaA φ a θa ι) ≫ TransverseTame.exchange B sq ((DerivedCategory.singleFunctor _ 0).obj ((Mod.extendScalars (coefficientMap φ W)).obj L))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The theta witnesses have their forward maps fixed to the actual inverse scalar-adjunction mates, so their inverses are the canonical scalar/pullback comparisons. The iota witness is normalized by the actual derived and ordinary scalar units. The open exchange is the existing TransverseTame.exchange for arbitrary condensed coefficients, without its tame-boundary specialization. Every helper has real data; only the main theorem is postponed. Repair of returned head 895e053ef2c: cite the definition owner def-sfb-open-slice-shriek-exchange instead of the transverse-tame theorem; cite the existing def-sfb-derived-comap-upper-star-iso owner. pullMate writes the Mathlib mateEquiv expression directly; no ScalarPullback.mate wrapper is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca25f51c6",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of returned head 895e053ef2c4 makes exactly the requested repairs. Item node: only stmt_deps and lean changed; lean.statement is byte-identical. lem-sfb-transverse-tame-open-shriek-exchange is replaced by the new def-sfb-open-slice-shriek-exchange (existing:true on the unchanged Sheaf.Paper.TransverseTameOpenShriekExchange; Modules/openUnit_isIso/restrictionComparison/restrictionComparison_isIso/exchange all exist live; statement matches the def exchange signature verbatim; node text matches the code: arbitrary commutative condensed ring, slice comparison t, cartesian invertibility, e = c_! adjunct of t^-1, no qc/tame hypothesis, e not asserted invertible). def-sfb-derived-comap-upper-star-iso added (file identical to live). pullMate inlines the exact ScalarPullback.mate body (mateEquiv symm of TwoSquare.mk of derivedComapUpperStarIso.inv), so it is the same map. Clause check re-done: theta pinned to pullMate, iota pinned by scalar unit, beta/Theta_a/Theta_j/delta verbatim, final equation order, source and target correct; no flatness or invertibility assumed; universes u/u+1; V=X, U=X, W empty, rank 0, nonflat phi admitted. Only the main theorem has sorry; docstrings and both report sections present; live item still split with no lean record, not superseded. No file changed, no compile. Advisory: moduleObjectDerivedExchange inside the landed module is a plain def in the theorem module of lem-sfb-derived-exchange-exact-normalization (pre-existing gap, maintainer note); base dep lem-weil-pbc-ringed-topoi-derived-tensor-pullback imported but unused in the Lean; coefficientMap/extendScalars owners outside stmt_deps (pre-existing)."
+ }
+}

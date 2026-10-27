@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "If $S=\\varnothing$, the map $q$ forces $T=\\varnothing$. Take $T_0=S_0=\\varnothing$ and the unique maps and function. All assertions are vacuous since every tuple length is positive. Henceforth $S$ and $T$ are nonempty. Put $k=n+1$. Repeated application of [lem-sfb-finite-quotient-fiber-product] gives compact Hausdorff totally disconnected spaces $T^r$ and $P_r=T_S^r$ for every $r\\geq1$: use the base point to form ordinary products, and use $P_{r+1}=P_r\\times_S T$ for the fibre powers, starting with $P_1=T$. The identifications with tuple subspaces and the maps to $S$ are given by the coordinates. In particular $P_k$ is compact and coordinate-deletion maps are continuous.",
+   "text": "If $S=\\varnothing$, then $T=\\varnothing$; use empty finite quotients and the unique function. Otherwise put $k=n+1$ and $P_r=T_S^r$. By [lem-sfb-finite-quotient-fiber-product], iterating products over a point and $P_{r+1}=P_r\\times_S T$ gives compact Hausdorff totally disconnected $T^r$ and $P_r$. The coordinate identifications give their tuple subspace topologies; $P_k$ is closed in $T^k$, since equality in Hausdorff $S$ is closed.",
    "uses": [
     "lem-sfb-finite-quotient-fiber-product"
    ],
@@ -24,9 +24,9 @@
    }
   },
   {
-   "text": "For each $z\\in P_k$, continuity of $c$ into discrete $M$ gives an open neighbourhood $O_z$ of $z$ in $T^k$ such that $c=c(z)$ on $O_z\\cap P_k$. By the finite-product topology choose a rectangle around $z$ inside $O_z$. Apply [lem-weil-pbc-profinite-clopen-basis] in $T$ to each coordinate neighbourhood to obtain a clopen rectangle $R_z=\\prod_{i=0}^{k-1}U_{z,i}$ around $z$ with $R_z\\subseteq O_z$. Compactness of $P_k$ selects finitely many $R_1,\\ldots,R_N$ covering it; $c$ is constant on each $R_l\\cap P_k$.",
+   "text": "Apply [lem-sfb-profinite-rectangular-extension] with $K=P_k$. Obtain a finite clopen partition $\\alpha$ of $T$ and continuous $h:T^k\\to M$, constant on products of $\\alpha$-blocks and restricting to $c$.",
    "uses": [
-    "lem-weil-pbc-profinite-clopen-basis"
+    "lem-sfb-profinite-rectangular-extension"
    ],
    "elementary": false,
    "source": {
@@ -35,27 +35,9 @@
    }
   },
   {
-   "text": "Let $\\alpha$ consist of the nonempty atoms of the finite family of clopens $U_{l,i}$ in $T$: an atom is an intersection choosing each $U_{l,i}$ or its complement. Thus $\\alpha$ is a finite partition into nonempty clopens. For any $k$-tuple of its blocks $A_0,\\ldots,A_{k-1}$ whose product meets $P_k$, choose a point $z$ of that intersection and an $R_l$ containing $z$. Membership in every $U_{l,i}$ is constant on $A_i$, so $\\prod_iA_i\\subseteq R_l$. Consequently $c$ is constant on $(\\prod_iA_i)\\cap P_k$. Define $h:T^k\\to M$ to have this constant value on $\\prod_iA_i$ if the intersection is nonempty, and value $0$ otherwise. This is well-defined, agrees with $c$ on $P_k$, and is continuous: each fibre is a union of the finitely many clopen product cells.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
-   }
-  },
-  {
-   "text": "Define the continuous function $e:T^{k+1}\\to M$ by\n$$e(t_0,\\ldots,t_k)=\\sum_{j=0}^k(-1)^j h(t_0,\\ldots,\\widehat{t_j},\\ldots,t_k).$$\nContinuity follows because coordinate deletions are continuous and finite sums in discrete $M$ are continuous. Its nonzero locus $D=e^{-1}(M\\setminus\\{0\\})$ is clopen, hence compact as a closed subset of compact $T^{k+1}$. Every face of a tuple in $P_{k+1}$ belongs to $P_k$, where $h=c$; the assumed equation therefore gives $e|_{P_{k+1}}=0$. Thus for each $t\\in D$ there are indices $i,j$ with $q(t_i)\\ne q(t_j)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
-   }
-  },
-  {
-   "text": "For each $t\\in D$ choose such $i,j$. Hausdorffness makes $S\\setminus\\{q(t_j)\\}$ an open neighbourhood of $q(t_i)$. Apply [lem-weil-pbc-profinite-clopen-basis] in $S$ to choose a clopen $V_t$ containing $q(t_i)$ and excluding $q(t_j)$. The open set\n$$W_t=\\{u\\in T^{k+1}:q(u_i)\\in V_t,\\ q(u_j)\\notin V_t\\}$$\ncontains $t$. Compactness of $D$ selects finitely many $W_t$ covering $D$. Let $\\gamma$ be the partition of $S$ into the nonempty atoms of their finitely many clopens $V_t$ (the partition $\\{S\\}$ when the family is empty). A tuple $u$ whose $q(u_i)$ all lie in the same $\\gamma$-block belongs to none of these $W_t$: membership in each selected $V_t$ is constant on a block. Hence such a tuple lies outside $D$, and $e(u)=0$.",
+   "text": "Set $e(t_0,\\ldots,t_k)=\\sum_{j=0}^k(-1)^j h(t_0,\\ldots,\\widehat{t_j},\\ldots,t_k)$. Coordinate deletions and finite sums in discrete $M$ are continuous. Every face of a tuple in $P_{k+1}$ lies in $P_k$, so $h=c$ there and the hypothesis gives $e|_{P_{k+1}}=0$. Apply [lem-sfb-profinite-defect-base-partition] with $r=k+1$ to obtain a finite clopen partition $\\gamma$ of $S$; $e$ vanishes whenever all base images lie in one $\\gamma$-block.",
    "uses": [
-    "lem-weil-pbc-profinite-clopen-basis"
+    "lem-sfb-profinite-defect-base-partition"
    ],
    "elementary": false,
    "source": {
@@ -64,7 +46,7 @@
    }
   },
   {
-   "text": "Refine $\\alpha$ to the finite clopen partition\n$$\\beta=\\{A\\cap q^{-1}(B): A\\in\\alpha,\\ B\\in\\gamma,\\ A\\cap q^{-1}(B)\\ne\\varnothing\\}.$$\nLet $T_0=\\beta$, $S_0=\\gamma$, and let $a,b$ send a point to its block. The maps are continuous surjections because the blocks are open and nonempty. Define $q_0(C)=B$ for the unique $B\\in\\gamma$ with $C\\subseteq q^{-1}(B)$. This is well-defined and $q_0a=bq$. Given $B\\in\\gamma$, choose $s\\in B$ and then $t$ with $q(t)=s$; its $\\beta$-block maps to $B$. Thus $q_0$ is surjective.",
+   "text": "Let $\\beta$ consist of the nonempty $A\\cap q^{-1}(B)$ for $A\\in\\alpha$, $B\\in\\gamma$. These form a finite clopen partition. Take $T_0=\\beta$, $S_0=\\gamma$ discrete and let $a,b$ send points to their blocks. They are continuous surjections. Send a $\\beta$-block to its unique $\\gamma$-block to define $q_0$, so $q_0a=bq$. Given $B\\in\\gamma$, choose $s\\in B$ and $t$ with $q(t)=s$; the block of $t$ maps to $B$, proving $q_0$ surjective.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -73,16 +55,7 @@
    }
   },
   {
-   "text": "Because $\\beta$ refines $\\alpha$, the function $h$ is constant on each product of $k$ blocks of $\\beta$. Write $h_0:T_0^k\\to M$ for the corresponding function and restrict it to $c_0:(T_0)_{S_0}^k\\to M$. For $(t_0,\\ldots,t_{k-1})\\in P_k$, compatibility $q_0a=bq$ places its block tuple in this domain, and\n$$c_0(a(t_0),\\ldots,a(t_{k-1}))=h(t_0,\\ldots,t_{k-1})=c(t_0,\\ldots,t_{k-1}).$$",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partition construction; agent-written application to the given cocycle."
-   }
-  },
-  {
-   "text": "For any $(x_0,\\ldots,x_k)\\in(T_0)_{S_0}^{k+1}$, independently choose representatives $t_i\\in x_i$. Their $q$-images lie in the single $\\gamma$-block $q_0(x_i)$, so step 5 gives $e(t_0,\\ldots,t_k)=0$. Each face of the block tuple belongs to $(T_0)_{S_0}^k$ and the definition of $h_0$ gives\n$$\\sum_{j=0}^k(-1)^j c_0(x_0,\\ldots,\\widehat{x_j},\\ldots,x_k)=\\sum_{j=0}^k(-1)^j h(t_0,\\ldots,\\widehat{t_j},\\ldots,t_k)=e(t_0,\\ldots,t_k)=0.$$\nThe representatives need not have equal $q$-images. This verifies the equation even on block tuples with no lift to $P_{k+1}$. When $M$ is the zero group, $h=e=0$, $D=\\varnothing$, and the same construction applies.",
+   "text": "Since $\\beta$ refines $\\alpha$, $h$ descends to $h_0:T_0^k\\to M$. Restrict to $c_0:(T_0)_{S_0}^k\\to M$. Compatibility puts the image of each tuple in $P_k$ in this domain, and $c_0(a(t_0),\\ldots,a(t_{k-1}))=h(t_0,\\ldots,t_{k-1})=c(t_0,\\ldots,t_{k-1})$. For any quotient tuple $(x_0,\\ldots,x_k)$ with equal $q_0$-images, choose $t_i\\in x_i$ independently. Their base images lie in the common $\\gamma$-block, so step 3 gives $e(t_0,\\ldots,t_k)=0$. By the definition of $h_0$, each face value of $c_0$ equals the corresponding face value of $h$; their alternating sum is therefore $e(t_0,\\ldots,t_k)=0$. Equal base images of the representatives are unnecessary, so this includes nonliftable tuples. For $M=0$, $h=e=0$ and the construction still applies.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -93,7 +66,8 @@
  ],
  "proof_deps": [
   "lem-sfb-finite-quotient-fiber-product",
-  "lem-weil-pbc-profinite-clopen-basis"
+  "lem-sfb-profinite-rectangular-extension",
+  "lem-sfb-profinite-defect-base-partition"
  ],
  "proof_origin": {
   "by": "agent",
@@ -607,8 +581,8 @@
   "date": "2026-10-22",
   "item": "lem-sfb-finite-valued-cech-cocycle-descent",
   "worker": "stage1",
-  "summary": "Statement unchanged. Constructed a finite clopen rectangular extension of the given cochain, then separated the compact nonzero locus of its alternating sum by finitely many clopens of the base. The resulting compatible finite partitions preserve the cocycle equation even on nonliftable tuples. Reused two existing nodes; no new nodes.",
-  "blueprint": "The inherited Paragraph (3) finite E open-direct-image branch, via normed-scalar-profinite-cech-exact: supplies exactly its finite discrete cocycle descent step. The blueprint delegates the open-coefficient result and does not state this auxiliary lemma.",
+  "summary": "Repair of the human-requested re-split: statement unchanged. Extracted the two independent compactness arguments as statement-only unsplit nodes: rectangular extension on a closed product subspace, and finite base partition forcing vanishing of an arbitrary continuous discrete defect. The parent constructs the compatible quotient surjection and verifies the descended equation on all tuples. The report preserves all eight old steps and assigns every argument. Current landing-refusal repair: compared the retained baseline with current main (identical), re-read current cited statements, retained both auxiliaries and all searches, and resolved the newly detected 08ZZ overlap with explicit statement comparisons in the report. Delivery is regenerated on current main.",
+  "blueprint": "The inherited Paragraph (3) finite E open-direct-image branch, via normed-scalar-profinite-cech-exact: supplies exactly its finite discrete cocycle descent step. The blueprint delegates the open-coefficient result and does not state this auxiliary lemma. The two new nodes serve the same inherited route; no blueprint-level claim or unit is changed.",
   "tool_uses": [
    {
     "node": "lem-sfb-finite-quotient-fiber-product",
@@ -620,12 +594,12 @@
   "lem-sfb-finite-quotient-fiber-product"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NK-aedcff480",
-  "group": "NK",
+  "reviewer": "NT-cc-Q124-f549f52e6",
+  "group": "Q124",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-aedcff480 (reviewer sub-agent of L); spot-checked: I read the item in full. It is a first split, with 0 new nodes; the statement, stmt_deps and blueprint provenance are unchanged, and there is no SGA citation. The only citer, normed-scalar-profinite-cech-exact step 1, needs the cocycle equation on non-liftable quotient tuples (σ(q_0x_0),x), and the item states exactly that strong form. All eight steps are correct. Step 1 takes compactness of T^r and T_S^r from the statement of lem-sfb-finite-quotient-fiber-product; this off-unit tool use is declared, and I accept it. Steps 2 and 5 use the clopen basis (a Mathlib leaf) on T and on S. Steps 3, 6, 7 and 8 are atom-partition algebra, written out. In step 3, each atom meeting U_{l,i} lies inside it, which makes h well defined. The key step is 5: the defect locus D is compact, and it is separated by finitely many clopens W_t, so tuples whose base images lie in one γ-block have e=0. Edge cases checked: S=∅, M=0, n=1, and T=S={u,v} with a coarse base. I read Stacks topology.tex 08ZY and 08ZZ; proof_origin is by agent, which is correct. The duplicate search found that lem-per-finite-quotient-cochain-colimit concerns group cochains, so it is not a duplicate, and nothing else matches. No faults; no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-f549f52e6 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. This answers the released 2026-10-22 human re-split note. The item JSON is identical to the prior head 57314b8c except for one appended sentence in split_report.summary (the landing-refusal repair). Live and side-live still hold the old 8-step proof, so the delivery is not superseded. No source cites SGA. The statement and stmt_deps are unchanged. The assembly has 5 steps and 2262 characters (at most 3000 allowed). Step 1: the fiber-product lemma gives compact Hausdorff totally disconnected T^r and P_r, and P_k is closed through the diagonal of Hausdorff S; I accept the off-unit tool use. Step 2 applies rectangular-extension with K=P_k and k>=2, and every hypothesis holds. Step 3: e vanishes on P_{k+1} by the cocycle hypothesis, then defect-base-partition is applied with r=k+1. Step 4 refines to the partition beta; surjectivity of q is used only to get q_0 surjective. Step 5: h descends to c_0. For the cocycle equation it picks independent representatives in a common gamma-block, so the equation holds on non-liftable quotient tuples too. Allocation: old steps 2-3 became rectangular-extension; the end of old step 4 and old step 5 became defect-base-partition; old steps 1, 4 (the defect e) and 6-8 stay in the parent with the same content. Nothing was blurred. The two nodes are of comparable size, independent, and neither restates a clause of the item. Both statements are true and self-contained. Small cases tested: T or K empty, k=1, M=0, r=1, S empty, q not surjective, and S=T={u,v} with e(u,v)=e(v,u)=1, which forces the finest gamma. I read Stacks topology.tex 08ZY and 08ZZ; the auxiliaries are correctly labelled as agent-formulated. Each new node records 3+ kinds of Mathlib search and is not a one-line Mathlib leaf. I re-ran the duplicate scan on the moved base. Candidates checked: cochain-closed-rectangle-certificates, finite-quotient-fiber-product, profinite-action-finite-quotients and clopen-pullback-bijective-open. None is a duplicate or a generalization."
  },
  "lean": {
   "module": "Sheaf.Topology.FiniteValuedCechCocycleDescent",
@@ -649,5 +623,17 @@
   "group": "NA",
   "result": "pass",
   "note": "Re-delivery of fb828afd6e93 (RETURN H2.2); module byte-identical. stmt_deps now gain only the new def node def-sfb-set-cech-nerve (existing:true on the unchanged WeilConjectures.AlgebraicTopology.SetCechNerveFreeResolution; setCechNerve/setCechFace; statement verbatim from line 28; §5/H12 fields complete; no DAG duplicate; retired Sheaf copy, so no name clash), replacing the spurious theorem node. Clause check: T,S compact T2 totally disconnected, q continuous surjection, M finite discrete abelian (0 allowed), n≥1, c continuous on setCechNerve q n with the subspace-topology helper instance (real induced data, unique), cocycle equation with (-1:ℤ)^j and succAbove faces; conclusion has finite discrete T₀,S₀ in Type u, continuous surjections a,b, surjective q₀, hcomm, factorization, equation on all quotient tuples including unliftable ones; matches the node exactly. Edge cases S=∅, M=0, n=1, n=0 excluded; independent universes. Docstrings carry source, blueprint id and all 8 steps; sorry only; lines ≤100; not on the dropped list. No compile per instructions; worker scompile clean (9.8 s / 10.1 s). Advisory: plain import used only by the proof."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

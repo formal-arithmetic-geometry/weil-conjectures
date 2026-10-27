@@ -12,14 +12,13 @@ public import Mathlib.Order.Directed
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.AlgebraicGeometry.Modules.Dual
+import Sheaf.AlgebraicGeometry.InvertibleFpTensorModels
+import Sheaf.AlgebraicGeometry.FinitePresentationLimitIsomorphismDescent
 import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
-import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.FinitePresentationAffineLimitDescent
-import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
+import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Mathlib.RingTheory.PicardGroup
 
 /-! # Invertible modules descend along affine transition limits
 
@@ -31,15 +30,40 @@ clause (2) (blueprint: lem-trf-invertible-affine-limit-descent).
 
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option warn.sorry false
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits Opposite
-
+open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry
+
+open Scheme.Modules
+
+/-- For quasi-coherent modules, a tensor inverse forces local freeness of rank one.
+On each affine open the section modules are invertible modules over its coordinate ring.
+They are finite projective and their ranks multiply to one, so each has rank one.
+Source: Stacks Project, Modules, Tags 0B8K and 0B8M, lemmas `lemma-invertible` and
+`lemma-invertible-is-locally-free-rank-1`. -/
+private theorem isInvertible_of_tensorIsoUnit {X : Scheme.{u}} (M N : X.Modules)
+    [M.IsQuasicoherent] [N.IsQuasicoherent] (e : M ⊗ N ≅ 𝟙_ X.Modules) :
+    M.IsInvertible := by
+  have hlf : M.IsFiniteLocallyFreeOfRank 1 := by
+    apply isFiniteLocallyFreeOfRank_of_isAffineOpen M
+    intro U hU
+    let t : TensorProduct Γ(X, U) Γ(M, U) Γ(N, U) ≃ₗ[Γ(X, U)] Γ(X, U) :=
+      LinearEquiv.ofBijective (tensorSectionsMap M N U)
+        ((quasiCoherent_tensor_product_affine_sections M N).2 U hU) ≪≫ₗ
+          appLinearEquivOfIso e U
+    have := Module.Invertible.left t
+    have := Module.Invertible.right t
+    refine ⟨Module.finitePresentation_of_projective _ _, inferInstance, fun p ↦ ?_⟩
+    have hr := congrFun (Module.rankAtStalk_eq_of_equiv t) p
+    have : Nontrivial Γ(X, U) := p.nontrivial
+    rw [Module.rankAtStalk_tensorProduct, Pi.mul_apply, Module.rankAtStalk_self] at hr
+    exact Nat.eq_one_of_mul_eq_one_right hr
+  have := (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one M).2 hlf
+  exact IsInvertible.of_sheafOfModules M
 
 /-- An invertible module on an inverse limit of quasi-compact, quasi-separated
 schemes with affine transition morphisms descends to an invertible module at a
@@ -77,6 +101,34 @@ theorem invertible_affine_limit_descent
     ∃ i : I, ∃ L_i : (D.obj (op i)).Modules,
       L_i.IsInvertible ∧
         Nonempty (((Scheme.Modules.tensorPullback (c.π.app (op i))).obj L_i) ≅ L) := by
-  sorry
+  classical
+  obtain ⟨_, _, _, _, i, A, B, hA, hB, a, b, hAB, hunit, heval⟩ :=
+    invertible_fp_tensor_models D c hc L
+  let ε := (Classical.choose (module_pullback_tensor (c.π.app (op i))) A B).hom ≫
+    (a.hom ⊗ₘ b.hom) ≫ dualEvaluation L
+  have : IsIso ε := heval
+  have := (tensorPullbackObjUnitToUnit_isIso (c.π.app (op i))).1
+  let φ : (tensorPullback (c.π.app (op i))).obj (A ⊗ B) ≅
+      (tensorPullback (c.π.app (op i))).obj (𝟙_ (D.obj (op i)).Modules) :=
+    asIso ε ≪≫ (asIso (tensorPullbackObjUnitToUnit (c.π.app (op i)))).symm
+  obtain ⟨k, hik, f, g, hfg, hgf, _, _⟩ :=
+    finitePresentation_iso_descent_affineLimit D c hc i (A ⊗ B)
+      (𝟙_ (D.obj (op i)).Modules) hAB hunit φ
+  let q := D.map (homOfLE hik).op
+  let A' := (tensorPullback q).obj A
+  let B' := (tensorPullback q).obj B
+  let t : (tensorPullback q).obj (A ⊗ B) ≅
+      (tensorPullback q).obj (𝟙_ (D.obj (op i)).Modules) :=
+    ⟨f, g, hfg, hgf⟩
+  have := (tensorPullbackObjUnitToUnit_isIso q).1
+  let e : A' ⊗ B' ≅ 𝟙_ (D.obj (op k)).Modules :=
+    (Classical.choose (module_pullback_tensor q) A B).symm ≪≫ t ≪≫
+      asIso (tensorPullbackObjUnitToUnit q)
+  have : A.IsFinitePresentation := hA
+  have : B.IsFinitePresentation := hB
+  have : A'.IsFinitePresentation := isFinitePresentation_tensorPullback q A
+  have : B'.IsFinitePresentation := isFinitePresentation_tensorPullback q B
+  exact ⟨k, A', isInvertible_of_tensorIsoUnit A' B' e,
+    ⟨affineLimitTensorPullbackComparison D c hik A ≪≫ a⟩⟩
 
 end AlgebraicGeometry

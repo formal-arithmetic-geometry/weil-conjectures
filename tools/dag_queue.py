@@ -86,6 +86,14 @@ def nodes_dir() -> pathlib.Path:
     return pathlib.Path(p) if pathlib.Path(p).is_absolute() else li.ROOT / p
 
 
+def route_dropped() -> set[str]:
+    """Human-withdrawn routes are not work; their records stay in the DAG for validation."""
+    p = li.ROOT / "coord/route-pivot-dropped.txt"
+    if not p.exists():
+        return set()
+    return {s for line in p.read_text().splitlines() if (s := line.split("#", 1)[0].strip())}
+
+
 def load() -> dict[str, dict]:
     out = {}
     for p in sorted(nodes_dir().rglob("*.json")):
@@ -162,7 +170,8 @@ def recorded_stage1_completion(d) -> bool:
     payload = {k: d.get(k) for k in ("statement", "lean")}
     digest = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     declarations = {(d.get("lean") or {}).get("declaration")} | set((d.get("lean") or {}).get("declarations") or [])
-    audit = (d.get("lean_audit") or {}).get(done_branch()) or {}
+    audit = (d.get("lean_audit") if isinstance(d.get("lean_audit"), dict) else {}).get(done_branch())
+    audit = audit if isinstance(audit, dict) else {}
     declarations.update(x.get("name") for x in audit.get("decls", []) if not x.get("sorry"))
     audit_digest = hashlib.sha256(json.dumps(audit, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     return (rec.get("result") == "complete" and rec.get("interface_sha256") == digest
@@ -369,6 +378,11 @@ class Dag:
         self._set_assumed()
         self.dist = self.distances(cut=False)    # every node a target reaches: the DAG check and stages 2 and 3
         self.dist1 = self.distances(cut=True)    # reached without passing through a finished node: stage 1
+        # Queue selection follows the human's route withdrawals. Keep dist/dist1 and all
+        # dependency edges intact: check_dag and review must still see forbidden citations.
+        self.route_dropped = route_dropped()
+        self.queue_dist = self.distances(cut=False, excluded=self.route_dropped)
+        self.queue_dist1 = self.distances(cut=True, excluded=self.route_dropped)
         self.height = {}   # fewest dependency steps down to a Mathlib leaf
 
     def _set_assumed(self):
@@ -412,20 +426,21 @@ class Dag:
         else:
             self.targets = [i for i, d in self.live.items() if field(d, "target") or str(field(d, "kind") or "").lower() == "target"]
 
-    def distances(self, cut: bool) -> dict[str, int]:
+    def distances(self, cut: bool, excluded=()) -> dict[str, int]:
         # the human, 2026-10-16: "先放开一批 batch3 下面的子节点，后面不用再剪枝，别干等着" -- nodes listed in
         # coord/preopen.txt are reached like targets (their work opens before the parent's split lands, and stays open
         # even if that split later changes)
         pre = li.ROOT / "coord" / "preopen.txt"
         extra = [x.split()[0] for x in pre.read_text().splitlines() if x.strip() and not x.lstrip().startswith("#")] if pre.exists() else []
-        return self.distances_from(list(self.targets) + [x for x in extra if x in self.live and x not in self.targets], cut)
+        roots = list(self.targets) + [x for x in extra if x in self.live and x not in self.targets]
+        return self.distances_from(roots, cut, excluded=excluded)
 
-    def distances_from(self, roots, cut: bool = False, stop=()) -> dict[str, int]:
+    def distances_from(self, roots, cut: bool = False, stop=(), excluded=()) -> dict[str, int]:
         dist = {}
         dq = collections.deque((t, 0) for t in roots)
         while dq:
             i, k = dq.popleft()
-            if i in dist:
+            if i in dist or i in excluded:
                 continue
             dist[i] = k
             if i in stop:
@@ -455,6 +470,14 @@ class Dag:
         self.height[i] = 1 + (min(below) if below else 0)
         return self.height[i]
 
+    @property
+    def progress_open(self) -> set[str]:
+        """the nodes the progress walk (tools/progress_reach.py) reaches and counts open; stage-1/2 work lies inside it"""
+        if "_progress_open" not in self.__dict__:
+            import progress_reach
+            self._progress_open = progress_reach.open_nodes(self)
+        return self._progress_open
+
     def resolve(self, i: str) -> str:
         seen = set()
         while i in self.merged and i not in seen:
@@ -482,14 +505,14 @@ class Dag:
         out, seen, stack = set(), set(), list(roots)
         while stack:
             i = stack.pop()
-            if i in seen:
+            if i in seen or i in self.route_dropped:
                 continue
             seen.add(i)
             d = self.live.get(i)
             if d is None or (not unfolded(d) and not keeps_plan(i)):
                 continue
             for c in self.deps(i, "stmt"):
-                if c in self.live and c not in seen and not self.stated(c):
+                if c in self.live and c not in self.route_dropped and c not in seen and not self.stated(c):
                     out.add(c); stack.append(c)
         return out
 
@@ -505,22 +528,23 @@ class Dag:
         big = 10**6
         # A released human re-split reopens even closed Lean. Use the same
         # completion predicate as claims and retirement, rather than unfolded().
-        items = [((rank.get(self.live[i].get("unit"), big) if rank else 0) * 1000 + self.dist1[i], i)
-                 for i, d in self.live.items() if i in self.dist1 and not stage1_completed(d)]
+        items = [((rank.get(self.live[i].get("unit"), big) if rank else 0) * 1000 + self.queue_dist1[i], i)
+                 for i, d in self.live.items() if i in self.queue_dist1 and i in self.progress_open and not stage1_completed(d)]
         # the human, 2026-10-16 (STAGE 1 -> 2 HANDOFF): an unsplit node in the statement downstream (stmt_deps closure) of a
         # node on the reach blocks that statement's grounding; it is a stage-1 item even when the target route does not pass
         # through it (it was never offered: the route reaches it only through stmt_deps of nodes behind finished ones)
         have = {i for _, i in items}
         # 2026-10-17: an assumed node's stmt_deps are not pulled in through it
-        seen, stack = set(), [c for i in self.dist if i not in self.assumed for c in self.deps(i, "stmt")]
+        seen, stack = set(), [c for i in self.queue_dist if i in self.progress_open and i not in self.assumed
+                              for c in self.deps(i, "stmt")]
         while stack:
             c = stack.pop()
-            if c in seen: continue
+            if c in seen or c in self.route_dropped: continue
             seen.add(c)
             d = self.live.get(c)
             if d is None or ((is_leaf(d) or finished(d)) and not stage1_repair_owed(c)): continue
             if not stage1_completed(d):
-                if c not in have: items.append((big * 1000 + self.dist.get(c, 999), c)); have.add(c)
+                if c not in have: items.append((big * 1000 + self.queue_dist.get(c, 999), c)); have.add(c)
                 if not keeps_plan(c):   # 2026-10-17: a returned coarse split keeps its plan; its statement downstream stays open
                     continue
             stack.extend(self.deps(c, "stmt"))
@@ -533,7 +557,7 @@ class Dag:
         out, st = set(), list(self.targets)
         while st:
             i = st.pop()
-            if i in out or i not in self.live:
+            if i in out or i not in self.live or i in self.route_dropped:
                 continue
             out.add(i); st += self.deps(i, "stmt")
         return out
@@ -541,7 +565,7 @@ class Dag:
     def needs_statement(self, i: str) -> bool:
         """A stage-2 node that still needs a statement: reached from a target and not stated (no Lean declaration of its
         own, not a Mathlib leaf, not assumed, not finished with its declaration upstream)."""
-        return i in self.live and i in self.dist and not self.stated(i)
+        return i in self.live and i in self.queue_dist and not self.stated(i)
 
     def blockers(self, items) -> dict[str, int]:
         """item -> how many stage-2 nodes still needing a statement cannot be stated before it: every node whose stmt_deps
@@ -569,11 +593,16 @@ class Dag:
         s1open = {nid for _, nid in self.stage1()}
         early = li.config().get("SHEAF_EARLY_REVIEW", "") not in ("", "0", "no")
         # the human, 2026-10-18: a node below a finished node is still needed when the statement of a reached node needs it
-        need = self.stmt_needed([i for i in self.dist1 if self.needs_statement(i)])
+        # 2026-10-25 (the human: "this is clearly wrong work"): only nodes the progress walk counts open
+        # (tools/progress_reach.py). queue_dist1 is cut only at closed Lean, so below a node whose own proof is written but
+        # rests on a sorry (WeilConjectures.Statement, CtfStabilityDirectImages, ...) it offered the whole pruned plan:
+        # 3296 of 3540 stage-2 items on 10-24
+        reach = {i for i in self.queue_dist1 if i in self.progress_open}
+        need = self.stmt_needed([i for i in reach if self.needs_statement(i)])
         for i, d in self.live.items():
             if not self.needs_statement(i):   # a leaf, stated, assumed (never an item, 2026-10-17) or finished (2026-10-18)
                 continue
-            if i not in self.dist1 and i not in need:
+            if i not in reach and i not in need:
                 # launcher, 2026-10-15: reached only through a node whose Lean is already closed. Stage 1 does not split such
                 # nodes (stage1 uses dist1), and no target needs their statements; they were counted as "waits for stage 1".
                 why["below a finished node, not needed"] += 1; continue

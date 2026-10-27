@@ -1,0 +1,189 @@
+{
+ "id": "lem-sfb-dg-free-module-hom-cohomology",
+ "kind": "statement",
+ "title": "Morphisms out of the free DG module of rank one compute cohomology",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $D(A,d)$ for the homotopy category of these modules localized at the maps inducing isomorphisms on all cohomology groups; triangles are the distinguished mapping-cone triangles. Let $(B,d)$ be such a differential graded algebra and $M$ a right differential graded $B$-module. For $k\\in\\mathbf Z$ let $M[k]$ be the shift: $M[k]^r=M^{r+k}$, differential $(-1)^kd_M$, and the unchanged right $B$-action. For a cycle $x\\in M^k$ (so $d_Mx=0$) the map $\\mu_x:B\\to M[k]$, $b\\mapsto xb$, is a map of right differential graded $B$-modules. Sending $x$ to the class of $\\mu_x$ in $\\operatorname{Hom}_{D(B,d)}(B,M[k])$ induces an isomorphism of abelian groups $$H^k(M)\\xrightarrow{\\ \\sim\\ }\\operatorname{Hom}_{D(B,d)}(B,M[k])$$ for every $k\\in\\mathbf Z$; in particular boundaries give the zero morphism. No boundedness, countability or commutativity assumption on $B$ or $M$ is made.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KY, lemma-hom-derived, part (1) with the P-resolution id: B -> B (B has property (P) with the one-step filtration 0 in B), together with Tag 09KM, lemma-property-P-K-projective; the identity Hom_{D(A,d)}(A,M)=H^0(M) is stated in the proof of Tag 09RA, lemma-compact-implies-bounded."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the Hom-complex convention of [lem-sfb-dg-homotopically-projective-hom-derived]. For any right DG $B$-module $N$, evaluation at $1$ gives an isomorphism of complexes $\\underline{\\operatorname{Hom}}_B(B,N)\\cong N$. Indeed a degree-$r$ graded right-linear map is uniquely $f_x(b)=xb$ for $x=f(1)\\in N^r$, with inverse evaluation. The Leibniz rule gives $d_B(1)=d_B(1)+d_B(1)$, hence $d_B(1)=0$, and $d(f_x)(b)=d_N(xb)-(-1)^rx\\,d_Bb=d_N(x)b$. Thus evaluation commutes with the differentials. If $N$ is acyclic so is this Hom complex; therefore $B$ is homotopically projective by the cited definition.",
+   "uses": [
+    "lem-sfb-dg-homotopically-projective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K1, lemma-hom-from-shift-free; Tag 09KY, lemma-hom-derived (1), and its proof using Tag 09KM, lemma-property-P-K-projective."
+   }
+  },
+  {
+   "text": "For $N=M[k]$, the degree-zero cycles of the complex in Step 1 are precisely the maps $\\mu_x$ with $x\\in M^k$ and $d_Mx=0$: $d_{M[k]}(xb)=(-1)^k(d_Mx)b+x\\,d_Bb$. The homotopy convention in [lem-sfb-dg-homotopically-projective-hom-derived] identifies maps modulo boundaries of that Hom complex. If $x-x^{\\prime}=d_My$, $y\\in M^{k-1}$, the degree-$-1$ right-linear map $h(b)=(-1)^kyb$ satisfies $(d_{M[k]}h+h\\,d_B)(b)=d_My\\,b$, so $\\mu_x-\\mu_{x^{\\prime}}=dh$. Conversely any such homotopy yields $x-x^{\\prime}=(-1)^kd_M(h(1))$, a boundary. Hence $[x]\\mapsto[\\mu_x]$ gives an additive bijection $H^k(M)\\to\\operatorname{Hom}_{K(B,d)}(B,M[k])$. Addition is preserved since $\\mu_{x+x^{\\prime}}=\\mu_x+\\mu_{x^{\\prime}}$; the sign $(-1)^k$ does not change the subgroup of boundaries.",
+   "uses": [
+    "lem-sfb-dg-homotopically-projective-hom-derived"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K1, lemma-hom-from-shift-free; Tag 09KY, lemma-hom-derived (1), and its proof using Tag 09KM, lemma-property-P-K-projective."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-dg-homotopically-projective-hom-derived] with algebra $B$, homotopically projective source $B$ from Step 1, and target $M[k]$. Its conclusion gives the bijection induced by localization $\\operatorname{Hom}_{K(B,d)}(B,M[k])\\to\\operatorname{Hom}_{D(B,d)}(B,M[k])$. By [lem-sfb-dg-derived-admissible-triangles] the localization functor is exact, in particular additive, so this bijection is an additive map. Composing it with Step 2 is exactly the map prescribed in the statement, and proves the asserted isomorphism of abelian groups. The explicit homotopy in Step 2 proves the boundary clause. All degrees are arbitrary integers, and no argument restricts the size, boundedness or commutativity of $B$ or $M$.",
+   "uses": [
+    "lem-sfb-dg-homotopically-projective-hom-derived",
+    "lem-sfb-dg-derived-admissible-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K1, lemma-hom-from-shift-free; Tag 09KY, lemma-hom-derived (1), and its proof using Tag 09KM, lemma-property-P-K-projective."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dg-homotopically-projective-hom-derived",
+  "lem-sfb-dg-derived-admissible-triangles"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09K1, lemma-hom-from-shift-free; Tag 09KY, lemma-hom-derived (1), and its proof using Tag 09KM, lemma-property-P-K-projective."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -l 'DGAlgebra|DGModule|differential graded (algebra|module)' over Mathlib",
+   "results": "0 files",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has no differential graded algebras or modules over them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ln 'IsKProjective' over Mathlib",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: K-projective cochain complexes over an abelian category only (the special case of a ring in degree zero), not right DG modules over a DG algebra. Other search services are not available to the reviewer."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|Qh_map_bijective",
+   "results": "Hits: Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; searched Mathlib/Algebra/Homology",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ordinary cochain complexes, ordinary derived functors or Ext in an abelian category; none states the right-DG-module assertion for an arbitrary DG algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a right differential graded module is morphisms from its free algebra in the derived category",
+   "results": "Hits: CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.ShortComplex.rightHomologyIsKernel, CategoryTheory.ShortComplex.descRightHomology, CategoryTheory.ShortComplex.descOpcycles, CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ordinary cochain complexes, ordinary derived functors or Ext in an abelian category; none states the right-DG-module assertion for an arbitrary DG algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKProjective\", \"Qh_map_bijective\"",
+   "results": "Hits: CochainComplex.IsKProjective.Qh_map_bijective",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ordinary cochain complexes, ordinary derived functors or Ext in an abelian category; none states the right-DG-module assertion for an arbitrary DG algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from the free rank one differential graded module B to M shifted by k in the derived category equal H k of M",
+   "results": "Hits: CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extMk_hom, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply, CategoryTheory.Abelian.Ext.homLinearEquiv, HomologicalComplex.evalCompCoyonedaCorepresentableBySingle, CochainComplex.HomComplex.Cochain.fromSingleEquiv_fromSingleMk, CochainComplex.HomComplex.Cochain.toSingleEquiv_toSingleMk",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ordinary cochain complexes, ordinary derived functors or Ext in an abelian category; none states the right-DG-module assertion for an arbitrary DG algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the unit identifies homotopy classes of maps from a differential graded algebra into a shifted DG module with its cohomology",
+   "results": "Hits: CochainComplex.HomComplex.CohomologyClass.toHom, CochainComplex.HomComplex.CohomologyClass.homAddEquiv, CochainComplex.HomComplex.CohomologyClass.toHom_mk, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk, CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom, CochainComplex.HomComplex.leftHomologyData'_H_coe, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CochainComplex.HomComplex.leftHomologyData'_π",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern ordinary cochain complexes, ordinary derived functors or Ext in an abelian category; none states the right-DG-module assertion for an arbitrary DG algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-dg-qis-restriction-equivalence",
+  "date": "2026-10-24",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: the identification Hom_{D(B,d)}(B,B[k]) = H^k(B) used to verify hypothesis (2) of Tag 09R9 (Tags 09KY, 09KM).",
+   "via": [
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-free-module-hom-cohomology",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded evaluation at the unit and the shifted null-homotopy, proved homotopical projectivity of the rank-one module directly, and reused the existing classical DG localization comparison. No new nodes. All cited statements were opened and checked. Mathlib services were searched in two phrasings; their results concern ordinary cochain complexes, not arbitrary DG algebras.",
+  "blueprint": "Inherited proof (3) of det-thm-sf-ctf-stability-direct-images via the coherent-family/Quot and countable-telescope chain: the 09S6 quasi-isomorphism equivalence input Hom_D(B,B[k]) = H^k(B). Steps 1-2 expand the free-module computation of 09K1; Step 3 is the 09KY comparison used by 09S6. blueprint_refs.py ancestor returns None, as in the live item and the reused comparison node; inherited from.place and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-095e6205a",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-095e6205a (reviewer sub-agent of L); spot-checked: Pass: the proof is correct and complete, with no new nodes and no fixes. Shape: one commit (item and report); statement, stmt_deps and source unchanged; no repair note; proof_deps equal the union of the step uses; both cited nodes are in the same unit, unsplit and dependency-free, so there is no cycle and no tool use; no SGA. Sources read in Stacks dga.tex: definition-shift (l.250, right-module shift with unchanged action, as in the item), 09K1 (l.1901), 09KM (l.2240) and 09KY(1) with its proof (l.2633). Step 1: I recomputed the evaluation-at-1 isomorphism of complexes Hom_B(B,N)≅N, d1=0 from d(1·1)=2d1, and (d f_x)(b)=d(x)b, so B is homotopically projective in the cited node's sense. Step 2: I recomputed that d_{M[k]}(xb)=(-1)^k(dx)b+x db, that h=(-1)^k y· satisfies dh=μ_{dy}, and that (dh)(1)=(-1)^k d(h(1)) for the converse, so Hom_K(B,M[k])≅H^k(M). Step 3: the cited bijection Hom_K→Hom_D is additive because def-weil-triangulated-category defines exact functors as additive. Edge cases checked: B=0, M=0, acyclic M, B=Z, odd k, characteristic 2. Mathlib has no DG algebras or DG modules (confirmed by rg). Note for the maintainer: lem-sfb-dg-free-shift-derived-hom (on base, split in parallel by Q16 aceff25b) states the shift-transposed form; the two nodes are merge candidates, which is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgFreeModuleHomCohomology",
+  "declaration": "CategoryTheory.DgAlgebra.exists_freeModuleHomCohomologyEquiv",
+  "file": "lean/Sheaf/CategoryTheory/DgFreeModuleHomCohomology.lean",
+  "statement": "theorem exists_freeModuleHomCohomologyEquiv (B : Algebra.{u}) [DerivedStructure B] (M : RightModule B) (k : ℤ) (S : RightModule B) (e : ShiftComparison B k M S) : ∃ E : (((underlying B).obj M).homology k) ≃+ ((Q B).obj (regular B) ⟶ (Q B).obj S), ∀ x : ((underlying B).obj M).cycles k, ∃ μ : regular B ⟶ S, (∀ (r : ℤ) (b : B.X.X r), HEq (((((underlying B).obj M).shiftFunctorObjXIso k r (r + k) rfl).hom) (e.iso.hom.f r ((((underlying B).map μ).f r) b))) (act B M k r (((underlying B).obj M).iCycles k x) b)) ∧ E (((underlying B).obj M).homologyπ k x) = (Q B).map μ ∧ ((∃ y : ((underlying B).obj M).X (k - 1), ((underlying B).obj M).iCycles k x = ((underlying B).obj M).d (k - 1) k y) → (Q B).map μ = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published DgAlgebra definitions. The additive equivalence is normalized on every cycle by the actual multiplication DG map, with an explicit boundary-zero clause. S and e range over all models of the prescribed shift; DerivedStructure supplies the standard structures on the fixed localization."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1d46dd09",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Theorem exists_freeModuleHomCohomologyEquiv (sorry only, no new defs) matches the node clause by clause: B : Algebra.{u} (Mon complexes, noncommutative), M : RightModule B, D = actual quasi-iso localization Q B, every k : ℤ, M[k] realized by any S with ShiftComparison (sign (-1)^k, unchanged action, existence by shifts_exist), cycles and homologyπ, μ pinned by a degreewise HEq formula xb, E : H^k ≃+ Hom_D(Q regular, Q S) with E[x] = Q.map μ, and an explicit boundary-zero clause. The ≃+ does not depend on the DerivedStructure instance (zero object and finite products make the addition unique). Checked against Stacks dga.tex 09K1 l.1901, 09KY(1) l.2633, 09RA proof l.6347. Edge cases: B=0, M=0, acyclic M, B=ℤ, k=0, negative/odd k, char 2. lean.statement verbatim; stmt_dep def-sfb-dg-derived-category landed; docstrings have source and blueprint plus the proof steps; report sections present. No duplicate (Q71 free_shift_derived_hom is the different A[k]-evaluation form). No file changed, no compile run."
+ }
+}

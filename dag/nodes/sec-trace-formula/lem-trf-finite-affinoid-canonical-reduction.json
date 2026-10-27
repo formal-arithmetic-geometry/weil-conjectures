@@ -1,0 +1,464 @@
+{
+ "id": "lem-trf-finite-affinoid-canonical-reduction",
+ "kind": "statement",
+ "title": "Finite maps of strict affinoids induce finite maps on canonical reductions",
+ "statement": "Let $K$ be an algebraically closed field [def-weil-field], complete for a nontrivial real-valued nonarchimedean absolute value. Let $A,B\\ne0$ be reduced strict affinoid $K$-algebras: each is a quotient of a restricted-series ring $K\\langle T_1,\\ldots,T_r\\rangle$ [def-trf-restricted-series-presentation], with its affinoid Banach topology. For $H=A,B$ put $\\rho_H(h)=\\sup_\\chi|\\chi(h)|$, with $\\chi:H\\to K$ ranging over continuous unital $K$-algebra homomorphisms, and put $H_{\\le1}=\\{h:\\rho_H(h)\\le1\\}$, $H_{<1}=\\{h:\\rho_H(h)<1\\}$ and $\\widetilde H=H_{\\le1}/H_{<1}$. Write $\\kappa=\\{a\\in K:|a|\\le1\\}/\\{a\\in K:|a|<1\\}$. If a unital $K$-algebra homomorphism $\\varphi:A\\to B$ makes $B$ a finitely generated $A$-module, then $\\varphi$ is continuous, $\\rho_B(\\varphi(a))\\le\\rho_A(a)$ for all $a\\in A$, and the induced $\\kappa$-algebra homomorphism $\\widetilde\\varphi:\\widetilde A\\to\\widetilde B$ makes $\\widetilde B$ a finitely generated $\\widetilde A$-module. Neither injectivity of $\\varphi$ nor surjectivity on reductions is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "BGR Theorem 6.3.5/1, finite map implies finite reduction map. Independently read in Temkin, A new proof of the Gerritzen-Grauert theorem, introduction printed p.2 and section 2 (definition of reduction); https://math.huji.ac.il/~temkin/papers/Gerritzen_Grauert.pdf. BGR archival copy WANTED; source is not locally present."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "For $H=A,B$, compare the character supremum in the statement with the maximal-ideal supremum of [lem-trf-affinoid-supremum-seminorm-calculus]. Each maximal residue field $H/\\mathfrak m$ is finite over $K$. It equals $K$: every residue element satisfies a polynomial over $K$ by linear dependence of its powers, and factoring that polynomial over the algebraically closed field forces the element to be a scalar. The residue map $\\chi_{\\mathfrak m}:H\\to K$ is continuous, since the cited inequality gives $|\\chi_{\\mathfrak m}(h)|\\le\\|h\\|_q$ for a Tate quotient norm. Conversely, each unital $K$-algebra character onto $K$ has maximal kernel and is this residue map. Thus the two suprema agree, including before continuity of $\\varphi$ is known.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+    "place": "Section 1.4, Propositions 6 and 8, printed pp.24-25; character comparison over an algebraically closed base written out here. Primary PDF read online 2026-10-24; local archival copy WANTED."
+   }
+  },
+  {
+   "text": "The arbitrary-homomorphism inequality of [lem-trf-affinoid-supremum-seminorm-calculus], together with step 1, gives $\\rho_B(\\varphi(a))\\le\\rho_A(a)$. Apply [lem-trf-affinoid-spectral-banach-norm] to the two nonzero reduced strict affinoids. For quotient norms choose its constant $M_B$ on $B$. Then $\\|\\varphi(a)-\\varphi(a\\prime)\\|_{B,q}\\le M_B\\rho_B(\\varphi(a-a\\prime))\\le M_B\\rho_A(a-a\\prime)\\le M_B\\|a-a\\prime\\|_{A,q}$. This Lipschitz inequality proves continuity for their affinoid topologies.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-trf-affinoid-spectral-banach-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-several-approaches-nonarchimedean-geometry.pdf",
+    "url": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Theorem 1.2.6(1),(5), printed pp.6-7, and the following paragraph; the continuity deduction is the displayed inequality. Primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "The nonarchimedean norm inequalities of step 2 show that $H_{\\le1}$ is a subring and $H_{<1}$ an ideal in it: $\\rho_H(xy)\\le\\rho_H(x)\\rho_H(y)$ and $\\rho_H(x+y)\\le\\max(\\rho_H(x),\\rho_H(y))$. Also $\\rho_H(c\\cdot1)=|c|$, so the scalar map takes $V=\\{c:|c|\\le1\\}$ into $H_{\\le1}$ and $\\mathfrak m_V=\\{c:|c|<1\\}$ into $H_{<1}$. The contraction in step 2 maps both these subrings and ideals for $A$ into the corresponding ones for $B$. Hence $[a]\\mapsto[\\varphi(a)]$ is well defined on the quotients and fixes the residue scalars $\\kappa=V/\\mathfrak m_V$. This constructs the stated $\\kappa$-algebra map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-gerritzen-grauert.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Gerritzen_Grauert.pdf",
+    "place": "Section 2, definition of reduction; quotient-ring verification written out here. Primary PDF read online 2026-10-24; archival copy WANTED."
+   }
+  },
+  {
+   "text": "Extend $\\widetilde H$ to any nonzero algebraic Tate quotient using the maximal-ideal supremum in [lem-trf-affinoid-supremum-seminorm-calculus]. At every maximal ideal the extending absolute value gives $|x+y|\\le\\max(|x|,|y|)$, $|xy|\\le|x||y|$ and $|c\\cdot1|=|c|$. Taking suprema gives the same inequalities for $\\rho_H$, so $H_{\\le1}$ is a subring, $H_{<1}$ is an ideal in it, and scalars induce the residue-field action. Nonemptiness of the maximal spectrum follows from [lem-weil-pbc-proper-ideal-contained-in-maximal] applied to the proper zero ideal. Thus this construction needs no completeness assertion about a quotient norm. For a finite map $\\psi:D\\to H$, arbitrary-homomorphism contraction induces $\\widetilde\\psi$ on these quotients. For $h\\in H_{\\le1}$, [lem-trf-finite-affinoid-spectral-equation] supplies $h^r+\\sum_{i=1}^r\\psi(d_i)h^{r-i}=0$ with $\\rho_D(d_i)^{1/i}\\le\\rho_H(h)\\le1$. Each $d_i$ is in $D_{\\le1}$, so reducing this monic equation makes $\\bar h$ integral over $\\widetilde D$. For $A,B$ this notation agrees with the character construction by step 1.",
+   "uses": [
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-trf-finite-affinoid-spectral-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+    "place": "Agent-written reduction-level assembly from Section 1.4 Lemmas 12 and 13 and Noether normalization 1.2 Corollary 10; algebraic finiteness components from the cited Stacks nodes. No use of BGR 6.4.1."
+   }
+  },
+  {
+   "text": "First take a nonzero affinoid DOMAIN $C$. Present it as $T_r/I$. The lift in [lem-trf-tate-normalization-lift] supplies a finite injection $T_d\\hookrightarrow C$. Put $R=\\kappa[U_1,\\ldots,U_d]$ and $S=\\widetilde C$. By [lem-trf-tate-spectral-generic-reduction-rank], $R\\hookrightarrow S$ is injective, $S$ is reduced and $R$-torsion-free, and its localization at $R\\setminus0$ has finite dimension. Step 4 for $T_d\\to C$ says $S$ is integral over the reduction of $T_d$, identified with $R$ by coefficient reduction in that cited rank lemma. Thus [lem-trf-integral-generic-finite-algebra] makes $S$ finite over $R$. The variables of $R$ and a finite module-spanning family of $S$ generate $S$ as a $\\kappa$-algebra. Hence every such domain has finite-type reduction. This establishes the Tate-normalization case before using any assertion for general finite reduction maps.",
+   "uses": [
+    "lem-trf-tate-normalization-lift",
+    "lem-trf-tate-spectral-generic-reduction-rank",
+    "lem-trf-integral-generic-finite-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+    "place": "Agent-written reduction-level assembly from Section 1.4 Lemmas 12 and 13 and Noether normalization 1.2 Corollary 10; algebraic finiteness components from the cited Stacks nodes. No use of BGR 6.4.1."
+   }
+  },
+  {
+   "text": "Now take any nonzero reduced affinoid $C=T_r/I$. Apply [lem-trf-tate-submodule-norm-controlled-generators] with $D=T_r$ and $s=1$ to every ideal of $T_r$: its finite module generators are ideal generators. Thus $T_r$ is Noetherian; mapping generators of inverse-image ideals proves that its quotient $C$ is Noetherian. Its minimal primes $\\mathfrak p_1,\\ldots,\\mathfrak p_s$ are finite by [lem-weil-pbc-noetherian-finitely-many-minimal-primes]. Every prime contains a minimal prime by [lem-weil-pbc-prime-contains-minimal-prime]. Put $C_i=C/\\mathfrak p_i$. Each is a nonzero affinoid domain, presented by the composite $T_r\\to C\\to C_i$. The quotient map is finite: $1$ generates $C_i$ as a $C$-module. Maximal ideals of $C_i$ correspond to maximal ideals of $C$ containing $\\mathfrak p_i$, with identical residue fields. Every maximal ideal of $C$ occurs for at least one $i$. Hence $\\rho_{C_i}(c_i)\\le\\rho_C(c)$ for every $i$; conversely each maximal-residue value of $c$ is at most $\\max_i\\rho_{C_i}(c_i)$. Taking its supremum proves $\\rho_C(c)=\\max_i\\rho_{C_i}(c_i)$. It follows that the map $\\widetilde C\\to P:=\\prod_i\\widetilde C_i$ is injective: a representative mapping to zero has all the finitely many component norms strictly less than one, hence their maximum strictly less than one. The index set is nonempty because a nonzero ring has a maximal ideal, by [lem-weil-pbc-proper-ideal-contained-in-maximal] applied to the proper zero ideal.",
+   "uses": [
+    "lem-trf-tate-submodule-norm-controlled-generators",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+    "place": "Agent-written reduction-level assembly from Section 1.4 Lemmas 12 and 13 and Noether normalization 1.2 Corollary 10; algebraic finiteness components from the cited Stacks nodes. No use of BGR 6.4.1."
+   }
+  },
+  {
+   "text": "Each $\\widetilde C_i$ is finite type over $\\kappa$ by step 5, so $P$ is generated as a $\\kappa$-algebra by its finitely many coordinate idempotents and the coordinate-supported finite generating families. Step 4 applies to the finite quotients $C\\to C_i$. Consequently every $x=(x_i)\\in P$ is integral over $\\widetilde C$: choose monic equations $f_i(x_i)=0$ over $\\widetilde C$ and use $\\prod_i f_i$, whose evaluation has a zero factor in each coordinate. In particular the displayed finite $\\kappa$-algebra generators are integral over $\\widetilde C$ and also generate $P$ over $\\widetilde C$. By [lem-sc-finite-generated-integral-subring], $P$ is finite over $\\widetilde C$. The field $\\kappa$ is Noetherian (its only ideals are zero and itself). Apply [lem-sfb-artin-tate-subalgebra-finite-type] to the injection of step 6 and this finite extension. It gives that $\\widetilde C$ is finite type over $\\kappa$. This independently proves the general finite-type fact; it does not cite the descendant node for that fact.",
+   "uses": [
+    "lem-sc-finite-generated-integral-subring",
+    "lem-sfb-artin-tate-subalgebra-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+    "place": "Agent-written reduction-level assembly from Section 1.4 Lemmas 12 and 13 and Noether normalization 1.2 Corollary 10; algebraic finiteness components from the cited Stacks nodes. No use of BGR 6.4.1."
+   }
+  },
+  {
+   "text": "Apply step 7 to $C=B$ and choose $\\kappa$-algebra generators $\\bar b_1,\\ldots,\\bar b_m$ of $\\widetilde B$. Since $\\widetilde\\varphi$ fixes $\\kappa$, these are also $\\widetilde A$-algebra generators. Step 4 for the given finite map $A\\to B$ makes each of them integral over $\\widetilde A$. Thus [lem-sc-finite-generated-integral-subring] says their $\\widetilde A$-subalgebra, which is all of $\\widetilde B$, is a finite $\\widetilde A$-module. Together with steps 1-3 this gives every clause of the unchanged statement. No injection of $A$ into $B$, nor surjection of reductions, was used.",
+   "uses": [
+    "lem-sc-finite-generated-integral-subring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf",
+    "place": "Agent-written reduction-level assembly from Section 1.4 Lemmas 12 and 13 and Noether normalization 1.2 Corollary 10; algebraic finiteness components from the cited Stacks nodes. No use of BGR 6.4.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affinoid-supremum-seminorm-calculus",
+  "lem-trf-affinoid-spectral-banach-norm",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-trf-finite-affinoid-spectral-equation",
+  "lem-trf-tate-normalization-lift",
+  "lem-trf-tate-spectral-generic-reduction-rank",
+  "lem-trf-integral-generic-finite-algebra",
+  "lem-trf-tate-submodule-norm-controlled-generators",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-sc-finite-generated-integral-subring",
+  "lem-sfb-artin-tate-subalgebra-finite-type"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Repair of returned Q117 delivery: reduction-level proof by Tate normalization, Gauss-homogeneous generic rank, spectral-equation integrality, finite normalization over the residue polynomial ring, minimal-prime quotients and Artin-Tate. Analytic primary PDF read online; archival copy WANTED. BGR 6.4.1 unit-ball finiteness is not used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|canonical.?reduction|reduction.*Module.Finite",
+   "results": {
+    "t": "2026-10-24T08:41:20Z",
+    "tool": "grep",
+    "query": "affinoid|TateAlgebra|canonical.?reduction|reduction.*Module.Finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite homomorphism of affinoid algebras induces a finite homomorphism on canonical reductions",
+   "results": {
+    "t": "2026-10-24T08:41:20Z",
+    "tool": "leansearch",
+    "query": "A finite homomorphism of affinoid algebras induces a finite homomorphism on canonical reductions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.QuasiFinite",
+     "AlgHom.Finite",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "RingHom.QuasiFinite.of_finite",
+     "AlgHom.FiniteType"
+    ],
+    "digest": "909bfd837ad100ca"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.Finite\", \"ResidueField\"",
+   "results": {
+    "t": "2026-10-24T08:41:21Z",
+    "tool": "loogle",
+    "query": "\"Algebra.Finite\", \"ResidueField\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite homomorphism of affinoid algebras induces a finite homomorphism on canonical reductions",
+   "results": {
+    "t": "2026-10-24T08:41:22Z",
+    "tool": "leanfinder",
+    "query": "A finite homomorphism of affinoid algebras induces a finite homomorphism on canonical reductions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.IsFinite.SpecMap_iff",
+     "AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType",
+     "AlgebraicGeometry.IsFinite.toIsAffineHom",
+     "RingHom.Finite.of_comp_finite",
+     "AlgebraicGeometry.Scheme.Hom.finiteType_appLE"
+    ],
+    "digest": "d1591fc8f12ed14c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module finite morphisms of strictly affinoid Banach algebras remain module finite after taking spectral unit balls modulo elements of norm less than one",
+   "results": {
+    "t": "2026-10-24T08:45:48Z",
+    "tool": "leanfinder",
+    "query": "Module finite morphisms of strictly affinoid Banach algebras remain module finite after taking spectral unit balls modulo elements of norm less than one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "module_finite_of_liesOver",
+     "Module.Finite.of_localized_maximal",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "finite_of_algHom_finiteType_of_isJacobsonRing",
+     "Algebra.QuasiFinite",
+     "Submodule.fg_of_isLocalized_maximal",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "finite_of_finite_type_of_isJacobsonRing"
+    ],
+    "digest": "8792f96b70b739a3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme sections and ordinary quotient rings are not spectral unit-ball reductions; Mathlib has no strict-affinoid reduction theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite homomorphism of reduced strict affinoid algebras over an algebraically closed complete nonarchimedean field induces a finite homomorphism of canonical reductions",
+   "results": {
+    "t": "2026-10-24T09:28:01Z",
+    "tool": "leanfinder",
+    "query": "A finite homomorphism of reduced strict affinoid algebras over an algebraically closed complete nonarchimedean field induces a finite homomorphism of canonical reductions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "IsLocalRing.ResidueField.finite_of_finite",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.SpecMap_iff",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.IsFinite.toIsAffineHom",
+     "AlgebraicGeometry.finite_appTop_of_universallyClosed",
+     "RingHom.EssFiniteType.residueFieldMap"
+    ],
+    "digest": "c0508c7c48bf5437"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-section finiteness, ordinary local residue-field finiteness and finite-extension spectral norms do not state the strict-affinoid canonical-reduction assertion or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "affinoid|TateAlgebra|canonical.?reduction|reduction.*Module.Finite",
+   "results": {
+    "t": "2026-10-24T09:29:06Z",
+    "tool": "grep",
+    "query": "affinoid|TateAlgebra|canonical.?reduction|reduction.*Module.Finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-section finiteness, ordinary local residue-field finiteness and finite-extension spectral norms do not state the strict-affinoid canonical-reduction assertion or a one-line generalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite morphism of strictly affinoid algebras induces a module finite morphism on reductions of spectral unit balls",
+   "results": {
+    "t": "2026-10-24T09:29:07Z",
+    "tool": "leansearch",
+    "query": "A finite morphism of strictly affinoid algebras induces a module finite morphism on reductions of spectral unit balls",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgHom.Finite",
+     "RingHom.QuasiFinite",
+     "AlgebraicGeometry.IsFinite.SpecMap_iff",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "RingHom.Finite"
+    ],
+    "digest": "6afa398c8a55eabb"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-section finiteness, ordinary local residue-field finiteness and finite-extension spectral norms do not state the strict-affinoid canonical-reduction assertion or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.Finite\", \"ResidueField\"",
+   "results": {
+    "t": "2026-10-24T09:29:07Z",
+    "tool": "loogle",
+    "query": "\"Algebra.Finite\", \"ResidueField\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-section finiteness, ordinary local residue-field finiteness and finite-extension spectral norms do not state the strict-affinoid canonical-reduction assertion or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module finite nonarchimedean Banach algebras have finite canonical reduction maps modulo spectral norm less than one",
+   "results": {
+    "t": "2026-10-24T09:29:08Z",
+    "tool": "leanfinder",
+    "query": "Module finite nonarchimedean Banach algebras have finite canonical reduction maps modulo spectral norm less than one",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "spectralNorm.completeSpace",
+     "Module.Basis.norm_isNonarchimedean",
+     "Module.Basis.norm_mul_le_const_mul_norm",
+     "isNonarchimedean_spectralNorm",
+     "Algebra.norm_eq_one_of_not_module_finite",
+     "spectralNorm.normedSpace"
+    ],
+    "digest": "499752ae3633219c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: scheme affine-section finiteness, ordinary local residue-field finiteness and finite-extension spectral norms do not state the strict-affinoid canonical-reduction assertion or a one-line generalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-canonical-reduction-finite-type",
+  "date": "2026-10-24",
+  "group": "Q86"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Finite generation of the canonical reduction of a strict affinoid. Relative finiteness of the reduction map used after Tate Noether normalization.",
+   "via": [
+    "lem-trf-affinoid-canonical-reduction-finite-type",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-finite-affinoid-canonical-reduction",
+  "worker": "stage1",
+  "summary": "Replaced the returned stronger-unit-ball citation by a reduction-level proof. Added two statement-only genuine inputs: Gauss homogeneity and generic rank for a normalized Tate domain, and algebraic finiteness of a reduced integral torsion-free algebra of finite generic dimension. Integrality is supplied by the existing spectral-equation node; existing Artin-Tate handles the minimal-prime assembly. Statement, inherited metadata, and search history retained. No cycle through unit-ball finiteness, canonical-reduction finite type, or norm lifting. Rebased after the approved delivery 190434e526d was refused at landing for side/live completion mismatch: reread every direct cited statement against the current DAG, verified unchanged interfaces, and expanded step 4 with pointwise seminorm and maximal-existence checks for algebraic Tate quotients. Retained the approved reduction-level route and both statement-only inputs. After the second promotion-only landing return at 8b4a29ca7e5, rechecked the current cited statements and expanded step 6 to exhibit the finite quotient generators and both inequalities identifying the component supremum. The promotion of side completion remains a maintainer operation.",
+  "blueprint": "Historical analytic supporting input in the normalization chain below lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2 (distinguished reduced-affinoid presentations), specifically the relative canonical-reduction finiteness input of lem-trf-affinoid-canonical-reduction-finite-type. The current latest blueprint proof uses contracting correspondences; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "why": "Generic commutative algebra: finitely many minimal primes of the Noetherian affinoid quotient; no analytic unit step replaced."
+   },
+   {
+    "node": "lem-weil-pbc-prime-contains-minimal-prime",
+    "why": "Generic prime containment gives the exhaustive family of domain quotients; no analytic alternative route."
+   },
+   {
+    "node": "lem-sc-finite-generated-integral-subring",
+    "why": "Generic integral-generator criterion, used only after integrality and finite algebra generation are separately established."
+   },
+   {
+    "node": "lem-sfb-artin-tate-subalgebra-finite-type",
+    "why": "Generic Artin-Tate descent from the product of domain reductions; the analytic unit has no such commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "why": "Generic maximal-ideal existence in a nonzero ring ensures a nonempty minimal-prime family; cited directly rather than inferred from seminorm calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-sc-finite-generated-integral-subring",
+  "lem-sfb-artin-tate-subalgebra-finite-type",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-92316551c",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-92316551c (reviewer sub-agent of L); spot-checked: FIX for one citation; the mathematics is correct. Mechanical finding confirmed: step 7, proof_deps and tool_uses cite the dropped 2026-10-19 route node lem-per-artin-tate-subalgebra-finite-type (Q134, on the Gabber branch, flagged unreachable). The use itself is plain Stacks 00IS with no Qbar_l, adic, t-structure, Gabber or alteration input. I repointed all 4 occurrences to lem-sfb-artin-tate-subalgebra-finite-type, which has the same statement verbatim, status mathlib (fg_of_fg_of_fg), and says in its blueprint field that it replaces the dropped node. Corrected item: fixes/dag/nodes/sec-trace-formula/lem-trf-finite-affinoid-canonical-reduction.json; nothing else changed. Steps 1-8 checked against each cited statement. (1) Characters equal residue maps because the residue fields are finite over the algebraically closed K. (2) Contraction plus ||phi a|| <= M_B rho_B(phi a) <= M_B rho_A(a) <= M_B ||a|| gives continuity. (4) The spectral equation gives rho_D(b_i) <= rho_H(h)^i <= 1, so the monic equation reduces; no injectivity or reducedness needed. (5) The domain case discharges every hypothesis of both new nodes. (6) Noetherian, finitely many minimal primes, rho_C = max_i rho_{C_i}, so the map to the product of reductions is injective. (7) P is integral over the reduction of C via the product of the monic equations, so P is finite; Artin-Tate over the field kappa gives finite type. (8) Integral generators make B-reduction finite over A-reduction. The transitive closure has no cycle and does not reach unit-ball finiteness, canonical-reduction-finite-type or norm-lifting. New node tate-spectral-generic-reduction-rank: true by p_{tc}(Z) = Z^r + sum t^i t_i Z^(r-i), the fibre formula and Gauss multiplicativity. Torsion-freeness and injectivity follow from lifts of norm exactly 1, reducedness from power multiplicativity, and the rank bound from clearing denominators and normalising a coefficient to norm 1. Tested on d=0, T=C, XY=pi over K<X+Y> (reduction not a domain, allowed) and U=X^p. New node integral-generic-finite-algebra: true via S_Q = product of fields L_j, integral closures finite over R (0335, no separability needed), then 00IK. Torsion-freeness and reducedness are both needed; S=0 is fine. Neither new node restates the item, and I found no duplicate (checked powerbounded-integral, galois-envelope, torsionfree-fibre-polynomial, sfb-integral-closure-rank). The delivery is byte-identical to the approved daa52a753004, whose landing was refused only because side completion was not promoted. No repair note exists, so the re-split rule does not apply. No SGA source is used. BGR 6.3.5/1 is not available locally (WANTED); Stacks 00IS, 0335, 00IK and 00J7 were read.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteAffinoidCanonicalReduction",
+  "declaration": "RestrictedSeries.finite_canonicalReduction",
+  "file": "lean/Sheaf/RingTheory/FiniteAffinoidCanonicalReduction.lean",
+  "statement": "theorem finite_canonicalReduction (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] [IsAlgClosed K] (A : Type v) [NormedCommRing A] [Algebra K A] [Nontrivial A] [IsReduced A] (B : Type w) [NormedCommRing B] [Algebra K B] [Nontrivial B] [IsReduced B] (hA : IsAffinoidQuotient K A (algebraMap K A)) (hB : IsAffinoidQuotient K B (algebraMap K B)) (φ : A →ₐ[K] B) (hφ : φ.Finite) : Continuous φ ∧ ∃ (ρA : A → ℝ) (ρB : B → ℝ), (∀ a : A, ρA a = sSup {r : ℝ | ∃ χ : A →ₐ[K] K, Continuous χ ∧ r = ‖χ a‖}) ∧ (∀ b : B, ρB b = sSup {r : ℝ | ∃ χ : B →ₐ[K] K, Continuous χ ∧ r = ‖χ b‖}) ∧ (∀ a : A, ρB (φ a) ≤ ρA a) ∧ ∃ (A₀ : Subring A) (B₀ : Subring B) (IA : Ideal A₀) (IB : Ideal B₀) (V : Subring K) (m : Ideal V), (∀ a : A, a ∈ A₀ ↔ ρA a ≤ 1) ∧ (∀ b : B, b ∈ B₀ ↔ ρB b ≤ 1) ∧ (∀ a : A₀, a ∈ IA ↔ ρA a.val < 1) ∧ (∀ b : B₀, b ∈ IB ↔ ρB b.val < 1) ∧ (∀ c : K, c ∈ V ↔ ‖c‖ ≤ 1) ∧ (∀ c : V, c ∈ m ↔ ‖c.val‖ < 1) ∧ ∃ (sA : V ⧸ m →+* A₀ ⧸ IA) (sB : V ⧸ m →+* B₀ ⧸ IB) (f : A₀ ⧸ IA →+* B₀ ⧸ IB), (∀ c : V, ∃ a : A₀, a.val = algebraMap K A c.val ∧ sA (Ideal.Quotient.mk m c) = Ideal.Quotient.mk IA a) ∧ (∀ c : V, ∃ b : B₀, b.val = algebraMap K B c.val ∧ sB (Ideal.Quotient.mk m c) = Ideal.Quotient.mk IB b) ∧ (∀ a : A₀, ∃ b : B₀, b.val = φ a.val ∧ f (Ideal.Quotient.mk IA a) = Ideal.Quotient.mk IB b) ∧ f.comp sA = sB ∧ f.Finite",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f989d871",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Clause-by-clause match: NontriviallyNormedField+IsUltrametricDist+CompleteSpace+IsAlgClosed K; Nontrivial/IsReduced A,B with IsAffinoidQuotient (quotient Gauss norm, so affinoid topology); φ:A→ₐ[K]B with φ.Finite and no injectivity/surjectivity. Conclusions Continuous φ, ρ as continuous-character sSup fixed by equality at every point, contraction, A₀/B₀ subrings and IA/IB ideals fixed by ≤1/<1 membership, V/m residue ring, sA/sB/f pinned on every class, f.comp sA = sB, f.Finite: exact. Edge cases n=0, non-injective φ, independent universes u v w OK. No duplicate spectral-seminorm or canonical-reduction notion in the live DAG, Sheaf Lean or Mathlib. Node differs from side-live only in its lean field; lean.statement matches the file verbatim. Docstrings carry source, blueprint tag and the 8-step proof; sorry only; all imported Mathlib modules exist; report has Worker report and Second reading sections. No file changed, so no compile."
+ }
+}

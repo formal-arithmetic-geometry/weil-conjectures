@@ -6,6 +6,7 @@ Authors: SHEAF group F4
 module
 
 public import Sheaf.SixFunctors.ProperImageLocalizingProper
+import Sheaf.Paper.QcqsProperHullTailBound
 
 /-!
 # Proper direct image for the continuous-map algebraic-closure coefficient
@@ -57,6 +58,24 @@ theorem continuousAlgCl_proper_lowerTail
       localizingClosureProEtale (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X K →
       ((lowerStar (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) p).rightDerivedFunctor.obj
         ((DerivedCategory.TStructure.t.truncLT (q - (c : ℤ))).obj K)).IsLE (q - 1) := by
-  sorry
+  let Λ := Profinite.continuousMapRingObj (PadicAlgCl ℓ)
+  -- 2026-10-25: the all-continuous algebraic closure is no longer an admissible coefficient
+  -- (IsLocalizingAdmissibleCoefficient); this coefficient-specific result is off every route.
+  have hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ := sorry
+  let : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  let : QuasiSeparatedSpace Y :=
+    quasiSeparatedSpace_of_quasiSeparated (Y ↘ Spec (.of k))
+  obtain ⟨c, hc⟩ := exists_uniform_lowerTail_bound_of_isProper ℓ Λ hΛ (𝟙 Y) p
+  refine ⟨c, fun q K hK ↦ ?_⟩
+  let a := q - (c : ℤ)
+  have hbound : ((moduleObjectDerivedPushforward Λ p).obj
+      ((DerivedCategory.TStructure.t.truncLE (a - 1)).obj K)).IsLE (q - 1) := by
+    apply (DerivedCategory.isLE_iff _ _).mpr
+    intro r hr
+    exact hc a K hK r (by dsimp [a]; omega)
+  exact DerivedCategory.TStructure.t.isLE_of_iso
+    ((moduleObjectDerivedPushforward Λ p).mapIso
+      ((DerivedCategory.TStructure.t.truncLEIsoTruncLT (a - 1) a (by omega)).app K))
+    (q - 1)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

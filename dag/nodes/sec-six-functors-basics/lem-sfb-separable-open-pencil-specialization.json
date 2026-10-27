@@ -1,0 +1,377 @@
+{
+ "id": "lem-sfb-separable-open-pencil-specialization",
+ "kind": "statement",
+ "title": "Finite separable specialization of an open family of norm pencils",
+ "statement": "Let $F$ be a field, $C$ a smooth projective geometrically integral finite-type $F$-curve of dimension one, $G$ a finite group acting by $F$-automorphisms, $L$ an invertible $\\mathcal O_C$-module, and $n\\geq1$. Put $B=\\bigotimes_{g\\in G}g^*L$ and use the norm sections $\\mathcal N_G$ of [def-sfb-pencil-orbit-bundle-norm]. Assume $V=\\Gamma(C,L^{\\otimes n})$ is finite dimensional. Let $W\\subseteq V\\times V$ be a nonempty Zariski open, where $V\\times V$ denotes affine space after a choice of basis. Suppose that for every extension field $T/F$ and $(a,b)\\in W(T)$ the norm pair generates $B_T^{\\otimes n}$ and defines a finite surjective $G$-invariant morphism $\\psi_{a,b}:C_T\\to\\mathbf P^1_T$ etale on a nonempty open. Let $M\\subset C$ be a reduced finite etale closed subscheme. Then there exist a finite separable extension $E/F$, a pair $(a,b)\\in W(E)$, and $g\\in\\mathrm{SL}_2(E)$ such that $g\\circ\\psi_{a,b}:C_E\\to\\mathbf P^1_E$ is finite, surjective, $G$-invariant and etale on a nonempty open, and its fibres above $[0:1],[1:1],[1:0]$ are finite etale over $E$, with reduced union disjoint from $M_E$. This holds even when $F$ is finite. The group fixes the extended constants $E$. A finite separable extension is a finite-dimensional extension all of whose elements have separable minimal polynomial; $\\mathrm{SL}_2(E)$ is the group of determinant-one two-by-two matrices over $E$.\n\nThe notions used are [def-weil-field], [def-pc-field-extension], [def-pc-base-change], [def-sc-invertible-module], [def-pc-module-pullback], [def-kun-projective], [def-kun-topological-krull-dimension], [def-sbc-smooth-morphisms], [def-pc-geometrically-irreducible], [def-weil-finite-type-morphism], [def-weil-pbc-generating-sections], [def-weil-pbc-morphism-to-projective-space-by-sections], [def-weil-finite-integral-morphism], [def-weil-surjective-morphism], [def-weil-etale-morphism], [def-nagata-projective-space-base-change].",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "de Jong §3.4, printed p.606; agent-written quotient-free norm-section replacement, extracted from returned proof steps 15--16. The last extraction supplies the finite-separable parameter descent needed in §3.3. Local PDF WANTED; publisher PDF read at https://www.numdam.org/item/10.5802/aif.1575.pdf."
+ },
+ "stmt_deps": [
+  "def-sfb-pencil-orbit-bundle-norm",
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-kun-projective",
+  "def-kun-topological-krull-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Choose a basis of $V$, so $V\\times V=\\mathbf A^{2d}_F$ for $d=\\dim_F V$. This affine space is smooth by [sbc-lem-affine-space-smooth], and its open subscheme $W$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes](a). Since $W$ is nonempty, [lem-pc-dense-separable-points] gives a closed point $w\\in W$ with $F_1=\\kappa(w)$ finite separable over $F$. Its residue-field morphism is the desired pair $(a,b)\\in W(F_1)$. The hypothesis of the item now gives the finite surjective invariant pencil $\\psi_1:C_{F_1}\\to\\mathbf P^1_{F_1}$, etale on a nonempty open.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-dense-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056U (lemma-smooth-separable-closed-points-dense); Tag 055T (lemma-affine-space-over-field)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-separable-closure-exists-galois] choose a separable closure $K/F_1$, which is Galois and separably closed. By [lem-sfb-separably-closed-field-infinite], $K$ is infinite. Applying [lem-pd-geometric-curve] to the original curve and the separable closure $K/F$ gives that $C_K$ is again a smooth projective geometrically integral curve of dimension one: $K/F$ is separable algebraic by [lem-zl-separable-permanence], and is separably closed. Thus it is a separable closure of $F$ as well. The genus in that lemma is simply the genus of $C$; no specified genus is required here.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-sfb-separably-closed-field-infinite",
+    "lem-pd-geometric-curve",
+    "lem-zl-separable-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GT, 09HC, 09HB; geometric-curve base change as in lem-pd-geometric-curve"
+   }
+  },
+  {
+   "text": "The base change $M_K\\subset C_K$ is closed by [lem-pc-closed-imm-base-change], finite by [lem-weil-pbc-finite-morphism-permanence](a), and etale by [lem-weil-pbc-etale-base-change-finite-limits](1). It is reduced by [etale-proposition-etale-reduced], since $\\operatorname{Spec}K$ is reduced. The image of $(a,b)$ is in $W(K)$ by composition of its point morphism with $\\operatorname{Spec}K\\to\\operatorname{Spec}F_1$. Thus the hypothesis also gives a finite surjective invariant pencil $\\psi_K:C_K\\to\\mathbf P^1_K$, etale on a nonempty open.",
+   "uses": [
+    "lem-pc-closed-imm-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "etale-proposition-etale-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01JY, 01WL, 02GO; etale.tex Tag 025O"
+   }
+  },
+  {
+   "text": "For every intermediate extension $T/F_1$, the pencil of the image of $(a,b)$ in $W(T)$ is $(\\psi_1)_T$. In [def-sfb-pencil-orbit-bundle-norm], retain the same finite enumeration of $G$. On an open where the finitely many translated line bundles are trivial, a translated section has a coefficient $u_g$, and its tensor has coefficient $\\prod_g u_g$. Scalar extension sends this to $\\prod_g(u_g\\otimes1)$: this follows recursively from $u\\mapsto1\\otimes u$ and the tensor multiplication rule. The recursively defined pullback-power and tensor-distribution comparisons only regroup these factors, so the norm sections themselves pull back to the norm sections over $T$. Write their local coefficients as $A,B$. On the projective charts the morphism of [def-weil-pbc-morphism-to-projective-space-by-sections] is given by $A/B$ where $B$ is invertible and $B/A$ where $A$ is invertible. Scalar extension gives $(A\\otimes1)/(B\\otimes1)$ and its inverse on those same pulled-back charts. Since the pair generates, these charts cover the source; hence the morphisms agree. This computes only the pulled-back chosen sections, without asserting base change for the entire space of global sections. In particular $\\psi_K=(\\psi_1)_K$.",
+   "uses": [
+    "def-sfb-pencil-orbit-bundle-norm",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Agent norm-section replacement of §3.4, base-change compatibility from the definitions"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-coordinate-avoidance] with $A=K$, fraction field $K$, $U=\\operatorname{Spec}K$, $Y=C_K$, pencil $\\psi_K$, and marking $M_K$. All its hypotheses were verified in steps 2--3. It gives $h\\in\\mathrm{SL}_2(K)$ such that $h\\circ\\psi_K$ has finite etale fibres at $0,1,\\infty$, with reduced union disjoint from $M_K$. Invariance is retained. This use is only of the infinite-domain avoidance lemma; no family or finite-separable specialization assertion is assumed.",
+   "uses": [
+    "lem-sfb-integral-coordinate-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§3.4, printed p.606, coordinate avoidance, applied over the separable closure"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-set-in-finite-galois-subextension] to the four matrix entries of $h$ in the Galois extension $K/F_1$. Obtain $F_1\\subseteq E\\subseteq K$ finite Galois over $F_1$ containing these entries. Their matrix $g$ over $E$ has determinant one, since its determinant maps to $\\det h=1$ under the injective field map $E\\hookrightarrow K$. The original pair gives $(a,b)\\in W(E)$. By [lem-weil-pbc-field-degree-multiplicativity] and [lem-zl-separable-permanence], the tower $F\\subseteq F_1\\subseteq E$ is finite separable over $F$.",
+   "uses": [
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "lem-weil-pbc-field-degree-multiplicativity",
+    "lem-zl-separable-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09DT, 0EXM, 09G9, 09HB"
+   }
+  },
+  {
+   "text": "Put $\\varphi_E=g\\circ\\psi_{a,b}$. The matrix inverse $\\left(\\begin{smallmatrix}g_{22}&-g_{12}\\\\-g_{21}&g_{11}\\end{smallmatrix}\\right)$ defines the inverse projective automorphism. Thus composing with $g$ preserves finiteness and surjectivity: on affine charts the coordinate ring map of this isomorphism is an isomorphism, so a finite module remains finite; surjectivity follows from bijectivity. It preserves $G$-invariance because $\\psi_{a,b}\\circ\\sigma=\\psi_{a,b}$ implies $g\\circ\\psi_{a,b}\\circ\\sigma=g\\circ\\psi_{a,b}$. The isomorphism $g$ identifies its source with the whole (open) target, hence is an open immersion and is etale by [lem-weil-pbc-etale-composition-cancellation](1). Clause (2) of that same node shows that $\\varphi_E$ is etale on the nonempty open supplied for $\\psi_{a,b}$ by the hypothesis.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "§3.4, elementary composition with a projective coordinate automorphism"
+   }
+  },
+  {
+   "text": "For $t\\in\\{0,1,\\infty\\}$ let $D_t=\\varphi_E^{-1}(t)$ be the scheme-theoretic fibre. It is finite over $E$ by [lem-weil-pbc-finite-morphism-permanence](a). By step 4 and $g_K=h$, its base change to $K$ is the corresponding finite etale fibre of step 5. The map $(D_t)_K\\to D_t$ is surjective: it is the base change of $\\operatorname{Spec}K\\to\\operatorname{Spec}E$, which is surjective by [lem-pc-field-extension-surjective], using [lem-weil-pbc-surjective-base-change]. For every $x\\in D_t$ choose a point $x_K$ above it and apply [lem-sc-etale-faithfully-flat-local] to $D_t\\to\\operatorname{Spec}E$. It follows that this map is etale at every point, hence etale. This checks descent on the fibre schemes themselves; it does not infer etaleness from reducedness alone.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-sc-etale-faithfully-flat-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL, 01S1; pointwise field-extension descent as in lem-sc-etale-faithfully-flat-local"
+   }
+  },
+  {
+   "text": "Each $D_t$ is reduced by [etale-proposition-etale-reduced]. The three distinct rational target points have disjoint fibres, so their scheme-theoretic union is their finite disjoint union, and is reduced. If this union met $M_E$, the intersection would acquire a point after base change to $K$, by [lem-pc-field-extension-surjective] and [lem-weil-pbc-surjective-base-change]. Its base change is the empty intersection from step 5, a contradiction. Hence the union is disjoint from $M_E$. The action on every scalar extension is $\\sigma\\times\\mathrm{id}$, so it fixes $E$ pointwise. The argument used finite-separable residue points and a separable closure, never the existence of an $F$-rational parameter or infinitely many elements of $F$; it therefore includes finite $F$, the empty marking, and trivial or nonfaithful $G$.",
+   "uses": [
+    "etale-proposition-etale-reduced",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 025O; empty intersections reflected by surjective field base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-sfb-separably-closed-field-infinite",
+  "lem-pd-geometric-curve",
+  "lem-zl-separable-permanence",
+  "lem-pc-closed-imm-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "etale-proposition-etale-reduced",
+  "def-sfb-pencil-orbit-bundle-norm",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-sfb-integral-coordinate-avoidance",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sc-etale-faithfully-flat-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "§§3.3--3.4, printed pp.605--606; finite-separable specialization assembled from existing DAG lemmas and Stacks Tags 056U, 09DT, 0EXM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty affine open parameter space of invariant separating curve pencils admits a point over a finite separable extension and a projective coordinate change with reduced finite etale fibres above zero one infinity avoiding a prescribed finite marking.",
+   "results": "; WeierstrassCurve.Affine.Point.map_some, AlgebraicGeometry.AffineSpace.not_isIntegralHom, WeierstrassCurve.Projective.comp_equiv_comp, WeierstrassCurve.exists_isMinimal, WeierstrassCurve.Affine.Point.map, WeierstrassCurve.Projective.nonsingularLift_some, AlgebraicGeometry.Proj.isSeparated, WeierstrassCurve.Affine.nonsingular_iff_variableChange",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, Module.Finite",
+   "results": "; Algebra.traceMatrix_eq_embeddingsMatrixReindex_mul_trans, Algebra.traceMatrix_eq_embeddingsMatrix_mul_trans, Algebra.Etale.iff_exists_algEquiv_prod, IsIntegralClosure.finite, Algebra.discr_isUnit_of_basis, Algebra.discr_not_zero_of_basis, Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two, Algebra.discr_mul_isIntegral_mem_adjoin",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSepClosed|separableClosure|exists.*[eé]tale|pencil",
+   "results": "; Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty open of affine space has a rational point over a finite separable extension of any field; descend a curve pencil and an avoiding projective linear transformation from a separable closure.",
+   "results": "; FirstOrder.Field.finite_ACF_prime_not_realize_of_ACF_zero_realize, isLiouville_of_finiteDimensional, FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime, FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime_or_zero, ax_grothendieck_univ, functionField_iff, ax_grothendieck_of_definable, NumberField.Embeddings.instNonemptyRingHom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the effective-action/norm, interpolation, relative section-pencil, integral coordinate-avoidance, or finite-separable specialization assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonempty open of affine space has a point over a finite separable extension, giving a separating projective curve pencil with three etale fibres.",
+   "results": "service unavailable: ; no hits",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty open family of invariant finite generically etale morphisms from a smooth projective curve to the projective line has a member over a finite separable extension with three reduced etale fibres avoiding a finite marking after a determinant one coordinate change.",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; StandardEtalePair.hasMap_X; WeierstrassCurve.Affine.Point.map_some; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; Algebra.Etale.iff_exists_algEquiv_prod; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-span, field-extension, standard-smooth, and elliptic-curve results do not give the stated norm-pencil specialization and three-fibre avoidance."
+  },
+  {
+   "tool": "grep",
+   "query": "pencil|specializ.*separable|separable.*specializ|coordinate.*avoid",
+   "results": "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean; Mathlib/AlgebraicGeometry/SpreadingOut.lean; Mathlib/AlgebraicGeometry/SpreadingOut.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-span, field-extension, standard-smooth, and elliptic-curve results do not give the stated norm-pencil specialization and three-fibre avoidance."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSeparable, Module.Finite",
+   "results": "Algebra.traceMatrix_eq_embeddingsMatrixReindex_mul_trans; Algebra.traceMatrix_eq_embeddingsMatrix_mul_trans; Algebra.Etale.iff_exists_algEquiv_prod; IsIntegralClosure.finite; Algebra.discr_isUnit_of_basis; Algebra.discr_not_zero_of_basis; Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two; Algebra.discr_mul_isIntegral_mem_adjoin",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-span, field-extension, standard-smooth, and elliptic-curve results do not give the stated norm-pencil specialization and three-fibre avoidance."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonempty open of affine space has a point over a finite separable extension and a curve pencil can be moved to avoid a finite set in the projective line.",
+   "results": "IsOpen.affineSpan_eq_top; Set.Nonempty.affineSpan; spanPoints_nonempty; IsSepClosed.of_isAlgClosed; IsSepClosed; Field.instNeZeroFinSepDegree; AlgebraicGeometry.Scheme.isBasis_affineOpens; affineSpan_nonempty",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-span, field-extension, standard-smooth, and elliptic-curve results do not give the stated norm-pencil specialization and three-fibre avoidance."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonempty Zariski open of affine space over any field admits a point over a finite separable extension; a finite generically etale curve map admits a projective coordinate change avoiding finitely many points.",
+   "results": "WeierstrassCurve.Affine.Point.map_some; WeierstrassCurve.Affine.Point.map; AlgebraicGeometry.AffineSpace.not_isIntegralHom; WeierstrassCurve.Affine.Point.map_injective; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.isOpen_etaleLocus; Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; WeierstrassCurve.Projective.baseChange_nonsingular",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-span, field-extension, standard-smooth, and elliptic-curve results do not give the stated norm-pencil specialization and three-fibre avoidance."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-local-curve-pencils",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.3--3.4, pp.605--606: local quotient pencils and avoidance of 0,1,infinity. The zero-dimensional clause spells out the suitable-cover/pencil choice left implicit in §3.3; after a finite separable constant extension one chooses the finite separating pencil on the quotient curve. Local PDF WANTED; online publisher PDF read.; extraction of returned local-pencil proof, steps 15--16 (parameter selection and descent only)",
+   "via": [
+    "lem-sfb-invariant-local-curve-pencils",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-separable-open-pencil-specialization",
+  "worker": "stage1",
+  "summary": "Selected a finite-separable residue-field parameter, applied existing integral coordinate avoidance over a separable closure, descended its four matrix coefficients into a finite Galois subextension, and descended etaleness of each finite fibre pointwise. All substantive inputs reuse existing nodes. The sole new statement records the exact existing project proof IsSepClosed.instInfinite. No statement change. Repair of returned head e18cc2ab642: rebased delivery through deliver.py onto current origin/sheaf-dag; all retained full-statement citation quotes still agree with the current DAG. Made the norm scalar-extension calculation explicit on projective charts and used the open-immersion clause for etaleness of the coordinate automorphism. Retained the approved statement and nine-step proof route.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration input through de Jong §§3.3--3.4: the parameter selection and finite-separable descent extracted as local-pencil proof steps 15--16. The inherited blueprint ancestor is null and is preserved; blueprint_refs.py ancestor reports None.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic affine space is smooth used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic smoothness under restriction to open subschemes, composition with an open immersion, and isomorphism used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "Generic density of rationally defined closed points used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-separable-closure-exists-galois",
+    "why": "Generic existence of a separable closure; it is galois over every intermediate field used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-pd-geometric-curve",
+    "why": "Generic the geometric curve is a smooth projective geometrically integral curve used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-zl-separable-permanence",
+    "why": "Generic transitivity of separable algebraic extensions used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "Generic the ideal sheaf of a base-changed closed immersion used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic base change, affineness and properness for finite morphisms used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic the base-change functor between small etale sites commutes with finite limits used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic etale morphisms over reduced schemes are reduced used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "why": "Generic a finite subset of a galois extension lies in a finite galois subextension used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-field-degree-multiplicativity",
+    "why": "Generic multiplicativity of degrees in a tower of finite field extensions used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic open immersions are etale; etale morphisms compose and cancel used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-pc-field-extension-surjective",
+    "why": "Generic a field extension induces a surjective morphism of spectra used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic base change of a surjective morphism is surjective used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   },
+   {
+    "node": "lem-sc-etale-faithfully-flat-local",
+    "why": "Generic etaleness at a point descends along a faithfully flat field extension used only for parameter selection, scalar-extension geometry, or descent; the unit has no replacement for this scheme/field tool. The norm-pencil and coordinate-avoidance route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-pd-geometric-curve",
+  "lem-zl-separable-permanence",
+  "lem-pc-closed-imm-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sc-etale-faithfully-flat-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-a44abe2d3",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-a44abe2d3 (reviewer sub-agent of L); spot-checked: PASS, no changes. This is a re-delivery after an L promotion refusal of the earlier head e18cc2ab, which a reader PASSed. Live and side-live still have the item unsplit with an empty proof; the statement, stmt_deps and source are identical; the new node is absent from both. There is no repair note and no SGA citation. Diff against e18cc2ab: the new node lem-sfb-separably-closed-field-infinite is byte-identical, and the only item changes are steps 4 and 7 plus the summary. Steps 1-3, 5, 6, 8 and 9 were re-read against their cited statements and are unchanged: 056U finite-separable residue point; separable closure K, which is Galois over F_1 and a separable closure of F; M_K closed, finite, etale and reduced; integral avoidance with A=K; finite Galois descent of the 4 matrix entries with det g = 1; pointwise descent of etaleness of D_t via lem-sc-etale-faithfully-flat-local (not via reducedness); disjointness via surjectivity of the lift. Step 4 (elementary) now computes the norm in local coefficients, prod u_g goes to prod(u_g⊗1). This matches the recursive t_ρ/c of def-sfb-pencil-orbit-bundle-norm and the chart description A/B, B/A of the morphism by sections, whose charts cover the source because the pair generates. It is correct and concerns only the chosen sections. Step 7 now gets etaleness of the isomorphism g as an open immersion from clause (1) of etale-composition-cancellation, then uses clause (2). def-weil-etale-morphism was dropped consistently; proof_deps equals the union of uses (21 ids). New node: true (X^q-X-1 is separable with no root over F_q); the Lean instance IsSepClosed.instInfinite at IsSepClosed.lean:56-62 has no sorry. Duplicate scan: the only nearby statement is cor-pc-dense-points-curves-sections(3), that X(k) is infinite for a curve, which is a different statement. The generic field and scheme tool_uses are accepted. Maintainer note: the inherited blueprint.from.node=null is a base-node property."
+ }
+}

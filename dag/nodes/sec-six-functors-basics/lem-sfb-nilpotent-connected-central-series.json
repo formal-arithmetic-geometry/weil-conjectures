@@ -1,0 +1,191 @@
+{
+ "id": "lem-sfb-nilpotent-connected-central-series",
+ "kind": "statement",
+ "title": "A connected nilpotent group admits a central series of connected subgroup varieties",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Assume $k$ is perfect: either its characteristic is zero, or its characteristic is a prime $p$ and every element of $k$ is a $p$-th power. Let $G$ be smooth and connected. Suppose there are $s\\geq0$ and subgroups $G=H_0\\supseteq H_1\\supseteq\\cdots\\supseteq H_s=1$ such that for every $0\\leq j<s$, every commutative $k$-algebra $R$, $g\\in G(R)$ and $h\\in H_j(R)$, the commutator $ghg^{-1}h^{-1}$ belongs to $H_{j+1}(R)$. No smoothness or connectedness of the $H_j$ is assumed. Then there are $t\\geq0$ and smooth connected subgroups $G=C_0\\supseteq C_1\\supseteq\\cdots\\supseteq C_t=1$ with the same commutator property: $gcg^{-1}c^{-1}\\in C_{j+1}(R)$ for all $j<t$, all $R$, $g\\in G(R)$ and $c\\in C_j(R)$. The trivial group admits $t=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 6.38 and Corollary 6.39, printed pp.133--134; Corollary 6.19 supplies connected subgroup varieties in the descending central series. Centrality is expressed by commutator containment as in Remark 6.35."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof": [
+  {
+   "text": "Set $C_0=G$, which is a smooth connected closed normal subgroup of itself. Recursively, for $0\\leq j<s$, apply [lem-sfb-smooth-connected-relative-commutator] with $N=C_j$ and put $C_{j+1}=[G,C_j]$. Its statement supplies a smooth connected normal closed subgroup contained in $C_j$, and $gcg^{-1}c^{-1}\\in C_{j+1}(R)$ for every commutative $k$-algebra $R$, $g\\in G(R)$ and $c\\in C_j(R)$. Thus the recursion is defined through $C_s$, and produces a descending sequence with the required commutator property.",
+   "uses": [
+    "lem-sfb-smooth-connected-relative-commutator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Descending central series before Proposition 6.38, p.133; Remark 6.25(b), p.131."
+   }
+  },
+  {
+   "text": "Prove $C_j\\subseteq H_j$ by induction for $0\\leq j\\leq s$. At $j=0$ both subgroups are $G$. Suppose $j<s$ and $C_j\\subseteq H_j$. For every $R$, a point $c\\in C_j(R)$ lies in $H_j(R)$, so the given central-series hypothesis implies $gcg^{-1}c^{-1}\\in H_{j+1}(R)$ for every $g\\in G(R)$. Apply the minimality clause of [lem-sfb-smooth-connected-relative-commutator] with $N=C_j$ and $K=H_{j+1}$. It yields $C_{j+1}\\subseteq H_{j+1}$. This application requires no smoothness, connectedness or normality of $H_{j+1}$.",
+   "uses": [
+    "lem-sfb-smooth-connected-relative-commutator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.38, converse proof, p.133: comparison of the descending central series with an arbitrary central series."
+   }
+  },
+  {
+   "text": "At $j=s$ the inclusion gives $C_s\\subseteq H_s=1$. Every subgroup contains the identity subgroup, so $C_s=1$. Set $t=s$ and take the sequence constructed in step 1; all its terms are smooth connected closed subgroups and it has exactly the required commutator property. If $s=0$, the hypothesis already gives $G=H_0=1$, and the sequence consists of $C_0=G=1$. For a trivial $G$ one can always take $t=0$, irrespective of the length of the supplied sequence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.38 and Corollary 6.39, pp.133–134."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-connected-relative-commutator"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 6.38 and Corollary 6.39, printed pp.133–134, using the relative commutator of Definition 6.24 and Remark 6.25(b), p.131."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected nilpotent algebraic group over a perfect field admits a finite central series of smooth connected closed subgroup schemes",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); nilpotent_iff_finite_descending_central_series, nilpotent_iff_finite_ascending_central_series, Group.IsNilpotent.nilpotent, Group.IsNilpotent.nilpotent', nilpotent_iff_lowerCentralSeries, Group.IsVirtuallyNilpotent, Group.isNilpotent_iff, Group.IsNilpotent.isVirtuallyNilpotent",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"IsDescendingCentralSeries\"",
+   "date": "2026-10-24",
+   "results": "[loogle] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "descendingCentral|descending.central|central.series",
+   "date": "2026-10-24",
+   "results": "[grep] OK 0 hit(s); none",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected nilpotent group variety has a descending central series consisting of connected group varieties",
+   "date": "2026-10-24",
+   "results": "[leansearch] OK 8 hit(s); IsDescendingCentralSeries, lowerCentralSeries_isDescendingCentralSeries, lowerCentralSeries, IsAscendingCentralSeries, nilpotent_iff_finite_ascending_central_series, nilpotent_iff_lowerCentralSeries, upperCentralSeries_isAscendingCentralSeries, Group.IsNilpotent.nilpotent",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A central series of possibly non smooth closed subgroup schemes in a smooth connected algebraic group can be replaced by a central series of smooth connected subgroup schemes",
+   "date": "2026-10-24",
+   "results": "[leanfinder] OK 8 hit(s); upperCentralSeriesAux, upperCentralSeries, upperCentralSeries_isAscendingCentralSeries, lowerCentralSeries_isDescendingCentralSeries, Group.IsNilpotent.nilpotent, IsAscendingCentralSeries, nilpotent_iff_finite_descending_central_series, Group.IsNilpotent.nilpotent'",
+   "verdict": "no match: returned results concern abstract groups, Lie algebras, rings, analytic groups or number fields; none states this theorem about affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "centralSeries|central.series|lowerCentral|[Nn]ilpotent",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological group results do not supply a closed subgroup scheme, smoothness, or connectedness; the algebraic-geometry grep hits concern commutativity of proper groups only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected nilpotent algebraic groups admit a central series consisting of connected group subvarieties",
+   "results": "8 hits: upperCentralSeries, lowerCentralSeries, Group.IsNilpotent.nilpotent', upperCentralSeriesAux, Group.IsNilpotent.nilpotent, IsAscendingCentralSeries, Group.IsNilpotent.mk, Group.isNilpotent_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological group results do not supply a closed subgroup scheme, smoothness, or connectedness; the algebraic-geometry grep hits concern commutativity of proper groups only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected nilpotent affine algebraic group over a perfect field has a descending central series of smooth connected closed subgroup schemes",
+   "results": "8 hits: nilpotent_iff_finite_descending_central_series, Group.IsNilpotent.nilpotent, nilpotent_iff_finite_ascending_central_series, Group.IsNilpotent.nilpotent', nilpotent_iff_lowerCentralSeries, lowerCentralSeries_nilpotencyClass, Group.IsNilpotent, upperCentralSeries_nilpotencyClass",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract or topological group results do not supply a closed subgroup scheme, smoothness, or connectedness; the algebraic-geometry grep hits concern commutativity of proper groups only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-central-additive-subgroup",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: A connected nilpotent group admits a central series of connected subgroup varieties.",
+   "via": [
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nilpotent-connected-central-series",
+  "worker": "stage1",
+  "summary": "Q100: retain the statement and all hypotheses; construct the descending central series using a new statement-only relative-commutator lemma, compare its terms with the given possibly nonsmooth subgroups by an explicit induction, and terminate at the supplied length. One new node, no Mathlib leaves; no project attachment.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), the open-direct-image finiteness input through the inherited alteration/moduli/reductive-group support chain. The local place is the central-series argument for the central additive subgroup of a unipotent group (Milne Proposition 14.32), realized here by Milne 6.38–6.39. Steps 1–3 implement the descending-series construction, comparison and termination; no unit or chapter route is replaced. Whole-blueprint searches for central series, nilpotent, commutator, relative commutator, commutator subgroup and 6.25 gave no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-d2c9506e1",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-d2c9506e1 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 at Propositions 2.46–2.48 and 2.50 (pp.54–56), Definition 6.24 and Remark 6.25 (p.131), Remark 6.35, and Proposition 6.38 with its converse proof and Corollary 6.39 (pp.133–134). Every cited place exists and supports what the node or step takes from it. The item's statement, stmt_deps and source are identical to live; live still has the item unsplit and has no repair note, so nothing supersedes this delivery. Step 1 builds C_{j+1}=[G,C_j] by recursion from the new node; the next application needs the output to be normal, smooth and connected, and it is. Step 2 proves C_j⊆H_j by induction: the minimality clause applies to any closed K with K(R) containing all commutators, so it applies to H_{j+1} with no smoothness or normality. This is Milne's converse proof of 6.38. Step 3 (C_s=1, t=s, and the s=0 case) is elementary. The new node is true over any field: the commutator map G×N→N is pointed and its image is closed under inverses, since [g,n]^{-1}=[g^{-1},gng^{-1}]. Then 2.50 gives smoothness, 2.48 connectedness, K=N in 2.46 gives D⊆N, and normality follows from base change to k_s and density of G(k_s). It is strictly smaller than the item and restates none of its clauses. It generalizes lem-sfb-smooth-connected-derived-subgroup (only N=G over an algebraically closed field) and is not a one-line case of lem-sfb-affine-pointed-map-generated-subgroup, which lacks smoothness and normality; no other node in the DAG duplicates it. Small cases checked: N=1, commutative G, U_3, and infinitesimal K in characteristic p. The perfectness hypothesis is unused but harmless, and the statement was kept. No off-unit citations, no tool_uses, no SGA. FIX (B3): 'affine' in the new node had no definition node, so [def-pc-scheme] was added to its statement and stmt_deps (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-connected-relative-commutator.json).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NilpotentConnectedCentralSeries",
+  "declaration": "AlgebraicGeometry.nilpotent_connected_central_series",
+  "file": "lean/Sheaf/AlgebraicGeometry/NilpotentConnectedCentralSeries.lean",
+  "statement": "theorem nilpotent_connected_central_series (k : Type u) [Field k] (hperfect : CharZero k ∨ ∃ p : ℕ, p.Prime ∧ CharP k p ∧ ∀ x : k, ∃ y : k, y ^ p = x) (G : Grp (Over (Spec (.of k)))) (haff : IsAffine G.X.left) (hft : LocallyOfFiniteType G.X.hom) (hqc : QuasiCompact G.X.hom) (hsm : Smooth G.X.hom) (hconn : ConnectedSpace G.X.left) (hseries : ∃ (s : ℕ) (H : Fin (s + 1) → Grp (Over (Spec (.of k)))) (i : ∀ j : Fin (s + 1), H j ⟶ G), (∀ j : Fin (s + 1), IsClosedSubgroupScheme (i j).hom.hom ∧ IsAffine (H j).X.left ∧ LocallyOfFiniteType (H j).X.hom ∧ QuasiCompact (H j).X.hom) ∧ IsIso (i 0) ∧ Nonempty (H (Fin.last s) ≅ Grp.trivial _) ∧ (∀ j : Fin s, ∃ l : H j.succ ⟶ H j.castSucc, l ≫ i j.castSucc = i j.succ) ∧ ∀ (j : Fin s) (R : Type u) [CommRing R] [Algebra k R] (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ G.X) (h : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ (H j.castSucc).X), ∃ z : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ (H j.succ).X, z ≫ (i j.succ).hom.hom = g * (h ≫ (i j.castSucc).hom.hom) * g⁻¹ * (h ≫ (i j.castSucc).hom.hom)⁻¹) : ∃ (t : ℕ) (C : Fin (t + 1) → Grp (Over (Spec (.of k)))) (i : ∀ j : Fin (t + 1), C j ⟶ G), (∀ j : Fin (t + 1), IsClosedSubgroupScheme (i j).hom.hom ∧ IsAffine (C j).X.left ∧ LocallyOfFiniteType (C j).X.hom ∧ QuasiCompact (C j).X.hom ∧ Smooth (C j).X.hom ∧ ConnectedSpace (C j).X.left) ∧ IsIso (i 0) ∧ Nonempty (C (Fin.last t) ≅ Grp.trivial _) ∧ (Nonempty (G ≅ Grp.trivial _) → t = 0) ∧ (∀ j : Fin t, ∃ l : C j.succ ⟶ C j.castSucc, l ≫ i j.castSucc = i j.succ) ∧ ∀ (j : Fin t) (R : Type u) [CommRing R] [Algebra k R] (g : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ G.X) (c : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ (C j.castSucc).X), ∃ z : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))) ⟶ (C j.succ).X, z ≫ (i j.succ).hom.hom = g * (c ≫ (i j.castSucc).hom.hom) * g⁻¹ * (c ≫ (i j.castSucc).hom.hom)⁻¹",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d38c96ee2",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean; lean.statement matches the file signature exactly. Every clause matches the node: perfectness stated literally (char 0, or char p with surjective p-th powers); G affine, finite type (LocallyOfFiniteType ∧ QuasiCompact), smooth, connected; given series H of closed subgroups with H0 = G and Hs = 1, nested inclusions, ambient-G commutator condition over all commutative k-algebras R : Type u, as in the IsClosedSubgroupScheme point test; nothing extra assumed about the Hj; conclusion adds Smooth/ConnectedSpace for each Cj, plus t = 0 when G is trivial. Edge cases s=0, t=0, trivial G, non-smooth H, non-reduced R covered. No new definitions or nodes; rg of side-live lean for central-series/relative-commutator names found no hits. Proof is sorry only; docstrings give the source place and the three proof steps; imports used. Proof dependency lem-sfb-smooth-connected-relative-commutator has no Lean record yet (proof dependency only). Not recompiled: no file changed."
+ }
+}

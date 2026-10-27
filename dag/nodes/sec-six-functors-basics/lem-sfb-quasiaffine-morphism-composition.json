@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-quasiaffine-morphism-composition",
+ "kind": "statement",
+ "title": "Composition of quasi-affine morphisms",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of schemes [def-pc-scheme]. Assume that both $f$ and $g$ are quasi-affine [def-nagata-quasi-affine-morphism]: the inverse image of every affine open of the target is a quasi-compact open subscheme of an affine scheme. Then $g\\circ f:X\\to Z$ is quasi-affine in the same sense. No finite-type, Noetherian or separatedness hypothesis on the schemes is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SN, morphisms.tex, lemma-composition-quasi-affine, statement and proof, lines 2280--2316. Used to extend charts from an affine open of the original base without losing relative quasi-affineness."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-quasi-affine-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $U\\subseteq Z$ and put $W=g^{-1}(U)$ and $E=f^{-1}(W)$. By [def-nagata-quasi-affine-morphism], $W$ is quasi-affine. The definition also says that every affine-open preimage under $f$ is quasi-compact, so $f$ is quasi-compact by [def-weil-finite-type-morphism]. By [lem-trf-quasi-affine-canonical-affine-embedding], $W$ is quasi-compact and quasi-separated and has an open immersion $j:W\\hookrightarrow V=\\operatorname{Spec}\\Gamma(W,\\mathcal O_W)$. Hence $E$ is quasi-compact by [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open]. The affine scheme $V$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]; [lem-weil-pbc-qcqs-morphism-permanence](1), applied to $j$, shows that $j$ is quasi-compact and quasi-separated.",
+   "uses": [
+    "def-nagata-quasi-affine-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SN, lemma-composition-quasi-affine, proof"
+   }
+  },
+  {
+   "text": "The restriction $f_W:E\\to W$ is quasi-affine: an affine open $B\\subseteq W$ is also an affine open of $Y$, and $f_W^{-1}(B)=f^{-1}(B)$ is quasi-affine by the hypothesis on $f$ and [def-nagata-quasi-affine-morphism]. Apply [lem-trf-quasi-affine-relative-spec-embedding] to $f_W$. It gives a quasi-coherent $\\mathcal O_W$-algebra $\\mathcal A$, a relative spectrum $R=\\underline{\\operatorname{Spec}}_W(\\mathcal A)$, and a quasi-compact open immersion $i:E\\hookrightarrow R$ over $W$.",
+   "uses": [
+    "def-nagata-quasi-affine-morphism",
+    "lem-trf-quasi-affine-relative-spec-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SN, lemma-composition-quasi-affine, proof"
+   }
+  },
+  {
+   "text": "Set $\\mathcal A'=j_*\\mathcal A$, with its $\\mathcal O_V$-algebra structure induced by $\\mathcal O_V\\to j_*\\mathcal O_W$. Its underlying module is the ordinary direct image of the underlying module of $\\mathcal A$. Since $j$ is quasi-compact and quasi-separated, [pqf-lem-pushforward-qcoh] makes that module quasi-coherent. Thus $\\mathcal A'$ is a quasi-coherent algebra in the sense of [lem-weil-pbc-affine-morphism-relative-spec]. By clause (2) of that node, $T=\\underline{\\operatorname{Spec}}_V(\\mathcal A')$ exists and is affine, taking the affine open to be all of $V$.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SN, lemma-composition-quasi-affine, proof"
+   }
+  },
+  {
+   "text": "Identify $W$ with its open image in $V$. For every open $B\\subseteq W$, the definition of direct image gives $(j_*\\mathcal A)|_W(B)=\\mathcal A(j^{-1}(j(B)))=\\mathcal A(B)$, with identical restriction maps, multiplication and structure-algebra action. Hence $\\mathcal A'|_W\\cong\\mathcal A$ as $\\mathcal O_W$-algebras. Clauses (3) and (4) of [lem-weil-pbc-affine-morphism-relative-spec] identify $R$ with the open subscheme $T_W=\\pi^{-1}(W)$ of $T$, where $\\pi:T\\to V$ is the structure morphism. The inclusion $T_W\\hookrightarrow T$ is an open immersion by [def-weil-open-immersion].",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SN, lemma-composition-quasi-affine, proof"
+   }
+  },
+  {
+   "text": "The open immersion $i:E\\hookrightarrow R=T_W$, followed by the inclusion $T_W\\hookrightarrow T$, identifies $E$ with an open subscheme of the affine scheme $T$: its image is open in the open subset $T_W$, hence open in $T$, and both structure sheaf maps are restriction isomorphisms [def-weil-open-immersion]. Step 1 proved $E$ quasi-compact. Thus $(g\\circ f)^{-1}(U)=E$ is isomorphic to a quasi-compact open subscheme of an affine scheme. Since $U$ was arbitrary, [def-nagata-quasi-affine-morphism] gives the conclusion.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SN, lemma-composition-quasi-affine, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-quasi-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-quasi-affine-relative-spec-embedding",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SN, lemma-composition-quasi-affine, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composites of quasi-affine morphisms of schemes are quasi-affine and quasi-compact open immersions are quasi-affine",
+   "results": "{\"t\": \"2026-10-24T13:55:08Z\", \"tool\": \"leanfinder\", \"query\": \"Composites of quasi-affine morphisms of schemes are quasi-affine and quasi-compact open immersions are quasi-affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.instIsAffineHomCompScheme\", \"AlgebraicGeometry.IsAffineHom.comp_iff\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\"], \"digest\": \"1c375314249482b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give composition of affine, quasi-compact, quasi-separated or locally quasi-finite morphisms, or quasi-affineness of a scheme under affine maps/immersions. They do not give composition of arbitrary quasi-affine morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-affine morphisms are stable under composition without finite type hypotheses",
+   "results": "{\"t\": \"2026-10-24T13:55:07Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi-affine morphisms are stable under composition without finite type hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.instIsAffineHomCompScheme\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\", \"AlgebraicGeometry.IsAffineHom.comp_iff\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderComposition\"], \"digest\": \"e6ea63f2f9ae8ea0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give composition of affine, quasi-compact, quasi-separated or locally quasi-finite morphisms, or quasi-affineness of a scheme under affine maps/immersions. They do not give composition of arbitrary quasi-affine morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The composition of two quasi affine scheme morphisms is quasi affine",
+   "results": "{\"t\": \"2026-10-24T13:55:01Z\", \"tool\": \"leansearch\", \"query\": \"The composition of two quasi affine scheme morphisms is quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\", \"AlgebraicGeometry.instIsAffineHomCompScheme\", \"AlgebraicGeometry.quasiSeparated_comp\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.IsAffineHom.of_comp\", \"AlgebraicGeometry.IsAffineHom.comp_iff\"], \"digest\": \"c2f9a4dac5e9102b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give composition of affine, quasi-compact, quasi-separated or locally quasi-finite morphisms, or quasi-affineness of a scheme under affine maps/immersions. They do not give composition of arbitrary quasi-affine morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsQuasiAffine",
+   "results": "{\"t\": \"2026-10-24T13:55:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\"], \"digest\": \"f3c38cbb0b5e7297\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give composition of affine, quasi-compact, quasi-separated or locally quasi-finite morphisms, or quasi-affineness of a scheme under affine maps/immersions. They do not give composition of arbitrary quasi-affine morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.affine.*compos|compos.*quasi.affine|QuasiAffine.*comp",
+   "results": "{\"t\": \"2026-10-24T13:55:00Z\", \"tool\": \"grep\", \"query\": \"quasi.affine.*compos|compos.*quasi.affine|QuasiAffine.*comp\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\"], \"digest\": \"5814a8a198e28d79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give composition of affine, quasi-compact, quasi-separated or locally quasi-finite morphisms, or quasi-affineness of a scheme under affine maps/immersions. They do not give composition of arbitrary quasi-affine morphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiAffine.*comp|quasi.affine.*compos|IsQuasiAffineHom",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-24T14:36:59Z\", \"tool\": \"grep\", \"query\": \"QuasiAffine.*comp|quasi.affine.*compos|IsQuasiAffineHom\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\"], \"digest\": \"5814a8a198e28d79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern absolute quasi-affine schemes or affine, quasi-compact, quasi-separated or locally quasi-finite morphisms; none states composition of arbitrary relative quasi-affine morphisms."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi-affine morphisms are stable under composition",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T14:37:00Z\", \"tool\": \"leansearch\", \"query\": \"Quasi-affine morphisms are stable under composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_comp\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\", \"AlgebraicGeometry.QuasiSeparated.of_comp\", \"RingHom.QuasiFinite.stableUnderComposition\", \"AlgebraicGeometry.IsAffineHom.comp_iff\", \"CategoryTheory.MorphismProperty.IsStableUnderComposition\"], \"digest\": \"7e1c5196735f6fa9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern absolute quasi-affine schemes or affine, quasi-compact, quasi-separated or locally quasi-finite morphisms; none states composition of arbitrary relative quasi-affine morphisms."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsQuasiAffine",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T14:37:00Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.openCoverBasicOpenTop\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\"], \"digest\": \"f3c38cbb0b5e7297\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern absolute quasi-affine schemes or affine, quasi-compact, quasi-separated or locally quasi-finite morphisms; none states composition of arbitrary relative quasi-affine morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composition of two quasi-affine morphisms of arbitrary schemes is quasi-affine",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T14:37:01Z\", \"tool\": \"leanfinder\", \"query\": \"The composition of two quasi-affine morphisms of arbitrary schemes is quasi-affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineHomCompScheme\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\", \"AlgebraicGeometry.IsAffineHom.comp_iff\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderComposition\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.quasiCompact_comp\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\"], \"digest\": \"6a928692e11f3ca5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern absolute quasi-affine schemes or affine, quasi-compact, quasi-separated or locally quasi-finite morphisms; none states composition of arbitrary relative quasi-affine morphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-affine scheme morphism followed by another quasi-affine morphism is quasi-affine without finite type assumptions",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-24T14:40:16Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi-affine scheme morphism followed by another quasi-affine morphism is quasi-affine without finite type assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.instIsAffineHomCompScheme\", \"AlgebraicGeometry.IsAffineHom.comp_iff\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsAffineHom\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderComposition\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.quasiSeparated_isStableUnderComposition\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\"], \"digest\": \"8f4833689239093d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern absolute quasi-affine schemes or affine, quasi-compact, quasi-separated or locally quasi-finite morphisms; none states composition of arbitrary relative quasi-affine morphisms."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input: Anantharaman Proposition 4.1.1 and Proposition 4.1.3 (scan OCR 4.1.5), printed pp.54-55: integral descent criterion and descent of affine neighbourhoods; restrict to integral covers which are also fpqc. Last property clause: Stacks Tags 02KU, 02L0, 02L2, descent.tex labels lemma-descending-property-separated, lemma-descending-property-finite-presentation, lemma-descending-property-flat. Supporting argument: invariant quasi-affine charts in the proof of the integral descent criterion; Tag 01SN, morphisms.tex, lemma-composition-quasi-affine, statement and proof, lines 2280--2316. Used to extend charts from an affine open of the original base without losing relative quasi-affineness.",
+   "via": [
+    "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-quasiaffine-morphism-composition",
+  "worker": "stage1",
+  "summary": "Split Stacks 01SN into five steps, reusing existing relative-Spec characterization, qcqs pushforward and relative-Spec restriction nodes. Explicitly checked quasi-compactness of the source preimage and qcqs hypotheses for the open embedding; no finite-type or separation assumption added. No new nodes and no statement change. Mathlib searches give no match; the project has relative definitions and base-change results but no composition declaration.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3) descent/chart argument, specifically the integral-descent invariant quasi-affine chart extension recorded in blueprint.from.place. The latest blueprint proof supplies only the high-level compactification route; the precise auxiliary composition argument is Stacks 01SN. The ancestor command returns None, as already recorded in the item. No chapter/unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-quasi-affine-relative-spec-embedding",
+    "why": "Generic scheme characterization (Stacks 01SM) used exactly as in 01SN; the six-functor unit has no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "Generic qcqs direct-image quasi-coherence theorem (01LC) applied to the underlying module of the algebra on W; needed by 01SN and not replaced by the unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic relative-Spec existence, functoriality and open restriction (01LX, 01SA); needed to realize the affine ambient scheme in 01SN."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-quasi-affine-relative-spec-embedding",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-beb08dc0e",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-beb08dc0e (reviewer sub-agent of L); spot-checked: Read the item, all 10 cited node statements and Stacks morphisms.tex 01SM/01SN (label lemma-composition-quasi-affine, l.2281). The five steps follow 01SN and spell out the quasi-compactness and quasi-separatedness checks the source leaves implicit. Step 1: f is quasi-compact (the qc clause of def-weil-finite-type-morphism), so E is quasi-compact by lem-weil-pbc-quasi-compact-morphism-preimage-qc-open. 01P9 gives W quasi-compact and separated, and permanence (1) with an affine V makes j quasi-compact and quasi-separated. Step 2: restricting f over W keeps it quasi-affine (an elementary check), then 01SM. Step 3: j_*A is quasi-coherent (01LC), and relative-Spec clause (2) taken over all of V makes T affine. Step 4: (j_*A)|_W is isomorphic to A, and clauses (3) and (4) identify R with T_W. Step 5: the open immersions compose. The statement is not weakened and no new hypotheses were added. Tested the empty, identity, affine and non-quasi-separated Y cases. There are no new nodes, and searches for 01SN and quasi-affine composition across all nodes found no duplicate (the ind-quasi-affine nodes state different results). Batch-5 flag: the cited lem-trf-quasi-affine-canonical-affine-embedding (01P9) and lem-trf-quasi-affine-relative-spec-embedding (01SM) are general scheme lemmas. Their dependency closures (59 and 101 nodes) contain no assumption leaf, trace-formula proof node or Poincaré node; the only trace-formula-chapter nodes are generic qcqs/affinization tools. Neither assumption provides them and neither proof contains them, so I accepted both. I also accepted the three recorded tool_uses (01SM, 01LC, relative Spec). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiAffineMorphismComposition",
+  "declaration": "AlgebraicGeometry.isQuasiAffineHom_comp",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiAffineMorphismComposition.lean",
+  "statement": "theorem isQuasiAffineHom_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [IsQuasiAffineHom f] [IsQuasiAffineHom g] : IsQuasiAffineHom (f ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7d1a4fff",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Single module Sheaf.AlgebraicGeometry.QuasiAffineMorphismComposition: isQuasiAffineHom_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [IsQuasiAffineHom f] [IsQuasiAffineHom g] : IsQuasiAffineHom (f ≫ g) matches node and Stacks 01SN (morphisms.tex l.2280-2316) clause by clause; uses the recorded def-nagata-quasi-affine-morphism owner IsQuasiAffineHom (affine-open preimages quasi-affine = qc open in affine, matching Stacks def). No extra hypotheses; one universe forced by composition; empty/identity/affine/non-separated cases covered. No existing general composition (upstream only has the immersion + quasi-compact special instance). Node copy differs from side-live only in lean; lean.statement verbatim; proof sorry; docstrings carry 01SN place, blueprint id and the 5 proof steps; worker and NJ second-reading sections present. No file changed, no compile run."
+ }
+}

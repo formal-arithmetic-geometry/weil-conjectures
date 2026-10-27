@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-affine-group-coordinate-hopf",
+ "kind": "statement",
+ "title": "Coordinate Hopf identities of an arbitrary affine group scheme",
+ "statement": "Let $k$ be a field [def-weil-field] and $H$ an affine group scheme over $k$ [def-sc-group-scheme]. Write $C=k[H]=\\Gamma(H,\\mathcal O_H)$, so $H=\\operatorname{Spec}C$ [def-weil-affine-spectrum]. With tensor products of commutative algebras as in [lem-weil-pbc-algebra-tensor-pushout-universal-property], the pullbacks of multiplication, identity and inverse give $k$-algebra maps $\\Delta:C\\to C\\otimes_k C$, $\\epsilon:C\\to k$, and $S:C\\to C$. They satisfy\n$$(\\Delta\\otimes1)\\Delta=(1\\otimes\\Delta)\\Delta,\\qquad (\\epsilon\\otimes1)\\Delta=(1\\otimes\\epsilon)\\Delta=1_C,$$\nunder the tensor associativity and unit identifications. If $\\mu:C\\otimes_k C\\to C$ is multiplication and $u:k\\to C$ is the structure map, then\n$$\\mu(S\\otimes1)\\Delta=\\mu(1\\otimes S)\\Delta=u\\epsilon.$$\nThus, for every $c\\in C$, any finite tensor presentation $\\Delta(c)=\\sum c_{(1)}\\otimes c_{(2)}$ satisfies\n$$\\sum S(c_{(1)})c_{(2)}=\\epsilon(c)1_C=\\sum c_{(1)}S(c_{(2)}).$$\nAll three maps preserve products and units; in particular $S(cd)=S(c)S(d)$ and $S(1)=1$. No finite-type, smoothness, reducedness, commutativity of the group law, or finite-dimensionality hypothesis on $H$ or $C$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 022S (definition-group-scheme), associativity, identity and inverse diagrams, translated to coordinate rings of affine group schemes. Mathlib AlgebraicGeometry/Group/Affine.lean, the instance at lines 337-343, implements this translation for every commutative base ring."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The coordinate ring of an affine group scheme over a field is a commutative Hopf algebra with coproduct and antipode dual to multiplication and inverse",
+   "results": "Actual returned hits: GroupLike.instCommGroup, GroupLike.instGroup, CommSemiring.toHopfAlgebra, MonoidAlgebra.instHopfAlgebra, MonoidAlgebra.instHopfAlgebraStruct, AddMonoidAlgebra.instHopfAlgebraStruct, AddMonoidAlgebra.instHopfAlgebra, GroupLike.instInv (8 hits).",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle and grep identify the coordinate-ring HopfAlgebra instance (Affine.lean:337); the semantic searches also locate its Hopf axiom consequences. The coordinate instance and its inherited coalgebra/bialgebra axioms, with the two sum identities and antipodeAlgHom, state all clauses. Not every returned hit is relevant."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, AlgebraicGeometry.Scheme",
+   "results": "Actual returned hits: AlgebraicGeometry.instGrpObjSpecAsOverSpec, AlgebraicGeometry.instCommGrpObjSpecAsOverSpec, AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine (3 hits).",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle and grep identify the coordinate-ring HopfAlgebra instance (Affine.lean:337); the semantic searches also locate its Hopf axiom consequences. The coordinate instance and its inherited coalgebra/bialgebra axioms, with the two sum identities and antipodeAlgHom, state all clauses. Not every returned hit is relevant."
+  },
+  {
+   "tool": "grep",
+   "query": "HopfAlgebra|antipode",
+   "results": "Actual returned hits: Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean (4 hits).",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle and grep identify the coordinate-ring HopfAlgebra instance (Affine.lean:337); the semantic searches also locate its Hopf axiom consequences. The coordinate instance and its inherited coalgebra/bialgebra axioms, with the two sum identities and antipodeAlgHom, state all clauses. Not every returned hit is relevant."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate ring of an affine group scheme carries the Hopf algebra structure dual to the group laws",
+   "results": "Actual returned hits: HopfAlgCat.instHopfAlgebra, AddMonoidAlgebra.instHopfAlgebraStruct, HopfAlgCat.instRing, MonoidAlgebra.instHopfAlgebra, AddMonoidAlgebra.instHopfAlgebra, HopfAlgebraStruct.noConfusionType, HopfAlgebraStruct.antipode, HopfAlgebraStruct.mk (8 hits).",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle and grep identify the coordinate-ring HopfAlgebra instance (Affine.lean:337); the semantic searches also locate its Hopf axiom consequences. The coordinate instance and its inherited coalgebra/bialgebra axioms, with the two sum identities and antipodeAlgHom, state all clauses. Not every returned hit is relevant."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The two antipode convolution identities in a Hopf algebra give sum a1 S(a2) = counit(a) and sum S(a1) a2 = counit(a)",
+   "results": "Actual returned hits: HopfAlgebra.sum_mul_antipode_eq_smul, HopfAlgebra.mul_antipode_lTensor_comul_apply, HopfAlgebra.sum_antipode_mul_eq_smul, HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit, HopfAlgebra.mul_antipode_rTensor_comul_apply, HopfAlgebra.sum_antipode_mul_eq_algebraMap_counit, HopfAlgebra.mul_antipode_lTensor_comul, HopfAlgebra.mul_antipode_rTensor_comul (8 hits).",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle and grep identify the coordinate-ring HopfAlgebra instance (Affine.lean:337); the semantic searches also locate its Hopf axiom consequences. The coordinate instance and its inherited coalgebra/bialgebra axioms, with the two sum identities and antipodeAlgHom, state all clauses. Not every returned hit is relevant."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit",
+   "results": "Actual returned hits: HopfAlgebra.sum_mul_antipode_eq_algebraMap_counit (1 hits).",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle and grep identify the coordinate-ring HopfAlgebra instance (Affine.lean:337); the semantic searches also locate its Hopf axiom consequences. The coordinate instance and its inherited coalgebra/bialgebra axioms, with the two sum identities and antipodeAlgHom, state all clauses. Not every returned hit is relevant."
+  },
+  {
+   "tool": "grep",
+   "query": "sum_mul_antipode_eq_algebraMap_counit|sum_antipode_mul_eq_algebraMap_counit|antipodeAlgHom",
+   "results": "Actual returned hits: Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean, Mathlib/RingTheory/HopfAlgebra/Basic.lean, Mathlib/RingTheory/HopfAlgebra/Basic.lean, Mathlib/RingTheory/HopfAlgebra/Basic.lean, Mathlib/RingTheory/HopfAlgebra/Basic.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean, Mathlib/RingTheory/HopfAlgebra/Convolution.lean (11 hits).",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle and grep identify the coordinate-ring HopfAlgebra instance (Affine.lean:337); the semantic searches also locate its Hopf axiom consequences. The coordinate instance and its inherited coalgebra/bialgebra axioms, with the two sum identities and antipodeAlgHom, state all clauses. Not every returned hit is relevant."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hopf algebra multiplication antipode coproduct equals unit times counit",
+   "results": "Actual returned hits: HopfAlgebra.mul_antipode_rTensor_comul, HopfAlgebra.mul_antipode_lTensor_comul, HopfAlgebra.mul_antipode_rTensor_comul_apply, HopfAlgebra.mk, HopfAlgebra.mul_antipode_lTensor_comul_apply, HopfAlgebra.ofAlgHom, CategoryTheory.HopfObj.antipode_left, CategoryTheory.HopfObj.antipode_right (8 hits).",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle and grep identify the coordinate-ring HopfAlgebra instance (Affine.lean:337); the semantic searches also locate its Hopf axiom consequences. The coordinate instance and its inherited coalgebra/bialgebra axioms, with the two sum identities and antipodeAlgHom, state all clauses. Not every returned hit is relevant."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine",
+   "results": "Actual returned hits: AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine (1 hits).",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle and grep identify the coordinate-ring HopfAlgebra instance (Affine.lean:337); the semantic searches also locate its Hopf axiom consequences. The coordinate instance and its inherited coalgebra/bialgebra axioms, with the two sum identities and antipodeAlgHom, state all clauses. Not every returned hit is relevant."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instHopfAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfGrpObjOverSchemeSpecAsOverOfIsAffine",
+  "file": "Mathlib/AlgebraicGeometry/Group/Affine.lean",
+  "line": 337,
+  "how": "specializes in one line: apply the instance at Affine.lean:337-343 with R = CommRingCat.of k and G = H; it gives HopfAlgebra k Gamma(H, top). The construction transports the given group operations along H.isoSpec and algSpec.fullyFaithful (lines 339-343), so these are the given coordinate maps, not newly chosen operations. One declaration per explicit axiom consequence: Coalgebra.coassoc and Coalgebra.rTensor_counit_comp_comul / lTensor_counit_comp_comul (Mathlib/RingTheory/Coalgebra/Basic.lean:82,84,86); Bialgebra.counitAlgHom and comulAlgHom (Mathlib/RingTheory/Bialgebra/Basic.lean:122,127); HopfAlgebra.mul_antipode_rTensor_comul and mul_antipode_lTensor_comul (Mathlib/RingTheory/HopfAlgebra/Basic.lean:71,74), sum_antipode_mul_eq_algebraMap_counit and sum_mul_antipode_eq_algebraMap_counit (:103,108); HopfAlgebra.antipodeAlgHom (Mathlib/RingTheory/HopfAlgebra/Convolution.lean:80). Read these source passages and the equivalence in Mathlib/Algebra/Category/CommHopfAlgCat.lean:199-219. The sum identities use any Coalgebra.Repr of Delta(c)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hopf-coaction-linearization",
+  "date": "2026-10-23",
+  "group": "Q45"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Translate power lifting to quasi-coherent algebras on the quotient stack. Affine coordinate conversion between groupoid linearizations and rational coactions. Supporting coordinate-ring input: the Hopf identities dual to the affine group laws, before constructing the linearization inverse.",
+   "via": [
+    "lem-sfb-hopf-coaction-linearization",
+    "lem-sfb-flat-affine-action-algebra-descent",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

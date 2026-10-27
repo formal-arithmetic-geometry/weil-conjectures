@@ -12,6 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 public import WeilConjectures.Compactification.NagataCompactification
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+import Mathlib.Algebra.CharP.CharAndCard
+import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Cohomological smoothness in finite-coefficient comparison coordinates
@@ -78,7 +80,49 @@ theorem finiteComparedInvertibleExponent (P : PurityFiniteSetting.{u})
     {T : AlgebraicGeometry.Scheme.{u}}
     (a : T ⟶ AlgebraicGeometry.Spec (.of P.field.k)) :
     AlgebraicGeometry.HasInvertibleExponent P.Coefficient T := by
-  sorry
+  classical
+  let l := P.coefficients.l
+  let E := P.extension
+  have hdvr := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hm : (l : Padic.coefficientExtensionIntegers l E) ∈
+      Padic.coefficientExtensionMaximalIdeal l E := by
+    apply (hdvr.2.1 _).2
+    change spectralNorm (Padic l) E (l : E) < 1
+    rw [← map_natCast (algebraMap (Padic l) E),
+      spectralNorm_extends (K := Padic l) (L := E)]
+    exact Padic.norm_p_lt_one
+  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    hdvr.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hkill : ((l ^ P.level : ℕ) : P.Coefficient) = 0 := by
+    apply ULift.ext
+    change ((l ^ P.level : ℕ) :
+      Padic.coefficientExtensionIntegers l E ⧸ Padic.coefficientExtensionIdeal l E P.level) = 0
+    rw [← map_natCast (Ideal.Quotient.mk _), Ideal.Quotient.eq_zero_iff_mem]
+    rw [Nat.cast_pow]
+    change (l : Padic.coefficientExtensionIntegers l E) ^ P.level ∈
+      Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+        Set (Padic.coefficientExtensionIntegers l E)) ^ P.level
+    rw [hgen]
+    exact Ideal.pow_mem_pow hm P.level
+  let : Fintype P.field.k₀ := Fintype.ofFinite _
+  have : Fact P.field.p.Prime := ⟨P.field.prime⟩
+  have : CharP P.field.k₀ P.field.p := charP_of_card_eq_prime_pow
+    (by simpa only [← Nat.card_eq_fintype_card] using
+      P.field.card_base.trans P.field.cardinality_eq)
+  have : CharP P.field.k P.field.p := charP_of_injective_algebraMap' P.field.k₀ P.field.p
+  have hl : (l : P.field.k) ≠ 0 := by
+    intro hz
+    have hdiv := (CharP.cast_eq_zero_iff P.field.k P.field.p l).mp hz
+    exact P.coefficients.different
+      ((Nat.prime_dvd_prime_iff_eq P.field.prime (Fact.out : l.Prime)).mp hdiv).symm
+  refine ⟨l ^ P.level, pow_pos (Nat.Prime.pos Fact.out) _, hkill, ?_⟩
+  have hu := ((Ne.isUnit hl).pow P.level).map
+    ((AlgebraicGeometry.Scheme.ΓSpecIso (.of P.field.k)).inv.hom)
+  simpa only [map_pow, map_natCast, Nat.cast_pow] using hu.map a.appTop.hom
 
 end WeilConjectures.PurityFiniteSetting
 

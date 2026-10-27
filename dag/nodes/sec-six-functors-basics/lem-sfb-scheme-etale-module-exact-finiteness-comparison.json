@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+ "kind": "statement",
+ "title": "Exactness and finiteness in the Zariski-small-etale module comparison",
+ "statement": "Let $T$ be a scheme [def-pc-scheme]. For a quasi-coherent Zariski $\\mathcal O_T$-module $F$ [pqf-def-coherent], let $A_T(F)=F_{\\mathrm{et}}$ be its associated sheaf [def-sc-etale-qcoherent-module], with $A_T(F)(u:U\\to T)=\\Gamma(U,u^*F)$ on the small etale site [def-weil-pbc-etale-site]. Regard the functor $A_T$ of [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] as taking values in all sheaves of $\\mathcal O_{T,\\mathrm{et}}$-modules [def-weil-sheaf-of-modules-category], with quasi-coherent essential image [def-trf-space-quasi-coherent-module]. This functor is exact: it takes every short exact sequence of quasi-coherent Zariski modules to a short exact sequence in the ambient small-etale module category. Moreover $F$ is of finite type, respectively of finite presentation, if and only if $A_T(F)$ is of finite type, respectively of finite presentation. On either site these properties mean locally admitting an epimorphism $\\mathcal O^{\\oplus n}\\twoheadrightarrow F$, respectively an exact sequence $\\mathcal O^{\\oplus m}\\to\\mathcal O^{\\oplus n}\\to F\\to0$, with $m,n<\\infty$; locally means Zariski locally on the Zariski site and etale locally on the small etale site. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 06VE, lemma-equivalence-quasi-coherent-limits, part (5), only the small etale site; Tag 05VG, lemma-equivalence-quasi-coherent-properties, finite type and finite presentation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-etale-site",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module"
+ ],
+ "proof": [
+  {
+   "text": "The specified canonical extension has the context adjunction to restriction. Restriction is additive sectionwise; the adjunction makes extension additive and a left adjoint, hence it preserves cokernels and epimorphisms.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a monomorphism between quasi-coherent modules, every small-etale test map is flat, so tensor pullback preserves that monomorphism. Evaluation on global sections preserves monomorphisms. The tensor-section comparison and its naturality conjugate the components of the extended map to these injective section maps. Thus every component is mono, and the faithful forgetful functors from module sheaves to additive sheaves to presheaves reflect monomorphisms. This proves preservation of monomorphisms without constructing quasi-coherent kernels.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given an ambient short exact sequence with quasi-coherent terms, right exactness sends its cokernel presentation to an exact sequence with epi last map. Step 2 makes the first map mono. Functoriality and preservation of zero supply the zero composite, so the mapped short complex is short exact.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finiteness-preservation lemma for the two forward implications. For either reverse implication, local recovery supplies an etale fpqc covering whose Zariski pullbacks have the appropriate finiteness property. Finite type descends by isFiniteType_of_fpqc_tensorPullback. For finite presentation pass from the precoverage to its generated covering sieve and apply fpqc finite-presentation descent to the canonical descent datum of F with its identity comparison isomorphism.",
+   "uses": [
+    "lem-sfb-zariski-etale-finiteness-preservation",
+    "lem-sfb-zariski-etale-finiteness-local-recovery",
+    "lem-sfb-fpqc-finite-type-module-descent",
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-sfb-zariski-etale-finiteness-preservation",
+  "lem-sfb-zariski-etale-finiteness-local-recovery",
+  "lem-sfb-fpqc-finite-type-module-descent",
+  "lem-pc-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 06VE (parts (3)-(5)) and 05VG. Lean implementation preserves monomorphisms using flat test pullbacks and sectionwise limits, combines this with right exactness from the adjunction, and splits off forward local presentation transport and local recovery before the existing fpqc descent theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between Zariski and small etale quasi coherent modules on a scheme is exact and preserves finite type and finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: generic predicates for module sheaves and etale site definitions do not compare exactness and finiteness across the Zariski and small etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness and finite generation of quasi coherent sheaves are preserved and reflected by passage from the Zariski to the small etale topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: generic predicates for module sheaves and etale site definitions do not compare exactness and finiteness across the Zariski and small etale sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsQuasicoherent\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) : Prop\", \"doc\": \"A sheaf of modules is quasi-coherent if it is locally the cokernel of a\\nmorphism between coproducts of copies of the sheaf of rings.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (R : CategoryTheory.Sheaf J RingCat) [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] : CategoryTheory.ObjectProperty (She\", \"doc\": \"A sheaf of modules is quasi-coherent if it is locally the cokernel of a\\nmorphism between coproducts of copies of the sheaf of rings.\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : SheafOfModules R) [M.IsFinitePr\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (q : M.Quasic\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} {inst✝¹ : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat} {inst✝² : ∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat} {M : Sheaf\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {M : SheafOfModules R} (nonempty_qua\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.instIsClosedUnderIsomorphismsIsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] : (SheafOfModules.isQuasicoherent R).IsC\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentObjIsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] (M : (SheafOfModules.isQuasicoherent\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.Presentation.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Limits.HasBinaryProducts C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [CategoryTheory.HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat] [∀ (X : C), CategoryTheory.HasSheafi\", \"doc\": \"If a sheaf of `R`-modules `M` has a presentation, then `M` is quasi-coherent.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent_over\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] [∀ (X : C) (Y : CategoryTheory.Over X), \", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.of_coversTop\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} [∀ (X : C), CategoryTheory.HasSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] [∀ (X : C) (Y : CategoryTheory.Over X), CategoryTheory.HasSheafify ((J.over X\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {R : CategoryTheory.Sheaf J RingCat} [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] {D : Type u₂} [CategoryTheory.Catego\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: generic predicates for module sheaves and etale site definitions do not compare exactness and finiteness across the Zariski and small etale sites."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]xact|[Ff]inite[Pp]resentation|[Ff]inite[Tt]ype",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"205\", \"text\": \"    exact congr($(f.val.naturality (α.app U.unop).op) x).symm\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean\", \"line\": \"38\", \"text\": \"    exact hasColimit_of_iso e\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean\", \"line\": \"42\", \"text\": \"  exact abelianOfAdjunction _ _ (asIso (adj.counit)) adj\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"line\": \"45\", \"text\": \"  exact (isomorphisms _).arrow_mk_iso_iff\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"line\": \"50\", \"text\": \"  exact (sheafificationAdjunction.{v} α).isLocalization\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"52\", \"text\": \"  isFiniteType_generators : p.generators.IsFiniteType := by infer_instance\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"53\", \"text\": \"  isFiniteType_relations : p.relations.IsFiniteType := by infer_instance\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"55\", \"text\": \"attribute [instance] Presentation.IsFinite.isFiniteType_generators\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"56\", \"text\": \"  Presentation.IsFinite.isFiniteType_relations\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"line\": \"58\", \"text\": \"@[deprecated Presentation.IsFinite.isFiniteType_relations (since := \\\"2026-04-14\\\")]\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"63\", \"text\": \"    exact ((φ.hom.app X).hom.map_mul _ _).symm)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"line\": \"66\", \"text\": \"    exact ConcreteCategory.congr_hom (φ.hom.naturality f) _\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"163\", \"text\": \"  exact IsColimit.comp_coconePointUniqueUpToIso_hom\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"line\": \"170\", \"text\": \"  exact IsColimit.comp_coconePointUniqueUpToIso_hom\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"line\": \"95\", \"text\": \"class IsFiniteType (σ : M.GeneratingSections) : Prop where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"line\": \"98\", \"text\": \"attribute [instance] IsFiniteType.finite\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"line\": \"100\", \"text\": \"instance (σ : M.GeneratingSections) (p : M ⟶ N) [Epi p] [σ.IsFiniteType] :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"line\": \"101\", \"text\": \"    (σ.ofEpi p).IsFiniteType where\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"line\": \"131\", \"text\": \"    exact ⟨⟨_, i, rfl⟩, ⟨hi ≫ eqToHom (by grind)⟩⟩\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"line\": \"44\", \"text\": \"  exact Sheaf.isSheaf_of_isLimit G _ (isLimitOfPreserves (toPresheaf R) hc)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: generic predicates for module sheaves and etale site definitions do not compare exactness and finiteness across the Zariski and small etale sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The associated quasi coherent sheaf on the small etale site preserves kernels cokernels finite type finite presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If there exists a quasicoherent sheaf $\\\\sigma$ over the ring sheaf $\\\\mathcal{O}$ such that $\\\\sigma$ satisfies the finite presentation condition, then the sheaf $\\\\mathcal{M}$ also satisfies the finite \"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.QuasicoherentData\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a quasicoherent sheaf data $ q $ over a ring sheaf $ \\\\mathcal{O} $, if every indexed presentation $ q.\\text{presentation}(i) $ is finite (admits finite generators and relations), then $ q $ itsel\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: generic predicates for module sheaves and etale site definitions do not compare exactness and finiteness across the Zariski and small etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exactness finite type finite presentation comparison zariski small etale quasi coherent module",
+   "results": "Available; 8 hits: SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, Algebra.Etale.finitePresentation. ",
+   "date": "2026-10-23",
+   "verdict": "No match: the generic finiteness predicates and scheme etale topology do not state this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Exact\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "No match: the generic finiteness predicates and scheme etale topology do not state this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "zariski.*etale|etale.*quasicoherent",
+   "results": "Available; 3 hits: Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean, Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean.  Searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "No match: the generic finiteness predicates and scheme etale topology do not state this comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski small etale quasi coherent modules exact finite presentation comparison",
+   "results": "Available; 8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.recOn, SheafOfModules.QuasicoherentData.IsFinitePresentation.casesOn, SheafOfModules.IsFinitePresentation.recOn. ",
+   "date": "2026-10-23",
+   "verdict": "No match: the generic finiteness predicates and scheme etale topology do not state this comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-naive-cotangent-coherent",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. Assembly of coherent naive cotangent cohomology: Exactness and finiteness in the Zariski-small-etale module comparison.",
+   "via": [
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "worker": "stage1",
+  "summary": "Proved ambient exactness using the tensor-pullback adjunction and flatness of small-etale test maps. Lifted local finite presentations through full faithfulness, then applied fpqc module descent. Added only the general finite-type fpqc descent theorem; no statement change.",
+  "blueprint": "The inherited non-blueprint provenance points to det-thm-sf-ctf-stability-direct-images proof (3) via the coherent naive cotangent prerequisite. The current latest direct-images proof (3) states compactification and cites the open coefficient input, rather than this prerequisite explicitly. This split supplies the subordinate Zariski-small-etale exactness and finiteness comparison needed by lem-sfb-space-naive-cotangent-coherent; no unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic comparison, adjunction, exactness or descent tool in the Stacks 06VE/05VG proof; this unit has no replacement statement. Used only with the hypotheses and clauses quoted in citations.json."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Identifies the etale slice over U_i with the small etale site of U_i, by composition and cancellation; a generic geometric site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-60ab8c455",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-60ab8c455 (reviewer sub-agent of L); spot-checked: I read the item, all five steps, the new node and every cited statement. Sources checked in descent.tex: 06VE (lemma-equivalence-quasi-coherent-limits, parts (3)-(6) and proof), 05VG (lemma-equivalence-quasi-coherent-properties) and 05AZ (lemma-finite-type-descends). The item statement is byte-identical to live and unweakened. Its exactness holds only on the small etale site, as in 06VE(5); 06VE(6) shows the big site fails. Item still unsplit in live and side-live, so no other group superseded it. Steps 1, 2, 4 and 5 are correct: step 1 uses the left adjoint epsilon^* with the qcoh cokernel being the ambient cokernel; step 2 uses flat pullback, left-exact sections and sectionwise kernels; step 4 lifts presentations through full faithfulness and gets the zero cokernel from faithfulness; step 5 uses that an etale cover is fpqc, the new node for finite type and lem-pc-fpqc-descent(2) for finite presentation. New node lem-sfb-fpqc-finite-type-module-descent: Stacks 05AZ exactly, statement only, self-contained, definitions cited. Checked on the empty cover, the identity cover and infinite-rank modules. Not a duplicate of the faithfully-flat module, algebra or morphism descent nodes, nor of lem-trf-etale-module-finite-presentation-local or lem-pc-fpqc-descent(2), and no blueprint node states it. FIX (C1/C2): step 3 was marked elementary but silently used three facts: the slice of T_et over V is V_et, the pullback composition isomorphism, and that open immersions are etale. It now cites lem-weil-pbc-etale-composition-cancellation and lem-pc-module-pullback-identity-composition (both already in proof_deps), writes out the identification and is marked elementary=false. Off-unit generic tools in split_report.tool_uses are accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeEtaleModuleExactFinitenessComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scheme_etale_module_exact_finiteness_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.schemeEtaleModuleComparison",
+   "AlgebraicGeometry.Scheme.Modules.scheme_etale_module_exact_finiteness_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeEtaleModuleExactFinitenessComparison.lean",
+  "statement": "theorem scheme_etale_module_exact_finiteness_comparison (T : Scheme.{u}) : (∀ (S : ShortComplex T.Modules), S.X₁.IsQuasicoherent → S.X₂.IsQuasicoherent → S.X₃.IsQuasicoherent → S.ShortExact → ∃ h : (schemeEtaleModuleComparison T).map S.f ≫ (schemeEtaleModuleComparison T).map S.g = 0, (ShortComplex.mk ((schemeEtaleModuleComparison T).map S.f) ((schemeEtaleModuleComparison T).map S.g) h).ShortExact) ∧ (∀ (F : T.Modules) [F.IsQuasicoherent], (F.IsFiniteType ↔ ((schemeEtaleModuleComparison T).obj F).IsFiniteType) ∧ (F.IsFinitePresentation ↔ ((schemeEtaleModuleComparison T).obj F).IsFinitePresentation))",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper is a transparent abbreviation of the recorded canonical tensor extension. Classical.choose extracts only the proof-only context guaranteed by the comparison theorem; it selects no arbitrary module, map or functor. Short exactness is stated for the explicitly mapped arrows in the full SmallEtaleModules category; the existential zero-composition proof constructs that short complex without assuming a separate preservation-of-zero instance."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51843275e",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Read the item, the 7 stmt_deps and Stacks 06VE(5)/05VG. Statement matches the file verbatim; item record differs from live only by its new lean field. schemeEtaleModuleComparison = (Classical.choose …).extension: ZariskiEtaleModuleContext has only Prop fields (IsContinuous, IsRightAdjoint), so the choice selects no data and extension is the recorded SheafOfModules.pullback tensor extension, identified by the dependency's e with etaleTensorSectionsSheaf. Exactness: all three objects quasi-coherent, ShortExact in T.Modules, mapped complex ShortExact in the ambient SmallEtaleModules; the ∃ h is only the zero-composite proof; small site only, consistent with 06VE(6). Finiteness: two iff clauses with Mathlib SheafOfModules.IsFiniteType/IsFinitePresentation (no Scheme.Modules shadow), local on each site's own topology. No Noetherian, quasi-compact or universe assumptions; empty scheme, zero modules and rank 0 covered. All imports resolve; no duplicate names; docstrings carry the source place, blueprint id and the 5 proof steps; proof is sorry only. No compile (no changes); worker reports a clean scompile. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T092636-L-3450296",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-nodal-nonspecial-smooth-divisor",
+ "kind": "statement",
+ "title": "Nonspecial divisor in the smooth locus of a nodal curve",
+ "statement": "Let $k$ be a separably closed field [def-weil-field, def-pc-separably-closed] and let $X/k$ be a nonempty projective geometrically reduced geometrically connected curve [def-pc-geometrically-irreducible] with nodal geometric fibres [def-kun-projective, def-trf-nodal-geometric-fibres]. Put $g=\\dim_kH^1(X,\\mathcal O_X)$, with coherent cohomology [def-sc-sheaf-cohomology-functor]. There is an effective Cartier divisor $E$ [def-pc-divisor-line-bundle] supported in the smooth locus [def-sbc-smooth-morphisms], of degree $g$, such that $H^1(X,\\mathcal O_X(E))=0$ and the canonical inclusion $k\\to H^0(X,\\mathcal O_X(E))$ is an isomorphism. The divisor can be chosen to be a sum of $g$ distinct $k$-rational smooth points. For $g=0$ it is the empty divisor. Degree means $\\chi(\\mathcal O_X(E))-\\chi(\\mathcal O_X)$ [def-pc-degree-line-bundle, def-pc-euler-characteristic].",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 4.4, printed p.143; successive independent evaluations of the dualizing sheaf at smooth points. The distinctness refinement follows by avoiding the finitely many previously chosen points. Primary Numdam PDF read online; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-kun-projective",
+  "def-trf-nodal-geometric-fibres",
+  "def-sc-sheaf-cohomology-functor",
+  "def-pc-divisor-line-bundle",
+  "def-sbc-smooth-morphisms",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pc-separably-closed",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "The structure map $f:X\\to\\operatorname{Spec}k$ is proper by [lem-kun-projective-implies-proper], hence finite type and separated. Over the Noetherian field $k$, [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian and [pqf-lem-lft-fp-locnoeth] makes $f$ locally finitely presented; quasi-compactness and separatedness give finite presentation. It is flat by [lem-pc-flat-field]. The nodal curve hypotheses give pure dimension one on its geometric fibres: a zero-dimensional irreducible component of a reduced finite-type curve is an isolated open-and-closed point, contrary to connectedness and dimension one; the other components have dimension one. The same applies to $X$. By [lem-pc-projective-coherent-finiteness] coherent cohomology is finite-dimensional, and [lem-sc-noetherian-cohomology-above-dimension] gives $H^q(X,F)=0$ for $q>1$. By [lem-pc-h0-geom-connected], the canonical $k\\to H^0(X,\\mathcal O_X)$ is an isomorphism. Thus $g$ is finite and $\\chi(X,\\mathcal O_X)=1-g$.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-pc-flat-field",
+    "lem-pc-projective-coherent-finiteness",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-pc-h0-geom-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2, lemma-duality-dim-1, proper-curve setup; varieties.tex Tag 0BUG, global functions; cohomology.tex Tag 02UZ. Deligne Lemma 4.4, Riemann--Roch setup."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-gorenstein-curve-relative-dualizing] to $f$. Step 1 checked properness, flatness and finite presentation, and the assumed nodal geometric fibres satisfy its remaining hypotheses. It supplies an invertible dualizing sheaf $W$. Apply [lem-sfb-reduced-curve-dualizing-module] to $X$: it supplies the natural duality isomorphism and uniqueness of the representing pair. Since $W$ represents the same functor, identify it with $\\omega_X$ through this uniqueness. Taking $F=\\mathcal O_X$, the identity $\\operatorname{Hom}(\\mathcal O_X,\\omega_X)=\\Gamma(X,\\omega_X)$ gives $\\dim_k\\Gamma(X,\\omega_X)=g$. We will also use the cited module theorem's assertion that a morphism to $\\omega_X$ vanishing at every component-generic stalk is zero.",
+   "uses": [
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-sfb-reduced-curve-dualizing-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli-curves.tex",
+    "place": "Tag 0E6R, lemma-gorenstein-dualizing and preceding field-case representing property; curves.tex Tags 0BS2, 0BS3. Deligne Lemma 4.4, dualizing sheaf."
+   }
+  },
+  {
+   "text": "Let $U$ be the smooth locus. It is dense by [lem-pur-geometrically-reduced-dense-smooth-open]. For any nonzero $s\\in\\Gamma(X,\\omega_X)$ and finite set $T$ of smooth rational points, the map $\\mathcal O_X\\to\\omega_X$ defined by $s$ is nonzero at some component-generic stalk by step 2. Trivialize the invertible sheaf near that generic point. Its representing function has nonzero residue in the generic field; after restriction to its principal nonvanishing open it is a unit. That open meets $U$, and deleting $T$ still leaves a nonempty open: its generic point has dimension-one closure and is not one of the finitely many closed points in $T$. This is a nonempty smooth $k$-scheme. By [lem-pc-rational-points-dense], it contains a $k$-rational point $P$. At $P$ the evaluation $s(P)\\in\\omega_X\\otimes k(P)$ is nonzero, and $P\\notin T$.",
+   "uses": [
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-pc-rational-points-dense",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 056V (lemma-geometrically-reduced-dense-smooth-open), 056U (lemma-smooth-separable-closed-points-dense); Deligne Lemma 4.4, choice of a smooth point. Distinctness: delete the previous finite set."
+   }
+  },
+  {
+   "text": "Construct distinct $P_1,\\ldots,P_g\\in U(k)$ inductively. Let $V_0=\\Gamma(X,\\omega_X)$ and, after $i$ choices, let $V_i$ be the subspace of sections evaluating to zero at all $P_1,\\ldots,P_i$. Inductively $\\dim_k V_i=g-i$. If $i<g$, choose $0\\ne s\\in V_i$ and apply step 3 with $T=\\{P_1,\\ldots,P_i\\}$ to choose $P_{i+1}$ where $s$ is nonzero. Evaluation $V_i\\to\\omega_X\\otimes k(P_{i+1})$ is therefore nonzero. Its target is one-dimensional because $\\omega_X$ is invertible and $k(P_{i+1})=k$, so its image has dimension one and its kernel $V_{i+1}$ has dimension $g-i-1$. This proves the induction and gives $V_g=0$. If $g=0$, no choices are made and already $V_0=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 4.4, printed p.143: induction on independent evaluations; finite-dimensional rank-nullity written explicitly, with avoidance of previous points."
+   }
+  },
+  {
+   "text": "Let $E$ be the reduced union of the $P_i$ in $X$. Each $k$-rational point is closed because $X/k$ is separated, and $E\\cong\\coprod_{i=1}^g\\operatorname{Spec}k$. The smooth locus $U$ has relative dimension one: its components lie in the dimension-one components of $X$; the nodal curve has no isolated components by step 1. The finite locally free closed subscheme $E\\subset U$ is an effective Cartier divisor by [lem-pc-cartier-criterion]. The effective Cartier property extends to $X$ on the cover $U\\cup(X\\setminus E)$, with local equation $1$ on the second open. Thus $E$ is a sum of distinct smooth rational points. Its associated module $M=\\mathcal O_X(E)$ is invertible by [lem-pc-divisor-line-bundle-properties]. By [lem-pc-degree-base-change], $\\deg M=\\dim_k\\Gamma(E,\\mathcal O_E)=g$. This includes the empty union for $g=0$, whose ideal is $\\mathcal O_X$ and whose degree is zero.",
+   "uses": [
+    "lem-pc-cartier-criterion",
+    "def-pc-divisor-line-bundle",
+    "lem-pc-divisor-line-bundle-properties",
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B9D, lemma-divisors-on-curves, (1) implies (2), on the smooth open; varieties.tex Tag 0AYY, lemma-degree-effective-Cartier-divisor. Deligne Lemma 4.4, divisor construction."
+   }
+  },
+  {
+   "text": "Write $I=\\mathcal I_E$; by definition $M=I^\\vee$. The canonical inclusion $\\mathcal O_X\\to M$ is locally the injective map $a\\mapsto ta$ in a trivialization where $I=(t)$ and $t$ is a nonzerodivisor. Precomposition identifies $\\operatorname{Hom}(M,\\omega_X)$ with the global sections of $I\\otimes\\omega_X$ inside $\\Gamma(X,\\omega_X)$: in the same trivialization it is multiplication by $t$. At each reduced smooth point $P_i$, membership in $I\\otimes\\omega_X$ is exactly zero evaluation modulo its maximal ideal; away from $E$ the ideal is the unit ideal. Consequently $\\operatorname{Hom}(M,\\omega_X)=V_g=0$. By the natural isomorphism of [lem-sfb-reduced-curve-dualizing-module], the dual of $H^1(X,M)$ is zero. This cohomology is finite-dimensional by step 1, so $H^1(X,M)=0$.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "def-sc-invertible-module",
+    "lem-sfb-reduced-curve-dualizing-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS2, lemma-duality-dim-1 (5); rank-one Hom calculation as in Tag 0BS4, remark-rework-duality-locally-free. Deligne Lemma 4.4, duality criterion."
+   }
+  },
+  {
+   "text": "By step 1, $\\chi(X,M)=h^0(X,M)-h^1(X,M)=h^0(X,M)$. Using the degree convention of [def-pc-degree-line-bundle] and [def-pc-euler-characteristic], steps 1 and 5 give $h^0(X,M)=\\deg M+\\chi(X,\\mathcal O_X)=g+1-g=1$. The injective sheaf map $\\mathcal O_X\\to M$ from step 6 sends $1$ to a nonzero global section: locally its image is the nonzerodivisor $t$ and $X$ is nonempty. Hence the resulting canonical map $k\\to H^0(X,M)$ is injective. Both vector spaces have dimension one, so it is an isomorphism. When $g=0$ the construction took $E=\\varnothing$, $M=\\mathcal O_X$, and all these assertions reduce to $H^1(X,\\mathcal O_X)=0$ and the canonical global-functions isomorphism from step 1.",
+   "uses": [
+    "def-pc-degree-line-bundle",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+    "place": "Lemma 4.4, printed p.143, first sentence of proof: H0 follows from the other assertions and Riemann--Roch; Euler-characteristic rearrangement spelled out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-pc-flat-field",
+  "lem-pc-projective-coherent-finiteness",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-pc-h0-geom-connected",
+  "lem-sfb-gorenstein-curve-relative-dualizing",
+  "lem-sfb-reduced-curve-dualizing-module",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-pc-rational-points-dense",
+  "def-sc-invertible-module",
+  "lem-pc-cartier-criterion",
+  "def-pc-divisor-line-bundle",
+  "lem-pc-divisor-line-bundle-properties",
+  "lem-pc-degree-base-change",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Lemma 4.4, printed p.143, read in the primary Numdam PDF online; local PDF WANTED. Expanded induction, distinctness and g=0 checked using the cited local Stacks sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically connected projective reduced nodal curve over a separably closed field has an effective divisor of degree arithmetic genus in the smooth locus with H1 O(D) zero and H0 O(D) one dimensional",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"FunctionField.classNumber\", \"module\": \"Mathlib/NumberTheory/ClassNumber/FunctionField\", \"type\": \"(Fq : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Field Fq] →\\n      [Fintype Fq] →\\n        [inst_2 : Field F] →\\n          [inst_3 : Algebra (Polynomial Fq) F] →\\n            [inst_4 : Algebra (RatFunc Fq) F] →\\n              [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] →\\n                [FunctionFiel\", \"doc\": \"The class number is defined as the cardinality of the class group of the ring of integers $\\\\mathcal{O}_F$ (the integral closure of $\\\\mathbb{F}_q[X]$) in a function field $F$ over the finite field $\\\\ma\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Jacobian R → WeierstrassCurve.Jacobian.PointClass R → Prop\", \"doc\": \"The property that a point class $ [P] $ in the Jacobian of a Weierstrass curve is nonsingular if any representative $ P $ of the class satisfies the nonsingularity condition. This is well-defined beca\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Choose genus many smooth rational points on a nodal curve killing all sections of its dualizing sheaf",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.Point.some.elim\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] →\\n    {W' : WeierstrassCurve.Affine R} →\\n      {motive : W'.Point → Sort u} →\\n        (t : W'.Point) →\\n          t.ctorIdx = 1 →\\n            ({x y : R} → (h : W'.Nonsingular x y) → motive (WeierstrassCurve.Affine.Point.some h)) → motive t\", \"doc\": \"Given a commutative ring $ R $, an affine Weierstrass curve $ W $ over $ R $, a type family $ P $ over $ W $-points, a point $ t $ on $ W $, and a proof that $ t $ is a nonsingular point (i.e., its co\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.nonsingularLift_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"(P : Fin 3 → R) : W'.NonsingularLift ⟦P⟧ ↔ W'.Nonsingular P\", \"doc\": \"For any point $ P $ in the Jacobian of a Weierstrass curve over a commutative ring $ R $, the point class $ [P] $ is nonsingular if and only if the representative $ P $ is nonsingular.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"{x y : F} (h : W.Nonsingular x y) :\\n  ClassGroup.mk (XYIdeal' <| (nonsingular_neg ..).mpr h) * ClassGroup.mk (XYIdeal' h) = 1\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, the product of the class group elements corresponding to the invertible fractional ideals $XYIdeal'$ at $(x, y)$ a\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"{R : Type r} →\\n  {inst : CommRing R} →\\n    {W' : WeierstrassCurve.Projective R} →\\n      {P : Sort u} →\\n        {point : WeierstrassCurve.Projective.PointClass R} →\\n          {nonsingular : W'.NonsingularLift point} →\\n            {point' : WeierstrassCurve.Projective.PointClass R} →\\n              {no\", \"doc\": \"A type ensuring that distinct projective Weierstrass curve points over different commutative rings cannot be confused, by requiring equality of their projective coordinate representations $[X:Y:Z]$ an\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.nonsingular\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Jacobian R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"For any commutative ring $ R $ and any Weierstrass curve over $ R $, a point on the Jacobian (which is the curve itself) is nonsingular if and only if every representative of its equivalence class und\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.nonsingular_some\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Jacobian.Basic\", \"type\": \"(a b : R) : W'.Nonsingular ![a, b, 1] ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"A point $(a, b, 1)$ on the Jacobian of a Weierstrass curve is nonsingular if and only if the corresponding affine point $(a, b)$ on the curve is nonsingular. This establishes the equivalence between t\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Affine.Point\", \"type\": \"{R : Type r} →\\n  [inst : CommRing R] →\\n    {W' : WeierstrassCurve.Affine R} →\\n      {motive : W'.Point → Sort u} →\\n        (t : W'.Point) →\\n          motive WeierstrassCurve.Affine.Point.zero →\\n            ({x y : R} → (h : W'.Nonsingular x y) → motive (WeierstrassCurve.Affine.Point.some h)) → motiv\", \"doc\": \"Given a commutative ring $ R $, an affine Weierstrass curve $ W $ over $ R $, and a type family $ P $ over $ W $-points, this function defines a value for any $ W $-point by specifying its value at th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"divisor\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "grep",
+   "query": "nonspecial|non.special|dualizing|riemann.roch",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"20\", \"text\": \"This file was obtained by dualizing the definitions in\"}\n  {\"file\": \"Mathlib/Data/Set/Defs.lean\", \"line\": \"60\", \"text\": \"Additionally, dualizing the order on sets would mean that a set is dual to its complement.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"32\", \"text\": \"* consider dualizing the results to right adjoints\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToDual.lean\", \"line\": \"27\", \"text\": \"  We may also want this feature for dualizing results about bicategories.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"22\", \"text\": \"by dualizing this file. These two files should be kept in sync.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"21\", \"text\": \"Note: this file was obtained by dualizing the definitions in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"27\", \"text\": \"(This file was obtained by dualizing the results in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"line\": \"12\", \"text\": \"# The dualizing functor on `Cat`\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"line\": \"190\", \"text\": \"and dualizing the result using `toDual`.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned hits; Weierstrass coordinate classes, ring Picard groups, ordinary scheme morphisms and compact topological-group translates do not give this relative algebraic-space statement"
+  },
+  {
+   "tool": "grep",
+   "query": "nonspecial|non.special|dualizing|Riemann.?Roch",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass equation nonsingularity or analytic meromorphic divisors, not nonspecial divisors on arbitrary projective nodal curves; no relevant hit from the AlgebraicGeometry grep or Loogle pattern."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A curve has an effective nonspecial divisor of degree its arithmetic genus supported on distinct rational points in its smooth locus",
+   "results": "8 hits: MeromorphicOn.divisor, WeierstrassCurve.Jacobian.nonsingularLift_iff, WeierstrassCurve.Projective.Point.mk.noConfusion, WeierstrassCurve.preΨ'_ne_zero, WeierstrassCurve.Projective.Point.instZeroOfNontrivial, WeierstrassCurve.Projective.Point.mk, WeierstrassCurve.Projective.Point.casesOn, WeierstrassCurve.Projective.Point.nonsingular",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass equation nonsingularity or analytic meromorphic divisors, not nonspecial divisors on arbitrary projective nodal curves; no relevant hit from the AlgebraicGeometry grep or Loogle pattern."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"divisor\", \"cohomology\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass equation nonsingularity or analytic meromorphic divisors, not nonspecial divisors on arbitrary projective nodal curves; no relevant hit from the AlgebraicGeometry grep or Loogle pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective nodal curve over a separably closed field admits genus many distinct smooth rational points whose effective divisor has vanishing first cohomology and only constant sections",
+   "results": "8 hits: WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.Projective.nonsingularLift_zero, WeierstrassCurve.Projective.Point.nonsingular, WeierstrassCurve.Projective.Nonsingular, WeierstrassCurve.Projective.nonsingularLift_addMap, WeierstrassCurve.Projective.nonsingular_zero, WeierstrassCurve.Projective.Point, WeierstrassCurve.Projective.nonsingular_add",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass equation nonsingularity or analytic meromorphic divisors, not nonspecial divisors on arbitrary projective nodal curves; no relevant hit from the AlgebraicGeometry grep or Loogle pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose distinct rational smooth points on a projective curve giving independent evaluation functionals on all global differentials and a nonspecial degree genus divisor",
+   "results": "8 hits: WeierstrassCurve.Projective.Nonsingular, WeierstrassCurve.Projective.NonsingularLift, WeierstrassCurve.Jacobian.Nonsingular, WeierstrassCurve.Jacobian.NonsingularLift, WeierstrassCurve.Projective.nonsingularLift_zero, WeierstrassCurve.Projective.Point.nonsingular, WeierstrassCurve.Projective.nonsingularLift_addMap, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass equation nonsingularity or analytic meromorphic divisors, not nonspecial divisors on arbitrary projective nodal curves; no relevant hit from the AlgebraicGeometry grep or Loogle pattern."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-picard-etale-schematic",
+  "date": "2026-10-23",
+  "group": "Q117"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Nonspecial divisor in the smooth locus of a nodal curve.",
+   "via": [
+    "lem-sfb-nodal-picard-etale-schematic",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-nonspecial-smooth-divisor",
+  "worker": "stage1",
+  "summary": "Expanded Deligne Lemma 4.4 into seven steps, retaining the separably closed field and distinct-point refinement. Reused existing duality, density, Cartier and degree nodes; no new nodes. Checked each cited statement and all hypotheses, including g=0. No Lean declaration states this result.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Etale-local schematic nodal Picard identity space. Auxiliary input: Nonspecial divisor in the smooth locus of a nodal curve. Realized by the evaluation induction in steps 2--6 and Euler-characteristic assembly in steps 1 and 7. The current latest blueprint direct-image proof (3) is the ancestor route recorded in the inherited provenance; blueprint_refs.py ancestor reports None for this pre-existing chain, which is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic algebraic-geometry input used with its stated hypotheses in the Deligne Lemma 4.4 evaluation argument; the present unit supplies no replacement for this Projective morphisms are proper. This does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-projective-coherent-finiteness",
+    "why": "Generic algebraic-geometry input used with its stated hypotheses in the Deligne Lemma 4.4 evaluation argument; the present unit supplies no replacement for this Coherent cohomology of a projective scheme over a Noetherian ring. This does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic algebraic-geometry input used with its stated hypotheses in the Deligne Lemma 4.4 evaluation argument; the present unit supplies no replacement for this Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme. This does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-h0-geom-connected",
+    "why": "Generic algebraic-geometry input used with its stated hypotheses in the Deligne Lemma 4.4 evaluation argument; the present unit supplies no replacement for this $H^0=k$ is equivalent to geometric connectedness. This does not replace the unit route."
+   },
+   {
+    "node": "lem-pur-geometrically-reduced-dense-smooth-open",
+    "why": "Generic algebraic-geometry input used with its stated hypotheses in the Deligne Lemma 4.4 evaluation argument; the present unit supplies no replacement for this Density of smooth points over an arbitrary field. This does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-rational-points-dense",
+    "why": "Generic algebraic-geometry input used with its stated hypotheses in the Deligne Lemma 4.4 evaluation argument; the present unit supplies no replacement for this Rational points on smooth schemes over separably closed fields. This does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-cartier-criterion",
+    "why": "Generic algebraic-geometry input used with its stated hypotheses in the Deligne Lemma 4.4 evaluation argument; the present unit supplies no replacement for this The Cartier criterion on smooth one-dimensional fibres. This does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-divisor-line-bundle-properties",
+    "why": "Generic algebraic-geometry input used with its stated hypotheses in the Deligne Lemma 4.4 evaluation argument; the present unit supplies no replacement for this Properties of $\\mathcal{O}_X(D)$. This does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-degree-base-change",
+    "why": "Generic algebraic-geometry input used with its stated hypotheses in the Deligne Lemma 4.4 evaluation argument; the present unit supplies no replacement for this Degree: base change and tensor products. This does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-pc-projective-coherent-finiteness",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-pc-h0-geom-connected",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-pc-rational-points-dense",
+  "lem-pc-cartier-criterion",
+  "lem-pc-divisor-line-bundle-properties",
+  "lem-pc-degree-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-af0c9f6c5",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-af0c9f6c5 (reviewer sub-agent of L); spot-checked: I read the item and all 25 cited statements, and verified the Stacks tags and labels (0BS2/0BS3/0BS4, 0E6R, 056U/056V, 0BUG, 02UZ, 0B9D, 0AYY). I read 0AYY in full: it gives deg D = dim Gamma(D,O_D) for proper X of dimension at most 1. The Deligne Lemma 4.4 PDF is not in the local literature: the report files a WANTED line and proof_origin.by is agent, so I checked the proof as a self-contained argument. Step 1: proper, Noetherian, finitely presented, flat; finite coherent cohomology; H^{>=2}=0; H^0(O)=k from properness, geometric reducedness and geometric connectedness. The pure-dimension-one argument (a zero-dimensional component would be a clopen point) is correct. Step 2: the relative Gorenstein node applies to f over Spec k, and the reduced-curve node's uniqueness clause identifies its sheaf with omega_X, so omega_X is invertible with dim Gamma(omega)=g. Step 3: the generic-stalk clause, a principal open, density of the smooth locus and rational-point density over the separably closed field give a rational smooth point P outside T with s(P) nonzero. Step 4: the rank-nullity induction is elementary and correct. Step 5: the Cartier criterion (1)=>(2) applies on U, which is smooth of relative dimension 1, and the degree is g by the degree node's clause 2 as currently stated. Step 6: Hom(M,omega) equals V_g, which is 0, so H^1(M)=0 by duality. Step 7: Euler-characteristic rearrangement plus injectivity of the constants map. Small cases checked: P^1, the nodal cubic, two P^1 meeting twice, a tree of P^1's. The statement is unchanged apart from added definition citations, there are no new nodes, and there is no duplicate in the DAG. No re-split note exists for this item. Batch-5: lem-pc-h0-geom-connected and lem-pc-degree-base-change reach only the definition def-trf-schematically-dense-open; the Gorenstein node reaches the Stacks 0C4E nodal-lci criterion; the reduced-curve node reaches linear algebra of complexes over a field. All are generic and none is a step of the trace formula or Poincare duality, so all are accepted. I accept the nine declared tool_uses. Advisory: the blueprint_update of lem-pc-degree-base-change narrows clause 2 to smooth X; the general form cited here is true (Stacks 0AYY)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalNonspecialSmoothDivisor",
+  "declaration": "AlgebraicGeometry.exists_nodal_nonspecial_smooth_divisor",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalNonspecialSmoothDivisor.lean",
+  "statement": "theorem exists_nodal_nonspecial_smooth_divisor (k : Type u) [Field k] [IsSepClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [Nonempty X] [IsHProjective (X ↘ Spec (.of k))] [GeometricallyReduced (X ↘ Spec (.of k))] [GeometricallyConnected (X ↘ Spec (.of k))] (hdim : topologicalKrullDim X = 1) (hnodal : HasNodalGeometricFibres (X ↘ Spec (.of k))) (g : ℕ) (hg : g = Module.finrank k ((Scheme.Modules.moduleCohomologyOverField k X 1).obj (Scheme.Modules.unit X))) : ∃ J : X.IdealSheafData, J.IsInvertible ∧ (∀ x : J.subscheme, J.subschemeι x ∈ (X ↘ Spec (.of k)).smoothLocus) ∧ J.toModulesᵛ.degree k = (g : ℤ) ∧ Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj J.toModulesᵛ) ∧ Function.Bijective (fun a : k ↦ ((SheafOfModules.homObjSectionsEquiv J.toModules (Scheme.Modules.unit X)).symm (a • J.toModulesι)).1 (op ⊤)) ∧ (∃ e : (∐ fun _ : Fin g ↦ Spec (.of k)) ≅ J.subscheme, e.hom ≫ J.subschemeι ≫ X ↘ Spec (.of k) = Sigma.desc (fun _ : Fin g ↦ 𝟙 (Spec (.of k)))) ∧ (g = 0 → J = ⊤)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10e142911",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_dep records and the Lean declarations they use (HasNodalGeometricFibres, Modules.dual/homObj, homObjSectionsEquiv, homModuleOfOver, Modules.degree/eulerChar, IdealSheafData.IsInvertible, moduleCohomologyOverField). Every hypothesis matches the node and none is stronger (IsSepClosed, IsHProjective, GeometricallyReduced/Connected, Nonempty, dim 1, nodal fibres; g bound by an equation to the module-cohomology H^1). Every conclusion clause matches: IsInvertible ideal, support in the smooth locus, degree = g in the chi convention, H^1 subsingleton, the canonical constants map bijective (1 goes to the ideal inclusion, k acts through globalSectionsRingHom), an iso over k of the divisor with g copies of Spec k (reduced, rational, distinct), g=0 gives J=top. Edge cases g=0, imperfect k and reducible curves are covered; no extra universe restriction. The node copy changes only lean, statement verbatim; docstrings carry the source place, blueprint id and seven proof steps; proof is sorry only; no duplicate found in side/live/Mathlib; all imports exist. No changes, so no compile. Remark only: degree's eulerChar uses abelian-sheaf H while g/H^1 use module cohomology; each is its own node's recorded declaration."
+ }
+}

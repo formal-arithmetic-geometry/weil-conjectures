@@ -3,13 +3,14 @@
 
 A single-file compile of the changed module cannot see its effect on other modules: they still load its old .olean.
 This static check refuses (exit 3) a change that
-  1. removes imports, when some downstream module reached a module only through them and uses a declaration from it;
+  1. removes `public import`s (a plain import is seen by no importer), when some downstream module reached a module
+     only through them and uses a declaration from it;
   2. removes or renames a declaration that a downstream module still uses;
   3. adds a declaration whose global name another module already declares (a module importing both then fails with
      `environment already contains`);
   4. adds an import that closes an import cycle;
-  5. adds a theorem whose statement another module already states word for word (whitespace aside; statements of
-     at least 40 characters), under whatever name: the same fact would then be proved twice.
+  5. (advisory since 2026-10-24, printed to stderr, not refused) adds a theorem whose statement another module
+     already states word for word (whitespace aside; statements of at least 40 characters).
 
 Usage: tools/import_prune_check.py <module> <old file> <new file>      (an empty or missing old file: a new module)
 Exit 0: nothing found. Exit 3: findings printed. Exit 2: usage error.
@@ -72,7 +73,10 @@ def main() -> int:
     old_text = old_f.read_text(errors="ignore") if old_f.is_file() else ""
     new_text = new_f.read_text(errors="ignore") if new_f.is_file() else ""
     old_imports, new_imports = li.imports_of(old_text), li.imports_of(new_text)
-    removed = old_imports - new_imports
+    # 2026-10-24 (the human: why does an import check take hours?): every module is a file of Lean's module system, where
+    # a plain `import X` is seen by no importer; only a removed `public import` can take something away from downstream.
+    # Scanning every downstream module for the names of ~40 removed private imports had taken 3.5 h for one delivery.
+    removed = li.public_imports_of(old_text) - li.public_imports_of(new_text)
     added_imports = new_imports - old_imports
     old_decls, new_decls = li.decls_in_text(old_text), li.decls_in_text(new_text)
     removed_decls = {q for q in old_decls - new_decls if len(q.rsplit(".", 1)[-1]) >= 6}
@@ -106,12 +110,13 @@ def main() -> int:
                        for q, s in new_stmts.items())
         twice = [(q, o) for q, o in twice if o]
         if twice:
-            print(f"{mod} proves statements that the library already states word for word:")
+            # 2026-10-24 (the human: checks never refuse beyond compile, honesty and DAG consistency): a note only.
+            # It had refused 122 of 125 deliveries in two days, among them complete proofs of route modules
+            # (TwoColimit 5/5) whose helpers repeat statements of Sheaf.UpstreamExtra copies or twins.
+            print(f"ADVISORY (not refused): {mod} proves statements that the library already states word for word:",
+                  file=sys.stderr)
             for q, o in twice:
-                print(f"  {q}: same statement as {', '.join(o[:3])}")
-            print("Import and use the existing theorem instead of proving it again, or generalize it in place. If the two "
-                  "texts mean different things through different `variable`s or `open`s, state those binders explicitly.")
-            return 3
+                print(f"  {q}: same statement as {', '.join(o[:3])}", file=sys.stderr)
     if not (removed or removed_decls):
         return 0
 

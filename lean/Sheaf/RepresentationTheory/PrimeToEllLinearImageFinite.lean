@@ -8,9 +8,9 @@ module
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 public import Mathlib.Topology.Algebra.Module.FiniteDimension
-import Sheaf.RepresentationTheory.ProfiniteStableLattice
-import Mathlib.Topology.Algebra.Valued.LocallyCompact
-import Mathlib.GroupTheory.OrderOfElement
+import Sheaf.RepresentationTheory.StableLatticeFiniteMatrixReductions
+import Sheaf.NumberTheory.Padics.CoprimeCongruenceKernelRigidity
+import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Finite image of prime-to-ell linear monodromy
@@ -68,6 +68,58 @@ theorem primeToEll_linear_image_finite
     [TopologicalSpace M] [IsModuleTopology E M]
     (ρ : H →* (M ≃ₗ[E] M)) (_hρ : Continuous (fun p : H × M ↦ ρ p.1 p.2)) :
     Finite ρ.range ∧ Nat.Coprime (Nat.card ρ.range) l := by
-  sorry
+  classical
+  subst tE
+  let := spectralNorm.nontriviallyNormedField ℚ_[l] E
+  have hM := eq_moduleTopology E M
+  have hρ' := _hρ
+  rw [hM] at hρ'
+  obtain ⟨Λ, b, e, A, _, _, _, hA, _, _, hred⟩ :=
+    exists_stable_lattice_finite_matrix_reductions l E H M ρ hρ'
+  let B := coefficientExtensionRepresentationReduction l E H (Module.finrank E M) A
+  have hfinite : ∀ n, 1 ≤ n → Finite (B n).range := by
+    intro n hn
+    obtain ⟨Aₙ, rfl, _, hf, _, _, _⟩ := hred n hn
+    exact hf
+  have hopen : ∀ n, 1 ≤ n → IsOpen ((B n).ker : Set H) := by
+    intro n hn
+    let : TopologicalSpace (Matrix.GeneralLinearGroup (Fin (Module.finrank E M))
+      (coefficientExtensionRing l E n)) := ⊥
+    obtain ⟨Aₙ, rfl, _, _, hc, _, _⟩ := hred n hn
+    exact hc.isOpen_preimage _ (show @IsOpen _ ⊥ {1} from trivial)
+  have hcoprime : ∀ n, 1 ≤ n → Nat.Coprime (Nat.card (B n).range) l := by
+    intro n hn
+    let N : OpenNormalSubgroup H :=
+      { toSubgroup := (B n).ker, isOpen' := hopen n hn }
+    have hc := _hH N
+    rwa [Nat.card_congr (QuotientGroup.quotientKerEquivRange (B n)).toEquiv] at hc
+  have hker : (B 1).ker = A.ker :=
+    (coprime_congruence_kernel_rigidity l E H (Module.finrank E M) A
+      hfinite hcoprime 1 le_rfl).2
+  have hle : (B 1).ker ≤ ρ.ker := by
+    intro g hg
+    have hgA : A g = 1 := by
+      change g ∈ A.ker
+      rwa [← hker]
+    change ρ g = 1
+    apply e.ext'
+    intro j
+    rw [hA, hgA]
+    change ∑ i, (((1 : Matrix _ _ (coefficientExtensionIntegers l E)) i j :
+      coefficientExtensionIntegers l E) : E) • e i = e j
+    simp only [Matrix.one_apply]
+    rw [Finset.sum_eq_single j]
+    · simp
+    · intro i _ hij
+      simp [hij]
+    · simp
+  have hρopen : IsOpen (ρ.ker : Set H) :=
+    Subgroup.isOpen_mono hle (hopen 1 le_rfl)
+  let N : OpenNormalSubgroup H := { toSubgroup := ρ.ker, isOpen' := hρopen }
+  have hfin : Finite (H ⧸ ρ.ker) := ρ.ker.quotient_finite_of_isOpen hρopen
+  refine ⟨Finite.of_equiv (H ⧸ ρ.ker)
+    (QuotientGroup.quotientKerEquivRange ρ).toEquiv, ?_⟩
+  have hc := _hH N
+  rwa [Nat.card_congr (QuotientGroup.quotientKerEquivRange ρ).toEquiv] at hc
 
 end Padic

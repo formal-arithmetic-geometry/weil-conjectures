@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-fpqc-chart-limit-spreading",
+ "kind": "statement",
+ "title": "Open finite-presentation charts of an fpqc form spread along affine limits",
+ "statement": "Let $S$ be an affine scheme [def-pc-scheme]. Let $p:A\\to S$ be a flat surjective quasi-compact morphism with $A$ affine [def-weil-pbc-fpqc-covering], and let $F$ be a contravariant set-valued functor on $S$-schemes satisfying the fpqc covering equalizer condition. Suppose $F_A$ is represented by an $A$-scheme $P$ quasi-separated and locally of finite presentation [def-pc-representable-functor, def-sbc-locally-finite-presentation, def-weil-quasi-separated-morphism]. Let $I$ be a small nonempty directed set and $(T_i)$ an inverse system of affine $S$-schemes with limit $T$ [def-weil-pbc-category-colimit], with its specified projections [def-weil-pbc-category-colimit]. Suppose $F_T$ is represented by a scheme $Y$. Let $V\\subseteq Y$ be an open subscheme [def-weil-open-immersion] of finite presentation over $T$, meaning locally of finite presentation, quasi-compact and quasi-separated [def-weil-quasi-separated-morphism]. There are $i\\in I$, a $T_i$-scheme $V_i$ of finite presentation, and a map of fpqc sheaves $h_{V_i}\\to F_{T_i}$ which is a representable open immersion: its pullback along every map $h_H\\to F_{T_i}$ from a scheme is represented by an open subscheme of $H$. Its base change to $T$ is the specified inclusion $h_V\\subseteq F_T$, through an isomorphism $V_i\\times_{T_i}T\\simeq V$. If $V$ is quasi-affine, meaning isomorphic to a quasi-compact open subscheme of an affine scheme, $V_i$ may also be chosen quasi-affine. No representability of $F_{T_i}$ is assumed.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Raynaud, Un critere d effectivite de descente, Theorem 4.1 proof, reductions 3 and 4, printed pp.5-19--5-20. Primary scan read at https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf; local archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [thm-pd-spreading-out](1) to $V\\to T$. The affine stages are qcqs by [lem-weil-pbc-affine-scheme-qcqs], and their transition maps, being maps of affine schemes, are affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Obtain $i_0$, a finitely presented $T_{i_0}$-scheme $V_{i_0}$, and a specified isomorphism $V_{i_0}\\times_{T_{i_0}}T\\simeq V$. For $j\\ge i_0$ put $V_j=V_{i_0}\\times_{T_{i_0}}T_j$. These schemes are qcqs by [lem-weil-pbc-qcqs-morphism-permanence]; their transition maps are affine and their limit is $V$ by [lem-weil-pbc-limit-fibre-products].",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-limit-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), Tag 0EUU (lemma-descend-open-immersion), Tag 01Z5 (lemma-limit-quasi-affine); Raynaud Theorem 4.1, reduction 3, after the separatedness reduction 2."
+   }
+  },
+  {
+   "text": "Under the functor-of-points interpretation, the given inclusion $h_V\\to F_T$ gives a section $v\\in F(V)$: evaluate on $1_V$. Conversely a section gives a natural transformation by restriction along each map to $V$. Apply [lem-sfb-fpqc-form-qcqs-limit-continuity] to the system $V_j$. After enlarging $i_0$ obtain $v_i\\in F(V_i)$ restricting to $v$, hence a map $h_{V_i}\\to F_{T_i}$, where the prescribed $T_i$-coordinate is retained. Base change identifies this map with the specified inclusion, not merely an abstract isomorphic chart.",
+   "uses": [
+    "lem-sfb-fpqc-form-qcqs-limit-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), Tag 0EUU (lemma-descend-open-immersion), Tag 01Z5 (lemma-limit-quasi-affine); Raynaud Theorem 4.1, reduction 3, after the separatedness reduction 2."
+   }
+  },
+  {
+   "text": "Put $B_j=A\\times_ST_j$, $B=A\\times_ST$ and $W_j=A\\times_SV_j$. The $B_j$ are affine by [lem-weil-pbc-fibre-product-affine-spectra], and $W_j$ is finitely presented over $B_j$ by [lem-weil-pbc-qcqs-morphism-permanence]; these are affine-transition systems with the displayed limits by [lem-weil-pbc-limit-fibre-products]. The section $v_i$ gives a scheme map $a_i:W_i\\to P\\times_AB_i$. Its limit is the base change of $V\\hookrightarrow Y$, hence an open immersion. The source $W_i$ is quasi-compact. Cover its image in $P$ by finitely many affine opens and let $P_0$ be their union. Then $a_i$ factors through $P_0\\times_AB_i$. Since $P/A$ is quasi-separated and $A$ affine, $P$ is quasi-separated; the open $P_0$ is qcqs. Local finite presentation restricts to this open, so $P_0/A$ is finitely presented. Thus both $W_i$ and $P_0\\times_AB_i$ are qcqs.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-limit-fibre-products",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), Tag 0EUU (lemma-descend-open-immersion), Tag 01Z5 (lemma-limit-quasi-affine); Raynaud Theorem 4.1, reduction 3, after the separatedness reduction 2."
+   }
+  },
+  {
+   "text": "The map $W_i\\to P_0\\times_AB_i$ is locally of finite presentation. Here is the elementary affine verification from [def-sbc-locally-finite-presentation]: for affine charts over $\\operatorname{Spec}R\\subset B_i$, their rings $C,D$ are finitely presented over $R$. Write $C=R[t_1,\\ldots,t_n]/(r_1,\\ldots,r_m)$, $D=R[u_1,\\ldots,u_e]/(s_1,\\ldots,s_f)$, and choose polynomials $q_l(t)$ for the images of $u_l$ in $C$. The given $D$-algebra $C$ has finite presentation $D[t_1,\\ldots,t_n]/(r_1,\\ldots,r_m,u_1-q_1,\\ldots,u_e-q_e)$. Its identification with $C$ follows by eliminating the $u_l$; each $s_b(q)$ vanishes modulo the $r_a$. These charts establish the assertion.",
+   "uses": [
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), Tag 0EUU (lemma-descend-open-immersion), Tag 01Z5 (lemma-limit-quasi-affine); Raynaud Theorem 4.1, reduction 3, after the separatedness reduction 2."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-descend-open-immersion-qcqs] over the affine system $B_j$, on the tail starting at $i$. Step 3 supplies qcqs sources and targets, step 4 local finite presentation, and the limiting map is an open immersion by step 3. For some $j\\ge i$ the map $W_j\\to P_0\\times_AB_j$ is an open immersion. Its composite into $P\\times_AB_j$ is therefore an open immersion too. Replace $i,V_i,v_i$ by this $j,V_j,v_j$.",
+   "uses": [
+    "lem-weil-pbc-descend-open-immersion-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), Tag 0EUU (lemma-descend-open-immersion), Tag 01Z5 (lemma-limit-quasi-affine); Raynaud Theorem 4.1, reduction 3, after the separatedness reduction 2."
+   }
+  },
+  {
+   "text": "For any $T_i$-scheme $H$ and section $h\\in F(H)$, put $H_A=H\\times_SA$. The pullback of $h_{V_i}\\to F_{T_i}$ on $H_A$ is represented by an open $E'\\subset H_A$, since its further description is the scheme pullback of the open immersion $W_i\\to P\\times_AB_i$ along the section $H_A\\to P\\times_AB_i$. On $H_A\\times_HH_A$ the two opens agree: on every test they both express the equality between the prescribed $F$-section and the section from $V_i$, with its $T_i$-coordinate. The cover $H_A\\to H$ is fpqc by [lem-weil-pbc-fpqc-covering-axioms]. Hence [lem-weil-pbc-open-subscheme-fpqc-descent] gives an open $E\\subset H$. It represents the original pullback: for every $K\\to H$, a lift $K\\to V_i$ implies $K_A\\to H_A$ lands in $E'$. Conversely, if $K\\to H$ lands in $E$, the unique local lift $K_A\\to V_i$ has equal restrictions to the double overlap, because $W_i\\to P\\times_AB_i$ is a monomorphism. By [lem-weil-pbc-fpqc-representable-descent] it descends uniquely to $K\\to V_i$ over $T_i$. The equality of its section with $h|_K$ holds after the fpqc cover and therefore on $K$, by the equalizer condition on $F$. These inverse constructions are natural. Thus $h_{V_i}\\to F_{T_i}$ is a representable open immersion.",
+   "uses": [
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0 (lemma-open-fpqc-covering), Tag 023Q (lemma-fpqc-universal-effective-epimorphisms); applied to the explicit pullback subfunctor."
+   }
+  },
+  {
+   "text": "If $V$ is quasi-affine, apply [lem-sfb-limit-quasi-affine-eventual] to the qcqs affine-transition system $V_j$ on the present tail. Its limit is the specified $V$, so a later $V_j$ is quasi-affine. Replace the chart by that base change. Its finite presentation persists by [lem-weil-pbc-qcqs-morphism-permanence]. Its representable open-immersion property persists directly: a scheme test at $T_j$ is also one at $T_i$, and its pullback is the same open with the fixed $T_j$-coordinate. The specified isomorphism and inclusion at $T$ persist as well.",
+   "uses": [
+    "lem-sfb-limit-quasi-affine-eventual",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZM (lemma-descend-finite-presentation), Tag 0EUU (lemma-descend-open-immersion), Tag 01Z5 (lemma-limit-quasi-affine); Raynaud Theorem 4.1, reduction 3, after the separatedness reduction 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-quasi-separated-morphism",
+  "lem-sfb-fpqc-form-qcqs-limit-continuity",
+  "lem-sfb-limit-quasi-affine-eventual",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Raynaud Theorem 4.1 reduction 3 after reduction 2, expanded using Tags 01ZM, 0EUU, 03N0 and 01Z5, with the missing quasi-separatedness hypothesis restored."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf represented locally by a locally finitely presented scheme commutes with filtered colimits of rings",
+   "results": "{\"t\": \"2026-10-24T14:40:38Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf represented locally by a locally finitely presented scheme commutes with filtered colimits of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"preservesFilteredColimits_coyoneda\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"CommRingCat.preservesFilteredColimits_coyoneda\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\"], \"digest\": \"ff6c03c46bbb462c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-target map factorization and descent of compact opens do not spread open charts into an fpqc sheaf whose stage restrictions need not be schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an fpqc sheaf of sets locally represented by a locally finitely presented scheme, quasi-compact open scheme charts descend along affine inverse limits",
+   "results": "{\"t\": \"2026-10-24T14:47:52Z\", \"tool\": \"leanfinder\", \"query\": \"For an fpqc sheaf of sets locally represented by a locally finitely presented scheme, quasi-compact open scheme charts descend along affine inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\"], \"digest\": \"90d3f9e764ec983d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-target map factorization and descent of compact opens do not spread open charts into an fpqc sheaf whose stage restrictions need not be schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*limit|limit.*fpqc|descent.*limit|limit.*descent",
+   "results": "{\"t\": \"2026-10-24T14:50:32Z\", \"tool\": \"grep\", \"query\": \"fpqc.*limit|limit.*fpqc|descent.*limit|limit.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-target map factorization and descent of compact opens do not spread open charts into an fpqc sheaf whose stage restrictions need not be schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi-compact finitely presented open scheme charts of locally finitely presented fpqc sheaves descend along affine inverse limits",
+   "results": "{\"t\": \"2026-10-24T14:50:33Z\", \"tool\": \"leansearch\", \"query\": \"Quasi-compact finitely presented open scheme charts of locally finitely presented fpqc sheaves descend along affine inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"f8cea1b3da177845\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-target map factorization and descent of compact opens do not spread open charts into an fpqc sheaf whose stage restrictions need not be schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsOpenImmersion",
+   "results": "{\"t\": \"2026-10-24T14:50:33Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsOpenImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.preimage_smoothLocus_eq\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\"], \"digest\": \"3f741c2292e3ba86\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-target map factorization and descent of compact opens do not spread open charts into an fpqc sheaf whose stage restrictions need not be schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "represent.*limit|limit.*represent",
+   "results": "{\"t\": \"2026-10-24T14:58:13Z\", \"tool\": \"grep\", \"query\": \"represent.*limit|limit.*represent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme-target map factorization and descent of compact opens do not spread open charts into an fpqc sheaf whose stage restrictions need not be schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-24T15:45:03Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Hom.preimage_smoothLocus_eq\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\"], \"digest\": \"3f741c2292e3ba86\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations do not state continuity for fpqc forms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open finitely presented scheme charts into an fpqc locally representable functor descend along inverse limits of affine schemes",
+   "results": "{\"t\": \"2026-10-24T15:45:04Z\", \"tool\": \"leanfinder\", \"query\": \"Open finitely presented scheme charts into an fpqc locally representable functor descend along inverse limits of affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\"], \"digest\": \"d70bf53ef062b4d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Hom factorization/equality or categorical limit preservation is only an input, not continuity of a merely fpqc-locally represented sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*limit|limit.*fpqc|descend.*[Oo]pen|[Oo]pen.*descend",
+   "results": "{\"t\": \"2026-10-24T15:47:36Z\", \"tool\": \"grep\", \"query\": \"fpqc.*limit|limit.*fpqc|descend.*[Oo]pen|[Oo]pen.*descend\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"e01b218eaf00f0b5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Hom factorization/equality or categorical limit preservation is only an input, not continuity of a merely fpqc-locally represented sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open subschemes of finite presentation of fpqc forms descend to a finite stage of an affine inverse limit",
+   "results": "{\"t\": \"2026-10-24T15:47:37Z\", \"tool\": \"leansearch\", \"query\": \"Open subschemes of finite presentation of fpqc forms descend to a finite stage of an affine inverse limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"AlgebraicGeometry.isBasis_preimage_isAffineOpen\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.AffineScheme.hasLimits\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\"], \"digest\": \"d3fb3d2065811154\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme Hom factorization/equality or categorical limit preservation is only an input, not continuity of a merely fpqc-locally represented sheaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-orbit-finite-diagram-approximation",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent branch; Raynaud Theorem 4.1 finite-diagram reductions, below lem-sfb-integral-descent-invariant-quasiaffine-charts. Reduction 3: descending the chosen finite-presentation open and its map into the fpqc sheaf.",
+   "via": [
+    "lem-sfb-integral-orbit-finite-diagram-approximation",
+    "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fpqc-chart-limit-spreading",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported unrestricted chart-spreading claim is false for two affine schemes glued along a non-quasi-compact open. Restore quasi-separatedness of the local representing P/A, available after Raynaud reduction 2; give the counterexample and affected caller in the report. One new statement-only continuity node; reuse all scheme approximation, eventual openness, open descent and quasi-affine leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent branch; Raynaud Theorem 4.1 finite-diagram reductions, below lem-sfb-integral-descent-invariant-quasiaffine-charts. Reduction 3: descending the chosen finite-presentation open and its map into the fpqc sheaf. Steps 1-2 realize reduction 3 object/map approximation, steps 3-6 its eventual open-immersion check after the fpqc cover, step 7 the quasi-affine version.",
+  "tool_uses": [
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic finite-presentation object approximation, exactly the EGA IV 8 passage used by Raynaud; not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic qcqs and finite-presentation base-change bookkeeping for scheme models."
+   },
+   {
+    "node": "lem-weil-pbc-limit-fibre-products",
+    "why": "Identifies the base-changed model systems and their limits."
+   },
+   {
+    "node": "lem-weil-pbc-descend-open-immersion-qcqs",
+    "why": "Generic eventual openness for qcqs scheme models, the openness test used in Raynaud reduction 3."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "The fixed fpqc cover stays a cover on every scheme test."
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Descends the open subscheme on a scheme test without assuming the target functor represented."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Descends unique local lifts to the model scheme in the testwise representability check."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-limit-fibre-products",
+  "lem-weil-pbc-descend-open-immersion-qcqs",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-7e7ff99b0",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-7e7ff99b0 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new node and every cited statement in full. (1) The statement correction (E7) is right: the old statement, with P only locally of finite presentation, is false. I checked the counterexample. Take R=k[x_1,x_2,...], glue two copies of Spec R along the complement of the origin (which is not quasi-compact), set F=h_P, A=S, T_i=Spec R/(x_1..x_i), T=Spec k, V=P_T (two points). Any chart V_i is open in P_{T_i} and contains both origins. In V_i the two affine neighbourhoods D(f) and D(g) meet in D(fg)∩U, which is not quasi-compact, so V_i is not quasi-separated. The added hypothesis 'P quasi-separated' is Raynaud's reduction 2, which comes before reduction 3. (2) Steps. Step 1: thm-pd-spreading-out(1) and the permanence/limit-fibre-products nodes. Step 2: the new continuity node applied to the qcqs system V_j, with the Yoneda direction written out. Step 3: P_0, a finite affine cover of the image of W_i, is qcqs and finitely presented because P is quasi-separated. Step 4: the presentation D[t]/(r,u-q)≅C holds, since s(q)=0 in C, and the step really is elementary. Step 5: 0EUU (descend-open-immersion-qcqs) with every hypothesis met. Step 6: E' = H_A ×_{P×B_i} W_i, the two pullbacks are equal, then 03N0 open descent, the monomorphism lift, representable descent, and injectivity of the equalizer. Step 7: 01Z5 eventual quasi-affineness, and the open-immersion property persists under base change. All steps are correct. (3) New node lem-sfb-fpqc-form-qcqs-limit-continuity is true: F(Z_i) is the equalizer of Hom_A(Z_{i,A},P) and Hom_{A_2}(Z_{i,A_2},P_2), and Stacks 01ZC(3) (limits.tex l.1285, no qcqs condition on X) applies because filtered colimits commute with equalizers. I checked the identity-cover, empty and singleton cases. It is statement-only, self-contained, and has three search kinds. rg -L over the DAG for 01ZC and fpqc together with limits finds no duplicate: the scheme lfp criterion takes affine tests only, map-equality is equality only, and representation-spreading needs separated, finitely presented P. It does not restate the item. (4) The tool_uses are generic: spreading-out, limit-fibre-products, descend-open-immersion-qcqs and open-subscheme descent; I accept them. No SGA source is used. FIX, three small faults: step 1 now cites lem-weil-pbc-morphism-affine-schemes-affine for the affine transitions of T_i; step 3 now cites lem-weil-pbc-fibre-product-affine-spectra for B_j affine; the step 6 source tag 02W0, which is refine-coverings-fully-faithful, is corrected to 023Q (fpqc-universal-effective-epimorphisms); proof_deps recomputed. FLAG for maintainer/HUMAN: the reviewed citer lem-sfb-integral-orbit-finite-diagram-approximation, step 1, applies this lemma without P/A quasi-separated. It needs Raynaud's reduction 2 first (a quasi-separated open subfunctor containing x) or another repair. The delivery records this in its report and does not edit the citer.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcChartLimitSpreading",
+  "declaration": "AlgebraicGeometry.exists_fpqc_chart_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcChartLimitSpreading.lean",
+  "statement": "theorem exists_fpqc_chart_of_isLimit (S A : Scheme.{u}) [IsAffine S] [IsAffine A] (p : A ⟶ S) [Flat p] [Surjective p] [QuasiCompact p] (F : (Over S)ᵒᵖ ⥤ Type (max u v)) (hF : Presheaf.IsSheaf (Scheme.fpqcTopology.over S) F) (P : Over A) (hP : Nonempty (((Over.map p).op ⋙ F).RepresentableBy P)) [QuasiSeparated P.hom] [LocallyOfFinitePresentation P.hom] (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) [∀ i : Iᵒᵖ, IsAffine (D.obj i).left] (c : Cone D) (hc : IsLimit c) (Y : Over c.pt.left) (hY : ((Over.map c.pt.hom).op ⋙ F).RepresentableBy Y) (V : Over c.pt.left) (j : V ⟶ Y) [IsOpenImmersion j.left] [LocallyOfFinitePresentation V.hom] [QuasiCompact V.hom] [QuasiSeparated V.hom] : ∃ (i : I) (Vi : Over (D.obj (op i)).left) (α : uliftYoneda.{v}.obj Vi ⟶ (Over.map (D.obj (op i)).hom).op ⋙ F) (g : (Over.map c.pt.hom).obj V ⟶ (Over.map (D.obj (op i)).hom).obj Vi), LocallyOfFinitePresentation Vi.hom ∧ QuasiCompact Vi.hom ∧ QuasiSeparated Vi.hom ∧ (MorphismProperty.over (@IsOpenImmersion)).relative uliftYoneda.{v} α ∧ IsPullback g.left V.hom Vi.hom (c.π.app (op i)).left ∧ F.map g.op (uliftYonedaEquiv.{v} (F := (Over.map (D.obj (op i)).hom).op ⋙ F) α) = hY.homEquiv j ∧ (V.left.IsQuasiAffine → Vi.left.IsQuasiAffine)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77adb3a8c",
+  "group": "NA",
+  "result": "pass",
+  "note": "Only the module (one sorried theorem, no defs), the node's lean record (node otherwise unchanged vs side-live) and the report changed. Every clause matches the node: affine S/A; flat surjective qc p; fpqc sheaf F on Over S (Type (max u v)); RepresentableBy P with QuasiSeparated+LocallyOfFinitePresentation P.hom; directed nonempty I : Type u with affine D : Iᵒᵖ ⥤ Over S and IsLimit c; explicit hY; open j : V ⟶ Y with V/T lfp+qc+qs. Conclusion: ∃ i Vi α g with Vi fp, MorphismProperty.over IsOpenImmersion relative uliftYoneda α (Mathlib relative, same idiom as upstream Representability.lean:601), IsPullback square for Vi×T≅V, section equality F.map g.op (uliftYonedaEquiv α) = hY.homEquiv j (types checked), quasi-affine implication (Mathlib IsQuasiAffine = qc open in Spec Γ). No extra assumptions; universes bound; edge cases ok; stmt_dep lean records read; no name collision; proof-dep imports exist; docstrings carry source place, blueprint tag and 7 proof steps; lean.statement verbatim. No compile (no file changed). Advisory: stage-1 FLAG on citer lem-sfb-integral-orbit-finite-diagram-approximation (missing P/A quasi-separated) remains outside this delivery."
+ }
+}

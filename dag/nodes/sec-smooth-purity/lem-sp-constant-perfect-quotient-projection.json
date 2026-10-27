@@ -59,35 +59,63 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded finite-projective A-resolution of A/I^(n+1). Exact constant module realization preserves its augmentation quasi-isomorphism and finite-free retractions. Scalar tensor cancellation identifies finite evaluated reduction with total tensor by that resolution on flat K-flat complexes. The reduction counit fixes this comparison; the normalization of reductionPullIso fixes its compatibility with inverse image.",
+   "text": "Choose a bounded finite-projective scalar resolution using d.quotientPerfect, realize its derived isomorphism by an actual augmentation using K-projective lifting, and apply the exact constant-module functor. Finite projective modules are retracts of finite free modules, and constant realization preserves the splittings and finite support. proEtaleStrictPerfect_flat gives a flat K-flat representative F of the constant quotient. These are the existing scalarResolution, constantFiniteRetract and constantResolution helpers.",
    "uses": [
-    "def-sp-constant-reduction-models",
     "def-pc-perfect-ring-complex",
     "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "def-weil-pbc-projection-formula-arrows"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula)."
+   }
   },
   {
-   "text": "Choose a K-injective representative J of K. Tensor by the bounded finite-projective coefficient preserves K-injectives. The derived-adjunction counit factorization computes the specified finite mate as localization of tensorAdjunctionTotal, through the normalized comparisons from the first step. Finite-free terms give the finite-product projection isomorphism; inclusions and retractions give the finite-projective inverse. Bounded signed totalization gives a chain inverse. Localization preserves both inverse identities, proving invertibility for the one fixed quotient. No tower conservativity is used in this finite theorem.",
+   "text": "Apply the tensor interpretation and pullback-square lemma to this F and its actual augmentation. Obtain tensor models a,b and natural isomorphisms eV,eU. No inverse to the projection is part of this comparison lemma.",
    "uses": [
-    "def-weil-pbc-projection-formula-arrows",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "lem-sp-constant-quotient-tensor-comparison"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula)."
+   }
+  },
+  {
+   "text": "Choose a K-injective representative of the arbitrary unbounded K. The signed projection-resolution normalization supplies an explicit inverse and both inverse identities for the tensor projection at QF. Hence that tensor projection is invertible.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-signed-projection-resolution-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula)."
+   }
+  },
+  {
+   "text": "Transpose under the derived adjunction. The specified reduction mate satisfies the mate-counit identity. The tensor projection satisfies the projection-counit identity. Substitute the pullback square and naturality of eU; injectivity of the adjunction bijection gives eV_(Rf*K) followed by tensor projection equals the original quotientProjection_K followed by Rf*(eU_K). The former and the final factor are invertible; cancel the final factor to conclude invertibility of the original mate, with its statement unchanged.",
+   "uses": [
+    "def-sp-constant-quotient-projection",
+    "def-weil-pbc-projection-formula-arrows",
+    "lem-sp-constant-quotient-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 07A4 (derived localization and tensor), 099M (derived adic reduction), and 0B56 (the canonical tensor/pullback square preceding lemma-projection-formula)."
+   }
   }
  ],
  "proof_deps": [
-  "def-sp-constant-reduction-models",
   "def-pc-perfect-ring-complex",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "def-weil-pbc-projection-formula-arrows",
+  "lem-sp-constant-quotient-tensor-comparison",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-pc-pre-derived-adjoint-functors-general"
+  "lem-weil-pbc-signed-projection-resolution-normalization",
+  "def-sp-constant-quotient-projection"
  ],
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
@@ -96,9 +124,9 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Original-site constant coefficient specialization of Tags 0B56 and 0944, with the existing counit-normalized reduction model.",
-  "group": "B3",
-  "date": "2026-10-21"
+  "place": "Bounded constant quotient resolution, tensor comparison, existing signed-total inverse, and an explicit mate-conjugation calculation.",
+  "group": "F6",
+  "date": "2026-10-25"
  },
  "lean": {
   "existing": false,
@@ -124,13 +152,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "F6",
   "result": "pass",
-  "landing": "20261021T151106-L-1123595",
+  "landing": "20261025T122905-L-1816307",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

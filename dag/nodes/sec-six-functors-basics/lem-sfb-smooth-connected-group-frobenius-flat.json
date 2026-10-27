@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-smooth-connected-group-frobenius-flat",
+ "kind": "statement",
+ "title": "Finite faithfully flat relative Frobenius of a smooth connected affine group",
+ "statement": "Let $k$ be an algebraically closed field of prime characteristic $p>0$ [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. For $r\\geq1$ put $q=p^r$, $C=k[G]$ and $G^{(q)}=\\operatorname{Spec}(C\\otimes_{k,a\\mapsto a^q}k)$ [def-weil-affine-spectrum, def-weil-pbc-module-tensor-product], with the base-changed group operations. The $k$-algebra map $C\\otimes_{k,a\\mapsto a^q}k\\to C$, $c\\otimes a\\mapsto ac^q$, defines a group-scheme homomorphism $F^r_{G/k}:G\\to G^{(q)}$. This homomorphism is finite [def-weil-finite-integral-morphism], faithfully flat (flat [def-weil-flat-morphism] and surjective), and locally of finite presentation [def-sbc-locally-finite-presentation]. In particular it is a quasi-compact fppf covering: a surjective flat locally finitely presented morphism. The group $G$ need not be reductive or commutative; the trivial group and $p=2$ are included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "2.26--2.28 and Proposition 2.29, printed pp.47--49 (relative Frobenius, its iterates and the faithfully flat isogeny for smooth connected groups); literature/stacks-project/varieties.tex, Tag 0CCD (lemma-relative-frobenius-finite) and Tag 0CCG (remark-n-fold-relative-frobenius), for finiteness. Local finite presentation is automatic for these finite-type morphisms between finite-type schemes over a field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-absolute-frobenius-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\sigma(a)=a^q$ and $D=C\\otimes_{k,\\sigma}k$. By [lem-pc-affine-finite-type-algebra], choose algebra generators $x_1,\\ldots,x_t$ of $C$ over $k$. Then $x_i\\otimes1$ generate $D$ over its second-factor copy of $k$: expand $c$ as a polynomial in the $x_i$ and use $(bc)\\otimes a=c\\otimes b^qa$. Thus both algebras are finitely generated. By [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}D$ is precisely the base change of $G$ along $\\operatorname{Spec}\\sigma$, with the stated $k$-structure. By [sbc-lem-smooth-geometrically-reduced], the unique fibre of the smooth map $G\\to\\operatorname{Spec}k$, namely $G$, is reduced. Hence $C$ is reduced by [lem-weil-pbc-affine-scheme-reduced-iff].",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal; Milne 2.24--2.26, printed pp.46--47; Stacks Tag 01I4, lemma-fibre-product-affine-schemes"
+   }
+  },
+  {
+   "text": "Every $a\\in k$ has a unique $q$th root: existence follows from algebraic closedness applied to $T^q-a$, and uniqueness from $(u-v)^q=u^q-v^q$ in characteristic $p$. Let $\\beta=\\sigma^{-1}$. It is a ring automorphism. The map $\\theta:D\\to C$, $c\\otimes a\\mapsto c\\beta(a)$, is a ring isomorphism with inverse $c\\mapsto c\\otimes1$: it respects the balancing relation since $\\beta(b^qa)=b\\beta(a)$, and $c\\beta(a)\\otimes1=c\\otimes a$. These formulas also verify multiplicativity. In particular $D$ is reduced. The formula $\\varphi(c\\otimes a)=ac^q$ is additive, multiplicative, balanced and $k$-linear for the second-factor structure, and $\\varphi(z)=\\theta(z)^q$ for every finite tensor sum $z$. If $\\varphi(z)=0$, reducedness of $C$ gives $\\theta(z)=0$ and then $z=0$. Thus $\\varphi$ is injective. These calculations use the tensor relations and universal property in [lem-weil-pbc-algebra-tensor-pushout-universal-property], applied to $k$ with its two indicated structure maps; $\\theta$ is a ring isomorphism, not asserted to preserve the second-factor $k$-structure.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.24--2.26, printed pp.46--47; proof of Proposition 2.29, printed p.49: the field Frobenius is an isomorphism"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-affine-group-coordinate-hopf] for the coordinate Hopf maps $\\Delta,\\epsilon,S$ of $C$. Their base changes give the Hopf operations on $D$. If $\\Delta(c)=\\sum_j u_j\\otimes v_j$, then $\\Delta_D(c\\otimes a)=\\sum_j(u_j\\otimes1)\\otimes_k(v_j\\otimes a)$. Therefore $(\\varphi\\otimes\\varphi)\\Delta_D(c\\otimes a)=a\\sum_j u_j^q\\otimes v_j^q=\\Delta(ac^q)$. Likewise $\\epsilon_D(c\\otimes a)=a\\epsilon(c)^q=\\epsilon(\\varphi(c\\otimes a))$ and $\\varphi S_D(c\\otimes a)=aS(c)^q=S\\varphi(c\\otimes a)$. Hence $\\varphi$ preserves all Hopf maps. By [lem-sfb-hopf-spectrum-functor], $\\operatorname{Spec}\\varphi:G\\to\\operatorname{Spec}D$ is a group-scheme homomorphism for the base-changed group law.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-sfb-hopf-spectrum-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "2.27(a),(b) and 2.28, printed p.48; Hopf-coordinate expansion of the functoriality and product diagrams"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reduced-target-dominant-group-flatness] to $A=D$, $B=C$ and $i=\\varphi$. Its field is our algebraically closed $k$; both algebras are finitely generated by Step 1, $D$ is reduced by Step 2, and $\\varphi$ is an injective Hopf homomorphism by Steps 2--3. Consequently $C$ is faithfully flat over $D$ through $\\varphi$. This is exactly the reduced-target dominant-homomorphism argument in the source, in affine coordinates; it assumes neither commutativity of the group law nor reductivity.",
+   "uses": [
+    "lem-sfb-reduced-target-dominant-group-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 1.69 and Proposition 1.70, summarized in 1.71, printed p.28; Proposition 2.29, proof on printed p.49"
+   }
+  },
+  {
+   "text": "The morphism of Step 3 is the $r$-fold relative Frobenius: composing its ring map with $c\\mapsto c\\otimes1$ gives $c\\mapsto c^q$, and with $a\\mapsto1\\otimes a$ gives the structure map of $C$. Under the affine fibre-product identification of Step 1 these are exactly the defining two projections of the relative Frobenius in [lem-trf-relative-frobenius-finite]. Since $G\\to\\operatorname{Spec}k$ is of finite type, hence locally of finite type, apply that node with $S=\\operatorname{Spec}k$, $X=G$ and $n=r$ to obtain finiteness of $F^r_{G/k}$. The characteristic condition holds because $C$ is a $k$-algebra and $p=0$ in $k$.",
+   "uses": [
+    "lem-trf-relative-frobenius-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCD, lemma-relative-frobenius-finite; Tag 0CCG, remark-n-fold-relative-frobenius"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-faithfully-flat-surjective-spectrum], Step 4 makes $\\operatorname{Spec}\\varphi$ surjective. To verify scheme flatness explicitly, faithful flatness implies flatness by [def-weil-pbc-faithfully-flat-ring-map]. For $\\mathfrak q\\in\\operatorname{Spec}C$ and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, localization of $C$-modules is exact by [lem-weil-pbc-localization-module-exact]; hence $C_{\\mathfrak q}$ is flat over $D$: tensor an injection with $C$ and localize it, using the fraction identification $(N\\otimes_D C)_{\\mathfrak q}=N\\otimes_D C_{\\mathfrak q}$. This identification sends $(n\\otimes c)/s$ to $n\\otimes(c/s)$, with the evident inverse. Now [lem-weil-pbc-flat-over-localization] makes $C_{\\mathfrak q}$ flat over $D_{\\mathfrak p}$. By [lem-weil-pbc-spec-domain-stalks-function-field](1), these are the local rings. The stalk map sends $a/t$ to $\\varphi(a)/\\varphi(t)$ because its composite with the germ map of $D$ sends $a$ to the germ of $\\varphi(a)$; the fraction formula is forced since denominators are units. Thus $F^r_{G/k}$ is flat at every point by [def-weil-flat-morphism].",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-flat-over-localization",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HB (definition-flat), 00CS (proposition-localization-exact), 00HT (lemma-flat-localization), and 00HQ (lemma-ff-rings); passage to stalks of affine schemes"
+   }
+  },
+  {
+   "text": "By [lem-wf-affine-noetherian-components], the finitely generated $k$-algebra $D$ is Noetherian. The single affine chart $\\operatorname{Spec}D$ therefore makes $G^{(q)}$ locally Noetherian by [pqf-def-locnoeth]. Finiteness from Step 5 and [pqf-lem-finite-fp-locnoeth] give finite presentation, in particular local finite presentation as in [def-sbc-locally-finite-presentation]. Finiteness also includes affineness by [def-weil-finite-integral-morphism], so [lem-weil-pbc-affine-morphism-permanence](3) gives quasi-compactness. Together with Step 6 this is the required quasi-compact fppf covering. For the trivial group, $C=k$ and the same formulas give an isomorphism; for $p=2$ every displayed Frobenius identity still holds. No step uses reductivity, commutativity, or a positive group dimension.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "pqf-def-locnoeth",
+    "pqf-lem-finite-fp-locnoeth",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 00FN (Algebra, lemma-Noetherian-permanence), 01OV (Properties, definition-locally-Noetherian), 01TX (lemma-noetherian-finite-type-finite-presentation); affine morphism permanence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-hopf-spectrum-functor",
+  "lem-sfb-reduced-target-dominant-group-flatness",
+  "lem-trf-relative-frobenius-finite",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-flat-over-localization",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-wf-affine-noetherian-components",
+  "pqf-def-locnoeth",
+  "pqf-lem-finite-fp-locnoeth",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "2.24--2.29, printed pp.46--49, especially the reduced-target dominance argument of Proposition 2.29 and Summary 1.71, printed p.28; finite-presentation supplement from Stacks 01TX"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"relativeFrobenius\", \"Flat\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ring/perfect-field Frobenius facts and smooth-algebra flatness do not assert finite faithful flatness of relative Frobenius on smooth connected affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative Frobenius of a smooth scheme of finite type over a perfect field of positive characteristic is finite faithfully flat",
+   "results": "OK 8 hits: Algebra.FormallySmooth.of_perfectField, Algebra.Smooth.exists_finiteType, Algebra.Smooth.flat, Algebra.Smooth.exists_subalgebra_finiteType, surjective_frobenius, bijective_frobenius, PerfectionMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ring/perfect-field Frobenius facts and smooth-algebra flatness do not assert finite faithful flatness of relative Frobenius on smooth connected affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|frobenius.*[Ff]lat|Frobenius.*[Ff]lat",
+   "results": "OK 0 hits: ; source subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ring/perfect-field Frobenius facts and smooth-algebra flatness do not assert finite faithful flatness of relative Frobenius on smooth connected affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Frobenius homomorphism of a smooth connected affine algebraic group is finite and faithfully flat",
+   "results": "OK 8 hits: RingHom.FaithfullyFlat, FiniteField.frobeniusAlgHom_apply, LinearMap.frobenius, FiniteField.Extension.frob, frobenius, RingHom.Flat, FiniteField.frobeniusAlgHom, AlgebraicGeometry.IsFinite.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ring/perfect-field Frobenius facts and smooth-algebra flatness do not assert finite faithful flatness of relative Frobenius on smooth connected affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group in characteristic p has a finite faithfully flat relative Frobenius isogeny",
+   "results": "OK 8 hits: bijective_frobenius, surjective_frobenius, IsArithFrobAt.arithFrobAt, bijective_iterateFrobenius, FiniteField.frobeniusAlgEquiv, frobeniusEquiv, FiniteField.frobeniusAlgEquiv_apply, PerfectRing.bijective_frobenius",
+   "date": "2026-10-24",
+   "verdict": "no match: returned ring/perfect-field Frobenius facts and smooth-algebra flatness do not assert finite faithful flatness of relative Frobenius on smooth connected affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|frobenius.*flat|flat.*frobenius",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, smooth-algebra flatness, and abstract faithfully flat ring-map facts do not give this group-scheme statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The iterated relative Frobenius morphism of a smooth group scheme in positive characteristic is finite flat and surjective",
+   "results": "OK 8 hits: LinearMap.iterateFrobenius, iterateFrobenius_mul_apply, IsPurelyInseparable.iterateFrobenius, iterateFrobenius_inj, iterateFrobenius, bijective_iterateFrobenius, frobenius, iterateFrobenius_add_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, smooth-algebra flatness, and abstract faithfully flat ring-map facts do not give this group-scheme statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"Flat\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, smooth-algebra flatness, and abstract faithfully flat ring-map facts do not give this group-scheme statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative Frobenius of a smooth affine algebraic group over an algebraically closed field of characteristic p is finite faithfully flat",
+   "results": "OK 8 hits: Algebra.Smooth.exists_finiteType, IsArithFrobAt.arithFrobAt, Algebra.Smooth.flat, FiniteField.frobeniusAlgEquiv, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.FormallySmooth.of_perfectField, IsAlgClosed.perfectRing, FiniteField.frobeniusAlgEquiv_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, smooth-algebra flatness, and abstract faithfully flat ring-map facts do not give this group-scheme statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective morphism of finitely generated commutative Hopf algebras over an algebraically closed field with reduced source the target is faithfully flat",
+   "results": "OK 8 hits: RingHom.FaithfullyFlat.codescendsAlong_injective, Module.FaithfullyFlat.injective_of_tensorProduct, RingHom.FaithfullyFlat.injective, Module.FaithfullyFlat.of_specComap_surjective, Algebra.IsGeometricallyReduced.of_injective, RingHom.FaithfullyFlat, Module.FaithfullyFlat.of_comap_surjective, RingHom.FaithfullyFlat.of_bijective",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Frobenius, smooth-algebra flatness, and abstract faithfully flat ring-map facts do not give this group-scheme statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-frobenius-borel-induction-geometry",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Frobenius Borel thickening: quotient and restriction of induced functions. Supporting input: finite faithfully flat relative Frobenius for the smooth connected groups S and B, before quotient and function descent.",
+   "via": [
+    "lem-sfb-frobenius-borel-induction-geometry",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-connected-group-frobenius-flat",
+  "worker": "stage1",
+  "summary": "Q72: seven-step affine-coordinate proof following Milne 2.24--2.29 and the existing reduced-target Hopf flatness theorem. All inputs already exist in the DAG: no new nodes. The inverse field Frobenius, tensor balancing, injectivity, Hopf compatibility, scheme flatness and Noetherian-target finite presentation are explicit. Statement unchanged; no finished project attachment or Mathlib match found.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite through lem-sfb-frobenius-borel-induction-geometry: finite faithfully flat Frobenius for S and B before quotient and function descent. Read latest blueprint unit and direct-images proof. Inherited blueprint.from.node is null (ancestor tool also returns None); preserved its place and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic affine algebra, scheme, or group-homomorphism input used only for its displayed statement in the Frobenius argument; the unit contains no alternative for this prerequisite."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic affine algebra, scheme, or group-homomorphism input used only for its displayed statement in the Frobenius argument; the unit contains no alternative for this prerequisite."
+   },
+   {
+    "node": "lem-trf-relative-frobenius-finite",
+    "why": "Generic affine algebra, scheme, or group-homomorphism input used only for its displayed statement in the Frobenius argument; the unit contains no alternative for this prerequisite."
+   },
+   {
+    "node": "pqf-lem-finite-fp-locnoeth",
+    "why": "Generic affine algebra, scheme, or group-homomorphism input used only for its displayed statement in the Frobenius argument; the unit contains no alternative for this prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Only clause (1), the general affine stalk localization statement, identifies the local rings in the scheme-flatness check."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-finite-type-algebra",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-trf-relative-frobenius-finite",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-ac2061df8",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-ac2061df8 (reviewer sub-agent of L); spot-checked: Read the whole item, all 7 steps and every cited statement. No new nodes; statement unchanged; no repair note, so this is an ordinary split. Sources checked: Milne iAG2017 2.26-2.28 and Prop 2.29 (pp.47-49), whose proof says target reduced + dominant => faithfully flat by 1.71 (1.69/1.70, p.28), and Stacks 0CCD (varieties.tex l.7154) for finiteness. S1: C is finitely generated and reduced (smooth fibre G reduced). Spec D is identified with the base change along Spec sigma. S2: elementary and checked by hand. theta(c tensor a)=c*beta(a) is the pushout map for (id, beta) since beta∘sigma=id. phi=theta^q, so phi is injective because C is reduced. S3: checked the Hopf compatibilities for Delta, epsilon and S. The Hopf axioms of D also follow from coordinate-hopf applied to H=G^(q). S4: reduced-target-dominant-group-flatness with A=D (reduced, the target ring, matching Milne 1.71), B=C, i=phi. S5: lem-trf-relative-frobenius-finite with n=r; the two projections match. S6: surjectivity, plus explicit stalk flatness via localization exactness and flat-over-localization. S7: D Noetherian => finite presentation (pqf-lem-finite-fp-locnoeth); quasi-compact via affine permanence (3). Edge cases: G_a/G_m (free of rank q), trivial group (isomorphism), p=2; alpha_p shows smoothness is needed. Closure over 152 nodes: no cycle. No duplicate in the DAG (rg -L 'relative Frobenius'). Tool uses accepted: lem-pc-affine-finite-type-algebra, sbc-lem-smooth-geometrically-reduced, pqf-lem-finite-fp-locnoeth, lem-weil-pbc-spec-domain-stalks-function-field; lem-trf-relative-frobenius-finite is on route via sk-prop-sf-rf-shriek-preservation. blueprint.from.node=null is inherited from the base (ancestor tool returns None): maintainer note only."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothConnectedGroupFrobeniusFlat",
+  "declaration": "AlgebraicGeometry.smoothConnectedGroup_relativeIterateFrobenius_finite_faithfullyFlat",
+  "declarations": [
+   "AlgebraicGeometry.groupRelativeIterateFrobenius",
+   "AlgebraicGeometry.smoothConnectedGroup_relativeIterateFrobenius_finite_faithfullyFlat"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothConnectedGroupFrobeniusFlat.lean",
+  "statement": "theorem smoothConnectedGroup_relativeIterateFrobenius_finite_faithfullyFlat (k : Type u) [Field k] [IsAlgClosed k] (p : ℕ) [CharP k p] (hp : p.Prime) (G : Over (Spec (.of k))) [GrpObj G] [IsAffine G.left] [ConnectedSpace G.left] [Smooth G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (r : ℕ) (hr : 1 ≤ r) : IsMonHom (groupRelativeIterateFrobenius k p hp G r) ∧ IsFinite (groupRelativeIterateFrobenius k p hp G r).left ∧ Flat (groupRelativeIterateFrobenius k p hp G r).left ∧ Surjective (groupRelativeIterateFrobenius k p hp G r).left ∧ LocallyOfFinitePresentation (groupRelativeIterateFrobenius k p hp G r).left ∧ QuasiCompact (groupRelativeIterateFrobenius k p hp G r).left ∧ ∀ (c : Γ(G.left, ⊤)) (a : k), (groupRelativeIterateFrobenius k p hp G r).left.appTop.hom ((pullback.fst G.hom ((Spec (.of k)).iterateFrobenius hp (Scheme.isOfCharacteristic_Spec (CharP.cast_eq_zero k p)) r)).appTop.hom c * (pullback.snd G.hom ((Spec (.of k)).iterateFrobenius hp (Scheme.isOfCharacteristic_Spec (CharP.cast_eq_zero k p)) r)).appTop.hom ((Scheme.ΓSpecIso (.of k)).inv.hom a)) = G.hom.appTop.hom ((Scheme.ΓSpecIso (.of k)).inv.hom a) * c ^ (p ^ r)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ec01cd9f",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Re-delivery of returned 1ab2 (H2). Node delta is exactly stmt_deps += def-weil-absolute-frobenius-scheme, def-pc-fibre-product, both landed owners of iterateFrobenius and pullback/fst/snd used in the signature. Lean module byte-identical to 1ab2; statement, proof and proof_deps unchanged. Re-read the statement: alg. closed k, CharP k p with p prime (p=2 included), G : Over (Spec k) with GrpObj/IsAffine/ConnectedSpace/Smooth/LocallyOfFiniteType+QuasiCompact, r>=1. Target is Over.pullback along iterateFrobenius (second-factor k-structure, base-changed GrpObj via grpObjObj). Map is the upstream canonical relativeIterateFrobenius (pullback.lift of F_G and G.hom). Conclusions IsMonHom, IsFinite, Flat, Surjective, LocallyOfFinitePresentation, QuasiCompact and the pure-tensor formula c⊗a ↦ a·c^(p^r), consistent with the _fst/_snd lemmas. Scanned all node lean records: no other unowned notion in the signature. Gates OK (only sorry, real helper, source and blueprint docstrings, 7 proof steps). No compile: no file changed; worker compile clean."
+ }
+}

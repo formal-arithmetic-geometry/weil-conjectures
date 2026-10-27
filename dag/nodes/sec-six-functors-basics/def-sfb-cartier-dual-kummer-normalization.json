@@ -1,0 +1,121 @@
+{
+ "kind": "definition",
+ "status": "split",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Section 2.1, supported Cartier class and its dual-Tate purity orientation; commuting ramified divisor squares in lem-sfb-ramified-root-limit-torsion-unit."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ramified-root-limit-torsion-unit",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Direct-images proof paragraph (3), the dual-Tate normalization and closed reduction exchange for supported purity in the finite root-tower argument.",
+   "via": [
+    "lem-sfb-ramified-root-limit-torsion-unit",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "id": "def-sfb-cartier-dual-kummer-normalization",
+ "title": "Canonical dual Tate normalization of a supported Cartier orientation",
+ "statement": "Let $A$ be a commutative ring annihilated by a positive integer $N$, use constant coefficient sheaves [def-weil-pbc-constant-sheaf], and use the ordinary etale module derived categories [def-weil-pbc-derived-categories] and the published signed finite Tate sheaves [def-asd-finite-etale-tate-sheaf]. The canonical signed Tate pullback is the generator-normalized roots pullback extended to tensor powers and duals. For a closed immersion $i:D\\hookrightarrow X$ of schemes [def-pc-scheme], put $S=i_*A_D(-1)[0]$, using the closed direct image [def-weil-pbc-direct-image]. When $N$ is invertible on $X$ and $D$, define the sheaf pairing $A_X(1)\\otimes i_*A_D(-1)\\to i_*A_D$ to be the adjunction transpose of tensor pullback, normalized Tate transport, the closed counit and internal evaluation. Suppose the Cartier ideal of $i$ is invertible [def-nagata-effective-cartier-ideal], and take a derived object $K$, a map $\\iota:K\\to A_X[0]$, and an isomorphism $P:S\\simeq K[2]$. Say $P$ is Kummer-normalized if there exists the supported relative boundary class $\\kappa\\in\\operatorname{Ext}^2(i_*A_D,A_X(1))$ satisfying [def-asd-ordinary-supported-kummer-boundary], such that its precomposition with the pairing equals the exact tensor-by-$A_X(1)$ image of the Ext class represented by $P\\iota[2]$, followed by the right unitor. Tensoring with $A_X(1)$ is exact because the actual line has a tensor inverse. For a commuting divisor square, define closed dual-Tate exchange by the ordinary direct-image adjunction mate followed by the normalized negative Tate pullback. The square is not required to be Cartesian, so when its top arrow factors through a nonreduced pullback divisor this definition includes the specified reduction map.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-pc-scheme",
+  "def-weil-pbc-direct-image",
+  "def-nagata-effective-cartier-ideal",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "KummerNormalized|closedEvaluation|CartierDualKummer|closedExchange",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "No match for supported Cartier dual-Tate normalization and its closed exchange."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical dual Tate Cartier purity orientation normalized by tensor evaluation of the supported Kummer boundary class",
+   "results": "8 hits: LinearMap.IsPerfPair.dualEval, transpose_dualTensorHom, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp, PiTensorProduct.dualDistribInvOfBasis_apply, PiTensorProduct.dualDistrib_dualDistribInvOfBasis_left_inverse, FractionalIdeal.dual_dual, PiTensorProduct.dualDistribEquiv, TensorProduct.dualDistrib; digest 01eb1a7bd30c40c4",
+   "date": "2026-10-22",
+   "verdict": "No match for supported Cartier dual-Tate normalization and its closed exchange."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"tensorLeft\", \"Kummer\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "No match for supported Cartier dual-Tate normalization and its closed exchange."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n KummerNormalized|closedEvaluation|CartierDualKummer|closedExchange lean/WeilConjectures lean/Sheaf; blueprint_refs.py search dual Kummer normalization",
+   "results": "No exact matches. Generic closed-evaluation duality and unrelated Kummer chart structures exist. The blueprint search returned 0 nodes.",
+   "date": "2026-10-22",
+   "verdict": "The existing SupportedKummerBoundary is reused; this adds only the dual-orientation comparison and its canonical pairings."
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.CartierDualKummerNormalization",
+  "declaration": "AlgebraicGeometry.Etale.RamifiedRoot.KummerNormalized",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RamifiedRoot.twistPullback",
+   "AlgebraicGeometry.Etale.RamifiedRoot.closedDual",
+   "AlgebraicGeometry.Etale.RamifiedRoot.closedEvaluation",
+   "AlgebraicGeometry.Etale.RamifiedRoot.KummerNormalized",
+   "AlgebraicGeometry.Etale.RamifiedRoot.closedExchange"
+  ],
+  "file": "lean/Sheaf/Paper/CartierDualKummerNormalization.lean",
+  "statement": "def KummerNormalized (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) {D X : Scheme.{u}} (i : D ⟶ X) [IsClosedImmersion i] (hI : i.ker.IsInvertible) (hX : IsUnit (N : Γ(X, ⊤))) (hD : IsUnit (N : Γ(D, ⊤))) (K : DerivedCategoryModule A X) (ι : K ⟶ ordinaryFiniteUnit A X) (P : closedDual A N hA i ≅ K⟦(2 : ℤ)⟧) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d25a17ae",
+  "group": "Q53",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d25a17ae",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Re-delivery of 7fe3c30e (H2 RETURN). All three Lean files byte-identical (sha256). Only node change: unused def-asd-ordinary-finite-p1-arrows dropped from the item's stmt_deps; the report's owner line now names OrdinaryFiniteP1Kummer / def-asd-ordinary-finite-p1-kummer-class. 11 stage-1 deps kept; 5 added landed def nodes all used. Independent re-reading: tower fields match the node with no extra assumptions; K = R(sectionsWithSupport) with a distinguished unit triangle, δ unique; P pinned by the unique SupportedKummerBoundary κ (Finite Coeff); θ and β unique by the forget-support square plus the openExchange boundary square; TransitionFormula keeps E = V(f^e) and the reduction, nothing asserted Cartesian; H^q vanishing, zero transition at n·ℓ^s, pinned colimit; étale and genuine pro-étale K-injective units, site mate iso at j^*A. Edge cases (empty, e=1, s≥1) ok. lean.statement verbatim, one sorry, docstrings ok. No compile (no file changed; worker 39.7/6.3/30.0 s clean). Advisories: twistPullback built from theorem-owned Tate decls (needs a def owner); non-stmt_dep owners; unsplit ramified-cartier-supported-purity needs a route decision."
+ }
+}

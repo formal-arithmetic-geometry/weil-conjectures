@@ -1,0 +1,260 @@
+{
+ "id": "lem-trf-polynomial-basechange-comma-evaluation",
+ "kind": "statement",
+ "title": "Polynomial base-change comma equivalence with its evaluation augmentation",
+ "statement": "Let $A\\to B\\to C$ be maps of commutative rings. Use a common infinite cardinal bound for all rings and variable sets and small models [def-weil-size-convention]. Let $\\mathcal E_C$ be the opposite category of pairs $(P\\to B,Q\\to C)$, with $P$ polynomial over $A$, $Q$ polynomial over $P$, and compatible augmentations; morphisms before taking opposites are commuting pairs of $A$-algebra maps preserving the augmentations. Let $\\mathcal D_C$ be the opposite category of polynomial $B$-algebras augmented to $C$, and put $u(P,Q)=(Q\\otimes_P B\\to C)$. Fix $V=(H\\xrightarrow{\\delta}C)\\in\\mathcal D_C$, so $H$ is polynomial over $B$. Let $\\mathcal E_H$ be the same pair category with target $H$ in place of $C$, and $\\mathcal D_H$ the opposite category of polynomial $B$-algebras augmented to $H$. Write $v:\\mathcal E_H\\to\\mathcal D_H$ for $(P,Q)\\mapsto(Q\\otimes_P B\\to H)$ and $j:\\mathcal D_H\\to\\mathcal D_C$ for composition of augmentation with $\\delta$. All these categories have the identity-cover topology [def-weil-pbc-sites-and-cohomology].\nThere is an equivalence $e_V:(V\\downarrow u)\\simeq\\mathcal E_H$ sending an object $((P,Q),a)$, where $a$ corresponds to $\\alpha:Q\\otimes_P B\\to H$, to $(P\\to B,Q\\xrightarrow{\\gamma}H)$ with $\\gamma(q)=\\alpha(q\\otimes1)$. Its inverse uses $\\alpha(q\\otimes b)=\\gamma(q)b$ and the augmentation $Q\\to H\\xrightarrow{\\delta}C$. On morphisms it preserves the underlying compatible pair of algebra maps. For every commutative ring $R$ and module presheaf $K$ on $\\mathcal D_C$ [def-weil-sheaf-of-modules-category], put $G=j^{-1}K$ and $F_V((P,Q),a)=K(u(P,Q))$. This equivalence identifies $F_V$ with $e_V^{-1}v^{-1}G$ and induces a natural isomorphism\n$$L\\pi_{(V\\downarrow u),!}^R F_V\\xrightarrow{\\sim}L\\pi_{\\mathcal E_H,!}^R(v^{-1}G)$$\nin $D(R)$ [def-weil-abstract-derived-category], where derived colimits and reindexing maps use [lem-trf-derived-colimit-bar]. Under this isomorphism the bar augmentation $((U,a),x)\\mapsto K(a)x$ to $K(V)[0]$ is the polynomial-target augmentation to $G(H\\xrightarrow{1}H)[0]$ specified in [lem-trf-cotangent-lower-shriek-polynomial-top]. In particular this specified augmentation is a quasi-isomorphism, naturally in $K$. No polynomiality of $C$ over $B$, and no flatness of either given ring map, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QW (lemma-triangle-compute-lower-shriek), case i=3, identification of I_U and its coefficient presheaf; Tag 08QV (lemma-polynomial-on-top). Correct the printed C_{Qbar/C} to C_{Qbar/B}; preserve the augmentation."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-cotangent-lower-shriek-polynomial-top",
+  "def-trf-polynomial-presentation-arbitrary-target"
+ ],
+ "proof": [
+  {
+   "text": "Put $T_U=Q\\otimes_P B$, with its induced augmentation $\\epsilon_U:T_U\\to C$. A comma object is precisely $U=(P,Q)$ together with a $B$-algebra map $\\alpha:T_U\\to H$ satisfying $\\delta\\alpha=\\epsilon_U$. Apply the tensor-pushout universal property over $P$ to $Q\\to H$ and the structural map $B\\to H$. It gives a bijection between these $\\alpha$ and compatible maps $\\gamma:Q\\to H$, by $\\gamma(q)=\\alpha(q\\otimes1)$ and $\\alpha(q\\otimes b)=\\gamma(q)b$. Restriction to $q\\otimes1$ shows that the comma equation is equivalent to $\\delta\\gamma$ being the given augmentation of $Q$. Conversely equality on both tensor factors proves the comma equation. Thus the proposed object maps are well-defined; they change no polynomial algebra or variable set.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QW (lemma-triangle-compute-lower-shriek), proof, case i=3; Tag 08QV (lemma-polynomial-on-top)."
+   }
+  },
+  {
+   "text": "Let a morphism $U\\to U'$ in the opposite pair category be represented by $(p:P'\\to P,q:Q'\\to Q)$. Its base change is $h:T_{U'}\\to T_U$, $q'\\otimes b\\mapsto q(q')\\otimes b$. The comma condition is $\\alpha' =\\alpha h$; by restriction to $q'\\otimes1$ and uniqueness in the tensor universal property it is equivalent to $\\gamma'=\\gamma q$. This is exactly the morphism condition in $\\mathcal E_H$. Preserve $(p,q)$ in both directions. Identities and composition are preserved since the underlying pairs are unchanged. The two object constructions are inverse by the two formulas of step 1 and tensor uniqueness, and their morphism constructions are inverse. They give $e_V$ and its inverse $r_V$. Use the same bounded models throughout; passing to skeletons instead gives the corresponding unit and counit isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QW (lemma-triangle-compute-lower-shriek), proof, case i=3; Tag 08QV (lemma-polynomial-on-top)."
+   }
+  },
+  {
+   "text": "Write $p_V:(V\\downarrow u)\\to\\mathcal E_C$ for the projection. The functors $jve_V$ and $up_V$ have the same algebra $T_U$, augmentation $\\delta\\alpha=\\epsilon_U$, and base-change maps. Consequently their precompositions with $K$ agree on objects and restriction maps: $e_V^{-1}v^{-1}G=F_V$. This coefficient identification is the identity on each $K(uU)$, and hence commutes with every morphism of module presheaves $K\\to K'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QW (lemma-triangle-compute-lower-shriek), proof, case i=3; Tag 08QV (lemma-polynomial-on-top)."
+   }
+  },
+  {
+   "text": "Apply the derived-colimit bar theorem to $e_V$ and this coefficient identification. Its canonical map sends $(Z_n\\to\\cdots\\to Z_0,x)$ to $(e_VZ_n\\to\\cdots\\to e_VZ_0,x)$. The face formulas show this is a chain map. Reindexing by $r_V$ gives its inverse: in the common explicit models the composites are identity, and on small skeletons the unit and counit give equality of the derived composite maps by the theorem's natural-transformation clause. This proves the stated isomorphism in $D(R)$, with its specified direction and naturality in $K$. All indexing categories are small by the common bound.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QW (lemma-triangle-compute-lower-shriek), proof, case i=3; Tag 08QV (lemma-polynomial-on-top)."
+   }
+  },
+  {
+   "text": "For $W=e_VZ$ with $Z=(U,a)$, let $b_W:(H\\xrightarrow{1}H)\\to vW$ be the arrow of $\\mathcal D_H$ opposite to $\\alpha:T_U\\to H$. Its image $j(b_W)$ is exactly $a:V\\to uU$. The polynomial-target augmentation is, by its cited statement, reindexing along $v$ followed by the augmentation induced by the $b_W$. The bar formula therefore sends a degree-zero generator $(Z,x)$ first to $(W,x)$ and then to $G(b_W)x=K(a)x$. In negative degrees both augmentations to the degree-zero complex are zero. Thus these are the same chain map, not merely maps inducing the same degree-zero homology map; the face formula for a one-arrow chain also verifies the augmentation relation by functoriality.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-lower-shriek-polynomial-top"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QW (lemma-triangle-compute-lower-shriek), proof, case i=3; Tag 08QV (lemma-polynomial-on-top)."
+   }
+  },
+  {
+   "text": "Write $H=B[E]$. Apply the polynomial-top theorem with the ring map $A\\to B$, target $H$, coefficient ring $R$, and presheaf $G=j^{-1}K$. Its pair category is exactly $\\mathcal E_H$ and its target category is $\\mathcal D_H$. The bound contains $E$ and all the rings; the topology is the identity-cover topology as required. That theorem makes its specified augmentation an isomorphism in $D(R)$. Composing with step 4 and using step 5 makes the specified comma augmentation a quasi-isomorphism. The generator formulas commute with every natural map $K\\to K'$, proving naturality. Polynomiality is used only for $H$; neither the equivalence nor this application requires $C$ polynomial or either ring map flat.",
+   "uses": [
+    "lem-trf-cotangent-lower-shriek-polynomial-top"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QW (lemma-triangle-compute-lower-shriek), proof, case i=3; Tag 08QV (lemma-polynomial-on-top)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-cotangent-lower-shriek-polynomial-top"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QW (lemma-triangle-compute-lower-shriek), proof, case i=3; Tag 08QV (lemma-polynomial-on-top). The source identifies the comma category and coefficients; this split expands the morphism check and the canonical bar-augmentation compatibility using the existing cited statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The comma category over a polynomial B algebra for the functor sending polynomial presentation pairs P Q to Q tensor over P with B is equivalent to polynomial pairs augmented to that algebra",
+   "results": "8 hits; top returned names/files: Algebra.Presentation.tensorModelOfHasCoeffsEquiv, coe_polyEquivTensor', Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.Presentation.tensorModelOfHasCoeffsHom, coe_polyEquivTensor'_symm, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, polyEquivTensor', Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul. The presentation tensorModelOfHasCoeffsEquiv (RingTheory/Extension/Presentation/Core.lean:207) is an algebra isomorphism, not an equivalence of augmented polynomial-pair comma categories with coefficients. IntegralClosure.lean:128 concerns integral closure, and presheaf colimit hits are ordinary colimits. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Algebra.TensorProduct",
+   "results": "0 hits; top returned names/files: none. loogle: unknown identifier 'Algebra.TensorProduct'. The presentation tensorModelOfHasCoeffsEquiv (RingTheory/Extension/Presentation/Core.lean:207) is an algebra isomorphism, not an equivalence of augmented polynomial-pair comma categories with coefficients. IntegralClosure.lean:128 concerns integral closure, and presheaf colimit hits are ordinary colimits. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(cotangent|polynomial).*(comma|shriek|derivedColimit)|(comma|shriek).*(polynomial|tensor)",
+   "results": "4 hits; top returned names/files: Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/Algebra/Category/CommAlgCat/FiniteType.lean, Mathlib/Algebra/MvPolynomial/Equiv.lean. The presentation tensorModelOfHasCoeffsEquiv (RingTheory/Extension/Presentation/Core.lean:207) is an algebra isomorphism, not an equivalence of augmented polynomial-pair comma categories with coefficients. IntegralClosure.lean:128 concerns integral closure, and presheaf colimit hits are ordinary colimits. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived colimit of the pullback of module presheaves on polynomial algebras in a tensor base change comma category equals evaluation at the polynomial target",
+   "results": "8 hits; top returned names/files: PresheafOfModules.colimitPresheafOfModules, PresheafOfModules.hasColimit, PresheafOfModules.evaluationJointlyReflectsColimits, PresheafOfModules.isLimitLimitCone, PresheafOfModules.evaluation_preservesColimitsOfShape, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, PresheafOfModules.evaluation_preservesColimit, PresheafOfModules.hasColimitsOfSize. The presentation tensorModelOfHasCoeffsEquiv (RingTheory/Extension/Presentation/Core.lean:207) is an algebra isomorphism, not an equivalence of augmented polynomial-pair comma categories with coefficients. IntegralClosure.lean:128 concerns integral closure, and presheaf colimit hits are ordinary colimits. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived left Kan extension over polynomial ring presentations is computed by the tensor universal property and evaluation at a polynomial target",
+   "results": "8 hits; top returned names/files: Algebra.Presentation.tensorModelOfHasCoeffsHom, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, MvPolynomial.universalFactorizationMapPresentation, PolynomialLaw.toFunLifted. The presentation tensorModelOfHasCoeffsEquiv (RingTheory/Extension/Presentation/Core.lean:207) is an algebra isomorphism, not an equivalence of augmented polynomial-pair comma categories with coefficients. IntegralClosure.lean:128 concerns integral closure, and presheaf colimit hits are ordinary colimits. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"TensorProduct\"",
+   "results": "1 hits; top returned names/files: TensorProduct.toIntegralClosure_mvPolynomial_bijective. The presentation tensorModelOfHasCoeffsEquiv (RingTheory/Extension/Presentation/Core.lean:207) is an algebra isomorphism, not an equivalence of augmented polynomial-pair comma categories with coefficients. IntegralClosure.lean:128 concerns integral closure, and presheaf colimit hits are ordinary colimits. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorModelOfHasCoeffsEquiv|toIntegralClosure_mvPolynomial_bijective",
+   "results": "10 hits; top returned names/files: Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean. The presentation tensorModelOfHasCoeffsEquiv (RingTheory/Extension/Presentation/Core.lean:207) is an algebra isomorphism, not an equivalence of augmented polynomial-pair comma categories with coefficients. IntegralClosure.lean:128 concerns integral closure, and presheaf colimit hits are ordinary colimits. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(polynomial|cotangent).*(comma|shriek|derivedColimit)|(comma|shriek).*(polynomial|tensor)",
+   "results": "4 hits: Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean, Mathlib/Algebra/MvPolynomial/Equiv.lean, Mathlib/Algebra/Category/CommAlgCat/FiniteType.lean. Digest b2c7ced40feb1a25. Read returned hits; presentation tensor-model equivalences concern algebra objects, integral closure is unrelated, and ordinary Kan-extension/colimit evaluation is not the derived polynomial-pair comma evaluation with its augmentation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"TensorProduct\"",
+   "results": "1 hits: TensorProduct.toIntegralClosure_mvPolynomial_bijective. Digest 0663a1cadc516860. Read returned hits; presentation tensor-model equivalences concern algebra objects, integral closure is unrelated, and ordinary Kan-extension/colimit evaluation is not the derived polynomial-pair comma evaluation with its augmentation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived colimit over a comma category of polynomial algebra pairs under tensor base change is evaluation at a polynomial target",
+   "results": "8 hits: CategoryTheory.lanEvaluationIsoColim, CategoryTheory.Comma.hasColimit, CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation, CategoryTheory.MorphismProperty.Comma.hasColimit_of_closedUnderColimitsOfShape, CategoryTheory.Comma.hasColimitsOfShape, CategoryTheory.Comma.coconeOfPreserves, CategoryTheory.Limits.colimitIsoFlipCompColim, CategoryTheory.Comma.coconeOfPreservesIsColimit. Digest fbf551b839e7629d. Read returned hits; presentation tensor-model equivalences concern algebra objects, integral closure is unrelated, and ordinary Kan-extension/colimit evaluation is not the derived polynomial-pair comma evaluation with its augmentation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The comma category of tensor base change of polynomial algebra presentation pairs is equivalent to pairs augmented to the chosen polynomial target, compatibly with the derived colimit evaluation augmentation",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsEquiv, Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.Presentation.tensorModelOfHasCoeffsHom, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.PreSubmersivePresentation.baseChange, Algebra.Presentation.baseChange. Digest c34e2abfc2852f51. Read returned hits; presentation tensor-model equivalences concern algebra objects, integral closure is unrelated, and ordinary Kan-extension/colimit evaluation is not the derived polynomial-pair comma evaluation with its augmentation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of the structured arrow category for base change of augmented polynomial ring presentations, and invariance of the module coefficient bar complex under this equivalence",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsEquiv, Algebra.PreSubmersivePresentation.baseChange_toPresentation, Algebra.PreSubmersivePresentation.baseChange_ring, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.PreSubmersivePresentation.baseChange, Algebra.Generators.CotangentSpace.compEquiv, Algebra.Presentation.baseChange, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul. Digest 55a44c86f104ff5c. Read returned hits; presentation tensor-model equivalences concern algebra objects, integral closure is unrelated, and ordinary Kan-extension/colimit evaluation is not the derived polynomial-pair comma evaluation with its augmentation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-lower-shriek",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Extracted lower-shriek proof steps 5 and 6: tensor-comma equivalence, coefficient pullback, and the exact polynomial-target augmentation.",
+   "via": [
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-basechange-comma-evaluation",
+  "worker": "stage1",
+  "summary": "Q90 supplies the tensor universal-property object and morphism checks, exact coefficient identification, canonical derived bar reindexing isomorphism, and equality of the two augmentations on generators. All non-elementary inputs already have nodes; no new node is necessary. The statement is unchanged. Checked Stacks 08QW/08QV, the current blueprint ancestor and unit, project attachment searches, and authentic Mathlib searches.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Extracted lower-shriek proof steps 5 and 6: tensor-comma equivalence, coefficient pullback, and the exact polynomial-target augmentation. Steps 1–3 expand the comma and coefficient identification in Stacks 08QW, case i=3; Steps 4–6 preserve its augmentation and apply 08QV. No change to the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-4e871ba42",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-4e871ba42 (reviewer sub-agent of L); spot-checked: This is a first split of a node that was unsplit on the base: the statement and stmt_deps are byte-identical to the base, there are no new nodes and no re-split note applies. Source: Stacks 08QW case i=3 (cotangent.tex ~1290-1365) prints C_{Qbar/C}, but the sheaf lives on polynomial B-algebras augmented to Qbar, so the item is right to use D_H = C_{H/B}. 08QV is then applied to H. Step 1: the tensor-pushout Mathlib leaf (clauses 2-3) gives alpha <-> gamma. I checked that gamma is compatible with P->B->H and that delta*alpha = eps_U holds because delta is B-linear. Step 2: u(f)a = a' in D_C is the same as alpha' = alpha h (variance checked), which is the same as gamma' = gamma q by uniqueness. So e_V is an isomorphism of categories on fixed models. Step 3: j v e_V(U,a) = (T_U, delta alpha) = u p_V(U,a), with the same base-change maps, so F_V = e_V^{-1} v^{-1} G on the nose. Step 4: the identity and composition clauses of derived-colimit-bar, with r_V, give the isomorphism in D(R). Its natural-transformation clause covers the skeleton variant. Step 5: polynomial-top's statement fixes its augmentation as reindexing along v followed by G(b). Here b_W is opposite to alpha and j(b_W) = a, so G(b_W) = K(a), and the two augmentations agree degree by degree; I also checked that the augmentation is a chain map on 1-chains. Step 6: polynomial-top is applied with C := H = B[E] and F := G; its categories and its v match E_H and D_H. Edge cases: E empty, B = 0, non-flat A->B, non-polynomial C and zero K are all fine. The dependency closure (330 nodes) has no cycle. Both cited nodes are in unit sk-i-curve-zero and are split and reviewed; the tensor node is a Mathlib leaf, so no tool_uses are needed. An rg -L search for the comma equivalence found no duplicate. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialBaseChangeCommaEvaluation",
+  "declaration": "Algebra.PolynomialPresentation.polynomial_baseChange_comma_evaluation",
+  "declarations": [
+   "Algebra.PolynomialPresentation.postcomposeTarget",
+   "Algebra.PolynomialPresentation.commaTarget",
+   "Algebra.PolynomialPresentation.PolynomialComma",
+   "Algebra.PolynomialPresentation.commaRestriction",
+   "Algebra.PolynomialPresentation.polynomialRestriction",
+   "Algebra.PolynomialPresentation.commaEvaluation",
+   "Algebra.PolynomialPresentation.PolynomialCommaEvaluation",
+   "Algebra.PolynomialPresentation.polynomial_baseChange_comma_evaluation"
+  ],
+  "file": "lean/Sheaf/RingTheory/PolynomialBaseChangeCommaEvaluation.lean",
+  "statement": "theorem polynomial_baseChange_comma_evaluation [Infinite I] (_boundA : Nonempty (A ↪ I)) (_boundB : Nonempty (B ↪ I)) (_boundC : Nonempty (C ↪ I)) (system : CategoryColimitBarSystem.{u}) : Nonempty (PolynomialCommaEvaluation I A B C E δ system)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existence assertion expands all clauses in PolynomialCommaEvaluation: specified object/morphism formulas for an actual category equivalence, identity coefficient identification, a natural derived isomorphism fixed by the canonical system.map, natural chain augmentations specified on every generator and nonzero degree, their exact chain-level compatibility, and IsIso of the specified comma augmentation. H=B[E] is its bounded polynomial coordinate representative; C is arbitrary. No data are chosen from an unproved existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1bb5faee",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read item node, new def node def-trf-polynomial-presentation-arbitrary-target, both delivered modules, the live deps (polynomial-target categories, polynomial_top_evaluation/IsEvaluationAugmentation, CategoryColimitBarSystem.map) and the citer CotangentLowerShriek. Every clause matches: StructuredArrow comma; pinned e_V object and morphism formulas (gamma(X_i)=alpha(X_i⊗1), inverse alpha=aeval gamma with values delta∘gamma, lower and upper maps kept as HEq, baseChange uniquely determined); identity-component coefficient iso; natural D(R) comparison pinned to system.map e id coefficient; comma augmentation K(a)x and polynomial augmentation equal to polynomial_top's epsP with F=j^-1 K; chain-level equality; IsIso(Q.map epsComma). C arbitrary, no flatness, bounds A/B/C into infinite I as in polynomial-top. New def node: PairHom gives exactly compatible A-algebra pairs, base change unique and existing. Edge cases E empty, empty variable sets, zero rings and zero K are covered. Docstrings, sources, single sorry and verbatim statement fields are OK. Advisory: duplicate coordinate model next to the u+1 CotangentSites model; this already existed with the landed Q35 polynomial-top node and the citer must bridge it. Not recompiled per instructions."
+ }
+}

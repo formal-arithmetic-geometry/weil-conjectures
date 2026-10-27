@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-space-relative-perfect-fibre-criterion",
+ "kind": "statement",
+ "title": "Relative perfection from lower bounds on the complex and its fibres",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories $D(\\mathcal O_Z)$ [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. A perfect complex is etale locally represented by a bounded complex of direct summands of finite free modules [def-weil-pbc-strict-perfect-coefficient-package]. Derived tensor and pullback use K-flat resolutions, and derived global sections use K-injective resolutions. Let $S$ be a scheme and $f:X\\to S$ a flat locally finitely presented morphism from an algebraic space, with these morphism properties tested on etale scheme charts. Let $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be pseudo-coherent: etale locally it has a bounded-above finite-free representative. For every point $s\\in S$ let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ and $i_s:X_s\\to X$ be the fibre projection. Then the following conditions are equivalent: (i) $K$ is locally bounded below on $X$, and $Li_s^*K$ is locally bounded below on $X_s$ for every $s$; (ii) $K$ locally has finite Tor amplitude over $f^{-1}\\mathcal O_S$, meaning that locally there are integers $a\\le b$ such that $\\mathcal H^j(K\\otimes^{\\mathbf L}_{f^{-1}\\mathcal O_S}M)=0$ for every module sheaf $M$ over $f^{-1}\\mathcal O_S$ in degree zero and every $j\\notin[a,b]$. Together with the assumed pseudo-coherence, condition (ii) is $S$-perfection. Local boundedness below means the cohomology sheaves vanish below an integer which may depend on the etale neighbourhood.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0GFK, lemma-bounded-on-fibres, with its relative-perfection condition written out."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-sfb-space-pseudocoherent-complex",
+  "def-sfb-space-relative-perfect",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Assume (ii). On any neighbourhood with relative Tor interval $[a,b]$, take $M=f^{-1}\\mathcal O_S$ in degree zero: the tensor is $K$ itself, so $K$ is locally bounded below. Together with the assumed pseudo-coherence, (ii) is $S$-perfection. Apply [lem-sfb-space-relative-perfect-base-change] to $\\operatorname{Spec}\\kappa(s)\\to S$. Its conclusion makes $Li_s^*K$ relatively perfect over the field. Taking the inverse-image structure sheaf as the test module again shows that this derived fibre is locally bounded below. Thus (ii) implies (i).",
+   "uses": [
+    "lem-sfb-space-relative-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFK, implication from relative perfection; Tag 0DKT for arbitrary base change."
+   }
+  },
+  {
+   "text": "Now assume (i). By [lem-sfb-space-etale-presentation-property-criterion] and [lem-sfb-scheme-etale-source-target-properties], flatness and local finite presentation hold on scheme presentation diagrams. Restrict the base scheme to affine opens and choose affine etale source charts, refining into neighbourhoods on which $K$ has a lower bound and on which the affine ring map is finitely presented by [def-sbc-locally-finite-presentation]. Thus it suffices to consider charts $U=\\operatorname{Spec}A\\to X$, $V=\\operatorname{Spec}R\\subset S$ with $U\\to V$ flat and $R\\to A$ finitely presented. The ring map is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Relative perfection can be checked on this covering by the etale-locality assertion of [lem-sfb-space-relative-perfect-base-change].",
+   "uses": [
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-sfb-space-relative-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFK, affine reduction; Tag 0DKQ, locality on source and target."
+   }
+  },
+  {
+   "text": "On such a chart, [lem-sfb-affine-etale-derived-module-realization] writes $K|_U=a_A(C)$ for $C\\in D(A)$ and identifies its cohomology with $a_A(H^j(C))$. Exactness and faithfulness imply that $C$ has the chosen lower bound. Under [lem-sfb-derived-etale-zariski-equivalence] its Zariski realization is $\\widetilde C$. The finite-free local models for $K$ restrict to pseudo-coherent models on $U$; [lem-sfb-etale-pseudocoherence-descent] gives pseudo-coherence of $\\widetilde C$. By [lem-pc-affine-pseudo-coherent-criterion], choose a bounded-above finite-free $A$-complex $P^\\bullet$ representing $C$.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-pc-affine-pseudo-coherent-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFK via perfect.tex Tag 0GEH; spaces-perfect.tex Tags 071Q and 08HE; perfect.tex Tag 08E7."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak p\\subset R$, put $k=\\kappa(\\mathfrak p)$, $B=A\\otimes_R k$ and $U_s=\\operatorname{Spec}B$. The diagram $U_s\\to X_s$, $U\\to X$ is cartesian. The pullback-composition and restriction comparisons of [lem-sfb-space-derived-etale-chart-calculus] identify $(Li_s^*K)|_{U_s}$ with the derived pullback of $K|_U$. On Zariski schemes [lem-pc-flat-complex-derived-pullback] computes this by the termwise pullback of $\\widetilde P^\\bullet$; [lem-sfb-derived-etale-zariski-equivalence] transports it to the etale site. In each degree its module is $P^j\\otimes_A B=P^j\\otimes_R k$, and its differential is $d_P^j\\otimes1$. Finite free $A$-modules are flat, and by [lem-pc-module-flat-transitive] are flat over $R$, since $A$ is $R$-flat. Hence [lem-pc-module-bounded-flat-kflat] makes $P^\\bullet$ K-flat over $R$. Consequently the SAME complex $P^\\bullet\\otimes_R k$ represents $C\\otimes_R^{\\mathbf L}k$. This proves the identification of the derived fibre with $a_B(C\\otimes_R^{\\mathbf L}k)$, using the exact realization of [lem-sfb-affine-etale-derived-module-realization].",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-pc-module-flat-transitive",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFK via perfect.tex Tag 0GEH, fibre calculation using flatness of R to A."
+   }
+  },
+  {
+   "text": "By (i), the restriction $(Li_s^*K)|_{U_s}$ is locally bounded below. Take an etale covering on whose members lower bounds $n_t$ hold. Their images in the affine scheme $U_s$ are open by [lem-weil-pbc-etale-morphism-open-map]. By [lem-weil-pbc-affine-scheme-qcqs], $U_s$ is quasi-compact, so finitely many of these images cover $U_s$. Put $n=\\min n_t$ for these finitely many members. For $j<n$ the cohomology sheaf restricts to zero on each of them, hence is zero: by the exact and jointly zero-detecting geometric stalks of [lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test], each geometric stalk can be computed on a covering member where it vanishes. The realization in step 4 and exact faithfulness in [lem-sfb-affine-etale-derived-module-realization] give $H^j(C\\otimes_R^{\\mathbf L}k)=0$ for $j<n$. If $U_s$ is empty, the complex is zero and any $n$ works. This argument is for one prime at a time and asserts no bound independent of $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFK via perfect.tex Tag 0GEH, local-to-global boundedness on each affine fibre."
+   }
+  },
+  {
+   "text": "The ring map $R\\to A$ is flat finitely presented, $C$ is pseudo-coherent and bounded below by step 3, and all its derived residue fibres are bounded below by step 5. Apply [lem-sfb-ring-relative-perfect-fibre-criterion] to obtain finite Tor amplitude over $R$. By [lem-trf-affine-relative-tor-amplitude-criterion], $\\widetilde C$ locally has finite Tor dimension over the Zariski inverse-image structure sheaf of $V$. By [lem-sfb-etale-relative-tor-comparison] the same is true on the small etale site of $U$. The pseudo-coherence already established makes $K|_U$ relatively perfect. The etale-locality assertion of [lem-sfb-space-relative-perfect-base-change] descends this property from our covering charts to $X$. This is (ii), completing the equivalence. All Tor tests here range over arbitrary modules over the indicated inverse-image ring sheaf.",
+   "uses": [
+    "lem-sfb-ring-relative-perfect-fibre-criterion",
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-sfb-etale-relative-tor-comparison",
+    "lem-sfb-space-relative-perfect-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0GFK, affine reduction; perfect.tex Tag 0GEH using more-algebra.tex Tag 0GHJ; Tags 0DHY and 0DK7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-relative-perfect-base-change",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-etale-pseudocoherence-descent",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-module-flat-transitive",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-ring-relative-perfect-fibre-criterion",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-sfb-etale-relative-tor-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0GFK, lemma-bounded-on-fibres, via perfect.tex Tag 0GEH and more-algebra.tex Tag 0GHJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex on an algebraic space flat locally finitely presented over a scheme is relatively perfect if it and every derived fibre are locally bounded below",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise bounded below criterion for finite relative Tor amplitude of a pseudo coherent complex in a flat family",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  [Module.Flat R M, ∀ (I : Ideal R), Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I)),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ[R] x i = 0 → TensorProduct.VanishesT\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative perfectness criterion bounded below pseudo coherent complex and derived fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (f : Q.obj X ⟶ Q.obj Y) (n : ℤ) [X.IsStrictlyLE n] :\\n  ∃ (X' : CochainComplex C ℤ) (_ : X'.IsStrictlyLE n) (s : X' ⟶ X) (_ : IsIso (Q.map s)) (g : X' ⟶ Y),\\n    f = inv (Q.map s) ≫ Q.map g\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category $D(\\\\mathcal{C})$, if $X$ is strictly supported above degree $n$ (i.e\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Fractions\", \"type\": \"{X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyGE a] [X.IsStrictlyLE b] [Y.IsStrictlyGE a] (f : Q.obj X ⟶ Q.obj Y) :\\n  ∃ (X' : CochainComplex C ℤ) (_ : X'.IsStrictlyGE a) (_ : X'.IsStrictlyLE b) (s : X' ⟶ X) (_ : IsIso (Q.map s)) (g :\\n    X' ⟶ Y), f = inv (Q.map s) ≫ Q.map g\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, where $X$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and $Y$ is strictly supported in degree\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Type*) [CommRing P] [Algebra R P] [Algebra P S] [IsScalarTower R P S] [FormallySmooth R P] [Module.Free P Ω[P⁄R]]\\n  [Module.Finite P Ω[P⁄R]] (h₁ : Function.Surjective (algebraMap P S)) (h₂ : (RingHom.ker (algebraMap P S)).FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (cotangentComplex\", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.TStructure\", \"type\": \"(X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure\", \"type\": \"[HasExt.{w} C] (K L : CochainComplex C ℤ) [K.IsGE 0] [K.IsLE 0] [L.IsGE 0] [L.IsLE 0] :\\n  HasSmallLocalizedShiftedHom.{w} (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) ℤ K L\", \"doc\": \"For cochain complexes $ K $ and $ L $ concentrated at degree 0 (satisfying both $ K $ is bounded below at 0 and $ K $ is bounded above at 0, and similarly for $ L $), the localized hom-sets between $ \"}\n  {\"name\": \"PerfectionMap.mk\", \"module\": \"Mathlib.RingTheory.Perfection\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u₁} [inst_1 : CommSemiring R] [inst_2 : CharP R p] {P : Type u₂}\\n  [inst_3 : CommSemiring P] [inst_4 : CharP P p] [inst_5 : PerfectRing P p] {π : P →+* R},\\n  (∀ ⦃x y : P⦄, (∀ (n : ℕ), π ((⇑(frobeniusEquiv P p).symm)^[n] x) = π ((⇑(frobeniusEquiv P p).s\", \"doc\": \"A ring homomorphism $\\\\pi : P \\\\to R$ from a perfect ring $P$ (of characteristic $p$) to a ring $R$ (of characteristic $p$) satisfies the perfection map conditions if: (1) $\\\\pi$ is injective on elements\"}\n  {\"name\": \"Algebra.FormallySmooth.casesOn\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.FormallySmooth R A → Sort u_1} →\\n            (t : Algebra.FormallySmooth R A) →\\n              ((projective_kaehlerDifferential : Module.Projective A Ω[\", \"doc\": \"Given a property $ P $ of formally smooth $ R $-algebras, if $ P $ holds for any algebra $ A $ where the Kähler differentials $ \\\\Omega_{A/R} $ are projective as an $ A $-module and the first cohomolog\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|bounded.*fibres|bounded.*fibers",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary flat morphisms, ordinary module-sheaf adjunctions or presentations, general derived bounds, or unrelated notions; none gives this algebraic-space derived criterion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented ring map R to A a pseudo coherent complex K of A modules is R perfect if and only if K and every derived residue field fibre are bounded below",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Module.free_of_lTensor_residueField_injective\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module R M] [inst_4 : Module R N] [inst_5 : AddCommGroup P] [inst_6 : Module R P]\\n  (f : M →ₗ[R] N) (g : N →ₗ[R] P) [inst_7 : IsLocalRing R],\\n  Function.S\", \"doc\": \"Let $ R $ be a commutative local ring with residue field $ k $. Suppose $ 0 \\\\to M \\\\xrightarrow{f} N \\\\xrightarrow{g} P \\\\to 0 $ is an exact sequence of finitely generated $ R $-modules, where $ N $ is f\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  [Module.Flat R M, ∀ (I : Ideal R), Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I)),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ[R] x i = 0 → TensorProduct.VanishesT\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n  {\"name\": \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.Finite R M] [Module.Flat R M] {ι : Type u} (v : ι → M),\\n  Function.Bijective\\n      ⇑(Finsupp.linearCombination (IsLocalRing.ResidueField R)\\n          (⇑((TensorProdu\", \"doc\": \"For a finitely generated flat module $ M $ over a commutative local ring $ R $, if the linear combination map from the tensor product $ k \\\\otimes_R M $ (where $ k $ is the residue field of $ R $) to $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary flat or smooth algebras, projective dimensions, ordinary Tor, derived cohomological bounds, or unrelated topology; none states this pseudo-coherent derived fibre criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor dimension over a base ring detected by bounded below derived fibres of a pseudo coherent complex over a flat algebra of finite presentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLE\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → C → ℕ → Prop\", \"doc\": \"The proposition that object $X$ in abelian category $\\\\mathcal{C}$ has projective dimension strictly less than $n$.\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLE\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → C → ℕ → Prop\", \"doc\": \"For an object $ X $ in an abelian category $ C $, the statement that $ X $ has injective dimension less than or equal to $ n $.\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → C → ℕ → Prop\", \"doc\": \"The proposition that object X in abelian category C has projective dimension less than n\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → C → ℕ → Prop\", \"doc\": \"For an object $ X $ in an abelian category $ C $, the statement that $ X $ has injective dimension less than $ n $.\"}\n  {\"name\": \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  \", \"doc\": \"For any projective object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, and for any object $Y$ in $\\\\mathcal{C}$, the $(n+1)$-th Tor functor $\\\\mathrm{Tor}_{n+1}(X, Y)\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"CategoryTheory.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective Y] (n : ℕ),\\n  \", \"doc\": \"In a monoidal abelian category with enough projectives, for any object $X$ and projective object $Y$, the $(n+1)$-th left-derived tensor product functor $\\\\mathrm{Tor}_{n+1}(X, Y)$ is zero.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary flat or smooth algebras, projective dimensions, ordinary Tor, derived cohomological bounds, or unrelated topology; none states this pseudo-coherent derived fibre criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary flat or smooth algebras, projective dimensions, ordinary Tor, derived cohomological bounds, or unrelated topology; none states this pseudo-coherent derived fibre criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyPerfect|RelativelyPerfect|bounded.*fibre|bounded.*fiber|TorAmplitude|torAmplitude",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Topology/Connected/CardComponents.lean\", \"line\": \"20\", \"text\": \"  the number of connected components of `X` is bounded by the cardinality of the fiber\"}\n  {\"file\": \"Mathlib/Topology/Connected/CardComponents.lean\", \"line\": \"40\", \"text\": \"components of `X` is bounded by the cardinality of the fiber of any point. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary flat or smooth algebras, projective dimensions, ordinary Tor, derived cohomological bounds, or unrelated topology; none states this pseudo-coherent derived fibre criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex over a flat finitely presented algebra has finite Tor dimension over the base when it and all residue field derived fibres are bounded below",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FinitePresentation.baseChange\", \"module\": \"Mathlib.RingTheory.FiniteStability\", \"type\": \"[FinitePresentation R A] : FinitePresentation B (B ⊗[R] A)\", \"doc\": \"Let $R$ be a commutative ring, and let $A$ and $B$ be $R$-algebras. If $A$ is a finitely presented $R$-algebra, then the base change $B \\\\otimes_R A$ is a finitely presented $B$-algebra.\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\n  {\"name\": \"Algebra.QuasiFinite.casesOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure such that for every prime ideal $ P $ in $ R $, the tensor product of the resi\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary flat or smooth algebras, projective dimensions, ordinary Tor, derived cohomological bounds, or unrelated topology; none states this pseudo-coherent derived fibre criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-test-relative-perfection",
+  "date": "2026-10-23",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Relative perfection from lower bounds on the complex and its fibres.",
+   "via": [
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-relative-perfect-fibre-criterion",
+  "worker": "stage1",
+  "summary": "Checked Tag 0GFK and its affine reduction against Tags 0GEH and 0GHJ. Reused existing etale/Zariski, pseudo-coherence, affine Tor and base-change statements; added only the ring-theoretic bounded-residue-fibre criterion. Wrote out the K-flat fibre calculation and finite-cover boundedness argument. Statement unchanged.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/plurinodal/relative-duality supporting branch, specifically the Tag 0GFK input to Tag 0GFL. The inherited nearest blueprint ancestor is null; preserve it and its via list. Latest blueprint checked at literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md.",
+  "tool_uses": [
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Generic affine algebra, scheme-chart, or site-comparison tool used to implement the Stacks 0GFK affine reduction; no step of the constructible six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic affine algebra, scheme-chart, or site-comparison tool used to implement the Stacks 0GFK affine reduction; no step of the constructible six-functor route is replaced."
+   },
+   {
+    "node": "lem-pc-affine-pseudo-coherent-criterion",
+    "why": "Generic affine algebra, scheme-chart, or site-comparison tool used to implement the Stacks 0GFK affine reduction; no step of the constructible six-functor route is replaced."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "Generic affine algebra, scheme-chart, or site-comparison tool used to implement the Stacks 0GFK affine reduction; no step of the constructible six-functor route is replaced."
+   },
+   {
+    "node": "lem-pc-module-flat-transitive",
+    "why": "Generic affine algebra, scheme-chart, or site-comparison tool used to implement the Stacks 0GFK affine reduction; no step of the constructible six-functor route is replaced."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic affine algebra, scheme-chart, or site-comparison tool used to implement the Stacks 0GFK affine reduction; no step of the constructible six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Generic affine algebra, scheme-chart, or site-comparison tool used to implement the Stacks 0GFK affine reduction; no step of the constructible six-functor route is replaced."
+   },
+   {
+    "node": "lem-trf-affine-relative-tor-amplitude-criterion",
+    "why": "Generic affine algebra, scheme-chart, or site-comparison tool used to implement the Stacks 0GFK affine reduction; no step of the constructible six-functor route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Affine quasi-compactness permits a finite covering and hence one lower bound on each individual fibre; this is a generic scheme tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-module-flat-transitive",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-trf-affine-relative-tor-amplitude-criterion",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-401c1adec",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-401c1adec (reviewer sub-agent of L); spot-checked: Read Stacks 0GFK, 0GEH, 0GHJ (statement and proof) and 0DKQ; the tags in the step sources are correct. First one-level split: the item is unsplit on live and side-live and there is no repair note, so this is not a re-split. The item statement is unchanged and matches 0GFK; the extra D_QCoh hypothesis comes from the base and is redundant.\n\nSteps: (1) The base-change node, applied to Spec κ(s)→S, plus the structure-sheaf test gives (ii)⇒(i). (2) The presentation criterion, étale source/target locality, the lfp definition and flat⇔flat-affine reduce to affine U=Spec A→V=Spec R with R→A flat and finitely presented. (3) The a_A realization and its exact faithfulness give the lower bound; the étale/Zariski equivalence, 08HE descent and 08E7 give a bounded-above finite-free model P. (4) The chart-calculus base change, termwise flat pullback and Flat.trans plus 064K K-flatness give P⊗_A B = P⊗_R k representing C⊗^L k. (5) A finite open cover from 03WT plus quasi-compactness of affines, taking the minimum bound and testing geometric stalks; the empty fibre is handled. (6) The new node, then 0DHY, then the 0DK7 étale comparison, then étale locality.\n\nNew node lem-sfb-ring-relative-perfect-fibre-criterion is exactly 0GHJ with R-perfect expanded. It is statement-only with its definitions cited and five searches recorded. Tested on k[ε]/ε² with C=k, on Z→Z[x] with A/(x), and over a field. The DAG search (0GHJ, 0GEH, 0GFK, 0BYP-type nodes, relative-perfect nodes) found no duplicate. It is strictly smaller than the item, not a restatement.\n\nAll nine tool_uses are generic algebra or scheme tools and are accepted. Batch-5: every flagged citation is a generic foundation or definition. Closure walk: no trace-formula/PD theorem or nt-assume node reached (thm-pd-spreading-out is generic). Accepted.\n\nMinor: the report names citations.json and searches.jsonl, which are not in the commit; cosmetic. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativePerfectFibreCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relativePerfect_iff_locally_boundedBelow_fibres",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.residueFieldSpaceMap",
+   "AlgebraicGeometry.AlgebraicSpace.residueFibre",
+   "AlgebraicGeometry.AlgebraicSpace.residueFibreInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.relativePerfect_iff_locally_boundedBelow_fibres"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativePerfectFibreCriterion.lean",
+  "statement": "theorem relativePerfect_iff_locally_boundedBelow_fibres {B : Scheme.{u}} (S : Over B) {X : AlgebraicSpace B} (f : X ⟶ schemeSpace S) (hf : MapIsFlat f) (hfp : MapIsLocallyOfFinitePresentation f) [HasDerivedCategory.{w} X.SmallModules] [∀ s : S.left, HasDerivedCategory.{wF} (residueFibre S f s).SmallModules] (K : X.DerivedModules) (hqc : X.derivedQCohProperty K) (hpc : X.IsPseudoCoherent K) : ((∀ V : X.SmallEtaleModel, ∃ T : Sieve V, T ∈ X.smallEtaleModelTopology V ∧ ∀ (U : X.SmallEtaleModel) (g : U ⟶ V), T g → ∃ c : ℤ, ∀ n : ℤ, n < c → IsZero ((SheafOfModules.overFunctor.{u} X.smallStructureRings U).obj ((DerivedCategory.homologyFunctor X.SmallModules n).obj K))) ∧ ∀ s : S.left, ∀ V : (residueFibre S f s).SmallEtaleModel, ∃ T : Sieve V, T ∈ (residueFibre S f s).smallEtaleModelTopology V ∧ ∀ (U : (residueFibre S f s).SmallEtaleModel) (g : U ⟶ V), T g → ∃ c : ℤ, ∀ n : ℤ, n < c → IsZero ((SheafOfModules.overFunctor.{u} (residueFibre S f s).smallStructureRings U).obj ((DerivedCategory.homologyFunctor (residueFibre S f s).SmallModules n).obj ((derivedTensorPullback (residueFibreInclusion S f s)).obj K)))) ↔ IsPerfectRelativeToScheme S f K",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Local lower bounds are written as covering-sieve vanishing of restricted cohomology on the existing small etale model. Residue fibres and their inclusions are abbreviations of the canonical sheaf fibre product and first projection. Under the explicit quasi-coherence and pseudo-coherence hypotheses, the right-hand predicate is precisely locally finite relative Tor amplitude, tested against all inverse-image-structure-sheaf module sheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e1eae029",
+  "group": "Q04",
+  "result": "fix",
+  "note": "Lean statement and record correct against Stacks 0GFK (spaces-more-morphisms l.12759) and node: S : Over B (B=S.left recovers node, form required by IsPerfectRelativeToScheme), MapIsFlat/MapIsLocallyOfFinitePresentation chart-tested, hqc+hpc exact; X_s/i_s = enlargedFibreProduct/Fst of the represented fromSpecResidueField map (owner def-sfb-space-sheaf-fibre-product cited); Li_s^* = derivedTensorPullback; (i) per-member covering-sieve lower bounds for K and every fibre; (ii) IsPerfectRelativeToScheme = locally finite relative Tor amplitude given hqc/hpc; independent universes w/wF; edge cases (empty X/S/fibre, K=0, nonclosed s) fine; 7 added stmt_deps are landed def nodes, none dropped; statement verbatim; sorry only; no H4 duplicate. Sole fault H11: the second reading was the author's self-check → fixes/lem-sfb-space-relative-perfect-fibre-criterion.report.md (worker report verbatim + independent clause-by-clause reading). No compile run (no Lean changed)."
+ }
+}

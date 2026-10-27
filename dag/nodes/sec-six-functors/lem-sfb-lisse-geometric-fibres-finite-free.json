@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-lisse-geometric-fibres-finite-free",
+ "kind": "statement",
+ "title": "Finite free actual geometric fibres of lisse coefficient modules",
+ "statement": "Fix ell prime, any scheme X and an algebraically closed geometric point x. For each of the integral coefficient rings O_E, the finite-extension coefficient fields E and the finite-subextension-valued condensed algebraic-closure ring, the predicate FiniteFreeFibre of [def-sfb-lisse-representation-data] holds: every lisse module has an additive fibre isomorphism from a finite free module over the original coefficient ring, intertwining its ordinary scalar multiplication with the specified constant-section scalar action. X need not be connected, Noetherian or normal.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+  "place": "Fibres paragraph; original DAG step 3"
+ },
+ "stmt_deps": [
+  "def-sfb-lisse-representation-data"
+ ],
+ "proof": [
+  {
+   "text": "Pull a lisse module back to the geometric point. Restrict a finite free trivialization along a section of its covering arrow to obtain a globally free finite-rank module on the point, including rank zero.",
+   "uses": [
+    "lem-sfb-lisse-module-inverse-image",
+    "lem-sfb-separably-closed-lisse-split-trivialization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the finite direct sum at the final object. Finite sums of abelian sheaves are products, and the point coefficient comparison evaluated at the one-point profinite set gives the original scalar ring. It is a ring-object comparison, so it respects the specified constants and their scalar actions. Transport the ordinary finite basis across this comparison and the global trivialization. For the algebraic-closure ring, every element on the one-point test lies in a finite extension, giving precisely the same scalar ring.",
+   "uses": [
+    "det-pe-condensed-point-coefficients",
+    "sk-def-sfb-qlbar-condensed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lisse-module-inverse-image",
+  "lem-sfb-separably-closed-lisse-split-trivialization",
+  "det-pe-condensed-point-coefficients",
+  "sk-def-sfb-qlbar-condensed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-finite/thm-lisse-qlbar-representations.proof.md",
+  "place": "Fibres paragraph; original DAG step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free geometric fibre of a locally constant sheaf of modules at a separably closed point",
+   "results": "Returned free sheaf modules, free loci and locally constant functions; no normalized condensed geometric fibre/correspondence statement.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match for geometric fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lisse sheaves continuous representations integral lattice normal Noetherian scheme",
+   "results": "Returned invariant integrality and condensed module functors; no matching scheme theorem.",
+   "date": "2026-10-26",
+   "verdict": "No direct Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_finiteDimensional_forall_mem|lisse_qlbar_representations",
+   "results": "Remote msearch grep returned no hits. Local rg of both Lean roots found the assigned theorem, the existing compact matrix theorem in WeilConjectures.RepresentationTheory.IntegralModel, and the invariant-subspace transport helpers in Sheaf.RepresentationTheory.LAdicSubrepresentation. Read the proof-dependency signatures and relevant Mathlib site/module files. No other declaration supplies the new step in its full normalized interface; matrix descent supplies the entry-field step but not the invariant-subspace and continuity comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use existing declarations as ingredients; a separate step is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseQlbarRepresentations",
+  "date": "2026-10-26",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-lisse-qlbar-representations",
+   "place": "Fibres paragraph; original DAG step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseGeometricFibresFiniteFree",
+  "file": "lean/Sheaf/Paper/LisseGeometricFibresFiniteFree.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.LisseRepresentation.lisse_geometric_fibres_finite_free",
+  "statement": "theorem lisse_geometric_fibres_finite_free\n    (ell : ℕ) [Fact ell.Prime] {X : Scheme.{u}}\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) :\n    (∀ E, FiniteFreeFibre (integers ell E)\n      (Padic.coefficientExtensionIntegers ell E) (continuousConstants _) x) ∧\n    (∀ E : PadicAlgCl.FiniteIntermediateField ell,\n      FiniteFreeFibre (Mon.mk (Profinite.continuousMapRingObj E)) E (continuousConstants E) x) ∧\n    FiniteFreeFibre (Mon.mk (Profinite.padicAlgClRingObj ell)) (PadicAlgCl ell)\n      (Profinite.PadicAlgCl.constRingHom ell) x",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbfb8",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T023429-L-565479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-cbfb8",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T023429-L-565479",
+  "kind": "interface",
+  "note": "independent cc review: Defs module vs live item namespace body (verbatim apart from a local irreducible attribute); theorem signature byte-identical; 3 sorry statements vs thm-lisse-qlbar-representations clauses (1)-(4) and GaloisLisseFiniteCorrespondence fields; item node vs live (lean/proof/proof_deps/proof_origin plus an in-order tool_uses subsequence); scratch --all build with #print axioms"
+ }
+}

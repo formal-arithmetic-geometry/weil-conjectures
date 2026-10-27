@@ -1,0 +1,285 @@
+{
+ "id": "lem-sp-normalized-arithmetic-interpolation",
+ "kind": "statement",
+ "title": "Normalized arithmetic interpolation and its actual finite-reduction comparisons",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $\\varpi$, and a scheme $T$ on which $\\ell$ is invertible [def-weil-l-adic-coefficient-extension, def-pc-scheme]. On a small skeleton of $T_{\\mathrm{proét}}$ put $B_k=(R/\\varpi^k)_T$ and $A=\\varprojlim_kB_k$ [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients]. Fix $e\\geq1$. Write $\\mathscr S(B)$ and $\\mathscr S(B_r)$ for strict semilinear module systems over $(B_k)_k$ and $(B_{en})_n$, with their ordinary unbounded derived categories [lem-pur-system-level-left-extension]. Let $C\\in D(\\mathscr S(B_r))$ satisfy normalization: all actual transition adjoints $B_{ea}\\otimes^L_{B_{eb}}C_b\\to C_a$ for $b\\geq a\\geq1$ are isomorphisms. No boundedness, constructibility or Tor bounds are assumed.\n\nLet $F=L_rC$ be the derived left extension adjoint to arithmetic restriction $U$, specified in [lem-pur-system-level-left-extension]. Its natural evaluation formulas are\n$$F_k=B_k\\otimes^L_{B_{e\\lceil k/e\\rceil}}C_{\\lceil k/e\\rceil},\\qquad UF\\cong C.$$\nThe second isomorphism identifies the selected transitions with those of $C$. For $a=\\lceil k/e\\rceil$ and $b=\\lceil(k+1)/e\\rceil$, its adjacent transition adjoint is the map\n$$B_k\\otimes^L_{B_{eb}}C_b\\longrightarrow B_k\\otimes^L_{B_{ea}}C_a$$\ninduced by the actual selected transition adjoint (the identity when $a=b$), under canonical tensor associators. Every transition adjoint of $F$ is an isomorphism, including composites between nonadjacent levels. After scalar forgetting $F$ determines a coherent normalized DVR tower [def-coef-normalized-dvr-tower]. Put $M=R\\varprojlim_n\\operatorname{Res}C_n$ and $\\mathcal L_BF=R\\varprojlim_k\\operatorname{Res}F_k$, using total derived inverse limit [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The canonical arithmetic restriction comparison gives $\\mathcal L_BF\\cong M$, identifying the projections at $en$ with those to $C_n$. The canonical scalar-extension adjoints of those projections are isomorphisms\n$$M\\otimes_A^L B_{en}\\xrightarrow{\\sim}C_n.$$\nThese are the selected actual counit comparisons of the uniformizer reduction/total-limit adjunction [lem-coef-derived-system-evaluation-calculus], and hence are coherent in $D(\\mathscr S(B_r))$, not merely unrelated evaluated isomorphisms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Normalization paragraph of det-sp-integral-adjunction-bijection: Counit, interpolation from ell-power to uniformizer-power levels; retained steps 5–6; extracted intermediate assertion of the retained proof, with explicit formulas; Bhatt–Scholze Definitions 3.5.2–3.5.3 and Lemma 3.5.7, pp. 24–26"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-system-level-left-extension",
+  "def-coef-normalized-dvr-tower",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sp-strict-tower-arithmetic-restriction-data",
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-system-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-system-level-left-extension] to $r(n)=en$. Since $e\\geq1$, this is strictly increasing and unbounded, and its least selected index above $k$ is $t(k)=\\lceil k/e\\rceil$. The stated evaluation and adjacent-transition formulas give exactly those in the assertion. Let $\\eta_C:C\\to UL_rC=UF$ be the actual unit of the adjunction $L_r\\dashv U$ of that node, a morphism in $D(\\mathscr S(B_r))$. Since $L_r$ is the total left derived functor of the strict-system left extension along the subsequence inclusion with the displayed evaluations, $\\eta_C$ is computed on a resolution of $C$ by the underived unit, whose level $n$ is the canonical identification $C_n\\cong B_{en}\\otimes_{B_{en}}C_n$ (here $t(en)=n$). Thus $e_n\\eta_C$ is the canonical isomorphism $C_n\\cong B_{en}\\otimes^L_{B_{en}}C_n=F_{en}$, and the specified transition formula at $m=en$ identifies the selected arrows of $UF$ with the actual arrows of $C$ under it. The evaluations jointly detect isomorphisms [lem-pur-system-level-left-extension], so $\\eta_C$ is an isomorphism of derived strict systems; write $\\phi=\\eta_C^{-1}:UF\\xrightarrow{\\sim}C$, with components $\\phi_n:F_{en}\\to C_n$.",
+   "uses": [
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Counit paragraph; arithmetic interpolation through the existing strict-system left extension, followed by uniformizer reconstruction (agent elaboration)"
+   }
+  },
+  {
+   "text": "For any $j\\geq k$, put $a=t(k)$ and $b=t(j)$. Iterating the specified adjacent maps and their canonical associators gives the map induced by $B_{ea}\\otimes^L_{B_{eb}}C_b\\to C_a$ after applying $B_k\\otimes^L_{B_{ea}}-$. This selected map is an isomorphism by normalization (the identity if $a=b$), and a functor preserves isomorphisms. Hence every transition adjoint of $F$ is invertible. Restriction to $A$ keeps the underlying abelian sheaves and their kernels and cokernels; applied termwise it therefore gives an object of the derived category of strict $A$-towers. Its identities and composition come from the strict system, so this is precisely the coherent normalized tower datum of [def-coef-normalized-dvr-tower].",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "def-pc-sheaf-restrict-scalars",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Counit paragraph; arithmetic interpolation through the existing strict-system left extension, followed by uniformizer reconstruction (agent elaboration)"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-strict-tower-arithmetic-restriction] to this underlying strict $A$-tower; it gives $\\rho_e:\\mathcal L_BF\\xrightarrow{\\sim}R\\varprojlim_n\\operatorname{Res}F_{en}$ with $p_n\\rho_e=p^F_{en}$. Termwise scalar forgetting commutes with selecting the levels $en$, so the scalar-forgotten $\\phi$ of Step 1 is an isomorphism of $A$-towers $r_e\\operatorname{Res}F\\to\\operatorname{Res}C$. Total derived limit is a functor on derived towers whose projections come from its natural Roos triangle [lem-weil-pbc-ringed-strict-tower-homotopy-limit], so $p^C_nR\\varprojlim(\\phi)=\\phi_n p_n$. Put $\\rho=R\\varprojlim(\\phi)\\circ\\rho_e:\\mathcal L_BF\\xrightarrow{\\sim}M$. Then $p^C_n\\rho=\\phi_np^F_{en}$ for every $n$, i.e. $\\rho$ identifies the projection of $\\mathcal L_BF$ at $en$ with that of $M$ to $C_n$ under $\\phi_n$. These are total derived limits and their specified projections.",
+   "uses": [
+    "lem-sp-strict-tower-arithmetic-restriction",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Counit paragraph; arithmetic interpolation through the existing strict-system left extension, followed by uniformizer reconstruction (agent elaboration)"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-normalized-actual-reconstruction-maps] to the normalized system $F$, using exactly the uniformizer system and adjunction of [lem-coef-derived-system-evaluation-calculus]. Its actual counit $\\mathcal R_B\\mathcal L_BF\\to F$ is a system isomorphism; its evaluation at $k$ is the scalar-extension adjoint of $p^F_k$. Restrict this system map to $en$, precompose with $U\\mathcal R_B(\\rho^{-1})$, and postcompose with $\\phi:UF\\xrightarrow{\\sim}C$. On one K-flat representative, $U\\mathcal R_B(M)$ is the selected reduction system $(M\\otimes_A^LB_{en})_n$. At level $n$ the resulting map is adjoint to $\\phi_np^F_{en}\\rho^{-1}=p^C_n$, so it is exactly the asserted comparison. All three maps are system isomorphisms, proving both invertibility and coherence of the selected actual counit maps.",
+   "uses": [
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Counit paragraph; arithmetic interpolation through the existing strict-system left extension, followed by uniformizer reconstruction (agent elaboration)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-level-left-extension",
+  "def-pc-sheaf-restrict-scalars",
+  "def-coef-normalized-dvr-tower",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Counit paragraph; arithmetic interpolation through the existing strict-system left extension, followed by uniformizer reconstruction (agent elaboration)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalized.*system|system.*normalized|subsequence.*tensor|tensor.*subsequence",
+   "results": "0 hits: ; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor compatible inverse systems remain normalized under left extension from a cofinal subsequence",
+   "results": "8 hits: CategoryTheory.Functor.IsLeftDerivedFunctor.mk, TensorProduct.directLimitLeft_symm_of_tmul, CategoryTheory.Functor.totalLeftDerived, InverseSystem.limit, TensorProduct.directLimitLeft, Submodule.FG.rTensor.directLimit, InverseSystem.isNatEquiv_piEquivLim, TensorProduct.directLimitRight; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LeftDerived",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.Functor.LeftDerived'; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived normalized compatible systems of modules interpolate across an arithmetic subsequence by derived left Kan extension",
+   "results": "8 hits: IsAdicComplete.StrictMono.extend_eq, IsAdicComplete.StrictMono.factorPow_comp_extend, localCohomology.diagram, IsAdicComplete.StrictMono.extend, localCohomology.ofDiagram, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, IsAdicComplete.StrictMono.of_comp_lift, localCohomology; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*section|section.*cartesian|normalized.*tower|tower.*normalized",
+   "results": "3 hits: Mathlib/CategoryTheory/Monoidal/Cartesian/Mon.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "12 hits: CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.HasLeftDerivedFunctor.mk', CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension, CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.leftDerivedUnique; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived extension of cartesian sections along a cofinal arithmetic subsequence preserves cartesian transition maps",
+   "results": "8 hits: CategoryTheory.Functor.WellOrderInductionData.sectionsMk, nonempty_sections_of_finite_inverse_system, TopCat.partialSections.nonempty, CategoryTheory.Functor.toEventualRangesSectionsEquiv, TopCat.partialSections, CategoryTheory.Functor.WellOrderInductionData.map_lift, InverseSystem.piLTLim_apply, CategoryTheory.Limits.SequentialProduct.functorMap_commSq_aux; read the returned signatures: generic adjunction/Kan-extension/ordinary completion facts do not state the varying-ring derived-system or Roos-unit assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized inverse system of derived modules over powers of a uniformizer is recovered by reducing its derived inverse limit",
+   "results": "8 hits: AdicCompletion, AdicCompletion.congr_symm_apply, AdicCompletion.submodule, InverseSystem.limit, InverseSystem.isNatEquiv_piEquivLim, Module.DirectLimit.module, InverseSystem.invLimEquiv_symm_apply_coe, Module.DirectLimit.inhabited.  Read returned signatures; ordinary adic completion and generic derived/Kan functors do not assert unbounded varying-sheaf-ring interpolation and its actual counit comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "12 hits: CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.HasLeftDerivedFunctor.mk', CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension, CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.leftDerivedUnique.  Read returned signatures; ordinary adic completion and generic derived/Kan functors do not assert unbounded varying-sheaf-ring interpolation and its actual counit comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*(system|tower)|arithmetic.*(restriction|subsequence)",
+   "results": "3 hits: Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean.  Read returned signatures; ordinary adic completion and generic derived/Kan functors do not assert unbounded varying-sheaf-ring interpolation and its actual counit comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived normalized systems of sheaves over DVR quotients interpolate from arithmetic subsequences and reconstruct as reductions of their derived inverse limit",
+   "results": "8 hits: BDeRhamPlus, BDeRham, IsAdicComplete.StrictMono.extend, AdicCompletion.transitionMap_comp_reduceModIdeal, IsAdicComplete.StrictMono.lift, IsAdicComplete.StrictMono.extend_eq, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq', AdicCompletion.transitionMap_comp_eval_apply.  Read returned signatures; ordinary adic completion and generic derived/Kan functors do not assert unbounded varying-sheaf-ring interpolation and its actual counit comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived extension of cartesian module systems along a cofinal subsequence and compatibility of their actual counit reduction maps",
+   "results": "8 hits: Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, Condensed.profiniteSolidCounit, Profinite.NobelingProof.GoodProducts.square_commutes, localCohomology.diagram, IsAdicComplete.StrictMono.factorPow_comp_extend, Condensed.profiniteSolidification, Condensed.profiniteSolid, IsAdicComplete.StrictMono.extend.  Read returned signatures; ordinary adic completion and generic derived/Kan functors do not assert unbounded varying-sheaf-ring interpolation and its actual counit comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-normalized-equivalence",
+  "date": "2026-10-22",
+  "group": "Q77"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization paragraph of det-sp-integral-adjunction-bijection: Counit, interpolation from ell-power to uniformizer-power levels; retained steps 5–6",
+   "via": [
+    "det-sp-normalized-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-normalized-arithmetic-interpolation",
+  "worker": "stage1",
+  "summary": "Kept the full unbounded statement. Specialized the existing strict-system left extension, checked normalization for all selected index pairs, applied canonical arithmetic cofinality with projection identities, and restricted the actual uniformizer reconstruction counit. No new nodes; no boundedness or constructibility assumptions added.",
+  "blueprint": "det-sp-integral-adjunction-bijection, Counit normalization/reconstruction passage, via det-sp-normalized-equivalence: interpolation from arithmetic selected levels to uniformizer levels and return of the actual finite counit comparisons. Realizes the Counit paragraph of sk-lem-sp-tower-equivalence.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "General strict-system left extension supplies interpolation with its actual transitions; it is a coefficient-system tool, not a replacement for the integral-adjunction route."
+   },
+   {
+    "node": "lem-sp-strict-tower-arithmetic-restriction",
+    "why": "Generic arithmetic cofinality for strict module towers supplies the canonical limit comparison and selected projection equality."
+   },
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "The uniformizer reconstruction theorem supplies the actual counit isomorphism before restriction to the arithmetic subsequence, exactly the reconstruction passage required by this unit."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "The generic reduction/total-limit adjunction supplies coherent system maps and identifies their evaluated adjoints; its enriched internal-Hom clauses are not used."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Step 3 takes from its statement only that total derived limit is a functor with natural Roos-triangle projections; generic ringed-tower tool already in the item's stmt_deps, no route step replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-system-level-left-extension",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NI-94f2ec32b",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-94f2ec32b (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement and stmt_deps are byte-identical to the base copy, there are no new nodes, and there is no re-split note for it. I read the source at the blueprint main-20261015 sk-lem-sp-tower-equivalence.proof.md Counit paragraph and at Bhatt–Scholze Lemma 3.5.7, which is background only; no SGA is cited. I checked every step against the full statements of the cited nodes: system-level left extension (t(k)=ceil(k/e), evaluation and transition formulas), arithmetic restriction with O=A (p_n rho=p_en), actual reconstruction maps (counit iso on normalized F, evaluation = adjoint of the projection) and evaluation calculus (R ⊣ L, K-flat model). Step 2's normalization is correct: k<=ea<=eb and j<=eb, and the composite is the base change of the selected adjoint, which normalization makes invertible. Step 4's composite is adjoint to p^C_n. Edge cases checked: e=1, e=2 with k=1..4, the zero system, empty T, and non-flat transitions. The DAG traversal (1300 nodes) finds no cycle. I accept the declared tool_uses. Two faults are repaired in fixes/dag/nodes/sec-smooth-purity/lem-sp-normalized-arithmetic-interpolation.json. (1) E5 in Step 1: UF≅C was assembled from natural levelwise identifications. It now comes from the actual unit eta_C of L_r ⊣ U: its level-n evaluation is the canonical C_n≅B_en⊗B_en C_n, and joint detection of isomorphisms makes it invertible (phi = eta_C^{-1}). (2) C1/C4 in Step 3: the functoriality of R lim and its projections was used without a citation. Step 3 now cites lem-weil-pbc-ringed-strict-tower-homotopy-limit (already a stmt_dep), and the identity now reads p^C_n rho = phi_n p^F_en. Step 4's notation was adjusted to match, the new citation was added to proof_deps, and a tool_uses entry was added for it. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedArithmeticInterpolation",
+  "declaration": "WeilConjectures.spNormalizedArithmeticInterpolation",
+  "declarations": [
+   "WeilConjectures.spInterpolationSequenceEquivalence",
+   "WeilConjectures.spInterpolationSequenceAdditive",
+   "WeilConjectures.spInterpolationSequenceInverseAdditive",
+   "WeilConjectures.spInterpolationIndex_strictMono",
+   "WeilConjectures.spInterpolationIndex",
+   "WeilConjectures.spInterpolationRings",
+   "WeilConjectures.spInterpolationSystems",
+   "WeilConjectures.SpInterpolationForgetting",
+   "WeilConjectures.spInterpolationRestrictionLimits",
+   "WeilConjectures.spInterpolationRestrictionColimits",
+   "WeilConjectures.spInterpolationEvaluation",
+   "WeilConjectures.spInterpolationForgetEvaluation",
+   "WeilConjectures.spInterpolationLimit",
+   "WeilConjectures.spInterpolationProjection",
+   "WeilConjectures.SpInterpolationNormalized",
+   "WeilConjectures.spInterpolationDerivedEquivalence",
+   "WeilConjectures.spInterpolationOrdinaryEvaluation_exists",
+   "WeilConjectures.spInterpolationOrdinaryEvaluation",
+   "WeilConjectures.spInterpolationEvaluationAdditive",
+   "WeilConjectures.spInterpolationFullEvaluation",
+   "WeilConjectures.spInterpolationSelectedEvaluation",
+   "WeilConjectures.spInterpolationReductionEvaluation",
+   "WeilConjectures.spInterpolationCounit",
+   "WeilConjectures.spInterpolationRestrictionSquare",
+   "WeilConjectures.SpNormalizedArithmeticInterpolation",
+   "WeilConjectures.spNormalizedArithmeticInterpolation"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedArithmeticInterpolation.lean",
+  "statement": "theorem spNormalizedArithmeticInterpolation (_hl : IsUnit (l : Γ(W, ⊤))) (L : SystemLevelLeftExtensionTheory.{t + 1, t, max u (t + 1)} (J := Scheme.ProEt.topology W)) (S : CoefficientDerivedSystemCalculus l E W) (e : ℕ) (he : 1 ≤ e) (N : DerivedCategory (spInterpolationSystems l E W (spInterpolationIndex e he))) (_hN : SpInterpolationNormalized l E W L (spInterpolationIndex e he) N) : Nonempty (SpNormalizedArithmeticInterpolation l E W L S e he N)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Positive exponent k+1 is encoded by k; the arithmetic embedding is e*(n+1)-1. Uses the recorded ordinary unbounded strict-system left extension and the existing ringed-sequence reduction calculus. The conclusion fixes the actual inverse unit, actual adjacent transition adjuncts, canonical total-limit arithmetic restriction, selected projections and the one coherent restricted actual counit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d9cec94f",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Re-delivery of 4598 (H2 RETURN). Lean byte-identical to the 4598 module, whose maths was reviewed clause by clause and passed; lean.statement verbatim. Node diff vs 4598 and side-live main is only the requested stmt_deps def-sp-strict-tower-arithmetic-restriction-data, def-pur-system-level-left-extension-basic, lem-pur-system-ringed-sequence-site, all landed on base. Report has Worker report, Second reading by Q113 and a repair section. Mechanical theorem-stmt_dep flag: lem-pur-system-ringed-sequence-site's declaration is def strictSystemSequenceEquivalence, the explicit equivalence the node constructs; the item is typed through it and no def node owns it, so the citation is correct. Advisory unchanged: DVR-tower clause rendered via IsNormalizedCoefficientSequence plus strict forgetting tower. No compile run (no file changed)."
+ }
+}

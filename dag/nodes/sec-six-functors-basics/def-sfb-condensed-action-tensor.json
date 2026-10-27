@@ -11,9 +11,45 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), dense-lattice input: agent-formulated formal restriction and cup-product infrastructure. Bhatt-Scholze section 4.3 and the Stacks right-derived construction provide context, not this entire internal-ring statement; exact reference WANTED."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The diagonal action tensor, closedness and functorial flat resolutions remain the existing actionTensorExist obligation; no replacement statement is introduced.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The internal/section tensor isomorphism identifies the internal relative tensor with the sheafification of sectionwise balanced tensors. Its unit is locally surjective. After restricting to its image cover, tensor induction shows that an action fixing generalized pure tensors fixes every section. Sheaf separatedness gives the equality globally.",
+   "uses": [
+    "lem-c2-internal-section-module-flatness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding observation and the diagonal equation to two trivial actions. For the unit, equivariance of the left unitor on its tensor with the trivial regular module, followed by injectivity of the underlying comparison and unitor, identifies the pure tensors of g z and z with 1. The ordinary right-unitor formula sends these tensors to g z and z, so the unit action is trivial. Lift the inverse forgetful tensor and unit comparisons to equivariant isomorphisms. Check naturality, associativity and both unit laws after forgetting the action using the monoidal functor map equations.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Trivial inflation is the left adjoint in the already specified invariant-submodule adjunction. Apply Adjunction.leftAdjoint_preservesColimits for colimits in universe u+1. Apply preservesSmallestColimits_of_preservesColimits for the universe-zero version.",
+   "uses": [
+    "def-sfb-condensed-derived-invariants"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-c2-internal-section-module-flatness",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-condensed-derived-invariants"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), dense-lattice input: agent-formulated formal restriction and cup-product infrastructure. Bhatt-Scholze section 4.3 and the Stacks right-derived construction provide context, not this entire internal-ring statement; exact reference WANTED.",
+  "note": "W3: partial proof route for trivialTensorExist and the two colimit theorems; actionTensorExist retains its original obligation. Uses the proved local-pure-tensor comparison and the invariant adjunction."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -227,10 +263,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -280,5 +320,15 @@
   "group": "NI",
   "result": "fix",
   "note": "Read the item, 11 stmt_deps, 5 new def nodes and all 6 modules against the node. Every clause is rendered faithfully: exact forget/inflation/restriction/scalar, Grothendieck structure, b_u = rightDerivedPullback of the unique invariant inclusion with unit normalization, CommShift, degree zero, identity case, c_J via a unique unit-normalized scalarComparison (no flatness), coefficientSquare, the unital cup algebra as the mate of the K-flat-pinned strong trivial tensor, the unique UnipotentAction on R⊞R, and the class/product formulas for restriction and coefficient change. Mathlib's cone differential makes singleδ = +snake δ, so [a] has cocycle +a as required. All choices are pinned; no hollow defs; records match; item statement unchanged; stmt_deps only gained new def nodes. Only fault, H8: 5 of 6 modules had no module docstring. FIX adds docstrings only (the item's includes the 12-step proof outline) plus an item lean-record override keeping the statement verbatim. nt_compile --json twice timed out at 60 s on the unchanged sibling CondensedDerivedInvariants at load 153-162; changes are comment-only; the worker compiled all six clean (46.0 s). Notes: overlap with Q02's profinite-only def-sfb-condensed-derived-inflation-arrows (not a duplicate); the new cup def node cites theorem lem-derived-right-exact-tensor-comparison for a plain Prop predicate (advisory); proof-dep imports are not in the item module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T061053-L-2395808",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

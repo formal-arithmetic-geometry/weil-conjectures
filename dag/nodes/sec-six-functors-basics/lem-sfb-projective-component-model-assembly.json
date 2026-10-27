@@ -1,0 +1,324 @@
+{
+ "id": "lem-sfb-projective-component-model-assembly",
+ "kind": "statement",
+ "title": "Assembly of projective normal component models and Cartier markings",
+ "statement": "Let $e$ be a field [def-weil-field], let $T$ be a nonempty reduced proper finite-type $e$-scheme [def-pc-reduced-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism], and enumerate its distinct reduced irreducible components $T_1,\\ldots,T_s$ [def-weil-irreducible-components, def-weil-pbc-scheme-reduction, def-weil-closed-immersion], where $1\\le s<\\infty$. Let $C\\subseteq T$ be closed and nowhere dense. For each $i$ suppose $N_i$ is a nonempty integral normal geometrically reduced $e$-scheme [def-pc-integral-scheme, def-weil-pbc-normal-ring, def-pc-geometrically-irreducible], where normal means every local ring is an integrally closed domain, with a closed immersion $N_i\\hookrightarrow\\mathbf P^{m_i}_e$ [def-nagata-projective-space-base-change]. Suppose $q_i:N_i\\to T_i$ is a proper $e$-morphism, surjective [def-weil-surjective-morphism] and birational (an isomorphism between dense open subschemes [def-weil-open-immersion]), and $\\mathcal J_i$ is an effective Cartier ideal [def-nagata-effective-cartier-ideal] on $N_i$ with support $q_i^{-1}(C\\cap T_i)$. Then the scheme disjoint union $B=\\coprod_{i=1}^sN_i$ and induced $e$-morphism $q:B\\to T$ exist. Each $N_i$ is an open-and-closed subscheme of $B$. The scheme $B$ is proper and finite type over $e$, geometrically reduced, and admits a closed immersion $B\\hookrightarrow\\mathbf P^M_e$, with $M+1=\\sum_i(m_i+1)$ [def-kun-projective]. The ideals $\\mathcal J_i$ are restrictions of an effective Cartier ideal $\\mathcal J$ on $B$, with support $q^{-1}C$. The morphism $q$ is surjective, maps the generic point [def-sc-generic-point] of each $N_i$ to the generic point of $T_i$, and induces isomorphisms of the corresponding residue fields [def-weil-residue-field]. Thus it induces a bijection between the component generic points of $B$ and $T$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150: reconstruction from the finitely many components. Agent expansion of the finite disjoint union using disjoint projective coordinate blocks and Cartier ideals on open-and-closed summands."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-reduced-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-pc-geometrically-irreducible",
+  "def-nagata-projective-space-base-change",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion",
+  "def-nagata-effective-cartier-ideal",
+  "def-kun-projective",
+  "def-sc-generic-point",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-scheme-coproduct-family] to the finite family $(N_i)$. It gives $B$, its pairwise disjoint clopen summands, and a unique $e$-morphism $q:B\\to T$ whose restriction to $N_i$ is $N_i\\xrightarrow{q_i}T_i\\hookrightarrow T$. For $t\\in T$, choose $i$ with $t\\in T_i$ and then $n\\in N_i$ with $q_i(n)=t$. Thus $q$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes); ILO X 2.3 Step 1, printed p.150"
+   }
+  },
+  {
+   "text": "Write $a_i:N_i\\hookrightarrow\\mathbf P^{m_i}_e$ for the given embeddings and $L_i=a_i^*\\mathcal O(1)$. By [lem-weil-pbc-projective-space-standard-charts], the sections $a_i^*T_{i,a}$ locally freely generate $L_i$, and at every point at least one is nonzero. On a disjoint open cover sheaves are given componentwise: put $L(U)=\\prod_i L_i(U\\cap N_i)$ with componentwise restrictions and $\\mathcal O_B(U)$-action. The sheaf axiom follows by gluing separately in each $N_i$, and [def-weil-open-immersion] identifies its restriction with $L_i$. Hence $L$ is invertible. For each $(i,a)$ let $s_{i,a}$ restrict to $a_i^*T_{i,a}$ on $N_i$ and to zero elsewhere. These sections generate $L$ at every point. Order their $\\sum_i(m_i+1)=M+1$ indices. Apply [lem-weil-pbc-projective-space-functor-of-points] and the base-change construction [def-weil-pbc-morphism-to-projective-space-by-sections] to obtain an $e$-morphism $a:B\\to\\mathbf P^M_e$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-projective-space-functor-of-points",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NE (lemma-projective-space), 01NG (lemma-standard-covering-projective-space); agent coordinate-block expansion"
+   }
+  },
+  {
+   "text": "For the standard target chart $D_+(T_{i,a})$, [lem-weil-pbc-projective-morphism-chart-preimage] identifies its inverse image with $W_{i,a}=a_i^{-1}(D_+(T_{i,a}))\\subset N_i$: the section $s_{i,a}$ is zero on every other summand. The chart description [lem-weil-pbc-projective-space-standard-charts] and the affine quotient criterion in [def-weil-closed-immersion] give $W_{i,a}=\\operatorname{Spec}(e[u_b:b\\ne a]/K_{i,a})$, where $u_b=T_{i,b}/T_{i,a}$ in the original projective space. By the ratio formula in [lem-weil-pbc-projective-morphism-chart-preimage], the ring map for $a$ on this chart sends $T_{i,b}/T_{i,a}$ to $u_b\\bmod K_{i,a}$ and $T_{j,c}/T_{i,a}$ to zero for $j\\ne i$. It is surjective since the $u_b$ generate the quotient. Thus every chart restriction of $a$ is a closed immersion by [def-weil-closed-immersion]. These standard target charts cover; apply clause (1) of [lem-weil-pbc-closed-finite-etale-zariski-local] to conclude that $a$ is a closed immersion. This proves the specified dimension bound, without changing any of the given embeddings.",
+   "uses": [
+    "lem-weil-pbc-projective-morphism-chart-preimage",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-finite-etale-zariski-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NG (lemma-standard-covering-projective-space); morphisms.tex Tag 01QO (lemma-closed-immersion), affine quotient criterion; agent block-coordinate calculation"
+   }
+  },
+  {
+   "text": "The closed immersion $a$ makes $B\\to\\operatorname{Spec}e$ projective in [def-kun-projective]. By [lem-kun-projective-implies-proper] this morphism is proper, hence of finite type by [def-weil-proper-morphism].",
+   "uses": [
+    "def-kun-projective",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1 (definition-proper); Tag 01WC (lemma-locally-projective-proper), applied to an H-projective morphism"
+   }
+  },
+  {
+   "text": "For every field extension $E/e$, [lem-sc-etale-fibre-product-base-change-coproduct] identifies $B_E$ with $\\coprod_i(N_i)_E$, with the indicated coprojections and projections. At any point its local ring is that of its summand by [def-weil-open-immersion]. Each such local ring is reduced, since each $N_i$ is geometrically reduced. By [def-pc-reduced-scheme] and [def-pc-geometrically-irreducible], $B_E$ is reduced for every $E$, so $B$ is geometrically reduced.",
+   "uses": [
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "def-weil-open-immersion",
+    "def-pc-reduced-scheme",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB and 01JC, empty-overlap gluing and its base change; reducedness checked on the displayed local rings"
+   }
+  },
+  {
+   "text": "On an open $U\\subset B$ define $\\mathcal J(U)=\\prod_i\\mathcal J_i(U\\cap N_i)\\subset\\prod_i\\mathcal O_{N_i}(U\\cap N_i)=\\mathcal O_B(U)$, with componentwise restriction. Gluing sections separately on each summand verifies the sheaf axiom. By [def-weil-open-immersion], its restriction to $N_i$ is exactly $\\mathcal J_i$. Its quasi-coherent affine presentations and local generators are those of $\\mathcal J_i$ on the affine open covers inside $N_i$; these form an open cover of $B$. Their generators remain non-zero-divisors in the same rings, so [def-nagata-effective-cartier-ideal] makes $\\mathcal J$ effective Cartier. Here support means the support of $\\mathcal O_B/\\mathcal J$. On each summand it is $q_i^{-1}(C\\cap T_i)$, which equals $(q^{-1}C)\\cap N_i$, proving the asserted support equality.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 01WR (definition-effective-Cartier-divisor), 01WS (lemma-characterize-effective-Cartier-divisor), local non-zero-divisor formulation; agent explicit product-of-sections construction"
+   }
+  },
+  {
+   "text": "By [def-pc-integral-scheme] each $N_i$ is irreducible, and [lem-weil-pbc-scheme-sober] supplies its unique generic point $\\eta_i$ and that of each $T_i$. Choose the dense open isomorphism $U_i\\xrightarrow{\\sim}V_i$ defining birationality of $q_i$. A generic point belongs to every nonempty open: otherwise its closure lies in the complementary closed subset. Thus $\\eta_i\\in U_i$. Its image is generic in $V_i$, hence generic in $T_i$ since $V_i$ is dense. These are exactly the generic points of the distinct components of $T$. An irreducible subset of $B$ cannot meet two clopen summands, since that would split it into two disjoint nonempty open subsets; therefore the $N_i$ are exactly the irreducible components of $B$. For residue fields, the open inclusions $U_i\\hookrightarrow N_i$, $V_i\\hookrightarrow T_i$ induce isomorphisms by [lem-weil-pbc-residue-field-point-naturality], and the displayed isomorphism induces an isomorphism on residue fields. The inclusions $T_i\\hookrightarrow T$ induce isomorphisms by [lem-weil-pbc-closed-immersion-residue-field-iso]; the clopen inclusions $N_i\\hookrightarrow B$ do so by the open-immersion case. The composite maps are the maps induced by $q$. This proves both the asserted residue-field isomorphisms and the bijection on component generic points.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "lem-weil-pbc-closed-immersion-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IS (lemma-scheme-sober), 01HH (lemma-open-immersion); morphisms.tex Tag 01QO for closed-immersion residue fields; agent use of the given dense open isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "def-kun-projective",
+  "lem-kun-projective-implies-proper",
+  "def-weil-proper-morphism",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "def-pc-reduced-scheme",
+  "def-pc-geometrically-irreducible",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 1, printed p.150; detailed coproduct, coordinate-block embedding and Cartier-ideal assembly using Stacks 01JB, 01JC, 01NE, 01NG, 01QO, 01WR, 01IS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Assemble finitely many normal projective geometrically reduced birational component models into a projective disjoint union with a surjective generic-point bijection and glued Cartier boundary",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {U V : AlgebraicGeometry.Scheme} →\\n          {iU : U ⟶ X} →\\n            {iV : V ⟶ X} →\\n              CategoryTheory.Limits.IsColimit (Categ\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and quasi-separated morphism of schemes. Suppose $X$ is the coproduct of two schemes $U$ and $V$ via open immersions $i_U: U \\\\to X$ and $i_V: V \\\\to X$, which are al\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"The composition of the normalization morphism of the composite morphism $ i_V \\\\circ f $, followed by the right inclusion into the coproduct and the hom-component of the normalization coproduct isomorp\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite disjoint unions of projective varieties embed in projective space using disjoint coordinate blocks and assemble Cartier ideals and birational component maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"ProjectiveSpectrum.basicOpen_eq_union_of_projection\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubmonoidClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A),\\n  ProjectiveSpectrum.basicOpen 𝒜 f = ⨆ i, ProjectiveSpectrum.basicOpen 𝒜 ((GradedRing.proj 𝒜 i) f)\", \"doc\": \"For a homogeneous element $ f $ in a graded ring $ A $, the basic open set $ D_+(f) $ in the projective spectrum $ \\\\text{Proj}(A) $ is equal to the union over all $ i \\\\in \\\\mathbb{N} $ of the basic ope\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.sigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"{ι : Type u} →\\n  (R : ι → CommRingCat) →\\n    (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶\\n      AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing }\", \"doc\": \"Given an indexed family of commutative rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, this constructs the canonical morphism from the coproduct (disjoint union) of the affine schemes $\\\\operatorname{Spec}(R_i)$ to the\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a scheme $X$ equipped with a ring homomorphism $f: \\\\mathcal{A}_0 \\\\to \\\\mathcal{O}_X(\\\\top)$ from the degree-zero component of $\\\\mathcal{A}$ to the structure sheaf o\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionSigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat), AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.sigmaSpec R)\", \"doc\": \"For any indexed family of commutative rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, the canonical morphism from the coproduct (disjoint union) of the affine schemes $\\\\operatorname{Spec}(R_i)$ to the affine scheme $\\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.Limits.Sigma",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Limits.Sigma'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "coprod|sigma|disjoint|IsProjective",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"1178\", \"text\": \"        codisjoint_iff_compl_le_left.mp (X.codisjoint_zeroLocus (U := U) (I ∩ J)) hxU,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"1179\", \"text\": \"        codisjoint_iff_compl_le_left.mp (X.codisjoint_zeroLocus (U := U) I) hxU, true_or]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"1200\", \"text\": \"    (codisjoint_iff_compl_le_left.mp (X.codisjoint_zeroLocus (U := U) (I i)) hx)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"184\", \"text\": \"    IsLocalization.under_map_of_isPrime_disjoint (.powers f)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"187\", \"text\": \"  · exact (disjoint_powers_iff_notMem_of_isPrime _).mpr x.2\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"193\", \"text\": \"  exact IsLocalization.isPrime_of_isPrime_disjoint\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"195\", \"text\": \"    ((disjoint_powers_iff_notMem_of_isPrime _).mpr x.2)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Properties.lean\", \"line\": \"276\", \"text\": \"    (X.sheaf.isProductOfDisjoint ⟨_, hS.1⟩ ⟨_, hT.1⟩ ?_).conePointUniqueUpToIso\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"311\", \"text\": \"    IsEmpty ↑(Limits.pullback f g) ↔ Disjoint (Set.range f) (Set.range g) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"313\", \"text\": \"  rw [Set.disjoint_iff_forall_ne]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"322\", \"text\": \"  rw [← not_isEmpty_iff, AlgebraicGeometry.Scheme.isEmpty_pullback_iff, Set.not_disjoint_iff]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"line\": \"820\", \"text\": \"    ((equivShrink J).trans <| (Equiv.uniqueSigma fun (_ : Unit) ↦ Shrink J).symm)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean\", \"line\": \"138\", \"text\": \"    simpa [← hV, Set.iUnion_sigma, Set.iUnion_subtype, Set.image_iUnion, Set.image_image] using! hU\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Sigma.lean\", \"line\": \"29\", \"text\": \"object is the disjoint union. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Sigma.lean\", \"line\": \"31\", \"text\": \"noncomputable def sigma (𝒰 : Cover.{v} (precoverage P) S) : S.Cover (precoverage P) where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Sigma.lean\", \"line\": \"34\", \"text\": \"  f _ := Sigma.desc 𝒰.f\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Sigma.lean\", \"line\": \"37\", \"text\": \"    refine ⟨fun s ↦ ?_, fun _ ↦ IsZariskiLocalAtSource.sigmaDesc 𝒰.map_prop⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Sigma.lean\", \"line\": \"39\", \"text\": \"    refine ⟨default, Sigma.ι 𝒰.X i y, by simp [← Scheme.Hom.comp_apply]⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"line\": \"164\", \"text\": \"    ((Equiv.punitProd _).symm.trans (Equiv.sigmaEquivProd PUnit 𝒰.I₀).symm) (fun _ => Iso.refl _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"80\", \"text\": \"    let 𝒰' := 𝒰.forgetQc.sigma\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"82\", \"text\": \"      ← Scheme.Cover.isSheafFor_sigma_iff hzar, Presieve.ofArrows_of_unique]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"83\", \"text\": \"    have : IsAffine (𝒰.forgetQc.sigma.X default) := by dsimp; infer_instance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"84\", \"text\": \"    let f : Spec _ ⟶ Spec R := (𝒰.forgetQc.sigma.X default).isoSpec.inv ≫ 𝒰.forgetQc.sigma.f default\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"87\", \"text\": \"      (𝒰.forgetQc.sigma.X default).isoSpec (by simp [hφ, f])]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"84\", \"text\": \"  let g : Z ⟶ Y := Sigma.desc fun Z ↦ Y.fromSpecStalk _\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply constituent notions or separate properties, not this complete intermediate construction or preservation statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Assemble finitely many normal projective geometrically reduced birational component models into a projective disjoint union with a surjective generic-point bijection and glued Cartier boundary",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Scheme",
+   "results": "OK 12 hits: IsClosedImmersion and its base-change, composition, stalk and affine properties; none assembles projective component models, generic fields and Cartier ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*(coprod|sigma)|(?:coprod|sigma).*projective",
+   "results": "0 hits; inspected results: none",
+   "date": "2026-10-23",
+   "verdict": "no match: constituent coproduct, Proj, affine and immersion interfaces only; none states all clauses of the component-model assembly"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite disjoint union of projective schemes with effective Cartier ideals is projective and the ideals glue",
+   "results": "8 hits; inspected results: AlgebraicGeometry.instIsAffineSigmaObjScheme, AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint, AlgebraicGeometry.instIsAffineCoprodScheme, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.coprodSpec, AlgebraicGeometry.Scheme.LocalRepresentability.toGlued",
+   "date": "2026-10-23",
+   "verdict": "no match: constituent coproduct, Proj, affine and immersion interfaces only; none states all clauses of the component-model assembly"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Scheme",
+   "results": "12 hits; inspected results: AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.respectsIso, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: constituent coproduct, Proj, affine and immersion interfaces only; none states all clauses of the component-model assembly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite disjoint unions of projective schemes admit a closed embedding into projective space in disjoint coordinate blocks with Cartier ideals glued from the components",
+   "results": "8 hits; inspected results: AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.instIsOpenImmersionSigmaSpec, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-23",
+   "verdict": "no match: constituent coproduct, Proj, affine and immersion interfaces only; none states all clauses of the component-model assembly"
+  },
+  {
+   "tool": "grep",
+   "query": "isClosedImmersion.*[Pp]roj|[Pp]roj.*isClosedImmersion|sigmaDesc.*[Pp]roper",
+   "results": "0 hits; inspected results: none",
+   "date": "2026-10-23",
+   "verdict": "no match: constituent coproduct, Proj, affine and immersion interfaces only; none states all clauses of the component-model assembly"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite coproduct of projective varieties embeds into a larger projective space by setting all coordinates outside each block to zero",
+   "results": "8 hits; inspected results: AlgebraicGeometry.sigmaSpec, AlgebraicGeometry.instIsOpenImmersionSigmaSpec, AlgebraicGeometry.coprodSpec, AlgebraicGeometry.ι_sigmaSpec, AlgebraicGeometry.coprodSpec_coprodMk, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.sigmaMk_mk, AlgebraicGeometry.coprodMk",
+   "date": "2026-10-23",
+   "verdict": "no match: constituent coproduct, Proj, affine and immersion interfaces only; none states all clauses of the component-model assembly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-pair-radicial-preparation",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 1, printed p.150 (compactification, reduced components, radicial constants, blowup, finite normalization), applied to the finitely many components with one common finite radicial constant extension. The compactification is chosen with C the closure of Z; including the complement of X is optional, not required.; returned proper-pair proof steps 11--12: Assembly of projective normal component models and Cartier markings. No imported blueprint ancestor exists on this added-input branch.",
+   "via": [
+    "lem-sfb-proper-pair-radicial-preparation",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-component-model-assembly",
+  "worker": "stage1",
+  "summary": "Read ILO X 2.3 Step 1 and Stacks scheme gluing, projective representability/charts, the affine closed-immersion criterion and Cartier definitions. Gave a seven-step assembly using existing nodes only. The block embedding is proved on affine charts with the explicit surjective coordinate map. Cartier ideals are the explicit componentwise product sheaf. Verified geometric reducedness after arbitrary field extension and all generic-point/residue-field assertions. No statement change, new node, attachment or Mathlib match.",
+  "blueprint": "Realizes the existing added-input provenance: det-thm-sf-ctf-stability-direct-images (3), alteration/tame-boundary reduction, through ILO X 2.3 Step 1 and the proper-pair preparation steps 11--12. The item has no imported blueprint ancestor; preserved null from.node and its via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Standard coordinate charts and local frames for O(1), used to verify the given block embedding; the unit has no projective-chart interface."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-functor-of-points",
+    "why": "Representability constructs the coordinate-section morphism, without altering the alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-projective-morphism-chart-preimage",
+    "why": "Computes the actual chart preimages and coordinate ring maps for the block embedding."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic geometric implication from the exhibited finite projective-space embedding."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "Generic residue-field comparison for each reduced component inclusion into T."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-projective-morphism-chart-preimage",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-141f58dc7",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-141f58dc7 (reviewer sub-agent of L); spot-checked: I read the whole item. It is a 7-step split with no new nodes. Its statement, stmt_deps, source and blueprint are unchanged against clones/live and clones/side-live, where the item is still unsplit with an empty proof. It is not a re-split delivery and no other group has split it. Source: ILO Exposé X 2.3 Step 1, printed p.150 (PDF p.156), which reassembles the disjoint sum of the components and gives no details, so marking the proof as agent-written is right. There is no SGA reference. Each step checks against the statements it cites. (1) The coproduct node gives B, clopen summands and a unique q over e; q is surjective point by point. (2) L is built componentwise and is invertible. The sections s_{i,a} generate it by standard-charts (a)/(b). The functor-of-points node and def-weil-pbc-morphism-to-projective-space-by-sections then give a: B→P^M_e over e. (3) Chart-preimage (i)/(ii) gives the preimage of each chart as W_{i,a} = Spec(e[u_b]/K) with a surjective ring map; the other blocks go to 0, and an empty W gives the zero quotient. Each chart restriction is therefore a closed immersion, and Zariski-locality clause (1) makes a a closed immersion. (4) def-kun-projective applies with N=M; projective implies proper, which includes finite type. (5) Base change commutes with the coproduct, and local rings are those of the summands, so B is geometrically reduced; marking this step elementary is justified. (6) J = ∏J_i(U∩N_i) is effective Cartier, and its support on N_i is q_i^{-1}(C∩T_i) = q^{-1}C∩N_i. (7) Sober schemes have unique generic points. The dense opens contain them, and the clopen summands are exactly the components of B. Residue-field isomorphisms come from the open-immersion and closed-immersion nodes. Small cases checked: s=1, all m_i=0 (coordinate points of P^{s-1}), empty C, components of T that meet. The unused hypotheses are inherited, not weakened. The only citer, proper-pair-radicial-preparation step 5, uses only clauses this proof establishes. I found no duplicate: very-ample-disjoint-union, normalization-projective-components and clopen-generic-projective-cover were read and none states this result. I accepted the 5 generic geometric tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveComponentModelAssembly",
+  "declaration": "AlgebraicGeometry.exists_projective_component_model_assembly",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveComponentModelAssembly.lean",
+  "statement": "theorem exists_projective_component_model_assembly (e : Type u) [Field e] (T : Scheme.{u}) [T.Over (Spec (.of e))] [Nonempty T] [IsReduced T] [IsProper (T ↘ Spec (.of e))] (hfiniteType : LocallyOfFiniteType (T ↘ Spec (.of e)) ∧ QuasiCompact (T ↘ Spec (.of e))) (s : ℕ) (hs : 0 < s) (Ti : Fin s → Scheme.{u}) [∀ i, (Ti i).Over (Spec (.of e))] [∀ i, IsReduced (Ti i)] (j : ∀ i, Ti i ⟶ T) [∀ i, IsClosedImmersion (j i)] [∀ i, (j i).IsOver (Spec (.of e))] (hcomponent : ∀ i, Set.range (j i) ∈ irreducibleComponents T) (henumeration : Function.Bijective (fun i ↦ (⟨Set.range (j i), hcomponent i⟩ : irreducibleComponents T))) (C : Set T) (hC : IsClosed C) (hCnd : interior C = ∅) (N : Fin s → Scheme.{u}) [∀ i, (N i).Over (Spec (.of e))] [∀ i, IsIntegral (N i)] (hnormal : ∀ (i : Fin s) (x : N i), IsDomain ((N i).presheaf.stalk x) ∧ IsIntegrallyClosed ((N i).presheaf.stalk x)) [∀ i, GeometricallyReduced (N i ↘ Spec (.of e))] (m : Fin s → ℕ) (a : ∀ i, N i ⟶ ℙ(ULift.{u} (Fin (m i + 1)); Spec (.of e))) [∀ i, IsClosedImmersion (a i)] [∀ i, (a i).IsOver (Spec (.of e))] (qi : ∀ i, N i ⟶ Ti i) [∀ i, IsProper (qi i)] [∀ i, Surjective (qi i)] [∀ i, (qi i).IsOver (Spec (.of e))] (hbirational : ∀ i, ∃ (U : (N i).Opens) (V : (Ti i).Opens), Dense (U : Set (N i)) ∧ Dense (V : Set (Ti i)) ∧ ∃ φ : U.toScheme ≅ V.toScheme, U.ι ≫ qi i = φ.hom ≫ V.ι) (Ji : ∀ i, (N i).IdealSheafData) (hJi : ∀ i, (Ji i).IsInvertible) (hsupport : ∀ i, ((Ji i).support : Set (N i)) = (qi i ≫ j i) ⁻¹' C) : ∃ (B : Scheme.{u}) (ι : ∀ i, N i ⟶ B) (b : B ⟶ Spec (.of e)) (q : B ⟶ T), Nonempty (IsColimit (Cofan.mk B ι)) ∧ (∀ i, IsOpenImmersion (ι i) ∧ IsClosed (Set.range (ι i))) ∧ (∀ i, ι i ≫ b = N i ↘ Spec (.of e)) ∧ (∀ i, ι i ≫ q = qi i ≫ j i) ∧ q ≫ (T ↘ Spec (.of e)) = b ∧ IsProper b ∧ LocallyOfFiniteType b ∧ QuasiCompact b ∧ GeometricallyReduced b ∧ (∃ (M : ℕ) (A : B ⟶ ℙ(ULift.{u} (Fin (M + 1)); Spec (.of e))), M + 1 = ∑ i, (m i + 1) ∧ IsClosedImmersion A ∧ A ≫ (ℙ(ULift.{u} (Fin (M + 1)); Spec (.of e)) ↘ Spec (.of e)) = b) ∧ (∃ J : B.IdealSheafData, J.IsInvertible ∧ (∀ i, J.comap (ι i) = Ji i) ∧ (J.support : Set B) = q ⁻¹' C) ∧ Surjective q ∧ (∀ (i : Fin s) (η : N i), IsGenericPoint η (Set.univ : Set (N i)) → IsGenericPoint (qi i η) (Set.univ : Set (Ti i)) ∧ IsGenericPoint (q (ι i η)) (Set.range (j i)) ∧ IsIso (q.residueFieldMap (ι i η))) ∧ Set.BijOn q (genericPoints B) (genericPoints T)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e028851ac",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node through the dep declarations (IsInvertible = locally regular principal, IdealSheafData.support = Supp(O/J), comap restriction, genericPoints, residueFieldMap, explicit Fin(M+1) projective embedding with M+1 = sum(m_i+1)); the component enumeration is a bijection onto irreducibleComponents; C closed with empty interior = nowhere dense; birationality uses the given qi. lean.statement verbatim; node otherwise unchanged vs side-live; no defs, proof sorry, docstrings and both report sections present; no duplicate found. Edge cases s=1, m_i=0, C empty, meeting components fine; single universe u. Minor: hfiniteType redundant with IsProper, harmless. No compile needed (no file changed)."
+ }
+}

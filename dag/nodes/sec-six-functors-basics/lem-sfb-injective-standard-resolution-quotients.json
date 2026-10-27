@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-injective-standard-resolution-quotients",
+ "kind": "statement",
+ "title": "Quotient of two standard resolutions along an injective target map is a polynomial resolution",
+ "statement": "Let $A\\to B\\xrightarrow{j}C$ be homomorphisms of commutative rings with $j$ injective. Let $P_\\bullet=P^{\\mathrm{std}}_\\bullet(B/A)$ and $Q_\\bullet=P^{\\mathrm{std}}_\\bullet(C/A)$ be the standard augmented simplicial polynomial algebras of [lem-trf-cotangent-resolution-coherence]. Use their standard functoriality map $P_\\bullet\\to Q_\\bullet$ and the augmentation $P_\\bullet\\to B$ to form the simplicial $B$-algebra $\\overline Q_\\bullet=Q_\\bullet\\otimes_{P_\\bullet}B$, with tensor products taken degreewise. The induced augmentation $\\overline Q_\\bullet\\to C$ is a polynomial resolution: every $\\overline Q_n$ is a polynomial $B$-algebra, every augmentation $\\overline Q_n\\to C$ is surjective, and $s(\\overline Q_\\bullet)\\to C[0]$ is a quasi-isomorphism of complexes of $B$-modules. Here $s(M)^{-n}=M_n$ has alternating-face differential and zero positive terms, as in the cited node. No flatness of $C$ over $B$, finiteness of the variable sets, or injectivity of $A\\to B$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SD, remark-triangle: the key fact that Q_bar = Q tensor_P B resolves C, and polynomiality from the injectivity of B to C. This is also the resolution input used in Tag 08SE, remark-explicit-map; no distinguished-triangle assertion is made here."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-trf-cotangent-resolution-coherence] for both standard resolutions and their functorial map $j_\\bullet:P_\\bullet\\to Q_\\bullet$. It gives augmentation compatibility, surjectivity $Q_n\\to C$ in every degree, and quasi-isomorphisms $s(P)\\to B[0]$, $s(Q)\\to C[0]$. The simplicial augmentation $e:P_\\bullet\\to\\operatorname{const}(B)$ also induces a quasi-isomorphism on alternating-face complexes: the map $s(\\operatorname{const}(B))\\to B[0]$ is the identity in degree zero and zero below, and its differential from degree $-n$ is the identity for positive even $n$ and zero for odd $n$. Thus its negative cohomology vanishes and its degree-zero cohomology is $B$. Its composite with $s(e)$ is the standard augmentation, so the assertion follows on cohomology.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08PM and 08PT (standard resolution); Tag 08SD (remark-triangle), choice of P and Q; the elementary alternating complex of a constant simplicial module"
+   }
+  },
+  {
+   "text": "Put $P_{-1}=B$, $Q_{-1}=C$, $j_{-1}=j$. Induct on $n\\geq0$, assuming $j_{n-1}$ injective (the initial assumption is precisely the given injectivity). The standard formula makes $j_n:A[UP_{n-1}]\\to A[UQ_{n-1}]$ send $[p]$ to $[j_{n-1}(p)]$. Put $E_n=UQ_{n-1}\\setminus j_{n-1}(UP_{n-1})$. By the polynomial universal property [def-weil-pbc-mv-polynomial-ring], there are inverse maps $P_n[X_e:e\\in E_n]\\leftrightarrows Q_n$: coefficients $[p]$ go to $[j_{n-1}(p)]$ and $X_e$ to $[e]$; inversely an image variable $[j_{n-1}(p)]$ goes to $[p]$ and a complementary variable to $X_e$, fixing $A$. Their composites fix every generator and every coefficient. Evaluating the complementary variables at zero retracts the coefficient inclusion $P_n\\to P_n[E_n]$, so $j_n$ is injective. This completes the induction and identifies $Q_n$ as a polynomial $P_n$-algebra in each degree.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SD (remark-triangle), polynomiality of Q_n over P_n from injectivity; the maps are written using the polynomial universal property"
+   }
+  },
+  {
+   "text": "In the polynomial description from Step 2, the monomials in $E_n$ form a $P_n$-module basis: each polynomial is uniquely a finite linear combination of them. Hence $Q_n$ is free as a $P_n$-module. The explicit free-module clause of [lem-weil-pbc-projective-module-flat] implies that $Q_n$ is flat over $P_n$. This holds for every $n$, with no finiteness restriction on $E_n$.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SD (remark-triangle), flatness of Q_n over P_n; free monomial basis and the general free-implies-flat lemma"
+   }
+  },
+  {
+   "text": "Degreewise tensor and the augmentation define the simplicial $B$-algebra $\\overline Q$ and the map $\\bar\\epsilon:\\overline Q\\to C$: in degree $n$ it is $q\\otimes b\\mapsto\\epsilon_Q(q)j(b)$. This is balanced because $\\epsilon_Q(j_n(p))=j(\\epsilon_P(p))$, and commutes with every simplicial operator by augmentation compatibility. The map $P_n[E_n]\\otimes_{P_n}B\\to B[E_n]$ sends $\\sum_\\alpha p_\\alpha X^\\alpha\\otimes b$ to $\\sum_\\alpha\\epsilon_P(p_\\alpha)bX^\\alpha$. Its inverse sends $bX^\\alpha$ to $X^\\alpha\\otimes b$; the tensor balancing relation and uniqueness of polynomial coefficients show both composites are identities [def-weil-pbc-module-tensor-product, def-weil-pbc-mv-polynomial-ring]. Thus $\\overline Q_n$ is a polynomial $B$-algebra. Given $c\\in C$, choose $q\\in Q_n$ with $\\epsilon_Q(q)=c$ using Step 1; then $\\bar\\epsilon_n(q\\otimes1)=c$. Thus every augmentation is surjective.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SD (remark-triangle), Q_bar = Q tensor_P B; degreewise polynomial base change and induced augmentation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-simplicial-flat-base-change-quasi-iso] with $R_\\bullet=P_\\bullet$, $S_\\bullet=\\operatorname{const}(B)$, $f=e$, and $M_\\bullet=Q_\\bullet$ via $j_\\bullet$. The ring-map hypothesis was verified in Step 1 and degreewise flatness in Step 3; the operators on $Q$ are semilinear because $j_\\bullet$ is a simplicial ring map. Consequently $s(Q)\\to s(\\overline Q)$, $q\\mapsto q\\otimes1$, is a quasi-isomorphism of underlying abelian-group complexes. Its composite with $s(\\bar\\epsilon):s(\\overline Q)\\to C[0]$ is $s(Q)\\to C[0]$, already a quasi-isomorphism by Step 1. On every cohomology group this says $H(\\bar\\epsilon)$ composed with an isomorphism is an isomorphism; hence $H(\\bar\\epsilon)$ is an isomorphism. Finally $\\bar\\epsilon$ is $B$-linear, and the kernels, images and quotients defining its cohomology have the same underlying groups after forgetting $B$. A bijective $B$-linear map has a $B$-linear inverse, so it is a quasi-isomorphism of $B$-module complexes as required. Together with Step 4 this gives all clauses of a polynomial resolution.",
+   "uses": [
+    "lem-sfb-simplicial-flat-base-change-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SD (remark-triangle), application of sites-cohomology Tag 08RX via Tag 08QD; two-out-of-three on cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-projective-module-flat",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-simplicial-flat-base-change-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SD (remark-triangle), polynomial-resolution input only, using sites-cohomology Tags 08RX and 08QD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Standard simplicial polynomial resolutions for an injective ring map B to C remain resolutions after tensoring over the standard resolution of B with B",
+   "results": "{\"t\": \"2026-10-22T05:02:06Z\", \"tool\": \"leanfinder\", \"query\": \"Standard simplicial polynomial resolutions for an injective ring map B to C remain resolutions after tensoring over the standard resolution of B with B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.instTensorProduct\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.Extension.tensorH1Cotangent\", \"Algebra.FormallyEtale.instTensorProduct\", \"Rep.standardResolution\", \"Rep.barResolution\", \"ModuleCat.projectiveResolution\", \"Rep.barResolution_complex\"], \"digest\": \"4381fbc199b49409\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-product/base-change and representation-resolution hits do not assert acyclicity of a quotient over a simplicial standard algebra resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "standardResolution|polynomialResolution|simplicial.*polynomial|polynomial.*simplicial",
+   "results": "{\"t\": \"2026-10-22T05:02:27Z\", \"tool\": \"grep\", \"query\": \"standardResolution|polynomialResolution|simplicial.*polynomial|polynomial.*simplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"c5fc4bb5d21883cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-product/base-change and representation-resolution hits do not assert acyclicity of a quotient over a simplicial standard algebra resolution"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an injective ring map B to C, tensoring their standard simplicial polynomial A algebra resolutions over the resolution of B yields a polynomial B algebra resolution of C",
+   "results": "{\"t\": \"2026-10-22T05:02:27Z\", \"tool\": \"leansearch\", \"query\": \"For an injective ring map B to C, tensoring their standard simplicial polynomial A algebra resolutions over the resolution of B yields a polynomial B algebra resolution of C\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.includeRight_injective\", \"Algebra.instIsStandardOpenImmersionTensorProduct\", \"Algebra.TensorProduct.includeLeft_injective\", \"polyEquivTensor\", \"Algebra.FormallySmooth.instTensorProduct\", \"polyEquivTensor'\", \"Algebra.IsEpi.mk\", \"Module.FaithfullyFlat.injective_of_tensorProduct\"], \"digest\": \"6171216687b0ba0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-product/base-change and representation-resolution hits do not assert acyclicity of a quotient over a simplicial standard algebra resolution"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-22T05:02:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-product/base-change and representation-resolution hits do not assert acyclicity of a quotient over a simplicial standard algebra resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If B embeds in C, the base changed standard polynomial resolution Q(C/A) tensor over P(B/A) with B resolves C, and comparison maps of differential complexes are quasi isomorphisms",
+   "results": "{\"t\": \"2026-10-22T05:02:29Z\", \"tool\": \"leanfinder\", \"query\": \"If B embeds in C, the base changed standard polynomial resolution Q(C/A) tensor over P(B/A) with B resolves C, and comparison maps of differential complexes are quasi isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.IsPushout.cancelBaseChangeAux\", \"Algebra.IsPushout.cancelBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"Algebra.SubmersivePresentation.baseChange\"], \"digest\": \"f6c98a759e4fce16\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: tensor-product/base-change and representation-resolution hits do not assert acyclicity of a quotient over a simplicial standard algebra resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "standardResolution|polynomialResolution|simplicial.*polynomial|polynomial.*simplicial",
+   "results": "{\"t\": \"2026-10-22T05:23:53Z\", \"tool\": \"grep\", \"query\": \"standardResolution|polynomialResolution|simplicial.*polynomial|polynomial.*simplicial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"c5fc4bb5d21883cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial presentation base change, free module base change and representation standard resolutions do not state the simplicial quotient-resolution assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a standard free simplicial algebra resolution along the augmentation of an injective subresolution is an acyclic polynomial resolution",
+   "results": "{\"t\": \"2026-10-22T05:24:24Z\", \"tool\": \"leansearch\", \"query\": \"Base change of a standard free simplicial algebra resolution along the augmentation of an injective subresolution is an acyclic polynomial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.baseChange\", \"Algebra.Extension.baseChange\", \"IsBaseChange.free\", \"Algebra.Generators.baseChange\", \"Subalgebra.baseChange\", \"Subbimodule.baseChange\", \"LinearMap.toMvPolynomial_baseChange\", \"Algebra.Presentation.baseChange_relation\"], \"digest\": \"91bc0ec3dd5ab805\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial presentation base change, free module base change and representation standard resolutions do not state the simplicial quotient-resolution assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-22T05:24:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial presentation base change, free module base change and representation standard resolutions do not state the simplicial quotient-resolution assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective ring homomorphism B to C the standard simplicial polynomial A algebra resolutions satisfy that Q tensor over P with B is a polynomial B algebra resolution of C",
+   "results": "{\"t\": \"2026-10-22T05:24:25Z\", \"tool\": \"leanfinder\", \"query\": \"For an injective ring homomorphism B to C the standard simplicial polynomial A algebra resolutions satisfy that Q tensor over P with B is a polynomial B algebra resolution of C\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.tensorModelOfHasCoeffsInv\", \"Algebra.Presentation.tensorModelOfHasCoeffsHom\", \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv\", \"Algebra.IsStandardSmooth.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.PreSubmersivePresentation.baseChange\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"Algebra.SubmersivePresentation.baseChange\"], \"digest\": \"d66760098ac09f77\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial presentation base change, free module base change and representation standard resolutions do not state the simplicial quotient-resolution assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-cotangent-transitivity",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; etale source locality of the adjunction line used in the codimension-one differential calculation of the regular-pullback input; general scheme cotangent transitivity supporting the source-etale determinant comparison; supporting standard-resolution calculation in Stacks 08SD: the quotient Q tensor_P B is a polynomial resolution, before the differential exact sequence is formed",
+   "via": [
+    "lem-sfb-scheme-cotangent-transitivity",
+    "lem-sfb-etale-source-adjunction-line",
+    "lem-sfb-nodal-log-dualizing-pullback",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-injective-standard-resolution-quotients",
+  "worker": "stage1",
+  "summary": "Q17: follow Stacks 08SD, spell out injectivity and complementary-variable polynomiality by induction, the monomial free basis, the tensor-polynomial isomorphism and augmentation surjectivity. Isolate the general simplicial flat-base-change homology lemma 08RX/08QD as one new statement-only node. Preserve the statement; prove acyclicity by the canonical unit map and two-out-of-three. Record genuine Mathlib searches and exact citation quotations.",
+  "blueprint": "The inherited supporting standard-resolution calculation in blueprint.from.place, within the cotangent transitivity input to the recorded alteration/adjunction chain. Steps 1–4 carry the polynomial and flatness calculation; Step 5 carries the 08RX homological argument. ancestor returns null for this inherited chain; retain that provenance rather than invent a blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-cotangent-resolution-coherence",
+    "why": "Generic standard simplicial polynomial resolution and strict functoriality, used only for their stated construction, augmentation and acyclicity; this is not a replacement of a geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-cotangent-resolution-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-c4f23311f",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-c4f23311f (reviewer sub-agent of L); spot-checked: I read the whole split; no fixes needed. Status: the item is not on clones/side-live route-pivot-dropped.txt, and neither is its citer or its via chain; it is still unsplit live; no re-split note exists. The statement is unchanged and matches Stacks 08SD (cotangent.tex l.1407-1484) with Q = P^std(C/A) as in the diagram. The prose 'over B' in 08SD is a source slip; 08SE separates R over B. Step 1: lem-trf-cotangent-resolution-coherence gives the resolution, augmentation compatibility and the square map; s(const B) has differentials 0/id (n odd/even), so H = B in degree 0 and s(e) is a quasi-iso by two-out-of-three. Step 2: induction on injectivity of j_{n-1}, starting from j, gives Q_n = P_n[E_n] and j_n injective via the X_e -> 0 retraction (D4 fine). Step 3: free implies flat, from the free clause of lem-weil-pbc-projective-module-flat. Step 4: the map is balanced via epsilon_Q j_n = j epsilon_P, P_n[E] (x) B = B[E], and surjectivity holds. Step 5: the new node with R=P, S=const B, f=e, M=Q; two-out-of-three; then B-linearity. The change from Ab to B-module coefficients is handled explicitly. New node lem-sfb-simplicial-flat-base-change-quasi-iso: it is 08RX (sites-cohomology l.10422) specialized to Delta via 08QD (l.10393); degreewise flat gives a flat sheaf in the chaotic topology, so (x)^L = (x). It is true (Quillen Tor spectral sequence collapse) and I tested it on M=0, f=id and constant R, S. B1-B3, B5 and B7 hold. It is not a restatement of the item. rg -L for 08RX/08QD/08SD finds no duplicate; I read and set aside lem-trf-cotangent-flat-base-change, simplicial-derived-colimit-computation, surjective-quasi-iso-boundary-lifting and kflat-single-tensor-comparison. The tool_use lem-trf-cotangent-resolution-coherence (generic standard resolution) is accepted. The inherited null blueprint ancestor is a base-era fault. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.InjectiveStandardResolutionQuotients",
+  "declaration": "Algebra.CotangentResolution.isPolynomialResolution_quotient_of_injective",
+  "declarations": [
+   "Algebra.CotangentResolution.quotientAugmentation",
+   "Algebra.CotangentResolution.isPolynomialResolution_quotient_of_injective"
+  ],
+  "file": "lean/Sheaf/RingTheory/InjectiveStandardResolutionQuotients.lean",
+  "statement": "theorem isPolynomialResolution_quotient_of_injective {A B C : CommRingCat.{u}} (f : A ⟶ B) (j : B ⟶ C) (hj : Function.Injective j) (P : Augmentation (Arrow.mk f)) (Q : Augmentation (Arrow.mk (f ≫ j))) (hP : IsStandard P) (hQ : IsStandard Q) (h : AugmentedMap (Arrow.homMk' (𝟙 A) j (Category.id_comp (f ≫ j))) P Q) (hh : ∀ n : ℕ, HEq (h.map.app (op ⦋n⦌)) (standardSquareMap (Arrow.homMk' (𝟙 A) j (Category.id_comp (f ≫ j))) n)) : IsPolynomialResolution (quotientAugmentation f j P Q h)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ef91f53c",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read node (only lean added vs side-live), Stacks 08SD l.1407-1484 (Q = std resolution of C/A per diagram), dep module CotangentResolutionCoherence in full, and the delivered module. Hypotheses: A,B,C,f,j, hj injective only. P,Q pinned by IsStandard (terms, base, augmentation, all δ/σ). h pinned componentwise by hh to standardSquareMap for the square (𝟙A,j). Jointly satisfiable via Coherence. quotientAugmentation = genuine pushout Q ⊔_P const B in SimplicialObject CommRingCat (degreewise Q_n⊗_{P_n}B), base pushout.inr, augmentation pushout.desc (ε_Q, j). Conclusion = IsPolynomialResolution: polynomial B-algebras, surjective augmentations, QuasiIso of the alternating complex extended by zero (additive test equivalent to B-linear). Conclusion iso-invariant, so the categorical pushout is fine for the tensor node. Edge cases covered: zero rings, n=0, empty/infinite E, non-injective A→B, non-flat C/B. Statement field verbatim; source/blueprint docstrings and proof Steps 1-5 present; single sorry; universe bound; no duplicate; not dropped. No compile (no change). Advisory: base-era stmt_dep cites theorem lem-trf-cotangent-resolution-coherence while def-trf-cotangent-resolution-data (Q41, existing:true) owns the used defs → maintainer may re-point; unused proof-only imports; second reading is a self-check."
+ }
+}

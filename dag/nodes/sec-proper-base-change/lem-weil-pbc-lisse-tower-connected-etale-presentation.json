@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-lisse-tower-connected-etale-presentation",
+ "kind": "statement",
+ "title": "Connected etale origins with scalar-normalized geometric stalk arrows",
+ "statement": "Let $X$ be a Noetherian scheme, $g:Y\\to X$ an immersion, $d$ an adic coefficient datum on $A$, and $M$ an adic tower [def-weil-pbc-bounded-constructible-tower]. Suppose every level of $M$ is separately bounded and its inverse image along $g$, restricted along the specified finite coefficient comparison, has relatively finite lisse cohomology in every degree. Put $C=\\widehat A$ and $J=IC$. There is an etale cover $\\mathcal V$ of $Y$ with the following data on every member $V$: $V$ is connected, a point $v\\in V$ is specified, and for each $n$ there is a bounded complex $L_n$ in $D(V_{et},C/J^{n+1})$ with finite locally constant cohomology. Every vanishing cohomology of $M_n$ gives vanishing cohomology of $L_n$. Let $K_n$ be the actual exact derived geometric stalk of $L_n$ at the algebraic closure point of $v$ [def-weil-pbc-geometric-stalks]. There are arrows $t_n:K_{n+1}\\to\\operatorname{Res} K_n$ universal for the consecutive quotient scalar restrictions. Relative finite lissity of the original restricted cohomology holds on every pro-etale refinement of $V$. For each $n$ and etale $Z\\to V$, a supplied isomorphism $L_n|_Z\\simeq\\underline{K_n}$ transports to an isomorphism from constantAdicQuotientRealization of $K_n$ to the actual inverse image of $M_n$ on every pro-etale $W\\to Z\\to Y$ [lem-weil-pbc-constant-adic-quotient-scalar-comparison]. This theorem asserts no existence of an isomorphism trivializing $L_n$ and no covering sieve of markings.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL (lemma-compare-constructible-derived), 09B1 (lemma-compare-derived), 09C6 (lemma-connected-adic-lisse), descent and normalized algebraic stalk diagram before finite-level local constancy"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-weil-pbc-constant-adic-finite-diagram-data",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Cover Y by pointed connected open neighborhoods, taking a connected component of an affine neighborhood at each point. Components are open because the affine neighborhood is Noetherian. The point-indexed Cover.mkOfCovers also treats empty Y.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each chart and each n apply the single finite quotient etale origin theorem to M.level n. Its vanishing property transfers the given n-dependent cohomological interval to the descended level. Retain finite local constancy, vanishing, refinement lissity, and conditional transport for arbitrary algebraic models.",
+   "uses": [
+    "lem-weil-pbc-lisse-finite-quotient-etale-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each pair n+1,n, finite-ring derived local constancy on the connected chart supplies two etale covers with constant models equal to the actual geometric stalks at its chosen point. Completion quotient finiteness follows from the bijective canonical quotient map and d.quotientFinite. Intersect the covers and select a member over the point. Restrict both constant models along the two pullback projections and use each origin transport to identify them with the two actual pulled-back levels. Apply constantAdicQuotient_model_reduction on this nonempty etale member to obtain the universal stalk arrow. Only a single consecutive pair is considered at a time.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "lem-weil-pbc-constant-adic-quotient-model-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a universal arrow for each consecutive pair. Assemble the original presentation structure from the chosen point, descended levels, their derived bounds and other fields, and these arrows. Specialize arbitrary-model transport to the actual stalk at each n. All the assembly is proved Lean; no new marking sieve or simultaneous trivialization is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lisse-finite-quotient-etale-origin",
+  "lem-weil-pbc-finite-ring-derived-local-constancy",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "lem-weil-pbc-constant-adic-quotient-model-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AL, 09B1 and 09C6; F8 uses already stated finite-ring derived local constancy pairwise to avoid descent of a whole normalization diagram"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded finite locally constant etale complexes geometric stalk and scalar extension normalized towers",
+   "results": "8 hits about algebraic etaleness, bounded scalar extension and condensed constants; no descended normalized etale tower.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric stalks exact functor normalized derived tower local constant complexes",
+   "results": "8 hits concerning condensed colimits and Nobeling exactness; no derived stalk tower.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\"",
+   "results": "12 hits, including exact derived functor composition and natural isomorphisms; these supply formal transport tools but not finite coefficient descent.",
+   "date": "2026-10-27",
+   "verdict": "partial tools"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Tt]ower|[Tt]ower.*stalk; rg on lean/WeilConjectures and lean/Sheaf for etale origin and stalk interfaces",
+   "results": "Mathlib hits concern local rings. FinitePerfectAdicEtaleStalkData requires perfect local models and smaller coefficients; the coefficient-model stalk family requires a different completed object and Tor bounds. Neither supplies the separately bounded relative tower here.",
+   "date": "2026-10-27",
+   "verdict": "no applicable existing extraction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerStalkLevelModels",
+  "date": "2026-10-27",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Tags 09AL and 09B1, descent of the finite derived diagram; Tag 09C6, normalized geometric stalk diagram before finite-level local trivializations",
+   "via": [
+    "lem-weil-pbc-lisse-tower-stalk-level-models",
+    "lem-weil-pbc-lisse-tower-constant-stalk-models",
+    "lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseTowerConnectedEtalePresentation",
+  "file": "lean/Sheaf/Paper/LisseTowerConnectedEtalePresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_tower_connected_etale_presentation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.LisseTowerConnectedEtalePresentation",
+   "AlgebraicGeometry.Scheme.lisse_tower_connected_etale_presentation"
+  ],
+  "statement": "theorem lisse_tower_connected_etale_presentation\n    (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (hbounded : ∀ n : ℕ, ∃ a b : ℤ, ∀ q : ℤ, (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (M.level n)))\n    (hlisse : ∀ (n : ℕ) (q : ℤ),\n      IsRelativelyFiniteLisseModule g (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage g).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj (M.level n))))) :\n    ∃ 𝒱 : Cover.{u} etalePrecoverage Y, ∀ i : 𝒱.I₀,\n      Nonempty (LisseTowerConnectedEtalePresentation X Y g d M\n        (𝒱.etalePrecoverageToEtale i))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T084417-L-3677842",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T112341-L-1574530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

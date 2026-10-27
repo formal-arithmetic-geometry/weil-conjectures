@@ -1,0 +1,103 @@
+{
+ "id": "def-pur-good-truncation-normalization",
+ "kind": "definition",
+ "title": "The uniquely cohomology-normalized good-truncation isomorphism",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian] with a derived category [def-weil-abstract-derived-category], with independent category, morphism and localization universes. Let $K\\in D(\\mathcal C)$ and suppose $H^r(K)=0$ for every integer $r\\ne0$. Write $S_0:\\mathcal C\\to D(\\mathcal C)$ for the degree-zero single functor and $s:H^0S_0\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal C}$ for the canonical single-cohomology comparison. Define the good-truncation normalization $\\epsilon_K:K\\xrightarrow{\\sim}S_0H^0(K)$ to be the unique isomorphism of [lem-amb-derived-degree-zero-normalization] with $s_{H^0(K)}\\circ H^0(\\epsilon_K)=\\mathrm{id}_{H^0(K)}$. Thus its data is the unique cohomology-normalized isomorphism, including in the zero abelian category.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-amb-derived-degree-zero-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0118 and 06XS(2), good truncation and the degree-zero heart; used in paragraph 2 of main-20261015 lem-pur-gysin-structure.proof.md."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unique normalized isomorphism of a derived object concentrated in degree zero with the single of its zeroth cohomology",
+   "results": "{\"t\": \"2026-10-23T04:27:58Z\", \"tool\": \"leansearch\", \"query\": \"Unique normalized isomorphism of a derived object concentrated in degree zero with the single of its zeroth cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"HomologicalComplex.singleObjXIsoOfEq\", \"HomologicalComplex.singleObjOpcyclesSelfIso\", \"CochainComplex.single₀ObjXSelf\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.Limits.HasZeroObject.instSubsingletonIsoOfNat\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\"], \"digest\": \"ee15aff1b4e75515\"}",
+   "date": "2026-10-23",
+   "verdict": "Generic Mathlib ingredients only; reuse the exact published Sheaf definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctorCompHomologyFunctorIso",
+   "results": "{\"t\": \"2026-10-23T04:27:58Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.singleFunctorCompHomologyFunctorIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctorCompHomologyFunctorIso\"], \"digest\": \"441330a988d148dc\"}",
+   "date": "2026-10-23",
+   "verdict": "Generic Mathlib ingredients only; reuse the exact published Sheaf definition."
+  },
+  {
+   "tool": "grep",
+   "query": "goodTruncationNormalization|existsUnique_iso_single_homology_zero",
+   "results": "{\"t\": \"2026-10-23T04:27:58Z\", \"tool\": \"grep\", \"query\": \"goodTruncationNormalization|existsUnique_iso_single_homology_zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "Generic Mathlib ingredients only; reuse the exact published Sheaf definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l goodTruncationNormalization dag/nodes lean/WeilConjectures lean/Sheaf; blueprint_refs.py search truncation normalization",
+   "results": "DAG: lem-pur-good-truncation-exact-normalization owns the helper within its theorem record, and lem-pur-kummer-triangle-concentration uses it; no definition node owns it. Sheaf: exact definition GoodTruncationNormalization.lean:106; another consumer PurityKummerTriangleConcentration.lean. WeilConjectures: no match. Blueprint search: 3 integral/levelwise truncation nodes, none owns this normalization.",
+   "date": "2026-10-23",
+   "verdict": "Exact existing definition found, but no definition node owns it; record existing:true without copying Lean."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-supported-class-evaluation-comparison",
+  "date": "2026-10-23",
+  "group": "Q40"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-gysin-structure",
+   "place": "Tags 0118 and 06XS(2), good truncation and the degree-zero heart; used in paragraph 2 of main-20261015 lem-pur-gysin-structure.proof.md.",
+   "via": [
+    "lem-pur-supported-class-evaluation-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.GoodTruncationNormalization",
+  "declaration": "DerivedCategory.goodTruncationNormalization",
+  "statement": "noncomputable def goodTruncationNormalization (K : DerivedCategory C)\n    (hK : ∀ n : ℤ, n ≠ 0 → IsZero ((homologyFunctor C n).obj K)) :\n    K ≅ (singleFunctor C 0).obj ((homologyFunctor C 0).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Owns the existing plain definition, selected from the uniqueness theorem lem-amb-derived-degree-zero-normalization. Its data is the uniquely H0-normalized isomorphism; it does not select from the exact-functor compatibility theorem lem-pur-good-truncation-exact-normalization. No definition is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b35712f5b",
+  "group": "Q40",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b35712f5b",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 39d14b. All three H2 points repaired as instructed. (1) lem-pur-closed-support-exceptional-comparison replaced by new def node def-pur-closed-support-compact-identification (existing:true on closedSupportIdentityExtension/closedSupportCompactIso; signature verbatim; TeX matches the leftAdjointUniq/mapDerivedCategory/rightDerivedFunctorIsoMapDerivedCategory construction; def stmt_deps only). (2) lem-pur-good-truncation-exact-normalization replaced by def-pur-good-truncation-normalization (existing:true on goodTruncationNormalization, which is the .choose of lem-amb-derived-degree-zero-normalization's uniqueness theorem, a genuine dep). (3) adjunction-transpose dep and import dropped; Finite P.Coefficient built inline via Padic.finite_coefficientExtensionRing (owner def-weil-l-adic-coefficient-extension, in the def-pur-conventions closure) + ULift; no new hypothesis. Mechanical finding on lem-pur-supported-hom-pullback: genuine, supportedEvaluationChi is the .choose of the supportedHom_pullback existential with Identification pinned by naturality+cocycle normalization, so PASS on that point. Lean otherwise identical to the version passed clause by clause at 39d14b (hypotheses, phi counit equation, adjunction agreement on all etale-origin tests, C properties, eta/ev/ev.symm formulas, boundary clause; edge cases and universes fine). lean.statement verbatim; one sorry; no hollow defs; docstrings fine. No compile run (no FIX)."
+ }
+}

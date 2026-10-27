@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-principal-divisor-punctured-local-criterion",
+ "kind": "statement",
+ "title": "Divisor extension implies punctured local parafactoriality",
+ "statement": "Let $B$ be a commutative Noetherian normal domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring], let $K=\\operatorname{Frac}(B)$, and let $\\mathfrak p\\subset B$ be prime. Write $H(B)$ for its nonzero prime ideals having no prime strictly between them and $(0)$ [def-trf-affine-weil-divisor-class-group]. For $\\mathfrak r\\in H(B)$ let $v_{\\mathfrak r}:K^\\times\\to\\mathbf Z$ be the normalized valuation of the discrete valuation ring $B_{\\mathfrak r}$ [def-weil-pbc-localization-at-prime, def-sc-discrete-valuation-ring]. Assume first that every finite divisor $D=(d_{\\mathfrak r})$ of $B$ which agrees with $\\operatorname{div}(a)$ on the height-one primes contained in $\\mathfrak p$, for some $a\\in K^\\times$, equals $\\operatorname{div}(b)$ on all of $H(B)$ for some $b\\in K^\\times$. Assume in addition the following localization-stable divisor extension condition: for every prime $\\mathfrak q\\subset B$ and every finitely supported family of integers $(d_{\\mathfrak r})_{\\mathfrak r\\in H(B),\\,\\mathfrak r\\subseteq\\mathfrak q}$, if for every prime $\\mathfrak t\\subseteq\\mathfrak q$ with $\\mathfrak t\\subseteq\\mathfrak p$ there exists $a_{\\mathfrak t}\\in K^\\times$ such that $d_{\\mathfrak r}=v_{\\mathfrak r}(a_{\\mathfrak t})$ for every $\\mathfrak r\\in H(B)$ contained in $\\mathfrak t$, then there exists $b\\in K^\\times$ such that $d_{\\mathfrak r}=v_{\\mathfrak r}(b)$ for every $\\mathfrak r\\in H(B)$ contained in $\\mathfrak q$. For every prime $\\mathfrak q\\not\\subseteq\\mathfrak p$ with $\\dim B_{\\mathfrak q}\\ge2$ [def-weil-pbc-krull-dimension-ring], set $R=B_{\\mathfrak q}$ and $P=\\operatorname{Spec}R\\setminus\\{\\mathfrak qR\\}$ [def-weil-affine-spectrum, def-weil-open-immersion]. Then restriction $R\\to\\Gamma(P,\\mathcal O_P)$ is an isomorphism, and every invertible $\\mathcal O_P$-module [def-sc-invertible-module] is isomorphic to $\\mathcal O_P$.",
+ "source": {
+  "document": "literature/ega-iv4.pdf",
+  "place": "EGA IV4 Corollary 21.13.15, implication (a) implies (b), with S={p}, and 21.13.8 for the meaning of local parafactoriality. The displayed hypothesis is the stronger global-principality form of (a), as in Remark 21.13.16. No Stacks tag states this criterion. EGA IV4 is WANTED locally; read the online English translation.",
+  "url": "https://jcreinhold.github.io/ega/iv/34-ch4-21-divisors.html"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-sc-discrete-valuation-ring",
+  "def-trf-affine-weil-divisor-class-group",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Fix $\\mathfrak q$ as in the conclusion. By [lem-weil-pbc-localization-noetherian] and [lem-weil-pbc-localization-normal-domain], $R=B_{\\mathfrak q}$ is a Noetherian normal domain with fraction field $K$; it is local by [def-weil-pbc-localization-at-prime]. Prime correspondence and iterated localization in [lem-weil-pbc-localization-prime-residue-field-iso], together with [lem-weil-pbc-localization-dimension-chains-below-prime], identify $H(R)$ with the $\\mathfrak r\\in H(B)$ contained in $\\mathfrak q$. The local DVRs are the same subrings of $K$, so their normalized valuations agree. The maximal prime $\\mathfrak qR$ is not height one, since its local ring is $R$ of dimension at least two. Thus every height-one point of $\\operatorname{Spec}R$ belongs to $P$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00GY (lemma-localize-normal-domain), and the prime-correspondence/local-ring arguments in the cited localization nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-normal-local-depth-two] to $R$, with the Noetherian, local, normal-domain and dimension hypotheses verified in step 1. It gives depth at least two. Now [lem-sbc-depth-two-puncture-global-sections] says that restriction $\\Gamma(\\operatorname{Spec}R,\\mathcal O)\\to\\Gamma(P,\\mathcal O_P)$ is bijective. Under the canonical affine identification $R=\\Gamma(\\operatorname{Spec}R,\\mathcal O)$ in [lem-weil-pbc-spec-domain-stalks-function-field], this is exactly the displayed ring homomorphism. A bijective ring homomorphism is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-normal-local-depth-two",
+    "lem-sbc-depth-two-puncture-global-sections",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 031S (lemma-criterion-normal), S2 consequence; depth-two Hartogs as in the existing puncture-sections node and EGA IV4 21.13.4, 21.13.8(i)."
+   }
+  },
+  {
+   "text": "Let $L$ be an arbitrary invertible module on $P$. The open $P$ is nonempty: the prime $(0)$ differs from the maximal ideal, since $\\dim R\\ge2$. Apply [lem-sfb-normal-open-line-weil-dictionary] to $(A,U,L)=(R,P,L)$. It supplies a finite divisor family $d$ on the height-one points of $P$, and local rational equations at every point of $P$. By step 1 this family is indexed by all $\\mathfrak r\\in H(B)$ contained in $\\mathfrak q$, so it is an allowed input to the corrected extension hypothesis.",
+   "uses": [
+    "lem-sfb-normal-open-line-weil-dictionary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02SG, 0BE6 and 0BE8: associate the rational-section Weil cycle to L, as in EGA IV4 21.13.14."
+   }
+  },
+  {
+   "text": "If $\\mathfrak t\\subseteq\\mathfrak q$ and $\\mathfrak t\\subseteq\\mathfrak p$, then $\\mathfrak t\\ne\\mathfrak q$: equality would contradict $\\mathfrak q\\not\\subseteq\\mathfrak p$. Prime correspondence [lem-weil-pbc-localization-prime-residue-field-iso] therefore puts $\\mathfrak tR$ in $P$. The local equation supplied in step 3 gives an $a_{\\mathfrak t}$ with exactly the valuations required in the antecedent of the corrected hypothesis, using the identical DVRs of step 1. Apply that hypothesis to obtain one $b\\in K^\\times$ giving every coefficient of $d$. The final clause of [lem-sfb-normal-open-line-weil-dictionary] now yields $L\\cong\\mathcal O_P$. Since $L$ was arbitrary, this is the second conclusion.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-sfb-normal-open-line-weil-dictionary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BE8 (lemma-normal-c1-injective), applied after the explicit common-generization argument; corrected local assembly of the EGA IV4 21.13.14--15 route."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-normal-local-depth-two",
+  "lem-sbc-depth-two-puncture-global-sections",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-sfb-normal-open-line-weil-dictionary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Corrected localization-stable affine assembly of Tags 02SG, 0BE6, 0BE8 with the existing normal-depth and Hartogs nodes. Inspired by EGA IV4 21.13.14--15; the old global-only hypothesis is explicitly disputed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "parafactorial|punctured.*[Pp]ic|[Cc]artier.*[Ww]eil|[Ww]eil.*[Cc]artier",
+   "results": "No hits.  Affine structure-sheaf fraction descriptions and the Picard group of a local ring do not establish Picard triviality on a punctured local spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"PrimeSpectrum\"",
+   "results": "No hits.  Affine structure-sheaf fraction descriptions and the Picard group of a local ring do not establish Picard triviality on a punctured local spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal scheme divisor Cartier criterion parafactorial punctured local spectrum arbitrary subset",
+   "results": "Hits: AlgebraicGeometry.Scheme.mk.noConfusion, ModuleCat.Tilde.isLocallyFraction, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.isLocalization_away_of_isAffine, AlgebraicGeometry.Scheme.zeroLocus_eq_univ_iff_subset_nilradical, AlgebraicGeometry.IsIntegral.mk  Affine structure-sheaf fraction descriptions and the Picard group of a local ring do not establish Picard triviality on a punctured local spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal locally Noetherian scheme on which every Weil divisor Cartier along a subset is Cartier everywhere has parafactorial local rings away from generizations of that subset",
+   "results": "Hits: AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen  Affine structure-sheaf fraction descriptions and the Picard group of a local ring do not establish Picard triviality on a punctured local spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil divisor Cartier extension criterion implies trivial Picard groups and Hartogs on punctured normal local spectra",
+   "results": "Hits: AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.StructureSheaf.IsFraction, AlgebraicGeometry.instFieldCarrierFunctionField, ModuleCat.Tilde.isLocallyFraction_pred, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact  Affine structure-sheaf fraction descriptions and the Picard group of a local ring do not establish Picard triviality on a punctured local spectrum.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global principality of Weil divisors that are principal at a prime implies trivial Picard group on punctured local spectra away from its generizations",
+   "results": "Hits: CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum, CommRing.Pic.instSubsingletonOfIsLocalRing, IsDedekindDomain.isPrincipalIdealRing_localization_over_prime, CommRing.relPic_eq_top, ClassGroup, ClassGroup.mk0_eq_one_iff, FunctionField.classNumber_eq_one_iff, ClassGroup.mk_eq_one_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard and fractional ideal class-group facts do not imply a punctured local sheaf theorem; no localization-stable divisor extension criterion was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"PrimeSpectrum\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard and fractional ideal class-group facts do not imply a punctured local sheaf theorem; no localization-stable divisor extension criterion was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal domain divisor extension criterion implies every invertible module on a punctured local spectrum is trivial",
+   "results": "Hits: CommRing.Pic.instFreeOfSubsingleton, isDedekindDomainInv_iff, CommRing.Pic.instSubsingletonOfIsLocalRing, Module.Invertible.exists_linearEquiv_ideal, isDedekindDomain_iff_isDedekindDomainInv, IsDedekindDomainInv.isDedekindDomain, Module.Invertible.instLocalizationLocalizedModule, IsIntegrallyClosed.of_localization_maximal",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard and fractional ideal class-group facts do not imply a punctured local sheaf theorem; no localization-stable divisor extension criterion was found."
+  },
+  {
+   "tool": "grep",
+   "query": "parafactorial|Cartier.*Weil|Weil.*Cartier|punctured.*[Pp]ic",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard and fractional ideal class-group facts do not imply a punctured local sheaf theorem; no localization-stable divisor extension criterion was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localization-stable criterion for principal Weil divisors trivializes invertible sheaves on punctured normal local spectra",
+   "results": "Hits: AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred, AlgebraicGeometry.StructureSheaf.isLocallyFraction, ModuleCat.Tilde.isLocallyFraction_pred, AlgebraicGeometry.StructureSheaf.IsFraction, AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen, ModuleCat.Tilde.isUnit_toStalk",
+   "date": "2026-10-24",
+   "verdict": "no match: ring Picard and fractional ideal class-group facts do not imply a punctured local sheaf theorem; no localization-stable divisor extension criterion was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+  "date": "2026-10-24",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Theorem 21.14.1 and Corollary 21.14.2, with the explicit meaning of local parafactoriality in 21.13.8. No Stacks tag states this Ramanujam--Samuel theorem. Lower argument: EGA IV4 Corollary 21.13.15, implication (a) implies (b), with S={p}, and 21.13.8 for the meaning of local parafactoriality. The displayed hypothesis is the stronger global-principality form of (a), as in Remark 21.13.16. No Stacks tag states this criterion. EGA IV4 is WANTED locally; read the online English translation.",
+   "via": [
+    "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-principal-divisor-punctured-local-criterion",
+  "worker": "stage1",
+  "summary": "Q131 found the global-only imported hypothesis false (explicit two-node normal threefold in report), replaced it by an explicit localization-stable divisor-extension hypothesis, retained both conclusions, reused normal-depth/Hartogs and localization tools, and created one statement-only normal open line/Weil dictionary node after genuine searches. Caller Q87 must establish the stronger local hypothesis or use another proof; it is not inferred from the old condition.",
+  "blueprint": "Inherited ancestry has from.node=null. This realizes the lower EGA IV4 21.13.14--15 divisor/Picard step in the Ramanujam--Samuel branch of the affine-boundary route below six-functor stability. The newest unit statement is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Noetherianity under prime localization, a generic ring tool. No node of the item unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Normality and the common fraction field under localization, a generic ring tool. No node of the item unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Prime correspondence and unchanged further local rings, a generic ring tool. No node of the item unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "why": "Height-one prime identification, a generic dimension tool. No node of the item unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-normal-local-depth-two",
+    "why": "Normal S2 depth bound needed for Hartogs, not a change to the geometric route. No node of the item unit supplies this general fact."
+   },
+   {
+    "node": "lem-sbc-depth-two-puncture-global-sections",
+    "why": "Depth-two Hartogs restriction for the structure sheaf, not an etale-spreading argument. No node of the item unit supplies this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Canonical affine sections/stalk/fraction-field identifications. No node of the item unit supplies this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-normal-local-depth-two",
+  "lem-sbc-depth-two-puncture-global-sections",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-7b40a7e84",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-7b40a7e84 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full; base statement taken from the Q87 snapshot. Sources: EGA IV4 21.13.8, 21.13.14 and 21.13.15 with their proofs, 21.13.16, 21.14.1 and 21.14.2 (translation markdown), and Stacks 0BE8 with its proof. The worker's E7 dispute is correct. EGA's 21.13.15(a) must hold on every open of X ('conditions are local'), not only for cycles on Spec B. I checked the counterexample myself. B=C[x,y,z,t]/(xy-z(z-t^2+1)) has singular locus exactly {p,q} (t=±1) and is normal. Cl(B)=Z·(x,z) because B[1/x] is a UFD and div x=P+Q. Both completions are xy=zw, and (x,z) generates their class group Z. So Cl(B)->Cl(B_p) is injective (the old hypothesis holds), while Pic of the punctured spectrum of B_q is Cl(B_q), which is nonzero, so the old conclusion fails. The corrected statement keeps both conclusions and adds the per-q local form of EGA's (a); it is true and not circular, and the item is not a target. Steps: (1) the localization nodes give R normal Noetherian local with H(R)={r in H(B): r⊆q} and identical DVRs; (2) normal-local-depth-two, then depth-two puncture sections, then R=Gamma gives the first conclusion; (3) P is nonempty and the dictionary applies with index set H(R); (4) t⊆p and t⊆q force t≠q, so the local equations exist, the hypothesis gives b, and the dictionary's iff gives L≅O_P. New node lem-sfb-normal-open-line-weil-dictionary: I proved it independently via a rational section and the Stacks 0BE8 argument. It is statement-only, all four search kinds are recorded, and it is not a duplicate: the regular-space dictionary needs regularity and parafactorial-principal-cycle-extension is the reverse direction. Batch 5: def-trf-affine-weil-divisor-class-group is a general ring definition, not part of the trace-formula or Poincaré-duality proofs, and the base item already cited it; accepted. Declared tool_uses (localization, depth-two, Hartogs, spec stalks) are generic and accepted. MAINTAINER ACTION: caller lem-sfb-formally-smooth-ramanujam-samuel-localization (Q87 PASS 84f84922) step 3 verifies only the global hypothesis, so its step 4 now lacks the new local hypothesis. It needs a stage-1 repair note, and the EGA 21.13.15 source error with this counterexample should go to HUMAN.md and the ledger."
+ }
+}

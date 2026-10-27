@@ -22,183 +22,81 @@
  ],
  "proof": [
   {
-   "text": "The finite-type scheme $C$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. At a nodal point its local ring injects into its completion by [lem-weil-pbc-local-completion-faithfully-flat] and [lem-weil-pbc-faithfully-flat-universally-injective], so it is reduced: a nilpotent maps to zero in $k[[u,v]]/(uv)$, which embeds in $k[[u]]\\times k[[v]]$. At a smooth point choose a smooth affine curve neighbourhood; [lem-sc-smooth-normal] makes its local ring normal, in particular reduced. Thus $C$ is reduced. The reduced irreducible component $Z$ is integral, finite type, proper and one-dimensional. Apply [lem-sc-normalization-properties]: $\\nu$ is finite, $\\bar Z$ is proper and one-dimensional, and it is smooth since the algebraically closed field $k$ is perfect. The normalization is integral, since its affine rings are integral closures of domains inside their fraction fields; hence it is nonempty and connected. Properness gives separatedness, so it is a smooth proper connected curve in the stated sense.",
+   "text": "Apply [lem-trf-nodal-adjunction-preparation] to $C$: it is reduced, its singular set $T$ is finite, and $K_{C/k}$ exists with its smooth-locus identification. A reduced irreducible component $Z$ is integral, finite type and one-dimensional; it is proper by hypothesis.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-local-completion-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-universally-injective",
-    "lem-sc-smooth-normal",
-    "lem-sc-normalization-properties"
+    "lem-trf-nodal-adjunction-preparation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Section on nodal curves; local normalization and branch calculations."
+    "place": "Tag 0CBW (lemma-split-node) and Tag 0E38 (lemma-closed-subscheme-nodal-curve); assembly of the three re-split inputs."
    }
   },
   {
-   "text": "By [lem-trf-nodal-curve-lci-criterion], $C$ has a local-complete-intersection affine cover. The base is the Noetherian scheme $\\operatorname{Spec}k$, the structure map is flat because vector spaces over $k$ are free, and it is locally of finite presentation by [pqf-lem-lft-fp-locnoeth]. A Noetherian scheme is quasi-compact and its open intersections are quasi-compact, giving the quasi-separatedness required here. On each nonempty global-complete-intersection chart, its defining equations have length $n-1$, since the chart is pure one-dimensional. They form a regular sequence at every prime by [lem-weil-pbc-global-complete-intersection-local-regular-sequence]; by [lem-exc-regular-sequence-principal-neighbourhood] they spread to neighbourhoods and give the regular-immersion presentations of [lem-trf-flat-lci-canonical-adjunction]. Geometric fibres are pure one-dimensional by [lem-trf-flat-dense-generic-fibre-pure-dimension], applied over $\\operatorname{Spec}k$ whose generic fibre is $C$ itself. Thus the cited adjunction theorem applies with $d=1$: $K_{C/k}$ exists, is invertible, and agrees canonically with $\\Omega^1_{C/k}$ on the smooth locus. No properness or separatedness of $C$ was used.",
+   "text": "At each $x\\in T$, apply [lem-trf-split-node-component-normalization] to $A=\\mathcal O_{C,x}$: it is reduced by step 1, essentially of finite type, of dimension $1$ as $x$ is a closed point of the pure one-dimensional finite-type $C$, and $\\widehat A\\cong k[[u,v]]/(uv)$ as complete local $k$-algebras by hypothesis. Its two completed normalization branches are the projections to $k[[t]]$. If $x$ has one component both belong to it and its completion is $k[[u,v]]/(uv)$; if it has two components each has one branch and completion $k[[t]]$. Localization compatibility assigns these points to the scheme normalizations, giving exactly the asserted counts.",
    "uses": [
-    "lem-trf-nodal-curve-lci-criterion",
-    "pqf-lem-lft-fp-locnoeth",
-    "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
-    "lem-exc-regular-sequence-principal-neighbourhood",
-    "lem-trf-flat-lci-canonical-adjunction",
-    "lem-trf-flat-dense-generic-fibre-pure-dimension"
+    "lem-trf-split-node-component-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Section on nodal curves; local normalization and branch calculations."
+    "place": "Tag 0CBW (lemma-split-node) and Tag 0E38 (lemma-closed-subscheme-nodal-curve); assembly of the three re-split inputs."
    }
   },
   {
-   "text": "Let $T$ be the first-Fitting singular subscheme of $C$. With the flatness, local finite presentation and geometric dimension checked in step 2, [lem-trf-dth-fitting-smooth-locus] says $|T|$ is exactly the nonsmooth locus and its complement is open. By [lem-trf-nodal-curve-lci-criterion], $T\\to\\operatorname{Spec}k$ is unramified. Therefore [lem-trf-unramified-field-fibre-decomposition] expresses $T$ as a disjoint union of spectra of finite separable extensions of $k$, all equal to $k$. As a closed subscheme of the Noetherian scheme $C$, $T$ is quasi-compact, so this union is finite. In particular every singular point is one of the nodes in the hypothesis, the smooth locus contains every generic point, and its inverse image in $\\bar Z$ is the complement of finitely many closed points.",
-   "uses": [
-    "lem-trf-dth-fitting-smooth-locus",
-    "lem-trf-nodal-curve-lci-criterion",
-    "lem-trf-unramified-field-fibre-decomposition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Section on nodal curves; local normalization and branch calculations."
-   }
-  },
-  {
-   "text": "For the complete node $R=k[[u,v]]/(uv)$, the map $a(u,v)\\mapsto(a(u,0),a(0,v))$ identifies $R$ with the pairs of series having equal constant term. Put $N=k[[u]]\\times k[[v]]$. The idempotent $e=(1,0)$ satisfies $e^2-e=0$, and $N=R+Re$, so $N$ is finite and integral over $R$. Both power-series factors are integrally closed domains by [lem-weil-pbc-power-series-normal-domain] applied to the field $k$. The total fraction ring of $R$ is $k((u))\\times k((v))$: $u+v$ is a non-zero-divisor, and $u/(u+v)=(1,0)$ splits its two fraction-field factors. Any element of that product integral over $R$ is integral over $N$ and belongs to $N$ by the factorwise integrally closed property. Consequently $N$ is precisely the integral closure of $R$. Its two local factors have residue field $k$.",
-   "uses": [
-    "lem-weil-pbc-power-series-normal-domain"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Remark trivial-quadratic-extension and lemma-split-node; explicit equal-constant-term computation."
-   }
-  },
-  {
-   "text": "For a reduced Noetherian local curve ring $A$ with minimal primes $P_i$, [lem-weil-pbc-reduced-noetherian-total-ring-fractions] identifies $Q(A)$ with $\\prod_i\\operatorname{Frac}(A/P_i)$. Its integral closure is the product of the integral closures $B_i$ of the $A/P_i$: projecting a monic equation proves one inclusion. For the other, given a tuple $b_i\\in B_i$, lift the coefficients of a monic equation for each $b_i$ to $A$; the product of these monic polynomials annihilates the tuple, since in component $i$ its $i$-th factor vanishes. Thus the tuple is integral over $A$. By [lem-weil-pbc-integral-closure-commutes-localization], this description agrees with the localizations of scheme normalizations on affine charts. Consequently normalization of the reduced local ambient curve is the disjoint union of the normalizations of its components, and each of its points is attached to exactly one component. This verifies the local/scheme identification used in the following branch calculation.",
-   "uses": [
-    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-    "lem-weil-pbc-integral-closure-commutes-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Normalization in terms of components; the elementary componentwise monic-polynomial argument."
-   }
-  },
-  {
-   "text": "Fix an ambient node $x$ and put $A=\\mathcal O_{C,x}$. Apply [lem-trf-curve-normalization-completion] to $A$. Step 4 and [lem-weil-pbc-completion-finite-extension] identify the completed local rings of its normalization above $x$ with the two factors $k[[u]]$ and $k[[v]]$, one factor per point. Their residue fields are $k$. To track a particular component through $x$, let $P$ be its minimal prime in $A$. Apply the same normalization-completion lemma to the reduced one-dimensional domain $A/P$. By [lem-weil-pbc-completion-finite-module-tensor], its completion is $\\widehat A/P\\widehat A$; it is reduced and one-dimensional. Its kernel in $R$ is therefore the intersection of a nonempty subset of the two minimal primes $(u),(v)$. Thus the component uses either one branch or both. Distinct component ideals have distinct completed ideals, since faithful flatness contracts $P\\widehat A$ back to $P$. If one completed ideal is zero, its contraction is zero, so $A$ is a domain and has just that one minimal prime. Otherwise the only possibilities are $(u)$ and $(v)$, with disjoint branch sets. Every branch occurs: the product of all minimal primes in reduced $A$ is zero; its extension is zero, so each minimal prime of $R$ contains at least one completed component ideal. It follows that a node on two distinct components contributes one point on each normalization; a node on a single component contributes two points on that component's normalization. Applied to $Z$, this proves the asserted branch counts, including self-nodes.",
-   "uses": [
-    "lem-trf-curve-normalization-completion",
-    "lem-weil-pbc-completion-finite-extension",
-    "lem-weil-pbc-completion-finite-module-tensor",
-    "lem-weil-pbc-local-completion-faithfully-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Lemma closed-subscheme-nodal-curve, proof: completed maps onto one branch; normalization-same-after-completion in varieties.tex."
-   }
-  },
-  {
-   "text": "If $x\\in Z$ is smooth in $C$, an open normal affine curve neighbourhood of $x$ by [lem-sc-smooth-normal] has a unique component through $x$; after removing the other finitely many components, $Z$ and $C$ agree there. If an ambient node lies on two components, step 6 gives the completed local ring of $Z$ at $x$ as $k[[u]]$ or $k[[v]]$. This ring is regular by [lem-weil-pbc-power-series-field-cohen-regular-complete], so the local ring of $Z$ is regular by [lem-weil-pbc-completion-regular-local]. Its residue field is $k$, a separable extension of itself; [lem-weil-pbc-regular-local-separable-residue-smooth] makes $Z$ smooth at $x$. If the node has both branches on $Z$, its completed local ring is $R$, whose maximal ideal has two independent generators modulo its square and whose dimension is one, so it is not regular. The same regularity and smoothness criteria show $Z$ is not smooth there. These are exactly its self-nodes. Finally, on the smooth locus of $Z$, [lem-sc-smooth-normal] gives normality and [lem-sc-normalization-properties](b) gives that $\\nu$ is an isomorphism. This includes its smooth points over ambient intersection nodes.",
+   "text": "Set $S=T\\cap Z$, partitioned by these two local types. Outside $S$, a smooth affine neighbourhood in $C$ is normal by [lem-sc-smooth-normal]; after removing the other components it equals $Z$. Apply [lem-trf-completed-curve-boundary-geometry]: $\\bar Z$ is smooth proper connected, $\\nu$ finite and an isomorphism over $Z_{\\rm sm}$, the only singularities are self-nodes, and $B_Z$ is the reduced Cartier inverse image of $S$. Put $L=\\nu^*(K_{C/k}|_Z)$ and $M=\\Omega^1_{\\bar Z/k}\\otimes\\mathcal O(B_Z)$. Step 1 and the divisor trivialization give $\\alpha:L\\dashrightarrow M$, an isomorphism off $B_Z$.",
    "uses": [
     "lem-sc-smooth-normal",
-    "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "lem-weil-pbc-completion-regular-local",
-    "lem-weil-pbc-regular-local-separable-residue-smooth",
-    "lem-sc-normalization-properties"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Lemma closed-subscheme-nodal-curve; the final regularity and smoothness paragraph."
-   }
-  },
-  {
-   "text": "By steps 3 and 6 the set of points of $\\bar Z$ over the singular locus of $C$ is finite, with two distinct points for each self-node and one for each intersection branch belonging to $Z$. Each is a reduced closed point on the smooth connected curve $\\bar Z$. By [lem-sc-point-cartier], their sum $B_Z$ is an effective Cartier divisor, and [def-pc-divisor-line-bundle] gives its associated invertible module. Outside $B_Z$, step 7 identifies $\\nu$ with an isomorphism onto the part of $Z$ in the ambient smooth locus. Hence [lem-trf-flat-lci-canonical-adjunction] gives a canonical identification of $L:=\\nu^*(K_{C/k}|_Z)$ with $M:=\\Omega^1_{\\bar Z/k}\\otimes\\mathcal O_{\\bar Z}(B_Z)$ there, using the canonical trivialization of $\\mathcal O(B_Z)$ off its divisor. This determines a rational isomorphism $\\alpha:L\\dashrightarrow M$.",
-   "uses": [
-    "lem-sc-point-cartier",
-    "def-pc-divisor-line-bundle",
+    "lem-trf-completed-curve-boundary-geometry",
     "lem-trf-flat-lci-canonical-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Section on nodal curves; local normalization and branch calculations."
+    "place": "Tag 0CBW (lemma-split-node) and Tag 0E38 (lemma-closed-subscheme-nodal-curve); assembly of the three re-split inputs."
    }
   },
   {
-   "text": "Let $p\\in B_Z$ lie over a node $x$. Use the formal presentation $\\widehat{\\mathcal O}_{C,x}=k[[u,v]]/(uv)$ from the hypothesis. By step 6 its map to the completion at $p$ is one of $u\\mapsto t,v\\mapsto0$ or $u\\mapsto0,v\\mapsto t$, after choosing the branch parameter. The ring at $p$ is a discrete valuation ring by [lem-sc-smooth-connected-curve-local-rings]; it is the local ring of the normalization of the reduced algebraic curve at $x$, is essentially of finite type, and has residue field $k$. Step 2 supplies the local complete intersection and the adjunction line. Thus all hypotheses of [lem-trf-formal-plane-adjunction-lattice] hold with $f=uv$. On the first branch $f_v=u$, giving the generator $\\mathrm dt/t$; on the second $f_u=v$, giving $-\\mathrm dt/t$. Each is nonzero and has precisely one simple pole. These are calculations in continuous formal differentials as specified by the lemma, not an identification with the entire algebraic differential module of $k((t))/k$.",
+   "text": "For $p\\in B_Z$, $D=\\mathcal O_{\\bar Z,p}$ is a DVR by [lem-sc-smooth-connected-curve-local-rings]. Apply [lem-trf-formal-plane-adjunction-lattice] to the reduced finite-type lci chart of step 1, $f=uv$, and the completed branch of step 2. These are local normalization rings, essentially of finite type with residue $k$. On the $u$ branch $f_v=u$ gives $\\mathrm dt/t$; on the $v$ branch $f_u=v$ gives $-\\mathrm dt/t$. The lemma compares these through the same generic smooth-locus map and identifies regular completed differentials with $k[[t]]\\mathrm dt$. By [def-pc-divisor-line-bundle], $\\mathcal O(B_Z)_p=z^{-1}D$ for a uniformizer $z$. Its completed ideal is $(t)$ by [lem-weil-pbc-completion-regular-local]. Thus both completed lattices under $\\alpha$ are $k[[t]]\\mathrm dt/t$; the sign is a unit, also in characteristic two.",
    "uses": [
     "lem-sc-smooth-connected-curve-local-rings",
-    "lem-trf-formal-plane-adjunction-lattice"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Lemma fundamental-class-lci, determinant computation, applied through the formal plane adjunction lattice lemma with f=uv."
-   }
-  },
-  {
-   "text": "At the reduced point $p$ the divisor ideal is the maximal ideal of the discrete valuation ring $D=\\mathcal O_{\\bar Z,p}$. For a uniformizer $z$ it is $(z)$; the definition [def-pc-divisor-line-bundle] therefore realizes $\\mathcal O(B_Z)_p$ as $z^{-1}D$ in its fraction field. Under completion $z$ still generates the maximal ideal, by [lem-weil-pbc-completion-regular-local], and in the parameter of step 9 it is $t$ times a unit. The regular-differential comparison in [lem-trf-formal-plane-adjunction-lattice] identifies the completed target $M_p$ with $k[[t]]\\,\\mathrm dt/t$. Step 9 identifies the completed image of $L_p$ under the same rational smooth-locus map with this identical lattice; the minus sign on the second branch is a unit, including in characteristic two. Therefore the rational isomorphism $\\alpha$ has order zero at every point of $B_Z$.",
-   "uses": [
+    "lem-trf-formal-plane-adjunction-lattice",
     "def-pc-divisor-line-bundle",
-    "lem-weil-pbc-completion-regular-local",
-    "lem-trf-formal-plane-adjunction-lattice"
+    "lem-weil-pbc-completion-regular-local"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Explicit Cartier-ideal dual and local branch differential calculation."
+    "place": "Tag 0CBW (lemma-split-node) and Tag 0E38 (lemma-closed-subscheme-nodal-curve); explicit residue calculation via duality.tex Tag 0E9Z (lemma-fundamental-class-lci), followed by the DVR extension argument."
    }
   },
   {
-   "text": "To spell out the extension in step 10, choose local generators of $L_p,M_p$ and write $\\alpha$ as multiplication by $a\\in k(\\bar Z)^*$. By [lem-sc-smooth-connected-curve-local-rings], $a=wz^n$ with $w\\in D^*$ and $n\\in\\mathbf Z$. In the completion $z=t$ times a unit, so equality of the two completed lattices forces $n=0$; hence $a\\in D^*$. A unit in the stalk is represented by a unit on some neighbourhood of $p$, so $\\alpha$ extends to an isomorphism there. At points outside $B_Z$ it was already an isomorphism by step 8. The extensions agree on overlaps: they agree at the generic point and, on the integral curve, local regular functions inject into the function field by the same cited lemma. They therefore glue to $L\\cong M$ on $\\bar Z$. The isomorphism is canonical because it is the unique extension of the prescribed smooth-locus identification; in particular formal coordinates, branch ordering and local generators introduce no choice in the result.",
+   "text": "Choose stalk generators and write $\\alpha$ as $a=wz^n$ with $w\\in D^*$, using [lem-sc-smooth-connected-curve-local-rings]. Equality of the completed lattices forces $n=0$, so $a$ is a unit and extends to a neighbourhood isomorphism. Together with the isomorphism off $B_Z$ these glue: equality at the generic point implies equality of local sections by the same node's injections into $k(\\bar Z)$. The extension is unique, hence canonical and independent of formal coordinates. This proves the required isomorphism.",
    "uses": [
     "lem-sc-smooth-connected-curve-local-rings"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Gluing of the smooth-locus identification after the explicit branch lattice test."
+    "place": "Tag 0CBW (lemma-split-node) and Tag 0E38 (lemma-closed-subscheme-nodal-curve); explicit residue calculation via duality.tex Tag 0E9Z (lemma-fundamental-class-lci), followed by the DVR extension argument."
    }
   }
  ],
  "proof_deps": [
   "def-pc-divisor-line-bundle",
-  "lem-exc-regular-sequence-principal-neighbourhood",
-  "lem-sc-normalization-properties",
-  "lem-sc-point-cartier",
   "lem-sc-smooth-connected-curve-local-rings",
   "lem-sc-smooth-normal",
-  "lem-trf-curve-normalization-completion",
-  "lem-trf-dth-fitting-smooth-locus",
-  "lem-trf-flat-dense-generic-fibre-pure-dimension",
+  "lem-trf-completed-curve-boundary-geometry",
   "lem-trf-flat-lci-canonical-adjunction",
   "lem-trf-formal-plane-adjunction-lattice",
-  "lem-trf-nodal-curve-lci-criterion",
-  "lem-trf-unramified-field-fibre-decomposition",
-  "lem-weil-pbc-completion-finite-extension",
-  "lem-weil-pbc-completion-finite-module-tensor",
-  "lem-weil-pbc-completion-regular-local",
-  "lem-weil-pbc-faithfully-flat-universally-injective",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
-  "lem-weil-pbc-integral-closure-commutes-localization",
-  "lem-weil-pbc-local-completion-faithfully-flat",
-  "lem-weil-pbc-power-series-field-cohen-regular-complete",
-  "lem-weil-pbc-power-series-normal-domain",
-  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-  "lem-weil-pbc-regular-local-separable-residue-smooth",
-  "pqf-lem-lft-fp-locnoeth"
+  "lem-trf-nodal-adjunction-preparation",
+  "lem-trf-split-node-component-normalization",
+  "lem-weil-pbc-completion-regular-local"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/curves.tex",
-  "place": "Section nodal: split-node and closed-subscheme-nodal-curve; supplemented by varieties.tex normalization-same-after-completion and the explicit determinant/branch calculation. The cited Temkin PDF is not present locally."
+  "place": "Section nodal: split-node and closed-subscheme-nodal-curve; supplemented by varieties.tex normalization-same-after-completion and the explicit determinant/branch calculation. The cited Temkin PDF is not present locally. Re-split on 2026-10-22: three statement-only intermediate inputs; residue-lattice and unique extension assembly retained."
  },
  "mathlib_searches": [
   {
@@ -295,87 +193,27 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-nodal-normalization-adjunction",
   "worker": "stage1",
-  "summary": "Kept the statement and separated normalization geometry from the determinant calculation. Reused normalization properties, regularity, Fitting singular-locus and Cartier-divisor nodes. Added only the one-dimensional normalization/completion input and a general formal plane-equation adjunction-lattice comparison, both statement-only and searched with two phrasings. Computed the crossing normalization and the two simple-pole generators explicitly, and gave the DVR gluing/uniqueness argument. The missing Temkin PDF is recorded WANTED; the proof is agent-written from the available Stacks local calculations.",
-  "blueprint": "Historical normalization-and-residues input below lem-trf-local-term-locality proof (1)--(2), via marked nodal dualizing degrees. Steps 1--7 realize the normalization and branch-geometry input, steps 8--11 the adjunction restriction and simple-pole calculation. This is auxiliary algebraic curve geometry below the inherited stable-modification input, not a replacement for the unit contracting-correspondence proof.",
+  "summary": "Repair of the 2026-10-22 re-split return: extracted three independently stated unsplit nodes for adjunction preparation, local component branch algebra, and marked-curve normalization geometry. The original statement is unchanged. The parent retains the explicit dt/t calculation, completed-lattice comparison and unit/gluing argument in a short assembly. The report preserves all eleven previous steps verbatim and maps their arguments to the new obligations. No Lean files or compilers were used. Rebased repair after live-DAG promotion refusal: checked all current cited statements and ten verbatim quotations, retained all old arguments, distinguished nine newly present same-tag nodes, and completed the marked-geometry definition dependencies. The statement and mathematical proof route are unchanged. Current-base repair verified again on 2026-10-23: all six existing proof statements match the retained fingerprints; checked the decoded TeX strings and all ten verbatim citation pairs; distinguished the newly added nodal-family affine-presentation node. No mathematical statement or dependency changed. Promotion-return retry on 2026-10-23: compared the retained delivery to the current shared DAG; reread all nine proof inputs (six existing, three retained new), checked all ten verbatim citations and the 2647-character assembly; initial current-base server preflight passed at aa6d5223297. No cited existing statement changed; retained the original statement, route and logged research.",
+  "blueprint": "Historical normalization-and-residues input below lem-trf-local-term-locality proof (1)--(2), via marked nodal dualizing degrees. Steps 1--7 realize the normalization and branch-geometry input, steps 8--11 the adjunction restriction and simple-pole calculation. This is auxiliary algebraic curve geometry below the inherited stable-modification input, not a replacement for the unit contracting-correspondence proof. Re-split of the existing auxiliary input only: no change to the unit or chapter route.",
   "tool_uses": [
    {
     "node": "def-pc-divisor-line-bundle",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; The module $\\mathcal{O}_X(D)$ of an effective Cartier divisor. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-exc-regular-sequence-principal-neighbourhood",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; A regular sequence at a prime spreads to a principal neighbourhood. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-sc-normalization-properties",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; Properties of the normalization. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-sc-point-cartier",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; Closed points are Cartier divisors on smooth curves. No step of the trace-formula unit is replaced."
+    "why": "Generic smooth-curve local algebra or the Cartier-line definition used in the explicit differential and DVR extension argument, below the inherited marked-nodal curve input; no trace-formula route is replaced."
    },
    {
     "node": "lem-sc-smooth-connected-curve-local-rings",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; Smooth connected curves: integral, local rings at closed points are DVRs. No step of the trace-formula unit is replaced."
+    "why": "Generic smooth-curve local algebra or the Cartier-line definition used in the explicit differential and DVR extension argument, below the inherited marked-nodal curve input; no trace-formula route is replaced."
    },
    {
     "node": "lem-sc-smooth-normal",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; Smooth schemes are normal. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-completion-finite-extension",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; Completion of a finite algebra at the primes over a prime. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-completion-finite-module-tensor",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; The completion of a finite module over a Noetherian ring is its base change to the completed ring. No step of the trace-formula unit is replaced."
+    "why": "Generic smooth-curve local algebra or the Cartier-line definition used in the explicit differential and DVR extension argument, below the inherited marked-nodal curve input; no trace-formula route is replaced."
    },
    {
     "node": "lem-weil-pbc-completion-regular-local",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; A Noetherian local ring is regular iff its completion is. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-faithfully-flat-universally-injective",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; A faithfully flat ring map is universally injective. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-global-complete-intersection-local-regular-sequence",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; The equations of a global complete intersection form a regular sequence at every prime. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-integral-closure-commutes-localization",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; Integral closure commutes with localization (Stacks 0307). No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-local-completion-faithfully-flat",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; The completion of a Noetherian local ring is faithfully flat. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; Power series over a field or a Cohen ring: complete regular local domain. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-power-series-normal-domain",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; A power series ring over a Noetherian normal domain is a Noetherian normal domain. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; The total ring of fractions of a reduced Noetherian ring is a finite product of fields. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-regular-local-separable-residue-smooth",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; Regularity with separable residue field characterizes smoothness over a field. No step of the trace-formula unit is replaced."
-   },
-   {
-    "node": "pqf-lem-lft-fp-locnoeth",
-    "why": "Generic local algebra or smooth-curve geometry used in the normalization/adjunction auxiliary argument; Locally finite type over a locally Noetherian target is locally finitely presented. No step of the trace-formula unit is replaced."
+    "why": "Generic smooth-curve local algebra or the Cartier-line definition used in the explicit differential and DVR extension argument, below the inherited marked-nodal curve input; no trace-formula route is replaced."
    }
   ]
  },
@@ -401,12 +239,12 @@
   "pqf-lem-lft-fp-locnoeth"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q24-0a299d71e",
-  "group": "Q24",
+  "reviewer": "NT-cc-Q94-db80bd05e",
+  "group": "Q94",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q24-0a299d71e (reviewer sub-agent of L); spot-checked: Full mathematical review completed; all item steps, new nodes, cited statements, Stacks/Temkin sources, edge cases, route constraints, searches, and tool uses checked. Review written to review.md; no repairs required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-db80bd05e (reviewer sub-agent of L); spot-checked: Head db80bd05 is the 5th push of the 2026-10-21 re-split; e6e7, a812, b08f and 00bf each got a FIX and were returned because the side completion was not promoted to the live DAG. The three new node files are byte-identical in all five pushes (SHA-256 512257cc prep, e3cd94bd split-node, f87e3c0f boundary-geometry); the boundary-geometry stmt_deps fix from e6e7 is present. The item's statement, stmt_deps, source and Lean fields are identical to 00bf, and its proof is identical to the 00bf head as delivered; only split_report gained a retry sentence. The statements of all six cited existing nodes are unchanged since the 00bf snapshot. I read the mathematics again in full. Prep (old steps 1–3): uv is a Cartier hypersurface, so C is lci and flat over k; Fitting_1 = (u,v), so T is a finite disjoint union of copies of Spec k on exactly the nonsmooth points; C is reduced; K restricted to C_sm is Ω^1 (Stacks 0C4E/0E37). Split-node (old 4–6): the image of R is the pairs with equal constant term; N = R + R(1,0) is the integral closure of R; Q(R) = k((u))×k((v)); D⊗Â ≅ N by 0C3V; there are two maximal ideals with residue field k; the minimal primes are either 0 (domain, e.g. nodal cubic) or two primes extending to (u) and (v) (0CBW curves.tex l.4368, 0E38 l.4577). Boundary geometry (old 1, 7, 8): ν is finite, N is a smooth proper connected curve, the nonsmooth locus is S_node, ν is an isomorphism off S_node, and B is a reduced Cartier divisor (0E38/0C45). Parent steps 3–5: the u- and v-branches give dt/t and −dt/t; O(B)_p = z^{-1}D; the completed lattices agree, so n = 0, and the DVR gluing finishes the proof. Old steps 9–11 are carried by formal-plane-adjunction-lattice, as accepted at e6e7. Edge cases checked: smooth C, two crossing lines, nodal cubic, characteristic 2, nonseparated C. Duplicate sweep of the 150 nodes new since 00bf: sfb-split-node-normalization-conductor (Q123) is global polynomial conductor algebra and trf-nodal-marking-special-point-incidence (Q117) shares only the finiteness of T; both are overlap, not duplicates. No new node restates its parent or cites a sibling. Batch-5 flags: completed-curve-boundary-geometry, nodal-adjunction-preparation and split-node-component-normalization are generic statements about nodal curves and their normalizations. None is a statement of the trace formula or of Poincaré duality, none is a step of their proofs, and none reaches them; all three are accepted. No SGA citation; the generic tool_uses are accepted. FIX, file fixes/dag/nodes/sec-trace-formula/lem-trf-nodal-normalization-adjunction.json: proof step 2 again applied split-node without checking its hypotheses (the fix is lost for the 4th time). I re-applied it: A = O_{C,x} is reduced (step 1), essentially of finite type, of dimension 1 at a closed point of the pure one-dimensional C, and Â ≅ k[[u,v]]/(uv) as k-algebras by hypothesis. The proof is now 2869 characters. Maintainer note: each push since e6e7 has lost the step-2 fix after the promotion refusal.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.NodalNormalizationAdjunction",
@@ -430,5 +268,16 @@
   "result": "pass",
   "note": "Statement, dependencies, source correspondence, edge cases, docstrings, universes, route-pivot compliance, and recorded compilation checked; no substantive findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

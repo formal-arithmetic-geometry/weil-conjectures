@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+ "kind": "statement",
+ "title": "Smooth principal neighbourhood from regularity and finite separable residue",
+ "statement": "Let $k$ be a field [def-weil-field], let $f:X\\to\\operatorname{Spec}k$ be a morphism of schemes [def-pc-scheme], and let $U\\subseteq X$ be an affine open. Put $S=\\Gamma(U,\\mathcal O_X)$ with the $k$-algebra structure induced by $f$, and let $\\iota_U:\\operatorname{Spec}S\\to X$ be the canonical open immersion onto $U$ [def-weil-affine-spectrum] [def-weil-open-immersion]. Assume $S$ is of finite type over $k$ [def-weil-pbc-finite-type-algebra]. Let $\\mathfrak q\\subset S$ be a prime, put $x=\\iota_U(\\mathfrak q)$, and assume the local ring $S_{\\mathfrak q}$ is regular [def-weil-regular-scheme] and its residue field $\\kappa(\\mathfrak q)=S_{\\mathfrak q}/\\mathfrak qS_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] is finite separable over $k$ [def-weil-pbc-separable-algebraic-extension]. Then there exists $g\\in S\\setminus\\mathfrak q$ such that $S_g$ is a smooth $k$-algebra [def-weil-pbc-smooth-ring-map], where $S_g$ is localization at $\\{1,g,g^2,\\ldots\\}$. For such a $g$, put $D(g)=\\{\\mathfrak p\\in\\operatorname{Spec}S:g\\notin\\mathfrak p\\}$ and $V=\\iota_U(D(g))$, with its open subscheme structure. The canonical map $\\operatorname{Spec}S_g\\to X$ identifies $\\operatorname{Spec}S_g$ with $V$ over $\\operatorname{Spec}k$: the structural map on the source is induced by $k\\to S\\to S_g$ and equals $f$ composed with this canonical map. Moreover $x\\in V$ and $f|_V:V\\to\\operatorname{Spec}k$ is smooth [def-sbc-smooth-morphisms]. There is no dimension, integrality, normality or perfection assumption.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00TV, lemma-separable-smooth, implication (2) to (1), and Tag 00TB, definition-smooth-at-prime; geometric interpretation via Schemes Tag 01I3, lemma-standard-open-affine, and Morphisms Tag 01V6, lemma-smooth-characterize."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-smooth-ring-map",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\kappa(\\mathfrak q)$. The assumed finite separable extension is separable also in the general-field sense used by 00TV. Indeed, for every finitely generated intermediate field $k\\subset K\\prime\\subset K$, every element of $K\\prime$ is algebraic over $k$ with the same separable minimal polynomial over $k$ as in $K$. Thus $K\\prime/k$ is separable algebraic. Its empty family is a transcendence basis: $k[\\varnothing]=k$ injects into $K\\prime$ and $K\\prime/k$ is algebraic. Consequently every such $K\\prime/k$ is separably generated, exactly the definition of separability of $K/k$.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-pbc-transcendence-basis",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "definition-separable-field-extension, Tag 030O; empty transcendence basis for an algebraic extension; Fields definition-separable, Tag 09H1"
+   }
+  },
+  {
+   "text": "Apply the implication from regularity to smoothness at $\\mathfrak q$ in [lem-weil-pbc-regular-local-separable-residue-smooth]: $S$ is finite type over the field $k$, the specified local ring is regular, and step 1 verifies the residue-field separability hypothesis. By [def-weil-pbc-singular-ideal], smoothness at this prime means precisely that some $g\\notin\\mathfrak q$ makes $k\\to S\\to S_g$ smooth. Choose this $g$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "lemma-separable-smooth, Tag 00TV, (2) implies (1); definition-smooth-at-prime, Tag 00TB"
+   }
+  },
+  {
+   "text": "For any such $g$, [lem-weil-pbc-affine-open-section-vanishing-prime] identifies $V=\\iota_U(D(g))$ as an affine open of $X$ and its section ring with $S_g$ by the restriction localization $S\\to\\mathcal O_X(V)$. Hence the corresponding affine isomorphism $e:\\operatorname{Spec}S_g\\xrightarrow{\\sim}V$ has composite to $U=\\operatorname{Spec}S$ equal to $\\operatorname{Spec}(S\\to S_g)$: both induce that restriction map on sections. The contravariant functoriality and uniqueness in [def-weil-affine-spectrum] now give $f|_V\\circ e=\\operatorname{Spec}(k\\to S\\to S_g)$, since the original $k$-algebra structure on $S$ was induced by $f$. Also $g\\notin\\mathfrak q$ gives $\\mathfrak q\\in D(g)$, hence $x\\in V$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "lemma-standard-open-affine, Tag 01I3; lemma-spec-sheaves, Tag 01HV; canonical restriction and functoriality of Spec"
+   }
+  },
+  {
+   "text": "The smooth ring map $k\\to S_g$ gives a smooth morphism $h:\\operatorname{Spec}S_g\\to\\operatorname{Spec}k$ by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. Step 3 gives $h=f|_V\\circ e$. Apply clause (c) of [lem-weil-pbc-smooth-restrict-open-subschemes] to the source isomorphism $e$ and the identity of $\\operatorname{Spec}k$. It follows that $f|_V$ is smooth, with the asserted structural map. This works for every $g$ satisfying the algebraic conclusion.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "lemma-smooth-characterize, Tag 01V6; More on Morphisms lemma-smooth-formally-smooth, Tag 02H6; invariance under source isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-transcendence-basis",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "00TV (2) to (1), 00TB; Schemes 01I3 and 01HV; Morphisms 01V6 and More on Morphisms 02H6 for the affine geometric interpretation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_notMem_smooth|isSmoothAt.*regular|regular.*isSmoothAt|smooth.*[Nn]eighbo|[Nn]eighbo.*smooth",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/Sheaf/Smooth.lean\", \"line\": \"340\", \"text\": \"/-- Given a smooth commutative ring `R` and a manifold `M`, and an open neighbourhood `U` of a point\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/PartitionOfUnity.lean\", \"line\": \"505\", \"text\": \"manifold `M`, there exists a smooth function `f : M → [0,1]` that vanishes in a neighbourhood of `s`\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/PartitionOfUnity.lean\", \"line\": \"651\", \"text\": \"for all `y` in a neighborhood of `x` we have `c ∈ t y`. Then there exists a smooth function\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"102\", \"text\": \"/-- If `S` is `R`-smooth at a prime `p`, then `S` is `R`-standard-smooth in a neighbourhood of `p`:\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"109\", \"text\": \"  · obtain ⟨g, hg, hsm⟩ := IsSmoothAt.exists_notMem_smooth R p\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"150\", \"text\": \"lemma IsSmoothAt.exists_notMem_smooth [FinitePresentation R A] (p : Ideal A) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"278\", \"text\": \"  obtain ⟨r, hrx, hr⟩ := Algebra.IsSmoothAt.exists_notMem_smooth Γ(Y, U)\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/BumpFunction/FiniteDimension.lean\", \"line\": \"43\", \"text\": \"/-- If a set `s` is a neighborhood of `x`, then there exists a smooth function `f` taking\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSmoothAt.exists_notMem_smooth assumes formal smoothness at the prime; IsSmooth.exists_isStandardSmooth assumes the ambient morphism is already smooth. Neither derives it from regularity and finite separable residue, nor supplies the full ambient open-subsheme comparison from those hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular local ring at a prime of a finite type algebra over a field with finite separable residue field gives a principal smooth open neighbourhood in any ambient scheme affine chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the smooth locus of $ A $ over $ R $ if and only if the localization \"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSmoothAt.exists_notMem_smooth assumes formal smoothness at the prime; IsSmooth.exists_isStandardSmooth assumes the ambient morphism is already smooth. Neither derives it from regularity and finite separable residue, nor supplies the full ambient open-subsheme comparison from those hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an affine open of a scheme over a field a regular prime with finite separable residue field admits a principal localization smooth over the field whose spectrum is a smooth open neighbourhood in the scheme",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.IsSmoothAt\", \"Smooth\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \" (R : Type u_1) {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] (p : Ideal A) [p.IsPrime] : Prop\", \"doc\": \"An `R`-algebra `A` is smooth at a prime `p` of `A` if `Aₚ` is formally smooth over `R`.\\n\\nThis does not imply `Aₚ` is smooth over `R` under the mathlib definition\\neven if `A` is finitely presented,\\nbut\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \" (R : Type u_1) {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] [Algebra.FinitePresentation R A] (p : Ideal A) [p.IsPrime] [Algebra.IsSmoothAt R p] : ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.IsSmoothAt.of_formallySmooth_fiber\", \"module\": \"Mathlib.RingTheory.Smooth.Fiber\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S] [Algebra.FinitePresentation R S] (p : Ideal R) (q : Ideal S) [p.IsPrime] [q.IsPrime] [q.LiesOver p] [Algebra.FormallySmooth p.ResidueField (p.Fiber S)] : Algebra.IsSmoothAt R q\", \"doc\": \"[Stacks Tag 00TF](https://stacks.math.columbia.edu/tag/00TF) (We require the whole fiber to be smooth instead)\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \" (R : Type u_1) {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S] (p : Ideal S) [p.IsPrime] [Algebra.IsSmoothAt R p] : ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"If `S` is `R`-smooth at a prime `p`, then `S` is `R`-standard-smooth in a neighbourhood of `p`:\\nthere exists a basic open `p ∈ D(f)` of `Spec S` such that `S[1/f]` is standard smooth.\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial\", \"module\": \"Mathlib.RingTheory.Unramified.LocalStructure\", \"type\": \" {R : Type u_1} {S : Type u_3} [CommRing R] [CommRing S] [Algebra R S] {p : Ideal S} [p.IsPrime] [Algebra.FinitePresentation R S] [Algebra.IsSmoothAt R p] : ∃ f ∉ p, ∃ n x, IsScalarTower R (MvPolynomial (Fin n) R) (Localization.Away f) ∧ Algebra.IsStandardEtale (MvPolynomial (Fin n) R) (Localization\", \"doc\": \"Given `S` a finitely presented `R`-algebra, and `p` a prime of `S`. If `S` is smooth over `R`\\nat `p`, then there exists `f ∉ p` such that `R → S[1/f]` factors through some `R[X₁,...,Xₙ]`,\\nand that `S[\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSmoothAt.exists_notMem_smooth assumes formal smoothness at the prime; IsSmooth.exists_isStandardSmooth assumes the ambient morphism is already smooth. Neither derives it from regularity and finite separable residue, nor supplies the full ambient open-subsheme comparison from those hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity with separable residue extension yields an element outside the prime with smooth localization and hence a smooth open subscheme containing the point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the smooth locus of $ A $ over $ R $ if and only if the localization \"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsSmoothAt.exists_notMem_smooth assumes formal smoothness at the prime; IsSmooth.exists_isStandardSmooth assumes the ambient morphism is already smooth. Neither derives it from regularity and finite separable residue, nor supplies the full ambient open-subsheme comparison from those hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a field with regular local ring and finite separable residue field has a principal smooth neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.instSmoothOfIsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.Smooth R S\", \"doc\": \"Every standard smooth algebra over a commutative ring $ R $ is smooth over $ R $. A standard smooth algebra is one isomorphic to a localized polynomial ring $ R[x_1,\\\\ldots,x_n]_f $ with maximal rank J\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the neighbourhood lemmas require IsSmoothAt or smoothness already; none derives the full ambient-scheme assertion from regularity and finite separable residue. Read Mathlib/RingTheory/Smooth/Locus.lean:150-157."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the neighbourhood lemmas require IsSmoothAt or smoothness already; none derives the full ambient-scheme assertion from regularity and finite separable residue. Read Mathlib/RingTheory/Smooth/Locus.lean:150-157."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_notMem_smooth|regularLocal.*smooth|isRegularLocalRing.*smooth|smooth.*isRegularLocalRing",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"278\", \"text\": \"  obtain ⟨r, hrx, hr⟩ := Algebra.IsSmoothAt.exists_notMem_smooth Γ(Y, U)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"109\", \"text\": \"  · obtain ⟨g, hg, hsm⟩ := IsSmoothAt.exists_notMem_smooth R p\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"150\", \"text\": \"lemma IsSmoothAt.exists_notMem_smooth [FinitePresentation R A] (p : Ideal A) [p.IsPrime]\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the neighbourhood lemmas require IsSmoothAt or smoothness already; none derives the full ambient-scheme assertion from regularity and finite separable residue. Read Mathlib/RingTheory/Smooth/Locus.lean:150-157."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular point with finite separable residue field of an affine scheme over a field has a principal smooth open neighbourhood compatible with its structure morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] (p : Ideal A) [p.IsPrime] [IsSmoothAt R p] : ∃ f ∉ p, Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : CommRingCat\", \"doc\": \"For a scheme $ X $ and a point $ x \\\\in X $, the residue field at $ x $ is the quotient of the local ring $ \\\\mathcal{O}_{X,x} $ (the stalk of the structure sheaf at $ x $) by its unique maximal ideal, \"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] {f : A} :\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ smoothLocus R A ↔ Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the smooth locus of $ A $ over $ R $ if and only if the localization \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the neighbourhood lemmas require IsSmoothAt or smoothness already; none derives the full ambient-scheme assertion from regularity and finite separable residue. Read Mathlib/RingTheory/Smooth/Locus.lean:150-157."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity of a localization and separability of the residue field imply smoothness of an algebra over a field near a prime ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.Smooth.of_isLocalization_Away\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {A : Type u_5} [inst_1 : CommRing A] [inst_2 : Algebra R A] (r : R)\\n  [IsLocalization.Away r A], Algebra.Smooth R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the submonoid generated by all powers of an element $ r $, then $ A $ is a smooth $ R $-algebra.\"}\n  {\"name\": \"RingHom.Smooth.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to its localization at an element $ r $ is smooth, meaning that the localization is flat over $ R $ and the sheaf of differentials $ \\\\Omeg\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"RingHom.Smooth.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The canonical ring homomorphism from a ring $ R $ to its localization $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally free of finite rank.\"}\n  {\"name\": \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to its localization at an element $ r $ satisfies the standard smoothness condition, meaning the localization map is standard smooth as de\"}\n  {\"name\": \"Algebra.IsStandardSmooth.localization_away\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [IsLocalization.Away r S], Algebra.IsStandardSmooth R S\", \"doc\": \"If $ S $ is the localization of a commutative ring $ R $ at the submonoid generated by the powers of an element $ r $, then $ S $ is a standard smooth $ R $-algebra.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the neighbourhood lemmas require IsSmoothAt or smoothness already; none derives the full ambient-scheme assertion from regularity and finite separable residue. Read Mathlib/RingTheory/Smooth/Locus.lean:150-157."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-curve-separable-point-smooth",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §3.5, p.607: tame normalization over separable branch points, etale generic marking, and extraction of the algebraic constant field. This isolates the local smoothness assertion, not the relative genus-raising construction. Local PDF WANTED; publisher PDF read. Supporting input: de Jong §3.5, p.607, smoothness at tame branch points with separable residue fields; apply only after proving the upstairs residue extension separable.; re-split of lem-sfb-normal-curve-separable-point-smooth, old proof steps 5--6: finite separable versus general separable field extension, application of 00TV, principal localization and smooth open neighbourhood over the given base",
+   "via": [
+    "lem-sfb-normal-curve-separable-point-smooth",
+    "lem-sfb-tame-radical-curve-normalization",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-regular-separable-affine-smooth-neighbourhood",
+  "worker": "stage1",
+  "summary": "Q115: reuse the existing 00TV node, explicitly reconcile algebraic and general separability, extract the smooth principal localization by definition, and identify its ambient affine open and structural morphism before applying the affine smoothness comparison. No new nodes and no statement change.",
+  "blueprint": "Inherited blueprint.from.place: det-thm-sf-ctf-stability-direct-images (3), local smoothness prerequisite in the alteration refinement, as isolated by the parent normal-curve node, old steps 5--6. Current latest blueprint proof (3) is the direct-image/compactification paragraph; this delivery only supplies the inherited local geometric tool, without changing the unit route. Whole-blueprint searches regular separable, smooth affine, separable residue, principal open found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "why": "The general finite-type algebra criterion 00TV is the algebraic tool explicitly required by this item; no same-unit node supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "The canonical principal-open localization theorem supplies the affine geometric identification; this is a generic scheme tool, not an alternative alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "The affine ring/scheme comparison supplies smoothness in the project formally-smooth convention; no same-unit result replaces this bridge."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-895ee72e5",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-895ee72e5 (reviewer sub-agent of L); spot-checked: I read the item in full and every cited statement. The delivery has no new nodes. The item is unsplit on live and side-live and has no repair note, so it is not superseded. Statement, stmt_deps and blueprint are byte-identical to base. Sources: Stacks 00TV (algebra.tex l.38740) and 030O (l.9915) agree with lem-weil-pbc-regular-local-separable-residue-smooth and def-weil-pbc-separable-field-extension; 00TB agrees with def-weil-pbc-singular-ideal. Step 1: finite separable implies separable in the 030O sense via the empty transcendence basis; this is a correct, genuinely elementary use of the three definitions. Step 2: 00TV (regular implies smooth at q), and taking g comes straight from the def-singular-ideal statement, with no openness theorem used. Step 3: section-vanishing (a) and (b) together with the Spec bijection give e: Spec S_g ≅ V with f|_V∘e = Spec(k→S→S_g), and x ∈ V because g ∉ q. Step 4: the smooth-ring-map ⇔ smooth-affine node plus clause (c) of the restriction node, applied with v = id, gives f|_V smooth. Edge cases checked: S = k; k[x]/(x²−a) separable in char ≠ 2 versus purely inseparable in char 2 (excluded by the hypothesis); the cusp (not regular, excluded); a non-maximal q makes the statement vacuous. lem-trf-affine-smooth-prime-scheme-neighbourhood is close but assumes smoothness at q, so it is not a duplicate. I accept the three tool_uses of sk-thm-p1 nodes (00TV, principal-open localization, affine smoothness comparison) as generic tools; the unit sk-thm-sf-ctf-stability does not cite sk-thm-p1. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularSeparableAffineSmoothNeighbourhood",
+  "declaration": "AlgebraicGeometry.exists_smooth_principal_neighbourhood_of_regular_separable_residue",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularSeparableAffineSmoothNeighbourhood.lean",
+  "statement": "theorem exists_smooth_principal_neighbourhood_of_regular_separable_residue (k : Type u) [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) (U : X.Opens) (hU : IsAffineOpen U) [Algebra k Γ(X, U)] (hbase : hU.fromSpec ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k Γ(X, U)))) [Algebra.FiniteType k Γ(X, U)] (q : PrimeSpectrum Γ(X, U)) [IsRegularLocalRing (Localization.AtPrime q.asIdeal)] [Module.Finite k q.asIdeal.ResidueField] [Algebra.IsSeparable k q.asIdeal.ResidueField] : (∃ g : Γ(X, U), g ∉ q.asIdeal ∧ Algebra.Smooth k (Localization.Away g)) ∧ ∀ g : Γ(X, U), g ∉ q.asIdeal → Algebra.Smooth k (Localization.Away g) → hU.fromSpec q ∈ hU.fromSpec ''ᵁ PrimeSpectrum.basicOpen g ∧ Smooth ((hU.fromSpec ''ᵁ PrimeSpectrum.basicOpen g).ι ≫ f) ∧ ∃ e : Spec (.of (Localization.Away g)) ≅ (hU.fromSpec ''ᵁ PrimeSpectrum.basicOpen g).toScheme, e.hom ≫ (hU.fromSpec ''ᵁ PrimeSpectrum.basicOpen g).ι = Spec.map (CommRingCat.ofHom (algebraMap Γ(X, U) (Localization.Away g))) ≫ hU.fromSpec ∧ e.hom ≫ (hU.fromSpec ''ᵁ PrimeSpectrum.basicOpen g).ι ≫ f = Spec.map (CommRingCat.ofHom (algebraMap k (Localization.Away g)))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c66c825c",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Item lean-only (node otherwise identical to side-live); statement verbatim with file. Clause-by-clause match: field k, f : X ⟶ Spec k, affine U with Γ(X,U), induced k-algebra pinned by hbase (Spec fully faithful; not stronger), hU.fromSpec as ι_U, Algebra.FiniteType, IsRegularLocalRing (Localization.AtPrime q), Module.Finite + Algebra.IsSeparable on q.ResidueField; ∃ g ∉ q with Algebra.Smooth k S_g, plus separate ∀-such-g clause: x ∈ fromSpec ''ᵁ D(g), Smooth (V.ι ≫ f), canonical iso e (pinned by e ≫ V.ι = Spec.map(S→S_g) ≫ fromSpec) over Spec k. Edge cases (empty U, S = k, unit g, char p, single universe) fine. lem-trf-regular-separable-residue-smooth is a weaker distinct statement, not a duplicate; Mathlib lemmas assume IsSmoothAt. Docstrings/source/blueprint ok, sorry only, no defs, proof imports exist. No findings; no recompile."
+ }
+}

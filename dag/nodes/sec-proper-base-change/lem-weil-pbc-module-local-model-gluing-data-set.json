@@ -1,0 +1,226 @@
+{
+ "id": "lem-weil-pbc-module-local-model-gluing-data-set",
+ "kind": "statement",
+ "title": "A set of all effective gluing data for prescribed local module families",
+ "statement": "Let $X$ be a topological space, $\\mathcal O_X$ a sheaf of commutative rings, and let module sheaves and their morphisms mean those of [def-weil-sheaf-of-modules-category]. All sets of points and sections are taken in a fixed Grothendieck universe, and the index sets below are in that universe. For each open $U\\subseteq X$ fix a set $I_U$ and $\\mathcal O_U$-modules $B_{U,t}$ for $t\\in I_U$, where $\\mathcal O_U=\\mathcal O_X|_U$ and restriction to a smaller open is restriction of sections and module structures. Let $D$ consist of all tuples $d=(\\mathcal U,(t_U)_{U\\in\\mathcal U},(\\varphi_{UV})_{U,V\\in\\mathcal U})$, where $\\mathcal U\\subseteq\\operatorname{Op}(X)$ covers $X$, $t_U\\in I_U$, and $\\varphi_{UV}:B_{U,t_U}|_{U\\cap V}\\to B_{V,t_V}|_{U\\cap V}$ are module isomorphisms for every pair including $U=V$, satisfying $\\varphi_{UW}=\\varphi_{VW}\\circ\\varphi_{UV}$ after restriction to every triple overlap. Then $D$ is a set, and there is a family $(\\Phi_d)_{d\\in D}$ of $\\mathcal O_X$-modules with isomorphisms $\\theta^d_U:\\Phi_d|_U\\to B_{U,t_U}$ such that $\\varphi_{UV}\\circ\\theta^d_U|_{U\\cap V}=\\theta^d_V|_{U\\cap V}$ for every $d\\in D$ and $U,V\\in\\mathcal U$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01BC (lemma-set-isomorphism-classes-finite-type-modules), proof: the collection of gluing data and coverings forms a set, and gluing supplies a module for each datum"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-local-model-gluing-data"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Op}(X)$. For an open $W$ and two fixed $\\mathcal O_W$-modules $M,N$, a morphism is determined by its section maps [def-weil-sheaf-of-modules-category]. Thus $\\operatorname{Hom}(M,N)$ embeds into $\\prod_{V\\in\\operatorname{Op}(W)}\\operatorname{Map}(M(V),N(V))$: naturality, additivity and linearity merely cut out a subset. An isomorphism, together with its uniquely determined inverse, is a pair in $\\operatorname{Hom}(M,N)\\times\\operatorname{Hom}(N,M)$ satisfying the two inverse equations. Hence every such Hom and isomorphism collection is a set in the fixed universe, by closure under function sets, indexed products and subsets.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BC, lemma-set-isomorphism-classes-finite-type-modules, proof: the collection of all glueing data forms a set; morphism encoding made explicit"
+   }
+  },
+  {
+   "text": "Since $X$ is a set, $S\\subseteq\\mathcal P(X)$ is a set. Encode arbitrary cover/label/transition candidates in the dependent sum $$E=\\coprod_{\\mathcal C\\in\\mathcal P(S)}\\;\\coprod_{t\\in\\prod_{U\\in\\mathcal C}I_U}\\;\\prod_{(U,V)\\in\\mathcal C^2}\\operatorname{Iso}_{\\mathcal O_{U\\cap V}}(B_{U,t_U}|_{U\\cap V},B_{V,t_V}|_{U\\cap V}).$$ Every factor is a set by Step 1; the indices are sets, so $E$ is a set in the fixed universe. The conditions $\\bigcup\\mathcal C=X$ and the triple-overlap equations select a subset of $E$. This subset is precisely $D$, including all diagonal transition maps; therefore $D$ is a set.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BC, lemma-set-isomorphism-classes-finite-type-modules, proof: set of glueing data and set of coverings without repetitions"
+   }
+  },
+  {
+   "text": "Fix $d=(\\mathcal U,t,\\varphi)\\in D$. Apply clause (2) of [lem-weil-pbc-glue-sheaves-of-modules] with index set $\\mathcal U$, cover member $U$ at index $U$, and local module $B_{U,t_U}$. Its cover hypothesis is the cover condition defining $D$; its overlap isomorphisms and triple cocycle are exactly those of $d$, with the same order of composition and including equal indices. The all-equal cocycle is $\\varphi_{UU}=\\varphi_{UU}\\circ\\varphi_{UU}$, hence invertibility gives $\\varphi_{UU}=\\mathrm{id}$; thus the diagonal maps also meet the usual gluing convention. It yields an $\\mathcal O_X$-module $\\Phi$ and isomorphisms $\\theta_U:\\Phi|_U\\to B_{U,t_U}$ satisfying $\\varphi_{UV}\\circ\\theta_U|_{U\\cap V}=\\theta_V|_{U\\cap V}$. No finite-type, separation, or finiteness hypothesis on the cover is required.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 00AL (lemma-glue-sheaves) and 00AM (lemma-glue-sheaves-structures), via clause (2) of the cited module-gluing node"
+   }
+  },
+  {
+   "text": "Write $\\mathbb U$ for the fixed universe and $S=\\operatorname{Op}(X)$. In a larger ambient universe, $\\mathbb U$ is a set, so section assignments $A:S\\to\\mathbb U$ form a set. For each $A$, addition, negation, zero and scalar multiplication are encoded by functions on the $A(V)$, and restrictions by functions $A(V)\\to A(W)$ for every inclusion $W\\subseteq V$. Their products are sets; the module, restriction and sheaf axioms cut out a subset. Thus these encodings form an ambient set of module sheaves with sections in $\\mathbb U$. For each $d\\in D$, encode the comparison isomorphisms and their inverses by section maps as in Step 1 and impose the comparison equations. The resulting witness set $W_d$ is nonempty by Step 3. The disjoint union of these witness sets over the set $D$ is a set in that ambient universe. Set-indexed choice therefore selects $(\\Phi_d,(\\theta^d_U)_U)\\in W_d$ for all $d\\in D$. Every selected sheaf still has sections in $\\mathbb U$ and every comparison equation holds. For $D=\\varnothing$ choose the empty family.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01BC, lemma-set-isomorphism-classes-finite-type-modules, proof: set of glued modules; ordinary choice of representatives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01BC (lemma-set-isomorphism-classes-finite-type-modules), proof, set of glueing data and coverings; effective module glueing from Sheaves Tags 00AL and 00AM, with explicit set encodings and set-indexed choice"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Gg]luing|[Gg]lue|[Dd]escent|[Cc]ocycle",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise limit smallness, presheaf well-poweredness, presentation structures and abstract GlueData do not assert this quotient-map or effective-cocycle parametrization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct a set of all descent data and glued module sheaves from a small set of local models",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"glue\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small families of local module sheaves on opens have a small set of all cocycle gluing data with effective glued sheaves",
+   "results": "SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections; SheafOfModules.LocalGeneratorsData.X; SheafOfModules.LocalGeneratorsData.I; SheafOfModules.LocalGeneratorsData; SheafOfModules.IsQuasicoherent; SheafOfModules.isQuasicoherent; SheafOfModules.GeneratingSections; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise limit smallness, presheaf well-poweredness, presentation structures and abstract GlueData do not assert this quotient-map or effective-cocycle parametrization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Parametrize module sheaf descent cocycles by a set and glue each datum, including prescribed local identifications",
+   "results": "SheafOfModules.Presentation; SheafOfModules.QuasicoherentData.presentation; SheafOfModules.Presentation.generators; SheafOfModules.LocalGeneratorsData.I; SheafOfModules.LocalGeneratorsData.generators; SheafOfModules.LocalGeneratorsData.X; SheafOfModules.GeneratingSections.I; SheafOfModules.GeneratingSections.π",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise limit smallness, presheaf well-poweredness, presentation structures and abstract GlueData do not assert this quotient-map or effective-cocycle parametrization theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "GlueData|GluingData|[Gg]luing.*[Ss]et|[Gg]lueing.*[Ss]et",
+   "results": "Mathlib/CategoryTheory/LocallyDirected.lean; Mathlib/CategoryTheory/GlueData.lean; Mathlib/CategoryTheory/GlueData.lean; Mathlib/CategoryTheory/GlueData.lean; Mathlib/CategoryTheory/GlueData.lean; Mathlib/CategoryTheory/GlueData.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: sectionwise limit smallness, presheaf well-poweredness, presentation structures and abstract GlueData do not assert this quotient-map or effective-cocycle parametrization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small family of local sheaves of modules admits a set of all cocycle gluing data and a glued module for every datum",
+   "results": "SheafOfModules.LocalGeneratorsData; SheafOfModules.LocalGeneratorsData.X; SheafOfModules.IsQuasicoherent; SheafOfModules.LocalGeneratorsData.I; SheafOfModules.Presentation; SheafOfModules.isQuasicoherent; SheafOfModules.QuasicoherentData; SheafOfModules.GeneratingSections",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern local generators/presentations, smallness of sections of a limit, or abstract/space gluing data, not a set of all module-sheaf gluing data with effective realizations"
+  },
+  {
+   "tool": "grep",
+   "query": "glue|Glue|[Ss]mall",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean (subdirectory Algebra/Category/ModuleCat/Sheaf)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern local generators/presentations, smallness of sections of a limit, or abstract/space gluing data, not a set of all module-sheaf gluing data with effective realizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The collection of cocycle gluing data between a small family of local module sheaves is small and every datum has an effective glued module sheaf",
+   "results": "AlgebraicGeometry.LocallyRingedSpace.GlueData; AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion; TopCat.GlueData.ofOpenSubsets; AlgebraicGeometry.SheafedSpace.GlueData; SheafOfModules.IsQuasicoherent.mk; CategoryTheory.GlueData'.mk; AlgebraicGeometry.Scheme.Cover.gluedCover; CategoryTheory.GlueData.cocycle",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern local generators/presentations, smallness of sections of a limit, or abstract/space gluing data, not a set of all module-sheaf gluing data with effective realizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"glue\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern local generators/presentations, smallness of sections of a limit, or abstract/space gluing data, not a set of all module-sheaf gluing data with effective realizations"
+  },
+  {
+   "tool": "grep",
+   "query": "GlueData|[Gg]luing|[Dd]escent",
+   "results": "Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/DescentData.lean; Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean; Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean; Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean (subdirectory CategoryTheory/Sites/Descent)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern local generators/presentations, smallness of sections of a limit, or abstract/space gluing data, not a set of all module-sheaf gluing data with effective realizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The type of descent cocycles between prescribed local sheaves of modules is small and admits a family of global realizations",
+   "results": "SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections; SheafOfModules.Presentation; SheafOfModules.QuasicoherentData.presentation; SheafOfModules.QuasicoherentData; SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData; SheafOfModules.QuasicoherentData.I; SheafOfModules.IsQuasicoherent; SheafOfModules.LocalGeneratorsData",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern local generators/presentations, smallness of sections of a limit, or abstract/space gluing data, not a set of all module-sheaf gluing data with effective realizations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-finite-presentation-representatives",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Current main-20261015 blueprint, lemma-weil-pbc-h1-constructible-representation.proof.md, second paragraph: the finite-pushforward lemma. This node supplies set-sized finite-presentation module indices for the existing finite-pushforward/approximation chain recorded in via; source Stacks 01BC. Supporting input: A set of all effective gluing data for prescribed local module families.",
+   "via": [
+    "lem-weil-pbc-module-finite-presentation-representatives",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-module-local-model-gluing-data-set",
+  "worker": "Q80",
+  "summary": "Kept the statement. Encoded local morphisms by section maps, isomorphisms by inverse pairs, and the entire datum by a small dependent sum/product and a predicate; applied the existing module-gluing theorem with its exact hypotheses, then chose the witnesses over D in an ambient universe. No new nodes. Read Stacks 01BC and Sheaves 00AL/00AM, verified exact cited statements and empty/infinite edge cases, and searched the current blueprint, DAG, project Lean and Mathlib. Repair of the returned head 58ee681a967: rebased the retained split onto the current unsplit live item; re-read both current cited statements and rechecked their exact quotes. Made the ambient witness-set encoding explicit, so simultaneous choice has a stated set domain without altering the statement or dependency route. Resumed repair of the latest returned head 0efb9cddd11: reconstructed this record from the current read-only live item, retained the reviewed argument and search log, and checked both full cited statements and literal quotes anew. The witness encoding now lists the operations and all restriction maps explicitly before imposing their axioms. Repair of latest return 8a5542a91d3: rebuilt against the current unsplit live record, reread both complete cited statements and checked the literal quotes. Added the explicit equal-index cocycle calculation in Step 3 and the set of all witnesses over D in Step 4; the source, statement and dependencies are unchanged.",
+  "blueprint": "Realizes the set-sized gluing-family input below the finite-pushforward sentence in paragraph 2 of main-20261015 lemma-weil-pbc-h1-constructible-representation.proof.md, along the existing via chain. The nearest blueprint ancestor and the existing from.place are preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-da0fa3bd2",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-da0fa3bd2 (reviewer sub-agent of L); spot-checked: Fourth delivery of this split (after 58ee681a967, 0efb9cddd11 and 8a5542a91d3). The earlier returns were L landing/promotion refusals, not mathematical returns. Compared with 8a5542a91d3, only three fields changed: Step 3 adds the derivation φ_UU=φ_UU∘φ_UU ⇒ φ_UU=id; Step 4 states that the disjoint union of the witness sets W_d over D is a set before choice; and the split_report summary. The statement, stmt_deps, source, blueprint chain, Steps 1-2 and the 12 search records are identical. Source: Stacks modules.tex Tag 01BC (l.958-992), whose proof says that glueing data and injectively indexed coverings form a set. The item is that step with prescribed local models; taking the cover as a subset of Op(X) is the source's injective-indexing convention. Step 1 cites def-weil-sheaf-of-modules-category, read in full: morphisms are sectionwise linear maps, so Hom embeds in a product of Map sets and an Iso is an inverse pair. Step 2 is an elementary dependent sum/product E over subsets of Op(X), label choices and Iso sets; the cover and cocycle conditions cut out exactly D, diagonal pairs included. Step 3 uses clause (2) of lem-weil-pbc-glue-sheaves-of-modules (same unit sk-thm-p1, reviewed by L), read in full, with I=𝒰, U_i=U and F_i=B_{U,t_U}. Its hypotheses (all pairs including i=j, cocycle φ_ik=φ_jk∘φ_ij) and its conclusion φ_ij∘φ_i=φ_j match the item, and it assumes no finiteness. Step 4 is choice over the nonempty sets W_d in a larger universe; the chosen sheaves keep their sections in the fixed universe. Edge cases checked: X empty; X a point with the covers {X} and {∅,X}; an empty I_U, which can make D empty and gives the empty family; and infinite covers. proof_deps is the union of the step uses and there is no cycle. The only citer, the parent finite-presentation-representatives step 3, uses exactly the item's statement. lem-sfb-locally-prescribed-modules-small (essential smallness on sites) is not a duplicate of the item. No new nodes and no fixes. Maintainer note: this is a promotion loop, so L should promote the side completion; lem-sfb-locally-prescribed-modules-small could serve the parent as a tool."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ModuleLocalModelGluingDataSet",
+  "declaration": "AlgebraicGeometry.module_local_model_gluing_data_set",
+  "file": "lean/Sheaf/Topology/ModuleLocalModelGluingDataSet.lean",
+  "statement": "theorem module_local_model_gluing_data_set (X : RingedSpace.{u}) (I : Opens X → Type u) (B : ∀ U : Opens X, I U → ringedSiteModules.{u} ((moduleRings X).over U)) : Small.{u} (ModuleLocalModelGluingData X I B) ∧ ∃ (Φ : ModuleLocalModelGluingData X I B → ringedSiteModules.{u} (moduleRings X)) (θ : ∀ (d : ModuleLocalModelGluingData X I B) (U : d.cover), (Φ d).over U.val ≅ B U.val (d.label U)), ∀ (d : ModuleLocalModelGluingData X I B) (U V : d.cover) (W : Opens X) (hU : W ≤ U.val) (hV : W ≤ V.val), (θ d U).hom.val.app (op (Over.mk (homOfLE hU))) ≫ (d.transition U V).hom.val.app (op (Over.mk (homOfLE (le_inf hU hV)))) = (θ d V).hom.val.app (op (Over.mk (homOfLE hV)))",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e0983563",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Item clauses match the Lean: subset cover with ⨆=⊤, labels, overMap transitions for all pairs incl. diagonal with correct orientation, componentwise triple cocycle (U→T)=(U→V)≫(V→T), Small.{u} D, a simultaneous family Φ with θ iso to the local models, and θ_U≫φ_UV=θ_V; shapes are literally those of clause (3) of glue_sheaves_of_modules (I=cover, v=u). New def node has the §5 fields and its TeX matches the structure; the item differs from live only in lean and in stmt_deps (+ the new def node); lean.statement verbatim in both records; imports correct (plain proof_dep import of the GlueSheavesOfModules module). Edge cases: empty X, {X}, {∅,X}, empty I_U/empty D, infinite covers; single universe u. No duplicate (ModuleGlueData is a fixed-cover general-site notion). Advisory: Small conjunct is immediate from the Type u typing, which is exactly the node's 'D is a set', so not a tautology fault; moduleRings is the encoding the brief requires. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261023T102754-L-2970194",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.module_local_model_gluing_data_set"
+  ],
+  "sorry_after": []
+ }
+}

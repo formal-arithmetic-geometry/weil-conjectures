@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-symbolic-powers-flat-prime-extension",
+ "kind": "statement",
+ "title": "Symbolic powers commute with flat extension to a prime ideal",
+ "statement": "Let $R\\to S$ be a flat homomorphism [def-weil-pbc-flat-ring-map] of commutative Noetherian rings [def-weil-pbc-noetherian-ring], and let $\\mathfrak p\\subset R$ be a prime ideal such that its extended ideal $\\mathfrak q=\\mathfrak pS$ is a prime ideal of $S$. For a prime ideal $P$ of a commutative ring $T$ and $n\\geq0$, define its symbolic power by $P^{(n)}=\\{x\\in T:x/1\\in P^nT_P\\}$, where $T_P$ is localization at the complement of $P$ [def-weil-pbc-localization-at-prime] and $P^0=T$. Then for every $n\\geq0$ one has $\\mathfrak p^{(n)}S=\\mathfrak q^{(n)}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BC0, lemma-symbolic-power-flat-extension, statement and proof, lines 15578-15615; with the explicit definition from definition-symbolic-power. The Noetherian hypotheses are harmless restrictions of the source statement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "For $n=0$ both symbolic powers are the whole ring, so the assertion is immediate. Henceforth fix $n\\geq1$. First verify $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$, writing $\\varphi:R\\to S$ for the given map. For $t\\in R\\setminus\\mathfrak p$, multiplication by $t$ is injective on the domain $R/\\mathfrak p$. Flat tensor exactness and the quotient-tensor isomorphism identify its tensor with multiplication by $\\varphi(t)$ on $S/\\mathfrak pS=S/\\mathfrak q$, which is therefore injective. Since $\\mathfrak q$ is proper, $1\\ne0$ in $S/\\mathfrak q$, so $\\varphi(t)\\notin\\mathfrak q$. The reverse inclusion $\\mathfrak p\\subseteq\\varphi^{-1}(\\mathfrak q)$ follows from the definition of extension.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC0, lemma-symbolic-power-flat-extension, setup of the localizations; Tags 00HD (lemma-flat), 00DF (lemma-tensor-product-exact), 00D2 (lemma-tensor-with-bimodule)"
+   }
+  },
+  {
+   "text": "Put $A=R_{\\mathfrak p}$, $\\mathfrak m=\\mathfrak pA$, $k=A/\\mathfrak m=\\kappa(\\mathfrak p)$, $B=(R\\setminus\\mathfrak p)^{-1}S$, and $C=S_{\\mathfrak q}$. Step 1 places the denominators of $B$ outside $\\mathfrak q$, giving $B\\to C$. The localization-tensor statement, applied to $R\\to A$ and the $R$-module $S$, gives $A\\otimes_RS\\cong B$, $(r/t)\\otimes s\\mapsto\\varphi(r)s/\\varphi(t)$ (identify $R\\otimes_RS$ with $S$ by $r\\otimes s\\mapsto\\varphi(r)s$). Consequently cancellation of base change gives, for each $A$-module $H$, a canonical $S$-linear isomorphism $H\\otimes_RS\\cong H\\otimes_AB$, $h\\otimes s\\mapsto h\\otimes(s/1)$. These formulas show that all maps respect multiplication by elements of $S$. The cited prime-localization statement supplies the local ring $A$ and its residue field $k$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-module-tensor-cancel-base-change",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC0, lemma-symbolic-power-flat-extension, first paragraph, notation S_p and the tensor description of localization; Tags 00DK (lemma-tensor-localization), 00D2 (lemma-tensor-with-bimodule)"
+   }
+  },
+  {
+   "text": "By the definition of symbolic power, $\\ker(R\\to A/\\mathfrak m^n)=\\mathfrak p^{(n)}$. Tensor the exact sequence $0\\to\\mathfrak p^{(n)}\\to R\\to A/\\mathfrak m^n$ with the flat $R$-module $S$. Its first image in $S$ is exactly $\\mathfrak p^{(n)}S$: the map sends $x\\otimes s$ to $\\varphi(x)s$, and its image consists of finite sums of such terms. By step 2 and the quotient-tensor isomorphism, $(A/\\mathfrak m^n)\\otimes_RS\\cong(A/\\mathfrak m^n)\\otimes_AB\\cong B/\\mathfrak m^nB$. Under these maps the tensor of $R\\to A/\\mathfrak m^n$ is $s\\mapsto s/1\\bmod\\mathfrak m^nB$. Thus $\\mathfrak p^{(n)}S=\\ker(S\\to B/\\mathfrak m^nB)$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC0, lemma-symbolic-power-flat-extension, first two sentences: tensoring the kernel"
+   }
+  },
+  {
+   "text": "For $0\\leq i\\leq n$ let $F_i=\\mathfrak m^i/\\mathfrak m^n\\subseteq A/\\mathfrak m^n$ and let $E_i$ be the image of $F_i\\otimes_RS$ in $(A/\\mathfrak m^n)\\otimes_RS=B/\\mathfrak m^nB$. Flat tensor exactness makes these inclusions injective and gives $E_0=B/\\mathfrak m^nB$, $E_n=0$, and $E_i/E_{i+1}\\cong G_i\\otimes_RS$ for $0\\leq i<n$, where $G_i=\\mathfrak m^i/\\mathfrak m^{i+1}$. Indeed tensor the short exact sequences $0\\to F_{i+1}\\to F_i\\to G_i\\to0$. Surjectivity of the last tensor map can also be checked by lifting the first factors of each finite sum of pure tensors. Step 2 identifies $G_i\\otimes_RS$ with $G_i\\otimes_AB$. All these identifications are $S$-linear, hence commute with multiplication by $f\\in S$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC0, lemma-symbolic-power-flat-extension, finite filtration paragraph and its first displayed isomorphism"
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak m$ annihilates $G_i$, so the quotient-ring tensor statement gives $G_i\\otimes_AB\\cong G_i\\otimes_kD$, where $D=B/\\mathfrak mB$. The fraction map identifies $D\\cong(R\\setminus\\mathfrak p)^{-1}(S/\\mathfrak q)$: it sends $s/\\varphi(t)$ to $\\bar s/\\bar\\varphi(t)$, and its inverse is induced by the same fraction formula. Step 1 says all these denominators are nonzero in the domain $S/\\mathfrak q$; thus $D$ is a nonzero domain. Explicitly a fraction is zero only if a nonzero denominator multiple of its numerator is zero, and the domain law forces that numerator to be zero. In particular each $f\\in S\\setminus\\mathfrak q$ has nonzero image in $D$. Choose a $k$-basis $(e_j)$ of $G_i$ by the vector-space freeness statement. Every element of $G_i\\otimes_kD$ has a unique finite expression $\\sum_j e_j\\otimes d_j$: existence follows by expanding first factors in the basis, and uniqueness by applying the coordinate linear forms tensored with $D$. If $f\\sum_j e_j\\otimes d_j=0$, each $\\bar f d_j=0$ in the domain $D$, so all $d_j=0$. Therefore multiplication by $f$ is injective on every $E_i/E_{i+1}$.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-vector-space-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC0, lemma-symbolic-power-flat-extension, finite filtration paragraph, second displayed isomorphism and nonzerodivisors on its factors; fields.tex Tag 09FN (lemma-vector-space-is-free)"
+   }
+  },
+  {
+   "text": "For $f\\in S\\setminus\\mathfrak q$, descending induction on $i$ proves that $f$ acts injectively on $E_i$. The base $E_n=0$ is immediate. If $fx=0$ in $E_i$, its class in $E_i/E_{i+1}$ is zero by step 5, so $x\\in E_{i+1}$ and the induction hypothesis gives $x=0$. Hence every such $f$ is a nonzerodivisor on $E_0=B/\\mathfrak m^nB$. To prove $B/\\mathfrak m^nB\\to C/\\mathfrak m^nC$ injective, represent a kernel element by $y=b/\\varphi(t)$ with $t\\notin\\mathfrak p$. Since $\\mathfrak m^nC=\\mathfrak p^nC$, in $C$ write $b/\\varphi(t)=\\sum_j\\varphi(a_j)s_j/v_j$ with $a_j\\in\\mathfrak p^n$, $s_j\\in S$, $v_j\\in S\\setminus\\mathfrak q$. Put $V=\\prod_jv_j$ and $V_j=\\prod_{h\\ne j}v_h$. Equality of fractions gives $w\\in S\\setminus\\mathfrak q$ with $w(Vb-\\varphi(t)\\sum_j\\varphi(a_j)s_jV_j)=0$. Thus $wVb\\in\\mathfrak p^nS$ and $(wV)y=0$ in $B/\\mathfrak m^nB$. Since $wV\\notin\\mathfrak q$, the established injectivity forces $y=0$. Empty sums use $V=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC0, lemma-symbolic-power-flat-extension, reduction to injectivity of the further localization, and final sentence (injective, rather than invertible)"
+   }
+  },
+  {
+   "text": "Extension commutes with products of ideals by expanding finite sums of products of generators. Consequently $\\mathfrak q^nC=(\\mathfrak pS)^nC=\\mathfrak p^nC=\\mathfrak m^nC$. The defining kernel of $\\mathfrak q^{(n)}$ is therefore $\\ker(S\\to C/\\mathfrak m^nC)$. Since the map in step 6 is injective, this kernel equals $\\ker(S\\to B/\\mathfrak m^nB)$, which step 3 identified as $\\mathfrak p^{(n)}S$. This proves the assertion for every $n\\geq1$, and step 1 handled $n=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC0, lemma-symbolic-power-flat-extension, comparison of the two kernels; definition-symbolic-power (Tag 0313)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-module-tensor-cancel-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-vector-space-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BC0, lemma-symbolic-power-flat-extension, lines 15578-15615; with the filtration and fraction arguments made explicit, and the final word invertibly corrected to injectively."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Symbolic powers of a prime ideal commute with flat base change when the extended ideal remains prime",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instFlatAtPrime\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {A : Type u_4} {B : Type u_5} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B]\\n  (p : Ideal A) [inst_4 : p.IsPrime] (P : Ideal B) [inst_5 : P.IsPrime] [inst_6 : P.LiesOver p],\\n  Module.Flat (Localization.AtPrime p) (Localization.AtPrime P)\", \"doc\": \"If $ \\\\mathfrak{p} $ is a prime ideal in a commutative ring $ A $ and $ \\\\mathfrak{P} $ is a prime ideal in a commutative ring $ B $ lying over $ \\\\mathfrak{p} $, then the localization of $ B $ at $ \\\\mat\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [Module.FaithfullyFlat A B] (p : Ideal A) [p.IsPrime], ∃ P, P.IsPrime ∧ P.LiesOver p\", \"doc\": \"In a faithfully flat algebra extension $ B $ over $ A $, every prime ideal $ \\\\mathfrak{p} $ of $ A $ has a prime ideal $ \\\\mathfrak{P} $ of $ B $ lying over it, i.e., $ \\\\mathfrak{P} \\\\cap A = \\\\mathfrak{\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.baseChange\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [inst_3 : p.IsPrime] [Algebra.QuasiFiniteAt R p] {A : Type u_4} [inst_5 : CommRing A] [inst_6 : Algebra R A]\\n  (q : Ideal (TensorProduct R A S)) [inst_7 : q.IsPrime],\\n  p = Ideal.comap Al\", \"doc\": \"If a commutative ring $ S $ is quasi-finite over a base ring $ R $ at a prime ideal $ p $, then after base change to an $ R $-algebra $ A $, the tensor product $ A \\\\otimes_R S $ is quasi-finite over $\"}\n  {\"name\": \"Ideal.primesOver.isPrime\", \"module\": \"Mathlib/RingTheory/Ideal/Over\", \"type\": \"∀ {A : Type u_2} [inst : CommSemiring A] (p : Ideal A) {B : Type u_3} [inst_1 : Semiring B] [inst_2 : Algebra A B]\\n  (Q : ↑(p.primesOver B)), (↑Q).IsPrime\", \"doc\": \"The set $\\\\mathrm{primesOver}(p, B)$ consists of prime ideals $Q$ in the ring $B$ such that the contraction of $Q$ to the base ring is exactly the ideal $p$. This means $Q \\\\cap A = p$ where $A \\\\subsete\"}\n  {\"name\": \"Algebra.ZariskisMainProperty.trans\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] (p : Ideal T) [p.IsPrime],\\n  Algebra.ZariskisMainProperty R (Ideal.under S p) →\\n    (∃ r ∉ Ideal\", \"doc\": \"If a prime ideal $\\\\mathfrak{p} \\\\subseteq T$ satisfies Zariski's Main Theorem property relative to $S$, and there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfr\"}\n  {\"name\": \"Ideal.IsPrime.under\", \"module\": \"Mathlib/RingTheory/Ideal/Over\", \"type\": \"∀ (A : Type u_2) [inst : CommSemiring A] {B : Type u_3} [inst_1 : Semiring B] [inst_2 : Algebra A B] (P : Ideal B)\\n  [hP : P.IsPrime], (Ideal.under A P).IsPrime\", \"doc\": \"If $ P $ is a prime ideal in $ B $, then the preimage of $ P $ under the canonical algebra homomorphism $ A \\to B $ forms a prime ideal in $ A $. This instance asserts that the contraction of a prime i\"}\n  {\"name\": \"Ideal.Quotient.instIsPrimeQuotientMapRingHomAlgebraMapMkOfLiesOver\", \"module\": \"Mathlib/RingTheory/Ideal/Over\", \"type\": \"∀ (R : Type u_2) [inst : CommSemiring R] {A : Type u_3} [inst_1 : CommRing A] [inst_2 : Algebra R A] (p : Ideal R)\\n  (P : Ideal A) [P.IsPrime] [P.LiesOver p], (Ideal.map (Ideal.Quotient.mk (Ideal.map (algebraMap R A) p)) P).IsPrime\", \"doc\": \"If $ P $ is a prime ideal in a ring $ A $ lying over an ideal $ p $ in a commutative ring $ R $, then the image of $ P $ under the quotient map $ A \\to A/pA $ (where $ pA $ is the ideal generated by $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary ideal powers, going down and flatness of localized maps, not symbolic powers; the RingTheory grep finds only an Eisenstein docstring mentioning a second symbolic power. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a prime ideal extends to a prime under a flat ring homomorphism, its nth symbolic power extends to the nth symbolic power of the extended prime",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.map_pow\", \"module\": \"Mathlib.RingTheory.Ideal.Maps\", \"type\": \"(n : ℕ) : map f (I ^ n) = map f I ^ n\", \"doc\": \"For any ring homomorphism $ f : R \\to S $, any ideal $ I $ of $ R $, and any natural number $ n $, the image of the $ n $-th power of $ I $ under $ f $ is equal to the $ n $-th power of the image of $ \"}\n  {\"name\": \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra\", \"type\": \"(p : Ideal A) [p.IsPrime] : ∃ (P : Ideal B), P.IsPrime ∧ P.LiesOver p\", \"doc\": \"In a faithfully flat algebra extension $ B $ over $ A $, every prime ideal $ \\\\mathfrak{p} $ of $ A $ has a prime ideal $ \\\\mathfrak{P} $ of $ B $ lying over it, i.e., $ \\\\mathfrak{P} \\\\cap A = \\\\mathfrak{\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{f : R →+* S} (hf : f.Flat) : GeneralizingMap (comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib.RingTheory.Ideal.GoingDown\", \"type\": \"[Module.Flat R S] : Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"PrimeSpectrum.comap_surjective_of_faithfullyFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra\", \"type\": \": Function.Surjective (comap (algebraMap A B))\", \"doc\": \"If $ B $ is a faithfully flat $ A $-algebra, then the induced map from the prime spectrum of $ B $ to the prime spectrum of $ A $, given by taking preimages under the canonical algebra homomorphism $ \"}\n  {\"name\": \"Ideal.IsPrime.under\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \"[hP : P.IsPrime] : (P.under A).IsPrime\", \"doc\": \"If $ P $ is a prime ideal in $ B $, then the preimage of $ P $ under the canonical algebra homomorphism $ A \\to B $ forms a prime ideal in $ A $. This instance asserts that the contraction of a prime i\"}\n  {\"name\": \"Ideal.ramificationIdxIn\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Galois\", \"type\": \"{A : Type*} [CommRing A] (p : Ideal A) (B : Type*) [CommRing B] [Algebra A B] : ℕ\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in a commutative ring $A$ and a ring extension $A \\\\to B$, this function returns the ramification index of $\\\\mathfrak{p}$ in $B$, defined as the supremum of all natural\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary ideal powers, going down and flatness of localized maps, not symbolic powers; the RingTheory grep finds only an Eisenstein docstring mentioning a second symbolic power. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.symbolicPower",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Ideal.symbolicPower'\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary ideal powers, going down and flatness of localized maps, not symbolic powers; the RingTheory grep finds only an Eisenstein docstring mentioning a second symbolic power. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "symbolic[Pp]ow|symbolic_power|symbolic power",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"line\": \"52\", \"text\": \"  in the second symbolic power of `P`. When `P` is a maximal ideal,\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"line\": \"53\", \"text\": \"  that symbolic power coincides with `P ^ 2`, but not in general.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary ideal powers, going down and flatness of localized maps, not symbolic powers; the RingTheory grep finds only an Eisenstein docstring mentioning a second symbolic power. Both semantic phrasings were inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Symbolic powers of prime ideals commute with flat ring extensions when the extended ideal is prime",
+   "results": "{\"t\": \"2026-10-23T21:13:57Z\", \"tool\": \"leansearch\", \"query\": \"Symbolic powers of prime ideals commute with flat ring extensions when the extended ideal is prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.ofLocalizationPrime\", \"instFlatAtPrime\", \"Ideal.exists_ideal_over_prime_of_isIntegral_of_isPrime\", \"RingHom.Flat\", \"PrimeSpectrum.specComap_surjective_of_faithfullyFlat\", \"Ideal.ramificationIdxIn\", \"PrimeSpectrum.comap_surjective_of_faithfullyFlat\", \"Ideal.primesOver\"], \"digest\": \"1ad86118008737ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern going down, flatness of localizations and ordinary prime extension, not symbolic powers; Ideal.symbolicPower is unknown; the source grep only finds the Eisenstein docstring. Two semantic phrasings were inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization contraction of powers of a prime ideal is preserved by a flat algebra if the extended ideal is prime",
+   "results": "{\"t\": \"2026-10-23T21:14:19Z\", \"tool\": \"leanfinder\", \"query\": \"Localization contraction of powers of a prime ideal is preserved by a flat algebra if the extended ideal is prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"instFlatAtPrime\", \"RingHom.Flat.ofLocalizationPrime\", \"Ideal.isPrime_map_of_isLocalizationAtPrime\", \"IsLocalization.AtPrime.liesOver_map_of_liesOver\", \"RingHom.Flat.localRingHom\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"Ideal.under_map_of_isLocalizationAtPrime\"], \"digest\": \"f7fe3a1544152277\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern going down, flatness of localizations and ordinary prime extension, not symbolic powers; Ideal.symbolicPower is unknown; the source grep only finds the Eisenstein docstring. Two semantic phrasings were inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.symbolicPower",
+   "results": "{\"t\": \"2026-10-23T21:15:08Z\", \"tool\": \"loogle\", \"query\": \"Ideal.symbolicPower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.symbolicPower'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern going down, flatness of localizations and ordinary prime extension, not symbolic powers; Ideal.symbolicPower is unknown; the source grep only finds the Eisenstein docstring. Two semantic phrasings were inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "symbolic[Pp]ow|symbolic_power|symbolic power",
+   "results": "{\"t\": \"2026-10-23T21:15:08Z\", \"tool\": \"grep\", \"query\": \"symbolic[Pp]ow|symbolic_power|symbolic power\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\"], \"digest\": \"5cbbfcca58e5ce53\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits concern going down, flatness of localizations and ordinary prime extension, not symbolic powers; Ideal.symbolicPower is unknown; the source grep only finds the Eisenstein docstring. Two semantic phrasings were inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-generic-unit-factorization",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Vertical Cartier divisors of a smooth connected group over a normal base; local commutative-algebra input: the affine factorization paragraph of Stacks 0BD7, used on stalks before the fibre-overlap gluing argument. Supporting algebra: Stacks 0BC0 identifies the extended valuation-cutoff ideals in the affine factorization paragraph of 0BD7.",
+   "via": [
+    "lem-sfb-local-generic-unit-factorization",
+    "lem-sfb-normal-group-vertical-cartier-descent",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symbolic-powers-flat-prime-extension",
+  "worker": "stage1",
+  "summary": "Proved the unchanged Noetherian specialization of Stacks 0BC0 by tensoring the defining kernel and filtering the localized power quotient. Reused six existing Mathlib leaves, checked contraction of the extended prime, wrote out the basis and finite-filtration injectivity arguments, and corrected the source proof’s false claim of invertibility to the injectivity actually needed. No new nodes.",
+  "blueprint": "The inherited provenance serves det-thm-sf-ctf-stability-direct-images, proof (3), through the generic-unit factorization input to Stacks 0BD7. This item proves precisely the cited 0BC0 algebra input; the latest blueprint symbolic/0BC0 search finds no separate blueprint node. The ancestor command returns None, so the inherited null ancestor and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-80992f73d",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-80992f73d (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex 0313/0BC0 (lines 15540-15615), the item's 7 steps and all 6 cited Mathlib-leaf statements (flat-tensor-exact, tensor-over-quotient-ring (1)/(2), localization-tensor-over-base, module-tensor-cancel-base-change, localization-at-prime, vector-space-free). Each step uses only what the cited statements say. Step 1 proves the contraction phi^-1(q)=p that the map B->C needs. Steps 3-5 follow the source's tensored kernel, filtration and k-basis argument with S-linearity justified. Step 6 sets up the descending induction properly and writes the extra-localization kernel out with explicit denominators (wVb in p^nS). Step 7 compares the kernels. The source's final 'f acts invertibly' is false (R=k, S=k[z], p=q=0, n=1, f=z: z is injective but not surjective on k[z]); the proof correctly uses injectivity and the statement is unchanged. The Noetherian hypothesis comes from the base statement and is unused, so nothing is weakened. Edge cases n=0, p=0 and zero graded pieces are fine. There are no new nodes and no duplicate: lem-per-vertical-symbolic-powers-completion is only an unsplit special case, and Mathlib has no symbolicPower. All deps are Mathlib leaves, so no route or tool_uses issue. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SymbolicPowersFlatPrimeExtension",
+  "declaration": "Ideal.map_symbolic_power_of_flat",
+  "file": "lean/Sheaf/RingTheory/SymbolicPowersFlatPrimeExtension.lean",
+  "statement": "theorem map_symbolic_power_of_flat {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] (f : R →+* S) (hf : f.Flat) (p : Ideal R) [p.IsPrime] [(Ideal.map f p).IsPrime] (n : ℕ) : Ideal.map f (Ideal.comap (algebraMap R (Localization.AtPrime p)) (Ideal.map (algebraMap R (Localization.AtPrime p)) (p ^ n))) = Ideal.comap (algebraMap S (Localization.AtPrime (Ideal.map f p))) (Ideal.map (algebraMap S (Localization.AtPrime (Ideal.map f p))) ((Ideal.map f p) ^ n))",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db27ce300",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Ideal.map_symbolic_power_of_flat checked clause by clause against the node and Stacks 0BC0/0313 (algebra.tex 15548-15615): CommRing+IsNoetherianRing on R,S (node's permitted restriction), f.Flat = recorded RingHom.Flat, p prime, (map f p).IsPrime, symbolic power = comap (algebraMap _ (Localization.AtPrime P)) (map _ (P^n)) exactly the node's inline def, conclusion for all n:ℕ incl. n=0; independent universes u,v; no extra hypotheses. No existing symbolic-power declaration in Mathlib or project. Single by sorry, docstrings with source and blueprint and all 7 proof steps, stmt_dep imports public, lean.statement verbatim (script check), only the lean field changed vs live, Worker report and Second reading by Q156 present. No findings; no recompile since no file changed."
+ }
+}

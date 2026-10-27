@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-constant-completed-exact-model",
+ "kind": "statement",
+ "title": "Balancing is localization of the ordinary comparison",
+ "statement": "After composition with completedTensorModel on its completed scalar side, scalarCompletion is precisely mapDerivedCategorySquareIso of scalarCompletionOrdinary, for every finite l-adic coefficient extension and scheme W.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 (lemma-adjoint), Tag 06YY (lemma-derived-base-change); ordinary tensor associativity: sites-modules.tex, Tag 03EK."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "lem-pur-completed-scalar-model-counit"
+ ],
+ "proof": [
+  {
+   "text": "Localize the ordinary balancing square of exact functors, then compose with the inverse exact model to obtain a candidate comparison. The localization composition and natural transformation factor equations give the complex-counit normalization of this candidate, using completedTensorModel_counit and cancellation of the inverse model. The uniqueness clause of scalarCompletion_existsUnique identifies it with scalarCompletion. Cancel the inverse model to obtain the asserted isomorphism equality.",
+   "uses": [
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-pur-completed-scalar-model-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), Tag 06YY (lemma-derived-base-change); ordinary tensor associativity: sites-modules.tex, Tag 03EK."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-scalar-limit-reduction",
+  "lem-pur-completed-scalar-model-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 06YY; auxiliary exact-localization argument for constant/completed scalar associativity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of mates for composite adjunctions and scalar restriction extension natural transformations",
+   "results": "msearch leanfinder found mateEquiv and mateEquiv_hcomp; no prescribed scalarCompletion normalization or associativity square.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Mathlib leftAdjointUniq and homEquiv_leftAdjointUniq_hom_app supply uniqueness and unit characterization.",
+   "date": "2026-10-26",
+   "verdict": "usable ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|mate.*comp",
+   "results": "Existing exact-derived square pasting, universal left-derived uniqueness, and normalized ordinary/derived scalar adjunctions. No specialized model comparison.",
+   "date": "2026-10-26",
+   "verdict": "usable ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For exact functors, localization preserves the unit-normalized associator of composite adjunctions and the universal left derived counit comparison.",
+   "results": "Adjunction.localization, localization_unit_app, localization_counit_app, derived_unit and derived_counit. These supply generic adjunction localization, not the specialized pbc normalization and associator comparison.",
+   "date": "2026-10-26",
+   "verdict": "ingredients, no exact specialized match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletedScalarAssociativity",
+  "date": "2026-10-26",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Auxiliary Step 9 of strict scalar composition, serving coefficient compatibility: Balancing is localization of the ordinary comparison.",
+   "via": [
+    "lem-pur-constant-completed-scalar-associativity",
+    "lem-pur-compact-support-strict-scalar-composition",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarExactLocalization",
+  "file": "lean/Sheaf/Paper/CompletedScalarExactLocalization.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarCompletion_exactModel",
+  "statement": "theorem scalarCompletion_exactModel :\n    (letI := (baseTensor_exact l E F i W).1\n     have := (baseTensor_exact l E F i W).2\n     have := (completedTensor_exact l E F i W).1\n     have := (completedTensor_exact l E F i W).2\n     have := pbcExtend_additive (completedCoefficientMap l E F i W)\n     have := scalarConstantRestriction_limits l E W\n     have := scalarConstantRestriction_colimits l E W\n     have := scalarConstantRestriction_limits l F W\n     have := scalarConstantRestriction_colimits l F W\n     scalarCompletion l E F i W ≪≫\n       isoWhiskerRight (completedTensorModel l E F i W)\n         (scalarConstantRestriction l F W)) =\n    (letI := (baseTensor_exact l E F i W).1\n     have := (baseTensor_exact l E F i W).2\n     have := (completedTensor_exact l E F i W).1\n     have := (completedTensor_exact l E F i W).2\n     have := pbcExtend_additive (completedCoefficientMap l E F i W)\n     have := scalarConstantRestriction_limits l E W\n     have := scalarConstantRestriction_colimits l E W\n     have := scalarConstantRestriction_limits l F W\n     have := scalarConstantRestriction_colimits l F W\n     Functor.mapDerivedCategorySquareIso (scalarCompletionOrdinary l E F i W))",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261025T204812-L-3012368",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261025T204812-L-3012368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-integral-curve-span-degree-rigidity",
+ "kind": "statement",
+ "title": "Degree bounds the span of an integral curve, with the minimal-degree equality case",
+ "statement": "Let $k$ be algebraically closed [def-weil-field], $r\\ge2$, and let $Y\\subset\\mathbf P^{r-1}_k$ be an integral closed subscheme of dimension one [def-pc-integral-scheme, def-weil-closed-immersion]. Let $\\nu:\\widetilde Y\\to Y$ be its normalization [def-sc-normalization], and set $e=\\deg(\\nu^*\\mathcal O_Y(1))$ [def-pc-degree-line-bundle, def-pc-projective-space-twist]. Write $V=H^0(\\mathbf P^{r-1}_k,\\mathcal O(1))\\cong k^r$ and\n$$s=\\dim_k\\operatorname{im}\\bigl(V\\longrightarrow H^0(Y,\\mathcal O_Y(1))\\bigr).$$\nThen $e$ is a positive integer, $2\\le s\\le e+1$, and $s=e+1$ holds if and only if $Y$ is a rational normal curve in its own linear span: $Y\\cong\\mathbf P^1_k$, with its given embedding in that span the morphism of the complete linear system $|\\mathcal O_{\\mathbf P^1}(e)|$. In particular, if $Y$ is not such a curve, then $s\\le e$.",
+ "source": {
+  "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+  "place": "Proposition 1.0.3, printed pp.30--31, the bound on the space of restricted linear forms; minimal-degree equality case needed for Morrison Section 3.2 Theorem 8 proof step (3) Local PDF WANTED; agent-formulated geometric prerequisite, read the online book transcription.",
+  "url": "https://doczz.net/doc/7664568/lectures-on-moduli-of-curves---school-of-mathematics--tifr"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pc-integral-scheme",
+  "def-sc-normalization",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=\\widetilde Y$ and $L=\\nu^*\\mathcal O_Y(1)$. An integral curve is connected, reduced and generically reduced, and has just one reduced irreducible component. Apply [lem-sfb-projective-curve-normalization-section-defect] to $X=Y$: its structural assertions give a smooth proper connected curve $C$ and the positive integer $e=\\deg L$. Only these structural assertions are used, not its eventual-in-$m$ estimates. By [lem-sc-normalization-properties](a), $\\nu$ is surjective and birational. By [lem-sc-proper-dim-one-projective], $C$ is projective, since its dimension is one.",
+   "uses": [
+    "lem-sfb-projective-curve-normalization-section-defect",
+    "lem-sc-normalization-properties",
+    "lem-sc-proper-dim-one-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BXR (normalization), 0B5X (ample line bundles on curves); structural specialization of the cited projective-curve node"
+   }
+  },
+  {
+   "text": "Pullback $H^0(Y,\\mathcal O_Y(1))\\to H^0(C,L)$ is injective: birationality identifies the generic fibres, so a section whose pullback is zero has zero generic germ, hence is zero by [lem-sc-invertible-module-generic-stalk](3), with $X=Y$ and $U=Y$. Let $U$ be the image of $V$ in $H^0(C,L)$; then $\\dim U=s$. The restricted homogeneous coordinates generate $\\mathcal O_Y(1)$, and their pullbacks generate $L$, since on the chart $x_i\\ne0$ the $i$th coordinate is a local generator.",
+   "uses": [
+    "lem-sc-invertible-module-generic-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (birational normalization); elementary generic-germ injection and standard projective-coordinate charts"
+   }
+  },
+  {
+   "text": "Choose coordinates on $V$ so that the last $r-s$ basis vectors span the restriction kernel and the first $s$ restrict to a basis. Then $Y$ lies scheme-theoretically in the linear subspace cut out by the last $r-s$ coordinates, namely $\\mathbf P^{s-1}$; the original closed immersion factors as a closed immersion into this subspace. Indeed, on each standard affine chart its defining ideal contains those linear equations. No smaller linear subspace contains $Y$, by independence of the first $s$ restrictions. Also $s\\ne0$, since the coordinates generate the nonzero invertible sheaf. If $s=1$, on the unique generating-section chart every coordinate ratio is constant, and the embedding factors through a single $k$-point. A dimension-one closed subscheme cannot be a closed subscheme of $\\operatorname{Spec}k$ (its ideals are only $0,k$). Thus $s\\ge2$. The map $C\\to Y\\to\\mathbf P^{s-1}$ is the coordinate morphism of the generating space $U$, as in [def-weil-pbc-morphism-to-projective-space-by-sections].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-morphism-to-projective-space-by-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Proof (3), stable-curve/GIT prerequisite: elementary coordinate description of the linear span"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-curve-section-degree-cap] with $A=L$, $m=1$, $q=0$ and the zero divisor $B$. The number $n=h^0(C,L)$ is finite and satisfies $n\\le e+1$, since $e>0$. The inclusion of $U$ gives $s\\le n\\le e+1$. Suppose henceforth $s=e+1$. These inequalities force $U=H^0(C,L)$ and $n=e+1$.",
+   "uses": [
+    "lem-sfb-smooth-curve-section-degree-cap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CCS (linear-series degree/dimension inequality); use only the inequality, not its unrestricted equality sentence"
+   }
+  },
+  {
+   "text": "Write $g=h^1(C,\\mathcal O_C)$. Riemann--Roch [lem-sc-riemann-roch](1) gives $\\chi(C,M)=\\deg_{\\rm div}M+1-g$ for every line bundle $M$, and $\\chi(C,\\mathcal O_C)=1-g$. Subtraction identifies the divisor degree with the Euler-characteristic degree used here. If $g=1$, the positive integer $e$ satisfies $e\\ge2g-1$; [lem-sc-riemann-roch-large-degree] gives $n=e$, contradicting $n=e+1$. If $g\\ge2$, apply [lem-sfb-linear-series-degree-dimension-bound] to $C,L,U$. Its degree $a$ satisfies $0\\le a\\le e$ and $s\\le\\max\\{a+1-g,a/2+1\\}$. But $a+1-g\\le e-1<e+1$ and $a/2+1\\le e/2+1<e+1$, again a contradiction. Since genus is a nonnegative integer, $g=0$.",
+   "uses": [
+    "lem-sc-riemann-roch",
+    "lem-sc-riemann-roch-large-degree",
+    "lem-sfb-linear-series-degree-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BS6 (Riemann--Roch); numerical genus-one and genus-at-least-two cases using the existing linear-series node"
+   }
+  },
+  {
+   "text": "Apply the genus-zero clause of [lem-sfb-low-genus-pointed-automorphism-rigidity] with automorphism $\\operatorname{id}_C$: it gives $C\\simeq\\mathbf P^1_k$. Moreover $e\\ge1=2g+1$, so [lem-sc-degree-2g1-very-ample] makes $L$ very ample. By [def-sc-ample], its complete linear system is a closed immersion into $\\mathbf P(H^0(C,L)^\\vee)$. Since $U=H^0(C,L)$, the coordinate map of step 3 is exactly this complete-system map after choosing its basis. Thus $C\\xrightarrow\\nu Y\\hookrightarrow\\mathbf P^{s-1}$ is a closed immersion.",
+   "uses": [
+    "lem-sfb-low-genus-pointed-automorphism-rigidity",
+    "lem-sc-degree-2g1-very-ample",
+    "def-sc-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C6U (proposition-projective-line, characterization of the projective line), 0H2V (lemma-degree-at-least-2g+1, degree at least 2g+1 gives very ampleness), and Morphisms Tag 01VM"
+   }
+  },
+  {
+   "text": "The preceding composite being a closed immersion forces $\\nu$ to be an isomorphism here. Explicitly, on an affine chart $\\operatorname{Spec}R$ of the span meeting $Y$, write $Y\\cap\\operatorname{Spec}R=\\operatorname{Spec}(R/I)$ and $C\\cap\\operatorname{Spec}R=\\operatorname{Spec}(R/J)$. These presentations exist because both maps to the span are closed immersions [def-weil-closed-immersion]. Factorization gives $I\\subseteq J$. The surjectivity of $\\nu$ from step 1 gives $\\sqrt I=\\sqrt J$ (the closed subsets coincide). Since $Y$ is integral, $I$ is prime. Thus $I\\subseteq J\\subseteq\\sqrt J=I$, so $I=J$. These local isomorphisms glue to the given map $\\nu$. Hence $Y\\simeq C\\simeq\\mathbf P^1$.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR and the affine quotient description of a closed immersion; elementary prime-ideal calculation"
+   }
+  },
+  {
+   "text": "On $C\\simeq\\mathbf P^1$, [lem-sc-line-bundle-rational-section] writes $L\\simeq\\mathcal O(D)$ for a finite divisor $D$. By [def-sc-pic0] and the degree agreement in step 5, $\\deg D=e$. Use the coordinates of [def-sc-p1-standard], with $\\infty=\\mathbf P^1\\setminus\\operatorname{Spec}k[t]$. Every other closed point is $t=a$ for $a\\in k$, since $k$ is algebraically closed. At $a$ the element $t-a$ has order one, at infinity it is $s^{-1}(1-as)$ and has order minus one, and it is a unit at other points. Thus, by [def-sc-divisor], $\\operatorname{div}(t-a)=[a]-[\\infty]$. If $D=\\sum_a n_a[a]+n_\\infty[\\infty]$, the finite product $f=\\prod_a(t-a)^{n_a}$ has $\\operatorname{div}(f)=D-e[\\infty]$. Therefore [lem-sc-divisor-class-curve] identifies $\\mathcal O(D)$ with $\\mathcal O(e[\\infty])$. The latter is $\\mathcal O(e)$: its generator on $U_0$ is $1$ and on $U_1$ is $s^{-e}$, related by $1=t^{-e}s^{-e}$, precisely [def-sc-p1-standard]. Consequently the embedding of $Y$ in its span is the complete system $|\\mathcal O(e)|$.",
+   "uses": [
+    "lem-sc-line-bundle-rational-section",
+    "def-sc-pic0",
+    "def-sc-p1-standard",
+    "def-sc-divisor",
+    "lem-sc-divisor-class-curve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BE9 (divisor classes and invertible modules); explicit two-chart divisor computation on the projective line"
+   }
+  },
+  {
+   "text": "Conversely, suppose $Y\\simeq\\mathbf P^1$ and its embedding in its span is the complete system $|\\mathcal O(e)|$. Its defining coordinate space therefore has dimension $h^0(\\mathbf P^1,\\mathcal O(e))=e+1$ by [lem-sc-p1-monomial](i), where $e>0$ was already proved. Restriction of ambient linear forms onto the linear span is surjective (extend any linear form from a vector subspace to a basis of the ambient vector space), so this dimension is exactly the original $s$. This proves the converse. Finally, if $Y$ is not such a rational normal curve, equality $s=e+1$ is excluded; the integer inequality $s\\le e+1$ then gives $s\\le e$.",
+   "uses": [
+    "lem-sc-p1-monomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Projective-line section calculation; elementary restriction of linear forms and integer inequality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-curve-normalization-section-defect",
+  "lem-sc-normalization-properties",
+  "lem-sc-proper-dim-one-projective",
+  "lem-sc-invertible-module-generic-stalk",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-sfb-smooth-curve-section-degree-cap",
+  "lem-sc-riemann-roch",
+  "lem-sc-riemann-roch-large-degree",
+  "lem-sfb-linear-series-degree-dimension-bound",
+  "lem-sfb-low-genus-pointed-automorphism-rigidity",
+  "lem-sc-degree-2g1-very-ample",
+  "def-sc-ample",
+  "lem-sc-line-bundle-rational-section",
+  "def-sc-pic0",
+  "def-sc-p1-standard",
+  "def-sc-divisor",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-p1-monomial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+  "place": "Proposition 1.0.3 printed pp.30--31, bound on restricted linear forms, read online (local PDF WANTED). Equality argument supplied explicitly using existing smooth-curve, Riemann--Roch and divisor nodes; local Stacks curves.tex Tags 0BS6, 0C6U, 0H2V."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rationalNormal|minimal.degree|span.*degree|degree.*span",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\"], \"digest\": \"1d0bb9a9b4ae6a84\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: The hits concern projective Weierstrass equations, residue degrees and zero-cycle degrees, not the degree and linear span of an arbitrary integral curve."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nondegenerate integral projective curve of degree e spans projective space of dimension at most e and equality is a rational normal curve",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat\", \"WeierstrassCurve.Projective.nonsingular_of_Z_ne_zero\", \"IsIntegralCurveOn\", \"WeierstrassCurve.Projective.nonsingular_iff\", \"WeierstrassCurve.Projective.nonsingular_of_equiv\", \"LinearAlgebra.Projectivization.termℙ\", \"WeierstrassCurve.Projective.Equation\", \"WeierstrassCurve.Projective.eval_polynomial\"], \"digest\": \"c17984f41d5fbfe1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: The hits concern projective Weierstrass equations, residue degrees and zero-cycle degrees, not the degree and linear span of an arbitrary integral curve."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"degree\"",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.residueDegree\", \"AlgebraicGeometry.Scheme.Hom.residueDegree_id\", \"AlgebraicGeometry.Scheme.Hom.residueDegree_eq_finrank\", \"AlgebraicGeometry.AlgebraicCycle.degree\", \"AlgebraicGeometry.AlgebraicCycle.degree_single\", \"AlgebraicGeometry.AlgebraicCycle.degree_apply\", \"AlgebraicGeometry.AlgebraicCycle.degree_eq_map_of_unique\"], \"digest\": \"a8ed1556633c93bc\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: The hits concern projective Weierstrass equations, residue degrees and zero-cycle degrees, not the degree and linear span of an arbitrary integral curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral projective curve degree e linear span dimension at most e with equality exactly a rational normal curve",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve\", \"WeierstrassCurve.Projective.Equation\", \"WeierstrassCurve.Projective.Point\", \"WeierstrassCurve.Affine\", \"WeierstrassCurve.Projective.Point.nonsingular\"], \"digest\": \"c3a0dbc7cde51127\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: The hits concern projective Weierstrass equations, residue degrees and zero-cycle degrees, not the degree and linear span of an arbitrary integral curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral projective curve, normalization pullback of a line bundle has positive degree and global sections inject",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"WeierstrassCurve.exists_isIntegral\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\"], \"digest\": \"ea12aa09ebac3b38\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"normalization\", \"global sections\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*global sections|global sections.*normalization",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of an integral projective curve is finite and pullback on global sections of an invertible sheaf is injective",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"exists_integral_inj_algHom_of_fg\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"cf72f3f7e73a1463\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth projective connected curve a line bundle of positive degree has at most degree plus one global sections, with equality only projective line and complete O(e)",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_Φ_le\", \"WeierstrassCurve.natDegree_Ψ₃_le\", \"WeierstrassCurve.natDegree_preΨ_pos\", \"WeierstrassCurve.natDegree_preΨ'_pos\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_ΨSq_le\", \"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.natDegree_preΨ₄_le\"], \"digest\": \"b5df6521723a5baa\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"line bundle\", \"degree\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "grep",
+   "query": "rational normal|complete linear system|degree.*sections",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth projective curve line bundle L of degree e has h0 at most e+1 and equality iff curve is P1 and L is O(e)",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly_zero_right\", \"Polynomial.hilbertPoly_eq_zero_of_le_rootMultiplicity_one\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"WeierstrassCurve.Projective.Equation\", \"AlgebraicGeometry.Proj.zero_apply\", \"Algebra.formallySmooth_iff\", \"instContMDiffVectorBundleOfSomeENatTopOfLEInfty\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"30857918218612f3\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extremal linear series g d d on a proper algebraic curve implies genus zero",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ₄_pos\", \"PowerSeries.IsWeierstrassDivisorAt.seq_zero\", \"WeierstrassCurve.ψ_zero\", \"FormalMultilinearSeries.order_zero\", \"WeierstrassCurve.ΨSq_zero\", \"PowerSeries.zero_weierstrassDiv\", \"PowerSeries.zero_weierstrassMod\", \"WeierstrassCurve.preΨ'_zero\"], \"digest\": \"cf2e51dd0caee590\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a proper integral curve with constant global functions k has a positive degree line bundle with degree plus one independent sections then its first structure sheaf cohomology vanishes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\"], \"digest\": \"8b36018493de23b6\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nondegenerate integral projective curve of degree d in projective n space satisfies n at most d and equality forces the rational normal curve",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective\", \"Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat\", \"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.Equation\", \"WeierstrassCurve\", \"WeierstrassCurve.Projective.Point\"], \"digest\": \"4587bba80dc679f1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected returned names/results; normalization structure, elliptic/projective configurations and residue or cycle degree do not state the positive line-bundle degree/span inequality with its complete-system equality case."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-component-projection-weight-bounds",
+  "date": "2026-10-23",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, steps (2)--(3), printed p.14; agent explicit leading-coefficient version of the component-projection estimates. The multiple-component estimate is the coefficient 2e+1/2 in Gieseker, Lectures on Moduli of Curves, Proposition 1.0.3, printed pp.30--36. Local PDFs WANTED. Supporting prerequisite: Proposition 1.0.3, printed pp.30--31, the bound on the space of restricted linear forms; minimal-degree equality case needed for Morrison Section 3.2 Theorem 8 proof step (3)",
+   "via": [
+    "lem-sfb-component-projection-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-curve-span-degree-rigidity",
+  "worker": "stage1",
+  "summary": "Kept the statement; reused existing nodes for normalization positivity, section cap, Clifford/Riemann--Roch, genus-zero classification and very ampleness. Supplied the coordinate-span, generic injection, affine ideal equality and projective-line divisor computations explicitly. No new nodes. Checked cited statements and all equality-case hypotheses; no attachment exists in the read-only project source.",
+  "blueprint": "Realizes the inherited Gieseker Proposition 1.0.3 / Morrison Theorem 8 component-projection prerequisite beneath direct-images proof (3). Current ancestor command returns None, so inherited from.node=null and via are preserved; from.place is already precise. Whole-blueprint searches found no same_as.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-normalization-properties",
+    "why": "Finite surjective birational normalization, a generic scheme-theoretic input, not a replacement of the direct-image route."
+   },
+   {
+    "node": "lem-sc-proper-dim-one-projective",
+    "why": "Turns the proper normalized curve into a projective curve for the existing linear-series and low-genus inputs."
+   },
+   {
+    "node": "lem-sc-invertible-module-generic-stalk",
+    "why": "Injectivity of global sections into the generic fibre proves injectivity after birational pullback."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Definition used in the explicit coordinate/divisor calculations; no change of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "why": "Definition used in the explicit coordinate/divisor calculations; no change of the unit route."
+   },
+   {
+    "node": "lem-sc-riemann-roch",
+    "why": "Identifies divisor and Euler degrees before using curve cohomology."
+   },
+   {
+    "node": "lem-sc-riemann-roch-large-degree",
+    "why": "For genus one and positive degree computes h0=e, excluding equality."
+   },
+   {
+    "node": "lem-sc-degree-2g1-very-ample",
+    "why": "For genus zero and e>=1 makes the complete system a closed immersion."
+   },
+   {
+    "node": "def-sc-ample",
+    "why": "Definition used in the explicit coordinate/divisor calculations; no change of the unit route."
+   },
+   {
+    "node": "lem-sc-line-bundle-rational-section",
+    "why": "Presents L on P1 by a divisor for the explicit elementary classification."
+   },
+   {
+    "node": "def-sc-pic0",
+    "why": "Definition used in the explicit coordinate/divisor calculations; no change of the unit route."
+   },
+   {
+    "node": "def-sc-p1-standard",
+    "why": "Definition used in the explicit coordinate/divisor calculations; no change of the unit route."
+   },
+   {
+    "node": "def-sc-divisor",
+    "why": "Definition used in the explicit coordinate/divisor calculations; no change of the unit route."
+   },
+   {
+    "node": "lem-sc-divisor-class-curve",
+    "why": "Passes the explicit principal-divisor relation on P1 to a line-bundle isomorphism."
+   },
+   {
+    "node": "lem-sc-p1-monomial",
+    "why": "Counts the complete degree-e system for the converse."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-normalization-properties",
+  "lem-sc-proper-dim-one-projective",
+  "lem-sc-invertible-module-generic-stalk",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-sc-riemann-roch",
+  "lem-sc-riemann-roch-large-degree",
+  "lem-sc-degree-2g1-very-ample",
+  "def-sc-ample",
+  "lem-sc-line-bundle-rational-section",
+  "def-sc-pic0",
+  "def-sc-p1-standard",
+  "def-sc-divisor",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-p1-monomial"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-53dc214b9",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-53dc214b9 (reviewer sub-agent of L); spot-checked: First delivery of the item, not a re-split. The statement is unchanged and correct: tested on a line, a conic, a smooth and a nodal plane cubic, the twisted cubic, and positive characteristic. All 9 steps check out, with every hypothesis of the cited statements verified. Step 1 uses only the structural clause of normalization-section-defect (t=1, smooth proper connected E, e>0), plus normalization-properties(a) and proper-dim-one-projective. Step 2: the generic-germ injection via generic-stalk(3) with U=Y. Step 3: the span is cut out scheme-theoretically; s=0 and s=1 are excluded. Step 4: section-degree-cap with m=1, q=0, B=0. Step 5: Riemann–Roch identifies the divisor and χ degrees; g=1 is excluded by large-degree RR (n=e) and g>=2 by the linear-series bound. Step 6: genus-zero clause with b=id, then 2g+1 very ampleness and def-sc-ample. Step 7: I ⊆ J, equal radicals and I prime give I=J. Step 8: I recomputed div(t-a)=[a]-[∞] and the O(e[∞]) transition against def-sc-p1-standard. Step 9: p1-monomial(i) gives s=e+1. proof_deps equals the union of uses; no cycle; no duplicates (subcurve-span-weight-bound and gieseker-component-interpolation only use the rational normal curve notion; sk-thm-picard-pn is cohomology only). The off-unit generic curve tool_uses are accepted. Batch-5: the five reached trf nodes (proper-field-invertible-coherent, curve-degree-tensor-additive, def schematically-dense-open, genus-zero-smooth-proper-line, proper-finite-fibre-finite-near) are generic foundational facts, not steps of the trace formula or Poincaré duality proofs, so the citations stand. Stacks tags 0BXR, 0B5X, 0BS6, 0C6U, 0H2V, 0CCS and 0BE9 match their labels, and there is no SGA citation. The report's 0CCS r=d=0 source-error remark is correct and unused. Gieseker 1.0.3 is unavailable locally (WANTED), and the proof is honestly marked as agent-written. No fixes."
+ }
+}

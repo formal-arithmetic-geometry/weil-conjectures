@@ -1,0 +1,264 @@
+{
+ "id": "lem-trf-coherent-generator-subobject-closure",
+ "kind": "statement",
+ "title": "Finite-limit closure through quasi-compact subobjects of coherent generators",
+ "statement": "Let $\\mathcal E=\\operatorname{Sh}(\\mathcal C)$ be a category of set sheaves on a small site [def-weil-pbc-sites-and-cohomology], with the universe convention [def-weil-size-convention]. Let $(G_i)_{i\\in I}$ be a small generating family of quasi-compact objects [def-trf-coherent-topos]: every object receives an epimorphism from a coproduct of its members. Assume that $G_j\\times_{G_i}G_k$ is quasi-compact for every $i,j,k$ and every pair of sheaf morphisms $G_j\\to G_i$, $G_k\\to G_i$. Then every $G_i$ is coherent. Suppose in addition that the terminal object is isomorphic to a member of the family and that, for every $i,j\\in I$, $G_i\\times G_j$ is isomorphic to a member. Let $\\mathcal D$ consist of all objects $T$ admitting a monomorphism $T\\hookrightarrow G_i$ for some $i$, with $T$ quasi-compact. Every object of $\\mathcal D$ is coherent, and $\\mathcal D$ is closed under finite limits, including limits of diagrams with arbitrary sheaf morphisms. There exists a small full subcategory containing the $G_i$, consisting of coherent objects and closed under chosen finite limits up to isomorphism. In particular every object in the finite-limit closure of the family is coherent; if the family generates $\\mathcal E$ (every object receives an epimorphism from a coproduct of its members), that small subcategory is generating.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Agent finite-limit closure argument through quasi-compact subobjects, extracted from returned parent steps 3 (finite generator covers), 6 and 7. Context: literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf, Exposé XI, proof of Lemma 2.5, printed p. 179 (PDF p. 185), finite-limit-closed coherent generating subcategories. This abstract closure statement is not quoted verbatim there."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-trf-coherent-topos"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], all finite limits used below exist as limits of sheaves and are computed sectionwise. In particular products have tuple sections and pullbacks have pairs of sections with equal images. Quasi-compactness and quasi-separatedness [def-trf-coherent-topos] are invariant under isomorphism: composing a jointly epimorphic family with an isomorphism preserves and reflects joint epimorphy by cancellation, and composing maps to an isomorphic target identifies their pullback universal properties. We may therefore use any chosen representatives of the stated products, terminal object and pullbacks.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-trf-coherent-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00W2 (lemma-limit-sheaf); elementary transport of the definitions along isomorphisms."
+   }
+  },
+  {
+   "text": "Every quasi-compact object $B$ has a finite jointly epimorphic family $(G_{j_a}\\to B)_{a\\in A}$. Indeed, generation supplies an epimorphism $\\coprod_{a\\in A_0}G_{j_a}\\to B$ with a small index set $A_0$; the definition of quasi-compactness [def-trf-coherent-topos] selects a finite subset $A\\subseteq A_0$ with epimorphic coproduct map. The same argument applies independently to any quasi-compact $C$. Empty selected families are allowed.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0D07 (definition-quasi-compact-topos), applied to the assumed generating covers."
+   }
+  },
+  {
+   "text": "Fix $i$ and quasi-compact $B,C$ with arbitrary maps to $G_i$. Choose the finite generator covers of step 2. Clause (1) of [lem-trf-topos-finite-cover-calculus] makes $(G_{j_a}\\times_{G_i}G_{k_b}\\to B\\times_{G_i}C)_{(a,b)\\in A\\times B_0}$ jointly epimorphic, where $B_0$ indexes the cover of $C$. Every source is quasi-compact by the assumed quasi-compactness of $G_j\\times_{G_i}G_k$ for every pair of maps from generators, applied to the composite maps to $G_i$. The finite-family conclusion of clause (3) gives quasi-compactness of $B\\times_{G_i}C$, including when an indexing set is empty. This proves quasi-separatedness of $G_i$ [def-trf-coherent-topos]; its assumed quasi-compactness now makes it coherent. No terminal-object or product-closure hypothesis has been used.",
+   "uses": [
+    "lem-trf-topos-finite-cover-calculus",
+    "def-trf-coherent-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0GMP (lemma-image-of-quasi-compact), 0GMQ (lemma-coproduct-quasi-compact); finite-cover pullback calculus and the definition of quasi-separatedness."
+   }
+  },
+  {
+   "text": "Let $m:T\\hookrightarrow G_i$ be monic with $T$ quasi-compact. For quasi-compact $B,C$ and maps $b:B\\to T$, $c:C\\to T$, the objects $B\\times_T C$ and $B\\times_{G_i}C$ are canonically isomorphic: for any test sheaf $Z$, a pair $x:Z\\to B$, $y:Z\\to C$ satisfies $mbx=mcy$ exactly when $bx=cy$, by cancellation against $m$. This gives inverse maps by the two pullback universal properties, respecting projections. Since $G_i$ is quasi-separated by step 3, this pullback is quasi-compact. Thus $T$ is quasi-separated and hence coherent [def-trf-coherent-topos]. This proves the assertion about every object of $\\mathcal D$.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Elementary monomorphism cancellation and pullback universal properties; definition of quasi-separatedness."
+   }
+  },
+  {
+   "text": "Now impose the additional terminal and product hypotheses. The terminal object $1$ belongs to $\\mathcal D$ via an isomorphism to a generator and is quasi-separated by step 3. For any quasi-compact $T,S$, the product $T\\times S=T\\times_1S$ is therefore quasi-compact [def-trf-coherent-topos]. If $T\\hookrightarrow G_i$ and $S\\hookrightarrow G_j$, the product map $T\\times S\\to G_i\\times G_j$ is monic: equality after it implies equality of the two components by each given monomorphism, hence equality by the product universal property. Composing with the assumed isomorphism $G_i\\times G_j\\simeq G_k$ embeds $T\\times S$ into a generator. Consequently $\\mathcal D$ contains $1$ and is closed under binary products, and these products are coherent by step 4. Induction gives finite products, with the empty product $1$.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Elementary application of quasi-separatedness of the terminal object and product universal properties."
+   }
+  },
+  {
+   "text": "For arbitrary sheaf maps $f,g:T\\rightrightarrows S$ with $T,S\\in\\mathcal D$, put $Q=T\\times S$ and let $a=(1_T,f)$ and $b=(1_T,g):T\\to Q$ be their graphs. By step 5, $Q\\in\\mathcal D$, so $Q$ is quasi-separated by step 4. Both copies of $T$ are quasi-compact; hence $E=T\\times_{a,Q,b}T$ is quasi-compact [def-trf-coherent-topos]. Its two projections to $T$ agree because the first components of $a,b$ are identities. Their common value $e:E\\to T$ equalizes $f,g$. Conversely, any $h:Z\\to T$ with $fh=gh$ gives the unique pullback map with both components $h$, proving that $e$ is an equalizer. It is monic since a map into $E$ is determined by these two equal components. Composing $e$ with $T\\hookrightarrow G_i$ proves $E\\in\\mathcal D$. This argument applies to every $f,g$, without site-arrow representatives.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Elementary graph-pullback computation of the equalizer, using quasi-separatedness of the product."
+   }
+  },
+  {
+   "text": "For a finite diagram $F:J\\to\\mathcal E$ with all $F(j)\\in\\mathcal D$, set $P=\\prod_{j\\in\\operatorname{Ob}J}F(j)$ and $R=\\prod_{\\alpha:j\\to k\\in\\operatorname{Mor}J}F(k)$. There are two maps $u,v:P\\rightrightarrows R$ whose $\\alpha$-components are $F(\\alpha)\\pi_j$ and $\\pi_k$. By steps 5 and 6 their equalizer $L$ belongs to $\\mathcal D$. A map $Z\\to L$ is precisely a family $z_j:Z\\to F(j)$ satisfying $F(\\alpha)z_j=z_k$ for every arrow, so it is precisely a cone, uniquely. Thus $L$ is the diagram's limit. For the empty diagram $P=R=1$ and $L\\simeq1$. Isomorphic choices stay in $\\mathcal D$ by step 1. This proves closure under all finite limits, including diagrams with arbitrary sheaf morphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Elementary product/equalizer construction of a finite limit; existence of products and equalizers established in steps 1, 5 and 6."
+   }
+  },
+  {
+   "text": "To obtain a small full subcategory, start with the set $S_0=\\{G_i:i\\in I\\}\\cup\\{1\\}$. Recursively let $S_{n+1}$ contain $S_n$, one chosen product for each pair in $S_n$, and one chosen equalizer for each parallel pair of arrows between objects of $S_n$. These choices exist by step 1. Each $S_n$ is small in the containing universe [def-weil-size-convention]: a natural transformation between fixed sheaves $A,B$ is a family in the set $\\prod_{U\\in\\operatorname{Ob}\\mathcal C}\\operatorname{Maps}(A(U),B(U))$ satisfying naturality equations [def-weil-pbc-sites-and-cohomology], so all the arrow pairs used at each stage form a set. The countable union $S=\\bigcup_{n\\geq0}S_n$ is still small. Inductively every object of $S_n$ lies in $\\mathcal D$ by steps 5 and 6. The full subcategory on $S$ therefore consists of coherent objects, contains the given generators, and is closed under chosen terminal objects, binary products and equalizers: finitely many input objects occur together at some stage. Step 7 then supplies its chosen finite limits up to isomorphism. The assumed generator epimorphisms remain generator epimorphisms from its objects, so it is generating. Finally $\\mathcal D$ contains the family and is closed under finite limits and isomorphisms; hence every object obtained by finite-limit closure of the family is coherent.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Elementary countable finite-limit closure construction in the containing universe; small-site natural transformations are bounded by a product of function sets."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "def-trf-coherent-topos",
+  "lem-trf-topos-finite-cover-calculus",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex; literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent proof from Tag 00W2 (lemma-limit-sheaf), Tag 0D07 (definition-quasi-compact-topos), and finite-cover calculus (Tags 0GMP and 0GMQ). Exposé XI, Lemma 2.5, printed p. 179 supplies context, not this abstract criterion or its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi-compact subobjects of coherent generators closed under binary products form a class closed under finite limits in a Grothendieck topos",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Presheaf.instPreservesFiniteProductsOppositeVal\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] [inst_2 : CategoryTheory.Preregular C]\\n  [inst_3 : CategoryTheory.FinitaryExtensive C] (F : CategoryTheory.Sheaf (CategoryTheory.coherentTopology C) A),\\n  CategoryTheory.Limit\", \"doc\": \"For any precoherent category $\\\\mathcal{C}$ that is both preregular and finitary extensive, the sheaves on $\\\\mathcal{C}$ with respect to the coherent Grothendieck topology preserve finite products. Spe\"}\n  {\"name\": \"CategoryTheory.instPrecoherentOfFinitaryPreExtensiveOfPreregular\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Comparison\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.FinitaryPreExtensive C]\\n  [CategoryTheory.Preregular C], CategoryTheory.Precoherent C\", \"doc\": \"If a category $ \\\\mathcal{C} $ is finitary pre-extensive (having finite coproducts with disjoint and pullback-stable coproducts) and preregular (every pair of parallel morphisms admits a kernel pair wi\"}\n  {\"name\": \"instHasFiniteLimitsLightCondSet\", \"module\": \"Mathlib/Condensed/Light/Limits\", \"type\": \"CategoryTheory.Limits.HasFiniteLimits LightCondSet\", \"doc\": \"The category of light condensed sets, defined as sheaves on the category of light profinite spaces with the coherent Grothendieck topology, has all finite limits. This includes the existence of termin\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"If $\\\\mathcal{C}$ is a preregular and finitary extensive category where every effective epimorphism $f: Y \\\\to X$ admits a pullback of $f$ with itself, and $s: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a functor \"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A)\\n  [inst_2 : CategoryTheory.Preregular C] [inst_3 : CategoryTheory.FinitaryPreExtensive C],\\n  CategoryTheory.Presheaf.IsSheaf (CategoryTheory\", \"doc\": \"For a category $\\\\mathcal{C}$ that is both preregular and finitary pre-extensive, a presheaf $F$ satisfies the sheaf condition with respect to the coherent Grothendieck topology if and only if it satis\"}\n  {\"name\": \"instHasFiniteLimitsCondensed\", \"module\": \"Mathlib/Condensed/Limits\", \"type\": \"∀ {A : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Limits.HasFiniteLimits A],\\n  CategoryTheory.Limits.HasFiniteLimits (Condensed A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite limits, then the category of condensed objects over $\\\\mathcal{A}$, denoted $\\\\text{Condensed}\\\\, \\\\mathcal{A}$, also has finite limits. This follows from the fact t\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A)\\n  [inst_2 : CategoryTheory.Preregular C] [inst_3 : CategoryTheory.FinitaryExtensive C]\\n  [h : ∀ {Y X : C} (f : Y ⟶ X) [CategoryTheory.Effect\", \"doc\": \"A presheaf $ F $ on a category $ \\\\mathcal{C} $ is a sheaf for the coherent topology if and only if $ F $ preserves finite products and satisfies the equalizer condition for effective epimorphisms. Thi\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A)\\n  [inst_2 : CategoryTheory.Preregular C] [inst_3 : CategoryTheory.FinitaryExtensive C]\\n  [∀ (X : C), CategoryTheory.Projective X],\\n  Categor\", \"doc\": \"In a preregular, finitary extensive category where all objects are projective, a presheaf $ F $ satisfies the sheaf condition with respect to the coherent Grothendieck topology if and only if $ F $ pr\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic ObjectProperty finite-limit closure supplies an interface, not quasi-compactness or quasi-separatedness; scheme equalizer compactness is about schemes, not arbitrary sheaf topoi."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small family of coherent objects containing the terminal object and closed under products has coherent finite limit closure by quasi-compact subobjects",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsClosedUnderLimitsOfShape",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderLimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (P : CategoryTheory.ObjectProperty C) (J : Type u') [CategoryTheory.Category.{v', u'} J] : Prop\", \"doc\": \"A property of objects satisfies `P.IsClosedUnderLimitsOfShape J` if it\\nis stable by limits of shape `J`.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsClosedUnderLimitsOfShapeTop\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : Type u') [CategoryTheory.Category.{v', u'} J] : ⊤.IsClosedUnderLimitsOfShape J\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsClosedUnderLimitsOfShapeBotOfNonempty\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : Type u') [CategoryTheory.Category.{v', u'} J] [Nonempty J] : ⊥.IsClosedUnderLimitsOfShape J\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.LimitOfShape.prop\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {P : CategoryTheory.ObjectProperty C} {J : Type u'} [CategoryTheory.Category.{v', u'} J] [P.IsClosedUnderLimitsOfShape J] {X : C} (h : P.LimitOfShape J X) : P X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderLimitsOfShape.of_equivalence\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {P : CategoryTheory.ObjectProperty C} {J : Type u'} [CategoryTheory.Category.{v', u'} J] {J' : Type u''} [CategoryTheory.Category.{v'', u''} J'] (e : J ≌ J') [P.IsClosedUnderLimitsOfShape J] : P.IsClosedUnderLimitsOfShape J'\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isClosedUnderLimitsOfShape_iff_of_equivalence\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (P : CategoryTheory.ObjectProperty C) {J : Type u'} [CategoryTheory.Category.{v', u'} J] {J' : Type u''} [CategoryTheory.Category.{v'', u''} J'] (e : J ≌ J') : P.IsClosedUnderLimitsOfShape J ↔ P.IsClosedUnderLimitsOfShape J'\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.prop_pi\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (P : CategoryTheory.ObjectProperty C) {J : Type u_3} [P.IsClosedUnderLimitsOfShape (CategoryTheory.Discrete J)] (X : J → C) [CategoryTheory.Limits.HasProduct X] (hF : ∀ (j : J), P (X j)) : P (∏ᶜ X)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderLimitsOfShape.limitsOfShape_le\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} (P : CategoryTheory.ObjectProperty C) (J : Type u') {inst✝¹ : CategoryTheory.Category.{v', u'} J} [self : P.IsClosedUnderLimitsOfShape J] : P.limitsOfShape J ≤ P\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderLimitsOfShape.mk\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {P : CategoryTheory.ObjectProperty C} {J : Type u'} [CategoryTheory.Category.{v', u'} J] (limitsOfShape_le : P.limitsOfShape J ≤ P) : P.IsClosedUnderLimitsOfShape J\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isClosedUnderLimitsOfShape_iff\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (P : CategoryTheory.ObjectProperty C) (J : Type u') [CategoryTheory.Category.{v', u'} J] : P.IsClosedUnderLimitsOfShape J ↔ P.limitsOfShape J ≤ P\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsClosedUnderLimitsOfShape.mk'\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] {P : CategoryTheory.ObjectProperty C} {J : Type u'} [CategoryTheory.Category.{v', u'} J] [P.IsClosedUnderIsomorphisms] (h : P.strictLimitsOfShape J ≤ P) : P.IsClosedUnderLimitsOfShape J\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.prop_limit\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (P : CategoryTheory.ObjectProperty C) {J : Type u'} [CategoryTheory.Category.{v', u'} J] [P.IsClosedUnderLimitsOfShape J] (F : CategoryTheory.Functor J C) [CategoryTheory.Limits.HasLimit F] (hF : ∀ (j : J), P (F.obj j)) : P (CategoryTheory.Limit\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic ObjectProperty finite-limit closure supplies an interface, not quasi-compactness or quasi-separatedness; scheme equalizer compactness is about schemes, not arbitrary sheaf topoi."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoherentObject|[Qq]uasi[Ss]eparated|quasi.compact.*subobject",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic ObjectProperty finite-limit closure supplies an interface, not quasi-compactness or quasi-separatedness; scheme equalizer compactness is about schemes, not arbitrary sheaf topoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equalizers of maps between quasi-compact subobjects of coherent objects are quasi-compact because of quasi-separated diagonals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatEqualizerSchemeOfQuasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y] (f g : X ⟶ Y),\\n  CompactSpace ↥(CategoryTheory.Limits.equalizer f g)\", \"doc\": \"Given a compact space $X$ and a quasi-separated space $Y$, the equalizer of any two morphisms $f,g : X \\to Y$ between schemes has a carrier that is a compact space. This instance asserts that the equal\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥Y] (f g : X ⟶ Y),\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.equalizer.ι f g)\", \"doc\": \"If $ Y $ is a quasi-separated scheme, then the equalizer morphism $ \\\\iota $ of any two morphisms $ f, g : X \\\\to Y $ is quasi-compact. This follows from the property that in a quasi-separated space, th\"}\n  {\"name\": \"CompHaus.instPreregular\", \"module\": \"Mathlib/Topology/Category/CompHaus/EffectiveEpi\", \"type\": \"CategoryTheory.Preregular CompHaus\", \"doc\": \"The category of compact Hausdorff spaces is preregular. This means that for any pair of parallel morphisms $f, g : X \\to Y$ in this category, there exists a kernel pair (the pullback of $f$ and $g$) an\"}\n  {\"name\": \"LightProfinite.instPreregular\", \"module\": \"Mathlib/Topology/Category/LightProfinite/EffectiveEpi\", \"type\": \"CategoryTheory.Preregular LightProfinite\", \"doc\": \"The category of compact Hausdorff, totally disconnected, second-countable topological spaces is preregular. For any pair of parallel morphisms $f, g : X \\to Y$ in this category, there exists a kernel p\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.instHasEqualizers\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [CategoryTheory.PreGaloisCategory C],\\n  CategoryTheory.Limits.HasEqualizers C\", \"doc\": \"Any pre-Galois category $\\\\mathcal{C}$ has all equalizers, meaning it admits limits for diagrams consisting of two parallel morphisms $f, g : A \\\\to B$.\"}\n  {\"name\": \"CompHausLike.precoherent\", \"module\": \"Mathlib/Topology/Category/CompHausLike/EffectiveEpi\", \"type\": \"∀ {P : TopCat → Prop} [CompHausLike.HasExplicitPullbacks P] [CompHausLike.HasExplicitFiniteCoproducts P],\\n  (∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n    CategoryTheory.Precoherent (CompHausLike P)\", \"doc\": \"If the category of compact Hausdorff-like spaces has explicit pullbacks and explicit finite coproducts, and every effective epimorphism in this category is surjective, then it forms a precoherent cate\"}\n  {\"name\": \"Profinite.instPreregular\", \"module\": \"Mathlib/Topology/Category/Profinite/EffectiveEpi\", \"type\": \"CategoryTheory.Preregular Profinite\", \"doc\": \"The category of profinite spaces is preregular. For any pair of parallel morphisms $f, g : X \\to Y$ in this category, there exists a kernel pair (the pullback of $f$ and $g$) and the coequalizer of thi\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"If $\\\\mathcal{C}$ is a preregular and finitary extensive category where every effective epimorphism $f: Y \\\\to X$ admits a pullback of $f$ with itself, and $s: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a functor \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: generic ObjectProperty finite-limit closure supplies an interface, not quasi-compactness or quasi-separatedness; scheme equalizer compactness is about schemes, not arbitrary sheaf topoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-compact generating family with quasi-compact pairwise pullbacks over its members is coherent; its quasi-compact subobjects have finite-limit closure when terminal and products belong to the family",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.coherentCoverage\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Basic\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [CategoryTheory.Precoherent C] → CategoryTheory.Coverage C\", \"doc\": \"In a precoherent category $\\\\mathcal{C}$, the coherent coverage consists of all presieves generated by finite effective epimorphic families. For any morphism $f: Y \\\\to X$ and a covering presieve $S$ on\"}\n  {\"name\": \"CategoryTheory.coherentTopology\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Basic\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [CategoryTheory.Precoherent C] → CategoryTheory.GrothendieckTopology C\", \"doc\": \"The Grothendieck topology generated by the coherent coverage on a precoherent category $\\\\mathcal{C}$, constructed by saturating the collection of presieves generated by finite effective epimorphic fam\"}\n  {\"name\": \"CategoryTheory.extensive_regular_generate_coherent\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Comparison\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryPreExtensive C],\\n  (CategoryTheory.extensiveCoverage C ⊔ CategoryTheory.regularCoverage C).toGrothendieck =\\n    CategoryTheory.coherentTopology C\", \"doc\": \"In a category that is both finitary pre-extensive and preregular, the Grothendieck topology generated by the supremum of the extensive coverage and the regular coverage coincides with the coherent Gro\"}\n  {\"name\": \"CategoryTheory.Precoherent\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Basic\", \"type\": \"(C : Type u_1) → [CategoryTheory.Category.{v_1, u_1} C] → Prop\", \"doc\": \"A property of a category requiring it to satisfy conditions necessary for coherence, typically involving finite limits and covering families in the context of Grothendieck topologies.\"}\n  {\"name\": \"CategoryTheory.coherentTopology.mem_sieves_of_hasEffectiveEpiFamily\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C] {X : C}\\n  (S : CategoryTheory.Sieve X),\\n  (∃ α, ∃ (_ : Finite α), ∃ Y π, CategoryTheory.EffectiveEpiFamily Y π ∧ ∀ (a : α), S.arrows (π a)) →\\n    S ∈ (CategoryTheory.coherentTopology C) X\", \"doc\": \"For a precoherent category $\\\\mathcal{C}$, if a sieve $S$ on an object $X$ contains a finite effective epimorphic family $(Y_a \\\\to X)_{a \\\\in \\\\alpha}$ (with $\\\\alpha$ finite), then $S$ is a covering siev\"}\n  {\"name\": \"CategoryTheory.coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C] {X : C}\\n  (S : CategoryTheory.Sieve X),\\n  S ∈ (CategoryTheory.coherentTopology C) X ↔\\n    ∃ α, ∃ (_ : Finite α), ∃ Y π, CategoryTheory.EffectiveEpiFamily Y π ∧ ∀ (a : α), S.arrows (π a)\", \"doc\": \"For a precoherent category $ \\\\mathcal{C} $ and an object $ X $ in $ \\\\mathcal{C} $, a sieve $ S $ on $ X $ is in the coherent Grothendieck topology on $ \\\\mathcal{C} $ if and only if there exists a fini\"}\n  {\"name\": \"CompHausLike.precoherent\", \"module\": \"Mathlib/Topology/Category/CompHausLike/EffectiveEpi\", \"type\": \"∀ {P : TopCat → Prop} [CompHausLike.HasExplicitPullbacks P] [CompHausLike.HasExplicitFiniteCoproducts P],\\n  (∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n    CategoryTheory.Precoherent (CompHausLike P)\", \"doc\": \"If the category of compact Hausdorff-like spaces has explicit pullbacks and explicit finite coproducts, and every effective epimorphism in this category is surjective, then it forms a precoherent cate\"}\n  {\"name\": \"CategoryTheory.Pretopology.finite\", \"module\": \"Mathlib/CategoryTheory/Sites/Finite\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasPullbacks C] → CategoryTheory.Pretopology C\", \"doc\": \"The Grothendieck pretopology on a category $\\\\mathcal{C}$ with pullbacks, where covering sieves are those presieves whose sets of morphisms to the target object are finite. This pretopology satisfies t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: coherent-topology sheaf conditions and finite-limit interfaces do not assert this quasi-compact topos-object and finite-chart criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small quasi-compact generating family of sheaves whose pullbacks over generators are quasi-compact consists of coherent objects; its quasi-compact subobjects are closed under finite limits",
+   "results": "8 hits, including CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp and isSheaf_coherent_of_hasPullbacks_comp (CategoryTheory/Sites/Coherent/SheafComparison), plus quasicoherent module presentations.",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-site topology and module quasicoherence do not state the abstract object-level generator/subobject criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"coherent\"",
+   "results": "12 hits: SheafOfModules.IsQuasicoherent, QuasicoherentData and their projection/presentation declarations; these concern module quasicoherence.",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-site topology and module quasicoherence do not state the abstract object-level generator/subobject criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?compact|quasi.?separated|coherent.*object",
+   "results": "0 hits in CategoryTheory/Sites.",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-site topology and module quasicoherence do not state the abstract object-level generator/subobject criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a Grothendieck topos quasi-compact generators with quasi-compact pairwise fiber products are coherent and their quasi-compact subobjects are closed under finite limits",
+   "results": "8 hits: CategoryTheory.instPrecoherentOfFinitaryPreExtensiveOfPreregular, coherentTopology, extensive_regular_generate_coherent, Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits, and module quasicoherence declarations.",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-site topology and module quasicoherence do not state the abstract object-level generator/subobject criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Grothendieck topos is coherent if it has compact generators stable under binary products and compact overlaps; equalizers of maps between coherent objects are compact",
+   "results": "8 hits: coherent-site sheaf conditions (Presheaf.isSheaf_coherent_of_projective_of_comp, isSheaf_coherent_of_projective_comp, isSheaf_coherent_of_hasPullbacks_of_comp), coherentTopology, Precoherent, and extensive_regular_generate_coherent.",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-site topology and module quasicoherence do not state the abstract object-level generator/subobject criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "compact|separated|coherent",
+   "results": "25 printed hits in CategoryTheory/Sites/Coherent: coherent-topology files and comments, Precoherent in Basic.lean:54, reflects_precoherent in ReflectsPrecoherent.lean:31. Read Basic.lean:15-85 and SheafComparison.lean:20-65; these define a coherent topology or compare its sheaves, not quasi-compact and quasi-separated objects of arbitrary topoi.",
+   "date": "2026-10-23",
+   "verdict": "no match: coherent-site topology and module quasicoherence do not state the abstract object-level generator/subobject criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finitary-site-coherent-generators",
+  "date": "2026-10-22",
+  "group": "Q145"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input in the ancestor proof, through constructibility descent: Orgogozo §8.1, paragraph proving coherence from the site, and proof of Lemma 9.1.5, assertion that the induced geometric morphism is coherent. Agent finite-limit closure argument through quasi-compact subobjects, extracted from returned parent step 7. Context: literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf, Exposé XI, proof of Lemma 2.5, printed p. 179 (PDF p. 185), finite-limit-closed coherent generating subcategories. This abstract closure statement is not quoted verbatim there.",
+   "via": [
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-trf-proper-base-change-coherent-conservative",
+    "lem-trf-psi-constructibility-descent",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coherent-generator-subobject-closure",
+  "worker": "stage1",
+  "summary": "Q84 supplies an eight-step proof using existing finite-cover calculus and the existing Mathlib leaf for sectionwise set-sheaf limits. Generator quasi-separatedness is tested by finite generator covers; quasi-compact subobjects inherit it by monomorphism cancellation; terminal quasi-separatedness gives quasi-compact products; a graph pullback gives arbitrary equalizers. An explicit finite-product/equalizer cone and a countable small full-subcategory construction complete every clause. No statement changes, attachments or new nodes.",
+  "blueprint": "Realizes the abstract coherent-generator finite-limit-closure argument extracted from parent lem-trf-finitary-site-coherent-generators, first proof step, in the recorded ancestry from lem-trf-local-term-locality. Read latest ancestor proof: its current contracting-correspondence argument is unchanged by this auxiliary split."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-f5092b75d",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-f5092b75d (reviewer sub-agent of L); spot-checked: I read all 8 steps against the cited statements and they are correct. This is a first split with no new nodes. The item is unsplit on live and its statement and stmt_deps are unchanged from live. Step 3: clause (1) of lem-trf-topos-finite-cover-calculus gives the jointly epimorphic family G_{j_a}×_{G_i}G_{k_b} → B×_{G_i}C, the arbitrary-arrow hypothesis makes each source quasi-compact, and clause (3) gives quasi-compactness of B×_{G_i}C. This uses no coherence of the topos, so there is no circularity. Step 4: B×_T C ≅ B×_{G_i} C by cancelling the monomorphism. Step 5: the terminal object is quasi-separated, so T×S = T×_1 S is quasi-compact and embeds monomorphically into G_i×G_j ≅ G_k. Step 6: the equalizer is the pullback of the two graph maps over the quasi-separated product T×S. Step 7: the standard product/equalizer presentation of a finite limit. Step 8: smallness holds because Hom(A,B) ⊆ ∏_U Maps(A(U),B(U)) and a countable union of small sets is small. Sources: Stacks sites.tex 00W2 (l.1680), 0D07 (l.3368), 0GMP and 0GMQ (l.3383 and 3403) all checked; 0GMP/0GMQ enter only through the finite-cover node, which cites them; proof_origin agent is correct; no SGA is used. Route: the only off-unit statement is a Mathlib leaf, so no tool_uses are needed. Edge cases checked: Sets on a one-point site, where D = {∅, pt} and the equalizer of distinct maps is ∅; empty families, covers and diagrams. The statement never claims that arbitrary subobjects are quasi-compact. Duplicates: lifted-generator-quasiseparated-test and coherent-object-approximation both assume a coherent topos; kernel-pair-restriction and quasicompact-coproduct-calculus concern different data. The parent finitary-site-coherent-generators uses exactly these hypotheses and conclusions. proof_deps equals the union of the uses; Mathlib searches cover leanfinder, loogle, grep and leansearch, with one unavailable leansearch recorded as unavailable. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.CoherentGeneratorSubobjectClosure",
+  "declaration": "CategoryTheory.coherent_generator_subobject_closure",
+  "file": "lean/Sheaf/CategoryTheory/Sites/CoherentGeneratorSubobjectClosure.lean",
+  "statement": "theorem coherent_generator_subobject_closure {C : Type u} [Category.{v} C] (J : Precoverage C) (_hJ : J.IsSiteForCoverings) {I : Type (max u v w)} (G : I → Sheaf J.toGrothendieck (Type (max u v w))) (hqc : ∀ i, IsQuasiCompactObject.{max u v w} (G i)) (hgen : ∀ X : Sheaf J.toGrothendieck (Type (max u v w)), ∃ (A : Type (max u v w)) (ι : A → I) (f : ∀ a, G (ι a) ⟶ X), Epi (Sigma.desc f)) (hoverlap : ∀ (i j k : I) (f : G j ⟶ G i) (g : G k ⟶ G i), IsQuasiCompactObject.{max u v w} (pullback f g)) : (∀ i, IsCoherentObject.{max u v w} (G i)) ∧ ((∃ i, Nonempty ((⊤_ (Sheaf J.toGrothendieck (Type (max u v w)))) ≅ G i)) → (∀ i j, ∃ k, Nonempty ((G i ⨯ G j) ≅ G k)) → (∀ T : Sheaf J.toGrothendieck (Type (max u v w)), IsQuasiCompactObject.{max u v w} T → (∃ (i : I) (m : T ⟶ G i), Mono m) → IsCoherentObject.{max u v w} T) ∧ (∀ (K : Type) [SmallCategory K] [FinCategory K], ObjectProperty.IsClosedUnderLimitsOfShape ((fun T : Sheaf J.toGrothendieck (Type (max u v w)) ↦ IsQuasiCompactObject.{max u v w} T ∧ ∃ (i : I) (m : T ⟶ G i), Mono m) : ObjectProperty _) K) ∧ (∃ S : ObjectProperty (Sheaf J.toGrothendieck (Type (max u v w))), ObjectProperty.Small.{max u v w} S ∧ (∀ i, S (G i)) ∧ (∀ T, S T → IsCoherentObject.{max u v w} T) ∧ (∀ (K : Type) [SmallCategory K] [FinCategory K], S.isoClosure.IsClosedUnderLimitsOfShape K) ∧ (∀ X : Sheaf J.toGrothendieck (Type (max u v w)), ∃ (A : Type (max u v w)) (B : A → Sheaf J.toGrothendieck (Type (max u v w))) (f : ∀ a, B a ⟶ X), (∀ a, S (B a)) ∧ Epi (Sigma.desc f))) ∧ (∀ T : Sheaf J.toGrothendieck (Type (max u v w)), (ObjectProperty.ofObj G).limitsClosure (fun K : (Σ K : Cat.{0, 0}, FinCategory K) ↦ K.1) T → IsCoherentObject.{max u v w} T))",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f4044c10",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps (site convention IsSiteForCoverings, size convention, CoherentTopos IsQuasiCompactObject/IsCoherentObject), Mathlib limitsClosure/isoClosure/Small, parent FinitarySiteCoherentGenerators. Every clause matches: hqc/hgen/hoverlap (arbitrary maps), unconditional generator coherence, terminal/product antecedents, D=qc∧mono coherent and closed under finite limits (IsClosedUnderLimitsOfShape over all finite K), small S with S.isoClosure finite-limit closed, coherent, generating, limitsClosure of ofObj G coherent. Steps 3-8 re-checked; edge cases empty I / empty diagram / point site fine; universes max u v w as in parent; lean.statement verbatim; node otherwise unchanged; docstrings and report sections present; no new defs, sorry only. No findings; no compile needed."
+ }
+}

@@ -1,0 +1,200 @@
+{
+ "id": "lem-sfb-large-algclosed-field-extension",
+ "kind": "statement",
+ "title": "Algebraically closed overfields with a prescribed cardinal transcendence bound",
+ "statement": "Let $E$ be a field [def-weil-field]. There exist an algebraically closed field $K$ [def-weil-algebraic-closure] and a field embedding $\\sigma:E\\hookrightarrow K$ [def-pc-field-extension] such that $$\\max(\\aleph_0,|E|)<\\operatorname{trdeg}_{P}K,$$ where $P\\subseteq K$ is the prime subfield (the smallest subfield containing $1$), $\\operatorname{trdeg}$ is cardinal transcendence degree [def-kun-transcendence-degree], $|E|$ is the cardinality of the underlying set of $E$, and $\\aleph_0=|\\mathbf N|$. Cardinalities are compared in one common universe.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (1): algebraically closed field of very large transcendence degree; here applied with E as the base field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-field-extension",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Work in a universe $\\mathcal U$ containing $E$ and $\\mathbf N$, and put $\\kappa=\\max(\\aleph_0,|E|)$, a cardinal of $\\mathcal U$ with $\\aleph_0\\leq\\kappa$. Let $\\lambda=\\kappa^+$ be its successor cardinal, the least cardinal of $\\mathcal U$ strictly greater than $\\kappa$. It exists because the cardinals of $\\mathcal U$ are well ordered and the power set of a set of cardinality $\\kappa$ lies in $\\mathcal U$ and has cardinality $2^\\kappa>\\kappa$ by Cantor's diagonal argument. Thus $\\aleph_0\\leq\\kappa<\\lambda$, and $\\lambda$ is an infinite cardinal in $\\mathcal U$. Only these elementary size facts are used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (1); agent expansion using cardinal enlargement and cardinality of transcendence bases."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algclosed-extension-cardinal-lower-bound] to the field $E$ and the infinite cardinal $\\lambda$. It supplies a $\\mathcal U$-small algebraically closed extension $K/E$ with $\\lambda\\leq|K|$. Its structural map $\\sigma:E\\to K$ is an embedding by [def-pc-field-extension]. Consequently $\\aleph_0\\leq\\kappa<\\lambda\\leq|K|$, so $K$ is uncountable.",
+   "uses": [
+    "lem-sfb-algclosed-extension-cardinal-lower-bound",
+    "def-pc-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (1); agent expansion using cardinal enlargement and cardinality of transcendence bases."
+   }
+  },
+  {
+   "text": "Let $P\\subseteq K$ be the prime subfield. By [lem-sfb-prime-subfield-countable], $|P|\\leq\\aleph_0$. Apply [lem-exc-transcendence-basis-exists] to the inclusion $P\\to K$, obtaining a transcendence basis $b:I\\to K$. Now [lem-weil-countable-base-transcendence-cardinality] applies: the base $P$ is countable, and $K$ is algebraically closed and uncountable by step 2. It gives $|I|=|K|$. The definition [def-kun-transcendence-degree] identifies $|I|$ with $\\operatorname{trdeg}_P K$, hence $\\operatorname{trdeg}_P K=|K|$.",
+   "uses": [
+    "lem-sfb-prime-subfield-countable",
+    "lem-exc-transcendence-basis-exists",
+    "lem-weil-countable-base-transcendence-cardinality",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (1); agent expansion using cardinal enlargement and cardinality of transcendence bases."
+   }
+  },
+  {
+   "text": "Combine the preceding inequalities and equality: $\\max(\\aleph_0,|E|)=\\kappa<\\lambda\\leq|K|=\\operatorname{trdeg}_P K$. The field $K$ and embedding $\\sigma$ of step 2 therefore satisfy every clause of the statement. Every size comparison takes place in $\\mathcal U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (1); agent expansion using cardinal enlargement and cardinality of transcendence bases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algclosed-extension-cardinal-lower-bound",
+  "def-pc-field-extension",
+  "lem-sfb-prime-subfield-countable",
+  "lem-exc-transcendence-basis-exists",
+  "lem-weil-countable-base-transcendence-cardinality",
+  "def-kun-transcendence-degree"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (1); agent expansion using cardinal enlargement and cardinality of transcendence bases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For every field F and cardinal bound there is an algebraically closed extension with larger transcendence degree over its prime field",
+   "results": "{\"t\": \"2026-10-23T21:32:03Z\", \"tool\": \"leanfinder\", \"query\": \"For every field F and cardinal bound there is an algebraically closed extension with larger transcendence degree over its prime field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.cardinal_le_max_transcendence_basis\", \"IsAlgClosed.cardinal_le_max_transcendence_basis'\", \"FirstOrder.Field.ACF_categorical\", \"IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt\", \"Field.infinite_emb_of_transcendental\", \"IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt'\", \"Field.Emb.Cardinal.deg_lt_aleph0\", \"IsAlgClosed.instInfinite\"], \"digest\": \"363337685906710f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AlgebraicClosure gives an algebraic extension, not a transcendence bound; existence of transcendence bases and MvRatFunc rank results do not state this overfield existence assertion in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a field extension containing arbitrarily many algebraically independent elements and taking its algebraic closure",
+   "results": "{\"t\": \"2026-10-23T21:33:03Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of a field extension containing arbitrarily many algebraically independent elements and taking its algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicIndependent.algebraicClosure\", \"Field.infinite_emb_of_transcendental\", \"IsAlgClosed.isAlgClosure_of_transcendence_basis\", \"exists_isTranscendenceBasis'\", \"IsAlgClosed.cardinal_le_max_transcendence_basis'\", \"IsAlgClosed.cardinal_le_max_transcendence_basis\", \"Field.Emb.Cardinal.deg_lt_aleph0\", \"Algebra.Transcendental.infinite\"], \"digest\": \"d6d3661fcd4261f8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AlgebraicClosure gives an algebraic extension, not a transcendence bound; existence of transcendence bases and MvRatFunc rank results do not state this overfield existence assertion in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraically closed field extension of arbitrarily large transcendence degree",
+   "results": "{\"t\": \"2026-10-23T21:32:01Z\", \"tool\": \"leansearch\", \"query\": \"Algebraically closed field extension of arbitrarily large transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicClosure\", \"algebraicClosure\", \"IsAlgClosed.cardinal_le_max_transcendence_basis'\", \"Field.infinite_emb_of_transcendental\", \"algebraicClosure.isAlgebraic\", \"AlgebraicClosure.isAlgebraic\", \"IsAlgClosed.isAlgClosure_of_transcendence_basis\", \"IsTranscendenceBasis.isAlgebraic_field\"], \"digest\": \"5bb0abe8169fb03a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AlgebraicClosure gives an algebraic extension, not a transcendence bound; existence of transcendence bases and MvRatFunc rank results do not state this overfield existence assertion in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed, Algebra.trdeg",
+   "results": "{\"t\": \"2026-10-23T21:32:01Z\", \"tool\": \"loogle\", \"query\": \"IsAlgClosed, Algebra.trdeg\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AlgebraicClosure gives an algebraic extension, not a transcendence bound; existence of transcendence bases and MvRatFunc rank results do not state this overfield existence assertion in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(trdeg|transcendence)|trdeg.*exists|MvRatFunc|FractionRing.*MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T21:33:01Z\", \"tool\": \"grep\", \"query\": \"exists.*(trdeg|transcendence)|trdeg.*exists|MvRatFunc|FractionRing.*MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Vandermonde.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/Algebraic/Integral.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Adjoin.lean\", \"Mathlib/RingTheory/AlgebraicIndependent/Adjoin.lean\"], \"digest\": \"c0375a9851c35eaa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AlgebraicClosure gives an algebraic extension, not a transcendence bound; existence of transcendence bases and MvRatFunc rank results do not state this overfield existence assertion in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every field E there exists an algebraically closed extension K whose transcendence degree over its prime field is larger than the cardinality of E",
+   "results": "{\"t\": \"2026-10-23T22:20:56Z\", \"tool\": \"leanfinder\", \"query\": \"For every field E there exists an algebraically closed extension K whose transcendence degree over its prime field is larger than the cardinality of E\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.cardinal_le_max_transcendence_basis\", \"Field.infinite_emb_of_transcendental\", \"IsAlgClosed.cardinal_le_max_transcendence_basis'\", \"IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt\", \"IsAlgClosed.instInfinite\", \"IsAlgClosed.cardinal_eq_cardinal_transcendence_basis_of_aleph0_lt'\", \"Field.Emb.Cardinal.deg_lt_aleph0\", \"FirstOrder.Field.ACF_categorical\"], \"digest\": \"bbe1fcb9c360f643\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: hits give algebraic closure, basis cardinalities and supporting algebra facts, not the prescribed strict-bound overfield existence statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraically closed overfield with arbitrarily large cardinal transcendence degree",
+   "results": "{\"t\": \"2026-10-23T22:21:35Z\", \"tool\": \"leansearch\", \"query\": \"Algebraically closed overfield with arbitrarily large cardinal transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.trdeg\", \"AlgebraicClosure\", \"IsTranscendenceBasis.lift_cardinalMk_eq\", \"Algebra.IsAlgebraic.isTranscendenceBasis_of_le_trdeg\", \"AlgebraicClosure.instIsAlgClosureOfIsAlgebraic\", \"IsAlgClosed.cardinal_le_max_transcendence_basis\", \"trdeg_lt_aleph0\", \"IsAlgClosed.cardinal_le_max_transcendence_basis'\"], \"digest\": \"06bb8316f542f417\"}",
+   "date": "2026-10-23",
+   "verdict": "no full-item match: hits give algebraic closure, basis cardinalities and supporting algebra facts, not the prescribed strict-bound overfield existence statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-point-lift",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: apply 04Q6 to the morphism from the reduced source into the closure groupoid. Supporting Tag 04Q6, first proof paragraph: choose a field extension and a lifted point adapted to the groupoid and the chosen boundary point. Supporting Tag 04LR (lemma-groupoid-on-field-explain-points), proof, construction (1): algebraically closed field of very large transcendence degree; here applied with E as the base field.",
+   "via": [
+    "lem-sfb-field-groupoid-point-lift",
+    "lem-sfb-field-groupoid-open-image-closed",
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-large-algclosed-field-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the reviewed arbitrary-cardinal algebraically closed extension construction and the existing uncountable countable-base transcendence-basis cardinality theorem. Added only the prime-subfield countability Mathlib specialization. Checked project attachments, the whole DAG/blueprint, exact cited statements, common-universe bounds and finite/countable/uncountable input fields.",
+  "blueprint": "Expands Stacks 04LR construction (1) on the historical alteration/moduli dependency chain from det-thm-sf-ctf-stability-direct-images proof (3). Latest blueprint direct-images proof now uses compactification; this standalone supporting algebra lemma preserves its imported statement and does not change the chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-65f85e088",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-65f85e088 (reviewer sub-agent of L); spot-checked: I read the item, its one new node, every cited statement and the sources in full. Item statement: unchanged and true; it makes precise Stacks 04LR construction (1) (more-groupoids.tex), whose step (3) explains why trdeg is taken over the prime field. Route-pivot point: step 1 cited the dropped-machinery node lem-coef-infinite-cardinal-successor-regular, whose stmt_dep is def-coef-presentable-infinity-category. The step only uses kappa < kappa^+ with kappa^+ infinite in U, which is elementary (well-ordering of cardinals plus Cantor's 2^kappa > kappa). FIX: step 1 rewritten as an elementary step, and the dropped node removed from uses and proof_deps; nothing else changed. Step 2: lem-sfb-algclosed-extension-cardinal-lower-bound (reviewed Q37) applied with lambda infinite, giving K/E algebraically closed with lambda <= |K|, so K is uncountable; sigma is injective by def-pc-field-extension. Step 3: P is countable by the new node; a transcendence basis exists by lem-exc-transcendence-basis-exists; lem-weil-countable-base-transcendence-cardinality (Mathlib Classification.lean:122/149) gives |I| = |K|, with all three hypotheses checked; def-kun-transcendence-degree gives trdeg = |basis|. Step 4: correct chaining of the inequalities. New node lem-sfb-prime-subfield-countable: true (P is Q or F_p, fields.tex:220-231, Def 09FR); its Mathlib match Subfield.cardinalMk_closure_le_max (Subfield.lean:73) with s = empty plus closure_empty (Basic.lean:362) was read and is valid. rg -L over the DAG finds no duplicate; it is not a clause of the item. Edge cases checked: F_2, countable E, and uncountable algebraically closed E (lambda > |E| forces K != E). No SGA, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.LargeAlgClosedFieldExtension",
+  "declaration": "Field.exists_algClosed_extension_large_prime_trdeg",
+  "file": "lean/Sheaf/FieldTheory/LargeAlgClosedFieldExtension.lean",
+  "statement": "theorem exists_algClosed_extension_large_prime_trdeg (E : Type u) [Field E] : ∃ (K : Type u) (_ : Field K) (_ : Algebra E K), IsAlgClosed K ∧ max Cardinal.aleph0 (Cardinal.mk E) < Algebra.trdeg (↥(⊥ : Subfield K)) K",
+  "branch": "sheaf-dag",
+  "by": "Q76",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a58a85974",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Statement Field.exists_algClosed_extension_large_prime_trdeg matches node clause by clause: E Type u field, ∃ K Type u Field + Algebra E K (embedding per def-pc-field-extension), IsAlgClosed K, prime subfield = ⊥ Subfield with Subfield.toAlgebra, strict max ℵ₀ #E < Algebra.trdeg ⊥ K in common Cardinal.{u}. lean.statement verbatim; item changed only in lean vs side-live; not landed by another group. Source Stacks 04LR proof (1),(3) read. Edge cases F_2, countable, uncountable alg-closed E, char 0/p, universe 0 ok. No defs, sorry only, docstrings with source/blueprint/proof plan; plain imports = proof-dep modules. Advisory H11: second-reading section says no second worker reading (dispatcher policy), worker report clause-complete. Not recompiled (no file changed)."
+ }
+}

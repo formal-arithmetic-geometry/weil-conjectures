@@ -1,0 +1,110 @@
+{
+ "id": "lem-cbc-constant-tower-square-normalization",
+ "kind": "statement",
+ "title": "The inverse constant ringed tower square is the specified compositor",
+ "statement": "Let A be a commutative ring and k:V→W, r:V→S, p:W→T, i:S→T a chosen cartesian square. Let κ be the natural isomorphism from G_A(p)⋙G_A(k) to G_A(i)⋙G_A(r), equal to the inverse of gComp(A,k,p), followed by eqToIso(G_A(sq.w)), followed by gComp(A,r,i). Then the inverse natural transformation of exchangeConstantSquare(A,sq).exchangeTowerSquare equals κ.hom. The fixed compositors and constant coefficient transports are those of strict tower operations [def-weil-pbc-strict-tower-operations, def-cbc-strict-constant-tower-operations, def-cbc-strict-tower-proper-open-arrows]. No openness, properness, completeness or boundedness assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D8 and 07A7, composition of module inverse images and its derived base-change square; the finite open-exchange factor of blueprint latest/sec-six-functors-basics/sk-prop-sf-cbc/sk-prop-sf-cbc.proof.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-tower-operations",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Identify the constant module pullback compositors with the section-normalized ringed compositors by conjugate uniqueness. The dependent equality of the endpoint coefficient identifications then gives the explicit moduleSquareG formula. Whiskering over the strict tower index and exact localization give the same square as squareG_lift. Reuse the complete existing proof cbcEvaluationConstantTowerSquare from CompleteProetaleStrictTowerRealization; none of that module’s main realization theorem or completed-open claims is applied. The helper uses only these compositor definitions and the explicit moduleSquareG specification. Finally take inverses of that equality. A generic inverse-composite calculation identifies the three factors before taking components. The hypothesis specifying κ then gives the asserted natural-transformation equality.",
+   "uses": [
+    "def-weil-pbc-strict-tower-operations",
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "lem-fix-constant-square-compositor-specification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-tower-operations",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "lem-fix-constant-square-compositor-specification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D8 and 07A7; the existing cbcEvaluationConstantTowerSquare proof supplies the formal normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ringed strict tower pullback square for constant coefficient sheaves equals the canonical constant coefficient square compositor",
+   "results": "8 generic module pullback composition results; no project-specific normalization.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing proved library normalization helper; no new mathematical assumption."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySquareIso",
+   "results": "No Mathlib identifier: the exact square API belongs to the adopted source library.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing proved library normalization helper; no new mathematical assumption."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(Tower|tower).*Square|exchangeConstantTowerSquare|cbcEvaluationConstantTowerSquare",
+   "results": "No Mathlib match. Local rg found the already proved private cbcEvaluationConstantTowerSquare in Sheaf.Paper.CompleteProetaleStrictTowerRealization, which is reused.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing proved library normalization helper; no new mathematical assumption."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedOpenFiniteTransposeCoherence",
+  "date": "2026-10-26",
+  "group": "M2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-open-finite-transpose-coherence",
+   "place": "Normalize the fixed constant coefficient square in the pulled-back open-unit identity.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantTowerSquareNormalization",
+  "file": "lean/Sheaf/Paper/ConstantTowerSquareNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exchangeConstantTowerSquare_inv",
+  "statement": "theorem exchangeConstantTowerSquare_inv (A : Type (u + 1)) [CommRing A]\n    {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)\n    (sq : ChosenCartesianSquare k r p i)\n    (κ : ProEtale.StrictTower.G A p ⋙ ProEtale.StrictTower.G A k ≅\n      ProEtale.StrictTower.G A i ⋙ ProEtale.StrictTower.G A r)\n    (hκ : κ = (ProEtale.StrictTower.gComp A k p).symm ≪≫\n      eqToIso (congrArg (ProEtale.StrictTower.G A) sq.w) ≪≫\n      ProEtale.StrictTower.gComp A r i) :\n    (exchangeConstantSquare (A := A) sq).exchangeTowerSquare.inv = κ.hom",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ee9e1",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T023519-L-571642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ee9e1",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T023519-L-571642",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + new ConstantTowerSquareNormalization vs clone diff, node JSON field diff, unit sk-prop-sf-cbc realized (empty), sandbox compile of both modules + 2 direct importers, #print axioms of proof helpers vs statement data"
+ }
+}

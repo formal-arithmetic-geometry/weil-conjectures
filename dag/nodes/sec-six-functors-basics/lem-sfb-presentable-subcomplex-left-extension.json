@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-presentable-subcomplex-left-extension",
+ "kind": "statement",
+ "title": "One-degree extension of a presentable partial subcomplex with controlled cohomology image",
+ "statement": "Fix a universe $U$ for small sets and Hom sets [def-weil-size-convention]. Let $\\mathcal B$ be Grothendieck abelian [def-sp-grothendieck-abelian], and let $\\mathcal A\\subseteq\\mathcal B$ be full replete, contain zero, and be closed under kernels and cokernels of maps between its objects and under extensions in $\\mathcal B$. Suppose $\\mathcal A$ is Grothendieck abelian with the induced exact structure and is closed under $U$-small ambient coproducts. For an infinite regular cardinal $\\lambda\\in U$, call a small category $\\lambda$-filtered if every diagram with fewer than $\\lambda$ morphisms has a cocone. An object is $\\lambda$-presentable if its Hom functor preserves small $\\lambda$-filtered colimits [def-weil-pbc-category-colimit]; write $\\mathcal C^\\lambda$ for these objects in a category $\\mathcal C$. Regular means that a union of fewer than $\\lambda$ sets of size less than $\\lambda$ has size less than $\\lambda$. Fix an uncountable regular $\\lambda$ with the following properties. Put $\\mathcal S=\\mathcal B^\\lambda$. Assume $\\mathcal S$ is closed under subobjects, quotients and extensions in $\\mathcal B$; every object of $\\mathcal A$ is an ambient $U$-small $\\lambda$-filtered colimit of subobjects in $\\mathcal A\\cap\\mathcal S$; and every pair $x\\twoheadrightarrow y\\leftarrow n$ in $\\mathcal B$, with $n\\in\\mathcal S$, has a commutative lift $x\\leftarrow m\\twoheadrightarrow n$ with $m\\in\\mathcal S$, chosen monic into $x$ when $n\\to y$ is monic. Let $Z^\\bullet$ be an unbounded cochain complex [def-weil-abstract-derived-category] with $H^j(Z)\\in\\mathcal A$ for every integer $j$. Let $i\\le b$ be integers and let $N^j\\subseteq Z^j$ for $i\\le j\\le b$, with $N^j=0$ for $j>b$, be a partial subcomplex: $d_Z(N^j)\\subseteq N^{j+1}$. Assume every $N^j\\in\\mathcal S$, its cohomology in each degree $j>i$ belongs to $\\mathcal A\\cap\\mathcal S$, and the image of $K^i=\\ker(N^i\\to N^{i+1})\\to H^i(Z)$ belongs to $\\mathcal A\\cap\\mathcal S$. There is a subobject $N^{i-1}\\subseteq Z^{i-1}$ in $\\mathcal S$ with $d_Z(N^{i-1})\\subseteq N^i$ such that the extended partial subcomplex has cohomology in $\\mathcal A\\cap\\mathcal S$ in every degree $j>i-1$, and the image of $\\ker(N^{i-1}\\to N^i)\\to H^{i-1}(Z)$ belongs to $\\mathcal A\\cap\\mathcal S$. All previously chosen terms and differentials are retained.",
+ "source": {
+  "document": "https://arxiv.org/html/1405.1888",
+  "place": "Proof of Theorem A.3, downward induction after conditions (1)--(3), from the pullback defining L^i through the final epimorphism lift; the final N^i is read as N^{i-1} Hall--Neeman--Rydh, arXiv:1405.1888, Appendix A. No Stacks tag states this input; archive WANTED, online source read."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $Y^j=\\ker d_Z^j$, $X^j=\\operatorname{im}d_Z^{j-1}$ and $H^j=Y^j/X^j$. The partial-subcomplex condition embeds $K=\\ker(N^i\\to N^{i+1})$ in $Y^i$. Put $L=K\\times_{Y^i}X^i$, its intersection with the boundaries. Thus $L$ is the kernel of $K\\to H^i$, and both $K$ and $L$ lie in $\\mathcal S$ by its assumed closure under subobjects of $N^i$. Put $J=\\operatorname{im}(K\\to H^i)$; the hypothesis says $J\\in\\mathcal A\\cap\\mathcal S$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Theorem A.3 proof, pullback defining $L^i$ after induction conditions (1)--(3)"
+   }
+  },
+  {
+   "text": "Put $E=Z^{i-1}/X^{i-1}$. The differential induces an epimorphism $e:E\\twoheadrightarrow X^i$ with kernel $H^{i-1}\\hookrightarrow E$: its kernel is $Y^{i-1}/X^{i-1}$. Indeed an element of $E$ lifts after an epimorphic refinement to $Z^{i-1}$; it is killed by $e$ exactly when that lift is a cycle. Apply the assumed small epimorphism-lift property to $E\\twoheadrightarrow X^i\\leftarrow L$. Since $L\\hookrightarrow X^i$ is monic, obtain a monomorphism $M\\hookrightarrow E$ with $M\\in\\mathcal S$ and an epimorphism $v:M\\twoheadrightarrow L$. Let $T=\\ker v$. Then $T=M\\times_E H^{i-1}$: both conditions say that the composite to $X^i$ vanishes. In particular $T\\in\\mathcal S$, and $T\\to H^{i-1}$ is monic since $M\\to E$ is monic.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Theorem A.3 proof, first small lift $M^i$ and pullback $\\widetilde M^i$; the kernel calculation is written out using epimorphic refinements"
+   }
+  },
+  {
+   "text": "Use the given ambient small $\\lambda$-filtered presentation $H^{i-1}=\\operatorname{colim}_a P_a$ by subobjects $P_a\\in\\mathcal A\\cap\\mathcal S$. Presentability of $T$ says that $\\operatorname{colim}_a\\operatorname{Hom}(T,P_a)\\to\\operatorname{Hom}(T,H^{i-1})$ is bijective. An element of a colimit of sets is represented by an element at one stage (the colimit is the quotient of the disjoint union). Consequently $T\\hookrightarrow H^{i-1}$ factors through some $P=P_a\\hookrightarrow H^{i-1}$. The map $T\\to P$ is monic because its composite with $P\\hookrightarrow H^{i-1}$ is monic. No preservation of arbitrary subobjects by $\\mathcal A$ is asserted.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Theorem A.3 proof, factorization of $\\widetilde M^i\to H^{i-1}(Z)$ through $P^i$"
+   }
+  },
+  {
+   "text": "Form the ambient pushout $Q=M\\amalg_T P$. The sequence $0\\to T\\to M\\xrightarrow{v}L\\to0$ is short exact: $T$ is its kernel and $v$ is epic. The pushout-of-an-extension lemma gives a short exact sequence $0\\to P\\xrightarrow{a}Q\\xrightarrow{\\phi}L\\to0$, with $\\phi|_M=v$ and $\\phi a=0$. Since $P,L\\in\\mathcal S$ and $\\mathcal S$ is closed under extensions, $Q\\in\\mathcal S$. The maps $M\\to E$ and $P\\to H^{i-1}\\to E$ agree on $T$, so the pushout property gives $q:Q\\to E$ with $e q=(L\\hookrightarrow X^i)\\phi$.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Theorem A.3 proof, pushout defining $Q^i$; exactness supplied by Stacks Tag 010I section-extensions, pushout of extensions, via the cited node"
+   }
+  },
+  {
+   "text": "The map $q:Q\\to E$ is monic. To check this, let $z:W\\to Q$ satisfy $qz=0$. Since $L\\hookrightarrow X^i$ is monic, the identity $eq=(L\\hookrightarrow X^i)\\phi$ implies $\\phi z=0$. Exactness of $0\\to P\\xrightarrow{a}Q\\xrightarrow{\\phi}L\\to0$ factors $z=at$. Then $0=qz=(P\\hookrightarrow H^{i-1}\\hookrightarrow E)t$ implies $t=0$ and $z=0$. In a preadditive category this zero-kernel test implies monicity by applying it to the difference of any two maps. This also verifies that $\\ker\\phi$ maps isomorphically onto the chosen subobject $P$ of $H^{i-1}$.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Theorem A.3 proof, assertion about $\\ker\\phi$; monicity of the induced map into $Z^{i-1}/X^{i-1}$ is checked explicitly"
+   }
+  },
+  {
+   "text": "Apply the assumed small lift to $Z^{i-1}\\twoheadrightarrow E\\leftarrow Q$. Step 5 makes the right-hand map monic, so the lift supplies a subobject $N=N^{i-1}\\hookrightarrow Z^{i-1}$ in $\\mathcal S$ and an epimorphism $u:N\\twoheadrightarrow Q$ over $E$. Its differential into $Z^i$ is the composite $N\\xrightarrow{u}Q\\xrightarrow{\\phi}L\\hookrightarrow K\\hookrightarrow N^i\\hookrightarrow Z^i$. Hence it lands in the retained term $N^i$, its image there is exactly $L$ (both $u$ and $\\phi$ are epic), and its composite with the retained outgoing differential is zero.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Theorem A.3 proof, final epimorphism lift; the printed final $N^i$ means $N^{i-1}$"
+   }
+  },
+  {
+   "text": "Let $K_{\\mathrm{new}}=\\ker(N\\to N^i)=\\ker(\\phi u)$. Its map to $Q$ factors through $\\ker\\phi=a(P)$, giving $w:K_{\\mathrm{new}}\\to P$. This map is epic: for every $p:W\\to P$, apply epimorphic refinements to the epic $u$ and $ap:W\\to Q$, obtaining $\\rho:W\\prime\\twoheadrightarrow W$ and $n:W\\prime\\to N$ with $un=ap\\rho$. Then $\\phi un=0$, so $n$ factors through $K_{\\mathrm{new}}$ and its image under $w$ is $p\\rho$, since $a$ is monic. The refinement criterion proves the assertion. The natural map $K_{\\mathrm{new}}\\to H^{i-1}(Z)$ is $w$ followed by $P\\hookrightarrow H^{i-1}(Z)$, by the square over $E$. Its image is therefore exactly $P\\in\\mathcal A\\cap\\mathcal S$.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Theorem A.3 proof, omitted verification of induction condition (3) for the extended complex"
+   }
+  },
+  {
+   "text": "The new degree-$i$ cohomology is $K/L$, since the incoming image is $L$ by step 6. This quotient is canonically $J$: the epic map $K\\twoheadrightarrow J$ has kernel $L$, and an epimorphism in an abelian category is the cokernel of its kernel. For completeness, write it as a cokernel of some $h$ by normality of epimorphisms; $h$ factors through $L$, so a map killing $L$ kills $h$ and factors uniquely through $J$. Thus the quotient universal property gives $K/L\\cong J\\in\\mathcal A\\cap\\mathcal S$. Cohomology in degrees $j>i$ uses only previously retained terms and differentials and is unchanged. Together with step 7 and $N\\in\\mathcal S$, this proves all required clauses. No term above $i-1$ was altered.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Theorem A.3 proof, omitted verification of induction conditions (1) and (2) after adjoining $N^{i-1}$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian",
+  "lem-sp-abelian-refinements",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-pushout-short-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1405.1888",
+  "place": "Hall--Neeman--Rydh, arXiv:1405.1888v2, proof of Theorem A.3, downward induction after (1)--(3). Online source read; local archive WANTED. Assembly follows that construction and writes out its omitted invariant checks, using Stacks homology.tex, Tag 010I section-extensions, for pushout exactness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend a bounded partial subcomplex of presentable objects to the left with cohomology in a weak Serre subcategory",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/HasExt\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.HasExt C\", \"doc\": \"Every Grothendieck abelian category has the property that the localized hom-sets between single-term cochain complexes in its derived category form small sets, ensuring the derived category has well-d\"}\n  {\"name\": \"CategoryTheory.hasExt_of_enoughInjectives\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.LocallySmall.{w, v, u} C] [CategoryTheory.EnoughInjectives C], CategoryTheory.HasExt C\", \"doc\": \"If a category $\\\\mathcal{C}$ is locally small (has small hom-sets) and has enough injectives, then the derived category of $\\\\mathcal{C}$ has well-defined small localized hom-sets between cochain comple\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C}\\n  {P : CategoryTheory.ObjectProperty C} [self : P.IsSerreClass], P.IsClosedUnderExtensions\", \"doc\": \"If $\\\\mathcal{P}$ is a Serre class in an abelian category $\\\\mathcal{C}$, then $\\\\mathcal{P}$ is closed under extensions, meaning that for any short exact sequence $0 \\\\to A \\\\to B \\\\to C \\\\to 0$ in $\\\\mathca\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [Y.IsStrictlyGE n],\\n  ∃ Y',\\n    ∃ (_ : Y'.IsStrictlyGE n),\\n      ∃ g s,\\n        \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyGE a] [X.IsStrictlyLE b]\\n  [Y.IsStrictlyGE a] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ X',\\n    ∃ (_ : X\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, where $X$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and $Y$ is strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ext, bounded representatives, truncations, homology data and individual pushout facts do not give the weak-Serre partial-subcomplex extension with its cohomology-image invariant."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A small subcomplex with prescribed weak Serre cohomology extends one degree left using pullbacks and pushouts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.liftLeftHomology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.LeftHomology\", \"type\": \": A ⟶ S.leftHomology\", \"doc\": \"The function constructs a morphism from an object $ A $ to the left homology of a short complex $ S $ by composing the lifting map to the cycles (kernel of the first differential) with the projection \"}\n  {\"name\": \"HomologicalComplex.extend.homologyData'_left_H\", \"module\": \"Mathlib.Algebra.Homology.Embedding.ExtendHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] (K : HomologicalComplex C c) (e : c.Embedding c') {i j k \", \"doc\": \"Given a homological complex $ K $ in a category $ \\\\mathcal{C} $ with zero morphisms, a shape embedding $ e $, and homology data $ h $ for the short complex $ K_i \\\\to K_j \\\\to K_k $, the left homology o\"}\n  {\"name\": \"HomologicalComplex.extend.leftHomologyData\", \"module\": \"Mathlib.Algebra.Homology.Embedding.ExtendHomology\", \"type\": \"(h : (K.sc' i j k).LeftHomologyData) : ((K.extend e).sc' i' j' k').LeftHomologyData\", \"doc\": \"Given left homology data for a short complex $ K_i \\to K_j \\to K_k $ in a homological complex $ K $, this constructs corresponding left homology data for the extended complex $ K^e $ at indices $ i', j'\"}\n  {\"name\": \"HomologicalComplex.extend.leftHomologyData.cokernelCofork\", \"module\": \"Mathlib.Algebra.Homology.Embedding.ExtendHomology\", \"type\": \":\\n  CokernelCofork\\n    ((isLimitKernelFork K e hj' hk hk' cone hcone).lift (KernelFork.ofι ((K.extend e).d i' j') (d_comp_d _ _ _ _)))\", \"doc\": \"Constructs the cokernel cofork for the differential in an extended homological complex using the cocone morphism $\\\\pi$ and a proof that the composition of the differential with $\\\\pi$ equals the zero m\"}\n  {\"name\": \"SSet.Subcomplex.BicartSq.isPushout\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.SubcomplexColimits\", \"type\": \"{A₁ A₂ A₃ A₄ : X.Subcomplex} (sq : BicartSq A₁ A₂ A₃ A₄) :\\n  IsPushout (homOfLE sq.le₁₂) (homOfLE sq.le₁₃) (homOfLE sq.le₂₄) (homOfLE sq.le₃₄)\", \"doc\": \"Given four subcomplexes $A_1, A_2, A_3, A_4$ of a simplicial set $X$ forming a bicartesian square, the square diagram consisting of the inclusion maps $A_1 \\\\subseteq A_2$, $A_1 \\\\subseteq A_3$, $A_2 \\\\s\"}\n  {\"name\": \"CategoryTheory.IsPushout.exact_shortComplex\", \"module\": \"Mathlib.CategoryTheory.Abelian.CommSq\", \"type\": \"(h : IsPushout t l r b) : h.shortComplex.Exact\", \"doc\": \"In an abelian category, a pushout square induces an exact short complex, where the image of each differential equals the kernel of the subsequent differential.\"}\n  {\"name\": \"HomologicalComplex.truncGE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncGE\", \"type\": \": HomologicalComplex C c'\", \"doc\": \"The homological complex obtained by first truncating $ K $ using the shape embedding $ e $ to replace certain objects with homology objects, then extending the result back via the same embedding $ e $\"}\n  {\"name\": \"HomologicalComplex.extend.homologyData'\", \"module\": \"Mathlib.Algebra.Homology.Embedding.ExtendHomology\", \"type\": \"(h : (K.sc' i j k).HomologyData) : ((K.extend e).sc j').HomologyData\", \"doc\": \"Given homology data for a short complex $ K_i \\\\to K_j \\\\to K_k $ in a homological complex $ K $, this constructs corresponding homology data for the extended complex $ K^e $ at indices $ i', j', k' $ i\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ext, bounded representatives, truncations, homology data and individual pushout facts do not give the weak-Serre partial-subcomplex extension with its cohomology-image invariant."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"Subcomplex\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Ext, bounded representatives, truncations, homology data and individual pushout facts do not give the weak-Serre partial-subcomplex extension with its cohomology-image invariant."
+  },
+  {
+   "tool": "grep",
+   "query": "subcomplex|subComplex",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Ext, bounded representatives, truncations, homology data and individual pushout facts do not give the weak-Serre partial-subcomplex extension with its cohomology-image invariant. Searched Algebra/Homology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a bounded above small subcomplex detecting nonzero cohomology in a Grothendieck weak Serre category",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/HasExt\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.HasExt C\", \"doc\": \"Every Grothendieck abelian category has the property that the localized hom-sets between single-term cochain complexes in its derived category form small sets, ensuring the derived category has well-d\"}\n  {\"name\": \"CochainComplex.IsKProjective\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] → [inst_1 : CategoryTheory.Abelian C] → CochainComplex C ℤ → Prop\", \"doc\": \"A proposition asserting that a cochain complex in an abelian category satisfies the K-projective property, which typically requires that the complex is acyclic and satisfies certain lifting properties\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"CochainComplex.cm5b.instIsStrictlyGEI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ) [K.IsStrictlyGE n],\\n  (CochainComplex.cm5b.I K).IsStrictlyGE n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$ with enough injectives, this constructs a cochain complex $I K$ where each object $X^n$ is the injective replacement of $K.X^n$ from the original complex $K$, and \"}\n  {\"name\": \"CategoryTheory.hasExt_iff_small_ext\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C],\\n  CategoryTheory.HasExt C ↔ ∀ (X Y : C) (n : ℕ), Small.{w', w} (CategoryTheory.Abelian.Ext X Y n)\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the existence of Ext groups (HasExt) is equivalent to every Ext group $\\\\mathrm{Ext}^n(X, Y)$ being a small set for all objects $X, Y \\\\in \\\\mathcal{C}$ and all $n \"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → C → ℕ → Prop\", \"doc\": \"For an object $ X $ in an abelian category $ C $, the statement that $ X $ has injective dimension less than $ n $.\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.mk'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C} {n : ℕ},\\n  (∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext Y X i)) →\\n    CategoryTheory.HasInjectiveDimensionLT X n\", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, if for all $ i \\\\geq n $ and all objects $ Y $, the Ext group $ \\\\operatorname{Ext}^i(Y, X) $ is trivial (i.e., contains at most one element),\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Ext, bounded representatives, truncations, homology data and individual pushout facts do not give the weak-Serre partial-subcomplex extension with its cohomology-image invariant."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a partial subcomplex one degree to the left with presentable terms and cohomology in a Grothendieck weak Serre subcategory",
+   "results": "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; CochainComplex.cm5b; derived fraction and boundedness lemmas.",
+   "verdict": "no match: bounded derived fraction representatives do not control weak-Serre cohomology or cardinal presentable subobjects.",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct small subcomplexes in an abelian category with cohomology lying in a weak Serre subcategory",
+   "results": "ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects; CategoryWithHomology.hasHomology; HomologicalComplex.isGrothendieckAbelian; ShortComplex.HomologyData.ofAbelian.",
+   "verdict": "no match: structure/existence of homology and Serre classes is not the left-extension construction.",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPushout, ShortComplex.ShortExact",
+   "results": "0 hits; unknown identifier 'IsPushout' (unqualified query).",
+   "verdict": "no match from this unsuccessful query; existing fully qualified pushout node reused instead.",
+   "date": "2026-10-24"
+  },
+  {
+   "tool": "grep",
+   "query": "presentab|[Ss]mall.*[Ss]ubcomplex|[Ss]ubcomplex.*[Ss]mall",
+   "results": "Algebra/Homology/Double.lean:157,159,160,178,180: corepresentability of evaluation by double/single complexes. Searched Algebra/Homology.",
+   "verdict": "no match: no cardinal-presentable partial-subcomplex extension. Second phrasing and parent searches also read.",
+   "date": "2026-10-24"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weak-serre-derived-small-generators",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Ordinary Brown input for arbitrary schemes and noncartesian levelwise quasi-coherent total systems; independent of properness and adjoint locality. Input: Cohomological representability for a Grothendieck weak-Serre derived subcategory. Supporting input: a small family generating the weak-Serre derived subcategory under triangles and ambient coproducts, before Brown representability. Supporting prerequisite: Proof of Theorem A.3, downward induction after conditions (1)--(3), from the pullback defining L^i through the final epimorphism lift; the final N^i is read as N^{i-1}",
+   "via": [
+    "lem-sfb-weak-serre-derived-small-generators",
+    "lem-sfb-grothendieck-weak-serre-derived-representability",
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-presentable-subcomplex-left-extension",
+  "worker": "stage1",
+  "summary": "Retained the statement. Wrote the one-degree construction in eight steps, with explicit monicity of Q into the quotient, image L for the incoming differential, and epic cycle map onto P. Reused the existing pushout short-exact-sequence and epimorphic-refinement nodes; all other steps are direct instantiations of the item hypotheses or written elementary kernel/universal-property calculations. No new nodes. Checked all cited node statements and the online proof of HNR A.3.",
+  "blueprint": "Inherited prerequisite of sk-thm-sf-ctf-stability, direct-images proof (3), via the recorded weak-Serre small-generators chain. This item has no imported blueprint id and its inherited from.node is null; the exact input is HNR A.3 proof, from the L^i pullback to the final epimorphism lift. Searched the whole blueprint for presentable/subcomplex/pushout; no equivalent blueprint statement. Current latest unit and direct-images proof read.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Generic abelian pushout-of-extensions exactness; the present unit has no replacement for this homological algebra tool."
+   },
+   {
+    "node": "lem-sp-abelian-refinements",
+    "why": "Generic elementwise tests for epi and exactness after epimorphic refinement; used only to verify the kernel and cycle image in an arbitrary abelian category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-sp-abelian-refinements"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-996e95cf1",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-996e95cf1 (reviewer sub-agent of L); spot-checked: Read HNR arXiv:1405.1888, Lemma A.6(1)-(4) and the proof of Theorem A.3 (PDF fetched read-only; not archived in literature/). The 8 steps follow that construction exactly. Step 1 forms L = K ∩ X^i. Step 2 lifts M ↪ E = Z^{i-1}/X^{i-1} with T = M ×_E H^{i-1}. Step 3 factors T through some P_a in A∩S using λ-presentability. Step 4 forms the pushout Q via lem-weil-pbc-pushout-short-exact-sequence, with Q in S by extension closure. Step 5 proves q : Q → E monic, the check the source omits. Step 6 takes the monic lift N ⊆ Z^{i-1}, whose differential has image exactly L in N^i; the source's final 'N^i' means N^{i-1}. Step 7 shows the cycle map onto P is epic via lem-sp-abelian-refinements (a), so the image in H^{i-1} is P. Step 8 gives new H^i = K/L ≅ J; degrees j>i are unchanged. I re-derived every identity, and checked the edge cases i=b, L=0, T=0, P=0 and nonzero T; no boundedness below is used and no subobject closure of A is assumed. The statement and stmt_deps equal live and side-live, where the item is still unsplit; there is no repair note, so it is not superseded. No new nodes; proof_deps equals the union of uses; three search kinds recorded; no SGA. Tool uses accepted: the pushout lemma (sk-thm-p1, generic) and the refinements lemma (Mathlib leaf). No duplicate in the DAG: the related lem-sfb-weak-serre-presentable-cardinal-package states Lemma A.6, not this extension step. review_split's 'no such node' errors come from the snapshot's symlinked chapter directories; every cited node was opened directly."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PresentableSubcomplexLeftExtension",
+  "declaration": "CategoryTheory.presentable_subcomplex_left_extension",
+  "file": "lean/Sheaf/CategoryTheory/PresentableSubcomplexLeftExtension.lean",
+  "statement": "theorem presentable_subcomplex_left_extension {B : Type u} [Category.{v} B] [Abelian B] [IsGrothendieckAbelian.{v} B] (A : ObjectProperty B) [A.IsClosedUnderIsomorphisms] [A.ContainsZero] [A.IsClosedUnderKernels] [A.IsClosedUnderCokernels] [A.IsClosedUnderExtensions] [Abelian A.FullSubcategory] [IsGrothendieckAbelian.{v} A.FullSubcategory] (hcoprod : ∀ (I : Type v), A.IsClosedUnderColimitsOfShape (Discrete I)) (κ : Cardinal.{v}) [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < κ) [(isCardinalPresentable B κ).IsClosedUnderSubobjects] [(isCardinalPresentable B κ).IsClosedUnderQuotients] [(isCardinalPresentable B κ).IsClosedUnderExtensions] (hpresentation : ∀ (X : B), A X → ∃ (J : Type v) (_ : SmallCategory J) (_ : IsCardinalFiltered J κ) (F : J ⥤ B) (ι : F ⟶ (Functor.const J).obj X), Nonempty (IsColimit (Cocone.mk X ι)) ∧ (∀ j : J, Mono (ι.app j)) ∧ ∀ j : J, A (F.obj j) ∧ IsCardinalPresentable (F.obj j) κ) (hlift : ∀ (X Y n : B) (p : X ⟶ Y) (f : n ⟶ Y), Epi p → IsCardinalPresentable n κ → ∃ (m : B) (a : m ⟶ X) (q : m ⟶ n), IsCardinalPresentable m κ ∧ Epi q ∧ a ≫ p = q ≫ f ∧ (Mono f → Mono a)) (Z : CochainComplex B ℤ) (hZ : ∀ j : ℤ, A (Z.homology j)) (i b : ℤ) (hib : i ≤ b) (N : CochainComplex B ℤ) (n : N ⟶ Z) (hn : ∀ j : ℤ, Mono (n.f j)) (hbelow : ∀ j : ℤ, j < i → IsZero (N.X j)) (habove : ∀ j : ℤ, b < j → IsZero (N.X j)) (hsmall : ∀ j : ℤ, IsCardinalPresentable (N.X j) κ) (hcohom : ∀ j : ℤ, i < j → A (N.homology j) ∧ IsCardinalPresentable (N.homology j) κ) (himage : A (image (HomologicalComplex.cyclesMap n i ≫ Z.homologyπ i)) ∧ IsCardinalPresentable (image (HomologicalComplex.cyclesMap n i ≫ Z.homologyπ i)) κ) : ∃ (M : CochainComplex B ℤ) (m : M ⟶ Z), (∀ j : ℤ, Mono (m.f j)) ∧ (∀ j : ℤ, j < i - 1 → IsZero (M.X j)) ∧ (∀ j : ℤ, b < j → IsZero (M.X j)) ∧ (∀ j : ℤ, IsCardinalPresentable (M.X j) κ) ∧ (∀ j : ℤ, i - 1 < j → A (M.homology j) ∧ IsCardinalPresentable (M.homology j) κ) ∧ (A (image (HomologicalComplex.cyclesMap m (i - 1) ≫ Z.homologyπ (i - 1))) ∧ IsCardinalPresentable (image (HomologicalComplex.cyclesMap m (i - 1) ≫ Z.homologyπ (i - 1))) κ) ∧ ∃ e : ∀ (j : ℤ), i ≤ j → (N.X j ≅ M.X j), (∀ (j : ℤ) (hj : i ≤ j), (e j hj).hom ≫ m.f j = n.f j) ∧ ∀ (j k : ℤ) (hj : i ≤ j) (hk : i ≤ k), (e j hj).hom ≫ M.d j k = N.d j k ≫ (e k hk).hom",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3537534aa",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps (identical to side-live), module, report (Worker report + Second reading by NI present), HNR A.3 place, parent citer weak-serre-derived-small-generators. Every clause matches: Mathlib IsClosedUnderKernels/Cokernels (maps between A-objects), extensions, replete, ContainsZero, A Grothendieck, small coproducts in Type v; κ : Cardinal.{v} regular and > aleph0; S = isCardinalPresentable with subobject/quotient/extension instances; hpresentation = small κ-filtered colimit of mono subobjects in A∩S; hlift with Mono f → Mono a; Z unbounded with H^j in A; N padded by zeros, degreewise mono into Z; hcohom j>i; himage on image(cyclesMap n i ≫ homologyπ). Conclusion: M zero below i-1 and above b, presentable, cohomology j>i-1 in A∩S, cycle image at i-1, retention by isos over Z commuting with d. Output re-satisfies the hypotheses at i-1, so the parent can iterate it. lean.statement verbatim; no defs; sorry only; docstrings carry source, blueprint id and 8 steps; no universe restriction; no pro-etale. Advisory: [Abelian A.FullSubcategory] is a binder, which is harmless (abelian is a property; the inherited structure satisfies it; it does not enter the conclusion). No compile (no file changed)."
+ }
+}

@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-total-derived-pullback",
+ "kind": "lemma",
+ "title": "pullback_of_ctf_eq",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, and any field k. For every morphism v between standing schemes of [def-sfb-integral-compact-support-interface], the actual total derived inverse image with integral coefficient O_E preserves Dbc and Loc(Dbc). Identify these with Dctf and Loc(Dctf) by [det-def-localizing-closure-ctf-equals-bc], then use [det-proper-base-change-unbounded-pullback].",
+ "stmt_deps": [
+  "def-sfb-integral-compact-support-interface",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-proper-base-change-unbounded-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "Final paragraph, comparison, composition and base-change normalization."
+ },
+ "proof": [
+  {
+   "text": "For each standing scheme, its quasi-compact structure morphism to Spec k gives compactness, and its separated structure morphism gives quasi-separatedness. In Sheaf.Paper.UnboundedLocalizingPullback, the proved private helpers pullback_constructible and pullback_bounded_constructible apply to arbitrary condensed commutative coefficients on qcqs schemes, without the characteristic assumptions of the public unboundedLocalizingPullback theorem. Use a proof-only import all to apply them at O_E and v.hom.left, obtaining preservation of generators directly.",
+   "uses": [
+    "det-proper-base-change-unbounded-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same module's proved private helper pullback_of_constructible to obtain UnboundedLocalizingPullback at O_E. For source and target specialize localizingClosure_ctf_equals_bc using the identity monoid-object isomorphism at the finite intermediate field E. Its localizing-closure equality identifies localizingClosureProEtale with IntegralCompactSupport.localizing. Transport source membership to the former closure, apply the localizing field to the associated full-subcategory object, and transport target membership back. No positive-characteristic, distinct-prime or nonemptiness assumption is used.",
+   "uses": [
+    "det-proper-base-change-unbounded-pullback",
+    "det-def-localizing-closure-ctf-equals-bc"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-proper-base-change-unbounded-pullback",
+  "det-def-localizing-closure-ctf-equals-bc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/sk-prop-int-brown-construction.proof.md",
+  "place": "V3 Lean proof, 2026-10-26: reuse the general qcqs pullback helpers and transport localizing-closure membership using the integral ctf=bc equality."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralLocalizingCompactSupport",
+  "date": "2026-10-25",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-int-brown-construction",
+   "place": "Final paragraph, comparison, composition and base-change normalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-int-brown",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralCompactSupportPullback",
+  "file": "lean/Sheaf/SixFunctors/IntegralCompactSupportPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.pullback_of_ctf_eq",
+  "statement": "theorem pullback_of_ctf_eq (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    {X Y : Spaces k} (v : X ⟶ Y) :\n    (∀ K, generators (Profinite.padicIntegersRingObj ℓ E.val) Y.obj.left K →\n      generators (Profinite.padicIntegersRingObj ℓ E.val) X.obj.left ((pull\n        (Profinite.padicIntegersRingObj ℓ E.val) v.hom.left).obj K)) ∧\n    (∀ K, localizing (Profinite.padicIntegersRingObj ℓ E.val) Y.obj.left K →\n      localizing (Profinite.padicIntegersRingObj ℓ E.val) X.obj.left ((pull\n        (Profinite.padicIntegersRingObj ℓ E.val) v.hom.left).obj K))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriek|[Ll]ocalizing|[Cc]onstructible",
+   "results": {
+    "hits": 11,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Small.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated, CategoryTheory.Limits.PreservesColimitsOfShape",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support direct image of integral constructible sheaves preserves coproducts on the localizing closure and is independent of compactification",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.LocallyRingedSpace.coproduct",
+     "CompHausLike.instPreservesFiniteCoproductsTopCatCompHausLikeToTopOfHasExplicitFiniteCoproducts",
+     "AlgebraicGeometry.LocallyRingedSpace.instPreservesColimitsOfShapeSheafedSpaceCommRingCatDiscreteForgetToSheafedSpace",
+     "AlgebraicGeometry.Scheme.Hom.support_ker",
+     "HasCompactSupport.comp_isClosedEmbedding",
+     "CompHausLike.instPreservesFiniteCoproductsToCompHausLike",
+     "CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'",
+     "CondensedSet.LocallyConstant.functorFullyFaithful"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral compactly supported pushforward on pro etale derived categories of constructible sheaves is independent of compactification and commutes with composition and base change",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+     "SheafOfModules.pushforwardComp",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+     "CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+     "PresheafOfModules.pushforwardComp",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale|lowerShriek|[Bb]rown|[Cc]ompactification",
+   "results": {
+    "hits": 3,
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+     "Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean"
+    ],
+    "note": "",
+    "subdirectory": "CategoryTheory"
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite type scheme morphism the derived compactly supported pushforward is proper pushforward of extension by zero and satisfies a canonical composition law independent of the chosen compactification",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforward",
+     "AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward",
+     "AlgebraicGeometry.Scheme.Hom.comp_appLE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "no match for the integral pro-etale localizing compact-support theorem; returned pushforward composition statements concern underived sheaf modules, and localizing/constructible hits concern affine module localization or constructible subsets"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor of extension by zero followed by proper direct image preserves arbitrary coproducts on the triangulated subcategory generated by bounded constructible complexes",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+     "CategoryTheory.Functor.isHomological_of_localization",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "No match for this item. LeanFinder returns generic exact-functor derived-category constructions; grep returns the pro-etale site, integral coefficient sheaf, localizing-subcategory import, and unrelated compact-support integration facts. Read ExactFunctor.lean:34-108 and ElladicCohomology.lean:48-67; none constructs compact-support direct image or its comparison maps."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Pp]ush|[Pp]ush.*compactSupport|LocalizingSubcategory|ProEtale",
+   "results": {
+    "hits": 13,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Proetale.lean"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-16",
+   "verdict": "No match for this item. LeanFinder returns generic exact-functor derived-category constructions; grep returns the pro-etale site, integral coefficient sheaf, localizing-subcategory import, and unrelated compact-support integration facts. Read ExactFunctor.lean:34-108 and ElladicCohomology.lean:48-67; none constructs compact-support direct image or its comparison maps."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-49558",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261025T163606-L-709450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T181231-L-4117613",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-locally-nilpotent-derivation-exponential",
+ "kind": "statement",
+ "title": "Pointwise exponential of a locally nilpotent Lie derivation",
+ "statement": "Let $L$ be a Lie algebra over $\\mathbf Q$ [def-wf-lie-algebra], of arbitrary dimension. Let $D:L\\to L$ be a $\\mathbf Q$-linear map satisfying\n$$D([x,y])=[D(x),y]+[x,D(y)]\\qquad(x,y\\in L).$$\nAssume $D$ is locally nilpotent, meaning that for every $x\\in L$ there is an integer $N\\geq1$ with $D^N(x)=0$. Here $D^0$ is the identity and $D^n$ denotes $n$-fold composition. The formula\n$$\\operatorname{Exp}_D(x)=\\sum_{n=0}^{N-1}\\frac{D^n(x)}{n!}\\quad\\text{for any }N\\geq1\\text{ with }D^N(x)=0$$\nis independent of $N$ and defines a $\\mathbf Q$-linear Lie algebra automorphism of $L$, that is, a bijective linear map preserving the bracket. Its inverse is $\\operatorname{Exp}_{-D}$, defined by the same pointwise finite-sum formula for $-D$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.63, first proof, printed pp.503-504, Lie-theoretic input to the Serre presentation; characteristic-zero applicability on p.508. This pointwise exponential lemma is an agent-supplied prerequisite, not a theorem stated by Milne. WANTED: Serre, Complex Semisimple Lie Algebras, Chapter VI appendix, reflection construction."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "If $D^N x=0$, then $D^{N+j}x=D^j(0)=0$ for all $j\\geq0$. Thus any two allowed cutoffs give the same sum after extending both to their maximum. For $a,b\\in\\mathbf Q$ and $x,y\\in L$, choose a common cutoff $N$ annihilating both $x$ and $y$; it also annihilates $ax+by$. The finite sum of the linear maps $D^n/n!$ at this cutoff gives $\\operatorname{Exp}_D(ax+by)=a\\operatorname{Exp}_D(x)+b\\operatorname{Exp}_D(y)$. Also $(-D)^n x=(-1)^nD^n x$, by induction, so $-D$ is locally nilpotent and the same construction gives a linear map $\\operatorname{Exp}_{-D}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed pp.503-504, and characteristic-zero extension p.508: agent-supplied pointwise exponential prerequisite, not a theorem stated there."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-lie-derivation-iterate-binomial] to the given derivation: for every $n$, $D^n[x,y]=\\sum_{i=0}^n\\binom ni[D^i x,D^{n-i}y]$. Choose $r,s\\geq1$ with $D^r x=0$ and $D^s y=0$. In the formula for $n=r+s$, each term has $i\\geq r$ or $n-i\\geq s$, and hence is zero. Consequently $D^{r+s}[x,y]=0$, an allowed cutoff for the bracket.",
+   "uses": [
+    "lem-sfb-lie-derivation-iterate-binomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed pp.503-504, and characteristic-zero extension p.508: agent-supplied pointwise exponential prerequisite, not a theorem stated there."
+   }
+  },
+  {
+   "text": "Use cutoff $r+s$ on $[x,y]$ and substitute the formula from step 2. Since $\\binom ni/n!=1/(i!(n-i)!)$ in $\\mathbf Q$, reindex the finite sum by $j=n-i$. Terms with $i\\geq r$ or $j\\geq s$ vanish. Conversely every pair $0\\leq i<r$, $0\\leq j<s$ has $i+j<r+s$, so occurs exactly once. Thus\n$$\\operatorname{Exp}_D[x,y]=\\sum_{i<r,j<s}\\frac{[D^i x,D^j y]}{i!j!}=[\\operatorname{Exp}_D x,\\operatorname{Exp}_D y].$$\nThe last equality is precisely bilinearity of the bracket from [def-wf-lie-algebra].",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed pp.503-504, and characteristic-zero extension p.508: agent-supplied pointwise exponential prerequisite, not a theorem stated there."
+   }
+  },
+  {
+   "text": "For $x$ choose $N\\geq1$ with $D^N x=0$. Linearity and composition of powers give $D^N(\\operatorname{Exp}_{\\pm D}x)=\\sum_{j<N}(\\pm1)^jD^{N+j}x/j!=0$. Hence cutoff $N$ is valid for both outer maps when computing either composite at $x$. Expanding the finite sums gives\n$$\\operatorname{Exp}_{-D}(\\operatorname{Exp}_D x)=\\sum_{i,j<N}\\frac{(-1)^i}{i!j!}D^{i+j}x.$$\nTerms of total degree $k\\geq N$ are zero. For $k<N$, all pairs $i+j=k$ occur, with coefficient $\\frac1{k!}\\sum_{i=0}^k\\binom ki(-1)^i$. For $k>0$ this is $(1+(-1))^k/k!=0$ by [lem-pur-commutative-ring-binomial-expansion] over $\\mathbf Q$; for $k=0$ the sum has the single coefficient $1$. The composite therefore equals $x$. For the reversed composite the coefficient is $\\frac1{k!}\\sum_{j=0}^k\\binom kj(-1)^j$, giving the same result. These two identities prove bijectivity with inverse $\\operatorname{Exp}_{-D}$. Together with linearity and step 3 this proves the claimed Lie algebra automorphism.",
+   "uses": [
+    "lem-pur-commutative-ring-binomial-expansion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.63, first proof, printed pp.503-504, and characteristic-zero extension p.508: agent-supplied pointwise exponential prerequisite, not a theorem stated there."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra",
+  "lem-pur-commutative-ring-binomial-expansion",
+  "lem-sfb-lie-derivation-iterate-binomial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.63, first proof, printed pp.503-504, and characteristic-zero extension p.508: agent-supplied pointwise exponential prerequisite, not a theorem stated there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "locallyNilpotent|LocallyNilpotent|def exp|theorem exp",
+   "results": "{\"t\": \"2026-10-23T23:24:39Z\", \"tool\": \"grep\", \"query\": \"locallyNilpotent|LocallyNilpotent|def exp|theorem exp\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Derivation/Basic.lean\"], \"digest\": \"20898563d09f3093\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally nilpotent Lie derivation exponentiates pointwise to an automorphism in characteristic zero",
+   "results": "{\"t\": \"2026-10-23T23:24:39Z\", \"tool\": \"leansearch\", \"query\": \"A locally nilpotent Lie derivation exponentiates pointwise to an automorphism in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"LieDerivation.exp_map_apply\", \"Module.End.exp_mul_of_derivation\", \"LieModule.instLinearWeightsOfCharZero\", \"JacobsonNoether.exist_pow_eq_zero_of_le\", \"LieDerivation.coe_zero\", \"LieModule.exists_forall_pow_toEnd_eq_zero\"], \"digest\": \"8bd885d1c5f25c43\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieDerivation.exp",
+   "results": "{\"t\": \"2026-10-23T23:24:39Z\", \"tool\": \"loogle\", \"query\": \"LieDerivation.exp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"LieDerivation.exp_map_apply\"], \"digest\": \"09ee1c24d0e9e8c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exponential of a locally nilpotent derivation of a rational Lie algebra is a Lie algebra automorphism with inverse the exponential of its negative",
+   "results": "{\"t\": \"2026-10-23T23:24:40Z\", \"tool\": \"leanfinder\", \"query\": \"The exponential of a locally nilpotent derivation of a rational Lie algebra is a Lie algebra automorphism with inverse the exponential of its negative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"LieDerivation.exp_map_apply\", \"Module.End.exp_mul_of_derivation\", \"IsNilpotent.exp_mul_exp_neg_self\", \"IsNilpotent.exp\", \"IsNilpotent.exp_neg_mul_exp_self\", \"IsNilpotent.map_exp\"], \"digest\": \"dc160a790aad19f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise finite exponential of a linear derivation preserving the Lie bracket when each vector is killed by some power without a uniform nilpotence bound",
+   "results": "{\"t\": \"2026-10-23T23:26:51Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise finite exponential of a linear derivation preserving the Lie bracket when each vector is killed by some power without a uniform nilpotence bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp_map_apply\", \"LieDerivation.exp_apply\", \"LieDerivation.exp\", \"Module.End.exp_mul_of_derivation\", \"IsNilpotent.exp\", \"LieDerivation.iterate_apply_lie\", \"LieModule.exists_forall_pow_toEnd_eq_zero\", \"LieDerivation.iterate_apply_lie'\"], \"digest\": \"639b9cb95ecc43da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.exp in Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 and Module.End.exp_mul_of_derivation require a globally nilpotent endomorphism, not a power bound depending on the vector. The pointwise extension is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exponential of a locally nilpotent Lie derivation is a pointwise finite sum defining an automorphism in arbitrary dimension",
+   "results": "{\"t\": \"2026-10-23T23:48:18Z\", \"tool\": \"leanfinder\", \"query\": \"The exponential of a locally nilpotent Lie derivation is a pointwise finite sum defining an automorphism in arbitrary dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_map_apply\", \"LieDerivation.exp_apply\", \"Module.End.exp_mul_of_derivation\", \"IsNilpotent.exp\", \"IsNilpotent.exp_smul_eq_sum\", \"IsNilpotent.map_exp\", \"IsNilpotent.exp_eq_sum\"], \"digest\": \"d59b571c1f5db3d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the exponential hits at Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 require IsNilpotent D.toLinearMap, a uniform bound; the pointwise local hypothesis is weaker. The iterated Leibniz hits only supply a prerequisite."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyNilpotent|locallyNilpotent|iterate_apply_lie|def exp",
+   "results": "{\"t\": \"2026-10-23T23:48:36Z\", \"tool\": \"grep\", \"query\": \"LocallyNilpotent|locallyNilpotent|iterate_apply_lie|def exp\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Derivation/Basic.lean\", \"Mathlib/Algebra/Lie/Derivation/Basic.lean\", \"Mathlib/Algebra/Lie/Derivation/Basic.lean\", \"Mathlib/Algebra/Lie/Derivation/Basic.lean\"], \"digest\": \"ee904fa6f96e6707\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the exponential hits at Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 require IsNilpotent D.toLinearMap, a uniform bound; the pointwise local hypothesis is weaker. The iterated Leibniz hits only supply a prerequisite."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally nilpotent linear derivation on a rational Lie algebra exponentiates to an invertible Lie map without finite dimensionality",
+   "results": "{\"t\": \"2026-10-23T23:48:37Z\", \"tool\": \"leansearch\", \"query\": \"A locally nilpotent linear derivation on a rational Lie algebra exponentiates to an invertible Lie map without finite dimensionality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"Module.End.exp_mul_of_derivation\", \"LieDerivation.exp_map_apply\", \"LieDerivation.mk\", \"LieDerivation.instLinearMapClass\", \"LieDerivation.instCoeToLinearMap\", \"LieDerivation\"], \"digest\": \"fc65a852759cede5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the exponential hits at Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 require IsNilpotent D.toLinearMap, a uniform bound; the pointwise local hypothesis is weaker. The iterated Leibniz hits only supply a prerequisite."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieDerivation.exp",
+   "results": "{\"t\": \"2026-10-23T23:48:37Z\", \"tool\": \"loogle\", \"query\": \"LieDerivation.exp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"LieDerivation.exp_map_apply\"], \"digest\": \"09ee1c24d0e9e8c0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the exponential hits at Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 require IsNilpotent D.toLinearMap, a uniform bound; the pointwise local hypothesis is weaker. The iterated Leibniz hits only supply a prerequisite."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise exponential of a locally nilpotent endomorphism preserves a Lie bracket by a binomial Leibniz rule",
+   "results": "{\"t\": \"2026-10-23T23:48:52Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise exponential of a locally nilpotent endomorphism preserves a Lie bracket by a binomial Leibniz rule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.exp_map_apply\", \"LieDerivation.exp\", \"LieDerivation.exp_apply\", \"Module.End.exp_mul_of_derivation\", \"LieModule.toEnd_pow_lie\", \"Module.End.commute_exp_left_of_commute\", \"LieAlgebra.ad_pow_lie\", \"IsNilpotent.map_exp\"], \"digest\": \"1da862b8ad0979a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the exponential hits at Mathlib/Algebra/Lie/Derivation/Basic.lean:405-426 require IsNilpotent D.toLinearMap, a uniform bound; the pointwise local hypothesis is weaker. The iterated Leibniz hits only supply a prerequisite."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "LieDerivation.exp",
+  "file": "Mathlib/Algebra/Lie/Derivation/Basic.lean",
+  "how": "Lines 405-426 give the globally nilpotent case. Local nilpotence on an arbitrary-dimensional Lie algebra does not imply IsNilpotent D.toLinearMap."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integrable-sl2-reflection-automorphism",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Appendix C.21--C.22, printed p.612 (existence of a base); Section 23h, Theorem 23.63, first proof, printed pp.503--504, and characteristic-zero extension on p.508; the displayed Serre relations on p.504 require the sign and letter corrections recorded in report.md. Supporting argument for the rational Serre presentation: Reflection automorphism from a locally nilpotent rational sl2 action. General exponential input: pointwise exponentiation of a locally nilpotent Lie derivation, before calculating the three sl2 factors.",
+   "via": [
+    "lem-sfb-integrable-sl2-reflection-automorphism",
+    "lem-sfb-serre-rational-presentation",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-locally-nilpotent-derivation-exponential",
+  "worker": "stage1",
+  "summary": "Proved the pointwise exponential without replacing local nilpotence by uniform nilpotence. The sole new node is the Mathlib higher Leibniz identity; cutoff independence, linearity, finite rectangular bracket expansion and the two inverse finite convolutions remain explicit steps. Reused the existing commutative binomial theorem leaf. The statement is unchanged.",
+  "blueprint": "Supporting prerequisite of lem-sfb-integrable-sl2-reflection-automorphism and the rational Serre presentation, on the inherited alteration/direct-image route in blueprint.from.place. The current latest blueprint has no equivalent exponential or higher-Leibniz node; the null nearest blueprint ancestor returned by blueprint_refs.py is preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-bbe697640",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-bbe697640 (reviewer sub-agent of L); spot-checked: Read the item and its one new node in full, plus the statements of def-wf-lie-algebra and lem-pur-commutative-ring-binomial-expansion. Item statement unchanged and correct in any dimension. Tested on L=0, D=0, Heisenberg with D=ad e, and Q[t] with d/dt (locally but not uniformly nilpotent; Exp p(t)=p(t+1) with inverse p(t-1)). This last case shows that Mathlib's LieDerivation.exp at Mathlib/Algebra/Lie/Derivation/Basic.lean:401-426 (nilpotent D only) is correctly only a mathlib_candidate. Step 1: cutoff independence, linearity and local nilpotence of -D are elementary. Step 2: the bracket cutoff r+s follows from the new node, since i<r forces n-i>s. Step 3: binom(n,i)/n! = 1/(i!j!) and the reduction to the rectangle i<r, j<s are checked, and bilinearity comes from def-wf. Step 4: D^N kills Exp_{±D}x, so N is a valid outer cutoff; the coefficient of D^k x is (1-1)^k/k!, which is 0 for k>0 and 1 for k=0, by the binomial leaf over Q. Both composites are the identity. The new mathlib leaf lem-sfb-lie-derivation-iterate-binomial matches LieDerivation.iterate_apply_lie' at Basic.lean:145-148 with R=Q. Mathlib's Leibniz form at lines 43-48 agrees with the node's rule by skew-symmetry. The node is self-contained and statement-only, has four kinds of logged searches, and is strictly smaller than the item (no D1 problem). The rg -L duplicate search over dag/nodes found no node with the higher Leibniz rule or the pointwise exponential. Milne iAG2017 Theorem 23.63 (PDF pp.515-516) only sketches this and points to Serre, so proof_origin=agent and the WANTED line are right. No off-unit route citations beyond mathlib leaves, no SGA, no cycle, proof_deps equals the union of uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.LocallyNilpotentDerivationExponential",
+  "declaration": "Module.End.exists_lieEquiv_of_locallyNilpotent_derivation",
+  "file": "lean/Sheaf/Algebra/Lie/LocallyNilpotentDerivationExponential.lean",
+  "statement": "theorem exists_lieEquiv_of_locallyNilpotent_derivation {L : Type u} [LieRing L] [LieAlgebra ℚ L] (D : Module.End ℚ L) (hder : ∀ x y : L, D ⁅x, y⁆ = ⁅D x, y⁆ + ⁅x, D y⁆) (hnil : ∀ x : L, ∃ N : ℕ, 1 ≤ N ∧ (D ^ N) x = 0) : ∃ e : L ≃ₗ⁅ℚ⁆ L, (∀ (x : L) (N : ℕ), 1 ≤ N → (D ^ N) x = 0 → e x = ∑ n ∈ Finset.range N, ((n.factorial : ℚ)⁻¹) • ((D ^ n) x)) ∧ (∀ (x : L) (N : ℕ), 1 ≤ N → ((-D) ^ N) x = 0 → e.symm x = ∑ n ∈ Finset.range N, ((n.factorial : ℚ)⁻¹) • (((-D) ^ n) x))",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9863f6efc",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read node, def-wf-lie-algebra (Mathlib LieRing/LieAlgebra), module, report (Worker report + Second reading by Q40 present), Mathlib Derivation/Basic.lean:144-148,395-426. H3: L:Type u over ℚ without finiteness/nontriviality; D:Module.End ℚ L; hder verbatim Leibniz; hnil pointwise ∀x∃N≥1; e:L≃ₗ⁅ℚ⁆L pinned by the finite sum at every valid cutoff (gives N-independence and uniqueness, not arbitrary); e.symm pinned by the same formula for -D. Edge cases L=0, D=0, x=0, n=0 term, N=0 excluded, Q[t] with d/dt covered (LieDerivation.exp needs global nilpotence, so candidate only). No duplicate in Mathlib or the project Lean trees; lean.statement verbatim; stmt_deps correct; docstrings with source place, blueprint tag and 4 proof steps; sorry only; no definitions; no other records touched. No compile needed (no change)."
+ }
+}

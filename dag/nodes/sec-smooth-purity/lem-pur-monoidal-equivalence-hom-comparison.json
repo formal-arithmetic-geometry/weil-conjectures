@@ -1,0 +1,218 @@
+{
+ "id": "lem-pur-monoidal-equivalence-hom-comparison",
+ "kind": "statement",
+ "title": "Internal Hom comparison of a strong monoidal equivalence",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be monoidal categories [def-sfb-monoidal-category] with internal Homs: for each $M$, tensoring $M\\otimes-$ has a specified right adjoint $[M,-]$, with evaluation $\\operatorname{ev}_{M,N}:M\\otimes[M,N]\\to N$. Let $F:\\mathcal C\\to\\mathcal D$ be a strong monoidal functor [def-sfb-strong-monoidal-functor] whose underlying functor is an equivalence. Write $\\mu_{M,L}:FM\\otimes FL\\xrightarrow{\\sim}F(M\\otimes L)$ for its tensorator. For $M,N\\in\\mathcal C$, define\n$$c_{F;M,N}:F[M,N]\\longrightarrow[FM,FN]$$\nto be the transpose under the specified tensor/internal-Hom adjunction in $\\mathcal D$ of\n$$FM\\otimes F[M,N]\\xrightarrow{\\mu_{M,[M,N]}}F(M\\otimes[M,N])\\xrightarrow{F(\\operatorname{ev}_{M,N})}FN.$$\nThen $c_{F;M,N}$ is an isomorphism, natural contravariantly in $M$ and covariantly in $N$. In particular it is the specified evaluation comparison, satisfying\n$$\\operatorname{ev}_{FM,FN}\\circ(1_{FM}\\otimes c_{F;M,N})=F(\\operatorname{ev}_{M,N})\\circ\\mu_{M,[M,N]}.$$\nNo dualizability condition on $M$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+  "place": "Contragredient composite, first arrow: the canonical pullback/internal-Hom isomorphism for an automorphism; agent-formulated general categorical prerequisite, not a theorem quoted verbatim from the blueprint"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\Phi^{\\mathcal C}_{M;X,N}$ and $\\Phi^{\\mathcal D}_{FM;Z,FN}$ for the specified adjunction bijections, from tensor morphisms to internal-Hom morphisms. Their inverse sends $h:X\\to[M,N]$ to $\\operatorname{ev}_{M,N}(1_M\\otimes h)$. Thus, putting $a=F[M,N]$, $b=[FM,FN]$, and $c=c_{F;M,N}$, the definition of $c$ gives\n$$\\operatorname{ev}_{FM,FN}(1_{FM}\\otimes c)=F(\\operatorname{ev}_{M,N})\\mu_{M,[M,N]}.$$\nThroughout this proof composition is right to left. This is the required evaluation equation, directly from the inverse adjunction bijection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+    "place": "Contragredient composite, first arrow: the canonical pullback/internal-Hom isomorphism for an automorphism; agent-formulated general categorical prerequisite, not a theorem quoted verbatim from the blueprint"
+   }
+  },
+  {
+   "text": "For each $X\\in\\mathcal C$, consider this chain of bijections:\n$$\\operatorname{Hom}_{\\mathcal D}(FX,a)\\cong\\operatorname{Hom}_{\\mathcal C}(X,[M,N])\\cong\\operatorname{Hom}_{\\mathcal C}(M\\otimes X,N)\\cong\\operatorname{Hom}_{\\mathcal D}(F(M\\otimes X),FN)\\cong\\operatorname{Hom}_{\\mathcal D}(FM\\otimes FX,FN)\\cong\\operatorname{Hom}_{\\mathcal D}(FX,b).$$\nThe first and third use full faithfulness of the underlying equivalence; the second and fifth are the given adjunctions; the fourth is precomposition with the tensorator isomorphism of [def-sfb-strong-monoidal-functor]. To spell out full faithfulness here, choose $G$ with natural isomorphisms $\\eta:1\\cong GF$, $\\epsilon:FG\\cong1$. Faithfulness of $F$ follows by conjugating $GF(f)$ with $\\eta$; faithfulness of $G$ follows similarly with $\\epsilon$. For $h:FX\\to FY$, take $k=\\eta_Y^{-1}G(h)\\eta_X$; naturality of $\\eta$ gives $GF(k)=G(h)$, and faithfulness of $G$ gives $F(k)=h$. This proves the required Hom bijections without an extra categorical theorem.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+    "place": "Contragredient composite, first arrow: the canonical pullback/internal-Hom isomorphism for an automorphism; agent-formulated general categorical prerequisite, not a theorem quoted verbatim from the blueprint"
+   }
+  },
+  {
+   "text": "Every $h:FX\\to a$ is uniquely $F(k)$ for $k:X\\to[M,N]$. The chain of Step 2 sends it to the transpose of $F(\\operatorname{ev}_{M,N}(1_M\\otimes k))\\mu_{M,X}$. Tensorator naturality in [def-sfb-strong-monoidal-functor] and Step 1 give\n$$F(\\operatorname{ev}_{M,N}(1\\otimes k))\\mu_{M,X}=F(\\operatorname{ev}_{M,N})\\mu_{M,[M,N]}(1\\otimes Fk)=\\operatorname{ev}_{FM,FN}(1\\otimes cFk).$$\nHence that bijection is precisely $h\\mapsto ch$. For every $Z\\in\\mathcal D$, choose an isomorphism $s:FX\\xrightarrow{\\sim}Z$ using essential surjectivity (one can take $X=GZ$ and $s=\\epsilon_Z$). Precomposition with $s$ identifies $h\\mapsto ch$ on $\\operatorname{Hom}(Z,a)$ with this bijection on $\\operatorname{Hom}(FX,a)$. Thus postcomposition with $c$ is bijective for every $Z$.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+    "place": "Contragredient composite, first arrow: the canonical pullback/internal-Hom isomorphism for an automorphism; agent-formulated general categorical prerequisite, not a theorem quoted verbatim from the blueprint"
+   }
+  },
+  {
+   "text": "Surjectivity for $Z=b$ supplies $d:b\\to a$ with $cd=1_b$. Then $c(dc)=(cd)c=c=c1_a$, so injectivity for $Z=a$ gives $dc=1_a$. This is an explicit two-sided inverse, and proves invertibility without invoking Yoneda or a right-adjoint uniqueness theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+    "place": "Contragredient composite, first arrow: the canonical pullback/internal-Hom isomorphism for an automorphism; agent-formulated general categorical prerequisite, not a theorem quoted verbatim from the blueprint"
+   }
+  },
+  {
+   "text": "For $v:N\\to N'$, put $p=[M,v]$, $q=[FM,Fv]$. Naturality in the target of the specified adjunctions says $\\operatorname{ev}_{M,N'}(1\\otimes p)=v\\operatorname{ev}_{M,N}$ and $\\operatorname{ev}_{FM,FN'}(1\\otimes q)=Fv\\operatorname{ev}_{FM,FN}$. Therefore Step 1 and tensorator naturality [def-sfb-strong-monoidal-functor] give\n$$\\begin{aligned}\n\\operatorname{ev}_{FM,FN'}(1\\otimes c_{F;M,N'}Fp)&=F(\\operatorname{ev}_{M,N'})\\mu_{M,[M,N']}(1\\otimes Fp)\\\\\n&=F(\\operatorname{ev}_{M,N'}(1\\otimes p))\\mu_{M,[M,N]}\\\\\n&=Fv\\operatorname{ev}_{FM,FN}(1\\otimes c_{F;M,N})\\\\\n&=\\operatorname{ev}_{FM,FN'}(1\\otimes q c_{F;M,N}).\n\\end{aligned}$$\nInjectivity of the adjunction bijection proves $c_{F;M,N'}Fp=q c_{F;M,N}$, the asserted covariant naturality.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+    "place": "Contragredient composite, first arrow: the canonical pullback/internal-Hom isomorphism for an automorphism; agent-formulated general categorical prerequisite, not a theorem quoted verbatim from the blueprint"
+   }
+  },
+  {
+   "text": "For $u:M'\\to M$, define $p=[u,N]:[M,N]\\to[M',N]$ as the transpose of $\\operatorname{ev}_{M,N}(u\\otimes1)$, and define $q=[Fu,FN]$ by the identical rule in $\\mathcal D$. These are the contravariant internal-Hom maps, so by their definition\n$$\\operatorname{ev}_{M',N}(1\\otimes p)=\\operatorname{ev}_{M,N}(u\\otimes1),\\qquad \\operatorname{ev}_{FM',FN}(1\\otimes q)=\\operatorname{ev}_{FM,FN}(Fu\\otimes1).$$\nStep 1 and tensorator naturality [def-sfb-strong-monoidal-functor] now give\n$$\\begin{aligned}\n\\operatorname{ev}_{FM',FN}(1\\otimes c_{F;M',N}Fp)&=F(\\operatorname{ev}_{M',N}(1\\otimes p))\\mu_{M',[M,N]}\\\\\n&=F(\\operatorname{ev}_{M,N}(u\\otimes1))\\mu_{M',[M,N]}\\\\\n&=F(\\operatorname{ev}_{M,N})\\mu_{M,[M,N]}(Fu\\otimes1)\\\\\n&=\\operatorname{ev}_{FM,FN}(Fu\\otimes c_{F;M,N})\\\\\n&=\\operatorname{ev}_{FM',FN}(1\\otimes q c_{F;M,N}).\n\\end{aligned}$$\nInjectivity of the adjunction bijection proves $c_{F;M',N}Fp=q c_{F;M,N}$. This supplies contravariant naturality with no braiding, symmetry, or dualizability hypothesis.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+    "place": "Contragredient composite, first arrow: the canonical pullback/internal-Hom isomorphism for an automorphism; agent-formulated general categorical prerequisite, not a theorem quoted verbatim from the blueprint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/_section.md",
+  "place": "Contragredient composite, first arrow: the canonical pullback/internal-Hom isomorphism for an automorphism; agent-formulated general categorical prerequisite, not a theorem quoted verbatim from the blueprint"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal equivalence preserves internal hom canonical comparison is an isomorphism",
+   "results": "Hits: CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison, CategoryTheory.coev_expComparison, CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.uncurry_expComparison, CategoryTheory.expComparison_ev. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Closed",
+   "results": "Hits: . loogle: unknown identifier 'CategoryTheory.Functor.Closed'",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closedOfIsEquivalence|isIso.*closedComparison|closedComparison.*isIso|IsEquivalence.*Closed",
+   "results": "Hits: Mathlib/CategoryTheory/ObjectProperty/Ind.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "monoidal equivalence internal hom comparison isomorphism",
+   "results": "Hits: CategoryTheory.MonoidalClosed.curryHomEquiv', CategoryTheory.Functor.homObjEquiv, CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.expComparison, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.Hom.mulEquivCongrRight_apply, CategoryTheory.FunctorToTypes.functorHomEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical evaluation transpose internal Hom comparison invertible for a monoidal equivalence",
+   "results": "Hits: CategoryTheory.coev_expComparison, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.expComparison, CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso. ",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal equivalence preserves internal hom comparison",
+   "results": "{\"t\": \"2026-10-26T03:23:41Z\", \"tool\": \"leanfinder\", \"query\": \"strong monoidal equivalence preserves internal hom comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso\", \"CategoryTheory.expComparison\", \"CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso\", \"CategoryTheory.MonoidalClosed.ofEquiv\", \"CategoryTheory.MonoidalClosedFunctor.comparison_iso\", \"CategoryTheory.coev_expComparison\", \"CategoryTheory.uncurry_expComparison\", \"CategoryTheory.expComparison_ev\"], \"digest\": \"159738173a6cd5cc\"}",
+   "date": "2026-10-26",
+   "verdict": "no complete match: expComparison requires cartesian tensor; ofEquiv constructs a transported closed structure and does not state every requested clause for the two specified adjunctions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.MonoidalClosedFunctor, CategoryTheory.expComparison",
+   "results": "{\"t\": \"2026-10-26T03:23:41Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed, CategoryTheory.MonoidalClosedFunctor, CategoryTheory.expComparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosedFunctor.comparison_iso\", \"CategoryTheory.MonoidalClosedFunctor.mk\"], \"digest\": \"44a65f90a0a5dd13\"}",
+   "date": "2026-10-26",
+   "verdict": "no complete match: expComparison requires cartesian tensor; ofEquiv constructs a transported closed structure and does not state every requested clause for the two specified adjunctions"
+  },
+  {
+   "tool": "grep",
+   "query": "expComparison|MonoidalClosedFunctor|right adjoint",
+   "results": "{\"t\": \"2026-10-26T03:23:41Z\", \"tool\": \"grep\", \"query\": \"expComparison|MonoidalClosedFunctor|right adjoint\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorToTypes.lean\"], \"digest\": \"b2c1aeb6cc22ac46\"}",
+   "date": "2026-10-26",
+   "verdict": "no complete match: expComparison requires cartesian tensor; ofEquiv constructs a transported closed structure and does not state every requested clause for the two specified adjunctions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "monoidal equivalence internal hom comparison isomorphism",
+   "results": "{\"t\": \"2026-10-26T03:23:42Z\", \"tool\": \"leansearch\", \"query\": \"monoidal equivalence internal hom comparison isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.curryHomEquiv'\", \"CategoryTheory.Functor.homObjEquiv\", \"CategoryTheory.MonoidalClosed.ofEquiv\", \"CategoryTheory.expComparison\", \"CategoryTheory.tensorLeftHomEquiv\", \"CategoryTheory.Hom.mulEquivCongrRight_apply\", \"CategoryTheory.FunctorToTypes.functorHomEquiv\", \"CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj\"], \"digest\": \"8525c010730f90a3\"}",
+   "date": "2026-10-26",
+   "verdict": "no complete match: expComparison requires cartesian tensor; ofEquiv constructs a transported closed structure and does not state every requested clause for the two specified adjunctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal equivalence transports tensor right adjoint internal Hom",
+   "results": "{\"t\": \"2026-10-26T03:28:10Z\", \"tool\": \"leanfinder\", \"query\": \"strong monoidal equivalence transports tensor right adjoint internal Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalClosed.ofEquiv\", \"CategoryTheory.MonoidalClosed.instTransported\", \"CategoryTheory.Monoidal.transportStruct_tensorHom\", \"CategoryTheory.Equivalence.monoidalOfPostcompInverse\", \"CategoryTheory.Monoidal.transportStruct_tensorObj\", \"CategoryTheory.Monoidal.instIsMonoidalTransportedCounitEquivalenceTransported\", \"CategoryTheory.cartesianClosedOfEquiv\", \"CategoryTheory.instIsMonoidalFunctorCongrLeft\"], \"digest\": \"7489bc4642dce658\"}",
+   "date": "2026-10-26",
+   "verdict": "no complete match: expComparison requires cartesian tensor; ofEquiv constructs a transported closed structure and does not state every requested clause for the two specified adjunctions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-sf-weil-complexes",
+  "date": "2026-10-26",
+  "group": "NB"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-weil-complexes",
+ "blueprint": {
+  "from": {
+   "node": "sk-def-sf-weil-complexes",
+   "place": "Contragredient composite, first arrow: the canonical pullback/internal-Hom isomorphism for an automorphism",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-pur-monoidal-equivalence-hom-comparison",
+  "worker": "stage1",
+  "summary": "Six explicit elementary calculations: the transpose equation, a chain of Hom bijections using full faithfulness and tensorators, identification of that chain with postcomposition by c, an explicit two-sided inverse, and full evaluation calculations for naturality in each variable. No new nodes, no hypothesis added, and no repeat of the rejected attachment.",
+  "blueprint": "All six steps supply the general categorical prerequisite for the first arrow in the contragredient composite of the current sk-def-sf-weil-complexes/_section.md. Step 1 pins its evaluation normalization, Steps 2–4 prove its invertibility, and Steps 5–6 give its bifunctoriality."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NP-e85393cc8",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-e85393cc8 (reviewer sub-agent of L); spot-checked: I read the full item, all 6 steps and both cited statements. def-sfb-strong-monoidal-functor gives an invertible tensorator μ and the naturality F(f⊗g)μ=μ(Ff⊗Fg); that is exactly what the steps use. Blueprint source: latest=main-20261026, sk-def-sf-weil-complexes/_section.md lines 51-62, the first arrow of the contragredient composite, called the 'canonical pullback isomorphism'. The parent sk-def-sf-weil-complexes cites the item in stmt_deps. I checked every step by hand. Step 1: the counit formula gives the evaluation clause. Step 2: full faithfulness is written out with k=η_Y^{-1}G(h)η_X. Step 3: the Hom chain equals postcomposition with c (μ naturality with f=1, g=k), and ε_Z handles any Z. Step 4: there is an explicit two-sided inverse. Step 5: covariance holds (μ naturality with g=[M,v]). Step 6: contravariance holds through the transpose definition of [u,N] and μ naturality with f=u. No braiding is used. Edge cases checked: F=id gives c=1; different chosen adjoints, a non-symmetric tensor, a non-dualizable M and empty categories cause no problem. Strong monoidality is needed only where μ_{M,X} is inverted, and the statement assumes it. I found no added or dropped hypothesis. One commit with the statement and stmt_deps unchanged, no new nodes, proof_deps equal to the union of uses, and no SGA, off-unit theorems or tool_uses. Duplicate search with rg -L on dag/nodes found only geometric instances (lem-pod-derived-automorphism-hom-evaluation, lem-pod-geometric-frobenius-internal-hom-comparison, lem-zl-proetale-coefficient-slice-closed-comparison); none is the general comparison. Mathlib: MonoidalClosed.ofEquiv (Closed/Basic.lean lines 308-345) only transports a closed structure, and expComparison is for cartesian categories only, so 'no complete match' is right and splitting the item is right. No fixes."
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic",
+  "declaration": "CategoryTheory.Functor.Monoidal.commIhom",
+  "declarations": [
+   "CategoryTheory.Functor.Monoidal.commIhom",
+   "CategoryTheory.Functor.Monoidal.ihomObjIso",
+   "CategoryTheory.Functor.LaxMonoidal.ihomComparison",
+   "CategoryTheory.Functor.LaxMonoidal.ihomComparison_app_eq_curry",
+   "CategoryTheory.Functor.LaxMonoidal.ihomComparison_ev",
+   "CategoryTheory.Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app"
+  ],
+  "statement": "noncomputable def commIhom (A : C) : ihom A ⋙ G ≅ G ⋙ ihom (G.obj A)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-26",
+  "existing": true,
+  "note": "Existing upstream package gives all clauses for the two specified closed structures: commIhom is asIso of the canonical ihomComparison, ihomObjIso is its component, ihomComparison_app_eq_curry identifies that component with the required evaluation transpose, ihomComparison_ev is the displayed normalization, and map_pre_app_comp_ihomComparison_app is contravariant naturality. Covariant naturality is the naturality of commIhom.hom. Assumptions are arbitrary monoidal closed categories, G.Monoidal and G.IsEquivalence; no braiding, symmetry or dualizability. Functor.Monoidal is the strong structure encoded equivalently by the dependency match Functor.CoreMonoidal (via CoreMonoidal.toMonoidal). No new Lean module is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de027c6dc",
+  "group": "NE",
+  "result": "pass",
+  "note": "Only the lean record changed: existing:true sheaf-dag binding of CategoryTheory.Functor.Monoidal.commIhom in WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic (published, imported at WeilConjectures.lean:9181). Read the source: ihomComparison is the mateEquiv of μTwoSquare for the two specified ihom adjunctions; ihomComparison_app_eq_curry gives c = curry(μ ≫ G.map ev), the node's transpose; an IsIso instance under [G.Monoidal][G.IsEquivalence] and commIhom := asIso of it give invertibility of c itself; NatTrans naturality gives covariance in N; map_pre_app_comp_ihomComparison_app gives contravariance via pre, which matches Step 6 through id_tensor_pre_app_comp_ev; ihomComparison_ev is the displayed evaluation equation. Free Type*/Category* universes; no braiding, zero or dualizability assumptions; G.Monoidal ≡ CoreMonoidal dependency. lean.statement verbatim equal to l.179. No duplicate owner in dag/nodes. Statement and stmt_deps unchanged, no new nodes. Advisory: the report cites commIhom at lines 190-191, but it is at 179-180. No compile: no file changed."
+ }
+}

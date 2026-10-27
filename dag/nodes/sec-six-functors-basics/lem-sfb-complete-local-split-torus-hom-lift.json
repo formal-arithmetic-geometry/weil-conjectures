@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-complete-local-split-torus-hom-lift",
+ "kind": "statement",
+ "title": "Lifting split-torus homomorphisms over a complete Noetherian local ring",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], let $k=R/\\mathfrak m$, and suppose that the canonical map $R\\to\\varprojlim_{n\\geq1}R/\\mathfrak m^n$ is an isomorphism [def-weil-pbc-adic-completion]. Put $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. An $S$-group scheme means an $S$-scheme with multiplication, identity and inverse satisfying the group diagrams of [def-sc-group-scheme] over $S$. Let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. For $r\\geq0$ set $T=\\operatorname{Spec}R[x_1,y_1,\\ldots,x_r,y_r]/(x_iy_i-1)_{1\\leq i\\leq r}$, with $\\Delta(x_i)=x_i\\otimes x_i$, $\\Delta(y_i)=y_i\\otimes y_i$, counit $x_i,y_i\\mapsto1$, and inverse interchanging $x_i$ and $y_i$; for $r=0$ this is the trivial $S$-group. Every homomorphism of $k$-group schemes $f_0:T_k\\to G_k$ lifts to a homomorphism of $S$-group schemes $f:T\\to G$ whose special fibre is exactly $f_0$. If $f_0$ is a closed immersion [def-weil-closed-immersion], then every such lift $f$ is a closed immersion. Neither algebraic closedness of $k$ nor reductivity or connectedness of $G$ is assumed.",
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "WANTED locally; Brian Conrad, Reductive group schemes (2014), Corollary B.3.5, printed pp.292-293, restricted to H = G_m^r. Its direct proof uses Theorem B.3.2, Corollary B.2.6 and Remark B.2.4. Read online at https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf, PDF pages 292-293."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-sfb-relative-split-torus"
+ ],
+ "proof": [
+  {
+   "text": "For any $R$-algebra $A$, the maps sending $x_i$ to $e_{v_i}$ and $y_i$ to $e_{-v_i}$ identify the displayed torus algebra after scalar extension with $A[\\mathbf Z^r]$, where $v_i$ is the $i$th standard basis vector. The inverse sends $e_{(n_i)}$ to $\\prod_i x_i^{\\max(n_i,0)}y_i^{\\max(-n_i,0)}$. Multiplication and the three Hopf operations agree on these generators. The affine fibre-product formula identifies scalar extension with tensoring; the coefficient maps $R[\\mathbf Z^r]\\otimes_RA\\leftrightarrows A[\\mathbf Z^r]$, $e_v\\otimes a\\leftrightarrow ae_v$, are inverse. Thus $T_A=D_A(\\mathbf Z^r)$ compatibly with all quotient maps. The displayed finite presentation also proves that $T$ is locally of finite presentation. It is formally smooth directly: a unit $a_0$ modulo a square-zero ideal lifts to a unit $a$, since a lift $b$ of its inverse has $ab=1+c$ with $c^2=0$, and $b(1-c)$ is an inverse of $a$. Apply this independently to each of the $r$ units. Thus $T$ is smooth by the smoothness definition. Put $R_n=R/\\mathfrak m^n$ for $n\\geq1$. The kernel $J_n=\\mathfrak m^n/\\mathfrak m^{n+1}$ of $R_{n+1}\\to R_n$ is square-zero since $2n\\geq n+1$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.3.5, printed p.292, successive quotient rings; explicit split-source coordinate identifications."
+   }
+  },
+  {
+   "text": "Set $u_1=f_0$ over $R_1=k$. Suppose $u_n:T_{R_n}\\to G_{R_n}$ has been chosen. Smooth base-change stability makes $G_{R_{n+1}}$ smooth over $R_{n+1}$, and the affine fibre-product formula makes it affine. Apply the square-zero lifting lemma over $A=R_{n+1}$, with ideal $J_n$ and finitely generated group $M=\\mathbf Z^r$. Step 1 identifies the source and reduction with its $D_A(M)$ and $D_{A/J_n}(M)$. It gives $u_{n+1}$ reducing exactly to $u_n$, as a group homomorphism. Recursive choice gives a compatible family $(u_n)_{n\\geq1}$ with first term the prescribed $f_0$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-square-zero-diagonalizable-hom-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.3.5, printed p.292, infinitesimal existence step."
+   }
+  },
+  {
+   "text": "Apply effectivity of formal diagonalizable-source homomorphisms with $A=R$, $M=\\mathbf Z^r$, and this family. The ring is Noetherian, local and complete by hypothesis, the source is split by Step 1, and the target is affine of finite type: $G=\\operatorname{Spec}B$ is locally of finite presentation over $S=\\operatorname{Spec}R$, so by the affine-opens criterion for local finite presentation, applied with $U=G$ and $V=S$, the coordinate map $R\\to B$ is of finite presentation, and in particular $B$ is a finitely generated $R$-algebra. Effectivity produces an $R$-group homomorphism $f:T\\to G$ with reductions $u_n$. At $n=1$ this is exactly $f_0$, proving existence.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-sfb-adic-diagonalizable-hom-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.3.5, printed p.292, algebraization via Theorem B.3.2(1)."
+   }
+  },
+  {
+   "text": "Now let $f$ be any lift and suppose $f_0$ is a closed immersion. Write $G=\\operatorname{Spec}B$, $L=R[\\mathbf Z^r]$, let $f^*:B\\to L$ be its coordinate map and $\\epsilon:B\\to R$ its identity section. The affine fibre-product formula gives $K=T\\times_{G,e}S=\\operatorname{Spec}(L\\otimes_{B,\\epsilon}R)$. This tensor algebra is $L/I$, where $I=(f^*(b)-\\epsilon(b):b\\in B)$: its universal property is precisely equality of these two images of $B$. Hence $K\\to T$ is a closed immersion by the affine quotient criterion. Its points over any $S$-scheme $X$ are the $t\\in T(X)$ with $f(t)=1$; multiplication and inverse preserve this condition, so their restrictions give the subgroup operations. Reducing the quotient presentation to $k$ identifies $K_k$ with $\\ker f_0$. The coordinate map of $f_0$ is surjective by the closed-immersion criterion. Two maps from its target coordinate algebra that agree on its source therefore agree everywhere, so $f_0$ is injective on points over every affine $k$-scheme. In particular the kernel has only its identity element on every such test scheme; equivalently its affine representing algebra is $k$. Thus $K_k=1_k$ as a group scheme.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.3.5, printed pp.292-293, reduction to the scheme-theoretic kernel; elementary affine presentation written out."
+   }
+  },
+  {
+   "text": "Apply the local split-torus closed-subgroup lemma to $K\\hookrightarrow T$. The base ring is Noetherian local and Step 4 verifies its exact scheme-theoretic special-fibre hypothesis; flatness of $K$ is not needed. It gives $K=1_S$. For every $S$-scheme $X$, if $f(t)=f(t\\prime)$, then $t(t\\prime)^{-1}\\in K(X)=\\{1\\}$, so $t=t\\prime$. Thus $f$ is a monomorphism in the precise functor-of-points sense required by the relative torus monomorphism lemma. The latter applies: $T$ is the displayed split torus, $G$ is of finite presentation by hypothesis and is separated over $S$ by the affine-source separatedness lemma. It follows that $f$ is a closed immersion. This argument applied to an arbitrary lift, not just the lift constructed above. All formulas and arguments allow $r=0$.",
+   "uses": [
+    "lem-sfb-local-torus-subgroup-special-trivial",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-relative-torus-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.3.5, printed pp.292-293, kernel criterion; kernel triviality via Exercise 2.4.3(iii), printed p.76, and closedness via the existing torus-monomorphism node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "lem-pc-proper-base-change",
+  "lem-sfb-square-zero-diagonalizable-hom-lift",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-sfb-adic-diagonalizable-hom-effectivity",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "lem-sfb-local-torus-subgroup-special-trivial",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-relative-torus-monomorphism-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad Corollary B.3.5, printed pp.292-293, with the split-source form of Theorem B.3.2(1), the square-zero consequence of Corollary B.2.6 and Remark B.2.4, and the torsion kernel argument of Exercise 2.4.3(iii). Local archive unavailable; elementary coordinate elaborations and assembly supplied by NZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split torus homomorphism into a smooth affine group scheme over a complete noetherian local ring lifts from the residue field",
+   "results": "{\"t\": \"2026-10-24T03:19:49Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus homomorphism into a smooth affine group scheme over a complete noetherian local ring lifts from the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.of_split\", \"IsLocalRing.ResidueField.lift_residue_apply\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Ideal.ResidueField.liftₐ_algebraMap\", \"Ideal.ResidueField.liftₐ\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\"], \"digest\": \"7c513b3d3ff42a17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(torus|tori)\\b|multiplicative.type|diagonalizable",
+   "results": "{\"t\": \"2026-10-24T03:20:41Z\", \"tool\": \"grep\", \"query\": \"\\\\b(torus|tori)\\\\b|multiplicative.type|diagonalizable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary etale maps, local-ring residue maps or ambient scheme closed-immersion factorization; none constructs or lifts a torus group homomorphism. A second semantic phrasing was inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a diagonalizable group to a smooth affine group over the residue field lifts over a complete local base as a group homomorphism",
+   "results": "{\"t\": \"2026-10-24T03:21:16Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a diagonalizable group to a smooth affine group over the residue field lifts over a complete local base as a group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"IsLocalRing.ResidueField.lift_residue_apply\", \"Ideal.ResidueField.liftₐ_algebraMap\", \"IsLocalRing.ResidueField.lift\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.lift\", \"IsLocalRing.ResidueField.lift_comp_residue\"], \"digest\": \"28257c7bebd38d8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift group scheme homomorphisms from a split torus over a complete noetherian local ring preserving a closed immersion",
+   "results": "{\"t\": \"2026-10-24T03:21:16Z\", \"tool\": \"leansearch\", \"query\": \"Lift group scheme homomorphisms from a split torus over a complete noetherian local ring preserving a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\", \"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.IsClosedImmersion.lift.congr_simp\", \"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.liftRingHom\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"Algebra.FormallySmooth.lift\"], \"digest\": \"1a3992c4f30ed7cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_mkₐ_comp_eq_of_isAdicComplete|exists_adicCompletionEvalOneₐ_comp_eq",
+   "results": "{\"t\": \"2026-10-24T03:22:12Z\", \"tool\": \"grep\", \"query\": \"exists_mkₐ_comp_eq_of_isAdicComplete|exists_adicCompletionEvalOneₐ_comp_eq\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\"], \"digest\": \"27b8ecea39bf910b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"exists_mk\"",
+   "results": "{\"t\": \"2026-10-24T03:23:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\", \\\"exists_mk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"f37ced4758d53cbc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(torus|tori)\\b|diagonalizable|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T03:58:11Z\", \"tool\": \"grep\", \"query\": \"\\\\b(torus|tori)\\\\b|diagonalizable|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formal-smoothness or completion lifts are algebra maps and do not supply group-law compatibility or the special-fibre closedness criterion; second phrasing also inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"lift\"",
+   "results": "{\"t\": \"2026-10-24T03:58:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"lift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formal-smoothness or completion lifts are algebra maps and do not supply group-law compatibility or the special-fibre closedness criterion; second phrasing also inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from a split torus to a smooth affine group scheme lift over a complete Noetherian local ring",
+   "results": "{\"t\": \"2026-10-24T03:58:12Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms from a split torus to a smooth affine group scheme lift over a complete Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.of_split\", \"Algebra.FormallySmooth.iff_split_surjection\", \"Algebra.Extension.homInfinitesimal\", \"Algebra.FormallySmooth.mk_lift\"], \"digest\": \"b09f4b245f29181f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formal-smoothness or completion lifts are algebra maps and do not supply group-law compatibility or the special-fibre closedness criterion; second phrasing also inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a split torus group homomorphism over a complete local ring preserving closed immersions",
+   "results": "{\"t\": \"2026-10-24T04:00:04Z\", \"tool\": \"leansearch\", \"query\": \"Lift a split torus group homomorphism over a complete local ring preserving closed immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.liftRingHom\", \"IsAdicComplete.mk_comp_liftRingHom\", \"Algebra.FormallySmooth.lift\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\", \"AlgebraicGeometry.IsClosedImmersion.lift\", \"IsAdicComplete.of_liftRingHom\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac\"], \"digest\": \"ae4bb69415e92ff1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formal-smoothness or completion lifts are algebra maps and do not supply group-law compatibility or the special-fibre closedness criterion; second phrasing also inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifting a residue field torus representation into a smooth affine group scheme over a complete local ring preserves a closed immersion",
+   "results": "{\"t\": \"2026-10-24T04:00:09Z\", \"tool\": \"leanfinder\", \"query\": \"Lifting a residue field torus representation into a smooth affine group scheme over a complete local ring preserves a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.over_def\"], \"digest\": \"5f3c1d61f70ddaa6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary formal-smoothness or completion lifts are algebra maps and do not supply group-law compatibility or the special-fibre closedness criterion; second phrasing also inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-etale-subgroup-lift",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292: etale lifting of the multiplicative type subgroup followed by etale splitting, at a point with algebraically closed residue field; completion step in the proof of Conrad Proposition 3.1.6, using Corollary B.3.5 for the fixed split source.",
+   "via": [
+    "lem-sfb-split-torus-etale-subgroup-lift",
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-local-split-torus-hom-lift",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Separate infinitesimal lifting, formal effectivity and local closed-subgroup triviality as three statement-only inputs. Write the compatible-lift induction, exact algebraization and scheme-theoretic kernel argument; reuse the existing relative torus monomorphism closedness lemma. No field closure, reductivity, connectedness or kernel flatness is assumed. Mathlib and blueprint searches found no exact matches.",
+  "blueprint": "Current literature/blueprint/latest: det-thm-sf-ctf-stability-direct-images proof (3), inherited alteration/moduli/GIT/root-model route and completion step of Conrad Proposition 3.1.6. The inherited blueprint.from.node is null (confirmed by blueprint_refs ancestor), so its full from.place and via chain are retained. The present steps realize precisely the complete-local torus-lifting prerequisite of that chain. Searches of the whole blueprint for torus, multiplicative type, complete local, square-zero, diagonalizable, Hopf and subgroup found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only its smooth base-change clause (2) is used, as a generic scheme-theoretic tool; this unit has no substitute base-change statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-5294a67ce",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-5294a67ce (reviewer sub-agent of L); spot-checked: Read in full: the item's 5 steps and the 3 new statement-only nodes. The item's statement, stmt_deps and blueprint are identical to the live node, which is still unsplit; there is no parallel delivery and no re-split note. The Conrad source PDF is not in literature/, so I checked each new node by proving it myself. (1) square-zero-diagonalizable-hom-lift: true. The morphism lifts by formal smoothness, and the obstruction to a homomorphism lift is Hochschild H^2 with Lie(G)⊗J coefficients, which vanishes for diagonalizable groups over any base (torsion M included). (2) adic-diagonalizable-hom-effectivity: true. For b in B, write φ̂(b)=Σc_m e_m. Comparing coefficients of Δb gives Σ_i x_{i,m} y_{i,m'} = δ_{mm'} c_m. The rows r_m generate a finitely generated submodule of A^N (A Noetherian), so c_m≠0 for only finitely many m and φ̂(B) lies in A[M]. (3) local-torus-subgroup-special-trivial: true without flatness. K[n] is finite over A, so it is trivial by Nakayama; each fibre is diagonalizable with trivial torsion, hence trivial; then Q_q=pQ_q and Nakayama give Q=0. None of the three duplicates an existing node (diagonalizable-nilpotent-triviality, split-local-special-kernel-lifting, relative-torus-monomorphism-closed, torus-hom-generic-closed-rigidity, complete-dvr-cocharacter-lifting) or restates a clause of the item. Steps 1, 2, 4 and 5 are correct: T is shown to be a smooth torus directly, the induction is set up explicitly, the kernel is computed scheme-theoretically, and the hypotheses of the monomorphism-closed lemma are checked (separatedness via the affine-source Mathlib leaf). The tool use of lem-pc-proper-base-change(2) is accepted. Batch-5 flag: lem-trf-fppf-covering-base-change is a generic Mathlib site leaf (fppf coverings are stable under base change), not part of the trace formula or Poincaré duality proofs, so the citation is accepted. The only 'sga' string is the Conrad URL luminysga3smf, which is not an SGA citation. FIX (C1): step 3 inferred that B is finitely generated from 'affine of finite presentation' without a citation. It now cites lem-weil-pbc-lfp-affine-opens-finite-presentation (Stacks 01TQ (1)⇒(2), with U=G, V=S), added to uses and proof_deps with one sentence. No other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompleteLocalSplitTorusHomLift",
+  "declaration": "AlgebraicGeometry.completeLocal_splitTorus_hom_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompleteLocalSplitTorusHomLift.lean",
+  "statement": "theorem completeLocal_splitTorus_hom_lift (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (G : Grp (Over (Spec (.of R)))) [Smooth G.X.hom] [IsAffineHom G.X.hom] [LocallyOfFinitePresentation G.X.hom] (r : ℕ) (f₀ : (Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).mapGrp.obj (relativeSplitTorus (Spec (.of R)) r) ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).mapGrp.obj G) : (∃ f : relativeSplitTorus (Spec (.of R)) r ⟶ G, (Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).mapGrp.map f = f₀) ∧ (IsClosedImmersion f₀.hom.hom.left → ∀ f : relativeSplitTorus (Spec (.of R)) r ⟶ G, (Over.pullback (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))).mapGrp.map f = f₀ → IsClosedImmersion f.hom.hom.left)",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77f39aa98",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: R Noetherian local with IsAdicComplete on the maximal ideal; G : Grp (Over Spec R) smooth, affine and locally finitely presented (exactly finite presentation, since affine gives qcqs); the torus is the landed relativeSplitTorus (Laurent Hopf data, r=0 included), cited via the added stmt_dep def-sfb-relative-split-torus; f₀ is a Grp morphism between the base changes to the residue field; the lift's special fibre equals f₀ exactly; the closed-immersion clause covers every lift. No extra hypotheses; single universe. Record differs from the live node only in lean and that stmt_dep; lean.statement is verbatim. Docstrings carry the source, blueprint id and 5 proof steps; only sorry. Report has both required sections. No fixes, no compile."
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "lem-sfb-embedded-integral-restriction-kflat",
+ "kind": "lemma",
+ "title": "Embedded integral scalar restriction preserves K-flatness",
+ "statement": "Fix prime ell, a finite intermediate field E of PadicAlgCl ell, a maximal-ideal generator pi of its integers, and a Noetherian scheme X. For every integer-indexed K-flat complex P of internal modules over the continuous integral coefficients, termwise restriction along the actual scalarMap ell E X of [def-sfb-embedded-integral-model-coefficients] is K-flat. No boundedness or flat-term assumption is made.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "First paragraph, clauses (1) and (2); Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-finite-coefficient-realization",
+  "def-sfb-embedded-integral-model-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Apply embedded scalar flatness on the coefficient-sized site. Identify categorical flatness with independent-universe flatness. Transfer it to the original pro-etale site using the local equational criterion: lift an object and its finite relation by AsSmall.up, push its covering sieve through AsSmall.down, and use fullness, faithfulness and the induced topology to transfer the solutions.",
+   "uses": [
+    "lem-sfb-embedded-integral-scalar-flat",
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section-module comap and regular-module isomorphisms identify this with flatness of the restricted section-ring unit. Section tensor reconstruction identifies native K-flatness with independent-coefficient K-flatness. Apply flat scalar restriction and transport the result back through those isomorphisms.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "lem-sfb-integral-coefficient-square-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-embedded-integral-scalar-flat",
+  "lem-weil-pbc-site-flat-equational-criterion-universes",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-sfb-integral-coefficient-square-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Y2",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "First paragraph, clauses (1) and (2); Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isKFlat_restrictScalars|kFlat.*[Ff]lat|[Ff]lat.*kFlat",
+   "results": "{\"t\": \"2026-10-25T14:41:50Z\", \"tool\": \"grep\", \"query\": \"isKFlat_restrictScalars|kFlat.*[Ff]lat|[Ff]lat.*kFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib statement for the specified embedded scalar maps; use the existing project interfaces cited by the proof steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kFlat\", \"mapHomologicalComplex\"",
+   "results": "{\"t\": \"2026-10-25T14:41:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"kFlat\\\", \\\"mapHomologicalComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib statement for the specified embedded scalar maps; use the existing project interfaces cited by the proof steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a flat morphism of sheaves of rings preserves K-flat cochain complexes",
+   "results": "{\"t\": \"2026-10-25T14:41:51Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars along a flat morphism of sheaves of rings preserves K-flat cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Module.Flat.of_shrink\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"digest\": \"a403d2c422b32993\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib statement for the specified embedded scalar maps; use the existing project interfaces cited by the proof steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EmbeddedFirstReductionComparison",
+  "date": "2026-10-25",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "Proof paragraph (1), identification of the first constant and continuous reductions.",
+   "via": [
+    "lem-sfb-embedded-first-reduction-comparison",
+    "lem-sfb-embedded-integral-residue-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EmbeddedIntegralRestrictionKFlat",
+  "file": "lean/Sheaf/Paper/EmbeddedIntegralRestrictionKFlat.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.embeddedIntegralRestrictionKFlat",
+  "statement": "theorem embeddedIntegralRestrictionKFlat\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (π : PadicAlgCl.integers ℓ E.1)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))\n    (X : Scheme.{u}) [IsNoetherian X]\n    (P : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (integralCoefficientObject X ℓ E)) ℤ)\n    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P) :\n    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat\n      (((Mod.comap (scalarMap ℓ E X)).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T203744-L-2851161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T203744-L-2851161",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

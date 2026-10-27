@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-normal-stein-constant-field",
+ "kind": "statement",
+ "title": "Normal Stein factor and its algebraic constant field",
+ "statement": "Let $k$ be a field and let $f:T\\to B$ be a proper dominant morphism of integral schemes of finite type over $k$. Suppose $T$ is normal, meaning that all its local rings are integrally closed domains. Put $E=k(T)$ and $F=k(B)$ with the inclusion induced by $f$. There is a factorization $T\\xrightarrow{g}B_0\\xrightarrow{q}B$ in which $q$ is finite and dominant, $B_0$ is normal integral of finite type over $k$, and $g$ is proper with geometrically connected fibres. It has the specified construction $B_0=\\underline{\\operatorname{Spec}}_B(f_*\\mathcal O_T)$: for an affine open $V\\subseteq B$, $q^{-1}V=\\operatorname{Spec}\\Gamma(f^{-1}V,\\mathcal O_T)$, and $g$ on $f^{-1}V$ is the morphism induced by evaluation of these sections. Inside $E$ its function field is\n$$k(B_0)=\\{a\\in E:a\\text{ is algebraic over }F\\}.$$\nIn particular this field is finite over $F$ and is algebraically closed in $E$. Schemes, integrality, properness, finite type and finite morphisms use [def-pc-scheme], [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism] and [def-weil-finite-integral-morphism]. Function fields, affine spectra, geometric connectedness and relative algebraic closure use [def-sc-function-field], [def-weil-affine-spectrum], [def-pc-geometrically-irreducible] and [def-weil-relative-algebraic-closure].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 03H0 (theorem-stein-factorization-Noetherian), properties (1)--(5), with normal source; the normality and function-field identification are the normal Stein factor argument in de Jong, Families of curves and alterations, Lemma 5.2 proof, printed p.613 (publisher PDF read online; local PDF WANTED)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-sc-function-field",
+  "def-weil-affine-spectrum",
+  "def-pc-geometrically-irreducible",
+  "def-weil-relative-algebraic-closure",
+  "def-sfb-dominant-function-field-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-over-noetherian] to the two structure maps to $\\operatorname{Spec}k$: a field is Noetherian since its only ideals are $(0)$ and $(1)$. Thus $T$ and $B$ are Noetherian. All hypotheses of [lem-sfb-noetherian-normal-stein-model] hold; it supplies the normal integral $B_0$, finite dominant $q$, dominant proper $g$ with geometrically connected fibres, and exactly the relative-spectrum charts and evaluation maps required here.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-normal-stein-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03H0 (theorem-stein-factorization-Noetherian); morphisms.tex Tag 035L (lemma-normal-normalization)"
+   }
+  },
+  {
+   "text": "Choose a finite affine cover $V_i=\\operatorname{Spec}A_i$ of $B$ with each $A_i$ a finitely generated $k$-algebra, using [def-weil-finite-type-morphism]. The charts of step 1 give $q^{-1}V_i=\\operatorname{Spec}R_i$, with $R_i$ finite over $A_i$. A finite list of $A_i$-module generators of $R_i$, together with $k$-algebra generators of $A_i$, generates $R_i$ as a $k$-algebra. These finitely many affine charts cover $B_0$, proving that $B_0$ is of finite type over $k$.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 03H0; finite-module generators give the elementary finite-type consequence"
+   }
+  },
+  {
+   "text": "Fix a nonempty affine $V=\\operatorname{Spec}A\\subseteq B$ and put $U=f^{-1}V$, $R=\\Gamma(U,\\mathcal O_T)$. Dominance makes $U$ nonempty and $U\\to V$ dominant; its local rings are those of $T$, so $U$ is normal integral. Step 1 gives $R$ finite over $A$. Apply [lem-sfb-normal-sections-algebraic-constants] to $U\\to\\operatorname{Spec}A$. By [lem-sc-integral-function-field-affine-fraction], $F=\\operatorname{Frac}A$ and $k(B_0)=\\operatorname{Frac}R$. Also $k(U)=E$, since restriction to a nonempty open preserves the generic point and its local ring. The evaluation map in step 1 identifies the embedding of $k(B_0)$ into $E$ with the fraction-field embedding of $R\\subseteq E$. Thus the cited constant-field theorem gives the required equality, finiteness over $F$, and algebraic closedness in $E$.",
+   "uses": [
+    "lem-sfb-normal-sections-algebraic-constants",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0358 (lemma-normal-integral-sections), relative algebraic constant-field consequence; fields.tex Tag 09GI (lemma-algebraic-elements)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-noetherian-normal-stein-model",
+  "lem-sfb-normal-sections-algebraic-constants",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 03H0 normal Stein construction, assembled with the separate relative normal-section constant-field argument based on properties.tex Tag 0358."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ss]tein|normal.*[Pp]ushforward|[Pp]ushforward.*normal",
+   "results": "{\"t\": \"2026-10-22T03:10:10Z\", \"tool\": \"grep\", \"query\": \"[Ss]tein|normal.*[Pp]ushforward|[Pp]ushforward.*normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/TsumDivisorsAntidiagonal.lean\", \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"Mathlib/NumberTheory/LegendreSymbol/GaussEisensteinLemmas.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\"], \"digest\": \"da9edcf118e5f5b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal Stein factorization generic function field algebraic closure",
+   "results": "{\"t\": \"2026-10-22T03:10:10Z\", \"tool\": \"leansearch\", \"query\": \"Normal Stein factorization generic function field algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicClosure\", \"IsAlgClosure.normal\", \"AlgebraicClosure.isAlgebraic\", \"Ring.instFiniteDimensionalFractionRingSubtypeAlgebraicClosureMemIntermediateFieldNormalClosure\", \"AlgebraicClosure.instIsAlgClosureOfIsAlgebraic\", \"isNormalClosure_normalClosure\", \"IntermediateField.AdjoinSimple.normal_algebraicClosure\", \"IntermediateField.instIsAlgClosureAlgebraicClosureSubtypeMemOfIsAlgebraic\"], \"digest\": \"c30ead8d6a2cf449\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stein\"",
+   "results": "{\"t\": \"2026-10-22T03:10:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"stein\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization of a proper dominant morphism from a normal integral scheme has a normal finite base whose function field is the relative algebraic closure",
+   "results": "{\"t\": \"2026-10-22T03:10:14Z\", \"tool\": \"leanfinder\", \"query\": \"Stein factorization of a proper dominant morphism from a normal integral scheme has a normal finite base whose function field is the relative algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"f440a2693329a13a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tein|normal.*[Pp]ushforward|[Pp]ushforward.*normal",
+   "results": "{\"t\": \"2026-10-22T03:10:18Z\", \"tool\": \"grep\", \"query\": \"[Ss]tein|normal.*[Pp]ushforward|[Pp]ushforward.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read hits; constituent Galois/separating-basis or normalization/global-section facts do not give this combined statement in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tein|normal.*[Pp]ushforward|[Pp]ushforward.*normal",
+   "results": "{\"t\": \"2026-10-22T03:27:00Z\", \"tool\": \"grep\", \"query\": \"[Ss]tein|normal.*[Pp]ushforward|[Pp]ushforward.*normal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned normalization, global-section finiteness or ordinary algebraic-closure declarations cover constituents only; none gives geometric connectedness and the stated relative algebraic constant-field equality in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal Stein factorization generic function field algebraic closure",
+   "results": "{\"t\": \"2026-10-22T03:27:00Z\", \"tool\": \"leansearch\", \"query\": \"Normal Stein factorization generic function field algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicClosure\", \"IsAlgClosure.normal\", \"AlgebraicClosure.isAlgebraic\", \"Ring.instFiniteDimensionalFractionRingSubtypeAlgebraicClosureMemIntermediateFieldNormalClosure\", \"AlgebraicClosure.instIsAlgClosureOfIsAlgebraic\", \"isNormalClosure_normalClosure\", \"IntermediateField.AdjoinSimple.normal_algebraicClosure\", \"IntermediateField.instIsAlgClosureAlgebraicClosureSubtypeMemOfIsAlgebraic\"], \"digest\": \"c30ead8d6a2cf449\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned normalization, global-section finiteness or ordinary algebraic-closure declarations cover constituents only; none gives geometric connectedness and the stated relative algebraic constant-field equality in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"stein\"",
+   "results": "{\"t\": \"2026-10-22T03:27:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"stein\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned normalization, global-section finiteness or ordinary algebraic-closure declarations cover constituents only; none gives geometric connectedness and the stated relative algebraic constant-field equality in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stein factorization of a proper dominant morphism from a normal integral scheme has a normal finite base whose function field is the relative algebraic closure",
+   "results": "{\"t\": \"2026-10-22T03:27:02Z\", \"tool\": \"leanfinder\", \"query\": \"Stein factorization of a proper dominant morphism from a normal integral scheme has a normal finite base whose function field is the relative algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"f440a2693329a13a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned normalization, global-section finiteness or ordinary algebraic-closure declarations cover constituents only; none gives geometric connectedness and the stated relative algebraic constant-field equality in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite relative spectrum of global regular functions of a proper morphism from a normal variety has as its fraction field all rational functions algebraic over the base function field",
+   "results": "{\"t\": \"2026-10-22T03:27:03Z\", \"tool\": \"leanfinder\", \"query\": \"The finite relative spectrum of global regular functions of a proper morphism from a normal variety has as its fraction field all rational functions algebraic over the base function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\"], \"digest\": \"115c07828c844a1c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned normalization, global-section finiteness or ordinary algebraic-closure declarations cover constituents only; none gives geometric connectedness and the stated relative algebraic constant-field equality in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-curve-pencil",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; de Jong Lemma 5.2 proof, p.613, Stein factorization paragraph: R(Y) is algebraically closed in R(X)",
+   "via": [
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normal-stein-constant-field",
+  "worker": "stage1",
+  "summary": "Repair of the 5801-character proof return: two comparable independent arguments extracted as statement-only unsplit nodes, canonical normal Stein geometry over a Noetherian base and algebraic constants for finite global sections of an arbitrary normal integral scheme. Parent statement unchanged; its three-step assembly has fewer than 3000 characters. All seven original arguments are preserved verbatim in report.md with a precise allocation to the new work items and the elementary assembly.",
+  "blueprint": "Realizes the de Jong Lemma 5.2 Stein-factor paragraph identified in blueprint.from.place, below equivariant curve pencil and direct-images proof (3). The global factorization is steps 1-4; the algebraic-constant-field identification is steps 5-7. blueprint_refs.py ancestor returns None, matching the inherited null from.node; no blueprint provenance is invented. Re-split: old steps 1--4 go to the normal Stein-model node (finite-type-over-k setup remains in assembly); old steps 5--7 go to the normal-section constants node. Ancestor is still null, with inherited via chain retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General Noetherianity tool for the given finite-type structure maps."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "General identification of integral affine charts with their fraction fields, used to connect the two independent new arguments."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-stein-integral-global-sections",
+  "lem-sbc-relative-normalization-normal-stalks",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-sc-function-field-sections-glue",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-6b8ddb813",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-6b8ddb813 (reviewer sub-agent of L); spot-checked: Re-split answering the human's 2026-10-21 note (live repair-notes: 5801-character proof, at least 2 nodes). Live still holds the NL-reviewed 7-step split, so this delivery is not superseded. Only split-owned fields of the item changed (proof, proof_deps, proof_origin, split_report); statement, stmt_deps and the lean record are identical to live. Old steps 1-4 (about 3363 characters) became lem-sfb-noetherian-normal-stein-model: a proper dominant map of integral Noetherian schemes with normal source gives normal integral S = relative Spec of f_*O_T, q finite, g proper with geometrically connected fibres, plus the charts. That matches Stacks 03H0 (more-morphisms l.15205) with 0358/035L; I checked integrality and normality of S, and that g is surjective. Old steps 5-7 (about 2438 characters) became lem-sfb-normal-sections-algebraic-constants: X normal integral and dominant over Spec A, R finite over A, then Frac R is the algebraic closure of F in E, finite over F, algebraically closed in E, and every algebraic a is r/d. This is the 0358 gluing argument adapted, and the source says it is an agent adaptation. I tested it on Spec F(t) and A^1_F (finiteness hypothesis needed) and a purely inseparable extension (no separability needed). I tested node 1 on the identity, the cusp normalization, P^n x B and a purely inseparable cover. The two nodes are comparable in size, statement-only, have the full searches (the unavailable leansearch is marked honestly) and correct provenance; neither restates the item. Parent proof is 1725 characters in 3 steps. Step 1: Noetherianity via the Mathlib leaf finite-type-over-noetherian, then node 1. Step 2: finite type of B_0 over k, elementary, same argument as old step 3. Step 3: apply node 2 to f^{-1}V -> Spec A, which is dominant, nonempty, normal and integral. Affine-fraction (a Mathlib leaf) identifies F, k(B_0) = Frac R and the evaluation embedding into E. No argument was dropped or blurred. Duplicate search (03H0/03H2/Stein/0358/relative algebraic closure) found nothing that states either node; I read lem-trf-stein-smooth-generic-curve, lem-trf-proper-normal-geometric-connectedness and the pbc Stein ingredients. No SGA anywhere. The two declared tool_uses are Mathlib leaves; I accept them. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalSteinConstantField",
+  "declaration": "AlgebraicGeometry.exists_normal_stein_constant_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalSteinConstantField.lean",
+  "statement": "theorem exists_normal_stein_constant_field (k : Type u) [Field k] {T B : Scheme.{u}} [IsIntegral T] [IsIntegral B] (t : T ⟶ Spec (CommRingCat.of k)) (b : B ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType t] [QuasiCompact t] [LocallyOfFiniteType b] [QuasiCompact b] (f : T ⟶ B) [IsProper f] [IsDominant f] (hf : f ≫ b = t) (hT : ∀ x : T, IsDomain (T.presheaf.stalk x) ∧ IsIntegrallyClosed (T.presheaf.stalk x)) : ∃ (B₀ : Scheme.{u}) (q : B₀ ⟶ B) (g : T ⟶ B₀), ∃ (_ : IsIntegral B₀) (_ : IsDominant q) (_ : IsDominant g), g ≫ q = f ∧ IsFinite q ∧ LocallyOfFiniteType (q ≫ b) ∧ QuasiCompact (q ≫ b) ∧ (∀ x : B₀, IsDomain (B₀.presheaf.stalk x) ∧ IsIntegrallyClosed (B₀.presheaf.stalk x)) ∧ IsProper g ∧ GeometricallyConnected g ∧ (∀ V : B.Opens, IsAffineOpen V → IsIso (g.app (q ⁻¹ᵁ V))) ∧ Set.range (@algebraMap B₀.functionField T.functionField _ _ (g.dominantFunctionFieldAlgebra)) = (↑(@algebraicClosure B.functionField T.functionField _ _ (f.dominantFunctionFieldAlgebra)) : Set T.functionField) ∧ (@algebraMap B.functionField B₀.functionField _ _ (q.dominantFunctionFieldAlgebra)).Finite ∧ @algebraicClosure B₀.functionField T.functionField _ _ (g.dominantFunctionFieldAlgebra) = ⊥",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The affine section-map isomorphisms together with finite (hence affine) q specify the relative spectrum and evaluation maps canonically. The canonical function-field algebra is recorded on the new definition node def-sfb-dominant-function-field-map with existing: true; the local-dimension theorem is not a statement dependency. No private copy or theorem conclusion is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88d5a71fa",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (e7a621d2fbd3). The item module is byte-identical to the one reviewed then, whose statement was found correct clause by clause (Stacks 03H0, 035L, 0358). The H2 fault is fixed: stmt_deps now cite a new definition node, def-sfb-dominant-function-field-map, instead of the theorem node lem-trf-local-dimension-formula. The new node has the H12 fields, sources Stacks 01RM/01RW/0A1Z, and stmt_deps that all exist and are definition nodes. Its lean record is existing:true on AlgebraicGeometry.Scheme.Hom.dominantFunctionFieldAlgebra in Sheaf.TraceFormula.LocalDimensionFormula, and the statement matches the live source verbatim (line 47). That definition is the real generic-stalk map (functionFieldMap = stalkSpecializes then stalkMap at the generic point, with the generic-point equality proved from dominance), has no sorry, and no other def node or Mathlib declaration provides it. Against the live node, only lean and the one added stmt_dep changed. The item is not dropped and has no repair note. Proof is sorry only; docstrings carry the source place, blueprint tag and all 7 steps. No file changed, so no compile; the worker reports clean compiles."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

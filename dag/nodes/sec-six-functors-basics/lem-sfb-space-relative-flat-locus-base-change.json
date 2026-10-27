@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-space-relative-flat-locus-base-change",
+ "kind": "statement",
+ "title": "Relative flat locus of an algebraic-space map commutes with base change",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $X,Y,Z$ be algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Let $p:X\\to Z$, $q:Y\\to Z$, and $f:X\\to Y$ satisfy $q\\circ f=p$. Assume $p$ is flat and locally of finite presentation and $q$ is locally of finite type, with the chartwise meanings of [def-sfb-space-morphism-properties]. A point $x\\in|X|$ is a flat point of $f$ if for every compatible etale scheme-chart diagram $U\\to V$ over $X\\to Y$ and every $u\\in U$ mapping to $x$, the scheme map $U\\to V$ is flat at $u$ in the local-ring sense of [def-weil-flat-morphism]. Put $L=\\{x\\in|X|:f\\text{ is flat at }x\\}$. Point spaces and their topology are [def-a1-space-point-topology]. Then $L$ is open in $|X|$. For every algebraic-space morphism $h:Z\\prime\\to Z$, let $f_{Z\\prime}:X\\times_Z Z\\prime\\to Y\\times_Z Z\\prime$ be the base change, and $a:X\\times_Z Z\\prime\\to X$ the projection [lem-trf-space-fibre-products-etale-covers]. The set of flat points of $f_{Z\\prime}$ is exactly $|a|^{-1}(L)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X3 (lemma-base-change-flatness-fibres), full statement; pointwise flatness is the etale-chart definition (spaces-morphisms.tex, definition-flat and lemma-flat-local)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-morphism-properties",
+  "def-weil-flat-morphism",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas $c:W\\to Z$, then an atlas $V\\to Y\\times_ZW$, and finally an atlas $U\\to X\\times_YV$. Fibre products and composition of etale coverings give surjective etale maps $b:V\\to Y$ and $a:U\\to X$ and compatible scheme maps $g:U\\to V$ and $V\\to W$. In particular the composites $U\\to W$ and $V\\to W$ are chart diagrams for $p$ and $q$. By their chart tests, $U\\to W$ is flat and locally of finite presentation and $V\\to W$ is locally of finite type. These are exactly the hypotheses of the scheme relative-flat-locus theorem; no finiteness or flatness of $g$ is being assumed.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X2, proof first reduction sentence; Tag 05WY (lemma-flat-on-fibres-at-point), proof construction of U,V,W; spaces.tex Tag 02X1 (lemma-lift-morphism-presentations)."
+   }
+  },
+  {
+   "text": "Apply the scheme relative-flat-locus theorem to $U\\to V\\to W$: its flat locus $E\\subseteq|U|$ is open. Choice independence of pointwise flatness in the strict-local-flatness lemma says that $g$ is flat at $u$ if and only if $f$ is flat at $a(u)$: one compatible chart detects the same condition as every compatible chart in the item. Thus $E=|a|^{-1}(L)$. The atlas $a$ is surjective on point sets and gives the quotient topology on $|X|$, so openness of $E$ proves openness of $L$ (and also $L=|a|(E)$).",
+   "uses": [
+    "lem-sfb-relative-flat-locus-base-change",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X2, reduction to schemes and the sentence identifying A as the image of the scheme open; schemes Tag 05VK (lemma-base-change-flatness-fibres); spaces-morphisms.tex Tag 04NG (lemma-flat-at-point-etale-local-rings); spaces-properties.tex Tag 03BX (lemma-topology-points)."
+   }
+  },
+  {
+   "text": "Fix any $h:Z^{\\prime}\\to Z$ and write $X^{\\prime}=X\\times_ZZ^{\\prime}$ and $Y^{\\prime}=Y\\times_ZZ^{\\prime}$. Choose a surjective etale scheme atlas $W^{\\prime}\\to W\\times_ZZ^{\\prime}$, and set $U^{\\prime}=U\\times_WW^{\\prime}$ and $V^{\\prime}=V\\times_WW^{\\prime}$. These are schemes. Their maps $a^{\\prime}:U^{\\prime}\\to X^{\\prime}$ and $b^{\\prime}:V^{\\prime}\\to Y^{\\prime}$ are surjective etale: for example $U^{\\prime}\\to U\\times_ZZ^{\\prime}$ is the pullback of $W^{\\prime}\\to W\\times_ZZ^{\\prime}$, while $U\\times_ZZ^{\\prime}\\to X^{\\prime}$ is the pullback of $a$. Etale coverings survive these pullbacks and compose. The same argument applies to $V^{\\prime}$. The chart map $g^{\\prime}:U^{\\prime}\\to V^{\\prime}$ is precisely $g$ base changed along the scheme map $W^{\\prime}\\to W$. If $r:U^{\\prime}\\to U$ and $\\pi:X^{\\prime}\\to X$ are the projections, then $a r=\\pi a^{\\prime}$, as follows by evaluating their fibre-product coordinates.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X2, proof: choose W-prime covering W times_Z Z-prime, then U-prime and V-prime; etale covering stability is spaces-topologies.tex Tag 041F (lemma-etale)."
+   }
+  },
+  {
+   "text": "Let $L^{\\prime}$ be the flat-point set of $f_{Z^{\\prime}}$ and $E^{\\prime}$ that of $g^{\\prime}$. The arbitrary scheme-base-change clause applied to $g$ gives $E^{\\prime}=|r|^{-1}(E)$. The same choice-independent chart test as in step 2 gives $E^{\\prime}=|a^{\\prime}|^{-1}(L^{\\prime})$. Substituting $E=|a|^{-1}(L)$ and $a r=\\pi a^{\\prime}$ yields $|a^{\\prime}|^{-1}(L^{\\prime})=|a^{\\prime}|^{-1}(|\\pi|^{-1}(L))$. Surjectivity of $|a^{\\prime}|$ now proves $L^{\\prime}=|\\pi|^{-1}(L)$: for each $x^{\\prime}$ choose $u^{\\prime}$ above it and read membership through this equality. This covers arbitrary algebraic-space parameter changes, including empty charts and fibres.",
+   "uses": [
+    "lem-sfb-relative-flat-locus-base-change",
+    "lem-sfb-space-strict-local-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X2, proof final three sentences, specializing the module to the structure sheaf as in Tag 05X3; scheme theorem Tag 05VK; chart independence Tag 04NG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-relative-flat-locus-base-change",
+  "lem-sfb-space-strict-local-flatness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X3 (lemma-base-change-flatness-fibres), via Tag 05X2 (lemma-base-change-criterion-flatness-fibre), proof: reduction to compatible surjective etale scheme charts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|AlgebraicSpace|base.change.flatness.fibres",
+   "results": "{\"t\": \"2026-10-23T13:58:24Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|AlgebraicSpace|base.change.flatness.fibres\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness permanence and smooth-locus results do not state openness and equality of the relative flat locus for algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative flat locus of morphisms between algebraic spaces is open and is preserved by arbitrary base change on the base",
+   "results": "{\"t\": \"2026-10-23T13:58:25Z\", \"tool\": \"leansearch\", \"query\": \"Relative flat locus of morphisms between algebraic spaces is open and is preserved by arbitrary base change on the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"0d4ea37323589187\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness permanence and smooth-locus results do not state openness and equality of the relative flat locus for algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"flatLocus\"",
+   "results": "{\"t\": \"2026-10-23T13:58:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"flatLocus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness permanence and smooth-locus results do not state openness and equality of the relative flat locus for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For morphisms X to Y over Z of algebraic spaces with X flat and locally finitely presented over Z and Y locally finite type over Z the flat locus in X is open and commutes with arbitrary changes of Z",
+   "results": "{\"t\": \"2026-10-23T13:58:25Z\", \"tool\": \"leanfinder\", \"query\": \"For morphisms X to Y over Z of algebraic spaces with X flat and locally finitely presented over Z and Y locally finite type over Z the flat locus in X is open and commutes with arbitrary changes of Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instMorphismRestrict\"], \"digest\": \"5447fbfe47a60d4c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness permanence and smooth-locus results do not state openness and equality of the relative flat locus for algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If X is flat and of finite presentation over a base Z and Y is locally finite type over Z then points where X to Y is flat are an open set pulled back exactly along all parameter changes",
+   "results": "{\"t\": \"2026-10-23T13:58:27Z\", \"tool\": \"leanfinder\", \"query\": \"If X is flat and of finite presentation over a base Z and Y is locally finite type over Z then points where X to Y is flat are an open set pulled back exactly along all parameter changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\"], \"digest\": \"12931094e8f541db\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned scheme flatness permanence and smooth-locus results do not state openness and equality of the relative flat locus for algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T15:03:54Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme flatness permanence, universally open flat maps, or a smooth locus, not the relative flat locus of an algebraic-space morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For algebraic spaces X and Y over Z with X flat locally of finite presentation and Y locally of finite type the flat locus of X to Y is open and commutes with parameter base change",
+   "results": "{\"t\": \"2026-10-23T15:03:55Z\", \"tool\": \"leansearch\", \"query\": \"For algebraic spaces X and Y over Z with X flat locally of finite presentation and Y locally of finite type the flat locus of X to Y is open and commutes with parameter base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"e11491dcdac6a94e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme flatness permanence, universally open flat maps, or a smooth locus, not the relative flat locus of an algebraic-space morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"flatLocus\"",
+   "results": "{\"t\": \"2026-10-23T15:03:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"flatLocus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme flatness permanence, universally open flat maps, or a smooth locus, not the relative flat locus of an algebraic-space morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a morphism of algebraic spaces is flat is open and commutes with arbitrary base change when the source is flat and locally finitely presented over the parameter base",
+   "results": "{\"t\": \"2026-10-23T15:03:55Z\", \"tool\": \"leanfinder\", \"query\": \"The locus where a morphism of algebraic spaces is flat is open and commutes with arbitrary base change when the source is flat and locally finitely presented over the parameter base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.instMorphismRestrict\"], \"digest\": \"1727d492b334f987\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme flatness permanence, universally open flat maps, or a smooth locus, not the relative flat locus of an algebraic-space morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given flat finitely presented families of algebraic spaces over a base the subset of source points where a map between the families is flat pulls back exactly under all parameter changes",
+   "results": "{\"t\": \"2026-10-23T15:04:27Z\", \"tool\": \"leanfinder\", \"query\": \"Given flat finitely presented families of algebraic spaces over a base the subset of source points where a map between the families is flat pulls back exactly under all parameter changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.instDescScheme\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\"], \"digest\": \"050b0e9a4144c273\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme flatness permanence, universally open flat maps, or a smooth locus, not the relative flat locus of an algebraic-space morphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-universal-surjective-flat-open",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor. In quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism to the first projection. Supporting input: Tag 05XC (spaces-more-morphisms-lemma-where-surjective-flat), all five hypotheses and arbitrary algebraic-space parameter changes. Flat-locus input in the first sentence of Tag 05XC via Tag 05XB: Tag 05X3, openness and arbitrary-base-change equality of the source flat locus.",
+   "via": [
+    "lem-sfb-space-universal-surjective-flat-open",
+    "lem-sfb-space-universal-isomorphism-open",
+    "lem-sfb-space-graphs-open-in-hilbert",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-relative-flat-locus-base-change",
+  "worker": "stage1",
+  "summary": "Reduced to the existing scheme relative-flat-locus theorem using compatible surjective etale charts. Used existing pointwise chart independence and atlas topology; verified arbitrary algebraic-space base change with an auxiliary scheme atlas of W times_Z Z-prime. No new nodes and no statement change.",
+  "blueprint": "The inherited ancestry has blueprint.from.node null (the ancestor command also returns None); its place names det-thm-sf-ctf-stability-direct-images, proof (3), and the existing alteration/moduli prerequisite chain. This split realizes its final Tag 05X3 flat-locus input, following Tag 05X2 reduction to schemes. The current latest blueprint proof (3) remains the direct-image/compactification route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic algebraic-space atlas and quotient-topology tool: supplies surjective scheme atlases and detects openness on one such atlas; this unit has no substitute."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and covering-base-change tool for the chart construction; it supplies no relative-flat-locus assertion."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic composition and base-change of etale coverings, needed to keep the auxiliary maps scheme atlases; the scheme relative-flat-locus theorem does not provide it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-54efc9059",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-54efc9059 (reviewer sub-agent of L); spot-checked: I read the item's statement and all 4 proof steps in full. There are no new nodes and the statement is unchanged; the base item had no proof, so this is not a re-split. The statement matches Stacks 05X3 (spaces-more-morphisms.tex l.5917) exactly and is not weakened. The proof follows 05X2 (l.5872): the 05WY(3) chart triple U→V→W, then for Z'→Z a scheme atlas W'→W×_ZZ' with U'=U×_WW' and V'=V×_WW'. I matched every cited tag against tags/tags, and no SGA source is used. Step 1: a and b are etale coverings because an atlas composed with a base-changed covering is again one (fibre-products and chartwise-permanence nodes). The chart test of def-sfb-space-morphism-properties gives U→W flat and lfp and V→W lft, which are the hypotheses of the scheme theorem lem-sfb-relative-flat-locus-base-change (05VK). Step 2: the 'independent of choices' clause of lem-sfb-space-strict-local-flatness makes the exists and for-all chart tests the same, so E=|a|^{-1}(L) and L=|a|(E). L is open because |a| is open (last clause of lem-a1-space-affine-etale-cover). Step 3: I checked U'≅(U×_ZZ')×_{W×_ZZ'}W', so a' is a composite of two base-changed coverings, and g'=g×_WW' is compatible with f_{Z'}. Step 4: the base-change clause with T=W' gives E'=r^{-1}(E), the chart test gives E'=|a'|^{-1}(L'), and surjectivity of |a'| gives L'=|π|^{-1}(L). Edge cases checked: empty X, empty Z' or fibres, f=id, and a non-schematic W×_ZZ'. I accept the three generic tool_uses (atlas, fibre products, etale permanence). Batch-5 check, each citation is outside both assumptions: lem-a1-space-affine-etale-cover only reaches the definition def-trf-algebraic-space; lem-trf-space-chartwise-etale-permanence is generic Stacks 03FT-03FV etale permanence and not a step of the trace-formula proof; lem-sfb-relative-flat-locus-base-change reaches lem-trf-localization-finite-presentation-ring-map, which is commutative algebra; lem-sfb-space-strict-local-flatness only reaches the definition def-trf-algebraic-space. No duplicate algebraic-space flat-locus node exists in the DAG. Advisory only: the statement calls the projection 'a', while the proof uses 'a' for the chart and 'π' for the projection; step 3 defines π explicitly, so the argument is not ambiguous."
+ }
+}

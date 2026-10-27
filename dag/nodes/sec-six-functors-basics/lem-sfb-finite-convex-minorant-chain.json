@@ -1,0 +1,189 @@
+{
+ "id": "lem-sfb-finite-convex-minorant-chain",
+ "kind": "statement",
+ "title": "A finite decreasing sequence admits a convex minorant with contact vertices",
+ "statement": "Work over the real field $\\mathbf R$ [def-weil-field]. Let $n\\geq1$ be an integer and let $w_0\\geq w_1\\geq\\cdots\\geq w_n$ be real numbers. There exist an integer $h\\geq1$ and indices $0=a_0<a_1<\\cdots<a_h=n$ with the following properties. For each integer $0\\leq i\\leq n$, define $v_i$ by affine interpolation between the successive selected vertices: if $a_j\\leq i\\leq a_{j+1}$, put\n$$v_i=\\frac{(a_{j+1}-i)w_{a_j}+(i-a_j)w_{a_{j+1}}}{a_{j+1}-a_j}.$$\nThe two formulas at a shared endpoint agree. Then $v_{a_j}=w_{a_j}$ for every $j$, $v_i\\leq w_i$ for every $i$, and\n$$v_{i+1}-v_i\\leq v_{i+2}-v_{i+1}\\qquad(0\\leq i\\leq n-2).$$\nFor $n=1$ the last condition has no instances. These displayed inequalities are the meaning of a convex minorant here.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 2.4, Lemma 6 and Figure 2, printed pp.11--12; finite lower-envelope construction made explicit by the worker. Local PDF WANTED; source read online at https://arxiv.org/pdf/0810.2340.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "For integers $0\\leq p<q\\leq n$ put $s(p,q)=(w_q-w_p)/(q-p)$. For fixed $p<n$, select $b(p)\\in\\{p+1,\\ldots,n\\}$ minimizing $s(p,q)$. This selection is elementary: start with $q=p+1$, scan the remaining indices, and replace the current choice whenever a strictly smaller value is encountered. Induction on the number scanned says that the retained value is no greater than every scanned value. Thus $s(p,b(p))\\leq s(p,q)$ for every $p<q\\leq n$; ties may be retained arbitrarily.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 2.4, proof of Lemma 6, printed p.11 and Figure 2: explicit finite lower-envelope construction by Q52; source read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "Start with $a_0=0$ and, whenever $a_j<n$, put $a_{j+1}=b(a_j)$. Each step increases the integer index by at least one and keeps it at most $n$. After $j$ steps $a_j\\geq j$ by induction. Consequently a first stopping index $h$ exists with $a_h=n$ and $1\\leq h\\leq n$: otherwise the rule would give $a_n\\geq n$ and then a further index greater than $n$. This gives $0=a_0<\\cdots<a_h=n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 2.4, proof of Lemma 6, printed p.11 and Figure 2: explicit finite lower-envelope construction by Q52; source read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "For each consecutive pair $p=a_j<q=a_{j+1}$ and integer $p\\leq i\\leq q$, define $v_i=w_p+(i-p)s(p,q)$. Expanding this expression gives precisely the affine formula in the statement. At $i=p,q$ it gives $w_p,w_q$, so both formulas at a shared vertex agree. For $p<i\\leq q$, the minimizing property gives $s(p,q)\\leq s(p,i)$; multiplying by $i-p>0$ and adding $w_p$ gives $v_i\\leq w_i$. At $i=p$ there is equality. These intervals cover all integer indices from $0$ to $n$, so $v$ is defined everywhere and all required contact equalities and minorant inequalities hold.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 2.4, proof of Lemma 6, printed p.11 and Figure 2: explicit finite lower-envelope construction by Q52; source read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "For three successive selected vertices $p<q<r$, minimality at $p$ gives $s(p,q)\\leq s(p,r)$. The direct identity\n$$s(p,r)=\\frac{(q-p)s(p,q)+(r-q)s(q,r)}{r-p}$$\nthen gives $(r-p)s(p,q)\\leq(q-p)s(p,q)+(r-q)s(q,r)$. Subtracting the first term on the right and dividing by $r-q>0$ yields $s(p,q)\\leq s(q,r)$. Hence the slopes of successive selected segments are nondecreasing.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 2.4, proof of Lemma 6, printed p.11 and Figure 2: explicit finite lower-envelope construction by Q52; source read online, local PDF WANTED."
+   }
+  },
+  {
+   "text": "For each $0\\leq i<n$, choose the unique $j$ with $a_j\\leq i<a_{j+1}$. The two integers $i,i+1$ belong to that segment including its endpoints, so subtraction of its formula gives $v_{i+1}-v_i=s(a_j,a_{j+1})$. As $i$ increases, this segment index never decreases. Step 4 therefore implies $v_{i+1}-v_i\\leq v_{i+2}-v_{i+1}$ for $0\\leq i\\leq n-2$. If $n=1$, the construction selects $0,1$ and this range is empty. No normalization or sign assumption on the weights has been used; in particular the argument applies to the given decreasing sequence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Section 2.4, proof of Lemma 6, printed p.11 and Figure 2: explicit finite lower-envelope construction by Q52; source read online, local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 2.4, proof of Lemma 6, printed p.11 and Figure 2: explicit finite lower-envelope construction by Q52; source read online, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "ConvexOn, Fin",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern convex functions, their secant inequalities or affine minorants of an already convex function. None constructs a contact-vertex subsequence below arbitrary finite data; this is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "lower.{0,30}convex|convex.{0,30}(envelope|polygon|chain)",
+   "results": "[grep] OK 10 hit(s); returned names/files (logged first eight): Mathlib/Topology/Sion.lean, Mathlib/Geometry/Euclidean/Inversion/Basic.lean, Mathlib/Combinatorics/Enumerative/Catalan/Basic.lean, Mathlib/Analysis/Convex/Basic.lean, Mathlib/Analysis/Convex/Basic.lean, Mathlib/Analysis/Convex/Approximation.lean, Mathlib/Analysis/Convex/Approximation.lean, Mathlib/Analysis/Convex/Approximation.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern convex functions, their secant inequalities or affine minorants of an already convex function. None constructs a contact-vertex subsequence below arbitrary finite data; this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite list of planar points with strictly increasing x coordinates there is a convex piecewise linear minorant whose vertices are a subsequence including both endpoints",
+   "results": "[leanfinder] OK 8 hit(s); returned names/files (logged first eight): ConvexOn.openSegment_subset_strict_epigraph, ConvexOn.le_right_of_left_le, ConvexOn.le_left_of_right_le, ConvexOn.lt_left_of_right_lt, ConvexOn.secant_mono_aux1, ConvexOn.lt_right_of_left_lt, quasilinearOn_iff_mem_uIcc, ConvexOn.le_on_segment",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern convex functions, their secant inequalities or affine minorants of an already convex function. None constructs a contact-vertex subsequence below arbitrary finite data; this is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite decreasing sequence has a convex piecewise linear minorant with vertices among its graph points and both endpoints",
+   "results": "[leansearch] OK 8 hit(s); returned names/files (logged first eight): Real.tendsto_of_bddBelow_antitone, convexOn_iff_slope_mono_adjacent, convexOn_univ_piecewise_Iic_of_antitoneOn_Iic_monotoneOn_Ici, Monotone.quasilinearOn, ConcaveOn.ge_on_segment, convexOn_of_slope_mono_adjacent, Finset.le_sum_schlomilch', ConcaveOn.ge_on_segment'",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern convex functions, their secant inequalities or affine minorants of an already convex function. None constructs a contact-vertex subsequence below arbitrary finite data; this is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A decreasing finite real sequence admits a convex polygonal minorant through a subsequence of its graph points including both endpoints, with nondecreasing successive slopes",
+   "results": "[leanfinder] OK 8 hit(s); returned names/files (logged first eight): eVariationOn.add_point, ConvexOn.secant_mono_aux1, ConvexOn.secant_mono_aux3, ConvexOn.secant_mono_aux2, ConvexOn.le_left_of_right_le'', ConvexOn.slope_mono, StrictConvexOn.secant_strict_mono_aux1, Polynomial.Chebyshev.strictAntiOn_node",
+   "date": "2026-10-22",
+   "verdict": "No match: the hits concern convex functions, their secant inequalities or affine minorants of an already convex function. None constructs a contact-vertex subsequence below arbitrary finite data; this is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "lower.{0,30}convex|convex.{0,30}(envelope|polygon|chain)",
+   "results": "10 hits: Mathlib/Topology/Sion.lean, Mathlib/Geometry/Euclidean/Inversion/Basic.lean, Mathlib/Combinatorics/Enumerative/Catalan/Basic.lean, Mathlib/Analysis/Convex/Approximation.lean, Mathlib/Analysis/Convex/Approximation.lean, Mathlib/Analysis/Convex/Approximation.lean, Mathlib/Analysis/Convex/Approximation.lean, Mathlib/Analysis/Convex/Approximation.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: convexity criteria and convex-hull descriptions do not construct the endpoint-containing contact subsequence for arbitrary finite data"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The lower convex hull of a finite sequence is a polygonal chain with nondecreasing slopes and vertices at original sample points",
+   "results": "8 hits: convex_convexHull, convexOn_iff_slope_mono_adjacent, convexOn_of_slope_mono_adjacent, Set.Finite.convexHull_eq_image, Set.Finite.convexHull_eq, convex_closedConvexHull, Convex.convexHull_eq, ConvexOn.monotoneOn_slope_lt",
+   "date": "2026-10-23",
+   "verdict": "no match: convexity criteria and convex-hull descriptions do not construct the endpoint-containing contact subsequence for arbitrary finite data"
+  },
+  {
+   "tool": "loogle",
+   "query": "ConvexOn, Fin",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: convexity criteria and convex-hull descriptions do not construct the endpoint-containing contact subsequence for arbitrary finite data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite real sequence has a piecewise affine convex minorant interpolating a subsequence of its graph points including both endpoints",
+   "results": "8 hits: convexOn_univ_piecewise_Iic_of_antitoneOn_Iic_monotoneOn_Ici, convexOn_univ_piecewise_Ici_of_monotoneOn_Ici_antitoneOn_Iic, ConvexOn.secant_mono_aux1, ConvexOn.openSegment_subset_strict_epigraph, quasilinearOn_iff_mem_uIcc, ConvexOn.le_right_of_left_le, ConvexOn.le_max_of_mem_Icc, ConvexOn.le_left_of_right_le",
+   "date": "2026-10-23",
+   "verdict": "no match: convexity criteria and convex-hull descriptions do not construct the endpoint-containing contact subsequence for arbitrary finite data"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extract the lower convex polygonal envelope from finitely many real data points by selecting successive vertices of minimum secant slope",
+   "results": "8 hits: ConvexOn.secant_mono_aux3, ConvexOn.secant_mono_aux1, ConvexOn.secant_mono_aux2, ConvexOn.secant_mono, convexOn_iff_slope_mono_adjacent, ConvexOn.slope_mono_adjacent, ConvexOn.slope_mono, map_le_lineMap_iff_slope_le_slope",
+   "date": "2026-10-23",
+   "verdict": "no match: convexity criteria and convex-hull descriptions do not construct the endpoint-containing contact subsequence for arbitrary finite data"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-codegree-polygon-gap",
+  "date": "2026-10-22",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Section 2.4, Lemma 6 and Figure 2, printed pp.11--12: corrected factor-two polygon estimate and strict interior-codegree version, written by the worker; the printed positive gap at the last endpoint is not used. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Finite lower-envelope extraction in the proof of Lemma 6, before the weighted polygon estimate.",
+   "via": [
+    "lem-sfb-strict-codegree-polygon-gap",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-convex-minorant-chain",
+  "worker": "stage1",
+  "summary": "Q52 supplies the finite lower-envelope argument in five elementary steps: minimum-slope selection by a finite scan, bounded increasing recursion, affine interpolation and minorization, a weighted secant identity, and discrete convexity. No new nodes or statement changes. Existing searches retained and actual Q52 searches appended.",
+  "blueprint": "Realizes the inherited from.place: det-thm-sf-ctf-stability-direct-images paragraph (3), alteration prerequisite via stable curves, supporting Morrison Lemma 6 lower-envelope extraction before the weighted polygon estimate. The ancestor command returns None because the created.item chain terminates in a Lean module name; inherited from.node=null and via are retained. Current latest blueprint paragraph (3) was read."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-a35f7689f",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-a35f7689f (reviewer sub-agent of L); spot-checked: Read in full. One commit touching only the item and the report; the statement is unchanged, zero new nodes, no repair or re-split note for this item. Source: Morrison arXiv:0810.2340, §2.4 Lemma 6, printed pp.11-12, Fig. 2. The local PDF is absent, so I read the arXiv PDF. Its proof uses the 'lower convex envelope E of all the points' without constructing it; the item states that finite envelope, and the agent-written proof constructs it. Step 1: minimum-slope choice by finite scan over the nonempty set {p+1..n}. Step 2: strictly increasing recursion bounded by n, a_j>=j, so it stops with 1<=h<=n. Step 3: expanding w_p+(i-p)s(p,q) gives the statement's affine formula, and endpoint agreement holds; for p<i<=q, s(p,q)<=s(p,i) times i-p gives v_i<=w_i. Step 4: the identity (r-p)s(p,r)=(q-p)s(p,q)+(r-q)s(q,r) holds and r<=n is in p's scan range, so s(p,q)<=s(q,r). Step 5: unit differences equal the segment slope, so they are nondecreasing. All five steps are genuinely elementary and uses/proof_deps are empty. The consumer lem-sfb-strict-codegree-polygon-gap uses exactly contact, minorant, convexity and the affine formula. My own exact-rational test of the greedy construction covered n=1..5, entries -2..2 (non-monotone too) and both tie rules: 39,050 cases, 0 failures. rg -L over the DAG found no duplicate or generalization. Mathlib searches cover three kinds, no match. No SGA, no out-of-route citations. The stmt_dep def-weil-field for ordered R is inherited and harmless. No fixes."
+ }
+}

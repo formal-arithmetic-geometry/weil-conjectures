@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-etale-compact-support-scalar-action",
+ "kind": "statement",
+ "title": "Canonical scalar action on ordinary etale compact support",
+ "statement": "Let $O$ be a commutative ring, $t\\in O$, $f:X\\to Y$ a scheme morphism and $c$ a compactification [def-weil-compactifications-refinements]. For every strict etale compact-support datum $S$ of [def-per-strict-etale-system-interfaces], there exist scalar actions $s_X$ and $s_Y$ in that interface such that $F(s_X(r)_K)=s_Y(r)_{FK}$ for every $r\\in O$ and $K\\in D(\\mathsf S_X)$, where $F=S.\\mathrm{functor}$. The ordinary action at level $n$ is multiplication by the actual constant-ring sheafification image of $r\\bmod t^{n+1}$, and its derived action at $QK$ is $Q$ applied to that termwise ordinary action. This is the given normalized scalar action, rather than an independently assigned action on the compact-support image.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "definition-functor-linear-categories (09MK); derived.tex lemma-K-injective (070I); Zheng, Construction 4.1 and the scalar-linearity argument after Lemma 5.16."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-coefficient-system-image-data",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Construct multiplication by the sheafification image of r at every coefficient level. Naturality of the unit identifies its restriction to each etale object, and naturality under the quotient maps identifies it after coefficient restriction. Semilinearity of the successive transitions and linearity of every component morphism give a natural endomorphism of strict systems. Apply it termwise and use Localization.liftNatTrans to construct its derived action with the required representative equation.",
+   "uses": [
+    "def-per-strict-etale-system-interfaces",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the normalized ordinary geometric inverse image, express multiplication as a generalized-section operation with test sheaf the underlying module, ring operand the constant section composed with the map to the constant singleton, and module operand the identity. The constant singleton is already a sheaf, so every section of its sheafification comes from PUnit. The constant-section normalization and the moduleSMul graph equation therefore identify the transported operation with multiplication by the same r. The natural moduleUnderlying isomorphism and then inverseEvaluation show that inverse image preserves the ordinary action on systems.",
+   "uses": [
+    "def-pur-coefficient-system-image-data",
+    "def-per-strict-etale-system-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any additive F with the given derived factorization, compare the two natural endomorphisms obtained by applying its derived functor to the source scalar action and evaluating the target action on its image. After precomposition with Q, the representative equations, degreewise ordinary preservation, and naturality of the factorization isomorphism identify them. Localization.natTrans_ext gives equality on all derived objects. Apply this to the open and proper inverse-image functors.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-pur-coefficient-system-image-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Preservation of central natural endomorphisms transfers from either member of an adjoint pair to the other: apply the injective Hom adjunction bijection and use naturality of the unit or counit and of the two endomorphisms. Apply this to derived open extension left adjoint to open inverse image, and to proper direct image right adjoint to proper inverse image. Compose the two preservation identities to obtain the displayed compact-support equation.",
+   "uses": [
+    "def-per-strict-etale-system-interfaces"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "lem-weil-pbc-localization-universal-property",
+  "def-pur-coefficient-system-image-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex; literature/stacks-project/categories.tex; Zheng, Construction 4.1",
+  "place": "Tag 09MK; localization universal property (04VG), with fully faithful precomposition on natural transformations; scalar preservation transferred across the recorded adjunctions by unit/counit naturality. Written by A3, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar multiplication natural transformation on derived strict coefficient systems is preserved by compact support direct image and extension by zero",
+   "results": "Eight results about scalar operations on topological modules and compactly supported functions; none gives the strict coefficient-system action.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Adjunction",
+   "results": "One hit: CategoryTheory.Adjunction.extLinearEquiv, for Ext groups of already linear functors; it does not construct the scalar action on strict systems.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarSystem|StrictEtaleScalarAction|etaleCoefficientProper_coproducts|etaleCompactSupport_construction",
+   "results": "Zero hits in the search service. Local rg finds the existing StrictEtaleScalarAction interface, with no general action-preservation theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar multiplication on a derived category of strict coefficient systems preserved by compact support direct image",
+   "results": "Eight hits including Abelian.Ext.smul_hom (Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear), PresheafOfModules.Sheafify.smul, and scalar actions on compactly supported continuous functions; none constructs or preserves the specified strict-system scalar action.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleTowerBrownAdjunction",
+  "date": "2026-10-24",
+  "group": "E3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Steps 2–3; the corresponding construction, scalar or finite-level coproduct step of lem-pur-etale-tower-brown-adjunction.",
+   "via": [
+    "lem-pur-etale-tower-brown-adjunction",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleCompactSupportScalarAction",
+  "file": "lean/Sheaf/Paper/EtaleCompactSupportScalarAction.lean",
+  "declaration": "AlgebraicGeometry.etaleCompactSupport_scalarAction",
+  "statement": "theorem etaleCompactSupport_scalarAction\n    {O : Type (u + 1)} [CommRing O] {t : O}\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}\n    (S : StrictEtaleCompactSupport O t c) :\n    ∃ (scalarX : StrictEtaleScalarAction X O t)\n      (scalarY : StrictEtaleScalarAction Y O t),\n      ∀ r K, S.functor.map ((scalarX.derived r).app K) =\n        (scalarY.derived r).app (S.functor.obj K)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261024T014529-L-2212573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T161738-L-80512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

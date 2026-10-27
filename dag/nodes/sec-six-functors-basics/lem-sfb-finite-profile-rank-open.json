@@ -1,0 +1,207 @@
+{
+ "id": "lem-sfb-finite-profile-rank-open",
+ "kind": "statement",
+ "title": "Finite fibre-rank profiles give a finite upper-rank open and closed rank equations",
+ "statement": "Let $S$ be a Noetherian scheme, meaning quasi-compact and locally Noetherian [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Let $(F_d)_{d\\geq0}$ be coherent $\\mathcal O_S$-modules [pqf-def-coherent]. Fix $m\\geq0$ and integers $r_d\\geq0$ for $d\\geq m$. With residue fields [def-weil-residue-field], put $h_s(d)=\\dim_{\\kappa(s)}(F_{d,s}\\otimes_{\\mathcal O_{S,s}}\\kappa(s))$. Assume there is a finite set $H\\subseteq\\mathbf N^{\\mathbf N}$ containing every $h_s$. For $d\\geq m$ put $W_d=\\{s:h_s(d)\\leq r_d\\}$. For each $h\\in H$ with $h(d)>r_d$ for some $d\\geq m$, choose one such degree $e_h$. Then each $W_d$ is open and the finite intersection $V=\\bigcap_hW_{e_h}$ satisfies $V=\\bigcap_{d\\geq m}W_d$; if there are no such $h$, $V=S$. The open scheme $V$ is Noetherian and every $F_d|_V$ is coherent. For every $d\\geq m$ there is a quasi-coherent ideal $\\mathcal I_d\\subseteq\\mathcal O_V$ defining a closed immersion $C_d\\hookrightarrow V$ [def-weil-closed-immersion], such that for every scheme $T$ and map $t:T\\to V$, $t^*(F_d|_V)$ is locally free of rank $r_d$ if and only if $t$ factors uniquely through $C_d$. Here pullback is ordinary module pullback [def-pc-module-pullback], and locally free of rank $r$ means locally isomorphic to $\\mathcal O_T^{\\oplus r}$. Moreover any $g:T\\to S$ for which every $g^*F_d$ is locally free of rank $r_d$ for $d\\geq m$ factors uniquely through $V$. No Noetherian hypothesis on $T$ or flatness hypothesis on any $F_d$ is imposed.",
+ "source": {
+  "document": "literature/grothendieck-bourbaki-221-hilbert-schemes.pdf",
+  "url": "https://www.numdam.org/article/SB_1960-1961__6__249_0.pdf",
+  "place": "Bourbaki Expose 221, Lemma 3.5 and its use of Lemma 3.6, printed pp.263--264; finite-profile expansion of the stationary upper-rank opens. Also Stacks divisors.tex, Tag 05P8, lemma-locally-free-rank-r-pullback (2),(3). Archival PDF WANTED; primary scan read online."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For each $d\\geq m$, apply [lem-sfb-coherent-universal-rank-locus] to the Noetherian scheme $S$, the coherent module $F_d$, and the nonnegative integer $r_d$. Its bounded-fibre-dimension open is exactly $W_d$ by the definition of $h_s(d)$, so every $W_d$ is open.",
+   "uses": [
+    "lem-sfb-coherent-universal-rank-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05P8, lemma-locally-free-rank-r-pullback (2),(3); finite-profile argument formulated by Q57, following Bourbaki Expose 221 Lemma 3.5, printed pp.263--264 (primary scan read online)."
+   }
+  },
+  {
+   "text": "Let $B=\\{h\\in H:\\exists d\\geq m,\\ h(d)>r_d\\}$. It is finite, so $V=\\bigcap_{h\\in B}W_{e_h}$ is open. Membership in every $W_d$ implies membership in $V$. Conversely, if $s\\in V$ violated a bound at degree $d\\geq m$, then $h_s\\in H$ would belong to $B$. Its chosen witness would give $h_s(e_{h_s})>r_{e_{h_s}}$, contradicting $s\\in W_{e_{h_s}}$. Thus $V=\\bigcap_{d\\geq m}W_d$. When $B$ is empty the empty intersection is $S$, and the same argument says all bounds hold everywhere.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05P8, lemma-locally-free-rank-r-pullback (2),(3); finite-profile argument formulated by Q57, following Bourbaki Expose 221 Lemma 3.5, printed pp.263--264 (primary scan read online)."
+   }
+  },
+  {
+   "text": "Write $j:V\\hookrightarrow S$. Apply [lem-sfb-noetherian-open-closed-finite-presentation] with this open immersion and the identity closed immersion $V\\to V$. It makes $V$ locally Noetherian and $j$ quasi-compact. Choose a finite affine open cover of $S$; the inverse images under $j$ are quasi-compact and cover $V$, so their finite union is quasi-compact. Hence $V$ is Noetherian. Every $F_d|_V$ is coherent directly from [pqf-def-coherent]: finite generators near a point restrict to the intersection with $V$, and a map from a finite free module on an open of $V$ is the identical map on that open of $S$, with the same finite-type kernel.",
+   "uses": [
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian) and 01OZ (lemma-Noetherian-topology); modules.tex Tags 01BV (definition-coherent) and 01B5 (definition-finite-type)."
+   }
+  },
+  {
+   "text": "Fix $d\\geq m$. Restriction to an open does not change the local ring, residue field, or module stalk at any of its points. Thus every fibre dimension of $E_d=F_d|_V$ is at most $r_d$, by Step 2. Apply [lem-sfb-coherent-universal-rank-locus] on the Noetherian scheme $V$ to the coherent module $E_d$. Its bounded-generator open is all of $V$, so its final clause gives a closed immersion $C_d\\hookrightarrow V$ with a quasi-coherent defining ideal $\\mathcal I_d$. Its universal property says, for every scheme $T$ and $t:T\\to V$, that $t^*E_d$ is locally free of rank $r_d$ exactly when $t$ factors uniquely through $C_d$. There is no condition on $T$ in that cited statement.",
+   "uses": [
+    "lem-sfb-coherent-universal-rank-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05P8, lemma-locally-free-rank-r-pullback (2),(3); finite-profile argument formulated by Q57, following Bourbaki Expose 221 Lemma 3.5, printed pp.263--264 (primary scan read online)."
+   }
+  },
+  {
+   "text": "Finally suppose $g:T\\to S$ has all the required locally free pullbacks. For each $d\\geq m$, [lem-sfb-coherent-universal-rank-locus] on $S$ factors $g$ through its rank locus $C_{r_d}(F_d)$, hence through $W_d$. In particular its pointwise image lies in every $W_{e_h}$ and therefore in $V$. The factorization through this open is explicit: keep the continuous map with codomain restricted to $V$ and restrict $g^\\sharp$ to the opens contained in $V$. This is a morphism of locally ringed spaces because its stalk maps are those of $g$; it is unique since the open inclusion is the inclusion on points and its structure sheaf is the restriction [def-weil-open-immersion]. This also covers empty $T$ and the case $V=S$.",
+   "uses": [
+    "lem-sfb-coherent-universal-rank-locus",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05P8, lemma-locally-free-rank-r-pullback (2),(3); finite-profile argument formulated by Q57, following Bourbaki Expose 221 Lemma 3.5, printed pp.263--264 (primary scan read online)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-coherent-universal-rank-locus",
+  "lem-sfb-noetherian-open-closed-finite-presentation",
+  "pqf-def-coherent",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05P8, lemma-locally-free-rank-r-pullback (2),(3); finite-profile argument formulated by Q57, following Bourbaki Expose 221 Lemma 3.5, printed pp.263--264 (primary scan read online)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sequence of coherent sheaves with finitely many whole fibre rank functions has a finite test upper rank open and closed prescribed rank loci",
+   "results": "{\"t\": \"2026-10-22T07:35:19Z\", \"tool\": \"leanfinder\", \"query\": \"A sequence of coherent sheaves with finitely many whole fibre rank functions has a finite test upper rank open and closed prescribed rank loci\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.isLocallyConstant_rankAtStalk\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\"], \"digest\": \"e9fbdffc0e09727b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk and free-locus declarations assume freeness or flatness and do not give a finite-profile upper-rank reduction with universal closed rank loci."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many fibre dimension profiles reduce infinitely many coherent module rank inequalities to finitely many open conditions",
+   "results": "{\"t\": \"2026-10-22T07:35:12Z\", \"tool\": \"leansearch\", \"query\": \"Finitely many fibre dimension profiles reduce infinitely many coherent module rank inequalities to finitely many open conditions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalFrameOn.fintype_of_finiteDimensional\", \"IsLocalFrameOn.fintypeOfFiniteDimensional\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"Module.rank_lt_aleph0_iff\", \"Module.lt_rank_of_lt_finrank\", \"Module.rankAtStalk_pi\", \"Module.finrank_pi_fintype\", \"Module.isLocallyConstant_rankAtStalk\"], \"digest\": \"d67f85d060137177\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk and free-locus declarations assume freeness or flatness and do not give a finite-profile upper-rank reduction with universal closed rank loci."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsCoherent, IsOpen",
+   "results": "{\"t\": \"2026-10-22T07:35:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsCoherent, IsOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsCoherent'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown identifier AlgebraicGeometry.IsCoherent; no absence inference from this query; use the two semantic searches and grep."
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*locus|Fitting|fitting|finite.*profile",
+   "results": "{\"t\": \"2026-10-22T07:35:11Z\", \"tool\": \"grep\", \"query\": \"rank.*locus|Fitting|fitting|finite.*profile\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk and free-locus declarations assume freeness or flatness and do not give a finite-profile upper-rank reduction with universal closed rank loci."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous rank bounds for a family of coherent modules with finite image of the fibre Hilbert functions",
+   "results": "{\"t\": \"2026-10-22T07:35:20Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous rank bounds for a family of coherent modules with finite image of the fibre Hilbert functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.rankAtStalk_pi\", \"Module.finrank_le_finrank_of_rank_le_rank\", \"Module.rankAtStalk_prod\", \"iSupIndep.subtype_ne_bot_le_finrank_aux\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"iSupIndep.subtype_ne_bot_le_finrank\", \"rank_pi\", \"Module.isLocallyConstant_rankAtStalk\"], \"digest\": \"6684f25f1f5b3eda\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk and free-locus declarations assume freeness or flatness and do not give a finite-profile upper-rank reduction with universal closed rank loci."
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fitting|finite.*profile|rank.*locus",
+   "results": "{\"t\": \"2026-10-23T09:32:20Z\", \"tool\": \"grep\", \"query\": \"Fitting|fitting|finite.*profile|rank.*locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: free-locus results concern freeness of the original module or assume flatness; none supplies the simultaneous finite-profile reduction and universal closed fixed-rank loci."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many fibre dimension functions reduce infinitely many coherent sheaf rank bounds to a finite intersection of opens",
+   "results": "{\"t\": \"2026-10-23T09:32:20Z\", \"tool\": \"leansearch\", \"query\": \"Finitely many fibre dimension functions reduce infinitely many coherent sheaf rank bounds to a finite intersection of opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"IsLocalFrameOn.fintype_of_finiteDimensional\", \"IsLocalFrameOn.fintypeOfFiniteDimensional\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"TopologicalSpace.Opens.coe_finset_inf\", \"TopologicalSpace.Opens.instFinite\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_iInf\"], \"digest\": \"def0c5a3d2431676\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: free-locus results concern freeness of the original module or assume flatness; none supplies the simultaneous finite-profile reduction and universal closed fixed-rank loci."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.rankAtStalk, IsOpen",
+   "results": "{\"t\": \"2026-10-23T09:32:21Z\", \"tool\": \"loogle\", \"query\": \"Module.rankAtStalk, IsOpen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: free-locus results concern freeness of the original module or assume flatness; none supplies the simultaneous finite-profile reduction and universal closed fixed-rank loci."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prescribed constant ranks for arbitrary base changes of finitely presented modules are represented by locally closed subschemes",
+   "results": "{\"t\": \"2026-10-23T09:32:22Z\", \"tool\": \"leanfinder\", \"query\": \"Prescribed constant ranks for arbitrary base changes of finitely presented modules are represented by locally closed subschemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.isLocallyConstant_rankAtStalk\", \"Module.isOpen_freeLocus\", \"Algebra.isOpen_smoothLocus\", \"Module.FinitePresentation.exists_notMem_bijective\", \"Module.rankAtStalk_baseChange\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\"], \"digest\": \"c7ba2dc8c48b7ef1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: free-locus results concern freeness of the original module or assume flatness; none supplies the simultaneous finite-profile reduction and universal closed fixed-rank loci."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite set of fibre dimension profiles of coherent modules gives an open simultaneous upper rank bound and closed universal fixed rank loci",
+   "results": "{\"t\": \"2026-10-23T09:32:23Z\", \"tool\": \"leanfinder\", \"query\": \"A finite set of fibre dimension profiles of coherent modules gives an open simultaneous upper rank bound and closed universal fixed rank loci\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.isLocallyConstant_rankAtStalk\", \"Module.isOpen_freeLocus\", \"Module.rankAtStalk_pos_iff_mem_support\", \"Module.rankAtStalk\", \"Module.supportDim\", \"Module.Grassmannian.rankAtStalk_eq\", \"Module.rankAtStalk_pi\"], \"digest\": \"973701f556b0d121\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: free-locus results concern freeness of the original module or assume flatness; none supplies the simultaneous finite-profile reduction and universal closed fixed-rank loci."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-graded-tail-rank-stratum",
+  "date": "2026-10-22",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: A simultaneous graded tail rank condition defines an immersion; returned proof steps 2--3 and the first half of step 5: finite witnesses and individual closed rank loci",
+   "via": [
+    "lem-sfb-graded-tail-rank-stratum",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-profile-rank-open",
+  "worker": "stage1",
+  "summary": "Q57: prove the finite bad-profile witness argument directly, reuse the existing universal coherent rank locus and Noetherian-open Mathlib leaf, and verify the universal-open assertion without flatness or restrictions on test schemes. No statement changes or new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: A simultaneous graded tail rank condition defines an immersion; returned proof steps 2--3 and the first half of step 5: finite witnesses and individual closed rank loci; this split realizes the finite-profile upper-rank reduction and individual closed rank loci through Stacks 05P8.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-15d0c6bb3",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-15d0c6bb3 (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery adds a 5-step proof and keeps the statement and stmt_deps unchanged. There are no new nodes and no re-split note. S1: W_d=W_{r_d}(F_d) is open by the first clause of lem-sfb-coherent-universal-rank-locus, whose hypotheses are the item's. S2: elementary finite bad-profile argument giving V=∩_{d≥m}W_d, including B empty ⇒ V=S. S3: V is locally Noetherian and j is quasi-compact by lem-sfb-noetherian-open-closed-finite-presentation, and the preimages of a finite affine cover make V quasi-compact. F_d|_V is coherent directly from pqf-def-coherent. S4: stalks and fibre dimensions are unchanged on V, so W_{r_d}(E_d)=V and the cited node gives C_d↪V with the universal property for arbitrary T. S5: the cited node on S gives g(T)⊆∩W_d=V, and the factorization through the open subscheme is written out (def-weil-open-immersion). I read Stacks divisors.tex lemma-locally-free-rank-r-pullback (05P8), lines 1384-1422: it holds for every T. Edge cases checked: S or T empty; F=0 with r>0; k[ε]/ε² with F=A/ε, where C_1=Spec k, so the universal property is not reduced to fibre dimensions. Duplicate search found only the parent lem-sfb-graded-tail-rank-stratum, which is not a duplicate. No SGA reference. Batch-5: lem-trf-fitting-ideal-generate-locally (Fitting ideals represent local generation by ≤r sections, Stacks 0C3F/07ZC) is general scheme theory placed in the trace-formula chapter only by location. It is neither given by the trace formula or Poincaré duality nor a step of their proofs, so the citation is acceptable. No fixes."
+ }
+}

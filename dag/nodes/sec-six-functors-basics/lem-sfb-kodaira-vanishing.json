@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-kodaira-vanishing",
+ "kind": "statement",
+ "title": "Kodaira vanishing over algebraically closed characteristic-zero fields",
+ "statement": "Let $F$ be an algebraically closed field of characteristic zero [def-weil-field, def-weil-algebraic-closure], and let $Y$ be a smooth projective geometrically integral $F$-scheme of pure dimension $n\\ge0$ [def-pc-scheme, def-sbc-smooth-morphisms, def-pc-projective-morphism, def-pc-integral-scheme]. Define $\\omega_Y=\\bigwedge^n\\Omega^1_{Y/F}$. The sheaf $\\Omega^1_{Y/F}$ is obtained by gluing the modules of Kähler differentials $\\Omega_{A/F}$ [def-weil-pbc-kahler-differentials] on affine opens $\\operatorname{Spec}A\\subseteq Y$. For a locally free module $E$, $\\bigwedge^n E$ is its alternating exterior power (the quotient of $E^{\\otimes n}$ by the alternating multilinearity relations), with $\\bigwedge^0 E=\\mathcal O_Y$. Let $A$ be an ample invertible $\\mathcal O_Y$-module [def-weil-pbc-ample-invertible-module, def-sc-invertible-module]. Then $$H^i(Y,\\omega_Y\\otimes_{\\mathcal O_Y}A)=0\\qquad(i>0),$$ where $H^i=R^i\\Gamma$ is Zariski module sheaf cohomology [pqf-def-cohomology] and tensor product is [def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 22.51 proof, printed p.480, explicitly invokes Kodaira vanishing. WANTED: Popa, Kodaira dimension of algebraic varieties, section 1.6 opening paragraph and Theorem 1.6.1, printed pp.22--23; online author notes read at https://people.math.harvard.edu/~mpopa/271/Kodaira-posted.pdf (the opening paragraph extends the complex statement to arbitrary algebraically closed characteristic-zero fields)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-invertible-module",
+  "pqf-def-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-sheaf-exterior-power",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "Projectivity gives properness. Apply the proper-field coherence lemma with the invertible module $\\mathcal O_Y$: $Y$ is Noetherian and $\\mathcal O_Y$ is coherent. Smoothness gives finite locally free $\\Omega^1_{Y/F}$. On a trivializing open with basis $e_1,\\ldots,e_r$, the wedges $e_{i_1}\\wedge\\cdots\\wedge e_{i_n}$ for $i_1<\\cdots<i_n$ form a finite basis of $\\omega_Y$ (the single empty wedge for $n=0$). Thus locally $\\omega_Y$ is a finite direct sum of copies of $\\mathcal O_Y$. Finite sums of coherent modules are coherent by the cited closure lemma; coherence is local directly from its definition. Consequently $\\omega_Y$ is coherent. This argument does not assume a rank formula for the differential sheaf.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ (lemma-coherent-Noetherian), 01Y0 (lemma-coherent-abelian-Noetherian); Morphisms Tags 01WC (lemma-locally-projective-proper), 02G1 (lemma-smooth-omega-finite-locally-free)."
+   }
+  },
+  {
+   "text": "The base ring $F$ is Noetherian, since its only ideals are $0$ and $F$. Serre vanishing, with coefficient $\\mathcal F=\\omega_Y$ and ample invertible module $A$, gives $a$ such that $H^i(Y,\\omega_Y\\otimes A^{\\otimes t})=0$ for every $i>0$ and $t\\geq a$. Since $Y$ is proper over $F$ (step 1) and, by the definition of ampleness, every point of $Y$ lies in an affine open $Y_\\sigma$ for some $\\sigma\\in\\Gamma(Y,A^{\\otimes k})$, $k\\geq1$, the affine-loci criterion shows that $A$ is ample in the sense used by the sections lemma (some positive power has a complete linear system giving a closed immersion). Apply the sections lemma with closed subscheme $Z=\\varnothing$: for all sufficiently large $m$, $V_m=\\Gamma(Y,A^{\\otimes m})$ generates $A^{\\otimes m}$ and gives an immersion into $\\mathbf P(V_m)$. Choose such an $m\\geq2$ with $m+1\\geq a$. The module $A^{\\otimes m}$ is invertible, hence coherent by the proper-field coherence lemma. Projective coherent finiteness makes $V_m$ finite-dimensional over $F$. Since $Y$ is nonempty and this space generates a line bundle, $r=\\dim_F V_m\\geq1$.",
+   "uses": [
+    "lem-weil-pbc-coherent-serre-vanishing",
+    "lem-zl-bertini-sections",
+    "lem-pc-ample-affine-loci-criterion",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-pc-projective-coherent-finiteness",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02O1 (lemma-kill-by-twisting); Varieties Tag 0FD5 (lemma-generate-over-complement). Popa, proof of Theorem 1.6.1, printed pp.27--28, simultaneous choice of the power."
+   }
+  },
+  {
+   "text": "Apply Bertini to the generating space $V_m$, the invertible module $A^{\\otimes m}$ and the immersion from step 2. Its conclusion gives a nonempty open $U\\subset\\mathbf A^r_F$ parametrizing sections with smooth zero scheme. Intersect with $\\mathbf A^r_F\\setminus\\{0\\}$; it remains nonempty since $r\\geq1$ and affine space is integral. This open contains a principal open $D(f)$ with $f$ a nonzero polynomial. A nonzero polynomial over the infinite field $F$ is nonzero at some tuple in $F^r$: induct on $r$, first choosing values where a nonzero coefficient does not vanish, and then avoiding the finitely many roots in the last variable. Such a tuple yields $0\\ne s\\in\\Gamma(Y,A^{\\otimes m})$ and a smooth zero scheme $D=Z(s)$. Empty $D$ is permitted, in particular when $n=0$.",
+   "uses": [
+    "lem-zl-bertini-smooth-member"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6 (lemma-bertini), with the elementary rational-coefficient choice written out; Popa, proof of Theorem 1.6.1, printed pp.27--28."
+   }
+  },
+  {
+   "text": "Apply the smooth-divisor injectivity theorem with $L=A$, the integer $m\\geq2$ and the section $s$ of step 3. All hypotheses hold over the given algebraically closed characteristic-zero field; no embedding of $F$ in $\\mathbf C$ is assumed. It gives an injection $H^i(Y,\\omega_Y\\otimes A)\\longrightarrow H^i(Y,\\omega_Y\\otimes A^{\\otimes(m+1)})$ for every $i\\geq0$.",
+   "uses": [
+    "lem-sfb-kollar-smooth-divisor-injectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "WANTED locally; online Theorem 1.6.6, printed pp.26--27, and characteristic-zero scope in section 1.6 opening paragraph, p.22."
+   }
+  },
+  {
+   "text": "For $i>0$ the target of the injection in step 4 is zero by step 2 because $m+1\\geq a$. Every element of its source has the same image as zero, so injectivity forces it to be zero. Hence $H^i(Y,\\omega_Y\\otimes A)=0$ for every $i>0$, including in dimension zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "WANTED locally; proof of Theorem 1.6.1 using Theorem 1.6.6, printed pp.27--28."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "pqf-def-coherent",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "lem-zl-bertini-sections",
+  "lem-pc-ample-affine-loci-criterion",
+  "lem-pc-projective-coherent-finiteness",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-zl-bertini-smooth-member",
+  "lem-sfb-kollar-smooth-divisor-injectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne 22.51, p.480 invokes Kodaira. Assembly written by Q27 after reading Popa section 1.6, Theorem 1.6.6 and proof of 1.6.1 online; Popa local copy WANTED. Stacks supplies the existing Serre and Bertini inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kodaira vanishing for smooth projective varieties over an algebraically closed field of characteristic zero higher cohomology of canonical bundle tensor ample line bundle",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"isZero_Ext_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {C : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_2} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : CategoryTheory.EnoughProjectives C]\\n  (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (\", \"doc\": \"For any projective object $ X $ in an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, and for any object $ Y $ in $ \\\\mathcal{C} $, the $(n + 1)$-th extension group $\\\\text{Ext}^{\"}\n  {\"name\": \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Module.Projective A Ω[A⁄R]\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a commutative $ R $-algebra. If $ A $ is formally smooth over $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module.\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}\n  {\"name\": \"CategoryTheory.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective Y] (n : ℕ),\\n  \", \"doc\": \"In a monoidal abelian category with enough projectives, for any object $X$ and projective object $Y$, the $(n+1)$-th left-derived tensor product functor $\\\\mathrm{Tor}_{n+1}(X, Y)$ is zero.\"}\n  {\"name\": \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  \", \"doc\": \"For any projective object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, and for any object $Y$ in $\\\\mathcal{C}$, the $(n+1)$-th Tor functor $\\\\mathrm{Tor}_{n+1}(X, Y)\"}\n  {\"name\": \"Rep.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (X Y : Rep k G) [CategoryTheory.Projective Y] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (((Rep.Tor k G (n + 1)).obj X).obj Y)\", \"doc\": \"For any representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, if $Y$ is a projective object in the category $\\\\text{Rep}(k, G)$, then the $(n+1)$-th Tor functor $\\\\text{Tor}_{n+1}^{kG}\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ample invertible sheaf tensored with the determinant of Kahler differentials on a smooth projective variety has zero positive sheaf cohomology in characteristic zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Module.Projective A Ω[A⁄R]\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a commutative $ R $-algebra. If $ A $ is formally smooth over $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {P : Type u_2}\\n  [inst_3 : CommRing P] [inst_4 : Algebra R P] [Algebra.FormallySmooth R P] [inst_6 : Algebra P A]\\n  [IsScalarTower R P A],\\n  Function.Surjective ⇑(algebraMap P A) →\\n    (Function.Injective ⇑(\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ P $, and a $ P $-algebra $ A $ with a scalar tower structure over $ R $, if the canonical algebra map $ P \\to A $ is surjective, then the injectivity \"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Algebra.smoothLocus_eq_compl_support_inter\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A],\\n  Algebra.smoothLocus R A = (Module.support A (Algebra.H1Cotangent R A))ᶜ ∩ Module.freeLocus A Ω[A⁄R]\", \"doc\": \"For a commutative $ R $-algebra $ A $ of essential finite type, the smooth locus $ \\\\operatorname{smoothLocus}_R(A) $ coincides with the intersection of the complement of the support of the first cotan\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kodaira vanishing H i X omega X tensor ample line bundle is zero for i positive in characteristic zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Subsingleton Ω[S⁄R]\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is zero.\"}\n  {\"name\": \"WeierstrassCurve.c₄_of_isShortNF_of_char_three\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": W.c₄ = 0\", \"doc\": \"For a Weierstrass curve in short normal form over a commutative ring of characteristic three, the $ c_4 $ invariant is zero, i.e., $ c_4 = 0 $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (Z : TopologicalSpace.Closeds ↥X),\\n  ↑(AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal Z).support = ↑Z\", \"doc\": \"For any closed subset $ Z $ of a scheme $ X $, the support of the vanishing ideal sheaf of $ Z $, when considered as a subset of $ X $, is equal to $ Z $ itself.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_bot\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": vanishingIdeal (X := X) ⊥ = ⊤\", \"doc\": \"The vanishing ideal of the bottom element (zero sheaf) in the ordered type of ideal sheaf data on a scheme $X$ equals the top element (the entire structure sheaf $\\\\mathcal{O}_X$). In symbols, $\\\\text{v\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X : Scheme} [CompactSpace X] [QuasiSeparatedSpace X] {f s : Γ(X, ⊤)} (hf : f |_ X.basicOpen s = 0) :\\n  ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(X : Scheme) {U : X.Opens} (hU : IsAffineOpen U) (x f : Γ(X, U)) (H : x |_ (X.basicOpen f) = 0) :\\n  ∃ n : ℕ, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"ProjectiveSpectrum.vanishingIdeal_univ\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology\", \"type\": \": vanishingIdeal (∅ : Set (ProjectiveSpectrum 𝒜)) = ⊤\", \"doc\": \"The vanishing ideal of the empty set in the projective spectrum of a graded ring $\\\\mathcal{A}$ is equal to the entire ring, i.e., $\\\\text{vanishingIdeal}(\\\\emptyset) = \\\\top$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"{I : IdealSheafData X} : vanishingIdeal I.support = I.radical\", \"doc\": \"For any ideal sheaf data $\\\\mathcal{I}$ on a scheme $X$, the vanishing ideal sheaf of the support of $\\\\mathcal{I}$ is equal to the radical of $\\\\mathcal{I}$. That is, $\\\\text{vanishingIdeal}(\\\\text{suppor\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kodaira\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Kodaira|kodaira|canonical.*ample.*vanish",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types; root/Lie-module linear algebra, affine Proj charts, cotangent-module smoothness, abstract projective objects and ordinary module pushforward do not state this flag-geometry or vanishing theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Kodaira|kodaira|canonical.*ample|ample.*canonical",
+   "results": "10 hits; read results: Mathlib/NumberTheory/EllipticDivisibilitySequence.lean, Mathlib/NumberTheory/EllipticDivisibilitySequence.lean, Mathlib/NumberTheory/EllipticDivisibilitySequence.lean, Mathlib/NumberTheory/EllipticDivisibilitySequence.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unital.lean, Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean, Mathlib/Algebra/Jordan/Basic.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module or germ injectivity, abstract injective resolutions, and ordinary scalar multiplication do not state injectivity on canonical-bundle sheaf cohomology"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kodaira vanishing higher cohomology of the canonical bundle tensored with an ample line bundle over characteristic zero",
+   "results": "8 hits; read results: Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, isZero_Ext_succ_of_projective, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, Rep.isZero_Tor_succ_of_projective.",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module or germ injectivity, abstract injective resolutions, and ordinary scalar multiplication do not state injectivity on canonical-bundle sheaf cohomology"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kodaira\"",
+   "results": "0 hits; read results: none.",
+   "date": "2026-10-24",
+   "verdict": "no match: cotangent-module or germ injectivity, abstract injective resolutions, and ordinary scalar multiplication do not state injectivity on canonical-bundle sheaf cohomology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dominant-flag-line-kempf-vanishing",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho).",
+   "via": [
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-kodaira-vanishing",
+  "worker": "stage1",
+  "summary": "Q27 retained the statement, checked the project Lean for attachment, and assembled Kodaira from coherent Serre vanishing, Bertini and smooth-divisor Kollar injectivity. One new statement-only input (not a vanishing restatement); all other inputs reused. Checked dimension zero and arbitrary algebraically closed characteristic-zero fields. Popa local source requested; proof marked agent.",
+  "blueprint": "Realizes the characteristic-zero Kodaira input in the inherited alteration/moduli/reductivity/flag route ending in Milne 22.51. Current blueprint direct-image proof and unit read. No unit or chapter route changed. blueprint_refs ancestor returns null for this inherited chain; new node preserves that result and extends via.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic projective-implies-proper input needed for Serre and Bertini; no replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic proper-over-field coherence input for O and tensor powers; no item of this unit states it."
+   },
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic smooth differential sheaf input to coherence of the exterior power."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic closure under finite sums on a locally Noetherian scheme."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-serre-vanishing",
+    "why": "Generic coherent Serre twisting vanishing, used with omega."
+   },
+   {
+    "node": "lem-zl-bertini-sections",
+    "why": "Generic high-power linear-system immersion, specialized to the empty prescribed subscheme."
+   },
+   {
+    "node": "lem-pc-ample-affine-loci-criterion",
+    "why": "Generic comparison of Stacks 01PS ampleness with the some-power-very-ample notion def-sc-ample required by the sections lemma, for a proper scheme over a field; added by the maintainer reader."
+   },
+   {
+    "node": "lem-pc-projective-coherent-finiteness",
+    "why": "Generic coherent cohomology finiteness, used only for H0 of A^m."
+   },
+   {
+    "node": "lem-zl-bertini-smooth-member",
+    "why": "Generic Bertini smooth member theorem for the selected immersion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "lem-zl-bertini-sections",
+  "lem-pc-ample-affine-loci-criterion",
+  "lem-pc-projective-coherent-finiteness",
+  "lem-zl-bertini-smooth-member"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-e926d0850",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-e926d0850 (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full. Milne iAG 22.51 (p.480, local) invokes Kodaira in characteristic 0, matching the Kempf citer, and the item statement is unchanged. The new node lem-sfb-kollar-smooth-divisor-injectivity is true: it is the reduced smooth-divisor case of Esnault–Viehweg 5.1/5.2 (L^m=O(D), 0<1<m, no positivity, Serre dual form). It held on Spec F, empty D, P^1 with O(d) and curves of positive degree. It is not a restatement or a clause of the item and no duplicate exists in the DAG or blueprint. It has statement only and is self-contained with definitions cited. Popa is WANTED (online only). Steps 1, 3, 4 and 5 check against the cited statements: rank-free coherence of the wedge power, Bertini with the zero vector excluded and r>=1, injectivity with target power m+1. One fault, C4/E6 in step 2: lem-zl-bertini-sections takes ampleness in the sense of def-sc-ample (a power very ample), while the item's A is Stacks 01PS ample. FIX: cite lem-pc-ample-affine-loci-criterion in step 2 with a sentence, and add it to proof_deps and tool_uses. It has no cycle and no trf/pd reach. Batch 5: lem-trf-proper-field-invertible-coherent is a generic proper-over-field coherence fact that neither assumption gives, with no further trf/pd closure, so I accept it. The trf reach of lem-zl-bertini-sections is a general definition (def-trf-schematically-dense-open) plus generic limit and base-change lemmas, so I accept it. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KodairaVanishing",
+  "declaration": "AlgebraicGeometry.kodaira_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/KodairaVanishing.lean",
+  "statement": "theorem kodaira_vanishing (F : Type u) [Field F] [IsAlgClosed F] [CharZero F] (Y : Scheme.{u}) (f : Y ⟶ Spec (.of F)) (n : ℕ) [SmoothOfRelativeDimension n f] [IsProjective f] [GeometricallyIntegral f] (A : Y.Modules) [A.IsInvertible] (hA : Scheme.Modules.IsAmple Y A) (i : ℕ) (hi : 0 < i) : IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace i).obj (Scheme.Modules.exteriorSheaf f.relativeDifferentials n ⊗ A))",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e969d510",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Read item node, all 14 stmt_dep records, module, report. Node statement/proof/source unchanged vs live; delivery adds lean record and 3 stmt_deps (def-sc-relative-differential-sheaf, def-sc-sheaf-exterior-power, def-pc-geometrically-irreducible), each landed, byte-identical to live, naming exactly the used declarations relativeDifferentials/exteriorSheaf/GeometricallyIntegral. Clause match exact: Field+IsAlgClosed+CharZero, f : Y ⟶ Spec F, SmoothOfRelativeDimension n, IsProjective, GeometricallyIntegral, exteriorSheaf of relative differentials in degree n, IsInvertible + absolute 01PS IsAmple, sheaf ⊗, IsZero of moduleCohomology i for 0<i; no extra hypotheses or universe restriction. Matches Popa 1.6.1 (char-0 alg-closed scope p.22). Edge cases n=0, i=0 excluded (needed), i>n, empty Y excluded. No defs, single sorry, docstrings with source+blueprint and 5 proof steps, lean.statement verbatim, imports exist, consistent with landed Kollar sibling. No compile reproduced per instruction (worker compile clean)."
+ }
+}

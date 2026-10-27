@@ -35,7 +35,32 @@
  "blueprint_order": 1011,
  "blueprint_uses": [],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AddSubgroup.exists_exact_torsionBy_quotient"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AddSubgroup.exists_exact_torsionBy_quotient",
+     "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic",
+     "lines": [
+      360,
+      450
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-cd-affine",
  "lean": {
@@ -48,5 +73,21 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $G$ be an abelian group, $\\Lambda\\subseteq G$ a subgroup,\nand $n\\in\\mathbf Z$. Assume multiplication by $n$ on $G$ is\nsurjective. Then there is a short exact sequence\n\n$$\n0\\longrightarrow G[n]/\\Lambda[n]\n\\longrightarrow (G/\\Lambda)[n]\n\\xrightarrow{\\delta}\\Lambda/n\\Lambda\\longrightarrow0,\n\\qquad \\delta(g+\\Lambda)=ng+n\\Lambda.\n$$",
+  "proof": [
+   {
+    "text": "If $g+\\Lambda$ is killed by $n$, then $ng\\in\\Lambda$, so\n$\\delta$ is defined. Replacing $g$ by $g+\\lambda$ changes\n$ng$ by $n\\lambda$, proving independence of the representative.\nThe map from $G[n]$ to $(G/\\Lambda)[n]$ has kernel\n$G[n]\\cap\\Lambda=\\Lambda[n]$. Its image is contained in\n$\\ker\\delta$. Conversely, if $ng=n\\lambda$ for\n$\\lambda\\in\\Lambda$, then $g-\\lambda\\in G[n]$ represents the\nsame quotient class, proving equality with the kernel. Finally,\nfor $\\lambda\\in\\Lambda$ choose $g\\in G$ with $ng=\\lambda$;\nthen $g+\\Lambda$ maps to $\\lambda+n\\Lambda$, proving surjectivity.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

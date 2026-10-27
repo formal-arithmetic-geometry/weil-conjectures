@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-integral-constructible-reduction-limit",
+ "kind": "statement",
+ "title": "Reconstructing a constructible integral sheaf from its positive derived reductions",
+ "statement": "In the finite-field setting of [sk-def-sf-setting], let X be separated and finite type over the algebraically closed base, and E a finite extension of Q_l, with l different from the characteristic. Let N be a constructible completed-integral sheaf in the sense of [sk-def-sfb-constructible]. Put K_n = integralReductionFunctor l E X (n+1)(N[0]), the actual derived quotient tensor functor of [def-sfb-integral-derived-coefficient-data]. There is a categorical product of these K_n and transition maps K_(n+1) -> K_n for which N[0] is a derived limit [def-weil-derived-limit].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
+  "place": "paragraph (2): derived completeness and the three finite-reduction bullets"
+ },
+ "stmt_deps": [
+  "sk-def-sf-setting",
+  "sk-def-sfb-constructible",
+  "def-sfb-integral-derived-coefficient-data",
+  "def-weil-finite-field-fiber",
+  "def-weil-derived-limit",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the affine point gives compactness, and separatedness gives quasi-separatedness. Apply the existing complete_sheaf theorem from QcqsIntegralFiniteModelCompleteness to N. This is the finite-model completeness argument for the actual strict quotient augmentation, and requires neither an embedded coefficient field nor a torsion-free hypothesis. Retain its K-flat representative P, representative isomorphism and invertible augmentation.",
+   "uses": [
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact countable products of internal pro-etale modules give countable products in their derived category. The principal tensor/scalar-extension comparison identifies each displayed tensor reduction at exponent n+1 with integralLevel n and intertwines the actual quotient transition maps. The componentwise comparison and its inverses induce an isomorphism B of their products. Product extensionality shows that B intertwines the two Roos endomorphisms 1-shift.",
+   "uses": [
+    "lem-weil-derived-countable-products-existence",
+    "lem-pe-principal-tensor-scalar-extension",
+    "def-weil-tower-transition-endomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply roos_isDerivedLimit to the K-flat representative. The completionMap from N[0] to the strict Roos complex is invertible by completeness. Transport the distinguished triangle along this isomorphism in its first vertex and B in its two product vertices. The first arrow is completionMap followed by the old projection and B inverse; the last arrow is B followed by the old connecting arrow and the shifted inverse completionMap. Triangle.isoMk verifies the squares and distinguished_iff_of_iso gives IsDerivedLimit for the displayed tensor tower.",
+   "uses": [
+    "sk-def-pe-derived-completion",
+    "def-weil-derived-limit",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qcqs-integral-finite-model-completeness",
+  "sk-def-pe-derived-completion",
+  "lem-weil-derived-countable-products-existence",
+  "lem-pe-principal-tensor-scalar-extension",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-derived-limit",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext.proof.md",
+  "place": "paragraph (2), reconstruction by derived completeness; A9 uses the existing qcqs finite-model completeness, principal tensor/scalar-extension comparison, and strict Roos triangle"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived complete constructible integral sheaf is the derived inverse limit of its derived reductions modulo powers of the uniformizer",
+   "results": "AdicCompletion; SheafOfModules.hasLimit; SheafOfModules.hasLimitsOfSize. These are underived completion and module limits, not the asserted comparison for constructible pro-etale sheaves.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDerivedLimitTriangle\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedLimit|derivedComplete.*reduction|reduction.*derivedComplete",
+   "results": "0 Mathlib hits. The local project has a derived-limit predicate and several tower transport lemmas; none directly identifies these spectral-coefficient reductions for an arbitrary constructible sheaf.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratumExtBound",
+  "date": "2026-10-27",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-ext-bound",
+   "place": "paragraph (2), first sentence: reconstruction by derived completeness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-ext",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralConstructibleReductionLimit",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleReductionLimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integral_constructible_reduction_limit",
+  "statement": "theorem integral_constructible_reduction_limit\n    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    (N : pulledBackModuleObjects (integralCoefficientRing l E) X)\n    (hN : IsConstantModelConstructible (integralCoefficientRing l E) X N) :\n    ∃ hp : HasProduct (fun n : ℕ ↦ (integralReductionFunctor l E X (n + 1)).obj\n        ((DerivedCategory.singleFunctor _ 0).obj N)),\n      let := hp\n      ∃ step : ∀ n : ℕ,\n        (integralReductionFunctor l E X (n + 2)).obj\n            ((DerivedCategory.singleFunctor _ 0).obj N) ⟶\n          (integralReductionFunctor l E X (n + 1)).obj\n            ((DerivedCategory.singleFunctor _ 0).obj N),\n        IsDerivedLimit (K := fun n : ℕ ↦\n          (integralReductionFunctor l E X (n + 1)).obj\n            ((DerivedCategory.singleFunctor _ 0).obj N)) step\n          ((DerivedCategory.singleFunctor _ 0).obj N)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5ca77",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261027T094521-L-238190",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T103408-L-1066146",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

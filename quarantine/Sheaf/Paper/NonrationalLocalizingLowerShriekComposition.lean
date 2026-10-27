@@ -177,9 +177,9 @@ theorem exists_nonrationalLocalizingLowerShriekComposition
     (Z ↘ Spec (.of k))
   let : QuasiSeparatedSpace Z := quasiSeparatedSpace_of_quasiSeparated
     (Z ↘ Spec (.of k))
-  obtain ⟨φf, hif, hnf, hrf, hcf⟩ := compactification_coherence_cocycle Λ ℓ hΛ f
-  obtain ⟨φg, hig, hng, hrg, hcg⟩ := compactification_coherence_cocycle Λ ℓ hΛ g
-  obtain ⟨φh, hih, hnh, hrh, hch⟩ := compactification_coherence_cocycle Λ ℓ hΛ (f ≫ g)
+  obtain ⟨φf, hif, hnf, hrf, hcf⟩ := compactification_coherence_cocycle Λ ℓ hΛ k f
+  obtain ⟨φg, hig, hng, hrg, hcg⟩ := compactification_coherence_cocycle Λ ℓ hΛ k g
+  obtain ⟨φh, hih, hnh, hrh, hch⟩ := compactification_coherence_cocycle Λ ℓ hΛ k (f ≫ g)
   let F := fun c : Compactification.BoundaryCompactification f ↦
     localizingLowerShriek Λ c.obj.obj (hf c)
   let G := fun c : Compactification.BoundaryCompactification g ↦

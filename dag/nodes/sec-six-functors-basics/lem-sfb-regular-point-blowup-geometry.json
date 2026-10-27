@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-regular-point-blowup-geometry",
+ "kind": "statement",
+ "title": "Geometry of a blowup at a regular surface point",
+ "statement": "Let $X$ be an integral regular Noetherian scheme [def-pc-integral-scheme, def-weil-regular-scheme, pqf-def-locnoeth], with Noetherian meaning locally Noetherian and quasi-compact. Let $p\\in X$ be a closed point such that $\\dim\\mathcal O_{X,p}=2$ [def-weil-pbc-krull-dimension-ring]. Let $b:X'=\\operatorname{Bl}_pX\\to X$ be the blowup [def-nagata-global-blowup] of the reduced closed point. Then $X'$ is integral, regular and Noetherian. The morphism $b$ is proper [def-weil-proper-morphism] and is an isomorphism over $X\\setminus\\{p\\}$. For every closed point $q\\in X'$ with $b(q)=p$, the local ring $\\mathcal O_{X',q}$ has dimension $2$.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tags 0AGR (resolve-lemma-blowup-regular) and 0AGQ (resolve-lemma-blowup), with the closed exceptional point dimension calculation in the proof of 0AGR. Global geometric form of these local statements: localize at the closed center, and use that the blowup is an isomorphism away from its center. Integrality, Noetherianity and properness are included; no cohomology assertion is made."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-nagata-global-blowup",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The reduced point ideal $\\mathcal I$ is quasi-coherent [def-sbc-closed-immersion-ideal-sheaf]. An affine open $\\operatorname{Spec}R\\ni p$ with $R$ Noetherian exists [pqf-def-locnoeth]; there $\\mathcal I$ is the maximal ideal $\\mathfrak p$ ($p$ closed), finitely generated [def-weil-pbc-noetherian-ring]; elsewhere it is the unit ideal. These generators give finite free surjections [pqf-def-coherent]. It is nonzero: otherwise the affine stalk $R_{\\mathfrak p}=\\mathcal O_{X,p}$ would be a field, of dimension $0$ [lem-weil-pbc-affine-open-stalk-localization, def-weil-pbc-krull-dimension-ring], not $2$. Thus [lemma-nagata-blowup-proper] makes $b$ proper; proper includes finite type [def-weil-proper-morphism], so [lem-weil-pbc-finite-type-over-noetherian] makes $X'$ Noetherian.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IN (lemma-closed-subspace-scheme); properties.tex Tag 01OV (definition-noetherian); algebra.tex Noetherian definition; Tag 01HV (lemma-spec-sheaves), part (6)."
+   }
+  },
+  {
+   "text": "Put $U=X\\setminus\\{p\\}$. The generic stalk of integral $X$ is a field [lem-sc-integral-function-field-affine-fraction], so $p$ is not generic and $U$ is nonempty; its affine rings are domains [def-pc-integral-scheme]. The base is qcqs [lem-weil-pbc-locally-noetherian-quasi-separated], and its open $U$ is quasi-compact [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus [det-nagata-boundary-divisor-cartier] makes $b^{-1}U$ scheme-theoretically dense, i.e. $\\mathcal O_{X'}\\to j_*\\mathcal O_{b^{-1}U}$ is injective [def-nagata-scheme-theoretically-dense-open]. By [thm-nagata-global-blowup-complement], $b^{-1}U\\cong U$. Its inclusion $j$ is quasi-compact: for affine $W\\subseteq X'$, the open $W\\cap b^{-1}U$ of the Noetherian $X'$ is quasi-compact [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Apply [lem-sfb-schematic-integral-open-criterion] to obtain integrality of $X'$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "det-nagata-boundary-divisor-cartier",
+    "def-nagata-scheme-theoretically-dense-open",
+    "thm-nagata-global-blowup-complement",
+    "lem-sfb-schematic-integral-open-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02NS (properness), 02OS (lemma-blowing-up-gives-effective-Cartier-divisor: the center pulls back to an effective Cartier divisor, so its complement is scheme-theoretically dense) and the blowup-complement isomorphism; integrality from that density instead of Tag 02ND."
+   }
+  },
+  {
+   "text": "Set $A=\\mathcal O_{X,p}$, regular local of dimension $2$ [def-weil-regular-scheme]. The canonical $c:\\operatorname{Spec}A\\to X$ is flat and locally $R\\to R_{\\mathfrak p}$ [lem-weil-pbc-spec-local-ring-canonical-morphism]; hence $\\mathcal I\\mathcal O_{\\operatorname{Spec}A}=\\mathfrak pR_{\\mathfrak p}=\\mathfrak m_A$. Flat blowup comparison [def-nagata-blowup-flat-base-change-map, thm-nagata-blowup-flat-base-change] identifies $Y=\\operatorname{Bl}_{\\mathfrak m_A}(\\operatorname{Spec}A)$ with $\\operatorname{Spec}A\\times_X X'$ over $\\operatorname{Spec}A$, so the blowup map of $Y$ is the first projection.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805 (lemma-flat-base-change-blowing-up); schemes.tex Tags 01J6 (lemma-morphism-from-spec-local-ring), 02NA (equation-canonical-morphism)."
+   }
+  },
+  {
+   "text": "For each $q$ over $p$, [lem-sfb-local-spectrum-base-change-stalks] gives a unique lift $\\widetilde q\\in Y$ and $\\mathcal O_{X',q}\\cong\\mathcal O_{Y,\\widetilde q}$. By [lem-sfb-local-surface-maximal-blowup-geometry], $Y$ is regular, so these rings are regular local. Off $p$ the complement isomorphism identifies stalks with those of $X$. Together with Noetherianity this proves regularity [def-weil-regular-scheme]. If $q$ is closed, its lift is closed in $Y$ and lies over $\\mathfrak m_A$, hence is closed in the exceptional fibre. The same local surface lemma gives dimension $2$ there; the ring isomorphism preserves prime chains [def-weil-pbc-krull-dimension-ring], giving dimension $2$ at $q$.",
+   "uses": [
+    "lem-sfb-local-spectrum-base-change-stalks",
+    "lem-sfb-local-surface-maximal-blowup-geometry",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGR (lemma-blowup-regular), globalized using Tag 0805; properties.tex Tag 02IT (lemma-characterize-regular)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-flat-base-change-map",
+  "def-nagata-scheme-theoretically-dense-open",
+  "def-pc-integral-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-weil-regular-scheme",
+  "det-nagata-boundary-divisor-cartier",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-local-spectrum-base-change-stalks",
+  "lem-sfb-local-surface-maximal-blowup-geometry",
+  "lem-sfb-schematic-integral-open-criterion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lemma-nagata-blowup-proper",
+  "pqf-def-coherent",
+  "pqf-def-locnoeth",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tags 0AGQ and 0AGR, globalized by the retained flat-base-change/complement route; two independent dense-open and local-spectrum comparison lemmas isolate the returned proof arguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a closed regular point of local dimension two on an integral regular Noetherian scheme preserves regularity and dimension two at exceptional closed points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-relative-dimension and normalization results do not assert regularity of the point blowup. isRegularEpi_of_flat_of_surjective_of_isAffine concerns categorical regular epimorphisms, not regular local rings. The quotient-dimension formula supplies only a subsidiary algebraic calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsRegular\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.EffectiveEpi\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y] (π : X ⟶ Y) [AlgebraicGeometry.Surjective π] [AlgebraicGeometry.Flat π] : CategoryTheory.IsRegularEpi π\", \"doc\": \"If `π : X ⟶ Y` is a flat and surjective morphism between affine schemes, then `π` is a\\nregular epimorphism in the category of schemes.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-relative-dimension and normalization results do not assert regularity of the point blowup. isRegularEpi_of_flat_of_surjective_of_isAffine concerns categorical regular epimorphisms, not regular local rings. The quotient-dimension formula supplies only a subsidiary algebraic calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|Blowup|IsRegular",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"23\", \"text\": \"* `isRegularEpi_of_flat_of_surjective_of_isAffine`: The map `π : X ⟶ Y` is a regular epimorphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"68\", \"text\": \"  obtain ⟨u, hu⟩ := IsRegularEpi.exists_of_isKernelPair\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"88\", \"text\": \"    apply IsRegularEpi.exists_of_isKernelPair _ (IsPullback.of_hasPullback _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"120\", \"text\": \"lemma isRegularEpi_of_flat_of_surjective_of_isAffine\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"122\", \"text\": \"    IsRegularEpi π := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"93\", \"text\": \"    have : IsRegularEpi (Spec.map f) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"94\", \"text\": \"      isRegularEpi_of_flat_of_surjective_of_isAffine _\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-relative-dimension and normalization results do not assert regularity of the point blowup. isRegularEpi_of_flat_of_surjective_of_isAffine concerns categorical regular epimorphisms, not regular local rings. The quotient-dimension formula supplies only a subsidiary algebraic calculation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up a closed regular point of local dimension two on an integral regular Noetherian scheme preserves regularity and dimension two at exceptional closed points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"module\": \"Mathlib.RingTheory.RingHom.StandardSmooth\", \"type\": \": LocalizationPreserves (IsStandardSmoothOfRelativeDimension n)\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, and for any submonoid $ M \\\\subseteq R $, the induced homomorphism between the localizations $ R_M \\\\to S_{\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"module\": \"Mathlib.RingTheory.KrullDimension.Regular\", \"type\": \"{x : R} (reg : IsSMulRegular R x) (hx : x ∈ maximalIdeal R) : ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R\", \"doc\": \"If $ x $ is a regular element in the maximal ideal of a local ring $ R $, then the Krull dimension of $ R $ satisfies $ \\\\dim(R) = \\\\dim(R/(x)) + 1 $, where $ R/(x) $ denotes the quotient ring of $ R $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-relative-dimension and normalization results do not assert regularity of the point blowup. isRegularEpi_of_flat_of_surjective_of_isAffine concerns categorical regular epimorphisms, not regular local rings. The quotient-dimension formula supplies only a subsidiary algebraic calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quadratic transformation of a nonsingular surface remains integral regular Noetherian and is an isomorphism outside its center",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.nonsingular_iff_variableChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W : WeierstrassCurve.Affine R} (x y : R),\\n  W.Nonsingular x y ↔ (WeierstrassCurve.toAffine ({ u := 1, r := x, s := 0, t := y } • W)).Nonsingular 0 0\", \"doc\": \"A point $(x, y)$ on an affine Weierstrass curve $W$ over a ring $R$ is nonsingular if and only if the curve obtained by applying the variable change $\\\\phi = \\\\text{VariableChange.mk}(1, x, 0, y)$ to $W\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.map_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : DecidableEq F] [inst_5 : DecidableEq K]\\n  [inst_6 : Algebra R S] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [inst_9 : \", \"doc\": \"Given an algebra homomorphism $ f : F → K $ between fields extending a commutative ring $ R $, and an affine Weierstrass curve $ W' $ over $ R $, the map function sends a nonsingular point $ (x, y) $ \"}\n  {\"name\": \"WeierstrassCurve.Projective.map_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W' : WeierstrassCurve.Projective R} {f : R →+* S}\\n  (P : Fin 3 → R),\\n  Function.Injective ⇑f → ((WeierstrassCurve.map W' f).toProjective.Nonsingular (⇑f ∘ P) ↔ W'.Nonsingular P)\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism, and let $ W' $ be a Weierstrass curve over $ A $. For a point $ P $ on $ W' $, the point $ f \\\\circ P $ is nonsingular on the projective Weierstra\"}\n  {\"name\": \"WeierstrassCurve.Affine.map_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W : WeierstrassCurve.Affine R} {f : R →+* S}\\n  (x y : R), Function.Injective ⇑f → ((WeierstrassCurve.map W f).toAffine.Nonsingular (f x) (f y) ↔ W.Nonsingular x y)\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism and $ W $ an affine Weierstrass curve over $ A $. A point $ (x, y) $ on $ W $ is nonsingular if and only if the corresponding point $ (f(x), f(y))\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.map_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} [inst : CommRing R] [inst_1 : CommRing S] {W' : WeierstrassCurve.Jacobian R} {f : R →+* S}\\n  (P : Fin 3 → R),\\n  Function.Injective ⇑f → ((WeierstrassCurve.map W' f).toJacobian.Nonsingular (⇑f ∘ P) ↔ W'.Nonsingular P)\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism, $ W' $ a Weierstrass curve over $ A $, and $ P $ a point on $ W' $. The point $ f \\\\circ P $ is nonsingular on the Jacobian of the Weierstrass cur\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} {S : Type s} {A : Type u} {B : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing A]\\n  [inst_3 : CommRing B] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R A]\\n  [inst_6 : Algebra S A] [IsScalarTower R S A] [inst_8 : Algebra R B] [inst\", \"doc\": \"Let $ f : A \\\\to B $ be an injective ring homomorphism. For a projective Weierstrass curve $ W' $ over $ A $, a point $ P $ on $ W' $ is nonsingular if and only if the base-changed point $ f \\\\circ P $ \"}\n  {\"name\": \"WeierstrassCurve.Jacobian.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Jacobian R → WeierstrassCurve.Jacobian.PointClass R → Prop\", \"doc\": \"The property that a point class $ [P] $ in the Jacobian of a Weierstrass curve is nonsingular if any representative $ P $ of the class satisfies the nonsingularity condition. This is well-defined beca\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.nonsingularLift_some\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Jacobian R} (a b : R),\\n  W'.NonsingularLift ⟦![a, b, 1]⟧ ↔ W'.toAffine.Nonsingular a b\", \"doc\": \"For a Weierstrass curve over a commutative ring $ R $, the point class $ [a, b, 1] $ in its Jacobian is nonsingular if and only if the corresponding affine point $ (a, b) $ satisfies the nonsingularit\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth-relative-dimension and normalization results do not assert regularity of the point blowup. isRegularEpi_of_flat_of_surjective_of_isAffine concerns categorical regular epimorphisms, not regular local rings. The quotient-dimension formula supplies only a subsidiary algebraic calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|Blowup|IsRegular",
+   "results": "25 hits; Mathlib/Algebra/Algebra/Subalgebra/Basic.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/Algebra/Star/Basic.lean, Mathlib/Algebra/Star/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness, normalization, integral/proper scheme predicates, or categorical/nonzerodivisor regularity; none states the point-blowup geometry. The unrestricted grep was capped; the AlgebraicGeometry grep was also inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A blowup at a regular closed surface point is an integral regular Noetherian scheme proper over the original scheme",
+   "results": "8 hits; AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness, normalization, integral/proper scheme predicates, or categorical/nonzerodivisor regularity; none states the point-blowup geometry. The unrestricted grep was capped; the AlgebraicGeometry grep was also inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsRegular\"",
+   "results": "1 hits; AlgebraicGeometry.isRegularEpi_of_flat_of_surjective_of_isAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness, normalization, integral/proper scheme predicates, or categorical/nonzerodivisor regularity; none states the point-blowup geometry. The unrestricted grep was capped; the AlgebraicGeometry grep was also inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowing up a closed point of local dimension two in an integral regular Noetherian scheme preserves regularity and has two-dimensional local rings at closed exceptional points",
+   "results": "8 hits; AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, Algebra.IsSmoothAt.exists_notMem_smooth",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness, normalization, integral/proper scheme predicates, or categorical/nonzerodivisor regularity; none states the point-blowup geometry. The unrestricted grep was capped; the AlgebraicGeometry grep was also inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quadratic transformation of a two-dimensional regular local scheme is regular and exceptional closed points have local dimension two",
+   "results": "8 hits; AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.smoothLocus, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness, normalization, integral/proper scheme predicates, or categorical/nonzerodivisor regularity; none states the point-blowup geometry. The unrestricted grep was capped; the AlgebraicGeometry grep was also inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|Blowup|IsRegular",
+   "results": "7 hits; Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean (subdirectory AlgebraicGeometry)",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern smoothness, normalization, integral/proper scheme predicates, or categorical/nonzerodivisor regularity; none states the point-blowup geometry. The unrestricted grep was capped; the AlgebraicGeometry grep was also inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-trait-rational-domination",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 6: preserve regularity, integrality, Noetherianity and local dimension two through the point-blowup tower.",
+   "via": [
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-regular-point-blowup-geometry",
+  "worker": "stage1",
+  "summary": "Repair of the 6732-character proof: two independent, reusable statement-only unsplit nodes extract its dense-integral-open argument and its arbitrary local-spectrum base-change point/stalk comparison. The parent statement is unchanged. All eight original arguments are retained verbatim with their allocation in report.md; parent proof is a short assembly. No Lean written or compiled.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 6: preserve regularity, integrality, Noetherianity and local dimension two through the point-blowup tower. The split realizes precisely the point-blowup geometry prerequisite by localizing at the center; it changes no alteration route. Re-split of returned steps 2 and 5-6 (including closedness in step 8) into the two new independent lemmas; steps 1, 3, 4 and the applications in 7-8 remain explicit assembly.",
+  "tool_uses": [
+   {
+    "node": "det-nagata-boundary-divisor-cartier",
+    "why": "Only the scheme-theoretic density of the complement of the center in a blowup of a qcqs scheme is used, to prove integrality of the blowup; no node of this unit states it (the former integral-blowup tool is on the 2026-10-19 dropped list)."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "The canonical local-spectrum map and its flatness provide the generic localization tool needed for the local surface calculation; this unit has no such interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-nagata-boundary-divisor-cartier",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-0c08b261b",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-0c08b261b (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, and Stacks 0AGQ/0AGR, 0805, 01RE/01RV, 01J6/02NA and 00DK/00E3. Context: the live item is split and reviewed (Q13) and bound at stage 2 (NX). The released re-split note (2026-10-22, at least 2 nodes, at most 3000 characters) came after those landings, so I judged the delivery on its merits. Re-split check, old proof against new step by step: old step 2's affine-to-generic-field integrality argument is now lem-sfb-schematic-integral-open-criterion. Old steps 5, 6 and 8 (chart Spec S^-1D, global unique lift, explicit fraction inverse, closed lift, contraction to m_A) are now lem-sfb-local-spectrum-base-change-stalks. Old steps 1, 3, 4 and 7 each prove an item clause from existing nodes, so they rightly stay as assembly. Neither node restates a clause; they are of comparable size. Node 1 is correct: W∩V is nonempty by injectivity, sections embed in K by lem-sc-integral-function-field-affine-fraction plus sheaf separation; tested on Spec k, A^1 with D(x), and k[x,y]/(x^2,xy) with D(y), where the hypothesis fails as it should. Node 2 is correct: W x_X Spec A = Spec(D⊗R_p) = Spec S^-1D, S avoids Q, the inverse dt/(se) checks out, and h^-1{q} = {q̃} is closed; tested on id, a surface blowup (generic and closed exceptional points) and rings with zero divisors. Searches are recorded and the sources are right. Not a duplicate: lem-sfb-integral-blowup-projective-geometry would also give integrality, but it lies on the trf/projective-bundle path that Q13 deliberately avoided (advisory). The tool_uses (det-nagata-boundary-divisor-cartier, lem-weil-pbc-spec-local-ring-canonical-morphism) are unchanged and accepted. FIX restores checks that the shortening dropped. Step 1: cite pqf-def-locnoeth for the Noetherian affine neighbourhood, note that p closed makes the prime maximal, cite def-weil-pbc-krull-dimension-ring for dim 0 of a field. Step 2: cite def-nagata-scheme-theoretically-dense-open with its injectivity meaning, matching node 1's hypothesis, and justify quasi-compactness of j via lem-weil-pbc-noetherian-open-subscheme-noetherian on W∩b^-1U. Step 3: bc is an isomorphism over Spec A, which step 4 needs for 'lies over m_A, hence in E'. proof_deps is the union of the uses; the proof is 2974 characters. The new nodes are unchanged. No SGA; the item is not dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularPointBlowupGeometry",
+  "declaration": "AlgebraicGeometry.Scheme.regular_point_blowup_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularPointBlowupGeometry.lean",
+  "statement": "theorem regular_point_blowup_geometry (X : Scheme.{u}) [IsIntegral X] [IsNoetherian X] (hX : IsRegularScheme X) (p : X) (hp : IsClosed ({p} : Set X)) (hdim : ringKrullDim (X.presheaf.stalk p) = 2) : IsIntegral (IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowup ∧ IsRegularScheme (IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowup ∧ IsNoetherian (IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowup ∧ IsProper (IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowupMap ∧ IsIso ((IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowupMap ∣_ (⟨({p} : Set X)ᶜ, hp.isOpen_compl⟩ : X.Opens)) ∧ ∀ q : (IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowup, IsClosed ({q} : Set (IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowup) → (IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowupMap q = p → ringKrullDim ((IdealSheafData.vanishingIdeal ⟨{p}, hp⟩).blowup.presheaf.stalk q) = 2",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3229718d1",
+  "group": "NX",
+  "result": "pass",
+  "note": "Only the lean field was added to the node; the lean.statement matches the file verbatim. Every hypothesis matches the node: [IsIntegral X], IsRegularScheme X (= IsLocallyNoetherian ∧ every stalk regular local), [IsNoetherian X], p with IsClosed {p}, and ringKrullDim of the stalk at p = 2. Nothing extra is assumed. The center is Mathlib vanishingIdeal ⟨{p},hp⟩, the reduced maximal ideal; the blowup and blowupMap are the recorded WeilConjectures.Blowup.Gluing declarations, with no extra instances. All six conclusions are present: integral, regular, Noetherian, IsProper, IsIso of the morphismRestrict to {p}ᶜ, and for all closed q over p, ringKrullDim of the stalk = 2. The generic exceptional point is correctly excluded. One universe u, no restriction. No defs; the proof is sorry only. Docstrings carry Stacks 0AGQ/0AGR, the blueprint id and the 8 proof steps. Proof-dep imports all exist. No duplicate in Mathlib or the project's Lean. Not recompiled (per the 2026-10-21 instruction; the worker compiled cleanly). No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-sl2-divided-straightening",
+ "kind": "statement",
+ "title": "Divided-power straightening for an associative sl2 triple",
+ "statement": "Let $A$ be a unital associative $\\mathbf Q$-algebra, equipped with the commutator Lie algebra bracket $[X,Y]=XY-YX$ [def-wf-lie-algebra], and let $E,F,H\\in A$ satisfy $EF-FE=H$, $HE-EH=2E$, and $HF-FH=-2F$. For $X\\in A$ and $j\\in\\mathbf N$ write $X^{(j)}=X^j/j!$ and $\\binom{X}{j}=X(X-1)\\cdots(X-j+1)/j!$, with both expressions equal to $1$ for $j=0$. For every $m,n\\in\\mathbf N$, one has the identity in $A$ $$E^{(m)}F^{(n)}=\\sum_{t=0}^{\\min(m,n)}F^{(n-t)}\\binom{H-m-n+2t}{t}E^{(m-t)}.$$ No finite-dimensionality, nilpotence or faithfulness hypothesis on $A,E,F,H$ is required.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, pp.508--510, rank-one enveloping-algebra calculation supporting integral PBW. Full source WANTED: Steinberg, Lectures on Chevalley Groups, initial integral-enveloping-algebra construction, opposite-root divided-power identity."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-sfb-kostant-integral-form"
+ ],
+ "proof": [
+  {
+   "text": "Use the commutator convention of [def-wf-lie-algebra] and the three associative identities in the statement. Scalars below mean rational multiples of $1_A$ and are central. Set $B_t(X)=X(X-1)\\cdots(X-t+1)/t!$ and $B_0(X)=1$; all divisions are scalar multiplication by reciprocals in $\\mathbf Q$. In particular $E E^{(a)}=(a+1)E^{(a+1)}$. Rearranging the assumed relations gives $EH=(H-2)E$ and $HF=F(H-2)$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.508--510 supplies the rank-one/admissible-lattice motivation only; the displayed elementary calculation is written by N7, not asserted to be proved in Milne."
+   }
+  },
+  {
+   "text": "The last two identities give the required shifts directly. For $j\\geq0$, $HF^j=F^j(H-2j)$: the base $j=0$ is tautological and $HF^{j+1}=F^j(H-2j)F=F^{j+1}(H-2j-2)$ proves the successor. Also $E(H+c-i)=(H+c-i-2)E$ for every rational $c$ and integer $i$. Applying this once to each of the $t$ factors in the definition gives $E B_t(H+c)=B_t(H+c-2)E$, including $t=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.508--510 supplies the rank-one/admissible-lattice motivation only; the displayed elementary calculation is written by N7, not asserted to be proved in Milne."
+   }
+  },
+  {
+   "text": "For $r\\geq1$, telescoping the product gives\n$$EF^r-F^rE=\\sum_{i=0}^{r-1}F^i(EF-FE)F^{r-1-i}=\\sum_{j=0}^{r-1}F^{r-1}(H-2j)=rF^{r-1}(H-r+1).$$\nThe first sum telescopes because its $i$th summand is $F^iEF^{r-i}-F^{i+1}EF^{r-1-i}$; the middle equality uses $EF-FE=H$ and the preceding shift with $j=r-1-i$. The last sum uses $2\\sum_{j=0}^{r-1}j=r(r-1)$, whose successor follows by adding $2r$. Divide by $r!$ to obtain $EF^{(r)}=F^{(r)}E+F^{(r-1)}(H-r+1)$. For $r=0$ only the first term occurs: $EF^{(0)}=E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.508--510 supplies the rank-one/admissible-lattice motivation only; the displayed elementary calculation is written by N7, not asserted to be proved in Milne."
+   }
+  },
+  {
+   "text": "For $t\\geq1$ the falling products give $tB_t(X)=(X-t+1)B_{t-1}(X)$ and $B_t(X+1)-B_t(X)=B_{t-1}(X)$. Indeed the two products in the difference have the common factor $X(X-1)\\cdots(X-t+2)/t!$ and their remaining factors differ by $t$. Hence, for any $m\\geq0$,\n$$(m+1-t)B_t(X)+(X+m-t+2)B_{t-1}(X)=(m+1)B_t(X+1).$$\nTo see this, replace $(X+m-t+2)B_{t-1}$ by $tB_t+(m+1)B_{t-1}$ and use the difference identity. These are identities of rational polynomials, so substitution of $H$ plus a scalar is valid without division by any element depending on $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.508--510 supplies the rank-one/admissible-lattice motivation only; the displayed elementary calculation is written by N7, not asserted to be proved in Milne."
+   }
+  },
+  {
+   "text": "Fix $n\\geq0$ and induct on $m$. The base $m=0$ has exactly the term $t=0$ and reads $F^{(n)}=F^{(n)}$. Assume the displayed formula of the statement at this $m$. Multiply that equality on the left by $E$ and divide by the nonzero rational $m+1$. Since $EE^{(m)}/(m+1)=E^{(m+1)}$, this computes $E^{(m+1)}F^{(n)}$. We now expand each term of the resulting finite sum; this is equality by distributivity, not a comparison of coefficients in an assumed independent basis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.508--510 supplies the rank-one/admissible-lattice motivation only; the displayed elementary calculation is written by N7, not asserted to be proved in Milne."
+   }
+  },
+  {
+   "text": "Write $C_t=H-m-n+2t$. From an old summand $F^{(n-t)}B_t(C_t)E^{(m-t)}$, where $0\\leq t\\leq\\min(m,n)$, the first term of the formula for $EF^{(n-t)}$ and the shift give\n$$\\frac{m-t+1}{m+1}F^{(n-t)}B_t(C_t-2)E^{(m-t+1)}.$$\nIf $t<n$, the second term gives\n$$\\frac1{m+1}F^{(n-t-1)}(H-n+t+1)B_t(C_t)E^{(m-t)}.$$\nIf $t=n$ this second contribution is absent, since then $EF^{(0)}=E$. The displayed order of factors is preserved throughout; only polynomials in $H$ and rational scalars commute with each other.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.508--510 supplies the rank-one/admissible-lattice motivation only; the displayed elementary calculation is written by N7, not asserted to be proved in Milne."
+   }
+  },
+  {
+   "text": "Reindex the second contributions by replacing their old index with $t-1$. For $1\\leq t\\leq\\min(m+1,n)$ put $X=H-m-n+2t-2$. The two contributions then have the common outer factors $F^{(n-t)}$ and $E^{(m+1-t)}$, with total middle factor\n$$\\frac{(m+1-t)B_t(X)+(X+m-t+2)B_{t-1}(X)}{m+1}=B_t(X+1).$$\nHere the second coefficient is $H-n+t=X+m-t+2$. The preceding falling-product identity proves the equality. Since $X+1=H-(m+1)-n+2t$, this is exactly the middle factor required at $(m+1,n)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.508--510 supplies the rank-one/admissible-lattice motivation only; the displayed elementary calculation is written by N7, not asserted to be proved in Milne."
+   }
+  },
+  {
+   "text": "Check the endpoints in that reindexing. At $t=0$ there is just the first contribution, with factor $(m+1)B_0/(m+1)=1$. At $t=m+1\\leq n$ the first contribution is absent; its coefficient $m+1-t$ is zero, so the same middle-factor identity still applies to the second contribution. There is no term with $t>n$, since old index $n$ has no second contribution, and no term with $t>m+1$, since old indices are at most $m$. These observations also cover $n=0$. Thus the new range is exactly $0\\leq t\\leq\\min(m+1,n)$, completing the induction. Only associativity, distributivity, the three relations and rational scalar arithmetic were used, so no finiteness, nilpotence, faithfulness or nonzero-triple assumption is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, printed pp.508--510 supplies the rank-one/admissible-lattice motivation only; the displayed elementary calculation is written by N7, not asserted to be proved in Milne."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, printed pp.508--510, motivating integral divided powers; explicit associative-algebra induction by N7 (the full Steinberg source remains WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an associative rational algebra with sl2 triple E F H, divided powers satisfy E divided m F divided n equals sum F divided n-t binomial H-m-n+2t t E divided m-t",
+   "results": "{\"t\": \"2026-10-23T22:20:16Z\", \"tool\": \"leanfinder\", \"query\": \"In an associative rational algebra with sl2 triple E F H, divided powers satisfy E divided m F divided n equals sum F divided n-t binomial H-m-n+2t t E divided m-t\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DividedPowers.mul_dpow\", \"DividedPowers.RatAlgebra.dpow_eq_inv_fact_smul\", \"DividedPowers.OfInvertibleFactorial.dpow_add_of_lt\", \"DividedPowers.dpow_add\", \"DividedPowers.OfInvertibleFactorial.dpow_add\", \"DividedPowers.prod_dpow\", \"DividedPowers.OfInvertibleFactorial.dpow_mul_of_add_lt\", \"DividedPowers.dpow_add'\"], \"digest\": \"06539432dcb7e2f5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple records the three relations; Sl2.lean:153--181 proves action identities on a primitive vector, not an identity for arbitrary elements of an associative algebra. DividedPowers.mul_dpow and RatAlgebra concern commutative ideals, not opposite noncommuting root vectors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSl2Triple\"",
+   "results": "{\"t\": \"2026-10-23T22:20:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSl2Triple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsSl2Triple\", \"IsSl2Triple.toLieSubalgebra\", \"IsSl2Triple.lie_e_f\", \"IsSl2Triple.e_ne_zero\", \"IsSl2Triple.f_ne_zero\", \"IsSl2Triple.h_ne_zero\", \"IsSl2Triple.symm\", \"IsSl2Triple.symm_iff\"], \"digest\": \"e6dffecd0bdae38f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple records the three relations; Sl2.lean:153--181 proves action identities on a primitive vector, not an identity for arbitrary elements of an associative algebra. DividedPowers.mul_dpow and RatAlgebra concern commutative ideals, not opposite noncommuting root vectors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sl2 divided power commutation formula with binomial Cartan coefficients",
+   "results": "{\"t\": \"2026-10-23T22:21:17Z\", \"tool\": \"leansearch\", \"query\": \"sl2 divided power commutation formula with binomial Cartan coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DividedPowers.OfInvertibleFactorial.mul_dpow\", \"DividedPowers.mul_dpow\", \"DividedPowers.OfInvertibleFactorial.dpow_mul_of_add_lt\", \"LieDerivation.iterate_apply_lie'\", \"DividedPowers.dpow_sum'\", \"LieAlgebra.ad_pow_lie\", \"LieDerivation.iterate_apply_lie\", \"DividedPowers.dpow_add'\"], \"digest\": \"a75e9acf8b918b8c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple records the three relations; Sl2.lean:153--181 proves action identities on a primitive vector, not an identity for arbitrary elements of an associative algebra. DividedPowers.mul_dpow and RatAlgebra concern commutative ideals, not opposite noncommuting root vectors."
+  },
+  {
+   "tool": "grep",
+   "query": "lie_e_pow_succ_toEnd_f|divided|factorial|binom",
+   "results": "{\"t\": \"2026-10-23T22:22:19Z\", \"tool\": \"grep\", \"query\": \"lie_e_pow_succ_toEnd_f|divided|factorial|binom\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\"], \"digest\": \"0923c58ce6ae6284\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple records the three relations; Sl2.lean:153--181 proves action identities on a primitive vector, not an identity for arbitrary elements of an associative algebra. DividedPowers.mul_dpow and RatAlgebra concern commutative ideals, not opposite noncommuting root vectors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kostant sl2 straightening identity divided powers positive negative root vectors binomial H minus m minus n plus two t",
+   "results": "{\"t\": \"2026-10-23T22:22:21Z\", \"tool\": \"leanfinder\", \"query\": \"Kostant sl2 straightening identity divided powers positive negative root vectors binomial H minus m minus n plus two t\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isSl2Triple\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_f_pow_toEnd_f\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.ω_mul_e\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\"], \"digest\": \"b0f6d12f2a4f5810\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsSl2Triple records the three relations; Sl2.lean:153--181 proves action identities on a primitive vector, not an identity for arbitrary elements of an associative algebra. DividedPowers.mul_dpow and RatAlgebra concern commutative ideals, not opposite noncommuting root vectors."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSl2Triple|straightening|divided.*pow|factorial|binom",
+   "results": "{\"t\": \"2026-10-23T23:29:37Z\", \"tool\": \"grep\", \"query\": \"IsSl2Triple|straightening|divided.*pow|factorial|binom\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Basis/Basic.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\"], \"digest\": \"a4c91b2258d4f04b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sl2.lean:41--46 additionally assumes H nonzero and only defines the triple; Sl2.lean:157--181 gives action identities on a primitive vector, not universal associative normal ordering. DividedPowers/RatAlgebra.lean:250,289--290 is for commutative semirings and identifies a single divided power, not this noncommuting product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kostant sl2 divided powers straightening commutation formula in an associative algebra",
+   "results": "{\"t\": \"2026-10-23T23:29:37Z\", \"tool\": \"leansearch\", \"query\": \"Kostant sl2 divided powers straightening commutation formula in an associative algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DividedPowers.RatAlgebra.dpow_eq_inv_fact_smul\", \"commute_lmul_sq_rmul\", \"DividedPowers.dpow_add'\", \"DividedPowers.RatAlgebra.dividedPowers\", \"LieAlgebra.ad_pow_lie\", \"DividedPowers.mk\", \"DividedPowers.dpow_mul\", \"LieAlgebra.ofAssociativeAlgebra\"], \"digest\": \"772089b07899f626\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sl2.lean:41--46 additionally assumes H nonzero and only defines the triple; Sl2.lean:157--181 gives action identities on a primitive vector, not universal associative normal ordering. DividedPowers/RatAlgebra.lean:250,289--290 is for commutative semirings and identifies a single divided power, not this noncommuting product."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSl2Triple\"",
+   "results": "{\"t\": \"2026-10-23T23:29:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSl2Triple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsSl2Triple\", \"IsSl2Triple.toLieSubalgebra\", \"IsSl2Triple.lie_e_f\", \"IsSl2Triple.e_ne_zero\", \"IsSl2Triple.f_ne_zero\", \"IsSl2Triple.h_ne_zero\", \"IsSl2Triple.symm\", \"IsSl2Triple.symm_iff\"], \"digest\": \"e6dffecd0bdae38f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sl2.lean:41--46 additionally assumes H nonzero and only defines the triple; Sl2.lean:157--181 gives action identities on a primitive vector, not universal associative normal ordering. DividedPowers/RatAlgebra.lean:250,289--290 is for commutative semirings and identifies a single divided power, not this noncommuting product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a noncommutative rational algebra an sl2 triple satisfies the divided power normal ordering formula E divided m times F divided n with binomial polynomial in H coefficients",
+   "results": "{\"t\": \"2026-10-23T23:29:38Z\", \"tool\": \"leanfinder\", \"query\": \"In a noncommutative rational algebra an sl2 triple satisfies the divided power normal ordering formula E divided m times F divided n with binomial polynomial in H coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isSl2Triple\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f\", \"IsSl2Triple\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"IsSl2Triple.lie_h_e_nsmul\", \"IsSl2Triple.lie_h_e_smul\", \"IsSl2Triple.lie_h_f_nsmul\", \"IsSl2Triple.lie_e_f\"], \"digest\": \"eb19a5f4b2a66adc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sl2.lean:41--46 additionally assumes H nonzero and only defines the triple; Sl2.lean:157--181 gives action identities on a primitive vector, not universal associative normal ordering. DividedPowers/RatAlgebra.lean:250,289--290 is for commutative semirings and identifies a single divided power, not this noncommuting product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal enveloping algebra sl2 product of positive negative root vector powers expressed in PBW order using falling factorial Cartan coefficients",
+   "results": "{\"t\": \"2026-10-23T23:29:39Z\", \"tool\": \"leanfinder\", \"query\": \"Universal enveloping algebra sl2 product of positive negative root vector powers expressed in PBW order using falling factorial Cartan coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.e_lie_u\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"CartanMatrix.Relations.adE\", \"RootPairing.GeckConstruction.lie_h_e\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_f_pow_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\"], \"digest\": \"172ae220de2e874e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Sl2.lean:41--46 additionally assumes H nonzero and only defines the triple; Sl2.lean:157--181 gives action identities on a primitive vector, not universal associative normal ordering. DividedPowers/RatAlgebra.lean:250,289--290 is for commutative semirings and identifies a single divided power, not this noncommuting product."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kostant-integral-pbw",
+  "date": "2026-10-24",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, printed p.510, admissible-lattice existence before equation (152), whose enveloping-algebra input is Kostant integral PBW. Full source WANTED: Kostant, Groups over Z (1966), integral enveloping-algebra basis theorem; also Steinberg, Lectures on Chevalley Groups, initial integral-form construction. Supporting calculation: Section 23h, pp.508--510, rank-one enveloping-algebra calculation supporting integral PBW. Full source WANTED: Steinberg, Lectures on Chevalley Groups, initial integral-enveloping-algebra construction, opposite-root divided-power identity.",
+   "via": [
+    "lem-sfb-kostant-integral-pbw",
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-divided-straightening",
+  "worker": "stage1",
+  "summary": "Preserve the statement and its hypotheses. Give an eight-step elementary proof: product shifts, telescoping commutator with a power, falling-factorial recurrence, explicit induction, finite-sum expansion and endpoint checks. No non-elementary black box or new node is needed. Mathlib hits do not state the universal identity; Milne motivates but does not prove it, so proof_origin is agent.",
+  "blueprint": "The item has no imported blueprint ancestor: blueprint_refs.py ancestor returns None. Preserve the inherited null from.node and precise place/via chain. These calculations discharge the rank-one integral-enveloping-algebra input supporting Milne 23h p.510, along det-thm-sf-ctf-stability-direct-images proof (3). Searches of the entire latest blueprint and DAG for sl2, divided powers and the formula found no same-statement blueprint node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-3233f2656",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-3233f2656 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full and rechecked each by hand: the shifts EH=(H-2)E and HF^j=F^j(H-2j); the telescoped commutator EF^(r)=F^(r)E+F^(r-1)(H-r+1); the falling-factorial identity (m+1-t)B_t(X)+(X+m-t+2)B_{t-1}(X)=(m+1)B_t(X+1); the induction on m with base and step stated; the reindexing X=H-m-n+2t-2 with H-n+t=X+m-t+2; and the endpoints t=0, t=m+1<=n and n=0, which give the range exactly min(m+1,n). Every step is elementary and none divides by an element of A, so the identity holds in any unital Q-algebra. The statement is unchanged and matches its two uses in the parent lem-sfb-kostant-integral-pbw (step 2 with m=n=b, step 3 for opposite roots). The only citation is def-wf-lie-algebra (mathlib status), used for the commutator convention; proof_deps equals the union of uses and there is no cycle. My exact-fraction check on the irreducible sl2 representations of dimensions 1-6 with m,n=0..5 passed all 216 cases. Milne iAG §23h pp.509-511 (admissible lattice, (152)-(153)) only motivates the identity and does not prove it, so proof_origin.by=agent is honest; Steinberg is WANTED and no SGA source is used. A DAG search found no duplicate: rank-two-straightening excludes opposite roots, and positive-kostant-simple-divided-generation, borel-kostant-distribution-comparison and chevalley-integral-rank-one state other things. The Mathlib candidates (IsSl2Triple on primitive vectors, commutative DividedPowers) are not one-line specializations. There are no new nodes, no tool_uses and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.Sl2DividedStraightening",
+  "declaration": "Algebra.sl2_dividedPower_straightening",
+  "file": "lean/Sheaf/Algebra/Lie/Sl2DividedStraightening.lean",
+  "statement": "theorem sl2_dividedPower_straightening (A : Type u) [Ring A] [Algebra ℚ A] (E F H : A) (hEF : ⁅E, F⁆ = H) (hHE : ⁅H, E⁆ = 2 * E) (hHF : ⁅H, F⁆ = -(2 * F)) (m n : ℕ) : rationalDividedPower E m * rationalDividedPower F n = ∑ t ∈ Finset.range (min m n + 1), rationalDividedPower F (n - t) * rationalBinomial (H - (m : A) - (n : A) + 2 * (t : A)) t * rationalDividedPower E (m - t)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7824f6c22",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Lean signature matches the node clause by clause: Ring + Algebra ℚ (no commutativity/nontrivial), three bracket relations via the Ring.lie_def commutator (zero triple allowed, IsSl2Triple avoided), divided power / falling binomial reuse the landed owner def-sfb-kostant-integral-form (definitions read in the live module and matching the node), sum over range (min m n + 1) with shift H-m-n+2t computed in A and ℕ subtraction only in exponents where t≤min m n, factor order F/toral/E kept. Edge cases m=0/n=0, m=n=1, m=2 n=1 checked. Only record change: added stmt_dep def-sfb-kostant-integral-form (landed def node, no cycle); lean.statement verbatim; no duplicate theorem in Mathlib or the project; proof by sorry; docstrings carry source, blueprint tag and all 8 steps; report sections present. Not recompiled (no file changed)."
+ }
+}

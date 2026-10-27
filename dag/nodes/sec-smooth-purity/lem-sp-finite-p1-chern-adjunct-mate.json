@@ -1,0 +1,147 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived projective line twisted unit and Kummer Chern adjoint commute with arbitrary scheme base change",
+   "results": "Eight hits concerning base change of projective Weierstrass curve formulae; none concerning derived etale exchange.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived projective line twisted unit naturality base change adjunction mate",
+   "results": "Found CategoryTheory.unit_mateEquiv, unit_mateEquiv_symm and mateEquiv; no normalized shifted-line or Chern component theorem.",
+   "date": "2026-10-26",
+   "verdict": "Generic mate identity is a needed step, not the entire statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "One exact generic mate-unit identity.",
+   "date": "2026-10-26",
+   "verdict": "Does not include the derived finite-line normalization or identify its square."
+  },
+  {
+   "tool": "grep",
+   "query": "chern.*baseChange|twisted.*unit.*baseChange",
+   "results": "No Mathlib hits. Local library search found OrdinaryFiniteP1KummerBaseChange, which instead concerns the constant unit and the negative-twist evaluation adjunct, and OrdinaryFiniteP1KummerMaps, whose naturality clause requires Noetherian bases.",
+   "date": "2026-10-26",
+   "verdict": "No exact theorem. Separate positive-twist component equations remain necessary."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ChernAdjunctBaseChange",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-finite-p1-chern-adjunct-base-change",
+   "place": "Chern adjunct base-change proof, split into the Chern-map square and the formal mate step",
+   "via": [
+    "lem-sp-finite-p1-chern-adjunct-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sp-finite-p1-chern-adjunct-mate",
+ "kind": "statement",
+ "title": "Formal mate step for the projective-line Chern map",
+ "statement": "Given a square of Chern maps on projective lines compatible with inverse image, shifted-line transport, and the constant comparison, its transpose under the projective-line inverse-image/direct-image adjunctions is the displayed Chern pushforward square with projective-line exchange.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-nagata-projective-space-base-change",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Expand the Chern pushforward as the derived inverse-image/direct-image adjunct. Transport the exact inverse-image exchange along leftDerivedUpperStarIsoMapDerivedCategory; mapDerivedUpperStarLowerStarAdjunction_eq and the mate formula identify ordinaryFiniteP1Exchange with derivedBaseChangeMap.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3"
+   }
+  },
+  {
+   "text": "The proved ordinaryFiniteUnitPullback_comp identifies the composite of the actual cached unit comparisons with the comparison for the composite morphism. Cancel the composition isomorphism and compare the two factorizations of the diagonal of the projective-line square. This gives the unit-comparison square directly; no conversion to genericConstantIso is needed.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows",
+    "lem-amb-ordinary-finite-unit-pullback-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3"
+   }
+  },
+  {
+   "text": "Apply naturality of the mate to the Chern adjunct. The unit_mateEquiv identity and naturality of the adjunction Hom equivalence reduce the desired equality to the constant-comparison square followed by the assumed Chern-map square. Substitute those two equalities.",
+   "uses": [
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-kun-unbounded-exchange",
+  "lem-amb-ordinary-finite-unit-pullback-comp",
+  "lem-pur-mate-unit-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Proof, sentence: Both defining components commute with base change, so the isomorphism does too; expanded by lem-sp-finite-p1-kummer-naturality, steps 1--3; formalized by X5 using the mate-unit identity; X7 uses the existing composition theorem for the actual cached unit comparisons after the degree-zero repair"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteP1ChernAdjunctMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteP1ChernAdjunctMate.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1_chern_adjunct_of_map_baseChange",
+  "statement": "theorem ordinaryFiniteP1_chern_adjunct_of_map_baseChange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))\n    (hS' : IsUnit (N : Γ(S', ⊤)))\n    (c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n      (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)\n    (c' : ordinaryFiniteUnit A (ProjectiveLine S') ⟶\n      (ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧)\n    (hc : (ordinaryFinitePullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)).map c ≫\n        (ordinaryFiniteShiftedLinePullback A N hA t\n          (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)\n          ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n            hS.map (ProjectiveLine S ↘ S).appTop.hom)).hom =\n      (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)).hom ≫ c') :\n    (ordinaryFinitePullback A f).map (ordinaryFiniteP1ChernPushforward A N hA S c) ≫\n        ordinaryFiniteP1Exchange A f\n          ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫\n        (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n          (ordinaryFiniteShiftedLinePullback A N hA t\n            (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)\n            ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n              hS.map (ProjectiveLine S ↘ S).appTop.hom)).hom =\n      (ordinaryFiniteUnitPullback A f).hom ≫\n        ordinaryFiniteP1ChernPushforward A N hA S' c' ",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T024107-L-638596",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2cc84",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T142458-L-330646",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 9 adapted unclaimed modules vs published clone, DAG nodes, change record; 10 delivered files + 43 direct importers compiled in sandbox (all OK, max 50.8 s), axioms clean"
+ }
+}

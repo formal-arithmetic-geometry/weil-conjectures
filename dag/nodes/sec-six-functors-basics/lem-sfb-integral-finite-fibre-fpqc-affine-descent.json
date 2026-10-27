@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+ "kind": "statement",
+ "title": "Integral fpqc descent with finite fibres and affine neighbourhoods",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme], meaning it has an affine open cover by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]. An fpqc sheaf means a contravariant set-valued functor on $S$-schemes satisfying the covering equalizer condition of [def-weil-pbc-fpqc-covering]. Let $F$ be such a sheaf, and let $p:S^{\\prime}\\to S$ be an fpqc morphism such that $F_{S^{\\prime}}$ is represented by a scheme locally of finite presentation over $S^{\\prime}$. Suppose $q:T\\to S$ is integral, surjective, flat and quasi-compact, with finite underlying fibres [def-weil-finite-integral-morphism], and $F_T$ is represented by a locally Noetherian scheme $Y$. Assume $Y$ has property (FA). Property (FA) means that every finite subset of the underlying point set is contained in an affine open subscheme. Then $F$ is represented by an $S$-scheme $X$ with property (FA). If $Y\\to T$ is flat and separated and of finite presentation, so is $X\\to S$. Flatness is [def-weil-flat-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Proposition 4.1.1 and Proposition 4.1.3 (scan OCR 4.1.5), printed pp.54-55: integral descent criterion and descent of affine neighbourhoods; restrict to integral covers which are also fpqc. Last property clause: Stacks Tags 02KU, 02L0, 02L2, descent.tex labels lemma-descending-property-separated, lemma-descending-property-finite-presentation, lemma-descending-property-flat. Local archive WANTED; primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose representing identifications $h_P\\simeq F_{S'}$ and $h_Y\\simeq F_T$. On double overlaps both pullbacks represent the same restriction of $F$. By [lem-pc-representable-unique], the unique comparison respecting these identifications gives descent data on $P$ and $Y$. On triple overlaps both composites respect the same identification, which proves the cocycle. The base change $T\\times_SS'\\to T$ is fpqc. Over it, $Y$ is the base change of $P$ and hence locally of finite presentation. Descent of that property shows that $Y\\to T$ is locally of finite presentation. This use of property descent is between existing schemes and makes no representability assumption about $F$ on $S$.",
+   "uses": [
+    "def-pc-representable-functor",
+    "def-pd-descent-datum",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-pc-representable-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, canonical overlap schemes and data, p.16; Stacks descent.tex 02KY (lemma-descending-property-locally-finite-presentation)"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-descent-finite-point-orbits] to $q$, $Y\\to T$ and its canonical datum: the cover has finite underlying fibres by hypothesis, and $Y$ is locally Noetherian by hypothesis. Thus for every $y\\in Y$, the orbit $O_y=r_1(r_0^{-1}(y))$ is a finite subset of $Y$. Property (FA) supplies an affine open containing $O_y$. We use finiteness of this image, not the generally false assertion that finite underlying fibres of $q$ stay finite after every base change.",
+   "uses": [
+    "lem-sfb-integral-descent-finite-point-orbits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Finite-orbit prerequisite for Theorem 4.1(ii); agent expansion for the finite-underlying-fibre specialization"
+   }
+  },
+  {
+   "text": "The preceding orbit neighbourhoods meet precisely the hypothesis of [lem-sfb-integral-descent-invariant-quasiaffine-charts]. Its other hypotheses are the original fpqc sheaf $F$, the given locally finitely presented model $P$, the integral surjective cover $T\\to S$, and the representing scheme $Y$. Obtain a covering $(U_i)$ of $P$ by opens whose maps to $S'$ are quasi-affine and whose pullbacks agree under the canonical datum. Restrict that datum to each open. The equality of inverse-image opens makes inclusion into $P$ compatible with transport; the identity and cocycle equations are restrictions of those on $P$.",
+   "uses": [
+    "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1 proof, invariant quasi-affine neighbourhoods, pp.17-21"
+   }
+  },
+  {
+   "text": "Each restricted datum is effective by [lem-trf-quasi-affine-fpqc-effective-descent], since $p$ is fpqc and $U_i\\to S'$ is quasi-affine. The opens cover $P$ and their inclusions intertwine the canonical transport, exactly as required by [lem-pd-effective-invariant-open-cover]. That lemma glues their effective models to a scheme $X\\to S$ and an isomorphism $P\\simeq X\\times_SS'$ inducing the canonical datum. This is where the local charts are assembled into the descended scheme.",
+   "uses": [
+    "lem-trf-quasi-affine-fpqc-effective-descent",
+    "lem-pd-effective-invariant-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0247 (lemma-quasi-affine) and Tag 0AP4 (lemma-effective-for-fpqc-is-local-upstairs)"
+   }
+  },
+  {
+   "text": "The cartesian projection $P\\to X$ is invariant under its canonical datum. Therefore [lem-pd-fpqc-representability-descent] identifies $h_X$ with $F$. In particular $Y\\simeq X\\times_ST$. Descent along $p$ also makes $X\\to S$ locally of finite presentation. On each affine presentation, a finitely presented algebra is generated by its finitely many displayed variables, so this morphism is locally of finite type. Since $S$ is locally Noetherian, [pqf-lem-locnoeth-lft] gives that $X$ is locally Noetherian.",
+   "uses": [
+    "lem-pd-fpqc-representability-descent",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "Proposition 4.1.1, p.54; Stacks 02KY and 01T6, to establish the locally Noetherian target needed in Proposition 4.1.3"
+   }
+  },
+  {
+   "text": "Let $u:Y\\to X$ be the projection. It is integral by base change of $q$ and is an fpqc cover by base change, hence surjective. Its underlying fibres are finite for a separate reason. For an affine open $W=\\operatorname{Spec}A$ of $X$, integrality makes $u^{-1}W=\\operatorname{Spec}B$ an affine open of $Y$; $B$ is Noetherian because $Y$ is locally Noetherian. For $x\\in W$ corresponding to $\\mathfrak p\\subset A$, the fibre is $\\operatorname{Spec}(B\\otimes_A\\kappa(\\mathfrak p))$. Its ring is Noetherian by [lem-weil-pbc-fibre-ring-noetherian], and integral over the field $\\kappa(\\mathfrak p)$ by integrality under base change. The integral-extension dimension inequality makes its dimension at most zero. The zero-dimensional Noetherian scheme lemma now makes its point set finite (also for a zero fibre ring). Thus $u$ satisfies the finite-fibre condition without inferring it directly from base-change stability of finite underlying fibres.",
+   "uses": [
+    "lem-sbc-integral-morphism-base-change",
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "lem-weil-pbc-integral-extension-dimension",
+    "lem-sc-zero-dim-noetherian-finite-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, p.15, verification of its fibre hypothesis; Stacks integral base change and Noetherian fibre argument"
+   }
+  },
+  {
+   "text": "For any finite subset $E\\subseteq|X|$, Step 6 makes $E'=u^{-1}(E)$ finite. Property (FA) for $Y$ puts $E'$ in an affine open of $Y$. Apply [lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer] to $u$ and $E$: $X$ is locally Noetherian by Step 5, and $u$ is integral, surjective and has finite underlying fibres by Step 6. Its reverse implication supplies an affine open of $X$ containing $E$. This proves property (FA) for $X$. For $E=\\varnothing$ the empty affine open is allowed.",
+   "uses": [
+    "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, p.15; Anantharaman Proposition 4.1.3, p.55 (scan OCR 4.1.5)"
+   }
+  },
+  {
+   "text": "Assume additionally that $Y\\to T$ is flat, separated and of finite presentation. Apply fpqc descent along the original cover $q:T\\to S$ to the now existing scheme morphism $X\\to S$. The cited flatness, separatedness, local finite-presentation and quasi-compactness descent statements give each of those four properties. Separatedness makes the diagonal a closed immersion; on an affine target chart its inverse image is a closed subscheme of an affine scheme and is affine, hence quasi-compact. Thus $X\\to S$ is quasi-separated. By the definition of finite presentation (local finite presentation, quasi-compactness and quasi-separatedness), it is of finite presentation. All three requested properties therefore descend.",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-separated",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02L2, 02KU, 02KY, 02L0; labels lemma-descending-property-flat, lemma-descending-property-separated, lemma-descending-property-locally-finite-presentation, lemma-descending-property-finite-presentation (with quasi-compactness)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-representable-functor",
+  "def-pd-descent-datum",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-pc-representable-unique",
+  "lem-sfb-integral-descent-finite-point-orbits",
+  "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+  "lem-trf-quasi-affine-fpqc-effective-descent",
+  "lem-pd-effective-invariant-open-cover",
+  "lem-pd-fpqc-representability-descent",
+  "def-sbc-locally-finite-presentation",
+  "pqf-lem-locnoeth-lft",
+  "lem-sbc-integral-morphism-base-change",
+  "def-weil-finite-integral-morphism",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-quasi-compact",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Expansion of the integral orbit criterion (Theorem 4.1, pp.16-21), using its invariant-chart output and Corollary 3.8, p.15, together with Stacks fpqc descent. Sources read online; local archival copies WANTED in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An fpqc sheaf locally represented by a locally finitely presented scheme is representable if it becomes a scheme with the affine finite subset property over an integral surjective cover with finite fibres",
+   "results": "{\"t\": \"2026-10-24T11:45:01Z\", \"tool\": \"leanfinder\", \"query\": \"An fpqc sheaf locally represented by a locally finitely presented scheme is representable if it becomes a scheme with the affine finite subset property over an integral surjective cover with finite fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\"], \"digest\": \"33f9d62889a33f51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Zariski local representability assumes representable open subfunctors; descent-of-morphism-properties hits assume schemes already exist, whereas this statement proves object effectivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective integral descent of schemes when every fibre of the projection is contained in an affine open and descent of the AF property",
+   "results": "{\"t\": \"2026-10-24T11:44:58Z\", \"tool\": \"leansearch\", \"query\": \"Effective integral descent of schemes when every fibre of the projection is contained in an affine open and descent of the AF property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.sourceAffineLocally\", \"AlgebraicGeometry.IsAffineHom.mk\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top\", \"AlgebraicGeometry.isIntegralHom_iff\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\"], \"digest\": \"8eb7306643b3d92d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Zariski local representability assumes representable open subfunctors; descent-of-morphism-properties hits assume schemes already exist, whereas this statement proves object effectivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-24T11:44:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegral\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Zariski local representability assumes representable open subfunctors; descent-of-morphism-properties hits assume schemes already exist, whereas this statement proves object effectivity"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*[Dd]escent|[Dd]escent.*integral|affine.*[Nn]eighb",
+   "results": "{\"t\": \"2026-10-24T11:44:58Z\", \"tool\": \"grep\", \"query\": \"integral.*[Dd]escent|[Dd]escent.*integral|affine.*[Nn]eighb\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean\"], \"digest\": \"9f240f2580288968\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Zariski local representability assumes representable open subfunctors; descent-of-morphism-properties hits assume schemes already exist, whereas this statement proves object effectivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine neighbourhood criterion for effective descent of schemes along integral surjective morphisms",
+   "results": "{\"t\": \"2026-10-24T11:45:05Z\", \"tool\": \"leanfinder\", \"query\": \"Affine neighbourhood criterion for effective descent of schemes along integral surjective morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.isIntegralHom_iff\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\"], \"digest\": \"b137cbf658df026d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Zariski local representability assumes representable open subfunctors; descent-of-morphism-properties hits assume schemes already exist, whereas this statement proves object effectivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of an fpqc sheaf represented by a locally finitely presented scheme using an integral surjective cover with affine neighbourhoods of descent orbits",
+   "results": "{\"t\": \"2026-10-24T12:47:26Z\", \"tool\": \"leanfinder\", \"query\": \"Effective descent of an fpqc sheaf represented by a locally finitely presented scheme using an integral surjective cover with affine neighbourhoods of descent orbits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\"], \"digest\": \"9d2d516e5d10ed0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: morphism-property descent and Zariski local representability do not supply integral effectivity or the finite-set affine-neighbourhood reflection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of fpqc forms using integral covers and affine finite subsets",
+   "results": "{\"t\": \"2026-10-24T12:48:14Z\", \"tool\": \"leansearch\", \"query\": \"Representability of fpqc forms using integral covers and affine finite subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.HasAffineProperty.of_openCover\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\"], \"digest\": \"1687507e57f1243e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: morphism-property descent and Zariski local representability do not supply integral effectivity or the finite-set affine-neighbourhood reflection"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsIntegralHom",
+   "results": "{\"t\": \"2026-10-24T12:48:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsIntegralHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: morphism-property descent and Zariski local representability do not supply integral effectivity or the finite-set affine-neighbourhood reflection"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*descent|descent.*integral|finite.*subset.*affine|affine.*finite.*subset",
+   "results": "{\"t\": \"2026-10-24T12:48:15Z\", \"tool\": \"grep\", \"query\": \"integral.*descent|descent.*integral|finite.*subset.*affine|affine.*finite.*subset\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: morphism-property descent and Zariski local representability do not supply integral effectivity or the finite-set affine-neighbourhood reflection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-flat-group-fpqc-effectivity",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input: Anantharaman Proposition 4.1.1 and Proposition 4.1.3 (scan OCR 4.1.5), printed pp.54-55: integral descent criterion and descent of affine neighbourhoods; restrict to integral covers which are also fpqc. Last property clause: Stacks Tags 02KU, 02L0, 02L2, descent.tex labels lemma-descending-property-separated, lemma-descending-property-finite-presentation, lemma-descending-property-flat.",
+   "via": [
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+  "worker": "stage1",
+  "summary": "Eight-step split. Three statement-only prerequisites isolate finite orbit images, the invariant quasi-affine neighbourhood transfer (no effectivity conclusion), and reflection of an affine neighbourhood of a specified finite set. Existing quasi-affine effectiveness and invariant-open gluing construct the representing scheme. The post-effectivity fibre check uses Noetherian fibre rings, not the invalid base-change claim for finite underlying fibres. Statement unchanged; property descent uses scheme-specific statements.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input through lem-sfb-trait-flat-group-fpqc-effectivity. Retains the inherited null from.node and full via chain: blueprint_refs.py ancestor returns None. Whole-blueprint searches for integral descent, affine neighbourhoods, Raynaud, invariant quasi-affine, affine reflection and finite orbits found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-quasi-affine-fpqc-effective-descent",
+    "why": "Step 4 uses effectiveness for an arbitrary quasi-affine morphism and singleton fpqc cover, as a generic scheme-descent theorem; the unit has no replacement effectiveness statement for these charts."
+   },
+   {
+    "node": "lem-pd-effective-invariant-open-cover",
+    "why": "Step 4 glues effective restricted data on an invariant open covering, without any Picard-specific hypotheses; no node of this unit supplies this general gluing statement."
+   },
+   {
+    "node": "lem-pd-fpqc-representability-descent",
+    "why": "Step 5 identifies the effective scheme with the original fpqc set sheaf by its cartesian invariant model; this is general sheaf descent, not a Picard route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Steps 1, 5 and 8 descend local finite presentation between existing scheme morphisms; this generic permanence result does not replace the integral effectivity argument."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-noetherian",
+    "why": "Step 6 takes Noetherianity of a localization and quotient describing a fibre ring; this general commutative algebra fact is not supplied by the unit."
+   },
+   {
+    "node": "lem-weil-pbc-integral-extension-dimension",
+    "why": "Step 6 bounds the dimension of a ring integral over a residue field; this generic integral-extension theorem is not a theorem about the unit route."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Step 6 uses finiteness of the underlying space of a zero-dimensional Noetherian scheme, as a general topological algebraic geometry fact."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Step 8 applies generic flatness descent to the constructed scheme, with no effectivity assumed in obtaining that scheme."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-separated",
+    "why": "Step 8 applies generic separatedness descent to the constructed scheme; it does not change the route for constructing the scheme."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-quasi-compact",
+    "why": "Step 8 applies generic quasi-compactness descent as one defining part of finite presentation; the unit supplies no separate general permanence lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-quasi-affine-fpqc-effective-descent",
+  "lem-pd-effective-invariant-open-cover",
+  "lem-pd-fpqc-representability-descent",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-integral-extension-dimension",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-weil-pbc-fpqc-descend-quasi-compact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N0-6acf0c988",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-6acf0c988 (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes, every cited statement, Raynaud SAC 1967/68 exp.5 (Cor 3.8 p.5-15; Th 4.1 and its proof pp.5-16 to 5-19) and Anantharaman MSMF 33 (Props 4.1.1 and 4.1.3, pp.54-55), both fetched from Numdam into /tmp. The item statement is unchanged against Anantharaman 4.1.1 plus 4.1.3. Steps 1-8 check out: hypotheses hold at each citation; Step 6 gets finite fibres from Noetherian fibre rings integral over a field (dim 0, hence finite) and avoids the false claim that finite fibres survive base change; Step 8 obtains quasi-separatedness from the closed-immersion diagonal. Orbit node: true and not a restatement (Q-bar/Q test: r0^-1(v) infinite, orbit = finitely many Galois conjugates; effective case finite since the residue field is finitely generated). Chart node: exactly Raynaud's invariant quasi-affine construction before VIII 7.9, with no representability claimed; the transfer to general S' is valid because a locally Noetherian S is quasi-separated. FIX (C5): the new node lem-sfb-integral-finite-set-affine-reflection duplicates the existing unsplit node lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer (same statement and source: Raynaud 3.8 / Anantharaman 4.1.3). It is dropped, and Step 7 plus proof_deps now cite the existing node. Batch-5 flags: lem-trf-quasi-affine-fpqc-effective-descent is generic Stacks 0247 (its closure reaches only generic quasi-affine trf lemmas) and lem-pd-fpqc-representability-descent reaches only a general definition (def-pod-ring-scalar-extension); both are outside the assumed statements and accepted. The 10 declared tool_uses are accepted as generic.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralFiniteFibreFpqcAffineDescent",
+  "declaration": "AlgebraicGeometry.exists_representableBy_affine_neighbourhoods_of_integral_fpqc",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralFiniteFibreFpqcAffineDescent.lean",
+  "statement": "theorem exists_representableBy_affine_neighbourhoods_of_integral_fpqc {S S' T : Scheme.{u}} [IsLocallyNoetherian S] (F : (Over S)ᵒᵖ ⥤ Type (u + 1)) (hF : Presheaf.IsSheaf (Scheme.fpqcTopology.over S) F) (p : S' ⟶ S) [Flat p] [Surjective p] [QuasiCompact p] (P : Over S') [LocallyOfFinitePresentation P.hom] (hP : Nonempty (((Over.map p).op ⋙ F).RepresentableBy P)) (q : T ⟶ S) [IsIntegralHom q] [Surjective q] [Flat q] [QuasiCompact q] (hq : ∀ s : S, (q ⁻¹' {s}).Finite) (Y : Over T) [IsLocallyNoetherian Y.left] (hY : Nonempty (((Over.map q).op ⋙ F).RepresentableBy Y)) (hFA : ∀ E : Set Y.left, E.Finite → ∃ U : Y.left.Opens, IsAffineOpen U ∧ E ⊆ (U : Set Y.left)) : ∃ X : Over S, Nonempty (F.RepresentableBy X) ∧ (∀ E : Set X.left, E.Finite → ∃ U : X.left.Opens, IsAffineOpen U ∧ E ⊆ (U : Set X.left)) ∧ ((Flat Y.hom ∧ IsSeparated Y.hom ∧ LocallyOfFinitePresentation Y.hom ∧ QuasiCompact Y.hom ∧ QuasiSeparated Y.hom) → Flat X.hom ∧ IsSeparated X.hom ∧ LocallyOfFinitePresentation X.hom ∧ QuasiCompact X.hom ∧ QuasiSeparated X.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-353032260",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Only change: the item node's lean record plus the new module Sheaf/AlgebraicGeometry/IntegralFiniteFibreFpqcAffineDescent.lean; node otherwise identical to live; lean.statement verbatim in the file; proof sorry only. Clause-by-clause match: IsLocallyNoetherian S; F : (Over S)ᵒᵖ ⥤ Type (u+1) with an fpqc sheaf condition on Over S (universe consistent with the landed nonempty_representableBy_of_effective_fpqc_descent, the step-5 tool); p flat, surjective, quasi-compact (fidèlement plat quasi-compact, as in sibling lem-sfb-integral-descent-invariant-quasiaffine-charts); P lfp representing (Over.map p).op ⋙ F; q integral, surjective, flat, qc with set-theoretic finite fibres; Y locally Noetherian representing F_T, with inline (FA); conclusion ∃ X : Over S representing F with (FA), and Flat/IsSeparated/LFP∧QC∧QS of Y.hom implies the same for X.hom. No extra hypotheses; edge cases (empty schemes, E=∅) fine. No (FA) definition node or Lean predicate exists (DAG and lean/ grep). All stmt_dep records read and used correctly; non-public proof imports exist in side-live. Docstrings carry source, blueprint and 8 proof steps. Worker's report has Worker report and Second reading sections. No file changed, so no compile; relied on the worker's clean scompile."
+ }
+}

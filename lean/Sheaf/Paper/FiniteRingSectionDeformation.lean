@@ -12,32 +12,27 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 public import Sheaf.Targets.VectorBundlePurity
+public import Sheaf.AlgebraicGeometry.FiniteRingBundleSectionOrientation
 public import Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
-import Sheaf.AlgebraicGeometry.EtaleReesChart
-import Sheaf.CategoryTheory.SiteConstantModuleHom
-import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
-
-import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.ConormalGradedAlgebra
-import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.AlgebraicGeometry.VectorBundleZeroSection
-import WeilConjectures.Compactification.NagataCompactification
-import Sheaf.AlgebraicGeometry.SmoothTensorDuality
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange
-import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.Paper.RingedTopoiDerivedTensorPullback
-import Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
-import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
-
+public import Sheaf.Paper.CoordinateCounitArrows
+import Sheaf.Paper.SectionCoordinateTowerOneFibre
+import Sheaf.Paper.CoordinateTowerAdjointIsIso
+import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
+import all Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.AlgebraicGeometry.VectorIntegrationFrameAdjoint
+import Sheaf.AlgebraicGeometry.SectionPullbackCoefficientNaturality
+import Sheaf.AlgebraicGeometry.BundleSectionProjectionUnit
+import all Sheaf.Paper.NoetherianEtaleSectionSpecialization
+import Sheaf.AlgebraicGeometry.EtaleShiftedLineNormalizedDescent
+import Sheaf.Paper.SectionExceptionalFibreCoherence
+import all Sheaf.Paper.SectionReesBaseChangeEtale
+import all Sheaf.AlgebraicGeometry.VectorIntegrationMate
+import all Sheaf.Paper.SectionLocalDualizingComparisons
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+import WeilConjectures.ConstructibleSheaf.Pullback
+import Sheaf.AlgebraicGeometry.SectionReesNoetherianGeometry
+import Sheaf.AlgebraicGeometry.SmoothSectionCentredCoordinates
 /-! # Normalized section deformation for arbitrary finite rings
 
 Source: blueprint main-20261015, sec-smooth-purity/sk-thm-dnc, Local construction and
@@ -50,10 +45,19 @@ no arbitrary deformation datum, orientation, or fibre identification is a parame
 -/
 
 @[expose] public noncomputable section
+set_option Elab.async false
 set_option autoImplicit false
+set_option linter.all false
 universe u
-open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped CategoryTheory.Functor
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+attribute [local instance 20001]
+  CategoryTheory.GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall
+attribute [local instance 20001]
+  CategoryTheory.GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
+attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
+  ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize
 namespace AlgebraicGeometry.Etale.FiniteRingSectionDeformation
 open NoetherianSectionSpecialization
 
@@ -102,7 +106,34 @@ theorem geometry {V S : Scheme.{u}} [IsNoetherian S] (d : ℕ) (g : V ⟶ S)
     [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g]
     [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) :
     Geometry d g s := by
-  sorry
+  obtain ⟨⟨I, c, hc⟩, _, hE, hSym⟩ :=
+    SmoothSectionCentredCoordinates.exists_centred_coordinates d g s hs
+  obtain ⟨_, e, _, hp, _, _, hline, hdef, hsm, hsep, hft, hqc, _, hcomp, _, _, _⟩ :=
+    SectionReesNoetherianGeometry.geometry d g s hs
+  have : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian g
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace g
+  have : IsNoetherian V := ⟨⟩
+  have hpb := Scheme.Hom.isPullback_normalConeToDeformationSpace g s
+  have : LocallyOfFiniteType (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @LocallyOfFiniteType) hpb hft
+  have : IsSeparated (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated) hpb hsep
+  have : QuasiCompact (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) hpb hqc
+  have : IsLocallyNoetherian s.ker.normalCone :=
+    LocallyOfFiniteType.isLocallyNoetherian (Scheme.Hom.normalConeProj g s)
+  have : CompactSpace s.ker.normalCone :=
+    QuasiCompact.compactSpace_of_compactSpace (Scheme.Hom.normalConeProj g s)
+  refine ⟨hline, inferInstance, hdef, hsm, hsep, hcomp, hqc, ⟨⟩,
+    (NagataCompactification (Scheme.Hom.normalConeProj g s)).hasCompactification,
+    inferInstance, hE, hSym, ?_⟩
+  intro x
+  have hx : x ∈ (⨆ i, (c i).T.1) := by rw [hc]; trivial
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+  refine ⟨(c i).U, (c i).sectionInto hi, (c i).x, (c i).regular.1, ?_⟩
+  simpa only [Ideal.map_span, ← Set.range_comp, Function.comp_def, MvPolynomial.eval₂Hom_X'] using
+    (c i).sectionIdeal
+
 
 /-- The canonical relative-Spec comparison induced by Sym(I/I^2) → gr_I.
 Source: sk-thm-dnc, regular-coordinate algebra
@@ -132,7 +163,30 @@ theorem coneBundleIso_spec {V S : Scheme.{u}} [IsNoetherian S] (d : ℕ) (g : V 
       PurityNormalBundle.projection s ∧
     PurityNormalBundle.zeroSection s ≫ (coneBundleIso d g s).hom =
       VectorBundleZeroSection.zero S d (ConormalGradedAlgebra.piece s 1) := by
-  sorry
+  let E := VectorBundleZeroSection.antiEquivalence S
+  let f : VectorBundleZeroSection.algebraObject S d (ConormalGradedAlgebra.piece s 1) ≅
+      PurityNormalBundle.algebraObject s := ObjectProperty.isoMk _
+    (asIso (ConormalGradedAlgebra.symmetricComparison s))
+  let fOver := (ObjectProperty.ι (fun Y : Over S ↦ IsAffineHom Y.hom)).mapIso
+    ((E.inverse.mapIso f).unop)
+  refine ⟨Over.w fOver.hom, ?_⟩
+  have hpb := Scheme.Hom.isPullback_deformationSpaceOneFibre g s
+  have : SmoothOfRelativeDimension d g :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback
+      hpb inferInstance
+  have : IsSeparated g := MorphismProperty.of_isPullback (P := @IsSeparated) hpb
+    inferInstance
+  have : QuasiCompact g := MorphismProperty.of_isPullback (P := @QuasiCompact) hpb
+    inferInstance
+  have : Smooth g := SmoothOfRelativeDimension.smooth d g
+  have hgeo := (SectionReesNoetherianGeometry.geometry d g s hs).choose_spec
+  have hz := hgeo.choose_spec.2.2.1
+  have he := hgeo.choose_spec.1
+  rw [he] at hz
+  change s.normalConeZeroSection ≫
+    (FiniteSmoothPurity.reesConeComparison s).hom ≫ (coneBundleIso d g s).hom = _ at hz
+  rw [← Category.assoc, (FiniteSmoothPurity.reesConeComparison_spec s).2.1] at hz
+  exact hz
 
 /-- The locally constant free rank-one property written in the existing sheaf category.
 Source: sk-thm-dnc, opening paragraph
@@ -163,7 +217,29 @@ theorem lines_and_fibres (N : ℕ) (hN : 0 < N)
     IsShiftedLine A S d (sectionInvariant A g s) ∧
     IsShiftedLine A (AffineSpace (ULift.{u} (Fin 1)) S) d (family A g s) ∧
     IsIso (atOne A g s hs) ∧ IsIso (atZero A g s) := by
-  sorry
+  have : HasInvertibleExponent A S := ⟨N, hN, hA, hS⟩
+  have : HasInvertibleExponent A V := HasInvertibleExponent.of_hom g
+  have : HasInvertibleExponent A s.ker.deformationSpace :=
+    HasInvertibleExponent.of_hom (s.ker.deformationSpaceProj ≫ g)
+  have : HasCompactification
+      (SectionLocalDualizingComparisons.normalProjection d g s hs) :=
+    (vectorBundlePurityCompactification S d
+      (ConormalGradedAlgebra.piece s 1)).hasCompactification
+  have h := SectionLocalDualizingComparisons.section_local_dualizing_comparisons
+    A N hN hA hS d g s hs
+  refine ⟨h.1, h.2.1, ?_, ?_⟩
+  · exact NoetherianSectionSpecialization.isIso_sectionMap A
+      (Scheme.Hom.deformationSpaceProj g s) d g
+      (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)
+      (Scheme.Hom.deformationSpaceOneFibre g s)
+      (Scheme.Hom.isPullback_deformationSpaceOneFibre g s)
+      s.deformationSpaceSection s (Scheme.Hom.comp_deformationSpaceOneFibre hs)
+  · exact NoetherianSectionSpecialization.isIso_sectionMap A (Scheme.Hom.deformationSpaceProj g s) d
+      (Scheme.Hom.normalConeProj g s) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)
+      s.ker.normalConeToDeformationSpace
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
+      s.deformationSpaceSection s.normalConeZeroSection
+      Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace
 
 /-- The uniquely normalized comparison for every finite commutative coefficient ring.
 Source: sk-thm-dnc, Local construction and Gluing
@@ -186,7 +262,25 @@ theorem existsUnique_normalized (N : ℕ) (hN : 0 < N)
       (upperStar (ModuleCat.{u + 1} A)
         (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
           (sectionInvariant A g s), Normalized A g s hs κ := by
-  sorry
+  classical
+  have hlines := lines_and_fibres N hN A hA hS d g s hs
+  have : IsIso (atOne A g s hs) := hlines.2.2.1
+  have : HasCompactification
+      (SectionLocalDualizingComparisons.normalProjection d g s hs) :=
+    (vectorBundlePurityCompactification S d
+      (ConormalGradedAlgebra.piece s 1)).hasCompactification
+  obtain ⟨cover, local_exists⟩ :=
+    NoetherianSectionSpecialization.local_comparisons_exist A N hN hA hS d g s hs
+  choose localIso hn using fun i : cover.I₀ ↦
+    NoetherianSectionSpecialization.normalize_chart A (cover.f i)
+      (sectionInvariant A g s) (family A g s) (asIso (atOne A g s hs))
+      (local_exists i).some
+  obtain ⟨_, _, κ, hκ, _, huniq, _⟩ := AffineLineNormalizedDescent.normalized_descent
+    A S (2 * (d : ℤ)) (sectionInvariant A g s) (family A g s)
+    (NoetherianSectionSpecialization.line_shape A d S _ hlines.1)
+    (NoetherianSectionSpecialization.line_shape A d _ _ hlines.2.1)
+    (asIso (atOne A g s hs)) cover localIso hn
+  exact ⟨κ, hκ, huniq⟩
 
 /-- The inverse zero restriction is delta, using the two prescribed fibre identifications.
 Source: sk-thm-dnc, final formula (blueprint: lem-trf-finite-ring-section-deformation).
@@ -301,6 +395,111 @@ theorem baseChange_geometry
         (Scheme.Hom.baseChangeSection_snd g s hs b), Category.id_comp,
         Scheme.Hom.normalConeZeroSection_normalConeProj hs, Category.comp_id]
 
+private theorem sectionExceptionalComparison_eq
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {B B' : Scheme.{u}} {d : ℕ} {P : ExceptionalSectionPair B d}
+    {P' : ExceptionalSectionPair B' d} {v : B' ⟶ B}
+    (e : ExceptionalSectionChange P P' v) :
+    sectionExceptionalComparison A e = sectionMap A P.map P'.map v e.upper e.square
+      P.sect P'.sect e.section_comm := by
+  simp only [sectionExceptionalComparison, sectionCoherencePullbackIso, sectionMap,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc]
+
+private theorem familyPoint_false (S : Scheme.{u}) :
+    exceptionalFamilyPoint S false = AffineSpace.zeroSection (ULift.{u} (Fin 1)) S := rfl
+
+private theorem familyPoint_true (S : Scheme.{u}) :
+    exceptionalFamilyPoint S true = AffineSpace.oneSection (ULift.{u} (Fin 1)) S := rfl
+
+private def sectionFamily {V S : Scheme.{u}} [IsNoetherian S]
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) [Geometry d g s] : ExceptionalSectionFamily S d := by
+  have hpb := Scheme.Hom.isPullback_normalConeToDeformationSpace g s
+  have : SmoothOfRelativeDimension d (Scheme.Hom.normalConeProj g s) := by
+    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+    exact MorphismProperty.of_isPullback hpb inferInstance
+  have : IsSeparated (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated) hpb inferInstance
+  have : IsClosedImmersion (s.deformationSpaceSection ≫
+      Scheme.Hom.deformationSpaceProj g s) :=
+    (Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs) ▸ inferInstance
+  have : IsClosedImmersion s.deformationSpaceSection :=
+    IsClosedImmersion.of_comp _ (Scheme.Hom.deformationSpaceProj g s)
+  let ambient : ExceptionalSectionPair (AffineSpace (ULift.{u} (Fin 1)) S) d := {
+    total := s.ker.deformationSpace
+    map := Scheme.Hom.deformationSpaceProj g s
+    sect := s.deformationSpaceSection
+    section_map := Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs }
+  let one : ExceptionalSectionPair S d := {
+    total := V
+    map := g
+    sect := s
+    section_map := hs }
+  let zero : ExceptionalSectionPair S d := {
+    total := s.ker.normalCone
+    map := Scheme.Hom.normalConeProj g s
+    sect := s.normalConeZeroSection
+    section_map := Scheme.Hom.normalConeZeroSection_normalConeProj hs }
+  refine { ambient := ambient, fibre := fun t ↦ match t with
+             | false => zero
+             | true => one
+           restriction := ?_ }
+  intro t
+  cases t
+  · exact {
+      upper := s.ker.normalConeToDeformationSpace
+      square := hpb
+      section_comm := Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace }
+  · exact {
+      upper := Scheme.Hom.deformationSpaceOneFibre g s
+      square := Scheme.Hom.isPullback_deformationSpaceOneFibre g s
+      section_comm := Scheme.Hom.comp_deformationSpaceOneFibre hs }
+
+private theorem sectionFamily_normalized_iff
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {V S : Scheme.{u}} [IsNoetherian S]
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) [Geometry d g s]
+    (κ : family A g s ≅ (ordinaryFinitePullback A
+      (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj (sectionInvariant A g s)) :
+    (sectionFamily d g s hs).IsNormalized A κ ↔ Normalized A g s hs κ := by
+  simp only [ExceptionalSectionFamily.IsNormalized, ExceptionalSectionFamily.fibreMap,
+    sectionExceptionalComparison_eq, sectionFamily, exceptionalFamilyPoint, Normalized,
+    atOne, Bool.false_eq_true, ↓reduceIte]
+  rfl
+
+private theorem sectionPullback_endpoint
+    (A : Type (u + 1)) [CommRing A]
+    {B B' X X' : Scheme.{u}} (v : B' ⟶ B) (i : B ⟶ X) (i' : B' ⟶ X')
+    (r : X' ⟶ X) (z z' : B' ⟶ X)
+    (h₁ : z = v ≫ i) (h₂ : z = i' ≫ r)
+    (h₁' : z' = v ≫ i) (h₂' : z' = i' ≫ r) (K : DerivedCategoryModule A X) :
+    ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) v i z h₁).symm ≪≫
+      leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i' r z h₂).app K =
+    ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) v i z' h₁').symm ≪≫
+      leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i' r z' h₂').app K := by
+  subst z
+  subst z'
+  rfl
+
+private theorem linePullback_coherence (A : Type (u + 1)) [CommRing A]
+    {S S' : Scheme.{u}} (b : S' ⟶ S) (C : DerivedCategoryModule A S) :
+    linePullback A b C = (sectionCoherencePullbackIso A
+      (AffineSpace (ULift.{u} (Fin 1)) S' ↘ S') b
+      (AffineSpace.map (ULift.{u} (Fin 1)) b)
+      (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+      (AffineSpace.map_over b).symm C).symm := by
+  apply Iso.ext
+  have h := sectionPullback_endpoint A (AffineSpace.map (ULift.{u} (Fin 1)) b)
+    (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+    (AffineSpace (ULift.{u} (Fin 1)) S' ↘ S') b _ _ rfl
+    (AffineSpace.map_over b) (AffineSpace.map_over b).symm rfl C
+  simpa only [linePullback, sectionCoherencePullbackIso, Iso.trans_hom, Iso.symm_hom,
+    Iso.app_hom, Iso.app_inv, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app]
+    using congrArg Iso.hom h
+
 /-- Both normalized comparisons commute with arbitrary Noetherian base change under the
 canonical exceptional mates. The first equation is b_F followed by kappa', equal to
 pullback(kappa) followed by the projection compositor and a'^*b_C. The second is
@@ -374,7 +573,72 @@ theorem baseChange_compatibility (N : ℕ) (hN : 0 < N)
         (Scheme.Hom.normalConeProj (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b))
         b (normalMap g s hs b sq) sqN s.normalConeZeroSection
         (Scheme.Hom.baseChangeSection g s hs b).normalConeZeroSection hz := by
-  sorry
+  classical
+  have : Geometry d (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b) :=
+    (baseChange_geometry_exists d g s hs b).choose_spec
+  let P := sectionFamily d g s hs
+  let P' := sectionFamily d (pullback.snd g b) (Scheme.Hom.baseChangeSection g s hs b)
+    (Scheme.Hom.baseChangeSection_snd g s hs b)
+  have hD : (Scheme.Hom.baseChangeSection g s hs b).deformationSpaceSection ≫
+      deformationMap g s hs b =
+        AffineSpace.map (ULift.{u} (Fin 1)) b ≫ s.deformationSpaceSection :=
+    Scheme.Hom.deformationSpaceSection_comp_deformationSpaceMap_baseChangeSection g s hs b
+  obtain ⟨r, hr, w, rfl, _, hcomp, _⟩ := SectionReesBaseChange.base_change d g s hs b
+  let e : ExceptionalFamilyBaseChange P P' b := {
+    ambient := ⟨deformationMap g s hs b, sq, hD⟩
+    fibre := fun t ↦ match t with
+      | false => ⟨normalMap g s hs b sq, sqN, hz⟩
+      | true => ⟨pullback.fst g b, IsPullback.of_hasPullback g b,
+          Scheme.Hom.baseChangeSection_fst g s hs b⟩
+    point_comm := by
+      intro t
+      cases t
+      · exact (AffineSpace.zeroSection_comp_map b).symm
+      · exact (AffineSpace.oneSection_comp_map b).symm
+    fibre_comm := by
+      intro t
+      cases t
+      · exact IsPullback.lift_fst _ _ _ _
+      · exact hcomp.2.2.1.symm }
+  have hinv (x : S) : IsUnit (N : S.presheaf.stalk x) := by
+    simpa only [map_natCast] using hS.map (S.presheaf.germ ⊤ x (by trivial)).hom
+  have hk : P.IsNormalized A κ ∧ ∀ τ, P.IsNormalized A τ → τ = κ := by
+    refine ⟨?_, ?_⟩
+    · exact (sectionFamily_normalized_iff A d g s hs κ).2 hκ
+    intro τ hτ
+    obtain ⟨k, hk, hu⟩ := existsUnique_normalized N hN A hA hS d g s hs
+    have ht : Normalized A g s hs τ := by
+      exact (sectionFamily_normalized_iff A d g s hs τ).1 hτ
+    exact (hu τ ht).trans (hu κ hκ).symm
+  have hk' : P'.IsNormalized A κ' ∧ ∀ τ, P'.IsNormalized A τ → τ = κ' := by
+    refine ⟨?_, ?_⟩
+    · exact (sectionFamily_normalized_iff A d (pullback.snd g b)
+        (Scheme.Hom.baseChangeSection g s hs b)
+        (Scheme.Hom.baseChangeSection_snd g s hs b) κ').2 hκ' 
+    intro τ hτ
+    obtain ⟨k, hk, hu⟩ := existsUnique_normalized N hN A hA
+      (SectionLocalDualizingComparisons.invertibleOnSource N b hS) d (pullback.snd g b)
+      (Scheme.Hom.baseChangeSection g s hs b) (Scheme.Hom.baseChangeSection_snd g s hs b)
+    apply (hu τ ?_).trans (hu κ' hκ').symm
+    exact (sectionFamily_normalized_iff A d (pullback.snd g b)
+      (Scheme.Hom.baseChangeSection g s hs b)
+      (Scheme.Hom.baseChangeSection_snd g s hs b) τ).1 hτ
+  have hi := sectionExceptional_fibre_coherence A N hN hA P P' hinv b e
+  have hn := sectionExceptional_normalized_baseChange A N hN hA P P' hinv b e κ κ' hk hk'
+  dsimp only [P, P', sectionFamily, e] at hi hn
+  have h := And.intro (hi.2 true).2.2.1 (And.intro hi.1
+    (And.intro (hi.2 false).2.2.1 hn))
+  simp only [ExceptionalSectionFamily.specialization, ExceptionalSectionFamily.fibreMap,
+    familyPoint_false, familyPoint_true] at h
+  simpa only [linePullback_coherence, Iso.symm_hom, sectionExceptionalComparison_eq,
+    P, P', sectionFamily, familyPoint_false, familyPoint_true, Normalized, atOne,
+    sourceBaseChange, familyBaseChange,
+    specialization, atZero, e, if_neg Bool.false_ne_true, if_pos rfl,
+    Category.assoc] using h
+
+
+
+attribute [local irreducible] rightDerivedUpperShriek
 
 /-- The normalized etale-locality isomorphism for the chosen Brown right adjoints.
 The existence theorem determines it uniquely by its adjoint transpose through compact
@@ -410,6 +674,51 @@ def etaleSectionMap (A : Type (u + 1)) [CommRing A] [Finite A]
     (upperStar (ModuleCat.{u + 1} A) s').leftDerivedFunctor.map
       ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) h).hom.app _ ≫
         (locality A h f).hom.app (𝟙_ _))
+
+private theorem sectionLocality_eq (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U X S : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian S]
+    (h : U ⟶ X) [Etale h] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    (f : X ⟶ S) [HasCompactification f] (f' : U ⟶ S) [HasCompactification f']
+    (w : h ≫ f = f') (s : S ⟶ X) (s' : S ⟶ U) (hs : s' ≫ h = s) :
+    ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s' h s hs.symm).app _).hom ≫
+      (ordinaryFinitePullback A s').map
+        (sectionStructuralLocalityIso A h f f' w).hom =
+      etaleSectionMap A h f f' w s s' hs := by
+  subst f'
+  let E := existsUnique_etaleAmbientAdjointLocalityIso A h f
+    (HasCompactification.compactification f) (HasCompactification.compactification (h ≫ f))
+    (rightDerivedUpperShriek (ModuleCat.{u + 1} A) f)
+    (rightDerivedUpperShriek (ModuleCat.{u + 1} A) (h ≫ f))
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) f)
+    (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) (h ≫ f))
+  have he : Classical.choose E = E.exists.choose :=
+    (E.choose_spec.2 _ E.exists.choose_spec).symm
+  simp only [sectionStructuralLocalityIso, Iso.trans_hom, Iso.app_hom,
+    etaleSectionMap, locality, Functor.map_comp, he]
+  rfl
+
+private theorem sectionLocality_hom_eq (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U X S : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian S]
+    (h : U ⟶ X) [Etale h] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    (f : X ⟶ S) [HasCompactification f] (f' : U ⟶ S) [HasCompactification f']
+    (w : h ≫ f = f') (s : S ⟶ X) (s' : S ⟶ U) (hs : s' ≫ h = s) :
+    (SectionLocalDualizingComparisons.sectionLocality A h f f' w s s' hs).hom =
+      etaleSectionMap A h f f' w s s' hs := by
+  subst f'
+  simp only [SectionLocalDualizingComparisons.sectionLocality, etaleSectionMap,
+    locality, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
+
+private theorem sectionExceptionalLocality_eq
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {B : Scheme.{u}} [IsNoetherian B] {d : ℕ} {P P' : ExceptionalSectionPair B d}
+    (e : ExceptionalSectionEtaleMap P P') :
+    (sectionExceptionalLocalityIso A e).hom =
+      etaleSectionMap A e.upper P.map P'.map e.map_comm
+        P.sect P'.sect e.section_comm := by
+  dsimp only [sectionExceptionalLocalityIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.app_hom]
+  exact sectionLocality_eq A e.upper P.map P'.map e.map_comm
+    P.sect P'.sect e.section_comm
 
 /-- Pullback of the centre ideal along an etale map of pairs. This bound is the
 well-definedness proof for the actual map of extended Rees algebras.
@@ -578,7 +887,66 @@ theorem etaleNormalMap_spec {U X S : Scheme.{u}}
     etaleNormalMap h g s s' sq ≫ Scheme.Hom.normalConeProj g s =
       Scheme.Hom.normalConeProj (h ≫ g) s' ∧
     s'.normalConeZeroSection ≫ etaleNormalMap h g s s' sq = s.normalConeZeroSection := by
-  sorry
+  have : IsClosedImmersion s.ker.normalConeToDeformationSpace :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s).flip inferInstance
+  open Scheme.AffineZariskiSite in
+  have hn : IsPullback (etaleNormalMap h g s s' sq)
+      (relativeGluingData s'.ker.coequifibered_toNormalConePresheaf).toBase
+      (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase h := by
+    have he : etaleNormalMap h g s s' sq =
+        (SectionReesBaseChange.zeroPairData h s.ker s'.ker
+          (etalePair_ideal h s s' sq)).comparison _ _ := by
+      apply (cancel_mono s.ker.normalConeToDeformationSpace).mp
+      exact (IsPullback.lift_fst _ _ _ _).trans
+        (SectionReesBaseChange.zeroPairData_toRees h s.ker s'.ker
+          (etalePair_ideal h s s' sq)).symm
+    rw [he]
+    apply SectionReesBaseChange.zeroPairData_isPullback
+    have hk : s'.ker = s.ker.comap h := by
+      rw [← sq.isoPullback_hom_fst, Scheme.Hom.ker_comp_of_isIso,
+        Scheme.IdealSheafData.ker_fst_of_isClosedImmersion]
+    intro x
+    obtain ⟨W, hW, hxW, _⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp
+      X.isBasis_affineOpens (U := ⊤) (show h x ∈ (⊤ : X.Opens) from trivial)
+    obtain ⟨W', hW', hxW', hle⟩ := TopologicalSpace.Opens.isBasis_iff_nbhd.mp
+      U.isBasis_affineOpens (U := h ⁻¹ᵁ W) hxW
+    refine ⟨⟨W', hW'⟩, ⟨W, hW⟩, hle, hxW', ?_⟩
+    have he : s'.ker.siteIdeal ⟨W', hW'⟩ =
+        (s.ker.siteIdeal ⟨W, hW⟩).map (h.appLE W W' hle).hom := by
+      rw [Scheme.IdealSheafData.siteIdeal, hk,
+        Scheme.IdealSheafData.ideal_comap_appLE s.ker h ⟨W, hW⟩ ⟨W', hW'⟩ hle]
+    change IsPushout _ _ _ (CommRingCat.ofHom
+      ((s.ker.siteIdeal ⟨W, hW⟩).extendedReesAlgebraMap (h.appLE W W' hle).hom
+        (s'.ker.siteIdeal ⟨W', hW'⟩) _))
+    generalize_proofs hbound
+    dsimp only [Scheme.IdealSheafData.toReesPresheaf]
+    generalize s'.ker.siteIdeal ⟨W', hW'⟩ = J at he hbound ⊢
+    subst J
+    exact Ideal.isPushout_extendedReesAlgebraMap_of_flat _ (h.flat_appLE hW hW' hle) _
+  have hb : Scheme.Hom.purityNormalProjection s ≫ s =
+      (Scheme.AffineZariskiSite.relativeGluingData
+        s.ker.coequifibered_toNormalConePresheaf).toBase :=
+    IsClosedImmersion.lift_fac _ _ _
+  have hb' : Scheme.Hom.purityNormalProjection s' ≫ s' =
+      (Scheme.AffineZariskiSite.relativeGluingData
+        s'.ker.coequifibered_toNormalConePresheaf).toBase :=
+    IsClosedImmersion.lift_fac _ _ _
+  have hp : etaleNormalMap h g s s' sq ≫ Scheme.Hom.purityNormalProjection s =
+      Scheme.Hom.purityNormalProjection s' ≫ 𝟙 S := by
+    apply (cancel_mono s).mp
+    rw [Category.assoc, hb, hn.w, ← hb', Category.assoc, sq.w, Category.id_comp]
+    simp only [Category.comp_id]
+  have hi : IsIso (etaleNormalMap h g s s' sq) := by
+    rw [← hb, ← hb'] at hn
+    exact (IsPullback.of_bot hn hp sq.flip).isIso_fst_of_isIso
+  refine ⟨hi, IsPullback.lift_snd _ _ _ _, ?_⟩
+  apply (cancel_mono s.ker.normalConeToDeformationSpace).mp
+  rw [Category.assoc, etaleNormalMap, IsPullback.lift_fst, ← Category.assoc,
+    Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace, Category.assoc,
+    (etaleDeformationMap_spec h g s s' sq).2.2.2.2.2.2,
+    Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace]
+
 
 /-- Locality on the deformation section through the fixed etale Rees map.
 Source: sk-thm-dnc, etale compatibility
@@ -645,13 +1013,107 @@ theorem etale_compatibility (N : ℕ) (hN : 0 < N)
         (etaleSectionMap A h g (h ≫ g) rfl s s' hc) ∧
     etaleSectionMap A h g (h ≫ g) rfl s s' hc ≫ specialization A (h ≫ g) s' κ' =
       specialization A g s κ ≫ etaleNormalSectionMap A d h g s s' sq := by
-  sorry
+  classical
+  have : Smooth g := SmoothOfRelativeDimension.smooth d g
+  have : SmoothOfRelativeDimension d (h ≫ g) := by
+    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+    exact MorphismProperty.of_isPullback
+      (Scheme.Hom.isPullback_deformationSpaceOneFibre (h ≫ g) s') inferInstance
+  let P := sectionFamily d g s hs
+  let P' := sectionFamily d (h ≫ g) s' hs'
+  have hD := etaleDeformationMap_spec h g s s' sq
+  have hNmap := etaleNormalMap_spec h g s s' sq
+  have := hD.2.1
+  have := hD.2.2.1
+  have := hD.2.2.2.1
+  have := hD.2.2.2.2.1
+  have := hNmap.1
+  have hcentres : IsPullback
+      (𝟙 (AffineSpace (ULift.{u} (Fin 1)) S)) s'.deformationSpaceSection
+      s.deformationSpaceSection (etaleDeformationMap h s s' sq) := by
+    have ht : IsPullback (𝟙 (AffineSpace (ULift.{u} (Fin 1)) S))
+        (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+        (AffineSpace (ULift.{u} (Fin 1)) S ↘ S) (𝟙 S) :=
+      IsPullback.of_horiz_isIso (by simp)
+    have ho := ht.paste_vert sq.flip
+    rw [← Scheme.Hom.deformationSpaceSection_toBase,
+      ← Scheme.Hom.deformationSpaceSection_toBase] at ho
+    exact ho.of_bot (by simpa using hD.2.2.2.2.2.2.symm) hD.1
+  have hcomp := (SectionReesBaseChange.etale d g s hs h s' hs'
+    (by simpa using hc) sq).2.2.1
+  let e : ExceptionalFamilyEtaleMap P P' := {
+    ambient := {
+      upper := etaleDeformationMap h s s' sq
+      map_comm := hD.2.2.2.2.2.1
+      section_comm := hD.2.2.2.2.2.2
+      centres := hcentres }
+    fibre := fun t ↦ match t with
+      | false => {
+          upper := etaleNormalMap h g s s' sq
+          map_comm := hNmap.2.1
+          section_comm := hNmap.2.2
+          centres := IsPullback.of_horiz_isIso ⟨by
+            simpa only [P, P', sectionFamily, Bool.false_eq_true, if_false,
+              Category.id_comp] using hNmap.2.2.symm⟩ }
+      | true => {
+          upper := h
+          map_comm := rfl
+          section_comm := hc
+          centres := sq.flip }
+    fibre_comm := by
+      intro t
+      cases t
+      · exact (Scheme.Hom.isPullback_normalConeToDeformationSpace g s).lift_fst _ _ _
+      · exact hcomp.2.2.1.symm }
+  have hinv (x : S) : IsUnit (N : S.presheaf.stalk x) := by
+    simpa only [map_natCast] using hS.map (S.presheaf.germ ⊤ x (by trivial)).hom
+  have hk : P.IsNormalized A κ ∧ ∀ τ, P.IsNormalized A τ → τ = κ := by
+    refine ⟨?_, ?_⟩
+    · exact (sectionFamily_normalized_iff A d g s hs κ).2 hκ
+    intro τ hτ
+    obtain ⟨k, hk, hu⟩ := existsUnique_normalized N hN A hA hS d g s hs
+    have ht : Normalized A g s hs τ := by
+      exact (sectionFamily_normalized_iff A d g s hs τ).1 hτ
+    exact (hu τ ht).trans (hu κ hκ).symm
+  have hk' : P'.IsNormalized A κ' ∧ ∀ τ, P'.IsNormalized A τ → τ = κ' := by
+    refine ⟨?_, ?_⟩
+    · exact (sectionFamily_normalized_iff A d (h ≫ g) s' hs' κ').2 hκ'
+    intro τ hτ
+    obtain ⟨k, hk, hu⟩ := existsUnique_normalized N hN A hA hS d (h ≫ g) s' hs'
+    apply (hu τ ?_).trans (hu κ' hκ').symm
+    exact (sectionFamily_normalized_iff A d (h ≫ g) s' hs' τ).1 hτ
+  have hcoh := sectionExceptional_normalized_etale A N hN hA P P' hinv e κ κ' hk hk'
+  simp only [sectionExceptionalLocality_eq] at hcoh
+  dsimp only [P, P', sectionFamily, e] at hcoh
+  constructor
+  · simpa only [ExceptionalSectionFamily.specialization,
+    ExceptionalSectionFamily.fibreMap, sectionExceptionalComparison_eq,
+    P, P', sectionFamily, familyPoint_false, familyPoint_true, specialization, atZero,
+    e, family, ordinaryFinitePullback, if_neg Bool.false_ne_true, if_pos rfl,
+    etaleFamilyMap, etaleNormalSectionMap,
+    Category.assoc]
+      using hcoh.1
+  · simpa only [ExceptionalSectionFamily.specialization,
+    ExceptionalSectionFamily.fibreMap, sectionExceptionalComparison_eq,
+    P, P', sectionFamily, familyPoint_false, familyPoint_true, specialization, atZero,
+    e, family, ordinaryFinitePullback, if_neg Bool.false_ne_true, if_pos rfl,
+    etaleFamilyMap, etaleNormalSectionMap,
+    Category.assoc]
+    using hcoh.2
+
+
+
+attribute [local irreducible] rightDerivedLowerShriek
+  rightDerivedUpperShriekAdjunction
+  affineLinearCompactComparison affineTraceCounit affineTraceProjection singleFunctorObjUnitIso
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 /-- The affine-space orientation is the adjoint of the specified coordinate-tower
 counit, after its actual compact-support comparison and coefficient-unit identification.
 Source: sk-thm-dnc, coordinate normalization
 (blueprint: lem-trf-finite-ring-section-deformation). -/
-def affineAdjoint (N : ℕ) (hN : 0 < N)
+abbrev affineAdjoint (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
     (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
@@ -659,11 +1121,8 @@ def affineAdjoint (N : ℕ) (hN : 0 < N)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
     (affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S) ⟶
       dualizingComplex (ModuleCat.{u + 1} A) (affineTraceProjection S d) :=
-  (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A)
-    (affineTraceProjection S d)).homEquiv _ _
-      ((affineLinearCompactComparison N hN A hA S hS d).inv ≫
-        affineTraceCounit A N hA t D S hS d ≫
-          (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) S).hom)
+  CoordinateCounitArrows.towerAdjoint N hN A hA t D S hS d
+
 
 /-- Section restriction of the affine adjoint orientation, using the ordered tensor
 A_S(d)[2d] already used by linear trace invariance. The supplied section is any section
@@ -703,6 +1162,44 @@ def chartAdjoint (N : ℕ) (hN : 0 < N)
   exact affineSectionAdjoint N hN A hA t D S hS d (s ≫ e)
     (by rw [Category.assoc, w, hs]) ≫
       etaleSectionMap A e (affineTraceProjection S d) g w (s ≫ e) s rfl
+
+private theorem affineSectionAdjoint_isIso (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      OrdinaryFiniteP1Datum A N hA t T hT)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (z : S ⟶ affineTraceTower S d) (hz : z ≫ affineTraceProjection S d = 𝟙 S) :
+    IsIso (affineSectionAdjoint N hN A hA t D S hS d z hz) := by
+  let m := (affineLinearCoefficientDescent A N hA t S hS d).inv ≫
+    CoordinateCounitArrows.towerAdjoint N hN A hA t D S hS d
+  letI : IsIso m := IsIso.comp_isIso'
+    (Iso.isIso_inv (affineLinearCoefficientDescent A N hA t S hS d))
+    (coordinateTowerAdjoint_isIso N hN A hA t D S hS d)
+  exact IsIso.comp_isIso'
+    (Iso.isIso_inv ((leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)
+      z (affineTraceProjection S d) hz).app _))
+    (Functor.map_isIso (ordinaryFinitePullback A z) m)
+
+private theorem chartAdjoint_isIso (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      OrdinaryFiniteP1Datum A N hA t T hT)
+    {X S : Scheme.{u}} [IsNoetherian S] [IsNoetherian X]
+    (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) (g : X ⟶ S) [HasCompactification g]
+    (s : S ⟶ X) (hs : s ≫ g = 𝟙 S)
+    (e : X ⟶ affineTraceTower S d) [Etale e] [IsSeparated e]
+    [LocallyOfFiniteType e] [QuasiCompact e] (w : e ≫ affineTraceProjection S d = g) :
+    IsIso (chartAdjoint N hN A hA t D hS d g s hs e w) := by
+  letI := affineTraceNoetherian S d
+  have : IsIso (etaleSectionMap A e (affineTraceProjection S d) g w (s ≫ e) s rfl) := by
+    rw [← sectionLocality_hom_eq]
+    exact Iso.isIso_hom _
+  unfold chartAdjoint
+  exact IsIso.comp_isIso'
+    (affineSectionAdjoint_isIso N hN A hA t D S hS d (s ≫ e)
+      (by rw [Category.assoc, w, hs])) this
 
 /-- The induced deformation chart in the coordinates u_j=x_j/t.
 Source: sk-thm-dnc, standard Rees chart
@@ -842,6 +1339,18 @@ def sourceChartAdjoint (N : ℕ) (hN : 0 < N)
   chartAdjoint N hN A hA t D hS d g s hs
     (e ≫ (affineTraceAffineSpaceIso S d).inv) (coordinateTower_over d g e w)
 
+private theorem normalized_comparison
+    {B L : Type*} [Category B] [Category L]
+    (P : B ⥤ L) (I : L ⥤ B) (J : P ⋙ I ≅ 𝟭 B)
+    {X Y : B} {Z : L} (f : P.obj X ≅ Z) (g : X ≅ Y) (θ : I.obj Z ⟶ Y)
+    (h : I.map f.hom ≫ θ = J.hom.app X ≫ g.hom) :
+    I.map (f.inv ≫ P.map g.hom) ≫ J.hom.app Y = θ := by
+  have hn := J.hom.naturality g.hom
+  change I.map (P.map g.hom) ≫ J.hom.app Y = J.hom.app X ≫ g.hom at hn
+  rw [Functor.map_comp, Category.assoc, hn, ← h,
+    ← Category.assoc, ← Functor.map_comp, Iso.inv_hom_id, I.map_id,
+    Category.id_comp]
+
 /-- In each Cartesian-centre coordinate chart kappa is the identity between the two
 pullbacks of the specified affine-space dualizing line. Both orientations are the
 actual adjoints of the Kummer-normalized coordinate-tower counits.
@@ -875,12 +1384,61 @@ theorem coordinate_normalization (N : ℕ) (hN : 0 < N)
     familyChartAdjoint N hN A hA t D hS d g s hs e w sq ≫ κ.hom =
       (ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).map
         (sourceChartAdjoint N hN A hA t D hS d g s hs e w) := by
-  sorry
+  have hC := chartAdjoint_isIso N hN A hA t D hS d g s hs
+    (e ≫ (affineTraceAffineSpaceIso S d).inv) (coordinateTower_over d g e w)
+  have q := coordinateDeformationMap_spec d g s e w sq
+  letI := q.1
+  letI := q.2.1
+  letI := q.2.2.1
+  letI := q.2.2.2.1
+  have hF := chartAdjoint_isIso N hN A hA t D
+    (affineTracePullbackInvertible N (AffineSpace (ULift.{u} (Fin 1)) S ↘ S) hS) d
+    (Scheme.Hom.deformationSpaceProj g s) s.deformationSpaceSection
+    (Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs)
+    (coordinateDeformationMap d s e sq) q.2.2.2.2.1
+  have hFamily : IsIso (familyChartAdjoint N hN A hA t D hS d g s hs e w sq) := by
+    as_aux_lemma =>
+      exact IsIso.comp_isIso'
+        (Iso.isIso_hom (vectorIntegrationBaseCoefficientPullback A N hA t
+          (AffineSpace (ULift.{u} (Fin 1)) S ↘ S) hS d)) hF
+  refine ⟨hC, hFamily, ?_⟩
+  let P := ordinaryFinitePullback A (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  let I := ordinaryFinitePullback A (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)
+  let C := sourceChartAdjoint N hN A hA t D hS d g s hs e w
+  let F := familyChartAdjoint N hN A hA t D hS d g s hs e w sq
+  let J := leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)
+    (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)
+    (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+    (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S)
+  have : IsIso C := hC
+  have : IsIso F := hFamily
+  have hOne : I.map F ≫ atOne A g s hs =
+      J.hom.app (affineLinearBaseCoefficient A N hA S d) ≫ C := by
+    as_aux_lemma =>
+      have h := coordinateTowerSection_oneFibre N hN A hA t D hS d g s hs e w sq
+        (coordinateDeformationMap d s e sq) (by rfl) q.2.2.2.2.1
+      dsimp only at h
+      simp only [sectionLocality_hom_eq] at h
+      change I.map F ≫ atOne A g s hs =
+        J.hom.app (affineLinearBaseCoefficient A N hA S d) ≫ C at h
+      exact h
+  let μ := (asIso F).symm ≪≫ P.mapIso (asIso C)
+  have hμ : Normalized A g s hs μ := by
+    change I.map μ.hom ≫ J.hom.app (sectionInvariant A g s) = atOne A g s hs
+    exact normalized_comparison P I J (asIso F) (asIso C) _ hOne
+  obtain ⟨κ₀, _, huniq⟩ := existsUnique_normalized N hN A hA hS d g s hs
+  have heq : μ = κ := (huniq μ hμ).trans (huniq κ hκ).symm
+  change F ≫ κ.hom = P.map C
+  rw [← heq]
+  change (asIso F).hom ≫ (asIso F).inv ≫ P.map C = P.map C
+  exact Iso.hom_inv_id_assoc _ _
+attribute [local irreducible] VectorBundleZeroSection.scheme VectorBundleZeroSection.π
+  VectorBundleZeroSection.over VectorBundleZeroSection.antiEquivalence
 
 /-- The bundle's chosen compact-support right adjoint, using the already proved bundle
 geometry to supply its compactification. Source: sk-thm-dnc, normal-bundle orientation
 (blueprint: lem-trf-finite-ring-section-deformation). -/
-def bundleRight (A : Type (u + 1)) [CommRing A] [Finite A]
+abbrev bundleRight (A : Type (u + 1)) [CommRing A] [Finite A]
     (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
     DerivedCategoryModule A S ⥤
@@ -898,10 +1456,12 @@ def bundleAdjoint (N : ℕ) (hN : 0 < N)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
     (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
     vectorIntegrationCoefficient A N hA S d M ⟶
-      (bundleRight A S d M).obj (𝟙_ _) :=
-  (vectorBundlePurityAdjunction A S d M).homEquiv _ _
-    (vectorBundleIntegration N hN A hA S hS d M ≫
-      (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) S).hom)
+      (bundleRight A S d M).obj (ordinaryFiniteUnit A S) :=
+  (vectorBundlePurityAdjunction A S d M).homEquiv
+    (vectorIntegrationCoefficient A N hA S d M) (ordinaryFiniteUnit A S)
+    (vectorBundleIntegration N hN A hA S hS d M)
+
+attribute [local irreducible] bundleAdjoint
 
 /-- Restrict the affine-glued bundle adjoint to its zero section. The inverse of this
 map is the normal-bundle orientation in the statement.
@@ -913,7 +1473,7 @@ def bundleSectionAdjoint (N : ℕ) (hN : 0 < N)
     (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
     affineLinearBaseCoefficient A N hA S d ⟶
       (ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).obj
-        ((bundleRight A S d M).obj (𝟙_ _)) :=
+        ((bundleRight A S d M).obj (ordinaryFiniteUnit A S)) :=
   (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)
     (VectorBundleZeroSection.zero S d M) (VectorBundleZeroSection.π S d M)
     (VectorBundleZeroSection.zero_spec S d M).1).inv.app _ ≫
@@ -938,7 +1498,20 @@ theorem bundleAdjoint_isIso (N : ℕ) (hN : 0 < N)
     (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
     IsIso (bundleAdjoint N hN A hA S hS d M) ∧
     IsIso (bundleSectionAdjoint N hN A hA S hS d M) := by
-  sorry
+  let := (vectorIntegration_geometry S d M).1
+  let := (vectorIntegration_geometry S d M).2.1
+  have h : IsIso (bundleAdjoint N hN A hA S hS d M) := by
+    unfold bundleAdjoint vectorBundlePurityAdjunction
+    exact integration_unit_adjunct_isIso N hN A hA S hS d M
+  refine ⟨h, ?_⟩
+  let e := (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)
+    (VectorBundleZeroSection.zero S d M) (VectorBundleZeroSection.π S d M)
+    (VectorBundleZeroSection.zero_spec S d M).1).app
+      (affineLinearBaseCoefficient A N hA S d)
+  let F := ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)
+  let m := bundleAdjoint N hN A hA S hS d M
+  letI : IsIso m := h
+  exact IsIso.comp_isIso' (Iso.isIso_inv e) (Functor.map_isIso F m)
 
 /-- The normal-bundle orientation, the inverse of the affine-glued adjoint restricted
 to zero. Its target is the existing ordered tensor model of A_S(d)[2d], with the empty
@@ -949,7 +1522,7 @@ def bundleOrientation (N : ℕ) (hN : 0 < N)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
     (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
     (ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).obj
-        ((bundleRight A S d M).obj (𝟙_ _)) ≅
+        ((bundleRight A S d M).obj (ordinaryFiniteUnit A S)) ≅
       affineLinearBaseCoefficient A N hA S d :=
   letI := (bundleAdjoint_isIso N hN A hA S hS d M).2
   (asIso (bundleSectionAdjoint N hN A hA S hS d M)).symm
@@ -969,6 +1542,9 @@ theorem standardZero_over (S : Scheme.{u}) (d : ℕ) :
   unfold standardZero
   apply coordinateTower_over d (𝟙 S)
   exact AffineSpace.zeroSection_comp_over (ULift.{u} (Fin d)) S
+
+attribute [local irreducible] VectorBundleZeroSection.trivializationMap
+  affineTraceAffineSpaceIso
 
 /-- Frame coordinates carry the zero section of the standard bundle to the actual zero
 section. Source: sk-thm-dnc, orientation gluing
@@ -1001,7 +1577,7 @@ def bundleFrameSectionMap (A : Type (u + 1)) [CommRing A] [Finite A]
     (e : VectorBundleZeroSection.Trivialization S d M W) :
     (ordinaryFinitePullback A W.ι).obj
       ((ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).obj
-        ((bundleRight A S d M).obj (𝟙_ _))) ⟶
+        ((bundleRight A S d M).obj (ordinaryFiniteUnit A S))) ⟶
       sectionInvariant A (affineTraceProjection W.toScheme d) (standardZero W.toScheme d) :=
   letI := (vectorIntegration_geometry S d M).1
   letI := (vectorIntegration_geometry S d M).2.1
@@ -1009,6 +1585,22 @@ def bundleFrameSectionMap (A : Type (u + 1)) [CommRing A] [Finite A]
     W.ι (vectorIntegrationChart S d M W e) (vectorIntegrationChart_isPullback S d M W e)
     (VectorBundleZeroSection.zero S d M) (standardZero W.toScheme d)
     (bundleFrame_zero S d M W e)
+
+section FrameCompatibility
+-- Match the cached ordinary localization while keeping the large compositors folded.
+attribute [local instance 100000] ordinaryFiniteDerivedCategoryInstance
+attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
+attribute [local implicit_reducible] Scheme.Modules
+attribute [local irreducible] leftDerivedUpperStarComp leftDerivedUpperStarCompSectionIso
+attribute [local implicit_reducible] Etale.sheafMonoidalCategory
+attribute [local implicit_reducible] Etale.sheafBraidedCategory
+attribute [local implicit_reducible] CategoryTheory.catToReflQuiver
+attribute [local instance 20002] Etale.sheafMonoidalCategory Etale.sheafBraidedCategory
+attribute [local semireducible] bundleAdjoint
+attribute [local implicit_reducible] ordinaryFiniteSingleFunctor ordinaryFiniteDegreeZero
+  bundleAdjoint vectorIntegrationCoefficient vectorIntegrationSource dualizingComplex
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- Every bundle frame gives exactly the section restriction of the affine adjoint
 orientation; thus the inverse orientation is the specified sheaf gluing and is preserved
@@ -1036,25 +1628,50 @@ theorem bundleOrientation_frames (N : ℕ) (hN : 0 < N)
         affineSectionAdjoint N hN A hA t D W.toScheme
           (affineTracePullbackInvertible N W.ι hS) d (standardZero W.toScheme d)
           (standardZero_over W.toScheme d) := by
-  sorry
+  change SheafOfModules.{u} S.ringCatSheaf at M
+  letI := (vectorIntegration_geometry S d M).1
+  letI := (vectorIntegration_geometry S d M).2.1
+  have hm := vectorIntegration_frameAdjoint N hN A hA t D S hS d M W e
+  have hc := sectionPullback_coefficient_naturality A W.ι
+    (VectorBundleZeroSection.π S d M) (affineTraceProjection W.toScheme d)
+    (vectorIntegrationChart S d M W e) (VectorBundleZeroSection.zero S d M)
+    (standardZero W.toScheme d) (vectorIntegrationChart_isPullback S d M W e).w
+    (bundleFrame_zero S d M W e) (VectorBundleZeroSection.zero_spec S d M).1
+    (standardZero_over W.toScheme d) (affineLinearBaseCoefficient A N hA S d)
+    (affineLinearBaseCoefficient A N hA W.toScheme d)
+    (dualizingComplex (ModuleCat.{u + 1} A) (VectorBundleZeroSection.π S d M))
+    (dualizingComplex (ModuleCat.{u + 1} A) (affineTraceProjection W.toScheme d))
+    (vectorIntegrationBaseCoefficientPullback A N hA t W.ι hS d).hom
+    (bundleAdjoint N hN A hA S hS d M)
+    ((affineLinearCoefficientDescent A N hA t W.toScheme
+        (affineTracePullbackInvertible N W.ι hS) d).inv ≫
+      affineAdjoint N hN A hA t D W.toScheme
+        (affineTracePullbackInvertible N W.ι hS) d)
+    (dualizingComplexBaseChangeMap A (vectorIntegrationChart_isPullback S d M W e)) ?_
+  · dsimp only [bundleSectionAdjoint, bundleFrameSectionMap, sectionMap,
+      bundleSectionPullbackSquare, affineSectionAdjoint, Iso.trans, Iso.app, Iso.symm,
+      sectionInvariant, ordinaryFinitePullback, Functor.id_obj]
+        at hc ⊢
+    erw [hc]
+  · dsimp only [bundleAdjoint, affineAdjoint, vectorIntegrationCoefficient] at hm ⊢
+    erw [hm]
+
+end FrameCompatibility
 
 /-- The scalar-unit identification in the source of the full purity mate.
 Source: vector-bundle purity at K=A_S (blueprint: lem-trf-finite-ring-section-deformation). -/
-def purityUnitCoefficientIso (A : Type (u + 1)) [CommRing A] (N : ℕ)
+abbrev purityUnitCoefficientIso (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
     (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
     vectorBundlePurityTwistedPullback A N hA S d M (ordinaryFiniteUnit A S) ≅
       vectorIntegrationCoefficient A N hA S d M :=
-  ((derivedTensor (ModuleCat.{u + 1} A) (VectorBundleZeroSection.scheme S d M)).mapIso
-    (ordinaryFiniteUnitPullback A (VectorBundleZeroSection.π S d M) ≪≫
-      singleFunctorObjUnitIso (ModuleCat.{u + 1} A)
-        (VectorBundleZeroSection.scheme S d M))).app _ ≪≫
-    derivedTensorLeftUnitor (ModuleCat.{u + 1} A) _ _
+  bundleSectionPurityUnitIso N A hA S d M
+
 
 /-- The actual full-purity mate at the coefficient unit, expressed on its scalar-unit
 normalized source. Source: vector-bundle purity, displayed gamma
 (blueprint: lem-trf-finite-ring-section-deformation). -/
-def purityUnitMate (N : ℕ) (hN : 0 < N)
+abbrev purityUnitMate (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
     (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d]
@@ -1063,14 +1680,34 @@ def purityUnitMate (N : ℕ) (hN : 0 < N)
       ((derivedTensor (ModuleCat.{u + 1} A) S).obj (ordinaryFiniteUnit A S)).obj
         (vectorIntegrationSource A N hA S d M)) :
     vectorIntegrationCoefficient A N hA S d M ⟶
-      (bundleRight A S d M).obj (𝟙_ _) :=
-  (purityUnitCoefficientIso A N hA S d M).inv ≫
-    (vectorBundlePurityAdjunction A S d M).homEquiv _ _
-      (p.hom ≫ ((derivedTensor (ModuleCat.{u + 1} A) S).obj
-        (ordinaryFiniteUnit A S)).map (vectorBundleIntegration N hN A hA S hS d M) ≫
-          (derivedTensorRightUnitor (ModuleCat.{u + 1} A) S (ordinaryFiniteUnit A S)).hom) ≫
-    (bundleRight A S d M).map
-      (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) S).hom
+      (bundleRight A S d M).obj (ordinaryFiniteUnit A S) :=
+  bundleSectionPurityUnitMap N hN A hA S hS d M p
+
+attribute [local semireducible] rightDerivedLowerShriek
+
+attribute [local instance 20002] Etale.sheafMonoidalCategory Etale.sheafBraidedCategory
+
+attribute [local irreducible] vectorIntegrationCoefficient
+
+private theorem normalized_adjunct
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G)
+    {X Y : C} (e : X ≅ Y) (c : F.obj Y ⟶ 𝟙_ D)
+    (p : F.obj X ≅ (𝟙_ D) ⊗ F.obj Y)
+    (h : p.inv ≫ F.map e.hom = (λ_ (F.obj Y)).hom) :
+    a.homEquiv _ _ c = e.inv ≫ a.homEquiv _ _
+      (p.hom ≫ (𝟙_ D) ◁ c ≫ (ρ_ (𝟙_ D)).hom) := by
+  rw [← a.homEquiv_naturality_left]
+  apply congrArg (a.homEquiv _ _)
+  have he : F.map e.inv ≫ p.hom = (λ_ (F.obj Y)).inv := by
+    apply (cancel_mono (λ_ (F.obj Y)).hom).1
+    rw [← h]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [← F.map_comp, e.inv_hom_id, F.map_id]
+    rw [h, Iso.inv_hom_id]
+  rw [← Category.assoc, he]
+  rw [← leftUnitor_inv_naturality_assoc]
+  rw [← unitors_equal, Iso.inv_hom_id, Category.comp_id]
 
 /-- Agreement with the inverse purity orientation, whenever the full purity theorem
 supplies its canonical projection inverse. In particular this applies to all the
@@ -1094,7 +1731,18 @@ theorem bundleOrientation_purity (N : ℕ) (hN : 0 < N)
         (vectorIntegrationSource A N hA S d M))
     (hp : p.inv = vectorBundlePurityProjectionMap A N hA S d M (ordinaryFiniteUnit A S)) :
     bundleAdjoint N hN A hA S hS d M = purityUnitMate N hN A hA S hS d M p := by
-  sorry
+  let := (vectorIntegration_geometry S d M).1
+  let := (vectorIntegration_geometry S d M).2.1
+  let C := vectorIntegrationCoefficient A N hA S d M
+  let F := vectorBundlePurityLower A S d M
+  let e := bundleSectionPurityUnitIso N A hA S d M
+  let l := derivedTensorLeftUnitor (ModuleCat.{u + 1} A) S (F.obj C)
+  have he : p.inv ≫ F.map e.hom = l.hom := by
+    rw [hp]
+    exact bundleSectionProjection_unit N A hA S d M
+  unfold bundleAdjoint purityUnitMate bundleSectionPurityUnitMap
+  exact normalized_adjunct (vectorBundlePurityAdjunction A S d M) e
+    (vectorBundleIntegration N hN A hA S hS d M) p he
 
 /-- The line, fibre and unique-comparison conclusions in one proposition, using only
 proofs of geometry that the preceding geometric theorem supplies.

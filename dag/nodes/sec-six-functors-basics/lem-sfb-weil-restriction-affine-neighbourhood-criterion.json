@@ -1,0 +1,302 @@
+{
+ "id": "lem-sfb-weil-restriction-affine-neighbourhood-criterion",
+ "kind": "statement",
+ "title": "Scheme representability criterion for Weil restriction",
+ "statement": "Let $S$ and $S'$ be schemes [def-pc-scheme], and let $p:S'\\to S$ be finite locally free [def-pc-finite-locally-free]. Let $Z\\to S'$ be a scheme over $S'$. Define a functor on $S$-schemes by $F(X)=\\operatorname{Hom}_{S'}(X\\times_SS',Z)$, with restriction by precomposition [def-pc-fibre-product]. Assume that for every point $s\\in S$, every finite subset of the underlying space of $Z\\times_S\\operatorname{Spec}\\kappa(s)$ is contained, via its natural map to $Z$, in an affine open subscheme of $Z$ [def-weil-affine-spectrum, def-weil-open-immersion, def-weil-residue-field]. Then there exists an $S$-scheme $W$ and bijections $\\operatorname{Hom}_S(X,W)\\simeq F(X)$ natural in every $S$-scheme $X$. No quasi-compactness, separatedness or smoothness hypothesis on $Z$ is imposed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.6 Theorem 4, printed pp.194–195 (PDF pp.200–201), affine-neighbourhood criterion. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "The functor $F$ is a Zariski sheaf. Indeed, for an open cover $T=\\bigcup T_a$, the schemes $T_a\\times_S S\\prime$ identify with the inverse images of $T_a$ under $T\\times_S S\\prime\\to T$ and hence form an open cover. Compatible maps from them to $Z$ glue uniquely. Their composites to $S\\prime$ agree with the projection on this cover, so uniqueness of gluing makes the glued map an $S\\prime$-map. This proves precisely existence and uniqueness in the sheaf condition.",
+   "uses": [
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ (lemma-glue-functors), condition (1); BLR 7.6 Proposition 3, written out for scheme-valued input."
+   }
+  },
+  {
+   "text": "Index by all pairs $(V,U)$ with $V\\subseteq S$ affine open and $U\\subseteq Z$ affine open whose composite to $S$ factors through $V$; include the empty affine open. Define $F_{V,U}(T)\\subseteq F(T)$ to consist of those maps for which $T\\to S$ factors through $V$ and the map $T\\times_S S\\prime\\to Z$ factors through $U$. Both factorizations, when they exist, are unique because they are through open subschemes; precomposition preserves them. The affine-chart lemma gives an affine $V$-scheme $R_{V,U}$ representing $T\\mapsto\\operatorname{Hom}_{S\\prime}(T\\times_S S\\prime,U)$ on $V$-schemes. Viewed as an $S$-scheme, $R_{V,U}$ represents $F_{V,U}$: an $S$-map to it supplies exactly the required factorization through $V$ and the indicated $S\\prime$-map. This verifies (2)(a) of the gluing criterion.",
+   "uses": [
+    "lem-sfb-affine-weil-restriction-charts",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 01JJ (lemma-glue-functors), condition (2)(a); affine construction of BLR 7.6 Theorem 4, proof, first paragraph."
+   }
+  },
+  {
+   "text": "Fix an $S$-scheme $b:T\\to S$ and $a:E=T\\times_S S\\prime\\to Z$ in $F(T)$, and write $q:E\\to T$. The map $q$ is finite by base-change permanence. The subset $C=|E|\\setminus a^{-1}(|U|)$ is closed, so $q(C)$ is closed. Set $O_{V,U,a}=b^{-1}(|V|)\\setminus q(C)$, an open of $T$. For any $f:T\\prime\\to T$, the bad set for the pulled-back map $a_f$ is the inverse image $C\\prime$ of $C$ in $E\\times_T T\\prime$. The base-change image formula gives $q\\prime(C\\prime)=f^{-1}(q(C))$. Consequently $a_f$ lands in $U$ and $bf$ lands in $V$ exactly when $f(T\\prime)\\subseteq O_{V,U,a}$. A map with image in an open subscheme factors uniquely through it, by restricting its map of sheaves. Thus $T\\times_F F_{V,U}$ is represented by this open subscheme. This verifies (2)(b), including arbitrary nonflat and nonreduced test schemes.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-base-change-image",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BL4 (lemma-hom-from-finite-locally-free-representable), proof of condition (2)(b), with the base-change image check made explicit."
+   }
+  },
+  {
+   "text": "For $t\\in T$, put $s=b(t)$. The set $P=a(q^{-1}(t))$ is finite by finiteness of the fibres of $q$. Each point has a lift to $Z\\times_S\\operatorname{Spec}\\kappa(s)$: the corresponding point of $E_t$ maps to $Z$ and to $\\operatorname{Spec}\\kappa(t)\\to\\operatorname{Spec}\\kappa(s)$, so the fibre-product property supplies such a lift. Choose one for each element of $P$ and apply the hypothesis to this finite set; it gives an affine open $U_0\\subseteq Z$ containing $P$. Choose an affine open $V\\subseteq S$ containing $s$, and put $H=U_0\\cap(Z\\to S)^{-1}(V)$. Thus $P\\subseteq H$. If $P$ is empty use $U=\\varnothing$. Otherwise write $U_0=\\operatorname{Spec}A$ and let $J=\\{f\\in A:D(f)\\subseteq H\\}$. This is an ideal since $D(f+g)\\subseteq D(f)\\cup D(g)$ and $D(rf)\\subseteq D(f)$. The basic-open basis shows $J\\not\\subseteq\\mathfrak p_x$ for every $x\\in P$. Prime avoidance therefore gives $f\\in J$ outside all these finitely many prime ideals. The basic open $U=D(f)$ is affine and satisfies $P\\subseteq U\\subseteq H$, so $(V,U)$ is an index from step 2. It follows that $t\\in O_{V,U,a}$. Hence these opens cover $T$, and over each of them $a$ belongs to its corresponding $F_{V,U}$ by step 3. This is condition (2)(c).",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BL4 (lemma-hom-from-finite-locally-free-representable), proof of condition (2)(c); affine refinement by Tag 00DS (lemma-silly, prime avoidance) and Tag 01I3 (lemma-standard-open-affine)."
+   }
+  },
+  {
+   "text": "Steps 1–4 give all hypotheses (1), (2)(a), (2)(b), (2)(c) of the scheme-representability criterion. Apply it to $F$ and the family $F_{V,U}$. Its conclusion gives an $S$-scheme $W$ representing $F$, which means exactly the asserted bijections natural in every $S$-scheme. Every finiteness condition used above concerns $p$ and its base changes; no quasi-compactness, separatedness or smoothness assumption on $Z$ entered.",
+   "uses": [
+    "lem-pc-schemes-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JJ (lemma-glue-functors), conclusion; BLR 7.6 Theorem 4, final gluing argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-pc-fibre-product",
+  "lem-sfb-affine-weil-restriction-charts",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-pc-scheme-fibre",
+  "lem-pc-schemes-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Adaptation of Tag 0BL4 (lemma-hom-from-finite-locally-free-representable) to maps over S prime, using Tag 01JJ; affine input follows the coefficient construction of Tags 05Y6/0BL3. Same affine-chart/open-locus/gluing route as BLR 7.6 Theorem 4; no local BLR PDF available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weil restriction along a finite locally free morphism is representable by a scheme if every finite subset of each fibre lies in an affine open",
+   "results": "{\"t\": \"2026-10-24T07:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"Weil restriction along a finite locally free morphism is representable by a scheme if every finite subset of each fibre lies in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"AlgebraicGeometry.IsFinite.instFstScheme\"], \"digest\": \"d35d8101b9cc9508\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local representability and finite fibres are ingredients; no hit gives scheme representability of this Weil restriction under the finite-set affine-neighbourhood condition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilRestriction\"",
+   "results": "{\"t\": \"2026-10-24T07:17:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilRestriction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local representability and finite fibres are ingredients; no hit gives scheme representability of this Weil restriction under the finite-set affine-neighbourhood condition."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|weil.?[Rr]estriction|restriction of scalars",
+   "results": "{\"t\": \"2026-10-24T07:09:08Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|weil.?[Rr]estriction|restriction of scalars\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local representability and finite fibres are ingredients; no hit gives scheme representability of this Weil restriction under the finite-set affine-neighbourhood condition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars scheme representability affine open neighbourhood finite subset criterion",
+   "results": "{\"t\": \"2026-10-24T07:09:08Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars scheme representability affine open neighbourhood finite subset criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.affineOpensRestrict\", \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"AlgebraicGeometry.instIsAffineToSchemeValOpensMemSetAffineOpens\", \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk\"], \"digest\": \"68c47720385eedda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local representability and finite fibres are ingredients; no hit gives scheme representability of this Weil restriction under the finite-set affine-neighbourhood condition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of a scheme along a finite flat finite presentation map is a scheme under the affine neighbourhood property",
+   "results": "{\"t\": \"2026-10-24T07:09:19Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars of a scheme along a finite flat finite presentation map is a scheme under the affine neighbourhood property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat\"], \"digest\": \"676f231223b36d12\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: local representability and finite fibres are ingredients; no hit gives scheme representability of this Weil restriction under the finite-set affine-neighbourhood condition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil restriction of an affine scheme along a finite locally free morphism of affine schemes is represented by an affine scheme",
+   "results": "{\"t\": \"2026-10-24T07:49:40Z\", \"tool\": \"leanfinder\", \"query\": \"Weil restriction of an affine scheme along a finite locally free morphism of affine schemes is represented by an affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.affineAnd_apply\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.Hom.finite_app\"], \"digest\": \"9ee63d908a113ce1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite/affine morphisms and affine space are ingredients; no hit constructs the affine representing scheme of the relative restriction-of-scalars functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilRestriction\"",
+   "results": "{\"t\": \"2026-10-24T07:49:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilRestriction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite/affine morphisms and affine space are ingredients; no hit constructs the affine representing scheme of the relative restriction-of-scalars functor."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|weil.?restriction|restriction of scalars",
+   "results": "{\"t\": \"2026-10-24T07:49:38Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|weil.?restriction|restriction of scalars\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite/affine morphisms and affine space are ingredients; no hit constructs the affine representing scheme of the relative restriction-of-scalars functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil restriction of affine schemes is affine for finite locally free base change",
+   "results": "{\"t\": \"2026-10-24T07:49:39Z\", \"tool\": \"leansearch\", \"query\": \"Weil restriction of affine schemes is affine for finite locally free base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.affineOpensRestrict\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\"], \"digest\": \"0a07c3a52dccf3d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite/affine morphisms and affine space are ingredients; no hit constructs the affine representing scheme of the relative restriction-of-scalars functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The restriction of scalars of an arbitrary affine B scheme along a finite projective ring map A to B is affine and represents Hom over B after tensoring with B",
+   "results": "{\"t\": \"2026-10-24T07:50:23Z\", \"tool\": \"leanfinder\", \"query\": \"The restriction of scalars of an arbitrary affine B scheme along a finite projective ring map A to B is affine and represents Hom over B after tensoring with B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.affineAnd_apply\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.HasAffineProperty.SpecMap_iff_of_affineAnd\", \"AlgebraicGeometry.HasRingHomProperty.appTop\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.map_Spec_map\"], \"digest\": \"5443cb54e5c283a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite/affine morphisms and affine space are ingredients; no hit constructs the affine representing scheme of the relative restriction-of-scalars functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restriction\", \"affine\"",
+   "results": "{\"t\": \"2026-10-24T07:52:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"restriction\\\", \\\"affine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite/affine morphisms and affine space are ingredients; no hit constructs the affine representing scheme of the relative restriction-of-scalars functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor T maps to Hom over S prime from T times S prime to Z is represented by a scheme if every finite subset in a fibre of Z has an affine neighbourhood",
+   "results": "{\"t\": \"2026-10-24T07:51:39Z\", \"tool\": \"leanfinder\", \"query\": \"A functor T maps to Hom over S prime from T times S prime to Z is represented by a scheme if every finite subset in a fibre of Z has an affine neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h\\ud835\\udcb0S\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.\\ud835\\udcb0D\\u2080\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.\\ud835\\udcb0D\"], \"digest\": \"ec30a9ad4a35c81a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Scheme.LocalRepresentability.isRepresentable is the general gluing criterion only; its open chart and local covering hypotheses still require the argument of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "representable|LocalRepresentability|Weil",
+   "results": "{\"t\": \"2026-10-24T07:52:20Z\", \"tool\": \"grep\", \"query\": \"representable|LocalRepresentability|Weil\", \"sub\": \"AlgebraicGeometry/Functor\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match; this guessed subdirectory has no hits. The subsequent grep in AlgebraicGeometry/Sites locates the generic gluing criterion, which is not this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars representable functor finite fibre affine open neighbourhood scheme gluing",
+   "results": "{\"t\": \"2026-10-24T07:52:21Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars representable functor finite fibre affine open neighbourhood scheme gluing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RestrictScalars\", \"ModuleCat.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\"], \"digest\": \"13d91165380aebda\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are scalar restriction on modules or the generic scheme gluing criterion; none establishes the required affine charts and open cover for this Weil-restriction functor."
+  },
+  {
+   "tool": "grep",
+   "query": "Weil|restrict.*[Ss]calar|LocalRepresentability",
+   "results": "{\"t\": \"2026-10-24T07:52:54Z\", \"tool\": \"grep\", \"query\": \"Weil|restrict.*[Ss]calar|LocalRepresentability\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\", \"Mathlib/AlgebraicGeometry/Sites/Representability.lean\"], \"digest\": \"17ddcc0f34fa052e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are scalar restriction on modules or the generic scheme gluing criterion; none establishes the required affine charts and open cover for this Weil-restriction functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-lft-weil-restriction-geometry",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), open direct image preservation through sk-prop-open-coefficients; in the DAG refinement of admissible direct image, trait-extension input and finite-flat Néron lft descent (BLR 10.1 Proposition 4). BLR 7.6 Theorem 4, printed pp.194–195 (PDF pp.200–201), affine-neighbourhood criterion.",
+   "via": [
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-weil-restriction-affine-neighbourhood-criterion",
+  "worker": "stage1",
+  "summary": "Q47 checked the BLR criterion against the primary-source scan and split its affine-chart/open-subfunctor argument into five steps. Retained the statement exactly, used existing finite-map, base-change-image, prime-avoidance and scheme-gluing nodes, and created only the genuine affine representability input. Explicitly shrank affine charts by prime avoidance over affine base opens and verified the open-subfunctor condition for arbitrary base changes, including rank zero. No Lean attachment or Mathlib match for the item or new affine input.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability proof, paragraph on open direct image via sk-prop-open-coefficients; preserves the inherited Neron-lft/Weil-restriction refinement below that paragraph. This created chain has blueprint.from.node null (confirmed by blueprint_refs.py ancestor); no direct blueprint node states this criterion or the affine input.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Generic Zariski representability/gluing criterion (Stacks Tag 01JJ), used after all four hypotheses are proved explicitly. No local unit node provides this general scheme gluing tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-schemes-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-ac44bf319",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-ac44bf319 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-affine-weil-restriction-charts and all 14 cited statements in full, against Stacks more-morphisms 05Y6, 0BL3 and 0BL4 (labels checked in tags/tags) and Schemes 01JJ. The local BLR PDF is missing (WANTED) and the proof is correctly marked agent-written. The item statement is unchanged and its affine-neighbourhood hypothesis matches BLR 7.6 Thm 4. Step 1: Zariski sheaf via open-preimage-fibre-product and morphism gluing; correct. Step 2: open immersions are monomorphisms, so S-maps to R_{V,U} are V-factorizations; correct. Step 3: q is finite by base change, q(C) is closed for any closed set, and lem-weil-pbc-base-change-image gives q'(p^{-1}C)=f^{-1}q(C) for every subset, so the open subfunctor holds for arbitrary T'. Step 4: P is finite and lies over s; it lifts to Z_s through the fibre homeomorphism; the ideal J of f with D(f) inside H avoids each prime of P, and prime avoidance gives an affine D(f) through V, which closes the 0BL4 gap. The empty-P case is handled. Step 5: 01JJ, declared as a generic tool use (acceptable). New node: true (equalizer inside the affine Mor_V of 0BL3, or 05Y6 with B-linearity equations, local on V). Edge cases checked: rank 0, U empty, p the identity, no finite type. It is strictly smaller than the item and duplicates nothing: affine-finite-free-hom needs a global basis and gives Mor rather than maps over S'; 05Y7/05YF give only algebraic spaces; no 0BL3 node exists. Blueprint same_as [] confirmed by grep. Four kinds of search are recorded. Cosmetic, not fixed: step 2's source.document is more-morphisms.tex while its place starts with 01JJ, which is in schemes.tex."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.WeilRestrictionAffineNeighbourhood",
+  "declaration": "AlgebraicGeometry.weilRestriction_representable_of_affineNeighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/WeilRestrictionAffineNeighbourhood.lean",
+  "statement": "theorem weilRestriction_representable_of_affineNeighbourhood {S S' Z : Scheme.{u}} (p : S' ⟶ S) [p.IsFiniteLocallyFree] (q : Z ⟶ S') (h : ∀ (s : S) (P : Set ↥(pullback (q ≫ p) (S.fromSpecResidueField s))), P.Finite → ∃ U : Z.Opens, IsAffineOpen U ∧ (pullback.fst (q ≫ p) (S.fromSpecResidueField s)) '' P ⊆ (U : Set Z)) : ∃ W : Over S, Nonempty (yoneda.obj W ≅ (Over.pullback p).op ⋙ yoneda.obj (Over.mk q))",
+  "branch": "sheaf-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf9b226e0",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Statement matches node and BLR 7.6 Thm 4 clause by clause. S, S', Z : Scheme.{u}; [p.IsFiniteLocallyFree] is the recorded FiberDegree class (finite+flat+lfp). Fibre = pullback (q≫p) (S.fromSpecResidueField s); image of finite P under pullback.fst lies in an IsAffineOpen U. F = (Over.pullback p).op ⋙ yoneda.obj (Over.mk q); Mathlib source checked: obj = X×_S S' over S', maps act by precomposition. Conclusion ∃ W : Over S, Nonempty (yoneda.obj W ≅ F) gives natural bijections. No extra qc/sep/smooth/rank/universe assumptions. Edge cases: empty P, empty S/S' (rank 0), p = id, nonflat/nonreduced tests. No Weil-restriction definition node or Lean declaration exists, so the inline Mathlib functor is not a duplicate. Non-lean node fields identical to live; lean.statement verbatim in file. Only the theorem, sorry proof, source/blueprint docstrings and 5-step plan present; report has Worker report and Second reading by Q101. Unlanded proof dep lem-sfb-affine-weil-restriction-charts has no import yet; maintainer adds it under §3.7. No files changed, so no compile run."
+ }
+}

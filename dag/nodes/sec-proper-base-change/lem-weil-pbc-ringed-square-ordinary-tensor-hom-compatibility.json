@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-ringed-square-ordinary-tensor-hom-compatibility",
+ "kind": "statement",
+ "title": "The hom-oriented ordinary total tensor square",
+ "statement": "For a ringed tensor square s [def-weil-pbc-ringed-tensor-square-presentation] and arbitrary cochain complexes P,Q, let γ be its termwise module comparison, T_A the ordinary total tensor at a corner, and e_e:T_B(e*P,e*Q)≅e*T_A(P,Q) the canonical total comparison. Put a=e_k; k*(e_g), b=e_h; h*(e_f). Then T_X′(γ_P,γ_Q);b.hom = a.hom;γ_TY(P,Q). The local module identity is [lem-weil-pbc-ringed-square-module-tensor-compatibility], and the individual total components are [lem-weil-pbc-ringed-tensor-total-component].",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-tensor-square-presentation",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0E48 (remark-compatible-with-diagram, tensor verification omitted)"
+ },
+ "proof": [
+  {
+   "text": "Conjugate the ordinary module tensor identity by the two composite ordinary tensor isomorphisms to obtain the inverse module square.",
+   "uses": [
+    "lem-weil-pbc-ringed-square-module-tensor-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Test the hom-oriented total square in each degree and on every coproduct summand. Substitute the canonical total component formula for all four edges. Naturality of the specified module square moves it past the inclusion. The remaining equation is the inverse module square followed by the same pulled-back inclusion.",
+   "uses": [
+    "lem-weil-pbc-ringed-tensor-total-component",
+    "lem-weil-pbc-ringed-square-module-tensor-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-square-module-tensor-compatibility",
+  "lem-weil-pbc-ringed-tensor-total-component"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "F3: proved component of the ordinary total-complex square; extracted for the 60-second per-file compilation limit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensor pullback comparison commutes with a natural isomorphism of ringed topoi pullbacks",
+   "results": "8 hits; SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackIso. No ringed-square tensor compatibility statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor compatibility natural isomorphism pullback square of ringed topoi",
+   "results": "8 hits; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, CategoryTheory.Limits.CategoricalPullback.mkNatIso, SheafOfModules.sheafificationCompPullback, CategoryTheory.Over.starPullbackIsoStar, PresheafOfModules.pullback_comp_id, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, PresheafOfModules.pullback_id_comp, SheafOfModules.freeFunctorCompPullbackIso. No ringed-square tensor compatibility statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits; CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map. No ringed-square tensor compatibility statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*pullbackComp|pullbackComp.*tensor|RingedTensorSquare",
+   "results": "0 hits; . No ringed-square tensor compatibility statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedSquareTensorCompatibility",
+  "date": "2026-10-27",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (b): degreewise ordinary tensor square in lem-weil-pbc-ringed-square-tensor-compatibility",
+   "via": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-square-tensor-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedSquareOrdinaryTensorHomCompatibility",
+  "file": "lean/Sheaf/Paper/RingedSquareOrdinaryTensorHomCompatibility.lean",
+  "declaration": "SheafOfModules.ringedSquareOrdinaryTensorHomCompatibility",
+  "statement": "theorem ringedSquareOrdinaryTensorHomCompatibility\n    (s : RingedTensorSquare Y X Y' X' f g h k)\n    (P Q : CochainComplex (SheafOfModules.{u}\n      ((sheafCompose Y.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj Y.ring)) ℤ) :\n  let F := f.pullback.mapHomologicalComplex (.up ℤ)\n  let G := g.pullback.mapHomologicalComplex (.up ℤ)\n  let H := h.pullback.mapHomologicalComplex (.up ℤ)\n  let K := k.pullback.mapHomologicalComplex (.up ℤ)\n  let γ := (NatIso.mapHomologicalComplex s.modules (.up ℤ)).hom\n  let ef := f.ordinaryTensor.totalIso Y.ring X.ring f.inverseRing\n    f.inverse f.algebraic f.ringMap f.pullback f.object_eq\n    f.pushforward f.moduleAdjunction P Q\n  let eg := g.ordinaryTensor.totalIso Y.ring Y'.ring g.inverseRing\n    g.inverse g.algebraic g.ringMap g.pullback g.object_eq\n    g.pushforward g.moduleAdjunction P Q\n  let eh := h.ordinaryTensor.totalIso X.ring X'.ring h.inverseRing\n    h.inverse h.algebraic h.ringMap h.pullback h.object_eq\n    h.pushforward h.moduleAdjunction (F.obj P) (F.obj Q)\n  let ek := k.ordinaryTensor.totalIso Y'.ring X'.ring k.inverseRing\n    k.inverse k.algebraic k.ringMap k.pullback k.object_eq\n    k.pushforward k.moduleAdjunction (G.obj P) (G.obj Q)\n  let TY := Functor.uncurry.obj\n    ((@MonoidalCategory.curriedTensor (SheafOfModules.{u}\n      ((sheafCompose Y.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj Y.ring)) _\n      (monoidalCategory Y.ring)).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))\n  let TZ := Functor.uncurry.obj\n    ((@MonoidalCategory.curriedTensor (SheafOfModules.{u}\n      ((sheafCompose X'.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj X'.ring)) _\n      (monoidalCategory X'.ring)).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ))\n  let a : TZ.obj (K.obj (G.obj P), K.obj (G.obj Q)) ≅ K.obj (G.obj (TY.obj (P, Q))) :=\n    ek ≪≫ K.mapIso eg\n  let b : TZ.obj (H.obj (F.obj P), H.obj (F.obj Q)) ≅ H.obj (F.obj (TY.obj (P, Q))) :=\n    eh ≪≫ H.mapIso ef\n  TZ.map (CategoryTheory.Prod.mkHom (γ.app P) (γ.app Q)) ≫ b.hom =\n      a.hom ≫ γ.app (TY.obj (P, Q))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T222642-L-678572",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T222642-L-678572",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

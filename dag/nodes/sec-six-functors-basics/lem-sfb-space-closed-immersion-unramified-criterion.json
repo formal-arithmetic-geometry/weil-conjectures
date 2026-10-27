@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-space-closed-immersion-unramified-criterion",
+ "kind": "statement",
+ "title": "Closed immersions of universally closed algebraic-space morphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and the point spaces of [def-a1-space-point-topology]. Local finite type and unramifiedness mean the chart test of [def-sfb-space-morphism-properties] applied to the scheme properties [def-weil-finite-type-morphism] and [def-weil-unramified-morphism], respectively. Universally injective means injective on point spaces after every algebraic-space base change. Let $g:X\\to Y$ be universally closed, meaning closed on point spaces after every algebraic-space base change [def-sfb-space-morphism-properties]. Then $g$ is a closed immersion if and only if $g$ is unramified and universally injective. Here a closed immersion means a representable morphism whose every scheme base change is a closed immersion of schemes [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05W8 (spaces-more-morphisms-lemma-characterize-closed-immersion), equivalence of (1) and (3), with universal closedness fixed."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Assume $g$ is a closed immersion. It is representable, and for every scheme $T\\to Y$ the scheme morphism $g_T:X\\times_YT\\to T$ is a closed immersion, by the meaning of closed immersion in the statement. It is universally closed as a scheme morphism: for any scheme $T'\\to T$, its further base change is the base change of $g$ along $T'\\to Y$, hence is closed by [def-sfb-space-morphism-properties]. Apply [lem-sfb-universally-closed-unramified-radicial-criterion] to $g_T$. Thus every such $g_T$ is unramified and universally injective in the scheme sense.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-universally-closed-unramified-radicial-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05W8 (lemma-characterize-closed-immersion), forward implication by scheme tests and Tag 04XV."
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas $V\\to Y$ using [def-trf-algebraic-space]. Since $g$ is representable, $U=X\\times_YV$ is a scheme. By [lem-trf-space-fibre-products-etale-covers], its projection $U\\to X$ is representable surjective etale. The cartesian square with bottom arrow $g$ and top arrow $g_V:U\\to V$ is therefore a compatible chart diagram with surjective source chart. Its top arrow is unramified by step 1, so [lem-sfb-unramified-etale-compatible-charts] gives chartwise unramifiedness of $g$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-unramified-etale-compatible-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05W8, forward implication; scheme-test/chart comparison as in spaces-morphisms.tex Tag 03ZK (lemma-unramified-local)."
+   }
+  },
+  {
+   "text": "To check universal injectivity, let $Z\\to Y$ be any algebraic-space map and take two point classes of $X\\times_YZ$ with the same image in $|Z|$. By [def-a1-algebraic-space-point-classes], extend their field representatives to a common field $K$ where their $Z$-components agree. Their $X$-components then lie over the same $y:\\operatorname{Spec}K\\to Y$. They define two $K$-valued points of the scheme $X\\times_{Y,y}\\operatorname{Spec}K$ over its identity $K$-point. Step 1 says this scheme morphism is universally injective; the field-valued injectivity criterion stated in [def-weil-radicial-morphism] makes these points equal. The pointwise fibre-product identity [lem-trf-space-fibre-products-etale-covers] now makes the two representatives in $X\\times_YZ$ equal over $K$, so their point classes agree. This proves injectivity after every algebraic-space base change.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "def-weil-radicial-morphism",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05W8, forward implication; elementary common-field argument from spaces-morphisms.tex Tag 040X (lemma-universally-injective), (1) implies (2)."
+   }
+  },
+  {
+   "text": "Conversely, assume $g$ is unramified and universally injective. By [lem-sfb-space-unramified-radicial-representable], $g$ is representable by schemes. Fix any scheme $T\\to Y$. The base change $g_T:X\\times_YT\\to T$ is consequently a scheme morphism. It is unramified by [lem-sfb-space-unramified-permanence]; applying the chart characterization [lem-sfb-unramified-etale-compatible-charts] to its identity scheme charts gives unramifiedness in the scheme sense. It is universally injective as a scheme morphism because every further scheme base change is among the algebraic-space base changes in the hypothesis. It is universally closed by the identical observation for closed maps and [def-sfb-space-morphism-properties]. Thus [lem-sfb-universally-closed-unramified-radicial-criterion] makes $g_T$ a closed immersion. Since $T\\to Y$ was arbitrary, this is precisely the stated scheme-test definition of a closed immersion of algebraic spaces.",
+   "uses": [
+    "lem-sfb-space-unramified-radicial-representable",
+    "lem-sfb-space-unramified-permanence",
+    "lem-sfb-unramified-etale-compatible-charts",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-universally-closed-unramified-radicial-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05W8, last two sentences: representability from Tag 05W6, then scheme criterion Tag 04XV."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-universally-closed-unramified-radicial-criterion",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-unramified-etale-compatible-charts",
+  "def-a1-algebraic-space-point-classes",
+  "def-weil-radicial-morphism",
+  "lem-sfb-space-unramified-radicial-representable",
+  "lem-sfb-space-unramified-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05W8 (lemma-characterize-closed-immersion), equivalence (1) and (3); representability via Tag 05W6 and scheme criterion Tag 04XV. The field-point verification is expanded from Tag 040X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces a morphism is a closed immersion if and only if it is universally closed unramified and universally injective",
+   "results": "{\"t\": \"2026-10-23T14:16:21Z\", \"tool\": \"leanfinder\", \"query\": \"For algebraic spaces a morphism is a closed immersion if and only if it is universally closed unramified and universally injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.isClosedImmersion_iff\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\"], \"digest\": \"07a6c7f514783c61\"}; The hits IsClosedImmersion, iff_isPreimmersion and isClosedImmersion_iff_isAffineHom are scheme declarations, read in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:43-68,370-373. UniversallyInjective is scheme-only at Morphisms/UniversallyInjective.lean:36-79. None is the algebraic-space criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"Unramified\"",
+   "results": "{\"t\": \"2026-10-23T14:16:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsClosedImmersion\\\", \\\"Unramified\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The hits IsClosedImmersion, iff_isPreimmersion and isClosedImmersion_iff_isAffineHom are scheme declarations, read in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:43-68,370-373. UniversallyInjective is scheme-only at Morphisms/UniversallyInjective.lean:36-79. None is the algebraic-space criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isClosedImmersion_iff|IsClosedImmersion.*[Uu]nramified",
+   "results": "{\"t\": \"2026-10-23T14:16:19Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|isClosedImmersion_iff|IsClosedImmersion.*[Uu]nramified\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"f6aa494d0185e1fd\"}; The hits IsClosedImmersion, iff_isPreimmersion and isClosedImmersion_iff_isAffineHom are scheme declarations, read in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:43-68,370-373. UniversallyInjective is scheme-only at Morphisms/UniversallyInjective.lean:36-79. None is the algebraic-space criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universally closed unramified universally injective morphism of algebraic spaces is a closed immersion",
+   "results": "{\"t\": \"2026-10-23T14:16:20Z\", \"tool\": \"leansearch\", \"query\": \"A universally closed unramified universally injective morphism of algebraic spaces is a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.UniversallyInjective.mk\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\"], \"digest\": \"7c8f8f217e3aaa65\"}; The hits IsClosedImmersion, iff_isPreimmersion and isClosedImmersion_iff_isAffineHom are scheme declarations, read in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:43-68,370-373. UniversallyInjective is scheme-only at Morphisms/UniversallyInjective.lean:36-79. None is the algebraic-space criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Characterization of representable closed immersions of algebraic spaces by universal closedness and unramified radicial morphisms",
+   "results": "{\"t\": \"2026-10-23T14:16:21Z\", \"tool\": \"leanfinder\", \"query\": \"Characterization of representable closed immersions of algebraic spaces by universal closedness and unramified radicial morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.isClosedImmersion_iff\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.universallyClosed_iff\"], \"digest\": \"30ff101ab55f9575\"}; The hits IsClosedImmersion, iff_isPreimmersion and isClosedImmersion_iff_isAffineHom are scheme declarations, read in Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:43-68,370-373. UniversallyInjective is scheme-only at Morphisms/UniversallyInjective.lean:36-79. None is the algebraic-space criterion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally closed unramified universally injective morphism of algebraic spaces is a closed immersion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsPreimmersion f],\\n  IsClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    AlgebraicGeometry.IsPreimmersion f ∧ IsClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is a closed immersion if and only if it is a preimmersion and the image of $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.out\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.UniversallyClosed f],\\n  (AlgebraicGeometry.topologically @IsClosedMap).universally f\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is universally closed, then the underlying continuous map of $ f $ is universally closed in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally injective if for every base change, the induced morphism on the underlying topological spaces is injective.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"@AlgebraicGeometry.UniversallyClosed = (AlgebraicGeometry.topologically @IsClosedMap).universally\", \"doc\": \"The property of a morphism of schemes being universally closed coincides with the property that its underlying continuous map is a closed map and this property is preserved under all base changes.\"}\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"Unramified\"",
+   "results": "[loogle] OK 0 hit(s)\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isClosedImmersion_iff|IsClosedImmersion.*[Uu]nramified",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"58\", \"text\": \"  rw [isClosedImmersion_iff, and_comm]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"63\", \"text\": \"  rw [isClosedImmersion_iff, isPreimmersion_iff, and_assoc, isClosedEmbedding_iff]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"370\", \"text\": \"lemma isClosedImmersion_iff_isAffineHom {f : X ⟶ Y} :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"378\", \"text\": \"  (isClosedImmersion_iff_isAffineHom.mp ‹_›).2 U hU\"}\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion criterion for universally closed unramified radicial morphisms of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[IsClosedImmersion f] : UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsIntegralHom f\", \"doc\": \"Every closed immersion of schemes is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is a closed immersion if the underlying continuous map is a closed embedding and the induced maps on stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{f : X ⟶ Y} : IsClosedImmersion f ↔ IsAffineHom f ∧ ∀ U : Y.Opens, IsAffineOpen U → Function.Surjective (f.app U)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is a closed immersion if and only if it is an affine morphism and for every affine open subset $U$ of $Y$, the induced ring homomorphism on sections $\\\\mathcal{O}_Y(U\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [UniversallyClosed f] : IsClosedMap f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes that is universally closed is also a closed map, meaning the image of every closed subset of $ X $ under $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsClosedImmersion f ↔ IsFinite f ∧ Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions of algebraic spaces characterized by representable universally closed unramified monomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    AlgebraicGeometry.IsPreimmersion f ∧ IsClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is a closed immersion if and only if it is a preimmersion and the image of $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f], AlgebraicGeometry.IsImmersion f\", \"doc\": \"Any closed immersion between schemes is an immersion. Specifically, if $ f: X \\to Y $ is a closed immersion of schemes (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with a su\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    AlgebraicGeometry.SurjectiveOnStalks f ∧ Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is a closed immersion if and only if the induced maps on stalks are surjective and the underlying continuous map is a closed embedding.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsClosedImmersion f ↔ AlgebraicGeometry.IsFinite f ∧ CategoryTheory.Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsPreimmersion f],\\n  IsClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}\n\nRead candidate sources: Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean:36-79, ClosedImmersion.lean:43-68 and Finite.lean:124, FormallyUnramified.lean:45-56. These declarations concern scheme morphisms or ring maps, not algebraic-space representability. No algebraic-space match.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-universal-closed-immersion-open",
+  "date": "2026-10-23",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor. In quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism to the first projection. Supporting input: Tag 05XA (spaces-more-morphisms-lemma-where-closed-immersion), all three hypotheses and arbitrary algebraic-space parameter changes. Supporting input: Tag 05XA proof, first sentence: characterization of closed immersions as universally closed, unramified and universally injective.",
+   "via": [
+    "lem-sfb-space-universal-closed-immersion-open",
+    "lem-sfb-space-universal-isomorphism-open",
+    "lem-sfb-space-graphs-open-in-hilbert",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-closed-immersion-unramified-criterion",
+  "worker": "stage1",
+  "summary": "Expanded Tag 05W8 into scheme tests, chart recognition, a written common-field universal-injectivity argument, and the converse. Reused the existing scheme criterion and chart/base-change nodes. Added only the missing Tag 05W6 representability input, without a proof or universal-closedness hypothesis. Searched the entire DAG, current blueprint and Lean source, and ran all Mathlib searches through msearch.py.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor. In quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism to the first projection. Supporting input: Tag 05XA (spaces-more-morphisms-lemma-where-closed-immersion), all three hypotheses and arbitrary algebraic-space parameter changes. Supporting input: Tag 05XA proof, first sentence: characterization of closed immersions as universally closed, unramified and universally injective. The split realizes the Tag 05W8 criterion required in the first sentence of Tag 05XA, by its actual representability-and-scheme-tests proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-53fb66107",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-53fb66107 (reviewer sub-agent of L); spot-checked: I read Stacks 05W8 (spaces-more-morphisms l.2906), 05W6 (l.2867), etale 04XV (l.664) and spaces-morphisms 040X (l.3461). The item's statement, stmt_deps and blueprint are unchanged from side-live; it is still unsplit live and no repair note applies. Step 1: universal closedness of g_T comes from def-sfb-space-morphism-properties, then the scheme criterion lem-sfb-universally-closed-unramified-radicial-criterion. Step 2: atlas pulled back along the representable g; the single surjective-chart test of lem-sfb-unramified-etale-compatible-charts applies. Step 3 is the 040X common-field argument through 01S4(1) on X×_Y Spec K; it is short and correctly marked elementary. Step 4: the new node gives representability; base change by permanence, then identity charts, then the scheme criterion, which is exactly the 05W8 route. New node lem-sfb-space-unramified-radicial-representable is the 05W6 moreover clause under (2). It is self-contained, statement-only, with blueprint from/via set. It is strictly smaller than the item (no universal closedness; G_m→A^1 satisfies it and is not a closed immersion) and is not a clause of the item. Checked against Spec k'→k separable, Spec k^{1/p}→k and empty cases. No duplicate: 05W1 open-diagonal, 0463 lft-mono-lqf and 03XX separated-lqf-representable nodes are scheme-target or monomorphism inputs, not this statement. Batch-5 flags (def-trf-algebraic-space, trf fibre products, trf-scheme-monomorphism-separated via the scheme criterion, and the a1/sfb space definitions) are generic foundations outside the trace formula and Poincaré duality, so accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceClosedImmersionUnramifiedCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isClosedImmersion_iff_unramified_universallyInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceClosedImmersionUnramifiedCriterion.lean",
+  "statement": "theorem isClosedImmersion_iff_unramified_universallyInjective {S : Scheme.{u}} {X Y : AlgebraicSpace S} (g : X ⟶ Y) (hg : MapIsUniversallyClosed g) : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) g.hom.hom ↔ MapIsLocally (@IsUnramified) g ∧ ∀ (Y' : AlgebraicSpace S) (h : Y' ⟶ Y), Function.Injective (mapPoint (pullback.snd g.hom h.hom).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4510cdceb",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Stacks 05W8 (1)<=>(3) with universal closedness fixed. Each part uses the existing project definition: IsRepresentableWith(IsClosedImmersion p.left) for closed immersion, MapIsLocally(@IsUnramified) for unramified, and injective mapPoint of pullback.snd after every algebraic-space base change for universally injective (same form as MapIsUniversallyClosed); hg : MapIsUniversallyClosed. No extra hypotheses or universe restriction. Edge cases checked: empty spaces, identity base change, separable and inseparable field extensions, open immersions. No duplicate in the project or Mathlib; SpaceMapIsUnramified is only a space-to-scheme variant. lean.statement matches the file verbatim; the node differs from live only in its lean field; docstrings give the source place, blueprint tag and four proof steps; proof is sorry only; no new definitions; report sections present; no parallel stage-2 landing in svc.log. No file changed, so nothing recompiled."
+ }
+}

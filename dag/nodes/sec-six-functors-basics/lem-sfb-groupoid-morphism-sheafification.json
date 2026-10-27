@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-groupoid-morphism-sheafification",
+ "kind": "statement",
+ "title": "Morphism sheafification of a fibred groupoid",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $(\\mathcal C,J)$ be a site [def-weil-pbc-topos] whose objects and arrows form sets in the larger universe; all groupoids and their morphism sets below belong to that universe. A fibred groupoid has cartesian pullbacks along every base arrow, with their coherent comparison isomorphisms. A prestack is a fibred groupoid whose presheaves of isomorphisms on slice sites are sheaves. A stack is a prestack in which covering descent data for objects are effective. Let $\\mathcal P$ be a fibred groupoid. Keep its fibre objects and replace, for $u,v\\in\\mathcal P(T)$, its presheaf $I_{u,v}$ of isomorphisms on $\\mathcal C/T$ by its set-valued sheafification $I_{u,v}^{\\#}$ [def-weil-pbc-sheafification]. Take the new arrows $u\\to v$ in the fibre over $T$ to be $I_{u,v}^{\\#}(1_T)$. Composition, identities, inverses, and pullback extend those of $\\mathcal P$, and give a fibred groupoid $\\mathcal P^{\\mathrm{pre}}$ with these objects and arrows. It is a prestack, and the sheafification maps define an objectwise identity pullback-compatible functor $q:\\mathcal P\\to\\mathcal P^{\\mathrm{pre}}$. Its isomorphism sheaf between $q(u),q(v)$ is canonically $I_{u,v}^{\\#}$, compatibly with the map from $I_{u,v}$. For any prestack $\\mathcal Z$ and pullback-compatible functor $F:\\mathcal P\\to\\mathcal Z$, there is a pullback-compatible functor $F^{\\mathrm{pre}}:\\mathcal P^{\\mathrm{pre}}\\to\\mathcal Z$ and an invertible natural transformation $F^{\\mathrm{pre}}q\\cong F$.",
+ "source": {
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 02ZN (lemma-stackify), naive proof, quotient locally equal arrows and add locally defined arrows, first four construction paragraphs; Tag 0435 (lemma-stackify-universal-property), extension on morphisms into a prestack."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-topos",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Work on covering sieves throughout; no fibre products in $\\mathcal C$ are assumed. Use [def-pur-localized-ringed-site] for slice restriction and relocalization. For $u,v\\in\\mathcal P(T)$ put $A_{u,v}=I_{u,v}^{\\#}$, using [lem-trf-sieve-set-sheafification-exists] on $\\mathcal C/T$. The universal property [def-weil-pbc-sheafification] shows that sheafifying its unit $\\eta:I_{u,v}\\to A_{u,v}$ gives an isomorphism: the sheafification of a sheaf is itself, and both composites are identities by uniqueness of factorization. Hence [lem-cbc-set-presheaf-sheafification-local-bijection] makes $\\eta$ locally surjective and locally injective. Thus sections of $A_{u,v}$ have local representatives in $I_{u,v}$; representatives of the same section become equal on a covering sieve. Intersections of finitely many covering sieves cover: for two, pull back the second along every arrow of the first and apply transitivity [def-weil-pbc-topos]. Iterating gives simultaneous representatives of any finite list of sections.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-trf-sieve-set-sheafification-exists",
+    "def-weil-pbc-sheafification",
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), naive proof, first four construction paragraphs; the omitted checks are supplied explicitly for groupoids."
+   }
+  },
+  {
+   "text": "Construct composition on $\\mathcal C/T$ explicitly. For $a\\in A_{u,v}(f)$ and $b\\in A_{v,w}(f)$ choose a common covering sieve of $\\operatorname{dom}(f)$ representing them by arrows $a_r,b_r$ of $\\mathcal P$. On each member take $\\eta(b_r\\circ a_r)$. For any two choices, their restrictions to any common further arrow have equal images for $a$ and $b$; local injectivity from [lem-cbc-set-presheaf-sheafification-local-bijection] makes both pairs of representatives equal after a common covering refinement. Their composites then agree there, and separatedness of $A_{u,w}$ makes their images equal before that refinement. The sheaf condition [def-weil-pbc-topos] therefore glues these sections uniquely to $b\\circ a$. The same argument proves independence of the covering and representatives. Restricting the chosen sieve and its representatives gives the construction after any base arrow, so composition is a morphism of presheaves. Set $1_u=\\eta(1_u)$ and define $a^{-1}$ by gluing $\\eta(a_r^{-1})$; local equality of representatives and separatedness prove that this too is independent of choices and commutes with restriction.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), naive proof, first four construction paragraphs; the omitted checks are supplied explicitly for groupoids."
+   }
+  },
+  {
+   "text": "For three composable sections choose simultaneous representatives, as in step 1. On this covering sieve the two bracketings of their composite are the images of $(c_r\\circ b_r)\\circ a_r=c_r\\circ(b_r\\circ a_r)$ in $\\mathcal P$. Separatedness [def-weil-pbc-topos] gives global associativity. The equations $a\\circ1=a=1\\circ a$, $a^{-1}\\circ a=1$ and $a\\circ a^{-1}=1$ follow in exactly the same explicit way: represent $a$ locally, use the corresponding identity in its original fibre groupoid, and use separatedness. Consequently each fibre with objects those of $\\mathcal P(T)$ and arrows $A_{u,v}(1_T)$ is a groupoid. Also $\\eta(b\\circ a)=\\eta(b)\\circ\\eta(a)$ and $\\eta(1)=1$ by the construction on original representatives; thus $q_T$ is a functor, identity on objects.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), naive proof, first four construction paragraphs; the omitted checks are supplied explicitly for groupoids."
+   }
+  },
+  {
+   "text": "Let $h:S\\to T$. Relocalization [def-pur-localized-ringed-site] identifies $(\\mathcal C/T)/(S\\to T)$ with $\\mathcal C/S$. The original pullback comparisons identify the restriction of $I_{u,v}$ with $I_{h^*u,h^*v}$ by conjugation. Apply [lem-cbc-sieve-slice-sheafification] on $\\mathcal C/T$ at $(S,h)$ to obtain a unit-compatible isomorphism $A_{u,v}|_{\\mathcal C/S}\\cong A_{h^*u,h^*v}$. Define $h^*$ on new arrows by restriction followed by this isomorphism. It preserves composition, identity and inversion: on local representatives these assertions are respectively the corresponding assertions for the original pullback functor, and separatedness makes them hold for all sections. Take the identity and composition comparisons for these pullbacks to be the images under $q$ of the original comparisons. Their naturality on new arrows follows by the same local-representative check. Their unit equations and associativity (cocycle) equation $c_{h,\\ell k}\\circ h^*(c_{k,\\ell})=c_{kh,\\ell}\\circ c_{h,k}$ (on $\\ell^*$ applied to an object) already hold on each object in $\\mathcal P$, so their images under the fibre functors $q_T$ satisfy those equations. This gives coherent pullbacks; the unit compatibility also makes $q$ pullback-compatible.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-cbc-sieve-slice-sheafification",
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), naive proof, first four construction paragraphs; the omitted checks are supplied explicitly for groupoids."
+   }
+  },
+  {
+   "text": "For completeness, assemble the total fibred category directly. Its objects are pairs $(T,u)$ with $u\\in\\mathcal P(T)$. An arrow $(S,u)\\to(T,v)$ is $(h,a)$ with $h:S\\to T$ and $a:u\\to h^*v$ a new fibre arrow. Write $c_{h,k}:h^*k^*\\cong(kh)^*$ for the comparisons from step 4. Define $(k,b)\\circ(h,a)=(kh,c_{h,k}\\circ h^*(b)\\circ a)$; identities use the inverse of the pullback identity comparison. Substitution in this formula shows that associativity is the associativity (cocycle) equation for $c$, its naturality, and fibre associativity; the unit equations give the two identity laws. The arrow $(h,1):(S,h^*v)\\to(T,v)$ is cartesian: any arrow $(h\\ell,b)$ factors over $\\ell$ uniquely through it by the vertical component $c_{\\ell,h}^{-1}\\circ b$. These formulas prove the factorization and uniqueness. All vertical arrows are invertible by step 3, so the result is a category fibred in groupoids. An original arrow over $h$ factors uniquely through the chosen original cartesian lift, and sending its vertical factor by $q_S$ defines the asserted functor on total categories. The composition formula and step 4 show that it preserves composition and the cartesian lifts. No objects are added.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), naive proof, first four construction paragraphs; the omitted checks are supplied explicitly for groupoids."
+   }
+  },
+  {
+   "text": "For $h:S\\to T$, the arrows between $h^*q(u)$ and $h^*q(v)$ in the new fibre are $A_{h^*u,h^*v}(1_S)$. The unit-compatible isomorphism of step 4 identifies this set with $A_{u,v}(h)$. Its naturality identifies restriction maps as well. Thus the entire isomorphism presheaf between $q(u)$ and $q(v)$ is canonically $A_{u,v}=I_{u,v}^{\\#}$, not merely its value at $1_T$; its map from $I_{u,v}$ is $\\eta$ by the unit equation in [lem-cbc-sieve-slice-sheafification]. Each such presheaf is a sheaf, so the new fibred groupoid is a prestack by the definition in the item.",
+   "uses": [
+    "lem-cbc-sieve-slice-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), naive proof, first four construction paragraphs; the omitted checks are supplied explicitly for groupoids."
+   }
+  },
+  {
+   "text": "Let $F:\\mathcal P\\to\\mathcal Z$ be as in the statement, and write $K_{u,v}=\\operatorname{Isom}_{\\mathcal Z}(F(u),F(v))$ on $\\mathcal C/T$. This is a sheaf because $\\mathcal Z$ is a prestack. The original $F$, together with its pullback comparisons, gives a presheaf map $I_{u,v}\\to K_{u,v}$. By [lem-trf-sieve-set-sheafification-exists], it extends uniquely to a sheaf map $\\phi_{u,v}:A_{u,v}\\to K_{u,v}$. Define $F_T^{\\mathrm{pre}}(u)=F_T(u)$ and its map on arrows by $\\phi_{u,v}(1_T)$. On a simultaneous local representation of two new arrows, $\\phi$ sends their composite to $F(b_r\\circ a_r)=F(b_r)\\circ F(a_r)$; separatedness of $K_{u,w}$ gives preservation of composition globally. Identities are preserved since $\\phi\\eta=F$ on original arrows, and preservation of inverses follows from the inverse equations. Hence these are functors on fibres.",
+   "uses": [
+    "lem-trf-sieve-set-sheafification-exists",
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 0435 (lemma-stackify-universal-property), morphism-gluing part of the hint; restricted to the morphism stage of Tag 02ZN; effectivity of objects is not used."
+   }
+  },
+  {
+   "text": "Use the original pullback comparisons of $F$ as the pullback comparisons of $F^{\\mathrm{pre}}$, with the same object components. Their naturality for a new arrow is checked on local representatives by [lem-cbc-set-presheaf-sheafification-local-bijection]: unit compatibility of [lem-cbc-sieve-slice-sheafification] identifies its pullback with the image of the original pulled-back arrow; the required square is then the original naturality square of $F$. Separatedness of the target isomorphism sheaf gives the square globally. The unit and composition coherence equations involve the unchanged object components and follow from those of $F$. The total-category formula of step 5 now gives a pullback-compatible functor $F^{\\mathrm{pre}}$. The equality $\\phi\\eta=F$ identifies $F^{\\mathrm{pre}}q$ with $F$ on every fibre and on the chosen cartesian lifts, hence on all arrows. Identity object components give the claimed invertible natural transformation. None of this uses effectivity of object descent in $\\mathcal Z$.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "lem-cbc-sieve-slice-sheafification",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 0435 (lemma-stackify-universal-property), morphism-gluing part of the hint; restricted to the morphism stage of Tag 02ZN; effectivity of objects is not used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "lem-trf-sieve-set-sheafification-exists",
+  "def-weil-pbc-sheafification",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "def-weil-pbc-topos",
+  "lem-cbc-sieve-slice-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 02ZN (lemma-stackify), naive proof, first four paragraphs, and Tag 0435 (lemma-stackify-universal-property), hint. Explicit sieve-based completion of the omitted morphism-stage checks; no object-descent completion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafifying the isomorphism presheaves of a fibered groupoid with fixed objects gives its associated prestack",
+   "results": "{\"t\": \"2026-10-23T09:41:53Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafifying the isomorphism presheaves of a fibered groupoid with fixed objects gives its associated prestack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsPrestack\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\"], \"digest\": \"ed9f46935ee784b4\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid. Q90 repeated search: {\"t\": \"2026-10-23T11:50:46Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafifying the isomorphism presheaves of a fibered groupoid with fixed objects gives its associated prestack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsPrestack\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\"], \"digest\": \"ed9f46935ee784b4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "prestackification|prestackify|associatedPrestack|sheafifyHom",
+   "results": "{\"t\": \"2026-10-23T09:49:28Z\", \"tool\": \"grep\", \"query\": \"prestackification|prestackify|associatedPrestack|sheafifyHom\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\"], \"digest\": \"948d5427b123b382\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid. Q90 repeated search: {\"t\": \"2026-10-23T11:50:45Z\", \"tool\": \"grep\", \"query\": \"prestackification|prestackify|associatedPrestack|sheafifyHom\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\"], \"digest\": \"948d5427b123b382\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of morphisms with fixed objects of a fibered groupoid gives a prestack and extends functors into prestacks",
+   "results": "{\"t\": \"2026-10-23T09:49:28Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification of morphisms with fixed objects of a fibered groupoid gives a prestack and extends functors into prestacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.sheafify\", \"CategoryTheory.sheafification\", \"CategoryTheory.GrothendieckTopology.sheafification\", \"CategoryTheory.sheafify\", \"CategoryTheory.plusPlusSheaf\", \"CategoryTheory.GrothendieckTopology.sheafify\", \"CategoryTheory.HasSheafify\", \"CategoryTheory.presheafToSheaf\"], \"digest\": \"caebdbb464715552\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid. Q90 repeated search: {\"t\": \"2026-10-23T11:53:14Z\", \"tool\": \"leansearch\", \"query\": \"Sheafification of morphisms with fixed objects of a fibered groupoid gives a prestack and extends functors into prestacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.sheafify\", \"CategoryTheory.sheafification\", \"CategoryTheory.GrothendieckTopology.sheafification\", \"CategoryTheory.sheafify\", \"CategoryTheory.plusPlusSheaf\", \"CategoryTheory.GrothendieckTopology.sheafify\", \"CategoryTheory.HasSheafify\", \"CategoryTheory.presheafToSheaf\"], \"digest\": \"caebdbb464715552\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrestack\"",
+   "results": "{\"t\": \"2026-10-23T09:49:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPrestack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsPrestack\", \"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"CategoryTheory.Pseudofunctor.IsPrestack.mk\", \"CategoryTheory.Pseudofunctor.IsPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsPrestackFor_generate_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isPrestackFor\"], \"digest\": \"1ab5dd4a3b343912\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid. Q90 repeated search: {\"t\": \"2026-10-23T11:50:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPrestack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsPrestack\", \"CategoryTheory.Pseudofunctor.IsPrestack.isSheaf\", \"CategoryTheory.Pseudofunctor.IsPrestack.mk\", \"CategoryTheory.Pseudofunctor.IsPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsPrestackFor_generate_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isPrestackFor\"], \"digest\": \"1ab5dd4a3b343912\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct an associated prestack of a category fibred in groupoids by replacing each isomorphism presheaf by its sheafification",
+   "results": "{\"t\": \"2026-10-23T09:49:33Z\", \"tool\": \"leanfinder\", \"query\": \"Construct an associated prestack of a category fibred in groupoids by replacing each isomorphism presheaf by its sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\"], \"digest\": \"805733a290d6e8b4\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid. Q90 repeated search: {\"t\": \"2026-10-23T11:53:17Z\", \"tool\": \"leanfinder\", \"query\": \"Construct an associated prestack of a category fibred in groupoids by replacing each isomorphism presheaf by its sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor'\"], \"digest\": \"805733a290d6e8b4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-groupoid-stackification-local-description",
+  "date": "2026-10-23",
+  "group": "Q109"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: Stackification of groupoids: local objects, isomorphisms and extension. Supporting construction: Tag 02ZN (lemma-stackify), naive proof, quotient locally equal arrows and add locally defined arrows, first four construction paragraphs; Tag 0435 (lemma-stackify-universal-property), extension on morphisms into a prestack.",
+   "via": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-morphism-sheafification",
+  "worker": "stage1",
+  "summary": "Constructed composition and inverses by local representatives, verified fibre laws and pullback coherence, wrote the total-category and cartesian-lift formulas, identified the full Isom presheaf, and extended functors into prestacks. Reused existing sieve-local-bijection, slice-sheafification and universal sheafification nodes; no new nodes. Item statement unchanged.",
+  "blueprint": "The inherited created-item chain has no blueprint ancestor (blueprint_refs ancestor prints None). This is the morphism-only supporting construction for the inherited direct-image route: Tag 02ZN first four naive construction paragraphs; all checks omitted there are supplied. The current latest blueprint direct-images proof paragraph (3) is unchanged by this split. Whole-blueprint searches for groupoid, sheafification, sheafification slice, and sheafification restriction found no equal blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-c473427ff",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-c473427ff (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. I read all six cited statements and Stacks 02ZN (lemma-stackify: statement plus the naive local-equality and locally-defined-morphism paragraphs) and 0435 (statement and hint). The statement is unchanged and byte-identical to live, where the item is unsplit with an empty proof, so no other group has split it. Step 1 is correct: eta^# is an iso by the universal property, which with the local-bijection node gives local representatives, and finite intersections of covering sieves cover via axiom (iii). Steps 2-3 glue composition and inverses on simultaneous representatives and get well-definedness from separatedness; this avoids any product-preservation fact. Step 4 applies lem-cbc-sieve-slice-sheafification on C/T at (S,h); with relocalization this gives A_{u,v}|C/S ≅ A_{h*u,h*v} compatibly with the unit. Step 5 writes out the Grothendieck construction; I checked the composition formula, the direction of the cartesian factorization c_{l,h}^{-1}∘b, and its uniqueness. Step 6 identifies the whole Isom presheaf with I^#, so the result is a prestack. Steps 7-8 extend F through the trf adjunction into the Isom sheaves of Z and never use object effectivity. Edge cases checked: trivial topology returns P, a covering empty sieve makes the retained objects uniquely isomorphic, a presheaf of groups gives G^#, and a discrete non-sheaf stays a non-stack. I found no duplicate (grep for prestack/stackif with sheafif) and no cycle, since the parent is not cited. Batch-5: lem-trf-sieve-set-sheafification-exists is a Mathlib leaf for general set-valued sheafification with empty proof_deps; it is neither an assumed statement nor a step of the trace-formula or Poincare proofs, so it is accepted. FIX: steps 4 and 5 called the coherence of the pullback comparisons a 'pentagon'; it is replaced by the associativity (cocycle) equation c_{h,lk}∘h*(c_{k,l}) = c_{kh,l}∘c_{h,k}, written out in step 4. No other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GroupoidMorphismSheafification",
+  "declaration": "CategoryTheory.Pseudofunctor.exists_groupoid_morphism_sheafification",
+  "file": "lean/Sheaf/CategoryTheory/GroupoidMorphismSheafification.lean",
+  "statement": "theorem exists_groupoid_morphism_sheafification {C : Type w} [SmallCategory C] (J : GrothendieckTopology C) (P : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}) (hP : ∀ T : C, IsGroupoid (P.obj (.mk (op T)))) : ∃ A : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}, (∀ T : C, IsGroupoid (A.obj (.mk (op T)))) ∧ A.IsPrestack J ∧ ∃ (q : StrongTrans P A) (hObj : ∀ T : C, (A.obj (.mk (op T)) : Type w) = P.obj (.mk (op T))), (∀ (T : C) (u : P.obj (.mk (op T))), (q.app (.mk (op T))).toFunctor.obj u = Eq.mpr (hObj T) u) ∧ (∀ (T : C) (u v : P.obj (.mk (op T))), ∃ e : sheafify (J.over T) (P.presheafHom u v) ≅ A.presheafHom ((q.app (.mk (op T))).toFunctor.obj u) ((q.app (.mk (op T))).toFunctor.obj v), ∀ (V : Over T) (φ : (P.presheafHom u v).obj (op V)), e.hom.app (op V) ((toSheafify (J.over T) (P.presheafHom u v)).app (op V) φ) = (q.naturality V.hom.op.toLoc).inv.toNatTrans.app u ≫ (q.app (.mk (op V.left))).toFunctor.map φ ≫ (q.naturality V.hom.op.toLoc).hom.toNatTrans.app v) ∧ (∀ (Z : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}), (∀ T : C, IsGroupoid (Z.obj (.mk (op T)))) → Z.IsPrestack J → ∀ F : StrongTrans P Z, ∃ H : StrongTrans A Z, Nonempty (@CategoryTheory.Iso (StrongTrans P Z) (StrongTrans.homCategory (F := P) (G := Z)) (StrongTrans.vcomp q H) F))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab2c12525",
+  "group": "NY",
+  "result": "fix",
+  "note": "Lean statement exact against the node, Stacks 02ZN/0435: universes C:Type w small with Cat.{w,w} fibres; pseudofunctor with groupoid fibres (same encoding as the landed parent GroupoidStackificationLocalDescription); A exists with groupoid fibres and IsPrestack J; objects kept via hObj and q.obj u = Eq.mpr; the isomorphism sheaf identified with sheafify (J.over T) (presheafHom u v) on the whole slice, unit equation through q.naturality with the direction checked against Mathlib; universal property ∃H with H∘q ≅ F for every groupoid prestack Z. Not hollow: hom presheaves pinned and every object a q-image. Statement verbatim, node unchanged apart from lean, stmt_dep records read, no definitions, proof is sorry, docstrings have source, blueprint id and 8 steps; no duplicate found in Mathlib or side-live. Only fault: H11, the second reading was the worker's own pass. FIX = fixes/<item>.report.md (worker report verbatim + independent second reading). Advisory: 'pullback extends P' is rendered by StrongTrans comparisons, not an object-level equality, same as the landed parent."
+ }
+}

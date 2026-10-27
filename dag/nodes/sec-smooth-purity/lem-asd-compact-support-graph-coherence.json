@@ -14,72 +14,55 @@
  ],
  "proof": [
   {
-   "text": "Check the actual exchange by transposition. Write $t:\\overline U'\\to\\overline U$ and $E_j:t^*Dj_!\\to Dj'_!h^*$ for the specified inverse open-extension comparison. Let $\\theta:r'^*g^*\\to t^*r^*$ be the inverse-image square comparison. The graph projections of [def-asd-compact-support-graph-comparison] give, on exact derived functors,\n$$\\delta'_{h^*K}\\circ r'^*(C^\\Sigma_K)=E_{j,K}\\circ t^*(\\delta_K)\\circ\\theta_{Du_{\\Sigma!}K}.\\tag{*}$$\nTo verify this identity without testing derived morphisms on stalks, pull the graph decomposition back to $V'=\\overline U'\\times_{X'}U'$. On its graph component both sides take the section of the corresponding lift to that same section, and on the complementary component both sides are zero. The comparisons $\\beta$ are adjunction-preserving: by their defining conjugacy they are the left-adjoint comparisons of the equality of the restriction/direct-image functors on the localized sites. Thus the comparisons in the two pasted rectangles coincide by [lem-weil-pbc-mate-pasting], and the composition comparison $\\lambda$ is normalized by those same adjunctions. This makes the preceding component calculation an equality of sheaf natural transformations; [lem-weil-pbc-localization-universal-property] descends it to (*) on arbitrary complexes. Now transpose $C^{(j,r)}_K\\circ g^*a_K$ under $r'^*\\dashv Rr'_*$. The definition of proper exchange in [def-kun-unbounded-exchange] gives its transpose as the right side of (*): naturality moves $a_K$ past the pulled-back counit, and $\\varepsilon_r\\circ r^*a_K=\\delta_K$ by the triangle identity. The transpose of $a'_{h^*K}\\circ C^\\Sigma_K$ is the left side of (*). Injectivity of the adjunction bijection proves\n$$C^{(j,r)}\\circ g^*a=(a'h^*)\\circ C^\\Sigma.$$\nNo equality of derived morphisms has been inferred merely from equality on cohomology.",
+   "text": "Use the already proved graph-comparison identification and arbitrary-base exact exchange equation from GraphExchange in EtaleCompactSupportGraphGeometricBaseChange. Replace its forward comparison by compactSupportDerivedComparison. Cancel its invertible pullback and the inverse graph comparison on the base-changed compactification to obtain the base_change equation for canonicalEtaleCompactSupportCore.",
    "uses": [
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-mate-pasting",
+    "lem-asd-compact-support-graph-geometric-base-change",
+    "lem-asd-compact-support-graph-derived-isomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved open_compare_mono from UnboundedProperOpenComposition, which embeds open extension by zero into ordinary direct image. Direct image and its composition isomorphism preserve this monomorphism. A generic calculation for two successive right-adjoint transports identifies the transpose of a section of an invertible counit with extension of its inverse. Applied to the existing lowerStarUnit_comp_counit equation, this gives graph normalization for an open immersion directly into the open comparison map. For a refinement r:c→d, compose the two sheaf graph maps followed by lowerStarComp(r,d.g). After postcomposing with the monic compactification-to-direct-image map for c, naturality and associativity of lowerStarComp reduce the composite to graph normalization for r and then for d. Thus it equals the graph map for c. No duplicate downstream comparison lemmas are declared or relocated.",
+   "uses": [
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-weil-pbc-direct-image-composition-coherence",
+    "lem-amb-unbounded-proper-open-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the shared normalizationHomotopyComponent formula for the normalized graph component on a homotopy representative as the exact source factorization, Qh of the sheaf map, Qh of the inverse homotopy composition comparison, the right-derived unit, and the image of the inverse exact open-extension factorization. Its five-factor formula matches compactSupportComparisonOnHomotopy and the existing component theorem identifies compactSupportDerivedComparison on Qh with it. In the generic coherence calculations, the homotopy composition comparison for a literal composite simplifies to identity. In the composite of two such components, cancel the intermediate exact factors. Move the first derived unit past the second sheaf map by naturality and move the final exact factor past the derived direct-image compositor. The compositor factorization comp_fac and comp_unit_app identify the remaining two units with the unit of the composite. The sheaf refinement equation from step 2 then proves the forward derived refinement equation. Localization full faithfulness extends it from every homotopy representative to all derived objects; cancellation of the invertible graph comparisons gives the required refinement equation.",
+   "uses": [
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-amb-unbounded-proper-open-composition",
     "lem-weil-pbc-localization-universal-property",
-    "def-kun-unbounded-exchange"
+    "lem-asd-compact-support-graph-derived-isomorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6 (lemma-shriek-base-change); sites-cohomology.tex Tags 07A7 (remark-base-change), 0E46 and 0E47 (remark-compose-base-change, remark-compose-base-change-horizontal); explicit graph-component verification"
-   }
+   "elementary": false
   },
   {
-   "text": "For a proper refinement $p:\\overline U_1\\to\\overline U_2$ with $pj_1=j_2$, apply [lem-amb-unbounded-proper-open-interchange] to the square with top $j_1$, bottom $j_2$, left vertical $1_U$ and right vertical $p$. It gives the specified unbounded isomorphism $b_p:Dj_{2!}\\xrightarrow{\\sim}Rp_*Dj_{1!}$. Its sheaf support identification is the identity on the underlying sections over $U$, and its K-injective recipe fixes the derived normalization. Composing $Rr_{2*}b_p$ with the direct-image composition isomorphism [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] gives $\\rho_p:Rr_{2*}Dj_{2!}\\xrightarrow{\\sim}Rr_{1*}Dj_{1!}$. Its refinement composition and identity laws follow from the vertical-pasting and identity clauses of the same interchange node. All its hypotheses hold: $A$ is finite, both vertical maps are proper, both horizontal maps are open, and the compactifications are between Noetherian schemes. No cartesian hypothesis is needed for this application.",
+   "text": "For the proper identity compactification, postcompose the graph map with the monic inclusion into direct image. Graph normalization, equality of etale and open comparison maps, the right unit law for lowerStarComp, and naturality of lowerStarId show that this graph map is the inverse lowerStarId whiskered by extension by zero. For its derived normalization, move the exact-derived direct-image comparison past the inverse exact factor and use rightDerivedFunctorIsoMapDerivedCategory_hom_fac. Move the derived lowerStarId and identity comparisons past the same factor. mapDerivedCategoryNatIso_fach and the existing mapDerivedCategoryIdIso_hom_app_Qh_obj equation identify their normalized composite with Qh of lowerStarId. The homotopy identity cancellation is proved on a complex representative degree by degree, without unfolding the derived functors. The latter cancels Qh of its inverse in the graph map, leaving the exact factor and its inverse. Localization extends this identity to all derived objects. Cancel the forward graph comparison to conclude equality of the two specified identity isomorphisms.",
    "uses": [
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "more-etale.tex Tags 0F7B (lemma-shriek-proper-and-open), case (b), and 0F7C (lemma-shriek-proper-and-open-compose); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
-   }
-  },
-  {
-   "text": "Put $B=Du_{\\Sigma!}K$. Under $r_1^*=p^*r_2^*\\dashv Rr_{2*}Rp_*$ the transpose of $\\rho_pa_2$ is $\\varepsilon_p\\circ p^*b_p\\circ p^*\\delta_2$. By [lem-asd-proper-open-refinement-adjoint-projection], its first two factors equal the degreewise clopen projection $D\\pi_p$. On each graph summand, $p^*\\delta_2$ retains the lifts landing on the graph for $j_2$, and $D\\pi_p$ retains among those the lifts landing on $j_1(U)$. Their composite therefore retains exactly the graph summands for $j_1$, acting identically on each, and kills the others: it is $\\delta_1$. These are termwise maps, descended by localization. The composite-adjunction counit formula in [lem-weil-pbc-mate-pasting] gives the displayed transpose, so the adjunction bijection proves $\\rho_pa_2=a_1$, hence $c_1\\rho_p=c_2$. For refinements $p:1\\to2$, $q:2\\to3$, this identity gives $\\rho_p\\rho_q=a_1c_2a_2c_3=a_1c_3=\\rho_{qp}$; for identity refinements it gives $a_ic_i=1$.",
-   "uses": [
-    "lem-asd-proper-open-refinement-adjoint-projection",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B, lemma-shriek-proper-and-open, the specified K-injective map; the explicit derived adjoint as clopen-section projection is the extracted agent argument"
-   }
-  },
-  {
-   "text": "For the identity compactification, the graph projection is identity. The right-derived unit of the identity direct image is inverse to its exact-derived comparison. The lowerStarId comparison and right unitor therefore give precisely identityEtaleCompactSupportComparison. Cancel the invertible derived graph maps in the base-change and proper-refinement identities to obtain the three required equations.",
-   "uses": [
-    "def-weil-pbc-adjunction-conjugate",
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-weil-pbc-direct-image-composition-coherence",
     "lem-weil-pbc-localization-universal-property"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-shriek-base-change-map",
-  "def-weil-pbc-adjunction-conjugate",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-localization-universal-property",
-  "def-kun-unbounded-exchange",
-  "lem-amb-unbounded-proper-open-interchange",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-asd-proper-open-refinement-adjoint-projection"
+  "lem-asd-compact-support-graph-geometric-base-change",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-weil-pbc-direct-image-composition-coherence",
+  "lem-amb-unbounded-proper-open-composition",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; current blueprint prop-asd-smooth-base-change, coherence (iii)",
-  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged."
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7C; etale-cohomology.tex Tag 0F4L; direct-image composition and localization normalization",
+  "note": "U3: reuse the existing arbitrary-base graph exchange equation; prove refinement by the existing open_compare_mono theorem, graph normalization and derived-unit composition. A generic adjunction transport calculation identifies the open graph normalization. Identity uses exact-functor factorization equations. The homotopy composition cancellation is reused from EtaleCompactSupportGraphGeometricBaseChange. Repair of return 0b1d3eae651: all five duplicate declarations are removed; the needed monicity and homotopy facts are imported from independent prerequisites. The existing normalization-data definitions are factored through the same generic five-arrow formula and homotopy transformation; no public signature or constructed map changes; no new obligations; the unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -145,7 +128,18 @@
   "by": "J4",
   "date": "2026-10-18"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -157,13 +151,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-03b35",
-  "group": "J4",
+  "reviewer": "COMPILER",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261018T091405-L-3255847",
+  "landing": "20261024T191343-L-315095",
   "kind": "interface",
-  "note": "independent cc review: 03b351f vs passed head 30a0f75ae: the 7 Lean modules and 7 nodes are identical, plus the bundled F7 EtaleCompactificationGraphMap.lean (byte-identical to the F7 source compiled in the 30a0f review) and the re-created def-f7 node (lean.statement = def signature); all 8 modules + importer EtaleAmbientAdjointLocality compile (lcompile --all, exit 0); sorryAx only via the 3 stated holes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

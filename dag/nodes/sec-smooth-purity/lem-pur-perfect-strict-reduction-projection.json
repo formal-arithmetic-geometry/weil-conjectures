@@ -1,0 +1,156 @@
+{
+ "id": "lem-pur-perfect-strict-reduction-projection",
+ "kind": "statement",
+ "title": "Strict counit projection for perfect quotient coefficients",
+ "statement": "For small sites X,Y, a geometric morphism f, commutative Noetherian ring A and ideal I [def-pur-adic-site-strict-quotient-interface], assume PerfectQuotients A I: each A/I^(n+1) is a perfect A-complex. For every unbounded derived module object F on X, the whole strict towerProjection f A I F is invertible. The map is the prescribed counit transpose of reductionPullIso, derived on the strict tower category before evaluation.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0944 (lemma-projection-formula), followed by the strict diagram cohomology criterion, Tags 0940 and 0941 (lemma-derived-limit-is-ok)."
+ },
+ "stmt_deps": [
+  "def-pur-adic-site-strict-quotient-interface",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply the single-level perfect-quotient projection theorem independently at every positive level, using the corresponding component of PerfectQuotients.",
+   "uses": [
+    "lem-pur-perfect-reduction-projection-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, applied separately at each level."
+   }
+  },
+  {
+   "text": "Exact evaluation commutes with derived cohomology. Thus every component of every cohomology map is invertible. Strict tower maps are isomorphisms componentwise. The unbounded derived cohomology criterion makes the whole towerProjection invertible; this detects only isomorphisms, not equality of derived arrows.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0940 and 0941, strict tower abelianness and cohomology."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-perfect-reduction-projection-evaluation",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit specialization and assembly of the cited Stacks arguments; extracted from the parent auxiliary without changing its hypotheses or conclusion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with direct image for perfect constant coefficients, compatibly with completion units",
+   "results": "Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; Derivation.compAlgebraMapL; Algebra.Extension.CotangentSpace.map; Derivation.compAlgebraMap; AdicCompletion.ofTensorProduct_naturality; ModuleCat.extendScalarsComp; AdicCompletion.instIsScalarTower; AdicCompletion.tensor_map_id_left_eq_map",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*(app|comp)",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*projection|projection.*quotient|augmentation.*mate",
+   "results": "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean; Mathlib/Topology/Algebra/Category/ProfiniteGrp/Limits.lean; Mathlib/Topology/FiberBundle/Basic.lean; Mathlib/Topology/Inseparable.lean; Mathlib/Topology/DiscreteQuotient.lean; Mathlib/Topology/Order/ProjIcc.lean; Mathlib/RepresentationTheory/Rep/Basic.lean; Mathlib/Analysis/Normed/Group/Quotient.lean",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction mate of reduction by perfect quotient coefficients on a small ringed site is an isomorphism after evaluating a strict tower",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.mateEquiv; CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous; PresheafOfModules.sheafificationAdjunction; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.ΓSpec.isIso_adjunction_counit; AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unit_mateEquiv\"",
+   "results": "CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex_map_f|mapHomologicalComplex_obj_X",
+   "results": "Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean; Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+   "date": "2026-10-24",
+   "verdict": "No matching statement about the canonical strict quotient diagrams; categorical mate lemmas are used in the proved assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PerfectQuotientExchangeNormalization",
+  "date": "2026-10-24",
+  "group": "B7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; coefficient-compatibility clause (7) of sk-thm-sf-compatibility, through lem-pur-perfect-quotient-exchange-normalization: Strict counit projection for perfect quotient coefficients.",
+   "via": [
+    "lem-pur-perfect-quotient-exchange-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PerfectStrictReductionProjection",
+  "file": "lean/Sheaf/Paper/PerfectStrictReductionProjection.lean",
+  "declaration": "CategoryTheory.AdicSites.perfectStrictReductionProjection",
+  "statement": "theorem perfectStrictReductionProjection [IsNoetherianRing A]\n    (hperfect : PerfectQuotients A I) (F : X.derived A) :\n    IsIso (f.towerProjection A I F)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7bed",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T122541-L-1784662",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7bed",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T122541-L-1784662",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (byte-identical); relocated interface block vs clone (verbatim but for blueprint tags); 3 new sorried statements vs item clauses/nodes (strictly smaller, true); node proof fields vs Lean proof"
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-quotient-ordinary-models",
+ "kind": "statement",
+ "title": "Normalized slice evaluation of ordinary coherent scalar extension",
+ "statement": "In the context of [def-pur-quotient-reduction-core], fix any normalized scalar model S for Delta R to B_bullet and normalized scalar models L_n for alpha_n:R to B_n [def-coef-semilinear-system-models]. There is a natural isomorphism Delta followed by S.model.E followed by evaluation at n, to L_n.model.E, for every n. On the sheafified section 1 tensor x the isomorphism is the identity between the corresponding extension-unit sections. No flatness, K-flatness, or complex is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Step 2 and the evaluation-unit part of step 7 of lem-pur-quotient-system-flat-models; sites-modules.tex Tag 03EK, section-tensor-product, and Zheng Construction 4.1. This is the ordinary slice/sheafification calculation, with no homological assertions."
+ },
+ "stmt_deps": [
+  "def-pur-quotient-reduction-core",
+  "def-coef-semilinear-system-models"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the sectionwise extension presheaf at the vertical slice n. Its sections and maps are exactly the extension along alpha_n. Restriction and vertical sheafification commute, yielding the natural isomorphism between the sheafified functors. Its inverse is the identity on the same balanced tensors. The existing restrictionSheafificationMap_isIso in SemilinearDerivedCalculus supplies this commutation for continuous cocontinuous slice restriction.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-coef-semilinear-system-models",
+    "def-coef-semilinear-derived-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural isomorphism carries the sheafification unit on 1 tensor x to the sheafification unit on the identical tensor. The object equations in the two normalized models identify these units with scalarExtensionSection, proving the displayed normalization.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Step 2 and the evaluation-unit part of step 7 of lem-pur-quotient-system-flat-models; sites-modules.tex Tag 03EK, section-tensor-product, and Zheng Construction 4.1. This is the ordinary slice/sheafification calculation, with no homological assertions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf extension of scalars commutes with restriction to a vertical slice of the sequence site",
+   "results": "8 results including PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars, ModuleCat.extendRestrictScalarsAdj and Scheme.Modules.map_smul. None states the normalized vertical sequence-site comparison or K-flat constant systems.",
+   "date": "2026-10-26",
+   "verdict": "Use project sequence-site and scalar-model interfaces; no exact Mathlib statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant sequence of a K-flat sheaf complex is K-flat on the vertical inverse sequence site",
+   "results": "8 results including compatiblePreservingOfFlat and ordinary Module.Flat tensor exactness. No K-flat sequence-site statement.",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem; specialize the recorded ringed-topos pullback theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Limits.PreservesColimitsOfSize",
+   "results": "4 results about pushforward of quasicoherent presentations.",
+   "date": "2026-10-26",
+   "verdict": "No normalized scalar slice comparison or K-flat constant-system theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat; changeOfRings|sheafPushforwardContinuous; quotientConstant|quotientReduction",
+   "results": "Mathlib supplies ordinary scalar restriction and sheaf pushforward, but no K-flat theory. The project already defines quotientConstant and quotientReduction only in the assigned module. SystemEvaluationKFlat goes from the sequence site to a level, not in the constant-system direction. blueprint_refs searches constant sequence and scalar evaluation each returned 0 matches.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing constructions, relocated verbatim to break the proof import cycle; the new assertions are proper parts of the original proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSystemFlatModels",
+  "date": "2026-10-26",
+  "group": "F2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "via": [
+    "lem-pur-quotient-system-flat-models",
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "place": "Steps 1, 2 and 7 of lem-pur-quotient-system-flat-models: Normalized slice evaluation of ordinary coherent scalar extension"
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientOrdinaryModels",
+  "file": "lean/Sheaf/Paper/QuotientOrdinaryModels.lean",
+  "declaration": "WeilConjectures.SemilinearSections.quotientOrdinaryModels",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.quotientOrdinaryModels"
+  ],
+  "statement": "theorem quotientOrdinaryModels\n    (scalar : ScalarData.{c, v, max c v r}\n      (quotientRingMap.{c, v, r} J R B τ α hα))\n    (levels : ∀ n : ℕ, ScalarData.{c, v, max c v r} (α n)) :\n    ∃ reductionEvaluation : ∀ n : ℕ,\n      quotientConstant.{c, v, r} J R ⋙ scalar.model.E ⋙\n        evaluation.{c, v, max c v r} J B τ n ≅ (levels n).model.E,\n(∀ (M : Mod.{c, v, max c v r} J R) (n : ℕ) (U : Cᵒᵖ)\n    (x : M.val.obj U)\n    (y : ((evaluation.{c, v, max c v r} J B τ n).obj\n      (scalar.model.E.obj ((quotientConstant.{c, v, r} J R).obj M))).val.obj U),\n    HEq y (scalarExtensionSection.{c, v, r} (quotientRingMap.{c, v, r} J R B τ α hα)\n      scalar ((quotientConstant.{c, v, r} J R).obj M) (op (n, U.unop)) x) →\n    HEq (((reductionEvaluation n).hom.app M).val.app U y)\n      (scalarExtensionSection.{c, v, r} (α n) (levels n) M U x))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-58b99",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T023109-L-519959",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-58b99",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T023109-L-519959",
+  "kind": "interface",
+  "note": "independent cc review: moved QuotientReductionCore block vs clone original (byte-identical); item statement vs base; new sorry quotientOrdinaryModels vs ScalarData/obj_eq + vertical slice sheafification; item node proof_deps vs Lean uses; importer MixedReductionUnitComposition compiled against delivered modules (16.3 s)"
+ }
+}

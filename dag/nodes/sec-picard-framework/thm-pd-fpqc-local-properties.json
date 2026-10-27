@@ -91,7 +91,52 @@
   "def-pc-morphism-conventions"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback",
+     "module": "WeilConjectures.AlgebraicGeometry.EffectiveDescent",
+     "lines": [
+      214,
+      235
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.locallyOfFiniteType_quasiCompact_smooth_isProper_connectedSpace_of_isPullback",
+     "module": "WeilConjectures.AlgebraicGeometry.EffectiveDescent",
+     "lines": [
+      237,
+      256
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux",
+     "module": "WeilConjectures.AlgebraicGeometry.FieldExtensionDescent",
+     "lines": [
+      267,
+      281
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-jacobian-descent",
  "lean": {
@@ -116,11 +161,16 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $k\\subseteq K$ be a finite field extension and let $Z$ be a scheme over $k$\nsuch that $Z_K=Z\\times_kK$, the base change of\n$Z$, is of finite type and smooth over\n$K$, proper over $K$, and connected.\nThen $Z$ is of finite type and smooth over $k$, proper over $k$, and connected.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k\\subseteq K$ be a field extension and let $Z$ be a scheme over $k$, with\nbase change $Z_K=Z\\times_kK$.\n\n1. If $Z_K$ is of finite type and smooth over\n$K$, proper over $K$, and connected, then $Z$ is of finite type and smooth\nover $k$, proper over $k$, and connected.\n1. If $Z_K$ is proper, smooth of relative dimension $n$ and geometrically\nintegral over $K$, then $Z$ is proper, smooth of relative dimension $n$ and\ngeometrically integral over $k$.",
   "proof": [
    {
-    "text": "A finite field extension $k\\subseteq K$ makes $\\Spec(K)\\to\\Spec(k)$ a\nsurjective [def-pc-finite-locally-free]\nmorphism, in particular faithfully flat, quasi-compact, and locally of finite\npresentation, so it is an fpqc covering of $\\Spec(k)$ in the sense of Stacks\nProject, Descent, Section 35.23, Tag\n[02YJ](https://stacks.math.columbia.edu/tag/02YJ); the scheme $Z_K$ is the\nbase change of [def-pc-base-change], and smoothness and properness are the\nnotions of [def-pc-morphism-conventions].",
+    "text": "For a field extension $k\\subseteq K$ the morphism $\\Spec(K)\\to\\Spec(k)$ is\nsurjective, flat and quasi-compact (both schemes are one point), so it is an\nfpqc covering of $\\Spec(k)$ in the sense of Stacks Project, Descent, Section\n35.23, Tag [02YJ](https://stacks.math.columbia.edu/tag/02YJ); when $K/k$ is\nfinite it is moreover a surjective [def-pc-finite-locally-free] morphism. The\nscheme $Z_K$ is the base change of [def-pc-base-change], and smoothness and\nproperness are the notions of [def-pc-morphism-conventions]. The square\nformed by $Z_K\\to Z$, $Z_K\\to\\Spec(K)$, $Z\\to\\Spec(k)$ and\n$\\Spec(K)\\to\\Spec(k)$ is cartesian, so every property of morphisms which is\nlocal in the fpqc topology on the target holds for $Z\\to\\Spec(k)$ as soon as\nit holds for $Z_K\\to\\Spec(K)$.",
     "uses": [
      "def-pc-finite-locally-free",
      "def-pc-base-change",
@@ -129,21 +179,26 @@
     "elementary": false
    },
    {
-    "text": "*Being of finite type and smooth.* The morphism $Z_K\\to\\Spec(K)$ is\nlocally of finite presentation, and $Z_K\\to Z$ is surjective flat and of finite\npresentation, so $Z\\to\\Spec(k)$ is locally of finite presentation by Lemma\n35.14.3, Tag [02KL](https://stacks.math.columbia.edu/tag/02KL); since\n$Z_K$ is quasi-compact over $K$ and $Z_K\\to Z$ is surjective, $Z$ is\nquasi-compact, hence of finite type. Smoothness of $Z\\to\\Spec(k)$ then follows\nfrom smoothness of $Z_K\\to\\Spec(K)$ by Lemma 35.14.5, Tag\n[05B5](https://stacks.math.columbia.edu/tag/05B5), applied to the\nsurjective flat locally finitely presented morphism $Z_K\\to Z$; this is the\nsame lemma that Stacks Project, Lemma 39.9.4, Tag\n[0BFC](https://stacks.math.columbia.edu/tag/0BFC), invokes for abelian\nvarieties, there in the form Lemma 35.23.29, Tag\n[02VL](https://stacks.math.columbia.edu/tag/02VL).",
+    "text": "*(1) Being of finite type and smooth.* Quasi-compactness, being locally of finite\npresentation (Stacks Project, Descent, Section 35.23, Tag\n[02YJ](https://stacks.math.columbia.edu/tag/02YJ)) and smoothness (Lemma\n35.23.29, Tag [02VL](https://stacks.math.columbia.edu/tag/02VL)) are fpqc\nlocal on the target; hence $Z\\to\\Spec(k)$ is quasi-compact, locally of finite presentation,\nin particular of finite type, and smooth. This is the same lemma that Stacks\nProject, Lemma 39.9.4, Tag [0BFC](https://stacks.math.columbia.edu/tag/0BFC),\ninvokes for abelian varieties.",
     "uses": [],
     "elementary": null
    },
    {
-    "text": "*Properness.* This is one of the properties of morphisms proved to be\nlocal in the fpqc topology on the target in Stacks Project, Descent, Section\n35.23, Tag [02YJ](https://stacks.math.columbia.edu/tag/02YJ):\nseparatedness and universal closedness are separated in the list of that\nsection, and properness is their conjunction together with being of finite\ntype, which was settled above.",
+    "text": "*(1) Properness.* This is one of the properties of morphisms proved to be\nlocal in the fpqc topology on the target in Stacks Project, Descent, Section\n35.23, Tag [02YJ](https://stacks.math.columbia.edu/tag/02YJ):\nseparatedness and universal closedness are separately in the list of that\nsection, and properness is their conjunction together with being of finite\ntype, which was settled above.",
     "uses": [],
     "elementary": null
    },
    {
-    "text": "*Connectedness.* The morphism $Z_K\\to Z$ is the base change of the\nsurjective morphism $\\Spec(K)\\to\\Spec(k)$, hence surjective. The image of a\nconnected space under a continuous map is connected, so $Z$ is connected\nbecause $Z_K$ is.",
+    "text": "*(1) Connectedness.* The morphism $Z_K\\to Z$ is the base change of the\nsurjective morphism $\\Spec(K)\\to\\Spec(k)$, hence surjective. The image of a\nconnected space under a continuous map is connected, so $Z$ is connected\nbecause $Z_K$ is.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*(2)* Properness and smoothness descend as in (1). The relative dimension is\nread off on fibres: for $z\\in Z$ and a point $z'\\in Z_K$ over it, the fibre of\n$Z_K$ through $z'$ is the base change of the fibre of $Z$ through $z$ along the\nfield extension $\\kappa(z)\\subseteq\\kappa(z')$, and dimensions of schemes\nlocally of finite type over a field are invariant under field extension, so\n$Z\\to\\Spec(k)$ is smooth of relative dimension $n$. For geometric\nintegrality, let $\\Omega$ be a field over $k$ and choose a field $L$ containing\nboth $\\Omega$ and $K$ over $k$ (a residue field of $\\Omega\\otimes_kK\\neq0$).\nThen $Z_L=Z_K\\times_KL$ is integral, as $Z_K$ is geometrically integral, and\n$Z_L\\to Z_\\Omega$ is faithfully flat. Reducedness descends along faithfully\nflat morphisms, and $Z_\\Omega$ is irreducible as the image of the irreducible\n$Z_L$ under a surjection; so $Z_\\Omega$ is integral and $Z$ is geometrically\nintegral over $k$.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

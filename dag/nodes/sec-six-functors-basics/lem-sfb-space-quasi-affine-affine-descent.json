@@ -1,0 +1,330 @@
+{
+ "id": "lem-sfb-space-quasi-affine-affine-descent",
+ "kind": "statement",
+ "title": "Quasi-affine scheme representability descends over a faithfully flat affine base",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and use algebraic spaces over $S$ [def-trf-algebraic-space] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $p:V\\to U$ be a flat surjective morphism [def-weil-flat-morphism, def-weil-surjective-morphism] between affine $S$-schemes, and let $f:X\\to U$ be a morphism from an algebraic space. Suppose $X\\times_UV$ is represented by a quasi-affine scheme. Then $X$ is represented by a quasi-affine scheme. Here quasi-affine means isomorphic to a quasi-compact open subscheme of an affine scheme [def-weil-open-immersion, def-weil-pbc-quasi-compact-scheme, def-weil-affine-spectrum]. No representability, separation, finite-type, or finite-presentation hypothesis on $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0423 (lemma-descending-property-quasi-affine), affine flat-surjective reduction in its proof, lines 1690-1719; quasi-affine spaces as in spaces-morphisms.tex Tag 03WL (definition-quasi-affine)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "The affine open cover $\\{U\\}$ has affine inverse image $V$, so [pqf-lem-affine-local-target] makes $p$ affine. By [lem-weil-pbc-affine-morphism-permanence](3), it is quasi-compact. For each affine open $B\\subseteq U$, the inverse image $p^{-1}(B)$ is quasi-compact and maps onto $B$. Choose a finite affine open cover of this inverse image; its images cover $B$. Flatness restricts to these opens because their local rings are unchanged. These are exactly the conditions of [def-weil-pbc-fpqc-covering], so $\\{p\\}$ is fpqc. Choose a quasi-affine scheme $P$ representing $X\\times_UV$, with projection $a:P\\to V$. Applying [lem-a1-quasi-affine-target-locality] to the one-member affine cover $\\{V\\}$ shows that $a$ is a quasi-affine morphism.",
+   "uses": [
+    "pqf-lem-affine-local-target",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-pbc-fpqc-covering",
+    "lem-a1-quasi-affine-target-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0423 (lemma-descending-property-quasi-affine), affine flat-surjective part, lines 1690-1719."
+   }
+  },
+  {
+   "text": "The two pullbacks of $P$ to $V_2=V\\times_UV$ represent the same functor: its $T$-points are triples $(x,v_0,v_1)$ with $f(x)=p(v_0)=p(v_1)$. Define $\\phi:\\operatorname{pr}_0^*P\\to\\operatorname{pr}_1^*P$ by retaining $x,v_0,v_1$ and changing the distinguished $P$-coordinate from $(x,v_0)$ to $(x,v_1)$. This natural bijection of representable functors is a scheme isomorphism: evaluate it on the identity of each representing scheme to obtain mutually inverse morphisms. Over $V\\times_UV\\times_UV$, both $\\phi_{12}\\phi_{01}$ and $\\phi_{02}$ send $(x,v_0)$ to $(x,v_2)$ and retain all three ordered base coordinates. Thus the cocycle of [def-pd-descent-datum] holds. This spells out the omitted verification in Tag 0423, using the fibre-product functors of [lem-trf-space-fibre-products-etale-covers].",
+   "uses": [
+    "def-pd-descent-datum",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0423 (lemma-descending-property-quasi-affine), affine flat-surjective part, lines 1690-1719."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-quasi-affine-fpqc-effective-descent] with its $(A,B,V)$ equal to $(V,U,P)$. Step 1 supplies its singleton fpqc cover and quasi-affine morphism; step 2 supplies its scheme descent datum. Obtain a scheme $b:Y\\to U$ and an isomorphism $\\alpha:Y\\times_UV\\xrightarrow{\\sim}P$ over $V$ inducing exactly $\\phi$. No finite-presentation assumption is required. The base change of $b$ is therefore the quasi-affine morphism $a$. By [lem-sfb-scheme-quasi-affine-fpqc-descent], $b$ is quasi-affine. Since $U$ itself is an affine open of $U$, its inverse image is all of $Y$; the definition [def-nagata-quasi-affine-morphism] makes $Y$ a quasi-affine scheme.",
+   "uses": [
+    "lem-trf-quasi-affine-fpqc-effective-descent",
+    "lem-sfb-scheme-quasi-affine-fpqc-descent",
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0423 (lemma-descending-property-quasi-affine), affine flat-surjective part, lines 1690-1719."
+   }
+  },
+  {
+   "text": "For any $U$-scheme $T$, set $T_V=T\\times_UV$. By [lem-galois-fpqc-covering-base-change], $T_V\\to T$ is an fpqc covering. An element $y\\in\\operatorname{Mor}_U(T,Y)$ restricts to a map $T_V\\to Y\\times_UV$; applying $\\alpha$ and the projection $P\\to X$ gives $x_V:T_V\\to X$. On $T_V\\times_TT_V$ the two maps agree: compatibility of $\\alpha$ with the datum says they are related by $\\phi$, and step 2 shows that $\\phi$ retains the $X$-section. By [lem-a1-algebraic-space-fpqc-sheaf] there is a unique $x:T\\to X$ restricting to $x_V$. It is over $U$: its composite with $f$ agrees with the given $T\\to U$ on $T_V$, so uniqueness in [lem-weil-pbc-fpqc-representable-descent] with target $U$ makes them equal.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0423 (lemma-descending-property-quasi-affine), affine flat-surjective part, lines 1690-1719."
+   }
+  },
+  {
+   "text": "Conversely, for $x:T\\to X$ over $U$, the pair $(x|_{T_V},T_V\\to V)$ gives a map $T_V\\to P$, hence via $\\alpha^{-1}$ a map $y_V:T_V\\to Y$. On $T_V\\times_TT_V$, the two $P$-lifts are related by the explicit $\\phi$ of step 2. Since $\\alpha$ induces this datum, their $Y$-coordinates agree. Apply [lem-weil-pbc-fpqc-representable-descent] with target $Y$ to obtain a unique $y:T\\to Y$. Its composite with $b$ is the prescribed $T\\to U$ by the same uniqueness with target $U$. The constructions in this step and step 4 are inverse: after the fpqc covering they are inverse by $\\alpha^{-1}\\alpha=1$ and $\\alpha\\alpha^{-1}=1$; equality on $T$ follows from the uniqueness clauses of [lem-weil-pbc-fpqc-representable-descent] and [lem-a1-algebraic-space-fpqc-sheaf].",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0423 (lemma-descending-property-quasi-affine), affine flat-surjective part, lines 1690-1719."
+   }
+  },
+  {
+   "text": "The bijections $\\operatorname{Mor}_U(T,Y)\\simeq\\operatorname{Mor}_U(T,X)$ commute with every morphism of $U$-schemes: pullback preserves the local formulas using $\\alpha$, and uniqueness of the glued sections preserves their equality. For an arbitrary $S$-scheme $T$, decompose both sets of $S$-maps by their composites $T\\to U$ and apply these bijections to each fixed composite. They give inverse natural transformations $h_Y\\simeq X$, hence an isomorphism of algebraic spaces over $S$, since their morphisms are natural transformations [def-trf-algebraic-space]. Thus the quasi-affine scheme $Y$ of step 3 represents the original $X$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 0423 (lemma-descending-property-quasi-affine), affine flat-surjective part, lines 1690-1719."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-quasi-affine-morphism",
+  "def-pd-descent-datum",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-fpqc-covering",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-a1-quasi-affine-target-locality",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-sfb-scheme-quasi-affine-fpqc-descent",
+  "lem-trf-quasi-affine-fpqc-effective-descent",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 0423 (lemma-descending-property-quasi-affine), affine flat-surjective part, lines 1690-1719."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space over an affine scheme is a quasi affine scheme if its faithfully flat affine base change is quasi affine",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.affineAnd, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib only supplies quasi-affine scheme predicates and scheme descent tools; no algebraic-space source representability descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi affineness and scheme representability descend from a faithfully flat cover for an algebraic space",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib only supplies quasi-affine scheme predicates and scheme descent tools; no algebraic-space source representability descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"DescendsAlong\"",
+   "results": "0 hits; declarations/files: ",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib only supplies quasi-affine scheme predicates and scheme descent tools; no algebraic-space source representability descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If an algebraic space becomes a quasi affine scheme over a faithfully flat affine cover then it is a quasi affine scheme",
+   "results": "8 hits; declarations/files: AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.Scheme.IsQuasiAffine.recOn, AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine.casesOn, AlgebraicGeometry.Scheme.IsQuasiAffine.rec",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib only supplies quasi-affine scheme predicates and scheme descent tools; no algebraic-space source representability descent."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.affine|IsQuasiAffine",
+   "results": "10 hits; declarations/files: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean, Mathlib/AlgebraicGeometry/QuasiAffine.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib only supplies quasi-affine scheme predicates and scheme descent tools; no algebraic-space source representability descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space is represented by a quasi affine scheme if it becomes quasi affine after a faithfully flat affine base change",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T13:13:32Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic space is represented by a quasi affine scheme if it becomes quasi affine after a faithfully flat affine base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\"], \"digest\": \"61a12936424a8e5c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: absolute quasi-affine scheme results and generic descent interfaces do not establish quasi-affine descent or algebraic-space representability."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.affine|IsQuasiAffine",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T13:16:15Z\", \"tool\": \"grep\", \"query\": \"quasi.affine|IsQuasiAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\", \"Mathlib/AlgebraicGeometry/QuasiAffine.lean\"], \"digest\": \"eda2062b50e9bffc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: absolute quasi-affine scheme results and generic descent interfaces do not establish quasi-affine descent or algebraic-space representability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic space becomes a quasi affine scheme after faithfully flat affine base change then is a quasi affine scheme",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T13:16:15Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic space becomes a quasi affine scheme after faithfully flat affine base change then is a quasi affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\"], \"digest\": \"9b3b2f96b4062691\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: absolute quasi-affine scheme results and generic descent interfaces do not establish quasi-affine descent or algebraic-space representability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\", \"DescendsAlong\"",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T13:16:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\", \\\"DescendsAlong\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: absolute quasi-affine scheme results and generic descent interfaces do not establish quasi-affine descent or algebraic-space representability."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine\"",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T13:17:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\"], \"digest\": \"587188b2b5e45570\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: absolute quasi-affine scheme results and generic descent interfaces do not establish quasi-affine descent or algebraic-space representability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes quasi affineness descends along an fpqc covering of the target",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T13:17:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of schemes quasi affineness descends along an fpqc covering of the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Scheme.AffineCover.map_prop\", \"AlgebraicGeometry.HasAffineProperty.of_iSup_eq_top\", \"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.HasAffineProperty.of_openCover\", \"AlgebraicGeometry.HasRingHomProperty.of_source_openCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\"], \"digest\": \"a80cb7f8a95474eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: absolute quasi-affine scheme results and generic descent interfaces do not establish quasi-affine descent or algebraic-space representability."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiAffine.*[Dd]esc|[Dd]esc.*QuasiAffine|quasi.affine.*fpqc|fpqc.*quasi.affine",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-23T13:20:30Z\", \"tool\": \"grep\", \"query\": \"QuasiAffine.*[Dd]esc|[Dd]esc.*QuasiAffine|quasi.affine.*fpqc|fpqc.*quasi.affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: absolute quasi-affine scheme results and generic descent interfaces do not establish quasi-affine descent or algebraic-space representability."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi affine morphisms of schemes descend along faithfully flat quasi compact covering families of their target",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T13:20:30Z\", \"tool\": \"leansearch\", \"query\": \"Quasi affine morphisms of schemes descend along faithfully flat quasi compact covering families of their target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.HasAffineProperty.of_openCover\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\"], \"digest\": \"f299d12826fcdd0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: absolute quasi-affine scheme results and generic descent interfaces do not establish quasi-affine descent or algebraic-space representability."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism is quasi affine whenever its pullbacks by an fpqc covering of the target are quasi affine",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-23T13:20:31Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme morphism is quasi affine whenever its pullbacks by an fpqc covering of the target are quasi affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.HasAffineProperty.of_openCover\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.Scheme.AffineCover.map_prop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\"], \"digest\": \"c9dba156ca03ee4c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: absolute quasi-affine scheme results and generic descent interfaces do not establish quasi-affine descent or algebraic-space representability."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasi-compact-immersion-locality",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Descent of the universal locally closed equality loci for arbitrary Picard sheaf sections. Supporting input: Tag 0424 proof, sentence invoking 0423 to make X a quasi-affine scheme.",
+   "via": [
+    "lem-sfb-space-quasi-compact-immersion-locality",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-quasi-affine-affine-descent",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0423: checked the fpqc affine cover, wrote the canonical descent cocycle on test sections, used existing quasi-affine effective descent, separated scheme quasi-affine descent as the one new statement-only node (02L7), and identified the descended scheme with X by explicit mutually inverse fpqc gluing maps. Statement and statement dependencies are unchanged.",
+  "blueprint": "Newest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), through the existing generated alteration/Picard equality-locus chain recorded in blueprint.from. This split supplies its Stacks 0423 input to Tag 0424. blueprint_refs.py ancestor prints None, retained as JSON null; no imported blueprint node states either descent theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-quasi-affine-target-locality",
+    "why": "Generic scheme locality for quasi-affine morphisms, used on a singleton affine cover to check the effective-descent input; no six-functor route step is replaced."
+   },
+   {
+    "node": "lem-trf-quasi-affine-fpqc-effective-descent",
+    "why": "Generic scheme effective descent from Stacks 0247, exactly the input invoked in the proof of Stacks 0423."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic base change of fpqc scheme coverings to test schemes, used for the sheaf equalizers in Stacks 0423."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Generic fpqc sheaf condition for algebraic spaces on scheme tests; Stacks 0423 explicitly invokes this input to identify its descended model."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic fpqc gluing and uniqueness for maps to schemes, used to construct the inverse identification on test schemes."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and functor description of algebraic-space fibre products, used only to construct the canonical descent datum."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-quasi-affine-target-locality",
+  "lem-trf-quasi-affine-fpqc-effective-descent",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-7b7fbfdf7",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-7b7fbfdf7 (reviewer sub-agent of L); spot-checked: Read Stacks 0423 (spaces-descent.tex 1679-1719) and 02L7 (descent.tex 6002-6047), the item, the new node and all 13 cited statements. The item's statement, stmt_deps and blueprint match live and side-live; there it is still unsplit. The new id is absent from both live trees, and no node anywhere cites 02L7. Step 1: the singleton cover {p} is fpqc. p is affine by pqf-lem-affine-local-target and quasi-compact by affine-permanence (3), so each affine B has a finite affine cover of p^-1(B) whose images cover B. a:P->V is quasi-affine by 01SM locality applied to the cover {V}. Step 2: the canonical phi on T-points goes in the direction pr_0^*->pr_1^*, matching the effectivity node, and the cocycle checks out; this fills Stacks' omitted verification. Step 3: 0247 effectivity with (A,B,V)=(V,U,P) gives only Y and alpha. Its statement does not make the model quasi-affine, so the new 02L7 node is genuinely needed, and with U affine it gives Y a quasi-affine scheme. Steps 4-5: the base change T_V->T is fpqc; the space-target fpqc sheaf lemma glues Y-points to X-points, the scheme fpqc lemma glues back, and uniqueness gives mutual inverses and the over-U property. The X-coordinate equality on overlaps follows from alpha inducing phi. This avoids 041V. Step 6: the disjoint-union decomposition over T->U gives h_Y≅X over S. proof_deps equals the union of the step uses. New node lem-sfb-scheme-quasi-affine-fpqc-descent: a true, hypothesis-free statement of 02L7 that passes B1-B5 and B9. It is not a restatement of the item, since it is a scheme property and not space representability. Tested on empty U, the identity cover, a field extension with A^2 minus 0, and A^n over K. Duplicate search over the snapshot (0247, 0APK, 03XW, 041X, 0424, 02W5 fppf-only, 02W8 saturation) found no duplicate. Batch-5 flags: the item's stmt_deps already reach 7 trf/PD nodes; its proof_deps add 3 (0247, 01P9, 01SO), all generic scheme descent and quasi-affine theory, not trace-formula or PD statements or proof steps. lem-a1-algebraic-space-fpqc-sheaf reaches only def-trf-algebraic-space, a general definition already in the item's statement. All three flags accepted. The six tool_uses are generic fpqc, space and scheme foundations that Stacks 0423 invokes; accepted. No SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQuasiAffineAffineDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_quasiAffine_representation_of_flat_surjective_affine_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQuasiAffineAffineDescent.lean",
+  "statement": "theorem exists_quasiAffine_representation_of_flat_surjective_affine_baseChange {S : Scheme.{u}} (U V : Over S) [IsAffine U.left] [IsAffine V.left] (p : V ⟶ U) [Flat p.left] [Surjective p.left] (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj U) (h : ∃ P : Over S, P.left.IsQuasiAffine ∧ Nonempty (yoneda.obj P ≅ Limits.pullback f (yoneda.map p))) : ∃ Y : Over S, Y.left.IsQuasiAffine ∧ Nonempty (yoneda.obj Y ≅ X.obj.obj)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6397f6fc4",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Checked node against Stacks 0423 (spaces-descent.tex 1677-1719): U,V affine Over S, p flat+surjective (Mathlib Flat/Surjective), X : AlgebraicSpace S, f to yoneda U, hypothesis = presheaf pullback (same as underlying sheaf fibre product of fibreProduct_isAlgebraicSpace) represented by IsQuasiAffine P, conclusion yoneda Y ≅ X with Y quasi-affine; relative=absolute quasi-affine over affine V; Mathlib IsQuasiAffine = qc open of affine (of_isImmersion / toSpecΓ open immersion). No extra hypotheses or universe restriction; empty/identity cases covered. lean.statement verbatim; node differs from side-live only in lean; docstrings carry source, blueprint id and 6 proof steps; proof sorry, no defs; imports are stmt/proof-dep modules, all present. Advisory H11: second-reading section is the direct-delivery placeholder, worker clause table complete. No compile (no file changed)."
+ }
+}

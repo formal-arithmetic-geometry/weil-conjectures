@@ -1,0 +1,127 @@
+{
+ "id": "lem-pur-compact-support-scalar-roos-tensor-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), scalar-limit comparison: identify its tensor factor with the actual tensor/limit map and preserve strict augmentations.",
+   "via": [
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unit-normalized tensor comparison of support Roos complexes",
+ "statement": "Let l be prime, E,F finite extensions of Q_l with embedding i:E -> F, and W a scheme. Use the scalar tensor, tower tensor and scalarLimit of [def-pur-compact-support-scalar-limit-maps]. Let kappa_E and kappa_F be arbitrary Roos/total-limit isomorphisms satisfying the canonical ordinary-limit inclusion/right-derived-unit equations on every strict complex. For a strict E tower complex K, let theta be the complex tensor/Roos isomorphism whose hom is the canonical roosAdditiveComparison of [lem-pur-roos-additive-comparison]. Then tensor of kappa_E followed by the specified scalarLimitTensor is exactly the scalar tensor derived counit followed by derived theta, kappa_F and the tower tensor derived-factor inverse. Moreover theta sends every compatible strict augmentation to the augmentation formed by tensoring each coordinate, with its mapped compatibility equations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Tags 03EK and 0941; finite-free scalar tensor/product comparison, exact derived-square normalization and strict compatible augmentations.",
+  "note": "Lean proof specialization: lean/Sheaf/Paper/CompactSupportScalarRoosTensorNormalization.lean:51; extracted from scalarRoosTensorNormalization after local definition/API improvements and profiling left the main file near the 60-second bound."
+ },
+ "stmt_deps": [
+  "def-pur-compact-support-scalar-limit-maps",
+  "lem-pur-roos-additive-comparison",
+  "lem-pur-roos-comparison-horizontal-coherence"
+ ],
+ "proof": [
+  {
+   "text": "The supplied theta hom is the canonical additive comparison. The constant scalar tensor and tower tensor are exact, and scalarLimitTensor has the recorded exact derived square. Apply roosTensorNormalization to the two supplied unit equations to get precisely the actual tensor/total-limit equality.",
+   "uses": [
+    "def-pur-compact-support-scalar-limit-maps",
+    "lem-pur-roos-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite theta by its supplied equation. The generic comparison_augmentation theorem supplies the mapped compatibility equations and augmentation equality, since both sides have shifted-product coordinate zero and unshifted coordinate F(a).",
+   "uses": [
+    "lem-pur-roos-tensor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-compact-support-scalar-limit-maps",
+  "lem-pur-roos-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Tags 03EK and 0941; finite-free scalar tensor/product comparison, exact derived-square normalization and strict compatible augmentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor functor commutes with derived inverse limit Roos complex and preserves compatible augmentations",
+   "results": "8 generic tensor/direct-limit and finite-limit hits including TensorProduct.directLimitLeft; no derived inverse-limit Roos normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unit normalized Roos comparison tensor product preserves augmentation",
+   "results": "8 unrelated augmented simplex and monoidal complex hits including HomologicalComplex.rightUnitor and AugmentedSimplexCategory.inr_comp_tensorHom; no Roos tensor/limit normalization.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "roosTensorNormalization|roosAdditiveComparison|comparison_augmentation",
+   "results": "Zero Mathlib hits; the project generic normalization and augmentation lemmas are used.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match; project declarations used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarLimitReduction",
+  "group": "D4",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarRoosTensorNormalization",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarRoosTensorNormalization.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarRoosTensorNormalization_of_units",
+  "statement": "theorem scalarRoosTensorNormalization_of_units (W : Scheme.{u})\n    (κE : roosF (A := Modules\n      (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ⋙\n        DerivedCategory.Q ≅ DerivedCategory.Q ⋙ scalarLimit l E W)\n    (κF : roosF (A := Modules\n      (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W) ⋙\n        DerivedCategory.Q ≅ DerivedCategory.Q ⋙ scalarLimit l F W)\n    (hE : ∀ K : CochainComplex (Towers\n        (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ℤ,\n      DerivedCategory.Q.map (roosι K) ≫ κE.hom.app K =\n        DerivedCategory.Q.map\n          (limit.isoLimitCone ⟨HomologicalComplex.coneOfHasLimitEval K.asFunctor,\n            HomologicalComplex.isLimitConeOfHasLimitEval K.asFunctor⟩).hom ≫\n        Functor.rightDerivedFunctorUnitQ\n          (lim : Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W ⥤\n            Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) K)\n    (hF : ∀ K : CochainComplex (Towers\n        (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W) ℤ,\n      DerivedCategory.Q.map (roosι K) ≫ κF.hom.app K =\n        DerivedCategory.Q.map\n          (limit.isoLimitCone ⟨HomologicalComplex.coneOfHasLimitEval K.asFunctor,\n            HomologicalComplex.isLimitConeOfHasLimitEval K.asFunctor⟩).hom ≫\n        Functor.rightDerivedFunctorUnitQ\n          (lim : Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W ⥤\n            Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W) K)\n    (K : CochainComplex (Towers\n      (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ℤ)\n    (θ : ((pbcExtend (constantMap l E F i W)).mapHomologicalComplex (.up ℤ)).obj\n        (roosF.obj K) ≅\n      roosF.obj (((tensor l E F i W).mapHomologicalComplex (.up ℤ)).obj K))\n    (hθ : θ.hom = roosAdditiveComparison (pbcExtend (constantMap l E F i W)) K) :\n    (baseTensor l E F i W).map (κE.hom.app K) ≫\n        (scalarLimitTensor l E F i W).hom.app (DerivedCategory.Q.obj K) =\n      baseTensorCounit l E F i W (roosF.obj K) ≫\n        DerivedCategory.Q.map θ.hom ≫\n        κF.hom.app\n          (((tensor l E F i W).mapHomologicalComplex (.up ℤ)).obj K) ≫\n        (scalarLimit l F W).map\n          ((tensor l E F i W).mapDerivedCategoryFactors.inv.app K) ∧\n    (∀ (P : CochainComplex\n        (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ℤ)\n      (a : ∀ n : ℕ, P ⟶ K.asFunctor.obj (op n))\n      (ha : ∀ n : ℕ, a (n + 1) ≫\n        K.asFunctor.map (homOfLE (Nat.le_succ n)).op = a n),\n      ∃ h : ∀ n : ℕ,\n        ((pbcExtend (constantMap l E F i W)).mapHomologicalComplex (.up ℤ)).map\n            (a (n + 1)) ≫\n          (((tensor l E F i W).mapHomologicalComplex (.up ℤ)).obj K).asFunctor.map\n            (homOfLE (Nat.le_succ n)).op =\n          ((pbcExtend (constantMap l E F i W)).mapHomologicalComplex (.up ℤ)).map (a n),\n        ((pbcExtend (constantMap l E F i W)).mapHomologicalComplex (.up ℤ)).map\n            (roosAugment a ha) ≫ θ.hom =\n          roosAugment (fun n : ℕ ↦\n            ((pbcExtend (constantMap l E F i W)).mapHomologicalComplex (.up ℤ)).map (a n)) h)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

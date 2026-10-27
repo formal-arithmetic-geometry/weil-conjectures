@@ -104,16 +104,28 @@
  },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarSourceClassFormula",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarSourceClassFormula.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceClassFormula",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleScalarSourceClassFormula.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_source_class_formula",
-  "statement": "theorem rawModuleScalar_source_class_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    scalarSourceFactor Λ (A.hom ≫ k) ((freeSheaf Λ S).obj U)\n        (RawModuleScalarComparison.freeAbelian S U)\n        (RawModuleScalarComparison.freeMap Λ S U) ≫\n      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map\n        (moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)\n          (by rw [← Category.assoc, Over.w]) ((freeSheaf Λ S).obj U)) ≫\n      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map\n        ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z) =\n    rawModuleScalarSourcePrefix Λ k G q U A B f z ≫\n      (RawModuleScalarComparison.derivedPullbackIso Λ f.left).inv.app\n        (((DerivedCategory.Plus.singleFunctor _ 0).obj\n          ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦(q : ℤ)⟧)",
+  "statement": "theorem rawModuleScalar_source_class_formula (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale) (A B : Over W) (f : A ⟶ B) (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) : scalarSourceFactor Λ (A.hom ≫ k) ((freeSheaf Λ S).obj U) (RawModuleScalarComparison.freeAbelian S U) (RawModuleScalarComparison.freeMap Λ S U) ≫ (moduleAbelianForget Λ A.left).mapDerivedCategoryPlus.map (moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k) (by rw [← Category.assoc, Over.w]) ((freeSheaf Λ S).obj U)) ≫ (moduleAbelianForget Λ A.left).mapDerivedCategoryPlus.map ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z) = rawModuleScalarSourcePrefix Λ k G q U A B f z ≫ (moduleAbelianDerivedUpperStarIso Λ f.left).hom.app (((DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦(q : ℤ)⟧)",
   "branch": "sheaf-dag",
   "by": "N4",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "P2 reexports the existing canonical source construction. The prefix body is identical after expansion of the forget compatibility abbreviation; the source-class theorem uses the canonical forward derived comparison, definitionally the inverse of the historical comparison in this packet. All statements, hypotheses and the unit route retain their meaning. No new obligation is introduced. Y7 completes the listed retirement of the declaration-free Sheaf shim. The canonical upstream theorem and its complete source-square/naturality proof remain unchanged. The sole mathematical parent already imports the upstream theorem directly; its DAG dependency and the unit route are retained. No live or quarantined source imports the retired Sheaf path. No declaration, definition, theorem hypothesis, comparison or target statement changes."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -126,13 +138,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "Y7",
   "result": "pass",
-  "landing": "20261014T105818-L-1668349",
-  "kind": "proof",
+  "landing": "20261025T144416-L-1238417",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

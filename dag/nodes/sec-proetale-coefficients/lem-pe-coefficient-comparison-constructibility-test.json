@@ -14,26 +14,36 @@
  ],
  "proof": [
   {
-   "text": "inverse image commutes with restriction to each locally closed stratum by\nthe comparison base-change mate. An etale finite local trivialization pulls back\nto a pro-etale trivialization with the same finite module. Conversely, a finite\npro-etale local system descends uniquely to the etale site: finite presentation\nover the Noetherian ring lets its trivializations and transition maps descend\nalong affine pro-etale presentations to etale finite stages. Fully faithful\ncomparison on each stratum identifies that descended system with the restriction\nof the given etale module. The same finite partition thus witnesses etale\nconstructibility. Affine-local finite partitions glue on each quasi-compact affine\nopen, and arbitrary schemes are covered by such opens. Constant-scalar restriction\nand the coefficient-sized site equivalences preserve covers, the constant finite\nmodels and the stratum inverse images. No quasi-compactness assumption on the\nwhole scheme is needed. The empty scheme has the empty partition, and the zero\nmodule is covered by the zero finite model, so the two tests also agree there.",
+   "text": "Fix an affine open U and a finite locally closed stratification witnessing etale constructibility. Add its separately supplied constructibility proofs to obtain Scheme.Stratification with literally the same stratum schemes and immersion maps. The coefficient comparison/scalar-restriction inverse-image isomorphism identifies each pro-etale stratum restriction with the comparison of the etale stratum restriction. The continuous finite-limit-preserving site inclusion preserves finite local systems. Transport these local models through the isomorphism and upgrade finite generation to finite presentation over the Noetherian ring. This yields the required pro-etale witness on U.",
    "uses": [
-    "det-pe-finite-local-systems-twist",
-    "sk-thm-pe-direct-image-comparison",
-    "det-pe-classical-sheaves-modules",
-    "lem-sc-noetherian-finite-module-finite-presentation"
+    "lem-pe-coefficient-comparison-fixed-pullback",
+    "lem-sfb-coefficient-finite-local-systems-pullback",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-pe-coefficient-finite-local-model-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely retain each pro-etale stratification, forgetting only the bundled constructibility field to produce FiniteLocallyClosedStratification and its separate constructibility proofs. On every stratum forget finite presentation to finite generation. Transport the finite local models along the same comparison/scalar-restriction isomorphism, then apply single-stratum coefficient-sized reflection of finite local systems. These are exactly the etale local models required by the unchanged etale constructibility definition. Both directions work independently for every affine open, so there is no gluing step or quasi-compactness hypothesis on X.",
+   "uses": [
+    "lem-pe-coefficient-comparison-fixed-pullback",
+    "lem-pe-coefficient-comparison-finite-reflection",
+    "lem-pe-coefficient-finite-local-model-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "det-pe-classical-sheaves-modules",
-  "det-pe-finite-local-systems-twist",
+  "lem-pe-coefficient-comparison-fixed-pullback",
+  "lem-sfb-coefficient-finite-local-systems-pullback",
   "lem-sc-noetherian-finite-module-finite-presentation",
-  "sk-thm-pe-direct-image-comparison"
+  "lem-pe-coefficient-comparison-finite-reflection",
+  "lem-pe-coefficient-finite-local-model-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-equivalence.proof.md",
-  "place": "part (1); local/classical detail for the finite stratification arguments"
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AK, first proof paragraph, and Tag 099Y; the same finite partition is retained independently on each affine open. Reconstructed by M4 after the preceding delivery was taken out."
  },
  "mathlib_searches": [
   {
@@ -124,14 +134,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-9e836",
-  "group": "B2",
-  "result": "fix",
-  "landing": "20261021T012347-L-2179661",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T002008-L-48249",
   "kind": "interface",
-  "note": "independent cc review: 14 delivered modules + 3 live direct importers compiled in a sandbox (clean); moved Data defs diffed verbatim vs live item; item statement diffed vs live; #print axioms; the 3 sorry statements read against Stacks 09AI-09AL/BS 5-6 and the existing Type(u+1) interfaces; per-import removal compiles for all 61 import lines"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

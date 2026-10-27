@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Devissage of coherent sheaves by integral closed subschemes (Stacks 01YI)",
- "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions]. Let $\\mathcal P$ be a property of coherent $\\mathcal O_X$-modules [pqf-def-coherent] such that (0) $\\mathcal P$ holds for the zero module; (1) for any short exact sequence $0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ of coherent $\\mathcal O_X$-modules, if two out of the three have property $\\mathcal P$ then so does the third; (2) for every integral [def-pc-integral-scheme] closed subscheme $Z\\subset X$ [def-weil-closed-immersion] with generic point $\\xi$ there exists some coherent $\\mathcal O_X$-module $\\mathcal G$ such that (a) $\\operatorname{Supp}(\\mathcal G)=Z$ [def-weil-pbc-closed-subset-proper-over-base](2), (b) the stalk $\\mathcal G_\\xi$ [def-weil-pbc-module-stalk] is annihilated by the maximal ideal $\\mathfrak m_\\xi\\subset\\mathcal O_{X,\\xi}$ [def-weil-residue-field], (c) $\\dim_{\\kappa(\\xi)}\\mathcal G_\\xi=1$, and (d) property $\\mathcal P$ holds for $\\mathcal G$. Then property $\\mathcal P$ holds for every coherent $\\mathcal O_X$-module.",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions]. Let $\\mathcal P$ be a property of coherent $\\mathcal O_X$-modules [pqf-def-coherent] such that (0) $\\mathcal P$ holds for the zero module; (1) for any short exact sequence $0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ of coherent $\\mathcal O_X$-modules, if two out of the three have property $\\mathcal P$ then so does the third; (2) for every integral [def-pc-integral-scheme] closed subscheme $Z\\subset X$ [def-weil-closed-immersion] with generic point $\\xi$ there exists some coherent $\\mathcal O_X$-module $\\mathcal G$ such that (a) $\\operatorname{Supp}(\\mathcal G)=Z$ [def-weil-pbc-closed-subset-proper-over-base](2), (b) the stalk $\\mathcal G_\\xi$ [def-weil-pbc-module-stalk] is annihilated by the maximal ideal $\\mathfrak m_\\xi\\subset\\mathcal O_{X,\\xi}$ [def-weil-residue-field], (c) the residue-field action on $\\mathcal G_\\xi$ is induced from its original $\\mathcal O_{X,\\xi}$-action through the residue map and $\\dim_{\\kappa(\\xi)}\\mathcal G_\\xi=1$, and (d) property $\\mathcal P$ holds for $\\mathcal G$. Then property $\\mathcal P$ holds for every coherent $\\mathcal O_X$-module.",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Cohomology of Schemes, Lemma 30.12.6 (Tag 01YI, label lemma-property, coherent.tex line 3270); hypothesis (0) is added here because without it the lemma fails for X empty (then (1) and (2) hold for the property 'false'); for X nonempty (0) follows from (1) and (2) applied to 0->G->G->0->0"
@@ -29,70 +29,83 @@
  ],
  "proof": [
   {
-   "text": "Property P is invariant under isomorphism by applying (1) to $0\\to0\\to F'\\to F\\to0$ and using (0). A finite filtration by coherent submodules whose successive quotients have P therefore has P on its total module by induction; the empty filtration is covered by (0).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YI proof after the statement; finite-filtration induction"
-   }
-  },
-  {
-   "text": "For every coherent $\\mathcal F$, [lem-weil-pbc-coherent-filtration-integral-subschemes] supplies a finite filtration $0=\\mathcal F_0\\subseteq\\dots\\subseteq\\mathcal F_m=\\mathcal F$ by coherent submodules with $\\mathcal F_j/\\mathcal F_{j-1}\\cong(i_j)_*\\mathcal I_j$ for closed immersions $i_j:Z_j\\to X$ with $Z_j$ integral and nonzero coherent ideals $\\mathcal I_j\\subseteq\\mathcal O_{Z_j}$. Let $\\eta_j$ be the generic point of $Z_j$. Since $i_j$ is a homeomorphism onto the closed set $i_j(Z_j)$, the stalk of $(i_j)_*\\mathcal I_j$ at $i_j(\\eta_j)$ is $(\\mathcal I_j)_{\\eta_j}$, which is nonzero by [lem-weil-pbc-integral-scheme-ideal-generic-stalk] (a)$\\Rightarrow$(c). As $\\operatorname{Supp}(\\mathcal F_j/\\mathcal F_{j-1})\\subseteq\\operatorname{Supp}(\\mathcal F)$ (stalks of subquotients), every closed set containing $\\operatorname{Supp}(\\mathcal F)$ contains $i_j(\\eta_j)$ and hence its closure $i_j(Z_j)$, an irreducible closed subset of $X$.",
+   "text": "Zero objects and isomorphic coherent modules have P: apply two out of three to the short exact sequence 0 → F → G → 0 induced by an isomorphism F ≅ G. Coherence of zero, isomorphic modules and cokernels follows from lem-weil-pbc-coherent-modules-kernel-cokernel-sum.",
    "uses": [
-    "lem-weil-pbc-coherent-filtration-integral-subschemes",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YI proof using Lemma 01YF"
+    "place": "Lemma 01YI proof, using Lemmas 01YH and 01YF"
    }
   },
   {
-   "text": "Call an irreducible closed subset $T\\subseteq X$ good when $\\mathcal P$ holds for $i_*\\mathcal I$ for every closed immersion $i:Z\\to X$ with $Z$ integral and $i(Z)=T$ and every quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_Z$. Suppose some irreducible closed subset is bad. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] applied to the set of bad irreducible closed subsets there is a minimal bad $T_0$, together with an integral $i_0:Z_0\\to X$, $i_0(Z_0)=T_0$, and an ideal $\\mathcal I_0$ such that $\\mathcal P$ fails for $(i_0)_*\\mathcal I_0$; every irreducible closed subset strictly contained in $T_0$ is good.",
+   "text": "For a closed immersion i : Z → X, Z is locally Noetherian by pqf-lem-locnoeth-lft. Its structure module is coherent by lem-weil-pbc-finite-pushforward-coherent. A quasi-coherent ideal I is the kernel of the map O_Z → (Z/I)_*O_(Z/I): affine pushforward is quasi-coherent by lem-pc-affine-morphism-hi, and kernels are quasi-coherent by lem-weil-pbc-quasi-coherent-module-kernel. Thus I is coherent by lem-weil-pbc-coherent-kernel-cokernel-locnoeth, and i_*I is coherent by finite pushforward. Its stalks vanish off i(Z), by lem-weil-pbc-closed-pushforward-stalks.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-pc-affine-morphism-hi",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01YI proof, using Lemmas 01YH and 01YF"
+   }
+  },
+  {
+   "text": "Use well-founded induction on the closed subsets T of X (the minimal condition). Prove that P holds for i_*I for every integral closed immersion i with image contained in T. The image i(Z) is irreducible closed with generic point i(η_Z), since a continuous image of a generic point is generic in the closure of the image. Any integral closed image strictly smaller than i(Z) is strictly smaller than T, and so all its ideal pushforwards satisfy P by induction.",
    "uses": [
     "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YI proof ('If this fails, then since X is Noetherian there is a minimal integral closed subscheme Z_0')"
+    "place": "Lemma 01YI proof, using Lemmas 01YH and 01YF"
    }
   },
   {
-   "text": "Apply [lem-pc-coherent-property-irreducible] with $T=T_0$ to the restriction of $\\mathcal P$ to coherent modules with support in $T_0$. Its (1) is the item's (1) for sequences whose terms are supported in $T_0$; its (2) holds because for integral $i:Z\\to X$ with $i(Z)\\subsetneq T_0$ the set $i(Z)$ is irreducible closed and good by minimality (step 3); its (3) is the item's (2) applied to the integral closed subscheme $Z_0$, whose generic point is that of $T_0$. The lemma gives $\\mathcal P$ for every coherent module supported in $T_0$, in particular for $(i_0)_*\\mathcal I_0$, whose support lies in $i_0(Z_0)=T_0$: a contradiction. Thus every irreducible closed subset is good.",
+   "text": "Apply lem-pc-coherent-property-irreducible to i(Z). Its two-out-of-three hypothesis is supplied by the global hypothesis, its smaller-integral-image hypothesis by induction, and its distinguished module by hypothesis (2) at η_Z with the compatible quotient action. Step 2 supplies coherence and support containment for i_*I. Hence every ideal pushforward has P.",
    "uses": [
     "lem-pc-coherent-property-irreducible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YH (label lemma-property-irreducible, coherent.tex line 3179), invoked in the proof of Lemma 01YI"
+    "place": "Lemma 01YI proof, using Lemmas 01YH and 01YF"
    }
   },
   {
-   "text": "Filter an arbitrary coherent $\\mathcal F$ as in step 2. Each quotient $(i_j)_*\\mathcal I_j$ has $\\mathcal P$ because $i_j(Z_j)$ is good (step 4), so $\\mathcal F$ has $\\mathcal P$ by step 1 (for $m=0$, i.e. $\\mathcal F=0$, by (0)).",
+   "text": "Filter any coherent F by lem-weil-pbc-coherent-filtration-integral-subschemes. Every cokernel is coherent and isomorphic to an ideal pushforward, so has P by the induction result and step 1. Induct on Fin (m+1), starting with the zero subobject and using the short exact sequence of each inclusion and its cokernel. Finally transport along the isomorphism from the top subobject to F. The argument includes length zero and the empty scheme.",
    "uses": [
-    "lem-weil-pbc-coherent-filtration-integral-subschemes"
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YI conclusion"
+    "place": "Lemma 01YI proof, using Lemmas 01YH and 01YF"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-coherent-filtration-integral-subschemes",
-  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-closed-pushforward-stalks",
   "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-pc-coherent-property-irreducible"
+  "lem-pc-coherent-property-irreducible",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemmas 01YI and 01YH and the proof of 01YI"
+  "place": "Lemma 01YI, implemented by well-founded closed-support induction and finite-filtration induction; Lemma 01YH supplies the irreducible case"
  },
  "mathlib_searches": [
   {
@@ -143,9 +156,7 @@
  },
  "tool_uses": [
   "lem-weil-pbc-coherent-filtration-integral-subschemes",
-  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
-  "lem-weil-pbc-coherent-filtration-integral-subschemes",
-  "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+  "lem-weil-pbc-coherent-filtration-integral-subschemes"
  ],
  "reviewed": {
   "date": "2026-10-11",
@@ -159,7 +170,7 @@
   "module": "Sheaf.AlgebraicGeometry.CoherentPropertyDevissage",
   "declaration": "AlgebraicGeometry.coherent_property_devissage",
   "file": "lean/Sheaf/AlgebraicGeometry/CoherentPropertyDevissage.lean",
-  "statement": "theorem coherent_property_devissage (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (P : X.Modules → Prop) (hP_zero : ∀ F : X.Modules, IsZero F → P F) (hP_seq : ∀ (S : ShortComplex X.Modules), S.ShortExact → RingedSpace.IsCoherent X.toRingedSpace S.X₁ → RingedSpace.IsCoherent X.toRingedSpace S.X₂ → RingedSpace.IsCoherent X.toRingedSpace S.X₃ → ((P S.X₁ ∧ P S.X₂) ∨ (P S.X₁ ∧ P S.X₃) ∨ (P S.X₂ ∧ P S.X₃)) → P S.X₁ ∧ P S.X₂ ∧ P S.X₃) (hP_integral : ∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsIntegral Z] [IsClosedImmersion i] (ξ : Z), ∃ G : X.Modules, RingedSpace.IsCoherent X.toRingedSpace G ∧ (∀ x : X, (¬ Subsingleton (G.presheaf.stalk x)) ↔ x ∈ Set.range i.base) ∧ (∀ (r : X.presheaf.stalk (i.base ξ)), r ∈ IsLocalRing.maximalIdeal _ → ∀ m : (PresheafOfModules.stalkObj X.ringCatSheaf.presheaf (i.base ξ) G.val), r • m = 0) ∧ (∃ hκ : Module (X.residueField (i.base ξ)) (PresheafOfModules.stalkObj X.ringCatSheaf.presheaf (i.base ξ) G.val), @Module.finrank _ _ _ _ hκ = 1) ∧ P G) : ∀ F : X.Modules, RingedSpace.IsCoherent X.toRingedSpace F → P F",
+  "statement": "theorem coherent_property_devissage (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (P : X.Modules → Prop) (hP_zero : ∀ F : X.Modules, IsZero F → P F) (hP_seq : ∀ (S : ShortComplex X.Modules), S.ShortExact → RingedSpace.IsCoherent X.toRingedSpace S.X₁ → RingedSpace.IsCoherent X.toRingedSpace S.X₂ → RingedSpace.IsCoherent X.toRingedSpace S.X₃ → ((P S.X₁ ∧ P S.X₂) ∨ (P S.X₁ ∧ P S.X₃) ∨ (P S.X₂ ∧ P S.X₃)) → P S.X₁ ∧ P S.X₂ ∧ P S.X₃) (hP_integral : ∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsIntegral Z] [IsClosedImmersion i] (ξ : Z) (_hξ : IsGenericPoint ξ Set.univ), ∃ G : X.Modules, RingedSpace.IsCoherent X.toRingedSpace G ∧ (∀ x : X, (¬ Subsingleton (G.presheaf.stalk x)) ↔ x ∈ Set.range i.base) ∧ (∀ (r : X.presheaf.stalk (i.base ξ)), r ∈ IsLocalRing.maximalIdeal _ → ∀ m : (PresheafOfModules.stalkObj X.ringCatSheaf.presheaf (i.base ξ) G.val), r • m = 0) ∧ (∃ hκ : Module (X.residueField (i.base ξ)) (PresheafOfModules.stalkObj X.ringCatSheaf.presheaf (i.base ξ) G.val), (∀ (r : X.presheaf.stalk (i.base ξ)) (m : PresheafOfModules.stalkObj X.ringCatSheaf.presheaf (i.base ξ) G.val), r • m = (X.residue (i.base ξ)) r • m) ∧ @Module.finrank _ _ _ _ hκ = 1) ∧ P G) : ∀ F : X.Modules, RingedSpace.IsCoherent X.toRingedSpace F → P F",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-11",
@@ -173,5 +184,105 @@
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-23",
+  "by": "J2 stage 2",
+  "old_statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions]. Let $\\mathcal P$ be a property of coherent $\\mathcal O_X$-modules [pqf-def-coherent] such that (0) $\\mathcal P$ holds for the zero module; (1) for any short exact sequence $0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ of coherent $\\mathcal O_X$-modules, if two out of the three have property $\\mathcal P$ then so does the third; (2) for every integral [def-pc-integral-scheme] closed subscheme $Z\\subset X$ [def-weil-closed-immersion] with generic point $\\xi$ there exists some coherent $\\mathcal O_X$-module $\\mathcal G$ such that (a) $\\operatorname{Supp}(\\mathcal G)=Z$ [def-weil-pbc-closed-subset-proper-over-base](2), (b) the stalk $\\mathcal G_\\xi$ [def-weil-pbc-module-stalk] is annihilated by the maximal ideal $\\mathfrak m_\\xi\\subset\\mathcal O_{X,\\xi}$ [def-weil-residue-field], (c) $\\dim_{\\kappa(\\xi)}\\mathcal G_\\xi=1$, and (d) property $\\mathcal P$ holds for $\\mathcal G$. Then property $\\mathcal P$ holds for every coherent $\\mathcal O_X$-module.",
+  "what": "The Lean attachment quantified over arbitrary points of Z instead of generic points and used an unrelated existential residue-field module structure. Require genericity and compatibility with the original stalk-ring action, exactly as the source and the irreducible-support dependency do. The natural-language statement now makes the already intended quotient action explicit. This is a source-faithful interface repair followed by a complete proof, not a weakening of the conclusion.",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Cohomology of Schemes, Lemma 30.12.6 (Tag 01YI, label lemma-property, coherent.tex line 3270); hypothesis (0) is added here because without it the lemma fails for X empty (then (1) and (2) hold for the property 'false'); for X nonempty (0) follows from (1) and (2) applied to 0->G->G->0->0"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-curve-euler-tensor-generic-rank",
+    "holds": true,
+    "note": "The curve Euler-characteristic argument uses witnesses only at generic points, with the canonical residue-field action on structure-module pushforwards; its statement is unchanged. Its Lean proof is still sorry and makes no application requiring adaptation."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Property P is invariant under isomorphism by applying (1) to $0\\to0\\to F'\\to F\\to0$ and using (0). A finite filtration by coherent submodules whose successive quotients have P therefore has P on its total module by induction; the empty filtration is covered by (0).",
+    "uses": [],
+    "elementary": true,
+    "source": {
+     "document": "literature/stacks-project/coherent.tex",
+     "place": "Lemma 01YI proof after the statement; finite-filtration induction"
+    }
+   },
+   {
+    "text": "For every coherent $\\mathcal F$, [lem-weil-pbc-coherent-filtration-integral-subschemes] supplies a finite filtration $0=\\mathcal F_0\\subseteq\\dots\\subseteq\\mathcal F_m=\\mathcal F$ by coherent submodules with $\\mathcal F_j/\\mathcal F_{j-1}\\cong(i_j)_*\\mathcal I_j$ for closed immersions $i_j:Z_j\\to X$ with $Z_j$ integral and nonzero coherent ideals $\\mathcal I_j\\subseteq\\mathcal O_{Z_j}$. Let $\\eta_j$ be the generic point of $Z_j$. Since $i_j$ is a homeomorphism onto the closed set $i_j(Z_j)$, the stalk of $(i_j)_*\\mathcal I_j$ at $i_j(\\eta_j)$ is $(\\mathcal I_j)_{\\eta_j}$, which is nonzero by [lem-weil-pbc-integral-scheme-ideal-generic-stalk] (a)$\\Rightarrow$(c). As $\\operatorname{Supp}(\\mathcal F_j/\\mathcal F_{j-1})\\subseteq\\operatorname{Supp}(\\mathcal F)$ (stalks of subquotients), every closed set containing $\\operatorname{Supp}(\\mathcal F)$ contains $i_j(\\eta_j)$ and hence its closure $i_j(Z_j)$, an irreducible closed subset of $X$.",
+    "uses": [
+     "lem-weil-pbc-coherent-filtration-integral-subschemes",
+     "lem-weil-pbc-integral-scheme-ideal-generic-stalk"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/coherent.tex",
+     "place": "Lemma 01YI proof using Lemma 01YF"
+    }
+   },
+   {
+    "text": "Call an irreducible closed subset $T\\subseteq X$ good when $\\mathcal P$ holds for $i_*\\mathcal I$ for every closed immersion $i:Z\\to X$ with $Z$ integral and $i(Z)=T$ and every quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_Z$. Suppose some irreducible closed subset is bad. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] applied to the set of bad irreducible closed subsets there is a minimal bad $T_0$, together with an integral $i_0:Z_0\\to X$, $i_0(Z_0)=T_0$, and an ideal $\\mathcal I_0$ such that $\\mathcal P$ fails for $(i_0)_*\\mathcal I_0$; every irreducible closed subset strictly contained in $T_0$ is good.",
+    "uses": [
+     "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/coherent.tex",
+     "place": "Lemma 01YI proof ('If this fails, then since X is Noetherian there is a minimal integral closed subscheme Z_0')"
+    }
+   },
+   {
+    "text": "Apply [lem-pc-coherent-property-irreducible] with $T=T_0$ to the restriction of $\\mathcal P$ to coherent modules with support in $T_0$. Its (1) is the item's (1) for sequences whose terms are supported in $T_0$; its (2) holds because for integral $i:Z\\to X$ with $i(Z)\\subsetneq T_0$ the set $i(Z)$ is irreducible closed and good by minimality (step 3); its (3) is the item's (2) applied to the integral closed subscheme $Z_0$, whose generic point is that of $T_0$. The lemma gives $\\mathcal P$ for every coherent module supported in $T_0$, in particular for $(i_0)_*\\mathcal I_0$, whose support lies in $i_0(Z_0)=T_0$: a contradiction. Thus every irreducible closed subset is good.",
+    "uses": [
+     "lem-pc-coherent-property-irreducible"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/coherent.tex",
+     "place": "Lemma 01YH (label lemma-property-irreducible, coherent.tex line 3179), invoked in the proof of Lemma 01YI"
+    }
+   },
+   {
+    "text": "Filter an arbitrary coherent $\\mathcal F$ as in step 2. Each quotient $(i_j)_*\\mathcal I_j$ has $\\mathcal P$ because $i_j(Z_j)$ is good (step 4), so $\\mathcal F$ has $\\mathcal P$ by step 1 (for $m=0$, i.e. $\\mathcal F=0$, by (0)).",
+    "uses": [
+     "lem-weil-pbc-coherent-filtration-integral-subschemes"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/coherent.tex",
+     "place": "Lemma 01YI conclusion"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-coherent-filtration-integral-subschemes",
+   "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+   "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+   "lem-pc-coherent-property-irreducible"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-7ef9f",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261023T123606-L-1218033",
+  "kind": "interface",
+  "note": "independent cc review: new coherent_property_devissage signature vs Stacks 01YI and node lem-pc-coherent-property-devissage (old signature false: unrelated κ-action counterexample on Spec Q(t)); Lean proof vs node proof/proof_deps; direct importer CurveEulerTensorGenericRank compiled against delivered item"
+ }
 }

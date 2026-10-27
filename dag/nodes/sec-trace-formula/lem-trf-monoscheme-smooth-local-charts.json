@@ -1,0 +1,256 @@
+{
+ "id": "lem-trf-monoscheme-smooth-local-charts",
+ "kind": "statement",
+ "title": "Smallest affine neighborhoods and smooth monoscheme product charts",
+ "statement": "Let $M$ be a fine monoscheme and $x\\in M$ [def-trf-monoscheme-toric-realization]. There is a smallest open neighborhood $M_x$ of $x$, consisting of its generalizations, which is affine with section monoid $\\mathcal M_x$. More explicitly, in an affine neighborhood $\\operatorname{Spec}_{\\rm mon}P$ with finite generating set $E$ and prime $\\mathfrak p$ corresponding to $x$, one has $M_x=D(a)$ and $\\Gamma(M_x,\\mathcal M)=P_{\\mathfrak p}$, where $a$ is the sum of the members of $E\\setminus\\mathfrak p$ (the empty sum is $0$) and $P_{\\mathfrak p}=P-(P\\setminus\\mathfrak p)$.\n\nFor a morphism $f:N\\to M$ of fine monoschemes and $y\\in N$, $f$ restricts to $N_y\\to M_{f(y)}$, whose map of section monoids is the stalk map. If $f$ is smooth, this restriction is an affine chart induced by $P\\to P\\oplus\\mathbf N^r\\oplus\\mathbf Z^t$ for finite $r,t\\geq0$. For every field $k$, its realized ring map is the inclusion $k[P]\\to k[P][x_1,\\ldots,x_r,y_1^{\\pm1},\\ldots,y_t^{\\pm1}]$; the associated scheme morphism is smooth [def-sbc-smooth-morphisms]. The source realizations of these neighborhoods cover $k[N]$. No torsion-freeness assumption is imposed on $M,N$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Remark 3.1.4(iii), 3.1.10(ii), 3.1.13--3.1.16 and Lemma 3.2.12(i), pp.98--100,104; polynomial/Laurent infinitesimal lifting argument expanded by an agent."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-monoscheme-toric-realization",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighborhood $U=\\operatorname{Spec}_{\\rm mon}P$ of $x$ and a finite generating set $E$. Apply [lem-trf-monoid-prime-minimal-neighborhood] to the prime $\\mathfrak p$ of $x$. It gives $D(a)=\\bigcap_{b\\notin\\mathfrak p}D(b)$, $a=\\sum_{e\\in E\\setminus\\mathfrak p}e$, and $P_a=P-(P\\setminus\\mathfrak p)$. A prime $\\mathfrak q$ belongs to this intersection exactly when $\\mathfrak q\\subseteq\\mathfrak p$, so these are exactly the generalizations of $x$. Every open neighborhood $V$ of $x$ in $M$ intersects $U$ in a neighborhood containing $D(a)$; consequently $D(a)$ is smallest also in $M$. By [def-trf-monoscheme-toric-realization], its sections are $P_a$. Taking germs on a smallest neighborhood identifies its sections with the stalk, since every representative restricts there and equality of germs is equality after this restriction. Thus $M_x=D(a)$ and $\\Gamma(M_x,\\mathcal M)=P_{\\mathfrak p}$. That this smallest neighborhood is affine, namely canonically isomorphic to $\\operatorname{Spec}_{\\rm mon}\\mathcal M_{M,x}$ with its ordinary monoid sheaf, is the first monoscheme clause of [lem-trf-fine-monoid-local-smooth-charts]. For the finite-generator section formula in the affine model, use the minimal-neighborhood theorem to obtain membership, minimality and the equality of localization submonoids. Every covering sieve on the smallest neighborhood contains its identity: choose a member containing the distinguished point and use minimality to show that member equals the whole open. The sheafification unit is locally injective and locally surjective, hence bijective there. Evaluation of a compatible fraction family at the distinguished point identifies the original presheaf sections with localization at its complementary face; the inverse is the constant family, which is locally a fraction everywhere because all prime complements contain this face. Compose this equivalence with the inverse sheafification unit. Naturality of that unit on the restriction from the whole spectrum proves the required formula on every numerator.",
+   "uses": [
+    "lem-trf-monoid-prime-minimal-neighborhood",
+    "def-trf-monoscheme-toric-realization",
+    "lem-trf-fine-monoid-local-smooth-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 3.1.4(iii) and Remark 3.1.10(ii), pp.98--100; finite-generator form from VIII 3.1.2--3.1.4."
+   }
+  },
+  {
+   "text": "For x=f(y), continuity makes the inverse image of the smallest target neighborhood an open neighborhood of y. Source minimality gives the inclusion. Apply the universal property of the target open immersion to the source open inclusion followed by f; its factorization equality is an equality of full sheafed-space morphisms. The colimit equations for the canonical germ, colim.map, and colimit.pre show that taking a germ of a section pulled back and then restricted is the stalk map applied to its original germ. These constructions use only [def-trf-monoscheme-toric-realization] and its actual sheaf morphisms.",
+   "uses": [
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.6 and Remark 3.1.10(ii), pp.99--100; argument from smallest neighborhoods."
+   }
+  },
+  {
+   "text": "A smallest neighborhood is terminal in the opposite category of open neighborhoods, since it is included in every neighborhood. Thus its canonical injection into the stalk colimit is an isomorphism, by Mathlib isIso_ι_of_isTerminal. This works for the actual filtered-colimit stalk of [def-trf-fine-fan-blowup], without assuming all colimits exist in CommMonCat. The definition of smoothness in [def-trf-monoscheme-toric-realization] supplies ranks r,t and a product splitting of the stalk map. Compose the target germ equivalence times the identity on the free factors, then this stalk splitting, then the inverse source germ equivalence. Applying the injective source germ and the naturality equation of the preceding step proves the required formula for every section. No separate smooth affine-chart theorem or torsion-freeness assumption is used.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.13--3.1.16(i), p.100."
+   }
+  },
+  {
+   "text": "Put P=Gamma(V), B=Multiplicative(Fin r -> N) and C=Multiplicative(Fin t -> Z). Transport along the given monoid equivalence backwards and permute the product factors to C x (B x P). Mathlib MonoidAlgebra.domCongr and curryAlgEquiv identify the algebra with k[P][B][C]. The finite-function/finitely-supported-function additive equivalence identifies the B algebra with MvPolynomial (Fin r) k[P], and toMultiplicativeAlgEquiv converts the C algebra to its additive notation. The single-basis formulas for these actual equivalences give precisely e^(p,alpha,beta) -> e^p x^alpha y^beta. Additive induction on monoid-algebra elements and the given equation e(p,1,1)=sectionMap(p) prove that the chart homomorphism becomes the coefficient inclusion. Only the concrete monoid-algebra construction of [def-trf-monoscheme-toric-realization] is needed; no torsion hypothesis enters.",
+   "uses": [
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 3.2.12(i), p.104; the omitted product-algebra calculation expanded from VIII 3.2.1 and 3.1.16(i)."
+   }
+  },
+  {
+   "text": "For any commutative ring A, the algebra AddMonoidAlgebra A Z is LaurentPolynomial A, the localization of A[X] at X (Mathlib LaurentPolynomial.isLocalization). Algebra.Smooth.of_isLocalization_Away and Algebra.Smooth.comp show it is smooth over A. Induct on the finite Laurent rank: rank zero is A by AddMonoidAlgebra.uniqueAlgEquiv; split Fin(t+1) into its first coordinate and Fin t using Fin.consEquiv, and apply AddMonoidAlgebra.domCongr and curryAlgEquiv to identify the next algebra with a one-variable Laurent algebra over the preceding algebra. Transport smoothness along this algebra equivalence and compose. The polynomial algebra in Fin r is smooth, so the polynomial/Laurent coefficient inclusion is smooth. Step 4 identifies the realized ring map with this inclusion followed by the inverse ring equivalence; RingHom.Smooth.of_bijective and composition transport smoothness to that map. HasRingHomProperty.Spec_iff for scheme Smooth concludes. Both zero ranks, arbitrary characteristic and torsion in P are retained. This uses Mathlib algebra smoothness directly rather than a scheme affine-space comparison.",
+   "uses": [
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 01I3, lemma-standard-open-affine; Tag 00T7, lemma-standard-smooth (empty relation list); Tags 01VA and 01VC, lemma-composition-smooth and lemma-open-immersion-smooth. Expands ILO VIII Lemma 3.2.12(i)."
+   }
+  },
+  {
+   "text": "For every commutative monoid Q, the nonunits form a proper prime monoid ideal m: 1 is a unit, a product is a unit exactly when both factors are units, and multiplication cannot turn a nonunit into a unit. A proper monoid ideal contains no unit, since multiplying a unit by its inverse would put 1, hence every element, in the ideal. Consequently every basic open containing m contains every prime. Induction over the generated topology proves that every prime specializes to m. In any affine open V of N, transport m through the chart homeomorphism to y. Every point of V specializes to y, so lies in the chosen smallest neighborhood U(y); minimality also gives U(y) contained in V. Thus U(y)=V as affine opens. By [def-trf-monoscheme-toric-realization], the realization is the colimit of the locally directed affine diagram with open-immersion transition maps. Mathlib Scheme.IsLocallyDirected.ι_jointly_surjective gives an affine chart containing each realization point; replace that chart by the equal U(y). In the empty case the same joint-surjectivity statement proves the result without choosing any point of N.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.1.4(i), 3.1.10(ii), 3.1.16(i) and 3.2.1, pp.98--101,103; covering argument expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-monoscheme-toric-realization",
+  "lem-trf-fine-monoid-local-smooth-charts",
+  "lem-trf-monoid-prime-minimal-neighborhood"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Remarks 3.1.4(iii), 3.1.10(ii), 3.1.16(i) and Lemma 3.2.12(i); explicit monomial and Laurent-principal-open arguments supplied by Q05.; C5 proves the restriction/product-on-sections clause directly from the filtered stalk colimit and smoothness definition, and the covering clause from the nonunit prime and Mathlib open-gluing joint surjectivity. H5 proves the affine finite-generator section formula using locally bijective sheafification and evaluation on the smallest neighborhood, and the realized chart clause using explicit algebra currying and induction on Laurent variables. The first smallest-affine-neighborhood clause remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth map of fine monoschemes has smallest affine neighborhoods with monoid maps P to P plus N^r plus Z^t; their monoid algebras are smooth polynomial Laurent extensions.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"Algebra.basicOpen_subset_smoothLocus_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.smoothLocus R A ↔ Algebra.FormallySmooth R (Localization.Away f)\", \"doc\": \"For a finitely presented algebra $A$ over a commutative ring $R$ and an element $f \\\\in A$, the basic open set $D(f)$ in $\\\\operatorname{Spec}(A)$ is contained in the smooth locus of $A$ over $R$ if and\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"RingHom.smooth_iff_locally_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/LocallyStandardSmooth\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth) f\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is locally standard smooth, meaning that smoothness (flatness and locally free differentials) is equivalent to being locally isomorphic \"}\n  {\"name\": \"RingHom.Smooth.locally_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/RingHom/LocallyStandardSmooth\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth → RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth) f\", \"doc\": \"If $ f : R \\\\to S $ is a smooth ring homomorphism, then there exists a covering of $ \\\\operatorname{Spec}(S) $ such that $ f $ is standard smooth on each open set of the covering. This means $ S $ is lo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme standard smooth charts do not give smallest affine monoscheme neighborhoods or the specified monoid product splitting"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"Smooth\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme standard smooth charts do not give smallest affine monoscheme neighborhoods or the specified monoid product splitting"
+  },
+  {
+   "tool": "grep",
+   "query": "Monoscheme|monoid.*smooth|smooth.*monoid",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/SMul.lean\", \"line\": \"185\", \"text\": \"/-- The monoid `E →L[𝕜] E` of continuous linear endomorphisms of `E` acts smoothly on `E`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"497\", \"text\": \"instance [FormallySmooth R A] (M : Submonoid A) : FormallySmooth R (Localization M) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Basic.lean\", \"line\": \"560\", \"text\": \"  formallySmooth := Algebra.FormallySmooth.of_isLocalization (Submonoid.powers r)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"149\", \"text\": \"lemma FormallySmooth.of_formallySmooth_residueField_tensor (M : Submonoid P)\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme standard smooth charts do not give smallest affine monoscheme neighborhoods or the specified monoid product splitting"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk splittings of a smooth fine monoscheme morphism give actual affine product charts, and smooth morphisms after realization over a field.",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalk splittings of a smooth fine monoscheme morphism give actual affine product charts, and smooth morphisms after realization over a field.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scheme standard smooth charts do not give smallest affine monoscheme neighborhoods or the specified monoid product splitting"
+  },
+  {
+   "tool": "grep",
+   "query": "Monoscheme|monoscheme|monoid.*smooth|smooth.*monoid",
+   "results": "4 hits: Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/Geometry/Manifold/Algebra/SMul.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring spectra, ordinary smooth schemes, or smooth maps of manifolds; none states smallest monoscheme neighborhoods or the claimed monoid product charts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"Smooth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring spectra, ordinary smooth schemes, or smooth maps of manifolds; none states smallest monoscheme neighborhoods or the claimed monoid product charts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth maps of fine monoidal spaces are locally inclusions P into P plus natural and integer coordinates and give smooth morphisms on monoid algebras.",
+   "results": "8 hits: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, instFunLikeContMDiffMonoidMorphism, ContMDiffMonoidMorphism.mk, ContMDiffMonoidMorphism.recOn, ContMDiffMonoidMorphism.ctorIdx, ContMDiffMonoidMorphism.toMonoidHom",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring spectra, ordinary smooth schemes, or smooth maps of manifolds; none states smallest monoscheme neighborhoods or the claimed monoid product charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a fine monoscheme its smallest open neighborhood is the spectrum of its stalk monoid, and smooth monoscheme morphisms have polynomial Laurent realization charts.",
+   "results": "8 hits: AlgebraicGeometry.instIsPreimmersionFromSpecStalk, AlgebraicGeometry.Scheme.fromSpecStalk, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_isPreimmersion, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring spectra, ordinary smooth schemes, or smooth maps of manifolds; none states smallest monoscheme neighborhoods or the claimed monoid product charts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated integral commutative monoid has a finite prime spectrum with a smallest open neighborhood at each prime, and smooth local monoid homomorphisms split off free natural and integer factors.",
+   "results": "8 hits: PrimeSpectrum.finite_of_toPiLocalization_surjective, Algebra.QuasiFinite.finite_primeSpectrum, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.QuasiFinite.discreteTopology_primeSpectrum, PrimeSpectrum.finite_of_toPiLocalization_pi_surjective, MaximalSpectrum.finite_of_toPiLocalization_surjective, instFiniteMaximalSpectrumOfIsFractionRing, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ring spectra, ordinary smooth schemes, or smooth maps of manifolds; none states smallest monoscheme neighborhoods or the claimed monoid product charts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-toric-monoid-comparison",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, 3.1.17--3.1.23, Lemmas 3.2.9, 3.2.12 and 3.2.15, Lemma 3.2.17 and Corollary 3.2.18, printed pp.101--105; regular-over-Q application in 3.2.19, p.106. Re-split of lem-trf-toric-monoid-comparison, original step(s) 6: Smallest affine neighborhoods and smooth monoscheme product charts.",
+   "via": [
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoscheme-smooth-local-charts",
+  "worker": "stage1",
+  "summary": "Read ILO VIII pp.98--100,104 and the existing minimal-neighborhood and smooth-chart nodes. Reuse these nodes rather than duplicate their clauses; expand the monomial algebra identification, realize the Laurent chart as a principal open in affine space, and verify the realized covering including empty and torsion cases. No statement changes or new nodes.",
+  "blueprint": "Realizes the historical auxiliary monoidal-comparison step recorded in blueprint.from.place (lem-trf-toric-monoid-comparison, old step 6), below the current blueprint ancestor lem-trf-local-term-locality. The current latest blueprint no longer spells out the historical alteration branch; no chapter/unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Used only as the generic smoothness theorem for affine space over Spec k[P]; the monoidal unit contains no such scheme theorem. It supplies the smooth projection in step 5, without replacing the monoidal chart argument."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-cc7b4abad",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-cc7b4abad (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, unchanged statement, no new nodes. Read every cited statement and ILO VIII pp.98-100 and 104 (3.1.2-3.1.4(iii), 3.1.9, 3.1.10(ii), 3.1.13-3.1.16(i), 3.2.2-3.2.3, Lemma 3.2.12(i), which has no torsion-free hypothesis). The hypotheses match. Step 1: minimality and generalizations come from lem-trf-monoid-prime-minimal-neighborhood (q in the intersection of D(f) over f in F iff q is contained in p). Minimality in M follows by intersecting with the chart, and sections are P_a. Fault C1/C4: the claim that M_x is affine (D(a) isomorphic to Spec_mon P_a as monoidal spaces) was never derived. FIX: step 1 now cites [lem-trf-fine-monoid-local-smooth-charts], already in proof_deps, which states that the smallest neighborhood is canonically isomorphic to Spec_mon M_{X,x}. Step 2: continuity, minimality and the stalk map, elementary. Step 3: the monoscheme smooth-chart clause of the same node, with matching hypotheses. Step 4: the basis bijection k[P+N^r+Z^t] to k[P][x,y^{+-1}], valid with torsion and with r=t=0. Step 5: B_h with h the product of the y_j (t=0 gives h=1), cited through 01I3, def-sbc-affine-space, sbc-lem-affine-space-smooth and the open-immersion composition node; all statements checked. Step 6: m = Q minus Q^x is prime, every prime lies inside it, so N_m = U and the original charts cover k[N]. Edge cases checked: P={0}, finite group P, generic and closed points, r=t=0, identity f, empty N. The citer lem-trf-toric-monoid-comparison (steps 3 and 4) is served by the statement. Duplicate search found that lem-trf-fine-monoid-local-smooth-charts (parallel, Q01) overlaps the item's monoidal clauses; it is now cited rather than reproved. No duplicate was created. Accepted tool_use: sbc-lem-affine-space-smooth (generic smoothness of affine space; no monoidal-unit node gives it). No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonoschemeSmoothLocalCharts",
+  "declaration": "AlgebraicGeometry.Monoscheme.exists_smallest_affine_neighborhood",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.exists_smallest_affine_neighborhood",
+   "AlgebraicGeometry.Monoscheme.affine_smallest_neighborhood_formula",
+   "AlgebraicGeometry.Monoscheme.restrict_smallest_neighborhoods",
+   "AlgebraicGeometry.Monoscheme.realized_smallest_product_chart",
+   "AlgebraicGeometry.Monoscheme.smallest_neighborhood_realizations_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MonoschemeSmoothLocalCharts.lean",
+  "statement": "theorem exists_smallest_affine_neighborhood (M : Fine.{u}) (x : M.space) : ∃ U : AffineOpens M, ∃ hx : x ∈ U.1, (∀ V : Opens M.space, x ∈ V → U.1 ≤ V) ∧ (∀ z : M.space, z ∈ U.1 ↔ Specializes z x) ∧ Function.Bijective (FineFan.germ M.space.presheaf U.1 x hx)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45d73a94b",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read item node, the 3 stmt_dep modules (FineFanBlowup, MonoschemeToricRealization, Mathlib Smooth), FaceLocalizationFs, delivered module and report. All 5 theorems match the node clauses: smallest affine nbhd (z ⤳ x = generalization, canonical germ bijective); D(a) formula with P[a^-1]=P-(P\\p) and numerator-fixing section iso; restriction with ofRestrict square, germ/stalkMap compatibility, smooth Γ(V)×N^r×Z^t≃*Γ(U) with e(p,1,1)=sectionMap; k[ΓU]≃ₐ AddMonoidAlgebra(MvPolynomial (Fin r) k[ΓV]) (Fin t→ℤ) with basis and constant-inclusion formulas plus Smooth(Spec.map); cover of realization. Edge cases ok: empty N, a=1, r=t=0, torsion, any char. Statement field verbatim; stmt_deps and docstrings ok; no defs; sorry only; no duplicates. Advisories: faceLocalization is owned by theorem lem-trf-face-localization-fs but is the Lean rendering of the localization in stmt_dep def-trf-fine-fan-blowup (used by its spectrumSections); D(a) stated in the affine model; chart at section-monoid level. No recompile, per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T091729-L-3370357",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

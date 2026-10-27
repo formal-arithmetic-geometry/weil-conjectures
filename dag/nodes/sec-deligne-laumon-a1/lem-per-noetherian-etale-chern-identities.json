@@ -18,144 +18,224 @@
  ],
  "proof": [
   {
-   "text": "Use the Kummer sequence [lem-amb-kummer-any-base]. The relative torsor construction [lem-amb-relative-torsor-cohomology], with closed support all of $X$, sends a line bundle's frame torsor to its ordinary $c_1$. The additivity and dual identities of [lem-per-noetherian-supported-product-calculus] at full support give $c_1(L\\otimes M)=c_1(L)+c_1(M)$, $c_1(L^\\vee)=-c_1(L)$ and $c_1(\\mathcal O)=0$. Naturality of relative connecting maps gives pullback naturality. Twists are locally free of rank one and pull back canonically by [lem-asd-etale-finite-twist-pullback]. Thus even-degree twisted classes commute, and their powers and all pullbacks below are the indicated derived-tensor cup products. The quotient-projective geometry, its properness, and its tautological base change are [lem-pur-projective-bundle-tautological-geometry]; no cohomological claim from the finite-field purity setting is used.",
+   "text": "Construct the ordinary Kummer class of a line $L$ from its frame torsor and [lem-amb-kummer-any-base]. The frame torsor of a tensor product is the contracted product by [lem-sc-line-bundle-torsor]. Additivity and dual signs may also be read directly from [lem-per-noetherian-supported-product-calculus] with full support and the unique trivialization on the empty complement: $c_1(LM)=c_1(L)+c_1(M)$ and $c_1(L^\\vee)=-c_1(L)$. For $g:T\\to X$, the pulled-back transition functions of the frame torsor are $g^*g_{ij}$; [lem-sc-etale-torsor-h1-functoriality] identifies their torsor class with pullback followed by the units map. This units map gives a morphism from the inverse-image Kummer sequence to the Kummer sequence on $T$. Naturality of its boundary [lem-weil-pbc-site-cohomology-pullback] proves $g^*c_1(L)=c_1(g^*L)$. Roots, tensor products and evaluations have exactly the pullback identifications of [lem-asd-etale-finite-twist-pullback].",
    "uses": [
     "lem-amb-kummer-any-base",
-    "lem-amb-relative-torsor-cohomology",
+    "lem-sc-line-bundle-torsor",
     "lem-per-noetherian-supported-product-calculus",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-pur-projective-bundle-tautological-geometry"
+    "lem-sc-etale-torsor-h1-functoriality",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-asd-etale-finite-twist-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Definition 1.1 and the paragraph following it; Theorem 1.2, setup"
+    "place": "XVI Definition 1.1 and the additivity/pullback paragraph, pp.225-226; full-support instance of the admitted supported-product interface"
    }
   },
   {
-   "text": "Form $\\Phi_F$ as the sum of the adjoints of $\\xi^a:\\Lambda_P(-a)[-2a]\\to\\Lambda_P$. The ringed-topos derived adjunction and monoidal pullback are supplied by [lem-weil-pbc-ringed-projection-mate-exact]. Apply [thm-weil-pbc-bounded-below] to the proper $p$ and a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$. Its torsion hypothesis holds for $\\Lambda_P$. The canonical exchange identifies the stalk target with $R\\Gamma(\\mathbf P^{r-1}_\\Omega,\\Lambda)$. The module comparison [lem-weil-pbc-module-abelian-derived-direct-image-comparison] permits this use of the abelian base-change theorem. By Step 1, each component is the same power of the geometric Kummer hyperplane class. The calculation [lem-per-geometric-projective-space-hyperplane-cohomology] says it is an isomorphism on every cohomology stalk. Exactness of a geometric-point inverse image gives stalks of cohomology sheaves. Now [lemma-weil-pbc-geometric-stalk-conservative] and [lem-weil-pbc-derived-plus-iso-on-cohomology] prove that $\\Phi_F$ is an isomorphism. Both sides lie in $D^+$; their inclusion in the ordinary derived category gives the asserted map there.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "thm-weil-pbc-bounded-below",
-    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-    "lem-per-geometric-projective-space-hyperplane-cohomology",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Theorem 1.2, geometric-fibre proof"
-   }
-  },
-  {
-   "text": "Apply $\\operatorname{Hom}(\\Lambda_X(-r)[-2r],-)$ to $\\Phi_F$. The derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact] and the invertible-twist evaluations [lem-asd-etale-finite-twist-pullback] identify the resulting isomorphism with\n$$\\bigoplus_{a=0}^{r-1}H^{2(r-a)}(X,\\Lambda(r-a))\\longrightarrow H^{2r}(P,\\Lambda(r)),\\quad(b_a)_a\\longmapsto\\sum_a p^*b_a\\xi^a.$$\nWrite $\\xi^r=\\sum_{i=1}^r(-1)^{i+1}p^*c_i(F)\\xi^{r-i}$ using its unique coordinates. Set $c_0=1$ and $c_i=0$ for $i>r$. This proves existence and uniqueness without choosing an object from an undetermined existence assertion. For rank one, $P(F)=X$ and $\\mathcal O(1)=F$ by [lem-pur-projective-bundle-tautological-geometry], so the relation reads $\\xi=c_1(F)$. For rank zero use the stated convention.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-pur-projective-bundle-tautological-geometry"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Proof of Theorem 1.3, construction from the monic relation"
-   }
-  },
-  {
-   "text": "For a morphism $g:X'\\to X$ between bases in the statement, tautological geometry identifies $P(g^*F)$ and its quotient line with the pullback. Pull back the monic relation; Step 1 identifies $g^*\\xi$ with its new Kummer class. Uniqueness in Step 3 gives $g^*c_i(F)=c_i(g^*F)$. The same adjunction construction of each component, together with the canonical proper exchange of [thm-weil-pbc-bounded-below], identifies $g^*\\Phi_F$ with $\\Phi_{g^*F}$. These are the canonical maps, rather than isomorphisms selected separately. Bundle isomorphisms give the same conclusion by the quotient construction.",
+   "text": "For a rank-$r>0$ bundle form $p:P\\to X$ with its tautological line by [lem-pur-projective-bundle-tautological-geometry] and put $h=c_1(\\mathcal O_P(1))$. For each $0\\le a<r$, tensor $a$ copies of $h:\\Lambda_P\\to\\Lambda_P(1)[2]$ and evaluate against $p^{-1}\\Lambda_X(-a)[-2a]$. Adjunction gives a component $\\Lambda_X(-a)[-2a]\\to Rp_*\\Lambda_P$; take their finite sum $\\Phi_F$. These are the derived-tensor cup powers in the statement [def-kun-derived-tensor, lem-asd-etale-finite-twist-pullback]. Under any base change the actual exchange mate [def-kun-unbounded-exchange] sends each pulled component to the corresponding component for $g^*F$: its adjunct is the pulled cup power, since counit cancels unit. Step 1 and tautological base change identify that cup power with $c_1(\\mathcal O(1))^a$ on the new bundle. Proper exchange is invertible by [prop-weil-proet-finite-proper-base-change, lem-weil-pbc-exchange-forget-coefficients]. Thus $\\operatorname{Ex}\\,g^{-1}\\Phi_F=\\Phi_{g^*F}$. This constructs and compares the named morphisms before proving them invertible.",
    "uses": [
     "lem-pur-projective-bundle-tautological-geometry",
-    "thm-weil-pbc-bounded-below"
+    "def-kun-derived-tensor",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-kun-unbounded-exchange",
+    "prop-weil-proet-finite-proper-base-change",
+    "lem-weil-pbc-exchange-forget-coefficients"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Proof of Theorem 1.3, functoriality"
+    "place": "XVI Theorem 1.2; agent expansion of the global cup-power map and its exchange equation"
    }
   },
   {
-   "text": "Suppose $F=\\bigoplus_{i=1}^r L_i$. The quotient description [lem-trf-projective-bundle-quotient-geometry] gives $p^*F\\twoheadrightarrow\\mathcal O(1)$. Let $H_i$ be the zero locus of its $i$th component $p^*L_i\\to\\mathcal O(1)$. Off $H_i$ that component trivializes $M_i=\\mathcal O(1)\\otimes p^*L_i^\\vee$. Thus [lem-amb-relative-torsor-cohomology] lifts $c_1(M_i)=\\xi-p^*c_1(L_i)$ to a supported Kummer class $x_i\\in H^2_{H_i}(P,\\Lambda(1))$. The supported product in [lem-per-noetherian-supported-product-calculus] puts $\\prod_i x_i$ in support $\\bigcap_i H_i$. This intersection is empty: at every point the components of a surjection onto a free rank-one module generate its unit ideal, so they cannot all vanish in the residue field. Cohomology with empty support is zero, since its defining left exact functor is zero [def-pur-etale-derived-supported-sections]. Forgetting support gives $\\prod_i(\\xi-p^*c_1(L_i))=0$. Coefficient uniqueness in Step 3 gives $c_t(F)=\\prod_i(1+c_1(L_i)t)$. For $r=1$ the sole zero locus is empty; for $r=0$ the polynomial identity is the empty product convention.",
+   "text": "We first establish $\\Phi$ over a geometric field of positive characteristic $p\\ne\\ell$. On $k=\\overline{\\mathbf F}_p$, apply [thm-pur-projective-bundle-formula] only to the free bundle on $\\operatorname{Spec}k$, with $E=\\mathbf Q_\\ell$ and coefficient level $n$. Its coefficient ring is then $\\mathbf Z/\\ell^n$. The ordinary/pro-etale Kummer identification in [lem-pur-kummer-additivity] and finite-root identification in [lem-pur-twist-sheaf-locally-free] identify its class with the comparison image of step 1, including its positive sign. The direct-image comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] identifies the image of $\\Phi^{\\mathrm{et}}$ with this isomorphism: its displayed counit equality identifies adjuncts; [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies their cup powers. The comparison is fully faithful [thm-weil-pbc-site-comparison], so $\\Phi^{\\mathrm{et}}$ is invertible. For an arbitrary algebraically closed $K$ of characteristic $p$, take a common algebraically closed extension of $K$ and $k$ over $\\mathbf F_p$. Such an extension is obtained by taking a prime quotient of the nonzero tensor product of the two fields and then an algebraic closure of its fraction field. Step 2 and proper geometric exchange [cor-weil-pbc-geometric-fiber-finite] identify both base changes with the same map. The exact sections/stalk identification of [lem-weil-pbc-geometric-point-cohomology] makes pullback between algebraically closed points faithful on cohomology; hence $\\Phi$ over $K$ is invertible too.",
+   "uses": [
+    "thm-pur-projective-bundle-formula",
+    "lem-pur-kummer-additivity",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "thm-weil-pbc-site-comparison",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-weil-pbc-geometric-point-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 1.2, geometric-field reduction; replace its external field calculation by the admitted finite-field projective-bundle theorem, with explicit site/normalization comparisons"
+   }
+  },
+  {
+   "text": "Fix $m\\ge0$, put $B=\\operatorname{Spec}\\mathbf Z[1/\\ell]$ and $q:\\mathbf P^m_B\\to B$, and form $\\Phi_B$ as in step 2. It is proper by [lem-pur-projective-bundle-tautological-geometry]. Its standard opens have rings $R[T_j/T_i:j\\ne i]$ by [def-nagata-relative-projective-space]; these are affine $m$-spaces, so [sbc-lem-affine-space-smooth, lem-weil-pbc-smooth-local-on-source] make $q$ smooth. The constant abelian sheaf $G=\\mathbf Z/\\ell^n$ is locally constant and every stalk element has order a power of the unit $\\ell$. Consequently [lem-weil-pbc-smooth-local-acyclicity] followed by [lem-weil-pbc-locally-constant-torsion-local-acyclicity] makes $q$ locally acyclic relative to $G$. By [lem-weil-pbc-proper-locally-acyclic-specialization], every specialization $(R^jq_*G)_{\\bar s}\\to(R^jq_*G)_{\\bar t}$ through the strict localization of $B$ is an isomorphism. The theorem applies to the whole torsion sheaf $G$, for every $n$, rather than just prime coefficients.",
+   "uses": [
+    "lem-pur-projective-bundle-tautological-geometry",
+    "def-nagata-relative-projective-space",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-weil-pbc-smooth-local-acyclicity",
+    "lem-weil-pbc-locally-constant-torsion-local-acyclicity",
+    "lem-weil-pbc-proper-locally-acyclic-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0GJQ proposition-smooth-locally-acyclic, 0GJR lemma-locally-acyclic-locally-constant and 0GJW lemma-sp-isom-proper-torsion-loc-ac; application to polynomial projective space"
+   }
+  },
+  {
+   "text": "Choose a closed point $\\bar s$ of $B$ of characteristic $p\\ne\\ell$. The strict henselization $H$ of $\\mathbf Z_{(p)}$ is faithfully flat by [lem-sc-strict-henselization-faithfully-flat]. Thus $H\\otimes\\mathbf Q\\ne0$; a prime quotient followed by a fraction field and algebraic closure gives a characteristic-zero geometric point $\\bar t$ of $B_{(\\bar s)}$. The specialization square for $\\mathcal H^j(\\Phi_B)$ commutes: both stalk maps restrict the same pointed-neighbourhood representatives, as specified in [lem-weil-pbc-proper-locally-acyclic-specialization]. On the source, specialization is invertible since each $\\Lambda(-a)$ is locally constant [lem-asd-etale-finite-twist-pullback]; trivialize it on a pointed etale neighbourhood and the restriction map is identity. On the target it is invertible by step 4. Step 3 and proper stalk exchange [cor-weil-pbc-geometric-fiber-finite] give invertibility at $\\bar s$, hence at $\\bar t$. Every other characteristic-zero geometric field and this field have a common algebraically closed extension over $\\mathbf Q$, constructed as in step 3. Step 2 and proper exchange therefore give the same result over every such field. No finite-field scheme structure on a characteristic-zero field has been assumed.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-proper-locally-acyclic-specialization",
+    "lem-asd-etale-finite-twist-pullback",
+    "cor-weil-pbc-geometric-fiber-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJW, specialization map as restriction of pointed-neighbourhood germs; Tag 07QM for faithful flatness; agent application to the global Kummer-power map"
+   }
+  },
+  {
+   "text": "For the original $p:P(F)\\to X$, take any geometric point $\\bar x:\\operatorname{Spec}K\\to X$. The pullback of $F$ is a free rank-$r$ vector space; [lem-pur-projective-bundle-tautological-geometry] identifies its projective bundle and line with $(\\mathbf P_K^{r-1},\\mathcal O(1))$. By step 2 and [cor-weil-pbc-geometric-fiber-finite], the stalk of $\\Phi_F$ is precisely its cup-power decomposition. Steps 3 and 5 prove it invertible in both possible characteristics. Underlying abelian complexes are bounded below, and [lem-weil-pbc-derived-stalk-conservative] therefore makes $\\Phi_F$ an isomorphism; [lem-weil-pbc-exchange-forget-coefficients] detects this in the module category as well. This proves the displayed projective-bundle formula over every Noetherian $X$, and step 2 already proves its pullback equation.",
+   "uses": [
+    "lem-pur-projective-bundle-tautological-geometry",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Theorem 1.2, proper-base-change reduction; pp.226-227"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] with the global-sections topos to identify R Gamma_X R p_* with R Gamma_P. Twist the decomposition of step 6 by $\\Lambda_X(r)[2r]$ and apply ordinary cohomology. The twists are flat invertible lines [lem-asd-etale-finite-twist-pullback], and [lem-amb-proper-coproducts-projection] identifies this with the map $\\bigoplus_{a=0}^{r-1}H^{2(r-a)}(X,\\Lambda(r-a))\\to H^{2r}(P,\\Lambda(r))$, $(b_a)\\mapsto\\sum_a p^*b_a h^a$. The hypotheses of this projection theorem hold: $p$ is proper, hence finite type [def-weil-proper-morphism], and $P$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Expand $h^r$ uniquely in this basis and define $c_i(F)=(-1)^{i+1}b_{r-i}$ for $1\\le i\\le r$. Set $c_0=1$ and $c_i=0$ for $i>r$, also for rank zero. This gives exactly the monic relation and its uniqueness. For $r=1$, $P(F)=X$ and its tautological line is $F$ by the same geometry node, so the coefficient is its Kummer class. Pull back the relation using steps 1-2; uniqueness over the new base proves naturality of every $c_i$.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-proper-coproducts-projection",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pur-projective-bundle-tautological-geometry",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI proof of Theorem 1.3, p.227: uniquely defined monic coefficients and the rank-one case"
+   }
+  },
+  {
+   "text": "We prove the line-root formula for an arbitrary filtration $0=F_0\\subset\\cdots\\subset F_r=F$ by subbundles with line quotients $L_i$. On $P=P(F)$ put $Y_i=P(F/F_i)$, so $Y_0=P$ and $Y_r=\\varnothing$. The tautological-quotient classification [lem-trf-projective-bundle-quotient-geometry] identifies $Y_i$ with the zero locus in $Y_{i-1}$ of $p^*L_i\\to\\mathcal O(1)$: a quotient of $F/F_{i-1}$ kills its line subbundle $L_i$ exactly when it factors through $F/F_i$. In an adapted local frame its equations are the first $i$ homogeneous coordinates. Thus these are nested closed subschemes; no assertion based only on set-theoretic images is used. On $Y_{i-1}\\setminus Y_i$, that line map is an isomorphism, since locally its coefficient is an invertible coordinate. It trivializes $M_i=(\\mathcal O_P(1)\\otimes p^*L_i^\\vee)|_{Y_{i-1}}$. All these schemes are Noetherian by properness and [lem-weil-pbc-finite-type-over-noetherian]. Hence the supported Kummer class of [lem-per-noetherian-supported-product-calculus] gives $\\beta_i\\in H^2_{Y_i}(Y_{i-1},\\Lambda(1))$ whose image is $(h-p^*c_1(L_i))|_{Y_{i-1}}$.",
    "uses": [
     "lem-trf-projective-bundle-quotient-geometry",
-    "lem-amb-relative-torsor-cohomology",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-noetherian-supported-product-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Lemma 1.6 and Section 2.1: agent extension of its hyperplane argument to a filtration using the admitted nested-support products"
+   }
+  },
+  {
+   "text": "Write $\\alpha_i=h-p^*c_1(L_i)$. Start with $e_0=1\\in H^0_P(P,\\Lambda)$. Inductively define $e_i=\\beta_i\\cdot e_{i-1}\\in H^{2i}_{Y_i}(P,\\Lambda(i))$ using the nested action of [lem-per-noetherian-supported-product-calculus], with $Z=Y_i$, $Y=Y_{i-1}$ and ambient scheme $P$. Its projection formula says that after enlarging support from $Y_i$ to $Y_{i-1}$ this is multiplication of $e_{i-1}$ by $\\alpha_i$: the image of $\\beta_i$ on $Y_{i-1}$ is the restriction of $\\alpha_i$. Therefore, after forgetting all support, $e_i$ maps to $\\alpha_1\\cdots\\alpha_i$; this is an induction from $e_0=1$, not a splitting assertion about $F$. Since $Y_r$ is empty, its supported-sections functor is zero by [def-pur-etale-derived-supported-sections]; hence $e_r=0$. We obtain $\\prod_i(h-p^*c_1(L_i))=0$. Comparing its coefficients with the unique monic relation in step 7 proves $c_t(F)=\\prod_i(1+c_1(L_i)t)$ for every such filtration, including nonsplit ones. All degrees are even, so no additional commutation sign enters.",
+   "uses": [
     "lem-per-noetherian-supported-product-calculus",
     "def-pur-etale-derived-supported-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Lemma 1.6, hyperplanes with empty common intersection"
+    "place": "XVI Lemma 1.6 and Section 2.1; explicit nested-support induction in place of an extension-splitting torsor"
    }
   },
   {
-   "text": "The complete flag construction [def-pur-complete-flag-bundle] is an iterated quotient-projective bundle with a filtration by line quotients. At each projection $q$ the $a=0$ summand in Step 2 is the adjunction unit $\\Lambda\\to Rq_*\\Lambda$ and has a retraction, namely the zero-coordinate projection of $\\Phi^{-1}$. Applying $\\operatorname{Hom}(\\Lambda(-b)[-v],-)$, the derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact] and the twist identifications of [lem-asd-etale-finite-twist-pullback] show that pullback on $H^v(-,\\Lambda(b))$ is injective. Iterating gives injectivity for the flag projection. All stages remain Noetherian, being covered by finitely many finite-type projective charts over a Noetherian base. Next, for every extension of vector bundles, [lem-per-vector-extension-splitting-cohomology] gives a Noetherian splitting scheme on which the extension is split and pullback on these groups is an isomorphism. Thus a finite tower of these flag and splitting maps detects equality in every twisted degree.",
+   "text": "Use the recursive flag construction [def-pur-complete-flag-bundle]. Each stage is a projective bundle and its pullback admits the indicated next line quotient. By step 6, the unit $\\Lambda_T\\to Rq_*\\Lambda_{P(G)}$ is inclusion of the $a=0$ summand and has retraction the corresponding projection. Tensoring with $\\Lambda_T(b)$ and applying [lem-amb-proper-coproducts-projection] gives a retraction for every twisted unit. Using the same derived-composition statement for global sections, the pullback on $H^j(T,\\Lambda(b))$ is injective: a class mapping to zero is recovered as zero by that retraction. Iterating proves injectivity along the whole flag map. All bases remain Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; properness is supplied by [lem-pur-projective-bundle-tautological-geometry]. This derives the necessary cohomological splitting principle from step 6, without using a finite-field-only flag theorem.",
    "uses": [
     "def-pur-complete-flag-bundle",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-per-vector-extension-splitting-cohomology"
+    "lem-amb-proper-coproducts-projection",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pur-projective-bundle-tautological-geometry",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Propositions 1.4 and 1.5, the two splitting principles"
+    "place": "XVI Proposition 1.4, pp.226-227: flag tower and split injection from the projective-bundle formula"
    }
   },
   {
-   "text": "For $0\\to F'\\to F\\to F''\\to0$, first take its splitting scheme from Step 6. Then take a complete flag bundle for each of $F'$ and $F''$, successively pulling all bundles to the new base. Split the successive extensions in each universal filtration, working from its bottom line upwards. Explicitly, if the rank-$j-1$ term has already become $\\bigoplus_{i<j}L_i$, apply the splitting-scheme node to $0\\to F_{j-1}\\to F_j\\to L_j\\to0$; its universal section identifies $F_j$ with $F_{j-1}\\oplus L_j$. This terminates after their finite ranks. On the final base both $F'$ and $F''$ are sums of lines and $F=F'\\oplus F''$. Step 5 expresses their Chern polynomials as products of the corresponding line factors, so the product for $F$ is their product. Step 4 identifies all these classes with pullbacks of the original ones; the composite pullback is injective degree by degree by Step 6. Therefore $c_t(F)=c_t(F')c_t(F'')$ on $X$. A zero-rank term is the zero module and contributes the empty product $1$. No Zariski-local detection of global cohomology is assumed.",
-   "uses": [
-    "lem-per-vector-extension-splitting-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Proof of Theorem 1.3 after Proposition 1.5, reduction to Lemma 1.6"
-   }
-  },
-  {
-   "text": "Apply the flag and splitting tower of Step 6 to a single $F$. On its final base $F=\\bigoplus_i L_i$ and $F^\\vee=\\bigoplus_i L_i^\\vee$. Step 1 changes each root $x_i=c_1(L_i)$ to $-x_i$ upon dualizing. Step 5 therefore gives $c_t(F^\\vee)=\\prod_i(1-x_it)=c_{-t}(F)$ there. Pullback commutes with finite locally free duals: in a local frame it is the identity on the dual basis and hence agrees on overlaps. By Step 4 and injectivity of the composite pullback, the equality descends to $X$, so its coefficient of $t^i$ is $c_i(F^\\vee)=(-1)^ic_i(F)$. For rank zero this is $1=1$ in degree zero and $0=0$ in positive degrees.",
+   "text": "For $0\\to F'\\to F\\to F''\\to0$, pull back first to the complete flag bundle of $F'$, then to that of the pulled-back $F''$. Step 10 makes this composite injective on every relevant cohomology group. On this base, combine the flag of $F'$ with the inverse images in $F$ of the flag of $F''$. These inverse images are subbundles: locally the original exact sequence splits because its quotient is finite free, and local adapted bases exhibit each term and its quotient as free. The resulting line quotients of $F$ are exactly the two lists of flag quotients. Step 9 therefore identifies $c_t(F)$ with the product of those two root polynomials, which are $c_t(F')$ and $c_t(F'')$ by the same step. Step 7 gives pullback naturality, and injectivity descends this equality to $X$. For duality, pull $F$ to its complete flag bundle. Dualizing the flag in reverse order gives a subbundle filtration of $F^\\vee$ with line quotients $L_i^\\vee$. Step 1 negates each line class. Step 9 then gives $c_t(F^\\vee)=c_{-t}(F)$ there, and step 10 descends it. The coefficient of $t^i$ is the required $(-1)^ic_i(F)$. Empty root lists handle rank-zero bundles. If ranks vary, take the finitely many open-and-closed rank strata; cohomology of their disjoint union is the product, so these equalities give the global equality.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Proposition 1.7"
+    "place": "XVI Theorem 1.3 and Proposition 1.7, pp.227-228; elementary assembly from steps 7-10"
    }
   },
   {
-   "text": "For $M=\\ell^N$, $m=\\ell^n$ and $d=M/m$, the two Kummer sequences have a commuting map: on their left terms it is $\\mu_M\\to\\mu_m$, $u\\mapsto u^d$; on the middle $\\mathbf G_m$ it is $z\\mapsto z^d$; on the right $\\mathbf G_m$ it is the identity, since $(z^d)^m=z^M$. Naturality of the connecting maps in [lem-amb-relative-torsor-cohomology] sends the Kummer class of each frame torsor to the class of that same torsor. The twist comparison is exactly [lem-asd-etale-finite-twist-pullback], with tensor powers and dual evaluations for negative twists. Coefficient compatibility of products is [lem-per-noetherian-supported-product-calculus]. Hence each component $\\xi_N^a$ maps to $\\xi_n^a$ and the projective-bundle maps commute with the canonical coefficient comparison. One may check this square after restriction of scalars to abelian sheaves; no assertion that reduction is flat is used. If derived scalar extension is used instead, the canonical comparison $\\Lambda_n\\otimes^L_{\\Lambda_N}Rp_*\\Lambda_N\\to Rp_*\\Lambda_n$ is an isomorphism here: composing it with the scalar extension of $\\Phi_{F,N}$ gives $\\Phi_{F,n}$ under the Tate-line identifications, and both decomposition maps are isomorphisms. Finally reduce the monic relation of Step 3 coefficientwise; uniqueness at level $n$ gives the reduction of every $c_i(F)$. This also preserves the rank-zero convention.",
+   "text": "For $N\\ge n$, compare the two Kummer sequences at exponents $\\ell^N$ and $\\ell^n$ [lem-amb-kummer-any-base]. The left vertical map is $z\\mapsto z^{\\ell^{N-n}}$, the middle vertical map on $\\mathbf G_m$ is the same power, and the right vertical map is identity. The right square commutes since $(z^{\\ell^{N-n}})^{\\ell^n}=z^{\\ell^N}$. Naturality of the connecting maps [lem-weil-pbc-horseshoe-delta-functor] carries the boundary of the unchanged frame-torsor class to its level-$n$ boundary. The left map is exactly the root-twist reduction of [lem-asd-etale-finite-twist-pullback]. Tensor powers and evaluations respect that reduction, and the supported-product calculus says the cup products commute with coefficient reduction [lem-per-noetherian-supported-product-calculus]. Thus the same is true for all components of $\\Phi_F$ and for the monic relation. Reducing its coefficients gives a monic relation at level $n$; step 7's uniqueness proves reduction of every $c_i(F)$. This proves compatibility without assuming flatness of $\\mathbf Z/\\ell^n$ over $\\mathbf Z/\\ell^N$. If the decomposition is read via derived scalar extension, its target comparison is the canonical proper projection/scalar mate of [lem-pur-etale-scalar-mate-projection, lem-amb-proper-coproducts-projection]; these identify scalar extension of the components with the same level-$n$ cup powers. The scalar-mate boundedness assumptions hold since the already proved decomposition is a finite sum of shifted flat Tate lines; its scalar extension is again such a sum.",
    "uses": [
-    "lem-amb-relative-torsor-cohomology",
+    "lem-amb-kummer-any-base",
+    "lem-weil-pbc-horseshoe-delta-functor",
     "lem-asd-etale-finite-twist-pullback",
-    "lem-per-noetherian-supported-product-calculus"
+    "lem-per-noetherian-supported-product-calculus",
+    "lem-pur-etale-scalar-mate-projection",
+    "lem-amb-proper-coproducts-projection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Definition 1.1, Theorem 1.2 and the unique coefficients in the proof of Theorem 1.3; naturality for quotient coefficients"
+    "place": "XVI Definition 1.1 and uniquely characterized coefficients in the proof of Theorem 1.3; explicit coefficient diagram and proper projection comparison"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-complete-flag-bundle",
-  "def-pur-etale-derived-supported-sections",
   "lem-amb-kummer-any-base",
-  "lem-amb-relative-torsor-cohomology",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-per-geometric-projective-space-hyperplane-cohomology",
+  "lem-sc-line-bundle-torsor",
   "lem-per-noetherian-supported-product-calculus",
-  "lem-per-vector-extension-splitting-cohomology",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-asd-etale-finite-twist-pullback",
   "lem-pur-projective-bundle-tautological-geometry",
+  "def-kun-derived-tensor",
+  "def-kun-unbounded-exchange",
+  "prop-weil-proet-finite-proper-base-change",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "thm-pur-projective-bundle-formula",
+  "lem-pur-kummer-additivity",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-weil-pbc-site-comparison",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "def-nagata-relative-projective-space",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-local-acyclicity",
+  "lem-weil-pbc-locally-constant-torsion-local-acyclicity",
+  "lem-weil-pbc-proper-locally-acyclic-specialization",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-amb-proper-coproducts-projection",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-trf-projective-bundle-quotient-geometry",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "thm-weil-pbc-bounded-below"
+  "def-pur-etale-derived-supported-sections",
+  "def-pur-complete-flag-bundle",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-pur-etale-scalar-mate-projection"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose XVI, Definition 1.1, Theorems 1.2-1.3, Propositions 1.4-1.5, Lemma 1.6, Proposition 1.7; coefficient square written out"
+  "place": "Expose XVI, pp.225-228, Definition 1.1, Theorems 1.2-1.3, Proposition 1.4, Lemma 1.6 and Proposition 1.7; agent reconstruction of the geometric-field bridge via Stacks 0GJQ/0GJR/0GJW and of the filtered root formula via nested support actions."
  },
  "mathlib_searches": [
   {
@@ -227,6 +307,62 @@
    "results": "8 returned hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, CommRing.Pic.mk_tensor, CommRing.Pic.mul_eq_tensor, CommRing.relPic",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern other objects; no ordinary etale Chern, hyperplane-cohomology or splitting-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chern classes in ordinary etale cohomology projective bundle formula Whitney sum and dual bundle signs on Noetherian schemes",
+   "results": "8 hits; top: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective chart or topological vector-bundle declarations do not state ordinary etale projective-bundle or higher Chern identities"
+  },
+  {
+   "tool": "grep",
+   "query": "chernClass|chern_class|Chern class|Whitney",
+   "results": "0 hits; top: none. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective chart or topological vector-bundle declarations do not state ordinary etale projective-bundle or higher Chern identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chern classes in ordinary etale cohomology projective bundle formula and Whitney sum for vector bundles",
+   "results": "8 hits; top: VectorBundleCore.proj, VectorBundle.prod, VectorBundle.casesOn, VectorBundleCore.vectorBundle, VectorBundle.rec, VectorBundle.recOn, VectorBundleCore.isOpenMap_proj, mdifferentiable_add_section. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective chart or topological vector-bundle declarations do not state ordinary etale projective-bundle or higher Chern identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"chernClass\"",
+   "results": "0 hits; top: none. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective chart or topological vector-bundle declarations do not state ordinary etale projective-bundle or higher Chern identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary etale projective bundle formula Chern classes Whitney sum Noetherian scheme",
+   "results": "Logged 8 hits: AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, Algebra.FormallySmooth.projective_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-24",
+   "verdict": "no match: projective-spectrum geometry, smooth-ring facts, etale morphisms or topological vector bundles; none states ordinary etale higher Chern identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "chernClass, ProjectiveBundle, IsIso",
+   "results": "Logged 0 hits: . loogle: unknown identifier 'chernClass'",
+   "date": "2026-10-24",
+   "verdict": "no match: projective-spectrum geometry, smooth-ring facts, etale morphisms or topological vector bundles; none states ordinary etale higher Chern identities"
+  },
+  {
+   "tool": "grep",
+   "query": "chernClass|Chern class|Whitney",
+   "results": "Logged 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: projective-spectrum geometry, smooth-ring facts, etale morphisms or topological vector bundles; none states ordinary etale higher Chern identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary etale projective bundle formula and Whitney Chern classes",
+   "results": "Logged 8 hits: Algebra.FormallyEtale.instTensorProduct, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, VectorBundleCore.proj, VectorBundleCore.localTrivAt_apply, Algebra.formallyEtale_iff, Algebra.FormallyEtale.instFormallySmooth, FiberBundle.trivializationAt_proj_fst, Bundle.TotalSpace.proj",
+   "date": "2026-10-24",
+   "verdict": "no match: projective-spectrum geometry, smooth-ring facts, etale morphisms or topological vector bundles; none states ordinary etale higher Chern identities"
   }
  ],
  "mathlib_match": null,
@@ -255,74 +391,180 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-noetherian-etale-chern-identities",
   "worker": "stage1",
-  "summary": "Expanded the Noetherian ordinary-etale Chern calculation following Riou Expose XVI: proper geometric-fibre decomposition, unique monic coefficients, hyperplanes with empty intersection, injective flag and extension-splitting towers, Whitney, dual signs and the explicit coefficient square. Two strictly smaller statement-only supporting nodes; no finite-field hypothesis imported.",
-  "blueprint": "Supporting Chern calculation in the existing from.place ancestry: the regular-immersion class calculus used in the dimension-normalized duality route of lem-per-artin-gabber-affine-curve. Steps 1-4 give projective-bundle coordinates; 5-7 give Whitney; 8 gives dual signs; 9 gives coefficient compatibility. The ancestor and unit routes are unchanged.",
+  "summary": "Fresh Q26 repair with unchanged interface/provenance and authentic retained searches. Prove the arbitrary-Noetherian projective-bundle map by finite-field ordinary/pro-etale comparison, smooth proper specialization of the universal projective space over Z[1/ell], and proper geometric exchange. Define its monic coefficients, prove the root formula directly for nonsplit filtrations by nested supported Kummer multiplication, and derive Whitney and duality by flag injectivity. Spell out coefficient reduction. No dropped prerequisite, historical proof, alias, attachment or new node is restored.",
+  "blueprint": "Historical provenance is preserved verbatim under lem-per-artin-gabber-affine-curve Step 3, through the regular-immersion class-calculus input. Only the re-admitted ordinary finite-coefficient Chern construction interface is reconstructed; the current ancestor proof, discarded Artin-Gabber closure and arbitrary-field adic-duality route are not used.",
   "tool_uses": [
    {
     "node": "lem-amb-kummer-any-base",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
+    "why": "Generic The Kummer sequence on an arbitrary base interface used with its stated hypotheses in proof steps 1,12; this unit has no corresponding ordinary finite-coefficient construction tool."
    },
    {
-    "node": "lem-amb-relative-torsor-cohomology",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
+    "node": "lem-sc-line-bundle-torsor",
+    "why": "Generic Line bundles and $\\mathbf G_m$-torsors interface used with its stated hypotheses in proof steps 1; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-sc-etale-torsor-h1-functoriality",
+    "why": "Generic Functoriality of the etale torsor classification of H1 interface used with its stated hypotheses in proof steps 1; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Generic Pullback on cohomology over objects along a morphism of sites interface used with its stated hypotheses in proof steps 1; this unit has no corresponding ordinary finite-coefficient construction tool."
    },
    {
     "node": "lem-asd-etale-finite-twist-pullback",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
+    "why": "Generic Finite Tate lines on the small etale site and their pullback interface used with its stated hypotheses in proof steps 1,2,5,7,12; this unit has no corresponding ordinary finite-coefficient construction tool."
    },
    {
     "node": "lem-pur-projective-bundle-tautological-geometry",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
+    "why": "Generic Finite locally free projective bundles and tautological base change interface used with its stated hypotheses in proof steps 2,4,6,7,10; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "prop-weil-proet-finite-proper-base-change",
+    "why": "Generic Finite-torsion proper base change interface used with its stated hypotheses in proof steps 2; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic The derived exchange morphism commutes with forgetting the coefficient ring interface used with its stated hypotheses in proof steps 2,6; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "thm-pur-projective-bundle-formula",
+    "why": "Generic Projective-bundle formula without purity interface used with its stated hypotheses in proof steps 3; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-pur-kummer-additivity",
+    "why": "Generic Kummer additivity interface used with its stated hypotheses in proof steps 3; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic The twisting sheaves are locally free of rank one and derived complete interface used with its stated hypotheses in proof steps 3; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic Canonical derived direct-image comparison is the invertible counit mate interface used with its stated hypotheses in proof steps 3; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi interface used with its stated hypotheses in proof steps 3; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic Bounded-below site comparison interface used with its stated hypotheses in proof steps 3; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "cor-weil-pbc-geometric-fiber-finite",
+    "why": "Generic Finite-coefficient geometric-fiber formula interface used with its stated hypotheses in proof steps 3,5,6; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic Affine space is smooth interface used with its stated hypotheses in proof steps 4; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic Smoothness is local on an open cover of the source interface used with its stated hypotheses in proof steps 4; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-acyclicity",
+    "why": "Generic Smooth morphisms are universally locally acyclic interface used with its stated hypotheses in proof steps 4; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-constant-torsion-local-acyclicity",
+    "why": "Generic Local acyclicity extends to locally constant prime-to-characteristic torsion sheaves interface used with its stated hypotheses in proof steps 4; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-locally-acyclic-specialization",
+    "why": "Generic Proper locally acyclic morphisms have invertible higher-image specialization interface used with its stated hypotheses in proof steps 4,5; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic Strict henselization is faithfully flat interface used with its stated hypotheses in proof steps 5; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks on the derived category interface used with its stated hypotheses in proof steps 6; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic The proper projection formula on the ambient category interface used with its stated hypotheses in proof steps 7,10,12; this unit has no corresponding ordinary finite-coefficient construction tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) interface used with its stated hypotheses in proof steps 7,8,10; this unit has no corresponding ordinary finite-coefficient construction tool."
    },
    {
     "node": "lem-trf-projective-bundle-quotient-geometry",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
+    "why": "Generic Projective bundles of arbitrary quasi-coherent modules classify invertible quotients interface used with its stated hypotheses in proof steps 8; this unit has no corresponding ordinary finite-coefficient construction tool."
    },
    {
-    "node": "lem-weil-pbc-derived-plus-iso-on-cohomology",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
+    "node": "lem-weil-pbc-horseshoe-delta-functor",
+    "why": "Generic The connecting maps of right derived functors computed from horseshoe resolutions are well defined and natural interface used with its stated hypotheses in proof steps 12; this unit has no corresponding ordinary finite-coefficient construction tool."
    },
    {
-    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
+    "node": "lem-pur-etale-scalar-mate-projection",
+    "why": "Generic Restriction of the derived coefficient mate equals the projection morphism interface used with its stated hypotheses in proof steps 12; this unit has no corresponding ordinary finite-coefficient construction tool."
    },
    {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
+    "node": "lem-weil-pbc-geometric-point-cohomology",
+    "why": "Step 3 uses exact evaluation at an algebraically closed point to reflect cohomology isomorphisms along field extension; this unit has no such generic small-etale topos tool."
    },
    {
-    "node": "lemma-weil-pbc-geometric-stalk-conservative",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
-   },
-   {
-    "node": "thm-weil-pbc-bounded-below",
-    "why": "Generic ordinary-etale derived/cohomological or projective-geometry tool, used with its stated hypotheses in the Expose XVI supporting Chern calculation; the finite-field purity Chern formula is not used."
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Steps 7 and 10 use the ordinary ringed-topos derived-composition theorem with the final topos to identify global cohomology after direct image; no pro-etale or adic composition is used."
    }
   ]
  },
  "tool_uses": [
   "lem-amb-kummer-any-base",
-  "lem-amb-relative-torsor-cohomology",
+  "lem-sc-line-bundle-torsor",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-weil-pbc-site-cohomology-pullback",
   "lem-asd-etale-finite-twist-pullback",
   "lem-pur-projective-bundle-tautological-geometry",
+  "prop-weil-proet-finite-proper-base-change",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "thm-pur-projective-bundle-formula",
+  "lem-pur-kummer-additivity",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-weil-pbc-site-comparison",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-local-acyclicity",
+  "lem-weil-pbc-locally-constant-torsion-local-acyclicity",
+  "lem-weil-pbc-proper-locally-acyclic-specialization",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-trf-projective-bundle-quotient-geometry",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "thm-weil-pbc-bounded-below"
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q11-b12e8a3c0",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q136-86ad5844c",
+  "group": "Q136",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-b12e8a3c0 (reviewer sub-agent of L); spot-checked: I read the item in full: unchanged statement and 9 steps. I checked it against Riou, Exposé XVI (Travaux de Gabber pp. 225-228: Def 1.1, Thm 1.2/1.3, Props 1.4/1.5, Lemma 1.6, Prop 1.7) and Milne LEC Thm 23.2. Signs match Riou: xi^r - c1 xi^{r-1} + ... = 0, and the product of (xi - c1(L_i)) is 0. Step 2: proper base change at geometric points, where Omega is algebraically closed by def-weil-pbc-scheme-conventions; module/abelian comparison; stalk-conservative and D+ detector. Step 5: the components of p*F onto O(1) cannot all vanish at a point, so the hyperplanes have empty intersection, and Gamma with empty support is 0. Steps 6-7: flag-unit retraction plus splitting schemes give an explicit terminating tower that detects equality. Step 9: I checked the Kummer map of sequences (u^d, z^d, id) and the m|m' twist clause. Two new nodes. (1) The geometric P^m hyperplane cohomology is true: checked m=0, char 0, both sign conventions. It is not a duplicate of thm-pur-projective-bundle-formula (pro-etale, finite-field base) or of the P^1 nodes. (2) The vector-extension splitting scheme (Riou Prop 1.5) is true: checked a=0 or b=0 and a nonsplit extension. No node gives general-base Z/l^n homotopy invariance. Neither node restates an item clause. No SGA in any source, no cycle, and proof_deps equals the union of uses. Batch 5: closure from both targets with versus without the item's proof differs only by the two new per nodes. lem-trf-projective-bundle-quotient-geometry (pure Proj geometry) and thm-weil-pbc-bounded-below (proper base change, outside both assumptions) are both already in the base closure, so I accept them. I accept all 10 declared tool_uses. No changes."
- },
- "lean_audit": {}
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-86ad5844c (reviewer sub-agent of L); spot-checked: Q26 re-admission split (released stage-1 note, keep_plan false). This is not a 2026-10-21 re-split: the base proof is empty. The delivery has 0 new nodes and 12 steps, and proof_deps equals the union of the steps' uses. No stmt_dep or proof_dep is in route-pivot-dropped.txt, which I checked by script. The excluded lem-per-geometric-projective-space-hyperplane-cohomology and lem-per-vector-extension-splitting-cohomology are not cited and have no aliases. No SGA is cited, and the delivery adds no cycle. Source read: ILO XVI pp.225-229 (Déf 1.1, Thm 1.2, Thm 1.3, Props 1.4, 1.5 and 1.7, Lemme 1.6, §2.1). The statement matches ILO (quotient convention P(E)=Proj Sym E, Kummer c1, sign of the monic relation) and is unchanged. Steps: (3) thm-pur-projective-bundle-formula is used only on Spec k with E=Q_ell, so A=Z/ell^n. The transfer to the étale site goes through the b_u normalization and the full faithfulness of nu^* on D^+. The fixed-p datum is read as a blueprint parameter. (4)-(5) P^m over Z[1/ell] is smooth and proper; smooth local acyclicity and proper specialization give the isomorphism. Faithful flatness of Z_(p)^sh gives a characteristic-0 geometric point, and the specialization square commutes by naturality of germ restriction. (6) Stalk conservativity on D^+. (7) I recomputed c_i=(-1)^{i+1}b_{r-i}. The projection formula needs proper, finite type and Noetherian, all checked. (8)-(9) Y_i=P(F/F_i) is the zero locus of p^*L_i->O(1) by the quotient classification. The nested supported action with Z=Y_i, Y=Y_{i-1}, X=P and induction from e_0=1 give e_r in H_empty=0. This is a correct filtered form of ILO Lemme 1.6 and replaces Prop 1.5, whose homotopy input is dropped. (10)-(11) The a=0 summand is the unit and has a retraction, so flag pullback is injective. Inverse-image flags give Whitney, and the dual flag gives c_t(F^vee)=c_{-t}(F). (12) I verified the Kummer ladder (z^{ell^{N-n}}, z^{ell^{N-n}}, id). Bounded-below holds for the scalar mate because Lambda_N is free and the PBF gives a finite sum of flat twists. Small cases r=0, r=1, a free bundle, X empty, X=Spec Q, ell=2 and N=n all hold. Batch 5: the item itself is already in the PD/TF proof closure. By script, its new closure contains no thm-/prop- node of the trf or pod chapters except the generic prop-constructible-truncations. Every flagged citation is generic and neither assumption gives it: supported products; tautological, flag and quotient-line geometry; proper base change and the geometric-fibre corollary; locally acyclic specialization; the finite-field PBF. None is a step of the TF or PD proofs, so they are not grounds for RETURN. I accept the 29 declared generic tool_uses. No fixes. The disk was full at first (ENOSPC); review.md is now written (5154 bytes), with a copy at /tmp/q136rev/review.md."
+ }
 }

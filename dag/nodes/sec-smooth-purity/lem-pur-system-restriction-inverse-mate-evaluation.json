@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-system-restriction-inverse-mate-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the scalar-restriction inverse mate",
+ "statement": "Let CE and CF be towers of commutative rings on schemes X and Y, f : X → Y, and n a coefficient level. Let rX and rY be maps of their sequence ring sheaves, and aX and aY their level-n coefficient maps. Assume the level maps commute with the canonical inverse-image coefficient identifications. Suppose normalized scalar-restriction/pushforward and scalar-restriction/evaluation isomorphisms d, eX, eY act as identity on all underlying sections. Then level-n evaluation of the component at any CF-system M on Y of the inverse adjunction mate of d.inv is an isomorphism. No flatness assumption is needed. The systems, pushforward, and adjunctions are those of [lem-sf-semilinear-proper-open-mate-pasting], evaluation is [def-sp-varying-ring-operations], and scalar restriction is [def-coef-semilinear-system-models].",
+ "stmt_deps": [
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "def-sp-varying-ring-operations",
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK; agent-formulated normalized evaluation and mate-cube substep of blueprint sk-thm-purity-transport Step 10, for the existing whole-system scalar-restriction/pullback comparison."
+ },
+ "proof": [
+  {
+   "text": "Use the canonical pushforward/evaluation isomorphisms. Their inverse mates are inverses of the canonical pullback/evaluation isomorphisms by the unit normalization and injectivity of the adjunction hom equivalence.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The square formed by d.inv, the canonical pushforward/evaluation comparisons, eX, eY, and the fixed-ring scalar direct-image comparison commutes: each of its six component maps is identity on the same underlying additive sections. Transport the carrier equalities, compose the identities and apply module-sheaf extensionality.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply injectivity of the mate equivalence and its composition/whiskering laws to obtain the corresponding inverse-image cube. The fixed-ring scalar inverse mate is invertible. All other cube edges are evaluation or restriction isomorphisms, so cancel those edges to prove invertibility of the evaluated whole-system inverse mate.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": "K1 agent-written proof of the evaluation substep. Fully proved in Lean; abstract towers keep coefficient quotient constructions out of categorical elaboration.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of sheaves of modules on a coefficient sequence site detects invertibility of inverse image restriction of scalars comparison",
+   "results": "Eight hits: restriction of scalars, sheaf module evaluation and presheaf sheafification; none states the normalized whole-system inverse-mate cube.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; reuse evaluation and restriction APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve hits including mateEquiv, unit_mateEquiv_symm, mateEquiv_vcomp and mateEquiv_hcomp.",
+   "date": "2026-10-27",
+   "verdict": "Use the mate composition laws; no coefficient-system specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "restriction.*eval.*[iI]sIso|eval.*restriction.*[iI]sIso",
+   "results": "Zero Mathlib hits. Imported-blueprint search for scalar restriction inverse image evaluation also gave zero exact matches.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCompactSupportCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 10: ordinary scalar-restriction/pullback comparison, evaluation and inverse-mate cube subargument.",
+   "via": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemRestrictionInverseMateEvaluation",
+  "file": "lean/Sheaf/Paper/SystemRestrictionInverseMateEvaluation.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.restriction_inverse_mate_eval_isIso",
+  "statement": "theorem restriction_inverse_mate_eval_isIso\n    (CE CF : ℕ → CommRingCat.{u + 1})\n    (τE : ∀ n, CE (n + 1) ⟶ CE n) (τF : ∀ n, CF (n + 1) ⟶ CF n)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (rX : SemilinearProperOpen.ringSystem CE τE X ⟶\n      SemilinearProperOpen.ringSystem CF τF X)\n    (rY : SemilinearProperOpen.ringSystem CE τE Y ⟶\n      SemilinearProperOpen.ringSystem CF τF Y)\n    (aX : VaryingRing.coefficients CE X n ⟶ VaryingRing.coefficients CF X n)\n    (aY : VaryingRing.coefficients CE Y n ⟶ VaryingRing.coefficients CF Y n)\n    (hs : (StrictTower.constantRingIso (CE n) f).hom ≫ aX =\n      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map aY ≫\n        (StrictTower.constantRingIso (CF n) f).hom)\n    (d : SemilinearSections.res rX ⋙ SemilinearProperOpen.push CE τE f ≅\n      SemilinearProperOpen.push CF τF f ⋙ SemilinearSections.res rY)\n    (hd : ∀ (N : VaryingRing.Modules CF τF X) (U : (ℕ × Y.ProEt)ᵒᵖ)\n      (x : ((SemilinearSections.res rX ⋙ SemilinearProperOpen.push CE τE f).obj N).val.obj U),\n      HEq ((d.hom.app N).val.app U x) x)\n    (eX : SemilinearSections.res rX ⋙ VaryingRing.eval CE τE X n ≅\n      VaryingRing.eval CF τF X n ⋙ SemilinearSections.res aX)\n    (heX : ∀ (N : VaryingRing.Modules CF τF X) (U : X.ProEtᵒᵖ),\n      HEq (fun x ↦ (eX.hom.app N).val.app U x)\n        (fun x : N.val.obj (op (n, U.unop)) ↦ x))\n    (eY : SemilinearSections.res rY ⋙ VaryingRing.eval CE τE Y n ≅\n      VaryingRing.eval CF τF Y n ⋙ SemilinearSections.res aY)\n    (heY : ∀ (N : VaryingRing.Modules CF τF Y) (U : Y.ProEtᵒᵖ),\n      HEq (fun x ↦ (eY.hom.app N).val.app U x)\n        (fun x : N.val.obj (op (n, U.unop)) ↦ x))\n    (M : VaryingRing.Modules CF τF Y) :\n    IsIso ((VaryingRing.eval CE τE X n).map\n      ((((mateEquiv (SemilinearProperOpen.ordinaryAdj CF τF f)\n        (SemilinearProperOpen.ordinaryAdj CE τE f)).symm\n          (TwoSquare.mk _ _ _ _ d.inv)).natTrans).app M))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs clone/published item (verbatim move by diff; only systemRestrictionPullInv_isIso newly proved), 8 node JSONs vs Lean signatures, 4 direct importers compiled against the delivery and against the published build"
+ }
+}

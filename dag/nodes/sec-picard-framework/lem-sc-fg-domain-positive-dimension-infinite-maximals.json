@@ -24,10 +24,9 @@
  ],
  "proof": [
   {
-   "text": "Assume for contradiction that the set of maximal ideals of A is finite. If A were not a field, every maximal ideal would be nonzero, because a zero maximal ideal would make A a field. Choose a nonzero element x_m in each maximal ideal m. Since A is a domain, the finite product x=product_m x_m is nonzero, while x belongs to every maximal ideal. The Jacobson property of the finite-type k-algebra A, applied to the prime ideal (0), says that (0) is the intersection of all maximal ideals, so x must be zero, a contradiction. (If the finite set were empty, the existing maximal-ideal theorem applied to the proper ideal (0) would produce a maximal ideal, so this case is also impossible.)",
+   "text": "Assume for contradiction that the set M of maximal ideals of A is finite. By lem-weil-pbc-finite-type-over-field-prime-intersection-maximal, A is Jacobson. Since A is a domain, the zero ideal is prime, so its Jacobson radical equals zero. Every ideal contains zero, hence the finite infimum of all members of M equals zero.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
-    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
    ],
    "elementary": false,
    "source": {
@@ -36,7 +35,7 @@
    }
   },
   {
-   "text": "Therefore A is a field.",
+   "text": "A finite infimum of ideals that is prime equals one of its factors (Mathlib Ideal.eq_inf_of_isPrime_inf, proved using the product of the ideals and primality). Apply this to the finite family M whose infimum is zero. Thus a member of M is zero, so zero is maximal and A is a field (Ring.isField_iff_maximal_bot). The finite-infimum lemma also rules out an empty M, without a separate maximal-ideal existence argument.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -64,13 +63,12 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 00G1 and Theorem 00FV, affine positive-dimension argument"
+  "place": "Algebra, Lemma 00G1 and Theorem 00FV, affine positive-dimension argument; D6 uses Mathlib Ideal.eq_inf_of_isPrime_inf for the finite-product/primality step, and ringKrullDim_eq_zero_of_isField for the dimension contradiction."
  },
  "mathlib_searches": [
   {
@@ -145,5 +143,26 @@
   "result": "pass",
   "note": "k field=[Field k]; A f.g. k-algebra=[CommRing A][Algebra k A][Algebra.FiniteType k A] (recorded mathlib decl); domain=[IsDomain A]; dim>0=0<ringKrullDim A (recorded decl, WithBot ℕ∞, no extra bound); conclusion Set.Infinite {m : Ideal A | m.IsMaximal}; no hypothesis on k (finite k ok via k[t]); Mathlib has no exact statement (grep Infinite/IsMaximal/MaximalSpectrum: only Finite (MaximalSpectrum) instances), existing:false right; docstring carries the 4-step proof and blueprint marker"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261023T104804-L-3429060",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

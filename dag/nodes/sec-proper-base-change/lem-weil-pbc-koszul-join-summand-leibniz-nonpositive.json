@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-koszul-join-summand-leibniz-nonpositive",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The finite Koszul model of derived completion in def-weil-pbc-completed-pullback; Tag 0A0E identifies the negative finite complex with the dual of the positive one. This node isolates splitting off the first exterior koszul generator. This node isolates the contraction equation on a head-tail summand.",
+   "via": [
+    "lem-weil-pbc-koszul-adjoin-generator",
+    "lem-weil-pbc-completed-koszul-coefficient-comparison",
+    "lem-weil-pbc-completed-fiber-roos-comparison",
+    "lem-weil-pbc-completed-koszul-product-comparison",
+    "lem-weil-pbc-completed-fiber-roos-representative-comparison",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-completed-fiber-cech-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The nonpositive-degree contraction equation on a head-tail summand",
+ "statement": "For every commutative ring A, natural r,m, coefficient list a : Fin(r+1) to A and integers p,q with p ≤ 0 and q ≤ 0, the explicit multiplication map of [def-weil-pbc-koszul-join-graded] from the tensor summand (p,q) to degree p+q of completedKoszulPower(r+1,a,m) intertwines the outgoing differential with the sum of head contraction and tail contraction multiplied by the cochain tensor sign epsilon_2(p,q).",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-join-graded",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0664, lemma-join-sequences-koszul-complex, proof hint: exterior generators of the two factors and their Koszul differentials."
+ },
+ "proof": [
+  {
+   "text": "Use the extension isomorphism followed by the exterior-power inclusion as an injective coordinate map. On a pure tensor, the explicit summand map becomes the product of the head and tail exterior images. Naturality of contraction under each inclusion follows by left induction and equality of the pulled-back coefficient linear forms.",
+   "uses": [
+    "def-weil-pbc-koszul-join-graded",
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib extend_d_eq conjugates the differential between consecutive nonpositive degrees to koszulBoundary, whose inclusion into the exterior algebra is contraction. If a factor has exterior degree zero, its contraction is zero: use zeroEquiv and contraction of algebraMap. Its outgoing summand in positive cochain degree is also zero by definition. This identifies both head and tail contributions, including their boundary cases.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-koszul-join-graded",
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "When p+q=0, both p and q are zero and every outgoing differential vanishes by extension by zero. Otherwise put n=-p, k=-q and s=-(p+q+1). Evaluate the morphism equation on pure tensors and apply the injective exterior coordinate in degree s. Use the graded contraction Leibniz identity and identify the scalar action of epsilon_2(p,q) with multiplication by algebraMap((-1)^n), using negOnePow_neg and cast_negOnePow_natCast. Tensor-product extensionality finishes the equation.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "def-weil-pbc-koszul-join-graded",
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-koszul-join-graded",
+  "lem-weil-pbc-koszul-differential"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0622 and 0664, definition-koszul and lemma-join-sequences-koszul-complex; T4 supplies the extension-coordinate transport and degree-zero cases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exterior multiplication from the tensor of the exterior algebras of two complementary free submodules is an isomorphism, with differential given by the graded Leibniz rule",
+   "results": "Eight hits: Submodule.LinearDisjoint.mulMap, TensorProduct.gradedMul and graded tensor multiplication, ExteriorAlgebra.map and iota relations. No graded Koszul splitting or chain-map theorem.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; exterior multiplication and total tensor must be assembled."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower\", \"tensor\"",
+   "results": "exteriorPower.toTensorPower and exteriorPower.toTensorPower_apply_ιMulti only.",
+   "date": "2026-10-26",
+   "verdict": "Neither proves the direct-sum/tensor splitting or its contraction equation."
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower.*(sum|Sum|prod|Prod)|koszul.*(adjoin|tensor|concat)",
+   "results": "Five Mathlib hits, on exterior spanning families and inner products; no Koszul splitting. Local source search additionally found the proved final-generator assembly and its cone coordinates, but no completed cochain tensor map or transition/unit compatibility.",
+   "date": "2026-10-26",
+   "verdict": "No direct implementation of the required graded map and local contraction equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilKoszulJoinLeibniz",
+  "date": "2026-10-26",
+  "group": "E4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilKoszulJoinLeibniz",
+  "file": "lean/Sheaf/Paper/WeilKoszulJoinLeibniz.lean",
+  "declaration": "AlgebraicGeometry.Scheme.koszulJoinSummand_leibniz_nonpositive",
+  "statement": "theorem koszulJoinSummand_leibniz_nonpositive\n    {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)\n    (m : ℕ) (p q : ℤ) (hp : p ≤ 0) (hq : q ≤ 0) :\n    koszulJoinSummand (A := A) r a m p q (p + q) rfl ≫\n        (completedKoszulPower (A := A) (r + 1) a m).d (p + q) (p + q + 1) =\n      ((completedKoszulPower (A := A) 1 (fun _ ↦ a 0) m).d p (p + 1) ⊗ₘ 𝟙 _) ≫\n          koszulJoinSummand r a m (p + 1) q (p + q + 1) (by omega) +\n        ComplexShape.ε₂ (.up ℤ) (.up ℤ) (.up ℤ) (p, q) •\n          ((𝟙 _ ⊗ₘ\n            (completedKoszulPower (A := A) r (fun j ↦ a j.succ) m).d q (q + 1)) ≫\n              koszulJoinSummand r a m p (q + 1) (p + q + 1) (by omega))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-26"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T065530-L-3062533",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T083104-L-2268086",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

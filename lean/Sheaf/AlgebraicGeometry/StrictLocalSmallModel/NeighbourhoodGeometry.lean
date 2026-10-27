@@ -90,13 +90,14 @@ theorem smallModelFirst {X S : Scheme.{v}} {f : X ⟶ S}
             ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj
               i).1.left.unop).inv := by
   classical
-  let : HasColimit (Scheme.strictHenselizationDiagram s) := inferInstance
+  let : HasColimit (AlgebraicGeometry.Scheme.strictHenselizationDiagram s) := inferInstance
   let rep := (equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse
   let incl := Scheme.strictHenselizationAffineInclusion s
   let : incl.IsEquivalence := Scheme.strictHenselizationAffineInclusion_isEquivalence s
   have h := Functor.Final.ι_colimitIso_inv (rep ⋙ incl).op
-    (Scheme.strictHenselizationDiagram s) (op i)
-  change colimit.ι (Scheme.strictHenselizationDiagram s) (op (incl.obj (rep.obj i))) ≫
+    (AlgebraicGeometry.Scheme.strictHenselizationDiagram s) (op i)
+  change colimit.ι (AlgebraicGeometry.Scheme.strictHenselizationDiagram s)
+      (op (incl.obj (rep.obj i))) ≫
     (Scheme.smallStrictHenselizationColimitIso s).inv =
       colimit.ι (Scheme.strictHenselizationAffineDiagram s) (op i) at h
   have hh := congrArg Spec.map h
@@ -107,7 +108,7 @@ theorem smallModelFirst {X S : Scheme.{v}} {f : X ⟶ S}
     Category.assoc, pullback.lift_snd_assoc]
   change pullback.snd f (Scheme.strictHenselizationStructuralMap s) ≫
     Spec.map (Scheme.smallStrictHenselizationColimitIso s).inv ≫
-      Spec.map (colimit.ι (Scheme.strictHenselizationDiagram s)
+      Spec.map (colimit.ι (AlgebraicGeometry.Scheme.strictHenselizationDiagram s)
         (op (incl.obj (rep.obj i)))) ≫ _ = _
   simpa [Category.assoc, Scheme.strictHenselizationCone] using congrArg
     (fun k ↦ pullback.snd f (Scheme.strictHenselizationStructuralMap s) ≫ k ≫

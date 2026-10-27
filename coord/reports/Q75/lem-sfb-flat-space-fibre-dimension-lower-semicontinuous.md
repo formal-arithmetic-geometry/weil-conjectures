@@ -1,0 +1,46 @@
+# Q75 stage-1 delivery
+
+1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-flat-space-fibre-dimension-lower-semicontinuous.json`, the existing statement, now split in six steps. No new nodes; no new Mathlib leaves. `citations.json` contains a full verbatim statement for each of the 17 step/node citations. The supporting `searches.jsonl` records four actual Q75 searches.
+2. Attachments: none. Searches of all `lean/WeilConjectures/` for the exact blueprint tag, lower semicontinuity, and fibre dimension found no declaration stating this item. Related matrix-rank and coefficient-sheaf semicontinuity results do not apply to fibre Krull dimension.
+3. WANTED: none. All sources used are present.
+4. The statement and all statement dependencies are unchanged. The imported item had no proof. Its inherited blueprint ancestor is null, as confirmed by `tools/blueprint_refs.py ancestor`; its detailed place and via chain are retained. The newest blueprint is read from `literature/blueprint/latest/`, including `sk-thm-sf-ctf-stability/_section.md` and `sk-thm-sf-ctf-stability-direct-images.proof.md` (3). The chapter and unit records were read and not edited. The auxiliary Stacks proof stays below the recorded alteration/plurinodal prerequisite and does not change the unit route. No statement dispute was found.
+5. Nothing mathematical remains unfinished in this one-level split. Its existing auxiliary nodes retain their own stage states. Delivery validation is recorded below after the server checks.
+
+## Sources and searches
+
+The item follows `spaces-more-morphisms.tex`, Tag 0D4P, `lemma-dimension-fibres-flat`, lines 7203–7224: reduce locally to an affine target, choose an affine surjective etale source atlas, then use the scheme argument. I read that argument in `more-morphisms.tex`, Tag 0D4H, `lemma-dimension-fibres-flat`, lines 8491–8512, including its preceding dimension conventions. Its constant-dimension pieces are Tags 054T and 054U (`lemma-flat-finite-presentation-CM-pieces`, `lemma-flat-finite-presentation-specialization-dimension`), read together with the preceding Cohen–Macaulay open lemma. The proof uses the existing generic-point form of these opens and explicitly finds a component of maximal dimension; it does not assume the fibres are equidimensional.
+
+For the atlas construction I read `spaces-properties.tex`, Tag 03H6, `lemma-quasi-compact-affine-cover`, lines 747–768. For dimension comparison I read Tag 0A4H, `lemma-dimension-decent-invariant-under-etale`, and the statements of the existing quasi-separated atlas comparison nodes; the proof uses the one whose base-change clause applies directly to the original quasi-separated morphism over T. For finite dimensionality I read `morphisms.tex`, Tag 0A3V, `lemma-morphism-finite-type-bounded-dimension`, and the explicit affine-presentation statement of Tag 01TQ. For the generic-point dimension formula I read `varieties.tex`, Tag 0B1B within Tag 0A21, `lemma-dimension-locally-algebraic`, item `item-dimension-irreducibles-passing-through`. Flat-lfp openness is the existing Mathlib leaf for Tag 01UA.
+
+I searched the whole DAG by dimension, fibre, atlas, the relevant Stacks labels and tags before choosing citations. Whole-blueprint searches included `fibre dimension`, `lower semi`, `0D4P`, and `dimension`; no blueprint node states the item. No new node was necessary. In particular, I did not create a scheme version of the conclusion and call it a split: steps 4–5 carry the scheme argument using independently stated smaller inputs.
+
+The existing Q67 Mathlib search records are retained. The actual Q75 searches, with identical query text in the node and `searches.jsonl`, were:
+
+- leanfinder: `For a flat finitely presented morphism of algebraic spaces the dimension of the fibres is lower semicontinuous`. Eight hits, including `UniversallyOpen.of_flat`, flat generalizing maps, and smooth relative dimension. These concern schemes and do not give the requested dimension function.
+- leansearch: `The sets of base points where a flat family has fibre dimension greater than n are open`. Eight hits: scheme openness, manifold immersion, rank and fibre-bundle opens; no match.
+- loogle: `"LowerSemicontinuous", "AlgebraicGeometry"`. Zero hits.
+- grep: `lowerSemicontinuous.*dim|dim.*lowerSemicontinuous|dimensionFib|fiberDim`. Zero hits.
+
+The two different semantic phrasings did not reveal an exact theorem or a one-line specialization. The existing flat-lfp openness leaf is used where its actual conclusion suffices.
+
+## Review by Q75
+
+I checked every step against the cited node statements, not their proofs. Step 1 uses the finite-affine-atlas refinement statement, which explicitly allows the empty atlas and supplies one affine source, and the fibre-product/covers statement, which supplies preservation of surjective etale covers under base change. The flat and local finite-presentation hypotheses on U→V come directly from the item's chart-test assumptions with the etale target chart V→T. Thus this step does not infer flatness merely from a definition or silently invoke composition. Quasi-compactness over each affine V is exactly the quasi-compactness convention in the unchanged item.
+
+Step 2 uses the full base-change scope of `lem-sfb-space-etale-atlas-topological-dimension`: the original morphism f is quasi-separated by hypothesis and the new test scheme is Spec κ(t). It applies both to U_t and to the atlas W ⨿ U_t. The affine-fibre-product statement supplies affineness of U_t. The finite-affine-coproduct statement supplies the product-ring model; the two idempotents explicitly exhibit the summands as opens. Their etaleness is checked separately on each summand after each scheme test. Open-subspace monotonicity then bounds every affine etale chart by dim U_t. This proves both inequalities in the supremum convention, rather than confusing topological dimension with local-ring dimension or relying on a surjective chart to bound arbitrary charts without an argument.
+
+Step 3 uses the affine-pair finite-presentation lemma to obtain the actual finite list of algebra generators, the finite-type definition, affine-morphism permanence for quasi-compactness, affine-scheme quasi-compactness for the base, and the finite-type fibre bound under exactly its quasi-compact-target hypothesis. U and V are affine; no Noetherian hypothesis on V was inserted. The presentation also proves finite type of the ordinary field fibres in step 4 by tensoring their generators. Only the bound, not a global bound on all of T, is needed.
+
+Step 4 uses the supremum-of-local-dimensions identity and discreteness of the finite integer range to attain the maximum. The locally-algebraic component-dimension formula applies because U_t is of finite type over κ(t), with no perfection assumption on that field. Sobriety of a scheme supplies the generic point of the selected component. At that generic point the only component containing it is the selected component, by the closure definition and maximality, so the same component formula gives local dimension n. These are the precise conclusions the three cited statements supply; no assertion that every component has dimension n is used.
+
+Step 5 applies the existing constant-dimension-opens node with the whole base open. It requires genericity in an ordinary fibre component, which step 4 established, and flatness/local finite presentation, which step 1 established. The equality of the stratum index with n is explicit. The flat-lfp openness leaf states openness of g itself, so its image of H_n is open; no new restriction theorem for flatness is needed. For every point of that image, the strata node states local dimension n, and the supremum identity gives the required global fibre lower bound. Step 6 is only the open-cover union argument, including threshold -1.
+
+I tested empty T, the empty source over nonempty T (including the affine scheme Spec 0), an identity family of zero-dimensional fibres, affine n-space over a field, a disjoint union of components with unequal dimensions, and a non-surjective open flat family. Empty fibres give -infinity; a=-1 detects precisely the open image; maximal-component selection works without equidimensionality. No properness, connectedness, field closure or global dimension bound is used. The item has no step longer than 2000 characters; each of the five non-elementary steps lists every input it invokes. Existing off-unit auxiliary results are declared in `split_report.tool_uses` as generic tools, for maintainer review. I checked delivery-errors B–E: no new-node or duplicate issue; complete citation quotes; no restatement child; no cycle through the parent proper-flat theorem; all source tags and needed hypotheses are identified. No SGA source is used.
+
+## Not duplicates
+
+No new nodes. Existing atlas, dimension, sobriety and fibre-stratification statements are reused.
+
+## Validation
+
+Server `srvcheck.py ... review_split` passed with 0 new nodes. The required `deliver.py Q75 lem-sfb-flat-space-fibre-dimension-lower-semicontinuous --no-push` exited 0 and printed `OK (not pushed)` at commit `0fc9e22431b`, with preflight passed. No Lean, compiler or Lake command was run; no repository or launcher file was edited. The delivery is pushed only after a final dry run of this report update.

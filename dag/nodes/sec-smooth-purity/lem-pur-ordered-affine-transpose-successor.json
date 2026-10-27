@@ -1,0 +1,145 @@
+{
+ "id": "lem-pur-ordered-affine-transpose-successor",
+ "kind": "statement",
+ "title": "One-step propagation of the ordered transpose coefficient formula",
+ "statement": "In the finite purity setting [def-pur-conventions], fix d≥0. Assume the coefficient formula τ_d,K = Π_d,K;(K tensor I_d);ρ_K at dimension d over every separated finite-type base and for every bounded-below input with retained finite-Tor constructible etale representative. Then for each such base Y and input K the specified projection at d+1 is invertible and τ_(d+1),K = Π_(d+1),K;(K tensor I_(d+1));ρ_K. Here the canonical maps are those of [def-pur-ordered-affine-transpose-data]; only the single successor is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Steps 1 and 3--6 of lem-pur-ordered-affine-transpose-projection: projection-coherence successor calculation and extraction at the unit; sk-prop-an Step 6."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-ordered-affine-transpose-data",
+  "def-pur-ordered-affine-trace-data"
+ ],
+ "proof": [
+  {
+   "text": "Proof: all projections and tower bases are separated finite type. The Tate coefficients\nare ordered tensor powers of the shifted locally free rank-one etale Tate line; they\nare bounded and of finite Tor amplitude. Exact pullback and tensor preserve the class,\nand the stage applicability theorem supplies the exceptional inputs. The finite-ring\ncompact projection formula therefore makes the specified projection invertible.\nPut f=q_d and g=p_d. Expand the successor comparison, and transpose its inverse\nexceptional compositor through its defining pasted counit. Naturality of the line\ncomparison and of the counit gives the successive transposes tau_g Rg_!(tau_f).\nThe transpose of the line comparison is its defining augmentation. Insert this\nformula and the induction hypothesis at g. Coefficient associativity of inverse\nprojection moves the K factor past the Tate factor at f. Projection naturality moves\nthe tensor of line integration past the projection at g. The normalized composition\nprojection equation, with the canonical compact-support compositor, identifies the\nresult with inverse projection at d+1 followed by tensor of a single map J to A_Y.\nEvaluate the same calculation at the unit coefficient. The projection unit law\nidentifies J with the definition of integration at d+1. Substitute this equality\nin the preceding formula. At d=0 the normalized identity functors and unitors give\nthe same calculation with no positive-dimensional compositor. At each occurrence\nuse only the bounded-below etale-origin adjunction and the specified compactification\ncomparisons; no change of coordinate order is involved.",
+   "uses": [
+    "def-pur-affine-space-comparison",
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "thm-sf-preservation-class",
+    "lem-sf-proetale-constructible-origin",
+    "thm-sf-comp-composition",
+    "prop-finite-compact-support-constructibility",
+    "thm-sf-ambient-adjoint-class",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-pur-projection-formula-coefficient-coherence",
+    "lem-sf-composition-projection-mate",
+    "lem-sf-projection-compatible-triangle-assembly",
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "def-pur-affine-line-purity-comparison",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-adjunct-counit-identity",
+    "lem-pur-ordered-affine-comparison-natural"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-space-comparison",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "thm-sf-preservation-class",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-comp-composition",
+  "prop-finite-compact-support-constructibility",
+  "thm-sf-ambient-adjoint-class",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-pur-projection-formula-coefficient-coherence",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-projection-compatible-triangle-assembly",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "def-pur-affine-line-purity-comparison",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-pur-ordered-affine-comparison-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Steps 1 and 3--6 of lem-pur-ordered-affine-transpose-projection: projection-coherence successor calculation and extraction at the unit; sk-prop-an Step 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a comparison defined by iterated adjunction transpose and the projection formula",
+   "results": "Generic naturality and adjunction counit lemmas only; none fixes the project ordered affine maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "results": "Adjunction.counit_naturality, homEquiv_counit and comp_counit_app are useful generic tools, not the ordered affine assertion.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At the unit coefficient the adjunction transpose of the affine line purity map equals the normalized compact support trace",
+   "results": "No Mathlib declaration specifies the project affine purity and trace maps.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*naturality|inv_hom_id|comp_counit_app",
+   "results": "Generic categorical identities only. Searched both project roots for orderedAffine, tateSourceIso, BlockLaw and lineNormalizedIntegration. Only the assigned module contains these constructions; AffineSpaceTraceFactorization is a consumer. Blueprint searches for ordered affine comparison natural, transpose projection and affine line transpose normalization gave no exact prior node.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrderedAffineTransposeProjection",
+  "date": "2026-10-26",
+  "group": "S3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 1 and 3--6 of lem-pur-ordered-affine-transpose-projection: projection-coherence successor calculation and extraction at the unit; sk-prop-an Step 6.",
+   "via": [
+    "lem-pur-ordered-affine-transpose-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedAffineTransposeSuccessor",
+  "file": "lean/Sheaf/Paper/OrderedAffineTransposeSuccessor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.orderedAffineTranspose_successor",
+  "statement": "theorem orderedAffineTranspose_successor\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (d : ℕ)\n    (ih : ∀ (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))\n      [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]\n      (K : Plus (Ring P) Y) (Ke : Etale.DerivedCategoryModule (Ring P) Y)\n      (hKe : etaleFiniteTor (Ring P) Y Ke)\n      (eK : (comparison (Ring P) Y).obj Ke ≅ K.obj),\n      ∃ h : IsIso (projection P Y K.obj d),\n        transpose P Y aY K Ke hKe eK d = projectionInverse P Y K.obj d h ≫\n          ((tensor (Ring P) Y).obj K.obj).map (integration P Y aY d) ≫\n            (moduleRightUnit (Ring P) Y K.obj).hom)\n    (Y : Scheme.{u})\n    (aY : Y ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]\n    (K : Plus (Ring P) Y) (Ke : Etale.DerivedCategoryModule (Ring P) Y)\n    (hKe : etaleFiniteTor (Ring P) Y Ke)\n    (eK : (comparison (Ring P) Y).obj Ke ≅ K.obj) :\n    ∃ h : IsIso (projection P Y K.obj (d + 1)),\n      transpose P Y aY K Ke hKe eK (d + 1) = projectionInverse P Y K.obj (d + 1) h ≫\n        ((tensor (Ring P) Y).obj K.obj).map (integration P Y aY (d + 1)) ≫\n          (moduleRightUnit (Ring P) Y K.obj).hom",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2367",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T211647-L-4017776",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2367",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T211647-L-4017776",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, Data module and 3 child modules + nodes compared with clone sheaf-dag (theorem header byte-identical, 17 defs verbatim plus @[irreducible]); reader gate compiled the 5 delivered modules and 4 clone consumers (AffineSpaceTraceProductData/SuccessorContraction/ContractionProduct/Factorization) together, all OK; children's statements read against the AffineSpacePurity and AffineLinePurity defs"
+ }
+}

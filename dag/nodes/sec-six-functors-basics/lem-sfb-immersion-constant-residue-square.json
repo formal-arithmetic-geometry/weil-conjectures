@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-immersion-constant-residue-square",
+ "kind": "statement",
+ "title": "Ordinary immersion pullback in constant-scalar coordinates",
+ "statement": "Let i:S -> X be an immersion of schemes [def-pc-scheme] and k any commutative ring in the coefficient universe. Transport fixed-k sheaves on X into modules over the constant k ring sheaf on the pro-etale AsSmall model, using the inverse model equivalence and inverse constant-scalar restriction [def-coef-constant-scalar-restriction]. Composing with ConstantCompletion.pull for sfbImmersionAlgebra i and its constant coefficient isomorphism is naturally isomorphic to sfbFixedResiduePull i k [def-sfb-adic-immersion-residue-comparison-core]. This statement concerns ordinary module sheaves only, with no completed coefficient, ideal, derived complex or Noetherian hypothesis.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-coef-constant-scalar-restriction",
+  "def-sfb-adic-immersion-residue-comparison-core",
+  "def-sfb-adic-immersion-completed-model"
+ ],
+ "proof": [
+  {
+   "text": "Define the canonical constant coefficient direct-image map by transposing the whiskered target sheafification unit. Its scalar-normalization equation identifies its adjoint transpose with the specified constantMap of the algebraic inverse image.",
+   "uses": [
+    "lem-sf-constant-inverse-image-scalar-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the supplied-algebraic-presentation adjunction for the continuous ringed topos. The scalar-normalization equality is precisely its required coefficient compatibility. Identify its sheafified tensor functor with ConstantCompletion.change on objects and maps, obtaining the ordinary module pull/direct-image adjunction.",
+   "uses": [
+    "lem-pur-ringed-pullback-presentation-on-sites",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under evaluation from the AsSmall model, constant-scalar direct image commutes with the original fixed-k direct image. Its section map is the identity additive map; linearity is the sheafification Hom-equivalence equation stating that each constant a maps to a. The restrictionIso comparison identifies this realization with the specified restriction equivalence.",
+   "uses": [
+    "lem-ctf-finite-comparison-model-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose each ordinary adjunction with the model and scalar equivalences. Conjugate the right-adjoint square to obtain the claimed natural isomorphism of left adjoints.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constant-inverse-image-scalar-normalization",
+  "lem-pur-ringed-pullback-presentation-on-sites",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-ctf-finite-comparison-model-realization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 00YV, 03A0, 03CY and 03D2; sites-modules.tex Lemmas pullback-module and adjoint-push-pull"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 00YV, 03A0, 03CY and 03D2; sites-modules.tex Lemmas pullback-module and adjoint-push-pull"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalizing a ring sheaf by an isomorphism and an equivalence of sites commutes with derived scalar extension",
+   "results": "Generic module pushforward and free-module APIs; no theorem for the normalized completed coefficient and specified residue.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "Ordinary restriction definition, additive instance and object/map projection equations.",
+   "date": "2026-10-26",
+   "verdict": "Useful ordinary APIs; no derived normalization comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexCompIso|pushforwardPushforwardEquivalence",
+   "results": "Mathlib has complex comparison and equivalences for module pushforward along site equivalences.",
+   "date": "2026-10-26",
+   "verdict": "Use these categorical APIs; no theorem with the specified residue complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicImmersionResidueComparisonFixed",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "The residue comparison below the completed-model immersion construction: Ordinary immersion pullback in constant-scalar coordinates"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ImmersionConstantResidueSquare",
+  "file": "lean/Sheaf/Paper/ImmersionConstantResidueSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbImmersion_constantResidueSquare",
+  "statement": "theorem sfbImmersion_constantResidueSquare {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i] (k : Type (u + 1)) [CommRing k] : Nonempty (((SfbAdicRestriction.modelEquivalence X (ModuleCat.{u + 1} k)).inverse ⋙ (ConstantScalarRestriction.restriction (proEtaleModelTopology X) k).asEquivalence.inverse) ⋙ ConstantCompletion.pull (sfbImmersionAlgebra i) (ConstantCompletion.constantMap (sfbImmersionAlgebra i) k) ≅ SfbResidueComparisonCore.sfbFixedResiduePull i k)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T092836-L-3472033",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T092836-L-3472033",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

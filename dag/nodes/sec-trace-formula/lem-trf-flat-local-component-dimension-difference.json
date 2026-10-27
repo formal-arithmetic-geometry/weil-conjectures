@@ -1,0 +1,262 @@
+{
+ "id": "lem-trf-flat-local-component-dimension-difference",
+ "kind": "statement",
+ "title": "Dimension difference on minimal components of a flat local map",
+ "statement": "Let $k$ be a field, let $(A,\\mathfrak m,K)$ and $(B,\\mathfrak n,L)$ be nonzero commutative local $k$-algebras essentially of finite type [def-weil-pbc-essentially-finite-type-algebra], and let $f:A\\to B$ be a flat local $k$-algebra homomorphism [def-weil-pbc-flat-ring-map], where local means $f^{-1}(\\mathfrak n)=\\mathfrak m$, $K=A/\\mathfrak m$, and $L=B/\\mathfrak n$. A prime is minimal when it contains no strictly smaller prime. Contraction gives a surjection from the set of minimal primes of $B$ onto that of $A$. For every minimal prime $\\mathfrak q$ of $B$ and $\\mathfrak p=f^{-1}(\\mathfrak q)$ set $E=\\operatorname{Frac}(A/\\mathfrak p)$ and $H=\\operatorname{Frac}(B/\\mathfrak q)$, with the inclusion induced by $f$. All dimensions and transcendence degrees below are finite nonnegative integers [def-weil-pbc-krull-dimension-ring, def-kun-transcendence-degree], and\n$$\\dim(A/\\mathfrak p)+\\operatorname{trdeg}_k K=\\operatorname{trdeg}_k E,\\qquad\n\\dim(B/\\mathfrak q)+\\operatorname{trdeg}_k L=\\operatorname{trdeg}_k H.$$\nFor the induced field map $K\\to L$ one has the integer identity\n$$\\dim(B/\\mathfrak q)-\\dim(A/\\mathfrak p)=\\operatorname{trdeg}_E H-\\operatorname{trdeg}_K L.$$\nSurjectivity of contraction asserts existence of a minimal prime over every minimal prime downstairs; it does not assert uniqueness, a bijection, or flatness of $A/\\mathfrak p\\to B/\\mathfrak q$. No smoothness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent combination of Tags 00OT (lemma-dimension-at-a-point-finite-type-over-field), 00P0 (lemma-dimension-prime-polynomial-ring), 00P1 (lemma-dimension-at-a-point-finite-type-field), 00HS (lemma-flat-going-down), 00HR (lemma-local-flat-ff), and fields.tex Tag 030H (lemma-transcendence-degree-tower); formerly steps 5, 7, and the dimension subtraction in step 9 of lem-trf-smooth-local-tangent-cone-extension."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathfrak q$ be a minimal prime of $B$ and put $\\mathfrak p=f^{-1}(\\mathfrak q)$. Contraction preserves primality: if $ab\\in\\mathfrak p$, then $f(a)f(b)\\in\\mathfrak q$, so one factor belongs to $\\mathfrak q$. For any prime $\\mathfrak p_0\\subseteq\\mathfrak p$, flat going down gives a prime $\\mathfrak q_0\\subseteq\\mathfrak q$ contracting to $\\mathfrak p_0$. Minimality of $\\mathfrak q$ forces $\\mathfrak q_0=\\mathfrak q$, whence $\\mathfrak p_0=\\mathfrak p$. Thus contraction sends minimal primes to minimal primes.",
+   "uses": [
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HS (lemma-flat-going-down), applied below a minimal prime"
+   }
+  },
+  {
+   "text": "The map $f$ is flat and local, so the faithful-flatness node gives surjectivity on spectra. Given a minimal prime $\\mathfrak p$ of $A$, choose a prime $Q$ of $B$ over it. The prime-containment node, with $I=0$, gives a minimal prime $\\mathfrak q\\subseteq Q$. Its contraction is a prime contained in $\\mathfrak p$, hence is $\\mathfrak p$ by minimality. This proves surjectivity on minimal primes without a uniqueness assertion.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HR (lemma-local-flat-ff), 00HQ (lemma-ff-rings), and 00E0 (lemma-Zariski-topology), part (4)"
+   }
+  },
+  {
+   "text": "For the dimension calculation, take either $(D,\\mathfrak d,\\mathfrak a)=(A,\\mathfrak m,\\mathfrak p)$ or $(B,\\mathfrak n,\\mathfrak q)$. By essential finite type write $D=W^{-1}C$ as a $k$-algebra, with $C$ finite type over $k$. Put $\\mathfrak r=\\{c\\in C:c/1\\in\\mathfrak d\\}$. The localization-prime-residue-field node, part (2), identifies $C_{\\mathfrak r}$ with $D_{\\mathfrak d}$. Since $D$ is local, every denominator outside $\\mathfrak d$ is a unit; $d/s\\mapsto ds^{-1}$ is inverse to $D\\to D_{\\mathfrak d}$. Hence $D\\simeq C_{\\mathfrak r}$ over $k$. Under this isomorphism the maximal ideal is $\\mathfrak rC_{\\mathfrak r}$, as a fraction $c/s$ is a unit precisely when $c\\notin\\mathfrak r$.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization), 00C9 (item-localization-localization), and 00QM (definition-essentially-finite-p-t)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak a_0$ be the contraction of $\\mathfrak a$ to $C$. The same localization node, part (1), gives $\\mathfrak a=\\mathfrak a_0C_{\\mathfrak r}$; also $\\mathfrak a_0\\subseteq\\mathfrak r$. Put $T=C/\\mathfrak a_0$ and $\\mathfrak r_T=\\mathfrak r/\\mathfrak a_0$. The quotient-localization node gives $D/\\mathfrak a\\simeq T_{\\mathfrak r_T}$ by $(c+\\mathfrak a_0)/(s+\\mathfrak a_0)\\mapsto c/s+\\mathfrak a$. Here $T$ is a nonzero domain, and the images of finitely many algebra generators of $C$ generate $T$, so it is finite type over $k$. Reducing this isomorphism modulo the maximal ideals gives $D/\\mathfrak d\\simeq\\kappa_T(\\mathfrak r_T)$. The map $T\\to T_{\\mathfrak r_T}$ is injective, since a zero fraction $t/1$ implies $st=0$ for some $s\\notin\\mathfrak r_T$, and $T$ is a domain. Every target element is $t/s$ with $s/1$ a unit; the unit-denominator fraction-equivalence node therefore identifies $\\operatorname{Frac}(T)$ with $\\operatorname{Frac}(D/\\mathfrak a)$ over $k$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-trf-unit-denominator-fraction-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization) and 00CT (proposition-localize-quotient); fraction-field comparison by the cited unit-denominator lemma"
+   }
+  },
+  {
+   "text": "Apply the dimension-at-point-components node to the finite type domain $T$ at $\\mathfrak r_T$. Its unique minimal prime is $(0)$, contained in $\\mathfrak r_T$, so $\\dim_{\\mathfrak r_T}\\operatorname{Spec}T=\\dim T$. The finite-type-domain node gives $\\dim T=\\operatorname{trdeg}_k\\operatorname{Frac}(T)$, finite. The local-ring dimension node gives, with finite terms, $\\dim_{\\mathfrak r_T}\\operatorname{Spec}T=\\dim T_{\\mathfrak r_T}+\\operatorname{trdeg}_k\\kappa_T(\\mathfrak r_T)$. Substituting the explicit identifications from the preceding step yields $\\dim(D/\\mathfrak a)+\\operatorname{trdeg}_k(D/\\mathfrak d)=\\operatorname{trdeg}_k\\operatorname{Frac}(D/\\mathfrak a)$; these are nonnegative finite integers. A ring isomorphism preserves prime chains, hence dimension; a field isomorphism over $k$ preserves algebraic independence and transcendence bases, hence transcendence degree. Taking both choices of $D$ proves the two asserted formulas and the finiteness of their terms.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00OT (lemma-dimension-at-a-point-finite-type-over-field), 00P0 (lemma-dimension-prime-polynomial-ring), 00P1 (lemma-dimension-at-a-point-finite-type-field)"
+   }
+  },
+  {
+   "text": "The map $A/\\mathfrak p\\to B/\\mathfrak q$ is injective because $f^{-1}(\\mathfrak q)=\\mathfrak p$, and extends to $E\\to H$ by $a/b\\mapsto f(a)/f(b)$. Locality similarly makes $A/\\mathfrak m\\to B/\\mathfrak n$, namely $K\\to L$, injective. Both maps respect $k$. Apply the tower node to $k\\to E\\to H$ and $k\\to K\\to L$: $\\operatorname{trdeg}_k H=\\operatorname{trdeg}_E H+\\operatorname{trdeg}_k E$ and $\\operatorname{trdeg}_k L=\\operatorname{trdeg}_K L+\\operatorname{trdeg}_k K$. Since their left sides are finite by step 5, both relative degrees are finite as well, and cardinal addition is ordinary addition here. Subtracting the two dimension formulas of step 5 in $\\mathbf Z$ gives $\\dim(B/\\mathfrak q)-\\dim(A/\\mathfrak p)=(\\operatorname{trdeg}_k H-\\operatorname{trdeg}_k E)-(\\operatorname{trdeg}_k L-\\operatorname{trdeg}_k K)=\\operatorname{trdeg}_E H-\\operatorname{trdeg}_K L$. This uses neither smoothness nor flatness of the component quotient map.",
+   "uses": [
+    "lem-sbc-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030H (lemma-transcendence-degree-tower), twice, followed by integer subtraction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-trf-unit-denominator-fraction-equivalence",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-sbc-transcendence-degree-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Combination of Tags 00HS, 00HR, 00E0, 00E3, 00CT, 00OT, 00P0, 00P1 and fields.tex Tag 030H; elementary localization reductions written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"minimalPrimes\"",
+   "results": "{\"t\": \"2026-10-22T06:42:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"minimalPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: going down, prime lifting, and the transcendence-degree tower are separate inputs; none states the dimension identity for minimal-prime quotients of local essentially finite type algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes|ringKrullDim.*trdeg|trdeg.*ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T06:42:13Z\", \"tool\": \"grep\", \"query\": \"minimalPrimes|ringKrullDim.*trdeg|trdeg.*ringKrullDim\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Noetherian.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean\", \"Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean\", \"Mathlib/RingTheory/Spectrum/Prime/LTSeries.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Basic.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\"], \"digest\": \"4edb4ac001a1ab47\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: going down, prime lifting, and the transcendence-degree tower are separate inputs; none states the dimension identity for minimal-prime quotients of local essentially finite type algebras."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-flat-local-component-dimension-difference: flat local homomorphism of essentially finite type local algebras dimension difference equals transcendence degree difference for each minimal component",
+   "results": "{\"t\": \"2026-10-22T06:42:13Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-flat-local-component-dimension-difference: flat local homomorphism of essentially finite type local algebras dimension difference equals transcendence degree difference for each minimal component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"lift_trdeg_le_of_surjective\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat\", \"IsTranscendenceBasis.lift_cardinalMk_eq_trdeg\", \"Module.Flat.of_isLocalizedModule\", \"trdeg_le_of_injective\", \"lift_trdeg_add_le\"], \"digest\": \"c9e4d70615c13286\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: going down, prime lifting, and the transcendence-degree tower are separate inputs; none states the dimension identity for minimal-prime quotients of local essentially finite type algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-flat-local-component-dimension-difference: a flat local map of local algebras essentially of finite type over a field maps minimal primes onto minimal primes, and quotient dimensions differ by fraction field transcendence degree minus residue field transcendence degree",
+   "results": "{\"t\": \"2026-10-22T06:42:24Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-flat-local-component-dimension-difference: a flat local map of local algebras essentially of finite type over a field maps minimal primes onto minimal primes, and quotient dimensions differ by fraction field transcendence degree minus residue field transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.ofLocalizationPrime\", \"instFlatAtPrime\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"RingHom.Flat.generalizingMap_comap\", \"Module.rankAtStalk_eq\", \"Ring.KrullDimLE.of_isLocalization\"], \"digest\": \"705b09dcb1732940\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: going down, prime lifting, and the transcendence-degree tower are separate inputs; none states the dimension identity for minimal-prime quotients of local essentially finite type algebras."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-flat-local-component-dimension-difference: dimension formula for minimal prime quotients of a faithfully flat local ring map with a fixed transcendence degree of each component function field extension",
+   "results": "{\"t\": \"2026-10-22T06:42:24Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-flat-local-component-dimension-difference: dimension formula for minimal prime quotients of a faithfully flat local ring map with a fixed transcendence degree of each component function field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"Ring.KrullDimLE.of_isLocalization\", \"Module.rankAtStalk_eq\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"Subalgebra.LinearDisjoint.rank_eq_one_of_flat_of_self_of_inj\", \"Algebra.IsStandardSmooth.relativeDimension\", \"lift_trdeg_add_eq\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\"], \"digest\": \"91bba6fd33fc7c57\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: going down, prime lifting, and the transcendence-degree tower are separate inputs; none states the dimension identity for minimal-prime quotients of local essentially finite type algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*trdeg|trdeg.*ringKrullDim|finrank.*trdeg|trdeg.*finrank",
+   "results": "{\"t\": \"2026-10-22T06:42:59Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*trdeg|trdeg.*ringKrullDim|finrank.*trdeg|trdeg.*finrank\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: going down, prime lifting, and the transcendence-degree tower are separate inputs; none states the dimension identity for minimal-prime quotients of local essentially finite type algebras."
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*trdeg|trdeg.*ringKrullDim|minimalPrimes.*comap",
+   "results": "{\"t\": \"2026-10-23T11:36:37Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*trdeg|trdeg.*ringKrullDim|minimalPrimes.*comap\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\", \"Mathlib/RingTheory/Unramified/Dedekind.lean\", \"Mathlib/RingTheory/Unramified/Dedekind.lean\"], \"digest\": \"d8558b095234ecfa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give flat going down, essential finite type residue maps, smooth dimension presentations, and transcendence bases, not the component dimension identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "local domain essentially of finite type over a field dimension plus residue field transcendence degree equals fraction field transcendence degree",
+   "results": "{\"t\": \"2026-10-23T11:36:37Z\", \"tool\": \"leansearch\", \"query\": \"local domain essentially of finite type over a field dimension plus residue field transcendence degree equals fraction field transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTranscendenceBasis.lift_cardinalMk_eq_trdeg\", \"IsTranscendenceBasis.cardinalMk_eq_trdeg\", \"Algebra.trdeg\", \"Algebra.EssFiniteType.mk\", \"trdeg_lt_aleph0\", \"Polynomial.trdeg_of_isDomain\", \"RingHom.EssFiniteType.residueFieldMap\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\"], \"digest\": \"53a880276376ecb4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give flat going down, essential finite type residue maps, smooth dimension presentations, and transcendence bases, not the component dimension identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"minimalPrimes\"",
+   "results": "{\"t\": \"2026-10-23T11:36:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"minimalPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give flat going down, essential finite type residue maps, smooth dimension presentations, and transcendence bases, not the component dimension identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat local map of essentially finite type local algebras over a field dimension difference of minimal components and transcendence degrees",
+   "results": "{\"t\": \"2026-10-23T11:36:38Z\", \"tool\": \"leanfinder\", \"query\": \"flat local map of essentially finite type local algebras over a field dimension difference of minimal components and transcendence degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.IsStandardSmooth.relativeDimension\", \"instFlatAtPrime\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RingHom.isStandardSmoothOfRelativeDimension_algebraMap\"], \"digest\": \"d6c931c850647442\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give flat going down, essential finite type residue maps, smooth dimension presentations, and transcendence bases, not the component dimension identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dimension formula local rings essentially of finite type over a field fraction field residue field transcendence degree",
+   "results": "{\"t\": \"2026-10-23T11:36:39Z\", \"tool\": \"leanfinder\", \"query\": \"dimension formula local rings essentially of finite type over a field fraction field residue field transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"IsLocalRing.finrank_quotient_map\", \"RingHom.EssFiniteType.residueFieldMap\", \"Ideal.finrank_quotient_map\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.IsAlgebraic.rank_fractionRing\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\"], \"digest\": \"2f874eff6ee52e16\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give flat going down, essential finite type residue maps, smooth dimension presentations, and transcendence bases, not the component dimension identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-local-tangent-cone-extension",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Tangent cone and minimal-prime dimensions of an essentially smooth local extension. Re-split of lem-trf-smooth-local-tangent-cone-extension: Agent combination of Tags 00OT (lemma-dimension-at-a-point-finite-type-over-field), 00P0 (lemma-dimension-prime-polynomial-ring), 00P1 (lemma-dimension-at-a-point-finite-type-field), 00HS (lemma-flat-going-down), 00HR (lemma-local-flat-ff), and fields.tex Tag 030H (lemma-transcendence-degree-tower); formerly steps 5, 7, and the dimension subtraction in step 9 of lem-trf-smooth-local-tangent-cone-extension.",
+   "via": [
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-local-component-dimension-difference",
+  "worker": "stage1",
+  "summary": "Six-step proof with no new nodes: derive contraction and surjectivity on minimal primes, give explicit finite-type localization and component quotient models, apply existing dimension formulas, and subtract two finite field-tower identities. Statement unchanged; all cited node statements read. No exact project attachment or Mathlib match found.",
+  "blueprint": "Historical nearby-duality/alteration support branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-smooth-local-tangent-cone-extension: realizes its former steps 5, 7 and dimension subtraction in step 9. The latest blueprint routes locality via contracting correspondences; this subsidiary algebra lemma makes no change to that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic localization and residue-field comparison supplies the finite-type local model; this unit has no such general localization theorem."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-components",
+    "why": "Generic 00OT theorem computes point dimension for a finite-type domain; used only as a commutative-algebra tool, not as a change to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Generic 00P0 dimension/transcendence-degree theorem supplies the finite function-field degree; the trace-formula unit does not state this algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic 00P1 field-algebra local dimension formula supplies the height/residue-degree decomposition; no replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-972df84ea",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-972df84ea (reviewer sub-agent of L); spot-checked: The delivery adds no new nodes, and the item statement, stmt_deps and source are unchanged. The statement still gives the citer lem-trf-smooth-local-tangent-cone-extension step 4 exactly what it uses: surjective contraction of minimal primes and the integer identity with k=Q. I read every cited statement in full and checked each step. Step 1: 00HS going down plus minimality shows contraction keeps minimal primes minimal. Step 2: 00HR's φ(m)⊆n follows from f^{-1}(n)=m; with 00E0(4) at I=0 this gives surjectivity on minimal primes. Step 3: localization-prime-residue-field-iso (2) gives C_r≅D_𝔡≅D as k-algebras; that node's blueprint_update only drops a citation bracket. Step 4: part (1) of the same node and 00CT (R=C, I=𝔞_0, p=r) give D/𝔞≅T_{r_T}. The hypotheses of the unit-denominator fraction node hold: T is a domain, T→T_{r_T} is injective, and denominators s/1 are units. Step 5: 00OT with the single minimal prime (0), 00P0 and 00P1 (read at algebra.tex l.28222) give the two formulas with finite terms. Step 6: the 030H tower applies to the induced injective maps E→H and K→L over k, and the subtraction is in Z. Small cases checked: k→k(x), k→k[x]_(x), k[t]_(t)→k[t,y]_(t), and k→(k[x,y]/(xy))_(x,y), where contraction is surjective but not bijective. DAG duplicate search found nothing that restates the item. The four sk-thm-p1 commutative-algebra nodes are off the route of sk-i-curve-zero; I accept them as the tool_uses the worker declared. No SGA; Stacks tags verified in tags/tags. No fixes."
+ }
+}

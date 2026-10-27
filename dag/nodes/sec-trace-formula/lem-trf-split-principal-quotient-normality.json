@@ -1,0 +1,241 @@
+{
+ "id": "lem-trf-split-principal-quotient-normality",
+ "kind": "statement",
+ "title": "Normality descent through a module-split principal quotient",
+ "statement": "Let $R,A$ be commutative rings with identity, let $\\iota:R\\to A$ be an injective identity-preserving ring homomorphism, and let $\\rho:A\\to R$ be additive with $\\rho(\\iota(r)a)=r\\rho(a)$ for every $r\\in R$, $a\\in A$, and $\\rho(\\iota(r))=r$ for every $r\\in R$. Thus $\\rho$ is a retraction linear for the $R$-module structure on $A$ induced by $\\iota$; multiplicativity of $\\rho$ is not assumed. For every $\\theta\\in R$, one has $\\iota^{-1}(\\iota(\\theta)A)=\\theta R$. The induced identity-preserving ring map $j:R/\\theta R\\to A/\\iota(\\theta)A$ is injective, and $\\bar\\rho:A/\\iota(\\theta)A\\to R/\\theta R$, $[a]\\mapsto[\\rho(a)]$, is a well-defined additive retraction of $j$, linear over $R/\\theta R$. If $A/\\iota(\\theta)A$ is a normal domain [def-weil-pbc-normal-ring], then $R/\\theta R$ is a normal domain as well, meaning a nonzero integral domain integrally closed in its fraction field. This includes $\\theta=0$: a ring embedded as a module direct summand in a normal domain is a normal domain.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent-formulated local-algebra lemma using normal domains as in Tag 0309 (definition-domain-normal); extracted from steps 4 and 6 of the returned split. Tag 0309 defines normality and does not assert this descent theorem. Motivation: ILO Expose VI 1.6(i)--(ii), printed p. 70, in literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "If $r=\\theta s$, then $\\iota(r)=\\iota(\\theta)\\iota(s)$ lies in $\\iota(\\theta)A$. Conversely, if $\\iota(r)=\\iota(\\theta)a$, apply $\\rho$ to obtain $r=\\theta\\rho(a)$. Thus $\\iota^{-1}(\\iota(\\theta)A)=\\theta R$. Write $B=R/\\theta R$ and $C=A/\\iota(\\theta)A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0309 (definition-domain-normal); agent adaptation of the fractional ideal argument in Tag 033G (lemma-descent-normal), replacing faithfully flat ideal contraction by the given linear retraction."
+   }
+  },
+  {
+   "text": "The formula $j([r])=[\\iota(r)]$ is a unital ring map: changing $r$ by $\\theta s$ changes its image by $\\iota(\\theta)\\iota(s)$. Its kernel is zero by step 1. If $a-a^{\\prime}=\\iota(\\theta)c$, then $\\rho(a)-\\rho(a^{\\prime})=\\theta\\rho(c)$, so $p=\\bar\\rho:C\\to B$, $[a]\\mapsto[\\rho(a)]$, is well defined and additive. Moreover $p(j([r])[a])=[r\\rho(a)]=[r]p([a])$ and $p(j([r]))=[r]$. These identities prove the asserted $B$-linearity and retraction property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0309 (definition-domain-normal); agent adaptation of the fractional ideal argument in Tag 033G (lemma-descent-normal), replacing faithfully flat ideal contraction by the given linear retraction."
+   }
+  },
+  {
+   "text": "Assume now that $C$ is a normal domain. Since $j$ is injective and unital, $B$ is nonzero ($1_B=0_B$ would imply $1_C=0_C$). If $bb^{\\prime}=0$, then $j(b)j(b^{\\prime})=0$; the domain property of $C$ and injectivity imply $b=0$ or $b^{\\prime}=0$. Thus $B$ is a domain. Apply [lem-weil-pbc-fraction-field-lift] to the injective composite $B\\xrightarrow{j}C\\hookrightarrow\\operatorname{Frac}(C)$. It gives an embedding $h:\\operatorname{Frac}(B)\\hookrightarrow\\operatorname{Frac}(C)$ with $h(a/b)=j(a)/j(b)$ for $b\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-fraction-field-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0309 (definition-domain-normal); agent adaptation of the fractional ideal argument in Tag 033G (lemma-descent-normal), replacing faithfully flat ideal contraction by the given linear retraction."
+   }
+  },
+  {
+   "text": "Let $x=a/b\\in\\operatorname{Frac}(B)$, $b\\ne0$, be integral over $B$, with $x^d+\\sum_{i<d}b_ix^i=0$. Applying the ring map $h$ gives $h(x)^d+\\sum_{i<d}j(b_i)h(x)^i=0$ in $\\operatorname{Frac}(C)$. This is a monic equation over $C$. Since $C$ is normal, [def-weil-pbc-normal-ring] gives $c\\in C$ with $h(x)=c$. Hence $j(a)=j(b)c$ in $\\operatorname{Frac}(C)$ and therefore in $C$, whose canonical inclusion in its fraction field is injective.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0309 (definition-domain-normal); agent adaptation of the fractional ideal argument in Tag 033G (lemma-descent-normal), replacing faithfully flat ideal contraction by the given linear retraction."
+   }
+  },
+  {
+   "text": "Apply the additive $B$-linear retraction $p$ of step 2 to $j(a)=j(b)c$. This yields $a=bp(c)$ in $B$, so $x=a/b=p(c)\\in B$. Every fraction integral over $B$ therefore belongs to $B$; by [def-weil-pbc-normal-ring], $B$ is a normal domain. The fractional argument only uses an injective unital ring map with an additive linear retraction, so apply that same argument directly to $R\\to A$ and $\\rho$ to prove the final assertion.",
+   "uses": [
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0309 (definition-domain-normal); agent adaptation of the fractional ideal argument in Tag 033G (lemma-descent-normal), replacing faithfully flat ideal contraction by the given linear retraction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fraction-field-lift",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0309 (definition-domain-normal); agent adaptation of the fractional ideal argument in Tag 033G (lemma-descent-normal), replacing faithfully flat ideal contraction by the given linear retraction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If R is a commutative subring of A with an R-linear retraction A to R, then R modulo theta embeds as a module direct summand in A modulo theta, and is a normal domain whenever the latter is a normal domain.",
+   "results": "8 hits; exists_integral_inj_algHom_of_quotient, KummerDedekind.quotMapEquivQuotQuotMap, Ideal.quotientEquivDirectSum, instFiniteDimensionalQuotientPolynomialIdealSpanSingletonSetSmithCoeffs, Ideal.Quotient.normal, KummerDedekind.quotMapEquivQuotQuotMap_symm_apply, Ideal.quotientRangePowQuotSuccInclusionEquiv, Ideal.quotientEquivPiSpan",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, LinearMap",
+   "results": "12 hits; Algebra.intTrace, Algebra.intTrace_eq_trace, Algebra.intTraceAux, Algebra.map_intTraceAux, Algebra.algebraMap_intTrace, Algebra.intTrace_eq_of_isLocalization, Algebra.algebraMap_intTrace_fractionRing, Algebra.trace_quotient_eq_of_isDedekindDomain",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "retract|split|[Pp]ure|of_injective",
+   "results": "5 hits; Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean, Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean, Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean, Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean, Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean; Mathlib/RingTheory/IntegralClosure",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normality descends from a normal domain to a module direct summand subring, and this linear splitting descends modulo any principal ideal from the subring.",
+   "results": "8 hits; Ideal.exists_smith_normal_form, Ideal.smithNormalForm, Ideal.quotientEquivDirectSum, Ideal.smithCoeffs, Ideal.quotientEquivPiSpan, PrincipalIdeals.normal, Submodule.quotientEquivPiSpan, Submodule.smithNormalFormOfLE",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module split subring of a normal domain is integrally closed; quotient the split extension by a principal ideal.",
+   "results": "8 hits; instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure, Ring.instIsIntegrallyClosedNormalClosure, IsIntegralClosure.module_free, Subring.isIntegrallyClosedIn_iff, instIsIntegralQuotientIdeal, instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure, IsIntegrallyClosed.of_isIntegrallyClosed_of_isIntegrallyClosedIn, instIsIntegrallyClosedSubtypeMemValuationSubring; Read IntegrallyClosed.lean:308: of_isIntegrallyClosed_of_isIntegrallyClosedIn additionally assumes IsIntegrallyClosedIn R S, which a module splitting does not supply (a proper field extension already shows the difference). It also does not supply the quotient retraction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]etract|[Pp]ure|[Ss]plit",
+   "results": "0 hits; ; Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, Ideal.Quotient",
+   "results": "0 hits; ; loogle: unknown identifier 'Ideal.Quotient'",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A domain R is integrally closed if and only if any fraction a/b satisfying a monic polynomial over R belongs to R; a subring split as a module in a normal domain is normal.",
+   "results": "8 hits: isIntegrallyClosed_iff, IsIntegrallyClosed, Ring.instIsIntegrallyClosedNormalClosure, isIntegrallyClosed_iff_isIntegrallyClosedIn, isIntegrallyClosed_iff_isIntegralClosure, IsIntegrallyClosed.isIntegral_iff, IsIntegrallyClosed.of_isIntegrallyClosedIn, Subring.isIntegrallyClosed_iff. Read the returned types and IntegrallyClosed.lean:308: the relative integral-closedness assumption is stronger than a linear retraction. The hits do not state quotient splitting or the descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegrallyClosed_iff|isIntegral.*(div|fraction)|of.*[Rr]etract|of.*[Ss]plit",
+   "results": "14 hits: Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean, Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean, Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean, Mathlib/RingTheory/IntegralClosure/IsIntegral/AlmostIntegral.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean; directory RingTheory/IntegralClosure. Read the returned types and IntegrallyClosed.lean:308: the relative integral-closedness assumption is stronger than a linear retraction. The hits do not state quotient splitting or the descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A domain is integrally closed if every fraction integral over the domain has numerator divisible by denominator.",
+   "results": "8 hits: IsIntegrallyClosedIn, IsIntegrallyClosed, instIsIntegrallyClosedInSubtypeMemSubringToSubringIntegralClosure, IsDedekindDomainInv.integrallyClosed, Subring.isIntegrallyClosedIn_iff, Ring.instIsIntegrallyClosedNormalClosure, instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure, IsIntegrallyClosedIn.inst. Read the returned types and IntegrallyClosed.lean:308: the relative integral-closedness assumption is stronger than a linear retraction. The hits do not state quotient splitting or the descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed",
+   "results": "12 hits: IsIntegrallyClosed, Field.instIsIntegrallyClosed, isIntegrallyClosed_iff_isIntegrallyClosedIn, IsIntegrallyClosed.instIsIntegralClosure, isIntegrallyClosed_iff_isIntegralClosure, IsIntegrallyClosed.of_isIntegrallyClosedIn, IsIntegrallyClosed.of_equiv, IsIntegrallyClosed.of_isIntegrallyClosed_of_isIntegrallyClosedIn. Read the returned types and IntegrallyClosed.lean:308: the relative integral-closedness assumption is stronger than a linear retraction. The hits do not state quotient splitting or the descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an inclusion of commutative rings has a linear retraction and the larger ring is an integrally closed domain, then the smaller ring is integrally closed. The retraction descends modulo any principal ideal.",
+   "results": "8 hits: IsIntegrallyClosed.of_isIntegrallyClosed_of_isIntegrallyClosedIn, IsIntegralClosure.of_isIntegralClosure_of_isIntegrallyClosedIn, AlgHom.isIntegrallyClosedIn, IsIntegrallyClosedIn.of_isIntegralClosure, IsIntegrallyClosed.of_isIntegrallyClosedIn, IsIntegralClosure.of_isIntegrallyClosedIn, IsIntegrallyClosedIn, Ring.instIsIntegrallyClosedNormalClosure. Read the returned types and IntegrallyClosed.lean:308: the relative integral-closedness assumption is stronger than a linear retraction. The hits do not state quotient splitting or the descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, LinearMap",
+   "results": "12 hits: Algebra.intTrace, Algebra.intTrace_eq_trace, Algebra.intTraceAux, Algebra.map_intTraceAux, Algebra.algebraMap_intTrace, Algebra.intTrace_eq_of_isLocalization, Algebra.algebraMap_intTrace_fractionRing, Algebra.trace_quotient_eq_of_isDedekindDomain. Read the returned types and IntegrallyClosed.lean:308: the relative integral-closedness assumption is stronger than a linear retraction. The hits do not state quotient splitting or the descent theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-saturation-normality",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry, through log-regular divisorial structure: the saturated completed local models in Expose VI 1.6(i)--(ii). Auxiliary quotient splitting and fractional-integrality argument for those models, extracted from old steps 4 and 6 of lem-trf-log-regular-saturation-normality.",
+   "via": [
+    "lem-trf-log-regular-saturation-normality",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-split-principal-quotient-normality",
+  "worker": "stage1",
+  "summary": "Proved principal-ideal contraction and the quotient ring injection and linear retraction explicitly; used the existing Mathlib fraction-field embedding leaf and a monic-equation calculation to descend normality. No new nodes, no statement changes, no flatness or multiplicativity assumption. Checked zero, unit and zero-divisor theta and a nonmultiplicative linear retraction.",
+  "blueprint": "Proof (1)--(2) of lem-trf-local-term-locality, nearby-duality alteration ancestry, through log-regular divisorial structure: the saturated completed local models in Expose VI 1.6(i)--(ii). Auxiliary quotient splitting and fractional-integrality argument for those models, extracted from old steps 4 and 6 of lem-trf-log-regular-saturation-normality.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-4b07494e7",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-4b07494e7 (reviewer sub-agent of L); spot-checked: I read all of it in full: the item, the stmt_dep/proof_deps statements (lem-weil-pbc-fraction-field-lift, a Mathlib leaf; def-weil-pbc-normal-ring), the parent citer lem-trf-log-regular-saturation-normality, and Stacks algebra.tex 0309 (l.7979) and 033G (l.46684, statement and proof). There are 0 new nodes and the statement is unchanged; it is true, being 'a module direct summand of a normal domain is normal' applied to the quotient pair. Step 1: r=θρ(a) follows from linearity and the retraction. Step 2: j and ρ̄ are well defined, j is injective, and ρ̄ is B-linear with ρ̄∘j=id. Step 3: B is a nonzero domain, and the fraction-field-lift hypotheses (domain source, field target, injective map) all hold. Step 4: applying h to the monic equation and using the normal-ring definition gives h(x)=c∈C, so j(a)=j(b)c in C. Step 5: applying ρ̄ gives a=bρ̄(c), and only additivity and linearity are used, never multiplicativity. The adaptation of 033G is faithful: the retraction takes the place of faithful flatness exactly where 033G uses it, and the proof is correctly marked agent-origin. Tested cases: θ=0; θ a unit; ℤ/6 with θ=2; ℤ⊂ℤ[t] with the nonmultiplicative retraction coeff0+coeff1 and θ=2; ℤ⊂ℤ[i]. All agree with the statement. No duplicate in the DAG (grep -R on direct summand/retraction/module-split combined with normal domain/integrally closed). proof_deps equals the union of uses, there is no cycle, and no SGA source is used. The parent uses the item exactly as stated. No tool_uses needed, because the off-unit dependency is a Mathlib leaf. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SplitPrincipalQuotientNormality",
+  "declaration": "RingHom.split_principal_quotient_normality",
+  "file": "lean/Sheaf/RingTheory/SplitPrincipalQuotientNormality.lean",
+  "statement": "theorem split_principal_quotient_normality {R : Type u} {A : Type v} [CommRing R] [CommRing A] (ι : R →+* A) (hι : Function.Injective ι) (ρ : A →+ R) (hlinear : ∀ (r : R) (a : A), ρ (ι r * a) = r * ρ a) (hretract : ∀ r : R, ρ (ι r) = r) (θ : R) : Ideal.comap ι (Ideal.span ({ι θ} : Set A)) = Ideal.span ({θ} : Set R) ∧ (∃ (j : (R ⧸ Ideal.span ({θ} : Set R)) →+* (A ⧸ Ideal.span ({ι θ} : Set A))) (p : (A ⧸ Ideal.span ({ι θ} : Set A)) →+ (R ⧸ Ideal.span ({θ} : Set R))), (∀ r : R, j (Ideal.Quotient.mk _ r) = Ideal.Quotient.mk _ (ι r)) ∧ Function.Injective j ∧ (∀ a : A, p (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ (ρ a)) ∧ Function.LeftInverse p j ∧ (∀ (b : R ⧸ Ideal.span ({θ} : Set R)) (c : A ⧸ Ideal.span ({ι θ} : Set A)), p (j b * c) = b * p c)) ∧ ((IsDomain (A ⧸ Ideal.span ({ι θ} : Set A)) ∧ IsIntegrallyClosed (A ⧸ Ideal.span ({ι θ} : Set A))) → IsDomain (R ⧸ Ideal.span ({θ} : Set R)) ∧ IsIntegrallyClosed (R ⧸ Ideal.span ({θ} : Set R))) ∧ ((IsDomain A ∧ IsIntegrallyClosed A) → IsDomain R ∧ IsIntegrallyClosed R)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f6461cb8",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read the item, its stmt_dep def-weil-pbc-normal-ring (IsDomain ∧ IsIntegrallyClosed), the fraction-field-lift proof dep, the module, the report (Worker report + Second reading present) and the citer lem-trf-log-regular-saturation-normality. Every clause matches: comap of span{ιθ} = span{θ}; ∃ j (ring hom, [r]↦[ιr], injective) and p (AddMonoidHom, [a]↦[ρa], left inverse of j, p(j b*c)=b*p c), both fixed by their formulas on representatives; normal-domain descent on the quotients; explicit θ=0 conjunct. ρ only additive+linear+retraction; independent universes u v; no extra assumptions. Edge cases checked: θ=0, θ a unit, θ a zero-divisor, zero rings, non-multiplicative ρ. No duplicate in Mathlib or Sheaf/WeilConjectures. lean.statement verbatim; docstrings carry source place, blueprint tag and proof steps; proof sorry only; no definitions. Live node lacks lean, so nothing landed in parallel. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T070722-L-3646732",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

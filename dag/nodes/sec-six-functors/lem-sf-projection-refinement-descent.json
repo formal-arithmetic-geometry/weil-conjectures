@@ -1,0 +1,242 @@
+{
+ "id": "lem-sf-projection-refinement-descent",
+ "kind": "statement",
+ "title": "Projection mates descend along non-Cartesian compactification refinements",
+ "statement": "Fix the finite-field datum $k_0=\\mathbf F_q$, $k=\\overline{k_0}$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$ and a uniformizer $t$; put $A_n=R/(t^n)$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Use the operation datum [def-fix-six-functor-datum], not a datum assuming projection invertibility. Schemes are finite type over $k$ and their structure morphisms need not be separated. Use the small pro-etale coefficient categories and the specified compactification projection map [def-exchange-projection], with compact-support functors [def-weil-integral-rational-qbar-compact-support]. Let $f:X\\to Y$ be separated of finite type, $K\\in D^b_c(X,A_n)$ arbitrary and $L\\in D^b_{ctf}(Y,A_n)$ [def-weil-finite-tor-amplitude]. For compactifications $c_i=(j_i,p_i)$ and a proper refinement $a:c_1\\to c_2$, put\n$$\\theta_a=R_{p_2}(\\gamma_a^{-1})c_{p_2,a}$$\nwith exactly the comparison of [def-sf-refinement-comparison-isomorphism]. The proper/open comparison $\\gamma_a$ uses the clopen-projection normalization of [lem-sf-proper-open-projection-mate], including non-Cartesian refinement squares. Then\n$$\\theta_{a,K\\otimes^LLf^*L}\\operatorname{PF}^{c_1}_{f,K,L}=\\operatorname{PF}^{c_2}_{f,K,L}(\\theta_{a,K}\\otimes1_L).$$\nBoth $K$ and $K\\otimes^LLf^*L$ are bounded constructible and admit etale-origin witnesses; hence the compactification comparisons apply to both, without imposing finite Tor amplitude on $K$. The common-refinement cocycle [prop-compactification-coherence-detailed] makes these maps descend to a natural transformation independent of compactification. The local equality used here also holds before evaluation for actual semilinear-system proper/open maps in [lem-sf-integral-compactification-system-realization]; it is an equality of system composites, without detecting maps from their finite evaluations.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Concrete repair of fix-prop-projection-formula, former proof step(s) 8, 9; Tags 0F7B and 0F7G: refinement normalization and tensor compatibility"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-fix-six-functor-datum",
+  "def-exchange-projection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-finite-tor-amplitude",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-sf-proper-open-projection-mate",
+  "prop-compactification-coherence-detailed",
+  "lem-sf-integral-compactification-system-realization",
+  "def-sf-projection-refinement-domains",
+  "lem-sf-refinement-projection-counit"
+ ],
+ "proof": [
+  {
+   "text": "Apply tensor_and_origins. Its first clause supplies origins for K and, after its tensor-closure clause, for T=K tensor Lf*L. These are precisely the three domain assertions of finite_descent.",
+   "uses": [
+    "lem-sf-projection-refinement-inputs"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use refinement_square for every proper refinement. The witnessed normalized comparison family and its cocycle are supplied by comparison_cocycle.",
+   "uses": [
+    "lem-sf-projection-refinement-square",
+    "lem-sf-projection-refinement-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a base compactification and restrict its actual projection natural transformation to the full pair domain to define tau. For any other compactification take a common refinement and apply the single-refinement square to both legs. Precompose with the tensor of the first comparison, use that square and cancel its inverse on T, then use the second square. Functoriality cancels the inverse comparison on K. The normalization of rho identifies these composites with the two components of rho(c,c0), proving the displayed tau equation. No projection arrow is inverted. The cancellation is proved first as a private generic coefficient-ring identity and then specialized, retaining the exact native projection components.",
+   "uses": [
+    "lem-sf-projection-refinement-square",
+    "lem-sf-projection-refinement-comparisons",
+    "prop-compactification-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The intrinsic system theorem is the existing properOpenProjectionMateSystems specialized to the same refinement square with identity left proper map. It retains all identity pull/push and composition comparisons and is an equality in the actual semilinear-system category before evaluation. The realizations remain those of IntegralCompactificationSystemRealization, without enlarging their common-bound or etale-origin domain.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-proper-open-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Same local clopen-normalized mate identity on ringed diagram sites; intrinsic system assertion, not detection by evaluation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-projection-refinement-inputs",
+  "lem-sf-projection-refinement-square",
+  "lem-sf-projection-refinement-comparisons",
+  "prop-compactification-refinement",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-proper-open-projection-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "U1: tensor closure from proved constructible projection domains, origins from the finite-ring origin theorem, comparison extension by full faithfulness, directed refinement square from refinementProjectionCounit plus witness/compositor normalization, and common-refinement descent by cancellation. The intrinsic system specialization is unchanged. Native projection maps are written using the existing definitionally identical finiteProjection API; generic coefficient wrappers share categorical instances before concrete coefficient substitution."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Counit projection maps commute with compactification refinement comparisons for derived sheaves",
+   "results": "OK 8 hits: CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counitApp_app, CompHausLike.LocallyConstant.counitAppApp, CompHausLike.LocallyConstant.incl_of_counitAppApp, CompHausLike.LocallyConstant.counitApp, CategoryTheory.constantSheafAdj_counit_w, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.adjunction_counit",
+   "date": "2026-10-22",
+   "verdict": "No match: these hits do not state the derived pro-etale compactification refinement identity or its system-level clause."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementComparison.*projection|projection.*refinementComparison|properOpen.*tensor|compactification.*projection",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No match: these hits do not state the derived pro-etale compactification refinement identity or its system-level clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural projection formula transformation compatible with proper open interchange and composition of adjunctions",
+   "results": "OK 8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans, CategoryTheory.Abelian.LeftResolution.π_naturality, CategoryTheory.Abelian.LeftResolution.π_naturality_assoc, CategoryTheory.sheafComposeNatTrans, CategoryTheory.CategoryOfElements.map_π, CategoryTheory.Limits.Types.Limit.map_π_apply, IsOpenMap.adjunction, CategoryTheory.Abelian.LeftResolution.π",
+   "date": "2026-10-22",
+   "verdict": "No match: these hits do not state the derived pro-etale compactification refinement identity or its system-level clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"mate\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No match: these hits do not state the derived pro-etale compactification refinement identity or its system-level clause."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-prop-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof: Tags 0F7B and 0F7G: refinement normalization and tensor compatibility; extracted former concrete step(s) 8, 9",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-projection-refinement-descent",
+  "worker": "stage1",
+  "summary": "Proved domain eligibility without Tor amplitude on K, specialized the existing non-Cartesian proper/open tensor identity, expanded the specified projection map and canceled the exact refinement comparisons. Descended by the existing cocycle and checked the intrinsic system identity. No new nodes or statement changes. Reviewer fix (Q76 maintainer reader): inserted step 4 identifying the clopen mate gamma_a with the witnessed proper/open map of def-sf-refinement-comparison-isomorphism.",
+  "blueprint": "fix-prop-projection-formula proof: refinement normalization and tensor compatibility, extracted former steps 8 and 9. The current source delegates refinement to prop-sf-pf-coherence; this split supplies the explicit local equation and its assembly.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Generic Finite Tor amplitude under the site comparison used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-sf-etale-tor-flat-pullback-model",
+    "why": "Generic Etale finite-Tor flat models with their termwise geometric pullback used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-sf-bounded-one-sided-tensor-realization",
+    "why": "Generic Bounded signed total realization with a supplied one-sided flat factor used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic Comparison inverse image commutes with scheme pullback used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-preserves-bounded-constructible",
+    "why": "Generic Pullback preserves bounded constructibility used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-pur-finite-tensor-constructible-cohomology",
+    "why": "Generic Finite-level derived tensor has constructible cohomology without a boundedness claim used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic Tensor and composition coherence of ringed-topos projection maps used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic Compactification coherence used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic Coherent integral realization of compactification expressions and their maps used exactly as stated for domain preparation, projection composition or the common-refinement cocycle; this unit has no separate such lemma."
+   },
+   {
+    "node": "lem-sf-proper-open-comparison-site-normalization",
+    "why": "Step 4: the stated equation writing the pro-etale proper/open map as the transport of the etale one; no node of this remark unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-proper-open-comparison-proetale",
+    "why": "Step 4: names the pro-etale map alpha_a(L) used in part (a) of def-sf-refinement-comparison-isomorphism; generic black box."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Step 4: refinement clause identifying the etale alpha_a with the normalized proper/open comparison; generic black box."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Step 4: levelwise evaluation of the clopen-projection mate as the transported finite comparison; generic black box."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-compactification-coherence-detailed",
+  "lem-sf-integral-compactification-system-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-96b3201c4",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-96b3201c4 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps and every cited statement in full. Also read Stacks 0F7B (lemma-shriek-proper-and-open), 0F7G (lemma-shriek-lqf-and-proper) and the main-20261015 source fix-prop-projection-formula.proof.md, which only delegates refinement to prop-sf-pf-coherence. No new nodes; statement unchanged; no repair note covers this node (it was created by the Q132 re-split). Checks: A_n=R/t^n is a valid P_n (R Noetherian, R/t^n finite and perfect). Steps 1-3 bound T in [r+u,s+v] with an etale witness, using no Tor condition on K. Step 5's substitution into lem-sf-proper-open-projection-mate is well typed: square (X,X̄1,X,X̄2), s=(j1,id) is clopen, not Cartesian. I redid step 6's algebra: composition identity with (f,g)=(a,p2), compositor naturality, cancellation to θ_T PF^{c1}=PF^{c2}(θ_K⊗1); the directions match def-sf-refinement-comparison-isomorphism(b). Step 7 descends correctly via the common-refinement cocycle. Step 8 is the system clause of the mate lemma, with no inference from evaluations. Fault (C4/C1), fixed: no step proved that the item's clopen mate γ_a equals the witnessed α_a of def-sf-refinement-comparison-isomorphism, yet step 3 (invertibility) and step 7 (descent through prop-compactification-coherence) depend on it. I inserted a new step 4 using lem-sf-proper-open-comparison-site-normalization, lem-weil-pbc-proper-open-comparison-proetale, def-weil-pbc-proper-open-comparison, the refinement clause of lem-cbc-proper-open-interchange-coherence, lem-cbc-strict-tower-proper-open-calculus (constant tower), lem-sf-proper-open-projection-mate and naturality along the witness, applied to K and to T. Step references are renumbered, proof_deps recomputed, the four off-unit tools added to split_report.tool_uses; no cycle. Edge cases checked: identity refinement, K=0, L=0, empty X, the non-Cartesian fold refinement pt⊔pt→pt, and K=R/t over R/t^2 with infinite Tor amplitude. Maintainer note: the item overlaps reviewed nodes. lem-pur-pf-refinement-compatibility has the same equation for separated X,Y; lem-fix-projection-compactification-comparison covers the A_n case for any two compactifications. Consider merging, or pointing fix-prop-projection-formula at the existing node. Fixed file: fixes/dag/nodes/sec-six-functors/lem-sf-projection-refinement-descent.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProjectionRefinementDescent",
+  "declaration": "WeilConjectures.ProjectionRefinementDescent.finite_descent",
+  "declarations": [
+   "WeilConjectures.ProjectionRefinementDescent.finite_descent",
+   "WeilConjectures.IntegralSystemRealization.projectionRefinementSystems"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ProjectionRefinementDescent.lean",
+  "statement": "theorem finite_descent (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra ℚ_[C.l] E] [FiniteDimensional ℚ_[C.l] E]\n    (n : ℕ) (_S : SixFunctorOperationDatum D C E (n + 1) (Nat.succ_pos n))\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :\n    (∀ (K : (boundedConstructible C.l E n X).FullSubcategory)\n      (L : (finiteTor C.l E n Y).FullSubcategory),\n      boundedConstructible C.l E n X (tensorInput C.l E n f K.obj L.obj) ∧\n      (∃ O : RefinementFiniteLevelOrigin C.l E (n + 1) (Nat.succ_pos n) X,\n        Nonempty (refinementFiniteLevelFixedObject C.l E (n + 1) (Nat.succ_pos n) X O ≅\n          K.obj)) ∧\n      (∃ OT : RefinementFiniteLevelOrigin C.l E (n + 1) (Nat.succ_pos n) X,\n        Nonempty (refinementFiniteLevelFixedObject C.l E (n + 1) (Nat.succ_pos n) X OT ≅\n          tensorInput C.l E n f K.obj L.obj))) ∧\n    (∀ (c d : Compactification f) (r : c.Refinement d)\n      (K : (boundedConstructible C.l E n X).FullSubcategory)\n      (L : (finiteTor C.l E n Y).FullSubcategory),\n      refinementLaw C.l E n c d r K L) ∧\n    ∃ rho : ∀ c d : Compactification f,\n        (boundedConstructible C.l E n X).ι ⋙ image C.l E n c ≅\n          (boundedConstructible C.l E n X).ι ⋙ image C.l E n d,\n      (∀ (c d b : Compactification f) (r : b.Refinement c) (s : b.Refinement d)\n        (K : (boundedConstructible C.l E n X).FullSubcategory)\n        (O : RefinementFiniteLevelOrigin C.l E (n + 1) (Nat.succ_pos n) X)\n        (e : refinementFiniteLevelFixedObject C.l E (n + 1) (Nat.succ_pos n) X O ≅ K.obj),\n        (rho c d).app K = (theta C.l E n r K.obj O e).symm ≪≫\n          theta C.l E n s K.obj O e) ∧\n      (∀ c d b : Compactification f, rho c d ≪≫ rho d b = rho c b) ∧\n      ∀ c₀ : Compactification f,\n        ∃ tau : source C.l E n c₀ ⟶ target C.l E n c₀,\n          ∀ (c : Compactification f)\n            (K : (boundedConstructible C.l E n X).FullSubcategory)\n            (L : (finiteTor C.l E n Y).FullSubcategory)\n            (hT : boundedConstructible C.l E n X (tensorInput C.l E n f K.obj L.obj)),\n          coefficientProjectionComponent (Coefficient C.l E n) c K.obj L.obj ≫\n            (rho c c₀).hom.app ⟨tensorInput C.l E n f K.obj L.obj, hT⟩ =\n          ((ProperOpenTensor (Coefficient C.l E n) Y).map ((rho c c₀).hom.app K)).app\n              L.obj ≫ tau.app (K, L)",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite descent, domain preparation and intrinsic system refinement identity. Positive coefficient levels are indexed by n+1; fixed-scalar categories and all normalized comparisons are the recorded canonical realizations, with no additional Tor condition on K or separatedness of scheme structure maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b07423f5f",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Read node, all 10 stmt_deps, module, report, dependency sources (RefinementComparisonIsomorphism, FiniteTorAmplitude, IntrinsicFiniteTorsionConstructibility, SfIntrinsicRealizationTransport, ProperOpenProjectionMate, upstream Refinement and projectionMapOfCompactification) and the landed precedent FixProjectionCompactificationComparison. Every clause matches: finite field/coefficient data with n+1 indexing; operation datum without projection invertibility; non-separated structure maps; K arbitrary D^b_c and only L finite Tor; theta = image(e^-1) then refinementComparisonAtWitness then image(e), which is definitionally the def's refinementComparisonIsomorphism, direction c to d; domain conjunct concludes T in D^b_c with witnesses for K and T; refinementLaw is PF_c then theta_T = (theta_K tensor L) then PF_d for every witness; descent gives rho normalized on common refinements with cocycle, and tau is a NatTrans forced to PF at c0; system clause is properOpenProjectionMateSystems at r = identity, an equality in System with no evaluation. Node changed only in lean; statement verbatim; no hollow defs; two sorry proofs; docstrings and proof steps present; lines at most 98 characters; no name clash; edge cases and universes OK. Advisory: intrinsicFiniteTorsionConstructible and sfIntrinsicDerivedEquivalence come in via def-weil-finite-tor-amplitude, as in the landed precedent; overlap with lem-fix-projection-compactification-comparison was already flagged by the stage-1 reviewer. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "independent cc review: finite_descent proof, the moved ProjectionRefinementData declarations (spellings that unfold to the old ones) and the new hole normalized_refinement_inverse, against node lem-sf-projection-refinement-descent, the change record, the 5 new nodes and the published clone; importers FiniteProjectionFromDescent and FiniteProjectionCompactificationSquare compiled OK against the delivered modules"
+ }
+}

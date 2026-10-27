@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-finite-locally-free-fibre-scheme-neighbourhood",
+ "kind": "statement",
+ "title": "Affine fibre neighbourhoods detect scheme neighbourhoods under finite locally free covers",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $E,B$ be algebraic spaces over $S$ [def-trf-algebraic-space], and let $p:E\\to B$ be representable, surjective and finite locally free: for every scheme $T\\to B$, the sheaf fibre product $E\\times_BT$ [lem-trf-space-fibre-products-etale-covers] is a scheme and its projection to $T$ is surjective and finite locally free [def-pc-finite-locally-free]. Give spaces the atlas point topology [def-a1-space-point-topology]. For each $b\\in|B|$, the following are equivalent: (i) there is an open subspace $N\\subseteq B$ [def-a1-space-open-subspace] containing $b$ and represented by a scheme; (ii) there is an open subspace $A\\subseteq E$ represented by an affine scheme [def-weil-affine-spectrum] whose point set contains the entire inverse image $|p|^{-1}(\\{b\\})$. No separatedness, Noetherianity, quasi-compactness, or schemeness assumption is imposed on $B$ or $E$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0BA1 (lemma-when-quotient-scheme-at-point), full equivalence; unlike spaces-over-fields.tex Tag 0B87 this needs no group action."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-finite-locally-free",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Assume (i). Choose an affine open $V$ of the scheme $N$ containing $b$, using the local affine condition in the definition of a scheme [def-pc-scheme]. An open subscheme of $N$ is an open subspace of $B$: on each scheme test it is an open subscheme of an open subscheme. By the hypothesis on $p$, $A=E\\times_BV$ is a scheme and $A\\to V$ is finite locally free [def-pc-finite-locally-free], hence finite. A finite morphism is affine [def-weil-finite-integral-morphism], and an affine morphism has affine inverse image of an affine open [pqf-def-affine-morphism]; apply this to the whole affine target $V$. Thus $A$ is affine. By [lem-a1-space-open-factor-scheme-tests], $A$ is open in $E$ with point set $|p|^{-1}(|V|)$, which contains the full fibre over $b$. This proves (ii).",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-finite-locally-free",
+    "def-weil-finite-integral-morphism",
+    "pqf-def-affine-morphism",
+    "lem-a1-space-open-factor-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BA1 (lemma-when-quotient-scheme-at-point), proof, first paragraph: (i) implies (ii)"
+   }
+  },
+  {
+   "text": "Assume (ii), and set $C=|E|\\setminus|A|$. Since $A$ is an open subspace, $|A|$ is an open subset of $|E|$ [lem-a1-space-point-open-calculus], so $C$ is closed. The map $p$ is finite on scheme tests by [def-pc-finite-locally-free]. Its point map is closed by [lem-sfb-finite-space-morphism-topology], so $O=|B|\\setminus|p|(C)$ is open. The full-fibre hypothesis gives $b\\in O$. Choose a scheme atlas of $B$ using [def-trf-algebraic-space]. Applying [lem-a1-space-invariant-open-quotient] to this atlas and $O$ produces an open subspace $N\\subseteq B$ with $|N|=O$. For any point $e$ of $E$ mapping into $O$, $e\\notin C$, since otherwise $p(e)\\in|p|(C)$. Hence $|p|^{-1}(|N|)\\subseteq|A|$. This complement-image construction directly gives the saturated shrinking in the source.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-sfb-finite-space-morphism-topology",
+    "lem-a1-space-point-open-calculus",
+    "def-trf-algebraic-space",
+    "lem-a1-space-invariant-open-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BA1 (lemma-when-quotient-scheme-at-point), proof, second paragraph: saturated open shrinking"
+   }
+  },
+  {
+   "text": "Put $W=E\\times_BN$. By [lem-a1-space-open-factor-scheme-tests] it is open in $E$ and has point set $|p|^{-1}(|N|)$. The inclusion of this set in $|A|$ makes $W\\to E$ factor through $A$, and the pullback to $A$ is $W$ itself by that same cited statement. Since the inclusion of $W$ is representable by open immersions [def-a1-space-open-subspace], $W$ is therefore a scheme isomorphic to an open subscheme of the affine scheme $A$. For every scheme $T\\to N$, the fibre product $W\\times_NT$ is canonically $E\\times_BT$ by its universal property. Its projection to $T$ is surjective and finite locally free by the original hypothesis on $p$. Surjectivity on every scheme base change is equivalent to surjectivity of $|W|\\to|N|$ on point classes [lem-a1-space-point-open-calculus], which is the form of surjectivity the next citation assumes. Thus $W\\to N$ satisfies every hypothesis of [lem-sfb-finite-locally-free-open-affine-cover], which makes $N$ a scheme. Since $b\\in|N|$, (i) follows.",
+   "uses": [
+    "lem-a1-space-open-factor-scheme-tests",
+    "def-a1-space-open-subspace",
+    "lem-sfb-finite-locally-free-open-affine-cover",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BA1 (lemma-when-quotient-scheme-at-point), proof, second and third paragraphs: open affine-source restriction and scheme descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-pc-finite-locally-free",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-finite-locally-free-open-affine-cover",
+  "lem-sfb-finite-space-morphism-topology",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0BA1 (lemma-when-quotient-scheme-at-point), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective finite locally free morphism of algebraic spaces a point of the target has a scheme open neighbourhood if an affine open upstairs contains its entire fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being surjective for morphisms of schemes is Zariski local at the target. That is, if a morphism $ f: X \\\\to Y $ is surjective, then for any Zariski covering sieve on $ Y $, there exist\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes having surjective induced maps on stalks is Zariski-local at the source, meaning it can be checked locally on an open cover of the source scheme.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [AlgebraicGeometry.IsClosedImmersion f],\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app f U))\", \"doc\": \"Let $f: X \\\\to Y$ be a closed immersion of schemes, and let $U$ be an affine open subset of $Y$. Then the canonical ring homomorphism from the ring of sections of the structure sheaf of $Y$ over $U$ to\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.iff_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.SurjectiveOnStalks f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).SurjectiveOnStalks\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is surjective on stalks if and only if the corresponding ring homomorphism between their global sections is surjective on stalks.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schematic locus of the quotient by a finite locally free equivalence relation detected by affine neighbourhoods of fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFiniteType f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n         \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite type if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ with $ f(V) \\\\subseteq U $, t\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X.Hom (AlgebraicGeometry.Spec A)) →\\n      (I : Ideal ↑A) →\\n        I ≤\\n            RingHom.ker\\n              (CommRingCat.Hom.hom\\n                (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)) →\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Finite\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schematic[Ll]ocus|scheme[Ll]ocus",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine neighbourhood of a fibre of a finite flat surjection of algebraic spaces gives a scheme neighbourhood downstairs",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsAffineHom f] (y : Y) : IsAffine (f.fiber y)\", \"doc\": \"For any affine morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(𝒰 : Y.OpenCover) [∀ i, IsAffine (𝒰.X i)] : P f ↔ ∀ i, Q (𝒰.pullbackHom f i)\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes, and let $ \\\\mathcal{U} $ be an open cover of $ Y $ such that each $ \\\\mathcal{U}_i $ is affine. Then $ f $ has the affine property if and only if for every in\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|schematic[Ll]ocus|scheme[Ll]ocus",
+   "results": "{\"t\": \"2026-10-23T14:57:07Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|schematic[Ll]ocus|scheme[Ll]ocus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned signatures concern schemes, scheme covers, affine scheme morphisms or flat scheme quotient maps; none gives schematic neighbourhood descent for an algebraic-space target"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic locus of the quotient by a finite flat equivalence relation detected by affine neighbourhoods of fibres",
+   "results": "{\"t\": \"2026-10-23T14:57:07Z\", \"tool\": \"leansearch\", \"query\": \"Schematic locus of the quotient by a finite flat equivalence relation detected by affine neighbourhoods of fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\"], \"digest\": \"34be59e08d34f6c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned signatures concern schemes, scheme covers, affine scheme morphisms or flat scheme quotient maps; none gives schematic neighbourhood descent for an algebraic-space target"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Finite\"",
+   "results": "{\"t\": \"2026-10-23T14:57:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"Finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned signatures concern schemes, scheme covers, affine scheme morphisms or flat scheme quotient maps; none gives schematic neighbourhood descent for an algebraic-space target"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free surjection of algebraic spaces a point has a scheme open neighbourhood if and only if its full inverse image is contained in an affine open",
+   "results": "{\"t\": \"2026-10-23T14:57:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite locally free surjection of algebraic spaces a point has a scheme open neighbourhood if and only if its full inverse image is contained in an affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.isAffineHom_of_forall_exists_isAffineOpen\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.Scheme.Hom.finite_app\"], \"digest\": \"d0bcd6c31045822c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned signatures concern schemes, scheme covers, affine scheme morphisms or flat scheme quotient maps; none gives schematic neighbourhood descent for an algebraic-space target"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient algebraic space by a finite locally free cover is a scheme near a point when the fibre has a common affine neighbourhood",
+   "results": "{\"t\": \"2026-10-23T14:59:16Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient algebraic space by a finite locally free cover is a scheme near a point when the fibre has a common affine neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\"], \"digest\": \"ce05e4de61cf54c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned signatures concern schemes, scheme covers, affine scheme morphisms or flat scheme quotient maps; none gives schematic neighbourhood descent for an algebraic-space target"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-affine-neighbourhood-scheme-descent",
+  "date": "2026-10-23",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: descent: Tag 0B8F proof, third input 0B88; descend the scheme using the finite-point affine condition. Auxiliary for the present split: final affine-fibre descent of Tag 0B88, using the finite locally free criterion instead of its Galois specialization.",
+   "via": [
+    "lem-sfb-geometric-affine-neighbourhood-scheme-descent",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-locally-free-fibre-scheme-neighbourhood",
+  "worker": "stage1",
+  "summary": "Proved both directions of Tag 0BA1 with no statement change and no new nodes. Saturated shrinking is the complement of the closed image of the affine complement. Reused the existing open-affine-source finite locally free descent criterion; every restricted scheme test is the original test for p.",
+  "blueprint": "Current latest sk-thm-sf-ctf-stability/_section.md read. This is the supporting Tag 0BA1 descent input in the historical det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli/Picard chain named in blueprint.from.place. Steps 1-3 realize Tag 0BA1 paragraphs 1-3. blueprint_refs.py ancestor returns None; retained the existing null from.node and explicit place/via chain. Whole-blueprint searches for 0BA1, finite flat equivalence and affine quotient found no duplicate blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Generic open-subspace pullback and point-image factorization; applies to arbitrary algebraic spaces, without replacing the unit route."
+   },
+   {
+    "node": "lem-a1-space-invariant-open-quotient",
+    "why": "Generic construction of the open subspace for an open point subset via an etale atlas; the unit has no separate statement of this topology interface."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point calculus of algebraic spaces: an open subspace has open point image, and surjectivity on scheme base changes equals point surjectivity; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-3cdaeaa43",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-3cdaeaa43 (reviewer sub-agent of L); spot-checked: FIX. I read the item and all three proof steps in full, the statement of every cited node, and Stacks decent-spaces.tex Tag 0BA1 (lemma-when-quotient-scheme-at-point, l.2157-2210). This is the first split: live and side-live have the item unsplit and there is no repair note. The statement is unchanged and matches 0BA1 hypothesis by hypothesis. Step 1 ((i)⇒(ii)): the preimage of an affine V under a finite locally free map is finite, hence affine (def-weil-finite-integral-morphism, pqf-def-affine-morphism), and lem-a1-space-open-factor-scheme-tests gives an open subspace containing the whole fibre over b; marking the step elementary is acceptable. Step 2: the complement-of-closed-image shrinking via lem-sfb-finite-space-morphism-topology (whose finite-on-scheme-tests hypothesis p meets) and lem-a1-space-invariant-open-quotient is valid and replaces Stacks' t(Z)/fppf-openness argument correctly. Step 3: W=E×_B N is an open subscheme of the affine A by the factorization clause plus def-a1-space-open-subspace, and W×_N T≅E×_B T, so lem-sfb-finite-locally-free-open-affine-cover (07S6 packaged, strictly smaller than the item, no cycle) shows N is a scheme. Fault (C1/C4), fixed: step 2 needs |A| open in |E|, and step 3 needs point surjectivity, which is the form the cited descent node assumes; neither was cited. I added lem-a1-space-point-open-calculus to steps 2 and 3, to proof_deps and to split_report.tool_uses. The tool uses of the generic lem-a1 algebraic-space point/open interfaces are accepted. Batch-5 check: the three flagged citations reach sec-trace-formula only through def-trf-algebraic-space and foundational fibre-product, étale-quotient and fppf-descent nodes. These are general algebraic-space foundations, not steps of the trace formula or of Poincaré duality, so no assumption leaf is needed. Duplicate search over the DAG for 0BA1/0B88/07S6 and schematic locus found no duplicate statement. Small cases checked: B empty, p=id, fibres with several points, W not quasi-compact. No SGA is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeFibreSchemeNeighbourhood",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finiteLocallyFree_fibre_scheme_neighbourhood_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeFibreSchemeNeighbourhood.lean",
+  "statement": "theorem finiteLocallyFree_fibre_scheme_neighbourhood_iff {S : Scheme.{u}} (E B : AlgebraicSpace S) (p : E ⟶ B) (hp : IsRepresentableWith (fun _ _ q ↦ Surjective q.left ∧ q.left.IsFiniteLocallyFree) p.hom.hom) (b : Point B.obj.obj) : (∃ N : OpenSubspace B, b ∈ pointImage N.val.ι ∧ ∃ T : Over S, Nonempty (N.val.toFunctor ≅ yoneda.obj T)) ↔ (∃ A : OpenSubspace E, (∃ T : Over S, IsAffine T.left ∧ Nonempty (A.val.toFunctor ≅ yoneda.obj T)) ∧ ∀ e : PointRepresentative E.obj.obj, Quot.mk _ (e.map p.hom.hom) = b → Quot.mk _ e ∈ pointImage A.val.ι)",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The scheme-test hypothesis uses IsRepresentableWith with the conjunction of scheme surjectivity and the recorded IsFiniteLocallyFree class. Both open subspaces use the recorded OpenSubspace definition; schemeness is Yoneda representability and affineness is IsAffine on the representing scheme. The full-fibre condition is expressed on all field-valued point representatives, avoiding a second definition of the point map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b29b408e",
+  "group": "Q28",
+  "result": "fix",
+  "note": "Lean exact vs node and Stacks 0BA1: hp = IsRepresentableWith(Surjective ∧ IsFiniteLocallyFree) on every scheme test (representability implicit in Stacks' finite locally free morphism of spaces); (i) ∃ OpenSubspace N, b ∈ pointImage N.ι, N ≅ yoneda T; (ii) ∃ OpenSubspace A ≅ yoneda T with IsAffine T.left and ∀ PointRepresentative e, [p∘e]=b → [e] ∈ pointImage A.ι (= full fibre, class-invariant); ↔ scopes right; no extra assumptions; universes u/u+1 bound; edge cases B empty, E empty, p=id, multi-point fibres OK; no new definitions, no existing 0BA1 found (IsRepresentedByScheme is for based categories only); node differs from live only by lean record; lean.statement verbatim; docstrings with source, blueprint id and 3 proof steps; proof sorry. Sole fault H11: the 'Second reading by Q28' is the author's same-session rereading → FIX fixes/lem-sfb-finite-locally-free-fibre-scheme-neighbourhood.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean changed, nothing compiled."
+ }
+}

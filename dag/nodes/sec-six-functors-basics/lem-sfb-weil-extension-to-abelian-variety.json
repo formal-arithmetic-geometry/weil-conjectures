@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-weil-extension-to-abelian-variety",
+ "kind": "statement",
+ "title": "Weil extension of rational maps to an abelian variety",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a nonempty integral separated $k$-scheme of finite type [def-pc-integral-scheme, def-weil-pbc-scheme-conventions] smooth over $k$ [def-sbc-smooth-morphisms], and let $B/k$ be an abelian variety [def-sc-abelian-variety]. Let $U\\subseteq X$ be a dense open subscheme, and let $f:U\\to B$ be a $k$-scheme morphism. There exists a unique $k$-scheme morphism $\\overline f:X\\to B$ whose restriction to $U$ is $f$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "8.18, printed p.152 (combine 8.16 and 8.17). Uniqueness is the separated-target equality principle on an integral source. This is the extension theorem, not extension to an arbitrary proper target."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-sc-abelian-variety"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-smooth-geometrically-normal], with the identity field extension $k/k$, $X$ is regular and all its local rings are normal domains. By [def-weil-regular-scheme], it is locally Noetherian and its local rings are Noetherian. Its structure map is quasi-compact by [def-weil-finite-type-morphism], so $X$ is Noetherian. By [def-pc-integral-scheme] $X$ is reduced and irreducible. By [def-sc-abelian-variety], $B$ is a proper smooth connected group scheme, hence separated and of finite type by [def-weil-proper-morphism]. It therefore has all the target hypotheses for both the proper-target extension input and the group-target input.",
+   "uses": [
+    "lem-trf-smooth-geometrically-normal",
+    "def-weil-regular-scheme",
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "def-sc-abelian-variety",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "8.18, printed p.152, combining 8.16 and 8.17; expanded using Milne Abelian Varieties, Chapter I, Theorems 3.1–3.2 and Lemma 3.3, printed pp.16–18."
+   }
+  },
+  {
+   "text": "Consider all pairs $(V,F_V)$ with $V$ open in $X$, $U\\subseteq V$, and $F_V:V\\to B$ a $k$-morphism extending $f$. Let $D$ be the union of their domains. The pair $(U,f)$ belongs to this family. For any two pairs, $U$ is dense in $V\\cap V'$: an open subset of this intersection is open in $X$ and meets the dense $U$. The intersection is reduced, since all its stalks are stalks of the reduced $X$ [def-pc-reduced-scheme]. The maps agree on $U$ and are over $k$, so [lem-sfb-relative-separated-dominant-ext] gives equality on $V\\cap V'$. Apply [lem-weil-pbc-scheme-morphism-gluing] to obtain $F_D:D\\to B$. Its composite to $\\operatorname{Spec}k$ agrees with the structure map on every $V$, so the uniqueness clause of gluing makes $F_D$ a $k$-morphism. Also $F_D|_U=f$.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-sfb-relative-separated-dominant-ext",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0A1Y, lemma-rational-map-from-reduced-to-separated, proof by gluing representatives; the relative equality and gluing assertions are the cited nodes."
+   }
+  },
+  {
+   "text": "Let $x\\in X$ satisfy $\\dim\\mathcal O_{X,x}=1$. Step 1 makes $\\mathcal O_{X,x}$ a Noetherian normal local domain, so [lem-sc-normal-dim1-dvr] makes it a discrete valuation ring. By [def-sc-discrete-valuation-ring] it is a valuation ring. Apply [lem-sfb-rational-map-extension-valuation-point] with $S=\\operatorname{Spec}k$, $Y=B$, and the original $U,f$. The source is integral and Noetherian by step 1, the target is proper, and $U$ is dense. The cited statement gives an open $V$ containing $U$ and $x$ and a $k$-morphism extending $f$. This is one of the pairs defining $D$, hence $x\\in D$. Thus $X\\setminus D$ contains no point with one-dimensional local ring.",
+   "uses": [
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-rational-map-extension-valuation-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Theorem 3.1, printed pp.16–17, the codimension-one DVR argument; Stacks algebra.tex Tag 00PD (lemma-characterize-dvr) and morphisms.tex Tag 0BX7 (lemma-extend-across), in the cited existing nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-rational-divisorial-indeterminacy] to the given smooth integral $X$, to $G=B$, and to $U,f$. Its $D$ is exactly the union in step 2; smoothness, connectedness, separatedness and finite type of $B$ were verified in step 1. If $D\\ne X$, the cited statement supplies a nonempty finite collection of closed subsets $Z_i\\subseteq X\\setminus D$ and generic points $z_i$ with $\\dim\\mathcal O_{X,z_i}=1$. In particular $z_1\\notin D$, contradicting step 3. Therefore $D=X$. The morphism $F_D$ of step 2 is the required extension.",
+   "uses": [
+    "lem-sfb-group-rational-divisorial-indeterminacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "8.18, printed p.152, combining 8.16 and 8.17; expanded using Milne Abelian Varieties, Chapter I, Theorems 3.1–3.2 and Lemma 3.3, printed pp.16–18."
+   }
+  },
+  {
+   "text": "If $F,F':X\\to B$ are two $k$-morphisms restricting to $f$ on $U$, apply [lem-sfb-relative-separated-dominant-ext] with $T=X$, $W=U$, $Y=B$, $S=\\operatorname{Spec}k$, and $h$ the open inclusion. The source is reduced, $h$ has dense image, the target is separated over $k$, and $Fh=f=F'h$. Hence $F=F'$.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KM (lemma-where-are-they-equal), closed-equalizer consequence for a reduced source; relative dense-image equality is precisely the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-smooth-geometrically-normal",
+  "def-weil-regular-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-sc-abelian-variety",
+  "def-weil-proper-morphism",
+  "def-pc-reduced-scheme",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-rational-map-extension-valuation-point",
+  "lem-sfb-group-rational-divisorial-indeterminacy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "8.18, printed p.152, combining 8.16 and 8.17; expanded using Milne Abelian Varieties, Chapter I, Theorems 3.1–3.2 and Lemma 3.3, printed pp.16–18."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every rational map from a smooth variety to an abelian variety extends to a morphism defined on the whole variety",
+   "results": "8 hits; ; logged top results: AlgebraicGeometry.Scheme.RationalMap.exists_rep, AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over, AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over, AlgebraicGeometry.Scheme.RationalMap.toPartialMap, AlgebraicGeometry.Scheme.Hom.toRationalMap, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap, AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.toPartialMap represents a rational map on its maximal open domain and does not prove that domain is all of a smooth source; ofFunctionField constructs only a rational map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a dense open subscheme of a smooth integral variety to an abelian variety extends everywhere",
+   "results": "8 hits; ; logged top results: AlgebraicGeometry.Scheme.PartialMap.mk, AlgebraicGeometry.Scheme.Hom.toPartialMap, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι, AlgebraicGeometry.IsDominant.casesOn, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, Dense.extend",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.toPartialMap represents a rational map on its maximal open domain and does not prove that domain is all of a smooth source; ofFunctionField constructs only a rational map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"rational\"",
+   "results": "12 hits; ; logged top results: AlgebraicGeometry.Scheme.RationalMap, AlgebraicGeometry.Scheme.RationalMap.id, AlgebraicGeometry.Scheme.RationalMap.domain, AlgebraicGeometry.Scheme.Hom.toRationalMap, AlgebraicGeometry.Scheme.PartialMap.toRationalMap, AlgebraicGeometry.Scheme.RationalMap.representative, AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective, AlgebraicGeometry.Scheme.RationalMap.openCoverDomain",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.toPartialMap represents a rational map on its maximal open domain and does not prove that domain is all of a smooth source; ofFunctionField constructs only a rational map"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*map|extend.*morphism|AbelianVariety",
+   "results": "23 hits; ; logged top results: Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/Composition.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.toPartialMap represents a rational map on its maximal open domain and does not prove that domain is all of a smooth source; ofFunctionField constructs only a rational map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil extension theorem rational maps from nonsingular varieties to abelian varieties have no indeterminacy",
+   "results": "8 hits; ; logged top results: AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.exists_rep, AlgebraicGeometry.Scheme.RationalMap.toPartialMap, AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated",
+   "date": "2026-10-23",
+   "verdict": "no match: RationalMap.toPartialMap represents a rational map on its maximal open domain and does not prove that domain is all of a smooth source; ofFunctionField constructs only a rational map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every rational map from a smooth variety to an abelian variety extends to a morphism on the whole variety",
+   "results": "{\"t\": \"2026-10-23T14:14:23Z\", \"tool\": \"leanfinder\", \"query\": \"Every rational map from a smooth variety to an abelian variety extends to a morphism on the whole variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\"], \"digest\": \"542489c6766be40a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representation on the maximal domain does not show that domain equals X."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil extension theorem rational maps from nonsingular varieties to abelian varieties have no indeterminacy",
+   "results": "{\"t\": \"2026-10-23T14:48:01Z\", \"tool\": \"leanfinder\", \"query\": \"Weil extension theorem rational maps from nonsingular varieties to abelian varieties have no indeterminacy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\"], \"digest\": \"10ad3037bb08b36c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representation on the maximal domain does not show that domain equals X."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a dense open smooth variety to an abelian variety extends everywhere",
+   "results": "{\"t\": \"2026-10-23T14:22:25Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from a dense open smooth variety to an abelian variety extends everywhere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.mk\", \"AlgebraicGeometry.Scheme.Hom.toPartialMap\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"AlgebraicGeometry.IsDominant.casesOn\", \"Dense.extend\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.IsSmooth.recOn\"], \"digest\": \"b862ed000b7f30fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representation on the maximal domain does not show that domain equals X."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-23T14:22:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representation on the maximal domain does not show that domain equals X."
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|rational.*extend|extend.*rational",
+   "results": "{\"t\": \"2026-10-23T14:22:25Z\", \"tool\": \"grep\", \"query\": \"AbelianVariety|rational.*extend|extend.*rational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: rational-map representation on the maximal domain does not show that domain equals X."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-inclusion-multiple-retraction",
+  "date": "2026-10-23",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: An abelian inclusion retracts up to a positive integer. Supporting input: 8.18, printed p.152 (combine 8.16 and 8.17). Uniqueness is the separated-target equality principle on an integral source. This is the extension theorem, not extension to an arbitrary proper target.",
+   "via": [
+    "lem-sfb-abelian-inclusion-multiple-retraction",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-weil-extension-to-abelian-variety",
+  "worker": "stage1",
+  "summary": "Kept the statement. Followed Milne 8.18: construct the maximal extension by existing gluing and equality nodes, exclude all codimension-one points by the existing DVR and proper valuation-point extension nodes, then contradict divisorial group-target indeterminacy. One new statement-only node for Milne 8.17; no new Mathlib leaves. All quoted citations checked against their statements.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: An abelian inclusion retracts up to a positive integer. Supporting input: 8.18, printed p.152 (combine 8.16 and 8.17). Uniqueness is the separated-target equality principle on an integral source. This is the extension theorem, not extension to an arbitrary proper target. Realizes the Weil-extension prerequisite used by the abelian multiple-retraction argument. The current blueprint direct-image proof is unchanged; all this work is below that prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic geometric regularity and normality of any smooth scheme over a field; the curve-only smooth-normal node does not cover arbitrary-dimensional X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-smooth-geometrically-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-89d9b7ace",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-89d9b7ace (reviewer sub-agent of L); spot-checked: Read the item's 5 steps, the new node, every cited statement, Milne iAG 8.16–8.18 (printed pp.151–152) and Milne AV Ch. I Thm 3.1, Thm 3.2 and Lemma 3.3 (printed pp.16–18; k arbitrary, varieties geometrically reduced). The route is 8.16 in pointwise form plus 8.17, giving 8.18. Step 1: lem-trf-smooth-geometrically-normal with K'=K=k gives regular, normal-domain local rings; with finite type this makes X Noetherian. B is proper, so it is separated and of finite type. Step 2: V∩V' is reduced and U is dense in it, so relative-separated-dominant-ext applies; gluing gives F_D on the maximal domain D, and the uniqueness clause shows F_D is over k. Step 3: a 1-dimensional Noetherian normal local domain is a DVR, hence a valuation ring; rational-map-extension-valuation-point (all hypotheses checked) puts every codimension-1 point in D. Step 4: the new node forces D=X. Step 5: uniqueness follows from the dense-equality lemma. New node lem-sfb-group-rational-divisorial-indeterminacy is Milne 8.17 / AV 3.3 for arbitrary k with smooth X and a smooth separated group G. It is true. Small cases checked: dim 0, U=X, a constant map, G_a with f=1/t (complement is a divisor, so properness of G is genuinely not assumed) and the trivial group. It does not restate the parent and is not a duplicate: a DAG statement scan and the Mathlib RationalMap API found no Weil purity result. Route: lem-trf-smooth-geometrically-normal (unit sk-i-curve-zero) is off-route but declared in split_report.tool_uses; accepted as generic Stacks 056T used as a black box. Batch-5: the same node is generic commutative algebra, not the trace formula or Poincaré duality or a step of their proofs, so accepted; def-trf-valuation-ring is a general definition (Stacks 00I9), accepted. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.WeilExtension",
+  "declaration": "AlgebraicGeometry.existsUnique_extension_to_abelianVariety",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/WeilExtension.lean",
+  "statement": "theorem existsUnique_extension_to_abelianVariety (k : Type u) [Field k] (X : Over (Spec (.of k))) [IsIntegral X.left] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [Smooth X.hom] (B : Over (Spec (.of k))) [GrpObj B] [IsAbelianVariety B] (U : X.left.Opens) (hU : Dense (U : Set X.left)) (f : U.toScheme ⟶ B.left) (hf : f ≫ B.hom = U.ι ≫ X.hom) : ∃! F : X.left ⟶ B.left, F ≫ B.hom = X.hom ∧ U.ι ≫ F = f",
+  "branch": "sheaf-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af9bbaca5",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Clause-by-clause match of node lem-sfb-weil-extension-to-abelian-variety: k Field; X : Over (Spec k) with IsIntegral (includes Nonempty), IsSeparated, LocallyOfFiniteType+QuasiCompact (finite type per convention node), Smooth; B with GrpObj + recorded IsAbelianVariety (proper, smooth, connected); U dense open; f with base equation; conclusion ∃! F over k with U.ι ≫ F = f (uniqueness over k-morphism extensions, as node). No extra hypotheses, single universe u from the recorded APIs, autoImplicit false. Edge cases: empty X excluded, U=X, dim 0, trivial B, any characteristic. lean.statement verbatim in file; no defs, sorry-only proof, source and blueprint docstrings with the 5 proof steps; proof-dep imports exist in side-live; encoding consistent with GroupRationalDivisorialIndeterminacy; no existing Weil-extension declaration in Mathlib/WeilConjectures/Sheaf. Not recompiled (no change); worker compile clean. No findings."
+ }
+}

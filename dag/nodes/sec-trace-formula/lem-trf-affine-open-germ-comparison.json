@@ -1,0 +1,122 @@
+{
+ "id": "lem-trf-affine-open-germ-comparison",
+ "kind": "statement",
+ "title": "Spread a supplied comparison of normalized affine fan opens",
+ "statement": "Let $T$ be a sharp monoidal space and $h:T\\to F$, $k:T\\to G$ local maps to fine fans [def-trf-fine-fan-blowup]. Fix $t\\in T$, affine opens $L\\ni h(t)$ and $K\\ni k(t)$ with coordinates $P=\\mathcal P_{F,h(t)}$, $Q=\\mathcal P_{G,k(t)}$ [lem-trf-affine-fan-hom-universal]. Assume $P$ is fine and both coordinates are normalized so the germ of the pulled-back canonical section equals the open-inclusion stalk map. Suppose a monoid map $\\alpha:P\\to Q$ and a SUPPLIED isomorphism $e:K\\simeq L$ satisfy $k_t\\alpha=h_t$ and $e^*\\rho_L=\\rho_K\\alpha$. Then on some open neighborhood $U$ of $t$ contained in $h^{-1}L\\cap k^{-1}K$ there are restricted factorizations $a:U\\to L$, $b:U\\to K$, with their full sheafed-space triangles commuting and $a=b\\mathbin{\\gg}e$. The lemma does not construct alpha or e; alpha need not be invertible.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII, proof of Theorem 3.3.15, printed p.109, common inverse image U and shrinking because the monoids are fine; Lemma 3.1.8(ii), printed p.99."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "lem-trf-affine-fan-hom-universal"
+ ],
+ "proof": [
+  {
+   "text": "Take V=h^{-1}(L) intersect k^{-1}(K), which contains t. Restrict the maps and factor through the opens. These factorizations exist for sheafed spaces by restricting their presheaf natural transformations; they are local because open inclusions identify stalks. Compose the h-factorization with the affine coordinates of L, and the k-factorization with e followed by the same coordinates.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of germs and the normalizations of the coordinates identify the two canonical P-section germs at t with h_t(p) and k_t(alpha(p)), transported to the stalk on V. The supplied section identity for e gives the second formula. The supplied equation k_t alpha=h_t makes them equal for all p. The target monoid P is fine and sharp (it is a fan stalk), so apply lem-trf-affine-fan-germ-rigidity. It gives an open of V about t on which the two full morphisms agree.",
+   "uses": [
+    "lem-trf-affine-fan-germ-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "View this open as U in T, using that V is open. Restrict the two factorizations once more. Cancel the affine coordinate isomorphism of L in their equality to obtain a=b followed by e. Functorial restriction supplies both triangles. Since U is contained in V the two image containments hold. The trivial P case is included in the rigidity lemma and requires no generator choice.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-fan-germ-rigidity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII, proof of Theorem 3.3.15, printed p.109, common inverse image U and shrinking because the monoids are fine; Lemma 3.1.8(ii), printed p.99."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of monoid section germs determines morphisms into fine sharp affine fans on a neighborhood",
+   "results": "{\"t\": \"2026-10-26T08:19:56Z\", \"tool\": \"leansearch\", \"query\": \"Equality of monoid section germs determines morphisms into fine sharp affine fans on a neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.stalk_hom_ext_iff\", \"TopCat.Presheaf.Sheafify.isGerm\", \"Filter.Germ.coe_eq\", \"Submonoid.LocalizationMap.mk'_eq_iff_mk'_eq\", \"Filter.EventuallyEq.germ_eq\", \"Submonoid.LocalizationMap.ext_iff\", \"MonoidHom.mker.congr_simp\", \"ContMDiffMonoidMorphism.mk.injEq\"], \"digest\": \"2d98b419f921b22c\"} Returned ordinary ringed-space, scheme, module or filter results; none states this assertion for the project sharp monoidal spaces. The ordinary stalk lemmas also require all colimits, whereas FineFan uses filtered colimits. Project search found the cited dependency but not the section-normalized/restriction bridge.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local maps of sharp monoidal spaces to a fine affine fan with equal stalk section germs agree on a neighborhood",
+   "results": "{\"t\": \"2026-10-26T08:19:57Z\", \"tool\": \"leanfinder\", \"query\": \"Local maps of sharp monoidal spaces to a fine affine fan with equal stalk section germs agree on a neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq\", \"AlgebraicGeometry.IsAffineOpen.stalkMap_injective\", \"TopCat.Presheaf.germ_ext\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.spread_out_of_isGermInjective\"], \"digest\": \"1c6280aa14829d4a\"} Returned ordinary ringed-space, scheme, module or filter results; none states this assertion for the project sharp monoidal spaces. The ordinary stalk lemmas also require all colimits, whereas FineFan uses filtered colimits. Project search found the cited dependency but not the section-normalized/restriction bridge.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "FanChart|KatoFan|SharpSpaceMap",
+   "results": "{\"t\": \"2026-10-26T08:11:56Z\", \"tool\": \"grep\", \"query\": \"FanChart|KatoFan|SharpSpaceMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Returned ordinary ringed-space, scheme, module or filter results; none states this assertion for the project sharp monoidal spaces. The ordinary stalk lemmas also require all colimits, whereas FineFan uses filtered colimits. Project search found the cited dependency but not the section-normalized/restriction bridge.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictFanChartLocalComparison",
+  "date": "2026-10-26",
+  "group": "C8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII, proof of Theorem 3.3.15, printed p.109, common inverse image U and shrinking because the monoids are fine; Lemma 3.1.8(ii), printed p.99.",
+   "via": [
+    "lem-trf-strict-fan-chart-local-comparison",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenGermComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenGermComparison.lean",
+  "declaration": "AlgebraicGeometry.FineFan.affine_open_germ_comparison",
+  "statement": "theorem affine_open_germ_comparison\n    (T : SheafedSpace CommMonCat.{u})\n    (hT : ∀ x : T, IsSharp (stalk T.presheaf x))\n    (F G : Fan.{u}) (h : T ⟶ F.space) (k : T ⟶ G.space)\n    (hh : IsLocalMorphism h) (hk : IsLocalMorphism k) (t : T)\n    (L : AffineOpen F.space (stalk F.space.presheaf (h.hom.base t)))\n    (K : AffineOpen G.space (stalk G.space.presheaf (k.hom.base t)))\n    (hL : h.hom.base t ∈ L.openSet) (hK : k.hom.base t ∈ K.openSet)\n    (hf : IsFine (stalk F.space.presheaf (h.hom.base t)))\n    (nL : ∀ p : stalk F.space.presheaf (h.hom.base t),\n      germ (F.space.restrict L.openSet.isOpenEmbedding).presheaf ⊤\n          ⟨h.hom.base t, hL⟩ (by trivial) (affinePullback L.iso.hom p) =\n        stalkMap (F.space.ofRestrict L.openSet.isOpenEmbedding) ⟨h.hom.base t, hL⟩ p)\n    (nK : ∀ q : stalk G.space.presheaf (k.hom.base t),\n      germ (G.space.restrict K.openSet.isOpenEmbedding).presheaf ⊤\n          ⟨k.hom.base t, hK⟩ (by trivial) (affinePullback K.iso.hom q) =\n        stalkMap (G.space.ofRestrict K.openSet.isOpenEmbedding) ⟨k.hom.base t, hK⟩ q)\n    (α : stalk F.space.presheaf (h.hom.base t) →*\n      stalk G.space.presheaf (k.hom.base t))\n    (ha : (stalkMap k t).hom.comp α = (stalkMap h t).hom)\n    (e : G.space.restrict K.openSet.isOpenEmbedding ≅\n      F.space.restrict L.openSet.isOpenEmbedding)\n    (he : (SheafedSpace.Γ.map e.hom.op).hom.comp (affinePullback L.iso.hom) =\n      (affinePullback K.iso.hom).comp α) :\n    ∃ U : Opens T, t ∈ U ∧\n      (∀ x ∈ U, h.hom.base x ∈ L.openSet) ∧\n      (∀ x ∈ U, k.hom.base x ∈ K.openSet) ∧\n      ∃ (a : T.restrict U.isOpenEmbedding ⟶ F.space.restrict L.openSet.isOpenEmbedding)\n        (b : T.restrict U.isOpenEmbedding ⟶ G.space.restrict K.openSet.isOpenEmbedding),\n        a ≫ F.space.ofRestrict L.openSet.isOpenEmbedding =\n          T.ofRestrict U.isOpenEmbedding ≫ h ∧\n        b ≫ G.space.ofRestrict K.openSet.isOpenEmbedding =\n          T.ofRestrict U.isOpenEmbedding ≫ k ∧\n        a = b ≫ e.hom",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T091319-L-3332038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T091319-L-3332038",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

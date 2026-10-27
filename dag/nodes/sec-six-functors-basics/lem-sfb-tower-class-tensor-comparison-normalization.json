@@ -1,0 +1,168 @@
+{
+ "id": "lem-sfb-tower-class-tensor-comparison-normalization",
+ "kind": "statement",
+ "title": "Finite adjunction normalization of the constructed tensor comparison",
+ "statement": "Let l be prime, let E be a finite extension of Q_l, let X and Y be schemes and f:X→Y a morphism. Fix Base b and Geometry g for f [def-sp-tower-shriek-data]. Let T be a GeometryOrdinaryTensor record on the ordinary fields of g.generic, and let comparison(g,T) be the explicitly constructed system tensor comparison [def-sfb-tower-class-tensor-comparison]. Assume g.generic.levelPushUnderlying acts identically on all sections. For every source coefficient systems M,N, index n, pro-etale chart U over Y and sections x,y of M_n,N_n on U, the finite constant-ring adjoint of ordinaryPullEvaluation.inv followed by the n-th evaluation of comparison(g,T,N) at M sends tensorPure(x,y) to tensorPure(sectionAdjoint(id)(x),sectionAdjoint(id)(y)) [def-sfb-tower-class-section-adjoint]. This asserts only the section formula for a fixed constructed comparison, with no existence, naturality or quotient-transition conclusion.",
+ "stmt_deps": [
+  "def-sfb-tower-class-tensor-comparison",
+  "def-sfb-tower-class-section-adjoint",
+  "def-sp-tower-shriek-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes"
+ },
+ "proof": [
+  {
+   "text": "Cancel the invertible evaluation tensor maps in T.evaluation to identify the evaluated system comparison with geometricTensorComponent. Apply its proved component_pure helper, hence T.level_pure, to the product of the two underlying finite module sheaves and the pairing followed by inverse ordinaryEvaluationTensor. Naturality of a family of generalized sections identifies the three imageMap evaluations. The siteTensorIso_pure formula and the pure formula for ordinaryEvaluationTensor then transport this equality to the explicit site tensors on both sequence sites. No horizontal compatibility or system assembly theorem is used.",
+   "uses": [
+    "lem-sfb-tensor-comparison-evaluated-component",
+    "lem-coef-semilinear-geometric-ordinary-tensor",
+    "lem-coef-geometric-tensor-component-horizontal",
+    "lem-pur-system-ordinary-tensor-reduction",
+    "lem-coef-semilinear-tensor-evaluation",
+    "def-sfb-tower-class-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the natural family of generalized sections to the topos adjunction unit at U, evaluated on chart(f,U). Transport coefficients, transitions, the pull functor, the pull evaluation, and the bundled finite adjunction through the specified equality fields of g. Evaluate level_unit_underlying and remove levelPushUnderlying using hpush. Apply moduleUnderlying.inv to identify the resulting generalized sections with the finite module units, followed by inverse ordinaryPullEvaluation. The cast from evaluated carriers to system carriers is justified by evaluation_carrier.",
+   "uses": [
+    "lem-sfb-tensor-comparison-unit-coordinates",
+    "def-coef-semilinear-geometry-base",
+    "def-coef-semilinear-geometry-derived",
+    "def-sp-tower-shriek-data",
+    "lem-pur-system-ordinary-tensor-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use geometry_unit_evaluation and naturality of ordinaryPushEvaluation to show that the evaluated system adjoint is the finite adjoint of inverse ordinaryPullEvaluation followed by the evaluated map. Naturality in the target identifies its action on a section with the original map acting on sectionAdjoint of the identity. Substitute the three unit-section identifications into the site tensor equality and apply this adjoint identity to the constructed comparison. All equalities precede localization and apply without exclusions at zero modules, empty charts, or n=0.",
+   "uses": [
+    "lem-sfb-tensor-comparison-coordinate-conjugation",
+    "lem-sfb-tensor-comparison-adjoint-evaluation",
+    "lem-sp-tower-ordinary-unit-evaluation",
+    "def-sfb-tower-class-section-adjoint",
+    "def-sfb-tower-class-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-tensor-comparison-evaluated-component",
+  "lem-coef-semilinear-geometric-ordinary-tensor",
+  "lem-coef-geometric-tensor-component-horizontal",
+  "lem-pur-system-ordinary-tensor-reduction",
+  "lem-coef-semilinear-tensor-evaluation",
+  "def-sfb-tower-class-tensor-comparison",
+  "lem-sfb-tensor-comparison-unit-coordinates",
+  "def-coef-semilinear-geometry-base",
+  "def-coef-semilinear-geometry-derived",
+  "def-sp-tower-shriek-data",
+  "lem-sfb-tensor-comparison-coordinate-conjugation",
+  "lem-sfb-tensor-comparison-adjoint-evaluation",
+  "lem-sp-tower-ordinary-unit-evaluation",
+  "def-sfb-tower-class-section-adjoint"
+ ],
+ "proof_origin": {
+  "by": "H3",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes",
+  "note": "Lean proof of the finite normalization using the existing generalized-section component and tensor-evaluation API; no new assumptions or split obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of modules preserves the tensor product and its adjunction unit sends pure tensors to pure tensors",
+   "results": "8 hits, including PresheafOfModules.Monoidal.tensorObj_map_tmul, SheafOfModules.PullbackConstruction.adjunction and the free-unit pullback formulas.",
+   "date": "2026-10-27",
+   "verdict": "No normalized system-coordinate tensor comparison; use the existing local ordinary tensor theorem and sheafification API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of sheaves of modules preserves tensor products with its adjunction unit pure tensor formula",
+   "results": "8 results, including SheafOfModules.pullbackObjUnitToUnit and the pullbackPushforwardAdjunction unit formulas from Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree.",
+   "date": "2026-10-27",
+   "verdict": "Finite unit results only; reuse the existing project ordinary tensor comparison for tensor preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackPushforwardAdjunction\"",
+   "results": "12 results, including SheafOfModules.pullbackPushforwardAdjunction and its free-unit formulas.",
+   "date": "2026-10-27",
+   "verdict": "No normalized tensor comparison on the actual coefficient system coordinates."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification",
+   "results": "0 Mathlib-index hits. Independent local rg finds tensorObjIsoSheafification, siteTensorRightIso, siteSheafTensorRightIso, geometricOrdinaryTensor_exists, GeometryOrdinaryTensor.evaluation and system_natural in the project.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing sheafification presentation, naturality, and ordinary geometric tensor record; add only coordinate transport and its finite normalization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassTensorLevelCoordinates",
+  "date": "2026-10-27",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "clause (2), finite tensor comparisons and their adjunction transposes",
+   "via": [
+    "lem-sfb-tower-class-tensor-level-coordinates",
+    "lem-sfb-tower-class-tensor-geometry-existence",
+    "lem-sfb-diagonal-trace-geometric-model-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassTensorComparisonNormalization",
+  "file": "lean/Sheaf/Paper/TowerClassTensorComparisonNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.TensorCoordinates.comparison_normalization",
+  "statement": "theorem comparison_normalization {b : SpTowerShriek.Base l E}\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)\n    (T : SemilinearSections.GeometryOrdinaryTensor\n      (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y) (SpTowerShriek.tau l E Y)\n      (Scheme.ProEt.topology X)\n      (Scheme.proEtaleSheafInverseImage f (Type (u + 1)))\n      (Scheme.proEtaleSheafDirectImage f (Type (u + 1)))\n      (Scheme.proEtaleSheafAdjunction f (Type (u + 1))) (ordinaryGeometry l E g))\n    (hpush : ∀ (n : ℕ)\n      (N : SemilinearSections.Mod.{u + 1, u, u + 1} (Scheme.ProEt.topology X)\n        (g.generic.coefficients n)) (U : Y.ProEtᵒᵖ)\n      (x : ((SemilinearSections.underlying.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n)).obj\n          ((g.generic.levelPush n).obj N)).obj.obj U),\n      HEq (((g.generic.levelPushUnderlying n).hom.app N).hom.app U x) x)\n    (M N : Systems Y (Arings l E Y)) (n : ℕ) (U : Y.ProEtᵒᵖ)\n    (x : M.val.obj (op (n, U.unop))) (y : N.val.obj (op (n, U.unop))) :\n    HEq\n      ((((Scheme.proEtaleConstantRingAdjunction (SpTowerShriek.R l E n) f).homEquiv\n        _ _) ((g.ordinaryPullEvaluation n).inv.app ((tensorRight l E Y N).obj M) ≫\n          (SpTowerShriek.ev l E X n).map ((comparison l E g T N).hom.app M))).val.app U\n            (tensorPure l E Y M N (op (n, U.unop)) x y))\n      (tensorPure l E X (g.pull.obj M) (g.pull.obj N)\n        (op (n, (chart f U).unop))\n        (sectionAdjoint l E g (𝟙 (g.pull.obj M)) n U x)\n        (sectionAdjoint l E g (𝟙 (g.pull.obj N)) n U y))",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-27"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T094405-L-221900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261027T123447-L-2301455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

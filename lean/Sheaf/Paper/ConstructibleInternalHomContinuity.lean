@@ -26,6 +26,7 @@ import all Sheaf.Paper.ClosedSupportBoundedContinuity
 import Sheaf.AlgebraicGeometry.OpenExtensionRHomContinuity
 import Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison
 import Sheaf.Paper.CartesianCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-!
 # Continuity of constructible-source derived internal Hom

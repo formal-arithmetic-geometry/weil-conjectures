@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-ringed-tensor-comparison-extension",
+ "kind": "statement",
+ "title": "Extend a tensor comparison from two K-flat factors to one",
+ "statement": "Let C be a small ringed site with coefficient ring sheaf R and independent module universes [def-weil-size-convention, def-weil-sheaf-of-modules-category]. Fix its unbounded derived localization Q [def-weil-abstract-derived-category], its closed structure S [lem-sf-ringed-derived-closed-symmetric-monoidal] and simultaneous K-flat total-tensor comparison T [def-coef-ringed-tensor-hom-model]. There is a family of isomorphisms Q Tot(P tensor N) ≅ S.tensor(QP, QN) whenever P or N is K-flat [def-pc-kflat-complex]. It is natural for chain maps between such pairs and agrees with the specified T comparison when both factors are K-flat. Naturality is an equality of the actual comparison morphisms, including when only one factor on each side is K-flat.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (functorial K-flat resolution), 06YT (one K-flat tensor computes derived tensor), and 0FPT."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-kflat-complex",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Take the reduced functorial flat resolution F with augmentation eta. Each F(P) is K-flat; the acyclic-tensor formulation follows by tensoring the quasi-isomorphism 0 to an acyclic test complex. The two augmentation tensor map is a quasi-isomorphism when either target factor is K-flat, by factoring through two tensor maps whose unchanged factor is K-flat. The native K-flat comparison identifies the acyclic-tensor predicate with preservation of quasi-isomorphisms by tensoring; independently sized tensor colimits supply the colimit hypotheses for the reduced resolution construction.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define t by the inverse localized tensor augmentation, then the prescribed comparison on F(P),F(N), then derived tensor of the augmentations. The naturality square of eta, functoriality of total tensor, and naturality of T give naturality of t. If both P,N are K-flat, naturality of T on their augmentations cancels the inverse localized augmentation and identifies t with T.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YT and 0FPT; functorial resolution construction fully proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural derived tensor comparison on pairs of K-flat complexes extends naturally to all pairs with at least one K-flat complex using functorial K-flat resolutions",
+   "results": "HomologicalComplex.HasGoodTensor₁₂ and Tor APIs, no comparison extension.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing resolution and localization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CoefficientTensorModels\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing resolution and localization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedDerivedTensorBothModel|resolvedTensorIso",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing resolution and localization APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a natural derived tensor comparison from two K-flat complexes to the case that either factor is K-flat, using functorial flat resolutions.",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact; Module.Flat.of_flat_tensorProduct; Module.Flat.rTensor_shortComplex_exact; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; Module.Flat.instTensorProduct; Module.Flat.lTensor_exact; Module.Flat.iff_flat_tensorProduct; Module.Flat.rTensor_exact",
+   "date": "2026-10-22",
+   "verdict": "No exact match. These flat-module tensor exactness results do not extend the prescribed K-flat comparison; use functorial resolution and its augmentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteDualityMaps",
+  "date": "2026-10-21",
+  "group": "U7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-ringed-site-duality-maps",
+   "place": "Normalization steps: extend the simultaneous K-flat comparison to the coherence interface."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedTensorComparisonExtension",
+  "file": "lean/Sheaf/Algebra/Homology/RingedTensorComparisonExtension.lean",
+  "declaration": "CategoryTheory.ringedTensorComparison_extension",
+  "statement": "theorem ringedTensorComparison_extension\n    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))\n    (T : CoefficientTensorModels.{r, c, v, w} J R S) :\n    ∃ t : RingedDerivedTensorComparison.{c, v, r, w} J R S,\n      RingedDerivedTensorBothModel.{c, v, r, w} J R S T t ∧\n        RingedDerivedTensorNaturality.{c, v, r, w} J R S t",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, 5 adapted modules, 5 new modules, 7 node files and 2 change records matched against the base in clones/live (verbatim move, identical #check signatures, import-only adaptations of unclaimed modules, unchanged statements), #print axioms in a sandbox, and the reader gate: 57 of 63 direct importers compiled against the sandbox, 3 after recompiling a stale importer, 3 not compilable against the lagging published build either"
+ }
+}

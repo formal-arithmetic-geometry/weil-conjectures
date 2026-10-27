@@ -1,0 +1,119 @@
+{
+ "id": "lem-diagonal-coefficient-family-extension",
+ "kind": "statement",
+ "title": "Extend a fixed diagram to non-torsion coefficient fields",
+ "statement": "Let ell be prime and Y,P1_Y,P1_Y×_Y P1_Y Noetherian, with ell a unit on Y. For every Diagram d of [def-sfb-diagonal-coefficient-category] over condensed Z_ell with the fixed line zlLine, there exists a Family of [def-sfb-diagonal-coefficient-diagrams] whose Z_ell component is literally d. All integral, rational, closure and transition scalar squares are the specified adjoint-normalized ScalarCompatibility data. No completed reference or finite quotient realization is asserted.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-diagrams"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraphs (1)--(2), finite-free extension, localization and finite-field colimit"
+ },
+ "proof": [
+  {
+   "text": "For each finite subextension E, apply the finite coefficient extension theorem to the fixed input d. Choose its integral and rational diagrams and their two ScalarCompatibility records, obtaining the complete finite-stage data with the same input Z_ell component.",
+   "uses": [
+    "lem-sfb-diagonal-finite-coefficient-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite closure theorem to these fixed diagrams and the two compatibility families. Obtain the common closure diagram, all rational-to-closure compatibility records and every rational transition record.",
+   "uses": [
+    "lem-sfb-diagonal-finite-coefficient-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble Family with zl literally d, the chosen finite diagrams and closure, and the four families of ScalarCompatibility witnesses. Its zl projection equals d by reflexivity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-finite-coefficient-extension",
+  "lem-sfb-diagonal-finite-coefficient-closure"
+ ],
+ "proof_origin": {
+  "by": "K1",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraphs (1)--(2), assemble single-finite-field extension and coherent finite-field closure"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport integration identity through a natural transformation and endpoint isomorphisms; canonical right derived functor computed on K injective complexes; diagonal trace coefficient extension and uniformizer quotient annihilation",
+   "results": "Eight hits, including InjectiveResolution.isoRightDerivedObj and Functor.mapDerivedCategoryFactorsh_hom_app; none states the normalized diagonal comparison. The canonical K-injective unit API is reused.",
+   "date": "2026-10-24",
+   "verdict": "No complete existing diagonal coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "Twelve hits, including rightDerivedUnique and LocalizerMorphism.Derives construction APIs. These provide the canonical unit universal property; they do not assert the geometric coefficient endpoints.",
+   "date": "2026-10-24",
+   "verdict": "Use the published universal-property API for the canonical derived model."
+  },
+  {
+   "tool": "grep",
+   "query": "integration_transport|canonicalDiagonalRightDerived|diagonalUniformizer_annihilator|diagonalCompleted_frame|diagonalCoefficientFamily_extension|diagonalCoefficient_uniformizerFiniteComparison",
+   "results": "Zero hits in the search service. Local rg of both roots found the definitions of Reference, Family and ScalarCompatibility but no constructions.",
+   "date": "2026-10-24",
+   "verdict": "New comparison components are necessary for this reduction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTowerCoefficients",
+  "date": "2026-10-24",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraphs (1)--(2), finite-free extension, localization and finite-field colimit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCoefficientFamilyExtension",
+  "file": "lean/Sheaf/Paper/DiagonalCoefficientFamilyExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCoefficientFamily_extension",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalCoefficientFamily_extension"
+  ],
+  "statement": "theorem diagonalCoefficientFamily_extension\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]\n    (hY : IsUnit (l : Γ(Y, ⊤)))\n    (d : Diagram (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y (zlLine l)) :\n    ∃ family : Family l Y, family.zl = d",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e2cc7",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261024T020722-L-2653769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3df5",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261026T222726-L-686554",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs Family fields (DiagonalCoefficientDiagrams:43-64) and ScalarCompatibility (DiagonalCoefficientScalars:89); new sorried statements vs their nodes and source paragraphs (1)-(2); SfP1ChartExchange delivered vs clone (whitespace only)"
+ }
+}

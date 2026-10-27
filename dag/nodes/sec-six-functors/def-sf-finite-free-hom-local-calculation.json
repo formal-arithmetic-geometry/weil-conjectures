@@ -1,0 +1,121 @@
+{
+ "id": "def-sf-finite-free-hom-local-calculation",
+ "kind": "definition",
+ "title": "Canonical bounded-flat finite-free Hom model calculation and restriction square",
+ "status": "split",
+ "statement": "On the small etale derived module categories [def-weil-pbc-derived-categories], let $\\phi:A\\to B$ be a commutative ring map, $F_T=-\\otimes_A^LB$ the actual derived scalar extension [lem-pur-derived-change-of-rings], and $H_A,H_B$ the published internal Hom [def-pur-derived-internal-hom]. Use the finite-basis evaluation coordinates [def-sf-finite-free-hom-evaluation-coordinates]. For specified $K,N$ and a specified comparison arrow $u:F_TH_A(K,N)\\to H_B(F_TK,F_TN)$, define its local finite-free calculation predicate as follows. For every rank $t\\ge0$, trivialization $e:K\\simeq A_T^t[0]$, bounded flat complex $P$ [def-sf-etale-bounded-flat-complex] and representing isomorphism $e_P:N\\simeq QP$, the evaluation map followed by the product of $e_P$ identifies $H_A(K,N)$ with $(QP)^t$. Define the source coordinates by applying $F_T$ to evaluation coordinates, its finite-product comparison, and the product of the canonical scalar representative maps $F_TN\\to Q(P\\otimes_A B)$. Define the target coordinates by evaluation on the reduced basis, using the canonical scalar unit, followed by the same product of representative maps. Require both coordinate maps to be isomorphisms and $u$ followed by target coordinates to equal source coordinates. Define the restriction compatibility predicate for specified comparison arrows on $T$ and $U\\to T$ by requiring the canonical Hom restriction mates to be isomorphisms and the square between restriction of the first arrow and the second arrow to commute, transported by the normalized scalar/pullback isomorphism [def-pur-etale-scalar-pullback-iso]. The theorem using these predicates supplies the actual evaluation-transpose arrows [def-sf-etale-finite-coefficient-hom-arrow]; these definitions supply no arbitrary replacement for them. The source and target comparison coordinates are morphisms of B-module derived categories, including the rank-zero empty product.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-derived-internal-hom",
+  "def-sf-finite-free-hom-evaluation-coordinates",
+  "def-sf-etale-bounded-flat-complex",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-sf-etale-finite-coefficient-hom-arrow"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3: finite-free internal Hom and standard-basis evaluation"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalar.*[Hh]om|[Hh]om.*scalar|[Hh]om.*[Cc]oordinates",
+   "results": "[grep] OK 4 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "ordinary scalar restriction and module Hom results; no exact derived model predicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded flat finite free derived Hom scalar reduction identity in evaluation coordinates compatible with restriction",
+   "results": "[leansearch] OK 8 hit(s); ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, ModuleCat.restrictScalarsId'App_hom_apply, Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.restrictScalarsId'App.congr_simp, ModuleCat.restrictScalarsId'App, AlgHom.coe_restrictScalars', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, AlgHom.restrictScalars.congr_simp",
+   "date": "2026-10-22",
+   "verdict": "ordinary scalar restriction and module Hom results; no exact derived model predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free internal Hom models scalar extension coordinates identity restriction square",
+   "results": "[leanfinder] OK 8 hit(s); ModuleCat.homEquiv_extendScalarsId, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.homEquiv_extendScalarsComp",
+   "date": "2026-10-22",
+   "verdict": "ordinary scalar restriction and module Hom results; no exact derived model predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "rg bounded flat.*coordinates|local.*Hom.*calculation|finite-free.*Hom models dag/nodes; blueprint_refs.py search finite-free Hom; rg LocalFreeCalculation|RestrictionCompatibility|SourceCoordinates|TargetCoordinates lean/WeilConjectures lean/Sheaf",
+   "results": "DAG results include this item and lem-sf-ringed-finite-free-hom-coordinates; the latter concerns a finite-free scalar extension and was read. Blueprint search returned lem-sf-hom-comparison-finite-free. No exact generic derived finite-free first-argument model predicate or canonical restriction square was found in upstream or Sheaf; SourceCoordinates hits are affine tilde module coordinates.",
+   "date": "2026-10-22",
+   "verdict": "new definition combines existing canonical maps"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-etale-lisse-hom-reduction",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraphs 2–3: bounded-flat finite-free Hom coordinates, scalar identity and restriction compatibility",
+   "via": [
+    "lem-coef-etale-lisse-hom-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeHomLocalCalculation",
+  "declaration": "WeilConjectures.LisseHomLocalFreeCalculationRing",
+  "declarations": [
+   "WeilConjectures.lisseHomRingHom",
+   "WeilConjectures.lisseHomRestrictionFunctorRing",
+   "WeilConjectures.LisseHomComparisonType",
+   "WeilConjectures.lisseHomReducedBasisRing",
+   "WeilConjectures.lisseHomModelMapRing",
+   "WeilConjectures.lisseHomSourceCoordinatesRing",
+   "WeilConjectures.lisseHomTargetCoordinatesRing",
+   "WeilConjectures.LisseHomLocalFreeCalculationRing",
+   "WeilConjectures.lisseHomRestrictionGeneral",
+   "WeilConjectures.lisseHomRestrictionRing",
+   "WeilConjectures.LisseHomRestrictionSquare",
+   "WeilConjectures.LisseHomRestrictionCompatibilityRing"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeHomLocalCalculation.lean",
+  "statement": "def LisseHomLocalFreeCalculationRing (A B : Type (u + 1)) [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) (K N : Etale.DerivedCategoryModule A T) (u : LisseHomComparisonType A B φ T K N) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586601c33",
+  "group": "Q143",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586601c33",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Re-delivery after the 20565c32 RETURN (H2, three ownership points), all repaired. (1) The item and def-sf-finite-free-hom-local-calculation cite the existing:true owner def-pur-etale-scalar-pullback-iso instead of the theorem lem-pur-etale-scalar-mate-projection. (2) lem-sf-flat-model is replaced by the new existing:true def-sf-etale-bounded-flat-complex; its statement matches FlatModel.lean IsBoundedFlatComplex (Λ in u+1, X in u, arbitrary a,b, IsZero outside, flat terms), and the local-calculation module adds the public import, the only Lean change. (3) New existing:true def-sf-etale-site-perfect-complex matches SitePerfect.lean IsSitePerfect (étale cover, per-member bounds, retracts of constant Fin m → Λ, L f^* K ≅ Q P). No other DAG node owns either declaration (scan of live and side-live). New nodes' stmt_deps equal their citations; lean.statement fields are verbatim. The item changes only lean and stmt_deps (adds 6 def nodes, loses none, adds no theorem). The other changed dep records equal side-live (Q84/Y7 base movement). Theorem and coordinate modules are byte-identical to the returned head, whose mathematics was checked clause by clause and re-read: index shift, projective L, Tor intervals [a,b+2dX+1] and [a-2dS,b+2dX+1+2dS], both ctf endpoints, IsIso of the canonical etaleFiniteHomCanonical, local evaluation identity including t=0, restriction square. sorry only in the theorem; no hollow defs; no pro-étale substitute. Not compiled (no file changed). Advisory: Lean-file source.document on the ownership nodes; the item imports the old Hom/change-of-rings modules, which the rebound Q84 modules re-export; the unused inherited def-weil-site-perfect-complex stmt_dep; the second reading was by the same worker."
+ }
+}

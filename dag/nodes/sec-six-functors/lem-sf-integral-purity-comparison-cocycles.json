@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-integral-purity-comparison-cocycles",
+ "kind": "statement",
+ "title": "Canonical integral purity comparison cocycles",
+ "statement": "Fix the finite-field datum $D$, its coefficient datum $C$, a finite coefficient field $E$, and a smooth separated finite-type morphism $f:X\\to Y$ of pure relative dimension $r$ between separated finite-type schemes over $D.k$. Use the specified source and exceptional objects, their reduction maps [def-pur-adic-purity-objects], the normalized scalar family [lem-pur-adic-purity-scalar-naturality], and the finite reduction comparisons [def-pur-finite-reduction-comparisons]. Assume the actual completed-ring projections satisfy $p_n q_{n,m}=p_m$ for $m\\le n$. Let $\\alpha$ be the derived tensor associator conjugated by reductionBridge, and $c_N$ the canonical support comparison conjugated by reductionBridge and finiteImageIso. For every integral finite-Tor input $K$ and $m\\le n$, reduction of its source comparison followed by the finite source comparison and shifted pullback of $\\alpha_Y$ equals $\\alpha_X$ followed by its source comparison at $m$. The analogous equation holds for its exceptional comparison, and for $N=H_RK$ or $N=G_RK$ the reduction of $c_N$ followed by the finite support comparison and support of $\\alpha_X$ equals $\\alpha_Y$ followed by $c_N$ at $m$. These are equalities of actual derived morphisms, with exactly the canonical tensor associators defined by the stated projection identity; equal indices are included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6), integral purity transport, canonical successive quotient comparisons and actual exceptional counits; parent proof steps 2 and 6"
+ },
+ "stmt_deps": [
+  "def-pur-adic-purity-objects",
+  "lem-pur-adic-purity-scalar-naturality",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-smooth-trace",
+  "lem-sf-constructible-exceptional-adjunction-coefficients",
+  "def-pur-adic-source-reduction",
+  "def-pur-adic-exceptional-reduction"
+ ],
+ "proof": [
+  {
+   "text": "identify the two derived reduction functors by the unique comparison of\nleft adjoints to composite scalar restriction. The hypothesis is the equality of\nactual completed-ring projections, so this comparison is the tensor associator.\nThe scalar adjunction units identify it with the direct quotient normalization in\npurAdicSource_finiteness_reductions. Substitute this into its source square.\nFor the exceptional square, transpose under compact support and exceptional inverse\nimage. The coefficient mate preserves the actual counit, so mate pasting identifies\nsuccessive reduction with direct reduction. The integral exceptional tower evaluation\nhas this same normalization, giving the asserted target square. For support, apply\ncomparison_composition, conjugate by reductionBridge and finiteImageIso, and use\nnaturality of these isomorphisms. Its finite comparison is exactly the specified\ncompact-support scalar mate. This proves the support square for every input N,\nhence for the two stated inputs. At equal indices the same unit-normalized adjunction\ncomparison gives the identity quotient equation; no nonempty-scheme assumption enters.",
+   "uses": [
+    "lem-pur-adic-source-finiteness-reductions",
+    "prop-coef-integral-exceptional-adjoint",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-coef-finite-exceptional"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-adic-source-finiteness-reductions",
+  "prop-coef-integral-exceptional-adjoint",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-coef-finite-exceptional"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6), integral purity transport, canonical successive quotient comparisons and actual exceptional counits; parent proof steps 2 and 6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor reduction exceptional adjunction counit and successive quotient cocycle",
+   "results": "CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derivedε. These are general adjunction APIs, not the prescribed integral and finite coefficient comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient reduction of smooth purity and its inverse commutes with the exceptional counit trace",
+   "results": "CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derived_counit; general derived adjunction equations, no identification of the pro-etale coefficient realizations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientProjection|completedIntegralCoefficients.*π|finiteReductionRingHom",
+   "results": "msearch Mathlib grep returned no hits. Local project search found comparison_composition, finiteReductionOfPurity and the source-normalization equation, which supply parts but not the displayed combined comparisons in reconstruction coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedIntegralPurityTrace",
+  "date": "2026-10-25",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (6), integral purity transport, canonical successive quotient comparisons and actual exceptional counits; parent proof steps 2 and 6",
+   "via": [
+    "lem-sf-normalized-integral-purity-trace",
+    "lem-sf-package-normalized-orientation-perfect-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPurityComparisonCocycles",
+  "file": "lean/Sheaf/Paper/IntegralPurityComparisonCocycles.lean",
+  "declaration": "WeilConjectures.NormalizedIntegralPurityTrace.integralPurityComparisonCocycles",
+  "statement": "theorem integralPurityComparisonCocycles (hprojection : ∀ (W : Scheme.{u}) (n m : ℕ) (h : m ≤ n), (PurCompactSupport.reduction C.l E.val (n + 1) (Nat.succ_pos n)).map W ≫ Scheme.proEtaleConstantRingMap (T := W) ((purAdicFiniteSetting D C E.val n).finiteReductionRingHom (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h)) = (PurCompactSupport.reduction C.l E.val (m + 1) (Nat.succ_pos m)).map W) (K : Cat D C E Y) (α : ∀ (W : Scheme.{u}) (n m : ℕ) (h : m ≤ n), scalarReductionDerivedExtension C.l E.val W n ⋙ (purAdicFiniteSetting D C E.val n).finiteReduction (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) W ≅ scalarReductionDerivedExtension C.l E.val W m) (hα : α = fun (W : Scheme.{u}) (n m : ℕ) (h : m ≤ n) ↦ (show scalarReductionDerivedExtension C.l E.val W n ⋙ (purAdicFiniteSetting D C E.val n).finiteReduction (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) W ≅ scalarReductionDerivedExtension C.l E.val W m from Functor.isoWhiskerRight (reductionBridge D C E W n) _ ≪≫ PurCompactSupport.tensorComposition ((PurCompactSupport.reduction C.l E.val (n + 1) (Nat.succ_pos n)).map W) (Scheme.proEtaleConstantRingMap (T := W) ((purAdicFiniteSetting D C E.val n).finiteReductionRingHom (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h))) ((PurCompactSupport.reduction C.l E.val (m + 1) (Nat.succ_pos m)).map W) (hprojection W n m h) ≪≫ (reductionBridge D C E W m).symm)) (c : ∀ (N : DerivedCategory (scalarReductionSource C.l E.val X)) (n : ℕ), (scalarReductionDerivedExtension C.l E.val Y n).obj ((PurCompactSupport.image (PurCompactSupport.completed C.l E.val) (integralExceptionalCompactification D f)).obj N) ⟶ ((purAdicFiniteSetting D C E.val n).smoothCompactSupport f).obj ((scalarReductionDerivedExtension C.l E.val X n).obj N)) (hc : c = fun (N : DerivedCategory (scalarReductionSource C.l E.val X)) (n : ℕ) ↦ (show (scalarReductionDerivedExtension C.l E.val Y n).obj ((PurCompactSupport.image (PurCompactSupport.completed C.l E.val) (integralExceptionalCompactification D f)).obj N) ⟶ ((purAdicFiniteSetting D C E.val n).smoothCompactSupport f).obj ((scalarReductionDerivedExtension C.l E.val X n).obj N) from (reductionBridge D C E Y n).hom.app _ ≫ (PurCompactSupport.comparison.{u} (PurCompactSupport.reduction C.l E.val (n + 1) (Nat.succ_pos n)) (integralExceptionalCompactification D f)).app N ≫ (PurCompactSupport.finiteImageIso.{u} C.l E.val n (integralExceptionalCompactification D f)).hom.app _ ≫ ((purAdicFiniteSetting D C E.val n).smoothCompactSupport f).map ((reductionBridge D C E X n).inv.app N))) : ∀ (n m : ℕ) (h : m ≤ n), ((purAdicFiniteSetting D C E.val n).finiteReduction (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) X).map (purAdicSourceReduction D C E.val f r K.obj K.property n) ≫ ((purAdicFiniteSetting D C E.val n).finiteReductionSourceComparison (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) f r _).hom ≫ ((purAdicFiniteSetting D C E.val m).compositionShiftedPullback f r).map ((α Y n m h).hom.app K.obj) = (α X n m h).hom.app (purAdicSource D C E.val f r K.obj) ≫ purAdicSourceReduction D C E.val f r K.obj K.property m ∧ ((purAdicFiniteSetting D C E.val n).finiteReduction (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) X).map (purAdicTargetReduction D C E.val f r K.obj K.property n) ≫ (purAdicFiniteSetting D C E.val n).finiteReductionExceptionalComparison (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) f r _ (purAdicReductionFiniteTor D C E.val Y K.obj K.property n) ≫ ((purAdicFiniteSetting D C E.val m).compositionExceptional f).map ((α Y n m h).hom.app K.obj) = (α X n m h).hom.app (purAdicTarget D C E.val f K.obj) ≫ purAdicTargetReduction D C E.val f r K.obj K.property m ∧ ∀ N : DerivedCategory (scalarReductionSource C.l E.val X), N = purAdicSource D C E.val f r K.obj ∨ N = purAdicTarget D C E.val f K.obj → ((purAdicFiniteSetting D C E.val n).finiteReduction (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) Y).map (c N n) ≫ (purAdicFiniteSetting D C E.val n).finiteReductionCompactSupportComparison (m + 1) (Nat.succ_pos m) (Nat.succ_le_succ h) f _ ≫ ((purAdicFiniteSetting D C E.val m).smoothCompactSupport f).map ((α X n m h).hom.app N) = (α Y n m h).hom.app ((PurCompactSupport.image (PurCompactSupport.completed C.l E.val) (integralExceptionalCompactification D f)).obj N) ≫ c N m",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T003144-L-150095",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T003144-L-150095",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

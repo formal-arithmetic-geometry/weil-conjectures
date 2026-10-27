@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-adic-ordinary-tensor-transition",
+ "kind": "statement",
+ "title": "Consecutive naturality of the explicit ordinary quotient level maps",
+ "statement": "Let A be a commutative ring, I an ideal, P any A-module cochain complex, and L_n⊣Res_n any supplied quotient derived adjunctions. Use the explicit maps c_n and ordinary tensor diagram T(P) of [lem-weil-pbc-adic-ordinary-tensor-levels], and the canonical quotient diagram D of [lem-weil-pbc-finite-perfect-adic-quotient-diagram]. For every n, D_(n+1→n) followed by c_n equals c_(n+1) followed by Q of the actual quotient transition T(P)_(n+1→n). This asserts only the square for the prescribed maps, not their invertibility. In particular no K-flatness, boundedness, finiteness, completeness or sheaf hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09AW, canonical adic quotient transitions; Tag 06Y6, scalar extension on K-flat representatives. Extracted from parent proof steps 2 and 3. Tag 0BYK (lemma-functoriality-derived-base-change), the induced coefficient transformation."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-adic-ordinary-tensor-levels",
+  "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Write q_n for the quotient map, U_n for restriction and eta_n for ordinary scalar insertion. By the proved unit equation of the explicit level maps, composing the defining derived transpose with its unit gives Q(eta_n), because the exact restriction factorization maps cancel. The consecutive quotient tensor map is linear over A/I^(n+2), with the target action restricted along the quotient homomorphism.",
+   "uses": [
+    "lem-weil-pbc-adic-ordinary-tensor-levels"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Undo the exact restriction and symmetry comparisons and the specified composition isomorphism U_n≅U_(n+1)∘Res(A/I^(n+2)→A/I^(n+1)). Both maps in the proposed square are now restrictions of maps with target the restricted nth ordinary extension complex. Apply injectivity of the (n+1)st adjunction Hom bijection. The canonical transition transposes to the lower unit by its definition. The other transpose is the ordinary coefficient quotient map composed with upper scalar insertion. In every cochain degree this sends x to the image of 1 tensor x, namely 1 tensor x, since quotient homomorphisms preserve 1. Thus it is lower scalar insertion. These maps commute with differentials by naturality of insertion. The canonical exact restriction composition isomorphism is the localization of the ordinary identity-on-elements restriction comparison, so its factorization transports the equality to the two transposes. Injectivity proves the square. No K-flatness or invertibility is used.",
+   "uses": [
+    "lem-weil-pbc-adic-ordinary-tensor-levels",
+    "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-ordinary-tensor-levels",
+  "lem-weil-pbc-finite-perfect-adic-quotient-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09AW, canonical adic quotient transitions; Tag 06Y6, scalar extension on K-flat representatives. Extracted from parent proof steps 2 and 3. Tag 0BYK (lemma-functoriality-derived-base-change), the induced coefficient transformation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The transpose of localized ordinary scalar extension unit is an isomorphism on K-flat complexes and is natural in coefficient quotient maps",
+   "results": "8 hits, including Module.Dual.transpose, localization-module scalar equivalences and Functor.mapHomologicalComplexUpToQuasiIsoFactors; no normalized quotient comparison.",
+   "verdict": "Use the project exact-right-adjoint K-flat criterion, not a new K-flat existence assertion.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat tensor complex represents derived quotient scalar extension compatibly with quotient transition maps",
+   "results": "8 hits about Module.Flat tensor exactness; none about derived quotient transitions.",
+   "verdict": "No Mathlib statement for these normalized derived quotient maps.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ModuleCat.extendScalars\", \"DerivedCategory\"",
+   "results": "0 hits.",
+   "verdict": "No direct comparison.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*[Tt]ranspose|[Tt]ensor.*[Qq]uotient.*[Dd]iagram",
+   "results": "0 Mathlib hits. Read ModuleCat.ChangeOfRings, Homology.Additive and Functor.OfSequence.",
+   "verdict": "These supply the ordinary functors and sequential assembly, not the derived unit normalization.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicFlatTensorComparison",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof of Tag 09C6, the displayed completed quotient complex before the inverse-limit argument: Consecutive naturality of the explicit ordinary quotient level maps.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-flat-tensor-comparison",
+    "lem-weil-pbc-finite-perfect-adic-canonical-comparison",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicOrdinaryTensorTransition",
+  "file": "lean/Sheaf/Paper/AdicOrdinaryTensorTransition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicOrdinaryTensorLevelMap_transition",
+  "statement": "theorem adicOrdinaryTensorLevelMap_transition\n    {A : Type t} [CommRing A] (I : Ideal A)\n    (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤\n      DerivedCategory (ModuleCat.{t} (A ⧸ I ^ (n + 1))))\n    (adj : ∀ n : ℕ, L n ⊣ DerivedCategory.adicLevelRestriction I n)\n    (P : CochainComplex (ModuleCat.{t} A) ℤ) (n : ℕ) :\n    (finitePerfectAdicQuotientDiagram I L adj (DerivedCategory.Q.obj P)).map\n        (homOfLE (Nat.le_succ n)).op ≫\n        adicOrdinaryTensorLevelMap I L adj P n =\n      adicOrdinaryTensorLevelMap I L adj P (n + 1) ≫\n        DerivedCategory.Q.map ((adicOrdinaryTensorComplexDiagram I P).map\n          (homOfLE (Nat.le_succ n)).op)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorLevelMap_transition",
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorComplexDiagram_comparison"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T064434-L-2176103",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T084339-L-3670691",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.adicOrdinaryTensorLevelMap_transition"
+  ],
+  "sorry_after": []
+ }
+}

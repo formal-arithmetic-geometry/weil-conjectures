@@ -1,0 +1,374 @@
+{
+ "id": "lem-sfb-good-coresolution-product-total",
+ "kind": "statement",
+ "title": "Good coresolutions of complexes compute product totalization",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $M^\\bullet,E_0^\\bullet,E_1^\\bullet,\\ldots$ be integer-indexed cochain complexes of abelian groups, with differentials $d$ of degree $1$ satisfying $d^2=0$. Let $u:M^\\bullet\\to E_0^\\bullet$ and $f_i:E_i^\\bullet\\to E_{i+1}^\\bullet$ be chain maps. Assume $0\\to M^\\bullet\\xrightarrow{u}E_0^\\bullet\\xrightarrow{f_0}E_1^\\bullet\\to\\cdots$ is exact in every degree. Assume also that for every $n\\in\\mathbf Z$ the induced sequence $0\\to M^n/d_M(M^{n-1})\\to E_0^n/d_{E_0}(E_0^{n-1})\\to E_1^n/d_{E_1}(E_1^{n-1})\\to\\cdots$ is exact. Define $T^n=\\prod_{i\\ge0}E_i^{n-i}$ and $(d_Tx)_i=f_{i-1}(x_{i-1})+(-1)^i d_{E_i}(x_i)$, with the first summand zero for $i=0$. Then the augmentation $M^\\bullet\\to T^\\bullet$, $m\\mapsto(u(m),0,0,\\ldots)$, is a quasi-isomorphism, meaning that it induces isomorphisms on $H^n=\\ker d^n/\\operatorname{im}d^{n-1}$ for every $n$. No boundedness assumption on the individual complexes is imposed.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09J0, homology.tex, lemma-good-right-resolution-gives-qis, statement and the displayed product-total differential in its proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Write $a:M^\\bullet\\to T^\\bullet$ for the augmentation. Degreewise exactness gives $f_0u=0$ and $f_if_{i-1}=0$. For $i\\ge1$, the $i$th component of $d_T^2x$ is $f_{i-1}f_{i-2}x_{i-2}+((-1)^{i-1}+(-1)^i)f_{i-1}d x_{i-1}+d^2x_i=0$, omitting the first term for $i=1$; the component $i=0$ is $d^2x_0=0$. We used $df_{i-1}=f_{i-1}d$. Similarly $d_Ta(m)=a(d_Mm)$, so this is a complex and $a$ is a chain map. All formulas use only finitely many coordinates at a time.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-good-coresolution-cohomology-rows] to the given chain maps: its degreewise exactness and differential-cokernel exactness are precisely the two assumptions of the item. Thus $0\\to H^q(M)\\to H^q(E_0)\\to H^q(E_1)\\to\\cdots$ is exact for every $q$. This is the sole supporting theorem needed in the induction below.",
+   "uses": [
+    "lem-sfb-good-coresolution-cohomology-rows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, proof"
+   }
+  },
+  {
+   "text": "Fix $n\\in\\mathbf Z$ and a cocycle $x=(x_i)\\in T^n$. The first two cocycle equations give $d x_0=0$ and $f_0x_0=d x_1$. Exactness of the differential-cokernel row in degree $n$ gives $m\\in M^n$ and $v\\in E_0^{n-1}$ with $x_0=u(m)+dv$. Applying $d$ gives $u(dm)=0$, hence $dm=0$ since $u$ is degreewise injective. Replace $x$ by $r=x-a(m)$: it is a cocycle with $r_0=dv$. It remains to construct $y\\in T^{n-1}$ with $d_Ty=r$. Start with $y_0=v$, which solves the coordinate-zero equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, proof"
+   }
+  },
+  {
+   "text": "Inductively suppose $y_0,\\ldots,y_k$, with $y_j\\in E_j^{n-j-1}$, solve $r_j=f_{j-1}y_{j-1}+(-1)^jdy_j$ for $0\\le j\\le k$ (omit $f_{-1}y_{-1}$). Put $w=r_{k+1}-f_ky_k\\in E_{k+1}^{n-k-1}$. The cocycle equation for $r$ gives $dr_{k+1}=(-1)^k f_kr_k$, so $dw=0$ by the equation at $k$ and $f_kf_{k-1}=0$. Also $f_{k+1}w=f_{k+1}r_{k+1}=(-1)^{k+3}dr_{k+2}$ is a boundary. By [lem-sfb-good-coresolution-cohomology-rows] in degree $n-k-1$, choose a cycle $z\\in E_k^{n-k-1}$ whose image under $f_k$ has cohomology class $[w]$. Replace $y_k$ by $y_k+z$. This keeps its equation because $dz=0$; it leaves all earlier equations unchanged. Now $w-f_kz$ is a boundary, so choose $y_{k+1}\\in E_{k+1}^{n-k-2}$ with $(-1)^{k+1}dy_{k+1}=w-f_kz$. This solves the next coordinate equation and completes the induction.",
+   "uses": [
+    "lem-sfb-good-coresolution-cohomology-rows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, proof"
+   }
+  },
+  {
+   "text": "Choose witnesses recursively in the preceding construction. At stage $k+1$ only $y_k$ is changed and $y_{k+1}$ is added. Each coordinate $y_j$ is therefore fixed permanently after stage $j+1$; take this final value as the $j$th coordinate of $y\\in\\prod_{j\\ge0}E_j^{n-j-1}=T^{n-1}$. The equation at coordinate $j$ holds once the coordinates $j-1,j$ have stabilized, so it holds for this $y$. Hence $d_Ty=r$, and $[x]=H^n(a)[m]$. This proves surjectivity. No limit in a topological group or infinite sum is involved: $y$ is simply the family of its final coordinates.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, proof"
+   }
+  },
+  {
+   "text": "For injectivity, let $m\\in M^n$ be a cocycle and suppose $a(m)=d_Ty$ for $y\\in T^{n-1}$. Coordinates zero and one say $u(m)=dy_0$ and $f_0y_0=dy_1$. Thus the class of $y_0$ in $E_0^{n-1}/d(E_0^{n-2})$ lies in the kernel of the map to $E_1^{n-1}/d(E_1^{n-2})$. The assumed exact cokernel row in degree $n-1$ gives $z\\in M^{n-1}$ and $t\\in E_0^{n-2}$ with $y_0=u(z)+dt$. Differentiating yields $u(m)=u(dz)$; degreewise injectivity of $u$ gives $m=dz$. Therefore $H^n(a)$ is injective. Together with surjectivity, for arbitrary $n$, this proves the stated quasi-isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-good-coresolution-cohomology-rows"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 09J0, lemma-good-right-resolution-gives-qis, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "good.right.resolution|product.total|total.*quasiIso",
+   "results": {
+    "t": "2026-10-24T01:24:49Z",
+    "tool": "grep",
+    "query": "good.right.resolution|product.total|total.*quasiIso",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary injective resolutions, single short exact sequences, and quasi-isomorphism closure, not a product total of a nonnegative unbounded bicomplex with exact differential-cokernel rows. CM5b.instQuasiIsoIntP is a projection from a mapping-cone factorization, not this augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact complex of complexes and exact cokernel rows product totalization quasi isomorphism",
+   "results": {
+    "t": "2026-10-24T01:24:50Z",
+    "tool": "leansearch",
+    "query": "Exact complex of complexes and exact cokernel rows product totalization quasi isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "quasiIso_comp",
+     "CategoryTheory.ShortComplex.QuasiIso.exact_iff",
+     "quasiIsoAt_iff_exactAt'",
+     "CategoryTheory.ShortComplex.Exact.gIsCokernel",
+     "HomologicalComplex.instIsMultiplicativeQuasiIso",
+     "CategoryTheory.ShortComplex.quasiIso_comp",
+     "quasiIsoAt_iff_exactAt",
+     "exactAt_iff_of_quasiIsoAt"
+    ],
+    "digest": "3ec31701c53dc973"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary injective resolutions, single short exact sequences, and quasi-isomorphism closure, not a product total of a nonnegative unbounded bicomplex with exact differential-cokernel rows. CM5b.instQuasiIsoIntP is a projection from a mapping-cone factorization, not this augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"quasiIso\"",
+   "results": {
+    "t": "2026-10-24T01:24:50Z",
+    "tool": "loogle",
+    "query": "\"total\", \"quasiIso\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary injective resolutions, single short exact sequences, and quasi-isomorphism closure, not a product total of a nonnegative unbounded bicomplex with exact differential-cokernel rows. CM5b.instQuasiIsoIntP is a projection from a mapping-cone factorization, not this augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact nonnegative coresolution of complexes exact on cokernels of differentials gives a quasi-isomorphism to its product total complex",
+   "results": {
+    "t": "2026-10-24T01:24:53Z",
+    "tool": "leanfinder",
+    "query": "An exact nonnegative coresolution of complexes exact on cokernels of differentials gives a quasi-isomorphism to its product total complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "HomologicalComplex.HomologySequence.quasiIso_τ₃",
+     "CochainComplex.mappingCone.quasiIso_descShortComplex",
+     "HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE",
+     "quasiIsoAt_iff_exactAt'",
+     "CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'",
+     "quasiIsoAt_iff_exactAt",
+     "CategoryTheory.InjectiveResolution.instQuasiIsoIntι'"
+    ],
+    "digest": "3387fb38181a2c6a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary injective resolutions, single short exact sequences, and quasi-isomorphism closure, not a product total of a nonnegative unbounded bicomplex with exact differential-cokernel rows. CM5b.instQuasiIsoIntP is a projection from a mapping-cone factorization, not this augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stacks good right resolution product total complex exactness of differential cokernels",
+   "results": {
+    "t": "2026-10-24T01:26:27Z",
+    "tool": "leanfinder",
+    "query": "Stacks good right resolution product total complex exactness of differential cokernels",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ",
+     "CategoryTheory.InjectiveResolution.exact_succ",
+     "CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ",
+     "CategoryTheory.InjectiveResolution.exact₀",
+     "CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ",
+     "CategoryTheory.ProjectiveResolution.complex_exactAt_succ",
+     "CategoryTheory.InjectiveResolution.descFSucc",
+     "CategoryTheory.Abelian.LeftResolution.map_chainComplex_d_1_0_assoc"
+    ],
+    "digest": "e58dc1a052e377a6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary injective resolutions, single short exact sequences, and quasi-isomorphism closure, not a product total of a nonnegative unbounded bicomplex with exact differential-cokernel rows. CM5b.instQuasiIsoIntP is a projection from a mapping-cone factorization, not this augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "good.*resolution|product.*total|total.*quasiIso",
+   "results": {
+    "t": "2026-10-24T01:57:51Z",
+    "tool": "grep",
+    "query": "good.*resolution|product.*total|total.*quasiIso",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no product-total augmentation theorem. CM5b.instQuasiIsoIntP is the projection from a mapping-cone factorization, not a good coresolution; read Mathlib/Algebra/Homology/Factorizations/CM5b.lean:35-93. Ordinary injective resolutions and augmentations do not give this unbounded product total theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Product total of exact coresolution exact on differential cokernels is quasi isomorphic to the augmented complex",
+   "results": {
+    "t": "2026-10-24T01:57:52Z",
+    "tool": "leansearch",
+    "query": "Product total of exact coresolution exact on differential cokernels is quasi isomorphic to the augmented complex",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.augment",
+     "CategoryTheory.ShortComplex.Exact.gIsCokernel",
+     "CochainComplex.fromSingle₀AsComplex",
+     "CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'",
+     "CategoryTheory.InjectiveResolution.instQuasiIsoIntι'",
+     "CategoryTheory.ProjectiveResolution.exact₀",
+     "CategoryTheory.ProjectiveResolution.exact_succ",
+     "CategoryTheory.ShortComplex.exact_iff_of_forks"
+    ],
+    "digest": "6c9e346f443c9473"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no product-total augmentation theorem. CM5b.instQuasiIsoIntP is the projection from a mapping-cone factorization, not a good coresolution; read Mathlib/Algebra/Homology/Factorizations/CM5b.lean:35-93. Ordinary injective resolutions and augmentations do not give this unbounded product total theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"quasiIso\"",
+   "results": {
+    "t": "2026-10-24T01:57:52Z",
+    "tool": "loogle",
+    "query": "\"total\", \"quasiIso\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no product-total augmentation theorem. CM5b.instQuasiIsoIntP is the projection from a mapping-cone factorization, not a good coresolution; read Mathlib/Algebra/Homology/Factorizations/CM5b.lean:35-93. Ordinary injective resolutions and augmentations do not give this unbounded product total theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A good right resolution of an unbounded cochain complex computes its product totalization by a quasi isomorphism",
+   "results": {
+    "t": "2026-10-24T01:57:53Z",
+    "tool": "leanfinder",
+    "query": "A good right resolution of an unbounded cochain complex computes its product totalization by a quasi isomorphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "CochainComplex.IsKProjective",
+     "CochainComplex.cm5b",
+     "CategoryTheory.InjectiveResolution.ofCocomplex",
+     "CategoryTheory.Abelian.LeftResolution.chainComplexXIso",
+     "DerivedCategory.right_fac_of_isStrictlyLE",
+     "CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
+     "CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt"
+    ],
+    "digest": "f1c41e21dee2eca1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no product-total augmentation theorem. CM5b.instQuasiIsoIntP is the projection from a mapping-cone factorization, not a good coresolution; read Mathlib/Algebra/Homology/Factorizations/CM5b.lean:35-93. Ordinary injective resolutions and augmentations do not give this unbounded product total theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-injective-resolution-localization",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): the reduction to the countable subalgebra A' by Tag 09S6, lemma-qis-equivalence. Supporting input for Tag 09S6: Tag 09LT, lemma-tensor-hom-adjoint; its derived tensor and Hom constructions and the canonical tensor/Hom shift comparisons in the preceding sections. Within Tag 09LT: Tags 09KU, lemma-right-resolution; 09KS, lemma-property-I-K-injective, applied also to all shifts; 09KY, lemma-hom-derived, part (2) and its proof, which only uses homotopical injectivity. Supporting input: Tag 09J0, homology.tex, lemma-good-right-resolution-gives-qis, statement and the displayed product-total differential in its proof.",
+   "via": [
+    "lem-sfb-dg-injective-resolution-localization",
+    "lem-sfb-dg-bimodule-derived-adjunction",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-good-coresolution-product-total",
+  "worker": "stage1",
+  "summary": "Q13 follows Stacks 09J0 with its displayed product differential. The exact cohomology-row input is a single smaller statement-only node. The item spells out the signed recursion, the correction by a cycle in the preceding column, stabilization of every coordinate, and injectivity in arbitrary degree; no boundedness or spectral-sequence convergence is assumed. The statement is unchanged.",
+  "blueprint": "Inherited supporting input under current latest det-thm-sf-ctf-stability-direct-images, proof (3): Tag 09LT uses Tag 09KU; its product-total resolution uses Tag 09J0. Here: 09J0 proof, the exact cohomology rows used in the recursive boundary construction."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-1414f4d69",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-1414f4d69 (reviewer sub-agent of L); spot-checked: Read Stacks 09J0 (lemma-good-right-resolution-gives-qis), statement and proof, and the 09IZ first paragraph it invokes. The item statement matches 09J0 hypothesis by hypothesis: Coker(d^p) is reindexed to V^n/dV^{n-1}, and the product total T^n=prod E_i^{n-i} has differential f_{i-1}+(-1)^i d. The statement is unchanged and consistent with its only citer, dg-injective-resolution-localization. The new node lem-sfb-good-coresolution-cohomology-rows is the displayed H-row exactness of the 09J0 proof. I re-proved it as the dual of 09IZ: boundary rows, then cycle rows, then H rows, from the long exact sequences. Small cases (zero, zero differentials, one column) hold, and a degreewise short exact sequence with a non-exact cokernel row shows the extra hypothesis is needed. The node is statement-only and self-contained, with tag+label as source and real searches. It is not a clause of the item and not a duplicate: the picard 09IZ chain is the kernel/direct-sum dual with this exactness inside a step, and the CE row nodes are different statements. I recomputed every sign in steps 1-6: d_T^2=0; the step-3 cokernel lift with dm=0 from injectivity; in step 4, dw=0 via dy_k=(-1)^k(r_k-f_{k-1}y_{k-1}), f_{k+1}w=(-1)^{k+3}dr_{k+2}, z in E_k^{n-k-1} at the same degree as y_k, and y_{k+1}=(-1)^{k+1}e; the step-5 coordinates stabilize after stage j+1 with no limit; step-6 injectivity uses the degree-(n-1) cokernel row. The induction is properly stated (D4), the only non-elementary input is cited (C1), there is no cycle and everything is in the same unit. Minor: the report mentions a citations.json that is not in the commit, which has no effect. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.GoodCoresolutionProductTotal",
+  "declaration": "CochainComplex.GoodCoresolution.augmentation_quasiIso",
+  "declarations": [
+   "CochainComplex.GoodCoresolution.productTerm",
+   "CochainComplex.GoodCoresolution.horizontalComponent",
+   "CochainComplex.GoodCoresolution.productDifferential",
+   "CochainComplex.GoodCoresolution.productDifferential_comp",
+   "CochainComplex.GoodCoresolution.productTotal",
+   "CochainComplex.GoodCoresolution.augmentationCoordinate",
+   "CochainComplex.GoodCoresolution.augmentationComponent",
+   "CochainComplex.GoodCoresolution.augmentationComponent_comm",
+   "CochainComplex.GoodCoresolution.augmentation",
+   "CochainComplex.GoodCoresolution.augmentation_quasiIso"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/GoodCoresolutionProductTotal.lean",
+  "statement": "theorem augmentation_quasiIso (M : CochainComplex AddCommGrpCat.{u} ℤ) (E : ℕ → CochainComplex AddCommGrpCat.{u} ℤ) (u : M ⟶ E 0) (f : ∀ i : ℕ, E i ⟶ E (i + 1)) (h_inj : ∀ n : ℤ, Function.Injective (u.f n)) (h₀ : ∀ n : ℤ, Function.Exact (u.f n) ((f 0).f n)) (h : ∀ (i : ℕ) (n : ℤ), Function.Exact ((f i).f n) ((f (i + 1)).f n)) (hc_inj : ∀ n : ℤ, Function.Injective (opcyclesMap u n)) (hc₀ : ∀ n : ℤ, Function.Exact (opcyclesMap u n) (opcyclesMap (f 0) n)) (hc : ∀ (i : ℕ) (n : ℤ), Function.Exact (opcyclesMap (f i) n) (opcyclesMap (f (i + 1)) n)) : QuasiIso (augmentation M E u f h h₀)",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The product total and augmentation explicitly specified by this node are constructed by the listed helpers. The two preliminary named theorems are precisely the well-definedness assertions in proof step 1: the total differential squares to zero and the augmentation is a chain map. All data are explicit; only these proofs and the quasi-isomorphism proof are postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b191269d",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Read node, Stacks homology.tex 09J0 (l.6928ff) statement and the displayed Tot_pi differential, the delivered module and report. Clause match: h_inj/h0/h give the degreewise exact augmented row; hc_inj/hc0/hc on opcyclesMap n give the V^n/dV^{n-1} row (opcycles = coker d(n-1,n) for up Z), matching Stacks Coker(d^p) reindexed. productTerm is the genuine Pi product of E_i^{n-i}; the differential is horizontalComponent (0 at i=0, f_i then eqToHom) + (-1)^i d with the correct degrees; the augmentation is (u,0,0,...); the conclusion is QuasiIso of that actual map (meets the derived-form rule). The helper theorems productDifferential_comp and augmentationComponent_comm are node proof step 1 and true as typed. No boundedness; a single universe u, no restriction. Only sorry proofs; docstrings with source and blueprint; lean.statement verbatim; all 10 declarations listed; only the lean field differs from live. H4 grep of the project and Mathlib found no product totalization; the item is not landed elsewhere. No compile since no change; worker reports clean scompile. Advisory: the second reading was written by the worker itself."
+ }
+}

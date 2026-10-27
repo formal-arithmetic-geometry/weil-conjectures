@@ -1,0 +1,157 @@
+{
+ "id": "lem-sf-finite-coefficient-site-tensor-naturality",
+ "kind": "statement",
+ "title": "Chosen finite coefficient chain tensor comparisons are natural",
+ "status": "split",
+ "statement": "At each positive finite coefficient level, the pointwise isomorphisms finiteHomNuChainTensor of [def-sf-finite-coefficient-site-chain-tensor] assemble into a natural isomorphism from total tensor followed by termwise inverse image to the intrinsic total tensor of the two inverse images. Its component at every pair P,Q is exactly the specified pointwise isomorphism.",
+ "stmt_deps": [
+  "def-sf-finite-coefficient-site-chain-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Final site-transport paragraph; Stacks Project, Cohomology on Sites, Tags 06YN and 07A4."
+ },
+ "proof": [
+  {
+   "text": "Choose the normalized ordinary tensor natural isomorphism of finiteCoefficientIntrinsicComparison. It is a genuine natural isomorphism, not an arbitrary family of pointwise maps.",
+   "uses": [
+    "lem-sf-finite-intrinsic-tensor-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the total-bifunctor comparison to this ordinary comparison. Its naturality gives a natural isomorphism on cochain complexes, and its total-summand equation gives FiniteCoefficientChainTensorNormalization. Identify the explicit source tensor functor using its native tensor maps.",
+   "uses": [
+    "lem-pc-total-bifunctor-comparison-iso",
+    "lem-sf-finite-intrinsic-chain-tensor-generators",
+    "def-sf-etale-finite-coefficient-hom-arrow",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each pair of complexes, uniqueness of the normalized chain comparison identifies this natural isomorphism with the specified finiteHomNuChainTensor. This yields the requested component equation.",
+   "uses": [
+    "def-sf-finite-coefficient-site-chain-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-sf-finite-coefficient-site-chain-tensor",
+  "lem-pc-total-bifunctor-comparison-iso",
+  "lem-sf-finite-intrinsic-chain-tensor-generators",
+  "lem-sf-finite-intrinsic-tensor-generators"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y7",
+  "date": "2026-10-22",
+  "note": "Lift the existing normalized ordinary natural tensor comparison to total complexes, identify chosen components abstractly by uniqueness, assemble over an arbitrary finite ring, and then specialize. The shared naturality predicate packages the component equation as heterogeneous equality; the presentation retains that certificate through specialization; native witnesses are compared by ordinary equality only in the abstract uniqueness proof.",
+  "place": " The source ChainIso and uniquely normalized comparison are named before specialization. The ringed-site tensor uses its shared generic constructor. Heterogeneous component equality is retained through specialization; the abstract uniqueness proof compares its native witnesses by ordinary equality."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of inverse-image tensor comparisons follows from pure tensors and total summand inclusions",
+   "results": "[leanfinder] OK 8 hit(s); Generic tensor and total-summand naturality APIs, no specialized intrinsic inverse-image natural isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "Use the generic naturality APIs with the two comparison adjunctions and the existing generator normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.ι_mapBifunctorMap",
+   "results": "[loogle] OK 1 hit(s); HomologicalComplex.ι_mapBifunctorMap",
+   "date": "2026-10-22",
+   "verdict": "Use the generic naturality APIs with the two comparison adjunctions and the existing generator normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPure_natural|ι_mapBifunctorMap|μ_natural",
+   "results": "[grep] OK 25 hit(s); Generic tensor and total-summand naturality APIs, no specialized intrinsic inverse-image natural isomorphism.",
+   "date": "2026-10-22",
+   "verdict": "Use the generic naturality APIs with the two comparison adjunctions and the existing generator normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive colimit preserving strong monoidal functor has a natural tensor isomorphism on total cochain complexes",
+   "results": {
+    "t": "2026-10-22T03:42:54Z",
+    "tool": "leansearch",
+    "query": "An additive colimit preserving strong monoidal functor has a natural tensor isomorphism on total cochain complexes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.preservesColimitNatIso",
+     "CategoryTheory.Functor.Monoidal.ofBifunctor",
+     "CategoryTheory.Functor.CommShift.isoAdd",
+     "HomologicalComplex.tensorHom",
+     "CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor",
+     "CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape",
+     "CategoryTheory.instPreservesColimitsTensorLeft",
+     "instAdditiveFunctorColim"
+    ],
+    "digest": "82c1abf10fc4bc8b"
+   },
+   "date": "2026-10-22",
+   "verdict": "General colimit natural isomorphisms and tensor morphisms exist; no hit gives the required normalized natural total-complex comparison. The proof uses the existing total-bifunctor comparison and source normalization uniqueness."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientSiteHomArrow",
+  "date": "2026-10-22",
+  "group": "Y7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sf-finite-coefficient-site-hom-arrow",
+   "place": "Chosen finite coefficient chain tensor comparisons are natural",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCoefficientSiteTensorNaturality",
+  "file": "lean/Sheaf/Paper/FiniteCoefficientSiteTensorNaturality.lean",
+  "declaration": "WeilConjectures.finiteHomNuChainTensor_naturalIso",
+  "statement": "theorem finiteHomNuChainTensor_naturalIso (n : ℕ) :\n    FiniteHomChainTensorNaturalityAux (finiteHomNuComplex l E X n)\n      (finiteHomCochainTensorGeneral _)\n      (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X)\n        (integralCoefficientCommRingSheaf l E X n))\n      (finiteHomNuChainTensor l E X n)",
+  "branch": "sheaf-dag",
+  "by": "Y7",
+  "date": "2026-10-22",
+  "declarations": [
+   "WeilConjectures.coefficientTotalTensorGeneral",
+   "WeilConjectures.FiniteHomChainTensorNaturalityAux",
+   "WeilConjectures.finiteHomNuChainTensor_naturalIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-91a91",
+  "group": "Y7",
+  "result": "fix",
+  "landing": "20261022T114256-L-598666",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 91a912d9 vs prior FIXed head 4ada08f3 (cmp: all Lean/node files identical, only change record status + report differ) and live (CoefficientRingedTensorHomModel and importer IntegralTensorReductionTowerComparison unchanged); fixed set of 10 modules compiled with run_set, exit 0; checker rule stage3_delivery.py:602-606 (Status must start with open)"
+ }
+}

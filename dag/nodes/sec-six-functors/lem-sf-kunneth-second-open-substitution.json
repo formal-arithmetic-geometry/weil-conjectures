@@ -1,0 +1,298 @@
+{
+ "id": "lem-sf-kunneth-second-open-substitution",
+ "kind": "statement",
+ "title": "Second-open substitution and its proper/open projection square",
+ "statement": "Fix distinct primes $p_0,\\ell$, integers $d,n\\geq1$, $\\kappa=\\overline{\\mathbf F_{p_0^d}}$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$. Work with a six-functor datum [def-sf-datum] and the specified canonical exchange and projection maps [def-exchange-projection, def-sf-pf]. All schemes are separated finite-type $\\kappa$-schemes and all morphisms are separated of finite type. Write $P_h=Lh^*$, $S_h=Rh_!$ and $J_i=i_!$ for an open immersion; for proper $h$ use $S_h=Rh_*$. All tensors are derived over $\\Lambda$, and $\\sigma$ is the signed symmetry. Use the canonical composition comparisons $\\alpha_{h,e}:S_hS_e\\cong S_{he}$ of [thm-sf-comp-composition], on the bounded constructible etale-origin domain identified by [lem-sf-proetale-constructible-origin]. For $A$ on the target of $h$ and $N$ on its source, put $\\Theta_h(A,N)=S_h(\\sigma)\\operatorname{PF}_{h,N,A}\\sigma:A\\otimes S_hN\\to S_h(P_hA\\otimes N)$. For $h:V\\to B$, $z:Z\\to B$, projections $r_0:V\\times_BZ\\to V$, $s_0:V\\times_BZ\\to Z$, and $C\\in D^b_{ctf}(V,\\Lambda)$, $N\\in D^b_{ctf}(Z,\\Lambda)$, define the specified map\n$$\\lambda_{h,z}(C,N)=\\alpha_{z,s_0}\\,S_z\\bigl(\\operatorname{PF}_{s_0,P_{r_0}C,N}(\\operatorname{Ex}_{h,z}(C)\\otimes1)\\bigr)\\Theta_z(S_hC,N).$$\nJuxtaposition composes right to left, with the canonical pullback and tensor associators inserted. Let $a:\\bar X\\to B$ and $b:\\bar Y\\to B$ be proper and $k:Y\\hookrightarrow\\bar Y$ open (the letter $k$ denotes this open immersion; the base field is $\\kappa$). Put $U=\\bar X\\times_BY$, $W=\\bar X\\times_B\\bar Y$, with projections $r:U\\to\\bar X$, $s:U\\to Y$, $P:W\\to\\bar X$, $Q:W\\to\\bar Y$, and $w=1_{\\bar X}\\times_Bk:U\\hookrightarrow W$. For $M\\in D^b_{ctf}(\\bar X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$, put $H=P_PM$ and $N=P_wH\\otimes P_sL$. Let $\\beta:P_QJ_kL\\xrightarrow{\\sim}J_wP_sL$ be normalized open base change and let $\\widetilde\\gamma_{w,H,A}:H\\otimes J_wA\\xrightarrow{\\sim}J_w(P_wH\\otimes A)$ be the signed open tensor map of [lem-sf-open-tensor-normalization]. Set\n$$e_2=\\widetilde\\gamma_{w,H,P_sL}(1\\otimes\\beta):H\\otimes P_QJ_kL\\xrightarrow{\\sim}J_wN.$$\nThus $e_2$ is the one-open external tensor comparison of [lem-sf-open-external-tensor-normalization]. For $C$ on $W$, put $E_C=\\operatorname{Ex}_{Q,k}(C):P_kS_QC\\to S_sP_wC$. For $C$ on $U$, let $\\Gamma_C:J_kS_sC\\to S_QJ_wC$ be the $J_k\\dashv P_k$-adjunct of $(E_{J_wC})^{-1}:S_sC\\to P_kS_QJ_wC$, using $P_wJ_wC\\cong C$ and the identity normalization of the open unit. Then\n$$\\Gamma_C=\\alpha_{Q,w,C}^{-1}\\alpha_{k,s,C},$$\nand the following square of specified morphisms commutes:\n$$S_Q(e_2)\\operatorname{PF}_{Q,H,J_kL}\n=\\Gamma_N\\,J_k\\bigl(\\operatorname{PF}_{s,P_wH,L}(E_H\\otimes1)\\bigr)\\Theta_k(S_QH,L).$$\nConsequently the following equality of the specified exchange/projection composites holds, with targets identified by $S_bJ_kS_s\\cong S_bS_QJ_w$:\n$$\\lambda_{a,bk}(M,L)=S_bS_Q(e_2)\\lambda_{a,b}(M,J_kL).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, expanded compactification reduction; Returned proof steps 1, 2, 5, 6, 7: signed projection composition, horizontal exchange pasting, normalized proper/open square and second open-factor substitution. Agent-formulated identity; the proof-coherence paragraph supplies the canonical projection and exchange route."
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-exchange-projection",
+  "def-sf-pf",
+  "thm-sf-comp-composition",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-open-external-tensor-normalization",
+  "def-sf-proper-open-mate"
+ ],
+ "proof": [
+  {
+   "text": "The square $(s,w,Q,k)$ is Cartesian. Its verticals $Q,s$ are proper, being base changes of $a$, by [lem-weil-pbc-proper-fp-permanence]; its opens are quasi-compact since they are finite type. The canonical exchange $E:P_kS_Q\\cong S_sP_w$ agrees with the open-restriction comparison in [lem-sf-cartesian-open-adjunction-restriction]: that lemma's counit equation is precisely its mate formula in [def-exchange-projection]. The normalized proper/open comparison of [lem-sf-proper-open-tensor-compatibility], specialized to this Cartesian square, is consequently the $J_k\\dashv P_k$-adjunct of $E_{J_wC}^{-1}$; the auxiliary clopen map there is the identity. Hence it is exactly $\\Gamma_C$, and $E_{J_wC}P_k\\Gamma_C=1$ after the open unit identification. Now use the compositor normalization stated in [lem-sf-composition-projection-mate]. For $f=s$, $g=k$ choose the compactification $(k,1_{\\bar Y})$ of $k$ and the compatible triangle $(j,b,q,p)=(1_U,w,s,Q)$. The normalized tower comparison is precisely $\\Gamma$. For $f=w$, $g=Q$ choose $(1_W,Q)$ and $(w,1_W,1_W,1_W)$ for the analogous triangle; its proper/open comparison is the identity, giving the chosen compactification $(w,Q)$ of $Qw=ks$. Thus $\\alpha_{Q,w}\\Gamma=\\alpha_{k,s}$ in these compactification coordinates. The natural, compactification-independent compositors of [thm-sf-comp-composition] give $\\Gamma_C=\\alpha_{Q,w,C}^{-1}\\alpha_{k,s,C}$ as asserted. Their domain includes the inputs here by [lem-sf-proetale-constructible-origin].",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sf-cartesian-open-adjunction-restriction",
+    "def-exchange-projection",
+    "lem-sf-proper-open-tensor-compatibility",
+    "lem-sf-composition-projection-mate",
+    "thm-sf-comp-composition",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: reduction to proper morphisms, expanded second-open substitution; projection base-change and composition coherence. Agent calculation using Stacks Tags 0F7B (lemma-shriek-proper-and-open), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor)."
+   }
+  },
+  {
+   "text": "Put $D=H\\otimes P_QJ_kL$ and $T=\\operatorname{PF}_{s,P_wH,L}(E_H\\otimes1)$. By [lem-sf-open-tensor-normalization], $P_we_2$ is the identity of $N$ after $P_wH\\otimes P_sP_kJ_kL=N$ is identified using the open unit. Indeed restriction of $\\beta$ and of the open tensor map are identities, and the signed variant inserts two mutually inverse symmetries. This also identifies $e_2$ with the one-open external tensor map in [lem-sf-open-external-tensor-normalization]. For any $A$ on $\\bar Y$, the signed open projection $\\Theta_k(A,L)$ restricts to the identity of $P_kA\\otimes L$: the restriction of the open projection is the identity and its two signed symmetries cancel. These assertions use the actual normalized maps, not just existence of an isomorphism.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-open-external-tensor-normalization",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: reduction to proper morphisms, expanded second-open substitution; projection base-change and composition coherence. Agent calculation using Stacks Tags 0F7B (lemma-shriek-proper-and-open), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor)."
+   }
+  },
+  {
+   "text": "Compare the proposed square under the bijection\n$$\\operatorname{Hom}(S_QH\\otimes J_kL,S_QJ_wN)\\cong\\operatorname{Hom}(P_kS_QH\\otimes L,P_kS_QJ_wN).$$\nThe inverse open projection identifies its source with $J_k(P_kS_QH\\otimes L)$; use its identity restriction from step 2. Postcompose the adjoints with the invertible $E_{J_wN}$. Naturality of $E$ at $e_2$ makes the left-hand adjunct\n$$S_s(P_we_2)\\,E_D\\,P_k(\\operatorname{PF}_{Q,H,J_kL}).$$\nThe base-change square for the projection transformation in [prop-sf-pf-coherence], applied to $(s,w,Q,k)$ and the pair $(H,J_kL)$, identifies this with\n$$S_s(P_we_2)\\,\\operatorname{PF}_{s,P_wH,P_kJ_kL}(E_H\\otimes1)=T.$$\nThe last equality is step 2 and naturality in the second input. The right-hand adjunct is $T$, since $E_{J_wN}P_k\\Gamma_N=1$ by step 1, $P_kJ_kT=T$ by naturality of the open unit, and $P_k\\Theta_k(S_QH,L)=1$ by step 2. Injectivity of the adjunction bijection proves\n$$S_Q(e_2)\\operatorname{PF}_{Q,H,J_kL}=\\Gamma_NJ_k(T)\\Theta_k(S_QH,L).$$\nHere $Q,s$ are proper base changes of $a$, so the proper direct-image and shriek projection maps coincide by the proper clause of [prop-sf-pf-coherence].",
+   "uses": [
+    "lem-sf-cartesian-open-adjunction-restriction",
+    "prop-sf-pf-coherence",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: reduction to proper morphisms, expanded second-open substitution; projection base-change and composition coherence. Agent calculation using Stacks Tags 0F7B (lemma-shriek-proper-and-open), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor)."
+   }
+  },
+  {
+   "text": "Write $A=S_aM$, $F=P_bA$, and $v=\\operatorname{Ex}_{a,b}(M):F\\to S_QH$. Horizontal exchange pasting in [fix-lem-exchanges], for the base changes $b$ followed by $k$, gives\n$$\\operatorname{Ex}_{a,bk}(M)=E_H\\,P_kv.$$\nAll pullback compositors here identify $P_wH=P_rM$. The composition pentagon for the projection maps in [prop-sf-pf-coherence], applied to $k$ followed by $b$, gives its signed version\n$$\\Theta_{bk}(A,L)=S_b(\\Theta_k(F,L))\\,\\Theta_b(A,J_kL),$$\nthrough $S_{bk}=S_bJ_k$. To obtain this formula expand each $\\Theta$ as $S(\\sigma)\\operatorname{PF}\\sigma$; naturality of the signed symmetry moves it through the compositor and through the second projection map, and each adjacent pair $\\sigma_{V,U}\\sigma_{U,V}$ is the identity. Thus this is exactly the projection composition identity on the reversed tensor factors, with the same Koszul signs. Naturality of $\\Theta_k$ in its first input also gives\n$$J_k(P_kv\\otimes1)\\Theta_k(F,L)=\\Theta_k(S_QH,L)(v\\otimes1).$$",
+   "uses": [
+    "fix-lem-exchanges",
+    "prop-sf-pf-coherence",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: reduction to proper morphisms, expanded second-open substitution; projection base-change and composition coherence. Agent calculation using Stacks Tags 0F7B (lemma-shriek-proper-and-open), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor)."
+   }
+  },
+  {
+   "text": "Expand $\\lambda_{a,bk}$ using step 4. With the target initially written as $S_bJ_kS_sN$, the part inside $S_b$ after $\\Theta_b(A,J_kL)$ is\n$$J_k(T)\\,J_k(P_kv\\otimes1)\\,\\Theta_k(F,L)\n=J_k(T)\\Theta_k(S_QH,L)(v\\otimes1).$$\nChange this target to $S_bS_QJ_wN$ using $S_b\\Gamma_N$. Step 3 replaces the last expression by\n$$S_Q(e_2)\\operatorname{PF}_{Q,H,J_kL}(v\\otimes1).$$\nConsequently, after restoring the outer composition comparison, the result is\n$$S_bS_Q(e_2)\\,\\alpha_{b,Q}\\,S_b\\bigl(\\operatorname{PF}_{Q,H,J_kL}(v\\otimes1)\\bigr)\\Theta_b(A,J_kL)\n=S_bS_Q(e_2)\\lambda_{a,b}(M,J_kL).$$\nIn this formula $S_bS_Q(e_2)$ denotes its conjugate by the outer compositor when the target is written as a single shriek functor. The insertion of $S_b\\Gamma_N$ is precisely the target identification required in the statement: substitute step 1 and use associativity of $\\alpha$ in [thm-sf-comp-composition] and $bks=bQw$. Naturality of that compositor moves $S_bS_Q(e_2)$ past it. This proves the final equality of specified composites.",
+   "uses": [
+    "thm-sf-comp-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph: reduction to proper morphisms, expanded second-open substitution; projection base-change and composition coherence. Agent calculation using Stacks Tags 0F7B (lemma-shriek-proper-and-open), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "fix-lem-exchanges",
+  "lem-sf-cartesian-open-adjunction-restriction",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-open-external-tensor-normalization",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-proper-open-tensor-compatibility",
+  "lem-weil-pbc-proper-fp-permanence",
+  "prop-sf-pf-coherence",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph: reduction to proper morphisms, expanded second-open substitution; projection base-change and composition coherence. Agent calculation using Stacks Tags 0F7B (lemma-shriek-proper-and-open), 0F7J (lemma-shriek-composition), 0F7K (lemma-pseudo-functor)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lowerShriek|kunneth|projectionFormula|extensionByZero",
+   "results": "0 hits: .  The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"baseChange\"",
+   "results": "0 hits: .  The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of the canonical exchange projection composite after extension by zero in the second factor of a relative external tensor product",
+   "results": "8 hits: Prod.comul_comp_fst, PiTensorProduct.ext_iff, TensorProduct.ext_iff, TensorProduct.comm_comp_comm, zero_prodMap_dualTensorHom, CategoryTheory.leftDistributor_ext_right_iff, CategoryTheory.ChosenPullbacksAlong.Over.tensorObj_ext_iff, TensorProduct.Eqv.of_zero_left.  The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The shriek Kunneth composite is compatible with replacing its second morphism by an open immersion followed by a proper morphism using the proper open interchange and tensor projection square",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Hom.comp_appIso, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv.  The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal base change pasting and open adjunction prove the normalized tensor interchange square needed for extension by zero in the second input of a derived compact support external product",
+   "results": "8 hits: LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.ihomPoints_symm_comp, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat.  The hits concern ordinary scheme-module compositors, over-category adjunctions, diagram external products or condensed projectivity; none states this equality of derived shriek exchange/projection maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of proper base change with the projection formula and extension by zero in the second factor of a derived external tensor product",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', Algebra.IsPushout.cancelBaseChange_tmul, LightCondensed.ihomPoints_symm_comp, Algebra.IsPushout.cancelBaseChangeAux_symm_tmul, LightCondensed.internallyProjective_iff_tensor_condition.  Read the returned signatures: these concern ordinary scheme modules, restrictions, pushforward compositors, or condensed internal projectivity; none asserts this derived shriek exchange/projection identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|extensionByZero|lowerShriek",
+   "results": "0 hits: .  Read the returned signatures: these concern ordinary scheme modules, restrictions, pushforward compositors, or condensed internal projectivity; none asserts this derived shriek exchange/projection identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\", \"baseChange\"",
+   "results": "0 hits: .  Read the returned signatures: these concern ordinary scheme modules, restrictions, pushforward compositors, or condensed internal projectivity; none asserts this derived shriek exchange/projection identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula commutes with restriction to an open subset under proper base change and the extension by zero adjunction",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, TopCat.Presheaf.SheafConditionEqualizerProducts.res_π, AlgebraicGeometry.opensCone_π_app, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι.  Read the returned signatures: these concern ordinary scheme modules, restrictions, pushforward compositors, or condensed internal projectivity; none asserts this derived shriek exchange/projection identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of the canonical projection transformation under composition of a proper pushforward with extension by zero and horizontal pasting of base change squares",
+   "results": "8 hits: PresheafOfModules.pushforward_assoc, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, PresheafOfModules.pushforwardComp, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.comp_pushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforwardNatTrans_comp, AlgebraicGeometry.Scheme.Modules.pushforwardComp.  Read the returned signatures: these concern ordinary scheme modules, restrictions, pushforward compositors, or condensed internal projectivity; none asserts this derived shriek exchange/projection identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-product-compactification-identity",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "lem-sf-kunneth-coherence",
+   "place": "Symmetry paragraph: 'after reduction to proper f,g by the independence of the compactification'; Returned proof steps 1, 2, 5, 6, 7: signed projection composition, horizontal exchange pasting, normalized proper/open square and second open-factor substitution",
+   "via": [
+    "lem-sf-product-compactification-identity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-kunneth-second-open-substitution",
+  "worker": "stage1",
+  "summary": "Expanded second-open substitution as an explicit open-adjunction calculation, followed by horizontal exchange pasting and signed projection composition. All ingredients reuse existing nodes; no new nodes. Checked the actual comparison normalizations and bounded-below etale-origin domain.",
+  "blueprint": "lem-sf-kunneth-coherence.proof.md, symmetry paragraph: reduction to proper f,g by independence of compactification; this split realizes the second open factor in that reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-cartesian-open-adjunction-restriction",
+    "why": "Identifies the normalized open-restriction exchange and its unit/counit equations; generic open-adjunction tool. The unit does not separately state this normalization."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Supplies bounded etale-origin witnesses for constructible finite-coefficient inputs. The unit does not separately state this normalization."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Supplies identity restrictions and full faithfulness for open extension; generic normalization tool. The unit does not separately state this normalization."
+   },
+   {
+    "node": "lem-sf-open-external-tensor-normalization",
+    "why": "Identifies the specified one-open external tensor comparison; generic open normalization tool. The unit does not separately state this normalization."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Checks properness of the verticals by base change. This is a generic tool, not a replacement of the relative-product route."
+   },
+   {
+    "node": "lem-sf-proper-open-tensor-compatibility",
+    "why": "Supplies the canonical proper/open map with its exact open-adjunction normalization. This is a generic tool, not a replacement of the relative-product route."
+   },
+   {
+    "node": "lem-sf-composition-projection-mate",
+    "why": "Supplies the proper/open compatible-tower normalization of the canonical shriek compositor. This is a generic tool, not a replacement of the relative-product route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-cartesian-open-adjunction-restriction",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-open-external-tensor-normalization",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sf-proper-open-tensor-compatibility",
+  "lem-sf-composition-projection-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NA-59d9fa219",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-59d9fa219 (reviewer sub-agent of L); spot-checked: This is a first split of an unsplit item that had no proof, not a 2026-10-21 re-split. No new nodes, no cycle, no SGA citation; statement and stmt_deps are unchanged and proof_deps equals the union of the step uses. Statement types check: Q and s are base changes of the proper map a, and the square (s,w,Q,k) is Cartesian because W×_Ȳ Y = U. The source of λ_{a,bk}(M,L) is S_aM⊗S_bJ_kL, and its target is S_{bks}N, the same as S_{bQw}N. The target identification S_bΓ reduces to plain compositors by associativity of α. Small cases: k = id gives a trivial identity; Y empty, L = 0 and M = 0 give zero maps. Step 1: the E of cartesian-open-adjunction-restriction (p=Q, i=k, b=w, q=s) has the same counit transpose as the Ex_* mate of def-exchange-projection. The Γ of proper-open-tensor-compatibility (k₁=w, r=s, p=Q, i=k, auxiliary s = id) is exactly the item's Γ_C. In composition-projection-mate the triangle (1_U,w,s,Q) for (k,s) gives α_{k,s} = Γ, and the triangle (w,1,1,1) for (Q,w) gives α_{Q,w} = 1; both compactify the composite as (w,Q). This matches the Stacks 0F7J construction through 0F7B (more-etale.tex l.3159 and l.2460). Step 2 (elementary): P_wβ, P_wγ and P_kΘ_k are identities by open-tensor-normalization, and the signed symmetries cancel. Step 3: I redid the J_k⊣P_k adjunct computation after postcomposing with E_{J_wN}. The left side reduces to T by naturality of E, the base-change clause of prop-sf-pf-coherence for (s,w,Q,k) and naturality in the second input. The right side reduces to T by the adjunct definition of Γ and step 2. No faithfulness is used. Step 4: horizontal pasting in fix-lem-exchanges (2) gives Ex_{bk} = E_H·P_kv; the signed pentagon follows from the projection-formula composition identity, with the σ pair cancelling. Step 5 (elementary substitution): I recomputed it; it uses Ex_{a,b} = v. Hypotheses checked: finite Λ, étale-origin domain via constructible-origin (ii), bk never assumed proper. Duplicate search (rg -L for open-substitution, second open, J_kS_s, Gamma_C): only the first-open sibling and unrelated supported-coefficient and exchange nodes. Batch 5: composition-projection-mate and proper-open-tensor-compatibility reach lem-trf-adjoint-composition-coherence, a Mathlib-status abstract adjunction-composition coherence. prop-sf-pf-coherence reaches lem-pod-derived-exact-square-composition, an abstract result that derived exact functors preserve pasting. All are generic coherences outside both assumptions and are accepted. Accepted the seven tool_uses: three are on the unit route via sk-rem-sf-pf-done, four are generic tools."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.KunnethSecondOpenSubstitution",
+  "declaration": "AlgebraicGeometry.ProEtale.KunnethSecondOpen.kunneth_second_open_substitution",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.Diagram",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.Diagram.properQ",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.Diagram.properS",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.Diagram.quasiCompactW",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.ambient",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.inside",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.external",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.openExchange",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.inner",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.squareLeft",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.properCoordinates",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.openCoordinates",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.commonCompactification",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.alphaKS",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.alphaQW",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.gamma",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.properTheta",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.properExchange",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.substituted",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.extended",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.Assertion",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.FiniteAssertion",
+   "AlgebraicGeometry.ProEtale.KunnethSecondOpen.kunneth_second_open_substitution"
+  ],
+  "file": "lean/Sheaf/SixFunctors/KunnethSecondOpenSubstitution.lean",
+  "statement": "theorem kunneth_second_open_substitution {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n} (S : SixFunctorDatum D C E n hn) {B₀ X₀ Y₀ Yb₀ : SixFunctorSpace D} [IsSeparated B₀.obj.hom] [IsSeparated X₀.obj.hom] [IsSeparated Y₀.obj.hom] [IsSeparated Yb₀.obj.hom] (a₀ : X₀ ⟶ B₀) (b₀ : Yb₀ ⟶ B₀) (k₀ : Y₀ ⟶ Yb₀) [IsProper a₀.hom.left] [IsProper b₀.hom.left] [IsOpenImmersion k₀.hom.left] {U W : Scheme.{u}} (d : Diagram a₀.hom.left b₀.hom.left k₀.hom.left U W) (M : finiteTorConstructibleCategory C.l E n hn X₀.obj.left) (L : finiteTorConstructibleCategory C.l E n hn Y₀.obj.left) : FiniteAssertion S a₀ b₀ k₀ d M L",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The specified equalities are in the recorded fixed-scalar realization. Gamma uses the existing proper/open mate, with its exact open-adjunction characterization retained as an equation. The alpha equality evaluates the canonical compositor on every etale-origin presentation. The final lambda equality is written before the common invertible outer compositor alpha_{b,Q}, in the exact iterated target specified by the node; substituted retains the actual PF_{bk} of (k,b), both signs, exchange and projection. Properness of Q,s and quasi-compactness of the opens are derived, never added as theorem hypotheses. Added the already landed proper/open compatibility node to stmt_deps for its canonical map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90e4e1a2a",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery after the 747a H2 RETURN. Lean module byte-identical (sha bd62f1c9); the item record differs only in stmt_deps (lem-sf-proper-open-tensor-compatibility → def-sf-proper-open-mate). New node def-sf-proper-open-mate is existing:true on the unchanged ProperOpenProjectionMate: check_existing clean, statement verbatim, 12 real decls, no owner race, no cycle; TeX α/γ/mate directions match the Lean. lem-cbc-proetale-extension-zero-base-change cited for its own ordinaryOpenExtensionBaseChangeIso, with def-sf-finite-open-tensor-operations as precedent. Advisory: rightDerivedLowerStarIsoOfIsClosedRange and leftDerivedUpperStarComp have no def-node owner. Gates OK; report sections present; no compile needed (no file changed)."
+ }
+}

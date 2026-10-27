@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-smooth-function-modules-acyclic",
+ "kind": "statement",
+ "title": "Acyclicity of arbitrary modules over smooth functions",
+ "statement": "Let $N$ be a Hausdorff second-countable smooth real manifold without boundary, locally modeled on finite-dimensional Euclidean spaces; the local dimension may vary between connected components. Then $N$ is paracompact, meaning that every open cover admits a locally finite open refinement. Let $\\mathcal E_N$ be the sheaf $U\\mapsto C^\\infty(U,\\mathbf C)$ with pointwise ring operations. For every sheaf $F$ of unital $\\mathcal E_N$-modules [def-weil-sheaf-of-modules-category], its underlying abelian sheaf $F_{\\mathrm{ab}}$ satisfies $H^r(N,F_{\\mathrm{ab}})=0$ for every $r>0$. Here $H^r$ is the right derived global-sections functor in abelian sheaves on the site of open subsets of $N$ [def-weil-pbc-sites-and-cohomology]. No local freeness, coherence, or finite-rank condition on $F$ is assumed.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. IV §4, discussion following Definition (4.4), printed p.203 (locally compact spaces with countable base are paracompact); Example (4.12), Theorem (4.15), Lemma (4.18), Corollary (4.19), printed pp.204--205. The soft-ring argument applies to the sheaf of complex-valued smooth functions and does not use a uniform dimension bound."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-smooth-dimension-strata"
+ ],
+ "proof": [
+  {
+   "text": "Each point has a chart containing the inverse image of a small closed Euclidean ball about its image; this is a compact neighborhood, so $N$ is locally compact. Apply [lem-sfb-locally-compact-countable-paracompact] with the assumed Hausdorff and second-countability hypotheses. Thus $N$ is $\\sigma$-compact, paracompact and normal. This proves the topological clause.",
+   "uses": [
+    "lem-sfb-locally-compact-countable-paracompact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4.B, printed p.203; locally compact countable-base case supplied by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Fix disjoint closed subsets $A,B\\subseteq N$. The connected components $C$ of $N$ are open: a sufficiently small coordinate ball about any point is connected and contained in its component. Each $C$ is a Hausdorff second-countable locally compact manifold of one fixed finite dimension, by the componentwise dimension convention in the statement. The topological leaf gives normality and $\\sigma$-compactness of $C$. Apply [lem-sfb-smooth-separating-cutoff] to $A\\cap C,B\\cap C$ on $C$. The functions $u_C$ define $u:N\\to\\mathbf R$ on the disjoint open components. It is smooth since smoothness is local; unions of the componentwise open neighborhoods show that $u=0$ near $A$ and $u=1$ near $B$. Viewed as a complex-valued function, $u$ is a section of $\\mathcal E_N$ (its imaginary part is zero).",
+   "uses": [
+    "lem-sfb-locally-compact-countable-paracompact",
+    "lem-sfb-smooth-separating-cutoff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Example (4.12) and cutoff in Lemma (4.18), pp.204--205; componentwise assembly of the Mathlib cutoff."
+   }
+  },
+  {
+   "text": "Put $G=F_{\\mathrm{ab}}$. Let $S\\subseteq N$ be closed and $s\\in\\Gamma(S,G|_S)$. Since $N$ is paracompact Hausdorff, [lem-sfb-closed-section-neighborhood-extension] gives an open $U\\supseteq S$ and $t\\in G(U)$ restricting to $s$. Apply the preceding cutoff construction with $A=N\\setminus U$ and $B=S$. We obtain $u\\in\\mathcal E_N(N)$ equal to zero on an open neighborhood $W$ of $N\\setminus U$, and equal to one on a neighborhood of $S$.",
+   "uses": [
+    "lem-sfb-closed-section-neighborhood-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Corollary (4.8), p.204, and proof of Lemma (4.18), p.205."
+   }
+  },
+  {
+   "text": "Use the module action to form $(u|_U)t\\in F(U)$. On $U\\cap W$ this is $0t=0$, so it glues with the zero section of $F(W)$ on the open cover $U\\cup W=N$. The sheaf axiom produces $\\widetilde s\\in F(N)$. Along $S$ the scalar $u$ is one, hence $\\widetilde s|_S=1s=s$ by unitality. This proves directly that the abelian sheaf $G$ is soft. Only multiplication by a scalar and sheaf gluing were used; there was no finiteness assumption on $F$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, proof of Lemma (4.18), p.205; open-neighborhood vanishing makes extension by zero a sheaf gluing."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-soft-abelian-sheaf-acyclic] to the paracompact Hausdorff space $N$ and the soft abelian sheaf $G$ just constructed. It gives $R^r\\Gamma(N,G)=0$ for every $r>0$, exactly the cohomology convention in the statement. No passage between module-derived and abelian-derived functors is involved.",
+   "uses": [
+    "lem-sfb-soft-abelian-sheaf-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "IV §4, Theorem (4.15), Lemma (4.18), Corollary (4.19), p.205."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-compact-countable-paracompact",
+  "lem-sfb-smooth-separating-cutoff",
+  "lem-sfb-closed-section-neighborhood-extension",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-soft-abelian-sheaf-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "IV §4.B, Corollary (4.8), Example (4.12), Theorem (4.15), proof of Lemma (4.18), Corollary (4.19), pp.203--205; read online, WANTED in literature/. Cutoff construction strengthened using Mathlib; dimension handled componentwise."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Dolbeault|barPartial|\\bdbar\\b|\\bfine\\b.*sheaf|sheaf.*\\bfine\\b|\\bsoft\\b.*sheaf",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-function sheaf definitions and abelian/Grothendieck category structures do not imply softness or vanishing of higher global sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sheaf of modules over smooth complex valued functions on a paracompact manifold has vanishing higher sheaf cohomology",
+   "results": "OK 8 hits: SheafOfModules.noConfusionType, SheafOfModules, SheafOfModules.IsQuasicoherent.mk, AlgebraicGeometry.Scheme.Modules, SheafOfModules.mk, SheafOfModules.recOn, smoothSheafCommGroup, SheafOfModules.rec. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-function sheaf definitions and abelian/Grothendieck category structures do not imply softness or vanishing of higher global sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf cohomology vanishes in positive degrees for modules over a sheaf of smooth functions on a manifold",
+   "results": "OK 8 hits: instNontrivialStalkPresheafSmoothSheaf, smoothSheaf.obj_eq, smoothSheafRing, instAddCommGroupObjOppositeOpensCarrierOfPresheafSmoothSheaf, smoothSheafCommRing, smoothSheaf, smoothSheafCommRing.coeFun, smoothSheafCommGroup. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-function sheaf definitions and abelian/Grothendieck category structures do not imply softness or vanishing of higher global sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"acyclic\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-function sheaf definitions and abelian/Grothendieck category structures do not imply softness or vanishing of higher global sections"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bsoft\\b|\\bfine\\b|acyclic|cohomology",
+   "results": "OK 0 hits: ; Mathlib/Geometry/Manifold/Sheaf. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-function sheaf definitions and abelian/Grothendieck category structures do not imply softness or vanishing of higher global sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fine sheaf or a soft sheaf of modules on a paracompact Hausdorff space is acyclic for global sections",
+   "results": "OK 8 hits: instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.isFinitePresentation, instAbelianLightCondMod, SheafOfModules.isQuasicoherent, SheafOfModules.IsFiniteType, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-function sheaf definitions and abelian/Grothendieck category structures do not imply softness or vanishing of higher global sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fine sheaves and soft sheaves on paracompact spaces have zero higher derived global sections",
+   "results": "OK 8 hits: TopCat.Sheaf.forget, CategoryTheory.Sheaf.Γ, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, TopCat.Presheaf.section_ext, AlgebraicGeometry.SheafedSpace.Γ, AlgebraicGeometry.SheafedSpace.Γ_def, CategoryTheory.HasGlobalSectionsFunctor, TopCat.Presheaf.sheafify. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-function sheaf definitions and abelian/Grothendieck category structures do not imply softness or vanishing of higher global sections"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothSheaf\", \"cohomology\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: the smooth-function sheaf definitions and abelian/Grothendieck category structures do not imply softness or vanishing of higher global sections"
+  },
+  {
+   "tool": "grep",
+   "query": "soft|flabby|flasque|fine.sheaf|sheaf.*fine",
+   "results": "OK 16 hits: Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Flasque.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Functors.lean, Mathlib/Topology/Sheaves/Skyscraper.lean.  Source directory Mathlib/Topology/Sheaves",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth sheaf construction and flasque results do not prove arbitrary smooth-module acyclicity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A soft sheaf of abelian groups on a paracompact Hausdorff topological space has zero positive degree sheaf cohomology",
+   "results": "OK 8 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.instAddCommGroupH, smoothSheafCommGroup, CategoryTheory.sheafIsAbelian, TopCat.Sheaf.forget, Condensed.ofSheafCompHaus. ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth sheaf construction and flasque results do not prove arbitrary smooth-module acyclicity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"acyclic\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth sheaf construction and flasque results do not prove arbitrary smooth-module acyclicity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every module sheaf over the sheaf of smooth functions on a second countable Hausdorff differentiable manifold is acyclic",
+   "results": "OK 8 hits: smoothSheaf.coeFun, smoothSheaf.obj_eq, instNontrivialStalkPresheafSmoothSheaf, smoothSheaf, smoothSheafCommRing.coeFun, smoothSheafRing, smoothSheafCommRing, instAddCommGroupObjOppositeOpensCarrierOfPresheafSmoothSheaf. ",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth sheaf construction and flasque results do not prove arbitrary smooth-module acyclicity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dolbeault-acyclic-resolution",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: IV §4, discussion following Definition (4.4), printed p.203 (locally compact spaces with countable base are paracompact); Example (4.12), Theorem (4.15), Lemma (4.18), Corollary (4.19), printed pp.204--205. The soft-ring argument applies to the sheaf of complex-valued smooth functions and does not use a uniform dimension bound.",
+   "via": [
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-function-modules-acyclic",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved local compactness and paracompactness, assembled smooth neighborhood cutoffs over the open connected components, extended closed-subset sections to neighborhoods, and explicitly glued scalar multiples to zero to prove softness before applying soft-sheaf acyclicity. Four new nodes, two Mathlib leaves. Source read online; locally absent PDF requested. All statements checked on empty, zero-dimensional and varying-dimension cases.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. Supporting input: Dolbeault complexes are acyclic resolutions. Supporting input: IV §4, discussion following Definition (4.4), printed p.203 (locally compact spaces with countable base are paracompact); Example (4.12), Theorem (4.15), Lemma (4.18), Corollary (4.19), printed pp.204--205. The soft-ring argument applies to the sheaf of complex-valued smooth functions and does not use a uniform dimension bound. This split realizes the inherited smooth-function-module acyclicity supporting input, not a new unit route. blueprint_refs.py ancestor returns None, matching the inherited null from.node; new nodes prepend this item to via."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-e1d688ef2",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-e1d688ef2 (reviewer sub-agent of L); spot-checked: PASS: I read the item, all five steps and all four new nodes in full, and wrote review.md; no fixes. Source check: Demailly IV §4.B, pp.203–205, is absent from literature/, so I fetched the author's PDF and read the extracted text. The delivery follows its route exactly: (4.6)(a)/(4.7)/(4.8) neighborhood extension, (4.9) softness, (4.12) smooth cutoffs, (4.18) modules over a soft ring are soft, (4.15) soft implies acyclic on paracompact spaces, giving (4.19). The worker correctly improves (4.18): the cutoff vanishes on an open neighborhood of the complement of U, so extension by zero is a genuine gluing. The item statement is byte-identical to live and side-live, where the item is still unsplit and none of the new ids exists. Mathlib leaves read in Mathlib source: SigmaCompact.lean:187, and Paracompact.lean:286 and 299, one declaration per clause with instances inferred; and PartitionOfUnity.lean:507 exists_contMDiffMap_zero_one_nhds_of_isClosed (FiniteDimensional at line 484; IsManifold ∞; T2, Normal and SigmaCompact; neighborhood-set equalities and values in [0,1]). The fixed-model leaf is applied componentwise: components are open, and each component has one dimension, is T2, second-countable and locally compact. The two unsplit nodes contain statements only, are self-contained and true (Godement II.3.3.1 / II.4.4.3); softness and sections on closed sets are defined inline, and cohomology is the derived-functor H^r of def-weil-pbc-sites-and-cohomology. Step 4 is elementary; I checked it against def-weil-sheaf-of-modules-category (semilinear module action) and the sheaf gluing axiom. No duplicate soft, paracompact or cutoff nodes exist in the snapshot or live DAG. There is no SGA citation, no off-unit citation, so no tool_uses, and no cycle; the split is not a relabelling. Edge cases checked: empty N and S, S=N, F=0, zero-dimensional and unbounded-dimension components, and non-compact S."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.SmoothFunctionModulesAcyclic",
+  "declaration": "SmoothDimensionStrata.paracompact_and_modules_acyclic",
+  "file": "lean/Sheaf/Geometry/Manifold/SmoothFunctionModulesAcyclic.lean",
+  "statement": "theorem paracompact_and_modules_acyclic (N : Type u) [TopologicalSpace N] [T2Space N] [SecondCountableTopology N] [D : SmoothDimensionStrata N] : ParacompactSpace N ∧ ∀ (F : ringedSiteModules.{u} D.complexSheaf) (r : ℕ), 0 < r → Subsingleton (CategoryTheory.Sheaf.H' ((SheafOfModules.toSheaf D.complexSheaf).obj F) r (⊤ : Opens N))",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8677589fe",
+  "group": "NH",
+  "result": "pass",
+  "note": "Clause-by-clause check of node vs Lean: T2/SecondCountable/SmoothDimensionStrata (open disjoint Euclidean C^∞ strata = smooth manifold of locally varying finite dimension), ParacompactSpace N conjunct, ∀ F : ringedSiteModules.{u} D.complexSheaf (Mathlib SheafOfModules, no finiteness), SheafOfModules.toSheaf underlying abelian sheaf, ∀ r>0 Subsingleton (Sheaf.H' … r ⊤) matching the recorded cohomology interface and the soft-acyclic proof dep exactly. New def node def-sfb-smooth-dimension-strata: notion absent (Mathlib smoothSheafRing fixed-model only; no project/DAG copy), reuses def-sfb-smooth-real-manifold; complexPresheaf data explicit (Π_n C^∞(U∩N_n,ℂ), restrictRingHom), sorried items only named Prop theorems complex_contMDiffRing (true, Mathlib has only same-field instance) and complexPresheaf_isSheaf; H12 fields OK. Item diff vs side-live only lean + added stmt_dep; dep records byte-identical; statement verbatim; docstrings/source/blueprint/proof steps present; edge cases (empty N, dim 0, unbounded dims, F=0, r=1) covered. No findings; no compile needed (no file changed)."
+ }
+}

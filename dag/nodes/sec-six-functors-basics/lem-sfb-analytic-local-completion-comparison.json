@@ -1,0 +1,316 @@
+{
+ "id": "lem-sfb-analytic-local-completion-comparison",
+ "kind": "statement",
+ "title": "Noetherian analytic local rings and the canonical algebraic completion comparison",
+ "statement": "Let $X$ be a separated smooth scheme of finite type over $\\mathbf C$, and let $\\pi:(M,\\mathcal O_M)\\to(X,\\mathcal O_X)$ be the analytification morphism of ringed spaces of [lem-sfb-smooth-analytification-cotangent]. For $a\\in M$ put $x=\\pi(a)$, $A=\\mathcal O_{X,x}$ and $B=\\mathcal O_{M,a}$, and let $\\phi:A\\to B$ be the map sending a germ of a regular function to its holomorphic germ. Then $A$ and $B$ are Noetherian local rings [def-weil-pbc-noetherian-ring], with maximal ideals $\\mathfrak m$ and $\\mathfrak n$, and $\\phi$ is local, meaning $\\phi^{-1}(\\mathfrak n)=\\mathfrak m$. The induced map on maximal-ideal-adic completions [def-weil-pbc-adic-completion]\n$$\\widehat\\phi:\\widehat A=\\varprojlim_{r\\geq1}A/\\mathfrak m^r\\longrightarrow\\widehat B=\\varprojlim_{r\\geq1}B/\\mathfrak n^r$$\nis an isomorphism of rings. It is the map induced by $\\phi$ on the quotient systems, so its composite with $A\\to\\widehat A$ is $A\\xrightarrow{\\phi}B\\to\\widehat B$.",
+ "source": {
+  "document": "literature/serre-gaga.pdf",
+  "place": "WANTED: Serre, Géométrie algébrique et géométrie analytique, local-ring and completion comparison used in §9 Proposition 10 (the exactness input cited by the parent); the document is absent locally. Analytic Noetherianity is the Weierstrass local-ring theorem."
+ },
+ "stmt_deps": [
+  "lem-sfb-smooth-analytification-cotangent",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "First prove the algebraic Noetherian assertion. Apply [lem-trf-affine-chart-stalk-differentials] to the smooth structure morphism $X\\to\\operatorname{Spec}\\mathbf C$, which is locally of finite presentation. It supplies an affine neighbourhood $W=\\operatorname{Spec}R_0$ of $x$ with $R_0$ finitely presented over $\\mathbf C$ and $A\\cong(R_0)_{\\mathfrak p}$. The field $\\mathbf C$ is Noetherian, since its only ideals are zero and the whole field. Thus [lem-weil-pbc-finite-type-algebra-noetherian] makes $R_0$ Noetherian, and [lem-weil-pbc-localization-noetherian] makes $A$ Noetherian. The localization is local by [def-weil-pbc-localization-at-prime]. The complex point $a$ evaluates $R_0$ in $\\mathbf C$ with kernel $\\mathfrak p$; constants make this evaluation surjective. It extends to $A$ with kernel its maximal ideal $\\mathfrak m$ and residue field $\\mathbf C$.",
+   "uses": [
+    "lem-trf-affine-chart-stalk-differentials",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00FM (section-Noetherian); affine stalk localization as in the cited chart lemma"
+   }
+  },
+  {
+   "text": "Since $X$ is smooth over $\\mathbf C$, [sbc-thm-etale-local-normal-form] gives an affine neighbourhood $U_1$ of $x$ and a morphism $t=(t_1,\\ldots,t_d):U_1\\to\\mathbf A^d_{\\mathbf C}$ that is etale in the sense of [def-sbc-smooth-morphisms]: smooth, with fibre of dimension $0$ at every point, in particular at $x$. By [lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension] there is an open $U'\\subseteq U_1$ containing $x$ on which $t$ is etale in the sense of [def-weil-etale-morphism] (locally of finite presentation, flat and unramified). Choose a principal affine open $U=\\operatorname{Spec}R\\subseteq U'$ of the affine scheme $U_1$ containing $x$; these three properties restrict along the open immersion $U\\subseteq U'$, so $t|_U$ is etale in that sense, and this $U$ and $t$ are used below and in step 7. Put $c_i=t_i(a)$ and $s_i=t_i-c_i$. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], $\\mathbf C[T_1,\\ldots,T_d]\\to R$ has zero relative differential module and zero first cotangent homology. Apply [lem-trf-formally-etale-differentials-base-change] to this map over $\\mathbf C$, and [lem-weil-pbc-polynomial-ring-kahler-basis] to the polynomial algebra. They give the basis $dt_1,\\ldots,dt_d$ of $\\Omega_{R/\\mathbf C}$. The affine description in [def-sc-relative-differential-sheaf] makes this a frame of $\\Omega^1_{X/\\mathbf C}|_U$.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-trf-formally-etale-differentials-base-change",
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L, lemma-smooth-etale-over-affine-space; Algebra Tags 00RX (lemma-differentials-polynomial-ring), 0H93 (lemma-formally-etale-omega)"
+   }
+  },
+  {
+   "text": "The cotangent comparison in [lem-sfb-smooth-analytification-cotangent] sends that frame to $d_{\\mathrm{hol}}t_i^{\\mathrm{an}}$. Consequently the holomorphic map $q=(s_i^{\\mathrm{an}})_i$ has invertible derivative at $a$: in any manifold chart its component differentials are a basis of the cotangent space. Its components and tuple are analytic by the analytification statement and [lem-sfb-complex-analytic-function-operations]. Apply [lem-sfb-complex-analytic-inverse-toolkit] in the chosen chart, shrinking the inverse neighbourhood using its clause (4), to obtain mutually inverse holomorphic maps between a neighbourhood of $a$ and a neighbourhood of $0\\in\\mathbf C^d$. Composition with $q$ and its inverse identifies $B$ with $G_d$, the ring of holomorphic germs at $0$ defined in [lem-sfb-holomorphic-germ-taylor-jets]. Under this identification $\\phi(s_i)$ is exactly the coordinate germ $z_i$.",
+   "uses": [
+    "lem-sfb-smooth-analytification-cotangent",
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-complex-analytic-inverse-toolkit",
+    "lem-sfb-holomorphic-germ-taylor-jets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre GAGA no.6 Proposition 3, printed pp.9-10, smooth-coordinate expansion; read online; document absent locally"
+   }
+  },
+  {
+   "text": "Prove $G_e$ Noetherian for all $e\\geq0$ by induction, hence for $e=d$. The base $G_0=\\mathbf C$ is a field. Suppose $G_{e-1}$ is Noetherian and $I\\subseteq G_e$ is an ideal. For $I=0$ use the empty generating set. Otherwise choose nonzero $f\\in I$ and use [lem-sfb-holomorphic-weierstrass-division] to change linear coordinates so that $h=f\\circ L$ is regular in the last variable, of order $k$. Composition with $L$ and $L^{-1}$ gives inverse ring maps on germs by [lem-sfb-complex-analytic-function-operations], so finite generation of the changed ideal $I\\circ L$ suffices. Rename it $I$, so $h\\in I$. Let $N\\subseteq G_{e-1}^k$ consist of the coefficient tuples of polynomials $r(z,w)$ of degree less than $k$ in $w$ that belong to $I$. This is a submodule: addition and multiplication by germs independent of $w$ preserve $I$. The inductive hypothesis and [lem-weil-pbc-noetherian-submodule-finite] give finitely many generators of $N$, represented by $r_1,\\ldots,r_m\\in I$. For any $g\\in I$, analytic division gives $g=qh+r$; since $r=g-qh\\in I$, its tuple belongs to $N$, so $r=\\sum b_j(z)r_j$. Thus $I=(h,r_1,\\ldots,r_m)$. This also works for $k=0$: the zero module has no remainder generators and division gives $I=(h)$. The induction proves $G_d$, and therefore $B$, Noetherian.",
+   "uses": [
+    "lem-sfb-holomorphic-weierstrass-division",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/cartan-1951-52-exp11.pdf",
+    "place": "WANTED locally. F. Bruhat, Cartan seminar 1951-52 exp.11, section 2, Theorem 2, printed pp.2-3; division-and-remainder induction read online https://www.numdam.org/item/SHC_1951-1952__4__A11_0.pdf"
+   }
+  },
+  {
+   "text": "Evaluation at the origin on $G_d$ is onto $\\mathbf C$. A germ with nonzero value has a holomorphic reciprocal by [lem-sfb-complex-analytic-function-operations]; a germ with zero value cannot be a unit, since evaluation preserves products and $1$. Hence its kernel $\\mathfrak q$ is the unique maximal ideal. Transport along the chart of step 3 to conclude that $B$ is local with maximal ideal $\\mathfrak n$ the germs vanishing at $a$. By the evaluation description of $\\pi$ in [lem-sfb-smooth-analytification-cotangent], $\\phi(f)(a)$ equals the residue of $f\\in A$ in $\\mathbf C$. Thus $\\phi^{-1}(\\mathfrak n)=\\mathfrak m$. In particular $\\phi(\\mathfrak m^r)\\subseteq\\mathfrak n^r$ for each $r\\geq1$, so $\\phi$ induces the compatible quotient maps defining $\\widehat\\phi$.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-smooth-analytification-cotangent",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre GAGA no.6 Proposition 3, printed pp.9-10, smooth-coordinate expansion; read online; document absent locally"
+   }
+  },
+  {
+   "text": "Put $P=\\mathbf C[T_1,\\ldots,T_d]$ and $J=(T_1,\\ldots,T_d)$. By [lem-sfb-holomorphic-germ-taylor-jets] and the chart of step 3, evaluation $T_i\\mapsto\\phi(s_i)$ gives compatible isomorphisms $P/J^r\\cong B/\\mathfrak n^r$. Their inverse limit is an isomorphism: apply the inverses componentwise to compatible sequences, and compatibility follows by applying the injective isomorphisms at the smaller index. Identify $\\varprojlim_rP/J^r$ with $\\mathbf C[[T_1,\\ldots,T_d]]$ [def-weil-pbc-multivariate-power-series] explicitly: a formal series maps to its polynomial truncations of total degree less than $r$; conversely its coefficient at $T^\\alpha$ is the coefficient in any truncation with $r>|\\alpha|$. A class modulo $J^r$ has a unique such polynomial representative, since $J^r$ consists of polynomials all of whose monomials have degree at least $r$. The two constructions are inverse and preserve sums and Cauchy products. We obtain an isomorphism $\\theta_B:\\mathbf C[[T]]\\to\\widehat B$ whose $r$th component is $\\sum_{|\\alpha|<r}a_\\alpha\\phi(s)^\\alpha\\bmod\\mathfrak n^r$.",
+   "uses": [
+    "lem-sfb-holomorphic-germ-taylor-jets",
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre GAGA no.6 Proposition 3, printed pp.9-10, smooth-coordinate expansion; read online; document absent locally"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-chart-rational-point-taylor-iso] to the chart $t:U\\to\\mathbf A^d_{\\mathbf C}$ of step 2, with $k=L=\\mathbf C$ and $b=x$. Its residue-field hypothesis holds by step 1. The base change by the identity field extension is canonically $U$. It gives an isomorphism $\\theta_A:\\mathbf C[[T_1,\\ldots,T_d]]\\to\\widehat A$ whose image modulo $\\mathfrak m^r$ of a series $\\sum a_\\alpha T^\\alpha$ is $\\sum_{|\\alpha|<r}a_\\alpha s^\\alpha$. This uses the actual coordinate germs $s_i$, not merely an abstract isomorphism with a power-series ring.",
+   "uses": [
+    "lem-trf-etale-chart-rational-point-taylor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 039M, lemma-characterize-etale-completions and the following residue-degree remark; polynomial completion calculation in the cited Taylor-isomorphism node"
+   }
+  },
+  {
+   "text": "For any formal series $F=\\sum a_\\alpha T^\\alpha$ and every $r\\geq1$, the $r$th component of $\\widehat\\phi(\\theta_A(F))$ is $\\sum_{|\\alpha|<r}a_\\alpha\\phi(s)^\\alpha\\bmod\\mathfrak n^r$, because the quotient map is induced by $\\phi$. Step 6 identifies this with the $r$th component of $\\theta_B(F)$. Equality of compatible sequences proves $\\widehat\\phi\\circ\\theta_A=\\theta_B$, hence $\\widehat\\phi=\\theta_B\\circ\\theta_A^{-1}$ is an isomorphism. For $f\\in A$ the $r$th component of both $\\widehat\\phi(f\\bmod\\mathfrak m^r)_r$ and the image of $\\phi(f)$ in $\\widehat B$ is $\\phi(f)\\bmod\\mathfrak n^r$. This proves the required canonical square. When $d=0$ the same argument has no variables and all truncations are $\\mathbf C$; the empty scheme has no $a$ to check.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/serre-gaga.pdf",
+    "place": "Serre GAGA no.6 Proposition 3, printed pp.9-10, smooth-coordinate expansion; read online; document absent locally"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-chart-stalk-differentials",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-localization-at-prime",
+  "sbc-thm-etale-local-normal-form",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-trf-formally-etale-differentials-base-change",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "def-sc-relative-differential-sheaf",
+  "lem-sfb-smooth-analytification-cotangent",
+  "lem-sfb-complex-analytic-function-operations",
+  "lem-sfb-complex-analytic-inverse-toolkit",
+  "lem-sfb-holomorphic-germ-taylor-jets",
+  "lem-sfb-holomorphic-weierstrass-division",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-trf-etale-chart-rational-point-taylor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/serre-gaga.pdf",
+  "place": "GAGA no.6 Proposition 3, expanded through smooth etale coordinates, analytic division induction (Bruhat exp.11 section 2), and finite Taylor jets; sources read online, absent from local literature."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth complex algebraic variety the holomorphic local ring is noetherian and its completion equals the completion of the algebraic local ring",
+   "results": "OK 8 hits: AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, Algebra.Smooth.flat_of_isNoetherianRing, Algebra.IsSmoothAt, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, smoothSheafCommRing.instLocalRing_stalk, Algebra.IsSmoothAt.exists_notMem_smooth, AlgebraicGeometry.stalkFunctionFieldAlgebra, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Holomorphic and algebraic local rings at a smooth complex point have isomorphic maximal ideal adic completions",
+   "results": "OK 8 hits: AdicCompletion.instCommRing, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.instAlgebra, Padic.adicCompletionEquiv, PadicInt.instIsAdicCompleteMaximalIdeal, AdicCompletion.of_ofAlgEquiv_symm, AdicCompletion.ofAlgEquiv, Rat.HeightOneSpectrum.adicCompletion.padicEquiv. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConvergentPowerSeries\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  },
+  {
+   "tool": "grep",
+   "query": "convergentPowerSeries|convergent.*noetherian|analytification.*completion|holomorphic.*local.*ring",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of the ring of convergent complex power series is the formal power series ring and the convergent series ring is noetherian",
+   "results": "OK 8 hits: PowerSeries.isNoetherianRing, PowerSeries.instIsNoetherianRing, PowerSeries.WithPiTopology.instCompleteSpace, MvPowerSeries.WithPiTopology.instCompleteSpace, LaurentSeries.instLaurentSeriesComplete, PowerSeries.instIsDiscreteValuationRing, LaurentSeries.powerSeriesRingEquiv, LaurentSeries.mem_integers_of_powerSeries. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not compare algebraic and holomorphic local rings or their completions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ring of holomorphic germs at the origin of complex n space is noetherian",
+   "results": "8 hits: PowerSeries.isNoetherianRing, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, IsNoetherianRing, PowerSeries.instIsNoetherianRing, MvPolynomial.isNoetherianRing_fin, MvPolynomial.isNoetherianRing, Polynomial.isNoetherianRing, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian. Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme stalk Noetherianity and formal-series results do not compare holomorphic and algebraic local rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ring of convergent complex power series in finitely many variables is a Noetherian local ring",
+   "results": "8 hits: PowerSeries.isNoetherianRing, PowerSeries.instIsNoetherianRing, MvPowerSeries.instIsLocalRing, PowerSeries.instIsLocalRing, PowerSeries.maximalIdeal_eq_span_X, PowerSeries.instIsDiscreteValuationRing, PowerSeries.idealX, PowerSeries.fg_iff_of_isPrime. Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme stalk Noetherianity and formal-series results do not compare holomorphic and algebraic local rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ConvergentPowerSeries\"",
+   "results": "0 hits: . Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme stalk Noetherianity and formal-series results do not compare holomorphic and algebraic local rings"
+  },
+  {
+   "tool": "grep",
+   "query": "convergent.*(power.?series|noetherian)|holomorphic.*germ|Weierstrass.*division",
+   "results": "7 hits: Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean. Read Mathlib/Analysis/Calculus/FDeriv/Analytic.lean:295-302,863-869: differentiable Taylor data/expansion, not the germ-ring quotient isomorphism.",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme stalk Noetherianity and formal-series results do not compare holomorphic and algebraic local rings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-analytic-pullback-exact",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain: local-ring input for exact analytic pullback. The canonical local completion comparison. Realized here by smooth etale coordinates, holomorphic inverse charts, analytic division, and coordinatewise equality of the two completed maps.",
+   "via": [
+    "lem-sfb-analytic-pullback-exact",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-analytic-local-completion-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved algebraic Noetherianity from affine stalks; chose an etale coordinate chart and made it holomorphic using the existing cotangent comparison and inverse theorem; derived analytic Noetherianity by a complete division/remainder induction; constructed analytic completion from finite jets and compared its coordinate projections with the existing algebraic Taylor-completion isomorphism. Added two statement-only analytic tools, no restated comparison or Noetherianity clause.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), supporting local GAGA input in the imported Kodaira/Kempf prerequisite chain. This does not alter the unit route. The item has no independent blueprint node; blueprint_refs.py ancestor returns None, retained from the live node.",
+  "tool_uses": [
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic smooth local coordinate theorem, Stacks 054L; the unit provides no replacement for this local geometric tool."
+   },
+   {
+    "node": "lem-trf-affine-chart-stalk-differentials",
+    "why": "Generic affine stalk/localization model for a locally finitely presented morphism, used only for algebraic Noetherianity."
+   },
+   {
+    "node": "lem-trf-etale-chart-rational-point-taylor-iso",
+    "why": "Generic coordinate-normalized algebraic completed local-ring theorem, Stacks 039M; it supplies no analytification or analytic ring assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-thm-etale-local-normal-form",
+  "lem-trf-affine-chart-stalk-differentials",
+  "lem-trf-etale-chart-rational-point-taylor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-779a19f86",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-779a19f86 (reviewer sub-agent of L); spot-checked: FIX, with one missing citation repaired. I read the item and both new nodes in full. The item statement is unchanged against clones/live, where the item is still unsplit; there is no supersession, no SGA and no re-split note. All 8 steps check out against the cited statements. (1) Affine stalk model (Stacks 01V9), then the finite-type and localization Noetherian lemmas; kappa(x)=C from the complex point. (3) Cotangent comparison, then invertible Jacobian, then the inverse toolkit gives B ≅ G_d. (4) The Weierstrass-division Noetherian induction is properly set up, including the k=0 and I=0 cases. (5) Evaluation gives that phi is local. (6)-(8) Jets and the Stacks 039M Taylor iso give the coordinatewise equality of the completions. New nodes: holomorphic-germ-taylor-jets (Hadamard/Taylor; tested d=0, d=1 r=2) and holomorphic-weierstrass-division (tested f=w, k=0, f=z_1 needing a non-identity L). Both are true, self-contained and statement-only; neither restates the item. The rg search found no duplicates: tate-weierstrass is nonarchimedean, distinguished-polynomial-quotient is formal. Fault (C1/C4), step 2: sbc-thm-etale-local-normal-form gives an étale map in the sense of def-sbc-smooth-morphisms (smooth of relative dimension 0). Step 2 and step 7 apply lem-weil-pbc-etale-ring-map-iff-etale-affine and lem-trf-etale-chart-rational-point-taylor-iso, which need def-weil-etale-morphism (lfp + flat + unramified), and nothing in the step bridged the two notions. The fix makes step 2 cite lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension (sk-thm-p1, on the route, no cycle, no trf/pd nodes in its closure) and shrink to an affine U; the uses and proof_deps are updated. Batch-5 check: the three trf citations (affine-chart-stalk-differentials = 01V9/01HV, formally-etale-differentials-base-change = Mathlib 0H93, etale-chart-rational-point-taylor-iso = 039M) are generic commutative algebra. Their closures contain no trace-formula theorem, no Poincaré node and no nt-assume leaf, and they are not steps of either assumed proof, so I accept them. The declared tool_uses (054L, the two trf nodes) are accepted. Sources: GAGA no.6 Prop 3, Frenkel exp.10 and Bruhat exp.11 are WANTED with URLs; the local Stacks tags were checked through the cited node statements.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AnalyticLocalCompletionComparison",
+  "declaration": "AlgebraicGeometry.SmoothAnalytic.exists_analyticLocalCompletionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AnalyticLocalCompletionComparison.lean",
+  "statement": "theorem exists_analyticLocalCompletionComparison {X : Scheme.{u}} (f : X ⟶ Spec (.of (ULift.{u} ℂ))) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [Smooth f] (D : Data f) (a : D.space) : IsNoetherianRing (X.presheaf.stalk (D.pi.hom.base a)) ∧ IsNoetherianRing (D.space.presheaf.stalk a) ∧ ∃ hB : IsLocalRing (D.space.presheaf.stalk a), ∃ hlocal : Ideal.comap (D.pi.hom.stalkMap a).hom (@IsLocalRing.maximalIdeal (D.space.presheaf.stalk a) _ hB) = IsLocalRing.maximalIdeal (X.presheaf.stalk (D.pi.hom.base a)), ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk (D.pi.hom.base a))) (X.presheaf.stalk (D.pi.hom.base a)) ≃+* AdicCompletion (@IsLocalRing.maximalIdeal (D.space.presheaf.stalk a) _ hB) (D.space.presheaf.stalk a), (∀ (r : ℕ), 1 ≤ r → ∀ z : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk (D.pi.hom.base a))) (X.presheaf.stalk (D.pi.hom.base a)), AdicCompletion.evalₐ (@IsLocalRing.maximalIdeal (D.space.presheaf.stalk a) _ hB) r (e z) = Ideal.quotientMap (@IsLocalRing.maximalIdeal (D.space.presheaf.stalk a) _ hB ^ r) (D.pi.hom.stalkMap a).hom ((pow_le_pow_left' hlocal.ge r).trans (Ideal.le_comap_pow (D.pi.hom.stalkMap a).hom r)) (AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (X.presheaf.stalk (D.pi.hom.base a))) r z)) ∧ (∀ b : X.presheaf.stalk (D.pi.hom.base a), e (algebraMap _ _ b) = algebraMap _ _ ((D.pi.hom.stalkMap a).hom b))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89ab27793",
+  "group": "NO",
+  "result": "pass",
+  "note": "First delivery; one module, one sorry'd theorem, no definitions. Only the item node's lean field changed (checked against side-live); lean.statement matches the file verbatim. Hypotheses are the same as the cotangent dependency (separated, locally finite type + quasi-compact, smooth over Spec ULift ℂ, universe u). The fully pinned SmoothAnalytic.Data D is the same interface as the sibling exists_analyticClosedIdealLocalQuotient. Both stalks Noetherian; the analytic stalk is local by an ∃ hB conclusion (D.space is only a RingedSpace); localness stated as comap φ n = m. The ring iso e of the adic completions is fixed at every level r ≥ 1 by Ideal.quotientMap through m^r ≤ (comap φ n)^r ≤ comap φ (n^r), plus the algebraMap square. Edge cases: empty scheme vacuous, dimension 0 and varying dimension allowed, r=0 harmless. No duplicate notion. Docstrings give source, blueprint id and the 8 proof steps. No extra assumptions, no live write, no pro-étale. Not recompiled (no FIX). Advisory: unused stage-3 imports; the second reading is the worker's own reread."
+ }
+}

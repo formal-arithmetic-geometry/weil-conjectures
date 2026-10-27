@@ -38,110 +38,32 @@
    }
   },
   {
-   "text": "The bound $P^q=0$ for $q>b$ makes $P$ a bounded-above complex of flat module sheaves. Thus [lem-pc-bounded-above-flat-kflat-site] makes it K-flat on the ringed small etale site $(X_{\\rm et},A_X)$. This is K-flatness against arbitrary acyclic complexes, not just bounded acyclic test complexes.",
+   "text": "Apply [lem-sp-bounded-flat-coefficient-site-square] to this $P$, the given $A\\to B$ and $[a,b]$. Its hypotheses are the flat terms and strict bounds supplied in Step 1; it needs neither Noetherianity nor constructibility. It makes $P$, $P\\otimes_A B$, $N_AP$ and $(N_AP)\\otimes_A B$ K-flat with flat terms and these same bounds. Substitute the isomorphism $Q(P)\\simeq L$ in its three derived representative isomorphisms to obtain exactly $L_B$, $N_AL$ and $(N_AL)_B$. Its $B_X$-linear chain comparison identifies the last complex with $N_B(P\\otimes_A B)$ and localizes to the specified canonical derived comparison. Its universal Tor assertion gives Tor amplitude $[a,b]$ for the three target objects on their own sites.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat-site"
+    "lem-sp-bounded-flat-coefficient-site-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, label lemma-bounded-flat-K-flat (the cited node has the older incorrect tag 06YS in its source field, but its statement is precisely this lemma)"
+    "place": "Agent deduction from Tag 06YQ (lemma-bounded-flat-K-flat), Tag 0G7E (lemma-pullback-K-flat), Tag 06YY (lemma-derived-base-change), Tag 07A4 (lemma-pullback-tensor-product), Tag 08G1 (lemma-tor-amplitude); termwise comparison also uses sites-modules.tex Tag 03EL (lemma-tensor-product-pullback). These are inputs, not a single source statement of the combined assertion."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-pullback-preserves-kflat] to the identity topos with ring map $A_X\\to B_X$, and to the site comparison with its constant-ring identification from [lem-sf-comparison-pullback-exact]. Starting with $P$, these applications give K-flatness and flat terms for $P\\otimes_A B$ and $N_XP$; applying the identity-topos change of rings on the pro-etale site to $N_XP$ gives them for $(N_XP)\\otimes_A B$. All these functors send zero modules to zero modules, so the degree interval stays $[a,b]$. The computing comparison of [lem-weil-pbc-ringed-topoi-derived-pullback], applied to the two coefficient morphisms, identifies the first and third complexes with $L_B$ and $(N_XL)_B$. Exactness in [lem-sf-comparison-pullback-exact] identifies termwise $N_XP$ with $N_XL$: it sends the isomorphism represented by $P$ to its derived isomorphism. No coefficient ring map in the K-flat pullback statement is assumed flat.",
+   "text": "Apply [lem-sp-constructible-coefficient-site-square] with $C=P$. The given finite affine Noetherian cover verifies its scheme hypothesis, and Step 1 supplies its bounded termwise constructible input. Its four localized complexes have constructible cohomology in $[a,b]$. By the representative isomorphisms of Step 2 these are $L$, $L_B$, $N_AL$ and $(N_AL)_B$, the last using the canonical comparison with $N_B(P\\otimes_A B)$. This proves the required bounded constructibility on both sites. Combined with Step 2 it proves every asserted property; neither new lemma assumes the coefficient map flat or of finite projective dimension.",
    "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
+    "lem-sp-constructible-coefficient-site-square"
    ],
    "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E (lemma-pullback-K-flat) and 06YY (lemma-derived-base-change), applied to the identity-topos coefficient morphisms and the comparison morphism"
-   }
-  },
-  {
-   "text": "For every degree $q$, apply [lem-weil-pbc-ringed-topoi-module-pullback-tensor] to $P^q$ and the etale $A_X$-module $B_X$. The constant-module isomorphism of [lem-sfb-geometric-inverse-image-constant-module], with $R=A$ and $M=B$, identifies $N_XB_X$ with the pro-etale $B_X$, including its $A$-action. Hence the canonical comparison gives $N_X(P^q\\otimes_A B)\\simeq N_XP^q\\otimes_A B$. It is $B_X$-linear: scalar multiplication by a section of $B_X$ acts on the second tensor factor on both sides. Naturality in $P^q$ makes the isomorphisms commute with the differentials, giving the asserted isomorphism of complexes. Its image in the derived category is the canonical derived tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]: that node defines the comparison on K-flat representatives by these same termwise tensor maps. In particular the fourth complex also represents $(N_XL)_B$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-sfb-geometric-inverse-image-constant-module",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, label lemma-tensor-product-pullback; sites-cohomology.tex Tag 07A4, label lemma-pullback-tensor-product, its comparison on K-flat representatives"
-   }
-  },
-  {
-   "text": "Fix a degree $q$ and a finite constructible stratification witnessing constructibility of $P^q$ in [def-weil-pbc-etale-constructible-sheaf]. On a stratum $i:S\\to X$ the tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] identifies $i^*(P^q\\otimes_A B)$ with $i^*P^q\\otimes_A i^*B_X$, and the constant-module isomorphism of [lem-sfb-geometric-inverse-image-constant-module] (with $R=A$, $M=B$, $f=i$) identifies $i^*B_X$ with $B_S$, compatibly with the $B$-action by its naturality in the $A$-linear maps $b\\cdot-:B\\to B$; so $i^*(P^q\\otimes_A B)\\simeq i^*P^q\\otimes_A B_S$. The scalar-extension clause of [lem-pod-lisse-tensor-and-scalar-extension] makes this a finite locally constant $B_S$-module: on a trivializing etale cover it has value $M\\otimes_A B$ for a finite $A$-module $M$. Concretely, if $r$ elements generate $M$, their tensors with $1$ generate $M\\otimes_A B$ over the finite ring $B$, so its underlying set is finite. Empty strata give the zero sheaf and need no choice of a geometric point; on every nonempty stratum a geometric point exists, as in the lisse lemma. Thus the same finite partition witnesses constructibility over $B$ for each term of $P\\otimes_A B$.",
-   "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-sfb-geometric-inverse-image-constant-module",
-    "lem-pod-lisse-tensor-and-scalar-extension"
-   ],
-   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GKB, label lemma-tensor-constructible, same-stratification argument; the local scalar-extension input is the existing lisse lemma"
-   }
-  },
-  {
-   "text": "Put $Q=P\\otimes_A B$. By Step 5 its terms are constructible $B_X$-modules. Apply [thm-constructible-serre] over the finite ring $B$: $Z^q=\\ker(Q^q\\to Q^{q+1})$ is constructible, and $H^q(Q)=\\operatorname{coker}(Q^{q-1}\\to Z^q)$ is constructible. These are maps between constructible sheaves, so the kernel and cokernel clauses apply directly. Since $Q$ is zero outside $[a,b]$, so is its cohomology. Step 3 therefore proves bounded constructibility of $L_B$.",
-   "uses": [
-    "thm-constructible-serre"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03RZ, label lemma-constructible-abelian, kernel and cokernel clauses"
-   }
-  },
-  {
-   "text": "The given finite affine cover makes $X$ quasi-compact. It is locally Noetherian, so [lem-weil-pbc-locally-noetherian-quasi-separated] makes it quasi-separated. Each finite coefficient ring is Noetherian, since it has only finitely many ideals. Consequently the forward constructible-sheaf comparison in [sk-thm-pe-constructible-comparison] applies to both $A$ and $B$. Exactness of $N_X$ in [lem-sf-comparison-pullback-exact] gives $H^q(N_XL)\\simeq N_XH^q(L)$, so $N_XL$ is bounded constructible. Apply the same statements over $B$ to the bounded constructible etale complex $L_B$ obtained in Step 6. This gives bounded constructibility of $N_XL_B$, hence of $(N_XL)_B$ by Step 4. To check the global finite-stratification convention explicitly, take the finite stratification of each etale cohomology sheaf. For each stratum $i:S\\to X$, [lem-weil-pbc-comparison-pullback] identifies $i^*N_XF$ with $N_Si^*F$. A trivializing etale covering is also a pro-etale covering, and [lem-sfb-geometric-inverse-image-constant-module] identifies its constant values with the same finite modules. Thus that same finite partition witnesses the pro-etale constructibility required here.",
-   "uses": [
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "sk-thm-pe-constructible-comparison",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sfb-geometric-inverse-image-constant-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-equivalence.proof.md",
-    "place": "forward directions of (1) and (2); locally Noetherian quasi-separatedness is the separately cited scheme lemma"
-   }
-  },
-  {
-   "text": "Finally apply the implication from a flat model to Tor amplitude in [lem-sp-ringed-site-tor-flat-model], on $(X_{\\rm et},B_X)$, $(X_{\\rm proet},A_X)$, and $(X_{\\rm proet},B_X)$ respectively. Step 3 has supplied, for $L_B$, $N_XL$ and $(N_XL)_B$, flat representatives zero outside $[a,b]$. The cited equivalence therefore gives Tor amplitude in precisely this interval for all three objects, against every module sheaf on the appropriate site. Together with Steps 1-7 this proves every claim. In particular $B$ itself is never used as a K-flat or flat $A$-module: only $P$ and its pullbacks are used to compute the derived extensions.",
-   "uses": [
-    "lem-sp-ringed-site-tor-flat-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G1, label lemma-tor-amplitude, implication (2) to (1)"
+    "place": "Agent deduction from Tag 0GKB (lemma-tensor-constructible), Tag 03RZ (lemma-constructible-abelian), and the forward sheaf/complex argument in literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-equivalence.proof.md, parts (1)-(2); global stratifications are retained explicitly."
    }
   }
  ],
  "proof_deps": [
   "lem-sf-etale-flat-constructible",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-sfb-geometric-inverse-image-constant-module",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-pod-lisse-tensor-and-scalar-extension",
-  "thm-constructible-serre",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "sk-thm-pe-constructible-comparison",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-sp-ringed-site-tor-flat-model"
+  "lem-sp-bounded-flat-coefficient-site-square",
+  "lem-sp-constructible-coefficient-site-square"
  ],
  "proof_origin": {
   "by": "agent",
@@ -243,67 +165,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sp-finite-coefficient-input-models",
   "worker": "stage1",
-  "summary": "Kept the statement and all coefficient/site hypotheses. Wrote eight steps using only existing DAG results: etale flat constructible replacement, site K-flatness, ringed pullback and computation, the canonical termwise tensor comparison, scalar constructibility and Serre closure, constructible site comparison, and the same-interval Tor conclusion. No new nodes or Mathlib leaves. Corrected the source-tag reference for bounded-above site K-flatness in the proof without editing the cited node.",
-  "blueprint": "Realizes det-sp-reduction-exceptional Charts finite coefficient-extension input, through lem-sp-et-proet-coefficient-compatibility: gives the bounded models required before chart and locality arguments. No change to any unit or chapter.",
+  "summary": "Repair of mandatory workload re-split: statement unchanged. Two independent statement-only work packages retain old Steps 2-4 and 8 (bounded-flat coefficient/site square) and Steps 5-7 (underived constructibility square), respectively. Step 1 still selects the model using the existing flat constructible theorem. The parent has three short assembly steps; report retains every old argument verbatim and maps it to its new node. No Lean edits or compiles.",
+  "blueprint": "det-sp-reduction-exceptional Charts finite coefficient-extension input, through lem-sp-et-proet-coefficient-compatibility; bounded input model and the homological and constructibility verifications. Chapter and unit route unchanged.",
   "tool_uses": [
    {
     "node": "lem-sf-etale-flat-constructible",
-    "why": "Finite-ring Noetherian etale flat constructible replacement supplies P; it is a domain theorem, not an alternative exceptional-pullback route. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "Generic ringed-site bounded-flat K-flatness, including unbounded acyclic tests. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "why": "Generic ringed-topos K-flat and flat-term preservation for comparison and coefficient morphisms. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-sf-comparison-pullback-exact",
-    "why": "Exact constant-coefficient site comparison and its cohomology compatibility. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Generic computing comparison for coefficient extension on K-flat representatives. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "why": "Generic canonical underived tensor comparison, used on coefficients and on stratum restriction. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-sfb-geometric-inverse-image-constant-module",
-    "why": "Generic constant-module inverse image identifies the A-module underlying B across sites. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Identifies the concrete chain tensor comparison with the specified derived comparison. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-pod-lisse-tensor-and-scalar-extension",
-    "why": "Only part (3), ordinary finite locally constant scalar extension, used on constructible strata. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "thm-constructible-serre",
-    "why": "Kernel/cokernel constructibility for the cohomology of the bounded B-model. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Generic scheme fact verifies the comparison theorem qcqs hypothesis. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "sk-thm-pe-constructible-comparison",
-    "why": "Only forward preservation of constructible sheaves and bounded complexes by the actual site inverse image. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-sp-ringed-site-tor-flat-model",
-    "why": "Generic flat-model-to-Tor implication for each target ringed site. The compatibility unit has no separate domain lemma with this statement."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "Compatibility of site comparison with stratum restriction verifies the global finite-stratification convention. This generic inverse-image comparison is not a replacement for the unit route."
+    "why": "Existing etale flat constructible replacement supplies P; it is the same generic domain input already accepted on this item, not a new exceptional-pullback proof route."
    }
   ]
  },
@@ -324,14 +194,25 @@
   "lem-weil-pbc-comparison-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q64-9958c918a",
-  "group": "Q64",
+  "reviewer": "NT-cc-Q18-fc692fadf",
+  "group": "Q18",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-9958c918a (reviewer sub-agent of L); spot-checked: Read the item, all 15 cited statements and the Stacks sources in full: 06YQ (the item's tag correction is right; 06YS is lemma-K-flat-resolution), 0G7E, 06YY, 03EL, 07A4, 0GKB, 03RZ, 08G1, 0GL6. Statement unchanged and true. Small cases checked: Z/4->Z/2 with L=A[0] gives B[0] with Tor amplitude [0,0]; B=0, the empty scheme, a=b and the identity map are also consistent. Steps 1-8 are correct. Step 7 checks the global finite-stratification convention directly through lem-weil-pbc-comparison-pullback and the constant-module lemma, so it does not rely on the affine-local Cons of sk-thm-pe-constructible-comparison. FIX (C1): Step 5 used i^*B_X ≅ B_S without a citation; it now cites lem-sfb-geometric-inverse-image-constant-module, which was already in proof_deps. Batch-5 flag on lem-pod-lisse-tensor-and-scalar-extension accepted: its 70-node closure reaches only two other generic pod nodes (lem-pod-etale-stalk-tensor-scalar, def-pod-ring-scalar-extension) and no trace-formula node, transport node or batch-4 target. The node is Stacks 093V/03EL lisse sheaf algebra, and only clause (3) is used. No duplicate: the overlaps found (det-sp-scalar-extension-functor (2), det-prop-scalar-six-ctf (3), lem-sf-etale-flat-constructible) each give only part of the item, or work in another setting. The 14 tool_uses are generic and accepted. No SGA citation. Maintainer notes: the source.place of lem-pc-bounded-above-flat-kflat-site should read 06YQ; the item statement cites det-sp-scalar-extension-functor, a pro-étale-only node, for the étale L_B (inherited, advisory).; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-fc692fadf (reviewer sub-agent of L); spot-checked: Released human re-split note (6050 chars, at least 2 nodes); I judged it on its merits, since the item's S2 Lean record passed but its proof still ends in sorry. Compared with live (the Q64 8-step split), only proof, proof_deps and split_report changed; the statement is byte-identical. All of old steps 2-8 are verbatim in the report. Old steps 2, 3, 4 and 8 become lem-sp-bounded-flat-coefficient-site-square (2763 chars). Old steps 5-7 become lem-sp-constructible-coefficient-site-square (2831 chars). Old step 1 stays in the parent via lem-sf-etale-flat-constructible. The parent is a 3-step assembly of 1809 chars. Both packages are comparable in size, neither restates the item, and no argument is dropped. Bounded-flat node, checked on any scheme: 06YQ gives K-flatness; 0G7E/06YY (no flatness of A->B needed) give flat terms, K-flatness and the three derived representatives; 03EL plus the constant-module lemma give the B-linear chain isomorphism N_B(P_B)=(N_A P)_B, whose image is the 07A4 canonical comparison; 08G1 (2)=>(1) gives Tor amplitude [a,b] for all five complexes. Constructible node: 0GKB with the same global strata and value M tensor_A B; thm-constructible-serre (03RZ(3)) for kernels and cokernels; blueprint sk-thm-pe-constructible-comparison-equivalence (1) forward direction with comparison-pullback for global pro-etale strata; exactness gives H^q(N_R C)=N_R H^q(C). I verified the Stacks labels and tags in the .tex and tags files. Small cases: Z/4->Z/2 with P=A[0] gives B[0] with amplitude [0,0] and no claim that B is flat; (Z/2)[0] over Z/4 gives an underived constructible C_B; B=0, X empty, a=b and A=B all hold. Neighbouring nodes (det-sp-scalar-extension-functor (2), lem-fd-flat-constructible-tensor, lem-weil-pbc-bounded-constructible-exact-scalar-extension, lem-sfb-extend-scalars-bounded-constructible, lem-sp-ringed-site-tor-flat-model) cover only parts, so there is no duplicate. No SGA source. The tool use lem-sf-etale-flat-constructible is generic and accepted. Advisories: the item's 14 old tool_uses are now stale and belong to the new packages' future splits; in the constructible node the last clause cites the etale constructible-complex definition, while the pro-etale meaning comes from the preceding clause; the inherited 06YS->06YQ note stands. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.FiniteCoefficientInputModels",
   "declaration": "AlgebraicGeometry.finiteCoefficientInputModels",
@@ -361,5 +242,19 @@
   "group": "Q11",
   "result": "pass",
   "note": "Read item, 16 stmt_dep records, report (Worker report + Second reading by Q11), the module and the exact source decls (pbcFixedScalarExtension = left adjoint of derived restriction, with the left derived scalar extension shown adjoint by scalarDerivedAdjunction; etale/sheafExtendScalars = sheafified ModuleCat.extendScalars; etaleSheafExtendScalarsCompComparisonUpperStarIso = conjugate of Iso.refl; kFlat; ProEtale torAmplitudeIn = generic DerivedCategory.torAmplitudeIn testing every sheaf; IsConstructibleProEtaleFixedModuleSheaf intrinsic). Hypotheses exact, no extra assumptions; essentiallySmallSelf witness is a Prop instance at u+1, not a hypothesis. All conclusion clauses present: flat/support/K-flat for the four models, three derived representation isos, canonical complex and derived tensor comparison, bounded constructibility and same-interval Tor amplitude for L_B, N_X L, (N_X L)_B. Records: only the item changed; 3 appended landed def stmt_deps each supply a used decl; statement verbatim; plain imports = proof_dep modules. Edge cases B=0, empty X, a=b, phi=id, Z/4->Z/2 fine. No compile (no file changed). Advisory: upstream scalar-extension decls recorded on no node; derived comparison not tied to ringedTopoiCanonicalDerivedTensorPullback (encoding mismatch, node clause still met); det-sp-scalar-extension-functor, def-weil-proetale-tor-amplitude, derived-tensor-pullback interfaces imported but unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261023T135739-L-2967451",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.finiteCoefficientInputModels"
+  ],
+  "sorry_after": []
  }
 }

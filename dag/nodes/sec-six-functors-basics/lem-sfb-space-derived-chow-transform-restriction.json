@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-space-derived-chow-transform-restriction",
+ "kind": "statement",
+ "title": "Restriction of a derived Chow transform on an algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived pullback and tensor use K-flat resolutions; derived direct image uses K-injective resolutions. Let $A$ be a commutative ring, let $X\\to\\operatorname{Spec}A$ be separated and of finite presentation (diagonal a closed immersion, and quasi-compact, quasi-separated and locally finitely presented on etale charts), and put $P=\\mathbf P^n_A$ for $n\\geq0$ [def-pc-projective-space-twist]. Let $h:Z\\hookrightarrow T=X\\times_A P$ be a closed immersion, write $p:T\\to X$ and $q:T\\to P$ for the projections, and put $b=p\\circ h$ and $c=q\\circ h$. Let $V\\subset P$ be open, set $W=c^{-1}(V)$, and suppose that $j=c|_W:W\\hookrightarrow V$ is a closed immersion and $b_W=b|_W:W\\to X$ is etale. Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_T)$ satisfy $E|_{X\\times_A V}\\simeq(h_*\\mathcal O_Z)[0]|_{X\\times_A V}$. For every $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ there is a natural isomorphism in $D(\\mathcal O_V)$, $$\\left(Rq_*(Lp^*K\\otimes^{\\mathbf L}_{\\mathcal O_T}E)\\right)|_V\\simeq Rj_*(b_W^*K).$$ Here $W$ is a scheme because it is closed in $V$, and the etale restriction $b_W^*K$ equals $Lb_W^*K$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow, displayed derived isomorphism and proof (using only its stated kernel restriction and etaleness hypotheses)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-pc-projective-space-twist",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-closed-subspace",
+  "def-pc-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Put $T_V=X\\times_A V$, with $a:T_V\\to T$, $p_V:T_V\\to X$ and $q_V:T_V\\to V$. The inverse image $Z\\times_TT_V$ equals $c^{-1}(V)=W$; write $i:W\\to T_V$. Then $p_Vi=b_W$ and $q_Vi=j$. The closed-subspace definition makes $i$ a representable closed immersion: on every scheme test its fibre product is the same scheme test of $h$. On an affine chart a closed immersion is $\\operatorname{Spec}(R/I)\\to\\operatorname{Spec}R$, hence affine and quasi-compact; its diagonal is an isomorphism, hence quasi-compact and quasi-separated. Thus $i$ is qcqs. Likewise the given representable closed immersion $j$ into the scheme $V$ makes $W$ a scheme.",
+   "uses": [
+    "def-sfb-space-closed-subspace",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "Apply etale localization of total direct image to $q$ and the open immersion $V\\to P$. For $B=Lp^*K\\otimes^{\\mathbf L}E$ this gives $(Rq_*B)|_V\\simeq R(q_V)_*(B|_{T_V})$. Restriction is exact and preserves K-flat complexes, so restricting K-flat representatives for the two factors computes the restricted derived tensor. Derived pullback composition along $a$ and $p$, with $La^*=a^*$ since $a$ is etale, identifies $(Lp^*K)|_{T_V}$ with $Lp_V^*K$. Consequently $B|_{T_V}\\simeq Lp_V^*K\\otimes^{\\mathbf L}(E|_{T_V})$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-ringed-site-restriction-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "The degree-zero direct-image restriction comparison applied to $h$ and $a$ gives $(h_*\\mathcal O_Z)|_{T_V}\\simeq i_*\\mathcal O_W$. Using the specified kernel isomorphism, the complex inside $R(q_V)_*$ is therefore $L\\otimes^{\\mathbf L}(i_*\\mathcal O_W)[0]$, where $L=Lp_V^*K$. Derived pullback preserves quasi-coherent cohomology, so $L\\in D_{\\mathrm{QCoh}}(\\mathcal O_{T_V})$. The structure module $\\mathcal O_W$ is quasi-coherent, having the presentation $0\\to\\mathcal O_W\\xrightarrow{1}\\mathcal O_W\\to0$ in the local-presentation definition.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "The small ringed-site module category on $W$ is Grothendieck and has enough injectives. Choose an injective resolution $\\mathcal O_W[0]\\to I^\\bullet$ concentrated in nonnegative degrees. It is K-injective by the bounded-below injective-complex theorem, so $i_*I^\\bullet$ represents $Ri_*\\mathcal O_W[0]$. Since $i$ is affine and $\\mathcal O_W$ is quasi-coherent, affine module higher-image vanishing gives $H^r(i_*I^\\bullet)=0$ for $r>0$. Negative degrees vanish because the complex is zero there. Left exactness of module direct image identifies $H^0(i_*I^\\bullet)$ with $i_*\\mathcal O_W$. Thus the augmentation $(i_*\\mathcal O_W)[0]\\to i_*I^\\bullet$ is a quasi-isomorphism, giving the canonical natural identification $(i_*\\mathcal O_W)[0]\\simeq Ri_*\\mathcal O_W[0]$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sfb-space-affine-module-higher-image-vanishing",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "Apply the unbounded qcqs algebraic-space projection formula to $i$, $F=\\mathcal O_W[0]$ and $L=Lp_V^*K$. Step 1 checks qcqs and Step 3 checks both quasi-coherence hypotheses. With tensor symmetry and the structure-module unit this gives $L\\otimes^{\\mathbf L}Ri_*\\mathcal O_W[0]\\simeq Ri_*(\\mathcal O_W[0]\\otimes^{\\mathbf L}Li^*L)\\simeq Ri_*Li^*L$. Substituting Step 4 into Steps 2 and 3 now identifies the required left side with $R(q_V)_*Ri_*Li^*Lp_V^*K$.",
+   "uses": [
+    "lem-sfb-space-qcqs-derived-projection-formula",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  },
+  {
+   "text": "Derived pullback composition gives $Li^*Lp_V^*K\\simeq L(p_Vi)^*K=Lb_W^*K$, while derived direct-image composition gives $R(q_V)_*Ri_*\\simeq R(q_Vi)_*=Rj_*$. Finally $b_W$ is etale by hypothesis, so its tensor pullback is exact slice restriction and $Lb_W^*K\\simeq b_W^*K$. This yields $Rj_*(b_W^*K)$ in $D(\\mathcal O_V)$. Localization, the fixed kernel isomorphism tensored with $K$, the projection formula, and the composition comparisons are natural in $K$, so their composite is the claimed natural isomorphism.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-closed-subspace",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "def-trf-space-quasi-coherent-module",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-qcqs-derived-projection-formula",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a derived Chow Fourier Mukai transform is the closed immersion pushforward of the etale restriction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → Y.Modules → (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → X.Modules\", \"doc\": \"Given a sheaf of modules $ M $ over a scheme $ Y $ and an open immersion $ f : X \\\\to Y $, this function returns the restricted sheaf of modules over $ X $ obtained by applying the restriction functor \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n        [inst_1 : AlgebraicGeometry.IsOpenImmersion g] →\\n          AlgebraicGeometry.Scheme.Modules.restrictFunctor (CategoryTheory.CategoryStruct.comp f g) ≅\\n            (Alge\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → (U : Y.Opens) → ↑((TopologicalSpace.Opens.map f.base).obj U) ⟶ ↑U\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and an open subset $U$ of $Y$, this defines the restriction of $f$ as a morphism from the open subscheme $X|_{f^{-1}(U)}$ to the open subscheme $Y|_U$.\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrictOpensRange\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X Y U : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : U ⟶ Y) →\\n      [inst : AlgebraicGeometry.IsOpenImmersion g] →\\n        CategoryTheory.Arrow.mk (f ∣_ AlgebraicGeometry.Scheme.Hom.opensRange g) ≅\\n          CategoryTheory.Arrow.mk (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"Given schemes $X, Y, U$ with morphisms $f : X \\to Y$ and an open immersion $g : U \\to Y$, there is an isomorphism in the arrow category of schemes between the restriction of $f$ to the image of $g$ and \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor projection formula on a graph kernel computes a Fourier Mukai transform near an etale chart",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo (CategoryTheory.Limits.pullback.fst f g) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInl) (X.fromSpec\", \"doc\": \"The composition of the morphism from the spectrum of the tensor product ring $\\\\operatorname{Spec}(T.tensor)$ to the pullback scheme and the first projection morphism $\\\\operatorname{pullback.fst}(f,g)$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.CategoryStruct.comp T.SpecTensorTo (CategoryTheory.Limits.pullback.snd f g) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map T.tensorInr) (Y.fromSpec\", \"doc\": \"The composition of the morphism from the spectrum of the tensor product to the pullback scheme with the second projection to $Y$ equals the composition of the morphism induced by the right tensor incl\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/TensorProduct\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (A : Type u_3) →\\n      (B : Type u_4) →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing A] →\\n                [inst_4 : CommRing B] →\\n                  [inst_5 : Algebra R A] \", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (s : S),\\n  (KaehlerDifferential.tensorKaehlerEqu\", \"doc\": \"For a formally étale algebra extension $ S \\to T $ over $ R $, the inverse of the base change isomorphism $ \\\\Omega_{S/R} \\\\otimes_S T \\\\cong \\\\Omega_{T/R} $ maps the Kähler differential $ d_T(\\\\mathrm{alge\"}\n  {\"name\": \"tensorKaehlerQuotKerSqEquiv_tmul_D\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {P : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing P] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R P] [inst_4 : Algebra P S] [inst_5 : Algebra R S] [inst_6 : IsScalarTower R P S] (s : S) (t : P),\\n  (tensorKaehlerQuotKerSqEquiv R P S)\\n      (s ⊗ₜ[P ⧸ RingHom.ker (alg\", \"doc\": \"For elements $s$ and $t$ in the appropriate algebraic structures, the tensor product of $s$ with the differential of the quotient map applied to $t$ equals the tensor product of $s$ with the different\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a derived Chow Fourier Mukai transform is the closed immersion pushforward of the etale restriction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] (U) : Γ(M.restrict f, U) = Γ(M, f ''ᵁ U)\", \"doc\": \"For any open subset $U$ of $X$, the sections of the restricted module sheaf over $U$ are equal to the sections of the original module sheaf over the image $f(U)$ in $Y$, where $f : X \\to Y$ is an open \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenImmersion (X.ofRestrict h)\", \"doc\": \"The morphism from the restricted scheme $ X|_U $ to $ X $, constructed via an open immersion $ h: U \\\\to X $, is an open immersion. This means the underlying continuous map is the open embedding $ h $,\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : (f ⁻¹ᵁ U).toScheme ⟶ U\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and an open subset $U$ of $Y$, this defines the restriction of $f$ as a morphism from the open subscheme $X|_{f^{-1}(U)}$ to the open subscheme $Y|_U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ restrictFunctor f ≅ 𝟭 _\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W e) :\\n  (X.ofRestrict h).appLE V W e =\\n    X.presheaf.map (homOfLE (show X.ofRestrict h ''ᵁ _ ≤ _ by exact Set.image_subset_iff.mpr e)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ constructed via $h$ is an open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrict_presheaf_map\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W) (i : V ⟶ W) :\\n  (X.restrict h).presheaf.map i =\\n    X.presheaf.map\\n      (homOfLE (show X.ofRestrict h ''ᵁ W.unop ≤ X.ofRestrict h ''ᵁ V.unop from Set.image_mono i.unop.le)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ is an open immersion. This means th\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.mkPseudoArrayLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (elements : Array Lean.FVarId) (typ : Lean.Expr) (typLevel : Lean.Level) : Lean.Compiler.LCNF.Simp.ConstantFold.FolderM (Lean.Compiler.LCNF.LetValue Lean.Compiler.LCNF.Purity.pure)\", \"doc\": \"Turn an `#[a, b, c]` into:\\n```\\nlet _x.12 := 3\\nlet _x.8 := @Array.mkEmpty _ _x.12\\nlet _x.22 := @Array.push _ _x.8 x\\nlet _x.24 := @Array.push _ _x.22 y\\nlet _x.26 := @Array.push _ _x.24 z\\n_x.26\\n```\"}\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.getPseudoListLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (fvarId : Lean.FVarId) : Lean.Compiler.LCNF.CompilerM (Option (List Lean.FVarId × Lean.Expr × Lean.Level))\", \"doc\": \"Turns an expression chain of the form\\n```\\nlet _x.1 := @List.nil _\\nlet _x.2 := @List.cons _ a _x.1\\nlet _x.3 := @List.cons _ b _x.2\\nlet _x.4 := @List.cons _ c _x.3\\nlet _x.5 := @List.cons _ d _x.4\\nlet _x\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.LaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on a lax functor that promotes a lax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfLax`.\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).inv = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : (self.mapCompIso f g).inv = F.mapComp f g\", \"doc\": \"`mapCompIso` gives rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mk\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (mapIdIso : (a : B) → F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)) (mapCompIso : {a b c : B} → (f : a ⟶ b) → (g : b ⟶ c) → F.map (C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.OplaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on an oplax functor that promotes an oplax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfOplax`.\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the oplax unity constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the oplax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso_hom\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).hom = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the oplax unity constraint\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|Fourier.?Mukai|derived.?Chow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Fourier.?Mukai|derived.?Chow|chow.*transform|transform.*chow",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme module functors, sheaf pullback, or scheme ideal kernels; none states the algebraic-space derived transform restriction or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of derived pullback tensor a graph structure sheaf computes an integral transform on algebraic spaces",
+   "results": "8 hits; TopCat.Sheaf.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme module functors, sheaf pullback, or scheme ideal kernels; none states the algebraic-space derived transform restriction or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"projection\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme module functors, sheaf pullback, or scheme ideal kernels; none states the algebraic-space derived transform restriction or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a derived Fourier Mukai transform with a closed immersion kernel equals pushforward of etale pullback",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme module functors, sheaf pullback, or scheme ideal kernels; none states the algebraic-space derived transform restriction or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|IsAlgebraicSpace",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme module functors, sheaf pullback, or scheme ideal kernels; none states the algebraic-space derived transform restriction or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-coherent complex on an algebraic space the derived Chow graph kernel restricts to the derived direct image of its restriction to an etale chart",
+   "results": "8 hits; AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.Scheme.kerFunctor_map, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion, AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary scheme module functors, sheaf pullback, or scheme ideal kernels; none states the algebraic-space derived transform restriction or specializes to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pseudocoherent-tests-relative",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, identify the transform on V by 0CTS.",
+   "via": [
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-derived-chow-transform-restriction",
+  "worker": "stage1",
+  "summary": "Q46 split the Stacks 0CTS restriction computation using existing algebraic-space etale localization, affine module vanishing, the qcqs projection formula, and derived composition. Checked every cited statement and all hypotheses; no new nodes, statement change, Lean writing or compilation. Preserved inherited provenance and searches, adding actual Q46 search records.",
+  "blueprint": "Retains the inherited supporting-input ancestry (ancestor command returns None). Realizes the 0CTT proof sentence identifying the transform on V by 0CTS, in the pseudo-coherent-test prerequisite chain below the direct-image stability proof. Steps 1-3 give its localized kernel, Step 4 justifies Ri_* O_W=i_* O_W, and Steps 5-6 give the projection-formula/composition computation. Latest blueprint chapter and unit read; no chapter or unit changes.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "The ordinary etale localization comparison for module direct image supplies the kernel restriction; this is a generic algebraic-space module theorem, not a trace-formula step."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "The small ringed-site module category is Grothendieck, used solely to choose an ordinary injective resolution; no geometric step is replaced."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Enough injectives in a Grothendieck category supplies the resolution of the degree-zero structure module."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "The standard bounded-below comparison lets that same resolution compute the unbounded total direct image."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Only symmetry and the structure-module tensor unit are used in the projection formula; this generic ringed-site tensor theorem imposes no duality hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-0651397cc",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-0651397cc (reviewer sub-agent of L); spot-checked: I read the Stacks source (Tag 0CTS, spaces-more-morphisms.tex, lemma-compute-Fourier-Mukai-for-derived-chow) and the properties of 0CTR. The item statement is byte-identical to live and still unsplit there, and it keeps exactly the hypotheses the 0CTS proof uses: j closed, b_W etale, the kernel restriction. Six steps, no new nodes. Step 1 (marked elementary, which is fair): W = Z×_T T_V; i is the base change of h, affine on scheme tests by def-weil-closed-immersion, hence qcqs; W is a scheme because j is representable. Step 2: the chart-calculus etale localization a'^*Rq_* ≅ R(q_V)_*a^*, plus lem-sfb-ringed-site-restriction-kflat for the restricted tensor and the pullback composition giving Lp_V^*. Step 3: lem-trf-space-etale-module-pushforward-restriction gives (h_*O_Z)|_{T_V} ≅ i_*O_W, and quasi-coherence of L and of O_W is checked. Step 4: the bounded-below injective resolution is K-injective; affine module vanishing plus left exactness give Ri_*O_W = i_*O_W. Step 5: the qcqs projection formula, with its hypotheses checked, plus symmetry and unit. Step 6: the composition isomorphisms and Lb_W^* = b_W^* for etale b_W. Edge cases checked: W empty, K = 0, n = 0, unbounded K, non-flat i. The scheme node 0CSK needs W to be an open of X, so it is not a duplicate. Batch-5 check: every listed citation (def-trf-space-etale-module-functors, def-sfb-space-closed-subspace and def-trf-algebraic-space, the chart calculus, lem-trf-space-etale-module-pushforward-restriction, affine vanishing) is generic algebraic-space/derived infrastructure. Their trf closure is 45 foundational nodes with no trace-formula or duality theorem and no sec-poincare-duality node, so none needs an assumption leaf. Route: lem-sfb-ringed-site-restriction-kflat (unit sk-prop-sfb-module-derived-factorization) is missing from split_report.tool_uses; it is a generic tool, recorded as a route note and accepted. review_split's 'no such node' lines come from it not following the symlinked chapter directories, not from missing nodes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedChowTransformRestriction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.derived_chow_transform_restriction",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.chowProjectiveSpace",
+   "AlgebraicGeometry.AlgebraicSpace.chowProjectiveOpen",
+   "AlgebraicGeometry.AlgebraicSpace.chowProjectiveOpenInclusion",
+   "AlgebraicGeometry.AlgebraicSpace.derived_chow_transform_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDerivedChowTransformRestriction.lean",
+  "statement": "theorem derived_chow_transform_restriction (A : CommRingCat.{u}) (n : ℕ) [∀ Y : AlgebraicSpace (Spec A), HasDerivedCategory.{w} Y.SmallModules] (X T Z : AlgebraicSpace (Spec A)) (s : X ⟶ schemeSpace (Over.mk (𝟙 (Spec A)))) (_hsep : MapIsSeparated s) (_hqc : MapIsQuasiCompact s.hom.hom) (_hqs : MapIsQuasiCompact (Limits.pullback.diagonal s.hom.hom)) (_hlfp : MapIsLocallyOfFinitePresentation s) (p : T ⟶ X) (q : T ⟶ schemeSpace (chowProjectiveSpace A n)) (_hT : IsLimit (BinaryFan.mk p q)) (h : Z ⟶ T) (_hh : IsRepresentableWith (fun _ _ k ↦ IsClosedImmersion k.left) h.hom.hom) (V : (chowProjectiveSpace A n).left.Opens) (T_V : AlgebraicSpace (Spec A)) (a : T_V ⟶ T) (q_V : T_V ⟶ schemeSpace (chowProjectiveOpen A n V)) (_hTV : IsPullback a q_V q (chowProjectiveOpenInclusion A n V)) (W : AlgebraicSpace (Spec A)) (wZ : W ⟶ Z) (j : W ⟶ schemeSpace (chowProjectiveOpen A n V)) (_hW : IsPullback wZ j (h ≫ q) (chowProjectiveOpenInclusion A n V)) (_hj : IsRepresentableWith (fun _ _ k ↦ IsClosedImmersion k.left) j.hom.hom) (_hbW : IsEtale (wZ ≫ h ≫ p).hom.hom) (E : T.DerivedQCoh) (_hE : Nonempty ((derivedTensorPullback a).obj E.obj ≅ (derivedTensorPullback a).obj ((DerivedCategory.singleFunctor T.SmallModules 0).obj ((smallModuleDirectImage h).obj (SheafOfModules.unit Z.smallStructureRings))))) : Nonempty ((X.derivedQCohProperty.ι ⋙ derivedTensorPullback p ⋙ (Functor.curry.obj T.derivedDualityModel.closed.tensor).flip.obj E.obj ⋙ derivedDirectImage q ⋙ derivedTensorPullback (chowProjectiveOpenInclusion A n V)) ≅ (X.derivedQCohProperty.ι ⋙ derivedTensorPullback (wZ ≫ h ≫ p) ⋙ derivedDirectImage j))",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The isomorphism is natural in K: a natural isomorphism of functors from the full subcategory D_QCoh(X) into D(O_V). Cartesian squares specify arbitrary representatives of X times_A V and c inverse(V). The right-hand pullback is written as the canonical Lb_W^*, which is ordinary exact restriction because b_W is etale. The three helper definitions only package the existing projective scheme, its open subscheme and its actual Yoneda inclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67ecba349",
+  "group": "O1",
+  "result": "pass",
+  "note": "Clause-by-clause match vs node and Stacks 0CTS: s to the terminal schemeSpace with MapIsSeparated, quasi-compact, quasi-separated (diagonal quasi-compact) and MapIsLocallyOfFinitePresentation; P = ProjectiveSpace (ULift (Fin (n+1))) (Spec A); product via BinaryFan IsLimit; h and j representable closed immersions; IsPullback squares for X×_A V and W = c^{-1}(V); IsEtale on wZ≫h≫p; E in DerivedQCoh with kernel hypothesis La^*E ≅ La^*((h_*O_Z)[0]) (ordinary h_* then degree 0); conclusion is a Nonempty natural iso X.DerivedQCoh ⥤ D(O_V) of (Lp^* ⋙ (−⊗E) ⋙ Rq_* ⋙ restriction to V) and (Lb_W^* ⋙ Rj_*). Node and source only assert existence and the only citer (pseudocoherent-tests-relative) needs only the objectwise iso. Only the item node changed (lean record and 5 existing def stmt_deps added); the other 16 dep nodes are identical to live. Helpers are real, not hollow; sorry only; statement verbatim; docstrings and 6 proof steps present; no name collisions; imports match proof_deps. Edge cases V/W/X empty, A=0, n=0 covered; no extra hypotheses. Advisory: KFlatIndependentCoefficients public import unneeded; chowProjectiveOpen same shape as coarseOpenOver. No compile run because no file changed."
+ }
+}

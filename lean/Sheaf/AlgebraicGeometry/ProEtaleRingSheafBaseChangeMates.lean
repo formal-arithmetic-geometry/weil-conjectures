@@ -56,7 +56,8 @@ private theorem squareMonoidal {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X
   have := compMonoidal (pullback.fst g f) g
   have := compMonoidal (pullback.snd g f) f
   have := congrMonoidal (pullback.condition (f := g) (g := f))
-  dsimp only [ringSheafSquareComparison, upperStarCompIso]
+  rw [ringSheafSquareComparison_eq]
+  dsimp only [upperStarCompIso]
   simp only [Iso.trans_hom, Iso.symm_hom]
   infer_instance
 private theorem squareLift {X' T X : Scheme.{u}} (g : X' ⟶ X) (f : T ⟶ X)

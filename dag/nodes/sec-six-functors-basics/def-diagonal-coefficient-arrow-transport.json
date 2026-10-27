@@ -1,0 +1,100 @@
+{
+ "id": "def-diagonal-coefficient-arrow-transport",
+ "kind": "definition",
+ "title": "Generic supplied data for coefficient arrow transport",
+ "statement": "Let l be prime, Y a scheme, I and Q commutative condensed ring objects and a:Z_l->I, b:I->Q specified unital coefficient maps. Let L and M be the specified line families with underlying sheaf maps from zlLine to L and from L to M. CoefficientArrowRoute groups the three Diagram objects and their two normalized ScalarCompatibility structures [def-sfb-diagonal-coefficient-category, def-sfb-diagonal-coefficient-scalars]. Separately, for commutative ordinary rings R,A, a ring homomorphism phi:R->A, a natural killing exponent N with N=0 in R and A, and Y a scheme, CartierScalarMaps groups the constant map on P=ProjectiveLine Y and the positive Tate-line map on W=diagonalSurface Y, together with exactly the constant-generator and pure-root-tensor normalizations appearing in GeoCartierScalarCompatibility [def-sfb-geo-cartier-interface]. Neither structure contains a Cartier class equation, a completion assertion, or an existence choice. CartierScalarMaps.Equation explicitly names the Yoneda square for two supplied classes, without asserting it. They group supplied data so that statements can use their shared types without repeatedly expanding concrete coefficient constructions.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-maps",
+  "def-sfb-diagonal-coefficient-scalars",
+  "def-sfb-geo-cartier-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized derived scalar unit induces a bijection on Ext groups and finite coefficient changes preserve the supported Cartier class",
+   "date": "2026-10-27",
+   "results": "8 hits: Ext.chgUniv, Ext.homEquiv_chgUniv, Ext.mk₀_bijective, Ext.homLinearEquiv, Ext.homLinearEquiv_apply, Ext.mk₀_linearEquiv₀_apply, Ext.smul_eq_comp_mk₀, ProjectiveResolution.extAddEquivCohomologyClass_apply.",
+   "verdict": "Generic Ext APIs only. Local search found scalar_unit_ext_bijective (proved), geoCartierCanonicalClass_scalar (stated), and the completed and scalar endpoint interfaces; reuse them."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "date": "2026-10-27",
+   "results": "6 hits, including CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp and map_comp_assoc.",
+   "verdict": "Functor composition API is available, but not the normalized completed/condensed/finite cyclic comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "CyclicCartier|CartierFrame|cyclic.*[Cc]artier",
+   "date": "2026-10-27",
+   "results": "0 hits.",
+   "verdict": "No existing cyclic Cartier frame or its projection/continuation theorem in the search index. Local rg additionally inspected DiagonalCoefficient*, DiagonalUniformizer*, GeoCartier*, CartierReduction*, and ScalarUnitExt."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerCartierReduction",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), finite cyclic reduction followed by finite coefficient extension",
+   "via": [
+    "lem-diagonal-uniformizer-cartier-reduction",
+    "lem-diagonal-uniformizer-finite-normalization",
+    "lem-diagonal-coefficient-uniformizer-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalCoefficientArrowTransport",
+  "file": "lean/Sheaf/Paper/DiagonalCoefficientArrowTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CoefficientArrowRoute",
+  "statement": "structure CoefficientArrowRoute (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    {I Q : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj I] [IsCommMonObj I] [MonObj Q] [IsCommMonObj Q]\n    (a : Profinite.continuousMapRingObj.{u} ℤ_[l] ⟶ I) [IsMonHom a]\n    (b : I ⟶ Q) [IsMonHom b]\n    (L : ∀ X : Scheme.{u}, Modules I X) (M : ∀ X : Scheme.{u}, Modules Q X)\n    (m : ∀ X : Scheme.{u}, (zlLine l X).X ⟶ (L X).X)\n    (v : ∀ X : Scheme.{u}, (L X).X ⟶ (M X).X)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CoefficientArrowRoute",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CartierScalarMaps",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.CartierScalarMaps.Equation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021357-L-2763238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021357-L-2763238",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

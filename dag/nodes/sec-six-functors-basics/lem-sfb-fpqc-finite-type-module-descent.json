@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-fpqc-finite-type-module-descent",
+ "kind": "statement",
+ "title": "Finite type quasi-coherent modules descend along fpqc coverings",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $F$ be a quasi-coherent Zariski $\\mathcal O_X$-module [pqf-def-coherent; def-weil-sheaf-of-modules-category], and let $\\{f_i:X_i\\to X\\}_{i\\in I}$ be an fpqc covering [def-weil-pbc-fpqc-covering]. If every tensor pullback $f_i^*F$ [def-pc-module-pullback] is of finite type [pqf-def-coherent], then $F$ is of finite type. There is no Noetherian or quasi-compactness assumption on $X$, and the index set may be infinite (or empty when $X$ is empty).",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05AZ, lemma-finite-type-descends."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For each affine open U of X, form the PreZeroHypercover of the original family. The quasi-compact part of hf gives QuasiCompactCover. Apply Mathlib QuasiCompactCover.exists_isAffineOpen_of_isCompact directly to hU.isCompact, obtaining n, indices a : Fin n -> I and affine opens V_j of Y_{a(j)} with union of their images equal to U. Hence V_j is contained in f_{a(j)} inverse-image U. No restriction of schemes or compactness of X is needed.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022B, definition-fpqc-covering, affine-open condition."
+   }
+  },
+  {
+   "text": "Set R = O_X(U), A_j = O_{Y_{a(j)}}(V_j), and g_j = f_{a(j)}.appLE U V_j. Each g_j is flat by the flat affine-section criterion. The finite product B of the A_j is flat by transport from its direct sum. To lift a prime p of R, use hU.isoSpec to find a point x of U representing p, then the covering equality to find y in some V_j mapping to x. IsAffineOpen.comap_primeIdealOf_appLE identifies the corresponding prime of A_j as lying over p. Pull it back through the coordinate evaluation B -> A_j. Its contraction to R is p, so R -> B is faithfully flat.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-finite-product-flat-modules",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HB and 00DD (finite products of flat modules), 00HQ, lemma-ff-rings; morphisms.tex Tag 01U5, lemma-flat-characterize."
+   }
+  },
+  {
+   "text": "For each j, transport ordinary-pullback quasi-coherence along tensorOrdinaryPullbackIso to the tensor pullback. The hypothesis hfinite and finite_sections_of_finiteType give finite sections on V_j. Apply exists_tensorPullback_affine_sections to the affine opens U and V_j and their containment. Compose its bijective R-linear map with tensor symmetry; its scalar-compatibility clause makes the composite A_j-linear. This gives a linear equivalence from A_j tensor_R F(U) to those finite section modules, hence finite generation of each tensor factor.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-weil-pbc-tensor-pullback-ordinary-comparison",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I9 and 01IA; properties.tex Tag 01PB, lemma-finite-type-module; modules.tex Tag 01BG, lemma-pullback-quasi-coherent."
+   }
+  },
+  {
+   "text": "For any finite family of R-algebras A_j and M, regard N_j = A_j tensor_R M as a B-module by coordinate evaluation. The identity is semilinear for the surjective evaluation map B -> A_j, so LinearMap.finite_iff_of_bijective makes each N_j finite over B. Module.Finite.pi then makes their product finite over B. TensorProduct.piLeft supplies the R-linear equivalence B tensor_R M -> product_j N_j, with coordinate formula (a tensor m)_j = a_j tensor m. Tensor induction verifies B-linearity: at pure tensors the equation is (ba)_j tensor m = b_j times (a_j tensor m); zero and sums follow by additivity. Upgrade the equivalence to B-linear and transport finite generation. All arguments allow the empty index type.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Finite-product tensor calculation in the affine reduction of Descent Tag 05AZ; the coordinate projection/insertion equivalence is Mathlib TensorProduct.piLeft."
+   }
+  },
+  {
+   "text": "Apply Module.Finite.of_finite_tensorProduct_of_faithfullyFlat to R -> B, using faithful flatness from step 2 and finite generation of B tensor_R F(U) from steps 3 and 4. Thus F(U) is finite over R for every affine open U.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-descent-finite-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05AZ, lemma-finite-type-descends, affine reduction; algebra.tex Tag 03C4 (1), lemma-descend-properties-modules."
+   }
+  },
+  {
+   "text": "Use the opensRange of the members of X.affineCover; isAffineOpen_opensRange shows that each is affine and OpenCover.iSup_opensRange says they cover X. Apply clause (c) of quasicoherent_finite_type_affine with step 5 on every member. This gives finite type of F. The cover is arbitrary, not a finite subcover, and there is no compactness or Noetherian hypothesis. If X or the original index type is empty, the same proof applies.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PB, lemma-finite-type-module, affine-local assembly; modules.tex Tag 01B5, definition-finite-type."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-weil-pbc-tensor-pullback-ordinary-comparison",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-faithfully-flat-descent-finite-module",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05AZ, lemma-finite-type-descends, with Algebra Tag 03C4 (1). A7 formalizes the affine refinement directly using Mathlib QuasiCompactCover, flatness and prime-spectrum surjectivity, then proves the finite-product tensor step and affine-local assembly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Module.Finite\", \"FaithfullyFlat\"",
+   "results": "Available; 1 hits: Module.Finite.of_finite_tensorProduct_of_faithfullyFlat. ",
+   "date": "2026-10-23",
+   "verdict": "No match for scheme module-sheaf descent. Module.Finite.of_finite_tensorProduct_of_faithfullyFlat is only the affine algebraic ingredient, not the scheme statement; the SheafOfModules hits define finiteness or concern finite presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "Finite.*[Ff]aithfully[Ff]lat|[Ff]inite[Tt]ype.*[Dd]escent|[Ff]inite.*[Ff]pqc",
+   "results": "Available; 10 hits: Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Etale/Descent.lean. ",
+   "date": "2026-10-23",
+   "verdict": "No match for scheme module-sheaf descent. Module.Finite.of_finite_tensorProduct_of_faithfullyFlat is only the affine algebraic ingredient, not the scheme statement; the SheafOfModules hits define finiteness or concern finite presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type quasi coherent module descends under fpqc covering of schemes",
+   "results": "Available; 8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsQuasicoherent, SheafOfModules.isQuasicoherent, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.mk, SheafOfModules.IsQuasicoherent.rec. ",
+   "date": "2026-10-23",
+   "verdict": "No match for scheme module-sheaf descent. Module.Finite.of_finite_tensorProduct_of_faithfullyFlat is only the affine algebraic ingredient, not the scheme statement; the SheafOfModules hits define finiteness or concern finite presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent module on a scheme is of finite type if its pullbacks on an fpqc covering are of finite type",
+   "results": "Available; 8 hits: SheafOfModules.IsFiniteType, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.quasicoherentDataOfIsFinitePresentation. ",
+   "date": "2026-10-23",
+   "verdict": "No match for scheme module-sheaf descent. Module.Finite.of_finite_tensorProduct_of_faithfullyFlat is only the affine algebraic ingredient, not the scheme statement; the SheafOfModules hits define finiteness or concern finite presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc|[Dd]escent|[Ff]inite[Tt]ype",
+   "results": "Available; 0 hits: .  Searched Mathlib/AlgebraicGeometry/Modules",
+   "date": "2026-10-23",
+   "verdict": "No match for scheme module-sheaf descent. Module.Finite.of_finite_tensorProduct_of_faithfullyFlat is only the affine algebraic ingredient, not the scheme statement; the SheafOfModules hits define finiteness or concern finite presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fpqc descent of finite generation for quasicoherent sheaves on an arbitrary scheme",
+   "results": "Available; 8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation. ",
+   "date": "2026-10-23",
+   "verdict": "No match for scheme module-sheaf descent. Module.Finite.of_finite_tensorProduct_of_faithfullyFlat is only the affine algebraic ingredient, not the scheme statement; the SheafOfModules hits define finiteness or concern finite presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]inite[Tt]ype.*[Ff]pqc|[Ff]pqc.*[Ff]inite[Tt]ype|[Ff]inite[Tt]ype.*[Dd]escen",
+   "results": "Available; 2 hits: Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/RingTheory/Finiteness/Descent.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern definitions, finite presentation, or descent of morphism properties, not finite type of quasi-coherent modules under fpqc families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.IsFiniteType\", \"pullback\"",
+   "results": "Available; 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern definitions, finite presentation, or descent of morphism properties, not finite type of quasi-coherent modules under fpqc families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type of a quasi coherent module descends along any fpqc covering of schemes",
+   "results": "Available; 8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.IsFiniteType.mk, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.mk, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern definitions, finite presentation, or descent of morphism properties, not finite type of quasi-coherent modules under fpqc families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent sheaf is finite type if it becomes finite type on an fpqc covering of a scheme",
+   "results": "Available; 8 hits: SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern definitions, finite presentation, or descent of morphism properties, not finite type of quasi-coherent modules under fpqc families."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteType|[Ff]inite[Tt]ype",
+   "results": "Available; 0 hits: . Searched Mathlib/AlgebraicGeometry/Modules",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern definitions, finite presentation, or descent of morphism properties, not finite type of quasi-coherent modules under fpqc families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generation of a quasicoherent module can be checked after faithfully flat quasi compact pullback on schemes",
+   "results": "Available; 8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern definitions, finite presentation, or descent of morphism properties, not finite type of quasi-coherent modules under fpqc families."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "date": "2026-10-23",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. Assembly of coherent naive cotangent cohomology: Exactness and finiteness in the Zariski-small-etale module comparison. Reflection of finite type: fpqc descent after obtaining finite type on the etale cover.",
+   "via": [
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fpqc-finite-type-module-descent",
+  "worker": "stage1",
+  "summary": "Expanded the omitted proof of Stacks 05AZ using affine fpqc refinement, affine tensor pullback sections, finite-type affine detection, an explicit finite-product tensor/generators calculation, and the existing Mathlib leaf 03C4 (1). Statement unchanged; no new nodes. Empty schemes, empty finite refinements, infinite coverings and non-Noetherian bases retained.",
+  "blueprint": "Retains the inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain, specifically reflection of finite type in lem-sfb-scheme-etale-module-exact-finiteness-comparison. The ancestor command returns None; inherited from.node=null and via are preserved. Whole-blueprint searches for 05AZ and finite type gave no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-affine-standard-refinement",
+    "why": "Generic finite affine refinement of an fpqc family; the unit has no replacement for this scheme-local reduction."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic equivalence between finite-type quasi-coherent sheaves and finite affine section modules, clauses (a) and (c); used as a tool in the finiteness reflection prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic canonical affine tensor formula for module pullback sections; needed to reach the algebraic descent input."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic preservation of quasi-coherence by tensor pullback, required for the affine finite-type criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-pullback-quasi-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-330c8d9bd",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-330c8d9bd (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement matches Stacks descent.tex:1895 (05AZ, whose proof is 'Omitted' with a pointer to 03C4 (1)), hypothesis by hypothesis. Following D5, the 6-step proof supplies the omitted details. Step 1: restricting to an affine U keeps an fpqc covering, by the def-weil-pbc-fpqc-covering clauses (elementary, checked). Step 2: lem-weil-pbc-fpqc-affine-standard-refinement gives finite J and R→∏A_j faithfully flat. Step 3: pullback quasi-coherence, then clause (a) of quasi-coherent-finite-type-affine on V_j, then the affine-sections iso F(U)⊗A_j≅(f^*F)(V_j), with V_j⊆f^{-1}U matching that lemma's hypotheses. Step 4: B⊗M≅∏A_j⊗M for finite J, with the inverse and B-linearity checked; for J empty, B=0 and R=0. Step 5: Mathlib leaf Module.Finite.of_finite_tensorProduct_of_faithfullyFlat; its first-factor action matches Step 4. Step 6: clause (c), which is verbatim. proof_deps equals the union of the uses. No SGA citation. No duplicate in the DAG: lem-weil-pbc-finite-type-descends-faithfully-flat is about finite-type algebras and is rightly unused. Live and side-live still have the item unsplit, and there is no re-split note. I accept the 4 generic off-unit tool_uses (fpqc refinement, qc finite-type affine criterion, pullback affine sections, pullback quasi-coherence). Minor source-place labels in steps 3-4 are not faults."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcFiniteTypeModuleDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFiniteType_of_fpqc_tensorPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcFiniteTypeModuleDescent.lean",
+  "statement": "theorem isFiniteType_of_fpqc_tensorPullback {X : Scheme.{u}} (F : X.Modules) (hF : F.IsQuasicoherent) {I : Type v} (Y : I → Scheme.{u}) (f : ∀ i, Y i ⟶ X) (hf : Presieve.ofArrows Y f ∈ fpqcPrecoverage X) (hfinite : ∀ i, ((tensorPullback (f i)).obj F).IsFiniteType) : F.IsFiniteType",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f26462c7",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Lean matches Stacks 05AZ and the node clause by clause: X : Scheme.{u} with no extra assumptions; F : X.Modules with IsQuasicoherent only; arbitrary I : Type v with Presieve.ofArrows Y f ∈ fpqcPrecoverage X, the recorded fpqc encoding; hypothesis on the recorded tensorPullback (f i), correct direction; conclusion F.IsFiniteType. SheafOfModules.IsFiniteType is tied to the site universe, so no free universe; u and v are declared. Edge cases: empty X, empty I, infinite I all correct. lean.statement is verbatim in the file; public imports are the stmt_dep modules, plain imports the proof_dep modules, and the cited declarations exist; sorry only, no definitions; docstrings carry source, blueprint and 6 steps. Only the lean field differs from side-live; no duplicate theorem. H11 advisory: Second reading is the author's self-check under the dispatcher policy. Not recompiled: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T080845-L-1636378",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

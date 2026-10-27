@@ -2,7 +2,7 @@
  "id": "lem-pur-normalized-completed-operation-models",
  "kind": "statement",
  "title": "Simultaneous normalized quotient/Roos models for primitive completed operations",
- "statement": "Fix a prime l, a finite extension E of Q_l, an arbitrary family W of schemes with l invertible in every residue field, and independent site, coefficient and family universes. There exist Models l E W as specified in the completed-operation substitution interface: the full reduction/total-limit calculus, a canonical system RingedSiteDualityModel with equal closed structure, integral_closed equal to IntegralOnSlice.duality, completion with its unit equation, a normalized IntegralComparisonRoosModel at every scheme and an IntegralComparisonPullbackModel for every morphism using these same models. The actual calculus counit is invertible on every normalized system, and the coefficient unit, system tensor and whole-system pullback preserve IsNormalizedCoefficientSequence. This asserts primitive construction and normalization only: it does not assert expression comparison, substitution or structural transport laws.",
+ "statement": "Fix a prime l, a finite extension E of Q_l, an arbitrary family W of schemes with l invertible in every residue field, and independent site, coefficient and family universes. There exist Models l E W as specified in the completed-operation substitution interface: the full reduction/total-limit calculus, a canonical system RingedSiteDualityModel with the canonical adjunction-compatible isomorphisms between its closed tensor and the calculus tensor and between the integral calculus tensor and IntegralOnSlice.duality, completion with its unit equation, a normalized IntegralComparisonRoosModel at every scheme and an IntegralComparisonPullbackModel for every morphism using these same models. The actual calculus counit is invertible on every normalized system, and the coefficient unit, system tensor and whole-system pullback preserve IsNormalizedCoefficientSequence. This asserts primitive construction and normalization only: it does not assert expression comparison, substitution or structural transport laws.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
   "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
@@ -21,71 +21,66 @@
   "lem-coef-derived-system-evaluation-calculus",
   "lem-sfb-ringed-site-duality-maps",
   "def-trf-integral-comparison-sequence-systems",
-  "def-trf-integral-comparison-realization-models"
+  "def-trf-integral-comparison-realization-models",
+  "def-pur-completed-operation-model-data"
  ],
  "proof": [
   {
-   "text": "Choose canonical closed total-tensor models on the integral and sequence sites. Present the reduction/total-limit calculus with these same tensors, by transporting its tensor comparisons and adjunctions along the normalized representative comparisons. Choose the integral model to be IntegralOnSlice.duality. This yields the system_closed and integral_closed equalities, without identifying arbitrarily chosen isomorphic structures.",
+   "text": "Choose the canonical normalized quotient/limit calculus and ordinary/derived completion models for each scheme. Choose the canonical sequence-site duality model. Compare closed tensors sharing the same internal Hom by the natural isomorphism fixed by their adjunction units and counits; use it explicitly in tensorRealization instead of demanding equality of chosen structures.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-sfb-ringed-site-duality-maps"
+    "lem-trf-completion-unit-canonical-models",
+    "lem-sfb-ringed-site-duality-maps",
+    "lem-coef-closed-tensor-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Coefficient twists; simultaneous normalized completed-operation models, original construction steps 1--6; Stacks 07A4, 07A6, 08J9, 0941."
    }
   },
   {
-   "text": "The strict quotient tower computes reduction on flat-term K-flat representatives. Apply the normalized natural Roos/total-limit comparison to obtain completion. The strict quotient augmentation identifies its unit with the reduction adjunction unit. For every scheme morphism, form inverse image of this same whole reduction system; the quotient/Roos comparison gives IntegralComparisonPullbackModel, normalized on every simultaneous quotient presentation. One Roos comparison is shared at each scheme.",
+   "text": "Use the proved normalizedCompletionRealization to obtain completion and its unit equation. Use one ordinary/derived-model Roos comparison per scheme, and primitiveQuotientRealizationComparisons to provide a normalized pullback realization for every family morphism.",
    "uses": [
-    "lem-pur-completed-primitive-counit-comparison",
-    "lem-pur-integral-operations-well-defined",
-    "lem-weil-strict-roos-comparison"
+    "lem-pur-normalized-completion-realization",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-primitive-quotient-realization-comparisons"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Coefficient twists; simultaneous normalized completed-operation models, original construction steps 1--6; Stacks 07A4, 07A6, 08J9, 0941."
    }
   },
   {
-   "text": "Identify the actual unit, tensor and pullback transition adjuncts using the normalized system operation models. The unit adjunct is scalar multiplication, tensor uses monoidal scalar extension followed by the input adjuncts, and pullback uses inverse scalar association followed by pullback of the input adjunct. Their cocycles follow from scalar association and the input cocycles, hence all three preserve normalization. Transport through the same normalized representative comparisons of the preceding steps.",
+   "text": "The actual counit is invertible by purNormalizedReconstruction. Normalization is invariant under a whole-system isomorphism by transition naturality and cancellation of the induced bijections on Hom sets. Apply the quotient-expression normalization theorem to the empty family and unit expression. For tensor, write both normalized inputs as reductions using the actual counit, use reductionTensor, and transport along the canonical closed-tensor comparison. For pullback, apply effective quotient model descent to the reduction of the total limit, then transport along pullback of the counit.",
    "uses": [
-    "lem-pur-normalized-operation-system-models"
+    "lem-pur-normalized-reconstruction-adjunction-calculus",
+    "lem-pur-quotient-expression-kflat-normalization",
+    "lem-trf-effective-quotient-model-descent",
+    "lem-coef-closed-tensor-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
-   }
-  },
-  {
-   "text": "The canonical reduction/total-limit counit is invertible on normalized whole systems by normalized-DVR effectivity. The projection normalization of the calculus identifies it with the counit in the primitive comparison theorem, so effectivity applies to precisely the specified map. Assemble the data and these four primitive properties; no assertion about expressions or substitution is used.",
-   "uses": [
-    "lem-pur-completed-primitive-counit-comparison",
-    "lem-coef-normalized-dvr-effectivity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-    "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Coefficient twists; simultaneous normalized completed-operation models, original construction steps 1--6; Stacks 07A4, 07A6, 08J9, 0941."
    }
   }
  ],
  "proof_deps": [
-  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-completion-unit-canonical-models",
   "lem-sfb-ringed-site-duality-maps",
-  "lem-pur-completed-primitive-counit-comparison",
-  "lem-pur-integral-operations-well-defined",
-  "lem-weil-strict-roos-comparison",
-  "lem-pur-normalized-operation-system-models",
-  "lem-coef-normalized-dvr-effectivity"
+  "lem-coef-closed-tensor-comparison",
+  "lem-pur-normalized-completion-realization",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-trf-primitive-quotient-realization-comparisons",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-pur-quotient-expression-kflat-normalization",
+  "lem-trf-effective-quotient-model-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-  "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Coefficient twists; simultaneous normalized completed-operation models, original construction steps 1--6; Stacks 07A4, 07A6, 08J9, 0941."
  },
  "mathlib_searches": [
   {
@@ -163,13 +158,122 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-21dd0",
-  "group": "F5",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261022T021031-L-164224",
+  "landing": "20261025T211939-L-4169961",
   "kind": "interface",
-  "note": "independent cc review: delivered item module + new NormalizedCompletedOperationModels against live clone (verbatim move of Models/tensor/unit/tensorRealization/tensorComparison/pullbackComparison), node lem-pur-completed-operation-tower-substitution and new node lem-pur-normalized-completed-operation-models against the Lean, change record Users against the import graph; all 9 direct importers compiled against the delivery (3 also time out at 60 s against the published build: pre-existing/load)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "B2 stage 2",
+  "old_statement": "Fix a prime l, a finite extension E of Q_l, an arbitrary family W of schemes with l invertible in every residue field, and independent site, coefficient and family universes. There exist Models l E W as specified in the completed-operation substitution interface: the full reduction/total-limit calculus, a canonical system RingedSiteDualityModel with equal closed structure, integral_closed equal to IntegralOnSlice.duality, completion with its unit equation, a normalized IntegralComparisonRoosModel at every scheme and an IntegralComparisonPullbackModel for every morphism using these same models. The actual calculus counit is invertible on every normalized system, and the coefficient unit, system tensor and whole-system pullback preserve IsNormalizedCoefficientSequence. This asserts primitive construction and normalization only: it does not assert expression comparison, substitution or structural transport laws.",
+  "what": "Equality of independently chosen closed monoidal structures is stronger than the source normalization and is not supplied by adjunction uniqueness. Replace equality casts by the canonical natural isomorphism determined by the common internal Hom adjunction; no arbitrary tensor comparison is added. Completion, counit and primitive normalization clauses are unchanged.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+   "place": "Coefficient twists; simultaneous normalized completed-operation models, original construction steps 1--6; Stacks 07A4, 07A6, 08J9, 0941."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-completed-operation-tower-substitution",
+    "holds": true,
+    "note": "Uses the same unit-normalized completion, canonical tensor, counit and pullback maps; the canonical adjunction comparison replaces equality transport without changing these operations up to their specified normalized identification."
+   },
+   {
+    "id": "lem-pur-derived-pullback-tensor-iso",
+    "holds": true,
+    "note": "Uses the coefficient unit and primitive normalization only; their types and mathematical meaning are preserved."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Choose canonical closed total-tensor models on the integral and sequence sites. Present the reduction/total-limit calculus with these same tensors, by transporting its tensor comparisons and adjunctions along the normalized representative comparisons. Choose the integral model to be IntegralOnSlice.duality. This yields the system_closed and integral_closed equalities, without identifying arbitrarily chosen isomorphic structures.",
+    "uses": [
+     "lem-coef-derived-system-evaluation-calculus",
+     "lem-sfb-ringed-site-duality-maps"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+     "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
+    }
+   },
+   {
+    "text": "The strict quotient tower computes reduction on flat-term K-flat representatives. Apply the normalized natural Roos/total-limit comparison to obtain completion. The strict quotient augmentation identifies its unit with the reduction adjunction unit. For every scheme morphism, form inverse image of this same whole reduction system; the quotient/Roos comparison gives IntegralComparisonPullbackModel, normalized on every simultaneous quotient presentation. One Roos comparison is shared at each scheme.",
+    "uses": [
+     "lem-pur-completed-primitive-counit-comparison",
+     "lem-pur-integral-operations-well-defined",
+     "lem-weil-strict-roos-comparison"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+     "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
+    }
+   },
+   {
+    "text": "Identify the actual unit, tensor and pullback transition adjuncts using the normalized system operation models. The unit adjunct is scalar multiplication, tensor uses monoidal scalar extension followed by the input adjuncts, and pullback uses inverse scalar association followed by pullback of the input adjunct. Their cocycles follow from scalar association and the input cocycles, hence all three preserve normalization. Transport through the same normalized representative comparisons of the preceding steps.",
+    "uses": [
+     "lem-pur-normalized-operation-system-models"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+     "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
+    }
+   },
+   {
+    "text": "The canonical reduction/total-limit counit is invertible on normalized whole systems by normalized-DVR effectivity. The projection normalization of the calculus identifies it with the counit in the primitive comparison theorem, so effectivity applies to precisely the specified map. Assemble the data and these four primitive properties; no assertion about expressions or substitution is used.",
+    "uses": [
+     "lem-pur-completed-primitive-counit-comparison",
+     "lem-coef-normalized-dvr-effectivity"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+     "place": "Coefficient twists, order 2232; original completed-operation substitution proof steps 1--6: simultaneous quotient/Roos realization and primitive normalization."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-coef-derived-system-evaluation-calculus",
+   "lem-sfb-ringed-site-duality-maps",
+   "lem-pur-completed-primitive-counit-comparison",
+   "lem-pur-integral-operations-well-defined",
+   "lem-weil-strict-roos-comparison",
+   "lem-pur-normalized-operation-system-models",
+   "lem-coef-normalized-dvr-effectivity"
+  ],
+  "old_stmt_deps": [
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-scheme-morphism-properties",
+   "def-weil-completed-integral-coefficients",
+   "def-coef-normalized-dvr-tower",
+   "lem-coef-semilinear-derived-sections",
+   "def-weil-integral-reduction-tower",
+   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+   "lem-coef-normalized-dvr-effectivity",
+   "def-pur-integral-derived-operations",
+   "def-pur-completed-operation-expressions",
+   "lem-coef-derived-system-evaluation-calculus",
+   "lem-sfb-ringed-site-duality-maps",
+   "def-trf-integral-comparison-sequence-systems",
+   "def-trf-integral-comparison-realization-models"
+  ]
  }
 }

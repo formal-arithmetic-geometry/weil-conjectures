@@ -1,0 +1,238 @@
+{
+ "id": "lem-trf-locally-ind-etale-base-change-charts",
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "Fix $x^\\prime\\in T^\\prime$ and any charts $V=\\operatorname{Spec}B$, $U=\\operatorname{Spec}A$, $W=\\operatorname{Spec}C$ as in the statement. The inclusions $u(V)\\subset U$ and $W\\subset g^{-1}(U)$ give the restricted maps $V\\to U$ and $W\\to U$. Apply [lem-weil-pbc-open-fibre-product] with $(X,Y,S)=(T,S^\\prime,S)$: the canonical map $V\\times_UW\\to T^\\prime$ identifies its source, compatibly with both projections, with the open subscheme $V^\\prime=p^{-1}(V)\\cap q^{-1}(W)$. Since $p(x^\\prime)\\in V$ and $q(x^\\prime)\\in W$, this open contains $x^\\prime$. In Lean, take m = pullback.map and use Scheme.pullback_map_isOpenImmersion and Scheme.Pullback.range_map. The open inclusion and m have equal ranges, so IsOpenImmersion.isoOfRangeEq gives the isomorphism, and isoOfRangeEq_hom_fac gives its compatibility with the ambient pullback.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR, lemma-open-fibre-product, statement and proof"
+   }
+  },
+  {
+   "text": "Give $B,C$ the $A$-algebra structures from $V\\to U$, $W\\to U$: by [def-weil-affine-spectrum] each of these morphisms of affine spectra is $\\operatorname{Spec}$ of exactly one ring homomorphism, $A\\to B$, respectively $A\\to C$. Write $i:V\\times_UW\\xrightarrow{\\sim}V^\\prime$ for step 1. Apply [lem-weil-pbc-fibre-product-affine-spectra] with $(R,A,B)=(A,B,C)$ to obtain $j:V\\times_UW\\xrightarrow{\\sim}\\operatorname{Spec}(B\\otimes_A C)$. Then $j\\circ i^{-1}$ is the asserted affine presentation. The projection formulas of that node identify the maps to $V,W$ with the spectra of $b\\mapsto b\\otimes1$ and $c\\mapsto1\\otimes c$. If $r_V,r_W$ are the projections from $V\\times_UW$ and $e_V:V\\hookrightarrow T$, $e_W:W\\hookrightarrow S^\\prime$ are the inclusions, step 1 gives $p|_{V^\\prime}\\circ i=e_V\\circ r_V$ and $q|_{V^\\prime}\\circ i=e_W\\circ r_W$. Composing with $i^{-1}$ identifies both restricted projections under $j\\circ i^{-1}$ with the stated tensor maps, followed by $e_V,e_W$. Canonicity is relative to the fixed chart presentations and their structure maps: any two resulting identifications, composed with $j^{-1}$, have the same two projections to $V,W$, hence agree by uniqueness in [def-pc-fibre-product]. The equations are pullbackSpecIso_hom_fst and pullbackSpecIso_hom_snd. Cancel the open immersions iV and iW and apply pullback.hom_ext and Iso.ext to prove uniqueness.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4, lemma-fibre-product-affine-schemes, and 01JQ, lemma-fibre-product-affines"
+   }
+  },
+  {
+   "text": "The base-change clause of [lem-weil-pbc-ind-etale-stability] applies to the ind-etale map $A\\to B$ of the chosen chart and the arbitrary map $A\\to C$. Its base-changed map has source $C$ and target $B\\otimes_A C$, with structure homomorphism $c\\mapsto1\\otimes c$; hence this homomorphism is ind-etale. By the second projection formula established in step 2, it is precisely the coordinate map of $V^\\prime\\to W$. Thus the ind-etale conclusion is for the projection $q$, with no restriction on $A\\to C$. Use the already-proved source-library RingHom.IndEtale.isStableUnderBaseChange clause directly, with the right algebra structure on B tensor_A C; the other clauses of the bundled Sheaf stability theorem are not needed. Transport IndEtaleAcrossUniverses to and from the equal-universe predicate along the canonical ULift ring equivalences, using invariance under ring isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097J, lemma-base-change-ind-etale"
+   }
+  },
+  {
+   "text": "For any $x^\\prime\\in T^\\prime$, choose $V,U$ about $p(x^\\prime)$ using the hypothesis on $u$. By [def-pc-fibre-product], $g(q(x^\\prime))=u(p(x^\\prime))\\in u(V)\\subset U$, so $q(x^\\prime)\\in g^{-1}(U)$. The latter is open by continuity of the scheme morphism $g$. Apply [lem-weil-pbc-affine-opens-basis] on $S^\\prime$ to obtain an affine open $W=\\operatorname{Spec}C$ with $q(x^\\prime)\\in W\\subset g^{-1}(U)$. Steps 1--3 produce an affine open $V^\\prime$ containing $x^\\prime$, with $q(V^\\prime)\\subset W$ and ind-etale coordinate map $C\\to B\\otimes_A C$. These are exactly the required local affine charts for $q$. Only $U,V,W$ have been assumed affine. Use Scheme.exists_affine_mem_range_and_range_subset to choose W, IsOpenImmersion.lift for W to U, and Spec.preimage for its coordinate map A to C. The actual new chart is Spec(B tensor_A C) mapped by pullbackSpecIso.inv followed by m; its point-membership follows from range_map and its second projection equation from pullbackSpecIso_inv_snd.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IT, lemma-basis-affine-opens; Tag 01JP, definition-fibre-product; Tag 01JR, lemma-open-fibre-product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex; literature/stacks-project/proetale.tex",
+  "place": "Tags 01JR, 01I4, 01JQ, 097J and 01IT, implemented using Mathlib open-immersion and affine-pullback APIs and the source-library ind-etale base-change theorem."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ind-etale-strict-local-invariance",
+  "date": "2026-10-22",
+  "group": "NG"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "title": "Affine ind-etale neighbourhood charts after arbitrary scheme base change",
+ "statement": "Let $u:T\\to S$ be a morphism of schemes [def-pc-scheme] such that for every point $x\\in T$ there are affine open subschemes $V=\\operatorname{Spec}B\\subset T$, $U=\\operatorname{Spec}A\\subset S$ [def-weil-affine-spectrum, def-weil-open-immersion], with $x\\in V$ and $u(V)\\subset U$, for which the induced ring homomorphism $A\\to B$ is ind-etale [def-weil-pbc-ind-etale-algebra]. For any scheme morphism $g:S'\\to S$, put $T'=T\\times_SS'$ and let $p:T'\\to T$, $q:T'\\to S'$ be its projections [def-pc-fibre-product]. For every point $x'\\in T'$, every such pair $V,U$ about $p(x')$, and every affine open $W=\\operatorname{Spec}C\\subset g^{-1}(U)$ containing $q(x')$, the open subscheme $V'=p^{-1}(V)\\cap q^{-1}(W)$ contains $x'$ and has a canonical isomorphism\n$$V'\\cong V\\times_UW\\cong\\operatorname{Spec}(B\\otimes_A C).$$\nUnder this isomorphism the restrictions of $p$ and $q$ are induced by $B\\to B\\otimes_A C$, $b\\mapsto b\\otimes1$, and $C\\to B\\otimes_A C$, $c\\mapsto1\\otimes c$, respectively. The latter ring homomorphism is ind-etale. In particular $q:T'\\to S'$ satisfies the same local affine ind-etale chart condition at every point of $T'$. No finiteness, affineness, or separation condition on $g$, $S$, or $S'$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex; literature/stacks-project/proetale.tex",
+  "place": "Tag 01JR, lemma-open-fibre-product; Tag 01I4, lemma-fibre-product-affine-schemes; Tag 01JQ, lemma-fibre-product-affines; Tag 097J, lemma-base-change-ind-etale. Synthesis of the returned parent proof, step 4."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-pc-fibre-product"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]nd.?[Ee]tale|[Pp]ro[Aa]ffine[Ee]tale",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the etale special cases and abstract property transport require extra hypotheses and do not construct the stated local ind-etale charts",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally ind etale morphisms of schemes are stable under arbitrary base change with tensor product affine charts",
+   "results": "RingHom.Etale.isStableUnderBaseChange; Algebra.Etale.baseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; Algebra.FormallyEtale.instTensorProduct; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: the etale special cases and abstract property transport require extra hypotheses and do not construct the stated local ind-etale charts",
+   "digest": "9863e0d51b719a0d"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IndEtale\", \"baseChange\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the etale special cases and abstract property transport require extra hypotheses and do not construct the stated local ind-etale charts",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism locally represented by filtered colimits of etale affine algebras retains such affine charts after arbitrary scheme base change",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange; AlgebraicGeometry.affineAnd_isStableUnderBaseChange; AlgebraicGeometry.AffineTargetMorphismProperty.isStableUnderBaseChange_of_isStableUnderBaseChangeOnAffine_of_isZariskiLocalAtTarget; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange; AlgebraicGeometry.isAffineHom_isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: the etale special cases and abstract property transport require extra hypotheses and do not construct the stated local ind-etale charts",
+   "digest": "98259112165cfc30"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski local affine presentations by ind etale algebras are preserved by pullbacks of schemes",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.HasAffineProperty.of_isPullback; AlgebraicGeometry.of_targetAffineLocally_of_isPullback; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: the etale special cases and abstract property transport require extra hypotheses and do not construct the stated local ind-etale charts",
+   "digest": "a385789f9abc078c"
+  },
+  {
+   "tool": "grep",
+   "query": "IndEtale|ind.etale|locallyIndEtale",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no full match: affine pullback formulas and etale stability are ingredients, but do not state local ind-etale chart stability",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IndEtale\", \"baseChange\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no full match: affine pullback formulas and etale stability are ingredients, but do not state local ind-etale chart stability",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ind etale affine open charts of scheme pullbacks have tensor product coordinate rings",
+   "results": "AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc; AlgebraicGeometry.pullbackSpecIso_hom_base; AlgebraicGeometry.pullbackSpecIso; AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc; AlgebraicGeometry.pullbackSpecIso_hom_fst_assoc; AlgebraicGeometry.pullbackSpecIso_hom_base_assoc; AlgebraicGeometry.pullbackSpecIso_hom_snd; AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc",
+   "date": "2026-10-22",
+   "verdict": "no full match: affine pullback formulas and etale stability are ingredients, but do not state local ind-etale chart stability",
+   "digest": "8ccf370a36f44ff3"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally ind etale scheme morphisms admit affine tensor product charts after arbitrary base change",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.Etale.baseChange; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale; RingHom.Etale.propertyIsLocal; AlgebraicGeometry.IsEtale.instFormallyUnramified; RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no full match: affine pullback formulas and etale stability are ingredients, but do not state local ind-etale chart stability",
+   "digest": "6b481ba725003aeb"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski local filtered colimits of etale affine algebras are preserved by scheme pullbacks",
+   "results": "AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong; AlgebraicGeometry.HasAffineProperty.of_isPullback; AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine",
+   "date": "2026-10-22",
+   "verdict": "no full match: affine pullback formulas and etale stability are ingredients, but do not state local ind-etale chart stability",
+   "digest": "04a81f344ff239b5"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization and strict-local tests in the external-product comparison: arbitrary-base-change affine charts, extracted from lem-trf-ind-etale-strict-local-invariance proof step 4, below lem-trf-oriented-nearby-strict-local-description.",
+   "via": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-locally-ind-etale-base-change-charts",
+  "worker": "stage1",
+  "summary": "Promotion-return repair assembled on the current server DAG. Compared the retained item with the current unsplit node, re-read all cited statements and definitions, and verified all six verbatim citation quotations. Step 2 now displays the equations relating both restricted projections to the open-fibre-product identification, making explicit their compatibility with the tensor-spectrum identification. The statement, dependency route and actual search records are retained. No new nodes or Mathlib leaves.",
+  "blueprint": "Serves lem-trf-local-term-locality.proof.md, (1) and (2), the specialization-to-the-normal-cone argument: through the recorded ancestor chain to lem-trf-ind-etale-strict-local-invariance, proof step 4, supplies local affine ind-etale charts after arbitrary base change. This is a generic scheme-theoretic input below that route; it introduces no alternate trace or purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Step 3 uses the generic ring-theoretic base-change clause (Stacks 097J) for A to B and A to C; the curve-zero unit has no separate ring-stability lemma and its normal-cone route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-2bee4b2dd",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-2bee4b2dd (reviewer sub-agent of L); spot-checked: Fourth delivery of this item (earlier: ca454961 FIX, 4827a253 PASS, 403397f4 FIX); none has landed. The item is still unsplit in live and side-live. There is no repair note, so this is not a re-split, and it has 0 new nodes. Compared with 4033, only the step-2 text and split_report changed: step 2 now names i and j and gives explicit projection equations. The statement, stmt_deps, source, blueprint and searches are unchanged. I read all 4 steps against the cited statements and against the Stacks sources, with tags checked in tags/tags. Step 1: lem-weil-pbc-open-fibre-product (01JR, schemes.tex:3198) with (f,g)=(u,g); the hypotheses u(V)⊂U and g(W)⊂U hold, the image is p^-1(V)∩q^-1(W), and the projections are compatible. Step 2: lem-weil-pbc-fibre-product-affine-spectra (01I4/01JQ) with (R,A,B)=(A,B,C). The tensor order and the maps b⊗1 and 1⊗c are right, and p|∘i=e_V∘r_V and q|∘i=e_W∘r_W follow from step 1. Uniqueness via def-pc-fibre-product, applied to j^-1∘φ, is correct. Step 3: the 097J clause of lem-weil-pbc-ind-etale-stability (proetale.tex:1170, no hypothesis on A→C) makes C→B⊗_A C ind-etale. I accept it as a generic off-unit tool use. Step 4: u∘p=g∘q, the open g^-1(U) and 01IT give W. Edge cases checked: T' empty, zero tensor ring, g=id, A→B etale, S and S' not separated (affineness never comes from intersections of affines). The parent lem-trf-ind-etale-strict-local-invariance uses only the q-chart clause. A DAG search found no duplicate, and no SGA source is cited. FIX (C1, re-applying the 4033 fix lost again): step 2 takes the A-algebra structure on C from W→U through Hom(Spec C,Spec A)=Hom(A,C) without citing def-weil-affine-spectrum. I added the citation to the step-2 text, its uses and proof_deps over the new wording, in fixes/dag/nodes/sec-trace-formula/lem-trf-locally-ind-etale-base-change-charts.json. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyIndEtaleBaseChangeCharts",
+  "declaration": "AlgebraicGeometry.locally_indEtale_base_change_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyIndEtaleBaseChangeCharts.lean",
+  "statement": "theorem locally_indEtale_base_change_charts {T S S' : Scheme.{u}} (u : T ⟶ S) (hu : ∀ x : T, ∃ (A B : CommRingCat.{u}) (f : A ⟶ B) (iV : Spec B ⟶ T) (iU : Spec A ⟶ S), IsOpenImmersion iV ∧ IsOpenImmersion iU ∧ x ∈ Set.range iV ∧ Spec.map f ≫ iU = iV ≫ u ∧ RingHom.IndEtaleAcrossUniverses f.hom) (g : S' ⟶ S) : (∀ (x' : (pullback u g : Scheme.{u})) (A B C : Type u) [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra A C] (iV : Spec (.of B) ⟶ T) (iU : Spec (.of A) ⟶ S) (iW : Spec (.of C) ⟶ S') [IsOpenImmersion iV] [IsOpenImmersion iU] [IsOpenImmersion iW], Spec.map (CommRingCat.ofHom (algebraMap A B)) ≫ iU = iV ≫ u → Spec.map (CommRingCat.ofHom (algebraMap A C)) ≫ iU = iW ≫ g → pullback.fst u g x' ∈ iV.opensRange → pullback.snd u g x' ∈ iW.opensRange → RingHom.IndEtaleAcrossUniverses (algebraMap A B) → x' ∈ ((pullback.fst u g) ⁻¹ᵁ iV.opensRange ⊓ (pullback.snd u g) ⁻¹ᵁ iW.opensRange) ∧ (∃! e : (((pullback.fst u g) ⁻¹ᵁ iV.opensRange ⊓ (pullback.snd u g) ⁻¹ᵁ iW.opensRange).toScheme ≅ pullback (Spec.map (CommRingCat.ofHom (algebraMap A B))) (Spec.map (CommRingCat.ofHom (algebraMap A C)))), (e ≪≫ pullbackSpecIso A B C).hom ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[A] C)) ≫ iV = ((pullback.fst u g) ⁻¹ᵁ iV.opensRange ⊓ (pullback.snd u g) ⁻¹ᵁ iW.opensRange).ι ≫ pullback.fst u g ∧ (e ≪≫ pullbackSpecIso A B C).hom ≫ Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight.toRingHom : C →+* B ⊗[A] C)) ≫ iW = ((pullback.fst u g) ⁻¹ᵁ iV.opensRange ⊓ (pullback.snd u g) ⁻¹ᵁ iW.opensRange).ι ≫ pullback.snd u g) ∧ RingHom.IndEtaleAcrossUniverses (Algebra.TensorProduct.includeRight.toRingHom : C →+* B ⊗[A] C)) ∧ (∀ x' : (pullback u g : Scheme.{u}), ∃ (C D : CommRingCat.{u}) (f : C ⟶ D) (iV' : Spec D ⟶ pullback u g) (iW : Spec C ⟶ S'), IsOpenImmersion iV' ∧ IsOpenImmersion iW ∧ x' ∈ Set.range iV' ∧ Spec.map f ≫ iW = iV' ≫ pullback.snd u g ∧ RingHom.IndEtaleAcrossUniverses f.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a7134cf6",
+  "group": "Q39",
+  "result": "pass",
+  "note": "First S2 delivery; node changed only in lean, statement verbatim. Clause match: hu as open-immersion charts with square Spec.map f ≫ iU = iV ≫ u (u(V)⊂U plus ring map via Spec.homEquiv); first conclusion over all x', A, B, C, iV, iU, iW with algebraMap squares (W⊂g⁻¹U), memberships and A→B ind-étale; x' ∈ fst⁻¹V ⊓ snd⁻¹W; ∃! e : V' ≅ pullback(Spec.map algebraMap) with projection equations through pullbackSpecIso (unique since iV, iW mono; exists by 01JR); includeRight C→B⊗C ind-étale; last clause is the q-chart condition in the same form as hu. No extra hypotheses; universe u throughout; edge cases T' empty, zero tensor ring, g=id, non-separated S'. Deps used as recorded (Scheme, Spec, IsOpenImmersion, pullback, IndEtaleAcrossUniverses); pullbackSpecIso is a Mathlib def, so no theorem stmt_dep needed. No duplicate in Sheaf or WeilConjectures. Docstrings carry source, blueprint id and 4 proof steps; only sorry is the theorem proof; lines ≤100; report sections present. Not compiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T083429-L-2352223",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

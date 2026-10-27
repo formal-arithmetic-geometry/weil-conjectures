@@ -1,0 +1,111 @@
+# global build 2026-10-26T10:40:52Z of 2a06580edd: Sheaf.AlgebraicGeometry.VectorIntegrationLocalTraceCompatibility failed
+error: Sheaf/AlgebraicGeometry/VectorIntegrationLocalTraceCompatibility.lean:70:2: `simp` made no progress
+
+Note: The target expression is not type-correct under the `implicit` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    (ordinaryFiniteUnitPullback A v).inv
+  has type
+    @Quiver.Hom (DerivedCategoryModule A U)
+      (instCategoryDerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat A))).toQuiver (ordinaryFiniteUnit A U)
+      ((ordinaryFinitePullback A v).obj (ordinaryFiniteUnit A S))
+  but is expected to have type
+    @Quiver.Hom (DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat A)))
+      (instCategoryDerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat A))).toQuiver (ordinaryFiniteUnit A U)
+      ((ordinaryFinitePullback A v).obj
+        ((DerivedCategory.singleFunctor (Sheaf S.smallEtaleTopology (ModuleCat A)) 0).obj (ordinaryFiniteConstant A S)))
+  in the application
+    τ ≫ (ordinaryFiniteUnitPullback A v).inv
+  
+  Note: The following definitions were not unfolded because their definition is not exposed:
+    Shrink ↦ 6
+error: Sheaf/AlgebraicGeometry/VectorIntegrationLocalTraceCompatibility.lean:261:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (etaleDegreeZeroHomEquiv A U.ι α).symm
+      (compRestriction V.ι p U.ι hp ((etaleDegreeZeroHomEquiv A V.ι α) (?τ ≫ (ordinaryFiniteUnitPullback A V.ι).inv))) ≫
+    (ordinaryFiniteUnitPullback A U.ι).hom
+in the target expression
+  (etaleDegreeZeroHomEquiv A U.ι α).symm
+        (compRestriction V.ι p U.ι hp
+          ((etaleDegreeZeroHomEquiv A V.ι α)
+            (vectorIntegrationLocalTrace N hN A hA t D S hS d F V e ≫ (ordinaryFiniteUnitPullback A V.ι).inv))) ≫
+      (ordinaryFiniteUnitPullback A U.ι).hom =
+    (etaleDegreeZeroHomEquiv A U.ι α).symm
+        (compRestriction V'.ι p' U.ι hp'
+          ((etaleDegreeZeroHomEquiv A V'.ι α)
+            (vectorIntegrationLocalTrace N hN A hA t D S hS d F V' e' ≫ (ordinaryFiniteUnitPullback A V'.ι).inv))) ≫
+      (ordinaryFiniteUnitPullback A U.ι).hom
+
+N : ℕ
+hN : 0 < N
+A : Type (u + 1)
+inst✝³ : CommRing A
+inst✝² : Finite A
+hA : ↑N = 0
+S : Scheme
+inst✝¹ : IsNoetherian S
+hS : IsUnit ↑N
+d : ℕ
+F : SheafOfModules S.ringCatSheaf
+inst✝ : F.IsFiniteLocallyFreeOfRank d
+L : Sheaf S.smallEtaleTopology (ModuleCat A)
+α :
+  vectorIntegrationSource A N hA S d F ≅
+    (DerivedCategory.singleFunctor (Sheaf S.smallEtaleTopology (ModuleCat A)) 0).obj L
+t : OrdinaryFiniteTwistTransport A N hA
+D : (T : Scheme) → [IsNoetherian T] → (hT : IsUnit ↑N) → OrdinaryFiniteP1Datum A N hA t T hT
+hD : OrdinaryFiniteP1BaseChange A N hA t D
+V V' : S.Opens
+e : VectorBundleZeroSection.Trivialization S d F V
+e' : VectorBundleZeroSection.Trivialization S d F V'
+W : S.Etale
+q : W ⟶ Scheme.Etale.mk V.ι
+q' : W ⟶ Scheme.Etale.mk V'.ι
+U : S.Opens := V ⊓ V'
+p : ↑U ⟶ ↑V := S.homOfLE ⋯
+p' : ↑U ⟶ ↑V' := S.homOfLE ⋯
+hp : U.ι = p ≫ V.ι
+hp' : U.ι = p' ≫ V'.ι
+this✝ : TopologicalSpace.NoetherianSpace ↥↑U :=
+  Topology.IsInducing.noetherianSpace (Topology.IsOpenEmbedding.isInducing (Scheme.Hom.isOpenEmbedding U.ι))
+this : IsNoetherian ↑U :=
+  let __IsLocallyNoetherian := inferInstance;
+  { toIsLocallyNoetherian := __IsLocallyNoetherian,
+    isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact Set.univ }
+g : GL (Fin d) ↑Γ(↑U, ⊤)
+hg :
+  vectorIntegrationOverlapPrefix N hN A hA t S hS d F U V' ⋯ e' =
+    vectorIntegrationOverlapPrefix N hN A hA t S hS d F U V ⋯ e ≫
+      affineLinearTraceAction N hN A hA t ↑U ⋯ d (affineTraceLinearMap (↑U) d g) ⋯
+hi :
+  affineLinearTraceAction N hN A hA t ↑U ⋯ d (affineTraceLinearMap (↑U) d g) ⋯ ≫ affineTraceCounit A N hA t D ↑U ⋯ d =
+    affineTraceCounit A N hA t D ↑U ⋯ d
+⊢ (etaleDegreeZeroHomEquiv A U.ι α).symm
+        (compRestriction V.ι p U.ι hp
+          ((etaleDegreeZeroHomEquiv A V.ι α)
+            (vectorIntegrationLocalTrace N hN A hA t D S hS d F V e ≫ (ordinaryFiniteUnitPullback A V.ι).inv))) ≫
+      (ordinaryFiniteUnitPullback A U.ι).hom =
+    (etaleDegreeZeroHomEquiv A U.ι α).symm
+        (compRestriction V'.ι p' U.ι hp'
+          ((etaleDegreeZeroHomEquiv A V'.ι α)
+            (vectorIntegrationLocalTrace N hN A hA t D S hS d F V' e' ≫ (ordinaryFiniteUnitPullback A V'.ι).inv))) ≫
+      (ordinaryFiniteUnitPullback A U.ι).hom
+
+Note: The target expression is not type-correct under the `implicit` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    (ordinaryFiniteUnitPullback A V.ι).inv
+  has type
+    @Quiver.Hom (DerivedCategoryModule A ↑V)
+      (instCategoryDerivedCategory (Sheaf (↑V).smallEtaleTopology (ModuleCat A))).toQuiver (ordinaryFiniteUnit A ↑V)
+      ((ordinaryFinitePullback A V.ι).obj (ordinaryFiniteUnit A S))
+  but is expected to have type
+    @Quiver.Hom (DerivedCategory (Sheaf (↑V).smallEtaleTopology (ModuleCat A)))
+      (instCategoryDerivedCategory (Sheaf (↑V).smallEtaleTopology (ModuleCat A))).toQuiver (ordinaryFiniteUnit A ↑V)
+      ((ordinaryFinitePullback A V.ι).obj
+        ((DerivedCategory.singleFunctor (Sheaf S.smallEtaleTopology (ModuleCat A)) 0).obj (ordinaryFiniteConstant A S)))
+  in the application
+    vectorIntegrationLocalTrace N hN A hA t D S hS d F V e ≫ (ordinaryFiniteUnitPullback A V.ι).inv
+  
+  Note: The following definitions were not unfolded because their definition is not exposed:
+    Shrink ↦ 6
+error: Lean exited with code 1

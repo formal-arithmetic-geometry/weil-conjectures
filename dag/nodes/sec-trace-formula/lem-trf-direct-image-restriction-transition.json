@@ -1,0 +1,125 @@
+{
+ "id": "lem-trf-direct-image-restriction-transition",
+ "kind": "statement",
+ "title": "Restriction-form transition square for the actual system direct image",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, schemes $X,Z,Y$, an open immersion $j:X\\to Z$, and a morphism $p:Z\\to Y$. Let $D$ be any CompactSupportSystemEvaluationData of [def-trf-compact-support-system-evaluation-diagram]. Assume its ordinary coefficient square and ordinary direct-image evaluation are identities on sections, and both derived comparisons satisfy the specified CompactSupportDerivedSquareNormalization on arbitrary K-injective resolutions. Write $G=Rp_{*,\\bullet}$, $G_n=Rp_{*,n}$, $d_n:e_nG\\cong G_ne_n$, and $a_{m,n}:G_mr^Z_{m,n}\\cong r^Y_{m,n}G_n$ for these comparisons. For every $n\\leq m$ and arbitrary $N\\in D(\\mathscr S_Z)$, $\\tau^Y_{m,n,GN}\\,;\\,r^Y_{m,n}(d_{n,N})=d_{m,N}\\,;\\,G_m(\\tau^Z_{m,n,N})\\,;\\,a_{m,n,e_nN}$. This compares the restriction-form transition before open extension, scalar-adjunction transposition or completed restriction.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; coherence proof steps 2 and 4, restriction-form transition square"
+ },
+ "stmt_deps": [
+  "def-trf-compact-support-system-evaluation-diagram",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "For the ordinary square, use the characterization of coefficientSequenceTransition on sections. The two evaluation comparisons are identities by h2, and the coefficient comparison is the identity by h0. Both sides are the horizontal restriction of N evaluated on the base change of the test object. This proves ordinary_transition by module-sheaf extensionality.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-trf-compact-support-system-evaluation-diagram"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a normalized derived square, first take a K-injective source J and resolve H(J) by r:H(J) -> I. The normalization equation says that its postcomposition tail is an isomorphism. Cancel that tail and apply naturality of the cochain derived unit along r; its component at a K-injective is the inverse of rightDerivedFunctorObjQIso. This gives normalized_unit_kinjective. Form the two natural transformations on complexes appearing in this equation. For an arbitrary complex choose a K-injective resolution and cancel the induced target isomorphism; naturality extends the equality to every complex (normalized_unit). Cancelling the ordinary and derived comparison isomorphisms yields normalized_unit_inv. These are consequences of the supplied normalization and K-injective-resolution hypotheses, with no injectivity preservation assumption on H or K.",
+   "uses": [
+    "def-trf-compact-support-system-evaluation-diagram"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The liftNatTrans_app formula and the normalized exact-functor compositor show transition_rep: conjugating a derived transition by the exact-evaluation factorizations gives Q of its termwise ordinary transition. On a K-injective model J of N, precompose the desired equality with evaluation of the invertible derived unit of system direct image. Postcompose with the inverse derived coefficient comparison and the two exact-restriction factorization isomorphisms. Use transition naturality, normalized_unit_inv for both evaluations and coefficient restriction, and factorization naturality. The left side becomes Q of the ordinary transition square followed by the level derived unit; the right side has the same form by naturality of that unit. Apply ordinary_transition degreewise and localize its equality. Transport the equality of natural transformations from Q(J) to N along its K-injective-model isomorphism. This is derived_transition, specialized in the public theorem.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-trf-compact-support-system-evaluation-diagram",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "K-injective-derived-unit reformulation of the original resolution proof, using lemma-K-injective-defined (070Y), lemma-enough-K-injectives-implies (070K), and exact-functor localization (015F); ordinary section square from Zheng 4.10 and Stacks 0941. E5, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image evaluation commutes with the restriction-form transition of a system of coefficient modules",
+   "results": "Eight hits for ordinary restriction and pushforward section formulas, including PresheafOfModules.pushforward_obj_map_apply'; no derived system-transition square.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived direct image of semilinear coefficient systems commutes with transition maps and adjunction units and counits",
+   "results": "Eight hits for ordinary sheaf module pushforward and adjunction evaluations; no specified derived transition comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*(evaluation|transition)|evaluation.*rightDerivedFunctor",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CompactSupportSystemEvaluationCoherence",
+  "date": "2026-10-27",
+  "group": "T4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Proof Step 1 (Global powers), compatibility with composition before rationalization; the comparison prerequisite of prop-trf-rational-frobenius-integral-model.proof.md (2)-(3). Coherence proof steps 2, 4.",
+   "via": [
+    "lem-trf-compact-support-system-evaluation-coherence",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CompactSupportDirectImageRestrictionTransition",
+  "file": "lean/Sheaf/TraceFormula/CompactSupportDirectImageRestrictionTransition.lean",
+  "declaration": "WeilConjectures.compactSupportDirectImageRestrictionTransition",
+  "statement": "theorem compactSupportDirectImageRestrictionTransition\n    {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]\n    [D : CompactSupportSystemEvaluationData l E X Z Y j p]\n    (h0 : ∀ {m n : ℕ} (h : n ≤ m)\n            (N : normalizedDVRModules l E Z n) (V : Y.ProEtᵒᵖ),\n            HEq (fun x ↦ ((D.operations.ordinaryCoefficientComparison h).hom.app N).val.app V x)\n              (fun x : N.val.obj ((Scheme.proEtaleBaseChange p).op.obj V) ↦ x))\n    (h1 : ∀ {m n : ℕ} (h : n ≤ m),\n      letI := normalizedDVRModuleRes_limits l E Z h\n      letI := normalizedDVRModuleRes_colimits l E Z h\n      letI := normalizedDVRModuleRes_limits l E Y h\n      letI := normalizedDVRModuleRes_colimits l E Y h\n      CompactSupportDerivedSquareNormalization\n          (compactSupportLevelDirectImage l E p n) (compactSupportLevelDirectImage l E p m)\n          (normalizedDVRModuleRes l E Z h) (normalizedDVRModuleRes l E Y h)\n          (D.operations.ordinaryCoefficientComparison h) (D.operations.derivedCoefficientComparison\n            h))\n    (h2 : ∀ (n : ℕ) (N : coefficientSequenceModules l E Z)\n            (V : Y.ProEtᵒᵖ)\n            (x : ((integralComparisonSequenceDirectImage l E p ⋙\n              coefficientSequenceEvaluation l E Y n).obj N).val.obj V),\n            HEq (((D.pOrdinaryEvaluation n).hom.app N).val.app V x) x)\n    (h3 : ∀ n : ℕ,\n      letI := coefficientSequenceEvaluation_additiveInstance l E Z n\n      letI := coefficientSequenceEvaluation_additiveInstance l E Y n\n      letI := coefficientSequenceEvaluation_limits l E Z n\n      letI := coefficientSequenceEvaluation_colimits l E Z n\n      letI := coefficientSequenceEvaluation_limits l E Y n\n      letI := coefficientSequenceEvaluation_colimits l E Y n\n      CompactSupportDerivedSquareNormalization\n          (integralComparisonSequenceDirectImage l E p) (compactSupportLevelDirectImage l E p n)\n          (coefficientSequenceEvaluation l E Z n) (coefficientSequenceEvaluation l E Y n)\n          (D.pOrdinaryEvaluation n).symm (D.pRightEvaluation n).symm)\n    {m n : ℕ} (h : n ≤ m) (N : coefficientSequenceDerived l E Z) :\n    (coefficientSequenceDerivedTransition l E Y h).app\n        ((integralComparisonSequenceDirectImage l E p).rightDerivedFunctor.obj N) ≫\n      (normalizedDVRRes l E Y h).map ((D.pRightEvaluation n).hom.app N) =\n    (D.pRightEvaluation m).hom.app N ≫\n      (compactSupportLevelDirectImage l E p m).rightDerivedFunctor.map\n        ((coefficientSequenceDerivedTransition l E Z h).app N) ≫\n      (D.operations.derivedCoefficientComparison h).hom.app\n        ((coefficientSequenceDerivedEvaluation l E Z n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T235940-L-1472900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T034633-L-3668114",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

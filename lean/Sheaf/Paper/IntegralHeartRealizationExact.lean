@@ -4,16 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group C5
 -/
 module
-public import Sheaf.Paper.IntegralHeartLocalModel
+public import Sheaf.Paper.IntegralHeartLocalModelData
 import Mathlib.Algebra.Category.ModuleCat.Biproducts
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.LinearAlgebra.TensorProduct.Tower
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.Algebra.Category.ModuleCat.Descent
 import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+public import Mathlib.RingTheory.DedekindDomain.Basic
 /-!
 # Exactness and finite free terms of integral scalar realization
 

@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.CategoryTheory.Localization.Predicate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-!
 # Relative tensor with a module in a single degree

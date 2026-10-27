@@ -1,0 +1,178 @@
+{
+ "id": "lem-trf-etale-presented-local-cokernels",
+ "kind": "statement",
+ "title": "Lift specified local free presentations to quasi-coherent Zariski cokernels",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $c_X$ its canonical Zariski/etale module context [lem-trf-zariski-etale-tensor-sections], $G$ any small etale module, and $(U_i)$ any family of etale charts [def-weil-pbc-etale-site], without a covering hypothesis. For small $K_i,J_i$, suppose $d_i:\\mathcal O_{U_i,et}^{(K_i)}\\to\\mathcal O_{U_i,et}^{(J_i)}$ and $q_i:\\mathcal O_{U_i,et}^{(J_i)}\\to G|_{U_i}$ form cokernel coforks. In the coordinates [def-trf-etale-presented-recovery-coordinates], the generator-normalized free comparisons are isomorphisms, each $d_i$ has a unique Zariski lift $h_i$, and there are quasi-coherent cokernels $F_i$ [pqf-def-coherent] with quotient maps and isomorphisms $L_{U_i}F_i\\simeq G|_{U_i}$ commuting with those quotients. Each $F_i$ has a linear tensor-section comparison whose unit is the identity on every open. This is precisely the datum EtalePresentedLocalRecovery; no overlap maps or global module are claimed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-trf-space-quasi-coherent-module",
+  "def-pc-module-pullback",
+  "def-trf-etale-presented-recovery-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_i=\\mathcal O_{V_i}^{(K_i)}$ and $B_i=\\mathcal O_{V_i}^{(J_i)}$, with coproducts taken in module sheaves. On each affine open $\\operatorname{Spec}R\\subseteq V_i$, [lem-weil-pbc-spec-tilde-free-module] with $n=1$ makes the structure module quasi-coherent. The affine-local definition [pqf-def-coherent] therefore makes $\\mathcal O_{V_i}$ quasi-coherent. By [lem-weil-pbc-quasi-coherent-module-coproduct-closure], $A_i$ and $B_i$ are quasi-coherent for arbitrary small $K_i,J_i$. By [lem-trf-etale-extension-free-presentations-hom], $L_{V_i}$ preserves these coproducts and sends the structure module to the etale structure module; hence it canonically identifies $L_{V_i}A_i,L_{V_i}B_i$ with the two free modules in the specified presentation.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module",
+    "pqf-def-coherent",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-trf-etale-extension-free-presentations-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof of (2) by the same construction as (1)."
+   }
+  },
+  {
+   "text": "Apply the Hom bijection of [lem-trf-etale-extension-free-presentations-hom] to $A_i,B_i$. It gives a unique $h_i:A_i\\to B_i$ with image $d_i$ under the identifications of step 1. Define $q_i:B_i\\to F_i=\\operatorname{Coker}(h_i)$. The module $F_i$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-cokernel-closure]. Since $L_{V_i}$ preserves cokernels by [lem-trf-etale-extension-free-presentations-hom], both $L_{V_i}q_i$ and the supplied presentation projection are cokernels of $d_i$. Their universal properties give the unique isomorphism $b_i:L_{V_i}F_i\\simeq G|_{(V_i)_{\\mathrm{et}}}$ commuting with those projections.",
+   "uses": [
+    "lem-trf-etale-extension-free-presentations-hom",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX, proposition-equivalence-quasi-coherent, proof of (2) by the same construction as (1)."
+   }
+  },
+  {
+   "text": "Use the linear, unit-normalized tensor comparison of lem-trf-etale-extension-free-presentations-hom on each local cokernel. All contexts contain only proof fields and hence agree by proof irrelevance. This gives localTensor, local_linear and local_unit.",
+   "uses": [
+    "lem-trf-etale-extension-free-presentations-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-tilde-free-module",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-trf-etale-extension-free-presentations-hom",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful tensor extension lifts a presentation by free modules to a quasicoherent cokernel and compatible local comparisons",
+   "results": "SheafOfModules.presentationOfIsCokernelFree, QuasicoherentData.presentation, quasicoherentDataOfIsFinitePresentation; these package presentations but do not lift along change of topology.",
+   "date": "2026-10-26",
+   "verdict": "No direct recovery construction; the existing free-presentation/Hom theorem remains the tool."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicoherent module on the small etale site is recovered by restriction to the Zariski site and effective descent of free presentations",
+   "results": "SheafOfModules.QuasicoherentData and its presentation/local-generators projections.",
+   "date": "2026-10-26",
+   "verdict": "Local presentations alone do not construct compatible Zariski cokernels or their descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit",
+   "results": "Adjunction.homEquiv, left_triangle_components, right_triangle_components and toEquivalence.",
+   "date": "2026-10-26",
+   "verdict": "The Hom equivalence and triangle identities supply the final formal argument; not the local recovery or descent."
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePresentedRecovery|etalePresentedModule_effectiveRecovery|isIso_counit_app; rg in Mathlib, lean/WeilConjectures, lean/Sheaf, DAG; blueprint_refs search etale presented",
+   "results": "The assigned module is the only recovery datum. Existing declarations are isQuasicoherent_cokernel, isQuasicoherent_sigma, exists_isQuasicoherent_toDescentData_iso, existsUnique_hom_of_cover, Hom.isIso_iff_isIso_app. No imported blueprint node matches etale presented.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing dependency declarations for the two genuine construction steps, and prove the adjunction tail directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtalePresentedModuleEffectiveRecovery",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 03DX recovery argument below the section-algebra change of topology: Lift specified local free presentations to quasi-coherent Zariski cokernels",
+   "via": [
+    "lem-trf-etale-presented-module-effective-recovery",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtalePresentedLocalCokernels",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePresentedLocalCokernels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etalePresented_localCokernels",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.EtalePresentedLocalRecovery",
+   "AlgebraicGeometry.Scheme.Modules.etalePresented_localCokernels"
+  ],
+  "statement": "theorem etalePresented_localCokernels (c : ∀ X : Scheme.{u}, ZariskiEtaleModuleContext X) (T : Scheme.{u}) (G : SmallEtaleModules T) (I : Type w) (U : I → T.Etale) (K J : I → Type u) (d : ∀ i, SheafOfModules.free (R := smallEtaleModuleRing (U i).left) (K i) ⟶ SheafOfModules.free (J i)) (q : ∀ i, SheafOfModules.free (R := smallEtaleModuleRing (U i).left) (J i) ⟶ (presentedEtaleRestriction (U i)).obj G) (zero : ∀ i, d i ≫ q i = 0) (presentation : ∀ i, Nonempty (IsColimit (CokernelCofork.ofπ (q i) (zero i)))) : Nonempty (EtalePresentedLocalRecovery c T G I U K J d q)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-89aa1",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T091709-L-3365885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-89aa1",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T091709-L-3365885",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + EtalePresentedRecovery unchanged vs clone; new Local/Descent structures = verbatim field subsets of EtalePresentedRecovery; moved defs verbatim vs published; item node vs proof as written"
+ }
+}

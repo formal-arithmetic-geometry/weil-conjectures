@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-tower-purity-presentation-retagging",
+ "kind": "statement",
+ "title": "Retagging for arbitrary normalized presentations of one tower purity adjunction",
+ "statement": "Use the finite-field setting [def-pur-conventions] and interfaces [def-pur-tower-geometric-purity-data, det-sp-tower-gamma]. Let j:X to Z be open, p:Z to Y proper, f=jp smooth of pure dimension d, with X,Y separated finite-type over k and Noetherian. Fix the normalized operations, twists, constructible-support functor F, right adjoint G, adjunction, finite-level comparisons and tower purity presentation a. Then Retagging holds: for every other presentation a_gamma on the same factorization and any right adjoint G_gamma, orientation, the actual inverse-projection/counit composite, and its tensor transpose agree with those of a after the unique counit-preserving right-adjoint comparison. The tensor data in each presentation are the given arbitrary normalized data, not newly chosen tensor models.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+ },
+ "stmt_deps": [
+  "def-pur-tower-geometric-purity-data",
+  "def-pur-conventions",
+  "det-sp-tower-gamma"
+ ],
+ "proof": [
+  {
+   "text": "Unfold Retagging. Apply orientation_ground_field_retagging with the identity automorphism and the given structural maps. Scheme.Hom.isOver_iff supplies the structural equation. Specialize its tower clause to the same factorization and two arbitrary purity presentations. Faithfulness of inverse realization removes that functor and proves the orientation equation.",
+   "uses": [
+    "lem-pur-orientation-ground-field-retagging"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+   }
+  },
+  {
+   "text": "Apply tensor_presentation_retagging to the supplied tensor models and the same two adjunction presentations. This gives the quantified projection-counit and tensor-transpose equations, completing the conjunction.",
+   "uses": [
+    "lem-pur-tower-tensor-presentation-retagging"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+    "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-orientation-ground-field-retagging",
+  "lem-pur-tower-tensor-presentation-retagging"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1 (purity square) and Step 5 (coefficient transports)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized smooth purity orientations and tensor counit transposes are independent of the presentation of the same right adjoint",
+   "results": "8 hits: CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit; CategoryTheory.Adjunction.rightAdjointLaxMonoidal; CategoryTheory.Bicategory.adjointifyCounit; CategoryTheory.rightAdjointMate; CategoryTheory.tensorRightAdjunction; CategoryTheory.Adjunction.rightOp_counit; CategoryTheory.Adjunction.counit_isIso_of_R_fully_faithful",
+   "date": "2026-10-27",
+   "verdict": "No exact tower statement. Generic adjunction formulas are used in the assembly; scheme and algebra tensor hits do not supply the normalized tower comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized smooth purity orientations and tensor counit transposes are independent of the presentation of the same right adjoint",
+   "results": "8 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor; CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε; CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc; CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit; CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ; CategoryTheory.mateEquiv_counit; CategoryTheory.Adjunction.ε_comp_map_ε_assoc; CategoryTheory.Adjunction.map_ε_comp_counit_app_unit",
+   "date": "2026-10-27",
+   "verdict": "No exact tower statement. Generic adjunction formulas are used in the assembly; scheme and algebra tensor hits do not supply the normalized tower comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedTower|TowerPurity|orientation.*retagging|coefficient.*tower",
+   "results": "0 hits: none",
+   "date": "2026-10-27",
+   "verdict": "No exact tower statement. Generic adjunction formulas are used in the assembly; scheme and algebra tensor hits do not supply the normalized tower comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerGeometricPurityMate",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Step 1 (purity square) and Step 5 (coefficient transports)",
+   "via": [
+    "lem-pur-tower-geometric-purity-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerPurityPresentationRetagging",
+  "file": "lean/Sheaf/Paper/TowerPurityPresentationRetagging.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpGeometricPurity.purity_presentation_retagging",
+  "statement": "theorem purity_presentation_retagging (S : PurityFiniteSetting.{u}) (b : SpTowerShriek.Base S.coefficients.l S.extension) (o : SpTowerShriek.Operations S.coefficients.l S.extension b) (q : SpTowerCalculus.Coordinates S.coefficients.l S.extension b) {X Z Y : AlgebraicGeometry.Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p] [QuasiCompact (j ≫ p)] [HasCompactification (j ≫ p)] (d : ℕ) (w : SpChartAdmissibility.Twists S.coefficients.l S.extension X) (hF : ∀ K : SpTowerCalculus.C S.coefficients.l S.extension b q X, spConstructibleTorTowers S.coefficients.l S.extension Y (q.abelian Y) ((SpTowerCalculus.F S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p)).obj K.obj)) (G : SpTowerCalculus.C S.coefficients.l S.extension b q Y ⥤ SpTowerCalculus.C S.coefficients.l S.extension b q X) (adj : SpTowerGluing.support S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) hF ⊣ G) (lv : SpTowerGluing.Levels S.coefficients.l S.extension b o q (SpTowerGamma.factorization j p) hF G adj) (a : SpTowerGamma.Purity S.coefficients.l S.extension b o q j p d w hF G adj lv) [AlgebraicGeometry.Scheme.Over X (Spec (.of S.field.k))] [AlgebraicGeometry.Scheme.Over Y (Spec (.of S.field.k))] [hSX : IsSeparated (X ↘ Spec (.of S.field.k))] [hTX : LocallyOfFiniteType (X ↘ Spec (.of S.field.k))] [hCX : QuasiCompact (X ↘ Spec (.of S.field.k))] [hSY : IsSeparated (Y ↘ Spec (.of S.field.k))] [hTY : LocallyOfFiniteType (Y ↘ Spec (.of S.field.k))] [hCY : QuasiCompact (Y ↘ Spec (.of S.field.k))] [hOver : (j ≫ p).IsOver (Spec (.of S.field.k))] [hsm : SmoothOfRelativeDimension d (j ≫ p)] : Retagging S.coefficients.l S.extension b o q j p d w hF G adj lv a",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3317e",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T012915-L-2345962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3317e",
+  "group": "P4",
+  "result": "fix",
+  "landing": "20261027T012915-L-2345962",
+  "kind": "interface",
+  "note": "independent cc review: TowerGeometricPurityData vs published item prefix (verbatim); item theorem+Conclusion byte-identical; 3 sorried holes vs pinned Twists/RootLines/CoefficientPullback/TensorData; scratch --all build + #print axioms (propext, sorryAx, Classical.choice, Quot.sound)"
+ }
+}

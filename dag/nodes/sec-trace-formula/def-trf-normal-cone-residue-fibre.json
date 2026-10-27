@@ -1,0 +1,128 @@
+{
+ "id": "def-trf-normal-cone-residue-fibre",
+ "kind": "definition",
+ "title": "Canonical residue fibre of the normal cone and initial classes",
+ "status": "split",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative local ring, let $I\\subseteq\\mathfrak m$ be an ideal, and put $A=R/I$ and $k=R/\\mathfrak m$. Give $k$ its canonical $A$-algebra structure via the quotient factor map $R/I\\to R/\\mathfrak m$, $r+I\\mapsto r+\\mathfrak m$. Let $G=\\operatorname{gr}_I R=\\bigoplus_{n\\geq0}I^n/I^{n+1}$ with its degree-zero $A$-algebra structure and homogeneous inclusions $\\iota_n$ [def-weil-pbc-associated-graded-ring]. Define the normal-cone residue fibre to be the commutative $k$-algebra $F=k\\otimes_A G$ [def-weil-pbc-module-tensor-product], with tensor-product multiplication and $k$-algebra map $c\\mapsto c\\otimes1$. For $n\\geq0$ and $a\\in I^n$, define its residue-fibre initial class as $1\\otimes\\iota_n(a\\bmod I^{n+1})\\in F$. No Noetherianity, flatness, reducedness or characteristic hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Canonical associated-graded tensor and quotient construction in the DAG filtered-algebra synthesis for lem-trf-normal-flat-hilbert-convolution and lem-trf-normal-cone-directrix-minimal-primes. Underlying associated-graded construction: Section 00JM and proof of Lemma 05GH; specialization to the residue field uses the quotient factor map. This node owns only the construction, not the minimal-prime theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalConeFibre|normalConeResidueAlgebra|normalConeFibreClass",
+   "results": "{\"t\": \"2026-10-23T20:53:00Z\", \"tool\": \"grep\", \"query\": \"normalConeFibre|normalConeResidueAlgebra|normalConeFibreClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "Existing exact project construction reused; Mathlib search does not supply this specialized associated-graded residue fibre with initial classes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "normal cone residue fibre tensor associated graded algebra residue field initial class",
+   "results": "{\"t\": \"2026-10-23T20:53:01Z\", \"tool\": \"leansearch\", \"query\": \"normal cone residue fibre tensor associated graded algebra residue field initial class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residueField\", \"TensorAlgebra.gradedAlgebra\", \"Ideal.Fiber\", \"Algebra.QuasiFinite.finite_fiber\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"IsLocalRing.instCommRingResidueField\", \"Valued.ResidueField\"], \"digest\": \"db68a24a41069d38\"}",
+   "date": "2026-10-23",
+   "verdict": "Existing exact project construction reused; Mathlib search does not supply this specialized associated-graded residue fibre with initial classes. Ideal.Fiber is a general prime-residue tensor, not this specialized construction; its source was read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normal cone fibre k tensor over R quotient I associated graded ring canonical initial class",
+   "results": "{\"t\": \"2026-10-23T20:53:02Z\", \"tool\": \"leanfinder\", \"query\": \"normal cone fibre k tensor over R quotient I associated graded ring canonical initial class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProjectiveSpectrum\", \"HomogeneousLocalization\", \"HomogeneousLocalization.Away\", \"HomogeneousIdeal.irrelevant\", \"HomogeneousLocalization.AtPrime\", \"Ideal.Fiber.exists_smul_eq_one_tmul\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\"], \"digest\": \"b55591cddbbcccf7\"}",
+   "date": "2026-10-23",
+   "verdict": "Existing exact project construction reused; Mathlib search does not supply this specialized associated-graded residue fibre with initial classes."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n normalConeResidueAlgebra|normalConeFibre|normalConeFibreClass lean/Sheaf lean/WeilConjectures; rg -l normalConeFibre|normalConeResidueAlgebra dag/nodes; tools/blueprint_refs.py search normalConeFibre; tools/blueprint_refs.py search normal-cone",
+   "results": "Project: exactly the five concrete construction declarations in Sheaf.RingTheory.NormalConeDirectrixMinimalPrimes. No WeilConjectures construction. DAG: lem-trf-flat-graded-fibre-regular-lift and lem-trf-normal-cone-directrix-minimal-primes mention these declarations, both theorem nodes, no owning definition node. Blueprint name search: zero; normal-cone search: det-sp-dnc-definition, det-tf-cone-leg-lifts, pur9-def-normal-cone, sk-def-purity-conv, none is this local ring residue fibre.",
+   "date": "2026-10-23",
+   "verdict": "Add a definition node owning the existing five declarations, as explicitly required by return H2; do not duplicate definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normal-flat-hilbert-convolution",
+  "date": "2026-10-23",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-flat Hilbert convolution: construction of F=gr_I(R) tensor_(R/I) k and its degreewise initial classes; Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: section 2, p.153, normal-flat tangent/normal-cone comparison, and the paragraph after Example (4.2), p.157; the cited underlying result is Resolution of singularities (1964), Chapter II, Theorem 2; numerical input: the Hilbert function of a normally flat local ring is the convolution of the normal-cone fibre Hilbert function with the Hilbert function of its regular centre.",
+   "via": [
+    "lem-trf-normal-flat-hilbert-convolution",
+    "lem-trf-normal-flat-double-initial-ideal",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalConeDirectrixMinimalPrimes",
+  "declaration": "Ideal.normalConeFibre",
+  "declarations": [
+   "Ideal.normalConeResidueAlgebra",
+   "Ideal.normalConeFibre",
+   "Ideal.normalConeFibreCommRing",
+   "Ideal.normalConeFibreAlgebra",
+   "Ideal.normalConeFibreClass"
+  ],
+  "statement": "abbrev normalConeFibre {R : Type u} [CommRing R] [IsLocalRing R] (I : Ideal R) (hI : I ≤ IsLocalRing.maximalIdeal R) : Type u",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Owning definition node for the five existing unconditional construction declarations in the published theorem module; their data are quotient factor, tensor product, its canonical instances and the tensor of the initial class. No theorem or choice is used. Return H2 explicitly requests this definition ownership record; no new Lean module is needed."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d51b15d7c",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d51b15d7c",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN at b5eca057. The theorem stmt_dep lem-trf-normal-cone-directrix-minimal-primes is replaced by the new def node def-trf-normal-cone-residue-fibre, an existing:true record on the unchanged module Sheaf.RingTheory.NormalConeDirectrixMinimalPrimes owning normalConeResidueAlgebra, normalConeFibre, normalConeFibreCommRing, normalConeFibreAlgebra and normalConeFibreClass. These are real data (quotient factor, tensor product and its instances, 1⊗[a]) with binders CommRing/IsLocalRing/I/hI only; the statement field is verbatim and no other def node owns them. The item Lean is byte-identical to the returned head, and the item node differs from side-live only in lean and stmt_deps. Clause re-check: hypotheses exact and none stronger; normalConeFibrePiece = k⊗G_j via the split inclusion; finite dimensionality is a conclusion; the range/ℕ∞/choose formula is right; I=0, I=m, n=0 and s=0 are covered. Sorry only; docstrings carry the source place and six steps. Advisory: the theorem node record also lists the five decls and their docstrings still name it as blueprint; that cleanup is not S2-fixable. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "id": "lem-sfb-snc-finite-tame-scalar-extension",
+ "kind": "statement",
+ "title": "Original-chart finite tame closure under finite scalar extension",
+ "statement": "Let $p$ be prime, $k$ a field of characteristic $p$, $Y$ a scheme with a finite labelled family $C$ of ideal sheaves, and $I$ a subset of the labels. Let $Q$ be an SNC residual chart [def-sfb-snc-residual-chart-data], with affine chart $\\operatorname{Spec}B$ separated of finite type over $k$, and assume its principal chart boundary is strict normal crossings [def-trf-strict-normal-crossings-boundary]. Set $U=Q.puncturedResidual$, and use the full finite tame subcategory specified by pullback from $Q.puncturedChart$ in [def-sfb-snc-finite-tame-sheaves]. Let $R,S$ be finite unital rings, $\\varphi:R\\to S$ a unital ring map, and $E:\\operatorname{Mod}_R\\to\\operatorname{Mod}_S$ a functor with adjunction $E\\dashv\\operatorname{Res}_\\varphi$ [def-pod-ring-scalar-extension]. If $M$ is an $R$-module sheaf on $U_{\\mathrm{proet}}$ whose underlying set sheaf is in that finite tame subcategory, then so is the underlying set sheaf of $N=(V\\mapsto E(M(V)))^\\#$ [def-weil-pbc-sheafification]. In particular there is a finite locally constant tame set sheaf on the original chart puncture whose pullback to $U$ is the underlying set sheaf of $N$; constancy on the full root tower alone is not the conclusion. No flatness, freeness, commutativity, or cover-degree restriction is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IX Proposition 2.1(i)-(iii), printed pp.133-134, especially the simultaneous-root lattice quotient presentation on p.133; finite-operation consequence with Bhatt-Scholze Section 5.1, pp.34-35."
+ },
+ "stmt_deps": [
+  "def-sfb-snc-residual-chart-data",
+  "def-sfb-snc-finite-tame-sheaves",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-sheaf-of-modules-category",
+  "def-pod-ring-scalar-extension",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Represent the original finite tame set sheaf at a finite root level and split the resulting finite etale cover over the universal residual root algebra. Its pullback to a connected finite root level is constant finite. The supplied chart already carries the connected finite levels and the covering full tower.",
+   "uses": [
+    "lem-sfb-snc-finite-tame-root-model",
+    "lem-sfb-universal-residual-root-finite-etale-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply connected abelian tower descent with the compatible Kummer Cech comparisons. This provides natural normalized splittings and a finite continuous abelian inertia action. Finite products identify the stalk module operations with operations on its constant fibre.",
+   "uses": [
+    "lem-sfb-connected-abelian-tower-normalized-descent",
+    "lem-sfb-compatible-kummer-tower-cech",
+    "lem-sfb-normalized-finite-splitting-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Adjoint uniqueness identifies E with balanced left scalar extension. It commutes with inverse image and constants. The extended module is finite: the map from S indexed by the finite original module, taking a tuple to the sum of its pure tensors, is onto. Therefore N is constant finite on the full tower, with a descent action factoring through a common finite tame root group.",
+   "uses": [
+    "lem-sfb-geometric-constant-left-scalar-extension",
+    "lem-sfb-normalized-finite-splitting-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each transitive orbit of this finite abelian action choose its stabilizer K in Gamma_n=(Z/n)^r. Every subgroup K is stable under common multiplication by units modulo n: one inclusion follows from closure under integer multiplication, and the reverse inclusion uses the inverse unit. Thus K is preserved by the cyclotomic Galois action and defines a finite etale subgroup of mu_n^r over B. The root-torsor quotient by this subgroup is finite etale on the puncture: after an etale root-of-unity splitting cover it is the usual quotient of a finite torsor, and finite etale descent glues it. Equivalently use the lattice Kummer quotient presentation in ILO IX 2.1, printed p.133. Take the finite disjoint union over the orbits. The result is finite locally constant and becomes constant on every strict-local full root tower.",
+   "uses": [
+    "lem-sfb-compatible-kummer-tower-cech",
+    "lem-sfb-finite-etale-fppf-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "After pullback to H the chosen primitive roots identify the quotient covers with the given orbit sets and root rotations. Their normalized splittings therefore have the same full overlap arrow as N. Descent for the covering tower glues this identification to U. This proves membership in the specified essential image. With no parameters the action is trivial and the same construction is a disjoint union of copies. A zero module contributes one constant label.",
+   "uses": [
+    "lem-sfb-connected-abelian-tower-normalized-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compatible-kummer-tower-cech",
+  "lem-sfb-connected-abelian-tower-normalized-descent",
+  "lem-sfb-finite-etale-fppf-descent",
+  "lem-sfb-geometric-constant-left-scalar-extension",
+  "lem-sfb-normalized-finite-splitting-operations",
+  "lem-sfb-snc-finite-tame-root-model",
+  "lem-sfb-universal-residual-root-finite-etale-splitting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IX Proposition 2.1(i)-(iii), printed pp.133-134, especially the simultaneous-root lattice quotient presentation on p.133; finite-operation consequence with Bhatt-Scholze Section 5.1, pp.34-35.",
+  "note": "Explicit finite-coefficient consequence of the cited sources; no unit route is changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars between finite rings preserves finite tame locally constant sheaves on a normal crossings parameter root tower",
+   "results": "{\"t\": \"2026-10-26T08:17:02Z\", \"tool\": \"leansearch\", \"query\": \"Extension of scalars between finite rings preserves finite tame locally constant sheaves on a normal crossings parameter root tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"AlgHom.extendScalars\", \"instFinitePresentationTensorProduct\", \"Algebra.Generators.extendScalars\", \"LinearEquiv.extendScalarsOfIsLocalization\", \"AlgHom.extendScalarsOfSurjective\", \"AlgEquiv.extendScalarsOfSurjective\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\"], \"digest\": \"310a256d6a264a17\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: results concern general module/sheaf operations, not normalized SNC finite-label monodromy or original-chart tame scalar closure."
+  },
+  {
+   "tool": "grep",
+   "query": "(tame|monodromy).*(scalar|module)|(scalar|module).*(tame|monodromy)",
+   "results": "{\"t\": \"2026-10-26T08:17:38Z\", \"tool\": \"grep\", \"query\": \"(tame|monodromy).*(scalar|module)|(scalar|module).*(tame|monodromy)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: results concern general module/sheaf operations, not normalized SNC finite-label monodromy or original-chart tame scalar closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContAction\", \"Module\"",
+   "results": "{\"t\": \"2026-10-26T08:17:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"ContAction\\\", \\\"Module\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match: results concern general module/sheaf operations, not normalized SNC finite-label monodromy or original-chart tame scalar closure."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SNCFiniteFibreClassification",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; finite-coefficient consequence of parent Step 5 (old Step 11), original-chart finite tame closure under finite scalar extension.",
+   "via": [
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SNCFiniteTameScalarExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCFiniteTameScalarExtension.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sncFiniteTame_scalarExtension",
+  "statement": "theorem sncFiniteTame_scalarExtension {p : ℕ} [Fact p.Prime] {Y : Scheme.{u}} {a : ℕ} {C : Fin a → Y.IdealSheafData} {I : Finset (Fin a)} (Q : SNCResidualChart p C I) (k : Type u) [Field k] [CharP k p] [(Spec Q.B).Over (Spec (.of k))] [LocallyOfFiniteType ((Spec Q.B) ↘ Spec (.of k))] [QuasiCompact ((Spec Q.B) ↘ Spec (.of k))] [IsSeparated ((Spec Q.B) ↘ Spec (.of k))] (_hD : IsStrictNormalCrossingsBoundary Q.chartBoundary) (R S : Type (u + 1)) [Ring R] [Ring S] [Finite R] [Finite S] (φ : R →+* S) (E : ModuleCat.{u + 1} R ⥤ ModuleCat.{u + 1} S) (_adj : E ⊣ ModuleCat.restrictScalars φ) (M : Sheaf (Scheme.ProEt.topology Q.puncturedResidual) (ModuleCat.{u + 1} R)) (_hM : Q.finiteTame ((sheafCompose (Scheme.ProEt.topology Q.puncturedResidual) (forget (ModuleCat.{u + 1} R))).obj M)) : Q.finiteTame ((sheafCompose (Scheme.ProEt.topology Q.puncturedResidual) (forget (ModuleCat.{u + 1} S))).obj ((presheafToSheaf (Scheme.ProEt.topology Q.puncturedResidual) (ModuleCat.{u + 1} S)).obj (M.obj ⋙ E)))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ae394",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T092320-L-3422101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ae394",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T092320-L-3422101",
+  "kind": "interface",
+  "note": "independent cc review: item scalarReduction proof + 2 new sorry modules/nodes vs item statement, SNCFiniteFibreData/finiteTame defs, unit realized lists, node diffs, sandbox compile with #print axioms"
+ }
+}

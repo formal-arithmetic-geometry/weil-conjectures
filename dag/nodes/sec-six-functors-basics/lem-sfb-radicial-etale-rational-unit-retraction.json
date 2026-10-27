@@ -1,0 +1,360 @@
+{
+ "id": "lem-sfb-radicial-etale-rational-unit-retraction",
+ "kind": "statement",
+ "title": "Normalized rational unit retraction for radicial-etale covers",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p$, and a finite normed extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. All schemes are separated of finite type over $k$ [sk-def-sfb-dc-setting]. Put $A_{E,T}=p_T^*C(-,E)$ and $A_{\\mathcal O_E,T}=p_T^*C(-,\\mathcal O_E)$, with continuous-map condensed rings and their norm topologies [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Use internal modules and their ordinary unbounded derived categories [sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull]. Write $\\Dbc(T,A_E)$ for bounded complexes with finite constant local models on finite constructible stratifications [sk-def-sfb-constructible]. Lisse means pro-etale locally finite free, including rank zero [def-sfb-lisse-coefficient-module]. Let $S$ be a scheme as above and let $f:W\\to S$ factor as\n$$W\\xrightarrow{u}T\\xrightarrow{e}S,$$\nwhere $u$ is a finite universal homeomorphism and $e$ a finite etale surjection of constant degree $d\\geq1$ [def-weil-finite-integral-morphism, def-weil-universal-homeomorphism, def-weil-etale-morphism, def-weil-surjective-morphism]. For every internal $A_{E,S}$-module $M$, not necessarily lisse, the functors $u_*,e_*,f_*$ on these coefficient modules are exact. The unit for $u^*\\dashv u_*$ identifies $u_*u^*e^*M$ with $e^*M$. Under this identification there is an $A_{E,S}$-linear natural trace\n$$t_M:f_*f^*M\\longrightarrow M$$\ncharacterized on an etale local splitting of $e$ into $d$ sheets by the sum of the $d$ copies of $M$. On the same splitting the unit $\\eta_M:M\\to f_*f^*M$ is the diagonal, and\n$$t_M\\eta_M=d\\,1_M.$$\nIn the ordinary derived category the canonical comparison identifies $Rf_*(f^*M[0])$ with $(f_*f^*M)[0]$, and $\\eta_M[0]$ is the derived adjunction unit under this identification. Consequently $(1/d)t_M[0]$ retracts that unit, so $M[0]$ is a retract of $Rf_*(f^*M[0])$. The scalar $1/d$ belongs to $E$, even if $\\ell$ divides $d$. For a purely inseparable factor ($d=1$) the construction is the inverse to the universal-homeomorphism unit, rather than a field trace.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Agent continuous-coefficient extension of Tag 03SE (definition-trace-map), sum and degree formulas; proetale.tex Tag 09AB (lemma-thickening) for the radicial factor; original item step 6."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-finite-integral-morphism",
+  "def-weil-universal-homeomorphism",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-sfb-norm-continuous-monodromy-data",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Write $R_X=A_{E,X}$. The cartesian-coefficient theorem identifies module inverse image with the lift of the underlying inverse image, and the module pushforward definition gives its underlying direct image. Apply pro-etale topological invariance to $u$: its actual set-sheaf unit and counit are invertible. They remain invertible for abelian sheaves, since their inverses preserve addition by naturality. The module adjunction is the lifted adjunction: its unit and counit have these same underlying maps. The inverse of a bijective linear map is linear (apply the map to the two sides of the linearity equation), so these are module isomorphisms. Thus $u^*$ and $u_*$ are inverse equivalences, and $u_*$ is exact because an additive equivalence preserves kernels and cokernels by their universal properties. In particular put $N=e^*M$ to obtain the canonical identification $u_*u^*N\\cong N$, inverse to the actual unit. This proves the radicial assertion for arbitrary modules, not only for finite local models.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-trf-proetale-topological-invariance",
+    "sk-def-sfb-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AB, lemma-thickening; the lift to module actions is written out using the cartesian coefficient and transport nodes"
+   }
+  },
+  {
+   "text": "Choose an etale covering family $q_i:U_i\\to S$ splitting $e$, using the finite-etale local splitting lemma at each point; constant degree makes every nonempty splitting have $d$ sheets. The cited comparison makes etale maps weakly etale. These etale covering families are pro-etale coverings: over an affine test scheme, their open images cover, and quasi-compactness selects finitely many affine source opens covering it. Identify the pro-etale site of $U_i$ with the slice over $U_i$. On sheaves of rings the object-inverse-image comparison identifies inverse image with restriction; the cartesian coefficient isomorphism therefore identifies $R_{U_i}$ with $R_S|_{U_i}$. The same identification for modules follows from $R_{U_i}\\otimes_{q_i^{-1}R_S}q_i^{-1}M\\cong q_i^{-1}M$. We may work with sectionwise ring-module sheaves via the internal-module equivalence. Restriction of modules to each slice is exact by the cited ringed-site restriction theorem. Moreover these restrictions jointly detect zero objects: if $H|_{U_i}=0$, a section of $H$ on any $V$ vanishes on the covering $V\\times_SU_i$, hence vanishes by the sheaf axiom. Exactness is consequently detected by these restrictions, since they preserve kernels and cokernels.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-sheaf-of-modules-category",
+    "det-pe-morphisms-etale-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 04HN, lemma-finite-etale-etale-local; pro-etale localization as in the cited localization nodes, with exact module restriction"
+   }
+  },
+  {
+   "text": "For any $R_T$-module $H$ and an object $V\\to U_i$, the direct-image definition gives $(e_*H)(V)=H(V\\times_ST)$. The chosen splitting writes $V\\times_ST=\\coprod_{j=1}^d V_j$ with each $V_j\\cong V$. The sheaf axiom for this finite disjoint covering gives $H(\\coprod_jV_j)\\cong\\prod_jH(V_j)$: intersections of distinct sheets are empty and a sheaf of modules has zero sections on the empty scheme. These restriction maps commute with all restrictions and with the $R_S(V)$-action. Thus $(e_*H)|_{U_i}\\cong\\prod_j s_{ij}^*H$, where $s_{ij}:U_i\\to T$ are the sheets. Each sheet pullback is exact by cartesian coefficients. A finite product in an abelian category is a biproduct and preserves exact sequences: the direct-sum functor is left adjoint to the diagonal, hence preserves cokernels, while the product functor is right adjoint to the diagonal, hence preserves kernels. By the detection argument in step 2, $e_*$ is exact. Composition of module pushforwards gives $f_*\\cong e_*u_*$, so $f_*$ is exact too. This finite-product calculation uses no exactness of infinite products.",
+   "uses": [
+    "def-sfb-finite-lower-star",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-pbc-proetale-site",
+    "def-weil-sheaf-of-modules-category",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SE, definition-trace-map and following sheet description; finite disjoint-cover sheaf calculation and finite-biproduct exactness supplied explicitly"
+   }
+  },
+  {
+   "text": "Apply the preceding formula to $H=e^*M$. On each sheet the inverse-image restriction is canonically $M|_{U_i}$, so $(e_*e^*M)|_{U_i}\\cong(M|_{U_i})^d$. Define $t_i$ to be the sum of its $d$ coordinates. These maps are linear and natural in $M$. To check compatibility of two splittings, intersect each sheet of one with each sheet of the other over $U_i\\times_SU_h$. Their images are open and closed and cover the overlap. Refining by these intersections gives pieces on which the two labellings differ by a permutation: each sheet of either splitting meets exactly its matching sheet at every point. Finite sums are unchanged by this permutation. Thus the $t_i$ agree on a cover of the overlap, and agree everywhere by the separated sheaf axiom. For a section on an arbitrary $V$, apply the $t_i$ after restriction to $V\\times_SU_i$ and glue their images in $M$; uniqueness makes this compatible with restriction, addition and scalar multiplication. This constructs the unique natural linear $t^e_M:e_*e^*M\\to M$ with the stated local formula. No finite-rank or discreteness assumption on $M$ is involved.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SE, definition-trace-map, characterization by localization and sum; permutation and gluing argument supplied for continuous module sheaves"
+   }
+  },
+  {
+   "text": "Use the composition isomorphisms to write $f_*f^*M\\cong e_*u_*u^*e^*M$, and follow by $e_*$ of the inverse universal-homeomorphism unit from step 1. Denote the resulting isomorphism to $e_*e^*M$ by $c_M$, and set $t_M=t^e_Mc_M$. The unit of the composite adjunction is $M\\xrightarrow{\\eta^e_M}e_*e^*M\\xrightarrow{e_*\\eta^u_{e^*M}}e_*u_*u^*e^*M$; hence $c_M\\eta^f_M=\\eta^e_M$. In the split product description this latter unit sends a section $m$ to its restrictions on the $d$ sheets, namely $(m,\\ldots,m)$ under the sheet identifications. Therefore $t_M\\eta^f_M=\\sum_{j=1}^dm=d\\,1_M$, locally and hence globally. The isomorphisms used in $c_M$ are natural and linear, which proves those properties for $t_M$.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SE, degree formula after definition-trace-map; composite-adjunction unit formula expanded explicitly"
+   }
+  },
+  {
+   "text": "Since $E$ contains $\\mathbf Q_\\ell$, its characteristic is zero. The positive integer $d$ is nonzero in $E$, so $1/d\\in E$, irrespective of whether $\\ell$ divides $d$. Constant scalar multiplication by $1/d$ is an endomorphism of the continuous coefficient sheaf: multiplication by a fixed field element is continuous, and the same holds after pullback from the point. Therefore $r_M=(1/d)t_M$ is a module morphism and $r_M\\eta^f_M=(1/d)d\\,1_M=1_M$. This uses no claim that $d$ is a unit in $\\mathcal O_E$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-sfb-continuous-map-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SE, normalization when degree multiplication is invertible; scalar calculation for the specified field coefficients"
+   }
+  },
+  {
+   "text": "The cartesian-coefficient theorem makes $f^*$ exact, and step 3 makes $f_*$ exact. For these exact functors the total derived functors are canonically their termwise functors. In particular $Lf^*(M[0])\\cong f^*M[0]$ and $Rf_*(f^*M[0])\\cong(f_*f^*M)[0]$. Apply adjunction localization to the degreewise adjunction with its exact-functor comparison isomorphisms. Its explicit unit formula says that the derived unit on $M[0]$, after these comparisons, is the image of the ordinary unit $\\eta^f_M[0]$. These are the canonical derived comparisons of the stipulated module derived pushpull, not an unrelated adjunction chosen on isomorphic functors. Equivalently, for a K-injective resolution $f^*M[0]\\to I$, the unit is represented by $M[0]\\to f_*f^*M[0]\\to f_*I$; exactness makes the second arrow a quasi-isomorphism, giving exactly this identification.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-right-derived-exact",
+    "def-sfb-left-derived-exact",
+    "lem-sfb-adjunction-localization",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; localized adjunction with unit formula as in lem-sfb-adjunction-localization"
+   }
+  },
+  {
+   "text": "Put the retraction $r_M$ of step 6 in degree zero and compose with the canonical comparison in step 7. Its composite with the derived unit is $(r_M\\eta^f_M)[0]=1_{M[0]}$. This proves the claimed retract in the ordinary unbounded derived category. When $d=1$, the finite etale splitting has one sheet, $t^e$ and its unit are inverse, and $t_M$ is precisely the inverse universal-homeomorphism unit (with the degree-one etale identification). Thus even for a nontrivial purely inseparable field extension this is an inverse to a topos-equivalence unit; no algebraic field trace, which can vanish in characteristic $p$, was used. The zero module and the empty base give the same identities between zero maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SE normalization; degree-one and zero-object cases of the explicit construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-trf-proetale-topological-invariance",
+  "sk-def-sfb-transport",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-sheaf-of-modules-category",
+  "det-pe-morphisms-etale-comparison",
+  "def-sfb-finite-lower-star",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-right-derived-exact",
+  "def-sfb-left-derived-exact",
+  "lem-sfb-adjunction-localization",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SE (definition-trace-map and following paragraphs), extended explicitly to the specified continuous internal modules using existing pro-etale invariance, localization and derived comparison nodes; no new geometric route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(FiniteEtale|IsEtale).*(trace|unit)|(trace|unit).*FiniteEtale",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(trace|retraction).*(etale|étale|proetale)|universalHomeomorph.*(Mod|module)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.IsSplitMono",
+   "results": "1 hits: CategoryTheory.mem_essImage_of_unit_isSplitMono",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite etale surjection of positive degree d the pullback pushforward unit of rational module sheaves has retraction trace divided by d",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullback, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite universal homeomorphism followed by finite etale map admits a normalized degree trace splitting the unit for continuous coefficient module sheaves on the proetale site",
+   "results": "8 hits: Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.iff_exists_algEquiv_prod, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.formallyEtale, RingHom.Etale.toAlgebra, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(FiniteEtale|finiteEtale|IsEtale).*(pushforward|lowerStar|product|exact)",
+   "results": "1 hits: Mathlib/RingTheory/Etale/Finite.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic field trace, constant condensed modules, finite presentation or generic module definitions; none proves the finite radicial-etale normalized unit for all continuous internal coefficient modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit for a finite etale cover with rational continuous module coefficients has a trace retraction divided by the degree",
+   "results": "8 hits: Algebra.normalizedTrace_eq_of_fininteDimensional, Algebra.normalizedTrace_eq_of_finiteDimensional_apply, Algebra.normalizedTrace_eq_of_finiteDimensional, Algebra.normalizedTrace_def, Algebra.normalizedTrace, Algebra.normalizedTrace_eq_of_fininteDimensional_apply, LinearMap.trace, Algebra.intTrace_eq_trace",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic field trace, constant condensed modules, finite presentation or generic module definitions; none proves the finite radicial-etale normalized unit for all continuous internal coefficient modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Limits.HasFiniteProducts",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic field trace, constant condensed modules, finite presentation or generic module definitions; none proves the finite radicial-etale normalized unit for all continuous internal coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale morphism on the proetale site has direct image locally given by a finite product on sheaves of modules over any ring sheaf, with diagonal adjunction unit",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.ofSheafCompHaus, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic field trace, constant condensed modules, finite presentation or generic module definitions; none proves the finite radicial-etale normalized unit for all continuous internal coefficient modules"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite|Finite).*(sheet|Sheet)|(pushforward|lowerStar).*(finiteProduct|FiniteProduct|splitCover)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic field trace, constant condensed modules, finite presentation or generic module definitions; none proves the finite radicial-etale normalized unit for all continuous internal coefficient modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a ring sheaf on the proetale site, direct image along a finite etale cover is locally the product over its sheets on all module sheaves",
+   "results": "8 hits: SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules, SheafOfModules, SheafOfModules.unit, SheafOfModules.Finite.hasFiniteLimits, SheafOfModules.free, SheafOfModules.ιFree, SheafOfModules.IsFiniteType.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic field trace, constant condensed modules, finite presentation or generic module definitions; none proves the finite radicial-etale normalized unit for all continuous internal coefficient modules"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a finite locally constant object of a topos: the right adjoint on modules over an arbitrary sheaf of rings is a finite product of the sheet modules after a splitting cover",
+   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functor_obj_val, CondensedMod.ofSheafCompHaus, CompHausLike.LocallyConstant.counit_app_val, LightCondMod.LocallyConstant.functor, CompHausLike.LocallyConstant.adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic field trace, constant condensed modules, finite presentation or generic module definitions; none proves the finite radicial-etale normalized unit for all continuous internal coefficient modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-pair-proper-generators",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), via lem-sfb-tame-pair-proper-generators original step 6: normalized rational unit retraction for the finite radicial-etale factorization; no imported blueprint ancestor",
+   "via": [
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-radicial-etale-rational-unit-retraction",
+  "worker": "Q95",
+  "summary": "Split using existing nodes only. Lift the universal-homeomorphism equivalence to the specified modules, compute finite-etale direct image as local finite products, prove exactness and glue the sheet-sum trace, then normalize by 1/d and check the canonical derived unit. Statement unchanged; no new nodes, no Mathlib match, no attachment.",
+  "blueprint": "Realizes the original step 6 of lem-sfb-tame-pair-proper-generators below det-thm-sf-ctf-stability-direct-images proof (3). The radicial factor, sheet sum, rational normalization and ordinary derived-unit comparison are explicit. The inherited null blueprint ancestor is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-proetale-topological-invariance",
+    "why": "Topological invariance of the underlying pro-etale topos for the radicial factor; a geometric tool, not a replacement for the constructible direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-etale-local-split",
+    "why": "Finite-etale geometric local splitting; the same degree calculation needs this for arbitrary continuous module coefficients."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identification of a pro-etale site over a site object with its slice, used only to compute restrictions."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Actual inverse image on sheaves of rings is restriction on a pro-etale site object; module comparison then follows from cartesian coefficients."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of module restriction on a general ringed-site slice, with arbitrary ring sheaf; no purity assertion used."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic bridge from internal actions to sectionwise ring-module sheaves, preserving the underlying sections."
+   },
+   {
+    "node": "lem-sfb-adjunction-localization",
+    "why": "Generic localization of an adjunction with its actual unit formula, used to pin down the derived unit."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Only the etale-implies-weakly-etale comparison is used to regard the splitting charts as pro-etale site objects."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-proetale-topological-invariance",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-adjunction-localization",
+  "det-pe-morphisms-etale-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-3765916ba",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-3765916ba (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement, plus Stacks 09AB (proetale.tex lemma-thickening, l.4963), 03SE (etale-cohomology.tex definition-trace-map, l.10353ff) and 04HN. The statement is byte-identical to the one Q63 created; it was unsplit with an empty proof. There are no new nodes, no re-split note and no SGA citation, and proof_deps is the union of the step uses. Step 1 holds: 09AB applies because a finite universal homeomorphism is integral, universally injective and surjective. The invariance is lifted to modules through cartesian coefficients and the lifted adjunction, and the choice of left adjoint does not matter because the direct-image node says r_* is an equivalence. Step 2: the étale charts form pro-étale coverings, the sheet count is d on every nonempty chart without needing connectedness, rings are identified on slices by the ring-sheaf clause only, restriction is exact and the restrictions jointly detect zero. Step 3: the finite sheet product formula and biproduct exactness show that e_* and f_* are exact. Step 4: on overlaps the open-closed sheet intersections differ by a permutation, so the sums agree and glue. Step 5: the conjugate composition isomorphism gives c∘η^f=η^e, the unit is the diagonal, and tη=d. Step 6: 1/d lies in E because char E=0, even when ℓ divides d. Step 7: exact-functor comparisons plus the adjunction-localization unit formula identify the actual derived unit. Step 8: for d=1 the trace is the inverse radicial unit. Edge cases checked: d=ℓ, a purely inseparable d=1, S empty, M=0. Duplicate search found no node that states the item. Advisory only: lem-sfb-finite-etale-trace-image states the sheet trace on the sectionwise C(|U|,E) model, and the inline argument here is legitimate. Batch-5 flag on lem-trf-proetale-topological-invariance: accepted. It is the generic Stacks 09AB topos invariance, which neither the trace-formula nor the Poincaré-duality assumption supplies and which is not a step of either. Its closure has only the 09AB/04DF invariance sub-nodes, and no thm-trf, Poincaré, sk-thm-trace-transport or nt- nodes. The declared tool_uses are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RadicialEtaleRationalUnitRetraction",
+  "declaration": "AlgebraicGeometry.ProEtale.radicial_etale_rational_unit_retraction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTraceSheetProjection",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTraceRadicialComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTraceDerivedComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTraceDerivedUnit",
+   "AlgebraicGeometry.ProEtale.radicial_etale_rational_unit_retraction"
+  ],
+  "file": "lean/Sheaf/Paper/RadicialEtaleRationalUnitRetraction.lean",
+  "statement": "theorem radicial_etale_rational_unit_retraction (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E : Type u) [NormedField E] [NormedAlgebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (W T S : Over (Spec (.of k))) [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom] (u₀ : W ⟶ T) (e : T ⟶ S) [IsFinite u₀.left] (hu : (topologically IsHomeomorph).universally u₀.left) [IsFinite e.left] [Etale e.left] [Surjective e.left] (d : ℕ) (hd : 1 ≤ d) (hdegree : ∀ s : S.left, e.left.fiberDegree s = d) : (d : E) ≠ 0 ∧ PreservesFiniteLimits (CondensedRing.lowerStar (normContinuousRing E).X u₀.left) ∧ PreservesFiniteColimits (CondensedRing.lowerStar (normContinuousRing E).X u₀.left) ∧ PreservesFiniteLimits (CondensedRing.lowerStar (normContinuousRing E).X e.left) ∧ PreservesFiniteColimits (CondensedRing.lowerStar (normContinuousRing E).X e.left) ∧ PreservesFiniteLimits (CondensedRing.lowerStar (normContinuousRing E).X (u₀.left ≫ e.left)) ∧ ∃ hF : PreservesFiniteColimits (CondensedRing.lowerStar (normContinuousRing E).X (u₀.left ≫ e.left)), ∃ a : 𝟭 _ ≅ CondensedRing.upperStar (normContinuousRing E).X u₀.left ⋙ CondensedRing.lowerStar (normContinuousRing E).X u₀.left, a.hom = (CondensedRing.upperStarLowerStarAdjunction (normContinuousRing E).X u₀.left).unit ∧ ∃! t : CondensedRing.upperStar (normContinuousRing E).X (u₀.left ≫ e.left) ⋙ CondensedRing.lowerStar (normContinuousRing E).X (u₀.left ≫ e.left) ⟶ 𝟭 _, (∀ (U : Scheme.{u}) (q : U ⟶ S.left) [Etale q] (s : Fin d → (U ⟶ T.left)) (hs : ∀ j, s j ≫ e.left = q), IsColimit (Cofan.mk (pullback e.left q) (fun j ↦ pullback.lift (s j) (𝟙 U) (by simpa using hs j))) → ∀ M : Mod (Sheaf (Scheme.ProEt.topology S.left) Ab.{u + 1}) (condensedRingObj (normContinuousRing E).X S.left), (CondensedRing.upperStar (normContinuousRing E).X q).map (t.app M) = (CondensedRing.upperStar (normContinuousRing E).X q).map (rationalTraceRadicialComparison (normContinuousRing E).X u₀.left e.left a M).hom ≫ ∑ j : Fin d, rationalTraceSheetProjection (normContinuousRing E).X e.left q (s j) (hs j) M ∧ ∀ j : Fin d, (CondensedRing.upperStar (normContinuousRing E).X q).map ((CondensedRing.upperStarLowerStarAdjunction (normContinuousRing E).X (u₀.left ≫ e.left)).unit.app M) ≫ (CondensedRing.upperStar (normContinuousRing E).X q).map (rationalTraceRadicialComparison (normContinuousRing E).X u₀.left e.left a M).hom ≫ rationalTraceSheetProjection (normContinuousRing E).X e.left q (s j) (hs j) M = 𝟙 _) ∧ (∀ M : Mod (Sheaf (Scheme.ProEt.topology S.left) Ab.{u + 1}) (condensedRingObj (normContinuousRing E).X S.left), (CondensedRing.upperStarLowerStarAdjunction (normContinuousRing E).X (u₀.left ≫ e.left)).unit.app M ≫ t.app M = d • 𝟙 M) ∧ (d = 1 → ∀ M : Mod (Sheaf (Scheme.ProEt.topology S.left) Ab.{u + 1}) (condensedRingObj (normContinuousRing E).X S.left), t.app M ≫ (CondensedRing.upperStarLowerStarAdjunction (normContinuousRing E).X (u₀.left ≫ e.left)).unit.app M = 𝟙 _) ∧ ∀ M : Mod (Sheaf (Scheme.ProEt.topology S.left) Ab.{u + 1}) (condensedRingObj (normContinuousRing E).X S.left), rationalTraceDerivedUnit (normContinuousRing E).X (u₀.left ≫ e.left) M ≫ (rationalTraceDerivedComparison (normContinuousRing E).X (u₀.left ≫ e.left) hF M).hom = (DerivedCategory.singleFunctor _ 0).map ((CondensedRing.upperStarLowerStarAdjunction (normContinuousRing E).X (u₀.left ≫ e.left)).unit.app M) ∧ ∃ r : (CondensedRing.lowerStar (normContinuousRing E).X (u₀.left ≫ e.left)).obj ((CondensedRing.upperStar (normContinuousRing E).X (u₀.left ≫ e.left)).obj M) ⟶ M, r.hom = (t.app M).hom ≫ normContinuousScalar S.left (d : E)⁻¹ M ∧ (CondensedRing.upperStarLowerStarAdjunction (normContinuousRing E).X (u₀.left ≫ e.left)).unit.app M ≫ r = 𝟙 M ∧ rationalTraceDerivedUnit (normContinuousRing E).X (u₀.left ≫ e.left) M ≫ (rationalTraceDerivedComparison (normContinuousRing E).X (u₀.left ≫ e.left) hF M).hom ≫ (DerivedCategory.singleFunctor _ 0).map r = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Full natural trace statement on arbitrary internal continuous E-coefficient modules. Four real-data helpers give counit sheet projections, the inverse-unit radicial comparison, the canonical exact right-derived comparison, and the actual derived adjunction unit transported by the canonical exact left-derived comparison. The two added statement dependencies are landed owners of the reused norm continuous ring/scalar and fibre degree interfaces. No statement correction or additional theorem node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91a9baae1",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Read the node, all 14 stmt_dep records, the module, report and the used source declarations (normContinuousRing/Scalar, fiberDegree, moduleObjectDerivedPullback, derivedUpperStarLowerStarAdjunction=derivedAdjunction, singleFunctorCompLeft/RightDerivedFunctorIso). Every hypothesis matches with nothing stronger: finite plus universally-homeomorphic u, finite étale surjective e with constant fiberDegree d≥1, separated finite-type Over k. The ∃! natural trace is characterized by the sheet sum over every Cofan-colimit étale splitting, with counit-based sheet projections, and is unique because splitting charts cover S. The diagonal unit, unit≫t=d•𝟙, (d:E)≠0, r=(1/d)t via normContinuousScalar, the canonical derived comparison and the actual derived unit are all present, plus a true d=1 inverse clause. E:Type u is forced by the recorded normContinuousRing. Edge cases checked: S empty, M=0, d=1 inseparable, ℓ|d. lean.statement is byte-identical to the file; the two added def stmt_deps are on the base (NormContinuousMonodromyData landed 2026-10-21). Helpers have real data, docstrings and the 8-step proof are present, a single sorry, no duplicate found. No files changed and no compile."
+ }
+}

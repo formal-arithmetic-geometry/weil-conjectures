@@ -1,0 +1,191 @@
+{
+ "id": "lem-sfb-split-simple-absolute-irreducibility",
+ "kind": "statement",
+ "title": "Simple rational modules of split semisimple groups remain simple after field extension",
+ "statement": "Let $k$ be a field of characteristic zero [def-weil-field] and let $G$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme]. Assume $G$ is semisimple: after algebraic closure it has no nontrivial smooth connected solvable normal subgroup, with solvable meaning that successive commutator subgroup schemes become trivial. Assume $G$ has a split maximal torus, meaning a closed subgroup isomorphic to a finite product of $\\mathbf G_m$, maximal among tori after algebraic closure; $\\mathbf G_m(A)=A^\\times$. Let $V$ be a nonzero finite-dimensional rational $G$-representation [def-wf-algebraic-representations]. Simple means that the only $k$-linear subspaces preserved by the action after every commutative $k$-algebra extension are $0$ and $V$. If $V$ is simple, then for every field extension $K/k$ [def-pc-field-extension] the scalar-extended representation $V_K=K\\otimes_kV$ of $G_K=G\\times_kK$ is simple: its only $K$-linear subspaces invariant after every commutative $K$-algebra extension are $0$ and $V_K$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "22.2--22.4, printed pp.463--464, especially 22.4: End(V(lambda))=k and simplicity after extension; supporting scalar-extension criterion 4.19(b), printed pp.90--91."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-wf-algebraic-representations",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose a split maximal torus $T\\subseteq G$ from the hypothesis. Apply [lem-sfb-split-simple-multiplicity-one-weight] to this $T$ and the given simple rational $G$-module $V$. Its hypotheses are exactly smoothness, connectedness, affineness, finite type, geometric semisimplicity, split maximality of $T$, and finite-dimensional simplicity, all assumed here. Obtain a character $\\lambda:T\\to\\mathbf G_m$ and a nonzero $v\\in V_\\lambda$ with $V_\\lambda=kv$.",
+   "uses": [
+    "lem-sfb-split-simple-multiplicity-one-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 22.2, pp.463--464; Theorem 22.18(b), p.467."
+   }
+  },
+  {
+   "text": "Let $f:V\\to V$ be any rational $G$-equivariant endomorphism. For every $k$-algebra $A$ and $t\\in T(A)$, equivariance gives $t(1\\otimes f(v))=(1\\otimes f)t(1\\otimes v)=\\lambda(t)(1\\otimes f(v))$. Thus $f(v)\\in V_\\lambda=kv$, so $f(v)=av$ for some $a\\in k$. Put $q=f-a\\,\\mathrm{id}_V$ and $N=\\ker q$. The space $N$ is rationally invariant: for every $A$, a basis of $N$ extended to a basis of $V$ identifies $A\\otimes_kN$ with $\\ker(1\\otimes q)$ (the independent images under $q$ of a basis of a complement remain independent after tensoring). Equivariance of $q$ then preserves this kernel under every $g\\in G(A)$. Since $v\\ne0$ lies in $N$, simplicity forces $N=V$, hence $f=a\\,\\mathrm{id}_V$. Conversely, scalar maps commute with every action. This proves the precise scalar-endomorphism hypothesis needed in the next step over $k$, without assuming $k$ algebraically closed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.4, p.464 and Exercise 22-1, p.482; explicit kernel argument as in the proof of Schur Lemma 4.20, p.91."
+   }
+  },
+  {
+   "text": "Fix any field extension $K/k$. Apply [lem-sfb-scalar-endomorphisms-absolute-simplicity] with $H=G$ and the original representation $V$. The original hypotheses supply finite type, affineness, finite-dimensionality, nonzeroness and simplicity. Step 2 supplies every rational equivariant endomorphism being scalar, in the sense of commuting with the action after every commutative $k$-algebra extension. The criterion gives simplicity of $K\\otimes_kV$ as a rational $G_K$-module, with invariance tested after every commutative $K$-algebra extension. This is precisely the required conclusion, for arbitrary $K/k$.",
+   "uses": [
+    "lem-sfb-scalar-endomorphisms-absolute-simplicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "22.4, p.464, invoking Proposition 4.19(b), pp.90--91."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-simple-multiplicity-one-weight",
+  "lem-sfb-scalar-endomorphisms-absolute-simplicity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "22.2--22.4, pp.463--464, and 4.19(b), pp.90--91; scalar endomorphisms proved using the multiplicity-one weight and the elementary kernel argument of 4.20."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every simple finite dimensional rational representation of a split reductive algebraic group is absolutely irreducible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k]\\n  [NeZero ↑(Fintype.card G)] (V : FDRep k G), CategoryTheory.Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"FDRep.finrank_hom_simple_simple\", \"module\": \"Mathlib/RepresentationTheory/FDRep\", \"type\": \"∀ {k G : Type u} [inst : Field k] [inst_1 : Monoid G] [IsAlgClosed k] (V W : FDRep k G) [CategoryTheory.Simple V]\\n  [CategoryTheory.Simple W], Module.finrank k (V ⟶ W) = if Nonempty (V ≅ W) then 1 else 0\", \"doc\": \"For finite-dimensional simple representations $V$ and $W$ of a group $G$ over an algebraically closed field $k$, the dimension of the space of $G$-linear maps $\\\\text{Hom}_G(V, W)$ equals 1 if $V \\\\cong\"}\n  {\"name\": \"Representation.IsIrreducible\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"{G : Type u_1} →\\n  {k : Type u_2} →\\n    {V : Type u_3} →\\n      [inst : Monoid G] →\\n        [inst_1 : Field k] → [inst_2 : AddCommGroup V] → [inst_3 : Module k V] → Representation k G V → Prop\", \"doc\": \"A representation of a monoid $ G $ on a vector space $ V $ over a field $ k $ is irreducible if the only $ G $-invariant subspaces of $ V $ are the trivial subspace $ \\\\{0\\\\} $ and $ V $ itself.\"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"Representation.IsIrreducible.toIsSimpleOrder\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} {V : Type u_3} {inst : Monoid G} {inst_1 : Field k} {inst_2 : AddCommGroup V}\\n  {inst_3 : Module k V} {ρ : Representation k G V} [self : ρ.IsIrreducible], IsSimpleOrder (Subrepresentation ρ)\", \"doc\": \"If a monoid representation $\\\\rho$ on a vector space $V$ over a field $k$ is irreducible, then the bounded order of subrepresentations of $\\\\rho$ is a simple order, meaning every subrepresentation is ei\"}\n  {\"name\": \"Representation.is_simple_module_iff_irreducible_ofModule\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} [inst : Monoid G] [inst_1 : Field k] (M : Type u_4) [inst_2 : AddCommGroup M]\\n  [inst_3 : Module (MonoidAlgebra k G) M],\\n  IsSimpleModule (MonoidAlgebra k G) M ↔ (Representation.ofModule M).IsIrreducible\", \"doc\": \"A module $ M $ over the monoid algebra $ k[G] $ is simple if and only if the corresponding representation of $ G $ on $ M $, obtained via restriction of scalars from $ k[G] $ to $ k $, is irreducible.\"}\n  {\"name\": \"Representation.isIrreducible_iff\", \"module\": \"Mathlib/RepresentationTheory/Irreducible\", \"type\": \"∀ {G : Type u_1} {k : Type u_2} {V : Type u_3} [inst : Monoid G] [inst_1 : Field k] [inst_2 : AddCommGroup V]\\n  [inst_3 : Module k V] (ρ : Representation k G V), ρ.IsIrreducible ↔ IsSimpleOrder (Subrepresentation ρ)\", \"doc\": \"A representation $\\\\rho$ of a monoid $G$ on a vector space $V$ over a field $k$ is irreducible if and only if the poset of subrepresentations of $\\\\rho$ forms a simple order, meaning the only $G$-invari\"}\n  {\"name\": \"RootPairing.GeckConstruction.instIsIrreducible\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"For any non-empty type $\\\\iota$, the Lie module structure on the space of functions $b.\\\\text{support} \\\\oplus \\\\iota \\\\to K$ over the Geck-constructed Lie algebra $\\\\mathfrak{g}_b$ associated to the root p\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite-group characters, Lie weights, topological simple connectedness and abstract root pairings do not state this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"IsAlgClosed\", \"Simple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite-group characters, Lie weights, topological simple connectedness and abstract root pairings do not state this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "absolutely.*irreducible|absolutely.*simple|simple.*baseChange|baseChange.*simple",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite-group characters, Lie weights, topological simple connectedness and abstract root pairings do not state this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simple rational representations of a split reductive group remain simple under every extension of the ground field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FDRep.simple_iff_end_is_rank_one\", \"module\": \"Mathlib.RepresentationTheory.FinGroupCharZero\", \"type\": \"[NeZero (Fintype.card G : k)] (V : FDRep k G) : Simple V ↔ Module.finrank k (V ⟶ V) = 1\", \"doc\": \"Let $ k $ be a field and $ G $ a finite monoid such that the cardinality of $ G $ is non-zero in $ k $. For any finitely generated representation $ V $ of $ G $ over $ k $, $ V $ is simple if and only\"}\n  {\"name\": \"instIsSimpleModule\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"(R) [DivisionRing R] : IsSimpleModule R R\", \"doc\": \"For any division ring $ R $, $ R $ is a simple module over itself, meaning its only submodules are the zero submodule and $ R $ itself.\"}\n  {\"name\": \"AddGroupExtension.IsConj.refl\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \"∀ {N : Type u_1} {G : Type u_2} [inst : AddGroup N] [inst_1 : AddGroup G] {E : Type u_3} [inst_2 : AddGroup E]\\n  (S : AddGroupExtension N E G) (s : S.Splitting), S.IsConj s s\", \"doc\": \"For any additive group extension $0 \\\\to N \\\\to E \\\\to G \\\\to 0$ and any splitting $s : G \\\\to E$, the splitting $s$ is conjugate to itself. This holds because the identity automorphism $\\\\phi = \\\\text{id}_E\"}\n  {\"name\": \"RootPairing.restrictScalarsRat\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.BaseChange\", \"type\": \"[CharZero L] [P.IsCrystallographic]\", \"doc\": \"Given a crystallographic root pairing $ P $ over a field $ L $ of characteristic zero, this constructs a new root pairing over $ \\\\mathbb{Q} $ by restricting scalars via the canonical embedding $ \\\\math\"}\n  {\"name\": \"Polynomial.SplittingField.instField\", \"module\": \"Mathlib.FieldTheory.SplittingField.Construction\", \"type\": \": Field (SplittingField f)\", \"doc\": \"For any polynomial $ f $ over a field $ K $, the splitting field of $ f $ is a field extension of $ K $ in which $ f $ factors completely into linear terms.\"}\n  {\"name\": \"IsGalois.IntermediateField.AdjoinSimple.card_aut_eq_finrank\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \"[FiniteDimensional F E] {α : E} (hα : IsIntegral F α) (h_sep : IsSeparable F α)\\n  (h_splits : ((minpoly F α).map (algebraMap F F⟮α⟯)).Splits) : Nat.card Gal(F⟮α⟯/F) = finrank F F⟮α⟯\", \"doc\": \"If $\\\\alpha$ is an element of a finite extension $E/F$ such that $\\\\alpha$ is integral and separable over $F$, and the minimal polynomial of $\\\\alpha$ over $F$ splits in $F(\\\\alpha)$, then the order of th\"}\n  {\"name\": \"GroupExtension.IsConj.refl\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \"(s : S.Splitting) : S.IsConj s s\", \"doc\": \"For any splitting $ s $ of the group extension $ 1 \\\\to N \\\\to E \\\\to G \\\\to 1 $, the splitting $ s $ is conjugate to itself via the identity element of $ N $, i.e., there exists $ n = 1_N \\\\in N $ such th\"}\n  {\"name\": \"GroupExtension.Splitting.instMonoidHomClass\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \": MonoidHomClass S.Splitting G E\", \"doc\": \"The type of splittings of the group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ is equipped with the structure of monoid homomorphisms from $G$ to $E$, ensuring each splitting preserves multiplication and i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract finite-group characters, Lie weights, topological simple connectedness and abstract root pairings do not state this theorem for algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "absolutely.*(simple|irreducible)|simple.*baseChange|baseChange.*simple",
+   "results": "[grep] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group irreducibility and finite-group character criteria do not state absolute simplicity for rational representations of split semisimple algebraic group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Irreducible rational algebraic group representations over a split field are absolutely irreducible",
+   "results": "[leansearch] OK 8 hit(s).  Returned: Representation.IsIrreducible, MonoidAlgebra.Submodule.instIsSemisimpleModule, Representation.irreducible_iff_isSimpleModule_asModule, Representation.IsIrreducible.mk, Representation.IsIrreducible.recOn, Representation.isIrreducible_iff, Representation.IsIrreducible.toIsSimpleOrder, Rep.instInjective",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group irreducibility and finite-group character criteria do not state absolute simplicity for rational representations of split semisimple algebraic group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"IsIrreducible\"",
+   "results": "[loogle] OK 10 hit(s).  Returned: Representation.IsIrreducible, Representation.IsIrreducible.finrank_eq_one_of_isMulCommutative, Representation.IsIrreducible.instFiniteDimensionalAsModuleOfFinite, Representation.IsIrreducible.instIsSimpleModuleMonoidAlgebraAsModule, Representation.IsIrreducible.instSubsingletonIntertwiningMapOfIsEmptyEquiv, Representation.IsIrreducible.finrank_intertwiningMap_self, Representation.IsIrreducible.injective_or_eq_zero, Representation.IsIrreducible.surjective_or_eq_zero",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group irreducibility and finite-group character criteria do not state absolute simplicity for rational representations of split semisimple algebraic group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple finite dimensional rational representation of a split semisimple algebraic group remains simple after every field extension",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: FDRep.simple_iff_end_is_rank_one, FDRep.finrank_hom_simple_simple, simple_of_finrank_eq_one, IsSimpleModule.finrank_eq_one_of_isMulCommutative, FDRep.simple_iff_char_is_norm_one, IsSimpleModule.algebraMap_end_bijective_of_isAlgClosed, RootPairing.isSimpleModule_weylGroupRootRep, Representation.is_simple_module_iff_irreducible_ofModule",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract-group irreducibility and finite-group character criteria do not state absolute simplicity for rational representations of split semisimple algebraic group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-charzero-weyl-character-identity",
+  "date": "2026-10-24",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorem 22.52 and the definition of J immediately before Theorem 22.50, printed p.480; corrected by the appended errata, Chapter 22, entry for p.480, to characteristic zero. Highest-weight conventions: Chapter 22a and 22.53, printed p.481 (the split Lie/group highest-weight correspondence). Supporting geometric scalar-extension input for the characteristic-zero Weyl character calculation: 22.2--22.4, printed pp.463--464, especially 22.4: End(V(lambda))=k and simplicity after extension; supporting scalar-extension criterion 4.19(b), printed p.90.",
+   "via": [
+    "lem-sfb-split-charzero-weyl-character-identity",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-simple-absolute-irreducibility",
+  "worker": "stage1",
+  "summary": "Read Milne 22.2--22.4 and 22.18, Exercise 22-1, and Proposition 4.19(b). Isolated the arbitrary-field multiplicity-one weight input and the general scalar-endomorphism extension criterion as two statement-only nodes; proved the scalar-endomorphism claim in the item by preserving the weight line and taking the kernel. Retained the item statement and dependencies exactly. No applicable sorry-free project declaration or Mathlib theorem found; checked algclosed highest-weight nodes do not cover the arbitrary ground field.",
+  "blueprint": "Realizes the existing chain ending at det-thm-sf-ctf-stability-direct-images proof (3), numerical characteristic-zero Weyl-character input: Milne 22.4 geometric scalar extension. The current latest blueprint direct-image proof was read. blueprint_refs.py ancestor returns None: the existing created.item chain has a non-blueprint root, so from.node remains null, with the full existing place and via chain preserved. The two new nodes extend that chain by this item. No chapter or unit route changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-63717f696",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-63717f696 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the stmt_deps, the citer and the unit, and checked the source in Milne iAG2017. 22.2 and 22.18(b) (pp.463-467) give a multiplicity-one weight for a split reductive group over any field k. 22.4 (p.464, with Exercise 22-1 on p.482) gives End(V(lambda))=k and simplicity after extension via 4.19(b) (pp.90-91, endomorphisms in the sense of 4.18). Step 1 cites lem-sfb-split-simple-multiplicity-one-weight; the item supplies all of its hypotheses. Step 2 is elementary and correct: equivariance gives f(v) in V_lambda=kv; ker(f-a) is stable after flat base change, contains v, so it is V. This is the Schur 4.20 kernel argument without an algebraically closed field. Step 3 applies lem-sfb-scalar-endomorphisms-absolute-simplicity (4.19(b), with no separability hypothesis), and its conclusion is the item's verbatim. Both new statements are true, self-contained and statement-only. I tested them on trivial G, SL2 Sym^n, characteristic-p highest weights, SO2 over R (shows splitness is needed), the Z/3 rotation module over R (End=C, shows the scalar hypothesis is needed) and mu_p. Neither duplicates an existing node: the existing highest-weight nodes assume an algebraically closed field, and split-lie-module-classification is about Lie modules over Q. Neither restates the item. Searches cover three kinds, there is no cycle, everything is in the same unit, there are no tool_uses, and the blueprint chain is consistent with the item's. There is no re-split order. No fixes were made."
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-integral-residue-stratum-lift",
+ "kind": "statement",
+ "title": "Lift perfect residue charts on one fixed stratum",
+ "statement": "Let T be Noetherian, E/Q_l a finite extension with integral coefficient datum d, and K intrinsically complete over d.completedRing T. Fix an immersion g:S→T with S locally Noetherian and quasi-compact. Let C be a cochain complex of finite-coefficient module sheaves realizing the exponent-one reduction of K through the actual finiteRingComparison. Suppose an etale cover of S gives perfect constant residue-field complex models for the finite-coefficient pullback of Q(C). Then a covering proetale sieve of S has perfect integral-complex models for K restricted through g, in exactly the integralLocalDerived and integralConstantDerived conventions of [def-weil-pbc-integral-stratified-perfect-models]. The stratum S and g stay fixed. There is no global stratification, global reduction bound, or compatible-origin conclusion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-witness-compatibility",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing coefficient_datum theorem to obtain the actual uniformizer-adic datum on O_E and dvrCoefficientModel_exists for its normalized completed comparison on S. The DVR generator theorem identifies its ideal with the maximal ideal, and coefficientIntegers_complete supplies IsAdicComplete. No new datum is chosen from an unproved mere-existence theorem.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-weil-pbc-integral-residue-coefficient-model",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+   }
+  },
+  {
+   "text": "Apply integralResidueStratum_input. It supplies the actual completeness predicate and etale residue sieve for the concrete normalized functor integralResidueStratumPull.",
+   "uses": [
+    "lem-weil-pbc-integral-residue-stratum-input"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+   }
+  },
+  {
+   "text": "Apply residue_lisse_perfect_lift on S with this datum, the singleton uniformizer tuple, and both prepared inputs. Retain its pro-etale sieve and its local perfect O_E-models P.",
+   "uses": [
+    "lem-weil-pbc-residue-lisse-perfect-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+   }
+  },
+  {
+   "text": "Apply integralResidueStratum_constant to each P to get a perfect ULift(O_E)-model Q. Restrict its comparison to the slice and compose it, in the inverse direction, with the local isomorphism from residue lifting.",
+   "uses": [
+    "lem-weil-pbc-integral-residue-stratum-constant",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+   }
+  },
+  {
+   "text": "Scalar restriction along a coefficient isomorphism is an equivalence on every slice. It commutes with ordinary slice restriction by the identity on sections. Localize that square, then conjugate by the canonical representative restriction comparisons. Full faithfulness reflects the composed isomorphism to exactly integralLocalDerived(g,K) ≅ integralLocalDerived(g,integralConstantDerived_T(Q)). This is the proved private sliceCoefficient_reflects lemma; S and g stay fixed. The existing finite-perfect-model infrastructure supplies the standard derived localizations on ring sheaves and their slices.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-integral-stratified-perfect-models",
+    "lem-weil-pbc-residue-perfect-finite-quotient-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-weil-pbc-integral-residue-coefficient-model",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-weil-pbc-integral-residue-stratum-input",
+  "lem-weil-pbc-residue-lisse-perfect-lift",
+  "lem-weil-pbc-integral-residue-stratum-constant",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "lem-weil-pbc-residue-perfect-finite-quotient-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.8(1),(2), Lemma 6.6.8 and Proposition 6.6.11; coefficient-presentation comparisons on constant sections and quotient projections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete constructible pro etale complexes over a complete discrete valuation ring admit stratified perfect constant models",
+   "results": "Hits inspected: BDeRhamPlus, BDeRham, AlgebraicGeometry.Scheme.Etale, StandardEtalePresentation, StandardEtalePair.instFormallyEtaleRing, AlgebraicGeometry.IsEtale.of_comp, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-27",
+   "verdict": "No match for the actual completed coefficient and slice-presentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "Hits inspected: IsAdicComplete, IsAdicComplete.of_subsingleton, IsAdicComplete.toIsHausdorff, IsAdicComplete.toIsPrecomplete, IsAdicComplete.mk, isAdicComplete_iff, IsAdicComplete.bot, IsAdicComplete.subsingleton",
+   "date": "2026-10-27",
+   "verdict": "No match for the actual completed coefficient and slice-presentation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*[Cc]omplete|[Cc]omplete.*[Pp]erfect|residue.*[Ll]isse.*[Ll]ift",
+   "results": "Hits inspected: Mathlib/Probability/Distributions/Geometric.lean, Mathlib/Probability/Distributions/Geometric.lean, Mathlib/Probability/Distributions/Poisson/Basic.lean, Mathlib/Probability/Distributions/Poisson/Basic.lean, Mathlib/Probability/Distributions/Poisson/Basic.lean, Mathlib/Probability/Martingale/Basic.lean, Mathlib/Probability/Kernel/CondDistrib.lean, Mathlib/Probability/Kernel/CondDistrib.lean",
+   "date": "2026-10-27",
+   "verdict": "No match for the actual completed coefficient and slice-presentation comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCompletedLocalPerfectCriterion",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-integral-completed-local-perfect-criterion",
+   "place": "The single-chart comparison in the proof of Proposition 6.6.11.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueStratumLift",
+  "file": "lean/Sheaf/Paper/IntegralResidueStratumLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralResidueStratum_lift",
+  "statement": "theorem integralResidueStratum_lift\n    (T : Scheme.{u}) [IsNoetherian T] (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (K : PbcCompletedDerived T (pbcIntegralDatum l E))\n    (hcomplete : PbcIsIntrinsicallyComplete T (pbcIntegralDatum l E) K)\n    (S : Scheme.{u}) [IsLocallyNoetherian S] [CompactSpace S]\n    (g : S ⟶ T) [IsImmersion g]\n    (𝒰 : Scheme.Cover.{u} etalePrecoverage S)\n    (C : CochainComplex\n      (FiniteCoefficientModules T (PbcQuotient (pbcIntegralDatum l E) 0)) ℤ)\n    (eC : Nonempty\n      (DerivedCategory.Q.obj (((SheafOfModules.restrictScalars\n        (AdicCoefficients.finiteRingComparison T\n          (PbcQuotient (pbcIntegralDatum l E) 0)).hom).mapHomologicalComplex (.up ℤ)).obj C) ≅\n        (pbcCompletedReduction T (pbcIntegralDatum l E) 0).obj K))\n    (hmodels : ∀ j : 𝒰.I₀,\n      ∃ P : CochainComplex (ModuleCat.{u + 1} (PbcQuotient (pbcIntegralDatum l E) 0)) ℤ,\n        @DerivedCategory.IsPerfectRingComplex (PbcQuotient (pbcIntegralDatum l E) 0) _\n          (HasDerivedCategory.standard _) (DerivedCategory.Q.obj P) ∧\n        Nonempty\n          ((finiteCoefficientDerivedPullback T (PbcQuotient (pbcIntegralDatum l E) 0)\n            (𝒰.f j ≫ g)).obj (DerivedCategory.Q.obj C) ≅\n            (finiteCoefficientRealization (𝒰.X j)\n              (PbcQuotient (pbcIntegralDatum l E) 0)).mapDerivedCategory.obj\n                (DerivedCategory.Q.obj\n                  (((constantSheaf (ProEt.topology (𝒰.X j))\n                  (ModuleCat.{u + 1} (PbcQuotient (pbcIntegralDatum l E) 0))).mapHomologicalComplex\n                      (.up ℤ)).obj P)))) :\n    ∃ V : Sieve (⊤_ S.ProEt), V ∈ ProEt.topology S (⊤_ S.ProEt) ∧\n      ∀ (U : S.ProEt) (f : U ⟶ ⊤_ S.ProEt), V f →\n        ∃ P : completedConstantDerived (ModuleCat.{u + 1} (PbcIntegralRing l E)),\n          @DerivedCategory.IsPerfectRingComplex (PbcIntegralRing l E) _\n            (HasDerivedCategory.standard _) P ∧\n          Nonempty (integralLocalDerived g (pbcAdicCompletion T (pbcIntegralDatum l E)) U K ≅\n            integralLocalDerived g (pbcAdicCompletion T (pbcIntegralDatum l E)) U\n              ((integralConstantDerived T (pbcIntegralDatum l E)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4f63c",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T222652-L-680402",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T012933-L-2349690",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-power-lifting-quotient-submersive",
+ "kind": "statement",
+ "title": "Power lifting implies universal submersiveness of an affine invariant quotient",
+ "statement": "Let $k$ be a field [def-weil-field] and $H$ an affine finite-type group scheme [def-sc-group-scheme, def-weil-finite-type-morphism] over $k$. For a commutative $k$-algebra $D$, a rational $H$-action is a $k$-algebra coaction $\\rho_D:D\\to D\\otimes_k k[H]$ satisfying the counit and coassociativity identities, and $D^H=\\{d:\\rho_D(d)=d\\otimes1\\}$. Suppose that for every surjective equivariant homomorphism $D\\twoheadrightarrow D'$ of rational $H$-algebras (without finite-generation restrictions) and every $b\\in(D')^H$, some positive power of $b$ is the image of an element of $D^H$. Then for every finitely generated rational $H$-algebra $E$, the map $\\operatorname{Spec}E\\to\\operatorname{Spec}(E^H)$ [def-weil-affine-spectrum] is universally submersive: for every commutative $E^H$-algebra $L$, the continuous map $\\operatorname{Spec}(E\\otimes_{E^H}L)\\to\\operatorname{Spec}L$ is surjective and a subset of its target is open if and only if its inverse image is open. The invariant ring is not assumed Noetherian or finitely generated.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Lemma 9.2.5 (3), Theorem 9.1.4 and Theorem 5.3.1(3), followed by the faithfully flat finitely presented surjective cover Spec E -> [Spec E/H]. Read online arXiv:1005.2398v3; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-sfb-affine-action-invariant-spectrum",
+  "def-sfb-affine-action-quotient-stack"
+ ],
+ "proof": [
+  {
+   "text": "Fix a finitely generated rational $H$-algebra $E$, and put $R=E^H$, $U=\\operatorname{Spec}E$, $Y=\\operatorname{Spec}R$. By [lem-sfb-flat-affine-action-stack-presentation], form the quasi-compact, quasi-separated algebraic stack $\\mathcal X=[U/H]$, the universally open surjective presentation $\\pi:U\\to\\mathcal X$, and the quasi-compact, quasi-separated morphism $\\phi:\\mathcal X\\to Y$. The composite $\\phi\\pi$ is precisely the morphism induced by $R\\hookrightarrow E$. This construction applies to non-smooth $H$ as well.",
+   "uses": [
+    "lem-sfb-flat-affine-action-stack-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tags 06FI, 06FH, with stacks-morphisms.tex Tag 06R7"
+   }
+  },
+  {
+   "text": "Let $\\mathcal A\\twoheadrightarrow\\mathcal B$ be any surjection of quasi-coherent $\\mathcal O_{\\mathcal X}$-algebras and let $t\\in\\Gamma(\\mathcal X,\\mathcal B)$. By [lem-sfb-flat-affine-action-algebra-descent], it corresponds to a surjective equivariant $E$-algebra map $D\\twoheadrightarrow D'$, and $t$ corresponds to $b\\in(D')^H$. Forgetting to $k$-algebras preserves both surjectivity and equivariance. The assumed lifting property produces $N>0$ and $a\\in D^H$ mapping to $b^N$. Write $\\alpha:\\Gamma(\\mathcal X,\\mathcal A)\\cong D^H$ and $\\beta:\\Gamma(\\mathcal X,\\mathcal B)\\cong(D')^H$ for the natural algebra isomorphisms in the descent theorem. Set $s=\\alpha^{-1}(a)$. Naturality gives $\\beta(\\operatorname{image}(s))=\\operatorname{image}(a)=b^N=\\beta(t)^N=\\beta(t^N)$, so injectivity of $\\beta$ gives $\\operatorname{image}(s)=t^N$. These algebras need not be finitely generated, exactly as permitted by the hypothesis. For the structure algebra the same theorem identifies $R\\to\\Gamma(\\mathcal X,\\mathcal O_{\\mathcal X})$ with the identity.",
+   "uses": [
+    "lem-sfb-flat-affine-action-algebra-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WT; Alper Lemma 9.2.5 (3), applied directly to algebras on the affine action quotient"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-global-power-lifting-adequacy] to $\\phi:\\mathcal X\\to\\operatorname{Spec}R$: step 1 supplies quasi-compactness and quasi-separatedness of both $\\mathcal X$ and $\\phi$, and step 2 supplies power lifts for every quasi-coherent algebra surjection. Its structure-algebra identification is for the actual ring map induced by $\\phi$, so the criterion's global-functions hypothesis holds for this morphism. Consequently $\\phi$ is an adequate moduli space. In particular the criterion supplies power lifts for all quasi-coherent algebras on every affine etale base change, including algebras not pulled back from $\\mathcal X$; this is the local condition in the current definition. No commutation of invariants with arbitrary scalar extension is asserted.",
+   "uses": [
+    "lem-sfb-global-power-lifting-adequacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Lemma 4.1.8 (3) implies (2), Remarks 4.1.3 and 5.1.2"
+   }
+  },
+  {
+   "text": "For any commutative $R$-algebra $L$, set $T=\\operatorname{Spec}L$ and $\\mathcal X_T=\\mathcal X\\times_YT$. The theorem [lem-sfb-adequate-moduli-universally-submersive] applied to the adequate moduli map just obtained says that $g:|\\mathcal X_T|\\to|T|$ is surjective and $V\\subseteq|T|$ is open exactly when $g^{-1}V$ is open. It applies to this arbitrary $T\\to Y$, with no flatness assumption on $L$ and no Noetherian assumption on $R$. It does not assert that the unmodified base change of $\\phi$ is itself an adequate moduli space.",
+   "uses": [
+    "lem-sfb-adequate-moduli-universally-submersive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Theorem 5.3.1 (1)--(3), with Proposition 5.2.9 (3)"
+   }
+  },
+  {
+   "text": "The base change of $U$ along $T\\to Y$ is $U_T=\\operatorname{Spec}(E\\otimes_RL)$. To check the identification with its projections, a map from an affine test scheme $\\operatorname{Spec}B$ to this spectrum is a ring map $E\\otimes_RL\\to B$, equivalently ring maps $E\\to B$ and $L\\to B$ agreeing on $R$. By [def-weil-affine-spectrum] this is exactly a pair of maps to $U$ and $T$ over $Y$. The universal property of [def-pc-fibre-product] thus identifies the fibre product on affine tests; affine opens cover every test scheme, so the unique maps glue and give the asserted isomorphism. The map to $T$ is induced by $l\\mapsto1\\otimes l$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "lemma-fibre-product-affine-schemes (affine tensor-product construction)"
+   }
+  },
+  {
+   "text": "The square with $U_T=U\\times_YT$ and $\\mathcal X_T=\\mathcal X\\times_YT$ is the base change of $\\pi$ along $\\mathcal X_T\\to\\mathcal X$: a map to $U\\times_{\\mathcal X}\\mathcal X_T$ is precisely a map to $U$ together with a compatible map to $T$, so this fibre product is $U_T$. By the base-change assertion of [lem-sfb-flat-affine-action-stack-presentation], $p:|U_T|\\to|\\mathcal X_T|$ is open and surjective. Hence $h=g\\circ p$ is surjective. For $V\\subseteq|T|$, if $h^{-1}V$ is open then $p(h^{-1}V)=g^{-1}V$ is open, using surjectivity of $p$. Step 4 then makes $V$ open. Conversely continuity of $h$ makes $h^{-1}V$ open whenever $V$ is open. By step 5, $h$ is exactly $\\operatorname{Spec}(E\\otimes_RL)\\to\\operatorname{Spec}L$. As $L$ was arbitrary, this proves the stated universal submersiveness.",
+   "uses": [
+    "lem-sfb-flat-affine-action-stack-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06R7, followed by composition of quotient maps (elementary topology)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-affine-action-stack-presentation",
+  "lem-sfb-flat-affine-action-algebra-descent",
+  "lem-sfb-global-power-lifting-adequacy",
+  "lem-sfb-adequate-moduli-universally-submersive",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Quotient-stack proof of Theorem 9.1.4 expanded via the global criterion 4.1.8 and Theorem 5.3.1 (3). Read arXiv:1005.2398v3 online; local PDF WANTED. Fppf descent details supplied from Stacks Tags 06FI, 06FH, 06WT, 06R7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine quotient by a geometrically reductive group Spec A to Spec of its invariants is universally submersive",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.UniversallyClosed (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ whose zero-graded component $\\\\mathcal{A}_0$ is a finite type algebra over a base ring $A$, the canonical morphism $\\\\operatorname{Proj}(\\\\mathcal{A}) \\\\to \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X.Hom (AlgebraicGeometry.Spec A)) →\\n      (I : Ideal ↑A) →\\n        I ≤\\n            RingHom.ker\\n              (CommRingCat.Hom.hom\\n                (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso A).inv f.appTop)) →\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.AffineSpace n S ↘ S).base)\", \"doc\": \"For any scheme $ S $ and natural number $ n $, the canonical morphism $ \\\\mathbb{A}^n_S \\\\to S $ from the affine $ n $-space over $ S $ to $ S $ is an open map, meaning the image of every open subset of\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space surjectivity and quotient-map criteria for prime spectra do not prove universal submersiveness of an invariant quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Power lifting of invariants for surjective equivariant algebra maps implies universal submersiveness of the affine invariant quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ) [inst_4 : Finite σ],\\n  Function.Surjective ⇑P.cotangentComplexAux\", \"doc\": \"The cotangent complex auxiliary map associated with a submersive presentation is surjective when the generating set $\\\\sigma$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgHom.liftOfSurjective_surjective\", \"module\": \"Mathlib/RingTheory/Ideal/Quotient/Operations\", \"type\": \"∀ {R : Type u_5} {A : Type u_6} {B : Type u_7} {C : Type u_8} [inst : CommRing R] [inst_1 : CommRing A]\\n  [inst_2 : CommRing B] [inst_3 : CommRing C] [inst_4 : Algebra R A] [inst_5 : Algebra R B] [inst_6 : Algebra R C]\\n  (f : A →ₐ[R] B) (hf : Function.Surjective ⇑f) (g : A →ₐ[R] C) (H : RingHom.ker \", \"doc\": \"Let $ f : A \\\\to B $ and $ g : A \\\\to C $ be surjective algebra homomorphisms over a commutative semiring $ R $. If the kernel of $ f $ is contained in the kernel of $ g $, then the induced algebra homo\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [TotallyDisconnectedSpace G] [IsTopologicalGroup G] [i\", \"doc\": \"Let $ A \\\\subseteq B $ be commutative rings with $ B $ equipped with a profinite group $ G $-action preserving the $ A $-algebra structure. For a prime ideal $ Q \\\\subseteq B $ lying over $ P = Q \\\\cap A\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (G : Type u_3)\\n  [inst_3 : Group G] [Finite G] [inst_5 : MulSemiringAction G B] [inst_6 : SMulCommClass G A B] (P : Ideal A)\\n  (Q : Ideal B) [Q.IsPrime] [inst_8 : Q.LiesOver P] [Algebra.IsInvariant A B G\", \"doc\": \"The group homomorphism from the stabilizer subgroup $\\\\text{Stab}_G(P)$ of an ideal $P \\\\subseteq B$ to the group of $A/p$-algebra automorphisms of the quotient ring $B/P$ is surjective. This means ever\"}\n  {\"name\": \"Ideal.Quotient.exists_algHom_fixedPoint_quotient_under\", \"module\": \"Mathlib/RingTheory/Invariant/Basic\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} {k : Type u_3} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  (G : Type u_4) [Finite G] [inst_4 : Group G] [inst_5 : MulSemiringAction G B] [Algebra.IsInvariant A B G]\\n  (P : Ideal A) (Q : Ideal B) [inst_7 : Q.LiesOver P] [inst_8 : CommRing k] [ins\", \"doc\": \"Given a commutative ring $ A $ with an ideal $ P $, a commutative ring $ B $ with an ideal $ Q $ lying over $ P $, and an algebra homomorphism $ \\\\sigma : k \\\\to k $ over the quotient ring $ A/P $, ther\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_surjective\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {A : Type u_2} {B : Type u_3} [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] (f : A →ₐ[R] B),\\n  Function.Surjective ⇑f → Algebra.FormallyUnramified R B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ f : A \\\\to B $ is a surjective algebra homomorphism over $ R $, then $ B $ is also formally unramified over $ R $.\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"{A : Type u_1} →\\n  {B : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : CommRing B] →\\n        [inst_2 : Algebra A B] →\\n          {G : Type u_3} →\\n            [inst_3 : Group G] →\\n              [inst_4 : MulSemiringAction G B] →\\n                [SMulCommClass G A B] →\\n                  [inst_6 \", \"doc\": \"A functor from the category of open normal subgroups of a topological group $ G $ to types, where for each open normal subgroup $ N $, it constructs a type involving the fixed subalgebra of $ B $ unde\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space surjectivity and quotient-map criteria for prime spectra do not prove universal submersiveness of an invariant quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuotientMap\", \"PrimeSpectrum\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"PrimeSpectrum.isQuotientMap_of_generalizingMap\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommSemiring R] [CommSemiring S] {f : R →+* S} (h₁ : Function.Surjective (PrimeSpectrum.comap f)) (h₂ : GeneralizingMap (PrimeSpectrum.comap f)) : Topology.IsQuotientMap (PrimeSpectrum.comap f)\", \"doc\": \"If `f : Spec S → Spec R` is generalizing and surjective, the topology on `Spec R` is the\\nquotient topology induced by `f`.\"}\n  {\"name\": \"PrimeSpectrum.isQuotientMap_of_specializingMap\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommSemiring R] [CommSemiring S] {f : R →+* S} (h₁ : Function.Surjective (PrimeSpectrum.comap f)) (h₂ : SpecializingMap (PrimeSpectrum.comap f)) : Topology.IsQuotientMap (PrimeSpectrum.comap f)\", \"doc\": \"If `f : Spec S → Spec R` is specializing and surjective, the topology on `Spec R` is the\\nquotient topology induced by `f`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space surjectivity and quotient-map criteria for prime spectra do not prove universal submersiveness of an invariant quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "universally.?submersive|geometric.{0,5}reductiv|adequateModuli",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space surjectivity and quotient-map criteria for prime spectra do not prove universal submersiveness of an invariant quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine quotient by a geometrically reductive group Spec A to Spec of its invariants is universally submersive",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X.Hom (Spec A)) (I : Ideal A) (hI : I ≤ RingHom.ker ((Scheme.ΓSpecIso A).inv ≫ f.appTop).hom) :\\n  f.liftQuotient I hI ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk _)) = f\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $f^\\\\sharp: A \\\\to \\\\Gamma(X, \\\\mathcal{O}_X)$ be the corresponding ring homomorphism on glo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X.Hom (Spec A)) (I : Ideal A) (hI : I ≤ RingHom.ker ((Scheme.ΓSpecIso A).inv ≫ f.appTop).hom) :\\n  X ⟶ Spec <| .of (A ⧸ I)\", \"doc\": \"Let $f: X \\\\to \\\\mathrm{Spec}(A)$ be a morphism from a scheme $X$ to an affine scheme $\\\\mathrm{Spec}(A)$, and let $I$ be an ideal of the commutative ring $A$. The morphism $f$ corresponds to a ring homo\"}\n  {\"name\": \"Representation.quotientToInvariants\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"{k : Type u_1} →\\n  {G : Type u_2} →\\n    [inst : CommSemiring k] →\\n      [inst_1 : Group G] →\\n        {V : Type u_4} →\\n          [inst_2 : AddCommMonoid V] →\\n            [inst_3 : Module k V] →\\n              (ρ : Representation k G V) →\\n                (S : Subgroup G) →\\n                  [inst_4 : S\", \"doc\": \"Given a commutative semiring $k$, group $G$, $k$-module $V$ with representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$, and a normal subgroup $S \\\\trianglelefteq G$, this constructs the representation of the \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat.{u}} (I : Ideal R) : IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the morphism $ \\\\operatorname{Spec}(R/I) \\\\to \\\\operatorname{Spec}(R) $ induced by the quotient map $ R \\\\to R/I $ is a closed immersion. This foll\"}\n  {\"name\": \"Representation.quotient\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"(W : Submodule k V) (le_comap : ∀ g, W ≤ W.comap (ρ g)) : Representation k G (V ⧸ W)\", \"doc\": \"Given a representation $\\\\rho$ of a monoid $G$ on a module $V$ over a commutative semiring $k$, and a submodule $W \\\\subseteq V$ satisfying $W \\\\subseteq W^{\\\\rho(g)}$ for all $g \\\\in G$ (i.e., $W$ is inva\"}\n  {\"name\": \"Rep.mkQ_hom\", \"module\": \"Mathlib.RepresentationTheory.Rep\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Monoid G] (A : Rep k G) (W : Submodule k ↑A.V)\\n  (le_comap : ∀ (g : G), W ≤ Submodule.comap (A.ρ g) W), (A.mkQ W le_comap).hom = ModuleCat.ofHom W.mkQ\", \"doc\": \"For a commutative ring $ k $, monoid $ G $, representation $ A $ in $ \\\\text{Rep}(k, G) $, and a $ G $-invariant submodule $ W \\\\subseteq A $, the underlying linear map of the canonical quotient morphis\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor_map_hom\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : Group G] (S : Subgroup G) [inst_2 : S.Normal] {X Y : Rep k G}\\n  (f : X ⟶ Y),\\n  ((Rep.quotientToInvariantsFunctor k S).map f).hom =\\n    (Rep.invariantsFunctor k ↥S).map ((Action.res (ModuleCat k) S.subtype).map f)\", \"doc\": \"For any commutative ring $k$, group $G$, normal subgroup $S \\trianglelefteq G$, and morphism $f : X \\to Y$ between $G$-representations, the action of the quotient-to-invariants functor on $f$ is equal t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space surjectivity and quotient-map criteria for prime spectra do not prove universal submersiveness of an invariant quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine invariant quotient is universally submersive if powers of invariant elements lift across all equivariant surjections",
+   "results": "Actual search returned 8 hits: Representation.Coinvariants.mk_surjective, Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, Ideal.Quotient.exists_algHom_fixedPoint_quotient_under, Algebra.SubmersivePresentation.cotangentComplexAux_surjective, Ideal.Quotient.stabilizerHom_surjective_of_profinite, Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux, instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract-group invariant rings and generic prime-spectrum quotient-map criteria do not imply the group-scheme invariant-quotient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuotientMap\", \"PrimeSpectrum\"",
+   "results": "Actual search returned 2 hits: PrimeSpectrum.isQuotientMap_of_generalizingMap, PrimeSpectrum.isQuotientMap_of_specializingMap",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract-group invariant rings and generic prime-spectrum quotient-map criteria do not imply the group-scheme invariant-quotient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.{0,5}reductiv|adequateModuli|universally.?submersive",
+   "results": "Actual search returned 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract-group invariant rings and generic prime-spectrum quotient-map criteria do not imply the group-scheme invariant-quotient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Power lifting of invariants implies universal submersiveness of an affine invariant quotient",
+   "results": "Actual search returned 8 hits: StructureGroupoid.LocalInvariantProp.liftPropOn_of_liftProp, CategoryTheory.Subobject.lift, AlgebraicGeometry.Scheme.Hom.liftQuotient, StructureGroupoid.LocalInvariantProp.liftPropOn_chart, StructureGroupoid.LocalInvariantProp.liftProp_subtype_val, StructureGroupoid.LocalInvariantProp.liftPropAt_of_mem_maximalAtlas, Algebra.FormallySmooth.liftOfSurjective, StructureGroupoid.LocalInvariantProp.liftPropOn_of_mem_maximalAtlas",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract-group invariant rings and generic prime-spectrum quotient-map criteria do not imply the group-scheme invariant-quotient assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pgl-geometric-reductivity",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient.",
+   "via": [
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-power-lifting-quotient-submersive",
+  "worker": "stage1",
+  "summary": "Expanded power lifting into global adequacy of the fppf action quotient and then composed its universally submersive moduli map with the open surjective presentation. Kept arbitrary non-smooth finite-type affine groups and arbitrary scalar extensions; no finite generation or Noetherianity of invariants is used. Four statement-only generic inputs are separated. Corrected malformed prime notation only. Returned-head repair: rebased the retained split onto the current unsplit DAG, reread all current cited statements, and clarified step 3 against the current adequate-moduli definition, including the actual global-functions map and all algebras on affine etale base changes. Renewal after the landing return: reread all current dependencies, documented the newly present formal-moduli-quotient definition sharing Tag 04M9, and made explicit the Cartesian square that permits applying universal openness of the presentation in step 6. Current-main repair of the renewed landing refusal: verified the live unsplit record and retained inputs, reread all existing dependency statements, and expanded step 2 to show explicitly that natural algebra isomorphisms send the lifted invariant power to the required section power.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Steps 1--3 expand the affine GIT adequacy argument; steps 4--6 give universal submersiveness and the specified tensor-product base change. The inherited ancestor is null, as confirmed by blueprint_refs.py ancestor; no same-statement blueprint node was found.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-d279579a5",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-d279579a5 (reviewer sub-agent of L); spot-checked: Unchanged from my verdict above. A background search that compared the node lists of the previous and current snapshots was stopped at its time limit. The previous snapshot has no dag/nodes directory there, so that comparison could not work; it is superseded by the targeted grep of the current snapshot (adequate moduli, universally submersive, 06WT, 06FI, 06FH, power-lift), which found no duplicate. This is the fourth head of the split. Live and side-live still show the item unsplit, with no reviewed record, no proof and no repair note. By sha256, the four new nodes are byte-identical to 6f2173ce, which was a PASS. The item changes only in step 2: it names the natural algebra isomorphisms α and β, and naturality plus injectivity of β gives image(s)=t^N. This is correct, and β is multiplicative by Stacks 06WT. I re-read the item and all four new nodes in full. Stacks 06FI, 06R7 and 06WT were checked locally. Alper 4.1.8 and 5.3.1 were judged from knowledge; the PDF is still WANTED. Steps 1-6 are correct. Batch-5 flag: def-trf-algebraic-space is the general definition of an algebraic space, not part of the trace formula or Poincaré duality, so it is accepted. No SGA appears. Small cases checked: trivial H, E=k, L=0, α_p, nonreduced L. No changes and no tool_uses. Maintainer note: the new nodes could also prove the N8 smooth-G lem-sfb-power-lifting-adequate-affine-quotient."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PowerLiftingQuotientSubmersive",
+  "declaration": "AlgebraicGeometry.SchemeAction.power_lifting_quotient_submersive",
+  "file": "lean/Sheaf/AlgebraicGeometry/PowerLiftingQuotientSubmersive.lean",
+  "statement": "theorem power_lifting_quotient_submersive (k : Type u) [Field k] (H : Over (Spec (CommRingCat.of k))) [GrpObj H] [IsAffineHom H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (hlift : ∀ (D D' : Type u) [CommRing D] [CommRing D'] [Algebra k D] [Algebra k D'] [ModObj H (affineActionScheme k D)] [ModObj H (affineActionScheme k D')] (f : D →ₐ[k] D'), Function.Surjective f → (∃ s : affineActionScheme k D' ⟶ affineActionScheme k D, s.left = Spec.map (CommRingCat.ofHom f.toRingHom) ∧ Nonempty (IsModHom H s)) → ∀ b : affineInvariants k D' H, ∃ (n : ℕ) (_ : 0 < n) (a : affineInvariants k D H), f a = (b : D') ^ n) (E : Type u) [CommRing E] [Algebra k E] [Algebra.FiniteType k E] [ModObj H (affineActionScheme k E)] (L : Type v) [CommRing L] [Algebra (affineInvariants k E H) L] : Function.Surjective (PrimeSpectrum.comap (Algebra.TensorProduct.includeRight (R := affineInvariants k E H) (A := E) (B := L)).toRingHom) ∧ ∀ V : Set (PrimeSpectrum L), IsOpen V ↔ IsOpen (PrimeSpectrum.comap (Algebra.TensorProduct.includeRight (R := affineInvariants k E H) (A := E) (B := L)).toRingHom ⁻¹' V)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Returned-head repair: cite def-sfb-affine-action-invariant-spectrum for affineInvariants and def-sfb-affine-action-quotient-stack for affineActionScheme. Equivariance now uses Mathlib IsModHom on the scheme morphism whose underlying map is Spec f, avoiding affineGroupCoordinates, affineProductCoordinates and affineTensorCoaction. Removed the duplicate affineInvariants.algebra instance; Mathlib Algebra.ofSubsemiring supplies precisely the inclusion algebra."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f4679d2a",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after RETURN aa4b3e03dd1f; all three points fixed. H2: theorem stmt_dep lem-sfb-affine-action-stack-presentation removed; def-sfb-affine-action-invariant-spectrum (existing:true, owns affineInvariants) and def-sfb-affine-action-quotient-stack (lists affineActionScheme) cited. Equivariance now Mathlib IsModHom on the Over morphism with s.left = Spec f: exact equivariance, no unowned tensor-coordinate defs. H4: duplicate affineInvariants.algebra dropped for Mathlib Algebra.ofSubsemiring. Node JSON differs from live only in stmt_deps and lean; statement verbatim in file. All hypotheses and conclusions match: H affine finite type, no smoothness; D,D' Type u, no finite generation; N>0; E finite type; L arbitrary in universe v; surjective plus open iff preimage open. Edge cases trivial H, E=0, L=0, alpha_p, any characteristic covered. Sorry only; docstrings give source, blueprint id and 6 proof steps. Report has both sections; the second reading was by the worker itself. No compile: no file changed. Advisory: QuasiCompact is implied by IsAffineHom, harmless."
+ }
+}

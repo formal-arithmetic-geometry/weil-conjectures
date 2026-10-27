@@ -1,0 +1,146 @@
+{
+ "id": "def-pur-chart-affine-comparison-data",
+ "kind": "definition",
+ "title": "Canonical affine-chart source, normal and integration constructions",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Use the finite coefficient setting $P$, $k=\\overline{\\mathbf F}_q$, and $A=\\mathcal O_E/\\varpi_E^n$ with $n\\ge1$ of [def-pur-conventions]. Work with the existing exceptional inverse image [def-weil-exceptional-inverse-image], derived pullback [def-weil-derived-pullback-tensor-hom], section invariants [def-pur-section-invariant], normal cones [def-pur-normal-bundle], and canonical diagonal data [def-pur-diagonal-dnc-chart-data]. Let $d\\ge0$, let $h:U\\to Y$ be separated of finite type [def-weil-proper-morphism, def-weil-finite-type-morphism] and smooth of pure relative dimension $d$ [def-sbc-smooth-morphisms], and let $a_Y:Y\\to\\operatorname{Spec}k$ be of finite type. Put $p:\\mathbf A^d_Y\\to Y$ [def-sbc-affine-space]. For an etale map $e:U\\to\\mathbf A^d_Y$ [def-weil-etale-morphism] with $ep=h$, define the following affine-chart data. The map $m=e\\times e$ on self-products is the canonical pullback map, satisfying $m p_A=p_Ue$, and $a:U\\times_YU\\to(\\mathbf A^d_Y\\times_Y\\mathbf A^d_Y)\\times_{\\mathbf A^d_Y}U$ is its pullback lift with $p_U$. The lift is etale, separated and quasi-compact and carries the diagonal to the base-changed diagonal. Its ordinary source-section comparison is inverse counit-normalized etale restriction along $a$ followed by inverse smooth section base change, using a presentation $N$ of [def-sp-etale-compact-support-normalization]; its pro-etale comparison is transported by the canonical source and pullback comparisons of [thm-pur-dnc-invariance].\n\nThe diagonal ideal pulls into the diagonal ideal under $m$. Define the deformation map by the extended-Rees map $t\\mapsto t$, $f/t\\mapsto e^*f/t$. Its zero-fibre compatibility defines the actual normal-cone map by the zero-fibre pullback lift. This map is Cartesian over $e$ and preserves zero sections. Define the normal-section comparison by inverse smooth exceptional section base change for this square, transported through the same site comparisons. The projection, etale-lift, ideal, zero-fibre, Cartesian and zero-section facts just stated are the typing assertions for these constructions.\n\nFor every $h$ as above, independently of any choice of $e$, define $b_h$ from the section invariant of its actual normal cone to that of the relative-Spec bundle of its degree-one conormal module, using the canonical homogeneously normalized model of [def-pur-diagonal-dnc-chart-data] and counit-normalized section-etale restriction. Define $\\beta_h$ by $b_h$ followed by the comparison image of the inverse zero-section integration transpose on that bundle, with its canonical shifted Tate coefficient [def-coefficient-twists-detailed]. The bundle orientation is the actual integration construction of [def-pur-finite-ring-section-data, lem-trf-finite-ring-section-deformation], not an arbitrary orientation. These definitions use any normalized presentation $N$ and apply to arbitrary finite extensions $E/\\mathbf Q_\\ell$, including ramified ones. No conclusion of the affine-chart coherence theorem is assumed. Include $d=0$ and empty schemes.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-section-invariant",
+  "def-pur-normal-bundle",
+  "def-pur-diagonal-dnc-chart-data",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-affine-space",
+  "def-weil-etale-morphism",
+  "def-sp-etale-compact-support-normalization",
+  "thm-pur-dnc-invariance",
+  "def-coefficient-twists-detailed",
+  "def-pur-finite-ring-section-data",
+  "lem-trf-finite-ring-section-deformation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 1--4: Cartesian-centre section comparison, differential on normal bundles, exceptional etale locality, and zero-section integration."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "chartCoefficientUnit|chartEtaleIdentification|normalBundleComparison|ChartFactors",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib construction; reuse the located project definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical source and normal-cone comparisons for an etale coordinate chart and zero-section inverse integration transpose",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.Etale, ContMDiffSection.coe_zero, VectorBundleCore.trivializationAt_symmL, TangentBundle.symmL_trivializationAt_eq_core, mdifferentiableOn_symm_coordChangeL, TangentBundle.symmL_trivializationAt, Bundle.contMDiffAt_zeroSection, AlgebraicGeometry.Scheme.isoSpec_inv_image_zeroLocus",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib construction; reuse the located project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible coefficient unit and counit preserving etale exceptional inverse image identification with derived pullback",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.instHasPullbacksEtale, StandardEtalePair.hasMap_X, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib construction; reuse the located project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n chartCoefficientUnit|chartEtaleIdentification|normalBundleComparison|namespace .*ChartFactors lean/WeilConjectures lean/Sheaf; grep -rl new definition ids dag/nodes; python3 tools/blueprint_refs.py search chart",
+   "results": "No upstream WeilConjectures match. Sheaf locates chartCoefficientUnit_constructible, chartCoefficientUnit and chartEtaleIdentification in DiagonalDncChartNormalization, and normalBundleComparison/beta and affine comparisons in ChartDncVectorFactors. No definition node owns these declarations; def-pur-diagonal-dnc-chart-data owns the other diagonal data. Blueprint search gives 99 chart nodes, including the existing theorem nodes, but no definition owner for these helpers.",
+   "date": "2026-10-24",
+   "verdict": "Record the existing declarations under definition nodes as explicitly required by return F1/F2; write no duplicate definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-chart-exceptional-mate-coherence",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1--4: Cartesian-centre section comparison, differential on normal bundles, exceptional etale locality, and zero-section integration.",
+   "via": [
+    "lem-pur-chart-exceptional-mate-coherence",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.Paper.ChartDncVectorFactorData",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ChartFactors.beta",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.selfMap",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.selfMap_fst",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.sourceLift",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.sourceLift_geometry",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.sourceOrdinary",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.source",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.idealCondition",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.deformation",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normalCondition",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normalMap",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normalGeometry",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normal",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.normalBundleComparison",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.beta",
+   "WeilConjectures.PurityFiniteSetting.ChartFactors.tate"
+  ],
+  "statement": "def beta (P : PurityFiniteSetting.{u}) {U Y : Scheme.{u}}\n    (d : ℕ) (h : U ⟶ Y) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]\n    [SmoothOfRelativeDimension d h]\n    (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership required by Q37 return F1/F3. Reuses landed definitions, not the theorem chart_dnc_vector_factors (whose coefficient hypothesis is narrower).",
+  "file": "lean/Sheaf/Paper/ChartDncVectorFactorData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4181a94c4",
+  "group": "Q37",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4181a94c4",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Re-delivery for the 4af079ce RETURN. F1 fixed: the item no longer cites theorem lem-pur-chart-dnc-vector-factors; its stmt_deps add only the new def nodes def-pur-general-chart-comparisons and def-pur-chart-affine-comparison-data. The latter is an existing:true owner of ChartFactors.selfMap..beta with its statement field verbatim; its lem-trf-finite-ring-section-deformation dep is genuine (bundleOrientation needs bundleAdjoint_isIso). F2 fixed: delta inlined as Dnc.existsUnique_dncInvariance.exists.choose; chartCoefficientUnit/chartEtaleIdentification owned by the existing:true def-pur-chart-coefficient-adjoint-data (JSON read from the commit, not in the snapshot), whose TeX matches the Lean body. F3 fixed: affine_specialization states 7 equalities with ChartFactors, true by unfolding (general bodies = ChartFactors with p:=g). Item module unchanged; all clauses re-checked (IsIso c, D^b_c/etale-origin domain, c≫rho=eps, three equations with Tate, Identity/Composition). d=0, empty schemes, ramified E covered; single universe u. No hollow defs, sorry only in theorems, statements verbatim, all deps exist, no cycle, report sections present. Advisory: upstream theorem-owned diagonalDualizing*/Dnc.* helpers cited only transitively via def-pur-diagonal-dnc-chart-data. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1755",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261025T122958-L-1821326",
+  "kind": "interface",
+  "note": "independent cc review: old ChartDncVectorFactors.lean (clone) vs delivered ChartDncVectorFactorData+item (verbatim extraction, public reexport); new sorry lemmas vs Conclusion clauses 1/2; node lean.statements vs Lean signatures; importers ChartDiagonalSourceMate and GeneralChartComparisons compiled against delivered modules (exit 0)"
+ }
+}

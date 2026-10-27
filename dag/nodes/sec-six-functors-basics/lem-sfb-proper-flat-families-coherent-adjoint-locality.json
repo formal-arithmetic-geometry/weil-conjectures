@@ -1,0 +1,484 @@
+{
+ "id": "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+ "kind": "statement",
+ "title": "Coherent right adjoints are local for proper maps between flat families",
+ "statement": "Let $S$ be any scheme [def-pc-scheme], and let $X\\to S$ and $Y\\to S$ be flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $f:X\\to Y$ be a proper $S$-morphism [def-weil-proper-morphism]. On the full derived categories of modules with quasi-coherent cohomology [def-pc-derived-category], derived direct image [def-pc-derived-direct-image] has a right adjoint $f^!:D_{\\mathrm{QCoh}}(Y)\\to D_{\\mathrm{QCoh}}(X)$ with counit $\\varepsilon_f:Rf_*f^!\\to\\operatorname{id}$. If $j:V\\hookrightarrow Y$ is any open immersion [def-weil-open-immersion], put $U=f^{-1}V$, write $j_X:U\\hookrightarrow X$ and $f_V:U\\to V$, and choose the corresponding adjunction for $f_V$. For every locally bounded-below $K\\in D_{\\mathrm{QCoh}}(Y)$, the canonical mate\n$$j_X^*f^!K\\longrightarrow f_V^!(j^*K)$$\nis an isomorphism. Here locally bounded below means that each point has a neighbourhood on which $\\mathcal H^i(K)=0$ for all sufficiently negative $i$. The mate is the transpose under $Rf_{V,*}\\dashv f_V^!$ of the restriction of $\\varepsilon_{f,K}$, using the canonical identification $Rf_{V,*}j_X^*\\simeq j^*Rf_*$. Thus this isomorphism identifies the restricted counit with $\\varepsilon_{f_V,j^*K}$. No quasi-compactness or quasi-separatedness of $S,X,Y$, no Noetherian hypothesis, and no flatness of $f$ are assumed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0A9E (lemma-twisted-inverse-image), 0A9P (lemma-proper-noetherian), especially its footnote giving proper pseudo-coherent morphisms as the correct generality. Pseudo-coherence here follows from more-morphisms.tex Tags 0695 (lemma-flat-finite-presentation-pseudo-coherent) and 0683 (lemma-permanence-pseudo-coherent). Agent-formulated extension from qcqs schemes by localization on affine target opens and coherent duality descent; the arbitrary-base existence/locality assertion is not claimed to be the literal statement of 0A9E."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-weil-open-immersion",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-mayer-vietoris-canonical-data",
+  "lem-pc-derived-open-restriction-qcoh-iff",
+  "lem-pc-derived-direct-image-preserves-qcoh"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinary derived categories throughout. For qcqs $X,Y$, compact generation [lem-pc-derived-qcoh-compact-generation], preservation of coproducts [lem-pc-derived-direct-image-preserves-direct-sums] and [lem-pc-brown-representability-right-adjoint] give $Rf_*\\dashv a_f$. For arbitrary schemes properness still makes $f$ qcqs. Preservation of quasi-coherence and coproducts therefore gives the hypotheses of [lem-sfb-levelwise-quasicoherent-brown] in its single-scheme case, so $a_f$ exists globally as well. Apply the same argument to every open restriction of $f$. The general ordinary Brown input is needed here because compact generation and the qcqs coherator theorem have qcqs scheme hypotheses; no equivalence $D(\\mathrm{QCoh}(X))=D_{\\mathrm{QCoh}}(X)$ is assumed.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-pc-derived-qcoh-compact-generation",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-brown-representability-right-adjoint",
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9E, ordinary Brown proof; general weak-Serre Brown theorem for the arbitrary-scheme existence clause."
+   }
+  },
+  {
+   "text": "First suppose $Y$ is qcqs, $V\\subset Y$ is quasi-compact, $U=f^{-1}V$, and $Q\\in D^+_{\\mathrm{QCoh}}(Y)$ restricts to zero on $V$. Then $X$ is qcqs and $U$ is quasi-compact. For any perfect $P$ on $X$ and any $b:P\\to f^!Q$, take its adjoint $c:Rf_*P\\to Q$. The object $Rf_*P$ is pseudo-coherent by [lem-sfb-flat-family-perfect-direct-image-pseudocoherent]. The supported-map annihilation theorem supplies $I\\to\\mathcal O_Y$, perfect and invertible on $V$, such that $I\\otimes^L Rf_*P\\to Q$ is zero. The projection formula identifies its source with $Rf_*(Lf^*I\\otimes^L P)$. Naturality of adjunction identifies the transpose with\n$$Lf^*I\\otimes^L P\\longrightarrow P\\xrightarrow{b}f^!Q.$$\nIt is therefore zero. On $U$ its first arrow is an isomorphism, so $b|_U=0$. The perfect open-support detector now gives $(f^!Q)|_U=0$. This uses boundedness only for $Q$, in the pseudo-coherent case of the annihilation theorem; it assumes no flatness of $f$.",
+   "uses": [
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sc-pseudo-coherent-support-annihilation",
+    "lem-pc-projection-formula",
+    "lem-sc-perfect-open-support-detection",
+    "lem-pc-derived-pullback-perfect",
+    "lem-sc-perfect-derived-tensor-perfect",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9P, lemma-proper-noetherian, proof and footnote; Tag 0A9C, lemma-map-from-pseudo-coherent-to-complex-with-support."
+   }
+  },
+  {
+   "text": "For qcqs $Y$ and quasi-compact $V$, the preceding support argument and [lem-sc-right-adjoint-open-support-criterion] give the isomorphism $j_X^*a_fK\\to a_{f_V}j^*K$ for $K\\in D^+_{\\mathrm{QCoh}}(Y)$. It is the transpose of $Rf_{V,*}j_X^*a_fK\\simeq j^*Rf_*a_fK\\xrightarrow{j^*\\varepsilon_f}j^*K$, using [lem-pc-restrict-derived-direct-image-open]. For successive opens, transposing the composite of the two mates gives the restriction of $\\varepsilon_f$: first use $\\varepsilon_{f_V}Rf_{V,*}(\\text{first mate})=j^*\\varepsilon_f$, then the analogous equation for the second mate. This is also the transpose of the direct mate, so injectivity of the adjunction bijection proves equality. Identity restriction gives the identity by the same equation. This is an ordinary counit calculation.",
+   "uses": [
+    "lem-sc-right-adjoint-open-support-criterion",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0A9L, 0A9N and 0A9P; ordinary transpose and successive-restriction counit equations."
+   }
+  },
+  {
+   "text": "For a set-indexed open cover $Y=\\bigcup_iY_i$, form its face-only Cech schemes $Y_n$ and $X_n=X\\times_Y Y_n$, with augmentations $b,a$. Work in the ordinary total module categories of [lem-sfb-semisimplicial-ringed-total-category], and let $\\mathcal L_X,\\mathcal L_Y$ mean levelwise quasi-coherent derived objects, without a cartesian condition. The free evaluation adjoints $\\ell_n\\dashv e_n$ are exact by [lem-sfb-semisimplicial-evaluation-free-adjoint]. Thus evaluation preserves K-injectives: for an acyclic complex $A$, $\\operatorname{Hom}_{K}(A,e_nI)=\\operatorname{Hom}_{K}(\\ell_nA,I)=0$. The underived total pushforward along $(f_n)$ is defined componentwise using open restriction/pushforward comparison for its transitions. Resolve in the total module category by [lem-sfb-grothendieck-k-injective]. Its right derived functor $F$ consequently satisfies $e_nF=Rf_{n,*}e_n$. It preserves levelwise quasi-coherence and coproducts by the respective qcqs-morphism theorems and conservative evaluations. These are constructions on complexes in ordinary abelian categories.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-derived-direct-image-preserves-direct-sums",
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Ordinary total-site construction, spaces-simplicial.tex Tags 0D72 and 0D9E; K-injective computation and open restriction."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-levelwise-quasicoherent-brown] to $F:\\mathcal L_X\\to\\mathcal L_Y$ to obtain $F\\dashv G$. On each $\\alpha$-labelled summand of $e_m\\ell_n$, open restriction and [lem-pc-restrict-derived-direct-image-open] show that the canonical comparison $\\ell_n^YRf_{n,*}M\\to F\\ell_n^XM$, the transpose under $\\ell_n^Y\\dashv e_n$ of $Rf_{n,*}$ applied to the unit $M\\to e_n\\ell_n^XM$ (using $e_nF=Rf_{n,*}e_n$), is an isomorphism on every component; the finite direct sums in the free formula commute with $Rf_{m,*}$, and conservativity of the evaluations makes it an isomorphism $F\\ell_n^X\\simeq\\ell_n^Y Rf_{n,*}$. Whenever $a_n$ is the right adjoint of $Rf_{n,*}$, for $M\\in D_{\\mathrm{QCoh}}(X_n)$ and $N\\in\\mathcal L_Y$ the adjunctions give\n$$\\operatorname{Hom}(M,e_nGN)\\cong\\operatorname{Hom}(\\ell_n^XM,GN)\\cong\\operatorname{Hom}(F\\ell_n^XM,N)\\cong\\operatorname{Hom}(Rf_{n,*}M,e_nN)\\cong\\operatorname{Hom}(M,a_ne_nN).$$\nHence Yoneda identifies $e_nG\\simeq a_ne_n$. Its normalization is $e_n\\varepsilon_F=\\varepsilon_{f_n}$ under these identifications, since all four bijections send identities to the specified counits.",
+   "uses": [
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Total-category Brown and the exact free-evaluation adjunction; component Hom calculation."
+   }
+  },
+  {
+   "text": "The transition of this actual total object is determined by the free-evaluation counit. Indeed the $\\alpha$ summand of $\\ell_me_mGN\\to GN$ is precisely $\\theta^{GN}_\\alpha$ by [lem-sfb-semisimplicial-evaluation-free-adjoint]. The normalization in the previous step and naturality of $\\varepsilon_F$ show that its transpose is $\\theta^N_\\alpha\\circ\\operatorname{res}_\\alpha(\\varepsilon_{f_m})$. Thus, under $e_nGN=a_ne_nN$,\n$$\\theta^{GN}_\\alpha=(a_n\\theta^N_\\alpha)\\circ\\mu_{\\alpha,e_mN},$$\nwhere $\\mu_\\alpha:\\operatorname{res}_\\alpha a_m\\to a_n\\operatorname{res}_\\alpha$ is the ordinary open-square mate. This also proves the equation for the counit, not merely an isomorphism of component objects. The identity and composition equations hold because $GN$ is already an object of the total derived category; no lifting of a diagram in derived categories is being asserted.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0D72 free-adjunction inverse formula and Tag 0D9E derived free counit; naturality of the ordinary total counit."
+   }
+  },
+  {
+   "text": "First suppose $Y$ is quasi-separated, and choose an affine open cover. Each nonempty finite intersection $Y_{i_0\\ldots i_n}$ is qcqs: it is quasi-compact by [lem-weil-pbc-quasi-separated-affine-cover-criterion] (iterate using finite affine covers of the earlier intersections) and is an open subscheme of an affine scheme. Its inverse image under the proper $f$ is qcqs. Thus each $a_n$ in the preceding construction is defined componentwise on the disjoint union, using the qcqs Brown adjoints of step 1. Module complexes, K-injective resolutions and their Hom bijections on a disjoint union are componentwise, so these component adjoints form an adjoint on the whole disjoint union. For locally bounded-below $K$, its restriction to each intersection has a single lower bound, obtained from a finite subcover and the minimum of the finitely many local bounds. Step 3 makes every transition mate at these inputs invertible. For $N=b^*K$, the equation of step 6 therefore makes $GN$ cartesian.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Qcqs localization of Tag 0A9P; finite intersections for a quasi-separated target and componentwise resolutions."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-zariski-total-quasicoherent-descent] to this cartesian total object to obtain $H\\in D_{\\mathrm{QCoh}}(X)$ with $a^*H\\simeq Gb^*K$. For every $M\\in D_{\\mathrm{QCoh}}(X)$, the object $Fa^*M$ has components $Rf_{n,*}(M|_{X_n})$ and transitions the restriction isomorphisms of [lem-pc-restrict-derived-direct-image-open], so it is cartesian. The total pushforward of step 4 is the direct image of the ringed total morphism given levelwise by $f_n$, and $b\\circ(f_n)=f\\circ a$; hence [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] gives $Rb_*Fa^*M\\simeq Rf_*Ra_*a^*M\\simeq Rf_*M$, the last by the unit isomorphism of the descent equivalence on $X$. The descent equivalence on $Y$ therefore identifies $Fa^*M\\simeq b^*Rb_*Fa^*M\\simeq b^*Rf_*M$, naturally in $M$. Consequently\n$$\\operatorname{Hom}_X(M,H)\\cong\\operatorname{Hom}_{\\mathcal L_X}(a^*M,Gb^*K)\\cong\\operatorname{Hom}_{\\mathcal L_Y}(Fa^*M,b^*K)\\cong\\operatorname{Hom}_Y(Rf_*M,K).$$\nThus $H\\simeq a_fK$ by the representing bijections, and the image of its identity gives the global counit. Its component on every affine chart is the local counit by step 5. In particular the canonical mate to each chart is invertible. Full faithfulness here concerns actual total derived objects via the descent equivalence, not compatible families of ordinary derived morphisms.",
+   "uses": [
+    "lem-sfb-zariski-total-quasicoherent-descent",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-sfb-coherent-right-adjoint-comparisons",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Ordinary total descent, sites-cohomology.tex Tag 0D7V; representability and counit normalization."
+   }
+  },
+  {
+   "text": "For quasi-separated $Y$, the preceding proof allows any affine cover, so include any specified affine open $W$ as a chart; it proves locality to $W$. Let $V\\subset Y$ be any open. It too is quasi-separated, and $K|_V$ is locally bounded below. For each affine $W\\subset V$, apply the chart result to $Y\\supset W$ and $V\\supset W$. The successive-restriction counit calculation of step 3 factors the mate from $Y$ to $W$ as the restriction of the mate from $Y$ to $V$ followed by the mate from $V$ to $W$. Both the direct mate and the second factor are isomorphisms. Thus the first factor is an isomorphism over $f^{-1}W$. These opens cover $f^{-1}V$, so every cohomology sheaf of the cone of the mate vanishes, proving locality for arbitrary $V$.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Extension from affine-chart locality to arbitrary opens by counit pasting and stalkwise cone detection."
+   }
+  },
+  {
+   "text": "Now allow arbitrary $Y$ and choose an affine cover again. A finite intersection of these charts may fail to be quasi-compact, but it is an open subscheme of an affine scheme, so its open immersion into that affine is separated (its relative diagonal is an isomorphism). Hence [lem-sc-separated-over-affine-scheme-separated] makes it separated and thus quasi-separated: a closed-immersion diagonal is quasi-compact by the cited definitions. The already proved quasi-separated case applies to the restricted proper map on each intersection and every further face open, with locally bounded-below $K$. Run the same total construction of steps 4--6: the level adjoints exist by step 1 and their transition mates at $b^*K$ are now isomorphisms by step 9. Thus $Gb^*K$ is cartesian. Step 8's ordinary descent and Hom calculation again identify its descent with $a_fK$, including its counit and locality to every affine chart. This second pass does not impose quasi-compactness on the intersections or a uniform lower bound across them. The family hypotheses persist on all source and target opens.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-proper-morphism",
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-sfb-zariski-total-quasicoherent-descent",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-closed-immersion",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Second ordinary Cech pass: separated intersections of affine opens on an arbitrary scheme; same total adjunction and descent calculation."
+   }
+  },
+  {
+   "text": "The argument of step 9 now applies without quasi-separatedness: for any $V\\subset Y$, cover $V$ by affine opens $W$, use the just proved arbitrary-target chart result for $Y\\supset W$ and $V\\supset W$, and use ordinary counit pasting. It follows that the specified mate $j_X^*a_fK\\to a_{f_V}j^*K$ is invertible. Its defining transpose is the restricted counit, so it identifies that counit with $\\varepsilon_{f_V}$ exactly as claimed.",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Arbitrary-open conclusion from affine-chart locality and the counit formula."
+   }
+  },
+  {
+   "text": "Identity and successive restriction compatibility are the transpose equations proved in step 3, which did not use qcqs hypotheses. For an isomorphism of $S$-diagrams, transport the functors and adjunction bijections. The ordinary comparisons of [lem-sfb-coherent-right-adjoint-comparisons] identify the transported adjoints with the chosen ones by the unique counit-preserving isomorphisms and satisfy their cocycle equations. Both transported and original restriction mates transpose to the same restricted counit after the canonical direct-image comparisons, hence agree by injectivity of the adjunction bijection. This proves naturality in $K$ and all stated coherence independently of all chosen Brown representatives and covers.",
+   "uses": [
+    "lem-sfb-coherent-right-adjoint-comparisons",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Ordinary uniqueness of right adjoints and naturality of the counit transpose; no enhanced mates."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-pc-derived-qcoh-compact-generation",
+  "lem-pc-derived-direct-image-preserves-direct-sums",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-brown-representability-right-adjoint",
+  "lem-sfb-levelwise-quasicoherent-brown",
+  "lem-weil-pbc-proper-base-change",
+  "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+  "lem-sc-pseudo-coherent-support-annihilation",
+  "lem-pc-projection-formula",
+  "lem-sc-perfect-open-support-detection",
+  "lem-pc-derived-pullback-perfect",
+  "lem-sc-perfect-derived-tensor-perfect",
+  "def-pc-perfect-complex",
+  "lem-sc-right-adjoint-open-support-criterion",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "lem-sfb-grothendieck-k-injective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-sfb-zariski-total-quasicoherent-descent",
+  "lem-sfb-coherent-right-adjoint-comparisons",
+  "def-weil-open-immersion",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "def-weil-closed-immersion",
+  "def-weil-quasi-separated-morphism",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9E ordinary Brown, Tag 0A9P with Kiehl footnote, and ordinary total-site globalization via sites-cohomology.tex Tag 0D7V and Hall--Neeman--Rydh Appendix A.3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudoCoherent.*[Mm]orphism|[Pp]roper.*[Dd]uality|[Rr]ightAdjoint.*[Oo]pen",
+   "results": "Actual search: 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint of proper coherent derived pushforward is local on the target for bounded below quasi-coherent complexes",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, CategoryTheory.Adjunction.derived, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat, CategoryTheory.Functor.sheafAdjunctionCocontinuous. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo-coherent morphisms satisfy cancellation: X and Y pseudo-coherent over S implies every S-morphism X to Y is pseudo-coherent",
+   "results": "Actual search: 8 hits; PseudoEpimorphism.cancel_right, PseudoEpimorphism.cancel_left, AlgebraicGeometry.IsPreimmersion.of_comp, CategoryTheory.ShortComplex.quasiIso_of_comp_left, CategoryTheory.Preadditive.epi_iff_cancel_zero, quasiIso_of_comp_left, CategoryTheory.cancel_mono, AlgebraicGeometry.AffineTargetMorphismProperty.cancel_left_of_respectsIso. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"rightAdjoint\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" : AlgebraicGeometry.LocallyRingedSpace.Γ.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \" : AlgebraicGeometry.Scheme.Γ.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \" {X : AlgebraicGeometry.Scheme} : (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; these are ordinary module/sheaf or category-theoretic constructions, not this geometric derived theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck[Dd]uality|coherentAdjoint|properRightAdjoint|[Pp]seudo[Cc]oherent[Mm]orphism",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; these are ordinary module/sheaf or category-theoretic constructions, not this geometric derived theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper map between schemes flat and locally of finite presentation over a common arbitrary scheme, quasi-coherent derived pushforward has a right adjoint compatible with open restriction on bounded below inputs",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardPushforwardAdj. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper morphism of flat locally finitely presented families has quasi coherent derived right adjoint local on the target for bounded below complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; these are ordinary module/sheaf or category-theoretic constructions, not this geometric derived theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pseudo coherent derived pushforward right adjoint commutes with open restriction for bounded below quasi coherent complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).r =\\n    (AlgebraicGeometry.Scheme.Modules.pushforward f.as.unop).toCatHom\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the right adjoint component of the pseudofunctor's action on $ f $ equals the pushforward functor $ f_* $ between the module categories of $ X $ and $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)).IsRightAdjoint\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[HasWeakSheafify K A] : (G.sheafPushforwardContinuous A J K).IsRightAdjoint\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the induced sheaf pushforward functor $ F_* $ is a right adjoint, provided th\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} φ).IsRightAdjoint\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; these are ordinary module/sheaf or category-theoretic constructions, not this geometric derived theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent Grothendieck duality is local for proper maps between flat families over arbitrary schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.of_stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(H : ∀ x, (f.stalkMap x).hom.Flat) : Flat f\", \"doc\": \"If for every point $ x \\\\in X $, the induced map on stalks $ \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x} $ is flat, then the morphism $ f : X \\\\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types; these are ordinary module/sheaf or category-theoretic constructions, not this geometric derived theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-nodal-perfect-duality-trace",
+  "date": "2026-10-23",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat.",
+   "via": [
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+  "worker": "stage1",
+  "summary": "Major repair of all return points: discarded the enhanced foundation and every dropped-machinery citation. Retained the Kiehl/support argument. Used ordinary Brown, free evaluation adjunctions and actual ringed total derived categories, first on quasi-separated targets and then on arbitrary targets. Added ordinary Brown and Zariski total-descent prerequisites with precise sources. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Steps 1--3 are the ordinary qcqs duality argument, and steps 4--12 globalize by an ordinary total-site Brown adjunction and descent. This realizes the arbitrary-base trace-locality prerequisite without the dropped route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-qcoh-compact-generation",
+    "why": "Ordinary general tool: Compact generation of the quasi-coherent derived category. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-direct-sums",
+    "why": "Ordinary general tool: Derived direct image preserves direct sums. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Ordinary general tool: Derived direct image along a qcqs morphism preserves quasi-coherent cohomology. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-pc-brown-representability-right-adjoint",
+    "why": "Ordinary general tool: Brown representability criterion for a right adjoint. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-sc-pseudo-coherent-support-annihilation",
+    "why": "Ordinary general tool: Perfect annihilator for a map to a supported complex. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Ordinary general tool: The projection formula. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-sc-perfect-open-support-detection",
+    "why": "Ordinary general tool: Global perfect maps detect vanishing on a quasi-compact open. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-pc-derived-pullback-perfect",
+    "why": "Ordinary general tool: Derived pullback preserves perfect complexes. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-sc-perfect-derived-tensor-perfect",
+    "why": "Ordinary general tool: Derived tensor product of perfect objects is perfect. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-sc-right-adjoint-open-support-criterion",
+    "why": "Ordinary general tool: Support criterion for restriction of a right adjoint to a quasi-compact open. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Ordinary general tool: Derived direct image commutes with restriction to opens. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Ordinary general tool: Grothendieck abelian categories have K-injective resolutions. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-sfb-coherent-right-adjoint-comparisons",
+    "why": "Ordinary general tool: Counit-normalized comparisons for a coherent family of chosen adjunctions. Used only for coherent structure-module duality or ringed total-site calculation; the marked-nodal-curve unit has no substitute for this generic input. No coefficient-category or chapter route is changed."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Ordinary general tool: composition of derived direct images for morphisms of ringed topoi, used in step 8 to compute Rb_* of the total pushforward; the marked-nodal-curve unit has no substitute. Added by the maintainer reader's FIX."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-qcoh-compact-generation",
+  "lem-pc-derived-direct-image-preserves-direct-sums",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-brown-representability-right-adjoint",
+  "lem-sc-pseudo-coherent-support-annihilation",
+  "lem-pc-projection-formula",
+  "lem-sc-perfect-open-support-detection",
+  "lem-pc-derived-pullback-perfect",
+  "lem-sc-perfect-derived-tensor-perfect",
+  "lem-sc-right-adjoint-open-support-criterion",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sfb-coherent-right-adjoint-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-81b90b936",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-81b90b936 (reviewer sub-agent of L); spot-checked: I read all 12 steps of the item, the three new nodes and every cited statement in full. Sources checked: duality.tex 0A9P with the Kiehl footnote, properties.tex 077P(1), sites-cohomology.tex 0D7V, and Hall-Neeman-Rydh arXiv:1405.1888v2 Theorem A.3 and B.1, which I read from the arXiv PDF because the paper is not archived. A.3 says: A Grothendieck, M a weak Serre subcategory closed under coproducts, M Grothendieck, then D_M(A) is well generated. The return points of 869953a8 are repaired. No presentable, infinity or dg-mate citation remains; the remaining 'enhanced'/'presentab' hits are negations or search text. The unsourced enhanced-descent node is gone. Existence now comes from ordinary Brown: compact generation for qcqs, and A.3 plus Neeman for arbitrary schemes. Gluing goes through one actual total derived object GN built by Brown on the levelwise-qcoh total category, then 0D7V Zariski descent of objects; no bare derived morphisms are glued. Step checks: step 2 (Kiehl, 0A9C(ii), projection formula, perfect detector on qcqs X and quasi-compact U) is unchanged and correct, with no flatness of f. Step 3 uses the open-support criterion at D^+, and its counit pasting is formal. Step 4: exact free adjoints give K-injective preservation, so e_nF=Rf_{n*}e_n, and each f_n is proper by base change. Step 6: the transition equation follows by transposition. Step 7: intersections in a quasi-separated Y are qcqs, and lower bounds are taken per intersection. Step 10: affine intersections in an arbitrary Y are separated through separated-over-affine, and only the already proved quasi-separated case is applied to them; no claim that they are affine (E1 avoided). Steps 9 and 11 are genuinely elementary. Step 12 uses the right-adjoint comparisons as stated. New nodes: the Kiehl node is byte-identical to the one accepted last time. The Brown node holds: 077P(1), weak-Serre closure and coproducts checked componentwise, free images of generators generate, then A.3 plus Neeman. The Zariski descent node holds: the 0D7V hypotheses are verified (flat open immersions, Zariski descent of qcoh, Cech resolution, affine bound 0). Neither is a duplicate of the etale lem-sfb-fppf-face-total-qcoh-equivalence or of the abstract lem-sfb-ringed-unbounded-descent-criterion, and neither restates the item. FIX, one fault (E5-type): steps 5 and 8 asserted isomorphisms only componentwise. Step 5 now names the comparison morphism, the transpose of Rf_{n*} applied to the unit, which is an isomorphism by conservativity of the evaluations. Step 8 now shows that Fa^*M is cartesian and that Rb_*Fa^*M = Rf_*Ra_*a^*M = Rf_*M, citing lem-weil-pbc-ringed-topoi-derived-pushforward-composition, which I added to uses, proof_deps and tool_uses. Its closure reaches no trace-formula or Poincare-duality node. Batch-5: all four flags reach lem-trf-slice-site-total-pseudofunctor, the generic Stacks 09WC total-site construction, which is not part of the trace formula or Poincare duality; accepted. No SGA citation. I accept the declared generic coherent-duality tool_uses. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-proper-flat-families-coherent-adjoint-locality.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatFamiliesCoherentAdjointLocality",
+  "declaration": "AlgebraicGeometry.ProperFlatFamilies.coherent_adjoint_locality",
+  "declarations": [
+   "AlgebraicGeometry.ProperFlatFamilies.directImage",
+   "AlgebraicGeometry.ProperFlatFamilies.restriction",
+   "AlgebraicGeometry.ProperFlatFamilies.openComparison",
+   "AlgebraicGeometry.ProperFlatFamilies.openMate",
+   "AlgebraicGeometry.ProperFlatFamilies.exists_rightAdjoint",
+   "AlgebraicGeometry.ProperFlatFamilies.coherent_adjoint_locality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatFamiliesCoherentAdjointLocality.lean",
+  "statement": "theorem coherent_adjoint_locality {S X Y : Scheme.{u}} (pX : X ⟶ S) (pY : Y ⟶ S) [Flat pX] [LocallyOfFinitePresentation pX] [Flat pY] [LocallyOfFinitePresentation pY] (f : X ⟶ Y) [IsProper f] (hf : f ≫ pY = pX) (V : Y.Opens) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (aV : schemeDerivedQCohCategory V.toScheme ⥤ schemeDerivedQCohCategory (f ⁻¹ᵁ V).toScheme) (adj : directImage f ⊣ a) (adjV : directImage (f ∣_ V) ⊣ aV) (K : schemeDerivedQCohCategory Y) (hK : ∀ y : Y, ∃ W : Y.Opens, y ∈ W ∧ ∃ b : ℤ, ∀ i : ℤ, i < b → IsZero ((SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) W).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) i).obj K.obj))) : IsIso ((openMate f V adj adjV).app K) ∧ ((directImage (f ∣_ V)).map ((openMate f V adj adjV).app K) ≫ adjV.counit.app ((restriction Y V).obj K) = (openComparison f V).inv.app (a.obj K) ≫ (restriction Y V).map (adj.counit.app K)) ∧ (∀ b : (restriction X (f ⁻¹ᵁ V)).obj (a.obj K) ⟶ aV.obj ((restriction Y V).obj K), (directImage (f ∣_ V)).map b ≫ adjV.counit.app ((restriction Y V).obj K) = (openComparison f V).inv.app (a.obj K) ≫ (restriction Y V).map (adj.counit.app K) → b = (openMate f V adj adjV).app K)",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Existence is exists_rightAdjoint; coherent_adjoint_locality states invertibility and unique counit normalization of the explicitly constructed openMate. The returned generic identity, pasting and transport statements were removed, together with the extra geometric coherence sentence, by the explicitly authorized stage-2 statement correction. No qcqs or Noetherian scheme hypothesis, flatness of f or uniform global lower bound is imposed. The existing interface nodes added to stmt_deps supply the exact restrictions, canonical sectionwise comparison and full-subcategory lifts."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c07f7548",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery after the 7c3dd H3 return takes the explicitly allowed §1(C) removal of the coherence sentence. The new statement is exactly the old one minus that sentence, old_statement equals live, the proof is unchanged, and the removal is source-based (0A9E/0A9P assert only invertibility of the counit mate). Citer audit: the sole citer by stmt/proof/uses parse is lem-sfb-relative-nodal-perfect-duality-trace; its steps 2/4/5 use retained existence/locality/counit and transport goes through coherent-right-adjoint-comparisons, so holds=true. Lean matches clause by clause: arbitrary S, flat lfp pX/pY, IsProper f, hf, V : Y.Opens with f ∣_ V, arbitrary adj/adjV, pointwise local lower bound hK; conclusions IsIso of openMate (mateEquiv of the canonical schemeMVOpenRestrictionComparison.inv, direction checked), the counit equation and uniqueness. Helpers have real data, theorems are sorry, docstrings carry source and blueprint, lean.statement is verbatim. Mechanical theorem-stmt_dep finding: the preserves-QCoh and open-restriction-QCoh theorems are the proof obligations of the ObjectProperty.lift defining the D_QCoh functors the statement needs, a genuine dependency on their conclusions (their modules hold no definitions), so PASS on that point. No compile (no file changed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q17 stage 2",
+  "old_statement": "Let $S$ be any scheme [def-pc-scheme], and let $X\\to S$ and $Y\\to S$ be flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $f:X\\to Y$ be a proper $S$-morphism [def-weil-proper-morphism]. On the full derived categories of modules with quasi-coherent cohomology [def-pc-derived-category], derived direct image [def-pc-derived-direct-image] has a right adjoint $f^!:D_{\\mathrm{QCoh}}(Y)\\to D_{\\mathrm{QCoh}}(X)$ with counit $\\varepsilon_f:Rf_*f^!\\to\\operatorname{id}$. If $j:V\\hookrightarrow Y$ is any open immersion [def-weil-open-immersion], put $U=f^{-1}V$, write $j_X:U\\hookrightarrow X$ and $f_V:U\\to V$, and choose the corresponding adjunction for $f_V$. For every locally bounded-below $K\\in D_{\\mathrm{QCoh}}(Y)$, the canonical mate\n$$j_X^*f^!K\\longrightarrow f_V^!(j^*K)$$\nis an isomorphism. Here locally bounded below means that each point has a neighbourhood on which $\\mathcal H^i(K)=0$ for all sufficiently negative $i$. The mate is the transpose under $Rf_{V,*}\\dashv f_V^!$ of the restriction of $\\varepsilon_{f,K}$, using the canonical identification $Rf_{V,*}j_X^*\\simeq j^*Rf_*$. Thus this isomorphism identifies the restricted counit with $\\varepsilon_{f_V,j^*K}$. These canonical identifications respect identity opens, successive restrictions and isomorphisms of the $S$-diagram. No quasi-compactness or quasi-separatedness of $S,X,Y$, no Noetherian hypothesis, and no flatness of $f$ are assumed.",
+  "what": "Repair of independent stage-2 return H3 at 7c3dd5874d96, using its explicitly permitted sentence-removal alternative. The extra coherence sentence left the geometric identity, successive-open and scheme-diagram comparison cocycles unspecified. The three previous categorical mate identities did not type those geometric laws on openMate itself. Remove exactly that sentence and those three inadequate declarations, retaining the source locality assertion, the canonical mate, its counit equation, and uniqueness. No counterexample to geometric coherence is asserted. This supporting node is not the blueprint unit statement.",
+  "source": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Tags 0A9E (lemma-twisted-inverse-image) and 0A9P (lemma-proper-noetherian, including the proper pseudo-coherent/Kiehl footnote), equation-sheafy and lemma-when-sheafy: the source locality assertion is invertibility of the specified counit-defined open mate on bounded-below inputs. The arbitrary-scheme extension in the existing node is retained; the additional package of identity, successive-open and scheme-diagram coherence laws is omitted as explicitly allowed by the independent stage-2 return H3."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-relative-nodal-perfect-duality-trace",
+    "holds": true,
+    "note": "Steps 2, 4 and 5 use retained existence, locality and counit normalization; composition of adjoints and isomorphism transport have separate cited comparison lemmas, and steps 6-11 use separate base-change pasting lemmas."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-weil-flat-morphism",
+   "def-sbc-locally-finite-presentation",
+   "def-weil-proper-morphism",
+   "def-pc-derived-category",
+   "def-pc-derived-direct-image",
+   "def-weil-open-immersion"
+  ]
+ }
+}

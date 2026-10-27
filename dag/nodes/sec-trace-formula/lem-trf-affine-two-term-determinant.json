@@ -13,74 +13,109 @@
  ],
  "proof": [
   {
-   "text": "Work first over a commutative ring $A$ with good complexes $P=[P^{-1}\\to P^0]$ of finite projective modules. Set $D(P)=\\det_A(P^0)\\otimes\\det_A(P^{-1})^\\vee$ as in [lem-trf-surjective-two-term-determinant-calculus]. It is invertible: on the finite free localizations of [lem-weil-pbc-finite-projective-standard-free-cover], wedge products of bases identify each top exterior power with $A$ (also for rank zero). Good complexes are bounded above with projective terms, so [lem-sc-bounded-above-projective-kprojective] and [lem-coef-kprojective-derived-hom-bijection] identify their derived morphisms with chain maps modulo homotopy. In particular a derived isomorphism is represented by a quasi-isomorphism $a:P\\to Q$ and has a chain-map inverse up to homotopy. The surjective case already has the explicit map $T_a$ of the new calculus lemma.",
+   "text": "On $\\operatorname{Spec}A$, the Tor-window and affine-preimage lemmas give a pseudo-coherent preimage $C$. The tensor/tilde and homology comparisons reflect the given Tor interval $[-1,0]$ (the affine tilde unit is invertible). The projective-window lemma gives a good model $P$. Set $D(P)=\\det P^0\\otimes(\\det P^{-1})^\\vee$, invertible by the projective determinant lemma. K-projective Hom identifies derived isomorphisms and their inverses with homotopy classes of quasi-isomorphisms.",
    "uses": [
-    "lem-trf-surjective-two-term-determinant-calculus",
-    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-trf-two-term-perfect-tor-window",
+    "lem-sc-perfect-qcoherent",
+    "lem-pc-perfect-affine-module-preimage",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "new-affine-derived-tilde-homology-comparison",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-trf-pseudo-coherent-tor-projective-window",
+    "lem-trf-projective-determinant-exact-sequence",
     "lem-sc-bounded-above-projective-kprojective",
     "lem-coef-kprojective-derived-hom-bijection"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM, good models; Tag 0658"
+   }
   },
   {
-   "text": "For an arbitrary quasi-isomorphism $a:P\\to Q$, choose a finite free module $F$ and a surjection $p:F\\to Q^{-1}$. Let $M=[P^{-1}\\oplus F\\xrightarrow{d_P\\oplus1}P^0\\oplus F]$, let $b:M\\to P$ be projection, and put $c^{-1}=(a^{-1},p)$ and $c^0=(a^0,d_Qp)$. Then $c$ is a chain map homotopic to $ab$ by $h(x,f)=p(f)$ in degree zero. The kernel of $b$ is $[F\\xrightarrow{1}F]$, so $b$ and $c$ are quasi-isomorphisms. The map $c^{-1}$ is surjective. Given $y\\in Q^0$, surjectivity of $H^0(a)$ writes $y=a^0(x)+d_Q(z)$; lift $z$ through $p$ to see that $c^0$ is surjective. Hence both $b,c$ qualify for [lem-trf-surjective-two-term-determinant-calculus]. For any such good diagram (allowing $c\\simeq ab$) define its proposed map to be $T_cT_b^{-1}:D(P)\\to D(Q)$.",
+   "text": "Choose a good diagram and set $D(a)=T_cT_b^{-1}$. Fibre-product composition gives $T_{c_{12}}T_r=T_{b_{23}}T_s$ by the surjective calculus, so the proposed maps multiply. A diagram for the identity has homotopic legs and map $1$. Compose any diagram for $a$ with one fixed diagram for its homotopy inverse: their composite is $1$, proving diagram independence. Homotopic $a$ share diagrams. Thus $D$ is functorial; transport along chosen model identifications $e_L:QP_L\\cong L$ by $u\\mapsto D(e_M^{-1}ue_L)$.",
    "uses": [
-    "lem-trf-surjective-two-term-determinant-calculus"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a good diagram for $1_P$, its two legs are homotopic, and the homotopy clause of [lem-trf-surjective-two-term-determinant-calculus] makes $T_cT_b^{-1}=1$. Next take good diagrams $(b_{12},c_{12})$ for $a:P_1\\to P_2$ and $(b_{23},c_{23})$ for $a':P_2\\to P_3$. Form the degreewise fibre product $N=M_{12}\\times_{P_2}M_{23}$, along $c_{12},b_{23}$, with projections $r,s$. Each projection is surjective; its kernel is the kernel complex of the other surjective leg, hence has an isomorphism as differential. The exact sequence on terms splits since the quotient terms are projective, so $N$ has finite projective terms. The projections are quasi-isomorphisms: a cycle lifts after correcting its differential using the acyclic kernel, and a lift of a boundary differs from a boundary by a kernel cycle, which is a kernel boundary. Thus $(b_{12}r,c_{23}s)$ is a good diagram for $a'a$. The equality $c_{12}r=b_{23}s$ and the composition clause of the calculus lemma give $T_{c_{12}}T_r=T_{b_{23}}T_s$. Rearranging yields $T_{c_{23}s}T_{b_{12}r}^{-1}=(T_{c_{23}}T_{b_{23}}^{-1})(T_{c_{12}}T_{b_{12}}^{-1})$.",
-   "uses": [
-    "lem-trf-surjective-two-term-determinant-calculus"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Fix a homotopy inverse $a':Q\\to P$ of $a$ from [lem-coef-kprojective-derived-hom-bijection] and fix one good diagram for $a'$. Compose it with any good diagram for $a$ using the preceding fibre product. Since $a'a\\simeq1_P$, the resulting legs are homotopic; step 4 makes its map the identity. Thus every proposed map for $a$ equals the inverse of the fixed map for $a'$, proving independence of good diagram. A good diagram for $a$ is also one for any homotopic representative, so the map depends only on the derived morphism. Step 4 now proves the composition law, and its identity calculation proves the identity law. Transport along identifications of a model with a derived object gives the determinant functor and its canonical comparisons between models: the comparison for a composite identification is the composite comparison, by this same law.",
-   "uses": [
-    "lem-coef-kprojective-derived-hom-bijection",
-    "lem-trf-surjective-two-term-determinant-calculus"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a ring map $A\\to B$, the map $B\\otimes_A\\bigwedge^r V\\to\\bigwedge^r(B\\otimes_A V)$ sends $b\\otimes(v_1\\wedge\\cdots\\wedge v_r)$ to $b((1\\otimes v_1)\\wedge\\cdots\\wedge(1\\otimes v_r))$. It is an isomorphism for finite projective $V$: check on the free localizations of [lem-weil-pbc-finite-projective-standard-free-cover], where basis wedges give its inverse. Likewise $B\\otimes_A V^\\vee\\cong(B\\otimes_A V)^\\vee$ is checked on a finite basis. These formulas give $B\\otimes_A D(P)\\cong D(B\\otimes_A P)$. A surjective good map has split exact term sequences and kernel differential an isomorphism, so tensoring preserves its defining kernel sequences and quasi-isomorphism. The wedge-lift maps $\\gamma^i$ and $\\delta_N=\\det(d_N)$ in [lem-trf-surjective-two-term-determinant-calculus] commute with this scalar extension, directly by their displayed wedge formulas. Consequently $T_a$ commutes with scalar extension for surjective maps, and $T_cT_b^{-1}$ does so for all good diagrams. Identities and iterated scalar extension agree because both maps send a pure wedge tensor to the same wedge tensor. This also proves naturality in derived isomorphisms. No flatness of $A\\to B$ is required.",
-   "uses": [
+    "lem-trf-good-two-term-surjective-diagrams",
     "lem-trf-surjective-two-term-determinant-calculus",
-    "lem-weil-pbc-finite-projective-standard-free-cover"
+    "lem-coef-kprojective-derived-hom-bijection"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJM, good diagrams, composition, independence"
+   }
   },
   {
-   "text": "The preceding scalar-extension formula computes derived extension of scalars on good complexes. Indeed a finite projective module is flat: tensoring with it is a direct summand of tensoring with a finite free module, so preserves exactness. By [lem-pc-module-bounded-flat-kflat], a good complex is K-flat, hence ordinary tensor computes its derived tensor. In the special model $P=[V\\xrightarrow{1}V]$, apply the surjective-map construction of [lem-trf-surjective-two-term-determinant-calculus] to $P\\to0$. Its kernel is $P$, $\\delta_P=\\det(1_V)$, and the short-exact-sequence maps for quotient zero are identities. Thus $D(P)\\to A$ takes $\\det(1_V)$ to $1$. Under the ordinary symmetry identifying $D(P)$ with $(\\det V)^\\vee\\otimes\\det V$, this is exactly evaluation. This includes $V=0$.",
+   "text": "For $A\\to B$: a surjective quasi-isomorphism $a$ of good complexes has split exact term sequences and kernel $N$ with $d_N$ invertible, so $B\\otimes_A a$ is again one with kernel $B\\otimes_AN$; homotopies tensor, so good diagrams go to good diagrams. The exterior/dual scalar comparisons commute with $\\gamma^i$ and $\\det(d_N)$, hence with $T_a$ and both legs of every good diagram. They give a natural $s:B\\otimes D(P)\\cong D(B\\otimes P)$. Good models are K-flat; sheafify $s$ and follow it by the model comparison for $e_g=Lg^*(e_L)\\varepsilon_g^{-1}$ to define pullbackIso. The fixed coherence identifies successive counits with the section tensor comparison. Thus its composition equation is the scalar associativity equation; its left unit law at the identity gives the scalar unit equation.",
    "uses": [
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "lem-trf-surjective-two-term-determinant-calculus",
     "lem-pc-module-bounded-flat-kflat",
-    "lem-trf-surjective-two-term-determinant-calculus"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the affine module construction through the affine derived equivalence and the affine tensor comparison. For a model on an arbitrary scheme, pull its terms to an affine test scheme; the pure-wedge scalar-extension formulas give the local_modelIso family. Iteration proves local_model_naturality. The rank-zero formulas give local_zeroIso and its naturality. The actual acyclic identity complex is zero in the derived category, and the contraction calculation on every affine test scheme proves local_acyclic.",
-   "uses": [
     "lem-pc-affine-qcoh-derived-equivalence",
     "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-trf-two-term-perfect-tor-window"
+    "lem-pc-recorded-pullback-composition",
+    "lem-trf-two-term-determinant-pullback-coherence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "perfect.tex Tag 0FJY, scalar extension and normalized comparisons"
+   }
+  },
+  {
+   "text": "For a displayed $P$ on any $X$ and affine $f:Y\\to X$, let $P_f=\\Gamma(Y,f^*P)$: its terms are finite projective, and the affine tilde counit reconstructs $f^*P$. Put $j_f:Q(f^*P)\\cong Lf^*QP$ equal to the inverse K-flat counit. Define local_modelIso by the sheafified wedge/dual scalar map followed by $D(j_f)$ and the chosen-model comparison. Local free frames define the wedge sheaf maps. For further $h$, their scalar associativity and the normalized equation for $\\kappa_{h,f},j_f,j_h$ give local_model_naturality. Apply the same formula to the zero model for local_zeroIso and its naturality.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-finite-flat-affine-sections-projective",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-flat-complex-derived-pullback",
+    "def-sc-sheaf-exterior-power",
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "lem-trf-two-term-determinant-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "perfect.tex Tag 0FJY, displayed models and zero"
+   }
+  },
+  {
+   "text": "Choose the single global $z:Q[E\\xrightarrow1E]\\cong0$ induced by projection; its kernel and cokernel cohomology vanish. On every affine test scheme the counits identify its pullback with that projection. The surjective calculus contracts by $\\delta=\\det(1_E)$, giving evaluation (ordinary symmetry puts it in the required dual-first order). The scalar comparison preserves evaluation, so this proves local_acyclic for that same $z$, including rank zero. These are all fields of the affine interface.",
+   "uses": [
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-projective-exterior-scalar-comparisons",
+    "def-trf-affine-determinant-interfaces"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJI, acyclic identity complex; perfect.tex Tag 0FJY"
+   }
   }
  ],
  "proof_deps": [
-  "lem-trf-surjective-two-term-determinant-calculus",
-  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-trf-two-term-perfect-tor-window",
+  "lem-sc-perfect-qcoherent",
+  "lem-pc-perfect-affine-module-preimage",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-trf-pseudo-coherent-tor-projective-window",
+  "lem-trf-projective-determinant-exact-sequence",
   "lem-sc-bounded-above-projective-kprojective",
   "lem-coef-kprojective-derived-hom-bijection",
+  "lem-trf-good-two-term-surjective-diagrams",
+  "lem-trf-surjective-two-term-determinant-calculus",
+  "lem-trf-projective-exterior-scalar-comparisons",
   "lem-pc-module-bounded-flat-kflat",
   "lem-pc-affine-qcoh-derived-equivalence",
-  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-recorded-pullback-composition",
+  "lem-trf-two-term-determinant-pullback-coherence",
+  "def-pc-module-pullback",
+  "lem-pc-finite-flat-affine-sections-projective",
   "lem-pc-flat-complex-derived-pullback",
-  "lem-trf-two-term-perfect-tor-window"
+  "def-sc-sheaf-exterior-power",
+  "def-trf-affine-determinant-interfaces"
  ],
  "proof_origin": {
   "by": "document",
@@ -115,13 +150,76 @@
    "results": "Eight hits: LinearMap.det, IsBaseChange.det_endHom, LinearEquiv.det_baseChange, LinearMap.det_baseChange and related scalar determinants. These are endomorphism determinants, not determinant lines of complexes or compatible gluing data. The queried theorem types do not provide the required construction.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "determinant functor on two term complexes of finite projective modules compatible with extension of scalars",
+   "results": "8 hits: LinearEquiv.det_baseChange, IsBaseChange.det_endHom, LinearMap.det_baseChange, LinearMap.detAux, LinearMap.detAux_def, LinearMap.det, LinearEquiv.det, LinearMap.coe_det. Read the returned signatures: these supply scalar endomorphism determinants, K-projective Hom, or projective resolutions, not the determinant functor and its compatible affine families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "determinantFunctor|determinantLine|determinant.*[Cc]omplex",
+   "results": "2 hits: Mathlib/LinearAlgebra/Complex/Determinant.lean, Mathlib/LinearAlgebra/Complex/Determinant.lean. Read the returned signatures: these supply scalar endomorphism determinants, K-projective Hom, or projective resolutions, not the determinant functor and its compatible affine families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "determinant line functor of perfect complexes with Tor amplitude in degrees minus one and zero",
+   "results": "8 hits: LinearMap.det, Matrix.GeneralLinearGroup.map_det, LinearEquiv.det, LinearMap.det_dualMap, Rep.Tor, LinearMap.associated_det_comp_equiv, LinearMap.coe_det, LinearMap.det_def. Read the returned signatures: these supply scalar endomorphism determinants, K-projective Hom, or projective resolutions, not the determinant functor and its compatible affine families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"determinant\", \"Complex\"",
+   "results": "0 hits: . Read the returned signatures: these supply scalar endomorphism determinants, K-projective Hom, or projective resolutions, not the determinant functor and its compatible affine families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|torAmplitude|finite.*projective.*[Cc]omplex|[Pp]erfect[Cc]omplex",
+   "results": "0 hits: . Read the returned signatures: these supply scalar endomorphism determinants, K-projective Hom, or projective resolutions, not the determinant functor and its compatible affine families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertible determinant module associated to a quasi isomorphism of two term projective complexes",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.quasiIso, CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ', CochainComplex.IsKProjective.Qh_map_bijective, DerivedCategory.isIso_Q_map_iff_quasiIso, CochainComplex.isKProjective_iff_of_iso, HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso, CochainComplex.isKProjective_of_iso, CochainComplex.cm5b.instQuasiIsoIntP. Read the returned signatures: these supply scalar endomorphism determinants, K-projective Hom, or projective resolutions, not the determinant functor and its compatible affine families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complex with Tor amplitude in a finite interval has a finite projective complex representative concentrated in the same interval",
+   "results": "8 hits: CochainComplex.IsKProjective, CochainComplex.isKProjective_of_projective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.HasProjectiveDimensionLE, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex. Read the returned signatures: these supply scalar endomorphism determinants, K-projective Hom, or projective resolutions, not the determinant functor and its compatible affine families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "det_baseChange|det_endHom",
+   "results": "7 hits: Mathlib/RingTheory/TensorProduct/IsBaseChangeHom.lean, Mathlib/LinearAlgebra/SpecialLinearGroup.lean, Mathlib/LinearAlgebra/Charpoly/BaseChange.lean, Mathlib/LinearAlgebra/Charpoly/BaseChange.lean, Mathlib/LinearAlgebra/Charpoly/BaseChange.lean, Mathlib/LinearAlgebra/Transvection/Basic.lean, Mathlib/LinearAlgebra/Transvection/Basic.lean. Read the returned signatures: these supply scalar endomorphism determinants, K-projective Hom, or projective resolutions, not the determinant functor and its compatible affine families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"det\", \"quasiIso\"",
+   "results": "0 hits: . Read the returned signatures: these supply scalar endomorphism determinants, K-projective Hom, or projective resolutions, not the determinant functor and its compatible affine families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
  "status": "split",
  "created": {
   "by": "worker",
-  "item": "Sheaf.TraceFormula.TwoTermPerfectDeterminant",
+  "item": "lem-trf-two-term-perfect-determinant",
   "date": "2026-10-21",
   "group": "G2"
  },
@@ -162,14 +260,12 @@
   "date": "2026-10-21"
  },
  "reviewed": {
-  "date": "2026-10-20",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "C-ee750",
-  "group": "G2",
+  "reviewer": "NT-cc-Q06-73e59100e",
+  "group": "Q06",
   "result": "pass",
-  "landing": "20261020T233143-L-899803",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-73e59100e (reviewer sub-agent of L); spot-checked: Re-delivery of the S1 re-split (note released 2026-10-22, keep_plan; base proof 7 steps, 6050 characters). Base item in live and side-live is unchanged and the 3 new ids are absent from both, so the delivery is not superseded. Item and new nodes are byte-identical to head e3c09861075f (FIX), apart from split_report, so that run's step-3 fix was lost. Step by step against the base: step 2 of the base (M, b, c, h(x,f)=p(f), c^0 surjective) and the fibre-product half of step 3 are now lem-trf-good-two-term-surjective-diagrams. I re-read 0FJM at more-algebra.tex l.37124 and checked the chain-map and homotopy identities, the fibre-product kernels with invertible differential, and the composite c23 s ≃ a'a b12 r. The module algebra of base step 5 is now lem-trf-projective-exterior-scalar-comparisons, checked for non-flat B, variable rank, V=0 and kernel-first γ. The new lem-trf-pseudo-coherent-tor-projective-window is the final clause of Stacks 0658 (l.18889, re-read); it supplies the global affine model that the base assumed. Step 1 reflects the [-1,0] Tor window through tensor-tilde (3), the homology comparison and the invertible unit τ. Independence (fixed diagram of the homotopy inverse), K-flatness, the j_f/κ local families and the single global z for local_acyclic stay in the item as assembly. No duplicates found (rg 0658/0FJM/good diagram/exterior scalar; ring-pseudo-coherent-finite-tor-perfect, bounded-finite-tor-perfect, site-perfect-tor-window, sifted-good-diagram-calculus, koszul-base-change-iso, flat-lci-presentation-base-change all differ). No SGA. Batch-5 flags: the item enters batch 5 directly via the non-trf lem-sfb-adjunction-cotangent-determinant-normalization. Closure of each flagged node: window 21 nodes, no trf/pod; diagrams 8 nodes, no trf/pod; scalar comparisons 197 nodes and the exact-sequence lemma 196, whose only trf nodes are def-trf-projective-determinant-module and the exact-sequence lemma itself. All are generic algebra (0658, 0FJM, 0FJB), not trace-formula or Poincaré steps, so accepted. The 12 declared tool_uses are generic affine/homological comparisons and are accepted. FIX: re-applied the earlier step-3 sentence: B⊗ of a surjective quasi-isomorphism of good complexes is again one (split term sequences, kernel B⊗N with d invertible), and homotopies, hence good diagrams, tensor. Without it, 'hence with T_a and both legs of every good diagram' has no support. Proof is now 2885 characters. Whole item in fixes/dag/nodes/sec-trace-formula/. Advisory: the step-4 sheaf-wedge identification is still brief, but no less than base step 7.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_proof": {
   "date": "2026-10-20",
@@ -181,5 +277,87 @@
   "kind": "interface",
   "note": "independent cc review: ee7502bc vs PASSed fbdc6cf3 (diff -r: only 5 Users rows added to G2-derived-tensor-vanishing-single-definition.md), delivery recompiled against live build, #print axioms of proved decls, all 13 direct importers of Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes compiled against the delivered .lbuild (10 pass, 3 quarantined fail identically on published build)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-two-term-determinant",
+  "worker": "stage1",
+  "summary": "Rebased the returned Q06 split onto the current live DAG for direct delivery and rechecked every cited statement and all 30 citation pairs. Retained three strictly smaller statement-only inputs: specified projective Tor-window representatives; surjective good-diagram existence and fibre-product composition; coherent exterior/dual scalar extension and its short-exact-sequence compatibility. The five-step assembly retains inverse-diagram independence, functor construction and affine and arbitrary-source interface maps. Statement and statement dependencies agree with current live; no changed cited statement requires a mathematical alteration.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Within the two-term determinant auxiliary: Affine two-term determinant functors from good diagrams.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-perfect-qcoherent",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-pc-perfect-affine-module-preimage",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "new-affine-derived-tilde-homology-comparison",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-sc-bounded-above-projective-kprojective",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-coef-kprojective-derived-hom-bijection",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-pc-recorded-pullback-composition",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-pc-finite-flat-affine-sections-projective",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "Generic affine or homological algebra comparison; used with its stated hypotheses, without replacing any step of the geometric unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-perfect-qcoherent",
+  "lem-pc-perfect-affine-module-preimage",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "new-affine-derived-tilde-homology-comparison",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-recorded-pullback-composition",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-pc-flat-complex-derived-pullback"
+ ]
 }

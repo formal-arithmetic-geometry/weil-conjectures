@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-normalized-algebra-weight-line-simple",
+ "kind": "statement",
+ "title": "A multiplicity-one torus weight vector generates a simple module for a normalized operator algebra",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme]. Let $V\\ne0$ be a finite-dimensional $k$-vector space with a rational representation $\\rho:G\\to\\operatorname{GL}(V)$, equivalently a coassociative counital coaction $c:V\\to V\\otimes_k k[G]$. Assume $V$ is simple as a rational $G$-module: the only subspaces $W$ with $c(W)\\subseteq W\\otimes_k k[G]$ are $0,V$. Let $T\\subseteq G$ be a split torus subgroup, meaning a closed subgroup isomorphic to $\\mathbf G_m^r$ for some $r\\ge0$. Let $A\\subseteq\\operatorname{End}_k(V)$ be a unital $k$-subalgebra. Assume it is normalized by $G$ scheme-theoretically: for every commutative $k$-algebra $R$ and $g\\in G(R)$, conjugation by $\\rho_R(g)$ carries $A\\otimes_kR$ onto itself inside $\\operatorname{End}_R(V\\otimes_kR)$. For a character $\\chi:T\\to\\mathbf G_m$, let $V_\\chi$ be the subspace of $w$ with $\\rho_R(t)(w\\otimes1)=\\chi_R(t)(w\\otimes1)$ for all $R$ and $t\\in T(R)$. If $\\dim_kV_\\chi=1$ and $0\\ne v\\in V_\\chi$, then $Av=\\{a(v):a\\in A\\}$ is a simple left $A$-module. Explicitly, $Av\\ne0$ and every $k$-linear subspace of $Av$ stable under every $a\\in A$ is either $0$ or $Av$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Agent formulation of the normalized-algebra variant of Clifford theory, Exercise 4-2 (printed p.97), combined with the Grassmannian construction in 7.29, torus weight decomposition in Theorem 12.12 (printed pp.234--235), and Borel fixed point Corollary 17.3 (printed p.353). This precise operator-algebra formulation is an agent lemma, not a verbatim theorem of Milne."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sfb-rational-highest-weight-data",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-natural-rational-representation-data",
+  "def-sfb-character-scalar-evaluation",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let $S\\subseteq V$ be the sum of all simple $A$-submodules. It is nonzero: among the nonzero $A$-stable subspaces choose one of least positive dimension; a nonzero proper submodule would have smaller dimension. For $g\\in G(k)$ and a simple $A$-submodule $U$, normalization gives $a\\rho(g)u=\\rho(g)(\\rho(g)^{-1}a\\rho(g))u$. Thus $\\rho(g)U$ is $A$-stable, and pulling its submodules back by $\\rho(g)^{-1}$ proves it is simple. Hence $\\rho(g)S=S$. Apply [lem-sfb-smooth-group-rational-point-subspace-test] to this subspace of the given finite-dimensional rational representation: $k$ is algebraically closed and $G$ is smooth affine of finite type. Therefore $S$ is a rational $G$-submodule (evaluate the all-algebras condition at the universal point to obtain $c(S)\\subseteq S\\otimes k[G]$). Simplicity of $V$ gives $S=V$.",
+   "uses": [
+    "lem-sfb-smooth-group-rational-point-subspace-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercise 4-2, printed p.97: operator-algebra socle argument; Corollaries 4.4--4.5 for rational-point detection."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-module-socle-complements] to the unital ring $A$ and its left module $V$: step 1 says precisely that the sum of its simple submodules is $V$. Hence every $A$-submodule has an $A$-stable complement. These additive $A$-submodules are $k$-linear because $A$ contains all scalar operators. Moreover, if $U\\subseteq M\\subseteq V$ are $A$-submodules and $V=U\\oplus D$, then $M=U\\oplus(M\\cap D)$: for $m=u+d\\in M$, $u\\in U\\subseteq M$ implies $d\\in M$. Thus every $A$-submodule of every $M\\subseteq V$ also has a complement inside $M$.",
+   "uses": [
+    "lem-sfb-module-socle-complements"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.17, printed p.90, and its general module criterion (Mathlib IsSemisimpleModule.of_sSup_simples_eq_top)."
+   }
+  },
+  {
+   "text": "For joint $A,T$-stable subspaces $U\\subseteq M\\subseteq V$, choose an $A$-linear retraction $p:M\\to U$ using step 2. Put $E=\\operatorname{Hom}_A(M,U)\\subseteq\\operatorname{Hom}_k(M,U)$, with rational $T$-action $(t\\cdot f)=\\rho_U(t)f\\rho_M(t)^{-1}$. This preserves $A$-linearity: if $b=\\rho_M(t)^{-1}a\\rho_M(t)$, then $(t\\cdot f)(am)=\\rho_U(t)f(b\\rho_M(t)^{-1}m)=a(t\\cdot f)(m)$. The same identities hold over every $k$-algebra; $E$ is the kernel of the finite linear equations $f(am)=af(m)$ for a basis of $A$, so base change preserves this description. Decompose $p=\\sum_\\psi p_\\psi$ by [lem-sfb-split-torus-representation-weight-decomposition] applied to the finite-dimensional rational $T$-module $E$. Restriction $E\\to\\operatorname{End}_A(U)$ is $T$-equivariant. Apply the same weight decomposition to its target: since $p|_U=1_U$ has trivial character, uniqueness of weight components gives $p_1|_U=1_U$. Thus $C=\\ker p_1$ is stable under both $A$ and $T$, and $M=U\\oplus C$, since $m=p_1(m)+(m-p_1(m))$ and $U\\cap C=0$.",
+   "uses": [
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.12(d), printed pp.234--235: take the trivial-character component of a retraction in the Hom representation. This is the explicit linear weight-projection argument, not an appeal to an uncited averaging theorem."
+   }
+  },
+  {
+   "text": "Induct on $\\dim_k M$ to decompose every joint $A,T$-stable subspace $M\\subseteq V$ into a finite direct sum of joint stable simple $A$-submodules. For $M=0$ use the empty sum. Otherwise let $B$ be the image of $A$ in $\\operatorname{End}_k(M)$. It is unital and is normalized by $T$ over every $k$-algebra, by restriction of the given conjugation identity; taking this image commutes with scalar extension over the field $k$. Apply [lem-sfb-torus-normalized-simple-submodule] to $M,B,T$ to obtain a nonzero joint stable $U\\subseteq M$ simple over $B$, equivalently over $A$. Step 3 gives a joint stable complement $C$ in $M$. Since $U\\ne0$, $\\dim C<\\dim M$, so the induction hypothesis decomposes $C$. Adjoining $U$ proves the inductive claim. At $M=V$ this gives $V=\\bigoplus_{i=1}^n U_i$ with every $U_i$ simple over $A$ and $T$-stable.",
+   "uses": [
+    "lem-sfb-torus-normalized-simple-submodule"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 7.29--7.30 and Corollary 17.3 through the torus-stable simple-submodule auxiliary; induction using the weight projection in Theorem 12.12."
+   }
+  },
+  {
+   "text": "Write $v=\\sum_i v_i$ in the decomposition of step 4. Each projection $V\\to U_i$ commutes with $T$ over every $k$-algebra, so $\\rho_R(t)(v_i\\otimes1)=\\chi_R(t)(v_i\\otimes1)$ and $v_i\\in V_\\chi$. Nonzero vectors from distinct summands are linearly independent, while $\\dim_k V_\\chi=1$. Exactly one $v_i$ is nonzero, and therefore $v\\in U_i$. The subspace $Av$ is nonzero since $1\\in A$, is $A$-stable, and lies in $U_i$. Simplicity gives $Av=U_i$, hence every $A$-stable subspace of $Av$ is $0$ or $Av$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent assembly of the multiplicity-one conclusion from the T-stable simple summands; Theorem 12.12 supplies the notion of character subspaces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-group-rational-point-subspace-test",
+  "lem-sfb-module-socle-complements",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-torus-normalized-simple-submodule"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Operator-algebra variant of Exercise 4-2 (p.97), with Propositions 4.17 and 7.29--7.30, Theorem 12.12 and Corollary 17.3. The Hom weight-projection and final multiplicity-one assembly are written out by Q03."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torus normalizes a finite dimensional operator algebra on an irreducible rational representation of a connected algebraic group; the algebra cyclic span of a multiplicity one torus weight vector is simple",
+   "results": "8 hits: FDRep.simple_iff_end_is_rank_one, FDRep.simple_iff_char_is_norm_one, FDRep.finrank_hom_simple_simple, RootPairing.isSimpleModule_weylGroupRootRep, Representation.IsIrreducible.toIsSimpleOrder, IsSimpleModule.finrank_eq_one_of_isMulCommutative, Representation.irreducible_iff_isSimpleModule_asModule, Representation.IsIrreducible",
+   "date": "2026-10-24",
+   "verdict": "no match: the semisimple-module hits assume semisimplicity, and IsIsotypic.submodule_linearEquiv_fun assumes an isotypic module. Neither gives semisimplicity from normalization by an irreducible rational group action or the multiplicity-one torus conclusion. FDRep scalar-endomorphism results concern different hypotheses and do not specialize in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSemisimpleModule, IsSimpleModule",
+   "results": "12 hits: instIsSemisimpleModuleOfIsSimpleModule, IsSemisimpleModule.exists_simple_submodule, IsSemisimpleModule.of_sSup_simples_eq_top, IsSemisimpleModule.sSup_simples_eq_top, sSup_simples_eq_top_iff_isSemisimpleModule, IsSemisimpleModule.sSup_simples_le, IsSemisimpleModule.eq_bot_or_exists_simple_le, IsSemisimpleModule.exists_sSupIndep_sSup_simples_eq_top",
+   "date": "2026-10-24",
+   "verdict": "no match: the semisimple-module hits assume semisimplicity, and IsIsotypic.submodule_linearEquiv_fun assumes an isotypic module. Neither gives semisimplicity from normalization by an irreducible rational group action or the multiplicity-one torus conclusion. FDRep scalar-endomorphism results concern different hypotheses and do not specialize in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "Clifford|clifford|normaliz|weight",
+   "results": "0 hits: . Search directory: Mathlib/RingTheory/SimpleModule",
+   "date": "2026-10-24",
+   "verdict": "no match: the semisimple-module hits assume semisimplicity, and IsIsotypic.submodule_linearEquiv_fun assumes an isotypic module. Neither gives semisimplicity from normalization by an irreducible rational group action or the multiplicity-one torus conclusion. FDRep scalar-endomorphism results concern different hypotheses and do not specialize in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an operator algebra normalized by a connected algebraic group acting irreducibly a vector in a one dimensional torus weight space generates a simple module over the algebra",
+   "results": "8 hits: LieModule.weightSpace, Representation.irreducible_iff_isSimpleModule_asModule, MonoidAlgebra.Submodule.instIsSemisimpleModule, LieModule.weightSpaceOfIsLieTower, RootPairing.isSimpleModule_weylGroupRootRep, IsSimpleModule.finrank_eq_one_of_isMulCommutative, RootPairing.isSimpleModule_weylGroupRootRep_iff, Representation.is_simple_module_iff_irreducible_ofModule",
+   "date": "2026-10-24",
+   "verdict": "no match: the semisimple-module hits assume semisimplicity, and IsIsotypic.submodule_linearEquiv_fun assumes an isotypic module. Neither gives semisimplicity from normalization by an irreducible rational group action or the multiplicity-one torus conclusion. FDRep scalar-endomorphism results concern different hypotheses and do not specialize in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clifford theory finite dimensional normalized associative subalgebra and multiplicity one weight space implies its cyclic submodule is simple",
+   "results": "8 hits: RootPairing.isSimpleModule_weylGroupRootRep, FDRep.simple_iff_end_is_rank_one, Representation.IsIrreducible.toIsSimpleOrder, IsIsotypic.submodule_linearEquiv_fun, Representation.is_simple_module_iff_irreducible_ofModule, FDRep.finrank_hom_simple_simple, FDRep.simple_iff_char_is_norm_one, Representation.irreducible_iff_isSimpleModule_asModule",
+   "date": "2026-10-24",
+   "verdict": "no match: the semisimple-module hits assume semisimplicity, and IsIsotypic.submodule_linearEquiv_fun assumes an isotypic module. Neither gives semisimplicity from normalization by an irreducible rational group action or the multiplicity-one torus conclusion. FDRep scalar-endomorphism results concern different hypotheses and do not specialize in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clifford theory normalized operator algebra irreducible rational algebraic group multiplicity one torus weight generates simple module",
+   "results": "8 hits: RootPairing.isSimpleModule_weylGroupRootRep, FDRep.simple_iff_char_is_norm_one, FDRep.simple_iff_end_is_rank_one, Representation.is_simple_module_iff_irreducible_ofModule, Rep.norm, Representation.irreducible_iff_isSimpleModule_asModule, FDRep.char_orthonormal, FDRep.finrank_hom_simple_simple",
+   "date": "2026-10-24",
+   "verdict": "no match: the normalized rational-group and multiplicity-one conclusion is absent; abstract simple/semisimple module and finite-group or Lie-theoretic results do not state it."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSemisimpleModule, IsSimpleModule",
+   "results": "12 hits: instIsSemisimpleModuleOfIsSimpleModule, IsSemisimpleModule.exists_simple_submodule, IsSemisimpleModule.of_sSup_simples_eq_top, IsSemisimpleModule.sSup_simples_eq_top, sSup_simples_eq_top_iff_isSemisimpleModule, IsSemisimpleModule.sSup_simples_le, IsSemisimpleModule.eq_bot_or_exists_simple_le, IsSemisimpleModule.exists_sSupIndep_sSup_simples_eq_top",
+   "date": "2026-10-24",
+   "verdict": "no match: the normalized rational-group and multiplicity-one conclusion is absent; abstract simple/semisimple module and finite-group or Lie-theoretic results do not state it."
+  },
+  {
+   "tool": "grep",
+   "query": "normaliz|Clifford|torus",
+   "results": "0 hits: ; directory Mathlib/RingTheory/SimpleModule",
+   "date": "2026-10-24",
+   "verdict": "no match: the normalized rational-group and multiplicity-one conclusion is absent; abstract simple/semisimple module and finite-group or Lie-theoretic results do not state it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A multiplicity one torus weight vector generates a simple module for an operator algebra normalized by an irreducible rational algebraic group",
+   "results": "8 hits: Representation.irreducible_iff_isSimpleModule_asModule, RootPairing.isSimpleModule_weylGroupRootRep, RootPairing.isSimpleModule_weylGroupRootRep_iff, IsSimpleModule.finrank_eq_one_of_isMulCommutative, simple_of_finrank_eq_one, Representation.is_simple_module_iff_irreducible_ofModule, MonoidAlgebra.Submodule.instIsSemisimpleModule, LieModule.Weight.mk.sizeOf_spec",
+   "date": "2026-10-24",
+   "verdict": "no match: the normalized rational-group and multiplicity-one conclusion is absent; abstract simple/semisimple module and finite-group or Lie-theoretic results do not state it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A one dimensional torus weight space in an irreducible algebraic group representation is cyclic simple for every normalized operator algebra",
+   "results": "8 hits: RootPairing.isSimpleModule_weylGroupRootRep, FDRep.simple_iff_end_is_rank_one, FDRep.simple_iff_char_is_norm_one, RootPairing.GeckConstruction.instIsIrreducible, LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero, RootPairing.isSimpleModule_weylGroupRootRep_iff, LieAlgebra.instNontrivialSubtypeMemLieSubmoduleLieSubalgebraGenWeightSpaceOfNatForall, RootPairing.isIrreducible_iff_invtRootSubmodule",
+   "date": "2026-10-24",
+   "verdict": "no match: the normalized rational-group and multiplicity-one conclusion is absent; abstract simple/semisimple module and finite-group or Lie-theoretic results do not state it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-restricted-module-infinitesimal-simplicity",
+  "date": "2026-10-24",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Section 22(e), statement 22.54, printed p.481, infinitesimally simple representations in characteristic p. The displayed coefficients there must be coefficients of fundamental weights, equivalently pairings with simple coroots, not coefficients of simple roots. See report.md Source error. Corroboration read online: J. C. Jantzen, Moment graphs and representations, Sem. Congres 24 (2010), sections 5.1--5.2, printed pp.302--303, Curtis theorem, https://math.au.dk/~jantzen/grnbl.pdf. Full book reference WANTED: Jantzen (2003), Part II, sections 3.14--3.15. Supporting input to infinitesimal simplicity: Agent formulation of the normalized-algebra variant of Clifford theory, Exercise 4-2 (printed p.97), combined with the Grassmannian construction in 7.29, torus weight decomposition in Theorem 12.12 (printed pp.234--235), and Borel fixed point Corollary 17.3 (printed p.353). This precise operator-algebra formulation is an agent lemma, not a verbatim theorem of Milne.",
+   "via": [
+    "lem-sfb-restricted-module-infinitesimal-simplicity",
+    "lem-sfb-restricted-frobenius-tensor-simplicity",
+    "lem-sfb-restricted-highest-weight-dimension-product",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normalized-algebra-weight-line-simple",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved the normalized socle equals V, invoked the exact Mathlib complement criterion, wrote the trivial-character projection of A-linear retractions explicitly, and inductively decomposed V into joint A,T-stable simple summands. Multiplicity one puts v in one summand. Added one statement-only geometric auxiliary and one Mathlib leaf. Checked all cited statements and degenerate and positive-characteristic cases.",
+  "blueprint": "The inherited ancestor is null (blueprint_refs.py ancestor confirms this broken ancestor chain); preserved it and the exact inherited place. This splits the normalized-algebra prerequisite of infinitesimal simplicity along the recorded ILO/de Jong/Haboush/Steinberg route. No same-statement blueprint node was found by Clifford, weight, Grassmannian, simple submodule, invariant complement, retraction and sum of simple searches.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-0513a8ddf",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-0513a8ddf (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full. The statement is unchanged against clones/live, where the item is still unsplit with no proof. There is no repair note and no SGA citation. The statement is true: it is Clifford theory for an algebra A that G normalizes. Step 1: the sum of simple A-submodules (the socle) is G(k)-stable. Through lem-sfb-smooth-group-rational-point-subspace-test (k algebraically closed, G smooth, affine, finite type) and the universal point it is G-stable, so it equals V. Step 2 is the exact Mathlib leaf IsSemisimpleModule.of_sSup_simples_eq_top, which I read at Basic.lean:200-202 with the class at lines 63-65, plus a correct restriction of complements to submodules M. Step 3: A-linearity of the twisted T-action on Hom_A(M,U) is verified. The weight-decomposition node gives the projection p_1 with p_1|_U = 1_U by uniqueness of components, and ker p_1 is stable under A and T. Step 4: the induction is set up correctly (B is the image of A; normalization and base change are justified), using the new unsplit node lem-sfb-torus-normalized-simple-submodule. That node is true and strictly smaller than the item: I tested r=0, upper-triangular B, k[N] with t N t^-1 = t^2 N, and positive characteristic, and the Borel fixed point route is sound. It is statement-only and self-contained. Step 5 is correctly elementary. I searched the DAG and found no duplicates; candidates read: simple-hyperplane-splitting-criterion, solvable-proper-fixed-point, solvable-torus-complements, lie-kolchin. The Milne places hold: Proposition 4.17 on p.90, Exercise 4-2, Corollary 17.3. Maintainer note: blueprint.from.node is null all along the via chain; this was inherited from the base and is not a fault of this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.NormalizedAlgebraWeightLineSimple",
+  "declaration": "AlgebraicGeometry.normalized_algebra_weight_line_simple",
+  "file": "lean/Sheaf/RepresentationTheory/NormalizedAlgebraWeightLineSimple.lean",
+  "statement": "theorem normalized_algebra_weight_line_simple (k : Type u) [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [Smooth G.X.hom] [ConnectedSpace G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (V : Type u) [AddCommGroup V] [Module k V] [FiniteDimensional k V] (ρ : RationalRepresentation.NaturalRepresentation (k := k) G.X.left V) (hsimple : RationalHighestWeight.IsSimple (G := G) (RationalRepresentation.genericCoaction (k := k) G.X.left V ρ)) (T : Grp (Over (Spec (.of k)))) (iT : T ⟶ G) [IsClosedSubgroupScheme iT.hom.hom] (r : ℕ) (hsplit : Nonempty (T ≅ MultiplicativeType.splitTorus k r)) (A : Subalgebra k (Module.End k V)) (hnormalized : ∀ (R : Type u) [CommRing R] [Algebra k R] (g : points G.X R), (Submodule.span R {f : Module.End R (R ⊗[k] V) | ∃ a : A, f = (a : Module.End k V).baseChange R}).map (ρ.action R g).conj.toLinearMap = Submodule.span R {f : Module.End R (R ⊗[k] V) | ∃ a : A, f = (a : Module.End k V).baseChange R}) (χ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative k)) (Wχ : Submodule k V) (hWχ : ∀ w : V, w ∈ Wχ ↔ ∀ (R : Type u) [CommRing R] [Algebra k R] (t : points T.X R), ρ.action R (t ≫ iT.hom.hom) (1 ⊗ₜ[k] w) = CentralTorusWeightBlocks.characterScalar χ R t • (1 ⊗ₜ[k] w)) (hdim : Module.finrank k Wχ = 1) (v : V) (hvχ : v ∈ Wχ) (hv : v ≠ 0) : A.toSubmodule.map (LinearMap.applyₗ v) ≠ ⊥ ∧ ∀ W : Submodule k V, W ≤ A.toSubmodule.map (LinearMap.applyₗ v) → (∀ (a : A) (w : V), w ∈ W → (a : Module.End k V) w ∈ W) → W = ⊥ ∨ W = A.toSubmodule.map (LinearMap.applyₗ v)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair of returned head 51a28d545474: the natural action/generic coaction and characterScalar are cited through definition nodes recording the unchanged existing declarations; the two theorem statement dependencies are removed. The Lean signature is unchanged and uses no conclusion of either theorem. The advisory definition citations are added. Normalization and the full all-algebras weight condition, exact Av image and both simplicity clauses are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b7cb726a2",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 51a28d545474. The Lean file is byte-identical to that version, whose mathematics was already found faithful; I re-checked it clause by clause and lean.statement matches the file verbatim. The item node changes only lean and stmt_deps. The two theorem stmt_deps (comodule dictionary, central-torus weight blocks) are replaced by two new existing:true definition nodes. def-sfb-natural-rational-representation-data owns NaturalRepresentation, genericPoint, coordinatePoint and genericCoaction; def-sfb-character-scalar-evaluation owns characterScalar. Both node statements match the live declarations exactly (Milne Remark 4.1 p.84; Ch.12), carry all required fields, and cite dependencies that all exist. No other definition node owns these declarations. The earlier advisory is addressed: def-sc-gm-ga, def-sc-group-scheme-subgroup, def-sbc-smooth-morphisms, def-weil-connected-scheme and def-weil-finite-type-morphism are now cited. Only sorry, docstrings present, no hollow defs. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,256 @@
+{
+ "id": "lem-sp-orientation-scalar-propagation",
+ "kind": "statement",
+ "title": "Scalar pasting propagates the unit orientation equation",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X\\xrightarrow fY\\xrightarrow gZ$ be smooth separated morphisms of pure relative dimensions $d,e\\geq0$ between separated finite-type $k$-schemes, and put $h=gf$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms].\n\nLet $A_0\\to A_1$ be a unital homomorphism of finite commutative rings killed by powers of $\\ell$. In the ordinary pro-etale constant-ring derived categories and their bounded constructible finite-Tor subcategories [det-sp-finite-general-ring], write $S_T=(-)\\otimes^L_{A_0}A_1$ [det-sp-scalar-extension-functor]. For $i=0,1$ and $u=f,g,h$ put $G_{u,i}=u^!_{A_i}$, $H_{u,i}K=u^*_{A_i}K(d_u)[2d_u]$ and $\\omega_{u,i}=G_{u,i}A_{i,\\mathrm{target}(u)}$, where $d_f=d,d_g=e,d_h=d+e$. Use derived operations and twists [def-weil-derived-pullback-tensor-hom, def-coefficient-twists-detailed]. Let $\\gamma_{u,i}:H_{u,i}\\simeq G_{u,i}$ be the diagonal purity family, $a_{u,i}:H_{u,i}A_i\\simeq\\omega_{u,i}$ its inverse orientation, and $t_{u,i}$ its tensor map [def-pur-smooth-purity-map, det-sp-finite-general-ring]. Write $c_i:G_{h,i}\\simeq G_{f,i}G_{g,i}$ and $r_u:S G_{u,0}\\simeq G_{u,1}S$ for the specified counit-normalized composition and exceptional coefficient maps [det-sp-composition-comparisons, det-sp-reduction-exceptional]. Put $\\rho_i=t_{f,i,\\omega_{g,i}}$.\n\nAfter the canonical scalar/pullback, twist and shift identifications, for every constructible finite-Tor $K$ over $A_0$ the scalar transport of the iterated purity map satisfies\n$$G_{f,1}(r_g(K))\\,r_f(G_{g,0}K)\\,S\\!\\left(\\gamma_{f,0}(G_{g,0}K)\\circ H_{f,0}(\\gamma_{g,0}(K))\\right)\n=\\gamma_{f,1}(G_{g,1}SK)\\circ H_{f,1}(\\gamma_{g,1}(SK)).$$\nIf the unit equation\n$$c_0(A_{0,Z})a_{h,0}=\\rho_0(f^*a_{g,0}\\otimes a_{f,0})$$\nholds, then the direct diagonal orientations at $A_1$ satisfy\n$$c_1(A_{1,Z})a_{h,1}=\\rho_1(f^*a_{g,1}\\otimes a_{f,1}).$$\nAll sources use the specified comparisons of [det-sp-reduction-exceptional]; no flatness or finite projective dimension of $A_1$ over $A_0$ is assumed. In particular this implication applies to $A_0=\\mathbf Z/\\ell^r$ and any finite commutative $A_1$ killed by $\\ell^r$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1), finite coefficient orientation identity: passage from prime-power coefficients to arbitrary admissible rings; former Step 8"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "det-sp-finite-general-ring",
+  "det-sp-scalar-extension-functor",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "def-pur-smooth-purity-map",
+  "det-sp-composition-comparisons",
+  "det-sp-reduction-exceptional",
+  "def-sp-composition-orientation-arrow-data",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-pur-finite-ring-section-data"
+ ],
+ "proof": [
+  {
+   "text": "All arguments below lie in the stated categories. Apply [lem-sp-composite-projection-coefficients] at each $A_i$: $G_{g,i}K$ and $\\omega_{g,i}$ are permitted inputs and the projections are natural, unital and associative. Its projections and counit-preserving compositor meet the hypotheses of [lem-sp-composite-tensor-transpose]. Consequently $t_{u,i,L}$ is natural in $L$ and $t_{u,i,1}$ is the unit identification; hence $\\gamma_{u,i}(1)=a_{u,i}$. By [det-sp-scalar-extension-functor](2), scalar extension preserves these constructible finite-Tor inputs without any flatness assumption.",
+   "uses": [
+    "lem-sp-composite-projection-coefficients",
+    "lem-sp-composite-tensor-transpose",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (2) and final paragraph: domains and natural, unital tensor maps"
+   }
+  },
+  {
+   "text": "Write $\\lambda_{u,M}:S H_{u,0}M\\simeq H_{u,1}SM$ for the canonical source comparison and $u_i:H_{h,i}1\\simeq H_{f,i}H_{g,i}1$ for the twisted pullback compositor. Their source compatibility is\n$$H_{f,1}(\\lambda_{g,1})\\lambda_{f,H_{g,0}1}S(u_0)=u_1\\lambda_{h,1}.$$\nHere every subscript $1$ used as an input denotes the coefficient unit, and $S1$ is identified with the new unit. For clarity this is the canonical tensor associativity square: after inverse image, each route sends a local tensor $((x\\otimes y)\\otimes z)\\otimes b$ to $x\\otimes y\\otimes z b$. The ringed derived monoidal comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] compute pullback composition on K-flat complexes; the scalar/tensor and composition chain equations of [lem-pur-cochain-pullback-tensor-coherence] give this equality before localization. All shifted Tate lines here are locally free and their scalar extensions are ordinary by [det-sp-scalar-extension-functor](3). Thus the same calculation applies to their positive tensor powers. The accumulated shifts are even, so their interchange has sign $+1$. This fixes the source identifications used below.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (1): canonical shifted Tate tensor splitting and its scalar identifications"
+   }
+  },
+  {
+   "text": "Apply [det-sp-reduction-compatibilities](3) separately to $u=f,g,h$. In our notation its purity equation is\n$$r_u(M)S(\\gamma_{u,0}(M))=\\gamma_{u,1}(SM)\\lambda_{u,M}.$$\nThese are the direct diagonal/DNC purity maps over arbitrary finite rings, not newly chosen orientations: that normalization and the specified counit-characterized $r_u$ are explicit in the cited statement. Its hypotheses allow exactly $A_0\\to A_1$ of the item.",
+   "uses": [
+    "det-sp-reduction-compatibilities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.md",
+    "place": "clause (3), purity scalar square"
+   }
+  },
+  {
+   "text": "Put $Q_i(K)=\\gamma_{f,i}(G_{g,i}K)H_{f,i}(\\gamma_{g,i}(K))$, $B_K=G_{f,1}(r_g(K))r_f(G_{g,0}K)$, and $A_K=H_{f,1}(\\lambda_{g,K})\\lambda_{f,H_{g,0}K}$. Successively use the square of Step 3 for $f$, naturality of $\\gamma_{f,1}$ at $r_g(K)$, naturality of $\\lambda_f$ at $\\gamma_{g,0}(K)$, and the square for $g$. This gives\n$$\\begin{aligned}B_KS(Q_0(K))\n&=G_{f,1}(r_g)\\gamma_{f,1}(SG_{g,0}K)\\lambda_{f,G_{g,0}K}S(H_{f,0}(\\gamma_{g,0}(K)))\\\\\n&=\\gamma_{f,1}(G_{g,1}SK)H_{f,1}(r_g S(\\gamma_{g,0}(K)))\\lambda_{f,H_{g,0}K}\\\\\n&=Q_1(SK)A_K.\\end{aligned}$$\nAfter the source identification $A_K$ this is the first displayed equality in the item. Naturality of $\\gamma$ is part of [det-sp-finite-general-ring](3), and the source square used is precisely Step 3.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "det-sp-reduction-compatibilities"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "final paragraph: naturality, applied to the two coefficient purity squares"
+   }
+  },
+  {
+   "text": "At $K=1$, Step 1 and the defining tensor expression for $\\gamma$ in [det-sp-finite-general-ring](3) give\n$$Q_i(1)u_i=t_{f,i,\\omega_{g,i}}(1\\otimes a_{f,i})(f^*a_{g,i}\\otimes1)=\\rho_i(f^*a_{g,i}\\otimes a_{f,i}).$$\nThis is just functoriality of the tensor product, keeping the $g$-line before the $f$-line. The assumed unit equation is therefore $c_0(1)a_{h,0}=Q_0(1)u_0$. Apply $S$ to this equality and postcompose with $B_1$. By [det-sp-composition-comparisons](2), $B_1S(c_0(1))=c_1(S1)r_h(1)$, with these actual counit-normalized compositors. Step 3 at $(h,1)$ identifies $r_h(1)S(a_{h,0})=a_{h,1}\\lambda_{h,1}$. Step 4 and the source equation in Step 2 identify the right side with $Q_1(1)u_1\\lambda_{h,1}$. Cancel the isomorphism $\\lambda_{h,1}$. Expanding $Q_1(1)u_1$ by the first equation gives exactly\n$$c_1(1)a_{h,1}=\\rho_1(f^*a_{g,1}\\otimes a_{f,1}).$$\nOnly functors applied to an equality and cancellation of an isomorphism were used; no faithfulness of scalar extension is required. The map $\\mathbf Z/\\ell^r\\to A_1$ is a particular unital map in the hypotheses, giving the final specialization.",
+   "uses": [
+    "det-sp-finite-general-ring",
+    "det-sp-composition-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+    "place": "proof (1): transport of the unit equation; final paragraph: expand purity as inverse orientation followed by tensor map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-composite-projection-coefficients",
+  "lem-sp-composite-tensor-transpose",
+  "det-sp-scalar-extension-functor",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "det-sp-reduction-compatibilities",
+  "det-sp-finite-general-ring",
+  "det-sp-composition-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.proof.md",
+  "place": "proof (1) and final paragraph, filled in by pasting the coefficient purity and compositor equations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient extension propagates composition of smooth orientations through counit normalized exceptional comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SmoothBumpCovering.comp_embeddingPiTangent_mfderiv\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For a smooth bump covering $ f $ on a manifold $ M $ modeled on $ \\\\mathbb{R}^\\\\iota \\\\times \\\\mathbb{R} $, the composition of the first projection $ \\\\mathbb{R}^\\\\iota \\\\times \\\\mathbb{R} \\\\to \\\\mathbb{R}^\\\\iot\"}\n  {\"name\": \"SingularManifold.map_comp\", \"module\": \"Mathlib/Geometry/Manifold/Bordism\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} {Z : Type u_3} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y]\\n  [inst_2 : TopologicalSpace Z] {k : WithTop ℕ∞} {E : Type u_4} {H : Type u_5} [inst_3 : NormedAddCommGroup E]\\n  [inst_4 : NormedSpace ℝ E] [inst_5 : FiniteDimensional ℝ E] [inst_6 : TopologicalS\", \"doc\": \"Given continuous functions $\\\\phi : X \\\\to Y$ and $\\\\psi : Y \\\\to Z$, and a singular manifold with corners structure $s$ on $X$, the composition of the pushforward structures induced by $\\\\phi$ followed by\"}\n  {\"name\": \"SingularManifold.map_f\", \"module\": \"Mathlib/Geometry/Manifold/Bordism\", \"type\": \"∀ {X : Type u_1} {Y : Type u_2} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {k : WithTop ℕ∞}\\n  {E : Type u_4} {H : Type u_5} [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace ℝ E]\\n  [inst_4 : FiniteDimensional ℝ E] [inst_5 : TopologicalSpace H] {I : ModelWithCorners ℝ E H}\\n  (s : S\", \"doc\": \"Given a singular manifold with corners $ s $ on a topological space $ X $, modeled on a finite-dimensional real normed vector space $ E $ with parameter $ k $ and model with corners $ I $, and a conti\"}\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent_coe\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"∀ {ι : Type uι} {E : Type uE} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {H : Type uH} [inst_3 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} {M : Type uM} [inst_4 : TopologicalSpace M]\\n  [inst_5 : ChartedSpace H M] [inst_6 : IsManifold I (↑⊤) M] \", \"doc\": \"For a finite-dimensional manifold $ M $ modeled on a normed vector space $ E $ over $ \\\\mathbb{R} $ with a model with corners $ I $, and a smooth bump covering $ f $, the embedding $ \\\\operatorname{embe\"}\n  {\"name\": \"SingularManifold.comap_f\", \"module\": \"Mathlib/Geometry/Manifold/Bordism\", \"type\": \"∀ {X : Type u_1} [inst : TopologicalSpace X] {k : WithTop ℕ∞} {E : Type u_4} {H : Type u_5} {M : Type u_6}\\n  [inst_1 : NormedAddCommGroup E] [inst_2 : NormedSpace ℝ E] [inst_3 : FiniteDimensional ℝ E]\\n  [inst_4 : TopologicalSpace H] {I : ModelWithCorners ℝ E H} [inst_5 : TopologicalSpace M] [inst_6 \", \"doc\": \"Given a singular manifold $ s $ with corners modeled on a finite-dimensional real normed vector space, an extended natural number $ k $, and a continuous map $ \\\\phi: M \\\\to s.M $, the underlying map of\"}\n  {\"name\": \"SmoothBumpCovering.embeddingPiTangent\", \"module\": \"Mathlib/Geometry/Manifold/WhitneyEmbedding\", \"type\": \"{ι : Type uι} →\\n  {E : Type uE} →\\n    [inst : NormedAddCommGroup E] →\\n      [inst_1 : NormedSpace ℝ E] →\\n        [inst_2 : FiniteDimensional ℝ E] →\\n          {H : Type uH} →\\n            [inst_3 : TopologicalSpace H] →\\n              {I : ModelWithCorners ℝ E H} →\\n                {M : Type uM} →\\n     \", \"doc\": \"For a finite-dimensional manifold $ M $ modeled on a normed vector space $ E $ over $ \\\\mathbb{R} $ with a model with corners $ I $, and a smooth bump covering $ f $, this function defines a $ C^\\\\infty\"}\n  {\"name\": \"ModelWithCorners.coe_extChartAt_transContinuousLinearEquiv\", \"module\": \"Mathlib/Geometry/Manifold/Diffeomorph\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {E' : Type u_3} [inst_3 : NormedAddCommGroup E'] [inst_4 : NormedSpace 𝕜 E'] {H : Type u_5}\\n  [inst_5 : TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) {M : Type u_9} [ins\", \"doc\": \"For a manifold with corners modeled on a normed vector space $ E $, given a model with corners $ I $ and a continuous linear equivalence $ e $ between model spaces, the extended chart at any point $ x\"}\n  {\"name\": \"mfderivWithin_extChartAt_symm_comp_mfderiv_extChartAt'\", \"module\": \"Mathlib/Geometry/Manifold/MFDeriv/Atlas\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H} {M : Type u_4}\\n  [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] [IsManifold I 1 M] {x y\", \"doc\": \"For a point $ y $ in the domain of the extended chart at $ x $ on a manifold with corners, the composition of the Fréchet derivative of the inverse extended chart restricted to the image of the model \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Adjunction.comp",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "orientation.*[Ss]calar|[Pp]urity.*[Cc]oefficient.*comp|[Ss]calar.*[Oo]rientation",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"120\", \"text\": \"/-- If `g` is a non-scalar orientation preserving matrix with a fixed point in `ℍ`,\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport the composition identity of purity at the coefficient unit through a nonflat finite ring extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Flat.stableUnderComposition\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": StableUnderComposition Flat\", \"doc\": \"If $ f : R \\\\to S $ and $ g : S \\\\to T $ are flat ring homomorphisms between commutative rings, then their composition $ g \\\\circ f : R \\\\to T $ is also a flat ring homomorphism.\"}\n  {\"name\": \"RingHom.Flat.containsIdentities\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": ContainsIdentities Flat\", \"doc\": \"For every commutative ring $ R $, the identity ring homomorphism $ \\\\id_R : R \\\\to R $ satisfies the flatness property. This means that $ R $ is a flat $ R $-module under the identity map's induced alge\"}\n  {\"name\": \"NonUnitalRingHom.comp_id\", \"module\": \"Mathlib.Algebra.Ring.Hom.Defs\", \"type\": \"(f : α →ₙ+* β) : f.comp (NonUnitalRingHom.id α) = f\", \"doc\": \"For any non-unital ring homomorphism $ f : \\\\alpha \\\\to \\\\beta $, composing $ f $ with the identity homomorphism on $ \\\\alpha $ results in $ f $, i.e., $ f \\\\circ \\\\text{id}_\\\\alpha = f $.\"}\n  {\"name\": \"ModuleCat.extendScalars_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \":\\n  (extendScalarsComp (RingHom.id R₁) f₁₂).hom ≫\\n      Functor.whiskerRight (extendScalarsId R₁).hom _ ≫ (Functor.leftUnitor _).hom =\\n    𝟙 _\", \"doc\": \"For any commutative ring $ R $ and ring homomorphism $ f : R \\to S $, the composition of the extension of scalars functor for the identity homomorphism $ \\text{id}_R $ followed by $ f $ is naturally iso\"}\n  {\"name\": \"RingHom.FaithfullyFlat.stableUnderComposition\", \"module\": \"Mathlib.RingTheory.RingHom.FaithfullyFlat\", \"type\": \": StableUnderComposition FaithfullyFlat\", \"doc\": \"The composition of two faithfully flat ring homomorphisms between commutative rings is again a faithfully flat ring homomorphism.\"}\n  {\"name\": \"NonUnitalRingHom.id_comp\", \"module\": \"Mathlib.Algebra.Ring.Hom.Defs\", \"type\": \"(f : α →ₙ+* β) : (NonUnitalRingHom.id β).comp f = f\", \"doc\": \"For any non-unital ring homomorphism $ f : \\\\alpha \\\\to \\\\beta $, the composition of the identity homomorphism on $ \\\\beta $ with $ f $ is equal to $ f $ itself, i.e., $ \\\\mathrm{id}_\\\\beta \\\\circ f = f $.\"}\n  {\"name\": \"PerfectRing.lift_comp_lift_eq_id\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \"[PerfectRing L p] : (lift j i p).comp (lift i j p) = RingHom.id L\", \"doc\": \"Given commutative rings $K, L, M$ with exponential characteristic $p$, where $M$ is a perfect ring and $i : K \\\\to L$ is $p$-radical, the composition of the unique ring homomorphism $L \\\\to M$ extending\"}\n  {\"name\": \"RingEquiv.coe_mulEquiv_trans\", \"module\": \"Mathlib.Algebra.Ring.Equiv\", \"type\": \"(e₁ : R ≃+* S) (e₂ : S ≃+* S') : (e₁.trans e₂ : R ≃* S') = (e₁ : R ≃* S).trans ↑e₂\", \"doc\": \"For ring equivalences $ e_1 : R \\\\simeq+* S $ and $ e_2 : S \\\\simeq+* S' $, the composition of $ e_1 $ and $ e_2 $ as multiplicative equivalences is equal to the composition of their coercions to multip\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the iterated purity morphism with derived change of coefficient rings and exceptional compositors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagramComp\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v v')} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        {E : Type v'} →\\n          [inst_2 : CategoryTheory.SmallCategory E] →\\n            (I' : CategoryTheory.Functor E D) →\\n              (I : CategoryTheory.Functor D (Ideal R)) \", \"doc\": \"For any natural number $i$, the local cohomology diagram of the composition of functors $I' \\\\circ I$ at level $i$ is naturally isomorphic to the composition of the opposite functor of $I'$ with the lo\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For smooth morphisms the scalar extension of an iterated purity transformation equals the iterated purity transformation after change of finite coefficient rings",
+   "results": "OK 8 hits; actual top results: RingHom.Smooth.isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange, Algebra.IsStandardSmooth.trans, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "OK 9 hits; actual top results: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*scalar|scalar.*purity|orientation.*coefficient",
+   "results": "OK 0 hits; actual top results: none. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth exceptional inverse image purity is compatible with arbitrary derived extension of finite coefficient rings",
+   "results": "OK 8 hits; actual top results: RingHom.Smooth, RingHom.FormallySmooth.respectsIso, RingHom.FormallySmooth.isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.Extension.formallySmooth_iff_split_injection, Algebra.Smooth.baseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|dualizing.*orientation",
+   "results": "OK 0 hits; actual top results: none. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal pasting of natural transformation coefficient comparison squares transports composition of orientations at the monoidal unit",
+   "results": "OK 8 hits; actual top results: Mathlib.Tactic.Monoidal.evalHorizontalComp_cons_nil, Mathlib.Tactic.Monoidal.evalHorizontalComp_nil_cons, Mathlib.Tactic.Monoidal.evalHorizontalComp_cons_cons, CategoryTheory.TwoSquare.hCompVCompHComp, CategoryTheory.CatCommSq.hComp, CategoryTheory.CatCommSq.hComp_iso_hom_app, CategoryTheory.TwoSquare.hComp_app, CategoryTheory.mateEquiv_hcomp. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-composition-factors",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-composition-factors",
+   "place": "proof (1), finite coefficient orientation identity: passage from prime-power coefficients to arbitrary admissible rings; former Step 8",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sp-orientation-scalar-propagation",
+  "worker": "stage1",
+  "summary": "Reuse the existing finite-ring purity scalar squares and counit-normalized compositor equation. Check domains, source rebracketing, tensor unit normalization, horizontal pasting, and transport of the assumed unit equality. No new nodes or statement changes.",
+  "blueprint": "Realizes det-sp-composition-factors proof (1), passage from prime-power coefficients to arbitrary finite rings, and its final paragraph expanding gamma via inverse orientation and tensor map.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic derived monoidal pullback composition and its normalized K-flat model type the canonical source comparisons; this does not replace the orientation-composition route."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic scalar/tensor/composition chain equations verify rebracketing of the source comparisons, independently of any orientation or composition-of-purity theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-95b70817a",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-95b70817a (reviewer sub-agent of L); spot-checked: I read the whole item. Statement and stmt_deps are unchanged against side-live, where the item is still unsplit; there is no repair note, no new node and no cycle, and proof_deps equals the union of the step uses. Step 1: lem-sp-composite-projection-coefficients puts G_gK, ω_g and W in Dctf with natural, unital, associative projections; lem-sp-composite-tensor-transpose gives t_{u,1} = unit identification, so γ(1) = a; scalar-extension-functor(2) preserves Tor intervals without flatness. Step 2: the source coherence H_f(λ_g)λ_f S(u_0) = u_1 λ_h follows from the ringed monoidal comparisons and the cochain scalar/composition chain equations, with locally free Tate lines and even shifts (sign +1). Step 3: det-sp-reduction-compatibilities(3) has exactly the item's hypotheses for u = f, g, h, its r_u is the det-sp-reduction-exceptional comparison and its γ is the det-sp-finite-general-ring family. Step 4: I recomputed the three-line pasting (Step 3 square for f, naturality of γ_f at r_g and of λ_f at γ_g, Step 3 square for g) and it gives Q_1(SK)A_K. Step 5: at K = 1, composition-comparisons(2) gives B_1 S(c_0) = c_1 r_h, Step 3 at h gives r_h S(a_h) = a_h λ_h, and cancelling the isomorphism λ_h gives the claim; S is never assumed faithful. Edge cases checked: identity map, Z/ℓ² → F_ℓ (nonflat), d or e = 0, zero ring, and the final Z/ℓ^r specialization. No duplicate: iterated-purity-scalar-pasting is the rational E ⊂ L case and orientation-scalar-tower-transport concerns base change. Route: the cited units sk-thm-smooth-purity and sk-lem-sp-reduction are on the unit's route; the two tool_uses (ringed derived monoidal comparisons, cochain pullback tensor coherence) are generic coherence tools and are accepted. Batch 5: det-sp-reduction-compatibilities reaches lem-trf-site-functorial-flat-resolution only through det-sp-scalar-extension-functor, which was already a stmt_dep of the item and of its parent; that node is the generic existence of functorial flat resolutions of module sheaves, not part of the trace formula or Poincaré duality, so no RETURN. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrientationScalarPropagation",
+  "declaration": "AlgebraicGeometry.ProEtale.SpOrientationScalarPropagation.orientationScalarPropagation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpOrientationScalarPropagation.iterated",
+   "AlgebraicGeometry.ProEtale.SpOrientationScalarPropagation.UnitEquation",
+   "AlgebraicGeometry.ProEtale.SpOrientationScalarPropagation.orientationScalarPropagation"
+  ],
+  "file": "lean/Sheaf/Paper/OrientationScalarPropagation.lean",
+  "statement": "theorem orientationScalarPropagation (D : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime] (hne : ell ≠ D.p) {X Y Z : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] [IsSeparated f] [IsSeparated g] [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)] [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (phi : A →+* B) (n : ℕ) (hn : 1 ≤ n) (hA : ((ell ^ n : ℕ) : A) = 0) (hB : ((ell ^ n : ℕ) : B) = 0) (geometryf : Etale.FiniteRingSectionDeformation.Geometry d (pullback.fst f f) (pullback.diagonal f)) (geometryg : Etale.FiniteRingSectionDeformation.Geometry e (pullback.fst g g) (pullback.diagonal g)) (geometryh : Etale.FiniteRingSectionDeformation.Geometry (d + e) (pullback.fst (f ≫ g) (f ≫ g)) (pullback.diagonal (f ≫ g))) (afA : Etale.dualizingComplex (ModuleCat.{u + 1} A) f ≅ line A (ell ^ n) hA X d) (_hfA : OrientationNormalized A (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA f d geometryf ((finiteGeneralRingPrimeSetting D ell hne n hn).diagonalExponent_isUnit (X ↘ Spec (.of D.k))) afA) (agA : Etale.dualizingComplex (ModuleCat.{u + 1} A) g ≅ line A (ell ^ n) hA Y e) (_hgA : OrientationNormalized A (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA g e geometryg ((finiteGeneralRingPrimeSetting D ell hne n hn).diagonalExponent_isUnit (Y ↘ Spec (.of D.k))) agA) (ahA : Etale.dualizingComplex (ModuleCat.{u + 1} A) (f ≫ g) ≅ line A (ell ^ n) hA X (d + e)) (_hhA : OrientationNormalized A (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA (f ≫ g) (d + e) geometryh ((finiteGeneralRingPrimeSetting D ell hne n hn).diagonalExponent_isUnit (X ↘ Spec (.of D.k))) ahA) (afB : Etale.dualizingComplex (ModuleCat.{u + 1} B) f ≅ line B (ell ^ n) hB X d) (_hfB : OrientationNormalized B (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hB f d geometryf ((finiteGeneralRingPrimeSetting D ell hne n hn).diagonalExponent_isUnit (X ↘ Spec (.of D.k))) afB) (agB : Etale.dualizingComplex (ModuleCat.{u + 1} B) g ≅ line B (ell ^ n) hB Y e) (_hgB : OrientationNormalized B (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hB g e geometryg ((finiteGeneralRingPrimeSetting D ell hne n hn).diagonalExponent_isUnit (Y ↘ Spec (.of D.k))) agB) (ahB : Etale.dualizingComplex (ModuleCat.{u + 1} B) (f ≫ g) ≅ line B (ell ^ n) hB X (d + e)) (_hhB : OrientationNormalized B (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hB (f ≫ g) (d + e) geometryh ((finiteGeneralRingPrimeSetting D ell hne n hn).diagonalExponent_isUnit (X ↘ Spec (.of D.k))) ahB) (eX : CoefficientLineComparison phi (ell ^ n) (ell ^ n) hA hB X) (eY : CoefficientLineComparison phi (ell ^ n) (ell ^ n) hA hB Y) : (∀ (K : proCategory A Z), IsCtf A Z K → (proScalar phi X).map (iterated A f g (line A (ell ^ n) hA X d) (line A (ell ^ n) hA Y e) afA agA K) ≫ proCoefficientMap phi f ((exceptional A g).obj K) ≫ (exceptional B f).map (proCoefficientMap phi g K) = proLambda f d eX ((proSource A g (line A (ell ^ n) hA Y e)).obj K) ≫ (proSource B f (line B (ell ^ n) hB X d)).map (proLambda g e eY K) ≫ iterated B f g (line B (ell ^ n) hB X d) (line B (ell ^ n) hB Y e) afB agB ((proScalar phi Z).obj K)) ∧ (UnitEquation A f g (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hA ((finiteGeneralRingPrimeSetting D ell hne n hn).diagonalExponent_isUnit (Y ↘ Spec (.of D.k))) d e afA agA ahA → UnitEquation B f g (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n) hB ((finiteGeneralRingPrimeSetting D ell hne n hn).diagonalExponent_isUnit (Y ↘ Spec (.of D.k))) d e afB agB ahB)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "The iterated equation is in the actual fixed-module pro-etale category, with both canonical lambda source factors explicit. The unit equations are mapped from the canonical ordinary-etale origin coordinates into the same pro-etale category, using the existing finiteCompositor, finiteRho and finiteLineSplit. The data-only owning node def-sp-composition-orientation-arrow-data is cited without using the downstream composition-factors theorem. Its owning module already contains the downstream theorem: the reverse proof import from that module to this one must be omitted to avoid a cycle (stage 2 rule 7). A common positive annihilating exponent and Noetherian/quasi-compact/compactification interface binders only expose data guaranteed by the standing finite-type setting. No flatness or finite projective dimension condition is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c710c02eb",
+  "group": "NC",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: arbitrary unital phi:A→+*B of finite rings with common ell^n (no flatness); orientations pinned by OrientationNormalized on the Geometry class; r_u=proCoefficientMap, source λ=proLambda with pinned CoefficientLineComparison; first conjunct ∀ IsCtf K: S(iterated_A)≫r_f≫G_f(r_g) = λ_f≫H_f(λ_g)≫iterated_B; second UnitEquation A→B with c(1)a_h = ρ(f*a_g⊗a_f), finiteCompositor/finiteRho/finiteLineSplit owned by existing:true def-sp-composition-orientation-arrow-data (reverse import omitted, NA c1c2 precedent); interface Prop binders derivable; lean.statement verbatim; statement/proof_deps unchanged; edge cases d=e=0, empty X, zero ring, nonflat Z/ℓ²→F_ℓ OK. Advisory: finiteGeneralRingPrimeSetting owner uncited, like the landed siblings. FIX: delivery carried H2's taken-out proof of SfP1ChartMapComposition (sorry again after batch take-out 3cba8a7, H2 claim) → fixes/SfP1ChartMapComposition.lean = live text byte-identical; report note appended. No compile needed (unchanged published file)."
+ }
+}

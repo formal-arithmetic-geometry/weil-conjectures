@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+ "kind": "statement",
+ "title": "Geometric-stalk test for Tor amplitude of an arbitrary ring sheaf on a space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$, with its small etale site [def-trf-algebraic-space]. Let $R$ be any sheaf of commutative rings on this site, not necessarily the structure sheaf, and $E\\in D(R)$, the unbounded derived category of $R$-module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Compute derived tensors by K-flat resolutions. For a geometric point $\\bar x:\\operatorname{Spec}\\Omega\\to X$, where $\\Omega$ is algebraically closed, let $R_{\\bar x}$ and $E_{\\bar x}$ be the stalk ring and termwise stalk complex, formed over pointed etale scheme neighbourhoods. Geometric stalk functors on $R$-module sheaves are exact and jointly detect zero objects. For integers $a\\le b$, the following conditions are equivalent: $H^i(E\\otimes_R^{\\mathbf L}M)=0$ for every $R$-module sheaf $M$ in degree zero and every $i\\notin[a,b]$; and $H^i(E_{\\bar x}\\otimes_{R_{\\bar x}}^{\\mathbf L}N)=0$ for every geometric point $\\bar x$, every $R_{\\bar x}$-module $N$ in degree zero, and every $i\\notin[a,b]$. This equivalence applies also after restriction to any etale scheme chart of $X$. No quasi-coherence, boundedness, Noetherian or quasi-compactness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), both clauses; enough geometric points and exactness from spaces-properties.tex Tag 04K5 (theorem-exactness-stalks), applied to underlying abelian sheaves."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "def-pc-kflat-complex",
+  "def-pc-module-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "For each $\\bar x$, realize its geometric stalk as the inverse image of the point $p_{\\bar x}$, and take its normalized ring/module presentation. The transported ring is exactly $R_{\\bar x}$ and the transported module is the pointed-neighbourhood stalk with its induced action, by the underlying-set identifications in the presentation. The module functor is exact. It jointly detects zero module sheaves: apply the conservative geometric-stalk theorem to the underlying set map $M\\to0$; an isomorphism there is a bijective module homomorphism, whose inverse is automatically linear. Thus a module sheaf is zero precisely when all its geometric stalks are zero.",
+   "uses": [
+    "lem-sfb-space-geometric-points-conservative",
+    "def-sfb-ringed-site-point",
+    "lem-sfb-ringed-site-point-exact",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), points in the proof; spaces-properties.tex Tags 04K0 (lemma-stalk-gives-point) and 04K5 (theorem-exactness-stalks)."
+   }
+  },
+  {
+   "text": "Assume the sheaf Tor condition. The ringed-site flat-model criterion supplies a representative $P\\simeq E$ with flat terms, zero outside $[a,b]$. The normalized point functor sends every term to a flat $R_{\\bar x}$-module. Exactness from step 1, and the exact-functor cohomology comparison, show that the localized complex $P_{\\bar x}$ represents $E_{\\bar x}$. It is bounded above and flat, hence is K-flat over the stalk ring. For any $R_{\\bar x}$-module $N$, the ordinary-module K-flat tensor computation identifies $E_{\\bar x}\\otimes^{\\mathbf L}_{R_{\\bar x}}N$ with the localization of $\\operatorname{Tot}(P_{\\bar x}\\otimes N[0])$. Its degree $i$ term is $P^i_{\\bar x}\\otimes N$, zero for $i\\notin[a,b]$, so its cohomology vanishes there. This tests every $N$, without assuming it is a stalk of a global sheaf.",
+   "uses": [
+    "lem-sp-ringed-site-tor-flat-model",
+    "lem-sfb-ringed-site-point-flat",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), forward implication via Tag 08H5 (lemma-tor-amplitude-pullback), expanded using Tag 08G1 (lemma-tor-amplitude); more-algebra.tex bounded-flat K-flat and derived tensor computation."
+   }
+  },
+  {
+   "text": "For the converse assume all the stalk Tor conditions, and fix an arbitrary $R$-module sheaf $M$. Choose flat-term K-flat resolutions $P\\to E$ (of a representative) and $Q\\to M[0]$. Their total tensor represents $E\\otimes_R^{\\mathbf L}M$. By the K-flat stalk theorem, $P_{\\bar x}$ and $Q_{\\bar x}$ are K-flat; their terms remain flat by the flat-stalk theorem. Step 1 and the exact-functor cohomology comparison show that they represent $E_{\\bar x}$ and $M_{\\bar x}[0]$. The signed total-tensor stalk comparison identifies $(\\operatorname{Tot}(P\\otimes_R Q))_{\\bar x}$ with $\\operatorname{Tot}(P_{\\bar x}\\otimes_{R_{\\bar x}}Q_{\\bar x})$. The ordinary-module K-flat tensor computation therefore gives a derived isomorphism $(E\\otimes_R^{\\mathbf L}M)_{\\bar x}\\simeq E_{\\bar x}\\otimes_{R_{\\bar x}}^{\\mathbf L}M_{\\bar x}$. Applying the exact-functor cohomology comparison gives $H^i(E\\otimes_R^{\\mathbf L}M)_{\\bar x}\\cong H^i(E_{\\bar x}\\otimes_{R_{\\bar x}}^{\\mathbf L}M_{\\bar x})$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sfb-ringed-site-kflat-stalk-criterion",
+    "lem-sfb-ringed-site-point-flat",
+    "lem-sfb-ringed-site-point-tensor",
+    "lem-pc-source-kflat-module-tensor-model",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), converse displayed equality; expanded with Tags 06YS (lemma-K-flat-resolution), 0DEN (lemma-check-K-flat-stalks) and 07A4 (lemma-pullback-tensor-product)."
+   }
+  },
+  {
+   "text": "If $i\\notin[a,b]$, the right side of the final comparison in step 3 is zero by the hypothesis applied to the particular module $N=M_{\\bar x}$. Hence every stalk of $H^i(E\\otimes_R^{\\mathbf L}M)$ is zero. Step 1 gives $H^i(E\\otimes_R^{\\mathbf L}M)=0$. Since $M$ and $i$ were arbitrary, this proves the sheaf Tor condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), converse conclusion."
+   }
+  },
+  {
+   "text": "For an etale scheme chart $U\\to X$, the localized site $X_{\\mathrm{et}}/U$ is $U_{\\mathrm{et}}$. An object of $X_{\\mathrm{et}}/U$ is a scheme $T$ with an etale map $h_T\\to X$ and a map $f:T\\to U$ over $X$. Then $f$ is etale: by the definition of etale maps to $X$, $W=T\\times_XU$ is a scheme whose projections $W\\to T$ and $W\\to U$ are etale. The graph $\\gamma=(\\mathrm{id},f):T\\to W$ satisfies $\\mathrm{pr}_T\\circ\\gamma=\\mathrm{id}_T$, so $\\gamma$ is etale by etale cancellation, and $f=\\mathrm{pr}_U\\circ\\gamma$ is etale as a composite. Conversely, if $T\\to U$ is etale, then $T\\to X$ is etale: for every scheme $T'\\to X$, $T'\\times_XT=(T'\\times_XU)\\times_UT$ is a scheme, etale over the etale $T'$-scheme $T'\\times_XU$, hence etale over $T'$ as a composite. Maps and jointly surjective etale covering families agree on both sides. The same definition identifies $U_{\\mathrm{et}}$ with the small etale site of the algebraic space $h_U$. The restricted ring sheaf is an arbitrary commutative ring sheaf on this site, and the restricted complex is an object of its unbounded module derived category. Apply steps 1--4 with the algebraic space represented by $U$ and this ring and complex. This proves exactly the same equivalence after restriction, with no additional hypothesis. If $U$ or $X$ is empty, the conservative-stalk theorem says its sheaf topos is trivial, so both conditions still hold.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DJJ (lemma-tor-amplitude-stalk) applied on U; spaces-properties.tex definition of the small etale site and Tag 04K5 (theorem-exactness-stalks)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-geometric-points-conservative",
+  "def-sfb-ringed-site-point",
+  "lem-sfb-ringed-site-point-exact",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-sfb-ringed-site-point-flat",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-ringed-site-kflat-stalk-criterion",
+  "lem-sfb-ringed-site-point-tensor",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DJJ (lemma-tor-amplitude-stalk), with the forward implication expanded through Tags 08H5 and 08G1 and the converse through Tag 0DEN; algebraic-space points: spaces-properties.tex Tags 04K0 and 04K5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site with enough points the Tor amplitude of a complex can be tested on all stalk complexes over stalk rings",
+   "results": "{\"t\": \"2026-10-23T11:47:17Z\", \"tool\": \"leanfinder\", \"query\": \"On a ringed site with enough points the Tor amplitude of a complex can be tested on all stalk complexes over stalk rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.IsGE\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.IsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\"], \"digest\": \"d270facf536aeed1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring sheaf on the small etale site of an algebraic space vanishing of derived tensor outside an interval is equivalent to vanishing at every geometric stalk",
+   "results": "{\"t\": \"2026-10-23T11:48:46Z\", \"tool\": \"leanfinder\", \"query\": \"For a ring sheaf on the small etale site of an algebraic space vanishing of derived tensor outside an interval is equivalent to vanishing at every geometric stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_univ_iff\", \"Algebra.etaleLocus\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\"], \"digest\": \"6d35aa8486a7f89b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of sheaves has Tor amplitude in an interval if and only if every stalk has Tor amplitude in that interval",
+   "results": "{\"t\": \"2026-10-23T11:47:15Z\", \"tool\": \"leansearch\", \"query\": \"A complex of sheaves has Tor amplitude in an interval if and only if every stalk has Tor amplitude in that interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"SheafOfModules.noConfusionType\", \"SheafOfModules.hasLimitsOfSize\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"TopCat.Presheaf.IsSheaf\", \"SheafOfModules\", \"SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat\"], \"digest\": \"833258eb9733c256\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T11:47:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.rankAtStalk_eq_of_le_of_finite_of_flat\", \"Module.rankAtStalk_eq_of_le_of_finite_of_flat'\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant\"], \"digest\": \"47e1de3079a14b58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|stalk.*[Ff]lat|[Ff]lat.*stalk",
+   "results": "{\"t\": \"2026-10-23T11:47:15Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|tor_amplitude|stalk.*[Ff]lat|[Ff]lat.*stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"f023ee2ea6b20948\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern ordinary base change, scheme flatness, general derived-category truncation, or sheaf infrastructure; none states this Tor-amplitude theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|[Ss]talk.*[Tt]ensor|[Tt]ensor.*[Ss]talk",
+   "results": "{\"t\": \"2026-10-23T13:26:13Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|tor_amplitude|[Ss]talk.*[Tt]ensor|[Tt]ensor.*[Ss]talk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\"], \"digest\": \"1f2b9f94822a9279\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are ordinary derived-category bounds, scheme etale properties, scheme module-sheaf infrastructure, or ring-theoretic stalk tensor formulas; none states arbitrary-ring-sheaf Tor-amplitude detection on an algebraic space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude of a complex of module sheaves can be tested at all geometric points",
+   "results": "{\"t\": \"2026-10-23T13:26:13Z\", \"tool\": \"leansearch\", \"query\": \"Tor amplitude of a complex of module sheaves can be tested at all geometric points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"ModuleCat.Tilde.toStalk\", \"SheafOfModules.hasLimitsOfSize\", \"ModuleCat.Tilde.stalkIso\", \"SheafOfModules.IsQuasicoherent.casesOn\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.recOn\", \"AlgebraicGeometry.Scheme.Modules.isSheaf\"], \"digest\": \"461c2d620911bfca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are ordinary derived-category bounds, scheme etale properties, scheme module-sheaf infrastructure, or ring-theoretic stalk tensor formulas; none states arbitrary-ring-sheaf Tor-amplitude detection on an algebraic space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-23T13:26:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"RingHom.SurjectiveOnStalks.tensorProductMap\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks\", \"PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux\", \"Module.rankAtStalk_tensorProduct\", \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"Module.rankAtStalk_eq_finrank_tensorProduct\"], \"digest\": \"43b39f1ebb9173cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are ordinary derived-category bounds, scheme etale properties, scheme module-sheaf infrastructure, or ring-theoretic stalk tensor formulas; none states arbitrary-ring-sheaf Tor-amplitude detection on an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex on a ringed site with enough points has Tor amplitude in an interval if and only if all stalk complexes do",
+   "results": "{\"t\": \"2026-10-23T13:26:15Z\", \"tool\": \"leanfinder\", \"query\": \"A complex on a ringed site with enough points has Tor amplitude in an interval if and only if all stalk complexes do\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.IsGE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjSingleFunctor\"], \"digest\": \"e2e7a68482ccba01\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are ordinary derived-category bounds, scheme etale properties, scheme module-sheaf infrastructure, or ring-theoretic stalk tensor formulas; none states arbitrary-ring-sheaf Tor-amplitude detection on an algebraic space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary ring sheaf on an algebraic space etale site Tor amplitude of an unbounded complex is detected on geometric stalks",
+   "results": "{\"t\": \"2026-10-23T13:26:16Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary ring sheaf on an algebraic space etale site Tor amplitude of an unbounded complex is detected on geometric stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isGE_iff\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.etaleLocus_eq_univ_iff\", \"DerivedCategory.isLE_iff\"], \"digest\": \"d77bb8c8feb55ae4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations are ordinary derived-category bounds, scheme etale properties, scheme module-sheaf infrastructure, or ring-theoretic stalk tensor formulas; none states arbitrary-ring-sheaf Tor-amplitude detection on an algebraic space."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-perfect-base-change",
+  "date": "2026-10-23",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Etale locality and base change of relative perfectness. Supporting input: Tor-amplitude locality, before applying the flat base-change argument.",
+   "via": [
+    "lem-sfb-space-relative-perfect-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test",
+  "worker": "stage1",
+  "summary": "Kept the statement and gave a five-step proof following 0DJJ. Forward implication uses the existing arbitrary-ringed-site bounded flat representative criterion, so arbitrary stalk modules are tested. Converse uses existing unbounded K-flat stalk, tensor and cohomology statements. Reused both existing algebraic-space point and conservativity nodes. The first dry run found a newly landed point-realization node; the proposed duplicate was removed and its citation replaced. No new nodes. Maintainer reader (2026-10-23): step 5 now writes out the identification X_et/U = U_et via etale cancellation [lem-weil-pbc-etale-composition-cancellation]; the off-unit ringed-site point tools are declared.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Etale locality and base change of relative perfectness. Supporting input: Tor-amplitude locality, before applying the flat base-change argument. The current latest direct-images proof (3) is the ancestor context; this supplies its already recorded relative-perfectness/Tor-locality prerequisite. The ancestry tool returns null, so the inherited null ancestor and via list are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-ringed-site-tor-flat-model",
+    "why": "Generic bounded flat representatives on any ringed site, used for arbitrary stalk test modules in the forward implication. No node of this unit supplies this generic tool; no unit-level route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor cohomology comparison, used for termwise stalks and quasi-isomorphisms. No node of this unit supplies this generic tool; no unit-level route is replaced."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic homological algebra: bounded flat stalk complexes are K-flat. No node of this unit supplies this generic tool; no unit-level route is replaced."
+   },
+   {
+    "node": "lem-pc-source-kflat-module-tensor-model",
+    "why": "Generic ordinary-module K-flat derived tensor computation. No node of this unit supplies this generic tool; no unit-level route is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded K-flat resolutions on a ringed site. No node of this unit supplies this generic tool; no unit-level route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site derived tensor computed on flat-term K-flat representatives. No node of this unit supplies this generic tool; no unit-level route is replaced."
+   },
+   {
+    "node": "lem-sfb-ringed-site-point-exact",
+    "why": "Generic ringed-site point calculus: exactness of the normalized stalk-module functor at the geometric point of step 1; no node of this unit states it for arbitrary ring sheaves, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-sfb-ringed-site-point-flat",
+    "why": "Generic ringed-site point calculus: the normalized stalk of a flat module sheaf is flat over the stalk ring (steps 2, 3); no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sfb-ringed-site-point-tensor",
+    "why": "Generic ringed-site point calculus: stalks commute with signed unbounded total tensor complexes (step 3); no node of this unit supplies it."
+   },
+   {
+    "node": "lem-sfb-ringed-site-kflat-stalk-criterion",
+    "why": "Generic ringed-site point calculus: stalks of K-flat complexes are K-flat over the stalk ring (step 3); no node of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Mathlib-leaf etale composition and cancellation for schemes, used in step 5 to identify the localized site X_et/U with U_et."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-source-kflat-module-tensor-model",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-ringed-site-point-exact",
+  "lem-sfb-ringed-site-point-flat",
+  "lem-sfb-ringed-site-point-tensor",
+  "lem-sfb-ringed-site-kflat-stalk-criterion",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-f58281bc4",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-f58281bc4 (reviewer sub-agent of L); spot-checked: Read the item's statement and all five steps against Stacks 0DJJ (sites-cohomology l.12690-12716), with 08H5/08G1 for the forward direction and 04K0/04K5 for algebraic-space points. The statement is identical to live, where the item is still unsplit with no repair note. There are no new nodes. The stmt_deps additions are all definitions the statement uses. Steps 1-4 check out. Step 1: the 04K0 point adjunction from lem-sfb-space-geometric-points-conservative is the same notion as def-trf-geometric-morphism, so the normalized presentation, the exactness and zero detection via conservativity on |M|->* follow. Step 2: lem-sp-ringed-site-tor-flat-model (1)=>(2) is used with the site-derived-tensor-descent model, which is the same model as the item's tensor, so there is no C4 mismatch. Point-flat, bounded flat => K-flat and the module tensor model then let every stalk-ring module N be tested. Step 3: the K-flat resolutions, the descent iso, the K-flat-stalk criterion (no boundedness), point-tensor for unbounded Tot and the exact-functor cohomology give the derived stalk iso. Step 4 is elementary. Repair (C1/C2): step 5 was marked elementary and claimed X_et/U = U_et 'by definition'. That needs etale cancellation: the graph T->T x_X U is a section of an etale map. The step now writes the argument out, cites the Mathlib leaf lem-weil-pbc-etale-composition-cancellation and is marked non-elementary; proof_deps is updated. The four off-route ringed-site point lemmas (exact, flat, tensor, K-flat-stalk; unit sk-prop-sfb-module-derived-factorization) were undeclared. They are generic point calculus, and the FIX declares them in split_report.tool_uses together with the leaf. Batch-5 flags: I walked the closure from the two batch-5 targets, stopping at nt-assume, the trf/pod chapters, sk-thm-trace-transport and the other targets. With and without the item the closures differ only by the item, so every cited node was already in it. The flags reach only def-trf-geometric-morphism (a definition) and, for kflat-stalk-criterion, generic lem-trf free-module and module-colimit nodes, which are not steps of the trace formula or of Poincaré duality, so they are accepted. Duplicate search: lem-trf-ringed-tor-amplitude-stalk-test (ringed spaces) and lem-sf-etale-stalk-tor-test (constant ring on schemes) are not duplicates. Small cases: empty X/U, R=0, a separably closed point, Z/2 over Z, unbounded E. The citer lem-sfb-space-tor-independent-relative-amplitude is covered. No SGA is cited. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-ring-sheaf-tor-amplitude-stalk-test.json.; 1 file(s) fixed by the reviewer"
+ }
+}

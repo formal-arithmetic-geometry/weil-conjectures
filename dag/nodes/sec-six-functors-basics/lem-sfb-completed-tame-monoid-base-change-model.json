@@ -1,0 +1,435 @@
+{
+ "id": "lem-sfb-completed-tame-monoid-base-change-model",
+ "kind": "statement",
+ "title": "Completed tame monoid base-change normal form",
+ "statement": "Let $(A,\\mathfrak m)$ be a nonzero Noetherian local commutative ring [def-weil-pbc-noetherian-ring], $R,Q$ fine saturated monoids [def-trf-fs-log-blowup], and $h:R\\to Q$ a homomorphism whose group completion is injective and whose cokernel has finite torsion subgroup of order invertible in $A$ (the cokernel may also have a free part). Let $\\alpha:R\\to(A,\\cdot)$ be a homomorphism, put $G=\\alpha^{-1}(A^\\times)$ and $S=R_G/G^{\\rm gp}$, where $R_G=\\{r-g:r\\in R,g\\in G\\}\\subset R^{\\rm gp}$. Suppose a homomorphism $a:S\\to(A,\\cdot)$ and a character $\\epsilon:R^{\\rm gp}\\to A^\\times$ have been chosen such that $\\alpha(r)=\\epsilon(r)a(\\bar r)$ for every $r\\in R_G$, where $\\bar r$ denotes its image in $S$ and $\\alpha$ is extended to $R_G$ by inverting its units. Assume the maximal-ideal completion $\\widehat A$ [def-weil-pbc-adic-completion], compatibly with the monomials $a(u)$, has one of the following presentations for some finite $n\\ge0$: (a) $k[[S]][[t_1,\\ldots,t_n]]$, where $k=A/\\mathfrak m$ is a coefficient field; (b) $V[[S]][[t_1,\\ldots,t_n]]/(\\theta)$, where $V$ is a Cohen ring with residue field $k$ [def-weil-pbc-cohen-ring] and $\\theta\\equiv p\\pmod{(S\\setminus\\{0\\},t_1,\\ldots,t_n)}$, with $p$ the uniformizer of $V$. Here formal monoid rings are completions of $E[S][t]$ at $(\\mathfrak m_E,S\\setminus\\{0\\},t)$, and monoid rings have basis $[u]$ and multiplication $[u][v]=[u+v]$.\nPut $C=A\\otimes_{\\mathbf Z[R]}\\mathbf Z[Q]$ [def-weil-pbc-module-tensor-product]. Let $\\mathfrak q$ be any prime of $C$ contracting to $\\mathfrak m$, put $B=C_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime], $F=\\{q\\in Q:[q]\\in B^\\times\\}$, $T=Q_F/F^{\\rm gp}$ with $Q_F=\\{q-f:q\\in Q,f\\in F\\}$, and $J=([q]:q\\in Q\\setminus F)B$. Then there is a nonzero complete regular Noetherian local ring $D$ [def-weil-regular-scheme] with residue field $\\kappa(\\mathfrak q)$ and a continuous isomorphism identifying the indicated ideals as follows:\n$$ (\\widehat B,J\\widehat B)\\cong (D[[T]],([v]:v\\in T\\setminus\\{0\\}))\\quad\\text{in case (a)},$$\n$$ (\\widehat B,J\\widehat B)\\cong (D[[T]]/(\\eta),([v]:v\\in T\\setminus\\{0\\}))\\quad\\text{in case (b)},$$\nwhere $\\widehat B$ is the maximal-ideal completion, $D[[T]]$ is the completion of $D[T]$ at $(\\mathfrak m_D,T\\setminus\\{0\\})$, and the reduction $\\overline\\eta\\in D=D[[T]]/(T\\setminus\\{0\\})$ belongs to $\\mathfrak m_D\\setminus\\mathfrak m_D^2$. Neither $h$ nor the induced map on sharp monoids is required to be Kummer; no flatness of $A\\to B$ is assumed. A local ring has one maximal ideal, and $\\kappa(\\mathfrak q)=C_{\\mathfrak q}/\\mathfrak q C_{\\mathfrak q}$. Complete here means that the canonical map to the maximal-ideal completion is an isomorphism.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and 1.8, printed p.70, and VIII 3.1.1--3.1.5, pp.98--99 (formal models and face localization). The general algebraic base-change normal form is agent formulated, not asserted verbatim there. Kato 1994 Theorem 8.2 is WANTED locally. No Stacks tag states this logarithmic monoid-base-change normal form."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "def-per-formal-monoid-extension-data",
+  "def-trf-complete-toric-local-model"
+ ],
+ "proof": [
+  {
+   "text": "The local map $A\\to B$ reflects units, so the inverse images $G,F$ of the unit groups are faces and $h^{-1}F=G$. Apply face sharpening to $(R,G)$ and $(Q,F)$. Put $\\Gamma=G^{\\rm gp}$ and $\\Delta=F^{\\rm gp}$. It gives $R_G^\\times=\\Gamma$, $Q_F^\\times=\\Delta$, and sharp fs $S,T$ with finite free group completions. Apply the group-section monoid-product lemma to each quotient: its kernel condition follows from $S^{\\rm gp}=R^{\\rm gp}/\\Gamma$ and $T^{\\rm gp}=Q^{\\rm gp}/\\Delta$. Choose sections and write $R_G=\\Gamma\\oplus S$, $Q_F=\\Delta\\oplus T$. Then\n$$h(g,s)=(h_U(g)+c(s),\\beta(s)),\\quad \\alpha(g,s)=\\rho(g)e(s)a(s),$$\nwhere $h_U$ is injective, $c:S^{\\rm gp}\\to\\Delta$, $\\rho=\\alpha|_\\Gamma$, and $e(s)=\\epsilon(j_S(s))$ are characters. In these coordinates $a(s)$ uses the given identification with $S$. If $\\beta(s)=0$, a representative of $s$ maps to a unit of $Q_F$ and hence to a unit of $B$; its image in $A$ is a unit, so $s=0$. Thus $\\beta^{-1}(0)=\\{0\\}$. No injectivity of $\\beta^{\\rm gp}$ is asserted.",
+   "uses": [
+    "lem-trf-fs-face-sharpening",
+    "lem-trf-group-section-monoid-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and 1.8, p.70; VIII 3.1.1--3.1.5, pp.98--99; agent algebraic refinement"
+   }
+  },
+  {
+   "text": "Set $N=\\#(\\operatorname{coker}h^{\\rm gp})_{\\rm tor}$, a positive unit in $A$. The torsion subgroup of $\\Delta/h_U(\\Gamma)$ injects into $(\\operatorname{coker}h^{\\rm gp})_{\\rm tor}$: if $dv=h_U(g)$, and $v=h^{\\rm gp}(r)$, injectivity gives $dr=g\\in\\Gamma$; since $R^{\\rm gp}/\\Gamma=S^{\\rm gp}$ is torsion free, $r\\in\\Gamma$ and $v\\in h_U(\\Gamma)$. This proves injectivity on torsion, by applying the same argument to the difference of two such classes. Consequently this torsion subgroup is finite and killed by $N$.\nThe group $\\Delta$ is finitely generated: split $Q^{\\rm gp}\\to T^{\\rm gp}$ by lifting its finite basis and project the finite generators of $Q^{\\rm gp}$ to the kernel $\\Delta$. The same argument gives finite generation of $\\Gamma$. Let $\\Gamma'\\subset\\Delta$ be the inverse image of that torsion subgroup. Then $\\Gamma'/h_U(\\Gamma)$ is finite killed by $N$, so $\\Gamma'$ is generated by generators of $h_U(\\Gamma)$ and finitely many coset representatives. The quotient $\\Delta/\\Gamma'$ is finitely generated and torsion free, hence has a finite basis by the cited group theorem. Lift that basis to split the sequence, obtaining $\\Delta=\\Gamma'\\oplus\\mathbf Z^r$. In particular the full unit quotient is allowed to have a free part.",
+   "uses": [
+    "lem-trf-fs-face-sharpening",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and 1.8, p.70; VIII 3.1.1--3.1.5, pp.98--99; agent algebraic refinement"
+   }
+  },
+  {
+   "text": "We may replace $A$ by $A_0=\\widehat A$ without changing $\\widehat B$, its residue field or its chart monomials. Indeed let $C'=\\widehat A\\otimes_A C$. Since $\\widehat A/\\mathfrak m\\widehat A=A/\\mathfrak m$, there is a unique prime over the selected point in the closed fibre. Apply the finite-type base-change adic-quotient lemma to $A\\to C$: $C$ is finite type because $Q$ has finitely many monoid generators. That lemma identifies every quotient of the two selected local rings by its maximal-ideal power, compatibly with transitions. Taking inverse limits gives the asserted identification, preserving each original monomial and hence its generated ideal. Finite-type permanence and localization permanence make all these local rings Noetherian.",
+   "uses": [
+    "lem-trf-finite-type-base-change-adic-quotients",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MA (lemma-completion-tensor), 00FN (lemma-Noetherian-permanence), 00FN (lemma-Noetherian-permanence); finite-type closed-fibre completion comparison"
+   }
+  },
+  {
+   "text": "Write $L=k$ in (a) and $L=V$ in (b), and put $E=L[[t_1,\\ldots,t_n]]$. The power-series theorem gives a nonzero complete regular Noetherian local $E$. The defining combined-adic completions identify the supplied base model with\n$$A_0=E[[S]]/(f),\\qquad f=0\\text{ in (a)},\\quad f=\\theta\\text{ in (b)}.$$\nFor clarity, modulo the $j$th power of the combined ideal only coefficients modulo $(\\mathfrak m_L,t)^j$ are needed. The completion-mod-power identity identifies these with coefficients of $E$ modulo $\\mathfrak m_E^j$, so the two quotient rings and their transitions coincide. In case (b) $f$ lies in the maximal ideal, since $\\theta\\equiv p$ modulo the boundary and $t$; in case (a) it is zero. The formal monoid dimension theorem also gives $E[[S]]/([s]:s\\ne0)=E$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-trf-formal-monoid-ring-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and 1.8, p.70; VIII 3.1.1--3.1.5, pp.98--99; agent algebraic refinement"
+   }
+  },
+  {
+   "text": "Localize the tensor ring by all $F$-monomials, which are already invertible in $B$. This gives $A_0\\otimes_{\\mathbf Z[R_G]}\\mathbf Z[Q_F]$: its maps send $b\\otimes z^{q-f}$ to $bz^q/z^f$ and conversely, and balancing accounts for the already inverted $G$-monomials. With the sections of Step 1 put\n$$Z=A_0\\otimes_{\\mathbf Z[\\Gamma]}\\mathbf Z[\\Delta].$$\nThen the localized chart algebra is\n$$Z[T]/\\bigl([c(s)]Y^{\\beta(s)}-e(s)a(s):s\\in S\\bigr).$$\nThese are actual inverse presentations: the map on $Q_F=\\Delta\\oplus T$ sends $(v,t)$ to $[v]Y^t$, and the inverse sends $[v]$ and $Y^t$ to the corresponding $Q_F$-monomials. The relations for $(g,s)\\in\\Gamma\\oplus S$ are generated by those for $(g,0)$ and $(0,s)$, giving precisely the displayed relations by the tensor pushout universal property. A finite set of monoid generators of $S$ suffices, since the relation for $s+s'$ is the sum of a monomial multiple of the relation for $s$ and another multiple of the relation for $s'$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and 1.8, p.70; VIII 3.1.1--3.1.5, pp.98--99; agent algebraic refinement"
+   }
+  },
+  {
+   "text": "The decomposition $\\Delta=\\Gamma'\\oplus\\mathbf Z^r$ of Step 2 identifies\n$$Z=A_0[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]\\otimes_{\\mathbf Z[\\Gamma]}\\mathbf Z[\\Gamma'].$$\nThe finite-index group-algebra theorem applies to $h_U:\\Gamma\\hookrightarrow\\Gamma'$ and the character $\\rho$, with exponent $N$. It makes $Z$ finite free and etale over $P=A_0[z^{\\pm1}]$. Let $\\mathfrak a$ be the inverse image in $Z$ of the maximal ideal of $B$. It contracts to the maximal ideal of $A_0$. The inverse-image prime of the selected point in $Z[T]$ is exactly $\\mathfrak aZ[T]+(Y^t:t\\ne0)$: every such monomial vanishes in its residue field, and quotienting by them leaves $Z$. Its residue field is $\\kappa(\\mathfrak a)=\\kappa(\\mathfrak q)$, since localization of this quotient at the selected prime leaves $\\operatorname{Frac}(Z/\\mathfrak a)$. Write $\\mathfrak b=\\mathfrak a\\cap P$.",
+   "uses": [
+    "lem-sfb-tame-kummer-group-algebra-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72; finite-index group-algebra input after separating the free unit directions"
+   }
+  },
+  {
+   "text": "Let $H=E[[S]]$ and $U=E[z^{\\pm1}]$. Since $P=H[z^{\\pm1}]/(f)$ and the selected prime contains the maximal ideal of $A_0$, it contains the images of all nonzero $S$-monomials. Modulo those monomials, $f$ and $\\mathfrak m_E$ vanish at the selected point. There is therefore a unique prime $\\mathfrak p\\subset U$ containing $\\mathfrak m_EU$ such that the inverse image of $\\mathfrak b$ in $H[z^{\\pm1}]$ is $\\mathfrak pH[z^{\\pm1}]+([s]:s\\ne0)$. Set $D_0=\\widehat{U_{\\mathfrak p}}$. Apply the Laurent--monoid completion comparison with its second monoid trivial. Completion of the quotient by $f$ then gives\n$$\\widehat{P_{\\mathfrak b}}\\cong D_0[[S]]/(f_0),$$\nwhere $f_0$ is the coefficientwise image of $f$. Here $D_0$ has residue field $\\kappa(\\mathfrak b)$; the prime classification follows from $H/([s]:s\\ne0)=E$, as in Step 4.",
+   "uses": [
+    "lem-sfb-laurent-monoid-completion",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GG (lemma-hathat-finitely-generated) and 00MA (lemma-completion-tensor), applied to the Laurent coefficient localization and quotient"
+   }
+  },
+  {
+   "text": "The ring $D_0$ is nonzero complete regular Noetherian local. Indeed $E$ is regular local by Step 4, hence a regular ring by regular-local localization; polynomial regularity makes $E[z_1,\\ldots,z_r]$ regular. Its prime local ring at the prime corresponding to $\\mathfrak p$ is $U_{\\mathfrak p}$ (the variables are units there), so that ring is regular local. Its completion is regular local, Noetherian and complete by the cited completion theorems, and has the same nonzero residue field. These arguments construct $D_0$ before the relation $f_0$ is imposed.",
+   "uses": [
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AFS (lemma-localization-of-regular-local-is-regular), Tag 0316 (lemma-completion-Noetherian-Noetherian), Tag 05GG; more-algebra.tex Tag 07NY (lemma-completion-regular); polynomial regularity as cited"
+   }
+  },
+  {
+   "text": "Apply finite-extension completion to the finite $P$-algebra $Z$ at $\\mathfrak b$. It identifies $\\widehat{Z_{\\mathfrak a}}$ with the selected local factor of $\\widehat{P_{\\mathfrak b}}\\otimes_P Z$. Equivalently, apply the tame group-algebra theorem after replacing its coefficient ring by the complete local ring $B_0=D_0[[S]]/(f_0)$: it decomposes the same algebra into complete local finite etale $B_0$-algebras. The selected factor $K$ is nonzero and has residue field $\\kappa(\\mathfrak a)=\\kappa(\\mathfrak q)$. Apply finite-etale formal-monoid coefficient lifting with coefficient ring $D_0$, monoid $S$, and relation $f_0$ (zero is permitted). We obtain a nonzero complete regular Noetherian local finite etale $D_0$-algebra $D$ and a $B_0$-algebra isomorphism\n$$K\\cong D[[S]]/(f_D).$$\nThe relation $f_D$ is the coefficientwise image of the original $f$. The lemma also states that each nonzero cotangent class from $D_0$ remains nonzero in $D$.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-sfb-tame-kummer-group-algebra-completion",
+    "lem-sfb-finite-etale-formal-monoid-coefficient-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07N9 (lemma-completion-finite-extension); more-algebra.tex Tag 09ZL (lemma-finite-etale-equivalence), as in the coefficient-lift node"
+   }
+  },
+  {
+   "text": "Completing the presentation in Step 5 at its selected prime first replaces $Z_{\\mathfrak a}$ by $K=\\widehat{Z_{\\mathfrak a}}$. To check this explicitly, reduction of coefficients modulo the $j$th maximal-ideal power gives the same ring by completion-mod-power; all $T$-monomials have positive order, and denominators outside the selected prime have nonzero constant coefficient modulo $\\mathfrak a$, hence are invertible modulo that power by a finite geometric series. These identifications preserve the finitely many relations of Step 5. Completion of a Noetherian quotient therefore gives the completed presentation over $K$ with those relations. Every ring before completion is finite type over a Noetherian coefficient ring, including Laurent rings (adjoin inverses), so the quotient-completion hypotheses hold; their localizations and completions are Noetherian by the cited theorems.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GG, 00MA, 00FN, 00FN and 0316; finite quotient comparison at the selected monomial prime"
+   }
+  },
+  {
+   "text": "In $K$, the ratios $e(s)[c(s)]^{-1}$ form a character of the free group $S^{\\rm gp}$. Choose unit lifts of its values on a finite basis to $D[[S]]$ and extend multiplicatively to obtain a character $v:S^{\\rm gp}\\to D[[S]]^\\times$. Unit lifts exist because the kernel $(f_D)$ is contained in the maximal ideal: an element whose quotient is a unit has nonzero residue, hence is a unit. Under $K=D[[S]]/(f_D)$, the remaining equations are\n$$Y^{\\beta(s)}-v(s)X^s=0.$$\nThe new completion-comparison lemma, now with coefficient ring $D$, no Laurent variables, and monoids $S,T$, identifies the completed ring before these equations and $f_D$ with $D[[S\\oplus T]]$. Completion of the Noetherian quotient thus proves\n$$\\widehat B\\cong D[[S\\oplus T]]/(f_D,\\ X^s-v(s)^{-1}Y^{\\beta(s)}:s\\in S).$$\nChanging the chosen lifts modifies each equation by an element of $(f_D)$, so the displayed quotient is independent of that choice. This presentation retains the original character; it never extends $\\epsilon$ across $h^{\\rm gp}$.",
+   "uses": [
+    "lem-trf-fs-face-sharpening",
+    "lem-sfb-laurent-monoid-completion",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and 1.8, p.70; VIII 3.1.1--3.1.5, pp.98--99; agent algebraic refinement"
+   }
+  },
+  {
+   "text": "Apply formal-monoid implicit elimination with coefficient ring $D$, monoids $S,T$, local monoid map $\\beta$ of Step 1 and character $u(s)=v(s)^{-1}$. Its statement identifies the quotient by $X^s-u(s)Y^{\\beta(s)}$ with $D[[T]]$, fixes $D$ on the stratum, and sends every nonzero $S$-monomial into the nonzero-$T$ ideal. Thus Step 11 yields $\\widehat B\\cong D[[T]]$ when $f=0$, and $\\widehat B\\cong D[[T]]/(\\eta)$ when $f=\\theta$, with $\\eta$ the full convergent substitution image of $f_D$. This uses the entire substituted series, including its coefficient variables, rather than its constant coefficient.",
+   "uses": [
+    "lem-sfb-formal-monoid-implicit-elimination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.3 formal monoid calculation, pp.72--73; the cited independent implicit-elimination input handles arbitrary unit twists"
+   }
+  },
+  {
+   "text": "It remains to check the parameter condition in (b). Put $R_*=U_{\\mathfrak p}/(t_1,\\ldots,t_n)$. It is the localization of $V[z^{\\pm1}]$ at the induced prime, and $R_*/pR_*$ is the corresponding prime localization of $k[z^{\\pm1}]$. Both are regular local by regular-local localization and polynomial regularity over $V$ and $k$; those coefficient rings are regular by the power-series theorem with zero variables. Also $p\\ne0$ in $R_*$, since multiplication by $p$ is injective on the Laurent polynomial ring over the domain $V$ and remains injective after localization. The nonzero proper ideal $pR_*$ has regular quotient. The regular-quotient parameter theorem makes it generated by a nonempty part of a minimal parameter system. If $p$ belonged to $\\mathfrak m_{R_*}^2$, every generator of $pR_*$ would have zero cotangent class, contradicting minimality (equivalently the regular-local cotangent-dimension theorem). Hence $p\\in\\mathfrak m_{R_*}\\setminus\\mathfrak m_{R_*}^2$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NR (lemma-regular-quotient-regular) and Tag 00KU (definition-regular-local); polynomial regularity for the two Laurent coefficient strata"
+   }
+  },
+  {
+   "text": "By completion of the quotient, $D_0/(t)D_0\\cong\\widehat{R_*}$. Completion-mod-power at power two preserves the cotangent class of $p$, so it is nonzero in $\\widehat{R_*}$. Let $\\theta_{00}\\in D_0$ be the image of $\\theta$ after setting all nonzero $S$-monomials to zero and extending coefficients from $E$. The hypothesis gives $\\theta_{00}\\equiv p\\pmod{(t)D_0}$. Therefore $\\theta_{00}\\in\\mathfrak m_{D_0}\\setminus\\mathfrak m_{D_0}^2$: its residue vanishes, and a square class would have square image in $D_0/(t)D_0$, contrary to Step 13. Coefficient lifting in Step 9 preserves this nonzero cotangent class in $D$. Finally implicit elimination fixes coefficients on the stratum and kills nonzero $S$-monomials there, so $\\overline\\eta$ is exactly the image of $\\theta_{00}$ in $D$. This proves $\\overline\\eta\\in\\mathfrak m_D\\setminus\\mathfrak m_D^2$, including linear terms such as $\\theta=p-t_1$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-sfb-finite-etale-formal-monoid-coefficient-lift",
+    "lem-sfb-formal-monoid-implicit-elimination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MA and 05GG; more-algebra.tex Tag 09ZL through the cited coefficient-lift statement"
+   }
+  },
+  {
+   "text": "The isomorphisms identify the indicated ideals. A monomial $q-f\\in Q_F=\\Delta\\oplus T$ with $T$-class $t$ maps to a unit from $K$ times $Y^t$; after Step 12 it is still a unit times $Y^t$. For $q\\in Q\\setminus F$ its class is nonzero, giving one ideal inclusion. Conversely each $t\\ne0$ has a representative $q-f$ with $q\\in Q$, $f\\in F$ and necessarily $q\\notin F$. The denominator monomial and its $\\Delta$-factor are units. Hence $Y^t$ is a unit times an image of a generator of $J$. This gives the reverse inclusion as generated ideals, including after the quotient by $\\eta$. Every isomorphism identifies maximal ideals and therefore their powers, so it and its inverse are continuous. The residue field of $D$ is $\\kappa(\\mathfrak q)$ by Step 9. If $T=\\{0\\}$ the two boundary ideals are zero; if $r=0$ or $n=0$ the empty variable lists give the same constructions.",
+   "uses": [
+    "lem-sfb-formal-monoid-implicit-elimination"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and 1.8, p.70; VIII 3.1.1--3.1.5, pp.98--99; agent algebraic refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-group-section-monoid-product",
+  "lem-trf-fg-torsionfree-group-free",
+  "lem-trf-finite-type-base-change-adic-quotients",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sfb-tame-kummer-group-algebra-completion",
+  "lem-sfb-laurent-monoid-completion",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-sfb-finite-etale-formal-monoid-coefficient-lift",
+  "lem-sfb-formal-monoid-implicit-elimination",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-local-cotangent-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and 1.8, p.70; VI 2.2--2.3, pp.72--73; VIII 3.1.1--3.1.5, pp.98--99. Agent-written algebraic proof; tame unit-group algebra, finite-etale coefficient lifting and implicit elimination are separate statement-only sfb dependencies, as is the Laurent completion comparison. Kato 1994 Theorem 8.2 is not used as a black box."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LogRegular|LogScheme|formal.?monoid|completed.?monoid",
+   "results": "{\"t\": \"2026-10-22T05:35:36Z\", \"tool\": \"grep\", \"query\": \"LogRegular|LogScheme|formal.?monoid|completed.?monoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary smooth presentations, ordinary power series or monoid-algebra ring instances, not this chart-compatible completed toric base-change normal form"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a local toric base change of a log regular ring has a formal monoid ring presentation",
+   "results": "{\"t\": \"2026-10-22T05:35:37Z\", \"tool\": \"leansearch\", \"query\": \"Completion of a local toric base change of a log regular ring has a formal monoid ring presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.ring\", \"Algebra.Presentation.baseChange\", \"Algebra.FormallyEtale.of_isLocalization\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.SubmersivePresentation.baseChange\", \"isLocalizedModule_iff_isBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"Algebra.FinitePresentation.baseChange\"], \"digest\": \"6ed8c64c8ad8c8af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary smooth presentations, ordinary power series or monoid-algebra ring instances, not this chart-compatible completed toric base-change normal form"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MonoidAlgebra\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-22T05:35:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"MonoidAlgebra\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary smooth presentations, ordinary power series or monoid-algebra ring instances, not this chart-compatible completed toric base-change normal form"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed local monoid algebra base change along an injective map of fine saturated monoids with invertible torsion cokernel admits a power series toric normal form",
+   "results": "{\"t\": \"2026-10-22T05:35:47Z\", \"tool\": \"leanfinder\", \"query\": \"Completed local monoid algebra base change along an injective map of fine saturated monoids with invertible torsion cokernel admits a power series toric normal form\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassFactorization\", \"MvPowerSeries.map.isLocalHom\", \"PowerSeries.weierstrassDistinguished_mul\", \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"LaurentSeries.of_powerSeries_localization\"], \"digest\": \"530190e36a3ee878\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary smooth presentations, ordinary power series or monoid-algebra ring instances, not this chart-compatible completed toric base-change normal form"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal local structure theorem for a toroidal morphism with finite invertible torsion in the lattice quotient",
+   "results": "{\"t\": \"2026-10-22T05:35:48Z\", \"tool\": \"leanfinder\", \"query\": \"Formal local structure theorem for a toroidal morphism with finite invertible torsion in the lattice quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"6f3bc173f68860f5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern ordinary smooth presentations, ordinary power series or monoid-algebra ring instances, not this chart-compatible completed toric base-change normal form"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed local monoid algebra base change with invertible torsion in the group cokernel has a formal toric presentation",
+   "results": "{\"t\": \"2026-10-22T06:22:16Z\", \"tool\": \"leanfinder\", \"query\": \"Completed local monoid algebra base change with invertible torsion in the group cokernel has a formal toric presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.tensorModelOfHasCoeffsInv\", \"Algebra.PreSubmersivePresentation.baseChange\", \"Algebra.Presentation.baseChange\", \"BDeRham\", \"Algebra.PreSubmersivePresentation.baseChange_toPresentation\", \"Algebra.Presentation.tensorModelOfHasCoeffsHom\", \"Algebra.Generators.baseChange\", \"Algebra.PreSubmersivePresentation.localizationAway\"], \"digest\": \"bbf8f8d411bb3fb5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the presentation base-change and valuation/power-series completion hits do not give arbitrary sharp monoid base-change models with a unit character and mixed-characteristic parameter."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddMonoidAlgebra\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-22T06:22:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"AddMonoidAlgebra\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the presentation base-change and valuation/power-series completion hits do not give arbitrary sharp monoid base-change models with a unit character and mixed-characteristic parameter."
+  },
+  {
+   "tool": "grep",
+   "query": "tame.*monoid|monoid.*completion|formal.?monoid|toric",
+   "results": "{\"t\": \"2026-10-22T06:22:45Z\", \"tool\": \"grep\", \"query\": \"tame.*monoid|monoid.*completion|formal.?monoid|toric\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/MaricaSchoenheim.lean\", \"Mathlib/Dynamics/Ergodic/Conservative.lean\", \"Mathlib/LinearAlgebra/Reflection.lean\", \"Mathlib/Tactic/Linarith/Oracle/FourierMotzkin.lean\", \"Mathlib/Tactic/Linarith/Oracle/FourierMotzkin.lean\", \"Mathlib/Tactic/Linarith/Oracle/FourierMotzkin.lean\", \"Mathlib/Tactic/Linarith/Oracle/FourierMotzkin.lean\", \"Mathlib/Tactic/Linarith/Oracle/FourierMotzkin.lean\"], \"digest\": \"c978be3a912c49f9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the presentation base-change and valuation/power-series completion hits do not give arbitrary sharp monoid base-change models with a unit character and mixed-characteristic parameter."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A toroidal base change of a log regular local ring has a complete local monoid power series presentation",
+   "results": "{\"t\": \"2026-10-22T06:23:19Z\", \"tool\": \"leansearch\", \"query\": \"A toroidal base change of a log regular local ring has a complete local monoid power series presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.baseChange\", \"Algebra.Presentation.baseChange_relation\", \"Algebra.PreSubmersivePresentation.baseChange_toPresentation\", \"Algebra.FinitePresentation.baseChange\", \"Algebra.PreSubmersivePresentation.baseChange\", \"Algebra.Generators.baseChange\", \"Algebra.PreSubmersivePresentation.baseChange_ring\", \"Algebra.SubmersivePresentation.baseChange\"], \"digest\": \"94a1fba3e9980b4f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the presentation base-change and valuation/power-series completion hits do not give arbitrary sharp monoid base-change models with a unit character and mixed-characteristic parameter."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-log-smooth-preserves-log-regularity",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction: ILO X Lemma 2.2 proof, p.149, the successive modification of a marked nodal curve and the following smooth-pair-over-a-field sentence; the relative smoothness, rather than mere regularity, of the final free-characteristic charts; log regularity before choosing a sharp chart in repaired Step 1; completed local calculation for log-smooth preservation, including invertible torsion in the chart cokernel",
+   "via": [
+    "lem-sfb-log-smooth-preserves-log-regularity",
+    "lem-sfb-free-characteristic-relative-nc-criterion",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-completed-tame-monoid-base-change-model",
+  "worker": "stage1",
+  "summary": "Repair of C1/C4 and F/G4: retain the exact item statement and the fifteen-step algebraic argument. Add three statement-only sfb nodes supplying the tame finite-index group algebra, finite-etale formal-monoid coefficient lift with cotangent preservation, and implicit elimination fixing the coefficient stratum; re-cite Steps 6/9/12/14/15 and remove dependence on helpers outside the live route. Retain the independently useful Laurent completion comparison. All four new nodes are unsplit, with actual Mathlib searches; no SGA, Lean writes or compiles. Current-DAG repair of the 2026-10-22 13:17 UTC landing return (returned head 0eb330e6cbf): re-read every current statement dependency and proof citation, retained the identical statement, and verified all 43 verbatim quotations and the 25-node proof-dependency union. The live read node is unsplit with an empty proof; all four sfb helpers remain absent there. Delivery is rebuilt by the prescribed tool on current origin/sheaf-dag, retaining current maintainer fields; the former duplicate-report gate is resolved by the explicit historical comparison in the report. Latest landing-return repair, 2026-10-23: the current NR return identifies 2a922b00f61 (2026-10-22 16:27 UTC), superseding the earlier return head discussed above. Compared all worker-owned files with the present live DAG; re-read all statement/proof dependency statements and verified the exact 43-quotation coverage. No cited mathematical assertion requires alteration. The prescribed delivery tool successfully rebuilt and checked the retained split on its freshly fetched current base at dry-run head cf408d75190. The updated report records the latest returned head and present dependency snapshot; final validation and push follow this substantive rebase audit.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction: ILO X Lemma 2.2 proof, p.149, the successive modification of a marked nodal curve and the following smooth-pair-over-a-field sentence; the relative smoothness, rather than mere regularity, of the final free-characteristic charts; log regularity before choosing a sharp chart in repaired Step 1; completed local calculation for log-smooth preservation, including invertible torsion in the chart cokernel; Steps 1--2 separate faces and tame unit directions; Steps 3--11 construct the coefficient ring and actual completed presentation; Steps 12--15 eliminate the sharp variables and check the parameter and boundary ideal.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Steps 1, 2, 11 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-trf-group-section-monoid-product",
+    "why": "Steps 1 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-trf-finite-type-base-change-adic-quotients",
+    "why": "Steps 3 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Steps 4, 13 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-trf-formal-monoid-ring-dimension",
+    "why": "Steps 4 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Steps 7, 10, 11, 14 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Steps 8, 13 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Steps 8 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Steps 8, 10 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Steps 9 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "why": "Steps 13 use this generic algebraic statement exactly as quoted in citations.json. The current constructibility unit supplies no face/group/completion/regular-local-ring tool of this kind; it does not replace the unit alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-group-section-monoid-product",
+  "lem-trf-finite-type-base-change-adic-quotients",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NR-e891c740d",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-e891c740d (reviewer sub-agent of L); spot-checked: 4th delivery. Diffed field by field against 2a922b00 (PASS) and 0eb330e6 (PASS), ignoring split_report: the item and all four new sfb nodes are identical. Only split_report changed (it records the 2a92 landing return and the dry-run at cf408d75190). Live and side-live: the item is still unsplit with an empty proof, and its statement, stmt_deps, source, blueprint, unit and created fields equal the delivery. No sfb helper id exists live and there is no repair note. The dropped per twins are confirmed at route-pivot-dropped.txt l.1468/1550/1588/1943; the sfb nodes replace them and the delivery cites no per id. I re-read all 15 steps against the current statements of every stmt_dep and proof_dep. Step 1: A→B is local, so units are reflected, h⁻¹F=G and β⁻¹(0)=0 without β^gp injective. Step 2: torsion of Δ/h_U(Γ) injects into coker torsion, and Δ=Γ'⊕Z^r. Step 3: base change to Â via the trf adic-quotients node. Steps 4-5: E=L[[t]] and the pushout presentation Z[T]/([c(s)]Y^β−e(s)a(s)). Steps 6/9: group-algebra node over P and over B₀. Step 7: Laurent node with T=0. Step 8: D₀ regular. Step 9: coefficient lift with E:=D₀. Steps 11-12: unit lifts, then elimination with u=v⁻¹. Steps 13-14: p∉m² in the localized V[z^±] and θ₀₀≡p mod t, so η̄∈m_D∖m_D². Step 15: boundary ideals match. All four new nodes are true. Group algebra: free on coset representatives, étale since |M/L| is invertible; tested Z/2⊂Z/4 over Q and over F₃/F₂. Laurent: tested E=k, S=N, r=1, p=0, where both sides are k(z)[[x]]. Coefficient lift: 09ZL over henselian A₀, 07NF, m_D=nD, flat cotangent. Elimination: iteration from φ₀ (a homomorphism since S is sharp) converges because β(s)≠0; tested u=1+X and β=sum. None restates a clause of the item. Duplicate scan found only the dropped per twins, the narrower lem-trf-formal-monoid-extension-model and lem-trf-polynomial-power-series-monoid-completion; the latter could be cited in Step 4 (advisory only). Sources checked: ILO VI 1.6 p.70 (models (i)/(ii), f≡p mod (P∖0,t)), VI 1.8, VI 2.2-2.3 pp.72-73; Stacks 05GG/00MA/07N9/09ZL/07NF/031B/00NR. No SGA. Batch-5 flags: face-sharpening, group-section-monoid-product, fg-torsionfree-group-free, finite-type-base-change-adic-quotients, formal-monoid-ring-dimension, polynomial-ring-regular-base and def-trf-fs-log-blowup are all generic monoid and commutative algebra, not steps of the trace formula or Poincaré duality, so all are accepted. Maintainer note: the landing step L should promote this split (item plus four sfb nodes); the mathematics has been unchanged since 0eb330e6."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedTameMonoidBaseChangeModel",
+  "declaration": "Algebra.completedTameMonoidBaseChange_model",
+  "file": "lean/Sheaf/RingTheory/CompletedTameMonoidBaseChangeModel.lean",
+  "statement": "theorem completedTameMonoidBaseChange_model (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (R : Type v) [CommMonoid R] (Q : Type w) [CommMonoid Q] (_hR : AlgebraicGeometry.IsFineSaturatedMonoid R) (_hQ : AlgebraicGeometry.IsFineSaturatedMonoid Q) (h : R →* Q) (_hgp : Function.Injective (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h))) (_htor : Finite (CommGroup.torsion (GrothendieckGroup Q ⧸ (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h)).range))) (_horder : IsUnit (Nat.card (CommGroup.torsion (GrothendieckGroup Q ⧸ (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h)).range)) : A)) (α : R →* A) (a : Multiplicative (chartSharpMonoid α) →* A) (ε : GrothendieckGroup R →* Aˣ) (_hα : ∀ r : Localization ((IsUnit.submonoid A).comap α), localizedUnitChart α r = (ε (unitChartGroupMap α r) : A) * a (Multiplicative.ofAdd (Additive.ofMul (Associates.mk r)))) (q : Ideal (monoidChartTensor α h)) [q.IsPrime] (_hq : Ideal.comap (monoidChartTensorBase α h) q = IsLocalRing.maximalIdeal A) : ((∃ (n : ℕ) (e : AddMonoidAlgebra.CompletedLocalModel (IsLocalRing.ResidueField A) (chartSharpMonoid α) n ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A), ∀ s : chartSharpMonoid α, e (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra (IsLocalRing.ResidueField A) (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : IsLocalRing.ResidueField A)))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) false) ∧ ((∃ (V : Type (max u v w)) (_ : CommRing V) (_ : IsLocalRing V) (p : ℕ), IsCohenRing p V ∧ Nonempty (IsLocalRing.ResidueField V ≃+* IsLocalRing.ResidueField A) ∧ ∃ (n : ℕ) (θ : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n), θ - (p : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n) ∈ AddMonoidAlgebra.completedLocalModelBoundaryIdeal V (chartSharpMonoid α) n ∧ ∃ e : (AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n ⧸ Ideal.span {θ}) ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A, ∀ s : chartSharpMonoid α, e (Ideal.Quotient.mk (Ideal.span {θ}) (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra V (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : V))))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) true)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-621466ae8",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Clause-by-clause match of Algebra.completedTameMonoidBaseChange_model to the node. A Noetherian local; R,Q fs; h^gp injective; finite torsion of coker with IsUnit card in A, free part allowed; chartSharpMonoid=Associates(R_G)=S; _hα over the whole face localization; case (a) CompletedLocalModel(ResidueField A) S n ≃ Â with monomial compatibility (equivalent to a coefficient field); case (b) IsCohenRing p V, residue iso, θ-p in the boundary ideal incl. t, quotient ≃ Â; C=monoidChartTensor, B=AtPrime q, T, J = def-per data; conclusion HasExtendedFormalMonoidModel false/true: regular complete nonzero D, residue κ(q), D[[T]] or D[[T]]/(η) with ρ(η̄)∈m_D∖m_D², IsAdicPairEquiv boundary equality and continuity. No Kummer, flatness or β^gp assumption. V universe max u v w harmless (iso-invariant, same as landed sibling). Edge cases n=0, r=0, T trivial, torsion trivial OK. Statement verbatim and 15 proof steps verbatim in docstring (script-checked); source and blueprint docstrings; no new defs; only sorry; all imports exist live. stmt_deps add two existing def nodes, no cycle. No duplicate (formalMonoidExtension_model is bijective-only; Kummer twin dropped). Advisory: CompletedLocalModel is recorded under a theorem node but reached via def-trf-complete-toric-local-model (accepted precedent); report's 'no sfb modules' remark is stale for FormalMonoidImplicitElimination. No compile (no files changed)."
+ }
+}

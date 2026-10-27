@@ -1,0 +1,549 @@
+{
+ "id": "lem-sfb-space-alternating-sign-cohomology-spectral",
+ "kind": "statement",
+ "title": "Alternating configuration spectral sequence for etale sheaf cohomology",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], $X$ an algebraic space over $S$ [def-trf-algebraic-space], and $f:U\\to X$ a representable surjective etale morphism from a scheme [def-weil-etale-morphism]. Assume $f$ is separated, meaning that its diagonal is a closed immersion [def-weil-closed-immersion]. For $p\\geq0$ let $W_p\\subset U^{\\times_X(p+1)}$ be the open and closed subscheme complementary to all pairwise equality loci [lem-trf-space-fibre-products-etale-covers, def-weil-open-immersion]. The permutation group $\\mathfrak S_{p+1}$ acts freely on $W_p$. Its orbit sheaf $Q_p=W_p/\\mathfrak S_{p+1}$, the fppf sheafification of the orbit presheaf [def-pc-fppf-site, def-weil-pbc-sheafification], is an algebraic space. The quotient $\\pi_p:W_p\\to Q_p$ is a representable surjective etale morphism and a torsor for this constant group, and the induced $g_p:Q_p\\to X$ is etale. Let $L_p=(\\pi_{p,*}\\underline{\\mathbf Z})^{\\mathrm{sgn}}$, the subsheaf on which a permutation acts by its sign; $L_p$ is etale locally isomorphic to $\\underline{\\mathbf Z}$, and is trivialized by $\\pi_p$. For every abelian sheaf $A$ on $X_{\\mathrm{et}}$, there is a natural first-quadrant cohomological spectral sequence [def-sp-spectral-sequence]\n$$E_1^{p,q}=H^q((Q_p)_{\\mathrm{et}},g_p^{-1}A\\otimes_{\\mathbf Z}L_p)\\quad\\Longrightarrow\\quad H^{p+q}(X_{\\mathrm{et}},A).$$\nCohomology here means right derived abelian-sheaf global sections [def-sp-left-exact-additive, def-sp-injective-resolutions], and tensor is the sheafification of the sectionwise tensor product. For each $m\\geq0$ the abutment has a finite filtration $H^m=F^0\\supseteq F^1\\supseteq\\cdots\\supseteq F^{m+1}=0$ with $F^p/F^{p+1}\\cong E_\\infty^{p,m-p}$; each entry stabilizes to its $E_\\infty$ value. No quasi-coherence or invertibility of any factorial is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0728, lemma-alternating-spectral-sequence; Tag 0727, lemma-twist, for the sign local system and its local trivialization. Quotient existence and torsor description are the objects used in these statements."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-open-immersion",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-sp-spectral-sequence",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-etale-configuration-free-sheaf-distinct-locus",
+  "def-sfb-presheaf-map-separated-diagonal",
+  "def-sp-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=\\mathbf Z[U/X]$ and $K_p=\\bigwedge^{p+1}E$, with the contraction and exact augmentation $K_\\bullet\\to\\underline{\\mathbf Z}$ supplied by [lem-sfb-etale-cover-trace-koszul-resolution]. By [lem-sfb-etale-configuration-exterior-hom], $W_p$ is open and closed and etale over $X$, its permutation action is free, and $\\operatorname{Hom}(K_p,F)$ is naturally the sign subgroup of $\\Gamma(W_p,F|_{W_p})$. These identifications apply to every abelian sheaf $F$, not just injectives.",
+   "uses": [
+    "lem-sfb-etale-cover-trace-koszul-resolution",
+    "lem-sfb-etale-configuration-exterior-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 0723 and 0726, inputs used in the proof of 0728"
+   }
+  },
+  {
+   "text": "For $G=\\mathfrak S_{p+1}$ the action relation $R=\\coprod_{\\sigma\\in G}W_p\\rightrightarrows W_p$ is a scheme: use [lem-weil-pbc-scheme-coproduct-family]. Its projections are etale since each component is an isomorphism; it is a monomorphism into $W_p\\times_SW_p$ because a distinct tuple has no nonidentity stabilizer, and its image is an equivalence relation by the action laws. Apply [lem-trf-etale-relation-quotient]. Its presheaf $T\\mapsto W_p(T)/R(T)$ receives the orbit presheaf $T\\mapsto W_p(T)/\\mathfrak S_{p+1}$ surjectively: a pair in the image of $R(T)$ is $(\\sigma w,w)$ on each member of the finite open and closed decomposition $T=\\coprod_\\sigma T_\\sigma$ given by the components of $R$, so two tuples with the same $R$-class have the same orbit Zariski locally on $T$. Hence both presheaves have the same fppf sheafification, and the quotient of the cited theorem is the stated orbit sheaf $Q_p$; it is an algebraic space, $\\pi_p$ is representable surjective etale, and $R\\cong W_p\\times_{Q_p}W_p$. Thus $\\pi_p$ is the required torsor. The map $W_p\\to X$ coequalizes the action, so the same universal property gives $g_p:Q_p\\to X$. It is etale by [lem-trf-space-etale-source-atlas-detection](3), using the scheme atlas $W_p\\to Q_p$ whose composite to $X$ is etale.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-trf-etale-relation-quotient",
+    "lem-sfb-etale-configuration-exterior-hom",
+    "lem-trf-space-etale-source-atlas-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0728, lemma-alternating-spectral-sequence, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-torsor-character-line] to $\\pi_p$ and the sign character. It identifies its $L_\\chi$ with the stated $L_p$, proves its local rank one and trivialization on $W_p$, and gives $L_p\\otimes L_p\\cong\\underline{\\mathbf Z}$. Associating the three tensor factors makes $T_p(F)=F\\otimes L_p$ an additive self-equivalence, since $T_p^2(F)\\cong F\\otimes(L_p\\otimes L_p)\\cong F$. By [lem-trf-space-enlarged-etale-ringed-site-model] the etale inverse images are compatible with composition and $X_{\\mathrm{et}}$ localized at $W_p$ is $(W_p)_{\\mathrm{et}}$, so $\\pi_p^{-1}g_p^{-1}F\\cong F|_{W_p}$, naturally in $F$ and compatibly with each permutation $\\sigma$ of $W_p$ over $Q_p$ and $X$. For every $F$ on $X$, this, the character isomorphism for $g_p^{-1}F$ and Step 1 give $$\\operatorname{Hom}(K_p,F)\\cong\\Gamma(Q_p,g_p^{-1}F\\otimes L_p).$$ The identifications respect every coefficient map.",
+   "uses": [
+    "lem-sfb-finite-torsor-character-line",
+    "lem-sfb-etale-configuration-exterior-hom",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0728, lemma-alternating-spectral-sequence, proof"
+   }
+  },
+  {
+   "text": "Choose a nonnegative injective resolution $A\\to I^\\bullet$ using [lem-weil-pbc-site-sheaves-enough-injectives]. For etale $g_p$, use [lem-trf-space-enlarged-etale-ringed-site-model] to regard its inverse image as localization at the object $Q_p$ on the enlarged etale site; that model gives the equivalences with the small sites. Restriction to a slice preserves injectives by [new-over-pullback-preserves-injectives], and is exact because restriction preserves kernels and locally surjective sheaf maps. Transport across the additive sheaf equivalences preserves exactness and injectives by [lem-weil-pbc-equivalence-injective-resolutions]. Thus $g_p^{-1}I^\\bullet$ is an injective resolution of $g_p^{-1}A$. The same equivalence theorem, applied to the additive self-equivalence $T_p$ of Step 3, shows that $g_p^{-1}I^\\bullet\\otimes L_p$ is an injective resolution of $g_p^{-1}A\\otimes L_p$.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "new-over-pullback-preserves-injectives",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-sfb-finite-torsor-character-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0728, lemma-alternating-spectral-sequence, proof"
+   }
+  },
+  {
+   "text": "Form the first-quadrant double complex $D^{p,q}=\\operatorname{Hom}(K_p,I^q)$, with horizontal differential precomposition by $\\partial_{p+1}$ and vertical differential postcomposition by $d_I^q$. They commute by associativity of composition; each squares to zero. Use total differential $d_h+(-1)^p d_v$ as in [def-sp-double-complex-total]. Step 3, applied to each $I^q$ and $d_I^q$, identifies its $p$-th column as a complex with $\\Gamma(Q_p,g_p^{-1}I^\\bullet\\otimes L_p)$. By Step 4 and the injective-resolution definition of right derived global sections [def-sp-left-exact-additive, def-weil-pbc-sites-and-cohomology], its $q$-th cohomology is exactly $H^q(Q_p,g_p^{-1}A\\otimes L_p)$.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "lem-sfb-etale-configuration-exterior-hom",
+    "lem-sfb-finite-torsor-character-line",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0728, lemma-alternating-spectral-sequence, proof"
+   }
+  },
+  {
+   "text": "For fixed $q$, injectivity of $I^q$ makes $\\operatorname{Hom}(-,I^q)$ exact: the extension property of [def-sp-injective-resolutions] makes restriction along each monomorphism surjective, while factorization through a cokernel identifies its kernel. Apply this to the short exact image-kernel sequences of the augmented resolution in Step 1. It follows that the augmented row $$0\\to\\operatorname{Hom}(\\underline{\\mathbf Z},I^q)\\to\\operatorname{Hom}(K_0,I^q)\\to\\operatorname{Hom}(K_1,I^q)\\to\\cdots$$ is exact. A map from the constant integer sheaf is uniquely its image of $1$, so its first term is $\\Gamma(X,I^q)$. Thus horizontal row cohomology is zero in positive degree and $\\Gamma(X,I^q)$ in degree zero; this identification commutes with $d_I$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sfb-etale-cover-trace-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0725, lemma-alternating-cech-to-cohomology, row exactness paragraph"
+   }
+  },
+  {
+   "text": "Apply [thm-sp-double-complex-spectral-sequences] to $D$. Its row spectral sequence has only the row-cohomology degree $p=0$ column nonzero, by Step 6, and at the next page that column is $H^q(\\Gamma(X,I^\\bullet))=H^q(X,A)$ by [def-sp-left-exact-additive, def-weil-pbc-sites-and-cohomology]. All later differentials vanish for degree reasons. Its finite abutment filtration has a single nonzero graded piece, giving the canonical identification $H^m(\\operatorname{Tot}D)\\cong H^m(X,A)$. The column spectral sequence has the $E_1$ page computed in Step 5, so it is the asserted spectral sequence. The same double-complex theorem gives $F^0=H^m$, $F^{m+1}=0$, $F^p/F^{p+1}\\cong E_\\infty^{p,m-p}$ and stabilization of every entry.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0725, double-complex spectral sequences and abutment; Tag 0728, final paragraph"
+   }
+  },
+  {
+   "text": "For a coefficient morphism $A\\to B$, [lem-weil-pbc-injective-resolution-lift-exists] gives a map of injective resolutions and hence a map of the double complexes preserving their filtrations. Two lifts are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy], applied to the quasi-isomorphism $A[0]\\to I_A^\\bullet$. Applying $\\operatorname{Hom}(K_p,-)$ carries that homotopy to a vertical column homotopy, so the two maps agree on $E_1$ and therefore on every later page. They also induce the same map on total cohomology: on $D^{p,q}$ multiply the vertical homotopy by $(-1)^p$; horizontal cross terms cancel and its total boundary is the difference of the maps. Identity and composition follow by uniqueness. Consequently the spectral sequence from $E_1$, its filtration, and its abutment are natural in $A$ and independent of the resolution by applying this argument to the identity. This completes every clause without inverting any group order.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0725, canonical injective-resolution construction; naturality expanded by Q05"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-cover-trace-koszul-resolution",
+  "lem-sfb-etale-configuration-exterior-hom",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-etale-source-atlas-detection",
+  "lem-sfb-finite-torsor-character-line",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "new-over-pullback-preserves-injectives",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tags 0723, 0725, 0726, 0727 and 0728; expanded quotient and naturality arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a separated surjective etale map of algebraic spaces the alternating Cech spectral sequence has terms given by sign twisted cohomology of unordered distinct tuples",
+   "results": {
+    "t": "2026-10-23T21:11:54Z",
+    "tool": "leanfinder",
+    "query": "For a separated surjective etale map of algebraic spaces the alternating Cech spectral sequence has terms given by sign twisted cohomology of unordered distinct tuples",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.alternatingCofaceMapComplex",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+     "AlgebraicTopology.alternatingCofaceMapComplex_obj",
+     "Algebra.FormallyEtale.subsingleton_h1Cotangent",
+     "Algebra.etaleLocus_eq_compl_support",
+     "Algebra.Generators.H1Cotangent.δ_map",
+     "Algebra.FormallyEtale.instForallOfFinite",
+     "ContinuousCohomology.MultiInd.d"
+    ],
+    "digest": "03de5038846da28b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a first quadrant spectral sequence from sign twisted sheaf cohomology of unordered configurations in an etale cover to sheaf cohomology of the base",
+   "results": {
+    "t": "2026-10-23T21:12:40Z",
+    "tool": "leanfinder",
+    "query": "There is a first quadrant spectral sequence from sign twisted sheaf cohomology of unordered configurations in an etale cover to sheaf cohomology of the base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+     "CategoryTheory.Sheaf.cohomologyPresheaf"
+    ],
+    "digest": "faa903c2d704f402"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"Sheaf\"",
+   "results": {
+    "t": "2026-10-23T21:12:10Z",
+    "tool": "loogle",
+    "query": "\"SpectralSequence\", \"Sheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*(spectral|cohomolog)|sign.*(sheaf|twist)|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T21:12:10Z",
+    "tool": "grep",
+    "query": "alternating.*(spectral|cohomolog)|sign.*(sheaf|twist)|AlgebraicSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alternating Cech cohomology spectral sequence for a separated etale covering with sign local systems on configuration quotients",
+   "results": {
+    "t": "2026-10-23T21:12:10Z",
+    "tool": "leansearch",
+    "query": "Alternating Cech cohomology spectral sequence for a separated etale covering with sign local systems on configuration quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.alternatingConst",
+     "AlgebraicTopology.alternatingCofaceMapComplex",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "HomologicalComplex.alternatingConstScIsoEven",
+     "HomologicalComplex.alternatingConstHomologyIsoEven",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.d_eq_unop_d",
+     "AlgebraicTopology.alternatingCofaceMapComplex_obj"
+    ],
+    "digest": "300a432c004cf252"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alternating etale Cech spectral sequence with sign local coefficients on unordered distinct tuple quotient algebraic spaces",
+   "results": {
+    "t": "2026-10-23T22:07:51Z",
+    "tool": "leanfinder",
+    "query": "Alternating etale Cech spectral sequence with sign local coefficients on unordered distinct tuple quotient algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.alternatingCofaceMapComplex",
+     "AlgebraicTopology.alternatingCofaceMapComplex_obj",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+     "Algebra.FormallyEtale.instForallOfFinite",
+     "Algebra.etaleLocus_eq_compl_support",
+     "Algebra.Generators.H1Cotangent.δ",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂",
+     "Algebra.Generators.H1Cotangent.δ_map"
+    ],
+    "digest": "ef61b1d77697dc9e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an algebraic space is computed by a first quadrant spectral sequence of sign twisted cohomology of configuration quotients",
+   "results": {
+    "t": "2026-10-23T22:07:58Z",
+    "tool": "leanfinder",
+    "query": "Cohomology of an algebraic space is computed by a first quadrant spectral sequence of sign twisted cohomology of configuration quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.cohomologyPresheaf",
+     "CategoryTheory.Sheaf.H",
+     "continuousCohomology",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂",
+     "ContinuousCohomology.MultiInd.complex",
+     "CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+     "ContinuousCohomology.homogeneousCochains",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃"
+    ],
+    "digest": "d7309b75bb885767"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpectralSequence\", \"Sheaf\"",
+   "results": {
+    "t": "2026-10-23T22:07:58Z",
+    "tool": "loogle",
+    "query": "\"SpectralSequence\", \"Sheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*(spectral|cohomolog)|sign.*(sheaf|twist)|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T22:07:58Z",
+    "tool": "grep",
+    "query": "alternating.*(spectral|cohomolog)|sign.*(sheaf|twist)|AlgebraicSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Alternating Cech cohomology spectral sequence for separated etale covers with sign local systems on configuration quotients",
+   "results": {
+    "t": "2026-10-23T22:07:59Z",
+    "tool": "leansearch",
+    "query": "Alternating Cech cohomology spectral sequence for separated etale covers with sign local systems on configuration quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.alternatingConst",
+     "AlgebraicTopology.alternatingCofaceMapComplex",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "HomologicalComplex.alternatingConstHomologyIsoEven",
+     "AlgebraicTopology.AlternatingCofaceMapComplex.obj",
+     "AlternatingMap.domDomCongr_perm",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "AlgebraicTopology.alternatingCofaceMapComplex_obj"
+    ],
+    "digest": "c22b80668c46e846"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; ordinary module exterior powers, cotangent algebra, constant alternating complexes, group representations and general sheaf cohomology do not state this etale-sheaf result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qcoh-cohomology-finite-bound",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections. Ordinary-sheaf input: Stacks 072C, lemma-vanishing-quasi-separated, finite bound independent of the quasi-coherent module. Supporting input: Tag 072C proof, displayed E_1 page supplied by Tag 0728, using the unordered distinct-tuple quotients and sign line of Tag 0727.",
+   "via": [
+    "lem-sfb-space-qcoh-cohomology-finite-bound",
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-alternating-sign-cohomology-spectral",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0728 through its 0723 exterior resolution, 0726 alternating-sections identification and 0727 integral character line. Three strictly smaller statement-only inputs are created. Reused the existing etale relation quotient, enlarged site localization, resolution comparison and first-quadrant convergence theorems; wrote the quotient geometry, exactness application and naturality explicitly. The item statement is unchanged.",
+  "blueprint": "Realizes the subordinate Stacks 0728 input in the existing ancestor place: det-thm-sf-ctf-stability-direct-images proof (3), cohomological bound through 072C. The latest blueprint direct-images proof (3) is unchanged by this supporting split; inherited from.node is null as returned by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "The finite disjoint union constructs the scheme action relation; a general scheme coproduct is a tool, not a change of unit route."
+   },
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "The general scheme etale-equivalence-relation quotient theorem constructs Q_p and its torsor kernel pair; no other node in this unit states that etale presentation theorem."
+   },
+   {
+    "node": "lem-trf-space-etale-source-atlas-detection",
+    "why": "The general source-atlas criterion descends etaleness of W_p to Q_p over X."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "General sheaf-category enough-injectives theorem used to choose a resolution, unrelated to the geometric unit route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "General enlarged etale-site model realizes a space-valued etale map as localization, so the generic slice restriction theorem applies."
+   },
+   {
+    "node": "new-over-pullback-preserves-injectives",
+    "why": "General localization theorem for abelian sheaves gives injective preservation on the enlarged etale site."
+   },
+   {
+    "node": "lem-weil-pbc-equivalence-injective-resolutions",
+    "why": "General additive-equivalence theorem transports injectives across site models and the tensor-line equivalence."
+   },
+   {
+    "node": "def-sp-double-complex-total",
+    "why": "The standard total complex, signs and filtrations are definitions."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Definition of abelian sheaf cohomology via an injective resolution."
+   },
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "The injective extension property makes Hom into each resolution term exact."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "General first-quadrant double-complex theorem gives both spectral sequences and their finite abutment filtrations."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "General resolution comparison supplies maps over every coefficient morphism."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "General uniqueness of maps into bounded-below injectives gives naturality from E_1 and independence of resolution."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-etale-source-atlas-detection",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "new-over-pullback-preserves-injectives",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-c9ca439bb",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-c9ca439bb (reviewer sub-agent of L); spot-checked: Read in full: the item, its 8 steps, and the 3 new nodes, against Stacks spaces-cohomology.tex Tags 0722–0728 and their proofs, plus the statements of every cited node. The item statement is unchanged; it is Stacks 0728 with U a scheme. The new nodes are true and are not duplicates or restatements of the item: trace-Koszul resolution = 0723, configuration exterior Hom = 0726, finite-torsor character line = 0727 for general G and χ. I checked the free-action monomorphism, that W_p is open and closed, that L⊗L≅Z is canonical because χ(h)²=1, and Z/2 coefficients. I tested the item on X empty, f=id, a split degree-2 cover and infinite fibres. The total homotopy in step 8 is correct with sign (-1)^p. The double-complex step correctly uses row degeneration, the finite filtration and stabilization. The DAG search (rg -L) found no duplicate: the alternating Čech nodes of the picard chapter, the relative Čech spectral sequence, and the affine-only free quotient do not state these facts. Batch-5 check: the five listed trf citations (def-trf-algebraic-space, space fibre products, étale relation quotient, source-atlas detection, enlarged site model) are general algebraic-space and site tools. Their full closures reach no nt-* assumption, no Poincaré-duality node, no sk-thm-trace-transport and no thm-/sk-/det- node of sec-trace-formula, so they are accepted. All tool_uses are accepted as generic. No SGA source. FIX, in the item's proof only: (1) step 2 now explains why the relation-quotient presheaf V(T)/R(T) and the orbit presheaf W_p(T)/S_{p+1} have the same fppf sheafification; (2) step 3 now cites lem-trf-space-enlarged-etale-ringed-site-model for π_p^{-1}g_p^{-1}F≅F|_{W_p}, compatibly with the permutations, which is needed to pass from the configuration node to the character node (C1/C4); (3) steps 5 and 7 now cite def-sp-left-exact-additive for derived global sections on spaces that are not objects of their scheme sites. proof_deps is updated to the union of uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAlternatingSignCohomologySpectral",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_alternating_sign_cohomology_spectral",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.configurationIntegers",
+   "AlgebraicGeometry.AlgebraicSpace.configurationSections",
+   "AlgebraicGeometry.AlgebraicSpace.configurationSections_additive",
+   "AlgebraicGeometry.AlgebraicSpace.configurationEnoughInjectives",
+   "AlgebraicGeometry.AlgebraicSpace.configurationCohomology",
+   "AlgebraicGeometry.AlgebraicSpace.configurationRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.configurationTwist",
+   "AlgebraicGeometry.AlgebraicSpace.configurationFreeMap",
+   "AlgebraicGeometry.AlgebraicSpace.configurationSignSections",
+   "AlgebraicGeometry.AlgebraicSpace.IsConfigurationSignLine",
+   "AlgebraicGeometry.AlgebraicSpace.configurationOrbitPresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.configurationOrbitMap",
+   "AlgebraicGeometry.AlgebraicSpace.IsConfigurationTorsor",
+   "AlgebraicGeometry.AlgebraicSpace.ConfigurationQuotient",
+   "AlgebraicGeometry.AlgebraicSpace.space_alternating_sign_cohomology_spectral"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAlternatingSignCohomologySpectral.lean",
+  "statement": "theorem space_alternating_sign_cohomology_spectral {S : Scheme.{u}} (X : AlgebraicSpace S) (U : X.EtaleSite) (hsurj : IsSurjective U.obj.hom) (hsep : IsSeparatedPresheafMap U.obj.hom) : ∃ (D : ∀ p : ℕ, ConfigurationQuotient X U p) (L : ∀ p : ℕ, Sheaf (D p).Q.etaleTopology AddCommGrpCat.{u + 1}), (∀ p : ℕ, IsConfigurationSignLine (D p).Q (D p).chart (p + 1) (D p).chartAction (L p)) ∧ ∃ (E : CohomologicalSpectralSequenceNat.{u + 2, u + 2} (Sheaf X.etaleTopology AddCommGrpCat.{u + 1} ⥤ AddCommGrpCat.{u + 1}) 1), (∀ p q : ℕ, Nonempty ((E.page 1 (by decide)).X (p, q) ≅ configurationRestriction (D p).g (D p).gEtale ⋙ configurationTwist (D p).Q (L p) ⋙ configurationCohomology (D p).Q q)) ∧ ∃ F : ∀ m : ℕ, DecreasingFiltration (configurationCohomology X m), (∀ m : ℕ, IsIso ((F m).step 0).arrow ∧ IsZero ((F m).step (m + 1) : Sheaf X.etaleTopology AddCommGrpCat.{u + 1} ⥤ AddCommGrpCat.{u + 1})) ∧ (∀ p q : ℕ, Nonempty ((F (p + q)).gr (p : ℤ) ≅ (E.page ((p + q + 2 : ℕ) : ℤ) (by omega)).X (p, q))) ∧ (∀ (p q : ℕ) (r : ℤ) (hr : 1 ≤ r), max (p : ℤ) ((q : ℤ) + 1) < r → Nonempty ((E.page r hr).X (p, q) ≅ (E.page ((p + q + 2 : ℕ) : ℤ) (by omega)).X (p, q)))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The geometry and canonical maps are packaged by ConfigurationQuotient. Sign-line sections are the sign subgroup of maps from the existing free represented sheaf to the constant integers on each localized site. Cohomology is right derived additive global sections. E1, stabilization and the finite abutment filtration are in the functor category, including naturality in every abelian coefficient sheaf. The filtration endpoints use an isomorphic inclusion and a zero subobject, equivalent to top and bottom."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7471295b8",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Re-delivery of returned 5c90: Lean module byte-identical to 5c90; item node changes only lean+stmt_deps. Both H2 findings resolved: hsep now cites def-sfb-presheaf-map-separated-diagonal (IsSeparatedPresheafMap owner) instead of lem-trf-space-qc-separated-etale-local; new existing:true def node def-sfb-etale-configuration-free-sheaf-distinct-locus owns configurationFreeSheaf/configurationDistinctSet (read against Stacks 0726/0728: sheafified free Z[Hom(-,U)] with ulift; complement of pairwise scheme-equalizer images; no rival owner in live), theorem kept only in proof_deps. Tensor advisory answered in report (integral AddCommGrpCat sectionwise tensor + sheafification). Clause check vs node/Stacks 0727-0728: cover, separated diagonal, W_p via fibre-product limit + clopen distinct locus, free action pinned by coordinates, orbit presheaf + fppf sheafification universal property, torsor, g via triangle, sign line = sign part of pi_*Z with restriction compatibility and trivialisation on W, natural E1 iso, rightDerived Hom(Z,-), finite filtration endpoints, gr = E_{p+q+2}, stabilisation r>max(p,q+1): all correct. Edge cases (empty, p=0, id cover, m=0, p>m, disconnected tests) fine. Gates: only sorry is main theorem, docstrings with source/blueprint, statement verbatim, 15 decls present, no extra hypotheses or universe restriction, no pro-etale. No compile (no file changed)."
+ }
+}

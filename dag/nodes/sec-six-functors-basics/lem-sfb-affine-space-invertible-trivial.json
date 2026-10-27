@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-affine-space-invertible-trivial",
+ "kind": "statement",
+ "title": "Invertible sheaves on affine space over a field are trivial",
+ "statement": "Let $k$ be a field [def-weil-field] and $n\\geq0$ an integer. Put $X=\\operatorname{Spec}(k[t_1,\\ldots,t_n])$ [def-weil-affine-spectrum, def-weil-pbc-mv-polynomial-ring]. For every invertible $\\mathcal O_X$-module $M$ [def-sc-invertible-module], there is an $\\mathcal O_X$-linear isomorphism $M\\cong\\mathcal O_X$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BDA, lemma-open-subscheme-UFD, clause (2), with R=k and the whole affine space; its proof uses polynomial factoriality and triviality of invertible modules over a UFD."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Put A=k[t_1,...,t_n] and X=Spec A. By [lem-sfb-polynomial-field-ufd], A is a unique factorization domain, including n=0. Transport its domain and unique-factorization structures across Scheme.ΓSpecIso to B=Γ(X,⊤).",
+   "uses": [
+    "lem-sfb-polynomial-field-ufd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC1, lemma-polynomial-ring-UFD; field case."
+   }
+  },
+  {
+   "text": "By [lem-sc-affine-invertible-sections] on the affine open X, N=Γ(X,M) is an invertible B-module. Since B is a UFD, [lem-sfb-ufd-invertible-module-trivial] supplies a B-linear equivalence e:N≃B (in Lean: Module.Invertible.free_iff_linearEquiv and the trivial Picard group instance). Thus r↦r•e⁻¹(1) is bijective, since this map is e⁻¹.",
+   "uses": [
+    "lem-sc-affine-invertible-sections",
+    "lem-sfb-ufd-invertible-module-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BDA, lemma-open-subscheme-UFD, proof restricted to the whole affine space: polynomial factoriality and the affine case of Tag 0BCH."
+   }
+  },
+  {
+   "text": "Use the already proved affine criterion AlgebraicGeometry.Scheme.Modules.isFreeGenerator_of_bijective_smul from WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections: the section s=e⁻¹(1) is a free sheaf generator. Explicitly form the compatible family of restrictions s|_U, and let φ:𝒪_X→M be multiplication by this family, using SheafOfModules.unitHomEquiv. On each open U the generator property says φ_U is bijective. The underlying presheaf functor reflects isomorphisms, so φ is an isomorphism. Its inverse gives M≅𝒪_X. This uses a proved source-library criterion instead of reconstructing the affine tilde equivalence.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-sc-affine-invertible-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV and 01IB: an affine module basis trivializes its associated quasi-coherent sheaf; implemented by the proved affine free-generator criterion in InvertibleSections.lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-polynomial-field-ufd",
+  "lem-sc-affine-invertible-sections",
+  "lem-sfb-ufd-invertible-module-trivial",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BDA, lemma-open-subscheme-UFD, clause (2), whole affine space; UFD Picard triviality (0BCH), using the proved source-library affine free-generator criterion for the final sheaf isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Pic.*MvPolynomial|MvPolynomial.*Pic|picard.*affine|affine.*picard",
+   "results": "{\"t\": \"2026-10-23T09:48:37Z\", \"tool\": \"grep\", \"query\": \"Pic.*MvPolynomial|MvPolynomial.*Pic|picard.*affine|affine.*picard\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every invertible sheaf on affine space over a field is trivial",
+   "results": "{\"t\": \"2026-10-23T09:48:38Z\", \"tool\": \"leansearch\", \"query\": \"Every invertible sheaf on affine space over a field is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.instFreeOfSubsingleton\", \"CommRing.Pic.subsingleton_iffₛ\", \"AlgebraicGeometry.Scheme.ΓSpecIso_inv\", \"Module.Invertible.exists_linearEquiv_ideal\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine.congr_simp\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen\"], \"digest\": \"69a164e8ad9d5eaa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-23T09:48:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible sheaves on affine space over a field are trivial Picard group affine n space is zero",
+   "results": "{\"t\": \"2026-10-23T09:48:48Z\", \"tool\": \"leanfinder\", \"query\": \"Invertible sheaves on affine space over a field are trivial Picard group affine n space is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.relPic_eq_top\", \"CommRing.Pic.instFreeOfSubsingleton\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.subsingleton_iffₛ\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"CommRing.Pic.mk_eq_one\", \"CommRing.Pic.mk\"], \"digest\": \"3db02dd9666cc9fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every line bundle on Spec of a unique factorization domain or a polynomial ring over a field is trivial",
+   "results": "{\"t\": \"2026-10-23T09:48:48Z\", \"tool\": \"leanfinder\", \"query\": \"Every line bundle on Spec of a unique factorization domain or a polynomial ring over a field is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"CommRing.Pic.instSubsingletonOfIsLocalRing\", \"CommRing.relPic_eq_top\", \"CommRing.Pic.instFreeOfSubsingleton\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.subsingleton_iffₛ\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"FunctionField.classNumber_eq_one_iff\"], \"digest\": \"10db8a2008051397\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible sheaves on affine n space over a field are trivial and units of polynomial rings with coordinate variables inverted are scalar Laurent monomials",
+   "results": "{\"t\": \"2026-10-23T09:51:24Z\", \"tool\": \"leanfinder\", \"query\": \"Invertible sheaves on affine n space over a field are trivial and units of polynomial rings with coordinate variables inverted are scalar Laurent monomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv\", \"AlgebraicGeometry.AffineSpace.SpecIso\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\"], \"digest\": \"563b715715e662f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommRing.Pic\", \"IsGCDMonoid\"",
+   "results": "{\"t\": \"2026-10-23T09:52:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"CommRing.Pic\\\", \\\"IsGCDMonoid\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Picard group of a greatest common divisor domain or unique factorization domain is trivial",
+   "results": "{\"t\": \"2026-10-23T09:53:01Z\", \"tool\": \"leanfinder\", \"query\": \"The Picard group of a greatest common divisor domain or unique factorization domain is trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.relPic_eq_top\", \"card_classGroup_eq_one\", \"card_classGroup_eq_one_iff\", \"ClassGroup.mk_eq_one_iff\", \"ClassGroup.mk0_eq_one_iff\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"ClassGroup\", \"ClassGroup.mk_eq_one_of_coe_ideal\"], \"digest\": \"b261bf4106e08a76\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic Picard groups, affine-coordinate maps, or unrelated base-change and sheaf surjectivity results do not state this scheme-theoretic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "UniqueFactorization|IsGCDMonoid|instSubsingleton",
+   "results": "{\"t\": \"2026-10-23T11:10:35Z\", \"tool\": \"grep\", \"query\": \"UniqueFactorization|IsGCDMonoid|instSubsingleton\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"14\", \"886\"], \"digest\": \"fa74ee475a02bd6d\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible sheaf on an affine scheme is the sheaf associated to an invertible module of global sections",
+   "results": "{\"t\": \"2026-10-23T11:15:18Z\", \"tool\": \"leanfinder\", \"query\": \"Every invertible sheaf on an affine scheme is the sheaf associated to an invertible module of global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.unitsToPic_apply\", \"CommRing.Pic.mk\", \"CommRing.Pic.AsModule\", \"CommRing.Pic.mk_eq_one\", \"CommRing.Pic.subsingleton_iff\", \"AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso\", \"CommRing.Pic.instCoeSortType\", \"CommRing.Pic.mk_eq_one_iff\"], \"digest\": \"495f769d1eaaafc2\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "rankAtStalk|Invertible|free_iff_linearEquiv",
+   "results": "{\"t\": \"2026-10-23T11:20:02Z\", \"tool\": \"grep\", \"query\": \"rankAtStalk|Invertible|free_iff_linearEquiv\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"25\", \"26\", \"27\", \"33\"], \"digest\": \"0e8e0eb7eb6d6a93\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Invertible, Subsingleton",
+   "results": "{\"t\": \"2026-10-23T11:20:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Invertible, Subsingleton\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CommRing.Pic.instFreeOfSubsingleton\", \"CommRing.Pic.subsingleton_iffₛ\", \"CommRing.Pic.subsingleton_iff\", \"Module.Invertible.exists_linearEquiv_ideal\"], \"digest\": \"47ff0d2d6e513010\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite projective module locally free of rank one over a unique factorization domain is isomorphic to the ring",
+   "results": "{\"t\": \"2026-10-23T11:20:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finite projective module locally free of rank one over a unique factorization domain is isomorphic to the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.exists_linearEquiv_ideal\", \"Module.free_of_finite_type_torsion_free'\", \"CommRing.Pic.instFreeOfSubsingleton\", \"CommRing.Pic.instFreeAsModuleOfNat\", \"CommRing.Pic.mk_eq_one_iff\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.subsingleton_iffₛ\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\"], \"digest\": \"3786f8892e803a2d\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "iff.*[Rr]ank|[Rr]ank.*iff|of_isLocalized|of_local|isLocallyFree",
+   "results": "{\"t\": \"2026-10-23T11:21:39Z\", \"tool\": \"grep\", \"query\": \"iff.*[Rr]ank|[Rr]ank.*iff|of_isLocalized|of_local|isLocallyFree\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"251\", \"254\", \"548\", \"634\"], \"digest\": \"5524e6310acb06ef\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible module over a unique factorization domain is linearly isomorphic to the ring",
+   "results": "{\"t\": \"2026-10-23T11:21:40Z\", \"tool\": \"leansearch\", \"query\": \"An invertible module over a unique factorization domain is linearly isomorphic to the ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.tensorInvEquiv\", \"Module.Invertible.linearEquivOfLeftInverse\", \"Module.Invertible.instProjective\", \"Module.Invertible.free_iff_linearEquiv\", \"CommRing.Pic.mk_eq_one_iff\", \"Module.Invertible.algEquivOfRing\", \"Module.Invertible.linearEquivOfRightInverse\", \"Module.Invertible.mk\"], \"digest\": \"8839fbeefcbadf3d\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "rankAtStalk|of_isLocalized_span|invertible.*[Ii]ff|[Ii]ff.*invertible|Invertible.*Projective|Projective.*Invertible",
+   "results": "{\"t\": \"2026-10-23T11:23:52Z\", \"tool\": \"grep\", \"query\": \"rankAtStalk|of_isLocalized_span|invertible.*[Ii]ff|[Ii]ff.*invertible|Invertible.*Projective|Projective.*Invertible\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"Mathlib/RingTheory/DividedPowers/RatAlgebra.lean\", \"Mathlib/RingTheory/DividedPowers/RatAlgebra.lean\"], \"digest\": \"09dfefec78dbeed7\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, IsGCDMonoid",
+   "results": "{\"t\": \"2026-10-23T11:23:52Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, IsGCDMonoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated projective module of constant local rank one over a factorial domain is free of rank one",
+   "results": "{\"t\": \"2026-10-23T11:23:56Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated projective module of constant local rank one over a factorial domain is free of rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"Module.free_of_finite_type_torsion_free\", \"Module.free_iff_isTorsionFree\", \"CommRing.Pic.instFreeAsModuleOfNat\", \"CommRing.Pic.instFreeOfSubsingleton\", \"Module.Invertible.rank_eq_one\", \"Module.Invertible.finrank_eq_one\", \"Module.finite_of_rank_eq_one\"], \"digest\": \"da4fa33759bf4682\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "free.*rank.*one|rank.*one.*free|Invertible.*iff|iff.*Invertible",
+   "results": "{\"t\": \"2026-10-23T11:25:46Z\", \"tool\": \"grep\", \"query\": \"free.*rank.*one|rank.*one.*free|Invertible.*iff|iff.*Invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Basic.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean\", \"Mathlib/Topology/Algebra/Module/Equiv.lean\", \"Mathlib/Topology/Algebra/Module/Equiv.lean\"], \"digest\": \"1c1f0d1ceda11b07\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite projective module of constant rank one over a unique factorization domain is free of rank one",
+   "results": "{\"t\": \"2026-10-23T11:25:47Z\", \"tool\": \"leansearch\", \"query\": \"A finite projective module of constant rank one over a unique factorization domain is free of rank one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"Module.basisOfFiniteTypeTorsionFree'\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"Module.free_of_finite_type_torsion_free\", \"Module.Finite.exists_comp_eq_id_of_projective\", \"Module.Invertible.rank_eq_one\", \"Module.free_of_flat_of_finrank_eq\", \"Module.free_iff_isTorsionFree\"], \"digest\": \"10d04ea14f7816fa\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "instSubsingletonPic|mk_eq_one_iff|TODO|become free of rank one",
+   "results": "{\"t\": \"2026-10-23T11:29:39Z\", \"tool\": \"grep\", \"query\": \"instSubsingletonPic|mk_eq_one_iff|TODO|become free of rank one\", \"sub\": \"RingTheory/PicardGroup.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"50\", \"56\", \"493\", \"496\", \"497\"], \"digest\": \"9b10ecd05c6a2e9b\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SubsingletonPic\"",
+   "results": "{\"t\": \"2026-10-23T11:29:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"SubsingletonPic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"instSubsingletonPicOfIsDomainOfIsGCDMonoid\"], \"digest\": \"b1afbd13f458bd1a\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem mk_eq_one_iff|instance \\(R\\).*IsGCDMonoid|toGCDMonoid",
+   "results": "{\"t\": \"2026-10-23T11:31:25Z\", \"tool\": \"grep\", \"query\": \"theorem mk_eq_one_iff|instance \\\\(R\\\\).*IsGCDMonoid|toGCDMonoid\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/PicardGroup.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/GCDMonoid.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/GCDMonoid.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/GCDMonoid.lean\", \"Mathlib/RingTheory/UniqueFactorizationDomain/GCDMonoid.lean\"], \"digest\": \"870a2b00374f63ca\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a unique factorization domain an R module with bijective dual tensor evaluation is linearly equivalent to R",
+   "results": "{\"t\": \"2026-10-23T11:31:26Z\", \"tool\": \"leansearch\", \"query\": \"Over a unique factorization domain an R module with bijective dual tensor evaluation is linearly equivalent to R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.linearEquivDual\", \"dualTensorHomEquivOfBasis\", \"Module.Invertible.linearEquiv\", \"Module.evalEquiv\", \"Module.Basis.toDualEquiv\", \"Module.Invertible.linearEquiv.congr_simp\", \"Module.IsReflexive.bijective_dual_eval'\", \"Module.evalEquiv_toLinearMap\"], \"digest\": \"37197393e7b8a959\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a unique factorization domain R a module N with bijective evaluation Hom_R(N,R) tensor N to R is linearly equivalent to R",
+   "results": "{\"t\": \"2026-10-23T11:31:26Z\", \"tool\": \"leanfinder\", \"query\": \"Over a unique factorization domain R a module N with bijective evaluation Hom_R(N,R) tensor N to R is linearly equivalent to R\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.linearEquiv\", \"Module.Invertible.right\", \"Module.Invertible.left\", \"Module.Invertible.linearEquivDual\", \"Module.Invertible.free_iff_linearEquiv\", \"Module.Invertible.bijective_curry\", \"Submodule.tensorInvEquiv\", \"LinearEquiv.smul_id_of_finrank_eq_one\"], \"digest\": \"49a4e9e9bf3d01a9\"}",
+   "date": "2026-10-23",
+   "verdict": "related algebraic ingredients only: Mathlib has invertible modules and ring Picard triviality; these searches do not state the item for invertible sheaves on affine n-space. Reused the existing affine-sections and tilde correspondence nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-bundle-picard-classification",
+  "date": "2026-10-23",
+  "group": "Q26"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The ten-canonical Hilbert parameter and projective-frame torsors. Specific prerequisite: Projective frames and projective linear transformations over schemes. General Picard decomposition underlying the tautological-line and local-matrix arguments; not an automorphism or frame-torsor statement. Supporting input: Invertible sheaves on affine space over a field are trivial.",
+   "via": [
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-space-invertible-trivial",
+  "worker": "stage1",
+  "summary": "Read Stacks 0BDA, 0BC1, 0BCH and the affine equivalence. Reviewer FIX: polynomial factoriality now from the new statement-only lem-sfb-polynomial-field-ufd (0BC1), replacing a citation of a route-pivot-dropped node. Reused affine invertible-sections, tilde construction and adjunction nodes. One new Mathlib leaf supplies UFD tensor-invertible-module triviality. The sheaf isomorphism is assembled explicitly; no statement correction.",
+  "blueprint": "Supporting algebraic geometry for det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited stable-curve/projective-frame route: triviality on affine-space charts. The imported ancestor chain has blueprint.from.node=null; retained it as instructed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-invertible-sections",
+    "why": "Generic affine Zariski invertible-sheaf sections theorem; no same-unit node states its evaluation bijectivity. It supplies only the algebraic input and does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-invertible-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-a11a5b12d",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-a11a5b12d (reviewer sub-agent of L); spot-checked: Mechanical finding confirmed. Step 1 cited lem-per-polynomial-ufd-prime-quotient, which is on the route-pivot drop list (route-pivot-dropped.txt line 1769; created by Q62 inside the dropped Gabber/Qbar middle-perversity chain). The item and its only citer, lem-sfb-projective-bundle-picard-classification, are live, and the step used only the generic fact that k[t_1..t_n] is a UFD. This is a repairable citation fault (C1), not a route fault. No live DAG node states that fact: lem-pur-polynomial-field-pid has one variable only, and the trf UFD nodes need a regular local ring or a Noetherian height-one hypothesis. Fix: a new statement-only node lem-sfb-polynomial-field-ufd (Stacks 0BC1, algebra.tex:29578, field case), status unsplit with mathlib_candidate MvPolynomial.uniqueFactorizationMonoid (UniqueFactorization.lean:130; Field.toEuclideanDomain, EuclideanDomain.to_principal_ideal_domain :287, PrincipalIdealRing.to_uniqueFactorizationMonoid :371). Step 1 and proof_deps now cite it, and the dropped id appears nowhere in the fixed files. The recomputed 68-node closure contains no dropped id. Second fix: step 3 said 'the identities A_f→A_f glue' without naming the map. It now builds α:Ã→O_X as the adjunct of id_A (adjunction clause 1), shows α_{D(f)} is A_f→A_f with 1↦1 (from tilde-sections and 01HV (3),(5)), and concludes α is an isomorphism because it is bijective on a basis of opens. The rest checks out. Item = 0BDA (divisors.tex:7187) clause (2) with R=k, no weakening, n=0 included. Step 2: lem-sc-affine-invertible-sections with U=X says exactly that evaluation is bijective; the accepted tool use is generic. Delivered leaf lem-sfb-ufd-invertible-module-trivial is true (0BCH + 0B8I) and self-contained. I read its Mathlib lines: Module.Invertible PicardGroup.lean:77-78, Pic.mk_eq_one_iff :493, GCD-domain Subsingleton Pic instance :883-887, UFM→IsGCDMonoid GCDMonoid.lean:50. It generalizes the PID node lem-pur-pid-invertible-module-trivial and is not a duplicate, because n≥2 needs non-PIDs. Small cases tested: n=0, n=1, k[x,y], finite fields, zero ring excluded. No SGA source; the Artin–Gabber finite-coefficient rule is not otherwise involved. Q02's lead review missed that the node was dropped (F).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSpaceInvertibleTrivial",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_of_mvPolynomial_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpaceInvertibleTrivial.lean",
+  "statement": "theorem nonempty_iso_unit_of_mvPolynomial_field (k : Type u) [Field k] (n : ℕ) (M : (Spec (CommRingCat.of (MvPolynomial (Fin n) k))).Modules) [M.IsInvertible] : Nonempty (M ≅ Scheme.Modules.unit (Spec (CommRingCat.of (MvPolynomial (Fin n) k))))",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b5ae91ca",
+  "group": "Q113",
+  "result": "pass",
+  "note": "The Lean statement nonempty_iso_unit_of_mvPolynomial_field matches the node clause by clause: k : Type u with [Field k], n : ℕ (n = 0 included), MvPolynomial (Fin n) k, Spec of it, the recorded Scheme.Modules.IsInvertible (Zariski-locally ≅ unit; quasi-coherence follows from it and the 2026-10-23 blueprint drops it), and the conclusion Nonempty (M ≅ Scheme.Modules.unit X). No extra hypothesis or universe restriction. The node diff against live is the added lean record only, the statement field is verbatim in the file, and the stmt_dep nodes are unchanged. Imports cover the stmt_deps and proof_deps (InvertibleSections, Modules.Tilde, PicardGroup). No line over 100 characters; source and blueprint docstrings present and the theorem docstring carries the three proof steps; proof is only sorry; no definitions or pro-étale content. The report has the Worker report and Second reading by Q113 sections. Not recompiled: no FIX, and the report records clean compiles. Duplicate check: PicardAffine.lean exists_isFreeGenerator_* are related ingredients only (generic open U, free-generator conclusion); noted as an advisory stage-3 tool."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T094356-L-219364",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

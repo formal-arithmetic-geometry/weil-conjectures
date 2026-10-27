@@ -266,22 +266,39 @@
  },
  "lean": {
   "module": "Sheaf.RingTheory.CompletedInvertibleKummerMonoidExtension",
-  "declaration": "Algebra.completed_invertible_kummer_monoid_extension",
+  "declaration": "Algebra.completedInvertibleKummerMonoidExtension_model",
   "file": "lean/Sheaf/RingTheory/CompletedInvertibleKummerMonoidExtension.lean",
-  "statement": "theorem completed_invertible_kummer_monoid_extension (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (R : Type v) [CommMonoid R] (Q : Type w) [CommMonoid Q] (_hR : AlgebraicGeometry.IsFineSaturatedMonoid R) (_hQ : AlgebraicGeometry.IsFineSaturatedMonoid Q) (h : R →* Q) (_hh : Function.Injective h) (_hkummer : ∀ q : Q, ∃ d : ℕ, 0 < d ∧ ∃ r : R, h r = q ^ d) (_hgp : Function.Injective (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h))) (_hfinite : Finite (GrothendieckGroup Q ⧸ (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h)).range)) (N : ℕ) (_hN : 0 < N) (_hNunit : IsUnit (N : A)) (_hkill : ∀ z : GrothendieckGroup Q, ∃ r : GrothendieckGroup R, GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h) r = z ^ N) (α : R →* A) (a : Multiplicative (chartSharpMonoid α) →* A) (ε : GrothendieckGroup R →* Aˣ) (_hα : ∀ r : Localization ((IsUnit.submonoid A).comap α), localizedUnitChart α r = (ε (unitChartGroupMap α r) : A) * a (Multiplicative.ofAdd (Additive.ofMul (Associates.mk r)))) (q : Ideal (monoidChartTensor α h)) [q.IsPrime] (_hq : Ideal.comap (monoidChartTensorBase α h) q = IsLocalRing.maximalIdeal A) : ((∃ (n : ℕ) (e : AddMonoidAlgebra.CompletedLocalModel (IsLocalRing.ResidueField A) (chartSharpMonoid α) n ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A), ∀ s : chartSharpMonoid α, e (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra (IsLocalRing.ResidueField A) (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : IsLocalRing.ResidueField A)))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) false) ∧ ((∃ (V : Type (max u v w)) (_ : CommRing V) (_ : IsLocalRing V) (p : ℕ), IsCohenRing p V ∧ Nonempty (IsLocalRing.ResidueField V ≃+* IsLocalRing.ResidueField A) ∧ ∃ (n : ℕ) (θ : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n), θ - (p : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n) ∈ AddMonoidAlgebra.completedLocalModelBoundaryIdeal V (chartSharpMonoid α) n ∧ ∃ e : (AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n ⧸ Ideal.span {θ}) ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A, ∀ s : chartSharpMonoid α, e (Ideal.Quotient.mk (Ideal.span {θ}) (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra V (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : V))))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) true)",
+  "statement": "theorem completedInvertibleKummerMonoidExtension_model (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (R : Type v) [CommMonoid R] (Q : Type w) [CommMonoid Q] (_hR : AlgebraicGeometry.IsFineSaturatedMonoid R) (_hQ : AlgebraicGeometry.IsFineSaturatedMonoid Q) (h : R →* Q) (_hinj : Function.Injective h) (_hkummer : ∀ q : Q, ∃ (d : ℕ) (_ : 0 < d) (r : R), h r = q ^ d) (_hgp : Function.Injective (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h))) [Finite (GrothendieckGroup Q ⧸ (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h)).range)] (N : ℕ) (_hN : 0 < N) (_hkill : ∀ q : GrothendieckGroup Q, q ^ N ∈ (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h)).range) (_hunit : IsUnit (N : A)) (α : R →* A) (a : Multiplicative (chartSharpMonoid α) →* A) (ε : GrothendieckGroup R →* Aˣ) (_hα : ∀ r : Localization ((IsUnit.submonoid A).comap α), localizedUnitChart α r = (ε (unitChartGroupMap α r) : A) * a (Multiplicative.ofAdd (Additive.ofMul (Associates.mk r)))) (q : Ideal (monoidChartTensor α h)) [q.IsPrime] (_hq : Ideal.comap (monoidChartTensorBase α h) q = IsLocalRing.maximalIdeal A) : ((∃ (n : ℕ) (e : AddMonoidAlgebra.CompletedLocalModel (IsLocalRing.ResidueField A) (chartSharpMonoid α) n ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A), ∀ s : chartSharpMonoid α, e (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra (IsLocalRing.ResidueField A) (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : IsLocalRing.ResidueField A)))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) false) ∧ ((∃ (V : Type (max u v w)) (_ : CommRing V) (_ : IsLocalRing V) (p : ℕ), IsCohenRing p V ∧ Nonempty (IsLocalRing.ResidueField V ≃+* IsLocalRing.ResidueField A) ∧ ∃ (n : ℕ) (θ : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n), θ - (p : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n) ∈ AddMonoidAlgebra.completedLocalModelBoundaryIdeal V (chartSharpMonoid α) n ∧ ∃ e : (AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n ⧸ Ideal.span {θ}) ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A, ∀ s : chartSharpMonoid α, e (Ideal.Quotient.mk (Ideal.span {θ}) (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra V (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : V))))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) true)",
   "branch": "newtargets-dag",
-  "by": "Q36",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "Reuses the nine canonical chart/completed-pair definitions recorded by def-per-formal-monoid-extension-data, independently of the group-isomorphism theorem in their published module. The present theorem assumes an injective Kummer map with finite group cokernel killed by an invertible positive integer. 2026-10-20 (U): module Sheaf.RingTheory.CompletedInvertibleKummerMonoidExtension deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q130",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-8ed01fd06",
-  "group": "Q36",
+  "reviewer": "NT-stage2-cc-ca8e9554e",
+  "group": "Q130",
   "result": "pass",
-  "note": "Re-delivery of the de02641522d0 H2 RETURN. Theorem stmt_dep lem-trf-formal-monoid-extension-model replaced by new def node def-per-formal-monoid-extension-data (existing:true, exactly the nine plain defs of Sheaf.RingTheory.FormalMonoidExtensionModel; lean.statement verbatim = monoidChartTensor signature; statement text matches each def including HasExtendedFormalMonoidModel false/true, IsAdicPairEquiv continuity both ways; H12 fields present; no parallel def node in live DAG). Item Lean byte-identical (sha256 77a48228) to the module previously verified clause by clause; node differs from live only in lean/stmt_deps; lean.statement verbatim. IsCohenRing requires Nat.Prime p and a DVR, so the mixed case cannot have p=0. Edge cases n=0, trivial S/T, N=1, torsion units covered; universes bound; only sorry; docstrings carry source and blueprint. nt_compile --json rc 0, 3.4 s, clean. Advisory: CompletedLocalModel/completedLocalModelBoundaryIdeal/localModelCompletionIdeal are owned by theorem node lem-trf-log-regular-saturation-normality, which is not in stmt_deps (unchanged since the reviewed delivery)."
+  "note": "Lean matches node clause by clause: A Noetherian local, R,Q fs, h injective Kummer, h^gp injective, finite cokernel killed by N>0 invertible in A, alpha/eps/a twist relation over all of R_G, C/q/B/F/T/J via the nine def-per-formal-monoid-extension-data helpers; case (a) and (b) presentation hypotheses with monomial compatibility (IsCohenRing forces prime p; V in Type(max u v w) transports, not a restriction); conclusion HasExtendedFormalMonoidModel false/true: regular complete D with residue kappa(q), pair equivalence with actual J and continuity both ways, eta-bar in m_D minus m_D^2. lean.statement verbatim, sorry only, docstrings carry source, blueprint and 9 steps, no new defs, stmt_deps identical to live. Advisories: IsFineSaturatedMonoid owned by def-trf-log-regular-pair; CompletedLocalModel owned by theorem node lem-trf-log-regular-saturation-normality, not in stmt_deps (as in the 2026-10-18 review); two proof_dep records name absent modules and need a lean_removed entry; implicit-elimination record says deleted but the file exists. No compile (no file changed)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/CompletedInvertibleKummerMonoidExtension.lean",
+  "module": "Sheaf.RingTheory.CompletedInvertibleKummerMonoidExtension",
+  "declaration": "Algebra.completed_invertible_kummer_monoid_extension",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

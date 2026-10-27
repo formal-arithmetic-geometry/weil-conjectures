@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 import all Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisSections
 import all Sheaf.AlgebraicGeometry.CondensedQbarScalarBasisUnitOfSections
+import Sheaf.AlgebraicGeometry.CondensedQbarPointBasis
 import Sheaf.CategoryTheory.CoefficientPushCopowerCriterion
 import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import Mathlib.Topology.Algebra.Module.FiniteDimension
@@ -40,9 +41,9 @@ coefficient changes. This file supplies the coefficient-specific input:
   derived categories, and (Pull) is an isomorphism there;
 * for a finite extension `F/E`, (Push) is an isomorphism on all unbounded objects, hence so is
   (Shriek);
-* for `E ⊆ Ω`, (Push) is an isomorphism on all unbounded objects when `f` is proper, but not
-  for an arbitrary `f`. Since the proper part of a compactification is proper, (Shriek) is an
-  isomorphism on all unbounded objects for every `f` with a compactification.
+* for `E ⊆ Ω`, (Push) is an isomorphism on all unbounded objects provided `Rf_*` preserves
+  coproducts. The proper-map instance records this continuity as an explicit hypothesis.
+  The same hypothesis on the proper part of a compactification gives (Shriek).
 
 ## Sorried input
 
@@ -60,15 +61,15 @@ coefficient changes. This file supplies the coefficient-specific input:
   `F/E`, (Push) is an isomorphism on all unbounded objects, since `F_X ≅ E_X^n` reduces it to
   the compatibility of `Rf_*` with finite direct sums.
 * `ProEtale.CondensedRing.isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper`:
-  for `E ⊆ Ω` and `f` proper, (Push) is an isomorphism on all unbounded objects: `Rf_*` has a
-  right adjoint `Rf^!`, hence commutes with the coproducts through which `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` is
-  computed from the finite stages. For a general `f` this fails, and (Push) is an isomorphism
-  only at objects at which `Rf_*` commutes with the relevant coproducts; no such statement is
-  made here.
+  for `E ⊆ Ω`, the scalar-basis mate criterion proves (Push) from preservation of coproducts
+  by `Rf_*`. Properness alone does not supply ambient unbounded continuity. The former
+  unconditional assertion was disputed; the authorized correction makes continuity explicit.
 
 -/
 
 @[expose] public section
+
+
 
 universe u
 
@@ -799,17 +800,37 @@ instance isIso_derivedPushHom_padicSubfieldRingObjMap {E F : FiniteIntermediateF
   exact finitePush_of_pointCopower f _ _
     (Profinite.padicSubfieldRingObjMap ℓ h) I e
 
--- STATEMENT-DISPUTED: the mate criterion makes this force infinite copower continuity,
--- hence countable coproduct continuity. The generic-point counterexample extends to
--- internal E_X-modules via scalar action (r * s)(t) = r|_t * s(t) on coevaluation.
--- See the B5 report for the ringed argument and its remaining formalization checks.
-/-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` and `f` *proper*, on all unbounded objects: `Rf_*`
-then admits a right adjoint `Rf^!`, hence commutes with the coproducts through which the derived
-extension of scalars along the flat `E_X ⟶ ℚ̄_ℓ,X` is computed. See the module docstring. -/
+-- STATEMENT-DISPUTED: the original assertion used properness alone to claim ambient
+-- unbounded coproduct continuity. The maintenance repair of 2026-10-22 authorizes the
+-- explicit continuity hypothesis below; no formal refutation of the old assertion is claimed.
+-- The scalar-basis copower criterion proves the corrected implication.
+set_option maxHeartbeats 800000 in
+-- The concrete coefficient categories compare several derived adjunctions.
+/-- **(Push)** is an isomorphism for `E ⊆ ℚ̄_ℓ` on all unbounded objects when the proper
+map's derived direct image preserves coproducts. This continuity is an explicit hypothesis,
+not a consequence of properness in the ambient category. A scalar basis of the regular
+condensed algebraic closure reduces the canonical mate to those coproduct comparisons.
+(blueprint: lem-sfb-qlbar-push-iso-proper) -/
 instance isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper [IsProper f]
-    (E : FiniteIntermediateField ℓ) :
-    IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
-  sorry
+    (E : FiniteIntermediateField ℓ)
+    [∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I)
+      R((f)_*⟦Profinite.continuousMapRingObj E⟧)] :
+    IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) := by
+  classical
+  let : HasColimitsOfSize.{u + 1, u + 1}
+      (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        (Profinite.continuousMapRingObj E)) := IsGrothendieckAbelian.hasColimits _
+  let : HasCoproducts.{u + 1}
+      (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        (Profinite.continuousMapRingObj E)) :=
+    fun J ↦ HasColimitsOfShape.of_small.{u + 1, u + 1} _ (Discrete J)
+  obtain ⟨I, ⟨e⟩⟩ := Profinite.exists_padicAlgCl_point_basis.{u} ℓ E
+  apply (push_of_pointCopower_iff_continuity f _ _
+    (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) I e).2
+  intro M
+  let := coefficientDerivedCoproducts (Profinite.continuousMapRingObj E) X
+  let := coefficientDerivedCoproducts (Profinite.continuousMapRingObj E) Y
+  infer_instance
 
 variable [HasCompactification f]
 
@@ -818,11 +839,17 @@ example {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
     IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjMap ℓ h) f) :=
   inferInstance
 
-/-- **(Shriek)** is an isomorphism for `E ⊆ ℚ̄_ℓ`, on all unbounded objects: the proper part of
-the compactification contributes (Push) for a proper morphism, which is an isomorphism. -/
-example (E : FiniteIntermediateField ℓ) :
-    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) :=
-  inferInstance
+/-- **(Shriek)** is an isomorphism for `E ⊆ ℚ̄_ℓ` on all unbounded objects if the
+proper part of the chosen compactification preserves coproducts under derived direct image. -/
+example (E : FiniteIntermediateField ℓ)
+    [∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I)
+      R(((HasCompactification.compactification f).g)_*⟦Profinite.continuousMapRingObj E⟧)] :
+    IsIso (derivedLowerShriekHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) := by
+  have : IsIso (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+      (HasCompactification.compactification f).g) :=
+    isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_of_isProper
+      ℓ (HasCompactification.compactification f).g E
+  exact isIso_derivedLowerShriekHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f
 
 end Push
 

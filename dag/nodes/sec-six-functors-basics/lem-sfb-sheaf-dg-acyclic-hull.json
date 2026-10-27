@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-sheaf-dg-acyclic-hull",
+ "kind": "statement",
+ "title": "An acyclic dg hull preserves monomorphisms",
+ "statement": "Let $X$ be a topological space with a sheaf of commutative rings $\\mathcal O$, in the universes of [def-weil-size-convention], and let $\\mathcal A$ be a sheaf dg $\\mathcal O$-algebra. Use left sheaf dg modules and signed shifts as in [def-sfb-sheaf-dg-module-localization]. Let $\\operatorname{Gr}(\\mathcal A)$ be the category of integer-graded left $\\mathcal A$-module sheaves, with no differential and with degree-zero module maps. Let $F$ forget the differential from sheaf dg $\\mathcal A$-modules to $\\operatorname{Gr}(\\mathcal A)$. There is a functor $G$ in the reverse direction and natural bijections $\\operatorname{Hom}_{\\mathrm{dg}}(G(N),M)\\simeq\\operatorname{Hom}_{\\operatorname{Gr}(\\mathcal A)}(N,F(M))$. For every graded module sheaf $N$, every underlying cohomology sheaf of $G(N)$ is zero. For every monomorphism $N\\hookrightarrow N^{\\prime}$ of graded module sheaves, the induced dg map $G(N)\\to G(N^{\\prime})$ is a monomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FSK (lemma-dg-hull) and 0FSL (lemma-dg-hull-acyclic); preservation of monomorphisms follows from the natural unit and cokernel descriptions in 0FSL, as used in 0FSS. Left modules by the graded opposite algebra."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization",
+  "def-sfb-graded-sheaf-module-category"
+ ],
+ "proof": [
+  {
+   "text": "Work in the fixed universes. For a graded left module sheaf $N$, set $G(N)^n=N^n\\oplus N^{n-1}$ as an $\\mathcal O$-module sheaf: on an open $V$ its sections are pairs $(x,y)$ with $x\\in N^n(V)$ and $y\\in N^{n-1}(V)$, with componentwise restrictions. The sheaf gluing and uniqueness conditions hold separately in the two coordinates. Define $D(x,y)=(0,x)$ in degree $n+1$; this is a sheaf map and $D^2=0$. No product indexed by all degrees is needed: each degree uses just two sheaves.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSK (lemma-dg-hull) and 0FSL (lemma-dg-hull-acyclic); explicit left-module construction and elementary verification by Q52"
+   }
+  },
+  {
+   "text": "For a homogeneous local section $a\\in\\mathcal A^p$, define $a\\cdot(x,y)=(ax-(-1)^p d_{\\mathcal A}(a)y,\\,(-1)^p ay)$. The terms have degrees $p+n$ and $p+n-1$; the formula is $\\mathcal O$-bilinear, additive and compatible with restriction. It is unital since $d_{\\mathcal A}(1)=0$ (the derivation identity gives $d(1)=d(1)+d(1)$). For $b\\in\\mathcal A^q$, expanding $a\\cdot(b\\cdot(x,y))$ gives $(abx-(-1)^q a\\,d(b)y-(-1)^{p+q}d(a)by,\\,(-1)^{p+q}aby)$. This equals $(ab)\\cdot(x,y)$ because $d(ab)=d(a)b+(-1)^p a\\,d(b)$. Thus the displayed action is associative.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSK (lemma-dg-hull) and 0FSL (lemma-dg-hull-acyclic); explicit left-module construction and elementary verification by Q52"
+   }
+  },
+  {
+   "text": "The dg module identity is a direct computation: $D(a\\cdot(x,y))=(0,ax-(-1)^p d(a)y)$, while $d(a)\\cdot(x,y)+(-1)^p a\\cdot D(x,y)$ has first coordinate $d(a)x-d(a)x=0$ (using $d^2(a)=0$), and second coordinate $(-1)^{p+1}d(a)y+ax$. Hence these expressions agree. This makes $G(N)$ a left sheaf dg module with the conventions of the statement. For a degree-zero graded $\\mathcal A$-linear map $u:N\\to N'$, put $G(u)(x,y)=(u(x),u(y))$. This commutes with $D$ and the action formula since $u(ax)=a u(x)$ and $u(d(a)y)=d(a)u(y)$. Componentwise composition and identities show that $G$ is a functor.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSK (lemma-dg-hull) and 0FSL (lemma-dg-hull-acyclic); explicit left-module construction and elementary verification by Q52"
+   }
+  },
+  {
+   "text": "Given a degree-zero graded $\\mathcal A$-linear sheaf map $f:N\\to F(M)$, define $\\widetilde f:G(N)\\to M$ by $\\widetilde f(x,y)=f(x)+d_Mf(y)$. This has degree zero and commutes with restrictions. It is a chain map since $d_M\\widetilde f(x,y)=d_Mf(x)=\\widetilde f(0,x)$. It is $\\mathcal A$-linear: for $a$ of degree $p$, expanding $\\widetilde f(a\\cdot(x,y))$ gives $a f(x)-(-1)^p d(a)f(y)+(-1)^p d_M(a f(y))=a f(x)+a d_Mf(y)$ by the dg Leibniz identity. Thus $\\widetilde f$ is a dg module morphism.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSK (lemma-dg-hull) and 0FSL (lemma-dg-hull-acyclic); explicit left-module construction and elementary verification by Q52"
+   }
+  },
+  {
+   "text": "Conversely, for a dg map $t:G(N)\\to M$, define $f(x)=t(x,0)$. The inclusion $x\\mapsto(x,0)$ is graded $\\mathcal A$-linear by the action formula, so $f$ is graded $\\mathcal A$-linear. Since $(x,y)=(x,0)+D(y,0)$, the chain-map identity forces $t(x,y)=f(x)+d_M f(y)$. The two assignments are inverse, because $\\widetilde f(x,0)=f(x)$. They are natural: for $u:N'\\to N$, $\\widetilde{f u}=\\widetilde f\\,G(u)$ by evaluation on $(x,y)$; for a dg map $v:M\\to M'$, $\\widetilde{v f}=v\\widetilde f$ since $v d_M=d_{M'}v$. Inverting these natural bijections gives exactly $\\operatorname{Hom}_{\\mathrm{dg}}(G(N),M)\\simeq\\operatorname{Hom}_{\\operatorname{Gr}(\\mathcal A)}(N,F(M))$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSK (lemma-dg-hull) and 0FSL (lemma-dg-hull-acyclic); explicit left-module construction and elementary verification by Q52"
+   }
+  },
+  {
+   "text": "In degree $n$, the kernel sheaf of $D:G(N)^n\\to G(N)^{n+1}$ consists precisely of pairs $(0,y)$. It is also the image of $D:G(N)^{n-1}\\to G(N)^n$, since $D(y,0)=(0,y)$. These identities are identities of sheaf maps: the projection $(x,y)\\mapsto y$ restricts to an inverse from the kernel onto $N^{n-1}$, and $y\\mapsto(y,0)$ gives the required lift in degree $n-1$. Consequently the kernel and image subsheaves coincide, so their quotient, the $n$th underlying cohomology sheaf, is zero. This holds for every integer $n$.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSK (lemma-dg-hull) and 0FSL (lemma-dg-hull-acyclic); explicit left-module construction and elementary verification by Q52"
+   }
+  },
+  {
+   "text": "Let $u:N\\to N'$ be a categorical monomorphism of graded module sheaves. To justify using injectivity on sections, define $K^n(V)=\\{x\\in N^n(V):u(x)=0\\}$. These form sheaves by gluing in $N^n$ and checking $u(x)=0$ locally. They are stable under the graded $\\mathcal A$-action since $u(ax)=a u(x)$, so they form a graded module sheaf $K$. Its inclusion $j:K\\to N$ satisfies $u j=0=u\\,0$. Cancellation by the monomorphism $u$ gives $j=0$. On each open and in each degree $j$ is the inclusion of the displayed subset, hence that subset is zero. Thus every map $u^n(V)$ is injective. This proves the needed direction directly, without invoking any theorem that forgetful functors preserve monomorphisms.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSK (lemma-dg-hull) and 0FSL (lemma-dg-hull-acyclic); explicit left-module construction and elementary verification by Q52"
+   }
+  },
+  {
+   "text": "By construction $G(u)^n(V)$ sends $(x,y)$ to $(u^n(V)x,u^{n-1}(V)y)$, so it is injective by the previous step. If two dg module maps $r,s:P\\to G(N)$ satisfy $G(u)r=G(u)s$, this sectionwise injectivity gives $r^n(V)=s^n(V)$ on every open and in every degree. Equality of these components is equality of dg module maps. Hence $r=s$, proving that $G(u)$ is a monomorphism, as required.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FSK (lemma-dg-hull) and 0FSL (lemma-dg-hull-acyclic); explicit left-module construction and elementary verification by Q52"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-sheaf-dg-module-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FSK and 0FSL; explicit two-coordinate left-module proof instead of the adjoint-functor/presentation proof; 0FSS uses the resulting monomorphism preservation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from sheaf differential graded modules to graded modules has an exact left adjoint with acyclic values",
+   "results": "{\"t\": \"2026-10-24T08:07:44Z\", \"tool\": \"leanfinder\", \"query\": \"The forgetful functor from sheaf differential graded modules to graded modules has an exact left adjoint with acyclic values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.freeForgetAdjunction\", \"Condensed.freeForgetAdjunction\", \"PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"PresheafOfModules.sheafificationAdjunction\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsRightAdjointPushforward\"], \"digest\": \"191133243e8c7a07\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the generic adjunction lemmas in CategoryTheory/Preadditive/Injective/Preserves.lean:49-66 assume the functors and preservation properties; they do not construct this hull. DifferentialObject.lean:104-112 only forgets an already linear differential; a dg action has the additional d_A term. KInjective.lean:42-51 and CM5b concern ordinary cochain complexes. No sheaf dg module or hull occurs in the grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free differential graded hull of a graded sheaf module is acyclic and preserves monomorphisms",
+   "results": "{\"t\": \"2026-10-24T08:09:52Z\", \"tool\": \"leanfinder\", \"query\": \"Free differential graded hull of a graded sheaf module is acyclic and preserves monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instMonoFIntI\", \"CochainComplex.cm5b.instMonoIntI\", \"CochainComplex.IsKProjective\", \"CochainComplex.IsKInjective\", \"CochainComplex.cm5b.I_X\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b.I\"], \"digest\": \"64405b9019e9bd87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the generic adjunction lemmas in CategoryTheory/Preadditive/Injective/Preserves.lean:49-66 assume the functors and preservation properties; they do not construct this hull. DifferentialObject.lean:104-112 only forgets an already linear differential; a dg action has the additional d_A term. KInjective.lean:42-51 and CM5b concern ordinary cochain complexes. No sheaf dg module or hull occurs in the grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialGraded\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-24T08:10:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"DifferentialGraded\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the generic adjunction lemmas in CategoryTheory/Preadditive/Injective/Preserves.lean:49-66 assume the functors and preservation properties; they do not construct this hull. DifferentialObject.lean:104-112 only forgets an already linear differential; a dg action has the additional d_A term. KInjective.lean:42-51 and CM5b concern ordinary cochain complexes. No sheaf dg module or hull occurs in the grep."
+  },
+  {
+   "tool": "grep",
+   "query": "dgHull|dg_hull|DifferentialGraded|DGModule",
+   "results": "{\"t\": \"2026-10-24T08:10:44Z\", \"tool\": \"grep\", \"query\": \"dgHull|dg_hull|DifferentialGraded|DGModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the generic adjunction lemmas in CategoryTheory/Preadditive/Injective/Preserves.lean:49-66 assume the functors and preservation properties; they do not construct this hull. DifferentialObject.lean:104-112 only forgets an already linear differential; a dg action has the additional d_A term. KInjective.lean:42-51 and CM5b concern ordinary cochain complexes. No sheaf dg module or hull occurs in the grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic differential graded hull left adjoint to forgetting the differential preserves monomorphisms",
+   "results": "{\"t\": \"2026-10-24T08:10:45Z\", \"tool\": \"leansearch\", \"query\": \"Acyclic differential graded hull left adjoint to forgetting the differential preserves monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesMonomorphisms_of_preserves_shortExact_left\", \"CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects\", \"CategoryTheory.Adjunction.unit_mono_of_L_faithful\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"ModuleCat.forget_preservesMonomorphisms\", \"AddCommGrpCat.forget_commGrp_preserves_mono\", \"CategoryTheory.MonoOver.imageForgetAdj\", \"CategoryTheory.DifferentialObject.forget_faithful\"], \"digest\": \"c7086f49899c49d2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the generic adjunction lemmas in CategoryTheory/Preadditive/Injective/Preserves.lean:49-66 assume the functors and preservation properties; they do not construct this hull. DifferentialObject.lean:104-112 only forgets an already linear differential; a dg action has the additional d_A term. KInjective.lean:42-51 and CM5b concern ordinary cochain complexes. No sheaf dg module or hull occurs in the grep."
+  },
+  {
+   "tool": "grep",
+   "query": "dgHull|dg_hull|DifferentialGraded|DGModule",
+   "results": "{\"t\": \"2026-10-24T08:31:17Z\", \"tool\": \"grep\", \"query\": \"dgHull|dg_hull|DifferentialGraded|DGModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CM5b constructs ordinary cochain factorizations, not a left adjoint for sheaf dg algebra actions; DifferentialObject forgets an already linear differential, while a dg algebra action includes the d_A term; the generic adjunction preservation lemmas assume rather than construct the hull. Read CategoryTheory/Preadditive/Injective/Preserves.lean:49–66, CategoryTheory/DifferentialObject.lean:104–112 and Algebra/Homology/Factorizations/CM5b.lean:70–122. The second semantic query returns conversions between differential objects and ordinary complexes, tensor algebra grading and bicomplexes, none supplying the signed sheaf dg action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic differential graded hull left adjoint to forgetting the differential preserves monomorphisms",
+   "results": "{\"t\": \"2026-10-24T08:31:18Z\", \"tool\": \"leansearch\", \"query\": \"Acyclic differential graded hull left adjoint to forgetting the differential preserves monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesMonomorphisms_of_preserves_shortExact_left\", \"CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects\", \"CategoryTheory.Adjunction.unit_mono_of_L_faithful\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"ModuleCat.forget_preservesMonomorphisms\", \"AddCommGrpCat.forget_commGrp_preserves_mono\", \"CategoryTheory.MonoOver.imageForgetAdj\", \"CategoryTheory.DifferentialObject.forget_faithful\"], \"digest\": \"c7086f49899c49d2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CM5b constructs ordinary cochain factorizations, not a left adjoint for sheaf dg algebra actions; DifferentialObject forgets an already linear differential, while a dg algebra action includes the d_A term; the generic adjunction preservation lemmas assume rather than construct the hull. Read CategoryTheory/Preadditive/Injective/Preserves.lean:49–66, CategoryTheory/DifferentialObject.lean:104–112 and Algebra/Homology/Factorizations/CM5b.lean:70–122. The second semantic query returns conversions between differential objects and ordinary complexes, tensor algebra grading and bicomplexes, none supplying the signed sheaf dg action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialGraded\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-24T08:31:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"DifferentialGraded\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CM5b constructs ordinary cochain factorizations, not a left adjoint for sheaf dg algebra actions; DifferentialObject forgets an already linear differential, while a dg algebra action includes the d_A term; the generic adjunction preservation lemmas assume rather than construct the hull. Read CategoryTheory/Preadditive/Injective/Preserves.lean:49–66, CategoryTheory/DifferentialObject.lean:104–112 and Algebra/Homology/Factorizations/CM5b.lean:70–122. The second semantic query returns conversions between differential objects and ordinary complexes, tensor algebra grading and bicomplexes, none supplying the signed sheaf dg action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free differential graded hull of a graded sheaf module is acyclic and preserves monomorphisms",
+   "results": "{\"t\": \"2026-10-24T08:31:19Z\", \"tool\": \"leanfinder\", \"query\": \"Free differential graded hull of a graded sheaf module is acyclic and preserves monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instMonoFIntI\", \"CochainComplex.cm5b.instMonoIntI\", \"CochainComplex.IsKProjective\", \"CochainComplex.IsKInjective\", \"CochainComplex.cm5b.I_X\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CochainComplex.cm5b.I\"], \"digest\": \"64405b9019e9bd87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CM5b constructs ordinary cochain factorizations, not a left adjoint for sheaf dg algebra actions; DifferentialObject forgets an already linear differential, while a dg algebra action includes the d_A term; the generic adjunction preservation lemmas assume rather than construct the hull. Read CategoryTheory/Preadditive/Injective/Preserves.lean:49–66, CategoryTheory/DifferentialObject.lean:104–112 and Algebra/Homology/Factorizations/CM5b.lean:70–122. The second semantic query returns conversions between differential objects and ordinary complexes, tensor algebra grading and bicomplexes, none supplying the signed sheaf dg action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint adding a differential to graded modules over a differential graded algebra using two copies of the module",
+   "results": "{\"t\": \"2026-10-24T08:32:04Z\", \"tool\": \"leanfinder\", \"query\": \"Left adjoint adding a differential to graded modules over a differential graded algebra using two copies of the module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.dgoToHomologicalComplex\", \"HomologicalComplex.homologicalComplexToDGO\", \"TensorAlgebra.GradedAlgebra.ι\", \"HomologicalComplex₂.ofGradedObject_X_X\", \"HomologicalComplex.dgoToHomologicalComplex_obj_d\", \"HomologicalComplex.dgoEquivHomologicalComplex_functor\", \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"HomologicalComplex.dgoToHomologicalComplex_obj_X\"], \"digest\": \"adf8dc19abf0ec86\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: CM5b constructs ordinary cochain factorizations, not a left adjoint for sheaf dg algebra actions; DifferentialObject forgets an already linear differential, while a dg algebra action includes the d_A term; the generic adjunction preservation lemmas assume rather than construct the hull. Read CategoryTheory/Preadditive/Injective/Preserves.lean:49–66, CategoryTheory/DifferentialObject.lean:104–112 and Algebra/Homology/Factorizations/CM5b.lean:70–122. The second semantic query returns conversions between differential objects and ordinary complexes, tensor algebra grading and bicomplexes, none supplying the signed sheaf dg action."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-dg-injectivity-tests",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. Affine passage to dg global modules, including the local-to-finite-cell perfectness theorem and the actual coefficient adjunction comparisons. Independent tool: Affine equivalence: construct the dg adjunction before checking its unit and counit by the ordinary affine equivalence. Resolution prerequisite: set of acyclic extension tests before the pushout construction of 0FT0. Independent prerequisite in the injectivity-test proof: acyclic dg hull converts subobjects of a graded generator into acyclic dg monomorphisms; it is not an injectivity-test equivalence.",
+   "via": [
+    "lem-sfb-sheaf-dg-injectivity-tests",
+    "lem-sfb-flat-ringed-dg-pushpull",
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-acyclic-hull",
+  "worker": "stage1",
+  "summary": "Constructed the hull explicitly, checked its signed left action, dg identity, functoriality and natural Hom bijection, and proved acyclicity and monomorphism preservation on sections. No new node: all arguments are written finite-coordinate calculations or direct kernel and cancellation arguments. Reused the existing dg module and sheaf module definitions. No statement correction.",
+  "blueprint": "The inherited from.place locates this prerequisite in the acyclic extension tests before 0FT0: steps 1–5 construct the hull and adjunction, step 6 gives acyclicity, and steps 7–8 make graded test monomorphisms into acyclic dg monomorphisms. The newest blueprint direct-images proof (3) is the ancestor context; no blueprint node states the hull theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-8ba368549",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-8ba368549 (reviewer sub-agent of L); spot-checked: Read sdga.tex 0FSK lemma-dg-hull and 0FSL lemma-dg-hull-acyclic (~l.3290-3420). The source's G(A_gr)=C[-1] (cone on id, degree n = A^n+A^{n-1}, D(x,y)=(0,x)) is exactly the delivered explicit G(N) specialised to N=A. Statement, stmt_deps and blueprint are identical to Q37's created node and are not weakened. The parent injectivity-tests step 0 uses exactly the three clauses. I recomputed all 8 steps with the left-module Leibniz convention of def-sfb-sheaf-dg-module-localization: degrees, d(1)=0, associativity via d(ab)=d(a)b+(-1)^p a d(b), D-Leibniz (first coordinate d(a)x-d(a)x=0, second ax-(-1)^p d(a)y), A-linearity of f~(x,y)=f(x)+df(y) (the d(a)f(y) terms cancel), the inverse via (x,y)=(x,0)+D(y,0), naturality, ker D = im D = {(0,y)} sectionwise so H^n=0, mono => sectionwise injective via the sectionwise kernel K in Gr(A), and G(u) left-cancellable. All steps are genuinely elementary and use only definitions (def-weil-size-convention, def-weil-sheaf-of-modules-category, def-sfb-sheaf-dg-module-localization). There are no off-unit statements, tool_uses=[], and no new nodes. Edge cases: A=O with N=O gives the acyclic disk with Hom=M^0(X); d_A=0 gives the shifted action; the acyclic dga with de=1 is consistent; unbounded N and noncommutative A are covered. Duplicate search (rg -L 0FSK/0FSL/dg hull/cone on identity) found only the parent and the unrelated pretriangulated-hull nodes lem-coef-dg-*. Cosmetic issues: duplicated mathlib_searches entries, and report mentions of worker-side citations.json/searches.jsonl that are not committed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafDgAcyclicHull",
+  "declaration": "CategoryTheory.SheafDg.exists_acyclicHull",
+  "file": "lean/Sheaf/CategoryTheory/SheafDgAcyclicHull.lean",
+  "statement": "theorem exists_acyclicHull {X : TopCat.{u}} (S : TopCat.Sheaf CommRingCat.{w} X) [EssentiallySmall.{w} (TopologicalSpace.Opens X)] (A : Algebra S) : ∃ G : GradedLeftModule (underlyingGradedAlgebra A) ⥤ LeftModule A, Nonempty (G ⊣ (HomologicalComplex.forget (ringedSiteModules.{w} (rings S)) (.up ℤ)).mapMod A.X) ∧ (∀ (N : GradedLeftModule (underlyingGradedAlgebra A)) (n : ℤ), IsZero ((cohomology A n).obj ((q A).obj (G.obj N)))) ∧ G.PreservesMonomorphisms",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-365d747fa",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps, item module, report, dep Lean (SheafDgModuleLocalization LeftModule/q/cohomology; GradedSheafModule Graded/forgetComplexMonoidal (identity tensorator via inducingFunctorData)/underlyingGradedAlgebra/GradedLeftModule; WeilConjectures Monoidal/Mod mapMod). All clauses match: X:TopCat.{u}, S CommRingCat.{w}, EssentiallySmall.{w} Opens (dep convention), A:Algebra S; ∃ G with Nonempty (G ⊣ forget.mapMod A.X) (F is genuine differential-forgetting with true action), cohomology A n of q(G N) IsZero ∀N n, G.PreservesMonomorphisms; ∃ is iso-invariant since G is a left adjoint. Node diff vs side-live: lean + added stmt_dep def-sfb-graded-sheaf-module-category only, present on delivery base 365d747 (ls-tree), dep modules byte-identical. H4 duplicate removed, landed Q25 owner reused. Source 0FSK/0FSL/0FSS: cone of id. Edge cases ok. No defs, only sorry, docstrings with source+blueprint+8 steps, statement verbatim, report has Worker report + Second reading by Q36. Not recompiled (unchanged; worker scompile + preflight clean). No findings."
+ }
+}

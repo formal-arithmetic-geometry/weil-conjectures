@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-open-support-step-bounds",
+ "kind": "statement",
+ "title": "One open support operation preserves the system bounds",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, a finite extension E of Q_l and the specified strict system operations o. Let j:X to Y be a quasi-compact open immersion of schemes of finite type over Spec D.k, without separatedness hypotheses on their structure morphisms. For every Good system M on X and every derived-complete bounded constructible integral K on X, the specified system extension by zero of M is Good on Y, and the localized completed-ring extension by zero of K is integral constructible on Y. The two assertions are independent; they require no relation between M and K.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Parent completed-shriek composition node, proof steps 7 and 8; Stacks 0941, 0F10, 0GL1 and 0E8I, as detailed in the declaration docstring."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Apply finiteStageDerivedExtensionByZero_constructibleFiniteTor at every positive coefficient level. It preserves the same support and Tor intervals. Transport constructibility, support and Tor amplitude through the specified open evaluation isomorphism.",
+   "uses": [
+    "lem-trf-open-ctf",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical ambient model to obtain a realization model for canonical operations. The proved fixedOpenReduction_isIso helper of open reconstruction effectivity gives an invertible open-reduction mate on every integral object. Normalized reconstruction identifies M with reduction of its actual total limit by the invertible counit. Applying open extension and the open-reduction mate therefore identifies its output with a reduction system, hence normalized. Uniqueness of left adjoints to the fixed system pullback identifies the canonical open functor with o.extension. Transport normalization through this whole-system isomorphism.",
+   "uses": [
+    "lem-sf-integral-canonical-ambient-models",
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-pur-completed-open-tensor-system-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rebuild compatible etale origins from the output level bounds. Convert each intrinsic level by the canonical finite-module equivalence and use bounded constructible etale descent. Transfer each actual system transition to the fixed coefficient level via full faithfulness, then lift its etale comparison through the bounded-below fully faithful site comparison. The two required squares follow by cancelling the chosen comparison isomorphisms.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-proetale-dbc-triangulated",
+    "def-sf-integral-system-expression-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the independent integral clause, use the constructibility component of the already constructed canonical open-factor coherence data for j. Its extension functor is exactly ringedOpen. Combine this with output normalization, bounds and origins to obtain both original conclusions.",
+   "uses": [
+    "lem-sf-pf-open-factor-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-open-ctf",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-sf-integral-canonical-ambient-models",
+  "lem-sf-open-reconstruction-effectivity",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-pur-completed-open-tensor-system-realization",
+  "lem-sf-proetale-constructible-origin",
+  "def-sf-integral-system-expression-domain",
+  "lem-sf-pf-open-factor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "B3: reuse proved finite open CTF bounds and canonical open-factor integral preservation; reconstruct origins by etale descent; prove normalization through the invertible actual reconstruction counit and canonical open-reduction mate."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructible derived complete integral coefficients normalized reductions with uniform Tor bounds preserved by proper pushforward and extension by zero",
+   "results": "{\"t\": \"2026-10-25T13:33:56Z\", \"tool\": \"leansearch\", \"query\": \"Constructible derived complete integral coefficients normalized reductions with uniform Tor bounds preserved by proper pushforward and extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"Condensed.instAB4CondensedMod\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.IsIntegralHom.recOn\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"f73f45118e53480f\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for this project-specific derived coefficient system and its bounds; retain the published project constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized coefficient sequences with uniform constructible cohomology and Tor bounds have compatible etale origins",
+   "results": "{\"t\": \"2026-10-25T13:33:58Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized coefficient sequences with uniform constructible cohomology and Tor bounds have compatible etale origins\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instEtaleRing\", \"Algebra.Etale.comp\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"913071b33a85af25\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for this project-specific derived coefficient system and its bounds; retain the published project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedCoefficientSequence|LevelBounds|sfIntegralConstructible",
+   "results": "{\"t\": \"2026-10-25T13:33:58Z\", \"tool\": \"grep\", \"query\": \"IsNormalizedCoefficientSequence|LevelBounds|sfIntegralConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for this project-specific derived coefficient system and its bounds; retain the published project constructions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompletedShriekCompositionLaws",
+  "date": "2026-10-25",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The common-bounds and coefficient-comparison argument; parent node proof steps 7 and 8.",
+   "via": [
+    "lem-sf-completed-shriek-composition-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenSupportStepBounds",
+  "file": "lean/Sheaf/SixFunctors/OpenSupportStepBounds.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.openSupportStep_bounds",
+  "statement": "theorem openSupportStep_bounds (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (o : Operations l E) {X Y : Over (Spec (CommRingCat.of D.k))}\n    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left]\n    (M : System l E X.left) (hM : Good l E X.left M) (K : Integral l E X.left)\n    (hK : sfIntegralConstructible l E X.left K) :\n    Good l E Y.left ((Operations.shriek l E o j.left).obj M) ∧\n      sfIntegralConstructible l E Y.left ((ringedOpen l E j.left).obj K)",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T164514-L-1027766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261025T201351-L-2456882",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

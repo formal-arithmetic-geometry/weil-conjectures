@@ -1,0 +1,332 @@
+{
+ "id": "lem-weil-pbc-continuous-scalar-derived-encoding",
+ "kind": "statement",
+ "title": "Continuous coefficient encoding for the exact ambient derived scalar adjunction",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be a finite normed field extension, and let $A=\\mathcal O_E$ with uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $T$ be a noetherian scheme, and use its small pro-etale site [def-weil-pbc-proetale-site]. Put $B_T=\\varprojlim_{n\\geq1}(A/\\varpi^n)_T$ [def-weil-pbc-adic-coefficient-datum], $A_T(V)=C(|V|,A)$ and $E_T(V)=C(|V|,E)$. Identify $B_T$ with $A_T$ by the canonical quotient projections, and use the ring map $B_T\\to E_T$ given by this identification followed by postcomposition with $A\\hookrightarrow E$ [lem-weil-pbc-continuous-coefficients-immersion-restriction]. Let $A_T^c=p_T^*C(-,A)$ and $E_T^c=p_T^*C(-,E)$ be the internal coefficient rings [def-weil-pbc-continuous-integral-coefficients, def-weil-pbc-condensed-e-module-category], with their actual inclusion, and let $\\Phi_A,\\Phi_E$ be the specified internal-to-sectionwise module encodings [def-weil-pbc-continuous-coefficient-module-encoding]. Write $D(\\Phi_A),D(\\Phi_E)$ for their termwise derived equivalences, and $Q$ for localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]. All tensor products are sheaf tensor products [def-pur-sheaf-tensor-product]. Ordinary scalar extension $E_T\\otimes_{B_T}-$ and restriction of scalars are additive and exact; the same holds in internal modules. The actual unbounded derived functor $F=E_T\\otimes^L_{B_T}-$ is triangulated with its termwise shift comparison, and every complex $K$ computes it: $F(QK)\\cong Q(E_T\\otimes_{B_T}K)$, naturally in $K$. There is a natural isomorphism of derived functors $D(\\Phi_E)\\circ(E_T^c\\otimes^L_{A_T^c}-)\\cong F\\circ D(\\Phi_A)$, identifying the actual coefficient inclusion and its ordinary scalar-extension comparison, with the termwise comparison on complexes. The functor $F$ is left adjoint to the exact termwise derived restriction $U$. Under the displayed factorization isomorphisms, its unit on every representing complex is $\\eta_{QK}=Q(K\\to U(E_T\\otimes_{B_T}K))$, where the chain map sends each local section $m$ to $1\\otimes m$. The same normalization holds under the specified internal encodings. No boundedness, constructibility or completeness hypothesis is imposed on $K$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1),(2); ambient coefficient and encoding calculation isolated from returned proof steps 1–3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-weil-pbc-condensed-e-module-category",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Use chartComparison_naturality and the specified coefficient equalities lisseIntegerSheaf_eq and lisseFieldSheaf_eq. The equality lisseScalar_square identifies the two actual inclusions. Restriction along the inverse charts, sectionModuleComapIso, and identity linear maps for ring-isomorphism transport give a restriction comparison whose map on every section is the identity. The private helpers ringRestriction, ringIsoRestriction and spectralRestriction implement these three operations without choosing a new encoding.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; specified continuous coefficient charts"
+   }
+  },
+  {
+   "text": "Reuse the existing proved ordinaryAdjunction_exists and reductionUnit_apply of AdicCoefficientDatum. These apply sheafRingCoefficientOrdinaryAdjunction to the fixed reductionChange presentation and evaluate at the identity to give unit m ↦ 1 tensor m. Take the inverse mate of the restriction comparison across this adjunction and extendRestrictAdjunction. Since both vertical functors are equivalences, the mate is invertible (apply the equivalence mate theorem to opposite categories). Its mate-unit identity gives exactly ordinaryUnit.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, ordinary scalar adjunction; categorical mate identities"
+   }
+  },
+  {
+   "text": "The existing integralScalarExtension_exact theorem proves finite-limit preservation for actual internal scalar extension. Transfer it to sectionwise extension through the ordinary extension comparison and the inverse encoding. Left adjoints preserve finite colimits. The encodings are additive since equivalences preserve binary products. Restriction retains its existing exactness instances.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-scalar-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2; continuous integral scalar localization"
+   }
+  },
+  {
+   "text": "For each fixed universal left-derived pair, compare it with the exact termwise functor using leftDerivedUnique and the canonical mapDerivedCategoryFactorsh. Its factorization identity is exactComparison_fac. Insert the quotient-to-derived isomorphisms and cancel their inverses to obtain exactComparison_complex on every cochain complex. Thus both actual derived pairs retain their specified counits. Transport the termwise shift structure and triangulated structure along the sectionwise comparison.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F; exact-functor derived comparison"
+   }
+  },
+  {
+   "text": "Localize the ordinary extension isomorphism with the existing mapDerivedCategorySquareIso. The composition and natural-isomorphism factorization equations prove squareComplex. Whisker it with the two canonical universal-pair comparisons. Naturality and inverse cancellation prove exactly derivedExtensionComplex. The existing derived-equivalence instances for the two encodings give the required equivalences.",
+   "uses": [
+    "lem-sfb-exact-derived-composition",
+    "lem-sfb-exact-derived-natural-iso",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG; localization of compositions and natural isomorphisms"
+   }
+  },
+  {
+   "text": "Localize the ordinary cochain adjunction using the square determined by exactComparison_complex and the canonical exact restriction factorization. The explicit localization_unit_app formula, followed by inverse cancellation, is the required unit identity on every complex. This constructs the sectionwise adjunction directly and does not require a separate K-flat resolution argument.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG; localization of an exact adjunction"
+   }
+  },
+  {
+   "text": "For the specified actual internal adjunction, apply the already proved derived_unit_cochain identity from DerivedAdjointCochainCounit. This is the unit calculation underlying its public leftDerivedCochainCounit theorem. Unfold only reductionComplexCounit, remove the identity homotopy factor, and cancel the restriction factorization inverse. The resulting identity is internalUnit. Finally assemble the data and preserve the two ordinary section formulas established above.",
+   "uses": [
+    "lem-derived-adjoint-cochain-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY; existing derived cochain unit calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "lem-derived-adjoint-cochain-counit",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F; sites-cohomology.tex Tag 06YY; categorical localization and adjunction identities",
+  "note": "V8: shorter exact-functor route implemented in Lean; ordinary comparisons use restriction and mates, sectionwise derived adjunction is localized directly, and the fixed internal adjunction uses the existing derived cochain unit identity. The unit route and all statement data are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Actual derived change of rings from integral continuous l-adic sheaves to field sheaves agrees under internal module encoding with termwise exact scalar extension and its normalized tensor unit",
+   "results": "{\"t\": \"2026-10-22T06:20:58Z\", \"tool\": \"leanfinder\", \"query\": \"Actual derived change of rings from integral continuous l-adic sheaves to field sheaves agrees under internal module encoding with termwise exact scalar extension and its normalized tensor unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"CondensedMod.IsSolid\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"Condensed.profiniteSolid\", \"CondensedMod.ofSheafProfinite\"], \"digest\": \"89d378d88ea1d730\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat adjunction and condensed monoidal infrastructure do not identify the actual continuous coefficient encoding or its unbounded derived unit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extendScalars\"",
+   "results": "{\"t\": \"2026-10-22T06:20:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"extendScalars\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat adjunction and condensed monoidal infrastructure do not identify the actual continuous coefficient encoding or its unbounded derived unit"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*scalar.*derived|derived.*scalar.*encoding|integral.*continuous.*exact",
+   "results": "{\"t\": \"2026-10-22T06:20:46Z\", \"tool\": \"grep\", \"query\": \"continuous.*scalar.*derived|derived.*scalar.*encoding|integral.*continuous.*exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat adjunction and condensed monoidal infrastructure do not identify the actual continuous coefficient encoding or its unbounded derived unit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal and sectionwise module encoding intertwines derived extension of continuous l-adic scalars and the adjunction unit on every complex",
+   "results": "{\"t\": \"2026-10-22T06:20:47Z\", \"tool\": \"leansearch\", \"query\": \"Internal and sectionwise module encoding intertwines derived extension of continuous l-adic scalars and the adjunction unit on every complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.restrictCoextendScalarsAdj\", \"TopModuleCat.withModuleTopologyAdj\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\"], \"digest\": \"06b979ce7c4cb490\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat adjunction and condensed monoidal infrastructure do not identify the actual continuous coefficient encoding or its unbounded derived unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For continuous coefficient sheaves O_E and E on the proetale site, tensoring with E is exact and left adjoint to exact restriction, with unit one tensor x on all complexes",
+   "results": "{\"t\": \"2026-10-22T06:20:58Z\", \"tool\": \"leanfinder\", \"query\": \"For continuous coefficient sheaves O_E and E on the proetale site, tensoring with E is exact and left adjoint to exact restriction, with unit one tensor x on all complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\"], \"digest\": \"e104f8a5b80cb57e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat adjunction and condensed monoidal infrastructure do not identify the actual continuous coefficient encoding or its unbounded derived unit"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*scalar.*derived|derived.*scalar.*encoding|continuous.*ModuleEquivalence",
+   "results": "{\"t\": \"2026-10-22T07:19:39Z\", \"tool\": \"grep\", \"query\": \"continuous.*scalar.*derived|derived.*scalar.*encoding|continuous.*ModuleEquivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module localization, condensed solid infrastructure, or generic triangulated/localization tools; none states the continuous coefficient encoding and its normalized actual unbounded scalar adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived localization of continuous l-adic module sheaves agrees with internal scalar extension and the unit one tensor m",
+   "results": "{\"t\": \"2026-10-22T07:19:39Z\", \"tool\": \"leansearch\", \"query\": \"Derived localization of continuous l-adic module sheaves agrees with internal scalar extension and the unit one tensor m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ\", \"LinearMap.extendScalarsOfIsLocalization_apply\", \"IsLocalization.tensorProduct_isLocalizedModule\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"IsLocalizedModule.rTensor\", \"LinearMap.extendScalarsOfIsLocalization_apply'\", \"IsLocalization.moduleLid\", \"IsLocalization.instIsLocalizedModuleTensorProductMap\"], \"digest\": \"79ace63a15e63008\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module localization, condensed solid infrastructure, or generic triangulated/localization tools; none states the continuous coefficient encoding and its normalized actual unbounded scalar adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extendScalars\"",
+   "results": "{\"t\": \"2026-10-22T07:19:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"extendScalars\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module localization, condensed solid infrastructure, or generic triangulated/localization tools; none states the continuous coefficient encoding and its normalized actual unbounded scalar adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On the proetale site continuous integral and rational l-adic coefficient module encodings identify exact scalar extension and its unbounded derived adjunction unit",
+   "results": "{\"t\": \"2026-10-22T07:19:49Z\", \"tool\": \"leanfinder\", \"query\": \"On the proetale site continuous integral and rational l-adic coefficient module encodings identify exact scalar extension and its unbounded derived adjunction unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidification\", \"Condensed.profiniteSolidCounit\", \"Condensed.profiniteSolid\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"CondensedMod.IsSolid.isIso_solidification_map\"], \"digest\": \"a26b862d5232854f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module localization, condensed solid infrastructure, or generic triangulated/localization tools; none states the continuous coefficient encoding and its normalized actual unbounded scalar adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|extendRestrictScalarsAdj",
+   "results": "{\"t\": \"2026-10-22T07:21:13Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategory|extendRestrictScalarsAdj\", \"sub\": \"Algebra/Category\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\", \"Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean\"], \"digest\": \"583f8334048cad38\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module localization, condensed solid infrastructure, or generic triangulated/localization tools; none states the continuous coefficient encoding and its normalized actual unbounded scalar adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-22T07:21:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapDerivedCategory\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module localization, condensed solid infrastructure, or generic triangulated/localization tools; none states the continuous coefficient encoding and its normalized actual unbounded scalar adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact change of rings functor between sheaf module categories induces a triangulated functor on all complexes and identifies the adjunction unit under an equivalence with internal modules",
+   "results": "{\"t\": \"2026-10-22T07:21:25Z\", \"tool\": \"leanfinder\", \"query\": \"An exact change of rings functor between sheaf module categories induces a triangulated functor on all complexes and identifies the adjunction unit under an equivalence with internal modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"CategoryTheory.Adjunction.IsTriangulated.mk''\", \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\"], \"digest\": \"64cda1972845c001\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module localization, condensed solid infrastructure, or generic triangulated/localization tools; none states the continuous coefficient encoding and its normalized actual unbounded scalar adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated_leftAdjoint|pushforwardPushforwardAdj_unit_app_val_app",
+   "results": "{\"t\": \"2026-10-22T07:34:28Z\", \"tool\": \"grep\", \"query\": \"isTriangulated_leftAdjoint|pushforwardPushforwardAdj_unit_app_val_app\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\"], \"digest\": \"12a1d81f785c61c7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module localization, condensed solid infrastructure, or generic triangulated/localization tools; none states the continuous coefficient encoding and its normalized actual unbounded scalar adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatIso|fullyFaithfulWhiskeringLeft",
+   "results": "{\"t\": \"2026-10-22T07:36:00Z\", \"tool\": \"grep\", \"query\": \"liftNatIso|fullyFaithfulWhiskeringLeft\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\", \"Mathlib/CategoryTheory/Localization/Predicate.lean\"], \"digest\": \"b48470184665bdc1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are ordinary module localization, condensed solid infrastructure, or generic triangulated/localization tools; none states the continuous coefficient encoding and its normalized actual unbounded scalar adjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-realization-scalar-functor",
+  "date": "2026-10-22",
+  "group": "Q110"
+ },
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof opening: 'choose an integral lattice and rationalize'; Lemma 6.8.2(1),(2); ambient coefficient and encoding calculation isolated from returned proof steps 1–3",
+   "via": [
+    "lem-weil-pbc-realization-scalar-functor",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-continuous-scalar-derived-encoding",
+  "worker": "stage1",
+  "summary": "Seven-step split with no new nodes: canonical coefficient localization, exact ordinary scalar adjunction, specified normalized internal/section encoding, exact unbounded derivation, natural derived square, K-flat-to-arbitrary-complex unit equation, and internal unit compatibility. Read all cited statements and source passages, checked no dependency returns to the item, and retained the statement verbatim.",
+  "blueprint": "Realizes the ambient coefficient calculation behind the opening integral-lattice/rationalization sentence of thm-weil-pbc-finite-extension. Does not assert a constructibility or realization theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic normalized internal/section change-of-rings comparison, used at the actual coefficient inclusion; the proper-base-change unit has no replacement for this categorical encoding tool."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Generic small-ringed-site ordinary tensor/restriction adjunction and restriction exactness, with its section formula."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic universal unbounded sheaf change-of-rings construction used to identify the actual derived functor."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Generic canonical comparison between a derived composite of exact functors and the composite of their derived functors."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic actual unbounded scalar adjunction with K-flat unit normalization; no geometric purity or alternate proper-base-change route is used."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic unbounded K-flat resolution existence for a small ringed site, used only to check the unit on arbitrary representatives."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Generic specified localization of an exact adjunction retaining its unit, not a replacement of a geometric proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-exact-derived-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N7-d7c2e808f",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-d7c2e808f (reviewer sub-agent of L); spot-checked: Read the full item (7 steps, no new nodes, statement unchanged), every cited node statement, Bhatt-Scholze Lemma 6.8.2(1),(2) at pdf p.58, and Stacks 015F, 07A6, 03ET, 03D7, 03DA, 03EK, 0GMW, 06YY, 04VG, 09T5 and 0FND (all labels resolve). Steps 1-6 hold. Step 1: the immersion-restriction node gives B_T=A_T and A_T[1/ϖ]=E_T for noetherian T, and the realizations node gives c_E j^c = j c_A. Step 2: the localization node applies with R=A_T and s=ϖ, and the ordinary adjunction node gives the transpose and so unit 1⊗m. Step 3: the internal-section node composed with the encoding definition gives α and ρ; the pro-étale site is listed in det-def-sfb-sheaf-tensor-structure. Step 4: uniqueness of right Kan extensions gives b: F≅D(L). Step 5: the natural-iso and composition nodes give the derived square. Step 6: I verified U(b_K)η_{QK}Qp = Q(η^0_K)Qp using b_P=c_P and cancelled Qp; no boundedness is used. Fault repaired in step 7: it claimed the internal-section node identifies the localized exact adjunctions with the actual derived ones, but that node only compares the internal and sectionwise K-flat adjunctions. Step 7 now runs the step-6 K-flat normalization and cancellation for both j and a_sec, adds lem-pur-sheaf-ring-derived-coefficient-adjunction and lem-pc-kflat-resolution to its uses (already in proof_deps), and is 1541 characters. Fix file: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-continuous-scalar-derived-encoding.json. Accepted all 7 tool_uses as generic black-box categorical tools; no SGA is used. No repair note exists, so this is not a re-split. The existing continuous-encoding nodes (objectwise scalar-extension, finite-limit exactness) are not duplicates. Edge cases checked: empty T, ϖ-torsion module in degree 0 (unit zero, no faithfulness claimed), unbounded complexes. The snapshot's review_split reports 'no such node' for every id because its glob does not follow the chapter symlinks; this is a tool artefact and all ids exist and are unmerged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousScalarDerivedEncoding",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousScalarDerivedEncoding",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.ContinuousScalarDerivedEncodingData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousScalarDerivedEncoding"
+  ],
+  "file": "lean/Sheaf/Paper/ContinuousScalarDerivedEncoding.lean",
+  "statement": "theorem continuousScalarDerivedEncoding (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) [IsNoetherian X] : ∃ d : ContinuousScalarDerivedEncodingData (Scheme.reductionChange X (lisseIntegerToField ℓ E X)) (Scheme.reductionRestrict X (lisseIntegerToField ℓ E X)) (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)) (Mod.comap (coefficientMap (integralScalarMap ℓ E) X)) (continuousIntegerModuleEquivalence ℓ E X) (continuousFieldModuleEquivalence ℓ E X) (Scheme.reductionDerivedChange X (lisseIntegerToField ℓ E X)) (Scheme.reductionDerivedCounit X (lisseIntegerToField ℓ E X)) (integralScalarExtension ℓ E X) (Mod.extendScalars (coefficientMap (integralScalarMap ℓ E) X)).leftDerivedFunctorCounit (Mod.extendRestrictAdjunction (coefficientMap (integralScalarMap ℓ E) X)) (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap (integralScalarMap ℓ E) X)), (∀ (M : Scheme.reductionModules X (lisseIntegerSheaf ℓ E X)) (V : X.ProEtᵒᵖ) (m : M.val.obj V), (d.ordinary.unit.app M).val.app V m = Scheme.reductionTensorSection X (lisseIntegerToField ℓ E X) M V 1 m) ∧ ∀ (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X)) (V : X.ProEtᵒᵖ) (x : N.X.obj.obj V), (d.restriction.hom.app N).val.app V x = x",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44904bb6",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN 3f016d7c198b. The lem-pur-derived-change-of-rings record is now byte-identical to live (Q84 module OrdinaryDerivedChangeOfRings, full declarations list), so the overwrite is gone. The item module is byte-identical (sha256 432635c5) to the module the earlier review accepted in substance. The item node differs from live only in lean (live has none, not landed). Re-checked independently: F = reductionDerivedChange with the universal counit (reductionDerivedUniversal); comparison pinned by comparisonCounit; shift pinned by ofIso comparison.symm, triangulated; Fc = L(Mod.extendScalars coefficientMap) with its leftDerivedFunctorCounit; derivedExtension pinned termwise; extension pinned via ordinaryUnit + restriction = id on sections + unit 1⊗m; derived units on all complexes, sectionwise and internal; no boundedness or extra hypotheses; no hollow fields; sorry only; docstrings carry source and blueprint. Report has Worker report and Second reading sections. Advisory: the stmt_dep lem-pur-derived-change-of-rings record has no declaration used directly (base-era). No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-03315",
+  "group": "V8",
+  "result": "fix",
+  "landing": "20261025T011044-L-3638669",
+  "kind": "interface",
+  "note": "independent cc review: continuousScalarDerivedEncoding proof (statement byte-identical, axioms propext/choice/Quot.sound) against node lem-weil-pbc-continuous-scalar-derived-encoding and its plan; def→abbrev integralScalarExtension against a compile of the item with the original def (18.4 s, passes)"
+ }
+}

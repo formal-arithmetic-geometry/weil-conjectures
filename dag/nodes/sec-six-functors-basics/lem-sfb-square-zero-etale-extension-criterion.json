@@ -1,0 +1,248 @@
+{
+ "id": "lem-sfb-square-zero-etale-extension-criterion",
+ "kind": "statement",
+ "title": "Etaleness of a map of square-zero extensions from its kernel comparison",
+ "statement": "Let $A^+,A,B^+,B$ be commutative unital rings, $p:A^+\\twoheadrightarrow A$ and $q:B^+\\twoheadrightarrow B$ surjective ring homomorphisms, and $u^+:A^+\\to B^+$, $u:A\\to B$ unital ring homomorphisms satisfying $q\\circ u^+=u\\circ p$. Put $I=\\ker p$ and $J=\\ker q$, and assume $I^2=0$ and $J^2=0$. Give $I$ its quotient $A$-module structure and $J$ its quotient $B$-module structure. Suppose $u$ is etale, meaning that $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale [def-weil-affine-spectrum], [def-weil-etale-morphism], and that the canonical $B$-linear map $I\\otimes_A B\\to J$, $i\\otimes b\\mapsto u^+(i)\\widetilde b$, is an isomorphism; here $\\widetilde b$ is any lift of $b$ to $B^+$, and $J^2=0$ makes the formula independent of the lift. Then $u^+$ is etale, meaning that $\\operatorname{Spec}B^+\\to\\operatorname{Spec}A^+$ is etale.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05YT (lemma-lift-etale-infinitesimal), full statement; the equality of kernels in the diagram means the canonical tensor comparison is an isomorphism."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Identify $A^+/I$ with $A$ by the isomorphism $[a]\\mapsto p(a)$; its inverse sends $a$ to the class of any lift, independently of that lift. By [lem-weil-pbc-etale-ring-map-iff-etale-affine], $B$ is an etale finitely presented $A$-algebra. Apply [lem-exc-etale-algebra-lift] to $A^+$ and $I$. Obtain an etale $A^+$-algebra $C$, with structural map $v:A^+\\to C$, and an $A$-algebra isomorphism $e:C/IC\\xrightarrow{\\sim}B$. Write $r:C\\twoheadrightarrow B$ for $e$ after quotient; thus $\\ker r=IC$ and $rv=up$. The affine etale criterion also gives that $\\operatorname{Spec}C\\to\\operatorname{Spec}A^+$ is etale.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-exc-etale-algebra-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05YT (lemma-lift-etale-infinitesimal), first sentence; Tag 04D1 (lemma-lift-etale)"
+   }
+  },
+  {
+   "text": "The same affine etale criterion gives $H_1(L_{C/A^+})=0$ and $\\Omega_{C/A^+}=0$. The zero module is projective: every map out of it lifts uniquely across any surjection. Hence [lem-weil-pbc-smooth-ring-map-square-zero-lifting] applies to $C$, the $A^+$-algebra $B^+$ via $u^+$, and its square-zero ideal $J$. Identify $B^+/J$ with $B$ by $[b^+]\\mapsto q(b^+)$. The map $r$ is $A^+$-linear because $rv=up=qu^+$. Lifting $r$ gives an $A^+$-algebra homomorphism $\\varphi:C\\to B^+$ with $q\\varphi=r$ and $\\varphi v=u^+$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05YT (lemma-lift-etale-infinitesimal), second sentence; Tag 031J (proposition-characterize-formally-smooth), (6) implies (1)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-algebra-flat], $C$ is flat over $A^+$. Products of generators show $(IC)^2=I^2C=0$. Apply [lem-weil-pbc-ideal-cotangent-flat-base-change-ring] to $A^+\\to C$ and $I$: since both ideal squares vanish, multiplication identifies $I\\otimes_{A^+}C$ with $IC$. There is a canonical isomorphism $I\\otimes_{A^+}C\\simeq I\\otimes_A B$, sending $i\\otimes c$ to $i\\otimes r(c)$. Explicitly, its inverse sends $i\\otimes b$ to $i\\otimes c$ for any $r(c)=b$. If the lift changes by $\\sum v(i_k)c_k$ with $i_k\\in I$, the difference is $\\sum (i_ki)\\otimes c_k=0$ since $I^2=0$. Balancing over $A$ follows by lifting $a\\in A$ to $a^+\\in A^+$ and using the tensor relation $(a^+i)\\otimes c=i\\otimes v(a^+)c$; another lift acts identically on $I$. The two formulas are inverse on pure tensors, which generate the tensor product [def-weil-pbc-module-tensor-product]. We obtain an isomorphism $\\theta:I\\otimes_A B\\xrightarrow{\\sim}IC$, $i\\otimes b\\mapsto v(i)c$ for any $r(c)=b$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05YT (lemma-lift-etale-infinitesimal), third sentence; Tag 0473 (morphisms-lemma-conormal-functorial-flat), affine proof"
+   }
+  },
+  {
+   "text": "Let $\\beta:I\\otimes_A B\\xrightarrow{\\sim}J$ be the assumed comparison. For $i\\in I$ and $r(c)=b$, the equations of step 2 give $\\varphi(\\theta(i\\otimes b))=\\varphi(v(i)c)=u^+(i)\\varphi(c)=\\beta(i\\otimes b)$, because $q(\\varphi(c))=b$. Here $u^+(i)\\in J$ since $qu^+(i)=up(i)=0$, and changing the lift of $b$ changes the product by an element of $J^2=0$. Also $q\\varphi(IC)=r(IC)=0$, so $\\varphi$ restricts to a map $IC\\to J$. Equality on pure tensors, followed by additivity [def-weil-pbc-module-tensor-product], shows that this restriction composed with $\\theta$ is exactly $\\beta$. Consequently $\\varphi|_{IC}:IC\\to J$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05YT (lemma-lift-etale-infinitesimal), final sentence: compatibility of the kernel comparison"
+   }
+  },
+  {
+   "text": "If $\\varphi(c)=0$, then $r(c)=q\\varphi(c)=0$, hence $c\\in IC$; injectivity of $\\varphi|_{IC}$ gives $c=0$. For $b^+\\in B^+$ choose $c\\in C$ with $r(c)=q(b^+)$. Then $b^+-\\varphi(c)\\in J$; surjectivity of $\\varphi|_{IC}$ supplies $k\\in IC$ with $\\varphi(k)=b^+-\\varphi(c)$, so $\\varphi(c+k)=b^+$. Thus $\\varphi$ is a bijective $A^+$-algebra homomorphism. Its inverse preserves addition, multiplication, the unit and the $A^+$-structure by applying the injective map $\\varphi$ to each required equality. It therefore identifies the map $u^+$ with the etale structure map $v:A^+\\to C$ of step 1. Substitution along this $A^+$-algebra isomorphism gives etaleness of $u^+$, and [lem-weil-pbc-etale-ring-map-iff-etale-affine] gives precisely the asserted etaleness of its spectrum.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05YT (lemma-lift-etale-infinitesimal), final sentence: the elementary exact-row argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-exc-etale-algebra-lift",
+  "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05YT (lemma-lift-etale-infinitesimal), full proof, with the balancing, kernel-compatibility and exact-row calculations written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*(square|[Kk]er)|lift.*[Ee]tale|[Ee]tale.*lift",
+   "results": "9 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Weakly.lean, Mathlib/RingTheory/Etale/Weakly.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions, formal lifting, scalar towers or standard-etale special cases; none states the kernel-base-change criterion for two arbitrary square-zero extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale ring map lifts across square zero extensions when the map on kernels is the base change isomorphism",
+   "results": "8 hits: RingHom.FormallyEtale, Algebra.FormallySmooth.lift, RingHom.Etale, liftOfDerivationToSquareZero_apply, Algebra.FormallySmooth.liftOfSurjective, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, liftOfDerivationToSquareZero, AlgHom.kerSquareLift",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions, formal lifting, scalar towers or standard-etale special cases; none states the kernel-base-change criterion for two arbitrary square-zero extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"ker\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions, formal lifting, scalar towers or standard-etale special cases; none states the kernel-base-change criterion for two arbitrary square-zero extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If two ring surjections have square zero kernels I and J and the quotient map is etale with J equal to I tensor the target quotient then the map of extensions is etale",
+   "results": "8 hits: Algebra.Etale.comp, Algebra.IsStandardEtale.of_surjective, Algebra.FormallyEtale.iff_comp_bijective, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.instTensorProduct, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.comp_bijective, Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions, formal lifting, scalar towers or standard-etale special cases; none states the kernel-base-change criterion for two arbitrary square-zero extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale homomorphism on quotient rings and an isomorphism on square zero kernel modules imply that a map of ring extensions is etale",
+   "results": "8 hits: Algebra.IsEtaleAt.comp, Algebra.Etale.comp, RingHom.Etale.toAlgebra, Algebra.FormallyEtale.iff_comp_bijective, RingHom.Etale.ofLocalizationSpan, RingHom.etale_algebraMap, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give definitions, formal lifting, scalar towers or standard-etale special cases; none states the kernel-base-change criterion for two arbitrary square-zero extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "Etale.*(ker|square)|etale.*(ker|square)|lift.*[Ee]tale",
+   "results": "5 hits: Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Etale/StandardEtale.lean, Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Basic.lean, Mathlib/RingTheory/Etale/Weakly.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved definitions, formal lifting, base-change and standard-etale statements do not assert the two-extension kernel criterion; reused existing DAG nodes for the supporting facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale quotient square zero extension isomorphism of ideals",
+   "results": "8 hits: Algebra.Extension.infinitesimal, Algebra.Extension.toInfinitesimal, Ideal.cotangentIdeal_square, Algebra.FormallyEtale.comp_bijective, KaehlerDifferential.quotientCotangentIdeal, derivationToSquareZeroEquivLift_symm_apply_apply_coe, Algebra.Extension.homInfinitesimal, derivationToSquareZeroEquivLift",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved definitions, formal lifting, base-change and standard-etale statements do not assert the two-extension kernel criterion; reused existing DAG nodes for the supporting facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, Ideal",
+   "results": "5 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq_aux",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved definitions, formal lifting, base-change and standard-etale statements do not assert the two-extension kernel criterion; reused existing DAG nodes for the supporting facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale ring homomorphism on quotients and isomorphism on square zero ideals imply the original ring map is etale",
+   "results": "8 hits: Algebra.FormallyEtale.iff_comp_bijective, RingHom.Etale.ofLocalizationSpan, RingHom.etale_algebraMap, RingHom.Etale.toAlgebra, RingHom.Etale.ofLocalizationSpanTarget, Algebra.FormallyEtale.comp_bijective, StandardEtalePair.instEtaleRing, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved definitions, formal lifting, base-change and standard-etale statements do not assert the two-extension kernel criterion; reused existing DAG nodes for the supporting facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat algebra and a square zero ideal have an injective ideal tensor multiplication map giving the kernel of reduction",
+   "results": "8 hits: Algebra.FormallyUnramified.comp_injective, Algebra.FormallyUnramified.iff_comp_injective, Algebra.FormallyUnramified.iff_comp_injective_of_small, Algebra.kerTensorProductMapIdToAlgHomEquiv, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.kerCotangentToTensor_injective_iff, Module.Flat.tfae_equational_criterion, retractionKerToTensorEquivSection",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved definitions, formal lifting, base-change and standard-etale statements do not assert the two-extension kernel criterion; reused existing DAG nodes for the supporting facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale map between quotient rings lifts to an etale map of square zero ring extensions if the kernel is obtained by tensor base change",
+   "results": "8 hits: Algebra.Etale.baseChange, liftOfDerivationToSquareZero, RingHom.Etale, AlgHom.kerSquareLift, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, liftOfDerivationToSquareZero_apply, RingHom.FormallyEtale, RingHom.Etale.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: the retrieved definitions, formal lifting, base-change and standard-etale statements do not assert the two-extension kernel criterion; reused existing DAG nodes for the supporting facts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-etale-square-zero-chart-construction",
+  "date": "2026-10-23",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Local construction input in Tag 05ZT, first two proof paragraphs, before choosing an algebraic-space presentation. Algebra input in Tag 05ZT, first proof paragraph: the map A(U) to A(V) is etale by Tag 05YT.",
+   "via": [
+    "lem-sfb-scheme-etale-square-zero-chart-construction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-square-zero-etale-extension-criterion",
+  "worker": "stage1",
+  "summary": "Followed Tag 05YT without changing its statement. Reused the existing etale algebra lift, affine etale criterion, smooth square-zero lifting, etale flatness, and flat conormal comparison. Wrote out the tensor balancing, equality of the actual kernel maps, and injectivity/surjectivity argument. No new nodes.",
+  "blueprint": "Supporting algebra step in Tag 05ZT for the inherited direct-image alteration/deformation branch: Tag 05YT supplies etaleness of maps between the square-zero affine charts. Steps 1-2 are the etale lift and its map to B+; steps 3-5 are the kernel comparison and isomorphism. The inherited blueprint.from.node is null, as blueprint_refs.py ancestor reports; retained its existing precise from.place and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-algebra-lift",
+    "why": "Generic ring-theoretic lifting across an arbitrary quotient, used exactly as in Tag 05YT; it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-algebra-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-457e980ab",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-457e980ab (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement is unchanged and matches Stacks Tag 05YT (algebra.tex line 39590). It writes the source's 'J = I⊗_A B' as the canonical map i⊗b ↦ u⁺(i)b̃ being an isomorphism. I checked that this map is well defined (u⁺(I) ⊆ J, lift independence by J² = 0, A-balanced) and tested it on k → k[ε], where the hypothesis fails and the conclusion fails too, and on split extensions. The five steps follow the source's proof. Step 1: the 04D1 lift via lem-exc-etale-algebra-lift, whose étale is the scheme-convention sense, translated through lem-weil-pbc-etale-ring-map-iff-etale-affine. Step 2: the 031J lifting with H1 = 0 and Ω = 0 projective, into B⁺ over A⁺ via u⁺ with N = J; r is A⁺-linear because rv = up = qu⁺. Step 3: flatness from 00U2(6), the 0473 comparison with both ideal squares zero, and the change of tensor base I⊗_{A⁺}C ≅ I⊗_A B written out (lift independence uses I² = 0). Step 4: φ(v(i)c) = u⁺(i)φ(c), so φ|IC ∘ θ = β and φ|IC is an isomorphism. Step 5: injectivity and surjectivity of φ by hand, then the affine criterion. Every cited statement says what its step takes from it; no cycle. Duplicate search over the whole DAG (05YT, lift-etale-infinitesimal, square-zero étale nodes) finds only the item and its citers. Accepted tool_use: lem-exc-etale-algebra-lift (another unit, Lean-closed in slopmaster2); it is the 04D1 input that the source's proof itself uses. No SGA citation. Inherited null blueprint.from.node with a precise from.place (05ZT use). review_split.py's 'no such node' messages are a symlink artifact; I opened every cited node directly. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SquareZeroEtaleExtensionCriterion",
+  "declaration": "RingHom.etale_of_squareZero_kernel_comparison",
+  "file": "lean/Sheaf/RingTheory/SquareZeroEtaleExtensionCriterion.lean",
+  "statement": "theorem etale_of_squareZero_kernel_comparison {Aplus : Type u} {A : Type v} {Bplus : Type w} {B : Type t} [CommRing Aplus] [CommRing A] [CommRing Bplus] [CommRing B] [Algebra Aplus Bplus] [Algebra Aplus B] (p : Aplus →+* A) (q : Bplus →ₐ[Aplus] B) (u : A →+* B) (hp : Function.Surjective p) (hq : Function.Surjective q) (hcomm : u.comp p = algebraMap Aplus B) (hI : (RingHom.ker p) ^ 2 = ⊥) (hJ : (RingHom.ker q.toRingHom) ^ 2 = ⊥) (hu : u.Etale) (e : (RingHom.ker p) ⊗[Aplus] B ≃ₗ[Aplus] RingHom.ker q.toRingHom) (he : ∀ (i : RingHom.ker p) (b : Bplus), (e (i ⊗ₜ[Aplus] q b) : Bplus) = algebraMap Aplus Bplus (i : Aplus) * b) : (algebraMap Aplus Bplus).Etale",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The upper arrow is encoded by Algebra Aplus Bplus, the composite by Algebra Aplus B, and q is an Aplus-algebra map. Tensor over Aplus is canonically tensor over A because p is surjective and ker p acts trivially. he specifies the canonical comparison on all lifts; Aplus-linearity suffices since that formula forces B-linearity. Independent ring universes; ring étaleness as permitted by the recorded affine bridge."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-020b9312d",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Read the item node, its 3 stmt_deps (Spec, AlgebraicGeometry.Etale, TensorProduct Mathlib leaves), Stacks 05YT and the module. Only the lean field differs from side-live; the statement is verbatim with one sorry. The square is fully general via Algebra Aplus Bplus, q : Bplus →ₐ[Aplus] B and hcomm. hI/hJ are on the actual kernels. I⊗_{A+}B ≅ I⊗_A B canonically, since I and B are both killed by I. he determines e on the spanning tensors i⊗q b (q surjective), so e is the canonical comparison (lift independence by J²=0); the hypothesis is neither weaker nor stronger. RingHom.Etale rendering allowed by brief-stage2 l.138 (ÉTALE RING MAPS); universes independent. Edge cases: zero rings, I=J=0, k→k[ε] correctly excluded. Docstrings carry 05YT, the blueprint id and the 5 proof steps; no defs, no SGA, no pro-étale use; EtaleAlgebraLift import exists live. Not recompiled (no file changed); the worker reports both compiles clean. No findings."
+ }
+}

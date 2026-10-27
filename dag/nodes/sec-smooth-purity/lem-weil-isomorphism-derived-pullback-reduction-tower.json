@@ -37,10 +37,10 @@
    }
   },
   {
-   "text": "Apply the tensor isomorphism of [lem-pur-isomorphism-inverse-image-tensor-hom] in degree $i$ with $\\mathcal O=R_Y$, $\\mathcal F=P^i$, $\\mathcal G=B_{n,Y}$. Transport scalars by $c_{\\mathcal O_E}$ and $c_n$. The resulting map sends $g^{-1}x\\otimes a$ to $g^{-1}x\\otimes c_n(a)$. It respects the balanced relation: for $r\\in g^{-1}R_Y$, the images of $(r g^{-1}x)\\otimes a$ and $g^{-1}x\\otimes g^{-1}(\\pi_{n,Y})(r)a$ coincide since $\\pi_{n,X}(c_{\\mathcal O_E}(r))=c_n(g^{-1}(\\pi_{n,Y})(r))$ by Step 1. Its inverse uses $c_n^{-1}$ on the second factor and the inverse tensor comparison. These maps respect restrictions; the sheaf tensor product of [def-pur-sheaf-tensor-product] therefore gives mutually inverse module maps. This constructs precisely the stated $\\beta_n$ and its prescribed local formula.",
+   "text": "Use the projection square to commute restriction of scalars with the sectionwise module equivalence. The comparison is the composite of pushforward-composition isomorphisms and has identity underlying section maps. The mate under the two ordinary extension/restriction adjunctions is invertible: precomposition with it is bijective on hom sets by the adjunctions and the fully faithful module equivalences. Its inverse defines beta; the mate equation states exactly that beta preserves the normalized units.",
    "uses": [
-    "lem-pur-isomorphism-inverse-image-tensor-hom",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -49,10 +49,9 @@
    }
   },
   {
-   "text": "The coefficient sheaf $B_{n,Y}$ is a complex concentrated in degree zero. Hence the total tensor convention of [def-pc-tensor-complex-sheaves] makes $d_{P_n}^i=d_P^i\\otimes1$. Naturality of the tensor comparison of [lem-pur-isomorphism-inverse-image-tensor-hom] with respect to $d_P^i$ gives $\\beta_n^{i+1}F(d_P^i\\otimes1)=(F(d_P^i)\\otimes1)\\beta_n^i$. Thus the termwise maps in Step 2 and their inverses are chain maps, giving an isomorphism of complexes. There is no interchange with an infinite totalization here, since only one coefficient degree is nonzero.",
+   "text": "Map the natural ordinary tensor comparison termwise to cochain complexes. Naturality with respect to each differential supplies the chain-map equations for its hom and inverse. This is the recorded tensor complex, since the coefficient factor is concentrated in degree zero.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pur-isomorphism-inverse-image-tensor-hom"
+    "def-pc-tensor-complex-sheaves"
    ],
    "elementary": true,
    "source": {
@@ -61,11 +60,10 @@
    }
   },
   {
-   "text": "The constant-sheaf ring isomorphism $c_n$ is unital. The local formula in Step 2 therefore sends $F(x\\otimes1)$ to $F(x)\\otimes1$, which proves $\\beta_n F(\\gamma_n)=\\gamma_n^X$. This is an equality of $R_X$-module chain maps: the action on the coefficient factor is through $\\pi_{n,X}$ by Step 1. The map $\\gamma_n$ is exactly the quotient arrow specified in [def-weil-integral-reduction-tower]. The equality is verified on the presheaf pure tensors defining [def-pur-sheaf-tensor-product], then passes to their sheafification; the section formula in clause (1) of [lem-weil-proetale-isomorphism-inverse-image] identifies the inverse-image sections used here.",
+   "text": "The mate equation identifies the comparison on the adjunction unit. The recorded unit is the sheafification image of 1 tensor x. Every pure tensor a tensor x is a times this unit section. Linearity and the inverse coefficient-isomorphism action therefore give the required pure-tensor formula, and the quotient-arrow equation follows from the mate equation.",
    "uses": [
-    "def-weil-integral-reduction-tower",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-proetale-isomorphism-inverse-image"
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-weil-integral-reduction-tower"
    ],
    "elementary": true,
    "source": {
@@ -74,11 +72,10 @@
    }
   },
   {
-   "text": "For a local tensor $F(x\\otimes a)$ at level $n+1$, the two maps $\\beta_nF(\\tau_n)$ and $\\tau_n^X\\beta_{n+1}$ give, respectively, $F(x)\\otimes c_n(F(\\rho_{n,Y})(F(a)))$ and $F(x)\\otimes\\rho_{n,X}(c_{n+1}(F(a)))$. These agree by the coefficient-reduction naturality equation in Step 1, an instance of clause (3) of [lem-weil-proetale-isomorphism-inverse-image]. Since $\\tau_n$ is $1\\otimes\\rho_{n,Y}$ by [def-weil-integral-reduction-tower], the universal property of the sheafified tensor [def-pur-sheaf-tensor-product] proves $\\beta_nF(\\tau_n)=\\tau_n^X\\beta_{n+1}$. Both are maps of $R_X$-complexes after restricting level $n+1$ and level $n$ along their projections; no assertion of $B_{n+1,X}$-linearity with its original action on the level-$n$ source is needed.",
+   "text": "Conjugate the transported transition by the two comparison isomorphisms, working in completed-coefficient modules using the restriction square. Maps out of a restricted scalar extension are determined by sheafified pure tensors. On these tensors the defining transition formula and the coefficient-reduction naturality square agree, so the conjugated transition is the canonical transition on X. Evaluate the resulting morphism equality on arbitrary local sections.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
     "def-weil-integral-reduction-tower",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-proetale-isomorphism-inverse-image"
    ],
    "elementary": true,
    "source": {
@@ -87,10 +84,8 @@
    }
   },
   {
-   "text": "Let $u:P\\to P'$ be a chain map and put $u_n=u\\otimes1$. Degreewise tensor naturality in [lem-pur-isomorphism-inverse-image-tensor-hom] gives $\\beta'_nF(u_n)=(F(u)\\otimes1)\\beta_n$; equivalently both send $F(x\\otimes a)$ to $F(u(x))\\otimes c_n(F(a))$. Step 3 shows these are chain maps. This proves the requested chain-map naturality, and also applies to the auxiliary K-flat flat-term complexes introduced below.",
-   "uses": [
-    "lem-pur-isomorphism-inverse-image-tensor-hom"
-   ],
+   "text": "The ordinary comparison is a natural isomorphism of functors. Its termwise cochain naturality is precisely the asserted identity for every chain map.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
@@ -111,25 +106,23 @@
    }
   },
   {
-   "text": "Apply the right-hand (MS2) assertion of [lem-pur-quasi-isos-saturated-triangulated] to $q:P\\to K$ and $q':P'\\to K$ in the homotopy category. It gives $t:V\\to P'$ a quasi-isomorphism and $v:V\\to P$ with $qv=q't$. Two-out-of-three in the same node makes $v$ a quasi-isomorphism. Choose a K-flat resolution $r:T\\to V$ with flat terms by [lem-pc-kflat-resolution]. Set $a=vr:T\\to P$, $b=tr:T\\to P'$, choosing chain representatives. Both are quasi-isomorphisms and $qa=q'b$ in the homotopy category. For the ringed-topos morphism with structure map $c_{\\mathcal O_E}$, [lem-weil-pbc-ringed-pullback-preserves-kflat] makes $g^*T=g^{-1}T\\otimes_{g^{-1}R_Y}R_X$ K-flat with flat terms. The normalized scalar-isomorphism comparison of [lem-weil-sheaf-scalar-extension-ring-iso] identifies this complex with $F(T)$, so $F(T)$ is K-flat. Its maps $F(a),F(b)$ are quasi-isomorphisms by Step 7. The hypotheses that $F(P),F(P')$ are K-flat are precisely the remaining K-flat hypotheses for the comparison on $X$.",
+   "text": "Transfer the pointwise universal derived scalar-extension counit from homotopy complexes to complexes. The homotopy quotient is full and essentially surjective, so it is initial on the relevant structured-arrow categories. Transfer further through the canonical quotient factorization isomorphisms. The finite sectionwise inverse image is an equivalence, also after deriving, hence preserves the pointwise defining limits and the universal right Kan counit.",
    "uses": [
-    "lem-pur-quasi-isos-saturated-triangulated",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-sheaf-scalar-extension-ring-iso"
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-weil-proetale-isomorphism-inverse-image"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS (lemma-K-flat-resolution), Tag 0G7E (lemma-pullback-K-flat); derived.tex Tag 05RT; sites-modules.tex Tag 03CZ"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes); pointwise right Kan extension and preservation of its defining limits by equivalences, made explicit in the private Lean helpers."
    }
   },
   {
-   "text": "Put $T_n=T\\otimes_{R_Y}B_{n,Y}$, $a_n=a\\otimes1$, $b_n=b\\otimes1$. Clause (1) of [lem-pur-derived-change-of-rings] makes $a_n,b_n$ quasi-isomorphisms. To identify the canonical comparison, write $L=L\\pi_{n,Y}^*$ and let $\\varepsilon_Z:L(QZ)\\to Q(Z\\otimes B_{n,Y})$ be the natural comparison of [lem-pur-left-derived-from-kflat-class]. It is invertible for $Z=T,P,P'$ by the K-flat computations of the change-of-rings node. Naturality gives $[a_n]\\varepsilon_T=\\varepsilon_P L([a])$ and $[b_n]\\varepsilon_T=\\varepsilon_{P'}L([b])$. The computation at $q$ is $c_q=\\varepsilon_P L([q])^{-1}$ and that at $q'$ is $c_{q'}=\\varepsilon_{P'} L([q'])^{-1}$. Since $[q][a]=[q'][b]$, cancellation yields $c_{q'}c_q^{-1}=[b_n][a_n]^{-1}$. This is $\\theta_n$ as defined in [lem-weil-integral-reduction-tower-well-defined]. The same calculation on $X$, using Step 8 and the assumed K-flatness of $F(P),F(P')$, gives $\\theta_n^X=[F(b)\\otimes1][F(a)\\otimes1]^{-1}$. The invoked change-of-rings functor on the homotopy category is exact by the cited node, and its comparison $\\varepsilon$ is the one computing that derived functor; thus no comparison between unspecified choices is being assumed.",
+   "text": "The universal property applied to the cochain comparison and exact inverse-image factorization yields a natural transformation between the two composed derived functors. Its counit equation and naturality imply compatibility with the span Q(q), Q(q'). At the four K-flat complexes the counits are invertible. The canonical resolution comparison is epsilon(P) inverse, followed by LQ(q), LQ(q') inverse, and epsilon(P'); this follows directly from the recorded resolution-isomorphism equation.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-weil-integral-reduction-tower-well-defined"
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -138,9 +131,9 @@
    }
   },
   {
-   "text": "Apply Step 6 to $a:T\\to P$ and $b:T\\to P'$ and write $a_n^X=F(a)\\otimes1$, $b_n^X=F(b)\\otimes1$. In the finite-coefficient derived category on $X$ it gives $\\beta_nF([a_n])=[a_n^X]\\beta_n^T$ and $\\beta'_nF([b_n])=[b_n^X]\\beta_n^T$. The arrows $[a_n]$ and $[a_n^X]$ are invertible by [lem-pur-derived-change-of-rings]; $F([a_n])$ is invertible because $F$ is a functor by Step 7. Using the comparison formulas of Step 9, the desired equation is the cancellation\n$$\\beta'_nF(\\theta_n)=\\beta'_nF([b_n])F([a_n])^{-1}=[b_n^X]\\beta_n^TF([a_n])^{-1}=[b_n^X][a_n^X]^{-1}\\beta_n=\\theta_n^X\\beta_n.$$\nThis proves compatibility with the canonical resolution comparisons, in the asserted $D(X_{\\mathrm{proet}},A_{E,n})$, and completes all clauses.",
+   "text": "Substitute the canonical comparison formulas into the naturality identity for the span. Cancel the invertible counit and localization-factorization arrows. The remaining equation is beta(P') after the transported canonical comparison equals the canonical comparison on X after beta(P), exactly in the finite-coefficient derived category. This requires only the K-flat image hypotheses already in the statement; no auxiliary K-flat refinement is used.",
    "uses": [
-    "lem-pur-derived-change-of-rings"
+    "lem-weil-integral-reduction-tower-well-defined"
    ],
    "elementary": true,
    "source": {
@@ -151,25 +144,19 @@
  ],
  "proof_deps": [
   "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
   "def-weil-completed-integral-coefficients",
   "def-weil-integral-reduction-tower",
   "def-weil-sheaf-of-modules-category",
-  "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-isomorphism-inverse-image-tensor-hom",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
   "lem-weil-integral-reduction-tower-well-defined",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-weil-sheaf-scalar-extension-ring-iso"
+  "lem-weil-proetale-isomorphism-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
-  "place": "Agent assembly of tensor naturality, coefficient projection squares and common K-flat comparison roofs; source facts are the Stacks tags recorded on the steps."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+  "place": "A6: ordinary adjunction mates and normalized tensor generation; derived comparison via the pointwise universal counit and cancellation, retaining the statement and unit route."
  },
  "mathlib_searches": [
   {
@@ -331,13 +318,8 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-isomorphism-inverse-image-tensor-hom",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-pur-quasi-isos-saturated-triangulated",
-  "lem-weil-integral-reduction-tower-well-defined",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat"
+  "lem-weil-integral-reduction-tower-well-defined"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -385,22 +367,25 @@
   "note": "Delivery is identical to the landed item (batch b66ba613e6, Q63 delivery 94c5afc59 with the cc FIX applied) except the Authors line and lean.by/lean.date; the 14 dependency nodes are byte-identical; no new nodes, dependency modules or statement correction. Independent reading: every node clause is rendered. c_{O_E} is fixed uniquely by its projection squares; F is the recorded inverse image with coefficients carried along c; the hypothesis is exactly K-flat with flat terms; Lean n stands for exponent n+1, covering all n>=1; beta is fixed on pure tensors, with the unit and transition identities, chain-map naturality, and the final D(X,A_n) equation with the recorded comparison on both schemes. Independent universes t/u/max u (t+1); no stronger assumptions; nothing hollow; sorry only; source and blueprint docstrings present; lean.statement verbatim. Worker report and Second reading by Q92 both present (the second reading is short). nt_compile --json of the snapshot: rc=0 twice, no errors or warnings, 47.0 s and 55.9 s against the 60 s limit."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "N4",
+  "reviewer": "COMPILER",
+  "group": "A6",
   "result": "pass",
-  "landing": "20261019T005352-L-2759090",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.isoReductionCompletedMap_existsUnique",
-   "WeilConjectures.isoReductionMapQuasiIso",
-   "WeilConjectures.isomorphismReductionTower"
-  ],
-  "sorry_after": [
-   "WeilConjectures.isomorphismReductionTower"
-  ]
+  "landing": "20261025T002444-L-3105984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

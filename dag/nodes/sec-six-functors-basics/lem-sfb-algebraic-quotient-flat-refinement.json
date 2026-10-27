@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-algebraic-quotient-flat-refinement",
+ "kind": "statement",
+ "title": "Flat restricted groupoid presentation of an algebraic quotient",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $B$ be an algebraic space over $S$ [def-trf-algebraic-space]. Let $(U,R,s,t,e,i,c)$ be a groupoid in algebraic spaces over $B$ [def-sfb-algebraic-space-groupoid]. Let $[U/R]$ be its stackification on the big fppf site [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description], in the fibred-groupoid conventions [def-sfb-stable-pointed-moduli-groupoids]. Suppose $[U/R]$ is an algebraic stack [def-sfb-algebraic-moduli-stack]. Then there are an algebraic space $U'$ over $B$ and a morphism $g:U'\\to U$ for which $h:U'\\times_{g,U,t}R\\to U$, $h(u',r)=s(r)$, is a surjection of fppf sheaves. Here surjection of fppf sheaves means that every section of the target over a scheme lifts after an fppf covering of that scheme. Put $R'=U'\\times_{g,U,t}R\\times_{s,U,g}U'$ (sheaf fibre products [lem-trf-space-fibre-products-etale-covers]); its two projections to $U'$ are flat and locally of finite presentation, tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. No flatness or finiteness is assumed on $s,t$, or $g$.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06PJ (lemma-quotient-algebraic), necessary implication."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-space-groupoid",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-algebraic-space-groupoid-quotient-presentation",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal X=[U/R]$ and let $\\pi:U\\to\\mathcal X$ be the object map. By the algebraic-stack hypothesis choose a scheme $W$ and a representable smooth surjective atlas $f:W\\to\\mathcal X$. In the stated fibred-groupoid convention this map is an object $\\xi\\in\\mathcal X(W)$, with its pullbacks. The composite $W\\to\\mathcal X\\to B$ gives its structural map to $B$.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PJ, lemma-quotient-algebraic, necessary implication"
+   }
+  },
+  {
+   "text": "Apply local essential surjectivity of stackification to $\\xi$. Obtain an fppf covering $\\{b_i:W_i\\to W\\}_{i\\in I}$, maps $g_i:W_i\\to U$, and isomorphisms $\\theta_i:\\pi(g_i)\\xrightarrow{\\sim}b_i^*\\xi$. These are maps over $B$: their structural maps to the discrete groupoid $B$ agree under $\\theta_i$. Each $b_i$ is flat and locally of finite presentation and the family is jointly surjective, by the definition of the fppf site.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PJ, lemma-quotient-algebraic, necessary implication"
+   }
+  },
+  {
+   "text": "First shrink the index set: for each point $w\\in|W|$ choose one $i(w)\\in I$ with $w\\in b_{i(w)}(W_{i(w)})$, and keep only the indices $i(w)$. The retained family is still an fppf covering (each $b_i$ is unchanged and the images still cover $W$), and it is indexed by a quotient of the set $|W|$, which lies in the universe $\\mathcal U$ of [def-weil-size-convention] together with all $W_i$. Hence the scheme $U'=\\coprod_i W_i$ over the retained indices lies in the fixed universe, as the coproduct clause of the representable calculus requires; let $b:U'\\to W$ be the induced map. The component inclusions are disjoint open immersions covering $U'$. The maps $g_i$ glue uniquely to $g:U'\\to U$: for a test map $T\\to U'$, glue the sections of the fppf sheaf $U$ on the disjoint open inverse images of the components. The $\\theta_i$ similarly glue in the isomorphism sheaf of the stack $\\mathcal X$, giving $\\theta:\\pi g\\xrightarrow{\\sim}fb$. Thus $g$ is over $B$. By open-source locality of flatness and local finite presentation, $b$ has both properties, since its restriction to $W_i$ is $b_i$; it is surjective since the images of the $b_i$ cover $W$. To apply the representable calculus here, a scheme is its discrete algebraic stack: its identity is an atlas and its diagonal is representable. The empty covering of an empty $W$ gives $U'=\\varnothing$, and all these local conditions still hold.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-trf-algebraic-space",
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PJ, lemma-quotient-algebraic, necessary implication"
+   }
+  },
+  {
+   "text": "The atlas $f$ is flat and locally of finite presentation because it is smooth. Composition of representable morphisms with each of these properties, and composition of surjective morphisms, show that $fb$ is representable, surjective, flat and locally of finite presentation. The isomorphism $\\theta$ identifies the scheme base changes of $a=\\pi g$ with those of $fb$, so $a:U'\\to\\mathcal X$ has the same properties. This uses no property of the original $s,t$ or of $g$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PJ, lemma-quotient-algebraic, necessary implication"
+   }
+  },
+  {
+   "text": "For maps $x,y:T\\to U$, the original arrow presheaf between these objects is $\\{r\\in R(T')\\mid s(r)=x|_{T'},\\ t(r)=y|_{T'}\\}$ on $T$-schemes. It is already an fppf sheaf, being a fibre product of the fppf sheaves $R,U,h_T$. The isomorphism-sheaf clause of stackification therefore identifies it with $\\operatorname{Isom}_{\\mathcal X}(\\pi x,\\pi y)$. Consequently an object of $U'\\times_{a,\\mathcal X,a}U'$ over $T$ is exactly $(v,w,r)$ with $t(r)=g(v)$ and $s(r)=g(w)$ (take the isomorphism from $a(w)$ to $a(v)$). Its arrows are forced identities because $U'$ is discrete. This gives, naturally in $T$ and respecting both projections, an equivalence with the discrete sheaf $U'\\times_{g,U,t}R\\times_{s,U,g}U'=R'$. The latter is an algebraic space by the algebraic-space fibre-product theorem.",
+   "uses": [
+    "def-sfb-algebraic-space-groupoid",
+    "def-trf-algebraic-space",
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PJ, lemma-quotient-algebraic, necessary implication"
+   }
+  },
+  {
+   "text": "Both projections $U'\\times_{\\mathcal X}U'\\to U'$ are base changes of the representable flat locally finitely presented map $a$. Base-change stability gives flatness and local finite presentation of both projections. Under the projection-preserving equivalence of step 5 these are precisely the two projections $R'\\to U'$ in the statement.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PJ, lemma-quotient-algebraic, necessary implication"
+   }
+  },
+  {
+   "text": "Fix a scheme $T$ and $u:T\\to U$. The algebraic space $P=U'\\times_{a,\\mathcal X,\\pi u}T$ is surjective, flat and locally of finite presentation over $T$, by base change from $a$. On each affine open $T_\\alpha\\subseteq T$, apply the finite affine scheme refinement theorem to the singleton family $P\\times_TT_\\alpha\\to T_\\alpha$. It gives an fppf scheme covering $\\{V_{\\alpha j}\\to T_\\alpha\\}$ with maps $V_{\\alpha j}\\to P$. An open immersion is flat since its local-ring maps are identities; it is locally of finite presentation since locally it is $\\operatorname{Spec}A_f\\to\\operatorname{Spec}A$ with $A_f=A[z]/(fz-1)$. Thus these families together cover $T$ fppf: their composites with the open immersions remain flat and locally finitely presented, and their images cover $T$. A map to $P$ consists of $v:V_{\\alpha j}\\to U'$ and an isomorphism between $a(v)$ and $\\pi(u|_{V_{\\alpha j}})$. Invert it if necessary. The arrow identification proved in step 5 gives $r:V_{\\alpha j}\\to R$ with $t(r)=g(v)$ and $s(r)=u|_{V_{\\alpha j}}$. Hence $(v,r)$ is a lift to $U'\\times_{g,U,t}R$ of $u$ on this fppf covering. This proves the required surjection of sheaves, including the empty test scheme.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-fppf-finite-affine-refinement",
+    "def-pc-fppf-site",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 06PJ, lemma-quotient-algebraic, necessary implication"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-pc-fppf-site",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-sfb-algebraic-space-groupoid",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-fppf-finite-affine-refinement",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 06PJ, lemma-quotient-algebraic, necessary implication"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*[Aa]lgebraic[Ss]tack|[Aa]lgebraic[Ss]tack.*quotient",
+   "results": "{\"t\": \"2026-10-23T18:53:51Z\", \"tool\": \"grep\", \"query\": \"quotient.*[Aa]lgebraic[Ss]tack|[Aa]lgebraic[Ss]tack.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A groupoid in algebraic spaces with algebraic quotient has a flat locally finitely presented restricted groupoid presentation",
+   "results": "{\"t\": \"2026-10-23T18:53:51Z\", \"tool\": \"leansearch\", \"query\": \"A groupoid in algebraic spaces with algebraic quotient has a flat locally finitely presented restricted groupoid presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"CategoryTheory.SmallGroupoid\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"CategoryTheory.instIsGroupoid\", \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"Topology.IsOpenEmbedding.singleton_hasGroupoid\"], \"digest\": \"19ac31572fa24a6d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"AlgebraicStack\"",
+   "results": "{\"t\": \"2026-10-23T18:53:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"AlgebraicStack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic quotient stack of a groupoid in algebraic spaces admits a refinement whose source and target maps are flat and locally of finite presentation",
+   "results": "{\"t\": \"2026-10-23T18:53:53Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic quotient stack of a groupoid in algebraic spaces admits a refinement whose source and target maps are flat and locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"c4337c1ea2596c96\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an algebraic quotient of an arbitrary algebraic space groupoid, a covering refinement of its objects has flat locally finitely presented arrow projections",
+   "results": "{\"t\": \"2026-10-23T18:55:10Z\", \"tool\": \"leanfinder\", \"query\": \"Given an algebraic quotient of an arbitrary algebraic space groupoid, a covering refinement of its objects has flat locally finitely presented arrow projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"c0d99a798e41a4a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphisms, categorical groupoids, or locally surjective sheaves do not state this algebraic-space/stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Aa]lgebraic[Ss]tack|[Aa]lgebraic[Ss]tack.*quotient",
+   "results": "{\"t\": \"2026-10-23T20:16:16Z\", \"tool\": \"grep\", \"query\": \"quotient.*[Aa]lgebraic[Ss]tack|[Aa]lgebraic[Ss]tack.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or categorical/manifold groupoids, not a refinement of an algebraic-space quotient stack"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A groupoid in algebraic spaces with algebraic quotient admits a flat locally finitely presented restricted presentation",
+   "results": "{\"t\": \"2026-10-23T20:16:16Z\", \"tool\": \"leansearch\", \"query\": \"A groupoid in algebraic spaces with algebraic quotient admits a flat locally finitely presented restricted presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgHom.FinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"CategoryTheory.instIsGroupoid\", \"Algebra.Presentation.instFinitePresentationQuotientOfFinite\", \"PresentedGroup\"], \"digest\": \"658cdfc781ed543d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or categorical/manifold groupoids, not a refinement of an algebraic-space quotient stack"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"AlgebraicStack\"",
+   "results": "{\"t\": \"2026-10-23T20:16:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"AlgebraicStack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or categorical/manifold groupoids, not a refinement of an algebraic-space quotient stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic quotient stack of a groupoid in algebraic spaces admits a refinement with flat locally finitely presented arrow projections",
+   "results": "{\"t\": \"2026-10-23T20:16:17Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic quotient stack of a groupoid in algebraic spaces admits a refinement with flat locally finitely presented arrow projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"dabdfde00c746e8d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or categorical/manifold groupoids, not a refinement of an algebraic-space quotient stack"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth atlas of an algebraic quotient stack lifts after an fppf cover to the original groupoid object space",
+   "results": "{\"t\": \"2026-10-23T20:16:18Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth atlas of an algebraic quotient stack lifts after an fppf cover to the original groupoid object space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.ulift\", \"AlgebraicGeometry.Scheme.Cover.ulift_X\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.Cover.ulift_f\", \"AlgebraicGeometry.Scheme.Cover.ulift_I₀\", \"HasGroupoid.compatible\", \"StructureGroupoid.mem_maximalAtlas_of_mem_groupoid\", \"hasGroupoid_of_pregroupoid\"], \"digest\": \"ca73bc383e633a32\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphisms or categorical/manifold groupoids, not a refinement of an algebraic-space quotient stack"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-classifying-stack-flatness",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: closed-point hypothesis (c) of Lemma 8.3.1; Residual-gerbe reduction of the closed singleton: a reduced singleton stack locally of finite type over a field is universally homeomorphic to a finite field spectrum; supporting input: Smooth atlas over the gerbe base for local-finite-type descent, and the universal topological comparison. Supporting neutral-section input for the smooth atlas argument (06QG(3)). In the neutral-section proof: Tag 06QG invokes the converse direction of criteria Lemma 06PL after identifying the stack with the trivial-action quotient. 06PL converse: obtain a restricted groupoid with flat locally finitely presented arrow projections, using the general criterion 06PJ.",
+   "via": [
+    "lem-sfb-algebraic-classifying-stack-flatness",
+    "lem-sfb-neutral-gerbe-section-fppf",
+    "lem-sfb-gerbe-smooth-universal-homeomorphism",
+    "lem-sfb-singleton-stack-finite-field-homeomorphism",
+    "lem-sfb-stack-diagonal-closed-points",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algebraic-quotient-flat-refinement",
+  "worker": "stage1",
+  "summary": "Checked the necessary implication of Stacks 06PJ against the source and existing node statements. Constructed an fppf refinement of a smooth atlas, identified its self-relation by the stackification isomorphism-sheaf clause, and proved the requested sheaf surjection by affine scheme refinement of each presentation pullback. All inputs already exist; no new nodes, statement correction, or Lean attachment.",
+  "blueprint": "Supporting input in the inherited ancestry of det-thm-sf-ctf-stability-direct-images, proof (3): the general quotient criterion needed for 06PL in the neutral-gerbe argument. The current blueprint direct-images proof (3) still concerns preservation by direct images; this split only supplies the specified subsidiary quotient criterion. The imported ancestry has from.node=null, retained as inherited. Whole-blueprint searches found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "The general scheme coproduct theorem forms one scheme from the local lifts of the atlas; this construction is a generic tool, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "The generic existence of sheaf fibre products of algebraic spaces represents the restricted arrow sheaf; it is already a statement dependency and does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-743e1e4cc",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-743e1e4cc (reviewer sub-agent of L); spot-checked: Read Stacks criteria.tex 06PJ (lemma-quotient-algebraic), the full statement and converse paragraph. The item statement is unchanged from base and matches the source's hypotheses: an arbitrary groupoid in algebraic spaces over B, no flatness on s,t, h(u',r)=s(r), R' = the restriction. No new nodes. Steps 1-6 follow Stacks: (1) atlas ξ; (2) the stackification local-essential-image clause gives an fppf covering with lifts g_i and isos θ_i; (3) coproduct U' = ∐W_i, with g and θ glued by the sheaf and Isom-sheaf properties; (4) a = πg is representable, surjective, flat and lfp via smooth⇒flat+lfp and composition in the chartwise calculus; (5) the Isom-sheaf clause gives U'×_X U' ≅ R' respecting projections, orientations checked; (6) flat and lfp by base change. Step 7 replaces Stacks' restrict-equivalence argument with a direct proof: P = U'×_{a,X,πu}T is surjective, flat and lfp; on affine opens the finite-affine refinement node gives an fppf cover with maps to P; inverting the iso and applying step 5 gives r with t(r)=g(v), s(r)=u. This is complete and correct. Edge cases checked: empty W and T, infinite covers, stabilizers, non-quasi-compact bases. No duplicate of 06PJ's necessary direction in the DAG (checked fppf-groupoid-stack-presentations 04WY, restriction-quotient 02VH, flat-groupoid-algebraic-quotient 06FI). Batch-5 check: lem-sfb-stack-chartwise-smooth-etale-calculus and lem-sfb-space-fppf-finite-affine-refinement reach sec-trace-formula only through def-trf-algebraic-space, a general definition and not part of the trace formula or Poincaré duality, so both are accepted. tool_uses (scheme coproduct, space fibre products) are generic and accepted. No SGA. FIX: step 3 claimed the coproduct is 'in the fixed universe' without proof, while the calculus node's coproduct clause requires it. I added the shrinking of the covering to one index per point of |W|, so the index set is in 𝒰, and added def-weil-size-convention to step-3 uses and proof_deps. Whole corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-algebraic-quotient-flat-refinement.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicQuotientFlatRefinement",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_algebraic_quotient_flat_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicQuotientFlatRefinement.lean",
+  "statement": "theorem exists_algebraic_quotient_flat_refinement {S : Scheme.{u}} (B U R : AlgebraicSpace S) (bU : U ⟶ B) (bR : R ⟶ B) (s t : R ⟶ U) (hs : s ≫ bU = bR) (ht : t ≫ bU = bR) (e : U.obj.obj ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : Limits.pullback s.hom.hom t.hom.hom ⟶ R.obj.obj) (X : BasedCategory.{v, w} (Over S)) (a : BasedFunctor (discreteModuli U.obj.obj) X) (hquot : SpaceGroupoidQuotientPresentation s.hom.hom t.hom.hom e i c X a) (halg : IsAlgebraicModuliStack X) : ∃ (U' : AlgebraicSpace S) (g : U' ⟶ U), Presheaf.IsLocallySurjective (Scheme.fppfTopology.over S) ((Limits.pullback.snd g.hom t.hom).hom ≫ s.hom.hom) ∧ ∃ (R' : AlgebraicSpace S) (ρ : R'.obj ≅ Limits.pullback (Limits.pullback.snd g.hom t.hom ≫ s.hom) g.hom) (p q : R' ⟶ U'), p.hom = ρ.hom ≫ Limits.pullback.fst (Limits.pullback.snd g.hom t.hom ≫ s.hom) g.hom ≫ Limits.pullback.fst g.hom t.hom ∧ q.hom = ρ.hom ≫ Limits.pullback.snd (Limits.pullback.snd g.hom t.hom ≫ s.hom) g.hom ∧ MapIsFlat p ∧ MapIsLocallyOfFinitePresentation p ∧ MapIsFlat q ∧ MapIsLocallyOfFinitePresentation q",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab9e78201",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Read item node, Stacks criteria.tex 06PJ converse (l.3088), tags 044Q/044R/044T, both modules, all stmt_dep declarations (IsPresheafGroupoid, IsFppfModuliStack, ModuliTwoIso, discreteModuli, MapIsFlat/MapIsLocallyOfFinitePresentation, IsAlgebraicModuliStack) and the landed SchemeGroupoidQuotientPresentation. Statement matches clause by clause: groupoid over B via hs/ht + IsPresheafGroupoid; [U/R] via SpaceGroupoidQuotientPresentation; algebraic hypothesis; U', g with fppf IsLocallySurjective of pullback.snd g t ≫ s; R' ≅ U'×_{g,U,t}R×_{s,U,g}U' with p/q the two projections, both flat+lfp on étale charts; no hypotheses on s,t,g; non-trivial since g=id needs s,t flat. New def node is a faithful space analogue of the scheme presentation (real arrow composite, composition orientation checked, ∃! single); no existing space version (H4 search of live lean/dag). Records: only stmt_deps += new node + def-sfb-space-morphism-properties (owner of MapIsFlat) and lean; statements verbatim; docstrings with source/blueprint and 7 proof steps; only sorry. No recompile (no change). Advisory: worker's second reading is a self-review; worker's stray shared-node write left no residue."
+ }
+}

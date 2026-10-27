@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-scheme-algebraic-residue-closed-point",
+ "kind": "statement",
+ "title": "Algebraic residue extensions over closed base points give closed scheme points",
+ "statement": "Let $f:Y\\to S$ be any morphism of schemes [def-pc-scheme], let $y\\in Y$, and put $s=f(y)$. Use the induced residue-field homomorphism $\\kappa(s)\\to\\kappa(y)$ [def-weil-residue-field]. Suppose that $\\{s\\}$ is closed in $S$ and that this field extension is algebraic, meaning that each element of $\\kappa(y)$ is a root of a nonzero polynomial over $\\kappa(s)$ [def-weil-algebraic-element, def-pc-field-extension]. Then $\\{y\\}$ is closed in $Y$. No local finite-type, quasi-compactness, separatedness, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre), part (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-residue-field",
+  "def-weil-algebraic-element",
+  "def-pc-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "Let $z\\in\\overline{\\{y\\}}$. Continuity gives $f(z)\\in\\overline{\\{s\\}}=\\{s\\}$. Choose an affine open $V=\\operatorname{Spec}A$ about $s$, and then an affine open $U=\\operatorname{Spec}B$ about $z$ contained in $f^{-1}V$, using [lem-weil-pbc-affine-opens-basis] twice. Every open neighbourhood of $z$ contains $y$, so $y\\in U$. By [def-weil-affine-spectrum], the restriction $U\\to V$ comes from a ring map $A\\to B$. Write $\\mathfrak p\\subset A$ for $s$, $\\mathfrak q\\subset B$ for $y$, and $\\mathfrak r\\subset B$ for $z$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre), affine-open argument; Tag 01IT (lemma-basis-affine-opens). We work in charts about an arbitrary specialization instead of first forming the fibre."
+   }
+  },
+  {
+   "text": "The singleton $\\{\\mathfrak p\\}$ is closed in $V$. The closure formula of [lem-weil-pbc-spec-irreducible-closed-subsets-primes] gives $V(\\mathfrak p)=\\{\\mathfrak p\\}$. Choose a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]; then $\\mathfrak m\\in V(\\mathfrak p)$, so $\\mathfrak m=\\mathfrak p$. Thus $A/\\mathfrak p$ is a field. By [lem-weil-pbc-spec-field-point-residue-field], $\\kappa(s)=\\operatorname{Frac}(A/\\mathfrak p)=A/\\mathfrak p$, and $B/\\mathfrak q$ embeds in $\\kappa(y)$. The map $A\\to B/\\mathfrak q$ has kernel $\\mathfrak p$, since the image of $y$ is $s$. Hence it embeds $k=A/\\mathfrak p$ in $C=B/\\mathfrak q$. By the definition of the induced residue map [def-weil-residue-field], these embeddings give $k\\subseteq C\\subseteq\\kappa(y)$ with exactly the specified structural map $\\kappa(s)\\to\\kappa(y)$: all three maps are induced by the section maps followed by germs and residue quotients.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-spec-field-point-residue-field",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GA (lemma-finite-residue-extension-closed), proof diagram; Tag 00ES (lemma-irreducible), part (1), and Tag 00E0 (lemma-Zariski-topology), maximal-ideal existence."
+   }
+  },
+  {
+   "text": "Here is the elementary field argument in the proof of Tag 00GA, written out rather than made a new node. For $0\\ne b\\in C$, algebraicity [def-weil-algebraic-element] gives a nonzero polynomial relation over $k$. Delete its initial zero coefficients by dividing out a power of $b$ in $\\kappa(y)$; this gives $a_0+a_1b+\\cdots+a_nb^n=0$ with $a_0\\ne0$. Since $k$ is a field, $b^{-1}=-a_0^{-1}(a_1+\\cdots+a_nb^{n-1})\\in C$. Thus $C$ is a field. Consequently $\\mathfrak q$ is maximal: an ideal strictly containing $\\mathfrak q$ contains some $c\\notin\\mathfrak q$; lifting the inverse of its nonzero class in $C$ shows that ideal contains $1$.",
+   "uses": [
+    "def-weil-algebraic-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BID (lemma-subalgebra-algebraic-extension-field), proof (the inverse-polynomial formula), used in Algebra Tag 00GA."
+   }
+  },
+  {
+   "text": "Since $U$ is open and contains both points, $z\\in\\overline{\\{y\\}}$ also holds in $U$. By the closure formula and inclusion criterion in [lem-weil-pbc-spec-irreducible-closed-subsets-primes], $\\mathfrak q\\subseteq\\mathfrak r$. Maximality of $\\mathfrak q$ and properness of the prime $\\mathfrak r$ give $\\mathfrak r=\\mathfrak q$, hence $z=y$. Every point of $\\overline{\\{y\\}}$ is therefore $y$, so this closure is $\\{y\\}$ and $\\{y\\}$ is closed in $Y$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre), conclusion from affine opens; Algebra Tag 00ES (lemma-irreducible), part (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-spec-field-point-residue-field",
+  "def-weil-residue-field",
+  "def-weil-algebraic-element"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TE, proof; its algebraic input Tag 00GA (algebra.tex), with the inverse-polynomial argument of Fields Tag 0BID (lemma-subalgebra-algebraic-extension-field). The same affine argument is applied about each specialization, avoiding an auxiliary fibre-residue comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Aa]lgebraic.*[Cc]losed|[Cc]losed.*[Aa]lgebraic|closePoints_subset_preimage_closedPoints",
+   "results": "{\"t\": \"2026-10-23T13:23:07Z\", \"tool\": \"grep\", \"query\": \"[Aa]lgebraic.*[Cc]losed|[Cc]losed.*[Aa]lgebraic|closePoints_subset_preimage_closedPoints\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\"], \"digest\": \"b6f5e7b5d79ac2a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the arbitrary-scheme algebraic-residue criterion; closed immersion criteria need an additional proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAlgebraic\"",
+   "results": "{\"t\": \"2026-10-23T13:23:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsAlgebraic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the arbitrary-scheme algebraic-residue criterion; closed immersion criteria need an additional proof"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If the residue field of a scheme point is algebraic over the residue field of its closed image then that point is closed without finite type assumptions",
+   "results": "{\"t\": \"2026-10-23T13:23:08Z\", \"tool\": \"leansearch\", \"query\": \"If the residue field of a scheme point is algebraic over the residue field of its closed image then that point is closed without finite type assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.Scheme.residue\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.residueFieldCongr\", \"AlgebraicGeometry.Scheme.Hom.residueFieldMap\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.evaluation.congr_simp\"], \"digest\": \"bcdfef67710af014\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the arbitrary-scheme algebraic-residue criterion; closed immersion criteria need an additional proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary scheme morphism a point with algebraic residue field extension over a closed base point is closed",
+   "results": "{\"t\": \"2026-10-23T13:23:09Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary scheme morphism a point with algebraic residue field extension over a closed base point is closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\"], \"digest\": \"19e4cbdedc287961\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the arbitrary-scheme algebraic-residue criterion; closed immersion criteria need an additional proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a scheme over a field any point with algebraic residue field is closed even when the scheme is not locally of finite type",
+   "results": "{\"t\": \"2026-10-23T13:23:12Z\", \"tool\": \"leanfinder\", \"query\": \"In a scheme over a field any point with algebraic residue field is closed even when the scheme is not locally of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\"], \"digest\": \"4e671f2534a81114\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the arbitrary-scheme algebraic-residue criterion; closed immersion criteria need an additional proof"
+  },
+  {
+   "tool": "grep",
+   "query": "01TE|IsAlgebraic|Algebra.IsAlgebraic",
+   "results": "{\"t\": \"2026-10-23T13:27:57Z\", \"tool\": \"grep\", \"query\": \"01TE|IsAlgebraic|Algebra.IsAlgebraic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"93aeb82ee0bdf83a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the arbitrary-scheme algebraic-residue criterion; closed immersion criteria need an additional proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism a point with algebraic residue field extension over a closed image point is closed without finite type or separatedness assumptions",
+   "results": "{\"t\": \"2026-10-23T14:47:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a scheme morphism a point with algebraic residue field extension over a closed image point is closed without finite type or separatedness assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\"], \"digest\": \"d8ce3b0c96efb28d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion equivalence requires an additional proof; the Jacobson finite-type criterion has extra hypotheses. The second semantic phrasing likewise found no arbitrary-scheme algebraic-residue criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "01TE|IsAlgebraic|algebraic.*closed|closed.*algebraic",
+   "results": "{\"t\": \"2026-10-23T14:50:18Z\", \"tool\": \"grep\", \"query\": \"01TE|IsAlgebraic|algebraic.*closed|closed.*algebraic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"3030ff708f71cfdf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion equivalence requires an additional proof; the Jacobson finite-type criterion has extra hypotheses. The second semantic phrasing likewise found no arbitrary-scheme algebraic-residue criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A point of an arbitrary scheme with algebraic residue extension over a closed base point is closed",
+   "results": "{\"t\": \"2026-10-23T14:50:18Z\", \"tool\": \"leansearch\", \"query\": \"A point of an arbitrary scheme with algebraic residue extension over a closed base point is closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.comap_closedPoint\", \"IsLocalRing.isClosed_singleton_closedPoint\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"IsLocalRing.closedPoint\", \"IsLocalRing.closedPoint.congr_simp\", \"AlgebraicGeometry.Scheme.height_of_isClosed\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"IsLocalRing.specializes_closedPoint\"], \"digest\": \"2d12b4f1394d1e20\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion equivalence requires an additional proof; the Jacobson finite-type criterion has extra hypotheses. The second semantic phrasing likewise found no arbitrary-scheme algebraic-residue criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAlgebraic\"",
+   "results": "{\"t\": \"2026-10-23T14:50:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsAlgebraic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion equivalence requires an additional proof; the Jacobson finite-type criterion has extra hypotheses. The second semantic phrasing likewise found no arbitrary-scheme algebraic-residue criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a scheme over a field a point with algebraic residue field is closed even without local finite type",
+   "results": "{\"t\": \"2026-10-23T14:51:30Z\", \"tool\": \"leanfinder\", \"query\": \"In a scheme over a field a point with algebraic residue field is closed even without local finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\"], \"digest\": \"354b868b113587ee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: closed-immersion equivalence requires an additional proof; the Jacobson finite-type criterion has extra hypotheses. The second semantic phrasing likewise found no arbitrary-scheme algebraic-residue criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-decent-algebraic-field-image-closed",
+  "date": "2026-10-23",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Topology of rational points of quasi-separated algebraic spaces. Supporting input: Algebraic field-valued images over closed base points are closed in decent spaces. Supporting input for the proof of Stacks 07U5: Algebraic residue extensions over closed base points give closed scheme points.",
+   "via": [
+    "lem-sfb-decent-algebraic-field-image-closed",
+    "lem-sfb-qs-space-rational-point-topology",
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-algebraic-residue-closed-point",
+  "worker": "stage1",
+  "summary": "Checked the arbitrary-scheme statement against Stacks 01TE(2), excluded stronger finite-type or separated Lean/Mathlib candidates, and wrote the affine specialization proof using existing basis, spectrum-closure, maximal-ideal-existence and affine residue dictionary nodes. The subring-of-an-algebraic-extension inverse formula is elementary and written explicitly, so no new node is needed. Statement and statement dependencies are unchanged.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images clause (3) geometry chain, specifically its decent-space closed-image input through Stacks 07U5. The latest sk-thm-sf-ctf-stability-direct-images.proof.md has a shorter compactification paragraph; no claim is made that the present algebraic geometry lemma appears verbatim there. The concrete source of this supporting lemma is Stacks 01TE(2).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-field-point-residue-field",
+    "why": "Generic affine residue-field dictionary: its clauses (1),(2) supply kappa(p)=Frac(A/p) and identify the chart residue fields; no same-unit statement replaces this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-field-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-5ef6f26fe",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-5ef6f26fe (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is exactly Stacks 01TE(2) (morphisms.tex:3565): an arbitrary morphism, an algebraic residue extension and a closed base point imply a closed point. Nothing is added or dropped. The small cases agree: A^1 generic point and Spec k[t] generic point show both hypotheses are needed, and the doubled-origin line is covered. Step 1 uses the affine-basis node (neighbourhood form) and the Spec-morphism bijection. The chart is taken about the specialization z, which contains y, so the conclusion is global without separatedness. Step 2: V(p)={p} by the closure clause of 00ES, so p is maximal by 00E0. The spec-field-point-residue-field clauses (1),(2) give kappa(s)=A/p and B/q in kappa(y). The kernel of A->B/q is p. The residue map is compatible because the stalk map is the localization of phi. That node is in another unit (sk-thm-p1); the declared tool use is generic and accepted. Step 3 is the 0BID inverse formula as used in 00GA (both proofs read) and is elementary: C is a field, so q is maximal. Step 4: q is contained in r, so r=q and z=y. proof_deps equals the union of the step uses. The searches cover three kinds. No existing node states 0BID, 00GA or general 01TE; lem-trf-finite-residue-point-closed-in-fibre assumes finite type and concludes only closedness in the fibre. No new nodes, no SGA. The item is still unsplit in live and side-live, there is no repair note, and A-F hold. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicResidueClosedPoint",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isClosed_singleton_of_isAlgebraic_residueField",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicResidueClosedPoint.lean",
+  "statement": "theorem isClosed_singleton_of_isAlgebraic_residueField {Y S : Scheme.{u}} (f : Y ⟶ S) (y : Y) (hs : IsClosed ({f y} : Set S)) (halg : @Algebra.IsAlgebraic (S.residueField (f y)) (Y.residueField y) _ _ (f.residueFieldMap y).hom.toAlgebra) : IsClosed ({y} : Set Y)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f6d03924",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Stacks 01TE(2) (morphisms.tex 3564-3576) matched clause by clause: arbitrary Y,S : Scheme.{u}, arbitrary f, y; Algebra.IsAlgebraic pinned to residueFieldMap (direction checked, Mathlib ResidueField.lean:123); hs : IsClosed {f y}; conclusion IsClosed {y}; no extra hypotheses or instances. Node changes only the lean record; statement verbatim. stmt_deps records (Scheme/Hom, residueField/residueFieldMap, IsAlgebraic, Algebra/toAlgebra) match the declarations used. No Mathlib or upstream duplicate (upstream iff criterion needs locally finite type over a field); no name collision. No defs, sorry-only proof, docstrings carry source place and blueprint tag with the 4-step proof; Worker report and Second reading by Q14 present. Edge cases (empty Y, infinite algebraic extension, DVR identity, A^1 generic point) correct. No file changed, so no recompile; worker reports scompile exit 0."
+ }
+}

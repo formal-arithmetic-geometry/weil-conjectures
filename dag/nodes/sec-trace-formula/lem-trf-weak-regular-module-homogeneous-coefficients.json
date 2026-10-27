@@ -1,0 +1,290 @@
+{
+ "id": "lem-trf-weak-regular-module-homogeneous-coefficients",
+ "kind": "statement",
+ "title": "Homogeneous coefficient criterion for a weakly regular module sequence",
+ "statement": "Let $R$ be a commutative ring, $N$ an $R$-module, $s\\geq0$, and $y_1,\\ldots,y_s\\in R$. Put $J=(y_1,\\ldots,y_s)$. Suppose that for each $1\\leq i\\leq s$, multiplication by $y_i$ is injective on $N/(y_1,\\ldots,y_{i-1})N$; this is condition (1) of [def-weil-pbc-regular-sequence], without any nonvanishing requirement. For $\\alpha=(\\alpha_1,\\ldots,\\alpha_s)\\in\\mathbb N^s$ write $|\\alpha|=\\sum_i\\alpha_i$ and $y^\\alpha=\\prod_i y_i^{\\alpha_i}$. Then for every $n\\geq0$ and every family $(n_\\alpha)_{|\\alpha|=n}$ in $N$, one has\n$$\\sum_{|\\alpha|=n}y^\\alpha n_\\alpha\\in J^{n+1}N\\quad\\Longrightarrow\\quad n_\\alpha\\in JN\\ \\text{for every }\\alpha\\text{ with }|\\alpha|=n.$$\nThe module $N$ may be zero, and the parameter list may be empty. For $s=0$, the empty multi-index has degree zero and its monomial is $1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00LN (lemma-regular-quasi-regular), part (2), and its proof, with equation-quasi-regular (Tag 061N). The module coefficient criterion is expanded explicitly. The proof uses only injectivity on successive quotients, so its argument also covers weak regularity and the zero module; it never uses the nonvanishing clause of regularity."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "For an ideal $H$, write $HN$ for the submodule of finite sums $\\sum_j h_jv_j$ with $h_j\\in H$ and $v_j\\in N$. If $H=(z_1,\\ldots,z_r)$, expanding its generators gives $HN=\\sum_i z_iN$. By the definition of ideal products and distributivity, $H^dN=\\sum_{|\\beta|=d}z^\\beta N$: expand each product of $d$ generators, absorb all scalar coefficients into elements of $N$, and collect equal multi-indices; conversely every summand lies in $H^dN$. For $d=0$ the right side is $N$. In particular every $v\\in H^{d+1}N=H^d(HN)$ has an expansion $v=\\sum_{|\\beta|=d}z^\\beta b_\\beta$ with $b_\\beta\\in HN$. These are finite sums, including when the list is empty.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular, proof of (1) and the module extension (2); Tag 061N, equation-quasi-regular."
+   }
+  },
+  {
+   "text": "Prove the asserted next-power coefficient criterion by induction on the length $s$, simultaneously for every degree $n$ and every weakly regular list of that length on $N$. At $s=0$ the ideal is zero: for $n=0$ the premise says that the single coefficient belongs to $0^1N=0$, and for $n>0$ there are no multi-indices. Thus the conclusion holds. Assume now that it holds in every degree for lists of length $s-1$, where $s\\geq1$.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular, proof of (1) and the module extension (2); Tag 061N, equation-quasi-regular."
+   }
+  },
+  {
+   "text": "For this fixed length, it suffices to prove the zero-relation assertion in each degree: $\\sum_{|\\alpha|=n}y^\\alpha a_\\alpha=0$ implies $a_\\alpha\\in JN$. Indeed, for the original sum $v\\in J^{n+1}N$, step 1 gives $v=\\sum_{|\\alpha|=n}y^\\alpha b_\\alpha$ with all $b_\\alpha\\in JN$. Subtract to obtain the zero relation with coefficients $a_\\alpha=n_\\alpha-b_\\alpha$. Once the zero-relation assertion is proved, addition of $b_\\alpha$ puts the original $n_\\alpha$ in $JN$. This reduction uses no induction hypothesis at length $s$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular, proof of (1) and the module extension (2); Tag 061N, equation-quasi-regular."
+   }
+  },
+  {
+   "text": "Put $z=(y_1,\\ldots,y_{s-1})$, $K=(y_1,\\ldots,y_{s-1})$ and $t=y_s$. The prefix is weakly regular because its successive quotients and multiplications are unchanged. The last injectivity hypothesis says that $t$ acts injectively on $N/KN$. Consequently, for every $l\\geq0$, $t^l a\\in KN$ implies $a\\in KN$: in the quotient, cancel $t$ successively $l$ times, with $l=0$ immediate. Also $KN\\subseteq JN$ and $tN\\subseteq JN$ by the descriptions of the generated ideals.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular, proof of (1) and the module extension (2); Tag 061N, equation-quasi-regular."
+   }
+  },
+  {
+   "text": "Fix $n$. Prove by induction on $l\\in\\{0,\\ldots,n\\}$ that every relation\n$$\\sum_{e=0}^{l}t^e\\sum_{|\\beta|=n-e}z^\\beta a_{\\beta,e}=0$$\nhas every displayed coefficient in $JN$. The coefficients range over arbitrary elements of $N$ at each induction stage. For $l=0$, the prefix sum is zero and hence belongs to $K^{n+1}N$. Apply the outer induction hypothesis, in degree $n$, to the weakly regular prefix on the same module $N$. It puts all $a_{\\beta,0}$ in $KN\\subseteq JN$. This includes an empty prefix and degree zero.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular, proof of (1) and the module extension (2); Tag 061N, equation-quasi-regular."
+   }
+  },
+  {
+   "text": "Let $l>0$ and assume the inner assertion at $l-1$. For $e<l$, each term $t^ez^\\beta a_{\\beta,e}$ belongs to $K^{n-e}N\\subseteq K^{n-l+1}N$, since $|\\beta|=n-e\\geq n-l+1$. The displayed relation therefore gives\n$$\\sum_{|\\beta|=n-l}z^\\beta(t^l a_{\\beta,l})\\in K^{n-l+1}N.$$\nThe outer induction hypothesis in degree $n-l$ gives $t^la_{\\beta,l}\\in KN$. Applying the cancellation from step 4 yields $a_{\\beta,l}\\in KN$. No cancellation on $N$ itself or on $N/K^qN$ is being used.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular, proof of (1) and the module extension (2); Tag 061N, equation-quasi-regular."
+   }
+  },
+  {
+   "text": "Write $a_{\\beta,l}=\\sum_{i=1}^{s-1}z_i u_{\\beta,i}$ using step 1. For $|\\gamma|=n-l+1$ let $b_\\gamma=\\sum_{\\beta,i:\\,\\beta+\\epsilon_i=\\gamma}u_{\\beta,i}$, where $\\epsilon_i$ is the $i$th unit multi-index. Distributivity gives\n$$\\sum_{|\\beta|=n-l}z^\\beta a_{\\beta,l}=\\sum_{|\\gamma|=n-l+1}z^\\gamma b_\\gamma.$$\nReplace $a_{\\gamma,l-1}$ by $a'_{\\gamma,l-1}=a_{\\gamma,l-1}+t b_\\gamma$, and keep all coefficients at $e<l-1$ unchanged. Multiplication of the displayed identity by $t^l$ rewrites the original relation as a zero relation with upper exponent $l-1$. The inner induction puts all its coefficients in $JN$. Since $t b_\\gamma\\in JN$, subtraction puts the original $a_{\\gamma,l-1}$ there too. Coefficients at smaller exponents are unchanged, and those at exponent $l$ already lie in $KN$. This proves the inner induction step, also for an empty prefix, where the sums over $i$ are zero.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular, proof of (1) and the module extension (2); Tag 061N, equation-quasi-regular."
+   }
+  },
+  {
+   "text": "Every degree-$n$ relation in the full list is exactly the relation in step 5 with $l=n$, by separating a multi-index $\\alpha$ into its prefix $\\beta$ and last exponent $e$. The inner induction therefore proves the zero-relation assertion. Step 3 proves the next-power criterion, completing the outer induction. When $N=0$ all the expansions and injectivity assertions remain valid; when $JN=N$ the conclusion is automatic. No finiteness, Noetherian, local, permutation, or nonvanishing assumption has been introduced.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LN, lemma-regular-quasi-regular, proof of (1) and the module extension (2); Tag 061N, equation-quasi-regular."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00LN, lemma-regular-quasi-regular, proof of (1) and the module extension (2); Tag 061N, equation-quasi-regular."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi.?regular|coeff.*(eval|pow)|[Ii]sWeaklyRegular",
+   "results": "{\"t\": \"2026-10-23T21:17:45Z\", \"tool\": \"grep\", \"query\": \"quasi.?regular|coeff.*(eval|pow)|[Ii]sWeaklyRegular\", \"sub\": \"RingTheory/Regular\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"0d608bdae1cc6edf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the definition and quotient recursion of weak regularity, localization or flat base change; no module homogeneous coefficient theorem. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists quasi-regular sequences as TODO. Project QuasiRegular.lean:126 proves only ring coefficients, not arbitrary module coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsWeaklyRegular\", \"coeff\"",
+   "results": "{\"t\": \"2026-10-23T21:17:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsWeaklyRegular\\\", \\\"coeff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the definition and quotient recursion of weak regularity, localization or flat base change; no module homogeneous coefficient theorem. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists quasi-regular sequences as TODO. Project QuasiRegular.lean:126 proves only ring coefficients, not arbitrary module coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-weak-regular-module-homogeneous-coefficients: regular sequence on a module implies associated graded module is polynomial module with degree zero coefficients",
+   "results": "{\"t\": \"2026-10-23T21:17:46Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-weak-regular-module-homogeneous-coefficients: regular sequence on a module implies associated graded module is polynomial module with degree zero coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.IsWeaklyRegular.of_isLocalizedModule\", \"RingTheory.Sequence.IsRegular.toIsWeaklyRegular\", \"RingTheory.Sequence.isRegular_cons_iff\", \"RingTheory.Sequence.IsRegular.recIterModByRegular\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff\", \"RingTheory.Sequence.IsRegular.recIterModByRegularWithRing\"], \"digest\": \"d4c4586b0d38d62e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the definition and quotient recursion of weak regularity, localization or flat base change; no module homogeneous coefficient theorem. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists quasi-regular sequences as TODO. Project QuasiRegular.lean:126 proves only ring coefficients, not arbitrary module coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-weak-regular-module-homogeneous-coefficients: for a module regular sequence, a homogeneous sum of monomials lying in the next ideal power has every coefficient in the parameter ideal",
+   "results": "{\"t\": \"2026-10-23T21:17:48Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-weak-regular-module-homogeneous-coefficients: for a module regular sequence, a homogeneous sum of monomials lying in the next ideal power has every coefficient in the parameter ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.isRegular_iff\", \"RingTheory.Sequence.isWeaklyRegular_iff\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"RingTheory.Sequence.IsRegular.top_ne_smul\", \"RingTheory.Sequence.IsWeaklyRegular.cons'\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff'\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff\"], \"digest\": \"dc3ed7dbb525bffa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the definition and quotient recursion of weak regularity, localization or flat base change; no module homogeneous coefficient theorem. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists quasi-regular sequences as TODO. Project QuasiRegular.lean:126 proves only ring coefficients, not arbitrary module coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?regular|coeff_mem_of_eval_mem_pow_succ|coeff.*[Rr]egular|[Rr]egular.*coeff",
+   "results": "{\"t\": \"2026-10-23T21:18:31Z\", \"tool\": \"grep\", \"query\": \"quasi.?regular|coeff_mem_of_eval_mem_pow_succ|coeff.*[Rr]egular|[Rr]egular.*coeff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Quasispectrum.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Pi.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Pi.lean\", \"Mathlib/Algebra/Algebra/Spectrum/Pi.lean\"], \"digest\": \"8d8a952d00439321\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the definition and quotient recursion of weak regularity, localization or flat base change; no module homogeneous coefficient theorem. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists quasi-regular sequences as TODO. Project QuasiRegular.lean:126 proves only ring coefficients, not arbitrary module coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsWeaklyRegular\", \"pow\"",
+   "results": "{\"t\": \"2026-10-23T21:18:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsWeaklyRegular\\\", \\\"pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the definition and quotient recursion of weak regularity, localization or flat base change; no module homogeneous coefficient theorem. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists quasi-regular sequences as TODO. Project QuasiRegular.lean:126 proves only ring coefficients, not arbitrary module coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-weak-regular-module-homogeneous-coefficients: the degree n monomials of a weakly regular sequence identify the nth ideal graded quotient with copies of M divided by the generated ideal",
+   "results": "{\"t\": \"2026-10-23T21:18:34Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-weak-regular-module-homogeneous-coefficients: the degree n monomials of a weakly regular sequence identify the nth ideal graded quotient with copies of M divided by the generated ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.isWeaklyRegular_iff\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff'\", \"RingTheory.Sequence.IsWeaklyRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsWeaklyRegular.cons'\", \"RingTheory.Sequence.isWeaklyRegular_append_iff'\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff\"], \"digest\": \"465e0bd715a3c414\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern the definition and quotient recursion of weak regularity, localization or flat base change; no module homogeneous coefficient theorem. Mathlib/RingTheory/Regular/RegularSequence.lean:21 explicitly lists quasi-regular sequences as TODO. Project QuasiRegular.lean:126 proves only ring coefficients, not arbitrary module coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi.?regular|[Ii]sWeaklyRegular",
+   "results": "{\"t\": \"2026-10-23T22:14:20Z\", \"tool\": \"grep\", \"query\": \"quasi.?regular|[Ii]sWeaklyRegular\", \"sub\": \"RingTheory/Regular\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"0d608bdae1cc6edf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give weak-regularity definitions and recursors, flat base change, unrelated polynomial leading coefficients or the filtration Rees submodule; none states independence of module-valued monomial coefficients. Read Mathlib/RingTheory/Regular/RegularSequence.lean:21,130-148 and the candidate signatures returned by this search. The project ring-coefficient theorem in QuasiRegular.lean:126 is not a theorem for arbitrary modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weakly regular module sequences give independent monomials over the quotient module in each ideal graded piece",
+   "results": "{\"t\": \"2026-10-23T22:14:20Z\", \"tool\": \"leansearch\", \"query\": \"Weakly regular module sequences give independent monomials over the quotient module in each ideal graded piece\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.mk\", \"RingTheory.Sequence.IsWeaklyRegular.recIterModByRegular\", \"RingTheory.Sequence.IsWeaklyRegular\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.IsRegular.mk\", \"RingTheory.Sequence.IsWeaklyRegular.rec\", \"RingTheory.Sequence.IsWeaklyRegular.ndrecWithRing\", \"RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last\"], \"digest\": \"a2620bd1e95b3888\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give weak-regularity definitions and recursors, flat base change, unrelated polynomial leading coefficients or the filtration Rees submodule; none states independence of module-valued monomial coefficients. Read Mathlib/RingTheory/Regular/RegularSequence.lean:21,130-148 and the candidate signatures returned by this search. The project ring-coefficient theorem in QuasiRegular.lean:126 is not a theorem for arbitrary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsWeaklyRegular\", \"coeff\"",
+   "results": "{\"t\": \"2026-10-23T22:14:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsWeaklyRegular\\\", \\\"coeff\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give weak-regularity definitions and recursors, flat base change, unrelated polynomial leading coefficients or the filtration Rees submodule; none states independence of module-valued monomial coefficients. Read Mathlib/RingTheory/Regular/RegularSequence.lean:21,130-148 and the candidate signatures returned by this search. The project ring-coefficient theorem in QuasiRegular.lean:126 is not a theorem for arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a weakly regular sequence on an arbitrary module, a homogeneous monomial sum in the next power of its ideal has all coefficients in the ideal times the module",
+   "results": "{\"t\": \"2026-10-23T22:14:21Z\", \"tool\": \"leanfinder\", \"query\": \"For a weakly regular sequence on an arbitrary module, a homogeneous monomial sum in the next power of its ideal has all coefficients in the ideal times the module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.isWeaklyRegular_iff\", \"RingTheory.Sequence.IsWeaklyRegular.cons'\", \"RingTheory.Sequence.isWeaklyRegular_cons_iff'\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"RingTheory.Sequence.isRegular_iff\", \"RingTheory.Sequence.IsRegular.top_ne_smul\", \"Polynomial.coeff_prod_mem_ideal_pow_tsub\"], \"digest\": \"1d1bb494b1574231\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give weak-regularity definitions and recursors, flat base change, unrelated polynomial leading coefficients or the filtration Rees submodule; none states independence of module-valued monomial coefficients. Read Mathlib/RingTheory/Regular/RegularSequence.lean:21,130-148 and the candidate signatures returned by this search. The project ring-coefficient theorem in QuasiRegular.lean:126 is not a theorem for arbitrary modules."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*coeff|coeff.*regular|regular.*graded|graded.*regular",
+   "results": "{\"t\": \"2026-10-23T22:14:47Z\", \"tool\": \"grep\", \"query\": \"regular.*coeff|coeff.*regular|regular.*graded|graded.*regular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/MvPolynomial/MonomialOrder.lean\", \"Mathlib/RingTheory/HahnSeries/Summable.lean\"], \"digest\": \"32aed6674ddf812c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give weak-regularity definitions and recursors, flat base change, unrelated polynomial leading coefficients or the filtration Rees submodule; none states independence of module-valued monomial coefficients. Read Mathlib/RingTheory/Regular/RegularSequence.lean:21,130-148 and the candidate signatures returned by this search. The project ring-coefficient theorem in QuasiRegular.lean:126 is not a theorem for arbitrary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsWeaklyRegular\", \"pow\"",
+   "results": "{\"t\": \"2026-10-23T22:14:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsWeaklyRegular\\\", \\\"pow\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give weak-regularity definitions and recursors, flat base change, unrelated polynomial leading coefficients or the filtration Rees submodule; none states independence of module-valued monomial coefficients. Read Mathlib/RingTheory/Regular/RegularSequence.lean:21,130-148 and the candidate signatures returned by this search. The project ring-coefficient theorem in QuasiRegular.lean:126 is not a theorem for arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded module for an ideal generated by a module regular sequence is the polynomial module over the quotient module",
+   "results": "{\"t\": \"2026-10-23T22:14:49Z\", \"tool\": \"leanfinder\", \"query\": \"The associated graded module for an ideal generated by a module regular sequence is the polynomial module over the quotient module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsWeaklyRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegularWithRing\", \"RingTheory.Sequence.IsRegular.recIterModByRegular\", \"RingTheory.Sequence.IsRegular.recIterModByRegularWithRing\", \"Ideal.Filtration.submodule\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.isRegular_cons_iff'\"], \"digest\": \"b3aa2fc0589e9e11\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give weak-regularity definitions and recursors, flat base change, unrelated polynomial leading coefficients or the filtration Rees submodule; none states independence of module-valued monomial coefficients. Read Mathlib/RingTheory/Regular/RegularSequence.lean:21,130-148 and the candidate signatures returned by this search. The project ring-coefficient theorem in QuasiRegular.lean:126 is not a theorem for arbitrary modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-adic-degree-zero-regular-strict-powers",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Numerical near-point input: normal-cone equations have generators in the projective-point order algebra. Q103 refinement: section 2, p.153, normal-flat tangent/normal-cone comparison, and the paragraph after Example (4.2), p.157; the cited underlying result is Resolution of singularities (1964), Chapter II, Theorem 2; numerical input: the Hilbert function of a normally flat local ring is the convolution of the normal-cone fibre Hilbert function with the Hilbert function of its regular centre. Q28 refinement: algebraic strictness of powers of lifted centre parameters on the I-adic module filtration, used before taking finite-length factors. Q45 refinement: module homogeneous coefficient theorem used to raise the parameter-ideal order of a remainder in the proof of adic strictness.",
+   "via": [
+    "lem-trf-adic-degree-zero-regular-strict-powers",
+    "lem-trf-normal-flat-hilbert-convolution",
+    "lem-trf-normal-flat-double-initial-ideal",
+    "lem-trf-near-blowup-order-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-weak-regular-module-homogeneous-coefficients",
+  "worker": "stage1",
+  "summary": "Expanded the module version of Stacks 00LN into eight explicit steps: finite monomial expansion, an outer induction on length and an inner induction on the last exponent, with the coefficient correction written out. Retained the statement, including weak regularity, zero modules and empty lists. Reused two Mathlib definition nodes; no new nodes. Searched current project Lean, the whole DAG and blueprint, and Mathlib in two formulations; only ring-coefficient results were found.",
+  "blueprint": "The historical supporting commutative-algebra branch recorded in blueprint.from.place, via lem-trf-adic-degree-zero-regular-strict-powers: the homogeneous module coefficient input used to raise parameter-ideal order. Realizes the Stacks 00LN module double induction supporting that input; it changes neither the current sk-i-curve-zero route nor its local-term statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-6b09a6c42",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-6b09a6c42 (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex 16850-16978 in full (061N equation-quasi-regular, definition-quasi-regular-sequence, 00LN lemma-regular-quasi-regular with its proof). The statement is unchanged from the base, and live and side-live still have the item unsplit with no proof, so it is not superseded. The added stmt_dep def-weil-pbc-algebra-hom-quotient is the definition of the ideal powers J^{n+1} the statement uses. Both cited definitions were read in full; only condition (1) of def-weil-pbc-regular-sequence is used. 00LN's proof never uses nonvanishing, so the weak-regularity statement is justified, and its 'in J' means JM for modules. I checked all 8 steps against the source: monomial expansion with H^{d+1}N=H^d(HN); the outer induction on s with base s=0 and the full criterion as hypothesis; the reduction to zero relations; prefix weak regularity and cancellation of t^l on N/KN; the inner induction on l with base l=0; the top-coefficient argument through the outer hypothesis in degree n-l, applied to t^l a; the explicit b_gamma correction giving an upper exponent of l-1; and the assembly. All steps are correct and elementary, and proof_deps equals the union of uses. Small cases checked: s=1 over k[x]; (x,y) over k[x,y] in degree 1; the empty prefix; N=0; the unit parameter y=1 (shows nonvanishing must not be required); and k[eps]/eps^2 as a negative test (the injectivity hypothesis is needed). No new nodes. The whole-DAG scan finds only ring-coefficient analogues (lem-pur-regular-sequence-higher-homogeneous-relations, -graded-polynomial, lem-per-h1-koszul-quasi-regular, lem-weil-pbc-regular-sequence-conormal-free), so there is no duplicate. The parent lem-trf-adic-degree-zero-regular-strict-powers step 2 uses the item exactly as stated, on M/I^pM. Mathlib RegularSequence.lean:21 lists quasi-regular sequences as TODO, so mathlib_match null is correct. No SGA, no tool_uses needed, blueprint fields present with same_as=[]. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeakRegularModuleHomogeneousCoefficients",
+  "declaration": "RingTheory.Sequence.IsWeaklyRegular.homogeneous_coefficients_mem",
+  "file": "lean/Sheaf/RingTheory/WeakRegularModuleHomogeneousCoefficients.lean",
+  "statement": "theorem homogeneous_coefficients_mem {R : Type u} [CommRing R] {N : Type v} [AddCommGroup N] [Module R N] {s : ℕ} (y : Fin s → R) (hy : RingTheory.Sequence.IsWeaklyRegular N (List.ofFn y)) (n : ℕ) (c : (Finset.Nat.antidiagonalTuple s n) → N) (hc : (∑ α : Finset.Nat.antidiagonalTuple s n, (∏ i, y i ^ α.val i) • c α) ∈ (Ideal.ofList (List.ofFn y) ^ (n + 1)) • (⊤ : Submodule R N)) : ∀ α : Finset.Nat.antidiagonalTuple s n, c α ∈ Ideal.ofList (List.ofFn y) • (⊤ : Submodule R N)",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91111c42b",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 00LN(2) clause by clause: CommRing R, Module R N (universes u v, no Nontrivial), y : Fin s → R via List.ofFn, J = Ideal.ofList, hypothesis IsWeaklyRegular (condition (1) only, justified since 00LN proof never uses nonvanishing), multi-indices = antidiagonalTuple s n subtype, premise in J^(n+1)•⊤, conclusion ∀α, c α ∈ J•⊤. Edge cases s=0 (singleton/empty index), n=0, N=0, unit parameter covered. lean.statement verbatim in file; node differs from live only in lean field (fresh record, no rebind). No new defs, no existing Mathlib/project match (only ring-coefficient versions), docstrings with source/blueprint and 8 proof steps, sorry only, report sections present. Citer adic-degree-zero-regular-strict-powers usage fits. No findings."
+ }
+}

@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-adequate-algebra-unit-power-kernel",
+ "kind": "statement",
+ "title": "Adequate-moduli algebra adjunction has universally power-lifting nil kernel",
+ "statement": "Let $k$ be a field [def-weil-field], $R$ a commutative $k$-algebra, and $\\phi:\\mathcal X\\to\\operatorname{Spec}R$ an adequate moduli space [def-sfb-adequate-moduli-space, def-weil-affine-spectrum]. Let $C$ be any commutative $R$-algebra. Write $\\mathcal C=\\mathcal O_{\\mathcal X}\\otimes_R C$ for the quasi-coherent commutative algebra obtained by tensor pullback: on an affine scheme object $V=\\operatorname{Spec}A\\to\\mathcal X$ it is the algebra associated to $A\\otimes_R C$. Quasi-coherent algebras and their global sections use [def-sfb-stack-quasi-coherent-algebra], and tensor extension uses [def-weil-module-base-change]. Put $D=\\Gamma(\\mathcal X,\\mathcal C)$ and let $u:C\\to D$ send $c$ to the compatible family of sections $1\\otimes c$. For every commutative $C$-algebra $C'$, form $u_{C'}:C'\\to C'\\otimes_C D$, $c'\\mapsto c'\\otimes1$. Every element of $\\ker u_{C'}$ is nilpotent, and for every $d'\\in C'\\otimes_C D$ there are an integer $N>0$ and $c'\\in C'$ with $u_{C'}(c')=(d')^N$. There are no finite-generation, flatness, Noetherian or absolute diagonal-separation hypotheses.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper, published version, Lemma 5.2.6, printed p.508, together with Proposition 3.3.5, Definition 3.3.1 and Remark 3.3.2, printed pp.497--498. Tensor form of the algebra adjunction unit. Primary PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf; local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-adequate-moduli-space",
+  "def-weil-affine-spectrum",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-module-base-change",
+  "def-sfb-stack-scalar-algebra"
+ ],
+ "proof": [
+  {
+   "text": "By the adequate-moduli definition, $R\\simeq\\Gamma(\\mathcal X,\\mathcal O)$ and every surjection of quasi-coherent algebras on $\\mathcal X$ lifts positive powers on global sections (take the identity etale test of $\\operatorname{Spec}R$). The affine-target criterion therefore makes $\\phi$ adequately affine. Choose $P=R[T_c:c\\in C]$ with evaluation $T_c\\mapsto c$ and $I=\\ker(P\\to C)$; evaluation is surjective because every $c$ is the image of $T_c$, so $P/I\\simeq C$.",
+   "uses": [
+    "def-sfb-adequate-moduli-space",
+    "lem-sfb-affine-target-adequacy-criterion",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper Lemma 5.2.6, printed p.508, using Lemma 5.2.1, printed p.507; online published PDF read, local copy WANTED."
+   }
+  },
+  {
+   "text": "Put $\\mathcal Z=\\mathcal X\\times_{\\operatorname{Spec}R}\\operatorname{Spec}P$, with projection $f:\\mathcal Z\\to\\operatorname{Spec}P$. Adequate affineness persists by the affine-target base-change lemma. The polynomial projection $\\operatorname{Spec}P\\to\\operatorname{Spec}R$ is flat, hence $R\\to P$ is flat by the affine flatness criterion. Apply flat scalar-sections to $\\mathcal O_{\\mathcal X}$ and $R\\to P$: its restriction is $\\mathcal O_{\\mathcal Z}$ by the structure-sheaf definition, so the canonical map $R\\otimes_R P\\to\\Gamma(\\mathcal Z,\\mathcal O_{\\mathcal Z})$ is an isomorphism. It identifies this ring with $P$ and sends $T_c$ to the structural section $1\\otimes T_c$.",
+   "uses": [
+    "lem-sfb-adequately-affine-affine-target-base-change",
+    "lem-nagata-polynomial-projection-flat",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sfb-stack-flat-scalar-sections",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper Lemma 5.2.6, printed p.508, using Lemma 5.2.1, printed p.507; online published PDF read, local copy WANTED."
+   }
+  },
+  {
+   "text": "Apply the ideal-quotient comparison to $f$, $\\mathcal A=\\mathcal O_{\\mathcal Z}$ and $I\\subseteq P$. Its source is $P/IP=P/I=C$. Its target is $D$: indeed the closed relative spectrum of $\\mathcal O_{\\mathcal Z}/I\\mathcal O_{\\mathcal Z}$ is $\\mathcal X\\times_R\\operatorname{Spec}C=\\underline{\\operatorname{Spec}}_{\\mathcal X}(\\mathcal O_{\\mathcal X}\\otimes_RC)$. These identifications follow on affine tests from imposing the relations $I$ on $A\\otimes_RP$, yielding $A\\otimes_RC$, and from the relative-spectrum global-section identification. They send the class of each $T_c$ to $1\\otimes c$, so the comparison map is exactly $u$. For any $C$-algebra $C'$, its tensor extension is consequently exactly $u_{C'}$, and the cited comparison gives both elementwise nilpotence of its kernel and the asserted positive-power lift. No tensor/global-section isomorphism for a nonflat extension is used.",
+   "uses": [
+    "lem-sfb-adequate-ideal-quotient-comparison",
+    "lem-sfb-stack-relative-spec-construction",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+    "place": "Alper Lemma 5.2.6, printed p.508, using Lemma 5.2.1, printed p.507; online published PDF read, local copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-adequate-moduli-space",
+  "lem-sfb-affine-target-adequacy-criterion",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-adequately-affine-affine-target-base-change",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-sfb-stack-flat-scalar-sections",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-sfb-adequate-ideal-quotient-comparison",
+  "lem-sfb-stack-relative-spec-construction",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces-arXiv-1005.2398.pdf",
+  "place": "Alper Lemma 5.2.6 polynomial-quotient argument, read online; local PDF unavailable. Explicit assembly and identification by Q50."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an adequate moduli space the adjunction map from a quasi-coherent algebra B to the pushforward of its pullback is universally power surjective with nilpotent kernel",
+   "results": "{\"t\": \"2026-10-23T12:58:52Z\", \"tool\": \"leanfinder\", \"query\": \"For an adequate moduli space the adjunction map from a quasi-coherent algebra B to the pushforward of its pullback is universally power surjective with nilpotent kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\"], \"digest\": \"6c4fed8197057aac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme or module adjunctions, formal unramifiedness, affine spectra, or general descent; none asserts the power and nilpotent-kernel property for an adequate moduli space. The adequate-name searches return no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "{\"t\": \"2026-10-23T12:59:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"adequate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme or module adjunctions, formal unramifiedness, affine spectra, or general descent; none asserts the power and nilpotent-kernel property for an adequate moduli space. The adequate-name searches return no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequate_moduli|universallyAdequate|adequateHomeomorphism",
+   "results": "{\"t\": \"2026-10-23T12:59:27Z\", \"tool\": \"grep\", \"query\": \"adequateModuli|adequate_moduli|universallyAdequate|adequateHomeomorphism\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme or module adjunctions, formal unramifiedness, affine spectra, or general descent; none asserts the power and nilpotent-kernel property for an adequate moduli space. The adequate-name searches return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adequate moduli map to Spec R and an arbitrary R algebra C the map C to global sections of the pulled back algebra has nilpotent kernel and is universally power surjective",
+   "results": "{\"t\": \"2026-10-23T13:10:34Z\", \"tool\": \"leanfinder\", \"query\": \"For an adequate moduli map to Spec R and an arbitrary R algebra C the map C to global sections of the pulled back algebra has nilpotent kernel and is universally power surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.HasRingHomProperty\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.HasAffineProperty.SpecMap_iff_of_affineAnd\", \"AlgebraicGeometry.HasRingHomProperty.Spec_iff\"], \"digest\": \"8ad923b633cd9fbc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme or module adjunctions, formal unramifiedness, affine spectra, or general descent; none asserts the power and nilpotent-kernel property for an adequate moduli space. The adequate-name searches return no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction unit C to global sections of tensor pullback along an adequate moduli space has nilpotent kernel after every scalar extension",
+   "results": "{\"t\": \"2026-10-23T13:11:30Z\", \"tool\": \"leansearch\", \"query\": \"Adjunction unit C to global sections of tensor pullback along an adequate moduli space has nilpotent kernel after every scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_unit\", \"CategoryTheory.Over.toOverSectionsAdj_unit_app\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.constantSheafΓAdj\"], \"digest\": \"a0c5b505364319bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern scheme or module adjunctions, formal unramifiedness, affine spectra, or general descent; none asserts the power and nilpotent-kernel property for an adequate moduli space. The adequate-name searches return no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adequate moduli space adjunction unit from an algebra to global sections of its tensor pullback is universally power surjective with nilpotent kernel",
+   "results": "{\"t\": \"2026-10-23T13:41:57Z\", \"tool\": \"leanfinder\", \"query\": \"Adequate moduli space adjunction unit from an algebra to global sections of its tensor pullback is universally power surjective with nilpotent kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.adjunction\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.Spec.reflective\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"PrimeSpectrum.mem_image_comap_basicOpen\"], \"digest\": \"21813f21176f37c3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction and scheme global-function declarations do not give the adequate-moduli unit theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "adequateModuli|adequatelyAffine|universallyAdequate|adequateHomeomorphism",
+   "results": "{\"t\": \"2026-10-23T13:47:46Z\", \"tool\": \"grep\", \"query\": \"adequateModuli|adequatelyAffine|universallyAdequate|adequateHomeomorphism\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction and scheme global-function declarations do not give the adequate-moduli unit theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunction unit for an adequate moduli space has universally nil kernel and lifts positive powers of algebra sections",
+   "results": "{\"t\": \"2026-10-23T13:47:47Z\", \"tool\": \"leansearch\", \"query\": \"Adjunction unit for an adequate moduli space has universally nil kernel and lifts positive powers of algebra sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unit\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"CategoryTheory.toSheafification\", \"AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_unit\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"AlgebraicGeometry.Scheme.kerAdjunction_unit_app\", \"CategoryTheory.ObjectProperty.isLocal_adj_unit_app\", \"CategoryTheory.Adjunction.unitSplitEpiOfLFull\"], \"digest\": \"87bc3c857b0fa5de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction and scheme global-function declarations do not give the adequate-moduli unit theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adequate\"",
+   "results": "{\"t\": \"2026-10-23T13:47:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"adequate\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract adjunction and scheme global-function declarations do not give the adequate-moduli unit theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adequate moduli space arbitrary extension of scalars induces a universally adequate algebra adjunction unit with nil kernel",
+   "results": "{\"t\": \"2026-10-23T14:21:45Z\", \"tool\": \"leanfinder\", \"query\": \"For an adequate moduli space arbitrary extension of scalars induces a universally adequate algebra adjunction unit with nil kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"comonadicExtendScalars\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallyUnramified.ext'\", \"Algebra.FormallyUnramified.lift_unique'\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"Algebra.FormallyUnramified.elem\", \"Algebra.Extension\", \"Algebra.FormallySmooth.of_restrictScalars\"], \"digest\": \"82172931562d9082\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: comonadic scalar extension and formal smoothness or unramifiedness have different hypotheses and conclusions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-adequate-base-change-affinization",
+  "date": "2026-10-23",
+  "group": "Q157"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.3, proof of Corollary 11(2), printed p.17, semistable replacement (citing Mumford, Stability of projective varieties, Lemma 5.3). Arbitrary-characteristic projective GIT formulation; both local references WANTED. Supporting input: Projective PGL quotient with universal closed images of invariant subschemes. Universal invariant closed-image assertion: apply the topology theorem for adequate moduli spaces on each invariant affine chart. Repair of the universal-closed-topology input: Alper Proposition 5.2.9(3), replacing the invalid citation of the downstream topological-images node. Algebra input to the affine-chart calculation: Alper Lemma 5.2.6 and Proposition 3.3.5, the adjunction unit on an arbitrary algebra and its tensor extensions.",
+   "via": [
+    "lem-sfb-adequate-base-change-affinization",
+    "lem-sfb-adequate-moduli-universal-closed-topology",
+    "lem-sfb-projective-pgl-invariant-quotient",
+    "lem-sfb-projective-git-semistable-replacement",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adequate-algebra-unit-power-kernel",
+  "worker": "stage1",
+  "summary": "Polynomial presentation and ideal-quotient assembly of Alper 5.2.6; reused existing polynomial-flatness and flat scalar-sections nodes for the polynomial case, and isolated the genuinely non-elementary adequately affine ideal-quotient comparison. Checked arbitrary tensor extensions without a nonflat base-change isomorphism.",
+  "blueprint": "Supporting algebra input to det-thm-sf-ctf-stability-direct-images proof (3), along the inherited plurinodal/GIT/adequate-moduli chain; realizes polynomial-quotient argument in Alper 5.2.6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Identifies the same tensor algebra after imposing the polynomial relations, by its universal property; generic commutative algebra tool, no alternate geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-51fb4afd0",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-51fb4afd0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-adequate-ideal-quotient-comparison and the statement of every cited node; the live item is still unsplit with the same statement and no repair note. There is no local Alper PDF; I checked the mathematics against Alper's argument for 5.2.6, 5.2.1 and 3.3.1/3.3.5 as I know it. Step 1: condition (1) of the adequate-moduli definition at the identity test gives R = Γ(X,O), condition (2) gives global power lifting, so by the affine-target criterion φ is adequately affine (qcqs by definition); P = R[T_c] → C is surjective. Step 2: adequate affineness is kept by affine-target base change; R → P is flat (Nagata flatness plus the flat-affine criterion, both Mathlib leaves); flat scalar-sections gives Γ(Z,O_Z) ≅ P as P-algebras, so IG = I. Step 3: G/IG = C, and H ≅ D because Spec_Z(O_Z/IO_Z) and Spec_X(O_X⊗_R C) are both X×_R Spec C on affine tests, using the relative-spec base-change and global-section clauses and the tensor pushout. The objectwise map A⊗_R C → A/IA is not an isomorphism, and the step correctly avoids it. v = u because both are R-algebra maps that agree on the generators [T_c]. The new node is Alper 5.2.1 with an affine target and is true for every G/IG-algebra E: kernels stay nil because the map is a universal homeomorphism, and power lifts descend from E⊗_P H to its quotient E⊗_{G/IG}H. Edge cases I=0, I=P, f the identity and E=0 all hold; no uniform exponent is claimed. It does not restate a clause of the item. B1-B9 hold, three kinds of search are recorded, the graph is acyclic, no cited id is missing or merged, proof_deps equals the union of the step uses, and there is no SGA citation. I accept the tool_use of the Mathlib-leaf tensor pushout. Batch-5: all five listed citations are generic adequacy or flat-base-change lemmas or definitions, reaching only the definitions def-trf-algebraic-space and def-trf-space-quasi-coherent-module, and none is part of the trace formula or Poincaré duality. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AdequateAlgebraUnitPowerKernel",
+  "declaration": "CategoryTheory.adequateAlgebraUnit_power_kernel",
+  "declarations": [
+   "CategoryTheory.adequateAlgebraUnit_power_kernel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AdequateAlgebraUnitPowerKernel.lean",
+  "statement": "theorem adequateAlgebraUnit_power_kernel {k : Type u} [Field k] (R : Type u) [CommRing R] [Algebra k R] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) (φ : BasedFunctor F (discreteModuli (yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))))))) (hφ : IsAdequateModuliSpace F hF (AlgebraicSpace.schemeSpace (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k R))))) φ) (C : Type u) [CommRing C] [Algebra R C] (C' : Type (max u t)) [CommRing C'] [Algebra C C'] : (∀ c' : C', (algebraMap C' (C' ⊗[C] moduliGlobalSectionsRing (moduliScalarSheaf φ C))) c' = 0 → IsNilpotent c') ∧ (∀ d' : C' ⊗[C] moduliGlobalSectionsRing (moduliScalarSheaf φ C), ∃ N : ℕ, 0 < N ∧ ∃ c' : C', (algebraMap C' (C' ⊗[C] moduliGlobalSectionsRing (moduliScalarSheaf φ C))) c' = d' ^ N)",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14bb292ae",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Read item node, all 6 stmt_deps, new def-sfb-stack-scalar-algebra node, both delivered modules, report (Worker report + Second reading present), live StackQuasiCoherentAlgebra/discreteModuli/schemeSpace/IsAdequateModuliSpace. Clause-by-clause match: k field, R k-algebra, F algebraic stack, φ to discreteModuli(yoneda Spec R over k), hφ recorded IsAdequateModuliSpace on schemeSpace, C : Type u, C' : Type (max u t) (generalization), D = moduliGlobalSectionsRing of moduliScalarSheaf (fppf sheafification of pointwise pushout O_X<-R->C, left leg = actual structural pullback via ΓSpecIso/appTop of yoneda.preimage after w_obj), C-algebra via moduliScalarUnit c↦1⊗c, algebraMap C' = c'⊗1, elementwise nil kernel and ∃N>0 power lift in node order; no extra hypotheses. New def node genuinely missing (no stack algebra pullback in side-live), real data, only Prop sorry (naturality, true), universes independent. lean.statement verbatim for both records; item differs from live only in lean + new-node stmt_dep; other deps identical to live. Edge cases zero rings, C'=C, empty F, any char OK. Advisories: schemeSpace/IsAlgebraicModuliStack owners not in stmt_deps (established pattern); second reading is a self re-read. No file changed, no compile."
+ }
+}

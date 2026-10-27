@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-compact-support-open-restriction-scalar",
+ "kind": "statement",
+ "title": "Scalar restriction respects the tensor-to-literal open restriction model",
+ "statement": "Let A and B be finite commutative rings, let φ:A→B be a ring homomorphism, and let j:X→Z be an open immersion of schemes with small pro-etale sites [def-weil-pbc-proetale-site]. Write G_A and P_A for the native constant-ring module inverse and direct images, and Res_W for restriction along φ on W [lem-weil-proetale-direct-image-restriction-of-scalars]. Define d:P_B⋙Res_Z ≅ Res_X⋙P_A by the section-normalized finite-coefficient direct-image comparison [lem-weil-proetale-direct-image-restriction-of-scalars], conjugated by compactSupportDirectModel [def-weil-compact-support-native-system-evaluation], and g:Res_Z⋙G_A → G_B⋙Res_X as its inverse adjunction mate. Write K_A for literal restriction to the open in the canonical intrinsic realization coordinates [lem-weil-extension-by-zero-adjunction]. Let β_A:G_A≅K_A be openSquarePullbackModel [lem-trf-open-square-exchange] followed by the transported upperStarIsoOpenImmersionRestriction, and similarly β_B. Let σ:Res_Z⋙K_A≅K_B⋙Res_X be sfOpenRestrictionCoefficientSquare [lem-sf-open-extension-scalar-restriction-coherence]. For every B-module sheaf N on Z, g_N ≫ Res_X(β_B,N) = β_A,Res_Z(N) ≫ σ_N. No surjectivity or flatness of φ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D3, adjoint inverse and direct images of modules; Tag 03CY, restriction to a localized site; Tag 03DI, lemma-extension-by-zero. The coordinate-normalization part of step 2 of lem-weil-compact-support-ordinary-open-transition."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-trf-open-square-exchange",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-sf-open-extension-scalar-restriction-coherence",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "On every scalar-unit section, sfRealizationRestriction is the identity and sfIntrinsicDirectImageComparison sends the source scalar-unit section to the target scalar-unit section. The scalar-unit map is an isomorphism on sections (the underlying presheaf is already a sheaf), so these normalizations prove scalarDirectRealization on all sections. Cancel the realization and direct-image isomorphisms to obtain scalarDirectRealization_inv.",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-sf-open-extension-scalar-restriction-coherence",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define literalUnit as the realization counit inverse, followed by realization of the fixed-scalar literal restriction unit, followed by the inverse normalized direct-image comparison. The formula for sfInverseRealizationRestriction, naturality of the realization counit, and its triangle identity give inverseRealization_counit. Fixed-scalar restriction commutes literally with the open restriction adjunction unit. Use that equality, naturality of sfRealizationRestriction, and scalarDirectRealization_inv to prove literalUnit_scalar.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-sf-open-extension-scalar-restriction-coherence",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the unit of an adjunction transported through two equivalences and the normalized direct-image comparison; naturality of that comparison and the realization triangle identity give realizedAdjunction_unit. The unit equation for the canonical leftAdjointUniq from fixed-scalar upperStar to literal restriction then proves upperModel_direct_unit. Combine it sectionwise with openSquarePullbackModel_existsUnique to obtain native_literal_unit for the published compactSupportOpenRestrictionModel.",
+   "uses": [
+    "def-weil-compact-support-native-system-evaluation",
+    "lem-trf-open-square-exchange",
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the tensor inverse-image/direct-image Hom equivalence and use its injectivity. The inverse-mate unit identity expresses the transpose of compactSupportScalarPullback using compactSupportScalarDirectImage, whose action on sections is the identity. Apply native_literal_unit to both sides and literalUnit_scalar to identify the two transposes. Sectionwise extensionality closes their equality. All maps and arguments apply unchanged to zero rings, identity coefficient maps, and empty opens.",
+   "uses": [
+    "def-weil-compact-support-native-system-evaluation",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-sf-open-extension-scalar-restriction-coherence",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-trf-open-square-exchange",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3, 03CY and 03DI: adjunction naturality, canonical literal restriction, and normalization by the scalar-unit sections. M3 writes the sectionwise and equivalence-transport calculations in Lean, without new unproved intermediate statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "openSquarePullbackModel.*[Ss]calar|[Ss]calar.*openSquarePullbackModel|[Rr]estriction.*leftAdjointUniq",
+   "results": "0 hits. No matching declaration.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the native-to-literal pro-etale scalar square; generic adjunction or scheme-module infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits. CategoryTheory.Adjunction.leftAdjointUniq; CategoryTheory.Adjunction.leftAdjointUniq_refl; CategoryTheory.Adjunction.leftAdjointUniq_inv_app; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the native-to-literal pro-etale scalar square; generic adjunction or scheme-module infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identification of inverse image with restriction to an open commutes with restriction of coefficient scalars and preserves adjunction units",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; ModuleCat.Tilde.toOpen_res; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the native-to-literal pro-etale scalar square; generic adjunction or scheme-module infrastructure only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of coefficient rings commutes with the unit normalized identification of inverse image and restriction of sheaves to an open subscheme",
+   "results": "8 hits. AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc; AlgebraicGeometry.StructureSheaf.comap_id'; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.toOpen_toSpecΓ_app",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the native-to-literal pro-etale scalar square; generic adjunction or scheme-module infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportOrdinaryOpenTransition",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-ordinary-open-transition",
+   "place": "Step 2: transport of the scalar square to the native restriction model.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportOpenScalarRestriction",
+  "file": "lean/Sheaf/Paper/CompactSupportOpenScalarRestriction.lean",
+  "declaration": "WeilConjectures.compactSupportOpenRestrictionModel_scalar",
+  "declarations": [
+   "WeilConjectures.compactSupportScalarDirectImage",
+   "WeilConjectures.compactSupportScalarPullback",
+   "WeilConjectures.compactSupportOpenRestrictionModel",
+   "WeilConjectures.compactSupportOpenRestrictionModel_scalar"
+  ],
+  "statement": "theorem compactSupportOpenRestrictionModel_scalar {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]\n    (φ : A →+* B) (N : proEtaleRingModules Z (proEtaleConstantRing Z B)) :\n    (compactSupportScalarPullback j φ).app N ≫\n      (proEtaleCoefficientRestrictScalars X φ).map\n        ((compactSupportOpenRestrictionModel B j).hom.app N) =\n    (compactSupportOpenRestrictionModel A j).hom.app\n        ((proEtaleCoefficientRestrictScalars Z φ).obj N) ≫\n      (sfOpenRestrictionCoefficientSquare j φ).hom.app N",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T112419-L-1581712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T123505-L-2308000",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

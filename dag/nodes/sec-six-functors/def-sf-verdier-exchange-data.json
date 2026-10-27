@@ -54,14 +54,26 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "lean": {
-  "module": "Sheaf.Paper.VerdierExchange",
+  "module": "Sheaf.SixFunctors.VerdierExchangeData",
   "declaration": "WeilConjectures.VerdierExchange.StageData",
   "declarations": [
    "WeilConjectures.VerdierExchange.composition",
+   "WeilConjectures.VerdierExchange.smallSite",
    "WeilConjectures.VerdierExchange.ringHom",
    "WeilConjectures.VerdierExchange.ringUnit",
    "WeilConjectures.VerdierExchange.ringDual",
@@ -95,12 +107,13 @@
    "WeilConjectures.VerdierExchange.ringUnitScalar",
    "WeilConjectures.VerdierExchange.integralAlphaRealization"
   ],
-  "statement": "structure StageData {X Y S : Scheme.{u}} (s : Stage.{u} l)\n    (F : Operation l Ω X Y s) (A : Operation l Ω Y S s)\n    (B : Operation l Ω X S s) (unit : C l Ω S s)",
+  "statement": "structure StageData {X Y S : Scheme.{u}} (s : Stage.{u} l) (F : Operation l Ω X Y s) (A : Operation l Ω Y S s) (B : Operation l Ω X S s) (unit : C l Ω S s)",
   "branch": "newtargets-dag",
-  "by": "NN",
-  "date": "2026-10-19",
-  "existing": true,
-  "note": "Definition ownership requested by the independent review of returned head 2f2560c1e463. All listed declarations are published constructions or structure/predicate definitions, not witnesses chosen from verdier_exchange. No new Lean module or copy of a definition is introduced."
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Section 1(B), H10 repair of c2041a3b2c0d: the recorded module Sheaf.Paper.VerdierExchange is quarantined and cannot be imported. Move the complete definition-node interface, with original names, to an independent data module. No theorem, all-stage package or Assertion is imported or restated; all evaluation, projection, shift, scalar and compositor normalization fields are retained. The quarantined theorem must import this module when restored instead of redeclaring its data. B2 restoration repair: preserve this reviewed module attachment while restoring its missing source together with Sheaf.Paper.VerdierExchange; explicit inferred universes, local abstract signed choice and direct shift cases preserve all signatures and mathematical fields.",
+  "file": "lean/Sheaf/SixFunctors/VerdierExchangeData.lean"
  },
  "reviewed": {
   "date": "2026-10-19",
@@ -111,11 +124,21 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-13bccf939",
-  "group": "NN",
+  "reviewer": "NT-stage2-cc-de20cd085",
+  "group": "Q38",
   "result": "pass",
-  "note": "Re-delivery of 2f2560c1e463 (RETURNed only for H2). The Lean module is byte-identical (sha 291e865f) and compiles cleanly via nt_compile --json in 13.6 s; the first try timed out at load ~280. The H2 repair is correct: new def node def-sf-verdier-exchange-data has existing:true on Sheaf.Paper.VerdierExchange and owns 33 plain decls (StageData…integralAlphaRealization). All exist and a probe compiles cleanly. The statement is verbatim, the theorem/Package/Assertion are excluded and no .choose is used. It covers every VerdierExchange decl the item uses, there is no other owner, and the item cites the node instead of sk-thm-sf-verdier-exchange. Mechanical finding: lem-weil-structure-direct-images-constructible is genuine. baseUnit uses the theorem finiteFieldDatumPrimeUnit itself (IsUnit (l:k)), which is needed to state the admissibility predicates, so PASS on that point. Hypotheses, conclusion, domain and edge cases are unchanged and were checked again. Advisories: the coefficient notions reach the item only through the def node's own stmt_deps, and _S is unused. The units diffs are base drift."
+  "note": "Re-delivery after the c204 H10 return. The item module and JSON are unchanged in substance: only the docstring, one open line and lean.note differ, and the lean.statement is verbatim, so the 8ef8/c204 mathematics checks stand (five arrows, both HomSquares equations, ActualProjectionShifts, IntegralCompletionShifts, shifts as conclusions, r=0/negative r, universes u+1/u). The H10 repair: (1) TensorHomTranspositionData holds the ten records copied exactly from the quarantined TensorAdjunctionExchange source (diffed; namespace kept; parent package/theorem omitted; imports VerdierExchangeData, not the parent, so the stage-3 cycle is gone). (2) VerdierExchangeData is a §1(B) dependency module for def-sf-verdier-exchange-data (lean-only record change): definition bodies identical to quarantine/VerdierExchange.lean minus Package/Assertion/verdier_exchange and five imports; smallSite made public (EssentiallySmall is a Prop, no diamond); all 34 declarations present; statement verbatim. (3) A source import walk from the item finds no missing project source file (Weil.Definitions is in lean/Comparator) and reaches neither quarantined module. The three new definition nodes are OK; two are byte-identical to c204. The only sorry is the theorem proof; no hollow definitions; docstrings and both report sections present. Advisories: H11 self-review; restored quarantined parents must import the new modules and drop their copies; the old RingRealization heartbeat timeout is not reproduced in the worker's real compile of the new file, and the landing compile will confirm."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9981b",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261025T013859-L-4029736",
+  "kind": "interface",
+  "note": "independent cc review: VerdierExchangeData vs Q38 landed version 90fbac22ea6 (only explicit .{u}, gen* options, let-abstracted signedShift, cases ringInclusionShift); item vs quarantine/Sheaf/Paper/VerdierExchange.lean (Package/Assertion/verdier_exchange verbatim, 34 dup defs replaced by public import); node vs HEAD"
  }
 }

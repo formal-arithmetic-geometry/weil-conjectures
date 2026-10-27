@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-rational-normal-curve",
+ "kind": "definition",
+ "title": "Rational normal curve in its own linear span",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], $n,e\\in\\mathbf N$, and $i:Y\\to\\mathbf P^n_k$ a morphism of schemes [def-pc-scheme]. Say that $i$ is a rational normal curve of degree $e$ in its own linear span if $i$ is a closed immersion [def-weil-closed-immersion], $e>0$, the space of restricted linear forms has dimension $h_i(1)=e+1$ [def-sfb-projective-coordinate-hilbert-polynomial], and there is a $k$-isomorphism $\\alpha:\\mathbf P^1_k\\xrightarrow{\\sim}Y$ with $(i\\circ\\alpha)^*\\mathcal O_{\\mathbf P^n}(1)\\cong\\mathcal O_{\\mathbf P^1}(e)$ [def-pc-projective-space-twist]. The dimension clause says the embedding in its span uses the complete degree-$e$ system: $h^0(\\mathbf P^1,\\mathcal O(e))=e+1$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sfb-projective-coordinate-hilbert-polynomial"
+ ],
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf; literature/gieseker-lectures-on-moduli-of-curves.pdf",
+  "place": "Morrison §3.2, Theorem 8 proof step (3), printed p.14; Gieseker Proposition 1.0.3, pp.30--31. Complete linear-system meaning explicitly specified by lem-sfb-component-projection-weight-bounds and lem-sfb-integral-curve-span-degree-rigidity."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "rational normal curve complete linear system projective line",
+   "results": "{\"t\": \"2026-10-24T04:50:01Z\", \"tool\": \"leansearch\", \"query\": \"rational normal curve complete linear system projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.Equation\", \"LinearAlgebra.Projectivization.termℙ\", \"WeierstrassCurve.Projective\", \"WeierstrassCurve.Projective.polynomial\", \"Collinear\", \"Configuration.ProjectivePlane.card_points_eq_card_lines\", \"Configuration.ProjectivePlane.toHasPoints\", \"Configuration.ofField.instProjectivePlaneProjectivizationForallFinOfNatNatOfDecidableEq\"], \"digest\": \"9051fec5629da385\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact declaration: elliptic projective equations are not rational normal curves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "rational normal curve embedding of projective line by a complete linear system",
+   "results": "{\"t\": \"2026-10-24T04:50:04Z\", \"tool\": \"leanfinder\", \"query\": \"rational normal curve embedding of projective line by a complete linear system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective\", \"WeierstrassCurve.toProjective\", \"WeierstrassCurve.Projective.toAffine\", \"WeierstrassCurve.Projective.PointClass\", \"WeierstrassCurve.Projective.Point.toAffineLift\", \"WeierstrassCurve.Projective.Point.toAffineAddEquiv_apply\", \"WeierstrassCurve.Affine.Point.toProjective\", \"WeierstrassCurve.Projective.Point.toAffineAddEquiv\"], \"digest\": \"a5e8f11df6966906\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact declaration: elliptic projective equations are not rational normal curves."
+  },
+  {
+   "tool": "grep",
+   "query": "RationalNormal|rationalNormal|rational.normal.curve",
+   "results": "{\"t\": \"2026-10-24T04:50:02Z\", \"tool\": \"grep\", \"query\": \"RationalNormal|rationalNormal|rational.normal.curve\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib algebraic-geometry match."
+  },
+  {
+   "tool": "rg",
+   "query": "rg -n 'rational.normal.curve|rationalNormal|RationalNormal' lean/WeilConjectures lean/Sheaf; rg -l -F 'rational normal curve' dag/nodes; python3 tools/blueprint_refs.py search 'rational normal'",
+   "results": "No definition in upstream or Sheaf. DAG: component-projection-weight-bounds, integral-curve-span-degree-rigidity, singular-point-jet-weight-bounds, gieseker-component-interpolation, subcurve-span-weight-bound mention the notion, but none defines it as a definition node or has a recorded declaration for it. Blueprint: 0 matches. The ancestor command reports inherited blueprint.from.node = None.",
+   "date": "2026-10-24",
+   "verdict": "Missing independent notion; add its definition, reusing coordinateDimension and projective twists."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-component-projection-weight-bounds",
+  "date": "2026-10-24",
+  "group": "Q38"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, steps (2)--(3), printed p.14; agent explicit leading-coefficient version of the component-projection estimates. The multiple-component estimate is the coefficient 2e+1/2 in Gieseker, Lectures on Moduli of Curves, Proposition 1.0.3, printed pp.30--36. Local PDFs WANTED. Definition of rational normal curve in its own span in the second projection estimate.",
+   "via": [
+    "lem-sfb-component-projection-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalNormalCurve",
+  "declaration": "AlgebraicGeometry.IsRationalNormalCurve",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalNormalCurve.lean",
+  "statement": "def IsRationalNormalCurve (k : Type u) [Field k] (n : ℕ) {Y : Scheme.{u}} (i : Y ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))) (e : ℕ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3094a4da",
+  "group": "Q38",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3094a4da",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read item, new def-sfb-rational-normal-curve, both modules, report and all 12 stmt_dep records plus the sections/flag/weight/equations/coordinateDimension/degree/nilradical declarations. Every hypothesis and both conclusions match the node: r=n+2>=4, d>3, d/r<8/7, connected closed subscheme, coordinate Hilbert polynomial, nondegenerate X_red via equations of the nilradical subscheme = bot, integral component, degree on the normalization, flag 0 = W with weights <=1, s = coordinateDimension, length>=2 and generic-reducedness/e<=3/not-RNC clauses; a_F fixed by an O(m) remainder (unique). IsPolynomialRestriction copies the dep's chart clause word for word (not an arbitrary map); RNC def says the complete degree-e embedding exactly and is not a duplicate. lean.statement verbatim; sorry only; no extra assumptions or universe restrictions. Bounded-weight theorem stmt_dep is from stage 1, not added. Advisories: plain defs reach the item through that theorem's imports; second reading by the author."
+ }
+}

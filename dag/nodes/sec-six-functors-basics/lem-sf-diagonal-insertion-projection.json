@@ -1,0 +1,188 @@
+{
+ "id": "lem-sf-diagonal-insertion-projection",
+ "kind": "statement",
+ "title": "Projection naturality for insertion of a supported diagonal class",
+ "statement": "Let \\(A\\) be a finite commutative ring and \\(f:X\\to Y\\) proper. Use all the canonical maps and notation of [def-sf-supported-diagonal-calculus]. Let \\(B\\in D_A(X)\\), \\(L\\in D_A(Y)\\), \\(e:B\\simeq f^*L\\), and \\(\\delta:U\\to p_2^*B\\) any morphism. For all \\(M\\in D_A(X)\\) and \\(K\\in D_A(Y)\\),\n\\[F(I_\\delta(M));D(E_B(M));F(\\pi_{p_1,M,p_2^*B}^{-1})=F(\\rho_M^{-1};(\\mathrm{id}_M\\otimes(\\alpha_1(\\mathbf1_X);P_1(\\delta)))),\\]\n\\[I_\\delta(H_BK);P_2(c_H\\otimes\\mathrm{id}_{p_2^*B});\\pi_{p_2,H_BK,p_2^*B}^{-1}=\\rho_{H_BK}^{-1};(\\mathrm{id}_{H_BK}\\otimes(\\alpha_2(\\mathbf1_X);P_2(\\delta))).\\]\nHere \\(\\rho\\) is the canonical right unitor, \\(\\alpha_2\\) is idIsoDiagonalSnd, and semicolons denote composition in application order. No trace, lisse-line condition, or integral normalization is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Projection naturality for insertion of a supported diagonal class; both coordinate triangle computations"
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Expand insertion and use naturality of the canonical tensor symmetry to factor its component into α2(M), pushforward of the diagonal tensor-unit identification with factors swapped, and pushforward of identity tensor δ. Prove inverse ordered-projection naturality directly from naturality of projectionMap and of the two tensor swaps. These are private, fully proved categorical calculations.",
+   "uses": [
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the first coordinate, use diagonalPushComparison to move α2 across directComparison. Naturality of directComparison moves the remaining diagonal-kernel map to the first coordinate. Apply properSectionProjectionUnit to Δ,p1, identifying its canonical section comparison with diagonalFirst and its tensor-unit factor with diagonalIso followed by swap. Cancel forward/inverse projection and apply inverse-projection naturality in δ. Functoriality gives exactly the first claimed equation.",
+   "uses": [
+    "lem-sf-diagonal-push-comparison",
+    "lem-sf-proper-section-projection-unit",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the second coordinate first prove that diagonalSectionIso(M) followed by Δ* of the common-base coordinate comparison is the inverse section comparison for p2. For M=f*N use the two associativity identities leftDerivedUpperStarComp_assoc'_app for Δ,p1,f and Δ,p2,f and cancel their common prefix; extend along any e:M≅f*N by naturality. Apply this with N=L tensor K and e=coefficientPull. Naturality of projectionUnitIso and tensor symmetry transports the diagonal tensor-unit identification to the second coordinate. Apply properSectionProjectionUnit to Δ,p2. Finally tensor naturality in δ commutes it with coordinateTwisted, and inverse ordered-projection naturality yields the second equation. All these coordinate and arbitrary-class calculations are complete Lean proofs in the item module.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-proper-section-projection-unit",
+    "lem-kun-tensor-sym",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-tensor-sym",
+  "lem-sf-diagonal-push-comparison",
+  "lem-sf-proper-section-projection-unit",
+  "lem-kun-tensor-unit",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "M1: complete arbitrary-class naturality and pullback-section compatibility; reduced to two independent, strictly smaller section/compositor coherence statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized diagonal kernel coordinate trace integrals imply adjunction triangle identities",
+   "results": "ProbabilityTheory.Kernel.IsReversible, ProbabilityTheory.Kernel.partialTraj_self, ProbabilityTheory.Kernel.copy, ProbabilityTheory.Kernel.lintegral_id_prod, ProbabilityTheory.Kernel.id_comp, ProbabilityTheory.Kernel.IsProper.lintegral_mul, ProbabilityTheory.parallelProd_posterior_comp_copy_comp, ProbabilityTheory.Kernel.comp_id",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Ii]ntegr|sectionComposite",
+   "results": "",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "projection formula naturality with a diagonal section and tensor product",
+   "results": "CategoryTheory.CartesianMonoidalCategory.tensorHom_fst, CategoryTheory.NatTrans.tensor_naturality, CategoryTheory.MonoidalCategory.externalProductCompDiagIso_hom_app_app, CategoryTheory.MonoidalCategory.externalProductCompDiagIso, CategoryTheory.Abelian.LeftResolution.π_naturality, CategoryTheory.Limits.prod.diag_map, CategoryTheory.Limits.pullbackDiagonalMapIso.hom_snd, CategoryTheory.Abelian.LeftResolution.π_naturality_assoc",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper direct image compact support forget supports comparison commutes projection formula base change",
+   "results": "TopCat.Sheaf.pushforwardForgetIso, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToTop_preservesPullback_of_left, HasCompactSupport.comp_isClosedEmbedding, IsProperMap, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forgetToPresheafedSpace_preservesPullback_of_right, Function.support_comp_eq_preimage, HasCompactSupport.comp_homeomorph",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of tensor projection formula with a section whose composite is identity",
+   "results": "Bimod.TensorBimod.π_tensor_id_actRight, id_tensor_π_preserves_coequalizer_inv_desc, Algebra.FormallyUnramified.comp_sec, SemimoduleCat.MonoidalCategory.rightUnitor_naturality, CategoryTheory.Functor.Monoidal.tensorHom_app_snd, π_tensor_id_preserves_coequalizer_inv_desc, id_tensor_π_preserves_coequalizer_inv_colimMap_desc, CategoryTheory.CartesianMonoidalCategory.tensorHom_snd",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*section|section.*projection",
+   "results": "Mathlib/RingTheory/Extension/Cotangent/Basis.lean, Mathlib/RingTheory/Smooth/NoetherianDescent.lean, Mathlib/Algebra/Module/Presentation/Cokernel.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean, Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper compactly supported direct image tensor projection exchange comparison",
+   "results": "LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, le_comap_range_rTensor",
+   "date": "2026-10-26",
+   "verdict": "No exact geometric contraction or diagonal projection theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfDiagonalKernelIntegrals",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null ancestor; Naturality of the tensor projection map identifies the first arrow with identity_M tensor Rp1(delta); in the second triangle p1*q*K=p2*q*K pulls the common coefficient outside Rp2*.",
+   "via": [
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfDiagonalInsertionProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfDiagonalInsertionProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.insertion_projection",
+  "statement": "theorem insertion_projection {B : DerivedCategoryModule A X}\n    (L : DerivedCategoryModule A Y) (e : B ≅ (CoordinateTrace.pull A f).obj L)\n    (δ : (push A (TraceDiagonalDatum.diagonal f)).obj\n        (derivedTensorUnit (ModuleCat.{u + 1} A) X) ⟶\n      (CoordinateTrace.pull A (pullback.snd f f)).obj B) :\n    (∀ M : DerivedCategoryModule A X,\n      (push A f).map (insertionApp A f δ M) ≫\n          (directComparison A f).hom.app (kernel A f B M) ≫\n            (push A f).map\n              (orderedProjection A (pullback.fst f f) M\n                ((CoordinateTrace.pull A (pullback.snd f f)).obj B)).inv =\n        (push A f).map\n          ((unitRightUnitor (ModuleCat.{u + 1} A) X M).inv ≫\n            ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map\n              ((SfDiagonalKernel.diagonalFirst A f).hom.app\n                  (derivedTensorUnit (ModuleCat.{u + 1} A) X) ≫\n                (push A (pullback.fst f f)).map δ))) ∧\n    (∀ K : DerivedCategoryModule A Y,\n      insertionApp A f δ ((CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj\n        B).obj K) ≫\n          (push A (pullback.snd f f)).map\n            (((derivedTensor (ModuleCat.{u + 1} A) (pullback f f)).map\n              (coordinateTwisted A f L K e).hom).app\n                ((CoordinateTrace.pull A (pullback.snd f f)).obj B)) ≫\n            (orderedProjection A (pullback.snd f f) ((CoordinateTrace.pull A f ⋙ (derivedTensor\n              (ModuleCat.{u + 1} A) X).obj B).obj K)\n              ((CoordinateTrace.pull A (pullback.snd f f)).obj B)).inv =\n        (unitRightUnitor (ModuleCat.{u + 1} A) X\n            ((CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B).obj\n              K)).inv ≫\n          ((derivedTensor (ModuleCat.{u + 1} A) X).obj\n              ((CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B).obj\n                K)).map\n            ((TraceDiagonalDatum.idIsoDiagonalSnd (Λ := A) f).hom.app\n                (derivedTensorUnit (ModuleCat.{u + 1} A) X) ≫\n              (push A (pullback.snd f f)).map δ))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic canonical tensor, projection or proper-exchange calculus already used by the original proof plan; the unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic canonical tensor, projection or proper-exchange calculus already used by the original proof plan; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Generic canonical tensor, projection or proper-exchange calculus already used by the original proof plan; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Generic canonical tensor, projection or proper-exchange calculus already used by the original proof plan; the unit route is unchanged."
+   }
+  ],
+  "blueprint": "The two coordinate triangle computations before normalized diagonal integration."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fda89",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261026T222540-L-666663",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T012902-L-2344025",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

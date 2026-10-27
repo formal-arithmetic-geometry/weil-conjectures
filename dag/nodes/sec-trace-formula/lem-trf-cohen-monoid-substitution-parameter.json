@@ -1,0 +1,297 @@
+{
+ "id": "lem-trf-cohen-monoid-substitution-parameter",
+ "kind": "statement",
+ "title": "A substituted Cohen relation retains a nonzero parameter class",
+ "statement": "Let $V$ be a Cohen ring with uniformizer the prime integer $p$ [def-weil-pbc-cohen-ring] and residue field $k=V/pV$. Let $K$ be a finite free abelian group, $S,T$ sharp fine saturated additive monoids [def-trf-fs-log-blowup] (sharp: $0$ is the only invertible element), and $f:S\\to K\\oplus T$ a homomorphism with coordinates $(\\delta,\\beta)$ and $\\beta(s)\\ne0$ for $s\\ne0$. Fix $n\\ge0$ and put $t=(t_1,\\ldots,t_n)$,\n$$E=V[K][t],\\quad\\mathfrak p\\subset E\\text{ a prime containing }(p,t),\\quad E_*=E_{\\mathfrak p},\\quad D=\\widehat {E_*},$$\n$$H_S=\\widehat {V[S][t]}_{(p,[s]:s\\ne0,t)},\\quad H=D[[T]]=\\widehat {D[T]}_{(\\mathfrak m_D,[v]:v\\ne0)}.$$\nCompletions and localization are [def-weil-pbc-adic-completion, def-weil-pbc-localization-at-prime], and Monoid rings $E[M]$ consist of finite sums $\\sum c_u[u]$ with $[u][v]=[u+v]$. There is a continuous substitution homomorphism $\\psi:H_S\\to H$ extending $V\\to D$, $t_i\\mapsto t_i\\in D$, $[s]\\mapsto[\\delta(s)][\\beta(s)]$. For every $\\theta\\in H_S$ with $\\theta-p\\in([s]:s\\ne0,t)H_S$, set $\\eta=\\psi(\\theta)$ and let $\\bar\\eta\\in D$ be its image under the augmentation $H\\to D$ killing the nonzero $T$-monomials. Then\n$$\\bar\\eta\\equiv p\\pmod{(t)D},\\qquad\\bar\\eta\\in\\mathfrak m_D\\setminus\\mathfrak m_D^2.$$\nMore precisely, with $E'=E_* /(t)$ and maximal ideal $\\mathfrak m_{E'}$, both $E'$ and $E'/pE'$ are regular local [def-weil-regular-scheme]; $p$ is nonzero and lies in $\\mathfrak m_{E'}\\setminus\\mathfrak m_{E'}^2$, $D/(t)D\\cong\\widehat {E'}$, and the image of $\\bar\\eta$ in this quotient is $p$, whose cotangent class remains nonzero. This asserts congruence modulo the old parameters, allowing linear $t_i$ terms, including $\\theta=p-t_1$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6(ii), printed p. 70; agent-supplied verification of the mixed-characteristic parameter condition after substitution and quotienting the old parameters, returned proof Steps 12--13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-regular-scheme",
+  "def-trf-complete-toric-model"
+ ],
+ "proof": [
+  {
+   "text": "Choose a basis of $K$, of rank $r$. Thus $V[K]=V[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$: the basis monomial indexed by $(a_i)$ is $\\prod z_i^{a_i}$, and the inverse sends $z_i^{\\pm1}$ to the corresponding group basis elements. A Cohen ring and a field are regular local rings, by [lem-weil-pbc-power-series-field-cohen-regular-complete] with zero variables. They are therefore regular rings by [lem-weil-pbc-regular-local-localization]. Apply [lem-trf-polynomial-ring-regular-base] over $V$ (including the old variables $t$) and over $k$, and then [lem-weil-pbc-localization-of-regular-ring] to invert the $z_i$ and localize at primes. Consequently $E_*$ is Noetherian regular local, as are every prime localization of $V[K]$ and of $k[K]$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-weil-pbc-localization-of-regular-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NR (lemma-regular-quotient-regular), 05GG (lemma-hathat-finitely-generated), 00MA (lemma-completion-tensor); agent assembly for ILO VI 1.6(ii), printed p. 70."
+   }
+  },
+  {
+   "text": "Put $\\mathfrak q=\\mathfrak p/(t)\\subset V[K]$. The explicit isomorphism $E'=E_*/(t)\\cong V[K]_{\\mathfrak q}$ sends the class of $a(t)/b(t)$ to $a(0)/b(0)$: $b\\notin\\mathfrak p$ implies $b(0)\\notin\\mathfrak q$, and its inverse is induced by constant polynomials. Reducing coefficients modulo $p$ gives in the same way $E'/pE'\\cong k[K]_{\\mathfrak q/(p)}$. Both rings are regular local by Step 1. Moreover $p\\ne0$ in $E'$: if a denominator $b\\notin\\mathfrak q$ killed $p$ in $V[K]$, each coefficient of $b$ would be killed by the nonzero element $p$ of the domain $V$, hence $b=0$, impossible. Since $p\\in\\mathfrak q$, its image belongs to the maximal ideal $\\mathfrak m'$ of $E'$.",
+   "uses": [
+    "def-weil-pbc-cohen-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NR (lemma-regular-quotient-regular), 05GG (lemma-hathat-finitely-generated), 00MA (lemma-completion-tensor); agent assembly for ILO VI 1.6(ii), printed p. 70."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-regular-local-quotient-independent-generators] to $R=E'$ and $I=pE'$. Its hypotheses hold by Steps 1--2. It gives a finite set generating $pE'$ whose cotangent classes in $\\mathfrak m'/\\mathfrak m'^2$ are linearly independent. If $p$ lay in $\\mathfrak m'^2$, every element of this generating set would have zero cotangent class. Independence would force the set to be empty, hence $pE'=0$, contradicting $p\\ne0$. Thus $p\\in\\mathfrak m'\\setminus\\mathfrak m'^2$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-quotient-independent-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NR (lemma-regular-quotient-regular), 05GG (lemma-hathat-finitely-generated), 00MA (lemma-completion-tensor); agent assembly for ILO VI 1.6(ii), printed p. 70."
+   }
+  },
+  {
+   "text": "The surjection $E_*\\to E'$ has kernel $(t)$ and $E_*$ is Noetherian local. Thus [lem-weil-pbc-local-completion-quotient] gives the canonical isomorphism $D/(t)D\\cong\\widehat {E'}$, carrying $p$ to $p$. By [lem-weil-pbc-local-completion-local-ring], $D$ and $\\widehat {E'}$ are local, with maximal ideals obtained by extending those of $E_*$ and $E'$. By [lem-weil-pbc-module-completion-complete], applied with $M=E'$ and $I=\\mathfrak m'$, $E'/\\mathfrak m'^2\\cong\\widehat {E'}/\\mathfrak m'^2\\widehat {E'}$ through the canonical map. Therefore the image of $p$ in $\\widehat {E'}$ is outside its maximal ideal squared, by Step 3. The same completion lemma for $E_*$ says $D$ is complete for its maximal ideal. All ideals here are finitely generated because the original local rings are Noetherian.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NR (lemma-regular-quotient-regular), 05GG (lemma-hathat-finitely-generated), 00MA (lemma-completion-tensor); agent assembly for ILO VI 1.6(ii), printed p. 70."
+   }
+  },
+  {
+   "text": "Let $I=(p,[s]:s\\ne0,t)\\subset V[S][t]$ and $J=(\\mathfrak m_D,[v]:v\\ne0)\\subset D[T]$. The map on finite monoid sums sends $c[s]t^a$ to $c[\\delta(s)][\\beta(s)]t^a$; additivity of $f$ makes it multiplicative. Its image of $I$ is in $J$: $p,t_i\\in\\mathfrak m_D$ and $\\beta(s)\\ne0$ for $s\\ne0$. For each $l\\ge1$ it therefore induces $V[S][t]/I^l\\to D[T]/J^l$. Apply these compatible maps to the coordinates of a compatible sequence to obtain $\\psi:H_S\\to H$. This is a ring homomorphism, extends the prescribed map, and is continuous since its $l$-th coordinate depends only on the $l$-th coordinate of the input. Sharpness of $T$ implies that two nonzero elements cannot sum to zero: otherwise each would be invertible. Hence killing nonzero $T$-monomials defines an augmentation $D[T]\\to D$, carrying $J^l$ into $\\mathfrak m_D^l$. Taking compatible coordinates and using completeness of $D$ from Step 4 gives the continuous augmentation $H\\to D$; it fixes $D$ and kills every nonzero $T$-monomial.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NR (lemma-regular-quotient-regular), 05GG (lemma-hathat-finitely-generated), 00MA (lemma-completion-tensor); agent assembly for ILO VI 1.6(ii), printed p. 70."
+   }
+  },
+  {
+   "text": "Write $\\theta-p=\\sum_{j=1}^h[s_j]b_j+\\sum_{i=1}^nt_i c_i$ with each $s_j\\ne0$; this is the definition of membership in the stated generated ideal. Apply the augmentation after $\\psi$. Each first summand vanishes since $\\beta(s_j)\\ne0$. Thus $\\bar\\eta=p+\\sum_i t_i a_i$ for $a_i\\in D$, proving the congruence and $\\bar\\eta\\in\\mathfrak m_D$. Its image in $D/(t)D\\cong\\widehat {E'}$ is exactly $p$. The quotient sends $\\mathfrak m_D$ into the maximal ideal of $\\widehat {E'}$: on $E_*$ this follows from the quotient $E_*\\to E'$, and Step 4 identifies both completed maximal ideals with the extended ones. It therefore sends $\\mathfrak m_D^2$ into that ideal squared. Step 4 shows $p$ is outside this square, so $\\bar\\eta\\notin\\mathfrak m_D^2$. The argument allows $n=0$, trivial $K,S,T$, and $\\theta=p-t_1$ without change.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NR (lemma-regular-quotient-regular), 05GG (lemma-hathat-finitely-generated), 00MA (lemma-completion-tensor); agent assembly for ILO VI 1.6(ii), printed p. 70."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-regular-local-quotient-independent-generators",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00NR (lemma-regular-quotient-regular), 05GG (lemma-hathat-finitely-generated), 00MA (lemma-completion-tensor); agent assembly for ILO VI 1.6(ii), printed p. 70."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a Laurent polynomial stratum over a Cohen ring, a formal monoid relation congruent to p modulo nonzero monomials and old parameters has nonzero cotangent class after substitution",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent_eq\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S],\\n  Algebra.Generators.cMulXSubOneCotangent S r =\\n    Algebra.Extension.Cotangent.mk ⟨MvPolynomial.C r * MvPolynomial.X () - 1, ⋯⟩\", \"doc\": \"In the cotangent module of the algebra extension obtained by localizing at $ r $, the element represented by the polynomial $ C(r)X - 1 $ (where $ C(r) $ is the constant polynomial embedding of $ r $ \"}\n  {\"name\": \"PreTilt.coeff_nat_find_add_ne_zero\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ {O : Type u₂} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p] {f : PreTilt O p}\\n  {h : ∃ n, (PreTilt.coeff n) f ≠ 0} (k : ℕ), (PreTilt.coeff (Nat.find h + k)) f ≠ 0\", \"doc\": \"Let $ O $ be a commutative ring and $ p $ a prime. For any sequence $ (f_n) $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, if there exists some $ n $ such that the $ n $-th coefficient $ f_n \\\\neq 0 $ in\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] {P : Algebra.PreSubmersivePresentation R S ι σ} (x : ↥P.ker),\\n  P.cotangentComplexAux (Algebra.Extension.Cotangent.mk x) = 0 ↔\\n    ∀ (i : σ), (MvPolyno\", \"doc\": \"For a pre-submersive presentation $ P $ of an algebra over a commutative ring $ R $ with finite $ \\\\sigma $, the cotangent complex auxiliary map sends an element $ x $ in the kernel of $ P $ to zero in\"}\n  {\"name\": \"Algebra.SubmersivePresentation.sectionCotangent_zero_of_notMem_range\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  ∀ i ∉ Set.range P.map, P.sectionCotangent (P.cotangentSpaceBasis i) = 0\", \"doc\": \"In the context of a submersive algebra presentation $ P $, if an index $ i $ does not belong to the image of the generating set under the projection map $ P.\\text{map} $, then the canonical section map\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.PreSubmersivePresentation R S ι σ) (x : ↥P.ker) (i : σ),\\n  P.cotangentComplexAux (Algebra.Extension.Cotangent.mk x) i =\\n    (MvPolynomial.\", \"doc\": \"For a pre-submersive presentation $ P $ of an $ R $-algebra $ S $ with finite index type $ \\\\sigma $, the cotangent complex auxiliary linear map evaluated at a kernel element $ x $ and index $ i : \\\\sig\"}\n  {\"name\": \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A} (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0),\\n  (g.weierstrassDistinguished hg).IsDistinguishedAt (IsLocalRing.maximalIdeal A)\", \"doc\": \"For a local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if a power series $ g $ over $ A $ has non-zero image under the residue map $ A \\\\to A/\\\\mathfrak{m} $, then the Weierstrass distinguished pol\"}\n  {\"name\": \"PreTilt.mk_untilt_eq_coeff_zero\", \"module\": \"Mathlib/RingTheory/Perfectoid/Untilt\", \"type\": \"∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) O] (x : PreTilt O p),\\n  (Ideal.Quotient.mk (Ideal.span {↑p})) (PreTilt.untilt x) = (PreTilt.coeff 0) x\", \"doc\": \"For any element $ x $ in the pretilt $ \\\\mathrm{PreTilt}(O, p) $, the image of $ \\\\mathrm{untilt}(x) $ under the canonical quotient map $ O \\\\to O/(p) $ equals the zeroth coefficient $ f_0 $ of the seque\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} [inst_1 : IsLocalRing A],\\n  (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → g.IsWeierstrassDivisor\", \"doc\": \"Let $ A $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $, and let $ g $ be a power series over $ A $. If the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (applied coe\"}\n\nThe hits give Weierstrass division, a cotangent-dimension criterion, or monomial substitution formulas; none gives the Cohen-stratum nonzero cotangent parameter after this substitution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a relation reduces to p modulo old variables in a completed Laurent polynomial ring over an unramified complete discrete valuation ring, it belongs to the maximal ideal but not its square",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] [inst_1 : IsLocalRing A] [inst_2 : IsAdicComplete (IsLocalRing.maximalIdeal A) A]\\n  {g : PowerSeries A} (hg : (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0),\\n  (g.weierstrassDistinguished hg).IsDistinguishedAt (IsLocalRing.maximalIdeal A)\", \"doc\": \"For a local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if a power series $ g $ over $ A $ has non-zero image under the residue map $ A \\\\to A/\\\\mathfrak{m} $, then the Weierstrass distinguished pol\"}\n  {\"name\": \"PowerSeries.weierstrassMod\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      PowerSeries A → PowerSeries A → [IsPrecomplete (IsLocalRing.maximalIdeal A) A] → Polynomial A\", \"doc\": \"Given a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $ and a power series $ g $ over $ A $, this function computes the Weierstrass modulus of $ g $ with respect to another power seri\"}\n  {\"name\": \"PowerSeries.weierstrassDistinguished\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    [inst_1 : IsLocalRing A] →\\n      [IsAdicComplete (IsLocalRing.maximalIdeal A) A] →\\n        (g : PowerSeries A) → (PowerSeries.map (IsLocalRing.residue A)) g ≠ 0 → Polynomial A\", \"doc\": \"Given a local ring $ A $ and a power series $ g $ over $ A $ whose image under the residue map $ A \\\\to A/\\\\mathfrak{m} $ (where $ \\\\mathfrak{m} $ is the maximal ideal) is non-zero, this function returns\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  [inst_1 : IsAdicComplete I A] {f : PowerSeries A ⧸ Ideal.span {g}},\\n  (Ideal.Quotient.mk (Ideal.span {g})) ↑(H.mod' f) = f\", \"doc\": \"For a Weierstrass divisor $ g $ at an ideal $ I $ in a commutative ring $ A $, the quotient map from the power series ring $ A⟦X⟧ $ modulo the ideal generated by $ g $ to the polynomial ring $ A[X] $,\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A},\\n  g.IsDistinguishedAt I → ∀ [IsHausdorff I A], (↑g).IsWeierstrassDivisorAt I\", \"doc\": \"For a commutative ring $ A $, an ideal $ I $, and a polynomial $ g $ over $ A $, if $ g $ is distinguished at $ I $ (i.e., its leading coefficient modulo $ I $ is a unit in $ A/I $) and $ A $ is Hausd\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} → [inst : CommRing A] → PowerSeries A → Ideal A → Prop\", \"doc\": \"A power series $ g $ satisfies the Weierstrass divisor condition at an ideal $ I $ if the coefficient of $ X^{\\text{ord}(g)} $ in the image of $ g $ under the quotient map $ R \\to R/I $ is a unit in the\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  [inst_1 : IsAdicComplete I A] {f : PowerSeries A}, H.mod' ((Ideal.Quotient.mk (Ideal.span {g})) f) = H.mod f\", \"doc\": \"For a Weierstrass divisor $ g $ at an ideal $ I $, the composition of the linear map $ \\\\text{mod}' $ with the canonical quotient map $ R[[X]] \\\\to R[[X]]/(g) $ satisfies $ \\\\text{mod}'(\\\\text{quotient}(f\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivisorAt.mod_coe_eq_self\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : PowerSeries A} {I : Ideal A} (H : g.IsWeierstrassDivisorAt I)\\n  [inst_1 : IsAdicComplete I A] {r : Polynomial A},\\n  r.degree < ↑((PowerSeries.map (Ideal.Quotient.mk I)) g).order.toNat → H.mod ↑r = r\", \"doc\": \"In an adic complete commutative ring $ A $ with respect to an ideal $ I $, if a power series $ r $ has degree strictly less than the order of the image of $ g $ in the quotient ring $ A/I $ (where $ g\"}\n\nThe hits give Weierstrass division, a cotangent-dimension criterion, or monomial substitution formulas; none gives the Cohen-stratum nonzero cotangent parameter after this substitution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"AdicCompletion\"",
+   "results": "[loogle] OK 0 hit(s)\n\nThe hits give Weierstrass division, a cotangent-dimension criterion, or monomial substitution formulas; none gives the Cohen-stratum nonzero cotangent parameter after this substitution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(Cohen.*[Pp]arameter|[Pp]arameter.*Cohen|cotangent.*complet|complet.*cotangent|mem.*maximalIdeal.*2)",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"161\", \"text\": \"  let f := Ideal.mapCotangent _ _ (Algebra.ofId R (AdicCompletion (maximalIdeal R) R))\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"182\", \"text\": \"      (mem_maximalIdeal_iff_eval_one_eq_zero m'.1).mp m'.2, eq_zero_iff_mem, mul_top] at lmem\"}\n\nThe hits give Weierstrass division, a cotangent-dimension criterion, or monomial substitution formulas; none gives the Cohen-stratum nonzero cotangent parameter after this substitution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A substituted mixed characteristic monoid relation reducing to the Cohen uniformizer after quotienting old parameters has nonzero linear term",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PowerSeries.HasSubst.monomial'\", \"module\": \"Mathlib.RingTheory.PowerSeries.Substitution\", \"type\": \"{n : ℕ} (hn : n ≠ 0) (s : S) : HasSubst (monomial n s)\", \"doc\": \"For any non-zero natural number $n$ and element $s$ in a ring $S$, the monomial power series $sX^n$ satisfies the substitution condition because its constant term is zero, which is nilpotent.\"}\n  {\"name\": \"PowerSeries.HasSubst.monomial\", \"module\": \"Mathlib.RingTheory.PowerSeries.Substitution\", \"type\": \"{n : τ →₀ ℕ} (hn : n ≠ 0) (s : S) : HasSubst (MvPowerSeries.monomial n s)\", \"doc\": \"For any non-zero exponent $ n $ and ring element $ s $, the monomial $ X^n $ with coefficient $ s $ in the multivariate power series ring satisfies the substitution condition. This follows because the\"}\n  {\"name\": \"MonoidAlgebra.single_ne_zero\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Defs\", \"type\": \": single m r ≠ 0 ↔ r ≠ 0\", \"doc\": \"In the monoid algebra $ R[M] $ over a semiring $ R $ with basis a monoid $ M $, the monomial $ \\\\text{single}_m(r) $ (which has coefficient $ r $ at $ m $ and zero elsewhere) is non-zero if and only if\"}\n  {\"name\": \"MixedCharZero.mk\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {p : ℕ} [toCharZero : CharZero R],\\n  (∃ I, I ≠ ⊤ ∧ CharP (R ⧸ I) p) → MixedCharZero R p\", \"doc\": \"If $ R $ is a commutative ring with characteristic zero and there exists a proper ideal $ I $ (i.e., $ I \\neq R $) such that the quotient ring $ R/I $ has characteristic $ p $, then $ R $ satisfies the\"}\n  {\"name\": \"MvPowerSeries.substAlgHom_monomial\", \"module\": \"Mathlib.RingTheory.MvPowerSeries.Substitution\", \"type\": \"(ha : HasSubst a) (e : σ →₀ ℕ) (r : R) :\\n  substAlgHom ha (monomial e r) = (algebraMap R (MvPowerSeries τ S) r) * (e.prod (fun s n ↦ (a s) ^ n))\", \"doc\": \"For a substitution function $ a $ satisfying the substitution condition, the substitution algebra homomorphism applied to the monomial with exponent $ e $ and coefficient $ r $ equals the product of t\"}\n  {\"name\": \"MixedCharZero.recOn\", \"module\": \"Mathlib.Algebra.CharP.MixedCharZero\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {p : ℕ} →\\n      {motive : MixedCharZero R p → Sort u} →\\n        (t : MixedCharZero R p) →\\n          ([toCharZero : CharZero R] → (charP_quotient : ∃ I, I ≠ ⊤ ∧ CharP (R ⧸ I) p) → motive ⋯) → motive t\", \"doc\": \"Given a commutative ring $ R $ with characteristic zero and an ideal $ I \\neq R $ such that $ R/I $ has characteristic $ p $, this recursor allows defining functions or proofs by recursion on the mixed\"}\n  {\"name\": \"IsAdjoinRootMonic.liftPolyₗ\", \"module\": \"Mathlib.RingTheory.IsAdjoinRoot\", \"type\": \"{T : Type*} [AddCommGroup T] [Module R T] (g : R[X] →ₗ[R] T) : S →ₗ[R] T\", \"doc\": \"Given a linear map $ g : R[X] → T $, the function constructs a linear map $ S → T $ by composing $ g $ with the quotient homomorphism that reduces polynomials modulo the monic polynomial defining $ S \"}\n  {\"name\": \"NoZeroSMulDivisors.isReduced\", \"module\": \"Mathlib.RingTheory.Nilpotent.Basic\", \"type\": \"(R : Type*) [MonoidWithZero R] [NoZeroDivisors R] : IsReduced R\", \"doc\": \"In a monoid with zero that has no zero divisors, every element is reduced, meaning that if an element raised to any positive integer power equals zero, then the element itself must be zero.\"}\n\nThe hits give Weierstrass division, a cotangent-dimension criterion, or monomial substitution formulas; none gives the Cohen-stratum nonzero cotangent parameter after this substitution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen|cotangent|weierstrass",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"19\", \"text\": \"the dimension of the cotangent space over the residue field being equal to `ringKrullDim R`,\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"20\", \"text\": \"(see `IsRegularLocalRing.iff_finrank_cotangentSpace`).\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"32\", \"text\": \"* `IsRegularLocalRing.iff_finrank_cotangentSpace` : the equivalence of `IsRegularLocalRing` and\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"33\", \"text\": \"  `Module.finrank (ResidueField R) (CotangentSpace R) = ringKrullDim R`\"}\n  {\"file\": \"Mathlib/RingTheory/RegularLocalRing/Defs.lean\", \"line\": \"75\", \"text\": \"lemma iff_finrank_cotangentSpace [IsLocalRing R] [IsNoetherianRing R] :\"}\n\nThe hits give Weierstrass division, a cotangent-dimension criterion, or monomial substitution formulas; none gives the Cohen-stratum nonzero cotangent parameter after this substitution.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relation congruent to the prime uniformizer modulo old parameters in a completed Laurent polynomial Cohen ring has nonzero cotangent class",
+   "results": "PowerSeries.isDistinguishedAt_weierstrassDistinguished; PowerSeries.weierstrassDistinguished; PreTilt.mk_untilt_eq_coeff_zero; PowerSeries.IsWeierstrassDivisor.of_map_ne_zero; PowerSeries.IsWeierstrassFactorization.map_ne_zero; PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit; PowerSeries.weierstrassUnit; PowerSeries.exists_isWeierstrassFactorization",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(Cohen.*[Pp]arameter|[Pp]arameter.*Cohen|cotangent.*complet|complet.*cotangent|mem.*maximalIdeal.*2)",
+   "results": "Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local ring completion preserves the nonzero cotangent class of a uniformizer after quotienting polynomial variables",
+   "results": "PowerSeries.instIsLocalRing; UniformSpace.Completion.coeRingHom; UniformSpace.Completion.continuous_coeRingHom; UniformSpace.Completion.commRing.congr_simp; UniformSpace.Completion.ring.congr_simp; UniformSpace.Completion.commRing; IsLocalRing.CotangentSpace; Polynomial.IsDistinguishedAt.algEquivQuotient",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"AdicCompletion\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Cohen ring V and a prime above p in a Laurent polynomial ring V[K], p is outside the square of the localized maximal ideal and stays so on completion",
+   "results": "IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers; IsDedekindDomain.HeightOneSpectrum.notMem_adicCompletionIntegers; BDeRham; IsDedekindDomain.HeightOneSpectrum.coe_algebraMap_mem; IsDedekindDomain.HeightOneSpectrum.adicCompletion.mul_nonZeroDivisor_mem_adicCompletionIntegers; LaurentSeries.algebraMap_C_mem_adicCompletionIntegers; BDeRhamPlus; instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-monoid-extension-model",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Independent completed-local algebra input for the toric chart case of VI 1.8: VI 1.6, printed p. 70 (the two formal models), and VIII 3.1.1--3.1.5, printed pp. 98--99 (face localization). The algebraic base-change statement is an agent-supplied local-model input, not a quotation of VI 1.8; its intended independent argument is in report.md. Re-split task: VI 1.6(ii), printed p. 70; agent-supplied verification of the mixed-characteristic parameter condition after substitution and quotienting the old parameters, returned proof Steps 12--13.",
+   "via": [
+    "lem-trf-formal-monoid-extension-model",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cohen-monoid-substitution-parameter",
+  "worker": "stage1",
+  "summary": "Six-step proof using existing regularity, quotient and completion results; no new nodes. Constructed substitution and augmentation on finite adic quotients; proved the parameter survives modulo old variables and the completed maximal ideal squared. Original statement retained.",
+  "blueprint": "Independent local-algebra verification under historical lem-trf-local-term-locality alteration branch, through lem-trf-formal-monoid-extension-model; ILO VI 1.6(ii) congruence. Latest ancestor proof concerns contraction and supplies no replacement commutative algebra statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Generic commutative algebra input for the completed Cohen/Laurent chart; the local-term unit has no version of this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic commutative algebra input for the completed Cohen/Laurent chart; the local-term unit has no version of this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic commutative algebra input for the completed Cohen/Laurent chart; the local-term unit has no version of this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-independent-generators",
+    "why": "Generic commutative algebra input for the completed Cohen/Laurent chart; the local-term unit has no version of this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic commutative algebra input for the completed Cohen/Laurent chart; the local-term unit has no version of this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic commutative algebra input for the completed Cohen/Laurent chart; the local-term unit has no version of this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic commutative algebra input for the completed Cohen/Laurent chart; the local-term unit has no version of this algebraic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-regular-local-quotient-independent-generators",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-2e35e1d62",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-2e35e1d62 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full. The delivery is one commit containing only the item and the report, with no new nodes. The statement is byte-identical to the live one, and live/side-live still have the item unsplit. There is no re-split note for this item. Source: ILO VI 1.6(ii) (f ≡ p mod (P−{0}, t_i)) matches the hypothesis θ−p∈([s],t)H_S. The parent formal-monoid-extension-model, step 5, uses only η̄∈m_D∖m_D². Step 1: the power-series lemma with d=0, clause (4), plus regular-local-localization, polynomial-ring-regular-base (a Mathlib leaf in the same unit) and localization-of-regular-ring make E_* regular local. Step 2 (elementary): E'≅V[K]_𝔮 via a(0)/b(0), with the inverse given by constants; E'/p≅k[K]_{𝔮/p}; p≠0 because V[K] is a domain. Step 3: quotient-independent-generators (Stacks 00NR) with R=E', I=pE' gives p∉m'². Step 4: local-completion-quotient gives D/(t)D≅Ê' with p↦p; local-completion-local-ring gives m_{Ê'}=m'Ê'; module-completion-complete(2) with n=2 transports the cotangent class, and clause (1) makes D complete. Step 5: ψ is built on the adic quotients using β(s)≠0 and p,t∈m_D, and the augmentation is a ring map by sharpness. Step 6: the finite ideal combination gives η̄=p+Σt_i a_i, and m_D²→m_{Ê'}² gives η̄∉m_D². The statement holds on n=0 with trivial K,S,T, on θ=p−t_1, and for K=ℤ with 𝔮=(p) or (p,z−1). Duplicate search: the same argument appears only inside proof steps of the sfb/per tame-monoid models, and no node states this lemma. The tool_uses are generic sk-thm-p1 commutative algebra and I accept them; the worker wrote the tool_uses field itself, which C8 reserves for the maintainer, but the entries are correct. No SGA is cited, the Stacks tags 00NR/05GG/00MA match their labels, and the searches cover four tools. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CohenMonoidSubstitutionParameter",
+  "declaration": "CohenMonoidSubstitution.cohen_monoid_substitution_parameter",
+  "declarations": [
+   "CohenMonoidSubstitution.Local",
+   "CohenMonoidSubstitution.Complete",
+   "CohenMonoidSubstitution.localParameters",
+   "CohenMonoidSubstitution.Stratum",
+   "CohenMonoidSubstitution.completeParameters",
+   "CohenMonoidSubstitution.polynomialMap",
+   "CohenMonoidSubstitution.coefficientMap",
+   "CohenMonoidSubstitution.latticeMonomial",
+   "CohenMonoidSubstitution.oldParameter",
+   "CohenMonoidSubstitution.cohen_monoid_substitution_parameter"
+  ],
+  "file": "lean/Sheaf/RingTheory/CohenMonoidSubstitutionParameter.lean",
+  "statement": "theorem cohen_monoid_substitution_parameter (p : ℕ) (hV : IsCohenRing p V) [Module.Free ℤ K] [Module.Finite ℤ K] (S : Type w) [AddCommMonoid S] (T : Type z) [AddCommMonoid T] (hS : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative S)) (hT : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative T)) (hsharpS : ∀ s : S, IsUnit (Multiplicative.ofAdd s) → s = 0) (hsharpT : ∀ t : T, IsUnit (Multiplicative.ofAdd t) → t = 0) (f : S →+ K × T) (hβ : ∀ s : S, s ≠ 0 → (f s).2 ≠ 0) (P : Ideal (ToricMonoid.PolynomialRing V K n)) [P.IsPrime] (hp : (p : ToricMonoid.PolynomialRing V K n) ∈ P) (ht : ∀ i : Fin n, (MvPolynomial.X i : ToricMonoid.PolynomialRing V K n) ∈ P) (I : Ideal (ToricMonoid.PolynomialRing V S n)) (hI : I = Ideal.span {(p : ToricMonoid.PolynomialRing V S n)} ⊔ ToricMonoid.chartIdeal V S n) : ∃ (_ : IsLocalRing (Complete P)) (_ : IsRegularLocalRing (Stratum P)), IsRegularLocalRing (Stratum P ⧸ Ideal.span {(p : Stratum P)}) ∧ (p : Stratum P) ≠ 0 ∧ (p : Stratum P) ∈ IsLocalRing.maximalIdeal (Stratum P) ∧ (p : Stratum P) ∉ IsLocalRing.maximalIdeal (Stratum P) ^ 2 ∧ ∃ (_ : IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal (Stratum P)) (Stratum P))) (e : (Complete P ⧸ completeParameters P) ≃+* AdicCompletion (IsLocalRing.maximalIdeal (Stratum P)) (Stratum P)), (∀ a : Local P, e (Ideal.Quotient.mk (completeParameters P) (algebraMap (Local P) (Complete P) a)) = algebraMap (Stratum P) (AdicCompletion (IsLocalRing.maximalIdeal (Stratum P)) (Stratum P)) (Ideal.Quotient.mk (localParameters P) a)) ∧ (p : AdicCompletion (IsLocalRing.maximalIdeal (Stratum P)) (Stratum P)) ∈ IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal (Stratum P)) (Stratum P)) ∧ (p : AdicCompletion (IsLocalRing.maximalIdeal (Stratum P)) (Stratum P)) ∉ IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal (Stratum P)) (Stratum P)) ^ 2 ∧ ∀ (J : Ideal (AddMonoidAlgebra (Complete P) T)), J = (IsLocalRing.maximalIdeal (Complete P)).map (algebraMap (Complete P) (AddMonoidAlgebra (Complete P) T)) ⊔ Ideal.span {b | ∃ t : T, t ≠ 0 ∧ b = AddMonoidAlgebra.single t (1 : Complete P)} → ∃ ψ : AdicCompletion I (ToricMonoid.PolynomialRing V S n) →+* AdicCompletion J (AddMonoidAlgebra (Complete P) T), @Continuous _ _ (⨅ l : ℕ, TopologicalSpace.induced (AdicCompletion.evalₐ I l) ⊥) (⨅ l : ℕ, TopologicalSpace.induced (AdicCompletion.evalₐ J l) ⊥) ψ ∧ (∀ (s : S) (c : V), ψ (AdicCompletion.of I (ToricMonoid.PolynomialRing V S n) (MvPolynomial.C (AddMonoidAlgebra.single s c))) = AdicCompletion.of J (AddMonoidAlgebra (Complete P) T) (AddMonoidAlgebra.single (f s).2 (coefficientMap P c * latticeMonomial P (f s).1))) ∧ (∀ i : Fin n, ψ (AdicCompletion.of I (ToricMonoid.PolynomialRing V S n) (MvPolynomial.X i)) = algebraMap (Complete P) (AdicCompletion J (AddMonoidAlgebra (Complete P) T)) (oldParameter P i)) ∧ ∃ ε : AdicCompletion J (AddMonoidAlgebra (Complete P) T) →+* Complete P, @Continuous _ _ (⨅ l : ℕ, TopologicalSpace.induced (AdicCompletion.evalₐ J l) ⊥) (IsLocalRing.maximalIdeal (Complete P)).adicTopology ε ∧ (∀ (t : T) (d : Complete P), ε (AdicCompletion.of J (AddMonoidAlgebra (Complete P) T) (AddMonoidAlgebra.single t d)) = if t = 0 then d else 0) ∧ ∀ θ : AdicCompletion I (ToricMonoid.PolynomialRing V S n), θ - (p : AdicCompletion I (ToricMonoid.PolynomialRing V S n)) ∈ (ToricMonoid.chartIdeal V S n).map (algebraMap (ToricMonoid.PolynomialRing V S n) (AdicCompletion I (ToricMonoid.PolynomialRing V S n))) → ε (ψ θ) - (p : Complete P) ∈ completeParameters P ∧ ε (ψ θ) ∈ IsLocalRing.maximalIdeal (Complete P) ∧ ε (ψ θ) ∉ IsLocalRing.maximalIdeal (Complete P) ^ 2 ∧ Ideal.Quotient.mk (completeParameters P) (ε (ψ θ)) = (p : Complete P ⧸ completeParameters P) ∧ e (Ideal.Quotient.mk (completeParameters P) (ε (ψ θ))) = (p : AdicCompletion (IsLocalRing.maximalIdeal (Stratum P)) (Stratum P))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1df1ef7a9",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsCohenRing p V; K finite free ℤ-module; S,T fs (IsFineSaturatedMonoid) plus sharpness; f : S →+ K×T with hβ; P prime containing p and t; E_*, D, H_S (I = (p) ⊔ chartIdeal = (p,[s]≠0,t)), H (J by equation). ψ, ε and e are existentials pinned uniquely: ψ continuous and normalized on C(single s c) and X i; ε continuous and normalized on single t d; e is a ring iso of complete local rings fixed on E_*, so it is the canonical comparison. Conclusions all present: E′ and E′/p regular local, p≠0, p∈m′∖m′², p∉m_{Ê′}², η̄≡p mod (t)D, η̄∈m_D∖m_D², image of η̄ is p. Edge cases n=0, trivial K,S,T and θ=p−t₁ covered; universes independent. lean.statement matches the file exactly; one sorry; helpers real with docstrings. Added stmt_dep def-trf-complete-toric-model is landed (brief §4 allows it); no other node changes, no new nodes; no duplicate. Advisory: IsFineSaturatedMonoid is owned by def-trf-log-regular-pair, re-exported by def-trf-fs-log-blowup, same use as landed siblings. Nothing compiled (no file changed)."
+ }
+}

@@ -1,0 +1,279 @@
+{
+ "id": "lem-sfb-presented-ring-colimit-geometry",
+ "kind": "statement",
+ "title": "Faithful flatness, ind-etaleness and spectrum limit of a presented ring colimit",
+ "statement": "Let I be a small preorder in the universe of the commutative rings D_i and F. Coherent transitions, compatible inclusions D_i→F and a ring-map universal property define a categorical colimit. If I is filtered and compatible maps R→D_i are faithfully flat and etale, their induced map R→F is faithfully flat and ind-etale. For any test scheme Z, compatible maps Z→Spec D_i factor uniquely through Spec F.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "090N faithfully flat filtered colimits; 01YW affine inverse limits; 04AX categorical colimit universal property."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Build the ring diagram and its cocone directly from the maps and coherence equations. Apply IsColimit.ofExistsUnique to the given compatible-map universal property. Cocone naturality gives the required transition equations; ring homomorphism extensionality transports uniqueness to categorical morphisms.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The structural maps form a natural transformation from the constant R diagram. Apply the adopted source theorem RingHom.FaithfullyFlat.of_isColimit to this cocone and the faithfully flat maps at every stage. The same diagram, constant-base transformation and colimit cocone supply RingHom.IndEtale.iff_exists with its stagewise etale proofs. No witness is chosen to define a ring or a map: all the diagram and cocone data have already been constructed.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-faithfully-flat-algebras",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Oppose the colimit cocone. The spectrum functor preserves the resulting limit because it is a right adjoint. For a test scheme and a compatible family, form its cone to the spectrum diagram; naturality is precisely the compatibility equation with reversed arrows. The limit universal property gives the unique factorization, including all projection equations.",
+   "uses": [
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-directed-colimit-faithfully-flat-algebras",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-spec-small-colimit-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "090N faithfully flat filtered colimits; 01YW affine inverse limits; 04AX categorical colimit universal property. Explicit universal-property assembly of the displayed constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Module.Basis",
+   "results": "MvPolynomial.basisMonomials; MvPolynomial.basisRestrictSupport; MvPolynomial.coe_basisMonomials; LinearMap.toMvPolynomial_id; LinearMap.toMvPolynomial; LinearMap.toMvPolynomial_constantCoeff; LinearMap.polyCharpolyAux; LinearMap.polyCharpoly",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of a multivariate polynomial ring by X i ^ n minus a i has basis bounded monomials",
+   "results": "MvPolynomial.basisMonomials; Polynomial.Sequence.basis; Polynomial.degreeLT.basis_val; Algebra.PreSubmersivePresentation.basis; WeierstrassCurve.Affine.CoordinateRing.basis_apply; MvPolynomial.coe_basisMonomials; MvPolynomial.basisRestrictSupport; AdjoinRoot.powerBasisAux'",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "X.*pow.*sub.*C|quotient.*basis",
+   "results": "Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean; Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean; Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean; Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Projective.lean; Mathlib/NumberTheory/Cyclotomic/Basic.lean; Mathlib/NumberTheory/Cyclotomic/Basic.lean; Mathlib/NumberTheory/Cyclotomic/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "pthRootAlgebra|smulTower|powerBasis'",
+   "results": "Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "etale_of_units|localization_away_map_finite|FaithfullyFlat.of_linearEquiv",
+   "results": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; Mathlib/RingTheory/RingHom/FiniteType.lean; Mathlib/RingTheory/RingHom/Finite.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "tameRootAlgebra|eval₂Hom|IsColimit.ofExistsUnique",
+   "results": "Mathlib/Algebra/Category/Ring/Topology.lean; Mathlib/Algebra/Category/Ring/Topology.lean; Mathlib/Algebra/Category/Ring/Topology.lean; Mathlib/Algebra/Category/Ring/Topology.lean; Mathlib/Algebra/Category/Ring/Topology.lean; Mathlib/Algebra/Category/Ring/FinitePresentation.lean; Mathlib/Algebra/Category/Ring/FinitePresentation.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Univ.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*localization|localization.*colimit|IsLocalization.ringHom_ext",
+   "results": "Mathlib/RingTheory/LocalProperties/Basic.lean; Mathlib/RingTheory/LocalProperties/Basic.lean; Mathlib/RingTheory/LocalProperties/Basic.lean; Mathlib/RingTheory/Localization/Ideal.lean; Mathlib/RingTheory/Localization/Finiteness.lean; Mathlib/RingTheory/Localization/Basic.lean; Mathlib/RingTheory/Localization/Basic.lean; Mathlib/RingTheory/Localization/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "of_isColimit|isLimitOfPreserves|PreservesLimits.*Spec",
+   "results": "Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean; Mathlib/AlgebraicTopology/ModelCategory/IsCofibrant.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Discrete/Characterization.lean; Mathlib/Condensed/Light/Epi.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot.powerBasis'",
+   "results": "AdjoinRoot.powerBasis'; AdjoinRoot.powerBasis'_gen; AdjoinRoot.powerBasis'_dim; WeierstrassCurve.Affine.CoordinateRing.basis_apply",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale.of_restrictScalars",
+   "results": "Algebra.Etale.of_restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.lift",
+   "results": "Ideal.Quotient.lift; Ideal.Quotient.lift_comp_mk; Ideal.Quotient.lift_surjective_of_surjective; Ideal.Quotient.lift_mk; Ideal.injective_lift_iff; RingHom.lift_injective_of_ker_le_ideal; Ideal.Quotient.liftₐ_apply; Ideal.ker_quotient_lift",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.lift",
+   "results": "IsLocalization.Away.lift; IsLocalization.Away.lift_comp; IsLocalization.Away.lift_eq; IsLocalization.Away.liftAlgHom_toRingHom; IsLocalization.Away.coe_liftAlgHom; IsLocalization.Away.liftAlgHom_apply",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.FaithfullyFlat.of_isColimit",
+   "results": "loogle: unknown identifier 'RingHom.FaithfullyFlat.of_isColimit'",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simultaneous quotients by independent monic binomials admit a bounded monomial basis and power refinement ring equivalences",
+   "results": "PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply; RingOfIntegers.ZModXQuotSpanEquivQuotSpanPair; PowerBasis.quotientEquivQuotientMinpolyMap_apply_mk; AdjoinRoot.powerBasisAux'_repr_symm_apply; PowerBasis.quotientEquivQuotientMinpolyMap_apply; PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply_mk; Polynomial.quotientSpanCXSubCXSubCAlgEquiv; PowerBasis.quotientEquivQuotientMinpolyMap",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a polynomial quotient generated by compatible nth roots is the filtered colimit of finite root quotients",
+   "results": "AdjoinRoot; IsAdjoinRoot.repr; AdjoinRoot.isAdjoinRoot; AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot_mk_of; AdjoinRoot.quotEquivQuotMap_apply_mk; AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot_symm_mk_mk; AdjoinRoot.quotMapCMapSpanMkEquivQuotMapCQuotMapSpanMk; AdjoinRoot.quotEquivQuotMap_symm_apply_mk",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing simultaneous root algebras at the product of the parameters gives finite etale faithfully flat maps",
+   "results": "RingHom.Etale.ofLocalizationSpan; RingHom.Etale.ofLocalizationSpanTarget; StandardEtalePair.instEtaleRing; Algebra.Etale.of_isLocalizationAway; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.Etale.of_isLocalization_Away; StandardEtalePresentation; Algebra.FormallyEtale.localization_map",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits of faithfully flat etale ring maps are faithfully flat ind etale and spectrum sends colimits to scheme limits",
+   "results": "AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.flat_and_surjective_SpecMap_iff; Algebra.Etale.exists_subalgebra_fg; RingHom.Etale.stableUnderComposition; Algebra.Etale.comp",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing a diagram of algebras at a common coefficient preserves its colimit universal property",
+   "results": "Algebra.Generators.compLocalizationAwayAlgHom; localCohomology.hasColimitDiagram; instHasColimitsCommAlgCat; CommRingCat.isPushout_of_isLocalization; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; CommRingCat.Colimits.colimitIsColimit; RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; CommAlgCat.binaryCofanIsColimit",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous monic root quotients have bounded monomial bases, finite etale punctured transitions, and a filtered colimit root algebra",
+   "results": "AdjoinRoot.powerBasisAux'; AdjoinRoot.isAdjoinRootMonic; IsAdjoinRootMonic.noConfusionType; AdjoinRoot.isAdjoinRootMonic.congr_simp; IsAdjoinRootMonic.monic; IsAdjoinRootMonic.powerBasis; Polynomial.Monic.finite_adjoinRoot; AdjoinRoot.powerBasis'",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a diagram of algebras at a common coefficient preserves its colimit universal property",
+   "results": "ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor; CommRingCat.Colimits.colimitIsColimit; CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone; CategoryTheory.Limits.isColimitMapCoconeCofanMkEquiv; AlgebraicGeometry.LocallyRingedSpace.coproductCofanIsColimit; ModuleCat.HasColimit.isColimitColimitCocone; CategoryTheory.Limits.isColimitOfPreserves; localCohomology.ofDiagram",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra obtained by adjoining roots of units is etale after localizing at the product of the parameters",
+   "results": "Algebra.Etale.of_isLocalizationAway; Algebra.Etale.of_isLocalization_Away; CyclotomicRing; Algebra.FormallyEtale.localization_base; Algebra.FormallyEtale.of_isLocalization; Algebra.FormallyEtale.localization_map; Algebra.Unramified.of_isLocalization_Away; Localization.awayEquivAdjoin",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible family of root quotient homomorphisms induces a unique homomorphism from the compatible root polynomial quotient",
+   "results": "AdjoinRoot.algHom_ext; AdjoinRoot.algHom_ext'; AdjoinRoot.ringHom_ext; AdjoinRoot.liftHom_eq_algHom; AdjoinRoot.algHomOfDvd_apply_root; AdjoinRoot.map; AdjoinRoot.ringHom_ext_iff; AdjoinRoot.mapAlgHom.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of faithfully flat etale ring maps are faithfully flat ind etale and spectrum sends colimits to scheme limits",
+   "results": "CategoryTheory.Limits.isIndObject_colimit; CommRingCat.FilteredColimits.colimitCoconeIsColimit; ModuleCat.FilteredColimits.colimitCoconeIsColimit; RingCat.FilteredColimits.colimit; CommRingCat.FilteredColimits.colimit; CategoryTheory.Limits.colimitLimitIso; CommRingCat.FilteredColimits.colimitCocone; CategoryTheory.Ind.lim",
+   "date": "2026-10-23",
+   "verdict": "No exact simultaneous-root or compatible-map assembly theorem; the named component APIs are used."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ParameterRootPuncturedCoverTower",
+  "group": "A2",
+  "date": "2026-10-23"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Punctured parameter-root tower proof: Faithful flatness, ind-etaleness and spectrum limit of a presented ring colimit",
+   "via": [
+    "lem-sfb-parameter-root-punctured-cover-tower",
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PresentedRingColimit",
+  "file": "lean/Sheaf/RingTheory/PresentedRingColimit.lean",
+  "declaration": "Algebra.PresentedRingColimit.faithfullyFlat_indEtale",
+  "declarations": [
+   "Algebra.PresentedRingColimit.diagram",
+   "Algebra.PresentedRingColimit.cocone",
+   "Algebra.PresentedRingColimit.isColimit",
+   "Algebra.PresentedRingColimit.faithfullyFlat_indEtale",
+   "Algebra.PresentedRingColimit.scheme_existsUnique"
+  ],
+  "statement": "theorem faithfullyFlat_indEtale [IsFiltered I] {R : Type u} [CommRing R] (base : ∀ i, R →+* D i) (full : R →+* F) (hb : ∀ i j (h : i ≤ j), (tr i j h).comp (base i) = base j) (hf : ∀ i, (inc i).comp (base i) = full) (hff : ∀ i, (base i).FaithfullyFlat) (het : ∀ i, (base i).Etale) : full.FaithfullyFlat ∧ full.IndEtale",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261023T134724-L-2738742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261023T134724-L-2738742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

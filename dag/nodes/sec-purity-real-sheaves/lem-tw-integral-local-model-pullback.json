@@ -1,0 +1,185 @@
+{
+ "id": "lem-tw-integral-local-model-pullback",
+ "kind": "statement",
+ "title": "Inverse image transports integral stratified perfect local models",
+ "statement": "Let $A$ be a commutative ring and $d$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. For every scheme $T$, put $B_T=\\varprojlim_n(A/I^n)_T$, where $I$ is the ideal of $d$. Let $f:X\\to Y$ be any morphism of schemes and let $K\\in D(B_Y)$. Use the actual completed-ring ordinary derived pullback $d.\\mathrm{pull}(f)$ of [def-weil-pbc-proetale-operations]. If $K$ admits a finite constructible locally closed stratification with pro-etale local perfect $A$-complex models, namely $\\operatorname{IsIntegralStratifiedPerfect}(Y,d,K)$ [def-weil-pbc-integral-stratified-perfect-models], then $d.\\mathrm{pull}(f)K$ admits such models on $X$. The scalar complex at each pulled-back chart is the original perfect $A$-complex. No completeness of the output, invertibility of a completion map, or nonemptiness of the strata is assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 and Remark 6.8.15; inverse-image preservation of stratified perfect local models."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite stratification pullback. Keep every index, including empty strata; inverse images of constructible locally closed subsets are constructible locally closed, disjoint, and cover the source.",
+   "uses": [
+    "lemma-constructible-pullback-stratification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport each original covering sieve along the pro-etale base-change functor, which is continuous and preserves terminal objects. Pull it back along the unique isomorphism from the chosen terminal object. Every arrow in this sieve factors through a base-changed original chart.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized local scalar equivalence converts integralLocalDerived into slice restriction of d.pull. The weakly etale chart derived equivalence identifies that slice restriction with d.pull along the underlying chart scheme. Pullback composition and preservation of completed constant realization give localModel_iff.",
+   "uses": [
+    "lem-cbc-extension-zero-perfect-model-transport",
+    "lem-weil-pbc-perfect-chart-tensor-comparison",
+    "lem-weil-pbc-completed-ordinary-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a factorization through an original chart pull its model isomorphism along the induced scheme morphism. The pullback compositor and equality of the two scheme composites identify the source. The constant-realization pullback comparison identifies the target with the same scalar perfect complex. Convert back with localModel_iff and retain the original perfectness witness.",
+   "uses": [
+    "lem-cbc-extension-zero-perfect-model-transport",
+    "lem-weil-pbc-completed-ordinary-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-constructible-pullback-stratification",
+  "def-weil-proetale-inverse-image",
+  "lem-cbc-extension-zero-perfect-model-transport",
+  "lem-weil-pbc-perfect-chart-tensor-comparison",
+  "lem-weil-pbc-completed-ordinary-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 and Remark 6.8.15; inverse-image preservation of stratified perfect local models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image preserves complexes locally isomorphic to the constant realization of a perfect scalar complex on a finite stratification",
+   "results": {
+    "t": "2026-10-25T02:37:14Z",
+    "tool": "leanfinder",
+    "query": "Inverse image preserves complexes locally isomorphic to the constant realization of a perfect scalar complex on a finite stratification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.exists_locallyConstant_finite_aux",
+     "HomologicalComplex.restriction.sc'Iso_inv_τ₁",
+     "Profinite.NobelingProof.CC_exact",
+     "Profinite.exists_locallyConstant_fin_two",
+     "HomologicalComplex.extendSingleIso_inv_f",
+     "ComplexShape.Embedding.isIso_liftExtend_f_iff",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "HomologicalComplex.map_isStrictlySupported"
+    ],
+    "digest": "c9a9b587feab0d5a"
+   },
+   "date": "2026-10-25",
+   "verdict": "Use CoverPreserving.of_isContinuous for the covering sieve. Mathlib supplies sieve transport and functor composition, but no integral completed-coefficient local-model theorem; reuse the project chart equivalences and constant-realization comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "functorPushforward|pullbackComp",
+   "results": {
+    "t": "2026-10-25T02:37:44Z",
+    "tool": "grep",
+    "query": "functorPushforward|pullbackComp",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean",
+     "Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+     "Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+     "Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+     "Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+     "Mathlib/CategoryTheory/Sites/IsSheafFor.lean",
+     "Mathlib/CategoryTheory/Sites/Equivalence.lean",
+     "Mathlib/CategoryTheory/Sites/Equivalence.lean"
+    ],
+    "digest": "98a64017b7e19472"
+   },
+   "date": "2026-10-25",
+   "verdict": "Use CoverPreserving.of_isContinuous for the covering sieve. Mathlib supplies sieve transport and functor composition, but no integral completed-coefficient local-model theorem; reuse the project chart equivalences and constant-realization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.CoverPreserving.of_isContinuous",
+   "results": {
+    "t": "2026-10-25T02:40:48Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.CoverPreserving.of_isContinuous",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.CoverPreserving.of_isContinuous"
+    ],
+    "digest": "4affe403759d9145"
+   },
+   "date": "2026-10-25",
+   "verdict": "Use CoverPreserving.of_isContinuous for the covering sieve. Mathlib supplies sieve transport and functor composition, but no integral completed-coefficient local-model theorem; reuse the project chart equivalences and constant-realization comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryCompletedIntegralPullback",
+  "date": "2026-10-25",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof, first sentence: the dual stalk is the dual representation. Through lem-tw-lisse-rational-realization and lem-tw-ordinary-completed-integral-pullback, ordinary pullback must preserve the stratified perfect models before its completion comparison is inverted.",
+   "via": [
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-ordinary-completed-integral-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryIntegralLocalModels",
+  "file": "lean/Sheaf/Paper/OrdinaryIntegralLocalModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralStratifiedPerfect_pullback",
+  "statement": "theorem integralStratifiedPerfect_pullback {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d)))\n    (hK : IsIntegralStratifiedPerfect Y d K) :\n    IsIntegralStratifiedPerfect X d ((d.pull f).obj K)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0c664",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261025T101620-L-3714355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0c664",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261025T101620-L-3714355",
+  "kind": "interface",
+  "note": "independent cc review: item proof (characterization + new integralStratifiedPerfect_pullback + existing sorried strict-model comparison + actual-tower unit) against lem-tw-ordinary-completed-integral-pullback; construction module vs live item (verbatim move + local irreducible/private helpers); adapted modules and node stmt_deps/lean records vs clone; sandbox --all compile incl. importer ProperIntegralOrdinaryInputs"
+ }
+}

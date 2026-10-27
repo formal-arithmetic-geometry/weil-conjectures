@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-dualizable-integral-completion",
+ "kind": "statement",
+ "title": "Dualizable tensoring preserves the actual integral completion augmentation",
+ "statement": "For a prime ell, any finite extension E of Q_ell, any scheme S, and any dualizable M in the ambient derived category of internal modules over the pulled-back continuous condensed valuation ring [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-derived-tensor-hom], tensoring with M preserves IsDerivedComplete [sk-def-pe-derived-completion]. There is no constructibility, characteristic, boundedness or local presentation hypothesis.",
+ "stmt_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-pe-derived-completion"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph, final four sentences: tensor commutes with finite reductions and the augmented derived inverse limit."
+ },
+ "proof": [
+  {
+   "text": "For complete N, its actual invertible Roos augmentation identifies N with Q(roos(P)) for a K-flat representative P. The theorem roos_isDerivedLimit gives a Milnor triangle and hence a homotopy-limit cone for the canonical integral reduction tower of N.",
+   "uses": [
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A right dual gives the adjunction tensorLeft(dual M) left adjoint to tensorLeft(M), so tensorLeft(M) preserves countable products. Its native derived exact structure preserves the Milnor triangle. Apply IsHomotopyLimit.map, and transport the resulting cone along tensorIntegralReductionTower to the canonical reduction tower of M tensor N.",
+   "uses": [
+    "lem-pc-homotopy-limit-map",
+    "lem-sfb-tensor-integral-reduction-tower",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a K-flat representative R of M tensor N. Its actual Roos output gives a second homotopy-limit cone for this tower. Uniqueness of homotopy limits identifies the two vertices. The actual output Q(roos(R)) is complete by isDerivedComplete_roos. Composing its representative isomorphism with the vertex isomorphism and the tensor of the invertible completion map for N proves completeness of M tensor N, keeping the output representative's actual invertible augmentation. No compatibility of augmentations is inferred from quotient projections.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "sk-def-pe-derived-completion",
+    "lem-pe-internal-roos-output-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-pe-derived-completion",
+  "lem-pc-homotopy-limit-map",
+  "lem-sfb-tensor-integral-reduction-tower",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-pe-internal-roos-output-complete"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J4",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.proof.md",
+  "place": "First paragraph: dualizable tensor preserves products and sequential derived limits, and commutes with finite reductions. Realized by homotopy-limit uniqueness and the already stated completeness of actual Roos outputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a dualizable object preserves derived complete objects and integral bounded constructibility",
+   "results": "8 hits, all LightCondensed internallyProjective tensor criteria and its monoidal closed structure; no result on the recorded augmented integral completion or constructibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedComplete",
+   "results": "0 hits; unknown identifier IsDerivedComplete",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete.*tensor|tensor.*IsDerivedComplete",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralTensorProduct",
+  "date": "2026-10-25",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First paragraph, final four sentences: tensor commutes with finite reductions and the augmented derived inverse limit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.DualizableIntegralCompletion",
+  "file": "lean/Sheaf/SixFunctors/DualizableIntegralCompletion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.dualizableIntegralCompletion",
+  "statement": "theorem dualizableIntegralCompletion\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (S : Scheme.{u}) (M : DerivedCategory (AdicCompletion.Modules l E S))\n    (hM : IsDualizable M) :\n    ∀ N : DerivedCategory (AdicCompletion.Modules l E S),\n      IsDerivedComplete l E S N → IsDerivedComplete l E S (M ⊗ N)",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-30d1a",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T100927-L-3639897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261025T143503-L-1031049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

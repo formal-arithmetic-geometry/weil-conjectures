@@ -1,0 +1,320 @@
+{
+ "id": "lem-sf-continuous-adic-proper-base-change-restriction",
+ "kind": "statement",
+ "title": "Proper base change under locally closed restriction for continuous adic module sheaves",
+ "statement": "Let $k$ be an algebraically closed field of positive characteristic, let $\\ell\\ne\\operatorname{char}(k)$ be a prime, and let $\\Omega=\\overline{\\mathbf Q}_\\ell$ with its extended $\\ell$-adic topology [def-weil-l-adic-numbers; def-weil-algebraic-closure]. For a $k$-scheme $T$, use its small pro-etale site [def-weil-pbc-proetale-site]. Define $\\mathcal R_T$ to be the sheafification of the ring presheaf $V\\mapsto\\{f\\in C(|V|,\\Omega):f\\text{ has locally finite-dimensional }\\mathbf Q_\\ell\\text{-span}\\}$, with pointwise operations and restriction by precomposition. Locally finite-dimensional means that every point has an open neighbourhood on which the span of the function's values has finite dimension. Use sheaves of modules [def-weil-sheaf-of-modules-category] and their ordinary derived categories [def-weil-abstract-derived-category]. For a scheme morphism $v:T\\to T'$, the coefficient map $\\mathcal R_{T'}\\to v_*\\mathcal R_T$ is induced by precomposition with $|V\\times_{T'}T|\\to|V|$; module direct image uses this action. Its total right derived functor $Rv_*$ is computed in these module categories [def-sfb-right-derived-functor], not in a common-finite-stage category.\n\nLet $p:P\\to T$ be proper, where $T$ is of finite type over $k$ [def-weil-proper-morphism; def-weil-finite-type-morphism]. Let $h:T'\\hookrightarrow T$ be a quasi-compact locally closed immersion (a composite of an open immersion and a closed immersion [def-weil-open-immersion; def-weil-closed-immersion]). Set $P'=P\\times_TT'$, with projections $h':P'\\to P$ and $p':P'\\to T'$ [def-pc-fibre-product]. On $T',P'$ use the inverse-image coefficient rings $h^{-1}\\mathcal R_T,h'^{-1}\\mathcal R_P$ and the induced coefficient map for $p'$. The symbol $h^{-1}$ on modules means the exact topos inverse image with its transported action, without extension of scalars [def-weil-proetale-inverse-image]; use its termwise functor on derived categories.\n\nLet $M$ be an $\\mathcal R_P$-module sheaf which Zariski locally has a finite partition by locally closed subschemes on each of which it is pro-etale locally finite free over the restricted $\\mathcal R_P$. Then the canonical exchange is an isomorphism in $D(\\operatorname{Mod}(h^{-1}\\mathcal R_T))$:\n$$\\operatorname{Ex}_{h,p,M}:h^{-1}Rp_*(M[0])\\xrightarrow{\\sim}Rp'_*((h'^{-1}M)[0]).$$\nHere $M[0]$ is the complex concentrated in degree zero. The exchange is the derived restriction map: its ordinary component $\\operatorname{bc}_M:h^{-1}p_*M\\to p'_*h'^{-1}M$ is adjoint to the composite $p'^{-1}h^{-1}p_*M\\cong h'^{-1}p^{-1}p_*M\\to h'^{-1}M$, with the last arrow the inverse image of the counit. If $\\delta_{p,M}:(p_*M)[0]\\to Rp_*(M[0])$ denotes the derived-unit comparison, then\n$$\\operatorname{Ex}_{h,p,M}\\circ h^{-1}(\\delta_{p,M})=\\delta_{p',h'^{-1}M}\\circ\\operatorname{bc}_M[0].$$\nNo Frobenius structure, common open subscheme or compactification is part of this assertion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C9, theorem-proper-base-change, is the derived-complete finite-stage input; this node states the continuous-module realization and rational/algebraic-closure coefficient transport needed by prop-functor-package clause 2, as opposed to the common-stage category of thm-weil-pbc-qbar. The locally closed exchange and its normalization are for the actual ordinary module-derived operations. This realization is not asserted to be the literal statement of 09C9."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sf-finite-span-module-derived-comparison]. It identifies $A_Z=p_Z^*\\underline\\Omega$ with the specified $\\mathcal R_Z$, matches the precomposition coefficient maps, and gives exact module equivalences preserving local finite-free trivializations and ordinary derived functors. Thus the given $M$ corresponds to an $A_P$-module $N$ with the same local stratifications.",
+   "uses": [
+    "lem-sf-finite-span-module-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.1--6.8.3 and Remark 6.8.15; coefficient/module comparison lemma."
+   }
+  },
+  {
+   "text": "For each affine open $U\\subseteq T$, [lem-sf-affine-proper-square-stratified-module] makes all four restricted corners separated finite-type $k$-schemes, both vertical maps proper, and $N_U[0]$ an object of the full ordinary bounded constructible category. These are exactly the geometric and coefficient-category hypotheses needed below; no separatedness of $T$ is required.",
+   "uses": [
+    "lem-sf-affine-proper-square-stratified-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.3, 6.8.6 and 6.8.8; affine-square and finite-refinement lemma."
+   }
+  },
+  {
+   "text": "Clause 3 of [det-thm-sfb-proper-base-change-rational] at $\\Lambda=\\Omega$ makes the proper exchange on $N_U[0]$ invertible. By [lem-sfb-derived-exchange-exact-normalization] it is the ambient unit--square--counit map. On these separated corners [lem-sf-finite-span-module-derived-comparison] carries precisely this map to the sectionwise derived counit mate, which [lem-sf-ringed-restriction-exchange-open-descent] identifies with $\\operatorname{Ex}_{h_U,p_U,M_U[0]}$. Hence that specified local exchange is invertible.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-rational",
+    "lem-sfb-derived-exchange-exact-normalization",
+    "lem-sf-finite-span-module-derived-comparison",
+    "lem-sf-ringed-restriction-exchange-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.md",
+    "place": "Clause 3; adjunction-normalized transport and resolving exchange."
+   }
+  },
+  {
+   "text": "The opens $T'_U$ cover $T'$. The restriction equality and cover detection in [lem-sf-ringed-restriction-exchange-open-descent] now make the global specified exchange invertible. Its degree-zero comparison formula in the same lemma gives exactly the required equation with $\\delta_{p,M}$ and $\\delta_{p',h'^{-1}M}$. The coefficient isomorphisms in step 1 identify these actual inverse-image rings with those in the statement.",
+   "uses": [
+    "lem-sf-ringed-restriction-exchange-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; normalized exchange and open descent lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-span-module-derived-comparison",
+  "lem-sf-affine-proper-square-stratified-module",
+  "det-thm-sfb-proper-base-change-rational",
+  "lem-sfb-derived-exchange-exact-normalization",
+  "lem-sf-ringed-restriction-exchange-open-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.1, 6.8.3, 6.8.6, 6.8.8 and Remark 6.8.15 supply coefficient/category conventions; ordinary-module proper base change is the existing det-thm-sfb-proper-base-change-rational clause 3. Explicit coefficient, open-local and derived-unit normalization arguments by NX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change for ordinary derived pushforward of constructible modules over the pro-etale sheaf of continuous locally finite dimensional Qbar ell valued functions",
+   "results": "SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardNatIso; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforward_obj_val; SheafOfModules.pushforward; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardComp_hom_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states proper base change for the specified continuous adic module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of higher direct images of continuous l-adic constructible module sheaves along a locally closed immersion commutes with a proper scheme morphism",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states proper base change for the specified continuous adic module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proper\", \"baseChange\"",
+   "results": "CategoryTheory.MorphismProperty.IsStableUnderBaseChange; CategoryTheory.MorphismProperty.IsStableUnderCobaseChange; CategoryTheory.MorphismProperty.IsStableUnderBaseChange.isomorphisms; CategoryTheory.MorphismProperty.IsStableUnderBaseChange.monomorphisms; CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.epimorphisms; CategoryTheory.MorphismProperty.IsStableUnderCobaseChange.isomorphisms; CategoryTheory.MorphismProperty.IsStableUnderBaseChangeAgainst; CategoryTheory.MorphismProperty.IsStableUnderCobaseChangeAgainst",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states proper base change for the specified continuous adic module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicSheaf|adicDerivedBaseChange|proper.*baseChange|baseChange.*[Pp]roper",
+   "results": "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Pretopology.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states proper base change for the specified continuous adic module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pro-etale proper base change for constructible Qbar ell adic sheaves and restriction to a closed subscheme",
+   "results": "AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.IsProper.instMorphismRestrict; AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange; AlgebraicGeometry.IsProper.toUniversallyClosed; AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states proper base change for the specified continuous adic module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Bb]ase[Cc]hange|[Pp]roper.*[Bb]ase[Cc]hange|locallyFiniteFunctions",
+   "results": "25 hits: Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean, Mathlib/CategoryTheory/MorphismProperty/Descent.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/MorphismProperty/Limits.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified ordinary module-derived pro-etale proper base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived proper base change theorem for constructible continuous algebraic closure l-adic coefficient sheaves on the pro-etale site",
+   "results": "8 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange, LieAlgebra.derivedSeries_baseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.Etale.formallyEtale, Algebra.Etale.baseChange, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Condensed.lanSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified ordinary module-derived pro-etale proper base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforward\"",
+   "results": "12 hits: PresheafOfModules.pushforward₀Obj, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, PresheafOfModules.pushforwardId, PresheafOfModules.pushforward, PresheafOfModules.pushforward₀Obj_obj_carrier, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified ordinary module-derived pro-etale proper base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change for ordinary derived direct image of constructible sheaves of modules over continuous finite-subextension-valued l-adic coefficient rings",
+   "results": "8 hits: SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforward, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified ordinary module-derived pro-etale proper base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of lisse Qbar l module sheaves commute with restriction to locally closed subschemes under a proper morphism",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the specified ordinary module-derived pro-etale proper base change"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*(cohomology|baseChange)|locallyFiniteFunctions|AdicSheaf",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/ValuativeCriterion.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric base-change stability and the definition of integral ellAdicSheaf do not state this derived module exchange"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-open-immersion-compact-image-extension-by-zero",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-zl-morphism-open-closed-reduction via lem-sf-weil-open-immersion-compact-image-extension-by-zero: prop-functor-package clause 2, compactification comparison over the open and its closed complement; continuous ordinary-module proper exchange realization",
+   "via": [
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-continuous-adic-proper-base-change-restriction",
+  "worker": "stage1",
+  "summary": "Repaired the human re-split request: three statement-only unsplit nodes distribute the coefficient/module-derived comparison, normalized resolution exchange with open descent, and affine-square geometry with global stratification. All ten original arguments are mapped and retained verbatim in report.md. Parent statement and Lean data unchanged; parent proof is a four-step assembly of the new nodes and existing rational proper base change.",
+  "blueprint": "Same prop-functor-package clause 2 compactification-comparison input as the returned proof, using the finite/integral/rational coefficient route. blueprint_refs.py ancestor returns None; new via lists prepend this item to its retained via list.",
+  "tool_uses": [
+   {
+    "node": "det-thm-sfb-proper-base-change-rational",
+    "why": "Ordinary-module rational proper base change supplies the local invertibility input on the standing separated finite-type corners; this is the existing coefficient route."
+   },
+   {
+    "node": "lem-sfb-derived-exchange-exact-normalization",
+    "why": "The formal ambient/restricted exchange normalization identifies the canonical map used by that rational theorem; it is a generic mate tool, not a new route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-qlbar-condensed",
+  "def-weil-pbc-condensed-qbar-coefficient-construction",
+  "lem-weil-pbc-continuous-chart-scheme-naturality",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-ringed-open-comparison",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "sk-def-sfb-bounded-constructible",
+  "det-thm-sfb-proper-base-change-rational",
+  "lem-sfb-derived-exchange-exact-normalization",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-locally-noetherian-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-68ca09bac",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-68ca09bac (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes in full, the cited statements and the base 10-step NX proof, and checked them against the re-split note of 2026-10-22 (side-live repair-notes). The item is not superseded: live still holds the 10-step split. It is not dropped and uses no SGA. Statement, stmt_deps and lean are unchanged; there is no cycle. Mapping of old steps: 1–3 → lem-sf-finite-span-module-derived-comparison (ring iso as θ_Z of the existing ring-realization node, c_Zα_v=ρ_v v^{-1}c_W, module equivalence, K-injectives, derived adjunction); 4, 5, 9, 10 → lem-sf-ringed-restriction-exchange-open-descent (resolution Ex, δ-equation, derived open comparison by 08FI, restriction equality, cover detection, identity and empty cases); 6–7 → lem-sf-affine-proper-square-stratified-module (affine corners separated and finite type, proper by 01W3/01W4, Noetherian and qs by 01OY, gluing-core factorization, finite free ⇒ lfp ⇒ D_cons); 8 → parent step 3 (det-thm-sfb-proper-base-change-rational clause 3 at Q̄_ℓ plus lem-sfb-derived-exchange-exact-normalization). The parent proof is 1696 characters in 4 steps. The three new nodes run about 3.5k, 3.0k and 2.5k characters and do not restate the item. All three statements are true. The doubled-origin T is fine because only the affine-local corners are claimed separated, and sk-def-sfb-dc-setting allows any field of characteristic p≠ℓ. Edge cases: h=id, empty schemes, rank 0, K=0. Sources checked: Bhatt–Scholze Def 6.8.1, Lemma 6.8.2(2), 6.8.3/6.8.6/6.8.8 and Rem 6.8.15; Stacks labels 08FI, 09T5, 01T3/01T4/01T6, 01W3/01W4 and 01OY all exist. One fault (E6/B2) is fixed. The finite-span node said 'the independently specified sectionwise ringed-topos derived adjunction', and the ringed node said 'derived counit mate', and neither named the adjunction, although parent step 3 needs them to agree. Both now name it as the adjunction obtained by deriving the ordinary module adjunction, normalized by Hom transposes into K-injectives. The finite-span ring clause now defines c_Z as θ_Z of lem-sf-locally-finite-coefficient-ring-realization. Only the statement field changed, in fixes/dag/nodes/sec-six-functors/. tool_uses for det-thm-sfb-proper-base-change-rational and lem-sfb-derived-exchange-exact-normalization are accepted. Advisories: the theorem stmt_dep on the ring-realization node needs a def owner at stage 2, and the item's top-level tool_uses list is stale.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousAdicProperBaseChangeRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.proper_base_change_restriction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.coefficientPresheaf",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.coefficientPresheaf_isSheaf",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.coefficientRing",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.coefficientMap_naturality",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.coefficientMap",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.ring",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.inverseRing",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.direct",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.inverseDirect",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.inverseAdjunction_existsUnique",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.inverseAdjunction",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.operations_properties",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.inverse_additive",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.inverse_preservesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.inverse_preservesFiniteColimits",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.direct_additive",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.ringBaseChange",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.restrictedMap",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.DirectSquare",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.DirectSquareNormalized",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.directSquare_existsUnique",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.directSquare",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.ordinaryExchange",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.exchangeAux",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.exchange",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.degreeZeroUnit",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.degreeZeroExchange",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.degreeZeroExchange_normalization",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.properExchange",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.proper_base_change_restriction"
+  ],
+  "file": "lean/Sheaf/Paper/ContinuousAdicProperBaseChangeRestriction.lean",
+  "statement": "theorem proper_base_change_restriction {k : Type u} [Field k] [IsAlgClosed k] (hc : ringChar k ≠ 0) (hl : l ≠ ringChar k) {P T T' : Scheme.{u}} [T.Over (Spec (CommRingCat.of k))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k))] [QuasiCompact (T ↘ Spec (CommRingCat.of k))] (p : P ⟶ T) [IsProper p] (h : T' ⟶ T) [IsImmersion h] [QuasiCompact h] (M : proEtaleRingModules P (coefficientRing l P)) (hM : ∀ x : P, ∃ (U : Scheme.{u}) (j : U ⟶ P), IsOpenImmersion j ∧ x ∈ Set.range j.base ∧ ∃ (n : ℕ) (Z : Fin n → Scheme.{u}) (i : (a : Fin n) → Z a ⟶ U), (∀ a, IsImmersion (i a)) ∧ (∀ y : U, ∃! a, y ∈ Set.range (i a).base) ∧ ∀ a, ∃ q : ((proEtaleModuleInverseImage (i a ≫ j) (coefficientRing l P)).obj M).LocalGeneratorsData.{u + 1}, q.IsLocallyFreeData ∧ q.IsFiniteType) : IsIso (properExchange l p h M) ∧ (proEtaleModuleInverseImage h (coefficientRing l T)).mapDerivedCategory.map (degreeZeroUnit (direct p (coefficientRing l T) (coefficientRing l P) (coefficientMap l p)) M) ≫ properExchange l p h M = ((proEtaleModuleInverseImage h (coefficientRing l T)).mapDerivedCategorySingleFunctor 0).hom.app ((direct p (coefficientRing l T) (coefficientRing l P) (coefficientMap l p)).obj M) ≫ (DerivedCategory.singleFunctor _ 0).map ((ordinaryExchange p h (coefficientRing l T) (coefficientRing l P) (coefficientMap l p)).app M) ≫ degreeZeroUnit (direct (pullback.snd p h) (inverseRing h (coefficientRing l T)) (inverseRing (pullback.fst p h) (coefficientRing l P)) (restrictedMap p h (coefficientRing l T) (coefficientRing l P) (coefficientMap l p))) ((proEtaleModuleInverseImage (pullback.fst p h) (coefficientRing l P)).obj M)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The coefficient presheaf is already a sheaf, so coefficientRing represents its sheafification without changing sections. Restriction uses proEtaleModuleInverseImage into the actual inverse-image ring. The ordinary exchange is the mate of the section-normalized direct-image square; its derived map is constructed by rightDerivedDesc, and the main theorem includes its degree-zero derived-unit normalization. Supporting declarations are the constructions and properties explicitly used in this same node, not an arbitrary comparison datum."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64b9158f8",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: alg-closed k, char>0, l≠char; coefficient ring of locally-finite-span continuous PadicAlgCl-valued functions (presheaf already a sheaf, true by upstream isSheaf_fpqcTopology_adicFunctionsPresheaf); precomposition coefficient map; actual inverse-image rings h^{-1}R_T, h'^{-1}R_P with mate-induced p' map; pure proEtaleModuleInverseImage, no scalar extension; IsProper p, finite-type T (non-separated allowed), IsImmersion+QuasiCompact h; hM = Zariski-local finite immersed partition (∃!) with pro-étale local generators IsLocallyFreeData ∧ IsFiniteType (varying/zero rank). Exchange = mateEquiv of the ∃!-pinned direct-image square under ∃!-pinned unit-normalized adjunctions, derived via rightDerivedDesc; IsIso in D(Mod(h^{-1}R_T)) plus the δ normalization equation. All sorry'd helpers checked true (inverse-image unit equation = private canonicalUnit_sections). Only the lean and stmt_deps fields changed (landed ops node added, allowed); statement verbatim; lines ≤99; docstrings and 10-step proof present. Advisories: helper adjunction/exactness duplicate private upstream facts; degreeZeroExchange_normalization is a generic lemma with no DAG node; RightDerivedFunctorOfQuasiIsoResolutions import is unused but cites the stmt_dep. No fixes, no compile (per instruction)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1c55f",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261025T030503-L-2851179",
+  "kind": "interface",
+  "note": "independent cc review: delivered ContinuousAdicProperBaseChangeRestriction.lean diff vs clone; node lem-sf-continuous-adic-proper-base-change-restriction proof_deps; unit sk-thm-sf-package realized (empty); owner nodes of removed modules",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.coefficientMap_naturality",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.coefficientPresheaf_isSheaf",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.degreeZeroExchange_normalization",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.directSquare_existsUnique",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.inverseAdjunction_existsUnique",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.operations_properties",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.proper_base_change_restriction"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.directSquare_existsUnique",
+   "AlgebraicGeometry.ProEtale.ContinuousAdicRestriction.proper_base_change_restriction"
+  ]
+ }
+}

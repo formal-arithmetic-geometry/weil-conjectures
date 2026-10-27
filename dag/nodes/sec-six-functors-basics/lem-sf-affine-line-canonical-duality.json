@@ -1,0 +1,266 @@
+{
+ "id": "lem-sf-affine-line-canonical-duality",
+ "kind": "statement",
+ "title": "Canonical affine-line duality over arbitrary affine bases",
+ "statement": "Let $A$ be a finite commutative ring, let $N\\geq1$ satisfy $NA=0$, let $S$ be any affine scheme on which $N$ is invertible, and let $p:\\mathbf A^1_S\\to S$ be the affine-line projection [def-sbc-affine-space]. Use the ordinary unbounded etale categories, compact-support adjoint $G_p$, $\\omega_p=G_pA_S$ and $\\theta_p$ of [lem-sf-etale-ambient-adjoint-projection], with the standard open-then-proper factorization $\\mathbf A^1_S\\hookrightarrow\\mathbf P^1_S\\to S$ [def-nagata-projective-space-base-change]. Put $T=A_{\\mathbf A^1_S}(1)=\\mu_{N,\\mathbf A^1_S}\\otimes_{\\mathbf Z/N}A_{\\mathbf A^1_S}$, with its roots-of-unity action and constant coefficients as in [lem-asd-finite-etale-twist-line]. There exists an isomorphism $\\gamma_p:T[2]\\xrightarrow{\\sim}\\omega_p$ such that, for every $K\\in D(S_{\\mathrm{et}},A)$, the actual composite\n$$T[2]\\otimes_A^Lp^*K\\xrightarrow{\\gamma_p\\otimes1}\\omega_p\\otimes_A^Lp^*K\\xrightarrow{\\theta_{p,K}}G_pK$$\nis an isomorphism. There is no Noetherian, constructibility, boundedness or Tor-amplitude hypothesis on $S$ or $K$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraphs 2-3, the affine-line building block of the affine-space adjunction and its counit-defined tensor mate; the arbitrary-affine-base input AffineLineSmoothDuality is stated in upstream SmoothDuality/AffineSpace.lean lines 125-136. Generalizes the Noetherian cor-amb-affine-space-adjunction only in dimension one; no general smooth theorem is asserted."
+ },
+ "stmt_deps": [
+  "def-sbc-affine-space",
+  "lem-sf-etale-ambient-adjoint-projection",
+  "lem-asd-finite-etale-twist-line",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Write $X=\\mathbf A^1_S$, $P=\\mathbf P^1_S$, and $p=qj$ for the standard chart $j:X\\hookrightarrow P$. The chart is an open immersion over $S$ by [lemma-nagata-relative-affine-space-open-immersion], and $q$ is proper by [lemma-nagata-projective-space-base-change-proper]. Supply $q$ with $(\\mathrm{id}_P,q)$, $j$ with $(j,\\mathrm{id}_P)$, and $p$ with $(j,q)$. These are precisely the factorizations used below. In particular $F_q=Rq_*$ and $F_p=Rq_*Dj_!$ by [lem-sf-etale-ambient-adjoint-projection]. Set $B=A_P(1)[2]$. Invertibility of $N$ on $P$ follows by applying its structure-sheaf ring maps to a local inverse on $S$.",
+   "uses": [
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-sf-etale-ambient-adjoint-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md",
+    "place": "Paragraph 1: standard affine-line compactification"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-affine-base-p1-trace-adjunction] to $S,A,N$, obtaining $F_q\\dashv H$ with $HK=B\\otimes_A^Lq^*K$ and trace $t:F_qB\\to A_S$. The ambient adjunction is $F_q\\dashv G_q$ [lem-sf-etale-ambient-adjoint-projection]. By [det-sp-unique-right-adjoint] there is a counit-preserving natural isomorphism $e:H\\xrightarrow{\\sim}G_q$, satisfying $\\epsilon^G_K\\circ F_q(e_K)=\\epsilon^H_K$. Let $r:B\\xrightarrow{\\sim}H(A_S)$ be the inverse right unitor, with $q^*A_S=A_P$ inserted, and put $\\gamma_q=e_{A_S}\\circ r:B\\xrightarrow{\\sim}\\omega_q$. The counit equation at $A_S$ gives $\\epsilon^G_{A_S}\\circ F_q(\\gamma_q)=t$. In the Lean proof choose the projective right adjoint to be H itself, with the trace adjunction; no separate chosen ambient projective adjoint is needed. The proof-only helper tensorMap_of_trace_adjunction performs the counit-preserving comparison for any selected adjoint, using projection naturality, the trace formula and the explicit unit equation.",
+   "uses": [
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-etale-ambient-adjoint-projection",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Construct the projection-normalized projective adjunction, then identify its right adjoint"
+   }
+  },
+  {
+   "text": "For arbitrary $K$, transpose $\\theta_{q,K}\\circ(\\gamma_q\\otimes1)$ under $F_q\\dashv G_q$. By the definition of $\\theta$ and naturality of its projection isomorphism, its transpose is\n$$\\lambda_K\\circ(\\epsilon^G_{A_S}\\otimes1)\\circ\\mathrm{PF}_{\\omega_q,K}^{-1}\\circ F_q(\\gamma_q\\otimes1)\n=\\lambda_K\\circ((\\epsilon^G_{A_S}\\circ F_q\\gamma_q)\\otimes1)\\circ\\mathrm{PF}_{B,K}^{-1}\n=\\lambda_K\\circ(t\\otimes1)\\circ\\mathrm{PF}_{B,K}^{-1}=\\epsilon^H_K.$$\nThe last equality is exactly the counit formula in [lem-sf-affine-base-p1-trace-adjunction]. Step 2 says $e_K$ has this same transpose. Injectivity of the adjunction bijection therefore gives $\\theta_{q,K}\\circ(\\gamma_q\\otimes1)=e_K$. Both $e_K$ and $\\gamma_q\\otimes1$ are isomorphisms, so every $\\theta_{q,K}$ is an isomorphism. This is a direct substitution of the two counit formulas; it uses no unproved compatibility of unrelated isomorphisms. The calculation is proved first in the abstract private helper tensorMap_of_trace, then instantiated by tensorMap_of_trace_adjunction; this avoids unfolding geometric derived-category constructions throughout the formal calculation.",
+   "uses": [
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-etale-ambient-adjoint-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraph 3: transpose the actual tensor map and compare counits"
+   }
+  },
+  {
+   "text": "The open immersion $j$ is etale by [lem-weil-pbc-open-immersion-etale] and separated: its monomorphism property makes its diagonal the identity of $X$, a closed immersion. The factorizations in step 1 allow [lem-sf-etale-unit-tensor-arbitrary-base] to identify $G_j$ with $j^*$ and make its tensor maps invertible. Apply the etale restriction clause of [lem-sf-exceptional-tensor-transitivity] to $a=j$, $b=q$, $h=p$. Its counit-preserving comparison $\\lambda_K:j^*G_qK\\xrightarrow{\\sim}G_pK$ obeys\n$$\\lambda_K\\circ j^*\\theta_{q,K}=\\theta_{p,K}\\circ(\\lambda_{A_S}\\otimes1),$$\nwith its specified tensor/pullback identifications. Since $\\theta_{q,K}$ is invertible by step 3 and both $\\lambda$ components are invertible, this equation makes $\\theta_{p,K}$ invertible for every unbounded $K$. No tensor-invertibility hypothesis is needed for this etale restriction clause. The private helper tensorMap_etale_restriction applies exactly sfExceptionalTensorEtaleRestriction, then cancels its three invertible leading factors. It constructs the etale right adjoint using the ambient existence theorem; uniqueness of right adjoints determines this data up to natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sf-etale-unit-tensor-arbitrary-base",
+    "lem-sf-exceptional-tensor-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+    "place": "Paragraphs 2-3: etale restriction with equality of canonical tensor maps"
+   }
+  },
+  {
+   "text": "The canonical roots-of-unity pullback of [lem-asd-etale-finite-twist-pullback] identifies $j^*B$ with $A_X(1)[2]=T[2]$, including its $\\mathbf Z/N$ action and coefficient extension. Define\n$$\\gamma_p:T[2]\\xrightarrow{\\sim}j^*B\\xrightarrow{j^*\\gamma_q}j^*\\omega_q\\xrightarrow{\\lambda_{A_S}}\\omega_p.$$\nAll three arrows are isomorphisms. By step 4 the second arrow in the composite asked for in the statement is $\\theta_{p,K}$ and is invertible. Its first arrow is tensoring the isomorphism $\\gamma_p$ with $1_{p^*K}$, hence is invertible. Their composite is therefore invertible. This proves the requested assertion for the actual $\\theta_p$, with no restriction on $K$. In Lean finiteEtaleTwistPullbackData.c at exponent one is placed in degree zero, composed with singleFunctorCompLeftDerivedUpperStarIso and the pullback commShiftIso. Stalkwise invertibility on S maps to the projective stalks, hence to its global sections, and then to the affine-chart global sections.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/cor-amb-affine-space-adjunction.proof.md",
+    "place": "Paragraph 1, identifying j^*q^*(1)[2] with p^*(1)[2]; tensor conclusion in thm-asd-smooth-tensor proof paragraph 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-sf-etale-ambient-adjoint-projection",
+  "lem-sf-affine-base-p1-trace-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-sf-etale-unit-tensor-arbitrary-base",
+  "lem-sf-exceptional-tensor-transitivity",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraphs 2-3, specialized to the affine line; retain the projective-line/open-chart route of cor-amb-affine-space-adjunction. The arbitrary-base projective input is isolated as a new statement-only node. R1 formalization: counit comparison and etale restriction implemented as proved private helpers; the projective trace interface uses the same standard-chart coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For affine line projection over an arbitrary affine scheme with invertible finite coefficients compact support pushforward is left adjoint to pullback Tate twist shifted two",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction; Hits concern structure-sheaf pullback adjunctions, affine scheme geometry and the generic single-degree derived-category criterion; none gives affine-line etale duality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality for the relative affine line with torsion etale sheaves on the entire unbounded derived category",
+   "results": "DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, DerivedCategory.isGE_Q_obj_iff, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; Hits concern structure-sheaf pullback adjunctions, affine scheme geometry and the generic single-degree derived-category criterion; none gives affine-line etale duality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"Adjunction\"",
+   "results": "No hits; Hits concern structure-sheaf pullback adjunctions, affine scheme geometry and the generic single-degree derived-category criterion; none gives affine-line etale duality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AffineLineSmoothDuality|affineSpaceAdjunction|TateTwist",
+   "results": "No hits; Hits concern structure-sheaf pullback adjunctions, affine scheme geometry and the generic single-degree derived-category criterion; none gives affine-line etale duality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine line etale duality relative dimension one exceptional pullback tensor canonical map",
+   "results": "LinearMap.tensorProduct, Algebra.Extension.Cotangent.of, Algebra.Extension.h1Cotangentι, AffineSubspace.subtype, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, InnerProductSpace.canonicalContravariantTensor; Hits concern structure-sheaf pullback adjunctions, affine scheme geometry and the generic single-degree derived-category criterion; none gives affine-line etale duality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AffineLineSmoothDuality|affineLine.*[Dd]uality|dualizingComplexTensorMap",
+   "results": "{\"t\": \"2026-10-22T06:25:55Z\", \"tool\": \"grep\", \"query\": \"AffineLineSmoothDuality|affineLine.*[Dd]uality|dualizingComplexTensorMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine line projection compact support has right adjoint pullback Tate twist shift two on unbounded etale derived categories",
+   "results": "{\"t\": \"2026-10-22T06:25:56Z\", \"tool\": \"leansearch\", \"query\": \"Affine line projection compact support has right adjoint pullback Tate twist shift two on unbounded etale derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"CategoryTheory.PullbackShift.adjunction\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso'\"], \"digest\": \"399925738e09c101\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AffineSpace\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-22T06:25:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"AffineSpace\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint of compact support pushforward on the affine line has invertible canonical tensor comparison for every unbounded complex",
+   "results": "{\"t\": \"2026-10-22T06:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"The right adjoint of compact support pushforward on the affine line has invertible canonical tensor comparison for every unbounded complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"6084c602b514a3fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine line etale duality over any affine scheme with finite coefficients killed by an invertible integer, exceptional pullback is Tate twist shift two times pullback on unbounded complexes",
+   "results": "{\"t\": \"2026-10-22T06:26:06Z\", \"tool\": \"leanfinder\", \"query\": \"Affine line etale duality over any affine scheme with finite coefficients killed by an invertible integer, exceptional pullback is Tate twist shift two times pullback on unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"12dab39c85147b38\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-smooth-dualizing-complex-invertible",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-prop-sf-rf-shriek-preservation, smooth case (unit step 3), via the current thm-asd-smooth-tensor proof: Paragraphs 2-3, the affine-line building block of the affine-space adjunction and its counit-defined tensor mate; the arbitrary-affine-base input AffineLineSmoothDuality is stated in upstream SmoothDuality/AffineSpace.lean lines 125-136. Generalizes the Noetherian cor-amb-affine-space-adjunction only in dimension one; no general smooth theorem is asserted.",
+   "via": [
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-affine-line-canonical-duality",
+  "worker": "stage1",
+  "summary": "Proved the affine-line statement from a separate arbitrary-affine-base projective-line adjunction, explicitly compared its projection-normalized counit with the actual theta map, then used the existing normalized etale restriction equation. One genuinely geometric projective-line input is left unsplit; no statement or hypothesis changed. No sorry-free project declaration states the item.",
+  "blueprint": "Unit sk-prop-sf-rf-shriek-preservation step 3: projective-line adjunction then affine localization. Current thm-asd-smooth-tensor proof paragraphs 2-3 are realized by steps 1-5, through cor-amb-affine-space-adjunction proof paragraph 1. blueprint_refs ancestor prints None because the maintainer-created smooth-dualizing ancestor has created.item=null; new node therefore has from.node=null and via=[item, lem-sf-smooth-dualizing-complex-invertible].",
+  "tool_uses": [
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic counit-preserving uniqueness for the two projective right adjoints; not a replacement for the unit projective-line route."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Identifies the concrete roots-of-unity Tate line restricted to the standard affine chart, for arbitrary bases."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Standard projective compactification chart of affine space, valid over any base."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Properness of the standard projective compactification over any base."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Checks the etaleness hypothesis for applying the existing etale restriction equation to the affine chart."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-unique-right-adjoint",
+  "lem-asd-etale-finite-twist-pullback",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NM-1ccda91b6",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-1ccda91b6 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, every cited statement, the unit sk-prop-sf-rf-shriek-preservation (step 3) and the main-20261015 blueprint files thm-asd-smooth-tensor.proof (paragraphs 2-3), cor-amb-affine-space-adjunction.proof (d=1) and thm-amb-p1-adjunction.{md,proof}. No SGA source is cited. This is not a re-split. The item is unsplit in clones/live and clones/side-live, and every cited statement is identical there. The item's statement and stmt_deps are unchanged, and the statement is true. Step 1: the open-immersion lemma depends on def-nagata-projective-space-base-change and both Nagata lemmas are Lean-closed; the factorizations (id_P,q), (j,id_P) and (j,q) give F_p=Rq_*Dj_!. Step 2: det-sp-unique-right-adjoint gives e:H≅G_q with eps^G∘F(e)=eps^H, and gamma_q=e_{A_S}∘r is well typed. The last sentence of the new node gives eps^G_{A_S}∘F(gamma_q)=t. Step 3: I redid the transpose computation. It uses the definition of theta, naturality of PF in M, and the new node's counit formula. The new node pins PF to the same projection map, so theta_q∘(gamma_q⊗1)=e_K and the step is correctly marked elementary. Step 4: j is etale (mathlib node) and separated (it is a monomorphism). The etale clause of lem-sf-exceptional-tensor-transitivity with u=j, b=q gives lambda_K∘j^*theta_q=theta_p∘(lambda_{A_S}⊗1), so theta_p is invertible. Step 5: lem-asd-etale-finite-twist-pullback with v=j, m=N identifies j^*B with T[2], so gamma_p is an isomorphism. New node lem-sf-affine-base-p1-trace-adjunction: it is statement-only and self-contained, with ten searches in the log. It is projective-line Poincaré duality over an arbitrary affine base with a PF-normalized counit, and it is true. Small cases checked: A=0, N=1, a separably closed field (degree -2), and non-Noetherian F_l[x_1,...]. It does not restate the item: it concerns P^1 and proper Rq_*, and it follows the blueprint's own decomposition into thm-amb-p1-adjunction then cor-amb-affine-space-adjunction. I searched snapshot and live for duplicates: thm-amb-p1-adjunction, lem-asd-ordinary-finite-p1-adjunction and det-sp-p1-adjunction need a Noetherian base; det-sp-tower-p1-adjunction is for towers in D^+; lem-pur-coordinate-line-adjunction is over k; lem-sp-tower-p1-arbitrary-base-integrals gives only inputs. None duplicates it. Accepted tool use: lem-asd-etale-finite-twist-pullback; the other declared uses name closed or mathlib nodes and are harmless. Maintainer note: the report's not-duplicates list omits lem-sp-tower-p1-arbitrary-base-integrals. It is not a duplicate, but whoever splits the new node should cite it for the decomposition, trace and diagonal integrals over any scheme. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfAffineLineCanonicalDuality",
+  "declaration": "AlgebraicGeometry.Etale.sfAffineLineCanonicalDuality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfAffineLineCanonicalDuality",
+   "AlgebraicGeometry.Etale.sfAffineLineCompactification"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfAffineLineCanonicalDuality.lean",
+  "statement": "theorem sfAffineLineCanonicalDuality (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (S : Scheme.{u}) [IsAffine S] (hS : ∀ s : S, IsUnit (N : S.presheaf.stalk s)) (G : DerivedCategoryModule A S ⥤ DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S)) (adj : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) (sfAffineLineCompactification S) ⊣ G) : ∃ gamma : (shiftFunctor _ (2 : ℤ)).obj ((DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateLine (AffineSpace (ULift.{u} (Fin 1)) S) N A hA)) ≅ G.obj (constantComplex A S), ∀ K : DerivedCategoryModule A S, IsIso ((((derivedTensor (ModuleCat.{u + 1} A) (AffineSpace (ULift.{u} (Fin 1)) S)).map gamma.hom).app ((L(upperStar (ModuleCat.{u + 1} A) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S))).obj K)) ≫ sfEtaleAmbientTensorMap A (sfAffineLineCompactification S) G adj K)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "G and adj select the ambient right adjoint and its adjunction, whose existence is supplied by sfEtaleAmbientAdjointProjection; they are ambient data rather than additional hypotheses. sfAffineLineCompactification explicitly bundles the recorded standard chart and projective projection. The conclusion uses the concrete roots-of-unity Tate line and the actual sfEtaleAmbientTensorMap for precisely that adjunction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e1e94894",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Each node hypothesis/clause checked against the Lean: finite A : Type (u+1), 0<N, (N:A)=0, IsAffine S, stalkwise N unit, p = AffineSpace (ULift (Fin 1)) S ↘ S, standard chart into ProjectiveSpace (Option (ULift (Fin 1))) S (P^1) packaged by the real-data helper sfAffineLineCompactification. G/adj are selection data (existence by sfEtaleAmbientAdjointProjection). ∃ γ : (single 0 finiteEtaleTateLine)[2] ≅ G(A_S) chosen before ∀ K unbounded; IsIso of the actual composite (derivedTensor.map γ).app(L p^* K) ≫ sfEtaleAmbientTensorMap with the same c, G, adj. No Noetherian/bounded hypotheses; edge cases (empty S, zero ring, N=1, universes) fine. lean.statement verbatim (diff); item node changed only in lean; dep node files equal live; imports = statement deps (public) + recorded proof-dep modules (plain); no line >100; one sorry; docstrings carry source, blueprint tag and five-step plan. Not recompiled (no file changed); relied on the worker's clean compile. Advisory: affineTraceLineCompactification (def-amb-affine-trace-tower, PUnit/ProjectiveLine model) coexists with the helper; it is a different coordinate model and not a stmt_dep, so not H4."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-e70b0",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261024T015854-L-2461580",
+  "kind": "interface",
+  "note": "independent cc review: Item proof (3 proved private helpers + main theorem) against node lem-sf-affine-line-canonical-duality; restated sorried sfAffineBaseP1TraceAdjunction (affine S, standard-chart P1, ofIsProper compactification, unit clause) against its node statement, which already asserts the unit normalization; EtaleFiniteTwistPullbackBase import swap against the import cycle via SmoothDuality; sandbox compile of Base, EtaleFiniteTwistPullback (importer), trace module and item all OK; axioms = propext/Classical.choice/Quot.sound + sorryAx from the projective hole"
+ }
+}

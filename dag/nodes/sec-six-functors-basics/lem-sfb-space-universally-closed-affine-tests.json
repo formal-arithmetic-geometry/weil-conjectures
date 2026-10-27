@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-space-universally-closed-affine-tests",
+ "kind": "statement",
+ "title": "Universal closedness of algebraic-space morphisms is detected by affine scheme tests",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $f:X\\to Y$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and the usual point-space topology [def-a1-space-point-topology]. Suppose that for every affine scheme $T$ over $S$ and every morphism $T\\to Y$, the map $|X\\times_YT|\\to|T|$ is closed, meaning that the image of each closed subset is closed. Then $f$ is universally closed: for every algebraic space $Y\\prime$ over $S$ and every morphism $Y\\prime\\to Y$, the map $|X\\times_Y Y\\prime|\\to|Y\\prime|$ is closed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03IT, lemma-universally-closed-local, implication (3) implies (1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary algebraic space $Z$ over $S$ and morphism $Z\\to Y$. Put $P=X\\times_Y Z$ and let $p:P\\to Z$ be its projection; these exist by [lem-trf-space-fibre-products-etale-covers]. By [lem-a1-space-affine-etale-cover], choose a representable surjective etale atlas $q:W\\to Z$ with $W=\\coprod_{i\\in I}W_i$ and every $W_i$ an affine $S$-scheme. Write $q_i:W_i\\to Z$ for its restriction. The same cited statement identifies the topology on $|Z|$ with the quotient topology for $|q|$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-affine-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03IT (lemma-universally-closed-local), proof of (3) implies (4), applied directly to an arbitrary base change."
+   }
+  },
+  {
+   "text": "Let $C\\subseteq|P|$ be closed and put $D=|p|(C)$. For each $i$, form $P_i=P\\times_ZW_i$, with projections $r_i:P_i\\to P$ and $p_i:P_i\\to W_i$, using [lem-trf-space-fibre-products-etale-covers]. The fibre-product universal property identifies $P_i$ with $X\\times_YW_i$: a compatible triple $(x,z,w)$ is sent to $(x,w)$, with inverse $(x,w)\\mapsto(x,q_i(w),w)$. This isomorphism induces a homeomorphism, since both inverse morphisms induce continuous point maps by [lem-a1-space-point-open-calculus]. Set $C_i=|r_i|^{-1}(C)$. The continuity clause of [lem-a1-space-point-open-calculus] makes $C_i$ closed. Since $W_i$ is an affine $S$-scheme and its map to $Y$ is the composite through $Z$, the hypothesis of the item says that $D_i=|p_i|(C_i)$ is closed in $|W_i|$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03IT (lemma-universally-closed-local), proof of (3) implies (4), applied directly to an arbitrary base change."
+   }
+  },
+  {
+   "text": "For each $i$ we have $|q_i|^{-1}(D)=D_i$. One inclusion follows from $p\\circ r_i=q_i\\circ p_i$. Conversely, if $w\\in|W_i|$ and $|q_i|(w)=|p|(x)$ for some $x\\in C$, apply the surjectivity of $|P\\times_ZW_i|\\to|P|\\times_{|Z|}|W_i|$ in [lem-a1-space-point-open-calculus]. It gives $v\\in|P_i|$ projecting to $(x,w)$. Thus $v\\in C_i$ and $w=|p_i|(v)\\in D_i$. This uses surjectivity onto the set-theoretic fibre product, not an identification of that set with the points of the algebraic-space fibre product.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), applied to the square P_i = P times_Z W_i; makes explicit the descent inference in Tag 03IT."
+   }
+  },
+  {
+   "text": "Consequently $|q|^{-1}(D)$ is closed in $|W|$: on every open disjoint summand $|W_i|$ its complement is the open set $|W_i|\\setminus D_i$, and the complement on $|W|$ is their union. By the quotient-topology clause of [lem-a1-space-affine-etale-cover], $D$ is closed in $|Z|$. This is the topology of [def-a1-space-point-topology]: an open set for that final topology pulls back to an open set along the atlas, while a quotient-open set pulls back openly along every etale scheme-source map by the continuity clause of the cover node. Since $C$ and $Z\\to Y$ were arbitrary, every algebraic-space base change of $f$ is closed, as required.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03IT (lemma-universally-closed-local), proof of (3) implies (4), applied directly to an arbitrary base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-point-open-calculus",
+  "def-a1-space-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03IT (lemma-universally-closed-local), proof of (3) implies (4), applied directly to an arbitrary base change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is universally closed if its base change to every affine scheme is a closed map on points",
+   "results": "{\"t\": \"2026-10-23T19:48:33Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces is universally closed if its base change to every affine scheme is a closed map on points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.UniversallyClosed.out\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\"], \"digest\": \"092b62cb4a5d84a1\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of algebraic spaces is universally closed if its base change to every affine scheme is a closed map on points",
+   "results": "{\"t\": \"2026-10-23T19:48:33Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of algebraic spaces is universally closed if its base change to every affine scheme is a closed map on points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\"], \"digest\": \"e92a700d895e9767\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\", \"Spec\"",
+   "results": "{\"t\": \"2026-10-23T19:48:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyClosed\\\", \\\"Spec\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_respectsIso\", \"AlgebraicGeometry.universallyClosed_eq_universallySpecializing\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"27018a43abeec29c\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universallyClosed_iff|universallyClosed_eq|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T19:48:34Z\", \"tool\": \"grep\", \"query\": \"universallyClosed_iff|universallyClosed_eq|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\"], \"digest\": \"839c68ab0f890f64\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal closedness of a map of etale sheaves represented by algebraic spaces can be tested by closedness over affine scheme targets",
+   "results": "{\"t\": \"2026-10-23T19:48:41Z\", \"tool\": \"leanfinder\", \"query\": \"Universal closedness of a map of etale sheaves represented by algebraic spaces can be tested by closedness over affine scheme targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.UniversallyClosed.out\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed\"], \"digest\": \"b912c5f6ead3472a\"}; Read Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:48-78,230-250 and Morphisms/UniversallyClosed.lean:35-53. These declarations concern schemes, not general algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "universallyClosed_iff|universallyClosed_eq|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T21:05:41Z\", \"tool\": \"grep\", \"query\": \"universallyClosed_iff|universallyClosed_eq|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\"], \"digest\": \"839c68ab0f890f64\"} Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean lines 34-53: X and Y are schemes; the returned universal closedness declarations do not cover algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal closedness of algebraic space morphisms detected by affine scheme base changes",
+   "results": "{\"t\": \"2026-10-23T21:05:41Z\", \"tool\": \"leansearch\", \"query\": \"Universal closedness of algebraic space morphisms detected by affine scheme base changes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.UniversallyClosed.mk\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\"], \"digest\": \"1f11e68ad0a0e842\"} Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean lines 34-53: X and Y are schemes; the returned universal closedness declarations do not cover algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyClosed\", \"IsClosedMap\"",
+   "results": "{\"t\": \"2026-10-23T21:05:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"UniversallyClosed\\\", \\\"IsClosedMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\"], \"digest\": \"78da5546ac9ae3db\"} Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean lines 34-53: X and Y are schemes; the returned universal closedness declarations do not cover algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is universally closed if every affine scheme base change has a closed map on underlying points",
+   "results": "{\"t\": \"2026-10-23T21:05:42Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces is universally closed if every affine scheme base change has a closed map on underlying points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.UniversallyClosed.out\", \"AlgebraicGeometry.UniversallyClosed.universally_isClosedMap\", \"AlgebraicGeometry.Scheme.Hom.isClosedMap\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\"], \"digest\": \"7c6b8ee615968d59\"} Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean lines 34-53: X and Y are schemes; the returned universal closedness declarations do not cover algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal closedness for etale sheaves represented by algebraic spaces can be checked on affine scheme targets",
+   "results": "{\"t\": \"2026-10-23T21:06:20Z\", \"tool\": \"leanfinder\", \"query\": \"Universal closedness for etale sheaves represented by algebraic spaces can be checked on affine scheme targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyClosed_isZariskiLocalAtTarget\", \"AlgebraicGeometry.UniversallyClosed\", \"AlgebraicGeometry.universallyClosed_eq\", \"AlgebraicGeometry.universallyClosed_iff\", \"AlgebraicGeometry.UniversallyClosed.out\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.isIntegral_appTop_of_universallyClosed\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\"], \"digest\": \"f8a560b56de80313\"} Read Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean lines 34-53: X and Y are schemes; the returned universal closedness declarations do not cover algebraic spaces.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qc-valuative-existence-closed",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Convert valuative uniqueness for the represented Picard group into separatedness; its diagonal is quasi-compact by 0DNI. In the diagonal argument of Tag 03KV: the quasi-compact diagonal satisfies valuative existence, so Tag 03KA gives universal closedness. Supporting input: Tag 03KA proof, reduction of universal closedness to closed maps after affine scheme base changes.",
+   "via": [
+    "lem-sfb-space-qc-valuative-existence-closed",
+    "lem-sfb-space-valuative-separatedness",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-universally-closed-affine-tests",
+  "worker": "stage1",
+  "summary": "Expanded Tag 03IT (3) implies (1) by taking an affine-component etale atlas of an arbitrary base change. Reused existing affine-atlas, sheaf-fibre-product, and point-open-calculus nodes. Wrote both inclusions of the inverse-image/image equality using point-fibre-product surjectivity, and the complement argument for descending closedness. No statement change and no new nodes.",
+  "blueprint": "Supports the inherited alteration/moduli/Picard/valuative-criterion branch under det-thm-sf-ctf-stability-direct-images, proof (3), through Tag 03KA. Read the current latest direct-images proof and unit. The ancestor command returns None for this inherited creation chain; preserved its null ancestor and precise from.place/via. Blueprint searches for universally closed affine, points cartesian and affine etale cover found no matching blueprint nodes. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic affine-component etale atlas and quotient topology for any algebraic space, needed to apply the affine tests; no node of this unit supplies these clauses."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic continuity and surjectivity of points of a sheaf fibre product onto the fibre product of point sets; needed to lift a chosen pair in the closed-image calculation."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Existence and universal property of algebraic-space sheaf fibre products; used to form the arbitrary base change and its chart pullbacks."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-acacec6eb",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-acacec6eb (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged, no new nodes, and a four-step proof of Stacks Tag 03IT (3)⇒(1). The proof applies the source's chart argument for (3)⇒(4) directly to an arbitrary base change Z→Y, which is valid because the argument never uses the atlas V. Steps: (1) the fibre-product node forms P=X×_Y Z, and the cover node gives an atlas W=⊔W_i of affine S-schemes with the quotient topology on |Z|. (2) P_i=P×_Z W_i is identified with X×_Y W_i by the universal property. Point maps are continuous, so this is a homeomorphism compatible with the projections to W_i, and the affine hypothesis makes |p_i|(C_i) closed. (3) |q_i|^{-1}(D)=D_i: one inclusion is functoriality of point maps, the other uses only the 03H4 surjectivity clause of point-open-calculus. (4) This step is genuinely elementary: the complement is a union of opens in the disjoint summands, so D is closed in the quotient topology. That topology equals the final topology of def-a1-space-point-topology in both directions, by the atlas and by the continuity clause of the cover node. Sources read: 03IT and definition-closed (spaces-morphisms.tex), 03H4 and 03FX (spaces-properties.tex). Edge cases checked: empty Z, infinitely many components, Z or P_i not a scheme, and the non-injective point fibre product; all fine. Duplicate search over the DAG ('universally closed', 03IT, universally-closed-local) found no node stating this criterion. Batch-5 finding: lem-a1-space-affine-etale-cover and lem-a1-space-point-open-calculus reach sec-trace-formula only through the general definition def-trf-algebraic-space, which was already a base stmt_dep. They are generic point-topology facts, not steps of the trace formula or Poincaré duality, so I accept them. I accept the tool_uses (two lem-a1 nodes and lem-trf-space-fibre-products-etale-covers) as generic tools that no node of this unit supplies. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceUniversallyClosedAffineTests",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.mapIsUniversallyClosed_of_affine_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceUniversallyClosedAffineTests.lean",
+  "statement": "theorem mapIsUniversallyClosed_of_affine_tests {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (h : ∀ (T : Over S) (a : yoneda.obj T ⟶ Y.obj.obj), IsAffine T.left → ∀ C : Set (Point (Limits.pullback f.hom.hom a)), IsClosed C → IsClosed (schemePointMap (𝟙 (yoneda.obj T)) ⁻¹' (mapPoint (Limits.pullback.snd f.hom.hom a) '' C))) : MapIsUniversallyClosed f",
+  "branch": "sheaf-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed MapIsUniversallyClosed predicate from def-sfb-space-morphism-properties, added to stmt_deps. The affine-test closed image is a subset of the ordinary scheme T: pull back the image on point classes along its canonical residue-field point map. No statement correction or new notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e37dc4c2f",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Read item, 5 stmt_deps, module, report, Stacks 03IT (spaces-morphisms.tex l.1373). Hypothesis: ∀ T:Over S, a:h_T→Y, IsAffine T.left, ∀ closed C ⊆ |X×_Y T| (presheaf pullback, def-a1 point topology), schemePointMap(𝟙)⁻¹'(mapPoint snd '' C) closed in T. The residue-field bijection T≅|h_T| makes this exactly the closed-image test on |T|. Conclusion = landed MapIsUniversallyClosed (∀ Y', IsClosedMap of mapPoint of the sheaf-pullback snd). No extra hypotheses, single universe u, edge cases covered. lean.statement verbatim, lines ≤100. Item fields other than lean/stmt_deps identical to live. stmt_deps gains only landed def-sfb-space-morphism-properties (brief l.177). Dep nodes unchanged. Docstrings carry source, blueprint and the 4 proof steps; sorry only. Plain imports are proof_dep modules. No duplicate in lean/Sheaf or the DAG. Advisory: mapPoint's owner def-sfb-proper-curve-moduli is reached only transitively via def-sfb-space-morphism-properties, whose statement names that point map; accepted. No compile (no files changed)."
+ }
+}

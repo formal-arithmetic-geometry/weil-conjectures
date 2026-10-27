@@ -1,0 +1,135 @@
+{
+ "id": "lem-zl-frobenius-power-translate-structure",
+ "kind": "statement",
+ "title": "Single-return compatibility of the explicitly constructed power-translate carrier isomorphism",
+ "statement": "Let $k_0,k_1$ be finite fields, let $\\ell$ be a prime different from their characteristics, and let $X/k_0,C/k_1$ be schemes. Write $g=\\operatorname{Fr}_{\\bar X}$ and $f=\\operatorname{Fr}_{\\bar C}$, and let $\\theta:\\bar X\\simeq\\bar C$ satisfy $\\theta;f=g^r;\\theta$ for $r\\in\\mathbf N$ [def-zl-source-constant-field-restriction]. Put $F_n=(g^{-n})_*$. Let $P,Q$ be $F_r$-algebras with invertible returns $\\phi_P,\\phi_Q$, and let $e:F_jP\\simeq Q$ satisfy $F_r(e);\\phi_Q=c_{j,r}(P);F_j(\\phi_P);e$, where $c$ is the iterated-pullback commutor [lem-zl-frobenius-power-return-commutation]. Let $A,B$ be constructible Weil sheaves on $C$ whose underlying Weil objects equal the transports of $P,Q$ through $\\theta$. Define $\\beta=\\theta^{-1};g^j;\\theta$ and the concrete isomorphism $\\alpha:\\beta^* A\\simeq B$ by $\\beta^*\\theta_*P\\simeq(\\beta^{-1})_*\\theta_*P\\simeq\\theta_*(g^{-j})_*P\\xrightarrow{\\theta_*e}\\theta_*Q$, with the given carrier equalities inserted as equality isomorphisms. Supply the (derivable) equality $f;\\beta=\\beta;f$. Then $\\operatorname{comp}_{f,\\beta}; f^*(\\alpha);\\phi_B=\\operatorname{congr}_{f\\beta=\\beta f};\\operatorname{comp}_{\\beta,f};\\beta^*(\\phi_A);\\alpha$ as maps $(f;\\beta)^*A\\to B$ of underlying pro-etale sheaves. This assertion concerns one return and the explicitly constructed carrier comparison; it has no geometric points, scalar Frobenii, stalks, or iterated returns on $C$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Step 2 of lem-zl-frobenius-power-stalk-transport: the single-return compatibility square before iteration or taking stalks; geometric orbit argument in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-zl-source-constant-field-restriction",
+  "lem-zl-frobenius-power-return-commutation"
+ ],
+ "proof": [
+  {
+   "text": "Identify frobeniusPowerCompositionIso(m,n) with the geometric pushforward compositor from g^(-m)_* followed by g^(-n)_* to g^(-(m+n))_*, followed by frobeniusPowPullbackIterateIso(m+n). The zero case is naturality of the identity comparison and lowerStarFactor_id_right. At a successor, naturality of the recursive powerStep gives the recursion of the ordered comparison; lowerStarFactor_assoc, lifted faithfully to adic modules, gives the identical recursion for the geometric compositor. Cancel the iterated comparison after Nat.add_comm to identify frobeniusPowerCommIso with adicLowerStarSquareIso for the commuting inverse powers.",
+   "uses": [
+    "lem-zl-frobenius-power-composition-geometric",
+    "lem-zl-frobenius-power-return-commutation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set beta=theta^-1 g^j theta. Obtain theta beta^-1=g^(-j) theta by cancellation, theta f^-1=g^(-r) theta from the supplied Frobenius intertwining, and beta^-1 f^-1=f^-1 beta^-1 by inverting hc. Apply adicLowerStarSquareIso_cube to these squares, and move e and the return of P through the square comparisons by naturality. Substitute the assumed equation he with the geometric commutor from the preceding step. This proves equivariance of the explicitly constructed inverse-pushforward carrier comparison for the transported returns.",
+   "uses": [
+    "def-zl-source-constant-field-restriction",
+    "lem-zl-frobenius-power-return-commutation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the supplied equalities hA and hB on the adic pushforward side to identify the concrete carrier map, including its equality isomorphisms, with the transported map from the preceding step. Forget the adic module structure. Apply upperStarIsoLowerStarInv_hom_app_trans to the two orders (f,beta), using an arbitrary common composite isomorphism. The factorisations and their lower-star comparisons cancel by a categorical square calculation. Prefix by the congruence to the common composite and use the functor-level factorisation identities to obtain exactly the displayed upper-pullback square. The carrier map is frobeniusPowerTranslateSheafIso and the two return maps are frobeniusStr. Identity compositors cover j=0 and r=0 without a positivity assumption.",
+   "uses": [
+    "def-zl-source-constant-field-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-frobenius-power-composition-geometric",
+  "lem-zl-frobenius-power-return-commutation",
+  "def-zl-source-constant-field-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "The recorded single-return argument, implemented by V1 using the proved power-composition induction, pushforward square-cube coherence, and common-composite pullback factorisation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The composition isomorphisms of pullback along powers of one automorphism are compatible with commuting two powers",
+   "results": "CategoryTheory.Over.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst, CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left, CategoryTheory.Iso.conjAut_zpow, CategoryTheory.Limits.pullback.mapDesc_comp, CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp, CategoryTheory.MorphismProperty.Over.pullbackComp_inv_app_left, CategoryTheory.ChosenPullbacksAlong.pullbackComp",
+   "date": "2026-10-27",
+   "verdict": "No exact comparison-square theorem; repository StalkUpperStar and pushforward coherence APIs are partial tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pullback and pushforward comparison carries an equivariant sheaf isomorphism under commuting automorphisms to a morphism of endofunctor algebras",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.pushforwardCongr, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-27",
+   "verdict": "No exact comparison-square theorem; repository StalkUpperStar and pushforward coherence APIs are partial tools."
+  },
+  {
+   "tool": "grep",
+   "query": "mapOfNatIso|upperStarIsoLowerStarInv",
+   "results": "No matching Mathlib declarations.",
+   "date": "2026-10-27",
+   "verdict": "No exact comparison-square theorem; repository StalkUpperStar and pushforward coherence APIs are partial tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.FrobeniusPowerStalkTransport",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Step 2 of lem-zl-frobenius-power-stalk-transport: the single-return compatibility square before iteration or taking stalks; geometric orbit argument in sk-i-dl-general-real.",
+   "via": [
+    "lem-zl-frobenius-power-stalk-transport",
+    "lem-zl-geometric-power-orbit-stalk",
+    "lem-zl-semisimple-frobenius-orbit-descent",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.FrobeniusPowerTranslateStructure",
+  "file": "lean/Sheaf/DeligneLaumon/FrobeniusPowerTranslateStructure.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.frobeniusStr_powerTranslate",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.frobeniusPowerTranslateAut",
+   "AlgebraicGeometry.WeilSheaf.frobeniusPowerTranslateSheafIso",
+   "AlgebraicGeometry.WeilSheaf.frobeniusStr_powerTranslate"
+  ],
+  "statement": "theorem frobeniusStr_powerTranslate\n    (θ : (X ↘ Spec (.of k₀)).geometricFiber ≅ (C ↘ Spec (.of k₁)).geometricFiber)\n    (r : ℕ)\n    (hθ : θ.hom ≫ (C ↘ Spec (.of k₁)).geometricGaloisFrobenius.hom =\n      ((X ↘ Spec (.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)\n    (P Q : IsoAlgebra (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X r))\n    (j : ℕ)\n    (e : (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X j).obj P.carrier ≅ Q.carrier)\n    (he : (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X r).map e.hom ≫ Q.str.hom =\n      (ProEtaleWeilSheaf.frobeniusPowerCommIso j r).hom.app P.carrier ≫\n        (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X j).map P.str.hom ≫ e.hom)\n    (A B : WeilSheaf k₁ l C)\n    (hA : A.obj = (IsoAlgebra.mapOfNatIso\n      (ProEtaleWeilSheaf.transportCommIso θ r hθ)).obj P)\n    (hB : B.obj = (IsoAlgebra.mapOfNatIso\n      (ProEtaleWeilSheaf.transportCommIso θ r hθ)).obj Q)\n    (hc : (C ↘ Spec (.of k₁)).geometricGaloisFrobenius.hom ≫\n        (frobeniusPowerTranslateAut θ j).hom =\n      (frobeniusPowerTranslateAut θ j).hom ≫\n        (C ↘ Spec (.of k₁)).geometricGaloisFrobenius.hom) :\n    (upperStarComp (WeilCoefficients.{u} l)\n      (C ↘ Spec (.of k₁)).geometricGaloisFrobenius.hom\n      (frobeniusPowerTranslateAut θ j).hom).hom.app A.obj.carrier.X ≫\n        ((C ↘ Spec (.of k₁)).geometricGaloisFrobenius.hom)^*[WeilCoefficients.{u} l].map\n          (frobeniusPowerTranslateSheafIso θ r hθ P Q j e A B hA hB).hom ≫\n        WeilSheaf.frobeniusStr B =\n      (upperStarCongr (WeilCoefficients.{u} l) hc).hom.app A.obj.carrier.X ≫\n        (upperStarComp (WeilCoefficients.{u} l) (frobeniusPowerTranslateAut θ j).hom\n          (C ↘ Spec (.of k₁)).geometricGaloisFrobenius.hom).hom.app A.obj.carrier.X ≫\n          ((frobeniusPowerTranslateAut θ j).hom)^*[WeilCoefficients.{u} l].map\n            (WeilSheaf.frobeniusStr A) ≫\n          (frobeniusPowerTranslateSheafIso θ r hθ P Q j e A B hA hB).hom",
+  "context": "variable {k₀ k₁ : Type u} [Field k₀] [Finite k₀] [Field k₁] [Finite k₁]\n  {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] [Fact (ringChar k₁ ≠ l)]\n  {X C : Scheme.{u}} [X.Over (Spec (.of k₀))] [C.Over (Spec (.of k₁))]",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T235906-L-1466375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T034758-L-3685980",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

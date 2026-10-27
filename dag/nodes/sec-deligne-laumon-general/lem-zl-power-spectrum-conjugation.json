@@ -1,0 +1,236 @@
+{
+ "id": "lem-zl-power-spectrum-conjugation",
+ "kind": "statement",
+ "title": "Algebraic multiplicities and reality for powers of endomorphisms",
+ "statement": "Let $K$ be an algebraically closed field, $V$ a finite-dimensional $K$-vector space, and $A:V\\to V$ a $K$-linear endomorphism. Let $r=\\dim_KV$, let $n\\ge1$ be an integer, and enumerate the roots of the characteristic polynomial $\\chi_A(T)$ [def-weil-characteristic-polynomial] as $\\alpha_1,\\ldots,\\alpha_r$, with algebraic root multiplicities [def-weil-root-multiplicity]. Then\n$$\\chi_{A^n}(T)=\\prod_{j=1}^r(T-\\alpha_j^n),\\qquad \\det(1-TA^n\\mid V)=\\prod_{j=1}^r(1-T\\alpha_j^n).$$\nThe second polynomial is the reverse characteristic polynomial [def-weil-reverse-characteristic-polynomial]. Thus multiplicities add when distinct eigenvalues have equal $n$th powers. If $\\iota:K\\xrightarrow{\\sim}\\mathbf C$ is a field isomorphism and the multiset $(\\iota(\\alpha_j))_j$ is invariant under complex conjugation, then the multiset $(\\iota(\\alpha_j^n))_j$ is also invariant, and $\\iota(\\det(1-TA^n\\mid V))\\in\\mathbf R[T]$. No invertibility or semisimplicity of $A$ is assumed; $r=0$ gives empty products equal to $1$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 1, final sentences: powering preserves conjugation-stable spectra; old mixed-descent Step 1, triangularization and algebraic multiplicities."
+ },
+ "stmt_deps": [
+  "def-weil-characteristic-polynomial",
+  "def-weil-root-multiplicity",
+  "def-weil-reverse-characteristic-polynomial"
+ ],
+ "proof": [
+  {
+   "text": "Use the already-proved basis form of [p-linear-triangular], Module.End.exists_basis_isUpperTriangular_toMatrix, to choose a basis b with upper triangular matrix B for A. Mathlib Matrix.charpoly_of_isUpperTriangular gives the product of X minus the diagonal entries. Taking roots and using Polynomial.roots_multiset_prod_X_sub_C identifies the multiset of diagonal entries with the given enumeration alpha. No reversal of the basis or fresh determinant induction is needed.",
+   "uses": [
+    "p-linear-triangular",
+    "def-weil-characteristic-polynomial",
+    "def-weil-root-multiplicity"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib Matrix.BlockTriangular.pow shows B^k stays upper triangular. By induction on k, its ith diagonal entry is B_ii^k: in the diagonal entry of B^k B, every summand with j<i vanishes in B^k and every one with i<j vanishes in B. The base case is the identity matrix, also for the empty index set. Apply Matrix.charpoly_of_isUpperTriangular to B^n and transport the diagonal multiset equality through a -> X-C(a^n). This proves the characteristic-polynomial product for A^n.",
+   "uses": [
+    "def-weil-characteristic-polynomial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [def-weil-reverse-characteristic-polynomial], reverse the characteristic-polynomial product. The proved source-library identity Polynomial.reverse_multiset_prod_X_sub_C gives the product of 1-C(a^n) X, equivalently 1-X C(a^n). Zero eigenvalues and empty multisets are allowed.",
+   "uses": [
+    "def-weil-reverse-characteristic-polynomial"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take roots of the powered characteristic-polynomial product with Polynomial.roots_multiset_prod_X_sub_C. Polynomial.count_roots identifies root multiplicity with the count in that multiset; Multiset.count_map and Fintype.card_subtype identify this count with Nat.card of the fibre of j -> alpha_j^n. This includes collisions, repeated roots and positive characteristic.",
+   "uses": [
+    "def-weil-root-multiplicity"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Map the conjugation-stable multiset equality through z -> z^n. Conjugation and the field isomorphism preserve powers, giving conjugation stability for the powered multiset. Map that equality through z -> 1-X C(z) and take products. Polynomial coefficient maps commute with products, so the mapped reverse characteristic polynomial Q is fixed by coefficientwise conjugation. Complex.conj_eq_iff_re says each coefficient equals the inclusion of its real part. Construct P explicitly by applying Complex.re to the finitely supported coefficients of Q and prove coefficientwise that P.map Complex.ofRealHom=Q.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "p-linear-triangular",
+  "def-weil-characteristic-polynomial",
+  "def-weil-root-multiplicity",
+  "def-weil-reverse-characteristic-polynomial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 1, final sentences; the same triangularization and multiset argument, implemented using the existing triangular basis and Mathlib product formulas (W4, 2026-10-25)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "charpoly.*pow|pow.*charpoly|roots.*pow",
+   "results": "Actual search: 22 hits; Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean, Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean, Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue/spectrum power hits give only sets or one eigenvector, not the characteristic polynomial with algebraic multiplicities and conjugation; finite-field charpoly_pow_card has incompatible field and exponent hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complex conjugation invariant multiset of eigenvalues remains invariant after taking a positive integer power of a linear operator",
+   "results": "Actual search: 8 hits; spectrum.map_pow, Module.End.HasEigenvalue.pow, spectrum.pow_mem_pow, spectrum.map_pow_of_nonempty, spectrum.pow_image_subset, spectrum.map_pow_of_pos, Module.End.HasEigenvector.pow_apply, Module.End.HasUnifEigenvector.pow_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue/spectrum power hits give only sets or one eigenvector, not the characteristic polynomial with algebraic multiplicities and conjugation; finite-field charpoly_pow_card has incompatible field and exponent hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly, HPow.hPow",
+   "results": "Actual search: 8 hits; LinearMap.charpoly_zero, LinearMap.charpoly_one, LinearMap.pow_eq_aeval_mod_charpoly, IsNilpotent.charpoly_eq_X_pow_finrank, LinearMap.isNilpotent_iff_charpoly, LinearMap.charpoly_eq_X_pow_iff, LinearMap.charpoly_nilpotent_tfae, LinearMap.det_eq_sign_charpoly_coeff",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue/spectrum power hits give only sets or one eigenvector, not the characteristic polynomial with algebraic multiplicities and conjugation; finite-field charpoly_pow_card has incompatible field and exponent hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eigenvalues of a power of a finite dimensional endomorphism over an algebraically closed field counted with algebraic multiplicity are the powers of its eigenvalues",
+   "results": "Actual search: 8 hits; Module.End.HasEigenvalue.pow, Module.End.HasUnifEigenvalue.pow, spectrum.map_pow_of_nonempty, Module.End.HasEigenvector.pow_apply, spectrum.map_pow_of_pos, Module.End.HasUnifEigenvector.pow_apply, Module.End.hasGenEigenvalue_of_hasEigenvalue, LinearMap.finrank_genEigenspace_le",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue/spectrum power hits give only sets or one eigenvector, not the characteristic polynomial with algebraic multiplicities and conjugation; finite-field charpoly_pow_card has incompatible field and exponent hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A real characteristic polynomial of a complex linear operator implies real characteristic polynomial for every positive power",
+   "results": "Actual search: 8 hits; LinearMap.pow_eq_aeval_mod_charpoly, Matrix.IsHermitian.charpoly_cfc_eq, Module.End.HasEigenvalue.pow, FiniteField.Matrix.charpoly_pow_card, Matrix.pow_eq_aeval_mod_charpoly, LinearMap.charpoly_eq_X_pow_iff, Module.End.HasUnifEigenvalue.pow, BoundedContinuousFunction.char_mem_charPoly",
+   "date": "2026-10-22",
+   "verdict": "no match: eigenvalue/spectrum power hits give only sets or one eigenvector, not the characteristic polynomial with algebraic multiplicities and conjugation; finite-field charpoly_pow_card has incompatible field and exponent hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Characteristic polynomial of a power of an endomorphism has roots equal to powers of the eigenvalues with algebraic multiplicities",
+   "results": "Actual search: 8 hits; Module.End.HasEigenvalue.pow, Module.End.HasUnifEigenvalue.pow, LinearMap.pow_eq_aeval_mod_charpoly, Module.End.hasGenEigenvalue_of_hasEigenvalue, LinearMap.finrank_genEigenspace_le, Module.End.HasEigenvector.pow_apply, Module.End.HasUnifEigenvector.pow_apply, Matrix.pow_eq_aeval_mod_charpoly",
+   "date": "2026-10-22",
+   "verdict": "no match for full item: eigenvalue sets, trace identities, diagonal/Hermitian special cases or nilpotence do not supply the multiplicity and conjugation clauses for arbitrary endomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "charpoly.*pow|pow.*charpoly|det_of_upperTriangular|det_of_lowerTriangular",
+   "results": "Actual search: 20 hits; Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean",
+   "date": "2026-10-22",
+   "verdict": "match for auxiliary determinant calculation only; reuse existing lem-weil-pbc-block-triangular-determinant instead of creating a node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The characteristic polynomial of the nth power of a linear endomorphism is the product of X minus the nth powers of its eigenvalues counted with multiplicities",
+   "results": "Actual search: 8 hits; Matrix.charpoly, LinearMap.polyCharpoly, Module.End.HasEigenvalue.pow, Matrix.charpoly_diagonal, LinearMap.charpoly, LinearMap.charpoly_def, Matrix.charpoly_toLin, Matrix.eval_charpoly",
+   "date": "2026-10-22",
+   "verdict": "no match for full item: eigenvalue sets, trace identities, diagonal/Hermitian special cases or nilpotence do not supply the multiplicity and conjugation clauses for arbitrary endomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.charpoly, HPow.hPow",
+   "results": "Actual search: 8 hits; LinearMap.charpoly_zero, LinearMap.charpoly_one, LinearMap.pow_eq_aeval_mod_charpoly, IsNilpotent.charpoly_eq_X_pow_finrank, LinearMap.isNilpotent_iff_charpoly, LinearMap.charpoly_eq_X_pow_iff, LinearMap.charpoly_nilpotent_tfae, LinearMap.det_eq_sign_charpoly_coeff",
+   "date": "2026-10-22",
+   "verdict": "no match for full item: eigenvalue sets, trace identities, diagonal/Hermitian special cases or nilpotence do not supply the multiplicity and conjugation clauses for arbitrary endomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "det_of_isUpperTriangular|det_of_upperTriangular",
+   "results": "Actual search: 9 hits; Mathlib/LinearAlgebra/Matrix/Rank.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Block.lean, Mathlib/LinearAlgebra/Matrix/Echelon/Pivot.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "match for auxiliary determinant calculation only; reuse existing lem-weil-pbc-block-triangular-determinant instead of creating a node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant of an upper triangular matrix is the product of its diagonal entries",
+   "results": "Actual search: 8 hits; Matrix.det_of_upperTriangular, Matrix.det_of_lowerTriangular, Matrix.twoBlockTriangular_det', Matrix.BlockTriangular.det, Matrix.BlockTriangular.det_fintype, Matrix.det_diagonal, Matrix.det, Matrix.twoBlockTriangular_det",
+   "date": "2026-10-22",
+   "verdict": "match for auxiliary determinant calculation only; reuse existing lem-weil-pbc-block-triangular-determinant instead of creating a node"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.IsUpperTriangular, Matrix.det",
+   "results": "Actual search: 3 hits; Matrix.det_of_isUpperTriangular, Matrix.det_of_upperTriangular, Matrix.IsUpperTriangular.det_ne_zero_iff",
+   "date": "2026-10-22",
+   "verdict": "match for auxiliary determinant calculation only; reuse existing lem-weil-pbc-block-triangular-determinant instead of creating a node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The determinant of an upper triangular square matrix over a commutative ring equals the product of its diagonal entries",
+   "results": "Actual search: 8 hits; Matrix.det_of_upperTriangular, Matrix.det_of_lowerTriangular, Matrix.det_diagonal, Matrix.charpoly_of_upperTriangular, Matrix.det_toSquareBlock_id, Matrix.BlockTriangular.det, Matrix.BlockTriangular.det_fintype, Matrix.permanent_diagonal",
+   "date": "2026-10-22",
+   "verdict": "match for auxiliary determinant calculation only; reuse existing lem-weil-pbc-block-triangular-determinant instead of creating a node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A real characteristic polynomial of a complex linear operator implies real characteristic polynomial for every positive power",
+   "results": "Actual search: 8 hits; BoundedContinuousFunction.char_mem_charPoly, Matrix.IsHermitian.charpoly_cfc_eq, Module.End.HasEigenvalue.pow, Module.End.HasUnifEigenvalue.pow, LinearMap.pow_eq_aeval_mod_charpoly, LinearMap.charpoly_eq_X_pow_iff, Matrix.IsHermitian.splits_charpoly, Matrix.IsHermitian.charpoly_eq",
+   "date": "2026-10-22",
+   "verdict": "no match for full item: eigenvalue sets, trace identities, diagonal/Hermitian special cases or nilpotence do not supply the multiplicity and conjugation clauses for arbitrary endomorphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-constant-extension-mixed-descent",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 1, final sentences: powering preserves conjugation-stable spectra; old mixed-descent Step 1, triangularization and algebraic multiplicities.",
+   "via": [
+    "lem-zl-constant-extension-mixed-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-power-spectrum-conjugation",
+  "worker": "stage1",
+  "summary": "Expanded powering and reality using the existing invariant-flag node and the existing block-lower-triangular determinant Mathlib leaf. The determinant product, matrix-power diagonal, root counts, and occurrence-permutation argument are explicit elementary calculations. No new nodes, no statement changes, no Lean writing or compilation.",
+  "blueprint": "thm-zl-real-mixed-by-curves.proof.md, paragraph 1 final two sentences: local Frobenius is a positive power and powering preserves conjugation-stable spectra.",
+  "tool_uses": [
+   {
+    "node": "p-linear-triangular",
+    "why": "Generic invariant-flag linear algebra supplies triangularization for an arbitrary algebraically closed field; this implements the unit's stated powering calculation and no node of this unit supplies the flag."
+   }
+  ]
+ },
+ "tool_uses": [
+  "p-linear-triangular"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-972bbd64a",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-972bbd64a (reviewer sub-agent of L); spot-checked: There are no new nodes. The item statement, stmt_deps and source are unchanged from the base; only a 5-step proof was added. Source: main-20261015 thm-zl-real-mixed-by-curves.proof.md, paragraph 1 ('powering preserves conjugation-stable spectra'); the item matches it exactly and is not weakened. Step 1: p-linear-triangular gives a complete invariant flag over the algebraically closed K; an adapted basis, reversed, gives a lower-triangular matrix (direction checked). Step 2: lem-weil-pbc-block-triangular-determinant with p=1, q=s-1, by induction, gives det = product of diagonal entries over K[T]. Cancellation plus Q(c)≠0 identifies (d_i) with the root multiset of def-weil-root-multiplicity exactly. Step 3: lower-triangular matrices are closed under products, so B^n has diagonal d_i^n; this gives chi_{A^n} and det(1-TA^n). Step 4: multiplicities add at collisions; separability is not needed, so it holds when char K divides n. Step 5: an occurrence permutation shows the conjugated product equals the product, so the polynomial is in R[T]. Tested r=0, A=0, the Jordan block J_2(λ) (chi_{J^n}=(T-λ^n)^2), diag(1,-1) at n=2, char p with n=p, and diag(i,-i). Duplicate search: lem-wf-trace-power-eigenvalues gives traces only and p-linear-spectra covers tensor/exterior/dual spectra, so neither is a duplicate. Batch-5 flag on p-linear-triangular (sec-trace-formula): accepted as a declared tool_use. It is generic linear algebra with no stmt_deps and a sorry-free Lean declaration (Module.End.exists_le_map_le_finrank_eq_succ). Neither the trace-formula leaf nor the Poincaré-duality leaf gives it. Within sec-trace-formula it is used only by lem-zl-log-det-identity, which belongs to the zeta-rationality consequence, not to the proof of the trace formula or of Poincaré duality. Other batch-5 split nodes already cite it. No SGA source is used and no changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.PowerSpectrumConjugation",
+  "declaration": "LinearMap.power_spectrum_conjugation",
+  "file": "lean/Sheaf/LinearAlgebra/PowerSpectrumConjugation.lean",
+  "statement": "theorem power_spectrum_conjugation {K : Type u} [Field K] [IsAlgClosed K] {V : Type v} [AddCommGroup V] [Module K V] [FiniteDimensional K V] (A : V →ₗ[K] V) (n : ℕ) (hn : 1 ≤ n) (α : Fin (Module.finrank K V) → K) (hα : A.charpoly.roots = Finset.univ.val.map α) : (A ^ n).charpoly = ∏ j, (X - C (α j ^ n)) ∧ (A ^ n).charpolyRev = ∏ j, (1 - X * C (α j ^ n)) ∧ (∀ β : K, rootMultiplicity β (A ^ n).charpoly = Nat.card {j : Fin (Module.finrank K V) // α j ^ n = β}) ∧ (∀ ι : K ≃+* ℂ, Finset.univ.val.map (fun j ↦ star (ι (α j))) = Finset.univ.val.map (fun j ↦ ι (α j)) → Finset.univ.val.map (fun j ↦ star (ι (α j ^ n))) = Finset.univ.val.map (fun j ↦ ι (α j ^ n)) ∧ ∃ P : ℝ[X], P.map Complex.ofRealHom = (A ^ n).charpolyRev.map ι.toRingHom)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-960f3ad83",
+  "group": "NV",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: alg-closed K, finite-dim V in an independent universe, arbitrary A, n≥1; roots enumerated with multiplicity via charpoly.roots = univ.val.map α (satisfiable since the charpoly splits); charpoly and charpolyRev(=charpoly.reverse) products; collision multiplicity via Nat.card of the fibre; conditional ι:K≃+*ℂ conjugation-stable multiset plus a real polynomial P. Edge cases r=0, A=0, Jordan block, diag(1,-1), char p with n=p and diag(i,-i) checked. Source thm-zl-real-mixed-by-curves.proof.md para 1 matches. Node diff is lean only; lean.statement verbatim. No duplicate in Mathlib/project (charpoly_pow_card and TracePow differ). Docstrings carry source, blueprint id and the 5 steps; sorry only; lines ≤100; report has both sections. No findings; no compile re-run (2026-10-21 rule)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261024T232218-L-2316208",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

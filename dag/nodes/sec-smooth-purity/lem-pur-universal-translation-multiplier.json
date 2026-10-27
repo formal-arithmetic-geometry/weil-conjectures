@@ -1,0 +1,324 @@
+{
+ "id": "lem-pur-universal-translation-multiplier",
+ "kind": "statement",
+ "title": "The universal affine translation has a natural unit multiplier",
+ "statement": "Let $N\\geq1$, let $A$ be a finite commutative ring with $NA=0$, and let $S$ be a Noetherian scheme on which $N$ is invertible, where Noetherian means having a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring]. Let $d\\geq0$, put $P=\\mathbf A^d_S$, $W=\\mathbf A^d_P$, and let $q_P:W\\to P$ and $p:P\\to S$ be the projections [def-sbc-affine-space]. The zero section $e:S\\to P$ is given by all coordinates zero. Let $\\tau:W\\to W$ be $(z,a)\\mapsto(z-a,a)$, an automorphism over $P$ with inverse $(z,a)\\mapsto(z+a,a)$. Work in the ordinary etale derived categories of $A$-modules [def-weil-pbc-derived-categories] and put $L_P=A_W(d)[2d]$ using the canonical Tate pullback maps [lem-asd-etale-finite-twist-pullback]. With ordinary compact supports [def-amb-etale-compact-support], let $M_P=Rq_{P!}L_P$, let $t_P:M_P\\xrightarrow{\\sim}A_P[0]$ be the normalized coordinate-tower trace [lem-amb-affine-space-top-trace], and let $\\rho_P=Rq_{P!}(\\kappa_\\tau)\\circ\\operatorname{Ex}_{!,\\tau}$ be the canonical action [lem-amb-compact-action-base-change], with its bounded-below exchange interpreted in the unbounded category by [lem-amb-unbounded-compact-support-comparisons].\n\nThere is a unique section $b\\in\\Gamma(P,A_P)^\\times$ of the constant etale coefficient sheaf [def-weil-pbc-constant-sheaf] such that the equality of actual derived morphisms is\n$$t_P\\circ\\rho_P\\circ t_P^{-1}=m_b[0],$$\nwhere $m_b:A_P\\to A_P$ is multiplication by $b$. Under the canonical section/function identification [lem-weil-pbc-constant-sheaf-sections-locally-constant], $b$ is a Zariski-locally constant function $|P|\\to A^\\times$. For every morphism $u:T\\to P$ with $T$ Noetherian, form $W_T=W\\times_PT$, the translated action $\\rho_T$ on $M_T=Rq_{T!}A_{W_T}(d)[2d]$, and the normalized trace $t_T:M_T\\xrightarrow{\\sim}A_T[0]$ by the same constructions. For the canonical exchange $C_u:u^*M_P\\xrightarrow{\\sim}M_T$, one has\n$$C_u\\circ u^*\\rho_P=\\rho_T\\circ C_u,\\qquad t_T\\circ C_u=u^*t_P,\\qquad t_T\\circ\\rho_T\\circ t_T^{-1}=m_{u^*b}[0].$$\nIn particular $e^*b=1$: under zero-section pullback the action is $\\rho_{1,1}=1$ with the canonical identity Tate identification.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+  "place": "Step 1: translation, 'let the translation vector vary over V' through the locally constant unit multiplier; unit sk-thm-smooth-purity, Agreement on the model paragraph, and lem-pur-projection-purity-agreement's identification of the translated diagonal pair"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-affine-space",
+  "def-weil-pbc-derived-categories",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-amb-etale-compact-support",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-compact-action-base-change",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "def-trf-ambient-affine-translation-trace",
+  "def-amb-affine-trace-tower",
+  "def-amb-affine-trace-construction"
+ ],
+ "proof": [
+  {
+   "text": "Apply [def-amb-affine-trace-tower] over $S$, $P$ and every Noetherian $T$ in the statement. Its coordinate identifications give $W_T=\\mathbf A^d_T$, separated finite-type projections, Noetherian total spaces, and invertibility of $N$ on all stages. The finite affine Noetherian covers give quasi-compactness, and [lem-weil-pbc-locally-noetherian-quasi-separated] gives quasi-separatedness. Choose compactifications by [thm-nagata-compactification]. Their open parts are quasi-compact: the inverse image of an affine open of the middle scheme is an open of the Noetherian source, hence quasi-compact. For this last implication apply [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] to complements of finite unions in a covering of the open: a minimal complement cannot meet another member of the cover, so that finite union covers the open. The polynomial formulas $z\\mapsto z-a$ and $z\\mapsto z+a$ are inverse over $P$, including $d=0$.",
+   "uses": [
+    "def-amb-affine-trace-tower",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+    "place": "Step 1: translation, action on the coefficient line"
+   }
+  },
+  {
+   "text": "The object $L_P=A_W(d)[2d]$ is bounded below. By [lem-asd-etale-finite-twist-pullback], $\\kappa_\\tau:\\tau^*L_P\\cong L_P$ is an isomorphism, and its pullback to $W_T$ is the specified $\\kappa_{\\tau_T}$, using the composition comparison. Apply [lem-amb-compact-action-base-change] with $(f,a,K,\\theta)=(q_P,\\tau,L_P,\\kappa_\\tau)$: it gives the automorphism $\\rho_P$ in the statement. By [lem-amb-affine-space-top-trace], $t_P$ is an isomorphism. The bounded-below normalizations of [lem-amb-unbounded-compact-support-comparisons] identify these very maps with their unbounded versions. Thus $\\alpha=t_P\\rho_Pt_P^{-1}$ is an automorphism of $A_P[0]$.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-compact-action-base-change",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+    "place": "Step 1: translation, action on the coefficient line"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-derived-single-fully-faithful] to the abelian category of $A_P$-module sheaves. There are unique sheaf endomorphisms $h,k:A_P\\to A_P$ with $h[0]=\\alpha$ and $k[0]=\\alpha^{-1}$. Functoriality and injectivity on Hom give $hk=kh=1$. These are sheaf maps lifting the actual derived morphisms, not merely their actions on global cohomology.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts, part (2), degree zero"
+   }
+  },
+  {
+   "text": "Set $b=h_P(1)$ and $c=k_P(1)$ in $\\Gamma(P,A_P)$. For any etale object $U\\to P$ and any section $x\\in A_P(U)$, $A_P$-linearity and restriction compatibility give $h_U(x)=h_U(x\\cdot1)=x h_U(1)=x b|_U$, and likewise $k_U(x)=x c|_U$. Hence $h=m_b$, $k=m_c$, and $hk=kh=1$ evaluated at $1$ gives $bc=cb=1$. Thus $b$ is a unit and $\\alpha=m_b[0]$. Any other multiplier has the same sheaf map by the injectivity in [lem-weil-pbc-derived-single-fully-faithful], and evaluation at $1$ gives the same section. This proves existence and uniqueness.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+    "place": "Step 1: translation, action on the coefficient line"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-constant-sheaf-sections-locally-constant] to the additive group of $A$. The sections $b,c$ become Zariski-locally constant functions to $A$. On each open on which both are constant, the equation $bc=1$ says that the value of $b$ lies in $A^\\times$. These opens cover $P$, so the same function is locally constant with codomain $A^\\times$. The section/function identification respects multiplication here: restrict to these constant opens, multiply the constant values, and use the sheaf equality axiom.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, remark-constant-locally-constant-maps"
+   }
+  },
+  {
+   "text": "For $u:T\\to P$, [lem-amb-compact-action-base-change] gives $C_u u^*\\rho_P=\\rho_T C_u$, since the Tate isomorphisms pull back as checked in step 2. The trace lemma [lem-amb-affine-space-top-trace] gives $t_T C_u=u^*t_P$. Both equations use the same exchange by [lem-amb-unbounded-compact-support-comparisons]. Inserting $C_u^{-1}C_u$ and these equations gives\n$$t_T\\rho_Tt_T^{-1}=(u^*t_P)(u^*\\rho_P)(u^*t_P)^{-1}=u^*(t_P\\rho_Pt_P^{-1})=u^*(m_b[0]).$$\nBy [lem-pe-constant-left-module-inverse-image], inverse image preserves the constant ring, multiplication and $1$, and is exact. Applying it to the formula $x\\mapsto bx$ gives $u^*m_b=m_{u^*b}$ on sheaves; applying it termwise to the degree-zero complexes gives $m_{u^*b}[0]$. No flatness or finite-type assumption on $u$ is needed.",
+   "uses": [
+    "lem-amb-compact-action-base-change",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+    "place": "Step 1: translation, action on the coefficient line"
+   }
+  },
+  {
+   "text": "Take $u=e:S\\to P$. All translation parameters become zero, so $\\tau_e=1_{\\mathbf A^d_S}$. The identity and composition normalization of [lem-asd-etale-finite-twist-pullback] makes $\\kappa_{\\tau_e}$ the identity. Thus [lem-amb-compact-action-base-change] gives $\\rho_{1,1}=1$. Step 6 implies $m_{e^*b}[0]=t_S1t_S^{-1}=1$. By [lem-weil-pbc-derived-single-fully-faithful], $m_{e^*b}=1$ as a sheaf map; evaluation at $1$ proves $e^*b=1$.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-compact-action-base-change",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+    "place": "Step 1: translation, action on the coefficient line"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-affine-trace-tower",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-compact-action-base-change",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-vector-bundle.proof.md",
+  "place": "Step 1: translation, 'let the translation vector vary over V' through the locally constant unit multiplier; unit sk-thm-smooth-purity, Agreement on the model paragraph, and lem-pur-projection-purity-agreement's identification of the translated diagonal pair",
+  "group": "Q99",
+  "date": "2026-10-22",
+  "note": "Expands the blueprint coefficient-line argument using the existing normalized trace and action lemmas, Stacks degree-zero Hom and constant-section comparisons; no SGA source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "translation.*trace|trace.*translation|affine.*compact.*support",
+   "results": "4 hits: Mathlib/Tactic/Translate/Core.lean, Mathlib/Tactic/Translate/Core.lean, Mathlib/Tactic/Translate/Core.lean, Mathlib/Tactic/Translate/Core.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: The returned declarations concern affine coordinates, algebraic etaleness or abstract derived isomorphisms, not this compact-support multiplier."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal translation on affine space induces, via normalized compact support etale trace, a base change compatible locally constant unit multiplier",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, KaehlerDifferential.isBaseChange_of_formallyEtale, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-22",
+   "verdict": "no match: The returned declarations concern affine coordinates, algebraic etaleness or abstract derived isomorphisms, not this compact-support multiplier."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphism of the constant etale coefficient line obtained by conjugating a compact support trace is multiplication by a locally constant unit",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.IsIso",
+   "results": "12 hits: DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.isIso_iff, DerivedCategory.isIso_Qh_map_iff, DerivedCategory.left_fac, DerivedCategory.right_fac, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE",
+   "date": "2026-10-22",
+   "verdict": "no match: The returned declarations concern affine coordinates, algebraic etaleness or abstract derived isomorphisms, not this compact-support multiplier."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating an automorphism of a derived etale complex trivialized by a trace gives multiplication by a locally constant unit, naturally under inverse image",
+   "results": "8 hits: StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv_apply_coe, StandardEtalePair.homEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, StandardEtalePair.instFormallyEtaleRing, StandardEtalePresentation.toPresentation_σ', Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-22",
+   "verdict": "no match: The returned declarations concern affine coordinates, algebraic etaleness or abstract derived isomorphisms, not this compact-support multiplier."
+  },
+  {
+   "tool": "grep",
+   "query": "translation.*trace|trace.*translation|affine.*compact.*support",
+   "results": "4 hits: Mathlib/Tactic/Translate/Core.lean, Mathlib/Tactic/Translate/Core.lean, Mathlib/Tactic/Translate/Core.lean, Mathlib/Tactic/Translate/Core.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived isomorphisms, constant sheaf sections, locally constant functions and affine coordinates do not state the normalized compact-support translation multiplier and its base-change equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.IsIso",
+   "results": "12 hits: DerivedCategory.instIsIsoMapCochainComplexIntQOfQuasiIso, DerivedCategory.isIso_Q_map_iff_quasiIso, DerivedCategory.isIso_iff, DerivedCategory.isIso_Qh_map_iff, DerivedCategory.left_fac, DerivedCategory.right_fac, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived isomorphisms, constant sheaf sections, locally constant functions and affine coordinates do not state the normalized compact-support translation multiplier and its base-change equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphisms of the constant etale coefficient line are multiplication by locally constant units naturally under pullback",
+   "results": "8 hits: LocallyConstant.comapₗ, CompHausLike.LocallyConstant.unitIso, CompHausLike.LocallyConstant.unit_app, CompHausLike.LocallyConstant.unit, LocallyConstant.coeFnMonoidHom, Rep.ofAlgebraAutOnUnits, ContinuousLinearEquiv.unitsEquivAut_apply_symm, ContinuousLinearEquiv.unitsEquivAut",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived isomorphisms, constant sheaf sections, locally constant functions and affine coordinates do not state the normalized compact-support translation multiplier and its base-change equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal affine translation acts on normalized compact support etale cohomology by a base change compatible locally constant unit",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, AlgebraicGeometry.AffineSpace.comp_homOfVector, AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDiagram",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived isomorphisms, constant sheaf sections, locally constant functions and affine coordinates do not state the normalized compact-support translation multiplier and its base-change equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism of a constant sheaf in the derived category is multiplication by a unique invertible global section",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓObjEquivHom, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.ΓNatIsoCoyoneda, CategoryTheory.Sheaf.isConstant_iff_forget, CategoryTheory.Sheaf.isConstant_of_isIso_counit_app, CategoryTheory.Sheaf.H",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract derived isomorphisms, constant sheaf sections, locally constant functions and affine coordinates do not state the normalized compact-support translation multiplier and its base-change equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-translation-trace",
+  "date": "2026-10-22",
+  "group": "Q88"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Step 1: translation, 'let the translation vector vary over V' through the locally constant unit multiplier; unit sk-thm-smooth-purity, Agreement on the model paragraph, and lem-pur-projection-purity-agreement's identification of the translated diagonal pair",
+   "via": [
+    "lem-pur-affine-translation-trace"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-universal-translation-multiplier",
+  "worker": "stage1",
+  "summary": "Seven steps using existing nodes: check affine geometry; conjugate the canonical action; lift it and its inverse to sheaves; evaluate at 1 to construct the unique unit; identify locally constant functions; calculate the exchange equations and scalar pullback; specialize to the zero section. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes the coefficient-line and zero-section part of Step 1 of sk-prop-sp-orientation-vector-bundle.proof.md, through ancestor lem-pur-projection-purity-agreement and parent lem-pur-affine-translation-trace. The connected-fibre detection argument belongs to the parent.",
+  "tool_uses": [
+   {
+    "node": "def-amb-affine-trace-tower",
+    "why": "Coordinate tower geometry supplies the Noetherian, separated finite-type and invertibility prerequisites implicit in the item trace."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme geometry for compactification existence; it does not replace a purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic Noetherian topology supplies quasi-compactness of the compactification open part by the finite-union argument written in step 1."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic existence of the compactifications required by the action theorem."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Finite Tate comparisons with identity and composition normalization, exactly those specified in the statement."
+   },
+   {
+    "node": "lem-amb-compact-action-base-change",
+    "why": "Generic action coherence and identity normalization for the specified ordinary compact-support functor."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Normalized coordinate trace and its base-change equation, already specified in the statement."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Identifies the bounded-below and unbounded exchanges with the specified normalization."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "Generic comparison of constant etale sections with Zariski locally constant functions; no same-unit substitute."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic exact inverse image preserves constant scalars and ring operations; used solely for pullback of multiplication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-amb-affine-trace-tower",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "thm-nagata-compactification",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-compact-action-base-change",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-pe-constant-left-module-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-f45ee487b",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-f45ee487b (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement and stmt_deps byte-equal to live/side-live, where the item is still unsplit; no repair note; no cycle; no SGA. Checked against blueprint main-20261015 vector-bundle orientation Step 1 and the unit's Agreement-on-the-model paragraph: the item does the multiplier and zero-section part, and the connected-fibre argument stays in the parent. Checked every cited statement. Step 1: the affine-trace-tower node gives Noetherian stages, separated finite-type projections and N invertible; Nagata applies (qcqs via the locally-Noetherian node); the minimal-closed-subset argument correctly makes the open part quasi-compact. Step 2: the action node with (q_P, tau, L_P, kappa_tau); Tate composition compatibility gives the pulled-back theta_T = kappa_{tau_T}; the trace node applied over the base P; the unbounded-comparisons node's bounded-below restriction clause. Steps 3-4: the derived-single Mathlib leaf on Mod(A_P) gives h=m_b and k=m_c with bc=1; uniqueness by faithfulness and evaluation at 1. Step 5: additive section/function isomorphism plus restriction to constant opens; it relies on the evident naturality of the 03P5 map, which is advisory and accepted. Step 6: the conjugation calculation is verified; u^{-1}(m_b)=m_{u^{-1}b} because inverse image preserves finite limits (lem-pe-constant-left-module-inverse-image); no flatness of u needed. Step 7: tau_e=1, so rho_{1,1}=1 and e*b=1. Edge cases checked: d=0, A=0, empty S/T, disconnected or nonreduced base, composite N. Declared tool_uses accepted; the sk-prop-an nodes are in the unit's uses anyway."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UniversalTranslationMultiplier",
+  "declaration": "AlgebraicGeometry.Etale.purUniversalTranslationMultiplier",
+  "declarations": [
+   "AlgebraicGeometry.Etale.IsEtaleUnitMultiplier",
+   "AlgebraicGeometry.Etale.CoefficientLineMultiplierWitness",
+   "AlgebraicGeometry.Etale.TranslationMultiplierWitness",
+   "AlgebraicGeometry.Etale.purUniversalTranslationMultiplier"
+  ],
+  "file": "lean/Sheaf/Paper/UniversalTranslationMultiplier.lean",
+  "statement": "theorem purUniversalTranslationMultiplier (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) : ∃ (b : LocallyConstant (affineTraceTower S d) Aˣ) (w : TranslationMultiplierWitness N hN A hA (affineTraceTower S d) (affineTraceNoetherian S d) (affineTraceInvertible N S hS d) d (affineTraceCoordinate S d) b), (∀ (b' : LocallyConstant (affineTraceTower S d) Aˣ) (_ : TranslationMultiplierWitness N hN A hA (affineTraceTower S d) (affineTraceNoetherian S d) (affineTraceInvertible N S hS d) d (affineTraceCoordinate S d) b'), b' = b) ∧ (∀ (T : Scheme.{u}) (hT : IsNoetherian T) (v : T ⟶ affineTraceTower S d), ∃ (wT : TranslationMultiplierWitness N hN A hA T hT (affineTracePullbackInvertible N v (affineTraceInvertible N S hS d)) d (fun i ↦ v.appTop (affineTraceCoordinate S d i)) (b.comap ⟨v, v.continuous⟩)) (C : (ordinaryFinitePullback A v).obj ((affineTraceLeft A (affineTraceTower S d) d).obj ((affineTraceRight A N hA (affineTraceTower S d) d).obj (ordinaryFiniteUnit A (affineTraceTower S d)))) ≅ (affineTraceLeft A T d).obj ((affineTraceRight A N hA T d).obj (ordinaryFiniteUnit A T))), C.hom = affineTraceExchange A v d ((affineTraceRight A N hA (affineTraceTower S d) d).obj (ordinaryFiniteUnit A (affineTraceTower S d))) ≫ (affineTraceLeft A T d).map ((affineTraceRightBaseChange A N hA (ambientAffineTraceTransport N hN A hA) v (affineTraceInvertible N S hS d) d (ordinaryFiniteUnit A (affineTraceTower S d))).hom ≫ (affineTraceRight A N hA T d).map (ordinaryFiniteUnitPullback A v).hom) ∧ (ordinaryFinitePullback A v).map w.action ≫ C.hom = C.hom ≫ wT.action ∧ C.hom ≫ wT.trace.hom = (ordinaryFinitePullback A v).map w.trace.hom ≫ (ordinaryFiniteUnitPullback A v).hom) ∧ (∀ x : S, b ((AffineSpace.zeroSection (ULift.{u} (Fin d)) S ≫ (affineTraceAffineSpaceIso S d).inv) x) = 1) ∧ ambientAffineTranslationExchange A S d (fun i ↦ (AffineSpace.zeroSection (ULift.{u} (Fin d)) S ≫ (affineTraceAffineSpaceIso S d).inv).appTop (affineTraceCoordinate S d i)) ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≫ (affineTraceLeft A S d).map (ambientAffineTranslationTate A N hA (ambientAffineTraceTransport N hN A hA) S hS d (fun i ↦ (AffineSpace.zeroSection (ULift.{u} (Fin d)) S ≫ (affineTraceAffineSpaceIso S d).inv).appTop (affineTraceCoordinate S d i))).hom = 𝟙 _",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Unit sections are represented by their canonically corresponding locally constant A-units-valued functions. IsEtaleUnitMultiplier specifies the actual multiplication map on constant local generators; TranslationMultiplierWitness fixes the trace to the published counit and states conjugation in the unbounded category. The theorem gives uniqueness, arbitrary Noetherian base change with the specified exchange, and zero-section normalization. Only definitions from AmbientAffineTranslationTrace are used, not its downstream invariance theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e8153f60",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Read the item node, all 14 stmt_deps, the source (main-20261015 vector-bundle proof Step 1, lines 5-13), the Lean module, report.md, and the side-live declarations AmbientAffineTranslationTrace, exists_affineSpaceTopTrace, ordinaryFiniteConstant/Unit/UnitPullback and upstream AffineSpace.translation/zeroSection. Only the item node changed vs side-live (lean, plus 3 landed def stmt_deps); statement verbatim; Worker report and Second reading sections present. Every clause matches: tau = translation(-a), which is z-a; action pinned by action_eq to Ex followed by Tate; trace pinned to affineTraceCounit with the normalized data; IsEtaleUnitMultiplier pins m_b on constant generators (not hollow); uniqueness over conjugation witnesses only; base change for every Noetherian T with C_u fixed to the published exchange, action square, trace square and m_{u*b}; e*b=1 and identity action at the zero section. Edge cases covered: d=0, A=0, empty S/T, disconnected P. The u+1 coefficient universe is the framework's own. No compile: no file changed; worker scompile clean in 9.5/6.2 s. Advisory: lem-trf-ambient-affine-translation-trace has this item in proof_deps but lives in the module this item imports, so stage 3 hits an import cycle; the worker listed the omitted import per stage-2 rule 7."
+ }
+}

@@ -21,9 +21,10 @@
  ],
  "proof": [
   {
-   "text": "Fix $q\\geq0$ and put $K=L[0]$. Its only nonzero cohomology is $\\mathcal H^0(K)=L$, which is constructible by hypothesis. Hence $K$ is bounded constructible by [def-weil-pbc-constructible-complexes]. No truncation is needed: the input already has amplitude $[0,0]$.",
+   "text": "Fix $q\\geq0$ and put $K=L[0]$. Its only nonzero cohomology is $\\mathcal H^0(K)=L$, which is constructible by hypothesis. Hence $K$ is bounded constructible by [def-weil-pbc-constructible-complexes]. No truncation is needed: the input already has amplitude $[0,0]$. In Lean, compare the sectionwise constant scalar action with fixedSheaf using realizationRingIso and the sheafification unit; transport along the AsSmall site equivalence. Mathlib computes the cohomology of a single-degree embedding. Off degree zero it is zero, hence constructible; in degree zero transport the given constructibility across the canonical homology isomorphism.",
    "uses": [
-    "def-weil-pbc-constructible-complexes"
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": true,
    "source": {
@@ -66,9 +67,10 @@
    }
   },
   {
-   "text": "Unfold [def-trf-oriented-constructible-sheaf] with $Y=S$ and $b=1_S$. Its finite constructible locally closed strata give the required partitions of $X$ and $S$. Its restriction maps are exactly the universal-property maps in the statement, and its trivializing coverings have constant finite $\\Lambda$-module values. These are all the requested clauses. Since $q$ was fixed arbitrarily, the partitions may depend on $q$ and no uniform vanishing assertion is used or deduced.",
+   "text": "Unfold constructibility of G_q to obtain its two finite constructible locally closed stratifications and finite-type local constancy on every normalized stratum restriction. Convert each finite locally closed stratification to Scheme.Stratification by inserting its already provided stratum-constructibility proofs, leaving its subsets, domains and immersions unchanged. For each pair of strata apply lem-trf-constructible-vanishing-canonical-strata to the actual restrictionModules morphism and this local-constancy witness. Mathlib's sheafPullbackConstruction.sheafPullbackIso proves its inverse-image presentation hypothesis. The lemma produces the covering sieve and finite constant module slice models in the exact fixed-ring presentation of the conclusion. Assemble these with the original strata and their constructibility proofs. This last step requires a presentation comparison, not just definitional unfolding.",
    "uses": [
-    "def-trf-oriented-constructible-sheaf"
+    "def-trf-oriented-constructible-sheaf",
+    "lem-trf-constructible-vanishing-canonical-strata"
    ],
    "elementary": true,
    "source": {
@@ -81,13 +83,15 @@
   "def-trf-oriented-constructible-sheaf",
   "def-trf-oriented-nearby-cycles",
   "def-weil-pbc-constructible-complexes",
+  "lem-trf-constructible-vanishing-canonical-strata",
   "lem-trf-psi-constructibility-descent",
-  "lem-trf-psi-proper-surjective-constructibility"
+  "lem-trf-psi-proper-surjective-constructibility",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/48/9291-1712.10216v7.pdf",
-  "place": "Degree-zero specialization of the proof of Theorem 4.27(2), printed p. 37, read online. Local source PDFs are WANTED; this agent-origin flag is retained until archival verification is possible."
+  "place": "The five-step proof of Lu–Zheng Theorem 4.27(2), degree-zero specialization. H7 implements componentwise finite limits and generating-cover continuity for the stratum site functor, proves bounded constructibility and the Psi-good proper-surjective descent argument, and isolates step 5 as the canonical presentation-comparison lemma."
  },
  "mathlib_searches": [
   {
@@ -186,12 +190,12 @@
    "AlgebraicGeometry.OrientedNearbyCycles.PsiGoodStrata.exists_constructible_cohomology_strata"
   ],
   "file": "lean/Sheaf/Paper/PsiGoodOrientedCohomologyStrata.lean",
-  "statement": "theorem exists_constructible_cohomology_strata {X S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (m : ℕ) (_hm : 1 ≤ m) (_hΛ : (m : Λ) = 0) (_hS : IsUnit (m : Γ(S, ⊤))) (L : (etaleDatum.{u, u + 1} X).modules (Coeff.{u, u + 1} Λ)) (_hc : Scheme.IsConstructibleEtaleModuleSheaf (etaleFixed X (Coeff Λ) L)) (_hgood : IsPsiGood f Λ (degreeZero X Λ L)) (q : ℤ) (_hq : 0 ≤ q) : ∃ (A : Scheme.LocallyClosedStratification X) (B : Scheme.LocallyClosedStratification S), (∀ a : Fin A.n, Topology.IsConstructible (A.stratum a)) ∧ (∀ b : Fin B.n, Topology.IsConstructible (B.stratum b)) ∧ ∀ (a : Fin A.n) (b : Fin B.n), ∃ R : (productSite (A.immersion a ≫ f) (B.immersion b)).topology.Cover (⊤_ (productSite (A.immersion a ≫ f) (B.immersion b)).objects), ∀ (Z : (productSite (A.immersion a ≫ f) (B.immersion b)).objects) (r : Z ⟶ ⊤_ (productSite (A.immersion a ≫ f) (B.immersion b)).objects), R r → ∃ M : ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ), Finite M ∧ Nonempty ((fixedSheaf (productSite (A.immersion a ≫ f) (B.immersion b)) (Coeff Λ) (((restrictionModules f (A.immersion a) (B.immersion b)).modulePull (Coeff Λ)).obj (cohomology f Λ L q))).over Z ≅ (constantSheaf ((productSite (A.immersion a ≫ f) (B.immersion b)).topology.over Z) (ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ))).obj M)",
+  "statement": "theorem exists_constructible_cohomology_strata {X S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (m : ℕ) (_hm : 1 ≤ m) (_hΛ : (m : Λ) = 0) (_hS : IsUnit (m : Γ(S, ⊤))) (L : (etaleDatum.{u, u + 1} X).modules (Coeff.{u, u + 1} Λ)) (_hc : Scheme.IsConstructibleEtaleModuleSheaf (etaleFixed X (Coeff Λ) L)) (_hgood : IsPsiGood f Λ (degreeZero X Λ L)) (q : ℤ) (_hq : 0 ≤ q) : ∃ (A : Scheme.Stratification X) (B : Scheme.Stratification S), (∀ a : Fin A.n, Topology.IsConstructible (A.stratum a)) ∧ (∀ b : Fin B.n, Topology.IsConstructible (B.stratum b)) ∧ ∀ (a : Fin A.n) (b : Fin B.n), ∃ R : (productSite (A.immersion a ≫ f) (B.immersion b)).topology.Cover (⊤_ (productSite (A.immersion a ≫ f) (B.immersion b)).objects), ∀ (Z : (productSite (A.immersion a ≫ f) (B.immersion b)).objects) (r : Z ⟶ ⊤_ (productSite (A.immersion a ≫ f) (B.immersion b)).objects), R r → ∃ M : ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ), Finite M ∧ Nonempty ((fixedSheaf (productSite (A.immersion a ≫ f) (B.immersion b)) (Coeff Λ) (((restrictionModules f (A.immersion a) (B.immersion b)).modulePull (Coeff Λ)).obj (cohomology f Λ L q))).over Z ≅ (constantSheaf ((productSite (A.immersion a ≫ f) (B.immersion b)).topology.over Z) (ModuleCat.{u + 1} (Coeff.{u, u + 1} Λ))).obj M)",
   "branch": "newtargets-dag",
   "by": "Q61",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The conclusion is expanded into the two recorded finite locally closed stratifications, constructible parts, and covering-sieve trivializations with finite constant module values. Canonical site/scalar transports reuse the published two-map oriented datum, constant-ring module restriction and CommRingCat-to-RingCat comparison. Coeff is the existing canonical ULift of Lambda, transported along ULift.ringEquiv; there is no new coefficient or map assumption. Named helper properties specify only the canonical transports required to type this statement."
+  "note": "The conclusion is expanded into the two recorded finite locally closed stratifications, constructible parts, and covering-sieve trivializations with finite constant module values. Canonical site/scalar transports reuse the published two-map oriented datum, constant-ring module restriction and CommRingCat-to-RingCat comparison. Coeff is the existing canonical ULift of Lambda, transported along ULift.ringEquiv; there is no new coefficient or map assumption. Named helper properties specify only the canonical transports required to type this statement. Restoration by T8: replace the retired LocallyClosedStratification abbreviation by its defining Scheme.Stratification, preserving the elaborated statement. The explicit constructibility conjuncts remain. upContinuous is proved using Mathlib site equivalence."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -201,5 +205,26 @@
   "result": "pass",
   "note": "Statement matches the node clause by clause: Noetherian S as IsLocallyNoetherian+CompactSpace, f of finite presentation as LOFP+QC+QS, finite Lambda with m invertible on S, L constructible via the recorded IsConstructibleEtaleModuleSheaf after canonical transport only, IsPsiGood on L[0], q>=0 bound before the existential partitions, two LocallyClosedStratifications with constructible strata, covering sieves of the terminal triple with finite constant module values. restrictSite (Comma.map with etaleBaseChangeComp) checked by hand as the canonical ILO XI 1.9 stratum site functor; its equality with the universal-property lift is stated only in a docstring, which is acceptable because the two maps are canonically isomorphic. Lambda in Type (u+1) is forced by the recorded constructible-sheaf predicate and openly documented, not a hidden restriction. The 3 postponed transport properties are true and documented. No hollow definitions, only sorry proofs, all 15 declarations listed, no duplicate notion, no pro-etale substitute, statement field verbatim, item statement text unchanged, report has worker and second-reading sections. nt_compile --json at the library path: the first 3 attempts timed out on the dependency OrientedPointCohomology under load ~160; the next attempt compiled PsiGoodOrientedCohomologyStrata cleanly in 7.0 s with no errors or warnings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261024T190023-L-3852392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

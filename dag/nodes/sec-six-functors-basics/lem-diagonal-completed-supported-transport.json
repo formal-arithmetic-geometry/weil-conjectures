@@ -1,0 +1,122 @@
+{
+ "id": "lem-diagonal-completed-supported-transport",
+ "kind": "statement",
+ "title": "Supported-source transport through normalized coefficient squares",
+ "statement": "Let l be prime, Y any scheme, P=P1_Y and W=P times_Y P with the specified DiagonalTraceLocalizations. Fix CompletedRealizations eP and eW and an ordinary completed coefficient square sDelta at the diagonal. Define i:eW(Delta_* completed-unit) isomorphic to Delta_* condensed-unit to be sDelta at the completed regular unit followed by direct image of eP.unitIso. This i satisfies the underlying-sheaf source normalization of [def-sfb-diagonal-coefficient-reference]. For every f:W to P, completed right-derived model R, normalized acyclic SupportedSource a for f and ordinary coefficient square s for f, there is a condensed NormalizedSource b for the canonical right-derived functor. Mapping a.hom by eP, then the derived square s.derive and the single-object comparison of i, equals eP.singleUnit followed by b.hom. The equality is for the full universal-unit derived square, not an unspecified comparison.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-diagonal-completed-push-square",
+  "lem-diagonal-canonical-right-derived",
+  "det-prop-diagonal-tower-trace"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1); initial coefficient and supported-source identification, expanded in lem-diagonal-completed-frame proof"
+ },
+ "proof": [
+  {
+   "text": "Form the supported-source isomorphism explicitly from the ordinary diagonal square and the regular-unit isomorphism. Its underlying-sheaf normalization is proved by cancelling the image of the regular-module underlying isomorphism in the ordinary square normalization.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For f, conjugate the normalized completed supported-source isomorphism by eP.unitIso, the ordinary square at f and the image of i. On underlying sheaves, its inverse is the canonical direct-image composition map, then Delta f=id, then the identity direct-image map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the full universal-unit normalization of s.derive at the single complex of the completed supported source. Naturality of the single-complex comparisons gives the required derived source equation. Exact equivalences preserve the old acyclicity and all the remaining comparison maps are invertible, so the condensed single derived unit is invertible. This supplies b. No trace or integration morphism is used.",
+   "uses": [
+    "lem-diagonal-completed-push-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-completed-push-square"
+ ],
+ "proof_origin": {
+  "by": "K3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), detailed construction following the proof of lem-diagonal-completed-frame"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence between modules over isomorphic ring sheaves preserves direct images and the canonical derived unit on acyclic objects",
+   "results": "Eight hits, including ModuleCat.restrictScalarsEquivalenceOfRingEquiv and SheafOfModules.pushforwardSections_unitHomEquiv; no complete normalized sheaf comparison.",
+   "date": "2026-10-26",
+   "verdict": "Existing scalar and module APIs are tools; the normalized coefficient statements are absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence commuting with ordinary direct image transports its normalized acyclic degree zero supported source through the derived functor universal unit",
+   "results": "Eight hits, including Functor.mapDerivedCategoryFactors, mapDerivedCategorySingleFunctor and Abelian.Ext.mapExactFunctor_hom. No supported-source or completed-coefficient existence theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing exact-derived and single-object comparison APIs for the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "CompletedRealization|CompletedOrdinarySquare|NormalizedSource|restrictScalarsEquivalence",
+   "results": "Local rg of both library roots found the definitions and the original frame hole, but no realization or ordinary-square existence theorem. Mathlib supplies general scalar restriction and exact-derived APIs. DAG search found no duplicate normalized comparison statement.",
+   "date": "2026-10-26",
+   "verdict": "These separate construction steps are not already declared."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalCompletedFrame",
+  "date": "2026-10-26",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), initial coefficient and supported-source identification",
+   "via": [
+    "lem-diagonal-completed-frame"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedSupportedCoefficientTransport",
+  "file": "lean/Sheaf/Paper/CompletedSupportedCoefficientTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedSupportedCoefficient_transport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedSupportedCoefficient_transport",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedSupportedCoefficientIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedSupportedCoefficientIso_normalization"
+  ],
+  "statement": "theorem completedSupportedCoefficient_transport (l : ℕ) [Fact l.Prime]\n    (Y : Scheme.{u})\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (eP : CompletedRealization l (ProjectiveLine Y))\n    (eW : CompletedRealization l (diagonalSurface Y))\n    (sΔ : CompletedOrdinarySquare l (diagonalImmersion Y) eP eW) :\n    let i := completedSupportedCoefficientIso l Y eP eW sΔ\n    ∀ (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n      (R : DiagonalRightDerived (diagonalTracePush l f))\n      (a : DiagonalTrace.SupportedSource l Y f R)\n      (s : CompletedOrdinarySquare l f eW eP),\n      let R' := canonicalDiagonalRightDerived\n        (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)\n      ∃ b : DiagonalTrace.NormalizedSource\n          (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)\n          R'\n          (source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y)\n          (Mod.regular (condensedRingObj\n            (Profinite.continuousMapRingObj.{u} ℤ_[l]) (ProjectiveLine Y)))\n          (diagonalImmersion Y ≫ f = 𝟙 _)\n          (SupportNormalization (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y f),\n        eP.F.mapDerivedCategory.map a.hom ≫\n            (s.derive (R := R) (R' := R')).derived.iso.hom.app _ ≫\n            R'.R.map\n              ((eW.F.mapDerivedCategorySingleFunctor 0).hom.app _ ≫\n                (DerivedCategory.singleFunctor\n                  (Modules (Profinite.continuousMapRingObj.{u} ℤ_[l])\n                    (diagonalSurface Y)) 0).map i.hom) =\n          eP.singleUnit l (ProjectiveLine Y) ≫ b.hom",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T183249-L-3697987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261026T183249-L-3697987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

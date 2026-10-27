@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-sl2-cubic-gauss-identity",
+ "kind": "statement",
+ "title": "The rank-one cubic relation gives Gauss identities in an affine group",
+ "statement": "Let $A$ be a nonzero commutative ring and $H$ an affine group scheme over $\\operatorname{Spec}A$, meaning an affine scheme with multiplication, identity and inverse satisfying the group diagrams, as in [def-sfb-pinned-split-root-realization]. Write $\\mathbf G_a(R)=(R,+)$ and $\\mathbf G_m(R)=R^\\times$ for every commutative $A$-algebra $R$. Suppose $x:\\mathbf G_a\\to H$ and $d:\\mathbf G_m\\to H$ are group-scheme homomorphisms and $h\\in H(A)$ satisfies, on all such $R$,\n$$d(t)x(u)d(t)^{-1}=x(t^2u),\\quad h d(t)h^{-1}=d(t^{-1}),\\quad h^2=d(-1),\\quad(hx(1))^3=1.$$\nDefine $y:\\mathbf G_a\\to H$ by $y(v)=h x(-v)h^{-1}$. For every $R$ and $u,v\\in R$ with $w=1+uv\\in R^\\times$, one has\n$$x(u)y(v)=y(v/w)d(w)x(u/w),\\qquad y(v)x(u)=x(u/w)d(w)^{-1}y(v/w).$$\nOne also has $h=x(1)y(-1)x(1)$. All equations are identities of scheme morphisms on their indicated domains, including the domain $\\operatorname{Spec}A[u,v,(1+uv)^{-1}]$ for the two Gauss identities. No invertibility of $u$ or $v$, characteristic restriction, reducedness or Noetherian assumption is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 6.2.4 proof, printed pp.202--203, final reduction to the explicit SL2 calculation: the polynomial Gauss identities and the value of the Weyl element, before extending the open-cell map. Agent formulation of the input omitted in the online proof; local archival copy WANTED. No Stacks tag states this root-system/group-scheme calculation. No other source is invoked."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Use the group-scheme operations of [def-sfb-pinned-split-root-realization]. Thus $x(a+b)=x(a)x(b)$, $x(-a)=x(a)^{-1}$, and the same formulas hold for $y$, since it is conjugation of $x(-v)$. Also $d(ab)=d(a)d(b)$. The torus relations give\n$$d(t)y(v)d(t)^{-1}=h d(t^{-1})x(-v)d(t)h^{-1}=y(t^{-2}v).$$\nHere $d(t)h=h d(t^{-1})$, obtained from the assumed conjugation by $h$. These are equalities over every $A$-algebra, with only $t$ required to be a unit.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4, equations (6.2.2)--(6.2.4), printed pp.201--203: agent-supplied explicit rank-one calculation omitted in the source. No SGA source used."
+   }
+  },
+  {
+   "text": "Put $X=x(1)$ and $z=h^2=d(-1)$. Since $(-1)^2=1$, the torus action says that $z$ commutes with every $x(a)$, and $z^2=1$; as a power of $h$, it also commutes with $h$. From $(hX)^3=1$ one gets $XhXhX=h^{-1}$. Therefore\n$$x(1)y(-1)x(1)=XhXh^{-1}X=z^{-1}XhXhX=z^{-1}h^{-1}=h,$$\nthe last equality following from $h^4=z^2=1$. This proves the Weyl-element assertion over $A$ and after every base change.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4, equations (6.2.2)--(6.2.4), printed pp.201--203: agent-supplied explicit rank-one calculation omitted in the source. No SGA source used."
+   }
+  },
+  {
+   "text": "For subsequent equality reflection, write the affine scheme $H$ as $\\operatorname{Spec}C$, using [def-pc-scheme]. The affine-spectrum correspondence [def-weil-affine-spectrum] identifies $H(R)$ with $\\operatorname{Hom}_{A\\text{-alg}}(C,R)$. If $j:R\\hookrightarrow B$ is injective and two such maps become equal after composition with $j$, their values on each $c\\in C$ were equal already. Consequently $H(R)\\to H(B)$ is injective. This is coordinatewise cancellation, without a reducedness assumption. If $R$ is the zero ring, $H(R)$ is a singleton, so all assertions there hold automatically.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4, equations (6.2.2)--(6.2.4), printed pp.201--203: agent-supplied explicit rank-one calculation omitted in the source. No SGA source used."
+   }
+  },
+  {
+   "text": "Let $R$ be a nonzero $A$-algebra and $t\\in R^\\times$. Set $B=R[S]/(S^2-t)$ and let $s$ be the class of $S$. The monic-quotient basis of [lem-weil-pbc-monic-quotient-free], applied to this monic degree-two polynomial, gives the basis $(1,s)$. Hence $R\\to B$ is injective: the coordinate of $r\\cdot1$ along $1$ is $r$. Moreover $s$ is a unit with inverse $t^{-1}s$. Conjugate step 2 by $d(s)$ in $H(B)$, using step 1:\n$$x(t)y(-t^{-1})x(t)=d(s)h d(s)^{-1}=d(s^2)h=d(t)h.$$\nThe penultimate equality uses $h d(s)^{-1}=d(s)h$. Step 3 reflects this equality back to $H(R)$. Thus, for every unit $t$, put $N(t)=x(t)y(-t^{-1})x(t)=d(t)h$. In particular\n$$N(a)d(b)=d(b)^{-1}N(a)=N(a/b)\\quad(a,b\\in R^\\times).$$",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4, equations (6.2.2)--(6.2.4), printed pp.201--203: agent-supplied explicit rank-one calculation omitted in the source. No SGA source used."
+   }
+  },
+  {
+   "text": "First suppose $v$ and $w=1+uv$ are units. The definition of $N(-v^{-1})$ in step 4 gives\n$$y(v)=x(v^{-1})N(-v^{-1})x(v^{-1}).$$\nApply the same formula to $v/w$. Moving $d(w)$ past the adjacent $x$ by the assumed torus relation, and then using $N(a)d(w)=N(a/w)$, yields the explicit calculation\n$$\\begin{aligned}\ny(v/w)d(w)x(u/w)\n&=x(w/v)N(-w/v)x(w/v)d(w)x(u/w)\\\\\n&=x(w/v)N(-w/v)d(w)x(1/(wv))x(u/w)\\\\\n&=x(w/v)N(-1/v)x(1/(wv)+u/w)\\\\\n&=x(u+1/v)N(-1/v)x(1/v)\\\\\n&=x(u)y(v).\n\\end{aligned}$$\nHere $w/v=u+1/v$ and $1/(wv)+u/w=1/v$. Every division displayed is legitimate under precisely the temporary assumptions that $v,w$ are units; $u$ need not be a unit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4, equations (6.2.2)--(6.2.4), printed pp.201--203: agent-supplied explicit rank-one calculation omitted in the source. No SGA source used."
+   }
+  },
+  {
+   "text": "Remove the temporary condition on $v$ universally. Put $P=A[U,V]$ [def-weil-polynomial-ring], $W=1+UV$, and $D=P[W^{-1}]$. Multiplication by $V$ on $P$ is injective: its coefficient at $U^iV^{j+1}$ is the original coefficient at $U^iV^j$. If $V(p/W^m)=0$ in $D$, the fraction equality in [def-weil-ring-localization-away] gives $W^nVp=0$ in $P$ for some $n$. Cancel $V$ to get $W^np=0$, which says $p/W^m=0$. Thus $V$ is a non-zero-divisor on $D$, and the same fraction criterion makes $D\\to D[V^{-1}]$ injective. Step 5 proves the first identity in $H(D[V^{-1}])$ for $u=U,v=V$. Step 3 therefore proves it in $H(D)$. For any $A$-algebra $R$ and $u,v\\in R$ with $1+uv$ a unit, the polynomial evaluation followed by [lem-weil-pbc-ring-localization-universal-property] defines $D\\to R$, $U\\mapsto u$, $V\\mapsto v$, $W^{-1}\\mapsto(1+uv)^{-1}$. Naturality gives the first identity in $H(R)$. Its equality in $H(D)$ is also the required equality of morphisms $\\operatorname{Spec}D\\to H$.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4, equations (6.2.2)--(6.2.4), printed pp.201--203: agent-supplied explicit rank-one calculation omitted in the source. No SGA source used."
+   }
+  },
+  {
+   "text": "In the first identity replace $(u,v)$ by $(-u,-v)$; its denominator remains $w=1+uv$. Invert both sides, using the additive-group inverse formulas from step 1. This gives\n$$y(v)x(u)=x(u/w)d(w)^{-1}y(v/w).$$\nThe same operation on the universal equality over $D$ proves the second equality of scheme morphisms. Step 2 already proved the assertion about $h$. All displayed maps are built from $x,y,d,h$ and the group operations, with the only inverted function on the Gauss domain being $W$; hence every clause holds on its stated domain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.2.4, equations (6.2.2)--(6.2.4), printed pp.201--203: agent-supplied explicit rank-one calculation omitted in the source. No SGA source used."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-ring-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Theorem 6.2.4, equations (6.2.2)--(6.2.4), printed pp.201--203: agent-supplied explicit rank-one calculation omitted in the source. No SGA source used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms from additive and multiplicative group schemes with a Weyl element and cubic relation imply SL2 Gauss multiplication identity",
+   "results": "{\"t\": \"2026-10-24T11:57:02Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms from additive and multiplicative group schemes with a Weyl element and cubic relation imply SL2 Gauss multiplication identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isSl2Triple\", \"UpperHalfPlane.σ_mul\", \"EisensteinSeries.D2_mul\", \"ModularGroup.T_mul_apply_one\", \"EisensteinSeries.vecMul_SL2_mem_gammaSet\", \"RootPairing.GeckConstruction.ω_mul_f\", \"ModularGroup.T_pow_mul_apply_one\", \"ModularGroup.smul_eq_lcRow0_add\"], \"digest\": \"39043721551bd2b3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra sl2 triples, real Mobius actions, integer modular generators and Gauss sums do not give these identities for homomorphisms of group schemes over arbitrary rings."
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss|cubic|presentation|unipotent",
+   "results": "{\"t\": \"2026-10-24T12:00:39Z\", \"tool\": \"grep\", \"query\": \"Gauss|cubic|presentation|unipotent\", \"sub\": \"LinearAlgebra/Matrix/SpecialLinearGroup.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra sl2 triples, real Mobius actions, integer modular generators and Gauss sums do not give these identities for homomorphisms of group schemes over arbitrary rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cubic Weyl element relation and torus equivariant additive homomorphism imply the rank one Gauss relation in a group scheme",
+   "results": "{\"t\": \"2026-10-24T12:00:39Z\", \"tool\": \"leansearch\", \"query\": \"A cubic Weyl element relation and torus equivariant additive homomorphism imply the rank one Gauss relation in a group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"gaussSum\", \"gaussSum_mulShift\", \"RootPairing.weylGroupToPerm\", \"RootPairing.weylGroupCorootRep\", \"gaussSum_mul_gaussSum_pow_orderOf_sub_one\", \"mul_gaussSum_inv_eq_gaussSum\", \"RootPairing.weylGroupRootRep\", \"RootPairing.range_weylGroup_coweightHom\"], \"digest\": \"50e823227c0b8622\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra sl2 triples, real Mobius actions, integer modular generators and Gauss sums do not give these identities for homomorphisms of group schemes over arbitrary rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\"",
+   "results": "{\"t\": \"2026-10-24T12:00:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.«term_ᵀ»\", \"Matrix.SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.hasInv\", \"Matrix.SpecialLinearGroup.hasMul\", \"Matrix.SpecialLinearGroup.hasOne\", \"Matrix.SpecialLinearGroup.instGroup\", \"Matrix.SpecialLinearGroup.instInhabited\", \"Matrix.SpecialLinearGroup.monoid\"], \"digest\": \"723505ce3191821f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra sl2 triples, real Mobius actions, integer modular generators and Gauss sums do not give these identities for homomorphisms of group schemes over arbitrary rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presentation of SL2 homomorphisms by an additive root map a torus map and Weyl element satisfying n squared equals h minus one and n x one cubed equals one",
+   "results": "{\"t\": \"2026-10-24T12:00:40Z\", \"tool\": \"leanfinder\", \"query\": \"Presentation of SL2 homomorphisms by an additive root map a torus map and Weyl element satisfying n squared equals h minus one and n x one cubed equals one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isSl2Triple\", \"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_ne_zero\", \"ModularGroup.coeHom\", \"SpecialLinearGroup.SL2Z_generators\", \"ModularGroup.g_eq_of_c_eq_one\", \"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_eq_zero\", \"ModularGroup.T\", \"ModularGroup.S\"], \"digest\": \"e3dbe52e91599d66\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra sl2 triples, real Mobius actions, integer modular generators and Gauss sums do not give these identities for homomorphisms of group schemes over arbitrary rings."
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss|cubic|presentation|unipotent",
+   "results": "{\"t\": \"2026-10-24T12:24:41Z\", \"tool\": \"grep\", \"query\": \"Gauss|cubic|presentation|unipotent\", \"sub\": \"LinearAlgebra/Matrix/SpecialLinearGroup.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root systems or Lie algebra sl2 triples and definitions of SL2, not this relation-level statement for arbitrary affine group schemes over rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cubic Weyl relation and root torus conjugation imply Gauss decomposition for group schemes over rings",
+   "results": "{\"t\": \"2026-10-24T12:24:42Z\", \"tool\": \"leansearch\", \"query\": \"A cubic Weyl relation and root torus conjugation imply Gauss decomposition for group schemes over rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.weylGroup\", \"RootPairing.weylGroup_apply_root\", \"RootPairing.weylGroupRootRep\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.weylGroup.induction'\", \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.weylGroupToPerm\"], \"digest\": \"84e9c0d071906a68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root systems or Lie algebra sl2 triples and definitions of SL2, not this relation-level statement for arbitrary affine group schemes over rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\"",
+   "results": "{\"t\": \"2026-10-24T12:24:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.«term_ᵀ»\", \"Matrix.SpecialLinearGroup\", \"Matrix.SpecialLinearGroup.hasInv\", \"Matrix.SpecialLinearGroup.hasMul\", \"Matrix.SpecialLinearGroup.hasOne\", \"Matrix.SpecialLinearGroup.instGroup\", \"Matrix.SpecialLinearGroup.instInhabited\", \"Matrix.SpecialLinearGroup.monoid\"], \"digest\": \"723505ce3191821f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root systems or Lie algebra sl2 triples and definitions of SL2, not this relation-level statement for arbitrary affine group schemes over rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Torus equivariant additive group scheme homomorphisms and a Weyl element satisfying the cubic relation imply rank one Gauss identities",
+   "results": "{\"t\": \"2026-10-24T12:24:43Z\", \"tool\": \"leanfinder\", \"query\": \"Torus equivariant additive group scheme homomorphisms and a Weyl element satisfying the cubic relation imply rank one Gauss identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.EmbeddedG2.ofPairingInThree\", \"RootPairing.EmbeddedG2.ofPairingInThree_short\", \"RootPairing.EmbeddedG2.pairingIn_shortAddLong_right\", \"RootPairing.EmbeddedG2.long_eq_three_mul_short\", \"RootPairing.EmbeddedG2.shortAddLongRoot_eq\", \"RootPairing.isG2_iff\", \"RootPairing.IsG2.toEmbeddedG2\", \"RootPairing.EmbeddedG2.pairingIn_threeShortAddLong_left\"], \"digest\": \"a637be22449c9ecd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root systems or Lie algebra sl2 triples and definitions of SL2, not this relation-level statement for arbitrary affine group schemes over rings."
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss.*decompos|gauss.*decompos|cubic.*relation|Weyl.*relation|weyl.*relation",
+   "results": "{\"t\": \"2026-10-24T12:25:28Z\", \"tool\": \"grep\", \"query\": \"Gauss.*decompos|gauss.*decompos|cubic.*relation|Weyl.*relation|weyl.*relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root systems or Lie algebra sl2 triples and definitions of SL2, not this relation-level statement for arbitrary affine group schemes over rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine group scheme with additive root subgroup weight two diagonal torus and order three Weyl product satisfies x u y v equals y v over one plus u v times d one plus u v times x u over one plus u v",
+   "results": "{\"t\": \"2026-10-24T12:25:30Z\", \"tool\": \"leanfinder\", \"query\": \"An affine group scheme with additive root subgroup weight two diagonal torus and order three Weyl product satisfies x u y v equals y v over one plus u v times d one plus u v times x u over one plus u v\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.EmbeddedG2.shortAddLongRoot\", \"RootPairing.EmbeddedG2.shortAddLongRoot_eq\", \"RootPairing.GeckConstruction.ω_mul_f\", \"RootPairing.EmbeddedG2.pairingIn_shortAddLong_right\", \"RootPairing.EmbeddedG2.pairingIn_threeShortAddLong_right\", \"RootPairing.EmbeddedG2.threeShortAddLongRoot_eq\", \"RootPairing.EmbeddedG2.pairingIn_threeShortAddLong_left\"], \"digest\": \"c7af339064cd6a09\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root systems or Lie algebra sl2 triples and definitions of SL2, not this relation-level statement for arbitrary affine group schemes over rings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simple-root-weyl-transport",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Small centralizers and their homomorphism amalgamation. Supporting input: Theorem 6.2.4, printed pp.201--203, with identities (6.2.2)--(6.2.6) and the uniqueness paragraph immediately before them. This is the relation-level theorem, prior to Corollary 6.2.7. Supporting argument: Theorem 6.2.4 proof, printed pp.202–203: Weyl-word construction of all-root maps, its Tits root-system compatibility input, and the rank-one centralizer calculation. Read Conrad online; local archival PDF WANTED. This node states the omitted compatibility argument as a separate obligation; no other source is invoked. No Stacks tag states this reductive-group result. Supporting input: Theorem 6.2.4 proof, printed pp.202--203, final reduction to the explicit SL2 calculation: the polynomial Gauss identities and the value of the Weyl element, before extending the open-cell map.",
+   "via": [
+    "lem-sfb-simple-root-weyl-transport",
+    "lem-sfb-pinned-root-relations-hom-criterion",
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-cubic-gauss-identity",
+  "worker": "stage1",
+  "summary": "Q05 supplies the omitted rank-one calculation without changing the statement. The cubic relation gives the Weyl word; an existing monic-quotient Mathlib leaf permits adjoining a square root of each unit with an injective scalar map. Explicit word algebra proves Gauss when v is a unit; coordinatewise cancellation over the universal localization removes that condition, and inversion gives the reverse identity. No new nodes, no Lean or compilation.",
+  "blueprint": "Retains the inherited from.place chain through det-thm-sf-ctf-stability-direct-images (3); realizes the final supporting input, Conrad Theorem 6.2.4, pp.202--203, explicit SL2 calculation before open-cell extension. The ancestor tool reports from.node = null for this pre-existing created-node chain. Latest blueprint ef6f9619fdbffa59e88528fb56483d76c70258c8 was read; no cubic/Gauss/Weyl blueprint duplicate was found."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-4aec45648",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-4aec45648 (reviewer sub-agent of L); spot-checked: Read the whole item, the report and all 7 cited statements. The statement is byte-identical to the unsplit version. The 3 added stmt_deps (affine spectrum, polynomial ring, localization away) are used by Spec A[u,v,(1+uv)^{-1}]. Conrad Thm 6.2.4 is not in literature/: WANTED is recorded and proof_origin=agent, so I checked the mathematics directly. SL2 matrix check: y(v) is lower unipotent, hX has order 3, x(1)y(-1)x(1)=h, x(u)y(v)=[[w,u],[v,1]] and y(v)x(u)=[[1,u],[v,w]] match both Gauss right-hand sides. Steps: (1) d(t)h=h d(t^{-1}) gives d y d^{-1}=y(t^{-2}v). (2) z=d(-1) is central with z^2=1, XhXhX=h^{-1}, so the word equals h^{-3}=h. (3) H=Spec C, so an injective R->B gives an injective H(R)->H(B). (4) The monic-quotient Mathlib leaf gives the basis (1,s); conjugating by d(s) gives N(t)=x(t)y(-1/t)x(t)=d(t)h, checked in SL2, and N(a)d(b)=N(a/b). (5) Checked the fraction identities w/v=u+1/v and 1/(wv)+u/w=1/v. (6) V is a non-zero-divisor on A[U,V] and on D=P[W^{-1}]; D->D[V^{-1}] is injective and D[V^{-1}] is nonzero; specialization uses the localization Mathlib leaf. (7) The (-u,-v) substitution plus inversion gives the second identity. Edge cases u=0, v=0, the zero ring and characteristic 2 are covered. Minor point: the polynomial-ring node is one-variable, so A[U,V] is read as A[U][V]; this is elementary and I made no change. The parent simple-root-weyl-transport step 6 uses exactly this statement. Not a duplicate of sl2-lifted-root-gauss-relations (central extension), rank-one-normalized-gauss-chart (reductive H), or relative-sl2-central-extension-splitting and fppf-local-two-unit-decomposition. There are no new nodes. Cited nodes are definitions or Mathlib leaves, so there is no route issue and no tool_uses. Searches cover all three kinds."
+ }
+}

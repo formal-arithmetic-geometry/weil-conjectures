@@ -1,0 +1,37 @@
+## Worker report
+
+Files written:
+- dag/nodes/sec-six-functors-basics/lem-sfb-coideal-coinvariant-projection.json: statement item, now split; no Mathlib match.
+- citations.json: verbatim statement excerpts for all six step/node citations.
+- searches.jsonl: five new searches run through the required msearch.py command, with their actual results.
+- report.md: this report.
+
+No new nodes; no new Mathlib leaves. No attachments. Nothing remains unfinished in this split.
+
+WANTED: Julien Bichon, Faithful flatness of Hopf algebras over coideal subalgebras with a bimodule conditional expectation, arXiv:2301.05480v2, Lemma 2.6 and Proposition 2.2, for lem-sfb-coideal-coinvariant-projection. The named local PDF is absent. I read the author's HTML at https://arxiv.org/html/2301.05480v2, especially sections 2.1, 2.2 and 2.4. I have marked proof_origin.by as agent because the local document is unavailable and I supply the tensor calculation behind the source's diagram explicitly.
+
+The imported statement needs no correction. Its empty proof is replaced by five steps. The main input is the existing canonical tensor isomorphism, including its naturality for H-linear maps. The other input supplies the quotient coalgebra, action, coassociativity and compatible relative Hopf module structure. The proof does not require faithful flatness, exactness of tensoring, a finite-dimensional Hopf algebra, a finite group, a comodule-compatible E, or an antipode-stable subalgebra A.
+
+The project Lean search by the exact blueprint tag and by coideal, HopfModule, conditional expectation and coinvariant terminology found no declaration stating this item. The related project files concern Hopf ideals or geometric representation coinvariants. The imported Mathlib searches were retained. Five additional required-command searches are recorded literally in the item and searches.jsonl. The first semantic phrasing returned Hopf structural identities. The second returned group representation coinvariants and finite-group averaging. Loogle with Comodule and coinvariant returned no hits; the RingTheory grep returned no hits. LeanSearch returned Beck equalizer results. I read Mathlib/CategoryTheory/Monad/Equalizer.lean and Mathlib/RingTheory/HopfAlgebra/Basic.lean: their statements do not supply this coideal-module projection from E. The averaging hit explicitly requires a finite group and invertible order, which are absent here. No hit is an exact theorem or a one-line specialization for this item.
+
+Blueprint searches for coinvariant and coideal found no matching imported statement (four coinvariant results concern group representation quotients or curve cohomology). The full-DAG search for the same concepts and Bichon/arXiv identifier found the already existing coideal cluster, which is reused. I read the current latest/main-20261024 unit and direct-images proof. The inherited chain is a supporting algebra input below its proof (3), not a replacement of a unit step. The item's existing nearest-blueprint record has node null; blueprint_refs.py ancestor confirms that value. I retained it and its precise inherited place, and filled same_as with the searched empty result. No unit or chapter record is modified.
+
+## Not duplicates
+
+No new node is proposed. In particular, the coassociativity comparison stays an explicit step using the existing isomorphism rather than becoming another coideal-projection statement. The relative-module and canonical-isomorphism nodes are inputs, not duplicated.
+
+## Review by Q68
+
+I read the worker brief, stage-1 contract, SETUP's three levels, GOAL, and both copies of delivery-errors B--E. For the item I read Bichon's Lemma 2.6 online, together with the quotient setup and Proposition 2.2. There are no new-node sources to check. The source's projection diagram is expanded rather than cited as an unexplained commutation. The statement is unchanged, and there is no statement dispute.
+
+For step 1 I opened lem-sfb-relative-hopf-module-kernels and checked that its statement supplies the Hopf counit identities, quotient ideal, action h.pi(t)=pi(ht), and the compatibility formula making alpha H-linear for the diagonal action. I opened lem-sfb-coideal-canonical-tensor-isomorphism and checked that its statement supplies exactly that diagonal action on Z=C tensor X and the isomorphism used in beta. The computation a.(g tensor x)=g tensor ax uses that Delta(a)'s FIRST factors lie in A, exactly the right coideal hypothesis. E is both left and right A-linear because H and A are commutative; no bimodule hypothesis was silently added. This validates all the balanced tensor maps used afterwards.
+
+For step 2 the canonical-isomorphism node explicitly gives an isomorphism for EVERY left H-module, so it applies to Z as well as X. It also explicitly gives naturality for H-linear maps, which applies to alpha by step 1. The other cited node explicitly gives Delta_C pi=(pi tensor pi) Delta and the coassociativity axiom for alpha. The pure-tensor computation of kappa_Z nu is written out; it uses the quotient action on g, not an unstated identification of complexes. Injectivity follows from the cited isomorphism. This is the only non-elementary step; it uses a substantive previously stated theorem and has fewer than 2000 characters.
+
+For step 3 the relative-module node's statement explicitly defines R(X) by alpha(x)=g tensor x and says it is an A-submodule. Applying the E-contraction to the two sides of the equality in step 2 is evaluated on pure tensors on both sides. The equality alpha(E(h)x)=E(h)alpha(x) uses the H-linearity already established, not a coaction assumption on E. Thus the codomain restriction is justified, and its A-linearity follows from the actual balanced maps.
+
+For step 4 the canonical-isomorphism node explicitly gives the value of kappa on 1 tensor r, hence its inverse on g tensor r. E(1)=1 follows from its given restriction to A. This proves the left-inverse identity as an equality in the submodule, not merely an idempotence assertion about an unknown image. Step 5 is elementary: its tensor composite is evaluated on every pure tensor, then a left inverse proves injectivity. It invokes no flatness theorem. The displayed formula for p agrees with the original statement through the tensor unitor A tensor_A X=X.
+
+I checked small and degenerate cases: X=0 gives the unique zero map and the identity of the zero module; A=H gives C=k and p=id; H=A=k does the same. For H=k[t,t^{-1}], A=k[t^n,t^{-n}], X=H with its induced quotient coaction, the formula on a monomial gives E(t^r), lying in A, even for an A-linear retraction E which is not coaction-compatible. This also works when the characteristic divides n, so the argument is not finite-group averaging in disguise. When A=k the projection is only claimed k-linear, not H-linear, as required.
+
+Against B--E: no new statements, hidden proof sketches, duplicate nodes, extraneous hypotheses, missing non-elementary facts, or unsourced comparison remain. Every step citation has a verbatim quote from the opened node statement in citations.json. The proof dependencies are their exact union. The argument only cites the two existing nodes already needed to state the item, so it introduces no off-route tool use and no backward edge. No step exceeds 2000 characters. All writes are confined to this sandbox; no Lean, compiler, Lake or repository git command was run.

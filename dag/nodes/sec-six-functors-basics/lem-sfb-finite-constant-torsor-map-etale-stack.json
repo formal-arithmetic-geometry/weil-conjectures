@@ -1,0 +1,354 @@
+{
+ "id": "lem-sfb-finite-constant-torsor-map-etale-stack",
+ "kind": "statement",
+ "title": "Etale descent for finite constant-group torsors with equivariant maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], let $H$ be a finite abstract group, and let $V$ be an arbitrary $S$-scheme with a left $H$-action by $S$-automorphisms. For an $S$-scheme $T$, let $H_T=\\coprod_{h\\in H}T$ with multiplication induced by that of $H$. A left $H_T$-torsor is a $T$-scheme $P\\to T$ with a left $H_T$-action which becomes equivariantly isomorphic to $H_{T_i}$ with left translation after some jointly surjective family of etale maps $T_i\\to T$ [def-weil-etale-morphism]. Let $\\mathcal T_V(T)$ have objects $(P,f)$ consisting of such a torsor and an $H$-equivariant $S$-morphism $f:P\\to V$. Its arrows are $H_T$-equivariant $T$-isomorphisms $b:P\\to P'$ satisfying $f' b=f$. Pullback along $T'\\to T$ is by scheme fibre product [def-pc-fibre-product], with the induced action and map. Then $\\mathcal T_V$ is a stack in groupoids for the etale topology: for any two objects over $T$, the presheaf of their isomorphisms on $S$-schemes over $T$ is a sheaf for jointly surjective etale families; and for every such family $\\{T_i\\to T\\}$, any objects $(P_i,f_i)$ with overlap isomorphisms $b_{ij}$ satisfying $b_{jk}b_{ij}=b_{ik}$ on triple overlaps are restrictions of an object $(P,f)$ over $T$, via isomorphisms inducing the specified $b_{ij}$. Stack and groupoid have the conventions of [def-sfb-stable-pointed-moduli-groupoids]. No freeness of the action on $V$, finite-type hypothesis on $V$ or $S$, or invertibility of $|H|$ is required.",
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 0370 (lemma-group-quotient-stack-in-groupoids), its descent argument for torsors with equivariant maps; Tag 0BLZ (lemma-finite-etale-stack) supplies effective descent of the finite etale torsor schemes. Etale-site finite constant-group specialization over arbitrary S."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-etale-scheme-action-torsor-groupoid"
+ ],
+ "proof": [
+  {
+   "text": "Pullback preserves the torsor condition: pull a trivializing etale family back along $T'\\to T$ and use the canonical fibre-product identifications. The pulled-back family is still jointly surjective etale. Pullback of the map to $V$ is its composite with the projection to $P$; it is equivariant. An equivariant isomorphism and its inverse pull back to equivariant isomorphisms respecting that map. The universal property of fibre products supplies the unit and associativity comparisons, whose coherence follows because both composites have the same projections. Thus these groupoids and pullbacks give a category fibred in groupoids in the convention stated in the item.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-pc-fibre-product",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0370, construction preceding lemma-group-quotient-stack-in-groupoids; cartesian pullbacks"
+   }
+  },
+  {
+   "text": "For any jointly surjective etale family $\\{T_i\\to T\\}$, apply the fpqc-covering lemma with ambient small etale site $T_{\\mathrm{Et}}$ and object $\\mathrm{id}_T$. It is therefore an fpqc family. Its pullback along any scheme map is again a jointly surjective etale family, hence fpqc by the same argument. In particular this applies to $P\\times_TT_i\\to P$ for every $T$-scheme $P$. Compatible maps from these schemes to any fixed scheme glue uniquely by representable fpqc descent. If the maps are over a base, their composite with that base equals the required structure map because this equality holds on the cover and gluing is unique.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q, lemma-fpqc-universal-effective-epimorphisms; Topologies Tag 022C"
+   }
+  },
+  {
+   "text": "Every torsor $P\\to T$ occurring here is finite etale. Indeed take a trivializing family $U_a\\to T$. For a finite set $H$ the fold $\\coprod_H U_a\\to U_a$ is etale by finite coproduct etaleness, applied to identity morphisms. It is finite: on an affine open $W=\\operatorname{Spec}A\\subset U_a$, its inverse image is $\\coprod_H W=\\operatorname{Spec}(\\prod_H A)$, and the diagonal algebra $A\\to\\prod_H A$ is generated as an $A$-module by the finitely many coordinate vectors. This proves finiteness on an affine cover, hence globally. The trivializations identify these folds with the pullbacks of $P\\to T$. Step 2 makes the trivializing family fpqc; descend finiteness and etaleness to $P\\to T$.",
+   "uses": [
+    "lem-sc-etale-coproduct-etale",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0BLZ, lemma-finite-etale-stack; Descent Tags 02LA and 02VN applied to trivializations"
+   }
+  },
+  {
+   "text": "Fix two global objects $(P,f),(Q,g)$ and compatible isomorphisms between their restrictions to a jointly surjective etale family. View their underlying maps as maps $P\\times_TT_i\\to Q$, and glue them by Step 2 to $b:P\\to Q$. Glue the local inverses likewise to $c:Q\\to P$. The equations $cb=1$, $bc=1$ and $gb=f$ hold by uniqueness on the respective pulled-back covers. For every $h\\in H$ the two maps $b\\circ h_P$ and $h_Q\\circ b$ agree on $P\\times_TT_i$, hence are equal. Thus $b$ is equivariant and is an arrow of the required groupoid. Uniqueness of $b$ follows from the same gluing uniqueness. Apply this argument after any $T'\\to T$ to obtain exactly the sheaf assertion on the entire category of $S$-schemes over $T$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0370, omitted morphism-descent axiom, expanded using Descent Tag 023Q"
+   }
+  },
+  {
+   "text": "Now take object descent data $(P_i,f_i,b_{ij})$ on $\\{T_i\\to T\\}$. By Step 3 each $P_i\\to T_i$ is finite etale. Form $T^*=\\coprod_iT_i$ and $P^*=\\coprod_iP_i$; $P^*\\to T^*$ is finite etale by Zariski locality on the open-and-closed summands. The morphism $T^*\\to T$ is a surjective etale morphism (the coproduct of an etale covering, explicitly allowed in the finite-etale descent lemma). On $T^*\\times_TT^*$ the summands are $T_i\\times_TT_j$: this follows by restricting each projection to the disjoint open summands and applying the fibre-product universal property. Thus the $b_{ij}$ assemble to an isomorphism of the two pullbacks of $P^*$; the triple-overlap cocycle is precisely the given one on each summand. Apply finite etale descent to obtain a finite etale $P\\to T$ and isomorphisms $e_i:P\\times_TT_i\\xrightarrow{\\sim}P_i$ with $b_{ij}=e_j e_i^{-1}$ on overlaps.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-closed-finite-etale-zariski-local",
+    "def-pc-fibre-product",
+    "lem-galois-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0BLZ, lemma-finite-etale-stack; family encoded by its disjoint union, as in lem-galois-descent"
+   }
+  },
+  {
+   "text": "For each $h\\in H$, transport the action of $h$ on $P_i$ across $e_i$ to an automorphism of $P\\times_TT_i$. These maps are compatible on overlaps because $b_{ij}$ is equivariant. Step 2 glues them to $a_h:P\\to P$ over $T$. The identities $a_1=1$ and $a_g a_h=a_{gh}$ follow by gluing uniqueness, since they hold on every $P_i$; in particular $a_{h^{-1}}$ is inverse to $a_h$. The coproduct mapping property makes the maps $a_h$ a morphism $H_T\\times_TP=\\coprod_H P\\to P$, and those identities are exactly a left action. Under $e_i$ it is the original action. Choose trivializing etale families for each $P_i$. Their composites with $T_i\\to T$ are a jointly surjective etale family and equivariantly trivialize $P$. Thus $P$ is a torsor in precisely the etale-local sense of the item.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-covering-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0370, descent of torsor action; torsor local trivializations composed with original cover"
+   }
+  },
+  {
+   "text": "The morphisms $f_i e_i:P\\times_TT_i\\to V$ agree on overlaps, since $f_j b_{ij}=f_i$. Step 2 gives a unique map $f:P\\to V$; it is over $S$ by equality on this cover. For each $h\\in H$, $f a_h=h_V f$ holds after restriction to every $P_i$, so it holds globally by the same uniqueness. Consequently $(P,f)$ is an object and each $e_i$ is an equivariant isomorphism respecting maps to $V$. Their overlap maps are the prescribed $b_{ij}$ by Step 5. This proves effective object descent; together with Steps 1 and 4 it proves the claimed stack property. None of these arguments requires a free action on $V$, finite type, or a unit $|H|$.",
+   "uses": [
+    "lem-weil-pbc-fpqc-representable-descent",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0370, lemma-group-quotient-stack-in-groupoids, final morphism-gluing paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sc-etale-coproduct-etale",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-galois-fpqc-descend-etale",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-galois-descent",
+  "lem-weil-pbc-etale-covering-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 0370, lemma-group-quotient-stack-in-groupoids, specialized to finite constant groups with scheme torsors; underlying effectivity via Tag 0BLZ and lem-galois-descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\"",
+   "results": "OK; 12 hits: CategoryTheory.Pseudofunctor.IsStackFor, CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor, CategoryTheory.Pseudofunctor.IsStackFor_generate_iff, CategoryTheory.Pseudofunctor.isStackFor_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff, CategoryTheory.Pseudofunctor.IsStackFor.essSurj, CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence, CategoryTheory.Pseudofunctor.IsStackFor.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack/descent criteria require a stack hypothesis; ordinary type torsors and categories of finite group actions do not give effective descent of scheme torsors with maps",
+   "digest": "b8afc658ce1201e8"
+  },
+  {
+   "tool": "grep",
+   "query": "Torsor|torsor|IsStack",
+   "results": "OK; 15 hits: Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack/descent criteria require a stack hypothesis; ordinary type torsors and categories of finite group actions do not give effective descent of scheme torsors with maps",
+   "digest": "6e2e9ec9e9bb54ec"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The groupoid of etale torsors under a finite constant group with equivariant morphisms to a scheme is a stack over arbitrary schemes",
+   "results": "OK; 8 hits: AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack/descent criteria require a stack hypothesis; ordinary type torsors and categories of finite group actions do not give effective descent of scheme torsors with maps",
+   "digest": "2ba3521700d7bea0"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale descent is effective for schemes that are torsors under finite constant groups and carry equivariant maps to an arbitrary scheme",
+   "results": "OK; 8 hits: CategoryTheory.EffectiveEpiFamily.desc, CategoryTheory.EffectiveEpiFamilyStruct.desc, CategoryTheory.EffectiveEpiFamily.fac, Algebra.Etale.exists_subalgebra_fg, CategoryTheory.EffectiveEpiFamilyStruct.fac, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack/descent criteria require a stack hypothesis; ordinary type torsors and categories of finite group actions do not give effective descent of scheme torsors with maps",
+   "digest": "8d86060164153b8c"
+  },
+  {
+   "tool": "grep",
+   "query": "Torsor|torsor|IsStack",
+   "results": "OK; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack/descent criteria require a stack hypothesis; ordinary type torsors and categories of finite group actions do not give effective descent of scheme torsors with maps",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsor\"",
+   "results": "OK; 12 hits: AddTorsor, Torsor, addGroupIsAddTorsor, AddGroup.instAddTorsor, Group.instTorsor, AddTorsor.nonempty, Torsor.nonempty, AddTorsor.toVSub",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack/descent criteria require a stack hypothesis; ordinary type torsors and categories of finite group actions do not give effective descent of scheme torsors with maps",
+   "digest": "152f29f523dd7238"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The category fibred over schemes of finite group torsors with an equivariant map satisfies effective descent for objects and the sheaf condition for isomorphisms",
+   "results": "OK; 8 hits: CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget, CategoryTheory.PreGaloisCategory.FiberFunctor, AlgebraicGeometry.Scheme.isLocallyDirected_of_equifibered_of_injective, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', CategoryTheory.isSheaf_coherent, CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff, CategoryTheory.Functor.instEffectiveEpiEffectiveEpiOver, CategoryTheory.Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack/descent criteria require a stack hypothesis; ordinary type torsors and categories of finite group actions do not give effective descent of scheme torsors with maps",
+   "digest": "84d7c3d73401ef77"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale descent of finite group scheme torsors with equivariant maps to a scheme is effective",
+   "results": "OK; 8 hits: AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: general stack criteria and torsors of types do not state descent of scheme torsors with equivariant maps",
+   "digest": "e461ffb1dd8f3294"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\"",
+   "results": "OK; 12 hits: CategoryTheory.Pseudofunctor.IsStackFor, CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor, CategoryTheory.Pseudofunctor.IsStackFor_generate_iff, CategoryTheory.Pseudofunctor.isStackFor_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff, CategoryTheory.Pseudofunctor.IsStackFor.essSurj, CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence, CategoryTheory.Pseudofunctor.IsStackFor.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: general stack criteria and torsors of types do not state descent of scheme torsors with equivariant maps",
+   "digest": "b8afc658ce1201e8"
+  },
+  {
+   "tool": "grep",
+   "query": "Torsor|torsor|IsStack",
+   "results": "OK; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: general stack criteria and torsors of types do not state descent of scheme torsors with equivariant maps",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite constant group scheme torsors with an equivariant map form a stack for the etale topology",
+   "results": "OK; 8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology, Equiv.vaddConst, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.Etale, CategoryTheory.Sheaf.ΓObjEquivHom, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-23",
+   "verdict": "no match: general stack criteria and torsors of types do not state descent of scheme torsors with equivariant maps",
+   "digest": "f5e093ba778128d8"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A category of finite constant group torsors equipped with equivariant morphisms satisfies effective descent and its isomorphisms form sheaves",
+   "results": "OK; 8 hits: CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget, CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups, CategoryTheory.isSheaf_coherent, Profinite.instEffectivelyEnoughCompHausProfiniteToCompHaus, CategoryTheory.EffectiveEpiFamily.transitive_of_finite, TopCat.toSheafCompHausLike",
+   "date": "2026-10-23",
+   "verdict": "no match: general stack criteria and torsors of types do not state descent of scheme torsors with equivariant maps",
+   "digest": "4ac7e054e6fb9cb9"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsor\"",
+   "results": "OK; 12 hits: AddTorsor, Torsor, addGroupIsAddTorsor, AddGroup.instAddTorsor, Group.instTorsor, AddTorsor.nonempty, Torsor.nonempty, AddTorsor.toVSub",
+   "date": "2026-10-23",
+   "verdict": "no match: general stack criteria and torsors of types do not state descent of scheme torsors with equivariant maps",
+   "digest": "152f29f523dd7238"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStack|[Tt]orsor|finiteEtaleDescent",
+   "results": "OK; 25 hits: Mathlib/Data/ENNReal/Action.lean, Mathlib/Algebra/Group/Pointwise/Set/Scalar.lean, Mathlib/Data/Set/SMulAntidiagonal.lean, Mathlib/Geometry/Euclidean/Incenter.lean, Mathlib/Geometry/Euclidean/Incenter.lean, Mathlib/Geometry/Euclidean/Triangle.lean, Mathlib/Geometry/Euclidean/Triangle.lean, Mathlib/Geometry/Euclidean/Congruence.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: general stack criteria and torsors of types do not state descent of scheme torsors with equivariant maps",
+   "digest": "fb7ed86910ad50a5"
+  },
+  {
+   "tool": "grep",
+   "query": "IsStack|IsPrestack|Torsor",
+   "results": "OK; 20 hits: Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean, Mathlib/CategoryTheory/Sites/Descent/IsPrestack.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: general stack criteria and torsors of types do not state descent of scheme torsors with equivariant maps",
+   "digest": "161cad42742a20db"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-action-groupoid-quotient-criterion",
+  "date": "2026-10-23",
+  "group": "NG"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: Finite representable pullbacks of a formal quotient chart. General quotient-presentation input at every infinitesimal level: recover the stack from the action groupoid of its pulled-back atlas. Supporting descent input: effective etale descent for scheme torsors with equivariant maps, prior to any recognition of another stack.",
+   "via": [
+    "lem-sfb-action-groupoid-quotient-criterion",
+    "lem-sfb-finite-formal-quotient-pullback",
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-constant-torsor-map-etale-stack",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0370 and 0BLZ. Reused finite etale descent and scheme morphism descent; proved finite-etale nature of the given torsors, descended their schemes, actions, and equivariant maps, and expanded morphism gluing. No new nodes and no change to the statement.",
+  "blueprint": "Inherited broken created.item ancestry has null blueprint.from.node (ancestor command confirms). Retain it and its explicit place: det-thm-sf-ctf-stability-direct-images proof (3), stable moduli quotient presentation prerequisite. Latest blueprint direct-images proof read; this is the torsor descent subargument, not a change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Convert each etale family into an fpqc family, including after pullback, to apply scheme morphism descent; a topology tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-etale-coproduct-etale",
+    "why": "Etaleness of the finite constant scheme from copies of the identity; generic scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-local-on-target",
+    "why": "Check the finite constant scheme is finite on affine opens using the finite product algebra; generic locality tool."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Etaleness of each torsor scheme descends from its defining trivializations; generic morphism property descent."
+   },
+   {
+    "node": "lem-galois-descent",
+    "why": "Effective descent of finite etale schemes, applied before gluing actions or equivariant maps; no node in this unit supplies scheme descent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-sc-etale-coproduct-etale",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-galois-fpqc-descend-etale",
+  "lem-galois-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-c5506716f",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-c5506716f (reviewer sub-agent of L); spot-checked: I read the item in full: statement unchanged, 7 steps, no new nodes. I also read every cited statement and Stacks 0370 (examples-stacks.tex l.1272-1308). The route is Stacks 0370 specialised to finite constant H and scheme torsors. Effectivity of the torsor scheme comes from lem-galois-descent (finite etale descent), not from false general effectivity of scheme descent. The axioms Stacks omits are written out in step 1 (fibred category) and step 4 (isomorphisms form a sheaf). Step 2: def-weil-pbc-etale-site allows arbitrary jointly surjective etale coverings of id_T, so fpqc-finer-than-etale applies, including to the pulled-back covers {P x_T T_i -> P}; representable fpqc descent then glues maps into any scheme. Step 3: the fold over H is finite etale via the finite coproduct-etale node, Spec of a product of rings, and finite-local-on-target(2); finiteness and etaleness then descend along the fpqc cover. Step 5: the coproduct T*->T is surjective etale (named as an example in the lem-galois-descent statement); T* x_T T* is the coproduct of the T_i x_T T_j; the b_ij cocycle matches the def-pd-descent-datum convention p13=p23 p12; essential surjectivity gives P and e_i with b_ij = e_j e_i^{-1}. Steps 6-7: the action, local triviality (via the etale-covering-composition node) and the equivariant map to V follow by gluing uniqueness. Edge cases checked: trivial or nonabelian H, characteristic dividing |H|, empty T, infinite covers of non-qcqs bases, non-free action on V. No duplicate node found (rg over torsor plus stack/descent). No cycle (dependency closure of 9726 nodes contains neither the item nor its citer). No SGA cited. The worker wrote split_report.tool_uses itself (C8 leaves that to the maintainer); I accept them, since all five are generic tools that replace no unit route. Inherited null blueprint.from.node kept as it was."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantTorsorMapEtaleStack",
+  "declaration": "AlgebraicGeometry.SchemeAction.finite_constant_torsor_map_isModuliStack",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantTorsorMapEtaleStack.lean",
+  "statement": "theorem finite_constant_torsor_map_isModuliStack {S : Scheme.{u}} (H : Type v) [Group H] [Finite H] (G V : Over S) [GrpObj G] [ModObj G V] (incl : H → (Over.mk (𝟙 S) ⟶ G)) (hincl : IsColimit (Cofan.mk G incl)) (hincl_one : incl 1 = 1) (hincl_mul : ∀ g h : H, incl (g * h) = incl g * incl h) : IsModuliStack (etaleTorsorGroupoid G V)",
+  "branch": "sheaf-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed étale torsor groupoid. G and incl present H_S by the coproduct universal property and its unit/multiplication, as in the downstream actionGroupoid_quotient_criterion; no freeness, finite-type or characteristic hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-248db0b41",
+  "group": "Q123",
+  "result": "pass",
+  "note": "Read item, 6 stmt_dep records, live TorsorObject/TorsorHom/IsLocallyTrivial, IsEtaleLocallyTrivial/etaleTorsorGroupoid, IsFibredInGroupoids/IsModuliStack, consumer actionGroupoid_quotient_criterion, Stacks 0370/0BLZ. Item changed only lean (live null) and stmt_deps (+landed def-sfb-etale-scheme-action-torsor-groupoid, allowed, acyclic); statement verbatim. H_S = cofan colimit of terminal copies + unit/mul equations pins the GrpObj (universal coproducts), same presentation as consumer; ModObj G V = H-action by S-automorphisms; H : Type v independent universe (generalizes consumer). Torsors étale-locally trivial with cartesian equivariant q; arrows cartesian, equivariant, preserve f; conclusion = landed IsModuliStack (CFG + étale sieve colimit descent). Edge cases (empty T/S, H=1, V empty, non-faithful action, char | |H|, non-qcqs, universes) OK. No defs, sorry only, docstrings with source/blueprint/7 steps, private proof-dep imports exist, étale not pro-étale, no duplicate. No compile (no change)."
+ }
+}

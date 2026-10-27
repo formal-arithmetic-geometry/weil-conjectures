@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-integral-strict-augmentation",
+ "kind": "statement",
+ "title": "Natural integral strict augmentation with its ordinary normalization",
+ "statement": "For an abelian category A with inverse-sequence limits and fixed derived categories of A and strict towers in A, let I be a simultaneous left-derived prime-power reduction with its ordinary presentation. Let RZ be a functor from the derived category of strict towers to D(A) and etaZ a comparison from ordinary limit to RZ. There exists a natural transformation a:id_D(A)->I.T followed by RZ. For every complex P its component at Q(P), followed by RZ of I.epsilon(P), is exactly the explicit ordinary constant/limit-unit quotient augmentation followed by etaZ at the ordinary quotient tower. No counit is assumed invertible. The strict tower augmentation and the ordinary map are explicit constructions.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion, canonical completion map; localization universal property and universal left-derived counit"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary quotient projections form one strict tower map by their consecutive-transition equation. Their naturality in the input gives a natural transformation const -> I.ordinary.E; map it to cochain complexes.",
+   "uses": [
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing generic augmented-derived-tower-unit theorem with Q as localization, exact constant towers as G and DG, the ordinary quotient tower as T, its supplied left-derived functor as LT, ordinary limit as F, and the given RZ and etaZ. The left-derived universal property is the required right Kan extension. The theorem supplies natural t and v and the normalization equation for their composite. This is precisely the displayed formula after unfolding the explicitly defined ordinary augmentation.",
+   "uses": [
+    "lem-weil-pbc-augmented-derived-tower-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-weil-pbc-augmented-derived-tower-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion, canonical completion map; localization universal property and universal left-derived counit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of ordinary prime power quotients of a complex with torsion free terms has its canonical augmentation invertible modulo the prime",
+   "results": "Eight hits for ordinary profinite inverse limits and module direct limits; none for the derived sheaf augmentation.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib theorem; use the universal derived construction and principal Koszul calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical augmentation from a regular complex of abelian sheaves to the right derived inverse limit of its ordinary prime power quotients is an isomorphism after derived reduction modulo the prime",
+   "results": "Eight hits for local cohomology, ordinary zeroth derived functors, solidification and representation resolutions; none for this augmentation calculation.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match. Use the principal Koszul and Roos argument of Stacks 099M."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "results": "Six hits in Mathlib.CategoryTheory.Functor.Derived.LeftDerived, including leftDerivedLift, leftDerived_fac and leftDerived_fac_app.",
+   "date": "2026-10-27",
+   "verdict": "Use the universal lift and its factorization equation to construct and normalize the natural augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionModIdeal|integralStrictAugmentation",
+   "results": "No search-service hits. Local rg finds the source reductionModIdeal and isIso_smul_id_of_isZero_reductionModIdeal; there is no existing integralStrictAugmentation.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved source cone criterion; explicitly construct the augmentation and isolate only its ordinary regular-complex computation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictLimitAugmentationTriangle",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Proof step 4: strict integral prime-power completion; Canonical natural augmentation for a simultaneous integral reduction",
+   "via": [
+    "lem-sfb-integral-strict-limit-augmentation-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralStrictAugmentation",
+  "file": "lean/Sheaf/Paper/IntegralStrictAugmentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_integralStrictAugmentation",
+  "statement": "theorem exists_integralStrictAugmentation :\n    ∃ a : 𝟭 (DerivedCategory A) ⟶ I.T ⋙ RZ,\n      ∀ P : CochainComplex A ℤ,\n        a.app (DerivedCategory.Q.obj P) ≫ RZ.map (I.ε.app P) =\n          integralStrictOrdinaryAugmentation ℓ RZ ηZ I.ordinary P",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalReductionTowerAugmentation",
+   "AlgebraicGeometry.ProEtale.integralStrictConstantAdditive",
+   "AlgebraicGeometry.ProEtale.integralStrictLimitAdditive",
+   "AlgebraicGeometry.ProEtale.integralStrictOrdinaryAugmentation",
+   "AlgebraicGeometry.ProEtale.exists_integralStrictAugmentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T222628-L-675480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T222628-L-675480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 import Mathlib.Topology.Algebra.Module.FiniteDimension
 import WeilConjectures.CategoryTheory.Sites.MonObj
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-!
 # Coordinates of a finite subfield basis on condensed modules

@@ -1,0 +1,198 @@
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Basic
+
+import WeilConjectures.RingTheory.DvrFiniteSeparableFractionEssFiniteType
+import WeilConjectures.AlgebraicGeometry.Morphisms.DvrUniformizerRootAlgebra
+import WeilConjectures.RingTheory.DvrUnramifiedCompositumBaseChange
+import Mathlib.RingTheory.Unramified.LocalRing
+import Sheaf.AlgebraicGeometry.FiniteEtaleNormalGenericComponents
+import Sheaf.AlgebraicGeometry.UnitBinomialFiniteEtale
+import Mathlib.RingTheory.Etale.Field
+import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
+import WeilConjectures.Mathlib.RingTheory.Etale.Field
+import Mathlib.RingTheory.Localization.Integral
+import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+import Mathlib.FieldTheory.SeparableDegree
+
+/-! # Unramified and tame normalization branches after local DVR base change
+
+Source: Stacks Project, More on Algebra, Tag 0EXY (lemma-tame-goes-up), parts (1) and (2),
+and Tag 09E8 (remark-finite-separable-extension).
+(blueprint: lem-sfb-dvr-tame-unramified-compositum-permanence)
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe uR uS uF uE uT
+
+open scoped TensorProduct
+
+namespace RingTheory
+
+/-- Unramified and tame finite separable extensions remain so in every normalized field
+factor after an arbitrary injective local extension of DVRs.
+
+Source: Stacks Project, Tags 0EXY and 09E8.
+(blueprint: lem-sfb-dvr-tame-unramified-compositum-permanence)
+
+The right algebra structure on the displayed tensor product is the canonical inclusion
+of E, so the product decomposition preserves the given base extension. Residue fields
+of maximal-ideal localizations are canonically the quotients by those maximal ideals.
+The existential local-hom proofs install precisely the canonical residue algebra structures.
+The index-one condition is written directly as equality of extended maximal ideals;
+the tame condition records a positive index through its defining ideal-power equality.
+
+Proof, following the DAG's eleven steps:
+1. First, for any field extension E/F, a finite separable T/F is etale, and remains etale over E
+by base change. Apply the etale-algebra-over-a-field theorem to obtain Totimes_FE=prod_iU_i, with
+each U_i/E finite separable. The base-change citation applies to the singleton cover
+operatorname{Spec}Ttooperatorname{Spec}F, which is surjective because its rings are nonzero
+fields. We will use this same conclusion for other finite separable field extensions below.
+Uses: lem-weil-pbc-finite-separable-extension-etale, lem-weil-pbc-etale-covering-base-change, lem-
+weil-pbc-etale-algebra-over-field-product.
+2. Apply the finite case (a) of the algebraic-normalization structure theorem with the identity
+DVR map Sto S and the field extension U_i/E. It gives the DVR localizations (D_i)_{mathfrak q} and
+finite residue extensions over S/mathfrak m_S. Their structural maps from S are injective and
+local: maximal ideals contract to mathfrak m_S, and denominators outside the contracted prime are
+units. Their fraction fields are U_i. Explicitly, for xin U_i choose a monic equation over E and a
+power s of a uniformizer of S making all coefficients of the equation for sx integral; then sxin
+D_i, so xinoperatorname{Frac}(D_i). The same observations apply to C_{mathfrak n} over R. This
+proves all unconditional clauses.
+Uses: lem-sfb-dvr-algebraic-normalization-structure.
+3. Suppose the original indices are one and the original residue extensions are separable. Fix
+V=(D_i)_{mathfrak q}. The map Tto U_i sends C into D_i: a monic equation over R is a monic
+equation over S. Contract mathfrak m_V to mathfrak nsubset C. This prime contains a nonzero
+uniformizer of R, so it is maximal by the dimension-one assertion of the normalization structure
+theorem. Localization gives a local injection C_{mathfrak n}to V. The finite-separable-fraction
+theorem makes C_{mathfrak n} essentially of finite type over R. Its index-one equality and
+separable residue extension therefore give Omega_{C_{mathfrak n}/R}=0 by the local unramified
+criterion.
+Uses: lem-sfb-dvr-algebraic-normalization-structure, lem-sbc-dvr-finite-separable-fraction-ess-
+finite-type, lem-sfb-essentially-finite-type-local-unramified-criterion.
+4. Apply the unramified compositum theorem with its (R,V,A,T) equal to (R,C_{mathfrak
+n},S,(D_i)_{mathfrak q}) and its field equal to U_i. The maps and locality were checked above. Its
+algebra-generation hypothesis holds: the field factor U_i is generated by the images of E and T,
+since each pure tensor maps to the product of these images. Moreover E=S[1/pi] for a uniformizer
+pi of R: writing its nonzero image as a unit times a positive power of an S-uniformizer proves
+this equality. Since T contains 1/pi, the S-algebra generated by T already contains E. The theorem
+gives essential finite type and zero differentials for Sto(D_i)_{mathfrak q}. The local criterion
+gives precisely the required maximal-ideal equality and separable residue extension. Thus the
+whole unramified assertion is proved for arbitrary local DVR base extension; it may now be applied
+to other DVR pairs.
+Uses: lem-sbc-dvr-unramified-compositum-base-change, lem-sfb-essentially-finite-type-local-
+unramified-criterion, lem-weil-pbc-dvr-unit-times-uniformizer-power.
+5. Now suppose the original extension is tame. Choose a uniformizer pi of R. Uniformizer-root
+domination supplies mgeq1 prime to p, a finite separable T'/F containing T and F_m=F(a) with
+a^m=pi, such that T'/F_m is unramified over the DVR R_m=R[a]. Its residue field is R/mathfrak m_R.
+This is an auxiliary extension, not a replacement of the field factors whose conclusion we must
+prove.
+Uses: lem-sfb-tame-extension-uniformizer-root-domination.
+6. Fix a factor U=U_i and a maximal ideal mathfrak q of D=operatorname{IntCl}_U(S). The algebra
+T'otimes_TU is nonzero (tensor a T-basis of T'), finite etale over U, and hence has a field factor
+W. It contains U and T' compatibly over T and is generated by them. Let
+J=operatorname{IntCl}_W(S). The inclusion Dsubseteq J is integral, since each element of J already
+satisfies a monic equation over Ssubseteq D. Lying over gives a prime mathfrak r of J above
+mathfrak q; it is maximal and J_{mathfrak r} is a DVR by the normalization structure theorem,
+since W/E is finite separable. Write Z=J_{mathfrak r}. Then D_{mathfrak q}to Z is an injective
+local map.
+Uses: lem-weil-pbc-integral-injective-lying-over, lem-sfb-dvr-algebraic-normalization-structure.
+7. Inside W put L=E(a) and B=operatorname{IntCl}_L(S); contract mathfrak m_Z to mathfrak bsubset
+B. Then B_{mathfrak b} is a DVR with fraction field L and the induced map R_mto B_{mathfrak b} is
+local: a^m=pi lies in its maximal ideal, so a does too. It is injective as a map of subrings of W.
+The field W is a factor of T'otimes_{F_m}L: its image contains U=Ecdot T and T', hence generates
+W, and a finite-dimensional domain over L is a field. Apply the already proved unramified
+assertion (steps 2–4) to R_mto B_{mathfrak b} and T'/F_m. It follows that Z/B_{mathfrak b} has
+index one and separable residue extension. To identify the selected localization, use transitivity
+of integrality to identify normalization first over S and then over B, and integral-closure
+localization to pass to B_{mathfrak b}; contraction of mathfrak r then gives exactly Z.
+Uses: lem-sfb-dvr-algebraic-normalization-structure, lem-weil-pbc-integral-transitive, lem-weil-
+pbc-integral-closure-commutes-localization.
+8. It remains to bound the index and residue extension of L/E. Write pi=utheta^t in S, where theta
+is a uniformizer, u a unit, and tgeq1. Put g=gcd(m,t), h=m/g, d=t/g. Choose y with y^h=theta in an
+algebraic extension of L, put V=L(y), and set z=a/y^d. Then z^m=u and a=zy^d, so V=E(y,z). By the
+uniformizer-root-algebra theorem S_y=S[y] is a DVR with uniformizer y, fraction field E(y), and
+residue field S/mathfrak m_S (reduce its presentation modulo y). The unit-binomial theorem says
+S_y[Z]/(Z^m-u) is finite etale. Its generic field factor selected by Zmapsto z is precisely V. The
+normal-generic-components theorem identifies the corresponding component with
+H=operatorname{IntCl}_V(S_y) and makes it finite etale over S_y.
+Uses: lem-weil-pbc-dvr-unit-times-uniformizer-power, lem-sbc-dvr-uniformizer-root-algebra, lem-
+sfb-unit-binomial-finite-etale, lem-sfb-finite-etale-normal-generic-components.
+9. The ring H is also the integral closure of S in V: S_y/S is integral, so transitivity gives one
+inclusion, while a monic equation over S is also one over S_y. By lying over choose a maximal
+ideal mathfrak h of H above mathfrak b of B; here H/B is integral because its elements are
+integral over S. Put Q=H_{mathfrak h}. It is a DVR by the normalization structure theorem. Since
+H/S_y is etale, the etale maximal-ideal and residue-field theorems give mathfrak m_{S_y}Q=mathfrak
+m_Q and a finite separable residue extension. Consequently y is a uniformizer of Q, and theta=y^h
+has valuation h in Q.
+Uses: lem-weil-pbc-integral-transitive, lem-weil-pbc-integral-injective-lying-over, lem-sfb-dvr-
+algebraic-normalization-structure, lem-weil-pbc-etale-prime-generates-maximal, lem-weil-pbc-etale-
+algebra-residue-field-separable.
+10. Let b=e(B_{mathfrak b}/S) and c=e(Q/B_{mathfrak b}), both positive. If beta is a uniformizer
+of B_{mathfrak b}, write theta=vbeta^b there with v a unit; then in Q it gives h=bc. Thus bmid
+hmid m, so pnmid b. The local injection B_{mathfrak b}to Q embeds its residue field into that of
+Q. Every element of this subfield is separable over S/mathfrak m_S, since its minimal polynomial
+divides a separable polynomial for the same element in the larger field. Hence B_{mathfrak b}/S
+has separable residue extension. Together with step 7, the valuation formula in a DVR gives
+e(Z/S)=bcdot1=b, and transitivity of separable algebraic extensions gives separability of
+kappa(Z)/kappa(S).
+Uses: lem-zl-separable-permanence.
+11. Finally apply the same valuation calculation to the tower Sto D_{mathfrak q}to Z. The positive
+index e(D_{mathfrak q}/S) divides e(Z/S) and is therefore prime to p. The residue field D/mathfrak
+q embeds into kappa(Z), so its elements are separable over S/mathfrak m_S by the minimal-
+polynomial argument of step 10. Its degree is finite by step 2. The original factor U_i and the
+prime mathfrak q were arbitrary; this gives every required tame branch, including the case m=1. No
+hypothesis on the degree, completeness or separability of S/R was used.
+Uses: elementary DVR valuation arithmetic.
+-/
+theorem dvr_tame_unramified_compositum_permanence
+    (R : Type uR) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
+    (S : Type uS) [CommRing S] [IsDomain S] [IsDiscreteValuationRing S]
+    [Algebra R S] [FaithfulSMul R S] [IsLocalHom (algebraMap R S)]
+    (F : Type uF) [Field F] [Algebra R F] [IsFractionRing R F]
+    (E : Type uE) [Field E] [Algebra S E] [IsFractionRing S E]
+    [Algebra F E] [Algebra R E] [IsScalarTower R F E] [IsScalarTower R S E]
+    (p : ℕ) (hp : p.Prime)
+    [CharP (IsLocalRing.ResidueField R) p] [CharP (IsLocalRing.ResidueField S) p]
+    (T : Type uT) [Field T] [Algebra F T] [FiniteDimensional F T]
+    [Algebra.IsSeparable F T] [Algebra R T] [IsScalarTower R F T] :
+    ∃ (n : ℕ) (U : Fin n → Type (max uT uE))
+      (_ : ∀ i, Field (U i)) (_ : ∀ i, Algebra E (U i))
+      (_ : ∀ i, Algebra S (U i)) (_ : ∀ i, IsScalarTower S E (U i)),
+      Nonempty (@AlgEquiv E (T ⊗[F] E) (∀ i, U i) _ _ _
+        Algebra.TensorProduct.rightAlgebra _) ∧
+      ∀ (i : Fin n) (q : Ideal (integralClosure S (U i))) [q.IsMaximal],
+        ∃ (_ : IsLocalHom (algebraMap S (Localization.AtPrime q))),
+          IsDiscreteValuationRing (Localization.AtPrime q) ∧
+          Module.Finite (IsLocalRing.ResidueField S) q.ResidueField ∧
+          ((∀ (v : Ideal (integralClosure R T)) [v.IsMaximal],
+              ∃ (_ : IsLocalHom (algebraMap R (Localization.AtPrime v))),
+                (IsLocalRing.maximalIdeal R).map (algebraMap R (Localization.AtPrime v)) =
+                  IsLocalRing.maximalIdeal (Localization.AtPrime v) ∧
+                Algebra.IsSeparable (IsLocalRing.ResidueField R) v.ResidueField) →
+            (IsLocalRing.maximalIdeal S).map (algebraMap S (Localization.AtPrime q)) =
+              IsLocalRing.maximalIdeal (Localization.AtPrime q) ∧
+            Algebra.IsSeparable (IsLocalRing.ResidueField S) q.ResidueField) ∧
+          ((∀ (v : Ideal (integralClosure R T)) [v.IsMaximal],
+              ∃ (_ : IsLocalHom (algebraMap R (Localization.AtPrime v))) (e : ℕ),
+                0 < e ∧ Nat.Coprime e p ∧
+                (IsLocalRing.maximalIdeal R).map (algebraMap R (Localization.AtPrime v)) =
+                  IsLocalRing.maximalIdeal (Localization.AtPrime v) ^ e ∧
+                Algebra.IsSeparable (IsLocalRing.ResidueField R) v.ResidueField) →
+            ∃ e : ℕ, 0 < e ∧ Nat.Coprime e p ∧
+              (IsLocalRing.maximalIdeal S).map (algebraMap S (Localization.AtPrime q)) =
+                IsLocalRing.maximalIdeal (Localization.AtPrime q) ^ e ∧
+              Algebra.IsSeparable (IsLocalRing.ResidueField S) q.ResidueField) := by
+  sorry
+
+end RingTheory

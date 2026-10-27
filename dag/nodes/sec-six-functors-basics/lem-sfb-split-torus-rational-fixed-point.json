@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-split-torus-rational-fixed-point",
+ "kind": "statement",
+ "title": "Rational fixed point for a split torus on a proper scheme",
+ "statement": "Let $k$ be any field [def-weil-field], let $T$ be a $k$-group scheme [def-sc-group-scheme] isomorphic to $\\mathbf G_{m,k}^r$ for an integer $r\\geq0$, where $\\mathbf G_{m,k}=\\operatorname{Spec}k[z,z^{-1}]$ with unit multiplication, and let $X$ be a proper finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism]. Suppose $a:T\\times_kX\\to X$ is a $k$-scheme action, meaning $a(1,x)=x$ and $a(t,a(u,x))=a(tu,x)$ as morphism identities. If $X(k)\\ne\\varnothing$, then there exists $x\\in X(k)$ fixed scheme-theoretically by $T$: for every commutative $k$-algebra $A$ and every $t\\in T(A)$, $a_A(t,x_A)=x_A$, where $x_A$ is the scalar extension of $x$. No perfectness, infinitude, algebraic closedness, smoothness or geometric irreducibility of $X$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.51, printed p.343, specialized to the split solvable group G_m^r. The hypothesis X(k) nonempty is essential and retained; complete means proper over k."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Choose a $k$-group isomorphism $T\\simeq\\mathbf G_m^r$ and transport the action along it. Write $H_i=\\mathbf G_m^i\\times\\{1\\}^{r-i}$ and let $C_j\\simeq\\mathbf G_m$ be the $j$th coordinate subgroup. Starting with a chosen $y_0\\in X(k)$, construct $y_i\\in X(k)$ such that the orbit morphism $H_i\\to X$ of $y_i$ is the constant morphism with value $y_i$. For $i=0$ this is the unit identity. The action identity and commutativity of the product imply that the $H_i$-action commutes, as a morphism identity, with the $C_{i+1}$-action.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.51, printed p.343, multiplicative-group limit argument and induction along the split series; details made scheme-theoretic using Stacks Tags 0BX7 and 01KM."
+   }
+  },
+  {
+   "text": "For the inductive step put $y=y_i$ and $f:\\mathbf G_m\\to X$, $f(t)=a(t,y)$, using $C_{i+1}$. Put $L=\\operatorname{Spec}k[t]$ and $U=D(t)=\\operatorname{Spec}k[t,t^{-1}]$. The polynomial-domain node makes $L$ integral; $U$ is dense since it contains the zero prime. The scheme $L$ is finite type over $\\operatorname{Spec}k$ (one algebra generator, one affine chart), and is Noetherian by the finite-type-over-Noetherian node: a field is Noetherian since its only ideals are $0,k$. The complement of $U$ is the single rational point $0=(t)$. Its local ring is $k[t]_{(t)}$. Every nonzero rational function is $t^n p/q$ with $n\\in\\mathbf Z$ and $p(0)q(0)\\ne0$, by removing the lowest powers of $t$ from numerator and denominator. It lies in this local ring exactly when $n\\ge0$; hence either it or its inverse lies there. Thus this stalk is a valuation ring.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.51, printed p.343, multiplicative-group limit argument and induction along the split series; details made scheme-theoretic using Stacks Tags 0BX7 and 01KM."
+   }
+  },
+  {
+   "text": "Apply the valuation-point extension node with base $\\operatorname{Spec}k$, source $L$, target the given proper scheme $X$, open $U$, point $0$, and morphism $f$. Step 2 verifies integral Noetherian source, density and the valuation-stalk hypothesis; properness is assumed. It gives an extension $F:V\\to X$ with $U\\cup\\{0\\}\\subseteq V\\subseteq L$. Since $L\\setminus U=\\{0\\}$, $V=L$. Define $z=F(0)\\in X(k)$.",
+   "uses": [
+    "lem-sfb-rational-map-extension-valuation-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.51, printed p.343, multiplicative-group limit argument and induction along the split series; details made scheme-theoretic using Stacks Tags 0BX7 and 01KM."
+   }
+  },
+  {
+   "text": "On $\\mathbf G_m\\times L$, with coordinates $(u,t)$, compare $a(u,F(t))$ (the $C_{i+1}$-action) and $F(ut)$. Their restrictions to $D(t)=\\mathbf G_m\\times U$ agree by the action identity and $F|_U=f$. The source ring $k[u,u^{-1},t]$ is a domain: the polynomial-domain node gives the domain $k[u,t]$, and localization at the nonzero powers of $u$ remains a domain, since a fraction is zero only if its numerator is zero. Thus the source is reduced, and $D(t)$ is dense because it contains the zero prime. Both maps are over $k$, and $X\\to\\operatorname{Spec}k$ is separated by properness. The relative separated dense-image extension node makes the two maps equal. Pulling back along $t=0$ gives $a(u,z)=z$ as morphisms $C_{i+1}\\to X$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "def-weil-proper-morphism",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.51, printed p.343, multiplicative-group limit argument and induction along the split series; details made scheme-theoretic using Stacks Tags 0BX7 and 01KM."
+   }
+  },
+  {
+   "text": "Compare $a(h,F(t))$ and $F(t)$ on $H_i\\times L$. On $H_i\\times U$, commutation and the inductive hypothesis give $a(h,F(t))=a(h,a(t,y))=a(t,a(h,y))=a(t,y)=F(t)$ as morphisms. The coordinate ring $k[h_1^{\\pm1},\\ldots,h_i^{\\pm1},t]$ is a domain by the polynomial-domain node and the localization calculation of step 4; this also covers $i=0$. Hence the source is reduced and its open $D(t)$ is dense. Both maps are over $k$ and the target is separated by properness. Apply the relative separated dense-image extension node again, and restrict to $t=0$. The resulting morphism identity $a(h,z)=z$ says that $z$ remains fixed by $H_i$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "def-weil-proper-morphism",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.51, printed p.343, multiplicative-group limit argument and induction along the split series; details made scheme-theoretic using Stacks Tags 0BX7 and 01KM."
+   }
+  },
+  {
+   "text": "Set $y_{i+1}=z$. Multiplication identifies $H_i\\times C_{i+1}$ with $H_{i+1}$, and the action identity gives $a(hc,z)=a(h,a(c,z))=a(h,z)=z$ using steps 4 and 5. This completes the induction. For $r=0$ retain $y_0$; otherwise take $x=y_r$. Its orbit morphism $T\\to X$ is constant, also after transport back through the chosen isomorphism. Evaluating this morphism identity on any commutative $k$-algebra $A$ and $t\\in T(A)$ gives $a_A(t,x_A)=x_A$, exactly the required scheme-theoretic fixedness.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.51, printed p.343, multiplicative-group limit argument and induction along the split series; details made scheme-theoretic using Stacks Tags 0BX7 and 01KM."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-rational-map-extension-valuation-point",
+  "def-weil-proper-morphism",
+  "lem-sfb-relative-separated-dominant-ext"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.51, printed p.343, multiplicative-group limit argument and induction along the split series; details made scheme-theoretic using Stacks Tags 0BX7 and 01KM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Bb]orel.*[Ff]ixed|[Ss]plit.*[Tt]or.*[Ff]ix|[Ff]ix.*[Tt]or.*[Ss]plit",
+   "results": "{\"t\": \"2026-10-24T04:44:00Z\", \"tool\": \"grep\", \"query\": \"[Bb]orel.*[Ff]ixed|[Ss]plit.*[Tt]or.*[Ff]ix|[Ff]ix.*[Tt]or.*[Ss]plit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group fixed-point sets, finite Galois actions, proper discontinuity and compactness of a proper scheme do not produce a rational point fixed by a split algebraic torus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational fixed point theorem for split solvable algebraic groups on complete algebraic varieties",
+   "results": "{\"t\": \"2026-10-24T04:44:00Z\", \"tool\": \"leansearch\", \"query\": \"Rational fixed point theorem for split solvable algebraic groups on complete algebraic varieties\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddAction.fixedBy_subset_fixedBy_zsmul\", \"AddAction.vadd_mem_fixedBy_iff_mem_fixedBy\", \"AddAction.fixedPoints_of_subsingleton\", \"fixedPoints_subgroup_sup\", \"QPF.Fix\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"Sylow.mem_fixedPoints_mul_left_cosets_iff_mem_normalizer\", \"FixedPoints.toAlgAut_surjective\"], \"digest\": \"e0d0b9c94910fa69\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group fixed-point sets, finite Galois actions, proper discontinuity and compactness of a proper scheme do not produce a rational point fixed by a split algebraic torus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixedPoints\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T04:44:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"fixedPoints\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group fixed-point sets, finite Galois actions, proper discontinuity and compactness of a proper scheme do not produce a rational point fixed by a split algebraic torus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An action of powers of the multiplicative algebraic group on a complete variety with a rational point has a point fixed scheme theoretically",
+   "results": "{\"t\": \"2026-10-24T04:44:06Z\", \"tool\": \"leanfinder\", \"query\": \"An action of powers of the multiplicative algebraic group on a complete variety with a rational point has a point fixed scheme theoretically\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.instGLAction\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\", \"MulAction.exists_smul_eq\", \"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\"], \"digest\": \"eb9c4988fad82d2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group fixed-point sets, finite Galois actions, proper discontinuity and compactness of a proper scheme do not produce a rational point fixed by a split algebraic torus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus acting on a proper scheme over a field with a rational point has a rational fixed point",
+   "results": "{\"t\": \"2026-10-24T04:44:08Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus acting on a proper scheme over a field with a rational point has a rational fixed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"top_fixedByFinite\", \"FixedPoints.toAlgAut_surjective\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"FixedPoints.toAlgHom_bijective\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\"], \"digest\": \"409bf70faed5d4c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group fixed-point sets, finite Galois actions, proper discontinuity and compactness of a proper scheme do not produce a rational point fixed by a split algebraic torus."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel.*fixed|split.*torus.*fixed|torus.*rational.*fixed",
+   "results": "{\"t\": \"2026-10-24T07:01:47Z\", \"tool\": \"grep\", \"query\": \"Borel.*fixed|split.*torus.*fixed|torus.*rational.*fixed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group actions or Galois fixed fields, not existence of a rational scheme-theoretic fixed point for a split torus acting on a proper scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational fixed point for an action of the multiplicative algebraic group on a proper scheme",
+   "results": "{\"t\": \"2026-10-24T07:01:47Z\", \"tool\": \"leansearch\", \"query\": \"Rational fixed point for an action of the multiplicative algebraic group on a proper scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.fixedPoints\", \"AddAction.fixedPoints\", \"AddAction.fixedBy\", \"AddAction.mem_fixedPoints'\", \"AddAction.mem_fixedPoints\", \"MulAction.mem_fixedPoints\", \"MulAction.smul_inv_mem_fixedBy_iff_mem_fixedBy\", \"AddAction.mem_fixedBy_zsmul\"], \"digest\": \"fc804a1dc95395c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group actions or Galois fixed fields, not existence of a rational scheme-theoretic fixed point for a split torus acting on a proper scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fixedPoints\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T07:01:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"fixedPoints\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group actions or Galois fixed fields, not existence of a rational scheme-theoretic fixed point for a split torus acting on a proper scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus acting on a proper scheme over any field with a rational point has a rational fixed point",
+   "results": "{\"t\": \"2026-10-24T07:01:48Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus acting on a proper scheme over any field with a rational point has a rational fixed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"top_fixedByFinite\", \"FixedPoints.toAlgAut_surjective\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"FixedPoints.toAlgHom_bijective\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"FixedPoints.toAlgAut_bijective\"], \"digest\": \"05fbe828f1334b7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group actions or Galois fixed fields, not existence of a rational scheme-theoretic fixed point for a split torus acting on a proper scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split solvable algebraic group acting on a complete variety with a rational point has a fixed rational point",
+   "results": "{\"t\": \"2026-10-24T07:01:49Z\", \"tool\": \"leanfinder\", \"query\": \"A split solvable algebraic group acting on a complete variety with a rational point has a fixed rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"top_fixedByFinite\", \"Polynomial.Gal.galAction_isPretransitive\", \"FixedPoints.toAlgAut_surjective\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"FixedPoints.normal\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois\"], \"digest\": \"28f1d4add8c20e2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group actions or Galois fixed fields, not existence of a rational scheme-theoretic fixed point for a split torus acting on a proper scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-maximal-split-tori-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, action of each split torus on the complete homogeneous scheme G/P; Theorem 16.51.",
+   "via": [
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-rational-fixed-point",
+  "worker": "stage1",
+  "summary": "Checked Milne 16.51 and implemented its G_m limit and split-series induction through existing nodes. Extend each coordinate orbit across 0 by Stacks 0BX7; two relative separated dense-image comparisons prove scheme-theoretic fixedness and preserve earlier coordinate fixedness. No new nodes or statement changes. Covers arbitrary fields and nonreduced proper targets.",
+  "blueprint": "Supporting input at the existing blueprint.from.place: Milne 25.10 rational-conjugacy proof uses 16.51 for a split torus on G/P. The six steps realize the multiplicative-group case and finite-coordinate induction, below the recorded direct-image constructibility route. blueprint_refs ancestor returns None for this created chain; existing from.node and via are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-eaefeabe7",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-eaefeabe7 (reviewer sub-agent of L); spot-checked: I read all six steps in full against Milne iAG Thm 16.51 (p.343: G_m limit argument and induction along the subnormal series) and every cited statement. The item is the G_m^r case, with the same hypotheses (proper = complete, X(k) nonempty kept) and scheme-theoretic fixedness on A-points, which is what the citer lem-sfb-field-maximal-split-tori-conjugacy uses. Nothing is weakened. This is a first split, not a 2026-10-21 re-split, and it creates no new nodes. Steps: (1) transport the action, set up the inductive claim that the H_i-orbit map is constant, and derive commutation from the action identity. (2) k[t] is a domain by the polynomial leaf and Noetherian by the 01T6 leaf, D(t) is dense, and the t^n p/q computation shows k[t]_(t) is a valuation ring. (3) The 0BX7 extension node (S=Spec k, Y=X proper) gives V ⊇ U ∪ {0}, so V = L and z = F(0) is in X(k). (4) and (5) apply ext_of_isDominant_of_isSeparated (reduced domain source, D(t) dense, X/k separated via proper) to a(u,F(t)) vs F(ut) and to a(h,F(t)) vs F(t), then restrict to t=0. (6) The multiplication isomorphism H_i×C_{i+1}≅H_{i+1} closes the induction. Edge cases checked: r=0, scaling on P^1, nonreduced X with trivial action, finite k (no density of k-points used), and translation on G_m, which shows properness is needed. Duplicates: lem-sfb-solvable-proper-fixed-point is the algebraically closed case only, and lem-sfb-split-flag-rational-fixed-scheme states something different, so neither duplicates the item. Route: the extension node is in the same unit and the rest are Mathlib leaves or definitions, so no tool_uses are needed. No SGA cited, no cycle. Batch-5: the item newly cites lem-sfb-rational-map-extension-valuation-point, whose closure reaches def-trf-valuation-ring. That node is only the general valuation-ring definition (Stacks 00I9, Mathlib ValuationRing). It is not part of the trace formula or Poincaré duality statements or proofs, so it is genuinely outside the assumptions. Minor: steps 4-5 use affine products and the reducedness of a domain's spectrum without citing nodes; these are definitional, so I treat them as elementary. No fixes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitTorusRationalFixedPoint",
+  "declaration": "AlgebraicGeometry.exists_rational_fixedPoint_of_splitTorus",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitTorusRationalFixedPoint.lean",
+  "statement": "theorem exists_rational_fixedPoint_of_splitTorus {k : Type u} [Field k] (T : Grp (Over (Spec (.of k)))) (r : ℕ) (hsplit : Nonempty (T ≅ MultiplicativeType.splitTorus k r)) (X : Over (Spec (.of k))) [ModObj T.X X] [IsProper X.hom] (hx : Nonempty (𝟙_ (Over (Spec (.of k))) ⟶ X)) : ∃ x : 𝟙_ (Over (Spec (.of k))) ⟶ X, ∀ (A : Type u) [CommRing A] [Algebra k A] (t : StandardGroupSchemes.affine k A ⟶ T.X), t • (toUnit (StandardGroupSchemes.affine k A) ≫ x) = toUnit (StandardGroupSchemes.affine k A) ≫ x",
+  "branch": "sheaf-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-61e69510b",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Read item node (diff vs live: only lean + stmt_dep def-sfb-tori-multiplicative-type), report (Worker report + Second reading by Q101 placeholder), module, all stmt_dep records, live ToriMultiplicativeType.splitTorus, StandardGroupSchemes.affine/multiplicative, Mathlib ModObj and Cartesian Hom smul. Clauses match Milne 16.51 specialized to G_m^r: Field k, T : Grp(Over Spec k) with Grp-iso to splitTorus k r (r=0 trivial), IsProper (contains LocallyOfFiniteType+QuasiCompact), ModObj action with both identities, rational point as 𝟙_ ⟶ X, conclusion t • x_A = x_A for all k-algebras A : Type u and t ∈ T(A) (scheme-theoretic, T's own coordinate ring is a test algebra). Edge cases r=0, zero/nonreduced A, nonreduced X, finite/imperfect k ok; universes bound. No defs, no duplicate name/file live, no owning action def node, lean.statement verbatim, proof sorry, docstrings with source and six proof steps. No findings; compile not reproduced."
+ }
+}

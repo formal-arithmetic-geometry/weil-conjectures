@@ -1,0 +1,231 @@
+{
+ "id": "lem-trf-closed-subscheme-field-stalk-test",
+ "kind": "statement",
+ "title": "Closed ambient points with separable field stalks detect an unramified closed subscheme",
+ "statement": "Let $k$ be a field, let $X\\to\\operatorname{Spec}k$ be a scheme locally of finite type [def-weil-finite-type-morphism], and let $i:Y\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion]. Suppose that for every $y\\in Y$ whose image $i(y)$ is a closed point of $X$ [def-weil-closed-points], the canonical residue map $\\mathcal O_{Y,y}\\to\\kappa(y)$ [def-weil-residue-field] is an isomorphism and $\\kappa(y)/k$ is a finite separable algebraic field extension [def-weil-pbc-separable-algebraic-extension]. Then $Y\\to\\operatorname{Spec}k$ is locally of finite type and unramified [def-weil-unramified-morphism]. In addition, every $y\\in Y$ has image a closed point of $X$, the map $\\mathcal O_{Y,y}\\to\\kappa(y)$ is an isomorphism, and $\\kappa(y)/k$ is finite separable. The empty scheme $Y$ is allowed; no quasi-compactness or dimension assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), combined with morphisms.tex Tag 02G7 (lemma-unramified-over-field): closed-specialization and field-stalk argument elaborating the unramifiedness step of curves.tex, lemma-nodal-lci."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open cover $U_j=\\operatorname{Spec}B_j$ of $X$ with each $B_j$ finitely generated over $k$, as in [def-weil-finite-type-morphism]. By the affine description in [def-weil-closed-immersion], $i^{-1}(U_j)=\\operatorname{Spec}(B_j/I_j)$ for an ideal $I_j$. The images of any finite set of $k$-algebra generators of $B_j$ generate $B_j/I_j$. These inverse images cover $Y$, so $Y\\to\\operatorname{Spec}k$ is locally of finite type. No finite subcover is required.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01QO (lemma-closed-immersion), affine quotient description, and definition of locally finite type (Tag 01T0)."
+   }
+  },
+  {
+   "text": "Fix $y\\in Y$ and put $Z=\\overline{\\{i(y)\\}}\\subset X$. By [lem-sc-lft-over-field-jacobson-space], the ambient closed points in $Z$ are dense in $Z$. Since $i(y)\\in Z$, this dense set is nonempty: the closure of the empty set is empty. Choose such a closed point $x\\in Z$. The image $i(Y)$ is closed and contains $i(y)$, hence contains $Z$ [def-weil-closed-immersion]. Thus $x=i(z)$ for a unique $z\\in Y$. The homeomorphism onto this closed image identifies $\\overline{\\{y\\}}$ with $Z$, so $z\\in\\overline{\\{y\\}}$. In particular $y$ is a generalization of $z$, and the hypothesis of the item applies at $z$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), part (2), applied to the closure of the ambient point."
+   }
+  },
+  {
+   "text": "The canonical residue map at $z$ is an isomorphism by hypothesis, so $A=\\mathcal O_{Y,z}$ is a field. Apply clause (1) of [lem-weil-pbc-spec-local-ring-canonical-morphism] to $(Y,z)$: the image of $\\operatorname{Spec}A\\to Y$ is exactly the set of generalizations of $z$, and its closed point maps to $z$. Since the spectrum of a field has one point [def-weil-affine-spectrum], this image is $\\{z\\}$. Step 2 therefore gives $y=z$. Consequently every $y\\in Y$ maps to a closed point of $X$, and the assumed canonical residue isomorphism and finite separability apply at every $y$.",
+   "uses": [
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J7 (lemma-specialize-points), with canonical morphism 02NA (equation-canonical-morphism)."
+   }
+  },
+  {
+   "text": "For every $y\\in Y$, the singleton $\\{i(y)\\}$ is closed in $X$ by step 3. Its inverse image under $i$ is $\\{y\\}$, since a closed immersion is injective and continuous [def-weil-closed-immersion]; thus $y$ is closed in $Y$ [def-weil-closed-points]. Together with step 1 and the field and separability conclusions of step 3, these are precisely the hypotheses of the reverse implication in [lem-trf-unramified-over-field-local-criterion]. Hence $Y\\to\\operatorname{Spec}k$ is unramified. This proves every assertion. If $Y$ is empty, steps 2 and 3 are vacuous, and the same local criterion applies.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-closed-points",
+    "lem-trf-unramified-over-field-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G7 (lemma-unramified-over-field), part (1), in the local-ring form of the cited node; curves.tex Tag 0C4E (lemma-nodal-lci), last paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-points",
+  "lem-trf-unramified-over-field-local-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4E (lemma-nodal-lci), final paragraph: the closed-point field-stalk test is elaborated using varieties.tex Tag 0478 and schemes.tex Tag 01J7, then morphisms.tex Tag 02G7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme of a scheme locally of finite type over a field is unramified when its local rings at ambient closed points are finite separable residue fields; every point of the closed subscheme is then closed in the ambient scheme",
+   "results": "{\"t\": \"2026-10-22T06:00:57Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subscheme of a scheme locally of finite type over a field is unramified when its local rings at ambient closed points are finite separable residue fields; every point of the closed subscheme is then closed in the ambient scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.unramifiedLocus\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\"], \"digest\": \"cf69c8c398a86b9f\"}; No match: the local-ring unramified criteria concern one localization, and Jacobson singleton criteria concern one point; none propagates field-stalk hypotheses restricted to ambient closed points to all points of a closed subscheme.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unramified\", \"IsField\"",
+   "results": "{\"t\": \"2026-10-22T06:00:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unramified\\\", \\\"IsField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\"], \"digest\": \"55cb98f51db8d389\"}; No match: the local-ring unramified criteria concern one localization, and Jacobson singleton criteria concern one point; none propagates field-stalk hypotheses restricted to ambient closed points to all points of a closed subscheme.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unramified.*(closed|field)|closed.*unramified|isField.*(stalk|localization)|stalk.*isField",
+   "results": "{\"t\": \"2026-10-22T06:00:45Z\", \"tool\": \"grep\", \"query\": \"unramified.*(closed|field)|closed.*unramified|isField.*(stalk|localization)|stalk.*isField\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"87524685a1d81a19\"}; No match: the local-ring unramified criteria concern one localization, and Jacobson singleton criteria concern one point; none propagates field-stalk hypotheses restricted to ambient closed points to all points of a closed subscheme.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type scheme over a field whose local rings at closed points are finite separable fields is unramified and all its points are closed",
+   "results": "{\"t\": \"2026-10-22T06:00:45Z\", \"tool\": \"leansearch\", \"query\": \"A finite type scheme over a field whose local rings at closed points are finite separable fields is unramified and all its points are closed\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The service returned a rate-limit error; no absence conclusion is drawn from this request.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jacobson finite type scheme with field stalks at all closed points has no nonclosed points; separable residue fields imply an unramified structure morphism",
+   "results": "{\"t\": \"2026-10-22T06:01:21Z\", \"tool\": \"leanfinder\", \"query\": \"Jacobson finite type scheme with field stalks at all closed points has no nonclosed points; separable residue fields imply an unramified structure morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\"], \"digest\": \"c3d6d8a550384f20\"}; No match: the local-ring unramified criteria concern one localization, and Jacobson singleton criteria concern one point; none propagates field-stalk hypotheses restricted to ambient closed points to all points of a closed subscheme.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(stalk|localRing)|Unramified.*[Ff]ield|isField.*[Uu]nramified",
+   "results": "{\"t\": \"2026-10-22T06:01:06Z\", \"tool\": \"grep\", \"query\": \"closed.*(stalk|localRing)|Unramified.*[Ff]ield|isField.*[Uu]nramified\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Module.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Unramified/Dedekind.lean\", \"Mathlib/RingTheory/Unramified/Locus.lean\", \"Mathlib/RingTheory/Unramified/Locus.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\"], \"digest\": \"817b3774bf09c73e\"}; No match: the local-ring unramified criteria concern one localization, and Jacobson singleton criteria concern one point; none propagates field-stalk hypotheses restricted to ambient closed points to all points of a closed subscheme.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subscheme of a locally finite type scheme over a field with finite separable field local rings at ambient closed points is unramified and all its points are closed",
+   "results": "{\"t\": \"2026-10-23T04:12:43Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subscheme of a locally finite type scheme over a field with finite separable field local rings at ambient closed points is unramified and all its points are closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.unramifiedLocus\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isClosed_singleton_iff_isClosedImmersion\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\"], \"digest\": \"39969068c3aaca08\"}; Read the actual returned hits. The algebraic local unramified criteria and Jacobson-space results do not state the closed-subscheme test, which combines specialization with the field stalk hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unramified.*(closed|field)|closed.*unramified|isField.*stalk|stalk.*isField",
+   "results": "{\"t\": \"2026-10-23T04:13:52Z\", \"tool\": \"grep\", \"query\": \"unramified.*(closed|field)|closed.*unramified|isField.*stalk|stalk.*isField\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\"], \"digest\": \"db11eeb7a437063e\"}; Read the actual returned hits. The algebraic local unramified criteria and Jacobson-space results do not state the closed-subscheme test, which combines specialization with the field stalk hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme locally of finite type over a field whose local rings at closed points are finite separable fields is unramified",
+   "results": "{\"t\": \"2026-10-23T04:13:52Z\", \"tool\": \"leansearch\", \"query\": \"A scheme locally of finite type over a field whose local rings at closed points are finite separable fields is unramified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"Algebra.Unramified.finiteType\", \"Algebra.Unramified\", \"Algebra.Unramified.mk\", \"Algebra.FormallyUnramified\", \"Algebra.FormallyUnramified.iff_isSeparable\"], \"digest\": \"369c13bcbbf54c7f\"}; Read the actual returned hits. The algebraic local unramified criteria and Jacobson-space results do not state the closed-subscheme test, which combines specialization with the field stalk hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unramified\", \"IsField\"",
+   "results": "{\"t\": \"2026-10-23T04:13:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Unramified\\\", \\\"IsField\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\"], \"digest\": \"55cb98f51db8d389\"}; Read the actual returned hits. The algebraic local unramified criteria and Jacobson-space results do not state the closed-subscheme test, which combines specialization with the field stalk hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Jacobson scheme with field stalks at closed points has no nonclosed points",
+   "results": "{\"t\": \"2026-10-23T04:14:02Z\", \"tool\": \"leanfinder\", \"query\": \"A Jacobson scheme with field stalks at closed points has no nonclosed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfOfIsJacobsonRing\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfIsJacobsonRingCarrier\", \"closure_closedPoints\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"jacobsonSpace_iff_locallyClosed\"], \"digest\": \"8dd36ae5416e062e\"}; Read the actual returned hits. The algebraic local unramified criteria and Jacobson-space results do not state the closed-subscheme test, which combines specialization with the field stalk hypothesis.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-curve-lci-criterion",
+  "date": "2026-10-22",
+  "group": "Q10"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The nodal-curve geometry used below the local-term proof, via nodal-family-fitting-singular: original step 1, last two sentences (closed specialization inside the singular subscheme), and original step 2 (the field stalk forces the specialization to be equality; quotient affine algebras are finite type; then apply the unramified-over-a-field local criterion).",
+   "via": [
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-closed-subscheme-field-stalk-test",
+  "worker": "stage1",
+  "summary": "Preserve the statement and its six statement dependencies. Give a four-step proof: finite type via affine quotients, closed specialization in the ambient Jacobson scheme, equality of that specialization using the canonical local-ring spectrum, and the existing local criterion for unramifiedness. Reuse all needed DAG nodes; create none. Check the empty scheme and arbitrary non-quasi-compact schemes. Record actual Mathlib queries and clause-specific citation quotations.",
+  "blueprint": "Retains the recorded ancestry from lem-trf-local-term-locality through nearby-cycle duality, plurinodal alteration and nodal-family geometry. Precisely elaborates the nodal-curve criterion (lem-trf-nodal-curve-lci-criterion), forward nodal-to-unramified direction: curves.tex Tag 0C4E, last paragraph, sentence beginning By Lemma lemma-nodal for every point x in Z. Steps 2 and 3 justify passing the ambient-closed-point hypotheses to every point before applying the field-local criterion. The current main-20261015 local-term proof itself does not state this auxiliary scheme lemma; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Only clause (1), the image of Spec of the local ring as all generalizations, is used as a generic scheme-local tool. The trace-formula unit has no separate result stating this image formula; its full pullback/flatness conclusions are unused."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-16bc9a4fc",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-16bc9a4fc (reviewer sub-agent of L); spot-checked: PASS. I read the item, the cited node statements and the sources in full. The delivery is one commit with the item and its report; it adds no new nodes and does not change the statement or its 6 stmt_deps. The statement is true: it makes rigorous the unramifiedness step at the end of curves.tex 0C4E lemma-nodal-lci. Step 1 (marked elementary): the affine quotient clause of def-weil-closed-immersion (01QO) and quotients of finitely generated algebras give locally of finite type; no finite subcover is used. Step 2: the Mathlib leaf lem-sc-lft-over-field-jacobson-space (0478(2)) gives ambient closed points dense in every closed Z. Taking Z as the closure of {i(y)}, it contains a closed point x = i(z), and since i is a homeomorphism onto a closed image, z is in the closure of {y}. Step 3: the field stalk at z plus clause (1) of lem-weil-pbc-spec-local-ring-canonical-morphism (01J7) and the one-point Spec of a field give y = z. Step 4: {y} = i⁻¹({i(y)}) is closed, so the 'if' direction of lem-trf-unramified-over-field-local-criterion (02G7) applies. All conclusions are covered. Edge cases checked: empty Y, infinite disjoint union of Spec k, dual numbers, an inseparable residue extension, A¹, non-separated X. The citer lem-trf-nodal-curve-lci-criterion uses exactly these hypotheses and conclusions. The rg -L duplicate search found no node stating the item, and there is no cycle. Tag/label pairs check against tags/tags, and no SGA source is cited. Accepted tool_use: lem-weil-pbc-spec-local-ring-canonical-morphism (unit sk-thm-p1), clause (1) only, because the unit has no node stating the 01J7 image fact."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSubschemeFieldStalkTest",
+  "declaration": "AlgebraicGeometry.closed_subscheme_unramified_of_closed_point_field_stalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSubschemeFieldStalkTest.lean",
+  "statement": "theorem closed_subscheme_unramified_of_closed_point_field_stalks {k : Type u} [Field k] {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] (i : Y ⟶ X) [IsClosedImmersion i] (h : ∀ y : Y, i y ∈ closedPoints X → Function.Bijective (Y.residue y) ∧ ((i ≫ f).residueFieldAlgebraMap y).Finite ∧ @Algebra.IsSeparable k (Y.residueField y) _ _ ((i ≫ f).residueFieldAlgebraMap y).toAlgebra) : LocallyOfFiniteType (i ≫ f) ∧ IsUnramified (i ≫ f) ∧ ∀ y : Y, i y ∈ closedPoints X ∧ Function.Bijective (Y.residue y) ∧ ((i ≫ f).residueFieldAlgebraMap y).Finite ∧ @Algebra.IsSeparable k (Y.residueField y) _ _ ((i ≫ f).residueFieldAlgebraMap y).toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13b1735c9",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Node unchanged except lean record; lean.statement verbatim in file. Clauses match: LocallyOfFiniteType f, IsClosedImmersion i, hypothesis only for i y ∈ closedPoints X, canonical Y.residue bijective, (i≫f).residueFieldAlgebraMap finite and Algebra.IsSeparable; conclusion LocallyOfFiniteType ∧ IsUnramified (recorded def) ∧ ∀ y all pointwise clauses. Statement true (0478 Jacobson specialization, 01J7 field stalk forces y=z, 02G7 via landed local-criterion node). Edge cases: empty Y, infinite disjoint union, k[ε], inseparable extension, A¹, non-separated X. One sorry theorem, docstrings carry source, blueprint tag and 4 steps; single universe forced by Spec (.of k); imports exist; no name clash. residueFieldAlgebraMap (owned by sk-def-zeta, no stmt_dep) is the canonical construction of def-weil-residue-field, used the same way by the landed lem-trf-unramified-over-field-local-criterion: note only. No compile, since no file was changed."
+ }
+}

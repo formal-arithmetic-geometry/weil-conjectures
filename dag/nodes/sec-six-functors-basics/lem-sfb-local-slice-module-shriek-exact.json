@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-local-slice-module-shriek-exact",
+ "kind": "statement",
+ "title": "Exact module lower shriek under local slice equivalences",
+ "statement": "Work in the small-site universes of [def-weil-size-convention]. Let $\\mathcal C,\\mathcal D$ be sites [def-weil-pbc-sites-and-cohomology], and let $u:\\mathcal C\\to\\mathcal D$ be continuous and cocontinuous [def-weil-pbc-special-cocontinuous-functor](1). Let $R$ be a sheaf of commutative rings on $\\mathcal D$ and put $R'=R\\circ u$, with the identity structural ring map. For module sheaves [def-weil-sheaf-of-modules-category] let $T:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R')$ be precomposition. Suppose that for every $U\\in\\mathcal C$ the induced functor $u_U:\\mathcal C/U\\to\\mathcal D/u(U)$, $(V\\to U)\\mapsto(u(V)\\to u(U))$, is an equivalence of sites and identifies their restricted ring sheaves [def-pur-localized-ringed-site]. Suppose also that fibre products and equalizers exist in $\\mathcal C$ and are preserved by $u$, where an equalizer of $r,s:X\\to Y$ is the universal arrow $e:E\\to X$ with $re=se$. Then $T$ has an additive left adjoint $L:\\operatorname{Mod}(R')\\to\\operatorname{Mod}(R)$ which is exact. If $L^{\\mathrm{Ab}}$ denotes the left adjoint of precomposition on abelian sheaves, there is a natural isomorphism $\\mathrm{forget}\\circ L\\simeq L^{\\mathrm{Ab}}\\circ\\mathrm{forget}$, where $\\mathrm{forget}$ drops the ring action. No terminal object of either site is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0797 (lemma-lower-shriek-modules), 0798 (remark-when-shriek-equal), and 04BH (lemma-exactness-lower-shriek). The equivalence on slices makes the comparison (equation-compare-on-localizations) of 0798 an isomorphism."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "The module categories are abelian by [def-weil-sheaf-of-modules-category]. Apply [lem-trf-ringed-site-restriction-generator-data] to $u,R$: $T$ is additive, and its small-sum class $\\mathcal P$ epimorphically generates $\\operatorname{Mod}(R')$. For $P=\\bigoplus_iE_{U_i}^{R'}$, the displayed natural bijections in that statement corepresent $N\\mapsto\\operatorname{Hom}_{R'}(P,TN)$ by $\\bigoplus_iE_{uU_i}^{R}$. An isomorphism of $P$ with such a sum gives the same corepresentation by precomposing Hom with that isomorphism. Thus [lem-trf-partially-defined-module-adjoint], with $\\mathcal A=\\operatorname{Mod}(R)$ and $\\mathcal B=\\operatorname{Mod}(R')$, supplies $L\\dashv T$. All sums are small by the generator statement.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-trf-ringed-site-restriction-generator-data",
+    "lem-trf-partially-defined-module-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0797, lemma-lower-shriek-modules: its evaluation bijections and the epimorphic-generator adjoint criterion (Homology Tag 0793)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-left-adjoint-preserves-colimits], $L$ preserves finite colimits. Apply [lem-sfb-preserving-colimits-additive] to the abelian module categories of [def-weil-sheaf-of-modules-category]: $L$ is additive. Fix its adjunction unit $\\eta$.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-preserving-colimits-additive",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0797, the additive module adjunction; elementary consequences of the adjunction."
+   }
+  },
+  {
+   "text": "Precomposition on abelian sheaves has a left adjoint $A$ by [lem-weil-pbc-site-continuous-pushforward-sheaf] and [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. The same applies to each $u_U$, giving $A_U\\dashv T_U^{\\mathrm{Ab}}$. Indeed the localized coverings are underlying coverings by [def-pur-localized-ringed-site]; continuity and covering pullback preservation restrict from $u$, and cocontinuity lifts a cover of $u(V)$ to a cover of $V$, keeping the composite maps to $U$. The sites and their comma categories remain small. Write $R_U=R|_{u(U)}$; restriction gives $R^{\\prime}|_U=T_U^{\\mathrm{Ab}}R_U$ section by section.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0798, localized square; sites.tex lemma-localize-cocontinuous; abelian adjunction as in lemma-g-shriek-adjoint."
+   }
+  },
+  {
+   "text": "Fix $U$. A quasi-inverse to the site equivalence $u_U$ preserves covers, so precomposition with it sends sheaves to sheaves: its sheaf-condition diagrams identify with those on the corresponding covers. The two quasi-inverse isomorphisms then give inverse functors on abelian sheaves, with their group laws unchanged. Thus $T_U^{\\mathrm{Ab}}$ is fully faithful. Its adjunction counit $c_U:A_UT_U^{\\mathrm{Ab}}R_U\\to R_U$ is invertible: fullness lifts the unit $\\eta^{U}_{T_U^{\\mathrm{Ab}}R_U}$ to $d:R_U\\to A_UT_U^{\\mathrm{Ab}}R_U$. The triangle identity and faithfulness give $c_Ud=1$. Both $dc_U$ and $1$ have adjunct $\\eta^{U}_{T_U^{\\mathrm{Ab}}R_U}$, so injectivity of the adjunction bijection gives $dc_U=1$. This works for every $U$ without a terminal object in either original site.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0798, equation-compare-on-localizations; elementary verification of its hypothesis using the given site equivalences and the adjunction identities."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-module-shriek-forgetful-counit-criterion] to $L,A,A_U$. Step 4 verifies precisely its counit hypotheses on the restricted ring sheaves, so its specified natural map $\\gamma:A F_{\\mathcal C}\\to F_{\\mathcal D}L$ is invertible. Its inverse is the required natural isomorphism $\\mathrm{forget}\\circ L\\simeq L^{\\mathrm{Ab}}\\circ\\mathrm{forget}$, with $L^{\\mathrm{Ab}}=A$. Exactness will follow in Step 6.",
+   "uses": [
+    "lem-sfb-module-shriek-forgetful-counit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0798, final implication following equation-compare-on-localizations."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-abelian-lower-shriek-exact] to $u$ and the abelian left adjoint $A$ from Step 3. Its hypotheses are exactly the given continuity, cocontinuity, fibre products, equalizers and their preservation, so $A$ is exact. By [lem-weil-pbc-module-sheaves-colimits-forgetful], forgetting module actions is faithful and preserves kernels and cokernels on both small sites. Hence an input short exact module sequence becomes short exact after forgetting and applying $A$; the natural isomorphism of Step 5 identifies it with the underlying sequence of its image under $L$. This implies module exactness: its kernel, cokernel and middle homology have zero underlying abelian sheaves, since forgetting preserves kernels and cokernels; faithfulness then makes their identity maps zero, so these objects are zero. Thus $L$ is exact, completing all clauses.",
+   "uses": [
+    "lem-sfb-abelian-lower-shriek-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BH, lemma-exactness-lower-shriek, combined with Tags 03DA/03DB (lemma-abelian, lemma-limits-colimits) and the comparison of Tag 0798."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-ringed-site-restriction-generator-data",
+  "lem-trf-partially-defined-module-adjoint",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-preserving-colimits-additive",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-module-shriek-forgetful-counit-criterion",
+  "lem-sfb-abelian-lower-shriek-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0797 (generator construction), 0798 (localized counit comparison), and 04BH (abelian exactness)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "shriek|lowerShriek|PreservesFiniteLimits",
+   "results": "{\"t\": \"2026-10-23T22:08:21Z\", \"tool\": \"grep\", \"query\": \"shriek|lowerShriek|PreservesFiniteLimits\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean\"], \"digest\": \"a6cde06cac1e19af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module adjunctions and finite-limit preservation by evaluation/forgetful functors do not establish exactness of the left adjoint to module precomposition under these hypotheses. Read PullbackContinuous.lean:45-118 and Limits.lean:92-120; neither states the slice-equivalence criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact module left adjoint to restriction along a continuous cocontinuous site functor inducing equivalences on all localized sites",
+   "results": "{\"t\": \"2026-10-23T22:08:21Z\", \"tool\": \"leansearch\", \"query\": \"Exact module left adjoint to restriction along a continuous cocontinuous site functor inducing equivalences on all localized sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Adjunction.isLocalization_leftAdjoint'\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"CategoryTheory.plusPlusAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.constantSheafΓAdj\"], \"digest\": \"e49bdcfa960ab8a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module adjunctions and finite-limit preservation by evaluation/forgetful functors do not establish exactness of the left adjoint to module precomposition under these hypotheses. Read PullbackContinuous.lean:45-118 and Limits.lean:92-120; neither states the slice-equivalence criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"PreservesFiniteLimits\"",
+   "results": "{\"t\": \"2026-10-23T22:08:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"PreservesFiniteLimits\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toPresheaf_preservesFiniteLimits\", \"PresheafOfModules.evaluation_preservesFiniteLimits\", \"SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\"], \"digest\": \"bc3b628dad9a245a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module adjunctions and finite-limit preservation by evaluation/forgetful functors do not establish exactness of the left adjoint to module precomposition under these hypotheses. Read PullbackContinuous.lean:45-118 and Limits.lean:92-120; neither states the slice-equivalence criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lower shriek on sheaves of modules is exact for a continuous cocontinuous functor preserving fiber products and equalizers and inducing equivalences on slice ringed sites",
+   "results": "{\"t\": \"2026-10-23T22:08:22Z\", \"tool\": \"leanfinder\", \"query\": \"Lower shriek on sheaves of modules is exact for a continuous cocontinuous functor preserving fiber products and equalizers and inducing equivalences on slice ringed sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"SheafOfModules.instIsRightAdjointPushforward\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\"], \"digest\": \"7a5e27aa006525bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module adjunctions and finite-limit preservation by evaluation/forgetful functors do not establish exactness of the left adjoint to module precomposition under these hypotheses. Read PullbackContinuous.lean:45-118 and Limits.lean:92-120; neither states the slice-equivalence criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|lowerShriek|exact.*[Ss]heaf|[Ss]heaf.*exact",
+   "results": "{\"t\": \"2026-10-23T22:08:58Z\", \"tool\": \"grep\", \"query\": \"shriek|lowerShriek|exact.*[Ss]heaf|[Ss]heaf.*exact\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/EqualizerSheafCondition.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\"], \"digest\": \"e409ba9ea853f56a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module adjunctions and finite-limit preservation by evaluation/forgetful functors do not establish exactness of the left adjoint to module precomposition under these hypotheses. Read PullbackContinuous.lean:45-118 and Limits.lean:92-120; neither states the slice-equivalence criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for modules along a locally equivalence site functor agrees with abelian lower shriek and preserves short exact sequences",
+   "results": "{\"t\": \"2026-10-23T22:09:00Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero for modules along a locally equivalence site functor agrees with abelian lower shriek and preserves short exact sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"PresheafOfModules.homEquivOfIsLocallyBijective\", \"PresheafOfModules.toPresheaf_map_toSheafify\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\"], \"digest\": \"daa9485f02b93a26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: module adjunctions and finite-limit preservation by evaluation/forgetful functors do not establish exactness of the left adjoint to module precomposition under these hypotheses. Read PullbackContinuous.lean:45-118 and Limits.lean:92-120; neither states the slice-equivalence criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-representable-module-injective-transport",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Injective module transport along representable stack morphisms. Supporting input: Exact module lower shriek under local slice equivalences.",
+   "via": [
+    "lem-sfb-stack-representable-module-injective-transport",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-slice-module-shriek-exact",
+  "worker": "stage1",
+  "summary": "Repaired returned head ed48ae3bb1c on the current DAG. Removed the backward edge to ringed-site-slice-equivalence-exact-shriek, which now depends on this item. Constructed the module adjoint using existing generator and partial-adjoint statements, retained the localized counit proof and comparison child, and transported abelian exactness through that comparison using a new general 04BH statement. Statement unchanged; two new unsplit nodes, no Mathlib leaves.",
+  "blueprint": "Supporting site-theoretic prerequisite below det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction, via the inherited chain. Steps 1-6 realize the exact local module adjoint and its underlying-abelian comparison; latest sk-thm-sf-ctf-stability remains unchanged. The ancestor tool reports null for this inherited chain, retained as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-ringed-site-restriction-generator-data",
+    "why": "Step 1 uses generic module generators and their corepresenting Hom bijections; this unit has no replacement for the general 0797 generator computation."
+   },
+   {
+    "node": "lem-trf-partially-defined-module-adjoint",
+    "why": "Step 1 extends a partial left adjoint from an epimorphic generating class; this is a generic abelian-category tool, not a trace-formula argument."
+   },
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "Step 3 checks precomposition preserves sheaves globally and on slices, a generic continuity tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Step 6 uses exact faithful forgetting from module sheaves to abelian sheaves; this generic ringed-site tool detects the transported short exact sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-ringed-site-restriction-generator-data",
+  "lem-trf-partially-defined-module-adjoint",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-180c3189d",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-180c3189d (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, and Stacks sites-modules 04BH (lemma-exactness-lower-shriek), 0797 and 0798 (remark-when-shriek-equal, equation-compare-on-localizations). Return point C6 (cycle via lem-sfb-ringed-site-slice-equivalence-exact-shriek, which now cites the item) is repaired: none of the closures of generator-data, partial-adjoint, the criterion node or the 04BH node contains the item. Step 1: generator data plus Homology 0793 give L -| T, with Mod abelian and objects isomorphic to sums handled by composing with the isomorphism. Step 2: L preserves finite colimits (0038 leaf), so it is additive (010N leaf). Step 3: 00WW+00WX give A and A_U; I checked that u_U is continuous and cocontinuous from the localized covers and fibre products, and that R'|_U=T_U R|_u(U) holds sectionwise. Step 4 (elementary) re-derived: a cover-preserving quasi-inverse gives fully faithful T_U^Ab; cd=1 by the triangle identity and faithfulness, dc=1 because both have adjunct eta. Step 5: the criterion's gamma (adjunct of F(eta_M)) is inverted, which is the stated comparison in the correct direction. Step 6: 04BH makes A exact; forget is faithful and preserves kernels and cokernels, so exactness transported through gamma is reflected (advisory: the forgetful node's sheafification hypothesis is implicit for small sites). New node lem-sfb-abelian-lower-shriek-exact matches 04BH (a)-(c) and needs no terminal object (tested: a discrete two-object C to a point gives A=sum, exact). New node lem-sfb-module-shriek-forgetful-counit-criterion is the final implication of 0798: c_U is the counit at R|_u(U) with O_C=g^-1 O_D=R∘u, gamma is the source's transformation; its truth was re-derived via generators, gamma = j_u(U)!(c_U). Neither node restates the item. No duplicates in snapshot, live or side-live (rg for 04BH, 0798 and lower shriek + exact). Batch-5: lem-trf-ringed-site-restriction-generator-data (generic 0797 generator computation) and lem-trf-partially-defined-module-adjoint (Homology 0793) are general module-site and abelian-category facts. Neither is part of the trace formula or Poincaré duality or their proofs, and their closures contain no trf theorem or assumption leaf: accepted. All four declared tool_uses accepted. No SGA source. Statement unchanged against live, no re-split note applies, no fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalSliceModuleShriekExact",
+  "declaration": "CategoryTheory.exists_exact_moduleLeftAdjoint_forget_iso_of_localSliceEquivalences",
+  "file": "lean/Sheaf/CategoryTheory/LocalSliceModuleShriekExact.lean",
+  "statement": "theorem exists_exact_moduleLeftAdjoint_forget_iso_of_localSliceEquivalences {C : Type c} [Category.{vc} C] {D : Type d} [Category.{vd} D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) [HasPullbacks C] [HasEqualizers C] (F : C ⥤ D) [PreservesLimitsOfShape WalkingCospan F] [PreservesLimitsOfShape WalkingParallelPair F] (hcover : ∀ (X : C) (P : Presieve X), P ∈ J X → P.map F ∈ K (F.obj X)) [F.IsContinuous J.toGrothendieck K.toGrothendieck] [F.IsCocontinuous J.toGrothendieck K.toGrothendieck] (hslice : ∀ X : C, (Over.post (X := X) F).IsEquivalence) (hsliceCover : ∀ (X : C) (Y : Over X) (P : Presieve Y), P.map (Over.forget X) ∈ J Y.left ↔ (P.map (Over.post F)).map (Over.forget (F.obj X)) ∈ K (F.obj Y.left)) (R : Sheaf K.toGrothendieck CommRingCat.{max c d vc vd r}) : ∃ L : ringedSiteModules.{max c d vc vd r} ((F.sheafPushforwardContinuous RingCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck).obj ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R)) ⥤ ringedSiteModules.{max c d vc vd r} ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R), L.Additive ∧ Nonempty (L ⊣ SheafOfModules.pushforward.{max c d vc vd r} (F := F) (𝟙 ((F.sheafPushforwardContinuous RingCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck).obj ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R)))) ∧ PreservesFiniteLimits L ∧ PreservesFiniteColimits L ∧ ∀ A : Sheaf J.toGrothendieck AddCommGrpCat.{max c d vc vd r} ⥤ Sheaf K.toGrothendieck AddCommGrpCat.{max c d vc vd r}, (A ⊣ F.sheafPushforwardContinuous AddCommGrpCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck) → Nonempty (L ⋙ SheafOfModules.toSheaf.{max c d vc vd r} ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R) ≅ SheafOfModules.toSheaf.{max c d vc vd r} ((F.sheafPushforwardContinuous RingCat.{max c d vc vd r} J.toGrothendieck K.toGrothendieck).obj ((sheafCompose K.toGrothendieck (forget₂ CommRingCat.{max c d vc vd r} RingCat.{max c d vc vd r})).obj R)) ⋙ A)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-09bdbf60a",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read item, all 5 stmt_dep records, Stacks 0798 text, Mathlib IsContinuous, landed sibling RingedSiteSliceExactShriek (identical hypotheses/universes; its proof cites this item). Sites/continuity (hcover + pullback preservation; IsContinuous a redundant consequence), cocontinuity = dep clause (1), HasPullbacks/HasEqualizers + preservation, Over.post IsEquivalence + Presieve.map family cover iff (enough for an equivalence of sites via composition axiom), R' = R∘F by definition with identity ring map, T = pushforward 𝟙, ∃ L additive ⊣ T, PreservesFiniteLimits ∧ PreservesFiniteColimits, ∀ A ⊣ abelian precomposition, Nonempty(L⋙forget ≅ forget⋙A) (node says 'there is'; no citer needs a canonical γ). Universes max c d vc vd r per size convention. Statement verbatim, one sorry, no defs, docstrings with source/blueprint and 6 proof steps, node otherwise unchanged vs live, no import cycle. Advisory H11: second reading by the same worker (dispatcher policy). No fixes."
+ }
+}

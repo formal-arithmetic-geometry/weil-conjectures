@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-finite-dominant-normal-affine-chart-rings",
+ "kind": "statement",
+ "title": "Affine chart rings of finite dominant maps with normal base",
+ "statement": "Let $q:V\\to B$ be a finite dominant morphism of integral schemes [def-weil-finite-integral-morphism, def-pc-integral-scheme, def-sbc-normal-dominant-galois]. Suppose $B$ is locally Noetherian [pqf-def-locnoeth] and every local ring of $B$ is an integrally closed domain. Let $B=\\bigcup_iU_i$ be any affine open cover with nonempty $U_i=\\operatorname{Spec}(A_i)$ and Noetherian $A_i$ [def-weil-affine-spectrum, def-weil-pbc-noetherian-ring]. Then every inverse image $q^{-1}(U_i)$ is a nonempty affine open $\\operatorname{Spec}(C_i)$ of $V$, and the restricted morphism $q^{-1}(U_i)\\to U_i$ is induced by an injective ring map $\\varphi_i:A_i\\to C_i$. Each $A_i$ is a normal domain [def-weil-pbc-normal-ring], each $C_i$ is a domain, and $C_i$ is a finitely generated $A_i$-module via $\\varphi_i$. Such a cover of $B$ exists.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 030B, lemma-normality-is-local, (3) implies (1), applied to affine chart rings; finite affine inverse images: morphisms.tex Tag 01WH, definition-integral; affine stalks: schemes.tex Tag 01HV, lemma-spec-sheaves (6). This is the affine-chart preparation for more-morphisms.tex Tag 0F32, lemma-quasi-finite-Noetherian-universally-open, finite normal case."
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-pc-integral-scheme",
+  "def-sbc-normal-dominant-galois",
+  "pqf-def-locnoeth",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [pqf-def-locnoeth], $B$ has an affine open cover with Noetherian coordinate rings. Discard empty members; the remaining opens still cover $B$, since an empty set contains no point. This proves the last assertion. Now fix any cover as in the statement and any index $i$.",
+   "uses": [
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OV, definition-noetherian, locally Noetherian clause"
+   }
+  },
+  {
+   "text": "Write $U=U_i=\\operatorname{Spec}(A_i)$. Since $q(V)$ is dense in $B$, it meets the nonempty open $U$ by [def-sbc-normal-dominant-galois]; hence $W=q^{-1}(U)$ is nonempty. It is open by continuity. The finite-morphism definition [def-weil-finite-integral-morphism] gives $W=\\operatorname{Spec}(C_i)$ affine and the associated ring map $\\varphi_i:A_i\\to C_i$ making $C_i$ a finite $A_i$-module. Both $U$ and $W$ are nonempty affine opens of integral schemes, so [def-pc-integral-scheme] says that both $A_i$ and $C_i$ are domains.",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "def-weil-finite-integral-morphism",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WH, definition-integral (2); properties.tex Tag 01OK, definition-integral"
+   }
+  },
+  {
+   "text": "To prove injectivity, suppose $a\\ne0$ in $A_i$ and $\\varphi_i(a)=0$. The zero ideal of the domain $A_i$ is a prime not containing $a$, so the basic open $D(a)\\subseteq U$ is nonempty. It is also open in $B$, and dominance gives $v\\in V$ with $q(v)\\in D(a)$; necessarily $v\\in W$. Let $Q\\subset C_i$ be its prime. By [lem-weil-pbc-spec-map-stalk-localization], the image point corresponds to $\\varphi_i^{-1}(Q)$. But $\\varphi_i(a)=0\\in Q$, so $a\\in\\varphi_i^{-1}(Q)$, contradicting $q(v)\\in D(a)$. The kernel is zero, which proves injectivity.",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-map-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HY, lemma-morphism-into-affine-where-point-goes; contraction of primes and the defining basic opens of the spectrum"
+   }
+  },
+  {
+   "text": "For each maximal ideal $\\mathfrak m\\subset A_i$, take its point $x\\in U_i$. The affine-open stalk theorem [lem-weil-pbc-affine-open-stalk-localization] identifies $(A_i)_{\\mathfrak m}$ with $\\mathcal O_{B,x}$. The latter is an integrally closed domain by hypothesis, so the localization is a normal domain, in the sense of [def-weil-pbc-normal-ring]. The already proved domain property of $A_i$ and [lem-weil-pbc-normal-domain-of-local-normal] now show that $A_i$ is a normal domain. Its Noetherian property is part of the chosen-cover hypothesis. Since $i$ was arbitrary, all the required assertions hold for every chart.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-normal-domain-of-local-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030B, lemma-normality-is-local, (3) implies (1); schemes.tex Tag 01HV, lemma-spec-sheaves (6)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-finite-integral-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-normal-domain-of-local-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 030B, lemma-normality-is-local; affine preparation from morphisms.tex Tag 01WH, properties.tex Tags 01OK and 01OV, and schemes.tex Tags 01HV and 01HY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsNormalScheme|app.*[Ii]njective|[Ii]njective.*app|IsDominant",
+   "results": "Actual search returned 25 hits: Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean.  Searched Mathlib/AlgebraicGeometry/Morphisms.",
+   "date": "2026-10-22",
+   "verdict": "no match: finite_app covers module finiteness and app_injective covers injectivity after schematic dominance, but neither provides the affine chart domains and normal Noetherian coordinate rings; relative normalization hits construct a different scheme. The stalk-local normality argument remains."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsDominant",
+   "results": "Actual search returned 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite_app covers module finiteness and app_injective covers injectivity after schematic dominance, but neither provides the affine chart domains and normal Noetherian coordinate rings; relative normalization hits construct a different scheme. The stalk-local normality argument remains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dominant morphism of integral schemes with normal locally noetherian target, nonempty affine target charts have normal noetherian domain coordinate rings and injective finite maps to domain coordinate rings of their inverse images",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain. ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite_app covers module finiteness and app_injective covers injectivity after schematic dominance, but neither provides the affine chart domains and normal Noetherian coordinate rings; relative normalization hits construct a different scheme. The stalk-local normality argument remains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine coordinate rings of a finite dominant map to an integral normal locally noetherian scheme are finite injective extensions of normal noetherian domains",
+   "results": "Actual search returned 8 hits: exists_finite_inj_algHom_of_fg, exists_integral_inj_algHom_of_fg, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsIntegralHom.toIsAffineHom, AlgebraicGeometry.IsIntegralHom.mk, AlgebraicGeometry.IsIntegralHom.hasAffineProperty. ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite_app covers module finiteness and app_injective covers injectivity after schematic dominance, but neither provides the affine chart domains and normal Noetherian coordinate rings; relative normalization hits construct a different scheme. The stalk-local normality argument remains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite dominant morphisms from integral schemes to normal schemes, the ring map on every nonempty affine target chart is an injective finite extension of domains with integrally closed source",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext. ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite_app covers module finiteness and app_injective covers injectivity after schematic dominance, but neither provides the affine chart domains and normal Noetherian coordinate rings; relative normalization hits construct a different scheme. The stalk-local normality argument remains."
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegrallyClosed|isDomain_of_isIntegral|app_injective|finite_app",
+   "results": "Actual logged search: 14 hits; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: results cover constituent definitions or clauses, not the stalkwise-to-global normality argument together with all finite chart assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normal scheme affine open coordinate rings are integrally closed domains and finite dominant maps induce injective finite ring maps",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsIntegralHom.integral_app, AlgebraicGeometry.Scheme.Hom.finite_app, isIntegrallyClosedIn_iff, AlgebraicGeometry.affine_isIntegral_iff, AlgebraicGeometry.IsIntegralHom.mk",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: results cover constituent definitions or clauses, not the stalkwise-to-global normality argument together with all finite chart assertions"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNormal, AlgebraicGeometry.IsAffineOpen",
+   "results": "Actual logged search: 0 hits; . loogle: unknown identifier 'AlgebraicGeometry.IsNormal'",
+   "date": "2026-10-23",
+   "verdict": "query rejected: unknown identifier AlgebraicGeometry.IsNormal; no absence conclusion drawn from this query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite dominant morphism of integral schemes to a normal locally noetherian scheme, affine inverse image coordinate rings are finite injective extensions of normal noetherian domains",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, IsIntegralClosure.finite",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: results cover constituent definitions or clauses, not the stalkwise-to-global normality argument together with all finite chart assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant morphism to a reduced scheme is injective on rings of sections over every open subset",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.ext_of_isDominant, AlgebraicGeometry.ext_of_isDominant_of_isSeparated', AlgebraicGeometry.isDominant_of_of_appTop_injective, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.ext_of_isDominant_of_isSeparated, AlgebraicGeometry.Scheme.IsGermInjective, AlgebraicGeometry.injective_isZariskiLocalAtTarget",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: results cover constituent definitions or clauses, not the stalkwise-to-global normality argument together with all finite chart assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nonempty affine charts of an integral scheme have domain section rings; if stalks are integrally closed the chart ring is normal; a finite dominant morphism gives finite injective coordinate maps on those charts",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.instIsGermInjectiveOfIsIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: results cover constituent definitions or clauses, not the stalkwise-to-global normality argument together with all finite chart assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-dominant-normal-base-universally-open",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; justification that the full fibre product has a dense generic point after a finite extension of constants; re-split of finite dominant universal openness: old step 1: nonempty finite affine inverse images, injectivity from dominance, and normality from stalks",
+   "via": [
+    "lem-sfb-finite-dominant-normal-base-universally-open",
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-dominant-normal-affine-chart-rings",
+  "worker": "stage1",
+  "summary": "Proved the affine-chart preparation using existing DAG nodes only: the locally Noetherian cover definition, finite-morphism and integral-scheme definitions, the contraction-of-primes formula, affine stalk localizations, and the normal-domain local criterion. Wrote the nonemptiness and injectivity arguments explicitly. Preserved the statement and its hypotheses. No new nodes.",
+  "blueprint": "The inherited blueprint.from.node is null (confirmed by tools/blueprint_refs.py ancestor). The inherited place traces this to det-thm-sf-ctf-stability-direct-images, proof (3), through the finite normal-model preparation; this split realizes old step 1 of lem-sfb-finite-dominant-normal-base-universally-open. Current latest blueprint direct-images proof and unit read; no change to their route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-5f01a4a0c",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-5f01a4a0c (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery is one commit with the item and its report and creates no new nodes. Its statement and stmt_deps are byte-identical to the live node, which is still unsplit in both live and side-live, so there is no supersession. No repair note exists for this item. Steps: (1) pqf-def-locnoeth supplies a Noetherian affine cover; empty members are dropped and B is nonempty. (2) Density means q^{-1}(U) is nonempty. def-weil-finite-integral-morphism gives Spec C_i with C_i finite over A_i, and def-pc-integral-scheme gives domains, used only after nonemptiness is shown. (3) Injectivity: for a≠0 with φ(a)=0, D(a) is nonempty because (0)∈D(a). Dominance gives v over it, and lem-weil-pbc-spec-map-stalk-localization says the image is the contracted prime, which contains a: a contradiction. The argument is valid and short enough to mark elementary. (4) lem-weil-pbc-affine-open-stalk-localization(c) gives (A_i)_m≅O_{B,x}, which is normal by hypothesis. With the domain property, lem-weil-pbc-normal-domain-of-local-normal gives normality, matching Stacks 030B (3)⇒(1) (algebra.tex l.8177) and 01HV(6) (schemes.tex l.692). Both lemmas are Mathlib-leaf tools, so no tool_uses are needed. The parent's step 1 (Noetherian normal A_i ⊆ C_i domains, C_i finite) is fully covered. Edge cases: A_i a field; identity; Z⊆Z[i]; Z[t^2]→Z[t]; a closed point into A^1 shows dominance is needed. Duplicate search: lem-sfb-dominant-affine-germ-comparison (unsplit) also states injectivity of φ but not the item, so the inline argument is fine. No SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteDominantNormalAffineChartRings",
+  "declaration": "AlgebraicGeometry.finite_dominant_normal_affine_chart_rings",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDominantNormalAffineChartRings.lean",
+  "statement": "theorem finite_dominant_normal_affine_chart_rings {V B : Scheme.{u}} [IsIntegral V] [IsLocallyNoetherian B] (q : V ⟶ B) [IsFinite q] [IsDominant q] (hB : IsNormalScheme B) : (∀ (I : Type v) (U : I → B.Opens) (hU : ∀ i : I, IsAffineOpen (U i)), (⨆ i : I, U i) = ⊤ → (∀ i : I, Nonempty (U i)) → (∀ i : I, IsNoetherianRing Γ(B, U i)) → ∀ i : I, Nonempty (q ⁻¹ᵁ U i) ∧ ∃ hW : IsAffineOpen (q ⁻¹ᵁ U i), hW.fromSpec ≫ q = Spec.map (q.app (U i)) ≫ (hU i).fromSpec ∧ Function.Injective (q.app (U i)).hom ∧ IsDomain Γ(B, U i) ∧ IsIntegrallyClosed Γ(B, U i) ∧ IsDomain Γ(V, q ⁻¹ᵁ U i) ∧ (q.app (U i)).hom.Finite) ∧ (∃ (I : Type u) (U : I → B.Opens), (⨆ i : I, U i) = ⊤ ∧ ∀ i : I, IsAffineOpen (U i) ∧ Nonempty (U i) ∧ IsNoetherianRing Γ(B, U i))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9de8f5dd",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsNormalScheme B = IsIntegral B ∧ stalks integrally closed domains (read def); IsFinite/IsDominant/IsIntegral V/IsLocallyNoetherian B; ∀ I:Type v affine nonempty Noetherian covers → nonempty affine q⁻¹ᵁU, fromSpec equation (true via IsAffineOpen.SpecMap_appLE_fromSpec), injective, normal domain A_i, domain C_i, RingHom.Finite; separate ∃ cover in Type u. Node copy differs from live only in lean; statement verbatim in file; all 7 stmt_deps used via recorded decls; no duplicate found; docstrings/source/blueprint/proof steps present; sorry only; report has Worker report and Second reading sections. No findings."
+ }
+}

@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-adic-completion-flat-deformation-functor",
+ "kind": "statement",
+ "title": "Completion of flat algebra deformations and automatic adic completeness",
+ "statement": "Let $k$ be a field [def-weil-field] and let $B$ be a commutative Noetherian $k$-algebra [def-weil-pbc-noetherian-ring], with ideal $J$. Let $\\mathrm{Art}_k$ consist of Artinian local commutative $k$-algebras $A$ with specified residue field $k$ (Artinian means descending chains of ideals stabilize), and local $k$-maps respecting that field. Write $\\mathfrak m_A$ for the maximal ideal. A marked flat deformation of $B$ over $A$ is a flat $A$-algebra $Q$ [def-weil-pbc-flat-ring-map] with a specified isomorphism $Q/\\mathfrak m_AQ\\cong B$, and arrows over $A$ are isomorphisms respecting it. Let $J_Q$ be the inverse image of $J$ under this quotient. Then $Q$ is Noetherian, and $\\widehat Q=\\varprojlim_n Q/J_Q^n$ is Noetherian, flat over $A$, and complete for $J_Q\\widehat Q$ [def-weil-pbc-adic-completion]. Its reduction is canonically $\\widehat B$. Completion gives a functor of marked deformation groupoids, compatible with base change: for every map $A\\to A_1$ in $\\mathrm{Art}_k$ there is a natural marked isomorphism $\\widehat Q\\otimes_A A_1\\cong\\widehat{Q\\otimes_A A_1}$, the latter completion taken along the inverse image of $J$. Tensor products are those of [def-weil-pbc-module-tensor-product]. Furthermore, if $B$ is already $J$-adically complete, every marked flat deformation $Q$ of $B$ is $J_Q$-adically complete. If also $B$ is local and $J$ is its maximal ideal, $Q$ is a complete Noetherian local ring with maximal ideal $J_Q$.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DYV (lemma-completion), functor and proof; algebra.tex Tag 0DYC (lemma-complete-modulo-nilpotent) for automatic completeness. Finite-module completion gives the natural Artinian base-change isomorphisms."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-artin-deformation-test-category",
+  "def-sfb-marked-flat-algebra-deformations"
+ ],
+ "proof": [
+  {
+   "text": "Put $H=\\mathfrak m_AQ$. By [lem-weil-pbc-artinian-local-noetherian-nilpotent], $\\mathfrak m_A$ has finitely many generators and $\\mathfrak m_A^N=0$ for some $N\\ge1$. Their images generate $H$ and $H^N=0$. The inverse system $Q/H^n$ is constantly $Q$ for $n\\ge N$, so its canonical limit map is an isomorphism. Since $Q/H=B$ is Noetherian, [lem-weil-pbc-completion-noetherian-quotient-noetherian] applied to $(Q,H)$ makes $Q$ Noetherian. Applying [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-adic-completion-mod-ideal] to $(Q,J_Q)$ shows that $\\widehat Q$ is Noetherian and complete for $J_Q\\widehat Q$; $J_Q$ is finitely generated because $Q$ is Noetherian. Finally [lem-weil-pbc-noetherian-completion-flat] makes $Q\\to\\widehat Q$ flat, and [lem-weil-pbc-flat-ring-map-comp] composes it with the given flat map $A\\to Q$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYV (lemma-completion), proof, Noetherianity and flatness paragraphs; algebra.tex Tags 05GH, 0316, 05GG, 00MB."
+   }
+  },
+  {
+   "text": "The $Q$-module $B=Q/H$ is cyclic and the image of $J_Q$ is $J$. Apply [lem-weil-pbc-completion-finite-module-tensor] with ring $Q$, ideal $J_Q$ and module $B$. It gives the canonical bijection $\\widehat Q\\otimes_Q B\\cong\\widehat B$, hence $\\widehat Q\\otimes_A k\\cong\\widehat B$: tensor associativity identifies both with $\\widehat Q/H\\widehat Q$. The completion comparison on a simple tensor is $u\\otimes b\\mapsto (u_n b\\bmod J^n)_n$; this formula preserves products and units, so the bijection is an algebra isomorphism. This supplies the marking on $\\widehat Q$.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYV (lemma-completion), final paragraph; algebra.tex Tag 00MA (lemma-completion-tensor), part (3)."
+   }
+  },
+  {
+   "text": "Every $C\\in\\mathrm{Art}_k$ is finite-dimensional over $k$. Indeed [lem-weil-pbc-artinian-local-noetherian-nilpotent] gives generators $t_1,\\ldots,t_r$ of $\\mathfrak m_C$ and $\\mathfrak m_C^N=0$. Every $c\\in C$ is a scalar from $k$ plus $\\sum_i t_i c_i$, by the specified residue-field isomorphism. Iterating this expression $N$ times writes $c$ as a $k$-linear combination of the finitely many monomials in the $t_i$ of total degree less than $N$. For any $A\\to A_1$ in $\\mathrm{Art}_k$, a finite $k$-spanning set of $A_1$ also spans it over $A$; hence $Q_1=Q\\otimes_A A_1$ is finite as a $Q$-module. Its special fibre is $B$ by associativity and the residue markings. It is flat over $A_1$ by [lem-weil-pbc-flat-module-base-change], so step 1 applies to $Q_1$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-flat-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYV, natural functor of deformation categories; finite-module hypothesis for algebra.tex Tag 00MA, expanded using the Artinian base."
+   }
+  },
+  {
+   "text": "Let $L=J_QQ_1$, $H_1=\\mathfrak m_{A_1}Q_1$, and let $K$ be the inverse image of $J$ in $Q_1$. The image of $L$ in $Q_1/H_1=B$ is $J$, whence $K=L+H_1$. By [lem-weil-pbc-artinian-local-noetherian-nilpotent], $H_1^N=0$ for some $N\\ge1$. Expand a product of $n+N$ elements from $L+H_1$: each term either has at least $N$ factors from $H_1$ and vanishes, or at least $n$ factors from $L$. Thus $K^{n+N}\\subseteq L^n\\subseteq K^n$. The two completion limits are canonically isomorphic: one map uses $Q_1/L^n\\to Q_1/K^n$, its inverse uses $Q_1/K^{n+N}\\to Q_1/L^n$. Compatibility of sequences makes both composites identity at every quotient. This comparison is induced by the identity of $Q_1$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYV, cartesian compatibility; cofinal ideal-power comparison required to use Tag 00MA after base change."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-completion-finite-module-tensor] to the finite $Q$-module $Q_1$. It gives $\\widehat Q\\otimes_A A_1=\\widehat Q\\otimes_Q Q_1\\cong\\varprojlim_n Q_1/L^n$. The formula at level $n$ is $u\\otimes a_1\\mapsto u_n\\otimes a_1\\bmod L^n$, which is multiplicative and unital. Compose with step 4 to obtain $\\widehat Q\\otimes_A A_1\\cong\\widehat{Q_1}_K$. For a marked isomorphism $f:Q\\to Q'$, the quotient maps $f_n$ send $J_Q^n$ onto $J_{Q'}^n$, so $(x_n)\\mapsto(f_n(x_n))$ defines its completion and preserves identities and composition coordinatewise. Naturality of the tensor comparison is included in the cited node. All comparisons commute with step 2's markings: reduction to $k$ gives the same displayed formula for $B$. For $A\\to A_1\\to A_2$, the successive and direct comparisons send $u\\otimes a_1\\otimes a_2$ at every finite quotient to $u_n\\otimes(a_1a_2)$, using the image of $a_1$ in $A_2$. Equality on simple tensors gives the cocycle condition; identity base maps give identity comparisons. Thus completion gives the required functor and natural marked base-change isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYV (lemma-completion), natural functor, expanding Artinian base-change coherence using algebra.tex Tag 00MA."
+   }
+  },
+  {
+   "text": "Assume $B$ is $J$-adically complete. The nilpotence in step 1 makes $Q$ complete for $H=\\mathfrak m_AQ$. It is Noetherian by that step, and $Q/H=B$ is complete for the image $J$ of $J_Q$. Apply [lem-sfb-two-ideal-adic-completeness] with $R=Q$, $I=H$, and second ideal $J_Q$. This proves that the canonical map $Q\\to\\widehat Q$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-two-ideal-adic-completeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0DYC (lemma-complete-modulo-nilpotent), applied with nilpotent first ideal."
+   }
+  },
+  {
+   "text": "If $B$ is local with maximal ideal $J$, the inverse image $J_Q$ is maximal, since $Q/J_Q=B/J$ is a field. Every $q\\notin J_Q$ has unit image in $B$; lift its inverse to $r\\in Q$. Then $qr=1+h$ for $h\\in H$, and $(1+h)^{-1}=\\sum_{i=0}^{N-1}(-h)^i$ since $H^N=0$. Thus $q$ is a unit. Consequently every proper ideal lies in $J_Q$ and $Q$ is local with exactly that maximal ideal. Steps 1 and 6 give Noetherianity and completeness, proving the last clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYV and algebra.tex Tag 0DYC; elementary unit lifting through the nilpotent reduction kernel."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-sfb-two-ideal-adic-completeness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DYV (lemma-completion), proof, with algebra.tex Tags 00MA and 0DYC; finite Artinian base change and cofinality expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completing a flat deformation of a Noetherian algebra along an ideal gives a flat deformation of its completion and commutes with Artinian base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"AdicCompletion.liftAlgHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{S : Type u_5} →\\n  [inst : CommRing S] →\\n    (I : Ideal S) →\\n      {R : Type u_6} →\\n        {A : Type u_7} →\\n          [inst_1 : CommRing R] →\\n            [inst_2 : CommRing A] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R S] →\\n                  (f : (n : ℕ) → A →ₐ[R] \", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ S $, and an $ R $-algebra $ A $, this constructs an $ R $-algebra homomorphism from $ A $ to the $ I $-adic completion of $ S $, given a co\"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_3} →\\n  {S : Type u_4} →\\n    {A : Type u_5} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : Algebra R S] →\\n            (I : Ideal S) →\\n              [IsAdicComplete I S] →\\n                [inst_4 : CommRing A] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian proves only flatness over the original ring; neither the deformation functor with base-change markings nor automatic completeness of deformed rings is stated. Read AsTensorProduct.lean:378-382."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Module.Flat",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u} [CommRing R] (I : Ideal R) [IsNoetherianRing R] : Module.Flat R (AdicCompletion I R)\", \"doc\": \"Adic completion of a Noetherian ring `R` is flat over `R`.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian proves only flatness over the original ring; neither the deformation functor with base-change markings nor automatic completeness of deformed rings is stated. Read AsTensorProduct.lean:378-382."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*(flat|baseChange)|[Ff]lat.*[Cc]ompletion",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"31\", \"text\": \"- `flat_of_isNoetherian`: the adic completion of a Noetherian ring `R` is `R`-flat.\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"378\", \"text\": \"/-- Adic completion of a Noetherian ring `R` is flat over `R`. -/\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean\", \"line\": \"379\", \"text\": \"instance flat_of_isNoetherian : Module.Flat R (AdicCompletion I R) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"24\", \"text\": \"  Since `R` is Noetherian, `AdicCompletion I R` is `R`-flat so `A` is a retract\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Flat.lean\", \"line\": \"44\", \"text\": \"  have : Module.Flat R (AdicCompletion (RingHom.ker f) S) := .trans _ S _\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian proves only flatness over the original ring; neither the deformation functor with base-change markings nor automatic completeness of deformed rings is stated. Read AsTensorProduct.lean:378-382."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian flat deformations commute with completion and reduction modulo an Artinian base ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Ideal.exists_pow_inf_eq_pow_smul\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"[IsNoetherianRing R] [Module.Finite R M] (N : Submodule R M) :\\n  ∃ k : ℕ, ∀ n ≥ k, I ^ n • ⊤ ⊓ N = I ^ (n - k) • (I ^ k • ⊤ ⊓ N)\", \"doc\": \"Let $R$ be a Noetherian commutative ring, $M$ be a finitely generated $R$-module, $I$ be an ideal of $R$, and $N$ be a submodule of $M$. Then there exists a natural number $k$ such that for all $n \\\\ge\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \":\\n  (AlgebraTensorModule.map LinearMap.id f) =\\n    (ofTensorProductEquivOfFiniteNoetherian I N).symm.toLinearMap ∘ₗ\\n      map I f ∘ₗ (ofTensorProductEquivOfFiniteNoetherian I M).toLinearMap\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.map_val_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"(f : M →ₗ[R] N) {n : ℕ} (x : AdicCompletion I M) : (map I f x).val n = f.reduceModIdeal (I ^ n) (x.val n)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, and an $ R $-linear map $ f : M \\to N $, the induced linear map between the $ I $-adic completions of $ M $ and $ N $ satisf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian proves only flatness over the original ring; neither the deformation functor with base-change markings nor automatic completeness of deformed rings is stated. Read AsTensorProduct.lean:378-382."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat algebra over an Artinian local ring with Noetherian complete special fibre is Noetherian and complete along the lifted ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"IsHausdorff.of_isLocalRing\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M] [IsLocalRing R], I ≠ ⊤ → IsHausdorff I M\", \"doc\": \"If $ R $ is a local ring and $ I $ is a proper ideal of $ R $, then the $ I $-adic topology on the module $ M $ is Hausdorff, meaning the intersection of all powers of $ I $ in $ M $ is trivial.\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.QuasiFinite R S] (P : Ideal R) [inst_4 : P.IsPrime], IsArtinianRing (P.Fiber S)\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ P $ is a prime ideal of $ R $, then the fiber of $ P $ in $ S $—defined as the tensor product of the residue field of $ P $ with \"}\n  {\"name\": \"IsHausdorff.of_isDomain\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R] [IsDomain R], I ≠ ⊤ → IsHausdorff I R\", \"doc\": \"If $ R $ is a Noetherian ring and $ I $ is a proper ideal of $ R $, then the $ I $-adic topology on $ R $ is Hausdorff.\"}\n  {\"name\": \"IsNoetherianRing.of_isLocalization_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Semilocal\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] [Finite (MaximalSpectrum R)] (Rₚ : (P : Ideal R) → [P.IsMaximal] → Type u_3)\\n  [inst_2 : (P : Ideal R) → [inst : P.IsMaximal] → CommSemiring (Rₚ P)]\\n  [inst_3 : (P : Ideal R) → [inst_3 : P.IsMaximal] → Algebra R (Rₚ P)]\\n  [∀ (P : Ideal R) [inst_4 : P.IsMaxima\", \"doc\": \"If $ R $ is a commutative semiring such that for every maximal ideal $ P $, the localization $ R_P $ at $ P $ is a Noetherian ring, then $ R $ itself is a Noetherian ring. This criterion establishes t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: AdicCompletion.flat_of_isNoetherian proves only flatness over the original ring; neither the deformation functor with base-change markings nor automatic completeness of deformed rings is stated. Read AsTensorProduct.lean:378-382."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-affine-completion-deformation",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. General completion functor used before splitting its semilocal special fibre into factors.",
+   "via": [
+    "lem-sfb-isolated-affine-completion-deformation",
+    "lem-sfb-nodal-deformation-smoothing-parameters",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adic-completion-flat-deformation-functor",
+  "worker": "stage1",
+  "summary": "Seven-step split of 0DYV and automatic completeness: existing 05GH gives Noetherianity using the nilpotent reduction ideal; 0316/05GG/00MB give completion properties; 00MA gives the marking and finite Artinian base change. Wrote the finite spanning monomial argument, cofinality K=L+m_A1 Q1, and coherence formulas. One new general two-ideal completeness criterion (0DYC), statement only. No statement changes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Local-to-global deformation theorem underlying the node parameters in Pikaart--de Jong 2.3.6; no automorphism action or normalized level cover. Supporting calculation: Deformations of an affine isolated singularity and its completions. General completion functor used before splitting its semilocal special fibre into factors. Realizes the general completion prerequisite through Stacks 0DYV, with automatic completeness via 0DYC.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "why": "Generic commutative algebra 05GH applied to the nilpotent reduction ideal; the item unit has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherian completion theorem 0316; the item unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-c48af4a3d",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-c48af4a3d (reviewer sub-agent of L); spot-checked: I read the whole item and the new node: Stacks 0DYV (examples-defos l.1092-1122), 0DYC (algebra l.23215-23242), and the statements of all 15 nodes the item cites. The item is still unsplit in live and side-live, this is the only run, and there is no repair note. The statement, stmt_deps and blueprint are byte-identical to live; only the proof fields and split_report were added. Step 1: H=m_AQ is nilpotent and finitely generated, so the H-adic system is constant and Q is its own H-completion; 05GH then makes Q Noetherian, after which 0316, 05GG, 00MB and 00HC apply with their hypotheses in place. Step 2: 00MA with the cyclic module B (J_Q^nB=J^n) gives Q^⊗_A k≅B^ as rings. Step 3: an elementary monomial expansion makes Art_k objects finite over k, so Q1 is a finite Q-module; 00HI is used in the right direction. Step 4: K=L+H1 and K^{n+N}⊆L^n⊆K^n, elementary. Step 5: 00MA on Q1 (J_Q^nQ1=L^n) plus step 4; naturality, marking and the cocycle condition are checked on simple tensors. Step 6: the hypotheses of the new 0DYC node are met with R=Q, I=H and second ideal J_Q. Step 7: geometric-series unit lifting, elementary. The new node is exactly 0DYC, with the image (I+J)/I rendered correctly. I tested it at I=0, J=0, I=R and J=R. It does not restate a clause of the item: it is a general commutative-algebra lemma carrying only step 6. rg -L for 0DYC and for completeness/nilpotent finds no duplicate; the power-series 0DYC mention is a different statement. Mathlib's IsAdicComplete.of_lift (Basic.lean l.723) is a lift construction, not this criterion. I accept both declared tool uses: 05GH and 0316, from sk-thm-p1, generic commutative algebra. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicCompletionFlatDeformationFunctor",
+  "declaration": "Algebra.FlatDeformation.adicCompletion_flatDeformationFunctor",
+  "declarations": [
+   "Algebra.FlatDeformation.adicCompletion_flatDeformationFunctor"
+  ],
+  "file": "lean/Sheaf/RingTheory/AdicCompletionFlatDeformationFunctor.lean",
+  "statement": "theorem adicCompletion_flatDeformationFunctor (k B : Type u) [Field k] [CommRing B] [Algebra k B] [IsNoetherianRing B] (J : Ideal B) : (∀ (A : TestCategory k k) (Q : Groupoid B A), IsNoetherianRing (algebra Q) ∧ IsNoetherianRing (AdicCompletion (ideal J Q) (algebra Q)) ∧ ((algebraMap (algebra Q) (AdicCompletion (ideal J Q) (algebra Q))).comp (scalar Q).toRingHom).Flat ∧ IsAdicComplete ((ideal J Q).map (algebraMap (algebra Q) (AdicCompletion (ideal J Q) (algebra Q)))) (AdicCompletion (ideal J Q) (algebra Q)) ∧ (IsAdicComplete J B → IsAdicComplete (ideal J Q) (algebra Q) ∧ ∀ hB : IsLocalRing B, J = @IsLocalRing.maximalIdeal B _ hB → ∃ hQ : IsLocalRing (algebra Q), @IsLocalRing.maximalIdeal (algebra Q) _ hQ = ideal J Q)) ∧ (∀ (A A' : TestCategory k k) (f : A ⟶ A') (Q : Groupoid B A), ∃ (Q' : Groupoid B A') (i : algebra Q →ₐ[k] algebra Q'), IsBaseChange f Q Q' i) ∧ ∃ F : ∀ A : TestCategory k k, Groupoid B A ⥤ Groupoid (AdicCompletion J B) A, ∃ e : ∀ (A : TestCategory k k) (Q : Groupoid B A), algebra ((F A).obj Q) ≃ₐ[k] AdicCompletion (ideal J Q) (algebra Q), (∀ (A : TestCategory k k) (Q : Groupoid B A) (a : ring A), e A Q (scalar ((F A).obj Q) a) = algebraMap (algebra Q) (AdicCompletion (ideal J Q) (algebra Q)) (scalar Q a)) ∧ (∀ (A : TestCategory k k) (Q : Groupoid B A), IsCompletionMap (ideal J Q) J (marking Q).toRingHom ((marking ((F A).obj Q)).toRingHom.comp (e A Q).symm.toRingHom)) ∧ (∀ (A : TestCategory k k) (Q Q' : Groupoid B A) (f : Q ⟶ Q'), IsCompletionMap (ideal J Q) (ideal J Q') (hom f).toRingHom ((e A Q').toRingHom.comp ((hom ((F A).map f)).toRingHom.comp (e A Q).symm.toRingHom))) ∧ (∀ (A A' : TestCategory k k) (f : A ⟶ A') (Q : Groupoid B A) (Q' : Groupoid B A') (i : algebra Q →ₐ[k] algebra Q'), IsBaseChange f Q Q' i → ∃! j : algebra ((F A).obj Q) →ₐ[k] algebra ((F A').obj Q'), IsBaseChange f ((F A).obj Q) ((F A').obj Q') j ∧ IsCompletionMap (ideal J Q) (ideal J Q') i.toRingHom ((e A' Q').toRingHom.comp (j.toRingHom.comp (e A Q).symm.toRingHom)))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All clauses are one conjunction. Completion functors are identified with the actual AdicCompletion by k-algebra equivalences; marking and arrow maps are characterized at every finite quotient. Every Artinian base change exists and is preserved through a unique marked map, whose actual tensor-product isomorphism is fixed on simple tensors. No restriction to finite-type deformations or proper ideals."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7941366a7",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_deps (including the full source of TestCategory), the new def node and both modules, plus Stacks 0DY1 (l.814) and 0DYV (l.1092-1122). Hypotheses are exactly k field and B Noetherian k-algebra with ideal J; nothing extra. Groupoid B A = Core of flat factorisations A→Q→B with surjective marking and kernel m_A Q (= 0DY1); arrows are marked A-isomorphisms. Clauses: Q and Q-hat Noetherian; Q-hat flat over A via the actual composite; Q-hat complete for J_Q Q-hat. F lands in Groupoid B-hat A; e identifies outputs with AdicCompletion; marking and arrow maps pinned by quotientwise IsCompletionMap. Every Artinian base change exists (literal tensor product, fixed on simple tensors), with a unique marked base-change j completed along the inverse image of J. Completeness of B gives completeness of Q; the local clause gives maximal ideal J_Q. Edge cases J=0, J=B (zero ring admitted), B=0, A=k, n=0, non-surjective base maps: OK. Common universe u is harmless up to isomorphism. New def node: 11 real defs with source and blueprint docstrings; no duplicate in DAG, lean/Sheaf or Mathlib. Statement verbatim; declarations match; NL text unchanged vs live; no live lean record for the item. Proof is sorry with a 7-step docstring. Plain imports are existing proof_dep modules. Both report sections present. No compile run (no file changed). Advisories: the second reading was by the same worker; the local names Groupoid, IsBaseChange and hom shadow CategoryTheory.Groupoid and Mathlib's root IsBaseChange."
+ }
+}

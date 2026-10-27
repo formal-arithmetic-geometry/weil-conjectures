@@ -1,0 +1,267 @@
+{
+ "id": "lem-pur-system-compatible-compositor-normalization",
+ "kind": "statement",
+ "title": "Compatible-triangle word for the geometric semilinear compositor",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A_n=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. All schemes below are separated finite-type $k$-schemes. On a small representative of $W_{\\mathrm{proet}}$ put $B_{n,W}=(A_n)_W$ [def-weil-pbc-proetale-site, def-weil-size-convention]. Let $\\mathscr S_W$ consist of $B_{n,W}$-module sheaves with semilinear quotient transitions and compatible componentwise morphisms. Use $D(\\mathscr S_W)$ and the simultaneous geometric section models of [lem-coef-semilinear-derived-sections]. Write $P_u=u^*$, $R_u=Ru_*$, with unit $\\eta_u$ and counit $\\varepsilon_u$ of $P_u\\dashv R_u$, and $J_j=j_!$ for exact open extension. All maps below are actual derived-system maps with their quotient transitions.\n\nLet $X\\xrightarrow fY\\xrightarrow gZ$ be separated finite-type maps and choose a compactification $g=si$, with $i:Y\\hookrightarrow\\overline Y$ open and $s:\\overline Y\\to Z$ proper [def-weil-compactifications-refinements]. There exists a compatible triangle\n$$X\\xrightarrow{j}V\\xrightarrow{b_1}\\overline X,\\qquad q:V\\to Y,\\quad p_1:\\overline X\\to\\overline Y,$$\nwith $j,b_1$ quasi-compact open, $q,p_1$ proper, $qj=f$, and $p_1b_1=iq$ Cartesian, i.e. $V\\cong\\overline X\\times_{\\overline Y}Y$ via $(b_1,q)$ [def-pc-fibre-product]; $(j,q)$ and $(b_1j,sp_1)$ compactify $f$ and $gf$ [lem-weil-pbc-compatible-compactification-triangle]. Put $F=R_qJ_j$, $G=R_sJ_i$, $H=R_{sp_1}J_{b_1j}$. Let $d:R_sR_{p_1}\\cong R_{sp_1}$ and $e:J_{b_1}J_j\\cong J_{b_1j}$ be the canonical derived direct-image and open compositors [lem-weil-pbc-ringed-topoi-derived-pushforward-composition, lem-cbc-extension-zero-composition]. Let $\\gamma_Q:J_iR_q\\to R_{p_1}J_{b_1}$ be the intrinsic clopen-projection mate of [lem-sf-semilinear-proper-open-mate-pasting], for this Cartesian square. Define\n$$\\beta_Q=R_{sp_1}(e)\\,d_{J_{b_1}J_j}\\,R_s(\\gamma_QJ_j):GF\\longrightarrow H.$$\nThis is a natural isomorphism on systems whose levels have bounded constructible cohomology [def-weil-proetale-constructible-sheaf]. It is the geometric compact-support composition comparison constructed in the simultaneous section models: the construction by the proper/open square and the proper and open compositors is exactly this word as a system map. Its evaluation at $n$ is the specified finite compositor $\\alpha_{g,f}$ of [thm-sf-comp-composition] in these compactifications, with the etale-origin witnesses supplied by [lem-sf-proetale-constructible-origin]. The assertion includes identity compactifications and empty opens. There is no uniform cohomological or Tor interval in $n$ in the domain.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), first paragraph and compactification diagram; agent simultaneous-system construction with no uniform bound"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-size-convention",
+  "lem-cbc-extension-zero-composition",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "thm-sf-comp-composition",
+  "def-weil-compact-support-native-system-evaluation",
+  "def-pur-chosen-compactification-compositors",
+  "def-pur-finite-site-tower-etale-coordinates",
+  "def-pur-compatible-triangle-compactifications",
+  "def-pur-proetale-module-scalar-restriction",
+  "def-cbc-finite-constant-coefficient-transport",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension"
+ ],
+ "proof": [
+  {
+   "text": "QuasiCompact.compactSpace_of_compactSpace and quasiSeparatedSpace_of_quasiSeparated applied to the structure maps give qcqs for X,Y,Z. Apply exists_compatible_compactification_triangle to f,g,d. Use V = pullback e.g d.i, XB = e.Z, b = pullback.fst, q = pullback.snd and p = e.g. Its projection equations give j q = f and, after associativity and j b = e.i, the required composite factorization. The open d.i is quasi-compact by Compactification.quasiCompact_openImmersion.",
+   "uses": [
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite type over the field makes X,Y,Z locally Noetherian; the previous compactness makes them Noetherian. Properness of d.g, e.g and q gives compactness and local Noetherianity of d.Z, e.Z and V by the same argument. At each separate positive coefficient level, use the scalar_origin proof helper of system proper/open invertibility: fixed-module constructibility gives finite lisse models, bounded derived descent gives a bounded-below etale object, and the fixed scalar equivalence transports its realization to the given level. The coefficient carrier is exactly C_n and the scalar is identity. This uses only the interval at that level.",
+   "uses": [
+    "lem-wf-affine-noetherian-components",
+    "lem-pur-system-proper-open-invertibility",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-word evaluation lemma to this origin, the supplied Cartesian square and its commutativity proof. This is the claimed finite-level equation with exactly compositorFiniteSource, coherenceEtaleCompositor in the three supplied compactifications, and compositorFiniteTarget.",
+   "uses": [
+    "lem-pur-system-compositor-finite-word-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right side of that equation is invertible: it is a functor applied to an isomorphism followed by the target support isomorphism. Cancel the invertible source support comparison to obtain invertibility of the evaluated system word. The system_isIso_of_evaluations proof helper from system proper/open invertibility identifies E_n followed by constant-tower level zero with the jointly conservative semilinear evaluations and detects invertibility. This detects only invertibility, never equality of system morphisms. Pair this result with the already obtained finite equations and existential geometric witnesses.",
+   "uses": [
+    "lem-pur-system-proper-open-invertibility",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-system-compositor-finite-word-evaluation",
+  "lem-pur-system-proper-open-invertibility",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-wf-affine-noetherian-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, compatible diagram and four identifications; K6 reduction through the exact finite-word equation and joint conservativity for invertibility only"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact support composition on semilinear coefficient systems independent of compatible compactification refinements",
+   "results": "8 hits: CompactlySupportedContinuousMap.compLinearMap; CompactlySupportedContinuousMap.compLeft; CompactlySupportedContinuousMap.comp; hasCompactSupport_comp_left; HasCompactSupport.comp_left; CompactlySupportedContinuousMap.coe_compLeft; CompactlySupportedContinuousMap.toContinuousMap_compLeft; CompactlySupportedContinuousMap.compLeft_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or topological facts do not state this specified geometric varying-ring derived-system assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical geometric compact support compositor and common refinement cocycle on coefficient towers",
+   "results": "8 hits: CompactlySupportedContinuousMap.compLinearMap; CompactlySupportedContinuousMap.compLeft; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux; CompactlySupportedContinuousMap.comp; CompactlySupportedContinuousMap.compNonUnitalAlgHom; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun; CompactlySupportedContinuousMap.instIsScalarTower; CompactlySupportedContinuousMap.comp_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or topological facts do not state this specified geometric varying-ring derived-system assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "1 hits: CategoryTheory.Adjunction.comp_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or topological facts do not state this specified geometric varying-ring derived-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.open|semilinear.*system|compactification",
+   "results": "0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or topological facts do not state this specified geometric varying-ring derived-system assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactification composition natural transformation coherence under refinements",
+   "results": "8 hits: CategoryTheory.Functor.HomObj.comp; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp; topToCompHaus; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp_hom_app_snd_app; CategoryTheory.Limits.CatCospanTransform.comp; CategoryTheory.Endofunctor.Coalgebra.functorOfNatTransComp; CategoryTheory.Join.mapPairComp; CompHausLike.LocallyConstant.counit",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical or topological facts do not state this specified geometric varying-ring derived-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*system|shriek|compactification",
+   "results": "0 hits:  (Mathlib/CategoryTheory)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned support-of-functions, ordinary adjunction and sheaf pullback facts do not state compact-support composition on semilinear derived coefficient systems"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived direct image with proper support composition compatible compactification coefficient systems",
+   "results": "8 hits: HasCompactSupport.comp_homeomorph, HasCompactSupport.comp_isClosedEmbedding, CompactlySupportedContinuousMap.comp, HasCompactMulSupport.comp_homeomorph, HasCompactMulSupport.comp_isClosedEmbedding, CompactlySupportedContinuousMap.coe_comp_to_continuous_fun, AlgebraicGeometry.IsProper.comp_iff, AlgebraicGeometry.IsProper.instCompScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned support-of-functions, ordinary adjunction and sheaf pullback facts do not state compact-support composition on semilinear derived coefficient systems"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp",
+   "results": "12 hits: CategoryTheory.Adjunction.comp, CategoryTheory.Equivalence.trans_toAdjunction, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_unit_app_assoc, CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned support-of-functions, ordinary adjunction and sheaf pullback facts do not state compact-support composition on semilinear derived coefficient systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition of compact support derived direct images on inverse coefficient module systems via compatible compactifications",
+   "results": "8 hits: CompactlySupportedContinuousMap.compLinearMap, ZeroAtInftyContinuousMap.compLinearMap, CompactlySupportedContinuousMap.compNonUnitalAlgHom, ContDiffMapSupportedIn.postcompCLM_apply, CompactlySupportedContinuousMap.comp, CompactlySupportedContinuousMap.comp_assoc, ContDiffMapSupportedIn.postcompLM_apply, CompactlySupportedContinuousMap.coe_comp_to_continuous_fun",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned support-of-functions, ordinary adjunction and sheaf pullback facts do not state compact-support composition on semilinear derived coefficient systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper open base change adjunction mate and compositor for derived sheaf module towers",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.instIsRightAdjointPushforward",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned support-of-functions, ordinary adjunction and sheaf pullback facts do not state compact-support composition on semilinear derived coefficient systems"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-system-level-projection-formula-coherence",
+  "date": "2026-10-22",
+  "group": "Q141"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "Old Step 5: choose compatible compactifications and identify the actual composition comparison with the proper/open word; projection-composition input in its adic-coherence proof",
+   "via": [
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-system-compatible-compositor-normalization",
+  "worker": "stage1",
+  "summary": "Six-step assembly using existing compatible-triangle, semilinear mate/compositor, open constructibility and finite-site word-pasting nodes. Constructs the word on actual derived systems before evaluation, verifies invertibility on individually bounded constructible levels and identifies the specified finite compositor. No new nodes, no mathematical statement changes, no uniform-bound or evaluation-faithfulness assumptions. Maintainer reader FIX (2026-10-23): new Step 5 identifies the evaluated intrinsic clopen mate with the tower-paste open-adjunct interchange; Step 6 cites the class compact-support comparison for the identification with the composition theorem's alpha.",
+  "blueprint": "Realizes the nearest blueprint ancestor prop-pur-adic-reconstruction-trace-coherence, coherence transport, specifically the parent split old Step 5 named in blueprint.from.place: compatible compactifications and identification of the actual compositor with its proper/open word. The construction is Stacks 0F7J, first paragraph and four displayed identifications, on simultaneous semilinear section models.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic locally Noetherian scheme quasi-separatedness checks the compatible-triangle input. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic composition of separated and locally finite-type maps checks the ambient scheme setting. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic quasi-compact composition checks finite type of the new ambient schemes. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Generic finite-type affine algebra Noetherianity verifies the finite-site comparison hypotheses. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Generic compatible-triangle existence supplies exactly the diagram used in the proper/open construction. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-sf-open-finite-constructibility-interval",
+    "why": "Generic exact open extension preserves the individual bounded constructible intervals needed to apply the system proper/open lemma. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-cbc-finite-clopen-mate-site-transport",
+    "why": "Generic equality of the intrinsic clopen proper mate and the finite etale/pro-etale normalized map fixes the named arrow. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic bounded constructible etale-origin equivalence supplies witnesses at each separate finite level. No statement of this unit replaces this generic input."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "The finite coefficient composition theorem names the compositor to which evaluation is compared; the proof uses the proper/open word rather than replacing this unit route. No statement of this unit replaces this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-00621ebf9",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-00621ebf9 (reviewer sub-agent of L); spot-checked: Read the item, all 6 steps and every cited statement. The delivery has 0 new nodes. Source: Stacks 0F7J (lemma-shriek-composition) and 0F7B; the word beta_Q = R_{sp1}(e) d R_s(gamma_Q J_j) is exactly Stacks' third identification. The coefficient category D(S_W) of semilinear (A_n)_W-systems on the pro-etale site matches the parent and lem-pur-system-proper-open-invertibility. Steps 1-4 and the identity/empty step are correct: the triangle lemma's hypotheses (qcqs, Noetherian, separated finite type) are checked; the open-constructibility hypotheses (V Noetherian, ell invertible, the finite-torsion D^b_c equals the intrinsic one) are checked; the invertibility node applies with H=J_jM. FIX (C2/E5): delivered Step 5 claimed that the tower-paste A^p 'is exactly the word of Step 4', but tower-paste's Gamma^p is the open-adjunct interchange of lem-sp-proper-open-coefficient-mate, not the intrinsic clopen mate. I inserted a new Step 5 that proves they agree. Gamma^e (lem-amb-unbounded-proper-open-interchange) and gamma^e (lem-cbc-proper-open-interchange-coherence) have literally the same K-injective normalization. The transport equations of the coefficient-mate node and of lem-cbc-finite-clopen-mate-site-transport have the same shape with invertible comparisons, so Gamma^p = gamma^p on etale-origin inputs. Also C1/C4: identifying the word with the alpha of thm-sf-comp-composition goes through lem-sf-class-compact-support-comparison, which was not cited; it is now added to Step 6, as in lem-sf-compact-coefficient-composition Step 3. None of the four added nodes creates a cycle; all were already in the item's closure and in the unit's transitive route. Batch-5: def-trf-schematically-dense-open (a definition on the Nagata chain), lem-trf-adjoint-composition-coherence (a Mathlib-status category lemma) and lem-pod-lisse-module-sheaves-as-module-objects (a generic lisse/FLC lemma under proper base change) are all generic. None is part of the trace formula or Poincare duality, so they are accepted. Duplicate search: the tower-shriek calculus nodes, lem-sf-completed-shriek-composition-laws and the composition-projection nodes have uniform-bound or normalized domains or a different main claim. Statement unchanged; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SystemCompatibleCompositorNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.systemCompatibleCompositorNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.systemCompatibleCompositorNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/SystemCompatibleCompositorNormalization.lean",
+  "statement": "theorem systemCompatibleCompositorNormalization (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) {X Y Z : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [Z.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] [IsSeparated (Z ↘ Spec (.of D.k))] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (d : Compactification g) : ∃ (V XB : Scheme.{u}) (j : X ⟶ V) (b : V ⟶ XB) (q : V ⟶ Y) (p : XB ⟶ d.Z) (hj : IsOpenImmersion j) (hb : IsOpenImmersion b) (hqj : QuasiCompact j) (hqb : QuasiCompact b) (hpq : IsProper q) (hpp : IsProper p) (hi : QuasiCompact d.i) (sq : IsPullback b q p d.i), j ≫ q = f ∧ j ≫ b ≫ (p ≫ d.g) = f ≫ g ∧ ∀ (h : b ≫ p = q ≫ d.i) (M : Derived (compactSupportSystemLevel l E₀) (compactSupportSystemQuotient l E₀) X), compatibleCompositorDomain l E₀ X M → IsIso ((@compatibleCompositorWord (compactSupportSystemLevel l E₀) (compactSupportSystemQuotient l E₀) X V XB Y d.Z Z j b q p d.i d.g hj hb d.isOpenImmersion hqb hi hpq hpp h).app M) ∧ ∀ n : ℕ, ∃ w : StrictTower.ScalarEtaleOrigin (compactSupportSystemLevel l E₀ n) X ((compositorLevel (compactSupportSystemLevel l E₀) (compactSupportSystemQuotient l E₀) X n).obj M), w.Λ = (compactSupportSystemLevel l E₀ n : Type (u + 1)) ∧ HEq w.φ (RingHom.id (compactSupportSystemLevel l E₀ n)) ∧ (compositorFiniteSource (compactSupportSystemLevel l E₀) (compactSupportSystemQuotient l E₀) j q d.i d.g n M w).hom ≫ (compositorLevel (compactSupportSystemLevel l E₀) (compactSupportSystemQuotient l E₀) Z n).map ((@compatibleCompositorWord (compactSupportSystemLevel l E₀) (compactSupportSystemQuotient l E₀) X V XB Y d.Z Z j b q p d.i d.g hj hb d.isOpenImmersion hqb hi hpq hpp h).app M) = (StrictTower.HD (compactSupportSystemLevel l E₀ n) Z w.Λ w.φ).map ((coherenceEtaleCompositor w.Λ (FiniteSiteTower.compactificationF j q) (FiniteSiteTower.compactificationG d.g d.i) (FiniteSiteTower.compactificationGF j b p d.g d.i q sq)).hom.app w.origin.L) ≫ (compositorFiniteTarget (compactSupportSystemLevel l E₀) (compactSupportSystemQuotient l E₀) j b p d.g n M w).hom",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Actual semilinear derived-system proper/open word and its canonical finite evaluation transports. Positive levels are n+1; bounded constructibility is quantified separately at every level. H2 repair of b86166d065e2: cite definition owners for the finite compositor, finite-site coordinates and supplied compactifications, scalar restriction and all three strict-tower interfaces. All base statement dependencies, mathematical statement, proof and proof dependencies are preserved. Three ownership nodes bind already published plain definitions with existing:true; no duplicated construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ed0e0a98",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN b86166d065e2; all four required corrections done. Item .lean byte-identical apart from 3 public owner imports, so the prior H3 clause check stands (re-read: triangle/IsPullback, β_Q order, levelwise ∃-interval domain, IsIso on full domain, finite α clause with pinned C n/id, identity/empty/n=0). Item node differs from live only in lean and stmt_deps: all 15 live stmt_deps kept, 8 def nodes added, the 3 added theorem stmt_deps (lem-pur-compact-support-site-coherence, lem-sp-finite-site-tower-paste, lem-weil-pbc-proetale-constant-module-encoding) dropped. All other snapshot node records byte-identical to live. The 3 new existing:true owners (def-pur-finite-site-tower-etale-coordinates, def-pur-compatible-triangle-compactifications, def-pur-proetale-module-scalar-restriction) match the live decls and universes, statements verbatim; their stmt_deps exist; Stacks tags 0F7J/093I/03CY valid; no prior def owner. No compile (no change). Advisories: SemilinearProperOpen gamma/sComp/jComp/R/J/E/evalR/Derived def owners not cited (they come through the original stmt_dep lem-sf-semilinear-proper-open-mate-pasting); existing-module docstrings name the old blueprint node; étale-side α spelling kept, with justification."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-910bd",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261025T213034-L-277426",
+  "kind": "interface",
+  "note": "independent cc review: item proof + new finite-word sorry lemma read against lem-pur-system-compatible-compositor-normalization / new node and Stacks 0F7J; moved defs diffed verbatim against live; importers RamifiedScalarSystemTranspose and SystemCompositorRefinementSquare compiled against the delivered modules"
+ }
+}

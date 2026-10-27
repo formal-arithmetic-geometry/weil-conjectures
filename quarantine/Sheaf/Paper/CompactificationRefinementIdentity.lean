@@ -214,6 +214,12 @@ private theorem identityOfNormalized {X Y : Scheme.{u}} {f : X ⟶ Y}
     apply (cancel_mono ((refinementDerivedLowerStarId Λ c.obj.obj.Z).hom.app J)).1
     rw [h, Iso.inv_hom_id_app]
     rfl
+  unfold compactificationRefinementComponent
+  rw [show (Functor.rightDerivedFunctorNatIso
+      (lowerStarCongr Λ (Category.id_comp c.obj.obj.g))).hom =
+      (eqToIso (congrArg (fun g ↦ (lowerStar Λ g).rightDerivedFunctor)
+        (Category.id_comp c.obj.obj.g))).hom from
+    RefinementId.derive_eqToIso (lowerStar Λ) (Category.id_comp c.obj.obj.g)]
   change (lowerStar Λ c.obj.obj.g).rightDerivedFunctor.map
       (localizingRefinementMap Λ (𝟙 c) K) ≫
       (refinementDerivedLowerStarComp Λ (𝟙 c.obj.obj.Z) c.obj.obj.g).inv.app J ≫

@@ -54,6 +54,44 @@ theorem exists_continuous_map_of_open_subcollection
       (∀ U ∈ 𝒞, IsOpen (f '' (U : Set X))) ∧
       (∀ U ∈ 𝒞, f ⁻¹' (f '' (U : Set X)) = (U : Set X)) ∧
       IsTopologicalBasis ((fun U : X.Opens ↦ f '' (U : Set X)) '' 𝒞) := by
-  sorry
+  -- A type copy keeps the generated topology separate from the scheme's topology.
+  let B : Set (Set (ULift.{0} X)) :=
+    (fun U : X.Opens ↦ ULift.down ⁻¹' (U : Set X)) '' 𝒞
+  let : TopologicalSpace (ULift.{0} X) := generateFrom B
+  let Y : TopCat.{u} := TopCat.of (ULift.{0} X)
+  let f : C(X, Y) :=
+    ⟨ULift.up, by
+      apply continuous_generateFrom_iff.mpr
+      rintro _ ⟨U, _, rfl⟩
+      exact U.isOpen⟩
+  have hB : IsTopologicalBasis B := by
+    refine ⟨?_, ?_, rfl⟩
+    · rintro _ ⟨U, hU, rfl⟩ _ ⟨V, hV, rfl⟩ x hx
+      have hx' : x.down ∈ sSup {W : X.Opens | W ∈ 𝒞 ∧ W ≤ U ⊓ V} := by
+        rw [hrefine U hU V hV]
+        exact hx
+      obtain ⟨W, hW, hxW⟩ := Opens.mem_sSup.mp hx'
+      exact ⟨_, ⟨W, hW.1, rfl⟩, hxW, fun _ hy ↦ hW.2 hy⟩
+    · apply Set.sUnion_eq_univ_iff.mpr
+      intro x
+      have hx : x.down ∈ sSup 𝒞 := by rw [hcover]; trivial
+      obtain ⟨U, hU, hxU⟩ := Opens.mem_sSup.mp hx
+      exact ⟨_, ⟨U, hU, rfl⟩, hxU⟩
+  have himage (U : X.Opens) : f '' (U : Set X) = ULift.down ⁻¹' (U : Set X) := by
+    ext x
+    change (∃ y ∈ U, ULift.up y = x) ↔ x.down ∈ U
+    constructor
+    · rintro ⟨y, hy, rfl⟩
+      exact hy
+    · intro hx
+      exact ⟨x.down, hx, ULift.up_down x⟩
+  refine ⟨Y, f, ?_, ?_, ?_⟩
+  · intro U hU
+    rw [himage]
+    exact GenerateOpen.basic _ ⟨U, hU, rfl⟩
+  · intro U _
+    rw [himage]
+    rfl
+  · simpa only [himage] using hB
 
 end AlgebraicGeometry

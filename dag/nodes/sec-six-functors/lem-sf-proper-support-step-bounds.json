@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-proper-support-step-bounds",
+ "kind": "statement",
+ "title": "One proper support operation preserves the system bounds",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, a finite extension E of Q_l and the specified strict system operations o. Let f:X to Y be a proper morphism over Spec D.k, with X and Y of finite type over that field, without separatedness hypotheses on their structure morphisms. For every Good system M on X and every derived-complete bounded constructible integral K on X, the specified system proper image of M is Good on Y, and the localized completed-ring proper image of K is integral constructible on Y. The two assertions are independent: no relation between M and K is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Parent completed-shriek composition node, proof steps 7 and 8; Stacks 0941, 0F10, 0GL1 and 0E8I, as detailed in the declaration docstring."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "def-sf-integral-system-canonical-bridge",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the specified proper system image at every positive coefficient level. Use the uniform relative fibre-dimension bound for a finite-type morphism with quasi-compact target, and apply the already-proved finite_bound helper of the arbitrary-finite-ring compact-support bound to the identity-open compactification. This helper needs no separated structure morphisms. Transport its constructibility and its common cohomology and Tor interval [c,d+2r] through compact_coordinates, the identity-open comparison, and the recorded Operations evaluation.",
+   "uses": [
+    "det-sp-tower-bound-uniform",
+    "def-sp-finite-intrinsic-open-square",
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the ordinary sequence pushforward with the native varying-ring pushforward by their identical sectionwise coefficient ring maps. Uniqueness of left and then right adjoints identifies their derived images. Convert the normalization universal property into invertibility of the scalar-adjoint quotient transition. Apply finiteCompactSupportScalarComparison and compactSupportNativeSystemTransition: naturality shows that the output quotient adjunct is the scalar comparison composed with compact support of the input quotient isomorphism, conjugated by evaluation isomorphisms. Consequently it is invertible. Translate its universal property back to the actual normalizedDVRRes transition, and transport normalization across the system comparison.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "def-sp-varying-ring-operations",
+    "def-weil-compact-support-finite-action",
+    "lem-weil-compact-support-native-system-transition",
+    "lem-finite-compact-support-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each output level, finite-ring constructible derived origin supplies a bounded etale antecedent. Define the fixed-scalar transition by full faithfulness of intrinsic realization from the actual system transition conjugated by the chosen evaluation isomorphisms. Full faithfulness of the etale-to-proetale comparison on bounded-below objects lifts that transition uniquely to the etale antecedents. The two required Origins squares follow by inverse-hom cancellation. No stronger normalization-coherence witness is needed by the definition of Origins.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the independent integral input, identify ringedPush with sfCompletedDerivedDirectImage using the adjunction equation for the completed coefficient map. The integral direct-image constructibility theorem supplies constructibility and a uniform cohomological bound on the finite direct images. The complete direct-image reduction comparison supplies derived completeness and the canonical reduction isomorphisms. Transport all assertions along those isomorphisms; combine with the independently proved Good assertion.",
+   "uses": [
+    "lem-sf-integral-direct-image-constructible",
+    "lem-sf-complete-direct-image-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-bound-uniform",
+  "def-sp-finite-intrinsic-open-square",
+  "def-sf-integral-system-operations",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-finite-action",
+  "lem-weil-compact-support-native-system-transition",
+  "lem-finite-compact-support-scalar-comparison",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-complete-direct-image-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Parent proof steps 7 and 8, implemented by R2 using the existing finite_bound helper, native-system coefficient transition and finite scalar comparison; compatible origins lifted by full faithfulness."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructible derived complete integral coefficients normalized reductions with uniform Tor bounds preserved by proper pushforward and extension by zero",
+   "results": "{\"t\": \"2026-10-25T13:33:56Z\", \"tool\": \"leansearch\", \"query\": \"Constructible derived complete integral coefficients normalized reductions with uniform Tor bounds preserved by proper pushforward and extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"Condensed.instAB4CondensedMod\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.IsIntegralHom.recOn\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"f73f45118e53480f\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for this project-specific derived coefficient system and its bounds; retain the published project constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized coefficient sequences with uniform constructible cohomology and Tor bounds have compatible etale origins",
+   "results": "{\"t\": \"2026-10-25T13:33:58Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized coefficient sequences with uniform constructible cohomology and Tor bounds have compatible etale origins\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"StandardEtalePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instEtaleRing\", \"Algebra.Etale.comp\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"913071b33a85af25\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for this project-specific derived coefficient system and its bounds; retain the published project constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalizedCoefficientSequence|LevelBounds|sfIntegralConstructible",
+   "results": "{\"t\": \"2026-10-25T13:33:58Z\", \"tool\": \"grep\", \"query\": \"IsNormalizedCoefficientSequence|LevelBounds|sfIntegralConstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib theorem for this project-specific derived coefficient system and its bounds; retain the published project constructions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompletedShriekCompositionLaws",
+  "date": "2026-10-25",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The common-bounds and coefficient-comparison argument; parent node proof steps 7 and 8.",
+   "via": [
+    "lem-sf-completed-shriek-composition-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProperSupportStepBounds",
+  "file": "lean/Sheaf/SixFunctors/ProperSupportStepBounds.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.properSupportStep_bounds",
+  "statement": "theorem properSupportStep_bounds (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    (o : Operations l E) {X Y : Over (Spec (CommRingCat.of D.k))}\n    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]\n    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]\n    (f : X ⟶ Y) [IsProper f.left] (M : System l E X.left)\n    (hM : Good l E X.left M) (K : Integral l E X.left)\n    (hK : sfIntegralConstructible l E X.left K) :\n    Good l E Y.left ((Operations.push l E o f.left).obj M) ∧\n      sfIntegralConstructible l E Y.left ((ringedPush l E f.left).obj K)",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T164514-L-1027766",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T202935-L-2769103",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

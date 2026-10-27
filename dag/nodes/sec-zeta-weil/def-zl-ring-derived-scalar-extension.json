@@ -82,22 +82,35 @@
  },
  "chapter": "sec-zeta-weil",
  "unit": "sk-prop-smooth-proper-purity",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.RingDerivedScalarExtension",
   "declaration": "CategoryTheory.RingDerivedScalarExtension.moduleDerivedExtension",
   "declarations": [
    "CategoryTheory.RingDerivedScalarExtension.moduleDerivedRestriction",
    "CategoryTheory.RingDerivedScalarExtension.moduleDerivedRestriction_rightAdjoint",
-   "CategoryTheory.RingDerivedScalarExtension.moduleDerivedExtension"
+   "CategoryTheory.RingDerivedScalarExtension.moduleDerivedExtension",
+   "CategoryTheory.RingDerivedScalarExtension.moduleDerivedRestrictionComposition",
+   "CategoryTheory.RingDerivedScalarExtension.moduleDerivedExtensionComposition"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/RingDerivedScalarExtension.lean",
   "statement": "def moduleDerivedExtension {A B : Type r} [CommRing A] [CommRing B] (f : A →+* B) [HasDerivedCategory.{wR} (ModuleCat.{r} A)] [HasDerivedCategory.{wS} (ModuleCat.{r} B)] : DerivedCategory (ModuleCat.{r} A) ⥤ DerivedCategory (ModuleCat.{r} B)",
-  "branch": "newtargets-dag",
-  "by": "NU",
-  "date": "2026-10-18",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
   "existing": false,
-  "note": "Definition interface re-exposing CategoryTheory.ConstantScalarRealization.moduleDerivedRestriction and moduleDerivedExtension, with their canonical right-adjoint instance, from Sheaf.Paper.ConstantRealizationDerivedScalarExtension. Its owning node lem-sfb-constant-realization-derived-scalar-extension is cited in stmt_deps; no new scalar-extension construction is introduced."
+  "note": "Section 1(B), explicitly requested by the H2 return of lem-sfb-space-inverse-module-perfect-test-reduction at 9cc055cc91ae. The original definition interface supplies extension and restriction but no definition-owned composition comparison or scalar associator; consumers otherwise cite a theorem node merely for its plain helper definitions. Preserve every existing declaration and add moduleDerivedRestrictionComposition, re-exposing the canonical exact restriction comparison with a specified composite ring-map equality, and moduleDerivedExtensionComposition, its unit-preserving left-adjoint mate. Both have real data and arbitrary independent localization sizes; no theorem conclusion is used or redefined."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -108,11 +121,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-6cccd21d7",
-  "group": "NU",
+  "reviewer": "NT-stage2-cc-bc1fa4902",
+  "group": "Q51",
   "result": "pass",
-  "note": "Re-delivery after 07f043deb8be RETURN; Lean byte-identical, only records/report changed: lem-zl-component-relative-profinite-site restored to stmt_deps, false lem-pur claim corrected, def-zl-ring-derived-scalar-extension now cites its owner lem-sfb-constant-realization-derived-scalar-extension. Mechanical theorem-stmt_dep finding: PASS on this point, since componentTests := Classical.choose (component_relative_profinite_site T) (lines 229-231) is the theorem-constructed test functor (characterized by its ∃! mapping property) that underlies componentInverse/Modules/Derived/componentClause. Re-checked all hypotheses and conclusion clauses against the node (both bases, canonical A_T/F/G/perfect/lisse, component pullback, α/β coefficient compatibility, A_T≅Γ(S,Λ), both squares, final scalar formula, profinite clause), edge cases, universes, docstrings with nine proof steps, single sorry, lean.statement verbatim, all 31 declarations present, report sections present. nt_compile --json on the local side overlay with all three modules together: exit 0, no errors or warnings (item 6.3 s)."
+  "note": "Re-delivery of 9cc055cc91ae (returned H2). Both theorem stmt_deps (relative-flat-closed-kernel-base-change, constant-realization-derived-scalar-extension) are removed. traceDirectImageComparison (landed def node def-sfb-relative-dualizing-trace-pair, on base) has the same body as the old helper. A §1(B) repair of def-zl-ring-derived-scalar-extension adds moduleDerivedRestrictionComposition and moduleDerivedExtensionComposition: real data, independent universes wR/wS/wT, existing declarations verbatim, live node identical to base, no name clash. The item's natural-language statement is unchanged; lean.statement is byte-identical and appears verbatim in the file; only stmt_deps and lean changed. All hypothesis and conclusion clauses and edge cases re-checked; gates met (sorry only, source and blueprint docstrings, proof docstring). Report has both sections. Advisory only: the new associator restates ConstantScalarRealization.moduleTransitivity. No file changed, nothing compiled."
  }
 }

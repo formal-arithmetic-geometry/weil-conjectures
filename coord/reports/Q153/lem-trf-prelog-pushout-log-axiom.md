@@ -1,0 +1,35 @@
+# Stage-1 delivery: lem-trf-prelog-pushout-log-axiom
+
+1. Files written: `dag/nodes/sec-trace-formula/lem-trf-prelog-pushout-log-axiom.json` (statement, split; not a Mathlib leaf), `citations.json`, and this report. No new nodes; no Mathlib leaves added. The statement is unchanged.
+2. Attachments: none. Searches for the exact blueprint tag, prelog, logification and associated-log terminology in `lean/WeilConjectures/` found no declaration of this item. The generic local-representative theorem is already attached to its own existing node.
+3. WANTED: Kato (1988), Logarithmic structures of Fontaine–Illusie, section 1, for the associated-log construction in lem-trf-prelog-pushout-log-axiom. It is not among the obtained literature. No download or literature edit was made.
+4. The imported item is a correct statement but had no proof. Its source refers to log conventions and an unavailable reference rather than supplying this calculation, so the supplied proof is explicitly agent-written. Existing Mathlib generic sheafification results do not prove the log unit axiom. No hypothesis, conclusion, blueprint route or definition was changed.
+5. Unfinished: none in this one-level split. The unavailable Kato source is disclosed above; the full quotient and unit-locus arguments are written in the item.
+
+## Searches and reuse
+
+Read the current item, its parent `lem-trf-associated-log-universal-stalks`, its sibling hom-extension node, the chapter and unit records, GOAL.md, the three levels in SETUP.md, the stage-1 brief and stage document, and both copies of delivery-errors B–E. No earlier split or report existed in the sandbox. No released repair note for this item was found.
+
+Ran `tools/blueprint_refs.py ancestor lem-trf-prelog-pushout-log-axiom`, and searched the whole blueprint with `prelog` and `log structure` (both zero). Searched the whole DAG for the corresponding notions, sheafification local representatives, and the relevant Stacks tags. Reused the existing `lem-trf-commutative-monoid-sheafification` and `lem-weil-pbc-site-sheafification-sections-local`, rather than creating either one again. Read the actual statements, including the latter's corrected universe convention. The inherited blueprint ancestry is retained and its place is already specific.
+
+The required msearch command ran LeanFinder twice with different mathematical phrasings, LeanSearch, Loogle and grep. Exact query strings and results are retained in searches.jsonl and appended to the item without altering its inherited search records. Read the hits: ring-localization presheaves, ringed-space gluing and coequalizers, generic sheafification and module pullback comparisons. In particular read Mathlib/Topology/Sheaves/CommRingCat.lean, localizationPresheaf and totalQuotientPresheaf, lines 82–137: these localize rings, not construct a log monoid. No hit supplies this item's log axiom. All services answered successfully. No new-node search or duplicate-tag check is needed because there are no new nodes.
+
+## Review by Q153
+
+I read Travaux de Gabber Expose VI 1.1 at printed p.69 (PDF p.75), which specifies etale log structures and cites Kato for their language; it does not supply the pushout proof. I therefore marked the proof agent-written rather than attributing an unprinted proof to Illusie. I also read Stacks sites.tex Tag 00YR (`section-sheaves-algebraic-structures`), especially its underlying-set and adjunction assertions, and Tag 00WK (`lemma-sections-sheafification`), which explicitly supplies covering-local representatives. The structure-sheaf convention is Stacks etale-cohomology.tex Tag 04HS (`definition-structure-sheaf`); the item already uses this sheaf as its target. I checked the log axiom directly against `def-trf-fs-log-blowup`. There are no new nodes requiring additional sources.
+
+Step 1 uses no external theorem: the map out of the product is multiplicative because H is commutative, kills every generating relation by the compatibility hypothesis, and so kills the generated congruence. The factorization [m,u]=[m,1][1,u] proves uniqueness. Thus there is no hidden pushout-existence lemma or restatement node.
+
+Step 2 uses only restriction functoriality and gamma's assumed naturality. Applying a ring map to an inverse equation proves preservation of units, so the relation after restriction is genuinely one of the target congruence's generators. Identity, composition, and the structural formula are checked on representatives. This is an elementary calculation, not an uncited descent theorem.
+
+Step 3 cites `lem-trf-commutative-monoid-sheafification`, whose statement explicitly gives existence, multiplicativity of the unit, the universal mapping bijection, and underlying-set sheafification. Its universe hypothesis is met by the item's containing universe; the etale site's cover data and coefficient sets are included. The structural map is extended to the already specified structure sheaf. I did not infer the local-section theorem from the mere definition of sheafification.
+
+Step 4 is the direct computation of i, j, alpha i, alpha j and the factorization using eta's multiplicativity obtained in step 3. Its naturality is checked using the restriction formula of step 2; it needs no external statement.
+
+Step 5 cites both the underlying-set clause of the monoid sheafification node and the explicit local-representative clause of `lem-weil-pbc-site-sheafification-sections-local`; the quotes in citations.json are literal parts of their statements. The latter is a generic tool already Lean-closed, with the same sufficient universe convention as this item. I take representatives only after passing to a cover, never assert objectwise surjectivity of eta, and never assume M is a sheaf. The inverse of gamma(m_t) is written explicitly, so m_t really belongs to E. Applying exactly the defining relation with m=1 proves the local unit formula. Separatedness of the sheaf L gives the global equality; alpha j=id already proves injectivity. Finally `def-trf-fs-log-blowup` states exactly the inverse-image-of-units isomorphism required for a log structure, with no fineness or saturation required. All node citations are quoted in citations.json; no sibling or ancestor is used circularly.
+
+I tested the empty scheme/empty covering (L has its unique empty section by the sheaf condition), the zero ring (0=1, its unit group is the singleton, so the same inverse and quotient formulas hold), the trivial monoid, and the case gamma sends every element to units (the quotient collapses to the units through [m,u]=[1,gamma(m)u]). Noncancellative M is allowed: the proof cancels only ring units and never monoid elements. No local-global invertibility criterion or gluing of units is silently invoked. All five steps are below 2000 characters; no long step hides a separate comparison lemma. I checked self-contained hypotheses, TeX escaping, unchanged statement dependencies, exact proof-dependency union, and retained inherited blueprint fields. There are no new clauses moved to new nodes and no unused citation used as a stand-in for its proof.
+
+## Not duplicates
+
+No new nodes were created.

@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-adic-slice-closed",
+ "kind": "statement",
+ "title": "Hom on further slices and bidual pullback compatibility",
+ "statement": "Fix a prime l, a normalized base comparison family [lem-sf-adic-module-section-data], coefficient ring isomorphisms c on all site objects and normalized module restriction data [lem-sf-adic-slice-restriction]. Two equations hold: the base internal-Hom comparisons on every further slice commute with the actual adicUpperStarIhomIso and the normalized restriction section map; and the base bidual maps commute with actual native pullback through adicComparisonDualSlice and the contravariant Mod.ihomMap. The precise equations are the hom_slice and bidual_slice fields of AdicSliceClosedData. This assertion contains no coefficient or module restriction construction, tensor comparison or evaluation restriction assertion, and does not claim biduality is invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sections Localization of ringed sites, Tensor product and Internal Hom; definition-localize-ringed-site, lemma-tensor-product-pullback, lemma-internal-hom-restriction and lemma-internal-hom-adjoint-tensor. Specialization and normalization steps of lem-sf-adic-module-slice-compatibility; the native constructions in lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Evaluation.lean and lean/WeilConjectures/SixFunctors/ProEtale/Adic/InternalHomEvaluation.lean."
+ },
+ "stmt_deps": [
+  "lem-sf-adic-module-section-data",
+  "lem-sf-adic-slice-restriction"
+ ],
+ "proof": [
+  {
+   "text": "For any supplied base comparison P, evaluate naturality of its homIso along W.hom.op and use section_restriction. The definition of the sectionwise internal Hom restricts a slice morphism by Over.map; evaluation at the identity object of the further slice therefore identifies its value at W with P.sectionsEquiv applied to native evaluation of the restricted Hom section. This is the private hom_sections lemma, using the actual homObj of [def-pur-sheaf-hom] and the supplied evaluation field of [lem-sf-adic-module-section-data].",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-sf-adic-module-section-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The native upperStarIsoSheafPushforward is monoidal. Its tensor coherence, naturality of Sheaf.tensorObjComparison and the proved pushforward tensor formula identify the pullback tensorator on pure tensors with literal restriction. Compose the existing adicUpperStarIhomIso_evaluation with this localization isomorphism. Naturality of localization and evaluation on a pure tensor give evaluation_restriction, without a tensor comparison assumption or an additional theorem with sorry. These are existing native APIs imported by [lem-sf-adic-module-section-data].",
+   "uses": [
+    "lem-sf-adic-module-section-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply hom_sections to both sides of hom_slice, then use slice_sections from [lem-sf-adic-slice-restriction]. Naturality of the native Hom comparison moves W.hom.op across that comparison. Apply evaluation_restriction on W.left and naturality of the localization isomorphism. Applying the base additive section equivalence to this equality gives the required hom_slice equation on every further object.",
+   "uses": [
+    "lem-sf-adic-module-section-data",
+    "lem-sf-adic-slice-restriction",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "First combine native evaluation compatibility with evaluation_naturality for the actual adicUpperStarUnitIso to obtain dual_evaluation. For bidual_slice apply Mod.hom_ext_of_evaluation, the existing counit-injectivity principle of [det-sp-unique-right-adjoint], to the underlying maps. The left transpose becomes the pullback of the supplied base bidual_transpose by tensorator naturality and dual_evaluation. Lax braidedness moves the braiding through pullback. On the right, evaluation_ihomMap moves the dual comparison to the argument; whisker exchange and the supplied local bidual_transpose identify the result with the same braided evaluation by braiding naturality. No bidual invertibility is used. Pair this equation with hom_slice to construct AdicSliceClosedData.",
+   "uses": [
+    "det-sp-unique-right-adjoint",
+    "lem-sf-adic-module-section-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "det-sp-unique-right-adjoint",
+  "lem-sf-adic-slice-restriction",
+  "lem-sf-adic-module-section-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Internal Hom restriction and tensor adjunction (lemma-internal-hom-restriction, lemma-internal-hom-adjoint-tensor), realized by E4 through existing native evaluation, monoidal localization and counit injectivity APIs. No new proof obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to a localized ringed site commutes with tensor products and internal Hom through the canonical section maps",
+   "results": "LocallyRingedSpace.restrict; IsLocalization.instIsLocalizedModuleTensorProductMap; PresheafOfModules.Monoidal.tensorObjMap; Sheaf.ΓRes; ModuleCat.Tilde.res_apply; LocallyRingedSpace.ofRestrict; LocallyRingedSpace.toΓSpecCApp_spec; LocallyRingedSpace.ofRestrict_stalkMap_isIso.",
+   "date": "2026-10-26",
+   "verdict": "None compares the native internal adic modules with the supplied normalized section-module equivalences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules along a site object commutes with tensor products and internal Hom, with pullback comparison on sections",
+   "results": "SheafOfModules.pullbackObjUnitToUnit; pullbackObjFreeIso; conjugateEquiv_pullbackComp_inv; pullbackObjFreeIso_hom_naturality; freeFunctorCompPullbackIso; pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc (8 hits including duplicate indexed variants).",
+   "date": "2026-10-26",
+   "verdict": "These supply module-sheaf pullback APIs but no native adic comparison normalized on sections."
+  },
+  {
+   "tool": "grep",
+   "query": "rg isoMk|isoOfComponents Mathlib/CategoryTheory/Sites/Sheaf.lean; rg isoToLinearEquiv|def.*toLinearEquiv Mathlib/Algebra/Category/ModuleCat*; rg siteSheafTensorSecondMap.*(id|comp)|isIso.*siteSheafTensorSecondMap lean/Sheaf; rg adic.*(Slice|slice)|nativeTensorSlice|hom_slice|evaluation_slice|coefficientSlice lean/Sheaf/SixFunctors lean/WeilConjectures/SixFunctors/ProEtale",
+   "results": "Mathlib supplies fullyFaithfulSheafToPresheaf, Iso.toLinearEquiv, PresheafOfModules.isoMk and existing sheafification. The project supplies the assigned parent, its assembled consumer AdicModuleSliceHomComparison, and normalized native evaluation. No pre-existing normalized restriction/tensor/closed comparison theorem was found. Mod.map_tensorπ_comp_tensorLeftCompMapModComapIso_hom supplies the native quotient normalization.",
+   "date": "2026-10-26",
+   "verdict": "Reuse the existing isomorphism and coequalizer APIs; separate only the action, pure-tensor and closed normalization obligations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.AdicModuleSliceCompatibility",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Parent proof step 2: further-slice Hom compatibility through the actual native Hom iso, and bidual compatibility by braided evaluation. The inherited computed ancestor is null because the older maintainer-created parent has created.item=null; its recorded mathematical ancestor is lem-a1-local-boundary-duality.",
+   "via": [
+    "lem-sf-adic-module-slice-compatibility",
+    "lem-sf-adic-module-slice-hom-comparison",
+    "lem-sf-weil-lisse-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AdicSliceClosedCompatibility",
+  "file": "lean/Sheaf/SixFunctors/AdicSliceClosedCompatibility.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.adicSliceClosedCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AdicSliceClosedData",
+   "AlgebraicGeometry.ProEtale.adicSliceClosedCompatibility"
+  ],
+  "statement": "theorem adicSliceClosedCompatibility (l : ℕ) [Fact l.Prime]\n    (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)\n    (c : ∀ (X : Scheme.{u}) (U : X.ProEt),\n      (base U.left).ring ≅\n        (localizationRestriction RingCat.{u + 1} U.hom U.prop).obj (base X).ring)\n    (r : AdicSliceRestrictionData l base c) :\n    AdicSliceClosedData l base c r",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T182338-L-3549900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T195028-L-2662546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

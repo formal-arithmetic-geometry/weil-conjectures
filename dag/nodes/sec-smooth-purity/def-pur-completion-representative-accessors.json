@@ -1,0 +1,112 @@
+{
+ "id": "def-pur-completion-representative-accessors",
+ "kind": "definition",
+ "title": "Named projections of the existing normalized completion representative",
+ "statement": "For a derived scalar cochain model F and fixed completion models and exchange, RepresentativeComparison.val is the existing subtype value, and RepresentativeComparison.property is its existing pair of quotient and counit normalization equations [lem-pur-finite-free-completion-exchange]. Naming these projections lets clients keep the large subtype definition locally irreducible. No new data, property, or choice is introduced.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Existing RepresentativeComparison subtype in lem-pur-finite-free-completion-exchange; its two projections, with source Stacks Tags 06YT and 0941."
+ },
+ "stmt_deps": [
+  "lem-pur-finite-free-completion-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the existing subtype once. Its value is Subtype.val and its recorded quotient and counit equations are Subtype.property; both projection bodies are complete Lean terms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The existing RepresentativeComparison definition, with the two core subtype projections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Subtype.val",
+   "results": "Subtype.val and Subtype.property in Init.Prelude.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the core subtype projection; record its concrete type once to avoid repeatedly unfolding the large subtype."
+  },
+  {
+   "tool": "grep",
+   "query": "Subtype.property",
+   "results": "Mathlib/Data/Subtype.lean records Subtype.prop as the same projection.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the core subtype projection; record its concrete type once to avoid repeatedly unfolding the large subtype."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extract the value and the proof of the predicate from a subtype element",
+   "results": "Subtype.canLift, Subtype.prop, Subtype.coe_eta.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the core subtype projection; record its concrete type once to avoid repeatedly unfolding the large subtype."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteFreeCompletionExchangeCoherence",
+  "date": "2026-10-24",
+  "group": "B4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Existing normalized representative subtype in the completion exchange, used by the coherence assembly.",
+   "via": [
+    "lem-pur-finite-free-completion-exchange-coherence",
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.CompletionRepresentativeAccessors",
+  "file": "lean/Sheaf/Algebra/Homology/CompletionRepresentativeAccessors.lean",
+  "declaration": "CategoryTheory.PrincipalQuotientCompletion.RepresentativeComparison.val",
+  "declarations": [
+   "CategoryTheory.PrincipalQuotientCompletion.RepresentativeComparison.val",
+   "CategoryTheory.PrincipalQuotientCompletion.RepresentativeComparison.property"
+  ],
+  "statement": "def RepresentativeComparison.val {F : SheafOfModules.DerivedChangeOfRingsCochainModel φ} {t : (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections} {vS : (SheafOfModules.unit (SheafOfModules.derivedChangeRingIndependentCoefficients J S)).sections} {e : ℕ} {CR : Model R t} {CS : Model S vS} {ε : CR.completion ⋙ F.T ≅ F.T ⋙ CS.completion} {P : CochainComplex (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R)) ℤ} (d : RepresentativeComparison F t vS e CR CS ε P) : RepresentativeRoosComparison F.E (sourceTower t P) (targetTower F vS P) e",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c075",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T201357-L-2465468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9c075",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261025T201357-L-2465468",
+  "kind": "interface",
+  "note": "independent cc review: item signatures byte-identical to live; split lemma checked clause by clause against RepresentativeRoosComparison/index/block/selection; 26 importers compiled against the delivered set and against published PQCM/FFCE"
+ }
+}

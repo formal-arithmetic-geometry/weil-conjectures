@@ -1,0 +1,173 @@
+{
+ "id": "lem-trf-ordinary-resolution-padded-overlaps",
+ "kind": "statement",
+ "title": "Padded ordinary resolution towers on affine overlaps",
+ "statement": "Fix a totally ordered label type $L$. Let $A$ be a rule on reduced finite-type rational schemes admitting a closed embedding in a smooth separated finite-type rational scheme [def-trf-labeled-ordinary-zariski-resolution-data, def-trf-ordinary-resolution-rule, def-trf-labeled-embedded-resolution]. It assigns finite ordinary blowup towers with distinct increasing labels, coherent ideals with nonempty nowhere dense regular centers, and regular final scheme; its empty-input tower has length zero. For each open immersion of embeddable inputs over the rational base, its specified label-preserving cartesian contraction comparison deletes exactly the stages whose extended ideals are unit ideals [def-per-ordinary-tower-cartesian-map, def-nagata-extended-ideal, pqf-def-coherent, def-weil-regular-scheme].\n\nFor every finite affine cover of a reduced finite-type rational scheme $S$, with coproduct total space $T$ and map $q:T\\to S$, every embeddability witness for $T$, every embeddable affine rational input $W$, every open immersion $v:W\\to S$ over the rational base and every three open immersions $j_a:W\\to T$ with $qj_a=v$, there exists one labeled ordinary tower $P$ on $W$ admitting full cartesian label- and ideal-preserving maps over all three $j_a$ from $P$ to $A(T)$, and a labeled contraction comparison over the identity from $A(W)$ to $P$. Thus the three full restrictions are realized by one padded tower. Here a finite affine cover, its coproduct universal property, and the predicates on the comparisons are those of [def-trf-labeled-ordinary-zariski-resolution-data].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.9, 2.3.1 and Remark 2.3.5(ii), printed pp.88,91--92. Conditional synchronized Zariski gluing and independence of the affine cover; retained old proof Steps 4--5. Agent expansion of the disjoint-union synchronization argument, not a Stacks theorem on normalized towers."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-trf-ordinary-resolution-rule",
+  "def-nagata-global-blowup",
+  "def-weil-regular-scheme",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-trf-labeled-ordinary-zariski-resolution-data",
+  "def-per-ordinary-tower-cartesian-map",
+  "def-trf-labeled-embedded-resolution"
+ ],
+ "proof": [
+  {
+   "text": "For open restrictions, ordinary blowups can be pulled back without altering their centers. Indeed an open immersion induces isomorphisms on local rings by [def-weil-open-immersion]; these rings are free of rank one over themselves, hence the morphism is flat by [def-weil-flat-morphism]. Apply [thm-nagata-blowup-flat-base-change], with the actual extended ideal and canonical comparison defined in [def-nagata-blowup-flat-base-change-map], at each level. For a unit ideal the complement of its zero scheme is the entire level, so [thm-nagata-global-blowup-complement] gives the canonical identity blowup. Thus a tower with fixed finite label list is recovered from its contraction by inserting a unit ideal and that identity transition at each missing label. Repeated insertions leave later ideals unchanged under these identifications; a proper ideal is retained even when its blowup morphism happens to be an isomorphism.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, 2.2.11, 2.3.1 and Remark 2.3.5(ii), printed pp.87--88,91--92; explicit labeled Zariski-descent expansion."
+   }
+  },
+  {
+   "text": "Fix a finite affine cover and write $T=A(U)$, with label list $\\Lambda=(\\lambda_0<\\cdots<\\lambda_{n-1})$. On a chart $U_a$ retain all $n$ stages of $T|_{U_a}$. For an affine $W\\subset U_a\\cap U_b$, either embedding $W\\to U$ is an open immersion in $\\mathcal C$. The hypothesis therefore identifies the contraction of either pullback with the same tower $A(W)$, with the same labels and ideals. By Step 3 both full pullbacks are the tower obtained from $A(W)$ by inserting the unit stages at $\\Lambda\\setminus\\operatorname{labels}(A(W))$. Their comparison is consequently the canonical identity on each retained blowup and each inserted stage. Affine opens form a basis by [lem-weil-pbc-affine-opens-basis], so these comparisons agree on arbitrary overlaps: refine intersections of two chosen $W$'s again by affine opens and use the same padded tower there. On triple overlaps all three composites identify with that same padded tower. The scheme comparisons at a blowup stage are unique: once the two level-$i$ schemes are identified, the finite-type ideal of the stage is invertible on its blowup by [thm-nagata-blowup-principalizes-center], so [thm-nagata-blowup-universal-property] allows exactly one morphism over that identification between the two blowups of the corresponding ideals. Thus the comparison through $A(W)$, those on refinements and those of [prop-nagata-global-blowup-cover-independent] coincide. Hence these are equalities of actual center ideals and canonical tower maps, not merely agreements of terminal schemes.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "prop-nagata-global-blowup-cover-independent",
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, 2.2.11, 2.3.1 and Remark 2.3.5(ii), printed pp.87--88,91--92; explicit labeled Zariski-descent expansion."
+   }
+  },
+  {
+   "text": "pull back the assigned disjoint-union tower along each of the three open maps.\nFlat base change identifies each next level with the ordinary blowup of the extended\nideal. The open comparison to the rule's tower on W deletes exactly the unit ideals\nand preserves the ordered surviving labels and their actual ideals. Thus each full\npullback is obtained from that same assigned tower on W by inserting unit ideals at\nexactly the labels missing from its increasing list. A unit ideal has empty zero\nscheme, so the blowup-complement theorem identifies its blowup with the identity.\nInduct through the common finite list, using the same identity stage at each missing\nlabel. At each retained label the pullback of the center on its blowup is invertible;\nthe universal property supplies the comparison with the corresponding blowup of the\ncommon tower. Uniqueness of lifts makes these identifications agree with the maps\nat preceding stages. The three pullbacks therefore have a single common realization\nP with uncontracted cartesian maps and with the label-preserving contraction to A(W).\nTaking two of the maps equal gives double overlaps; using all three gives the\ntriple-overlap agreement. No affine-intersection assumption is used. A proper ideal\nwhose blowup is an isomorphism remains a retained stage, since deletion tests the\nideal itself. Empty W gives the same construction with only unit stages.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-affine-opens-basis",
+    "prop-nagata-global-blowup-cover-independent",
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "thm-nagata-blowup-flat-base-change",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-global-blowup-complement",
+  "lem-weil-pbc-affine-opens-basis",
+  "prop-nagata-global-blowup-cover-independent",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.4--2.1.9, 2.2.11, 2.3.1 and Remark 2.3.5(ii), printed pp.87--88,91--92; explicit labeled Zariski-descent expansion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite labeled ordinary blowup towers admit padded restrictions on affine overlaps and descend along finite affine covers with unique center preserving cartesian comparisons",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.AffineCover.ctorIdx, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover, AlgebraicGeometry.Scheme.OpenCover.affineRefinement, AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover, AlgebraicGeometry.QuasiCompactCover.of_finite",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem: finite-cover infrastructure and unrelated resolution results do not give these ordinary blowup towers, their padding, full center ideals or cartesian comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Padded overlap restrictions, effective affine descent, common-cover comparison, and embedded recovery for labeled ordinary resolution towers",
+   "results": "OK 8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, CategoryTheory.InjectiveResolution.descFSucc, CategoryTheory.ProjectiveResolution.liftFSucc, CategoryTheory.LocalizerMorphism.RightResolution.Hom.comp, CategoryTheory.LocalizerMorphism.RightResolution.Hom.comm_assoc, CategoryTheory.LocalizerMorphism.LeftResolution.Hom.comp, CategoryTheory.Abelian.LeftResolution.chainComplexMap_comp_assoc",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem: finite-cover infrastructure and unrelated resolution results do not give these ordinary blowup towers, their padding, full center ideals or cartesian comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|desingularization|resolutionTower",
+   "results": "OK 6 hits: Mathlib/Algebra/HierarchyDesign.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean, Mathlib/Tactic/ITauto.lean, Mathlib/Tactic/Linarith/Frontend.lean, Mathlib/Tactic/GRewrite/Core.lean",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem: finite-cover infrastructure and unrelated resolution results do not give these ordinary blowup towers, their padding, full center ideals or cartesian comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SynchronizedResolutionZariskiDescent",
+  "group": "F5",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Re-split task: VIII 2.1.9, 2.3.1 and Remark 2.3.5(ii), printed pp.88,91--92. Conditional synchronized Zariski gluing and independence of the affine cover; retained old proof Steps 4--5. Agent expansion of the disjoint-union synchronization argument, not a Stacks theorem on normalized towers. This sublemma realizes parent descent proof Steps 3,4: Padded ordinary resolution towers on affine overlaps.",
+   "via": [
+    "lem-trf-synchronized-resolution-zariski-descent",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryResolutionPaddedOverlaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryResolutionPaddedOverlaps.lean",
+  "declaration": "AlgebraicGeometry.ordinary_resolution_padded_overlaps",
+  "statement": "theorem ordinary_resolution_padded_overlaps {L : Type w} [LinearOrder L]\n    (A : OrdinaryZariskiResolutionRule.{u, w} L) : A.HasPaddedOverlaps",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261026T091512-L-3348508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261026T091512-L-3348508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

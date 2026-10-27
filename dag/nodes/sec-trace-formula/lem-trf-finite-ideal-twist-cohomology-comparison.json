@@ -1,0 +1,326 @@
+{
+ "id": "lem-trf-finite-ideal-twist-cohomology-comparison",
+ "kind": "statement",
+ "title": "Finite ideal products: coherence and twisted cohomology comparison",
+ "statement": "Let $f:Y\\to X$ be a finite morphism [def-weil-finite-integral-morphism] of locally Noetherian schemes [def-pc-scheme, pqf-def-locnoeth]. Let $\\mathcal F$ be a coherent $\\mathcal O_Y$-module and $\\mathcal J\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals [pqf-def-coherent]. Let $\\mathcal L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Write $\\mathcal G=f_*\\mathcal F$, with module direct image and pullback as in [def-pc-module-pullback]. Using the sheaf tensor product [def-pur-sheaf-tensor-product], let $\\mathcal H=f^{-1}\\mathcal J\\cdot\\mathcal F\\subseteq\\mathcal F$ be the image of the multiplication map $f^*\\mathcal J\\otimes\\mathcal F\\to\\mathcal F$ induced by $\\mathcal J\\hookrightarrow\\mathcal O_X$ and $f^\\sharp$, using the canonical structure-sheaf map $\\epsilon_f:f^*\\mathcal O_X\\to\\mathcal O_Y$ of [def-sfb-tensor-pullback-structure-sheaf-map] and the image construction of [def-trf-ideal-module-product-image]. Thus $\\mathcal H$ is generated locally by products of sections pulled back from $\\mathcal J$ with sections of $\\mathcal F$. Likewise $\\mathcal J\\mathcal G\\subseteq\\mathcal G$ is the image of $\\mathcal J\\otimes\\mathcal G\\to\\mathcal G$.\n(1) $\\mathcal G$, $\\mathcal H$, and $\\mathcal J\\mathcal G$ are coherent, and $\\mathcal J\\mathcal G=f_*\\mathcal H$ as submodules of $\\mathcal G$.\n(2) For $n\\in\\mathbf N$ put $\\mathcal N_n=\\mathcal L^{\\otimes n}$, with $\\mathcal N_0=\\mathcal O_X$; likewise $(f^*\\mathcal L)^{\\otimes0}=\\mathcal O_Y$. The modules $\\mathcal N_n$, $f^*\\mathcal N_n$, and $f^*\\mathcal L$ are invertible; tensoring by either $\\mathcal N_n$ or $f^*\\mathcal N_n$ is exact. There is a canonical isomorphism $f^*\\mathcal N_n\\cong(f^*\\mathcal L)^{\\otimes n}$, namely the recursive comparison of [def-sc-tensor-pullback-power-comparison]. The ordinary projection map\n$$f_*\\mathcal H\\otimes\\mathcal N_n\\longrightarrow f_*(\\mathcal H\\otimes f^*\\mathcal N_n)$$\nis an isomorphism. On an open trivializing $\\mathcal N_n$, its restrictions identify with the identity of $f_*\\mathcal H$; it is the map multiplying a section of $\\mathcal H$ by the pulled-back section of $\\mathcal N_n$. The sheaf $\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}$ is quasi-coherent.\n(3) For every $p,n\\ge0$, the equality in (1), the projection map in (2), and the edge map $e_{f,\\mathcal M}:H^p(X,f_*\\mathcal M)\\to H^p(Y,\\mathcal M)$ of [def-weil-pbc-module-cohomology-fmap](c) for $\\mathcal M=\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}$ give natural isomorphisms\n$$H^p(X,\\mathcal J\\mathcal G\\otimes\\mathcal L^{\\otimes n})\\cong H^p(X,f_*(\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}))\\cong H^p(Y,\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}),$$\nwhere cohomology is [pqf-def-cohomology]. No properness, surjectivity, or ampleness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, ideal-product and displayed cohomology calculation; Tag 01YP, lemma-affine-morphism-projection-ideal; Tag 089W, lemma-relative-affine-cohomology; degree-zero projection formula in literature/stacks-project/cohomology.tex, Tag 01E8, lemma-projection-formula"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-cohomology",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-sfb-tensor-pullback-structure-sheaf-map",
+  "def-trf-ideal-module-product-image"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-finite-integral-morphism], $f$ is affine. Apply [lem-weil-pbc-finite-pushforward-coherent] to $f$ and $\\mathcal F$ to obtain coherence of $\\mathcal G=f_*\\mathcal F$. Since $Y$ is locally Noetherian, [pqf-lem-coherent-ft-locnoeth] implies that $\\mathcal F$ is quasi-coherent. Apply [lem-weil-pbc-affine-pushforward-ideal-product] to $(f,\\mathcal F,\\mathcal J)$: its image submodule is precisely the $\\mathcal H$ in the statement, it is quasi-coherent, and $\\mathcal J\\mathcal G=f_*\\mathcal H$ as submodules of $\\mathcal G$. No injectivity of $f^*\\mathcal J\\to\\mathcal O_Y$ is used.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-affine-pushforward-ideal-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, ideal-product paragraph; Tag 01Y6, lemma-finite-pushforward-coherent; Tag 01YP, lemma-affine-morphism-projection-ideal"
+   }
+  },
+  {
+   "text": "The inclusion $\\mathcal H\\subseteq\\mathcal F$ has quasi-coherent source by Step 1 and coherent target by hypothesis. Clause (2) of [lem-weil-pbc-coherent-kernel-cokernel-locnoeth], on the locally Noetherian scheme $Y$, therefore makes $\\mathcal H$ coherent. Apply [lem-weil-pbc-finite-pushforward-coherent] to this coherent module: $f_*\\mathcal H$ is coherent on $X$. The equality of submodules from Step 1 gives coherence of $\\mathcal J\\mathcal G$. This finishes (1).",
+   "uses": [
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01Y1, lemma-coherent-Noetherian-quasi-coherent-sub-quotient; Tag 01Y6, lemma-finite-pushforward-coherent; Tag 0B5V, coherence of the ideal multiple"
+   }
+  },
+  {
+   "text": "The structure module is locally free of rank one, hence invertible by [def-sc-invertible-module]. With the tensor-power convention of [def-pur-sheaf-tensor-product] ($\\mathcal N_1=\\mathcal L$, $\\mathcal N_{n+1}=\\mathcal N_n\\otimes\\mathcal L$ for $n\\ge1$, and likewise for $f^*\\mathcal L$), induction on $n\\ge1$, using the tensor-product and pullback clauses of [lem-weil-pbc-invertible-pullback-tensor], shows that $\\mathcal N_n$, $f^*\\mathcal N_n$ and $f^*\\mathcal L$ are invertible; for $n=0$, $\\mathcal N_0=\\mathcal O_X$ is invertible and $f^*\\mathcal N_0\\cong\\mathcal O_Y$ by [lem-weil-pbc-module-pullback-structure-sheaf]. The canonical comparison $c_n:f^*\\mathcal N_n\\xrightarrow\\sim(f^*\\mathcal L)^{\\otimes n}$ is constructed recursively: $c_0=\\epsilon_f:f^*\\mathcal O_X\\to\\mathcal O_Y$ is the structure-sheaf pullback isomorphism [lem-weil-pbc-module-pullback-structure-sheaf], $c_1$ is the identity of $f^*\\mathcal L$, and for $n\\ge1$, $c_{n+1}$ is $f^*(\\mathcal N_n\\otimes\\mathcal L)\\cong f^*\\mathcal N_n\\otimes f^*\\mathcal L\\xrightarrow{c_n\\otimes1}(f^*\\mathcal L)^{\\otimes n}\\otimes f^*\\mathcal L$. These comparisons are natural and send pulled-back pure tensors to the corresponding tensors of pulled-back sections by the section formula of the cited tensor comparison.",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CD (lemma-tensor-product-pullback), 0B8L (lemma-pullback-invertible), 01CT (lemma-constructions-invertible); zero power by the structure-sheaf pullback isomorphism"
+   }
+  },
+  {
+   "text": "Tensoring by either of the invertible modules $\\mathcal N_n$ on $X$ and $f^*\\mathcal N_n$ on $Y$ is exact: on an open where the module is identified with the structure module, the tensor functor is naturally the identity. Thus a short exact sequence stays exact on a trivializing open cover, and is exact as a sequence of sheaves since exactness can be checked locally (kernels and local images agree there). This proves the exactness assertions of (2), including $n=0$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V, exactness of tensoring with an invertible module; direct local verification"
+   }
+  },
+  {
+   "text": "Put $N=\\mathcal N_n$. Construct the projection map from the compatible bilinear maps on opens $U\\subseteq X$ sending $h\\otimes s$ to $h\\otimes f^*s$ on $f^{-1}U$; the universal property of the sheafified tensor product [def-pur-sheaf-tensor-product] makes this a sheaf map $P:f_*\\mathcal H\\otimes N\\to f_*(\\mathcal H\\otimes f^*N)$. Choose a local generator $e$ of $N$ on $U$ [def-sc-invertible-module]. Pulling back the isomorphism $\\mathcal O_U\\to N|_U$, $a\\mapsto ae$, along $f^{-1}U\\to U$ (pullback is compatible with restriction to opens, [def-pc-module-pullback]) and composing with the structure-sheaf isomorphism $\\epsilon:f^*\\mathcal O_U\\to\\mathcal O_{f^{-1}U}$ of [lem-weil-pbc-module-pullback-structure-sheaf] shows that the pullback generator $f^*e$ trivializes $f^*N$ on $f^{-1}U$. Under $h\\mapsto h\\otimes e$ on the source and $h\\mapsto h\\otimes f^*e$ on the target, $P|_U$ is the identity of $(f_*\\mathcal H)|_U$. Its local inverses glue: replacing $e$ by $ae$ for a unit $a$ multiplies both tensor coordinates by $a$, since $h\\otimes f^*(ae)=f^*a\\,h\\otimes f^*e$. Thus $P$ is the asserted isomorphism. The formula also shows its naturality in $\\mathcal H$ and in maps of the invertible factor, without any hypothesis on $f$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E8, lemma-projection-formula, degree-zero local argument; its omitted gluing is written here for rank one"
+   }
+  },
+  {
+   "text": "The module $\\mathcal H$ is quasi-coherent by Step 1. The module $f^*\\mathcal L$ is invertible by Step 3, hence quasi-coherent by [def-sc-invertible-module]; its nonnegative tensor powers are invertible by Step 3 and therefore quasi-coherent as well. Apply [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] on $Y$ to $\\mathcal H$ and $(f^*\\mathcal L)^{\\otimes n}$. It gives quasi-coherence of $\\mathcal M_n=\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}$, completing (2).",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I8, lemma-widetilde-constructions (1); Section 01LA, tensor products of quasi-coherent modules"
+   }
+  },
+  {
+   "text": "Compose the equality of Step 1, the projection isomorphism $P$ of Step 5, and $f_*(1_{\\mathcal H}\\otimes c_n)$ of Step 3 to obtain $\\alpha_n:\\mathcal J\\mathcal G\\otimes\\mathcal N_n\\xrightarrow\\sim f_*\\mathcal M_n$. Apply the functor $H^p(X,-)$ [pqf-def-cohomology] to get the first isomorphism in (3). Since $f$ is affine and $\\mathcal M_n$ is quasi-coherent, [lem-weil-pbc-affine-morphism-cohomology-edge] applies and says exactly that the specified edge map $e_{f,\\mathcal M_n}$ is an isomorphism, giving the second one. For a map $v_0:\\mathcal F\\to\\mathcal F'$, multiplication gives $v_0(af)=a\\,v_0(f)$, so it restricts to $h:\\mathcal H\\to\\mathcal H'$ and $f_*v_0$ restricts to $w:\\mathcal J\\mathcal G\\to\\mathcal J\\mathcal G'$. Put $v=h\\otimes1:\\mathcal M_n\\to\\mathcal M'_n$. The local formula of Step 5 gives $f_*v\\circ\\alpha_n=\\alpha'_n\\circ(w\\otimes1_{\\mathcal N_n})$. Functoriality of cohomology and the coefficient-composition clause of [lem-weil-pbc-module-cohomology-fmap-functorial] give $H^p(Y,v)e_{f,\\mathcal M_n}=e_{f,\\mathcal M'_n}H^p(X,f_*v)$. Thus the displayed composite is natural. The same local tensor formula handles maps of invertible factors. The proof used only finiteness of $f$, local Noetherianity, coherence, quasi-coherence of the ideal, and invertibility.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V, displayed twisted cohomology calculation; Tag 089W, lemma-relative-affine-cohomology; cohomology.tex Tag 01F8, lemma-functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-affine-pushforward-ideal-product",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-module-cohomology-fmap-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, ideal-product and displayed cohomology calculation, expanded using Tags 01YP, 01Y1, 01Y6, 089W and cohomology.tex Tag 01E8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism of locally Noetherian schemes, a coherent sheaf F and quasi-coherent ideal J, put H=f inverse J times F. Then J f_* F = f_* H is coherent and H^p(X,J f_* F tensor L^n) is isomorphic to H^p(Y,H tensor (f^* L)^n)",
+   "results": "[leanfinder] OK 8 hit(s) Returned: AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.IsFiniteType, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward. Returned module pushforward definitions, affine-limit section lemmas, ideal-sheaf Galois connections or quasi-coherence of a different pushforward, not coherence of finite ideal multiples and their twisted cohomology comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for a line bundle and finite direct image of a coherent ideal multiple, followed by affine Leray cohomology isomorphism",
+   "results": "[leanfinder] OK 8 hit(s) Returned: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso. Returned module pushforward definitions, affine-limit section lemmas, ideal-sheaf Galois connections or quasi-coherence of a different pushforward, not coherence of finite ideal multiples and their twisted cohomology comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection[Ff]ormula|projection_formula|pushforward.*ideal|ideal.*pushforward",
+   "results": "[grep] OK 10 hit(s) Returned: Mathlib/AlgebraicGeometry/Spec.lean:373, Mathlib/AlgebraicGeometry/Spec.lean:406, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean:14, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean:18, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean:99, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean:121, Mathlib/RingTheory/FractionalIdeal/Operations.lean:19, Mathlib/RingTheory/FractionalIdeal/Operations.lean:66, Mathlib/RingTheory/Ideal/Maps.lean:660, Mathlib/RingTheory/TwoSidedIdeal/Operations.lean:35. Returned module pushforward definitions, affine-limit section lemmas, ideal-sheaf Galois connections or quasi-coherence of a different pushforward, not coherence of finite ideal multiples and their twisted cohomology comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Hh]igher[Dd]irect[Ii]mage|cohomology.*pushforward|pushforward.*cohomology|[Cc]oherent.*pushforward",
+   "results": "[grep] OK 7 hit(s) Returned: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:302, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:309, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:329, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:336, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:337, Mathlib/AlgebraicGeometry/Modules/Tilde.lean:567, Mathlib/AlgebraicGeometry/Modules/Tilde.lean:587. Returned module pushforward definitions, affine-limit section lemmas, ideal-sheaf Galois connections or quasi-coherence of a different pushforward, not coherence of finite ideal multiples and their twisted cohomology comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, SheafOfModules",
+   "results": "[loogle] OK 0 hit(s) Returned: none. Returned module pushforward definitions, affine-limit section lemmas, ideal-sheaf Galois connections or quasi-coherence of a different pushforward, not coherence of finite ideal multiples and their twisted cohomology comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite direct image ideal product tensor invertible sheaf projection formula cohomology comparison",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"} Returned: none. Service rate limited; no absence conclusion drawn.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "projection[Ff]ormula|projection_formula|cohomology.*pushforward|pushforward.*cohomology",
+   "results": "No hits.  Read the pushforward and adjunction definitions and the ideal-sheaf map: none states the ideal-module/cohomology theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite direct image coherent ideal product and tensor powers of a line bundle give natural cohomology isomorphisms",
+   "results": "Returned TensorProduct.piLeft, TensorProduct.finsuppRight, TensorProduct.directLimitLeft_rTensor_of, LinearMap.lsum, TensorProduct.directLimitLeft, PiTensorProduct.ofDirectSumEquiv, TensorProduct.directSumRight, localCohomology.idealPowersDiagram.  Read the pushforward and adjunction definitions and the ideal-sheaf map: none states the ideal-module/cohomology theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, SheafOfModules",
+   "results": "No hits.  Read the pushforward and adjunction definitions and the ideal-sheaf map: none states the ideal-module/cohomology theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism of locally Noetherian schemes, direct image of an ideal multiple of a coherent module commutes with twisting by a line bundle and with sheaf cohomology",
+   "results": "Returned AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.IdealSheafData.map_comp, AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction.  Read the pushforward and adjunction definitions and the ideal-sheaf map: none states the ideal-module/cohomology theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for an invertible module and affine Leray cohomology comparison on schemes",
+   "results": "Returned AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, SheafOfModules.Presentation.map_π_eq, AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, AlgebraicGeometry.IsAffineOpen.fromSpec_app_of_le.  Read the pushforward and adjunction definitions and the ideal-sheaf map: none states the ideal-module/cohomology theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-surjective-ample-reflection",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: finite-surjective descent and ascent of absolute ampleness (0B5V). Subargument: Stacks 0B5V ideal-product/projection/cohomology calculation, returned Steps 4 (coherence and identity), 5, and first part of 6.",
+   "via": [
+    "lem-trf-finite-surjective-ample-reflection",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-ideal-twist-cohomology-comparison",
+  "worker": "stage1",
+  "summary": "Kept the full statement. Reused the existing affine ideal-product, coherent-submodule, finite pushforward, invertible pullback/tensor, quasi-coherent tensor and canonical affine edge nodes. Wrote the rank-one projection map and its gluing explicitly and checked naturality of the named edge map. No new nodes.",
+  "blueprint": "The finite-surjective ampleness supporting subargument in the recorded ancestry of lem-trf-local-term-locality: Tag 0B5V ideal-product/coherence paragraph and its displayed twisted cohomology calculation. The current blueprint local-term argument itself is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-288304ebf",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-288304ebf (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full against Stacks coherent 0B5V (proof part (3)(c) and its three-line display), 01YP, 089W and cohomology 01E8, and confirmed the tag labels for 01Y1, 01Y6, 01CD, 0B8L, 01CT, 01I8, 01LA and 01F8. The statement is true. It drops 0B5V's proper, surjective and ample hypotheses, which the calculation never uses. I tested it with J=O_X (H=F), J=0, f=id, the non-flat closed immersion A->A/I, n=0 and p=0. There are no new nodes and proof_deps equals the union of the uses. Every cited statement node is Lean-closed (slopmaster2 closed, reviewed_proof), so no tool_uses is needed, and there is no SGA. Duplicate check: lem-pc-projection-formula is derived and lem-pc-closed-immersion-coherent-cohomology covers closed immersions only; no existing node states the degree-0 rank-one projection map, so writing it in step 5 is accepted. Step 7's naturality follows from clause (2) of fmap-functorial. Two repairs: (1) step 3's recursion gave a wrong source and target at n=0->1 against the tensor-power convention F^{⊗1}=F (a missing unitor; E4-minor). It now sets c_1=id, recurses for n>=1 and cites def-pur-sheaf-tensor-product. (2) Step 5 used f^*O_U ≅ O_{f^{-1}U} to trivialize f^*N without citing it (C1/C4). It now cites lem-weil-pbc-module-pullback-structure-sheaf, writes out the trivialization, and is marked elementary:false. The corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-finite-ideal-twist-cohomology-comparison.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteIdealTwistCohomologyComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_ideal_twist_cohomology_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.finiteTwistIdealMultiple",
+   "AlgebraicGeometry.Scheme.Modules.finiteTwistIdealMultipleι",
+   "AlgebraicGeometry.Scheme.Modules.finiteTwistProjectionHom",
+   "AlgebraicGeometry.Scheme.Modules.finiteTwistCoefficientMap",
+   "AlgebraicGeometry.Scheme.Modules.finiteTwistCohomologyMap",
+   "AlgebraicGeometry.Scheme.Modules.finite_ideal_twist_cohomology_comparison",
+   "AlgebraicGeometry.Scheme.Modules.finiteTwistProjectionHom_app",
+   "AlgebraicGeometry.Scheme.Modules.finiteTwistCohomologyMap_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteIdealTwistCohomologyComparison.lean",
+  "statement": "theorem finite_ideal_twist_cohomology_comparison {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [IsLocallyNoetherian X] [IsLocallyNoetherian Y] (F : Y.Modules) (hF : RingedSpace.IsCoherent Y.toRingedSpace F) (J : X.IdealSheafData) (L : X.Modules) [L.IsInvertible] : RingedSpace.IsCoherent X.toRingedSpace ((pushforward f).obj F) ∧ RingedSpace.IsCoherent Y.toRingedSpace (finiteTwistIdealMultiple f J F) ∧ RingedSpace.IsCoherent X.toRingedSpace (idealModuleProduct J.toModulesι ((pushforward f).obj F)) ∧ imageSubobject (idealModuleProductι J.toModulesι ((pushforward f).obj F)) = imageSubobject ((pushforward f).map (finiteTwistIdealMultipleι f J F)) ∧ ∃ e : idealModuleProduct J.toModulesι ((pushforward f).obj F) ≅ (pushforward f).obj (finiteTwistIdealMultiple f J F), e.hom ≫ (pushforward f).map (finiteTwistIdealMultipleι f J F) = idealModuleProductι J.toModulesι ((pushforward f).obj F) ∧ ∀ n : ℕ, (L.tensorPow n).IsInvertible ∧ ((tensorPullback f).obj (L.tensorPow n)).IsInvertible ∧ ((tensorPullback f).obj L).IsInvertible ∧ PreservesFiniteLimits (tensorRight (L.tensorPow n)) ∧ PreservesFiniteColimits (tensorRight (L.tensorPow n)) ∧ PreservesFiniteLimits (tensorRight ((tensorPullback f).obj (L.tensorPow n))) ∧ PreservesFiniteColimits (tensorRight ((tensorPullback f).obj (L.tensorPow n))) ∧ IsIso (finiteTwistProjectionHom f (finiteTwistIdealMultiple f J F) (L.tensorPow n)) ∧ (finiteTwistIdealMultiple f J F ⊗ ((tensorPullback f).obj L).tensorPow n).IsQuasicoherent ∧ ∀ p : ℕ, IsIso ((RingedSpace.moduleCohomology X.toRingedSpace p).map (finiteTwistCoefficientMap f J F L n e)) ∧ IsIso (moduleCohomologyEdgeMap f (finiteTwistIdealMultiple f J F ⊗ ((tensorPullback f).obj L).tensorPow n) p) ∧ IsIso (finiteTwistCohomologyMap f J F L p n e)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Returned-head 00121a19e253 H2 repaired: the power comparison is cited through def-sc-tensor-pullback-power-comparison, the structure-sheaf map through def-sfb-tensor-pullback-structure-sheaf-map, and the actual ideal image/inclusion definitions through def-trf-ideal-module-product-image. The theorem signatures and all real-data definitions are mathematically unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35f0d8ae1",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery of 00121a19 RETURN H2. Lean byte-identical to the accepted text except 3 docstring lines naming owners; lean.statement verbatim. stmt_deps: lem-sc-square-zero-ideal-tensor-unit replaced by def-sc-tensor-pullback-power-comparison (owns boundaryPullbackPowIso), def-sfb-tensor-pullback-structure-sheaf-map added (tensorPullbackObjUnitToUnit), new def-trf-ideal-module-product-image existing:true on idealModuleProduct/ι (IdealModuleProductStalk:42-55: real image data, no Mono, signature verbatim, no rival def owner in side-live). statement_change is citation-only (two inserted clauses, diff checked); old_statement/old_stmt_deps equal side-live base; proof/proof_deps unchanged; citers finite-surjective-ample-reflection and dominant-flag-line-kempf-vanishing hold. Mathematics as previously accepted (finite f, X and Y locally Noetherian, coherent F, IdealSheafData J, invertible L; clauses 1-3; edge cases n=0, p=0). Theorems sorry-only, docstrings and report sections present. Not recompiled because no file changed.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-24",
+  "by": "Q65 stage 2",
+  "old_statement": "Let $f:Y\\to X$ be a finite morphism [def-weil-finite-integral-morphism] of locally Noetherian schemes [def-pc-scheme, pqf-def-locnoeth]. Let $\\mathcal F$ be a coherent $\\mathcal O_Y$-module and $\\mathcal J\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals [pqf-def-coherent]. Let $\\mathcal L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Write $\\mathcal G=f_*\\mathcal F$, with module direct image and pullback as in [def-pc-module-pullback]. Using the sheaf tensor product [def-pur-sheaf-tensor-product], let $\\mathcal H=f^{-1}\\mathcal J\\cdot\\mathcal F\\subseteq\\mathcal F$ be the image of the multiplication map $f^*\\mathcal J\\otimes\\mathcal F\\to\\mathcal F$ induced by $\\mathcal J\\hookrightarrow\\mathcal O_X$ and $f^\\sharp$. Thus $\\mathcal H$ is generated locally by products of sections pulled back from $\\mathcal J$ with sections of $\\mathcal F$. Likewise $\\mathcal J\\mathcal G\\subseteq\\mathcal G$ is the image of $\\mathcal J\\otimes\\mathcal G\\to\\mathcal G$.\n(1) $\\mathcal G$, $\\mathcal H$, and $\\mathcal J\\mathcal G$ are coherent, and $\\mathcal J\\mathcal G=f_*\\mathcal H$ as submodules of $\\mathcal G$.\n(2) For $n\\in\\mathbf N$ put $\\mathcal N_n=\\mathcal L^{\\otimes n}$, with $\\mathcal N_0=\\mathcal O_X$; likewise $(f^*\\mathcal L)^{\\otimes0}=\\mathcal O_Y$. The modules $\\mathcal N_n$, $f^*\\mathcal N_n$, and $f^*\\mathcal L$ are invertible; tensoring by either $\\mathcal N_n$ or $f^*\\mathcal N_n$ is exact. There is a canonical isomorphism $f^*\\mathcal N_n\\cong(f^*\\mathcal L)^{\\otimes n}$. The ordinary projection map\n$$f_*\\mathcal H\\otimes\\mathcal N_n\\longrightarrow f_*(\\mathcal H\\otimes f^*\\mathcal N_n)$$\nis an isomorphism. On an open trivializing $\\mathcal N_n$, its restrictions identify with the identity of $f_*\\mathcal H$; it is the map multiplying a section of $\\mathcal H$ by the pulled-back section of $\\mathcal N_n$. The sheaf $\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}$ is quasi-coherent.\n(3) For every $p,n\\ge0$, the equality in (1), the projection map in (2), and the edge map $e_{f,\\mathcal M}:H^p(X,f_*\\mathcal M)\\to H^p(Y,\\mathcal M)$ of [def-weil-pbc-module-cohomology-fmap](c) for $\\mathcal M=\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}$ give natural isomorphisms\n$$H^p(X,\\mathcal J\\mathcal G\\otimes\\mathcal L^{\\otimes n})\\cong H^p(X,f_*(\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}))\\cong H^p(Y,\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}),$$\nwhere cohomology is [pqf-def-cohomology]. No properness, surjectivity, or ampleness hypothesis is imposed.",
+  "what": "H2 repair requested by the independent review of 00121a19e253: the statement used the recursive power comparison, the adjoint structure-sheaf map and ideal-product image/inclusion constructions without citing their definition nodes. Add those ownership citations, replace the unrelated square-zero theorem dependency with its existing definition owner, and register the existing ideal-product definitions. No hypothesis, object, conclusion or canonical map is altered.",
+  "source": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, ideal-product and displayed cohomology calculation; Tag 01YP, lemma-affine-morphism-projection-ideal; Tag 089W, lemma-relative-affine-cohomology; degree-zero projection formula in literature/stacks-project/cohomology.tex, Tag 01E8, lemma-projection-formula"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-finite-surjective-ample-reflection",
+    "holds": true,
+    "note": "The coherence and twisted cohomology comparison used in the ideal-devissage argument are unchanged; only definition ownership citations are completed."
+   },
+   {
+    "id": "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "holds": true,
+    "note": "The specialization J=O_Q and n=1 and its canonical projection/edge comparison are unchanged; all hypotheses and conclusions remain identical."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-finite-integral-morphism",
+   "def-pc-scheme",
+   "pqf-def-locnoeth",
+   "pqf-def-coherent",
+   "def-sc-invertible-module",
+   "def-pc-module-pullback",
+   "def-pur-sheaf-tensor-product",
+   "pqf-def-cohomology",
+   "def-weil-pbc-module-cohomology-fmap"
+  ]
+ }
+}

@@ -22,6 +22,7 @@ import json, pathlib, subprocess, sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import dag_queue as dq  # noqa: E402
+import nodefiles  # noqa: E402
 
 ROOT = dq.li.ROOT
 
@@ -53,7 +54,7 @@ def main(nodes=None, files=None, items=None) -> int:
         nodes, bp = {}, {}
         for p in sorted(dq.nodes_dir().rglob("*.json")):
             try:
-                d = json.loads(p.read_text())
+                d = nodefiles.read(p)
             except (OSError, json.JSONDecodeError):
                 continue
             if isinstance(d, dict) and dq.field(d, "id"):
@@ -62,7 +63,7 @@ def main(nodes=None, files=None, items=None) -> int:
                 bp[str(d["id"])] = d
         if dq.nodes_dir().resolve() == br.NODES.resolve():
             bnodes = bp
-    g = dq.Dag(nodes)
+    g = nodefiles.dag(nodes)
     files = files if files is not None else {p.stem: p for p in dq.nodes_dir().rglob("*.json")}
     if bnodes is None:
         bnodes = nodes if supplied else br.load()[0]

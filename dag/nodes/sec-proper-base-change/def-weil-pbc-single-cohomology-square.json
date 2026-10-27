@@ -1,0 +1,108 @@
+{
+ "id": "def-weil-pbc-single-cohomology-square",
+ "kind": "definition",
+ "title": "Retained commutative-square data",
+ "statement": "CohomologySquareData retains two endomorphisms and a map between two arbitrary objects of a category, their formulas as specified maps, and their commutation law. Its explicit constructor retains supplied maps and a commutation proof. For arbitrary single-complex, coefficient inverse-image and cohomology functors with their two natural transformations, construct the retained square from a coefficient square and a specified pullback component formula.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q8, lemma-higher-direct-images, restriction of cohomology classes; Descent Tag 03DR, tensor-section restriction."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Define the retained-square record with a category and its objects as parameters. Its explicit constructor retains the supplied maps and commutation proof and uses reflexivity for the three formula fields. Compose transformation naturality with the image of the coefficient square through the single-complex comparison, and substitute the supplied component formula. Apply the explicit square constructor. No existence theorem chooses any data.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q8 and 0EZM; coefficient naturality retained in a record with generic category and object parameters."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology pullback naturality for a commutative square of sheaf coefficient maps and single complexes",
+   "results": "Eight hits on module sheaf pullback and group cohomology; none express the fixed etale derived pullback or normalization.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map_comp_apply",
+   "results": "One hit for cohomology of a coefficient composite.",
+   "date": "2026-10-26",
+   "verdict": "Useful functoriality, not the claimed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rawAffineComplexPullback|coherentEtaleRestrictionIso|sheafHToDerived_map",
+   "results": "No Mathlib matches. Local source inspected and partial proofs recorded in the worker scratchpad.",
+   "date": "2026-10-26",
+   "verdict": "No existing matching interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of pullback in sheaf cohomology with respect to a commutative square of coefficient endomorphisms",
+   "results": "Eight hits: general categorical commutative-square naturality and sheaf-of-modules pullback composition; none for the prescribed derived etale raw comparison.",
+   "date": "2026-10-26",
+   "verdict": "No matching fixed-comparison interface; use functor and natural-transformation naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentRawScalarRestriction",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-raw-scalar-restriction",
+   "place": "Strict component of the scalar restriction proof."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawPullbackNaturalityAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawPullbackNaturalityAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.CohomologySquareData",
+  "statement": "structure CohomologySquareData {C : Type*} [Category* C] {A B : C} (ρ : A ⟶ B) (ν : End A) (ν' : End B)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.CohomologySquareData",
+   "AlgebraicGeometry.Scheme.Modules.CohomologySquareData.ofCommutes",
+   "AlgebraicGeometry.Scheme.Modules.coefficientPullback_square",
+   "AlgebraicGeometry.Scheme.Modules.coefficientCohomologySquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065714-L-3196579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T065714-L-3196579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

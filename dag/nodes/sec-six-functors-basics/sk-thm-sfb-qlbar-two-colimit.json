@@ -355,7 +355,63 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-17d1f1527 (reviewer sub-agent of L); spot-checked: I read all 14 steps, the new lemma, every cited statement, the main-20261015 unit and proof files and the return order. The statement, lean and lean_audit are unchanged. Steps 1-6 match the reviewed base apart from step 5's forward reference. Coefficient categories are layer-B module objects over p_X^* of the condensed rings, as def-sfb-derived-extend-to-qlbar says. The new lem-sfb-flat-scalar-tower-coherence is statement-only, self-contained and not a duplicate (rg over dag/nodes). Its tower equation is correct on pure tensors and holds for identity maps, zero rings and one-object sites. Its derived clause assumes exactness. Step 13's cancellation gives exactly (Hom-surj). Fault fixed (E5): step 9 claimed without argument that the tensor comparisons are the isomorphism of def-sfb-derived-extend-comp-iso, whose split proof builds it as the unique unit-compatible conjugate. I added the argument: the tensor comparison sends 1⊗(1⊗m) to 1⊗m, so by uniqueness in lem-weil-pbc-conjugate-iso-unit-equation, using the change-of-scalars (2) adjunctions, it is that isomorphism. I added that lemma and sk-def-sfb-change-of-scalars to the step's uses. Elision fixed: step 14 now explains the stage-H representative T_{H,H}(g) through the lemma's identity comparison. proof_deps recomputed. Accepted tool_uses: the 9 on the node, plus the Mathlib leaves def-weil-finite-subextension-directed-set, lem-weil-pbc-filtered-colimit-sets-elementwise and lem-weil-pbc-conjugate-iso-unit-equation (added to split_report). No SGA source. All steps are under 2000 characters. Fix file: fixes/dag/nodes/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit.json.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.derivedExtendScalarsSubfield",
+    "AlgebraicGeometry.ProEtale.derivedExtendScalarsToPadicAlgCl",
+    "CategoryTheory.Mod.extendScalarsIsoOfEq",
+    "AlgebraicGeometry.ProEtale.derivedExtendScalarsCompIso",
+    "AlgebraicGeometry.ProEtale.PadicSubfieldConstructible",
+    "AlgebraicGeometry.ProEtale.PadicAlgClConstructible",
+    "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj",
+    "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj",
+    "AlgebraicGeometry.ProEtale.constructibleExtendScalars",
+    "AlgebraicGeometry.ProEtale.constructibleToPadicAlgCl",
+    "AlgebraicGeometry.ProEtale.constructibleToPadicAlgClCompIso",
+    "AlgebraicGeometry.ProEtale.constructibleCocone",
+    "AlgebraicGeometry.ProEtale.constructibleCocone_homSurj",
+    "AlgebraicGeometry.ProEtale.constructibleCocone_homInj",
+    "AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj",
+    "AlgebraicGeometry.ProEtale.constructibleCocone_isFilteredTwoColimit"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.extendScalarsIsoOfEq",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
+     "lines": [
+      142,
+      146
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.derivedExtendScalarsSubfield",
+    "AlgebraicGeometry.ProEtale.derivedExtendScalarsToPadicAlgCl",
+    "AlgebraicGeometry.ProEtale.derivedExtendScalarsCompIso",
+    "AlgebraicGeometry.ProEtale.PadicSubfieldConstructible",
+    "AlgebraicGeometry.ProEtale.PadicAlgClConstructible",
+    "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj",
+    "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj",
+    "AlgebraicGeometry.ProEtale.constructibleExtendScalars",
+    "AlgebraicGeometry.ProEtale.constructibleToPadicAlgCl",
+    "AlgebraicGeometry.ProEtale.constructibleToPadicAlgClCompIso",
+    "AlgebraicGeometry.ProEtale.constructibleCocone",
+    "AlgebraicGeometry.ProEtale.constructibleCocone_homSurj",
+    "AlgebraicGeometry.ProEtale.constructibleCocone_homInj",
+    "AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj",
+    "AlgebraicGeometry.ProEtale.constructibleCocone_isFilteredTwoColimit"
+   ],
+   "open": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -390,5 +446,101 @@
   "landing": "20261019T005301-L-2748077",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "The coefficient ring $\\Qlb$ is a filtered union of the fields $E$, but integral lattices exist\nonly over a single $E$. We therefore show that every object and every morphism of\n$\\Dbc(X,\\Qlb)$ is defined over some finite $E$. For $C\\in D(X_{\\mathrm{proét}},E)$ and a finite\nextension $F/E$ we write $C_F=F_X\\otimes_{E_X}C$ and $C_{\\Qlb}=\\QbarX\\otimes_{E_X}C$ for the\nextensions of scalars, given by functors $D(X_{\\mathrm{proét}},E)\\to D(X_{\\mathrm{proét}},F)$ and\n$D(X_{\\mathrm{proét}},E)\\to D(X_{\\mathrm{proét}},\\Qlb)$; since $F_X$ and $\\QbarX$ are flat over\n$E_X$ ([lem-sfb-subfield-flat], [lem-sfb-qlbar-flat]), these need no deriving.\n\nLet $X$ be a standing scheme.\n\n1. Every lisse $\\QbarX$-module is isomorphic to $L_{\\Qlb}$ for a lisse $E_X$-module $L$ and\n   some finite $E/\\mathbf Q_\\ell$.\n2. For $C,D\\in\\Dbc(X,E)$ and every integer $r$, extension of scalars induces an isomorphism\n   $$\n   \\varinjlim_{F\\supset E}\\Hom_{D(X_{\\mathrm{proét}},F)}(C_F,D_F[r])\\xrightarrow{\\ \\sim\\ }\n   \\Hom_{D(X_{\\mathrm{proét}},\\Qlb)}(C_{\\Qlb},D_{\\Qlb}[r]),\n   $$\n   the colimit running over finite extensions $F$ of $E$ in $\\Qlb$.\n3. Every object of $\\Dbc(X,\\Qlb)$ is isomorphic to $K_{\\Qlb}$ for some $K\\in\\Dbc(X,E)$ and\n   some finite $E/\\mathbf Q_\\ell$.\n\n4. For rational coefficients $\\Dctf=\\Dbc$; these are the bounded constructible categories\n   $D_{\\mathrm{cons}}$ of [det-def-sfb-bounded-constructible]. By (2) with $r=0$ and (3), extension\n   of scalars identifies\n   $$\n   \\Dctf(X,\\Qlb)\\simeq\\mathop{\\text{2-colim}}_{E\\subset\\Qlb}\\Dctf(X,E)\n   $$\n   as ordinary categories (in the sense of [sk-def-sfb-filtered-two-colimit]): every object of\n   $\\Dctf(X,\\Qlb)$ is isomorphic to $K_{\\Qlb}$ for some finite $E$ and some $K\\in\\Dctf(X,E)$, and\n   for $K,L\\in\\Dctf(X,E)$ extension of scalars induces a bijection\n   $$\n   \\varinjlim_{F\\supset E}\\Hom_{\\Dctf(X,F)}(K_F,L_F)\\xrightarrow{\\ \\sim\\ }\\Hom_{\\Dctf(X,\\Qlb)}(K_{\\Qlb},L_{\\Qlb}),\n   $$\n   the colimit running over finite extensions $F$ of $E$ in $\\Qlb$.",
+  "proof": [
+   {
+    "text": "To descend a lisse $\\QbarX$-module we work with its transition matrices on a pro-étale cover.\nTwo facts describe the entries of such matrices on a quasi-compact object $V$ of\n$X_{\\mathrm{proét}}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "- Sections of a filtered colimit of sheaves over $V$ are the filtered colimit of the\n  sections. Indeed, every covering of $V$ has a finite refinement by quasi-compact objects,\n  and the sheaf condition for a finite covering is a finite limit, which commutes with\n  filtered colimits (this is the degree-zero case of \\stacks{0739}). Since\n  $\\QbarX=\\varinjlim_EE_X$ ([sk-prop-sfb-qlbar-colimit-x]), finitely many sections of\n  $\\QbarX$ over $V$ all lie in $E_X(V)$ for one finite $E/\\mathbf Q_\\ell$.\n- $E_X(V)$ is the ring of continuous functions $|V|\\to E$. A continuous function on a\n  quasi-compact space has compact image, which lies in $\\ell^{-m}\\cO_E$ for some $m$, so this\n  follows from the description of $\\cO_{E,X}$ in [sk-prop-sfb-qlbar-colimit-x].",
+    "uses": [
+     "sk-prop-sfb-qlbar-colimit-x"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Affine, hence quasi-compact, pro-étale coverings and quasi-compact refinements exist by\n\\stacks{0988}. Details: [det-lem-coefficient-finite-descent-sections].",
+    "uses": [
+     "det-lem-coefficient-finite-descent-sections"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(1) Let $L$ be a lisse $\\QbarX$-module. Since $X$ is quasi-compact, $L$ is free on a finite\ncovering of $X$ by quasi-compact (we may take affine) pro-étale objects $V_k$. Since $X$ is\nquasi-separated, the intersections $V_k\\times_XV_{k'}$ are quasi-compact. On them, $L$ is\ndescribed by finitely many transition matrices with entries in $\\QbarX$, and so are their\ninverses. By the two facts above, all these entries lie in $E_X$ for one finite $E$. The\ncocycle identities hold over $E_X$ because $E_X\\to\\QbarX$ is injective. Descent of sheaves\nalong the covering then produces a lisse $E_X$-module $L_E$ with $(L_E)_{\\Qlb}\\cong L$. The\nsame argument descends morphisms between lisse sheaves. Details:\n[det-lem-coefficient-finite-descent-lisse].",
+    "uses": [
+     "det-lem-coefficient-finite-descent-lisse"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(2) Extension of scalars $F_X\\otimes_{E_X}-$ is left adjoint to restriction of scalars\n$D(X_{\\mathrm{proét}},F)\\to D(X_{\\mathrm{proét}},E)$, so\n$\\Hom_{D(X_{\\mathrm{proét}},F)}(C_F,D_F[r])=\\Hom_{D(X_{\\mathrm{proét}},E)}(C,D_F[r])$, and similarly\nfor $\\Qlb$. Represent $D$ by a bounded complex $D^\\bullet$. The complexes\n$D^\\bullet\\otimes_{E_X}F_X$ form a filtered system of complexes of $E_X$-modules, all vanishing\nbelow the lower bound of $D^\\bullet$, and their colimit is $D^\\bullet\\otimes_{E_X}\\QbarX$, which\nrepresents $D_{\\Qlb}$. [sk-lem-constructible-ext-continuity], applied to $C\\in\\Dbc(X,E)$,\ngives\n$$\n\\varinjlim_F\\Hom_{D(X_{\\mathrm{proét}},E)}(C,D_F[r])\\xrightarrow{\\ \\sim\\ }\\Hom_{D(X_{\\mathrm{proét}},E)}(C,D_{\\Qlb}[r]),\n$$\nwhich is the claim after the adjunction. Details: [det-lem-coefficient-finite-descent-hom].",
+    "uses": [
+     "sk-lem-constructible-ext-continuity",
+     "det-lem-coefficient-finite-descent-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(3) First let $K$ be a constructible $\\QbarX$-module, with filtration\n$F_1\\subset\\cdots\\subset F_m=K$ as in [sk-lem-coefficient-heart] (3). We descend $F_k$ by\ninduction on $k$. The subquotient $F_k/F_{k-1}=a_!L$ descends because $L$ does, by (1), and\n$a_!$ commutes with extension of scalars, as functors\n$\\Mod(S_{\\mathrm{proét}},E)\\to\\Mod(X_{\\mathrm{proét}},\\Qlb)$. Suppose $F_{k-1}$ and $F_k/F_{k-1}$\ndescend to $E$. The extension $0\\to F_{k-1}\\to F_k\\to F_k/F_{k-1}\\to0$ is a distinguished\ntriangle, classified by a morphism $F_k/F_{k-1}\\to F_{k-1}[1]$. By (2) this morphism descends\nto some finite $F\\supset E$, and its cone over $F$ is a model of $F_k$.",
+    "uses": [
+     "sk-lem-coefficient-heart"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For a bounded complex $K$, induct in the same way along the truncation triangles\n$\\tau_{<q}K\\to K\\to\\mathcal H^q(K)[-q]\\to$. Once $\\tau_{<q}K$ and $\\mathcal H^q(K)$ have models\nover a finite $E$, the connecting morphism $\\mathcal H^q(K)[-q-1]\\to\\tau_{<q}K$ descends after a\nfinite extension by (2), and the cone of the descended morphism is a model of $K$. Each step\nenlarges $E$ finitely often, so after finitely many steps $K$ is defined over one finite $E$.\nDetails: [det-lem-coefficient-finite-descent-objects].",
+    "uses": [
+     "det-lem-coefficient-finite-descent-objects"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(4) The statement about objects is part (3). Its proof descends the lisse\nsheaves on the strata, together with their transition matrices, and then the connecting morphisms of a\nfinite Postnikov tower, so it descends the complexes themselves ([lem-sfb-constructible-cocone-obj]). The\nbijection on morphisms is part (2) with $r=0$, since $\\Dctf$ is a full\nsubcategory; it rests on the continuity of Ext out of a constructible complex\n([sk-lem-constructible-ext-continuity]). Surjectivity says that every morphism descends to a finite stage, and\ninjectivity that two morphisms with the same image agree at a later finite stage\n([lem-sfb-constructible-cocone-hom-surj], [lem-sfb-constructible-cocone-hom-inj]). Together with descent of\nobjects, these say exactly that the functor from the category with objects the pairs $(E,K)$,\n$K\\in\\Dctf(X,E)$, and Hom sets these colimits, to $\\Dctf(X,\\Qlb)$ is fully faithful and essentially surjective\n([thm-sfb-constructible-cocone-two-colimit]).",
+    "uses": [
+     "lem-sfb-constructible-cocone-obj",
+     "sk-lem-constructible-ext-continuity",
+     "lem-sfb-constructible-cocone-hom-surj",
+     "lem-sfb-constructible-cocone-hom-inj",
+     "thm-sfb-constructible-cocone-two-colimit"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The cocone itself: the derived extensions of scalars are [def-sfb-derived-extend-subfield] and\n[def-sfb-derived-extend-to-qlbar], with transitivity [def-sfb-derived-extend-comp-iso]; they preserve bounded\nconstructibility ([lem-sfb-extend-subfield-constructible], [lem-sfb-extend-to-qlbar-constructible]) and restrict\nto the categories [def-sfb-dcons-subfield] and [def-sfb-dcons-qlbar] ([def-sfb-constructible-extend-subfield],\n[def-sfb-constructible-extend-to-qlbar], [def-sfb-constructible-extend-comp-iso]), forming the cocone\n[def-sfb-constructible-cocone].",
+    "uses": [
+     "def-sfb-derived-extend-subfield",
+     "def-sfb-derived-extend-to-qlbar",
+     "def-sfb-derived-extend-comp-iso",
+     "lem-sfb-extend-subfield-constructible",
+     "lem-sfb-extend-to-qlbar-constructible",
+     "def-sfb-dcons-subfield",
+     "def-sfb-dcons-qlbar",
+     "def-sfb-constructible-extend-subfield",
+     "def-sfb-constructible-extend-to-qlbar",
+     "def-sfb-constructible-extend-comp-iso",
+     "def-sfb-constructible-cocone"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The proof uses only [sk-lem-coefficient-heart] and [sk-lem-constructible-ext-continuity], which\nprecede the uniform Ext bound and Brown representability, so the lemma is available before them. None\nof the properties is a formal consequence of $\\overline{\\mathbf Q}_{\\ell,X}=\\colim_EE_X$\n([sk-prop-sfb-qlbar-colimit-x]); both fail on the unbounded derived categories.",
+    "uses": [
+     "sk-lem-coefficient-heart",
+     "sk-lem-constructible-ext-continuity",
+     "sk-prop-sfb-qlbar-colimit-x"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

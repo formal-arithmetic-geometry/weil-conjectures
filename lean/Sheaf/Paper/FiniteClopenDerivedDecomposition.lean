@@ -35,6 +35,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import all Sheaf.AlgebraicGeometry.ProEtaleClopenRingedModuleGluing
 import Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus
+import all Sheaf.AlgebraicGeometry.ClopenStrictTowerRoosEquivalence
 import Sheaf.Paper.FiniteClopenConstructibilityBounds
 import Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange
 import Mathlib.Order.Bounds.Basic
@@ -42,6 +43,19 @@ import all Sheaf.CategoryTheory.StrictRoosAdditiveComparison
 import all Sheaf.AlgebraicGeometry.VaryingRingOperations
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Sheaf.Paper.DerivedPullbackTensorIso
+
+import all Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction
+import all Sheaf.Algebra.Homology.RingIsomorphismTensorTransport
+import Sheaf.AlgebraicGeometry.FinitePullbackLocalizationCohomology
+import Sheaf.AlgebraicGeometry.ProEtaleClopenTotalTensorKFlatDetection
+import all Sheaf.AlgebraicGeometry.ProEtaleClopenKFlatMonoidalDescent
+import Sheaf.Paper.OpenCompletedRestrictionIdentification
+import Sheaf.Paper.IntegralOperationsScalarComparisons
+import Mathlib.CategoryTheory.Localization.Prod
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+
+import all Sheaf.Paper.PurityFiniteSetting
 
 /-! # Finite clopen decomposition of derived coefficient categories
 
@@ -54,18 +68,58 @@ coefficient rings are the published finite quotients and completed integral shea
 -/
 
 @[expose] public noncomputable section
+attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian
+  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.hasDerived
+  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.modulesAbelian
+  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.hasDerived
+  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.monoidal
+  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.symmetric
+attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenRoos.modulesAbelian
+set_option Elab.async false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-universe u w
+attribute [local irreducible] HasDerivedCategory.standard
+  CategoryTheory.RingedDerivedNative.monoidal
+  CategoryTheory.Functor.mapDerivedCategory
+  CategoryTheory.Functor.mapDerivedCategoryFactors
+
+universe u w v c₀ d₀ v₀ z₀ r₀
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures
 namespace PurityFiniteSetting
 
+private theorem scalarAdditive {C : Type c₀} [Category.{d₀} C]
+    {J : GrothendieckTopology C} {R S : Sheaf J RingCat.{r₀}} (a : R ⟶ S) :
+    (SheafOfModules.restrictScalars.{z₀} a).Additive := inferInstance
+
+private theorem additiveComp {C : Type c₀} {D : Type d₀} {E : Type v₀}
+    [Category.{w} C] [Category.{w} D] [Category.{w} E]
+    [Preadditive C] [Preadditive D] [Preadditive E]
+    (F : C ⥤ D) (G : D ⥤ E) (hF : F.Additive) (hG : G.Additive) :
+    (F ⋙ G).Additive := by
+  let := hF
+  let := hG
+  infer_instance
+
+private def pushforwardRestrictIso
+    {C : Type c₀} [Category.{d₀} C] {D : Type v₀} [Category.{w} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (F : C ⥤ D) [F.IsContinuous J K] (R : Sheaf K RingCat.{r₀})
+    {S : Sheaf J RingCat.{r₀}}
+    (a : S ⟶ (F.sheafPushforwardContinuous RingCat.{r₀} J K).obj R) :
+    SheafOfModules.pushforward.{z₀} (F := F) (𝟙 _) ⋙
+        SheafOfModules.restrictScalars a ≅ SheafOfModules.pushforward a :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)
+
 variable (P : PurityFiniteSetting.{u})
+
+attribute [-instance] WeilConjectures.OpenCompletedRestriction.globalHasDerived
+  SheafOfModules.scalarRestriction_limits SheafOfModules.scalarRestriction_colimits
+
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -79,6 +133,8 @@ def clopenRing (X : Scheme.{u}) (n : ℕ) (integral : Bool) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   if integral then completedIntegralCommRingSheafUnrestricted P.coefficients.l P.extension X
   else integralCoefficientCommRingSheaf P.coefficients.l P.extension X n
+
+attribute [local irreducible] clopenRing
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -229,6 +285,8 @@ theorem clopenResidue_isUnit (Y : Over (Spec (CommRingCat.of P.field.k))) (y : Y
   simpa only [map_natCast] using
     (P.coefficientPrime_isUnit_stalk Y.left Y.hom y).map
       (IsLocalRing.residue (Y.left.presheaf.stalk y))
+
+attribute [local irreducible] Scheme.residueField
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -410,23 +468,25 @@ private theorem clopenRoosIso {A B : Type*} [Category A] [Category B]
     Nonempty (integralOperationsRoosFunctor ⋙ F.mapHomologicalComplex (.up ℤ) ≅
       (Functor.whiskeringRight ℕᵒᵖ _ _).obj (F.mapHomologicalComplex (.up ℤ)) ⋙
         integralOperationsRoosFunctor) := by
-  let G := F.mapHomologicalComplex (.up ℤ)
-  let : PreservesLimitsOfShape (Discrete ℕ) G :=
-    HomologicalComplex.preservesLimitsOfShape_of_eval _ (fun i ↦ by
-      change PreservesLimitsOfShape (Discrete ℕ)
-        (HomologicalComplex.eval A (ComplexShape.up ℤ) i ⋙ F)
-      infer_instance)
-  refine ⟨NatIso.ofComponents (fun C ↦ roosTheta F (clopenTowerComplex C)) ?_⟩
-  intro C D a
-  let f : clopenTowerComplex C ⟶ clopenTowerComplex D :=
-    { f := fun i ↦
-        { app := fun n ↦ (a.app n).f i
-          naturality := fun n m g ↦ congrArg (fun z ↦ z.f i) (a.naturality g) }
-      comm' := fun i j _ ↦ by ext n; exact (a.app n).comm i j }
-  exact roosTheta_map F _ _ (strictRoosProductMap_comm f)
-    _ _ (strictRoosProductMap_comm
-      ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex (.up ℤ)).map f))
-    (roosComparison_map F f) (roosComparison_map F f)
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    let G := F.mapHomologicalComplex (.up ℤ)
+    let : PreservesLimitsOfShape (Discrete ℕ) G :=
+      HomologicalComplex.preservesLimitsOfShape_of_eval _ (fun i ↦ by
+        change PreservesLimitsOfShape (Discrete ℕ)
+          (HomologicalComplex.eval A (ComplexShape.up ℤ) i ⋙ F)
+        infer_instance)
+    refine ⟨NatIso.ofComponents (fun C ↦ roosTheta F (clopenTowerComplex C)) ?_⟩
+    intro C D a
+    let f : clopenTowerComplex C ⟶ clopenTowerComplex D :=
+      { f := fun i ↦
+          { app := fun n ↦ (a.app n).f i
+            naturality := fun n m g ↦ congrArg (fun z ↦ z.f i) (a.naturality g) }
+        comm' := fun i j _ ↦ by ext n; exact (a.app n).comm i j }
+    exact roosTheta_map F _ _ (strictRoosProductMap_comm f)
+      _ _ (strictRoosProductMap_comm
+        ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex (.up ℤ)).map f))
+      (roosComparison_map F f) (roosComparison_map F f)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -497,6 +557,301 @@ private theorem clopenTor_mono {Y : Scheme.{u}} {A : Type u} [CommRing A]
   exact h.2 L Q e f hf hQ M q (hq.imp (fun h ↦ h.trans_le hca)
     (fun h ↦ hbd.trans_lt h))
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+  CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
+attribute [-instance] AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.hasDerived
+  AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedMonoidal
+  AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedSymmetric in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private def compareLocalizedBifunctors {A B C : Type*}
+    [Category* A] [Category* B] [Category* C]
+    (L : A ⥤ B) (W : MorphismProperty A)
+    [(L.prod L).IsLocalization (W.prod W)]
+    (F G : B × B ⥤ C) (α : (L.prod L) ⋙ F ≅ (L.prod L) ⋙ G) : F ≅ G :=
+  (Localization.fullyFaithfulWhiskeringLeft (L.prod L) (W.prod W) C).preimageIso α
+
+private theorem clopenTensorModelIso (Y : Scheme.{u})
+    (R : Sheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1})
+    (M : RingedSiteDualityModel.{u + 1, u, u, u + 2} (Scheme.ProEt.topology Y) R) :
+    Nonempty (M.closed.tensor ≅
+      @MonoidalCategory.tensor (DerivedCategory (clopenModules Y R)) _
+        (Scheme.ProEt.FiniteClopenTensor.derivedMonoidal.{u, u} R)) := by
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    let L := coefficientKFlatInclusion.{u, u + 1, u} (Scheme.ProEt.topology Y) R ⋙
+      DerivedCategory.Q
+    let W := (HomologicalComplex.quasiIso (clopenModules Y R) (.up ℤ)).inverseImage
+      (coefficientKFlatInclusion.{u, u + 1, u} (Scheme.ProEt.topology Y) R)
+    let : L.IsLocalization W :=
+      RingedDerivedNative.kFlatLocalization.{u + 1, u, u, u + 2}
+        (Scheme.ProEt.topology Y) R
+    exact ⟨compareLocalizedBifunctors L W M.closed.tensor
+      (@MonoidalCategory.tensor (DerivedCategory (clopenModules Y R)) _
+        (Scheme.ProEt.FiniteClopenTensor.derivedMonoidal.{u, u} R))
+      (M.models.comparison.symm ≪≫
+        RingedDerivedNative.comparison.{u + 1, u, u, u + 2} (Scheme.ProEt.topology Y) R)⟩
+
+
+private def scalarSquare {A B C D E : Type*}
+    [Category* A] [Category* B] [Category* C] [Category* D] [Category* E]
+    (H : A ⥤ B) (F : B ⥤ C) (G : D ⥤ E)
+    (S S' : B ⥤ D) (T T' : C ⥤ E)
+    (α : H ⋙ S ≅ H ⋙ S') (β : F ⋙ T ≅ S ⋙ G)
+    (γ : (H ⋙ F) ⋙ T ≅ (H ⋙ F) ⋙ T') : H ⋙ S' ⋙ G ≅ (H ⋙ F) ⋙ T' :=
+  (Functor.associator H S' G).symm ≪≫ isoWhiskerRight α.symm G ≪≫
+    Functor.associator H S G ≪≫ isoWhiskerLeft H β.symm ≪≫
+    (Functor.associator H F T).symm ≪≫ γ
+
+
+private def pushUnitThroughIso
+    {C : Type c₀} [Category.{v₀} C] {D : Type d₀} [Category.{z₀} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (F : C ⥤ D) [F.IsContinuous J K] (R : Sheaf K RingCat.{r₀})
+    {S : Sheaf J RingCat.{r₀}}
+    (e : S ≅ (F.sheafPushforwardContinuous RingCat.{r₀} J K).obj R) :
+    (SheafOfModules.pushforward.{r₀} (F := F) e.hom).obj
+      (SheafOfModules.unit R) ≅ SheafOfModules.unit S := by
+  let f : SheafOfModules.unit S ⟶
+      (SheafOfModules.pushforward.{r₀} (F := F) e.hom).obj (SheafOfModules.unit R) :=
+    SheafOfModules.unitToPushforwardObjUnit e.hom
+  have h (U : Cᵒᵖ) : IsIso (f.val.app U) := by
+    apply (ConcreteCategory.isIso_iff_bijective _).mpr
+    exact ConcreteCategory.bijective_of_isIso (e.hom.hom.app U)
+  let t := PresheafOfModules.isoMk (fun U ↦ @asIso _ _ _ _ (f.val.app U) (h U))
+    (by intro U V g; exact f.val.naturality g)
+  exact ((SheafOfModules.fullyFaithfulForget S).preimageIso
+    (X := SheafOfModules.unit S)
+    (Y := (SheafOfModules.pushforward.{r₀} (F := F) e.hom).obj (SheafOfModules.unit R)) t).symm
+
+private theorem rationalPullback_formula (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {Y X : Scheme.{u}} (f : Y ⟶ X)
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    [∀ x : X, Invertible (l : X.residueField x)] :
+    (∀ K, (rationalDerivedPullback l E f).obj K =
+      ⟨(constructibleIntegralPullback l E f).obj K.obj⟩) ∧
+    (∀ (K M : sfIntegralConstructibleCategory l E X) (a : K ⟶ M)
+      (c : Localization.Away (Padic.coefficientExtensionUniformizer l E)),
+      HEq ((rationalDerivedPullback l E f).map
+        (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] a :
+          (sfRationalConstructibleLocalization l E X).obj K ⟶
+          (sfRationalConstructibleLocalization l E X).obj M))
+        (c ⊗ₜ[Padic.coefficientExtensionIntegers l E]
+          (constructibleIntegralPullback l E f).map a)) := by
+  unfold rationalDerivedPullback
+  exact (rationalDerivedPullback_existsUnique l E f).exists.choose_spec.2
+
+
+private def pullbackInclusion (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {Y X : Scheme.{u}} (f : Y ⟶ X)
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    [∀ x : X, Invertible (l : X.residueField x)] :
+    (sfIntegralConstructible l E X).ι ⋙ integralDerivedPullback l E f ≅
+      constructibleIntegralPullback l E f ⋙ (sfIntegralConstructible l E Y).ι := by
+  unfold constructibleIntegralPullback
+  exact Iso.refl _
+
+private def transportTensorComparison {A B : Type*} [Category* A] [Category* B]
+    (F : A ⥤ B) (T T' : A × A ⥤ A) (S S' : B × B ⥤ B)
+    (a : T ≅ T') (b : S ≅ S') (c : T' ⋙ F ≅ F.prod F ⋙ S') :
+    T ⋙ F ≅ F.prod F ⋙ S :=
+  isoWhiskerRight a F ≪≫ c ≪≫ isoWhiskerLeft (F.prod F) b.symm
+
+section GenericDecomposition
+variable (X : Over (Spec (CommRingCat.of P.field.k)))
+  {I : Type w} [Finite I]
+  (Xi : I → Over (Spec (CommRingCat.of P.field.k))) (j : ∀ i, Xi i ⟶ X)
+  [∀ i, IsOpenImmersion (j i).left] [∀ i, IsClosedImmersion (j i).left]
+  (hdisjoint : ∀ i k, i ≠ k → Disjoint (Set.range (j i).left) (Set.range (j k).left))
+  (hcover : (⋃ i, Set.range (j i).left) = Set.univ)
+include hdisjoint hcover
+attribute [-instance] AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.hasDerived
+  AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedMonoidal
+  AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.derivedSymmetric
+  CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+  CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
+private theorem unboundedForRing
+    (R : Sheaf (Scheme.ProEt.topology X.left) CommRingCat.{u + 1}) :
+    (Functor.pi' (fun i ↦
+      clopenDerivedRestriction (j i).left R)).IsEquivalence ∧
+    (∀ (i : I) (m : ℤ), Nonempty
+      (clopenDerivedRestriction (j i).left R ⋙
+          DerivedCategory.homologyFunctor _ m ≅
+        DerivedCategory.homologyFunctor _ m ⋙
+          clopenRestriction (j i).left R)) ∧
+    (∀ i : I, Nonempty
+      ((clopenDerivedRestriction (j i).left R).obj
+          ((DerivedCategory.singleFunctor _ 0).obj (SheafOfModules.unit
+            ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+              R))) ≅
+        (DerivedCategory.singleFunctor _ 0).obj (SheafOfModules.unit
+          ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+            (clopenRingRestriction (j i).left R))))) ∧
+    ∀ (M : RingedSiteDualityModel.{u + 1, u, u, u + 2} (Scheme.ProEt.topology X.left)
+        R) (i : I)
+      (Mi : RingedSiteDualityModel.{u + 1, u, u, u + 2} (Scheme.ProEt.topology (Xi i).left)
+        (clopenRingRestriction (j i).left R)),
+      Nonempty (M.closed.tensor ⋙
+          clopenDerivedRestriction (j i).left R ≅
+        ((clopenDerivedRestriction (j i).left R).prod
+          (clopenDerivedRestriction (j i).left R)) ⋙
+            Mi.closed.tensor) := by
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    have hd : Pairwise (fun i k ↦ Disjoint (Set.range (j i).left) (Set.range (j k).left)) :=
+      hdisjoint
+    have hc : ∀ x : X.left, ∃ i, x ∈ Set.range (j i).left := by
+      intro x
+      have hx : x ∈ ⋃ i, Set.range (j i).left := by rw [hcover]; trivial
+      exact Set.mem_iUnion.mp hx
+    have H :=
+      Scheme.ProEt.FiniteClopenTensor.finite_clopen_derived_calculus.{u, u, w, 0, 0}
+        X.left I (fun i ↦ (Xi i).left) (fun i ↦ (j i).left) hd hc R
+    have ht := Scheme.ProEt.ClopenMonoidalDescent.clopen_kflat_monoidal_descent.{u, u, w}
+      X.left I (fun i ↦ (Xi i).left) (fun i ↦ (j i).left) hd hc R
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · let e := H.choose
+      have he := H.choose_spec.1
+      change (Functor.pi' (fun i ↦
+        Scheme.ProEt.FiniteClopenTensor.derivedRestriction.{u, u} (j i).left R)).IsEquivalence
+      rw [← he]
+      infer_instance
+    · intro i m
+      exact ⟨((clopenRestriction (j i).left R).mapDerivedCategoryHomologyFunctorIso m).symm⟩
+    · intro i
+      exact ⟨((clopenRestriction (j i).left R).mapDerivedCategorySingleFunctor 0).app _ ≪≫
+        (DerivedCategory.singleFunctor _ 0).mapIso (Iso.refl _)⟩
+    · intro M i Mi
+      let c := (ht.2.choose_spec i).choose_spec.choose_spec.choose
+      exact ⟨transportTensorComparison (clopenDerivedRestriction (j i).left R)
+        M.closed.tensor _ Mi.closed.tensor _
+        (clopenTensorModelIso X.left R M).some
+        (clopenTensorModelIso (Xi i).left (clopenRingRestriction (j i).left R) Mi).some
+        c⟩
+
+
+end GenericDecomposition
+
+section UnitHelpers
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+variable (X : Over (Spec (CommRingCat.of P.field.k)))
+variable {I : Type w} (Xi : I → Over (Spec (CommRingCat.of P.field.k)))
+variable (j : ∀ i, Xi i ⟶ X)
+variable [∀ i, IsOpenImmersion (j i).left]
+private theorem integralUnitCheck
+    (E : Type u) [Field E] [Algebra ℚ_[P.coefficients.l] E]
+    [FiniteDimensional ℚ_[P.coefficients.l] E]
+    [∀ x : X.left, Invertible (P.coefficients.l : X.left.residueField x)]
+    [∀ k (x : (Xi k).left), Invertible (P.coefficients.l : (Xi k).left.residueField x)]
+    (i : I) :
+    Nonempty ((integralDerivedPullback P.coefficients.l E (j i).left).obj
+      (integralConstantCoefficientObject P.coefficients.l E X.left) ≅
+        integralConstantCoefficientObject P.coefficients.l E (Xi i).left) := by
+  let l := P.coefficients.l
+  let R := completedIntegralCommRingSheafUnrestricted l E X.left
+  let S := completedIntegralCommRingSheafUnrestricted l E (Xi i).left
+  let V := sheafCompose (Scheme.ProEt.topology (Xi i).left)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+  let e := V.mapIso (OpenCompletedRestriction.coefficients.{u, u} l E (j i).left).completed
+  let v := pushUnitThroughIso.{u + 1, u + 1, u, u, u + 1}
+    (OpenCompletedRestriction.inclusion (j i).left)
+    ((sheafCompose (Scheme.ProEt.topology X.left)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) e
+  obtain ⟨d, hd⟩ := OpenCompletedRestriction.open_completed_restriction_complete
+    l E (j i).left inferInstance inferInstance
+  let K := integralConstantCoefficientObject l E X.left
+  let F : scalarReductionSource l E X.left ⥤ scalarReductionSource l E (Xi i).left :=
+    OpenCompletedRestriction.ordinary.{u, u} l E (j i).left
+  let hAdd : F.Additive := OpenCompletedRestriction.ordinaryAdditive.{u, u} l E (j i).left
+  let hLim : CategoryTheory.Limits.PreservesFiniteLimits F :=
+    OpenCompletedRestriction.ordinaryLimits.{u, u} l E (j i).left
+  let hCol : CategoryTheory.Limits.PreservesFiniteColimits F :=
+    OpenCompletedRestriction.ordinaryColimits.{u, u} l E (j i).left
+  let h : IsIso ((OpenCompletedRestriction.kappa.{u, u} l E (j i).left d).app K) :=
+    hd K (integralConstantCoefficient_constructible l E X.left P.field
+      P.coefficients.different).2.1
+  exact ⟨(@asIso _ _ _ _ ((OpenCompletedRestriction.kappa.{u, u} l E (j i).left d).app K) h).symm ≪≫
+    (@Functor.mapDerivedCategorySingleFunctor _ _ _ _ _ _ _ _ F
+      hAdd hLim hCol 0).app _ ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso v⟩
+
+private theorem finiteUnitCheck (n : ℕ) (i : I) :
+    Nonempty ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj
+      (finiteConstantCoefficientObject P.coefficients.l P.extension X.left n) ≅
+        finiteConstantCoefficientObject P.coefficients.l P.extension (Xi i).left n) := by
+  let := fun y : (Xi i).left ↦ (P.clopenResidue_isUnit (Xi i) y).invertible
+  let := fun x : X.left ↦ (P.clopenResidue_isUnit X x).invertible
+  let U : X.left.ProEt := ⟨Over.mk (j i).left, show WeaklyEtale (j i).left from inferInstance⟩
+  let d := (Scheme.finite_pullback_localization_cohomology P.coefficients.l
+    P.extension n X.left U).some
+  let A := Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)
+  let V := sheafCompose (Scheme.ProEt.topology (Xi i).left)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+  let e := V.mapIso d.ringIso
+  let v := pushUnitThroughIso.{u + 1, u + 1, u, u, u + 1} (clopenSiteInclusion (j i).left)
+    ((sheafCompose (Scheme.ProEt.topology X.left)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (Scheme.proEtaleConstantRing X.left A)) e
+  let F := Scheme.proEtaleObjectModuleRestriction U A d.ringIso
+  let hAdd := d.restrictionAdditive
+  let hLim := d.restrictionLimits
+  let hCol := d.restrictionColimits
+  exact ⟨d.derivedComparison.app _ ≪≫
+    (@Functor.mapDerivedCategorySingleFunctor _ _ _ _ _ _ _ _ F
+      hAdd hLim hCol 0).app _ ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso v⟩
+private theorem rationalUnitCheck (E : Type u) [Field E]
+    [Algebra ℚ_[P.coefficients.l] E] [FiniteDimensional ℚ_[P.coefficients.l] E]
+    [∀ x : X.left, Invertible (P.coefficients.l : X.left.residueField x)]
+    [∀ k (x : (Xi k).left), Invertible (P.coefficients.l : (Xi k).left.residueField x)]
+    (i : I) (K : sfIntegralConstructibleCategory P.coefficients.l E X.left)
+    (Ki : sfIntegralConstructibleCategory P.coefficients.l E (Xi i).left)
+    (hK : K.obj = integralConstantCoefficientObject P.coefficients.l E X.left)
+    (hKi : Ki.obj = integralConstantCoefficientObject P.coefficients.l E (Xi i).left) :
+    Nonempty ((rationalDerivedPullback P.coefficients.l E (j i).left).obj
+      ((sfRationalConstructibleLocalization P.coefficients.l E X.left).obj K) ≅
+        (sfRationalConstructibleLocalization P.coefficients.l E (Xi i).left).obj Ki) := by
+  let l := P.coefficients.l
+  obtain ⟨v⟩ := integralUnitCheck P X Xi j E i
+  let vi : (constructibleIntegralPullback l E (j i).left).obj K ≅ Ki :=
+    ObjectProperty.isoMk _ ((integralDerivedPullback l E (j i).left).mapIso
+      (eqToIso hK) ≪≫ v ≪≫ (eqToIso hKi).symm)
+  exact ⟨eqToIso ((rationalPullback_formula l E (j i).left).1
+    ((sfRationalConstructibleLocalization l E X.left).obj K)) ≪≫
+    (sfRationalConstructibleLocalization l E (Xi i).left).mapIso vi⟩
+
+attribute [local irreducible] ScalarLocalization.category
+  ObjectProperty.FullSubcategory.category in
+private theorem commonUnitCheck (i : I)
+    (B : AlgebraicallyClosedCoefficients.Index P.coefficients.l P.coefficients.Qbar) :
+    Nonempty ((P.clopenCommonStagePullback (j i)).obj (P.clopenCommonStageUnit X.left B) ≅
+      P.clopenCommonStageUnit (Xi i).left B) := by
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    let := fun x : X.left ↦ (P.clopenResidue_isUnit X x).invertible
+    let := fun k (x : (Xi k).left) ↦ (P.clopenResidue_isUnit (Xi k) x).invertible
+    let E := AlgebraicallyClosedCoefficients.Coefficient.{u}
+      P.coefficients.l P.coefficients.Qbar B
+    let K : sfIntegralConstructibleCategory P.coefficients.l E X.left :=
+      ⟨integralConstantCoefficientObject P.coefficients.l E X.left,
+        (integralConstantCoefficient_constructible P.coefficients.l E X.left
+          P.field P.coefficients.different).2.1⟩
+    let Ki : sfIntegralConstructibleCategory P.coefficients.l E (Xi i).left :=
+      ⟨integralConstantCoefficientObject P.coefficients.l E (Xi i).left,
+        (integralConstantCoefficient_constructible P.coefficients.l E (Xi i).left
+          P.field P.coefficients.different).2.1⟩
+    obtain ⟨v⟩ := rationalUnitCheck P X Xi j E i K Ki rfl rfl
+    let M := P.clopenCommonStageUnit X.left B
+    have hM := (commonStageDerivedPullback_existsUnique P.coefficients.l
+      P.coefficients.Qbar (j i).left).exists.choose_spec.1 M
+    let e := (GeneralAlgebraicallyClosedCoefficients.inclusion B).mapIso v
+    refine ⟨eqToIso hM ≪≫ ?_⟩
+    exact e
+end UnitHelpers
+
 section Decomposition
 variable (X : Over (Spec (CommRingCat.of P.field.k)))
   [hft : LocallyOfFiniteType X.hom] [hqc : QuasiCompact X.hom]
@@ -556,72 +911,34 @@ theorem finiteClopen_module_equivalence (n : ℕ) (integral : Bool) :
             fun i ↦ (a i).val.app
               (op ((Scheme.proEtaleBaseChange (j i).left).obj V)) (φ F V x i)) := by
   classical
-  obtain ⟨m, ⟨f⟩⟩ := Finite.exists_equiv_fin I
-  let q := f.symm
-  let Y (k : Fin m) := (Xi (q k)).left
-  let k (r : Fin m) := (j (q r)).left
   let R := (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
     (P.clopenRing X.left n integral)
-  have hc : ∀ x : X.left, ∃ a : Fin m, x ∈ Set.range (k a) := by
+  have hc : ∀ x : X.left, ∃ i, x ∈ Set.range (j i).left := by
     intro x
-    obtain ⟨i, hi⟩ := Set.mem_iUnion.mp (show x ∈ ⋃ i, Set.range (j i).left by
-      rw [hcover]; trivial)
-    refine ⟨f i, ?_⟩
-    change x ∈ Set.range ((j (f.symm (f i))).left)
-    rw [f.symm_apply_apply]
-    exact hi
-  let G := Scheme.ProEt.gluingFunctor.{u, u + 1, 0, 0} k R
-  let E := Scheme.ProEt.gluingEquivalence.{u, u + 1, 0, 0} k
-    (fun a b hab ↦ hdisjoint (q a) (q b) (fun he ↦ hab (q.injective he))) hc R
-  let C (i : I) := clopenModules (Xi i).left
-    (clopenRingRestriction (j i).left (P.clopenRing X.left n integral))
-  let T := Pi.equivalenceOfEquiv C q
-  let E' : clopenModules X.left (P.clopenRing X.left n integral) ≌ (∀ i, C i) :=
-    (E.trans T).changeFunctor (G := Functor.pi' (fun i ↦
-      clopenRestriction (j i).left (P.clopenRing X.left n integral)))
-    (by
-      let U := Functor.pi' (fun i ↦
-        clopenRestriction (j i).left (P.clopenRing X.left n integral))
-      change (U ⋙ T.inverse) ⋙ T.functor ≅ U
-      exact associator U T.inverse T.functor ≪≫
-        isoWhiskerLeft U T.counitIso ≪≫ rightUnitor U)
-  have heinv : E'.inverse = T.inverse ⋙ G := rfl
-  refine ⟨E', rfl, inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
-  rw [heinv]
-  let τ (F : ∀ i, C i) (V : X.left.ProEt) :
-      (∀ r : Fin m, (F (q r)).val.obj
-        (op ((Scheme.proEtaleBaseChange (j (q r)).left).obj V))) ≃+
-      (∀ i, (F i).val.obj (op ((Scheme.proEtaleBaseChange (j i).left).obj V))) :=
-    { Equiv.piCongrLeft _ q with
-      map_add' := fun x y ↦ by
-        funext i
-        obtain ⟨r, rfl⟩ := q.surjective i
-        simp }
-  have hτ (F : ∀ i, C i) (V : X.left.ProEt) (x) (a : Fin m) :
-      τ F V x (q a) = x a := by
-    simp [τ]
-  refine ⟨τ, ?_, ?_, ?_⟩
-  · intro F V r x i
-    obtain ⟨a, rfl⟩ := q.surjective i
-    change τ F V _ (q a) = _ • τ F V _ (q a)
-    rw [hτ, hτ]
-    rfl
-  · intro F V W g x
+    exact Set.mem_iUnion.mp (show x ∈ ⋃ i, Set.range (j i).left by rw [hcover]; trivial)
+  obtain ⟨G, η, ε, _, h₁, h₂, σ, hs, hr, hm, _, _⟩ :=
+    Scheme.ProEt.ClopenRoos.normalized_module_gluing.{u, u + 1, u, w}
+      X.left I (fun i ↦ (Xi i).left) (fun i ↦ (j i).left) hdisjoint hc R
+      (by
+        intro U a b
+        exact @mul_comm ((P.clopenRing X.left n integral).obj.obj U) inferInstance a b)
+  let E : clopenModules X.left (P.clopenRing X.left n integral) ≌
+      (∀ i, clopenModules (Xi i).left
+        (clopenRingRestriction (j i).left (P.clopenRing X.left n integral))) :=
+    CategoryTheory.Equivalence.mk _ G η ε
+  refine ⟨E, rfl, inferInstance, inferInstance, inferInstance, inferInstance, σ, hs, ?_, ?_⟩
+  · intro F V W f x
     funext i
-    obtain ⟨a, rfl⟩ := q.surjective i
-    change τ F V _ (q a) =
-      (F (q a)).val.map ((Scheme.proEtaleBaseChange (j (q a)).left).map g).op
-        (τ F W _ (q a))
-    rw [hτ, hτ]
-    rfl
-  · intro F H g V x
+    exact hr F W V f x i
+  · intro F G f V x
     funext i
-    obtain ⟨a, rfl⟩ := q.surjective i
-    change τ H V _ (q a) =
-      (g (q a)).val.app (op ((Scheme.proEtaleBaseChange (j (q a)).left).obj V))
-        (τ F V _ (q a))
-    rw [hτ, hτ]
-    rfl
+    exact hm F G f V x i
+
+
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -664,7 +981,9 @@ theorem finiteClopen_unbounded_decomposition (n : ℕ) (integral : Bool) :
         ((clopenDerivedRestriction (j i).left (P.clopenRing X.left n integral)).prod
           (clopenDerivedRestriction (j i).left (P.clopenRing X.left n integral))) ⋙
             Mi.closed.tensor) := by
-  sorry
+  exact unboundedForRing P X Xi j hdisjoint hcover (P.clopenRing X.left n integral)
+
+
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -692,6 +1011,7 @@ theorem finiteClopen_strict_roos (n : ℕ) (integral : Bool) (i : I) :
       (Scheme.ProEt.topology (Xi i).left) (Scheme.ProEt.topology X.left)
       (clopenSiteInclusion (j i).left) _ _ (𝟙 _)
   exact clopenRoosIso F
+
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -727,69 +1047,71 @@ theorem finiteClopen_finite_bounds (n : ℕ)
         ∀ i, Scheme.HasProEtaleTorAmplitude (Xi i).left
           (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1))
           ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj K) a b)) := by
-  classical
-  let Pn : PurityFiniteSetting.{u} := { P with
-    level := n + 1
-    level_pos := Nat.succ_pos n }
-  let : X.left.Over (Spec (CommRingCat.of Pn.field.k)) := ⟨X.hom⟩
-  have : LocallyOfFiniteType (X.left ↘ Spec (CommRingCat.of Pn.field.k)) := hft
-  have : QuasiCompact (X.left ↘ Spec (CommRingCat.of Pn.field.k)) := hqc
-  have H := finite_clopen_constructibility_bounds Pn X.left (fun i ↦ (Xi i).left)
-    (fun i ↦ (j i).left) hdisjoint hcover
-  let e (i : I) := Scheme.openSquareDerivedPullbackModel Pn.Ring (j i).left
-  have hsupport : ∀ (i : I),
-      Scheme.proEtaleCohomologicalSupport
-          ((Scheme.proEtaleConstantRingDerivedPullback Pn.Ring (j i).left).obj K) =
-        Scheme.proEtaleCohomologicalSupport
-          ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj K) :=
-    fun i ↦ clopenSupport_iso ((e i).app K)
-  have hbound : ∀ a b : ℤ, a ≤ b →
-      (Scheme.proEtaleCohomologicalSupport K ⊆ Set.Icc a b ↔
-        ∀ i, Scheme.proEtaleCohomologicalSupport
-          ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj K) ⊆
-            Set.Icc a b) := by
-    intro a b hab
-    simpa only [hsupport] using H.2.2.2.2.1 K a b hab
-  refine ⟨?_, hbound, ?_⟩
-  · have hconstructible := H.2.2.2.1 K
-    have hcoh :
-        (∀ m : ℤ, Scheme.IsConstructibleProEtaleModuleSheaf X.left Pn.Ring
-          ((DerivedCategory.homologyFunctor _ m).obj K)) ↔
-        ∀ (i : I) (m : ℤ), Scheme.IsConstructibleProEtaleModuleSheaf (Xi i).left Pn.Ring
-          ((DerivedCategory.homologyFunctor _ m).obj
-            ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj K)) := by
-      refine hconstructible.trans ⟨?_, ?_⟩
-      · intro h i m
-        exact clopenSheafConstructible_iso
-          ((DerivedCategory.homologyFunctor _ m).mapIso ((e i).app K)) (h i m)
-      · intro h i m
-        exact clopenSheafConstructible_iso
-          ((DerivedCategory.homologyFunctor _ m).mapIso ((e i).app K)).symm (h i m)
-    change (_ ∧ _) ↔ ∀ i, _ ∧ _
-    constructor
-    · rintro ⟨hb, hc⟩
-      obtain ⟨a, ha⟩ := hb.bddBelow
-      obtain ⟨b, hb⟩ := hb.bddAbove
-      have hs : Scheme.proEtaleCohomologicalSupport K ⊆ Set.Icc (min a b) (max a b) :=
-        fun q hq ↦ ⟨(min_le_left a b).trans (ha hq), (hb hq).trans (le_max_right a b)⟩
-      intro i
-      exact ⟨(Set.finite_Icc _ _).subset ((hbound _ _
-        ((min_le_left a b).trans (le_max_left a b))).mp hs i), hcoh.mp hc i⟩
-    · intro h
-      have hs := Set.finite_iUnion (fun i ↦ (h i).1)
-      obtain ⟨a, ha⟩ := hs.bddBelow
-      obtain ⟨b, hb⟩ := hs.bddAbove
-      refine ⟨(Set.finite_Icc (min a b) (max a b)).subset
-        ((hbound _ _ ((min_le_left a b).trans (le_max_left a b))).mpr ?_),
-        hcoh.mpr (fun i ↦ (h i).2)⟩
-      intro i q hq
-      have hmem : q ∈ ⋃ i, Scheme.proEtaleCohomologicalSupport
-          ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj K) :=
-        Set.mem_iUnion.mpr ⟨i, hq⟩
-      exact ⟨(min_le_left a b).trans (ha hmem), (hb hmem).trans (le_max_right a b)⟩
-  · intro a b hab
-    refine (H.2.2.2.2.2.1 K a b hab).trans ?_
-    exact forall_congr' (fun i ↦ clopenTor_iso ((e i).app K) a b)
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+      classical
+      let Pn : PurityFiniteSetting.{u} := { P with
+        level := n + 1
+        level_pos := Nat.succ_pos n }
+      let : X.left.Over (Spec (CommRingCat.of Pn.field.k)) := ⟨X.hom⟩
+      have : LocallyOfFiniteType (X.left ↘ Spec (CommRingCat.of Pn.field.k)) := hft
+      have : QuasiCompact (X.left ↘ Spec (CommRingCat.of Pn.field.k)) := hqc
+      have H := finite_clopen_constructibility_bounds Pn X.left (fun i ↦ (Xi i).left)
+        (fun i ↦ (j i).left) hdisjoint hcover
+      let e (i : I) := Scheme.openSquareDerivedPullbackModel Pn.Ring (j i).left
+      have hsupport : ∀ (i : I),
+          Scheme.proEtaleCohomologicalSupport
+              ((Scheme.proEtaleConstantRingDerivedPullback Pn.Ring (j i).left).obj K) =
+            Scheme.proEtaleCohomologicalSupport
+              ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj K) :=
+        fun i ↦ clopenSupport_iso ((e i).app K)
+      have hbound : ∀ a b : ℤ, a ≤ b →
+          (Scheme.proEtaleCohomologicalSupport K ⊆ Set.Icc a b ↔
+            ∀ i, Scheme.proEtaleCohomologicalSupport
+              ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj K) ⊆
+                Set.Icc a b) := by
+        intro a b hab
+        simpa only [hsupport] using H.2.2.2.2.1 K a b hab
+      refine ⟨?_, hbound, ?_⟩
+      · have hconstructible := H.2.2.2.1 K
+        have hcoh :
+            (∀ m : ℤ, Scheme.IsConstructibleProEtaleModuleSheaf X.left Pn.Ring
+              ((DerivedCategory.homologyFunctor _ m).obj K)) ↔
+            ∀ (i : I) (m : ℤ), Scheme.IsConstructibleProEtaleModuleSheaf (Xi i).left Pn.Ring
+              ((DerivedCategory.homologyFunctor _ m).obj
+                ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj K)) := by
+          refine hconstructible.trans ⟨?_, ?_⟩
+          · intro h i m
+            exact clopenSheafConstructible_iso
+              ((DerivedCategory.homologyFunctor _ m).mapIso ((e i).app K)) (h i m)
+          · intro h i m
+            exact clopenSheafConstructible_iso
+              ((DerivedCategory.homologyFunctor _ m).mapIso ((e i).app K)).symm (h i m)
+        change (_ ∧ _) ↔ ∀ i, _ ∧ _
+        constructor
+        · rintro ⟨hb, hc⟩
+          obtain ⟨a, ha⟩ := hb.bddBelow
+          obtain ⟨b, hb⟩ := hb.bddAbove
+          have hs : Scheme.proEtaleCohomologicalSupport K ⊆ Set.Icc (min a b) (max a b) :=
+            fun q hq ↦ ⟨(min_le_left a b).trans (ha hq), (hb hq).trans (le_max_right a b)⟩
+          intro i
+          exact ⟨(Set.finite_Icc _ _).subset ((hbound _ _
+            ((min_le_left a b).trans (le_max_left a b))).mp hs i), hcoh.mp hc i⟩
+        · intro h
+          have hs := Set.finite_iUnion (fun i ↦ (h i).1)
+          obtain ⟨a, ha⟩ := hs.bddBelow
+          obtain ⟨b, hb⟩ := hs.bddAbove
+          refine ⟨(Set.finite_Icc (min a b) (max a b)).subset
+            ((hbound _ _ ((min_le_left a b).trans (le_max_left a b))).mpr ?_),
+            hcoh.mpr (fun i ↦ (h i).2)⟩
+          intro i q hq
+          have hmem : q ∈ ⋃ i, Scheme.proEtaleCohomologicalSupport
+              ((finiteDerivedPullback P.coefficients.l P.extension n (j i).left).obj K) :=
+            Set.mem_iUnion.mpr ⟨i, hq⟩
+          exact ⟨(min_le_left a b).trans (ha hmem), (hb hmem).trans (le_max_right a b)⟩
+      · intro a b hab
+        refine (H.2.2.2.2.2.1 K a b hab).trans ?_
+        exact forall_congr' (fun i ↦ clopenTor_iso ((e i).app K) a b)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -842,6 +1164,7 @@ theorem finiteClopen_finiteTor_iff (n : ℕ)
     · intro i
       exact clopenTor_mono (ht i) ((min_le_left c d).trans (hc' ⟨i, rfl⟩))
         ((hd' ⟨i, rfl⟩).trans (le_max_right c d))
+
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -902,6 +1225,7 @@ theorem finiteClopen_finite_equivalences (n : ℕ) :
     exact isoWhiskerRight ht (Pi.eval _ i) ≪≫
       isoWhiskerLeft _ (Scheme.openSquareDerivedPullbackModel Pn.Ring (j i).left)
 
+
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.hasDerived
@@ -945,43 +1269,46 @@ theorem finiteClopen_tensor_and_reduction (i : I) :
           finiteDerivedPullback P.coefficients.l P.extension n (j i).left ≅
         finiteDerivedPullback P.coefficients.l P.extension m (j i).left ⋙
           coefficientFiniteQuotientDerived P.coefficients.l P.extension (Xi i).left h)) := by
-  let := fun y : (Xi i).left ↦ (P.clopenResidue_isUnit (Xi i) y).invertible
-  let := fun x : X.left ↦ (P.clopenResidue_isUnit X x).invertible
-  let l := P.coefficients.l
-  let E := P.extension
-  have h := derivedPullbackTensorIso l E (j i).left 0 P.coefficients.Qbar
-  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
-  · intro n
-    obtain ⟨e, _⟩ := (derivedPullbackTensorIso l E (j i).left n P.coefficients.Qbar).1
-    exact ⟨e⟩
-  · exact ⟨h.2.2.2.2.2.1.choose⟩
-  · exact ⟨h.2.2.2.2.2.2.1.choose⟩
-  · exact ⟨h.2.2.2.2.2.2.2.1.choose⟩
-  · intro n
-    let C := (sfIntegralConstructible l E X.left).ι
-    let F := P.clopenIntegralPullback (j i)
-    let SX := pullbackTensorCalculus l E X.left
-    let SY := pullbackTensorCalculus l E (Xi i).left
-    let G := C ⋙ SX.reduction ⋙ pullbackTensorSequenceDerived l E (j i).left
-    have hc : IsIso (whiskerLeft G SY.adjunction.counit) := by
-      apply (NatTrans.isIso_iff_isIso_app _).mpr
-      intro K
-      exact (pullbackTensorComparisonCounits l E (j i).left K K).2.1
-    let e : F ⋙ (sfIntegralConstructible l E (Xi i).left).ι ⋙ SY.reduction ≅
-        C ⋙ SX.reduction ⋙ pullbackTensorSequenceDerived l E (j i).left :=
-      isoWhiskerLeft C
-        (isoWhiskerRight (pullbackTensorIntegralPullbackModel l E (j i).left)
-          SY.reduction) ≪≫ asIso (whiskerLeft G SY.adjunction.counit)
-    exact ⟨(isoWhiskerRight
-        (isoWhiskerLeft C (SX.reductionEvaluation n))
-          (finiteDerivedPullback l E n (j i).left)).symm ≪≫
-      isoWhiskerLeft (C ⋙ SX.reduction)
-        (pullbackTensorDerivedEvaluation l E (j i).left n).symm ≪≫
-      isoWhiskerRight e.symm (coefficientSequenceDerivedEvaluation l E (Xi i).left n) ≪≫
-      isoWhiskerLeft (F ⋙ (sfIntegralConstructible l E (Xi i).left).ι)
-        (SY.reductionEvaluation n)⟩
-  · intro m n h
-    exact ⟨(pullbackTensorQuotient l E (j i).left h).symm⟩
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+      let := fun y : (Xi i).left ↦ (P.clopenResidue_isUnit (Xi i) y).invertible
+      let := fun x : X.left ↦ (P.clopenResidue_isUnit X x).invertible
+      let l := P.coefficients.l
+      let E := P.extension
+      have h := derivedPullbackTensorIso l E (j i).left 0 P.coefficients.Qbar
+      refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+      · intro n
+        obtain ⟨e, _⟩ := (derivedPullbackTensorIso l E (j i).left n P.coefficients.Qbar).1
+        exact ⟨e⟩
+      · exact ⟨h.2.2.2.2.2.1.choose⟩
+      · exact ⟨h.2.2.2.2.2.2.1.choose⟩
+      · exact ⟨h.2.2.2.2.2.2.2.1.choose⟩
+      · intro n
+        let C := (sfIntegralConstructible l E X.left).ι
+        let F := P.clopenIntegralPullback (j i)
+        let SX := pullbackTensorCalculus l E X.left
+        let SY := pullbackTensorCalculus l E (Xi i).left
+        let G := C ⋙ SX.reduction ⋙ pullbackTensorSequenceDerived l E (j i).left
+        have hc : IsIso (whiskerLeft G SY.adjunction.counit) := by
+          apply (NatTrans.isIso_iff_isIso_app _).mpr
+          intro K
+          exact (pullbackTensorComparisonCounits l E (j i).left K K).2.1
+        let e : F ⋙ (sfIntegralConstructible l E (Xi i).left).ι ⋙ SY.reduction ≅
+            C ⋙ SX.reduction ⋙ pullbackTensorSequenceDerived l E (j i).left :=
+          isoWhiskerLeft C
+            (isoWhiskerRight (pullbackTensorIntegralPullbackModel l E (j i).left)
+              SY.reduction) ≪≫
+            @asIso _ _ _ _ (whiskerLeft G SY.adjunction.counit) hc
+        exact ⟨(isoWhiskerRight
+            (isoWhiskerLeft C (SX.reductionEvaluation n))
+              (finiteDerivedPullback l E n (j i).left)).symm ≪≫
+          isoWhiskerLeft (C ⋙ SX.reduction)
+            (pullbackTensorDerivedEvaluation l E (j i).left n).symm ≪≫
+          isoWhiskerRight e.symm (coefficientSequenceDerivedEvaluation l E (Xi i).left n) ≪≫
+          isoWhiskerLeft (F ⋙ (sfIntegralConstructible l E (Xi i).left).ι)
+            (SY.reductionEvaluation n)⟩
+      · intro m n h
+        exact ⟨(pullbackTensorQuotient l E (j i).left h).symm⟩
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -1076,6 +1403,7 @@ theorem finiteClopen_integral_bounds (K : sfIntegralConstructibleCategory
       ((hd (Set.mem_range_self i)).trans (le_max_right c d))
 
 
+
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.hasDerived
@@ -1120,6 +1448,11 @@ theorem finiteClopen_constructible_equivalences :
     (Functor.pi' (fun i ↦ P.clopenCommonStagePullback (j i))).IsEquivalence := by
   sorry
 
+
+attribute [local irreducible] rationalDerivedPullback constructibleIntegralPullback
+  integralDerivedPullback
+  integralScalarExtension
+
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
 attribute [-instance] AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor.hasDerived
@@ -1150,7 +1483,54 @@ theorem finiteClopen_scalar_extension (i : I)
         sfRationalConstructibleLocalization P.coefficients.l P.extension (Xi i).left ≅
       sfRationalConstructibleLocalization P.coefficients.l P.extension X.left ⋙
         P.clopenRationalPullback (j i)) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    let := fun y : (Xi i).left ↦ (P.clopenResidue_isUnit (Xi i) y).invertible
+    let := fun x : X.left ↦ (P.clopenResidue_isUnit X x).invertible
+    let l := P.coefficients.l
+    let E := P.extension
+    let C := (sfIntegralConstructible l E X.left).ι
+    let F := integralDerivedPullback l E (j i).left
+    let r := P.clopenIntegralPullback (j i)
+    let D := (sfIntegralConstructible l E (Xi i).left).ι
+    let δ : C ⋙ F ≅ r ⋙ D := pullbackInclusion l E (j i).left
+    have hX : IsIso (whiskerLeft C (scalarCompletion l E L ι X.left)) := by
+      apply (NatTrans.isIso_iff_isIso_app _).mpr
+      intro K
+      exact (scalarCompletion_existsUnique l E L ι X.left).exists.choose_spec.2
+        K.obj K.property.1
+    have hY : IsIso (whiskerLeft (r ⋙ D) (scalarCompletion l E L ι (Xi i).left)) := by
+      apply (NatTrans.isIso_iff_isIso_app _).mpr
+      intro K
+      exact (scalarCompletion_existsUnique l E L ι (Xi i).left).exists.choose_spec.2
+        _ ((P.clopenIntegralPullback (j i)).obj K).property.1
+    let α := asIso (whiskerLeft C (scalarCompletion l E L ι X.left))
+    let β := scalarPullbackOrdinary l E L ι (j i).left
+    let γ := asIso (whiskerLeft (r ⋙ D) (scalarCompletion l E L ι (Xi i).left))
+    constructor
+    · refine ⟨?_⟩
+      refine scalarSquare C F (integralDerivedPullback l L (j i).left)
+        (integralOrdinaryDerivedScalar l E L ι X.left)
+        (integralScalarExtension l E L ι X.left)
+        (integralOrdinaryDerivedScalar l E L ι (Xi i).left)
+        (integralScalarExtension l E L ι (Xi i).left) α β
+          (isoWhiskerRight δ (integralOrdinaryDerivedScalar l E L ι (Xi i).left) ≪≫ γ ≪≫
+            (isoWhiskerRight δ (integralScalarExtension l E L ι (Xi i).left)).symm) ≪≫
+        isoWhiskerRight δ (integralScalarExtension l E L ι (Xi i).left) ≪≫
+        Functor.associator r D (integralScalarExtension l E L ι (Xi i).left)
+    · exact ⟨NatIso.ofComponents (fun K ↦ eqToIso
+          ((rationalPullback_formula l E (j i).left).1
+            ((sfRationalConstructibleLocalization l E X.left).obj K)).symm) (by
+            intro K M f
+            apply eq_of_heq
+            let hK := ((rationalPullback_formula l E (j i).left).1
+              ((sfRationalConstructibleLocalization l E X.left).obj K)).symm
+            let hM := ((rationalPullback_formula l E (j i).left).1
+              ((sfRationalConstructibleLocalization l E X.left).obj M)).symm
+            exact (comp_eqToHom_heq _ hM).trans
+              (((rationalPullback_formula l E (j i).left).2
+                _ _ f 1).symm.trans (eqToHom_comp_heq _ hK).symm))⟩
+
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -1178,7 +1558,20 @@ theorem finiteClopen_coefficient_units (i : I) :
     ∀ B : AlgebraicallyClosedCoefficients.Index P.coefficients.l P.coefficients.Qbar,
       Nonempty ((P.clopenCommonStagePullback (j i)).obj (P.clopenCommonStageUnit X.left B) ≅
         P.clopenCommonStageUnit (Xi i).left B) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    let := fun x : X.left ↦ (P.clopenResidue_isUnit X x).invertible
+    let := fun k (x : (Xi k).left) ↦ (P.clopenResidue_isUnit (Xi k) x).invertible
+    obtain ⟨v⟩ := integralUnitCheck P X Xi j P.extension i
+    refine ⟨fun n ↦ finiteUnitCheck P X Xi j n i, ?_, ?_, ?_⟩
+    · refine ⟨ObjectProperty.isoMk _ ?_⟩
+      simpa only [clopenIntegralPullback, constructibleIntegralPullback,
+        clopenIntegralUnit, ObjectProperty.lift, Functor.comp_obj, ObjectProperty.ι_obj] using v
+    · exact rationalUnitCheck P X Xi j P.extension i
+        (P.clopenIntegralUnit X.left) (P.clopenIntegralUnit (Xi i).left) rfl rfl
+    · exact commonUnitCheck P X Xi j i
+
+
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -1203,6 +1596,11 @@ theorem finiteClopen_empty [IsEmpty I] (n : ℕ) (integral : Bool) :
   have hx : x ∈ ⋃ i, Set.range (j i).left := by rw [hcover]; trivial
   obtain ⟨i, _⟩ := Set.mem_iUnion.mp hx
   exact isEmptyElim i
+
+
+
+set_option allowUnsafeReducibility true
+attribute [local reducible] clopenRing
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -1231,7 +1629,44 @@ theorem finiteClopen_finite_restriction_identification (n : ℕ) (i : I) :
             c.inv)).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧
       Nonempty (clopenDerivedRestriction (j i).left (P.clopenRing X.left n false) ⋙
         e.functor ≅ finiteDerivedPullback P.coefficients.l P.extension n (j i).left) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    let := fun y : (Xi i).left ↦ (P.clopenResidue_isUnit (Xi i) y).invertible
+    let := fun x : X.left ↦ (P.clopenResidue_isUnit X x).invertible
+    let U : X.left.ProEt :=
+      ⟨Over.mk (j i).left, show WeaklyEtale (j i).left from inferInstance⟩
+    let d := (Scheme.finite_pullback_localization_cohomology P.coefficients.l
+      P.extension n X.left U).some
+    let c := d.ringIso.symm
+    let G := SheafOfModules.scalarRestriction.{u + 1, u, u + 1} c.inv
+    let hAdd : G.Additive := scalarAdditive
+      ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c.inv)
+    let : G.IsEquivalence :=
+      SheafOfModules.scalarRestriction_isEquivalence.{u + 1, u, u + 1} c.symm
+    let hLimG : PreservesFiniteLimits G := inferInstance
+    let hColG : PreservesFiniteColimits G := inferInstance
+    let e := G.mapDerivedCategory.asEquivalence
+    let F := clopenRestriction (j i).left (P.clopenRing X.left n false)
+    let H := Scheme.proEtaleObjectModuleRestriction U
+      (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) d.ringIso
+    let hAddH : H.Additive := d.restrictionAdditive
+    let hLimH : PreservesFiniteLimits H := d.restrictionLimits
+    let hColH : PreservesFiniteColimits H := d.restrictionColimits
+    let hAddF : F.Additive := clopenRestrictionAdditive (j i).left _
+    let hFG : (F ⋙ G).Additive := additiveComp F G hAddF hAdd
+    let hLimFG : PreservesFiniteLimits (F ⋙ G) :=
+      @CategoryTheory.Limits.comp_preservesFiniteLimits _ _ _ _ _ _ F G inferInstance hLimG
+    let hColFG : PreservesFiniteColimits (F ⋙ G) :=
+      @CategoryTheory.Limits.comp_preservesFiniteColimits _ _ _ _ _ _ F G inferInstance hColG
+    let α : F ⋙ G ≅ H :=
+      pushforwardRestrictIso (clopenSiteInclusion (j i).left) _ _
+    let β : clopenDerivedRestriction (j i).left (P.clopenRing X.left n false) ⋙
+        e.functor ≅ H.mapDerivedCategory :=
+      (@Functor.mapDerivedCategoryCompIso _ _ _ _ _ _ _ _ _ _ _ _ F G
+        inferInstance hAdd inferInstance inferInstance hLimG hColG).symm ≪≫
+      @Functor.mapDerivedCategoryNatIso _ _ _ _ _ _ _ _ (F ⋙ G) H
+        hFG d.restrictionAdditive hLimFG hColFG d.restrictionLimits d.restrictionColimits α
+    exact ⟨c, e, ⟨G.mapDerivedCategoryFactors⟩, ⟨β ≪≫ d.derivedComparison.symm⟩⟩
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology in
@@ -1262,7 +1697,52 @@ theorem finiteClopen_integral_restriction_identification (i : I) :
           clopenDerivedRestriction (j i).left (P.clopenRing X.left 0 true) ⋙ e.functor ≅
         P.clopenIntegralPullback (j i) ⋙
           (sfIntegralConstructible P.coefficients.l P.extension (Xi i).left).ι) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    let := fun y : (Xi i).left ↦ (P.clopenResidue_isUnit (Xi i) y).invertible
+    let := fun x : X.left ↦ (P.clopenResidue_isUnit X x).invertible
+    let l := P.coefficients.l
+    let E := P.extension
+    let c := (OpenCompletedRestriction.coefficients l E (j i).left).completed.symm
+    let G := SheafOfModules.scalarRestriction.{u + 1, u, u + 1} c.inv
+    let hAdd : G.Additive := scalarAdditive
+      ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c.inv)
+    let : G.IsEquivalence :=
+      SheafOfModules.scalarRestriction_isEquivalence.{u + 1, u, u + 1} c.symm
+    let hLimG : CategoryTheory.Limits.PreservesFiniteLimits G := inferInstance
+    let hColG : CategoryTheory.Limits.PreservesFiniteColimits G := inferInstance
+    let e : DerivedCategory (clopenModules (Xi i).left
+        (clopenRingRestriction (j i).left (P.clopenRing X.left 0 true))) ≌
+        DerivedCategory (scalarReductionSource P.coefficients.l P.extension (Xi i).left) :=
+      G.mapDerivedCategory.asEquivalence
+    let F := clopenRestriction (j i).left (P.clopenRing X.left 0 true)
+    let hAddF : F.Additive := clopenRestrictionAdditive (j i).left _
+    let hFG : (F ⋙ G).Additive := additiveComp F G hAddF hAdd
+    let hLimFG : CategoryTheory.Limits.PreservesFiniteLimits (F ⋙ G) :=
+      @CategoryTheory.Limits.comp_preservesFiniteLimits _ _ _ _ _ _ F G inferInstance hLimG
+    let hColFG : CategoryTheory.Limits.PreservesFiniteColimits (F ⋙ G) :=
+      @CategoryTheory.Limits.comp_preservesFiniteColimits _ _ _ _ _ _ F G inferInstance hColG
+    let α : F ⋙ G ≅ OpenCompletedRestriction.ordinary l E (j i).left :=
+      pushforwardRestrictIso (clopenSiteInclusion (j i).left) _ _
+    let β : clopenDerivedRestriction (j i).left (P.clopenRing X.left 0 true) ⋙
+        e.functor ≅ OpenCompletedRestriction.derivedRestriction l E (j i).left :=
+      (@Functor.mapDerivedCategoryCompIso _ _ _ _ _ _ _ _ _ _ _ _ F G
+        inferInstance hAdd inferInstance inferInstance hLimG hColG).symm ≪≫
+      @Functor.mapDerivedCategoryNatIso _ _ _ _ _ _ _ _ (F ⋙ G) _
+        hFG (OpenCompletedRestriction.ordinaryAdditive l E (j i).left)
+        hLimFG hColFG (OpenCompletedRestriction.ordinaryLimits l E (j i).left)
+        (OpenCompletedRestriction.ordinaryColimits l E (j i).left) α
+    obtain ⟨d, hd⟩ := OpenCompletedRestriction.open_completed_restriction_complete
+      l E (j i).left inferInstance inferInstance
+    let C := (sfIntegralConstructible l E X.left).ι
+    have hk : IsIso (whiskerLeft C (OpenCompletedRestriction.kappa l E (j i).left d)) := by
+      apply (NatTrans.isIso_iff_isIso_app _).mpr
+      intro K
+      exact hd K.obj K.property
+    exact ⟨c, e, ⟨G.mapDerivedCategoryFactors⟩,
+      ⟨isoWhiskerLeft C β ≪≫
+        @asIso _ _ _ _ (whiskerLeft C (OpenCompletedRestriction.kappa l E (j i).left d)) hk ≪≫
+        pullbackInclusion l E (j i).left⟩⟩
 
 end Decomposition
 end PurityFiniteSetting

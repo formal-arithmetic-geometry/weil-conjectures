@@ -1,0 +1,105 @@
+{
+ "id": "lem-pur-normalized-section-encoding-restriction",
+ "kind": "statement",
+ "title": "Unique identity-on-sections restriction comparison under coefficient charts",
+ "statement": "Let W be a scheme, R and S commutative internal ring objects in abelian sheaves on W_proet, and φ : R → S a ring-object map. Let ψ be the reconstructed section-ring map of φ. For arbitrary section-ring charts eR : sectionRingSheaf R ≅ A and eS : sectionRingSheaf S ≅ B, let ER and ES be the section module equivalences transported through the charts [def-weil-pbc-continuous-coefficient-module-encoding]. Then Mod.comap φ ⋙ ER has a unique natural isomorphism to ES ⋙ pbcRestrict (eR.inv ≫ ψ ≫ eS.hom) [def-weil-pbc-bounded-constructible-tower] acting by the identity on every module section (expressed by HEq).",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks 00YV, and the section-encoding portion of sk-thm-purity-transport Steps 2--3. Agent-formulated comparison lemma, completely proved in Lean."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Apply the functor forgetting commutative ring sheaves to ring sheaves. The chart inverse identities show that the conjugated coefficient square commutes. The identity of section groups is therefore linear for the two restricted scalar actions and defines a module-sheaf isomorphism. Combine it with sectionModuleComapIso and the chart equivalence to obtain the desired natural isomorphism. Its components act identically on every section. The same section formula for any competitor proves equality of all components and hence uniqueness.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Stacks 00YV, and the section-encoding portion of sk-thm-purity-transport Steps 2--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf extension of scalars natural isomorphism determined by pure tensor sections and restriction of scalars under ring isomorphisms",
+   "results": "8 hits: ordinary ModuleCat extension/restriction adjunction formulas and SheafOfModules.pushforwardCongr; no combined normalized comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib tensor/sheafification extensionality with the existing project models."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.changeOfRings",
+   "results": "0 hits; identifier not indexed by Mathlib loogle.",
+   "date": "2026-10-27",
+   "verdict": "Use the project change-of-rings model."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModuleComapIso|ringModuleEquivalenceOfIso|sheafificationHomEquiv",
+   "results": "5 hits in Mathlib ModuleCat Presheaf Sheafification, including sheafificationHomEquiv; the section encoding APIs are project declarations.",
+   "date": "2026-10-27",
+   "verdict": "Reuse sheafificationHomEquiv for uniqueness and the project section equivalence APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportCondensedRealizationSetup",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-condensed-realization-setup",
+   "place": "Stacks 00YV, and the section-encoding portion of sk-thm-purity-transport Steps 2--3.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedSectionEncodingRestriction",
+  "file": "lean/Sheaf/Paper/NormalizedSectionEncodingRestriction.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.normalizedEncodingRestriction",
+  "statement": "theorem normalizedEncodingRestriction (W : Scheme.{u})\n    (R S : Sheaf (ProEt.topology W) Ab.{u + 1})\n    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]\n    (φ : R ⟶ S) [IsMonHom φ]\n    (ψ : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n      (ProEt.topology W) R ⟶\n        InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n          (ProEt.topology W) S) (hφ : ψ = CondensedRing.sectionRingMap W φ)\n    (A B : Sheaf (ProEt.topology W) CommRingCat.{u + 1})\n    (eR : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n      (ProEt.topology W) R ≅ A)\n    (eS : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n      (ProEt.topology W) S ≅ B) :\n    let ER := (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}\n      (ProEt.topology W) R).functor ⋙\n        (CondensedRing.ringModuleEquivalenceOfIso W ((adicLisseForget W).mapIso eR).symm).functor\n    let ES := (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}\n      (ProEt.topology W) S).functor ⋙\n        (CondensedRing.ringModuleEquivalenceOfIso W ((adicLisseForget W).mapIso eS).symm).functor\n    ∃! d : Mod.comap φ ⋙ ER ≅\n        ES ⋙ pbcRestrict (eR.inv ≫ ψ ≫ eS.hom),\n      ∀ (M : Mod (Sheaf (ProEt.topology W) Ab.{u + 1}) S) (U : W.ProEtᵒᵖ)\n        (x : (((Mod.comap φ ⋙ ER).obj M).val.obj U)),\n        HEq ((d.hom.app M).val.app U x) x",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T050541-L-236112",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T050541-L-236112",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

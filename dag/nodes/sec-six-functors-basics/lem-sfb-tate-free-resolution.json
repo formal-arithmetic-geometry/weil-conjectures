@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-tate-free-resolution",
+ "kind": "statement",
+ "title": "Tate resolution with a prescribed finite polynomial augmentation",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $S$ be a commutative $R$-algebra, and let $\\pi:P=R[x_1,\\ldots,x_n]\\twoheadrightarrow S$ be an $R$-algebra surjection, with $n\\geq0$. There exists a divided-power differential graded $R$-algebra $A$ [def-sfb-divided-power-dga] and an augmentation $\\varepsilon:A\\to S$ (where $S$ is concentrated in degree zero), with $A_0=P$ and $\\varepsilon_0=\\pi$, such that $H_0(A)\\xrightarrow{\\sim}S$ via $\\varepsilon$ and $H_i(A)=0$ for every $i>0$. The underlying graded divided-power algebra is polynomial, obtained from $P$ by adjoining finitely many variables in each positive degree, and every $A_i$ is free as an $R$-module. In particular, $\\cdots\\to A_2\\to A_1\\to A_0\\xrightarrow{\\pi}S\\to0$ is an augmented free $R$-module resolution.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PN (lemma-tate-resolution), statement (1)-(4), finiteness assertion, and its explicit free monomial construction"
+ },
+ "stmt_deps": [
+  "def-sfb-divided-power-dga",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-type-algebra-noetherian], $P$ is Noetherian: it has the required presentation with zero defining ideal. Hence $K=\\ker(\\pi)$ has a finite ideal generating list $f_1,\\ldots,f_r$, by [def-weil-pbc-noetherian-ring]; the list may be empty. Put $A(0)=P$ in degree zero with zero differential and zero positive divided powers. This satisfies [def-sfb-divided-power-dga] since its positive-degree part is zero.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-noetherian-ring",
+    "def-sfb-divided-power-dga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PN (lemma-tate-resolution), start of construction and choice of kernel generators"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-adjoin-dga-cycle] successively to adjoin degree-one exterior variables $u_1,\\ldots,u_r$ with $d(u_j)=f_j$. Each $f_j$ remains a cycle in degree zero. Call the result $A(1)$. The map which is $\\pi$ on $P$ and zero in positive degrees is an augmentation: the only differential whose image can have nonzero augmentation is $d:A(1)_1\\to P$, and its image is precisely $(f_1,\\ldots,f_r)=K$. Thus $H_0(A(1))=P/K\\cong S$ via the given $\\pi$. The direct-sum descriptions in [lem-sfb-divided-power-variable-adjunction] show that each term has as a $P$-basis the exterior monomials in the $u_j$ of that degree, and so is finite free.",
+   "uses": [
+    "lem-sfb-adjoin-dga-cycle",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PN (lemma-tate-resolution), construction of A(1) and base case"
+   }
+  },
+  {
+   "text": "Inductively suppose $m\\geq1$ and $A(m)$ is a divided-power DGA augmented to $S$, obtained from $P$ by adjoining finitely many variables in each degree $1,\\ldots,m$, with $H_0(A(m))\\cong S$ via the augmentation and $H_i(A(m))=0$ for $0<i<m$. Its degree-$q$ term is finite free over $P$, by iterating the direct-sum descriptions of [lem-sfb-divided-power-variable-adjunction]: its basis is the products of exterior variables (exponents zero or one) and divided-power symbols, of total degree $q$; there are finitely many variables and every positive-weight exponent is bounded by $q$. In particular $A(m)_m$ is a finite $P$-module. By [lem-weil-pbc-noetherian-submodule-finite], its cycle submodule $Z_m=\\ker(d:A(m)_m\\to A(m)_{m-1})$ has finite generators $z_1,\\ldots,z_t$. Their images generate $H_m(A(m))$ over $P$, since taking a quotient sends a generating list to a generating list.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PN (lemma-tate-resolution), induction hypothesis and finite cycle representatives"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-adjoin-dga-cycle] $t$ times with $e=m+1$ and cycles $z_j$ to form $A(m+1)$ with $d(v_j)=z_j$. Extend the augmentation by zero on all positive degrees. It is a chain map since the new differentials have positive degree. By the module formulas of [lem-sfb-divided-power-variable-adjunction], terms and differentials below degree $m+1$ are unchanged. In degree $m+1$ the new summands are exactly $Pv_j$, so the boundaries in degree $m$ become $d(A(m)_{m+1})+\\sum_jPz_j=Z_m$. Consequently $H_m(A(m+1))=0$, and $H_i(A(m+1))=H_i(A(m))$ for $i<m$. The new finite list of variables has degree $m+1$, completing the induction.",
+   "uses": [
+    "lem-sfb-adjoin-dga-cycle",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PN (lemma-tate-resolution), induction step and low-degree homology calculation"
+   }
+  },
+  {
+   "text": "Take $A$ to be the union of these monomial inclusions $A(0)\\subseteq A(1)\\subseteq\\cdots$, with its graded divided powers supplied by [lem-sfb-divided-power-variable-adjunction](4). Multiplication, differential and divided powers are defined in any stage containing the input elements; the inclusions preserve them by [lem-sfb-adjoin-dga-cycle], so the results are independent of the stage. Every identity of [def-sfb-divided-power-dga] involves finitely many inputs and holds in a stage containing them, hence holds in $A$. Since $A$ is obtained from $P$ by successive adjunctions of finite sets of variables of one positive degree each, followed by the union, its underlying graded divided-power algebra is polynomial in the sense of [def-sfb-divided-power-dga]. The compatible augmentations likewise give $\\varepsilon:A\\to S$, with $A_0=P$ and $\\varepsilon_0=\\pi$. For fixed $i\\geq0$, the three terms in degrees $i-1,i,i+1$ and their differentials are already final at stage $A(i+1)$, since later variables have degree at least $i+2$. Thus $H_i(A)=H_i(A(i+1))$, which is $S$ for $i=0$ and zero for $i>0$ by the induction.",
+   "uses": [
+    "lem-sfb-adjoin-dga-cycle",
+    "def-sfb-divided-power-dga",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PN (lemma-tate-resolution), final colimit paragraph, written as the degreewise stationary union"
+   }
+  },
+  {
+   "text": "Only finitely many variables were added in each positive degree. In degree $i$, their monomials of total degree $i$ form a finite $P$-basis: only variables of degree at most $i$ occur, exterior exponents are at most one, and divided-power exponents are at most $i$. This follows directly by iterating the direct-sum descriptions in [lem-sfb-divided-power-variable-adjunction]. By [def-weil-pbc-mv-polynomial-ring], ordinary monomials in $x_1,\\ldots,x_n$ form an $R$-basis of $P$. Multiplying these ordinary monomials by the indicated positive-degree basis monomials gives an $R$-basis of $A_i$: expanding a finite $P$-linear sum into coefficients proves spanning, and independence follows first over $P$ and then over $R$. Hence all $A_i$ are $R$-free. Surjectivity of $\\pi$, $\\ker(\\pi)=d(A_1)$ and $H_i(A)=0$ for $i>0$ give exactness of the asserted augmented free resolution.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PN (lemma-tate-resolution), graded polynomial construction and explicit monomial freeness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "def-sfb-divided-power-dga",
+  "lem-sfb-adjoin-dga-cycle",
+  "lem-sfb-divided-power-variable-adjunction",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PN (lemma-tate-resolution), full proof in the Noetherian finite type case; explicit degreewise stabilization and monomial basis arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tate resolution of a finite type algebra over a Noetherian ring by a free divided power differential graded polynomial algebra",
+   "results": {
+    "t": "2026-10-23T22:42:53Z",
+    "tool": "leanfinder",
+    "query": "Tate resolution of a finite type algebra over a Noetherian ring by a free divided power differential graded polynomial algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.IsStandardSmooth",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "Algebra.Presentation.differentialsSolution_isPresentation",
+     "Algebra.Generators.exists_presentation_of_free_cotangent",
+     "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential",
+     "Algebra.Smooth",
+     "Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation",
+     "Algebra.Presentation.differentialsSolution"
+    ],
+    "digest": "6853ceb81649484e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits concern smooth presentations or cotangent modules, not a free divided-power DGA resolving an arbitrary finite type algebra. Loogle returned Lean elaborator state names; the broad Tate grep hit substrings of restate/rotate. The specific Tate-resolution grep had no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\", \"resolution\"",
+   "results": {
+    "t": "2026-10-23T22:42:52Z",
+    "tool": "loogle",
+    "query": "\"Tate\", \"resolution\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Lean.StructureResolutionState",
+     "Lean.instInhabitedStructureResolutionState",
+     "Lean.StructureResolutionState.mk",
+     "Lean.StructureResolutionState.resolutions",
+     "Lean.Elab.Term.CollectPatternVars.State.choiceResolutions"
+    ],
+    "digest": "c5cdac26fce6e76f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits concern smooth presentations or cotangent modules, not a free divided-power DGA resolving an arbitrary finite type algebra. Loogle returned Lean elaborator state names; the broad Tate grep hit substrings of restate/rotate. The specific Tate-resolution grep had no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.?[Rr]esolution|tate_resolution|divided.?power.*resolution",
+   "results": {
+    "t": "2026-10-23T22:42:51Z",
+    "tool": "grep",
+    "query": "Tate.?[Rr]esolution|tate_resolution|divided.?power.*resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits concern smooth presentations or cotangent modules, not a free divided-power DGA resolving an arbitrary finite type algebra. Loogle returned Lean elaborator state names; the broad Tate grep hit substrings of restate/rotate. The specific Tate-resolution grep had no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every finite type algebra has a free differential graded algebra Tate resolution",
+   "results": {
+    "t": "2026-10-23T22:42:52Z",
+    "tool": "leansearch",
+    "query": "Every finite type algebra has a free differential graded algebra Tate resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FiniteType.instFreeAlgebraOfFinite",
+     "KaehlerDifferential.ideal_fg",
+     "Algebra.FiniteType",
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "RingHom.FiniteType",
+     "Algebra.FiniteType.iff_quotient_freeAlgebra'",
+     "FreeAlgebra.Pre",
+     "AlgHom.FiniteType"
+    ],
+    "digest": "5aaf9fee75ffd45b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits concern smooth presentations or cotangent modules, not a free divided-power DGA resolving an arbitrary finite type algebra. Loogle returned Lean elaborator state names; the broad Tate grep hit substrings of restate/rotate. The specific Tate-resolution grep had no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]ate|semifree|semi.free.*resolution",
+   "results": {
+    "t": "2026-10-23T22:44:00Z",
+    "tool": "grep",
+    "query": "[Tt]ate|semifree|semi.free.*resolution",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean",
+     "Mathlib/Algebra/Homology/ExactSequence.lean",
+     "Mathlib/Algebra/Homology/HomologySequenceLemmas.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean",
+     "Mathlib/Algebra/Homology/SpectralObject/Page.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean"
+    ],
+    "digest": "fb3b9218e8214698"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits concern smooth presentations or cotangent modules, not a free divided-power DGA resolving an arbitrary finite type algebra. Loogle returned Lean elaborator state names; the broad Tate grep hit substrings of restate/rotate. The specific Tate-resolution grep had no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.?[Rr]esolution|tate_resolution|divided.?power.*resolution",
+   "results": {
+    "t": "2026-10-23T23:38:02Z",
+    "tool": "grep",
+    "query": "Tate.?[Rr]esolution|tate_resolution|divided.?power.*resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are about ordinary finite type or smooth algebras, Kahler modules, or Lean elaborator state; none provides a divided-power DGA resolution. The specific Tate-resolution grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate free resolution of a finite type algebra over a Noetherian ring as a divided power differential graded algebra with finitely many generators in each degree",
+   "results": {
+    "t": "2026-10-23T23:38:04Z",
+    "tool": "leanfinder",
+    "query": "Tate free resolution of a finite type algebra over a Noetherian ring as a divided power differential graded algebra with finitely many generators in each degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType",
+     "Algebra.IsStandardSmooth",
+     "Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation",
+     "Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential",
+     "Algebra.Generators.exists_presentation_of_free_cotangent",
+     "Algebra.IsStandardSmooth.free_kaehlerDifferential",
+     "KaehlerDifferential.ideal_fg",
+     "Algebra.Presentation.differentialsSolution_isPresentation"
+    ],
+    "digest": "e32e987c7e49cd11"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are about ordinary finite type or smooth algebras, Kahler modules, or Lean elaborator state; none provides a divided-power DGA resolution. The specific Tate-resolution grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tate\", \"resolution\"",
+   "results": {
+    "t": "2026-10-23T23:38:24Z",
+    "tool": "loogle",
+    "query": "\"Tate\", \"resolution\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Lean.StructureResolutionState",
+     "Lean.instInhabitedStructureResolutionState",
+     "Lean.StructureResolutionState.mk",
+     "Lean.StructureResolutionState.resolutions",
+     "Lean.Elab.Term.CollectPatternVars.State.choiceResolutions"
+    ],
+    "digest": "c5cdac26fce6e76f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are about ordinary finite type or smooth algebras, Kahler modules, or Lean elaborator state; none provides a divided-power DGA resolution. The specific Tate-resolution grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated commutative algebra over a Noetherian ring has a semifree divided power differential graded resolution",
+   "results": {
+    "t": "2026-10-23T23:38:59Z",
+    "tool": "leansearch",
+    "query": "A finitely generated commutative algebra over a Noetherian ring has a semifree divided power differential graded resolution",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.EssFiniteType.isNoetherianRing",
+     "Algebra.FiniteType.isNoetherianRing",
+     "isNoetherianRing_of_fg",
+     "Algebra.SubmersivePresentation.free_kaehlerDifferential",
+     "Algebra.FinitePresentation.of_finiteType",
+     "Module.Finite.exists_free_surjective",
+     "KaehlerDifferential.ideal_fg",
+     "Subalgebra.fg_of_noetherian"
+    ],
+    "digest": "1531f99989cfcb63"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits are about ordinary finite type or smooth algebras, Kahler modules, or Lean elaborator state; none provides a divided-power DGA resolution. The specific Tate-resolution grep has no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-zero-relation-tor-obstruction",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tag 09PN (lemma-tate-resolution), statement (1)-(4), finiteness assertion, and its explicit free monomial construction",
+   "via": [
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-tate-free-resolution",
+  "worker": "stage1",
+  "group": "Q02",
+  "summary": "Followed the complete finite-type Noetherian construction of Stacks 09PN. Reused the existing finite-type Noetherian and finite-submodule lemmas and, after its concurrent landing, the graded divided-power variable-adjunction lemma. The sole new node is the single-variable differential extension (09PM). Wrote the base, induction, low-degree boundary calculation, stationary union and R-monomial basis explicitly. The item statement is unchanged; added its polynomial-ring definition dependency.",
+  "blueprint": "Supports direct-image branch (3) of det-thm-sf-ctf-stability-direct-images in the latest blueprint, via the inherited lci etale-invariance and square-zero Tor-obstruction chain. There is no imported blueprint ancestor in the current created.item chain (blueprint_refs.py ancestor returns None); preserved null provenance and the existing place/via chain. Whole-blueprint searches for Tate, divided power and extend differential found no matching statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-e79116c57",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-e79116c57 (reviewer sub-agent of L); spot-checked: The mathematics is correct and complete; two small repairs to the item. I read dpa.tex 09PG, 09PH, 09PI, 0F4I, 09PJ, 09PM and 09PN (statement and proof). The report's 09PI typo point is correct: the coefficient is (ni)!/(n!(i!)^n). New node lem-sfb-adjoin-dga-cycle (09PM) is true: I checked D^2=0 and Leibniz/dp compatibility by hand for odd e (zT-Tz=0) and even e (binomial identity for T^[a]T^[b]; z odd so z^2=0, no inverse of 2 needed), and also e=1, z=0 and R=0. It is a statement only (B1-B7 met), it is not a duplicate (recursive search of dag/nodes for 09PM, extend-differential and Tate), and it is not a clause of the item. Item steps: 1 (P Noetherian with zero ideal, K finitely generated); 2 (A(1)_1 = sum of P u_j, image of d = K, H_0 = S); 3 (stated induction invariant, finite P-basis, Z_m is a P-submodule and finitely generated); 4 (new summands P v_j in degree m+1 give B_m = Z_m, lower degrees unchanged); 5 (union and stationary-window homology); 6 (R-basis from monomials). All are correct, and the item is unchanged against 09PN. Small cases checked: n=0, empty relation list, S=0, R=0. No cycle; no SGA. FIX: step 3 now cites lem-sfb-divided-power-variable-adjunction for the finite-free P-basis it used (text and uses); step 5 adds one sentence concluding the item's 'polynomial' clause per def-sfb-divided-power-dga.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateFreeResolution",
+  "declaration": "GradedAlgebra.exists_tate_free_resolution",
+  "file": "lean/Sheaf/RingTheory/TateFreeResolution.lean",
+  "statement": "theorem exists_tate_free_resolution (R : Type u) [CommRing R] [IsNoetherianRing R] (S : Type v) [CommRing S] [Algebra R S] (n : ℕ) (π : MvPolynomial (Fin n) R →ₐ[R] S) (hπ : Function.Surjective π) : ∃ (A : VariableAdjunction.AlgebraData.{u, max u v} R) (D : DividedPowerDGA A.grade) (ι : MvPolynomial (Fin n) R →ₐ[R] A.Carrier) (ε : A.Carrier →ₐ[R] S), Function.Injective ι ∧ (∀ x : A.Carrier, x ∈ A.grade 0 ↔ ∃ f : MvPolynomial (Fin n) R, ι f = x) ∧ ε.comp ι = π ∧ (∀ (i : ℕ) (x : A.Carrier), 0 < i → x ∈ A.grade i → ε x = 0) ∧ (∀ x : A.Carrier, ε (D.d x) = 0) ∧ (∃ h : D.homology 0 ≃ₗ[R] S, ∀ z : D.chainComplex.cycles 0, h (D.chainComplex.homologyπ 0 z) = ε (Subtype.val (@id (integerComponent A.grade 0) (D.chainComplex.iCycles 0 z)))) ∧ (∀ i : ℕ, 0 < i → Subsingleton (D.homology (i : ℤ))) ∧ (∀ i : ℕ, Module.Free R (A.grade i)) ∧ Function.Exact (D.componentDifferential 0).hom (ε.toLinearMap.domRestrict (integerComponent A.grade 0)) ∧ ∃ (B : ℕ → VariableAdjunction.AlgebraData.{u, max u v} R) (γ : ∀ k : ℕ, GradedDividedPowers (B k).grade) (b : MvPolynomial (Fin n) R ≃ₐ[R] (B 0).Carrier) (J : ℕ → Type (max u v)), (∀ m : ℕ, (B 0).grade m = if m = 0 then ⊤ else ⊥) ∧ (∀ k : ℕ, Finite (J k)) ∧ ∃ p : ∀ k : ℕ, VariableAdjunction.SetPresentation (B k) (γ k) (k + 1) (J k) (B (k + 1)), (∀ k : ℕ, VariableAdjunction.SetNormalized (p k) (γ (k + 1))) ∧ ∃ q : VariableAdjunction.UnionPresentation B γ (fun k : ℕ ↦ k + 1) J p A, (q.into 0).toAlgHom.comp b.toAlgHom = ι ∧ ∀ k : ℕ, VariableAdjunction.Preserves (q.into k) (γ k) D.toGradedDividedPowers",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded DividedPowerDGA and variable-adjunction presentations. The injective polynomial map identifies its image with exactly A_0, and its composite with the augmentation is the prescribed pi. The H_0 linear equivalence is characterized on actual cycle classes by the augmentation. The normalized union tower starts at the prescribed polynomial algebra and adjoins a finite set in degree k+1 at step k. Module.Free and exactness at the augmentation record the free resolution consequence; positive exactness is the stated vanishing of the recorded homology."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98195058c",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read node, Stacks 09PN (dpa.tex 1207-1240), DividedPowerDGA and DividedPowerVariableAdjunction modules, delivered module and report. All clauses match: Noetherian R, independent universe S, surjective pi from MvPolynomial (Fin n) R (n=0 ok); injective iota with image exactly grade 0; eps algebra map with eps∘iota=pi, zero on positive grades, eps∘d=0; H0≅S characterised by eps on cycle classes; positive homology Subsingleton; Module.Free R in each degree; exactness at A0; polynomiality is IsPolynomial unfolded and refined (B0≅P anchored to iota, finite J k adjoined in degree k+1, Preserves into D). Edge cases n=0, empty generators, S=0, R=0, char 2 covered. Only lean field changed; statement verbatim; docstrings and proof steps present; no collisions. Notes: VariableAdjunction structures come from the theorem node via the def's IsPolynomial vocabulary (accepted); two unused non-public proof imports."
+ }
+}

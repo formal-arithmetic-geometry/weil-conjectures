@@ -1,0 +1,104 @@
+{
+ "id": "lem-asd-finite-twist-degree-zero-evaluation-pairing",
+ "kind": "statement",
+ "title": "Degree-zero finite-twist evaluation as a flat single-object pairing",
+ "statement": "For a commutative coefficient ring A killed by a positive N, a scheme T on which N is invertible, and any proof that its positive finite Tate line is flat, the fixed degree-zero evaluation of [def-asd-ordinary-finite-p1-decomposition-maps] equals derived symmetry followed by the flat single-object pairing of [lem-pur-etale-single-functor-monoidal-compatibility] associated to the actual internal-Hom evaluation of its positive finite Tate line against its sheaf dual. The equality is independent of the supplied flatness proof.",
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-decomposition-maps",
+  "lem-pur-etale-single-functor-monoidal-compatibility"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Degree-zero evaluation identification in the proof of the projective-line decomposition."
+ },
+ "proof": [
+  {
+   "text": "Expand the degree-zero evaluation, its degree-zero tensor comparison and the flat single-object pairing. Both use the actual internal-Hom evaluation. The positive Tate sheaf is the finite Tate line, the cached single functor is the canonical single functor, and flatness proofs are irrelevant; thus the two composites coincide definitionally.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-decomposition-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-decomposition-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Degree-zero evaluation identification; elementary categorical composition of the prescribed comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "degree zero derived tensor flat single functor evaluation pairing and inverse image",
+   "date": "2026-10-26",
+   "results": "Eight hits on homological-complex tensor units, unitors and single/evaluation functors; no specialized flat degree-zero evaluation comparison.",
+   "verdict": "Use the source flat tensor comparison and the stated monoidal compatibility theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "singleFunctorObjTensorIso",
+   "date": "2026-10-26",
+   "results": "Zero hits; identifier not in Mathlib.",
+   "verdict": "The needed comparison belongs to the adopted source library."
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorObjTensorIso|singleFunctorFlatPairing",
+   "date": "2026-10-26",
+   "results": "Zero Mathlib hits. Local source search finds singleFunctorObjTensorIso and the stated singleFunctorFlatPairing.",
+   "verdict": "No shorter Mathlib route; use the existing definitions and normalization lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteTwistDerivedEvaluationPullback",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-finite-twist-derived-evaluation-pullback",
+   "place": "Proof, degree-zero evaluation step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "merged_into": null,
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPairing",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTwistDegreeZeroEvaluationPairing.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteTwistDegreeZeroEvaluation_pairing",
+  "statement": "theorem finiteTwistDegreeZeroEvaluation_pairing\n    (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤)))\n    (hL : ObjectProperty.flat (Scheme.finiteEtaleTateLine T N A hA)) :\n    p1DecompositionDegreeZeroEvaluation A N hN hA T hT =\n      ((derivedTensorSymmetry (ModuleCat.{u + 1} A) T).hom.app\n        ((DerivedCategory.singleFunctor _ 0).obj\n          (Scheme.finiteEtaleTateSheaf A N T hA (-1)))).app\n        (ordinaryFiniteLine A N hA T) ≫\n      singleFunctorFlatPairing\n        (Scheme.finiteEtaleTateLine T N A hA)\n        (Scheme.finiteEtaleTateSheaf A N T hA (-1))\n        (ordinaryFiniteConstant A T)\n        hL\n        ((ihom.ev (Scheme.finiteEtaleTateLine T N A hA)).app\n          (ordinaryFiniteConstant A T))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T152111-L-1076381",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T152111-L-1076381",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

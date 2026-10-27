@@ -1,0 +1,370 @@
+{
+ "id": "lem-per-coherent-formal-generation-flatness",
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "Form $P=U\\times_{\\mathbf A^m_w}N$. Apply [lem-trf-etale-fibre-product-pair-refinement] to $X=N$, $M_1=U$, $M_2=N$, $i_1=j$, $i_2=1_N$: the second structure map is the given etale $w|_N$. Delete the closed complement of the diagonal section in $P\\times_U N$. Thus $P\\to U$ is etale, its inverse image of $N$ is exactly that section, and the selected lift of $a$ has residue field $L$. The map $(\\operatorname{pr}_N,z):P\\to N\\times\\mathbf A^n$ is the base change of $(w,z)$ and is etale. Translate its last coordinates by the regular functions $z|_N$; the inverse translation adds them, so $(p,Z)$ is etale and sends the section to zero. Here use [lem-weil-pbc-etale-scheme-base-change] and [lem-weil-pbc-etale-composition-cancellation]. The projection of affine space is smooth of relative dimension $n$, hence $p$ is smooth by [sbc-lem-affine-space-smooth, lem-sbc-smooth-relative-dimension-permanence]. The open $P^\\circ\\subset P$ so obtained need not be affine: replace it by a principal open of the affine $P$ inside it containing the lift of $a$, and $N$ by the inverse image of that open under the section (a principal open of $N$); the section stays closed and all maps stay etale. Then apply the same pair-refinement lemma with $S=N\\times\\mathbf A^n$, $X=M_1=N$, $i_1=1_N$, $e_1$ the zero section, $M_2=P^\\circ$, $i_2$ the section and $e_2=(p,Z)$ etale; here $e_1i_1=e_2i_2$ because $p$ retracts the section and $Z$ vanishes on it. Its fibre product $M_1\\times_SM_2$, which equals its $F_1$ since $i_1=1_N$, is $V(Z)=N\\times_{N\\times\\mathbf A^n}P^\\circ$, and the lemma makes the section open and closed in it; its complement is closed in $V(Z)$, hence in $P^\\circ$, and we delete it. Restricting once more to a principal affine open containing the lift of $a$ (and $N$ correspondingly), $V(Z)$ equals the section scheme-theoretically, so the section ideal is exactly $(Z)$. From now on $U,N,a$ denote these chosen neighbourhoods.",
+   "uses": [
+    "lem-trf-etale-fibre-product-pair-refinement",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "sbc-lem-affine-space-smooth",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO (lemma-base-change-etale), 02GN (lemma-composition-etale), 024T (etale-proposition-properties-sections), 01VA/01VB; the pair refinement writes out deletion of the other section components."
+   }
+  },
+  {
+   "text": "First shrink the ambient affine neighbourhood so the finite-type clause of coherence [pqf-def-coherent] supplies a surjection $\\mathcal O_U^{\\oplus t}\\twoheadrightarrow\\mathcal J$: its basis images are regular functions $g_j$, and on every stalk they generate the ideal. Write $N=\\operatorname{Spec}A$, $U=\\operatorname{Spec}B$, $H=(Z)B$, and let $J\\subset B$ represent the given coherent ideal. The finite-type algebras $A,B$ over $k$ are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]; their ideals and submodules of finite modules are finite by [lem-trf-noetherian-submodule-finitely-presented]. The etale augmented map $A[Z]\\to B$, with $B/H=A$, has $A[Z]/(Z)^r\\simeq B/H^r$ for every $r$ by [lem-sfb-augmented-etale-associated-graded]. The inverse limit is $A[[Z]]=:R$: a compatible truncation records each coefficient exactly once. Exactness and the finite-module tensor description of completion, [lem-weil-pbc-completion-exact-finite-modules, lem-weil-pbc-completion-finite-module-tensor], identify the completed ideal with $G=JR\\subset R$ and the completed quotient with $R/G$. In particular, if $g_1,\\ldots,g_t$ generate $J$, then $G=(g_1,\\ldots,g_t)R$. These are the maps induced by regular functions, not abstract isomorphisms. The uniqueness of the augmented etale lifts shows that this is the given straightening: both retain $w$ and send the graph to $Z=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-trf-noetherian-submodule-finitely-presented",
+    "lem-sfb-augmented-etale-associated-graded",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 0H1D (lemma-formally-etale-lift-infinitesimal), 00MA (lemma-completion-tensor), 00MB (lemma-completion-flat)."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p\\subset A$ be $a$, $C=L[[W]]$ and $T=C[[Z]]=L[[W,Z]]$. By [lem-trf-diagonal-taylor-faithful-flatness] the coefficient Taylor map $A_{\\mathfrak p}\\to C$ is faithfully flat; composed with the flat localization $A\\to A_{\\mathfrak p}$ it is flat [lem-weil-pbc-localization-flat, lem-weil-pbc-flat-ring-map-comp]. Both $A$ and $C$ are Noetherian, the latter by [lem-weil-pbc-power-series-noetherian]. Put $\\mathfrak q=\\{h\\in R:h(0)\\in\\mathfrak p\\}$. The coefficientwise map $R\\to T$ pulls back the maximal ideal of $T$ to $\\mathfrak q$. Apply [lem-per-formal-coefficient-taylor-faithful-flatness]: $R_{\\mathfrak q}\\to T$ is faithfully flat. The coordinate formula in step 2 and the Taylor formula show that $GT=J_a$ and that $f_i$ maps to the specified $f_{i,a}$. This also holds at nonclosed $a$, since the Taylor construction uses the $L$-rational diagonal point after extending the ground field.",
+   "uses": [
+    "lem-trf-diagonal-taylor-faithful-flatness",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-per-formal-coefficient-taylor-faithful-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0523 via the new coefficient-extension lemma; Tags 00HT, 00HC, 0306. The centered diagonal comparison is the cited Taylor lemma."
+   }
+  },
+  {
+   "text": "Put $I=(f_1,\\ldots,f_s)R$. The assumed equality $IT=GT$ contracts to $I_{\\mathfrak q}=G_{\\mathfrak q}$ by [lem-weil-pbc-faithfully-flat-ideal-contraction]. The ring $R$ is Noetherian by [lem-weil-pbc-power-series-noetherian], so choose finite generators of $I$ and $G$. Each chosen generator of $I$ belongs to $G_{\\mathfrak q}$, hence some denominator outside $\\mathfrak q$ multiplies it into $G$; do the reverse for the generators of $G$. The product $h\\notin\\mathfrak q$ of these finitely many denominators satisfies $hI\\subset G$ and $hG\\subset I$. Put $c=h(0)\\in A\\setminus\\mathfrak p$. In $A_c[[Z]]$ the image of $h$ is a unit: the inverse is obtained recursively by total $Z$ degree, starting with $c^{-1}$. Applying the two finite inclusions and multiplying by that inverse gives $IA_c[[Z]]=GA_c[[Z]]$. Thus the formal generators work on the single base open $D(c)$; no intersection of infinitely many coefficient opens has been taken.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-power-series-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CK (lemma-faithfully-flat-universally-injective) and Tag 0306; finite localization-denominator and formal-unit calculations written out."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-diagonal-taylor-faithful-flatness] to the ambient chart $(w,z)$ at the chosen lift of $a$. After the straightening of step 2 its target is $T$. Quotienting this faithfully flat map by $J$ gives a faithfully flat map $D:=\\mathcal O_{V(J),a}\\to T/J_a$, by [lem-weil-pbc-faithfully-flat-base-change]; if $a\\notin V(J)$, $J_a=T$ contracts to the unit ideal and we instead remove $V(J)$ near $a$. In the remaining case, $A_{\\mathfrak p}\\to C$ is flat, and $T/J_a$ is flat over $C$ by hypothesis. Their composite is flat by [lem-weil-pbc-flat-ring-map-comp]. Hence [lem-weil-pbc-flat-algebra-faithfully-flat-descent] makes $D$ flat over $A_{\\mathfrak p}$. Composing with $A\\to A_{\\mathfrak p}$ shows it is flat over $A$. The affine stalk identifications are [lem-weil-pbc-affine-open-stalk-localization]. Apply [lem-weil-pbc-noetherian-flat-locus-neighborhood] with $S=B/J$, $M=S$ and the point $a$: $S$ is finite type over the Noetherian $A$, and is a finite module over itself. We obtain a basic open neighbourhood in $V(J)$ on which all its stalks are flat over $A$.",
+   "uses": [
+    "lem-trf-diagonal-taylor-faithful-flatness",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-noetherian-flat-locus-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC, 00HI, 039V (lemma-flat-permanence), 00RC (theorem-openness-flatness)."
+   }
+  },
+  {
+   "text": "Lift the basic open from step 5 to a principal ambient open containing $a$, and intersect it with $p^{-1}D(c)$. Restrict $N$ to the inverse image of this open under its section, then restrict the ambient open to its inverse image under $p$. The section is still closed and $(p,Z)$ remains etale by [lem-a1-etale-open-restriction]. These restrictions preserve the formal ideal equality: an ambient localization by $v$ containing the section has $v|_N$ invertible on the restricted base, and the image of $v$ in $A[[Z]]$ has this unit constant term, so the formal inverse calculation in step 4 applies. All stalks of $V(J)$ on the resulting $U^\\circ$ are flat over the base ring by step 5, hence over the corresponding local ring: tensoring with a module already localized at that prime gives the same tensor product. Thus $V(J)\\cap U^\\circ\\to N^\\circ$ is flat by [def-weil-flat-morphism]. This produces both neighbourhoods simultaneously while retaining the section and the formal generators.",
+   "uses": [
+    "lem-a1-etale-open-restriction",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RC neighbourhood, Tag 02GJ (lemma-etale-characterize) under restriction, Tag 01U3 (definition-flat); explicit restriction and unit calculations."
+   }
+  },
+  {
+   "text": "For $b\\in N^\\circ$ outside $V(J)$, a regular generator is a unit at $b$, so $J_b$ is the whole Taylor ring and its zero quotient is flat. For the remaining $b$, extend coefficients to $L_b=\\kappa(b)$ and take the rational diagonal point. By [lem-weil-pbc-flat-module-base-change] the pulled-back actual quotient is flat over $N^\\circ_{L_b}$. Localizing at the diagonal preserves this by [lem-weil-pbc-flat-local-ring-maps]. Its maximal-ideal completed local rings are $L_b[[W]]$ and $L_b[[W,Z]]/J_b$ by [lem-trf-diagonal-taylor-faithful-flatness] and the finite-quotient completion calculation of step 2. Apply [lem-weil-pbc-flat-completion]: the latter quotient is flat over $L_b[[W]]$. The coefficientwise map $A[[Z]]\\to L_b[[W,Z]]$ takes the equality of step 4 to $J_b=(f_{i,b})$, since the finite regular generators $g_j$ map to the actual Taylor ideal. Thus generation and flatness hold for every $b$, including nonclosed points.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-trf-diagonal-taylor-faithful-flatness",
+    "lem-weil-pbc-flat-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HI (lemma-flat-base-change), 00HT (lemma-flat-localization), 0C4G (more-algebra-lemma-flat-completion)."
+   }
+  },
+  {
+   "text": "More generally let $A\\to S$ be any coefficient map with $S$ Noetherian. Pull back the actual finite-type quotient algebra to $S$: it is flat over $S$ by [lem-weil-pbc-flat-module-base-change] and Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Its completion along the pulled-back section ideal is flat over that algebra by [lem-weil-pbc-noetherian-completion-flat], hence over $S$ by [lem-weil-pbc-flat-ring-map-comp]. Steps 1--2 identify the ambient completion with $S[[Z]]$. The finite regular generators $g_j$ generate the completed ideal by [lem-weil-pbc-completion-finite-module-tensor]. Applying the coefficient homomorphism to the finite ideal identities $(g_j)=(f_i)$ identifies that ideal with $(f_{i,S})$. This proves the stated Noetherian coefficient-base-change assertion, without claiming that an uncompleted tensor product of power-series rings is the power-series ring. Step 7 treats subsequent diagonal completion. When $s=0$, the hypothesis $J_a=0$ contracts to $J\\mathcal O_{U,a}=0$ by [lem-weil-pbc-faithfully-flat-ideal-contraction]; finite regular generators each vanish on a neighbourhood, whose finite intersection makes $J=0$. The same applies before the etale localization, since the stalk map at the chosen lift is faithfully flat. Empty variable lists use the same formulas, with no translation or monomials to choose.",
+   "uses": [
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HI, 00FN, 00MB, 00HC, 00MA, 05CK; Noetherian base change, actual quotient completion and explicit finite identities."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-etale-fibre-product-pair-refinement",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "lem-sfb-augmented-etale-associated-graded",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "pqf-def-coherent",
+  "lem-trf-diagonal-taylor-faithful-flatness",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-per-formal-coefficient-taylor-faithful-flatness",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+  "lem-a1-etale-open-restriction",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-flat-completion",
+  "lem-weil-pbc-noetherian-completion-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent assembly of the cited completion, faithful-flatness, finite-denominator and flat-locus arguments; etale section refinement from morphisms.tex and etale.tex. No source claims arbitrary non-Noetherian coefficient-base-change preservation."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-supported-exceptional-chart-packet",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "title": "Spreading coherent formal generators and flatness, without spreading supported quotients",
+ "statement": "Let $k$ be a characteristic-zero field, $U$ a smooth affine finite-type $k$-scheme and $j:N\\hookrightarrow U$ a smooth affine closed subscheme [def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-closed-immersion]. Suppose $(w,z):U\\to\\mathbf A^{m+n}_k$ and $w|_N:N\\to\\mathbf A^m_k$ are etale coordinate maps [def-weil-etale-morphism, def-sbc-affine-space]. Identify the completion along $N$ with $\\mathcal O_N[[Z]]$ by straightening the graph of $z|_N$, where completion is the inverse limit modulo powers of the ideal of $N$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Let $\\mathcal J\\subset\\mathcal O_U$ be a coherent ideal and $f_1,\\ldots,f_s\\in\\mathcal O(N)[[Z]]$ formal sections [pqf-def-coherent]. Fix $a\\in N$, put $L=\\kappa(a)$, and use the centered diagonal Taylor ring $L[[W,Z]]$ [def-weil-residue-field]. Assume the Taylor extension $J_a$ of $\\mathcal J$ equals $(f_{1,a},\\ldots,f_{s,a})$ and $L[[W,Z]]/J_a$ is flat over $L[[W]]$, meaning tensoring preserves exact sequences [def-weil-pbc-flat-ring-map]. After a further etale localization at $a$ and a Zariski restriction, there are a neighbourhood $N^\\circ$ of the chosen point, an ambient neighbourhood $U^\\circ$ containing it as a closed section, and a smooth retraction $p:U^\\circ\\to N^\\circ$ respecting the $w$ coordinates. The functions $Z_j=z_j-p^*(z_j|_{N^\\circ})$ are regular, generate the section ideal, give an etale map $(p,Z):U^\\circ\\to N^\\circ\\times\\mathbf A^n$, and realize the given formal straightening. The scheme $V(\\mathcal J)\\cap U^\\circ$ is flat over $N^\\circ$, and the completion of $\\mathcal J|_{U^\\circ}$ along the section equals $(f_1,\\ldots,f_s)$. Thus at every $b\\in N^\\circ$ the actual centered Taylor ideal is generated by $f_{i,b}$ and its quotient is flat over $\\kappa(b)[[W]]$. These ideal-generation and flatness assertions are preserved by coefficient base change to a Noetherian coefficient ring (including residue-field extension), with the actual ideal pulled back and then completed along the pulled-back section, and by centered diagonal completion. All formal generators are transported coefficientwise, keeping $Z$ fixed. For $s=0$ the ideal is zero near $a$. No supported quotient is asserted to have regular coefficients on $N^\\circ$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent finite-generation/completion synthesis; background Tag 00MC, lemma-completion-faithfully-flat, and Tag 00RC, theorem-openness-flatness. Neither tag alone states the formal-generator conclusion."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-sbc-affine-space",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "pqf-def-coherent",
+  "def-weil-residue-field",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "def-trf-regular-hilbert-coefficient-datum",
+  "def-weil-flat-morphism",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-per-coherent-formal-generation-flatness coherent ideal formal completion generators and flatness near a point",
+   "results": "{\"t\": \"2026-10-24T10:21:11Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-coherent-formal-generation-flatness coherent ideal formal completion generators and flatness near a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.flat_of_isLocalized_maximal\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.flat_of_localized_maximal\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.Flat.iff_lTensor_injective\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"a1d267725379e059\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-coherent-formal-generation-flatness faithful flat completion contraction finite ideal generators localization and openness of flatness",
+   "results": "{\"t\": \"2026-10-24T10:21:12Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-coherent-formal-generation-flatness faithful flat completion contraction finite ideal generators localization and openness of flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.FaithfullyFlat.iff_flat_and_proper_ideal\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.flat_of_isLocalized_span\", \"Module.flat_of_localized_span\", \"Module.flat_of_isLocalized_maximal\"], \"digest\": \"2565c263db560c82\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-coherent-formal-generation-flatness coherent ideal generated by formal sections after completion at a point spreads on one open formal neighbourhood and flatness is open",
+   "results": "{\"t\": \"2026-10-24T10:21:14Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-coherent-formal-generation-flatness coherent ideal generated by formal sections after completion at a point spreads on one open formal neighbourhood and flatness is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.flat_iff\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"61b9132354642dc0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.*generat|complet.*generat|flatLocus",
+   "results": "{\"t\": \"2026-10-24T10:21:11Z\", \"tool\": \"grep\", \"query\": \"formal.*generat|complet.*generat|flatLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Flat\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-24T10:21:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.Flat\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-coherent-formal-generation-flatness etale neighbourhood retraction onto smooth closed section and spreading formal generators of a flat coherent ideal",
+   "results": "{\"t\": \"2026-10-24T10:38:20Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-coherent-formal-generation-flatness etale neighbourhood retraction onto smooth closed section and spreading formal generators of a flat coherent ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.etaleLocus\", \"Algebra.IsEtaleAt\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.instEtaleRing\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"16d23cf23d9e2c20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: standard etale presentations and etale maps from a polynomial algebra do not provide coherent formal ideal generation and flatness spreading with the supplied retraction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-coherent-formal-generation-flatness coherent ideal generated by formal series after Taylor completion at one point spreads near the section with flat quotient",
+   "results": "{\"t\": \"2026-10-24T12:12:58Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-coherent-formal-generation-flatness coherent ideal generated by formal series after Taylor completion at one point spreads near the section with flat quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"Module.flat_of_isLocalized_span\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Flat.propertyIsLocal\", \"PowerSeries.fg_iff_of_isPrime\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"ffbc533a6252feb8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary flatness, localization, Noetherian completion or univariate prime ideals, not the supplied formal-generator family and neighbourhood assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-coherent-formal-generation-flatness finite generators of a coherent formal ideal spread from the completed local ring near a section",
+   "results": "{\"t\": \"2026-10-24T12:14:00Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-coherent-formal-generation-flatness finite generators of a coherent formal ideal spread from the completed local ring near a section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"Algebra.QuasiFiniteAt\", \"Module.exists_basis_of_span_of_flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.flat_of_isLocalized_span\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Module.flat_of_isLocalized_maximal\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"57df443d975e16ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary flatness, localization, Noetherian completion or univariate prime ideals, not the supplied formal-generator family and neighbourhood assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-coherent-formal-generation-flatness equality of finitely generated ideals of a formal power series ring after localization at a prime spreads after inverting a constant coefficient",
+   "results": "{\"t\": \"2026-10-24T12:22:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-coherent-formal-generation-flatness equality of finitely generated ideals of a formal power series ring after localization at a prime spreads after inverting a constant coefficient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.fg_iff_of_isPrime\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"RingHom.Flat.ofLocalizationPrime\", \"instFlatAtPrime\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.flat_of_isLocalized_span\", \"RingHom.finitePresentation_ofLocalizationSpanTarget\"], \"digest\": \"537c944a4ae8fb8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary flatness, localization, Noetherian completion or univariate prime ideals, not the supplied formal-generator family and neighbourhood assertion"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Imported resolution prerequisite of ancestor proof Step 3: formal supported coefficient charts; repair of E2 uses completed coefficients, finite coherent generation and relative jet determinants rather than regular supported quotients.",
+   "via": [
+    "lem-per-supported-exceptional-chart-packet",
+    "lem-per-retained-test-boundary-regularity",
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-coherent-formal-generation-flatness",
+  "worker": "stage1",
+  "summary": "Q21: constructs the coordinate-compatible etale retraction, contracts equality of finite formal ideals via a coefficientwise faithfully flat map, spreads with one finite denominator, descends flatness and uses the existing flat-locus theorem. Clarifies the false unrestricted coefficient-base-change clause to Noetherian coefficient rings; explicit square-zero counterexample in report.md. One new statement-only coefficient-extension lemma.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3 through the imported resolution chain: supported-exceptional-chart-packet Step 2, actual retraction and coherent formal-generation/flatness. The latest ancestor blueprint has no formal-generation theorem; this is its already imported prerequisite, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-fibre-product-pair-refinement",
+    "why": "Generic etale-coordinate, completion or commutative-algebra input used exactly as stated in the proof; this unit has no replacement for this tool and its perverse-sheaf route is unchanged."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic etale-coordinate, completion or commutative-algebra input used exactly as stated in the proof; this unit has no replacement for this tool and its perverse-sheaf route is unchanged."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic etale-coordinate, completion or commutative-algebra input used exactly as stated in the proof; this unit has no replacement for this tool and its perverse-sheaf route is unchanged."
+   },
+   {
+    "node": "lem-sfb-augmented-etale-associated-graded",
+    "why": "Generic etale-coordinate, completion or commutative-algebra input used exactly as stated in the proof; this unit has no replacement for this tool and its perverse-sheaf route is unchanged."
+   },
+   {
+    "node": "lem-trf-diagonal-taylor-faithful-flatness",
+    "why": "Generic etale-coordinate, completion or commutative-algebra input used exactly as stated in the proof; this unit has no replacement for this tool and its perverse-sheaf route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+    "why": "Generic etale-coordinate, completion or commutative-algebra input used exactly as stated in the proof; this unit has no replacement for this tool and its perverse-sheaf route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+    "why": "Generic etale-coordinate, completion or commutative-algebra input used exactly as stated in the proof; this unit has no replacement for this tool and its perverse-sheaf route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-flat-completion",
+    "why": "Generic etale-coordinate, completion or commutative-algebra input used exactly as stated in the proof; this unit has no replacement for this tool and its perverse-sheaf route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-fibre-product-pair-refinement",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sfb-augmented-etale-associated-graded",
+  "lem-trf-diagonal-taylor-faithful-flatness",
+  "lem-weil-pbc-flat-algebra-faithfully-flat-descent",
+  "lem-weil-pbc-noetherian-flat-locus-neighborhood",
+  "lem-weil-pbc-flat-completion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-edb409c0a",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-edb409c0a (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement in full. One repair: step 1 used lem-trf-etale-fibre-product-pair-refinement a second time with M_2 an open of P that need not be affine, which the lemma does not allow (E1), and it did not give the data of that use. The fix restricts first to a principal affine open (and N to its preimage), then states the second use: S=N×A^n, X=M_1=N, e_1 the zero section, M_2=P°, e_2=(p,Z). The section is clopen in V(Z) and its closed complement is deleted. Only the step 1 text changed; it is in fixes/. Steps 2–8 hold. Step 2: the augmented-étale iso A[Z]/(Z)^r≅B/H^r and the finite-tensor node give G=(g_j)A[[Z]]. Step 3: q contracts (m_C,Z) and the new node gives R_q→T faithfully flat. Step 4: faithfully flat contraction and one denominator h, with c=h(0)∉p; checked line by line. Step 5: faithfully flat base change, flat composite, descent, then the flat-locus node (A Noetherian, B/J of finite type). Step 6: the opens are principal and the section stays closed. Step 7: residue-field base change and flat-completion (Noetherian local) at every b, nonclosed points included. Step 8: Noetherian S, B⊗S/(Z)^r=S[Z]/(Z)^r, and s=0 via contraction. Statement correction accepted: the unrestricted 'coefficient base change' is false. Checked counterexample: S=k⊕V with V square-zero and infinite-dimensional, J=0; then S[[Z]] is not flat (y=Σe_iZ^i is killed by e_0 but is not in V·S[[Z]]). The only citer, chart-packet, uses only residue-field and Taylor extensions, which are Noetherian. New node lem-per-formal-coefficient-taylor-faithful-flatness is true via Stacks 0523 (algebra.tex l.23808; hypotheses checked), plus Z in the Jacobson radical and flat local implies faithfully flat. No duplicate under rg -L (closest: truncated-flat, quotient-kernel, flat-module-powers); the three search kinds are recorded. Batch-5: all three cited trf nodes (pair-refinement, the Noetherian-submodule Mathlib leaf, diagonal Taylor faithful flatness) are generic scheme theory or commutative algebra. Their closures contain no trace-formula, Poincaré or assume node, the parent already cites diagonal-Taylor, and neither assumption gives them; accepted. The eight declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalGenerationFlatness",
+  "declaration": "AlgebraicGeometry.coherent_formal_generation_flatness",
+  "declarations": [
+   "AlgebraicGeometry.FormalSectionExpansion",
+   "AlgebraicGeometry.FormalSectionExpansion.regular",
+   "AlgebraicGeometry.formalCoefficientAlgebra",
+   "AlgebraicGeometry.formalCoefficientAlgebraLeft",
+   "AlgebraicGeometry.formalCoefficientAlgebraRight",
+   "AlgebraicGeometry.FormalGenerationBaseChange",
+   "AlgebraicGeometry.CoherentFormalGenerationNeighbourhood",
+   "AlgebraicGeometry.coherent_formal_generation_flatness"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalGenerationFlatness.lean",
+  "statement": "theorem coherent_formal_generation_flatness {k : Type u} [Field k] [CharZero k] (U N : Scheme.{u}) [IsAffine U] [IsAffine N] {m n s : ℕ} (j : N ⟶ U) [IsClosedImmersion j] (c : MvPolynomial (Fin m ⊕ Fin n) k →+* Γ(U, ⊤)) [Smooth (U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (c.comp MvPolynomial.C)))] [LocallyOfFiniteType (U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (c.comp MvPolynomial.C)))] [QuasiCompact (U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (c.comp MvPolynomial.C)))] [Smooth (j ≫ U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (c.comp MvPolynomial.C)))] (hchart : Etale (U.toSpecΓ ≫ Spec.map (CommRingCat.ofHom c))) (hw : Etale (N.toSpecΓ ≫ Spec.map (CommRingCat.ofHom (j.appTop.hom.comp (c.comp (MvPolynomial.rename Sum.inl).toRingHom))))) (F : FormalSectionExpansion j n) (hFw : ∀ i : Fin m, F.regular (c (MvPolynomial.X (Sum.inl i))) = MvPowerSeries.C (j.appTop (c (MvPolynomial.X (Sum.inl i))))) (hFz : ∀ i : Fin n, F.regular (c (MvPolynomial.X (Sum.inr i))) = MvPowerSeries.C (j.appTop (c (MvPolynomial.X (Sum.inr i)))) + MvPowerSeries.X i) (hFk : ∀ r : k, F.regular (c (MvPolynomial.C r)) = MvPowerSeries.C (j.appTop (c (MvPolynomial.C r)))) (J : U.IdealSheafData) (hJ : RingedSpace.IsCoherent U.toRingedSpace J.toModules) (f : Fin s → MvPowerSeries (Fin n) Γ(N, ⊤)) (a : N) (T : Γ(N, ⊤) →+* MvPowerSeries (Fin m) (N.residueField a)) (hT : HilbertCoefficient.isTaylorMap (j.appTop.hom.comp (c.comp (MvPolynomial.rename Sum.inl).toRingHom)) (N.Γevaluation a).hom T) (hgen : Ideal.map ((MvPowerSeries.map T).comp F.regular) (J.idealOfOpens ⊤) = Ideal.span (Set.range fun i : Fin s ↦ MvPowerSeries.map T (f i))) (hflat : ((Ideal.Quotient.mk (Ideal.map ((MvPowerSeries.map T).comp F.regular) (J.idealOfOpens ⊤))).comp MvPowerSeries.C).Flat) : Nonempty (CoherentFormalGenerationNeighbourhood.{u, v} j a c J F f)",
+  "branch": "sheaf-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15ec1a50a",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Node statement and proof unchanged versus live; only lean added plus four landed definition stmt_deps (regular-hilbert isTaylorMap, Flat, Hom.ker, IsNoetherianRing). lean.statement matches the file verbatim; sorry only; Worker report and Second reading sections present. Hypotheses match the node: CharZero field; U affine and Smooth/LocallyOfFiniteType/QuasiCompact over k (redundant, not stronger); N closed, affine, smooth; étale (w,z) and w|N; FormalSectionExpansion is the actual AdicCompletion iso, pinned by adic/constant/hFw/hFz/hFk, and the canonical straightening exists uniquely (formal étaleness plus conormal iso), so no extra assumption; RingedSpace.IsCoherent is a declaration of pqf-def-coherent; T is pinned by isTaylorMap; hgen and hflat are the straightened Taylor ideal and RingHom.Flat over L[[W]]. Conclusion covers every clause: affine baseOpen and ambient, cartesian section, smooth retraction respecting w, Z = e*z - p*(z|N°) generating the section ideal, (p,Z) étale, straightening transport, flatness of the comap subscheme, completed generation, pointwise statements for every b and field extension, Noetherian base change via the actual B⊗S completion (true via finite-type flat plus Noetherian completion), s=0 vanishing (achievable by shrinking to D(prod(1+h_i)) around the section). Edge cases s=0, unit ideal, m or n = 0, S=0, nonclosed points and universe v all fine. No duplicate owner of the helper structures; docstrings carry source, blueprint and the 8 proof steps. Not recompiled (no file changed)."
+ }
+}

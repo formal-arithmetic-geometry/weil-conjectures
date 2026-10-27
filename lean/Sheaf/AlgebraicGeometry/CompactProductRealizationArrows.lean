@@ -83,7 +83,10 @@ theorem compactProductGlobalSiteMap_isIso [Finite A] {X B : Scheme.{u}} {f : X â
     (c : Compactification f)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     IsIso (compactProductGlobalSiteMap A c K) := by
-  sorry
+  have := ProEtale.isIso_finiteComparisonGlobalSections c.Z A
+  dsimp only [compactProductGlobalSiteMap, ProEtale.supportGlobalComparison,
+    NatTrans.comp_app]
+  infer_instance
 
 /-- Insert the retained witness isomorphism into the compact-support comparison.
 Source: blueprint Step 1, specified pro-etale realization

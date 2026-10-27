@@ -1,0 +1,132 @@
+{
+ "id": "lem-diagonal-closure-ordinary-line-factor-iso",
+ "kind": "statement",
+ "title": "Invertibility of a normalized ordinary closure-line factor",
+ "statement": "For prime l, finite E and scheme X with l invertible, every module morphism from the ordinary scalar extension to spQbarTwist whose scalar-unit composite is closureLineMap is an isomorphism.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-maps",
+  "lem-diagonal-closure-ordinary-line-factor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), normalized colimit comparison"
+ },
+ "proof": [
+  {
+   "text": "Map the invertible global ell-section to every residue field and take the compatible primitive-root cover of tateTwist_finite_locallyFree. Its covering sieve gives CoversTop, so Sheaf.isIso_of_coversTop reduces the assertion to each slice.",
+   "uses": [
+    "det-def-sp-tate-twist-locally-free"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On a slice O, use spRationalRootDiagramBasis to identify the finite coefficient and rational twist diagrams with linear components. Pull the actual coefficient colimit to X and then to the slice using the two left adjoints. Transport the twist colimit cocone along the diagram basis and apply uniqueness of colimits to obtain an underlying isomorphism q. Its leg equations are retained. Prove q linear by precomposing with the tensor of the two coefficient colimit cocones: coefficient multiplicativity, the specified twist action equation, and the linearity of each finite basis give equality on every leg. The private normalizedColimitBasis and mappedColimitBasis helpers perform these constructions without any additional existence assumptions.",
+   "uses": [
+    "lem-sp-rational-root-diagram-basis",
+    "lem-sfb-qlbar-point-abelian-colimit",
+    "lem-route-sp-qbar-twist-action-exists-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite component b_E is a basis as an internal module on the slice. Apply spSliceNormalizedScalarExtensionBasis to obtain a basis d for the scalar extension with O(p) followed by d equal to b_E followed by the extension unit. The given hf and the colimit leg equation for q show that d followed by the restriction of f and q agree after O(p). Precompose with the coefficient unit; since O(p) preserves units, these two S-linear maps from the regular S-module agree on one. Mod.regular_hom_ext identifies them. Thus the restriction of f is invertible, as d and q are isomorphisms.",
+   "uses": [
+    "lem-sp-slice-normalized-scalar-extension-basis"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The forgetful functor from internal modules reflects isomorphisms. Apply Sheaf.isIso_of_coversTop to the underlying morphism and the slice isomorphisms just constructed, then reflect invertibility to the original module morphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-def-sp-tate-twist-locally-free",
+  "lem-sp-rational-root-diagram-basis",
+  "lem-sfb-qlbar-point-abelian-colimit",
+  "lem-route-sp-qbar-twist-action-exists-unique",
+  "lem-sp-slice-normalized-scalar-extension-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), normalized colimit comparison",
+  "date": "2026-10-27",
+  "note": "Complete Lean proof by normalized slice colimit bases and regular-module hom extensionality; no new split-off statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "isomorphism detection for normalized scalar-extension colimit maps of Tate lines",
+   "results": "No existing theorem for this module-sheaf map.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "jointly conservative slice restriction detects isomorphism of module morphism",
+   "results": "Only generic conservative-functor lemmas; no Tate-line specialization.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "factor_isIso|closureLineMap.*IsIso",
+   "results": "No existing declaration.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalClosureOrdinaryLine",
+  "date": "2026-10-27",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-diagonal-closure-ordinary-line",
+   "place": "paragraph (2), normalized colimit comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalClosureOrdinaryLineFactorIso",
+  "file": "lean/Sheaf/Paper/DiagonalClosureOrdinaryLineFactorIso.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalClosure_ordinaryLine_factor_isIso",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-27",
+  "statement": "theorem diagonalClosure_ordinaryLine_factor_isIso\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    (X : Scheme.{u}) (hX : IsUnit (l : Γ(X, ⊤)))\n    (f : (Mod.extendScalars\n        (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl l E) X)).obj\n          (spRationalTwist X l E) ⟶ spQbarTwist X l)\n    (hf : Mod.extendUnitHom (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl l E) X)\n          (spRationalTwist X l E) ≫ f.hom = closureLineMap l E X) :\n    IsIso f"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T050650-L-251464",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T084352-L-3673400",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

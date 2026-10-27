@@ -42,195 +42,40 @@
  ],
  "proof": [
   {
-   "text": "The finite affine cover makes $X$ quasi-compact: restrict an open cover to each affine, choose finite subcovers, and take their finite union, using [lem-weil-pbc-affine-scheme-qcqs]. It is locally Noetherian by the stipulated affine-cover definition, hence quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Every $P_n=A/J^n$ is Noetherian: inverse images of its ideals are finitely generated ideals of $A$, and their generators descend. Thus the comparison theorems below apply to $X$ and to each discrete coefficient ring $P_n$.",
+   "text": "Use Lean indices n >= 0, with exponent n+1; the statement's positive index is n+1. Apply [lem-sfb-adic-finite-reduction-tor] to the given residue object and isomorphism, obtaining the Tor interval for every reduction without using completeness. Apply [lem-sfb-adic-finite-completion-bounds] to this family and the given completeness, obtaining the actual derived limit and cohomology interval.",
    "uses": [
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-locally-noetherian-quasi-separated"
+    "lem-sfb-adic-finite-reduction-tor",
+    "lem-sfb-adic-finite-completion-bounds"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2 setup; Tag 01OY (locally Noetherian implies quasi-separated)"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose one K-flat resolution $P\\to N$ with flat terms [lem-pc-kflat-resolution]. The complexes $P\\otimes_A P_n$ represent $N_n$ by [lem-pur-derived-change-of-rings] and are K-flat with flat terms over $P_n$ by [lem-pur-kflat-change-of-rings]. Consequently, for every degree-zero $P_n$-module sheaf $F$, $N_n\\otimes^L_{P_n}F$ is represented by $(P\\otimes_A P_n)\\otimes_{P_n}F=P\\otimes_AF$. For $m\\ge n$, balancing gives $\\rho_{m,n}:N_m\\otimes^L_{P_m}P_n\\simeq N_n$, represented by $(p\\otimes u)\\otimes v\\mapsto p\\otimes q_{m,n}(u)v$, with inverse $p\\otimes v\\mapsto(p\\otimes1)\\otimes v$. For $r\\ge m\\ge n$ both iterated maps send $((p\\otimes u)\\otimes v)\\otimes w$ to $p\\otimes q_{r,n}(u)q_{m,n}(v)w$; thus these normalizations satisfy the quotient cocycle and commute with maps of representatives. For the normalized derived scalar unit, first form the ordinary tensor/restriction adjunction using the sheafification Hom equivalence. Its unit is the prescribed sectionwise insertion. Apply [lem-pur-resolving-class-derived-adjunction] to the K-flat resolving class, and transport its unit across the unique universal isomorphism to the fixed derived extension. The representative-transpose formula gives the required normalization. Uniqueness follows by cancelling the computation isomorphism on a K-flat resolution and then using localization naturality. For derived associativity, lift the composite of the two scalar computation maps and the ordinary balancing isomorphism through the universal property of extension along the composite ring map. The resulting map is invertible on flat-term K-flat resolutions, hence everywhere by naturality and essential surjectivity of localization. The same cancellation argument proves uniqueness.",
+   "text": "Apply [lem-sfb-adic-finite-etale-origins] separately at every index. The families are typed by the normalized constructions of [lem-sfb-adic-finite-reduction-data]. Choose witnesses K_n, their constructibility and Tor proofs, and comparison isomorphisms. Define the dependent family C_n by C_0=C and C_(n+1)=K_(n+1); define alpha_0=e and alpha_(n+1) by the chosen isomorphism. Case analysis on n proves constructibility and the same Tor interval for this overwritten family. This dependent construction preserves the originally prescribed residue object and isomorphism literally.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-resolving-class-derived-adjunction"
+    "lem-sfb-adic-finite-etale-origins",
+    "lem-sfb-adic-finite-reduction-data"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2 quotient reductions; K-flat change of rings and explicit tensor balancing"
-   }
+   "elementary": true
   },
   {
-   "text": "The assumed Tor tests say exactly that $C$ has Tor amplitude in $[a,b]$ on the étale site. The given constructible cohomology and boundedness put $C$ in $D^b_c(X_{\\mathrm{ét}},P_1)$. By [det-pe-finite-tor-comparison-noetherian], $N_1\\simeq\\nu_X^*C$ has the same Tor interval on the pro-étale site. The constructible comparison [sk-thm-pe-constructible-comparison] also makes its cohomology constructible. Exactness of comparison inverse image [sk-thm-pe-classical-sheaves] identifies its cohomology with the pullbacks of those of $C$.",
+   "text": "Apply [lem-sfb-adic-finite-etale-transitions] to this chosen family and these alpha maps. It yields beta for all quotient maps, with the specified cocycle and compatibility. Package the limit, bounds, Tor tests and marked family. The zero-index equality is reflexivity and its comparison equation follows from preservation of the identity.",
    "uses": [
-    "det-pe-finite-tor-comparison-noetherian",
-    "sk-thm-pe-constructible-comparison",
-    "sk-thm-pe-classical-sheaves"
+    "lem-sfb-adic-finite-etale-transitions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09C1 and 09C2; Tag 09AL; blueprint det-pe-finite-tor-comparison-noetherian"
-   }
-  },
-  {
-   "text": "Fix $n$ and any degree-zero $P_n$-module sheaf $F$. Its finite filtration $F\\supset JF\\supset\\cdots\\supset J^nF=0$ has quotients $G_i=J^iF/J^{i+1}F$ annihilated by $J$. By Step 2, $N_n\\otimes^L_{P_n}G_i=N_1\\otimes^L_{P_1}G_i$, which has no cohomology outside $[a,b]$ by Step 3. Tensoring the short exact sequences of this filtration with $P$ remains termwise exact since its terms are flat [def-pc-flat-sheaf-modules]. Their long exact cohomology sequences [lem-weil-pbc-complex-ses-homology-long-exact], inducting up from $J^nF=0$, therefore give the same vanishing for $N_n\\otimes^L_{P_n}F$. This proves the required Tor amplitude for every $n$ by [def-weil-proetale-tor-amplitude]; taking $F=P_n$ also proves that $N_n$ itself is supported in $[a,b]$.",
-   "uses": [
-    "def-pc-flat-sheaf-modules",
-    "def-weil-proetale-tor-amplitude",
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0942 (sites-cohomology-lemma-bounded), proof of (2), finite ideal filtration"
-   }
-  },
-  {
-   "text": "The given local derived $J\\underline A$-completeness is precisely the complete-subcategory condition in [lem-sp-completed-pullback-adjunction]. Its completion adjunction identifies the unit on a complete object with an isomorphism, so $N\\simeq R\\varprojlim_nN_n$, computed by a K-injective resolution of the strict reduction tower. Tensor $0\\to J^n/J^{n+1}\\to P_{n+1}\\to P_n\\to0$ with the flat-term complex $P$. The first resulting complex is $N_1\\otimes^L_{P_1}\\underline{J^n/J^{n+1}}$ by Step 2, hence has cohomology in $[a,b]$ by Step 3. Exactness of tensor with each flat term [def-pc-flat-sheaf-modules] and [lem-weil-pbc-complex-ses-homology-long-exact] give an epimorphism $H^b(N_{n+1})\\to H^b(N_n)$. Regard the strict complexes $T_n=P\\otimes_A P_n$ of Step 2 as complexes over the common sheaf $\\underline A$. Countable products are exact by [det-pe-products-exact], so [lem-weil-strict-roos-comparison] applies: its natural comparison identifies the K-injective completion limit with the termwise cone $\\operatorname{Cone}(1-s)[-1]$, up to the required object isomorphism. The Milnor sequence [det-pe-milnor-sequence] therefore computes $H^q(N)$. By Step 4, both end terms vanish for $q\\notin[a,b]$, except possibly $R^1\\!\\varprojlim H^b(N_n)$ when $q=b+1$; the epimorphisms just proved kill this last term by [det-pe-milnor-epimorphic]. Hence $H^q(N)=0$ for $q\\notin[a,b]$.",
-   "uses": [
-    "lem-sp-completed-pullback-adjunction",
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "det-pe-products-exact",
-    "lem-weil-strict-roos-comparison",
-    "det-pe-milnor-sequence",
-    "det-pe-milnor-epimorphic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099M (lemma-naive-completion); Tag 09C2 proof of (1); Tag 0947 (Milnor sequence and epimorphic towers)"
-   }
-  },
-  {
-   "text": "Step 3 makes every $H^q(N_1)$ constructible in the locally stratified sense of [sk-thm-pe-constructible-comparison]. Only the finitely many degrees $a\\leq q\\leq b$ occur. Apply [lem-sfb-adic-finite-stratification-pullback] to this finite family over $P_1$: it gives one open covering and, on each member $U$, one finite stratification with actual projections to the input strata and locally constant finite-type restrictions of every $H^q(N_1)$. Constructibility is checked on these opens, so fix one such stratum $i:S\\to U\\to X$. Exact restriction [def-weil-pbc-proetale-operations] and derived tensor pullback [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identify $(N_n|_S)\\otimes^L_{P_n}P_1$ with $N_1|_S$ and identify cohomology after restriction. Apply [lem-weil-pbc-nilpotent-reduction-lissity] on $S_{\\mathrm{proét}}$ with $B=P_n$, $I=J/J^n$, and $K=N_n|_S$. Step 1 makes $B$ Noetherian, Step 4 and exact restriction make $K$ bounded above, and $I^n=0$. The residue complex has locally constant finite-type cohomology by the chosen strata. The final clause of the cited lemma therefore makes each $H^q(K)$ locally constant of finite type over $P_n$. Thus all $N_n$ have constructible cohomology. No underlying set of $P_n$ is required to be finite.",
-   "uses": [
-    "sk-thm-pe-constructible-comparison",
-    "lem-sfb-adic-finite-stratification-pullback",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-nilpotent-reduction-lissity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2 proof of (3); Tag 09BR (lemma-compare-truncations-constructible), realized stratumwise by Tag 094I"
-   }
-  },
-  {
-   "text": "For each $n\\ge2$, Steps 4 and 6 put $N_n$ in the bounded constructible pro-étale category for $P_n$. The equivalence [sk-thm-pe-constructible-comparison] gives $C_n\\in D^b_c(X_{\\mathrm{ét}},P_n)$ and $\\alpha_n:\\nu_X^*C_n\\simeq N_n$. Use $C_1=C$ and the prescribed isomorphism for $\\alpha_1$. The reverse implication of [det-pe-finite-tor-comparison-noetherian] puts every $C_n$ in the same Tor interval $[a,b]$. This uses each ring $P_n$ separately, never a finite-ring or perfect-$A$-module identification.",
-   "uses": [
-    "sk-thm-pe-constructible-comparison",
-    "det-pe-finite-tor-comparison-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2 (4); Tag 09AL (lemma-compare-constructible-derived); finite-Tor comparison"
-   }
-  },
-  {
-   "text": "For $m\\ge n$, put $Q_{m,n}=C_m\\otimes^L_{P_m}P_n$ on the étale site. It has Tor amplitude $[a,b]$: for every $P_n$-module sheaf $F$, a flat-term K-flat representative $R\\to C_m$ gives the chain isomorphism $(R\\otimes_{P_m}P_n)\\otimes_{P_n}F\\to R\\otimes_{P_m}F$, $(r\\otimes v)\\otimes f\\mapsto r\\otimes vf$, with inverse $r\\otimes f\\mapsto(r\\otimes1)\\otimes f$, identifying $Q_{m,n}\\otimes^L_{P_n}F$ with $C_m\\otimes^L_{P_m}F$, which has the required vanishing by Step 7. In particular $Q_{m,n}$ is bounded. It also has constructible cohomology. Apply [lem-sfb-adic-finite-stratification-pullback] on the étale site to the finitely many nonzero $H^q(C_m)$, giving each the covering of $X$ by all affine opens, on each of which [def-pe-etale-constructible-module] supplies a stratification since $C_m\\in D^b_c$. The output covering may be taken to be the intersections of one input member each, so it contains every affine open $U$ (choose $U$ every time): on every affine $U$ there is a common finite stratification with locally constant finite-type restrictions, as [def-pe-etale-constructible-module] demands. Exact étale restriction [prop-weil-pbc-inverse-image-modules-exact] and tensor pullback [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] reduce to each stratum; there [lem-weil-pbc-locally-constant-tensor] applies to $C_m$ and the constant finite-type $P_m$-module $P_n$ in degree zero, both bounded above. It gives locally constant finite-type cohomology. The resulting local trivializations, initially $P_m$-linear, are $P_n$-linear because the scalar action factors through $P_m\\twoheadrightarrow P_n$; their model modules are finitely generated over $P_n$ by the same generators. Thus $Q_{m,n}\\in D^b_c(X_{\\mathrm{ét}},P_n)$.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-change-of-rings",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-locally-constant-tensor",
-    "lem-sfb-adic-finite-stratification-pullback",
-    "def-pe-etale-constructible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 09AL full-faithfulness domain check; Tag 094H (lemma-locally-constant-tensor-product)"
-   }
-  },
-  {
-   "text": "Derived tensor pullback [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the constant-coefficient identification in [sk-thm-pe-classical-sheaves] identify $\\nu_X^*Q_{m,n}$ with $\\nu_X^*C_m\\otimes^L_{P_m}P_n$. Therefore $\\alpha_n^{-1}\\rho_{m,n}(\\alpha_m\\otimes^LP_n)$ is an isomorphism $\\nu_X^*Q_{m,n}\\to\\nu_X^*C_n$. Both its source and target are in the bounded constructible comparison domain by Steps 7 and 8. Full faithfulness of [sk-thm-pe-constructible-comparison] lifts it uniquely to $\\beta_{m,n}:Q_{m,n}\\to C_n$; lifting its inverse shows that this is an isomorphism. Taking $m=n+1$ gives the required $\\beta_n$ and, by their definition, the stated compatibility equation with $\\alpha_n$ and $\\rho_n=\\rho_{n+1,n}$. To realize the normalized derived scalar/pullback comparison, use the derived pullback for the composite structural ring map as a common universal pair. Ordinary scalar associativity identifies the first composite with this ordinary pullback; the prescribed ordinary scalar/pullback comparison identifies the second. Pullback preserves flat-term K-flat complexes by [lem-weil-pbc-ringed-topos-kflat-pullback], and scalar extension preserves them by [lem-pur-kflat-change-of-rings]. The tensor comparison of [lem-weil-pbc-independent-sheaf-tensor-colimits] identifies the two flatness conventions. Thus both composite computation maps are invertible on the resolving class. Their universal lifts are isomorphisms by resolution naturality; composing one with the inverse of the other gives the comparison. Cancel the ordinary balancing isomorphisms to recover its stated representative equation. For uniqueness cancel the composite computation on a resolution, then descend by localization naturality.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "sk-thm-pe-classical-sheaves",
-    "sk-thm-pe-constructible-comparison",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL (lemma-compare-constructible-derived); explicit full-faithfulness transport of the quotient normalization"
-   }
-  },
-  {
-   "text": "For $r\\ge m\\ge n$, compare $\\beta_{r,n}$ with $\\beta_{m,n}\\circ(\\beta_{r,m}\\otimes^LP_n)$ under canonical tensor balancing. Apply $\\nu_X^*$ and then $\\alpha_n$. By Step 9 the latter composite becomes $\\rho_{m,n}\\circ(\\rho_{r,m}\\otimes^LP_n)\\circ(\\alpha_r\\otimes^LP_n)$: the intervening $\\alpha_m^{-1}$ and $\\alpha_m$ cancel. Step 2 identifies this with $\\rho_{r,n}\\circ(\\alpha_r\\otimes^LP_n)$, the image of the former map. Faithfulness of [sk-thm-pe-constructible-comparison] gives equality. For $m=n$, Step 2 gives the unit normalization $\\rho_{n,n}$; hence the compared map is $\\alpha_n^{-1}\\rho_{n,n}(\\alpha_n\\otimes^LP_n)$, which is the unit map $C_n\\otimes^L_{P_n}P_n\\to C_n$. Faithfulness gives this identity normalization for $\\beta_{n,n}$. This proves the quotient cocycle, retaining exactly the original $C_1$ and residue marking chosen in Step 7.",
-   "uses": [
-    "sk-thm-pe-constructible-comparison",
-    "lem-pur-kflat-change-of-rings"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL; quotient cocycle by faithfulness and the explicit balancing computation of Step 2"
-   }
-  },
-  {
-   "text": "For the normalized ordinary scalar/pullback comparison, work with a commutative square of ring sheaves F(f);cB = cA;g. Form the ringed-topos datum for cB using F.algebra and construct its induced additive module direct image G by [lem-weil-pbc-ringed-topos-induced-modules]. Restrict G along f; the square and ring_naturality make this the direct image for cA;g. The normalized supplied module adjunction underlying [lem-sp-completed-pullback-adjunction], together with the scalar adjunction of [lem-weil-pbc-ringed-topoi-module-adjunction], makes both pull(F,cA;g) and change(f);pull(F,cB) left adjoint to that same restricted G. Uniqueness of left adjoints identifies these functors. Its hom-equivalence formula gives exactly the insertion equation. Compose with ordinary scalar associativity for cA,g; inserting 1 twice agrees with inserting 1 for the composite. Conversely the insertion equation determines the adjoint transpose of every component, so faithfulness of underlying sheaves and injectivity of the hom-equivalence prove uniqueness of the isomorphism. Specialize to the actual comparison inverse image and the two constant coefficient maps; naturality of F.constants proves the coefficient square. This proves adicFiniteOrdinaryComparison_existsUnique, without an additional existence assertion or a new proof hole.",
-   "uses": [
-    "lem-weil-pbc-ringed-topos-induced-modules",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-sp-completed-pullback-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Inverse image of modules: lemma-pullback-module and lemma-adjoint-push-pull-modules; scalar extension and the normalized inverse-image adjunction, also used in proetale.tex Tags 09C2 and 09AL."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings",
-  "det-pe-finite-tor-comparison-noetherian",
-  "sk-thm-pe-constructible-comparison",
-  "sk-thm-pe-classical-sheaves",
-  "def-pc-flat-sheaf-modules",
-  "def-weil-proetale-tor-amplitude",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-sp-completed-pullback-adjunction",
-  "det-pe-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "det-pe-milnor-sequence",
-  "det-pe-milnor-epimorphic",
-  "lem-sfb-adic-finite-stratification-pullback",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-nilpotent-reduction-lissity",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-locally-constant-tensor",
-  "def-pe-etale-constructible-module",
-  "lem-pur-resolving-class-derived-adjunction",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-pbc-ringed-topos-induced-modules",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "lem-sfb-adic-finite-reduction-tor",
+  "lem-sfb-adic-finite-completion-bounds",
+  "lem-sfb-adic-finite-etale-origins",
+  "lem-sfb-adic-finite-etale-transitions",
+  "lem-sfb-adic-finite-reduction-data"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C2 (lemma-describe-constructible-complexes), using Tags 099M, 0942, 0947, 09AL and stratumwise 094I; the omitted finite-Tor and marking arguments are supplied explicitly. B4 supplies the normalized derived unit using the resolving-class adjunction (06XN, 0FND, 09T5), scalar associativity by the universal derived comparison, and the derived scalar/pullback square by common flat-term K-flat computations (06YY, 0G7E). A4 proves the ordinary scalar/pullback comparison by the normalized module adjunction, restriction of the induced module direct image along a commutative coefficient square, and uniqueness of left adjoints (sites-modules.tex, inverse image of modules); tensor insertion supplies the normalization and uniqueness. The main finite-reductions theorem retains its stated ten-step proof plan."
+  "place": "Tag 09C2 split into Tor filtration, completion/Milnor bounds, etale origins, and full-faithful quotient transport. T1 supplies the dependent witness choice fixing the prescribed residue marking.",
+  "by": "document"
  },
  "mathlib_searches": [
   {
@@ -384,7 +229,18 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "lem-sfb-adic-constructible-finite-reductions",
@@ -528,47 +384,10 @@
   "module": "Sheaf.Paper.AdicConstructibleFiniteReductions",
   "declaration": "AlgebraicGeometry.Scheme.adic_constructible_finite_reductions",
   "declarations": [
-   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit_existsUnique",
-   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit",
-   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnitComplex",
-   "AlgebraicGeometry.Scheme.adicFiniteUnit_existsUnique",
-   "AlgebraicGeometry.Scheme.adicFiniteUnit",
-   "AlgebraicGeometry.Scheme.adicFiniteResComp_existsUnique",
-   "AlgebraicGeometry.Scheme.adicFiniteResComp",
-   "AlgebraicGeometry.Scheme.adicFiniteDresComp",
-   "AlgebraicGeometry.Scheme.adicFiniteChangeComp_existsUnique",
-   "AlgebraicGeometry.Scheme.adicFiniteChangeComp",
-   "AlgebraicGeometry.Scheme.adicFiniteExtendComp_existsUnique",
-   "AlgebraicGeometry.Scheme.adicFiniteExtendComp",
-   "AlgebraicGeometry.Scheme.adicFiniteComparisonData",
-   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryPullback",
-   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryPullbackAdditive",
-   "AlgebraicGeometry.Scheme.adicFinitePullback",
-   "AlgebraicGeometry.Scheme.adicFinitePullbackComparison",
-   "AlgebraicGeometry.Scheme.adicFiniteConstantMap",
-   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison_existsUnique",
-   "AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison",
-   "AlgebraicGeometry.Scheme.adicFiniteComparison_existsUnique",
-   "AlgebraicGeometry.Scheme.adicFiniteComparison",
-   "AlgebraicGeometry.Scheme.adicFiniteCoeff",
-   "AlgebraicGeometry.Scheme.adicFiniteQuotient",
-   "AlgebraicGeometry.Scheme.adicFiniteFactor",
-   "AlgebraicGeometry.Scheme.adicFiniteQuotientComp",
-   "AlgebraicGeometry.Scheme.adicFiniteFactorComp",
-   "AlgebraicGeometry.Scheme.adicFiniteExtension",
-   "AlgebraicGeometry.Scheme.adicFiniteConstantComp",
-   "AlgebraicGeometry.Scheme.adicFiniteExtensionComp",
-   "AlgebraicGeometry.Scheme.adicFiniteAmbient",
-   "AlgebraicGeometry.Scheme.adicFiniteComplete",
-   "AlgebraicGeometry.Scheme.adicFiniteEtale",
-   "AlgebraicGeometry.Scheme.adicFiniteReduction",
-   "AlgebraicGeometry.Scheme.adicFiniteRho",
-   "AlgebraicGeometry.Scheme.adicFiniteUnderlying",
-   "AlgebraicGeometry.Scheme.adicFiniteTransition",
    "AlgebraicGeometry.Scheme.adic_constructible_finite_reductions"
   ],
   "file": "lean/Sheaf/Paper/AdicConstructibleFiniteReductions.lean",
-  "statement": "theorem adic_constructible_finite_reductions (X : Scheme.{u}) [IsNoetherian X] (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A) (N : adicFiniteAmbient.{u, v} X A) (hcomplete : adicFiniteComplete.{u, v} X A J N) (C : adicFiniteEtale.{u, v} X J 0) (hC : IsCoefficientBoundedConstructibleEtale.{u, v} X (adicFiniteCoeff J 0) C) (e : (adicFinitePullback.{u, v} X (adicFiniteCoeff J 0)).obj C ≅ adicFiniteReduction.{u, v} X J N 0) (a b : ℤ) (hab : a ≤ b) (hTor : HasCoefficientModelTorAmplitude (constant (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteCoeff J 0)) C a b) : (∃ hp : HasProduct (adicFiniteUnderlying.{u, v} X J N), @IsDerivedLimit _ _ _ _ _ _ _ _ hp (adicFiniteTransition.{u, v} X J N) N) ∧ (∀ q : ℤ, (q < a ∨ b < q) → IsZero ((coefficientModelCohomology (constant (coefficientProEtaleModelTopology.{u, v} X) A) q).obj N)) ∧ (∀ n : ℕ, HasCoefficientProEtaleTorAmplitude.{u, v} X (adicFiniteCoeff J n) (adicFiniteReduction.{u, v} X J N n) a b) ∧ ∃ (Cn : ∀ n : ℕ, adicFiniteEtale.{u, v} X J n) (alpha : ∀ n : ℕ, (adicFinitePullback.{u, v} X (adicFiniteCoeff J n)).obj (Cn n) ≅ adicFiniteReduction.{u, v} X J N n) (beta : ∀ {m n : ℕ} (h : n ≤ m), (adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteFactor J h)).obj (Cn m) ≅ Cn n), (∀ n : ℕ, IsCoefficientBoundedConstructibleEtale.{u, v} X (adicFiniteCoeff J n) (Cn n)) ∧ (∀ n : ℕ, HasCoefficientModelTorAmplitude (constant (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteCoeff J n)) (Cn n) a b) ∧ (∃ hzero : Cn 0 = C, (adicFinitePullback.{u, v} X (adicFiniteCoeff J 0)).map (eqToIso hzero).hom ≫ e.hom = (alpha 0).hom) ∧ (∀ (r m n : ℕ) (hnm : n ≤ m) (hmr : m ≤ r), (adicFiniteExtensionComp (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteFactor J hmr) (adicFiniteFactor J hnm) (adicFiniteFactor J (hnm.trans hmr)) (adicFiniteFactorComp J hnm hmr)).hom.app (Cn r) ≫ (beta (hnm.trans hmr)).hom = (adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteFactor J hnm)).map (beta hmr).hom ≫ (beta hnm).hom) ∧ (∀ (m n : ℕ) (h : n ≤ m), (adicFinitePullback.{u, v} X (adicFiniteCoeff J n)).map (beta h).hom ≫ (alpha n).hom = (adicFiniteComparison.{u, v} X (adicFiniteFactor J h)).inv.app (Cn m) ≫ (adicFiniteExtension (coefficientProEtaleModelTopology.{u, v} X) (adicFiniteFactor J h)).map (alpha m).hom ≫ (adicFiniteRho.{u, v} X J N h).hom)",
+  "statement": "theorem adic_constructible_finite_reductions (X : Scheme.{u}) [IsNoetherian X]\n    (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)\n    (N : adicFiniteAmbient.{u, v} X A) (hcomplete : adicFiniteComplete.{u, v} X A J N)\n    (C : adicFiniteEtale.{u, v} X J 0)\n    (hC : IsCoefficientBoundedConstructibleEtale.{u, v} X (adicFiniteCoeff J 0) C)\n    (e : (adicFinitePullback.{u, v} X (adicFiniteCoeff J 0)).obj C ≅\n      adicFiniteReduction.{u, v} X J N 0)\n    (a b : ℤ) (hab : a ≤ b)\n    (hTor : HasCoefficientModelTorAmplitude\n      (constant (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteCoeff J 0)) C a b) :\n    (∃ hp : HasProduct (adicFiniteUnderlying.{u, v} X J N),\n      @IsDerivedLimit _ _ _ _ _ _ _ _ hp (adicFiniteTransition.{u, v} X J N) N) ∧\n    (∀ q : ℤ, (q < a ∨ b < q) → IsZero ((coefficientModelCohomology\n      (constant (coefficientProEtaleModelTopology.{u, v} X) A) q).obj N)) ∧\n    (∀ n : ℕ, HasCoefficientProEtaleTorAmplitude.{u, v} X (adicFiniteCoeff J n)\n      (adicFiniteReduction.{u, v} X J N n) a b) ∧\n    ∃ (Cn : ∀ n : ℕ, adicFiniteEtale.{u, v} X J n)\n      (alpha : ∀ n : ℕ, (adicFinitePullback.{u, v} X (adicFiniteCoeff J n)).obj (Cn n) ≅\n        adicFiniteReduction.{u, v} X J N n)\n      (beta : ∀ {m n : ℕ} (h : n ≤ m),\n        (adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X)\n          (adicFiniteFactor J h)).obj (Cn m) ≅ Cn n),\n      (∀ n : ℕ, IsCoefficientBoundedConstructibleEtale.{u, v} X (adicFiniteCoeff J n) (Cn n)) ∧\n      (∀ n : ℕ, HasCoefficientModelTorAmplitude\n        (constant (smallModelComparisonEtaleTopology.{u, v} X) (adicFiniteCoeff J n))\n          (Cn n) a b) ∧\n      (∃ hzero : Cn 0 = C,\n        (adicFinitePullback.{u, v} X (adicFiniteCoeff J 0)).map (eqToIso hzero).hom ≫ e.hom =\n          (alpha 0).hom) ∧\n      (∀ (r m n : ℕ) (hnm : n ≤ m) (hmr : m ≤ r),\n        (adicFiniteExtensionComp (smallModelComparisonEtaleTopology.{u, v} X)\n          (adicFiniteFactor J hmr) (adicFiniteFactor J hnm)\n          (adicFiniteFactor J (hnm.trans hmr)) (adicFiniteFactorComp J hnm hmr)).hom.app\n            (Cn r) ≫ (beta (hnm.trans hmr)).hom =\n        (adicFiniteExtension (smallModelComparisonEtaleTopology.{u, v} X)\n          (adicFiniteFactor J hnm)).map (beta hmr).hom ≫ (beta hnm).hom) ∧\n      (∀ (m n : ℕ) (h : n ≤ m),\n        (adicFinitePullback.{u, v} X (adicFiniteCoeff J n)).map (beta h).hom ≫ (alpha n).hom =\n        (adicFiniteComparison.{u, v} X (adicFiniteFactor J h)).inv.app (Cn m) ≫\n          (adicFiniteExtension (coefficientProEtaleModelTopology.{u, v} X)\n            (adicFiniteFactor J h)).map (alpha m).hom ≫ (adicFiniteRho.{u, v} X J N h).hom)",
   "branch": "newtargets-dag",
   "by": "Q91",
   "date": "2026-10-17",
@@ -584,13 +403,13 @@
   "note": "Full read of the node, the 3 snapshot modules, the report (real Worker report and Second reading by Q91), the dependency declarations (ConstantCompletion, small-model comparison, AsSmall X.Etale/X.ProEt, old Tor and constructible records, IsDerivedLimit) and Stacks 09C2/09AL/03RW(3). Every hypothesis and conclusion matches the node: IsNoetherian X; A : Type (max v (u+1)), an independent coefficient universe that repairs H3; local completeness via the kernel of A to A/J; constructibility defined on each affine open, equivalent to a global finite stratification on Noetherian X; Tor tests on every K-flat representative and every module; IsDerivedLimit of the canonical tower; the cohomology bound; Tor of each N_n; Cn, alpha, beta for all n<=m with cocycle, Cn 0 = C with alpha 0 equal to e, and the alpha compatibility through the canonical comparison. H4 fixed (recorded smallModelProEtaleComparison used directly). No hollow definition: data is real or chosen by a uniqueness theorem; the InverseImageData choice is the landed dependency's own usage. The two section 1(B) repairs change only lean and state the same notions at the larger coefficient size. Three landed stmt_deps added, no cycle (my closures 168/623/110). No duplicate declaration found. Edge cases checked: empty X, N=0, J=0, J=A, n=0, a=b, m=n. nt_compile.py on all 3 files, run twice: exit 0, no diagnostics. lean.statement fields match the file signatures exactly and declaration lists are complete. Only nit: hab repeats the a<=b inside the predicate."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A4",
-  "result": "pass",
-  "landing": "20261021T024144-L-3038134",
+  "reviewer": "C-52b50",
+  "group": "T1",
+  "result": "fix",
+  "landing": "20261026T100410-L-14247",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item theorem signature vs published (identical); moved Data module vs published item prefix per declaration (named predicates/defeq bodies only); 4 new sorry statements vs Stacks 09C2/09AL and their nodes; 3 direct + 3 transitive importers compiled against delivery (all OK)"
  }
 }

@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-lattice-character-koszul-boundary",
+ "kind": "statement",
+ "title": "Coordinate character extension and its Koszul derived boundary",
+ "statement": "Let $R$ be any commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention]. Use internal $R$-modules [sk-def-sfb-module-objects] and their ordinary derived category [def-weil-abstract-derived-category]. Let $r\\geq0$ and let $D=\\mathbf Z^r$ be discrete, with trivial action on $R$ [def-sfb-condensed-action-module]. For $i\\in\\{1,\\ldots,r\\}$, let $d_i:\\underline D\\to(R,+)$ be the condensed additive map induced by $(n_1,\\ldots,n_r)\\mapsto n_i1_R$, and let $\\delta_i:R[-1]\\to R\\Gamma_{R,D}(R[0])$ be its connecting character class normalized as in [lem-sfb-condensed-derived-restriction-calculus]. Put $K=K_R(R;1)$ with the subset signs of [lem-sfb-discrete-lattice-koszul-resolution], and let $u_I:R[-|I|]\\to K$ denote the chain inclusion of the subset $I$ with coefficient $1$. Let $\\lambda$ be any simultaneous triangulated, invariant-normalized comparison of [lem-sfb-lattice-koszul-triangulated-cup-comparison].\n\nThe formulas $E_i=R\\oplus R$ and $T_j(x,y)=(x+\\mathbf1_{j=i}y,y)$ define commuting invertible internal $R$-linear operators and an exact sequence of $D$-equivariant modules\n$$0\\longrightarrow R\\xrightarrow{x\\mapsto(x,0)}E_i\\xrightarrow{(x,y)\\mapsto y}R\\longrightarrow0.$$\nIts Koszul sequence is degreewise split by $s(y)=(0,y)$ and $\\pi(x,y)=x$ on every subset component, as underlying internal modules. Let $\\partial_i:QK\\to(QK)[1]$ be its canonical derived connecting morphism, with $Q$ localization at quasi-isomorphisms. It is represented by the cochain map with components $\\pi^{n+1}d_{K(E_i)}^n s^n$; its degree-zero component on the empty-subset inclusion has singleton $\\{j\\}$ component $\\mathbf1_{j=i}1_R$. With the canonical shift comparison, the shifted composite $\\partial_i\\circ Q(u_\\varnothing)$ is exactly $Q(u_{\\{i\\}}):R[-1]\\to QK$. Consequently\n$$\\delta_i=\\lambda_R\\circ Q(u_{\\{i\\}})$$\nas actual morphisms in $D(\\operatorname{Mod}_R)$, with the positive character normalization. The zero ring is allowed; no characteristic, flatness, or completeness assumption is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic dense-lattice normalization below the ordinary-open-direct-image route; returned parent proof steps 2 and 3: unipotent coordinate extension, underlying splitting, positive singleton boundary and character-class comparison. Agent formulation extracted from the returned parent proof, not a theorem asserted by the blueprint paragraph; exact internal-module reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-weil-abstract-derived-category",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "lem-sfb-condensed-derived-restriction-calculus"
+ ],
+ "proof": [
+  {
+   "text": "For a section $n$ of $\\underline D$, set $n(x,y)=(x+d_i(n)y,y)$. Additivity of $d_i$ gives $n(m(x,y))=(x+(d_i(n)+d_i(m))y,y)=(n+m)(x,y)$; the inverse is $(x,y)\\mapsto(x-d_i(n)y,y)$. These formulas are $R$-linear and natural under every profinite base change, as required by [def-sfb-condensed-action-module]. On constant basis vectors they give exactly the displayed $T_j$, hence the operators commute. Both $a(x)=(x,0)$ and $p(x,y)=y$ are equivariant for trivial endpoints. Underlying modules have $\\ker p=\\operatorname{im}a$, $p$ is split surjective, and $a$ is split injective. By [lem-sfb-condensed-derived-restriction-calculus], forgetting is exact and detects exactness, so this is a short exact sequence in the equivariant abelian category.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), algebraic dense-lattice normalization: agent expansion of the coordinate-character boundary calculation."
+   }
+  },
+  {
+   "text": "Apply the explicit finite Koszul construction of [lem-sfb-discrete-lattice-koszul-resolution] to the sequence. Equivariance makes $K(a)$ and $K(p)$ chain maps, since they commute with every $T_j-1$. In degree $n$, take the finite direct sum of $s(y)=(0,y)$ and $\\pi(x,y)=x$ over all $n$-element subsets. On each component, $\\pi a=1$, $ps=1$, and $a\\pi+sp=1$. Thus the Koszul sequence is degreewise split exact as underlying internal modules, including degrees outside $0,\\ldots,r$, where all objects are zero. The endpoint complexes are $K=K_R(R;1)$ and have zero differential because every endpoint operator is $1$. The sections $s$ and retractions $\\pi$ here are only graded maps; no equivariance or compatibility with the middle differential is asserted.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), algebraic dense-lattice normalization: agent expansion of the coordinate-character boundary calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-condensed-derived-restriction-calculus] with the trivial group to see that the internal module category is abelian. Apply [lem-sc-p1-split-ses-boundary-comparison] to the integer cochain complexes of step 2 and their displayed splittings. It gives the chain map $\\beta:K\\to K[1]$ with $\\beta^n=\\pi^{n+1}d_{K(E_i)}^n s^n$ and identifies its localization with the canonical short-exact-sequence boundary: $\\partial_i=Q(\\beta)$ with the canonical shift comparison. This is an equality with the canonical cone boundary, not merely the assertion that some triangle with these first two arrows is distinguished. The cited comparison uses the same positive split-boundary convention, with cone third arrow minus the projection.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sc-p1-split-ses-boundary-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0152 (lemma-derived-canonical-delta-functor), 014I (definition-split-ses), 014Q (definition-distinguished-triangle); split cochain formula in homology.tex, Tag 011J (lemma-ses-termwise-split-cochain)."
+   }
+  },
+  {
+   "text": "Use the differential formula of [lem-sfb-discrete-lattice-koszul-resolution]. For a tuple $y\\in K^n$ and a subset $J$ of size $n+1$, one has $(T_j-1)s(y_{J\\setminus\\{j\\}})=(\\mathbf1_{j=i}y_{J\\setminus\\{j\\}},0)$. Consequently $(\\beta^ny)_J$ is zero if $i\\notin J$ and otherwise equals $(-1)^{\\#\\{j\\in J:j<i\\}}y_{J\\setminus\\{i\\}}$. At $n=0$, the component for $J=\\{j\\}$ is $\\mathbf1_{j=i}y$, with positive sign. Therefore $\\beta u_\\varnothing:R[0]\\to K[1]$ is the map which is $1_R$ in the sole singleton $\\{i\\}$ and zero in the others. Shifting this chain map down by one identifies it with $u_{\\{i\\}}:R[-1]\\to K$; all relevant source and target differentials are zero. Localizing gives $(\\partial_i Q(u_\\varnothing))[-1]=Q(u_{\\{i\\}})$ with the canonical shift identifications.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), algebraic dense-lattice normalization: agent expansion of the coordinate-character boundary calculation."
+   }
+  },
+  {
+   "text": "Let $F=R\\Gamma_{R,D}$ and $e:R[0]\\to F(R[0])$ be its invariant unit. Regard the equivariant sequence as complexes in degree zero, and write $\\partial_{E_i}:R[0]\\to R[0][1]$ for its boundary. These objects are bounded below. Put $b_i:F(R[0])\\to F(R[0])[1]$ equal to $F(\\partial_{E_i})$ followed by the canonical shift comparison. The boundary and invariant-inclusion clauses of [lem-sfb-lattice-koszul-triangulated-cup-comparison] give $\\lambda_R[1]\\partial_i=b_i\\lambda_R$ and $\\lambda_RQ(u_\\varnothing)=e$. Composing gives $\\lambda_R[1]\\partial_iQ(u_\\varnothing)=b_ie$. By the connecting-class definition of [lem-sfb-condensed-derived-restriction-calculus], $(b_ie)[-1]=\\delta_i$: the action of a section $n$ on $s(1)$ has defect $(d_i(n),0)$, so its normalized cocycle is $+d_i$. Shift this equality down and substitute step 4 to obtain $\\delta_i=\\lambda_RQ(u_{\\{i\\}})$. The comparison's flat-algebra cup clause is not used; the argument applies to every simultaneous triangulated, invariant-normalized comparison in the statement.",
+   "uses": [
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), algebraic dense-lattice normalization: agent expansion of the coordinate-character boundary calculation."
+   }
+  },
+  {
+   "text": "For $r=0$ there is no coordinate $i$, so all coordinate assertions are vacuous. For $r=1$ the middle Koszul complex is $E_i\\xrightarrow{(x,y)\\mapsto(y,0)}E_i$, and the computed boundary is $+1_R$. For $R=0$ every module and every displayed map is zero and all equalities hold. The formulas use only finite sums, integer signs and the unit of $R$; in characteristic two the same formulas remain valid. No flatness or completeness condition has entered the argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), algebraic dense-lattice normalization: agent expansion of the coordinate-character boundary calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sc-p1-split-ses-boundary-comparison",
+  "lem-sfb-lattice-koszul-triangulated-cup-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), algebraic dense-lattice normalization below ordinary open direct image; explicit unipotent and Koszul component calculation, using Stacks Tags 011J, 014I, 014Q, 0152 through existing DAG lemmas.",
+  "group": "Q07",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(koszul.*(character|connecting|boundary)|(character|connecting).*koszul)",
+   "results": "{\"t\": \"2026-10-22T05:58:13Z\", \"tool\": \"grep\", \"query\": \"(koszul.*(character|connecting|boundary)|(character|connecting).*koszul)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"c9ca54f8aea9f997\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representation H1-to-character identifications and generic degreewise-split boundary maps do not compute the coordinate extension in the internal condensed-module Koszul model or identify its actual derived character morphism. Read LowDegree.lean:1014,1023 and HomotopyCategory/DegreewiseSplit.lean:47,70,78; the latter is already covered by the existing split-boundary dependency."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unipotent extension of a trivial module by itself for a coordinate homomorphism of Z power r has connecting class the singleton inclusion in the Koszul complex",
+   "results": "{\"t\": \"2026-10-22T05:58:13Z\", \"tool\": \"leansearch\", \"query\": \"The unipotent extension of a trivial module by itself for a coordinate homomorphism of Z power r has connecting class the singleton inclusion in the Koszul complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.extend.congr_simp\", \"groupCohomology.H1π_comp_H1IsoOfIsTrivial_hom\", \"groupCohomology.cocycles₁IsoOfIsTrivial.congr_simp\", \"groupCohomologyIsoExt\", \"groupCohomology.H1IsoOfIsTrivial\", \"ExteriorAlgebra.toTrivSqZeroExt_ι\", \"groupCohomology.shortComplexH1\", \"TrivSqZeroExt.inl\"], \"digest\": \"7274a4e3edbc0413\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representation H1-to-character identifications and generic degreewise-split boundary maps do not compute the coordinate extension in the internal condensed-module Koszul model or identify its actual derived character morphism. Read LowDegree.lean:1014,1023 and HomotopyCategory/DegreewiseSplit.lean:47,70,78; the latter is already covered by the existing split-boundary dependency."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"connecting\"",
+   "results": "{\"t\": \"2026-10-22T05:58:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\", \\\"connecting\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representation H1-to-character identifications and generic degreewise-split boundary maps do not compute the coordinate extension in the internal condensed-module Koszul model or identify its actual derived character morphism. Read LowDegree.lean:1014,1023 and HomotopyCategory/DegreewiseSplit.lean:47,70,78; the latter is already covered by the existing split-boundary dependency."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split short exact sequence of Koszul cochain complexes for commuting upper triangular unipotent operators has boundary given by projection differential splitting and identifies the derived coordinate character",
+   "results": "{\"t\": \"2026-10-22T05:58:24Z\", \"tool\": \"leanfinder\", \"query\": \"A split short exact sequence of Koszul cochain complexes for commuting upper triangular unipotent operators has boundary given by projection differential splitting and identifies the derived coordinate character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cocycleOfDegreewiseSplit\", \"CochainComplex.homOfDegreewiseSplit_f\", \"CochainComplex.homOfDegreewiseSplit\", \"SimplicialObject.Splitting.ιSummand_comp_d_comp_πSummand_eq_zero\", \"SimplicialObject.Splitting.d\", \"CategoryTheory.ShortComplex.Splitting.g_s\", \"Rep.standardComplex.d_comp_ε\", \"LieAlgebra.Extension.oneCochainOfTwoSplitting_apply\"], \"digest\": \"cd4a836e5e92d44e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representation H1-to-character identifications and generic degreewise-split boundary maps do not compute the coordinate extension in the internal condensed-module Koszul model or identify its actual derived character morphism. Read LowDegree.lean:1014,1023 and HomotopyCategory/DegreewiseSplit.lean:47,70,78; the latter is already covered by the existing split-boundary dependency."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a discrete integer lattice acting trivially on internal modules over a condensed ring the coordinate character extension has Koszul connecting morphism the singleton basis inclusion",
+   "results": "{\"t\": \"2026-10-22T05:58:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a discrete integer lattice acting trivially on internal modules over a condensed ring the coordinate character extension has Koszul connecting morphism the singleton basis inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.εToSingle₀\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.Presentation.differentials.comm₁₂\", \"Algebra.Presentation.differentials.comm₁₂_single\", \"Algebra.Presentation.differentials.comm₂₃\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"Rep.standardComplex.d_comp_ε\"], \"digest\": \"e8b9c6e6b507301e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representation H1-to-character identifications and generic degreewise-split boundary maps do not compute the coordinate extension in the internal condensed-module Koszul model or identify its actual derived character morphism. Read LowDegree.lean:1014,1023 and HomotopyCategory/DegreewiseSplit.lean:47,70,78; the latter is already covered by the existing split-boundary dependency."
+  },
+  {
+   "tool": "grep",
+   "query": "H1IsoOfIsTrivial|H1π_comp_H1IsoOfIsTrivial_hom",
+   "results": "{\"t\": \"2026-10-22T05:58:27Z\", \"tool\": \"grep\", \"query\": \"H1IsoOfIsTrivial|H1π_comp_H1IsoOfIsTrivial_hom\", \"sub\": \"RepresentationTheory/Homological/GroupCohomology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean\"], \"digest\": \"bf96a9f7919c0479\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary representation H1-to-character identifications and generic degreewise-split boundary maps do not compute the coordinate extension in the internal condensed-module Koszul model or identify its actual derived character morphism. Read LowDegree.lean:1014,1023 and HomotopyCategory/DegreewiseSplit.lean:47,70,78; the latter is already covered by the existing split-boundary dependency."
+  },
+  {
+   "tool": "grep",
+   "query": "homOfDegreewiseSplit|cocycleOfDegreewiseSplit",
+   "results": "{\"t\": \"2026-10-22T11:18:48Z\", \"tool\": \"grep\", \"query\": \"homOfDegreewiseSplit|cocycleOfDegreewiseSplit\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean\"], \"digest\": \"72e8ee5315ae303b\"}",
+   "date": "2026-10-22",
+   "verdict": "partial match only: homOfDegreewiseSplit, cocycleOfDegreewiseSplit and homOfDegreewiseSplit_f give the general split boundary (DegreewiseSplit.lean:43,63,68), already provided by existing DAG nodes. They do not compute the lattice coordinate extension or identify its normalized character under the Koszul comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a coordinate character of a discrete integer lattice the upper triangular extension has positive connecting class represented by a singleton in the Koszul complex of internal condensed modules",
+   "results": "{\"t\": \"2026-10-22T11:18:48Z\", \"tool\": \"leansearch\", \"query\": \"For a coordinate character of a discrete integer lattice the upper triangular extension has positive connecting class represented by a singleton in the Koszul complex of internal condensed modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isStrictlyLE_iff\", \"HomotopyCategory.instPretriangulatedIntUp\", \"NumberField.mixedEmbedding.euclidean.instDiscreteTopologySubtypeMixedSpaceMemSubmoduleIntIntegerLattice\", \"CochainComplex.ConnectData.X_ofNat\", \"HomotopyCategory.instIsTriangulatedIntUp\", \"CategoryTheory.InjectiveResolution.instIsStrictlyGECochainComplexOfNatInt\", \"CochainComplex.instIsStrictlyGEObjIntSingleFunctor\", \"CategoryTheory.InjectiveResolution.cochainComplex\"], \"digest\": \"b1a9df63917d5c06\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned hits. The standard representation resolution and cotangent-complex maps are different objects; the local-cohomology grep hit is unrelated. No hit states the internal condensed-module coordinate Koszul character comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.homOfDegreewiseSplit\"",
+   "results": "{\"t\": \"2026-10-22T11:18:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex.homOfDegreewiseSplit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CochainComplex.homOfDegreewiseSplit\", \"CochainComplex.homOfDegreewiseSplit_f\"], \"digest\": \"b82d74a651e18000\"}",
+   "date": "2026-10-22",
+   "verdict": "partial match only: homOfDegreewiseSplit, cocycleOfDegreewiseSplit and homOfDegreewiseSplit_f give the general split boundary (DegreewiseSplit.lean:43,63,68), already provided by existing DAG nodes. They do not compute the lattice coordinate extension or identify its normalized character under the Koszul comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connecting morphism of the coordinate unipotent extension for an integer lattice acting on internal condensed modules is the singleton Koszul inclusion",
+   "results": "{\"t\": \"2026-10-22T11:18:50Z\", \"tool\": \"leanfinder\", \"query\": \"The connecting morphism of the coordinate unipotent extension for an integer lattice acting on internal condensed modules is the singleton Koszul inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Rep.standardComplex.εToSingle₀\", \"Rep.standardComplex.ε\", \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"Rep.standardComplex.forget₂ToModuleCat\", \"Rep.FiniteCyclicGroup.resolution.π_f\", \"Algebra.Extension.h1Cotangentι_apply\"], \"digest\": \"c00736edc0eb3067\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned hits. The standard representation resolution and cotangent-complex maps are different objects; the local-cohomology grep hit is unrelated. No hit states the internal condensed-module coordinate Koszul character comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(Koszul|koszul).*(character|connecting|boundary)|(character|connecting|boundary).*(Koszul|koszul)",
+   "results": "{\"t\": \"2026-10-22T11:19:20Z\", \"tool\": \"grep\", \"query\": \"(Koszul|koszul).*(character|connecting|boundary)|(character|connecting|boundary).*(Koszul|koszul)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"c9ca54f8aea9f997\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read returned hits. The standard representation resolution and cotangent-complex maps are different objects; the local-cohomology grep hit is unrelated. No hit states the internal condensed-module coordinate Koszul character comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise split short exact sequence of cochain complexes gives its canonical derived connecting map by applying a retraction after the differential after a section",
+   "results": "{\"t\": \"2026-10-22T11:19:27Z\", \"tool\": \"leanfinder\", \"query\": \"A degreewise split short exact sequence of cochain complexes gives its canonical derived connecting map by applying a retraction after the differential after a section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.homOfDegreewiseSplit\", \"CochainComplex.cocycleOfDegreewiseSplit\", \"CochainComplex.homOfDegreewiseSplit_f\", \"CochainComplex.triangleOfDegreewiseSplit_mor₃\", \"CochainComplex.triangleOfDegreewiseSplit_mor₂\", \"CochainComplex.triangleOfDegreewiseSplit_mor₁\", \"CochainComplex.mappingConeHomOfDegreewiseSplitIso_hom_f\", \"CochainComplex.mappingCone.cocycleOfDegreewiseSplit_triangleRotateShortComplexSplitting_v\"], \"digest\": \"10052dd7de471464\"}",
+   "date": "2026-10-22",
+   "verdict": "partial match only: homOfDegreewiseSplit, cocycleOfDegreewiseSplit and homOfDegreewiseSplit_f give the general split boundary (DegreewiseSplit.lean:43,63,68), already provided by existing DAG nodes. They do not compute the lattice coordinate extension or identify its normalized character under the Koszul comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-discrete-lattice-cup-exterior",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), algebraic dense-lattice normalization below the ordinary-open-direct-image route; returned parent proof steps 2 and 3: unipotent coordinate extension, underlying splitting, positive singleton boundary and character-class comparison.",
+   "via": [
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lattice-character-koszul-boundary",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Proved the coordinate action and exactness, supplied every underlying Koszul splitting identity, applied the existing canonical-cone/split-boundary comparison, computed the full insertion-sign formula and positive singleton, and used the simultaneous triangulated normalization to obtain equality of actual derived character morphisms. Reused existing nodes throughout: no new nodes or new Mathlib leaves. Read the cited statements and checked rank zero, rank one, the zero ring and characteristic two. Repair of the promotion return at head 2dab280a69c: rebased by deliver.py onto the current DAG and re-read every cited statement, including the now re-split restriction calculus, Koszul resolution and triangulated comparison. All eight verbatim citations still hold. Step 5 now explicitly types the equivariant boundary and its shifted derived image and checks the bounded-below domain; the assembly does not use the separate flat-algebra cup clause. The statement, statement dependencies and proof route are retained.",
+  "blueprint": "Realizes paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md through the inherited dense-lattice branch: the algebraic coordinate-extension and positive character normalization used in parent lem-sfb-discrete-lattice-cup-exterior step 2. The blueprint paragraph itself does not state the internal-module lemma; this is an agent proof below that route. Ancestor lookup returns None, as in the inherited blueprint.from.node; no blueprint ancestry field is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-p1-split-ses-boundary-comparison",
+    "why": "Generic equality of the canonical cone boundary with the localization of the degreewise split cochain boundary. This is needed to identify actual derived arrows, and no node in this unit gives this general comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-p1-split-ses-boundary-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-2a5f28662",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-2a5f28662 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is a re-push after the landing refused the earlier head 2dab280a, which I had passed after a full read. I compared the two heads field by field: only step 5 and the split report changed. Statement, statement deps, steps 1-4 and 6, proof deps, source, blueprint fields and the tool use are identical, and the statement and statement deps match live exactly. The item is still unsplit with no proof on both live and side-live, so it is not superseded. There are 0 new nodes and 0 Mathlib leaves. Step 5 now gives types explicitly: the boundary ∂_{E_i} goes R[0]→R[0][1]; b_i is F(∂_{E_i}) followed by the canonical shift comparison; and the objects are shown to be bounded below. With λ[1]∂_i=b_iλ and λQ(u_∅)=e, this gives (b_i e)[-1]=δ_i with positive normalization, so δ_i=λQ(u_{i}). The flat-algebra cup clause is not used. I re-read on this snapshot every cited statement: action-module, restriction-calculus (exactness, Grothendieck abelian, the definition of [a] with j(x,y)=(x+a(j)y,y) and positive cocycle, which matches the defect t(1)=(0,1) of unipotent-class), koszul-resolution (subset sign formula, invariant inclusion), split-ses-boundary-comparison (diagrammatic s d_B r = conventional π d s; cone boundary = Q(d)), and triangulated-cup-comparison (triangulated on D^+, identifies the connecting morphisms, invariant normalization). Stacks homology.tex:3520 (Tag 011J) gives π^{n+1}∘d_B^n∘s^n. I recomputed (T_j-1)(0,y)=(1_{j=i}y,0): the insertion sign is (-1)^{#{j<i}}, it is +1 on the singleton, and β∘u_∅ shifted by -1 is u_{i}. Edge cases r=0, r=1, R=0 and characteristic 2 hold. proof_deps equal the union of the steps' uses. The closure of the cited nodes (767 nodes) does not contain the item, so there is no cycle. Tool use lem-sc-p1-split-ses-boundary-comparison is accepted as a generic comparison. No SGA is cited; the proof is marked as agent-written, with an honest WANTED."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeCharacterKoszulBoundary",
+  "declaration": "Profinite.DiscreteLattice.CharacterBoundary.lattice_character_koszul_boundary",
+  "declarations": [
+   "Profinite.DiscreteLattice.CharacterBoundary.raiseCommShift",
+   "Profinite.DiscreteLattice.CharacterBoundary.transportCharacterClass",
+   "Profinite.DiscreteLattice.CharacterBoundary.Extension",
+   "Profinite.DiscreteLattice.CharacterBoundary.sequence",
+   "Profinite.DiscreteLattice.CharacterBoundary.Inclusions",
+   "Profinite.DiscreteLattice.CharacterBoundary.lattice_character_koszul_boundary"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeCharacterKoszulBoundary.lean",
+  "statement": "theorem lattice_character_koszul_boundary (i : Fin r) (K : KoszulModel R r) (M : TriangulatedCup.TriangulatedModel R r K) (c : Comparison R r K) (hc : TriangulatedCup.ComparisonProperties R r K M c) (B : RestrictionCup.Bridge R r) (a : CategoryTheory.CondensedDerivedRestriction.Character (RestrictionCup.ring R) (ULift.{u} (Group r))) (ha : ∀ (S : Profinite.{u}) (g : C(S, ULift.{u} (Group r))) (n : ℤ), (∀ s : S, Multiplicative.toAdd (g s).down i = n) → a.app S g = (n : CategoryTheory.CondensedBar.sectionRing (RestrictionCup.ring R) S)) : ∃ (E : Extension R r i) (hE : (sequence R r E).ShortExact) (hK : ((sequence R r E).map K.functor).ShortExact) (σ : ∀ n : ℤ, (((sequence R r E).map K.functor).map (HomologicalComplex.eval (Modules R) (.up ℤ) n)).Splitting) (U : Inclusions R r K), (∀ j : Fin r, IsIso (E.action (generator j))) ∧ (∀ j k : Fin r, Commute (E.action (generator j)) (E.action (generator k))) ∧ (∀ (a b : ℤ), (K.functor.obj (RestrictionCup.regularAlgebra R r).X).d a b = 0) ∧ (∀ (n : ℤ) (I J : Subsets r n), biproduct.ι _ I ≫ (K.coordinates _ n).inv ≫ (σ n).s ≫ (K.coordinates _ n).hom ≫ biproduct.π _ J = if I = J then biprod.inr else 0) ∧ (∀ (n : ℤ) (I J : Subsets r n), biproduct.ι _ I ≫ (K.coordinates _ n).inv ≫ (σ n).r ≫ (K.coordinates _ n).hom ≫ biproduct.π _ J = if I = J then biprod.fst else 0) ∧ DerivedCategory.triangleOfSESδ hK = ShiftedHom.map (CochainComplex.homOfDegreewiseSplit ((sequence R r E).map K.functor) σ) DerivedCategory.Q ∧ (∀ n : ℤ, (CochainComplex.homOfDegreewiseSplit ((sequence R r E).map K.functor) σ).f n = (σ n).s ≫ (K.functor.obj (sequence R r E).X₂).d n (n + 1) ≫ (σ (n + 1)).r) ∧ (∀ j : Fin r, biproduct.ι _ (⟨∅, rfl⟩ : Subsets r 0) ≫ (K.coordinates (RestrictionCup.regularAlgebra R r).X 0).inv ≫ (CochainComplex.homOfDegreewiseSplit ((sequence R r E).map K.functor) σ).f 0 ≫ (K.coordinates (RestrictionCup.regularAlgebra R r).X 1).hom ≫ biproduct.π _ (⟨{j}, by simp⟩ : Subsets r 1) = if j = i then 𝟙 _ else 0) ∧ (DerivedCategory.Q.map (U.map 0 ⟨∅, rfl⟩) ≫ DerivedCategory.triangleOfSESδ hK)⟦(-1 : ℤ)⟧' ≫ (shiftFunctorCompIsoId (DerivedCategory.{u + 2} (Modules R)) (1 : ℤ) (-1 : ℤ) (add_neg_cancel 1)).hom.app _ = ((DerivedCategory.singleFunctors (Modules R)).shiftIso (-1) 1 0 (by decide)).hom.app (𝟙_ (Modules R)) ≫ DerivedCategory.Q.map (U.map 1 ⟨{i}, by simp⟩) ∧ transportCharacterClass R r B a = ((DerivedCategory.singleFunctors (Modules R)).shiftIso (-1) 1 0 (by decide)).hom.app (𝟙_ (Modules R)) ≫ DerivedCategory.Q.map (U.map 1 ⟨{i}, by simp⟩) ≫ c.iso.hom.app (RestrictionCup.regularAlgebra R r).X",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bcd8b663",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Only the item's lean field changes; 8 dependency nodes byte-identical to side-live; statement verbatim; Worker report and Second reading sections present; single sorry; no hollow defs (Extension/Inclusions are fully pinned specifications, transportCharacterClass is a composite of canonical isos raiseFactors/raise.commShiftIso/cohomologyIso). Clause by clause: action (x,y)->(x+n_i y,y) with inl/snd and short exactness; Koszul row short exact; splittings fixed to diagonal inr/fst in every degree; triangleOfSESδ = ShiftedHom.map homOfDegreewiseSplit Q; component s≫d≫r; degree-0 singleton coefficient 1_{j=i} (sign recomputed +1); shifted ∂Q(u_∅) = Q(u_{i}) via canonical shift isos; δ_i = λ_R∘Q(u_{i}) for every K, M, c, hc and every pinned Bridge; d_i pinned by ha, word for word coordinateCharacter_exists. Edge cases r=0 (vacuous), r=1, R=0, char 2, empty S, universes OK. Advisory: RestrictionCup.* owner def-sfb-lattice-restriction-cup-comparison and characterClass owner def-sfb-condensed-unipotent-class cited only through stmt_deps of cited nodes; raiseCommShift is a canonical global instance with no competing instance. No compile (no change)."
+ }
+}

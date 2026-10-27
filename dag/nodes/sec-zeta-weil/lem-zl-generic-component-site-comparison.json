@@ -19,25 +19,8 @@
  },
  "proof": [
   {
-   "text": "Affine base change makes V affine and ind-etale over Ω. The classification of affine ind-etale Ω-algebras as locally constant functions and the spectrum homeomorphism identify V with Ω[Q], using its actual connected-component quotient.",
+   "text": "Identify genericComponentFunctor T with the explicit componentFunctor T from the proof of affine_component_site_projection. Its geometric characterization gives a map to the explicit component scheme. It is a homeomorphism with isomorphic stalk maps, hence a scheme isomorphism; coordinate uniqueness proves naturality.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-ind-etale-stability",
-    "det-pe-condensed-point-basis",
-    "lem-weil-pbc-locally-constant-prime-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
-   }
-  },
-  {
-   "text": "Each affine ind-etale basis object over V is Ω[E], with its V-map corresponding uniquely to E→Q. Conversely every such profinite arrow induces an ind-etale algebra map. Finite jointly surjective families correspond to the affine fpqc covering families. Comparison on this cover-dense basis gives equivalence of sheaf categories. It is restriction along the canonical component functor: its locally ringed-space characterization identifies each E-test object with Ω[E]. Hence the inverse-image adjoint π_V⁻¹ is an equivalence.",
-   "uses": [
-    "lem-weil-pbc-ind-etale-basis",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
     "lem-zl-affine-component-site-projection"
    ],
    "elementary": false,
@@ -47,7 +30,20 @@
    }
   },
   {
-   "text": "For E→S, base change of U_E along V→U and V_(E×_S Q) have the same locally ringed space |V|×_S E and the same inverse-image structure sheaf from V. Uniqueness makes the identification natural in E. Restriction along these isomorphic test-object functors identifies the composite direct images. Take adjunction mates to get the required inverse-image square.",
+   "text": "For an affine weakly etale scheme over the algebraically closed field, use the proved affine classification and stalk-isomorphism lemmas of GeometricFieldProfiniteDenseSubsite. The source and target spaces are totally disconnected. The component universal property therefore identifies every affine pro-etale object over the fibre with the component object on its actual connected components. Prove the component functor full and faithful by its coordinate universal property. Affine cover density and the finite jointly surjective refinement criterion prove it is a dense subsite, so restriction and its left adjoint are equivalences.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-profinite-dense-subsite",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+   }
+  },
+  {
+   "text": "For any morphism f:V→T between affine schemes, explicitly construct the map from the component object indexed by E×_π₀(T)π₀(V) to T_E. Use the component universal property to prove that its square over f is a pullback. Coordinate uniqueness gives naturality in E. Transfer this isomorphism to the canonical generic component functors, form the resulting isomorphism of composite sheaf direct images, and take adjunction mates.",
    "uses": [
     "lem-zl-affine-component-site-projection",
     "def-weil-proetale-inverse-image"
@@ -59,10 +55,12 @@
    }
   },
   {
-   "text": "The same comparison for an absolute profinite E is V×_Ω Ω[E]=Ω[Q×E]. On the geometric-field profinite basis the structural map is therefore precisely E↦(Q×E→Q). Use the normalized geometric-field point adjunction and its profinite point factorization, then take mates. Empty V gives the empty profinite slice and the same formulas.",
+   "text": "For affine T, the relative profinite test object T[S] and the component object on π₀(T)×S represent the same maps, using the label bijection and the component universal property. Construct inverse maps preserving the structure and label projections; uniqueness proves their inverse laws and naturality. Transfer to the canonical functor and take adjunction mates using the specified point adjunction. Compose with the existing point inverse-image composition isomorphism for V→Spec Ω. All constructions allow empty objects.",
    "uses": [
+    "lem-zl-affine-component-site-projection",
+    "lem-sfb-relative-profinite-test-labels",
     "lem-weil-pbc-geometric-field-proetale-evaluation",
-    "sk-def-sfb-pullback-from-point"
+    "lem-weil-pbc-profinite-point-pullback"
    ],
    "elementary": false,
    "source": {
@@ -72,21 +70,20 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-ind-etale-stability",
-  "det-pe-condensed-point-basis",
-  "lem-weil-pbc-locally-constant-prime-spectrum",
-  "lem-weil-pbc-ind-etale-basis",
-  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
   "lem-zl-affine-component-site-projection",
+  "lem-weil-pbc-geometric-field-profinite-dense-subsite",
+  "lem-weil-pbc-ind-etale-basis",
   "def-weil-proetale-inverse-image",
+  "lem-sfb-relative-profinite-test-labels",
   "lem-weil-pbc-geometric-field-proetale-evaluation",
-  "sk-def-sfb-pullback-from-point"
+  "lem-weil-pbc-profinite-point-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "W5",
+  "date": "2026-10-23",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Proof of Theorem 4.13, diagram (4.4) and the following coefficient paragraph"
+  "place": "Proof of Theorem 4.13, diagram (4.4); explicit universal-property and adjunction-mate implementation using existing proved component and field-basis constructions"
  },
  "mathlib_searches": [
   {
@@ -154,13 +151,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-d5c2c",
-  "group": "V1",
-  "result": "fix",
-  "landing": "20261021T061721-L-1819126",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261024T191614-L-442750",
   "kind": "interface",
-  "note": "independent cc review: item theorem signature vs live (identical); extracted six decls vs live item (verbatim); new sorry lemmas vs HRS (4.4) site/coefficient argument; importers compiled against delivered/fixed tree"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

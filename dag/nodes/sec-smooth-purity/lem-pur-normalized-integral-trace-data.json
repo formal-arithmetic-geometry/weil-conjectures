@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-normalized-integral-trace-data",
+ "kind": "statement",
+ "title": "Integral trace equations at the given base orientation",
+ "statement": "Fix the finite-field/coefficient setting $P$ of [def-pur-conventions], separated finite-type Noetherian $k$-schemes $X,Y$, and an open/proper factorization of a smooth separated quasi-compact locally finite-type $k$-morphism of pure dimension $d\\ge0$, with the residue-field invertibility of $\\ell$. Fix a specified exceptional coefficient System $S$. Using the literal model, trace and orientation definitions of [def-sp-field-extension-integral-models, def-pur-tower-trace-comparison-data], there exist a field-shriek model system $M$, its field-extension result $R$ and comparison stages $T_E$ for all finite coefficient fields $E$, such that each actual orientation has the prescribed finite unit reductions and is invertible; extension of the counit trace of the actual base-field orientation equals the counit trace of the actual orientation at $E$; and for every finite-Tor integral input $K$, tracePurity of this counitTrace equals the actual tower map. The same $M,R,T_E$ are used throughout. This asserts no integral/condensed adjunction transport, chart construction or uniformizer target comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2--4, the actual realized tower map, unit trace and change of finite coefficient field"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sp-field-extension-integral-models",
+  "def-pur-tower-trace-comparison-data",
+  "det-sp-field-extension-towers"
+ ],
+ "proof": [
+  {
+   "text": "Take the simultaneous model system and stages of lem-pur-tower-trace-purity-comparison. At the base coefficient field use its actual orientation itself as the input isomorphism: its invertibility and the prescribed reduction hypothesis are already supplied by the same theorem. Retain the resulting scalar-trace equality. In the integral component of the comparison conclusion substitute this equality; retain the prescribed orientations and the same model data. The rational and common-stage conclusions are not needed for this projection.",
+   "uses": [
+    "lem-pur-tower-trace-purity-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-tower-trace-purity-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2--4; specialization and projection of the existing simultaneous comparison, separated from the final stage assembly to keep elaboration bounded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Specialize a simultaneous tower trace purity comparison to its own base orientation and retain the integral scalar trace equations",
+   "results": "Algebra.normalizedTrace, Algebra.intTrace and trace-in-a-tower results; no derived sheaf/tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.asIso",
+   "results": "CategoryTheory.asIso and asIso_hom turn an invertible morphism into its isomorphism; used for the specified base orientation. No sheaf-specific comparison theorem.",
+   "date": "2026-10-27",
+   "verdict": "generic proof tool, not the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized_integral_trace_data|PrescribedUnitReductions|tracePurity",
+   "results": "No Mathlib hits. The project comparison theorem supplies all these conclusions after specializing the given base orientation.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Steps 2--4, actual tower map and scalar traces",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedIntegralTraceData",
+  "file": "lean/Sheaf/Paper/NormalizedIntegralTraceData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.normalized_integral_trace_data",
+  "statement": "theorem normalized_integral_trace_data\n    [SmoothOfRelativeDimension d (j ≫ p)]\n    [IsNoetherian X] [IsNoetherian Y]\n    [QuasiCompact (j ≫ p)] [IsSeparated (j ≫ p)] [LocallyOfFiniteType (j ≫ p)]\n    [∀ x : X, Invertible (P.coefficients.l : X.residueField x)]\n    [∀ y : Y, Invertible (P.coefficients.l : Y.residueField y)]\n    (S : ConstructibleExceptionalCoefficients.System P.coefficients.l P.coefficients.Qbar\n      P.field P.coefficients.different (f := j ≫ p)) :\n    ∃ (M : FieldShriekSystem.Models P)\n      (R : FieldExtensionTowers.Result P M j p d)\n      (T : ∀ E : FieldShriekSystem.Index P,\n        TowerTracePurityComparison.Stage P j p d S.ring M E (R.model E)),\n      (∀ E : FieldShriekSystem.Index P,\n        TowerTracePurityComparison.PrescribedUnitReductions P j p d S.ring M E\n          (R.model E) (T E)\n          (TowerTracePurityComparison.orientation P j p d S.ring M E (R.model E) (T E)) ∧\n        IsIso (TowerTracePurityComparison.orientation P j p d S.ring M E (R.model E) (T E))) ∧\n      (∀ E : FieldShriekSystem.Index P,\n        TowerTracePurityComparison.extendedTrace P j p d S.ring M E (R.model E) (T E)\n            (TowerTracePurityComparison.counitTrace P j p d S.ring M\n              (TowerTracePurityComparison.base P) (R.model (TowerTracePurityComparison.base P))\n              (T (TowerTracePurityComparison.base P))\n              (TowerTracePurityComparison.orientation P j p d S.ring M\n                (TowerTracePurityComparison.base P)\n                (R.model (TowerTracePurityComparison.base P))\n                (T (TowerTracePurityComparison.base P)))) =\n          TowerTracePurityComparison.counitTrace P j p d S.ring M E (R.model E) (T E)\n            (TowerTracePurityComparison.orientation P j p d S.ring M E (R.model E) (T E))) ∧\n      ∀ (E : FieldShriekSystem.Index P)\n        (K : finiteTorConstructibleIntegralCategory P.coefficients.l E.val Y),\n        TowerTracePurityComparison.tracePurity P j p d S.ring M E (R.model E) (T E)\n            (TowerTracePurityComparison.counitTrace P j p d S.ring M E (R.model E) (T E)\n              (TowerTracePurityComparison.orientation P j p d S.ring M E (R.model E) (T E))) K =\n          TowerTracePurityComparison.tower P j p d S.ring M E (R.model E) (T E) K",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

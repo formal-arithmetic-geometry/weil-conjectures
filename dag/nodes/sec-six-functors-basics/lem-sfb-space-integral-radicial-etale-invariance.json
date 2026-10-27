@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-space-integral-radicial-etale-invariance",
+ "kind": "statement",
+ "title": "Integral radicial surjections preserve the category of etale algebraic spaces",
+ "statement": "Let $B$ be a scheme and work with algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Let $f:X\\to Y$ be representable, integral, universally injective and surjective. Explicitly, for every scheme $T$ and morphism $T\\to Y$, the fibre product $X_T=X\\times_YT$ is a scheme and $X_T\\to T$ is integral [def-weil-finite-integral-morphism], surjective on scheme points, and universally injective (every further scheme base change is injective on point sets). For an algebraic space $H$, let $\\operatorname{EtSp}(H)$ have objects all algebraic spaces $V$ equipped with a chartwise etale map $V\\to H$ [lem-trf-space-chartwise-etale-permanence], meaning that its composite with every representable etale scheme chart of $V$ is representable etale, and arrows all morphisms of algebraic spaces over $H$. Then the base-change functor $$\\operatorname{EtSp}(Y)\\longrightarrow\\operatorname{EtSp}(X),\\qquad (V\\to Y)\\longmapsto (X\\times_YV\\to X)$$ is an equivalence of categories. No quasi-compactness, separation, finite-presentation or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05ZH (theorem-topological-invariance), full statement; etale algebraic-space objects use the chartwise notion, not a representability assumption on their structure maps."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-integral-morphism",
+  "def-sfb-space-chartwise-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Base change is well defined by [lem-trf-space-chartwise-etale-permanence]. Choose a representable surjective etale scheme atlas $W\\to Y$ [def-trf-algebraic-space]. Put $A=X\\times_YW$, $R=W\\times_YW$ and $T=W\\times_YW\\times_YW$. The atlas and fibre-product statements show that $A,R,T$ are schemes and $A\\to X$ is a surjective etale atlas. By the explicit scheme-test hypothesis on $f$, the maps $f_W:A\\to W$, $f_R:X\\times_YR\\to R$ and $f_T:X\\times_YT\\to T$ are integral, universally injective and surjective. By [lem-pc-integral-radicial-surjective-universal-homeomorphism] each is a scheme universal homeomorphism, and [thm-weil-pbc-universal-homeomorphism-invariance] makes its inverse image an equivalence on sheaves of sets. Fix one common universe bound for the sites, charts and sheaves used here, allowing the generator coproducts in [lem-sfb-space-etale-sheaf-realization]. No geometric finiteness assumption enters this choice.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-weil-size-convention",
+    "lem-sfb-space-etale-sheaf-realization",
+    "lem-pc-integral-radicial-surjective-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Atlas reduction of Tag 05ZH; scheme invariance: etale-cohomology.tex Tag 04DZ. Size convention: spaces-properties.tex Tag 0GF6. Characterization: morphisms.tex Tag 04DF (lemma-universal-homeomorphism)."
+   }
+  },
+  {
+   "text": "First prove that $f^{-1}:\\operatorname{Sh}(Y_{\\mathrm{et}})\\to\\operatorname{Sh}(X_{\\mathrm{et}})$ is fully faithful. Its restriction to $A$ is $f_W^{-1}$ of restriction to $W$: both are the inverse image along the same composite $A\\to Y$, by [lem-trf-space-enlarged-etale-ringed-site-model]. The same observation holds on $X\\times_YR$ and $X\\times_YT$. Given $c:f^{-1}F\\to f^{-1}G$, restrict it to $A$. Full faithfulness of $f_W^{-1}$ gives a unique $b:F|_W\\to G|_W$ with that pullback. The two sides of the descent compatibility equation for $b$ on $R$ become equal under $f_R^{-1}$, since $c$ is global on $X$; faithfulness of $f_R^{-1}$ makes them equal. Atlas descent [lem-sfb-space-atlas-sheaf-descent] glues $b$ to a unique $a:F\\to G$. On $A$ the maps $f^{-1}a$ and $c$ agree, so they agree globally by the faithful restriction part of atlas descent for $A\\to X$. Finally, if two maps $a$ have the same pullback, faithfulness on $W$ makes their restrictions equal and faithful atlas restriction makes the maps equal. This proves both fullness and faithfulness.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-sfb-space-atlas-sheaf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 05ZH, full faithfulness, implemented by spaces-properties.tex Tag 05YY and scheme invariance rather than the defective closed-graph assertion."
+   }
+  },
+  {
+   "text": "For essential surjectivity, let $K$ be a sheaf on $X_{\\mathrm{et}}$. Scheme invariance for $f_W$ gives a sheaf $G$ on $W_{\\mathrm{et}}$ and an isomorphism $\\theta:f_W^{-1}G\\simeq K|_A$. The canonical descent isomorphism for $K|_A$ on $A\\times_XA=X\\times_YR$, conjugated by the two pullbacks of $\\theta$, is an isomorphism between the pullbacks of $p_1^{-1}G$ and $p_2^{-1}G$. By fullness of $f_R^{-1}$ it lifts to a map $\\alpha:p_1^{-1}G\\to p_2^{-1}G$; lift its inverse too. Faithfulness makes the two composites identities, so $\\alpha$ is invertible. On $T$ the cocycle equation for $\\alpha$ becomes the cocycle equation for the canonical datum of $K$ after $f_T^{-1}$. Its faithfulness therefore proves the equation on $T$. Atlas descent gives $F$ on $Y$ with descent pair $(G,\\alpha)$. The isomorphism $\\theta$ is compatible with descent by the definition of $\\alpha$, so atlas descent for $A\\to X$ glues it to $f^{-1}F\\simeq K$. The restriction identifications used here are the composition comparisons of the canonical small-etale morphism. Together with the previous step this proves that $f^{-1}$ is an equivalence.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-sfb-space-atlas-sheaf-descent",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Scheme input: etale-cohomology.tex Tag 04DZ; atlas descent and cocycle: spaces-properties.tex Tag 05YY; composition: Tag 03G2."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-etale-sheaf-realization] over $Y$ and $X$. Its explicit construction identifies the functor on spaces with the sheaf equivalence just proved: for every sheaf $F$ on $Y$ and scheme test $T\\xrightarrow{x}X$, both $X\\times_YE_Y(F)$ and $E_X(f^{-1}F)$ have sections $(x,s)$ with $s\\in\\Gamma(T,(fx)^{-1}F)=\\Gamma(T,x^{-1}f^{-1}F)$. The equality is the canonical composition comparison of [lem-trf-space-enlarged-etale-ringed-site-model], and commutes with restriction and sheaf maps. Hence it gives a natural isomorphism of algebraic spaces over $X$. The natural counits $E_H(h_V)\\simeq V$ identify this with the given base-change functor on every object and arrow. Conjugating $f^{-1}$ by the two realization equivalences therefore proves exactly that $V\\mapsto X\\times_YV$ is an equivalence on all chartwise etale algebraic spaces. This includes objects with nonrepresentable or nonseparated structure maps.",
+   "uses": [
+    "lem-sfb-space-etale-sheaf-realization",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "spaces-properties.tex Tag 0GF6, construction preceding the lemma and natural unit/counit; Tag 03G2, functoriality of inverse image."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-pc-integral-radicial-surjective-universal-homeomorphism",
+  "lem-sfb-space-atlas-sheaf-descent",
+  "lem-sfb-space-etale-sheaf-realization",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-fibre-products-etale-covers",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05ZH (theorem-topological-invariance), scheme-atlas reduction; repaired full faithfulness by atlas descent of sheaves (spaces-properties.tex Tag 05YY), followed by Tag 0GF6 realization. Source graph error recorded in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|integral.*universally.*injective|radicial.*[Ee]tale",
+   "results": "Actual logged search: 0 hits; . Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphism properties, the scheme etale over-category, or ring-level etaleness; none supplies descent of etale algebraic spaces over an algebraic-space base"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral radicial surjections of algebraic spaces induce equivalence of categories of etale spaces",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsIntegralHom, RingHom.Etale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphism properties, the scheme etale over-category, or ring-level etaleness; none supplies descent of etale algebraic spaces over an algebraic-space base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral universally injective surjective morphism of algebraic spaces base change is an equivalence on etale algebraic spaces",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphism properties, the scheme etale over-category, or ring-level etaleness; none supplies descent of etale algebraic spaces over an algebraic-space base"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"Etale\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme morphism properties, the scheme etale over-category, or ring-level etaleness; none supplies descent of etale algebraic spaces over an algebraic-space base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral universally injective surjections induce equivalence of categories of etale algebraic spaces",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale and ring-level base-change results do not give equivalence of etale algebraic spaces over an algebraic-space base"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|radicial.*[Ee]tale|[Ee]tale.*[Ee]quivalence",
+   "results": "Actual logged search: 3 hits; Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale and ring-level base-change results do not give equivalence of etale algebraic spaces over an algebraic-space base"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change by a universal homeomorphism is an equivalence on etale algebraic spaces",
+   "results": "Actual logged search: 8 hits; Algebra.Etale.baseChange, Algebra.Etale.of_equiv, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.LocallyRingedSpace.stalkMap_hom_inv_apply, Algebra.FormallyEtale.of_equiv, RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale and ring-level base-change results do not give equivalence of etale algebraic spaces over an algebraic-space base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological invariance of the category of etale spaces over an algebraic space",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.SheafedSpace.instTopologicalSpaceCarrierCarrier",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale and ring-level base-change results do not give equivalence of etale algebraic spaces over an algebraic-space base"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-thickening-etale-scheme-equivalence",
+  "date": "2026-10-23",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Etale scheme charts in Tag 07W3, proof of (1)-(5) and flat counit, via equation-cube-over (07W2). Input for lifting a scheme object across U -> Y and X -> Z: Stacks 05ZS, lemma-thickening-equivalence. Supporting theorem for 05ZS: spaces-more-morphisms.tex Tag 05ZH (theorem-topological-invariance), equivalence on etale algebraic-space objects before restricting to schemes.",
+   "via": [
+    "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "lem-sfb-space-pushout-compatible-etale-charts",
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-integral-radicial-etale-invariance",
+  "worker": "stage1",
+  "summary": "Retained the full statement and its scheme-test representability hypothesis. Replaced the faulty source graph argument by sheaf descent on an etale scheme atlas, double overlap and triple overlap, using the existing scheme invariance theorem. Added statement-only atlas-descent and algebraic-space-base realization inputs with genuine logged searches. Checked every cited statement, arbitrary etale space objects, empty and nonseparated cases, universe convention and all source hypotheses.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) dependency chain at 05ZS/05ZH. The current latest direct-images proof (3) gives the high-level direct-image route; this item supplies its inherited algebraic-space lifting prerequisite, not a change to that route. Its four steps implement 05ZH by scheme-atlas reduction and sheaf descent/realization. No independent blueprint node for either supporting statement was found.",
+  "tool_uses": [
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Scheme universal-homeomorphism invariance is a generic input on the atlas, its double overlap and its triple overlap; this unit contains no scheme invariance substitute."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Canonical small-etale morphisms, composition and localization for algebraic spaces are a generic site-model tool needed to identify the atlas restrictions and the actual base-change functor."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic chartwise etale base-change permanence makes the stated functor well defined; it does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre products and etale base-change coverings identify the scheme atlas and its overlaps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-185be5b45",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-185be5b45 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. Sources read: Stacks 05ZH (statement and whole proof), 05YY (lemma-descent-sheaf) and 0GF6 (the construction, statement and size footnote). The item statement matches 05ZH (f representable, integral, universally injective, surjective; EtSp means all chartwise-étale spaces) and is neither weakened nor changed; the parent thickening node still gets what it cites. The source error is real: the graph of c is a section of an étale map, so it is open, but it is closed only when V is separated over Y. The doubled-origin-line counterexample is correct, and the delivery's route avoids that step. Step 1: W, R, T are schemes by the fibre-product node; A, X×R, X×T are schemes by the item's scheme-test hypothesis; then 04DF gives universal homeomorphisms (lem-pc) and thm-weil-pbc gives that u^{-1} is an equivalence. Step 2: full faithfulness of f^{-1}, with restriction to A = f_W^{-1}∘restriction by the composition clause of the site model, a lift on W, the compatibility on R by faithfulness, and gluing and equality on the atlases W→Y and A→X by the arrow part of the descent node. Step 3: essential surjectivity by descending (G, α), with the cocycle on T by faithfulness and θ glued. Step 4: the explicit (x,s) calculation gives X×_Y E_Y ≅ E_X∘f^{-1}, and with the counits this is the actual base-change functor; no representability or separation of V is used. New nodes: atlas-descent (05YY) and realization (0GF6 over an algebraic-space base, size hypothesis explicit) are both true, satisfy B1-B7 with all three search kinds recorded, and are not clauses of the item. They are not duplicates of lem-a1-etale-sheaf-algebraic-space-realization (scheme base only), lem-pe-site-sheaf-gluing (04TR, existence only), the fppf-level 0ADT nodes def-sfb-space-cover-sheaf-descent-categories and lem-sfb-fppf-space-datum-sheaf-realization, lem-sfb-etale-sheaf-space-atlas-bootstrap (0BH4) or the Rydh node (needs quasi-separated spaces). The item is still unsplit in live, and neither new id exists there. lem-pc and thm-weil-pbc lie inside the unit's route; the four declared tool uses are accepted as generic foundations. Batch 5: def-trf-algebraic-space is a definition; the site model (03G0-03LP), fibre products (02X2) and chartwise étale permanence (03FR-03FV) have closures containing only space-foundation trf nodes, with no nt-assume, Poincaré, trace-transport or trf theorem node, so all seven flags are accepted. No SGA source is used. No fixes were written."
+ }
+}

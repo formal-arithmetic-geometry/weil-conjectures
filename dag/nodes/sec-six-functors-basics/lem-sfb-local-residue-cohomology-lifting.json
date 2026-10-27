@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-local-residue-cohomology-lifting",
+ "kind": "statement",
+ "title": "Surjective zeroth cohomology reduction from first residue vanishing",
+ "statement": "Let R be a commutative local ring with residue field k. Let C be a cochain complex of R-modules [def-pc-derived-category], supported between integers a and b, with finite free terms [def-weil-pbc-free-module]. Define the residue complex by extension of scalars to k followed by restriction to R; define the reduction map on cohomology using the extension-restriction adjunction unit. If the first cohomology of the residue complex is zero, this canonical reduction map is surjective in degree zero. No reducedness or other cohomology vanishing is assumed.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 07VK, residue-vector lifting using the minimal local complex of algebra.tex Tag 00MT"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-local-finite-free-minimal-model] to replace C by a bounded finite free minimal complex D. Extension and restriction of scalars preserve homotopies, so they preserve this homotopy equivalence and its cohomology isomorphisms.",
+   "uses": [
+    "lem-sfb-local-finite-free-minimal-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MT"
+   }
+  },
+  {
+   "text": "All residue differentials of D vanish: each image lies in the maximal ideal times the target, and these scalars act by zero in k. Exactness of the residue complex in degree one therefore makes its degree-one term zero. Nakayama (Mathlib IsLocalRing.subsingleton_tensorProduct) makes D^1 zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MT and Nakayama"
+   }
+  },
+  {
+   "text": "Every vector of D^0 is a cycle. The map D^0 to its residue term is surjective: for a pure tensor r tensor x, lift r through R to k and move it to the x factor; use tensor induction for sums. Hence the induced map of cycles and the induced map of cohomology are surjective. Naturality of the extension-restriction unit transports surjectivity through the two homotopy-equivalence cohomology isomorphisms back to C.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 07VK and remark-explain-perfect-direct-image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-local-finite-free-minimal-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 07VK, residue-vector lifting using the minimal local complex of algebra.tex Tag 00MT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded finite free complex over a local ring with vanishing first residue cohomology has surjective reduction on zeroth cohomology",
+   "results": "groupCohomology.shortComplexH0_exact, CochainComplex.HomComplex.CohomologyClass.mk_zero, and general zero-object instances; none is residue reduction for module complexes.",
+   "date": "2026-10-27",
+   "verdict": "no match: no declaration states this assertion in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite free complex over local ring H1 residue zero surjective H0 reduction",
+   "results": "Cotangent H1 vanishing and group homology results; none applies.",
+   "date": "2026-10-27",
+   "verdict": "no match: no declaration states this assertion in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "residueCohomologyMap|IsMinimal|isMinimal in Mathlib/Algebra/Homology; subsingleton_tensorProduct in Mathlib/RingTheory/LocalRing/Module.lean",
+   "results": "No minimal-complex or residue-cohomology lifting result. IsLocalRing.subsingleton_tensorProduct supplies the Nakayama step only.",
+   "date": "2026-10-27",
+   "verdict": "no match: no declaration states this assertion in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatFibreSectionLifting",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-proper-flat-fibre-section-lifting",
+   "place": "Supporting finite-complex section-lifting argument, steps 2-7; the inherited unit route and statement are unchanged.",
+   "via": [
+    "lem-sfb-proper-flat-fibre-section-lifting",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalResidueCohomologyLifting",
+  "declaration": "CochainComplex.surjective_residueCohomologyMap_zero",
+  "statement": "theorem surjective_residueCohomologyMap_zero {R : Type u} [CommRing R] [IsLocalRing R]\n    (C : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ)\n    [C.IsStrictlyGE a] [C.IsStrictlyLE b]\n    [∀ i : ℤ, Module.Free R (C.X i)] [∀ i : ℤ, Module.Finite R (C.X i)]\n    (hH : Subsingleton (C.residueComplex.homology 1)) :\n    Function.Surjective (C.residueCohomologyMap 0)",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27",
+  "file": "lean/Sheaf/Algebra/Homology/LocalResidueCohomologyLifting.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T094516-L-236849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T094516-L-236849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

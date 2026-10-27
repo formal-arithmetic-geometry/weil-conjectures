@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-rational-p1-second-pull-section",
+ "kind": "lemma",
+ "title": "The two pullback identifications agree on the diagonal",
+ "statement": "Let $\\ell$ be a prime, let $c$ specify either a finite extension of $\\mathbf Q_\\ell$ in its fixed algebraic closure or the algebraic-closure coefficient, and put $\\Lambda=(\\operatorname{coefficient}\\ell c).X$. Let $k$ be a field of prime characteristic $p\\ne\\ell$ and $Y$ any $k$-scheme. Use the coefficients, Tate lines and canonical comparison of [def-sfb-rational-p1-second-pull-comparison]. Put $P=\\mathbf P^1_Y$, $q:P\\to Y$, $W=P\\times_Y P$, and write $p_1,p_2:W\\to P$ and $\\Delta:P\\to W$ for the projections and diagonal. Use the ordinary unbounded internal-module derived categories and fixed functors of [def-sfb-projective-diagonal-pullback]. For arbitrary $K\\in D_\\Lambda(Y)$ set $M=q^*K(1)[2]$, and let $e_M:p_1^*M\\simeq p_2^*M$ be secondPullComparison. Let $s_i:\\Delta^*p_i^*\\simeq\\mathrm{Id}$ be the canonical pullSectionIso for $\\Delta p_i=\\mathrm{id}_P$. Then, writing semicolons in application order, $$\\Delta^*(e_M^{-1});s_{1,M}=s_{2,M}.$$ This equality has no projection map, supported coefficient source, diagonal class, or trace. The Lean proposition [def-sfb-projective-pull-section-compatibility] has exactly this equation as its single field.",
+ "stmt_deps": [
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-projective-pull-section-compatibility"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, cancellation on the diagonal before integration."
+ },
+ "proof": [
+  {
+   "text": "Expand secondPullComparison into the two pullTwistIso maps and the canonical square comparison on q*K. Compute the latter after Delta using the representative-normalized pullback compositors. Associativity of inverse-image and scalar-extension composition identifies both paths with the pullback of K along q, because Delta p1 = Delta p2 = id. The identity compositor gives the same section comparison on this factor.",
+   "uses": [
+    "def-sfb-rational-p1-second-pull-comparison",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each root sheaf mu_(ell^n), inverse-image composition sends a local root to the same pulled-back root; both composites Delta pi are identity, so their restrictions agree with identity. These equalities commute with the root transition maps. Hence they pass to the inverse limit, coefficient scalar extension and inversion of ell defining the rational Tate line. For the closure coefficient, check after every finite-subextension coprojection; the colimit universal property gives the same equality. This proves the equality of the two restricted line comparisons, including their single-complex and shift maps.",
+   "uses": [
+    "def-sfb-rational-tate-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the two factor equalities using the actual pullback tensor comparison. On flat-term K-flat representatives, the tensor comparison and the pullback compositor both send a pure tensor r tensor (m tensor n) to (r tensor m) tensor (1 tensor n); associativity of scalar multiplication makes the two orders of composition identical. The representative normalizations therefore give the equality after localization. The unrestricted delta_comparison and composition_comparison clauses of ModuleRingedComparison identify these with the fixed internal-module transformations, without using the finite-type wrapper theorem. Apply the natural shift comparison to the same equality, and then compose with the inverse secondPullComparison to obtain the displayed equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "def-sfb-rational-p1-second-pull-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-rational-p1-second-pull-comparison",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-sfb-rational-tate-pullback-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pd-module-ringed-topos-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, cancellation on the diagonal before integration.",
+  "note": "Extracted a strict component of the assigned insertion argument; the formal proof remains open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal.*pullback|pullback.*diagonal",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean. These give ordinary diagonal and pullback identities; none states the derived Tate comparison restriction.",
+   "date": "2026-10-27",
+   "verdict": "No exact derived-coherence theorem; the ordinary diagonal identities are used in the section comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback.diagonal\"",
+   "results": "12 hits: CategoryTheory.Limits.pullback.diagonalObj, CategoryTheory.Limits.pullback.diagonal, CategoryTheory.Limits.pullback.diagonal_isKernelPair, CategoryTheory.Limits.pullback.diagonal_fst, CategoryTheory.Limits.pullback.diagonal_snd, CategoryTheory.Limits.pullback.diagonal_fst_assoc, CategoryTheory.Limits.pullback.diagonal_snd_assoc, CategoryTheory.Limits.pullback.diagonal_comp. These give ordinary diagonal and pullback identities; none states the derived Tate comparison restriction.",
+   "date": "2026-10-27",
+   "verdict": "No exact derived-coherence theorem; the ordinary diagonal identities are used in the section comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived pullback composition comparison restricts to identity on a common section of the projections of a fiber product",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.t_id, CategoryTheory.Over.prodComparisonIso_pullback_Spec_inv_left_fst_fst', AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst, CategoryTheory.Limits.pullbackComparison_comp_fst, CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_snd, CategoryTheory.Limits.pullbackComparison_comp_snd. These give ordinary diagonal and pullback identities; none states the derived Tate comparison restriction.",
+   "date": "2026-10-27",
+   "verdict": "No exact derived-coherence theorem; the ordinary diagonal identities are used in the section comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The two pullback composition comparisons along the diagonal of a fiber product agree with the identity section comparison",
+   "results": "8 hits: CategoryTheory.Limits.pullbackDiagonalMapIdIso, CategoryTheory.Limits.pullbackDiagonalMapIdIso_hom_fst_assoc, CategoryTheory.Limits.pullbackDiagonalMapIdIso_hom_snd_assoc, CategoryTheory.Limits.pullbackDiagonalMapIdIso_hom_snd, CategoryTheory.Limits.pullbackDiagonalMapIdIso.congr_simp, CategoryTheory.Limits.pullbackDiagonalMapIdIso_hom_fst, CategoryTheory.Limits.pullbackDiagonalMapIdIso_inv_snd_fst_assoc, CategoryTheory.Limits.pullback_diagonal_map_snd_snd_fst. These concern ordinary sheaves or geometric pullback maps; none states the required derived compatibility.",
+   "date": "2026-10-27",
+   "verdict": "No exact matching theorem in Mathlib; use the stated derived coherence dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondDiagonalInsertionFactor",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-triangle",
+   "place": "Second identity: for M=q^*K(1)[2], the base change map cancels against Rp_{2*} Delta_* = id, before applying integration.",
+   "via": [
+    "lem-sfb-rational-p1-second-diagonal-insertion-factor",
+    "lem-sfb-rational-p1-second-ambient-contraction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SecondPullSection",
+  "file": "lean/Sheaf/Paper/RationalP1SecondPullSection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.second_pull_section",
+  "statement": "theorem second_pull_section\n    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))\n    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)\n    (Y : Scheme.{u}) [Y.Over (Spec (.of k))]\n    (K : DerivedCategory (Modules (coefficient l c).X Y)) :\n    PullSectionCompatibility\n      (moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y))\n      (moduleObjectDerivedPullback (coefficient l c).X (secondProjection Y))\n      (moduleObjectDerivedPullback (coefficient l c).X (diagonalImmersion Y))\n      (pullSectionIso (coefficient l c).X Y (firstProjection Y)\n        (by unfold firstProjection; exact pullback.diagonal_fst _))\n      (pullSectionIso (coefficient l c).X Y (secondProjection Y)\n        (by unfold secondProjection; exact pullback.diagonal_snd _))\n      ((twist (coefficient l c).X (ProjectiveLine Y)\n        (line l c (ProjectiveLine Y))).obj\n        ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K))\n      (secondPullComparison l c k p hpl Y K).inv",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T123420-L-2294132",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T123420-L-2294132",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

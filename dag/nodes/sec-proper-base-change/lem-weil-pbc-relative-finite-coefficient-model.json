@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-relative-finite-coefficient-model",
+ "kind": "statement",
+ "title": "Exact small-site model for relative finite coefficient complexes",
+ "statement": "theorem exists_relative_finite_coefficient_model {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {B R : Type (u + 1)} [CommRing B] [CommRing R] [Finite B] [Finite R]\n    (f : B →+* R)\n    (K : DerivedCategory (pbcModules X (adicLisseConstantRing X B))) :\n    let J := proEtaleModelTopology Y\n    ∃ L : CategoryTheory.ConstantCompletion.D\n        (CategoryTheory.ConstantCompletion.constant J B),\n      (∀ q : ℤ, IsZero ((DerivedCategory.homologyFunctor\n          (pbcModules X (adicLisseConstantRing X B)) q).obj K) →\n        IsZero ((coefficientModelCohomology _ q).obj L)) ∧\n      (∀ q : ℤ, IsRelativelyFiniteLisseModule g B\n          ((DerivedCategory.homologyFunctor\n              (pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X B))) q).obj\n            ((adicTowerPullback g (adicLisseConstantRing X B)).obj K)) ↔\n        SheafOfModules.IsLocallyConstantFiniteTypeModules J B\n          ((coefficientModelCohomology _ q).obj L)) ∧\n      (∀ q : ℤ, IsRelativelyFiniteLisseModule g R\n          ((DerivedCategory.homologyFunctor\n              (pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X R))) q).obj\n            ((adicTowerPullback g (adicLisseConstantRing X R)).obj\n              ((pbcDerivedExtend ((constantSheaf (ProEt.topology X)\n                CommRingCat.{u + 1}).map (CommRingCat.ofHom f))).obj K))) ↔\n        SheafOfModules.IsLocallyConstantFiniteTypeModules J R\n          ((coefficientModelCohomology _ q).obj\n            ((adicFiniteExtension J f).obj L)))",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 093U, slice constant models; sites.tex Tag 03A0, equivalence of sites; sites-cohomology.tex Tags 06YY and 094I, scalar extension"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "lem-sfb-adic-finite-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Define P as the actual derived inverse image of K and L as relativeFiniteModelDerived(g,B)(P), using the explicitly constructed coefficient transport. The exact pullback and transport homology isomorphisms show that zero cohomology of K implies zero cohomology of L.",
+   "uses": [
+    "lem-weil-pbc-relative-finite-coefficient-transport",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the slice constant-model comparison with the same module M. Pull a final-object covering sieve back to an arbitrary object and then along AsSmall.down; conversely evaluate the small-site local-model condition at AsSmall.up of the final object and pull back along AsSmall.up. Convert finite underlying modules to finite generation, and finite generation over finite B back to finite underlying modules. This proves the ordinary relative-lissity equivalence. Transport it to cohomology via the exact-functor homology isomorphism.",
+   "uses": [
+    "lem-weil-pbc-relative-finite-constant-slice-comparison",
+    "lem-weil-pbc-relative-finite-coefficient-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the derived scalar-transport natural isomorphism at K, map it through cohomology, and compose it with the exact transport homology isomorphism. Apply the ordinary relative-lissity equivalence over R and invariance of the covering-sieve predicate under module isomorphism.",
+   "uses": [
+    "lem-weil-pbc-relative-finite-scalar-transport",
+    "lem-weil-pbc-relative-finite-constant-slice-comparison",
+    "lem-weil-pbc-relative-finite-coefficient-transport"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-relative-finite-coefficient-transport",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-relative-finite-constant-slice-comparison",
+  "lem-weil-pbc-relative-finite-scalar-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites.tex Tag 03A0, lemma-equivalence; sites-cohomology.tex Tags 06YY and 0D6D, derived pullback and composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of sites transports constant coefficient module sheaves, derived scalar extension, and locally constant finite type cohomology",
+   "results": "8 hits; CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscrete, CategoryTheory.Sheaf.isConstant_congr, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁",
+   "date": "2026-10-27",
+   "verdict": "No theorem with this full project statement; use the project comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafCongr\"",
+   "results": "12 hits; CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.sheafCongr_functor, CategoryTheory.Equivalence.sheafCongr_inverse, CategoryTheory.Equivalence.sheafCongr.functor_obj_obj_obj, CategoryTheory.Equivalence.sheafCongr.inverse_obj_obj_obj, CategoryTheory.Equivalence.sheafCongr.counitIso",
+   "date": "2026-10-27",
+   "verdict": "No theorem with this full project statement; use the project comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryHomologyFunctorIso",
+   "results": "0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No theorem with this full project statement; use the project comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedTowerLissePropagation",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-normalized-tower-lisse-propagation",
+   "place": "Coefficient comparison and nilpotent propagation",
+   "via": [
+    "new-lem-weil-pbc-normalized-tower-lisse-propagation"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeFiniteCoefficientModel",
+  "file": "lean/Sheaf/Paper/RelativeFiniteCoefficientModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_relative_finite_coefficient_model",
+  "statement": "theorem exists_relative_finite_coefficient_model {X Y : Scheme.{u}} (g : Y ⟶ X)\n    {B R : Type (u + 1)} [CommRing B] [CommRing R] [Finite B] [Finite R]\n    (f : B →+* R)\n    (K : DerivedCategory (pbcModules X (adicLisseConstantRing X B))) :\n    let J := proEtaleModelTopology Y\n    ∃ L : CategoryTheory.ConstantCompletion.D\n        (CategoryTheory.ConstantCompletion.constant J B),\n      (∀ q : ℤ, IsZero ((DerivedCategory.homologyFunctor\n          (pbcModules X (adicLisseConstantRing X B)) q).obj K) →\n        IsZero ((coefficientModelCohomology _ q).obj L)) ∧\n      (∀ q : ℤ, IsRelativelyFiniteLisseModule g B\n          ((DerivedCategory.homologyFunctor\n              (pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X B))) q).obj\n            ((adicTowerPullback g (adicLisseConstantRing X B)).obj K)) ↔\n        SheafOfModules.IsLocallyConstantFiniteTypeModules J B\n          ((coefficientModelCohomology _ q).obj L)) ∧\n      (∀ q : ℤ, IsRelativelyFiniteLisseModule g R\n          ((DerivedCategory.homologyFunctor\n              (pbcModules Y ((adicTowerInverseImage g).obj (adicLisseConstantRing X R))) q).obj\n            ((adicTowerPullback g (adicLisseConstantRing X R)).obj\n              ((pbcDerivedExtend ((constantSheaf (ProEt.topology X)\n                CommRingCat.{u + 1}).map (CommRingCat.ofHom f))).obj K))) ↔\n        SheafOfModules.IsLocallyConstantFiniteTypeModules J R\n          ((coefficientModelCohomology _ q).obj\n            ((adicFiniteExtension J f).obj L)))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T012947-L-2352163",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261027T034650-L-3672174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

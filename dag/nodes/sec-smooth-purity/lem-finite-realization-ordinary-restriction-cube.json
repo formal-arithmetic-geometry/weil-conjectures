@@ -1,0 +1,118 @@
+{
+ "id": "lem-finite-realization-ordinary-restriction-cube",
+ "kind": "statement",
+ "title": "The ordinary realization/restriction/direct-image cube",
+ "statement": "Let A and B be finite commutative rings, φ:A→B a ring homomorphism, and g:Z→Y any scheme morphism. Write E_TA and E_TB for the intrinsic realization equivalences, V_T for fixed-scalar restriction and U_T for intrinsic restriction [lem-sf-compact-support-restriction-of-scalars]; write Q_B for fixed-scalar direct image and P_A,P_B for intrinsic direct images, with section-normalized comparisons d_A and d_B [def-sp-finite-intrinsic-direct-adjunction]. Let c_T:E_TB U_T≅V_T E_TA be sfRealizationRestriction and let h:P_B U_Y≅U_Z P_A be proEtaleCoefficientDirectImageComparison [lem-weil-proetale-direct-image-restriction-of-scalars]. For every ordinary fixed-scalar B-sheaf M, P_A(c_Z(M)); d_A(V_Z M) equals h.inv(E_ZB M); U_Y(d_B(M)); c_Y(Q_B M). No boundedness, properness or flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 00YV and 03D1; the section-normalized realization comparisons, Step 1 of lem-finite-realization-restriction-cube."
+ },
+ "stmt_deps": [
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Precompose with the invertible ordinary coefficient comparison h.hom, cancel h.hom followed by h.inv, and evaluate on an object W of the target site and a section x. The underlying linear realization unit at the base-changed object is invertible; its surjectivity writes x as the realization unit of a section m.",
+   "uses": [
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary direct-image coefficient comparison and the realization restriction comparisons are the identity on underlying sections by their chosen normalizations. The direct-image realization comparisons send the source realization unit to the target realization unit. Thus both composites at x equal the same underlying sheafification-unit section; the units before and after scalar restriction agree on their underlying abelian presheaves. Sectionwise extensionality proves the identity. The argument covers zero rings and empty schemes without an additional hypothesis.",
+   "uses": [
+    "lem-sf-compact-support-restriction-of-scalars",
+    "def-sp-finite-intrinsic-direct-adjunction",
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 00YV and 03D1; sectionwise normalization and the sheafification unit.",
+  "by": "agent H8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A naturality cube for the realization of sheaves of modules, restriction of scalars, and direct image proved on sheafification unit sections",
+   "results": "{\"t\": \"2026-10-27T09:34:09Z\", \"tool\": \"leanfinder\", \"query\": \"A naturality cube for the realization of sheaves of modules, restriction of scalars, and direct image proved on sheafification unit sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\"], \"digest\": \"5995f02469cb12a7\"}",
+   "date": "2026-10-27",
+   "verdict": "The generic sheafification-unit API is available, but no Mathlib theorem states this cube. Prove it using the existing section-normalized project comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app",
+   "results": "{\"t\": \"2026-10-27T09:34:08Z\", \"tool\": \"loogle\", \"query\": \"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app\"], \"digest\": \"0df6cd63ca2bc5b0\"}",
+   "date": "2026-10-27",
+   "verdict": "The generic sheafification-unit API is available, but no Mathlib theorem states this cube. Prove it using the existing section-normalized project comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "realization.*restrict.*directImage|directImage.*realization.*restrict",
+   "results": "{\"t\": \"2026-10-27T09:34:07Z\", \"tool\": \"grep\", \"query\": \"realization.*restrict.*directImage|directImage.*realization.*restrict\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "The generic sheafification-unit API is available, but no Mathlib theorem states this cube. Prove it using the existing section-normalized project comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRealizationRestrictionCube",
+  "date": "2026-10-27",
+  "group": "H8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-finite-realization-restriction-cube",
+   "place": "The ordinary sectionwise cube in Step 2.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRealizationOrdinaryRestrictionCube",
+  "file": "lean/Sheaf/Paper/FiniteRealizationOrdinaryRestrictionCube.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteCompactScalar.realizationRestriction_ordinary_directImage_cube",
+  "statement": "theorem realizationRestriction_ordinary_directImage_cube\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)\n    (M : Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) :\n    (proEtaleConstantModuleDirectImage g A).map\n        ((sfRealizationRestriction Z φ).hom.app M) ≫\n      (sfIntrinsicDirectImageComparison g A).hom.app ((sfFixedRestriction Z φ).obj M) =\n    (proEtaleCoefficientDirectImageComparison g φ).inv.app\n        ((sfIntrinsicModuleEquivalence Z B).functor.obj M) ≫\n      (proEtaleCoefficientRestrictScalars Y φ).map\n        ((sfIntrinsicDirectImageComparison g B).hom.app M) ≫\n      (sfRealizationRestriction Y φ).hom.app\n        ((ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) g).obj M)",
+  "branch": "sheaf-dag",
+  "by": "H8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T123451-L-2302641",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261027T123451-L-2302641",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

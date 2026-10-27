@@ -15,9 +15,23 @@
   "document": "Stacks Project",
   "place": "Tag 03D8, sites-modules.tex, lemma-push-pull-composition-modules; Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply AlgebraicGeometry.Scheme.exchangeModuleComposition_existsUnique from Sheaf.Paper.StrictTowerOperations with its inner morphism k, outer morphism h, ring sheaves R, S, T and coefficient identifications c, d. Unfolding ExchangeModuleCompositionNormalized gives exactly the section equation in existsUnique_composition, for the same normalized adjunctions and fibre-product pasting. No transport or additional hypothesis is needed. The existing compositionIso definition then selects this uniquely determined comparison.",
+   "uses": [
+    "def-weil-pbc-strict-tower-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-tower-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03D8 (lemma-push-pull-composition-modules); exact reuse of exchangeModuleComposition_existsUnique in Sheaf.Paper.StrictTowerOperations, R5, 2026-10-24."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -91,10 +105,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
@@ -129,5 +147,15 @@
   "group": "Q16",
   "result": "fix",
   "note": "Re-delivery of a0d47048 H2 RETURN. Diffed against that snapshot: item Lean is byte-identical except the duplicate D(Ab) instance is removed and existsUnique_composition/compositionIso moved unchanged into the new ProEtaleOrdinaryPullbackComparison. The two theorem stmt_deps are replaced by def-sfb-proper-face-matching-arrow and def-sfb-proetale-composite-coefficients (existing:true, statements verbatim) and def-sfb-proetale-ordinary-pullback-comparison (new module). No theorem stmt_dep is added against live. Mathematics re-read vs Stacks 09A2: all clauses correct, normalization direction A=T(i)^-1 alpha_I, actual derived unit, arbitrary noncartesian g, every resolution covered, edge cases fine; no hollow data, all theorems sorry. check_existing/check_new_node clean. FIX fixes/def-sfb-proetale-composite-coefficients.json: adds body owner def-per-proetale-ring-inverse-image-comparisons (proEtaleRingInverseImageComp) to stmt_deps and statement, trims noncomputable from lean.statement. Advisory: matchingBoundaryIndex owned only by statement node lem-weil-pbc-simplicial-matching-object; module adjunction/pullback decls lack a def owner (base-era). No compile: no Lean changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261024T190836-L-106486",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

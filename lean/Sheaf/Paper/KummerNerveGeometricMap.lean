@@ -47,7 +47,9 @@ theorem kummerNerveMap_toBase {V T W U : Scheme.{u}} {G : Profinite.{u}} [CommGr
     (j : V ⟶ T) (q : T ⟶ U) (a : W ⟶ U) (hj : j ≫ q = v ≫ a) (n : ℕ) :
     coords.map n ≫ kummerNerveToBase a v n =
       coefficientParameterMap j (power G n) ≫ kummerFullParameterMap q (power G n) := by
-  sorry
+  simp only [kummerNerveToBase, kummerFullParameterMap, ← Category.assoc,
+    coords.over n, coefficientParameterProjectionCommutes]
+  simp only [Category.assoc, hj]
 
 /-- The map from an actual derived nerve term is restriction along the canonical
 root coordinates followed by the inverse puncture unit and actual counit mate.

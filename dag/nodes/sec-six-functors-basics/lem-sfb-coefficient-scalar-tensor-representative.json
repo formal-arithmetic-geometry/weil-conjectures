@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-coefficient-scalar-tensor-representative",
+ "kind": "lemma",
+ "title": "Signed tensor representative after scalar reconstruction",
+ "statement": "Let R and S be commutative condensed rings and a:R→S a ring-object map whose internal extension of scalars is exact on every scheme. Fix a scheme Z and chosen ordinary unbounded section derived categories as in [def-sfb-coefficient-scalar-tensor-realization-data]. Let b be a normalized ScalarDerivedPair for the actual reconstructed coefficient map. Let o identify internal ordinary scalar extension followed by section reconstruction with section reconstruction followed by b.extension, preserving all balanced scalar generators. Let p identify internalScalarExtension followed by the derived section equivalence with that equivalence followed by b.derived, and assume its computation square with o and the prescribed exact coefficientInternalScalarComplex on all reconstructed flat-term K-flat internal complexes. Let m be a monoidal structure on b.extension whose oplax tensorator sends s⊗(x⊗y) to (s⊗x)⊗(1⊗y) on every site object. Let t be a natural isomorphism from section derived tensor followed by b.derived to b.derived on both factors followed by section derived tensor, and assume that the internal identification square with p, the fixed section tensor comparisons and internalScalarTensorComparison commutes. For section complexes write E(P) for termwise b.extension, L for b.derived, c(P) for scalarPairComplexComparison of b, q_R(P,Q) and q_S(E(P),E(Q)) for the fixed qTensor components, Tot_R(P,Q) for the signed total tensor, and D_m(P,Q) for coefficientSectionScalarTotal(a,Z,b,m,P,Q). Let loc denote localization and let tensor_S(c(P),c(Q)) denote the section derived tensor functor applied to this pair of arrows. Then for every pair P,Q of flat-term K-flat section complexes the following equality holds, with composition read from left to right: L(q_R(P,Q)) ≫ c(Tot_R(P,Q)) ≫ loc(D_m(P,Q)) = t_(loc(P),loc(Q)) ≫ tensor_S(c(P),c(Q)) ≫ q_S(E(P),E(Q)). This asserts only the signed representative equation, conditional on the already normalized ordinary, scalar and derived tensor comparisons; it constructs none of them. No boundedness, nonzero-ring, finiteness, or enough-points hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, proof: the constituents of the total-complex isomorphism; Modules on Sites Tags 03EK, 03EL; step 3 of lem-sfb-coefficient-scalar-section-realization."
+ },
+ "stmt_deps": [
+  "def-sfb-coefficient-scalar-tensor-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the internal-image representative theorem to reconstructed internal complexes.",
+   "uses": [
+    "lem-sfb-coefficient-scalar-tensor-representative-internal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the resulting equality across the exact section equivalence using the transport theorem.",
+   "uses": [
+    "lem-sfb-coefficient-scalar-tensor-representative-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-coefficient-scalar-tensor-representative-internal",
+  "lem-sfb-coefficient-scalar-tensor-representative-transport"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; strict decomposition into internal representative and transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor compatibility of scalar extension computed on K-flat complexes",
+   "results": "Eight hits: TensorProduct.CompatibleSMul, ordinary Module.Flat tensor exactness and faithfully-flat scalar extension; no derived section scalar representative comparison.",
+   "date": "2026-10-26",
+   "verdict": "No match for the prescribed signed representative equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived scalar tensor comparison under an equivalence of module categories is represented by the signed totalization of its ordinary tensorator on K-flat complexes",
+   "results": "Eight HomologicalComplex tensor and graded-object existence hits; none identifies the scalar reconstruction square.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctorComparison",
+   "results": "0 hits; unknown identifier 'HomologicalComplex.mapBifunctorComparison' in the search index.",
+   "date": "2026-10-26",
+   "verdict": "No indexed theorem for this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*(Tensor|tensor).*|mapBifunctorComparison",
+   "results": "Six Mathlib hits, for left-derived group coinvariants and Tor; the normalized comparison is in the adopted source extension. Local searches found coefficientSectionScalarTotal only in its definition and realization clauses.",
+   "date": "2026-10-26",
+   "verdict": "The existing internal comparison and section representative theorem are inputs; their reconstruction compatibility is this remaining step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientScalarSectionRealization",
+  "date": "2026-10-26",
+  "group": "R7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "Rational proof (3): compatibility of derived tensor with scalar extension; signed total-complex representative normalization.",
+   "via": [
+    "lem-sfb-coefficient-scalar-section-realization",
+    "lem-sfb-coefficient-scalar-tensor-realization",
+    "lem-sfb-coefficient-projection-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientScalarTensorRepresentative",
+  "file": "lean/Sheaf/Paper/CoefficientScalarTensorRepresentative.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientScalarTensorRepresentative",
+  "statement": "theorem coefficientScalarTensorRepresentative (Z : Scheme.{u})\n    (b : SheafOfModules.ScalarDerivedPair.{u + 1, u, u + 1, u + 1}\n      (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (coefficientSectionScalarMap a Z))\n    (o : Mod.extendScalars (coefficientMap a Z) ⋙\n        (ModuleRingedComparison.equivalence S Z).functor ≅\n      (ModuleRingedComparison.equivalence R Z).functor ⋙ b.extension)\n    (p : internalScalarExtension a Z ⋙\n        (ModuleRingedComparison.derivedEquivalence S Z).functor ≅\n      (ModuleRingedComparison.derivedEquivalence R Z).functor ⋙ b.derived)\n    (m : b.extension.Monoidal)\n    (t : ModuleRingedComparison.tensor R Z ⋙ b.derived ≅\n      b.derived.prod b.derived ⋙ ModuleRingedComparison.tensor S Z)\n    (hgenerator :\n      (∀ (M : ModuleRingedComparison.internalModules R Z) (V : Z.ProEtᵒᵖ)\n            (s : (condensedRingObj S Z).obj.obj V) (x : M.X.obj.obj V),\n          (o.hom.app M).val.app V\n              (InternalAbelianSheafModule.internalScalarGenerator.{u + 1, u + 1, u}\n                (Scheme.ProEt.topology Z)\n                (coefficientMap a Z) M V s x) =\n            coefficientSectionScalarPure a Z b\n              ((ModuleRingedComparison.equivalence R Z).functor.obj M) V s x))\n    (hscalar :\n      (∀ (P : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ),\n          CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n            (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z)\n            (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex\n              (.up ℤ)).obj P) →\n          (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n            (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z)\n            ((ModuleRingedComparison.equivalence R Z).functor.obj (P.X n))) →\n          (ModuleRingedComparison.derivedEquivalence S Z).functor.map\n              (coefficientInternalScalarComplex a Z P) ≫\n            (ModuleRingedComparison.equivalence S Z).functor.mapDerivedCategoryFactors.hom.app\n              (((Mod.extendScalars (coefficientMap a Z)).mapHomologicalComplex (.up ℤ)).obj P) ≫\n            DerivedCategory.Q.map ((NatIso.mapHomologicalComplex o (.up ℤ)).hom.app P) =\n          p.hom.app (DerivedCategory.Q.obj P) ≫\n            b.derived.map\n              ((ModuleRingedComparison.equivalence R Z).functor.mapDerivedCategoryFactors.hom.app\n                P) ≫\n            SheafOfModules.scalarPairComplexComparison\n              (C := Z.ProEt) (J := Scheme.ProEt.topology Z)\n              (R := ModuleRingedComparison.ring R Z) (S := ModuleRingedComparison.ring S Z)\n              b.extension b.extension_additive b.derived\n              b.counit (((ModuleRingedComparison.equivalence R Z).functor.mapHomologicalComplex\n                (.up ℤ)).obj P)))\n    (hmonoidal :\n      (∀ (M N : ModuleRingedComparison.modules R Z) (V : Z.ProEtᵒᵖ)\n            (s : (ModuleRingedComparison.ring S Z).obj.obj V)\n            (x : M.val.obj V) (y : N.val.obj V),\n          (m.toOplaxMonoidal.δ M N).val.app V\n              (coefficientSectionScalarPure a Z b (M ⊗ N) V s\n                (ModuleRingedComparison.sectionPureTensor R Z M N V x y)) =\n            ModuleRingedComparison.sectionPureTensor S Z (b.extension.obj M) (b.extension.obj N) V\n              (coefficientSectionScalarPure a Z b M V s x)\n              (coefficientSectionScalarPure a Z b N V 1 y)))\n    (htensor :\n      ∀ M N : DerivedCategory (ModuleRingedComparison.internalModules R Z),\n          (ModuleRingedComparison.derivedEquivalence S Z).functor.map\n              (((internalScalarTensorComparison a Z).app M).app N) ≫\n            (ModuleRingedComparison.tensorComparison S Z).hom.app\n              ((internalScalarExtension a Z).obj M, (internalScalarExtension a Z).obj N) ≫\n            (ModuleRingedComparison.tensor S Z).map (Prod.mkHom (p.hom.app M) (p.hom.app N)) =\n          p.hom.app (((derivedTensor R Z).obj M).obj N) ≫\n            b.derived.map ((ModuleRingedComparison.tensorComparison R Z).hom.app (M, N)) ≫\n            t.hom.app ((ModuleRingedComparison.derivedEquivalence R Z).functor.obj M,\n              (ModuleRingedComparison.derivedEquivalence R Z).functor.obj N))\n    :\n    (∀ (P Q : CochainComplex (ModuleRingedComparison.modules R Z) ℤ),\n        CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) P →\n        CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n          (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (R := ModuleRingedComparison.ring R Z) Q →\n        (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n          (C := Z.ProEt) (J := Scheme.ProEt.topology Z)\n          (R := ModuleRingedComparison.ring R Z) (P.X n)) →\n        (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n          (C := Z.ProEt) (J := Scheme.ProEt.topology Z)\n          (R := ModuleRingedComparison.ring R Z) (Q.X n)) →\n        b.derived.map ((ModuleRingedComparison.qTensor R Z).app (P, Q)) ≫\n          SheafOfModules.scalarPairComplexComparison\n            (C := Z.ProEt) (J := Scheme.ProEt.topology Z)\n            (R := ModuleRingedComparison.ring R Z) (S := ModuleRingedComparison.ring S Z)\n            b.extension b.extension_additive b.derived\n            b.counit ((ModuleRingedComparison.totalTensor R Z).obj (P, Q)) ≫\n          DerivedCategory.Q.map (coefficientSectionScalarTotal a Z b m P Q) =\n        t.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫\n          (ModuleRingedComparison.tensor S Z).map (Prod.mkHom\n            (SheafOfModules.scalarPairComplexComparison\n            (C := Z.ProEt) (J := Scheme.ProEt.topology Z)\n            (R := ModuleRingedComparison.ring R Z) (S := ModuleRingedComparison.ring S Z)\n            b.extension b.extension_additive b.derived\n              b.counit P)\n            (SheafOfModules.scalarPairComplexComparison\n            (C := Z.ProEt) (J := Scheme.ProEt.topology Z)\n            (R := ModuleRingedComparison.ring R Z) (S := ModuleRingedComparison.ring S Z)\n            b.extension b.extension_additive b.derived\n              b.counit Q)) ≫\n          (ModuleRingedComparison.qTensor S Z).app\n            ((b.extension.mapHomologicalComplex (.up ℤ)).obj P,\n              (b.extension.mapHomologicalComplex (.up ℤ)).obj Q))",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sfb-coefficient-scalar-tensor-representative",
+  "worker": "stage3",
+  "group": "R7",
+  "summary": "Isolates only the signed tensor-representative equation after constructing and normalizing the ordinary and derived scalar comparisons. The parent proof supplies every hypothesis; no scalar pair, adjunction, monoidal structure or derived tensorator is constructed by this lemma.",
+  "blueprint": "The derived scalar tensor compatibility in rational proper-base-change proof (3), refined to the signed K-flat total-complex normalization of Stacks Tag 07A4.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "The ordinary scalar tensor square is checked after the balanced coprojections, using the generic sheaf tensor universal property. This does not replace a step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "The fixed exact section equivalence transports the ordinary tensor, signed total tensor, flatness and K-flatness. Only these general comparison properties are used."
+   },
+   {
+    "node": "lem-pd-section-tensor-representatives-exists-unique",
+    "why": "Uses the specified internal-to-section normalization of qTensor on complexes, rather than a new tensor model or a different unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261026T023939-L-616721",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T203101-L-3502890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

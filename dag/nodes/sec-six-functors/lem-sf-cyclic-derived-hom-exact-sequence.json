@@ -1,0 +1,324 @@
+{
+ "id": "lem-sf-cyclic-derived-hom-exact-sequence",
+ "kind": "statement",
+ "title": "Invariant and coinvariant sequence for native derived morphisms",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], $P:\\mathcal A\\to\\mathcal A$ an additive exact autoequivalence, $\\mathcal B=\\mathcal A^P$ the fixed-pair category [def-weil-endofunctor-fixed-pair-category], and $U$ the forgetful functor. Use ordinary derived categories [def-weil-abstract-derived-category]. For $M,N\\in D(\\mathcal B)$ with bounded cohomology put\n$$V^r_{M,N}=\\operatorname{Hom}_{D(\\mathcal A)}(D(U)M,D(U)N[r]),\\qquad T^r(u)=\\theta_{N[r]}D(P)(u)\\theta_M^{-1}.$$\nHere $\\theta$ is the isomorphism induced by the termwise structure maps, with the canonical shift comparison. Define $(V^r)^T=\\ker(1-T^r)$ and $(V^r)_T=\\operatorname{coker}(1-T^r)$ as abelian groups. There is a natural short exact sequence\n$$0\\longrightarrow(V^{-1}_{M,N})_T\\xrightarrow{\\partial}\\operatorname{Hom}_{D(\\mathcal B)}(M,N)\\xrightarrow{D(U)}(V^0_{M,N})^T\\longrightarrow0.$$\nThe right arrow is forgetting the action. The left arrow is the connecting map from the two-term free-action resolution, equivalently the class obtained by changing the action by an off-diagonal morphism into $N[-1]$ in a cone representative. The sequence is natural under precomposition and postcomposition by morphisms in $D(\\mathcal B)$ and their underlying morphisms.\n\nIt is also natural for the following functors and for finite composites of them, on pairs whose images still have bounded cohomology. Let $\\mathcal A'$ be Grothendieck abelian with an additive exact autoequivalence $P'$, fixed-pair category $\\mathcal B'$ and forgetful functor $U'$, let $H:\\mathcal A\\to\\mathcal A'$ be additive with a natural isomorphism $a:P'H\\xrightarrow{\\sim}HP$, and let $H^{\\mathrm{eq}}(M,\\theta)=(HM,H(\\theta)a_M)$. If $H$ is exact, use the termwise functor $D(H^{\\mathrm{eq}})$ with $D(U')D(H^{\\mathrm{eq}})=D(H)D(U)$. If $H$ is left exact, use the total right derived functor $RH^{\\mathrm{eq}}$ [def-sfb-right-derived-functor] with the canonical comparison $D(U')RH^{\\mathrm{eq}}\\cong RH\\,D(U)$ of [lem-sf-fixed-pair-derived-forget-comparison], which is the identity of $H(UI)$ on K-injective complexes $I$. On both outer terms the map is induced by the underlying functor $D(H)$, resp. $RH$, its shift comparison and this comparison. Thus these functors preserve the displayed connecting map $\\partial$, not merely the right-hand forgetting map. No assertion that forgetting is faithful on derived morphisms is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Last sentence, the extension-morphism correction needed to lift and test the exceptional counit Agent-formulated native-derived foundation; the blueprint does not prove this assertion."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the additive raw boundary and its three exact pairs from [lem-sf-cyclic-derived-off-diagonal-calculus]. Its kernel is exactly the range of the degree-minus-one defect.",
+   "uses": [
+    "lem-sf-cyclic-derived-off-diagonal-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+   }
+  },
+  {
+   "text": "Factor the raw additive boundary through the actual quotient by that range. QuotientAddGroup.injective_lift_iff gives injectivity. Restrict forgetting to the actual degree-zero invariant subgroup using the last exact pair. The middle exact pair gives exactness at native Hom; the last pair gives surjectivity onto the invariant subgroup.",
+   "uses": [
+    "def-sf-cyclic-derived-hom-data",
+    "lem-sf-cyclic-derived-off-diagonal-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+   }
+  },
+  {
+   "text": "Raw naturality gives naturality of the descended family on quotient representatives. A normalized off-diagonal SES is a presentation with identity endpoint isomorphisms, so the presentation equality computes its boundary exactly. For any other normalized natural family, transport a strict presentation along its endpoint isomorphisms, using boundedness invariance under isomorphism. This computes its value on every quotient representative and proves uniqueness.",
+   "uses": [
+    "def-sf-cyclic-derived-hom-data",
+    "lem-sf-cyclic-derived-off-diagonal-presentation",
+    "lem-sf-cyclic-derived-off-diagonal-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149, 0152, 070I; explicit cyclic free-resolution and off-diagonal argument in parent node steps 1--8."
+   }
+  },
+  {
+   "text": "For the exact companion, additivity of transport follows directly from additivity of D(L) and bilinearity of composition. The exact action lemma gives T-compatibility. Naturality of alpha and the coherent zero-shift equation prove the forgetting square. Present each u using the raw off-diagonal boundary, and compute the source normalized boundary on that presentation. Map the presentation by the exact-presentation lemma, then compute the target normalized boundary on it. The two normalized-presentation evaluations give the boundary square. This four-clause assembly is implemented in Lean; the right-derived and finite-composite companions are assembled in the following steps.",
+   "uses": [
+    "def-sf-cyclic-derived-hom-data",
+    "lem-sf-cyclic-derived-off-diagonal-presentation",
+    "lem-sf-cyclic-derived-exact-action",
+    "lem-sf-cyclic-derived-exact-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152, lemma-derived-canonical-delta-functor; agent-written exact-functor expansion in steps 5--7 of lem-sf-cyclic-derived-hom-exact-sequence. The blueprint exceptional-adjunction sentence asserts the application, not this calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-exact-input-derived-transformation] with exact input the identity and beta the identity unitor to obtain unit-compatible shifts and triangulatedness for each recorded right-derived functor. Triangulatedness implies additivity. The transport_additive and transport_forget calculations then give the additive and forgetting clauses without any action-specific theorem. Apply [lem-sf-cyclic-derived-right-action] for the T-clause. Present u using [lem-sf-cyclic-derived-off-diagonal-presentation], transport that presentation using [lem-sf-cyclic-derived-right-presentation], and evaluate both normalized boundaries by normalized_boundary_on_presentation. This proves the right-derived four-clause theorem.",
+   "uses": [
+    "lem-sfb-exact-input-derived-transformation",
+    "def-sf-cyclic-derived-hom-data",
+    "lem-sf-cyclic-derived-right-action",
+    "lem-sf-cyclic-derived-off-diagonal-presentation",
+    "lem-sf-cyclic-derived-right-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, 070K, 070Y and 0152; agent-written right-derived expansion of steps 5--8 of lem-sf-cyclic-derived-hom-exact-sequence. The blueprint exceptional-adjunction sentence asserts the application, not this calculation."
+   }
+  },
+  {
+   "text": "Expand the identity and pasted comparison of [def-sf-cyclic-derived-hom-data]. The identity transports u to itself. For a composite, expand map_comp and the composite shift comparison, and use naturality of the second shift comparison at the first inverse forgetting comparison. This proves transport_(s.comp t)(u)=transport_t(transport_s(u)). These calculations are implemented as private Lean lemmas.",
+   "uses": [
+    "def-sf-cyclic-derived-hom-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, 070K, 070Y and 0152; agent-written right-derived expansion of steps 5--8 of lem-sf-cyclic-derived-hom-exact-sequence. The blueprint exceptional-adjunction sentence asserts the application, not this calculation."
+   }
+  },
+  {
+   "text": "Induct on Generated. Each underlying generator is additive: exact functors by localization and right derived functors by the unit-compatible triangulatedness supplied above. Prove two identities simultaneously at every native pair, without bounds: transport commutes with T, and native functoriality commutes with the raw off-diagonal boundary. For exact generators use [lem-sf-cyclic-derived-exact-action] and [lem-sf-cyclic-derived-exact-presentation]; for right-derived generators use [lem-sf-cyclic-derived-right-action] and [lem-sf-cyclic-derived-right-presentation], with the unit-compatible underlying shift supplied in Generated. The identity case follows from identity transport. Paste both identities at a composite using the proved transport composition equality and functoriality. Finally evaluate the raw boundaries at the bounded source and final target using their strict presentations and normalized_boundary_on_presentation. Together with additivity and the general forgetting calculation this proves finite-composite functoriality with no intermediate bound assumption.",
+   "uses": [
+    "def-sf-cyclic-derived-hom-data",
+    "lem-sfb-exact-input-derived-transformation",
+    "lem-sf-cyclic-derived-off-diagonal-presentation",
+    "lem-sf-cyclic-derived-exact-action",
+    "lem-sf-cyclic-derived-exact-presentation",
+    "lem-sf-cyclic-derived-right-action",
+    "lem-sf-cyclic-derived-right-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, 070K, 070Y and 0152; agent-written right-derived expansion of steps 5--8 of lem-sf-cyclic-derived-hom-exact-sequence. The blueprint exceptional-adjunction sentence asserts the application, not this calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-cyclic-derived-off-diagonal-calculus",
+  "def-sf-cyclic-derived-hom-data",
+  "lem-sf-cyclic-derived-off-diagonal-presentation",
+  "lem-sf-cyclic-derived-exact-action",
+  "lem-sf-cyclic-derived-exact-presentation",
+  "lem-sfb-exact-input-derived-transformation",
+  "lem-sf-cyclic-derived-right-action",
+  "lem-sf-cyclic-derived-right-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0152 and the K-injective Hom/unit calculations of Tags 070I, 070K and 070Y. Complete Lean assemblies for all four parent theorems; right-derived action and strict-presentation transport split into two strictly smaller nodes. Finite composition uses the unbounded raw presentation calculus, so no intermediate boundedness is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms in the derived category of objects with infinite cyclic action fit in a short exact sequence of coinvariants of Hom in degree minus one and invariants of Hom in degree zero",
+   "results": "{\"t\": \"2026-10-22T04:29:29Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms in the derived category of objects with infinite cyclic action fit in a short exact sequence of coinvariants of Hom in degree minus one and invariants of Hom in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\", \"groupCohomology.mapShortComplex₁\", \"groupCohomology.mapShortComplex₃\", \"CategoryTheory.ShortComplex.ShortExact.extClass_hom\", \"groupCohomology.mapShortComplex₃_exact\", \"groupCohomology.map_cochainsFunctor_shortExact\", \"groupCohomology.mapShortComplex₁_exact\"], \"digest\": \"1e81e35b285b8a61\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext long exact sequences and finite cyclic representation results do not give the stated infinite cyclic equivariant-derived sequence or its functoriality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"Int\"",
+   "results": "{\"t\": \"2026-10-22T04:29:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"groupCohomology\\\", \\\"Int\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext long exact sequences and finite cyclic representation results do not give the stated infinite cyclic equivariant-derived sequence or its functoriality."
+  },
+  {
+   "tool": "grep",
+   "query": "coinvariant|infiniteCyclic|infinite_cyclic|homotopyFixed",
+   "results": "{\"t\": \"2026-10-22T04:29:37Z\", \"tool\": \"grep\", \"query\": \"coinvariant|infiniteCyclic|infinite_cyclic|homotopyFixed\", \"sub\": \"RepresentationTheory/\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean\"], \"digest\": \"6ec6d0ac5b9a5003\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext long exact sequences and finite cyclic representation results do not give the stated infinite cyclic equivariant-derived sequence or its functoriality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom for infinite cyclic equivariant objects is the mapping fiber of one minus conjugation and gives an invariant coinvariant exact sequence",
+   "results": "{\"t\": \"2026-10-22T04:29:38Z\", \"tool\": \"leansearch\", \"query\": \"Derived Hom for infinite cyclic equivariant objects is the mapping fiber of one minus conjugation and gives an invariant coinvariant exact sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.FiniteCyclicGroup.coinvariantsEquiv\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso\", \"Rep.FiniteCyclicGroup.groupHomologyIso₀\", \"Rep.FiniteCyclicGroup.homResolutionIso\", \"ContinuousCohomology.homogeneousCochains\", \"Rep.torIso\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_inv_f_hom_apply\", \"ContinuousCohomology.kerHomogeneousCochainsZeroEquiv\"], \"digest\": \"9eb61d99516bd858\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Ext long exact sequences and finite cyclic representation results do not give the stated infinite cyclic equivariant-derived sequence or its functoriality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms in the derived category of fixed pairs for an exact autoequivalence fit in an invariants coinvariants short exact sequence natural under total right derived equivariant functors",
+   "results": "{\"t\": \"2026-10-22T05:20:17Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms in the derived category of fixed pairs for an exact autoequivalence fit in an invariants coinvariants short exact sequence natural under total right derived equivariant functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"Rep.Tor_map\", \"Rep.coinvariantsShortComplex_shortExact\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"Rep.Tor_obj\", \"groupCohomology.map_cochainsFunctor_shortExact\", \"groupHomology.H1CoresCoinf_exact\", \"groupCohomology.mapShortComplex₁\"], \"digest\": \"77309e403125e2ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related general derived, Ext, and representation lemmas do not state the native cyclic invariant/coinvariant sequence with the specified derived-functor connecting-map compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "infiniteCyclic|infinite_cyclic|IsoAlgebra|homotopyFixed",
+   "results": "{\"t\": \"2026-10-22T05:20:25Z\", \"tool\": \"grep\", \"query\": \"infiniteCyclic|infinite_cyclic|IsoAlgebra|homotopyFixed\", \"sub\": \"CategoryTheory/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related general derived, Ext, and representation lemmas do not state the native cyclic invariant/coinvariant sequence with the specified derived-functor connecting-map compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category of objects with an automorphism morphism groups invariant coinvariant exact sequence",
+   "results": "{\"t\": \"2026-10-22T05:20:25Z\", \"tool\": \"leansearch\", \"query\": \"Derived category of objects with an automorphism morphism groups invariant coinvariant exact sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.coinvariantsShortComplex_shortExact\", \"HasDerivedCategory\", \"HasDerivedCategory.standard\", \"Rep.coinvariantsFunctor\", \"Rep.coinvariantsShortComplex\", \"DerivedCategory.instCategory\", \"CategoryTheory.Aut\", \"DerivedCategory.triangleOfSES\"], \"digest\": \"5dcdeb2d69faa4c4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related general derived, Ext, and representation lemmas do not state the native cyclic invariant/coinvariant sequence with the specified derived-functor connecting-map compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preadditiveYoneda\", \"IsHomological\"",
+   "results": "{\"t\": \"2026-10-22T05:20:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"preadditiveYoneda\\\", \\\"IsHomological\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.instIsHomologicalOppositeAddCommGrpCatObjFunctorPreadditiveYoneda\"], \"digest\": \"da1d664b70b721da\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related general derived, Ext, and representation lemmas do not state the native cyclic invariant/coinvariant sequence with the specified derived-functor connecting-map compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For objects of the derived category of modules with an invertible semilinear action the forgetful hom group has kernel the coinvariants of degree minus one Hom and image the invariant morphisms",
+   "results": "{\"t\": \"2026-10-22T05:21:18Z\", \"tool\": \"leanfinder\", \"query\": \"For objects of the derived category of modules with an invertible semilinear action the forgetful hom group has kernel the coinvariants of degree minus one Hom and image the invariant morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instLinearCochainComplexIntQ\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.Tor_obj\", \"Rep.coinvariantsShortComplex\", \"Rep.torIso\", \"Rep.coinvariantsShortComplex_X₁\", \"Rep.Tor_map\", \"Rep.standardResolution.extIso\"], \"digest\": \"a45a5d38537e19ae\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: related general derived, Ext, and representation lemmas do not state the native cyclic invariant/coinvariant sequence with the specified derived-functor connecting-map compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-native-exceptional-forgetful",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Last sentence, the extension-morphism correction needed to lift and test the exceptional counit The nearest imported blueprint ancestor is None; this expands the last sentence of the supplied cor-coef-verdier-weil-equivariance proof for the native obligation.",
+   "via": [
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cyclic-derived-hom-exact-sequence",
+  "worker": "stage1",
+  "group": "Q77",
+  "summary": "Twelve explicit steps derive the exact sequence from the existing free-action resolution, compute its 1-T inverse orientation, identify its boundary by a strict off-diagonal extension, and verify exact and total-right-derived functor naturality on split sequences of bounded-below injective representatives. No statement change and no new nodes.",
+  "blueprint": "The nearest imported ancestor is None (confirmed by blueprint_refs ancestor). Retains the inherited from.place and via; realizes the final exceptional-adjunction sentence of cor-coef-verdier-weil-equivariance.proof.md by supplying the native-derived morphism foundation rather than treating derived forgetting as faithful. The generic tools do not alter the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-free-derived-weil-resolution",
+    "why": "Exact free derived adjunction and its explicit natural cyclic resolution; this is already in the same unit."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Generic contravariant representable exactness applied to the free triangle and rotations; not a substitute geometric route."
+   },
+   {
+    "node": "lem-sf-fixed-pair-derived-forget-comparison",
+    "why": "Generic fixed-pair Grothendieck property, preservation of K-injectives, and actual underlying derived comparison on resolutions."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic enough-injectives theorem applied to the established Grothendieck fixed-pair category."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic bounded-below injective representative theorem, using the existing bounded-cohomology hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-shift",
+    "why": "Generic closure under shifts to represent the degree-minus-one underlying Hom."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Hom localization bijection and homotopy-equivalence criterion for K-injectives."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic canonical boundary and its naturality for the explicitly constructed short exact sequences."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact termwise localization for the exact H case."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic shift compatibility of the total right derived functor; connecting-map normalization is checked explicitly in the proof."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "Generic cohomology long exact sequence applied to the explicitly contractible kernel of the cone projection; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-c0327c1bf",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-c0327c1bf (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps and every cited statement in full: the free resolution, fixed pairs, hom-out-of-triangle, the fixed-pair forget comparison (its proof too, to pin down 'canonical'), dplus/K-injective shift/K-injective Hom, the SES triangle and long exact sequence, the exact and right-derived functor nodes, and lem-pc shift. I also read Stacks derived.tex Tag 0152 (line 3965: delta = -p q^-1) and the blueprint anchor (last paragraph only asserts the result, so 'by agent' is correct). This is a first split from an empty base proof: no re-split note, no new nodes, statement unchanged, no SGA. Hand checks: step 2 orientation is 1-T^{-1} on summand 0, with T^{-1}(v)=P^{-1}(theta_N^{-1} v theta_M); step 4 kernels and images of 1-T^{-1} and 1-T agree; step 7 matrix inverse multiplied out to the identity; step 8 g=s-ju, so e d_J=jf and pe=eps, and naturality gives delta_E=f[1]delta_J=d[u] with the correct sign; step 9 degreewise retraction by injectivity of A^n, ker q=C(1_A) contractible, quasi-isomorphism between K-injectives is a homotopy equivalence; step 10 -Q pi (Qq)^{-1} is preserved termwise by additive F, with eta invertible on K-injectives; step 11 off-diagonal entry H(theta_A)a P'H(u) by naturality of a; step 12 T-compatibility, PUJ is K-injective via the chain isomorphism theta_J. Small cases: Z[t^{+-1}] with M=Z[0], N=Z[1] gives Ext^1=Z=(V^-1)_T and V^0=0, and the unipotent extension shows forgetting is not faithful; scalar lambda!=1 gives zero. No duplicate in the DAG (nearest, lem-a1-fixed-pair-truncation-orthogonality, is about t-structures). Accepted tool_uses: lem-sf-fixed-pair-derived-forget-comparison and lem-pc-right-derived-functor-triangulated as generic tools; the other entries are mathlib leaves or same-unit. Advisory: step 11 takes 'the comparison is the identity on K-injectives' from the item's own unchanged statement and the comparison node's construction (its steps 10-12); that node's statement pins only 'canonical' plus the degree-0 unit. proof_deps equals the union of uses. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CyclicDerivedHomExactSequence",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.exists_cyclicDerivedHomBoundary",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.exists_cyclicDerivedHomBoundary",
+   "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedHom_exact_functorial",
+   "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedHom_rightDerived_functorial",
+   "CategoryTheory.Endofunctor.IsoAlgebra.cyclicDerivedHom_finite_composite_functorial"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CyclicDerivedHomExactSequence.lean",
+  "statement": "theorem exists_cyclicDerivedHomBoundary [IsGrothendieckAbelian.{v} C] : ∃! b : CyclicDerivedHomBoundary F, CyclicDerivedHomBoundaryExact F b ∧ CyclicDerivedHomBoundaryNatural F b ∧ CyclicDerivedHomBoundaryNormalized F b",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All four existing public theorem signatures are unchanged. Both remaining functoriality holes are reduced to right-derived action and strict-presentation transport. Shifts and additivity come from the existing exact-input theorem, and finite composition is proved by induction on Generated using the unbounded raw boundary."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b42f365d2",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Read node, 5 stmt_deps, the module (28 decls), upstream IsoAlgebra/mapOfNatIso/strNatIso, Mathlib triangleOfSESδ/TStructure.bounded/mapDerivedCategoryFactors, and the citer. Node identical to live except new lean record; lean.statement verbatim. All clauses match: T^r = θ_N[r]·D(P)u·θ_M⁻¹ with commShiftIso; actual ker/range quotient; SES as injective/Function.Exact/surjective, with q pinned to D(U)f; boundary pinned by the off-diagonal normalization (degreewise equation = matrix entry θ_A P(u), canonical class, triangleOfSESδ) plus naturality, so ∃! is sound and functoriality needs only Normalized+Natural; exact case uses mapOfNatIso e (=H^eq) and localized Iso.refl comparison; right-derived case uses ∃!-pinned exists_fixedPairDerivedForgetComparison and a unit-compatible (hence unique) CommShift; image boundedness only; Generated covers id/exact/RH/comp with no intermediate bounds. Edge cases ok; no hollow defs; sorry-only; docstrings ok; no duplicate notion. No compile (no change). Advisory: finite-composite settings share universes (documented, citer same-universe); sF pinned but unused; cyclicDerivedStructure re-derives strNatIso inline."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T123506-L-2308789",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

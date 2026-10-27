@@ -1,0 +1,188 @@
+{
+ "id": "def-sfb-stable-fiber-curve",
+ "kind": "definition",
+ "title": "Underlying curve of an object in a stable moduli fibre",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $g,r$ be natural numbers, let $T$ be an $S$-scheme, and let $C$ be an object of the actual fibre groupoid $\\overline{\\mathcal M}_{g,r}(T)$ [def-sfb-stable-pointed-moduli-groupoids]. Write $X$ for the underlying total curve of $C$, $T_C$ for its recorded base, and $p:X\\to T_C$ for its structure morphism. The fibre object includes an equality $e:T_C=T$ in the category of $S$-schemes. Define the underlying curve over the specified fibre base to be the object $X\\xrightarrow{p}T_C\\xrightarrow{e}T$ of $\\mathit{Sch}/T$, transporting the base by that equality. This keeps the actual total curve and structure morphism; it does not choose an isomorphism-class representative. For $r=0$, its automorphisms in $\\mathit{Sch}/T$ are precisely the automorphisms of the unpointed $T$-curve.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "source": {
+  "document": "literature/stacks-project/categories.tex; literature/stacks-project/moduli-curves.tex",
+  "place": "Tag 003T (definition-fibred-groupoids), the actual fibre over a specified base; Tag 0E7A (lemma-stable-curves-deligne-mumford), stable-curve groupoid and its underlying families. Canonical base-equality transport in the recorded actual fibre."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Underlying curve over the specified base of an object in the stable pointed moduli fibre groupoid",
+   "results": "[leansearch] OK 8 hit(s): Pointed.point; Pointed.X; WeierstrassCurve; WeierstrassCurve.Affine; FundamentalGroupoid.as; WeierstrassCurve.baseChange; WeierstrassCurve.toAffine; WeierstrassCurve.integralModel.",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib stable-moduli fibre-curve construction; reuse the exact existing project definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Fiber, CategoryTheory.Over.mk",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match from this query; the exact project declaration is used."
+  },
+  {
+   "tool": "grep",
+   "query": "fiberCurve|stable.*moduli",
+   "results": "[grep] OK 0 hit(s) in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"fiberCurve\" lean/WeilConjectures; rg -n \"def fiberCurve\" lean/Sheaf; rg -l \"fiberCurve|underlying curve over.*fibre|stable-fiber-curve\" dag/nodes",
+   "results": "No WeilConjectures hit. lean/Sheaf/AlgebraicGeometry/StableIsomFiniteUnramified.lean:47:def fiberCurve {S : Scheme.{u}} {g r : ℕ} {T : Over S}. The only DAG hit was dag/nodes/sec-six-functors-basics/lem-sfb-stable-isom-finite-unramified.json, a theorem node whose auxiliary declarations include this definition.",
+   "date": "2026-10-22",
+   "verdict": "Exact existing definition found; no definition node owns it. Introduce an existing:true definition node as explicitly requested in the H2/H12 return."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search \"stable fibre curve\"",
+   "results": "0 blueprint nodes match 'stable fibre curve'",
+   "date": "2026-10-22",
+   "verdict": "No blueprint definition node duplicate."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n fiberCurve|def-sfb-stable-fiber-curve lean/Sheaf lean/WeilConjectures dag/nodes; scompile.py --source Sheaf.AlgebraicGeometry.StableIsomFiniteUnramified",
+   "results": "No live Lean source declares fiberCurve. Only the withdrawn finite-unramified theorem DAG record mentions it. --source: Module source unavailable: Sheaf.AlgebraicGeometry.StableIsomFiniteUnramified.",
+   "date": "2026-10-22",
+   "verdict": "The formerly existing declaration is unavailable. Restore the concrete construction in its own definition-owned module; do not retain an existing:true record on absent source."
+  },
+  {
+   "tool": "grep",
+   "query": "fiberCurve|[Ss]table[Pp]ointed|[Ss]table.*[Mm]oduli",
+   "results": "0 hits in Mathlib/AlgebraicGeometry: none",
+   "date": "2026-10-23",
+   "verdict": "No match for the full stable-moduli construction. Generic categorical ingredients only; the stable family is supplied by def-sfb-stable-pointed-moduli-groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Underlying curve over the specified base of an object in the stable pointed moduli fibre groupoid",
+   "results": "8 hits: Pointed.point, Pointed.X, WeierstrassCurve, WeierstrassCurve.Affine, FundamentalGroupoid.as, WeierstrassCurve.baseChange, WeierstrassCurve.toAffine, WeierstrassCurve.integralModel",
+   "date": "2026-10-23",
+   "verdict": "No match for the full stable-moduli construction. Generic categorical ingredients only; the stable family is supplied by def-sfb-stable-pointed-moduli-groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Fiber, CategoryTheory.Over.mk",
+   "results": "0 hits: none",
+   "date": "2026-10-23",
+   "verdict": "No match for the full stable-moduli construction. Generic categorical ingredients only; the stable family is supplied by def-sfb-stable-pointed-moduli-groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underlying curve over a specified base obtained by equality transport from an object of the fibre of the stable pointed moduli groupoid",
+   "results": "8 hits: AlgebraicGeometry.instCanonicallyOverFiber, AlgebraicGeometry.Scheme.Hom.asFiber, CategoryTheory.PreGaloisCategory.PointedGaloisObject.pt, HasFibers.inducedFunctor_obj_coe, AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply, Pointed.coe_of, AlgebraicGeometry.Scheme.Hom.fiber, Bundle.TotalSpace.mk_cast",
+   "date": "2026-10-23",
+   "verdict": "No match for the full stable-moduli construction. Generic categorical ingredients only; the stable family is supplied by def-sfb-stable-pointed-moduli-groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Fiber",
+   "results": "12 hits: CategoryTheory.Functor.Fiber, CategoryTheory.Functor.Fiber.fiberCategory, CategoryTheory.Functor.Fiber.fiberInclusion, CategoryTheory.Functor.Fiber.mk, CategoryTheory.Functor.Fiber.instFaithfulFiberInclusion, CategoryTheory.Functor.Fiber.fiberInclusion_obj_inj, CategoryTheory.Functor.Fiber.fiberInclusion_mk, CategoryTheory.Functor.Fiber.inducedFunctor",
+   "date": "2026-10-23",
+   "verdict": "No match for the full stable-moduli construction. Generic categorical ingredients only; the stable family is supplied by def-sfb-stable-pointed-moduli-groupoids."
+  },
+  {
+   "tool": "grep",
+   "query": "def mk|def Fiber|def fiberInclusion",
+   "results": "25 hits in Mathlib/CategoryTheory: Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean, Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean, Mathlib/CategoryTheory/FintypeCat.lean, Mathlib/CategoryTheory/Localization/SmallHom.lean, Mathlib/CategoryTheory/Localization/SmallHom.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean, Mathlib/CategoryTheory/Equivalence.lean",
+   "date": "2026-10-23",
+   "verdict": "No match for the full stable-moduli construction. Generic categorical ingredients only; the stable family is supplied by def-sfb-stable-pointed-moduli-groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a scheme morphism along equality of its codomain to construct an object in the over category",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.copyBase, AlgebraicGeometry.Scheme.Hom.asOver, AlgebraicGeometry.Scheme.asOver, AlgebraicGeometry.Scheme.Hom.IsOver, AlgebraicGeometry.Scheme.instIsOverMapHomCommRingCatResidueFieldCongr, AlgebraicGeometry.Scheme.Hom.copyBase_eq, AlgebraicGeometry.Scheme.Over, AlgebraicGeometry.Scheme.CanonicallyOver",
+   "date": "2026-10-23",
+   "verdict": "No match for the full stable-moduli construction. Generic categorical ingredients only; the stable family is supplied by def-sfb-stable-pointed-moduli-groupoids."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-level-versal-branch-freeness",
+  "date": "2026-10-22",
+  "group": "NO"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Underlying curve over its specified fibre base, used for the actual automorphism group, node count, and versal-chart special fibre in the statement of lem-sfb-stable-level-versal-branch-freeness",
+   "via": [
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "import_flags": [
+  "unreachable"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StableFiberCurve",
+  "declaration": "AlgebraicGeometry.StablePointedModuli.fiberCurve",
+  "statement": "def fiberCurve {S : Scheme.{u}} {g r : ℕ} {T : Over S} (C : Fiber S g r T) : Over T.left",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The H2/H12 return requests independent definition ownership of this plain canonical construction. Its former module StableIsomFiniteUnramified was withdrawn: scompile.py --source reports Module source unavailable, confirmed 2026-10-22. Supply the same concrete base-equality transport here, with no choice and no finite-unramified theorem. The theorem and chart signatures are unchanged; they cite this definition node.",
+  "file": "lean/Sheaf/AlgebraicGeometry/StableFiberCurve.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6f03c339",
+  "group": "NO",
+  "result": "pass",
+  "note": "Lean byte-identical to the PASSed head b3e3fe16864c; the node records differ only by the maintainer's import_flags (now on base, commit 4d5fb958975e) and a chart lean.note. Side-live has both def nodes with no lean record and the item with lean None; the delivery adds the lean records and the two def-node stmt_deps. No live fiberCurve/StableVersalLevel clash. Re-read: the chart actions are fixed by the formal uniqueness, represents and density (no arbitrary maps); full-discriminant smoothLocus; frame condition = HomCondition, no symplectic condition; B = integralClosure in the product over all generic points, pinned by normalSquare/normalGeneric; stabilizer {1} for every geometric closed-fibre point; edge cases d=0, l=3, wild characteristic, disconnected E all fine; one universe u. H5/H6/H8 OK, statements verbatim. No compile run (no change). Maintainer note: NW's StableIsomFiniteUnramified re-delivery must import StableFiberCurve and drop its own fiberCurve."
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "def-sfb-stable-fiber-curve",
+  "worker": "stage1",
+  "summary": "Audited the definition as a concrete equality transport, retaining its exact statement and its two existing statement dependencies. The moduli-groupoid node supplies the actual family and base; the scheme node supplies the category in which the structure maps compose. By eliminating the base equality, the construction is simply the original projection regarded as an object of Sch/T. No existence theorem, choice of representative, or new lemma is required. Corrected the source place: the actual fibre is Tag 02XH, not Tag 003T. Read the existing Sheaf fiberCurve definition, which implements precisely this formula, but made no upstream attachment because no WeilConjectures declaration states the item. All existing Lean/review records are retained without alteration.",
+  "blueprint": "This is a created definition with no imported blueprint ancestor (blueprint_refs.py ancestor returns None). It serves the underlying-curve clause in lem-sfb-stable-level-versal-branch-freeness and the definition of the automorphism group in def-sfb-stable-versal-level-chart. It adds no alternate argument to the latest sk-thm-sf-ctf-stability unit. Searches of the whole imported blueprint for stable fibre curve, underlying curve and fibre category found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-9a1dcec58",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-9a1dcec58 (reviewer sub-agent of L); spot-checked: The delivery changes only mathlib_searches (+7 real 2026-10-23 entries) and split_report against base 01637d52; the statement, stmt_deps and Lean records are unchanged, and there are no new nodes. The math is sound. The fibre object (Stacks 02XH, categories.tex:6044: p(x)=U, arrows over id_U) carries an equality e:T_C=T in Sch/S. The definition is p followed by (eqToHom e).left, which matches the live Lean Over.mk(C.of.val.projection ≫ (eqToHom C.of.property).left). With e=rfl it is p itself, so no representative is chosen. For r=0 the automorphism clause holds by definition, and for r>0 nothing extra is claimed. Advisory: g≥2 is implicit through the cited def-sfb-stable-pointed-moduli-groupoids; the statement is left as is, matching the reviewed Lean. Fault B5/F: the report and split_report say the source was corrected to 02XH/0E77, but the delivered source.place still cites 003T (categories.tex:6978, the fibred-groupoids lifting definition) as 'the actual fibre' and 0E7A (the DM lemma). I fixed source.place to 02XH (definition-fibre-category) and 0E77 (definition-deligne-mumford, moduli-curves.tex:2502) in fixes/dag/nodes/sec-six-functors-basics/def-sfb-stable-fiber-curve.json; only that field changed. The 0E7A citation is removed with it. The Lean docstring still names 003T/0E7A (advisory). No duplicate: an rg over the DAG finds only the citers def-sfb-stable-versal-level-chart and lem-sfb-stable-level-versal-branch-freeness, and lem-sfb-stable-isom-finite-unramified is a different theorem. No SGA, no tool_uses.; 1 file(s) fixed by the reviewer"
+ }
+}

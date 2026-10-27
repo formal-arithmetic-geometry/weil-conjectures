@@ -15,120 +15,73 @@
  ],
  "proof": [
   {
-   "text": "Fix an index $i_0$. Each open subscheme $U_i$ is quasi-separated: its affine open cover is also a family of affine opens of $X$, whose pairwise intersections are quasi-compact by clause (1) of [lem-weil-pbc-quasi-separated-affine-cover-criterion]; clause (2) applied to this cover gives the claim. Since $U_i$ is quasi-compact by hypothesis, [lem-weil-pbc-qcqs-scheme-spectral] makes every $U_i$ spectral. In particular $Y=U_{i_0}$ is spectral. Let $J$ be the set of distinct opens among the $U_i$ contained in $Y$, ordered by reverse inclusion, and put $V_j=j$ for $j\\in J$. It is a set, is nonempty (it contains $Y$), and is directed by the given refinement condition. Every original $U_i$ contains a member of $J$, by applying that condition to $i,i_0$. Consequently $E=\\bigcap_{j\\in J}V_j$. For the stipulated finite-intersection refinement, use nonempty finite intersections. Two quasi-compact opens have finite affine covers, so their intersection is covered by finitely many pairwise affine-open intersections, each quasi-compact by clause (1) above. Induction therefore makes every nonempty finite intersection quasi-compact. Their total intersection is unchanged and their family is directed by reverse inclusion.",
+   "text": "Fix an original member U_i. Apply the spectral presentation to the distinct original opens contained in U_i, indexed by reverse inclusion. The actual intersection, its projections, compatible tuples, and induced topology supply the input to fixed-sheaf spectral continuity at the compact full open of U_i.",
    "uses": [
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "lem-weil-pbc-qcqs-scheme-spectral"
+    "lem-a1-qc-open-intersection-spectral-presentation",
+    "lem-weil-pbc-spectral-limit-pullback-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-groupoids.tex",
-    "place": "Section label section-ind-quasi-affine, equation-sections-of-intersection, reduction to one quasi-compact open; Properties Tag 094L and Schemes Tag 01KO"
+    "place": "Tag 0APJ proof, first paragraph, using equation (equation-sections-of-intersection) from the preceding paragraph"
    }
   },
   {
-   "text": "For $j\\le k$ let $f_{jk}:V_k\\hookrightarrow V_j$ be inclusion. These maps are spectral: a quasi-compact open $W$ of $V_j$ is a quasi-compact open of $Y$ (inclusion preserves its topology and open covers), and $f_{jk}^{-1}(W)=W\\cap V_k$ is quasi-compact by [def-weil-spectral-space], since $W,V_k$ are quasi-compact opens of $Y$. Identities and composition are those of inclusions. The subspace $E$ is the topological limit of this diagram, with projections $p_j:E\\hookrightarrow V_j$. Indeed, the coordinates of a compatible tuple all coincide in $Y$, since any two indices have a common upper bound. That common point lies in every $V_j$, hence in $E$; conversely any point of $E$ gives such a tuple. The initial topology of the $p_j$ is the subspace topology: all inclusions are continuous for that topology, and the projection $p_Y:E\\hookrightarrow Y$ alone induces the subspace topology. This also proves the limit assertion when $E$ is empty.",
+   "text": "Use the unit-characterized set inverse-image composition isomorphisms to transfer the fixed-stage continuity result to inverse images of the ambient underlying-set structure sheaf. Use the existing spectral-continuity module comparison-map API for unit compatibility and associativity; all further restriction squares follow from adjunction uniqueness. The open-embedding clause of subspace unit coherence proves that the unit to the whole open subspace is bijective. Its naturality identifies the transition with ordinary restriction. This yields representatives and eventual equality on the original opens, retaining repeated labels.",
    "uses": [
-    "def-weil-spectral-space"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0A31, label lemma-make-spectral-space, proof of assertion (b): universal property of the limit of the inclusions"
-   }
-  },
-  {
-   "text": "We may compute the underlying sets of the ring-valued inverse images by the set-valued inverse-image construction, with the same units. To check this, let $h:T\\to Z$ be any of the continuous maps used here and let $G$ be a sheaf of commutative rings on $Z$. For an open $W\\subseteq T$, the opens $B\\supseteq h(W)$ form a small nonempty directed poset under reverse inclusion. By [def-weil-pbc-topological-inverse-image], the presheaf inverse image is $h_pG(W)=\\varinjlim_B G(B)$ in rings. By [lem-pc-filtered-colimit-commrings-elementwise] its elements are represented by sections on such $B$, and two representatives agree precisely after restriction to a smaller such open. By [lem-weil-pbc-filtered-colimit-sets-elementwise] these are exactly the representatives and equality relation for the set colimit. Thus the canonical map from the set colimit to the underlying ring colimit is a bijection, commuting with restriction and with the coprojections. Sheafification commutes with underlying sets, including its unit, by [lem-weil-pbc-ring-sheafification-space-underlying-abelian]. Applying this to $h_pG$ gives the claimed identification of $h^{-1}G$ and its unit on underlying sets.",
-   "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "lem-pc-filtered-colimit-commrings-elementwise",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-ring-sheafification-space-underlying-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tags 008F and 0087, labels lemma-pullback-presheaves and lemma-sheafify-presheaf-structures; Categories Tag 04AX for representatives in filtered colimits"
-   }
-  },
-  {
-   "text": "For an open inclusion $v:V\\hookrightarrow Z$, inverse image is ordinary restriction. In fact every open $W$ of $V$ is open in $Z$, and $W$ is the terminal index of the poset of open neighbourhoods of $v(W)=W$ used in [def-weil-pbc-topological-inverse-image]. Thus $v_pG(W)=G(W)$, compatibly with restriction; this presheaf is already a sheaf, so the universal property of sheafification identifies $v^{-1}G$ with $G|_V$. Under this identification the inverse-image unit is the usual restriction map. Let $G$ now denote the underlying sheaf of sets of $\\mathcal O_X|_Y$. For $j\\in J$, put $v_j:V_j\\hookrightarrow Y$ and $H_j=v_j^{-1}G$. The preceding calculation identifies $H_j$ with the underlying structure sheaf on $V_j$. The unit equation for the canonical composition isomorphism in [lem-weil-pbc-sets-inverse-image-composition], applied to $E\\hookrightarrow Y\\hookrightarrow X$, identifies $p_Y^{-1}G$ with the underlying sheaf of $\\mathcal O_X|_E$ and identifies its maps from $H_j(V_j)$ with precisely the specified $\\rho_j$. Applied to $V_k\\hookrightarrow V_j\\hookrightarrow Y$, that same equation identifies the transition maps on $H_j(V_j)$ with ordinary restrictions to $V_k$. Step 3 ensures these identifications also describe the underlying maps of the ring-valued units.",
-   "uses": [
-    "def-weil-pbc-topological-inverse-image",
     "lem-weil-pbc-sets-inverse-image-composition",
-    "def-weil-pbc-sheafification"
+    "lem-a1-subspace-ring-restriction-unit-coherence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tags 008F and 008I, labels lemma-pullback-presheaves and lemma-pullback-composition; restriction to an open subspace and compatibility of the composition isomorphism with the units"
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APJ proof, first paragraph, using equation (equation-sections-of-intersection) from the preceding paragraph"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-spectral-limit-pullback-sections] to the small directed set $J$, the spectral spaces $V_j$, their spectral inclusion maps and the topological limit $E$ from Step 2. Take its fixed index to be $Y\\in J$, its sheaf to be $G$, and its quasi-compact open to be all of $Y$. The preimage of this open at stage $j$ is all of $V_j$, and the preimage on the limit is all of $E$. Clause (b) gives: every section of $p_Y^{-1}G$ on $E$ comes from a section of $H_j$ on $V_j$ for some $j\\in J$. By Steps 3 and 4 this says exactly $s=\\rho_j(a)$ for a structure-sheaf section $a$, proving (a). No ring, scheme structure or nonemptiness of $E$ is required by the cited topological lemma.",
+   "text": "The ring-to-set inverse-image isomorphism, compared to the chosen inverse-image functors, preserves the adjunction units. Its naturality at restriction to the full intersection transfers representatives and eventual equality to the actual structure-sheaf restriction maps.",
    "uses": [
-    "lem-weil-pbc-spectral-limit-pullback-sections"
+    "lem-a1-ring-inverse-image-underlying-sets"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 0A32, label lemma-compute-pullback-to-limit, with fixed index Y and the full quasi-compact open Y; the fixed-sheaf case of Tag 0A33 used in equation-sections-of-intersection"
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APJ proof, first paragraph, using equation (equation-sections-of-intersection) from the preceding paragraph"
    }
   },
   {
-   "text": "For (b), start instead with $i_0=i$ in Steps 1 and 2, so $Y=U_i$ itself is an index in $J$. If $a,a'\\in\\Gamma(U_i,\\mathcal O_X|_{U_i})$ have the same image on $E$, Steps 3 and 4 give sections of $H_Y$ whose images on $E$ agree. Clause (c) of [lem-weil-pbc-spectral-limit-pullback-sections], at the stage $Y$, gives $k\\ge Y$ in $J$ where the two sections agree. By Step 4 this is $a|_{V_k}=a'|_{V_k}$. Choose an original index labelling $V_k$; it satisfies $V_k\\subseteq U_i$, as required. Passing to distinct opens in $J$ therefore loses neither representatives nor eventual equalities for the original indexed family.",
+   "text": "Naturality of the inverse-image unit makes these ring maps a cocone on all distinct original opens. Reverse inclusion is directed by the assumed family refinement. Apply directed-ring cocone recognition, and transport its ring, additive-group, and set colimits through the equivalence from the order dual to the opposite inclusion category.",
    "uses": [
-    "lem-weil-pbc-spectral-limit-pullback-sections"
+    "lem-a1-directed-ring-cocone-recognition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Tag 0A32, label lemma-compute-pullback-to-limit, injectivity/eventual equality applied with base open U_i"
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APJ proof, first paragraph, using equation (equation-sections-of-intersection) from the preceding paragraph"
    }
   },
   {
-   "text": "The maps $\\rho_i$ are compatible with restriction by Step 4. By [lem-weil-pbc-filtered-colimit-sets-elementwise], (a) makes the induced set-colimit map surjective. If representatives $a\\in\\Gamma(U_i,\\mathcal O_X)$ and $b\\in\\Gamma(U_j,\\mathcal O_X)$ have the same image on $E$, choose an original stage $h$ contained in $U_i\\cap U_j$ and apply (b) to $a|_{U_h},b|_{U_h}$. They agree on a further stage, so the same elementwise lemma proves injectivity. This proves the set-colimit assertion. For abelian groups and rings one can check the universal property [def-weil-pbc-category-colimit] directly: given a compatible cocone $q_i$ into $B$ in either category, define $q(s)=q_i(a)$ using (a). The eventual equality just proved makes this independent of the choice. To check addition or multiplication, move two representatives to a common stage $h$ and compute $q(s+t)=q_h(a|_{U_h}+b|_{U_h})=q(s)+q(t)$ and, in rings, $q(st)=q_h(a|_{U_h}b|_{U_h})=q(s)q(t)$. Zero, negatives and the unit are checked at one stage. Each $\\rho_i$ preserves these operations because it is a ring inverse-image unit. Uniqueness of $q$ follows from (a). Hence this same section ring, or its underlying abelian group, is the specified colimit, with the specified canonical isomorphism.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tags 04AX and 002F, labels section-directed-colimits and definition-colimit; elementwise criterion and direct verification of the algebraic universal properties"
-   }
-  },
-  {
-   "text": "Finally let $g:X\\xrightarrow{\\sim}X'$ carry the indicated open family and $E$ to the corresponding family and $E'$. Its structure-sheaf isomorphism gives maps $g_i^\\sharp:\\Gamma(U'_i,\\mathcal O_{X'})\\to\\Gamma(U_i,\\mathcal O_X)$ and $g_E^\\sharp$ on the inverse-image sheaves over $E',E$. They satisfy $g_E^\\sharp\\rho'_i=\\rho_i g_i^\\sharp$: on the presheaf inverse image this equality holds on each representative section over an open neighbourhood, since both composites restrict its pullback by $g$; it then holds on sheafifications by uniqueness in the sheafification universal property [def-weil-pbc-topological-inverse-image] and [def-weil-pbc-sheafification]. Consequently the two maps from the colimit agree after each coprojection, and hence agree by [def-weil-pbc-category-colimit]. This proves naturality of exactly the canonical identification, in all three categories. In particular the empty intersection causes no exception: the topological lemma covers it, and the sheaf over the empty space has its unique section (the zero ring in the ring case).",
-   "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-category-colimit"
-   ],
+   "text": "For the final transport, the scheme structure-sheaf map followed by the unit on the source intersection is a map to the composite pushforward. Its adjoint along the target intersection inclusion is the required transport. The adjunction gives its all-open unit equation and uniqueness. Naturality at the inclusion of the top open gives the stated restriction squares. This argument works for every scheme map carrying the opens by inverse image, hence for the stated isomorphism; empty intersections cause no exception.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-groupoids.tex",
-    "place": "Equation equation-sections-of-intersection; naturality follows from the specified inverse-image units and the colimit universal property"
+    "place": "Tag 0APJ proof, first paragraph, using equation (equation-sections-of-intersection) from the preceding paragraph"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "def-weil-spectral-space",
-  "def-weil-pbc-topological-inverse-image",
-  "lem-pc-filtered-colimit-commrings-elementwise",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-ring-sheafification-space-underlying-abelian",
-  "lem-weil-pbc-sets-inverse-image-composition",
-  "def-weil-pbc-sheafification",
+  "lem-a1-qc-open-intersection-spectral-presentation",
   "lem-weil-pbc-spectral-limit-pullback-sections",
-  "def-weil-pbc-category-colimit"
+  "lem-weil-pbc-sets-inverse-image-composition",
+  "lem-a1-subspace-ring-restriction-unit-coherence",
+  "lem-a1-ring-inverse-image-underlying-sets",
+  "lem-a1-directed-ring-cocone-recognition"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-groupoids.tex",
-  "place": "Section section-ind-quasi-affine, equation equation-sections-of-intersection preceding Tag 0APJ; proof expanded using Tags 094L, 01KO, 0A31, 0A32 (the fixed-sheaf case of 0A33), 008F, 008I, 0087 and Categories 04AX/002F"
+  "place": "Equation equation-sections-of-intersection preceding Tag 0APJ, via the declared spectral presentation, fixed-sheaf continuity, unit-compatible inverse-image comparisons and directed-ring recognition; the transport is constructed by adjunction uniqueness."
  },
  "mathlib_searches": [
   {
@@ -229,19 +182,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-a1-sections-intersection-structure-colimit",
   "worker": "stage1",
-  "summary": "Preserved the statement and split the equation-sections-of-intersection argument into eight checked steps. Reused the existing spectral inverse-limit pullback-sections theorem, qcqs spectral and quasi-separatedness criteria, inverse-image composition, sheafification and elementwise-colimit nodes. Wrote out the topological limit, the ring-to-set inverse-image comparison, identification of the actual restriction units, both elementwise clauses, all three colimit universal properties and naturality. No new nodes. Mathlib affine-transition scheme limits do not apply to arbitrary intersections or arbitrary quasi-compact open inclusions.",
+  "summary": "Repair of the human-requested re-split: statement unchanged; four independent statement-only nodes separate the spectral inclusion presentation, ring-to-set inverse image with units, nested-subspace restriction and isomorphism coherence, and algebraic colimit recognition. The parent is a short assembly applying the existing fixed-sheaf continuity theorem twice. All eight old proof arguments are mapped and preserved verbatim as handoff material in report.md.",
   "blueprint": "The inherited ancestor lem-a1-affine-hc0 is the vanishing application, via the existing pro-etale representability / fpqc descent chain. This item realizes precisely the equation-sections-of-intersection input to Tag 0APK in the Gabber descent construction named in blueprint.from.place; Steps 1-2 give the spectral limit, Steps 3-6 its section identification, Steps 7-8 the stated algebraic and natural forms. The current main-20261015 ancestor states the vanishing only; no unit route or ancestor statement is changed.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-spectral-limit-pullback-sections",
-    "why": "General topological fixed-sheaf continuity tool, Tag 0A32, for the intersection diagram; this unit has no local version."
-   },
-   {
-    "node": "lem-weil-pbc-sets-inverse-image-composition",
-    "why": "Canonical set inverse-image composition with its unit equation identifies the maps used by the topological tool; no replacement of the fpqc route."
+    "why": "Existing Tag 0A32 fixed-sheaf continuity theorem is the topological tool explicitly used by the equation-sections-of-intersection route."
    }
   ]
  },
@@ -250,12 +199,12 @@
   "lem-weil-pbc-sets-inverse-image-composition"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q18-c49932a2a",
-  "group": "Q18",
+  "reviewer": "NT-cc-Q58-a69b6c3f1",
+  "group": "Q58",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-c49932a2a (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, sources and unit/chapter route. All eight steps preserve the canonical restriction maps and the three coefficient categories; edge cases, duplicates, cycles and long-step checks passed. Both generic tool uses accepted. No repairs needed; detailed checks are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-a69b6c3f1 (reviewer sub-agent of L); spot-checked: FIX: one repairable fault, found in new node lem-a1-subspace-ring-restriction-unit-coherence (B3/C4), now repaired. The re-split meets the human note of 2026-10-21. The old 8 steps (8270 characters) are covered as follows. Old 1–2 are in lem-a1-qc-open-intersection-spectral-presentation. Old 3 is in lem-a1-ring-inverse-image-underlying-sets. Old 4 and the unit-square part of old 8 are in lem-a1-subspace-ring-restriction-unit-coherence. Old 7 and the colimit-naturality part of old 8 are in lem-a1-directed-ring-cocone-recognition. Old 5–6 become parent steps 2–3, which apply the existing Tag 0A32 node lem-weil-pbc-spectral-limit-pullback-sections clauses (b) and (c) with index Y and the full open Y. Nothing was compressed; the parent is 2309 characters, 2419 after the fix. All four new statements are true; each was checked on the empty E, repeated-member, zero-ring and W=∅ cases. None is a duplicate (only étale-site or fixed-ring-module analogues exist), and none restates the parent or one of its clauses. The parent statement matches more-groupoids.tex l.2968–2990 (equation-sections-of-intersection) and is unchanged. Tags 0A31, 0A32, 008F, 008I, 0087, 04AX, 002F, 094L and 01KO match their labels. The item is not dropped, and there is no live supersession: live and side-live still show the 8-step base and none of the new ids. The fault: the coherence node called the ring isomorphism p_V^{-1}(G|_V)≅e^{-1}G 'canonical' without characterizing it, and gave its unit compatibility only at the open V. Parent step 1 needs the unit equation at every open B=V_j⊆Y, with Z=X and V=Y, to identify the 0A32 maps c∘η^{p_j} with the specified ρ_j. Old step 4 had this through the every-open unit equation of lem-weil-pbc-sets-inverse-image-composition. The FIX characterizes c_V in the coherence node as the unique ring-sheaf isomorphism with c_V(η^{p_V}_{G|_V,B}(s))=η^e_{G,B}(s) for every open B⊆V, which is true by the adjunction and uniqueness out of a sheafification. It also makes parent step 1 name the instances it uses: Z=Y, then Z=X with V=Y and B=V_j. The uses lists are unchanged. The tool use of the 0A32 node is accepted. The recorded tool_use of lem-weil-pbc-sets-inverse-image-composition is now reached only through the coherence node's stmt_deps (advisory). Corrected whole files are under fixes/dag/nodes/sec-purity-real-sheaves/.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -281,5 +230,26 @@
   "existing": false,
   "note": "Lean-only ownership repair for returned H1: the four concrete definitions intersectionInclusion, intersectionStructureSheaf, intersectionSections, and intersectionRestriction moved to Sheaf.AlgebraicGeometry.IntersectionStructureSectionsData, owned by def-a1-intersection-structure-sections and publicly imported by this module. This node owns intersectionOpenDiagram, intersectionMap, and sections_intersection_structure_colimit; the theorem is unchanged. The previous record was unusable because it still listed definitions moved to the independently owned data module."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261023T230633-L-3454233",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

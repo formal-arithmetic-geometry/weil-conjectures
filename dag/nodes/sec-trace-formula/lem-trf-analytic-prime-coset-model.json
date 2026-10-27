@@ -1,0 +1,180 @@
+{
+ "id": "lem-trf-analytic-prime-coset-model",
+ "kind": "statement",
+ "title": "Normalized special coset for an immediate prime-degree extension",
+ "statement": "Let $K\\subseteq L$ be complete fields with compatible nontrivial nonarchimedean real absolute values [def-weil-field]. Write $F^\\circ=\\{x:|x|\\le1\\}$ [def-trf-valuation-ring], $\\widetilde F=F^\\circ/\\{x:|x|<1\\}$ and $\\Gamma_F=|F^\\times|$ for $F=K,L$. Assume $\\widetilde K$ is algebraically closed, $\\Gamma_K$ is divisible, $p=\\operatorname{char}\\widetilde K>0$, $[L:K]=p$, $\\widetilde L=\\widetilde K$ and $\\Gamma_L=\\Gamma_K$. For a field $F$ with this absolute value, $a\\in F$ and $s>0$, put $S_{a,s}(F)=\\{c^p-ac+e:c,e\\in F,\\ |pc^p|<s,\\ |e|<s\\}$. A coset $b+S_{a,s}(F)$ is special if it does not contain zero, the infimum of the absolute values of its elements is $s$, and either $a=0$ or $(a,s)=(1,1)$. There exist $a\\in\\{0,1\\}\\subset K$, $s>0$ and $b\\in K$ such that $b+S_{a,s}(K)$ is special and $0\\in b+S_{a,s}(L)$. For every $v\\in b+S_{a,s}(K)$ one has $|pv|<s=\\inf_{c\\in K}|c^p-ac+v|$ and there exists $\\alpha\\in L$ with $|\\alpha^p-a\\alpha+v|<s$. If $a=1$, one can instead take such an $\\alpha$ satisfying $\\alpha^p-\\alpha+v=0$, and then $L=K(\\alpha)$ as ordinary fields.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 6.1.4(i)–(iii), printed p. 38; Lemma 6.1.2(i), printed p. 37; no tame base extension needed when the residue field is algebraically closed and the value group divisible."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-immediate-minpoly-coefficient-preparation] to $L/K$, obtaining $\\theta,r,R,f,b,a_i$. Put $s=r^p$. If $|a_1|=r^{p-1}$ put $A=-a_1$; otherwise put $A=0$. Then $g(T)=T^p-AT+b$ has $|A|\\le r^{p-1}$ and either $A=0$ or $|A|=r^{p-1}$. The discarded coefficients have $|a_i|R^i<s$, including $i=1$ in the case where it is discarded. Thus $|f(x)-g(x)|<s$ for $|x|\\le R$, in either $K$ or $L$. In particular $|g(\\theta)|<s$ and $|p\\theta^p|=|p|R^p<s$.",
+   "uses": [
+    "lem-trf-immediate-minpoly-coefficient-preparation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4(i)--(iii), proof, printed pp. 39--41"
+   }
+  },
+  {
+   "text": "For $c\\in K$ with $|c|\\le R$, the preparation gives $|f(c)|=|\\theta-c|^p>s$, hence $|g(c)|=|\\theta-c|^p$. If $|c|>R$, then $|c|^p>|Ac|,|b|$ and $|\\theta-c|=|c|$, so the same identity holds. Therefore $\\inf_{c\\in K}|g(c)|=r^p=s$, no value equals $s$, and $|pb|=|p|R^p<s$. These are numerical conclusions from the preparation, not an invocation of the immediate-polynomial-obstruction node.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4(i)--(iii), proof, printed pp. 39--41"
+   }
+  },
+  {
+   "text": "Write $P(x)=x^p-Ax$. The set $S_{A,s}(F)$ is an additive subgroup for $F=K,L$: the binomial identity bounds $|P(x+y)-P(x)-P(y)|$ by $|p|\\max(|x|,|y|)^p<s$ whenever $|px^p|,|py^p|<s$, and the same bound shows the sum still has an admissible parameter. Negation is exact for odd $p$; for $p=2$ the extra term is $2x^2$ of norm $<s$. The error terms form the additive ball $|e|<s$. For an inadmissible $c$ one has $|pc^p|\\ge s$, hence $|c|^p>s\\ge r^{p-1}s^{1/p}$ and $|c|^p>|Ac|$. If additionally $|g(c)|<|b|$, cancellation forces $|c|^p=|b|$, contradicting $|pc^p|\\ge s>|pb|$. Consequently all $c$ with $|g(c)|<|b|$ are admissible (in characteristic $p$ all $c$ are admissible). Since $|b|>s$, restricting $c$ to $|pc^p|<s$ leaves the infimum equal to $s$. Adding $e$ with $|e|<s$ leaves each norm $|g(c)|>s$ unchanged. Thus $b+S_{A,s}(K)$ excludes zero and has infimum $s$. Moreover $0=g(\\theta)-g(\\theta)\\in b+S_{A,s}(L)$, since both $\\theta$ and the error $-g(\\theta)$ satisfy their strict bounds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4(i)--(iii), proof, printed pp. 39--41"
+   }
+  },
+  {
+   "text": "If $A=0$, keep $a=0$, $s,b$. Otherwise set $n=p-1$. Divisibility of $\\Gamma_K$ gives $q\\in K^\\times$ with $|q|^n=|A|$. The element $u=A/q^n$ has norm one. Algebraic closedness of $\\widetilde K$ gives a nonzero residue root of $X^n-\\widetilde u$; choose a lift $z_0\\in K^\\circ$ of this root. For $H(X)=X^n-u$ all coefficients have norm at most one, $|H(z_0)|<1$, $|z_0|=1$ and $|H'(z_0)|=|nz_0^{n-1}|=1$, since $p\\nmid n$. Apply [lem-trf-complete-ultrametric-simple-root-lifting]. The lifted root $z$ has $z^n=u$, so $t=qz$ satisfies $t^{p-1}=A$ and $|t|=r$. No base extension was made.",
+   "uses": [
+    "lem-trf-complete-ultrametric-simple-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4(i)--(iii), proof, printed pp. 39--41"
+   }
+  },
+  {
+   "text": "In the second case replace $(A,b,s)$ by $(a,b',s')=(1,b/t^p,1)$. For $F=K,L$ the substitution $c=td$, $e=t^p e'$ gives exactly $t^{-p}S_{A,s}(F)=S_{1,1}(F)$: indeed $t^{-p}(c^p-Ac+e)=d^p-d+e'$, and both strict bounds divide by $|t|^p=s$. Thus the coset's norms and infimum divide by $s$, zero membership is preserved, and $|pb'|<1$. Rename $b',s'$ as $b,s$. In the first case there is no change. We have the required special coset $C=b+S_{a,s}(K)$, split over $L$, with $|a|\\le s^{(p-1)/p}$ and $|pb|<s$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4(i)--(iii), proof, printed pp. 39--41"
+   }
+  },
+  {
+   "text": "Take any $v\\in C$, say $v=b+d^p-ad+e$ with $|pd^p|,|e|<s$. The bound on $a$ gives $|ad|\\le\\max(s,|d|^p)$, so $|pad|\\le\\max(|p|s,|pd^p|)<s$. Hence $|pv|<s$. The subgroup identity gives $v+S_{a,s}(K)=C$, whose infimum is $s$ and whose elements have norm at least $s$. Thus the infimum of $|c^p-ac+v|$ over admissible $c$ is $s$: adding a term of norm $<s$ does not change these norms. If an inadmissible $c$ had $|c^p-ac+v|<s$, then $|c|^p>s$ and $|c|^p>|ac|$, forcing $|c|^p=|v|$, contrary to $|pv|<s\\le|pc^p|$. This proves the unrestricted infimum is $s$. Also $v+S_{a,s}(L)=b+S_{a,s}(L)$ contains zero, yielding $\\alpha\\in L$ with $|p\\alpha^p|<s$ and $|\\alpha^p-a\\alpha+v|<s$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4(i)--(iii), proof, printed pp. 39--41"
+   }
+  },
+  {
+   "text": "Suppose $a=1$, so $s=1$, and choose the preceding $\\alpha$. Expand $H(Y)=(\\alpha+Y)^p-(\\alpha+Y)+v$. It is monic with constant coefficient of norm $<1$. For $1\\le i<p$, the binomial coefficient is divisible by $p$. If $|\\alpha|\\ge1$, then $|\\binom pi\\alpha^{p-i}|\\le|p||\\alpha|^p<1$; if $|\\alpha|<1$, this is bounded by $|p|<1$. Therefore all coefficients are integral and the linear coefficient $p\\alpha^{p-1}-1$ has norm one. Apply [lem-trf-complete-ultrametric-simple-root-lifting] over the complete field $L$ at $Y=0$ to obtain a zero $y$ of norm $<1$. Then $\\beta=\\alpha+y\\in L$ satisfies $\\beta^p-\\beta+v=0$. The infimum already proved is one, so this polynomial has no root in $K$; hence $\\beta\\notin K$. Products of a basis of $L$ over $K(\\beta)$ with a basis of $K(\\beta)$ over $K$ form a $K$-basis of $L$ (expand coefficients to span and use linear independence successively). Thus $p=[L:K]=[L:K(\\beta)][K(\\beta):K]$. Since $\\beta\\notin K$ and $p$ is prime, $K(\\beta)=L$. Rename $\\beta$ as the requested $\\alpha$.",
+   "uses": [
+    "lem-trf-complete-ultrametric-simple-root-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 6.1.4(i)--(iii), proof, printed pp. 39--41"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-immediate-minpoly-coefficient-preparation",
+  "lem-trf-complete-ultrametric-simple-root-lifting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 6.1.4 and Lemma 6.1.2; agent assembly from the coefficient preparation and simple-root lifting, read in the cited arXiv version online. The local literature copy is missing (WANTED in report)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An immediate degree p extension of a complete nonarchimedean field splits a critical coset for an approximate additive polynomial T pow p minus a T plus b",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"hensels_lemma\", \"module\": \"Mathlib/NumberTheory/Padics/Hensel\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {R : Type u_1} [inst_1 : CommSemiring R] [inst_2 : Algebra R ℤ_[p]]\\n  {F : Polynomial R} {a : ℤ_[p]},\\n  ‖(Polynomial.aeval a) F‖ < ‖(Polynomial.aeval a) (Polynomial.derivative F)‖ ^ 2 →\\n    ∃ z,\\n      (Polynomial.aeval z) F = 0 ∧\\n        ‖z - a‖ < ‖(Polynomial.a\", \"doc\": \"For a polynomial $ F $ over the p-adic integers $ \\\\mathbb{Z}_p $ and an element $ a \\\\in \\\\mathbb{Z}_p $, if the p-adic norm of $ F(a) $ is strictly less than the p-adic norm of the derivative $ F'(a) $\"}\n  {\"name\": \"Polynomial.SplittingFieldAux\", \"module\": \"Mathlib/FieldTheory/SplittingField/Construction\", \"type\": \"ℕ → {K : Type u} → [inst : Field K] → Polynomial K → Type u\", \"doc\": \"Given a natural number $ n $, a field $ K $, and a polynomial $ f $ over $ K $, this recursive construction builds a field extension $ L $ of $ K $ by successively adjoining roots of irreducible facto\"}\n  {\"name\": \"Polynomial.SplittingFieldAuxAux\", \"module\": \"Mathlib/FieldTheory/SplittingField/Construction\", \"type\": \"ℕ → {K : Type u} → [inst : Field K] → Polynomial K → (L : Type u) × (x : Field L) × Algebra K L\", \"doc\": \"Given a natural number $ n $, a field $ K $, and a polynomial $ f $ over $ K $, this recursive construction builds a field extension $ L $ of $ K $ by successively adjoining roots of irreducible facto\"}\n  {\"name\": \"WittVector.RecursionBase.solution\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"(p : ℕ) →\\n  [hp : Fact (Nat.Prime p)] → {k : Type u_1} → [inst : Field k] → [IsAlgClosed k] → WittVector p k → WittVector p k → k\", \"doc\": \"Given two Witt vectors $\\\\mathbf{a}_1$ and $\\\\mathbf{a}_2$ over an algebraically closed field $k$ of characteristic $p$, this function returns an element $x \\\\in k$ such that $x^{p-1} = \\\\frac{\\\\mathbf{a}_\"}\n  {\"name\": \"Field.henselian\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (K : Type u_1) [inst : Field K], HenselianLocalRing K\", \"doc\": \"Any field $ K $ is a Henselian local ring. This follows because a field trivially satisfies Hensel's lemma: its maximal ideal is zero, and the residue field coincides with $ K $ itself, making root li\"}\n  {\"name\": \"WittVector.RecursionMain.root_exists\", \"module\": \"Mathlib/RingTheory/WittVector/FrobeniusFractionField\", \"type\": \"∀ (p : ℕ) [hp : Fact (Nat.Prime p)] {k : Type u_1} [inst : Field k] [inst_1 : CharP k p] [IsAlgClosed k] (n : ℕ)\\n  (a₁ a₂ : WittVector p k) (bs : Fin (n + 1) → k),\\n  a₁.coeff 0 ≠ 0 → a₂.coeff 0 ≠ 0 → ∃ b, (WittVector.RecursionMain.succNthDefiningPoly p n a₁ a₂ bs).IsRoot b\", \"doc\": \"For any natural number $n$, Witt vectors $a_1, a_2$ over a field $k$ with non-vanishing zeroth coefficients ($a_1^{(0)} \\\\neq 0$ and $a_2^{(0)} \\\\neq 0$), and a function $bs : \\\\mathrm{Fin}(n+1) \\\\to k$, \"}\n  {\"name\": \"Polynomial.exists_approx_polynomial\", \"module\": \"Mathlib/NumberTheory/ClassNumber/AdmissibleCardPowDegree\", \"type\": \"∀ {Fq : Type u_1} [inst : Fintype Fq] [inst_1 : Field Fq] {b : Polynomial Fq},\\n  b ≠ 0 →\\n    ∀ {ε : ℝ},\\n      0 < ε →\\n        ∀ (A : Fin (Fintype.card Fq ^ ⌈-Real.log ε / Real.log ↑(Fintype.card Fq)⌉₊).succ → Polynomial Fq),\\n          ∃ i₀ i₁, i₀ ≠ i₁ ∧ ↑(Polynomial.cardPowDegree (A i₁ % b - A i₀ % \", \"doc\": \"For any non-zero polynomial $ b $ over a finite field $ \\\\mathbb{F}_q $ and any $ \\\\varepsilon > 0 $, if $ A $ is a family of polynomials indexed by a finite set of size $ q^{\\\\lceil -\\\\log \\\\varepsilon / \"}\n  {\"name\": \"Field.primitive_element_inf_aux_exists_c\", \"module\": \"Mathlib/FieldTheory/PrimitiveElement\", \"type\": \"∀ {F : Type u_1} [inst : Field F] [Infinite F] {E : Type u_2} [inst_2 : Field E] (ϕ : F →+* E) (α β : E)\\n  (f g : Polynomial F),\\n  ∃ c, ∀ α' ∈ (Polynomial.map ϕ f).roots, ∀ β' ∈ (Polynomial.map ϕ g).roots, -(α' - α) / (β' - β) ≠ ϕ c\", \"doc\": \"For any polynomials $f, g$ over a field $F$ and a ring homomorphism $\\\\phi: F \\\\to K$, there exists an element $c \\\\in F$ such that for all roots $\\\\alpha' \\\\in K$ of $f_\\\\phi$ and $\\\\beta' \\\\in K$ of $g_\\\\phi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary algebra, discrete valuation rings, local fields or unrelated analytic functions; none states the specified immediate analytic-field assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "NormedField, Polynomial.IsRoot",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"Polynomial.eventually_atBot_not_isRoot\", \"module\": \"Mathlib.Analysis.Polynomial.Basic\", \"type\": \" {𝕜 : Type u_1} [NormedField 𝕜] [LinearOrder 𝕜] [IsStrictOrderedRing 𝕜] (P : Polynomial 𝕜) (hP : P ≠ 0) : ∀ᶠ (x : 𝕜) in Filter.atBot, ¬P.IsRoot x\", \"doc\": \"\"}\n  {\"name\": \"Polynomial.eventually_atTop_not_isRoot\", \"module\": \"Mathlib.Analysis.Polynomial.Basic\", \"type\": \" {𝕜 : Type u_1} [NormedField 𝕜] [LinearOrder 𝕜] [IsStrictOrderedRing 𝕜] (P : Polynomial 𝕜) (hP : P ≠ 0) : ∀ᶠ (x : 𝕜) in Filter.atTop, ¬P.IsRoot x\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary algebra, discrete valuation rings, local fields or unrelated analytic functions; none states the specified immediate analytic-field assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "critical.coset|special.coset|immediate.*degree|degree.*immediate",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary algebra, discrete valuation rings, local fields or unrelated analytic functions; none states the specified immediate analytic-field assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Immediate degree p valued field extension represented by a special coset that splits over the extension and an Artin Schreier equation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FiniteField.instFieldExtension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"(k : Type u_1) →\\n  [inst : Field k] →\\n    (p : ℕ) → [inst_1 : Fact (Nat.Prime p)] → (n : ℕ) → [inst_2 : CharP k p] → Field (FiniteField.Extension k p n)\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is the dimens\"}\n  {\"name\": \"FiniteField.Extension\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \"[CharP k p] : Type\", \"doc\": \"Given a finite field $ k $ of characteristic $ p $, this definition constructs the finite field extension of degree $ n $ over $ k $. The resulting field has $ p^{m \\\\cdot n} $ elements, where $ m $ is\"}\n  {\"name\": \"IsPurelyInseparable.sepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] : sepDegree F E = 1\", \"doc\": \"If $ E/F $ is a purely inseparable field extension, then the separable degree of $ E $ over $ F $ is equal to 1, i.e., $ [E : F]_\\\\text{sep} = 1 $.\"}\n  {\"name\": \"IsPurelyInseparable.normal\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] : Normal F E\", \"doc\": \"Every purely inseparable field extension is a normal extension. Specifically, if $ E $ is a purely inseparable extension of $ F $, then $ E $ is a normal extension of $ F $, meaning every irreducible \"}\n  {\"name\": \"FiniteField.Extension.frob\", \"module\": \"Mathlib.FieldTheory.Finite.Extension\", \"type\": \": Gal(Extension k p n/k)\", \"doc\": \"The Frobenius automorphism of the finite field extension $ L/k $, defined by raising elements to the power of the characteristic $ p $ of the base field $ k $, viewed as an element of the Galois group\"}\n  {\"name\": \"IsPurelyInseparable.finSepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] : finSepDegree F E = 1\", \"doc\": \"If the field extension $ E $ over $ F $ is purely inseparable, then its separable degree $[E:F]_s$ is equal to 1.\"}\n  {\"name\": \"Polynomial.SplittingField.instExpChar\", \"module\": \"Mathlib.FieldTheory.SplittingField.Construction\", \"type\": \"(p : ℕ) [ExpChar K p] : ExpChar (SplittingField f) p\", \"doc\": \"For any polynomial $ f $ over a field $ K $, the splitting field of $ f $ is a field extension of $ K $ in which $ f $ factors completely into linear terms.\"}\n  {\"name\": \"isSplittingField_iff_intermediateField\", \"module\": \"Mathlib.FieldTheory.SplittingField.IsSplittingField\", \"type\": \": p.IsSplittingField K L ↔ (p.map (algebraMap K L)).Splits ∧ IntermediateField.adjoin K (p.rootSet L) = ⊤\", \"doc\": \"A field extension $ L $ of $ K $ is a splitting field of the polynomial $ p $ over $ K $ if and only if $ p $ splits into linear factors in $ L $ and the field generated by $ K $ and the roots of $ p \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary algebra, discrete valuation rings, local fields or unrelated analytic functions; none states the specified immediate analytic-field assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalize an immediate extension of prime degree by a polynomial X pow p minus X plus b or approximate pth power equation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"X_pow_sub_C_irreducible_iff_of_prime\", \"module\": \"Mathlib/FieldTheory/KummerPolynomial\", \"type\": \"∀ {K : Type u} [inst : Field K] {p : ℕ},\\n  Nat.Prime p → ∀ {a : K}, Irreducible (Polynomial.X ^ p - Polynomial.C a) ↔ ∀ (b : K), b ^ p ≠ a\", \"doc\": \"Let $K$ be a field, let $p$ be a prime number, and let $a \\\\in K$. The polynomial $X^p - a$ is irreducible over $K$ if and only if $a$ has no $p$-th root in $K$ (that is, there is no $b \\\\in K$ such tha\"}\n  {\"name\": \"Polynomial.HasSeparableContraction.contraction\", \"module\": \"Mathlib/RingTheory/Polynomial/SeparableDegree\", \"type\": \"{F : Type u_1} →\\n  [inst : CommSemiring F] → {q : ℕ} → {f : Polynomial F} → Polynomial.HasSeparableContraction q f → Polynomial F\", \"doc\": \"Given a polynomial $ f $ over a field $ F $ of characteristic $ q $ that has a separable contraction, this is the specific polynomial obtained by substituting $ X^{q^m} $ into some separable polynomia\"}\n  {\"name\": \"X_pow_sub_C_irreducible_iff_of_prime_pow\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {p : ℕ},\\n  Nat.Prime p →\\n    p ≠ 2 → ∀ {n : ℕ}, n ≠ 0 → ∀ {a : K}, Irreducible (Polynomial.X ^ p ^ n - Polynomial.C a) ↔ ∀ (b : K), b ^ p ≠ a\", \"doc\": \"Let $K$ be a field, $p$ an odd prime, $n$ a positive integer, and $a \\\\in K$. The polynomial $X^{p^n} - a$ in $K[X]$ is irreducible if and only if for every $b \\\\in K$, $b^p \\\\neq a$.\"}\n  {\"name\": \"X_pow_sub_C_irreducible_of_prime\", \"module\": \"Mathlib/FieldTheory/KummerPolynomial\", \"type\": \"∀ {K : Type u} [inst : Field K] {p : ℕ},\\n  Nat.Prime p → ∀ {a : K}, (∀ (b : K), b ^ p ≠ a) → Irreducible (Polynomial.X ^ p - Polynomial.C a)\", \"doc\": \"For a prime number $p$ and an element $a$ in a field $K$ such that $a$ is not a $p$-th power in $K$, the polynomial $X^p - a$ is irreducible in the polynomial ring $K[X]$.\"}\n  {\"name\": \"Polynomial.generalizedEisenstein\", \"module\": \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDomain R] {K : Type u_2} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  {q f : Polynomial R} {p : ℕ},\\n  Irreducible (Polynomial.map (algebraMap R K) q) →\\n    q.Monic →\\n      f.IsPrimitive →\\n        0 < f.natDegree →\\n          (algebraMap R K) f.leadingCoeff ≠ 0 →\", \"doc\": \"Let $ q $ be a monic polynomial in $ R[X] $ that is irreducible over the field $ K $, and let $ f $ be a primitive polynomial in $ R[X] $ with positive degree. Suppose the leading coefficient of $ f $\"}\n  {\"name\": \"X_pow_sub_C_irreducible_of_prime_pow\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {p : ℕ},\\n  Nat.Prime p → p ≠ 2 → ∀ (n : ℕ) {a : K}, (∀ (b : K), b ^ p ≠ a) → Irreducible (Polynomial.X ^ p ^ n - Polynomial.C a)\", \"doc\": \"Let $p$ be a prime number with $p \\\\neq 2$, $n$ a natural number, and $a$ an element of a field $K$. If no element $b \\\\in K$ satisfies $b^p = a$, then the polynomial $X^{p^n} - a$ is irreducible over $\"}\n  {\"name\": \"not_irreducible_expand\", \"module\": \"Mathlib/FieldTheory/Perfect\", \"type\": \"∀ (R : Type u_2) (p : ℕ) [inst : CommSemiring R] [inst_1 : Fact (Nat.Prime p)] [inst_2 : CharP R p] [PerfectRing R p]\\n  (f : Polynomial R), ¬Irreducible ((Polynomial.expand R p) f)\", \"doc\": \"For a commutative semiring $ R $ with prime characteristic $ p $ that is a perfect ring (where every element has a $ p $-th root), the polynomial obtained by substituting $ X $ with $ X^p $ in any pol\"}\n  {\"name\": \"Polynomial.Monic.natSepDegree_eq_one_iff\", \"module\": \"Mathlib/FieldTheory/SeparableDegree\", \"type\": \"∀ {F : Type u} [inst : Field F] {f : Polynomial F} (q : ℕ) [ExpChar F q],\\n  f.Monic → (f.natSepDegree = 1 ↔ ∃ m n y, m ≠ 0 ∧ f = (Polynomial.X ^ q ^ n - Polynomial.C y) ^ m)\", \"doc\": \"For a monic polynomial $ f $ over a field $ F $ with exponential characteristic $ q $, the natural separable degree of $ f $ is 1 if and only if there exist natural numbers $ m, n $ with $ m \\\\neq 0 $,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary algebra, discrete valuation rings, local fields or unrelated analytic functions; none states the specified immediate analytic-field assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-immediate-rationality",
+  "date": "2026-10-24",
+  "group": "Q46"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Proof of Theorem 6.3.1(i), type 4 argument, printed p. 50, specialized to algebraically closed k: every finite extension is immediate, and the proof constructs a topological generator. Supporting fact: Proposition 6.1.4(i)–(iii), printed p. 38; Lemma 6.1.2(i), printed p. 37; no tame base extension needed when the residue field is algebraically closed and the value group divisible.",
+   "via": [
+    "lem-trf-analytic-immediate-rationality",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-analytic-prime-coset-model",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split via coefficient preparation of the minimal polynomial and complete ultrametric simple-root lifting; wrote out truncation, restricted infimum, subgroup, normalization, all-representative and exact-root calculations. Two statement-only supporting nodes; no Mathlib match or project attachment. Temkin source read online; missing local PDF reported WANTED.",
+  "blueprint": "Realizes the Temkin Proposition 6.1.4(i)--(iii) and Lemma 6.1.2 input along the recorded semistable-modification branch of lem-trf-local-term-locality, using the latest blueprint ancestry. It does not replace a unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-715a6acc3",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-715a6acc3 (reviewer sub-agent of L); spot-checked: I read Temkin arXiv:0707.3953v3, section 6.1, printed pp. 36-41, from a pdftotext copy; the local PDF is missing and the worker reported it as WANTED. That covers the definitions of S_{a,s}, critical and special cosets, Lemma 6.1.2 and its Hensel proof, and Prop 6.1.4 with its immediate-case proof (shrinking E_0, |a_1|<=r_0^{p-1}, |a_i|<r^p/r_0^i, |p|r_0^p<r^p, truncation to g, then (ii) and (iii)). The item statement is unchanged and is 6.1.4(i)-(iii) plus 6.1.2(i) for every representative. The tame base change K(a^{1/(p-1)}) is trivial here because the residue field is algebraically closed and the value group divisible; step 4 proves this. New node lem-trf-immediate-minpoly-coefficient-preparation is true: r is positive and not attained by immediacy, |f(c)|=|theta-c|^p by uniqueness of the extended absolute value, |b|=R^p, and the bounds come from shrinking R toward r with |a_i| fixed, including the conditional |a_1|R<r^p. Edge cases checked: inseparable char p (f=T^p-theta^p) and p=2. It holds only the first half of Temkin's proof, so it does not restate the item, and lem-trf-immediate-prime-polynomial-obstruction (no L, no coefficient bounds) is not a duplicate. New node lem-trf-complete-ultrametric-simple-root-lifting is the Newton/Hensel step for a complete real-valued field. It differs from lem-per-henselian-simple-root-stability (henselian, starts from a simple root). No DAG or Mathlib duplicate: Mathlib's Hensel results are the henselian-ring API and hensels_lemma over Z_p only. Steps 1-7 are each checked in review.md. Step 1: the truncation error is below s on |x|<=R. Step 2: inf|g|=s is not attained, by cases |c|<=R and |c|>R. Step 3: subgroup property (binomial terms; 2c^2 for p=2), inadmissible c are excluded via |pb|<s, and the coset splits over L via theta and -g(theta). Step 4: the (p-1)st root via the lifting node, with p not dividing p-1. Step 5: rescaling t^{-p}S_{A,s}=S_{1,1}. Step 6: |pv|<s using |a|<=s^{(p-1)/p}, and the unrestricted infimum equals s. Step 7: H(Y)=(alpha+Y)^p-(alpha+Y)+v has integral coefficients with linear coefficient of norm one; lifting over complete L, beta not in K, and the tower law give L=K(beta). Every non-elementary input is a cited node statement. No cycle, no off-unit tool use, blueprint from/via/same_as consistent, no SGA. No fixes."
+ }
+}

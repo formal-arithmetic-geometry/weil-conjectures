@@ -1,0 +1,384 @@
+{
+ "id": "lem-sfb-lft-group-etale-component-quotient",
+ "kind": "statement",
+ "title": "Canonical etale component quotient of a locally finite type field group",
+ "statement": "Let $k$ be a field [def-weil-field] and $H/k$ a separated group scheme locally of finite type [def-sc-group-scheme, def-weil-finite-type-morphism]; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Let $H^0$ be the open subgroup given by the connected component of the identity [def-weil-connected-scheme, def-weil-open-immersion]. The fppf sheafification $E=H/H^0$ of $V\\mapsto H(V)/H^0(V)$ [def-pc-fppf-site, def-weil-pbc-sheafification] is represented by a separated etale group scheme over $k$ [def-weil-etale-morphism]. The quotient map $q:H\\to E$ is surjective, flat and of finite presentation [def-weil-surjective-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]; in particular it is quasi-compact. Its geometric fibres are the geometric connected components of $H$, and its kernel is $H^0$. For every $k$-scheme $B$ [def-pc-scheme], $E_B$ with $q_B$ is the fppf quotient $H_B/(H^0)_B$ [def-pc-base-change]. More intrinsically, for every etale $B$-scheme $Z$, composition with $q_B$ gives a bijection $\\operatorname{Hom}_B(E_B,Z)\\simeq\\operatorname{Hom}_B(H_B,Z)$. These quotient identifications are compatible with further base change. In particular, for fields $k_1,k_2$, separated locally finite type groups $H_i/k_i$, a scheme $B$ with maps to both fields, and a group isomorphism $(H_1)_B\\simeq(H_2)_B$, there is a unique induced isomorphism $(E_1)_B\\simeq(E_2)_B$ intertwining the quotient maps. Induction respects identity isomorphisms and composition. Neither quasi-compactness nor smoothness, reducedness, commutativity or perfectness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R, proposition-connected-component, combined with bootstrap.tex Tag 06PH, lemma-quotient-free-action, and stacks-morphisms.tex Tag 0DU1, lemma-quotient-etale. The quotient relation is the clopen inverse image of H^0 under (x,y) -> xy^{-1}. Scheme representation of an etale space over a field and intrinsic geometric-component universal property are included in this auxiliary lemma; compare Milne, Algebraic Groups, Propositions 1.29-1.34 and 1.52, printed pp.15-21, for finite-type groups."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=H^0$. By lem-sfb-lft-field-group-neutral-component, $C$ is a clopen finite-type geometrically irreducible subgroup and $C_L=(H_L)^0$ for every field extension $L/k$. It is normal as a subgroup functor, including on nonreduced tests. Indeed consider conjugation $c:H\\times_k C\\to H$. At a point of its source take its residue field $L$; its coordinates are $g\\in H(L)$ and $a\\in C(L)$. Conjugation by $g$ on $H_L$ is an automorphism fixing the identity, with inverse conjugation by $g^{-1}$, so its homeomorphism preserves the connected component $(H_L)^0=C_L$. Thus $c$ sends this point into $C$. The open-factorization lemma gives a unique morphism $H\\times_k C\\to C$. The identities for conjugation follow after inclusion into $H$, and conjugation by $g^{-1}$ gives the reverse inclusion on every test scheme. This proves normality without replacing $C$ by its reduction.",
+   "uses": [
+    "lem-sfb-lft-field-group-neutral-component",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R; normality written out using field-extension equality and Schemes Tag 01HI."
+   }
+  },
+  {
+   "text": "Both $H\\to\\operatorname{Spec}k$ and $C\\to\\operatorname{Spec}k$ are flat by lem-pc-flat-field. The spectrum of a field is locally Noetherian: its only ideals are zero and the whole field, so its affine coordinate ring is Noetherian in pqf-def-locnoeth. The given local finite type of $H$ and the finite type of $C$ from step 1 therefore imply local finite presentation for both structural maps by pqf-lem-lft-fp-locnoeth. Regard these schemes as their actual representable fppf sheaves, using def-trf-scheme-algebraic-space.",
+   "uses": [
+    "lem-pc-flat-field",
+    "pqf-def-locnoeth",
+    "pqf-lem-lft-fp-locnoeth",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 and 01TP; flatness over a field; Spaces Tag 025Y."
+   }
+  },
+  {
+   "text": "Let $C$ act on $H$ by left multiplication. Cancellation on test groups proves freeness. The free-action quotient lemma applies by step 2: its quotient sheaf $E$ is an algebraic space, $q:H\\to E$ is surjective flat locally finitely presented, has fppf-local sections, and $(a,h)\\mapsto(ah,h)$ identifies $R=C\\times_k H$ with $H\\times_E H$. Normality in step 1 identifies these left orbits with the cosets in the statement. Under $R\\to H\\times_k H$, its image is precisely the inverse image of the open subscheme $C$ by $(x,y)\\mapsto xy^{-1}$. This is an isomorphism onto that open subscheme: the inverse on tests is $(x,y)\\mapsto(xy^{-1},y)$, and both formulas are morphisms by the group operations and unique open factorization. Thus $R\\to H\\times_k H$ is an open immersion. Apply lem-sfb-open-relation-etale-quotient to this action groupoid and to the flat locally finitely presented structural map of $H$ from step 2. It says exactly that the same quotient sheaf $E$ is etale over $k$.",
+   "uses": [
+    "lem-sfb-free-flat-group-space-quotient",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-sfb-open-relation-etale-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH; stacks-morphisms.tex Tag 0DU1; explicit open relation."
+   }
+  },
+  {
+   "text": "The etale algebraic space $E/k$ is locally quasi-finite by lem-a1-etale-space-locally-quasi-finite. Every etale scheme chart of $E$ is etale over $k$; since a field is reduced, etale-proposition-etale-reduced makes each chart reduced. Hence $E$ is reduced in the atlas sense required by lem-sfb-reduced-quasifinite-space-field-decomposition. That lemma realizes $E$ as a disjoint union of spectra of finite extensions of $k$, in particular as a scheme, with no finiteness of the index set. Its structural map remains etale: in the chartwise etale assertion one may now take the identity chart of this representing scheme. By lem-sfb-space-local-properties-chart-test, the flatness and local finite presentation of $q$ are also the ordinary scheme properties. Its local-section and relation descriptions remain descriptions of the same representable sheaves.",
+   "uses": [
+    "lem-a1-etale-space-locally-quasi-finite",
+    "etale-proposition-etale-reduced",
+    "lem-sfb-reduced-quasifinite-space-field-decomposition",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 06S0 (lemma-locally-quasi-finite-over-field); spaces-morphisms.tex Tag 03XU; etale.tex Tag 025O."
+   }
+  },
+  {
+   "text": "Normality makes $T\\mapsto H(T)/C(T)$ a presheaf of groups. Its sheafification $E$ is a sheaf of groups as follows. Lift finitely many sections to orbit classes on a common fppf refinement, multiply or invert their representatives there, and glue. The local-representative and local-equality statements of lem-weil-pbc-site-sheafification-sections-local show that these results are independent of representatives and refinements. Associativity, inverse and identity hold on these covers and hence hold in the sheaf. By Yoneda these natural operations on the represented sheaf give morphisms $E\\times_k E\\to E$, $E\\to E$ and $\\operatorname{Spec}k\\to E$ satisfying the group diagrams; $q$ is a homomorphism. Thus $E$ is an etale group scheme. By lem-sc-group-scheme-separated-field it is separated over $k$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-pc-yoneda",
+    "def-sc-group-scheme",
+    "lem-sc-group-scheme-separated-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WB and 00WK; Categories Tag 001P; groupoids.tex Tag 047L."
+   }
+  },
+  {
+   "text": "The singleton $\\{H\\to E\\}$ is an fppf covering by step 3 and lem-sfb-space-fppf-covering-calculus (including its agreement with scheme coverings). Its pullback of $q$ is $C\\times_k H\\to H$, by the relation isomorphism of step 3. This is of finite type: $C/k$ is of finite type by step 1 and finite type is preserved by arbitrary base change in lem-sfb-finite-type-composition-base-change. Apply finite-type fppf descent in lem-sfb-space-four-property-fppf-descent to $q$ with this covering. It gives finite type, hence quasi-compactness, of $q$. Also $H\\to\\operatorname{Spec}k$ is separated by hypothesis; separated cancellation applied to $H\\xrightarrow q E\\to\\operatorname{Spec}k$ makes $q$ separated, hence quasi-separated by lem-pc-separated-quasi-separated. Together with local finite presentation from step 4, this is finite presentation by def-sbc-locally-finite-presentation. No quasi-compactness of $H$ was used.",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-space-four-property-fppf-descent",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-pc-separated-quasi-separated",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Finite-type fppf descent; morphisms.tex Tags 01T0 and 01TP; schemes.tex Tags 01KV and 01KH."
+   }
+  },
+  {
+   "text": "For any $k$-scheme $B$, put $C_B=C\\times_k B$. By the base-change clause of lem-sfb-space-fppf-covering-calculus, $q_B:H_B\\to E_B$ is fppf. Base-changing the relation isomorphism gives $C_B\\times_B H_B\\simeq H_B\\times_{E_B}H_B$ with the same formulas. Therefore on every $B$-scheme $T$, sections of $E_B(T)$ lift fppf-locally to $H_B$, and two such lifts have the same image precisely when their ratio belongs to $C_B$ (locally, and in fact globally whenever both lifts are global). The local-representative/equality criterion for sheafification now identifies $E_B$ with the sheafification of $H_B(T)/C_B(T)$: this map is locally surjective, and its local injectivity is exactly the displayed kernel-pair formula. Taking the second coordinate to be the identity in that formula identifies the scheme-theoretic kernel of $q_B$ with $C_B$. The identification is by the actual inclusion and is compatible with all pullbacks. Applying this with $B=\\operatorname{Spec}k$ gives the asserted kernel of $q$.",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH, torsor relation under base change; sites.tex Tags 00WB and 00WK."
+   }
+  },
+  {
+   "text": "Fix an algebraically closed extension $\\Omega/k$. By etale base change and the etale-fibre description, $E_\\Omega$ is a disjoint union of copies of $\\operatorname{Spec}\\Omega$, so the fibres of $q_\\Omega$ are clopen in $H_\\Omega$. Each is nonempty by step 7. For any such fibre $F$, choose a point with residue field $L$; it supplies an $L$-point of $F$. The relation formula of step 7 then identifies $F_L$ with $C_L$ by translation using this point. This is connected by the geometric irreducibility in step 1. The map $F_L\\to F$ is surjective: $\\operatorname{Spec}L\\to\\operatorname{Spec}\\Omega$ is surjective, and surjectivity is preserved by base change. A separation of $F$ into two nonempty clopen pieces would pull back to such a separation of $F_L$, a contradiction. Hence every fibre is connected. A nonempty connected clopen piece of a disjoint clopen partition is a maximal connected subset (any connected subset meeting two pieces is separated). These fibres are consequently exactly the geometric connected components, with their induced open scheme structures.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO, 02GL and 01S1; component identification by the torsor relation and clopen partition."
+   }
+  },
+  {
+   "text": "Let $Z\\to B$ be any etale scheme and let $f:H_B\\to Z$ be a $B$-morphism. Write $R_B=C_B\\times_B H_B$, with $s(a,h)=h$ and $t(a,h)=ah$. The equalizer of $fs$ and $ft$ is an open subscheme $W\\subseteq R_B$: it is the pullback of the open diagonal of $Z/B$, by def-weil-etale-morphism and def-weil-unramified-morphism. We show its underlying subset is all of $R_B$. Lift an arbitrary point of $R_B$ to a geometric point with algebraically closed residue extension $\\Omega$; write its second coordinate as $h\\in H_B(\\Omega)$. The morphism $C_\\Omega\\to Z_\\Omega$, $a\\mapsto f(ah)$, has connected nonempty source by step 1. By etale base change and the etale-fibre description its target is a disjoint union of copies of $\\operatorname{Spec}\\Omega$. It therefore factors through the single copy selected by the identity $a=1$, and equals the constant map with value $f(h)$. In particular $fs=ft$ at the chosen geometric point. Thus every point lies in $W$. The open-subscheme structure on the full underlying open is the whole scheme, so $W=R_B$ and $fs=ft$ as morphisms. This uses an open diagonal, not a closed diagonal, and imposes no reducedness on the source or separatedness on $Z$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GE, 02GO and 02GL; equality on the open equalizer, written out."
+   }
+  },
+  {
+   "text": "By step 7 the singleton $\\{q_B:H_B\\to E_B\\}$ is fppf, hence fpqc by lem-trf-fppf-covering-is-fpqc. Step 9 and the relation formula say that $f$ agrees on its two pullbacks to $H_B\\times_{E_B}H_B$. The representable fpqc descent lemma gives a unique scheme morphism $g:E_B\\to Z$ with $gq_B=f$. It is a $B$-morphism: its composite to $B$ and the structural map $E_B\\to B$ agree after $q_B$, so the uniqueness part of the same descent lemma (target $B$) makes them equal. That uniqueness also says that any two $B$-morphisms $E_B\\to Z$ with the same pullback are equal. This proves the stated Hom bijection. The quotient identifications of step 7 commute with further base change: both identifications send the actual image of each local section $h$ to its orbit class; such sections cover by step 7, so equality is forced. Thus these identifications are canonical, rather than choices of representatives.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C; descent.tex Tag 023Q and sites.tex representable descent, applied to the scheme E_B."
+   }
+  },
+  {
+   "text": "Finally let $\\phi:(H_1)_B\\to(H_2)_B$ be the group isomorphism in the statement. Both $(E_i)_B$ are etale over $B$ by etale base change. Apply the Hom bijection of step 10 for $H_1$ with target $(E_2)_B$ to $q_2\\phi$; it gives a unique $\\bar\\phi:(E_1)_B\\to(E_2)_B$ intertwining the quotient maps. Apply it likewise to $\\phi^{-1}$. The two composites are identities since they are identities after $q_i$ and the same Hom bijections are injective. These maps are homomorphisms: lift any two local sections of $(E_1)_B$ fppf-locally to $(H_1)_B$ by step 7; the equality $\\bar\\phi(q_1(h)q_1(h'))=q_2(\\phi(h)\\phi(h'))$ follows from the group law of $\\phi$ and $q_i$, and descends by the sheaf equality axiom. Units and inverses follow the same way. Uniqueness after $q_i$ also forces the maps induced by identity isomorphisms to be identities and those induced by composites to be composites, and makes their pullbacks the maps induced after every further base change. No comparison of the two fields inside one another is needed.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GO; functoriality by the universal property just proved."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lft-field-group-neutral-component",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-pc-flat-field",
+  "pqf-def-locnoeth",
+  "pqf-lem-lft-fp-locnoeth",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-free-flat-group-space-quotient",
+  "lem-sfb-open-relation-etale-quotient",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "etale-proposition-etale-reduced",
+  "lem-sfb-reduced-quasifinite-space-field-decomposition",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-pc-yoneda",
+  "def-sc-group-scheme",
+  "lem-sc-group-scheme-separated-field",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-space-four-property-fppf-descent",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-pc-separated-quasi-separated",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Assembly of Tag 0B7R with Bootstrap Tag 06PH, Stacks Morphisms Tag 0DU1 and Spaces over Fields Tag 06S0; intrinsic arbitrary-base universal property and functoriality written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "group.*quotient|quotient.*group|[Cc]omponent.*[Gg]roup",
+   "results": "{\"t\": \"2026-10-24T15:20:16Z\", \"tool\": \"grep\", \"query\": \"group.*quotient|quotient.*group|[Cc]omponent.*[Gg]roup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of a group scheme over a field by an open subgroup is an etale scheme",
+   "results": "{\"t\": \"2026-10-24T15:20:17Z\", \"tool\": \"leansearch\", \"query\": \"Quotient of a group scheme over a field by an open subgroup is an etale scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.discreteTopology\", \"Subgroup.discreteTopology\", \"AlgebraicGeometry.Scheme.Etale\", \"Subgroup.quotient_finite_of_isOpen\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AddSubgroup.instDiscreteTopologyQuotientOfContinuousAdd\", \"QuotientGroup.discreteTopology\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"e50ee268f3be187e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T15:20:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fppf quotient of a locally finite type group scheme over a field by an open normal subgroup of finite type is a separated etale scheme",
+   "results": "{\"t\": \"2026-10-24T15:20:18Z\", \"tool\": \"leanfinder\", \"query\": \"The fppf quotient of a locally finite type group scheme over a field by an open normal subgroup of finite type is a separated etale scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"ProfiniteGrp.toFiniteQuotientFunctor\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"d1f65f4f8d310b7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type group scheme over a field has a canonical etale component scheme whose quotient map is quasi compact and commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T15:28:10Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type group scheme over a field has a canonical etale component scheme whose quotient map is quasi compact and commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"788184d9d02ca9a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|groupScheme|piZero|componentScheme",
+   "results": "{\"t\": \"2026-10-24T15:30:38Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|groupScheme|piZero|componentScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern topological or Galois-category quotients, etale morphisms, quasi-affine schemes or compact opens; none states this assertion about locally finite type group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|componentGroup|GroupScheme",
+   "results": "{\"t\": \"2026-10-24T16:16:55Z\", \"tool\": \"grep\", \"query\": \"identityComponent|componentGroup|GroupScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations constructs the group-scheme component quotient or states its arbitrary-base universal property; etale-morphism and topological/Galois-category declarations do not specialize to it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fppf sheaf of components of a locally finite type group scheme over a field is etale",
+   "results": "{\"t\": \"2026-10-24T16:16:55Z\", \"tool\": \"leansearch\", \"query\": \"The fppf sheaf of components of a locally finite type group scheme over a field is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"SheafOfModules.IsFiniteType.mk\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"188445315bcacc01\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations constructs the group-scheme component quotient or states its arbitrary-base universal property; etale-morphism and topological/Galois-category declarations do not specialize to it."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GrpObj, quotient",
+   "results": "{\"t\": \"2026-10-24T16:16:55Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.GrpObj, quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.GrpObj'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary topological groups, Galois categories, etale morphisms or etale algebras, not the component quotient of a locally finite type group scheme. The Loogle query reports an unknown identifier and gives no usable hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The connected component quotient of a group scheme locally of finite type over a field is represented by an etale group scheme and commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T16:16:56Z\", \"tool\": \"leanfinder\", \"query\": \"The connected component quotient of a group scheme locally of finite type over a field is represented by an etale group scheme and commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.fiber_in_connected_component\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"], \"digest\": \"33a6992afcbe2f17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations constructs the group-scheme component quotient or states its arbitrary-base universal property; etale-morphism and topological/Galois-category declarations do not specialize to it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally algebraic group has an open geometrically connected identity subgroup and its fppf coset sheaf is a discrete etale group scheme",
+   "results": "{\"t\": \"2026-10-24T16:18:47Z\", \"tool\": \"leanfinder\", \"query\": \"A locally algebraic group has an open geometrically connected identity subgroup and its fppf coset sheaf is a discrete etale group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Subgroup.connectedComponentOfOne\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"AlgebraicGeometry.IsLocallyArtinian.discreteTopology\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"a750d572b8062cf8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned declarations constructs the group-scheme component quotient or states its arbitrary-base universal property; etale-morphism and topological/Galois-category declarations do not specialize to it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-fpqc-group-form-effectivity",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Canonical etale component quotient of a locally finite type field group; field-fibre effectivity used in Anantharaman 4.1 before the trait component-envelope argument (inherited blueprint ancestry).",
+   "via": [
+    "lem-sfb-field-fpqc-group-form-effectivity",
+    "lem-sfb-trait-component-minimal-envelope",
+    "lem-sfb-flat-trait-group-finite-component-opens",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-lft-group-etale-component-quotient",
+  "worker": "stage1",
+  "summary": "Eleven assembly steps prove every original clause using existing DAG nodes, with no new nodes and no statement changes. In particular normality is proved on the original open subgroup, finite presentation follows by finite-type fppf descent plus separatedness, and the arbitrary-base universal property uses an open equalizer and connected geometric fibres, allowing nonreduced sources and nonseparated etale targets.",
+  "blueprint": "The item is an auxiliary field-fibre effectivity input to Anantharaman 4.1 along the inherited trait component-envelope route recorded in blueprint.from.place and via. Current literature/blueprint/latest whole-blueprint searches for the item, component quotient and 0B7R found no separate equivalent blueprint statement. Retained the inherited null from.node, from.place, via and empty same_as; this does not replace the direct-images stability unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-etale-space-locally-quasi-finite",
+    "why": "Generic etale-to-locally-quasi-finite implication for an algebraic space; the unit has no replacement."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic preservation of reducedness by etale scheme maps, used on charts; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Generic local representatives and equality criterion for sheafification; the unit has no replacement."
+   },
+   {
+    "node": "lem-sc-group-scheme-separated-field",
+    "why": "Generic separatedness of a group scheme over a field, applied to the constructed quotient; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic discrete geometric fibres of an etale scheme, used for components and constancy; the unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-etale-space-locally-quasi-finite",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-sc-group-scheme-separated-field",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-e723bb870",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-e723bb870 (reviewer sub-agent of L); spot-checked: PASS. I read the whole delivery: the item's 11 steps, every cited node statement, and the Stacks sources: 0B7R at groupoids.tex:1013, 06PH at bootstrap.tex:1985, 0DU1 at stacks-morphisms.tex:7039 and 06S0 at spaces-over-fields.tex:1817. The delivery has no new nodes. The statement is unchanged, so no hypothesis is added or dropped. Step checks: (1) H^0 is normal. At each point I take the point's own residue field L, use (H^0)_L=(H_L)^0, and then lemma 01HI factors the map through H^0. This holds even when H^0 is nonreduced. (2) Each map is flat because it is over a field, and locally of finite type implies locally of finite presentation because Spec k is locally Noetherian. (3) The 06PH hypotheses hold: the action is free by cancellation and C is flat and locally of finite presentation. The relation R is the open preimage of C under (x,y)->xy^{-1}, so it is an open immersion, and 0DU1 then gives that E is étale. (4) E is étale, hence locally quasi-finite. Its charts are reduced, so by 06S0 E is a disjoint union of Spec K_i and is therefore a scheme. (5) The group law comes from sheafification and Yoneda; E is separated by 047L. (6) q is of finite type by finite-type fppf descent along q itself, since its base change is C x H -> H. q is separated by 01KV cancellation, so it is of finite presentation. This does not use quasi-compactness of H. (7) The kernel-pair formula base-changes, so E_B is the sheafification of H_B/C_B and the kernel of q is H^0. (8) Over an algebraically closed field the fibres of q are clopen. Each fibre becomes isomorphic to C_L after a field extension, so it is connected, and connectedness passes down because the map is surjective. (9) The equalizer is the pullback of the open diagonal of Z/B, so it is open. A connected C_Omega maps into a single copy of Spec Omega, so the two maps agree at every point. This works for nonreduced H and non-separated Z. (10) fppf coverings are fpqc (022C), and representable fpqc descent (023Q) then gives the Hom bijection. (11) Functoriality follows from the uniqueness in that bijection. Edge cases checked: H=Spec k; an infinite constant group; Z x G_m, where H is not quasi-compact; alpha_p and mu_p x Z/n; an empty or nonreduced B; and an étale doubled-origin Z. No existing DAG node states this quotient; the wf component nodes and the identity-component nodes are different results. Accepted tool_uses: 03XU, 025O, 00WB/00WK, 047L and 02GL, each a generic lemma used exactly as stated. Batch 5: def-trf-scheme-algebraic-space is a general definition, and lem-trf-fppf-covering-is-fpqc is the 022C topology fact. The other seven listed nodes reach sec-trace-formula only through the general definition def-trf-algebraic-space. None of these is a step in the proof of the trace formula or of Poincaré duality, so all are accepted. No fixes."
+ }
+}

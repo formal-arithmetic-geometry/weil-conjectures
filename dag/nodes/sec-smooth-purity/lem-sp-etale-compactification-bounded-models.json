@@ -1,0 +1,277 @@
+{
+ "id": "lem-sp-etale-compactification-bounded-models",
+ "kind": "statement",
+ "title": "Bounded acyclic and flat models for a compactified etale morphism",
+ "statement": "Let $e:U\\to V$ be a separated etale morphism of finite type between Noetherian schemes (schemes with finite affine covers by spectra of Noetherian rings), and choose a compactification $U\\xrightarrow jW\\xrightarrow rV$, with $j$ open and $r$ proper [def-pc-scheme] [def-weil-pbc-noetherian-ring] [def-weil-etale-morphism] [def-weil-finite-type-morphism] [def-weil-proper-morphism] [def-weil-compactifications-refinements]. Let $R$ be a finite commutative ring and let $K$ be a cochain complex of constant-$R$ module sheaves on $U_{\\rm et}$, with $K^n=0$ for $n$ outside a fixed finite interval $[a,b]$ [def-weil-pbc-etale-sheaves] [def-pc-cochain-complex-modules]. Use the ordinary module derived categories with localization $Q$, exact extension by zero $j_!$, direct image $r_*$, and exact sum extension $e_{\\Sigma!}$ [def-weil-pbc-derived-categories] [def-weil-pbc-extension-by-zero] [def-weil-pbc-direct-image] [def-weil-pbc-etale-sum-extension]. Then $W$ is Noetherian and\n$$R^q r_{*,R}(j_!K^n)=0\\quad(n\\in\\mathbf Z,\\ q>0).$$\nThe canonical acyclic-complex comparison $\\alpha_K:Q(r_*j_!K)\\to Rr_*Q(j_!K)$ is an isomorphism. Let $c_K:Rr_*Q(j_!K)\\xrightarrow{\\sim}Q(e_{\\Sigma!}K)$ be the prescribed compact-support normalization of [lem-asd-etale-compact-support-normalization], and let $\\nu_M:r_*j_!M\\xrightarrow{\\sim}e_{\\Sigma!}M$ be its degree-zero comparison for a module sheaf $M$, sending a proper-support section to its etale sheet components. The maps $\\nu_{K^n}$ form a chain isomorphism $\\nu_K:r_*j_!K\\xrightarrow{\\sim}e_{\\Sigma!}K$, and $c_K\\alpha_K=Q(\\nu_K)$. These comparisons are natural in chain maps. The complexes $j_!K$, $r_*j_!K$ and $e_{\\Sigma!}K$ vanish outside $[a,b]$. If every $K^n$ is flat (tensoring with it preserves exact sequences), then these three complexes have flat terms, and they and $K$ are K-flat (their total tensor with any acyclic complex is acyclic) [def-pc-flat-sheaf-modules] [def-pc-kflat-complex]. No flatness assumption is needed for the preceding acyclicity and canonical comparison assertions.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), agent bounded-model verification using the etale compact-support normalization; extracted argument of returned item steps 1-2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-etale-sheaves",
+  "def-pc-cochain-complex-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-asd-etale-compact-support-normalization",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Properness of c.g gives finite type and quasi-compactness. Mathlib LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace give the two fields of IsNoetherian c.Z. The module-sheaf categories already carry the required Grothendieck and injective-resolution instances.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the given normalization N, its derived_normalization equation at M[0] expresses its invertible derived comparison as the localized termwise sheafComparison followed by the right-derived unit. By lem-kun-right-derived-single-h0 the zeroth homology of this unit is invertible, since lowerStar is left exact. Naturality with the termwise-single isomorphism transfers this assertion to the open extension of M[0]. Cancel the invertible factors, use homologyFunctorFactorsh and homologyFunctorFactors to return to the chain-level homology map, and then arrowIsoHomologyMapMapHomologicalComplexSingle to reflect invertibility to sheafComparison.app M. Componentwise invertibility makes a=N.sheafComparison e c invertible. Set nu=(asIso a).symm, whose inverse is exactly a. The Lean proof reuses the existing proved private supportSheafIso from EtaleSupportMapCompatibility, imported with import all, rather than copying this generic zeroth-homology argument.",
+   "uses": [
+    "lem-asd-etale-compact-support-normalization",
+    "lem-kun-right-derived-single-h0"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For M=K.X n, compose the inverse exact/single comparison for open extension, the given N.comparison at M[0], and the exact/single comparison for etale sum extension. This identifies Rr_*((j_!M)[0]) with (e_!M)[0]. Positive homology of the latter is zero. The unbounded/Plus compatibility and homologyRightDerivedFunctorObjSingleFunctorIso identify the former homology with R^q r_*(j_!M), giving the claimed vanishing.",
+   "uses": [
+    "lem-asd-etale-compact-support-normalization",
+    "lem-sp-derived-functor-single-identification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Translate derived_normalization from a homotopy representative of L to QL using the existing proved private comparison_complex_fac in UnboundedEtaleCompactSupportComparisons, imported with import all. Its right_unit_Q is definitionally the existing public rightDerivedFunctorUnitQ. This gives D(e_!).factors.hom_L followed by Q(a_L) followed by alpha_L equals N.comparison.inv_QL. Since the first two arrows are invertible, alpha_L is invertible. Precompose the desired c alpha=Q(nu) identity by the invertible D(e_!).factors.hom_K followed by Q(a_K). The preceding equation, N.comparison.inv_hom_id and Q(a_K)Q(nu_K)=1 prove it. Naturality follows from rightDerivedFunctorUnitQ_naturality and the naturality of the exact open-extension factorization; the private proved acyclicComparison_naturality states this calculation for abstract functors before application to scheme functors. This uses only the generic categorical helper from the imported module; it does not invoke or bypass any geometric comparison theorem. The private proved comparison_cancel packages the final cancellation for arbitrary isomorphisms, so the scheme specialization applies that lemma without expanding its functors.",
+   "uses": [
+    "lem-asd-etale-compact-support-normalization",
+    "def-asd-compact-support-graph-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any degree outside [a,b], map the supplied zero object K.X n through the additive open-extension, direct-image and etale sum-extension functors. These are the actual terms of the degreewise image complexes, so the same interval bounds apply.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the braiding to turn exactness of tensorRight(K.X n) into categorical two-sided flatness. The proved preservesFlat_etaleLowerShriek instance follows from the natural projection isomorphism tensorLeftEtaleLowerShriekIso and exactness of inverse image and sum extension; apply it both to c.i (definitionally open extension) and e. Transport the latter flatness across nu.app(K.X n) to obtain flatness of r_*j_!K.X n. Convert each upper support bound b into IsStrictlyLE b and apply the existing general categorical bounded-above flat K-flat criterion directly to all four complexes. Tensor preserves the needed colimits, and the sheaf category has exact filtered colimits by its existing Grothendieck instances.",
+   "uses": [
+    "lem-pur-etale-projection-kan-comparison",
+    "def-pc-flat-sheaf-modules",
+    "lem-sfb-bounded-above-flat-kflat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-kun-right-derived-single-h0",
+  "lem-sp-derived-functor-single-identification",
+  "def-asd-compact-support-graph-comparison",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "def-weil-pbc-extension-by-zero",
+  "lem-pur-etale-projection-kan-comparison",
+  "def-pc-flat-sheaf-modules",
+  "lem-sfb-bounded-above-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 bounded-model preparation, with the prescribed normalization; zeroth-derived unit via Tag 05TD, flatness via sites-modules Tag 0E8I, and categorical bounded-above flat K-flatness via the proved source-library criterion.",
+  "note": "Complete Lean proof from existing declarations, preserving all public statements and definitions. The returned exact_factor_Q and unitQ_homotopy duplicates and the repeated comparison calculation are removed. Private import all reuses comparison_complex_fac from UnboundedEtaleCompactSupportComparisons and supportSheafIso from EtaleSupportMapCompatibility; the two unit definitions are identified by explicit unfolding. Only the generic helper proofs are used, with no geometric theorem invoked from those modules. Naturality is proved for abstract functors to avoid expansion of scheme functors during rewriting. No new statements or holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded flat complexes on an etale scheme extended by zero along a compactification have acyclic terms for proper direct image and bounded flat K-flat direct images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    ∀ (n : ℤ), HomologicalComplex.ExactAt K n\", \"doc\": \"A cochain complex $ K $ in the homotopy category belongs to the acyclic subcategory if and only if it is exact at every integer index $ n $, meaning the image of the differential at each degree equals\"}\n  {\"name\": \"HomologicalComplex.isSupported_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c'),\\n  K.IsSupported e ↔ ∀ (i' : ι'), (∀ (i : ι), e.f i ≠ i\", \"doc\": \"For any category $\\\\mathcal{C}$ with zero morphisms, a homological complex $K$ with shape $c'$ is supported by an embedding $e: c \\\\to c'$ if and only if for every index $i' \\\\in \\\\iota'$, if $i'$ is not \"}\n  {\"name\": \"HomologicalComplex.IsSupportedOutside.exactAt\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : HomologicalComplex C c'} {e : c.Embedding c'}, K.IsSupportedOutside e → ∀ (i : ι), K.ExactAt (e.f i)\", \"doc\": \"If a homological complex $ K $ in a category with zero morphisms is supported outside the image of an embedding $ e: c \\to c' $ between complex shapes, then $ K $ is exact at every index in the image o\"}\n  {\"name\": \"HomologicalComplex.acyclic_truncGE_iff_isSupportedOutside\", \"module\": \"Mathlib/Algebra/Homology/Embedding/TruncGEHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [inst_2 : e.IsTruncGE] [inst_3 : ∀ (i' : ι'), K.HasHomo\", \"doc\": \"The truncated homological complex $ K $ obtained through the embedding $ e $ is acyclic if and only if the original complex $ K $ is supported outside the image of the embedding $ e $.\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"HomologicalComplex.acyclic_truncLE_iff_isSupportedOutside\", \"module\": \"Mathlib/Algebra/Homology/Embedding/TruncLEHomology\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [inst_2 : e.IsTruncLE] [inst_3 : ∀ (i' : ι'), K.HasHomo\", \"doc\": \"A homological complex $ K $ truncated via an embedding $ e $ is acyclic if and only if $ K $ is supported outside the image of $ e $.\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {P : C} [CategoryTheory.Projective P] {L : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj P) ⟶ DerivedCategory.Q.obj L),\\n  \", \"doc\": \"In an abelian category with enough projectives, for any projective object $ P $, cochain complex $ L $, and integer $ i $, every morphism in the derived category from the single complex concentrated a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract complex support and t-structures, affine limits or flat scheme morphisms; none states the acyclicity and flat compactification models on the small etale site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of flat sheaves computes compact support for an etale morphism by exact sum extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"HomologicalComplex.isSupported_iff\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c'),\\n  K.IsSupported e ↔ ∀ (i' : ι'), (∀ (i : ι), e.f i ≠ i\", \"doc\": \"For any category $\\\\mathcal{C}$ with zero morphisms, a homological complex $K$ with shape $c'$ is supported by an embedding $e: c \\\\to c'$ if and only if for every index $i' \\\\in \\\\iota'$, if $i'$ is not \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"HomologicalComplex.IsSupportedOutside.exactAt\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : HomologicalComplex C c'} {e : c.Embedding c'}, K.IsSupportedOutside e → ∀ (i : ι), K.ExactAt (e.f i)\", \"doc\": \"If a homological complex $ K $ in a category with zero morphisms is supported outside the image of an embedding $ e: c \\to c' $ between complex shapes, then $ K $ is exact at every index in the image o\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"LightCondensed.lanLightCondSet\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type u → LightCondSet\", \"doc\": \"For each type $X$, this constructs a sheaf in the category of light condensed sets by taking the pointwise left Kan extension of the locally constant function presheaf $\\\\mathrm{LocallyConstant}(-, X)$\"}\n  {\"name\": \"HomologicalComplex.exactAt_of_isSupported\", \"module\": \"Mathlib/Algebra/Homology/Embedding/IsSupported\", \"type\": \"∀ {ι : Type u_1} {ι' : Type u_2} {c : ComplexShape ι} {c' : ComplexShape ι'} {C : Type u_3}\\n  [inst : CategoryTheory.Category.{v_1, u_3} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  (K : HomologicalComplex C c') (e : c.Embedding c') [K.IsSupported e] (i' : ι'), (∀ (i : ι), e.f i ≠ i') → \", \"doc\": \"If a homological complex $ K $ in a category $ \\\\mathcal{C} $ with zero morphisms is supported by an embedding $ e $ from a complex shape $ c $ to $ c' $, and if an index $ i' \\\\in \\\\iota' $ satisfies $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract complex support and t-structures, affine limits or flat scheme morphisms; none states the acyclicity and flat compactification models on the small etale site."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlat\", \"mapHomologicalComplex\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract complex support and t-structures, affine limits or flat scheme morphisms; none states the acyclicity and flat compactification models on the small etale site."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*[Kk][Ff]lat|[Aa]cyclic.*[Ee]tale|[Ee]tale.*[Aa]cyclic",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract complex support and t-structures, affine limits or flat scheme morphisms; none states the acyclicity and flat compactification models on the small etale site."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compactification bounded flat complex direct image acyclic K-flat models",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.rec\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      ((flat_appLE :\\n            ∀ {U : Y.Opens},\\n              AlgebraicGeometry.IsAffineOpen U →\\n                ∀ {V : X.Opens},\\n                  AlgebraicGeometry.IsAffineOpen V →\\n           \", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property depending on the assertion that $f$ is flat. This is the recursor for the property `AlgebraicGeometry.Flat f`. To prove $P$, it suf\"}\n  {\"name\": \"AlgebraicGeometry.Flat.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. This statement is the induction principle for the property that $f$ is a flat morphism. To prove a property for a flat morphism $f$, one can use the defining\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract complex support and t-structures, affine limits or flat scheme morphisms; none states the acyclicity and flat compactification models on the small etale site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compactified separated etale map bounded flat sheaf complexes have acyclic proper direct image and canonical sum extension models",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme etaleness, abstract exact-functor homology or module flatness; none states the compactified etale bounded-model theorem or its prescribed comparison identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale morphism exact extension by zero computes compactly supported derived pushforward on bounded complexes",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, HomologicalComplex.IsSupportedOutside.exactAt, HomologicalComplex.isSupported_iff, HomologicalComplex.extend_exactAt_iff, HomologicalComplex.exactAt_of_isSupported, HomologicalComplex.IsSupported.exactAt, HomologicalComplex.extend_exactAt",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme etaleness, abstract exact-functor homology or module flatness; none states the compactified etale bounded-model theorem or its prescribed comparison identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorUnit\", \"IsIso\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme etaleness, abstract exact-functor homology or module flatness; none states the compactified etale bounded-model theorem or its prescribed comparison identity"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Aa]cyclic|[Ee]tale.*[Kk][Ff]lat|[Cc]ompactification.*[Ff]lat",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme etaleness, abstract exact-functor homology or module flatness; none states the compactified etale bounded-model theorem or its prescribed comparison identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactification of an etale morphism bounded complex exact sum extension computes proper derived direct image and preserves flat sheaves",
+   "results": "8 hits; Module.Flat.directSum_iff, AlgebraicGeometry.Flat.instMorphismRestrict, Algebra.FormallyEtale.instTensorProduct, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, AlgebraicGeometry.IsEtale, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.directSum",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme etaleness, abstract exact-functor homology or module flatness; none states the compactified etale bounded-model theorem or its prescribed comparison identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-etale-sum-coefficient-computation",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts paragraph: integral etale fibre summation commutes with coefficient extension; bounded-model and acyclicity preparation (returned item steps 1-2).",
+   "via": [
+    "lem-sp-etale-sum-coefficient-computation",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-etale-compactification-bounded-models",
+  "worker": "stage1",
+  "summary": "Q78 proves Noetherianity, termwise acyclicity from the prescribed normalization on single sheaves, and the actual comparison identity by expanding the existing graph construction. Ordinary etale projection and exactness prove preservation of flat terms; the existing bounded-above flat theorem gives K-flatness. No statement changes and no new nodes.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: integral etale summation commutes with coefficient extension; supplies the bounded-model preparation extracted in lem-sp-etale-sum-coefficient-computation.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-derived-functor-single-identification",
+    "why": "Generic identification of higher direct images with cohomology on single objects; does not replace any chart or coefficient route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic existence of injective resolutions for ordinary constant-ring module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic exactness of ordinary etale sum extension, also for open immersions."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary constant-ring inverse image/direct image adjunction and exactness."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "The item prescribes this very compact-support normalization; its sheaf specialization gives the acyclicity calculation."
+   },
+   {
+    "node": "lem-asd-compact-support-graph-derived-isomorphism",
+    "why": "Identifies the prescribed normalization as the forced inverse of the actual graph-derived map."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic ringed-site bounded-above flat criterion, applied only after the bounded flat models are constructed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-be5f89804",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-be5f89804 (reviewer sub-agent of L); spot-checked: I read all seven steps in full against the cited node statements. There are no new nodes and the statement is unchanged; the item is the parent re-split's new node, unsplit and with an identical statement in live and side-live, and carries no re-split note of its own. Step 1: proper includes finite type, so W is Noetherian by 01T6; enough injectives; r_* is left exact as a right adjoint. Step 2: the normalization's hypotheses hold (finite R is torsion, separated etale of finite type, Noetherian schemes); applied at M[0] its right side is concentrated in degree 0, and the single-object identification gives R^q r_* j_!M = 0 for q>0 with no flatness. Step 3: c=(Da)^{-1} comes from the def-asd Core and the graph-derived-iso statement. Lean confirms it: compactSupportComparisonOnHomotopy is unit∘Q(a), and derived_normalization pins comparison.inv to that formula in every instance. H^0 alpha = id by left exactness, so nu_M = a_M^{-1}. Step 4: from Da = alpha∘Q(a), alpha = Da∘Q(nu), which gives c alpha = Q(nu) as an equality of actual derived maps, natural in chain maps. Step 5: the additive degreewise functors keep the interval [a,b]. Step 6: the etale projection isomorphism (same unit) and three exact functors show v_!M is flat (the analogue of 0E8I); nu transports flatness to r_*j_!K^n. Step 7: 06YQ via lem-weil-pbc-independent-bounded-flat-kflat. Stacks sources checked: 0GL6, 0E8I, 06YQ. No SGA. No cycle; proof_deps = union of uses. Edge cases: empty U, R=0, a>b, e=id, open immersion, Z/4. Batch-5: graph-derived-iso reaches lem-pod-lisse-module-sheaves-as-module-objects, which is generic sheaf algebra, not part of the Poincare-duality proof; the same closure was already reached on the base through the stmt_dep normalization node, so the flag is accepted. All seven tool_uses are accepted as generic tools or as units the item's unit cites. Maintainer note: the normalization node's DAG statement omits its Lean derived_normalization pin. The proof is 4522 characters, so the item may later get a re-split note."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactificationBoundedModels",
+  "declaration": "AlgebraicGeometry.Etale.etaleCompactification_bounded_models",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleCompactificationAcyclicComparison",
+   "AlgebraicGeometry.Etale.etaleCompactification_bounded_models"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactificationBoundedModels.lean",
+  "statement": "theorem etaleCompactification_bounded_models (R : Type (u + 1)) [CommRing R] [Finite R] (N : EtaleCompactSupportNormalization R) {U V : Scheme.{u}} (e : U ⟶ V) [Etale e] [IsSeparated e] [QuasiCompact e] [IsLocallyNoetherian U] [CompactSpace U] [IsLocallyNoetherian V] [CompactSpace V] (c : Compactification e) : IsNoetherian c.Z ∧ ∃ nu : openImmersionLowerShriek (ModuleCat.{u + 1} R) c.i ⋙ lowerStar (ModuleCat.{u + 1} R) c.g ≅ etaleLowerShriek (ModuleCat.{u + 1} R) e inferInstance, nu.inv = N.sheafComparison e c ∧ ∀ (K : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ) (a b : ℤ) (_hK : ∀ n : ℤ, n < a ∨ b < n → IsZero (K.X n)), (∀ (n : ℤ) (q : ℕ), 0 < q → IsZero (((lowerStar (ModuleCat.{u + 1} R) c.g).rightDerived q).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} R) c.i).obj (K.X n)))) ∧ IsIso (etaleCompactificationAcyclicComparison R c K) ∧ (etaleCompactificationAcyclicComparison R c K ≫ (N.comparison e c).hom.app (_root_.DerivedCategory.Q.obj K) ≫ (etaleLowerShriek (ModuleCat.{u + 1} R) e inferInstance).mapDerivedCategoryFactors.hom.app K = _root_.DerivedCategory.Q.map ((NatIso.mapHomologicalComplex nu (.up ℤ)).hom.app K)) ∧ (∀ (L : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ) (phi : K ⟶ L), _root_.DerivedCategory.Q.map (((openImmersionLowerShriek (ModuleCat.{u + 1} R) c.i ⋙ lowerStar (ModuleCat.{u + 1} R) c.g).mapHomologicalComplex (.up ℤ)).map phi) ≫ etaleCompactificationAcyclicComparison R c L = etaleCompactificationAcyclicComparison R c K ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} R) c).map (_root_.DerivedCategory.Q.map phi)) ∧ (∀ n : ℤ, n < a ∨ b < n → IsZero ((openImmersionLowerShriek (ModuleCat.{u + 1} R) c.i).obj (K.X n)) ∧ IsZero ((lowerStar (ModuleCat.{u + 1} R) c.g).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} R) c.i).obj (K.X n))) ∧ IsZero ((etaleLowerShriek (ModuleCat.{u + 1} R) e inferInstance).obj (K.X n))) ∧ ((∀ n : ℤ, exactFunctor _ _ (tensorRight (K.X n))) → (∀ n : ℤ, exactFunctor _ _ (tensorRight ((openImmersionLowerShriek (ModuleCat.{u + 1} R) c.i).obj (K.X n))) ∧ exactFunctor _ _ (tensorRight ((lowerStar (ModuleCat.{u + 1} R) c.g).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} R) c.i).obj (K.X n)))) ∧ exactFunctor _ _ (tensorRight ((etaleLowerShriek (ModuleCat.{u + 1} R) e inferInstance).obj (K.X n)))) ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat K ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (((openImmersionLowerShriek (ModuleCat.{u + 1} R) c.i).mapHomologicalComplex (.up ℤ)).obj K) ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (((openImmersionLowerShriek (ModuleCat.{u + 1} R) c.i ⋙ lowerStar (ModuleCat.{u + 1} R) c.g).mapHomologicalComplex (.up ℤ)).obj K) ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (((etaleLowerShriek (ModuleCat.{u + 1} R) e inferInstance).mapHomologicalComplex (.up ℤ)).obj K))",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ef1b1acb2",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Only the item lean field differs from side-live; the 15 stmt_dep records are identical; no new nodes; lean.statement verbatim; single sorry. Clause by clause the Lean matches the node: hypotheses are exactly the normalization's instances plus QuasiCompact (finite type), with no Noetherian assumption on W; R : Type (u+1) finite. The normalization N is a parameter but fully pinned (derived_normalization and sheaf_normalization). nu is pinned by nu.inv = N.sheafComparison. alpha is the canonical derived unit composite, the same as compactSupportComparisonOnHomotopy. c_K alpha_K = Q(nu_K) holds as an equality of derived arrows with the exact-functor factorization. Naturality in chain maps, vanishing outside [a,b] for all three complexes, and the flatness-conditional exactFunctor(tensorRight)/quasiIso.kFlat clauses use the recorded flat and K-flat predicates. Edge cases checked: U empty, R=0, a>b, e=id or open immersion, Z/4. Docstrings, imports and gates ok; no duplicate theorem found. Advisory: rightDerivedLowerShriekOfCompactification (owner def-amb-etale-compact-support) is not in stmt_deps; it is reached via the cited normalization node, and stage 2 cannot add stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261024T015144-L-2331094",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

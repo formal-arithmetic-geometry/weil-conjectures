@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-fixed-scalar-etale-origin-proper-exchange",
+ "kind": "statement",
+ "title": "Proper pro-etale exchange on a bounded-below finite etale origin",
+ "statement": "For a finite commutative coefficient ring A, a Cartesian square of arbitrary schemes with p proper, and a fixed-A pro-etale complex K of bounded-below etale origin, the published ordinary derivedBaseChangeMap at K is invertible. No standing-field hypothesis or qcqs condition on the base-change schemes is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Coefficient transport and clauses (2)--(3), canonical-map identifications."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "proof": [
+  {
+   "text": "Retain an etale antecedent C and its comparison isomorphism. Finite A is additively torsion, so etale proper base change makes the etale exchange invertible. Properness makes p and its base change qcqs. The canonical site-comparison source and target isomorphisms identify the ordinary exchange on the comparison image with the image of the etale exchange. Transport along the retained object isomorphism using naturality.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lem-weil-pbc-proper-base-change",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-transport-identifies-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-bounded-below",
+  "lem-weil-pbc-proper-base-change",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-transport-identifies-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-finite.proof.md",
+  "place": "Expanded normalized coefficient transport; existing source-library proofs are used where available."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of abelian categories transports proper base change on a bounded below etale origin and the canonical derived projection formula through a monoidal adjunction square",
+   "results": "Functor.mapDerivedCategory, mapDerivedCategoryFactors, mapDerivedCategoryFactorsh; Ext.mapExactFunctor, Ext.mapExactFunctor_hom; Functor.exact_tfae; TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact; IsEtale.instIsStableUnderBaseChangeScheme.",
+   "date": "2026-10-23",
+   "verdict": "No geometric torsion-derived proper-exchange or projection-transport theorem in Mathlib. Reuse the existing project source theorem named in the Lean attachment."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"mateEquiv\"",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "No match; existing project source proof is used."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_derivedBaseChangeMap|isIso_rightDerivedLowerStarProjectionMap|projection.*mate",
+   "results": "0 hits",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib match; existing project source proof is used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mate of a pullback composition isomorphism under derived pullback pushforward adjunctions is the proper base change natural transformation on sheaves, and derived projection formula transports across exact equivalences",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; PresheafOfModules.pullback_comp_id; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.toOverPullbackIsoToOver; SheafOfModules.pullbackComp; PresheafOfModules.pullbackComp; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackIso",
+   "date": "2026-10-24",
+   "verdict": "General adjunction, equivalence and underived module-sheaf pullback comparisons; no match for the specified geometric derived operation statement. Reuse the recorded source-library proof or construct the operation from the existing geometric adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperBaseChange",
+  "date": "2026-10-23",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof, coefficient transport and canonical exchange/projection comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange",
+  "file": null,
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper",
+  "statement": "theorem isIso_derivedBaseChangeMap_app_of_isProper [Finite Λ] [IsProper f]\n    (sq : IsPullback g' f' f g)\n    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))\n    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) :\n    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-23",
+  "note": "Existing proved source-library declaration, reused without changing its signature, attributes, imports or body. The declaration proof has no sorry, but this does not claim its transitive dependencies have no sorry. The node records the fixed-scalar presentation needed by the item; no new Lean declaration is introduced."
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange"
+    }
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ac14d",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261024T185110-L-3396084",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ac14d",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261024T185110-L-3396084",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 4 new modules and 7 node files vs clones/live (signature, lean records, change record users, owners of reused source decls, unit realized=[]), the two sorried encoding statements vs the pinned Encoding structure and the existing qcqs-only exchange identification"
+ }
+}

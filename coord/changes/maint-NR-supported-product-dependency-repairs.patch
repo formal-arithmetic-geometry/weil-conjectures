@@ -1,0 +1,66 @@
+diff --git a/lean/Sheaf/AlgebraicGeometry/SfGraphSecondProjectionSquare.lean b/lean/Sheaf/AlgebraicGeometry/SfGraphSecondProjectionSquare.lean
+--- a/lean/Sheaf/AlgebraicGeometry/SfGraphSecondProjectionSquare.lean
++++ b/lean/Sheaf/AlgebraicGeometry/SfGraphSecondProjectionSquare.lean
+@@ -436,9 +436,7 @@
+             ((upperStar (ModuleCat.{u + 1} A) t.p).leftDerivedFunctor.obj K) ≫
+           (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) (t.a ≫ t.e) t.p f
+             ((Category.assoc t.a t.e t.p).trans t.fac).symm).inv.app K) := by
+-  simp only [sfGraphWordProjection, wordProjection, Iso.trans_hom, Iso.symm_hom,
+-    NatTrans.comp_app, Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
+-    Functor.whiskerLeft_app, Category.id_comp, Functor.map_comp]
++  simp only [sfGraphWordProjection, sfGraphProjectionWord, wordProjection]
+ 
+ /-- Projection compatibility of the second graph side.
+ 
+diff --git a/lean/Sheaf/AlgebraicGeometry/SfGraphMiddleProjectionSquare.lean b/lean/Sheaf/AlgebraicGeometry/SfGraphMiddleProjectionSquare.lean
+--- a/lean/Sheaf/AlgebraicGeometry/SfGraphMiddleProjectionSquare.lean
++++ b/lean/Sheaf/AlgebraicGeometry/SfGraphMiddleProjectionSquare.lean
+@@ -540,9 +540,7 @@
+   subst a
+   simp only [innerStrength, compStrength_app, properStrength_app, properTwistedStrength_app,
+     openStrength_app, CategoryTheory.Functor.map_id, Functor.map_comp,
+-    Category.assoc, sfGraphWordProjection, Iso.trans_hom, Iso.symm_hom,
+-    Functor.associator_hom_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+-    NatTrans.comp_app, Functor.comp_obj, Category.id_comp]
++    Category.assoc, sfGraphWordProjection, sfGraphProjectionWord, Functor.comp_obj]
+   erw [(openImmersionLowerShriek (ModuleCat.{u + 1} A) t.e).mapDerivedCategory.map_id,
+     (lowerStar (ModuleCat.{u + 1} A) t.p).rightDerivedFunctor.map_id, Category.id_comp]
+ 
+diff --git a/lean/Sheaf/AlgebraicGeometry/SfGraphFirstProjectionSquare.lean b/lean/Sheaf/AlgebraicGeometry/SfGraphFirstProjectionSquare.lean
+--- a/lean/Sheaf/AlgebraicGeometry/SfGraphFirstProjectionSquare.lean
++++ b/lean/Sheaf/AlgebraicGeometry/SfGraphFirstProjectionSquare.lean
+@@ -470,11 +470,8 @@
+     (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) :
+     sfGraphWordProjection A t M K = word_projection_map A t M K := by
+   simp only [word_projection_map, word_projection_raw, sfGraphWordProjection,
+-    Functor.associator_hom_app,
+-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.trans_hom,
+-    Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
+-    EtaleGraphPresentation.functor, Functor.comp_map, Functor.comp_obj,
+-    Category.id_comp, Category.assoc]
++    sfGraphProjectionWord, Functor.map_comp, EtaleGraphPresentation.functor,
++    Functor.comp_map, Functor.comp_obj, Category.assoc]
+ 
+ -- The proper/open projection before applying the coefficient compositor.
+ private noncomputable def compact_projection_raw
+diff --git a/lean/Sheaf/Paper/ScalarEvaluationTransposeExistence.lean b/lean/Sheaf/Paper/ScalarEvaluationTransposeExistence.lean
+--- a/lean/Sheaf/Paper/ScalarEvaluationTransposeExistence.lean
++++ b/lean/Sheaf/Paper/ScalarEvaluationTransposeExistence.lean
+@@ -75,7 +75,7 @@
+       SheafOfModules.pushforward (F := Prod.sectR n C) (eqToHom hR.symm) ≅
+       SheafOfModules.pushforward (F := Prod.sectR n C) (eqToHom hS.symm) ⋙
+         SheafOfModules.restrictScalars ψ)
+-    (hδ : ∀ (N : SheafOfModules.{max c v r} S) (U : C)
++    (_hδ : ∀ (N : SheafOfModules.{max c v r} S) (U : C)
+       (x : ((SheafOfModules.restrictScalars φ).obj N).val.obj (Opposite.op (n, U))),
+       ((δ.hom.app N).val.app (Opposite.op U)) x = x) :
+     IsIso ((mateEquiv adj adjn).symm (TwoSquare.mk _ _ _ _ δ.hom)).natTrans := by
+@@ -85,7 +85,7 @@
+     change (𝟭 (ℕ × C)).IsContinuous _ _
+     infer_instance
+   exact WeilConjectures.SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
+-    J J (𝟭 C) R S n φ Rn Sn hR hS ψ E En adj adjn δ hδ
++    J J (𝟭 C) R S n φ Rn Sn hR hS ψ E En adj adjn δ
+ 
+ section
+ universe a av b bv cv d dv a' av' b' bv' c' cv' d' dv'

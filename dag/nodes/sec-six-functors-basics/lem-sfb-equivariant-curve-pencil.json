@@ -20,9 +20,85 @@
   "def-weil-surjective-morphism",
   "def-sc-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $E=k(X)$. Its affine fraction-field description and the finite-type dimension formula give finite generation over $k$ and $\\operatorname{trdeg}_kE=d$. Transfer geometric integrality from a nonempty affine of $X$ to $\\operatorname{Spec}E$, so $E\\otimes_kK$ is a domain for every $K/k$. The induced semilinear action on $E$ therefore satisfies the invariant-parameter lemma. Choose its full separating family $t_1,\\ldots,t_d$, and put $F=k(t_1,\\ldots,t_{d-1})$; $E/F$ has separating basis $t_d$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-sbc-field-fraction-ring-geometric-integrality",
+    "lem-sfb-invariant-separating-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.2 proof, printed p.613; field-base assembly of the extracted arguments (local PDF WANTED; publisher PDF read online)"
+   }
+  },
+  {
+   "text": "Apply semilinear equivariant Chow modification to $X$, giving an integral projective $T$ with equivariant birational $p:T\\to X$. Apply the normalization lemma to $(T,p,X)$: $X$ is normal, proper and geometrically integral, so it gives a normal projective geometrically integral $N$ with equivariant H-projective surjective birational $p_1:N\\to X$ and the same field $E$.",
+   "uses": [
+    "lem-sfb-semilinear-equivariant-chow-modification",
+    "lem-sfb-equivariant-normal-projective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.2 proof, printed p.613; field-base assembly of the extracted arguments (local PDF WANTED; publisher PDF read online)"
+   }
+  },
+  {
+   "text": "Apply the invariant normalized-graph lemma to $N$ and $t_1,\\ldots,t_{d-1}$. It gives normal projective geometrically integral $X'$, an equivariant birational H-projective $a:X'\\to N$, and a dominant equivariant H-projective $b:X'\\to P=\\mathbf P^{d-1}_k$ inducing $F\\subseteq E$. Set $\\pi=p_1a$; composition preserves H-projectivity. Its maps are surjective, its function-field map is the identity, and intersecting their isomorphism opens gives a dense open of $X$ over which $\\pi$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-invariant-pencil-graph-model",
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.2 proof, printed p.613; field-base assembly of the extracted arguments (local PDF WANTED; publisher PDF read online)"
+   }
+  },
+  {
+   "text": "Apply the equivariant projective Stein lemma to $b$. It gives $X'\\xrightarrow{g}Y\\xrightarrow{q}P$ with $Y$ normal projective geometrically integral, $g$ dominant H-projective, compatible actions, and $L=k(Y)$ finite over $F$ and algebraically closed in $E$. All schemes are of finite type and proper over $k$.",
+   "uses": [
+    "lem-sfb-equivariant-projective-stein-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.2 proof, printed p.613; field-base assembly of the extracted arguments (local PDF WANTED; publisher PDF read online)"
+   }
+  },
+  {
+   "text": "Use the separating-Stein generic-curve lemma for $k\\subseteq F\\subseteq L\\subseteq E$ and $g$: Step 1 supplies separable generation and relative transcendence degree one, and Step 4 supplies the constant-field hypotheses. It gives the geometrically integral proper generic curve of dimension one and $\\dim Y=\\operatorname{trdeg}_kF=d-1$. Together with $\\pi$ and the actions these are every asserted clause.",
+   "uses": [
+    "lem-sfb-separating-stein-generic-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+    "place": "Lemma 5.2 proof, printed p.613; field-base assembly of the extracted arguments (local PDF WANTED; publisher PDF read online)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sbc-field-fraction-ring-geometric-integrality",
+  "lem-sfb-invariant-separating-parameters",
+  "lem-sfb-semilinear-equivariant-chow-modification",
+  "lem-sfb-equivariant-normal-projective-model",
+  "lem-sfb-invariant-pencil-graph-model",
+  "lem-trf-h-projective-composition",
+  "lem-sfb-equivariant-projective-stein-factor",
+  "lem-sfb-separating-stein-generic-curve"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 5.2, printed pp.612--613 (publisher PDF read online); expanded semilinear Chow preparation and explicit action checks using Stacks. Local PDF WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,7 +137,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-equivariant-plurinodal-field-alteration",
@@ -87,5 +163,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-equivariant-curve-pencil",
+  "worker": "stage1",
+  "summary": "Repair of the 10599-character returned proof: four statement-only, independently assigned arguments for finite equivariant normalization, invariant normalized graphs, semilinear projective Stein bases, and separating generic curves. Reuses the existing semilinear Chow node for returned steps 2--5, instead of duplicating it. All sixteen original arguments are preserved verbatim and assigned in report.md; parent proof is a short five-step assembly, with no statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; realizes the curve-pencil input to the dimension induction, following de Jong 5.2, not the later semistable alteration.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic function-field/dimension/geometric-integrality or projective-composition tool used in assembly of de Jong Lemma 5.2; no step of another unit is substituted."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic function-field/dimension/geometric-integrality or projective-composition tool used in assembly of de Jong Lemma 5.2; no step of another unit is substituted."
+   },
+   {
+    "node": "lem-sbc-field-fraction-ring-geometric-integrality",
+    "why": "Generic function-field/dimension/geometric-integrality or projective-composition tool used in assembly of de Jong Lemma 5.2; no step of another unit is substituted."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic function-field/dimension/geometric-integrality or projective-composition tool used in assembly of de Jong Lemma 5.2; no step of another unit is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sbc-field-fraction-ring-geometric-integrality",
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-finite-proper",
+  "lem-kun-proper-stability",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-chow-noetherian",
+  "lemma-nagata-proper-to-separated-target",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-chow-segre",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "lem-pc-very-ample-ample",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-scheme-image-partial-section",
+  "lem-weil-pbc-separably-generated-tensor-reduced",
+  "lem-weil-pbc-separably-generated-separable",
+  "lem-trf-geometric-reducedness-separable-scalar-restriction",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "lem-zl-finite-separable-closure",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "lem-kun-transcendence-degree-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-238e53e2b",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-238e53e2b (reviewer sub-agent of L); spot-checked: Human batch-5 re-split (repair note released 2026-10-22). The old 16-step NE proof (10599 characters) is now a 5-step assembly of 2083 characters. Statement, stmt_deps, blueprint and lean are byte-identical to live, so the landed NJ Lean binding is untouched. proof_deps equals the union of the step uses. The closure has 366 nodes, no cycle and no id from the drop list. Allocation, checked against the verbatim old steps in the report: old step 1 is still assembly step 1, citing the same four existing nodes. Old steps 2-5 go to the existing lem-sfb-semilinear-equivariant-chow-modification. I read its statement and its 9-step proof: it gives an integral T projective over k, with an H-action and an equivariant proper surjective H-projective q that is an isomorphism over a dense open, and k(T)=k(X). That is exactly what steps 2-5 produced, so reusing it is correct and a copy would be a duplicate. Old steps 6-7 (+11), 8-10 (+11), 12-14 and 15-16 become four new statement-only unsplit nodes of comparable size (about 2.1k, 2.6k, 2.0k and 1.4k characters). No argument is dropped, and no new node restates the item. All four new nodes are true. (1) normal-projective-model: normalization is finite and projective (0BXR, 0B3I, 087S); it is an isomorphism over U because p^{-1}U is normal (035K, 035L); the action lifts; geometric integrality holds because A⊗K embeds in E⊗K. (2) pencil-graph-model: V is invariant, the closure of the graph is integral, Z→N is an isomorphism over V, b is dominant by algebraic independence; checked r=0. (3) projective-stein-factor: 03H0; k(Y) is the algebraic closure of F in E because T is normal; the direction of the action formula is correct; geometric integrality holds because L⊆E; checked B=Spec k. (4) separating-stein-generic-curve: L/F is separable as a subextension; E/L is separable because L⊗_F F^{1/p}=L^{1/p}; 037Q gives geometric irreducibility; 0B1C gives the dimensions. All Stacks tags were verified in the tag file. No SGA is used. Duplicate search over the node ids found nothing equivalent. The Stein node extends lem-sfb-normal-stein-constant-field (NE), which this item no longer cites; maintainer note: the future split of the Stein node should cite it. Batch-5 finding: the chow node reaches lem-trf-reduced-scheme-image. That node is Stacks 056B, a generic statement about the scheme-theoretic image of a reduced source. It is not trace-formula or Poincaré-duality content, so I accepted it. The other trf nodes in the closure are generic algebra tools. The accepted tool_uses are four generic tools: the affine fraction field, dim=trdeg, field-fraction geometric integrality, and h-projective-composition. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantCurvePencil",
+  "declaration": "AlgebraicGeometry.exists_equivariant_curve_pencil",
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantCurvePencil.lean",
+  "statement": "theorem exists_equivariant_curve_pencil (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) [IsIntegral X] [IsProper p] [GeometricallyIntegral p] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (d : ℕ) (hd : 2 ≤ d) (hdim : topologicalKrullDim X = (d : WithBot ℕ∞)) (H : Type v) [Group H] [Finite H] (α : H →* Aut X) (β : H →* (k ≃+* k)) (hsemilinear : ∀ h : H, (α h).hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (β h⁻¹).toRingHom)) : ∃ (X' Y : Scheme.{u}) (p' : X' ⟶ Spec (.of k)) (q : Y ⟶ Spec (.of k)) (_ : IsIntegral X') (_ : IsIntegral Y) (α' : H →* Aut X') (γ : H →* Aut Y) (π : X' ⟶ X) (g : X' ⟶ Y), (∀ x : X', IsDomain (X'.presheaf.stalk x) ∧ IsIntegrallyClosed (X'.presheaf.stalk x)) ∧ (∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) ∧ IsProper p' ∧ GeometricallyIntegral p' ∧ IsProper q ∧ GeometricallyIntegral q ∧ IsHProjective q ∧ π ≫ p = p' ∧ g ≫ q = p' ∧ (∀ h : H, (α' h).hom ≫ p' = p' ≫ Spec.map (CommRingCat.ofHom (β h⁻¹).toRingHom)) ∧ (∀ h : H, (γ h).hom ≫ q = q ≫ Spec.map (CommRingCat.ofHom (β h⁻¹).toRingHom)) ∧ IsHProjective π ∧ Surjective π ∧ (∀ h : H, (α' h).hom ≫ π = π ≫ (α h).hom) ∧ (∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (π ∣_ U)) ∧ (∃ hη : π (genericPoint X') = genericPoint X, Function.Bijective (X.presheaf.stalkSpecializes (specializes_of_eq hη) ≫ π.stalkMap (genericPoint X') : X.functionField ⟶ X'.functionField)) ∧ IsHProjective g ∧ IsDominant g ∧ (∀ h : H, (α' h).hom ≫ g = g ≫ (γ h).hom) ∧ topologicalKrullDim Y = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ GeometricallyIntegral (g.fiberToSpecResidueField (genericPoint Y)) ∧ topologicalKrullDim (g.fiber (genericPoint Y)) = (1 : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3fc77398b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Each node clause matches the Lean. Hypotheses: k a field, X normal, proper (which gives finite type) and geometrically integral (IsIntegral is implied, so not stronger), dim d≥2, finite H : Type v acting on X and k with no faithfulness assumed; the compatibility uses Spec.map(β h⁻¹), which respects the group law under Aut_mul_def and matches the landed consumer. Conclusions: X' and Y normal, proper, geometrically integral, with compatible actions; π equivariant, IsHProjective (upstream def-kun-projective) and surjective, an isomorphism over a dense open and bijective on generic stalks; g IsHProjective, dominant and equivariant; Y IsHProjective of dim d-1; generic fibre geometrically integral of dim 1, no smoothness claimed. All ten stmt_dep records checked. The node equals side-live apart from lean; lean.statement is verbatim in the file; one sorry, no definitions; docstrings carry the source place and blueprint tag and all 16 proof steps; all 33 imports exist. Not on the dropped list, no repair note, no other group's lean record. Not recompiled (the worker's compile was clean). No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,153 @@
+{
+ "id": "lem-sfb-rational-p1-second-diagonal-insertion-factor",
+ "kind": "statement",
+ "title": "Second diagonal insertion factors through forward projection",
+ "statement": "For the coefficient, k,Y,K of [def-sfb-rational-p1-second-pull-comparison] and any normalized Diagram d, the pushSection map on M=q*K(1)[2] followed by Rp2*(diagonalClassMap d M) equals the right-unitor inverse, then identity_M tensor (singleUnitIso.inv followed by d.support2.hom, d.R2.map d.delta and the canonical comparison from d.R2 to the fixed derived pushforward), followed by J_K. There is no trace, inverse exchange, inverse projection, completed reference, localizing hypothesis or integration identity in this equation.",
+ "stmt_deps": [
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-internal-diagonal-tensor-comparison",
+  "def-sfb-diagonal-coefficient-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, before integration."
+ },
+ "proof": [
+  {
+   "text": "Use the comm field of second_pull_section, recorded by PullSectionCompatibility, to identify the two diagonal pullback comparisons. Projection naturality in its first argument, followed by tensor composition, gives tensorHom(secondPullComparison.inv,id) then diagonalTensorMap = the second sectionTensorMap. The inverse of diagonalTensorIso is diagonalTensorMap by its construction.",
+   "uses": [
+    "lem-sfb-rational-p1-second-pull-section",
+    "lem-sfb-rational-p1-left-projection-naturality",
+    "def-sfb-internal-diagonal-tensor-comparison",
+    "def-sfb-section-tensor-comparison",
+    "def-sfb-projective-pull-section-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use supported_section_projection at M=q*K(1)[2]. Prove projection naturality in the coefficient argument directly from the canonical projection mate and the two signed braidings, and transfer to projectionMap by its normalization. Naturality of secondDiagramPushIso moves d.delta past the recorded derived pushforward comparison.",
+   "uses": [
+    "lem-sfb-projective-supported-section-projection",
+    "def-sfb-projective-diagonal-composition",
+    "def-sfb-proetale-projection-exchange-maps",
+    "def-sfb-proetale-rational-localizing-projection-helpers",
+    "def-sfb-rational-p1-second-pull-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved abstract insert_class lemma: substitute the section identity, combine the pushforward maps, cancel the inverse diagonal tensor isomorphism, and combine the tensor morphisms to cancel supportedUnitIso.inv then supportedUnitIso.hom. Move delta across the projection using its coefficient naturality and identify the target with secondForwardProjection. All categorical composition, tensor and functoriality steps are proved in the item module. The proved private diagonal_insertion_from_section carries out this calculation for arbitrary M and a pullback comparison t with identity diagonal restriction. Specialize M to q*K(1)[2] and t to secondPullComparison.inv for the assigned theorem.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "def-sfb-rational-p1-second-pull-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-p1-second-pull-section",
+  "lem-sfb-rational-p1-left-projection-naturality",
+  "def-sfb-internal-diagonal-tensor-comparison",
+  "def-sfb-section-tensor-comparison",
+  "lem-sfb-projective-supported-section-projection",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-proetale-projection-exchange-maps",
+  "def-sfb-proetale-rational-localizing-projection-helpers",
+  "def-sfb-rational-p1-second-pull-comparison",
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-projective-pull-section-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B8",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, cancellation on the diagonal before integration.",
+  "note": "Formal reduction to diagonal pullback coherence and the class-free supported section/projection identity; the coefficient naturality and pasting are proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for a section identifies the pushforward of the diagonal class tensored with an object with the object tensored with the diagonal integral",
+   "results": "8 hits, including pullback.diagonal_fst, diagonalObjPullbackFstIso_inv_snd_fst, Scheme.Modules.pushforward_obj_obj and LinearMap.proj_comp_single. They concern ordinary pullback geometry, sheaf sections or linear algebra, not the derived section/projection or trace-tail equations.",
+   "date": "2026-10-27",
+   "verdict": "No matching derived identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal category the diagonal kernel unit followed by pullback of the trace counit is identity tensor the diagonal integral",
+   "results": "8 hits: Functor.diag tensor coherences, Dial.triangle, ExactPairing.coevaluation_evaluation and externalProductCompDiagIso components. None addresses geometric diagonal insertion or trace base change.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"counit\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "unitComponent|counitComponent|section.*(projection|tensor)",
+   "results": "RationalP1AmbientComposites defines the maps but proves no contraction. The tower modules TowerP1TriangleFactorization, TowerP1SecondTraceReordering and TowerP1DiagonalProjectionFactor supply an analogous decomposition on a different tower-system category. The generic ringed section/projection and exchange/tensor theorems need normalization transport to the present internal-module category.",
+   "date": "2026-10-27",
+   "verdict": "Use the canonical ambient maps and split the insertion and trace-tail equations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(section|counit)|diagonal.*contraction",
+   "results": "msearch Mathlib grep returned 12 hits: Condensed.Discrete.LocallyConstant projection of counit, group-functor section projections, extra degeneracies, hypercovers and Nobeling. None gives the derived geometric contraction or its two component equations.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1SecondAmbientContraction",
+  "date": "2026-10-27",
+  "group": "H5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-rational-p1-second-ambient-contraction",
+   "place": "Second identity, before integration."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1SecondDiagonalInsertionFactor",
+  "file": "lean/Sheaf/Paper/RationalP1SecondDiagonalInsertionFactor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.second_diagonal_insertion_factor",
+  "statement": "theorem second_diagonal_insertion_factor (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l)) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] (d : Diagram (coefficient l c).X Y (line l c)) (K : DerivedCategory (Modules (coefficient l c).X Y)) : (pushSectionIso (coefficient l c).X Y).hom.app ((twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K)) ≫ (moduleObjectDerivedPushforward (coefficient l c).X (secondProjection Y)).map (diagonalClassMap (coefficient l c).X Y (line l c) d ((twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K))) = (ρ_ ((twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K))).inv ≫ (((twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K)) ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫ d.support₂.hom ≫ d.R₂.R.map d.delta ≫ (secondDiagramPushIso (coefficient l c).X Y (line l c) d).hom.app (((DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧))) ≫ secondForwardProjection l c k p hpl Y K",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261026T222712-L-684121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T123420-L-2294132",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -18,65 +18,44 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=*_{\\mathrm{pro\\acute et}}$ with the finite jointly surjective covering families specified in the statement. Products and covering pullbacks are profinite sets. A map into a profinite set descends uniquely along a finite jointly surjective family: the union of the sources is compact, the target is Hausdorff, and the surjection is a quotient map. Thus representables are sheaves. Sheafification on this site is strong symmetric monoidal for the objectwise tensor [det-def-sfb-sheaf-tensor-structure], so the section-action equivalence $E$ from internal $R$-modules to module sheaves over the section ring [def-weil-pbc-internal-abelian-sheaf-module-equivalence] applies; it preserves underlying abelian sheaves, sections and maps. By [lem-pe-internal-section-tensor-comparison] $E$ is symmetric monoidal from the relative tensor to $\\otimes_R$. In $\\operatorname{Mod}(R)$ the right adjoint of $E(R[P])\\otimes_R-$ is $\\mathcal Hom_R(E(R[P]),-)$ [lem-pc-sheaf-modules-tensor-closed], so uniqueness of right adjoints gives $E\\circ H_P\\cong\\mathcal Hom_R(E(R[P]),-)\\circ E$, naturally in $P$. As $E$ preserves underlying sheaves of sets, $E(R[P])$ is the free module sheaf on $h_P$, the sheafification of $V\\mapsto\\bigoplus_{h_P(V)}R(V)$. An equivalence preserves injectives and injective resolutions, so $E$ identifies the derived functors, the colimits and the comparison of the statement with those of $\\operatorname{Mod}(R)$. Write $F_i=UM_i$ and $F=U(\\operatorname{colim}_i M_i)=\\operatorname{colim}_iF_i$. The cited forgetful-functor theorem gives this equality and exactness of $U$. Exact filtered colimits of abelian sheaves then give exact filtered colimits of module sheaves: exactness is tested on the underlying abelian sheaves.",
+   "text": "Apply [lem-sfb-profinite-free-functions-section-transport] to the stated coherent profinite site and $R$. It supplies finite products, subcanonicity, exact filtered module colimits, the identification of free objects and internal Hom, and transport of the specified resolution cocone to ordinary section-ring modules. Thus it suffices to prove the transported comparison invertible; write $F_i=UM_i$ and $F_\\infty=U M_\\infty=\\operatorname{colim}_iF_i$.",
    "uses": [
-    "sk-def-sfb-condensed-ring",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "det-def-sfb-sheaf-tensor-structure",
-    "lem-pe-internal-section-tensor-comparison",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-sfb-profinite-free-functions-section-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), 03CO (lemma-limits-colimits-abelian-sheaves); profinite coherent topology as in sk-def-sfb-condensed-ring."
+    "place": "Tag 03EK (section-tensor-product) and Tag 03EO (lemma-internal-hom-adjoint-tensor); agent extraction of former parent step 1: section-action/tensor transport, subcanonicity by compact quotient descent, and termwise resolution transport."
    }
   },
   {
-   "text": "For every $W\\in\\mathcal C$ and $q\\geq0$, obtain $\\operatorname{colim}_iH^q(W,F_i)\\cong H^q(W,F)$ from the existing cohomology-of-colimit-sites theorem, as follows. Adjoin a strict initial object $o$ to $I$ and extend the coefficient diagram by $F_o=0$ and its unique maps. The resulting small category $I^+$ is filtered: any finite diagram with vertices in $I$ has a cocone there, and any added vertex $o$ has its unique arrow to that cocone; for a diagram consisting only of $o$, use any object of the nonempty $I$. Every cocone on the original diagram extends uniquely across the zero object, so its colimit is still $F$. On $(I^+)^{\\mathrm{op}}$ take the constant system of sites $\\mathcal C$ with identity transition functors. All coverings are finite; the colimit category and site of the cited construction are $\\mathcal C$, because the index is nonempty and filtered. In the cohomology theorem choose the index $o$ and the object $W$. Its category of arrows $j\\to o$ in $(I^+)^{\\mathrm{op}}$ has exactly one such arrow for each $j$, so its filtered colimit is precisely the colimit over $I^+$. All site pullbacks are identities. The theorem therefore gives the displayed isomorphism with the actual coefficient coprojections, not just an abstract group isomorphism.",
+   "text": "Every covering family in this presentation is finite, and its pullbacks and composites remain finite jointly surjective profinite families. Apply [lem-sfb-finite-cover-derived-presheaf-continuity] to $F:I\\to\\operatorname{Ab}(\\mathcal C)$. Its derived-presheaf comparison $\\delta_F$ is an isomorphism, with the original coefficient coprojections. This includes arbitrary small filtered categories, not just directed preorders, and imposes no bound on the nonzero positive cohomological degrees.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "lem-weil-pbc-cohomology-colimit-of-sites"
+    "lem-sfb-finite-cover-derived-presheaf-continuity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 09YP (lemma-colimit), applied to the constant finite-cover site system; sites.tex Tags 09YL (lemma-colimit-sites), 0A35 (lemma-compute-pullback-to-limit)."
+    "place": "Tag 09YP (lemma-colimit), constant inverse system on the opposite of the index with an initial zero coefficient adjoined; Section 01FT (section-cohomology-sheaves), injective-resolution evaluation. Agent derived-presheaf formulation of former parent steps 2 and 3."
    }
   },
   {
-   "text": "Let $\\iota$ be inclusion of abelian sheaves into presheaves, and for an abelian sheaf $G$ put $h^q(G)=H^q(R\\iota(G[0]))$, an abelian presheaf. By the definition through injective resolutions, $h^q(G)(W)=H^q(W,G)$ for every $W$, naturally in $G$ [def-weil-pbc-sites-and-cohomology], since kernels and cokernels of presheaves are computed objectwise; $h^q(G)=0$ for $q<0$ because the resolutions are nonnegative. Apply this to the coprojections $F_i\\to F$. Presheaf colimits are computed objectwise, so the induced map $\\operatorname{colim}_ih^q(F_i)\\to h^q(F)$ is, at each $W$, exactly the isomorphism $\\operatorname{colim}_iH^q(W,F_i)\\to H^q(W,F)$ of step 2. Hence it is an isomorphism of abelian presheaves for every $q$ [def-weil-abstract-derived-category]. This uses one fixed degree at a time and never takes a product over cohomological degrees.",
+   "text": "Apply [lem-sfb-free-functions-colimit-model-comparison] to the transported compatible resolutions. Its hypothesis is exactly the invertibility of $\\delta_F$ established in step 2, so it proves that their comparison $c$ is a quasi-isomorphism and that $Q(c)$ is invertible. By [lem-sfb-profinite-free-functions-section-transport], the section-action equivalence carries this map back to the original comparison. Hence that comparison is invertible in the ordinary unbounded derived category. The criterion works degree by degree through exact filtered colimits and the derived free-representable model; no unbounded product is interchanged with a colimit.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-abstract-derived-category"
+    "lem-sfb-free-functions-colimit-model-comparison",
+    "lem-sfb-profinite-free-functions-section-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 01FT (section-cohomology-sheaves), injective-resolution definition of object cohomology; algebra.tex Tag 00DB (lemma-directed-colimit-exact)."
+    "place": "Tag 08J7 (section-internal-hom), injective Hom model; sites.tex Tag 00WJ (lemma-sheafification-exact). Agent extraction of former parent step 4: cohomology calculation using the existing derived free-representable model and exact filtered colimits; a conditional quasi-isomorphism criterion."
    }
   },
   {
-   "text": "Choose the compatible nonnegative injective resolutions $M_i\\to I_i$, $M_\\infty=\\operatorname{colim}_iM_i\\to I$ of the statement and let $c:\\operatorname{colim}_iH_P(I_i)\\to H_P(I)$ be the comparison. $U$ is exact, faithful and commutes with colimits [lem-weil-pbc-module-sheaves-colimits-forgetful], and a bijective $R$-linear sheaf map has an $R$-linear inverse; so $c$ is a quasi-isomorphism once $U(c)$ is. Exact filtered colimits of abelian sheaves [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact], applied to cycles, boundaries and their quotient, give $H^q(\\operatorname{colim}_iUH_P(I_i))=\\operatorname{colim}_iH^q(UH_P(I_i))$. Thus $H^q(Uc)$ is the map $\\operatorname{colim}_iH^q(D(U)RH_P(M_i[0]))\\to H^q(D(U)RH_P(M_\\infty[0]))$ induced by the coprojections. Apply [lem-sfb-free-representable-derived-functions-model] with this $\\mathcal C$, $R$, $P$: the site is small, has finite products and is subcanonical by step 1. Its isomorphism is natural in module maps and carries them to $D(a)D(t_P)R\\iota$ of the underlying maps. As $a$ is exact [lem-weil-pbc-sheafification-exact] and $t_P$ is exact objectwise, $H^q$ commutes with both, giving isomorphisms $H^q(D(U)RH_P(M_i[0]))\\cong a\\,t_P\\,h^q(F_i)$ natural in $i$ and compatible with the maps to $a\\,t_P\\,h^q(F)$. Since $a$ (a left adjoint) and $t_P$ (objectwise) commute with colimits, $H^q(Uc)$ is identified with $a\\,t_P$ of the isomorphism of step 3. Both sides vanish for $q<0$. Hence $U(c)$ and $c$ are quasi-isomorphisms, and $c$ is invertible in $D(\\operatorname{Mod}_R)$ [def-weil-abstract-derived-category]. Only cohomology sheaves and the naturality of the model's isomorphisms are used; no lift of derived isomorphisms to a diagram of complexes is needed.",
+   "text": "For a morphism of coefficient diagrams the comparison square agrees after every colimit coprojection, hence commutes by the colimit universal property. For $P\\!\\prime\\to P$, restriction along $W\\times P\\!\\prime\\to W\\times P$ commutes with each coefficient map. The coefficient and parameter naturality of [lem-sfb-profinite-free-functions-section-transport] and [lem-sfb-free-functions-colimit-model-comparison] preserve these squares under transport and localization. This proves all asserted naturalities, with the original module maps.",
    "uses": [
-    "lem-sfb-free-representable-derived-functions-model",
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J7 (section-internal-hom), via the derived-functions model; sites.tex Tag 00WJ (lemma-sheafification-exact); sites-modules.tex Tags 03DA, 03DB."
-   }
-  },
-  {
-   "text": "All comparisons above are induced by the original coefficient coprojections. A morphism of diagrams commutes with each coprojection and hence with their induced map out of the colimit. For a continuous map $P'\\to P$, the parameter restriction is induced by $W\\times P'\\to W\\times P$; restriction of sections along this map commutes with every coefficient map $M_i\\to M$. The derived-functions model is natural in both variables with this normalization, so these commuting squares remain commuting after passing to complexes, sheafification and the derived category. This proves the asserted naturality in diagrams, their module morphisms and profinite parameters.",
-   "uses": [
-    "lem-sfb-free-representable-derived-functions-model"
+    "lem-sfb-profinite-free-functions-section-transport",
+    "lem-sfb-free-functions-colimit-model-comparison"
    ],
    "elementary": true,
    "source": {
@@ -86,19 +65,9 @@
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-condensed-ring",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-  "det-def-sfb-sheaf-tensor-structure",
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-colimit-of-sites",
-  "lem-weil-pbc-cohomology-colimit-of-sites",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-abstract-derived-category",
-  "lem-sfb-free-representable-derived-functions-model",
-  "lem-weil-pbc-sheafification-exact"
+  "lem-sfb-profinite-free-functions-section-transport",
+  "lem-sfb-finite-cover-derived-presheaf-continuity",
+  "lem-sfb-free-functions-colimit-model-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -397,46 +366,9 @@
   "date": "2026-10-22",
   "item": "lem-sfb-profinite-derived-functions-filtered-colimit",
   "worker": "stage1",
-  "summary": "Verified the internal ordinary-module formulation; split through a generic derived free-representable function model, fixed-site finite-cover cohomology continuity, exact presheaf colimits and exact sheafification. No statement change and no finite-dimensionality assumption. Preserved the null ancestor returned by blueprint_refs.py because the recorded creation chain terminates at a module name; the textual place names paragraph (3) of det-thm-sf-ctf-stability-direct-images.",
-  "blueprint": "Paragraph (3), open direct image and arithmetic coefficient comparison, via the finite-stage coefficient-topology comparison: continuity of derived functions on profinite parameters. Steps 1-5 supply the derived profinite-function continuity used by the finite-stage arithmetic coefficient comparison, below paragraph (3).",
-  "tool_uses": [
-   {
-    "node": "sk-def-sfb-condensed-ring",
-    "why": "Generic sheaf/module, cohomology or exactness tool used as a black box on the fixed profinite site; the unit has no replacement for this general categorical input."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "why": "Generic sheaf/module, cohomology or exactness tool used as a black box on the fixed profinite site; the unit has no replacement for this general categorical input."
-   },
-   {
-    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "why": "Generic sheaf/module, cohomology or exactness tool used as a black box on the fixed profinite site; the unit has no replacement for this general categorical input."
-   },
-   {
-    "node": "lem-weil-pbc-colimit-of-sites",
-    "why": "Generic sheaf/module, cohomology or exactness tool used as a black box on the fixed profinite site; the unit has no replacement for this general categorical input."
-   },
-   {
-    "node": "lem-weil-pbc-cohomology-colimit-of-sites",
-    "why": "Generic sheaf/module, cohomology or exactness tool used as a black box on the fixed profinite site; the unit has no replacement for this general categorical input."
-   },
-   {
-    "node": "lem-weil-pbc-sheafification-exact",
-    "why": "Generic sheaf/module, cohomology or exactness tool used as a black box on the fixed profinite site; the unit has no replacement for this general categorical input."
-   },
-   {
-    "node": "det-def-sfb-sheaf-tensor-structure",
-    "why": "Generic sheaf/module, cohomology or exactness tool used as a black box on the fixed profinite site; the unit has no replacement for this general categorical input."
-   },
-   {
-    "node": "lem-pe-internal-section-tensor-comparison",
-    "why": "Generic sheaf/module, cohomology or exactness tool used as a black box on the fixed profinite site; the unit has no replacement for this general categorical input."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
-    "why": "Generic sheaf/module, cohomology or exactness tool used as a black box on the fixed profinite site; the unit has no replacement for this general categorical input."
-   }
-  ]
+  "summary": "Repair of the human re-split return: extracted three independent statement-only nodes, for section-action/free-Hom transport, finite-cover derived-presheaf continuity, and normalized derived colimit-model comparison. Retained the entire previous argument in the report, assigned to its future worker. Parent statement and Lean record unchanged; short assembly plus naturality. Rebased after the 2026-10-22 landing refusal (returned head 6e324fee1f7): reread all current cited statements, preserved every current field outside the proof/split metadata, and checked the newly landed 03EK overlap against lem-pd-internal-direct-image-lax-realization; its scheme direct-image adjunction/pairing statement does not supply profinite free-parameter internal-Hom transport.",
+  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images, through the recorded arithmetic coefficient comparison chain: A carries former step 1, B carries former steps 2-3, C carries former step 4; parent assembles them and retains former step 5. The existing blueprint ancestor is null as returned by blueprint_refs.py; this repair preserves it.",
+  "tool_uses": []
  },
  "tool_uses": [
   "sk-def-sfb-condensed-ring",
@@ -450,12 +382,12 @@
   "lem-pc-sheaf-modules-tensor-closed"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q07-c5acaabb0",
-  "group": "Q07",
+  "reviewer": "NT-cc-Q99-aeac89169",
+  "group": "Q99",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-c5acaabb0 (reviewer sub-agent of L); spot-checked: Verdict FIX. I read the item, the new node lem-sfb-free-representable-derived-functions-model, every cited statement, and Stacks 09YP (sites-cohomology l.2905) and 03FD (l.1862). No statement changed and no node is dropped; the fix is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-profinite-derived-functions-filtered-colimit.json. New node: true, since U H_P(I)(V)=I(V×P) is a sheaf and module injectives are section-acyclic by 03FD, so a t_P Rι(UM)=t_P(UI). I tested P terminal, P empty, M=0 and R=0. It has no proof, its stmt_deps define what it uses, and it is not a clause of the item. It duplicates none of the derived-internal-hom-sections model, the derived-evaluation-slice lemma, profinite-constant-derived-functions, normed-scalar-profinite-hom-acyclic, or the rhom-colimit ladder/source-transport nodes. Step 2's use of 09YP via a constant system on (I^+)^op with F_o=0 is roundabout but correct: I checked filteredness, finite coverings, the colimit site and the arrows to o. Repairs: (1) C4/E5, step 1: the internal-module equivalence node says nothing about Hom, yet step 4 applies a model stated for def-pur-sheaf-hom. Fixed by citing det-def-sfb-sheaf-tensor-structure, lem-pe-internal-section-tensor-comparison and lem-pc-sheaf-modules-tensor-closed, then using uniqueness of right adjoints and free objects matching. A DFS shows none of the three reaches the item. (2) E5, step 4: natural isomorphisms in D were carried to a colimit of complexes without a model. Rewritten to work on cohomology sheaves only: c is a qis iff U c is, H^q of a filtered colimit is the colimit of H^q, and the model's naturality plus exactness of a and t_P make H^q(Uc) equal a t_P of the step-3 isomorphism. Step 3 is restated as the cohomology-presheaf isomorphism without β, and the now-unused lem-weil-pbc-filtered-colimit-abelian-groups-exact is dropped. proof_deps and tool_uses are updated, and every step is under 2000 characters.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-aeac89169 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This head is a re-push of Q99 6e324fee1, which was PASSed at 14:45. Its landing was refused at 14:48 with the generic loop message 'completed in this project's DAG'. The item has no stage-3 landing, so it is not Lean-closed. After JSON normalization, the three new nodes are byte-identical to 6e324fee. The item differs only by one sentence added to split_report.summary, which records the rebase and the check against the newly landed lem-pd-internal-direct-image-lax-realization. I re-read the mathematics in full. Re-split check: base steps 1-5 map as step 1 to A (section-transport), steps 2-3 to B (finite-cover derived-presheaf continuity) and step 4 to C (colimit-model comparison); step 5 stays in the parent as naturality. The report keeps the old proof verbatim. Statement sizes are comparable (1992/2006/2566 characters) and the parent proof is 2137 characters of assembly. A: a finite jointly surjective family into a profinite set is a quotient map, so the site is subcanonical; E(R[P]) is L_P because E preserves underlying sheaves; E H_P is G_P E by uniqueness of right adjoints; U is exact and faithful, so it detects quasi-isomorphisms. B: H^q(R iota F) evaluates to H^q(W,F) objectwise. I checked Stacks 09YP (sites-cohomology l.2905): I+ is filtered, the arrows j to o in (I+)^op are unique with the right variance, I is cofinal, and the cited node needs only finite coverings. C: H^q of the colimit is the colimit of H^q; the model's naturality gives H^q(Uc) = a t_P H^q(delta); no lift of derived isomorphisms to complexes is assumed; its hypotheses equal the model's. In the parent, U composed with E is the original forgetful functor, so B's conclusion is exactly C's hypothesis. Edge cases pass: P empty or a point, R = 0, a terminal or zero diagram; an empty I is excluded. I checked the base nodes added since the prior head and searched the snapshot by concept. The candidates are not duplicates: lem-pd-internal-direct-image-lax-realization, lem-sfb-rhom-continuity-open-extension, lem-trf-derived-colimit-change-rings, lem-coef-derived-system-evaluation-calculus and lem-sf-module-object-ordinary-coefficient-equivalence. The Stacks tags 09YP, 0GN3, 03EK, 03EO, 08J7, 00WJ, 03FD and 01FT were verified, and no SGA source is used. Advisory: B's 'more precisely' clause is the I+ route written into the statement, but it is true. Maintainer note: this is a promotion loop, not a split fault, so please promote the split instead of re-dispatching it."
  },
  "lean": {
   "module": "Sheaf.Paper.ProfiniteDerivedFunctionsFilteredColimit",
@@ -485,5 +417,17 @@
   "group": "NL",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of c55170c5ab82. Snapshot diff vs prior run: only freeParameterMap body (InternalBar.free -> explicit Sheaf.composeAndSheafify AddCommGrpCat.free ⋙ Mod.free R.toMon.X composite, identical to the live CondensedBar.freeParameter body, so definitionally unchanged), stmt_deps drops lem-sfb-condensed-internal-bar-resolution (theorem) and keeps def-sfb-condensed-equivariant-bar-data, and report gains a real Second reading section. Live item still S2-open; no dep nodes changed. Clause table (ring/modules/free R[P]/all nonnegative injective resolutions/filtered I/coprojection-pinned comparison/IsIso/coefficient and parameter naturality) re-checked OK; edge cases OK; no hollow defs, sorry-only proofs, docstrings with source and blueprint, no pro-etale substitute, statement verbatim. Advisory only: unused proof-plan imports. No compile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

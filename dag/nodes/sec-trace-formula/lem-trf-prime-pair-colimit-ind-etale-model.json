@@ -1,0 +1,281 @@
+{
+ "id": "lem-trf-prime-pair-colimit-ind-etale-model",
+ "kind": "statement",
+ "title": "The pair-colimit at a prime is a concrete ind-etale henselian local model",
+ "statement": "Let $A$ be a commutative ring, $\\mathfrak p\\subset A$ a prime ideal, $R=A_{\\mathfrak p}$, $\\mathfrak m=\\mathfrak pR$ and $k=R/\\mathfrak m$ [def-weil-pbc-localization-at-prime]. Let $\\mathcal E$ have as objects the etale $R$-algebras $B$ [def-weil-etale-morphism] for which the structural map $k\\to B/\\mathfrak mB$ is an isomorphism, and all $R$-algebra maps as morphisms. Choose a small skeleton $I$ of $\\mathcal E$ and a colimit cocone $(C,(\\iota_i:B_i\\to C))$ of its underlying ring diagram, with structural map $\\eta_C:R\\to C$, as in [lem-weil-pbc-pair-henselization]. Then $I$ is filtered, every $B_i$ is finitely presented over $R$ [def-weil-pbc-finitely-presented-algebra], and this same cocone is a colimit in commutative $R$-algebras [def-weil-pbc-category-colimit]. The ring $C$ is henselian local [def-weil-pbc-henselian-terminology], its maximal ideal is $J=\\mathfrak mC$, the map $\\eta_C$ is local, and the structural map $e_C:k\\xrightarrow{\\sim}C/J$ is an isomorphism. The three specified maps $A\\to R$, $R\\xrightarrow{\\eta_C}C$, and their composite $A\\to C$ are ind-etale [def-weil-pbc-ind-etale-algebra]. No Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A02 (lemma-henselization), construction, and 0A03 (lemma-henselization-local-ring), locality. Agent-expanded model over the original ring A using algebra.tex Tag 00CR (lemma-localization-colimit) and proetale.tex Tag 097K (lemma-composition-ind-etale); the argument extracted from old item steps 1-3 and 7 is retained verbatim in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-pair-henselization",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-pair-henselization] to (R,m). Transfer filteredness along e. The forgetful functor from the under category creates connected colimits, so it reflects the given ring-colimit to an algebra-colimit. Whisker the pair-henselization colimit by e and use colimit uniqueness [def-weil-pbc-category-colimit] to obtain an R-algebra isomorphism from its vertex D to the specified vertex C. Its ring equivalence E satisfies E composed with eta_D = eta_C. Thus ideal extension and the structural quotient maps commute with E.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A02 (lemma-henselization), construction; explicit universal-property comparison with the chosen skeleton cocone"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-ring-map-iff-etale-affine], an etale affine ring map is finitely presented. Apply this to every $R\\to B_i$. Step 1 gives a filtered presentation of $C$ by these etale finitely presented $R$-algebras in the category of $R$-algebras. This is precisely the definition of ind-etaleness, so $\\eta_C:R\\to C$ is ind-etale.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A02 (lemma-henselization), the defining filtered etale presentation"
+   }
+  },
+  {
+   "text": "For the pair-henselization vertex D, use [def-weil-pbc-henselian-terminology] in its Mathlib root-lifting formulation: HenselianRing.jac already gives mD contained in the Jacobson radical. The unchanged structural quotient is a field, hence mD is maximal. The quotient homomorphism D to D/mD reflects units because its kernel lies in the Jacobson radical. A ring admitting a local map to a field is local, and its maximal ideal is mD. Root lifting for the henselian pair now gives HenselianLocalRing D. Transport this structure along E, and use ideal-map composition to identify the maximal ideal of C with mC. The quotient equivalence induced by E composed with the given structural quotient isomorphism proves bijectivity of the specified quotient map for C. Finally mC equals the maximal ideal, so the maximal-ideal criterion for local homomorphisms makes eta_C local. The local-ring and residue-field notions are [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A03 (lemma-henselization-local-ring), first paragraph; Mathlib HenselianRing.jac supplies the radical inclusion directly"
+   }
+  },
+  {
+   "text": "The adopted source library already proves that every localization is ind-Zariski (Algebra.IndZariski.localization), hence ind-etale (Algebra.IndEtale.of_indZariski). These use the explicit filtered algebra presentation awayColimitPresentation by principal localizations, whose algebra universal property is proved using localization descent. Specialize this proved API to the complement of p and apply RingHom.IndEtale.algebraMap_iff. This gives ind-etaleness of the specified map A to R directly, in the sense of [def-weil-pbc-ind-etale-algebra]; no second construction of the ring colimit or affine open-immersion argument is needed.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CR (lemma-localization-colimit), ring specialization; principal localizations are etale"
+   }
+  },
+  {
+   "text": "Apply the adopted source theorem RingHom.IndEtale.comp to the two specified ind-etale maps. Transport each of the three resulting predicates along the canonical ULift ring equivalences using the proved source invariance under ring isomorphism. By [def-weil-pbc-ind-etale-algebra] this is exactly IndEtaleAcrossUniverses for A to R, R to C, and their specified composite. No Noetherian hypothesis is used.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097K (lemma-composition-ind-etale)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0A02 and 0A03, with connected-under-colimit reflection and explicit quotient transport; existing proved source localization/ind-etale APIs realize algebra.tex Tag 00CR and proetale.tex Tag 097K. Lean proof by P5, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselization|henselisation|IndEtale|ind_etale",
+   "results": "{\"t\": \"2026-10-22T06:01:24Z\", \"tool\": \"grep\", \"query\": \"henselization|henselisation|IndEtale|ind_etale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing and TFAE concern a property, not a constructed pair-colimit; the etale-localization hits treat single principal localizations or formal etaleness, not this model over A",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.FormallyEtale",
+   "results": "{\"t\": \"2026-10-22T06:01:25Z\", \"tool\": \"loogle\", \"query\": \"HenselianLocalRing, Algebra.FormallyEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing and TFAE concern a property, not a constructed pair-colimit; the etale-localization hits treat single principal localizations or formal etaleness, not this model over A",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localization followed by the filtered etale construction of the henselization of its maximal ideal gives an ind etale henselian local algebra with unchanged residue field",
+   "results": "{\"t\": \"2026-10-22T06:01:25Z\", \"tool\": \"leansearch\", \"query\": \"A localization followed by the filtered etale construction of the henselization of its maximal ideal gives an ind etale henselian local algebra with unchanged residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.of_isLocalizationAway\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.FormallyEtale.of_isLocalization\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsStandardEtale.of_isLocalizationAway\", \"Algebra.FormallyEtale.localization_base\"], \"digest\": \"6f2559c42d79b1ef\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing and TFAE concern a property, not a constructed pair-colimit; the etale-localization hits treat single principal localizations or formal etaleness, not this model over A",
+   "digest": "6f2559c42d79b1ef"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The filtered colimit of etale neighborhoods of a local ring with trivial closed fibre has maximal ideal extended from the base and is ind etale over any ring of which the base is a localization",
+   "results": "{\"t\": \"2026-10-22T06:01:35Z\", \"tool\": \"leanfinder\", \"query\": \"The filtered colimit of etale neighborhoods of a local ring with trivial closed fibre has maximal ideal extended from the base and is ind etale over any ring of which the base is a localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.etaleLocus\", \"Algebra.IsEtaleAt\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalization_Away\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\"], \"digest\": \"83c8bb9617d88498\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing and TFAE concern a property, not a constructed pair-colimit; the etale-localization hits treat single principal localizations or formal etaleness, not this model over A",
+   "digest": "83c8bb9617d88498"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring A and a prime p, the henselization of the pair (A_p,p A_p), constructed as a filtered colimit of etale algebras with unchanged closed fibre, is henselian local and ind etale over A",
+   "results": "{\"t\": \"2026-10-22T06:01:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative ring A and a prime p, the henselization of the pair (A_p,p A_p), constructed as a filtered colimit of etale algebras with unchanged closed fibre, is henselian local and ind etale over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing\", \"Algebra.IsEtaleAt\", \"instHenselianRingMaximalIdeal\", \"Algebra.exists_etale_of_isEtaleAt\", \"HenselianLocalRing.TFAE\", \"Field.henselian\", \"IsAdicComplete.henselianRing\"], \"digest\": \"d662a72f9d285f6c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing and TFAE concern a property, not a constructed pair-colimit; the etale-localization hits treat single principal localizations or formal etaleness, not this model over A",
+   "digest": "d662a72f9d285f6c"
+  },
+  {
+   "tool": "grep",
+   "query": "of_isLocalization|ofLocalizationSpanTarget|exists_etale_bijective_residueFieldMap",
+   "results": "{\"t\": \"2026-10-22T06:02:32Z\", \"tool\": \"grep\", \"query\": \"of_isLocalization|ofLocalizationSpanTarget|exists_etale_bijective_residueFieldMap\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\"], \"digest\": \"1532442946045a30\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HenselianLocalRing and TFAE concern a property, not a constructed pair-colimit; the etale-localization hits treat single principal localizations or formal etaleness, not this model over A",
+   "digest": "1532442946045a30"
+  },
+  {
+   "tool": "grep",
+   "query": "henselization|henselisation|IndEtale|ind_etale",
+   "results": "{\"t\": \"2026-10-22T07:23:15Z\", \"tool\": \"grep\", \"query\": \"henselization|henselisation|IndEtale|ind_etale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern HenselianRing properties, single etale algebras or general colimits, not this specified pair-colimit model",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The henselization of a local ring is a filtered colimit of finitely presented etale algebras with the same residue field",
+   "results": "{\"t\": \"2026-10-22T07:23:15Z\", \"tool\": \"leansearch\", \"query\": \"The henselization of a local ring is a filtered colimit of finitely presented etale algebras with the same residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.TFAE\", \"RingHom.Etale\", \"HenselianLocalRing\", \"HenselianRing.recOn\"], \"digest\": \"4e1de6533d4902d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern HenselianRing properties, single etale algebras or general colimits, not this specified pair-colimit model",
+   "digest": "4e1de6533d4902d2"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, CategoryTheory.Limits.IsColimit",
+   "results": "{\"t\": \"2026-10-22T07:23:15Z\", \"tool\": \"loogle\", \"query\": \"HenselianLocalRing, CategoryTheory.Limits.IsColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern HenselianRing properties, single etale algebras or general colimits, not this specified pair-colimit model",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of etale algebras over a local ring with unchanged closed fibre is henselian local with maximal ideal extended from the base and is ind etale",
+   "results": "{\"t\": \"2026-10-22T07:23:20Z\", \"tool\": \"leanfinder\", \"query\": \"The colimit of etale algebras over a local ring with unchanged closed fibre is henselian local with maximal ideal extended from the base and is ind etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.IsEtaleAt\", \"Algebra.instEtaleOfIsStandardEtale\", \"StandardEtalePair.instEtaleRing\", \"Algebra.instIsStandardEtaleRing\"], \"digest\": \"ffd03c3d82f744fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern HenselianRing properties, single etale algebras or general colimits, not this specified pair-colimit model",
+   "digest": "ffd03c3d82f744fa"
+  },
+  {
+   "tool": "grep",
+   "query": "HenselianLocalRing|finitePresentation",
+   "results": "{\"t\": \"2026-10-22T07:23:39Z\", \"tool\": \"grep\", \"query\": \"HenselianLocalRing|finitePresentation\", \"sub\": \"RingTheory/Henselian.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"34\", \"108\", \"114\", \"119\", \"121\"], \"digest\": \"9cd8e1bfdeafcb19\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern HenselianRing properties, single etale algebras or general colimits, not this specified pair-colimit model",
+   "digest": "9cd8e1bfdeafcb19"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian pair with field quotient is a henselian local ring; the henselization at a prime is ind etale over the original ring",
+   "results": "{\"t\": \"2026-10-22T07:23:43Z\", \"tool\": \"leanfinder\", \"query\": \"A henselian pair with field quotient is a henselian local ring; the henselization at a prime is ind etale over the original ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.henselian\", \"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.TFAE\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.is_henselian\"], \"digest\": \"d69d4884ebc728ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern HenselianRing properties, single etale algebras or general colimits, not this specified pair-colimit model",
+   "digest": "d69d4884ebc728ff"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-henselization-prime-ind-etale",
+  "date": "2026-10-22",
+  "group": "Q20"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical auxiliary chain below lem-trf-local-term-locality, ordinary henselization at a prime: the concrete model construction in former steps 1-3 of lem-trf-henselization-prime-ind-etale and composition in former step 7, before comparison with an arbitrary initial H.",
+   "via": [
+    "lem-trf-henselization-prime-ind-etale",
+    "lem-trf-normal-tensor-component-join-model",
+    "lem-trf-artin-join-theorem-6-3",
+    "lem-trf-artin-henselian-tensor-residue-dichotomy",
+    "lem-trf-artin-tensor-etale-acyclic",
+    "lem-trf-gabber-nearby-cycle-dimension-bound",
+    "lem-trf-gabber-strict-local-torsion-bound",
+    "lem-trf-finite-type-torsion-universal-star",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-prime-pair-colimit-ind-etale-model",
+  "worker": "stage1",
+  "summary": "No new nodes: reuse the existing pair construction, affine etale finite-presentation bridge, localization colimit, principal open immersion, etale cancellation and ind-etale composition. Explicitly identify the chosen skeleton ring cocone with the pair-colimit and show it is an algebra-colimit. Derive the Jacobson condition from unique idempotent lifting on the cyclic finite algebra C/q, so no radical fact is taken from a definition that does not state it. Statement unchanged.",
+  "blueprint": "Historical auxiliary chain recorded in blueprint.from.place below lem-trf-local-term-locality; implements construction steps 1-3 and composition step 7 of lem-trf-henselization-prime-ind-etale without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pair-henselization",
+    "why": "Generic pair construction gives filteredness, henselian pair and structural quotient isomorphism; no trace-unit node states this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Generic ring-localization colimit used with S=A minus p; no trace-unit lemma gives it."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic stability under composition supplies the final base-ring composite; no trace-unit lemma gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-pair-henselization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-32bad62c3",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-32bad62c3 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes and the statement is unchanged (byte-equal to side-live). The item is an unsplit child of the re-split parent henselization-prime-ind-etale, whose repair note is resolved. It has no repair note of its own. Neither the item, the parent nor its via chain is on the drop list. The near-duplicate lem-per-local-pair-henselization-comparison (locality, J=mK, eta local, residue iso) is dropped (line 1683), so inlining that content is correct. rg -L found no other duplicate. Step 1: E is exactly the category of pair-henselization for (R,m). Filteredness transfers to the full skeleton. u eta_C = u iota_r s_r = mu_r s_r = eta_T, so the ring colimit is an R-algebra colimit, and the iso to B^h carries the henselian pair and residue iso across. Step 2: the iff leaf (00U1) gives f.p., so the presentation is ind-etale by definition. Step 3: if J is not in a maximal q, then D=C/q is cyclic finite with D/JD=0, and 0 and 1 are two idempotent lifts of 0, contradicting uniqueness. So J is in every maximal ideal, C/J=k is a field, C is local with maximal ideal J, and eta_C is local because e_C is injective. This replaces the Jacobson-radical citation in the 0A03 proof; I accept the elementary flag. Step 4: 00CR node with S=A minus p, algebra-colimit through f=1; A to A_f is etale by the 01I3 and 02GP leaves and f.p. Step 5: the composition clause of 097K. Small cases: A a field with p=0 (C=R); Z at (0) and at (p); non-Noetherian A. I accept the three declared generic pbc tool_uses; the other cited lemmas are Mathlib leaves. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrimePairColimitIndEtaleModel",
+  "declaration": "RingTheory.prime_pair_colimit_indEtale_model",
+  "file": "lean/Sheaf/RingTheory/PrimePairColimitIndEtaleModel.lean",
+  "statement": "theorem prime_pair_colimit_indEtale_model (A : Type u) [CommRing A] (p : Ideal A) [p.IsPrime] (I : Type u) [SmallCategory I] (_hI : Skeletal I) (e : I ≌ ObjectProperty.FullSubcategory (fun B : Under (CommRingCat.of (Localization.AtPrime p)) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map B.hom) ∧ Function.Bijective (Ideal.quotientMap ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map B.hom.hom) B.hom.hom Ideal.le_comap_map))) (c : Cocone (e.functor ⋙ ObjectProperty.ι _)) (_hc : IsColimit ((Under.forget (CommRingCat.of (Localization.AtPrime p))).mapCocone c)) : IsFiltered I ∧ (∀ i : I, (e.functor.obj i).obj.hom.hom.FinitePresentation) ∧ Nonempty (IsColimit c) ∧ (∃ hC : HenselianLocalRing c.pt.right, @IsLocalRing.maximalIdeal c.pt.right _ hC.toIsLocalRing = (IsLocalRing.maximalIdeal (Localization.AtPrime p)).map c.pt.hom.hom) ∧ IsLocalHom c.pt.hom.hom ∧ Function.Bijective (Ideal.quotientMap ((IsLocalRing.maximalIdeal (Localization.AtPrime p)).map c.pt.hom.hom) c.pt.hom.hom Ideal.le_comap_map) ∧ RingHom.IndEtaleAcrossUniverses (algebraMap A (Localization.AtPrime p)) ∧ RingHom.IndEtaleAcrossUniverses c.pt.hom.hom ∧ RingHom.IndEtaleAcrossUniverses (c.pt.hom.hom.comp (algebraMap A (Localization.AtPrime p)))",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49d36a529",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Item lean field only change (node otherwise byte-equal to side-live, live lean null). lean.statement verbatim in file. Clause-by-clause: E = verbatim pair_henselization full subcategory over Under (CommRingCat.of A_p) with m=maximalIdeal; small skeleton I:Type u (EssentiallySmall.{u}) via Skeletal + equivalence; Under cocone with only ring-colimit assumed (equivalent data: η_C forced by identity-algebra representative); conclusions IsFiltered I, FinitePresentation of each stage, Nonempty (IsColimit c), HenselianLocalRing with maximalIdeal = m.map η_C, IsLocalHom η_C, bijective structural quotientMap k→C/J, IndEtaleAcrossUniverses (recorded def lean) for A→A_p, η_C and composite. No extra hypotheses, no defs, sorry only, source+blueprint docstrings with 5 proof steps. No duplicate (HenselizationAtPrime, parent HenselizationPrimeIndEtale, PairHenselizationColimit/Filtered are different). Edge cases field/p=0, Z, non-Noetherian ok. Advisory: unused proof-dependency imports (H9). No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T071114-L-83886",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

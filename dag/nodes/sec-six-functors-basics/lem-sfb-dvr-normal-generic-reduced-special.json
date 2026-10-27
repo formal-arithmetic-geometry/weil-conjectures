@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-dvr-normal-generic-reduced-special",
+ "kind": "statement",
+ "title": "Normality over a DVR from normal generic and reduced special fibres",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring] with uniformizer $\\pi$, fraction field $L$, and residue field $k=R/\\pi R$. Let $T$ be a finitely generated commutative $R$-algebra, flat as an $R$-module [def-weil-pbc-flat-ring-map]. Suppose $T_L=T\\otimes_R L=T[1/\\pi]$ is a normal ring [def-weil-pbc-normal-ring] and $T/\\pi T$ is reduced, meaning it has no nonzero nilpotent elements. Then $T$ is a normal ring. Moreover, under the injective localization map $T\\to T_L$, every element of $T_L$ satisfying a monic polynomial over $T$ belongs to $T$. No normality of the special fibre is assumed. The zero algebra and an empty special fibre are allowed.",
+ "source": {
+  "document": "literature/prasad-yu-on-quasi-reductive-group-schemes.pdf",
+  "place": "WANTED locally; read https://arxiv.org/pdf/math/0405381, Appendix Remark A.3, printed p.27, paragraph on Serre criteria: a finite-type flat scheme over a normal Noetherian domain is normal when its generic fibre is normal and its other fibres are reduced. The final integral-closure formulation is the affine normal-ring characterization."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $t=\\pi\\cdot1_T$ and $B=T[1/t]=T_L$. Multiplication by $\\pi$ on $R$ is injective since $R$ is a domain and $\\pi\\ne0$. Tensor this injective $R$-linear map with the flat module $T$. Under $R\\otimes_RT\\simeq T$, the resulting map is multiplication by $t$, hence is injective by the definition of flatness. Every power of $t$ is therefore a nonzerodivisor, and the localization zero criterion shows that $T\\to B$ is injective.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055J, lemma-connected-flat-over-dvr, proof: uniformizer nonzerodivisor; the tensor argument is written out here."
+   }
+  },
+  {
+   "text": "First prove the asserted integral-closure clause directly. For $z\\in B$ integral over $T$, choose a representation $z=a/t^n$ with $n\\ge0$ minimal. If $n>0$, substitute this expression into a monic equation $z^d+\\sum_{i=0}^{d-1}c_i z^i=0$ with $d\\ge1$ and multiply by $t^{nd}$. Injectivity from step 1 gives $a^d+\\sum_{i=0}^{d-1}c_i a^i t^{n(d-i)}=0$ in $T$. Modulo $tT$ this says $\\overline a^d=0$. Reducedness of $T/tT$ implies $a=tb$ for some $b\\in T$, so $z=b/t^{n-1}$, contradicting minimality. Thus $n=0$ and $z\\in T$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055J, lemma-connected-flat-over-dvr, proof: least uniformizer denominator; agent extension from the idempotent equation to an arbitrary monic equation."
+   }
+  },
+  {
+   "text": "The normal ring $B$ is reduced: its prime localizations are domains by the definition of normality, hence reduced, and the joint injectivity of these localizations implies reducedness of $B$. By the injection $T\\hookrightarrow B$, a nilpotent of $T$ is zero. Thus $T$ is reduced.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-prime-localizations-jointly-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GV, definition-ring-normal, following paragraph; Tag 00HN, lemma-characterize-zero-local."
+   }
+  },
+  {
+   "text": "The DVR $R$ is Noetherian since every ideal is principal. The finite-type algebra theorem implies that $T$ is Noetherian, and the finiteness theorem for minimal primes gives finitely many minimal prime ideals of $T$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence) and 00FR (lemma-Noetherian-irreducible-components)."
+   }
+  },
+  {
+   "text": "Let $Q(T)$ and $Q(B)$ denote localization at the respective nonzerodivisors. If $s\\in T$ is a nonzerodivisor and $(s/1)(a/t^n)=0$ in $B$, the localization zero criterion gives $t^j sa=0$ for some $j$, hence $a=0$. Thus $s/1$ is a nonzerodivisor of $B$, and fractions define $Q(T)\\to Q(B)$ by $a/s\\mapsto(a/1)/(s/1)$. This map is injective: an image fraction equal to zero has zero numerator in $B$, hence $a=0$ in $T$. For $x\\in Q(T)$ integral over $T$, its image is integral over $B$ by mapping its monic equation. Since $B$ is normal, its integral closedness in $Q(B)$ puts this image in $B$. Its monic equation holds already in $B$, since $B\\to Q(B)$ is injective by the localization zero criterion. Step 2 then puts that element of $B$ in $T$. The injections into $Q(B)$ show that $x$ itself equals this element of $T$. Therefore $T$ is integrally closed in $Q(T)$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034M, lemma-normal-ring-integrally-closed; fraction maps and their injectivity are checked explicitly using Section 00CM, section-localization."
+   }
+  },
+  {
+   "text": "Apply the equivalence between normality and integral closedness in the total fraction ring for a reduced ring with finitely many minimal primes. Its hypotheses are steps 3 and 4, and its integral-closure condition is step 5. It follows that $T$ is normal. Step 2 already proves the additional clause. If $T=0$ all membership assertions are vacuous or equalities in the zero ring and normality is vacuous; the criterion allows the empty product. If the special fibre is empty, $T/tT=0$ is reduced and the same argument applies (indeed $t$ is then a unit).",
+   "uses": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030C, lemma-characterize-reduced-ring-normal, implication (2) to (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055J, lemma-connected-flat-over-dvr, least-denominator argument generalized to monic equations, followed by Algebra Tags 034M and 030C. The source assertion is Conrad Appendix Remark A.3 in Prasad--Yu (read online; archival copy WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat finite type algebra over a discrete valuation ring with normal generic fibre and reduced special fibre is normal",
+   "results": "{\"t\": \"2026-10-24T02:53:54Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finite type algebra over a discrete valuation ring with normal generic fibre and reduced special fibre is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"WeierstrassCurve.isGoodReduction_iff\", \"IsDiscreteValuationRing.TFAE\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"Algebra.IsGeometricallyReduced\"], \"digest\": \"55f214b874bae617\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsDiscreteValuationRing.TFAE and Dedekind-domain integral closedness concern the base ring; normalization reducedness and Flat definitions do not give normality of T with only reduced special fibre. No normality criterion of this form was returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-24T02:53:52Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\"], \"digest\": \"c68525a008f46a22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsDiscreteValuationRing.TFAE and Dedekind-domain integral closedness concern the base ring; normalization reducedness and Flat definitions do not give normality of T with only reduced special fibre. No normality criterion of this form was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*reduced|reduced.*normal|generic.*normal",
+   "results": "{\"t\": \"2026-10-24T02:53:51Z\", \"tool\": \"grep\", \"query\": \"normal.*reduced|reduced.*normal|generic.*normal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\"], \"digest\": \"d3157a8fcec2d3d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsDiscreteValuationRing.TFAE and Dedekind-domain integral closedness concern the base ring; normalization reducedness and Flat definitions do not give normality of T with only reduced special fibre. No normality criterion of this form was returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat scheme over a discrete valuation ring is normal if its generic fibre is normal and its closed fibre is reduced",
+   "results": "{\"t\": \"2026-10-24T02:53:52Z\", \"tool\": \"leansearch\", \"query\": \"A flat scheme over a discrete valuation ring is normal if its generic fibre is normal and its closed fibre is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat.stalkMap\"], \"digest\": \"9afc75f230054779\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsDiscreteValuationRing.TFAE and Dedekind-domain integral closedness concern the base ring; normalization reducedness and Flat definitions do not give normality of T with only reduced special fibre. No normality criterion of this form was returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let pi be a uniformizer. If D is flat over a DVR, D modulo pi is reduced and D with pi inverted is normal, then D is normal",
+   "results": "{\"t\": \"2026-10-24T02:53:53Z\", \"tool\": \"leanfinder\", \"query\": \"Let pi be a uniformizer. If D is flat over a DVR, D modulo pi is reduced and D with pi inverted is normal, then D is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDedekindDomainDvr\", \"PreTilt.isDomain\", \"WeierstrassCurve.IsGoodReduction\", \"IsDiscreteValuationRing.TFAE\", \"WeierstrassCurve.isGoodReduction_iff\", \"IsDedekindDomain.HeightOneSpectrum.intValuation_exists_uniformizer\", \"IsDedekindDomain.HeightOneSpectrum.valuation_exists_uniformizer\"], \"digest\": \"dc4944dab664f14a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: IsDiscreteValuationRing.TFAE and Dedekind-domain integral closedness concern the base ring; normalization reducedness and Flat definitions do not give normality of T with only reduced special fibre. No normality criterion of this form was returned."
+  },
+  {
+   "tool": "grep",
+   "query": "normal.*reduced|reduced.*normal|generic.*normal",
+   "results": "{\"t\": \"2026-10-24T03:26:02Z\", \"tool\": \"grep\", \"query\": \"normal.*reduced|reduced.*normal|generic.*normal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\"], \"digest\": \"d3157a8fcec2d3d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern the DVR itself, reduced localizations, normalization constructions or norms; none states normality of a flat algebra with merely reduced special fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra flat over a DVR is normal when its generic fiber is normal and its special fiber is reduced",
+   "results": "{\"t\": \"2026-10-24T03:26:02Z\", \"tool\": \"leansearch\", \"query\": \"An algebra flat over a DVR is normal when its generic fiber is normal and its special fiber is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra\", \"RingHom.Flat\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.FormallyUnramified.isReduced_of_field\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDedekindDomainDvr.toIsNoetherian\", \"RingHom.flat_algebraMap_iff\", \"Algebra.Smooth.flat\"], \"digest\": \"76ab199e4a510061\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern the DVR itself, reduced localizations, normalization constructions or norms; none states normality of a flat algebra with merely reduced special fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-24T03:26:02Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.TFAE\"], \"digest\": \"c68525a008f46a22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern the DVR itself, reduced localizations, normalization constructions or norms; none states normality of a flat algebra with merely reduced special fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finite type algebra over a discrete valuation ring with normal generic fibre and reduced special fibre is normal",
+   "results": "{\"t\": \"2026-10-24T03:26:03Z\", \"tool\": \"leanfinder\", \"query\": \"A flat finite type algebra over a discrete valuation ring with normal generic fibre and reduced special fibre is normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"WeierstrassCurve.isGoodReduction_iff\", \"IsDiscreteValuationRing.TFAE\", \"AlgebraicGeometry.ValuativeCommSq.domain\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"Algebra.IsGeometricallyReduced\"], \"digest\": \"55f214b874bae617\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern the DVR itself, reduced localizations, normalization constructions or norms; none states normality of a flat algebra with merely reduced special fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular element t of a ring A with radical ideal tA, normality of A with t inverted implies normality of A",
+   "results": "{\"t\": \"2026-10-24T03:26:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a regular element t of a ring A with radical ideal tA, normality of A with t inverted implies normality of A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isReduced_localizationPreserves\", \"Ideal.normalizationMonoid\", \"isReduced_ofLocalizationMaximal\", \"Algebra.intNorm_eq_of_isLocalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"instIsReducedLocalization\", \"Algebra.norm_eq_iff\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\"], \"digest\": \"055a0bc5a3caa7d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern the DVR itself, reduced localizations, normalization constructions or norms; none states normality of a flat algebra with merely reduced special fibre."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-group-model-potential-smooth-normalization",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Section 3.3, Proposition 3.4 and Corollary A.4, with Theorem A.6; local-extension reductions at the beginning of Section 5 and following Lemma A.9, printed pp.5-6,9,27-30; supporting input: Normality over a DVR from normal generic and reduced special fibres.",
+   "via": [
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-normal-generic-reduced-special",
+  "worker": "stage1",
+  "summary": "Q67: retained the full statement including zero and empty special fibre cases. Generalized the least-denominator argument of Stacks 055J to monic equations; reused existing 00FN, 00FR, 00HN, 034M and 030C nodes to conclude normality, checking every cited statement. No new nodes. Mathlib searches found no criterion of this form.",
+  "blueprint": "Supporting normality input in the inherited det-thm-sf-ctf-stability-direct-images ancestry, through group-model-potential-smooth-normalization. The latest unit direct-image proof is read; this split supplies its already-selected commutative-algebra prerequisite, without altering the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "why": "General normal-ring integral-closure tool applied to the generic fibre, not supplied by the six-functors unit."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "General commutative-algebra normality criterion assembling the denominator argument; no six-functors unit node replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-703c4bdff",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-703c4bdff (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. It has 0 new nodes and its statement is byte-identical to the base statement. In side-live the item is unsplit and there is no repair note, so no other group superseded it. The statement is true: it is the affine DVR case of Serre's criterion in Conrad's Remark A.3. Edge cases: T=0 holds, and an empty special fibre means pi is a unit, so it holds. Without reducedness it fails: in R[x]/(x^2-pi^2), x/pi is integral over T but not in T. Without flatness it fails: in R[x]/(pi x), T->T_L is not injective. Steps checked one by one: (1) pi is a nonzerodivisor on T by flatness and the zero criterion, so T->T[1/t] is injective. (2) The least-denominator argument generalizes the idempotent case in the proof of Stacks 055J (more-morphisms lemma-connected-flat-over-dvr) to any monic equation: multiplying by t^{nd} makes every term except a^d divisible by t, so a^d is in tT, reducedness gives a=tb, and minimality of n fails; this proves the integral-closure clause. (3) Lemma 00HN gives B reduced, hence T reduced. (4) Lemmas 00FN and 00FR give T Noetherian with finitely many minimal primes. (5) Q(T)->Q(B) is well defined and injective (written out); Lemma 034M for B and then step 2 put an integral x into T. (6) Lemma 030C, implication (2)=>(1), gives normality. I read the cited statements and the Stacks source for 034M, 030C and 055J. The duplicate search with rg -L over dag/nodes found no node stating the same thing or generalizing it. The declared tool_uses 034M and 030C (unit sk-thm-p1) are generic commutative algebra and replace no step of the unit route; I accept them. There is no SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrNormalGenericReducedSpecial",
+  "declaration": "Algebra.normal_of_normal_generic_reduced_special",
+  "file": "lean/Sheaf/RingTheory/DvrNormalGenericReducedSpecial.lean",
+  "statement": "theorem normal_of_normal_generic_reduced_special (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (pi : R) (hpi : IsLocalRing.maximalIdeal R = Ideal.span {pi}) (T : Type v) [CommRing T] [Algebra R T] [FiniteType R T] [Module.Flat R T] (hgeneric : ∀ (p : Ideal (Localization.Away (algebraMap R T pi))) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (hspecial : IsReduced (T ⧸ Ideal.span {algebraMap R T pi})) : (∀ (p : Ideal T) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) ∧ Function.Injective (algebraMap T (Localization.Away (algebraMap R T pi))) ∧ (∀ z : Localization.Away (algebraMap R T pi), IsIntegral T z → ∃ a : T, algebraMap T (Localization.Away (algebraMap R T pi)) a = z)",
+  "branch": "sheaf-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33fcfe380",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: DVR R with uniformizer hpi (maximalIdeal = span{pi}), Algebra.FiniteType, Module.Flat, generic normality over Localization.Away (algebraMap R T pi) in the inline def-weil-pbc-normal-ring form, IsReduced (T ⧸ span{pi}); conclusion = T normal ∧ T→T[1/pi] injective ∧ T-integral elements of T[1/pi] come from T. No extra assumptions; universes u,v independent and bound. Statement field verbatim in file. Live node identical apart from the new lean record and unsplit-by-others; proof-dep plain imports match the recorded modules (both WeilConjectures modules exist). Edge cases T=0 and empty special fibre covered; statement true (Serre criterion; counterexamples show reducedness and flatness are needed). No duplicate: the project has only the idempotent 055J helper. No definitions, sorry only, source and blueprint docstrings with the six proof steps, report has both sections. No file changed, so no compile."
+ }
+}

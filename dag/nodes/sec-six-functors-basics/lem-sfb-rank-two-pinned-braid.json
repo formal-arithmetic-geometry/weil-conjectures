@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-rank-two-pinned-braid",
+ "kind": "statement",
+ "title": "Braid relation for the pinned simple-reflection lifts",
+ "statement": "Let $A$ be a nonzero commutative ring and let $P=(G,T=D_A(M),\\Phi,\\Phi^\\vee,\\Delta,(X_\\alpha))$ be a pinned split realization [def-sfb-pinned-split-root-realization]. For $\\alpha\\in\\Delta$, use the canonical exponentials and unique linked opposite generator $Y_{-\\alpha}$ of [lem-sfb-split-root-subgroup-weyl-calculus], and put\n$$n_\\alpha=\\exp_\\alpha(X_\\alpha)\\exp_{-\\alpha}(-Y_{-\\alpha})\\exp_\\alpha(X_\\alpha)\\in G(A).$$\nFor distinct $a,b\\in\\Delta$, let $m$ be the order of $s_as_b$ on $M$, where $s_\\alpha(v)=v-\\langle v,\\alpha^\\vee\\rangle\\alpha$. Define $A_m$ and $B_m$ to be the alternating words of length $m$ in $n_a,n_b$ starting with $n_a$ and $n_b$, respectively. Then $A_m=B_m$ in $G(A)$. The same equality holds after every ring base change. The assertion includes disconnected and nonreduced bases and all central tori; it is an equality of the pinned lifts themselves, not just of their images in the Weyl group.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 6.2, normalizer relations preceding (6.2.3), printed p.201, and Section 6.4, Example 6.4.3, printed pp.230--231 (normalizer extension). The braid relation is an agent-written auxiliary rank-two word calculation required to compute the explicit torus relator, not an assertion that these passages state that relation. WANTED: Tits, Normalisateurs de tores I, Journal of Algebra 4 (1966), pp.96--116, the extended-Coxeter presentation and its normalizer realization. Read online; local archival copy WANTED. This is an auxiliary formulation by the worker, not a quotation of a source with omitted calculations. No Stacks tag states this reductive-group calculation."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-split-root-subgroup-weyl-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-small-centralizer-hom-amalgamation] with $J=\\{a,b\\}$. Its subgroup $G_J$ retains the full torus, coroots and pinning and has semisimple rank two. By [lem-sfb-split-root-subgroup-weyl-calculus] its root exponentials, linked opposite generators and $n_a,n_b$ are those in $G$. It suffices to prove the equality in $G_J(A)$. Relabel so $a$ is short when lengths differ; the desired equality is symmetric under exchanging the labels. Apply [lem-sfb-rank-two-root-string-seed-calculus] to $G_J$. Its four positive-root lists force the following Cartan entries and orders:\n$$\\begin{array}{c|rrrr}\\text{type}&A_1\\times A_1&A_2&B_2&G_2\\\\ \\langle b,a^\\vee\\rangle&0&-1&-2&-3\\\\ \\langle a,b^\\vee\\rangle&0&-1&-1&-1\\\\ m&2&3&4&6.\\end{array}$$\nFor the entries, substitute each listed root into $s_r(v)=v-\\langle v,r^\\vee\\rangle r$: preservation of the lists forces the displayed integers. On $V=\\mathbf Qa+\\mathbf Qb$ the matrices are $s_a=\\left(\\begin{smallmatrix}-1&-\\langle b,a^\\vee\\rangle\\\\0&1\\end{smallmatrix}\\right)$ and $s_b=\\left(\\begin{smallmatrix}1&0\\\\-\\langle a,b^\\vee\\rangle&-1\\end{smallmatrix}\\right)$; their product has the indicated exact order by multiplication. This is also its order on $M$: the Cartan determinants are $4,3,2,1$, so $M_{\\mathbf Q}=V\\oplus(\\ker a^\\vee\\cap\\ker b^\\vee)$, with the reflections trivial on the second summand; $M\\hookrightarrow M_{\\mathbf Q}$.",
+   "uses": [
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-rank-two-root-string-seed-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Isogeny Theorem Step 1, pp.204--205; Step 2, pp.205--206; agent-explicit reflection matrix calculation."
+   }
+  },
+  {
+   "text": "We need only these no-sum commutations: in $A_1\\times A_1$, $U_b$ commutes with $U_a$ and $U_{-a}$; in $B_2$, $U_d$ commutes with $U_b,U_{-b}$, where $d=2a+b$; in $G_2$, $U_f$ commutes with $U_a,U_{-a}$, where $f=3a+2b$. Here is a direct application of the cited statements, including their positivity hypothesis. For each pair $(r,s)$ just named, the lists of [lem-sfb-rank-two-root-string-seed-calculus], together with their negatives, contain no $ir+js$ with $i,j>0$. Indeed in $B_2$ such a combination has coordinates $(2i,i\\pm j)$ and in $G_2$ it has coordinates $(3i\\pm j,2i)$, neither in the relevant root list; the disconnected case is immediate. Thus $\\{r,s\\}$ is closed and has no opposite pair. By [lem-sfb-closed-root-set-positive-functional] choose an integral functional positive on this pair and nonzero on every root. Its positive set $\\Sigma$ is closed and disjoint from its negative. [lem-sfb-split-root-subgroup-weyl-calculus] gives the product-coordinate subgroup for every enumeration of $\\Sigma$. Choose generators for its root modules (and all remaining root modules); their canonical exponentials satisfy the closed-immersion, tangent and equivariance hypotheses of [lem-sfb-equivariant-root-commutator-support]. That node's empty-index-set clause now gives each asserted commutation as an identity on every algebra. Since $n_r$ is a product in $U_r,U_{-r},U_r$, it follows in particular that $\\operatorname{Ad}(n_a)X_b=X_b$ in the disconnected case, $\\operatorname{Ad}(n_b)X_d=X_d$ in $B_2$, and $\\operatorname{Ad}(n_a)X_f=X_f$ in $G_2$.",
+   "uses": [
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-closed-root-set-positive-functional",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-equivariant-root-commutator-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.16, pp.140--142, and root lists of Isogeny Theorem Step 2, pp.205--206; agent-explicit applications of the empty commutator support."
+   }
+  },
+  {
+   "text": "We will use the following immediate consequence of the characterization in [lem-sfb-split-root-subgroup-weyl-calculus]. If $h$ is a word in $n_a,n_b$, its Weyl action carries a simple root $r$ to a simple root $s$, and $\\operatorname{Ad}(h)X_r=X_s$, then $h n_r h^{-1}=n_s$. Indeed $h\\exp_r(v)h^{-1}=\\exp_s(\\operatorname{Ad}(h)v)$: conjugating the map preserves its defining tangent inclusion and torus equivariance, so uniqueness identifies it. The same holds on the negative root. The image of the linked opposite generator is linked to $X_s$, because conjugating the displayed three-factor expression gives an element normalizing $T$. The uniqueness of the linked opposite generator therefore identifies it with $Y_{-s}$. Substitution in that three-factor expression gives the asserted equality in $G(A)$, rather than only equality of adjoint actions. Also, directly from $n_r^2=r^\\vee(-1)$ and torus equivariance,\n$$\\operatorname{Ad}(n_r)^2Z=(-1)^{\\langle c,r^\\vee\\rangle}Z\\quad(Z\\in\\mathfrak g_c).$$",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 5.1.9 and Remark 5.1.10, pp.132--133; canonical exponential characterization, Theorem 4.1.4. Agent-explicit use of uniqueness."
+   }
+  },
+  {
+   "text": "For $A_1\\times A_1$ take $h=n_a$, $r=s=b$. The reflections fix $b$, and step 2 gives $\\operatorname{Ad}(h)X_b=X_b$. Step 3 implies $n_a n_b n_a^{-1}=n_b$, hence $n_a n_b=n_b n_a$. This is the required length-two equality.",
+   "uses": [
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Agent calculation from the disconnected rank-two list and Corollary 5.1.9; Isogeny Theorem Step 2, pp.205--206."
+   }
+  },
+  {
+   "text": "For $A_2$ put $c=a+b$ and $h=n_a n_b$. The seed gives $X_c=\\operatorname{Ad}(n_b)X_a$ and $\\operatorname{Ad}(n_a)X_b=-X_c$. Step 3 and $\\langle b,a^\\vee\\rangle=-1$ give\n$$\\operatorname{Ad}(h)X_a=\\operatorname{Ad}(n_a)X_c=-\\operatorname{Ad}(n_a)^2X_b=X_b.$$\nThe reflection formulas give $s_as_b(a)=b$. Thus step 3 gives $h n_a h^{-1}=n_b$. Multiplying by $h$ on the right yields $n_a n_b n_a=n_b n_a n_b$, as required.",
+   "uses": [
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Isogeny Theorem Step 2 (A2 normalization), Lemma 6.2.8, pp.205--207; agent-explicit word calculation."
+   }
+  },
+  {
+   "text": "For $B_2$ put $d=2a+b$, $X_d=\\operatorname{Ad}(n_a)X_b$ and $h=n_a n_b n_a$. Step 2 gives $\\operatorname{Ad}(n_b)X_d=X_d$, and $\\langle b,a^\\vee\\rangle=-2$ gives\n$$\\operatorname{Ad}(h)X_b=\\operatorname{Ad}(n_a)X_d=\\operatorname{Ad}(n_a)^2X_b=X_b.$$\nThe same root path is $b\\mapsto d\\mapsto d\\mapsto b$, so $s_as_bs_a(b)=b$. Step 3 gives $h n_b=n_b h$, which expands to $n_a n_b n_a n_b=n_b n_a n_b n_a$.",
+   "uses": [
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Isogeny Theorem Step 2 (B2 normalization), pp.205--206; agent-explicit word calculation using no-sum commutation."
+   }
+  },
+  {
+   "text": "For $G_2$ put $e=3a+b$, $f=3a+2b$, $X_e=-\\operatorname{Ad}(n_a)X_b$, $X_f=\\operatorname{Ad}(n_b)X_e$, and $h=n_a n_b n_a n_b n_a$. Since $\\langle b,a^\\vee\\rangle=-3$ and $\\langle e,b^\\vee\\rangle=3(-1)+2=-1$, step 3 gives $\\operatorname{Ad}(n_a)X_e=X_b$ and $\\operatorname{Ad}(n_b)X_f=-X_e$. Step 2 gives $\\operatorname{Ad}(n_a)X_f=X_f$. Reading the five factors of $h$ from right to left, the vector path is therefore\n$$X_b\\longmapsto-X_e\\longmapsto-X_f\\longmapsto-X_f\\longmapsto X_e\\longmapsto X_b.$$\nThe corresponding root path is $b,e,f,f,e,b$, so the Weyl action of $h$ fixes $b$. By step 3, $h n_b=n_b h$. Expanding gives precisely the length-six braid relation. Every minus sign is multiplication by the ring element $-1$, so the calculation also works in characteristics two and three.",
+   "uses": [
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Isogeny Theorem Step 2 (G2 signed vectors), pp.205--207; agent-explicit five-factor calculation."
+   }
+  },
+  {
+   "text": "The four cases prove the equality in $G_J(A)$ and hence in $G(A)$ under the subgroup inclusion of step 1. For any homomorphism $A\\to R$, the induced group homomorphism $G(A)\\to G(R)$ sends both words to the corresponding words, because the canonical root exponentials commute with base change and the linked generator remains linked and is unique by [lem-sfb-split-root-subgroup-weyl-calculus]. Thus it sends the equality to the asserted base-changed equality. The zero ring gives the unique point over the empty scheme as well. All other calculations were identities over $A$ and used full torus characters; no passage to geometric points, reduction of $A$, central quotient, or division by an integer occurred.",
+   "uses": [
+    "lem-sfb-small-centralizer-hom-amalgamation",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 5.1.9 and root exponential base-change compatibility; agent-explicit conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-small-centralizer-hom-amalgamation",
+  "lem-sfb-split-root-subgroup-weyl-calculus",
+  "lem-sfb-rank-two-root-string-seed-calculus",
+  "lem-sfb-closed-root-set-positive-functional",
+  "lem-sfb-equivariant-root-commutator-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Explicit rank-two conjugation argument from the root-vector normalization in Isogeny Theorem Step 2, pp.205--207, the canonical representatives of Corollary 5.1.9, and the root-product coordinates of Proposition 5.1.16. The source is read online; local archival copy WANTED. No Tits presentation or classification theorem is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Tits|braid",
+   "results": "1 hits; Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean; Mathlib/LinearAlgebra/RootSystem. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical Weyl representatives in pinned reductive groups satisfy braid relations",
+   "results": "8 hits; CoxeterSystem.wordProd_braidWord_eq, CoxeterSystem.simple_mul_simple_pow, CoxeterSystem.simple_mul_simple_pow', RootPairing.weylGroup.ofIdx_smul, RootPairing.weylGroup_apply_root, CoxeterSystem.braidWord, RootPairing.weylGroup_toSubmonoid, RootPairing.range_weylGroupToPerm. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"braid\", \"RootPairing\"",
+   "results": "0 hits; . Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical simple-root Weyl representatives in pinned split reductive group schemes satisfy braid relations over arbitrary rings",
+   "results": "8 hits; RootPairing.GeckConstruction.isSl2Triple, RootPairing.weylGroup.ofIdx, RootPairing.weylGroup.induction', RootPairing.weylGroup.induction, RootPairing.GeckConstruction.ω_mul_h, RootPairing.GeckConstruction.ω_mul_e, RootPairing.reflection_mem_weylGroup, RootPairing.weylGroup_apply_root. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "wordProd_braidWord_eq|simple_mul_simple_pow",
+   "results": "5 hits; Mathlib/GroupTheory/Coxeter/Basic.lean, Mathlib/GroupTheory/Coxeter/Basic.lean, Mathlib/GroupTheory/Coxeter/Basic.lean, Mathlib/GroupTheory/Coxeter/Basic.lean, Mathlib/GroupTheory/Coxeter/Basic.lean; Mathlib/GroupTheory/Coxeter. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Braid relations for standard lifts of simple reflections in the normalizer of a split maximal torus",
+   "results": "8 hits; RootPairing.GeckConstruction.ω_mul_h, RootPairing.reflection_reflectionPerm, RootPairing.weylGroup, CoxeterSystem.wordProd_braidWord_eq, RootPairing.GeckConstruction.ω_mul_e, RootPairing.weylGroup.ofIdx, CoxeterSystem.simple_mul_simple_pow', CoxeterSystem.simple_mul_simple_pow. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"braid\", \"RootPairing\"",
+   "results": "0 hits: . Hits read; CoxeterSystem.wordProd_braidWord_eq is about involutive Coxeter generators; RootPairing and GeckConstruction results concern lattice reflections or Lie matrices, not pinned group-scheme representatives.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical simple root representatives in a pinned split reductive group satisfy braid relations over arbitrary commutative rings",
+   "results": "8 hits: RootPairing.GeckConstruction.isSl2Triple, RootPairing.GeckConstruction.e_lie_v_ne, CartanMatrix.Relations.EF, RootPairing.GeckConstruction.h', RootPairing.GeckConstruction.f_lie_v_ne, RootPairing.GeckConstruction.ω_mul_e, RootPairing.GeckConstruction.lie_e_lie_f_apply, RootPairing.EmbeddedG2.threeShortAddLong. Hits read; CoxeterSystem.wordProd_braidWord_eq is about involutive Coxeter generators; RootPairing and GeckConstruction results concern lattice reflections or Lie matrices, not pinned group-scheme representatives.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical representatives of simple reflections in the normalizer of a split maximal torus satisfy the braid relations",
+   "results": "8 hits: CoxeterSystem.simple_mul_simple_pow', CoxeterSystem.simple_mul_simple_pow, CoxeterSystem.wordProd_braidWord_eq, CoxeterSystem.simple, CoxeterSystem.braidWord, CoxeterMatrix.Group, CoxeterSystem.IsReflection.conj, CoxeterSystem.IsReflection.pow_two. Hits read; CoxeterSystem.wordProd_braidWord_eq is about involutive Coxeter generators; RootPairing and GeckConstruction results concern lattice reflections or Lie matrices, not pinned group-scheme representatives.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tits|wordProd_braidWord_eq|pinned|braid",
+   "results": "4 hits: Mathlib/GroupTheory/Coxeter/Basic.lean, Mathlib/GroupTheory/Coxeter/Basic.lean, Mathlib/GroupTheory/Coxeter/Basic.lean, Mathlib/GroupTheory/Coxeter/Basic.lean. Hits read; CoxeterSystem.wordProd_braidWord_eq is about involutive Coxeter generators; RootPairing and GeckConstruction results concern lattice reflections or Lie matrices, not pinned group-scheme representatives.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Braid relations for canonical pinned Weyl representatives obtained by transporting simple root vectors",
+   "results": "8 hits: RootPairing.weylGroup_apply_root, RootPairing.weylGroup.ofIdx, RootPairing.weylGroup, RootPairing.reflection_reflectionPerm, RootPairing.weylGroup.ofIdx_smul, RootPairing.weylGroup.induction', RootPairing.weylGroup.induction, RootPairing.reflection_mem_weylGroup. Hits read; CoxeterSystem.wordProd_braidWord_eq is about involutive Coxeter generators; RootPairing and GeckConstruction results concern lattice reflections or Lie matrices, not pinned group-scheme representatives.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-low-rank-universal-root-coordinates",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Normalized root homomorphisms in semisimple rank at most two. Supporting input: Theorem 4.1.4 (canonical root groups), Corollary 5.1.9 and Remark 5.1.10 (rank-one Weyl representatives), Proposition 5.1.16 (positive ordered products), and Lemma 6.2.8 with Steps 2--4 of the Isogeny Theorem, printed pp.205--209 (universal rank-two constants). The last Weyl-word formula is an agent-explicit formulation of the normalizer relator (6.2.3) required in Step 4, using the coroot word for the square of a longest Weyl representative; it is not asserted to be a quotation of Lemma 6.2.8; Section 6.2, normalizer relations preceding (6.2.3), printed p.201, and Section 6.4, Example 6.4.3, printed pp.230--231 (normalizer extension). The braid relation is an agent-written auxiliary rank-two word calculation required to compute the explicit torus relator, not an assertion that these passages state that relation. WANTED: Tits, Normalisateurs de tores I, Journal of Algebra 4 (1966), pp.96--116, the extended-Coxeter presentation and its normalizer realization.",
+   "via": [
+    "lem-sfb-low-rank-universal-root-coordinates",
+    "lem-sfb-low-rank-pinned-root-hom",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-two-pinned-braid",
+  "worker": "stage1",
+  "summary": "Zero new nodes. Reduce to the full-torus two-simple-root centralizer, then use existing rank-two seed vectors, empty commutator support, and uniqueness of linked opposite generators. Explicit vector transport proves the four braid words in the group, including the G2 signs, without an adjoint-kernel ambiguity, model classification, or an SGA source. Statement unchanged.",
+  "blueprint": "Realizes the auxiliary braid relation at the existing blueprint.from.place: the rank-two word input to the explicit torus relator in lem-sfb-low-rank-universal-root-coordinates. The ancestry is a null blueprint anchor inherited from that item; current blueprint searches for braid, rank-two, root string and root commutator give no duplicate pinned-lift assertion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-93c83d7cf",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-93c83d7cf (reviewer sub-agent of L); spot-checked: I read the item and all six cited statements in full; the delivery adds no new nodes and leaves the statement and stmt_deps unchanged. Step 1: the small-centralizer node gives G_J for J={a,b} with the full torus, the original coroots and the inherited pinning. The weyl-calculus node shows that exp_γ, Y_{-α} and n_α are the same in G_J as in G. I re-derived the Cartan entries from the seed's root lists (B2: k=0 and k=-1 lead to b-a, which is not a root). The orders 2/3/4/6 on M follow from det≠0, which gives M_Q=V⊕(ker a^∨∩ker b^∨). Step 2: I recomputed i·r+j·s for the pairs (b,±a), (2a+b,±b) and (3a+2b,±a). None is a root, so each pair is closed and opposite-free. The positive-functional node gives Σ, the weyl-calculus node gives U_Σ independent of the enumeration, and the empty I_{a,b} clause of the commutator-support node gives the commutations on all algebras. Step 3: conjugating exp_r by h preserves the differential and T-equivariance, with the character carried r→s by the stated n_α action. Uniqueness of the linked generator then gives h n_r h^{-1}=n_s as group elements. The square formula follows from n_r^2=r^∨(-1) and the weight-space definition. Steps 4–7: I recomputed the vector and root paths. A2 gives -(-1)^{-1}X_b; B2 uses ⟨d,b^∨⟩=0; in G2, ⟨e,b^∨⟩=-1 and ⟨f,a^∨⟩=0, and the path X_b→-X_e→-X_f→-X_f→X_e→X_b is correct, as are the signs. Step 8: the base-change argument uses only the stated compatibilities. The dependency closure has no cycle. The Conrad source is not available locally, and proof_origin honestly marks the argument as agent-written; there is no SGA. Batch-5 flags: lem-trf-fg-torsionfree-group-free, lem-trf-sharp-monoid-positive-grading and lem-trf-smooth-fpqc-base-descent are general algebra and scheme facts. They lie outside the trace-formula and Poincaré-duality assumptions and are not steps of their proofs, so all three are accepted. There are no tool_uses and no fixes."
+ }
+}

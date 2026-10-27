@@ -1,0 +1,288 @@
+{
+ "id": "lem-pur-etale-system-brown-construction",
+ "kind": "statement",
+ "title": "Construction and Brown adjunction for the strict etale compact-support functor",
+ "statement": "Let $k=\\overline{\\mathbf F}_q$ have characteristic $p$ and let $\\ell\\ne p$ be prime [def-weil-finite-field-fiber]. Let $f:X\\to Y$ be a separated finite-type morphism of finite-type $k$-schemes, with no separatedness assumption on $Y$, and fix a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p_f}Y$ [def-weil-scheme-morphism-properties, def-weil-compactifications-refinements]. Let $E/\\mathbf Q_\\ell$ be finite, $O=\\mathcal O_E$, and let $t\\in O$ be nonzero and not a unit [def-weil-l-adic-coefficient-extension]. Put $A_n=O/(t^n)$ for $n\\ge1$. Use strict systems $\\mathsf S_A(W_{\\mathrm{et}})$, evaluation $e_n$, and their ordinary unbounded derived categories as in [lem-pur-coefficient-system-derived-comparison]. Set $F_A=Rp_{f,A,*}j_{!,A}$ and $F_n=Rp_{f,*,A_n}j_!$. \nThe coefficient rings $A_n$ are finite and annihilated by powers of $\\ell$, their transitions are surjective, and $O\\cong\\varprojlim_nO/(t^n)$. The category of systems is Grothendieck abelian, with coproducts, cohomology and cohomological bounds computed componentwise. The functor $F_A$ is a well-defined exact $O$-linear functor on the whole unbounded derived category and preserves arbitrary set-indexed coproducts in the chosen universe. Its canonical evaluation comparison is $e_nF_A\\cong F_ne_n$, with the evaluated open/proper adjunction units, counits and coefficient transitions.\n\nLet $L_n\\dashv e_n$ be derived left extension [lem-pur-system-level-left-extension], so $e_mL_nP=A_m\\otimes^L_{A_n}P$ for $m\\le n$ and is zero for $m>n$. The canonical coefficient projection comparisons give actual natural isomorphisms $F_AL_n\\cong L_nF_n$, whose level-$m$ maps for $m\\le n$ are the inverses of the projection isomorphisms $q$ for $A_n\\to A_m$ of [lem-pur-etale-system-coefficient-projection]. They respect all strict transitions.\n\nThere is an adjunction $F_A\\dashv G_A$ on these unbounded derived categories. Its right adjoint has the $O$-linear and coherent shift structures induced by adjunction, its unit and counit respect those structures, and $G_A$ is exact for that shift structure. The functor, adjunction and comparisons have their map action in the derived category, independent of choices of resolutions.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.14–5.15, Lemma 5.16 and the Brown adjoint immediately following it (printed pp. 21, 34–35); agent extraction of returned item steps 1 and 3. The nonuniformizer t version uses t equal to a unit times a positive uniformizer power."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-etale-system-coefficient-projection",
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-etale-brown-projection-realization"
+ ],
+ "proof": [
+  {
+   "text": "Apply nonunit_coefficient_stages. In the domain O, nonzero t is regular, so the existing compact-support construction supplies S.",
+   "uses": [
+    "lem-pur-nonunit-coefficient-stages",
+    "lem-pur-etale-compact-support-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the Grothendieck structure along coefficientSystemEquivalence to StrictRingSystem. System evaluation preserves coproducts; the exact-derived homology comparison gives componentwise cohomology. Componentwise vanishing of homology gives the common-bound iff statements.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-strict-extension",
+    "lem-pur-system-grothendieck",
+    "lem-pur-system-coproducts",
+    "lem-pur-ringed-site-grothendieck-coefficient-universe",
+    "lem-pur-exact-derived-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The given exact inverse-image models are isomorphic to mapDerivedCategory. Transfer their shift and triangulated structures and then transfer these to their adjoints. Their composite S.functor is exact and additive. The existing normalized scalar action supplies O-linearity.",
+   "uses": [
+    "lem-pur-exact-derived-adjunction-bounds",
+    "lem-pur-etale-compact-support-scalar-action",
+    "lem-sf-triangulated-right-adjoint",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite-type schemes over the field are locally Noetherian and quasi-compact. Apply the published proper finite-ring coproduct theorem. The geometric realization equivalences and their normalized proper comparison transport coproduct preservation to the given proper derived model. Open extension is a left adjoint. The evaluation comparison and joint detection of colimits prove S.functor preserves coproducts.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+    "lem-pur-coefficient-system-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport to the Grothendieck-sized derived localizations and apply Brown representability, then transport back. Choose the rightAdjoint with ofIsLeftAdjoint. Adjunction transfers additivity, coherent shifts and exactness. A direct Hom-transpose proof transfers scalars; naturality proves the scalar equations for unit and counit.",
+   "uses": [
+    "lem-grothendieck-derived-brown-right-adjoint",
+    "lem-sf-triangulated-right-adjoint",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the separate geometric comparison lemma for this S. Use the explicitly constructed proper/open insertion isomorphisms and their proved conjugacy identities, and assemble all fields of StrictEtaleBrownConstruction.",
+   "uses": [
+    "lem-pur-etale-brown-geometric-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-nonunit-coefficient-stages",
+  "lem-pur-etale-compact-support-construction",
+  "lem-pur-coefficient-evaluation-strict-extension",
+  "lem-pur-system-grothendieck",
+  "lem-pur-system-coproducts",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "lem-pur-exact-derived-coproducts",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-pur-etale-compact-support-scalar-action",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-pur-etale-brown-geometric-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Lemmas 5.13 and 5.16 and following Brown argument; Lean assembly follows the actual coefficient-system and derived-adjunction interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded derived compact-support functor on strict etale coefficient systems preserves arbitrary coproducts and admits an exact linear right adjoint by Brown representability",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.profiniteSolidification\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.profiniteFree R ⟶ Condensed.profiniteSolid R\", \"doc\": \"The natural transformation from the profinite-free $ R $-module functor to the profinite-solid $ R $-module functor, constructed via the counit of the right Kan extension defining the profinite solid \"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R],\\n  (Condensed.profiniteSolid R).IsRightKanExtension (Condensed.profiniteSolidCounit R)\", \"doc\": \"The profinite solid module functor from profinite spaces to condensed $ R $-modules is defined as the right Kan extension of the embedding functor from finite types to profinite spaces along the free \"}\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"Condensed.hasExactColimitsOfShape\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (A : Type u_1) (J : Type u_2) [inst : CategoryTheory.Category.{v_1, u_1} A]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} J] [CategoryTheory.Preadditive A]\\n  [∀ (X : CompHausᵒᵖ),\\n      CategoryTheory.Limits.HasLimitsOfShape (CategoryTheory.StructuredArrow X Stonean.toCompHaus.op) A]\\n  [inst_4 : C\", \"doc\": \"If a category $\\\\mathcal{A}$ admits colimits of shape $J$ and has exact colimits of shape $J$, and $\\\\mathcal{A}$ has finite limits, then the category of condensed objects $\\\\text{Condensed } \\\\mathcal{A}\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coproduct preserving triangulated functor between derived categories of Grothendieck abelian categories has a right adjoint",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"Given an additive functor $ F $ between abelian categories that preserves finite limits/colimits and homology, the induced functor between their derived categories is triangulated. This means it commu\"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is a triangulated functor between pretriangulated categories (commuting with integer-parameterized shifts, preserving preadditive structure, and respecting zero \"}\n  {\"name\": \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_3 : CategoryTheory.Limits.HasZeroObject D] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : CategoryTheory.Pread\", \"doc\": \"In an adjunction between pretriangulated categories, if the right adjoint is a triangulated functor (i.e., commutes with the integer-parameterized shift operation, preserves the preadditive structure,\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"Given pretriangulated categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with integer-parameterized shift operations, if functors $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ form a t\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"module\": \"Mathlib/CategoryTheory/Triangulated/Adjunction\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} {inst : CategoryTheory.Category.{v_1, u_1} C}\\n  {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.Limits.HasZeroObject C}\\n  {inst_3 : CategoryTheory.Limits.HasZeroObject D} {inst_4 : CategoryTheory.Preadditive C}\\n  {inst_5 : CategoryTheory.Pread\", \"doc\": \"If $ F : C \\to D $ and $ G : D \\to C $ form an adjunction between pretriangulated categories $ C $ and $ D $, where both functors commute with integer-parameterized shift operations and the adjunction r\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction\", \"type\": \"{C₁ : Type u_1} →\\n  {C₂ : Type u_2} →\\n    {D₁ : Type u_3} →\\n      {D₂ : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\\n              [inst_3 : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightAdjoint",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.IsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (right : CategoryTheory.Functor D C) : Prop\", \"doc\": \"A class asserting the existence of a left adjoint.\"}\n  {\"name\": \"CategoryTheory.Equivalence.isRightAdjoint_functor\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.functor.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.isRightAdjoint_inverse\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (e : C ≌ D) : e.inverse.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Functor D C) [R.IsRightAdjoint] : CategoryTheory.Functor C D\", \"doc\": \"A chosen left adjoint to a functor that is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Functor.isRightAdjoint_of_isEquivalence\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} [F.IsEquivalence] : F.IsRightAdjoint\", \"doc\": \"If `F` is an equivalence, it's a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsLeftAdjointLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Functor D C) [R.IsRightAdjoint] : R.leftAdjoint.IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.instIsRightAdjointRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (R : CategoryTheory.Functor D C) [R.IsLeftAdjoint] : R.rightAdjoint.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : G ⊣ F) : F.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (right : CategoryTheory.Functor C D) [right.IsRightAdjoint] : right.leftAdjoint ⊣ right\", \"doc\": \"The adjunction associated to a functor known to be a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightAdjoint.exists_leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {right : CategoryTheory.Functor D C} [self : right.IsRightAdjoint] : ∃ left, Nonempty (left ⊣ right)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightAdjoint.mk\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {right : CategoryTheory.Functor D C} (exists_leftAdjoint : ∃ left, Nonempty (left ⊣ right)) : right.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isRightAdjoint_of_iso\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F G : CategoryTheory.Functor C D} (h : F ≅ G) [F.IsRightAdjoint] : G.IsRightAdjoint\", \"doc\": \"Transport being a right adjoint along a natural isomorphism.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "brown|representability|IsRightAdjoint",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"line\": \"45\", \"text\": \"* [Bondal and Van den Bergh, *Generators and representability of functors in commutative and\"} Searched Mathlib/CategoryTheory/Triangulated/",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Brown right adjoint to derived etale compact supports on varying coefficient systems",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.derived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \"[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{D}_1, \\\\mathcal{D}_2$ with an adjunction $G \\\\dashv F$ between $\\\\mathcal{C}_1$ and $\\\\mathcal{C}_2$, and localization functors $L_1: \\\\mathcal{C}_1\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[HasWeakSheafify K A] : (G.sheafPushforwardContinuous A J K).IsRightAdjoint\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the induced sheaf pushforward functor $ F_* $ is a right adjoint, provided th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"CategoryTheory.rightAdjointOfCostructuredArrowTerminalsAux_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Comma\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  (G : CategoryTheory.Functor D C)\\n  [inst_2 : ∀ (A : C), CategoryTheory.Limits.HasTerminal (CategoryTheory.CostructuredArrow G A)] (B : D) (A : C)\\n  (g : G.obj B ⟶ A),\\n  (Category\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$, and objects $B \\\\in \\\\mathcal{D}$ and $A \\\\in \\\\mathcal{C}$, there is a natural equivalence between the hom-set\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \"[HasExplicitFiniteCoproducts.{u} P] : functor.{u, w} P hs ⊣ (sheafSections _ _).obj ⟨CompHausLike.of P PUnit.{u + 1}⟩\", \"doc\": \"There is an adjunction between the functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces and the sections functor evaluated at the terminal object (the unit ty\"}\n  {\"name\": \"CategoryTheory.Adjunction.derivedε\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.Adjunction\", \"type\": \": F' ⋙ G' ⟶ 𝟭 D₂\", \"doc\": \"The natural transformation $\\\\varepsilon': F' \\\\circ G' \\\\Rightarrow \\\\text{id}_{\\\\mathcal{D}_2}$ constructed as the right derived functor description, combining whiskered natural transformations $\\\\beta$, \"}\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \": functor R ⊣ underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"CategoryTheory.isRightAdjoint_triangle_lift\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Lifting.Left\", \"type\": \"{U : B ⥤ C} {F : C ⥤ B} (R : A ⥤ B) (adj₁ : F ⊣ U) (h : ∀ X : B, RegularEpi (adj₁.counit.app X))\\n  [HasReflexiveCoequalizers A] [(R ⋙ U).IsRightAdjoint] : R.IsRightAdjoint\", \"doc\": \"Let $\\\\mathcal{A}, \\\\mathcal{B}, \\\\mathcal{C}$ be categories. Suppose $F : \\\\mathcal{C} \\\\to \\\\mathcal{B}$ and $U : \\\\mathcal{B} \\\\to \\\\mathcal{C}$ form an adjunction $F \\\\dashv U$ with counit $\\\\varepsilon : F \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this ordinary etale derived-system assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated_rightAdjoint|brownRepresentability|brown_representability",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"60\", \"text\": \"lemma isTriangulated_rightAdjoint [F.IsTriangulated] : G.IsTriangulated where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"139\", \"text\": \"  have := isTriangulated_rightAdjoint adj.op\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"159\", \"text\": \"  rightAdjoint_isTriangulated := adj.isTriangulated_rightAdjoint\"}\n  {\"file\": \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"line\": \"203\", \"text\": \"  rightAdjoint_isTriangulated := E.toAdjunction.isTriangulated_rightAdjoint\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic category/module declarations or unrelated hits; none states the specified etale derived-system assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded derived compact support functor on strict etale coefficient systems preserves coproducts and admits a Brown right adjoint",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.LocallyConstant.adjunction\", \"CondensedSet.compactlyGeneratedAdjunction\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"Condensed.profiniteSolid\", \"LightCondMod.LocallyConstant.adjunction\", \"Condensed.profiniteSolidification\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"Condensed.profiniteSolidCounit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full strict etale coefficient-system construction, evaluation, left-extension comparison and Brown adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "Brown|brown|right_adjoint_linear|isTriangulated_rightAdjoint",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Normal.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full strict etale coefficient-system construction, evaluation, left-extension comparison and Brown adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.right_adjoint_linear",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Adjunction.right_adjoint_linear'\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full strict etale coefficient-system construction, evaluation, left-extension comparison and Brown adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Brown adjunction for strict inverse systems of etale module sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.constantSheafAdj\", \"PresheafOfModules.sheafificationAdjunction\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full strict etale coefficient-system construction, evaluation, left-extension comparison and Brown adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact coproduct preserving functor from the unbounded derived category of a Grothendieck abelian category has a right adjoint",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.abelianOfAdjunction\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Abelian.isLocalization_isoModSerre_kernel_of_leftAdjoint\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"HasDerivedCategory.standard\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the full strict etale coefficient-system construction, evaluation, left-extension comparison and Brown adjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-coefficient-system-adjoint",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: compatible finite-level functors before derived inverse limit; Constructions 4.1 and 5.14–5.15, Lemma 5.16 and the Brown adjoint immediately following it (printed pp. 21, 34–35); agent extraction of returned item steps 1 and 3. The nonuniformizer t version uses t equal to a unit times a positive uniformizer power.",
+   "via": [
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-system-brown-construction",
+  "worker": "stage1",
+  "summary": "Retained the statement; proved the strict-system construction, canonical evaluation, coproduct preservation, actual left-extension mate comparison and Brown adjunction from existing nodes, without new nodes. Checked arbitrary nonzero nonunit t and nonseparated Y.",
+  "blueprint": "def-weil-exceptional-inverse-image: ordinary etale Brown adjoint paragraph and adic-stage paragraph requiring compatible finite-level functors before inverse limit. Steps 1–5 construct the unbounded strict-system functor, 6–8 construct its actual left-extension comparisons, 9–10 provide the adjunction and map-level independence.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic Derived semilinear sections and coefficient-linear geometric operations input used as stated in the proof; the unit supplies no replacement for this categorical, coefficient-ring or Noetherian geometry tool."
+   },
+   {
+    "node": "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+    "why": "Generic Coproduct preservation for proper étale derived direct image input used as stated in the proof; the unit supplies no replacement for this categorical, coefficient-ring or Noetherian geometry tool."
+   },
+   {
+    "node": "lem-grothendieck-derived-brown-right-adjoint",
+    "why": "Generic Grothendieck derived Brown right adjoint input used as stated in the proof; the unit supplies no replacement for this categorical, coefficient-ring or Noetherian geometry tool."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Generic Adic systems of finite modules over a complete discrete valuation ring input used as stated in the proof; the unit supplies no replacement for this categorical, coefficient-ring or Noetherian geometry tool."
+   },
+   {
+    "node": "lem-pur-local-field-coefficient-stages",
+    "why": "Generic Finite-free ramified coefficient stages without a geometric base input used as stated in the proof; the unit supplies no replacement for this categorical, coefficient-ring or Noetherian geometry tool."
+   },
+   {
+    "node": "lem-sbc-linear-right-adjoint",
+    "why": "Generic A right adjoint to an additive linear functor is additive and linear input used as stated in the proof; the unit supplies no replacement for this categorical, coefficient-ring or Noetherian geometry tool."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field input used as stated in the proof; the unit supplies no replacement for this categorical, coefficient-ring or Noetherian geometry tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic Enough K-injectives compute total right derived functors input used as stated in the proof; the unit supplies no replacement for this categorical, coefficient-ring or Noetherian geometry tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
+  "lem-grothendieck-derived-brown-right-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-c082b9edf",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-c082b9edf (reviewer sub-agent of L); spot-checked: PASS. Split with no new nodes; statement and stmt_deps unchanged, and no repair note exists, so the re-split rule does not apply. Sources checked in the local Zheng PDF: Construction 4.1 (printed p. 21) gives e_{n!} and the tensor-or-zero formula; Lemma 5.13 (p. 34) gives the proper left-extension comparison via Lemma 4.10 and the projection formula; Constructions 5.14–5.15 and Lemma 5.16 (pp. 34–35) give Rf_! = proper∘open, the evaluation isomorphism and Brown. The item is the fixed-compactification form of this on ordinary small-étale strict systems over O/(t^n); no pro-étale category is substituted and no SGA is cited. Step by step: (1) DVR clause 5 gives t=uπ^r with r≥1; local-field stages with E=F gives finite ℓ-power-torsion rings; adic-limit clause 2 with M=O plus cofinality gives completeness. (2) The left-extension node supplies the Grothendieck category, componentwise coproducts and cohomology, joint detection and L_n⊣e_n. (3) The coefficient-system comparison applies because step 1 gives a non-zero-divisor and completeness; the semilinear-sections node supplies j_!. (4) Exactness and O-linearity come from exact factorization, the closed right-derived-triangulated node and K-injective linearity. (5) The Noetherian node covers X̄ over Y without separated Y; the proper finite-ring coproduct node is on small étale sites; the canonical comparison is evaluated and detected, including the empty family. (6) β is unit-normalized by conjugate uniqueness. (7) I checked the mate λ against def-weil-pbc-adjunction-mate (L_2=P_A, G=L_n, H=L_n, L_1=P_n); at m≤n its scalar transpose equals the defining transpose of q in coefficient-projection applied to (id, p_f), and it vanishes for m>n. (8) Mate pasting and the composition equation of q give q^{-1} levelwise, matching the statement's direction. (9) Brown, linear right adjoint, shift (iii) and triangulated right adjoint: hypotheses met. (10) Independence of resolutions via K-injective universality. proof_deps equals the union of uses. Tool uses: the 8 declared generic tools are accepted; lem-pc-right-derived-functor-triangulated is slopmaster2-closed and so needs no declaration. Maintainer note: the existing unsplit lem-pur-etale-tower-brown-adjunction overlaps this item (it requires separated X and Y, a uniformizer and an arbitrary field of characteristic p); consider merging later. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSystemBrownConstruction",
+  "declaration": "AlgebraicGeometry.etaleSystemBrownConstruction",
+  "declarations": [
+   "AlgebraicGeometry.StrictEtaleBrownComponents",
+   "AlgebraicGeometry.StrictEtaleBrownConstruction",
+   "AlgebraicGeometry.etaleSystemBrownConstruction"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleSystemBrownConstruction.lean",
+  "statement": "theorem etaleSystemBrownConstruction (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (t : Padic.coefficientExtensionIntegers l E) (_ht : t ≠ 0) (_hunit : ¬ IsUnit t) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : (∀ n : ℕ, Finite (Padic.coefficientExtensionIntegers l E ⧸ (Ideal.span ({t} : Set (Padic.coefficientExtensionIntegers l E))) ^ (n + 1))) ∧ (∀ n : ℕ, ∃ a : ℕ, (l ^ a : Padic.coefficientExtensionIntegers l E ⧸ (Ideal.span ({t} : Set (Padic.coefficientExtensionIntegers l E))) ^ (n + 1)) = 0) ∧ (∀ {m n : ℕ} (h : m ≤ n), Function.Surjective (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1)) : (Padic.coefficientExtensionIntegers l E ⧸ (Ideal.span ({t} : Set (Padic.coefficientExtensionIntegers l E))) ^ (n + 1)) →+* (Padic.coefficientExtensionIntegers l E ⧸ (Ideal.span ({t} : Set (Padic.coefficientExtensionIntegers l E))) ^ (m + 1)))) ∧ IsAdicComplete (Ideal.span ({t} : Set (Padic.coefficientExtensionIntegers l E))) (Padic.coefficientExtensionIntegers l E) ∧ Nonempty (StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) t c) ∧ ∀ S : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) t c, Nonempty (StrictEtaleBrownConstruction _ _ c S)",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair: universal quantification over the given compact-support presentation; independent definition ownership; projection_recorded_q explicitly identifies the inverse evaluated insertion projection with the compactScalarMap in the recorded coefficient-projection theorem. Reviewer FIX (cc second reader, 2026-10-24): added the conjunct Nonempty (StrictEtaleCompactSupport O t c), rendering the node's 'F_A is a well-defined functor' (step 3 constructs it; parent lem-pur-etale-coefficient-system-adjoint step 1 takes F from this item).",
+  "fixed_by": "NT-stage2-cc-2fcb05988"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2fcb05988",
+  "group": "Q138",
+  "result": "fix",
+  "note": "Re-delivery repairs prior F1-F3: projection_recorded_q is exactly conclusion 3 of etaleSystemCoefficientProjection with Etale.compactScalarMap, with every realization comparison pinned by sections, localization or mate equations; StrictEtale* notions come from def node def-per-strict-etale-system-interfaces and the import closure has no EtaleCoefficientSystemAdjoint; conclusion is ∀ S. New H3 finding N1: ∀ S alone drops the node's 'F_A is well-defined' existence (step 3), which the parent lem-pur-etale-coefficient-system-adjoint (∃ S, proof step 1 takes F from this item) needs. FIX: added conjunct Nonempty (StrictEtaleCompactSupport O t c) ∧ before ∀ S and updated the docstring; fixes/EtaleSystemBrownConstruction.lean plus lean-record.json with the verbatim statement (refit_record clean). Compile: nt_compile timed out on the unchanged realization module at load 70; lcompile.run_set with 560 s limit gave rc 0 for interfaces/realization/item (8.7/55.3/48.4 s). Advisories: E in Type (u+1); free cohomology iso and CommShift fields mirror the deps; compactScalarMap is owned by a theorem node but used as the stmt_dep states it; realization module is near the 60 s limit under load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T030510-L-2852930",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

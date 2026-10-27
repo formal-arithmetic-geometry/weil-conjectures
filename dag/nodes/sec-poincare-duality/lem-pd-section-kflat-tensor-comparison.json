@@ -1,0 +1,338 @@
+{
+ "id": "lem-pd-section-kflat-tensor-comparison",
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "kind": "statement",
+ "title": "Specified K-flat tensor comparison under the section equivalence",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. For a scheme $T$ use its small pro-étale site, small relative to module sheaves [def-weil-pbc-proetale-site], the pulled-back ring object $R_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients] and its reconstructed section-ring sheaf, and the fixed exact internal/section module equivalence $E_T$ [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Use the ordinary operations and universe convention of [def-pd-section-module-operations-data]. Let $q_T^{\\mathrm i},q_T^{\\mathrm s}$ denote the internal and section homotopy-to-derived localizations [def-weil-abstract-derived-category], and write $\\mathcal P_T^{\\mathrm i},\\mathcal P_T^{\\mathrm s}$ for the full subcategories of K-flat complexes with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules], with the corresponding exact-tensor and acyclic-total-tensor tests internally. All total tensors below are signed direct-sum cochain totals [def-pc-tensor-complex-sheaves], and all derived tensors are relative to $R_T$ [sk-def-sfb-derived-tensor-hom]. Use the fixed conjugate section tensor, equivalence localization factors and ordinary total comparison of [def-pd-section-derived-tensor-data], and the section tensor localization map of [def-pd-section-derived-realization]. Write $D(E_T)$ for the fixed localized equivalence and $\\kappa_P:D(E_T)q_T^{\\mathrm i}P\\cong q_T^{\\mathrm s}E_TP$ for its factor. Then termwise $E_T$ preserves and reflects quasi-isomorphisms and identifies $\\mathcal P_T^{\\mathrm i}$ with $\\mathcal P_T^{\\mathrm s}$. The internal representative subcategory localizes equivalently onto the internal derived category; restriction to its resolving pairs is fully faithful for natural transformations with arbitrary target category. The prescribed conjugate section tensor is identified with the independently constructed ringed K-flat tensor of [lem-weil-pbc-site-derived-tensor-descent], including its localization map. More precisely there is a unique natural isomorphism\n$$\\theta_{T;M,N}:D(E_T)(M\\otimes^{\\mathbf L}_{R_T}N)\\xrightarrow{\\sim}D(E_T)M\\otimes^{\\mathbf L}_{R_T}D(E_T)N$$\nwhose representative normalization is\n$$ (\\kappa_P\\otimes^{\\mathbf L}\\kappa_Q)\\,\\theta_{T;q_T^{\\mathrm i}P,q_T^{\\mathrm i}Q}\\,D(E_T)(r^{\\mathrm i}_{P,Q})=r^{\\mathrm s}_{E_TP,E_TQ}\\,q_T^{\\mathrm s}(t_{P,Q})\\,\\kappa_{\\operatorname{Tot}(P\\otimes Q)}.$$\nHere $P,Q\\in\\mathcal P_T^{\\mathrm i}$, $r^{\\mathrm i},r^{\\mathrm s}$ are the fixed isomorphisms from localized total tensor to derived tensor, and $t_{P,Q}:E_T\\operatorname{Tot}(P\\otimes Q)\\cong\\operatorname{Tot}(E_TP\\otimes E_TQ)$ is the ordinary total comparison. This is the fixed conjugate comparison, not an independently chosen isomorphism. The regular module in degree zero is a flat-term K-flat representative. Localizing the specified ordinary regular-module comparison gives an isomorphism $e_T:D(E_T)(R_T[0])\\cong R_{T,\\mathrm{sec}}[0]$. With the internal constraints induced from complexes and the fixed section constraints of [def-pd-section-derived-tensor-data], $\\theta_T,e_T$ satisfy the derived associator and both unitor diagrams on every pair or triple of derived objects. These claims retain independent site object and morphism universes and all unbounded complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); agent extraction of the specified internal/section K-flat tensor model identification from base proof Steps 1–3."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pd-section-module-operations-data",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-derived-realization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-weil-pbc-tensor-descent-representative-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Mathlib HomologicalComplex.quasiIso_map_iff_of_preservesHomology applied to the exact section equivalence gives preservation and reflection of quasi-isomorphisms. The existing internal_section_tensor_comparison identifies the acyclic total-tensor tests and exact tensor-right tests, hence the two resolving predicates.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); resolving localization and equivalence transport."
+   }
+  },
+  {
+   "text": "Use the proved abstract exists_quasiIso_flat_kFlat to resolve every internal complex. The homotopy acyclic-tensor criterion converts its K-flatness into the internal acyclic test. Apply the proved restriction_localization helper of resolving-representative-whiskering to the internal homotopy resolving subcategory. Its Construction.lift is an equivalence, and Localization.fullyFaithfulWhiskeringLeft on its square gives the arbitrary-target bijection.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "lem-sfb-derived-monoidal",
+    "lem-weil-pbc-resolving-representative-whiskering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); resolving localization and equivalence transport."
+   }
+  },
+  {
+   "text": "Unfold only the choice specification of qTensor. Its tensor_representatives normalization and the inverse identities for kappa and tensorComparison give the displayed representative square for the fixed comparison.",
+   "uses": [
+    "def-pd-section-derived-realization",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); resolving localization and equivalence transport."
+   }
+  },
+  {
+   "text": "Restrict qTensor to flat-term K-flat cochain pairs; tensor_representatives makes this restriction invertible. Let r be the canonical representative comparison of cochain_tensor_model_rigidity. Resolving-pair full faithfulness lifts qTensor followed by r to an isomorphism v from the prescribed conjugate tensor to the independent tensor. Define the native localization map q as v inverse followed by qTensor on every complex pair. On resolving pairs r is exactly tensorDescentPair; the lifted equation and cancellation give tensorDescentPair followed by q equals identity. Thus q has precisely the native normalization and v identifies the localization maps on every complex pair.",
+   "uses": [
+    "def-pd-section-derived-realization",
+    "lem-sf-cochain-tensor-model-rigidity",
+    "def-weil-pbc-tensor-descent-representative-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); resolving localization and equivalence transport."
+   }
+  },
+  {
+   "text": "On internal resolving pairs qTensor is invertible, by resolving-predicate comparison and its K-flat invertibility. Thus cancellation of qTensor and the kappa maps shows any normalized theta equals the fixed comparison on those pairs. Resolve complex representatives of arbitrary derived objects and apply naturality along the resulting derived isomorphisms to extend equality to all pairs.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "def-pd-section-derived-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); resolving localization and equivalence transport."
+   }
+  },
+  {
+   "text": "The monoidal unit is categorically flat, and the proved kFlat_single_obj_iff_flat makes its degree-zero single complex K-flat. Its other terms are zero and hence flat. The stated unit identification is exactly the composite kappa, localized singleMapHomologicalComplex and the specified ordinary unit comparison.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-sfb-derived-monoidal",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); resolving localization and equivalence transport."
+   }
+  },
+  {
+   "text": "For any equivalence E use the induced monoidal structure on its inverse into the transported monoidal category. The left adjoint oplax monoidal structure has unit identity and tensor maps E(unit_M tensor unit_N), by the equivalence triangle identities. The uniqueness specification tensorComparison_existsUnique identifies these maps with tensorComparison. The oplax structure supplies the associator and both unitor diagrams required by ConstraintCondition.",
+   "uses": [
+    "lem-sfb-symmetric-monoidal-equivalence-transport",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); resolving localization and equivalence transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pd-section-derived-realization",
+  "def-pd-section-derived-tensor-data",
+  "def-weil-pbc-tensor-descent-representative-comparison",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-symmetric-monoidal-equivalence-transport",
+  "lem-weil-pbc-resolving-representative-whiskering"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); resolving localization and equivalence transport.",
+  "note": "Complete Lean assembly using the existing normalized qTensor, resolving localization, cochain tensor model rigidity, and transported oplax constraints. No new statements or holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal sheaf modules and section modules have the same specified K-flat derived tensor comparison, resolving representatives and derived unit and associator constraints",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.Presentation\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.QuasicoherentData\", \"SheafOfModules.mapFree\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.QuasicoherentData.I\"], \"note\": \"\", \"digest\": \"5bc8ef980009b900\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebra, cochain tensor definitions or generic localization tools do not state the equality of these specified internal/section module constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of internal modules and section sheaf modules carries flat term K-flat representatives to each other and uniquely identifies the native derived tensors with the conjugate tensor and constraints",
+   "results": "{\"n_hits\": 8, \"top\": [\"Module.Flat.of_linearEquiv\", \"Module.Flat.iff_flat_tensorProduct\", \"LinearMap.tensorKerEquiv_apply\", \"Module.Flat.iff_lTensor_exact'\", \"LinearMap.tensorEqLocusEquiv_apply\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.tfae_equational_criterion\", \"Module.Flat.rTensor_exact\"], \"note\": \"\", \"digest\": \"a78e105f62a363b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebra, cochain tensor definitions or generic localization tools do not state the equality of these specified internal/section module constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift₂NatIso",
+   "results": "{\"n_hits\": 3, \"top\": [\"CategoryTheory.Localization.lift₂NatIso\", \"CategoryTheory.Localization.lift₂NatIso_hom\", \"CategoryTheory.Localization.lift₂NatIso_inv\"], \"note\": \"\", \"digest\": \"01f4d93be3985a19\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebra, cochain tensor definitions or generic localization tools do not state the equality of these specified internal/section module constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|[Dd]erived.*[Tt]ensor|[Tt]ensor.*[Dd]erived",
+   "results": "{\"n_hits\": 5, \"top\": [\"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\"], \"note\": \"\", \"digest\": \"70e25824352de70d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebra, cochain tensor definitions or generic localization tools do not state the equality of these specified internal/section module constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|[Dd]erived.*[Tt]ensor|[Tt]ensor.*[Dd]erived",
+   "results": "{\"t\": \"2026-10-22T07:52:58Z\", \"tool\": \"grep\", \"query\": \"KFlat|[Dd]erived.*[Tt]ensor|[Tt]ensor.*[Dd]erived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\", \"Mathlib/CategoryTheory/Monoidal/Tor.lean\"], \"digest\": \"ac25ea8a01109eb0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results give ordinary flat module exactness, exact functors on derived categories, generic localization lifts or Tor functors; none states this specified sheaf-module K-flat comparison with its localization maps and constraints."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived functor of an exact equivalence of sheaf module categories preserves K-flat complexes and has a unique monoidal tensor comparison normalized on resolutions",
+   "results": "{\"t\": \"2026-10-22T07:52:59Z\", \"tool\": \"leansearch\", \"query\": \"The derived functor of an exact equivalence of sheaf module categories preserves K-flat complexes and has a unique monoidal tensor comparison normalized on resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"CategoryTheory.instMonoidalFunctorFunctorCongrLeft\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CategoryTheory.instIsMonoidalFunctorCongrLeft\", \"SheafOfModules.mapFree\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"CategoryTheory.Equivalence.sheafCongrPrecoherent\"], \"digest\": \"6d805dcb52e5f3fe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results give ordinary flat module exactness, exact functors on derived categories, generic localization lifts or Tor functors; none states this specified sheaf-module K-flat comparison with its localization maps and constraints."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.lift₂NatIso",
+   "results": "{\"t\": \"2026-10-22T07:52:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Localization.lift₂NatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.lift₂NatIso\", \"CategoryTheory.Localization.lift₂NatIso_hom\", \"CategoryTheory.Localization.lift₂NatIso_inv\"], \"digest\": \"01f4d93be3985a19\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results give ordinary flat module exactness, exact functors on derived categories, generic localization lifts or Tor functors; none states this specified sheaf-module K-flat comparison with its localization maps and constraints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal equivalence of internal sheaf modules and section modules identifies K-flat derived tensors with their specified localization comparisons and associators",
+   "results": "{\"t\": \"2026-10-22T07:53:08Z\", \"tool\": \"leanfinder\", \"query\": \"An exact monoidal equivalence of internal sheaf modules and section modules identifies K-flat derived tensors with their specified localization comparisons and associators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"22348d5bd484a824\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results give ordinary flat module exactness, exact functors on derived categories, generic localization lifts or Tor functors; none states this specified sheaf-module K-flat comparison with its localization maps and constraints."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Mm]onoidal|[Mm]onoidal.*mapDerivedCategory|[Kk][Ff]lat|K.flat",
+   "results": "{\"t\": \"2026-10-22T07:53:41Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategory.*[Mm]onoidal|[Mm]onoidal.*mapDerivedCategory|[Kk][Ff]lat|K.flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Computability/TuringMachine/Tape.lean\", \"Mathlib/Computability/TuringMachine/Tape.lean\", \"Mathlib/Computability/TuringMachine/Tape.lean\"], \"digest\": \"1babea3c76287a53\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results give ordinary flat module exactness, exact functors on derived categories, generic localization lifts or Tor functors; none states this specified sheaf-module K-flat comparison with its localization maps and constraints."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "{\"t\": \"2026-10-22T07:53:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.mapHomologicalComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomologicalComplex\", \"CategoryTheory.Functor.mapHomologicalComplex_reflects_iso\", \"CategoryTheory.instPreservesZeroMorphismsHomologicalComplexMapHomologicalComplex\", \"CategoryTheory.Functor.mapHomologicalComplex_obj_X\", \"CategoryTheory.instFaithfulHomologicalComplexMapHomologicalComplex\", \"CategoryTheory.Functor.mapHomologicalComplexIdIso\", \"CategoryTheory.instAdditiveHomologicalComplexMapHomologicalComplex\", \"CategoryTheory.instFullHomologicalComplexMapHomologicalComplexOfFaithful\"], \"digest\": \"22619606e3e7627d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results give ordinary flat module exactness, exact functors on derived categories, generic localization lifts or Tor functors; none states this specified sheaf-module K-flat comparison with its localization maps and constraints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of monoidal abelian categories induces a strong monoidal equivalence of unbounded derived categories via flat K-flat resolutions",
+   "results": "{\"t\": \"2026-10-22T07:53:50Z\", \"tool\": \"leanfinder\", \"query\": \"An exact equivalence of monoidal abelian categories induces a strong monoidal equivalence of unbounded derived categories via flat K-flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Tor'\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Tor\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\"], \"digest\": \"58bfb75ab5f6af71\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected results give ordinary flat module exactness, exact functors on derived categories, generic localization lifts or Tor functors; none states this specified sheaf-module K-flat comparison with its localization maps and constraints."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-section-derived-tensor-normalization",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Seeded nt-target-poincare-isiso Step 2, via lem-pd-module-ringed-topos-derived-comparison Step 3 and lem-pd-section-derived-tensor-normalization Step 1: internal/section K-flat tensor identification with specified representative map, unit and constraints.",
+   "via": [
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-pd-section-kflat-tensor-comparison",
+  "worker": "stage1",
+  "summary": "Released re-split: two comparable statement-only tasks isolate conjugate/native localization counits and the ringed/abstract K-flat model identification. Existing ordinary comparison and ringed-equivalence resolving descent carry the first two old steps. The original statement is unchanged; all original argument text and its allocation are retained in report.md.",
+  "blueprint": "Seeded nt-target-poincare-isiso Step 2, via lem-pd-module-ringed-topos-derived-comparison Step 3 and lem-pd-section-derived-tensor-normalization Step 1: internal/section K-flat tensor identification with specified representative map, unit and constraints.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic ordinary comparison, resolving localization, or monoidal normalization tool used in the internal/section realization; the exchange unit does not construct these models."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic ordinary comparison, resolving localization, or monoidal normalization tool used in the internal/section realization; the exchange unit does not construct these models."
+   },
+   {
+    "node": "lem-sfb-exact-tensor-functor-derived-normalization",
+    "why": "Generic ordinary comparison, resolving localization, or monoidal normalization tool used in the internal/section realization; the exchange unit does not construct these models."
+   },
+   {
+    "node": "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+    "why": "Generic ordinary comparison, resolving localization, or monoidal normalization tool used in the internal/section realization; the exchange unit does not construct these models."
+   },
+   {
+    "node": "lem-sfb-symmetric-monoidal-equivalence-transport",
+    "why": "Generic ordinary comparison, resolving localization, or monoidal normalization tool used in the internal/section realization; the exchange unit does not construct these models."
+   },
+   {
+    "node": "lem-sfb-termwise-strong-monoidal",
+    "why": "Generic ordinary comparison, resolving localization, or monoidal normalization tool used in the internal/section realization; the exchange unit does not construct these models."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ordinary comparison, resolving localization, or monoidal normalization tool used in the internal/section realization; the exchange unit does not construct these models."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "Generic K-flat derived tensor of a Grothendieck abelian category, computed by K-flat replacement of either argument: gives invertibility of the internal localization map on K-flat pairs in Step 4; already an accepted tool use of this node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-symmetric-monoidal-equivalence-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NO-46475eff2",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-46475eff2 (reviewer sub-agent of L); spot-checked: FIX: the re-split meets the 2026-10-24 released note (≥2 nodes). It adds 2 comparable statement-only nodes, keeps the statement byte-identical and cuts the assembly from 6646 to 2340 characters (2502 after my fix). Old steps go as follows: 1–2 to step 1, citing existing lem-sfb-ringed-equivalence-resolving-tensor-descent with F=E_T^{-1} plus a one-line κ-square conjugation of the section bijection; 3–4 to lem-pd-conjugate-tensor-localization-counit; 6, including the prior reviewer's ringed-vs-abstract repair, to lem-pd-ringed-kflat-native-model-identification plus exact-tensor-functor normalization; 5 and 7 stay elementary, as in the base. Node 1 checked: the factors of θ compose correctly; on E-images ε^R B_R(κ,κ)vθ_0 = q(t)κD(E)(ε^A) = ε^c B_c(κ,κ)θ_0; it extends to all pairs because ε_U = qTot(s⊗t) ε_P B(qs,qt)^{-1} for flat-term K-flat resolutions (06YS). True. Node 2 checked: the test equivalence (cone/symmetry; 0→F); unique w by the resolving bijection; the all-pair ε identity; invertibility with one K-flat factor (06YP/06YT, Tot(s⊗t) = (1⊗t)(s⊗1)); constraints agree on flat-term K-flat triples. True. Its test-equivalence clause repeats lem-sfb-exact-monoidal-equivalence-total-kflat (advisory). Step 2 multiplies node 1's formula out to the item's exact square; ε^c matches def-pd-section-derived-realization and θ_0 matches def-pd-section-derived-tensor-data. Repairs: (1) C1, step 4: invertibility of the internal localization map on K-flat pairs needs lem-sfb-derived-monoidal, which base step 6 cited; I added it to uses, proof_deps and split_report.tool_uses (it is already an accepted node tool_use). (2) B3: node 1 listed lem-sfb-derived-monoidal twice in stmt_deps; I removed the duplicate. Accepted tool_uses: resolving-descent, internal-section comparison, cone criterion, exact normalization, termwise-strong-monoidal, site-derived-tensor-descent, transport (Mathlib leaf). No cycle; no SGA citation; dropped base deps are not orphaned.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionKFlatTensorComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.section_kflat_tensor_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.complexes",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.internalResolving",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.sectionResolving",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.nativeTensor",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.NativeLocalizationCondition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.RepresentativeCondition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.ConstraintCondition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.ResolvingLocalizationCondition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.NativeComparisonCondition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.UnitCondition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.KFlatSectionComparison.section_kflat_tensor_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/SectionKFlatTensorComparison.lean",
+  "statement": "theorem section_kflat_tensor_comparison (T : Scheme.{u}) : (∀ (P Q : CochainComplex (internalModules Λ T) ℤ) (f : P ⟶ Q), QuasiIso f ↔ QuasiIso ((complexes Λ T).map f)) ∧ (∀ P : CochainComplex (internalModules Λ T) ℤ, internalResolving Λ T P ↔ sectionResolving Λ T ((complexes Λ T).obj P)) ∧ ResolvingLocalizationCondition.{u, e, z} Λ T ∧ TensorRepresentativeCondition Λ T (qTensor Λ T) ∧ NativeComparisonCondition Λ T ∧ (∃! θ : Functor.uncurry.obj (CondensedRing.derivedTensor Λ T) ⋙ (derivedEquivalence Λ T).functor ≅ ((derivedEquivalence Λ T).functor.prod (derivedEquivalence Λ T).functor) ⋙ tensor Λ T, RepresentativeCondition Λ T θ) ∧ RepresentativeCondition Λ T (tensorComparison Λ T) ∧ internalResolving Λ T ((HomologicalComplex.single (internalModules Λ T) (.up ℤ) 0).obj (𝟙_ (internalModules Λ T))) ∧ UnitCondition Λ T",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of returned head 7b60a441a311: use the already-landed definition owner def-weil-pbc-tensor-descent-representative-comparison, with its TensorFlatRepresentative and tensorDescentPair, instead of citing the cochain-model rigidity theorem for helper definitions. The native localization map is pinned as the inverse of this specified published representative comparison. Same predicate and four-arrow descent composite, fixed conjugate tensor, qTensor, and unchanged theorem signature; no source statement or accepted split changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9bbdcd30",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Re-delivery after two H2 returns (1c54def30e67, 7b60a441a311: theorem stmt_dep lem-sf-cochain-tensor-model-rigidity used only for plain defs). This head replaces it with the landed definition node def-weil-pbc-tensor-descent-representative-comparison (kind definition, existing:true Q29 2026-10-21, identical on base and live, no cycle). Lean diff vs 7b60: import SiteDerivedTensorRestriction; sectionResolving = TensorFlatRepresentative (= IsKFlatIndependentCoefficients ∧ ∀i IsFlatOnSite, same predicate); NativeLocalizationCondition arrow = tensorDescentPair.hom (quotientCompQhIso⁻¹ ≫ Qh η⁻¹ ≫ γ ≫ T(λ,λ) from the same descent datum as nativeTensor = siteDerivedTensorIndependentCoefficients; same direction as the old cochainTensorRepresentativeArrow), so q stays pinned. Item node changes only lean + this stmt_dep. Clause-by-clause re-check unchanged and correct: quasi-iso transfer, P^i↔P^s, resolving localization with free e/z, qTensor condition, native v identification, ∃!θ with tensorComparison, R[0] representative, e₀ pinned, transported OplaxMonoidal constraints; universes u+1/u kept; unbounded; one sorry; docstrings with 7 steps; statement verbatim; lines ≤100. No compile (no file changed); worker reports clean scompile 14.7 s/7.5 s. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T024118-L-639181",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-adic-relation-matrix-initial-ideals",
+ "kind": "statement",
+ "title": "Initial ideals are stable under small perturbations of a presentation and its relations",
+ "statement": "Let $(P,\\mathfrak q)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], where local means that $\\mathfrak q$ is its unique maximal ideal. Let $r,t\\geq0$, let $b:P^r\\to P$ be the row $(b_1,\\ldots,b_r)$, and let $K:P^t\\to P^r$ be a matrix, both acting by matrix multiplication on finite free modules. Suppose $\\operatorname{im}K=\\ker b$. Then there is an integer $h\\geq1$ such that, for every row $b^{\\prime}$ and matrix $K^{\\prime}$ of these same sizes with all coefficients of $b-b^{\\prime}$ and $K-K^{\\prime}$ in $\\mathfrak q^h$ and with $b^{\\prime}K^{\\prime}=0$, the ideals $J=(b_1,\\ldots,b_r)$ and $J^{\\prime}=(b^{\\prime}_1,\\ldots,b^{\\prime}_r)$ satisfy, for every $d\\geq0$, $$\\mathfrak q^{d+1}+(J\\cap\\mathfrak q^d)=\\mathfrak q^{d+1}+(J^{\\prime}\\cap\\mathfrak q^d).$$ Here $\\mathfrak q^0=P$ and subsequent powers are products of ideals.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 07VE (lemma-approximate-complex) and 07VF (lemma-approximate-complex-graded), with L=P^t, M=P^r, N=P and I the maximal ideal; the equality is the displayed common-subquotient equality in the proof of 07VF."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-artin-rees] to $\\operatorname{im}K\\subseteq P^r$ and $\\operatorname{im}b\\subseteq P$. Choose a common enlarged bound $c\\geq0$. For either map $u:U\\to V$ this gives $\\operatorname{im}u\\cap\\mathfrak q^nV\\subseteq\\mathfrak q^{n-c}\\operatorname{im}u=u(\\mathfrak q^{n-c}U)$ for $n\\geq c$: the last equality follows by lifting each summand $ay$ of the submodule product to $ax$ with $u(x)=y$. Set $h=c+1$, which depends only on $b,K$.",
+   "uses": [
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IN (lemma-Artin-Rees) and 00IO (lemma-map-AR), proof: apply Artin-Rees to the image and lift scalar multiples."
+   }
+  },
+  {
+   "text": "Fix $b',K'$ as in the statement. Coefficient congruence implies $(K-K')(P^t)\\subseteq\\mathfrak q^{c+1}P^r$ and $(b-b')(P^r)\\subseteq\\mathfrak q^{c+1}$. The finite free modules are finitely generated, and $\\mathfrak q$ is contained in every maximal ideal since it is the unique one. Apply [lem-sfb-perturbed-image-artin-rees-bound] with $(A,I,L,M,N,f,g,f',g')=(P,\\mathfrak q,P^t,P^r,P,K,b,K',b')$ and the bounds of step 1. Exactness is $\\operatorname{im}K=\\ker b$; the perturbed complex condition is precisely $b'K'=0$. Thus $J'\\cap\\mathfrak q^n\\subseteq b'(\\mathfrak q^{n-c}P^r)$ for $n\\geq c$.",
+   "uses": [
+    "lem-sfb-perturbed-image-artin-rees-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VE (lemma-approximate-complex), first conclusion and first paragraph of the proof: preservation of the Artin-Rees bound for the right differential; no use of the additional exactness conclusion."
+   }
+  },
+  {
+   "text": "Fix $d\\geq0$. If $d\\leq c$, take $y=b(a)\\in J\\cap\\mathfrak q^d$ and put $y'=b'(a)$. Then $y-y'\\in\\mathfrak q^{c+1}\\subseteq\\mathfrak q^{d+1}$, so $y'\\in J'\\cap\\mathfrak q^d$. Conversely start with $y'=b'(a)\\in J'\\cap\\mathfrak q^d$ and put $y=b(a)$; the same difference estimate gives $y\\in J\\cap\\mathfrak q^d$. Adding $\\mathfrak q^{d+1}$ yields the required equality in these degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VF (lemma-approximate-complex-graded), proof, the case n <= c."
+   }
+  },
+  {
+   "text": "If $d>c$, step 1 writes any $y\\in J\\cap\\mathfrak q^d$ as $b(a)$ with $a\\in\\mathfrak q^{d-c}P^r$. Put $y'=b'(a)$. Each coordinate of $a$ belongs to $\\mathfrak q^{d-c}$, so the coefficient congruence gives $y-y'\\in\\mathfrak q^{c+1}\\mathfrak q^{d-c}=\\mathfrak q^{d+1}$. Hence $y'\\in J'\\cap\\mathfrak q^d$. Conversely step 2 writes any $y'\\in J'\\cap\\mathfrak q^d$ as $b'(a)$ with $a\\in\\mathfrak q^{d-c}P^r$; putting $y=b(a)$ gives the same estimate and $y\\in J\\cap\\mathfrak q^d$. Thus each intersection lies in the other plus $\\mathfrak q^{d+1}$, which proves equality of the two sums.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VF (lemma-approximate-complex-graded), proof, n > c and the symmetric inclusion using the bound for g-prime."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artin-rees",
+  "lem-sfb-perturbed-image-artin-rees-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 07VE and 07VF, with Artin-Rees bounds obtained from algebra.tex Tags 00IN/00IO; proof of the common-subquotient equality in 07VF."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Small adic perturbations of an exact complex of finite modules over a Noetherian local ring have isomorphic associated graded cokernels",
+   "results": "8 hits; AdicCompletion.map_exact, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.exists_smodEq_pow_add_one_smul, localCohomology.isoSelfLERadical, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, AdicCompletion.of_apply, Hausdorffification",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, Artin-Rees intersection bounds and stable filtrations do not assert stability of initial ideals under simultaneous perturbation of relation matrices"
+  },
+  {
+   "tool": "grep",
+   "query": "ArtinRees|artinRees|approximateComplex|approximate_complex|perturb",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, Artin-Rees intersection bounds and stable filtrations do not assert stability of initial ideals under simultaneous perturbation of relation matrices"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded cokernels of sufficiently congruent exact complexes of finite modules are isomorphic by Artin Rees",
+   "results": "8 hits; Ideal.exists_pow_inf_eq_pow_smul, CategoryTheory.ComposableArrows.Exact.isIso_cokerToKer', isArtinian_of_range_eq_ker, CategoryTheory.ComposableArrows.Exact.cokerIsoKer.congr_simp, CategoryTheory.ShortComplex.Exact.gIsCokernel, CategoryTheory.ComposableArrows.Exact.cokerIsoKer', ModuleCat.cokernelIsoRangeQuotient, CategoryTheory.ComposableArrows.Exact.cokerIsoKer'.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, Artin-Rees intersection bounds and stable filtrations do not assert stability of initial ideals under simultaneous perturbation of relation matrices"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedGraded\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, Artin-Rees intersection bounds and stable filtrations do not assert stability of initial ideals under simultaneous perturbation of relation matrices"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Rees stability under perturbation of differentials yields equal initial submodules and associated graded quotient modules",
+   "results": "8 hits; Ideal.stableFiltration_stable, Ideal.Filtration.Stable.bounded_difference, Ideal.Filtration.submodule_eq_span_le_iff_stable_ge, Ideal.Filtration.Stable, Ideal.stableFiltration_N, Ideal.Filtration.Stable.exists_pow_smul_eq, Ideal.stableFiltration, Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, Artin-Rees intersection bounds and stable filtrations do not assert stability of initial ideals under simultaneous perturbation of relation matrices"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Filtration\"",
+   "results": "12 hits; Ideal.Filtration, Ideal.Filtration.Stable, Ideal.Filtration.instBot, Ideal.Filtration.instCompleteLattice, Ideal.Filtration.instInfSet, Ideal.Filtration.instInhabited, Ideal.Filtration.instMax, Ideal.Filtration.instMin",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, Artin-Rees intersection bounds and stable filtrations do not assert stability of initial ideals under simultaneous perturbation of relation matrices"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_pow_inf_eq_pow_smul|bounded_difference|map_exact",
+   "results": "11 hits; Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/Exactness.lean, Mathlib/RingTheory/AdicCompletion/Exactness.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: completion exactness, Artin-Rees intersection bounds and stable filtrations do not assert stability of initial ideals under simultaneous perturbation of relation matrices"
+  },
+  {
+   "tool": "grep",
+   "query": "approximateComplex|approximate_complex|perturb|initialIdeal|initial_ideal",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_pow_inf_eq_pow_smul|map_exact|bounded_difference",
+   "results": "11 hits; Mathlib/RingTheory/QuotSMulTop.lean, Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/Exactness.lean, Mathlib/RingTheory/AdicCompletion/Exactness.lean, Mathlib/RingTheory/AdicCompletion/Exactness.lean, Mathlib/RingTheory/AdicCompletion/Exactness.lean, Mathlib/RingTheory/Filtration.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Congruent presentations with congruent relations have equal initial ideals over a Noetherian local ring",
+   "results": "8 hits; Algebra.Presentation.mk.inj, Algebra.PreSubmersivePresentation.mk.congr_simp, Algebra.Presentation.mk.injEq, Module.Presentation.mk.inj, Algebra.Presentation.localizationAway.congr_simp, Algebra.Presentation.naive.congr_simp, Ideal.Quotient.ringCon.congr_simp, Algebra.Presentation.relationOfHasCoeffs.congr_simp",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stability of an Artin Rees image intersection bound under perturbation of the two differentials of an exact complex",
+   "results": "8 hits; Ideal.exists_pow_inf_eq_pow_smul, Ideal.Filtration.Stable.inter_right, Ideal.stableFiltration_stable, Ideal.Filtration.Stable.inter_left, isArtinian_of_range_eq_ker, CategoryTheory.ShortComplex.Exact.isLimitImage, Ideal.stableFiltration, Ideal.Filtration.Stable.bounded_difference",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"range\", \"pow\"",
+   "results": "12 hits; pow_mem_range_pow_of_coprime, Subgroup.subgroupOf_map_powMonoidHom_eq_range, MulEquiv.map_range_powMonoidHom, QuotientGroup.mulEquivPiModRangePowMonoidHom, QuotientGroup.mulEquivPiModRangePowMonoidHom_apply, Ideal.span_range_pow_eq_top, Module.End.eventually_disjoint_ker_pow_range_pow, Polynomial.as_sum_range_C_mul_X_pow'",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Filtration\"",
+   "results": "12 hits; Ideal.Filtration, Ideal.Filtration.Stable, Ideal.Filtration.instBot, Ideal.Filtration.instCompleteLattice, Ideal.Filtration.instInfSet, Ideal.Filtration.instInhabited, Ideal.Filtration.instMax, Ideal.Filtration.instMin",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small adic perturbations of a row and its relation matrix preserve the initial ideal in every degree",
+   "results": "8 hits; Ideal.adic_basis, PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod, AdicCompletion.IsAdicCauchy, PreTilt.exists_smodEq_untiltAux, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, mem_reesAlgebra_iff, AdicCompletion.isAdicCauchy_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An Artin Rees bound for the second differential remains valid after perturbing both maps of an exact complex modulo one higher ideal power",
+   "results": "8 hits; AdicCompletion.map_exact, Profinite.NobelingProof.succ_exact, Algebra.H1Cotangent.exact_map_δ, AdicCompletion.exists_smodEq_pow_add_one_smul, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, Algebra.Generators.H1Cotangent.exact_map_δ, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_pow_inf_eq_pow_smul\"",
+   "results": "1 hits; Ideal.exists_pow_inf_eq_pow_smul",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform ideal power division bounds for images of linear maps survive simultaneous small changes of an exact sequence",
+   "results": "8 hits; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.exists_smodEq_pow_add_one_smul, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.StrictMono.extend, IsAdicComplete.StrictMono.lift, AdicCompletion.transitionMap",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated graded quotients defined by close generators and close syzygies have the same initial relation submodules",
+   "results": "8 hits; Module.Presentation.tautologicalRelations_R, HomogeneousSubmodule.ext', Module.Presentation.tautological_R, Module.Relations.toQuotient_relation, Algebra.Presentation.naive_relation, Algebra.PreSubmersivePresentation.ofHasCoeffs_relation, exteriorPower.presentation.relations_R, Algebra.Presentation.naive_relation_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: none states equality of all initial-ideal pieces under compatible perturbation of a presentation and its relations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-object-graded-approximation",
+  "date": "2026-10-23",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: apply lemma-approximate-versal after effectivity and before openness; Tag 07XB (lemma-approximate), affine-base case, conclusions (1)-(6). Supporting ring lemma: Tag 07XB, comparison of the two congruent presentation complexes before conclusion (6).",
+   "via": [
+    "lem-sfb-artin-object-graded-approximation",
+    "lem-sfb-artin-effective-versal-algebraization",
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adic-relation-matrix-initial-ideals",
+  "worker": "stage1",
+  "summary": "Followed Tags 07VE/07VF. Reused the existing Artin-Rees leaf to choose a common bound; isolated only preservation of that bound for the perturbed right differential. The item proves both inclusions explicitly, separating low and high degrees. No statement change.",
+  "blueprint": "The inherited supporting commutative-algebra route below det-thm-sf-ctf-stability-direct-images, proof (3), via Artin algebraization Tag 07XB; realizes the comparison of congruent presentation complexes by the common-subquotient equality in Tag 07VF. The ancestor tool reports from.node = None; its inherited origin is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-31628d861",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-31628d861 (reviewer sub-agent of L); spot-checked: Read Stacks more-algebra.tex 185-296 in full (07VE lemma-approximate-complex, 07VF lemma-approximate-complex-graded, 00IO convention). There is no repair note, so this is an ordinary split. The item statement is unchanged from the base and is 07VF with L=P^t, M=P^r, N=P, I=q, h=c+1; it gives the subquotient equality from 07VF's proof. Step 1: lem-weil-pbc-artin-rees, applied to im K and im b with a common c (the c'>=c clause allows this); q^{n-c} im u = u(q^{n-c}U) by lifting generators. Step 2: the new node, with every hypothesis checked (Noetherian; q in every maximal ideal; finite modules; im K = ker b; b'K'=0; entry congruence gives the image containments). Steps 3 and 4 (d<=c and d>c) are elementary, use both bounds and need no further input. New node lem-sfb-perturbed-image-artin-rees-bound: statement-only and self-contained, it is exactly 07VE's first conclusion with nothing weakened (exactness of S' is left out and not needed). I re-derived the adjustment argument and the statement is true. It is not a restated clause of the item. rg -L for 07VE/07VF/approximate-complex finds no duplicate; the existing Artin-Rees nodes cover fixed maps only. Edge cases tested: r=0, t=0, field, c=0, b=0 with K=id, k[[x]] with b=x^s; the counterexample b=0, K=1, b'=x^h, K'=1 shows b'K'=0 is needed. No SGA; from.node null is inherited; no tool_uses; no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicRelationMatrixInitialIdeals",
+  "declaration": "Ideal.exists_adic_relation_matrix_initial_ideals",
+  "file": "lean/Sheaf/RingTheory/AdicRelationMatrixInitialIdeals.lean",
+  "statement": "theorem exists_adic_relation_matrix_initial_ideals {P : Type u} [CommRing P] [IsNoetherianRing P] [IsLocalRing P] (q : Ideal P) [q.IsMaximal] {r t : ℕ} (b : Fin r → P) (K : Matrix (Fin r) (Fin t) P) (h_exact : Function.Exact (Matrix.mulVec K) (dotProduct b)) : ∃ h : ℕ, 1 ≤ h ∧ ∀ (b' : Fin r → P) (K' : Matrix (Fin r) (Fin t) P), (∀ i : Fin r, b i - b' i ∈ q ^ h) → (∀ (i : Fin r) (j : Fin t), K i j - K' i j ∈ q ^ h) → Matrix.vecMul b' K' = 0 → ∀ d : ℕ, q ^ (d + 1) + (Ideal.span (Set.range b) ⊓ q ^ d) = q ^ (d + 1) + (Ideal.span (Set.range b') ⊓ q ^ d)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19879dac9",
+  "group": "NP",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 07VE/07VF proof equality clause by clause: IsLocalRing+maximal q (equivalent), Function.Exact (mulVec K) (dotProduct b) = im K = ker b, ∃ h≥1 before b',K', entrywise congruences mod q^h, vecMul b' K' = 0, ∀ d sum-with-intersection equality; q^0=⊤; universe u unrestricted; lean.statement verbatim; node differs from live only in lean; stmt_dep IsNoetherianRing used; proof-dep Filtration imported, perturbed-bound node unsplit (no module); no duplicate in side-live/slopmaster2; docstrings carry source, blueprint tag and 4 steps; sorry only; report has Worker report + Second reading by NP; edge cases r=0, t=0, d=0, field OK; no changes so no recompile."
+ }
+}

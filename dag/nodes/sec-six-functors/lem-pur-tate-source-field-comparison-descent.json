@@ -1,0 +1,285 @@
+{
+ "id": "lem-pur-tate-source-field-comparison-descent",
+ "kind": "statement",
+ "title": "Localization and scalar-extension descent of Tate-source comparisons",
+ "statement": "Fix the finite-field and coefficient conventions of [def-pur-conventions]: $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$. For a separated finite-type $k_0$-scheme $T_0$ put $T=T_0\\times_{k_0}k$ and $G_T=Lg_{T,\\gamma}^*$, with $g_{T,\\gamma}=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\gamma)$ for geometric Frobenius $\\gamma$ [def-pur-scheme-geometric-frobenius]. Let $f_0:X_0\\to Y_0$ be separated and finite type between separated finite-type $k_0$-schemes, with geometric base change smooth of pure relative dimension $d\\ge0$. Use $P_fK=Lf^*K(d)[2d]$, the canonical source comparison $b_{f,K}$, and the strict source datum $(Lf^*\\varphi_K\\otimes\\tau_d)[2d]b_{f,K}$ of [def-pur-tate-datum], with $K\\in D^b_{ctf}(Y,\\Lambda)$. For $\\Lambda=E$ the source-comparison, coefficient, Cartesian-pullback and smooth-composition identities over $\\mathcal O_E$ (on the realized systems of [lem-pur-tate-source-strict-system-identities]) have equal localized images under rationalization, with the arrow action prescribed by [def-weil-derived-pullback-tensor-hom]. For every finite extension $E\\subseteq L\\subset\\overline{\\mathbf Q}_\\ell$, let $R_T$ denote scalar extension, $C_T:R_TG_T\\cong G'_TR_T$, $K'=R_YK$, and $a_P:R_XP_fK\\cong P'_fK'$ the canonical scalar comparison from [lem-pur-integral-operations-scalar-extension, lem-fix-operation-reduction]. With $\\varphi_{K'}=R_Y(\\varphi_K)C_{Y,K}^{-1}$ and $\\psi_{f,K}=(Lf^*\\varphi_K\\otimes\\tau_d)[2d]b_{f,K}$ one has\n$$a_PR_X(\\psi_{f,K})=\\psi'_{f,K'}G'_X(a_P)C_{X,P_fK}.$$\nThe scalar comparison is the identity for $L=E$ and is compatible with successive finite extensions. Over $\\Lambda=\\overline{\\mathbf Q}_\\ell$ these arrows and equations define well-defined morphism classes by representing the finitely many input objects, arrows and comparisons at one common finite coefficient field, independently of further extension. Every assertion uses the bounded constructible finite-Tor domains of the named comparisons, with the rational/common-stage categories rather than discrete non-torsion small-etale coefficients. The tensor comparison in $b_{f,K}$ is $\\mu$ of [lem-pur-derived-pullback-tensor-iso].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Displayed source-of-purity composite; agent-extracted argument from lem-pur-weil-tate-datum-transport, old Step 8; constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-scheme-geometric-frobenius",
+  "def-pur-tate-datum",
+  "lem-pur-tate-source-strict-system-identities",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-fix-operation-reduction",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Apply the functorial derived inverse limit to the whole-system equations of [lem-pur-tate-source-strict-system-identities], then rationalize. The raw localization [def-weil-rationalization-karoubi] has the same objects and sends an integral arrow $u$ to $u\\otimes1$; hence equal integral composites have equal images. More generally [lem-pur-semilinear-scalar-localization] preserves comparison equations, composition and whiskering. The explicit arrow action in [def-weil-derived-pullback-tensor-hom] sends $F(u\\otimes a)$ to $F(u)\\otimes a$ and $(v\\otimes a)\\otimes^L(w\\otimes b)$ to $(v\\otimes^Lw)\\otimes ab$. Thus the localized comparisons have precisely the prescribed action, including on rational arrows represented by sums of pure tensors. This gives the localized source, coefficient, Cartesian-pullback and smooth-composition identities.",
+   "uses": [
+    "lem-pur-tate-source-strict-system-identities",
+    "def-weil-rationalization-karoubi",
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "Source-of-purity composite: rationalized image of the integral datum."
+   }
+  },
+  {
+   "text": "Fix $E\\subseteq L$. Write $F=Lf^*$, $F'=Lf_L^*$, $T=E_X(d)$, $T'=L_X(d)$, and $\\alpha:R_XF\\cong F'R_Y$. Use the normalized pullback scalar comparisons of [lem-trf-integral-pullback-comparison-realization], rationalized as in Step 1; in particular $C_T$ is the comparison for $g_T$. That lemma's composition/scalar equation, applied to $fg_X=g_Yf$, identifies the two scalar transports of the commuting-pullback comparison $c_f:G_XF\\cong FG_Y$. The tensor comparison $\\mu_{g_X}$ commutes with scalar extension by [lem-pur-derived-pullback-tensor-iso]. The tensor/scalar maps are natural by [lem-pur-integral-operations-scalar-extension], and use the canonical shifted comparisons of [lem-weil-completed-scalar-chain-shift]. Put $H=(FG_YK\\otimes^LG_XT)[2d]$. Define $a_H:R_XH\\cong(F'G'_YK'\\otimes^LG'_XT')[2d]$ by scalar tensor comparison followed on the first factor by $F'(C_{Y,K})\\alpha_{G_YK}$ and on the second by $G'_X(t)C_{X,T}$, where $t:R_XT\\cong T'$ is the canonical twist comparison. Expand the defining $b=(c_f\\otimes1)[2d]\\mu_{g_X}[2d]$ of [def-pur-tate-datum]. Pasting the two component squares just cited, and using functoriality of tensor, gives\n$$a_HR_X(b_{f,K})=b'_{f,K'}G'_X(a_P)C_{X,P_fK}.$$\nAll these are comparisons of actual constructed functors, not independently chosen isomorphisms.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-completed-scalar-chain-shift",
+    "def-pur-tate-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "First arrow of the displayed source composite: pullback, tensor and shift comparisons under coefficient extension."
+   }
+  },
+  {
+   "text": "Let $D=(F\\varphi_K\\otimes\\tau_d)[2d]:H\\to P_fK$ and $D'=(F'\\varphi_{K'}\\otimes\\tau'_d)[2d]$. Apply [lem-pur-canonical-tate-arrow-naturality] with scheme $T=X$ and exponent $r=d\\ge0$. First take its coefficient functor to be completed integral extension $\\mathcal O_E\\to\\mathcal O_L$, with the specified strict quotient systems; then apply rationalization as in Step 1. The statement explicitly includes these localized images, so for the field scalar functor $R_X$ its equation says\n$$tR_X(\\tau_d)=\\tau'_dG'_X(t)C_{X,T}.$$\nNaturality of $\\alpha$ in [lem-pur-integral-operations-scalar-extension] gives\n$$\\alpha_K R_X(F\\varphi_K)=F'(R_Y\\varphi_K)\\alpha_{G_YK}.$$\nSubstitute $\\varphi_{K'}=R_Y(\\varphi_K)C_{Y,K}^{-1}$. The first-factor expression in $D'a_H$ becomes $F'(R_Y\\varphi_K)\\alpha_{G_YK}$, since $F'(C_Y^{-1})F'(C_Y)=1$; the second-factor expression is $tR_X(\\tau_d)$ by the displayed Tate equation. Naturality of the scalar tensor comparison and its shift [lem-weil-completed-scalar-chain-shift] now give $a_PR_X(D)=D'a_H$.",
+   "uses": [
+    "lem-pur-canonical-tate-arrow-naturality",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-completed-scalar-chain-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "Second arrow of the displayed source composite: datum and canonical Tate arrow."
+   }
+  },
+  {
+   "text": "Since $\\psi_{f,K}=Db_{f,K}$ and $\\psi'_{f,K'}=D'b'_{f,K'}$, Steps 2 and 3 give\n$$a_PR_X(\\psi_{f,K})=D'a_HR_X(b_{f,K})=D'b'_{f,K'}G'_X(a_P)C_{X,P_fK}=\\psi'_{f,K'}G'_X(a_P)C_{X,P_fK}.$$\nBoth sides run from $R_XG_XP_fK$ to $P'_fK'$; in particular the rightmost $C_X$ cannot be omitted before identifying these sources.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "Composition of the two displayed source arrows; associativity and substitution."
+   }
+  },
+  {
+   "text": "For $E\\subseteq L\\subseteq M$, the pullback and tensor scalar comparisons satisfy the identity and tower laws of [lem-pur-integral-operations-scalar-extension]; the normalized commuting-pullback comparison has these same laws by [lem-trf-integral-pullback-comparison-realization]. For the twist factor use [lem-weil-integral-twist-scalar-coherence], whose equation compares the successive twist/scalar maps with the direct one. Its identity clause uses the tensor unitor, so the comparison is the identity after the prescribed identity-extension identification. The shift of scalar extension is normalized by the quotient comparison in [lem-weil-completed-scalar-chain-shift]. Its termwise scalar associator multiplies coefficient factors in degree zero, so shifting that associator introduces no additional sign. Composing these factor equations proves the identity and successive-extension laws for $a_P$ and $b$. The Tate-arrow equation in Step 3 is natural for these same comparisons, so the source-datum equation of Step 4 is compatible with them. Rationalization preserves every equation by Step 1.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-integral-twist-scalar-coherence",
+    "lem-weil-completed-scalar-chain-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "Coefficient transport: identity and successive finite field extensions."
+   }
+  },
+  {
+   "text": "Use [def-weil-algebraically-closed-coefficients]: each object and arrow has a finite coefficient field of definition, and equality of representatives means equality after extension to a further common finite field. There are only finitely many objects, arrows and comparisons in each asserted diagram. Repeated composita therefore give one finite field containing their fields of definition; any finitely many equalities of classes can also be witnessed after one further enlargement. Form $b$, $D$, $\\psi$ and the comparisons at that field. By Steps 4 and 5 their further extensions agree through the prescribed comparisons. A different choice of representatives or initial field is compared at a common enlargement, where the equations already hold. Hence the morphism classes and equations are well-defined. The conjugated arrow action is exactly [def-weil-derived-pullback-tensor-hom]: the intermediate comparison and its inverse cancel when composing. All uses of reduction and coefficient comparison retain the bounded constructible finite-Tor domains of [lem-fix-operation-reduction]; at field stages these are $D^b_c$ as in [def-pur-conventions]. No passage to discrete non-torsion small-etale coefficients occurs.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-fix-operation-reduction",
+    "def-pur-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+    "place": "Rationalized/common-stage convention in the opening definition of strict Weil data."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-conventions",
+  "def-pur-tate-datum",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "lem-fix-operation-reduction",
+  "lem-pur-canonical-tate-arrow-naturality",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-pur-tate-source-strict-system-identities",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-completed-scalar-chain-shift",
+  "lem-weil-integral-twist-scalar-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Expansion of the source-of-purity composite and the coefficient-transport convention; constituent-compatibility assembly of prop-pur-weil-equivariance-compatibilities.proof.md. Existing nodes supply all comparison and localization theorems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tate source Weil datum identities descend through rationalization and common finite coefficient field scalar extension",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariance of shifted Tate pullback is preserved by localization and finite field extension in adic sheaf categories",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackObjFreeIso; SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, CategoryTheory.Functor",
+   "results": "loogle: unknown identifier 'CategoryTheory.Localization'",
+   "date": "2026-10-22",
+   "verdict": "no match: loogle: unknown identifier 'CategoryTheory.Localization'"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|Weil.*(rational|scalar)|commonStage",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"map\"",
+   "results": "AddSubmonoid.LocalizationMap; Submonoid.LocalizationMap; AddSubmonoid.IsLocalizationMap; Submonoid.IsLocalizationMap; Submonoid.LocalizationMap.instSubsingletonLocalization; AddSubmonoid.isLocalizationMap_top_nat_int; AddSubmonoid.LocalizationMap.instAddCancelCommMonoidLocalization; Submonoid.LocalizationMap.instCancelCommMonoidLocalization",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient extension and localization of strict Weil complexes preserve tensor Tate Frobenius arrow comparison",
+   "results": "Algebra.tensorH1CotangentOfIsLocalization_toLinearMap; Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv; WittVector.exists_frobenius_solution_fractionRing_aux; Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl; Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex; Algebra.Generators.map_comp_cotangentCompAwaySec; Algebra.tensorH1CotangentOfIsLocalization",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern underived module pullbacks, generic categorical/shift facts, cyclotomic characters, isocrystals, or unrelated algebra; no pro-etale canonical Tate-source comparison on these coefficient domains"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|WeilDatum|tate_source",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field Frobenius, isocrystals, general localization or Tor functors; none states this canonical Tate-source comparison with the specified coefficient and Frobenius arrows"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate source Frobenius comparisons descend through rationalization and scalar extension of finite coefficient fields",
+   "results": "LinearMap.frobenius; FiniteField.Extension.frob; WittVector.StandardOneDimIsocrystal.frobenius_apply; FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp; FiniteField.frobeniusAlgEquiv_apply; FiniteField.coe_frobeniusAlgEquivOfAlgebraic; FiniteField.instIsScalarTowerZModExtension; FiniteField.frobeniusAlgEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field Frobenius, isocrystals, general localization or Tor functors; none states this canonical Tate-source comparison with the specified coefficient and Frobenius arrows"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TateTwist\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field Frobenius, isocrystals, general localization or Tor functors; none states this canonical Tate-source comparison with the specified coefficient and Frobenius arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of coefficients preserves the geometric Frobenius datum on shifted Tate twisted derived pullback",
+   "results": "PreTilt.coeff_frobenius; PreTilt.coeff_frobeniusEquiv_symm; PreTilt.coeff_iterate_frobeniusEquiv_symm; PreTilt.coeff_iterate_frobenius'; Perfection.coeff_frobeniusEquiv_symm; Perfection.coeff_frobenius; WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.IsocrystalHom.frob_equivariant",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field Frobenius, isocrystals, general localization or Tor functors; none states this canonical Tate-source comparison with the specified coefficient and Frobenius arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between derived pullback tensor functors descend to rational localization and common finite coefficient field categories",
+   "results": "CategoryTheory.Tor'_obj_map; CategoryTheory.Tor'_map_app; CategoryTheory.Tor_map; Rep.Tor_map; CategoryTheory.Tor'; CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre_iso; CategoryTheory.Tor; CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field Frobenius, isocrystals, general localization or Tor functors; none states this canonical Tate-source comparison with the specified coefficient and Frobenius arrows"
+  },
+  {
+   "tool": "grep",
+   "query": "lifting₂CurriedTensorPre_iso",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field Frobenius, isocrystals, general localization or Tor functors; none states this canonical Tate-source comparison with the specified coefficient and Frobenius arrows"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-tate-datum-transport",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility assembly: source datum on pullback, Tate twist and even shift; extracted old Tate-source transport proof Step 8.",
+   "via": [
+    "lem-pur-weil-tate-datum-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-tate-source-field-comparison-descent",
+  "worker": "stage1",
+  "summary": "Expanded localization and finite-field scalar descent of the Tate-source datum using existing nodes only. The proof displays the structural and datum squares separately and composes them, retains whole-system normalization, checks identity/tower laws, and proves common-stage independence by the defining equality criterion. Statement unchanged; no new nodes or Mathlib leaves. Repair of returned head d1b596e7c96: revalidated every citation against the current DAG; Step 3 now explicitly checks r=d>=0 and applies integral coefficient extension before localization, as required by the current canonical-Tate-arrow statement.",
+  "blueprint": "prop-pur-weil-equivariance-compatibilities: constituent-compatibility assembly, the coefficient transport of the source pullback/Tate/shift composite in def-pur-tate-datum; extracted parent old Step 8.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Raw semilinear localization preserves the integral comparison equations; the package unit contains no generic semilinear fraction calculus."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "The normalized scalar/pullback comparison commutes with spatial composition and coefficient towers; the package unit does not supply the whole-system normalization of this generic comparison."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "The specified tensorator mu commutes with finite field scalar extension; this is the explicit tensor comparison named by the item."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Naturality, identity and tower laws of completed pullback and tensor coefficient comparisons, explicitly named by the item."
+   },
+   {
+    "node": "lem-weil-completed-scalar-chain-shift",
+    "why": "Canonical cochain shifts of the completed scalar comparison; needed to keep the source shift [2d] normalized."
+   },
+   {
+    "node": "lem-weil-integral-twist-scalar-coherence",
+    "why": "Tower and unit equations for the specified twist/scalar comparison, a generic coefficient-line tool not a replacement purity route."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "The bounded-domain coefficient comparisons expressly named by the item; no exceptional or internal-Hom specialization is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-semilinear-scalar-localization",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-completed-scalar-chain-shift",
+  "lem-weil-integral-twist-scalar-coherence",
+  "lem-fix-operation-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-bd7df4e84",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-bd7df4e84 (reviewer sub-agent of L); spot-checked: PASS: I read all six steps, every cited statement and the main-20261015 sources. This head re-delivers d1b596e7c96f, which was refused at landing after the statement of lem-pur-canonical-tate-arrow-naturality changed. Apart from the split_report summary, only Step 3 differs from d1b5. Step 3 now applies the current Tate node with scheme X, exponent r=d>=0 and coefficient functor integral extension O_E->O_L, then localizes. The node's equation t_R R(tau)=tau' G'(t_R) C_R covers this case, including 'at field level on their localized/common-stage images'. Its C_R is the same family as C_X in Step 2, because the trf realization node specifies the choices of lem-pur-integral-operations-scalar-extension. Checks: (1) The main equation is typed: both sides run R_X G_X P_fK -> P'_fK'. (2) Step 2's square a_H R_X(b)=b' G'_X(a_P) C is a paste of three cited facts: the trf composition/scalar equation applied to f g_X = g_Y f (it 'respects equality of scheme morphisms'), the scalar-extension compatibility of mu (lem-pur-derived-pullback-tensor-iso) and the chain-shift comparison. (3) I verified the Step 3 algebra: the first factor reduces to alpha_K R_X(F phi_K) by naturality of alpha and the cancellation of C_Y; the second factor is t R_X(tau_d). (4) Step 4 is elementary. (5) Step 5's identity and tower laws come from the component clauses of the scalar-extension, trf, twist-scalar coherence and chain-shift nodes. (6) Step 6 uses the common-stage colimit criterion. Small cases: L=E, d=0 (coefficient-unit arrow), K=0, ramified L/E, and q^{-d} is a unit. Source: def-pur-tate-datum.md displays exactly the phi^pur composite, and the route follows prop-pur-weil-equivariance-compatibilities.proof. There is no SGA citation, no cycle and no new node. The finite and strict-system siblings are not duplicates. Batch-5 flag: lem-pod-derived-exact-square-composition is a generic lemma (exact-functor square pasting survives derived localization, Stacks 05S7/014F). It is not content of the trace-formula or Poincare-duality assumptions or their proofs, so I accept it; the trf realization node is likewise generic coherence. I accept the declared tool_uses. Advisory: the agreement of the Step 2/3 twist comparison t with beta of the twist-coherence node is left implicit, which is harmless. No changes."
+ }
+}

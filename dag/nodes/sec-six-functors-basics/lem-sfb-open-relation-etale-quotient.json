@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-open-relation-etale-quotient",
+ "kind": "statement",
+ "title": "An open equivalence relation on a flat presentation has etale quotient",
+ "statement": "Work over a scheme $S$ [def-pc-scheme], in the universes of [def-weil-size-convention]. Algebraic spaces mean [def-trf-algebraic-space], algebraic stacks mean [def-sfb-algebraic-moduli-stack], and stacks in groupoids, their morphisms and $2$-fibre products use [def-sfb-stable-pointed-moduli-groupoids]. Let $Y$ be an algebraic space over $S$ and let $(U,R,s,t,e,i,c)$ be a groupoid in algebraic spaces over $Y$, with the test-point laws of [def-a1-groupoid-scheme]. Suppose $U\\to Y$ is flat and locally of finite presentation [def-weil-flat-morphism, def-sbc-locally-finite-presentation] and $(t,s):R\\to U\\times_YU$ is an open immersion, meaning that each scheme base change is an open subscheme [def-weil-open-immersion]. Let $[U/R]$ be the fppf stackification of its test-point groupoid [def-pc-fppf-site, lem-sfb-groupoid-stackification-local-description], and let $U/R$ be the fppf sheafification [def-weil-pbc-sheafification] of $T\\mapsto U(T)/R(T)$. Then $[U/R]$ is equivalent to the discrete stack of the algebraic space $U/R$, and the induced map $U/R\\to Y$ is etale [def-weil-etale-morphism]. Flatness, local finite presentation and etaleness for algebraic spaces are tested on etale scheme charts.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU1 (lemma-quotient-etale), complete statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-a1-groupoid-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-weil-pbc-sheafification",
+  "def-weil-etale-morphism",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-space-groupoid-quotient-presentation",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=U\\times_YU$ and $j=(t,s):R\\to P$. By the hypothesis, every scheme base change of $j$ is an open subscheme inclusion, hence etale by [lem-weil-pbc-open-immersion-etale]. Thus $j$ is representable etale in the scheme-test sense of [def-trf-algebraic-space]. The two projections $P\\to U$ are base changes of $U\\to Y$; they are flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. That node also makes $j$ flat and locally of finite presentation (etale implies smooth implies both), and makes their composites $s,t$ flat and locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU1 (lemma-quotient-etale), first proof sentence, verification of the flat-groupoid hypotheses"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-groupoid-algebraic-quotient] to the given test-point groupoid, now with flat locally finitely presented $s,t$. It gives an algebraic stack $\\mathcal Q=[U/R]$, a representable surjective flat locally finitely presented map $p:U\\to\\mathcal Q$, and the canonical equivalence $R\\simeq U\\times_{\\mathcal Q}U$, with its two projections $s,t$. The groupoid laws and all size bounds are exactly the hypotheses of the item.",
+   "uses": [
+    "lem-sfb-flat-groupoid-algebraic-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU1 (lemma-quotient-etale), first proof sentence; criteria.tex Tags 06FI and 06FH"
+   }
+  },
+  {
+   "text": "An open immersion is injective on test-scheme sections: after base change along a test section of its target there is at most one lift to the resulting open subscheme. Hence $R(T)\\to(U\\times_YU)(T)$ is injective. For $u\\in U(T)$ the preceding self-relation equivalence identifies automorphisms of $p(u)$ with arrows in $R(T)$ from $u$ to itself; there is exactly one, since the identity exists. Every object of $\\mathcal Q(T)$ is fppf locally isomorphic to such a $p(u)$ by [lem-sfb-groupoid-stackification-local-description]. Its automorphisms are therefore locally identities, and are globally identities because isomorphism presheaves of a stack are sheaves. Apply [lem-sfb-algebraic-setoid-space] to obtain an algebraic space $X$ and an equivalence $\\mathcal Q\\simeq h_X$. The structural map to $Y$ descends from the groupoid's given map to $Y$, by the stackification extension property, so $p:U\\to X$ is over $Y$ and $R\\simeq U\\times_XU$.",
+   "uses": [
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "def-weil-open-immersion",
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-algebraic-setoid-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU1 (lemma-quotient-etale), second proof sentence, no automorphisms, and the equality with the sheaf quotient"
+   }
+  },
+  {
+   "text": "Write $F(T)=U(T)/R(T)$ and $A=F^\\#$. The map $U\\to X$ induces $F\\to X$ and hence $\\alpha:A\\to X$ by [def-weil-pbc-sheafification], since $X$ is an fppf sheaf [def-trf-algebraic-space]. Conversely, for $x\\in X(T)$ choose an fppf cover on which it is represented by $u_i\\in U(T_i)$, using [lem-sfb-groupoid-stackification-local-description] and the equivalence above. On overlaps the two representatives have equal images in $X$, hence give a section of $U\\times_XU=R$. Their images in $A$ agree, so glue uniquely. This defines $\\beta:X\\to A$, independently of the cover and representatives: on a common refinement the same relation argument gives equality. It commutes with base change by restricting these representatives. Locally $\\alpha\\beta(x)=x$, so this holds globally. Also $\\beta\\alpha$ agrees with the identity after $F\\to A$; uniqueness in the sheafification universal property makes it the identity on $A$. Thus $A\\cong X$, compatibly over $Y$, proving $[U/R]\\simeq h_{U/R}$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-trf-algebraic-space",
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-flat-groupoid-algebraic-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU1 (lemma-quotient-etale), second proof sentence, identification with U/R, with the universal-property argument written out"
+   }
+  },
+  {
+   "text": "The map $p:U\\to X$ is surjective, flat and locally of finite presentation by Step 2, and its composite with $f:X\\to Y$ is the given flat locally finitely presented $U\\to Y$. The source-local clause of [lem-sfb-representable-fppf-etale-open-descent], taking the identity target cover of $Y$, therefore proves that $f$ is flat and locally of finite presentation. Identities are surjective etale by [lem-trf-space-representable-etale-scheme-tests], hence flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. No surjectivity of $U\\to Y$ is needed.",
+   "uses": [
+    "lem-sfb-representable-fppf-etale-open-descent",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU1 (lemma-quotient-etale), third proof sentence, descent of flatness and local finite presentation"
+   }
+  },
+  {
+   "text": "Consider $q=p\\times_Yp:U\\times_YU\\to X\\times_YX$. Factor it as $U\\times_YU\\to X\\times_YU\\to X\\times_YX$, first applying $p$ to the first factor and then to the second. These maps are respectively the base changes of $p$ along $X\\times_YU\\to X$ (first projection) and $X\\times_YX\\to X$ (second projection). Thus both, and their composite $q$, are surjective, flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Pulling back $\\Delta_f:X\\to X\\times_YX$ by $q$ gives $U\\times_XU\\to U\\times_YU$, hence precisely $j:R\\to U\\times_YU$: on test schemes the pullback is a pair $(u,v)$ whose images in $X$ agree. All these fibre products are algebraic spaces by [lem-trf-space-fibre-products-etale-covers]. Since $j$ is an open immersion, target descent along $q$ in [lem-sfb-representable-fppf-etale-open-descent] makes $\\Delta_f$ an open immersion.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU1 (lemma-quotient-etale), cartesian diagonal diagram and its omitted product-cover detail"
+   }
+  },
+  {
+   "text": "Local finite presentation implies local finite type by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Consequently [lem-sfb-space-unramified-open-diagonal] applied to Step 6 makes $f$ unramified. To finish, choose a surjective etale scheme chart $V\\to Y$ and a surjective etale scheme chart $W\\to X\\times_YV$, as in [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers]. By [lem-trf-space-representable-etale-scheme-tests], their base change and composite give a surjective etale map $W\\to X$. The scheme map $h:W\\to V$ is flat and locally of finite presentation by [lem-sfb-space-local-properties-chart-test], and unramified by [lem-sfb-unramified-etale-compatible-charts]. It is etale by the conjunction defining [def-weil-etale-morphism]. The etale clause of [lem-sfb-unramified-etale-compatible-charts] now gives that $f$ is etale.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-unramified-open-diagonal",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-unramified-etale-compatible-charts",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0DU1 (lemma-quotient-etale), final two proof sentences; spaces-morphisms.tex Tag 05W1 and the chart argument of lemma-unramified-flat-lfp-etale"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-etale",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-flat-groupoid-algebraic-quotient",
+  "def-weil-open-immersion",
+  "lem-sfb-groupoid-stackification-local-description",
+  "lem-sfb-algebraic-setoid-space",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-unramified-open-diagonal",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-unramified-etale-compatible-charts",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0DU1 (lemma-quotient-etale), complete proof, including its product-cover detail."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open equivalence relation on an algebraic space flat locally of finite presentation over Y has algebraic space quotient etale over Y",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring quotients and topological discrete quotients do not assert the algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If U to Y is flat locally finitely presented and R is an open subspace of U times over Y U then U modulo R is etale over Y",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring quotients and topological discrete quotients do not assert the algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient by an open equivalence relation is an etale algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"DiscreteQuotient.mk\", \"module\": \"Mathlib.Topology.DiscreteQuotient\", \"type\": \"{X : Type u_5} →\\n  [inst : TopologicalSpace X] → (toSetoid : Setoid X) → (∀ (x : X), IsOpen (setOf (toSetoid x))) → DiscreteQuotient X\", \"doc\": \"Given a topological space $X$, an equivalence relation on $X$, and a proof that each equivalence class is open in $X$, this constructs the discrete quotient of $X$.\"}\n  {\"name\": \"t2Space_iff_of_isOpenQuotientMap\", \"module\": \"Mathlib.Topology.Separation.Hausdorff\", \"type\": \"[TopologicalSpace Y] {π : X → Y} (h : IsOpenQuotientMap π) : T2Space Y ↔ IsClosed {q : X × X | π q.1 = π q.2}\", \"doc\": \"For a topological space $Y$ and an open quotient map $\\\\pi : X \\\\to Y$, the space $Y$ is Hausdorff (T2) if and only if the set $\\\\{(x,x') \\\\in X \\\\times X \\\\mid \\\\pi(x) = \\\\pi(x')\\\\}$ is closed in the product \"}\n  {\"name\": \"instTopologicalSpaceQuotient\", \"module\": \"Mathlib.Topology.Constructions\", \"type\": \"{s : Setoid X} [t : TopologicalSpace X] : TopologicalSpace (Quotient s)\", \"doc\": \"Given a topological space $X$ and an equivalence relation $s$ on $X$, the quotient set $X/s$ is equipped with the quotient topology. In this topology, a subset of $X/s$ is open if and only if its prei\"}\n  {\"name\": \"instTopologicalSpaceQuot\", \"module\": \"Mathlib.Topology.Constructions\", \"type\": \"{r : X → X → Prop} [t : TopologicalSpace X] : TopologicalSpace (Quot r)\", \"doc\": \"Given a topological space on a set $ X $ and an equivalence relation $ r $ on $ X $, the quotient set $ X / r $ is equipped with the quotient topology. In this topology, a subset of $ X / r $ is open \"}\n  {\"name\": \"DiscreteQuotient.isOpen_setOf_rel\", \"module\": \"Mathlib.Topology.DiscreteQuotient\", \"type\": \"∀ {X : Type u_5} [inst : TopologicalSpace X] (self : DiscreteQuotient X) (x : X), IsOpen (setOf (self.toSetoid x))\", \"doc\": \"For any topological space $X$ and its discrete quotient, the equivalence class of any point $x \\\\in X$ under the discrete quotient's equivalence relation is an open set in $X$.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] (e : A ≃ₐ[R] B) : FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $ and there exists an algebra equivalence $ e : A \\\\simeq_R B $, then $ B $ is also formally étale over $ R $.\"}\n  {\"name\": \"DiscreteQuotient.mk.injEq\", \"module\": \"Mathlib.Topology.DiscreteQuotient\", \"type\": \"∀ {X : Type u_5} [inst : TopologicalSpace X] (toSetoid : Setoid X)\\n  (isOpen_setOf_rel : ∀ (x : X), IsOpen (setOf (toSetoid x))) (toSetoid_1 : Setoid X)\\n  (isOpen_setOf_rel_1 : ∀ (x : X), IsOpen (setOf (toSetoid_1 x))),\\n  ({ toSetoid := toSetoid, isOpen_setOf_rel := isOpen_setOf_rel } =\\n      { toSe\", \"doc\": \"Given a topological space $X$ and two equivalence relations $\\\\sim_1$ and $\\\\sim_2$ on $X$ with open equivalence classes, the discrete quotient structures induced by $\\\\sim_1$ and $\\\\sim_2$ are equal if a\"}\n  {\"name\": \"TopologicalSpace.IsTopologicalBasis.quotient\", \"module\": \"Mathlib.Topology.Bases\", \"type\": \"{V : Set (Set X)} (hV : IsTopologicalBasis V) (h : IsOpenMap (Quotient.mk' : X → Quotient S)) :\\n  IsTopologicalBasis (Set.image (Quotient.mk' : X → Quotient S) '' V)\", \"doc\": \"Let $X$ be a topological space with a basis $\\\\mathcal{B}$, and let $X/S$ be the quotient space under an equivalence relation $S$. If the canonical quotient map $q: X \\\\to X/S$ is an open map, then the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring quotients and topological discrete quotients do not assert the algebraic-space quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Quotient\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.instIsSeparableQuotientIdealOfEssFiniteTypeOfIsPrime\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \" (K : Type u_1) (A : Type u) [Field K] [CommRing A] [Algebra K A] [Algebra.EssFiniteType K A] [Algebra.FormallyEtale K A] (p : Ideal A) [p.IsPrime] : Algebra.IsSeparable K (A ⧸ p)\", \"doc\": \"\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] (P : StandardEtalePair R) (I : Ideal S) (hI : I ^ 2 = ⊥) (x : S) (hx : P.HasMap ((Ideal.Quotient.mk I) x)) : ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"\"}\n  {\"name\": \"StandardEtalePair.equivPolynomialQuotient\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \" {R : Type u_1} [CommRing R] (P : StandardEtalePair R) : P.Ring ≃ₐ[R] Polynomial (Polynomial R) ⧸ Ideal.span {Polynomial.C P.f, Polynomial.X * Polynomial.C P.g - 1}\", \"doc\": \"An `AlgEquiv` between `P.Ring` and `R[X][Y]/⟨f, Yg-1⟩`,\\nto not abuse the defeq between the two.\"}\n  {\"name\": \"StandardEtalePair.equivAwayQuotient\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \" {R : Type u_1} [CommRing R] (P : StandardEtalePair R) : P.Ring ≃ₐ[R] Localization.Away P.g ⧸ Ideal.span {(algebraMap (Polynomial R) (Localization.Away P.g)) P.f}\", \"doc\": \"`R[X][Y]/⟨f, Yg-1⟩ ≃ R[X][1/g]/f`\"}\n  {\"name\": \"StandardEtalePair.equivMvPolynomialQuotient\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \" {R : Type u_1} [CommRing R] (P : StandardEtalePair R) : P.Ring ≃ₐ[R] MvPolynomial (Fin 2) R ⧸ Ideal.span {(Polynomial.Bivariate.equivMvPolynomial R) (Polynomial.C P.f), (Polynomial.Bivariate.equivMvPolynomial R) (Polynomial.X * Polynomial.C P.g - 1)}\", \"doc\": \"`R[X][Y]/⟨f, Yg-1⟩ ≃ R[X, Y]/⟨f, Yg-1⟩`\"}\n  {\"name\": \"StandardEtalePair.equivMvPolynomialQuotient_symm_apply\", \"module\": \"Mathlib.RingTheory.Etale.StandardEtale\", \"type\": \" {R : Type u_1} [CommRing R] (P : StandardEtalePair R) : P.equivMvPolynomialQuotient.symm ((Ideal.Quotient.mk (Ideal.span {(Polynomial.Bivariate.equivMvPolynomial R) (Polynomial.C P.f), (Polynomial.Bivariate.equivMvPolynomial R) (Polynomial.X * Polynomial.C P.g - 1)})) (MvPolynomial.X 0)) = P.X\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring quotients and topological discrete quotients do not assert the algebraic-space quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence.relation.*[Ee]tale|[Ee]tale.*equivalence.relation|quotientStack|quotient_stack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness, ring quotients and topological discrete quotients do not assert the algebraic-space quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|open.*equivalence.*relation|equivalence.*relation.*etale",
+   "results": "1 hits: Mathlib/Topology/OpenPartialHomeomorph/IsImage.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etaleness, abstract stack predicates or topological discrete quotients; none asserts the algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient by an open equivalence relation of an algebraic space flat locally of finite presentation over Y is etale over Y",
+   "results": "8 hits: DiscreteQuotient.mk, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, t2Space_iff_of_isOpenQuotientMap, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.UniversallyOpen.of_flat, IsOpenQuotientMap.isQuotientMap, AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etaleness, abstract stack predicates or topological discrete quotients; none asserts the algebraic-space quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Etale\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etaleness, abstract stack predicates or topological discrete quotients; none asserts the algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stackification of a flat groupoid with open relation is a discrete stack represented by an etale algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.Etale.forget, CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.IsStack.toIsPrestack",
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etaleness, abstract stack predicates or topological discrete quotients; none asserts the algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open equivalence relation on a flat locally finitely presented algebraic space has quotient etale over the base",
+   "results": "8 hits: Algebra.isOpen_etaleLocus, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: results are scheme etaleness, abstract stack predicates or topological discrete quotients; none asserts the algebraic-space quotient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-open-subgroupoid-etale-quotient",
+  "date": "2026-10-23",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 0DU2 (lemma-quasi-splitting-etale), last sentence: apply lemma-quotient-etale to the open action equivalence relation; supporting the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain.",
+   "via": [
+    "lem-sfb-open-subgroupoid-etale-quotient",
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-open-relation-etale-quotient",
+  "worker": "stage1",
+  "group": "NB",
+  "summary": "Split Tag 0DU1 using only existing DAG nodes. Verified flat groupoid hypotheses, triviality of all test-scheme automorphisms, identification with the fppf sheaf quotient by gluing, source descent, the two-base-change factorization of the product cover and descent of the relative diagonal. Finished on common scheme charts using the existing etale definition. No new nodes or mathematical statement changes; normalized imported doubled TeX escapes.",
+  "blueprint": "Tag 0DU2 (lemma-quasi-splitting-etale), last sentence: apply lemma-quotient-etale to the open action equivalence relation; supporting the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) is the current proper/open direct-image route; the inherited alteration-chain reference is historical provenance. The ancestor command returns None; the existing null ancestor and via chain are retained. The present split supplies only its local quotient prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme/algebraic-space chart or morphism calculus used in Tag 0DU1; this unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme/algebraic-space chart or morphism calculus used in Tag 0DU1; this unit has no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme/algebraic-space chart or morphism calculus used in Tag 0DU1; this unit has no replacement for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-90f580844",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-90f580844 (reviewer sub-agent of L); spot-checked: I read Stacks 0DU1 (stacks-morphisms.tex, lemma-quotient-etale) in full. The item's statement matches it with no hypothesis added. The delivery has no new nodes and 7 steps, each checked against the statements of the nodes it cites. S1: flat-lfp of s,t comes from j being an open immersion, hence representable etale, plus the calculus clauses for base change, composition and etale=>smooth=>flat+lfp. S2: 06FI node applied with its exact hypotheses. S3: triviality of automorphisms is correct; through the 2-fibre product convention, Aut(p(u)) is the set of r with j(r)=(u,u), j is injective on T-points, and isomorphism sheaves glue; this holds for nonreduced T as 04SZ requires. S4: identifying the stack with the sheaf quotient by the universal property and gluing is accepted as elementary. S5: the source-and-target clause of the descent node with V=Y, W=U. S6: I checked both base changes of the factorisation of q and that the pullback of Delta_f along q is j; this fills the detail 0DU1 omits. S7: lfp=>lft, then 05W1(2) gives unramified, and compatible charts give etale. Edge cases checked: U and R empty, U=Y, U=A^1_Y, and U an open of Y with U->Y not surjective. No duplicate and no cycle (closure checked). The two off-unit sk-i-curve-zero tools are generic. Batch-5 flags: def-trf-algebraic-space and the trf/sfb algebraic-space foundation nodes (03EC, 02X2, 04XB, 06FI, 04SZ, 04XD, 05W1, 03MJ, 03XT) are general space theory, neither assumed statement gives them and neither proof uses them, so I accept them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenRelationEtaleQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.open_relation_etale_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenRelationEtaleQuotient.lean",
+  "statement": "theorem open_relation_etale_quotient {S : Scheme.{u}} {Y U R : AlgebraicSpace S} (p : U ⟶ Y) (s t : R.obj.obj ⟶ U.obj.obj) (e : U.obj.obj ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : Limits.pullback s t ⟶ R.obj.obj) (hY : t ≫ p.hom.hom = s ≫ p.hom.hom) (hflat : MapIsFlat p) (hlfp : MapIsLocallyOfFinitePresentation p) (hopen : IsRepresentableWith (fun _ _ a ↦ IsOpenImmersion a.left) (pullback.lift t s hY)) (F : BasedCategory.{v, w} (Over S)) (a : BasedFunctor (discreteModuli U.obj.obj) F) (presentation : SpaceGroupoidQuotientPresentation s t e i c F a) : ∃ (X : AlgebraicSpace S) (f : X ⟶ Y) (q : U.obj.obj ⟶ X.obj.obj) (E : BasedFunctor (discreteModuli X.obj.obj) F), E.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso ((discreteModuliMap q).comp E) a) ∧ q ≫ f.hom.hom = p.hom.hom ∧ (∃ η : sheafify (Scheme.fppfTopology.over S) (coequalizer s t ⋙ uliftFunctor.{u + 1, u}) ≅ X.obj.obj ⋙ uliftFunctor.{u + 1, u}, Functor.whiskerRight (coequalizer.π s t) uliftFunctor.{u + 1, u} ≫ toSheafify (Scheme.fppfTopology.over S) (coequalizer s t ⋙ uliftFunctor.{u + 1, u}) ≫ η.hom = Functor.whiskerRight q uliftFunctor.{u + 1, u}) ∧ MapIsLocally (@Etale) f",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1fcace475",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Statement matches Stacks 0DU1 and the node clause by clause. Groupoid laws via IsPresheafGroupoid; over Y via hY : t≫p = s≫p. Flat and lfp via the étale-chart predicates MapIsFlat/MapIsLocallyOfFinitePresentation. Open immersion via IsRepresentableWith IsOpenImmersion on Limits.pullback.lift t s into U×_Y U. [U/R] via the landed SpaceGroupoidQuotientPresentation. U/R = sheafify of the lifted presheaf coequalizer, iso η to the lifted presheaf of X, with q pinned by π≫toSheafify≫η = q, f pinned by q≫f = p, E an equivalence with a ModuliTwoIso to a, and MapIsLocally Etale f. No extra hypotheses or universe restrictions; empty, identity and non-surjective-open cases covered. Item record differs from base only in lean and three added landed def stmt_deps; lean.statement verbatim; one sorry; source and blueprint docstrings with the 7-step proof; report has Worker report and Second reading by Q30 sections; no duplicate declaration. No fixes, no recompile."
+ }
+}

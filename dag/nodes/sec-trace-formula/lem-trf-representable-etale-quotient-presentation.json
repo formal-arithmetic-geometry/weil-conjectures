@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-representable-etale-quotient-presentation",
+ "kind": "statement",
+ "title": "A representable quotient map of an etale relation is etale and surjective",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $V,R$ be schemes over $S$. Let $j=(s,t):R\\to V\\times_S V$ [def-pc-fibre-product] be a monomorphism such that for every $S$-scheme $T$, $j$ identifies $R(T)$ with an equivalence relation on $V(T)$. Suppose $s,t$ are etale [def-weil-etale-morphism]. Let $F$ be the sheafification [def-weil-pbc-sheafification] on the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site] of the presheaf $T\\mapsto V(T)/R(T)$, with quotient map $q:h_V\\to F$, where $h_V(T)=\\operatorname{Mor}_S(T,V)$. Assume that $q$ is representable: for every $S$-scheme $T$ and section $x\\in F(T)$, the sheaf $h_T\\times_{x,F,q}h_V$ is represented by an $S$-scheme $P_x$. Then the projection $P_x\\to T$ is etale and surjective for every $T,x$. More precisely, there is an fppf covering $\\{f_\\alpha:T_\\alpha\\to T\\}$ and maps $a_\\alpha:T_\\alpha\\to V$ with $q(a_\\alpha)=x|_{T_\\alpha}$, together with canonical isomorphisms over $T_\\alpha$ $$P_x\\times_T T_\\alpha\\simeq T_\\alpha\\times_{a_\\alpha,V,t}R,$$ under which the map to $V$ is $s\\circ\\operatorname{pr}_R$. Moreover every $x\\in F(T)$ lifts to $V$ on an etale covering [def-weil-pbc-etale-site]: there is a jointly surjective etale family $\\{E_\\beta\\to T\\}$ and maps $b_\\beta:E_\\beta\\to V$ such that $q(b_\\beta)=x|_{E_\\beta}$. No representability of the diagonal of $F$, and no algebraic-space hypothesis on $F$, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WV (lemma-when-it-works-it-works), entire pullback computation and descent proof, with the weaker hypothesis that the quotient map is representable; Tag 0265 (lemma-presentation-quasi-compact), second proof step, explicitly permits the same proof before algebraicity is established."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "def-weil-pbc-etale-site",
+  "def-trf-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Fix an S-scheme T and a section x of F(T). Prove local surjectivity of the specified universal unit η directly, without assuming a small-valued sheafification functor on the big site: let B be the subsheaf of F consisting of sections locally in the image of η. Its sheaf condition follows from the sheaf condition of F and transitivity of covering sieves. The map η factors through B. Its universal property gives l:F→B, and injectivity of precomposition with η shows l followed by B→F is the identity. Thus B=F. The presheaf coequalizer projection h_V→Q is pointwise surjective, so the composite q:h_V→F is locally surjective. The image sieve of x is covering. Transfer it to T.left using the slice-site sieve equivalence; extract an fppf covering presieve and express it as a family of arrows. Membership of each arrow in the image sieve supplies a map a_i:T_i→V with q(a_i)=x|T_i. These arguments are formalized in the proved private helpers universal_unit_locallySurjective and local_lifts.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WV, lemma-when-it-works-it-works, first paragraph of proof; local sections: sites.tex Tag 00WK, lemma-sections-sheafification"
+   }
+  },
+  {
+   "text": "Use [lem-trf-etale-relation-kernel-pair] to obtain the pullback square h_R→h_V over q:h_V→F, with coordinates (s,t). Yoneda preserves pullbacks. Paste the square for P×_T T_i with the represented square for P, obtaining a pullback of q along h_{T_i}→h_T→F. Paste the square for T_i×_{a_i,V,t}R with the kernel-pair square; this is another pullback of q along the same map, since q(a_i)=x|T_i. Uniqueness of pullbacks gives an isomorphism of representable presheaves, and [lem-galois-yoneda-fully-faithful] recovers the scheme isomorphism e. The two pullback projection equations give e≫pr_Ti=pr_Ti and e≫pr_R≫s=pr_P≫b. Any other isomorphism with these equations has equal Yoneda image by joint monicity of the two projections of the second pasted pullback, hence equals e. This is the proved private helper local_model.",
+   "uses": [
+    "lem-trf-etale-relation-kernel-pair",
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WV, lemma-when-it-works-it-works, displayed pullback computation; groupoids.tex Tag 045Y, lemma-quotient-pre-equivalence"
+   }
+  },
+  {
+   "text": "The projection T_i×_{a_i,V,t}R→T_i is etale by [lem-weil-pbc-etale-scheme-base-change]. Transport this property through the local isomorphism of Step 2. The forgetful functor from schemes over S to schemes preserves pullbacks, so these are etale scheme base changes of p:P→T.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WV, lemma-when-it-works-it-works, sentence beginning Since t is etale and surjective; morphisms.tex Tag 02GO, lemma-base-change-etale"
+   }
+  },
+  {
+   "text": "The fppf covering family of Step 1 is an fpqc covering by the existing Mathlib leaf [lem-trf-fppf-covering-is-fpqc], applied as Scheme.fppfPrecoverage_le_fpqcPrecoverage to its presieve of arrows. No affine refinement or restriction-of-open comparison is needed.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C, lemma-zariski-etale-smooth-syntomic-fppf-fpqc; affine refinement Tag 021P, lemma-fppf-affine"
+   }
+  },
+  {
+   "text": "Apply [lem-galois-fpqc-descend-etale] to p.left and the fpqc family from Step 4. Identify the chosen scheme pullbacks with the underlying schemes of the slice pullbacks using their pullback isomorphisms, and use Step 3 to establish the hypothesis. For surjectivity a shorter argument avoids a separate reflexivity section: for each lift a_i the represented pullback universal property gives l_i:T_i→P with l_i≫p=f_i and l_i≫b=a_i, by Yoneda full faithfulness. Every point z of T lies below a point y of some T_i by the fppf-covering hypothesis. Then l_i(y) maps to z. Thus p is surjective.",
+   "uses": [
+    "lem-galois-fpqc-descend-etale",
+    "def-pc-fppf-site",
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WV, lemma-when-it-works-it-works, final descent paragraph; descent.tex Tag 02VN, lemma-descending-property-etale"
+   }
+  },
+  {
+   "text": "Use the singleton family $\\{E=P_x\\xrightarrow{\\pi}T\\}$. By Step 5 it is jointly surjective and etale, hence an etale covering by [def-weil-pbc-etale-site]. The projection $b:P_x\\to V$ is part of the represented fibre product [def-pc-fibre-product]. Its defining equality is $q(b)=x|_{P_x}$, so it is the required etale-local lift. The local models and their $s$-projection were already identified in Step 2. Since $T,x$ were arbitrary, every clause follows.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WV, lemma-when-it-works-it-works, conclusion; the represented pullback supplies the tautological lift"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification",
+  "lem-galois-fpqc-descend-etale",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-trf-etale-relation-kernel-pair",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 02WV and 0265, pullback comparison and etale descent argument; direct image-subsheaf proof of local surjectivity for the given universal unit, Mathlib fppf-to-fpqc inclusion, and surjectivity via the local lifts simplify the implementation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a sheaf quotient by an etale equivalence relation has a representable quotient map, the map is etale and surjective and sections lift etale locally",
+   "results": "8 hits; AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Surjective\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(quotient|Quotient).*(Etale|etale|Surjective)|(Etale|etale|Surjective).*(quotient|Quotient)",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/ResidueField.lean. Searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representable fppf sheaf quotient map for an etale equivalence relation is a surjective etale presentation",
+   "results": "8 hits; Quotient.mk''_surjective, Quotient.mk_surjective, Quot.mk_surjective, Module.Relations.Solution.ofQuotient_isPresentation, IsCoveringMap.isQuotientMap, TopCat.Presheaf.instEpiCommRingCatToTotalQuotientPresheaf, Quotient.map_mk, Quotient.map",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of etaleness for the scheme representing a pullback of a quotient sheaf: locally the pullback is a base change of an etale equivalence relation projection",
+   "results": "8 hits; AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable quotient sheaf map by an etale equivalence relation is surjective etale, with local lifts of sections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, Algebra.IsStandardEtale.of_surjective, StandardEtalePresentation.lift_bijective, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the representable etale-equivalence-relation quotient theorem; generic quotient sets, Zariski gluing, and scheme etale-property declarations do not give its clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "(quotient|Quotient).*(Etale|etale)|(Etale|etale).*(quotient|Quotient)",
+   "results": "0 hits: . Searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the representable etale-equivalence-relation quotient theorem; generic quotient sets, Zariski gluing, and scheme etale-property declarations do not give its clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representable fppf sheaf quotient of an etale equivalence relation has a surjective etale quotient map",
+   "results": "8 hits: Quotient.mk''_surjective, Quotient.mk_surjective, Quot.mk_surjective, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, Topology.IsQuotientMap.surjective, CategoryTheory.Quotient.functor, CategoryTheory.Quotient.full_functor, IsCoveringMap.isQuotientMap",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the representable etale-equivalence-relation quotient theorem; generic quotient sets, Zariski gluing, and scheme etale-property declarations do not give its clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Surjective\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the representable etale-equivalence-relation quotient theorem; generic quotient sets, Zariski gluing, and scheme etale-property declarations do not give its clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable morphism to an fppf quotient is etale by descent because each pullback is locally a base change of the relation projection",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: no hit states the representable etale-equivalence-relation quotient theorem; generic quotient sets, Zariski gluing, and scheme etale-property declarations do not give its clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-relation-quotient",
+  "date": "2026-10-22",
+  "group": "Q104"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized scheme descent input to the descent sentence: first form the quotient by the etale relation (Stacks 02WW). Representable quotient pullback calculation, descent of the atlas properties and etale-local lifting (old step 3 and the atlas portion of old step 6).",
+   "via": [
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-representable-etale-quotient-presentation",
+  "worker": "stage1",
+  "summary": "Followed Stacks 02WV under the weaker representable-map hypothesis explicitly allowed by 0265. Reused the existing quotient kernel-pair, local sheafification sections, scheme etale base change and fpqc descent nodes; wrote the test-point isomorphism, reflexivity section, fppf-to-fpqc argument and tautological etale-local lift. No new nodes and no statement change.",
+  "blueprint": "Realizes the quotient-presentation subargument in the descent sentence of lem-trf-local-term-locality, through the existing ancestry recorded in blueprint.from: the atlas portion of the split of lem-trf-etale-relation-quotient. Preserves the Stacks quotient route; no claim to alter the contracting-local-term unit.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic finite affine refinement of a scheme fppf cover, used solely to verify the fpqc-covering hypothesis; the unit has no such refinement statement."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic descent of the etale property of a scheme morphism along an fpqc covering, exactly the final step of Stacks 02WV; not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-descend-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-cdb82d034",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-cdb82d034 (reviewer sub-agent of L); spot-checked: Read Stacks 02WV (spaces.tex lemma-when-it-works-it-works) and 0265 (lemma-presentation-quasi-compact). The 02WV proof uses only representability of T x_{U/R} U, and 0265 runs the same argument before algebraicity is known, so the item's 'q representable' hypothesis is exact, not a weakening. The parent lem-trf-etale-relation-quotient (Steps 2 and 4) supplies that hypothesis. The item is unsplit both live and on side-live, is not on the dropped list, has no repair note and is not on a cycle. Statement checks: the orientation (fibre product over t, map to V is s.pr_R) matches the kernel-pair convention and Stacks. Small cases checked: R=V, R=VxV with V->S etale (F=h_S, P=TxV), and T empty. Step 1: the sections-local node (Lean-closed) applied to the presheaf quotient on the fppf site gives the local representatives. Step 2: the kernel-pair node (h_R ~ h_V x_F h_V via (s,t), same hypotheses) plus the fibre-product universal property and Yoneda (Mathlib leaf) give the iso over T_a; I checked both inverse maps and naturality. Step 3: 02GO base change of t is etale; reflexivity at id_V gives e with se=te=id, hence a section, hence surjective, which correctly replaces Stacks' 't surjective'. Step 4 had a C1/C5 fault: it re-proved 'f^{-1}(A) is T_a x_T A' inline, citing def-weil-open-immersion, which does not state it, while the Mathlib leaf lem-weil-pbc-open-preimage-fibre-product (isPullback_morphismRestrict) does. FIXED: Step 4 now cites that leaf plus the uniqueness clause of def-pc-fibre-product, def-weil-open-immersion is dropped from the step's uses and proof_deps, and the rest of the step is elementary. Step 5: lem-galois-fpqc-descend-etale applies to an arbitrary morphism with the fpqc family from Step 4 and the etale second projections from Steps 2-3; surjectivity follows from joint surjectivity plus the section. Step 6: the singleton P_x->T is an etale covering by def-weil-pbc-etale-site, and the tautological b gives q(b)=x|P. Duplicates: lem-trf-quotient-map-fppf-local-models needs s separated and locally quasi-finite and proves representability, so it is not a duplicate; no node states 02WV, and no general fppf=>fpqc node exists. The tool_uses lem-pc-fppf-affine-refinement and lem-galois-fpqc-descend-etale are accepted as generic black boxes. No new nodes; one repairable fault, fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-representable-etale-quotient-presentation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableEtaleQuotientPresentation",
+  "declaration": "AlgebraicGeometry.Scheme.representable_etale_quotient_presentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableEtaleQuotientPresentation.lean",
+  "statement": "theorem representable_etale_quotient_presentation {S : Scheme.{u}} {R V : Over S} (s t : R ⟶ V) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [Etale s.left] [Etale t.left] (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun g : F.obj ⟶ G.obj ↦ η ≫ g)) (hrep : AlgebraicSpace.IsRepresentable (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η)) : ∀ (T : Over S) (x : F.obj.obj (op T)), (∀ (P : Over S) (p : P ⟶ T) (b : P ⟶ V), IsPullback (yoneda.map b) (yoneda.map p) (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) (yonedaEquiv.symm x) → Etale p.left ∧ Surjective p.left ∧ ∃ (I : Type (u + 1)) (T' : I → Over S) (f : ∀ i, T' i ⟶ T) (a : ∀ i, T' i ⟶ V), Presieve.ofArrows (fun i ↦ (T' i).left) (fun i ↦ (f i).left) ∈ Scheme.fppfPrecoverage T.left ∧ ∀ i, (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η).app (op (T' i)) (a i) = F.obj.map (f i).op x ∧ ∃! e : pullback p (f i) ≅ pullback (a i) t, e.hom ≫ pullback.fst (a i) t = pullback.snd p (f i) ∧ e.hom ≫ pullback.snd (a i) t ≫ s = pullback.fst p (f i) ≫ b) ∧ (∃ (I : Type (u + 1)) (E : I → Over S) (g : ∀ i, E i ⟶ T) (b : ∀ i, E i ⟶ V), Presieve.ofArrows (fun i ↦ (E i).left) (fun i ↦ (g i).left) ∈ Scheme.etalePrecoverage T.left ∧ ∀ i, (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η).app (op (E i)) (b i) = F.obj.map (g i).op x)",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the already landed AlgebraicSpace.IsRepresentable predicate, without assuming that F is an algebraic space. The quotient and its sheafification are specified by the existing coequalizer/universal-property interface used in etale_relation_kernel_pair. Canonical local isomorphisms are uniquely characterized by their projections."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-996f4651e",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Diff vs side-live: only the new module plus the item node's lean record and stmt_deps (+def-trf-algebraic-space, a landed node whose IsRepresentable is exactly the node's 'q representable'; additions of landed nodes are allowed); lean.statement verbatim. Clause check: S/R/V over S, Mono (prod.lift s t), hrel equivalence, Etale s/t, the coequalizer+η+hη sheafification interface identical to the landed etale_relation_kernel_pair, hrep IsRepresentable (no diagonal/atlas hypothesis), Etale ∧ Surjective for every representing pullback, fppfPrecoverage cover with q(a_i)=x|, ∃! iso pullback p f_i ≅ pullback a_i t over T_i with map to V = snd≫s (uniqueness from Mono (s,t); orientation matches Stacks 02WV), etalePrecoverage lifts. The Lean lets the cover depend on P instead of the node's ∃ cover ∀ P; equivalent. Edge cases (T empty, V=R=∅, R=V, R=V×V) and universes (single u, cover index Type (u+1)) fine; docstrings carry 02WV/0265, the blueprint tag and the 6 steps; sorry only. Advisory: étale covers via etalePrecoverage rather than smallEtaleTopology (equivalent). No compile run (no file changed); worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261023T124511-L-1411764",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

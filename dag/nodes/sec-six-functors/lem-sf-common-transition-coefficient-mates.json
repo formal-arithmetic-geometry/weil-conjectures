@@ -1,0 +1,217 @@
+{
+ "id": "lem-sf-common-transition-coefficient-mates",
+ "kind": "statement",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "title": "Common-stage transition action and its counit mates",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and schemes $X,Y$. For each subfield $i\\subset\\Omega$ finite over $\\mathbf Q_\\ell$ write $C_i(T)=D^b_c(T,i)$ and use actual scalar transitions $T_{ij}^T$ for $i\\le j$. Let $C_\\Omega(T)$ be the literal finite-field pair category with filtered-colimit Hom groups, $I_i^T:C_i(T)\\to C_\\Omega(T)$ the inclusions, and $\\tau_{ij}^T:I_j^TT_{ij}^T\\cong I_i^T$ the canonical transitions [def-weil-algebraically-closed-coefficients, def-weil-rationalization-karoubi]. Thus a morphism from $(i,K)$ to $(j,L)$ is represented by $v_m:T_{im}^TK\\to T_{jm}^TL$ at a common subfield $m\\subset\\Omega$ finite over $\\mathbf Q_\\ell$ and containing $i,j$.\n\nGive adjunctions $F_i:C_i(X)\\rightleftarrows C_i(Y):G_i$ and $F_\\Omega:C_\\Omega(X)\\rightleftarrows C_\\Omega(Y):G_\\Omega$, with counits $\\varepsilon_i,\\varepsilon_\\Omega$ [def-weil-pbc-adjunction-mate]. Give invertible scalar comparisons $q_{j/i}:T_{ij}^YF_i\\cong F_jT_{ij}^X$ and $b_{j/i}:T_{ij}^XG_i\\cong G_jT_{ij}^Y$ and common comparisons $q_i:I_i^YF_i\\cong F_\\Omega I_i^X$ and $b_i:I_i^XG_i\\cong G_\\Omega I_i^Y$. For each comparison $(q,b)$ along $T$, require the counit normalization\n$$\\varepsilon_{t,T^YL}F_t(b_L)q_{G_sL}=T^Y(\\varepsilon_{s,L}).$$\nAssume the rational $q_{j/i}$ obey the scalar associativity and identity equations with the actual scalar associators and unitors. Put\n$$\\delta_{i,m,K}=I_m^Y(q_{m/i,K})(\\tau_{im,F_iK}^Y)^{-1}.$$\nRequire, for every common-stage representative, the actual arrow normalization\n$$F_\\Omega([m,v_m])=q_{j,L}\\delta_{j,m,L}^{-1}I_m^Y(F_m(v_m))\\delta_{i,m,K}q_{i,K}^{-1}.$$\n\nThen for all $i\\le j$, $K\\in C_i(X)$ and $L\\in C_i(Y)$ the given maps satisfy\n$$q_{j,T_{ij}^XK}I_j^Y(q_{j/i,K})=F_\\Omega((\\tau_{ij,K}^X)^{-1})q_{i,K}\\tau_{ij,F_iK}^Y,$$\n$$b_{j,T_{ij}^YL}I_j^X(b_{j/i,L})=G_\\Omega((\\tau_{ij,L}^Y)^{-1})b_{i,L}\\tau_{ij,G_iL}^X.$$\nThe equations use the pair-category endpoint identifications, so can be heterogeneous equalities in the formal record. They require no faithfulness of $I_i^T$ and no Karoubi completion. The inverse transition has its canonical identity representative at stage $j$ (with the identity-transition unitor); the displayed arrow normalization applies to that representative as well.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Derived inverse limits, rationalization, common-stage construction and refinement-compatible adjunction; extracted normalized coefficient argument, old steps 6,7"
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual stage systems S_X,S_Y of [def-weil-algebraically-closed-coefficients]. The family F_i with beta=q_{j/i} is a StageSystem.Morphism H: S_X -> S_Y: its coherence field is exactly the assumed scalar_assoc equation. The already proved source-library quotient construction H.functor sends a representative v at m to q_{m/i} F_m(v) q_{m/j}^{-1}. Expand the representative hypothesis and mkHom_eq_isoToStage to obtain F_Omega([m,v]) = q_i^{-1} H.functor([m,v]) q_j. This is an equality of actual pair-category arrows, with no faithfulness or completion.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Extracted old common-stage and refinement-compatible adjunction argument, old steps 6 and 7; representative formula and counit transpose"
+   }
+  },
+  {
+   "text": "The canonical transition tau^X_{ij,K} is represented at j by (S_X.assoc(h,refl)).hom_K. Calculate H.functor(tau^X_{ij,K}) = I_j(q_{j/i,K}^{-1}) tau^Y_{ij,F_i K}. To check this formula, expand functor_map_mkHom, the inclusion map, and transIso_hom_app_eq, and compose representatives at j. Cancel T^Y_jj(q_{j/i,K}); the remaining equation is precisely scalar_assoc(h,refl), followed by q q^{-1}=1. The helper pairFunctor_transition contains this calculation for arbitrary stage systems. Apply the preceding representative formula to tau^X and postcompose by F_Omega((tau^X)^{-1}); cancel the q and transition isomorphisms to obtain the required left comparison equation. This works for i=j without assuming a strict identity transition, and does not need scalar_unit.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Extracted old common-stage and refinement-compatible adjunction argument, old steps 6 and 7; representative formula and counit transpose"
+   }
+  },
+  {
+   "text": "For L at stage i, let A and B be the left and right sides of the required right comparison equation and Q=I_j(q_{j/i,G_i L}) q_{j,T^X_ij G_i L}. Precompose the counit transpose F_Omega(A) epsilon_Omega by Q. Naturality of q_j at b_{j/i,L}, followed by common_counit at j and finite_counit at (i,j,L), gives I_j(T^Y_ij(epsilon_i,L)). This is the local equality ha in the Lean proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Extracted old common-stage and refinement-compatible adjunction argument, old steps 6 and 7; representative formula and counit transpose"
+   }
+  },
+  {
+   "text": "Rewrite Q using the left comparison equation, then compute Q F_Omega(B) epsilon_Omega. Functoriality cancels the adjacent inverse X transitions. Counit naturality at (tau^Y_ij,L)^{-1} and common_counit at i replace the middle composite by I_i(epsilon_i,L) (tau^Y_ij,L)^{-1}. Naturality of the inverse Y transition at epsilon_i,L then cancels tau^Y and its inverse. The result is again I_j(T^Y_ij(epsilon_i,L)). This is the local equality hb in Lean.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Extracted old common-stage and refinement-compatible adjunction argument, old steps 6 and 7; representative formula and counit transpose"
+   }
+  },
+  {
+   "text": "Cancel the invertible Q in ha=hb. The two counit transposes are equal, so A=B by injectivity of (adjOmega.homEquiv _ _).symm, whose value is F_Omega(-) followed by epsilon_Omega. This is the objectwise counit-transpose bijection underlying [def-weil-pbc-adjunction-mate]. No morphism is canceled through a stage inclusion.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+    "place": "Extracted old common-stage and refinement-compatible adjunction argument, old steps 6 and 7; representative formula and counit transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Q6 stage-3 Lean proof: use the proved generic StageSystem.Morphism quotient construction and scalar associativity on the actual associator representative, then compare the two counit transposes by Adjunction.homEquiv. This replaces the old identity-unitor calculation, preserving all statements and the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite field pair category with filtered colimit Hom groups a compact support functor normalized on common stage representatives satisfies transition cocycles and its counit mates do too",
+   "results": "[leanfinder] OK 8 hit(s) Hits read: Condensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.profiniteSolidCounit, LightCondensed.isColimitLocallyConstantPresheaf_desc_apply, Condensed.fintypeCatAsCofanIsColimit, LightCondensed.fintypeCatAsCofanIsColimit, Condensed.isColimitLocallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheafDiagram. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluate the inverse pair category transition on its identity representative to prove closed coefficient left and right adjoint cocycles",
+   "results": "[leanfinder] OK 8 hit(s) Hits read: groupCohomology.cocyclesMk₁_eq, groupCohomology.dArrowIso₀₁_inv_left, groupCohomology.cocyclesMk₂_eq, CategoryTheory.PresheafOfGroups.OneCochain.inv_ev, groupCohomology.dArrowIso₀₁_inv_right, CategoryTheory.PresheafOfGroups.OneCocycle.ev_symm, groupCohomology.cocyclesIso₀_inv_comp_iCocycles, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "[loogle] OK 12 hit(s) Hits read: CategoryTheory.Adjunction.id, CategoryTheory.Adjunction.instInhabitedId, CategoryTheory.Adjunction, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commonStage.*[Cc]ocycle|[Cc]oefficient.*[Mm]ate.*[Tt]ransition|pairCategory.*[Tt]ransition",
+   "results": "[grep] OK 0 hit(s) General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed coefficient common stage transition compatibility for normalized exceptional adjunction mates",
+   "results": "[leansearch] OK 8 hit(s) Hits read: CategoryTheory.mateEquiv, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Closed.mk.noConfusion, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.expComparison. General mate/localization/limit or unrelated geometry results do not state the specified normalized constructible comparison assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commonStage.*[Cc]ocycle|[Cc]oefficient.*[Mm]ate.*[Tt]ransition|pairCategory.*[Tt]ransition",
+   "results": "No hits. General filtered-colimit facts or mate calculus do not state the representative-normalized pair-category assertion. The mateEquiv hit is already def-weil-pbc-adjunction-mate and is reused.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized scalar comparisons for a functor on a finite coefficient field pair category satisfy transition equations and right adjoint mate equations",
+   "results": "Hits read: CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.Monad.comparison_map_f, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.FunctorToTypes.rightAdj_map_app, CategoryTheory.FreeMonoidalCategory.normalizeObj', CategoryTheory.expComparison_ev General filtered-colimit facts or mate calculus do not state the representative-normalized pair-category assertion. The mateEquiv hit is already def-weil-pbc-adjunction-mate and is reused.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Hits read: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp General filtered-colimit facts or mate calculus do not state the representative-normalized pair-category assertion. The mateEquiv hit is already def-weil-pbc-adjunction-mate and is reused.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of natural isomorphisms between left adjoints with coefficient transition implies compatibility of counit normalized right adjoint mates",
+   "results": "Hits read: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm, CategoryTheory.conjugateEquiv_counit, CategoryTheory.unit_mateEquiv, CategoryTheory.mateEquiv_symm_apply General filtered-colimit facts or mate calculus do not state the representative-normalized pair-category assertion. The mateEquiv hit is already def-weil-pbc-adjunction-mate and is reused.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on the filtered common field pair category whose action on representatives is normalized by scalar comparison isomorphisms commutes with the canonical transition isomorphisms",
+   "results": "Hits read: ModuleCat.FilteredColimits.M.mk_map, CategoryTheory.IsFiltered.toSup_commutes, CategoryTheory.IsFiltered.SmallFilteredIntermediate.factoringCompInclusion, Field.Emb.Cardinal.embFunctor, CategoryTheory.IsFiltered.SmallFilteredIntermediate.factoring, InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj, CategoryTheory.IsCardinalFiltered.coeq_condition, Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor General filtered-colimit facts or mate calculus do not state the representative-normalized pair-category assertion. The mateEquiv hit is already def-weil-pbc-adjunction-mate and is reused.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-constructible-exceptional-coefficient-coherence",
+  "date": "2026-10-22",
+  "group": "Q148"
+ },
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Proof, third Hom bijection Rf_! dashv Rf^!; statement, compatibility with scalar extension. Common-stage construction of def-weil-exceptional-inverse-image: evaluate inverse transition representatives and compare the counit transposes.",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-common-transition-coefficient-mates",
+  "worker": "stage1",
+  "summary": "Evaluated the actual inverse transition at its identity/unitor representative; proved the left equation and computed both right comparison counit transposes explicitly. Reused the existing mate-bijection Mathlib leaf. No new nodes and no statement changes. Retained all original searches; added logged Q139 searches. Repaired missing blueprint ancestor using the parent coefficient-coherence node’s explicit sk-thm-sf-tensor-hom reference.",
+  "blueprint": "sk-thm-sf-tensor-hom: third Hom bijection and scalar-extension compatibility, through the common-stage construction paragraph of def-weil-exceptional-inverse-image; parent coefficient-coherence old steps 6 and 7."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-f0605aba8",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-f0605aba8 (reviewer sub-agent of L); spot-checked: Read the item in full against base f8dd6689. statement, stmt_deps and source are unchanged; only the proof, searches, split_report and blueprint changed. Live and side-live still have the item unsplit, so it is not superseded; there is no repair note and there are no new nodes. I redid every step. Step 1: tau_jj,A = I_j(u_A), because naturality of u at u_A gives T_jj(u_A) = u_{T_jj A}; the identity law then gives delta_jjA = I_jF_j(u_A^{-1}), which is the stipulated representative of the inverse transition. Step 2: the arrow formula at m = j cancels the middle factors and yields the first equation; endpoints checked. Step 3: naturality of q_j at b_{j/i}, then the common and finite counit normalizations, give Phi(A)Q = I_jT(eps_i). Step 4: Step 2 at G_iL, counit naturality at r_L, the normalization at i and naturality of tau^Y at eps_i give Phi(B)Q = I_jT(eps_i). Step 5: the transpose bijection, read as mateEquiv with alpha = Q^{-1} and side functors I_jT^X and I_jT^Y; this is the cited Mathlib leaf def-weil-pbc-adjunction-mate. The case i = j works with unitors kept, and no faithfulness or Karoubi completion is used. The scalar associativity hypothesis is not used, which is harmless in the unchanged statement. The pair-category Hom and transition maps match def-weil-algebraically-closed-coefficients. Source: main-20261015 def-weil-exceptional-inverse-image.md lines 38-45 gives only the common-stage construction, so proof_origin agent is correct. The blueprint from.node repair (null -> sk-thm-sf-tensor-hom, via the parent) matches the parent's own from.node. The duplicate candidates package-common-stage-transport, sfb-coherent-hom-transition-laws and pur-ordinary-adjunction-scalar-compatibility are different statements. Three kinds of search are recorded. No SGA source and no tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonTransitionCoefficientMates",
+  "declaration": "WeilConjectures.sfCommonTransitionCoefficientMates",
+  "declarations": [
+   "WeilConjectures.sfCommonTransitionScalarUnit",
+   "WeilConjectures.sfCommonTransitionCoefficientMates"
+  ],
+  "file": "lean/Sheaf/Paper/CommonTransitionCoefficientMates.lean",
+  "statement": "theorem sfCommonTransitionCoefficientMates (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X Y : AlgebraicGeometry.Scheme.{u}) (F : ∀ i : Padic.FiniteCoefficientFields l Ω, Stage l Ω X i ⥤ Stage l Ω Y i) (G : ∀ i : Padic.FiniteCoefficientFields l Ω, Stage l Ω Y i ⥤ Stage l Ω X i) (adj : ∀ i, F i ⊣ G i) (FΩ : Pair l Ω X ⥤ Pair l Ω Y) (GΩ : Pair l Ω Y ⥤ Pair l Ω X) (adjΩ : FΩ ⊣ GΩ) (q : ∀ (i j : Padic.FiniteCoefficientFields l Ω) (h : i ≤ j), F i ⋙ stageTransition l Ω Y i j h ≅ stageTransition l Ω X i j h ⋙ F j) (b : ∀ (i j : Padic.FiniteCoefficientFields l Ω) (h : i ≤ j), G i ⋙ stageTransition l Ω X i j h ≅ stageTransition l Ω Y i j h ⋙ G j) (qΩ : ∀ i, F i ⋙ inclusion (l := l) (Ω := Ω) (Y := Y) i ≅ inclusion (l := l) (Ω := Ω) (Y := X) i ⋙ FΩ) (bΩ : ∀ i, G i ⋙ inclusion (l := l) (Ω := Ω) (Y := X) i ≅ inclusion (l := l) (Ω := Ω) (Y := Y) i ⋙ GΩ) (finite_counit : ∀ (i j : Padic.FiniteCoefficientFields l Ω) (h : i ≤ j) (L : Stage l Ω Y i), (q i j h).hom.app ((G i).obj L) ≫ (F j).map ((b i j h).hom.app L) ≫ (adj j).counit.app ((stageTransition l Ω Y i j h).obj L) = (stageTransition l Ω Y i j h).map ((adj i).counit.app L)) (common_counit : ∀ (i : Padic.FiniteCoefficientFields l Ω) (L : Stage l Ω Y i), (qΩ i).hom.app ((G i).obj L) ≫ FΩ.map ((bΩ i).hom.app L) ≫ adjΩ.counit.app ((inclusion i).obj L) = (inclusion i).map ((adj i).counit.app L)) (scalar_assoc : ∀ (i j m : Padic.FiniteCoefficientFields l Ω) (h : i ≤ j) (k : j ≤ m) (K : Stage l Ω X i), (stageTransition l Ω Y j m k).map ((q i j h).hom.app K) ≫ (q j m k).hom.app ((stageTransition l Ω X i j h).obj K) ≫ (F m).map (((stageSystem l Ω X).assoc h k).hom.app K) = ((stageSystem l Ω Y).assoc h k).hom.app ((F i).obj K) ≫ (q i m (h.trans k)).hom.app K) (scalar_unit : ∀ (i : Padic.FiniteCoefficientFields l Ω) (K : Stage l Ω X i), (q i i le_rfl).hom.app K ≫ (F i).map ((sfCommonTransitionScalarUnit l Ω X i).hom.app K) = (sfCommonTransitionScalarUnit l Ω Y i).hom.app ((F i).obj K)) (representative_action : ∀ (i j m : Padic.FiniteCoefficientFields l Ω) (hi : i ≤ m) (hj : j ≤ m) (K : Stage l Ω X i) (L : Stage l Ω X j) (v : (stageTransition l Ω X i m hi).obj K ⟶ (stageTransition l Ω X j m hj).obj L), FΩ.map (ofHom ((inclusion i).obj K) ((inclusion j).obj L) m hi hj v) = (qΩ i).inv.app K ≫ ((stageSystem l Ω Y).transIso hi).inv.app ((F i).obj K) ≫ (inclusion m).map ((q i m hi).hom.app K) ≫ (inclusion m).map ((F m).map v) ≫ (inclusion m).map ((q j m hj).inv.app L) ≫ ((stageSystem l Ω Y).transIso hj).hom.app ((F j).obj L) ≫ (qΩ j).hom.app L) : (∀ (i j : Padic.FiniteCoefficientFields l Ω) (h : i ≤ j) (K : Stage l Ω X i), (inclusion j).map ((q i j h).hom.app K) ≫ (qΩ j).hom.app ((stageTransition l Ω X i j h).obj K) = ((stageSystem l Ω Y).transIso h).hom.app ((F i).obj K) ≫ (qΩ i).hom.app K ≫ FΩ.map (((stageSystem l Ω X).transIso h).inv.app K)) ∧ (∀ (i j : Padic.FiniteCoefficientFields l Ω) (h : i ≤ j) (L : Stage l Ω Y i), (inclusion j).map ((b i j h).hom.app L) ≫ (bΩ j).hom.app ((stageTransition l Ω Y i j h).obj L) = ((stageSystem l Ω X).transIso h).hom.app ((G i).obj L) ≫ (bΩ i).hom.app L ≫ GΩ.map (((stageSystem l Ω Y).transIso h).inv.app L))",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-33eb8cfba",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Node unchanged apart from its lean record; statement verbatim, one sorry. Clause check: ℓ, Ω (universe v) and schemes (universe u) are unrestricted. Stage, stageTransition, Pair, inclusion and transIso are the dependency's own constructions. q, b, qΩ, bΩ directions match the node. finite_counit and common_counit match ε F(b) q = T(ε). scalar_assoc and scalar_unit use the actual associator and unitor. representative_action expands q_i⁻¹ δ_i I_m F_m v δ_j⁻¹ q_j over all i, j, m (so it includes the inverse-transition representative at m = j). Both conclusions are the node's equations. Checked that the hypothesis agrees with how ι acts on maps, that conclusion 1 is derivable via scalar_assoc(h, le_rfl) plus the StageSystem cocycle, and that conclusion 2 follows by the mate argument. The helper sfCommonTransitionScalarUnit = eqToIso ≫ unitor is real data. Advisory: it duplicates OrdinaryFieldRealization.stageUnit, which is owned by a theorem node. No stronger hypotheses, no pro-étale substitute, docstrings and report sections present. No compile per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261025T164139-L-959939",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

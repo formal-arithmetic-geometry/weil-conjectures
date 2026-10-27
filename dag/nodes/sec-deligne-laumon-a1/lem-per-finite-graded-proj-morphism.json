@@ -238,20 +238,40 @@
   "module": "Sheaf.AlgebraicGeometry.FiniteGradedProjMorphism",
   "declaration": "AlgebraicGeometry.Proj.exists_isFinite_surjective_of_finite_graded",
   "file": "lean/Sheaf/AlgebraicGeometry/FiniteGradedProjMorphism.lean",
-  "statement": "theorem Proj.exists_isFinite_surjective_of_finite_graded {C A : Type u} [CommRing C] [CommRing A] (𝒞 : ℕ → AddSubgroup C) (𝒜 : ℕ → AddSubgroup A) [GradedRing 𝒞] [GradedRing 𝒜] (iota : 𝒞 →+*ᵍ 𝒜) (_hinj : Function.Injective iota) (_hft : (algebraMap (𝒞 0) C).FiniteType) (_hfinite : iota.toRingHom.Finite) : ∃ r : Proj 𝒜 ⟶ Proj 𝒞, IsFinite r ∧ Surjective r ∧ ∀ (d : ℕ) (hd : 0 < d) (f : C) (hf : f ∈ 𝒞 d), r ⁻¹ᵁ Proj.basicOpen 𝒞 f = Proj.basicOpen 𝒜 (iota f) ∧ Proj.awayι 𝒜 (iota f) (iota.2 hf) hd ≫ r = Spec.map (CommRingCat.ofHom (Away.map iota f)) ≫ Proj.awayι 𝒞 f hf hd",
+  "statement": "theorem Proj.exists_isFinite_surjective_of_finite_graded (ι : 𝒞 →+*ᵍ 𝒜) (hι : Function.Injective ι) (hC : (algebraMap (𝒞 0) C).FiniteType) (hA : ι.toRingHom.Finite) : ∃ r : Proj 𝒜 ⟶ Proj 𝒞, IsFinite r ∧ Surjective r ∧ (∀ (d : ℕ) (f : C) (hf : f ∈ 𝒞 d) (hd : 0 < d), r ⁻¹ᵁ Proj.basicOpen 𝒞 f = Proj.basicOpen 𝒜 (ι f)) ∧ (∀ (d : ℕ) (f : C) (hf : f ∈ 𝒞 d) (hd : 0 < d), Proj.awayι 𝒜 (ι f) (ι.map_mem hf) hd ≫ r = Spec.map (CommRingCat.ofHom (Away.map ι f)) ≫ Proj.awayι 𝒞 f hf hd)",
   "branch": "newtargets-dag",
-  "by": "Q155",
-  "date": "2026-10-19",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.FiniteGradedProjMorphism deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/FiniteGradedProjMorphism.lean",
+  "module": "Sheaf.AlgebraicGeometry.FiniteGradedProjMorphism",
+  "declaration": "AlgebraicGeometry.Proj.exists_isFinite_surjective_of_finite_graded",
+  "reason": "module deleted as dead (no target reaches it; this node is not reached either); the declaration exists nowhere else in lean/, so the node has no Lean statement"
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-92ff89627",
-  "group": "Q155",
+  "reviewer": "NT-stage2-cc-9e3cef2d0",
+  "group": "Q16",
   "result": "pass",
-  "note": "Clause-by-clause match: injective graded iota (𝒞 →+*ᵍ 𝒜), (algebraMap (𝒞 0) C).FiniteType, iota.toRingHom.Finite; ∃ r : Proj 𝒜 ⟶ Proj 𝒞 with IsFinite, Surjective, preimage of basicOpen f = basicOpen (iota f), and awayι chart square through Away.map (map_mk is c/f^m ↦ ι c/ι f^m). r is pinned uniquely because the charts cover. No C0=A0, Noetherian or other extra hypothesis; the shared universe u is forced by the Hom of schemes. Mathlib Proj.map needs the stronger irrelevant-ideal inclusion (k[x^2]⊂k[x] counterexample), so it is no duplicate. Edge cases (empty Proj, nilpotent f, degree-0 concentration) covered. sorry-only proof; docstrings carry source, blueprint and 7 steps; plain imports are the proof-dep mathlib_match modules (rule 7); lean.statement verbatim; only the lean field changed vs live. nt_compile --json clean, 4.7 s. Advisory: RingHom.Finite vs recorded Module.Finite."
+  "note": "Clause-by-clause match: ι : 𝒞 →+*ᵍ 𝒜 injective; (algebraMap (𝒞 0) C).FiniteType; ι.toRingHom.Finite (Module.Finite via ι); ∃ r : Proj 𝒜 ⟶ Proj 𝒞 with IsFinite, Surjective, r⁻¹ᵁ basicOpen f = basicOpen (ι f), and the awayι chart square through Away.map (map_mk = c/f^m ↦ ιc/ιf^m, direction checked). Covering charts fix r uniquely, so it is the canonical map. No C0=A0, Noetherian or Proj.map irrelevant-ideal hypothesis. Edge cases covered: empty Proj, nilpotent f, degree-0 grading. Only the lean field differs from live; statement verbatim; module and name absent live (earlier module removed as dead), no clash. Plain imports = proof_dep mathlib_match files. sorry-only; docstrings have source, blueprint and 7 steps. Not recompiled (no file changed); worker reports clean scompile, same statement passed Q155 nt_compile on 2026-10-19. Advisory: σ,τ share universe u (harmless)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [
+  "unreachable"
+ ]
 }

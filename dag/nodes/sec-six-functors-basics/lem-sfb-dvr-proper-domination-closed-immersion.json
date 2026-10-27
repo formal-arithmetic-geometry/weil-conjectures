@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-dvr-proper-domination-closed-immersion",
+ "kind": "statement",
+ "title": "DVR existence closes an immersion in a proper domination diagram",
+ "statement": "Let $X,Y,P,S$ be schemes [def-pc-scheme], and let $f:X\\to S$, $\\pi:Y\\to X$, $i:Y\\to P$, and $q:P\\to S$ be morphisms such that $qi=f\\pi$. Assume $\\pi$ is proper and $q$ is separated [def-weil-proper-morphism], $i$ is an immersion [def-weil-closed-immersion], $Y$ is quasi-compact (every open cover of its underlying space has a finite subcover), and $P$ is Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact. Assume also the following existence condition on $f$: for every discrete valuation ring $A$ [def-sc-discrete-valuation-ring] with fraction field $K$, and every pair $a:\\operatorname{Spec}K\\to X$, $b:\\operatorname{Spec}A\\to S$ [def-weil-affine-spectrum] with $fa=bj$, where $j:\\operatorname{Spec}K\\to\\operatorname{Spec}A$ comes from $A\\hookrightarrow K$, there exists $h:\\operatorname{Spec}A\\to X$ with $fh=b$ and $hj=a$. Then $i$ is a closed immersion [def-weil-closed-immersion]. No surjectivity of $\\pi$, separatedness of $f$, or uniqueness of its DVR lifts is assumed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equation-solid and final contradiction, extracted for an arbitrary Noetherian separated ambient scheme in place of projective space."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "pqf-def-locnoeth",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "$P$ is locally Noetherian by hypothesis, hence quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Since $Y$ is quasi-compact, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $i$ quasi-compact. An immersion is locally of finite type by [lem-weil-pbc-immersion-base-change-lft](2). Thus $i$ is of finite type by [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T5, lemma-immersion-locally-finite-type; properties.tex Tag 01OY, lemma-locally-Noetherian-quasi-separated; schemes.tex Tag 03GI, lemma-quasi-compact-permanence."
+   }
+  },
+  {
+   "text": "Suppose the image $E=i(|Y|)$ is not closed and choose $p\\in\\overline E\\setminus E$. Apply [lem-sfb-noetherian-image-boundary-dvr] to the finite-type map $i$ with locally Noetherian target $P$. Obtain a DVR $A$, fraction field $K$, maps $u:\\operatorname{Spec}K\\to Y$, $v:\\operatorname{Spec}A\\to P$, and $j:\\operatorname{Spec}K\\to\\operatorname{Spec}A$, with $iu=vj$ and $v(s_A)=p$.",
+   "uses": [
+    "lem-sfb-noetherian-image-boundary-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equation-solid and final contradiction; arbitrary separated ambient P."
+   }
+  },
+  {
+   "text": "Put $a=\\pi u$ and $b=qv$. The given compatibility yields $fa=f\\pi u=qiu=qvj=bj$. The assumed existence condition on $f$ gives $h:\\operatorname{Spec}A\\to X$ with $fh=b$ and $hj=a=\\pi u$. Thus $(u,h)$ is a commuting valuative square for $\\pi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equation-solid and final contradiction; arbitrary separated ambient P."
+   }
+  },
+  {
+   "text": "A DVR is a valuation ring by [def-sc-discrete-valuation-ring]. Apply [lemma-nagata-proper-valuative-criterion-existence-api] to the proper map $\\pi$ and the square $(u,h)$. Obtain $w:\\operatorname{Spec}A\\to Y$ with $\\pi w=h$ and $wj=u$. In particular $qiw=f\\pi w=fh=b=qv$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lemma-nagata-proper-valuative-criterion-existence-api"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equation-solid and final contradiction; arbitrary separated ambient P."
+   }
+  },
+  {
+   "text": "The maps $iw,v:\\operatorname{Spec}A\\to P$ are over the same map $b$ to $S$, and their generic restrictions agree: $iwj=iu=vj$. Apply [lemma-nagata-separated-valuation-lift-unique] to the separated map $q$ to obtain $iw=v$. At the closed point this gives $p=v(s_A)=i(w(s_A))\\in E$, contrary to the choice of $p$.",
+   "uses": [
+    "lemma-nagata-separated-valuation-lift-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equation-solid and final contradiction; arbitrary separated ambient P."
+   }
+  },
+  {
+   "text": "Therefore $i(|Y|)$ is closed in $P$. Since $i$ is an immersion, [lem-weil-pbc-immersion-closed-image-closed-immersion] implies that $i$ is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equation-solid and final contradiction; arbitrary separated ambient P."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-noetherian-image-boundary-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equation-solid and final contradiction; arbitrary separated ambient P."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact immersion into a Noetherian scheme is closed if it factors a proper morphism to a scheme satisfying existence for DVR squares over a separated target",
+   "results": "{\"t\": \"2026-10-22T06:02:56Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact immersion into a Noetherian scheme is closed if it factors a proper morphism to a scheme satisfying existence for DVR squares over a separated target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.QuasiCompact\"], \"digest\": \"75dcc350de5e3b0a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsClosedImmersion.of_isPreimmersion needs closed image; IsClosedImmersion.of_comp needs a closed-immersion composite; iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393-394) needs properness. UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:238) requires ALL valuation rings. None establishes closedness from the stated DVR-only domination diagram."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ii]mmersion.*[Vv]aluative|[Vv]aluative.*[Ii]mmersion|closedImmersion.*[Pp]roper|[Pp]roper.*closedImmersion",
+   "results": "{\"t\": \"2026-10-22T06:03:09Z\", \"tool\": \"grep\", \"query\": \"[Ii]mmersion.*[Vv]aluative|[Vv]aluative.*[Ii]mmersion|closedImmersion.*[Pp]roper|[Pp]roper.*closedImmersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 23, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"229529eb47fef350\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsClosedImmersion.of_isPreimmersion needs closed image; IsClosedImmersion.of_comp needs a closed-immersion composite; iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393-394) needs properness. UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:238) requires ALL valuation rings. None establishes closedness from the stated DVR-only domination diagram."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closedness of a quasi compact immersion into a Noetherian scheme using proper domination and existence of DVR lifts",
+   "results": "{\"t\": \"2026-10-22T06:03:10Z\", \"tool\": \"leansearch\", \"query\": \"Closedness of a quasi compact immersion into a Noetherian scheme using proper domination and existence of DVR lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\"], \"digest\": \"af952dfba33c671f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsClosedImmersion.of_isPreimmersion needs closed image; IsClosedImmersion.of_comp needs a closed-immersion composite; iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393-394) needs properness. UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:238) requires ALL valuation rings. None establishes closedness from the stated DVR-only domination diagram."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.ValuativeCriterion.Existence",
+   "results": "{\"t\": \"2026-10-22T06:03:10Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.ValuativeCriterion.Existence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsClosedImmersion.of_isPreimmersion needs closed image; IsClosedImmersion.of_comp needs a closed-immersion composite; iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393-394) needs properness. UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:238) requires ALL valuation rings. None establishes closedness from the stated DVR-only domination diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An immersion Y into a Noetherian S separated scheme P is closed when Y is proper over X and maps from traits lift to X",
+   "results": "{\"t\": \"2026-10-22T06:03:20Z\", \"tool\": \"leanfinder\", \"query\": \"An immersion Y into a Noetherian S separated scheme P is closed when Y is proper over X and maps from traits lift to X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\"], \"digest\": \"221b2a7682b1b224\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: IsClosedImmersion.of_isPreimmersion needs closed image; IsClosedImmersion.of_comp needs a closed-immersion composite; iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393-394) needs properness. UniversallyClosed.of_valuativeCriterion (ValuativeCriterion.lean:238) requires ALL valuation rings. None establishes closedness from the stated DVR-only domination diagram."
+  },
+  {
+   "tool": "grep",
+   "query": "immersion.*valuative|valuative.*immersion|immersion.*finiteType|finiteType.*immersion",
+   "results": "{\"t\": \"2026-10-23T04:12:17Z\", \"tool\": \"grep\", \"query\": \"immersion.*valuative|valuative.*immersion|immersion.*finiteType|finiteType.*immersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean\"], \"digest\": \"5729b36debff17b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned closed-image criterion assumes closedness already; of_comp assumes a closed-immersion composite; valuativeCriterion results require all valuation rings. No hit supplies DVR-only existence via this domination diagram."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact immersion into a Noetherian scheme has closed image when DVR lifts exist by proper domination",
+   "results": "{\"t\": \"2026-10-23T04:12:17Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact immersion into a Noetherian scheme has closed image when DVR lifts exist by proper domination\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.instQuasiCompactOfUniversallyClosed\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\"], \"digest\": \"f0afccbace001a48\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned closed-image criterion assumes closedness already; of_comp assumes a closed-immersion composite; valuativeCriterion results require all valuation rings. No hit supplies DVR-only existence via this domination diagram."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.ValuativeCriterion.Existence",
+   "results": "{\"t\": \"2026-10-23T04:12:17Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.ValuativeCriterion.Existence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned closed-image criterion assumes closedness already; of_comp assumes a closed-immersion composite; valuativeCriterion results require all valuation rings. No hit supplies DVR-only existence via this domination diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An immersion into a Noetherian separated S scheme is closed if its source is proper over an X satisfying existence of lifts from discrete valuation rings",
+   "results": "{\"t\": \"2026-10-23T04:12:18Z\", \"tool\": \"leanfinder\", \"query\": \"An immersion into a Noetherian separated S scheme is closed if its source is proper over an X satisfying existence of lifts from discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\"], \"digest\": \"516ba4f16e43b32b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned closed-image criterion assumes closedness already; of_comp assumes a closed-immersion composite; valuativeCriterion results require all valuation rings. No hit supplies DVR-only existence via this domination diagram."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper domination and DVR existence force the image of an immersion into a separated Noetherian ambient scheme to be closed",
+   "results": "{\"t\": \"2026-10-23T04:13:51Z\", \"tool\": \"leanfinder\", \"query\": \"Proper domination and DVR existence force the image of an immersion into a separated Noetherian ambient scheme to be closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_comp\", \"AlgebraicGeometry.IsImmersion.isLocallyClosed_range\", \"AlgebraicGeometry.IsClosedImmersion.base_closed\", \"AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range\"], \"digest\": \"ac02a0212b1c5737\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned closed-image criterion assumes closedness already; of_comp assumes a closed-immersion composite; valuativeCriterion results require all valuation rings. No hit supplies DVR-only existence via this domination diagram."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-dvr-properness",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; returned proof steps 6-7 and start of step 8: finite-type immersion, boundary DVR, two lifts and separated comparison",
+   "via": [
+    "lem-sfb-noetherian-dvr-properness",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dvr-proper-domination-closed-immersion",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Split the Stacks 0208 proper-domination contradiction into six steps using existing finite-type, boundary-DVR, valuative existence/uniqueness and closed-image nodes. Checked every cited statement and all hypotheses; no new nodes or Lean files. The source only needs separatedness of q and existence for f; no birationality, surjectivity of pi, or uniqueness for f is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Noetherian valuative properness test using discrete valuation rings; returned proof steps 6-7 and start of step 8: finite-type immersion, boundary DVR, two lifts and separated comparison; steps 1-6 realize the finite-type immersion, boundary DVR, two successive lifts, separated comparison, and closed-image conclusion of the extracted prerequisite.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-38e686748",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-38e686748 (reviewer sub-agent of L); spot-checked: I read Stacks limits.tex Tag 0208 (lemma-Noetherian-dvr-valuative-proper, lines 3927-4006) in full. The item takes out the core of the (4)=>(1) contradiction, with i:Y->P in place of X'->P^n_S, pi in place of X'->X and q in place of P^n_S->S. Birationality and surjectivity are not needed because existence is assumed for all DVR squares, and the uniqueness for the ambient map comes only from q being separated. There are 0 new nodes, the statement and stmt_deps are unchanged, and there is no re-split note. Every cited statement was opened. Step 1: locally-Noetherian implies quasi-separated (Mathlib leaf); qcqs-permanence (1) applies with Y quasi-compact and P quasi-separated; immersion-lft (2) and the finite-type definition give that i is of finite type. Step 2: lem-sfb-noetherian-image-boundary-dvr (same unit, its deps do not include the item, so no cycle) has exactly these hypotheses and gives A, K, u, v with iu=vj and v(s_A)=p. Step 3 is truly elementary and uses the item's own existence hypothesis. Step 4: the DVR definition records that a DVR is a valuation ring; proper-existence-api (Lean-closed via UniversallyClosed.eq_valuativeCriterion, and its blueprint_update is still fine for proper maps) gives w with pi w=h and wj=u. Step 5: separated-lift-unique (Lean-closed via IsSeparated.valuativeCriterion) applies to q, iw and v over b, so iw=v and p lies in the image, a contradiction. Step 6: an immersion with closed image is a closed immersion (Mathlib leaf). proof_deps equals the union of the uses; no SGA is cited. Edge cases checked: Y empty, i already a closed immersion, and the inclusion of G_m in A^1, which does not satisfy the existence hypothesis. Duplicate search over 0208 and DVR/closed-immersion nodes: the citer lem-sfb-noetherian-dvr-properness and lem-sfb-generic-dvr-properness-criterion are related but neither is a duplicate. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DvrProperDominationClosedImmersion",
+  "declaration": "AlgebraicGeometry.isClosedImmersion_of_proper_domination_of_dvr_lifts",
+  "file": "lean/Sheaf/AlgebraicGeometry/DvrProperDominationClosedImmersion.lean",
+  "statement": "theorem isClosedImmersion_of_proper_domination_of_dvr_lifts {X Y P S : Scheme.{u}} (f : X ⟶ S) (π : Y ⟶ X) (i : Y ⟶ P) (q : P ⟶ S) (comm : i ≫ q = π ≫ f) [IsProper π] [IsSeparated q] [IsImmersion i] [CompactSpace Y] [IsLocallyNoetherian P] [CompactSpace P] (hDVR : ∀ (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K] (a : Spec (CommRingCat.of K) ⟶ X) (b : Spec (CommRingCat.of A) ⟶ S), a ≫ f = Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ b → ∃ h : Spec (CommRingCat.of A) ⟶ X, h ≫ f = b ∧ Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ h = a) : IsClosedImmersion i",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b43fb936d",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Item lem-sfb-dvr-proper-domination-closed-immersion matches the node clause by clause: X Y P S : Scheme.{u}; f, π, i, q with the node's directions; comm : i ≫ q = π ≫ f (qi = fπ); [IsProper π] [IsSeparated q] [IsImmersion i] [CompactSpace Y] [IsLocallyNoetherian P] [CompactSpace P]; hDVR is existence only over DVR A and fraction field K, with a ≫ f = Spec.map(algebraMap) ≫ b → ∃ h, h ≫ f = b ∧ j ≫ h = a; conclusion IsClosedImmersion i. Composition orders checked. A and K in Type u only weaken a hypothesis, and the theorem stays true because the proof uses the universe-u DVR of exists_dvr_of_mem_closure_range_not_mem_range, whose binders and generic map are the same. Read against Stacks limits.tex 0208 (4)⇒(1). All six stmt_deps are Mathlib records used directly. No duplicate: isClosed_range_and_isClosedImmersion_of_valuativeFactorization is a different statement. Only the lean field changes against the live clone; the record is complete and its statement is verbatim in the file; no new nodes or dependency modules; live has no record yet. Docstrings carry source, blueprint id and the six proof steps; proof is sorry; lines ≤100; plain imports are proof-dependency modules. Report has Worker report and Second reading by Q34. No files changed, so no compile."
+ }
+}

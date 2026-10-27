@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-additive-derived-plus-unit-normalization",
+ "kind": "statement",
+ "title": "Unit-normalized full and bounded-below derived functors of an additive functor",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] with ordinary derived localizations $Q_{\\mathcal A},Q_{\\mathcal B}$ [def-weil-abstract-derived-category]. Assume $\\mathcal A$ has enough injectives [def-sp-injective-resolutions] and every cochain complex admits a quasi-isomorphism to a K-injective complex, meaning a complex $I$ such that every chain map from an acyclic complex to $I$ is null-homotopic. Let $F:\\mathcal A\\to\\mathcal B$ be additive [def-sp-left-exact-additive], with $F_K$ its degreewise functor on complexes modulo chain homotopy. Then $Q_{\\mathcal B}F_K$ has a total right derived pair $(RF,\\eta)$ as in [def-sfb-right-derived-functor]. For any quasi-isomorphism $s:C\\to I$ with $I$ K-injective, $\\eta_I$ is invertible and the canonical value isomorphism is\n$$RF(Q_{\\mathcal A}C)\\xrightarrow{RF(Q_{\\mathcal A}s)}RF(Q_{\\mathcal A}I)\\xrightarrow{\\eta_I^{-1}}Q_{\\mathcal B}(FI).$$\nLet $(R^+F,\\alpha)$ be the bounded-below right derived pair [lem-weil-pbc-right-derived-plus-injective], and let $\\iota_{\\mathcal A},\\iota_{\\mathcal B}$ denote the full inclusions of the bounded-below categories [def-weil-pbc-bounded-derived-subcategories]. There is a unique natural isomorphism\n$$\\theta:RF\\,\\iota_{\\mathcal A}\\xrightarrow{\\sim}\\iota_{\\mathcal B}R^+F$$\nsatisfying $\\theta_{Q^+C}\\eta_C=\\iota_{\\mathcal B}(\\alpha_C)$ for every bounded-below complex $C$, with the canonical localization identifications understood. In particular $RF$ carries $D^+(\\mathcal A)$ into $D^+(\\mathcal B)$. For every bounded-below degreewise injective complex $J$, both units are invertible and $\\theta_{Q^+J}=\\iota_{\\mathcal B}(\\alpha_J)\\eta_J^{-1}$; both derived values are computed by $FJ$. For every bounded-below injective resolution $s:C\\to J$, the same components satisfy\n$$\\theta_{Q^+C}=\\iota_{\\mathcal B}(R^+F(Q^+s))^{-1}\\,\\iota_{\\mathcal B}(\\alpha_J)\\,\\eta_J^{-1}\\,RF(Q_{\\mathcal A}s).$$\nThese formulas are independent of the injective representatives and natural for all derived morphisms. No left exactness of $F$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070K (lemma-enough-K-injectives-implies), 070I (lemma-K-injective), 070J (lemma-bounded-below-injectives-K-injective), 013K (lemma-injective-resolutions-exist); unit-normalized comparison of these constructions, extracted from returned item steps 3-5."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof": [
+  {
+   "text": "Use the universal property and K-injective unit invertibility of the recorded pair (RF, eta). Localization inverts any quasi-isomorphism s, so RF(Qh(s)) followed by eta_I inverse is invertible.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every bounded below degreewise injective complex J, bounded-below injectivity makes J K-injective. Thus eta_J is invertible. Let U be the restriction of RF to D+(A), and let eta+ be the restriction of eta. Mathlib HomotopyCategory.Plus.localizerMorphism_derives and LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso identify (U, eta+) as a right derived pair: the criterion tests exactly these invertible components on the injective derivability structure. This is the existing injective-resolution proof of bounded-below derivability, applied with target D(B). The underlying mathematical justification is the injective-resolution comparison of Tags 05TI and 05TH: every bounded below complex admits a quasi-isomorphism to an injective one, and the localization on injective complexes computes all derived maps. Mathlib packages precisely this criterion, not a new hypothesis.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put V = Rplus followed by the inclusion D+(B) -> D(B), with alpha+ obtained by whiskering alpha. The bounded-below derived unit alpha_J is invertible on degreewise injectives, and its included image is invertible. Apply the same Mathlib injective derivability criterion to obtain a right derived pair (V, alpha+). Functor.rightDerivedUnique now supplies theta : U isomorphic to V. Its rightDerivedNatTrans_app equation gives eta_C followed by theta_(Q+C) = inclusion(alpha_C) on every bounded-below complex C. The rightDerived_ext uniqueness theorem shows that every other unit-normalized comparison equals theta.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The value V(X) lies in D+(B). Transport this property across theta_X inverse using closure under isomorphisms. On an injective J, cancel eta_J in the unit equation to get theta_(Q+J) = eta_J inverse followed by inclusion(alpha_J).",
+   "uses": [
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a bounded-below quasi-isomorphism s:C -> J, localization inverts Q+(s), hence V(Q+(s)) is invertible. Naturality of theta says theta_C followed by V(Q+(s)) = U(Q+(s)) followed by theta_J. Cancel V(Q+(s)) and substitute the injective formula. The same calculation for any isomorphism q:X -> Q+(J) yields the representative formula, using q inverse instead of the inverse image of s. This proves both formulas for every resolution and representative without choosing either.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the full-category formula, naturality of eta at f:I -> J gives eta_I inverse followed by Qh(F(f)) = RF(Qh(f)) followed by eta_J inverse. Precompose by RF(Qh(s)), use functoriality and the assumed equation Qh(s) followed by Qh(f) = u followed by Qh(t), then reassociate. This proves the stated equality for every derived u and every f with that equation; no lift needs to be chosen.",
+   "uses": [
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-pbc-bounded-derived-subcategories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070K, 070J, 05TI and 05TH; Lean implementation uses Mathlib injective derivability (DerivabilityStructureInjectives.lean, localizerMorphism_derives; Derives.lean, isRightDerivedFunctor_of_isIso) and rightDerivedUnique/rightDerived_ext. The two units are tested on injectives and compared by their universal properties; all value formulas are naturality and cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusCompatibility|rightDerivedFunctorPlus.*unit|unit.*rightDerivedFunctorPlus",
+   "results": "{\"t\": \"2026-10-22T06:20:07Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorPlusCompatibility|rightDerivedFunctorPlus.*unit|unit.*rightDerivedFunctorPlus\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"b02070319bf4d351\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: classical objectwise derived functors and bounded-below/K-injective infrastructure do not state the full unit-normalized comparison for an arbitrary additive functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlusCompatibility\"",
+   "results": "{\"t\": \"2026-10-22T06:20:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedFunctorPlusCompatibility\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: classical objectwise derived functors and bounded-below/K-injective infrastructure do not state the full unit-normalized comparison for an arbitrary additive functor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical isomorphism between unbounded K injective right derived functor and bounded below right derived functor compatible with their units",
+   "results": "{\"t\": \"2026-10-22T06:20:08Z\", \"tool\": \"leansearch\", \"query\": \"Canonical isomorphism between unbounded K injective right derived functor and bounded below right derived functor compatible with their units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\"], \"digest\": \"4ad05ba5176d814b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: classical objectwise derived functors and bounded-below/K-injective infrastructure do not state the full unit-normalized comparison for an arbitrary additive functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an additive functor between abelian categories with enough injectives and K injective resolutions the total right derived functor restricts to the bounded below right derived functor by a natural isomorphism respecting the derived units",
+   "results": "{\"t\": \"2026-10-22T06:20:16Z\", \"tool\": \"leanfinder\", \"query\": \"For an additive functor between abelian categories with enough injectives and K injective resolutions the total right derived functor restricts to the bounded below right derived functor by a natural isomorphism respecting the derived units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\"], \"digest\": \"99080ad625ae73be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: classical objectwise derived functors and bounded-below/K-injective infrastructure do not state the full unit-normalized comparison for an arbitrary additive functor"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedUnique|rightDerived.*[Uu]nit|isKInjective_of_injective",
+   "results": "{\"t\": \"2026-10-22T06:21:43Z\", \"tool\": \"grep\", \"query\": \"rightDerivedUnique|rightDerived.*[Uu]nit|isKInjective_of_injective\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"d5edc2af6985009a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: classical objectwise derived functors and bounded-below/K-injective infrastructure do not state the full unit-normalized comparison for an arbitrary additive functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\", \"rightDerivedUnique\"",
+   "results": "{\"t\": \"2026-10-22T06:21:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRightDerivedFunctor\\\", \\\"rightDerivedUnique\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: classical objectwise derived functors and bounded-below/K-injective infrastructure do not state the full unit-normalized comparison for an arbitrary additive functor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit normalized comparison of total right derived localization with bounded below injective complexes independent of choice of injective resolution",
+   "results": "{\"t\": \"2026-10-22T06:21:53Z\", \"tool\": \"leanfinder\", \"query\": \"Unit normalized comparison of total right derived localization with bounded below injective complexes independent of choice of injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived_map_eq\", \"HasDerivedCategory.standard\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.Functor.rightDerived\"], \"digest\": \"f8e4581544dda626\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: classical objectwise derived functors and bounded-below/K-injective infrastructure do not state the full unit-normalized comparison for an arbitrary additive functor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedUnique\"",
+   "results": "{\"t\": \"2026-10-22T10:34:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"rightDerivedUnique\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedUnique\"], \"digest\": \"bcc8e09dd9dc5198\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rightDerivedUnique assumes both derived pairs already exist for the same localization; proving that the restrictions are derived pairs is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusCompatibility|rightDerivedUnique|isKInjective_of_injective",
+   "results": "{\"t\": \"2026-10-22T10:34:23Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorPlusCompatibility|rightDerivedUnique|isKInjective_of_injective\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\"], \"digest\": \"86e900dc52c6ef4f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide bounded-below derived functors and K-injectivity of injective complexes, but no full unit-normalized comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unit compatible natural isomorphism between unbounded K-injective right derived functor and bounded below injective right derived functor of an additive functor",
+   "results": "{\"t\": \"2026-10-22T10:34:23Z\", \"tool\": \"leansearch\", \"query\": \"Unit compatible natural isomorphism between unbounded K-injective right derived functor and bounded below injective right derived functor of an additive functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.Functor.leftDerivedNatIso\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\"], \"digest\": \"bb5f226bb841e3ab\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned classical rightDerived and degree-zero comparisons do not compare the full and bounded-below total derived pairs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor between abelian categories with arbitrary quasi-isomorphisms to K-injective resolutions has an unbounded right derived functor whose restriction to bounded below complexes is naturally isomorphic to the injective right derived functor compatibly with both units",
+   "results": "{\"t\": \"2026-10-22T10:34:24Z\", \"tool\": \"leanfinder\", \"query\": \"An additive functor between abelian categories with arbitrary quasi-isomorphisms to K-injective resolutions has an unbounded right derived functor whose restriction to bounded below complexes is naturally isomorphic to the injective right derived functor compatibly with both units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.Functor.toRightDerivedZero\"], \"digest\": \"cc41b431f6d5af40\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned classical rightDerived comparisons or exact-functor localization require different objects or extra exactness; they do not state this additive unit-normalized comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total right derived functors computed on K injectives compare with bounded below injective resolutions by a unique unit preserving natural isomorphism",
+   "results": "{\"t\": \"2026-10-22T10:34:57Z\", \"tool\": \"leanfinder\", \"query\": \"Total right derived functors computed on K injectives compare with bounded below injective resolutions by a unique unit preserving natural isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\"], \"digest\": \"122f1931fba0fad7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned classical rightDerived comparisons or exact-functor localization require different objects or extra exactness; they do not state this additive unit-normalized comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlus|rightDerivedFunctorUnit|HasKInjectiveResolutions",
+   "results": "{\"t\": \"2026-10-22T10:34:57Z\", \"tool\": \"grep\", \"query\": \"rightDerivedFunctorPlus|rightDerivedFunctorUnit|HasKInjectiveResolutions\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"8ff5e85a26ff240b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide bounded-below derived functors and K-injectivity of injective complexes, but no full unit-normalized comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ordinary-proetale-direct-image-plus-comparison",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Finite-coefficient internal-Hom finiteness sentence after the reduction-modulo-varpi display: Lemma 6.7.2, finite-field specialization, with Lemma 5.4.3 and Theorem 6.7.1; expanded using the existing arbitrary-field étale finiteness node. Ordinary finite-field direct-image input: identify the full K-injective functors with their bounded-below comparison before returning to the pro-etale site (returned split steps 3, 5, 6 and the comparison arrow of step 7). Returned ordinary-comparison steps 3-5: additive homotopy functor, K-injective computation, bounded-below injective models, and the natural unit equation.",
+   "via": [
+    "lem-sfb-ordinary-proetale-direct-image-plus-comparison",
+    "lem-sfb-finite-field-proetale-direct-image",
+    "lem-sfb-finite-field-internal-hom-finiteness"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-additive-derived-plus-unit-normalization",
+  "worker": "stage1",
+  "summary": "NE: preserved the statement and arbitrary-quasi-isomorphism K-injective hypothesis. Proved additive cone exactness and total existence, then constructed the comparison explicitly on injective representatives. Wrote out derived naturality, change-of-representative cancellation, unit normalization, uniqueness and the formula for any injective resolution. Reused six existing homological-algebra results; no new nodes. No Lean or compiler use.",
+  "blueprint": "Makes precise the abstract additive derived-functor comparison extracted from returned ordinary-comparison steps 3-5, underneath lem-sfb-dc-hom-preserves, via the ordinary pro-etale direct-image/finite-field/internal-Hom finiteness chain already recorded in blueprint.from. Supplies the full-to-bounded-below identification before the pro-etale comparison; no change to the ancestor statement or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-homotopy-category-triangulated",
+    "why": "Supplies the triangulation of K(A) and exactness of its localization, used for the additive cone calculation; this is a general homological-algebra tool, not a replacement of the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Supplies existence and invertibility of the total derived unit under arbitrary quasi-isomorphisms to K-injectives, with no stronger monomorphic-resolution assumption; the present unit does not prove this abstract tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Supplies the bounded-below derived pair and its unit on injectives for any additive functor; a generic tool needed to compare the two existing constructions."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Identifies bounded-below injective complexes as K-injective so that the two units are invertible on the same representatives."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Supplies enough bounded-below injective representatives for every cohomologically bounded-below derived object."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Supplies bijectivity of localization on maps into K-injectives, including the bounded-below case; needed to handle all derived morphisms and compare representatives."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NE-750b75148",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-750b75148 (reviewer sub-agent of L); spot-checked: S1, 0 new nodes, no Lean; item statement and stmt_deps unchanged; this delivery adds an 8-step proof to the Q46-created item (no re-split note applies). I read every cited statement. 070K (derived.tex l.9767) takes exactly the item's hypothesis (an exact F:K(A)->T plus quasi-isomorphisms to K-injectives), and step 1 shows Q_B F_K is exact using only additivity (cone, shift, sign of -p). I verified each equation chain: step 2 V(Qh)a_J=a_J'U(Qh); step 3 naturality via lifts into the K-injective J_Y (070I, any source); step 4 choice independence; step 5 cancels only V(q), never eta_C or alpha_C; step 6 uniqueness and D+ preservation (strictly full); step 7 rearranges exactly to the stated formula; step 8 c_t RF(u)=Q(Fh)c_s, with h a homotopy equivalence. Tags 070K/070I/070J/013K/05TH/05TI/014S/05RT checked in tags/tags. Edge cases checked: F=0, F=id, the non-left-exact -⊗Z/2. No duplicate: the src plus-compatibility leaf needs HasKInjectiveResolutions; the sbc base-change, exact-functor and trf adjunction nodes differ. No SGA. The 6 generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdditiveDerivedPlusUnitNormalization",
+  "declaration": "CategoryTheory.Functor.additiveDerivedPlus_unit_normalization",
+  "file": "lean/Sheaf/CategoryTheory/AdditiveDerivedPlusUnitNormalization.lean",
+  "statement": "theorem additiveDerivedPlus_unit_normalization (Rplus : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) (α : F.mapHomotopyCategoryPlus ⋙ DerivedCategory.Plus.Qh ⟶ DerivedCategory.Plus.Qh ⋙ Rplus) [Rplus.IsRightDerivedFunctor α (HomotopyCategory.Plus.quasiIso A)] : (∀ G : DerivedCategory A ⥤ DerivedCategory B, Function.Bijective (fun β : F.rightDerivedFunctorOfQuasiIsoResolutions h ⟶ G ↦ F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h ≫ Functor.whiskerLeft DerivedCategory.Qh β)) ∧ (∀ (I : CochainComplex A ℤ) (_ : I.IsKInjective), ∃ hη : IsIso ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj I)), ∀ (K : HomotopyCategory A (ComplexShape.up ℤ)) (s : K ⟶ (HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj I) (_ : HomotopyCategory.quasiIso A (ComplexShape.up ℤ) s), IsIso ((F.rightDerivedFunctorOfQuasiIsoResolutions h).map (DerivedCategory.Qh.map s) ≫ @CategoryTheory.inv _ _ _ _ ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj I)) hη) ∧ ∀ (J : CochainComplex A ℤ) (_ : J.IsKInjective) (hη' : IsIso ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj J))) (L : HomotopyCategory A (ComplexShape.up ℤ)) (t : L ⟶ (HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj J) (_ : HomotopyCategory.quasiIso A (ComplexShape.up ℤ) t) (u : DerivedCategory.Qh.obj K ⟶ DerivedCategory.Qh.obj L) (f : (HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj I ⟶ (HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj J), DerivedCategory.Qh.map s ≫ DerivedCategory.Qh.map f = u ≫ DerivedCategory.Qh.map t → (F.rightDerivedFunctorOfQuasiIsoResolutions h).map (DerivedCategory.Qh.map s) ≫ @CategoryTheory.inv _ _ _ _ ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj I)) hη ≫ DerivedCategory.Qh.map ((F.mapHomotopyCategory (ComplexShape.up ℤ)).map f) = (F.rightDerivedFunctorOfQuasiIsoResolutions h).map u ≫ (F.rightDerivedFunctorOfQuasiIsoResolutions h).map (DerivedCategory.Qh.map t) ≫ @CategoryTheory.inv _ _ _ _ ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app ((HomotopyCategory.quotient A (ComplexShape.up ℤ)).obj J)) hη') ∧ ∃ θ : DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctorOfQuasiIsoResolutions h ≅ Rplus ⋙ DerivedCategory.Plus.ι, (∀ K : HomotopyCategory.Plus A, (F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app K.obj ≫ θ.hom.app (DerivedCategory.Plus.Qh.obj K) = DerivedCategory.Plus.ι.map (α.app K)) ∧ (∀ θ' : DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctorOfQuasiIsoResolutions h ≅ Rplus ⋙ DerivedCategory.Plus.ι, (∀ K : HomotopyCategory.Plus A, (F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app K.obj ≫ θ'.hom.app (DerivedCategory.Plus.Qh.obj K) = DerivedCategory.Plus.ι.map (α.app K)) → θ' = θ) ∧ (∀ X : DerivedCategory.Plus A, (DerivedCategory.TStructure.t (C := B)).plus ((F.rightDerivedFunctorOfQuasiIsoResolutions h).obj X.obj)) ∧ (∀ J : HomotopyCategory.Plus A, (∀ n : ℤ, Injective (J.obj.as.X n)) → ∃ (hη : IsIso ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app J.obj)) (_ : IsIso (α.app J)), θ.hom.app (DerivedCategory.Plus.Qh.obj J) = @CategoryTheory.inv _ _ _ _ ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app J.obj) hη ≫ DerivedCategory.Plus.ι.map (α.app J) ∧ (∀ (K : HomotopyCategory.Plus A) (s : K ⟶ J) (_ : HomotopyCategory.Plus.quasiIso A s), ∃ hs : IsIso (DerivedCategory.Plus.ι.map (Rplus.map (DerivedCategory.Plus.Qh.map s))), θ.hom.app (DerivedCategory.Plus.Qh.obj K) = (F.rightDerivedFunctorOfQuasiIsoResolutions h).map (DerivedCategory.Qh.map s.hom) ≫ @CategoryTheory.inv _ _ _ _ ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app J.obj) hη ≫ DerivedCategory.Plus.ι.map (α.app J) ≫ @CategoryTheory.inv _ _ _ _ (DerivedCategory.Plus.ι.map (Rplus.map (DerivedCategory.Plus.Qh.map s))) hs) ∧ (∀ (X : DerivedCategory.Plus A) (q : X ≅ DerivedCategory.Plus.Qh.obj J), θ.hom.app X = (F.rightDerivedFunctorOfQuasiIsoResolutions h).map (DerivedCategory.Plus.ι.map q.hom) ≫ @CategoryTheory.inv _ _ _ _ ((F.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).app J.obj) hη ≫ DerivedCategory.Plus.ι.map (α.app J) ≫ DerivedCategory.Plus.ι.map (Rplus.map q.inv)))",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the recorded arbitrary-quasi-isomorphism derived pair, without monomorphic replacements. The bounded-below pair Rplus, alpha is arbitrary with its right-derived universal property. Formulas are written in the homotopy categories, with the canonical localization identifications understood as in the node; composition is in Lean order."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d26abb9ac",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Only the lean field changed vs live; statement verbatim; no name collision. Hypotheses: abelian A,B with independent universes, HasDerivedCategory wA/wB, EnoughInjectives A, F.Additive only, h identical to the recorded RightDerivedFunctorOfQuasiIsoResolutions (no mono). Rplus/alpha generalised to any IsRightDerivedFunctor pair (valid; Mathlib pair is an instance, clause 3 of the dep gives equivalence). All clauses checked true and matching the node in Lean order: K-injective value iso RF(Qs)≫η_I⁻¹, full-value naturality c_s≫Q(Ff)=RF(u)≫c_t (step 8), θ with unit equation on every K⁺ (no unit inverted), uniqueness among natural isos, D⁺ preservation via t.plus, injective formula η_J⁻¹≫ι(α_J), resolution formula, representative independence via any q:X≅Q⁺J. Plus.Qh/ι identifications are definitional (QhCompιIsoιCompQh = Iso.refl). No duplicate (upstream PlusCompatibility needs monic HasKInjectiveResolutions); citers are proof_deps only. Docstrings carry source and 8 steps; sorry only; no pro-etale substitute. Advisory: clause 1 and the IsIso η_I part restate proved dep theorems, following the node's own recall sentence; item content fully stated on the actual pair. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261023T103421-L-3135749",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

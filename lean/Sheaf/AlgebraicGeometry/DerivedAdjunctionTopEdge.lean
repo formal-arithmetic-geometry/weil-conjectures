@@ -5,156 +5,59 @@ Authors: SHEAF group NI
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedPullbackTopCohomology
-public import Sheaf.AlgebraicGeometry.UnboundedDirectImageSectionPresheaf
-public import WeilConjectures.AlgebraicGeometry.PinnedDerivedAdjunctionShifts
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-public import Mathlib.CategoryTheory.Whiskering
-import WeilConjectures.AlgebraicGeometry.RingedSpaceSheafificationCohomology
-import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
-import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleAdjunctionTranspose
+public import Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdgeData
+import Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdgeLocalCalculation
 
-/-! # The top-cohomology edge and the derived adjunction
-
-Source: Stacks Project, cohomology.tex, Tags 0BKJ, 0D5X and 079W; derived.tex,
-Tags 08J5, 0149 and 06XS. The adjunct equality is the DAG's agent assembly
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge).
-
-All local comparisons below use the existing universal right-derived units on the
-same K-injective representative. In particular they retain the local-class normalization.
-The theorem specifies the edge by its sheafification equation before identifying adjuncts.
+/-! # Top cohomology of the derived adjunction
+The normalized local edge is identified with the counit on an upper truncation.
+Adjunction naturality then gives its action on every bounded-above source.
+Source: Stacks, derived.tex, Tags 08J5 and 05TC; cohomology.tex, Tags 079W and 0BKJ.
 -/
 
 @[expose] public section
 set_option autoImplicit false
-set_option relaxedAutoImplicit false
 set_option synthInstance.maxSize 2048
-
 universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 noncomputable section
 namespace AlgebraicGeometry
 
-namespace RingedSpace
+private theorem transpose_top_naturality
+    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
+    (L : D ⥤ E) (R : E ⥤ D) (l : A ⥤ B) (r : B ⥤ A)
+    (adj : L ⊣ R) (a : l ⊣ r) (H : D ⥤ A) (H' : E ⥤ B)
+    {C P : D} {K : E} (f : C ⟶ P) (d : L.obj P ⟶ K)
+    (kC : H'.obj (L.obj C) ⟶ l.obj (H.obj C))
+    (kP : H'.obj (L.obj P) ⟶ l.obj (H.obj P)) [IsIso kC] [IsIso kP]
+    (hk : H'.map (L.map f) ≫ kP = kC ≫ l.map (H.map f)) :
+    a.homEquiv _ _ (inv kC ≫ H'.map ((adj.homEquiv _ _).symm
+        (f ≫ adj.homEquiv _ _ d))) =
+      H.map f ≫ a.homEquiv _ _ (inv kP ≫ H'.map d) := by
+  have hi : inv kC ≫ H'.map (L.map f) = l.map (H.map f) ≫ inv kP := by
+    apply (cancel_mono kP).1
+    simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id,
+      IsIso.inv_hom_id_assoc] using congrArg (fun z ↦ inv kC ≫ z) hk
+  rw [adj.homEquiv_naturality_left_symm, Equiv.symm_apply_apply, H'.map_comp]
+  rw [← Category.assoc, hi, Category.assoc, a.homEquiv_naturality_left]
 
-variable (X : RingedSpace.{u})
-  [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
-
-/-- A fixed K-injective representative, using the published functorial resolution.
-Source: Stacks, Tag 079V (blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
-abbrev topEdgeResolution (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :=
-  (CochainComplex.kInjectiveResolutionFunctor.{u} (SheafOfModules.{u} (moduleRings X))).obj
-    (DerivedCategory.Q.objPreimage K)
-
-/-- The canonical identification of that representative with K, induced by the resolution
-quasi-isomorphism. Source: Stacks, Tag 079V
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
-def topEdgeResolutionIso (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
-    DerivedCategory.Q.obj (topEdgeResolution X K) ≅ K :=
-  let r := (CochainComplex.toKInjectiveResolution.{u}
-    (SheafOfModules.{u} (moduleRings X))).app (DerivedCategory.Q.objPreimage K)
-  letI : QuasiIso r :=
-    (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ _).2
-  (asIso (DerivedCategory.Q.map r)).symm ≪≫ DerivedCategory.Q.objObjPreimageIso K
-
-/-- H^q of local sections computed on the fixed representative. Both isomorphisms are
-canonical derived-unit comparisons. Source: Stacks, Tags 0BKJ and 0D5W
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
-def topEdgeLocalModel (q : ℤ)
-    (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
-    (localHypercohomologyPresheaf X q).obj K ≅
-      (((localAbelianSections X).mapHomologicalComplex (ComplexShape.up ℤ)).obj
-        (topEdgeResolution X K)).homology q :=
-  (localHypercohomologyPresheaf X q).mapIso (topEdgeResolutionIso X K).symm ≪≫
-    (DerivedCategory.homologyFunctor _ q).mapIso
-      ((localAbelianSections X).rightDerivedFunctorOfQuasiIsoResolutionsObjIso
-        (localSectionsEnoughKInjectives X) (𝟙 (topEdgeResolution X K))) ≪≫
-    (DerivedCategory.homologyFunctorFactors _ q).app _
-
-/-- The canonical local-class map Θ, namely the abelian sheafification unit followed by
-its fixed cohomology-sheaf identification. Source: Stacks, Tag 0BKJ
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
-def topEdgeLocalClass (q : ℤ)
-    (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
-    (localHypercohomologyPresheaf X q).obj K ⟶
-      (localAbelianSections X).obj ((DerivedCategory.homologyFunctor _ q).obj K) :=
-  (sheafificationAdjunction (Opens.grothendieckTopology X) AddCommGrpCat.{u}).unit.app _ ≫
-    (sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).map
-      (localHypercohomologySheafificationAt q K).hom
-
-variable {X} {Y : RingedSpace.{u}}
-  [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))]
-
-/-- Transport between the two published right-derived direct images, by comparing both
-units on the same K-injective representative. Source: Stacks, Tags 079V and 0D5W
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
-def topEdgeDirectImageComparison (g : X ⟶ Y)
-    (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
-    (sectionDerivedDirectImage g).obj K ≅ (derivedModuleDirectImage g).obj K :=
-  (sectionDerivedDirectImage g).mapIso (topEdgeResolutionIso X K).symm ≪≫
-    (moduleDirectImage g).rightDerivedFunctorOfQuasiIsoResolutionsObjIso
-      (localSectionsEnoughKInjectives X) (𝟙 (topEdgeResolution X K)) ≪≫
-    ((derivedModuleDirectImage g).mapIso (topEdgeResolutionIso X K).symm ≪≫
-      (moduleDirectImage g).rightDerivedFunctorObjQIso (topEdgeResolution X K)).symm
-
-/-- The inverse-open local cohomology presheaf computed on the same representative.
-Source: Stacks, Tag 0D5X (blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
-def topEdgeInverseModel (g : X ⟶ Y) (q : ℤ)
-    (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
-    (inverseOpenHypercohomologyPresheaf g q).obj K ≅
-      ((((moduleDirectImage g ⋙ localAbelianSections Y).mapHomologicalComplex
-        (ComplexShape.up ℤ)).obj (topEdgeResolution X K)).homology q) :=
-  (inverseOpenHypercohomologyPresheaf g q).mapIso (topEdgeResolutionIso X K).symm ≪≫
-    (DerivedCategory.homologyFunctor _ q).mapIso
-      ((moduleDirectImage g ⋙ localAbelianSections Y).rightDerivedFunctorOfQuasiIsoResolutionsObjIso
-          (localSectionsEnoughKInjectives X) (𝟙 (topEdgeResolution X K))) ≪≫
-    (DerivedCategory.homologyFunctorFactors _ q).app _
-
-/-- The local derived-sections isomorphism λ, in the direction used by the edge.
-The selected presheaf isomorphism is uniquely fixed by its stated hom transformation.
-Source: Stacks, Tags 0D5W and 0D5X
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
-def topEdgeLocalLeray (g : X ⟶ Y) (q : ℤ)
-    (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
-    (localHypercohomologyPresheaf Y q).obj ((derivedModuleDirectImage g).obj K) ≅
-      (inverseOpenHypercohomologyPresheaf g q).obj K :=
-  (localHypercohomologyPresheaf Y q).mapIso (topEdgeDirectImageComparison g K).symm ≪≫
-    (Classical.choose (unboundedDirectImage_sectionPresheaf g q)).symm.app K
-
-/-- Θ on inverse-image opens. Exact precomposition commutes with homology; the two
-model comparisons then identify H^q(g^-1 V,K) with the corresponding local sections of K.
-Source: Stacks, Tags 0BKJ and 0D5X
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
-def topEdgeInverseLocalClass (g : X ⟶ Y) (q : ℤ)
-    (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
-    (inverseOpenHypercohomologyPresheaf g q).obj K ⟶
-      (localAbelianSections Y).obj
-        ((moduleDirectImage g).obj ((DerivedCategory.homologyFunctor _ q).obj K)) :=
-  (topEdgeInverseModel g q K).hom ≫
-    (((Functor.whiskeringLeft (Opens Y)ᵒᵖ (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj
-      (Opens.map g.hom.base).op).mapHomologicalComplexHomologyIso
-        (ComplexShape.up ℤ) q).hom.app
-          (((localAbelianSections X).mapHomologicalComplex (ComplexShape.up ℤ)).obj
-            (topEdgeResolution X K)) ≫
-    ((Functor.whiskeringLeft (Opens Y)ᵒᵖ (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj
-      (Opens.map g.hom.base).op).map
-        ((topEdgeLocalModel X q K).inv ≫ topEdgeLocalClass X q K)
-
-end RingedSpace
+private theorem sheafification_edge_ext
+    {V : Type*} [Category V] (J : GrothendieckTopology V)
+    [HasWeakSheafify J AddCommGrpCat.{u}]
+    (P : Vᵒᵖ ⥤ AddCommGrpCat.{u}) (M N : Sheaf J AddCommGrpCat.{u})
+    (e : (presheafToSheaf J AddCommGrpCat.{u}).obj P ≅ M)
+    (a b : M ⟶ N)
+    (h : (sheafificationAdjunction J AddCommGrpCat.{u}).unit.app P ≫
+        (sheafToPresheaf J AddCommGrpCat.{u}).map e.hom ≫
+        (sheafToPresheaf J AddCommGrpCat.{u}).map a =
+      (sheafificationAdjunction J AddCommGrpCat.{u}).unit.app P ≫
+        (sheafToPresheaf J AddCommGrpCat.{u}).map e.hom ≫
+        (sheafToPresheaf J AddCommGrpCat.{u}).map b) : a = b := by
+  apply (cancel_epi e.hom).1
+  apply ((sheafificationAdjunction J AddCommGrpCat.{u}).homEquiv _ _).injective
+  simpa only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc] using h
 
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-
-/-- The inverse of the already recorded canonical top comparison κ.
-Source: Stacks, Tag 05TC (blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
-def topEdgePullbackInverse {T S : Scheme.{u}} (g : T ⟶ S)
-    (q : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE q) :=
-  letI := (derivedPullback_topCohomology g q C hC).choose_spec.2.1
-  inv (derivedPullbackTopCohomology g q C hC)
 
 /-- The pinned derived adjunction induces the ordinary tensor-pullback adjunction in top
 cohomology, with precisely the local-class edge e. The existential unique map is the
@@ -163,27 +66,16 @@ Source: Stacks, cohomology.tex, Tags 0BKJ, 0D5X and 079W; derived.tex, Tags 08J5
 06XS. The adjunct equality is the agent refinement in the DAG
 (blueprint: lem-weil-pbc-derived-adjunction-top-edge).
 
-Proof:
-1. Naturality of Θ and λ and module sheafification give the naturality of e. All
-section maps are linear via g-sharp. Sheafification makes its defining equation unique.
-2. On M[-q], the single direct-image comparison sends m to its resolution cocycle.
-The maps λ and Θ send this to the class of that same m; hence e H^q(u)=id.
-3. Put A=Lg*C, M=H^q(K), J=τ≥q K. The standard triangles give M[-q]→J→τ≥q+1 J
-and τ≤q-1 A→A→H^q(A)[-q], with A≤q by the pullback top-cohomology theorem.
-4. Orthogonality and exactness of contravariant Hom factor every A→J through
-H^q(A)[-q]; covariant Hom exactness factors the result through M[-q]→J.
-5. Shifted full faithfulness of the single functor shows that this factor is the
-single of H^q of the original map. Thus maps A→J are determined by H^q.
-6. Set a=H^q(d)κ^-1 and let b be its ordinary adjunct. The composite v of Lg* of
-the top projection with the pinned single comparison has H^q(v)=κ. Consequently
-jd=i a[-q]v, since both sides have the same top cohomology.
-7. The normalized single transpose at the identity identifies the pinned comparison
-with that of the top-cohomology theorem. The single transpose, pinned adjunction shifts,
-pinned counit shifts and adjunction naturality give
-Rg*(j)α=Rg*(i) u b[-q] τ_C.
-8. Apply H^q and e. Naturality from step 1, normalization from step 2 and the identity
-actions of i,j,τ_C on H^q give e H^q(α)=b. This is the displayed equality.
-The argument allows arbitrary integer q, non-flat g, zero modules and empty opens. -/
+Proof: Put P = τ≤q Rg_*K with inclusion i : P → Rg_*K; H^q(i) is invertible. Take for e
+the truncated-counit edge: H^q(i)⁻¹ followed by the ordinary adjunct of κ_P⁻¹ H^q(d₀), where
+d₀ is the derived transpose of i. Its local-class equation is
+`topEdgeTruncatedCounit_localClass`. For d : Lg*C → K with C ≤ q, its adjunct factors as
+f ≫ i through P; adjunction naturality writes d = Lg*(f) ≫ d₀, and naturality of κ with
+ordinary adjunction naturality give the displayed equality after cancelling H^q(i).
+Uniqueness: Θ is the sheafification unit followed by an isomorphism, so two maps agreeing
+after Θ on every open are equal; forgetting module structure is faithful. The lower bound
+on K is not used.
+-/
 theorem derivedAdjunction_topEdge {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE q)
     (K : schemeDerivedCategory T) (_hK : ∃ n : ℤ, K.IsGE n) :
@@ -209,6 +101,58 @@ theorem derivedAdjunction_topEdge {T S : Scheme.{u}} (g : T ⟶ S)
               ((@pinnedDerivedAdjunction.{u, w} _
                 (fun {_ _} f ↦ Scheme.Modules.canonicalTensorPullbackAdditive.{u, w} f)
                 _ _ g).homEquiv C K d) ≫ e) := by
-  sorry
+  classical
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  let HS := DerivedCategory.homologyFunctor.{w, u, u + 1}
+    (SheafOfModules.{u} (moduleRings S.toRingedSpace)) q
+  let HT := DerivedCategory.homologyFunctor.{w, u, u + 1}
+    (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q
+  let t := DerivedCategory.TStructure.t
+    (C := SheafOfModules.{u} (moduleRings S.toRingedSpace))
+  let P := (t.truncLE q).obj ((schemeDerivedDirectImage g).obj K)
+  let i := (t.truncLEι q).app ((schemeDerivedDirectImage g).obj K)
+  let adj := @pinnedDerivedAdjunction.{u, w} _
+    (fun {_ _} f ↦ Scheme.Modules.canonicalTensorPullbackAdditive.{u, w} f) _ _ g
+  let a := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
+  let d₀ := (adj.homEquiv P K).symm i
+  have hP : P.IsLE q := by dsimp [P]; infer_instance
+  have hi : IsIso (HS.map i) :=
+    DerivedCategory.isIso_homologyFunctor_map_truncLTι_app _ (q + 1) q (by omega)
+  have := hi
+  let e := topEdgeTruncatedCounit g q K
+  have he := topEdgeTruncatedCounit_localClass g q K
+  refine ⟨e, ⟨he, ?_⟩, ?_⟩
+  · intro d
+    have := hC
+    let f := t.liftTruncLE (adj.homEquiv C K d) q
+    have hf : f ≫ i = adj.homEquiv C K d := t.liftTruncLE_ι _ q
+    have hn := (derivedPullback_topCohomology g q C hC).choose_spec.2.2.1 P hP f
+    have := (derivedPullback_topCohomology g q C hC).choose_spec.2.1
+    have := (derivedPullback_topCohomology g q P hP).choose_spec.2.1
+    have hh := transpose_top_naturality (derivedPullback g) (schemeDerivedDirectImage g)
+      (Scheme.Modules.tensorPullback g) (Scheme.Modules.pushforward g) adj a HS HT f d₀
+      (derivedPullbackTopCohomology g q C hC)
+      (derivedPullbackTopCohomology g q P hP) hn
+    have hfd : f ≫ adj.homEquiv P K d₀ = adj.homEquiv C K d := by
+      simpa only [d₀, Equiv.apply_symm_apply] using hf
+    rw [hfd, Equiv.symm_apply_apply] at hh
+    change a.homEquiv _ _ (inv (derivedPullbackTopCohomology g q C hC) ≫ HT.map d) =
+      HS.map (adj.homEquiv C K d) ≫ e
+    rw [hh, ← hf, HS.map_comp]
+    change HS.map f ≫ a.homEquiv _ _
+        (inv (derivedPullbackTopCohomology g q P hP) ≫ HT.map d₀) =
+      (HS.map f ≫ HS.map i) ≫ (inv (HS.map i) ≫
+        a.homEquiv _ _ (inv (derivedPullbackTopCohomology g q P hP) ≫ HT.map d₀))
+    simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+  · intro e' he'
+    apply (SheafOfModules.toSheaf (moduleRings S.toRingedSpace)).map_injective
+    apply sheafification_edge_ext (Opens.grothendieckTopology S)
+      ((RingedSpace.localHypercohomologyPresheaf S.toRingedSpace q).obj
+        ((schemeDerivedDirectImage g).obj K)) _ _
+      (RingedSpace.localHypercohomologySheafificationAt q
+        ((schemeDerivedDirectImage g).obj K))
+    apply NatTrans.ext
+    funext V
+    exact (he'.1 V).trans (he V).symm
 
 end AlgebraicGeometry

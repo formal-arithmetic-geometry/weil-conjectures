@@ -1,0 +1,257 @@
+{
+ "id": "lem-zl-partition-section-tensor-flat",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Tensor evaluation and flat sections at a partition object",
+ "statement": "Let $\\mathcal C$ be a site small relative to the module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with pullbacks, a strict initial object $\\varnothing$, and disjoint finite coproducts stable under pullback. Assume the component inclusions of every finite coproduct are a covering, including the empty covering of $\\varnothing$. Fix an object $W$ such that every covering of $W$ refines a finite coproduct decomposition of $W$. Let $\\mathcal O$ be a sheaf of commutative rings, $A=\\mathcal O(W)$, and $E(M)=M(W)$ on module sheaves [def-weil-sheaf-of-modules-category]. Assume also that $W$ is terminal in $\\mathcal C$ and $E$ is exact. For arbitrary module sheaves $M,N$ the section tensor pairing\n$$M(W)\\otimes_A N(W)\\longrightarrow (M\\otimes_{\\mathcal O}N)(W)$$\nis an isomorphism, where the sheaf tensor is the sheafification of the sectionwise tensor [def-pur-sheaf-tensor-product]. Its presheaf takes $\\varnothing$ to zero and finite coproducts to products, under the canonical component identification\n$$(\\prod_a M_a)\\otimes_{\\prod_a R_a}(\\prod_a N_a)\\cong\\prod_a(M_a\\otimes_{R_a}N_a).$$\nThe pairing is natural and compatible with ordinary associativity, symmetry and the unit $A=\\mathcal O(W)$, using the same pure-tensor and scalar formulas on both paths. If $F$ is a flat module sheaf [def-pc-flat-sheaf-modules], then $F(W)$ is a flat $A$-module. More precisely, for every finite relation $\\sum_{i=1}^n a_i x_i=0$ in $F(W)$, including $n=0$, there exist $m\\ge0$, $y_j\\in F(W)$ and $b_{ij}\\in A$ with $x_i=\\sum_jb_{ij}y_j$ and $\\sum_i a_i b_{ij}=0$. For the kernel sheaf $H=\\ker(\\mathcal O^n\\xrightarrow{(a_i)}\\mathcal O)$, such data can be obtained from a finite tensor sum $\\sum_j h_j\\otimes y_j\\in H(W)\\otimes_A F(W)$ mapping to $(x_i)$, with $h_j=(b_{ij})$. No flatness of $F(U)$ at other objects is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), section tensor calculation; Stacks Tags 03EK (sites-modules.tex, section-tensor-product), 00HK (algebra.tex, lemma-flat-eq); arbitrary ring-sheaf and partition-site formulation"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "For any module sheaf $L$, the sheaf axiom on the empty cover gives $L(\\varnothing)=0$; for the ring sheaf it gives the zero ring. For $U=\\coprod_aU_a$, any family of sections on the components is matching: distinct-component pullbacks are $\\varnothing$, while each same-component pullback is $U_a$. Unique gluing on the component cover gives $L(U)\\cong\\prod_aL(U_a)$ and $\\mathcal O(U)\\cong\\prod_a\\mathcal O(U_a)$. The identifications respect addition and scalar multiplication because restriction does. These assertions include the empty coproduct.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 03CY (lemma-sheafification-presheaf-modules), 03DA (lemma-abelian), 03ER (definition-flat); finite-partition specialization of Hemo--Richarz--Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "Here is the required component tensor calculation, directly from balancing. For a finite family put $R=\\prod_aR_a$, $M=\\prod_aM_a$, $N=\\prod_aN_a$. The canonical map $\\Phi$ sends $m\\otimes n$ to $(m_a\\otimes n_a)_a$. Let $\\iota_a$ extend a component vector by zero and let $e_a\\in R$ be its component idempotent. The rule $u\\otimes_{R_a}v\\mapsto\\iota_a(u)\\otimes_R\\iota_a(v)$ is $R_a$-balanced: extend a scalar by zero in $R$ and apply the $R$-balancing relation. Adding these maps gives $\\Psi:\\prod_a(M_a\\otimes_{R_a}N_a)\\to M\\otimes_RN$. Then $\\Phi\\Psi=1$ on each component, and $\\Psi\\Phi(m\\otimes n)=\\sum_a e_am\\otimes e_an=\\sum_a m\\otimes e_an=m\\otimes n$, since $e_a^2=e_a$ and $\\sum_ae_a=1$. Thus $\\Phi$ is an isomorphism. For an empty family both sides are zero. Apply this calculation to step 1: the presheaf $P(U)=M(U)\\otimes_{\\mathcal O(U)}N(U)$ sends finite coproducts to products and $\\varnothing$ to zero.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 03CY (lemma-sheafification-presheaf-modules), 03DA (lemma-abelian), 03ER (definition-flat); finite-partition specialization of Hemo--Richarz--Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "By the module-sheafification statement, $P^\\#$ is the abelian-group sheafification with its extended $\\mathcal O$-action and a linear unit. By the underlying-sets sheafification statement for abelian groups, its underlying set sheaf is the set sheafification of $|P|$. Step 2 verifies the initial-value and finite-product hypotheses of the partition-refinement lemma. Apply that lemma at $W$ to obtain a bijection $P(W)\\to P^\\#(W)$. It is $A$-linear, hence an $A$-module isomorphism. The definition of the sheaf tensor identifies this unit map with the pairing in the item. In Lean, the public partition-refinement theorem fixes the value universe to max u v w. For the independent coefficient universe here, apply the same local-injectivity and local-surjectivity argument directly: use its covering_refinement helper to obtain a precoverage covering, refine that covering by a finite partition, and use the tensor presheaf product bijection and sheaf separatedness. The module sheafification unit is locally bijective after forgetting to sets. Compose its bijection with the inverse of tensorObjIsoSheafification.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-zl-partition-refinement-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 03CY (lemma-sheafification-presheaf-modules), 03DA (lemma-abelian), 03ER (definition-flat); finite-partition specialization of Hemo--Richarz--Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "Write $\\theta_{M,N}$ for the pairing just proved invertible. For module maps $f,g$, both naturality paths send $m\\otimes n$ to the section represented by $f(m)\\otimes g(n)$; hence they agree by additivity. The associativity diagram sends $(m\\otimes n)\\otimes p$ on each path to the section represented by $m\\otimes(n\\otimes p)$, the symmetry diagram sends $m\\otimes n$ to $n\\otimes m$, and the left and right unit diagrams send $a\\otimes m$ and $m\\otimes a$ to $am$. These are the ordinary tensor associator, braiding and unitors: locally their maps are exactly these formulas, which respect the balancing relations and therefore sheafify by the universal property. Every tensor is a finite sum of pure tensors, and each $\\theta$ is surjective, so these checks prove all diagrams, including diagrams involving an iterated sheaf tensor. The unit is $\\mathcal O(W)=A$. Concretely, the forgetful functor has the lax monoidal structure right-adjoint to module sheafification. Its tensorator is the stated pairing, and its unit map is the identity by the adjunction triangle. Lax monoidal naturality, associativity, unitality and the braided-adjunction identity give the four formulas.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 03CY (lemma-sheafification-presheaf-modules), 03DA (lemma-abelian), 03ER (definition-flat); finite-partition specialization of Hemo--Richarz--Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "Let $\\sum_i a_ix_i=0$ be a finite relation in $F(W)$. Define $q:\\mathcal O^n\\to\\mathcal O$ by $q_U((c_i))=\\sum_i(a_i|_U)c_i$, using the unique $U\\to W$ (here terminality of $W$ is used). Put $H=\\ker q$. The sectionwise-kernel statement gives $H(W)=\\ker(A^n\\to A)$, and $H\\to\\mathcal O^n\\to\\mathcal O$ is exact. Flatness of $F$ means precisely that $-\\otimes_{\\mathcal O}F$ is exact; apply this exact functor and then the assumed exact functor $E$. Step 3 and its naturality identify the result with the exact sequence $H(W)\\otimes_AF(W)\\to A^n\\otimes_AF(W)\\to A\\otimes_AF(W)$. The finite-free identification sends $e_i\\otimes y$ to the vector with $y$ in position $i$, with inverse $(x_i)\\mapsto\\sum_i e_i\\otimes x_i$; the unit identification sends $a\\otimes y$ to $ay$. Consequently the last arrow is $(x_i)\\mapsto\\sum_i a_ix_i$. Exactness therefore supplies a preimage $t\\in H(W)\\otimes_AF(W)$ of $(x_i)$. Use the proved comparison siteSheafTensorRightIso [lem-weil-pbc-independent-sheaf-tensor-colimits] to transfer flatness from the explicit site tensor to the monoidal tensorRight functor. In fact evaluation preserving kernels suffices: tensor the kernel sequence by the exact tensor functor, then apply the kernel-preserving evaluation functor. The first map is still monic, so Mathlib's map_of_mono_of_preservesKernel gives exactness at the middle. Thus the assumed full exactness of evaluation is not needed in this proof, and its hypothesis is preserved.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 03CY (lemma-sheafification-presheaf-modules), 03DA (lemma-abelian), 03ER (definition-flat); finite-partition specialization of Hemo--Richarz--Scholbach Lemma 4.1(1)"
+   }
+  },
+  {
+   "text": "Write $t=\\sum_{j=1}^m h_j\\otimes y_j$, possible by the algebraic tensor-product construction, and write $h_j=(b_{ij})\\in H(W)\\subseteq A^n$. Its image is $(\\sum_jb_{ij}y_j)_i=(x_i)_i$, while membership in the kernel says $\\sum_i a_ib_{ij}=0$ for each $j$. This is exactly the required trivialization, with the specified tensor preimage. The equational criterion now implies that $F(W)$ is flat over $A$. If $n=0$, choose $m=0$ and $t=0$; zero coefficients cause no change to the argument. If $W=\\varnothing$ or $A$ is the zero ring then all section modules concerned are zero, and the same formulas apply. No assertion about flatness of $F(U)$ was used.",
+   "uses": [
+    "lem-weil-pbc-flat-equational-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HK, lemma-flat-eq, statement and kernel-tensor proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-zl-partition-refinement-sheafification",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-flat-equational-criterion",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), arbitrary ring-sheaf finite-partition elaboration; Stacks Tags 03EK, 03CY, 0F63, 00HK; E3 Lean implementation: component idempotents, the partition-refinement local-bijectivity argument in the coefficient universe, lax monoidal adjunction coherence, and the kernel-tensor equational-criterion proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact global sections on a finite partition ringed site preserve tensor products and send flat sheaves of modules to flat modules over the section ring",
+   "results": "8 hits; Module.Flat.iff_rTensor_exact', Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.iff_lTensor_exact', Module.Flat.rTensor_exact",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary module flatness criteria and objectwise presheaf tensor do not identify sheaf tensor sections or prove flatness of those sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Module.Flat",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary module flatness criteria and objectwise presheaf tensor do not identify sheaf tensor sections or prove flatness of those sections."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]lat.*evaluation|evaluation.*[Ff]lat|[Tt]ensor.*evaluation",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary module flatness criteria and objectwise presheaf tensor do not identify sheaf tensor sections or prove flatness of those sections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of the tensor product of module sheaves on a weakly contractible object equal the tensor product of sections",
+   "results": "8 hits; CategoryTheory.Sheaf.tensorProd_isSheaf, PresheafOfModules.Monoidal.tensorObj_obj, SheafOfModules.sections, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.sections, PresheafOfModules.Monoidal.tensorObj_map_tmul, PresheafOfModules.sectionsMk, SheafOfModules.sectionsFunctor_obj",
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary module flatness criteria and objectwise presheaf tensor do not identify sheaf tensor sections or prove flatness of those sections."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(sections|evaluation)|(sections|evaluation).*tensor",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: results concern fixed-ring Cartesian sheaves, tensor products over one fixed ring, or ordinary module flatness; none states the arbitrary ring-sheaf partition evaluation theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf tensor products evaluated at an object whose covers refine finite disjoint partitions",
+   "results": "8 hits; CategoryTheory.Sheaf.tensorProd_isSheaf, CategoryTheory.Sheaf.cartesianMonoidalCategory, TopCat.Presheaf.SheafConditionEqualizerProducts.piInters, TopCat.Presheaf.IsSheafUniqueGluing, TopCat.Presheaf.IsSheafOpensLeCover, TopCat.Presheaf.isSheaf_iff_isSheafPreservesLimitPairwiseIntersections, TopCat.Presheaf.IsSheafPreservesLimitPairwiseIntersections, TopCat.Presheaf.IsSheafPairwiseIntersections",
+   "date": "2026-10-22",
+   "verdict": "No match: results concern fixed-ring Cartesian sheaves, tensor products over one fixed ring, or ordinary module flatness; none states the arbitrary ring-sheaf partition evaluation theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, TensorProduct",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: results concern fixed-ring Cartesian sheaves, tensor products over one fixed ring, or ordinary module flatness; none states the arbitrary ring-sheaf partition evaluation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a finite partition site global sections commute with sheaf tensor products and exact global sections send flat sheaves to flat modules",
+   "results": "8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "No match: results concern fixed-ring Cartesian sheaves, tensor products over one fixed ring, or ordinary module flatness; none states the arbitrary ring-sheaf partition evaluation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of modules over a finite product ring decomposes into component tensor products",
+   "results": "8 hits; TensorProduct.piLeft, PiTensorProduct.ofDirectSumEquiv, TensorProduct.piRight, TensorProduct.piRight_apply, PiTensorProduct.ofDirectSumEquiv_tprod_apply, PiTensorProduct.tmulEquiv, PiTensorProduct.ofDFinsuppEquiv_tprod_apply, PiTensorProduct.tmulEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "No match: results concern fixed-ring Cartesian sheaves, tensor products over one fixed ring, or ordinary module flatness; none states the arbitrary ring-sheaf partition evaluation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "piLeft|piRight|tensorObjComparison|sections",
+   "results": "5 hits; Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean",
+   "date": "2026-10-22",
+   "verdict": "No match: results concern fixed-ring Cartesian sheaves, tensor products over one fixed ring, or ordinary module flatness; none states the arbitrary ring-sheaf partition evaluation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-contractible-derived-sections-tensor",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Specifically: Lemma 4.1(1): tensor compatibility and exact termwise evaluation used to compare dualizable objects, before the perfect/lisse equivalence. Re-split of lem-zl-contractible-derived-sections-tensor: old steps 4-5.",
+   "via": [
+    "lem-zl-contractible-derived-sections-tensor",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-partition-section-tensor-flat",
+  "worker": "stage1",
+  "summary": "Q40 preserves the statement and gives an explicit component-idempotent tensor calculation, applies the existing partition sheafification theorem with the underlying-set comparison, checks ordinary coherence on pure tensors, and lifts finite relations through the tensor of the kernel sheaf. No new nodes are needed.",
+  "blueprint": "Ancestor prop-zl-smooth-proper-relative-purity, Step 3 field-stage projection formula: the HRS Lemma 4.1(1) section-tensor and flat-section input to the dualizable/perfect comparison; retains the imported route through lem-zl-contractible-derived-sections-tensor."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-0222e0fba",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-0222e0fba (reviewer sub-agent of L); spot-checked: Read the item, its 6 steps and all 8 cited statements in full; review.md has the per-step checks. Shape: one commit; statement and stmt_deps byte-identical to base; no new nodes; proof_deps = union of uses; DAG closure acyclic; searches cover LeanSearch, LeanFinder/Loogle and grep; blueprint fields present; no SGA citation. Live node still unsplit and no repair note, so it is not superseded and no re-split rule applies. Route: the only non-definition, non-leaf statement cited is lem-zl-partition-refinement-sheafification, in the same unit; the 00HK criterion and set-sheafification are Mathlib leaves, so no tool_uses. Source: HRS Lemma 4.1(1), p.8 ('sheafification is unnecessary' at a w-contractible coherent object); item is its ordinary finite-partition form plus the flat-section consequence; Stacks 00HK, 03EK and 03CY match the cited nodes. Step 1: the empty cover gives zero sections; component covers give products (self-pullbacks are U_a, since coproduct injections are monic in the extensive setting). Step 2: recomputed the idempotent balancing (PhiPsi=1, PsiPhi(m⊗n)=Σe_a m⊗e_a n=m⊗n), the empty family, and a k×k test. Step 3: the partition lemma's hypotheses match the item exactly; module sheafification has the set sheafification as underlying sets; the bijection is A-linear. Step 4: coherence checked on pure tensors, which is how the statement fixes the comparisons; the 'sheafify by the universal property' wording is brief but routine, accepted. Steps 5-6: q is well defined by terminality; H=ker q is sectionwise; flatness by definition plus exact E keep H→O^n→O exact at the middle, giving a preimage t of (x_i); writing t=Σh_j⊗y_j gives a trivial relation, so 00HK gives flatness. Edge cases: n=0, W=∅, zero ring, two-component ring, finite-set site. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.PartitionSectionTensorFlat",
+  "declaration": "SheafOfModules.partition_section_tensor_flat",
+  "declarations": [
+   "SheafOfModules.partitionTensorPairing",
+   "SheafOfModules.partitionScalarEnd",
+   "SheafOfModules.partitionRelationMap",
+   "SheafOfModules.partitionKernelCoordinates",
+   "SheafOfModules.finite_product_ring_tensor",
+   "SheafOfModules.partition_section_tensor_flat"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/PartitionSectionTensorFlat.lean",
+  "statement": "theorem partition_section_tensor_flat [HasPullbacks C] [HasFiniteCoproducts C] [HasStrictInitialObjects C] (K : Precoverage C) (hK : K.IsSiteForCoverings) (hJ : J = K.toGrothendieck) (hdisjoint : ∀ (n : ℕ) (U : Fin n → C) (X : C) (j : ∀ a, U a ⟶ X), IsColimit (Cofan.mk X j) → ∀ (a b : Fin n), a ≠ b → Nonempty (IsInitial (pullback (j a) (j b)))) (hstable : ∀ (n : ℕ) (U : Fin n → C) (X : C) (j : ∀ a, U a ⟶ X), IsColimit (Cofan.mk X j) → ∀ (Y : C) (f : Y ⟶ X), Nonempty (IsColimit (Cofan.mk Y (fun a ↦ pullback.snd (j a) f)))) (hcover : ∀ (n : ℕ) (U : Fin n → C) (X : C) (j : ∀ a, U a ⟶ X), IsColimit (Cofan.mk X j) → Presieve.ofArrows U j ∈ K X) (W : C) (hW : IsTerminal W) (hrefine : ∀ (S : Presieve W), S ∈ K W → ∃ (n : ℕ) (U : Fin n → C) (j : ∀ a, U a ⟶ W), Nonempty (IsColimit (Cofan.mk W j)) ∧ ∀ a, ∃ (V : C) (f : V ⟶ W), S f ∧ ∃ h : U a ⟶ V, h ≫ f = j a) (hexact : exactFunctor _ _ (evaluation ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (op W))) : (∀ M N : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R), Function.Bijective (partitionTensorPairing M N (op W))) ∧ (∀ M N : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R), Subsingleton ((siteTensorPresheaf M.val N.val).obj (op (⊥_ C))) ∧ ∀ (n : ℕ) (U : Fin n → C) (X : C) (j : ∀ a, U a ⟶ X), IsColimit (Cofan.mk X j) → Function.Bijective (fun s : (siteTensorPresheaf M.val N.val).obj (op X) ↦ fun a ↦ (siteTensorPresheaf M.val N.val).map (j a).op s)) ∧ (∀ (M N M' N' : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (f : M ⟶ M') (g : N ⟶ N') (x : M.val.obj (op W)) (y : N.val.obj (op W)), (f ⊗ₘ g).val.app (op W) (partitionTensorPairing M N (op W) (x ⊗ₜ[R.obj.obj (op W)] y)) = partitionTensorPairing M' N' (op W) (f.val.app (op W) x ⊗ₜ[R.obj.obj (op W)] g.val.app (op W) y)) ∧ (∀ (M N P : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (x : M.val.obj (op W)) (y : N.val.obj (op W)) (z : P.val.obj (op W)), (α_ M N P).hom.val.app (op W) (partitionTensorPairing (M ⊗ N) P (op W) (partitionTensorPairing M N (op W) (x ⊗ₜ[R.obj.obj (op W)] y) ⊗ₜ[R.obj.obj (op W)] z)) = partitionTensorPairing M (N ⊗ P) (op W) (x ⊗ₜ[R.obj.obj (op W)] partitionTensorPairing N P (op W) (y ⊗ₜ[R.obj.obj (op W)] z))) ∧ (∀ (M N : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (x : M.val.obj (op W)) (y : N.val.obj (op W)), (β_ M N).hom.val.app (op W) (partitionTensorPairing M N (op W) (x ⊗ₜ[R.obj.obj (op W)] y)) = partitionTensorPairing N M (op W) (y ⊗ₜ[R.obj.obj (op W)] x)) ∧ (∀ (M : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (a : R.obj.obj (op W)) (x : M.val.obj (op W)), (λ_ M).hom.val.app (op W) (partitionTensorPairing (𝟙_ _) M (op W) (a ⊗ₜ[R.obj.obj (op W)] x)) = a • x ∧ (ρ_ M).hom.val.app (op W) (partitionTensorPairing M (𝟙_ _) (op W) (x ⊗ₜ[R.obj.obj (op W)] a)) = a • x) ∧ (∀ F : ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R), IsFlatOnSite F → Module.Flat (R.obj.obj (op W)) (F.val.obj (op W)) ∧ ∀ (n : ℕ) (a : Fin n → R.obj.obj (op W)) (x : Fin n → F.val.obj (op W)), (∑ i, a i • x i) = 0 → ∃ (m : ℕ) (y : Fin m → F.val.obj (op W)) (b : Fin n → Fin m → R.obj.obj (op W)) (h : Fin m → (kernel (partitionRelationMap W hW a)).val.obj (op W)) (t : TensorProduct (R.obj.obj (op W)) ((kernel (partitionRelationMap W hW a)).val.obj (op W)) (F.val.obj (op W))), (∀ i, x i = ∑ j, b i j • y j) ∧ (∀ j, ∑ i, a i * b i j = 0) ∧ (∀ j i, partitionKernelCoordinates W hW a (h j) i = b i j) ∧ t = ∑ j, h j ⊗ₜ[R.obj.obj (op W)] y j ∧ ∀ i, TensorProduct.lid (R.obj.obj (op W)) (F.val.obj (op W)) (TensorProduct.map ((LinearMap.proj i).comp (partitionKernelCoordinates W hW a)) (LinearMap.id : F.val.obj (op W) →ₗ[R.obj.obj (op W)] F.val.obj (op W)) t) = x i)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The main theorem states the site hypotheses, bijective canonical pairing, tensor-presheaf product property, coherence and flat-section conclusion with its actual kernel-tensor lift. finite_product_ring_tensor is the component-identification clause of this same node; the remaining declarations construct its canonical pairing, row map and kernel coordinates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9215cf92",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Only the lean record is added; statement, stmt_deps and proof are byte-identical to live; no new nodes; lean.statement matches the file verbatim. Site hypotheses are word-for-word those of the recorded bijective_toSheafify_of_partition_refinement; W terminal and exact evaluation present; extra typeclass assumptions are the IsFlatOnSite/tensor-record context and hold on essentially small sites. The pairing is the canonical sheafification unit followed by tensorObjIsoSheafification.inv into the recorded cochainModulesMonoidal tensor. All clauses present: bijective pairing; tensor presheaf zero at the initial object and finite coproducts to products; finite_product_ring_tensor equivalence with pure-tensor formula; naturality, associator, braiding and unitors with the same pairing; IsFlatOnSite gives Module.Flat plus the relation lift through the actual kernel of the row map (q built via unitHomEquiv and terminal restriction), with h_j, t and the coordinate-image equation. Edge cases n=0, m=0, empty family, zero ring checked. Definitions have real content; only sorry proofs; docstrings complete. Advisory: finite_product_ring_tensor is fixed to one universe; the second reading was by the same worker. Not recompiled (no fix written)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261023T230728-L-3473404",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

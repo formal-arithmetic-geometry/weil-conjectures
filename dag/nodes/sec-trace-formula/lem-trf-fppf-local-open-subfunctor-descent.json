@@ -1,0 +1,294 @@
+{
+ "id": "lem-trf-fppf-local-open-subfunctor-descent",
+ "kind": "statement",
+ "title": "Descent of open subfunctors along an fppf-local scheme presentation",
+ "statement": "Let $S,U$ be schemes [def-pc-scheme], with $U$ over $S$, and let $F,G$ be sheaves of sets on the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site, def-weil-pbc-sites-and-cohomology]. Write $h_X(Z)=\\operatorname{Mor}_S(Z,X)$ for each $S$-scheme $X$. Let $\\alpha:G\\to F$ be a natural transformation injective on sections over every $S$-scheme, and let $q:h_U\\to F$ be a natural transformation such that for every $S$-scheme $T$ and $a\\in F(T)$ there is an fppf covering $\\{\\varphi_i:T_i\\to T\\}$ and maps $a_i:T_i\\to U$ with $q(a_i)=a|_{T_i}$. Suppose $W\\subseteq U$ is an open subscheme [def-weil-open-immersion] and there is an isomorphism $h_W\\simeq h_U\\times_{F,q,\\alpha}G$ over $h_U$ [def-pc-fibre-product], whose projection to $h_U$ is the open inclusion. For any $T,a$ and any such covering and lifts, put $W_i=a_i^{-1}(W)$. Then the pullbacks of $W_i,W_j$ to $T_i\\times_TT_j$ are equal, and there is a unique open subscheme $W_{T,a}\\subseteq T$ with $\\varphi_i^{-1}(W_{T,a})=W_i$ for every $i$. There is a natural isomorphism over $h_T$, $h_{W_{T,a}}\\simeq h_T\\times_{F,a,\\alpha}G$. The open and this isomorphism are independent of the covering and lifts and commute with every scheme base change $Z\\to T$; in particular $\\alpha$ is representable by open immersions. No algebraic-space or representability assumption on $F,G$ or $q$ is made.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WU (lemma-finding-opens), local representatives, compatible opens, and global representing property; Tag 03N0 (descent-lemma-open-fpqc-covering); Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc); returned proof steps 6-8"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the assumed pullback isomorphism on E. Types.exists_of_isPullback and eW identify a section g of G(E) mapping to q(b) with a factorization of b:E→U through W. IsOpenImmersion.lift and its factorization equation identify such a factorization with range(b) contained in W. Applied to composites E→B→U, this is the same criterion for the inverse-image open b⁻¹W. Uniqueness of g follows from sectionwise injectivity.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), local representing property, applied to the given pullback isomorphism; Schemes Tags 01JY and 01HI"
+   }
+  },
+  {
+   "text": "On $B=T_i\\times_TT_j$, write $b_i=a_i\\mathrm{pr}_i$ and $b_j=a_j\\mathrm{pr}_j$. Naturality and the lift equations give $q(b_i)=a|_B=q(b_j)$. Put $O_i=\\mathrm{pr}_i^{-1}(W_i)$ and $O_j=\\mathrm{pr}_j^{-1}(W_j)$. The identity inclusion $O_i\\to B$ factors through $O_i$, hence step 1 supplies a section of $G(O_i)$ mapping to $q(b_i)|_{O_i}=q(b_j)|_{O_i}$. Step 1 for $b_j$ implies that this inclusion factors through $O_j$, so $O_i\\subseteq O_j$. Interchanging $i,j$ gives equality. Since both opens have the restricted structure sheaf, their open subschemes agree.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), equality of the two overlap opens; generalization using the given pullback square"
+   }
+  },
+  {
+   "text": "The given fppf family is fpqc by Mathlib AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage (Stacks Tag 022C). This directly discharges the covering hypothesis of openSubscheme_existsUnique_of_fpqc, without a separate affine refinement.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proved using Tag 021P (lemma-fppf-affine)"
+   }
+  },
+  {
+   "text": "Apply descent of compatible opens to the fpqc family from step 3 and the overlap equalities from step 2. It gives a unique open subscheme $V=W_{T,a}\\subseteq T$ with $\\varphi_i^{-1}(V)=W_i$ for every $i$. This applies to arbitrary covering families, including the empty covering of the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0 (lemma-open-fpqc-covering), existence and uniqueness"
+   }
+  },
+  {
+   "text": "For f:E→T, pull back the chosen fppf covering to E using the precoverage base-change axiom. If range(f) is contained in V, its composites from the covering members factor through the chart inverse-image opens, so step 1 supplies sections of G there. Extend these sections along the generated covering sieve. Their images under alpha are restrictions of a(f); injectivity implies compatibility. The sheaf condition in G glues them, and separation in F identifies the image of the glued section with a(f). This is the private image_local and criterion_of_descent argument.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), paragraph proving the descended open defines a section of the subsheaf; here the sectionwise gluing is written out"
+   }
+  },
+  {
+   "text": "Conversely, suppose $g\\in G(Z)$ satisfies $\\alpha(g)=f^*a$. On the same fppf covering $Z_i\\to Z$, step 1 applied to $g|_{Z_i}$ says that $r_i$ factors through $W_i$. Hence $f p_i$ has image in $V$. Joint surjectivity of this covering implies $f(Z)\\subseteq V$: given $z\\in Z$, take $z_i$ over $z$ and use $f(z)=f p_i(z_i)$. The open-factorization theorem gives a unique factorization $Z\\to V\\hookrightarrow T$. This proves both implications for every test scheme and every $f$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), final paragraph proving the representing property; Schemes Tag 01HI (lemma-restrict-map-to-opens)"
+   }
+  },
+  {
+   "text": "For every test E and f:E→T, steps 5 and 6 give existence of g with alpha(g)=a(f) exactly when range(f) is contained in V. Apply this to the inclusion j:V→T to get a section g on V; Yoneda makes it a natural transformation h_V→G. Together with h_V→h_T it is a pullback square: pointwise, open factorization proves existence, the mono j proves uniqueness, and alpha-injectivity identifies the second component. IsPullback.isoPullback gives the required isomorphism over h_T.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), conclusion that the descended open represents the fibre product"
+   }
+  },
+  {
+   "text": "Any isomorphism over h_T is unique because pullback.fst a alpha is mono. The pointwise criterion shows that for any other fppf family with lifts, phi_i⁻¹V equals ai_i⁻¹W, by testing their open inclusions; joint surjectivity gives uniqueness among all opens with those inverse images. For arbitrary b:Z→T, the criterion for (Z,b*a) is exactly the criterion for b⁻¹V, so testing both inclusions proves equality. Finally evaluate pullback.condition and the projection equations on each test map: equal composites into T give equal images in F of the G-components; injectivity gives equality in G. No nonempty-cover hypothesis is used.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU (lemma-finding-opens), global representing property; Descent Tag 03N0, uniqueness under pulled-back coverings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "def-weil-open-immersion",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-subscheme-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WU local-representatives and descended-open representing property, generalized to the assumed pullback square; formalized by V2 using Mathlib fppfPrecoverage_le_fpqcPrecoverage for Tag 022C and the existing openSubscheme_existsUnique_of_fpqc for Tag 03N0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "open.*subfunctor|subfunctor.*open|fppf.*representab|representab.*fppf|open.*fpqc",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean; Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability by open subschemes descends from an fppf covering for a monomorphism of sheaves of sets",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.IsRepresentable, AlgebraicGeometry.IsOpenImmersion",
+   "results": "loogle: unknown identifier 'CategoryTheory.MorphismProperty.IsRepresentable'",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism of fppf sheaves is representable by open immersions if its pullback to a scheme locally surjecting onto the target sheaf is an open subscheme",
+   "results": "AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.instMonoObjWalkingSpanCompSchemeSpanForgetNoneWalkingPairSomeMapInitOfIsOpenImmersion; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.IsOpenImmersion.le_monomorphisms; AlgebraicGeometry.IsOpenImmersion.mono; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono; AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "LocalRepresentability|local.*surject|open.*immersion.*descent",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, CategoryTheory.MorphismProperty.relative",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible open subschemes representing a subsheaf on an fppf covering descend and represent that subsheaf globally, using descent of opens and the sheaf gluing condition",
+   "results": "AlgebraicGeometry.Scheme.OpenCover.ext_elem; TopCat.Presheaf.generateEquivalenceOpensLe_inverse'; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map; AlgebraicGeometry.Scheme.subcanonical_zariskiTopology; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J; TopCat.Presheaf.generateEquivalenceOpensLe; SheafOfModules.QuasicoherentData.coversTop",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism properties and Zariski gluing do not state this fppf quotient or sheaf descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "fppf.*open|open.*fppf|LocalRepresentability|fpqc.*cover",
+   "results": "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: local Zariski representability and descent for already represented scheme morphisms do not state fppf-local representability for arbitrary sheaf monomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of a subfunctor by open subschemes descends along an fppf covering",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.opensDiagram, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-22",
+   "verdict": "no match: local Zariski representability and descent for already represented scheme morphisms do not state fppf-local representability for arbitrary sheaf monomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, CategoryTheory.Presheaf.IsLocallySurjective",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveFunYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOppositeType, AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: local Zariski representability and descent for already represented scheme morphisms do not state fppf-local representability for arbitrary sheaf monomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism of fppf sheaves is representable by open immersions if its pullback along a locally surjective map from a scheme is an open subscheme",
+   "results": "AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.instMonoObjWalkingSpanCompSchemeSpanForgetNoneWalkingPairSomeMapInitOfIsOpenImmersion, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.IsOpenImmersion.le_monomorphisms, AlgebraicGeometry.IsOpenImmersion.mono, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono, AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: local Zariski representability and descent for already represented scheme morphisms do not state fppf-local representability for arbitrary sheaf monomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme of a test scheme represents a subsheaf when this holds after an fppf cover and compatible opens descend",
+   "results": "AlgebraicGeometry.Scheme.subcanonical_zariskiTopology, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsLocallyFullOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_eq_ofArrows, AlgebraicGeometry.Scheme.AffineZariskiSite.generate_presieveOfSections, AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset",
+   "date": "2026-10-22",
+   "verdict": "no match: local Zariski representability and descent for already represented scheme morphisms do not state fppf-local representability for arbitrary sheaf monomorphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-relation-finding-opens",
+  "date": "2026-10-22",
+  "group": "Q103"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the quotient-by-etale-relation proof of lem-trf-etale-relation-quotient: the affine summand quotients embed as open subspaces of the total quotient. Tag 02WU (lemma-finding-opens), local representatives, compatible opens, and global representing property; Tag 03N0 (descent-lemma-open-fpqc-covering); Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc); returned proof steps 6-8.",
+   "via": [
+    "lem-trf-etale-relation-finding-opens",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-fppf-local-open-subfunctor-descent",
+  "worker": "stage1",
+  "summary": "Proved overlap compatibility by the assumed pullback square and sectionwise injectivity; verified fppf implies fpqc using existing affine refinement; applied existing open descent; wrote both directions of the representing property, explicit sheaf gluing and naturality, independence and arbitrary base change. No new nodes and no statement changes.",
+  "blueprint": "Supports lem-trf-local-term-locality through the existing chain to lem-trf-etale-relation-finding-opens: its Tag 02WU local-representatives, compatible-opens and global-representing-property argument (returned steps 6-8).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Finite affine refinement proves the fpqc covering condition for an arbitrary fppf cover; this generic site tool is not supplied by the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-36d7b2b13",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-36d7b2b13 (reviewer sub-agent of L); spot-checked: First split of the Q103-created item: no new nodes, statement unchanged. I read Stacks spaces.tex 02WU (lemma-finding-opens) with its proof, plus 03N0 and 022C/021P. The 8 steps correctly generalize the 02WU argument, replacing its quotient-specific facts with the assumed square h_W = h_U x_F G and alpha injective. Step 1: factorization via 01HI, with g unique because alpha is injective. Step 2: overlap opens are equal by mutual inclusion from step 1; injectivity of q is never used. Step 3: fppf implies fpqc via site base-change axiom (iii), lem-pc-fppf-affine-refinement and open-immersion base change, which gives exactly the def-weil-pbc-fpqc-covering condition. Step 4: 03N0 node. Steps 5-6: both directions on Z x_T T_i, using gluing in G, separatedness of F and joint surjectivity. Step 7: natural bijection. Step 8: independence of choices and base change via 03N0 uniqueness. Every cited statement was read and says what its step takes from it. The open-subscheme-fpqc-descent node is slopmaster2-closed. Accepted tool_use: lem-pc-fppf-affine-refinement, a generic site refinement that no node of sk-i-curve-zero gives. No SGA source and no trf node is cited. Duplicate search over 02WU/03N0/open-subfunctor candidates found no node stating the item (def-pc-open-subfunctor, etale-subsheaf-final-open, a1 space open image and the others are different). Edge cases checked: T empty with the empty cover, W empty, W=U, alpha an iso, G empty, a single-member cover, non-injective q. tools/review_split.py reports false 'no such node' because the chapter directories are symlinks; this is a tool artefact. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfLocalOpenSubfunctorDescent",
+  "declaration": "AlgebraicGeometry.fppf_local_open_subfunctor_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfLocalOpenSubfunctorDescent.lean",
+  "statement": "theorem fppf_local_open_subfunctor_descent {S : Scheme.{u}} (U : Over S) (F G : Sheaf (Scheme.fppfTopology.over S) (Type u)) (α : G.obj ⟶ F.obj) (hα : ∀ T : Over S, Function.Injective (α.app (op T))) (q : yoneda.obj U ⟶ F.obj) (hq : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over S) q) (W : U.left.Opens) (eW : yoneda.obj (Over.mk (W.ι ≫ U.hom)) ≅ pullback q α) (heW : eW.hom ≫ pullback.fst q α = yoneda.map (Over.homMk W.ι)) : ∃ (V : ∀ (T : Over S), (yoneda.obj T ⟶ F.obj) → T.left.Opens) (e : ∀ (T : Over S) (a : yoneda.obj T ⟶ F.obj), yoneda.obj (Over.mk ((V T a).ι ≫ T.hom)) ≅ pullback a α), (∀ (T : Over S) (a : yoneda.obj T ⟶ F.obj), (e T a).hom ≫ pullback.fst a α = yoneda.map (Over.homMk (V T a).ι)) ∧ (∀ (T : Over S) (a : yoneda.obj T ⟶ F.obj) (e' : yoneda.obj (Over.mk ((V T a).ι ≫ T.hom)) ≅ pullback a α), e'.hom ≫ pullback.fst a α = yoneda.map (Over.homMk (V T a).ι) → e' = e T a) ∧ (∀ (T : Over S) (a : yoneda.obj T ⟶ F.obj) (I : Type v) (Ti : I → Over S) (φ : ∀ i, Ti i ⟶ T), Presieve.ofArrows (fun i ↦ (Ti i).left) (fun i ↦ (φ i).left) ∈ Scheme.fppfPrecoverage T.left → ∀ ai : ∀ i, Ti i ⟶ U, (∀ i, yoneda.map (ai i) ≫ q = yoneda.map (φ i) ≫ a) → (∀ i j, pullback.fst (φ i).left (φ j).left ⁻¹ᵁ ((ai i).left ⁻¹ᵁ W) = pullback.snd (φ i).left (φ j).left ⁻¹ᵁ ((ai j).left ⁻¹ᵁ W)) ∧ (∀ i, (φ i).left ⁻¹ᵁ V T a = (ai i).left ⁻¹ᵁ W) ∧ (∀ O : T.left.Opens, (∀ i, (φ i).left ⁻¹ᵁ O = (ai i).left ⁻¹ᵁ W) → O = V T a)) ∧ (∀ (Z T : Over S) (b : Z ⟶ T) (a : yoneda.obj T ⟶ F.obj), V Z (yoneda.map b ≫ a) = b.left ⁻¹ᵁ V T a) ∧ (∀ (Z T : Over S) (b : Z ⟶ T) (a : yoneda.obj T ⟶ F.obj) (E : Over S) (vZ : E ⟶ Over.mk ((V Z (yoneda.map b ≫ a)).ι ≫ Z.hom)) (vT : E ⟶ Over.mk ((V T a).ι ≫ T.hom)), vZ ≫ Over.homMk (V Z (yoneda.map b ≫ a)).ι ≫ b = vT ≫ Over.homMk (V T a).ι → (pullback.snd (yoneda.map b ≫ a) α).app (op E) ((e Z (yoneda.map b ≫ a)).hom.app (op E) vZ) = (pullback.snd a α).app (op E) ((e T a).hom.app (op E) vT))",
+  "branch": "sheaf-dag",
+  "by": "Q45",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dadce2275",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Read the node, the 02WU/03N0/022C source places, all 5 stmt_dep records and the delivered module. Hypotheses match the node: fppfTopology.over S sheaves in Type u (same convention as the citer etale_relation_finding_opens), α sectionwise injective, q locally surjective (equivalent to fppf-local lifts because fppfPrecoverage is stable under base change and composition), W with an iso over h_U. Conclusions match clause by clause: overlap equality, existence and uniqueness of the descended open for every cover (I : Type v, empty allowed) and every system of lifts, natural iso over h_T with uniqueness, independence of choices, base change of the open and of the G-components. No extra assumptions. Statement verbatim, sorry only, 8-step docstring matching the node proof, source and blueprint docstrings, lines at most 100 characters, proof-dep plain imports allowed by brief-stage2 line 104, only the lean field differs from live, no duplicate in side-live Lean. Advisory: hq is a class passed explicitly. No compile: no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261023T132007-L-2181777",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

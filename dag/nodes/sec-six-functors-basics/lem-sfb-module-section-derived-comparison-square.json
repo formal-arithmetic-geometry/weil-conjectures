@@ -1,0 +1,364 @@
+{
+ "id": "lem-sfb-module-section-derived-comparison-square",
+ "kind": "statement",
+ "title": "Section realization identifies the normalized derived module compositor and identity",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. For every scheme $T$, use the small pro-étale site in the coefficient universe [def-weil-pbc-proetale-site, def-weil-size-convention], put $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], and let $B_T$ be its reconstructed section-ring sheaf. Write $E_T:\\operatorname{Mod}_{\\Lambda_T}\\simeq\\operatorname{Mod}(B_T)$ for the fixed exact equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence, sk-def-sfb-module-objects]. Use the internal module functors $f^*\\dashv f_*$ [sk-def-sfb-module-pushforward-pullback]. On section modules use the ringed-topos morphism whose structural coefficient map is adjunct to $\\alpha_f:f^*\\Lambda_Y\\cong\\Lambda_X$, or equivalently whose direct-image coefficient map is the reconstructed $\\eta_f:\\Lambda_Y\\to f_*\\Lambda_X$. Write $f_{*,s}$ for this sectionwise direct image, and $r_f:E_Yf_*\\cong f_{*,s}E_X$ for the comparison of [lem-sfb-internal-module-operations-transport]. For composable arbitrary scheme maps $X\\xrightarrow fY\\xrightarrow gZ$, let $c_{g,f}:g_*f_*\\cong(gf)_*$ be [def-sfb-module-lower-star-comp]; let $c^s_{g,f}$ be the sectionwise geometric compositor, and let $d_T:(1_T)_*\\cong1$ and $d^s_T$ be the ordinary identity identifications induced by sectionwise identity maps.\n\nThese structural ring maps compose to the structural map for $gf$, including the geometric identification of composite site functors. The comparisons satisfy\n$$r_{gf}\\circ E_Z(c_{g,f})=(c^s_{g,f}E_X)\\circ(g_{*,s}r_f)\\circ(r_g f_*),\\qquad E_T(d_T)=(d^s_TE_T)\\circ r_{1_T}.$$\n\nUse ordinary unbounded derived categories $D_T=D(\\operatorname{Mod}_{\\Lambda_T})$, $D^s_T=D(\\operatorname{Mod}(B_T))$ and total derived module direct images [sk-def-sfb-derived-categories, sk-def-sfb-module-derived-pushpull]. The termwise equivalence induces $\\mathcal E_T=D(E_T)$, preserves and reflects K-injective complexes (a complex $I$ is K-injective when every chain map from an acyclic complex to $I$ is null-homotopic), and identifies resolution transformations. Each $f_*$ preserves K-injective complexes. Write $a_f:\\mathcal E_YRf_*\\cong Rf_{*,s}\\mathcal E_X$ for the canonical resolution-compatible comparison of [lem-pd-section-derived-pushpull-normalization]. Let $\\kappa^i_{g,f}:R(gf)_*\\cong Rg_*Rf_*$ be the total-right-derived comparison induced by $c_{g,f}^{-1}$ and its resolution transformations, and let $\\epsilon^i_T:R(1_T)_*\\cong1$ be that induced by $d_T$. Let $\\kappa^s_{g,f}$ be the independently normalized ringed-topos comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and $\\epsilon^s_T$ its identity comparison induced by termwise identity. Put $b_{g,f}=(Rg_{*,s}a_f)\\circ(a_gRf_*)$. Then\n$$b_{g,f}\\circ(\\mathcal E_Z\\kappa^i_{g,f})=(\\kappa^s_{g,f}\\mathcal E_X)\\circ a_{gf},\\qquad \\mathcal E_T\\epsilon^i_T=(\\epsilon^s_T\\mathcal E_T)\\circ a_{1_T}.$$\nFor every internal K-injective complex $I$ on $X$, under the canonical resolution identifications, $\\kappa^i_{g,f,QI}=[c_{g,f,I}^{-1}]$ and $\\epsilon^i_{X,QI}=[d_{X,I}]$. These statements concern the specified transformations and their coefficient actions, include canonical functor associators and equality transports of scheme maps, and impose no properness, finite-type, density, Noetherian or field hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent specialization to the internal/sectionwise module equivalence, including the resolution-normalized composition and identity squares."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-internal-module-operations-transport",
+  "def-sfb-module-lower-star-comp",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-pd-section-derived-pushpull-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof": [
+  {
+   "text": "For $V\\in Z_{\\mathrm{pro\\acute et}}$, the site comparison identifies $(V\\times_ZY)\\times_YX$ with $V\\times_ZX$, with the same projections, as in [def-sfb-finite-lower-star-comp]. Apply [lem-sfb-eta-comp]: the coefficient map for $gf$ is $c^{\\rm Ab}_{g,f,\\Lambda_X}\\,g_*^{\\rm Ab}(\\eta_f)\\,\\eta_g$. In [lem-sfb-section-ring-lax-pushforward-coherence] take the two base-change site functors, their geometric composite comparison, and coefficient maps $\\eta_g,\\eta_f$. Its formula for $\\phi_\\chi$ says exactly that the reconstructed structural ring map for $gf$ is the composite structural ring map, including that site comparison. Thus both ringed-topos compositions in the question use the same coefficient action; no constant-coefficient identification is being substituted.",
+   "uses": [
+    "def-sfb-finite-lower-star-comp",
+    "lem-sfb-eta-comp",
+    "lem-sfb-section-ring-lax-pushforward-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6, definition-pushforward; coefficient-composition formula in blueprint lem-sfb-eta-comp, and section-ring coherence specialization"
+   }
+  },
+  {
+   "text": "The comparison $r_f$ of [lem-sfb-internal-module-operations-transport] is the existing direct-image comparison that is the identity on sections, as recorded in [def-pd-section-module-operations-data]; by the uniqueness clause of [lem-sfb-section-ring-lax-pushforward-coherence] it is that lemma's comparison $r_{F,\\psi}$ with identity underlying sheaf map. The latter's composition square applies with the coefficient map identified in step 1. Its internal compositor is $c_{g,f}$ of [def-sfb-module-lower-star-comp]: both have the specified geometric underlying sheaf isomorphism, and module morphisms with the same underlying sheaf morphism are equal. Its section compositor is $c^s_{g,f}$ for the same reason. The square therefore reads $r_{gf}E_Z(c_{g,f})=(c^s_{g,f}E_X)(g_{*,s}r_f)(r_gf_*)$. For the identity site functor, [lem-sfb-eta-id] identifies $\\eta_{1_T}$ with the inverse geometric identity at $\\Lambda_T$, so use the identity clause of the same coherence lemma. The geometric identity identifies $V\\times_TT$ with $V$; its restrictions and scalar action are the identity after that identification. This gives $E_T(d_T)=(d^s_TE_T)r_{1_T}$ for the specified ordinary identity maps.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-section-ring-lax-pushforward-coherence",
+    "def-sfb-module-lower-star-comp",
+    "lem-sfb-eta-id",
+    "def-pd-section-module-operations-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6, definition-pushforward; section-ring composition and identity comparisons"
+   }
+  },
+  {
+   "text": "By [lem-pd-section-derived-pushpull-normalization], termwise $E_T$ induces the equivalence $\\mathcal E_T$, preserves and reflects K-injectives, transports K-injective resolutions, and gives the specified resolution-compatible $a_f$. K-injective resolutions on section modules exist by [prop-pur-kinjective-resolutions-exist], since the sites are small in the module universe, and transport across $E_T$ supplies them internally. In particular, if $I$ is K-injective, the source and target of $a_{f,QI}$ identify with $Q(E_Yf_*I)$ and $Q(f_{*,s}E_XI)$, and in these coordinates $a_{f,QI}=Q(r_{f,I})$. This is the resolution-compatibility assertion applied to the identity resolution $I\\to I$, not a choice of a new derived comparison.",
+   "uses": [
+    "lem-pd-section-derived-pushpull-normalization",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ, lemma-adjoint-preserve-K-injectives, and 09T5, lemma-derived-adjoint-functors; existing section-derived normalization"
+   }
+  },
+  {
+   "text": "The module adjunction $f^*\\dashv f_*$ is supplied by [sk-def-sfb-module-pushforward-pullback], and [det-prop-sfb-module-pullback-exact-main] makes this $f^*$ additive exact for every commutative condensed ring and arbitrary scheme map. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to conclude that $f_*I$ is K-injective whenever $I$ is. Step 3 also shows that $f_{*,s}E_XI$ is K-injective: it is isomorphic via $r_f$ to $E_Yf_*I$. K-injectivity is invariant under a complex isomorphism, since composing a map and its null-homotopy with that isomorphism transports the defining condition. This does not assert K-injective preservation for an arbitrary ringed-topos direct image with nonexact pullback.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; exactness input: blueprint det-prop-sfb-module-pullback-exact-main"
+   }
+  },
+  {
+   "text": "Write $\\gamma_h:Qh_*\\to Rh_*Q$ for the resolution unit. By the universal property in [def-sfb-right-derived-functor], the comparison induced by $c^{-1}$ is characterized by\n$$\\kappa^i_{g,f,QN}\\gamma_{gf,N}=Rg_*(\\gamma_{f,N})\\,\\gamma_{g,f_*N}\\,Q(c^{-1}_{g,f,N}).$$\nHere every factor is typed: $\\gamma_{g,f_*N}$ lands in $Rg_*Q(f_*N)$ and then $Rg_*(\\gamma_{f,N})$ lands in $Rg_*Rf_*QN$. For K-injective $I$, $\\gamma_{gf,I}$, $\\gamma_{f,I}$ and $\\gamma_{g,f_*I}$ are invertible by step 4 and the K-injective clause of the cited universal property. Removing these resolution identifications leaves exactly $Q(c^{-1}_{g,f,I})$. It also proves invertibility on all objects, since every object has a K-injective representative. Similarly the identity comparison is characterized by $\\epsilon^i_{T,QN}\\gamma_{1_T,N}=Q(d_{T,N})$, so on $QI$ it is $Q(d_{T,I})$. The arbitrary-resolution and morphism formulas of [lem-sf-kinjective-derived-map-computation] identify all these coordinates with the canonical ones, including resolution transitions; hence these formulas describe the specified transformations.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, lemma-K-injective-defined; resolution-unit universal property and canonical map computation"
+   }
+  },
+  {
+   "text": "For the independently normalized sectionwise comparison apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the ringed topoi fixed in step 1 and the K-injective complex $E_XI$. By step 4, $f_{*,s}E_XI$ is K-injective, so take its identity map as the intermediate resolution $j$. The cited normalization is then the identity map from $g_{*,s}f_{*,s}E_XI$ to itself after the ordinary composition identification. Before making that identification it is precisely $Q((c^s_{g,f,E_XI})^{-1})$ from $Q((gf)_{*,s}E_XI)$ to $Q(g_{*,s}f_{*,s}E_XI)$. The sectionwise identity comparison induced by termwise identity is likewise $Q(d^s_{T,E_TI})$. Thus the sectionwise normalization has the same orientation as step 5, without identifying two unspecified right-adjoint isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; stated K-injective normalization with j the identity"
+   }
+  },
+  {
+   "text": "Evaluate the desired composition square on $QI$, using steps 3, 5 and 6. The map $a_{g,Rf_*QI}$ is represented by $r_{g,f_*I}$ because $f_*I$ is K-injective. To compute $Rg_{*,s}(a_{f,QI})$, its source $E_Yf_*I$ and target $f_{*,s}E_XI$ are both K-injective; [lem-sf-kinjective-derived-map-computation] therefore represents it by $g_{*,s}(r_{f,I})$. Consequently the left side is the class of\n$$(g_{*,s}r_{f,I})\\,r_{g,f_*I}\\,E_Z(c^{-1}_{g,f,I}),$$\nand the right side is the class of\n$$(c^s_{g,f,E_XI})^{-1}\\,r_{gf,I}.$$\nThese are equal: multiply the ordinary square from step 2 on the left by $(c^s)^{-1}$ and on the right by $E_Z(c^{-1})$. All terms are morphisms of modules for the structural ring map already checked in step 1. For identity, steps 3, 5 and 6 reduce the desired square to $Q(E_Td_{T,I})=Q(d^s_{T,E_TI})Q(r_{1_T,I})$, which is exactly the ordinary identity square of step 2.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, lemma-K-injective-defined; agent calculation of the two normalized component formulas"
+   }
+  },
+  {
+   "text": "The component equalities on K-injectives imply the natural-transformation equalities everywhere. Indeed, for any object $M$ choose a K-injective resolution and the resulting isomorphism $u:M\\xrightarrow{\\sim}QI$. For two natural transformations $t,t':A\\Rightarrow B$ in either desired square, naturality gives $t_M=B(u)^{-1}t_{QI}A(u)=B(u)^{-1}t'_{QI}A(u)=t'_M$. The resolution transitions and arbitrary derived morphisms are the canonical ones of [lem-sf-kinjective-derived-map-computation], so this argument is independent of that choice. The site maps and all the displayed compositions retain the geometric comparison from step 1; parentheses are inserted by the ordinary functor associators, and equal scheme maps induce the same restriction maps on sections. Thus the equalities include the stipulated associators and equality transports. Every input used arbitrary scheme maps and commutative condensed coefficients in the stated small universes; no geometric finiteness or field hypothesis has entered.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, lemma-K-injective, and 070Y, lemma-K-injective-defined; naturality and canonical resolution transitions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-lower-star-comp",
+  "lem-sfb-eta-comp",
+  "lem-sfb-section-ring-lax-pushforward-coherence",
+  "lem-sfb-internal-module-operations-transport",
+  "def-sfb-module-lower-star-comp",
+  "lem-sfb-eta-id",
+  "def-pd-section-module-operations-data",
+  "lem-pd-section-derived-pushpull-normalization",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-def-sfb-module-pushforward-pullback",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-sfb-right-derived-functor",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit normalized internal/sectionwise comparison using sites-modules Tag 03D6 and derived Tags 08BJ, 070Y, 070I."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalences of internal and sectionwise pro etale module sheaves identify normalized unbounded derived direct image compositors and their K injective formulas",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and derived transformations of fixed functors do not identify the specified internal/sectionwise ringed compositors, coefficient maps, and K-injective resolution squares in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.Equivalence",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and derived transformations of fixed functors do not identify the specified internal/sectionwise ringed compositors, coefficient maps, and K-injective resolution squares in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans|rightDerivedFunctorCompIso|preservesKInjective",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and derived transformations of fixed functors do not identify the specified internal/sectionwise ringed compositors, coefficient maps, and K-injective resolution squares in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image comparison under exact equivalences preserves composition isomorphisms and identity on K injective resolutions",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CochainComplex.isKInjective_of_iso, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and derived transformations of fixed functors do not identify the specified internal/sectionwise ringed compositors, coefficient maps, and K-injective resolution squares in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolution compatible equivalences carry the canonical right derived composition transformation to the derived ordinary compositor on K injective complexes",
+   "results": "CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and derived transformations of fixed functors do not identify the specified internal/sectionwise ringed compositors, coefficient maps, and K-injective resolution squares in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans_(fac|comp)|mapDerivedCategoryFactorsh_hom_app|mapDerivedCategoryIdIso",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor descent and derived transformations of fixed functors do not identify the specified internal/sectionwise ringed compositors, coefficient maps, and K-injective resolution squares in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans_(comp|fac)|preservesKInjective|isKInjective.*adj",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean; live search log digest 4a02d8997c467b02",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern supplied generic derived transformations or underived section modules; none states the complete specified internal/sectionwise unbounded comparison and coefficient-action normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.Equivalence",
+   "results": "No hits; live search log digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern supplied generic derived transformations or underived section modules; none states the complete specified internal/sectionwise unbounded comparison and coefficient-action normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical right derived composition isomorphism commutes with exact equivalence and K injective resolution comparison",
+   "results": "CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.Functor.isRightDerivedFunctor_iff_of_iso, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; live search log digest 7c13aea057a1c9e8",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern supplied generic derived transformations or underived section modules; none states the complete specified internal/sectionwise unbounded comparison and coefficient-action normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalences of internal module sheaves and sectionwise module sheaves identify canonical total derived pushforward composition and identity transformations on K injectives",
+   "results": "SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforward_comp_id, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp, SheafOfModules.pushforward_id_comp, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardPushforwardAdj; live search log digest d29b7edec1d7ded7",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern supplied generic derived transformations or underived section modules; none states the complete specified internal/sectionwise unbounded comparison and coefficient-action normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derived natural transformations of composites computed termwise on K injective complexes commute with exact equivalences",
+   "results": "CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; live search log digest 53a1fc34a76afc19",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern supplied generic derived transformations or underived section modules; none states the complete specified internal/sectionwise unbounded comparison and coefficient-action normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-module-derived-compositor-coherence",
+  "by": "worker",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, Rp_*Rh_* = R(ph)_*: identify the actual module and sectionwise derived compositors and their identity normalizations; returned item steps 1-3 and first half of step 5.",
+   "via": [
+    "lem-sfb-module-derived-compositor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-module-section-derived-comparison-square",
+  "worker": "stage1",
+  "summary": "Expanded the normalized module/sectionwise comparison into ordinary coefficient coherence, the ordinary comparison square, exact-adjoint K-injective preservation, resolution-unit formulas and explicit component calculations. Reused all required supporting lemmas; no new node or statement correction. Searched the current project and Mathlib; no complete attachment or Mathlib match.",
+  "blueprint": "det-sf-comp-coherence-cocycle.proof.md, Refinement isomorphisms, Rp_*Rh_*=R(ph)_*: specifies and compares the actual ordinary and derived module compositors and identity transformations used in that identification.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-finite-lower-star-comp",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "lem-sfb-eta-comp",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "lem-sfb-section-ring-lax-pushforward-coherence",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "def-sfb-module-lower-star-comp",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "lem-sfb-eta-id",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic coefficient, module-realization, exact-adjoint or K-injective resolution tool used to normalize the existing derived-composition step; it does not replace the compactification unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-finite-lower-star-comp",
+  "lem-sfb-eta-comp",
+  "lem-sfb-section-ring-lax-pushforward-coherence",
+  "lem-sfb-internal-module-operations-transport",
+  "def-sfb-module-lower-star-comp",
+  "lem-sfb-eta-id",
+  "lem-pd-section-derived-pushpull-normalization",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-def-sfb-module-pushforward-pullback",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-sfb-right-derived-functor",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-6c7dfe704",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-6c7dfe704 (reviewer sub-agent of L); spot-checked: Read all 8 steps and every cited statement in full. Statement, stmt_deps and blueprint are unchanged against the live clone; the item is still unsplit live, so it is not superseded; there are no new nodes and no cycle (DFS over 731 nodes). Stacks 0D6E (sites-cohomology l.4011) gives only Rg_*Rf_*=R(gf)_*, and proof_origin=agent says so correctly; 08BJ has the same hypotheses as lem-weil-pbc-right-adjoint-preserves-kinjective (right adjoint of an exact functor), which step 4 applies with det-prop-sfb-module-pullback-exact-main. Checked the arrow typing of both the ordinary square and the derived square. Step 1: the coherence lemma with C=Z, D=Y, H=X and kappa the fibre-product rebracketing gives c_kappa = def-sfb-finite-lower-star-comp, and chi=eta_{gf} by eta-comp. Step 5: the universal-property map Rg_*(gamma_f)gamma_{g,f_*}Q(c^-1) is well typed; on a K-injective I every unit is invertible (f_*I is K-injective by step 4), so kappa^i_{QI}=[c^-1]. Steps 6-7: with j=id the ringed node gives kappa^s=Q((c^s)^-1), and (c^s)^-1 r_{gf} = (g_{*,s}r_f)(r_g f_*)E_Z(c^-1) follows from step 2; the identity case follows the same way. Step 8 extends to all objects by naturality. Small cases checked: identity maps, zero ring, non-proper f. No duplicate: the pd normalization node covers only pullback composition. Off-unit generic tool_uses accepted. FIX (C3/C4): step 2 identified r_f of lem-sfb-internal-module-operations-transport with the coherence lemma's identity-underlying comparison using that node's proof, since its statement only says 'canonical'. Added def-pd-section-module-operations-data, which states that the direct-image comparison is the identity on sections, plus the coherence lemma's uniqueness clause, to step 2 and proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ModuleSectionDerivedComparisonSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.moduleSectionDerivedComparisonSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalPushComposition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionPushComposition",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalPushIdentity",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionPushIdentity",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derivedSectionPushIdentity",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalPushResolutionUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionPushResolutionUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.moduleSectionDerivedComparisonSquare"
+  ],
+  "file": "lean/Sheaf/Paper/ModuleSectionDerivedComparisonSquare.lean",
+  "statement": "theorem moduleSectionDerivedComparisonSquare {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) : (∀ V : Z.ProEtᵒᵖ, (coefficientMap Λ (f ≫ g)).hom.app V = (coefficientMap Λ g).hom.app V ≫ (coefficientMap Λ f).hom.app ((InternalModuleOperations.siteMap g).op.obj V) ≫ (InternalModuleOperations.ring Λ X).obj.map ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g (f ≫ g) rfl).hom.app V.unop).op) ∧ (∀ M : internalModules Λ X, (equivalence Λ Z).functor.map ((CondensedRing.lowerStarComp Λ f g).hom.app M) ≫ (pushComparison Λ (f ≫ g)).hom.app M = (pushComparison Λ g).hom.app ((CondensedRing.lowerStar Λ f).obj M) ≫ (pushforward Λ g).map ((pushComparison Λ f).hom.app M) ≫ (pushforwardComposition Λ f g).hom.app ((equivalence Λ X).functor.obj M)) ∧ (∀ (T : Scheme.{u}) (M : modules Λ T), (SheafOfModules.toSheaf _).map ((sectionPushIdentity Λ T).hom.app M) = (ProEtale.lowerStarId Ab.{u + 1} T).hom.app ((SheafOfModules.toSheaf _).obj M)) ∧ (∀ (T : Scheme.{u}) (M : internalModules Λ T), (equivalence Λ T).functor.map ((CondensedRing.lowerStarId Λ T).hom.app M) = (pushComparison Λ (𝟙 T)).hom.app M ≫ (sectionPushIdentity Λ T).hom.app ((equivalence Λ T).functor.obj M)) ∧ (∀ T : Scheme.{u}, (derivedFunctor Λ T).IsEquivalence) ∧ (∀ (T : Scheme.{u}) (I : CochainComplex (internalModules Λ T) ℤ), CochainComplex.IsKInjective (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj I) ↔ I.IsKInjective) ∧ (∀ (T : Scheme.{u}) (P I : CochainComplex (internalModules Λ T) ℤ) (i : P ⟶ I), (QuasiIso (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).map i) ∧ CochainComplex.IsKInjective (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj I)) ↔ (QuasiIso i ∧ I.IsKInjective)) ∧ (∀ {S T : Scheme.{u}} (h : S ⟶ T), (CondensedRing.lowerStar Λ h).PreservesKInjectiveComplexes) ∧ (∀ {S T : Scheme.{u}} (h : S ⟶ T) (P : CochainComplex (internalModules Λ S) ℤ), (derivedEquivalence Λ T).functor.map (internalPushResolutionUnit Λ h P) ≫ (derivedPushComparison Λ h).hom.app (DerivedCategory.Q.obj P) ≫ (derivedPushforward Λ h).map (sectionLocalizationComparison Λ S P).hom = (sectionLocalizationComparison Λ T (((CondensedRing.lowerStar Λ h).mapHomologicalComplex (.up ℤ)).obj P)).hom ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (pushComparison Λ h) (.up ℤ)).hom.app P) ≫ sectionPushResolutionUnit Λ h (((equivalence Λ S).functor.mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ (M : DerivedCategory (internalModules Λ X)), (derivedEquivalence Λ Z).functor.map ((internalPushComposition Λ f g).hom.app M) ≫ (derivedPushComparison Λ g).hom.app ((internalDerivedPushforward Λ f).obj M) ≫ (derivedPushforward Λ g).map ((derivedPushComparison Λ f).hom.app M) = (derivedPushComparison Λ (f ≫ g)).hom.app M ≫ (sectionPushComposition Λ f g).hom.app ((derivedEquivalence Λ X).functor.obj M)) ∧ (∀ (T : Scheme.{u}) (M : DerivedCategory (internalModules Λ T)), (derivedEquivalence Λ T).functor.map ((internalPushIdentity Λ T).hom.app M) = (derivedPushComparison Λ (𝟙 T)).hom.app M ≫ (derivedSectionPushIdentity Λ T).hom.app ((derivedEquivalence Λ T).functor.obj M)) ∧ (∀ (I : CochainComplex (internalModules Λ X) ℤ) [I.IsKInjective], internalPushResolutionUnit Λ (f ≫ g) I ≫ (internalPushComposition Λ f g).hom.app (DerivedCategory.Q.obj I) = DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (CondensedRing.lowerStarComp Λ f g).symm (.up ℤ)).hom.app I) ≫ internalPushResolutionUnit Λ g (((CondensedRing.lowerStar Λ f).mapHomologicalComplex (.up ℤ)).obj I) ≫ (internalDerivedPushforward Λ g).map (internalPushResolutionUnit Λ f I)) ∧ (∀ (I : CochainComplex (modules Λ X) ℤ) [I.IsKInjective] (J : CochainComplex (modules Λ Y) ℤ) [J.IsKInjective] (j : ((pushforward Λ f).mapHomologicalComplex (.up ℤ)).obj I ⟶ J) [QuasiIso j], QuasiIso (((pushforward Λ g).mapHomologicalComplex (.up ℤ)).map j) ∧ sectionPushResolutionUnit Λ (f ≫ g) I ≫ (sectionPushComposition Λ f g).hom.app (DerivedCategory.Q.obj I) = DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (pushforwardComposition Λ f g).symm (.up ℤ)).hom.app I) ≫ DerivedCategory.Q.map (((pushforward Λ g).mapHomologicalComplex (.up ℤ)).map j) ≫ sectionPushResolutionUnit Λ g J ≫ (derivedPushforward Λ g).map (inv (DerivedCategory.Q.map j) ≫ sectionPushResolutionUnit Λ f I)) ∧ (∀ (T : Scheme.{u}) (I : CochainComplex (internalModules Λ T) ℤ) [I.IsKInjective], internalPushResolutionUnit Λ (𝟙 T) I ≫ (internalPushIdentity Λ T).hom.app (DerivedCategory.Q.obj I) = DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (CondensedRing.lowerStarId Λ T) (.up ℤ)).hom.app I))",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The helper definitions construct the specified geometric and resolution-normalized composition and identity comparisons using the existing ordinary functors, fixed equivalence and general total-right-derived APIs. The theorem retains the coefficient action, ordinary and derived squares, preservation/reflection of K-injectivity and resolutions, resolution-unit compatibility, internal K-injective formulas and the independent sectionwise arbitrary-resolution normalization. No statement correction or replacement operation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9df73b32f",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Item node read, unchanged from side-live; read in full the module (7 helper defs with real bodies, one sorry theorem) and the dependency declarations in side-live (SectionModuleOperationsData aliases, InternalModuleOperationsTransport coefficientMap/lowerComparison/lowerComp, SectionDerivedTensorData/Realization derivedPushComparison, RingedToposDerivedPushforwardComposition, CondensedRing/ProEtale lowerStarId). All node clauses are rendered with correct orientation: coefficient composition with Over.pullbackComp; ordinary composition square; identity square (transported d^s pinned to geometric ProEtale.lowerStarId by conjunct 3, which is not hollow); D(E) equivalence; K-injectives preserved and reflected; arbitrary quasi-isomorphic resolutions; internal f_* preserves K-injectives; resolution-unit square for a_f; derived composition and identity squares; kappa^i and eps^i K-injective formulas; kappa^s defined concretely with the ringed dependency's full arbitrary-j normalization restated (that theorem needs small sites and cannot be instantiated here). No extra hypotheses; HasDerivedCategory.{u+1} is the existing API binder. Statement verbatim, longest line 99, docstrings present, both report sections present. Advisory: internalPushComposition duplicates the theorem-module helper CondensedRing.directImageComposition; aliases from def-pd-* nodes outside stmt_deps; possibly unused proof-plan plain imports. No file changed, so no compile."
+ }
+}

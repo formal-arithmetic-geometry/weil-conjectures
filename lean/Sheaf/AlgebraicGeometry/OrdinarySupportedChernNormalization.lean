@@ -28,6 +28,13 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+
+set_option linter.auxLemma false in
+attribute [local instance 100000] ordinaryFiniteClass._proof_1 ordinaryFiniteClass._proof_2
+  ordinaryFiniteClass._proof_3
+
 /-- Forgetting support in the uniquely normalized class gives the ordinary divisor Chern class.
 Source: Stacks 03PL and 0A45; the unit and scalar-Chern clauses of
 `ordinary_supported_kummer` (blueprint: lem-asd-ordinary-supported-chern-normalization).

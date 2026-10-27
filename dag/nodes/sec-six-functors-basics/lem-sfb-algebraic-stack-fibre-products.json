@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-algebraic-stack-fibre-products",
+ "kind": "statement",
+ "title": "Algebraic stacks admit 2-fibre products",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention]. Stacks in groupoids, morphisms and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces use [def-trf-algebraic-space]. Here an algebraic stack is a stack in groupoids with diagonal representable by algebraic spaces and a representable smooth surjective scheme atlas; smoothness is tested on scheme charts using [def-sbc-smooth-morphisms]. Let $\\mathcal A,\\mathcal B,\\mathcal C$ be algebraic stacks over $S$ and let $a:\\mathcal A\\to\\mathcal C$, $b:\\mathcal B\\to\\mathcal C$ be morphisms. The stack in groupoids $\\mathcal A\\times_{\\mathcal C}\\mathcal B$, whose objects over a scheme $T$ are triples $(x,y,\\alpha)$ with $x\\in\\mathcal A(T)$, $y\\in\\mathcal B(T)$ and $\\alpha:a(x)\\xrightarrow{\\sim}b(y)$, is an algebraic stack. With its two projections and tautological 2-isomorphism it is a 2-fibre product in the 2-category of algebraic stacks over $S$.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04T2 (lemma-2-fibre-product); the stronger construction is Tag 04TF (lemma-2-fibre-product-general)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=\\mathcal A\\times_{\\mathcal C}\\mathcal B$, using the triple construction. Its pullbacks and cartesian lifts are componentwise. A descent datum for triples consists of descent data for $x$ and $y$ and compatible isomorphisms $\\alpha_i:a(x_i)\\simeq b(y_i)$. Descend $x_i,y_i$ in $\\mathcal A,\\mathcal B$; the sheaf condition for isomorphisms in $\\mathcal C$ glues the $\\alpha_i$ uniquely. Arrows of triples are pairs of arrows satisfying $b(v)\\alpha=\\alpha'a(u)$; their sheaf condition follows by gluing both components and checking this equality locally in $\\mathcal C$. Thus $P$ is an etale stack.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04TF first paragraph; stacks.tex Tag 02ZL (lemma-2-product-stacks-in-groupoids); elementary componentwise descent in the etale convention"
+   }
+  },
+  {
+   "text": "For any fibred groupoid $\\mathcal D$ with representable diagonal and $x,x'\\in\\mathcal D(T)$, its isomorphism sheaf is an algebraic space: by the space-source representability lemma, $T\\times_{\\mathcal D}T$ is a space, and pulling it back along $T\\to T\\times_ST$ selects isomorphisms over the same test map to $T$. This pullback is a space by the space fibre-product lemma. Conversely, a scheme test $(x,x'):T\\to P\\times_SP$ of the diagonal has fibre the groupoid of $(z,z\\simeq x,z\\simeq x')$, equivalent to the discrete sheaf $\\operatorname{Isom}_P(x,x')$ by composing the second isomorphism with the inverse of the first. For $p=(x,y,\\alpha)$ and $p'=(x',y',\\alpha')$ the arrow equation gives\n$$\\operatorname{Isom}_P(p,p')=\\operatorname{Isom}_{\\mathcal A}(x,x')\\times_{\\operatorname{Isom}_{\\mathcal C}(a(x),b(y'))}\\operatorname{Isom}_{\\mathcal B}(y,y'),$$\nwith maps $u\\mapsto\\alpha'a(u)$ and $v\\mapsto b(v)\\alpha$. All three terms are spaces by the first calculation, so their fibre product is a space. This proves representability of $\\Delta_P$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04TF second paragraph; Tag 045G (lemma-representable-diagonal), conditions (1),(2),(4),(7)"
+   }
+  },
+  {
+   "text": "Choose smooth surjective scheme atlases $U\\to\\mathcal A$ and $V\\to\\mathcal B$. The diagonal of $\\mathcal C$ and the space-source representability lemma make $E=U\\times_{\\mathcal C}V$ an algebraic space. The natural map $E\\to P$ factors as\n$$U\\times_{\\mathcal C}V\\longrightarrow U\\times_{\\mathcal C}\\mathcal B\\longrightarrow\\mathcal A\\times_{\\mathcal C}\\mathcal B.$$\nThe first arrow is the 2-base change of $V\\to\\mathcal B$ and the second that of $U\\to\\mathcal A$: eliminating the redundant identified object in either triple gives the indicated equivalences. The general fibred-groupoid calculus therefore makes $E\\to P$ representable smooth surjective, without presupposing algebraicity of $P$ or of the intermediate category.",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04TF final paragraph, through the composition of base changes"
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme atlas $W\\to E$ from the definition of algebraic space. The general fibred-groupoid calculus identifies its space and discrete-groupoid properties, makes it smooth, and makes $W\\to E\\to P$ representable smooth surjective. Together with steps 1 and 2 this verifies all three defining conditions for an algebraic stack. All charts lie in the stipulated universes; no finite type or quasi-compact atlas is required.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sfb-algebraic-moduli-stack",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04TF final sentence; Tag 026O (definition-algebraic-stack)"
+   }
+  },
+  {
+   "text": "For any algebraic stack $\\mathcal H$, a morphism $\\mathcal H\\to P$ is precisely a pair $f:\\mathcal H\\to\\mathcal A$, $g:\\mathcal H\\to\\mathcal B$ and a natural isomorphism $af\\simeq bg$: evaluate the morphism on each object to obtain its triple, or assemble those triples to construct it. A 2-morphism is precisely a pair of natural isomorphisms of $f,g$ satisfying the same compatibility equation as an arrow of triples. These constructions are mutually inverse and natural in $\\mathcal H$. Since $P$ is algebraic by step 4 and morphisms and 2-morphisms of algebraic stacks are all those of their underlying stacks, this is the required 2-fibre-product universal property.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T2 final paragraph; explicit full-sub-2-category universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-size-convention",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 04TF (lemma-2-fibre-product-general) and 04T2 (lemma-2-fibre-product), with explicit elementary etale descent and universal-property checks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The 2 fibre product of algebraic stacks over an algebraic stack is an algebraic stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z), CategoryTheory.Limits.HasPullback f g\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.instHasPullbacks\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"CategoryTheory.Limits.HasPullbacks AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes admits pullbacks for every cospan diagram, meaning that for any pair of morphisms with a common codomain, there exists a pullback object in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {C : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec C)\\n  (g : Y ⟶ AlgebraicGeometry.Spec C), CategoryTheory.Limits.HasPullback f g\", \"doc\": \"For any commutative ring $C$, and any two schemes $X$ and $Y$ with morphisms $f: X \\\\to \\\\operatorname{Spec}(C)$ and $g: Y \\\\to \\\\operatorname{Spec}(C)$, the pullback of $f$ and $g$ exists in the category\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType g],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"Given morphisms $ f : X \\to S $ and $ g : Y \\to S $ of schemes, if $ g $ is locally of finite type, then the first projection morphism from the pullback of $ f $ and $ g $ to $ X $ is also locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFinitePresentation g],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, if $ g $ is locally of finite presentation, then the first projection morphism from the pullback of $ f $ and $ g $ to $ X \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"Given schemes $X, Y, S$ and morphisms $f : X \\\\to S$ and $g : Y \\\\to S$, if $f$ is locally of finite type, then the second projection morphism $X \\\\times_S Y \\\\to Y$ of the pullback is also locally of fin\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.fst\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [hg : AlgebraicGeometry.UniversallyOpen g],\\n  AlgebraicGeometry.UniversallyOpen (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if a morphism $ f : X \\to Z $ is locally of finite presentation, then the second projection morphism $ \\text{snd} : X \\times_Z Y \\to Y $ of the pullback of $ f $ and any morphi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Pullback.instHasPullbacks and the etale/open-immersion pullback declarations concern schemes or ordinary site categories. They do not construct a 2-fibre product of algebraic stacks or establish its algebraicity. No algebraic-stack declaration appeared in grep or Loogle."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|algebraic.stack|two.*[Ff]ibre|2.*[Ff]iber",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"141\", \"text\": \"    obtain ⟨xk, h1, h2⟩ := exists_preimage_of_isPullback (d.equifibered fj) xj uk <| by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RelativeGluing.lean\", \"line\": \"160\", \"text\": \"    obtain ⟨xk, rfl, h2⟩ := exists_preimage_of_isPullback (d.equifibered fj) xj uk <| by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"294\", \"text\": \"@[deprecated (since := \\\"2026-02-01\\\")] alias PreservesLocalization := NatTrans.Coequifibered\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Pullback.instHasPullbacks and the etale/open-immersion pullback declarations concern schemes or ordinary site categories. They do not construct a 2-fibre product of algebraic stacks or establish its algebraicity. No algebraic-stack declaration appeared in grep or Loogle."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Pullback.instHasPullbacks and the etale/open-immersion pullback declarations concern schemes or ordinary site categories. They do not construct a 2-fibre product of algebraic stacks or establish its algebraicity. No algebraic-stack declaration appeared in grep or Loogle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic stacks have two categorical fibre products over any algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.instHasPullbacks\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \": HasPullbacks Scheme\", \"doc\": \"The category of schemes admits pullbacks for every cospan diagram, meaning that for any pair of morphisms with a common codomain, there exists a pullback object in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instCartesianMonoidalCategoryOverScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \": CartesianMonoidalCategory (Over S)\", \"doc\": \"For any scheme $ S $, the over category $ \\text{Sch}/S $ (whose objects are schemes over $ S $) is equipped with a Cartesian monoidal category structure. The tensor product is defined as the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [QuasiCompact g] : QuasiCompact (pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [IsFinite f] : IsFinite (Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback $ X \\\\times_Z Y $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ S) (g : Y ⟶ S) [IsProper g] : IsProper (Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom f] [IsAffine Y] : IsAffine (pullback f g)\", \"doc\": \"Given schemes $X, Y, S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $f$ is an affine morphism and $Y$ is an affine scheme, then the fiber product $X \\times_S Y$ is also an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.monObjAsOverPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"[MonObj (asOver M S)] : MonObj (asOver (pullback (M ↘ S) f) T)\", \"doc\": \"For any scheme $ S $, the over category $ \\\\mathbf{Sch}/S $ (whose objects are schemes over $ S $) is equipped with a Cartesian monoidal category structure. The tensor product is defined as the fiber p\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Pullback.instHasPullbacks and the etale/open-immersion pullback declarations concern schemes or ordinary site categories. They do not construct a 2-fibre product of algebraic stacks or establish its algebraicity. No algebraic-stack declaration appeared in grep or Loogle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin stacks are closed under homotopy pullbacks of stacks in groupoids",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.HasPullbacks\", \"doc\": \"For any two open immersions $ f : X \\\\to Z $ and $ g : Y \\\\to Z $ in the category of schemes, there exists a pullback of $ f $ and $ g $.\"}\n  {\"name\": \"CategoryTheory.instHasPullbacksToPreOneHypercover\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {S : C} (E : CategoryTheory.PreZeroHypercover S)\\n  [inst_1 : E.HasPullbacks], E.toPreOneHypercover.HasPullbacks\", \"doc\": \"Given a pre-zero hypercover $ E $ of an object $ S $ in a category $ \\\\mathcal{C} $ with pullbacks, the pre-one hypercover constructed from $ E $ inherits the pullback property. Specifically, if $ E $ \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.Limits.HasPullback f g\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes and a morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksPrecoverageOfHasPullbacks\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.HasPullbacks],\\n  (AlgebraicGeometry.Scheme.precoverage P).HasPullbacks\", \"doc\": \"If a morphism property $ P $ on the category of schemes is closed under pullbacks (i.e., whenever two morphisms satisfy $ P $, their pullback exists and also satisfies $ P $), then the precoverage on \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.Limits.HasPullback g f\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes and any morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.hasPullback_of_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g],\\n  CategoryTheory.Limits.HasPullback f g\", \"doc\": \"If a family of morphisms forms a covering sieve in the precoverage on the category of schemes (defined as the intersection of the jointly surjective precoverage and the precoverage generated by open i\"}\n  {\"name\": \"CategoryTheory.Precoverage.ZeroHypercover.isPullback_of_forall_isPullback\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.Precoverage C}\\n  [J.toGrothendieck.Subcanonical] [inst_2 : CategoryTheory.Limits.HasPullbacks C] [J.IsStableUnderBaseChange]\\n  {P X Y Z : C} (fst : P ⟶ X) (snd : P ⟶ Y) (f : X ⟶ Z) (g : Y ⟶ Z) (𝒰 : J.ZeroHypercover X),\\n  (∀\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$, a zero hypercover $\\\\mathcal{U}$ of $X$, and the condition that for every element $i$ in the zeroth component of $\\\\mathcal{U}$\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Pullback.instHasPullbacks and the etale/open-immersion pullback declarations concern schemes or ordinary site categories. They do not construct a 2-fibre product of algebraic stacks or establish its algebraicity. No algebraic-stack declaration appeared in grep or Loogle."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-representable-stack-universally-closed-test",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Scheme-base-change test for universal closedness of representable stack maps. Supporting topology and algebraicity inputs to the scheme-base-change test (Stacks 0512), below paragraph (3) of det-thm-sf-ctf-stability-direct-images.",
+   "via": [
+    "lem-sfb-representable-stack-universally-closed-test",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebraic-stack-fibre-products",
+  "worker": "stage1",
+  "summary": "Followed Stacks 04TF to prove descent, the Isom fibre-product formula and a smooth scheme atlas, then wrote the 04T2 universal property. Reused existing space fibre-product and space-source representability statements. Added the strictly more general representable-map calculus for arbitrary fibred groupoids because the existing algebraic-stack calculus cannot be used before algebraicity is proved. Statement unchanged; definition dependency made explicit.",
+  "blueprint": "Inherited creation chain has no machine-resolvable blueprint ancestor (blueprint_refs.py ancestor returns None). The current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the direct-image preservation context; the inherited alteration/moduli prerequisites below it are retained. These steps realize its descendant algebraicity prerequisite at Stacks 04TF and 04T2, without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic closure of algebraic spaces under fibre products, needed for the Isom-space calculation; no node of this unit states that closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-98291ce8c",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-98291ce8c (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, and Stacks algebraic.tex 04TF (l.1670-1745) and 04T2 (l.1747-1766). The item statement is byte-identical to the base (base proof was empty); the only stmt_dep added is def-sfb-algebraic-moduli-stack, which is its inline algebraic-stack definition. The item is still unsplit in the latest snapshots and has no re-split note. Step 1 (stack descent) is the 02ZL argument written out, acceptable as elementary. Step 2: the Isom sheaf is a space via the space-source lemma on h_T, then pullback along T->T x_S T by the trf fibre-product lemma. The Isom_P formula matches 04TF: both arrows go a(x)->b(y'). Step 3: U x_C V -> U x_C B -> P are the base changes of V->B and U->B... specifically of V->B and of U->A along pr_1, both checked. The new general node is needed because the existing stack calculus requires algebraic stacks. Step 4: the etale scheme atlas W->E is etale, hence smooth, and composes to W->P. Step 5 is the formal 2-universal property (04T2). The new node is true (0301/0302/045A-C/03ZD/03ZE/04XX), statement-only, strictly smaller than the item, and has no duplicate (checked the stack-chartwise, dm-etale-atlas and representable-pullback-over-space nodes, and the HTT 0302 hits). FIX (B3): the new node's clause 'agree with its ordinary algebraic-space properties' named a smooth/etale notion for maps between algebraic spaces that no cited node defines. Restated it as: a morphism of spaces is representable by spaces, and for a scheme-representable map (e.g. a chart h_U->F) etale/surjective in the sense of def-trf-algebraic-space agree with the scheme-test sense. This is true and is exactly what step 4 uses. Accepted tool use: lem-trf-space-fibre-products-etale-covers (generic 02X2). Batch-5: all six flagged citations are definitions or generic algebraic-space/stack lemmas (02X2, 045G), not trace-formula or Poincare-duality steps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicStackFibreProducts",
+  "declaration": "CategoryTheory.algebraicStack_twoFiberProduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicStackFibreProducts.lean",
+  "statement": "theorem algebraicStack_twoFiberProduct {S : Scheme.{u}} (A : BasedCategory.{v₁, w₁} (Over S)) (B : BasedCategory.{v₂, w₂} (Over S)) (C : BasedCategory.{v₃, w₃} (Over S)) (hA : IsAlgebraicModuliStack A) (hB : IsAlgebraicModuliStack B) (hC : IsAlgebraicModuliStack C) (a : BasedFunctor A C) (b : BasedFunctor B C) : IsAlgebraicModuliStack (moduliTwoFiberProduct a b) ∧ ∃ κ : (moduliTwoFiberFst a b).comp a ≅ (moduliTwoFiberSnd a b).comp b, (∀ z : (moduliTwoFiberProduct a b).obj, κ.hom.toNatTrans.app z = z.obj.hom) ∧ (∀ (H : BasedCategory.{v₄, w₄} (Over S)), IsAlgebraicModuliStack H → ∀ (p : BasedFunctor H A) (q : BasedFunctor H B) (e : p.comp a ≅ q.comp b), ∃ (l : BasedFunctor H (moduliTwoFiberProduct a b)) (α : l.comp (moduliTwoFiberFst a b) ≅ p) (β : l.comp (moduliTwoFiberSnd a b) ≅ q), ∀ x : H.obj, a.map (α.hom.toNatTrans.app x) ≫ e.hom.toNatTrans.app x = κ.hom.toNatTrans.app (l.obj x) ≫ b.map (β.hom.toNatTrans.app x)) ∧ (∀ (H : BasedCategory.{v₄, w₄} (Over S)), IsAlgebraicModuliStack H → ∀ (l m : BasedFunctor H (moduliTwoFiberProduct a b)) (α : l.comp (moduliTwoFiberFst a b) ≅ m.comp (moduliTwoFiberFst a b)) (β : l.comp (moduliTwoFiberSnd a b) ≅ m.comp (moduliTwoFiberSnd a b)), (∀ x : H.obj, a.map (α.hom.toNatTrans.app x) ≫ κ.hom.toNatTrans.app (m.obj x) = κ.hom.toNatTrans.app (l.obj x) ≫ b.map (β.hom.toNatTrans.app x)) → ∃! θ : l ≅ m, BasedCategory.whiskerRight θ.hom (moduliTwoFiberFst a b) = α.hom ∧ BasedCategory.whiskerRight θ.hom (moduliTwoFiberSnd a b) = β.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9700ebea",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Node differs from live only in lean + stmt_dep def-sfb-open-moduli-substack (landed def node owning moduliTwoFiberSnd; brief-stage2 l.177 allows). Read all dep Lean (moduliTwoFiberProduct full comma subcat with IsIso hom over 𝟙, Fst/Snd, IsAlgebraicModuliStack, BasedNatTrans/whiskerRight). Hypotheses exact (independent universes, arbitrary a,b); conclusion algebraicity + κ pinned to z.obj.hom + 2-universal property among algebraic H (ess. surj. with correct cone-morphism equation; ∃! iso lift = full faithfulness; iso-only harmless since hom-categories are groupoids) matches Stacks 04T2/04TF and node. No duplicate (stack_closedImmersion_baseChange is a special-case citer). No new defs, sorry only, docstrings with source/blueprint/5 proof steps, statement verbatim, imports = statement + proof_dep modules. No compile (no change). Advisory: added stmt_dep not cited as [id] in text."
+ }
+}

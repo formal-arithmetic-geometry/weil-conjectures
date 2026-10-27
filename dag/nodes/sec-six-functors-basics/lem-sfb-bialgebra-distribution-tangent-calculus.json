@@ -1,0 +1,332 @@
+{
+ "id": "lem-sfb-bialgebra-distribution-tangent-calculus",
+ "kind": "statement",
+ "title": "Finite-order convolution and tangent derivations for a commutative bialgebra",
+ "statement": "Let $k$ be a field [def-weil-field] and $C$ a commutative unital $k$-algebra with unital algebra maps $\\Delta:C\\to C\\otimes_k C$ and $\\varepsilon:C\\to k$ satisfying coassociativity and the two counit identities $(\\varepsilon\\otimes1)\\Delta=(1\\otimes\\varepsilon)\\Delta=1_C$, using the canonical tensor identifications [def-weil-pbc-module-tensor-product] and the commutative $k$-algebra structure on $C\\otimes_kC$ with $(a\\otimes b)(a'\\otimes b')=aa'\\otimes bb'$ and unit $1\\otimes1$ [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Put $I=\\ker\\varepsilon$ and\n$$F_n=\\{a\\in\\operatorname{Hom}_k(C,k):a(I^{n+1})=0\\},\\quad F_{-1}=0,\\quad F=\\bigcup_{n\\geq0}F_n.$$\nFor $a,b:C\\to k$ linear set $(a*b)(c)=(a\\otimes b)(\\Delta c)$. This makes $F$ a unital associative $k$-algebra with unit $\\varepsilon$, and $F_r*F_s\\subseteq F_{r+s}$ for $r,s\\geq0$.\nLet $L$ be the vector space of linear maps $v:C\\to k$ satisfying $v(ab)=\\varepsilon(a)v(b)+v(a)\\varepsilon(b)$. Restriction identifies $L$ with $\\operatorname{Hom}_k(I/I^2,k)$; in particular $L\\subseteq F_1$ and $v(1)=0$. The map\n$$v\\longmapsto D_v=(1\\otimes v)\\Delta$$\nis a linear bijection from $L$ to the $k$-linear derivations $D:C\\to C$ (that is, $D(ab)=aD(b)+D(a)b$) satisfying $\\Delta D=(1\\otimes D)\\Delta$, with inverse $D\\mapsto\\varepsilon D$. Commutators of these derivations remain of this kind, and the bracket defined by $D_{[v,w]}=D_vD_w-D_wD_v$ makes $L$ a Lie algebra [def-wf-lie-algebra] and satisfies $[v,w]=v*w-w*v$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Sections 10e and 10l, Proposition 10.29 and printed pp.195--196, 208: left-invariant derivations and the filtered convolution algebra. Bialgebra generality isolates precisely the axioms used; inverse map epsilon D and bracket follow the displayed coassociativity computation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-wf-lie-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\eta:k\\to C$ for the scalar map and $p(c)=c-\\varepsilon(c)1$. Since $\\varepsilon\\eta=1_k$, every $c$ has the unique decomposition $\\varepsilon(c)1+p(c)$ with $p(c)\\in I$. Thus $C=k1\\oplus I$. The bilinearity relations for tensor products [def-weil-pbc-module-tensor-product] expand every tensor into its four $k1,I$ slots; the projections are the tensor products of $\\eta\\varepsilon$ and $p$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(l), printed p.208, augmentation splitting; explicit scalar and augmentation projections"
+   }
+  },
+  {
+   "text": "For $x\\in I$, the scalar–scalar slot of $\\Delta x$ is zero, since $(\\varepsilon\\otimes\\varepsilon)\\Delta x=\\varepsilon(x)=0$. Each of the remaining three slots has at least one factor in $I$. Consequently $\\Delta(I)\\subseteq I\\otimes C+C\\otimes I$, with the right side denoting the sum of the images in $C\\otimes C$. These inclusions and expansions use only the tensor bilinearity of [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(l), printed p.208, order filtration; explicit augmentation-slot expansion"
+   }
+  },
+  {
+   "text": "Let $a\\in F_r$, $b\\in F_s$ and $N=r+s+1$. For $x_1,\\ldots,x_N\\in I$, multiplicativity of $\\Delta$ for the product $(a\\otimes b)(a'\\otimes b')=aa'\\otimes bb'$ of [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $\\Delta(x_1\\cdots x_N)=\\prod_j\\Delta(x_j)$. Expand using Step 2. Each term has at least $N$ occurrences of factors from $I$ distributed over its two slots, so either the first slot belongs to $I^{r+1}$ or the second belongs to $I^{s+1}$. Thus $(a\\otimes b)$ kills every term. Products of $N$ elements of $I$ span $I^N$ (absorb an arbitrary coefficient in one factor), so $a*b\\in F_{r+s}$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(l), printed p.208, filtered convolution; expanded product and pigeonhole argument"
+   }
+  },
+  {
+   "text": "The coalgebra axioms in the hypotheses allow [lem-sfb-convolution-linear-map-algebra] with $R=B=k$: the full linear dual has the specified associative unital convolution algebra structure, unit $\\varepsilon$, and scalar map $t\\mapsto t\\varepsilon$. Each $F_n$ is a vector subspace and $F_n\\subseteq F_{n+1}$ since $I^{n+2}\\subseteq I^{n+1}$. Their union is a vector subspace; Step 3 makes it closed under multiplication, and $\\varepsilon\\in F_0$. Restrict the full-dual operations and identities to this union to obtain the asserted filtered algebra.",
+   "uses": [
+    "lem-sfb-convolution-linear-map-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(l), printed p.208; full-dual algebra supplied by the cited convolution lemma"
+   }
+  },
+  {
+   "text": "For $v\\in L$, substituting $a=b=1$ gives $v(1)=2v(1)$, hence $v(1)=0$ in every characteristic. For $x,y\\in I$, the defining Leibniz identity gives $v(xy)=0$, so $v$ kills $I^2$. Its restriction therefore factors through $I/I^2$, and $v\\in F_1$. Since $v$ kills scalars, the decomposition in Step 1 shows that this restriction determines $v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(e), Proposition 10.28 and §10(l), printed pp.195,208; direct Leibniz calculation"
+   }
+  },
+  {
+   "text": "Conversely, for $\\lambda:I/I^2\\to k$ linear put $v_\\lambda(c)=\\lambda(p(c)\\bmod I^2)$. The equality $p(ab)=\\varepsilon(a)p(b)+p(a)\\varepsilon(b)+p(a)p(b)$ implies $v_\\lambda(ab)=\\varepsilon(a)v_\\lambda(b)+v_\\lambda(a)\\varepsilon(b)$. These two constructions are linear and inverse, since $p(x)=x$ for $x\\in I$ and every $v\\in L$ kills scalars. This proves exactly the asserted linear identification of $L$ with the cotangent dual.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(e), Proposition 10.28 and §10(l), printed pp.195,208; explicit inverse on the augmentation summand"
+   }
+  },
+  {
+   "text": "Use finite-sum notation $\\Delta a=\\sum a_1\\otimes a_2$ (each tensor is a finite sum of simple tensors by [def-weil-pbc-module-tensor-product]). For $v\\in L$, multiplicativity of $\\Delta$ for the tensor-algebra product of [lem-weil-pbc-algebra-tensor-pushout-universal-property] and the Leibniz identity of $v$ give $D_v(ab)=\\sum a_1b_1(\\varepsilon(a_2)v(b_2)+v(a_2)\\varepsilon(b_2))=aD_v(b)+D_v(a)b$ by the two counit contractions. Thus the displayed $k$-linear map $D_v$ is a derivation.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(e), Proposition 10.29, printed pp.195–196; explicit bialgebra calculation"
+   }
+  },
+  {
+   "text": "Applying $1\\otimes1\\otimes v$ to $(\\Delta\\otimes1)\\Delta=(1\\otimes\\Delta)\\Delta$ gives $\\Delta D_v=(1\\otimes D_v)\\Delta$. Moreover $\\varepsilon D_v(c)=\\sum\\varepsilon(c_1)v(c_2)=v(c)$ by the other counit contraction. These formulas show invariance and one of the inverse identities; linearity in $v$ follows from the formula for $D_v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(e), Proposition 10.29, printed pp.195–196; explicit bialgebra calculation"
+   }
+  },
+  {
+   "text": "If $D:C\\to C$ is a $k$-linear derivation with $\\Delta D=(1\\otimes D)\\Delta$, the map $v=\\varepsilon D$ belongs to $L$, because $\\varepsilon$ is multiplicative and $\\varepsilon(D(ab))=\\varepsilon(a)\\varepsilon(Db)+\\varepsilon(Da)\\varepsilon(b)$. Applying $1\\otimes\\varepsilon$ to the invariance equation gives $D=(1\\otimes\\varepsilon D)\\Delta=D_v$. Together with Step 8 this proves the stated linear bijection and its inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(e), Proposition 10.29, printed pp.195–196; explicit bialgebra calculation"
+   }
+  },
+  {
+   "text": "For invariant derivations $D,E$ put $H=DE-ED$. Expanding both iterated Leibniz formulas cancels the two cross terms, giving $H(ab)=aH(b)+H(a)b$. Also $\\Delta DE=(1\\otimes D)\\Delta E=(1\\otimes DE)\\Delta$, and likewise for $ED$; subtraction gives $\\Delta H=(1\\otimes H)\\Delta$. Hence the subspace of invariant derivations is closed under commutators.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(e), Proposition 10.29, printed pp.195–196; explicit bialgebra calculation"
+   }
+  },
+  {
+   "text": "The statement of [def-wf-lie-algebra] gives the commutator Lie algebra of $\\operatorname{End}_k(C)$ and every commutator-closed subspace. Apply it to the subspace in Step 10, and transport its bracket through the linear bijection of Steps 8–9. Bilinearity, alternation and Jacobi are preserved by this bijection, and by construction $D_{[v,w]}=D_vD_w-D_wD_v$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(e), Proposition 10.29, printed pp.195–196; explicit bialgebra calculation"
+   }
+  },
+  {
+   "text": "Finally, for $\\Delta c=\\sum c_1\\otimes c_2$, linearity and $\\varepsilon D_v=v$ give $\\varepsilon(D_vD_w(c))=\\sum\\varepsilon(D_v(c_1))w(c_2)=\\sum v(c_1)w(c_2)=(v*w)(c)$. Interchanging $v,w$ and subtracting, then using the inverse $D\\mapsto\\varepsilon D$, proves $[v,w]=v*w-w*v$ with the asserted order of the factors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§10(e), Proposition 10.29, printed pp.195–196; explicit bialgebra calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-convolution-linear-map-algebra",
+  "def-wf-lie-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§10(e), Proposition 10.28–10.29, printed pp.195–196, and §10(l), printed p.208; omitted tensor and filtration calculations expanded explicitly using precisely the bialgebra axioms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "convolution|Convolution|primitive|Primitive|augmentation",
+   "results": "{\"t\": \"2026-10-24T00:19:03Z\", \"tool\": \"grep\", \"query\": \"convolution|Convolution|primitive|Primitive|augmentation\", \"sub\": \"RingTheory/Bialgebra\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/SymmetricAlgebra.lean\", \"Mathlib/RingTheory/Bialgebra/Convolution.lean\", \"Mathlib/RingTheory/Bialgebra/Convolution.lean\"], \"digest\": \"64f9c50f8e42fd7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.convRing in RingTheory/Coalgebra/Convolution.lean gives convolution on the full linear dual, not closure of finite-order distributions or the order estimate. Derivation.instLieAlgebra in RingTheory/Derivation/Lie.lean gives commutators of derivations, not the bialgebra identification. LeftInvariantDerivation in Geometry/Manifold/Algebra/LeftInvariantDerivation.lean requires charted normed manifolds and is not algebraic-group calculus. Returned signatures and these sources were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Distributions supported at the counit of a bialgebra are closed under convolution and tangent derivations embed in the convolution commutator Lie algebra",
+   "results": "{\"t\": \"2026-10-24T00:19:04Z\", \"tool\": \"leansearch\", \"query\": \"Distributions supported at the counit of a bialgebra are closed under convolution and tangent derivations embed in the convolution commutator Lie algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bialgebra.mk'\", \"BialgCat.of_counit\", \"Bialgebra.counitBialgHom\", \"LinearMap.convRing\", \"Bialgebra.counit_mul\", \"LinearMap.convSemiring\", \"Bialgebra.counitAlgHom\", \"Derivation.instLieAlgebra\"], \"digest\": \"8fde0ac37c7a184a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.convRing in RingTheory/Coalgebra/Convolution.lean gives convolution on the full linear dual, not closure of finite-order distributions or the order estimate. Derivation.instLieAlgebra in RingTheory/Derivation/Lie.lean gives commutators of derivations, not the bialgebra identification. LeftInvariantDerivation in Geometry/Manifold/Algebra/LeftInvariantDerivation.lean requires charted normed manifolds and is not algebraic-group calculus. Returned signatures and these sources were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "Coalgebra, Derivation",
+   "results": "{\"t\": \"2026-10-24T00:19:04Z\", \"tool\": \"loogle\", \"query\": \"Coalgebra, Derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.convRing in RingTheory/Coalgebra/Convolution.lean gives convolution on the full linear dual, not closure of finite-order distributions or the order estimate. Derivation.instLieAlgebra in RingTheory/Derivation/Lie.lean gives commutators of derivations, not the bialgebra identification. LeftInvariantDerivation in Geometry/Manifold/Algebra/LeftInvariantDerivation.lean requires charted normed manifolds and is not algebraic-group calculus. Returned signatures and these sources were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative augmented bialgebra the finite order functionals form a filtered convolution algebra and infinitesimal derivations at the counit have their Lie bracket given by convolution commutator",
+   "results": "{\"t\": \"2026-10-24T00:19:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative augmented bialgebra the finite order functionals form a filtered convolution algebra and infinitesimal derivations at the counit have their Lie bracket given by convolution commutator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.instBracket\", \"Derivation.bracket_eq_fun\", \"LeftInvariantDerivation.instLieAlgebra\", \"Derivation.instLieAlgebra\", \"LieRinehartAlgebra.instLieRinehartRingDerivation\", \"Derivation.instLieRing\", \"Derivation.instLieModule\", \"LieRinehartAlgebra.instDerivation\"], \"digest\": \"c6599c464a1baa6e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.convRing in RingTheory/Coalgebra/Convolution.lean gives convolution on the full linear dual, not closure of finite-order distributions or the order estimate. Derivation.instLieAlgebra in RingTheory/Derivation/Lie.lean gives commutators of derivations, not the bialgebra identification. LeftInvariantDerivation in Geometry/Manifold/Algebra/LeftInvariantDerivation.lean requires charted normed manifolds and is not algebraic-group calculus. Returned signatures and these sources were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left invariant derivations on a commutative coordinate bialgebra identify tangent functionals and the convolution Lie bracket and multiplication respects orders of vanishing",
+   "results": "{\"t\": \"2026-10-24T00:19:35Z\", \"tool\": \"leanfinder\", \"query\": \"Left invariant derivations on a commutative coordinate bialgebra identify tangent functionals and the convolution Lie bracket and multiplication respects orders of vanishing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LeftInvariantDerivation.instBracket\", \"LeftInvariantDerivation.left_invariant''\", \"LeftInvariantDerivation.instLieAlgebra\", \"LeftInvariantDerivation.evalAt\", \"LeftInvariantDerivation\", \"LeftInvariantDerivation.toDerivation\", \"LeftInvariantDerivation.leibniz\", \"LeftInvariantDerivation.left_invariant'\"], \"digest\": \"ed2b479b57bf6790\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LinearMap.convRing in RingTheory/Coalgebra/Convolution.lean gives convolution on the full linear dual, not closure of finite-order distributions or the order estimate. Derivation.instLieAlgebra in RingTheory/Derivation/Lie.lean gives commutators of derivations, not the bialgebra identification. LeftInvariantDerivation in Geometry/Manifold/Algebra/LeftInvariantDerivation.lean requires charted normed manifolds and is not algebraic-group calculus. Returned signatures and these sources were read."
+  },
+  {
+   "tool": "grep",
+   "query": "convolution|convRing|counit|derivation",
+   "results": "{\"t\": \"2026-10-24T00:53:07Z\", \"tool\": \"grep\", \"query\": \"convolution|convRing|counit|derivation\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean\", \"Mathlib/RingTheory/Coalgebra/Quotient.lean\", \"Mathlib/RingTheory/Coalgebra/Quotient.lean\", \"Mathlib/RingTheory/Coalgebra/Quotient.lean\"], \"digest\": \"64734f1373764896\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: full-dual convolution and the Lie algebra of all derivations do not state the finite-order filtration or the invariant-derivation bijection. Manifold LeftInvariantDerivation requires normed charted spaces, unlike this algebraic bialgebra statement. Read Coalgebra/Convolution.lean:55–68,174–193,212; Derivation/Lie.lean:34–64; Geometry/Manifold/Algebra/LeftInvariantDerivation.lean:40–55."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent space at the augmentation of a commutative bialgebra is the Lie algebra of invariant derivations with convolution commutator bracket",
+   "results": "{\"t\": \"2026-10-24T00:53:08Z\", \"tool\": \"leansearch\", \"query\": \"The tangent space at the augmentation of a commutative bialgebra is the Lie algebra of invariant derivations with convolution commutator bracket\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Derivation.instLieAlgebra\", \"Derivation.instLieModule\", \"Derivation.instLieRing\", \"Derivation.instBracket\", \"LieAlgebra.ofAssociativeAlgebra\", \"LieDerivation.instLieAlgebra\", \"LieDerivation.instBracket\", \"instAddCommGroupTangentSpace\"], \"digest\": \"75e7763c238ea1e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: full-dual convolution and the Lie algebra of all derivations do not state the finite-order filtration or the invariant-derivation bijection. Manifold LeftInvariantDerivation requires normed charted spaces, unlike this algebraic bialgebra statement. Read Coalgebra/Convolution.lean:55–68,174–193,212; Derivation/Lie.lean:34–64; Geometry/Manifold/Algebra/LeftInvariantDerivation.lean:40–55."
+  },
+  {
+   "tool": "loogle",
+   "query": "Coalgebra, Derivation",
+   "results": "{\"t\": \"2026-10-24T00:53:08Z\", \"tool\": \"loogle\", \"query\": \"Coalgebra, Derivation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: full-dual convolution and the Lie algebra of all derivations do not state the finite-order filtration or the invariant-derivation bijection. Manifold LeftInvariantDerivation requires normed charted spaces, unlike this algebraic bialgebra statement. Read Coalgebra/Convolution.lean:55–68,174–193,212; Derivation/Lie.lean:34–64; Geometry/Manifold/Algebra/LeftInvariantDerivation.lean:40–55."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite order distributions on a commutative bialgebra form a filtered convolution algebra and tangent functionals identify with left invariant derivations",
+   "results": "{\"t\": \"2026-10-24T00:53:09Z\", \"tool\": \"leanfinder\", \"query\": \"Finite order distributions on a commutative bialgebra form a filtered convolution algebra and tangent functionals identify with left invariant derivations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LeftInvariantDerivation.evalAt\", \"LeftInvariantDerivation.toDerivation\", \"LeftInvariantDerivation.instInhabited\", \"LeftInvariantDerivation.instAdd\", \"LeftInvariantDerivation\", \"LeftInvariantDerivation.left_invariant''\", \"LeftInvariantDerivation.evalAt_mul\", \"LeftInvariantDerivation.instModule\"], \"digest\": \"b33c7fdc29ca2b80\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: full-dual convolution and the Lie algebra of all derivations do not state the finite-order filtration or the invariant-derivation bijection. Manifold LeftInvariantDerivation requires normed charted spaces, unlike this algebraic bialgebra statement. Read Coalgebra/Convolution.lean:55–68,174–193,212; Derivation/Lie.lean:34–64; Geometry/Manifold/Algebra/LeftInvariantDerivation.lean:40–55."
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation|[Dd]istribution|[Ii]nvariant|[Dd]erivation",
+   "results": "{\"t\": \"2026-10-24T00:53:36Z\", \"tool\": \"grep\", \"query\": \"augmentation|[Dd]istribution|[Ii]nvariant|[Dd]erivation\", \"sub\": \"RingTheory/Bialgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: full-dual convolution and the Lie algebra of all derivations do not state the finite-order filtration or the invariant-derivation bijection. Manifold LeftInvariantDerivation requires normed charted spaces, unlike this algebraic bialgebra statement. Read Coalgebra/Convolution.lean:55–68,174–193,212; Derivation/Lie.lean:34–64; Geometry/Manifold/Algebra/LeftInvariantDerivation.lean:40–55."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear functionals vanishing on powers of the augmentation ideal of a bialgebra are closed under convolution with additive orders",
+   "results": "{\"t\": \"2026-10-24T00:53:38Z\", \"tool\": \"leanfinder\", \"query\": \"Linear functionals vanishing on powers of the augmentation ideal of a bialgebra are closed under convolution with additive orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.convMul\", \"LinearMap.convOne\", \"LinearMap.convRing\", \"LinearMap.convSemiring\", \"LinearMap.convCommSemiring\", \"Bialgebra.mul_compr₂_counit\", \"LinearMap.convCommRing\", \"LinearMap.convMul_apply\"], \"digest\": \"be3ad6eee696e016\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: full-dual convolution and the Lie algebra of all derivations do not state the finite-order filtration or the invariant-derivation bijection. Manifold LeftInvariantDerivation requires normed charted spaces, unlike this algebraic bialgebra statement. Read Coalgebra/Convolution.lean:55–68,174–193,212; Derivation/Lie.lean:34–64; Geometry/Manifold/Algebra/LeftInvariantDerivation.lean:40–55."
+  },
+  {
+   "tool": "grep",
+   "query": "convRing|convAlgebra|convMul_apply|convOne_apply",
+   "results": "{\"t\": \"2026-10-24T00:54:26Z\", \"tool\": \"grep\", \"query\": \"convRing|convAlgebra|convMul_apply|convOne_apply\", \"sub\": \"RingTheory/Coalgebra/Convolution.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"63\", \"66\", \"80\", \"84\", \"178\"], \"digest\": \"bff2714052ce6f2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: full-dual convolution and the Lie algebra of all derivations do not state the finite-order filtration or the invariant-derivation bijection. Manifold LeftInvariantDerivation requires normed charted spaces, unlike this algebraic bialgebra statement. Read Coalgebra/Convolution.lean:55–68,174–193,212; Derivation/Lie.lean:34–64; Geometry/Manifold/Algebra/LeftInvariantDerivation.lean:40–55."
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation.instLieAlgebra",
+   "results": "{\"t\": \"2026-10-24T00:54:27Z\", \"tool\": \"loogle\", \"query\": \"Derivation.instLieAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Derivation.instLieAlgebra\", \"Derivation.instLieModule\", \"Derivation.couple\", \"Derivation.Compatible.mk\", \"Derivation.Compatible.mem\", \"Derivation.Compatible.mk_left\", \"Derivation.Compatible.mk_right\", \"Derivation.Compatible.apply\"], \"digest\": \"bdd3b2ca1e48b8e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: full-dual convolution and the Lie algebra of all derivations do not state the finite-order filtration or the invariant-derivation bijection. Manifold LeftInvariantDerivation requires normed charted spaces, unlike this algebraic bialgebra statement. Read Coalgebra/Convolution.lean:55–68,174–193,212; Derivation/Lie.lean:34–64; Geometry/Manifold/Algebra/LeftInvariantDerivation.lean:40–55."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-characteristic-zero-distribution-enveloping",
+  "date": "2026-10-24",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Rational comparison prerequisite: tangent distributions realize the rational enveloping algebra before integral restriction; supporting input: Sections 10e and 10l, Proposition 10.29 and printed pp.195--196, 208: left-invariant derivations and the filtered convolution algebra. Bialgebra generality isolates precisely the axioms used; inverse map epsilon D and bracket follow the displayed coassociativity computation.",
+   "via": [
+    "lem-sfb-characteristic-zero-distribution-enveloping",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bialgebra-distribution-tangent-calculus",
+  "worker": "stage1",
+  "summary": "Retained every hypothesis and conclusion; added only the tensor-definition citation. Expanded the augmentation-slot filtration proof, both cotangent-dual inverse formulas, invariant derivations, commutator closure and the bracket order. Reused the existing convolution Mathlib leaf and Lie-algebra definition/example; no new nodes. No project Lean declaration covers the whole item.",
+  "blueprint": "Read literature/blueprint/latest (main-20261024), sec-six-functors-basics/sk-thm-sf-ctf-stability, especially direct-images proof (3). This supporting bialgebra calculus retains the existing alteration/representation-theoretic ancestry in blueprint.from.place and realizes the rational tangent-distribution prerequisite of lem-sfb-characteristic-zero-distribution-enveloping. Whole-blueprint searches for convolution, derivation, bialgebra, left-invariant, distribution and cotangent found no equal statement. blueprint_refs.py ancestor returns null; its existing from.node and via are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-20d5736b1",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-20d5736b1 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 printed pp.195–196 (Prop. 10.28, the left-invariance commutator display, Prop. 10.29 and its proof) and p.208 §10(l) (Dist_n, convolution, Dist_1≅k⊕g). I also read the four cited leaves in full: def-weil-field, def-weil-pbc-module-tensor-product, lem-sfb-convolution-linear-map-algebra and def-wf-lie-algebra. I checked all 12 steps. The pigeonhole order bound is correct, and so is the identity p(ab)=ε(a)p(b)+p(a)ε(b)+p(a)p(b). v(1)=0 is obtained by subtraction, so characteristic 2 is covered. Invariance comes from coassociativity, and the inverse (1⊗ε)ΔD=D_{εD} is Milne's proof. The bracket order ε(D_vD_w)=v*w is right. I tested C=k, additive k[t], multiplicative k[t] (no antipode), α_p in characteristic p and the matrix monoid (the bracket comes out as AB−BA). There are no new nodes and no repair note. No DAG node duplicates the item; the sibling Hopf, graded-derivation and pairing nodes differ. The route uses only Mathlib leaves, there is no cycle and no SGA source. The citer lem-sfb-characteristic-zero-distribution-enveloping (steps 1, 3, 4) uses the clauses as they are stated. One fault (B3/C4): the statement ('Δ unital algebra map') and the multiplicativity of Δ in steps 3 and 7 use the algebra structure on C⊗_kC, but def-weil-pbc-module-tensor-product defines only the module tensor product. FIX: cite the existing Mathlib leaf lem-weil-pbc-algebra-tensor-pushout-universal-property in the statement, stmt_deps and steps 3 and 7. I also wrote out 'derivation' as D(ab)=aD(b)+D(a)b inline and recomputed proof_deps as the union of the uses. The mathematical content is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BialgebraDistributionTangentCalculus",
+  "declaration": "BialgebraDistribution.finiteOrderConvolutionAndTangentDerivations",
+  "declarations": [
+   "BialgebraDistribution.augmentationIdeal",
+   "BialgebraDistribution.finiteOrder",
+   "BialgebraDistribution.orderFiltration",
+   "BialgebraDistribution.distributions",
+   "BialgebraDistribution.convolution",
+   "BialgebraDistribution.tangentFunctionals",
+   "BialgebraDistribution.tangentContraction",
+   "BialgebraDistribution.invariantDerivation",
+   "BialgebraDistribution.finiteOrderConvolutionAndTangentDerivations"
+  ],
+  "file": "lean/Sheaf/RingTheory/BialgebraDistributionTangentCalculus.lean",
+  "statement": "theorem finiteOrderConvolutionAndTangentDerivations (k : Type u) [Field k] (C : Type v) [CommRing C] [Bialgebra k C] : (∃ S : Subalgebra k (WithConv (C →ₗ[k] k)), (∀ a : WithConv (C →ₗ[k] k), a ∈ S ↔ a.ofConv ∈ distributions k C) ∧ (∀ r s : ℕ, ∀ a b : C →ₗ[k] k, a ∈ finiteOrder k C r → b ∈ finiteOrder k C s → convolution k C a b ∈ finiteOrder k C (r + s)) ∧ ((1 : WithConv (C →ₗ[k] k)).ofConv = Coalgebra.counit (R := k) (A := C))) ∧ (∃ e : tangentFunctionals k C ≃ₗ[k] Module.Dual k (augmentationIdeal k C).Cotangent, (∀ v : tangentFunctionals k C, ∀ x : augmentationIdeal k C, e v ((augmentationIdeal k C).toCotangent x) = v.1 x.1)) ∧ (∃ M : Submodule k (Derivation k C C), (∀ D : Derivation k C C, D ∈ M ↔ invariantDerivation k C D) ∧ (∃ eD : tangentFunctionals k C ≃ₗ[k] M, (∀ v : tangentFunctionals k C, (eD v).1.toLinearMap = tangentContraction k C v.1) ∧ (∀ D : M, (eD.symm D).1 = Coalgebra.counit.comp D.1.toLinearMap))) ∧ (∀ v : tangentFunctionals k C, v.1 ∈ finiteOrder k C 1 ∧ v.1 1 = 0) ∧ (∀ D E : Derivation k C C, invariantDerivation k C D → invariantDerivation k C E → invariantDerivation k C ⁅D, E⁆) ∧ (∃ LR : LieRing (tangentFunctionals k C), LR.toAddCommGroup = (inferInstance : AddCommGroup (tangentFunctionals k C)) ∧ ∃ LA : @LieAlgebra k (tangentFunctionals k C) _ LR, HEq LA.toModule (inferInstance : Module k (tangentFunctionals k C)) ∧ ∀ v w : tangentFunctionals k C, (@Bracket.bracket _ _ LR.toBracket v w).1 = convolution k C v.1 w.1 - convolution k C w.1 v.1 ∧ tangentContraction k C (@Bracket.bracket _ _ LR.toBracket v w).1 = (tangentContraction k C v.1).comp (tangentContraction k C w.1) - (tangentContraction k C w.1).comp (tangentContraction k C v.1))",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20718e698",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Read the node, its 4 stmt_deps (Mathlib leaves: Field, LieRing/LieAlgebra, TensorProduct, Algebra.TensorProduct), the module, the report and the Mathlib WithConv/Cotangent/Dual APIs. Every clause matches: Bialgebra k C over a Field with CommRing C, no extra assumptions, independent universes u v. The ideal I=ker counitAlgHom; F_n is the dualAnnihilator of I^(n+1); F is the union. The subalgebra of WithConv is pinned by membership, has unit counit, and satisfies the order bound F_r*F_s ⊆ F_{r+s}. tangentFunctionals is the canonical kernel intersection; the identification with Dual(I.Cotangent) is pinned to restriction. The bijection onto invariant derivations is pinned to rid∘(id⊗v)∘Δ with inverse counit∘D. Commutator closure is stated. The Lie structure keeps the inherited group and module, and its bracket is pinned by both v*w-w*v and the D-commutator. Edge cases covered: C=k, char 2 and p, no antipode, r=s=0. No duplicate in Mathlib or the live Sheaf/WeilConjectures trees. The lean.statement field is verbatim; the node is unchanged except lean (first delivery); the only sorry is the theorem proof; docstrings and the 12 proof steps are present; no line over 100 characters. Cosmetic only: lowerCamel Prop def invariantDerivation; orderFiltration is unused in the theorem."
+ }
+}

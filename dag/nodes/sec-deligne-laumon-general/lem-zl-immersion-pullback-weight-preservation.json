@@ -1,0 +1,218 @@
+{
+ "id": "lem-zl-immersion-pullback-weight-preservation",
+ "kind": "statement",
+ "title": "Immersion pullback preserves mixed and complex upper weights",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and an isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. For a separated finite-type $k_0$-scheme $S_0$ put $S=S_0\\times_{k_0}k$. Use the common-stage coefficient category $D^b_c(S,\\Qlb)$ and its constructible heart [def-weil-constructible-heart]. Weil objects and equivariant morphisms are fixed pairs as in [def-weil-weil-sheaf-complex]. Mixed upper bounds and $D_{\\le w}(S_0)$ have the meanings of [def-weil-punctual-weights; def-weil-complex-weights].\n\nLet $h_0:W_0\\hookrightarrow X_0$ be a locally closed immersion of separated finite-type $k_0$-schemes, meaning a closed immersion followed by an open immersion [def-weil-closed-immersion; def-weil-open-immersion]. Let $h$ be its base change to $k$ and $h^*$ the derived coefficient pullback [def-weil-derived-pullback-tensor-hom], with its induced Weil structure and its restriction to the constructible heart. For every $w\\in\\mathbf R$:\n1. If a constructible Weil sheaf $F$ on $X_0$ is $\\iota$-mixed of weights at most $w$, then $h^*F$ is $\\iota$-mixed of weights at most $w$.\n2. If $K\\in D_{\\le w}(X_0)$, then $h^*K\\in D_{\\le w}(W_0)$.\nThe finite filtrations in the first assertion may have repeated terms; no strictness of their inclusions is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-excision/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Restriction paragraph: pure-quotient filtrations and cohomology; old step 2."
+ },
+ "stmt_deps": [
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-punctual-weights",
+  "def-weil-complex-weights",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-derived-pullback-tensor-hom",
+  "sk-d-dl-general-weights",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof": [
+  {
+   "text": "Use lem-zl-canonical-immersion-punctual-spectrum to identify residue cardinalities and transfer output eigenvalues to input eigenvalues. The defining punctual-purity equation then gives purity with the same real weight.",
+   "uses": [
+    "lem-zl-canonical-immersion-punctual-spectrum",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+    "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+   }
+  },
+  {
+   "text": "The exact canonical heart pullback in lem-zl-weil-heart-localization-exact sends the finite mixed filtration to a filtration. It preserves the zero first term and monomorphisms; its cokernel comparison identifies successive quotients with pulled-back pure quotients. Purity is invariant under a heart isomorphism simply by precomposing its finite Weil presentation. Retain each quotient weight and its upper inequality.",
+   "uses": [
+    "lem-zl-weil-heart-localization-exact",
+    "def-weil-punctual-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+    "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+   }
+  },
+  {
+   "text": "For each integer a apply the sheaf result with bound w+a. Transport that filtration along the inverse of lem-zl-canonical-immersion-cohomology. Its final isomorphism is the only changed filtration datum. The defining degreewise condition gives the complex result.",
+   "uses": [
+    "lem-zl-canonical-immersion-cohomology",
+    "def-weil-complex-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+    "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-canonical-immersion-punctual-spectrum",
+  "def-weil-punctual-weights",
+  "lem-zl-weil-heart-localization-exact",
+  "lem-zl-canonical-immersion-cohomology",
+  "def-weil-complex-weights"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/det-l-dl-general-excision.proof.md",
+  "place": "Restriction sentence: preservation of weights under open and closed inverse images; finite-model Frobenius and cohomology justification expanded by U3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a locally closed immersion of schemes over a finite field preserves mixed upper weights of Weil sheaves and complexes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y S X' Y' S' : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) (f' : X' ⟶ S') (g' : Y' ⟶ S') (i₁ : X ⟶ X')\\n  (i₂ : Y ⟶ Y') (i₃ : S ⟶ S') (e₁ : CategoryTheory.CategoryStruct.comp f i₃ = CategoryTheory.CategoryStruct.comp i₁ f')\\n  (e₂ : CategoryTheory.CategoryStruct.comp g i₃ = CategoryTheory.C\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] {i j k : J}\\n  (x :\\n    ↥(CategoryTheory.Li\", \"doc\": \"Given a locally directed diagram of schemes where all morphisms are open immersions, for any pullback diagram involving the canonical open inclusions $V_{i,j}$ and $V_{i,k}$, there exists an index $l$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType g],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"Given morphisms $ f : X \\to S $ and $ g : Y \\to S $ of schemes, if $ g $ is locally of finite type, then the first projection morphism from the pullback of $ f $ and $ g $ to $ X $ is also locally of fi\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"Given schemes $X, Y, S$ and morphisms $f : X \\\\to S$ and $g : Y \\\\to S$, if $f$ is locally of finite type, then the second projection morphism $X \\\\times_S Y \\\\to Y$ of the pullback is also locally of fin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.range_map\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) {X' Y' S' : AlgebraicGeometry.Scheme} (f' : X' ⟶ S')\\n  (g' : Y' ⟶ S') (i₁ : X ⟶ X') (i₂ : Y ⟶ Y') (i₃ : S ⟶ S')\\n  (e₁ : CategoryTheory.CategoryStruct.comp f i₃ = CategoryTheory.CategoryStruct.comp i₁ f')\\n  (e₂ : CategoryTheory.CategoryStru\", \"doc\": \"Given morphisms $f: X \\\\to S$ and $g: Y \\\\to S$ of schemes, and compatible morphisms $i_1: X \\\\to X'$, $i_2: Y \\\\to Y'$, $i_3: S \\\\to S'$ where $i_3$ is a monomorphism, the image of the induced pullback ma\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme pullbacks, structure-module restrictions and module filtrations do not state preservation of common-stage Weil weights"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a pure quotient filtration along an immersion preserves mixed weights and cohomological upper weight bounds",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsModuleFiltration.mk_int\", \"module\": \"Mathlib/RingTheory/FilteredAlgebra/Basic\", \"type\": \"∀ {R : Type u_3} {M : Type u_4} {σ : Type u_5} {σM : Type u_6} [inst : Semiring R] [inst_1 : SetLike σ R]\\n  [inst_2 : AddCommMonoid M] [inst_3 : Module R M] [inst_4 : SetLike σM M] (F : ℤ → σ) (mono : Monotone F)\\n  [inst_5 : SetLike.GradedMonoid F] (F' : ℤ → σM),\\n  Monotone F' → ∀ [SetLike.GradedSMu\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $ forming a graded monoid, and a monotone family $ F' : \\\\mathbb{Z} \\\\to \\\\sigma_M $ of subsets of an $ R $-module $ M $\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_forall_le\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M}, F.Stable → F.N 0 ≤ F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ and another filtration $\\\\{I'^n M\\\\}$ with $I^0 M \\\\subseteq I'^0 M$, there exists an integer $n_0$ such that for all $n \\\\geq 0$, the inclusion $I\"}\n  {\"name\": \"Ideal.Filtration.Stable.bounded_difference\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F F' : I.Filtration M},\\n  F.Stable → F'.Stable → F.N 0 = F'.N 0 → ∃ n₀, ∀ (n : ℕ), F.N (n + n₀) ≤ F'.N n ∧ F'.N (n + n₀) ≤ F.N n\", \"doc\": \"Given two stable filtrations $\\\\{I^n M\\\\}$ and $\\\\{I'^n M\\\\}$ of an $R$-module $M$ by powers of ideals $I$ and $I'$, if their initial submodules $I^0 M = I'^0 M$ coincide, then there exists an integer $n_\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M}, F.Stable → ∃ n₀, ∀ n ≥ n₀, F.N n = I ^ (n - n₀) • F.N n₀\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ by an ideal $I$, there exists an integer $n_0$ such that for all $n \\\\geq n_0$, the submodule $I^n M$ is equal to $I^{n - n_0} \\\\cdot I^{n_0} M$.\"}\n  {\"name\": \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M}, F.Stable → ∃ n₀, ∀ (k : ℕ), F.N (n₀ + k) = I ^ k • F.N n₀\", \"doc\": \"For a stable filtration $\\\\{I^n M\\\\}_{n \\\\in \\\\mathbb{N}}$ of an $R$-module $M$ by powers of an ideal $I \\\\subseteq R$, there exists an integer $n_0$ such that for all $k \\\\geq 0$, the equality $I^k \\\\bullet\"}\n  {\"name\": \"LieModule.genWeightSpace_genWeightSpaceOf_map_incl\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ {R : Type u_2} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] (x : L) (χ : L → R),\\n  LieSubmodule.map (LieM\", \"doc\": \"For a nilpotent Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ acting on a Lie module $M$, and a weight function $\\\\chi : \\\\mathfrak{g} \\\\to R$, the image of the generalized weight space $\\\\text{G\"}\n  {\"name\": \"Ideal.Filtration.Stable.of_le\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M} [IsNoetherianRing R] [Module.Finite R M], F.Stable → ∀ {F' : I.Filtration M}, F' ≤ F → F'.Stable\", \"doc\": \"Let $ R $ be a Noetherian ring, $ M $ a finitely generated $ R $-module, and $ I $ an ideal of $ R $. If $ \\\\{F_n\\\\} $ is a stable $ I $-adic filtration of $ M $ and $ \\\\{F'_n\\\\} $ is another $ I $-adic f\"}\n  {\"name\": \"Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge\", \"module\": \"Mathlib/RingTheory/Filtration\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {I : Ideal R}\\n  {F : I.Filtration M}, F.Stable ↔ ∃ n₀, ∀ n ≥ n₀, F.N n = I ^ (n - n₀) • F.N n₀\", \"doc\": \"A filtration $\\\\{I^n M\\\\}$ of an $R$-module $M$ by powers of an ideal $I \\\\subseteq R$ is stable if and only if there exists an integer $n_0$ such that for all $n \\\\geq n_0$, the $n$-th submodule $I^n M$ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme pullbacks, structure-module restrictions and module filtrations do not state preservation of common-stage Weil weights"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\", \"upperStar\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme pullbacks, structure-module restrictions and module filtrations do not state preservation of common-stage Weil weights"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost.*upperStar|immersion.*mixed.*weight",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme pullbacks, structure-module restrictions and module filtrations do not state preservation of common-stage Weil weights"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally closed immersion pullback preserves mixed weights of ell adic Weil complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {UX UY : AlgebraicGeometry.Scheme} {iY : UY ⟶ Y}\\n  [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X} {f' : UX ⟶ UY}, CategoryTheory.IsPullba\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target, then given a pullback square where the right morphism is an open immersion, if the original morphism $ f $ satisfies $ P $, then the pulled\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \": MorphismProperty.HasPullbacks IsOpenImmersion\", \"doc\": \"For any two open immersions $ f : X \\\\to Z $ and $ g : Y \\\\to Z $ in the category of schemes, there exists a pullback of $ f $ and $ g $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{S T : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (i : S ⟶ T) [IsSeparated i] : IsClosedImmersion (pullback.mapDesc f g i)\", \"doc\": \"If $ i: S \\to T $ is a separated morphism of schemes, then the morphism between the pullbacks induced by $ i $ is a closed immersion. Specifically, given morphisms $ f: X \\to S $ and $ g: Y \\to S $, the \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsImmersion\", \"doc\": \"The property of being an immersion of schemes is stable under base change, meaning that if a morphism of schemes is an immersion, then any base change (pullback) of this morphism is also an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": HasPullback g f\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes and any morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(H' : Set.range g.base ⊆ Set.range f.base) : Y ⟶ X\", \"doc\": \"Given an open immersion $ f: X \\to Y $ and a morphism $ g: Z \\to Y $ whose underlying continuous map has image contained in the image of $ f $, this constructs a morphism $ Y \\to X $ by taking the invers\"}\n  {\"name\": \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"{ZX ZY X Y : Scheme} (iX : ZX ⟶ X) (iY : ZY ⟶ Y) (Zf : ZX ⟶ ZY) (f : X ⟶ Y) [IsClosedImmersion iX]\\n  [IsClosedImmersion iY] (h : iX ≫ f = Zf ≫ iY) (h' : iY.ker.comap f = iX.ker) : IsPullback iX Zf f iY\", \"doc\": \"Given schemes $Z_X \\\\subset X$ and $Z_Y \\\\subset Y$ as closed immersions with ideal sheaves $\\\\mathcal{I}_X$ and $\\\\mathcal{I}_Y$, and morphisms $f: X \\\\to Y$ and $Zf: Z_X \\\\to Z_Y$ forming a commutative sq\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": HasPullback f g\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes and a morphism $ g: Z \\to Y $, the pullback (fiber product) of $ f $ and $ g $ exists in the category of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme pullbacks, structure-module restrictions and module filtrations do not state preservation of common-stage Weil weights"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|IsPunctuallyPureOfWeight",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme restrictions, module-sheaf pullbacks, local cohomology and ideal filtrations do not state common-stage Weil-weight preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of an ell adic Weil sheaf to a locally closed subscheme preserves a finite filtration with punctually pure quotients",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Opens.toScheme, AlgebraicGeometry.Scheme.Opens.stalkIso, AlgebraicGeometry.Scheme.ofRestrict_appLE, AlgebraicGeometry.Scheme.restrict_presheaf_map, CategoryTheory.Sheaf.ΓRes, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.IsOpenImmersion.ofRestrict, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme restrictions, module-sheaf pullbacks, local cohomology and ideal filtrations do not state common-stage Weil-weight preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\", \"upperStar\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme restrictions, module-sheaf pullbacks, local cohomology and ideal filtrations do not state common-stage Weil-weight preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a locally closed immersion preserves mixed upper weights of constructible Weil sheaves and cohomological weight bounds",
+   "results": "OK 8 hits: AlgebraicGeometry.IsLocalAtTarget.of_isPullback, SheafOfModules.pullbackComp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme restrictions, module-sheaf pullbacks, local cohomology and ideal filtrations do not state common-stage Weil-weight preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image functor restricts a pure quotient filtration and preserves upper mixed weights of Weil complexes",
+   "results": "OK 8 hits: Profinite.NobelingProof.succ_exact, localCohomology, Ideal.Filtration.Stable.bounded_difference, IsModuleFiltration.mk_int, Ideal.Filtration.Stable.exists_forall_le, Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge, Ideal.Filtration.Stable.exists_pow_smul_eq, Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme restrictions, module-sheaf pullbacks, local cohomology and ideal filtrations do not state common-stage Weil-weight preservation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-morphism-open-closed-reduction",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Restriction paragraph: pure-quotient filtrations and cohomology; old step 2.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-immersion-pullback-weight-preservation",
+  "worker": "stage1",
+  "summary": "Expanded the restriction paragraph into preservation of punctual purity by an intertwining stalk isomorphism, exact restriction of the mixed filtration, and the cohomology comparison. Reused the existing common-stage immersion lemma, created no nodes, and retained the statement. Concrete upstream Weil-complex theorems use a different category and are not exact attachments.",
+  "blueprint": "Realizes the Restriction paragraph of lem-zl-morphism-open-closed-reduction.proof.md: restrict the filtration, identify closed-point residue fields and local Frobenius, and apply to all cohomology sheaves."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-e30246820",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-e30246820 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement is unchanged. The 3 steps realize the Restriction paragraph of lem-zl-morphism-open-closed-reduction.proof.md (main-20261015): restrict the filtration, a closed point with the same residue field, stalk and Frobenius, then apply this to cohomology sheaves. I checked them against the statements of lem-zl-immersion-weil-local-behavior clause (1), def-weil-punctual-weights and def-weil-complex-weights (bound w+a). The hypotheses and the common-stage Q̄_ℓ fixed-pair category match, and the bound is not weakened. Small cases (id, empty W_0, support outside W, zero sheaf) are fine. The DAG search found no duplicate; open-shriek, extension-by-zero, target-reassembly and mixed-direct-summand are different statements. One repaired fault (C1): steps 2 and 3 used, without citation, the fact that a Weil isomorphism intertwines the local Frobenius operators. The finite-F node lem-fd-local-frobenius-weil-morphism-naturality is not the common-stage statement. The fix writes out the naturality in step 2 (v α^[n] = β^[n] G^n(v) by induction, natural composition comparisons, natural point transports) and cites def-weil-local-frobenius-trace, lem-pod-integral-pullback-composition and lem-weil-frobenius-point-transport-natural(2). Step 3 refers to it, and proof_deps is the union of the uses. No cycle. Batch-5 flag: the immersion lemma reaches def-weil-local-frobenius-trace, which is the general definition of the local Frobenius operator and trace, not a step of the trace-formula or Poincaré-duality proofs. It was already in the base closure via the stmt_dep def-weil-punctual-weights. Accepted. The fix's added citations are generic, already in the closure, and add nothing new to the batch-5 closure.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ZlImmersionPullbackWeightPreservation",
+  "declaration": "WeilConjectures.zlImmersionPullbackWeightPreservation",
+  "file": "lean/Sheaf/Paper/ZlImmersionPullbackWeightPreservation.lean",
+  "statement": "theorem zlImmersionPullbackWeightPreservation (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Qbar : Type v) [Field Qbar] [Algebra (Padic l) Qbar] [IsAlgClosure (Padic l) Qbar] (iota : Qbar ≃+* ℂ) (W₀ X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType W₀.hom] [QuasiCompact W₀.hom] [IsSeparated W₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] (h₀ : W₀ ⟶ X₀) [IsImmersion h₀.left] (w : ℝ) : (∀ F : sfCommonStageWeilSheaf D l hl X₀ Qbar, SfIsMixedOfWeightsAtMost D l hl Qbar X₀ iota.toRingHom F w → SfIsMixedOfWeightsAtMost D l hl Qbar W₀ iota.toRingHom ((zlWeilPull D l hl Qbar h₀).obj F) w) ∧ (∀ K : sfCommonStageWeilComplex D l hl X₀ Qbar, SfComplexIsMixedOfWeightsAtMost D l hl Qbar X₀ iota.toRingHom K w → SfComplexIsMixedOfWeightsAtMost D l hl Qbar W₀ iota.toRingHom ((IsoAlgebra.mapOfNatIso (zlFrobeniusSquare D l hl Qbar h₀)).obj K) w)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing common-stage upper-bound predicate SfComplexIsMixedOfWeightsAtMost (sk-d-dl-general-weights) and normalized canonical Weil pullback zlWeilPull / zlFrobeniusSquare (def-zl-weil-ind-sheaf-category); those two already-landed statement dependencies are added. No alternate Weil category, upper-bound definition, or arbitrary equivariance datum is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-503625c4d",
+  "group": "NQ",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause. D, l≠p and Qbar in an independent universe v; iota : Qbar ≃+* ℂ, used via toRingHom; W₀ and X₀ LocallyOfFiniteType+QuasiCompact+IsSeparated over Spec k₀; [IsImmersion h₀.left] is exactly closed-then-open by Mathlib's isImmersion_iff_exists. Pullback zlPull = commonStageDerivedPullback (zlFiberMap); its Weil structure is IsoAlgebra.mapOfNatIso (zlFrobeniusSquare), built from normalized zlPullComp plus eqToIso of Frobenius naturality, not arbitrary; zlWeilPull is the heart lift of the same functor. Clause 1 uses SfIsMixedOfWeightsAtMost (Mono only, m=0 allowed, so repeated terms are fine). Clause 2 uses SfComplexIsMixedOfWeightsAtMost = ∀ b : ℤ at w+b; sfWeilCohomology matches the H^j Weil datum of def-weil-complex-weights, which has no lean record, so the upper notion is reused, not duplicated. Added stmt_deps sk-d-dl-general-weights and def-zl-weil-ind-sheaf-category are landed definition nodes with no cycle; only lean and stmt_deps differ from live. lean.statement verbatim; single sorry; docstrings with source place, blueprint id and 3 proof steps; universes bound; report sections present. Edge cases (empty W₀, zero objects, killed quotients, any real w, all b) covered. No compile (no file changed); worker reports a clean compile and an OK dry run. Advisory for stage 3: the ZlImmersionPullback equivariance is pinned by localPullbackComposition while zlFrobeniusSquare uses zlPullComp; the proof needs to identify them."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261025T015421-L-341801",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

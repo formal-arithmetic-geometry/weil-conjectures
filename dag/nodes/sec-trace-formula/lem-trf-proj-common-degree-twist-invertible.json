@@ -17,67 +17,56 @@
  ],
  "proof": [
   {
-   "text": "Because U is quasi-compact and the positive-degree standard opens form a basis of Proj(A), the assumed cover has a finite subcover; after reindexing, we may use the given finite list f_1, ..., f_r. The quasi-compactness definition is exactly the finite-subcover property, and the standard-open result supplies the positive-degree basis.",
-   "uses": [
-    "def-weil-pbc-quasi-compact-scheme",
-    "lem-weil-pbc-proj-standard-open-inclusion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MW proof, first sentence; Tag 01M4 and Algebra Tag 00JP for the positive-degree standard-open basis."
-   }
-  },
-  {
-   "text": "Let d_i=deg(f_i) and choose the positive common multiple e from the hypothesis. For each i put g_i=f_i^{e/d_i}; then deg(g_i)=e and D_+(g_i)=D_+(f_i), since a homogeneous prime contains f_i exactly when it contains a positive power of f_i. Thus the D_+(g_i) still cover U. This is the elementary common-degree replacement in the proof of Tag 01MW.",
+   "text": "Use the cover already supplied in the hypotheses. For each i put g_i=f_i^(e/d_i). Divisibility gives degree e and e>0 gives e/d_i>0; basicOpen_pow identifies D_+(g_i) with D_+(f_i). Thus every point of V lies in a standard open of a degree-e element. No finite-subcover or basis theorem is needed here.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MW proof, first paragraph: d=d_1...d_n and D_+(f_i)=D_+(f_i^{d/d_i})."
-   }
+   "elementary": true
   },
   {
-   "text": "The invertibility-locus characterization says that W_e is the union of standard opens D_+(ab) with homogeneous a,b satisfying deg(a)=deg(b)+e. Taking a=g_i and b=1 gives D_+(g_i)=D_+(g_i\\cdot1) contained in W_e for every i. Hence U, covered by these opens, is contained in W_e.",
-   "uses": [
-    "lem-trf-proj-twist-section-basic-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MS (lemma-where-invertible), characterization (2), applied in Tag 01MW proof."
-   }
-  },
-  {
-   "text": "By the definition of W_e, on U every O_U(ne)=O_P(ne)|_U is invertible and every multiplication map O_U(ne) tensor O_U(me) -> O_U((n+m)e) is an isomorphism. In particular O_U(ek) is invertible for k>=1.",
-   "uses": [
-    "lem-trf-proj-twist-section-basic-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MS characterization (1), restricted from W_e to U."
-   }
-  },
-  {
-   "text": "Compose the multiplication isomorphism for (e,(k-1)e) with the inductively obtained identification O_U(e)^{tensor (k-1)} ≅ O_U((k-1)e), starting from k=1. Associativity of tensor products makes this the canonical map O_U(e)^{tensor k} -> O_U(ek), and it is an isomorphism for every k>=1.",
+   "text": "For each degree-e homogeneous a, choose beta=0 and b=1 in the given union formula for W. This puts D_+(a) inside W. The degree-e cover therefore proves V <= W.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MW clauses (1)--(4), using the multiplication maps from Tag 01MS."
-   }
+   "elementary": true
+  },
+  {
+   "text": "On any open contained in D_+(a), construct the section a^n of O(ne) as the homogeneous fraction a^(n.toNat)/a^((-n).toNat). The difference of these nonnegative exponents is n. Localization fraction identities give a^n*a^m=a^(n+m) and a^0=1. The section a^(-n) is its pointwise inverse, so isFreeGenerator_twist_of_mul_eq_one makes it a free generator. Restriction transports the generator to V. Its local trivialization gives invertibility at every point.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-local-free-generator",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pointwise multiplication of homogeneous fractions is bilinear on sections and commutes with restriction. Apply tensor_bilinear_universal on Proj to construct the unique sheaf morphism with this action on local pure tensors, and transport it to V using the proved restriction-tensor comparison. On a degree-e chart it sends the free generator a^n tensor a^m to a^(n+m), so its map on sections of every smaller open is bijective. Hom.isIso_of_forall_bijective_app implies it is an isomorphism. The integer n=k also proves invertibility of the natural-degree twist O(ek).",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-sc-module-hom-local-bijective-iso",
+    "def-sc-local-free-generator",
+    "lem-weil-pbc-module-restriction-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Start at k=0 with the restriction-of-unit isomorphism followed by unitIsoTwistZero. Recursively tensor the identity of O(e)|V with the k-fold isomorphism, then compose with the binary multiplication isomorphism. This constructs actual isomorphisms for every k, and hence for k>0. The unit map sends 1 to 1. Naturality of tensorHom on tmulSection and the pure-tensor formula for binary multiplication give the required successor formula.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-quasi-compact-scheme",
-  "lem-weil-pbc-proj-standard-open-inclusion",
-  "lem-trf-proj-twist-section-basic-open"
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-local-free-generator",
+  "def-sc-invertible-module",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-sc-module-hom-local-bijective-iso",
+  "lem-weil-pbc-module-restriction-tensor-comparison",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01MW (lemma-ample-on-proj), proof first paragraph and clauses (1)--(4), using Tag 01MS (lemma-where-invertible)."
+  "place": "Tags 01MU (lemma-where-invertible) and 01MW (lemma-ample-on-proj); direct degree-e chart proof using the given cover, formalized by H9."
  },
  "mathlib_searches": [
   {
@@ -148,9 +137,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-proj-standard-open-inclusion"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -178,5 +165,26 @@
   "result": "pass",
   "note": "Every hypothesis and conclusion clause matches the node and Stacks 01MU/01MW, with no added assumptions. The open is the exact quasi-compact open of Proj with its inclusion; the cover is any finite family (may be empty, own universe); e>=1 is a common multiple of positive degrees. W_e is the node's equivalent union of D_+(ab) with deg a = deg b + e, b = 1 included. The conclusions state V <= W, invertibility of every O(ne) for n in Z, and isomorphisms for all binary multiplication maps, each pinned to the product of homogeneous fractions on local pure tensors. The k-fold map is pinned at 0 and recursively at k+1, with IsIso for k>0. These pins make the maps canonical, not arbitrary isomorphisms. The tensor is the same localization tensor recorded for def-pur-sheaf-tensor-product. No existing declaration duplicates this result. The six dependency records are identical to live; the item record only adds the lean field, and its statement field matches the file verbatim. No definitions, only sorry; docstrings carry the source place, blueprint tag and five proof steps. nt_compile --json: 3.2 s, exit 0, clean. Maintainer notes: the node's source field calls lemma-where-invertible Tag 01MS, but it is 01MU; the downstream qc-open-ample node pins the same map by a Fin-k product, which the proof stage must relate to this recursive pin."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261023T231542-L-3616386",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

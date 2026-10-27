@@ -49,7 +49,7 @@ theorem finiteCocone_limits
   have hB (p q : ℤ) (t : ℕ) (ht : R p q ≤ t) : T.B t p q = B p q := hr p q t ht |>.2
   have hreg : X.IsRegular := by
     intro p q
-    exact ⟨R p q, fun t ht ↦ hZ p q t ht⟩
+    exact ⟨R p q, fun t ht ↦ hB p q t ht⟩
   let L : X.LimitSubobjects := {
     Z := Z
     B := B

@@ -1,0 +1,82 @@
+{
+ "id": "lem-trf-prime-product-factor-splitting",
+ "kind": "statement",
+ "title": "Splitting factors of a finite indexed product of prime elements",
+ "statement": "Let $D$ be a commutative integral domain, that is, a nonzero commutative ring with no zero divisors. For $q,y\\in D$ write $q\\mid y$ when $y$ lies in the $D$-submodule $\\operatorname{span}_D\\{q\\}=qD$ of $D$ spanned by $q$ [def-weil-submodule-span], i.e. $y=qz$ for some $z\\in D$. Let $I$ be a set, $S\\subset I$ a finite subset, and $p:I\\to D$ a family such that for every $i\\in S$ the element $p_i$ is prime: $p_i\\ne0$, $p_i$ is not a unit, and $p_i\\mid ab$ implies $p_i\\mid a$ or $p_i\\mid b$ for all $a,b\\in D$. Let $h,k,a\\in D$ satisfy $hk=a\\prod_{i\\in S}p_i$. Then there are finite subsets $T,U\\subset I$ and elements $b,c\\in D$ such that $T\\cup U=S$, $T\\cap U=\\varnothing$, $a=bc$, $h=b\\prod_{i\\in T}p_i$, and $k=c\\prod_{i\\in U}p_i$. The empty subset and repeated or associated values of $p$ are allowed; unique factorization of $D$ is not assumed.",
+ "source": {
+  "document": "lean/.lake/packages/mathlib/Mathlib/RingTheory/Prime.lean",
+  "place": "mul_eq_mul_prime_prod, lines 24--48; theorem statement lines 32--36."
+ },
+ "stmt_deps": [
+  "def-weil-submodule-span"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If x times y equals a times a finite product of prime elements in a cancellative commutative monoid with zero then partition the primes between x and y and split a as b times c",
+   "results": "mul_eq_mul_prime_prod; mul_eq_mul_prime_pow; UniqueFactorizationMonoid.of_exists_prime_factors; UniqueFactorizationMonoid.exists_reduced_factors; prime_factors_unique. Read Mathlib/RingTheory/Prime.lean:24-48; first hit matches.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mul_eq_mul_prime_prod",
+   "results": "One hit: mul_eq_mul_prime_prod, Mathlib.RingTheory.Prime, complete signature gives the partition and b,c.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If x*y=a*product of prime elements there is a partition of the finite index set and a=b*c with x=b*product on the first part and y=c*product on the second part",
+   "results": "mul_eq_mul_prime_prod; mul_eq_mul_prime_pow; factorization_mul; UniqueFactorizationMonoid.exists_prime_factors. First hit matches without unique factorization.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "mul_eq_mul_prime_prod|mul_eq_mul_prime_pow",
+   "results": "In RingTheory: Mathlib/RingTheory/Prime.lean:32 mul_eq_mul_prime_prod; :55 mul_eq_mul_prime_pow; :57 invocation. Read lines 24-48, including both typeclass hypotheses and all conclusion clauses.",
+   "date": "2026-10-23",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "mul_eq_mul_prime_prod",
+  "file": "Mathlib/RingTheory/Prime.lean",
+  "line": 32,
+  "how": "specializes in one line: take the commutative cancellative monoid with zero to be the multiplicative monoid of the integral domain D and the Finset to represent S; mul_eq_mul_prime_prod at lines 32--36 gives exactly all six conclusion clauses. Its hypotheses [CommMonoidWithZero D] [IsCancelMulZero D] are inherited from a domain. Prime is exactly nonzero, nonunit, and the displayed product-divisibility property. No UFD instance is used. Divisibility as membership in the span: Ideal.span {q} is Submodule.span D {q} and Ideal.mem_span_singleton (Mathlib/RingTheory/Ideal/Span.lean:181) gives y ∈ span {q} ↔ q ∣ y, so the displayed primality is Mathlib's Prime (Mathlib/Algebra/Prime/Defs.lean:43)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-lattice-retraction-prime-factor-descent",
+  "date": "2026-10-23",
+  "group": "Q82"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) nearby-duality alteration ancestry of lem-trf-local-term-locality, through log-regular divisorial structure: Class-group input to the complete-local recognition equality: the cokernel of the primitive facet-valuation map injects into the Weil divisor class group of the completed model (the Mori-type injectivity issue in the return). Auxiliary Descent of prime monomial factors through a lattice-support retraction; original boundary-class proof steps 9, 10, 11. Prime-product factor splitting used before the positive exponent shift in original boundary-class proof steps 9--11; historical auxiliary ancestry, not a theorem asserted by the current contracting-correspondence text.",
+   "via": [
+    "lem-trf-lattice-retraction-prime-factor-descent",
+    "lem-trf-complete-toric-boundary-class-injectivity",
+    "lem-trf-complete-toric-kato-recognition",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

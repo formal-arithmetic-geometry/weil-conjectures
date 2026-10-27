@@ -1,0 +1,108 @@
+{
+ "id": "new-finite-compact-support-composition-tower-exchange",
+ "kind": "statement",
+ "title": "Composition exchange equals expanded tower exchange",
+ "statement": "For a compactification base-change square with its open and proper pullback witnesses, the strict composition exchange natural transformation equals the associator-expanded relative compact-support tower exchange.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F, expansion of the ordered proper mate followed by the open beta comparison"
+ },
+ "stmt_deps": [
+  "def-cbc-strict-tower-composition-maps",
+  "lem-pur-relative-compact-support-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Expand compositionE and exchange, then expand towerH. Both sides are the same mate followed by the same beta comparison, with only canonical functor associators and identity transformations inserted. Naturality and the identity laws for functor composition remove those associators. The declaration is left as the isolated constituent compatibility required by the finite evaluation proof.",
+   "uses": [
+    "def-cbc-strict-tower-composition-maps",
+    "lem-pur-relative-compact-support-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-tower-composition-maps",
+  "lem-pur-relative-compact-support-pasting"
+ ],
+ "proof_origin": {
+  "by": "F4 stage 3",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F, ordered mate expansion",
+  "note": "Split off as a strict constituent of finiteCompactSupportEvaluationRefinement."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompositionExchangeTowerH",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.compositionE_eq_towerH",
+  "file": "lean/Sheaf/Paper/CompositionExchangeTowerH.lean",
+  "statement": "theorem compositionE_eq_towerH {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} (c : Compactification f) (c' : Compactification f') (x : X' ⟶ X) (y : Y' ⟶ Y) (s : c'.Z ⟶ c.Z) (wi : x ≫ c.i = c'.i ≫ s) (wp : s ≫ c.g = c'.g ≫ y) (si : IsPullback x c'.i c.i s) (sp : IsPullback s c'.g c.g y) : compositionE B c c' x y s wi wp si = RelativeCompactSupport.towerH B c c' y x s sp si",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCompactSupportEvaluationRefinement",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-compact-support-evaluation-refinement",
+   "place": "Step 2 constituent compatibility between the specified composition exchange and the expanded tower exchange."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "composition exchange equals associator-expanded tower exchange in strict constant towers",
+   "results": "No direct specialized declaration found; the existing finiteEvaluation theorem uses towerH.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.associator_hom_app CategoryTheory.Category.id_comp",
+   "results": "Generic associator and identity laws only.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical laws support the expansion."
+  },
+  {
+   "tool": "grep",
+   "query": "compositionE towerH RelativeCompactSupport",
+   "results": "Existing definitions found in StrictTowerCompositionMaps and RelativeCompactSupportPasting; no equality theorem.",
+   "date": "2026-10-26",
+   "verdict": "The compatibility is a new split-off constituent."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T023129-L-522818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T071157-L-3878094",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.StrictTower.compositionE_eq_towerH"
+  ],
+  "sorry_after": []
+ }
+}

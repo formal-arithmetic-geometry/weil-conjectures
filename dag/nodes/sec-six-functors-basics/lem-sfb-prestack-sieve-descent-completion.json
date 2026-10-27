@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-prestack-sieve-descent-completion",
+ "kind": "statement",
+ "title": "Descent completion of a prestack using covering sieves",
+ "statement": "Fix the universes of [def-weil-size-convention]. Let $(\\mathcal C,J)$ be a site [def-weil-pbc-topos] whose objects and arrows form sets in the larger universe; all groupoids and their morphism sets below belong to that universe. A fibred groupoid has cartesian pullbacks along every base arrow, with their coherent comparison isomorphisms. A prestack is a fibred groupoid whose presheaves of isomorphisms on slice sites are sheaves. A stack is a prestack in which covering descent data for objects are effective. Let $\\mathcal Q$ be a prestack. For a covering sieve $R\\in J(T)$, regard $R$ as a full subcategory of $\\mathcal C/T$. Write $\\operatorname{Sec}_{\\mathcal Q}(R)$ for its groupoid of cartesian sections: a section assigns $x_f\\in\\mathcal Q(V)$ to each $f:V\\to T$ in $R$ and coherent isomorphisms $h^*x_f\\cong x_{fh}$ for each $h:W\\to V$; its arrows are compatible families of fibre isomorphisms. Define $\\mathcal D\\mathcal Q(T)$ to have objects $(R,x)$ with $R\\in J(T)$ and $x\\in\\operatorname{Sec}_{\\mathcal Q}(R)$, and arrows\n$$\\operatorname{Hom}_{\\mathcal D\\mathcal Q(T)}((R,x),(S,y))=\\varinjlim_{K\\subseteq R\\cap S,\\ K\\in J(T)}\\operatorname{Isom}_{\\operatorname{Sec}_{\\mathcal Q}(K)}(x|_K,y|_K),$$\nwhere the transition maps restrict to smaller covering sieves. Composition is composition on a common covering subsieve; pullback along $h:V\\to T$ restricts a section along $\\mathcal C/V\\to\\mathcal C/T$, to the inverse-image sieve $h^*R$. These formulas give a fibred groupoid $\\mathcal D\\mathcal Q$ which is a stack. Sending $u\\in\\mathcal Q(T)$ to its pullback section on the maximal sieve defines a pullback-compatible functor $e:\\mathcal Q\\to\\mathcal D\\mathcal Q$ fully faithful on every fibre. If $(R,x)\\in\\mathcal D\\mathcal Q(T)$ and $f:V\\to T$ is in $R$, then $(R,x)|_V$ is canonically isomorphic to $e(x_f)$, compatibly with restriction and the section's transition isomorphisms. In particular these formulas include empty covering sieves whenever they belong to $J$.",
+ "source": {
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 02ZN (lemma-stackify), final descent-data construction in both proofs, including checks (1)-(8) in the naive proof; covering-sieve formulation avoids requiring fibre products of arbitrary base arrows."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-topos"
+ ],
+ "proof": [
+  {
+   "text": "Use the topology axioms in [def-weil-pbc-topos]. Covering sieves are upward closed: if $R\\subseteq S$ covers, then $f^*S$ is maximal for $f\\in R$, so transitivity makes $S$ cover. If $R,S$ cover, then for $f\\in R$ the sieve $f^*(R\\cap S)=f^*S$ covers, so $R\\cap S$ covers. If $R$ covers and each $S_f$ covers $\\operatorname{dom}f$, the sieve $H=\\{fg:f\\in R,\\ g\\in S_f\\}$ covers: it is a sieve, and $f^*H\\supseteq S_f$, so use upward closure and transitivity. Thus common covering refinements exist. All sieve sets, section data, families of isomorphisms and their quotients are sets in the fixed larger universe, being subsets, indexed products and quotients of sets there.",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), final descent-data construction, naive checks (1)-(8) and less naive construction; explicit covering-sieve verification."
+   }
+  },
+  {
+   "text": "For two objects $(R,x),(S,y)$, apply [lem-sfb-cartesian-section-covering-restriction] with $S$ there equal to $R\\cap S$ here and any covering $K\\subseteq R\\cap S$. Its hypothesis holds since pullback of a covering sieve is covering. Hence every restriction\n$\\operatorname{Isom}(x|_{R\\cap S},y|_{R\\cap S})\\to\\operatorname{Isom}(x|_K,y|_K)$\nis bijective. The stated colimit is the quotient of pairs $(K,\\alpha)$ by equality after a common refinement; every pair has a unique extension to $R\\cap S$. This identifies the colimit canonically with the first isomorphism set. In particular a section isomorphism on any covering common subsieve represents an arrow uniquely, and equality can be checked on any further covering subsieve.",
+   "uses": [
+    "lem-sfb-cartesian-section-covering-restriction",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), final descent-data construction, naive checks (1)-(8) and less naive construction; explicit covering-sieve verification."
+   }
+  },
+  {
+   "text": "Compose representatives after restricting to the intersection of their sieves. Changing a representative does not change the composite, since on the intersection of the witnessing refinements the component composites agree. Identities are the identity section families and inverses are the component inverses. The category axioms hold after restriction to one common covering sieve, where they are those of $\\mathcal Q$. Pullback of a representative on $K$ along $h$ is its component family on $h^*K$; it respects the quotient because inverse image preserves intersections and coverings. The unit and composite-pullback comparisons are those of the cartesian section components of $\\mathcal Q$; their coherence holds componentwise. These fibre groupoids and coherent pullbacks give the total fibred groupoid explicitly: an arrow over $h:V\\to T$ from $A$ to $B$ is an arrow $A\\to h^*B$ in the fibre at $V$, and composition uses the just specified pullback comparisons. The arrows $h^*B\\to B$ represented by identities are cartesian by this description of all arrows over composites.",
+   "uses": [
+    "lem-sfb-cartesian-section-covering-restriction",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), final descent-data construction, naive checks (1)-(8) and less naive construction; explicit covering-sieve verification."
+   }
+  },
+  {
+   "text": "Define $e(u)$ by $f\\mapsto f^*u$ on the maximal sieve. Its section comparisons and its compatibility with pullback are the given cartesian comparisons of $\\mathcal Q$. By step 2 a morphism $e(u)\\to e(v)$ is uniquely a section isomorphism on the maximal sieve. Evaluation at $1_T$ identifies these with $\\operatorname{Isom}_{\\mathcal Q(T)}(u,v)$: naturality forces the component at $f$ to be the pullback of the component at $1_T$. Thus $e$ is fully faithful. If $f\\in R$, then $f^*R$ is maximal, and the comparisons $h^*x_f\\cong x_{fh}$ give a section isomorphism $e(x_f)\\cong(R,x)|_V$. Coherence of $x$ makes these isomorphisms compatible with restriction and its transition maps.",
+   "uses": [
+    "lem-sfb-cartesian-section-covering-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), final descent-data construction, naive checks (1)-(8) and less naive construction; explicit covering-sieve verification."
+   }
+  },
+  {
+   "text": "Prove descent of arrows in $\\mathcal D\\mathcal Q$. Let $A=(S,x),B=(U,y)$ lie over $T$, and let a compatible family $\\alpha_f:A|_V\\to B|_V$ be given on a covering sieve $R$. Put $H=R\\cap S\\cap U$. For $f\\in H$, the local isomorphisms of step 4 identify $A|_V,B|_V$ with $e(x_f),e(y_f)$. Full faithfulness of $e$ gives a unique $a_f:x_f\\to y_f$ representing $\\alpha_f$. Naturality of the $\\alpha_f$ and faithfulness of $e$ make $(a_f)$ a section isomorphism on $H$, hence an arrow $a:A\\to B$. For arbitrary $f\\in R$, its restriction agrees with $\\alpha_f$ on the covering sieve $f^*H$; step 2, now over $V$, proves equality. Any other glued arrow agrees on $H$ and is equal by step 2. This argument works over every slice object, so all isomorphism presheaves of $\\mathcal D\\mathcal Q$ are sheaves: it is a prestack.",
+   "uses": [
+    "lem-sfb-cartesian-section-covering-restriction",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), final descent-data construction, naive checks (1)-(8) and less naive construction; explicit covering-sieve verification."
+   }
+  },
+  {
+   "text": "Now let $A$ be cartesian object descent data in $\\mathcal D\\mathcal Q$ on a covering sieve $R$ of $T$. For each $f:V\\to T$ in $R$, choose its displayed representative $A_f=(S_f,x^f)$. Form the covering sieve $H=\\{fg:f\\in R,\\ g\\in S_f\\}$ from step 1. For each $t\\in H$ choose one factorization $t=f_tg_t$, and put $z_t=x^{f_t}_{g_t}$. Step 4 followed by the transition of $A$ gives an isomorphism $b_t:e(z_t)\\to A_t$. For $h:W\\to\\operatorname{dom}t$ with $s=th$, form\n$$e(h^*z_t)\\cong h^*e(z_t)\\xrightarrow{h^*b_t}h^*A_t\\xrightarrow{c_{t,h}}A_s\\xrightarrow{b_s^{-1}}e(z_s).$$\nFull faithfulness of $e$ lifts this uniquely to $d_{t,h}:h^*z_t\\to z_s$. The identities and cocycle for $d$ follow by applying the faithful $e$: the intermediate $b$ and $b^{-1}$ cancel and the remaining equality is exactly the cocycle for $c$, with the cartesian comparison isomorphisms inserted. Hence $z$ is a cartesian $\\mathcal Q$-section on $H$, and $B=(H,z)$ is an actual object of the prescribed completion. No effectiveness in $\\mathcal Q$ was assumed: only arrow lifting along the already proved fully faithful $e$ was used.",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), final descent-data construction, naive checks (1)-(8) and less naive construction; explicit covering-sieve verification."
+   }
+  },
+  {
+   "text": "For each $t\\in H$, step 4 gives $l_t:e(z_t)\\to B|_{\\operatorname{dom}t}$. The arrows $b_t l_t^{-1}:B|_{\\operatorname{dom}t}\\to A_t$ are compatible: the required equation is precisely $c_{t,h}h^*b_t=b_{th}e(d_{t,h})$, which defined $d_{t,h}$ in step 6, and $l$ has the same transition equation. Apply [lem-sfb-cartesian-section-covering-restriction] to the prestack $\\mathcal D\\mathcal Q$ proved in step 5, the inclusion $H\\subseteq R$, and its two sections $B|_R,A$. For every $f\\in R$, the sieve $f^*H$ covers by stability of coverings, so all the lemma's hypotheses hold. It extends this compatible isomorphism uniquely from $H$ to $R$. Thus $B$ with this isomorphism realizes the given descent data. Together with step 5 this is exactly the stack condition.",
+   "uses": [
+    "lem-sfb-cartesian-section-covering-restriction",
+    "def-weil-pbc-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), final descent-data construction, naive checks (1)-(8) and less naive construction; explicit covering-sieve verification."
+   }
+  },
+  {
+   "text": "If $\\varnothing\\in J(T)$, its unique cartesian section gives the object $(\\varnothing,*)$. For any two objects of the completion the empty common refinement contributes a unique section isomorphism, and step 2 shows this is their unique arrow. Thus the fibre is nonempty and contractible; descent on an empty covering has exactly the required effectiveness and uniqueness. Pullback stability gives the same assertion on every inverse-image empty covering. None of the preceding constructions chose an element of an empty sieve: in step 6 the choices are only indexed by actual members of $H$. Hence the empty cases are included without an added nonemptiness assumption.",
+   "uses": [
+    "def-weil-pbc-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 02ZN (lemma-stackify), final descent-data construction, naive checks (1)-(8) and less naive construction; explicit covering-sieve verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topos",
+  "lem-sfb-cartesian-section-covering-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 02ZN (lemma-stackify), filling the omitted final checks with covering sieves rather than fibre-product covers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stackification|stackify|descentCompletion|associatedStack|prestackPlus",
+   "results": "{\"t\": \"2026-10-23T09:49:28Z\", \"tool\": \"grep\", \"query\": \"stackification|stackify|descentCompletion|associatedStack|prestackPlus\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\"",
+   "results": "{\"t\": \"2026-10-23T09:49:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStack\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor_generate_iff\", \"CategoryTheory.Pseudofunctor.isStackFor_iff_of_sieve_eq\", \"CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.IsStackFor.essSurj\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"CategoryTheory.Pseudofunctor.IsStackFor.mk\"], \"digest\": \"b8afc658ce1201e8\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The category of cartesian sections of a prestack over covering sieves forms an associated stack",
+   "results": "{\"t\": \"2026-10-23T09:49:28Z\", \"tool\": \"leansearch\", \"query\": \"The category of cartesian sections of a prestack over covering sieves forms an associated stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.mk\", \"CategoryTheory.Pseudofunctor.IsStackFor.mk\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsStack.rec\", \"CategoryTheory.Pseudofunctor.IsPrestackFor\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor'\", \"CategoryTheory.Pseudofunctor.IsStack.recOn\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\"], \"digest\": \"34cbd85a44b5bd09\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The plus construction on a prestack makes descent data for objects effective while keeping the original fibers fully faithful",
+   "results": "{\"t\": \"2026-10-23T09:49:35Z\", \"tool\": \"leanfinder\", \"query\": \"The plus construction on a prestack makes descent data for objects effective while keeping the original fibers fully faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.isEquivalence_toDescentData\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\"], \"digest\": \"da9b0fd372f9da0d\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a prestack in groupoids the category of descent data on covering sieves with morphisms on common refinements is a stack",
+   "results": "{\"t\": \"2026-10-23T09:49:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a prestack in groupoids the category of descent data on covering sieves with morphisms on common refinements is a stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsPrestack.of_isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStack\", \"CategoryTheory.Pseudofunctor.isPrestackFor'\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"CategoryTheory.Pseudofunctor.IsStackFor\", \"CategoryTheory.Pseudofunctor.isStackFor_iff\"], \"digest\": \"78601804e3cef8b6\"}; Source inspection: IsPrestack/IsStack and their descent functors express descent conditions, not the construction asserted here. DenseSubsite.sheafifyHomEquivOfIsEquivalence is an adjunction for ordinary sheafification, not morphism sheafification of a fibred groupoid.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stackification|stackify|prestackPlus|descentCompletion",
+   "results": "{\"t\": \"2026-10-23T11:57:03Z\", \"tool\": \"grep\", \"query\": \"stackification|stackify|prestackPlus|descentCompletion\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read IsPrestack.lean:18-39, IsStack.lean and Precoverage.lean. IsStack.mk is a criterion assuming effective descent, not construction of a stackification. Plus.isSheaf_plus_plus is set/concrete-category sheafification, not the groupoid-valued completion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stackification\"",
+   "results": "{\"t\": \"2026-10-23T11:57:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"stackification\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read IsPrestack.lean:18-39, IsStack.lean and Precoverage.lean. IsStack.mk is a criterion assuming effective descent, not construction of a stackification. Plus.isSheaf_plus_plus is set/concrete-category sheafification, not the groupoid-valued completion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The plus construction for a prestack of groupoids using descent objects on covering sieves gives a stack",
+   "results": "{\"t\": \"2026-10-23T11:57:04Z\", \"tool\": \"leansearch\", \"query\": \"The plus construction for a prestack of groupoids using descent objects on covering sieves gives a stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Plus.isSheaf_plus_plus\", \"CategoryTheory.Pseudofunctor.IsStack.mk\", \"CategoryTheory.GrothendieckTopology.Plus.sep\", \"CategoryTheory.GrothendieckTopology.Plus.isSheaf_of_sep\", \"CategoryTheory.GrothendieckTopology.plusObj\", \"CategoryTheory.GrothendieckTopology.Plus.exists_rep\", \"CategoryTheory.GrothendieckTopology.plusFunctor_obj\", \"CategoryTheory.GrothendieckTopology.Plus.toPlus_mk\"], \"digest\": \"112cf5f68dacc7c1\"}; Read IsPrestack.lean:18-39, IsStack.lean and Precoverage.lean. IsStack.mk is a criterion assuming effective descent, not construction of a stackification. Plus.isSheaf_plus_plus is set/concrete-category sheafification, not the groupoid-valued completion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The covering sieve descent completion of a prestack is a stack with fully faithful unit",
+   "results": "{\"t\": \"2026-10-23T11:57:05Z\", \"tool\": \"leanfinder\", \"query\": \"The covering sieve descent completion of a prestack is a stack with fully faithful unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful\", \"CategoryTheory.Pseudofunctor.IsPrestackFor.nonempty_fullyFaithful\", \"CategoryTheory.Pseudofunctor.isPrestackFor_iff\", \"CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff\", \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\"], \"digest\": \"e31b5188649f9d0a\"}; Read IsPrestack.lean:18-39, IsStack.lean and Precoverage.lean. IsStack.mk is a criterion assuming effective descent, not construction of a stackification. Plus.isSheaf_plus_plus is set/concrete-category sheafification, not the groupoid-valued completion here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-groupoid-stackification-local-description",
+  "date": "2026-10-23",
+  "group": "Q109"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: sentence of the proof of Tag 07Y4 invoking criteria-lemma-stacks-etale once the smooth atlas has been shown surjective. Substep of Tag 076V: Stackification of groupoids: local objects, isomorphisms and extension. Supporting construction: Tag 02ZN (lemma-stackify), final descent-data construction in both proofs, including checks (1)-(8) in the naive proof; covering-sieve formulation avoids requiring fibre products of arbitrary base arrows.",
+   "via": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-prestack-sieve-descent-completion",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Made the common-refinement Hom sets explicit via one general locally covering sieve restriction lemma. Checked composition, fibred pullbacks, full faithfulness and local representatives. Proved morphism descent directly and flattened object descent to a covering sieve using only full faithfulness, then extended its comparison by the new restriction lemma. Checked empty coverings.",
+  "blueprint": "Inherited supporting construction under det-thm-sf-ctf-stability-direct-images proof (3), Tag 076V and 02ZN. The current latest blueprint proof (3) remains the compactification/direct-image route; this item supplies a pre-existing deeper support input. ancestor returns null for this pre-existing chain; preserved the null ancestor and complete via chain. Steps 1-4 realize 02ZN checks (1)-(7), steps 5-7 check (8), step 8 handles empty covers."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-2d4515f9b",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-2d4515f9b (reviewer sub-agent of L); spot-checked: Read Tag 02ZN (stacks.tex l.1480-1727; both proofs omit the checks (1)-(8) and the filteredness of the refinement colimit), the item and the new node in full, and def-weil-pbc-topos (i)-(iii). The item is still unsplit in live and side-live with an identical statement, and there is no repair note, so it is neither superseded nor a re-split. New node lem-sfb-cartesian-section-covering-restriction is true: glue a_f on the covering sieve f*K in the Isom sheaf, then naturality and injectivity follow by separatedness on (fh)*K. I tested K=S, S empty, K empty with empty covers (singletons on both sides) and the maximal-cover topology. It is self-contained and statement-only, records all three kinds of search with an honest mathlib_candidate (fullyFaithfulPullFunctor), and has no duplicate in an rg -L over 02ZN, prestack, cartesian section and covering subsieve. The only same-tag nodes are the circular parent and the morphism-sheafification sibling. It is not a clause of the item. Steps: 1 elementary topology closure; 2 colimit = Isom on R∩S via the new node; 3 composition and fibred structure; 4 fully faithful e plus local representatives; 5 descent of arrows (I checked that a|_V = α_f on f*H∩K′); 6 object descent on the composite sieve H using only full faithfulness of e; 7 effectiveness via the new node applied to DQ, a prestack by step 5, with no circularity; 8 empty covers. Together the steps cover every clause of the statement. No fibre products, nonempty covers or SGA are used, no tool_uses are needed, and proof_deps equals the union of uses. Minor remark only: the pullback comparisons on sections are strict. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PrestackSieveDescentCompletion",
+  "declaration": "CategoryTheory.Pseudofunctor.exists_prestack_sieve_descent_completion",
+  "declarations": [
+   "CategoryTheory.Pseudofunctor.sieveBasedCategory",
+   "CategoryTheory.Pseudofunctor.groupoidBasedCategory",
+   "CategoryTheory.Pseudofunctor.SieveCartesianSection",
+   "CategoryTheory.Pseudofunctor.sieveBasedInclusion",
+   "CategoryTheory.Pseudofunctor.restrictSieveSection",
+   "CategoryTheory.Pseudofunctor.restrictSieveSectionIso",
+   "CategoryTheory.Pseudofunctor.sieveBasedPullback",
+   "CategoryTheory.Pseudofunctor.pullbackSieveSection",
+   "CategoryTheory.Pseudofunctor.SieveCompletionObject",
+   "CategoryTheory.Pseudofunctor.SieveCompletionArrowRep",
+   "CategoryTheory.Pseudofunctor.SieveCompletionArrowRep.EventuallyEq",
+   "CategoryTheory.Pseudofunctor.SieveCompletionHom",
+   "CategoryTheory.Pseudofunctor.SieveCompletionObject.pullback",
+   "CategoryTheory.Pseudofunctor.SieveCompletionArrowRep.id",
+   "CategoryTheory.Pseudofunctor.SieveCompletionArrowRep.comp",
+   "CategoryTheory.Pseudofunctor.SieveCompletionArrowRep.inv",
+   "CategoryTheory.Pseudofunctor.SieveCompletionArrowRep.pullback",
+   "CategoryTheory.Pseudofunctor.sieveSectionValue",
+   "CategoryTheory.Pseudofunctor.pullbackSectionTransition",
+   "CategoryTheory.Pseudofunctor.IsPullbackSieveSection",
+   "CategoryTheory.Pseudofunctor.groupoidBasedMap",
+   "CategoryTheory.Pseudofunctor.maximalSieveCompletionObject",
+   "CategoryTheory.Pseudofunctor.sieveMemberTransition",
+   "CategoryTheory.Pseudofunctor.localSieveCompletionArrowRep",
+   "CategoryTheory.Pseudofunctor.SieveCompletionArrowRep.toQuot",
+   "CategoryTheory.Pseudofunctor.SieveDescentCompletion"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PrestackSieveDescentCompletion.lean",
+  "statement": "theorem exists_prestack_sieve_descent_completion {C : Type w} [SmallCategory C] (J : GrothendieckTopology C) (Q : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat.{w, w}) (hQ : ∀ T : C, IsGroupoid (Q.obj (.mk (op T)))) [Q.IsPrestack J] : Nonempty (SieveDescentCompletion Q J)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The construction is stated as Nonempty SieveDescentCompletion, whose fields specify the actual covering-sieve pairs bijectively, the explicit common-refinement quotient Hom sets, composition, inverse, pullback, maximal-sieve unit, and canonical compatible local comparisons. All raw objects, representatives, quotient and operations are real definitions in this module; no definition extracts data from the postponed theorem. Helpers unpack only notions explicitly defined by this item."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be0944912",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (size convention; pbc-topos used for Mathlib GrothendieckTopology), proof dep, Stacks 02ZN, the module (27 decls), Mathlib IsStack/IsPrestack/CoGrothendieck (cartesianLift, ι), and the parent consumer. Every clause is rendered: pairs bijective to fibre objects; Hom = Quot of reps on covering K≤R⊓S by EventuallyEq (checked it is an equivalence relation, HEq only between definitionally equal types, so hom_eq is consistent); comp on ⊓, id, inv; pullback via g↦g≫f on the inverse-image sieve with pullback_obj/hom; Mathlib IsStack; StrongTrans unit, fibrewise FullyFaithful, pinned by unitSection/IsPullbackSieveSection (mapComp' transitions), unit_obj and unit_hom (representative exists on ⊤, so not vacuous); localSectionIso pinned by the cartesianLift triangle and localIso by its class formula, with naturality giving the restriction/transition compatibility; empty sieves allowed. Universes w/Cat.{w,w} match the node; no stronger assumptions; canonical construction satisfies all fields. No duplicate in Mathlib or side-live Sheaf. Helpers are real data; only the theorem is sorry; source and blueprint docstrings on all 27 decls; the 8-step proof is in the theorem docstring; node diff vs side-live only in lean; statement verbatim; declarations complete; not landed elsewhere. No FIX, so no compile; the worker reports a clean scompile and deliver2 dry-run OK. Advisory: the stack's mapId/mapComp and the unit's naturality isos are constrained only through localIso naturality, not by separate fields, which is faithful to the node's implicit wording."
+ }
+}

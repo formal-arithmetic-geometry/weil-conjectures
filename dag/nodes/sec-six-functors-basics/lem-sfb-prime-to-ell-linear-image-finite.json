@@ -12,73 +12,45 @@
  ],
  "proof": [
   {
-   "text": "If $M=0$, its only automorphism is the identity, so the image has order $1$. Otherwise put $r=\\dim_E M$. Apply [lem-pod-profinite-stable-lattice] with $G=H$ and $V=M$: a profinite group is compact and the action is jointly continuous by hypothesis. Obtain a stable free $\\mathcal O_E$-lattice $\\Lambda$ of rank $r$ spanning $M$, with continuous restricted action and its maximal-ideal-adic topology equal to the subspace topology. Choose a basis of $\\Lambda$. It is an $E$-basis of $M$: its $r$ vectors span a space of dimension $r$. In this basis write $A(h)\\in\\operatorname{GL}_r(\\mathcal O_E)$ for the action; stability for $h$ and $h^{-1}$ supplies both an integral matrix and an integral inverse.",
+   "text": "Use the assumed equality of the topology of E with its spectral-norm topology, and eq_moduleTopology to replace the topology of M by moduleTopology E M. Apply [lem-sfb-stable-lattice-finite-matrix-reductions] to the compact group H, the vector space M, and the jointly continuous action. Obtain the stable lattice, its integer basis and field basis e, integral representation A, and finite continuous positive-level reductions B_n. The construction includes rank zero, so no separate zero-dimensional case is needed.",
    "uses": [
-    "lem-pod-profinite-stable-lattice"
+    "lem-sfb-stable-lattice-finite-matrix-reductions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stanford-weil2-seminar/L19.pdf",
-    "place": "Proposition 1.1.9, second bullet, p. 3: choose a stable lattice."
+    "place": "Proposition 1.1.9, p. 3; agent prime-to-ell corollary, assembly of the two extracted arguments."
    }
   },
   {
-   "text": "Write $\\mathcal O=\\mathcal O_E$, $\\pi=\\varpi_E$, and $A_n=\\mathcal O/\\pi^n\\mathcal O$ for $n\\geq1$, with the coefficient notation of [def-weil-l-adic-coefficient-extension]. The rings $A_n$ are finite by [lem-weil-valued-dvr-finite-quotients], applied to the valuation ring and uniformizer supplied by that coefficient datum. Reduction of the matrices defines $\\rho_n:H\\to\\operatorname{GL}_r(A_n)$; put $Q_n=\\rho_n(H)$ and $K_n=\\ker\\rho_n$. Each $Q_n$ is finite because its matrices have finitely many entries in a finite ring. Moreover $\\rho_n$ is continuous for the discrete topology: for each basis vector $e_j$, $h\\mapsto\\rho(h)e_j$ is continuous into $\\Lambda$ by [lem-pod-profinite-stable-lattice], and reduction modulo $\\pi^n\\Lambda$ has open fibres in the adic topology. Finitely many such evaluations determine the reduced matrix. Thus $H\\to Q_n$ is a continuous surjective homomorphism to a finite group, so $\\gcd(|Q_n|,\\ell)=1$ by the hypothesis on $H$.",
+   "text": "The kernel of B_n is the inverse image of the open singleton identity in its discrete target. Package it as an open normal subgroup N_n of H. The first isomorphism theorem identifies H/N_n with the range of B_n, so the hypothesis on all open normal quotients gives coprimality of its order with ell. Apply [lem-sfb-coprime-congruence-kernel-rigidity] using the finite positive-level images and these coprimality statements; at level one it gives ker B_1 = ker A.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-pod-profinite-stable-lattice",
-    "lem-weil-valued-dvr-finite-quotients"
+    "lem-sfb-coprime-congruence-kernel-rigidity"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stanford-weil2-seminar/L19.pdf",
-    "place": "Proposition 1.1.9, second and third bullets, p. 3; elementary construction of finite continuous reduction images."
+    "place": "Proposition 1.1.9, p. 3; agent prime-to-ell corollary, assembly of the two extracted arguments."
    }
   },
   {
-   "text": "For every $n\\geq1$ and matrix $B$ over $\\mathcal O$, repeated multiplication gives $(I+\\pi^nB)^m\\equiv I+m\\pi^nB\\pmod{\\pi^{n+1}}$ for all integers $m\\geq0$: the base $m=0$ is immediate, and the induction step multiplies by $I+\\pi^nB$, whose extra product term is divisible by $\\pi^{2n}$, hence by $\\pi^{n+1}$. By [def-weil-l-adic-coefficient-extension], $|\\ell|_E=|\\ell|_\\ell=\\ell^{-1}<1$, so $\\ell\\in\\mathfrak m_E=\\pi\\mathcal O$. Taking $m=\\ell$ gives $(I+\\pi^nB)^\\ell\\equiv I\\pmod{\\pi^{n+1}}$. This calculation works also at $\\ell=2$ and for ramified $E$.",
-   "uses": [
-    "def-weil-l-adic-coefficient-extension"
-   ],
+   "text": "If g belongs to ker B_1, rigidity gives A(g)=1. The coordinate formula in the field basis e then gives rho(g)(e_j)=e_j for every j; basis extensionality yields rho(g)=1. Thus ker B_1 is contained in ker rho. A subgroup containing an open subgroup is open, so ker rho is open. Package ker rho as an open normal subgroup N of H. Its quotient is finite because H is compact, and its order is coprime to ell by the hypothesis. The first isomorphism theorem H/ker rho = rho(H) transfers both conclusions. Empty-basis extensionality covers rank zero.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stanford-weil2-seminar/L19.pdf",
-    "place": "Agent expansion after Proposition 1.1.9: first-order matrix congruence calculation (not asserted in the notes)."
-   }
-  },
-  {
-   "text": "We prove $K_1=K_n$ by induction on $n\\geq1$. The base $n=1$ is equality. Suppose $K_1=K_n$ and take $h\\in K_1$. Since $h\\in K_n$, every entry of $A(h)-I$ is divisible by $\\pi^n$, so $A(h)=I+\\pi^nB$ for a matrix $B$ over $\\mathcal O$. The previous calculation implies $\\rho_{n+1}(h)^\\ell=1$ in $Q_{n+1}$. Apply [lem-sfb-finite-matrix-group-coprime-power] to $R=A_{n+1}$, $G=Q_{n+1}$ and exponent $\\ell$; the needed coprimality was established in Step 2. Its power map is injective and sends $1$ to $1$, so $\\rho_{n+1}(h)=1$. This proves $K_1\\subseteq K_{n+1}$; the reverse inclusion follows by reduction modulo $\\pi$. This completes the induction.",
-   "uses": [
-    "lem-sfb-finite-matrix-group-coprime-power"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stanford-weil2-seminar/L19.pdf",
-    "place": "Agent corollary to Proposition 1.1.9: induction on congruence depth using the Mathlib coprime-power bijection."
-   }
-  },
-  {
-   "text": "If $h\\in K_1$, Step 4 gives $A(h)-I\\in\\pi^nM_r(\\mathcal O)$ for every $n\\geq1$. For any entry $a$ of this difference, $a\\in\\pi^n\\mathcal O$ implies $|a|_E\\leq|\\pi|_E^n$. Here $0<|\\pi|_E<1$ by [def-weil-l-adic-coefficient-extension], so the right side tends to zero and $a=0$. Thus $A(h)=I$, which implies $\\rho(h)=1$ since $\\Lambda$ spans $M$. Conversely $\\rho(h)=1$ implies $h\\in K_1$. Therefore $\\ker\\rho=K_1$. The rule $\\rho(h)\\mapsto\\rho_1(h)$ is consequently a well-defined bijective group homomorphism $\\rho(H)\\to Q_1$: equality of reductions is equivalent to $h_2^{-1}h_1\\in K_1=\\ker\\rho$. Its target is finite and has order prime to $\\ell$ by Step 2, proving both assertions.",
-   "uses": [
-    "def-weil-l-adic-coefficient-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stanford-weil2-seminar/L19.pdf",
-    "place": "Agent expansion after Proposition 1.1.9: separatedness of the lattice and identification with the first finite reduction image."
+    "place": "Proposition 1.1.9, p. 3; agent prime-to-ell corollary, assembly of the two extracted arguments."
    }
   }
  ],
  "proof_deps": [
-  "lem-pod-profinite-stable-lattice",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-sfb-finite-matrix-group-coprime-power"
+  "lem-sfb-stable-lattice-finite-matrix-reductions",
+  "lem-sfb-coprime-congruence-kernel-rigidity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stanford-weil2-seminar/L19.pdf",
-  "place": "Proposition 1.1.9, p. 3 for the lattice; agent-written congruence calculation and induction for the prime-to-ell corollary."
+  "place": "Proposition 1.1.9, p. 3 for the stable lattice; agent congruence-kernel corollary and V6 Lean assembly via the open representation kernel."
  },
  "mathlib_searches": [
   {
@@ -171,33 +143,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-prime-to-ell-linear-image-finite",
   "worker": "stage1",
-  "summary": "Reused the existing stable-lattice theorem; wrote out continuity of finite matrix reduction, the first-order congruence power calculation, the full kernel induction, and separatedness. Added only the exact Mathlib coprime-power leaf. No statement change. The rank-zero, ell=2 and ramified cases are covered.",
-  "blueprint": "Paragraph (3) of det-thm-sf-ctf-stability-direct-images.proof.md, ordinary open direct image: agent tame-boundary expansion via lem-sfb-tame-stratum-kummer-descent; this item supplies finite prime-to-ell monodromy. The inherited created.item chain is broken at lem-sfb-admissible-direct-image, so blueprint_refs.py ancestor returns None; retain that null ancestor and record the precise source location here.",
-  "tool_uses": [
-   {
-    "node": "lem-pod-profinite-stable-lattice",
-    "why": "Generic compact-group invariant-lattice theorem with exactly the joint continuity and finite-dimensional hypotheses needed here; this unit contains no separate invariant-lattice theorem."
-   },
-   {
-    "node": "lem-weil-valued-dvr-finite-quotients",
-    "why": "Generic finiteness of quotients of a valued DVR with finite residue field; the coefficient datum supplies these hypotheses, and no lemma in this unit replaces this coefficient-ring tool."
-   }
-  ]
+  "summary": "Repair of the human re-split return: extracted old Steps 1-2 into stable-lattice-finite-matrix-reductions and old Steps 3-5 into coprime-congruence-kernel-rigidity. Both new nodes are self-contained statement-only unsplit work items, with the complete old arguments retained as proof plans in report.md. The item statement and Lean metadata are unchanged; its proof is now the short assembly of the independent topological and algebraic inputs.",
+  "blueprint": "Paragraph (3) of the main-20261015 det-thm-sf-ctf-stability-direct-images proof, open direct image; agent tame-boundary expansion via lem-sfb-tame-stratum-kummer-descent. The existing ancestor chain ends at lem-sfb-admissible-direct-image with no blueprint id; blueprint_refs.py ancestor returns None. Retained the inherited null ancestor and extended its via list for the two new nodes."
  },
  "tool_uses": [
   "lem-pod-profinite-stable-lattice",
   "lem-weil-valued-dvr-finite-quotients"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q02-2cfbbe784",
-  "group": "Q02",
+  "reviewer": "NT-cc-NK-e4df46b74",
+  "group": "NK",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-2cfbbe784 (reviewer sub-agent of L); spot-checked: Read in full: item and new leaf lem-sfb-finite-matrix-group-coprime-power, statement unchanged. Base had no proof and no repair note. Source: L19.pdf Prop 1.1.9 second bullet p.3 gives the stable lattice; the prime-to-ell corollary is correctly labelled agent-written. Step 1: lem-pod-profinite-stable-lattice hypotheses match (profinite so compact, joint continuity), giving a free full stable lattice and A(h) in GL_r(O_E); M=0 handled. Step 2: A_n finite; rho_n continuous via finitely many evaluations, so Q_n is a finite continuous quotient of order prime to ell. Step 3: (I+pi^nB)^ell = I mod pi^{n+1}, since cross terms are in pi^{2n} and ell is in m_E; holds for ell=2 and ramified E. Step 4: induction K_1=K_n written out; Mathlib leaf on Q_{n+1}, checked at OrderOfElement.lean:1245-1247 Nat.Coprime.pow_left_bijective. Step 5: the intersection of pi^nO is 0, so ker rho=K_1 and rho(H) is isomorphic to Q_1. rg -L found no duplicate of either node; the leaf is strictly smaller than the item. Batch-5 flag: the closure of lem-pod-profinite-stable-lattice is only l-adic field/DVR/lattice nodes and reaches no trace-formula, Poincare-duality or batch-4 node; it is generic representation theory and outside both assumptions, so accepted. Tool uses (stable lattice, valued-DVR quotients leaf) accepted. No SGA cited. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-e4df46b74 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the report, the repair note and the base proof in full. The repair note is the human's re-split of 2026-10-21, released 2026-10-22: at least 2 comparable new nodes, an assembly of at most 3000 characters, and no shortened argument. I checked mechanically that all 5 base step texts appear verbatim in the report. The split covers every old argument. Old Steps 1-2 (the lattice, integral coordinates, finite R_n and Q_n, A_n continuous to a discrete target) are now clauses of lem-sfb-stable-lattice-finite-matrix-reductions. Old Steps 3-5 (the matrix power congruence using 2n>=n+1 and ell in pi O, the induction K_1=K_n through coprime power injectivity, and separatedness) are now lem-sfb-coprime-congruence-kernel-rigidity. M=0, the coprimality inference and the isomorphism rho(H)=Q_1 are written out in item steps 1-3. The assembly has 1165 characters. The two nodes are of comparable size and complementary: node 1 is topological with no coprimality, node 2 is algebraic with no topology. Neither restates the item or one of its clauses. I checked every step against the cited statements. Item step 2: the kernel of a continuous surjection to a finite discrete group is open and normal, so Q_n is a finite continuous quotient and the hypothesis on H applies. Item step 3: the E-basis gives ker rho = ker A = K_1, and the map is well defined and injective. I tested node 2 on small cases. ell=3, Q_3, Z/2 acting by -1 holds. ell=2, Q_2, {±1} acting by -1 has Q_2 of order 2, so the every-n hypothesis is necessary and node 2 is not overstated. Rank 0 and ramified E are fine. I tested node 1 on rank 0 and on a Z_ell^x character. The source is L19.pdf Prop. 1.1.9, second and third bullets on p. 3, as cited, and the agent corollary is labelled as such. No SGA is cited. I searched the DAG with rg -L for stable lattice, congruence kernel and reduction. lem-pod-profinite-stable-lattice is strictly weaker than node 1, lem-sfb-finite-matrix-group-coprime-power is an ingredient of node 2, and I found no duplicate. Item statement, stmt_deps and Lean record are unchanged. Everything is in the same unit, so there are no tool uses to accept. Advisory: the item's tool_uses field is stale, and the coprime-power Mathlib leaf now has no citer until node 2 is split."
  },
  "lean": {
   "module": "Sheaf.RepresentationTheory.PrimeToEllLinearImageFinite",
@@ -216,5 +178,27 @@
   "group": "NL",
   "result": "pass",
   "note": "Node unchanged except added lean record; lean.statement verbatim in file. Checked clause by clause: ℓ prime; E finite over ℚ_ℓ with spectral-norm topology, same binders as def-weil-l-adic-coefficient-extension and landed modules; H : ProfiniteGrp with coprimality over all OpenNormalSubgroup quotients (equivalent to finite continuous quotients); M finite-dim with IsModuleTopology; ρ : H →* (M ≃ₗ[E] M), jointly continuous; conclusion Finite ρ.range ∧ Coprime (Nat.card ρ.range) l. Edge cases M=0, ℓ=2, ramified E covered; universes independent. Proof plan (lattice, congruence induction, separatedness) correct and in docstring; source and blueprint docstrings present; no defs, only sorry; no duplicate found. Not recompiled per instructions. No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261023T105748-L-3603700",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

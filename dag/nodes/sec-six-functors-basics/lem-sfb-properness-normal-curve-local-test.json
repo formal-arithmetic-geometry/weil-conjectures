@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-properness-normal-curve-local-test",
+ "kind": "statement",
+ "title": "Properness tested on local rings of normal finite-type curves",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ and $Y$ be schemes locally of finite type over $k$ [def-pc-scheme, def-weil-finite-type-morphism], and let $f:X\\to Y$ be a quasi-compact $k$-morphism. Then $f$ is proper [def-weil-proper-morphism] if and only if the following condition holds. Let $C$ be any integral scheme of finite type over $k$ [def-pc-integral-scheme] whose local rings are integrally closed domains [def-weil-pbc-normal-ring], let $c\\in C$ be a closed point with $\\dim\\mathcal O_{C,c}=1$ [def-weil-pbc-krull-dimension-ring], and put $U=C\\setminus\\{c\\}$, $R=\\mathcal O_{C,c}$ and $F=\\operatorname{Frac}R$. For every pair of $k$-morphisms $u:U\\to X$ and $v:C\\to Y$ with $fu=v|_U$, there is a unique $k$-morphism $h:\\operatorname{Spec}R\\to X$ such that $fh$ is the restriction of $v$ to $\\operatorname{Spec}R$ and $h|_{\\operatorname{Spec}F}$ is the restriction of $u$. Here a local ring is the structure-sheaf stalk, and $F$ is the field of fractions, whose elements are quotients of elements of the domain $R$ [def-weil-affine-spectrum]. No reducedness hypothesis is imposed on $X$ or $Y$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GWX, limits-lemma-essentially-finite-type-criterion-proper, specialized to S=Spec k (a field is Nagata); the condition uses precisely the C,U,c diagrams and their local DVR squares, not arbitrary fraction-field maps."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Write $p_X:X\\to\\operatorname{Spec}k$ and $p_Y:Y\\to\\operatorname{Spec}k$ for the structure maps. Since $p_Yf=p_X$ is locally of finite type, clause (a) of [lemma-nagata-finite-type-to-separated-target] gives that $f$ is locally of finite type. Together with its assumed quasi-compactness this makes $f$ finite type by [def-weil-finite-type-morphism]. The only ideals of the field $k$ are $0,k$, so $k$ is Noetherian and its single affine spectrum is locally Noetherian by [pqf-def-locnoeth]. Apply [pqf-lem-locnoeth-lft] to $p_X$ to obtain that $X$ is locally Noetherian. The same argument applies to every finite-type test scheme $C$ in the statement.",
+   "uses": [
+    "lemma-nagata-finite-type-to-separated-target",
+    "def-weil-finite-type-morphism",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWX (lemma-essentially-finite-type-criterion-proper), finite-type hypothesis; morphisms.tex Tags 01T8 (lemma-permanence-finite-type) and 01T6 (lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Suppose $f$ is proper and fix a test diagram $C,c,U,u,v$. The scheme $C$ is locally Noetherian by step 1. Choose a Noetherian affine chart $W=\\operatorname{Spec}A$ containing $c$, using [pqf-def-locnoeth]. The local ring $R=\\mathcal O_{C,c}$ is $A_{\\mathfrak p_c}$ by [lem-weil-pbc-spec-local-ring-canonical-morphism], hence Noetherian by [lem-weil-pbc-localization-noetherian]. It is a normal local domain of dimension one by the hypotheses, so [lem-sc-normal-dim1-dvr] makes $R$ a discrete valuation ring, in particular a valuation ring [def-sc-discrete-valuation-ring]. Properness includes separatedness [def-weil-proper-morphism]. Thus [lemma-nagata-proper-separated-valuation-extension] applied to the generic restriction of $u$ over $v|_{\\operatorname{Spec}R}$ supplies exactly one $h$ as required. This lift is a $k$-morphism because $fh=v|_{\\operatorname{Spec}R}$ and $f,v$ are $k$-morphisms.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-proper-morphism",
+    "lemma-nagata-proper-separated-valuation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWX (lemma-essentially-finite-type-criterion-proper), implication (1) to (2), and its DVR footnote; algebra.tex Tags 00FN and 00PD."
+   }
+  },
+  {
+   "text": "Conversely assume the unique-lift condition of the item. Forgetting uniqueness gives condition (3) of [lem-sfb-normal-curve-universal-closedness-test] for $g=f$: its $C,c,U,R,F$ and its two given maps are exactly those of the item, rather than arbitrary maps out of fraction fields. That node's implication (3) to (1) shows that $f$ is universally closed.",
+   "uses": [
+    "lem-sfb-normal-curve-universal-closedness-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWX (lemma-essentially-finite-type-criterion-proper), converse, application of Tag 0GWV (lemma-essentially-finite-type-criterion-universally-closed)."
+   }
+  },
+  {
+   "text": "Put $P=X\\times_YX$ with projections $p_1,p_2$ and diagonal $\\delta:X\\to P$ [def-pc-fibre-product]. The projection $p_1$ is locally of finite type by [lem-weil-pbc-lft-base-change] applied to $f$; composing it with $p_X$ shows that $P$ is locally of finite type over $k$ by clause (e) of [lem-weil-pbc-proper-fp-permanence]. Since $p_1\\delta=\\mathrm{id}_X$, clause (a) of [lemma-nagata-finite-type-to-separated-target] gives that $\\delta$ is locally of finite type. It is also quasi-compact: by [lem-weil-pbc-locally-noetherian-quasi-separated], intersections of affine opens of $X$ are quasi-compact. Cover $Y$ by affine opens $V$, and $f^{-1}(V)$ by affine opens $A,B$. The products $A\\times_VB$ cover $P$ by affine opens, by [lem-weil-pbc-fibre-product-affine-spectra]; their inclusions are open since on a scheme test the map factors through the product precisely when its two components factor through $A,B$. The inverse image of $A\\times_VB$ under $\\delta$ is $A\\cap B$, hence quasi-compact. For any map from a quasi-compact scheme to an affine scheme, take a finite affine cover of its source. Inverse images of basic opens are finite unions of principal opens by [lem-weil-pbc-basic-open-pullback], hence quasi-compact by [lem-weil-pbc-spec-localization-away-basic-open] and [lem-weil-pbc-affine-scheme-qcqs]. Every affine open of the target has a finite basic-open cover by the same two nodes. Thus each restricted map $A\\cap B\\to A\\times_VB$ is quasi-compact. Now [lem-pc-quasi-compact-local-on-target] gives that $\\delta$ is quasi-compact, hence finite type. Finally $\\delta$ is a monomorphism: if $\\delta r=\\delta s$, compose with $p_1$ to get $r=s$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-lft-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-basic-open-pullback",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-pc-quasi-compact-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWW (lemma-essentially-finite-type-criterion-separation), proof, quasi-compactness of the diagonal; morphisms.tex Tags 01T3, 01T4, 01T8 and properties.tex Tag 01OY."
+   }
+  },
+  {
+   "text": "Verify condition (3) of [lem-sfb-normal-curve-universal-closedness-test] for $\\delta$. Take a test diagram $a:U\\to X$ and $b:C\\to P$ with $\\delta a=b|_U$, and write $b_i=p_i b$. The fibre-product identities [def-pc-fibre-product] give $fb_1=fb_2=:v$ and $b_1|_U=b_2|_U=a$. The restrictions $b_1|_{\\operatorname{Spec}R}$ and $b_2|_{\\operatorname{Spec}R}$ are therefore two lifts for the original condition applied to $(a,v)$. Uniqueness makes them equal. Set $h=b_1|_{\\operatorname{Spec}R}$. Both projections of $\\delta h$ agree with those of $b|_{\\operatorname{Spec}R}$, so the fibre-product universal property gives $\\delta h=b|_{\\operatorname{Spec}R}$. Its generic restriction is $a|_{\\operatorname{Spec}F}$. Thus the diagonal satisfies the existence test, and that node makes $\\delta$ universally closed. Step 4 verified its quasi-compactness and both schemes' local finite type over $k$.",
+   "uses": [
+    "lem-sfb-normal-curve-universal-closedness-test",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWW (lemma-essentially-finite-type-criterion-separation), diagonal argument, using the local form of uniqueness directly; Tag 0GWV for the diagonal."
+   }
+  },
+  {
+   "text": "The monomorphism $\\delta$ is separated by [lem-trf-scheme-monomorphism-separated]. It is finite type by step 4 and universally closed by step 5, hence proper by [def-weil-proper-morphism]. Apply [lem-pc-proper-monomorphism-closed] to conclude that $\\delta$ is a closed immersion. Therefore $f$ is separated. Combining this with finite type from step 1 and universal closedness from step 3, the same definition makes $f$ proper. No step replaced $X$ or $Y$ by a reduction.",
+   "uses": [
+    "lem-trf-scheme-monomorphism-separated",
+    "def-weil-proper-morphism",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0GWX (lemma-essentially-finite-type-criterion-proper), final assembly; schemes.tex Tag 01L4 (lemma-monomorphism-separated), etale.tex Tag 04XV (lemma-characterize-closed-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-finite-type-to-separated-target",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-proper-morphism",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "lem-sfb-normal-curve-universal-closedness-test",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-basic-open-pullback",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pc-quasi-compact-local-on-target",
+  "lem-trf-scheme-monomorphism-separated",
+  "lem-pc-proper-monomorphism-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0GWX, lemma-essentially-finite-type-criterion-proper, with the diagonal proof of Tag 0GWW and universal-closedness criterion Tag 0GWV. Local uniqueness gives the diagonal lift directly, so no global gluing is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Valuative criterion for properness using discrete valuation rings essentially of finite type over a field",
+   "results": "{\"t\": \"2026-10-23T13:39:02Z\", \"tool\": \"leansearch\", \"query\": \"Valuative criterion for properness using discrete valuation rings essentially of finite type over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"ValuativeRel.isDiscrete_trivialRel\", \"of_isDiscreteValuationRing\", \"ValuativeRel.SRel\", \"ValuativeRel.IsDiscrete\", \"ValuativeTopology\", \"IsDiscreteValuationRing.TFAE\"], \"digest\": \"4c24e1c40343c45a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general valuative criterion quantifies over all valuation rings, not just local rings of normal finite-type curves; normalization and finite-type trait reduction are not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "essentially.*finite.*type.*[Vv]aluative|[Vv]aluative.*essentially|normal.*curve.*[Pp]roper",
+   "results": "{\"t\": \"2026-10-23T13:39:02Z\", \"tool\": \"grep\", \"query\": \"essentially.*finite.*type.*[Vv]aluative|[Vv]aluative.*essentially|normal.*curve.*[Pp]roper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general valuative criterion quantifies over all valuation rings, not just local rings of normal finite-type curves; normalization and finite-type trait reduction are not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Properness of a quasi compact morphism of schemes locally of finite type over a field can be tested on local rings of normal integral finite type curves at closed points",
+   "results": "{\"t\": \"2026-10-23T13:39:03Z\", \"tool\": \"leanfinder\", \"query\": \"Properness of a quasi compact morphism of schemes locally of finite type over a field can be tested on local rings of normal integral finite type curves at closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.isProper_iff\"], \"digest\": \"5a6a7d37ffc6376b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general valuative criterion quantifies over all valuation rings, not just local rings of normal finite-type curves; normalization and finite-type trait reduction are not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ValuativeCriterion\"",
+   "results": "{\"t\": \"2026-10-23T13:39:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"ValuativeCriterion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\"], \"digest\": \"5d68585847e23d64\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general valuative criterion quantifies over all valuation rings, not just local rings of normal finite-type curves; normalization and finite-type trait reduction are not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism over a field is proper if rational maps from punctured normal curves extend uniquely at the missing closed point",
+   "results": "{\"t\": \"2026-10-23T13:39:04Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism over a field is proper if rational maps from punctured normal curves extend uniquely at the missing closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\"], \"digest\": \"6a52da0906203e68\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general valuative criterion quantifies over all valuation rings, not just local rings of normal finite-type curves; normalization and finite-type trait reduction are not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Properness of a quasi compact morphism of schemes locally of finite type over a field tested by unique extension from punctured normal curves to their local rings",
+   "results": "{\"t\": \"2026-10-23T15:05:23Z\", \"tool\": \"leansearch\", \"query\": \"Properness of a quasi compact morphism of schemes locally of finite type over a field tested by unique extension from punctured normal curves to their local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.QuasiCompact.mk\", \"AlgebraicGeometry.IsProper.recOn\"], \"digest\": \"4e973b1e283d0e9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsProper.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:341) requires all valuation-ring squares; the restricted C,U,c criterion of Tag 0GWX is not a one-line specialization. The second semantic phrasing found only finite/proper instances and the same general criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "essentially.*finite.*type.*[Vv]aluative|[Vv]aluative.*essentially|normal.*curve.*[Pp]roper",
+   "results": "{\"t\": \"2026-10-23T15:05:24Z\", \"tool\": \"grep\", \"query\": \"essentially.*finite.*type.*[Vv]aluative|[Vv]aluative.*essentially|normal.*curve.*[Pp]roper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsProper.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:341) requires all valuation-ring squares; the restricted C,U,c criterion of Tag 0GWX is not a one-line specialization. The second semantic phrasing found only finite/proper instances and the same general criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ValuativeCriterion\"",
+   "results": "{\"t\": \"2026-10-23T15:05:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"ValuativeCriterion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.Uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\"], \"digest\": \"5d68585847e23d64\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsProper.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:341) requires all valuation-ring squares; the restricted C,U,c criterion of Tag 0GWX is not a one-line specialization. The second semantic phrasing found only finite/proper instances and the same general criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type morphism over a field is proper if rational maps from punctured normal curves extend uniquely at the missing closed point",
+   "results": "{\"t\": \"2026-10-23T16:17:46Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type morphism over a field is proper if rational maps from punctured normal curves extend uniquely at the missing closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.isProperMap\"], \"digest\": \"6a52da0906203e68\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IsProper.of_valuativeCriterion (Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:341) requires all valuation-ring squares; the restricted C,U,c criterion of Tag 0GWX is not a one-line specialization. The second semantic phrasing found only finite/proper instances and the same general criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-properness-formal-arc-test",
+  "date": "2026-10-23",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Testing properness of affine finite-type morphisms by formal arcs. Supporting input: reduce the properness test to local rings at closed points of normal integral finite-type curves (Stacks 0GWX over a field), before completion.",
+   "via": [
+    "lem-sfb-affine-properness-formal-arc-test",
+    "lem-sfb-hilbert-mumford-projective-representation",
+    "lem-sfb-hilbert-monomial-numerical-criterion",
+    "lem-sfb-uniform-gieseker-codegree-criterion",
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-properness-normal-curve-local-test",
+  "worker": "stage1",
+  "group": "Q112",
+  "summary": "Kept the statement exactly. Proved the forward implication using the existing normal dimension-one DVR and proper valuative extension nodes; for the converse separated universal closedness from uniqueness, applied the new Tag 0GWV criterion to f and its diagonal, and derived diagonal lifting explicitly from the two projections. Reused existing finite-type cancellation, Noetherian, fibre-product and proper-monomorphism nodes. One new unsplit node; no new Mathlib leaves.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Sections 2.2--2.3, Proposition 1, Lemma 2(3), equation (5), and Lemma 4(3), printed pp.6--10; normalized weights and arithmetic uniformity are explicit agent expansions. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input: Morrison Section 2.2, Proposition 1(1)--(2) and its proof, printed pp.6--7. Arbitrary-characteristic formulation of the Hilbert--Mumford criterion for SL and the determinant linearization; nonconstant weights explicitly exclude the trivial one-parameter subgroup. The elementary determinant-coordinate calculation is the one in Proposition 1; the underlying Hilbert--Mumford theorem is Mumford--Fogarty--Kirwan, Geometric Invariant Theory, Theorem 2.1 (local book WANTED). Supporting input: Morrison Proposition 1, first sentence of the proof, citing GIT Theorem 2.1: the general numerical criterion, before its specialization to Pluecker monomial coordinates. Supporting input: Testing properness of affine finite-type morphisms by formal arcs. Supporting input: reduce the properness test to local rings at closed points of normal integral finite-type curves (Stacks 0GWX over a field), before completion. The six steps realize this curve-local prerequisite; the current latest det-thm-sf-ctf-stability-direct-images proof (3) uses compactification, and this is a generic tool below its inherited supporting algebraic-geometric branch. The ancestor tool reports None, retained verbatim.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Its affine-local stalk identification gives R=A_p, before applying localization Noetherianity. This foundational scheme fact is not a unit-route replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-709713154",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-709713154 (reviewer sub-agent of L); spot-checked: I read limits.tex 0GWV, 0GWW and 0GWX in full, with S=Spec k (fields are Nagata by 0335(1)). The item's statement is unchanged from clones/live, where the item is still unsplit; there is no repair note and no SGA citation. The item matches 0GWX hypothesis by hypothesis, and the new node lem-sfb-normal-curve-universal-closedness-test matches 0GWV (1)-(3). The new node is statement-only and self-contained, with every notion cited to its definition. It is strictly weaker than the item (existence only), is used twice (for f and for its diagonal), and does not restate a clause of the item. rg -L over the DAG for 0GWV/0GWW/0GWX/0GWT/0CM2 and for universally-closed DVR criteria found only all-DVR or k[[t]] criteria (0208, 0207, 0CM2, 089G nodes and the parent), so it is not a duplicate. Steps: (1) cancellation (a) gives f locally of finite type, hence finite type, and pqf-lem-locnoeth-lft makes X and C locally Noetherian. (2) R=A_p is Noetherian (00FN), so R is a DVR by lem-sc-normal-dim1-dvr, and the proper+separated valuation-extension node gives the unique lift. (3) Forgetting uniqueness gives the new node's (3), hence universal closedness. (4) The diagonal is locally of finite type, quasi-compact via 01OY, affine products and local-on-target, and a monomorphism; I checked each part. (5) The diagonal existence test: the generic point of C lies in U because c is closed of codimension 1, so both restricted projections lift the same square, and item uniqueness makes them equal. Local uniqueness correctly replaces the 0GWT gluing. (6) 01L4 and 04XV make the diagonal a closed immersion, so f is separated, hence proper. Small cases tested: X empty; G_m in A^1 and A^1 over k with a=1/t both fail (3), as they should; the doubled-origin line satisfies (3) with two lifts, confirming the node correctly makes no uniqueness claim. Batch-5 citation lem-trf-scheme-monomorphism-separated: a general Mathlib leaf (IsSeparated.isSeparated_of_mono, Separated.lean:61) with empty proof_deps; neither assumption gives it and it is not a step of their proofs, so accepted. Accepted tool_uses: pqf-def-locnoeth, lem-weil-pbc-spec-local-ring-canonical-morphism, lem-sc-normal-dim1-dvr, lemma-nagata-proper-separated-valuation-extension. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PropernessNormalCurveLocalTest",
+  "declaration": "AlgebraicGeometry.isProper_iff_normal_curve_local_test",
+  "file": "lean/Sheaf/AlgebraicGeometry/PropernessNormalCurveLocalTest.lean",
+  "statement": "theorem isProper_iff_normal_curve_local_test (k : Type u) [Field k] (X Y : Scheme.{u}) (p : X ⟶ Spec (CommRingCat.of k)) (q : Y ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType p] [LocallyOfFiniteType q] (f : X ⟶ Y) [QuasiCompact f] (hf : f ≫ q = p) : IsProper f ↔ ∀ (C : Scheme.{u}) (s : C ⟶ Spec (CommRingCat.of k)) [IsIntegral C] [LocallyOfFiniteType s] [QuasiCompact s], (∀ z : C, IsDomain (C.presheaf.stalk z) ∧ IsIntegrallyClosed (C.presheaf.stalk z)) → ∀ (c : C), IsClosed ({c} : Set C) → ringKrullDim (C.presheaf.stalk c) = 1 → ∀ (U : C.Opens), (U : Set C) = {c}ᶜ → ∀ (a : U.toScheme ⟶ X) (b : C ⟶ Y), a ≫ p = U.ι ≫ s → b ≫ q = s → a ≫ f = U.ι ≫ b → ∃! h : Spec (C.presheaf.stalk c) ⟶ X, h ≫ p = C.fromSpecStalk c ≫ s ∧ h ≫ f = C.fromSpecStalk c ≫ b ∧ pullback.snd U.ι (Spec.map (CommRingCat.ofHom (algebraMap (C.presheaf.stalk c) (FractionRing (C.presheaf.stalk c)))) ≫ C.fromSpecStalk c) ≫ Spec.map (CommRingCat.ofHom (algebraMap (C.presheaf.stalk c) (FractionRing (C.presheaf.stalk c)))) ≫ h = pullback.fst U.ι (Spec.map (CommRingCat.ofHom (algebraMap (C.presheaf.stalk c) (FractionRing (C.presheaf.stalk c)))) ≫ C.fromSpecStalk c) ≫ a",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20eb6e03d",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Item node diff vs side-live/live: lean record only; statement verbatim in file. Clause-by-clause vs Stacks 0GWX over Spec k: field k, X/Y LOFT over k via p,q, f QC with hf, IsProper f ↔ ∀ C integral LOFT+QC over k, all stalks IsDomain∧IsIntegrallyClosed, c closed, ringKrullDim stalk=1, U={c}ᶜ, k-maps a,b with a≫f=U.ι≫b → ∃! h : Spec O_{C,c} ⟶ X with h≫f=fromSpecStalk≫b and generic agreement via pullback of U.ι along Spec Frac→C (fst iso since generic pt ≠ c; not vacuous). Same encoding as landed companion normal_curve_universal_closedness_test (∃ → ∃!). h≫p and a≫p clauses redundant but harmless. Edge cases: empty X/Y, empty/0-dim C, any char, universe u = established convention. No reducedness on X,Y. No duplicate in Mathlib or project; no new defs; sorry only; docstrings carry source 0GWX, blueprint id, six proof steps; lines ≤92; imports exist. No file changed, no compile run; worker reports clean compile."
+ }
+}

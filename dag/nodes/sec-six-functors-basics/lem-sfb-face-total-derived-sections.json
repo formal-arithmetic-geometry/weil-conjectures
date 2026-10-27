@@ -1,0 +1,424 @@
+{
+ "id": "lem-sfb-face-total-derived-sections",
+ "kind": "statement",
+ "title": "Derived sections on a flat face total site and their augmentation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $Z$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $a:W_\\bullet\\to Z$ be an augmented semisimplicial algebraic space: it is indexed contravariantly by the nonempty finite ordinals and injective order-preserving maps. Suppose every face map and every $a_p:W_p\\to Z$ is flat [def-weil-flat-morphism] on etale scheme charts. Use enlarged small etale ringed sites [lem-trf-space-enlarged-etale-ringed-site-model] and their ringed total module category $\\mathscr M$ and augmentation $a$ [lem-sfb-semisimplicial-ringed-total-category]. Let $F\\in\\mathscr M$ be any module, and choose a bounded-below injective resolution $F\\to I^\\bullet$ in $\\mathscr M$ with $I^q=0$ for $q<0$ [def-sp-injective-resolutions]. For every etale algebraic space $V\\to Z$, put $V_p=W_p\\times_ZV$. There is a natural isomorphism in the derived category of abelian groups [def-weil-abstract-derived-category]\n$$R\\Gamma(V_{\\mathrm{et}},(Ra_*F)|_V)\\ \\simeq\\ \\operatorname{Tot}(A_V),\\qquad A_V^{p,q}=\\Gamma((V_p)_{\\mathrm{et}},I_p^q|_{V_p}),\\quad p,q\\ge0.$$\nHere $(I_p^q)$ is component evaluation, the horizontal differential is $\\sum_{i=0}^{p+1}(-1)^i d_i^*$ using the semilinear transition of $I^q$ and adjunction, and the total differential is $d_h+(-1)^p d_v$ [def-sp-double-complex-total]. The $p$-th column represents $R\\Gamma((V_p)_{\\mathrm{et}},F_p|_{V_p})$. The construction is invariant under face-compatible zigzags of column quasi-isomorphisms between resolution diagrams with one common lower bound on the internal degree; the totalization is taken after choosing such compatible resolution diagrams, not from an isolated family of cohomology groups. For $F=a^*G$, with $G$ a module on $Z_{\\mathrm{et}}$, these identifications respect the augmentation: the map induced by the canonical derived adjunction unit $\\eta_G:G\\to Ra_*a^*G$ is represented by the augmented restriction map from a resolution model of $R\\Gamma(V_{\\mathrm{et}},G|_V)$ to the displayed total complex, and this remains true after such replacements. A map between bounded-below derived modules on $Z_{\\mathrm{et}}$ is an isomorphism if its derived sections on every etale $V\\to Z$ are isomorphisms. Neither a hypercover condition nor quasi-coherence of $F$ or $G$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0D7F, lemma-augmentation-spectral-sequence-modules, and its resolution proof (lemma-simplicial-resolution-augmentation-modules, lemma-augmentation-cech-complex-modules). Agent-supplied injective-order-map adaptation using the finite simplex on the vertices of each component; local derived-section and unit-compatible formulation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-sp-double-complex-total",
+  "def-weil-flat-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-enlarged-face-ringed-total-model"
+ ],
+ "proof": [
+  {
+   "text": "Work on the enlarged sites, so that an etale algebraic space $V\\to Z$ is an object and its slice is the site of $V$. By [lem-sfb-space-flat-etale-ringed-comparison] chartwise flatness of each face and $a_p$ is ringed-topos flatness. In the equivalent scalar-extension formulation [def-sfb-flat-etale-ringed-map], extension of scalars is exact. Transport of modules by inverse image is exact by [lem-trf-geometric-inverse-image-exact]; their composite, module pullback, is therefore exact. Every transition $f_\\alpha$ is a composite of faces, so by the composition compatibility of [lem-trf-space-enlarged-etale-ringed-site-model] its module pullback is a composite of these exact face pullbacks, hence exact, as the free-adjoint node requires. Evaluations are exact and jointly conservative by [lem-sfb-semisimplicial-ringed-total-category], so $a^*$ is exact as well: evaluate the cohomology of the image of a short exact sequence, obtaining the zero cohomology of each $a_p^*$ image. The exact left adjoint $\\ell_p$ of [lem-sfb-semisimplicial-evaluation-free-adjoint] and [lem-exc-rg-right-adjoint-preserves-injectives] show that $I_p^q=e_pI^q$ is injective; the same adjoint argument for $a^*\\dashv a_*$ shows that $a_*I^q$ is injective. Exact evaluation makes $F_p\\to I_p^\\bullet$ a resolution. All module categories have enough injectives by [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-sp-grothendieck-enough-injectives], including the module category of the total ring sheaf.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-space-flat-etale-ringed-comparison",
+    "def-sfb-flat-etale-ringed-map",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-exc-rg-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tags 0D72 and 0D74 (component extension); 0D7B (flat augmentation). Flatness comparison uses the cited algebraic-space node; 04JC, sites-modules-lemma-flat-pullback-exact."
+   }
+  },
+  {
+   "text": "For an arbitrary base module $H$, put $P_p(H)=\\ell_p(a_p^*H)$. The component formula in [lem-sfb-semisimplicial-evaluation-free-adjoint] and the augmentation composition identifications in [lem-sfb-semisimplicial-ringed-total-category] give\n$$(P_p(H))_m=\\bigoplus_{\\alpha:[p]\\hookrightarrow[m]}a_m^*H.$$\nDefine $d_i:P_p(H)\\to P_{p-1}(H)$ on the $\\alpha$ summand by the identity into the $\\alpha\\delta_i$ summand, and $P_0(H)\\to a^*H$ by folding summands. Postcomposition of labels commutes with deletion, and the pullback composition identifications obey the cocycle law, so these are maps of systems. Double deletion cancels in pairs with opposite signs; thus the alternating boundary squares to zero. In component $m$ this augmented chain complex is contractible. Write a summand as an increasing tuple $(i_0,\\ldots,i_p)$. Let $h$ insert $0$ at the start if $i_0>0$, and be zero if $i_0=0$; let $h_{-1}$ send the augmented term to the vertex $0$. If $i_0>0$, the first face of $(0,i_0,\\ldots,i_p)$ is the original tuple, and all other faces cancel the terms of $h\\partial$. If $i_0=0$, only its first face has nonzero $h$ and gives the original tuple. Hence $\\partial h+h\\partial=1$, including augmentation degree $-1$. This also covers $m=0$ and the zero terms $p>m$. Consequently $P_\\bullet(H)\\to a^*H$ is exact, since exact jointly conservative evaluations detect its cohomology. The contractions need not commute with $m$; only the differentials must be maps of systems.",
+   "uses": [
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7C, lemma-simplicial-resolution-augmentation-modules; agent adaptation to injective labels: finite ordered simplex, with its contraction written here."
+   }
+  },
+  {
+   "text": "For an injective total module $J$, apply $\\operatorname{Hom}_{\\mathscr M}(-,J)$ to the exact augmented resolution in Step 2. Injectivity makes the resulting cochain complex exact: a map annihilating a boundary factors through its image quotient and extends across the next monomorphism. The free adjunction and $a_p^*\\dashv a_{p,*}$ identify its terms with $\\operatorname{Hom}(H,a_{p,*}J_p)$, and its augmented term with $\\operatorname{Hom}(H,a_*J)$. Under the explicit inverse-adjunct formula the $i$th coface is the transpose of the transition along $\\delta_i$, with sign $(-1)^i$; the augmentation is the transpose of the component of $a^*a_*J\\to J$. Now take $H=E_V$, the free representable module of [lem-trf-free-representable-module-ext-evaluation]. Its displayed evaluation bijection turns this exact sequence into\n$$0\\to\\Gamma(V,a_*J)\\to\\Gamma(V_0,J_0)\\to\\Gamma(V_1,J_1)\\to\\cdots.$$\nHere $a_{p,*}J_p$ evaluated at $V$ is $J_p(W_p\\times_ZV)$ by the fibre-product description of [lem-trf-space-enlarged-etale-ringed-site-model]. Thus exactness holds on these sections, rather than merely as sheaves. It is natural in $J$ and $V$: a restriction carries a section to its restriction, and on free generators the corresponding map sends $e_{\\mathrm{id}}$ to the generator of the site arrow, so the adjunction bijections commute with it.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sfb-semisimplicial-evaluation-free-adjoint",
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-trf-free-representable-module-ext-evaluation",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7D, lemma-augmentation-cech-complex-modules; Hom proof applied to the face-only exact complex of Step 2."
+   }
+  },
+  {
+   "text": "Apply Step 3 to every $J=I^q$. Naturality in $J$ makes all cofaces commute with $d_I$, and the face identities already checked give $d_h^2=0$. Therefore the groups $A_V^{p,q}$ in the statement form a first-quadrant double complex, with total differential $d_h+(-1)^pd_I$. Put $B_V^q=\\Gamma(V,a_*I^q)$. The row augmentations define $b_V:B_V\\to\\operatorname{Tot}(A_V)$ by inclusion into bidegree $(0,q)$; the first horizontal differential kills that augmentation, so this is a chain map. Regard $B_V$ as a double complex concentrated in horizontal degree zero. On horizontal cohomology, Step 3 says $b_V$ is the identity identification in degree zero and both sides vanish in positive horizontal degrees. Apply the horizontal-first spectral sequence and functorial finite-filtration convergence of [thm-sp-double-complex-spectral-sequences]. The induced maps on $E_1$ and hence on every associated graded of total cohomology are isomorphisms. Successive short exact sequences of the finite filtrations then show $H^n(b_V)$ is an isomorphism for every $n$. Thus $b_V$ is a quasi-isomorphism of entire complexes.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, lemma-augmentation-spectral-sequence-modules, double-complex proof; Homology Tag 0133, lemma-double-complex-gives-resolution, second-variable variant."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-right-derived-plus-injective], $a_*I^\\bullet$ represents $Ra_*F$. By Step 1 it is a bounded-below complex of injectives, and so are all $I_p^\\bullet$. They are K-injective by [lem-weil-pbc-dplus-injective-representative]. Slice restriction preserves K-injectivity by [lem-pur-kinjective-restrict-localized]. Consequently $B_V$ represents $R\\Gamma(V,(Ra_*F)|_V)$ and each column $A_V^{p,\\bullet}$ represents $R\\Gamma(V_p,F_p|_{V_p})$. The slice identifications are those of [lem-trf-space-enlarged-etale-ringed-site-model]. Combined with $b_V$, this gives the asserted derived isomorphism, including the horizontal maps, since Step 3 identified their actual adjoints. If the derived sections are read as sections of underlying abelian complexes, [lem-sfb-ringed-sections-forget-abelian] supplies precisely the same comparison, naturally with all restriction maps. No claim that forgetting modules preserves injectivity is needed. Naturality of $b_V$ and of the canonical resolution comparisons gives naturality in $F$ and $V$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-sfb-ringed-sections-forget-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F resolution proof; sites-cohomology Tags 08FI (lemma-restrict-K-injective-to-open), 0D6J (lemma-modules-abelian-unbounded)."
+   }
+  },
+  {
+   "text": "For a face-compatible column quasi-isomorphism $A\\to A'$ of section resolution diagrams, shift a common internal lower bound $c$ to zero and apply [lem-sc-first-quadrant-total-column-comparison]. The shifted total has the same horizontal signs, and its vertical differential agrees with the shift of the original total after multiplying the horizontal-degree-$p$ summand by $(-1)^{cp}$; indeed this changes the horizontal sign by $(-1)^c$ and leaves the vertical sign unchanged. Thus the comparison also holds before shifting. Each arrow of a zigzag therefore gives an isomorphism of total derived objects; invert arrows pointing backwards. Compatibility of entire diagrams is used here to obtain double-complex maps, and the common lower bound makes each total diagonal finite. For two total injective resolutions of $F$, [lem-weil-pbc-kinjective-hom-derived] gives their comparison under $F$, unique up to homotopy; evaluation and sections carry that homotopy to column homotopies, and its total is the homotopy with sign $(-1)^p$ on horizontal degree $p$. Thus the construction is independent of this choice as well. This proves the stated invariance without replacing the compatible diagram by its separate cohomology groups.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0133, homology-lemma-double-complex-gives-resolution and column-cone comparison; agent sign and common-lower-bound verification."
+   }
+  },
+  {
+   "text": "Take $F=a^*G$ and a nonnegative injective resolution $G\\to J^\\bullet$ on the base. Exactness of $a^*$ makes $a^*G\\to a^*J$ a quasi-isomorphism. Since $I$ is K-injective, [lem-weil-pbc-kinjective-hom-derived] represents its derived inverse followed by $a^*G\\to I$ by a chain map $t:a^*J\\to I$, compatible with $G$ in the homotopy category. Termwise adjunction gives $t^\\flat:J\\to a_*I$. To check the derived adjunction rather than choose an unrelated map, use [lem-pc-derived-adjoint-functors]: it is the adjunction obtained by deriving this ordinary adjunction. Its hypotheses hold: $\\mathscr M$ and the base module category are Grothendieck (Step 1), so every unbounded complex has a K-injective resolution by [lem-weil-pbc-kinjective-functorial-existence]; by [lem-weil-pbc-kinjective-hom-derived] such a resolution $K\\to I_K$ receives a unique homotopy class from every quasi-isomorphic $K'$ under $K$, so the ind-system defining $Ra_*K$ is essentially constant with value $a_*I_K$; and $a^*$ is exact, so the pro-system defining $La^*$ at $M$ is essentially constant with value $a^*M$. Its Hom bijection on these representatives is the termwise bijection, since exact $a^*$ preserves quasi-isomorphisms and maps into K-injective $I$ are computed in the homotopy category. The adjunct of $t$ is therefore the unit $G\\to Ra_*a^*G$, as $t$ represents the identity of $a^*G$. On sections its composite with $b_V$ is the map $\\Gamma(V,J)\\to A_V^{0,\\bullet}\\to\\operatorname{Tot}(A_V)$ obtained from the degree-zero component $t_0$ and the augmentation adjunction; the first face difference is zero by compatibility of $t$ with the two transitions. This is exactly the augmented restriction map. A map of augmented resolution diagrams commutes with these maps before localization; Step 6 inverts its total quasi-isomorphism. Hence the same unit identification survives all the stated compatible replacements.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7D augmentation normalization; derived.tex lemma-derived-adjoint-functors; agent verification for the actual canonical unit."
+   }
+  },
+  {
+   "text": "Finally let $u:K\\to L$ be a map of bounded-below derived modules whose derived sections on every etale $V\\to Z$ are isomorphisms. Represent $K,L$ by bounded-below injective complexes using [lem-weil-pbc-dplus-injective-representative], and represent $u$ by a chain map using [lem-weil-pbc-kinjective-hom-derived]. Slice K-injectivity [lem-pur-kinjective-restrict-localized] says that its section maps compute the assumed derived-section maps. Thus for every object $V$ the cone of that section map is acyclic. Form the cone complex of presheaves of modules by forgetting the sheaf condition. Its evaluation is that same cone (cones use only finite sums), so its cohomology presheaves vanish objectwise. Exact module sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact] now makes its sheafified cone acyclic; sheafifying the original sheaf terms gives them back, so this is the cone of $u$ in module sheaves. Therefore $u$ is an isomorphism in the derived category. The enlarged site covers every algebraic-space etale object and contains all scheme etale objects, by [lem-trf-space-enlarged-etale-ringed-site-model]. This proves the asserted detection. The argument used neither hypercover exactness nor quasi-coherence: horizontal exactness came from injectivity on the total category, not from descent of $F$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Agent cone argument using exact module sheafification; sites-cohomology Tag 08FI (localized K-injectives)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-flat-etale-ringed-map",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-sfb-ringed-sections-forget-abelian",
+  "lem-sfb-semisimplicial-evaluation-free-adjoint",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-sfb-space-flat-etale-ringed-comparison",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-trf-free-representable-module-ext-evaluation",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tags 0D7C, 0D7D, 0D7F: face-only adaptation by the explicit finite ordered simplex contraction, with local sections and derived-unit normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image of a flat augmented semisimplicial ringed total site is computed by the alternating face total complex of derived sections of its components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicTopology.alternatingFaceMapComplex\", \"module\": \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      CategoryTheory.Functor (CategoryTheory.SimplicialObject C) (ChainComplex C ℕ)\", \"doc\": \"The functor that sends a simplicial object $X$ in a category $\\\\mathcal{C}$ to its associated chain complex in $\\\\mathcal{C}$ indexed by $\\\\mathbb{N}$, where each differential is the alternating sum of f\"}\n  {\"name\": \"AlgebraicTopology.map_alternatingFaceMapComplex\", \"module\": \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} D] [inst_3 : CategoryTheory.Preadditive D]\\n  (F : CategoryTheory.Functor C D) [inst_4 : F.Additive],\\n  (AlgebraicTopology.alternatingFa\", \"doc\": \"For any additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between categories where $ \\\\mathcal{D} $ is preadditive, the composition of the alternating face map complex functor on $ \\\\mathcal{C} $ fol\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.obj_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ) (Δ : SimplexCategoryᵒᵖ),\\n  (AlgebraicTopology.DoldKan.Γ₀.obj K).obj Δ = AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂ K Δ\", \"doc\": \"For a chain complex $K$ in a preadditive category $\\\\mathcal{C}$ with finite coproducts and an object $\\\\Delta$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the Γ₀ functor's object mapping is de\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀_obj_obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (X : ChainComplex C ℕ) (Δ : SimplexCategoryᵒᵖ),\\n  (AlgebraicTopology.DoldKan.Γ₀.obj X).obj Δ = AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂ X Δ\", \"doc\": \"For a chain complex $X$ in a preadditive category $\\\\mathcal{C}$ with finite coproducts and an object $\\\\Delta$ in the opposite simplex category $\\\\Delta^\\\\text{op}$, the $\\\\Gamma_0$ functor's object mappi\"}\n  {\"name\": \"AlgebraicTopology.AlternatingFaceMapComplex.ε\", \"module\": \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        CategoryTheory.SimplicialObject.Augmented.drop.comp (AlgebraicTopology.alternatingFaceMapComplex C) ⟶\\n          CategoryTh\", \"doc\": \"The natural transformation $\\\\varepsilon$ from the composition of the drop functor on augmented simplicial objects followed by the alternating face map complex functor to the composition of the point f\"}\n  {\"name\": \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(k G : Type u) →\\n  [inst : CommRing k] →\\n    [inst_1 : Monoid G] → (classifyingSpaceUniversalCover.compForgetAugmented.toModule k G).ExtraDegeneracy\", \"doc\": \"For a commutative ring $k$ and monoid $G$, this constructs an extra degeneracy structure on the augmented simplicial $k$-module object obtained by lifting the classifying space universal cover (compos\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteCoproducts C] →\\n        CategoryTheory.Functor (ChainComplex C ℕ) (CategoryTheory.SimplicialObject C)\", \"doc\": \"The Γ₀ functor maps chain complexes over a preadditive category $\\\\mathcal{C}$ with finite coproducts to simplicial objects in $\\\\mathcal{C}$. It is constructed as the composition of the Γ₀' functor (wh\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.obj\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      [CategoryTheory.Limits.HasFiniteCoproducts C] → ChainComplex C ℕ → CategoryTheory.SimplicialObject C\", \"doc\": \"The Γ₀ functor maps a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts to a simplicial object. For each object $ \\\\Delta $ in the opposite simplex category $ \\\\Delta^\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: alternatingFaceMapComplex and SemiSimplexCategory provide complexes and an index category, not the derived-section identification for ringed face total sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below sheaf on a semisimplicial ringed site has a spectral sequence of component derived sections computing total cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.ΓRes\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) (U : Cᵒᵖ) : (Γ J A).obj F ⟶ F.val.obj U\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this is the morphism from the global sections $\\\\Gamma(F)$ to the sections $F(U)$ over an object $U$ in $\\\\mathcal{C}^\\\\text{op\"}\n  {\"name\": \"SheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M : SheafOfModules.{v} R) : Type _\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections of a sheaf of modules $M$ over $R$ consist of families of elements $s_X \\\\in M(X)\"}\n  {\"name\": \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits\", \"type\": \"[HasColimitsOfShape K (PresheafOfModules.{v} R.val)] : HasColimitsOfShape K (SheafOfModules.{v} R)\", \"doc\": \"If the category of presheaves of modules over a presheaf of rings $ R $ admits colimits of shape $ K $, then the category of sheaves of modules over the corresponding sheaf of rings $ R $ also admits \"}\n  {\"name\": \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"{F : K ⥤ Sheaf J D} (E : Cocone (F ⋙ sheafToPresheaf J D)) (hE : IsColimit E) : IsColimit (sheafifyCocone E)\", \"doc\": \"Let $F : \\\\mathcal{K} \\\\to \\\\text{Sh}(J, \\\\mathcal{D})$ be a functor representing a diagram of sheaves on a site $(\\\\mathcal{C}, J)$ with values in a category $\\\\mathcal{D}$. Let $E$ be a cocone for the dia\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfShape D (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits of shape $D$. This means that give\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfSize.{v₂, v} (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits for diagrams indexed by categories\"}\n  {\"name\": \"SheafOfModules.GeneratingSections.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat} →\\n          {inst_2 : J.WEqualsLocallyBijective AddCommGrpCat} →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheafification and local bijectivity, this type represents the generatin\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: alternatingFaceMapComplex and SemiSimplexCategory provide complexes and an index category, not the derived-section identification for ringed face total sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"AlternatingCofaceMapComplex\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: alternatingFaceMapComplex and SemiSimplexCategory provide complexes and an index category, not the derived-section identification for ringed face total sites"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimplicial|semi.simplicial|augmentation.*spectral|spectral.*augmentation",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplexCategory/SemiSimplexCategory.lean\", \"line\": \"13\", \"text\": \"We define a category `SemiSimplexCategory` so that semi-simplicial objects\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: alternatingFaceMapComplex and SemiSimplexCategory provide complexes and an index category, not the derived-section identification for ringed face total sites"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Aa]dj|[Aa]dj.*evaluation|free.*[Ee]valuation",
+   "results": "21 hits read: Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Evaluation.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean. Directory: Mathlib/CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary evaluation adjoints, module pullbacks, injective resolutions and alternating complexes do not identify derived sections on a varying-ring face total site or normalize its unit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left adjoint to evaluation on a category of semilinear sheaf module diagrams is the sum of transition pullbacks",
+   "results": "8 hits read: TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafPullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.constantSheafAdj, SheafOfModules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, PresheafOfModules.pullback",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary evaluation adjoints, module pullbacks, injective resolutions and alternating complexes do not identify derived sections on a varying-ring face total site or normalize its unit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CosimplicialObject\", \"SheafOfModules\"",
+   "results": "0 hits read: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary evaluation adjoints, module pullbacks, injective resolutions and alternating complexes do not identify derived sections on a varying-ring face total site or normalize its unit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"leftAdjoint\"",
+   "results": "9 hits read: CategoryTheory.coevaluation_comp_leftAdjointMate, CategoryTheory.leftAdjointMate_comp_evaluation, CategoryTheory.coevaluation_comp_leftAdjointMate_assoc, CategoryTheory.leftAdjointMate_comp_evaluation_assoc, CategoryTheory.evaluationLeftAdjoint, CategoryTheory.evaluationIsLeftAdjoint, CategoryTheory.evaluationLeftAdjoint_obj_obj, CategoryTheory.evaluationLeftAdjoint_obj_map",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary evaluation adjoints, module pullbacks, injective resolutions and alternating complexes do not identify derived sections on a varying-ring face total site or normalize its unit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimplicial ringed total site injective resolution alternating face complex computes derived direct image",
+   "results": "8 hits read: CategoryTheory.InjectiveResolution.of, AlgebraicTopology.AlternatingFaceMapComplex.obj, CategoryTheory.InjectiveResolution.self, AlgebraicTopology.alternatingFaceMapComplex, AlgebraicTopology.AlternatingCofaceMapComplex.obj, AlgebraicTopology.alternatingCofaceMapComplex, CategoryTheory.InjectiveResolution.of_def, AlgebraicTopology.AlternatingCofaceMapComplex.d_eq_unop_d",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary evaluation adjoints, module pullbacks, injective resolutions and alternating complexes do not identify derived sections on a varying-ring face total site or normalize its unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a module system on a diagram of ringed topoi has a left adjoint given by the direct sum of pullbacks over arrows from the chosen component",
+   "results": "8 hits read: SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, PresheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, CondensedMod.LocallyConstant.adjunction",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary evaluation adjoints, module pullbacks, injective resolutions and alternating complexes do not identify derived sections on a varying-ring face total site or normalize its unit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections of the total ringed site of an augmented semisimplicial algebraic space are the total complex of component sections of an injective resolution",
+   "results": "8 hits read: CategoryTheory.InjectiveResolution.ofCocomplex, CategoryTheory.InjectiveResolution.toRightDerivedZero', CochainComplex.cm5b.I_X, CategoryTheory.InjectiveResolution.cocomplex, CategoryTheory.InjectiveResolution.ι', CategoryTheory.InjectiveResolution.cochainComplex, CategoryTheory.InjectiveResolution.of_def, CategoryTheory.InjectiveResolution.self_cocomplex",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned ordinary evaluation adjoints, module pullbacks, injective resolutions and alternating complexes do not identify derived sections on a varying-ring face total site or normalize its unit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-face-heart-derived-unit",
+  "date": "2026-10-23",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: hypothesis (3) in the unbounded descent argument: derived unit only for modules in degree zero; supporting input: 0DHE proof: face-only replacement of simplicial derived-image computation, retaining the actual adjunction unit",
+   "via": [
+    "lem-sfb-fppf-face-heart-derived-unit",
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-face-total-derived-sections",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing exact face-component free adjoint. Wrote the finite-simplex resolution and Hom row exactness, the local derived-section comparison, common-lower-bound invariance, actual derived-unit map and cone detection. No new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: hypothesis (3) in the unbounded descent argument: derived unit only for modules in degree zero; supporting input: 0DHE proof: face-only replacement of simplicial derived-image computation, retaining the actual adjunction unit The eight steps supply the local face-total derived-section input; the latest direct-images proof (3) retains the proper/open compactification route. The ancestor tool returns null; that recorded ancestry and via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-rg-right-adjoint-preserves-injectives",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-trf-free-representable-module-ext-evaluation",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic categorical or homological tool for exact adjoints, injective models, sections or finite totalization; used with its stated hypotheses, not to replace the direct-image unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic existence of K-injective resolutions in Grothendieck abelian categories, needed for the everywhere-defined hypothesis of the derived-adjunction node in Step 7; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-trf-free-representable-module-ext-evaluation",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-kinjective-functorial-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-a7649942b",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-a7649942b (reviewer sub-agent of L); spot-checked: FIX for two small citation and hypothesis gaps in Steps 1 and 7; the mathematics is correct. Base: the item matches live and side-live (both unsplit) in statement, stmt_deps and blueprint. There is no repair note and no new node; the item was created 2026-10-23 and had no proof before, so nothing was shortened. Source: I read Stacks spaces-simplicial 0D7B/0D7C/0D7D/0D7F (lines 2060-2215). The route is the 0D7F double complex, adapted to injective maps only, with flat ℓ_p in place of g_{n!}; flatness is a hypothesis of the item. Step 2: I rechecked the cone-on-vertex-0 contraction in every case (i_0>0, i_0=0, p=0, augmentation degree -1). The complex is the reduced chain complex of the ordered m-simplex, so it is exact componentwise. Small cases: m=0; W_p empty for p≥1, which gives the single column; and W_0=W_1=Z with identity faces, where the rows 1,0,1,0 are exact and a_*F=Eq(F_0⇉F_1). Steps 3-6 and 8 use only the statements of their cited nodes: free-representable θ and its naturality, the v_f fibre-product clause, the horizontal-first spectral sequence with finite filtration, dplus-K-injective, slice K-injectivity, first-quadrant column comparison, and exact sheafification for the cone. Repairs: (1) Step 1 now says every transition f_α^* is exact as a composite of faces, which the free-adjoint node assumes. (2) Step 7 applied lem-pc-derived-adjoint-functors without its everywhere-defined hypotheses. I added lem-weil-pbc-kinjective-functorial-existence (M and Mod(Z) are Grothendieck) to the step's uses, proof_deps and tool_uses, and stated why the ind-system and pro-system are essentially constant. Duplicates: the lem-trf-total-site-* and site-augmentation nodes are simplicial with constant Λ and do not specialize to this semisimplicial ringed item. Batch 5: def-sfb-flat-etale-ringed-map and lem-sfb-space-flat-etale-ringed-comparison reach sec-trace-formula only through the definition def-trf-algebraic-space. lem-sfb-semisimplicial-evaluation-free-adjoint reaches it only through the general total-site construction lem-trf-slice-site-total-pseudofunctor. lem-trf-free-representable-module-ext-evaluation and lem-trf-geometric-inverse-image-exact are generic site and module facts. None is part of the trace formula, Poincaré duality or their proofs, so all are accepted. The declared generic tool uses are accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FaceTotalDerivedSections",
+  "declaration": "CategoryTheory.FaceTotalDerivedSections.face_total_derived_sections",
+  "declarations": [
+   "CategoryTheory.FaceTotalDerivedSections.face",
+   "CategoryTheory.FaceTotalDerivedSections.spaceSections",
+   "CategoryTheory.FaceTotalDerivedSections.spaceSections_additive",
+   "CategoryTheory.FaceTotalDerivedSections.Model",
+   "CategoryTheory.FaceTotalDerivedSections.Rows",
+   "CategoryTheory.FaceTotalDerivedSections.Model.sections",
+   "CategoryTheory.FaceTotalDerivedSections.Model.sections_additive",
+   "CategoryTheory.FaceTotalDerivedSections.abelianGroupsDerived",
+   "CategoryTheory.FaceTotalDerivedSections.localize",
+   "CategoryTheory.FaceTotalDerivedSections.SectionModel",
+   "CategoryTheory.FaceTotalDerivedSections.siteGrothendieck",
+   "CategoryTheory.FaceTotalDerivedSections.Model.derivedSections",
+   "CategoryTheory.FaceTotalDerivedSections.localizeFunctor",
+   "CategoryTheory.FaceTotalDerivedSections.Model.unit",
+   "CategoryTheory.FaceTotalDerivedSections.single",
+   "CategoryTheory.FaceTotalDerivedSections.resolutionMap",
+   "CategoryTheory.FaceTotalDerivedSections.resolutionMap_quasiIso",
+   "CategoryTheory.FaceTotalDerivedSections.Model.resolutionComparison",
+   "CategoryTheory.FaceTotalDerivedSections.rowExtension",
+   "CategoryTheory.FaceTotalDerivedSections.Model.restriction",
+   "CategoryTheory.FaceTotalDerivedSections.CompatibleReplacementInvariant",
+   "CategoryTheory.FaceTotalDerivedSections.Computation",
+   "CategoryTheory.FaceTotalDerivedSections.Model.baseResolutionComparison",
+   "CategoryTheory.FaceTotalDerivedSections.localizeFunctor_map_isIso",
+   "CategoryTheory.FaceTotalDerivedSections.UnitCompatibility",
+   "CategoryTheory.FaceTotalDerivedSections.face_total_derived_sections"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FaceTotalDerivedSections.lean",
+  "statement": "theorem face_total_derived_sections {S : AlgebraicGeometry.Scheme.{u}} {Z : AlgebraicGeometry.AlgebraicSpace S} (W : SemiSimplexCategoryᵒᵖ ⥤ Over Z) (flat_faces : ∀ {p q : SemiSimplexCategoryᵒᵖ} (b : p ⟶ q), AlgebraicGeometry.AlgebraicSpace.MapIsFlat (W.map b).left) (flat_augmentation : ∀ p : SemiSimplexCategoryᵒᵖ, AlgebraicGeometry.AlgebraicSpace.MapIsFlat (W.obj p).hom) : Nonempty (Model W) ∧ ∀ G : Model W, ∃ (R : Rows G) (C : Computation R), Nonempty (UnitCompatibility C)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repairs immutable return 692a77926edd H3: the prior Geometry is removed. Model aliases the new shared fully pinned enlarged face total model, whose actual sites, enlarged coverage, ULift regular functions, Cartesian ring restrictions, projection unitors/compositors and augmentation direct-image mates are prescribed. Conclusion supplies Nonempty(Model W) and the complete derived comparison for EVERY model G. Sections now evaluate literal enlarged objects in the explicit Site.{u+1} model; all groups have coefficient universe u+1. No arbitrary site or module equivalence is supplied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-555a10293",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Re-delivery of the 692a H3 return. The new def node def-sfb-enlarged-face-ringed-total-model pins the Model fully: AsSmall enlarged sites, literal coverage, ULift rings, enlargedBaseChange, enlargedIdentityIso and enlargedCompositionIso; I checked the mapComp/compositionIso.symm direction by hand. It also pins the Cartesian ∃!-chosen structural maps, the Presentation's face pins, the augmentation direct image as base-change precomposition, the ring adjunct, and the direct-composition component as T.map((compositionIso).inv).op with the correct orientation; augmentation_comparison is exactly the leftAdjointCompIso mate. Theorem: Nonempty Model ∧ ∀ G, ∃ R C, Nonempty UnitCompatibility. Statement and source unchanged; the added stmt_deps are def nodes only; lean.statement fields are verbatim. All clauses check: comparison pinned via row quasi-iso and derived units, signed horizontal differential via Rows.transpose, total sign d_h+(-1)^p d_v, columns, naturality in M and V, replacements, unit, detection. Universes follow the dependency's u+1 convention. Advisory: the def node cites the theorem node composition-localization for plain enlarged*Iso defs (owner def node from 94bd not landed); four parallel face-total models, none landed; columnSections iso unpinned but unused. No compile, no file changed."
+ }
+}

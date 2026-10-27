@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-normal-laurent-line-invariance",
+ "kind": "statement",
+ "title": "Invertible sheaves on a split torus over a normal locally Noetherian scheme",
+ "statement": "Let $X$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] such that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $r\\geq0$. Put $D=\\mathbf Z[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$, the ring of finite sums $\\sum_{u\\in\\mathbf Z^r}c_u z^u$, with unique coefficients and multiplication $z^uz^v=z^{u+v}$. Let $Y=X\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Spec}D$ [def-weil-affine-spectrum, def-pc-fibre-product], let $q:Y\\to X$ be projection, and let $e:X\\to Y$ be the section induced by $z_i\\mapsto1$. Equivalently, over an affine open $\\operatorname{Spec}R\\subseteq X$ the scheme $Y$ is $\\operatorname{Spec}R[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$ with these coefficient and evaluation maps. For every invertible $\\mathcal O_Y$-module $N$ [def-sc-invertible-module] there is an isomorphism of $\\mathcal O_Y$-modules $q^*e^*N\\cong N$, where pullback is tensor inverse image [def-pc-module-pullback]. Empty and disconnected $X$, and $r=0$, are included; no group action or ampleness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Agent-formulated consequence of Tag 0BD7 (lemma-in-image-pullback) and Tag 0BDA (lemma-open-subscheme-UFD). Apply 0BD7 to the Laurent-space projection on each open normal integral component; its generic fibre is a principal open of affine space over a field, covered by 0BDA. This is not asserted to be the verbatim statement of either tag."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-relative-split-torus"
+ ],
+ "proof": [
+  {
+   "text": "First decompose $X$ into disjoint open normal integral schemes $X_a$. Here is the locally Noetherian reduction, without assuming that $X$ is quasi-compact. Choose an affine Noetherian open cover as in [pqf-def-locnoeth]. Each member $U$ is normal because its local rings are those of $X$, so [rem-pc-regular-normal](2) decomposes $U$ into finitely many disjoint open normal integral components. For a global irreducible component $C$ of $X$, [lem-sc-components-open-injection] says that every nonempty $C\\cap U$ is a component of $U$. Thus $C\\cap U$ is open in $U$, and $C$ is open in $X$. Distinct global components cannot meet: in an affine neighbourhood of a proposed intersection they would give distinct intersecting components, contradicting the injectivity in that same node and the disjointness just obtained. The components cover $X$; each is nonempty and irreducible, and its local rings are the original normal domains, so its open subscheme structure is reduced and integral [def-pc-integral-scheme]. Each $X_a$ remains locally Noetherian by [pqf-def-locnoeth].",
+   "uses": [
+    "pqf-def-locnoeth",
+    "rem-pc-regular-normal",
+    "lem-sc-components-open-injection",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 033N, lemma-normal-locally-Noetherian; deduced explicitly from the Noetherian case of Tag 033M and restriction of components to opens."
+   }
+  },
+  {
+   "text": "Over any affine open $\\operatorname{Spec}R$ of $X_a$, put $P=R[t_1,\\ldots,t_r]$ and $f=t_1\\cdots t_r$ (the empty product is $1$). The coefficient presentation in the statement identifies $q^{-1}(\\operatorname{Spec}R)$ with $\\operatorname{Spec}P_f$. Explicitly, $P_f\\to R[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$ sends $t_i\\mapsto z_i$ and $1/f\\mapsto\\prod_i z_i^{-1}$; its inverse sends $z_i\\mapsto t_i$ and $z_i^{-1}\\mapsto(\\prod_{j\\ne i}t_j)/f$. The two maps are inverse on all generators. By clause (0) of [lem-weil-pbc-affine-ideals-closed-subscheme], $\\operatorname{Spec}P_f$ is the principal open $D(f)$ of $\\operatorname{Spec}P$, with its scheme structure: its coordinate ring is $P_f$ and the inclusion is induced by localization. All identifications commute with restrictions in $R$ because they send each coefficient and each named monomial to itself.",
+   "uses": [
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BD7 and 0BDA, Laurent-space application; principal-open localization calculation supplied by the worker."
+   }
+  },
+  {
+   "text": "Write $q_a:Y_a=q^{-1}(X_a)\\to X_a$. The polynomial projection $\\operatorname{Spec}P\\to\\operatorname{Spec}R$ is flat by [lem-nagata-polynomial-projection-flat]. Its restriction to the open $D(f)$ has the identical source local rings at its points, hence is flat by [def-weil-flat-morphism]. These charts cover $Y_a$, proving flatness of $q_a$. The $R$-algebra $R[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$ is generated by the $2r$ elements $z_i,z_i^{-1}$, so $q_a$ is locally of finite type by [def-weil-finite-type-morphism]. Since $X_a$ is locally Noetherian, [pqf-lem-locnoeth-lft] makes $Y_a$ locally Noetherian as well. For $r=0$ the same statements hold for the identity projection.",
+   "uses": [
+    "lem-nagata-polynomial-projection-flat",
+    "def-weil-flat-morphism",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, hypotheses (1), (3), (4); checked on the Laurent charts."
+   }
+  },
+  {
+   "text": "For $x\\in X_a$ put $K=\\kappa(x)$. The fibre is $\\operatorname{Spec}K[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$: [lem-weil-pbc-fibre-product-affine-spectra] identifies its coordinate ring with $K\\otimes_R R[z_i^{\\pm1}]$, and the inverse coefficient maps $c\\otimes\\sum b_u z^u\\mapsto\\sum cb_u z^u$ and $\\sum c_u z^u\\mapsto\\sum c_u\\otimes z^u$ give this ring isomorphism. By step 2 this fibre is $D(t_1\\cdots t_r)$ in $\\operatorname{Spec}K[t_1,\\ldots,t_r]$. The polynomial ring is a domain by [lem-sfb-polynomial-field-ufd], and the displayed monomial is nonzero. Its localization is therefore a nonzero domain (a zero fraction has zero numerator). Its zero ideal is prime, so the spectrum is nonempty and integral by [def-pc-integral-scheme]. Thus every residue-field fibre of $q_a$ is integral and nonempty.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-polynomial-field-ufd",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, hypothesis (3); explicit fibre calculation."
+   }
+  },
+  {
+   "text": "Let $\\eta_a$ be the generic point of $X_a$ and $K=\\kappa(\\eta_a)$. By step 4 the generic fibre of $q_a$ is an open subscheme of affine $r$-space over $K$. The restriction of $N$ to it is invertible: a local free rank-one frame pulls back to $1\\otimes$ that frame by [def-sc-invertible-module, def-pc-module-pullback]. Hence [lem-sfb-affine-space-open-invertible-trivial] makes this restriction trivial. Apply [lem-sfb-normal-noetherian-generic-line-pullback] to $q_a$ and $N|_{Y_a}$. The base $X_a$ is normal integral and locally Noetherian by step 1, the source is locally Noetherian and the map is flat and locally of finite type by step 3, and its fibres are integral nonempty by step 4. Generic-fibre triviality was just proved, so every hypothesis of that node holds. It yields an invertible module $M_a$ on $X_a$ and an isomorphism $\\alpha_a:q_a^*M_a\\xrightarrow{\\sim}N|_{Y_a}$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-sfb-affine-space-open-invertible-trivial",
+    "lem-sfb-normal-noetherian-generic-line-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BDA, lemma-open-subscheme-UFD, final sentence, followed by Tag 0BD7, lemma-in-image-pullback, hypotheses (1)--(5) and conclusion."
+   }
+  },
+  {
+   "text": "The identity section restricts to $e_a:X_a\\to Y_a$ and satisfies $q_ae_a=\\mathrm{id}_{X_a}$, since evaluating a coefficient at $z_i=1$ returns that coefficient. Pulling $\\alpha_a$ back along $e_a$ and using the composition and identity isomorphisms of [def-pc-module-pullback] gives $\\beta_a:M_a\\xrightarrow{\\sim}e_a^*(N|_{Y_a})$. Consequently $\\alpha_a\\circ q_a^*(\\beta_a^{-1})$ is an isomorphism $q_a^*e_a^*(N|_{Y_a})\\xrightarrow{\\sim}N|_{Y_a}$. This uses existence of $\\alpha_a$ only; it requires no uniqueness or canonical choice in the generic-line descent theorem.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, consequence for a morphism with a section; pullback and inverse composition written out by the worker."
+   }
+  },
+  {
+   "text": "The open subschemes $Y_a=q^{-1}(X_a)$ are pairwise disjoint and cover $Y$. Restriction of tensor inverse image to these opens is the tensor inverse image for $q_a,e_a$ [def-pc-module-pullback], so step 6 supplies the desired isomorphism on each $Y_a$. They assemble into a global module isomorphism: on an open $V\\subseteq Y$, the sheaf axiom for the disjoint cover $V=\\coprod_a(V\\cap Y_a)$ identifies sections with the product of the component sections; apply the component isomorphisms coordinatewise, and their inverses coordinatewise. These maps commute with restriction and with scalars. This proves $q^*e^*N\\cong N$. If $X$ is empty the cover has no members and the same sheaf argument applies. For $r=0$, $q=e=\\mathrm{id}$, in agreement with this construction.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BD7 and 0BDA, componentwise application; disjoint-open gluing supplied by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "rem-pc-regular-normal",
+  "lem-sc-components-open-injection",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "lem-nagata-polynomial-projection-flat",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-polynomial-field-ufd",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-sfb-affine-space-open-invertible-trivial",
+  "lem-sfb-normal-noetherian-generic-line-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Application of Tags 0BD7 (lemma-in-image-pullback) and 0BDA (lemma-open-subscheme-UFD), with component reduction from properties.tex Tag 033N (lemma-normal-locally-Noetherian)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a normal locally Noetherian scheme X every invertible sheaf on X times a split torus is pulled back from X",
+   "results": "{\"t\": \"2026-10-24T04:38:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a normal locally Noetherian scheme X every invertible sheaf on X times a split torus is pulled back from X\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"AlgebraicGeometry.AffineSpace\"], \"digest\": \"4a28970792509c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; pullback constructions, normalization diagrams and ring Picard definitions do not state Laurent-variable invariance of invertible sheaves on a normal scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-24T04:38:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; pullback constructions, normalization diagrams and ring Picard definitions do not state Laurent-variable invariance of invertible sheaves on a normal scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*(Laurent|Polynomial)|(Laurent|Polynomial).*Pic",
+   "results": "{\"t\": \"2026-10-24T04:38:57Z\", \"tool\": \"grep\", \"query\": \"Pic.*(Laurent|Polynomial)|(Laurent|Polynomial).*Pic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Tropical/BigOperators.lean\", \"Mathlib/Algebra/Polynomial/Module/Basic.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Data/Nat/Cast/Defs.lean\", \"Mathlib/Algebra/MvPolynomial/Rename.lean\", \"Mathlib/Algebra/MvPolynomial/Degrees.lean\", \"Mathlib/Algebra/MvPolynomial/PDeriv.lean\", \"Mathlib/Algebra/MvPolynomial/Variables.lean\"], \"digest\": \"6b6e9f7561e8d201\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; pullback constructions, normalization diagrams and ring Picard definitions do not state Laurent-variable invariance of invertible sheaves on a normal scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback gives an isomorphism of Picard groups from a normal scheme to its product with the multiplicative group",
+   "results": "{\"t\": \"2026-10-24T04:38:57Z\", \"tool\": \"leansearch\", \"query\": \"Pullback gives an isomorphism of Picard groups from a normal scheme to its product with the multiplicative group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd\", \"AlgebraicGeometry.pullbackSpecIso\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"CategoryTheory.Limits.pullbackProdFstIsoProd\", \"AlgebraicGeometry.Scheme.Pullback.carrierEquiv\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\", \"AlgebraicGeometry.IsProper.instFstScheme\", \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\"], \"digest\": \"7572774a512f3a31\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; pullback constructions, normalization diagrams and ring Picard definitions do not state Laurent-variable invariance of invertible sheaves on a normal scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Picard group of a normal scheme is invariant under adjoining invertible polynomial variables",
+   "results": "{\"t\": \"2026-10-24T04:38:59Z\", \"tool\": \"leanfinder\", \"query\": \"The Picard group of a normal scheme is invariant under adjoining invertible polynomial variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.relPic\", \"instCommGroupPic\", \"Submodule.range_unitsToPic\", \"CommRing.relPic_eq_top\", \"Submodule.unitsToPic_apply\", \"Submodule.unitsToPic\", \"CommRing.Pic.instSubsingletonOfFiniteMaximalSpectrum\", \"CommRing.Pic.mk_eq_one\"], \"digest\": \"b482d57dc6757c48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; pullback constructions, normalization diagrams and ring Picard definitions do not state Laurent-variable invariance of invertible sheaves on a normal scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*(Laurent|Polynomial)|(Laurent|Polynomial).*Pic",
+   "results": "{\"t\": \"2026-10-24T05:04:46Z\", \"tool\": \"grep\", \"query\": \"Pic.*(Laurent|Polynomial)|(Laurent|Polynomial).*Pic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Data/Nat/Cast/Defs.lean\", \"Mathlib/Algebra/Tropical/BigOperators.lean\", \"Mathlib/Tactic/OfNat.lean\", \"Mathlib/Algebra/Polynomial/Module/Basic.lean\", \"Mathlib/Algebra/Polynomial/Splits.lean\", \"Mathlib/Algebra/MvPolynomial/Rename.lean\", \"Mathlib/Algebra/MvPolynomial/Degrees.lean\", \"Mathlib/Algebra/MvPolynomial/PDeriv.lean\"], \"digest\": \"c4d2c2adc83463ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Picard group definitions and functoriality, normalization diagrams and Laurent localization do not state essential surjectivity of line-module pullback on a normal scheme times a split torus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Picard group invariance under multiplying a normal scheme with a split torus",
+   "results": "{\"t\": \"2026-10-24T05:04:47Z\", \"tool\": \"leansearch\", \"query\": \"Picard group invariance under multiplying a normal scheme with a split torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.functor\", \"CommRing.Pic\", \"CommRing.Pic.subsingleton_iff\", \"CommRing.Pic.mapRingHom\", \"CommRing.Pic.mul_eq_tensor\", \"CommRing.Pic.mk.congr_simp\", \"CommRing.Pic.subsingleton_iffₛ\", \"CommRing.Pic.mk_eq_one\"], \"digest\": \"8026b169e8417442\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Picard group definitions and functoriality, normalization diagrams and Laurent localization do not state essential surjectivity of line-module pullback on a normal scheme times a split torus"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\", \"Laurent\"",
+   "results": "{\"t\": \"2026-10-24T05:04:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"Pic\\\", \\\"Laurent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Picard group definitions and functoriality, normalization diagrams and Laurent localization do not state essential surjectivity of line-module pullback on a normal scheme times a split torus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of line bundles along a split torus projection over a normal locally Noetherian scheme is essentially surjective",
+   "results": "{\"t\": \"2026-10-24T05:04:48Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of line bundles along a split torus projection over a normal locally Noetherian scheme is essentially surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.pointsPi_surjective\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Surjective.instSndScheme\"], \"digest\": \"b60de2b80939b35a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Picard group definitions and functoriality, normalization diagrams and Laurent localization do not state essential surjectivity of line-module pullback on a normal scheme times a split torus"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group of a normal ring remains unchanged upon adjoining Laurent polynomial variables",
+   "results": "{\"t\": \"2026-10-24T05:06:50Z\", \"tool\": \"leanfinder\", \"query\": \"Picard group of a normal ring remains unchanged upon adjoining Laurent polynomial variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.relPic\", \"CommRing.relPic_eq_top\", \"instCommGroupPic\", \"Submodule.range_unitsToPic\", \"CommRing.Pic.mk_self\", \"LaurentPolynomial.mk'_one_X\", \"LaurentPolynomial.isUnit_T\", \"LaurentPolynomial.isLocalization\"], \"digest\": \"f9d4ff7853f4db50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned signatures; Picard group definitions and functoriality, normalization diagrams and Laurent localization do not state essential surjectivity of line-module pullback on a normal scheme times a split torus"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-normal-line-power-linearization",
+  "date": "2026-10-24",
+  "group": "Q127"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Relative torus quotient input: invariant affine covering of the normal ample source after finite étale splitting of the torus. This is the relative-base replacement for the field-only Sumihiro lemma. Supporting input: Equivariant projective embedding before selecting boundary-avoiding weight charts. Supporting first step: linearize a positive tensor power of the initial relatively very ample line before choosing weight sections. Supporting geometric input: invertible sheaves on the product of a locally Noetherian normal scheme with a split torus are pulled back from the identity section; no group action is part of this input.",
+   "via": [
+    "lem-sfb-relative-normal-line-power-linearization",
+    "lem-sfb-relative-torus-diagonal-projective-embedding",
+    "lem-sfb-relative-split-torus-invariant-affines",
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-laurent-line-invariance",
+  "worker": "stage1",
+  "summary": "No new nodes. Reused generic-line pullback and affine-space-open line triviality; verified Laurent localization, flatness, local finite type, local Noetherianity and integral nonempty fibres. Derived disjoint integral components from the existing Noetherian decomposition and open-component injection, and used the identity section to identify the descended line. The statement is unchanged.",
+  "blueprint": "Relative torus quotient input: invariant affine covering of the normal ample source after finite étale splitting of the torus. This is the relative-base replacement for the field-only Sumihiro lemma. Supporting input: Equivariant projective embedding before selecting boundary-avoiding weight charts. Supporting first step: linearize a positive tensor power of the initial relatively very ample line before choosing weight sections. Supporting geometric input: invertible sheaves on the product of a locally Noetherian normal scheme with a split torus are pulled back from the identity section; no group action is part of this input.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Only clause (2), decomposition of an affine Noetherian normal open into disjoint integral components, is used to handle disconnected X. This is generic scheme geometry; the unit has no component-decomposition input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-143b15328",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-143b15328 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 7 steps, 15 proof_deps), the statement of every cited node, and Stacks divisors.tex Tag 0BD7 lemma-in-image-pullback (line 6968) and Tag 0BDA lemma-open-subscheme-UFD (line 7187). No new nodes. Step 1 splits X into disjoint open normal integral components using rem-pc-regular-normal(2) and lem-sc-components-open-injection; quasi-compactness of X is not needed. Steps 2-4: P_f is isomorphic to R[z^{±1}] (the maps are inverse on generators), the projection is flat and locally of finite type, the source is locally Noetherian, and every fibre is a nonempty domain κ[z^{±1}]. Step 5 checks all five 0BD7 hypotheses, and the generic fibre D(∏t_i) of A^r_K is trivialized by the 0BDA node. Step 6 orientation is correct: α∘q^*(β^{-1}). Step 7 glues over disjoint opens. The edge cases r=0 and empty X are covered. Not a duplicate: lem-sfb-split-torus-torsor-line-pullback assumes smooth X over a field, and lem-sfb-normal-variety-affine-parameter-picard compares two fibres. The tool_use rem-pc-regular-normal(2) is accepted. Batch-5: lem-trf-ufd-height-one (Stacks 0AFT, a UFD criterion) and lem-trf-flat-module-torsionfree-domain (flat module over a domain is torsion-free) are commutative-algebra Mathlib leaves. Neither is part of the trace formula or Poincaré duality, so both citations are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalLaurentLineInvariance",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_iso_tensorPullback_identity_relativeSplitTorus",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalLaurentLineInvariance.lean",
+  "statement": "theorem nonempty_iso_tensorPullback_identity_relativeSplitTorus (X : Scheme.{u}) [IsLocallyNoetherian X] (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (r : ℕ) (N : (relativeSplitTorus X r).X.left.Modules) [N.IsInvertible] : Nonempty ((tensorPullback (relativeSplitTorus X r).X.hom).obj ((tensorPullback (η[(relativeSplitTorus X r).X]).left).obj N) ≅ N)",
+  "branch": "sheaf-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing relativeSplitTorus, whose underlying scheme is canonically the stated Laurent space. Its Over structure map is q and its group identity section is e (Hopf counit z^m ↦ 1). Both inverse images use the recorded tensorPullback functor. Added the already landed definition node to stmt_deps; no new definition or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae8edf28c",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Only the item node changed vs side-live: new lean record (existing:false) plus a stmt_dep on the already-landed def-sfb-relative-split-torus (permitted reuse). Clause check: [IsLocallyNoetherian X]; stalks are IsDomain ∧ IsIntegrallyClosed (normal-ring inline form); r : ℕ; Y/q/e are relativeSplitTorus X r with .X.hom and the unit (η).left (counit e_m ↦ 1, so z_i ↦ 1); X ×_{Spec Γ} Spec Γ[ℤ^r] ≅ X ×_ℤ Spec ℤ[ℤ^r]; [N.IsInvertible]; conclusion Nonempty (tensorPullback q (tensorPullback e N) ≅ N) with the recorded tensorPullback. Empty X, disconnected/non-qc X, r=0 and the single universe are fine. Statement verbatim; the only sorry is the theorem proof; docstrings carry source and blueprint id; no duplicate, no new definition, no pro-etale substitute; report has both sections. No compile needed (no file changed)."
+ }
+}

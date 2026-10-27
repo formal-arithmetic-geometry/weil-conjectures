@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "The two operators are mutual inverses on all integer sequences. Indeed $\\Delta\\Lambda f(0)=f(0)$, $\\Delta\\Lambda f(n+1)=\\sum_{i\\le n+1}f(i)-\\sum_{i\\le n}f(i)=f(n+1)$, and $\\Lambda\\Delta f(n)=f(0)+\\sum_{i<n}(f(i+1)-f(i))=f(n)$. If $f,g$ first differ at $j$, their partial sums agree below $j$ and differ at $j$ by $f(j)-g(j)$; their differences also agree below $j$ and differ at $j$ by that amount. Hence every iterate of either operator preserves and reflects strict lexicographic order and equality. This holds for arbitrary integer entries, including negative finite differences.",
+   "text": "The two operators are mutual inverses on all integer sequences. Indeed $\\Delta\\Lambda f(0)=f(0)$, $\\Delta\\Lambda f(n+1)=\\sum_{i\\le n+1}f(i)-\\sum_{i\\le n}f(i)=f(n+1)$, and $\\Lambda\\Delta f(n)=f(0)+\\sum_{i<n}(f(i+1)-f(i))=f(n)$. If $f,g$ first differ at $j$, their partial sums agree below $j$ and differ at $j$ by $f(j)-g(j)$; their differences also agree below $j$ and differ at $j$ by that amount. Hence every iterate of either operator preserves and reflects strict lexicographic order and equality. This holds for arbitrary integer entries, including negative finite differences. Lean implementation (X3): prove both cancellation identities pointwise by induction and the partial-sum successor formula. Prove strict monotonicity of summation on Lex(N -> Z) at the first differing index. Its order-reflection property and summation/difference cancellation give the corresponding difference comparison. Induction on the exponent gives both iterated comparisons, including exponent zero.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "First [lem-weil-pbc-finite-type-over-noetherian], applied over the field $\\mathbf Q$, makes $X$ Noetherian; the same holds on finite-type source neighbourhoods and for every reduced closed union of its components. For the local map $A=\\mathcal O_{X,x}\\to B=\\mathcal O_{Y,y}$ use [lem-trf-smooth-local-tangent-cone-extension]; smooth affine charts give its essentially smooth local hypothesis. Local rings are essentially of finite type over $\\mathbf Q$. Write $g_A(j)=\\dim_{\\kappa(x)}\\mathfrak m_A^j/\\mathfrak m_A^{j+1}$ and similarly $g_B$. The graded isomorphism says that $g_B(j)$ is the sum of $g_A(i)$ over pairs consisting of $i$ and a monomial in $s$ variables of degree $j-i$. Extension of the residue field does not alter these finite dimensions. Finite composition series of the maximal-ideal filtration, using [lem-weil-pbc-length-additive-short-exact], give $h_A=\\Lambda g_A$ and $h_B=\\Lambda g_B$. Adjoining one variable replaces $g_A$ by $\\Lambda g_A$ since its powers are indexed by all nonnegative degrees. Iterate $s$ times to get $h_y=\\Lambda^s h_x$, also for $s=0$.",
+   "text": "First [lem-weil-pbc-finite-type-over-noetherian], applied over the field $\\mathbf Q$, makes $X$ Noetherian; the same holds on finite-type source neighbourhoods and for every reduced closed union of its components. For the local map $A=\\mathcal O_{X,x}\\to B=\\mathcal O_{Y,y}$ use [lem-trf-smooth-local-tangent-cone-extension]; smooth affine charts give its essentially smooth local hypothesis. Local rings are essentially of finite type over $\\mathbf Q$. Write $g_A(j)=\\dim_{\\kappa(x)}\\mathfrak m_A^j/\\mathfrak m_A^{j+1}$ and similarly $g_B$. The graded isomorphism says that $g_B(j)$ is the sum of $g_A(i)$ over pairs consisting of $i$ and a monomial in $s$ variables of degree $j-i$. Extension of the residue field does not alter these finite dimensions. Finite composition series of the maximal-ideal filtration, using [lem-weil-pbc-length-additive-short-exact], give $h_A=\\Lambda g_A$ and $h_B=\\Lambda g_B$. Adjoining one variable replaces $g_A$ by $\\Lambda g_A$ since its powers are indexed by all nonnegative degrees. Iterate $s$ times to get $h_y=\\Lambda^s h_x$, also for $s=0$. For the auxiliary dimension_profile_finite, no tangent-cone or finite-type domain dimension formula is needed: finite type over Q makes each stalk Noetherian. Mathlib gives finitely many minimal primes and finite Krull dimension of a Noetherian local ring. Each minimal-prime quotient is nontrivial and its dimension is bounded by the stalk dimension, so its dimension is a natural number. The dimension profile is the image of the nonempty finite minimal-prime set; its infimum belongs to it and the minimum extraction therefore recovers that infimum. For each positive power of the maximal ideal, the radical is the maximal ideal; it is the unique minimal prime over that power. Mathlib makes the quotient Artinian, hence of finite length over the quotient and, by surjectivity of the quotient map, over the original stalk.",
    "uses": [
     "lem-trf-smooth-local-tangent-cone-extension",
     "lem-weil-pbc-length-additive-short-exact",
@@ -79,7 +79,7 @@
    }
   },
   {
-   "text": "For $x\\in X$ let $P(x)=\\{\\dim Z:x\\in Z,\\ Z\\text{ an irreducible component of }X\\}$, $d_-(x)=\\min P(x)$, and $t_x=\\operatorname{trdeg}_{\\mathbf Q}\\kappa(x)$. For each such reduced component $Z$, the finite-type dimension formula gives $\\dim\\mathcal O_{Z,x}=\\dim Z-t_x$: apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] on a domain affine chart of $Z$, and [lem-weil-pbc-finite-type-domain-dimension-trdeg] to identify its topological dimension at $x$ with its function-field transcendence degree. All nonempty affine opens of $Z$ have that same function field. Hence $q_x=d_-(x)-t_x$, $c_x=|P(x)|$, and, writing $B_D$ for the modified head,\n$$B_D(x)=(|P(x)|,\\Lambda^{D-d_-(x)}H_x).$$\nAlso $q_x\\le\\dim X\\le D$, so Step 1 gives directly $\\Lambda^D\\Delta^{q_x}h_x=\\Lambda^{D-q_x}h_x$. This proves the stated conversion without discarding any initial entries of the sequences.",
+   "text": "For $x\\in X$ let $P(x)=\\{\\dim Z:x\\in Z,\\ Z\\text{ an irreducible component of }X\\}$, $d_-(x)=\\min P(x)$, and $t_x=\\operatorname{trdeg}_{\\mathbf Q}\\kappa(x)$. For each such reduced component $Z$, the finite-type dimension formula gives $\\dim\\mathcal O_{Z,x}=\\dim Z-t_x$: apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] on a domain affine chart of $Z$, and [lem-weil-pbc-finite-type-domain-dimension-trdeg] to identify its topological dimension at $x$ with its function-field transcendence degree. All nonempty affine opens of $Z$ have that same function field. Hence $q_x=d_-(x)-t_x$, $c_x=|P(x)|$, and, writing $B_D$ for the modified head,\n$$B_D(x)=(|P(x)|,\\Lambda^{D-d_-(x)}H_x).$$\nAlso $q_x\\le\\dim X\\le D$, so Step 1 gives directly $\\Lambda^D\\Delta^{q_x}h_x=\\Lambda^{D-q_x}h_x$. This proves the stated conversion without discarding any initial entries of the sequences. Lean implementation of modifiedHead_eq (X3): bound q by the dimension of any minimal-prime quotient, then by the stalk dimension. Mathlib identifies the latter with the coheight of the point, bounded by the Krull dimension of the sober space through the order isomorphism with irreducible closed sets. Thus q <= D. Write D=(D-q)+q and use the iterated left-inverse identity for summation and difference. This proves the displayed local formula directly, independently of the global dimension/transcendence-degree formula still needed in the rest of this step.",
    "uses": [
     "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
     "lem-weil-pbc-finite-type-domain-dimension-trdeg"
@@ -163,7 +163,7 @@
    }
   },
   {
-   "text": "The presentation in Step 11 therefore has the same test sequences for the modified head as for the Hilbert--Samuel stratum: after each admissible blowup Step 12 identifies equality with the previous level, so the allowed next centers coincide, and both descriptions use the same controlled ideal transform. Products with a line preserve the normalized head by Steps 2--3; in the Hilbert--Samuel test convention of [lem-trf-hilbert-samuel-local-presentations] they use the corresponding dimension shift and ordinary pullback. Blowups of intersections of exceptional divisors are the auxiliary tests specified by that same theorem, with its pullback convention; both presentations use that identical test operation and the identical exceptional history. Induction on the length of a finite test sequence proves equivalence, including every ordered exceptional history. Finally, locally where the chosen head is maximal, resolving the same marked presentation removes its $H$-stratum by [lem-trf-hilbert-samuel-local-presentations], hence removes the modified head by Step 11. Resolve all its presentations when claiming removal of that head globally.",
+   "text": "The presentation in Step 11 therefore has the same test sequences for the modified head as for the Hilbert--Samuel stratum: after each admissible blowup Step 12 identifies equality with the previous level, so the allowed next centers coincide, and both descriptions use the same controlled ideal transform. Products with a line preserve the normalized head by Steps 2--3; in the Hilbert--Samuel test convention of [lem-trf-hilbert-samuel-local-presentations] they use the corresponding dimension shift and ordinary pullback. Blowups of intersections of exceptional divisors are the auxiliary tests specified by that same theorem, with its pullback convention; both presentations use that identical test operation and the identical exceptional history. Induction on the length of a finite test sequence proves equivalence, including every ordered exceptional history. Finally, locally where the chosen head is maximal, resolving the same marked presentation removes its $H$-stratum by [lem-trf-hilbert-samuel-local-presentations], hence removes the modified head by Step 11. Resolve all its presentations when claiming removal of that head globally. Lean implementation of modified_presentation_equivalence (X3): induct on finite depth to prove an iff between ModifiedPresentsThrough for the two equivalent marked ideals. Their equal cosupports give the same admissibility condition. For every test, EquivalentThrough supplies transforms on both sides and equivalence of every pair of transforms. Choose a transform on the already-presenting side and apply the induction hypothesis to every transform on the other side. Prove the reverse implication with the opposite choice, then quantify over all depths and retain the common empty-boundary equality.",
    "uses": [
     "lem-trf-hilbert-samuel-local-presentations"
    ],
@@ -206,7 +206,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "VIII 2.3.13, printed p.94; explicit finite-difference synchronization reduction to local presentations. BMT arXiv:0905.3580 section 6.3 is WANTED, not read or claimed to be available."
+  "place": "VIII 2.3.13, printed p.94; explicit finite-difference synchronization reduction to local presentations. BMT arXiv:0905.3580 section 6.3 is WANTED, not read or claimed to be available. X3 stage 3: the integer-operator, dimension-profile finiteness, modifiedHead_eq and presentation-equivalence clauses are implemented in Lean directly from Mathlib and the existing definitions; other clauses and their dependencies remain open."
  },
  "mathlib_searches": [
   {
@@ -356,5 +356,72 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-503852029 (reviewer sub-agent of L); spot-checked: I read the item (all 14 steps), both new nodes, every cited statement and lem-trf-hilbert-samuel-local-presentations. Source check: ILO VIII 2.3.13, p.94, says BM-type algorithms are functorial only for equidimensional smooth morphisms and that [Bierstone et al. 2011 = BMT 0905.3580] §6.3 fixes the synchronization. BMT is absent from literature/, so WANTED with proof_origin agent is honest. Stacks 00ON was read and is correctly described as a chart/dimension input only. Steps 1-14 check out. I verified Δ^kh(1)=1+e-k, which gives the regular-head criterion. Step 7's Krull-intersection strictness is sound. Steps 8-11 (USC, level-set components, local locus equality via generic points) and the Step 12 blowup comparison are correct, given the rigidity node. Product with a line keeps B_D both at s=1 and at s=0 (where trdeg goes up by 1). Step 14 reduces the descending-chain claim to local-presentations' DCC through finitely many possible d_-. New node tangent-cone-extension is true. I tested A[t]_{(m,t)}, A[t]_{mA[t]} and an étale-split node: the dimension sets are equal by flat going down and the finite-type dimension formula, with no bijection of primes. New node equality-component-rigidity is consistent and not a restatement of the item. It holds for point centers (Bennett plus Step 7) and for top-dimensional components (termwise equimultiplicity plus the Dade bound). I found no counterexample. The lower-dimensional case for positive-dimensional centers is exactly the BMT input reported WANTED, so it is left to the node's own split. No duplicates in a DAG grep (Hilbert-Samuel, tangent cone, normal flatness, gr+flat). No SGA, no cycle. I accept the five generic commutative-algebra tool_uses. No fixes."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertSamuelSmoothDimensionProfile",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.smooth_dimension_profile",
+  "declarations": [
+   "AlgebraicGeometry.HilbertSamuel.integerSummation",
+   "AlgebraicGeometry.HilbertSamuel.difference",
+   "AlgebraicGeometry.HilbertSamuel.localComponentDimensions",
+   "AlgebraicGeometry.HilbertSamuel.minimumComponentDimension",
+   "AlgebraicGeometry.HilbertSamuel.componentDimensionCount",
+   "AlgebraicGeometry.HilbertSamuel.DimensionHead",
+   "AlgebraicGeometry.HilbertSamuel.normalizedHead",
+   "AlgebraicGeometry.HilbertSamuel.sumHead",
+   "AlgebraicGeometry.HilbertSamuel.modifiedHead",
+   "AlgebraicGeometry.HilbertSamuel.regularHead",
+   "AlgebraicGeometry.HilbertSamuel.modifiedLocus",
+   "AlgebraicGeometry.HilbertSamuel.ModifiedPresentsThrough",
+   "AlgebraicGeometry.HilbertSamuel.ModifiedPresents",
+   "AlgebraicGeometry.HilbertSamuel.integer_operators",
+   "AlgebraicGeometry.HilbertSamuel.dimension_profile_finite",
+   "AlgebraicGeometry.HilbertSamuel.smooth_dimension_profile",
+   "AlgebraicGeometry.HilbertSamuel.normalizedHead_regular",
+   "AlgebraicGeometry.HilbertSamuel.modifiedHead_eq",
+   "AlgebraicGeometry.HilbertSamuel.modifiedHead_properties",
+   "AlgebraicGeometry.HilbertSamuel.local_modified_presentations",
+   "AlgebraicGeometry.HilbertSamuel.modified_presentation_equivalence",
+   "AlgebraicGeometry.HilbertSamuel.modified_presentation_history_comparison",
+   "AlgebraicGeometry.HilbertSamuel.center_locallyConstant_iff",
+   "AlgebraicGeometry.HilbertSamuel.modifiedHead_nonincrease",
+   "AlgebraicGeometry.HilbertSamuel.modifiedHead_no_infinite_drops",
+   "AlgebraicGeometry.HilbertSamuel.modified_presentation_empty_maximum"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertSamuelSmoothDimensionProfile.lean",
+  "statement": "theorem smooth_dimension_profile {X Y : Scheme.{u}} (p : X ⟶ Spec (.of (ULift.{u} ℚ))) (f : Y ⟶ X) [IsReduced X] [LocallyOfFiniteType p] [QuasiCompact p] [Smooth f] (y : Y) : IsRegularLocalRing ((f.fiber (f y)).presheaf.stalk (f.asFiber y)) ∧ ∃ s : ℕ, ringKrullDim ((f.fiber (f y)).presheaf.stalk (f.asFiber y)) = (s : WithBot ℕ∞) ∧ localFunction Y y = (summation^[s]) (localFunction X (f y)) ∧ localComponentDimensions Y y = (fun d : WithBot ℕ∞ ↦ d + (s : WithBot ℕ∞)) '' localComponentDimensions X (f y) ∧ minimumComponentDimension Y y = minimumComponentDimension X (f y) + s ∧ componentDimensionCount Y y = componentDimensionCount X (f y) ∧ normalizedHead Y y = normalizedHead X (f y)",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4686d8156",
+  "group": "Q37",
+  "result": "pass",
+  "note": "All 17 node clauses match the Lean: hypotheses (reduced, finite type over Q via IsReduced/LocallyOfFiniteType/QuasiCompact on p), local invariants (c = ncard of the distinct-dimension set; integer Λ/Δ; Lex(ℕ × Lex(ℕ→ℤ)) head), smooth pullback (s = Krull dim of the regular fibre stalk at f.asFiber y; h_y = Λ^s h_x, dimensions shifted by s, equal heads; checked s=0 and s=1), regular-head iff plus strict >, modifiedHead_eq under dim X ≤ D, USC/finite image/level-component iff with H, shared presentations, test equivalence, centre equivalence, nonincrease, reachable no-infinite-drops, empty-maximum and history comparison. FullMaximalOrder at regular points goes beyond local-presentations' qualified clause, but the node's wording requires it and lem-trf-marked-ideal-transverse-suspension (r=1, I=0) makes it true. Dependency repair under §1(B): function_no_infinite_drops forbids only consecutive drops on one history and step 14 needs subsequences; the new function_no_infinite_reachable_drops (ReflTransGen BlowupTransition) is a superset record over a public re-export module that keeps all 11 live declarations, overwrites nothing, and is true by the fixed-ambient-dimension diagram DCC. Statements verbatim; only lean changed in both node copies; no hollow definitions, all sorry, docstrings and blueprint tags present, universes bound, no duplicates; item not dropped (stage-1 re-split note keeps the statement). Advisories: step 11 should cite the suspension node at the re-split; rigidity now has a Lean module; proof-dependency imports unused by the statement. Not compiled: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T093027-L-3500162",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-ringed-equivalence-derived-tensor-comparison",
+ "kind": "statement",
+ "title": "An additive tensor equivalence preserves derived tensor with a degree-zero module",
+ "statement": "Let $(\\mathcal C,J)$ and $(\\mathcal D,K)$ be sites essentially small in the same coefficient universe $r$ [def-weil-size-convention]. Let $R$ and $S$ be sheaves of commutative rings in that universe. Use the categories $\\operatorname{Mod}(R)$ and $\\operatorname{Mod}(S)$ of sheaves of modules [def-weil-sheaf-of-modules-category], their unbounded derived categories [def-weil-abstract-derived-category] in independent localization universes, and the published K-flat derived tensors [lem-weil-pbc-site-derived-tensor-descent]. Suppose $F:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$ is an additive equivalence supplied with a natural isomorphism $F(A\\otimes_R B)\\cong F(A)\\otimes_S F(B)$ for ordinary sheaf tensors [def-pur-sheaf-tensor-product]. For every $X\\in D(R)$ and $N\\in\\operatorname{Mod}(R)$ there exists an isomorphism\n$$D(F)(X\\otimes_R^{\\mathbf L}N[0])\\cong D(F)(X)\\otimes_S^{\\mathbf L}F(N)[0],$$\nwhere $N[0]$ is the module in cohomological degree zero and $D(F)$ is exact termwise derived transport [lem-weil-pbc-exact-functor-derived-factorization]. No boundedness, flatness of $N$, nonzero-ring or inhabited-site assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "definition-K-flat, lemma-K-flat-resolution and definition-derived-tor (Tags 06YN, 06YS and 06YU); exact-equivalence step in lem-sf-clopen-preserves-residue-tor."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "An additive equivalence and its inverse preserve homology and all coproducts. Curry the supplied ordinary tensor natural isomorphism and use the total-complex mapBifunctorComparison to obtain F(Tot(P,Q)) isomorphic to Tot(F(P),F(Q)). This applies without boundedness because an equivalence preserves the direct sums in each degree.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If P is K-flat and Z is acyclic on the target site, F inverse(Z) is acyclic. Tensor this complex with P, apply exact F, and use the total comparison followed by the counit F(F inverse(Z)) isomorphic to Z. The result Tot(Z,F(P)) is acyclic. Therefore F(P) is K-flat.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a representative Y for X and a K-flat resolution P to Y. Apply the single-tensor comparison on both sites to compute Q(P) tensor N[0] and Q(F(P)) tensor F(N)[0] by their termwise tensor complexes. The ordinary comparison c(P^q,N) is a chain isomorphism between F of the first complex and the second, by naturality for (d_P,id_N). Localize it, use the exact-functor localization comparison, and transport along Q(P) isomorphic to X. Their composite is the required isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-kflat-single-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 06YS and 06YU. Apply the definition of K-flatness through an exact tensor equivalence and use the existing single-tensor comparison; no full derived monoidal coherence theorem is required."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive equivalence of module sheaf categories preserving ordinary tensor commutes with the K-flat derived tensor against a module in degree zero",
+   "results": "8 hits, including Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.iff_rTensor_preserves_shortComplex_exact and ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat.",
+   "date": "2026-10-27",
+   "verdict": "No ringed-site derived comparison. Use the existing project K-flat single-tensor comparison instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySingleFunctor",
+   "results": "0 hits; Loogle reported unknown identifier 'Functor.mapDerivedCategorySingleFunctor'.",
+   "date": "2026-10-27",
+   "verdict": "Use exact termwise localization and the existing K-flat single comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "ringed_kFlat_single_tensor_comparison|mapBifunctorComparison",
+   "results": "Remote Mathlib search: 0 hits. Local project search finds SheafOfModules.ringed_kFlat_single_tensor_comparison and HomologicalComplex.mapBifunctorComparison in the adopted Bifunctor module.",
+   "date": "2026-10-27",
+   "verdict": "Use the project single comparison and the adopted signed-total comparison; the desired combination is new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfClopenPreservesResidueTor",
+  "date": "2026-10-27",
+  "group": "W6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models comparing ordinary tensor evaluation with integral completed tensor. Extracted exact-equivalence step of clopen objectwise residue Tor preservation.",
+   "via": [
+    "lem-sf-clopen-preserves-residue-tor",
+    "lem-sf-clopen-derived-compatibility",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion",
+    "lem-sf-clopen-lisse-complete-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedEquivalenceDerivedTensorComparison",
+  "file": "lean/Sheaf/Algebra/Homology/RingedEquivalenceDerivedTensorComparison.lean",
+  "declaration": "SheafOfModules.ringedEquivalence_derivedTensorComparison",
+  "statement": "theorem ringedEquivalence_derivedTensorComparison\n    {C : Type c} [Category.{h} C] [EssentiallySmall.{r} C]\n    {D : Type d} [Category.{k} D] [EssentiallySmall.{r} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    (R : Sheaf J CommRingCat.{r}) (S : Sheaf K CommRingCat.{r})\n    [HasDerivedCategory.{w} (ringedSiteModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]\n    [HasDerivedCategory.{w'} (ringedSiteModules.{r}\n      ((sheafCompose K (forget₂ CommRingCat.{r} RingCat.{r})).obj S))]\n    (F : ringedSiteModules.{r}\n        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R) ⥤\n      ringedSiteModules.{r}\n        ((sheafCompose K (forget₂ CommRingCat.{r} RingCat.{r})).obj S))\n    [F.Additive] [F.IsEquivalence]\n    (c₀ : tensor _ ⋙ F ≅ F.prod F ⋙ tensor _) :\n    ∀ (X : DerivedCategory (ringedSiteModules.{r}\n        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)))\n      (N : ringedSiteModules.{r}\n        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)),\n      Nonempty (F.mapDerivedCategory.obj\n          ((siteDerivedTensorIndependentCoefficients J R).obj\n            (X, (DerivedCategory.singleFunctor _ 0).obj N)) ≅\n        (siteDerivedTensorIndependentCoefficients K S).obj\n          (F.mapDerivedCategory.obj X, (DerivedCategory.singleFunctor _ 0).obj (F.obj N)))",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261027T084510-L-3686649",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261027T084510-L-3686649",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

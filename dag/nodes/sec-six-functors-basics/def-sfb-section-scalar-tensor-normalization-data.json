@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-section-scalar-tensor-normalization-data",
+ "kind": "definition",
+ "title": "Localized section restriction and scalar tensor normalization",
+ "status": "split",
+ "statement": "Let $a:\\Lambda\\to\\Lambda'$ be a commutative condensed coefficient morphism, $T$ a scheme, $D_{a,T}$ its internal scalar extension and $V_{a,T}$ its exact restriction, and $B_{a,T}=Q(B^0_{a,T}[0])$ its restricted regular coefficient [def-sfb-internal-derived-scalar-comparisons]. Write $E_{R,T}$ for the exact section equivalence [def-pd-section-module-operations-data], $\\bar E_{R,T}$ for its localization, and use the conjugate section tensor, unit and localization comparisons [def-pd-section-derived-tensor-data], [def-pd-section-derived-realization]. Given section scalar comparison data $s$ of [def-sfb-internal-section-scalar-pullback-comparison-data], define $\\operatorname{sectionScalarRestriction}(a,T,s):V_{a,T}\\bar E_{\\Lambda,T}\\simeq\\bar E_{\\Lambda',T}V^s_{a,T}$ by localizing its ordinary restriction comparison with the inverse and forward canonical composition factors (functor products here apply the left functor first). Define $\\operatorname{sectionScalarTensor}(a,T)$ as $N\\mapsto N\\otimes^{\\mathbf L}\\bar E_{\\Lambda,T}B_{a,T}$. Define $\\operatorname{sectionScalarCoefficient}(a,T):\\bar E_{\\Lambda,T}B_{a,T}\\simeq Q(E_{\\Lambda,T}B^0_{a,T}[0])$ by the exact-equivalence localization factor followed by the single-complex comparison.\n\nFor an internal tensor normalization $t$ from [def-sfb-internal-derived-scalar-comparisons], define $\\operatorname{SectionTensorNormalized}(a,T,s,t)$ to be the following predicate. There exists an ordinary natural isomorphism $o:e^s_{a,T}V^s_{a,T}\\simeq(-\\otimes E_{\\Lambda,T}B^0_{a,T})$ that sends the sheafified scalar generator $z\\otimes x$ to the specified local pure tensor $x\\otimes z$ under the given ordinary extension-object identification, on every section and every module. There exists a natural isomorphism $e:D^s_{a,T}V^s_{a,T}\\simeq\\operatorname{sectionScalarTensor}(a,T)$ with two properties. On every termwise flat K-flat section complex $P$ [def-pc-kflat-complex], [def-pc-flat-sheaf-modules], $e_{QP}$ followed by tensoring with the section coefficient comparison, the section tensor localization map, and the canonical single-factor total-tensor comparison equals the restricted scalar computation map followed by the exact restriction localization comparison and the localized termwise ordinary map $o$. For every internal derived object $M$, the section image of $t.\\mathrm{derived}_M$ followed by the fixed tensor comparison equals the localized restriction comparison at $D_{a,T}M$, followed by $V^s_{a,T}(s.\\mathrm{derived}_M)$ and $e_{\\bar E_{\\Lambda,T}M}$. This defines the normalization predicate only; it asserts no existence or compatibility theorem. All objects are unbounded and uncompleted, with small pro-etale object universe $u+1$, morphism universe $u$, and section universe $u+1$.",
+ "stmt_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-pd-section-module-operations-data",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-derived-realization",
+  "def-sfb-internal-section-scalar-pullback-comparison-data",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "Paragraph (1), normalized scalar comparison; integral proper-base-change proof paragraph (1), scalar reduction. Stacks Tags 03EK,06YY,06YU,07A6; published InternalScalarPullbackNormalization.lean definitions before its theorem."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarRestrictionPull|scalarRestrictionPush|scalarCoefficientPull|scalarTensorPull|sectionScalarRestriction|SectionTensorNormalized|scalarSectionPushComparison",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "Ordinary scalar constructions only; reuse the published Sheaf definitions, not a Mathlib duplicate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived internal module scalar restriction pullback comparison and its right mate, restricted regular coefficient pullback, tensor pullback, section scalar tensor normalization and section pushforward realization",
+   "results": "8 hits: RestrictScalars, ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj', PresheafOfModules.pushforward, PresheafOfModules.restrictScalarsObj, Derivation.restrictScalars, PresheafOfModules.restrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-23",
+   "verdict": "Ordinary scalar constructions only; reuse the published Sheaf definitions, not a Mathlib duplicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar restriction pullback mate and tensor normalization under an internal module section equivalence",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply",
+   "date": "2026-10-23",
+   "verdict": "Ordinary scalar constructions only; reuse the published Sheaf definitions, not a Mathlib duplicate."
+  },
+  {
+   "tool": "rg",
+   "query": "scalarRestrictionPull|scalarRestrictionPush|scalarCoefficientUnit|scalarCoefficientPull|scalarTensorPull|sectionScalarRestriction|sectionScalarTensor|sectionScalarCoefficient|SectionTensorNormalized|scalarSectionPushComparison in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search sectionScalarRestriction and scalarRestrictionPull",
+   "results": "No upstream definitions. Existing Sheaf definitions in InternalScalarMateProjection, InternalScalarPullbackNormalization and ScalarGeometricExchangeRectangle. DAG declaration-owner scan finds only theorem nodes, no definition owner for these exact names. Existing def-sfb-internal-section-scalar-pullback-comparison-data owns the other four section comparison declarations; it is cited, not duplicated. The similarly named quotient section predicate is in a distinct namespace and is a different notion.",
+   "date": "2026-10-23",
+   "verdict": "Add definition ownership records on unchanged published modules; no new Lean construction."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-coefficient-square-normalization",
+  "date": "2026-10-23",
+  "group": "Q79"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "Paragraph (1), normalized scalar comparison; integral proper-base-change proof paragraph (1), scalar reduction. Stacks Tags 03EK,06YY,06YU,07A6; published InternalScalarPullbackNormalization.lean definitions before its theorem.",
+   "via": [
+    "lem-sfb-flat-coefficient-square-normalization",
+    "lem-sfb-coefficient-push-filtered-legs"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "module": "Sheaf.Paper.InternalScalarPullbackNormalizationData",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.sectionScalarRestriction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.sectionScalarRestriction",
+   "AlgebraicGeometry.ProEtale.QuotientChange.sectionScalarTensor",
+   "AlgebraicGeometry.ProEtale.QuotientChange.sectionScalarCoefficient",
+   "AlgebraicGeometry.ProEtale.QuotientChange.SectionTensorNormalized"
+  ],
+  "statement": "def sectionScalarRestriction (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})\n    (s : SectionScalarComparison a T) :\n    V a T ⋙ (ModuleRingedComparison.derivedEquivalence Λ T).functor ≅\n      (ModuleRingedComparison.derivedEquivalence Λ' T).functor ⋙\n        SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}\n          (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T))",
+  "branch": "sheaf-dag",
+  "by": "Q79",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Declarations relocated verbatim from InternalScalarPullbackNormalization to its publicly re-exported data module, to permit independent normalization lemmas without an import cycle. No signature or body changes.",
+  "file": "lean/Sheaf/Paper/InternalScalarPullbackNormalizationData.lean"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48f7da5cf",
+  "group": "Q79",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48f7da5cf",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of d53b8964. Lean file byte-identical to returned head; item node changes only stmt_deps/lean.note: the theorem stmt_deps lem-sfb-internal-scalar-mate-projection and lem-sfb-scalar-geometric-exchange-rectangle are replaced by three new existing:true def nodes (def-sfb-scalar-restriction-tensor-comparison-data owning scalarRestrictionPull/Push, scalarCoefficientUnit/Pull, scalarTensorPull; def-sfb-section-scalar-tensor-normalization-data owning sectionScalarRestriction/Tensor/Coefficient, SectionTensorNormalized; def-sfb-scalar-section-push-comparison-data owning scalarSectionPushComparison) plus existing def-sfb-internal-section-scalar-pullback-comparison-data, def-sfb-internal-derived-scalar-comparisons, def-pd-section-module-operations-data, def-pd-section-derived-tensor-data and def-pd-section-derived-realization; mate theorem kept in proof_deps. Verified against side-live modules: all plain defs with real bodies, statements verbatim, TeX matches bodies (b, mate d, v, rho, mu directions), fields complete, no competing def owner live, item still split, no cycle. Substance re-read: hypotheses no stronger, flatness/exact pullback/unit/d/theta=lambda/section-pinned d/final display all match the node; edge cases fine; sorry only; docstrings ok. Advisory: base-era scalarDerivedRestriction etc. owned by uncited def nodes; owned decls' docstrings name theorem nodes. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-80d0c",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261025T033928-L-171853",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 4 new modules + 4 unclaimed adapted modules vs published clone (verbatim def moves diffed), node stmt/proof records vs Lean, new sorry transport statement vs TensorNormalized/SectionScalarNormalized pinning; sandbox --all build plus 11 direct importers compiled clean; axioms sorryAx only pre-existing or from declared sorry statements"
+ }
+}

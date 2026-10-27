@@ -1,0 +1,272 @@
+{
+ "id": "lem-trf-closed-point-affine-dimension-data",
+ "kind": "statement",
+ "title": "Affine data at a closed point of an integral locally finite-type scheme",
+ "statement": "Let $K$ be a field [def-weil-field], let $X$ be a nonempty integral scheme locally of finite type over $K$ [def-pc-integral-scheme, def-weil-finite-type-morphism], and let $x\\in X$ be a closed point [def-weil-closed-points]. Let $\\eta$ be the generic point [def-sc-generic-point], put $L=\\mathcal O_{X,\\eta}$ [def-weil-pbc-module-stalk], with its structural $K$-algebra structure, and put $r=\\operatorname{trdeg}_K L$ [def-kun-transcendence-degree]. There is an affine open neighbourhood $U=\\operatorname{Spec}A$ of $x$ [def-weil-affine-spectrum], where $A$ is a nonzero finitely generated $K$-algebra domain [def-weil-pbc-finite-type-algebra], and a maximal ideal $\\mathfrak m\\subset A$ representing $x$, with the following properties. The point $\\eta$ belongs to $U$ and the germ map $A\\to L$ is a $K$-algebra map making $L$ a fraction field of $A$ (it is injective, every nonzero element of $A$ becomes invertible, and every element of $L$ is a quotient of two germs). Restriction gives a canonical isomorphism of local $K$-algebras $\\mathcal O_{U,x}\\cong\\mathcal O_{X,x}$, hence a $K$-isomorphism $\\kappa_U(x)\\cong\\kappa_X(x)$ of residue fields [def-weil-residue-field]. The extension $\\kappa_X(x)/K$ is finite. Finally $r$ is a finite nonnegative integer and $\\dim A=\\dim A_{\\mathfrak m}=r$, where dimension is Krull dimension [def-weil-pbc-krull-dimension-ring] and $A_{\\mathfrak m}$ is the localization at $\\mathfrak m$ [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JX, lemma-alteration-dimension, equality proof: the closed point of the generic fibre has finite residue extension and local dimension r; affine-chart expansion using Algebra Tag 00P0, lemma-dimension-prime-polynomial-ring, and Morphisms Tag 01RV, lemma-integral-scheme-rational-functions."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-points",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk",
+  "def-kun-transcendence-degree",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-residue-field",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood U of x using Mathlib exists_isAffineOpen_mem_and_subset inside the top open. It is nonempty, so IsIntegral supplies IsDomain of its actual section ring. LocallyOfFiniteType.finiteType_appLE gives finite type for the structural map on U; compose with the inverse of ΓSpecIso, which is finite type because it is a ring isomorphism.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T1, definition-finite-type, in Section 01T0; affine cover of Spec K"
+   }
+  },
+  {
+   "text": "Apply Mathlib IsAffineOpen.primeIdealOf_isMaximal_of_isClosed to x in U and its given closedness in X. This gives maximality of the actual primeIdealOf used in the conclusion.",
+   "uses": [
+    "def-weil-closed-points",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DZ, definition-spectrum-ring, and 00E1, definition-Zariski-topology; closed sets V(I)"
+   }
+  },
+  {
+   "text": "Apply the Mathlib fraction-field leaf functionField_isFractionRing_of_isAffineOpen to the nonempty affine open U. The genericPoint_spec criterion puts the generic point in U. germ_injective_of_isIntegral gives injectivity; nonzero germs are units in the function field. IsFractionRing.div_surjective supplies the quotient expression. The equation on structural constants is germ_res_apply for the inclusion U into the top open.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions; integral case"
+   }
+  },
+  {
+   "text": "Choose exactly U.stalkIso at x as the stalk comparison and the inverse of asIso of the open immersion residueFieldMap as the residue-field comparison. Mathlib stalkIso_inv identifies the inverse stalk comparison with the inclusion stalkMap. Apply injectivity of that inverse and germ_stalkMap_apply to prove compatibility with structural constants. For residue constants use the already proved Scheme.Hom.residueFieldAlgebraMap_comp from WeilConjectures.PointCount and cancel residueFieldMap with its inverse. Thus the chosen comparisons are precisely the canonical maps required, with the two K-compatibility equations.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HV, lemma-spec-sheaves (6), and 01HF, example-open-subspace"
+   }
+  },
+  {
+   "text": "Reuse the already proved source theorem Scheme.Hom.finite_residueField_of_isClosed from WeilConjectures.PointCount, applied to f and the given closed point x. This is the Jacobson/Zariski lemma argument and supplies Module.Finite for exactly f.residueFieldAlgebraMap, without reconstructing or choosing a quotient comparison.",
+   "uses": [
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FV, theorem-nullstellensatz (1); maximal quotient of a finite-type algebra"
+   }
+  },
+  {
+   "text": "Give Γ(X,U) its structural K-algebra and install its finite-type instance from step 1. Give X.functionField the precise structural algebra in the conclusion. The germ equation on constants from step 3 establishes IsScalarTower K Γ(X,U) X.functionField. Apply finiteType_domain_ringKrullDim_eq_trdeg to Γ(X,U); it gives a natural number r with ring dimension r, FractionRing transcendence degree r and dimension r for every maximal localization. Restrict the canonical FractionRing.algEquiv to K using this scalar tower; AlgEquiv.trdeg_eq transports the transcendence degree to X.functionField. Apply the maximal-localization clause to the maximal prime from step 2.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00P0, lemma-dimension-prime-polynomial-ring"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-points",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-residue-field",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JX equality proof, expanded with the cited affine and commutative-algebra facts; implemented by P2 using existing Mathlib canonical germ/stalk/fraction APIs, WeilConjectures.PointCount and WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "functionField_isFractionRing|isClosed_singleton_iff_locallyOfFiniteType|height_of_isClosed",
+   "results": "{\"t\": \"2026-10-22T05:55:51Z\", \"tool\": \"grep\", \"query\": \"functionField_isFractionRing|isClosed_singleton_iff_locallyOfFiniteType|height_of_isClosed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\"], \"digest\": \"6b5d13ea8b36fa54\"}; Only ingredients: fraction fields and stalk restriction; no affine chart with the simultaneous residue-field and dimension comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "affine finite type neighbourhood of a closed point integral scheme residue field finite function field dimension",
+   "results": "{\"t\": \"2026-10-22T05:55:52Z\", \"tool\": \"leansearch\", \"query\": \"affine finite type neighbourhood of a closed point integral scheme residue field finite function field dimension\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Only ingredients: fraction fields and stalk restriction; no affine chart with the simultaneous residue-field and dimension comparisons.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-22T05:55:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"functionField\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\"], \"digest\": \"c40755e73ff20bd5\"}; Only ingredients: fraction fields and stalk restriction; no affine chart with the simultaneous residue-field and dimension comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral scheme locally of finite type over a field has an affine chart at each closed point identifying its finite residue field and the chart and maximal localization dimensions with transcendence degree of the function field",
+   "results": "{\"t\": \"2026-10-22T05:56:05Z\", \"tool\": \"leanfinder\", \"query\": \"An integral scheme locally of finite type over a field has an affine chart at each closed point identifying its finite residue field and the chart and maximal localization dimensions with transcendence degree of the function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\"], \"digest\": \"7c520332ddb67ed5\"}; Only ingredients: fraction fields and stalk restriction; no affine chart with the simultaneous residue-field and dimension comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|ringKrullDim|stalkIso|residueField.*[Ii]so",
+   "results": "{\"t\": \"2026-10-22T05:56:19Z\", \"tool\": \"grep\", \"query\": \"trdeg|ringKrullDim|stalkIso|residueField.*[Ii]so\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\"], \"digest\": \"5dcd9251c06ffcc3\"}; Only ingredients: fraction fields and stalk restriction; no affine chart with the simultaneous residue-field and dimension comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local dimension at a closed point of an integral locally finite type scheme is the transcendence degree of its function field; an affine neighbourhood gives the same residue field",
+   "results": "{\"t\": \"2026-10-22T05:56:39Z\", \"tool\": \"leanfinder\", \"query\": \"Local dimension at a closed point of an integral locally finite type scheme is the transcendence degree of its function field; an affine neighbourhood gives the same residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.stalkFunctionFieldAlgebra\", \"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\", \"Algebra.Presentation.localizationAway_dimension_zero\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\"], \"digest\": \"988959a67eea371c\"}; Only ingredients: fraction fields and stalk restriction; no affine chart with the simultaneous residue-field and dimension comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine neighbourhood of a closed point of an integral locally finite type scheme over a field, with function field, finite residue extension and local dimension equal to transcendence degree",
+   "results": "{\"t\": \"2026-10-22T07:26:50Z\", \"tool\": \"leanfinder\", \"query\": \"Affine neighbourhood of a closed point of an integral locally finite type scheme over a field, with function field, finite residue extension and local dimension equal to transcendence degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.functionField_isFractionRing_of_affine\"], \"digest\": \"00cb760554189b1a\"}; Read hits: functionField_isFractionRing supplies Step 3, stalkIso supplies restriction ingredients, residueField and Krull-dimension results do not state the whole combined item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField_isFractionRing|stalkIso|ringKrullDim.*trdeg|trdeg.*ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T07:27:18Z\", \"tool\": \"grep\", \"query\": \"functionField_isFractionRing|stalkIso|ringKrullDim.*trdeg|trdeg.*ringKrullDim\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\"], \"digest\": \"a60f6da01fa25295\"}; Read hits: functionField_isFractionRing supplies Step 3, stalkIso supplies restriction ingredients, residueField and Krull-dimension results do not state the whole combined item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed points integral locally finite type scheme affine neighbourhood function field transcendence degree local Krull dimension",
+   "results": "{\"t\": \"2026-10-22T07:27:18Z\", \"tool\": \"leansearch\", \"query\": \"Closed points integral locally finite type scheme affine neighbourhood function field transcendence degree local Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.closedPoint\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"topologicalKrullDim\", \"IsLocalRing.isClosed_singleton_closedPoint\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.height_of_isClosed\", \"IsLocalRing.comap_closedPoint\", \"IsLocalRing.closedPoint_mem_iff\"], \"digest\": \"52920670a3ac2091\"}; Read hits: functionField_isFractionRing supplies Step 3, stalkIso supplies restriction ingredients, residueField and Krull-dimension results do not state the whole combined item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-22T07:27:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"functionField\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\"], \"digest\": \"c40755e73ff20bd5\"}; Read hits: functionField_isFractionRing supplies Step 3, stalkIso supplies restriction ingredients, residueField and Krull-dimension results do not state the whole combined item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated integral algebra over a field the dimension at every maximal ideal equals the transcendence degree of its fraction field; scheme affine restriction preserves residue fields",
+   "results": "{\"t\": \"2026-10-22T07:27:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a finitely generated integral algebra over a field the dimension at every maximal ideal equals the transcendence degree of its fraction field; scheme affine restriction preserves residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"Algebra.QuasiFinite.instResidueField\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"RingHom.EssFiniteType.residueFieldMap\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.isUnramifiedAt_iff_map_eq\"], \"digest\": \"afe81e48b72698c6\"}; Read hits: functionField_isFractionRing supplies Step 3, stalkIso supplies restriction ingredients, residueField and Krull-dimension results do not state the whole combined item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T07:29:47Z\", \"tool\": \"grep\", \"query\": \"trdeg|ringKrullDim\", \"sub\": \"RingTheory/KrullDimension\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Field.lean\", \"Mathlib/RingTheory/KrullDimension/Field.lean\", \"Mathlib/RingTheory/KrullDimension/Field.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\"], \"digest\": \"9f9eb7df502c9f50\"}; Read hits: functionField_isFractionRing supplies Step 3, stalkIso supplies restriction ingredients, residueField and Krull-dimension results do not state the whole combined item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-fibre-closed-chain",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), contracting local terms by normal-cone specialization: the finite-type generic-fibre closed point and its local dimension in the alteration dimension input; original auxiliary proof steps 2--3.",
+   "via": [
+    "lem-trf-generic-fibre-closed-chain",
+    "lem-trf-closed-dominant-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-closed-point-affine-dimension-data",
+  "worker": "stage1",
+  "summary": "Q112: assembled the locally finite-type affine cover, integral function-field fraction description, germ-compatible affine stalk comparison, maximal-quotient Zariski lemma and existing finite-type-domain dimension theorem. All six steps cite statements actually read; no new nodes, statement changes or Lean writes.",
+  "blueprint": "Realizes the affine-chart data used in the generic-fibre closed-chain input beneath lem-trf-local-term-locality proof (1)--(2), through the recorded ancestor chain; no change to the contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Generic commutative-algebra tool: dimension and maximal-localization dimension of a finite-type domain equal fraction-field transcendence degree (00P0). The trace unit has no replacement for this algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-cdc77d310",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-cdc77d310 (reviewer sub-agent of L); spot-checked: I read the whole delivery. Compared with the side-live/live unsplit node, only proof, proof_deps, proof_origin, status, mathlib_searches and split_report changed. The statement, stmt_deps and blueprint are byte-identical. There are no new nodes and no repair note (not a re-split), and live is still unsplit. The only citer is lem-trf-generic-fibre-closed-chain step 2, and it uses exactly the delivered clauses; there is no cycle. Steps: (1) A Spec K-cover member U=Spec A containing x, by def-weil-finite-type-morphism with V=Spec K; A is a nonzero domain by def-pc-integral-scheme because x∈U. (2) {m} is closed in Spec A, so V(m)={m}, so m is maximal (elementary). (3) lem-sc-integral-function-field-affine-fraction (leaf, 01RV) gives η∈U and the fraction-field clauses; K-linearity follows from germs of constant sections. (4) lem-weil-pbc-affine-open-stalk-localization (b)+(c) gives A_m≅O_{X,x} compatibly with germs, hence a K-isomorphism of residue fields. (5) A_m/mA_m≅A/m (surjectivity and kernel written out), then lem-weil-pbc-zariski-lemma, which I checked against 00FV including its final sentence, gives κ(x)/K finite. (6) lem-weil-pbc-finite-type-domain-dimension-trdeg, which matches 00P0 verbatim, gives dim A=dim A_m=trdeg, with every hypothesis supplied by Steps 1-3. Source: Stacks 02JX equality paragraph; the chart plus 00P0 route is a valid elementary replacement for its Jacobson/dimension-formula argument. Edge cases tested: Spec F with F/K finite; K[t] at a degree-greater-than-1 irreducible; a purely inseparable residue extension over F_p(s); a non-quasi-compact X; and a non-closed point, which is excluded and correctly needs the closedness hypothesis. Accepted tool_use: lem-weil-pbc-finite-type-domain-dimension-trdeg (sk-thm-p1), a black-box commutative-algebra fact; the other off-unit citations are Mathlib leaves. No duplicate found among lem-sfb-curve-closed-point-affine-local-model, lem-weil-pbc-dimension-at-point-local-ring-trdeg, lem-sc-integral-locally-algebraic-affine-opens-dimension or lem-kun-finite-type-residue-trdeg. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedPointAffineDimensionData",
+  "declaration": "AlgebraicGeometry.closed_point_affine_dimension_data",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedPointAffineDimensionData.lean",
+  "statement": "theorem closed_point_affine_dimension_data {K : Type u} [Field K] {X : Scheme.{u}} [IsIntegral X] (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] (x : X) (hx : x ∈ closedPoints X) : ∃ (U : X.Opens) (hU : IsAffineOpen U) (hxU : x ∈ U) (hηU : genericPoint X ∈ U), IsDomain Γ(X, U) ∧ RingHom.FiniteType ((f.appLE ⊤ U (by simp)).hom.comp (Scheme.ΓSpecIso (.of K)).inv.hom) ∧ (hU.primeIdealOf ⟨x, hxU⟩).asIdeal.IsMaximal ∧ Function.Injective (X.presheaf.germ U (genericPoint X) hηU) ∧ (∀ b : Γ(X, U), b ≠ 0 → IsUnit (X.presheaf.germ U (genericPoint X) hηU b)) ∧ (∀ z : X.functionField, ∃ a b : Γ(X, U), b ≠ 0 ∧ z = X.presheaf.germ U (genericPoint X) hηU a * (X.presheaf.germ U (genericPoint X) hηU b)⁻¹) ∧ (∀ c : K, X.presheaf.germ U (genericPoint X) hηU (f.appLE ⊤ U (by simp) ((Scheme.ΓSpecIso (.of K)).inv c)) = X.presheaf.germ ⊤ (genericPoint X) (Set.mem_univ _) (f.appTop ((Scheme.ΓSpecIso (.of K)).inv c))) ∧ ∃ (e : U.toScheme.presheaf.stalk ⟨x, hxU⟩ ≅ X.presheaf.stalk x) (eκ : U.toScheme.residueField ⟨x, hxU⟩ ≅ X.residueField x), e = U.stalkIso ⟨x, hxU⟩ ∧ eκ.inv = U.ι.residueFieldMap ⟨x, hxU⟩ ∧ (∀ c : K, e.hom (U.toScheme.presheaf.germ ⊤ ⟨x, hxU⟩ (Set.mem_univ _) ((U.ι ≫ f).appTop ((Scheme.ΓSpecIso (.of K)).inv c))) = X.presheaf.germ ⊤ x (Set.mem_univ _) (f.appTop ((Scheme.ΓSpecIso (.of K)).inv c))) ∧ (∀ c : K, eκ.hom ((U.ι ≫ f).residueFieldAlgebraMap ⟨x, hxU⟩ c) = f.residueFieldAlgebraMap x c) ∧ @Module.Finite K (X.residueField x) _ _ (f.residueFieldAlgebraMap x).toAlgebra.toModule ∧ ∃ r : ℕ, @Algebra.trdeg K X.functionField _ _ ((X.presheaf.germ ⊤ (genericPoint X) (Set.mem_univ _)).hom.comp (f.appTop.hom.comp (Scheme.ΓSpecIso (.of K)).inv.hom)).toAlgebra = (r : Cardinal) ∧ ringKrullDim Γ(X, U) = (r : WithBot ℕ∞) ∧ ringKrullDim (Localization.AtPrime (hU.primeIdealOf ⟨x, hxU⟩).asIdeal) = (r : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "Q154",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd898f1ba",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Node copy differs from side-live only in lean; lean.statement verbatim in file; single sorry theorem, no defs. Clause-by-clause: field K, IsIntegral X (nonempty), LocallyOfFiniteType f (no QuasiCompact), closedPoints; affine U with actual Γ(X,U) domain, RingHom.FiniteType of structural map, primeIdealOf maximal, germ injective/units/quotients and K-compatibility, e pinned to U.stalkIso and eκ.inv to U.ι.residueFieldMap with K-equations, Module.Finite via residueFieldAlgebraMap, ∃ r:ℕ with trdeg (structural algebra) = r = dim A = dim A_m. Edge cases Spec F, non-rational closed point, inseparable, non-qc covered. Source 02JX read. No duplicates (dimension-at-point, affine-opens-dimension, curve local model). Docstrings with source/blueprint/6 steps. Advisory: residueFieldAlgebraMap (ZetaSeries) has no stmt_dep owner record but is the canonical map of def-weil-residue-field. No compile (no FIX files)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261023T105414-L-3554711",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

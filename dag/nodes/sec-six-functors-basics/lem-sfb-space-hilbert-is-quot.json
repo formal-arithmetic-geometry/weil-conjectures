@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-space-hilbert-is-quot",
+ "kind": "statement",
+ "title": "The proper Hilbert presheaf is the Quot presheaf of the structure sheaf",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $a:A\\to B$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Assume that $a$ is of finite presentation. Use the space morphism properties, module conventions and Quot presheaf of [def-sfb-space-proper-quot-functor]. For a scheme $T\\to B$, let $\\mathcal H_{A/B}(T)$ be the set of closed subspaces $i:D\\hookrightarrow A_T$ with $D\\to T$ proper, flat and of finite presentation, identified up to isomorphism of closed immersions over $A_T$; transitions are inverse images of closed subspaces. The assignment $[i:D\\hookrightarrow A_T]\\mapsto[\\mathcal O_{A_T}\\twoheadrightarrow i_*\\mathcal O_D]$ is a bijection $\\mathcal H_{A/B}(T)\\simeq\\operatorname{Quot}_{\\mathcal O_A/A/B}(T)$. Its inverse takes a quotient to the closed subspace cut out by its kernel ideal. These bijections commute with every scheme base change $T\\prime\\to T$ over $B$, including non-flat base changes, and hence form a natural isomorphism of presheaves over $B$.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D00, quot-lemma-hilb-is-quot, including naturality of the displayed mutually inverse constructions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-proper-hilbert-functor",
+  "def-sfb-space-module-structure-map"
+ ],
+ "proof": [
+  {
+   "text": "Fix a scheme $T\\to B$ and write $X=A_T$. By arbitrary base-change stability, $X\\to T$ is of finite presentation. For a Hilbert object $i:D\\hookrightarrow X$, both $D\\to T$ and $X\\to T$ are locally of finite presentation, hence the latter is locally of finite type. Relative finite-presentation permanence therefore makes $i$ locally of finite presentation. Apply the closed-structure criterion: $i$ is of finite presentation and $i_*\\mathcal O_D$ is a finitely presented $\\mathcal O_X$-module.",
+   "uses": [
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-relative-lfp-permanence",
+    "lem-sfb-space-closed-structure-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D00, lemma-hilb-is-quot"
+   }
+  },
+  {
+   "text": "The closed-pushforward theorem makes $q_i:\\mathcal O_X\\twoheadrightarrow i_*\\mathcal O_D$ surjective with quasi-coherent target. The relative-flatness lemma makes its target flat over $T$ because $D\\to T$ is flat. Its proper carrier is $D$ itself, with the finite type module $\\mathcal O_D$, generated locally by $1$. Thus all the target conditions in the Quot definition hold. An isomorphism of closed immersions induces an isomorphism of these quotient modules intertwining $q_i$, so this construction is defined on the specified isomorphism classes.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-closed-pushforward-relative-flatness",
+    "def-sfb-space-proper-quot-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D00, lemma-hilb-is-quot"
+   }
+  },
+  {
+   "text": "Conversely take a Quot object $q:\\mathcal O_X\\twoheadrightarrow Q$. Its kernel $\\mathcal I$ is quasi-coherent by closure of quasi-coherent modules under kernels. It is an ideal: $q(ab)=a q(b)=0$ whenever $q(b)=0$. The ideal correspondence constructs a unique closed subspace $i:D\\hookrightarrow X$ with ideal $\\mathcal I$. The surjection identifies $Q$ with $\\mathcal O_X/\\mathcal I\\simeq i_*\\mathcal O_D$ compatibly with $q$. The module $Q$ is of finite presentation, so the closed-structure criterion makes $i$ of finite presentation; composition with $X\\to T$ makes $D\\to T$ of finite presentation.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-closed-ideal-correspondence",
+    "lem-sfb-space-closed-structure-finite-presentation",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D00, lemma-hilb-is-quot"
+   }
+  },
+  {
+   "text": "The relative-flatness lemma applied to $Q\\simeq i_*\\mathcal O_D$ gives flatness of $D\\to T$. Since $X\\to T$ is of finite presentation, it is locally of finite type, as required for the proper-carrier lemma. The Quot condition gives a proper closed carrier for $Q$; that lemma identifies its scheme-theoretic support with $D$ and makes $D\\to T$ proper. This proves that the inverse construction lands in the Hilbert set without any Noetherian hypothesis.",
+   "uses": [
+    "lem-sfb-space-closed-pushforward-relative-flatness",
+    "lem-sfb-space-module-proper-carrier-support",
+    "def-sfb-space-proper-quot-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D00, lemma-hilb-is-quot"
+   }
+  },
+  {
+   "text": "An isomorphism of quotients intertwining their maps from $\\mathcal O_X$ gives equal kernels, hence equal closed-subspace classes by the ideal correspondence. Starting with $i$ returns its kernel ideal and then its original closed-subspace class. Starting with $q$ returns $\\mathcal O_X\\twoheadrightarrow\\mathcal O_X/\\ker q$, which is isomorphic to $q$ by the induced quotient isomorphism. Thus the two maps on isomorphism classes are mutually inverse.",
+   "uses": [
+    "lem-sfb-space-closed-ideal-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D00, lemma-hilb-is-quot"
+   }
+  },
+  {
+   "text": "Let $T\\prime\\to T$ be any scheme morphism over $B$ and $p:X\\prime=A_{T\\prime}\\to X$. The ideal correspondence supplies $p^*(i_*\\mathcal O_D)\\simeq i\\prime_*\\mathcal O_{D\\prime}$, preserving the quotient map, where $D\\prime=D\\times_TT\\prime$. Hence the forward assignment commutes with the transition maps. Both transitions are defined: flatness, properness and finite presentation of $D\\to T$ persist by arbitrary base change, and the Quot transitions are those in its definition. No exactness on the left of a pulled-back ideal sequence is asserted: the new ideal is the image of $p^*\\mathcal I\\to\\mathcal O_{X\\prime}$. Since the forward maps are bijective, their inverse maps also commute with transitions (apply the bijective forward map on $T\\prime$ to both sides). Thus the bijections give the claimed natural isomorphism, including non-flat base change.",
+   "uses": [
+    "lem-sfb-space-closed-ideal-correspondence",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "def-sfb-space-proper-quot-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D00, lemma-hilb-is-quot"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-proper-quot-functor",
+  "lem-sfb-space-closed-ideal-correspondence",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-sfb-space-closed-pushforward-relative-flatness",
+  "lem-sfb-space-closed-structure-finite-presentation",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-relative-lfp-permanence",
+  "lem-sfb-space-separated-fp-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D00, lemma-hilb-is-quot; omitted flatness and inverse/naturality checks exposed explicitly as above."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Hilbert functor equals the Quot functor of the structure sheaf for algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Spec.toSheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"CategoryTheory.Functor CommRingCatᵒᵖ (AlgebraicGeometry.SheafedSpace CommRingCat)\", \"doc\": \"The functor that assigns to each commutative ring $ R $ its prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the structure sheaf $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)} $, and to each ring homom\"}\n  {\"name\": \"AlgebraicGeometry.Spec.toPresheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"CategoryTheory.Functor CommRingCatᵒᵖ (AlgebraicGeometry.PresheafedSpace CommRingCat)\", \"doc\": \"The functor from the opposite category of commutative rings to presheafed spaces over commutative rings, obtained by composing the Spec functor (which assigns a ring its prime spectrum with structure \"}\n  {\"name\": \"AlgebraicGeometry.Spec.toSheafedSpace_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCatᵒᵖ),\\n  AlgebraicGeometry.Spec.toSheafedSpace.obj R = AlgebraicGeometry.Spec.sheafedSpaceObj (Opposite.unop R)\", \"doc\": \"For any commutative ring $ R $ in the opposite category of commutative rings, the object mapping of the Spec functor applied to $ R $ yields the sheafed space constructed from the prime spectrum $ \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.Spec.toPresheafedSpace_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCatᵒᵖ),\\n  AlgebraicGeometry.Spec.toPresheafedSpace.obj R =\\n    (AlgebraicGeometry.Spec.sheafedSpaceObj (Opposite.unop R)).toPresheafedSpace\", \"doc\": \"For a commutative ring $ R $, the object mapping of the Spec functor from the opposite category of commutative rings to presheafed spaces assigns to $ R $ the presheafed space obtained by equipping th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forgetToTop_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.forgetToTop.obj X = (AlgebraicGeometry.SheafedSpace.forget CommRingCat).obj X.toSheafedSpace\", \"doc\": \"For any scheme $X$, the underlying topological space obtained by the forgetful functor from schemes to topological spaces is equal to the composition of the forgetful functors from schemes to sheafed \"}\n  {\"name\": \"AlgebraicGeometry.Spec.locallyRingedSpaceObj_toSheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCat),\\n  (AlgebraicGeometry.Spec.locallyRingedSpaceObj R).toSheafedSpace = AlgebraicGeometry.Spec.sheafedSpaceObj R\", \"doc\": \"For any commutative ring $ R $, the underlying sheafed space of the locally ringed space $ \\\\operatorname{Spec}(R) $ coincides with the sheafed space structure on $ \\\\operatorname{Spec}(R) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γ_def\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.Γ =\\n  AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.op.comp AlgebraicGeometry.LocallyRingedSpace.Γ\", \"doc\": \"The contravariant functor that maps each scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the composition\"}\n  {\"name\": \"AlgebraicGeometry.Spec.sheafedSpaceObj\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"CommRingCat → AlgebraicGeometry.SheafedSpace CommRingCat\", \"doc\": \"For a commutative ring $ R $, the sheafed space constructed by equipping the prime spectrum $ \\\\operatorname{Spec}(R) $ with the structure sheaf of commutative rings $ \\\\mathcal{O}_{\\\\operatorname{Spec}(\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of the structure sheaf by an ideal defines a closed algebraic subspace and identifies the Hilbert and Quot moduli functors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → ↑X.affineOpens → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ with ideal sheaf data $I$ and an affine open subset $U \\\\subseteq X$, this constructs the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/I(U))$, where $\\\\mathcal{O}_X(U)$ is the ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.IdealSheafData → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {R : CommRingCat} (I : Ideal ↑R),\\n  AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the morphism $ \\\\operatorname{Spec}(R/I) \\\\to \\\\operatorname{Spec}(R) $ induced by the quotient map $ R \\\\to R/I $ is a closed immersion. This foll\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafDataᵒᵖ),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).obj I =\\n    CategoryTheory.Over.mk (Opposite.unop I).subschemeι\", \"doc\": \"For a scheme $Y$ and an ideal sheaf data $\\\\mathcal{I}$ on $Y$ (considered in the opposite category), the object mapping of the subscheme functor sends $\\\\mathcal{I}$ to the closed subscheme $\\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (I : X.IdealSheafData) →\\n    (U : ↑X.affineOpens) →\\n      I.subscheme.presheaf.obj (Opposite.op ((TopologicalSpace.Opens.map I.subschemeι.base).obj ↑U)) ≅\\n        { carrier := ↑(X.presheaf.obj (Opposite.op ↑U)) ⧸ I.ideal U, commRing := Ideal.Quotient.commRing (I.id\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the global sections of the subscheme's structure sheaf over the intersection with $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → CategoryTheory.Functor Y.IdealSheafDataᵒᵖ (CategoryTheory.Over Y)\", \"doc\": \"For a scheme $Y$, this functor maps each ideal sheaf data $\\\\mathcal{I}$ on $Y$ to its associated closed subscheme $\\\\operatorname{Subscheme}(\\\\mathcal{I})$ equipped with the canonical morphism to $Y$, a\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  (CategoryTheory.MorphismProperty.Over @AlgebraicGeometry.IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"For any scheme $X$, there is an equivalence of categories between the opposite category of the over category of closed immersions into $X$ with the top morphism property and the category of ideal shea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjCarrierIso\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (I : X.IdealSheafData) →\\n    (U : ↑X.affineOpens) →\\n      ↑(I.glueDataObj U).toPresheafedSpace ≅\\n        { carrier := ↑(X.zeroLocus ↑(I.ideal U) ∩ ↑↑U), str := instTopologicalSpaceSubtype }\", \"doc\": \"For any scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, there is a homeomorphism between the topological space underlying the local model $\\\\operatorname{Spec}\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"quotient\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "grep",
+   "query": "hilb.*quot|HilbertFunctor|QuotFunctor",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed subspaces correspond naturally to quotients of the structure sheaf with proper flat finitely presented support",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.gc\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": @GaloisConnection X.IdealSheafData (Closeds X)ᵒᵈ _ _ (support ·) (vanishingIdeal ·)\", \"doc\": \"There is a Galois connection between the ideal sheaf data on a scheme $X$ and the order dual of its closed subsets, where the adjoint pair consists of the support map (sending an ideal sheaf to its su\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat} {f : X ⟶ Spec R} :\\n  IsClosedImmersion f ↔\\n    ∃ I : Ideal R, ∃ e : X ≅ Spec (.of <| R ⧸ I), f = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(I : IdealSheafData X) : IsClosed I.supportSet\", \"doc\": \"The support set of an ideal sheaf on a scheme, defined as the set of points where the stalk of the ideal sheaf is non-zero, is a closed subset of the underlying topological space of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) : Γ(I.subscheme, I.subschemeι ⁻¹ᵁ U) ≅ .of (Γ(X, U) ⧸ I.ideal U)\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the global sections of the subscheme's structure sheaf over the intersection with $ \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat.{u}} (I : Ideal R) : IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the morphism $ \\\\operatorname{Spec}(R/I) \\\\to \\\\operatorname{Spec}(R) $ induced by the quotient map $ R \\\\to R/I $ is a closed immersion. This foll\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Closeds X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"Module.isClosed_support\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Module\", \"type\": \"[Module.Finite R M] : IsClosed (Module.support R M)\", \"doc\": \"For a finitely generated module $ M $ over a commutative semiring $ R $, the support of $ M $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is a closed set in the Zariski topology. This means the s\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern module presentations, scheme closed subschemes, scheme morphism properties, total quotient rings or Zariski gluing; none defines or represents this algebraic-space moduli functor or proves this natural identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert functor is naturally isomorphic to the Quot functor of the structure sheaf on an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIso_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCat), CategoryTheory.IsIso (AlgebraicGeometry.toSpecΓ R)\", \"doc\": \"For any commutative ring $ R $, the canonical ring homomorphism from $ R $ to the global sections of its prime spectrum $ \\\\operatorname{Spec}(R) $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.structurePresheafCompForget\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.Functor.comp (AlgebraicGeometry.structurePresheafInCommRing R) (CategoryTheory.forget CommRingCat) ≅\\n      (AlgebraicGeometry.structureSheafInType R).val\", \"doc\": \"The composition of the structure presheaf of commutative rings on the prime spectrum $\\\\operatorname{Spec}(R)$ with the forgetful functor to the category of types is naturally isomorphic to the structu\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"CategoryTheory.IsIso AlgebraicGeometry.ΓSpec.adjunction.counit\", \"doc\": \"The counit of the adjunction between the global sections functor $\\\\Gamma$ (contravariant from schemes to commutative rings) and the spectrum functor $\\\\operatorname{Spec}$ (from commutative rings to sc\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"CategoryTheory.IsIso AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.counit\", \"doc\": \"The counit of the Γ-Spec adjunction, which is a natural transformation from the composition of the Spec functor applied to the global sections functor to the identity functor on the category of locall\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [inst : CommRing R]\\n  (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ Opposite.op { carrier := R, commRing := inst })\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.toLocallyRingedSpace.obj\\n                (O\", \"doc\": \"For a locally ringed space $X$ and commutative ring $R$, the composition of the structure sheaf morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(U) \\\\to R$ with the component of the Γ-Spec adjunction hom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecΓIdentity\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.Spec.rightOp.comp AlgebraicGeometry.Scheme.Γ ≅ CategoryTheory.Functor.id CommRingCat\", \"doc\": \"The composition of the contravariant Spec functor from the opposite category of commutative rings to schemes and the global sections functor Γ from schemes to commutative rings is naturally isomorphic\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.SpecΓIdentity\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"AlgebraicGeometry.Spec.toLocallyRingedSpace.rightOp.comp AlgebraicGeometry.LocallyRingedSpace.Γ ≅\\n  CategoryTheory.Functor.id CommRingCat\", \"doc\": \"The composition of the global sections functor $\\\\Gamma$ and the $\\\\operatorname{Spec}$ functor is naturally isomorphic to the identity functor on the category of commutative rings, i.e., $\\\\Gamma \\\\circ \"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  CategoryTheory.IsIso (AlgebraicGeometry.ΓSpec.adjunction.unit.app X)\", \"doc\": \"For any affine scheme $X$, the unit morphism of the adjunction between the global sections functor $\\\\Gamma$ and the spectrum functor $\\\\operatorname{Spec}$ at $X$ is an isomorphism. This means the natu\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general proper Hilbert/Quot identification for algebraic spaces is not among these scheme and ring results"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Quot\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the general proper Hilbert/Quot identification for algebraic spaces is not among these scheme and ring results"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertFunctor|QuotFunctor|hilb.*quot",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the general proper Hilbert/Quot identification for algebraic spaces is not among these scheme and ring results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural bijection between closed subspaces and quotients of the structure sheaf with proper flat finitely presented support",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) : Γ(I.subscheme, I.subschemeι ⁻¹ᵁ U) ≅ .of (Γ(X, U) ⧸ I.ideal U)\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the global sections of the subscheme's structure sheaf over the intersection with $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) :\\n  I.subschemeι.app U = CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U)) ≫ (I.subschemeObjIso U).inv\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the component of the canonical morphism $ \\\\iota: \\\\text{Subscheme}(\\\\mathcal{I}) \\\\to X\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat} {f : X ⟶ Spec R} :\\n  IsClosedImmersion f ↔\\n    ∃ I : Ideal R, ∃ e : X ≅ Spec (.of <| R ⧸ I), f = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"(X : Scheme.{u}) : (MorphismProperty.Over @IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"For any scheme $X$, there is an equivalence of categories between the opposite category of the over category of closed immersions into $X$ with the top morphism property and the category of ideal shea\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat.{u}} (I : Ideal R) : IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the morphism $ \\\\operatorname{Spec}(R/I) \\\\to \\\\operatorname{Spec}(R) $ induced by the quotient map $ R \\\\to R/I $ is a closed immersion. This foll\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.gc\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": @GaloisConnection X.IdealSheafData (Closeds X)ᵒᵈ _ _ (support ·) (vanishingIdeal ·)\", \"doc\": \"There is a Galois connection between the ideal sheaf data on a scheme $X$ and the order dual of its closed subsets, where the adjoint pair consists of the support map (sending an ideal sheaf to its su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafDataᵒᵖ),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).obj I =\\n    CategoryTheory.Over.mk (Opposite.unop I).subschemeι\", \"doc\": \"For a scheme $Y$ and an ideal sheaf data $\\\\mathcal{I}$ on $Y$ (considered in the opposite category), the object mapping of the subscheme functor sends $\\\\mathcal{I}$ to the closed subscheme $\\\\operatorn\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general proper Hilbert/Quot identification for algebraic spaces is not among these scheme and ring results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert functor is naturally isomorphic to the Quot functor of the structure sheaf on an algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isIso_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R : CommRingCat), CategoryTheory.IsIso (AlgebraicGeometry.toSpecΓ R)\", \"doc\": \"For any commutative ring $ R $, the canonical ring homomorphism from $ R $ to the global sections of its prime spectrum $ \\\\operatorname{Spec}(R) $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.structurePresheafCompForget\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    CategoryTheory.Functor.comp (AlgebraicGeometry.structurePresheafInCommRing R) (CategoryTheory.forget CommRingCat) ≅\\n      (AlgebraicGeometry.structureSheafInType R).val\", \"doc\": \"The composition of the structure presheaf of commutative rings on the prime spectrum $\\\\operatorname{Spec}(R)$ with the forgetful functor to the category of types is naturally isomorphic to the structu\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"CategoryTheory.IsIso AlgebraicGeometry.ΓSpec.adjunction.counit\", \"doc\": \"The counit of the adjunction between the global sections functor $\\\\Gamma$ (contravariant from schemes to commutative rings) and the spectrum functor $\\\\operatorname{Spec}$ (from commutative rings to sc\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"CategoryTheory.IsIso AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction.counit\", \"doc\": \"The counit of the Γ-Spec adjunction, which is a natural transformation from the composition of the Spec functor applied to the global sections functor to the identity functor on the category of locall\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [inst : CommRing R]\\n  (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ Opposite.op { carrier := R, commRing := inst })\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.toLocallyRingedSpace.obj\\n                (O\", \"doc\": \"For a locally ringed space $X$ and commutative ring $R$, the composition of the structure sheaf morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(U) \\\\to R$ with the component of the Γ-Spec adjunction hom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecΓIdentity\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.Spec.rightOp.comp AlgebraicGeometry.Scheme.Γ ≅ CategoryTheory.Functor.id CommRingCat\", \"doc\": \"The composition of the contravariant Spec functor from the opposite category of commutative rings to schemes and the global sections functor Γ from schemes to commutative rings is naturally isomorphic\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.SpecΓIdentity\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"AlgebraicGeometry.Spec.toLocallyRingedSpace.rightOp.comp AlgebraicGeometry.LocallyRingedSpace.Γ ≅\\n  CategoryTheory.Functor.id CommRingCat\", \"doc\": \"The composition of the global sections functor $\\\\Gamma$ and the $\\\\operatorname{Spec}$ functor is naturally isomorphic to the identity functor on the category of commutative rings, i.e., $\\\\Gamma \\\\circ \"}\n  {\"name\": \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X],\\n  CategoryTheory.IsIso (AlgebraicGeometry.ΓSpec.adjunction.unit.app X)\", \"doc\": \"For any affine scheme $X$, the unit morphism of the adjunction between the global sections functor $\\\\Gamma$ and the spectrum functor $\\\\operatorname{Spec}$ at $X$ is an isomorphism. This means the natu\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general proper Hilbert/Quot identification for algebraic spaces is not among these scheme and ring results"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\", \"Quot\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the general proper Hilbert/Quot identification for algebraic spaces is not among these scheme and ring results"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertFunctor|QuotFunctor|hilb.*quot",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the general proper Hilbert/Quot identification for algebraic spaces is not among these scheme and ring results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural bijection between closed subspaces and quotients of the structure sheaf with proper flat finitely presented support",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) : Γ(I.subscheme, I.subschemeι ⁻¹ᵁ U) ≅ .of (Γ(X, U) ⧸ I.ideal U)\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the global sections of the subscheme's structure sheaf over the intersection with $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U : X.affineOpens) :\\n  I.subschemeι.app U = CommRingCat.ofHom (Ideal.Quotient.mk (I.ideal U)) ≫ (I.subschemeObjIso U).inv\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a closed subscheme defined by an ideal sheaf $ \\\\mathcal{I} $, the component of the canonical morphism $ \\\\iota: \\\\text{Subscheme}(\\\\mathcal{I}) \\\\to X\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat} {f : X ⟶ Spec R} :\\n  IsClosedImmersion f ↔\\n    ∃ I : Ideal R, ∃ e : X ≅ Spec (.of <| R ⧸ I), f = e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))\", \"doc\": \"A morphism $ f: X \\\\to \\\\operatorname{Spec}(R) $ is a closed immersion if and only if there exists an ideal $ I \\\\subseteq R $ and an isomorphism $ X \\\\cong \\\\operatorname{Spec}(R/I) $ such that $ f $ equa\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"(X : Scheme.{u}) : (MorphismProperty.Over @IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"For any scheme $X$, there is an equivalence of categories between the opposite category of the over category of closed immersions into $X$ with the top morphism property and the category of ideal shea\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{R : CommRingCat.{u}} (I : Ideal R) : IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, the morphism $ \\\\operatorname{Spec}(R/I) \\\\to \\\\operatorname{Spec}(R) $ induced by the quotient map $ R \\\\to R/I $ is a closed immersion. This foll\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.gc\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": @GaloisConnection X.IdealSheafData (Closeds X)ᵒᵈ _ _ (support ·) (vanishingIdeal ·)\", \"doc\": \"There is a Galois connection between the ideal sheaf data on a scheme $X$ and the order dual of its closed subsets, where the adjoint pair consists of the support map (sending an ideal sheaf to its su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor_obj\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (I : Y.IdealSheafDataᵒᵖ),\\n  (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).obj I =\\n    CategoryTheory.Over.mk (Opposite.unop I).subschemeι\", \"doc\": \"For a scheme $Y$ and an ideal sheaf data $\\\\mathcal{I}$ on $Y$ (considered in the opposite category), the object mapping of the subscheme functor sends $\\\\mathcal{I}$ to the closed subscheme $\\\\operatorn\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the general proper Hilbert/Quot identification for algebraic spaces is not among these scheme and ring results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-hilbert-representability",
+  "date": "2026-10-23",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 0D00, quot-lemma-hilb-is-quot, including naturality of the displayed mutually inverse constructions.",
+   "via": [
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-hilbert-is-quot",
+  "worker": "stage1",
+  "summary": "Split Tag 0D00 into forward admissibility, inverse admissibility, mutual inverse and arbitrary-base-change checks. Reused the existing quasi-coherent closed-pushforward, kernel, finite-presentation permanence/composition, and base-change nodes; exposed four general supporting lemmas. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 0D00, quot-lemma-hilb-is-quot, including naturality of the displayed mutually inverse constructions. This is a supporting moduli input below proof (3); the six steps realize the two constructions of Tag 0D00 and their compatibility, without replacing any unit step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-48eed3022",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-48eed3022 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. First split of an unsplit item with no proof: the statement and stmt_deps match base, live and side-live, and there is no repair note, so the re-split rule does not apply. Source check: quot.tex 0D00 and situation-hilb were read; the six steps follow the source's forward construction (permanence, 0610, flatness argument the source omits), its converse (03MB, 082T, 084Q, composition, proper-over-base section) and the inverse check it leaves out, and add naturality including non-flat base change. Each step's citations say what the step uses: flat-proper-fp-locality (base change), relative-lfp-permanence (D->T lfp and X->T lft give i lfp), closed-immersion-quasi-coherent-modules (quasi-coherence and surjectivity), qcoh-kernels-colimits, separated-fp-composition (fp clause). The carrier lemma is applied with Y=T, where X->T is lft. All cited proof nodes are in the item's unit, so no tool_uses are needed. New nodes: all four are statement-only, true as tested, general rather than clauses of the item, and not duplicates. (1) closed-ideal-correspondence (03MB; pullback ideal as an image, checked on Z->F_2 with I=(2)); relative-spec-correspondence 081V implies it only with extra closed-immersion and surjectivity arguments. (2) closed-pushforward-relative-flatness (0DK1 plus the 0D00 argument; flatness over O_T is étale local, so testing on charts of the form U x_X Z suffices); the geometric-stalks node covers abelian stalks only. (3) closed-structure-finite-presentation (084Q, 082T, 0610; closed immersions are qcqs); the scheme version is lem-trf-closed-immersion-finite-presentation-ideal. (4) module-proper-carrier-support (0CZI (2)<=>(3), 07U0/07U1, same lft and finite-type hypotheses); the scheme version is lem-weil-pbc-module-support-proper-over-base. Batch-5 flags: every flagged citation is a general definition (def-trf-algebraic-space, def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors) or the foundational fibre-product lemma lem-trf-space-fibre-products-etale-covers, which the item already cited on base; the closure reaches via existing sfb nodes end only at def-trf-algebraic-space. None is a step of the trace formula or Poincare duality, so accepted. Edge cases checked: empty T, Q=0 with D empty, non-reduced D, non-Noetherian rings. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceHilbertIsQuot",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.properHilbert_is_quot",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceHilbertIsQuot.lean",
+  "statement": "theorem properHilbert_is_quot (a : A ⟶ B) (ha : ProperQuotFinitePresentation a) : ∃ unitIso : ∀ T : ProperQuotTest B, (moduleTensorPullback (properQuotFst a T)).obj (SheafOfModules.unit A.structureSheaf) ≅ SheafOfModules.unit (properQuotFibre a T).structureSheaf, (∀ T : ProperQuotTest B, (unitIso T).hom = ((moduleTensorAdjunction (properQuotFst a T)).homEquiv _ _).symm (moduleStructureMap (properQuotFst a T))) ∧ ∃ e : properHilbertFunctor a ≅ properQuotFunctor a ha (hilbertStructureModule A), (∀ (T : ProperQuotTest B) (C : ProperHilbertFamily a T), ∃ q : ProperQuotient a (SheafOfModules.unit A.structureSheaf) T, e.hom.app (op T) C = Quot.mk _ q ∧ ∃ θ : q.target ≅ (moduleDirectImage C.val.val.arrow).obj (SheafOfModules.unit (C.val.val : AlgebraicSpace S).structureSheaf), q.quotient ≫ θ.hom = (unitIso T).hom ≫ moduleStructureMap C.val.val.arrow) ∧ (∀ (T : ProperQuotTest B) (q : ProperQuotient a (SheafOfModules.unit A.structureSheaf) T), kernelSubobject ((unitIso T).inv ≫ q.quotient) = kernelSubobject (moduleStructureMap (e.inv.app (op T) (Quot.mk _ q)).val.val.arrow))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.hilbertStructureModule_quasicoherent",
+   "AlgebraicGeometry.AlgebraicSpace.hilbertStructureModule",
+   "AlgebraicGeometry.AlgebraicSpace.properHilbert_is_quot"
+  ],
+  "note": "Canonical natural isomorphism, normalized forward map to the structure quotient and inverse kernel-ideal equation. The auxiliary named theorem supplies the implicit quasi-coherence of O_A needed to form the existing Quot presheaf; its module is the existing unit, not a new module construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-774256c7f",
+  "group": "NY",
+  "result": "pass",
+  "note": "Item statement verbatim equal to live; stmt_deps add only new def-sfb-space-proper-hilbert-functor (matches situation-hilb, Subobject classes of actual fibre A_T with proper/flat/fp composite, transitions pinned by ∃! cartesian square, no flatness restriction, not duplicate of scheme-only Hilbert nodes) and landed def-sfb-space-module-structure-map. Lean: Quot of literal unit O_A with sorried helper quasi-coherence theorem (generic isQuasicoherent_unit needs site instances unavailable; no project duplicate); unitIso pinned to adjunct of moduleStructureMap; forward class pinned to [O_{A_T}->i_*O_D] via θ equation; inverse by kernelSubobject equality; NatIso gives naturality for all test maps incl. non-flat. Types/orientation of IsPullback checked; ha is the Quot node's fp predicate; single universe u, Type (u+1). Edge cases (empty T/D, non-reduced, non-Noetherian) admitted. All theorems sorry, docstrings with source and blueprint present, report has Worker report and Second reading sections. No recompile (no file changed)."
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
+  "place": "Paragraph 3: transpose on U; steps 1 and 3 of lem-asd-tensor-mate-etale-precomp."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coefficient first inverse projection formula compact support composition etale sum extension",
+   "results": "No relevant match: FormalMultilinearSeries.rightInv_coeff, MvPowerSeries.coeff_inv and Function.support_comp_eq_preimage.",
+   "date": "2026-10-25",
+   "verdict": "No exact Mathlib statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatibility of tensor projection adjunction mate with composition of adjunctions",
+   "results": "comp_leftAdjointMate, comp_rightAdjointMate and Adjunction.map_μ_comp_counit_app_tensor_assoc are general mate tools; none identifies graph-normalized compact-support composition with sum-extension projection.",
+   "date": "2026-10-25",
+   "verdict": "Use general mate tools in the parent proof; no exact geometric statement."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorMateInverseProjection|etalePrecompProjection|compactSupportProjectionMap in Mathlib, WeilConjectures, Sheaf and dag/nodes",
+   "results": "No existing declaration of either new name. Sheaf.AlgebraicGeometry.ShriekTensorComposition gives compactSupportProjectionMap_comp; EtaleSupportMapCompatibility gives the separate sum-extension comparison square. No combined coefficient-first square exists. Mathlib Adjunction/Mates.lean gives conjugateEquiv_counit.",
+   "date": "2026-10-25",
+   "verdict": "Reuse existing projection and normalization declarations in the new step; the combined square is missing."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SmoothPurity.TensorMateEtalePrecomp",
+  "date": "2026-10-25",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Paragraph 3, projection followed by the composite etale counit.",
+   "via": [
+    "lem-asd-tensor-mate-etale-precomp"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "import_flags": [],
+ "id": "def-asd-tensor-mate-inverse-projection",
+ "kind": "definition",
+ "title": "Coefficient-first inverse compact-support projection",
+ "statement": "Let A be a finite commutative ring, f:X→S a compactifiable morphism of schemes, and K an arbitrary object of the ordinary unbounded derived category D(S_et,A) [def-weil-pbc-derived-categories, def-asd-compactifiable]. Define the natural transformation q_f(K,-):Rf_!(f* K ⊗ᴸ -)→K ⊗ᴸ Rf_!(-) as follows: identify exact inverse image with left derived inverse image, apply the signed symmetry on X, apply the inverse of the compact-support projection P_f, then apply the signed symmetry on S [def-kun-derived-tensor, def-weil-pbc-inverse-image, lem-kun-tensor-sym, lem-amb-shriek-tensor-composition]. The natural transformation is tensorMateInverseProjection. No counit or exceptional right adjoint enters its construction.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-asd-compactifiable",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-inverse-image",
+  "lem-kun-tensor-sym",
+  "lem-amb-shriek-tensor-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SmoothPurity.TensorMateInverseProjection",
+  "file": "lean/Sheaf/SmoothPurity/TensorMateInverseProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.tensorMateInverseProjection",
+  "statement": "def tensorMateInverseProjection\n    (A : Type (v + 1)) [CommRing A] [Finite A]\n    {X S : Scheme.{v}} (f : X ⟶ S) [HasCompactification f]\n    (K : DerivedCategoryModule A S) :\n    (derivedTensor (ModuleCat A) X).obj ((f)^*[ModuleCat A].mapDerivedCategory.obj K) ⋙\n        R(f)_![ModuleCat A] ⟶\n      R(f)_![ModuleCat A] ⋙ (derivedTensor (ModuleCat A) S).obj K",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T144301-L-1223057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261025T144301-L-1223057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

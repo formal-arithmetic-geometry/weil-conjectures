@@ -138,5 +138,64 @@
   "kind": "proof",
   "note": "independent Codex review: The unchanged Lean signature and completed proof match the node’s degree-zero cycle-factor statement; proof dependencies and report agree, compilation is clean, and all three proved declarations use only the permitted axioms."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.isIso_degreeZeroCohomology_cycles_factor"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.isIso_degreeZeroCohomology_cycles_factor",
+     "module": "WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux",
+     "lines": [
+      72,
+      150
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $T$ be a scheme [def-pc-scheme], $G$ an abelian sheaf on its small étale site, and $s:G[0]\\to I^\\bullet$ a quasi-isomorphism with $I^\\bullet$ K-injective [def-sp-kinjective-bridge]. Write $\\Gamma(T,-)$ for global sections and $Z^0$ for the kernel of the degree-zero differential. If $z:\\Gamma(T,G)\\to Z^0(\\Gamma(T,I^\\bullet))$ satisfies $i\\circ z=\\Gamma(T,s^0)$, where $i$ is the inclusion of cycles, then $\\pi\\circ z:\\Gamma(T,G)\\to H^0(\\Gamma(T,I^\\bullet))$ is an isomorphism, where $\\pi$ is the homology projection [def-weil-pbc-etale-cohomology].",
+  "proof": [
+   {
+    "text": "The category of abelian étale sheaves is Grothendieck abelian, hence has enough injectives ([lem-sp-grothendieck-enough-injectives]). Choose an injective resolution $R$ of $G$ in nonnegative degrees, extended by zero to all integer degrees. The incoming differential at degree zero vanishes in both $G[0]$ and $R$. Global sections are additive and left exact, and the incoming differentials vanish, so global sections preserve the homology in degree zero; therefore $H^0$ of $\\Gamma(T,-)$ of the augmentation $\\varepsilon\\colon G[0]\\to R$ is an isomorphism.",
+    "uses": [
+     "lem-sp-grothendieck-enough-injectives"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "$R$ is bounded below and termwise injective, hence K-injective. Maps into the K-injective complex $I^\\bullet$ in the derived category are maps in the homotopy category, so $Q(s)\\,Q(\\varepsilon)^{-1}$, where $Q$ is the localization functor, lifts to a chain map $a\\colon R\\to I^\\bullet$, and $a\\circ\\varepsilon$ is homotopic to $s$. Its image $Q(a)$ is invertible, so $a$ is a quasi-isomorphism; between the two K-injective complexes it is a homotopy equivalence.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Apply $\\Gamma(T,-)$ to this homotopy equivalence and to the homotopy $a\\circ\\varepsilon\\simeq s$. The homotopy equivalence induces an isomorphism $H^0(\\Gamma(T,a))$; homotopy invariance and functoriality of homology identify $H^0(\\Gamma(T,s))$ with $H^0(\\Gamma(T,a))\\circ H^0(\\Gamma(T,\\varepsilon))$, hence it is an isomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "In $\\Gamma(T,G[0])$, the inclusion of cycles and the homology projection in degree zero are isomorphisms because both adjacent differentials are zero. Let $c$ be the identification of $\\Gamma(T,G)$ with the degree-zero cycles of $\\Gamma(T,G[0])$. Cancelling the monomorphism $i$, the hypothesis $i\\circ z=\\Gamma(T,s^0)$ identifies $z$ with $c$ followed by the map induced by $\\Gamma(T,s)$ on degree-zero cycles. Naturality of the homology projection then writes $\\pi\\circ z$ as $c$, followed by the homology projection of $\\Gamma(T,G[0])$ and by $H^0(\\Gamma(T,s))$, a composite of isomorphisms.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

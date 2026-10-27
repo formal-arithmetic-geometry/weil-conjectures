@@ -54,7 +54,30 @@
   "lem-weil-pbc-proper-to-separated"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpaceSource",
+     "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.EmbeddingOver",
+     "lines": [
+      121,
+      130
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -62,5 +85,24 @@
   "item": "lem-weil-pbc-projective-embedding",
   "worker": "lead L",
   "summary": "merged into lemma-weil-pbc-chow-embedding-over-x: the same statement (found by the opus worker of prop-weil-pbc-reduction-to-projective-line); for the symmetric product, the finite/surjective clauses are lem-weil-pbc-symmetric-product-finite and -surjective"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to Y$ be a separated morphism, let $a:T\\to X$ be a morphism and\nlet $b:T\\hookrightarrow\\mathbf P^n_Y$ be a closed immersion with $f\\circ a$\nequal to $b$ followed by the projection $\\mathbf P^n_Y\\to Y$. Then the\ninduced morphism\n\n$$\n (a,b):T\\longrightarrow X\\times_Y\\mathbf P^n_Y\\simeq\\mathbf P^n_X\n$$\n\nis a closed immersion over $X$. In particular, if $f$ is proper, $Y$ is\nNoetherian and $\\pi:\\widetilde X\\to X$ with $i_Y:\\widetilde X\\hookrightarrow\n\\mathbf P^n_Y$ is its Chow modification [cor-chow-lemma-proper], then the map\n$i_X=(\\pi,i_Y):\\widetilde X\\to\\mathbf P^n_X$ is a closed immersion over $X$.",
+  "proof": [
+   {
+    "text": "The composite of $(a,b)$ with the projection\n$X\\times_Y\\mathbf P^n_Y\\to\\mathbf P^n_Y$ is the closed immersion $b$. This\nprojection is the base change of $f$ along $\\mathbf P^n_Y\\to Y$, hence\nseparated. If $g\\circ h$ is a closed immersion and $g$ is separated, then\n$h$ is a closed immersion: $h$ is the graph $T\\to T\\times_{\\mathbf P^n_Y}(X\\times_Y\\mathbf P^n_Y)$,\na closed immersion as a base change of the diagonal of $g$, followed by the\nbase change of the closed immersion $g\\circ h$. Hence $(a,b)$ is a closed\nimmersion. For the special case, a proper morphism is separated and\n$i_Y$ is a closed immersion with $p\\circ i_Y=f\\circ\\pi$ by\n[cor-chow-lemma-proper]; apply\nthe general statement with $T=\\widetilde X$, $a=\\pi$ and $b=i_Y$.",
+    "uses": [
+     "cor-chow-lemma-proper"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-kummer-transport-assembly",
+ "kind": "statement",
+ "title": "Formal assembly of strict Kummer transport and finite class normalization",
+ "statement": "Let A,B,C_n be abelian categories with small Ext groups in a fixed universe and chosen derived categories for A and strict B-systems. Let L be left adjoint to U, and D a simultaneous derived reduction [def-sfb-diagonal-system-interface]. Fix exact additive F_n:C_n to B and V_n:C_n to A, objects S,M,Q_n,P_n, a boundary delta in Ext^1(S,M), generator maps g_n, Kummer classes kappa_n and roots tower R. Suppose the canonically normalized source counit a is invertible, source isomorphisms satisfying a specified sourceNorm predicate and the normalized generator equation exist, and a single strict Kummer target satisfies KummerArrowTransport [lem-sfb-kummer-strict-target-transport] and the specified roots normalization. Let finiteClass be any predicate on finite Ext^2 classes. Suppose its value on the restriction F_n(e) holds whenever e has scalar adjunct minus delta followed by kappa_n. Then normalizedBoundaryTarget holds for finiteClass and these fixed data.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-kummer-strict-target-transport"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Formal assembly of the normalized source, strict target, and finite Cartier class comparison in steps (3)--(4)."
+ },
+ "proof": [
+  {
+   "text": "Unpack the single strict target data and, at each level, its target isomorphism and a source isomorphism with both its sourceNorm predicate and its normalized generator equation. Keep the same H, roots and b.",
+   "uses": [
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold the arbitrary-arrow transport formula and apply it to the fixed source counit, source generator, and delta. It gives a residue-linear e, its scalar-adjunct equation and the equality of its exact restriction with the evaluated strict arrow.",
+   "uses": [
+    "lem-sfb-kummer-strict-target-transport"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the assumed finite-class implication to the scalar-adjunct equation. Substitute the transport evaluation equality into this predicate. This supplies the finite-class component and retains both level normalizations and the same strict-system data.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-kummer-strict-target-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Formal assembly of the normalized source, strict target, and finite Cartier class comparison in steps (3)--(4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A coherent target object and finite-level source isomorphisms with unique normalized extension classes determine the normalized derived boundary",
+   "results": "8 hits: Mathlib.Tactic.BicategoryLike.NormalizedHom; AlgebraicTopology.DoldKan.instReflectsIsomorphismsSimplicialObjectKaroubiChainComplexNatN₁; AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom; CategoryTheory.FreeMonoidalCategory.normalizeIsoApp; SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁; Mathlib.Tactic.BicategoryLike.NormalizedHom.tgt; CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'; AlgebraicTopology.DoldKan.N₁_iso_normalizedMooreComplex_comp_toKaroubi. These concern other normalization constructions.",
+   "date": "2026-10-26",
+   "verdict": "No match for this logical assembly of the project predicates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HEq\", \"congrArg\"",
+   "results": "1 hit: Lean.Meta.CongrArgKind.heq, a metaprogramming datatype constructor rather than an assembly theorem.",
+   "date": "2026-10-26",
+   "verdict": "Use congrArg and ordinary equality composition directly."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedBoundaryTarget|KummerArrowTransport",
+   "results": "0 hits from msearch. Direct project inspection supplies normalizedBoundaryTarget in DiagonalTowerSystemInterface; KummerArrowTransport is the new generic predicate of this packet.",
+   "date": "2026-10-26",
+   "verdict": "No existing assembly theorem; prove the generic logical implication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalKummerReduction",
+  "group": "M2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Formal assembly of the normalized source, strict target, and finite Cartier class comparison in steps (3)--(4).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KummerTransportAssembly",
+  "file": "lean/Sheaf/Paper/KummerTransportAssembly.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.kummer_transport_assembly",
+  "statement": "theorem kummer_transport_assembly\n    (ℓ : ℕ) {A : Type uA} [Category.{vA} A] [abA : Abelian A] [hA : HasExt.{w} A]\n    {B : Type uB} [Category.{vB} B] [abB : Abelian B] [hB : HasExt.{w} B]\n    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]\n    [HasExt.{w} (ℕᵒᵖ ⥤ B)]\n    (L : A ⥤ B) (U : B ⥤ A) (ad : L ⊣ U) (D : DiagonalDerivedReduction ℓ L)\n    (C : ℕ → Type uC) [catC : ∀ n, Category.{vC} (C n)] [abC : ∀ n, Abelian (C n)]\n    [hC : ∀ n, HasExt.{w} (C n)]\n    (F : ∀ n, C n ⥤ B) [Fadd : ∀ n, (F n).Additive]\n    [Flim : ∀ n, PreservesFiniteLimits (F n)]\n    [Fcolim : ∀ n, PreservesFiniteColimits (F n)]\n    (V : ∀ n, C n ⥤ A) [Vadd : ∀ n, (V n).Additive]\n    [Vlim : ∀ n, PreservesFiniteLimits (V n)]\n    [Vcolim : ∀ n, PreservesFiniteColimits (V n)]\n    (S M : A) (δ : Ext S M 1) (rootsTower : ℕᵒᵖ ⥤ A)\n    (Q P : ∀ n, C n) (g : ∀ n, S ⟶ (V n).obj (Q n))\n    (κ : ∀ n, Ext M ((V n).obj (P n)) 1)\n    {sourceNorm : ∀ n, ((D.ordinary.E.obj S).obj (op n) ≅ (F n).obj (Q n)) → Prop}\n    {finiteClass : ∀ n, Ext ((F n).obj (Q n)) ((F n).obj (P n)) 2 → Prop}\n    {rootNorm : ∀ H : ℕᵒᵖ ⥤ B, (H ⋙ U ≅ rootsTower) →\n      ∀ n, (H.obj (op n) ≅ (F n).obj (P n)) → Prop}\n    (a : D.T.obj ((DerivedCategory.singleFunctor _ 0).obj S) ≅\n      (DerivedCategory.singleFunctor _ 0).obj (D.ordinary.E.obj S))\n    (ha : a.hom = diagonalDerivedSingleCounit ℓ L D S)\n    (hs : ∀ n, ∃ s : (D.ordinary.E.obj S).obj (op n) ≅ (F n).obj (Q n),\n      sourceNorm n s)\n    (hg : ∀ n s, sourceNorm n s →\n      HEq (ad.unit.app S ≫ U.map ((D.ordinary.π n).app S ≫ s.hom)) (g n))\n    (ht : Nonempty (KummerTargetData ℓ L U ad D C F V M rootsTower P κ rootNorm))\n    (hc : ∀ n (e : Ext (Q n) (P n) 2),\n      kummerScalarAdjunct (V n) (g n) e =\n        negativeExtProduct δ (κ n) → finiteClass n (exactFunctorExtImage (F n) e)) :\n    normalizedBoundaryTarget ℓ L U D S M δ rootsTower\n      (fun n => (F n).obj (Q n)) (fun n => (F n).obj (P n))\n      sourceNorm rootNorm finiteClass a",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.kummer_transport_assembly"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T012904-L-2344169",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

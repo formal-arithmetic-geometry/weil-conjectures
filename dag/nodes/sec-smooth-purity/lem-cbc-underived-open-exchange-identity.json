@@ -1,0 +1,129 @@
+{
+ "id": "lem-cbc-underived-open-exchange-identity",
+ "kind": "statement",
+ "title": "Identity normalization of the underived open exchange",
+ "statement": "Let $(A,I)$ be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], let $j:U\\to T$ be an open immersion, and let $sq$ be an open-immersion square [def-cbc-open-immersion-square] with horizontal maps $1_U,1_T$ and vertical maps $j,j$. Let $F_X$ be the completed module pullback along $1_X$ and $J$ the ordinary module extension by zero of [lem-cbc-completed-extension-zero-comparison]. Define $u_X:F_X\\cong1$ by the equality cbcDatumModulePull_eq followed by the left-adjoint identity isomorphism of the section-normalized ordinary adjunction and modulePushId of [lem-weil-pbc-completed-ordinary-comparisons]. For every completed-coefficient module $M$ on $U$, the underived inverse exchange $b_M:J(F_U M)\\to F_T(JM)$ satisfies $b_M\\,u_T(JM)=J(u_U(M))$. This is an equality of module morphisms before passing to complexes or derived categories; no quasi-compactness or completeness assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-open-immersion-square",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-pbc-completed-ordinary-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "lemma-shriek-base-change, identity specialization; sites-modules.tex, lemma-localize-morphism-ringed-sites and lemma-adjoint-push-pull-modules."
+ },
+ "proof": [
+  {
+   "text": "Compare cbcCompletedModuleDirectImage with the datum module direct image. Their coefficient maps are adjoints of completedCoefficientMap and integralRingIso.hom, equal by cbcDatumCoefficient_eq. The module pullback equality is cbcDatumModulePull_eq. Transport the datum module adjunction through these equalities: its unit on the small model sends x to the same sheafified tensor 1 tensor x. The tensor/sheafification normalization in cbcModulePullbackAdjunction_exists identifies it with the recorded completed-module adjunction. Thus its left-adjoint identity is exactly u_X.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-weil-pbc-completed-ordinary-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a module N on T and a test object V over U, use the section formula of cbcRightExchange_exists. Its restriction is along the canonical comparison V times_U U to V times_T T. Follow with the direct-image identity on U, or first use the direct-image identity on T and then restrict to U. These section maps coincide: their underlying maps from V to V times_T T both have first projection the identity and second projection V to U to T. Pullback extensionality and functoriality of N restriction prove the equality, including for an empty V. Finite coefficient projection equalities ensure the same completed scalar action.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-weil-pbc-completed-ordinary-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the inverse conjugate under the two composite adjunctions defining cbcUnderivedInverseExchange. Conjugation respects composition and whiskering. The two direct-image identities transpose to u_U and u_T by leftAdjointIdIso. Cancel the intermediate open-adjunction unit and counit using the triangle identities. This gives b_M followed by u_T(JM) equals J(u_U(M)). The proof is entirely in module categories and has no derived or K-flat input.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-weil-pbc-completed-ordinary-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-pbc-completed-ordinary-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "lemma-shriek-base-change, identity specialization; sites-modules.tex, lemma-localize-morphism-ringed-sites and lemma-adjoint-push-pull-modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The adjoint conjugate of a right exchange for an identity square respects the identity isomorphisms of the pullback functors",
+   "results": "8 hits: Adjunction.leftAdjointIdIso, leftAdjointIdIso_hom_app, conjugateEquiv_id, rightAdjointUniq, and general bicategorical conjugation results. None mentions the specified completed-module exchange.",
+   "date": "2026-10-26",
+   "verdict": "general adjunction API only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointIdIso",
+   "results": "6 hits in Mathlib.CategoryTheory.Adjunction.CompositionIso, including the hom/inv component formulas and conjugateEquiv_leftAdjointIdIso_hom. These give the algebraic transposition after checking the concrete right exchange.",
+   "date": "2026-10-26",
+   "verdict": "general API; concrete section identity absent"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(IdIso|NatTrans)|conjugateEquiv.*[Ii]d; local cbcUnderivedInverseExchange|cbcRightExchange|cbcModulePullId",
+   "results": "Mathlib adjunction identity/conjugation API found; local search finds the exchange constructors and normalization but no identity law. Blueprint/DAG identity-exchange candidates concern derived, proper, constant-coefficient or identity-open comparisons, not this underived completed-module identity.",
+   "date": "2026-10-26",
+   "verdict": "no duplicate or exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryOpenExchangeIdentity",
+  "date": "2026-10-26",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Identity part of proof step 7: the sectionwise identity and its adjoint transpose before derivation.",
+   "via": [
+    "lem-cbc-ordinary-open-exchange-identity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryOpenModuleIdentity",
+  "file": "lean/Sheaf/Paper/OrdinaryOpenModuleIdentity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcUnderivedInverseExchange_identity",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcModulePullId",
+   "AlgebraicGeometry.Scheme.cbcUnderivedInverseExchange_identity"
+  ],
+  "statement": "theorem cbcUnderivedInverseExchange_identity\n    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]\n    (sq : OpenImmersionSquare (𝟙 U) j j (𝟙 T))\n    (M : pbcModules U (pbcAdicCompletion U d)) :\n    (cbcUnderivedInverseExchange d sq).app M ≫\n        (cbcModulePullId d T).hom.app ((cbcOpenShriek d j inferInstance).obj M) =\n      (cbcOpenShriek d j inferInstance).map ((cbcModulePullId d U).hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T210727-L-3574966",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T210727-L-3574966",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

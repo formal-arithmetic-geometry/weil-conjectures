@@ -521,7 +521,9 @@
    "WeilConjectures.a1PointLinearRealization",
    "WeilConjectures.a1FiniteFibreStageCoordinates",
    "WeilConjectures.a1FiniteFibreLinearComparison",
-   "WeilConjectures.a1FiniteEtaleWeilFibreComparison"
+   "WeilConjectures.a1FiniteEtaleWeilFibreComparison",
+   "WeilConjectures.a1FiniteFibreModel_locallyOfFiniteType",
+   "WeilConjectures.a1FiniteFibreModel_quasiCompact"
   ],
   "file": "lean/Sheaf/Paper/A1FiniteEtaleWeilFibreComparison.lean",
   "statement": "theorem a1FiniteEtaleWeilFibreComparison [Etale g₀.left] (F : sfCommonStageWeilSheaf D l hl X₀ Ω) : sfCommonStageHeartProperty l (D.geometricFiber Y₀).left Ω (((sfModelWeilDerivedPush D l hl Ω g₀).obj F.obj).carrier) ∧ IsIso (a1FiniteFibreBaseChange D g₀ y ι hι l hl Ω F.obj) ∧ ((sfCommonStageWeilFrobeniusPullback (a1ResidueDatum D Y₀ y ι hι) l hl (sfWeilCohomologyPoint (a1ResidueDatum D Y₀ y ι hι)) Ω).map (a1FiniteFibreBaseChange D g₀ y ι hι l hl Ω F.obj) ≫ ((sfModelWeilDerivedPush (a1ResidueDatum D Y₀ y ι hι) l hl Ω (a1FiniteFibreStructure D g₀ y ι hι)).obj (a1FiniteFibreWeilComplex D g₀ y ι hι l hl Ω F.obj)).str.hom = (a1FiniteFibreStalkPair D g₀ y ι hι l hl Ω F.obj).str.hom ≫ a1FiniteFibreBaseChange D g₀ y ι hι l hl Ω F.obj) ∧ sfCommonStageHeartProperty l ((a1ResidueDatum D Y₀ y ι hι).geometricFiber (sfWeilCohomologyPoint (a1ResidueDatum D Y₀ y ι hι))).left Ω (((sfModelWeilDerivedPush (a1ResidueDatum D Y₀ y ι hι) l hl Ω (a1FiniteFibreStructure D g₀ y ι hι)).obj (a1FiniteFibreWeilComplex D g₀ y ι hι l hl Ω F.obj)).carrier) ∧ Nonempty (((sfModelWeilDerivedPush (a1ResidueDatum D Y₀ y ι hι) l hl Ω (a1FiniteFibreStructure D g₀ y ι hι)).obj (a1FiniteFibreWeilComplex D g₀ y ι hι l hl Ω F.obj)) ≅ (commonStageCompactWeilCohomology (a1ResidueDatum D Y₀ y ι hι) l hl Ω (a1FiniteFibreModel D g₀ y) (Compactification.ofIsProper (a1FiniteFibreModel D g₀ y).hom) (a1FiniteFibreWeilSheaf D g₀ y ι hι l hl Ω F) 0).obj) ∧ Function.Bijective (a1FiniteFibreClosedPointMap D g₀ y) ∧ (∀ x : X₀.left, g₀.left x = y.val → x ∈ closedPoints X₀.left) ∧ (∀ z : (a1FiniteFibreModel D g₀ y).left, IsIso ((pullback.fst g₀.left (Y₀.left.fromSpecResidueField y.val)).residueFieldMap z))",
@@ -540,5 +542,26 @@
   "result": "fix",
   "note": "Substance correct, clause by clause vs the node: finite étale g0 on finite-type models with no separatedness; Rg_*F in the heart, plus a point-free version covering empty Y; actual residue datum L=κ(y) with embedding ι; Z0 is the literal pullback, finite over L; G carries the d_y-iterated Weil structure; b_y is the explicitly constructed counit mate t^*g_*→a_*i^*, with IsIso and b_y F_y = F_{Z/L} b_y relative to L. The Nonempty Weil iso to commonStageCompactWeilCohomology is acceptable because that recorded H_c^0 is itself a .choose. Closed-point bijection, closedness, residue-field iso, and local Frobenius at every stage and lift (the operator, not a trace) are all present. Statement verbatim; 41 declarations match. Compile: the original timed out at 60 s twice at load ~110 and was clean at 41.1 s at load ~60 (worker 53.4 s). The profile showed ~17 s kernel time in a1ResidueStageCarrierIso (eqToIso of choose_spec; _proof_2..6 re-check the defeq). FIX: postponed theorem a1ResidueStageCarrier_eq (sorry, with source/blueprint/proof docstrings); the def is eqToIso of it, the same definition by proof irrelevance; no statement change. Fixed module clean in 24.4 s back to back. Files: fixes/A1FiniteEtaleWeilFibreComparison.lean and fixes/lem-a1-finite-etale-weil-fibre-comparison.lean-record.json (declarations +a1ResidueStageCarrier_eq, 42 names). Advisory: LinearComparison is close to formal; the H_c^0 iso cannot be normalized until that dependency has a canonical proper-case comparison."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261024T185116-L-3401258",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

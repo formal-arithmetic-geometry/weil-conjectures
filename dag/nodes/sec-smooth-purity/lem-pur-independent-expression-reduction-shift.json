@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-independent-expression-reduction-shift",
+ "kind": "lemma",
+ "title": "Pointwise reduction shifts through the explicit independent input context",
+ "status": "split",
+ "statement": "For an independent expression e with interpretation d, a family of functors R_i from input categories C_i into the corresponding interpreted categories, each equipped with a shift comparison, form the pointwise functor R and its componentwise single-input shift isomorphism chi. The map F(chi_K), followed by the input-shift and context endpoint equality transports, equals the map of the selected R_i shift under the explicit context, preceded by the reduction/update endpoint transports. This equality is before applying the context shift and before total limit; its exact equation is IndependentExpression.pointwiseShift_component. The context and endpoint equalities use [def-pur-integral-expression-occurrences], and primitive shift data use [lem-pur-independent-expression-shift-naturality].",
+ "stmt_deps": [
+  "def-pur-integral-expression-occurrences",
+  "lem-pur-independent-expression-shift-naturality"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, canonical maps and integer shifts in independent expression inputs."
+ },
+ "proof": [
+  {
+   "text": "Work with equality of bundled arrows, so both endpoints and the morphism are retained. Induct on the expression to show that evaluation of a family of arrows which is the identity at all occurring labels gives the identity of the evaluation. Next induct along the successful variable-context search: the selected component gives the input case, unary constructors apply the corresponding mapArrow functor, and tensor constructors pair the selected induction equation with the identity equation for the other subtree. Injectivity of the occurrence-label map excludes the selected label from that other subtree. Apply this equation to the hom component of pointwiseInputShiftIso: at the selected label it is the given reduction shift, and at every other label it is the identity. Finally maps of eqToHom are eqToHom; the endpoint transports in the required equation disappear under Arrow.mk on both sides. Injectivity of Arrow.mk for fixed endpoints proves the stated equality.",
+   "uses": [
+    "def-pur-integral-expression-occurrences"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-expression-occurrences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2; R2 realizes the expression/context map induction using bundled-arrow equality and the Mathlib mapArrow API."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A functor on a product category evaluated on a map in one coordinate equals the map of the corresponding single slot context",
+   "results": "8 hits, including CategoryTheory.Functor.pi'_map, CategoryTheory.Pi.eval_map, CategoryTheory.Pi.comap_map. No expression-context comparison.",
+   "date": "2026-10-26",
+   "verdict": "Reuse product functor API; explicit expression recursion is project-specific."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functor congruence transports maps along equality of functors",
+   "results": "8 hits, including CategoryTheory.Functor.congr_hom and CategoryTheory.Functor.hcongr_hom.",
+   "date": "2026-10-26",
+   "verdict": "Provides equality-transport glue, not the independent-context equation."
+  },
+  {
+   "tool": "grep",
+   "query": "Functor.congr_hom|eqToHom_map|Pi.isoMk",
+   "results": "25 hits in Mathlib category theory; generic congruence and equality transport only.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate expression theorem."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOperationShiftData",
+  "date": "2026-10-26",
+  "group": "X6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Step 2, shift coherence for independent expression inputs",
+   "via": [
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.IndependentExpressionReductionShift",
+  "file": "lean/Sheaf/SixFunctors/IndependentExpressionReductionShift.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.IndependentExpression.pointwiseShift_component",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.pointwiseInputShiftIso",
+   "WeilConjectures.IntegralSystemRealization.IndependentExpression.pointwiseContext_evaluate",
+   "WeilConjectures.IntegralSystemRealization.IndependentExpression.pointwiseShift_component"
+  ],
+  "statement": "theorem IndependentExpression.pointwiseShift_component\n    {B : Scheme.{u}} {I : Type u} {X : I → Over B}\n    {C : I → Type v} [∀ i, Category.{w} (C i)] [∀ i, HasShift (C i) ℤ]\n    {D : Scheme.{u} → Type v} [∀ W, Category.{w} (D W)] [∀ W, HasShift (D W) ℤ]\n    (R : ∀ i, C i ⥤ D (X i).left) (a : ∀ i, (R i).CommShift ℤ)\n    (d : Interpretation D) {W : Over B} (e : IndependentExpression B I X W)\n    (K : ∀ i, C i) (i : I) (r : ℤ) :\n    (e.val.evaluate d).map ((pointwiseInputShiftIso R a i r).hom.app K) ≫\n        (e.val.evaluate d).map (eqToHom (inputShift_obj _ ((Functor.pi R).obj K) i r)) ≫\n        eqToHom (e.variableContext_evaluate d ((Functor.pi R).obj K) i\n          (((Functor.pi R).obj K i)⟦r⟧)).1.symm =\n      (e.val.evaluate d).map ((Functor.pi R).map (eqToHom (inputShift_obj _ K i r))) ≫\n        eqToHom (e.pointwiseContext_evaluate R d K i ((K i)⟦r⟧)).symm ≫\n        (e.variableContext d ((Functor.pi R).obj K) i).evaluate.map\n          ((Functor.commShiftIso (R i) (self := a i) r).hom.app (K i))",
+  "branch": "sheaf-dag",
+  "by": "X6",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acd0d",
+  "group": "X6",
+  "result": "fix",
+  "landing": "20261026T003221-L-153828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T023909-L-612930",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

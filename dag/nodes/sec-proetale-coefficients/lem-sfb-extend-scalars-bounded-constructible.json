@@ -133,7 +133,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-e0062a7be (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. All six steps are sound for the current blueprint predicate; no new nodes or repairs. Accepted generic homology and cartesian-coefficient tools. Explicitly distinguished the master’s local-finite-presentation predicate; no category comparison or target weakening is accepted."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalars_obj"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalars_obj",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization",
+     "lines": [
+      116,
+      124
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "existing": true,
   "module": "WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization",
@@ -145,17 +170,49 @@
   "date": "2026-10-17"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "T8",
   "result": "pass",
-  "landing": "20261018T101338-L-3972760",
+  "landing": "20261023T135436-L-2894854",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
   "sorry_before": [
+   "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalars_obj",
    "AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme and $\\varphi\\colon\\cO_{E,X}\\to E_X$ as in\n[def-sfb-integers-to-subfield]. If $K\\in D(\\Mod_{\\cO_{E,X}})$ is bounded constructible\n[det-def-sfb-bounded-constructible], then so is\n$E\\otimes^{\\mathrm L}_{\\cO_E}K=L(\\operatorname{Ext}_\\varphi)(K)\\in D(\\Mod_{E_X})$\n[det-def-sfb-derived-extension-of-scalars].",
+  "proof": [
+   {
+    "text": "*$E_X$ is $\\cO_{E,X}$ with $\\ell$ inverted.* Let $S$ be a profinite set. A continuous map\n$S\\to E$ has compact, hence bounded, image, so\n$C(S,E)=\\bigcup_n\\ell^{-n}C(S,\\cO_E)$. Hence $\\underline E$ is the colimit of\n$\\underline{\\cO}_E\\xrightarrow{\\ell}\\underline{\\cO}_E\\xrightarrow{\\ell}\\cdots$ as a\n$\\underline{\\cO}_E$-module [det-def-sfb-condensed-ring]. This colimit may be computed\nsectionwise: profinite sets are quasi-compact and quasi-separated for the coherent\ntopology, so the sheaf condition involves only finite limits, which commute with filtered\ncolimits. Since $p_X^*$ is a left adjoint, it follows that\n$E_X=\\colim(\\cO_{E,X}\\xrightarrow{\\ell}\\cO_{E,X}\\xrightarrow{\\ell}\\cdots)$ as\n$\\cO_{E,X}$-modules.",
+    "uses": [
+     "det-def-sfb-condensed-ring"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Flatness.* $E_X$ is therefore a filtered colimit of free $\\cO_{E,X}$-modules of rank one.\nSince $\\otimes_{\\cO_{E,X}}$ commutes with colimits and filtered colimits are exact in the\nGrothendieck abelian category of modules [det-prop-sfb-module-category],\n$E_X\\otimes_{\\cO_{E,X}}-$ is exact. So $L(\\operatorname{Ext}_\\varphi)=D(\\operatorname{Ext}_\\varphi)$,\nand $H^n(E\\otimes^{\\mathrm L}_{\\cO_E}K)=E_X\\otimes_{\\cO_{E,X}}H^n(K)$. In particular\nboundedness is preserved.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Constructibility.* Let $M$ be a constructible $\\cO_{E,X}$-module\n[sk-def-sfb-constructible]. Extension of scalars commutes with restriction along a\nmorphism $g$, since $g^*$ is strong monoidal. It is right exact and sends free modules to\nfree modules of the same rank. So it sends a presentation\n$(\\cO_{E,X}|_U)^m\\to(\\cO_{E,X}|_U)^n\\to M|_U\\to0$ on a stratum and a member of a cover to\na presentation of $(E_X\\otimes M)|_U$ over $E_X|_U$. Hence $E_X\\otimes_{\\cO_{E,X}}M$ is\nconstructible, with the same stratification and covers.",
+    "uses": [
+     "sk-def-sfb-constructible"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

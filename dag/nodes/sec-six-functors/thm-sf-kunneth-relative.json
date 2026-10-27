@@ -20,158 +20,57 @@
   "def-weil-closed-immersion",
   "def-pc-fibre-product",
   "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-sf-relative-product-factors"
  ],
  "proof": [
   {
-   "text": "Work in the axiomatized six-functor datum of [def-sf-datum]; this proof uses its explicitly supplied (A2)--(A5), not a claim that defining concrete operations proves those axioms. Put $T=X\\times_BY$ and $h=g\\pi_Y=f\\pi_X$. The base-change theorem [lem-pod-separated-finite-type-base-change] gives that $\\pi_X,\\pi_Y$ are separated of finite type. For composition, the finite affine covers in the finite-type definition compose, and generators for $C$ over $A$ are the images of generators for $B/A$ together with generators for $C/B$. Separatedness of a composite follows because its diagonal is the composite of the diagonal of the first map and a base change of the diagonal of the second; both are closed immersions by the cited closed-immersion base-change and composition statements. Thus $h=g\\pi_Y$ is also separated of finite type. The finite-Tor typing needed below is $L\\pi_X^*K,L\\pi_Y^*L\\in D^b_{ctf}(T,\\Lambda)$ and $Rf_!K\\in D^b_{ctf}(B,\\Lambda)$: at finite coefficients these are precisely clauses (i), (iv) of [thm-sf-ctf-stability]; at the integral and field stages the datum supplies the operations on the stated finite-Tor categories, with the coefficient-passage conventions of that stability statement. No exceptional-image or duality clause of stability is used. Clause (ii) of [thm-sf-ctf-stability] also puts the exterior tensor input in the finite-Tor category. For the finite witnessed composition and the concrete exchange-pasting statements used below, [lem-sf-proetale-constructible-origin](ii) supplies an etale-origin witness for each bounded constructible finite-coefficient input. At the integral stage apply this to every constructible finite reduction in the specified derived-complete construction; at the rational and algebraically closed stages use the integral presentation and a common finite coefficient stage. These are the completed and transported domains of [fix-lem-exchanges], not discrete non-torsion etale coefficient categories.",
+   "text": "Use relative_product_presentation_exists for existence. Compose the six isomorphisms in their defined order. Their hom components are isomorphisms by typeclass inference, and naturality is the naturality equation for this natural transformation at Prod.mkHom a b.",
    "uses": [
-    "def-sf-datum",
-    "thm-sf-ctf-stability",
-    "lem-pod-separated-finite-type-base-change",
-    "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-closed-immersion-comp",
-    "lem-sf-proetale-constructible-origin",
-    "fix-lem-exchanges"
+    "lem-sf-relative-product-coefficient-factor-squares",
+    "def-sf-relative-kunneth-constructions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-    "place": "Proof, typing before (1) and the explanation after (4)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the inverse composition isomorphism of (A4) at $L\\pi_X^*K\\otimes^L_\\Lambda L\\pi_Y^*L$. Its source is $Rh_!(K\\boxtimes L)$ and its target is $Rg_!R\\pi_{Y!}(L\\pi_X^*K\\otimes^L_\\Lambda L\\pi_Y^*L)$. At the finite witnessed pro-etale level this is the canonical $\\alpha_{g,\\pi_Y}^{-1}$ of [thm-sf-comp-composition]; at other stages use its supplied composition isomorphism (A4).",
+   "text": "Apply relative_product_coefficient_factor_squares. Regard each of its six equations as a CommSq and paste them with CommSq.horiz_comp. Functor.map_comp and the hom of an Iso.trans identify the resulting equation with coefficient compatibility of relativeKunnethMap.",
    "uses": [
-    "def-sf-datum",
-    "thm-sf-comp-composition"
+    "lem-sf-relative-product-coefficient-factor-squares"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-    "place": "Proof, (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "The inverse projection transformation $\\operatorname{PF}_{\\pi_Y,L\\pi_X^*K,L}^{-1}$ sends $R\\pi_{Y!}(L\\pi_X^*K\\otimes^L_\\Lambda L\\pi_Y^*L)$ to $R\\pi_{Y!}L\\pi_X^*K\\otimes^L_\\Lambda L$. Its type is exactly [def-sf-pf], and its invertibility is (A3), concretely the all-coefficient projection formula [fix-prop-projection-formula]. Apply $Rg_!$ to this inverse. No symmetry is inserted at this step.",
+   "text": "Take proper-coordinate existence from its stated theorem. Construct the identity coefficient comparison on R, with identity operation comparisons; units and counits are the identity equations. Its recorded normalization follows by cancellation of tensorClosed and its inverse. Apply the coefficient/proper factor theorem to this identity comparison for ProperNormalization. Unfold the conjugated properFactors and cancel the six successive objectIso hom/inv pairs to obtain proper compatibility for any selected proper maps.",
    "uses": [
-    "def-sf-pf",
-    "def-sf-datum",
-    "fix-prop-projection-formula"
+    "lem-sf-relative-product-coefficient-factor-squares"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-    "place": "Proof, (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "The Cartesian square $T\\xrightarrow{\\pi_X}X$, $T\\xrightarrow{\\pi_Y}Y$, $X\\xrightarrow{f}B$, $Y\\xrightarrow{g}B$ has exchange $\\operatorname{Ex}_!:Lg^*Rf_!K\\xrightarrow{\\sim}R\\pi_{Y!}L\\pi_X^*K$ by (A2). Tensor its inverse with $1_L$ and apply $Rg_!$. This gives $Rg_!(Lg^*Rf_!K\\otimes^L_\\Lambda L)$. Tensor symmetry then gives $Rg_!(L\\otimes^L_\\Lambda Lg^*Rf_!K)$.",
+   "text": "Use the cube-factor transport lemma for primitive comparison existence and its seven beta_i. Paste its six separate commuting squares by CommSq.horiz_comp. Rewrite beta_0 and beta_6 by their endpoint equations to obtain exactly the required geometric base-change square.",
    "uses": [
-    "def-sf-datum"
+    "lem-sf-relative-kunneth-cube-factor-transport"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-    "place": "Proof, (3)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply $\\operatorname{PF}_{g,L,Rf_!K}^{-1}$ to the preceding object. Step 1 checked its second variable is in the finite-Tor domain. This gives $Rg_!L\\otimes^L_\\Lambda Rf_!K$, and tensor symmetry gives $Rf_!K\\otimes^L_\\Lambda Rg_!L$. We have used exactly the arrows defining the canonical map in the statement. Each is an isomorphism, so their composite is an isomorphism.",
+   "text": "Apply the independent closed-fibre specialization lemma to R and J for the last clause. It uses the same six isomorphisms on the closed schemes and then the canonical point tensor comparison, without coefficient or cube compatibility.",
    "uses": [
-    "def-sf-pf",
-    "def-sf-datum",
-    "fix-prop-projection-formula"
+    "lem-sf-relative-kunneth-closed-fibre"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-    "place": "Proof, (4)"
-   }
-  },
-  {
-   "text": "Each factor is natural in both inputs: the composition and exchange are natural transformations and the two projection maps are natural by [fix-prop-projection-formula] and [prop-sf-pf-coherence]. The inverse of an invertible natural transformation is natural, and tensoring and applying a functor preserve naturality, so their composite is natural. The coefficient comparison squares for its factors commute by (A5) and projection coherence; composing these squares proves finite-reduction and scalar-extension compatibility. For proper morphisms replace $R(-)_!$ by $R(-)_*$ through the (A4) identification; projection coherence identifies the projection factor with the direct-image factor and (A5) identifies the remaining coefficient comparisons, giving the asserted proper identification. At finite coefficients [cor-cbc-proper-coincidence] says exactly that the compact-support exchange under the canonical proper identification is the proper-base-change exchange; at higher stages use its coefficient-passage compatibility supplied by (A5). Thus the proper comparison is also the specified exchange comparison, not an arbitrary isomorphism between the two functors.",
-   "uses": [
-    "def-sf-datum",
-    "fix-prop-projection-formula",
-    "prop-sf-pf-coherence",
-    "cor-cbc-proper-coincidence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-    "place": "Proof, naturality and coefficient/proper compatibility"
-   }
-  },
-  {
-   "text": "Let $b:B'\\to B$ be a morphism of separated finite-type $k$-schemes, and use primes for all its base changes, with $v:Y'\\to Y$, $u:X'\\to X$, and $w:T'\\to T$. Use the monoidal pullback comparison to identify $Lw^*(K\\boxtimes L)$ with $Lu^*K\\boxtimes Lv^*L$. The exchange pasting equations of [fix-lem-exchanges] identify the square for $Lb^*\\alpha_{g,\\pi_Y}^{-1}$ with that for $\\alpha_{g',\\pi_Y'}^{-1}$. The base-change square of [prop-sf-pf-coherence] for $\\pi_Y$ along $v$, read backwards, identifies the inverse first projection factors. The exchange pasting equations identify the exchanged $R\\pi_{Y!}L\\pi_X^*K$ factors. The same projection-coherence square for $g$ along $b$, again read backwards, identifies the final inverse projection factors. Naturality of tensor symmetry and the monoidal pullback comparison identifies the two symmetry factors. Compose these commuting squares in the order of steps 2--5: the result is exactly the square comparing $Lb^*$ of the stated composite to the composite for $(f',g',Lu^*K,Lv^*L)$ through the exchanges for $f,g,h$. This proves the claimed base-change compatibility without invoking the later relative-product coherence lemma.",
-   "uses": [
-    "fix-lem-exchanges",
-    "prop-sf-pf-coherence",
-    "lem-pur-derived-pullback-tensor-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-    "place": "Proof, coherence (iii), explicitly described after (4)"
-   }
-  },
-  {
-   "text": "Put $B=s=\\operatorname{Spec}k$ and let $i_Z:Z\\hookrightarrow X$, $i_W:W\\hookrightarrow Y$ be closed immersions. The closed-immersion properness statement makes $i_Z,i_W$ separated of finite type, and the composition argument of step 1 makes their structure maps separated of finite type, and pullback stability puts $Li_Z^*K,Li_W^*L$ in the finite-Tor domains. Apply the construction of steps 1--5 to these two schemes. If $r:Z\\times_kW\\to X\\times_kY$ is the product immersion, with projections $\\pi'_X,\\pi'_Y$, monoidality and pullback composition give\n$$Lr^*(L\\pi_X^*K\\otimes^L L\\pi_Y^*L)\\cong L(\\pi_X r)^*K\\otimes^L L(\\pi_Y r)^*L\n\\cong L\\pi'_X^*Li_Z^*K\\otimes^L L\\pi'_Y^*Li_W^*L,$$\nsince $\\pi_X r=i_Z\\pi'_X$ and $\\pi_Y r=i_W\\pi'_Y$. Thus the input is precisely $r^*(K\\boxtimes L)$, rather than an extraordinary restriction or a supported complex.",
-   "uses": [
-    "thm-sf-ctf-stability",
-    "def-weil-closed-immersion",
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-weil-pbc-closed-immersion-proper"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-    "place": "Proof, compact-support specialization"
-   }
-  },
-  {
-   "text": "Invert that specialized isomorphism and apply $\\operatorname{Fib}_s$. By [def-weil-ordinary-compact-cohomology], the three compact-support direct images become the corresponding $R\\Gamma_c$ complexes. The canonical tensor comparison of [lem-sf-point-fibre-derived-tensor] identifies the fibre of the tensor product with the tensor product of the two fibres. The resulting isomorphism is exactly the displayed closed-subscheme compact-support product formula. This argument uses restrictions $Li_Z^*,Li_W^*$; it makes no assertion about the distinct cohomology-with-support functor of [def-pur-support-cohomology].",
-   "uses": [
-    "def-weil-ordinary-compact-cohomology",
-    "lem-sf-point-fibre-derived-tensor",
-    "def-pur-support-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-    "place": "Proof, final compact-support display"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "cor-cbc-proper-coincidence",
-  "def-pur-support-cohomology",
-  "def-sf-datum",
-  "def-sf-pf",
-  "def-weil-closed-immersion",
-  "def-weil-finite-type-morphism",
-  "def-weil-ordinary-compact-cohomology",
-  "def-weil-proper-morphism",
-  "fix-lem-exchanges",
-  "fix-prop-projection-formula",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-pur-derived-pullback-tensor-iso",
-  "lem-sf-point-fibre-derived-tensor",
-  "lem-sf-proetale-constructible-origin",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-closed-immersion-comp",
-  "lem-weil-pbc-closed-immersion-proper",
-  "prop-sf-pf-coherence",
-  "thm-sf-comp-composition",
-  "thm-sf-ctf-stability"
+  "def-sf-relative-kunneth-constructions",
+  "lem-sf-relative-kunneth-closed-fibre",
+  "lem-sf-relative-kunneth-cube-factor-transport",
+  "lem-sf-relative-product-coefficient-factor-squares"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
-  "place": "Proof (1)--(4), base-change paragraph, compact-support specialization; expanded explicitly"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Six arrows; coefficient and proper squares; coherence (iii); final compact-support display. Lean assembly with two remaining independent obligations."
  },
  "mathlib_searches": [
   {
@@ -245,41 +144,53 @@
   "def-sf-pf"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-kunneth-relative",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "item": "thm-sf-kunneth-relative",
   "worker": "stage1",
-  "summary": "Expanded the four canonical arrows without changing their order; checked finite-Tor typing, coefficient and proper comparisons, proved the base-change square by its constituent commuting squares, and derived the closed-subscheme formula using pullback monoidality and the point-fibre tensor interface. Corrected an out-of-domain base-change quantifier and replaced a dangling bibliographic pointer by prose. The Lean relative theorem has sorry and supplies no attachment. Maintainer review made the finite etale-origin witnesses explicit using the existing constructible-origin equivalence, including at finite reductions of higher coefficient inputs.",
-  "blueprint": "Steps 1--5 realize the typing and four arrows of the unit; 6--7 its naturality, coefficient/proper and base-change clauses; 8--9 its closed-subscheme compact-support specialization. Symmetry/triple-product coherence remains the existing lem-sf-kunneth-coherence.",
+  "summary": "Repair of the 7294-character returned split: extracted three statement-only independent tasks for all input domains, coefficient/proper factor squares, and Cartesian base-change factor squares. The original argument is preserved verbatim with a step-to-task map in report.md. Parent retains the ordered canonical arrows and the closed-subscheme specialization; statement unchanged. All new tasks searched in Mathlib by two phrasings plus LeanSearch, Loogle and source grep.",
+  "blueprint": "The three new tasks carry the typing before (1), the naturality/coefficient/proper sentence, and coherence (iii). Parent step 2 realizes (1)--(4); steps 5--6 realize the final specialization. The broader symmetry/triple-product coherence remains the separate downstream node.",
   "tool_uses": [
    {
     "node": "thm-sf-ctf-stability",
-    "why": "Only pullback and compact-support finite-Tor preservation type the two projection formula inputs and the restrictions; the unit itself explicitly calls these forward results."
+    "why": "Only pullback preservation types the closed-subscheme restriction inputs; no duality clause is used."
    },
    {
     "node": "lem-pur-derived-pullback-tensor-iso",
-    "why": "Generic monoidal pullback and composition comparisons identify the external products under restrictions and base change; they do not replace the four-arrow unit route."
+    "why": "Generic monoidal pullback and composition identify the restricted exterior product."
    }
   ]
  },
- "tool_uses": [
-  "thm-sf-ctf-stability",
-  "lem-pur-derived-pullback-tensor-iso"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q20-be34b7866",
-  "group": "Q20",
+  "reviewer": "NT-cc-Q102-eb2f75a96",
+  "group": "Q102",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-be34b7866 (reviewer sub-agent of L); spot-checked: Read the mathematics and cited sources in full. Repaired the missing constructible-origin citation for witnessed exchange/composition domains and completed the new node’s creator/date metadata. Statements unchanged; canonical arrows, coefficient stages, restriction formula, edge cases, duplicates and tool uses checked. Full findings in review.md; corrected JSON files under fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-eb2f75a96 (reviewer sub-agent of L); spot-checked: Faithful re-split under the 2026-10-21 note. The item is still unsplit-base in live and side-live, so nothing supersedes it. The statement is byte-identical to base and there is no SGA. Each of the 9 base steps has a place: step 1 → lem-sf-relative-product-input-domains; step 6 → lem-sf-relative-product-coefficient-factor-squares; step 7 → lem-sf-relative-product-base-change-factor-squares; steps 2–5 → parent step 2 (same six arrows, same order); steps 8–9 → parent steps 5–6. The parent is 2400 characters (2512 after the fix). The new statements are 2268/2793/2985 characters, statement-only and acyclic, and none restates the item. I checked them against main-20261015 _section/proof, coherence (iii), and the statements of def-sf-datum A2–A5, def-sf-pf, ctf-stability (i)(ii)(iv)(vii), proetale-constructible-origin (ii), fix-lem-exchanges pasting, prop-sf-pf-coherence base-change and proper clauses, cor-cbc-proper-coincidence and lem-pur-derived-pullback-tensor-iso. All three new statements are true. Checks: T'=T×_Y Y', ut=xu', and the d_2 square is the horizontal pasting of the big square in two ways; f proper ⇒ v proper; tested on b=id, empty X, and identity maps. Not duplicates: lem-pur-relative-product-geometric-factors covers only finite-level geometry; lem-sf-kunneth-coherence (iii) is the downstream composite. Two fixes. (1) B3: the base-change node used 'witnessed finite domains' without its definition; I added a def-weil-pbc-etale-origin-witness citation and stmt_dep. (2) C4/E1: parent step 6 did not check the D^b_ctf(s) hypothesis of lem-sf-point-fibre-derived-tensor; I added it via step 1 applied in step 5, and added input-domains to that step's uses. Tool uses thm-sf-ctf-stability and lem-pur-derived-pullback-tensor-iso are accepted, as on the base. The base remark identifying α with thm-sf-comp-composition was dropped; the statement does not need it, because the map is defined from (A4).; 2 file(s) fixed by the reviewer"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "In the setting of [def-sf-datum], let $B$ be a separated finite-type\n$k$-scheme, $f:X\\to B$, $g:Y\\to B$ separated finite type, $p,q$ the\nprojections of $X\\times_BY$ (so $f\\times_Bg=g\\circ q$), and put $K\\boxtimes L=p^*K\\otimes^L_\\Lambda q^*L$ for $K\\in D^b_{ctf}(X,\\Lambda)$, $L\\in D^b_{ctf}(Y,\\Lambda)$.\nDefine the canonical map as the composite of the inverse of the\ncomposition isomorphism $Rg_!Rq_!\\cong R(f\\times_Bg)_!$ of (A4), the inverse\nof the projection transformation of [def-sf-pf] for $q$ at $(p^*K,L)$, the\ninverse of the base-change exchange\n$\\operatorname{Ex}_!:Lg^*Rf_!K\\to Rq_!Lp^*K$ of (A2), the symmetry of\n$\\otimes^L_\\Lambda$, and the inverse of the projection transformation for $g$\nat $(L,Rf_!K)$ followed by the symmetry, i.e. of the four steps of the proof\nbelow. Then this\ncanonical map\n\n$$\nR(f\\times_Bg)_!\\bigl(K\\boxtimes L\\bigr)\\xrightarrow{\\ \\sim\\ }\nRf_!K\\otimes^L_\\Lambda Rg_!L\n$$\n\nis an isomorphism, natural in $K$ and $L$, compatible with base change\n$B'\\to B$, finite reduction, scalar extension, and with the\nidentifications $Rf_!\\cong Rf_*$ for proper $f$. For $B=\\operatorname{Spec}k$\nand closed immersions $i_Z:Z\\hookrightarrow X$, $i_W:W\\hookrightarrow Y$,\nit gives the compact-support product on the closed subschemes:\n\n$$\nR\\Gamma_c(Z,i_Z^*K)\\otimes^L_\\Lambda R\\Gamma_c(W,i_W^*L)\n\\cong R\\Gamma_c(Z\\times_kW,(i_Z\\times i_W)^*(K\\boxtimes L)).\n$$\n\nThis is cohomology of the restrictions to the closed subschemes.\nCohomology with supports $R\\Gamma_Z(X,K)=R\\Gamma(Z,Ri_Z^!K)$ is a different\nobject from $R\\Gamma_c(Z,i_Z^*K)$; its product formula over\n$\\operatorname{Spec}k$ is [lem-pur-kunneth-supported]. Over a general base\n$B$ the supports version fails, so only the compact-support form is stated\nrelatively.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "In the setting of [def-sf-datum], let $B$ be a separated finite-type\n$k$-scheme, $f:X\\to B$, $g:Y\\to B$ separated finite type, $p,q$ the\nprojections of $X\\times_BY$ (so $f\\times_Bg=g\\circ q$), and put $K\\boxtimes L=p^*K\\otimes^L_\\Lambda q^*L$ for $K\\in D^b_{ctf}(X,\\Lambda)$, $L\\in D^b_{ctf}(Y,\\Lambda)$.\nDefine the canonical map as the composite of the inverse of the\ncomposition isomorphism $Rg_!Rq_!\\cong R(f\\times_Bg)_!$ of (A4), the inverse\nof the projection transformation of [def-sf-pf] for $q$ at $(p^*K,L)$, the\ninverse of the base-change exchange\n$\\operatorname{Ex}_!:Lg^*Rf_!K\\to Rq_!Lp^*K$ of (A2), the symmetry of\n$\\otimes^L_\\Lambda$, and the inverse of the projection transformation for $g$\nat $(L,Rf_!K)$ followed by the symmetry, i.e. of the four steps of the proof\nbelow. Then this\ncanonical map\n\n$$\nR(f\\times_Bg)_!\\bigl(K\\boxtimes L\\bigr)\\xrightarrow{\\ \\sim\\ }\nRf_!K\\otimes^L_\\Lambda Rg_!L\n$$\n\nis an isomorphism, natural in $K$ and $L$, compatible with base change\n$B'\\to B$ and with the identifications $Rf_!\\cong Rf_*$ for proper $f$. For $B=\\operatorname{Spec}k$\nand closed immersions $i_Z:Z\\hookrightarrow X$, $i_W:W\\hookrightarrow Y$,\nit gives the compact-support product on the closed subschemes:\n\n$$\nR\\Gamma_c(Z,i_Z^*K)\\otimes^L_\\Lambda R\\Gamma_c(W,i_W^*L)\n\\cong R\\Gamma_c(Z\\times_kW,(i_Z\\times i_W)^*(K\\boxtimes L)).\n$$\n\nThis is cohomology of the restrictions to the closed subschemes.\nCohomology with supports $R\\Gamma_Z(X,K)=R\\Gamma(Z,Ri_Z^!K)$ is a different\nobject from $R\\Gamma_c(Z,i_Z^*K)$; its product formula over\n$\\operatorname{Spec}k$ is [lem-pur-kunneth-supported]. Over a general base\n$B$ the supports version fails, so only the compact-support form is stated\nrelatively.",
   "proof": [
    {
     "text": "The operations are those of [def-sf-datum] and [def-sf-pf],\ncohomology with supports has its separate meaning in\n[def-pur-support-cohomology].\nStep 1: by (A4), $R(f\\times_Bg)_!=Rg_!\\circ Rq_!$, so\n$R(f\\times_Bg)_!(K\\boxtimes L)=Rg_!\\bigl(Rq_!(q^*L\\otimes^L_\\Lambda p^*K)\\bigr)$. Step 2: the projection formula (A3) for $q$, whose target is\n$Y$, gives $Rq_!(q^*L\\otimes^L p^*K)\\cong L\\otimes^L_\\Lambda Rq_!(p^*K)$.\nStep 3: base change (A2) for the Cartesian square with $p,q,f,g$ gives\n$Rq_!(p^*K)\\cong Lg^*Rf_!K$. Step 4: applying the projection formula to\n$g$ with first variable $L$ and second variable $Rf_!K$ gives\n$Rg_!\\bigl(L\\otimes^L_\\Lambda Lg^*Rf_!K\\bigr)\\cong Rg_!L\\otimes^L_\\Lambda Rf_!K$, which is the displayed isomorphism. Step 5:\napply the same formula to the separated finite-type morphisms\n$Z\\to\\operatorname{Spec}k$, $W\\to\\operatorname{Spec}k$ and the\npullbacks $i_Z^*K,i_W^*L$. Pullback preserves their finite-Tor\nhypotheses, and the exterior product is the pullback of $K\\boxtimes L$.\nThis proves the claimed compact-support formula on the closed subschemes.",
@@ -291,6 +202,38 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeKunneth",
+  "declaration": "WeilConjectures.relativeKunneth",
+  "declarations": [
+   "WeilConjectures.relativeKunneth"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeKunneth.lean",
+  "statement": "theorem relativeKunneth\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (S : SixFunctorDatum D C E n hn) (s : PodCoefficientStage)\n    (Q : SixFunctorCompactifiedSquare D)\n    [IsSeparated Q.Y.obj.hom] [IsSeparated Q.f.hom.left]\n    [IsSeparated Q.g.hom.left] [IsSeparated Q.g'.hom.left] [IsSeparated Q.f'.hom.left]\n    (cg : Compactification Q.g.hom.left)\n    (ch : Compactification (Q.f' ≫ Q.g).hom.left) :\n    Nonempty (RelativeProductPresentation S s Q) ∧\n    ∀ R : RelativeProductPresentation S s Q,\n      (∀ K L, IsIso ((relativeKunnethMap R cg ch).app (K, L))) ∧\n      (∀ K K' L L' (a : K ⟶ K') (b : L ⟶ L'),\n        ((relativeProductTerms Q cg ch 0).eval\n          R.coordinates.operations R.coordinates.tensor).map (Prod.mkHom a b) ≫\n            (relativeKunnethMap R cg ch).app (K', L') =\n          (relativeKunnethMap R cg ch).app (K, L) ≫\n            ((relativeProductTerms Q cg ch 6).eval\n              R.coordinates.operations R.coordinates.tensor).map (Prod.mkHom a b)) ∧\n      (∀ (E' : Type u) [Field E'] [Algebra (Padic C.l) E']\n        [FiniteDimensional (Padic C.l) E'] (n' : ℕ) (hn' : 1 ≤ n')\n        (S' : SixFunctorDatum D C E' n' hn') (s' : PodCoefficientStage)\n        (R' : RelativeProductPresentation S' s' Q) (A : RelativeProductCoefficientData R R'),\n        A.RecordedComparison → ∀ K L,\n          (A.functor Q.Y).map ((relativeKunnethMap R cg ch).app (K, L)) ≫\n              (A.objectIso cg ch 6).hom.app (K, L) =\n            (A.objectIso cg ch 0).hom.app (K, L) ≫\n              (relativeKunnethMap R' cg ch).app\n                ((A.functor Q.X).obj K, (A.functor Q.Y').obj L)) ∧\n      (Nonempty (RelativeProductProperCoordinates R.coordinates) ∧\n        ∀ J : RelativeProductProperCoordinates R.coordinates,\n          R.ProperNormalization J ∧\n          ∀ (q : ∀ {X Y : SixFunctorSpace D}, (X ⟶ Y) → Bool)\n            (hq : ∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y),\n              q f = true → IsProper f.hom.left) K L,\n            (relativeKunnethMap R cg ch).app (K, L) ≫\n                (J.objectIso q hq (relativeProductTerms Q cg ch 6)).hom.app (K, L) =\n              (J.objectIso q hq (relativeProductTerms Q cg ch 0)).hom.app (K, L) ≫\n                ((R.properFactors J q hq cg ch 0 ≪≫\n                  R.properFactors J q hq cg ch 1 ≪≫ R.properFactors J q hq cg ch 2 ≪≫\n                  R.properFactors J q hq cg ch 3 ≪≫ R.properFactors J q hq cg ch 4 ≪≫\n                  R.properFactors J q hq cg ch 5).hom.app (K, L))) ∧\n      (∀ (Q' : SixFunctorCompactifiedSquare D)\n        [IsSeparated Q'.g.hom.left] [IsSeparated Q'.g'.hom.left]\n        [IsSeparated Q'.f'.hom.left]\n        (R' : RelativeProductPresentation S s Q')\n        (cg' : Compactification Q'.g.hom.left)\n        (ch' : Compactification (Q'.f' ≫ Q'.g).hom.left)\n        (G : RelativeKunnethCube Q Q' cg ch cg' ch'),\n        Nonempty (RelativeKunnethCubeComparisons R R' G) ∧\n        ∀ (A : RelativeKunnethCubeComparisons R R' G) K L,\n          (R'.coordinates.operations.pull G.b G.separated_b).map\n              ((relativeKunnethMap R cg ch).app (K, L)) ≫ (A.targetIso K L).hom =\n            (A.sourceIso K L).hom ≫\n              (relativeKunnethMap R' cg' ch').app\n                ((R'.coordinates.operations.pull G.x G.separated_x).obj K,\n                 (R'.coordinates.operations.pull G.y G.separated_y).obj L)) ∧\n      (∀ (Q' : SixFunctorCompactifiedSquare D) (J : RelativeKunnethClosedSquare Q Q'),\n        relativeKunnethClosedFormula R J)",
+  "branch": "sheaf-dag",
+  "by": "N7",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All four coefficient stages. Canonical six-factor composite, naturality, recorded coefficient comparisons, proper normalizations and conjugate maps, arbitrary Cartesian base-change cube with canonically normalized primitive comparisons (existence concluded), and ordinary closed-restriction RΓc coefficient-complex formula. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a7bdbfc1",
+  "group": "N7",
+  "result": "pass",
+  "note": "Statement matches node at all four stages: canonical six-factor composite pinned by the normalized presentation (A4, PF, Ex, signed symmetry), iso + naturality, recorded coefficient square for the same A, proper conjugation for any selected proper occurrences, arbitrary Cartesian base-change cube with pinned primitive comparisons (existence concluded), closed-subscheme RΓc derived-iso formula with ordinary restrictions. Statement field unchanged; lean.statement verbatim; no hollow defs; only theorems sorry. Restored Q51 module (dropped by red build b3f31b5, JSON left dangling) is a valid §1(B) repair: diff vs 138b6bd shows only imports, blueprint tags and the two _exists theorems moved. Advisories: (1) Q18 base-change lemma (landed 03:19, before base de7d98) has parallel theorem-owned RelativeProductBaseChange.* defs; report's 'no live module' is out of date; rebind later. (2) Five uncited definition-node owners used by the item helpers (def-pur-completed-pullback-tensor-comparison, def-sfb-proetale-tensor-model, def-weil-finite-torsion-constructibility, def-weil-point-fd-qlbar-category, def-pur-finite-pullback-tensor-comparison, the last cited by the new def node); def-sf-rational-common-tensor-symmetries is uncited by the def node. (3) Closed formula is a Nonempty iso. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b2e9",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261025T201243-L-2368212",
+  "kind": "interface",
+  "note": "independent cc review: relativeKunneth statement byte-identical to published; 12 moved declarations have identical type and value Expr hashes in the sandbox and published builds; two new sorry lemmas checked against the item's closed and base-change clauses and their nodes; 3 direct importers compiled against the delivered modules"
  }
 }

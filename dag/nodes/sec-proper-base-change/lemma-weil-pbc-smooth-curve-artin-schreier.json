@@ -215,7 +215,32 @@
   "def-weil-pbc-eight-curve-assertions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations",
+     "lines": [
+      791,
+      805
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -327,5 +352,52 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NY-8cbe3ebd0 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full; checked all six steps, cited statements, Stacks sources, unit/chapter route, edge cases, duplicate candidates and dependency cycles. The canonical Frobenius kernel map and literal F_p coefficients are preserved. No repairs needed. Detailed checks and accepted tool_uses are recorded in review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be algebraically closed of characteristic $p>0$ and let $C$ be a\nsmooth separated finite-type scheme of dimension at most one (not\nnecessarily connected). Then the constant sheaf $\\underline{\\mathbf F_p}$\nsatisfies all eight assertions $\\mathcal C_1,\\dots,\\mathcal C_8$ of\n[def-weil-pbc-eight-curve-assertions]; $\\mathcal C_4$ and $\\mathcal C_6$\nhold because their hypothesis (torsion prime to $p$) forces the sheaf to\nvanish.",
+  "proof": [
+   {
+    "text": "The Artin–Schreier sequence on the etale site is\n\n$$\n0\\longrightarrow\\underline{\\mathbf F_p}\\longrightarrow\\mathcal O_C\n\\xrightarrow{F-1}\\mathcal O_C\\longrightarrow0.\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Exactness on the right is checked on an etale neighbourhood by adjoining a\nroot of $T^p-T-a$; its derivative is $-1$, so that neighbourhood is etale.\nEtale cohomology of the quasi-coherent sheaf $\\mathcal O_C$ equals its\nZariski cohomology.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "If $C$ is affine, $H^q(C,\\mathcal O_C)=0$ for $q>0$. The long exact\nsequence gives\n\n$$\nH^1(C,\\mathbf F_p)=\n\\operatorname{coker}\\bigl(F-1:\\Gamma(C,\\mathcal O_C)\\to\n\\Gamma(C,\\mathcal O_C)\\bigr),\\qquad\nH^q(C,\\mathbf F_p)=0\\quad(q>1).\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "This proves assertions (1)–(3) and (8) in the affine case; assertions (5)\nand (7) concern proper curves, and (4) and (6) are vacuous for the\n$p$-torsion sheaf $\\underline{\\mathbf F_p}$ unless $C$ is empty. Points\nhave no higher cohomology, and finite disjoint unions commute with all maps\nconsidered, so we may assume $C$ connected.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Suppose $C$ is proper and connected. Then\n$H^0(C,\\mathcal O_C)=k$, $H^q(C,\\mathcal O_C)=0$ for $q>1$, and\n$E=H^1(C,\\mathcal O_C)$ has dimension $g$. Since $a\\mapsto a^p-a$ is\nsurjective on the algebraically closed field $k$, the long exact sequence\nreduces to\n\n$$\nH^1(C,\\mathbf F_p)=\\ker(F-1:E\\to E),\\qquad\nH^2(C,\\mathbf F_p)=\\operatorname{coker}(F-1:E\\to E).\n$$",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Choose a basis of $E$. The additive map $F-1$ is a morphism\n$\\mathbf A_k^g\\to\\mathbf A_k^g$ whose derivative is $-\\operatorname{id}$.\nIts kernel is therefore zero-dimensional etale and finite. The image is an\nopen subgroup of the connected additive group $\\mathbf A_k^g$, hence is the\nwhole group. Thus the cokernel is zero and the kernel is a finite\n$\\mathbf F_p$-vector space.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Proper coherent base change identifies\n$E\\otimes_kk'$ with $H^1(C_{k'},\\mathcal O_{C_{k'}})$ and carries Frobenius\nto Frobenius. The finite etale kernel of $F-1$ is a finite disjoint union\nof copies of $\\operatorname{Spec}k$; after an algebraically closed extension\nit has the same geometric points. Hence\n$H^1(C,\\mathbf F_p)\\to H^1(C_{k'},\\mathbf F_p)$ is an isomorphism, while\ndegree zero is $\\mathbf F_p$ and all degrees above one vanish. This proves\n(1), (3), (5), (7), and (8) in the proper case.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

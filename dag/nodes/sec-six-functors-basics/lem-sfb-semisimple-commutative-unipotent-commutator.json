@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-semisimple-commutative-unipotent-commutator",
+ "kind": "statement",
+ "title": "Commutator decomposition for semisimple conjugation on a commutative unipotent group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Groups are affine group schemes [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A point $s\\in H(k)$ is semisimple if its image under every finite-dimensional algebraic representation $H\\to\\operatorname{GL}(V)$ is diagonalizable; an algebraic representation is a homomorphism of group schemes, $V$ is a finite-dimensional $k$-vector space, and $\\operatorname{GL}(V)(A)$ is the group of invertible $A$-linear maps on $V\\otimes_k A$. Let $H$ be smooth and connected and $N\\subseteq H$ a smooth connected commutative normal subgroup which is unipotent: there is a closed immersion $N\\hookrightarrow U_m$ for some $m\\geq1$, where $U_m(A)$ consists of upper triangular $m\\times m$ matrices with diagonal entries $1$ for each commutative $k$-algebra $A$. Let $s\\in H(k)$ be semisimple. Define the centralizer $K=C_N(s)$ by $K(A)=\\{n\\in N(A):s_A n=n s_A\\}$; it is the closed subscheme equalizing conjugation by $s$ and the identity on $N$ [def-weil-closed-immersion, def-pc-fibre-product]. Then $K$ is connected. Moreover, for every $x\\in N(k)$ there exist $u\\in N(k)$ and $v\\in K(k)$ such that $x=[s,u]v$, where $[s,u]=sus^{-1}u^{-1}$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.39, printed p.338. The rational-point decomposition is the rational-point consequence of its surjective morphism $N\times C_N(s)\to N$ over an algebraically closed field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $a(n)=sns^{-1}$ and $c(n)=a(n)n^{-1}$. Normality of $N$ makes $a$ an automorphism of $N$. For every $k$-algebra $A$ and $n_1,n_2\\in N(A)$, commutativity gives $c(n_1n_2)=a(n_1)a(n_2)n_2^{-1}n_1^{-1}=c(n_1)c(n_2)$. Thus $c:N\\to N$ is a group-scheme homomorphism, and its scheme-theoretic kernel is exactly $K$. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to write $c=j\\circ q$, where $q:N\\to M$ is faithfully flat and finitely presented and $j:M\\hookrightarrow N$ is a closed immersion. All groups are affine and finite type, and hence separated, as required by that node. By [lem-sfb-group-hom-dimension-kernel-image], $\\dim N=\\dim M+\\dim K$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-group-hom-dimension-kernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.39, printed p.338: commutator homomorphism, image and equation (121)"
+   }
+  },
+  {
+   "text": "We will lift rational points along $q$. Every fibre over $y\\in M(k)$ is a nonempty affine finite-type $k$-scheme, since $q$ is surjective and is a morphism between affine finite-type schemes. Its coordinate algebra $B\\ne0$ has a maximal ideal. Apply [lem-sfb-cardinal-generator-nullstellensatz] to a finite algebra-generating set of $B$: the cardinal bound holds because an algebraically closed field is infinite. The residue field is algebraic over $k$, hence equals $k$: the minimal polynomial of each algebraic element splits into linear factors over $k$, so that element belongs to $k$. This supplies a point of the fibre over $k$. The same argument applies below to fibres of any surjective homomorphism between the affine finite-type groups under consideration.",
+   "uses": [
+    "lem-sfb-cardinal-generator-nullstellensatz"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.39, printed p.338: lifting the point in the commutator image; the same elementary fibre argument will give the final rational-point conclusion"
+   }
+  },
+  {
+   "text": "Let $x\\in(M\\cap K)(k)$ and choose $u\\in N(k)$ with $x=c(u)$ by step 2. The equality $x=sus^{-1}u^{-1}$ gives $x^{-1}s=usu^{-1}$, and $x$ commutes with $s$. Obtain a faithful finite-dimensional representation $\\rho:H\\hookrightarrow\\operatorname{GL}(V)$ from [lem-sfb-central-torus-faithful-weight-blocks], with the central torus $T=1=\\mathbf G_m^0$. Restrict $\\rho$ to $N$. The stipulated immersion $N\\hookrightarrow U_m\\hookrightarrow\\operatorname{GL}_m$ is faithful and sends $x$ to a unipotent matrix: its difference from the identity is strictly upper triangular, whose $m$th power is zero. Therefore [lem-sfb-rational-representation-unipotent-point], applied to $N$ and these two representations, makes $X=\\rho(x)$ unipotent. Also $X^{-1}$ is unipotent, since $X^{-1}-1=-X^{-1}(X-1)$ and the two factors commute. Set $S=\\rho(s)$, which is diagonalizable by the hypothesis on $s$. The commuting product $X^{-1}S=\\rho(u)S\\rho(u)^{-1}$ is itself diagonalizable, by conjugating an eigenbasis of $S$. It therefore has decompositions $(S,X^{-1})$ and $(X^{-1}S,1)$ into commuting diagonalizable and unipotent factors. Uniqueness in [lem-sfb-multiplicative-jordan-linear-compatibility] forces $X^{-1}=1$. Faithfulness of $\\rho$ gives $x=1$. Thus $(M\\cap K)(k)=\\{1\\}$.",
+   "uses": [
+    "lem-sfb-central-torus-faithful-weight-blocks",
+    "lem-sfb-rational-representation-unipotent-point",
+    "lem-sfb-multiplicative-jordan-linear-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.39, printed p.338: intersection with the centralizer and uniqueness of the Jordan decomposition"
+   }
+  },
+  {
+   "text": "The multiplication morphism $\\mu:M\\times_kK\\to N$ is a homomorphism because $N$ is commutative. Its kernel $D$ is isomorphic as a group scheme to $M\\cap K$: on every $k$-algebra the mutually inverse maps are $z\\mapsto(z,z^{-1})$ and $(m,v)\\mapsto m$, since $mv=1$ is equivalent to $v=m^{-1}$. Consequently $D(k)=\\{1\\}$ by step 3. Write $D=\\operatorname{Spec}B$ with $B$ a nonzero finite-type $k$-algebra. By [lem-sfb-cardinal-generator-nullstellensatz], every maximal ideal has residue field $k$ by the argument of step 2, hence defines a $k$-point; there is therefore just one maximal ideal $\\mathfrak m$. The same cited node says that every prime is the intersection of maximal ideals containing it; that intersection is now $\\mathfrak m$. Thus $\\operatorname{Spec}B$ consists of exactly one point. It follows directly that $D$ is connected and $\\dim D=0$. This argument allows nilpotents in $B$; it does not assert that the kernel scheme is trivial or smooth.",
+   "uses": [
+    "lem-sfb-cardinal-generator-nullstellensatz"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.39, printed p.338: scheme-theoretic kernel of multiplication: connectedness and dimension zero, retaining possible infinitesimal structure"
+   }
+  },
+  {
+   "text": "By [lem-sfb-scheme-product-dimension], $\\dim(M\\times_kK)=\\dim M+\\dim K$ for the dimension of [def-pc-dimension]; both factors are nonempty because they are group schemes. By [lem-pc-scheme-dimension-local-rings] this dimension equals the topological Krull dimension used in [lem-sfb-group-hom-dimension-kernel-image], for $M\\times_kK$, $M$ and $K$ alike, so step 1 gives $\\dim(M\\times_kK)=\\dim N$ topologically. The kernel of $\\mu$ has dimension zero by step 4, and the target $N$ is smooth and connected by hypothesis. The surjectivity criterion in [lem-sfb-group-hom-dimension-kernel-image] therefore says that $\\mu$ is faithfully flat. Apply [lem-sfb-connected-group-extension] to $\\mu$, whose connected kernel is $D$ and whose connected target is $N$. It follows that $M\\times_kK$ is connected. Its projection onto $K$ is a continuous surjection, since it has the section $v\\mapsto(1,v)$, so $K$ is connected. No smoothness of $D$ is needed.",
+   "uses": [
+    "lem-sfb-scheme-product-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-sfb-group-hom-dimension-kernel-image",
+    "lem-sfb-connected-group-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.39, printed p.338: surjectivity of multiplication and connectedness by Proposition 5.59"
+   }
+  },
+  {
+   "text": "For $x\\in N(k)$ the surjectivity of $\\mu$ gives a nonempty affine finite-type fibre. Apply [lem-sfb-cardinal-generator-nullstellensatz] exactly as in step 2 to find $(m,v)\\in M(k)\\times K(k)$ in that fibre; thus $x=mv$. Step 2 applied to $q$ gives $u\\in N(k)$ with $c(u)=m$. Consequently $x=[s,u]v$, which is the required decomposition.",
+   "uses": [
+    "lem-sfb-cardinal-generator-nullstellensatz"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.39, printed p.338: rational-point consequence of the surjective composite $N\times C_N(s)\to N$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-group-hom-dimension-kernel-image",
+  "lem-sfb-cardinal-generator-nullstellensatz",
+  "lem-sfb-central-torus-faithful-weight-blocks",
+  "lem-sfb-rational-representation-unipotent-point",
+  "lem-sfb-multiplicative-jordan-linear-compatibility",
+  "lem-sfb-scheme-product-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sfb-connected-group-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.39, printed p.338, with the scheme-theoretic singleton-kernel argument and rational-point lifting made explicit; Proposition 5.23/Remark 5.42, p.104/108, and Proposition 5.59(a), p.114."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple element acting by conjugation on a smooth connected commutative unipotent normal subgroup has connected fixed subgroup and every element is a commutator times a fixed element",
+   "results": "8 hits: MulAction.IwasawaStructure.commutator_le, upperCentralSeriesStep, upperCentralSeriesAux, Sylow.normalizer_le_centralizer_or_le_commutator, Sylow.commutator_eq_bot_or_commutator_eq_self, LieAlgebra.exists_isCartanSubalgebra_engel, Sylow.conj_eq_normalizer_conj_of_mem, LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra. Read returned signatures; these are abstract group actions, Lie algebras, linear Jordan decompositions or general smoothness statements, not this scheme-theoretic fixed-subscheme assertion. Logged digest 4d7599966f3e9f27.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"commutator\", \"IsConnected\"",
+   "results": "0 hits: . Read returned signatures; these are abstract group actions, Lie algebras, linear Jordan decompositions or general smoothness statements, not this scheme-theoretic fixed-subscheme assertion. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple|unipotent|centralizer",
+   "results": "0 hits: . Read returned signatures; these are abstract group actions, Lie algebras, linear Jordan decompositions or general smoothness statements, not this scheme-theoretic fixed-subscheme assertion. Logged digest 4f53cda18c2baa0c. Mathlib/AlgebraicGeometry/ searched.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimple automorphism of a commutative unipotent algebraic group gives a connected fixed group and decomposition into fixed points and commutators",
+   "results": "8 hits: FixedPoints.subalgebra, Module.End.exists_isNilpotent_isSemisimple, Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow, Module.End.IsSemisimple.of_mem_adjoin_singleton, AlgEquiv.aut, FixedPoints.toAlgAut_bijective, ConjAct.fixedPoints_eq_center, AddAction.fixedBy_mem_fixedBy_of_addCommute. Read returned signatures; these are abstract group actions, Lie algebras, linear Jordan decompositions or general smoothness statements, not this scheme-theoretic fixed-subscheme assertion. Logged digest 689d5e75063b35f0.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple element of an algebraic group acting on a commutative unipotent normal subgroup gives a connected centralizer and decomposition into fixed points and commutators",
+   "results": "8 hits: LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful, Module.End.IsSemisimple.of_mem_adjoin_pair, LieAlgebra.exists_isCartanSubalgebra_engel, LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra, LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf, LieAlgebra.IsSemisimple.booleanGenerators, LieModule.isCompl_genWeightSpace_zero_posFittingComp, Module.End.exists_isNilpotent_isSemisimple.  Logged digest c502bc2af4efdd9a.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract centralizers, Lie algebras and linear endomorphisms do not give the scheme-theoretic connectedness and rational-point decomposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"IsConnected\"",
+   "results": "0 hits: none.  Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract centralizers, Lie algebras and linear endomorphisms do not give the scheme-theoretic connectedness and rational-point decomposition"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple|unipotent|centralizer",
+   "results": "0 hits: none.  Logged digest 4f53cda18c2baa0c. Searched Mathlib/AlgebraicGeometry/.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract centralizers, Lie algebras and linear endomorphisms do not give the scheme-theoretic connectedness and rational-point decomposition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Commutative unipotent algebraic group centralizer of a semisimple element is connected and every element is a commutator times a fixed point",
+   "results": "8 hits: Subgroup.mem_centralizer_iff_commutator_eq_one, Subgroup.centralizer, commutator_centralizer_commutator_le_center, AddSubgroup.centralizer, AddSubsemigroup.centralizer, ConjAct.fixedPoints_eq_center, Subsemigroup.centralizer, AddSubgroup.centralizer_univ.  Logged digest 503d300c858a2d4a.",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract centralizers, Lie algebras and linear endomorphisms do not give the scheme-theoretic connectedness and rational-point decomposition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-solvable-semisimple-centralizer-connected",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Lemma 16.39, printed p.338. The rational-point decomposition is the rational-point consequence of its surjective morphism $N\times C_N(s)\to N$ over an algebraically closed field.",
+   "via": [
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semisimple-commutative-unipotent-commutator",
+  "worker": "stage1",
+  "summary": "Read Milne Lemma 16.39 and its kernel-image dimension and connected-extension inputs. Preserved the statement; wrote the commutator map, rational-point lifting, faithful-matrix Jordan comparison, singleton kernel topology, dimension-based surjectivity and connectedness argument. Added two statement-only generic algebraic-group lemmas; reused all other existing inputs, including the product dimension and Nullstellensatz nodes. No Lean writing or compilation.",
+  "blueprint": "The latest blueprint direct-images proof (3) is the inherited alteration/moduli route. Read latest/sk-thm-sf-ctf-stability/_section.md and direct-images.proof.md; its imported ancestor is absent (blueprint_refs ancestor returns None), so retained null from.node and the existing exact supporting chain. These six steps realize Milne 16.39 below 16.40 and the torus centralizer prerequisite in that chain. Whole-blueprint searches for semisimple, commutator, connected kernel, homomorphism dimension, kernel dimension, extension connected and the Milne places found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-cardinal-generator-nullstellensatz",
+    "why": "A generic finite-generation Nullstellensatz supplies rational points of nonempty affine fibres and detects the singleton kernel topology; no algebraic-group statement in the unit replaces this commutative-algebra tool."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Step 5 compares the local-ring dimension of lem-sfb-scheme-product-dimension (def-pc-dimension) with the topological Krull dimension of lem-sfb-group-hom-dimension-kernel-image; generic scheme-dimension identification (Stacks 04MU), no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-cardinal-generator-nullstellensatz",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-6183d34a5",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-6183d34a5 (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Lemma 16.39 (p.338) with the standing assumptions of §16(e), Prop. 5.23 (p.104) and Prop. 5.59(a) (p.114). The item's statement is unchanged from the base and keeps every hypothesis of 16.39; it states the rational-point form of the surjectivity, which 16.40 uses. Steps 1-4 and 6 hold. Step 1: c is a homomorphism by commutativity and is factored by lem-sfb-algebraic-group-homomorphism-factorization, which applies because affine groups are separated. Step 2 lifts points through the Nullstellensatz node. Step 3 is the Jordan uniqueness argument (x^{-1}s=usu^{-1} recomputed), using the faithful representation from the central-torus node with r=0 and the unipotent-point node. Step 4 gets a one-point spectrum from the two Nullstellensatz clauses without claiming the kernel is reduced. Step 6 gets x=[s,u]v. FIX (C1/C4): step 5 compared the local-ring dimension of lem-sfb-scheme-product-dimension (def-pc-dimension) with the topological Krull dimension of the new dimension node without citing anything. It now cites lem-pc-scheme-dimension-local-rings (Stacks 04MU), added to proof_deps and split_report.tool_uses. This is a generic off-unit tool with precedent; its closure has no trf/pd node and no cycle. New nodes: lem-sfb-group-hom-dimension-kernel-image (5.23 plus the full-dimension image criterion for a smooth connected target; tested on Frobenius/alpha_p, the zero map, a proper inclusion and the identity) and lem-sfb-connected-group-extension (5.59(a) without smoothness; tested on alpha_p, and the mu_n converse is not claimed) are true, self-contained, statement-only, not duplicates and not item clauses. Advisory: clause 1 of the dimension node overlaps the existing unsplit lem-sfb-homogeneous-quotient-krull-dimension; whoever splits it should cite that node. Batch 5: the factorization node reaches lem-trf-fppf-covering-base-change, a Mathlib leaf for Stacks 021O (fppf coverings stable under base change), along with generic algebraic-space infrastructure. Milne 5.39 is not a statement or proof step of the trace formula or Poincaré duality, so the citation is accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

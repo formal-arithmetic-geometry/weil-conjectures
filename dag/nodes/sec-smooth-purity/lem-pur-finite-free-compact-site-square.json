@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-finite-free-compact-site-square",
+ "kind": "statement",
+ "title": "Mixed scalar/site square for the concrete compact-support coefficient map",
+ "statement": "Let A and B be finite commutative rings and let phi:A→B make B finite free over A. For noetherian schemes X,Y, a compactification c of f:X→Y, bounded-below etale derived objects L over A and N over B, and gamma:N≅S_X L, the concrete coefficient arrow obeys SiteCompatibility(phi,c,L,N,gamma) [def-pur-finite-free-compact-support-data]. This asserts only the mixed scalar/site square, not invertibility, origins, naturality, composition, or refinement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Current Steps 1 and 4 (coefficient compatibility), using the ordinary compact-support construction in Step 3; the original parent calls these Steps 1 and 3."
+ },
+ "stmt_deps": [
+  "def-pur-finite-free-compact-support-data"
+ ],
+ "proof": [
+  {
+   "text": "Instantiate the two ringed-site systems of the mixed pasting theorem with the ordinary etale and proetale sites. Identify inverse-image balancing using the scalar pullback cube, proper right mates using the fixed direct-image counits, and open left mates using open units. These identify the concrete scalarMate, openIso, and the scalar transpose defining coefficientMap true.",
+   "uses": [
+    "lem-pur-topos-compact-scalar-site-pasting",
+    "lem-sfb-etale-proetale-scalar-pullback-cube",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-sf-comparison-open-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste proper and open squares, then use naturality of the compact-support site comparison to transport the B-input along gamma. The two gamma occurrences cancel. The equality is in the B-linear derived category; neither scalar restriction nor site pullback is claimed faithful.",
+   "uses": [
+    "lem-pur-compact-support-site-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-compact-support-site-coherence",
+  "lem-pur-topos-compact-scalar-site-pasting",
+  "lem-sf-comparison-open-tensor-coherence",
+  "lem-sfb-etale-proetale-scalar-pullback-cube",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Current Steps 1 and 4 (coefficient compatibility), using the ordinary compact-support construction in Step 3; the original parent calls these Steps 1 and 3.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free coefficient extension commutes with composition and refinement of compact support derived direct image",
+   "results": "{\"t\": \"2026-10-25T15:37:03Z\", \"tool\": \"leanfinder\", \"query\": \"Finite free coefficient extension commutes with composition and refinement of compact support derived direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactlySupportedContinuousMap.compLinearMap\", \"ContDiffMapSupportedIn.postcompCLM_apply\", \"CompactlySupportedContinuousMap.comp_assoc\", \"ContDiffMapSupportedIn.postcompLM_apply\", \"CompactlySupportedContinuousMap.compNonUnitalAlgHom\", \"CompactlySupportedContinuousMap.comp\", \"CompactlySupportedContinuousMap.coe_comp_to_continuous_fun\", \"ContDiffMapSupportedIn.postcompLM\"], \"digest\": \"2b7226e132523ff3\"}",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\", \"naturality\"",
+   "results": "{\"t\": \"2026-10-25T15:39:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction\\\", \\\"homEquiv\\\", \\\"naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_naturality_left\", \"CategoryTheory.Adjunction.homEquiv_naturality_right\", \"CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left\", \"CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right\", \"CategoryTheory.Adjunction.homEquiv_naturality_left_symm\", \"CategoryTheory.Adjunction.homEquiv_naturality_right_symm\", \"CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left_symm\", \"CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_right_symm\"], \"digest\": \"c7270464f2da8891\"}",
+   "date": "2026-10-25",
+   "verdict": "Useful elementary glue only."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*naturality|compactSupport.*composition|compactSupport.*refinement",
+   "results": "{\"t\": \"2026-10-25T15:40:52Z\", \"tool\": \"grep\", \"query\": \"compactSupport.*naturality|compactSupport.*composition|compactSupport.*refinement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "No direct concrete match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeCompactSupportComposition",
+  "date": "2026-10-26",
+  "group": "K9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Current Steps 1 and 4 (coefficient compatibility), using the ordinary compact-support construction in Step 3; the original parent calls these Steps 1 and 3.",
+   "via": [
+    "lem-pur-finite-free-compact-composition",
+    "lem-pur-finite-universal-smooth-trace",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeCompactSupportSiteSquare",
+  "file": "lean/Sheaf/Paper/FiniteFreeCompactSupportSiteSquare.lean",
+  "declaration": "AlgebraicGeometry.FiniteFreeCompactSupport.finiteFree_site_square",
+  "statement": "theorem finiteFree_site_square\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (hφ : letI := φ.toAlgebra; Module.Finite A B ∧ Module.Free A B)\n    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n    {f : X ⟶ Y} (c : Compactification f)\n    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (N : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (γ : N.obj ≅ (Sites.scalar false φ X).obj L.obj) :\n    SiteCompatibility φ c L N γ",
+  "branch": "sheaf-dag",
+  "by": "K9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7eba",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T202525-L-2725300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7eba",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261025T202525-L-2725300",
+  "kind": "interface",
+  "note": "independent cc review: the delivered item, data and square modules and four node files against the clone (theorem signature identical; nine definitions moved without change) and against the original conjuncts; compiled them with the direct importer FiniteUniversalSmoothTrace in a /tmp sandbox (all compiled)"
+ }
+}

@@ -1,0 +1,115 @@
+{
+ "id": "def-trf-integral-scalar-tower-functors",
+ "kind": "definition",
+ "title": "Canonical integral scalar quotient tower and strict Roos functors",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and let $E,L$ be finite extensions of $\\mathbf Q_\\ell$ with a $\\mathbf Q_\\ell$-embedding $\\iota:E\\to L$, valuation rings and fixed uniformizers [def-weil-l-adic-coefficient-extension]. Let $Y$ be a scheme with its small pro-etale site [def-weil-pbc-proetale-site] and constant ring sheaves [def-weil-pbc-constant-sheaf]. Put $A_{H,n+1}=\\mathcal O_H/\\varpi_H^{n+1}$ and $R_H=\\varprojlim_{n\\ge0}(A_{H,n+1})_Y$ for $H=E,L$, with their actual quotient projections [def-weil-completed-integral-coefficients]. The valuation-ring inclusion induces $j_n:A_{E,n+1}\\to A_{L,n+1}$; define $\\rho_n:R_E\\to(A_{L,n+1})_Y$ as the source projection followed by $(j_n)_Y$. For an unbounded complex $P$ of $R_E$-module sheaves, define $B_n(P)=\\operatorname{Res}_{R_L\\to(A_{L,n+1})_Y}((A_{L,n+1})_Y\\otimes_{R_E,\\rho_n}P)$ termwise by sheafified tensor and restriction of scalars [def-pur-sheaf-tensor-product] and [def-pc-sheaf-restrict-scalars], using the ordinary coefficient-change functor of [lem-pur-derived-change-of-rings]. Define the sheafified pure-tensor section $s\\otimes x$ through the sheafification unit and the prescribed identification with that ordinary functor. Define $\\tau_n:B_{n+1}\\to B_n$ to be the unique natural chain map sending every such section $s\\otimes x$ to $\\operatorname{red}(s)\\otimes x$. Define the strict functor $T:P\\mapsto(B_n(P),\\tau_n)_{n\\ge0}$ with its termwise tensor action on all chain maps. Define $C(P)=\\operatorname{Roos}(T(P))$, with the signed mapping cocone and diagonal maps of [def-sf-strict-roos-functor]. Finally define $C_{\\mathrm{good}}$ as inclusion of flat-term K-flat complexes [def-a1-flat-term-kflat-complex], followed by $C$ and complex localization $Q$ [def-weil-abstract-derived-category]. The scheme and coefficient universes are independent. These are concrete functors, not assertions of quasi-isomorphism preservation or localization descent.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "def-sf-strict-roos-functor",
+  "def-a1-flat-term-kflat-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), quotient-completion realization; Bhatt--Scholze Proposition 6.8.14(1), Definition 3.4.10 and Proposition 3.5.1(3), strict quotient tower before localization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The strict scalar extension quotient tower of sheaf complexes with canonical quotient transitions and its Roos complex functor restricted to flat term K flat representatives",
+   "results": "8 hits: Submodule.Quotient.isScalarTower, Algebra.Extension.instIsScalarTowerRing, Module.Flat.rTensor_shortComplex_exact, SheafOfModules.restrictScalars, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, comonadicExtendScalars, IsLocalRing.ResidueField.instIsScalarTower_1. No exact Mathlib match; these are generic completion, tensor, sheaf or augmentation constructions. Project search finds the exact existing declarations in Sheaf.Paper.IntegralScalarExtensionWellDefined (lines 591-650). No definition DAG node owns them; blueprint_refs search returns no match.",
+   "date": "2026-10-22",
+   "verdict": "existing project declaration; new definition-node ownership only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor from sheaf complexes to their scalar extension quotient towers with transition sending s tensor x to reduction s tensor x and diagonal Roos maps",
+   "results": "8 hits: SheafOfModules.Presentation.map, SheafOfModules.Presentation.mapRelations, SheafOfModules.mapFree, SheafOfModules.Presentation.mapGenerators, localCohomology.diagram, LightCondensed.free, CategoryTheory.Sheaf.cohomologyPresheafFunctor, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf. No exact Mathlib match; these are generic completion, tensor, sheaf or augmentation constructions. Project search finds the exact existing declarations in Sheaf.Paper.IntegralScalarExtensionWellDefined (lines 591-650). No definition DAG node owns them; blueprint_refs search returns no match.",
+   "date": "2026-10-22",
+   "verdict": "existing project declaration; new definition-node ownership only"
+  },
+  {
+   "tool": "grep",
+   "query": "completedScalarIdentityUnit|integralScalarTowerFunctor|integralScalarOnGood|integralScalarTransition",
+   "results": "0 hits: . No exact Mathlib match; these are generic completion, tensor, sheaf or augmentation constructions. Project search finds the exact existing declarations in Sheaf.Paper.IntegralScalarExtensionWellDefined (lines 591-650). No definition DAG node owns them; blueprint_refs search returns no match.",
+   "date": "2026-10-22",
+   "verdict": "existing project declaration; new definition-node ownership only"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-quotient-augmentation-diagram",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), quotient tower and normalized completion augmentation",
+   "via": [
+    "lem-trf-point-quotient-augmentation-diagram",
+    "lem-trf-point-sections-completion-cone",
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralScalarExtensionWellDefined",
+  "declaration": "WeilConjectures.integralScalarTowerFunctor",
+  "declarations": [
+   "WeilConjectures.integralScalarRho",
+   "WeilConjectures.integralScalarLevel",
+   "WeilConjectures.integralScalarTensorSection",
+   "WeilConjectures.integralScalarTransition_existsUnique",
+   "WeilConjectures.integralScalarTransition",
+   "WeilConjectures.integralScalarTowerFunctor",
+   "WeilConjectures.integralScalarComplexFunctor",
+   "WeilConjectures.integralScalarOnGood"
+  ],
+  "statement": "def integralScalarTowerFunctor :\n    CochainComplex (integralTowerModules l E Y) ℤ ⥤\n      (ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l L Y) ℤ)",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "H2 ownership repair requested by the independent return of 677d8cb2e92f. Owns integralScalarTransition, integralScalarTowerFunctor, integralScalarComplexFunctor and integralScalarOnGood, with their existing level and pure-tensor normalization and proved transition constructor. These definitions are not constructed from integralScalarExtensionWellDefined. No module or declaration is added or changed; the enclosing comparison/well-definedness theorem is not a statement dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7740ef618",
+  "group": "ND",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7740ef618",
+  "group": "ND",
+  "result": "pass",
+  "note": "Second re-delivery after RETURN 677d8cb2e92f (H2 ownership). Lean module byte-identical (sha256 a9b038e5…); item node differs only in stmt_deps: theorem lem-weil-finite-free-completed-scalar-comparison replaced by new def-trf-completed-scalar-identity-unit, and def-trf-integral-scalar-tower-functors added. Both new nodes are existing:true on unchanged modules (live = side-live). Unit node matches completedScalarIdentityUnit_existsUnique (l.1071): zero mappingCocone.snd, fst/π_n = integralScalarTensorSection … 1 x, unique .choose, any P, independent universes; statement verbatim l.1115-1117. Tower node matches integralScalarRho/OrdinaryLevel/Level/TensorSection/Transition_existsUnique/TowerFunctor/ComplexFunctor/OnGood (l.259-650); statement verbatim l.631-633. Its theorem stmt_dep lem-pur-derived-change-of-rings is accepted: derivedChangeRingIndependentCoefficients is tagged to it, and the parent def-weil-integral-scalar-extension and about 20 def nodes cite it the same way. Acyclic: neither new node reaches the item; no missing records; no other def owner; no parallel collision. Item math unchanged from the prior clause-by-clause check (RoosCoordinates, a_P, χ pin, m = cΓ(ι), whole-arrow/chain/roof/descent/IsDerivedLimit; edge cases K=0, n=1, non-invertible χ). Report sections present; only sorry is the main theorem. Advisories: intermediate helpers (QuotientMap, Reduction*, OrdinaryLevel, completedScalarRoosEndomorphism) stay listed only under the theorem node; branch field sheaf-dag. No compile (no FIX)."
+ }
+}

@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-graph-cone-gluing",
+ "kind": "statement",
+ "title": "Affine graph conormal algebras glue without separatedness",
+ "statement": "Let $f:X\\to T$ be a morphism of schemes and $i:Z\\hookrightarrow X$ a closed immersion [def-pc-scheme, def-weil-closed-immersion]. For affine opens $V\\subset T$ and $U\\subset f^{-1}(V)$ put $Z_U=Z\\times_XU$ and $Y_U=U\\times_VZ_U$ [def-pc-fibre-product]. The graph $s_U:Z_U\\to Y_U$ is closed; write $J_U$ for its ideal sheaf. The conormal algebras $\\bigoplus_{n\\ge0}J_U^n/J_U^{n+1}$ [lem-pur-conormal-graded-algebra] have canonical identifications on affine refinements of overlaps, carrying each homogeneous class to its restriction. These identifications satisfy identity and cocycle laws and glue, including their units and multiplications, to a quasi-coherent graded $\\mathcal O_Z$-algebra $\\mathcal G(f,i)$ independent of the affine choices. Its degree-zero part is $\\mathcal O_Z$. The relative Proj $P(f,i)=\\operatorname{Proj}_Z\\mathcal G(f,i)$ [def-nagata-relative-proj] exists with the stated affine restrictions. Both $\\mathcal G(f,i)$ and $P(f,i)$ are canonically functorial under isomorphisms of the diagram $Z\\hookrightarrow X\\to T$. If $f$ is locally of finite type [def-weil-finite-type-morphism] and $i$ is its first-Fitting singular inclusion [def-trf-first-fitting-singular-subscheme], then $P(f,i)$ is canonically the actual branch scheme $B_f$ of [def-sfb-nodal-branch-scheme], compatibly with its projection to $Z$. No separatedness, nodal, flatness or quasi-compactness assumption is required. The global graph need not be closed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0630; Tag 0633; Tag 04TR; Tag 0CBT. Divisors definition-conormal-sheaf and lemma-affine-conormal-sheaf; Sites lemma-glue-sheaves; Curves remark-quadratic-extension (3). Agent relative construction: old item Steps 2-3, including identification with the fixed graph exceptional fibre."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "lem-pur-conormal-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-weil-finite-type-morphism",
+  "def-trf-first-fitting-singular-subscheme",
+  "def-sfb-nodal-branch-scheme",
+  "def-pc-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $V=\\operatorname{Spec}R$, $U=\\operatorname{Spec}A$. Since $i$ is closed, $Z_U=\\operatorname{Spec}B$ with $B=A/K$ for an ideal $K$. By [lem-weil-pbc-fibre-product-affine-spectra], $Y_U=\\operatorname{Spec}(A\\otimes_R B)$. The graph corresponds to $\\mu:A\\otimes_R B\\to B$, $a\\otimes b\\mapsto\\bar a b$: its two components are $i|_{Z_U}$ and the identity, as required by [def-pc-fibre-product]. The map is surjective since $\\mu(1\\otimes b)=b$. The affine criterion in [def-weil-closed-immersion] therefore makes $s_U$ closed. This proves closedness locally without asserting closedness of the global graph.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4, 01JQ, lemma-fibre-product-affine-schemes and lemma-fibre-product-affines; Tag 01QO, affine criterion for closed immersions"
+   }
+  },
+  {
+   "text": "Put $Y=X\\times_T Z$ and $s=(i,1_Z):Z\\to Y$. Its composite with $Y\\to X$ is $i$, a closed immersion and hence an immersion. Apply [lem-zl-immersion-cancellation] to obtain that $s$ is an immersion. By the factorization defining immersion in [def-weil-closed-immersion], choose an open $W\\subseteq Y$ through which $s$ factors as a closed immersion $j:Z\\hookrightarrow W$. Let $J$ be its ideal. Apply [lem-pur-conormal-graded-algebra] to $j$, obtaining the quasi-coherent graded $\\mathcal O_Z$-algebra $G$ with product $[a][b]=[ab]$ and $G_0=\\mathcal O_Z$. This constructs a global algebra from an actual closed immersion, with no separatedness or finiteness assumption.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "lem-zl-immersion-cancellation",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Section 0630, definition-conormal-sheaf and preceding construction for immersions; Morphisms Tag 07RK, lemma-immersion-permanence (1)"
+   }
+  },
+  {
+   "text": "The canonical map $Y_U\\to Y$ identifies $Y_U$ with the open $U\\times_T Z_U$: because both factors map into $V$, the fibre product over $V$ equals the one over $T$. Its openness follows by applying [lem-weil-pbc-open-immersion-base-change] to the two open inclusions. The inverse image under $s$ of this open is exactly $Z_U$. Put $O_U=W\\cap Y_U$. The two closed immersions $Z_U\\hookrightarrow Y_U$ and $Z\\hookrightarrow W$ restrict on $O_U$ to the same closed immersion $Z_U\\hookrightarrow O_U$. An open immersion is flat: by [def-weil-open-immersion] its local-ring maps are isomorphisms, so the module in [def-weil-flat-morphism] is the rank-one free module over that same ring. Apply [lem-pur-conormal-algebra-flat-base-change] to $O_U\\to Y_U$ and $O_U\\to W$. The centre maps are respectively $1_{Z_U}$ and $Z_U\\to Z$. This gives a graded algebra isomorphism $\\alpha_U:G|_{Z_U}\\xrightarrow{\\sim}G(s_U)$. Its affine formula sends a homogeneous ideal class to its restriction, exactly the formula $[a]\\otimes r\\mapsto[g^\\sharp(a)r]$ in that cited statement.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "lem-pur-conormal-algebra-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0634 and 0635, lemma-conormal-algebra-functorial and lemma-conormal-algebra-functorial-flat; Schemes Tag 01JY, open base change"
+   }
+  },
+  {
+   "text": "For a refinement $(U',V')$ of $(U,V)$, the restrictions in the preceding step carry $[a]$ to $[a|]$ in every degree. Hence the comparison obtained through $\\alpha_U$ and $\\alpha_{U'}$ is the direct restriction comparison. On any overlap $Z_U\\cap Z_{U'}$ define the transition as $\\alpha_{U'}\\alpha_U^{-1}$, with both maps restricted to that overlap. This has identity when the indices coincide, inverse upon reversing them, and on triple overlaps its two composites agree by cancellation of $\\alpha_{U'}^{-1}\\alpha_{U'}$. Every comparison preserves products and units, since restriction sends $ab$ to $a|\\,b|$ and $1$ to $1$. On affine refinements these are precisely the homogeneous-class maps required in the statement. We use affine covers of the overlaps, never assume an intersection is affine.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0633–0635, affine restriction formulas for the conormal algebra"
+   }
+  },
+  {
+   "text": "The $Z_U$ cover $Z$, and the isomorphisms $\\alpha_U$ identify the displayed local algebras, their products and their units with restrictions of the already constructed $G$. Thus $G$ is their gluing. This gluing is independent of the affine cover: use the union of two covers and the same transition maps of the preceding step. It is also independent of the choice of $W$: for a second closed neighbourhood $W'$ compare both with $W\\cap W'$ by the same open flat-base-change maps of [lem-pur-conormal-algebra-flat-base-change]. Each comparison is the identity on restricted ideal representatives; consequently the pairwise comparisons have identity and cocycle laws, by the same cancellation calculation as above. Set $\\mathcal G(f,i)=G$. Its quasi-coherence and its degree-zero identification are those already supplied by [lem-pur-conormal-graded-algebra].",
+   "uses": [
+    "lem-pur-conormal-algebra-flat-base-change",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0630, 0633 and 0635, construction, affine compatibility and flat restriction of the conormal algebra"
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-relative-proj-exists] to the quasi-coherent graded algebra $G$: this gives $P(f,i)=\\operatorname{Proj}_Z G$ with the asserted restrictions over every affine open of $Z$, hence in particular over each affine $Z_U$. Indeed $Z_U$ is affine by Step 1. The restriction maps are those induced by the same graded restrictions, and their compatibility and independence of affine choices are included in the cited existence statement. A degree-preserving algebra isomorphism induces the corresponding Proj isomorphism by [prop-nagata-relative-proj-functoriality] (2). Thus all the algebra identifications above also identify the corresponding relative Proj schemes over the centres.",
+   "uses": [
+    "lemma-nagata-relative-proj-exists",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NQ, lemma-glue-relative-proj; functoriality of Proj under graded isomorphisms, Tags 01MY and 01MZ"
+   }
+  },
+  {
+   "text": "An isomorphism of diagrams $Z\\hookrightarrow X\\to T$ identifies their fibre products and graphs by [def-pc-fibre-product]. Transport a closed neighbourhood $W$ across this isomorphism. The resulting ambient isomorphism and its centre form a cartesian square, and it is flat because its local-ring maps are isomorphisms. The graded comparison of [lem-pur-conormal-algebra-flat-base-change] is therefore an isomorphism; on representatives it is $[a]\\mapsto[h^\\sharp(a)]$. Changing neighbourhoods agrees with Step 5. Identity and composition follow on these representatives from $(h\\circ k)^\\sharp=k^\\sharp h^\\sharp$, in every degree, including degree zero. The induced Proj maps of [prop-nagata-relative-proj-functoriality] (2) have the same laws: on a standard homogeneous chart their ring maps send $b/a^m$ to $h^\\sharp(b)/h^\\sharp(a)^m$, and successive substitutions compose. These charts cover Proj, so the identities hold globally. This establishes the specified canonical functoriality, including compatibility with the structural projections.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pur-conormal-algebra-flat-base-change",
+    "prop-nagata-relative-proj-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0634–0635, specified functorial conormal maps; Constructions Tags 01MY–01MZ, homogeneous localization maps"
+   }
+  },
+  {
+   "text": "Now assume $f$ is locally of finite type and $i:Z\\hookrightarrow X$ is the specified first-Fitting singular inclusion. Use exactly the coborder closed neighbourhood and ideal $J$ of [def-sfb-nodal-branch-scheme]. Step 5 identifies $G$ with this closed graph's conormal algebra. The cited definition specifies $B_f=\\operatorname{Bl}_J(W)\\times_W Z$ and its presentation as the relative Proj of $\\bigoplus J^n/J^{n+1}$. Here is the quotient calculation underlying that presentation, to make the identification explicit: on $\\operatorname{Spec}A\\subset W$, with ideal $I$, the blowup model is $\\operatorname{Proj}(\\mathcal R_A(I))$ by [def-nagata-affine-blowup] and [def-nagata-rees-algebra]. Arbitrary relative-Proj base change [lemma-nagata-relative-proj-base-change-arbitrary], applied to $A\\to A/I$, gives the Proj of $\\mathcal R_A(I)\\otimes_A A/I$. In degree $n$ the canonical quotient is $I^n\\otimes_A A/I=I^n/I I^n=I^n/I^{n+1}$, sending $a\\otimes\\bar r$ to $ar\\bmod I^{n+1}$. This preserves the degree-zero unit and multiplication, and commutes with all affine restrictions because both operations just restrict $a$ and $r$. Hence it is the very conormal presentation specified in [def-sfb-nodal-branch-scheme], not an abstract isomorphism of fibres. By Step 6 its Proj is canonically $P(f,i)$ over $Z$, and the degree-zero map shows its projection is $p_f$. None of these arguments used nodality, flatness of $f$, or quasi-compactness.",
+   "uses": [
+    "def-sfb-nodal-branch-scheme",
+    "def-nagata-affine-blowup",
+    "def-nagata-rees-algebra",
+    "lemma-nagata-relative-proj-base-change-arbitrary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01OG, definition-blow-up; Tag 0804, lemma-blowing-up-affine; Tags 0630–0633, conormal algebra. Constructions Tag 01O3, lemma-relative-proj-base-change. Curves Tag 0CBT (3), motivating branch Proj"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "lem-zl-immersion-cancellation",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "lem-pur-conormal-algebra-flat-base-change",
+  "lemma-nagata-relative-proj-exists",
+  "prop-nagata-relative-proj-functoriality",
+  "def-sfb-nodal-branch-scheme",
+  "def-nagata-affine-blowup",
+  "def-nagata-rees-algebra",
+  "lemma-nagata-relative-proj-base-change-arbitrary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0630–0635 and 01OG/0804, with Constructions 01NQ, 01O3 and Morphisms 07RK; relative graph assembly written by Q20"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The associated graded algebras of the ideals of affine closed graphs glue canonically on the graph subscheme without assuming separatedness of the family",
+   "results": "{\"t\": \"2026-10-22T06:04:14Z\", \"tool\": \"leansearch\", \"query\": \"The associated graded algebras of the ideals of affine closed graphs glue canonically on the graph subscheme without assuming separatedness of the family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"GradedAlgebra\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap_glueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι\"], \"digest\": \"571fca05dec5eb17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal-sheaf quotient gluing and Proj affine charts do not identify the graded graph cone and its exceptional-fibre realization without separatedness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"conormal\"",
+   "results": "{\"t\": \"2026-10-22T06:04:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"conormal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Loogle is currently under load, please try again later.\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: loogle: Loogle is currently under load, please try again later."
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*conormal|conormal.*graph|graphCone",
+   "results": "{\"t\": \"2026-10-22T06:04:14Z\", \"tool\": \"grep\", \"query\": \"graph.*conormal|conormal.*graph|graphCone\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal-sheaf quotient gluing and Proj affine charts do not identify the graded graph cone and its exceptional-fibre realization without separatedness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated graded algebras of the ideals of affine closed graphs glue canonically on the graph subscheme without assuming separatedness of the family",
+   "results": "{\"t\": \"2026-10-22T06:04:21Z\", \"tool\": \"leanfinder\", \"query\": \"The associated graded algebras of the ideals of affine closed graphs glue canonically on the graph subscheme without assuming separatedness of the family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjCarrierIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι\"], \"digest\": \"139dfed57a230989\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal-sheaf quotient gluing and Proj affine charts do not identify the graded graph cone and its exceptional-fibre realization without separatedness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A graph immersion has a quasi coherent conormal graded algebra independent of affine graph neighbourhoods and its projectivization agrees with the exceptional fibre",
+   "results": "{\"t\": \"2026-10-22T06:04:23Z\", \"tool\": \"leanfinder\", \"query\": \"A graph immersion has a quasi coherent conormal graded algebra independent of affine graph neighbourhoods and its projectivization agrees with the exceptional fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.Proj.awayι_toSpecZero\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.awayι_toSpecZero_assoc\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\"], \"digest\": \"403c0a093b8eea66\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ideal-sheaf quotient gluing and Proj affine charts do not identify the graded graph cone and its exceptional-fibre realization without separatedness"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, GradedAlgebra",
+   "results": "{\"t\": \"2026-10-23T04:11:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, GradedAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*conormal|conormal.*graph|graphCone",
+   "results": "{\"t\": \"2026-10-23T04:11:09Z\", \"tool\": \"grep\", \"query\": \"graph.*conormal|conormal.*graph|graphCone\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no graph-conormal gluing declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine graph conormal graded algebras glue without separatedness and their projectivization is the exceptional fibre of the graph blowup",
+   "results": "{\"t\": \"2026-10-23T04:11:10Z\", \"tool\": \"leanfinder\", \"query\": \"Affine graph conormal graded algebras glue without separatedness and their projectivization is the exceptional fibre of the graph blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\"], \"digest\": \"e0f55a5672de690a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj charts and closed-neighbourhood factorization do not supply the graded graph-cone gluing and fixed exceptional-fibre comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The conormal algebra of an immersion is independent of its closed ambient neighbourhood and Proj of this algebra is the exceptional fibre of the blowup",
+   "results": "{\"t\": \"2026-10-23T04:11:55Z\", \"tool\": \"leansearch\", \"query\": \"The conormal algebra of an immersion is independent of its closed ambient neighbourhood and Proj of this algebra is the exceptional fibre of the blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_ι\", \"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\"], \"digest\": \"f282be70cf1bbf0e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj charts and closed-neighbourhood factorization do not supply the graded graph-cone gluing and fixed exceptional-fibre comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normal cone of a locally closed immersion restricts on open subschemes and the projectivized normal cone is the exceptional divisor of its blowup",
+   "results": "{\"t\": \"2026-10-23T04:12:04Z\", \"tool\": \"leanfinder\", \"query\": \"The normal cone of a locally closed immersion restricts on open subschemes and the projectivized normal cone is the exceptional divisor of its blowup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_ι\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"746ca5caf3ece2f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Proj charts and closed-neighbourhood factorization do not supply the graded graph-cone gluing and fixed exceptional-fibre comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-branch-double-cover",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Relative graph-cone subargument: old Steps 2,3.",
+   "via": [
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-graph-cone-gluing",
+  "worker": "stage1",
+  "summary": "Constructed the conormal algebra in a closed neighbourhood of the global graph immersion and compared every affine graph through common open neighbourhoods. Proved class-normalized overlap, cocycle, independence and functoriality; checked the actual fixed branch blowup by its Rees quotient calculation. No statement change and no new nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Relative graph-cone subargument: old Steps 2,3. Realizes graph-cone Steps 2–3 by the closed-neighbourhood construction and common-open comparisons.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Generic Conormal graded algebra on a closed subscheme used for the graph-cone construction; the unit supplies no replacement for this scheme/algebra tool."
+   },
+   {
+    "node": "lem-pur-conormal-algebra-flat-base-change",
+    "why": "Generic Flat base change of the conormal algebra of a closed immersion used for the graph-cone construction; the unit supplies no replacement for this scheme/algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-conormal-algebra-flat-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-d1e7c79ef",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-d1e7c79ef (reviewer sub-agent of L); spot-checked: Read all 8 steps and every cited statement in full. The delivery adds 0 new nodes and leaves the statement and stmt_deps unchanged; there is no re-split note. Steps 1-8: (1) the affine graph Spec(A⊗_R B)→Spec B is surjective via 1⊗b, so it is closed by the 01QO criterion in def-weil-closed-immersion. (2) lem-zl-immersion-cancellation (07RK, no separatedness) makes the global graph an immersion; the conormal algebra is built on a closed neighbourhood W, as in the Stacks 0630 immersion construction. (3) Y_U is open as U×_T Z_U. I checked j^{-1}(W∩Y_U)=Z_U, so both base changes are the same closed immersion. Open immersions are flat, so the flat clause of lem-pur-conormal-algebra-flat-base-change gives α_U. (4)-(5) The cocycle laws are formal because every α_U comes from the one global G. Independence of W is shown through W∩W'. (6)-(7) Existence of relative Proj and clause (2) handle graded isomorphisms; transport along a base isomorphism is elementary, so I accepted it. (8) Over D, Bl_I(Spec A)=Proj R_A(I), base-changed along A→A/I, gives I^n⊗A/I=I^n/I^{n+1}. This matches the fixed coborder definition in def-sfb-nodal-branch-scheme and needs no nodality or flatness. Edge cases checked: Z empty; zero ideal (i=id, empty Proj); doubled-origin line (graph not closed, construction still works); nonreduced centre. Route: the Nagata, pbc and reduction units are on sk-thm-sf-ctf-stability's route. I accept the two declared tool_uses, lem-pur-conormal-graded-algebra and lem-pur-conormal-algebra-flat-base-change, as generic black boxes. All Stacks tags exist and there is no SGA. Duplicate search (coborder, graph cone) found only the sibling nodal-graph-cone fibre, chart and base-change nodes, which cite this item and state different facts. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GraphConeGluing",
+  "declaration": "AlgebraicGeometry.GraphCone.exists_graphCone_gluing",
+  "declarations": [
+   "AlgebraicGeometry.GraphCone.Diagram",
+   "AlgebraicGeometry.GraphCone.Chart",
+   "AlgebraicGeometry.GraphCone.Chart.centre",
+   "AlgebraicGeometry.GraphCone.Chart.family",
+   "AlgebraicGeometry.GraphCone.Chart.inclusion",
+   "AlgebraicGeometry.GraphCone.Chart.ambient",
+   "AlgebraicGeometry.GraphCone.Chart.graph",
+   "AlgebraicGeometry.GraphCone.Chart.ideal",
+   "AlgebraicGeometry.GraphCone.pieceClass",
+   "AlgebraicGeometry.GraphCone.Diagram.ambient",
+   "AlgebraicGeometry.GraphCone.Diagram.graph",
+   "AlgebraicGeometry.GraphCone.Chart.globalMap",
+   "AlgebraicGeometry.GraphCone.LocalChart",
+   "AlgebraicGeometry.GraphCone.LocalChart.ringMap",
+   "AlgebraicGeometry.GraphCone.Chart.local_properties",
+   "AlgebraicGeometry.GraphCone.Chart.local",
+   "AlgebraicGeometry.GraphCone.DiagramIso",
+   "AlgebraicGeometry.GraphCone.ChartSquare",
+   "AlgebraicGeometry.GraphCone.ChartSquare.idealPower_le",
+   "AlgebraicGeometry.GraphCone.ChartSquare.pieceMap",
+   "AlgebraicGeometry.GraphCone.AlgebraMapOver",
+   "AlgebraicGeometry.GraphCone.Gluing",
+   "AlgebraicGeometry.GraphCone.singularDiagram",
+   "AlgebraicGeometry.GraphCone.branchCentre",
+   "AlgebraicGeometry.GraphCone.branchChart_properties",
+   "AlgebraicGeometry.GraphCone.branchChart",
+   "AlgebraicGeometry.GraphCone.BranchNormalization",
+   "AlgebraicGeometry.GraphCone.Construction",
+   "AlgebraicGeometry.GraphCone.exists_graphCone_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GraphConeGluing.lean",
+  "statement": "theorem exists_graphCone_gluing : (∀ (d : Diagram.{u}) (c : Chart d), IsClosedImmersion c.graph) ∧ Nonempty (Construction.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30d641afc",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery repairs all four findings of the 927223b2 RETURN. F1: Gluing.restriction, localRestriction and Construction.algebraMap_class now pin [a] ↦ [g♯a] via ChartSquare.pieceMap (idealPower_le named sorry); the Sym O(-1)/Sym Ω twist is excluded, and local/branch charts tie to original charts (chart ambients lie in the coborder). F2: BranchNormalization.quotient fixes reesMap as the canonical R(I)→gr_I; .chart (relProjι ≫ e ≫ fst = Proj.map reesMap ≫ blowupι W) plus the snd equation determine e uniquely. degreeZero corrected to injective with range = grading 0. F3: imports trimmed and the used-declaration list corrected. F4: real 16-clause second reading. Only the lean fields of the item and def-sfb-nodal-branch-scheme change vs side-live; statements verbatim; declaration list = file decls. The §1(B) dep module is legitimate (O2's NodalBranchScheme was returned and exists nowhere). Single universe u; no extra hypotheses; all theorem proofs are sorry; every decl has source/blueprint docstrings; no compile run (no file changed). Advisories: nodalBranchClosedGraph_isClosedImmersion duplicates Mathlib's instIsClosedImmersionLiftCoborder; decls used from def nodes outside stmt_deps (associated-graded, rees-piece, global-blowup)."
+ }
+}

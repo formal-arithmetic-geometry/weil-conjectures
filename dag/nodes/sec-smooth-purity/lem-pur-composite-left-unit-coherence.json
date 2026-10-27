@@ -1,0 +1,99 @@
+{
+ "id": "lem-pur-composite-left-unit-coherence",
+ "kind": "lemma",
+ "title": "Left-unit coherence under composition",
+ "statement": "Let \\(C,D,E\\) be monoidal categories and \\(F:C\\to D\\), \\(G:D\\to E\\) functors. Let \\(d_F(X,Y):F(X\\otimes Y)\\simeq FX\\otimes FY\\) and \\(d_G(U,V):G(U\\otimes V)\\simeq GU\\otimes GV\\) be families of isomorphisms, with \\(d_G\\) natural in its first variable. Let \\(e_F:F1_C\\simeq1_D\\), \\(e_G:G1_D\\simeq1_E\\). Suppose each family and its unit satisfy the left-unit equation \\(d(1,X);(e\\mathbin{\\triangleright}HX);\\lambda_{HX}=H(\\lambda_X)\\). Then the composite family \\(G(d_F(X,Y));d_G(FX,FY)\\), with unit \\(G(e_F);e_G\\), satisfies the left-unit equation for \\(F;G\\). Here semicolon denotes composition in application order; no other naturality or associativity axiom is required.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; agent extraction of normalized tensor and unit coherence used in more-etale.tex Tag 0GL6"
+ },
+ "proof": [
+  {
+   "text": "Expand the composite unit using functoriality of right whiskering. Naturality of dG in its first variable moves G(eF) to the left of dG. Apply the left-unit law for G. Combine the three G-images by functoriality and apply the left-unit law for F.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X8",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; normalized representative descent and elementary categorical unit calculations"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible natural transformation between strong monoidal functors that preserves tensor products also preserves the monoidal unit",
+   "results": "Functor.Monoidal.ofLaxMonoidal; CoreMonoidal.ofLaxMonoidal; Monoidal.transport_ε; NatTrans.IsMonoidal.of_cartesianMonoidalCategory; Iso.instIsMonoidalInvFunctor; Monoidal.εIso; Monoidal.ofBifunctor; Monoidal.coreMonoidalTransport",
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized scalar comparisons or the required tensor-only implication; ordinary monoidal unit laws are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom",
+   "results": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom in Mathlib.CategoryTheory.Monoidal.Functor",
+   "date": "2026-10-25",
+   "verdict": "Underlying ordinary unit law; representative transport and site descent remain necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "left_unitality|IsMonoidal.of|unit.*tensor",
+   "results": "ModuleCat.Monoidal.Adjunction ordinary left_unitality; Monoidal.Category tensor/unit constructions; no scalar derived representative or pullback normalization square. Local source search also found ScalarRightUnitTransport and ExceptionalCoefficientUnitCoherence; their proved right-unit arguments guide the left-unit proof.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the new normalized left-unit or scalar/pullback tensor statements."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactScalarCoherence",
+  "date": "2026-10-25",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof, paragraph 2: the explicit projective-line trace commutes with coefficient reduction, and composition of its adjunctions gives the corresponding compatibilities for affine space; the scalar/projection and scalar/composition identifications needed before transposing; scalar binary tensor comparison and coefficient-unit normalization",
+   "via": [
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CompositeLeftUnitCoherence",
+  "file": "lean/Sheaf/CategoryTheory/CompositeLeftUnitCoherence.lean",
+  "declaration": "CategoryTheory.composite_left_unit",
+  "statement": "theorem composite_left_unit\n    {C D E : Type*} [Category C] [Category D] [Category E]\n    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E]\n    (F : C ⥤ D) (G : D ⥤ E)\n    (dF : ∀ X Y : C, F.obj (X ⊗ Y) ≅ F.obj X ⊗ F.obj Y)\n    (dG : ∀ X Y : D, G.obj (X ⊗ Y) ≅ G.obj X ⊗ G.obj Y)\n    (hdG : ∀ {X Y : D} (f : X ⟶ Y) (Z : D),\n      G.map (f ▷ Z) ≫ (dG Y Z).hom =\n        (dG X Z).hom ≫ (G.map f ▷ G.obj Z))\n    (eF : F.obj (𝟙_ C) ≅ 𝟙_ D) (eG : G.obj (𝟙_ D) ≅ 𝟙_ E)\n    (hF : ∀ X, (dF (𝟙_ C) X).hom ≫ eF.hom ▷ F.obj X ≫\n      (λ_ (F.obj X)).hom = F.map (λ_ X).hom)\n    (hG : ∀ X, (dG (𝟙_ D) X).hom ≫ eG.hom ▷ G.obj X ≫\n      (λ_ (G.obj X)).hom = G.map (λ_ X).hom)\n    (X : C) :\n    G.map ((dF (𝟙_ C) X).hom) ≫ (dG (F.obj (𝟙_ C)) (F.obj X)).hom ≫\n        (G.map eF.hom ≫ eG.hom) ▷ G.obj (F.obj X) ≫\n        (λ_ (G.obj (F.obj X))).hom = G.map (F.map (λ_ X).hom)",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

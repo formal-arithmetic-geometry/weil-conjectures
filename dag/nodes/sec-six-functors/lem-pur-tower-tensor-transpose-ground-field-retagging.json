@@ -1,0 +1,247 @@
+{
+ "id": "lem-pur-tower-tensor-transpose-ground-field-retagging",
+ "kind": "statement",
+ "title": "Tower projection and its counit transpose commute with ground-field retagging",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, an algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$; put $A_n=\\mathcal O_E/\\ell^n$ for $n\\geq1$ [def-pur-conventions, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes, and $f:X\\to Y$ a smooth separated $k$-morphism of pure relative dimension $d\\geq0$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-sbc-smooth-morphisms]. For a field automorphism $\\sigma:k\\simeq k$ fixing $k_0$, let $T^\\sigma$ be the same scheme $T$ with structural map $\\operatorname{Spec}(\\sigma)\\circ a_T$, for $T=X,Y$, and let $f^\\sigma$ be the same underlying morphism. Use the strict varying-coefficient tower categories $\\operatorname{Tow}(T,\\mathcal O_E)$ [sk-def-sp-coefficient-towers], their ordinary derived categories [def-weil-abstract-derived-category], and their full subcategories $\\mathcal C_T=\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ of towers with constructible levels and level-independent finite cohomological and Tor bounds [sk-def-sp-normalized-towers].\n\nIdentify the underlying tower operations, twists and same-compactification functor $F$ as in [lem-pur-tower-operations-ground-field-retagging]. Let $G$ and $G^\\sigma$ be the right adjoints of $F$ for $f$ and $f^\\sigma$ on $\\mathcal C_Y$, with counits $\\varepsilon$ and $\\varepsilon^\\sigma$ [det-sp-tower-gluing], and let $\\rho:G^\\sigma\\xrightarrow{\\sim}G$ be the unique natural isomorphism with $\\varepsilon_K\\circ F(\\rho_K)=\\varepsilon^\\sigma_K$. Denote the coefficient-unit tower on $Y$ by $\\mathbf1_Y$, and put $\\omega=G\\mathbf1_Y$ and $\\omega^\\sigma=G^\\sigma\\mathbf1_Y$. For $M\\in\\mathcal C_X$ and $K\\in\\mathcal C_Y$, the compactification projection transformations\n$$\\mathrm{PF}_{M,K}:FM\\otimes^LK\\longrightarrow F(M\\otimes^Lf^*K)$$\nfor $f$ and $f^\\sigma$ are the same natural transformation in the ordinary tower derived category. Here projection means the proper direct-image mate of the pullback-tensor comparison followed by its ordinary counit, then the extension-by-zero tensor comparison [def-exchange-projection, det-sp-tower-shriek-levels].\n\nFor $K\\in\\mathcal C_Y$ let $C_K:F(f^*K\\otimes^L\\omega)\\to K$ be the inverse-projection composite, with tensor symmetry and unit constraints, followed by $1_K\\otimes\\varepsilon_{\\mathbf1_Y}$, and define $C_K^\\sigma$ using $G^\\sigma,\\varepsilon^\\sigma,\\omega^\\sigma$. Let $t_K:f^*K\\otimes^L\\omega\\to GK$ and $t_K^\\sigma:f^*K\\otimes^L\\omega^\\sigma\\to G^\\sigma K$ be their adjoint transposes [det-sp-tower-gamma](2). Then\n$$C_K\\circ F(1_{f^*K}\\otimes\\rho_{\\mathbf1_Y})=C_K^\\sigma,$$\n$$t_K\\circ(1_{f^*K}\\otimes\\rho_{\\mathbf1_Y})=\\rho_K\\circ t_K^\\sigma.$$\nThese are equalities of morphisms in the ordinary derived categories of strict towers, including their quotient-coefficient transitions, for every $K\\in\\mathcal C_Y$, without a normalization hypothesis. No orientation map is assumed or compared in these assertions.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clause (2), projection-formula/counit transpose; explicit retagging comparison for thm-pur-weil-equivariance-of-purity-and-trace, proof Steps 1–3"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "lem-pur-tower-operations-ground-field-retagging",
+  "det-sp-tower-gluing",
+  "def-exchange-projection",
+  "det-sp-tower-shriek-levels",
+  "det-sp-tower-gamma"
+ ],
+ "proof": [
+  {
+   "text": "Ground-field retagging retains the compactification record definitionally. Thus its specified projection at each M,K is literally the original projection. This proves the first conjunct by reflexivity without using the operation-retagging theorem.",
+   "uses": [
+    "lem-pur-tower-operations-ground-field-retagging",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-sp-tower-tensor-adjoint-domains separately to the given G and G_sigma. Retain the tensor models from the first application; unit membership is a proposition, so the two witnesses define the same unit object. This supplies hQ, hQ_sigma, hpf and hpf_sigma for every K without assuming any comparison equation.",
+   "uses": [
+    "lem-sp-tower-tensor-adjoint-domains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove naturality in the first tensor variable of the actual compactification projection. For the proper projection use naturality of the pullback tensor comparison and counit, followed by naturality of homEquiv. For openTensor apply injectivity of the open adjunction homEquiv to its inverse and use its prescribed mate formula. Compose with pullback composition. Invert the resulting projection square. Naturality of the source and target signed braidings then gives naturality of the inverse-projection/symmetry word.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "det-sp-tower-gamma"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib rightAdjointUniq_hom_app_counit states the counit-preserving property of rho. Transport it through the actual section realization using naturality of supportRealization.inv. Follow the preceding inverse-projection equation by identity tensor this counit and the unit identification, then by the right unitor. Tensor functoriality gives F(tensorComparison) followed by projectionCounit = projectionCounit_sigma.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-tower-gluing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the transpose equation, lift the source comparison using fullness of the realization. Naturality of supportRealization and the preceding projectionCounit equation identify the original full-subcategory projection composites. Apply the adjunction Hom equivalence and the counit-preserving rightAdjointUniq relation. Map the equality forward through realization and cancel the realization counit isomorphisms. This is exactly the definition of tensorMate, so it proves the ambient comparison without any faithfulness assumption on finite evaluation.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-tower-gluing",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-tower-operations-ground-field-retagging",
+  "det-sp-tower-shriek-levels",
+  "lem-sp-tower-tensor-adjoint-domains",
+  "det-sp-tower-gamma",
+  "det-sp-tower-gluing",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clause (2), naturality and counit computations; Lean proof F3 with a domain-only extraction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "towerGamma|tensorTranspose|projectionFormula|counit.*retag",
+   "results": "{\"t\": \"2026-10-22T06:12:07Z\", \"tool\": \"grep\", \"query\": \"towerGamma|tensorTranspose|projectionFormula|counit.*retag\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Hom equivalence, derived adjunction and algebraic tensor results do not identify the geometric tower projection map under retagging"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula counit transpose on coefficient towers is invariant under retagging the ground field",
+   "results": "{\"t\": \"2026-10-22T06:12:07Z\", \"tool\": \"leansearch\", \"query\": \"The projection formula counit transpose on coefficient towers is invariant under retagging the ground field\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"t\": \"2026-10-22T06:12:08Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"05a3b8c6fadac431\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Hom equivalence, derived adjunction and algebraic tensor results do not identify the geometric tower projection map under retagging"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit preserving identification of exceptional right adjoints intertwines projection formula tensor transposes in the ordinary derived category of module towers",
+   "results": "{\"t\": \"2026-10-22T06:12:37Z\", \"tool\": \"leanfinder\", \"query\": \"Counit preserving identification of exceptional right adjoints intertwines projection formula tensor transposes in the ordinary derived category of module towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj\", \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"CategoryTheory.Adjunction.derived'_counit\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.Tor'_obj_obj\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"LightCondensed.internallyProjective_iff_tensor_condition'\"], \"digest\": \"95817be20deeb583\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Hom equivalence, derived adjunction and algebraic tensor results do not identify the geometric tower projection map under retagging"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor map adjoint to the inverse projection formula and counit for a smooth morphism on strict coefficient towers commutes with ground field retagging",
+   "results": "{\"t\": \"2026-10-22T06:12:38Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor map adjoint to the inverse projection formula and counit for a smooth morphism on strict coefficient towers commutes with ground field retagging\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquiv_left_inv\", \"Algebra.Generators.CotangentSpace.compEquiv_symm_inr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"Algebra.Extension.tensorCotangent\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"Algebra.Generators.CotangentSpace.fst_compEquiv\", \"Algebra.Extension.tensorCotangentSpace\"], \"digest\": \"123e2a94791105b7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Hom equivalence, derived adjunction and algebraic tensor results do not identify the geometric tower projection map under retagging"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv [Mathlib/CategoryTheory/Adjunction]",
+   "results": "{\"t\": \"2026-10-22T06:13:22Z\", \"tool\": \"grep\", \"query\": \"homEquiv\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\"], \"digest\": \"6c92ec6baeac664f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Hom equivalence, derived adjunction and algebraic tensor results do not identify the geometric tower projection map under retagging"
+  },
+  {
+   "tool": "grep",
+   "query": "retag|towerGamma|tensorTranspose|counit.*projection",
+   "results": "{\"t\": \"2026-10-22T06:58:38Z\", \"tool\": \"grep\", \"query\": \"retag|towerGamma|tensorTranspose|counit.*projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction identities or unrelated algebraic results; none states the strict tower retagging projection comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula tensor transpose is compatible with a counit preserving isomorphism of right adjoints on coefficient towers",
+   "results": "{\"t\": \"2026-10-22T06:58:39Z\", \"tool\": \"leansearch\", \"query\": \"Projection formula tensor transpose is compatible with a counit preserving isomorphism of right adjoints on coefficient towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit\", \"Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"TensorProduct.counit_def\", \"TensorProduct.piRight_apply\", \"TensorProduct.counit_tmul\", \"CategoryTheory.Adjunction.CommShift.CompatibilityCounit\", \"CoalgCat.MonoidalCategoryAux.counit_tensorObj_tensorObj_right\"], \"digest\": \"205030cbb7ffd42e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction identities or unrelated algebraic results; none states the strict tower retagging projection comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"t\": \"2026-10-22T06:58:40Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"05a3b8c6fadac431\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction identities or unrelated algebraic results; none states the strict tower retagging projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ground field retagging preserves the projection formula and its counit transpose on strict coefficient towers",
+   "results": "{\"t\": \"2026-10-22T06:58:50Z\", \"tool\": \"leanfinder\", \"query\": \"Ground field retagging preserves the projection formula and its counit transpose on strict coefficient towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galRestrict'_comp\", \"InfiniteGalois.proj_of_le\", \"InfiniteGalois.proj_adjoin_singleton_val\", \"Field.Emb.Cardinal.succEquiv_coherence\", \"InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj\", \"InfiniteGalois.toAlgEquivAux_eq_proj_of_mem\", \"Algebra.Generators.CotangentSpace.fst_compEquiv\", \"Algebra.Generators.CotangentSpace.compEquiv_symm_inr\"], \"digest\": \"998b5ecda2ee5944\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction identities or unrelated algebraic results; none states the strict tower retagging projection comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of inverse projection formula and uniqueness of adjoint transposes under isomorphic right adjoints",
+   "results": "{\"t\": \"2026-10-22T07:00:32Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of inverse projection formula and uniqueness of adjoint transposes under isomorphic right adjoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.homEquiv_symm_rightAdjointUniq_hom_app\", \"CategoryTheory.Adjunction.rightAdjointUniq\", \"CategoryTheory.Adjunction.rightAdjointUniq_trans_app\", \"CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc\", \"CategoryTheory.Adjunction.rightAdjointUniq_trans\", \"CategoryTheory.Adjunction.leftAdjointUniq_inv_app\", \"CategoryTheory.Adjunction.rightAdjointUniq_trans_assoc\"], \"digest\": \"07f590b8ae8b3053\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction identities or unrelated algebraic results; none states the strict tower retagging projection comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-tower-purity-ground-field-retagging",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Proof Steps 1–3, tower purity and counit squares: compatibility of the projection/counit transpose with the counit-preserving adjoint identification",
+   "via": [
+    "lem-pur-tower-purity-ground-field-retagging"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-tower-tensor-transpose-ground-field-retagging",
+  "worker": "stage1",
+  "summary": "Expanded the proper projection mate and open tensor comparison before finite evaluation, then proved the inverse-projection/counit and transpose equations by naturality and the representing Hom bijection. Reused six existing nodes; no new nodes, statement changes, orientations or normalization hypotheses.",
+  "blueprint": "Realizes thm-pur-weil-equivariance-of-purity-and-trace proof Steps 1–3 at the tower tensor/counit level, via det-sp-tower-gamma proof clause (2).",
+  "tool_uses": [
+   {
+    "node": "det-sp-tower-shriek-levels",
+    "why": "Ordinary tower operations and their specified projection map supply the domain-specific input for the compactification formula."
+   },
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "Only clause (2), the inverse-projection composite and its adjoint transpose, is used; neither the orientation nor purity invertibility is used."
+   },
+   {
+    "node": "det-sp-tower-gluing",
+    "why": "The actual tower representing Hom bijection and uniqueness of a counit-preserving adjoint identification are needed for the two counit computations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-tower-shriek-levels",
+  "det-sp-tower-gamma",
+  "det-sp-tower-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-f6672e545",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-f6672e545 (reviewer sub-agent of L); spot-checked: Read in full: the item, its five steps, all six cited statements (lem-pur-tower-operations-ground-field-retagging, def-exchange-projection with its main-20261015 blueprint_update, det-sp-tower-shriek-levels, det-sp-tower-gluing, det-sp-tower-gamma, sk-def-sp-normalized-towers) and the main-20261015 gamma proof, clause (2). No repair note applies (not a re-split). The statement is unchanged and is exactly what the only citer, lem-pur-tower-purity-ground-field-retagging, uses in its Step 3. Steps 1-2: PF = Rp_*(chi) after pi_p, with pi_p = Rp_*((delta⊗1)mu) after eta. This is the def-exchange-projection formula, and every ingredient is identified by the retagging lemma, so PF^σ = PF. Step 3: B = s_Y, PF^{-1}, F(s_X). I checked the types. PF_{ω^σ,K} is invertible by gamma(2) applied to f^σ, which is still smooth, separated and of pure dimension d. Inverting the naturality square and using symmetry naturality gives B(ω)F(1⊗u) = (1⊗Fu)B(ω^σ). Step 4: u = rho_1 satisfies ε_1 Fu = ε^σ_1, which gives C_K F(1⊗u) = C^σ_K. Step 5: under the injective gluing bijection h ↦ ε_K F h, both arrows map to C^σ_K, and the fullness clause makes the equality ambient. Edge cases checked: σ = id, d = 0, K = 0, X empty, non-normalized towers. No orientation, faithfulness of evaluation or normalization is used. No SGA source. The rg -L retagg sweep over the DAG found no duplicate; the Frobenius purity-mate nodes are consumers, not restatements. There are no new nodes. proof_deps equals the union of the step uses, and all search kinds are recorded. The tool_uses for the three det-sp nodes are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerTensorTransposeGroundFieldRetagging",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerTensorRetagging.tensor_transpose_ground_field_retagging",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerTensorRetagging.rightComparison",
+   "AlgebraicGeometry.ProEtale.SpTowerTensorRetagging.tensorComparison",
+   "AlgebraicGeometry.ProEtale.SpTowerTensorRetagging.tensor_transpose_ground_field_retagging"
+  ],
+  "file": "lean/Sheaf/Paper/TowerTensorTransposeGroundFieldRetagging.lean",
+  "statement": "theorem tensor_transpose_ground_field_retagging (σ : P.field.k ≃ₐ[P.field.k₀] P.field.k) (X Y : Over (Spec (CommRingCat.of P.field.k))) (f : X ⟶ Y) (d : ℕ) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated f.left] [SmoothOfRelativeDimension d f.left] (c : Compactification f.left) (hF : ∀ M : SpTowerCalculus.C P.coefficients.l P.extension b q X.left, spConstructibleTorTowers P.coefficients.l P.extension Y.left (q.abelian Y.left) ((SpTowerCalculus.F P.coefficients.l P.extension b o q c).obj M.obj)) (Gσ G : SpTowerCalculus.C P.coefficients.l P.extension b q Y.left ⥤ SpTowerCalculus.C P.coefficients.l P.extension b q X.left) (adjσ : SpTowerGluing.support P.coefficients.l P.extension b o q (spGroundFieldRetagCompactification P σ c) hF ⊣ Gσ) (adj : SpTowerGluing.support P.coefficients.l P.extension b o q c hF ⊣ G) : (∀ (M : SpTowerCalculus.C P.coefficients.l P.extension b q X.left) (K : SpTowerCalculus.C P.coefficients.l P.extension b q Y.left), SpTowerShriek.projection P.coefficients.l P.extension b o (spGroundFieldRetagCompactification P σ c) ((SpTowerGamma.realization P.coefficients.l P.extension b q X.left).obj M) ((SpTowerGamma.realization P.coefficients.l P.extension b q Y.left).obj K) = SpTowerShriek.projection P.coefficients.l P.extension b o c ((SpTowerGamma.realization P.coefficients.l P.extension b q X.left).obj M) ((SpTowerGamma.realization P.coefficients.l P.extension b q Y.left).obj K)) ∧ ∃ tx : SpTowerP1.TensorData P.coefficients.l P.extension b X.left, ∃ ty : SpTowerP1.TensorData P.coefficients.l P.extension b Y.left, ∃ hU : spConstructibleTorTowers P.coefficients.l P.extension Y.left (q.abelian Y.left) (SpTowerGamma.originalUnit P.coefficients.l P.extension b q Y.left), ∀ K : SpTowerCalculus.C P.coefficients.l P.extension b q Y.left, ∃ hQσ : spConstructibleTorTowers P.coefficients.l P.extension X.left (q.abelian X.left) ((SpTowerCalculus.realization P.coefficients.l P.extension b X.left (q.abelian X.left)).inverse.obj ((SpTowerGamma.tensorSource P.coefficients.l P.extension b o q f.left ((SpTowerGamma.exceptional P.coefficients.l P.extension b q Gσ).obj ⟨SpTowerGamma.originalUnit P.coefficients.l P.extension b q Y.left, hU⟩)).obj K)), ∃ hQ : spConstructibleTorTowers P.coefficients.l P.extension X.left (q.abelian X.left) ((SpTowerCalculus.realization P.coefficients.l P.extension b X.left (q.abelian X.left)).inverse.obj ((SpTowerGamma.tensorSource P.coefficients.l P.extension b o q f.left ((SpTowerGamma.exceptional P.coefficients.l P.extension b q G).obj ⟨SpTowerGamma.originalUnit P.coefficients.l P.extension b q Y.left, hU⟩)).obj K)), ∃ hpfσ : IsIso (SpTowerShriek.projection P.coefficients.l P.extension b o c ((SpTowerGamma.exceptional P.coefficients.l P.extension b q Gσ).obj ⟨SpTowerGamma.originalUnit P.coefficients.l P.extension b q Y.left, hU⟩) ((SpTowerGamma.realization P.coefficients.l P.extension b q Y.left).obj K)), ∃ hpf : IsIso (SpTowerShriek.projection P.coefficients.l P.extension b o c ((SpTowerGamma.exceptional P.coefficients.l P.extension b q G).obj ⟨SpTowerGamma.originalUnit P.coefficients.l P.extension b q Y.left, hU⟩) ((SpTowerGamma.realization P.coefficients.l P.extension b q Y.left).obj K)), (SpTowerShriek.F P.coefficients.l P.extension b o c).map (tensorComparison P b o q f.left (adjσ.rightAdjointUniq adj) hU K) ≫ SpTowerGamma.projectionCounit P.coefficients.l P.extension b o q c tx ty hF G adj hU K hpf = SpTowerGamma.projectionCounit P.coefficients.l P.extension b o q (spGroundFieldRetagCompactification P σ c) tx ty hF Gσ adjσ hU K hpfσ ∧ tensorComparison P b o q f.left (adjσ.rightAdjointUniq adj) hU K ≫ SpTowerGamma.tensorMate P.coefficients.l P.extension b o q c tx ty hF G adj hU K hQ hpf = SpTowerGamma.tensorMate P.coefficients.l P.extension b o q (spGroundFieldRetagCompactification P σ c) tx ty hF Gσ adjσ hU K hQσ hpfσ ≫ rightComparison P b q (adjσ.rightAdjointUniq adj) K",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02de30831",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read node, all 13 stmt_dep records, the module, and live SpTowerGamma/ShriekLevels/TowerOperationsGroundFieldRetagging/P1Adjunction sources. Every clause matches: PF(retag c)=PF(c) for all M,K; F(1⊗ρ₁)≫C_K=C_K^σ and (1⊗ρ₁)≫t_K=t_K^σ≫ρ_K with ρ=adjσ.rightAdjointUniq adj (counit relation direction correct); projectionCounit/tensorMate are the gamma dep's actual constructions; retag defs owned by cited lem-pur-tower-operations-ground-field-retagging. hU/hQ/hpf are true Prop conclusions, not hypotheses; no normalization/orientation. Defs non-hollow, docstrings OK, sorry only, node changed only in lean, statement verbatim, no long lines. Edge cases (σ=id, d=0, empty X, K=0, unnormalized, single universe u) covered. Advisories: ∃ tx ty TensorData is pinned (closed_eq, symmetry_model, uncurry_model, unit_model), acceptable per gamma convention, though ∀ would be stronger; SpTowerCalculus/TensorData/Compactification owners outside stmt_deps (H2 forbids adding). No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261025T162333-L-426843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

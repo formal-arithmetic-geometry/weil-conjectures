@@ -1,0 +1,139 @@
+{
+ "id": "lem-a1-finite-fibre-linear-lifting",
+ "kind": "statement",
+ "title": "Equivariant linear fibre isomorphisms lift to finite locally constant module sheaves",
+ "statement": "For a scheme T, a monodromy point p and its specified Galois finite correspondence, let F and G be valuation-ring module sheaves whose underlying set sheaves are finite locally constant. Every linear isomorphism between their actual geometric stalks that intertwines evaluation of the specified fundamental-group action lifts uniquely to an isomorphism of module sheaves whose stalk is exactly that isomorphism. No finiteness of the coefficient ring is assumed. Definitions and hypotheses are those of [def-sfb-monodromy-realization-data].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 6.8.5, p.60; Stacks Tag 0DV5 (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-monodromy-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Transport the equivariant fibre map through the specified finite-etale/FLC equivalence. The finite-etale fundamental-group equivalence lifts it to a map of finite locally constant set sheaves; its fibre formula follows from the correspondence evaluation and counit naturality.",
+   "uses": [
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Addition is a map from the square of the underlying finite locally constant sheaf, and each scalar multiplication is an endomorphism. Their stalk formulas and faithfulness force the lifted map to preserve both operations. Apply the same argument to the inverse; faithfulness proves the inverse identities and uniqueness. Germ surjectivity verifies the operation formulas, so the argument applies to arbitrary coefficient rings and to zero modules. The faithful stalk and equality-detection helpers are reused from Sheaf.Paper.LatticeNormalizationRationalExact, where their unchanged proofs transport the given finite correspondence; its rational-exactness theorem is not used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "cor-galois-lisse-representations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "K7",
+  "date": "2026-10-24",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 6.8.5, p.60; Stacks Tag 0DV5 (3); explicit component of integral fibre reconstruction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit finite free adic modules continuous monodromy action integral lisse sheaf",
+   "results": "Condensed.finFree ; Condensed.profiniteFree ; CompHausLike.LocallyConstantModule.functor ; LightCondMod.ofSheafLightProfinite ; LightCondMod ; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat ; CondensedMod.ofSheafProfinite ; LightCondMod.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"Sheaf\"",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|adic.*representation",
+   "results": "Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Topology/Homotopy/Lifting.lean ; Mathlib/Algebra/Torsor/Defs.lean",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*(comp|Comp)|sheafFiber.*(faithful|Faithful)",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"extendScalars\"",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant linear isomorphism of finite locally constant module sheaf fibres uniquely lifts to a sheaf isomorphism",
+   "results": "LightCondMod.LocallyConstant.functorIsoDiscreteAux₁ ; LocallyConstant.congrRightₗ ; LightCondMod.LocallyConstant.functorIsoDiscreteAux₂ ; CondensedMod.LocallyConstant.functorIsoDiscreteAux₁ ; CondensedMod.LocallyConstant.functorIsoDiscreteAux₂ ; CompHausLike.LocallyConstantModule.functor ; LightCondMod.LocallyConstant.functorIsoDiscrete ; CondensedMod.LocallyConstant.functorIsoDiscrete",
+   "date": "2026-10-23",
+   "verdict": "No specialized match; existing categorical, tensor, topology and Galois APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivariant linear isomorphism of finite locally constant module sheaf stalks lifts uniquely to an isomorphism of sheaves, and scalar extension of a continuous finite free integral representation is continuous",
+   "results": "LinearEquiv.canLiftContinuousLinearEquiv; LinearEquiv.extendScalarsOfSurjective_apply; LocallyConstant.congrRightₗ; LinearEquiv.extendScalarsOfIsLocalization; SeparationQuotient.liftCLM; Module.FinitePresentation.linearEquivMapExtendScalars; LocallyConstant.congrLeftₗ; LinearMap.extendScalarsOfIsLocalizationEquiv_apply",
+   "date": "2026-10-23",
+   "verdict": "No specialization supplies these normalized sheaf or representation claims. Linear algebra and topology APIs are reused in the proved construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralFibreMonodromyReconstruction",
+  "date": "2026-10-24",
+  "group": "K7"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "via": [
+    "lem-a1-integral-fibre-monodromy-reconstruction"
+   ],
+   "place": "Integral fibre reconstruction in the first compact-support sentence; Corollary 6.8.5, p.60; Stacks Tag 0DV5 (3)"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFibreLinearLifting",
+  "file": "lean/Sheaf/Paper/FiniteFibreLinearLifting.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_fibre_linear_lifting",
+  "statement": "theorem finite_fibre_linear_lifting (l : ℕ) [Fact l.Prime]\n    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {T : Scheme.{u}} (p : SfMonodromyPoint T)\n    (c : GaloisLisseFiniteCorrespondence p.point p.group)\n    (F G : Sheaf T.smallEtaleTopology\n      (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E)))\n    (hF : IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf _ F))\n    (hG : IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf _ G))\n    (e : (((pointSmallEtale p.point).sheafFiber\n      (A := ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))).obj F)\n      ≃ₗ[Padic.coefficientExtensionIntegers l E]\n      (((pointSmallEtale p.point).sheafFiber\n        (A := ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))).obj G))\n    (he : ∀ (g : p.group) (x y : ((pointSmallEtale p.point).sheafFiber\n        (A := ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))).obj F),\n      sfModuleFiberToSet l E p F y =\n        (c.γ g).hom.app (galoisUnderlyingFLC _ F hF) (sfModuleFiberToSet l E p F x) →\n      sfModuleFiberToSet l E p G (e y) =\n        (c.γ g).hom.app (galoisUnderlyingFLC _ G hG)\n          (sfModuleFiberToSet l E p G (e x))) :\n    ∃! d : F ≅ G,\n      ((pointSmallEtale p.point).sheafFiber\n        (A := ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))).mapIso d =\n          e.toModuleIso",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261024T190243-L-4006348",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261024T190243-L-4006348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

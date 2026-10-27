@@ -1,0 +1,300 @@
+{
+ "id": "lem-sfb-two-parameter-blowup-atlas",
+ "kind": "statement",
+ "title": "Two-generator regular-sequence blowup atlas and Cartier equations",
+ "statement": "Let $A$ be a commutative Noetherian ring, and let $x,y\\in A$ be such that both $(x,y)$ and $(y,x)$ are regular sequences. Put $I=(x,y)$, $Y=\\operatorname{Bl}_I(\\operatorname{Spec}A)$ and $Z=Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)$. Then the standard blowup charts give an open cover $Y=U_x\\cup U_y$ with canonical $A$-algebra presentations\n$$U_x\\cong\\operatorname{Spec}C_x,\\quad C_x=A[I/x]\\cong A[t]/(xt-y),\\qquad U_y\\cong\\operatorname{Spec}C_y,\\quad C_y=A[I/y]\\cong A[u]/(yu-x).$$\nThe chart coordinate $t$ corresponds to $y/x$ in the subalgebra $A[I/x]\\subseteq A_x$, and $u$ to $x/y$ in $A[I/y]\\subseteq A_y$. In the Rees-algebra Proj description these charts are $D_+(xT)$ and $D_+(yT)$, and their coordinates are $(yT)/(xT)$ and $(xT)/(yT)$. The rings $C_x,C_y$ are Noetherian. Their extended ideals are $IC_x=(x)$ and $IC_y=(y)$, and multiplication by $x$ on $C_x$ and by $y$ on $C_y$ is injective. The closed subscheme $Z$ is defined on these charts by these extended ideals, so $Z$ is an effective Cartier divisor. The scheme $Y$ is Noetherian, meaning locally Noetherian and quasi-compact.\nConventions: [def-weil-pbc-noetherian-ring], [def-weil-pbc-regular-sequence], [def-weil-affine-spectrum], [def-nagata-global-blowup], [def-nagata-blowup-chart-ring], [def-nagata-affine-proj], [def-pc-fibre-product], [def-nagata-effective-cartier-ideal], [pqf-def-locnoeth]. Further construction conventions: [def-nagata-affine-blowup], [def-nagata-rees-algebra], [def-weil-polynomial-ring], [def-weil-pbc-algebra-hom-quotient].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Tag 0BIQ (more-algebra-lemma-blowup-regular-sequence), together with resolve.tex Tag 0AGQ (resolve-lemma-blowup), the two-generator affine charts and exceptional ideal. Noetherianity: algebra.tex Tag 00FN (algebra-lemma-Noetherian-permanence). Retains old item proof steps 1--3, with parameter selection left in the assembly."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-affine-spectrum",
+  "def-nagata-global-blowup",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-affine-proj",
+  "def-pc-fibre-product",
+  "def-nagata-effective-cartier-ideal",
+  "pqf-def-locnoeth",
+  "def-nagata-affine-blowup",
+  "def-nagata-rees-algebra",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Apply [prop-nagata-affine-blowup-chart-cover] to the generating list $(x,y)$ of $I$. This gives the open cover by $U_x=\\operatorname{Spec}(A[I/x])$ and $U_y=\\operatorname{Spec}(A[I/y])$. In the affine Proj model [def-nagata-affine-blowup], the maps of [def-nagata-affine-blowup-chart-map] identify these with $D_+(xT)$ and $D_+(yT)$: [prop-nagata-affine-blowup-chart] says precisely that those chart maps are isomorphisms over $\\operatorname{Spec}A$. Thus the ring structures on the two charts are the structural $A$-algebra structures, not merely abstract ring structures.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-affine-blowup",
+    "def-nagata-affine-blowup-chart-map",
+    "prop-nagata-affine-blowup-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804, lemma-blowing-up-affine; finite generating family $(x,y)$"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-blowup-chart-regular-sequence-presentation] first with $(a,a_2)=(x,y)$ and then with $(a,a_2)=(y,x)$. The respective regular-sequence hypotheses are both explicitly assumed. The two resulting canonical $A$-algebra isomorphisms give $C_x\\cong A[t]/(xt-y)$ with $t\\mapsto y/x$, and $C_y\\cong A[u]/(yu-x)$ with $u\\mapsto x/y$. Under the chart morphisms in step 1, [def-nagata-homogeneous-away-to-chart] sends $(yT)/(xT)$ to $y/x$ and $(xT)/(yT)$ to $x/y$, by its displayed formula with $n=1$. This verifies the specified Proj coordinates as well as the hypersurface presentations.",
+   "uses": [
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "def-nagata-homogeneous-away-to-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BIQ, lemma-blowup-regular-sequence, applied to both orderings; chart-fraction convention of Tag 0804"
+   }
+  },
+  {
+   "text": "The presentations in step 2 exhibit each $C_x,C_y$ as a quotient of a polynomial algebra in one variable over the Noetherian ring $A$. In particular these are finite type $A$-algebras in exactly the sense of [lem-weil-pbc-finite-type-algebra-noetherian]. Apply that statement twice to conclude that both chart rings are Noetherian. No regular-local or domain hypothesis on $A$ is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence, first assertion"
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-chart-extended-ideal-principal] with $a=x$ and $a=y$ to obtain $IC_x=(x)$ and $IC_y=(y)$. Apply [lemma-nagata-chart-generator-regular] to the same two chart rings: multiplication by $x$ on $C_x$ and by $y$ on $C_y$ is injective. These statements concern the structural images of the indicated elements. They also follow directly from the fraction model: $y=xt$ and $x=yu$ give the two ideal equalities, and cancellation by $x$ in $A_x$ or by $y$ in $A_y$ restricts to injectivity on the respective subalgebras.",
+   "uses": [
+    "lemma-nagata-chart-extended-ideal-principal",
+    "lemma-nagata-chart-generator-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), proof of (2), citing algebra.tex Tag 07Z3 (lemma-affine-blowup)"
+   }
+  },
+  {
+   "text": "For either chart ring $C$, the fibre product description [lem-weil-pbc-fibre-product-affine-spectra] identifies its part of $Z$ with $\\operatorname{Spec}((A/I)\\otimes_A C)$, the projection to $\\operatorname{Spec}C$ being induced by $c\\mapsto\\bar1\\otimes c$. Clause (1) of [lem-weil-pbc-tensor-over-quotient-ring] identifies this module with $C/IC$, by $\\bar a\\otimes c\\mapsto ac\\bmod IC$. This is also an isomorphism of rings: it takes $\\bar1\\otimes1$ to $1$ and the product $(\\bar a\\otimes c)(\\bar b\\otimes d)$ to $abcd\\bmod IC$, the product of the images; additive extension gives the assertion for sums. Hence the chart projection is the closed subscheme defined by $IC$, by [def-weil-pbc-algebra-hom-quotient]. With step 4 these ideals are $(x)$ on $U_x$ and $(y)$ on $U_y$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), proof of (2); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); algebra.tex Tag 00DF (lemma-tensor-product-exact)"
+   }
+  },
+  {
+   "text": "The extended ideal on the cover $U_x\\cup U_y$ therefore defines $Z$ and is generated there by the nonzerodivisors in step 4. This is exactly the open-cover criterion in [def-nagata-effective-cartier-ideal]. Thus $Z$ is an effective Cartier divisor on $Y$.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), assertion (2) and its proof"
+   }
+  },
+  {
+   "text": "The two Noetherian affine chart rings of step 3 give a locally Noetherian affine cover of $Y$, so [pqf-def-locnoeth] gives local Noetherianity. By clause (iii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], each of $U_x,U_y$ is quasi-compact. Any open cover of $Y$ restricts to an open cover of each chart; choose a finite subcover of each chart and take the union of the two finite index sets. This is a finite subcover of $Y$. Thus $Y$ is also quasi-compact, which is the stipulated meaning of Noetherian.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "algebra.tex Tag 00E8 (lemma-quasi-compact); properties.tex Tag 01OV (definition-noetherian)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-nagata-affine-blowup-chart-cover",
+  "def-nagata-affine-blowup",
+  "def-nagata-affine-blowup-chart-map",
+  "prop-nagata-affine-blowup-chart",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "def-nagata-homogeneous-away-to-chart",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lemma-nagata-chart-generator-regular",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-nagata-effective-cartier-ideal",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0804 (lemma-blowing-up-affine) and Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), proof of (2); more-algebra.tex Tag 0BIQ; algebra.tex Tags 00FN and 00E8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian ring and a regular sequence x y in both orders the blowup of the ideal (x,y) has two Noetherian affine charts A[t]/(x*t-y) and A[u]/(y*u-x) with extended ideal generated by a nonzerodivisor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra\", \"module\": \"Mathlib/RingTheory/ReesAlgebra\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} [IsNoetherianRing R], IsNoetherianRing ↥(reesAlgebra I)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the Rees algebra of $ I $, which is the subalgebra of the polynomial ring $ R[X] $ consisting of polynomials whose coeffi\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R],\\n  AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec { carrier := R, commRing := inst })\", \"doc\": \"The spectrum of a Noetherian commutative ring is a Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring, then the scheme $ \\\\operatorname{Spec}(R) $ is a Noetherian scheme. This instance asserts that the prime spectrum of a Noetherian ring, equipped with the Zari\"}\n  {\"name\": \"instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing\", \"module\": \"Mathlib/RingTheory/ReesAlgebra\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} [IsNoetherianRing R], Algebra.FiniteType R ↥(reesAlgebra I)\", \"doc\": \"If $ R $ is a Noetherian ring and $ I $ is an ideal of $ R $, then the Rees algebra of $ I $ is a finitely generated $ R $-algebra. This follows from the fact that each graded component $ I^i $ of the\"}\n  {\"name\": \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"module\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness\", \"type\": \"∀ (A : Type u) [inst : CommRing A] (M : Type v) [inst_1 : AddCommGroup M] [inst_2 : Module A M] [IsNoetherianRing A]\\n  [Module.Finite A M], ∃ s, s.head = ⊥ ∧ s.last = ⊤\", \"doc\": \"In a Noetherian ring $ A $, for any $ A $-module $ M $, there exists a relation series of submodules starting from the trivial submodule $ \\\\{0\\\\} $ and ending at the entire module $ M $, such that each\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"For a commutative ring $ R $, the scheme $ \\\\operatorname{Spec}(R) $ is Noetherian if and only if $ R $ is a Noetherian ring.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Rees-algebra finiteness and general Proj affine covers do not supply the two hypersurface chart identifications, their coordinate maps or the Cartier equations; this requires the existing regular-sequence presentation plus the geometric assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"chart\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Rees-algebra finiteness and general Proj affine covers do not supply the two hypersurface chart identifications, their coordinate maps or the Cartier equations; this requires the existing regular-sequence presentation plus the geometric assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|Blowup|blow_up",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/RingTheory/ReesAlgebra.lean\", \"line\": \"17\", \"text\": \"blowup in the future.\"}\n  {\"file\": \"Mathlib/Algebra/HierarchyDesign.lean\", \"line\": \"46\", \"text\": \"https://www.ralfj.de/blog/2019/05/15/typeclasses-exponential-blowup.html\"}\n  {\"file\": \"Mathlib/Tactic/ITauto.lean\", \"line\": \"77\", \"text\": \"cause a blowup issue for `Xor`, but it isn't used very often anyway. We could add it to the `IProp`\"}\n  {\"file\": \"Mathlib/Tactic/Linarith/Frontend.lean\", \"line\": \"59\", \"text\": \"overall if it succeeds in all cases. This leads to exponential blowup in the number of `linarith`\"}\n  {\"file\": \"Mathlib/Tactic/GRewrite/Core.lean\", \"line\": \"127\", \"text\": \"  This lets us avoid an exponential blowup when there are multiple `gcongr` lemmas for rewriting\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"line\": \"51\", \"text\": \"are very tedious to manipulate. We avoid this blowup by carefully controlling which definitions\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Rees-algebra finiteness and general Proj affine covers do not supply the two hypersurface chart identifications, their coordinate maps or the Cartier equations; this requires the existing regular-sequence presentation plus the geometric assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A blowup of an ideal generated by a regular sequence of length two is covered by the two hypersurface affine charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": I.subscheme.AffineOpenCover\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme $\\\\operatorname{Subscheme}(\\\\mathcal{I})$ admits an affine open cover constructed by taking, for each affine open subset \"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{R : CommRingCat} {ι : Type*} (s : ι → R) (hs : Ideal.span (Set.range s) = ⊤) : (Spec R).AffineOpenCover\", \"doc\": \"Given a commutative ring $ R $ and a set of elements $\\\\{s_i\\\\}$ whose ideal span is the unit ideal (i.e., $\\\\langle s_i \\\\rangle = R$), the localization morphisms $\\\\operatorname{Spec}(R_{s_i}) \\\\to \\\\opera\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(R : CommRingCat.{u}) : OpenCover (Spec R)\", \"doc\": \"For any commutative ring $ R $, this constructs the open cover of the scheme $ \\\\operatorname{Spec}(R) $ by the standard affine open immersions $ \\\\operatorname{Spec}(R_r) \\\\to \\\\operatorname{Spec}(R) $, \"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{ι : Type*} (f : ι → A) {m : ι → ℕ} (f_deg : ∀ i, f i ∈ 𝒜 (m i)) (hm : ∀ i, 0 < m i)\\n  (hf : (HomogeneousIdeal.irrelevant 𝒜).toIdeal ≤ Ideal.span (Set.range f)) : (Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"∀ {R : CommRingCat} {ι : Type u_1} (s : ι → ↑R) (hs : Ideal.span (Set.range s) = ⊤),\\n  (AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop s hs).I₀ = ι\", \"doc\": \"Given a commutative ring $ R $, an index type $ \\\\iota $, and a function $ s: \\\\iota \\\\to R $, if the ideal generated by the image of $ s $ equals the entire ring $ R $, then the index set $ I_0 $ of the\"}\n  {\"name\": \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (elements with zero zeroth homogeneous component) is contained in the ideal generated by a set of hom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : OpenCover X\", \"doc\": \"For any scheme $X$, this constructs an open cover by affine open immersions obtained by taking the standard affine open subsets (localizations at elements) of each affine open subscheme in $X$'s affin\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Rees-algebra finiteness and general Proj affine covers do not supply the two hypersurface chart identifications, their coordinate maps or the Cartier equations; this requires the existing regular-sequence presentation plus the geometric assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Rees algebra Proj of a two generated complete intersection ideal has standard affine charts with the exceptional ideal principal and regular",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {ι : Type u_2} →\\n                (f : ι → A) →\\n                  {m : ι → ℕ} →\\n            \", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$ over a commutative ring $A$, if the irrelevant ideal (consisting of elements with zero zeroth homogeneous component) is contained in the ideal generated b\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) → [inst_3 : GradedRing 𝒜] → (AlgebraicGeometry.Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpecTopComponent\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and a homogeneous element $f$ of positive degree $m$, there is a homeomorphism between the basic open set $D_+(f) \\\\subseteq \\\\operatorname{Proj}(\\\\mathcal{A})$ and the pr\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.projIsoSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"For a graded ring $ \\\\mathcal{A} $ and a homogeneous element $ f $ of positive degree $ m $, the morphism of locally ringed spaces from the basic open set $ D_+(f) \\\\subseteq \\\\text{Proj}(\\\\mathcal{A}) $ \"}\n  {\"name\": \"AlgebraicGeometry.Proj.awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              (f : A) →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m →\", \"doc\": \"The canonical morphism from the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_{(f)})$ to the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$, constructed by composing the inverse of the isomor\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (q :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"The ideal in the graded ring $ A $ consisting of all elements $ a $ such that for every natural number $ i $, the homogeneous fraction $ \\\\frac{(\\\\text{proj}_i(a))^m}{f^i} $ lies in the prime ideal $ q \"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"The function maps a prime ideal $ q $ in the degree-zero localization $ A_f^0 $ of a graded ring $ \\\\mathcal{A} $ to a homogeneous prime ideal in $ \\\\text{Proj}(\\\\mathcal{A}) $ that does not contain the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: Rees-algebra finiteness and general Proj affine covers do not supply the two hypersurface chart identifications, their coordinate maps or the Cartier equations; this requires the existing regular-sequence presentation plus the geometric assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowup of an ideal generated by a regular sequence x y has affine charts A[t]/(x*t-y) with a nonzerodivisor exceptional equation",
+   "results": "Q28 command log: {\"ok\": true, \"n_hits\": 8, \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.quotientXYIdealEquiv\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give regular-sequence definitions, general Proj covers or Rees algebras, not this complete two-chart hypersurface and exceptional-divisor statement."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blowUp|Blowup|blow_up",
+   "results": "Q28 command log: {\"ok\": true, \"n_hits\": 6, \"top\": [\"Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean\", \"Mathlib/Algebra/HierarchyDesign.lean\", \"Mathlib/Tactic/GRewrite/Core.lean\", \"Mathlib/Tactic/Linarith/Frontend.lean\", \"Mathlib/Tactic/ITauto.lean\", \"Mathlib/RingTheory/ReesAlgebra.lean\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give regular-sequence definitions, general Proj covers or Rees algebras, not this complete two-chart hypersurface and exceptional-divisor statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\", \"chart\"",
+   "results": "Q28 command log: {\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give regular-sequence definitions, general Proj covers or Rees algebras, not this complete two-chart hypersurface and exceptional-divisor statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A blowup of a two generated regular sequence ideal has two hypersurface charts and an effective Cartier exceptional divisor",
+   "results": "Q28 command log: {\"ok\": true, \"n_hits\": 8, \"top\": [\"RingTheory.Sequence.IsRegular\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"RingTheory.Sequence.IsRegular.recOn\", \"RingTheory.Sequence.IsRegular.recIterModByRegular\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"RingTheory.Sequence.IsRegular.casesOn\", \"RingTheory.Sequence.IsRegular.rec\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give regular-sequence definitions, general Proj covers or Rees algebras, not this complete two-chart hypersurface and exceptional-divisor statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Proj of the Rees algebra of a two generated ideal is covered by standard degree zero localization charts with an effective Cartier exceptional divisor",
+   "results": "Q28 command log: {\"ok\": true, \"n_hits\": 8, \"top\": [\"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.awayι\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give regular-sequence definitions, general Proj covers or Rees algebras, not this complete two-chart hypersurface and exceptional-divisor statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-surface-maximal-blowup-geometry",
+  "date": "2026-10-23",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 8: identify the exceptional divisor of a regular surface-point blowup as the projective line over the center residue field.; re-split of lem-sfb-local-surface-maximal-blowup-geometry: old proof steps 1--3 (two-chart atlas, nonzerodivisor equations and finite cover Noetherianity)",
+   "via": [
+    "lem-sfb-local-surface-maximal-blowup-geometry",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-two-parameter-blowup-atlas",
+  "worker": "stage1",
+  "summary": "Reused the general regular-sequence chart presentation in both orders and the existing finite chart-cover, principal-ideal, nonzerodivisor, finite-type Noetherian and affine fibre-product statements. Checked both chart coordinates and the quotient map defining the exceptional fibre. No new nodes; the final Cartier and finite-cover arguments are explicit. Mathematical hypotheses and conclusions are unchanged.",
+  "blueprint": "The existing inherited from.place locates the two-chart and Noetherianity subargument of the surface-point blowup prerequisite. Steps 1--2 realize the chart and coordinate part, steps 3--6 the Noetherian ring and Cartier equations part, and step 7 the finite-cover Noetherian scheme part. Read the current latest sk-thm-sf-ctf-stability unit and direct-images proof; their coefficient-preservation route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic finite-generator blowup cover used for I=(x,y); no competing construction in this unit."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart",
+    "why": "Generic chart isomorphism over the base identifies the generator charts with the specified Proj opens."
+   },
+   {
+    "node": "lem-trf-blowup-chart-regular-sequence-presentation",
+    "why": "General algebra presentation specialized to length two in both orders; the six-functor unit does not supply this commutative-algebra input."
+   },
+   {
+    "node": "lemma-nagata-chart-extended-ideal-principal",
+    "why": "Generic principal exceptional ideal on an arbitrary affine blowup chart."
+   },
+   {
+    "node": "lemma-nagata-chart-generator-regular",
+    "why": "Generic injectivity of the exceptional equation on an affine blowup chart."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-nagata-affine-blowup-chart-cover",
+  "prop-nagata-affine-blowup-chart",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lemma-nagata-chart-generator-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-bb4dce41e",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-bb4dce41e (reviewer sub-agent of L); spot-checked: Read the item and all 15 cited statements in full. The statement is unchanged from live except that four existing convention nodes are now cited (def-nagata-affine-blowup, rees-algebra, weil-polynomial-ring, pbc-algebra-hom-quotient). The item is still unsplit on live and side-live. No new nodes. Step checks: step 1, prop-nagata-affine-blowup-chart-cover with (f0,f1)=(x,y), plus chart-map/prop-chart, identifies U_x, U_y with D_+(xT), D_+(yT) over Spec A. Step 2, lem-trf-blowup-chart-regular-sequence-presentation (Stacks 0BIQ, more-algebra l.7884) with s=2, applied in both orders, which are both hypotheses; θ_a with n=1 gives the Proj coordinates. Step 3, finite-type over Noetherian A (00FN node) gives Noetherian charts. Step 4, the Nagata nodes give IA[I/a]=(a) and injectivity of multiplication by a, applied with a=x,y. Step 5, fibre product of affine spectra plus tensor-over-quotient clause (1), upgraded to a ring iso in the step, gives Z∩U = Spec C/IC. Steps 6 and 7 are genuinely elementary: the Cartier cover criterion, and a two-chart Noetherian quasi-compact cover. Tested on k[X,Y] and on the non-reduced k[ε]/(ε²)[X,Y]. Regularity forces A/(x,y)≠0, so unit parameters are excluded. Duplicate search (0BIQ, 02OS, xt−y, blowup+regular sequence) finds no node stating this package. Batch-5: the cited lem-trf-blowup-chart-regular-sequence-presentation is pure commutative algebra (Stacks 0BIQ; deps are Koszul/syzygy/torsion algebra nodes). Neither the trace-formula assumption nor Poincaré duality gives it, and it is not a step of either proof, so the citation is acceptable. No SGA source is used. The five generic Nagata/trf algebra tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TwoParameterBlowupAtlas",
+  "declaration": "AlgebraicGeometry.twoParameterBlowupAtlas",
+  "file": "lean/Sheaf/AlgebraicGeometry/TwoParameterBlowupAtlas.lean",
+  "statement": "theorem twoParameterBlowupAtlas {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) (x y : I) (hI : Ideal.span ({(x : A), (y : A)} : Set A) = I) (hxy : RingTheory.Sequence.IsRegular A [(x : A), (y : A)]) (hyx : RingTheory.Sequence.IsRegular A [(y : A), (x : A)]) : ((AffineBlowup.chartRingι I x.property).opensRange ⊔ (AffineBlowup.chartRingι I y.property).opensRange = ⊤) ∧ (∀ a b : I, (a = x ∧ b = y) ∨ (a = y ∧ b = x) → (AffineBlowup.chartRingι I a.property).opensRange = Proj.basicOpen (reesGrading I) (reesX I a a.property) ∧ AffineBlowup.chartRingι I a.property ≫ AffineBlowup.toSpec I = Spec.map (CommRingCat.ofHom (algebraMap A (AffineBlowup.chartRing I a))) ∧ (∃ e : (Polynomial A ⧸ Ideal.span {Polynomial.C (a : A) * Polynomial.X - Polynomial.C (b : A)}) ≃ₐ[A] AffineBlowup.chartRing I a, ((e (Ideal.Quotient.mk _ Polynomial.X) : AffineBlowup.chartRing I a) : Localization.Away (a : A)) = AffineBlowup.chartFraction (a : A) 1 (b : A) ∧ e (Ideal.Quotient.mk _ Polynomial.X) = AffineBlowup.homogeneousAwayToChart I a.property (HomogeneousLocalization.Away.mk (reesGrading I) (reesX_mem I a a.property) 1 (reesX I b b.property) (reesX_mem I b b.property))) ∧ IsNoetherianRing (AffineBlowup.chartRing I a) ∧ I.map (algebraMap A (AffineBlowup.chartRing I a)) = Ideal.span {algebraMap A (AffineBlowup.chartRing I a) (a : A)} ∧ Function.Injective (fun c : AffineBlowup.chartRing I a ↦ algebraMap A (AffineBlowup.chartRing I a) (a : A) * c) ∧ (∃ eZ : pullback (AffineBlowup.chartRingι I a.property) (pullback.fst (AffineBlowup.toSpec I) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) ≅ Spec (.of (AffineBlowup.chartRing I a ⧸ I.map (algebraMap A (AffineBlowup.chartRing I a)))), eZ.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I.map (algebraMap A (AffineBlowup.chartRing I a))))) = pullback.fst (AffineBlowup.chartRingι I a.property) (pullback.fst (AffineBlowup.toSpec I) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))))) ∧ IsClosedImmersion (pullback.fst (AffineBlowup.toSpec I) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))) ∧ (pullback.fst (AffineBlowup.toSpec I) (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))).ker.IsInvertible ∧ IsNoetherian (AffineBlowup I)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4e5c942b9",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim; docstrings carry source, blueprint id and the 7 proof steps; one theorem, sorry only, no defs. Every clause matched: Noetherian A, I=(x,y) via bundled I-elements + hI, both IsRegular orderings (exclude zero ring/units/x=y as in node), Y=AffineBlowup (Rees Proj), Z=pullback(toSpec, Spec(A→A/I)), cover by the existing canonical chartRingι (Spec θ_a ≫ Proj.awayι, open immersion), over Spec A via algebraMap, opensRange=D_+(aT), A-alg iso A[X]/(aX−b)≃ₐ chartRing pinned by X↦b/a and θ_a(bT/aT), Noetherian chart rings, IC=(a), injective mult by a, Z∩U ≅ Spec(C/IC) with correct projection, IsClosedImmersion + ker.IsInvertible (effective Cartier), IsNoetherian Y. Single universe, no extra hypotheses. Notes: reesX (recorded on statement node lemma-nagata-rees-degree-one-element) and homogeneousAwayToChart (def-nagata-homogeneous-away-to-chart, a proof_dep) are not stmt_deps but are canonical existing helpers and nothing was added to stmt_deps; maintainer may cite the def node at stage 1. No recompile (no file changed); worker reports clean server compile."
+ }
+}

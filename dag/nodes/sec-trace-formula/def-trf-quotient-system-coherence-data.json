@@ -1,0 +1,131 @@
+{
+ "id": "def-trf-quotient-system-coherence-data",
+ "kind": "definition",
+ "title": "Shared canonical quotient-system coherence data",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "The definitions and uniquely characterized scalar comparison isomorphisms used by [lem-trf-quotient-system-mixed-coherence], with unchanged parameters and constructor equations. The scalar associator and unitor are determined by their universal cochain counit equations on K-flat models. Paths retain scheme-indexed empty, singleton and composite constructors. This node records the shared data API required by independent component modules.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-independent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+ },
+ "proof": [
+  {
+   "text": "Construct the scalar comparison by the universal left-derived lift of the ordinary scalar composition or identity. Its components are invertible on flat-term K-flat models; naturality and resolution prove invertibility everywhere. Cancel the universal target counit to prove uniqueness. Define the path interpretation and comparison by structural recursion with the prescribed equality transports.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U4",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite path bracketing independence from associative and unital functor comparison isomorphisms; scalar pullback coherence descends by K-flat resolutions",
+   "results": "8 hits, exact derived functor factors and shift instances; no complete mixed sequence-system equation or finite assembly theorem.",
+   "date": "2026-10-25",
+   "verdict": "Partial tools only; no direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryCompIso_assoc",
+   "results": "0 hits: identifier not in Mathlib search index. The adopted source-library derived comparison API was read directly.",
+   "date": "2026-10-25",
+   "verdict": "Use source comparison compatibility for geometric associativity; remaining equality transport is the split step."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso_assoc|pullback_assoc|leftAdjointCompIso_assoc",
+   "results": "13 Mathlib hits, including Adjunction.leftAdjointCompIso_assoc and SheafOfModules.pullback_assoc.",
+   "date": "2026-10-25",
+   "verdict": "Ordinary three-arrow tools do not alone assert the displayed derived equations or arbitrary binary assembly theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coherence of associative unital inverse image comparisons and scalar change comparisons in derived categories",
+   "results": "8 hits: ModuleCat.extendScalars_assoc'; derived adjunction factors; coimageImageComparison_app; localizer derived comparison factors; quasi-isomorphism inversion.",
+   "date": "2026-10-25",
+   "verdict": "Partial ordinary scalar and localization APIs; no entire sequence-site mixed equation or arbitrary bracketing theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSystemMixedCoherence",
+  "date": "2026-10-25",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-quotient-system-mixed-coherence",
+   "place": "Explicit component of the finite-string or derived coherence argument.",
+   "via": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientSystemMixedCoherenceData",
+  "file": "lean/Sheaf/Paper/QuotientSystemMixedCoherenceData.lean",
+  "declaration": "WeilConjectures.integralComparisonSystemScalarComposition_existsUnique",
+  "statement": "theorem integralComparisonSystemScalarComposition_existsUnique (X : Scheme.{t}) :\n    ∃! a : integralComparisonDerivedSequenceScalar l E L ι X ⋙\n        integralComparisonDerivedSequenceScalar l L M j X ≅\n      integralComparisonDerivedSequenceScalar l E M (j.comp ι) X,\n      ∀ (P : CochainComplex (coefficientSequenceModules l E X) ℤ),\n        CochainComplex.IsKFlatIndependentCoefficients\n          (R := coefficientSequenceCommRingSheaf l E X) P →\n        a.hom.app (DerivedCategory.Q.obj P) ≫\n            (integralComparisonSequenceScalarModel l E M (j.comp ι) X).ε.app P =\n          (integralComparisonDerivedSequenceScalar l L M j X).map\n              ((integralComparisonSequenceScalarModel l E L ι X).ε.app P) ≫\n            (integralComparisonSequenceScalarModel l L M j X).ε.app\n              (((integralComparisonSequenceScalarModel l E L ι X).E.mapHomologicalComplex\n                (.up ℤ)).obj P) ≫\n            DerivedCategory.Q.map\n              ((NatIso.mapHomologicalComplex\n                (integralComparisonSequenceScalarComposition l E L ι M j X)\n                  (.up ℤ)).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-25",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.integralComparisonSystemScalarComposition_existsUnique",
+   "WeilConjectures.integralComparisonSystemScalarComposition",
+   "WeilConjectures.integralComparisonSystemScalarUnit_existsUnique",
+   "WeilConjectures.integralComparisonSystemScalarUnit",
+   "WeilConjectures.IntegralQuotientPathInvertible",
+   "WeilConjectures.IntegralQuotientBracketing",
+   "WeilConjectures.integralQuotientBracketFunctor",
+   "WeilConjectures.integralQuotientBracketComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2a332",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261025T164455-L-1022707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2a332",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261025T164455-L-1022707",
+  "kind": "interface",
+  "note": "independent cc review: 2a3329 Lean+node files byte-identical to previously reviewed 1e2d2af4 (FIX); base drift checked (no changed deps/importers); reader gate re-run: 7 delivered modules + 5 live direct importers compile; axioms as expected; item node differs from live only in lean/proof/proof_deps/proof_origin"
+ }
+}

@@ -1,0 +1,144 @@
+{
+ "id": "lem-trf-flattening-smooth-affine-reduction",
+ "kind": "statement",
+ "title": "Etale devissage reduction of bounded-support flattening",
+ "statement": "Fix $d\\in\\mathbf N$. Suppose that for every $n<d$, every affine base $T$, every affine smooth morphism $g:Y\\to T$ of relative dimension $n$ with geometrically integral fibres (integral after every residue-field extension), every finite-type quasi-coherent module $N$ on $Y$, and every quasi-compact open $V\\subseteq T$ such that $N|_{Y_V}$ is finitely presented and flat over $V$, there is a $V$-admissible blowup making the canonical module strict transform of $N$ flat. Let $S$ be qcqs, $f:X\\to S$ quasi-compact and locally of finite presentation, $F$ a finite-type quasi-coherent module, and $U\\subseteq S$ a quasi-compact open such that $F|_{X_U}$ is finitely presented and flat over $U$. For $s\\in S$ let $F_s$ be its tensor pullback to the scheme fibre $X_s$. Suppose $\\dim\\{x\\in X_s:(F_s)_x\\ne0\\}<d$ for every $s$, with empty support assigned dimension $-\\infty$. Then there is a $U$-admissible blowup making the strict transform of $F$ flat over the new base. Schemes, module properties, flatness, dimension, smooth morphisms, pullback, admissible blowups and their canonical strict transforms use the conventions of [def-weil-pbc-scheme-conventions], [def-weil-quasi-separated-morphism], [def-sbc-locally-finite-presentation], [def-nagata-admissible-blowup], [def-trf-module-strict-transform], [pqf-def-coherent], [def-weil-pbc-module-finite-type-presentation], [lem-pqf-finite-type-ideal-module], [def-pc-module-stalk-functor], [def-pc-scheme-module-flat-over], [def-sbc-smooth-morphisms], [def-kun-topological-krull-dimension], [def-weil-etale-morphism]. Module tensor pullback is [def-pc-module-pullback]; integrality is [def-pc-integral-scheme].",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "First two proof paragraphs of Tag 0815, theorem-flatten-module; Tag 0814, lemma-flatten-module-etale-localize."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-quasi-separated-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-nagata-admissible-blowup",
+  "def-trf-module-strict-transform",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-pqf-finite-type-ideal-module",
+  "def-pc-module-stalk-functor",
+  "def-pc-scheme-module-flat-over",
+  "def-sbc-smooth-morphisms",
+  "def-kun-topological-krull-dimension",
+  "def-weil-etale-morphism",
+  "def-pc-module-pullback",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "At a point of nonzero fibre support, devissage transfer supplies an affine smooth geometrically integral family of relative dimension n equal to the local support dimension. Local dimension is at most global dimension, so n < d. Apply the assumed smooth-family assertion to its finite pushforward module and use the transfer equivalence to flatten the pulled-back original module.",
+   "uses": [
+    "lem-trf-devissage-flattening-transfer"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a point outside the fibre support, the residue-field support criterion shows its original stalk vanishes. The finite-type support is closed, so restrict to a zero-module neighbourhood. Identity base change and the unit-ideal blowup solve this local problem. Compactness of X selects finitely many of these and the devissage neighbourhoods.",
+   "uses": [
+    "lem-weil-pbc-support-pullback-finite-type",
+    "def-nagata-admissible-blowup"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine etale bases are quasi-compact over the quasi-separated S. Adjoin empty-source diagrams over a finite affine base cover, so both sources and bases are jointly covered. Apply finite etale flattening descent. At d=0 the support is everywhere empty, and the second and third steps alone apply.",
+   "uses": [
+    "lem-trf-etale-flattening-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-devissage-flattening-transfer",
+  "lem-weil-pbc-support-pullback-finite-type",
+  "def-nagata-admissible-blowup",
+  "lem-trf-etale-flattening-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "First two proof paragraphs of Tag 0815, theorem-flatten-module; Tag 0814, lemma-flatten-module-etale-localize."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "devissage.*flatten|flatten.*smooth",
+   "results": "0 hits; top=[]. No geometric flattening induction reduction; existing project-specific reductions were checked separately.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local devissage reduces flattening of a quasi coherent module to smooth affine families with geometrically integral fibres",
+   "results": "8 hits; top=['Module.Flat.of_isLocalizedModule', 'Module.Flat.of_flat_tensorProduct', 'Algebra.Smooth.flat', 'AlgebraicGeometry.IsEtale', 'Algebra.FormallyEtale.of_unramified_and_smooth', 'Algebra.FormallyEtale.instFormallySmooth', 'Algebra.FormallyEtale.iff_unramified_and_smooth', 'Algebra.Smooth.flat_of_isNoetherianRing']. No geometric flattening induction reduction; existing project-specific reductions were checked separately.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local devissage reduces flattening of a quasi coherent module to smooth affine families with geometrically integral fibres",
+   "results": "8 hits; top=['Algebra.Smooth.flat', 'AlgebraicGeometry.flat_iff', 'AlgebraicGeometry.Flat', 'Algebra.Smooth.flat_of_isNoetherianRing', 'AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth', 'AlgebraicGeometry.Flat.of_stalkMap', 'AlgebraicGeometry.Flat.flat_appLE', 'AlgebraicGeometry.IsSmooth.exists_isStandardSmooth']. No geometric flattening induction reduction; existing project-specific reductions were checked separately.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatteningModuleByAdmissibleBlowup",
+  "date": "2026-10-26",
+  "group": "B5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks Tag 0815: First two proof paragraphs of Tag 0815, theorem-flatten-module; Tag 0814, lemma-flatten-module-etale-localize.",
+   "via": [
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatteningSmoothAffineReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatteningSmoothAffineReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_flat_moduleStrictTransform_of_smooth_affine",
+  "statement": "theorem exists_flat_moduleStrictTransform_of_smooth_affine\n    (d : ℕ)\n    (hsmooth : ∀ n : ℕ, n < d →\n      ∀ (S X : Scheme.{u}) [IsAffine S]\n      (f : X ⟶ S) [IsAffineHom f] [SmoothOfRelativeDimension n f]\n      [GeometricallyIntegral f] (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType]\n      (U : S.Opens), IsCompact (U : Set S) →\n      (F.restrict (f ⁻¹ᵁ U).ι).IsFinitePresentation →\n      (F.restrict (f ⁻¹ᵁ U).ι).IsFlatOver (f ∣_ U) →\n      ∃ B : IsAdmissible S U,\n      (@moduleStrictTransform _ _ f B.I\n        (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).IsFlatOver\n          (pullback.snd f B.I.blowupMap))\n    {S X : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S]\n    (f : X ⟶ S) [QuasiCompact f] [LocallyOfFinitePresentation f]\n    (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType]\n    (U : S.Opens) (hU : IsCompact (U : Set S))\n    (hfp : (F.restrict (f ⁻¹ᵁ U).ι).IsFinitePresentation)\n    (hflat : ∀ x : X, f x ∈ U → Module.Flat (S.presheaf.stalk (f x))\n        ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj\n          ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)))\n    (hdim : ∀ s : S, topologicalKrullDim {x : f.fiber s |\n      ¬ Subsingleton (((tensorPullback (f.fiberι s)).obj F).presheaf.stalk x)} <\n        (d : WithBot ℕ∞)) :\n    ∃ B : IsAdmissible S U,\n      (@moduleStrictTransform _ _ f B.I\n        (B.I.isFiniteType_toModules_sheaf B.finiteType) F inferInstance).IsFlatOver\n          (pullback.snd f B.I.blowupMap)",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T081025-L-1770709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261026T081025-L-1770709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

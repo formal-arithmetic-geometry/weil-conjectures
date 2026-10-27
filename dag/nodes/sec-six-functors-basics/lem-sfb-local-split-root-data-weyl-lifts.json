@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-local-split-root-data-weyl-lifts",
+ "kind": "statement",
+ "title": "Split local root subgroups and global Weyl representatives",
+ "statement": "Let $A$ be a nonzero commutative Noetherian local ring [def-weil-pbc-noetherian-ring]. An $A$-group scheme has multiplication, identity and inverse over $\\operatorname{Spec}A$ satisfying the group diagrams of [def-sc-group-scheme]. Let $H$ be a smooth [def-sbc-smooth-morphisms] affine finite-type [def-weil-finite-type-morphism] $A$-group scheme whose geometric fibres are reductive: each is connected [def-weil-connected-scheme] and has no nontrivial smooth connected normal unipotent subgroup. Unipotent means all geometric points are unipotent matrices in a faithful representation. Let $S\\hookrightarrow H$ be a closed subgroup [def-weil-closed-immersion], with a specified isomorphism $S\\simeq\\mathbf G_{m,A}^r$, $r\\geq0$, whose geometric fibres are maximal tori; a torus over an algebraically closed field is a finite product of $\\mathbf G_m$, and maximal means maximal for subgroup inclusion. Here $\\mathbf G_{m,A}=\\operatorname{Spec}A[z,z^{-1}]$, with multiplication of units.\nWrite $M=\\mathbf Z^r$; $m=(m_j)\\in M$ defines the character $\\chi_m(s)=\\prod_j s_j^{m_j}$ of $S$. Let $\\mathfrak h=\\ker\\bigl(H(A[\\epsilon]/(\\epsilon^2))\\to H(A)\\bigr)$, $\\epsilon\\mapsto0$, be the tangent $A$-module of $H$ at the identity, where $a\\in A$ acts through the $A$-algebra map $\\epsilon\\mapsto a\\epsilon$ and addition is the group law. Conjugation by $S$ gives an $A$-linear coaction $\\rho:\\mathfrak h\\to\\mathfrak h\\otimes_AA[M]$, $A[M]=A[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$ with $e^m=\\prod_jz_j^{m_j}$, and $\\mathfrak h_m=\\{v\\in\\mathfrak h:\\rho(v)=v\\otimes e^m\\}$ is its character-weight summand for the full torus coaction. There is a finite subset $\\Phi\\subset M\\setminus\\{0\\}$, closed under negation, such that $\\mathfrak h_m$ is free of rank one for $m\\in\\Phi$ and is zero for other nonzero $m$. For every algebraically closed field $F$ with $A\\to F$, these characters are precisely the roots of $(H_F,S_F)$, with the usual character-weight meaning in [lem-sfb-reductive-root-subgroup-parametrizations]. There is a homomorphism $\\lambda:M\\to\\mathbf Z$ nonzero on $\\Phi$; put $\\Phi^+=\\{\\alpha\\in\\Phi:\\lambda(\\alpha)>0\\}$, so $\\Phi=\\Phi^+\\sqcup(-\\Phi^+)$. For each $\\alpha\\in\\Phi$ there is a closed $A$-subgroup $U_\\alpha\\subseteq H$ and an $S$-equivariant isomorphism $u_\\alpha:\\mathbf G_{a,A}\\xrightarrow{\\sim}U_\\alpha$, where $\\mathbf G_{a,A}=\\operatorname{Spec}A[t]$ has addition and $s u_\\alpha(t)s^{-1}=u_\\alpha(\\chi_\\alpha(s)t)$. These subgroups become the corresponding root subgroups over every such $F$.\nThere are a finite group $W\\subseteq\\operatorname{Aut}(M)$ preserving $\\Phi$ and elements $n_w\\in H(A)$, for $w\\in W$, which normalize $S$, act on its characters by $\\chi_{wm}(s)=\\chi_m(n_w^{-1}s n_w)$, and satisfy $n_wU_\\alpha n_w^{-1}=U_{w\\alpha}$. For every $A\\to F$ as above, $w\\mapsto[n_w]$ identifies $W$ with $N_{H_F}(S_F)(F)/S_F(F)$, where the normalizer consists of elements preserving $S_F$ under conjugation. All character and root subgroup identifications commute with further algebraically closed field extension. If $\\Phi=\\varnothing$, take $W=\\{1\\}$ and the empty root subgroup family.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, introduction to Section 4, printed p.107 (weight subbundles); Definition 5.1.1 and its following discussion, p.136 (connected-base constancy); Theorem 4.1.4, p.110 (relative root groups); Proposition 5.1.6, p.138 (constant Weyl group); Corollary 5.1.11, pp.142-143 (global Weyl representatives). Local freeness of root lines becomes freeness over the local ring. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "lem-sfb-reductive-root-subgroup-parametrizations"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-relative-tangent-weight-base-change] to the conjugation action. Write $\\mathfrak h=\\bigoplus_m\\mathfrak h_m$ with finite support and finite projective summands. At the unique maximal ideal $\\mathfrak m$ of $A$, [lem-weil-pbc-finite-projective-prime-local-free] supplies $f\\notin\\mathfrak m$ such that $(\\mathfrak h_m)_f$ is finite free. Such $f$ is a unit, so $\\mathfrak h_m$ itself is finite free. Choose an algebraic closure $F_0$ of $A/\\mathfrak m$. The tangent comparison identifies its rank with the dimension of the character-weight space on $H_{F_0}$. By [lem-sfb-reductive-rank-one-reflections] every nonzero root weight there has dimension one and roots occur in opposite pairs. Let $\\Phi$ be this finite nonzero weight set. Thus $\\mathfrak h_m$ has rank one for $m\\in\\Phi$ and rank zero otherwise, and hence is zero in the latter case. The same base-change comparison for any algebraically closed $A$-field $F$ shows that its nonzero root weights are exactly $\\Phi$.",
+   "uses": [
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-weil-pbc-finite-projective-prime-local-free",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Section 4 introduction, p.107; local freeness argument from Stacks Tag 00NX (lemma-finite-projective)."
+   }
+  },
+  {
+   "text": "For $r>0$, each $\\alpha=(a_j)\\in\\Phi$ gives a nonzero integer polynomial $p_\\alpha(T)=\\sum_{j=1}^r a_jT^{j-1}$. Each has finitely many integer zeros, so choose an integer $N$ avoiding their finite union. Put $\\lambda(m)=\\sum_jm_jN^{j-1}$. Then $\\lambda$ is additive and nonzero on $\\Phi$. Since $\\Phi=-\\Phi$, its positive and negative values give the required disjoint union. For $\\Phi=\\varnothing$, including $r=0$, take $\\lambda=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Elementary choice of a regular integer functional on a finite set of nonzero lattice vectors; source Section 5.1, before Theorem 5.1.13."
+   }
+  },
+  {
+   "text": "For each $\\alpha\\in\\Phi$ choose a basis $X_\\alpha$ of the free line $\\mathfrak h_\\alpha$. Apply [lem-sfb-relative-canonical-root-exponential], writing $U_\\alpha$ for the closed image of $\\exp_\\alpha$. The map $t\\mapsto tX_\\alpha$ identifies $\\mathbf G_{a,A}$ with its additive line group; composing with $\\exp_\\alpha$ gives $u_\\alpha$. Its equivariance gives $s u_\\alpha(t)s^{-1}=u_\\alpha(\\chi_\\alpha(s)t)$ on all algebra-valued points. The cited theorem identifies every geometric fibre of this closed subgroup with the required root subgroup and supplies arbitrary base-change compatibility.",
+   "uses": [
+    "lem-sfb-relative-canonical-root-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4, p.110; proof pp.116-118; trivialization of root lines over the local ring."
+   }
+  },
+  {
+   "text": "We will use the following coefficient calculation for the local ring $A$. A group-like element $q=\\sum_m a_me^m$ of a Laurent group algebra satisfies $a_m^2=a_m$, $a_ma_n=0$ for $m\\ne n$, and $\\sum_m a_m=1$, by comparing coefficients in $\\Delta(q)=q\\otimes q$ and the counit identity. A local ring has only idempotents $0,1$: either $a$ or $1-a$ is a unit and $a(1-a)=0$. Thus precisely one coefficient is $1$. It follows that every homomorphism between split tori over $A$ is a unique integer matrix of monomials, unchanged by scalar extension. In particular characters of $S$ are exactly $M$, cocharacters are $M^\\vee$, and each normalizer element acts on $M$ by a single integral automorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Section 4.1, p.107, characters of split tori; Definition 5.1.1 discussion, p.136. Coefficient verification written here."
+   }
+  },
+  {
+   "text": "For $\\alpha\\in\\Phi$, [lem-sfb-relative-opposite-root-reflection-map] gives a perfect pairing and a coroot. By the preceding coefficient calculation this coroot is a single $c_\\alpha\\in M^\\vee$, with the same value on every geometric fibre. Choose $Y_\\alpha\\in\\mathfrak h_{-\\alpha}$ dual to $X_\\alpha$, and put $v_\\alpha=\\exp_\\alpha(X_\\alpha)\\exp_{-\\alpha}(-Y_\\alpha)\\exp_\\alpha(X_\\alpha)\\in H(A)$. It normalizes $S$. Its torus conjugation formula gives, with the character convention of the item, $m\\mapsto s_\\alpha(m)=m-c_\\alpha(m)\\alpha$; this reflection is its own inverse since $c_\\alpha(\\alpha)=2$. These are the usual root reflections on every geometric fibre, by the same cited statement.",
+   "uses": [
+    "lem-sfb-relative-opposite-root-reflection-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.2.6 and Corollary 5.1.9(1), pp.120-121 and 140-141; explicit reflection construction in the proof of Corollary 5.1.11."
+   }
+  },
+  {
+   "text": "Define $W\\subseteq\\operatorname{Aut}(M)$ to be the subgroup generated by these $s_\\alpha$. For any algebraically closed $A$-field $F$, apply [lem-sfb-weyl-reflection-realization] to $(H_F,S_F)$. The split maximal torus $S_F$ lies in a Borel subgroup by [lem-sfb-torus-commuting-point-common-borel] with $c=1$; roots and coroots are those of [lem-sfb-reductive-borel-pair-structure] for this pair. Restriction to the rational root span is injective on the normalizer quotient, and its image is generated by root reflections. Each such reflection is represented by $v_\\alpha$ after base change, since by step 5 its coroot is the usual coroot on every geometric fibre, and its action on the full character lattice is $s_\\alpha$. In particular an element acting trivially on $M$ acts trivially on the root span and is trivial in the quotient. Therefore every quotient element is a product of these representatives: choose a product with its restriction on the root span; injectivity makes that product equal to it in the quotient. It follows that the full character action identifies this quotient with $W$. In particular $W$ is finite and preserves $\\Phi$, independently of $F$. For each $w$ choose a word $w=s_{\\alpha_1}\\cdots s_{\\alpha_k}$ and set $n_w=v_{\\alpha_1}\\cdots v_{\\alpha_k}$, with the empty word for $1$. Composition of the character actions proves the required formula, and the preceding identification proves $w\\mapsto[n_w]$ is a group isomorphism on each fibre. No multiplicativity of the chosen lifts in $H(A)$ is required. If $\\Phi=\\varnothing$, the same injectivity on the zero root span makes every fibre quotient trivial; take $W=\\{1\\}$ and $n_1=1$.",
+   "uses": [
+    "lem-sfb-weyl-reflection-realization",
+    "lem-sfb-torus-commuting-point-common-borel",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 5.1.11 proof, pp.142-143, generation by reflections; classical Weyl reflection realization as stated in the cited existing nodes."
+   }
+  },
+  {
+   "text": "It remains to verify subgroup conjugation over $A$. For $n=n_w$, differentiating its conjugation gives an isomorphism $d c_n:\\mathfrak h_\\alpha\\to\\mathfrak h_{w\\alpha}$: explicitly $\\operatorname{Ad}(s)d c_n(v)=d c_n(\\operatorname{Ad}(n^{-1}sn)v)=\\chi_\\alpha(n^{-1}sn)d c_n(v)=\\chi_{w\\alpha}(s)d c_n(v)$. Its inverse is $d c_{n^{-1}}$. Consequently $c_n\\circ\\exp_\\alpha\\circ(d c_n)^{-1}$ is an $S$-equivariant map from the additive $w\\alpha$-line to $H$ with tangent map the canonical inclusion. Uniqueness in [lem-sfb-relative-canonical-root-exponential] identifies it with $\\exp_{w\\alpha}$. Taking closed images gives $n_wU_\\alpha n_w^{-1}=U_{w\\alpha}$. Finally each character is a fixed Laurent monomial, and every root map and each product defining $n_w$ base changes from $A$. The arbitrary and successive base-change clauses in [lem-sfb-relative-tangent-weight-base-change] and [lem-sfb-relative-canonical-root-exponential] therefore give exactly the asserted compatibility for further algebraically closed field extensions.",
+   "uses": [
+    "lem-sfb-relative-tangent-weight-base-change",
+    "lem-sfb-relative-canonical-root-exponential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 4.1.4, uniqueness and arbitrary base change, p.110; application to conjugation by a normalizer element."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-tangent-weight-base-change",
+  "lem-weil-pbc-finite-projective-prime-local-free",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-relative-canonical-root-exponential",
+  "lem-sfb-relative-opposite-root-reflection-map",
+  "lem-sfb-weyl-reflection-realization",
+  "lem-sfb-torus-commuting-point-common-borel",
+  "lem-sfb-reductive-borel-pair-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Assembly follows Conrad Section 4 introduction, Theorem 4.1.4, Theorem 4.2.6 and Corollaries 5.1.9/5.1.11 read online. The literature copy is missing; WANTED recorded in report. Local coefficient and regular-functional arguments are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "reductive|root.?subgroup|root.?datum",
+   "results": "{\"t\": \"2026-10-24T04:00:06Z\", \"tool\": \"grep\", \"query\": \"reductive|root.?subgroup|root.?datum\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive group scheme with split maximal torus over a local ring has free rank one root spaces",
+   "results": "{\"t\": \"2026-10-24T04:00:07Z\", \"tool\": \"leansearch\", \"query\": \"A reductive group scheme with split maximal torus over a local ring has free rank one root spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.finrank_rootSpace_eq_one\", \"LieAlgebra.rootSpace\", \"LieAlgebra.rootSpace_zero_eq\", \"LieAlgebra.rootSpace.congr_simp\", \"RootPairing.ncard_eq_finrank_of_linearIndepOn_of\", \"LieAlgebra.rootSpace_comap_eq_genWeightSpace\", \"LieSubalgebra.root.congr_simp\", \"RootPairing.IsRootSystem.span_coroot_eq_top\"], \"digest\": \"e53fd0ae8effae8e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T04:00:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"RootPairing\\\", \\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a connected local base the nonzero torus weights of a reductive group form a fixed root system and its root lines are free",
+   "results": "{\"t\": \"2026-10-24T04:00:10Z\", \"tool\": \"leanfinder\", \"query\": \"Over a connected local base the nonzero torus weights of a reductive group form a fixed root system and its root lines are free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.toWeightBasis_apply\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieAlgebra.IsKilling.instIsRootSystemSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"LieModule.exists_forall_mem_corootSpace_smul_add_eq_zero\", \"LieAlgebra.IsKilling.rootSystem_root_apply\", \"LieSubalgebra.root\", \"LieAlgebra.IsKilling.span_weight_isNonZero_eq_top\"], \"digest\": \"dfdad315d5e88b1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive group scheme with split maximal torus over a local ring has constant root datum and free root modules with additive root subgroups",
+   "results": "{\"t\": \"2026-10-24T04:00:11Z\", \"tool\": \"leanfinder\", \"query\": \"A reductive group scheme with split maximal torus over a local ring has constant root datum and free root modules with additive root subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.EmbeddedG2.toIsReduced\", \"RootSystem.mk'\", \"RootPairing.IsReduced\", \"RootPairing.instIsRootSystemOfNonemptyOfNeZeroOfNatOfIsIrreducible\", \"RootPairing.IsCrystallographic\", \"RootPairing.nonempty_base\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.isRootSystem_mk''\"], \"digest\": \"f6c853e3bf7879e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-24T04:00:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"RootPairing\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "grep",
+   "query": "Weyl|normalizer|reductive",
+   "results": "{\"t\": \"2026-10-24T04:00:13Z\", \"tool\": \"grep\", \"query\": \"Weyl|normalizer|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every Weyl group element lifts to a rational point of the normalizer of a split maximal torus in a split reductive group scheme",
+   "results": "{\"t\": \"2026-10-24T04:00:14Z\", \"tool\": \"leansearch\", \"query\": \"Every Weyl group element lifts to a rational point of the normalizer of a split maximal torus in a split reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.weylGroup\", \"RootPairing.weylGroup_apply_root\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.weylGroup.induction\", \"RootPairing.weylGroup.induction'\", \"RootPairing.reflection_mem_weylGroup\", \"RootPairing.weylGroup.ofIdx_smul\", \"CoxeterSystem.lift\"], \"digest\": \"9ec91057b051333e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalizer of a split maximal torus in a split reductive group surjects onto the Weyl group on base scheme sections",
+   "results": "{\"t\": \"2026-10-24T04:00:18Z\", \"tool\": \"leanfinder\", \"query\": \"The normalizer of a split maximal torus in a split reductive group surjects onto the Weyl group on base scheme sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.range_weylGroup_weightHom\", \"RootPairing.range_weylGroup_coweightHom\", \"RootPairing.range_weylGroupToPerm\", \"CategoryTheory.PreGaloisCategory.AutGalois.π_surjective\", \"IsFractionRing.stabilizerHom_surjective\", \"RootPairing.weylGroupToPerm\", \"CategoryTheory.PreGaloisCategory.autMap_surjective_of_isGalois\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\"], \"digest\": \"abf9046f6b4ec48f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Each Weyl reflection admits a representative over the base ring in the normalizer of the split torus of a pinned reductive group",
+   "results": "{\"t\": \"2026-10-24T04:00:20Z\", \"tool\": \"leanfinder\", \"query\": \"Each Weyl reflection admits a representative over the base ring in the normalizer of the split torus of a pinned reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.reflection_mem_weylGroup\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.weylGroup.ofIdx\", \"RootPairing.weylGroup.ofIdx_smul\", \"RootPairing.weylGroup.induction'\", \"RootPairing.weylGroup.induction\", \"RootPairing.weylGroup\", \"RootPairing.range_weylGroup_weightHom\"], \"digest\": \"16aba9faf2318346\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root systems, characteristic-zero Killing Lie algebras, abstract subgroup products, general scheme covers and open immersions do not construct relative reductive root subgroups, base-ring Weyl representatives, or the relative multiplication open cell."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth affine group scheme acted on by a split torus has finite projective tangent character weight summands commuting with any base change",
+   "results": "{\"t\": \"2026-10-24T04:44:27Z\", \"tool\": \"leansearch\", \"query\": \"A smooth affine group scheme acted on by a split torus has finite projective tangent character weight summands commuting with any base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.Smooth.baseChange\", \"AffineBasis.reindex_smul\", \"LieModule.Weight.instFintype\", \"Algebra.IsStandardSmooth.baseChange\"], \"digest\": \"6451adff3410b99f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Lie module at the identity of a smooth group scheme is finite projective and torus character weights commute with scalar extension",
+   "results": "{\"t\": \"2026-10-24T04:47:33Z\", \"tool\": \"leanfinder\", \"query\": \"The Lie module at the identity of a smooth group scheme is finite projective and torus character weights commute with scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieModule.weightSpaceOfIsLieTower\", \"LieModule.instLinearWeightsOfCharZero\", \"LieModule.instLinearWeightsOfIsLieAbelian\", \"LieModule.LinearWeights\", \"LieModule.shiftedGenWeightSpace.instLieRingModuleSubtypeMemLieSubmodule\", \"LieModule.Weight\", \"LieModule.Weight.apply_lie\", \"LieModule.exists_forall_lie_eq_smul\"], \"digest\": \"78f352d104a57d47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Lie\"",
+   "results": "{\"t\": \"2026-10-24T04:47:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Lie\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|root.?subgroup|reductive|LieAlgebra",
+   "results": "{\"t\": \"2026-10-24T04:47:33Z\", \"tool\": \"grep\", \"query\": \"torus|root.?subgroup|reductive|LieAlgebra\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a reductive group scheme and a split maximal torus a root line has a unique torus equivariant exponential closed immersion of its additive vector group",
+   "results": "{\"t\": \"2026-10-24T04:47:56Z\", \"tool\": \"leansearch\", \"query\": \"For a reductive group scheme and a split maximal torus a root line has a unique torus equivariant exponential closed immersion of its additive vector group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.root.congr_simp\", \"RootPairing.restrictScalars_coe_root\", \"RootPairing.Base.linearIndepOn_root\", \"RootSystem.ext\", \"RootPairing.pairing_eq_add_of_root_eq_smul_add_smul\", \"LieAlgebra.IsKilling.rootSystem_toLinearMap_apply\", \"LieAlgebra.rootSpace.congr_simp\", \"LieAlgebra.IsKilling.rootSystem_root_apply\"], \"digest\": \"d308f03167d9d755\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"root\"",
+   "results": "{\"t\": \"2026-10-24T04:47:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"root\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "exponential|root.?group|root.?subgroup|reductive",
+   "results": "{\"t\": \"2026-10-24T04:47:58Z\", \"tool\": \"grep\", \"query\": \"exponential|root.?group|root.?subgroup|reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical root group exponential of the additive root line in a reductive group scheme over a commutative base ring",
+   "results": "{\"t\": \"2026-10-24T04:47:59Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical root group exponential of the additive root line in a reductive group scheme over a commutative base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.root'In\", \"RootPairing.EmbeddedG2.shortAddLongRoot\", \"RootPairing.EmbeddedG2.longRoot\", \"RootPairing.rootSpanMem\", \"RootPairing.EmbeddedG2\", \"RootPairing.EmbeddedG2.indexEquivAllRoots\", \"RootPairing.EmbeddedG2.indexEquivAllRoots_apply_coe\", \"RootPairing.EmbeddedG2.allRoots_subset_range_root\"], \"digest\": \"8b78996e57adcebe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "coroot|normalizer|root.?subgroup|root.?group",
+   "results": "{\"t\": \"2026-10-24T04:48:34Z\", \"tool\": \"grep\", \"query\": \"coroot|normalizer|root.?subgroup|root.?group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a reductive group scheme the product of positive and negative root exponentials gives a normalizer reflection through a dual pair of root line generators",
+   "results": "{\"t\": \"2026-10-24T04:48:35Z\", \"tool\": \"leansearch\", \"query\": \"In a reductive group scheme the product of positive and negative root exponentials gives a normalizer reflection through a dual pair of root line generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.reflection\", \"RootPairing.RootPositiveForm.isOrthogonal_reflection\", \"RootPairing.reflection_apply\", \"RootPairing.reflectionPerm_coroot\", \"RootPairing.toPerfPair_conj_reflection\", \"RootPairing.weylGroup.induction\", \"RootPairing.reflection_apply_root\", \"RootPairing.reflection_inv\"], \"digest\": \"eb09b5ad72e8c8ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-24T04:48:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a root of a reductive group scheme the canonical pairing of opposite root line bundles produces a Weyl reflection representative from a nonvanishing root vector",
+   "results": "{\"t\": \"2026-10-24T04:48:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a root of a reductive group scheme the canonical pairing of opposite root line bundles produces a Weyl reflection representative from a nonvanishing root vector\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.mapsTo_reflection_root\", \"RootPairing.weylGroup.ofIdx\", \"RootPairing.weylGroup.ofIdx_smul\", \"RootPairing.reflection_apply_root\", \"RootPairing.reflection\", \"RootPairing.Equiv.reflection_weightEquiv\", \"RootPairing.reflection_apply_root'\", \"RootPairing.reflection_apply\"], \"digest\": \"b9c872f24bbc2359\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Lie-algebra weights or abstract root pairings, or general smooth base change; none states this relative group-scheme construction and its arbitrary-ring comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-local-gauss-atlas",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell.",
+   "via": [
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-split-root-data-weyl-lifts",
+  "worker": "stage1",
+  "summary": "Kept the statement; constructed roots from finite projective weights, parametrizations from canonical root exponentials and Weyl lifts as products of rank-one three-exponential reflections. Reused existing field Weyl realization, and proved relative subgroup conjugation by uniqueness. Three strictly smaller general relative prerequisites are stated only. Checked small characteristics, nilpotent local bases, empty roots and character rather than differentiated weights.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-projective-prime-local-free",
+    "why": "Finite projective root-weight modules are free over the local base: apply the standard-open neighbourhood statement at its unique maximal ideal, where the resulting localization element is a unit. This generic module lemma is not supplied by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-projective-prime-local-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-f6939ef29",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-f6939ef29 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement and the parent gauss-atlas in full. Conrad's Reductive group schemes is not in literature/; the worker filed WANTED and set proof_origin agent, so I checked the cited places against the standard statements (Thm 4.1.4 = SGA3 XXII 1.1, three-exponential element = SGA3 XX 3.1). Steps 1-5 and 7 are correct. Step 1: local freeness at the maximal ideal plus constant rank gives the same Φ on every geometric fibre. Step 4: the group-like idempotent argument holds over a local ring. Step 5: n^{-1}tn = t·α^∨(α(t))^{-1} is an involution and gives s_α(m) = m − c_α(m)α in the item's convention. Step 7: exponential uniqueness gives n_w U_α n_w^{-1} = U_{wα}. One fault, C4 in step 6: the Borel containing S_F was cited from lem-sfb-reductive-borel-pair-structure, which only asserts that some pair (T,B) exists. FIX: cite lem-sfb-torus-commuting-point-common-borel with c=1 (same unit; its closure adds nothing new and makes no cycle), and spell out the coroot agreement and the injectivity of W_F into Aut(M). The three new nodes are true, are not duplicates (relative-torus-centralizer-normalizer has no weight decomposition; the field nodes give no A-points and no relative uniqueness), and do not restate the item or the parent. Batch 5: the flagged paths end at lem-trf-smooth-fpqc-base-descent (Stacks 02VL), lem-trf-fppf-covering-base-change (Stacks 021O) and lem-trf-split-lattice-torus-projection (split torus is smooth). These are generic sk-i-curve-zero facts, not trace-formula or Poincaré-duality steps, so they are acceptable. The prime-local-free tool use is accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

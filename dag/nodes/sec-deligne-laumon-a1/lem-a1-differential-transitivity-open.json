@@ -1,0 +1,126 @@
+{
+ "id": "lem-a1-differential-transitivity-open",
+ "kind": "statement",
+ "title": "Normalized source-open comparison for differential transitivity",
+ "statement": "Let X,Y,S be schemes [def-pc-scheme], h:X→Y and g:Y→S morphisms, and q:Ω_{X/S}→Ω_{X/Y} a morphism of O_X-modules [def-sc-relative-differential-sheaf] sending da to da on every source open. Use the canonical first arrow u of [def-a1-relative-differentials-pullback-map] and tensor module pullbacks [def-pc-module-pullback]. For each source open O⊆X, j:O→X, there exist an isomorphism e:(h*Ω_{Y/S})|_O≅(hj)*Ω_{Y/S} and a map q_O:Ω_{O/S}→Ω_{O/Y}. The isomorphism takes every restriction of an actual pulled-back db section to the actual pulled-back db for hj. The squares for u and q, with the specified relativeDifferentialsRestrictIso and the associativity congruence for j,h,g, commute. Finally q_O(da)=da on every open of O. This statement asserts only the restriction comparison and its normalization, not exactness.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01US, lemma-differentials-restrict-open, and 01UV, lemma-functoriality-differentials"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-relative-differential-sheaf",
+  "def-pc-module-pullback",
+  "def-a1-relative-differentials-pullback-map"
+ ],
+ "proof": [
+  {
+   "text": "Let j:O→X be the source-open inclusion. Restriction is the pullback for j. Compose its restriction adjunction with the normalized tensor pullback adjunction for h, and compare with the normalized tensor pullback adjunction for j≫h, using the canonical composition isomorphism of pushforwards. Uniqueness of left adjoints constructs e. Its unit identity says on every local section that e carries the restricted tensor unit to the tensor unit for j≫h; apply this to db to obtain the required normalization.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the universal derivation for j≫h as a derivation relative to j≫(h≫g), and use the universal property to construct q_O with da↦da. For the second square, apply the restriction adjunction Hom equivalence and then the differential universal-property Hom equivalence; naturality of the first reduces both sides on da to d(j♯a), using q(da)=da and q_O(da)=da. For the first square, apply the composite of the tensor and restriction adjunctions and then the universal-property Hom equivalence for Ω_{Y/S}. The left-adjoint uniqueness identity converts the route through e to the tensor adjunction for j≫h. On db the two sides are d(j♯h♯b), by the tensor-unit formulas, the defining canonical first-arrow formulas, and the source-restriction derivation formula. Equality induction proves that the associativity congruence also preserves differentials. Injectivity of the Hom equivalences proves both squares as sheaf morphism equalities, including empty opens. No localization or exactness assertion is needed for this comparison.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-a1-relative-differentials-pullback-map",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sc-relative-differential-sheaf",
+  "def-a1-relative-differentials-pullback-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01UX, 01UT, 01UV and 01US; detailed affine localization and adjunction-unit argument as in the parent plan"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right exact transitivity sequence of relative differential sheaves for composable scheme morphisms",
+   "results": "{\"t\": \"2026-10-26T06:58:12Z\", \"tool\": \"leanfinder\", \"query\": \"Right exact transitivity sequence of relative differential sheaves for composable scheme morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"AlgebraicGeometry.Scheme.IdealSheafData.map_comp\", \"Algebra.Generators.Cotangent.exact\", \"Algebra.H1Cotangent.exact_map_δ\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"Algebra.Generators.CotangentSpace.exact\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp\"], \"digest\": \"ee95887bc98ef11d\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem states the normalized sheaf-level affine/stalk or source-open comparison; algebraic and universal-property hits are existing dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials.*exact|exact_mapBaseChange_map",
+   "results": "{\"t\": \"2026-10-26T07:06:04Z\", \"tool\": \"grep\", \"query\": \"relativeDifferentials.*exact|exact_mapBaseChange_map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"Mathlib/RingTheory/Etale/Kaehler.lean\"], \"digest\": \"0b7e2b1682dd623a\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem states the normalized sheaf-level affine/stalk or source-open comparison; algebraic and universal-property hits are existing dependencies."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.map, Function.Exact",
+   "results": "{\"t\": \"2026-10-26T07:06:04Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential.map, Function.Exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"KaehlerDifferential.exact_mapBaseChange_map\"], \"digest\": \"9cf0245c04a1acda\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem states the normalized sheaf-level affine/stalk or source-open comparison; algebraic and universal-property hits are existing dependencies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Kahler differential sheaves transitivity sequence compatible with affine charts and open restrictions",
+   "results": "{\"t\": \"2026-10-26T07:09:15Z\", \"tool\": \"leansearch\", \"query\": \"Relative Kahler differential sheaves transitivity sequence compatible with affine charts and open restrictions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"CommRingCat.KaehlerDifferential.map\", \"KaehlerDifferential\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"KaehlerDifferential.tensorKaehlerEquiv\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"CommRingCat.KaehlerDifferential\", \"KaehlerDifferential.map_D\"], \"digest\": \"75c8ec6f1532b329\"}",
+   "date": "2026-10-26",
+   "verdict": "No theorem states the normalized sheaf-level affine/stalk or source-open comparison; algebraic and universal-property hits are existing dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeDifferentialsTransitivityExact",
+  "date": "2026-10-26",
+  "group": "D5"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-curve",
+   "place": "Third proof paragraph: nonzero differential gives separability and generic etaleness. Canonical differential transitivity input; source-open comparison in step 5 of lem-a1-differential-sheaf-transitivity-exact.",
+   "via": [
+    "lem-a1-differential-sheaf-transitivity-exact",
+    "lem-a1-nonzero-differential-generically-etale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeDifferentialsTransitivityOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDifferentialsTransitivityOpen.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.relativeDifferentials_transitivity_open",
+  "statement": "theorem relativeDifferentials_transitivity_open\n    {X Y S : Scheme.{u}} (h : X ⟶ Y) (g : Y ⟶ S)\n    (q : (h ≫ g).relativeDifferentials ⟶ h.relativeDifferentials)\n    (hq : ∀ (O : X.Opens) (a : Γ(X, O)),\n      q.app O ((h ≫ g).relativeDifferentialsDerivation.d (X := op O) a) =\n        h.relativeDifferentialsDerivation.d (X := op O) a) :\n      (∀ O : X.Opens,\n        ∃ (e : ((Modules.tensorPullback h).obj g.relativeDifferentials).restrict O.ι ≅\n              (Modules.tensorPullback (O.ι ≫ h)).obj g.relativeDifferentials)\n          (qO : (O.ι ≫ (h ≫ g)).relativeDifferentials ⟶ (O.ι ≫ h).relativeDifferentials),\n          (∀ (V : Y.Opens) (b : Γ(Y, V)),\n            e.hom.app (O.ι ⁻¹ᵁ (h ⁻¹ᵁ V))\n              (((Modules.tensorPullback h).obj g.relativeDifferentials).presheaf.map\n                (homOfLE (O.ι.image_preimage_le (h ⁻¹ᵁ V))).op\n                  (g.relativeDifferentialsPullbackGenerator h V b)) =\n              g.relativeDifferentialsPullbackGenerator (O.ι ≫ h) V b) ∧\n          (Modules.restrictFunctor O.ι).map (g.relativeDifferentialsPullbackMap h) ≫\n              ((h ≫ g).relativeDifferentialsRestrictIso O.ι).hom =\n            e.hom ≫ g.relativeDifferentialsPullbackMap (O.ι ≫ h) ≫\n              (relativeDifferentialsCongr _ (Category.assoc O.ι h g)).hom ∧\n          (Modules.restrictFunctor O.ι).map q ≫\n              (h.relativeDifferentialsRestrictIso O.ι).hom =\n            ((h ≫ g).relativeDifferentialsRestrictIso O.ι).hom ≫ qO ∧\n          (∀ (T : O.toScheme.Opens) (a : Γ(O.toScheme, T)),\n            qO.app T ((O.ι ≫ (h ≫ g)).relativeDifferentialsDerivation.d (X := op T) a) =\n              (O.ι ≫ h).relativeDifferentialsDerivation.d (X := op T) a))",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T081428-L-1958114",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T081428-L-1958114",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

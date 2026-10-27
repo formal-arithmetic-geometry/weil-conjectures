@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-space-eventually-finite-map",
+ "kind": "statement",
+ "title": "Finiteness descends to a stage of an algebraic-space inverse system",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and atlas point topology [def-a1-space-point-topology]. A space is quasi-compact if every open cover of its point space has a finite subcover, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback to every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine source after every affine scheme test. Local finite presentation and local finite type are tested on compatible etale scheme charts [def-sfb-space-morphism-properties]; finite presentation means local finite presentation, quasi-compactness and quasi-separatedness. Let $I$ be a small nonempty directed set, $(B_i)_{i\\in I}$ an inverse system of quasi-compact quasi-separated algebraic spaces with affine transitions and limit $B$, and choose $i_0\\in I$. Let $f_0:X_0\\to Y_0$ be a morphism over $B_{i_0}$ with $X_0,Y_0$ quasi-compact and quasi-separated. For $i\\geq i_0$ put $X_i=X_0\\times_{B_{i_0}}B_i$, $Y_i=Y_0\\times_{B_{i_0}}B_i$ and let $f_i:X_i\\to Y_i$ be the base change of $f_0$; let $f:X\\to Y$ be its base change to $B$. A finite morphism is representable by schemes and finite on every scheme test [def-weil-finite-integral-morphism]. If $f_0$ is locally of finite type and $f$ is finite, then there is $j\\geq i_0$ such that $f_i$ is finite for every $i\\geq j$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 084Z (lemma-descend-finite) in Situation 084W (situation-descent-property); persistence under later base change."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Restrict to the directed tail $i\\geq i_0$. Choose an affine scheme $V_0$ and a representable surjective etale map $V_0\\to Y_0$. Put $V_i=V_0\\times_{B_{i_0}}B_i$ and $W_0=X_0\\times_{Y_0}V_0$, $W_i=W_0\\times_{B_{i_0}}B_i$. Associativity of sheaf fibre products identifies $V_i=Y_i\\times_{Y_0}V_0$ and $W_i=X_i\\times_{Y_i}V_i$; write $g_i:W_i\\to V_i$. Every $V_i\\to Y_i$ is representable surjective etale by base change. The affine-scheme qcqs lemma gives $V_0$ qcqs, and the qcqs fibre-product lemma, applied to $X_0,V_0,Y_0$, gives $W_0$ qcqs.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-qcqs-space-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084Z (lemma-descend-finite), choice of affine etale chart; Tags 03H6 and 073B"
+   }
+  },
+  {
+   "text": "The affine transitions $B_i\\to B_{i_0}$ give affine maps $V_i\\to V_0$ and $W_i\\to W_0$, as well as affine transition maps between the $V_i$ and between the $W_i$. Consequently $V_i$ is an affine scheme and $W_i$ is qcqs, by affine locality and permanence. Since $X_0$ is quasi-compact and $Y_0$ is quasi-separated, $f_0$ is quasi-compact. Together with its assumed local finite type this makes $f_0$ finite type. Finite type is preserved by arbitrary algebraic-space base change, so each $g_i$ is finite type. Once $W_i$ is a scheme, the identity scheme charts in the definition of local finite type give local finite type of the scheme morphism $g_i$.",
+   "uses": [
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-four-property-fppf-descent",
+    "def-sfb-space-morphism-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084Z, hypotheses for the scheme descent step; Tags 03XH and 073B"
+   }
+  },
+  {
+   "text": "Set $V=V_0\\times_{B_{i_0}}B$ and $W=W_0\\times_{B_{i_0}}B$. The base-change formula for algebraic-space limits gives $V=\\varprojlim V_i$ and $W=\\varprojlim W_i$. The projection $B\\to B_{i_0}$ is affine, so $V$ is an affine scheme. Fibre-product associativity identifies $W=X\\times_Y V$, and $g:W\\to V$ with the base change of $f$. Thus $g$ is a finite morphism of schemes by the assumed finiteness of $f$ on scheme tests. In particular $g$ is affine, so $W$ is affine. Apply eventual affineness to the qcqs system $(W_i)$ with affine transitions: there is $k\\geq i_0$ such that $W_k$ is an affine scheme. All $W_i$ for $i\\geq k$ are then affine schemes as well.",
+   "uses": [
+    "lem-sfb-space-affine-limits-schematic-stages",
+    "lem-sfb-space-affine-locality",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084Z, reduction to an affine stage by Tags 07SF and 07SQ"
+   }
+  },
+  {
+   "text": "Reindex at $k$ and regard $(V_i)_{i\\geq k}$ as an inverse system of affine schemes with limit $V$. This is also a scheme limit: its algebraic-space universal property restricts to scheme tests. The cartesian identities give $W_i=W_k\\times_{V_k}V_i$ and $W=W_k\\times_{V_k}V$. Explicitly, both sides of the first identity classify a point of $X_0$, a point of $V_0$, and a point of $B_i$ with the prescribed equal images in $Y_0$ and $B_{i_0}$; the second identity is the same statement with $B$. Apply scheme finiteness descent to the $V_k$-morphism $g_k:W_k\\to V_k$. Its initial base $V_k$, source $W_k$ and target $V_k$ are affine and hence qcqs, its scheme morphism is locally of finite type by step 2, the transition maps of the bases $V_i$ are affine, and its limit morphism is the finite map $g$. Therefore $g_j$ is finite for some $j\\geq k$.",
+   "uses": [
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084Z, application of scheme Tag 01ZO (lemma-descend-finite-finite-presentation)"
+   }
+  },
+  {
+   "text": "The map $V_j\\to Y_j$ is a representable surjective etale scheme chart, and its pullback of $f_j$ is the finite scheme morphism $g_j$. The etale target criterion for finiteness therefore makes $f_j$ representable and finite. For every $i\\geq j$, fibre-product associativity identifies $f_i$ with the base change of $f_j$ along $Y_i\\to Y_j$. Stability of finite morphisms under arbitrary algebraic-space base change gives finiteness of every $f_i$, as required.",
+   "uses": [
+    "lem-sfb-space-integral-finite-etale-locality",
+    "lem-sfb-finite-space-morphism-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 084Z, final application of Tag 03ZQ (lemma-integral-local); persistence by Tag 03ZS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-four-property-fppf-descent",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-space-affine-limits-schematic-stages",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-descend-finite",
+  "lem-sfb-space-integral-finite-etale-locality",
+  "lem-sfb-finite-space-morphism-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 084Z (lemma-descend-finite), in Situation 084W; persistence by Tag 03ZS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an inverse system of qcqs algebraic spaces with affine transitions a morphism locally of finite type at one stage whose limit is finite is finite at a later stage",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.IsFinite.finite_app",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"LocallyOfFiniteType\"",
+   "results": "Actual logged search: 3 hits; AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]ventually.*[Ff]inite|[Dd]escend.*[Ff]inite",
+   "results": "Actual logged search: 6 hits; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finiteness of morphisms of algebraic spaces descends from the inverse limit to a finite stage under local finite type",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.IsFinite.casesOn, AlgebraicGeometry.IsFinite.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space morphism finite on the limit is finite at a sufficiently late stage of a qcqs inverse system",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instHasFiniteLimitsScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, commutative algebras or topological spaces, not this assertion for algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:35-65, Morphisms/FlatDescent.lean:160-185 and AffineTransitionLimit.lean:1040-1061; their objects are schemes and their hypotheses/conclusions do not give the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|eventually.*finite|descend.*finite",
+   "results": "{\"t\": \"2026-10-23T13:05:51Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|eventually.*finite|descend.*finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\"], \"digest\": \"c1768eb28aa556fb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Finite.lean:35-65 and AffineTransitionLimit.lean:1040-1061; finiteness and eventual affineness hits concern schemes, not algebraic spaces. The local-flat-descent and flat-descent hits concern scheme morphism properties, not inverse-limit finiteness of algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finiteness of an algebraic space morphism descends along an inverse system with affine transitions",
+   "results": "{\"t\": \"2026-10-23T13:05:52Z\", \"tool\": \"leansearch\", \"query\": \"Finiteness of an algebraic space morphism descends along an inverse system with affine transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\"], \"digest\": \"66cc39cfc949a86a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Finite.lean:35-65 and AffineTransitionLimit.lean:1040-1061; finiteness and eventual affineness hits concern schemes, not algebraic spaces. The local-flat-descent and flat-descent hits concern scheme morphism properties, not inverse-limit finiteness of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"LocallyOfFiniteType\"",
+   "results": "{\"t\": \"2026-10-23T13:05:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsFinite\\\", \\\"LocallyOfFiniteType\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\"], \"digest\": \"981049a1c60577ca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Finite.lean:35-65 and AffineTransitionLimit.lean:1040-1061; finiteness and eventual affineness hits concern schemes, not algebraic spaces. The local-flat-descent and flat-descent hits concern scheme morphism properties, not inverse-limit finiteness of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of qcqs algebraic spaces finite at an inverse limit with affine transition maps is finite at some stage",
+   "results": "{\"t\": \"2026-10-23T13:05:53Z\", \"tool\": \"leanfinder\", \"query\": \"A locally finite type morphism of qcqs algebraic spaces finite at an inverse limit with affine transition maps is finite at some stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite\"], \"digest\": \"e16b569de31f4d19\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Finite.lean:35-65 and AffineTransitionLimit.lean:1040-1061; finiteness and eventual affineness hits concern schemes, not algebraic spaces. The local-flat-descent and flat-descent hits concern scheme morphism properties, not inverse-limit finiteness of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite morphisms from a filtered inverse limit of quasi compact quasi separated algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T13:05:54Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of finite morphisms from a filtered inverse limit of quasi compact quasi separated algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.IsFinite.instDescScheme\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\"], \"digest\": \"7381930874ca2d37\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read Finite.lean:35-65 and AffineTransitionLimit.lean:1040-1061; finiteness and eventual affineness hits concern schemes, not algebraic spaces. The local-flat-descent and flat-descent hits concern scheme morphism properties, not inverse-limit finiteness of algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-surjective-affine-space-target",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D58 (lemma-curves-existence). Proof detail: Tag 0E7R proof, first paragraph after the first medskip: each X_n is a scheme by Tag 05ZR. Supporting input: Tag 05ZR via the affine-open argument of Tag 07VU; Tag 07VS applies to the surjective closed immersion from each affine open of Z to the corresponding open subspace of Y. Supporting input for Tag 07VS: Tag 084Z (lemma-descend-finite) in Situation 084W (situation-descent-property); persistence under later base change.",
+   "via": [
+    "lem-sfb-finite-surjective-affine-space-target",
+    "lem-sfb-thickening-of-scheme-space",
+    "lem-sfb-curve-formal-effectivity",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-eventually-finite-map",
+  "worker": "stage1",
+  "summary": "Split Tag 084Z along its affine etale chart, eventual affine source, scheme finiteness descent and etale locality proof. Reused all supporting nodes; no new nodes or statement change. Made the cartesian reindexing over affine scheme bases explicit before applying 01ZO.",
+  "blueprint": "Supports the inherited Tag 07VS/05ZR/0E7R/0D58 branch under det-thm-sf-ctf-stability-direct-images, via the recorded ancestor chain. Latest blueprint direct-images proof (3) assembles proper and open direct images; this subordinate approximation input does not change that route. The item is created rather than imported, and blueprint_refs ancestor reports None; preserve that inherited from.node and via. The five steps expand the existing from.place input Tag 084Z.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-descend-finite",
+    "why": "Generic scheme approximation lemma 01ZO used after passing to affine scheme stages. The unit has no separate scheme finiteness descent result; this does not replace its direct-image route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and etale atlas base change, used to construct the chart system; not a trace-formula argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-descend-finite",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-3f3745a51",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-3f3745a51 (reviewer sub-agent of L); spot-checked: I read the whole item and every citation; there are no new nodes and nothing to fix. The statement matches Stacks spaces-limits Situation 084W plus Lemma 084Z (lemma-descend-finite, l.1648), and adds persistence by 03ZS. It also assumes every B_i qcqs where Stacks assumes only B_0; this is harmless, since it follows from B_0 qcqs and affine transitions and is never used. The statement text is unchanged. The five steps follow the source proof (chart V_0, affine stage by 07SQ, 01ZO, 03ZQ). Step 1: the affine étale chart from 03H6, and W_0 qcqs by 073B(3) with X_0, V_0, Y_0 all qcqs. Step 2: base change of affine maps makes V_i affine and W_i qcqs; f_0 is quasi-compact by 073B, hence of finite type, and g_i is of finite type by base change (03XH); identity charts give local finite type of the scheme map g_i. Step 3: W = X x_Y V = lim W_i is finite over the affine V, so affine, and some W_k is affine by eventual affineness, whose hypotheses (small nonempty directed tail, qcqs stages, affine transitions) I checked. Step 4: 01ZO applied over the scheme bases V_i (i >= k), not B_i; I checked the cartesian identities W_i = W_k x_{V_k} V_i and W = W_k x_{V_k} V. Step 5: the finite clause of 03ZQ on V_j -> Y_j, then base change by 03ZS. No proof is used in place of a statement, there is no uncited non-elementary fact and no cycle (I followed the closure of all 13 proof_deps). Following every node with a spaces-limits.tex source, none restates 084Z (0850, 07SN, 08K1, 0851, 08K0, 0D4K are different). Batch 5: all seven flagged citations reach sec-trace-formula only through def-trf-algebraic-space, the general definition of algebraic space. They are basic space lemmas, not parts of the trace formula or Poincare duality, so all are accepted. tool_uses accepted: lem-weil-pbc-descend-finite (01ZO, generic and used by the source itself) and lem-trf-space-fibre-products-etale-covers (generic). No SGA source is cited. Edge cases: empty Y_0, singleton I, constant system."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEventuallyFiniteMap",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_eventually_isFinite_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEventuallyFiniteMap.lean",
+  "statement": "theorem exists_eventually_isFinite_baseChange {S : Scheme.{u}} {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ AlgebraicSpace S) (hBqc : ∀ i : I, CompactSpace (Point (D.obj (op i)).obj.obj)) (hBqs : ∀ (i : I) (U V : Over S) (a : yoneda.obj U ⟶ (D.obj (op i)).obj.obj) (b : yoneda.obj V ⟶ (D.obj (op i)).obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (haff : ∀ (i j : Iᵒᵖ) (g : i ⟶ j), IsRepresentableWith (fun _ _ p ↦ IsAffineHom p.left) (D.map g).hom.hom) (c : Cone D) (hc : IsLimit c) (i₀ : I) (X₀ Y₀ : AlgebraicSpace S) (f₀ : X₀ ⟶ Y₀) (y₀ : Y₀ ⟶ D.obj (op i₀)) (hXqc : CompactSpace (Point X₀.obj.obj)) (hXqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ X₀.obj.obj) (b : yoneda.obj V ⟶ X₀.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (hYqc : CompactSpace (Point Y₀.obj.obj)) (hYqs : ∀ (U V : Over S) (a : yoneda.obj U ⟶ Y₀.obj.obj) (b : yoneda.obj V ⟶ Y₀.obj.obj), IsAffine U.left → IsAffine V.left → CompactSpace (Point (Limits.pullback a b))) (hlft : MapIsLocally (@LocallyOfFiniteType) f₀) (hfinite : IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) (((Over.pullback (c.π.app (op i₀)).hom).map (Over.homMk (U := Over.mk (f₀.hom ≫ y₀.hom)) (V := Over.mk y₀.hom) f₀.hom rfl)).left.hom)) : ∃ (j : I) (hj : i₀ ≤ j), ∀ (i : I) (hji : j ≤ i), IsRepresentableWith (fun _ _ p ↦ IsFinite p.left) (((Over.pullback (D.map (homOfLE (le_trans hj hji)).op).hom).map (Over.homMk (U := Over.mk (f₀.hom ≫ y₀.hom)) (V := Over.mk y₀.hom) f₀.hom rfl)).left.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ef74dd7dc",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Read item node (only the lean record is new vs side-live), Stacks 084W/084Z, all stmt_dep declarations (IsRepresentableWith, AlgebraicSpace, MapIsLocally, pointTopologicalSpace, Mathlib IsFinite) and the module. All clauses match: Type u directed nonempty preorder; D : Iᵒᵖ ⥤ AlgebraicSpace S; qcqs via CompactSpace Point plus the absolute affine-pair test (as in landed IntegralSpaceFinitePresentationLimit); affine transitions as IsRepresentableWith IsAffineHom; IsLimit cone; f₀ over B_i₀ via y₀ and f₀≫y₀; local finite type via MapIsLocally; finiteness of the canonical Over.pullback base change; conclusion ∃ j ≥ i₀ ∀ i ≥ j along the actual transitions. No stronger hypotheses (all-B_i qcqs is in the node as accepted at stage 1). Edge cases covered. No duplicate notion, no definitions, sorry only, statement verbatim, imports are stmt_dep/proof_dep records, docstrings carry source, blueprint and 5 steps. No files changed, so no compile; the worker reports clean scompile."
+ }
+}

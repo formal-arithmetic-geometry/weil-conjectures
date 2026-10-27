@@ -1,0 +1,129 @@
+{
+ "id": "lem-pe-affine-etale-large-limit-maps",
+ "kind": "lemma",
+ "title": "Affine etale representables on larger affine limits",
+ "statement": "Let $X$ be a scheme in universe $u$. Let $I$ be a small cofiltered category whose objects and morphisms are in universe $u+1$, let $D:I\\to X_{\\mathrm{Proet}}$ have affine etale stages, and let $c$ be a cone whose image in schemes over $X$ is limiting. For an affine etale $X$-scheme $V$, the opposite Hom functor $\\operatorname{Hom}_{X_{\\mathrm{Proet}}^{\\mathrm{op}}}(V^{\\mathrm{op}},-)$ preserves the colimit of $D^{\\mathrm{op}}$. Equivalently maps from the vertex to $V$ factor through stages, and equality of two stage maps is detected after refinement. The affine etale stages and the proetale site are as in [det-pe-classical-definition-continuity-map].",
+ "stmt_deps": [
+  "det-pe-classical-definition-continuity-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "proposition-characterize-locally-finite-presentation (Tag 01ZC), (1) implies (3); proetale.tex lemma-limit-pullback (Tag 099S); the larger-index version of step 2 of lem-pe-affine-presentation-large-continuity"
+ },
+ "proof": [
+  {
+   "text": "Reflect the specified limiting cone through the fully faithful forgetful functor X.ProEt → Over X. Its opposite cone is a colimit cocone in X.ProEtᵒᵖ. It suffices to show that coyoneda at Vᵒᵖ maps this cocone to a colimit.",
+   "uses": [
+    "det-pe-classical-definition-continuity-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any morphism c.pt → V, apply the larger-index factorization theorem to obtain a stage map D(i) → V with the stated composite. Taking opposites proves joint surjectivity of the coyoneda image cocone.",
+   "uses": [
+    "lem-pe-affine-etale-large-limit-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For two maps out of the same stage whose images at the vertex are equal, apply the larger-index eventual-equality theorem. Taking opposites gives a transition of the filtered Hom diagram making the representatives equal. Types.FilteredColimit.isColimitOf' combines this with joint surjectivity to prove the mapped cocone is colimiting. The theorem preservesColimit_of_preserves_colimit_cocone then gives preservation of D.op.",
+   "uses": [
+    "lem-pe-affine-etale-large-limit-equality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-pe-classical-definition-continuity-map",
+  "lem-pe-affine-etale-large-limit-factorization",
+  "lem-pe-affine-etale-large-limit-equality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZC, separate existence and eventual-equality clauses; assembled in Lean using the filtered-colimit criterion of Mathlib.CategoryTheory.Limits.Types.Filtered."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphisms to affine etale schemes from a cofiltered affine limit commute with the colimit for a larger index universe",
+   "results": "Found preservesColimit_Gamma and Scheme.isAffine_of_isLimit, but no Hom continuity assertion allowing an index larger than the scheme universe.",
+   "verdict": "no direct match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine etale objects are finitely copresentable morphisms from an affine cofiltered limit factor through a stage arbitrary index universe",
+   "results": "Found Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType and affine transition limit lemmas. Their index is Type u for Scheme.{u}.",
+   "verdict": "no direct match at the larger index universe",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_hom_hom_comp\"",
+   "results": "Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, with the index in the scheme universe.",
+   "verdict": "small-index equality template only",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType|exists_hom_of_locallyOfFinitePresentation",
+   "results": "Mathlib.AlgebraicGeometry.AffineTransitionLimit has the equality lemma at line 690; its ambient I : Type u is fixed at line 37. The factorization lemma is exists_pi_app_comp_eq_of_locallyOfFinitePresentation.",
+   "verdict": "no larger-index assertion",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePresentationSectionColimit",
+  "date": "2026-10-26",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-pe-classical-sheaves-image",
+   "place": "Proof, (1) implies (2): the geometric factorization and equality part of step 2 of lem-pe-affine-presentation-large-continuity.",
+   "via": [
+    "lem-pe-affine-presentation-large-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-classical-sheaves",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleLargeLimitMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleLargeLimitMaps.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.affineEtale_largeLimit_preservesColimit",
+  "statement": "theorem affineEtale_largeLimit_preservesColimit {X : Scheme.{u}}\n    {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ X.ProEt) (haff : ∀ i, IsAffine (D.obj i).left)\n    (het : ∀ i, Etale (D.obj i).hom) (c : Cone D)\n    (hc : IsLimit ((Scheme.ProEt.forget X).mapCone c))\n    (V : X.ProEt) [IsAffine V.left] [Etale V.hom] :\n    PreservesColimit D.op (coyoneda.obj (op (op V)))",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261026T065654-L-3167049",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T091008-L-3294845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

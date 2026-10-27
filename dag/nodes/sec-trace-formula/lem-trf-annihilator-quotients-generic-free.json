@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-annihilator-quotients-generic-free",
+ "kind": "statement",
+ "title": "Simultaneous generic freeness of annihilator and principal quotients",
+ "statement": "Let $A$ be a commutative integral domain, $K=\\operatorname{Frac}(A)$ its localization at the zero prime [def-weil-pbc-localization-at-prime], and $B$ a commutative finite type $A$-algebra [def-weil-pbc-finite-type-algebra]. Let $b\\in B$ have nonzero image $b\\otimes1$ in $B\\otimes_AK$ [def-weil-module-base-change]. Define $I=\\operatorname{Ann}_B(b)=\\{x\\in B:bx=0\\}$, $C=B/I$, and $D=B/bB$, where $bB=\\{bx:x\\in B\\}$. Both $C$ and $D$ are finite type $A$-algebras, and $0\\to C\\xrightarrow{\\iota}B\\to D\\to0$ is an exact sequence of $A$-modules, with $\\iota(\\bar x)=bx$ and the last map the quotient. For every $0\\ne a\\in A$, $C_a\\ne0$. There exists $0\\ne g\\in A$ such that $C_g$ and $D_g$ are free $A_g$-modules [def-weil-pbc-free-module], with no finiteness condition on their bases. Here subscripts denote ring or module localization [def-weil-ring-localization-away, def-weil-pbc-module-localization-away]. The localized sequence $0\\to C_g\\xrightarrow{\\iota_g}B_g\\to D_g\\to0$ is exact, $C_g\\ne0$, and there are canonical identifications $C_g\\cong B_g/\\operatorname{Ann}_{B_g}(b/1)$ and $D_g\\cong B_g/(b/1)B_g$, under which $\\iota_g(\\bar x)= (b/1)x$. No Noetherian, finite-presentation, or nilpotence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof: annihilator quotient C, generic flatness for C and B/hB, and the resulting short exact sequence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-module-base-change",
+  "def-weil-pbc-free-module",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "The images in $C$ and $D$ of a finite algebra generating family of $B$ still generate: a polynomial expression in $B$ maps to the same expression in either quotient [def-weil-pbc-finite-type-algebra]. Both quotients are therefore finite type. The map $\\iota(x+I)=bx$ is well-defined since $bI=0$, is $A$-linear, and has zero kernel since $bx=0$ means $x\\in I$. Its image is exactly $bB$, which is the kernel of the surjection $B\\to D$. This proves the asserted unlocalized short exact sequence.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, annihilator quotient and multiplication sequence; explicit fraction calculations"
+   }
+  },
+  {
+   "text": "For $0\\ne a\\in A$, suppose $C_a=0$. Then $1_C/1=0$, so the fraction criterion of [def-weil-pbc-module-localization-away] gives $a^r1_C=0$ for some $r\\geq0$. Thus the image of $a^r$ in $B$ lies in $I$, giving $a^rb=0$. In $B\\otimes_AK$, the tensor relation gives $(b\\otimes1)a^r=0$ [def-weil-module-base-change]. Since $a/1$ is invertible in the zero-prime localization $K$ [def-weil-pbc-localization-at-prime], multiplication by $a^{-r}$ forces $b\\otimes1=0$, a contradiction. Hence $C_a\\ne0$ for every such $a$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-module-base-change",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, annihilator quotient and multiplication sequence; explicit fraction calculations"
+   }
+  },
+  {
+   "text": "Choose a finite polynomial presentation $P=A[x_1,\\ldots,x_n]\\twoheadrightarrow B$ using [def-weil-pbc-finite-type-algebra, def-weil-pbc-mv-polynomial-ring]. Through the resulting surjections $P\\twoheadrightarrow C,D$, each of $C,D$ is a cyclic, hence finitely generated, $P$-module [def-weil-finitely-generated-module]. A domain is reduced: if $r^m=0$ with $m\\geq1$, repeated use of the absence of zero divisors gives $r=0$. Apply [lem-sfb-reduced-polynomial-module-generic-freeness] separately with $R=A$, this finite $n$, and $M=C,D$. It gives dense opens $G_C,G_D\\subset\\operatorname{Spec}A$, each the union of principal opens on which the corresponding module is free. The spectrum is nonempty since $(0)$ is prime [def-weil-affine-spectrum]. Thus each dense open is nonempty. Choose a point in $G_C$ and a principal open $D(u)$ in its defining union containing that point. Then $u$ is outside a prime, so $u\\ne0$, and $C_u$ is free. In the same way choose $v\\ne0$ with $D_v$ free. This uses no finite-presentation hypothesis on the quotient modules.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-finitely-generated-module",
+    "lem-sfb-reduced-polynomial-module-generic-freeness",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051Z, lemma-generic-flatness-reduced, polynomial-module case; used for the generic-freeness calls in Tag 0575"
+   }
+  },
+  {
+   "text": "Put $g=uv\\ne0$. Inverting $g$ makes both $u$ and $v$ units, with $u^{-1}=v/g$ and $v^{-1}=u/g$. The fraction formulas identify $(A_u)_v=A_g$ and $(C_u)_v=C_g$: send $(x/u^i)/v^j$ to $x/(u^iv^j)$ and rewrite the denominator as a power of $g$; the inverse sends $x/g^k$ to $(x/u^k)/v^k$. Equality in both directions is precisely the fraction criterion [def-weil-ring-localization-away, def-weil-pbc-module-localization-away]. Take a basis $(e_i)$ of $C_u$ [def-weil-pbc-free-module]. Its images span $(C_u)_v$, by expanding the numerator of each fraction as a finite basis sum and dividing its coefficients by the denominator. For a finite relation among these images, clear their powers of $v$ in the coefficients. Vanishing in the localized module means some further power $v^k$ kills the resulting relation in $C_u$. Basis independence then says each resulting coefficient is killed by that power, so each original localized coefficient is zero. Thus these images are a basis of $C_g$ over $A_g$. Interchanging $u,v$ gives a basis of $D_g$ from the basis of $D_v$. This argument uses only finite support of individual expansions; either basis may be infinite or empty. Step 2 also gives $C_g\\ne0$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, annihilator quotient and multiplication sequence; explicit fraction calculations"
+   }
+  },
+  {
+   "text": "The fraction formulas define $\\iota_g((x+I)/g^n)=bx/g^n$ and $q_g(x/g^n)=(x+bB)/g^n$; these are $A_g$-linear and $q_g$ is surjective. If $bx/g^n=0$, some $g^kbx=0$, hence $g^kx\\in I$ and $(x+I)/g^n=0$. Thus $\\iota_g$ is injective. If $q_g(x/g^n)=0$, some $g^kx\\in bB$; write $g^kx=by$. Then $x/g^n=by/g^{n+k}=\\iota_g((y+I)/g^{n+k})$. Conversely $q_g\\iota_g=0$ since every $by$ lies in $bB$. This proves exactness without invoking an uncited theorem about exactness of localization [def-weil-pbc-module-localization-away, def-weil-ring-localization-away].",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, annihilator quotient and multiplication sequence; explicit fraction calculations"
+   }
+  },
+  {
+   "text": "The ring homomorphism $B_g\\to C_g$, $x/g^n\\mapsto(x+I)/g^n$, is surjective. Its kernel consists of fractions for which some $g^kx\\in I$, equivalently $g^kbx=0$, equivalently $(b/1)(x/g^n)=0$. Thus its kernel is $\\operatorname{Ann}_{B_g}(b/1)$. Sending a class of $x/g^n$ modulo this kernel to $(x+I)/g^n$ is a well-defined bijective ring homomorphism, giving the first canonical identification. Likewise the surjection $B_g\\to D_g$ has kernel those $x/g^n$ with $g^kx=by$ for some $k,y$, exactly the elements $by/g^{n+k}$ of $(b/1)B_g$. Its quotient map gives the second canonical identification. All kernel equivalences are the defining fraction criterion [def-weil-pbc-module-localization-away, def-weil-ring-localization-away]. Under the first identification the formula for $\\iota_g$ in step 5 is multiplication by $b/1$, as required.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, annihilator quotient and multiplication sequence; explicit fraction calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-module-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-finitely-generated-module",
+  "lem-sfb-reduced-polynomial-module-generic-freeness",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, annihilator argument; generic freeness via algebra.tex Tag 051Z polynomial case, with explicit fraction and basis calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "generic.*free|free.*localiz|generic.*flat",
+   "results": "OK 6 hits; Mathlib/RingTheory/Localization/Ideal.lean, Mathlib/RingTheory/Localization/AtPrime/Basic.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean, Mathlib/RingTheory/Localization/Free.lean; digest 819a5da9d7961d28. Directory Mathlib/RingTheory/Localization.  Read Mathlib/RingTheory/Localization/Free.lean:70-94: exists_free_localizedModule_powers requires finite presentation as a module over the base A, which these finite type algebras need not have. PID and finite local-module freeness results impose other extra hypotheses. Annihilator quotient declarations only identify annihilators. No returned declaration supplies simultaneous generic freeness and the multiplication sequence over an arbitrary domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Annihilator quotient and principal ideal quotient of a finite type algebra over a non Noetherian domain become simultaneously free after inverting one nonzero base element",
+   "results": "OK 8 hits; Module.quotientAnnihilator, Submodule.annihilator_quotient, Module.exists_ker_toSpanSingleton_eq_annihilator, Ideal.annihilator_quotient, Submodule.finite_dualAnnihilator_iff, algebra_finiteType_of_liesOver, Module.instQuotientIdealSpanSingletonSetSubmoduleHSMulTop, Submodule.annihilator; digest 9af4fc9c4e961e38.  Read Mathlib/RingTheory/Localization/Free.lean:70-94: exists_free_localizedModule_powers requires finite presentation as a module over the base A, which these finite type algebras need not have. PID and finite local-module freeness results impose other extra hypotheses. Annihilator quotient declarations only identify annihilators. No returned declaration supplies simultaneous generic freeness and the multiplication sequence over an arbitrary domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, Algebra.FiniteType, IsDomain",
+   "results": "OK 0 hits; ; digest 4f53cda18c2baa0c.  Read Mathlib/RingTheory/Localization/Free.lean:70-94: exists_free_localizedModule_powers requires finite presentation as a module over the base A, which these finite type algebras need not have. PID and finite local-module freeness results impose other extra hypotheses. Annihilator quotient declarations only identify annihilators. No returned declaration supplies simultaneous generic freeness and the multiplication sequence over an arbitrary domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra B over an arbitrary domain A and generically nonzero h in B, the annihilator quotient B/Ann(h) and B/hB become free A modules after a common nonzero localization",
+   "results": "OK 8 hits; instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree, Module.FinitePresentation.exists_free_localizedModule_powers, Module.free_iff_isTorsionFree, Algebra.instFreeCotangentToExtensionUnitLocalizationAway, Module.free_of_finite_type_torsion_free', Module.free_of_flat_of_finrank_eq, Module.free_of_finite_type_torsion_free, Algebra.SubmersivePresentation.free_cotangent; digest bd98347531c2c392.  Read Mathlib/RingTheory/Localization/Free.lean:70-94: exists_free_localizedModule_powers requires finite presentation as a module over the base A, which these finite type algebras need not have. PID and finite local-module freeness results impose other extra hypotheses. Annihilator quotient declarations only identify annihilators. No returned declaration supplies simultaneous generic freeness and the multiplication sequence over an arbitrary domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*freeness|generic.*flatness|genericFlat|genericFree",
+   "results": "OK 0 hits; ; digest 4f53cda18c2baa0c.  Read Mathlib/RingTheory/Localization/Free.lean:70-94: exists_free_localizedModule_powers requires finite presentation as a module over the base A, which these finite type algebras need not have. PID and finite local-module freeness results impose other extra hypotheses. Annihilator quotient declarations only identify annihilators. No returned declaration supplies simultaneous generic freeness and the multiplication sequence over an arbitrary domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous generic freeness over an integral domain for two cyclic modules over a polynomial algebra, preserving the annihilator multiplication short exact sequence",
+   "results": "OK 8 hits; Module.free_of_lTensor_residueField_injective, Module.free_of_maximalIdeal_rTensor_injective, Module.free_of_flat_of_finrank_eq, Module.Flat.exists_factorization_of_apply_eq_zero_of_free, Module.Flat.exists_factorization_of_comp_eq_zero_of_free, Submodule.exists_fg_of_baseChange_eq_zero, ModuleCat.smulShortComplex_exact, Module.IsLocalRing.linearCombination_bijective_of_flat; digest 5638fbd7993975ef.  Read Mathlib/RingTheory/Localization/Free.lean:70-94: exists_free_localizedModule_powers requires finite presentation as a module over the base A, which these finite type algebras need not have. PID and finite local-module freeness results impose other extra hypotheses. Annihilator quotient declarations only identify annihilators. No returned declaration supplies simultaneous generic freeness and the multiplication sequence over an arbitrary domain.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*free|free.*localiz|generic.*flat",
+   "results": "{\"t\": \"2026-10-23T23:47:50Z\", \"tool\": \"grep\", \"query\": \"generic.*free|free.*localiz|generic.*flat\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/AtPrime/Basic.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\", \"Mathlib/RingTheory/Localization/Free.lean\"], \"digest\": \"9cf299a752aa5538\"} Read the returned hits and Mathlib/RingTheory/Localization/Free.lean:78-94. The latter requires finite presentation as a module over the base A; C and D need not even be finite as A-modules. PID freeness assumes a principal ideal base. Quotient-annihilator and finite-type quotient lemmas supply no generic freeness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Annihilator and principal quotients of a finite type algebra over a domain are simultaneously free on a nonempty principal open",
+   "results": "{\"t\": \"2026-10-23T23:47:51Z\", \"tool\": \"leansearch\", \"query\": \"Annihilator and principal quotients of a finite type algebra over a domain are simultaneously free on a nonempty principal open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_ker_toSpanSingleton_eq_annihilator\", \"Submodule.annihilator\", \"Submodule.finite_dualAnnihilator_iff\", \"Module.quotientAnnihilator\", \"Ideal.annihilator_quotient\", \"Submodule.annihilator_quotient\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"algebra_finiteType_of_liesOver\"], \"digest\": \"5dbfd5eb144aaddf\"} Read the returned hits and Mathlib/RingTheory/Localization/Free.lean:78-94. The latter requires finite presentation as a module over the base A; C and D need not even be finite as A-modules. PID freeness assumes a principal ideal base. Quotient-annihilator and finite-type quotient lemmas supply no generic freeness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, Algebra.FiniteType, IsDomain",
+   "results": "{\"t\": \"2026-10-23T23:47:51Z\", \"tool\": \"loogle\", \"query\": \"Module.Free, Algebra.FiniteType, IsDomain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned hits and Mathlib/RingTheory/Localization/Free.lean:78-94. The latter requires finite presentation as a module over the base A; C and D need not even be finite as A-modules. PID freeness assumes a principal ideal base. Quotient-annihilator and finite-type quotient lemmas supply no generic freeness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over an arbitrary integral domain becomes a free module after inverting a nonzero element, with possibly infinite basis",
+   "results": "{\"t\": \"2026-10-23T23:47:52Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type algebra over an arbitrary integral domain becomes a free module after inverting a nonzero element, with possibly infinite basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_finite_type_torsion_free'\", \"Module.free_of_finite_type_torsion_free\", \"Algebra.FiniteType.instFreeAlgebraOfFinite\", \"instFiniteDimensionalFractionRingOfFinite\", \"instFreeSubtypeMemIdealOfFiniteOfIsTorsionFree\", \"IsIntegralClosure.module_free\", \"FiniteDimensional.isUnit\", \"FiniteDimensional.exists_mul_eq_one\"], \"digest\": \"f6ee56438cc30071\"} Read the returned hits and Mathlib/RingTheory/Localization/Free.lean:78-94. The latter requires finite presentation as a module over the base A; C and D need not even be finite as A-modules. PID freeness assumes a principal ideal base. Quotient-annihilator and finite-type quotient lemmas supply no generic freeness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic freeness for a finite module over a polynomial ring over a domain without Noetherian hypotheses",
+   "results": "{\"t\": \"2026-10-23T23:48:13Z\", \"tool\": \"leanfinder\", \"query\": \"Generic freeness for a finite module over a polynomial ring over a domain without Noetherian hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.exists_free_surjective\", \"Module.Finite.left\", \"Algebra.QuasiFinite.instOfFinite\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"Algebra.EssFiniteType\", \"Algebra.QuasiFinite\", \"fg_of_fg_of_fg\", \"Algebra.EssFiniteType.of_id\"], \"digest\": \"152877b064fb6dc1\"} Read the returned hits and Mathlib/RingTheory/Localization/Free.lean:78-94. The latter requires finite presentation as a module over the base A; C and D need not even be finite as A-modules. PID freeness assumes a principal ideal base. Quotient-annihilator and finite-type quotient lemmas supply no generic freeness. No exact match or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nonreduced-fibre-open",
+  "date": "2026-10-22",
+  "group": "Q90"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input below lem-trf-local-term-locality: the negative generic-fibre alternative (Stacks 0577) uses ordinary nonreduced spreading (0575) after the 0550 base preparation. In the 0575 subargument: Tag 0575, lemma-nonreduced-in-neighbourhood, proof: annihilator quotient C, generic flatness for C and B/hB, and the resulting short exact sequence.",
+   "via": [
+    "lem-trf-nonreduced-fibre-open",
+    "lem-trf-generic-fibre-not-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-annihilator-quotients-generic-free",
+  "worker": "stage1",
+  "summary": "O4 retained the full statement and reused the existing arbitrary-reduced-base polynomial-module generic-freeness node. Quotient finite type, multiplication exactness, generic nonvanishing, a common product denominator, arbitrary-basis localization and the two canonical quotient identifications are proved explicitly. No new nodes, statement changes, Lean writing or compilation.",
+  "blueprint": "The inherited constructibility chain below latest lem-trf-local-term-locality, through nonreduced-fibre spreading: realizes the Tag 0575 annihilator quotient, generic-freeness shrinking and multiplication exact sequence at blueprint.from.place. Latest ancestor statement and proof read; inherited chain and route retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-reduced-polynomial-module-generic-freeness",
+    "why": "Generic commutative-algebra tool, applied to the cyclic polynomial modules C and D over the domain A; this unit supplies no generic-freeness theorem. Its reduced-base hypothesis follows from A being a domain, and its statement supplies exactly the dense free principal opens needed by Tag 0575."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-reduced-polynomial-module-generic-freeness"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-566b813a5",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-566b813a5 (reviewer sub-agent of L); spot-checked: I read the item and its six steps in full. The statement is unchanged and matches what step 2 of the parent lem-trf-nonreduced-fibre-open uses, and its citations equal stmt_deps. Source: I read more-morphisms.tex Tag 0575 (lemma-nonreduced-in-neighbourhood), whose middle part is this item. The freeness of D_g is stronger than the flatness Stacks uses, and it is justified by algebra.tex Tag 051Z (polynomial case), as carried by lem-sfb-reduced-polynomial-module-generic-freeness. I checked that node's whole statement: A is reduced because it is a domain, n is finite, C and D are cyclic P-modules, and M_f is the localization of the underlying A-module. Its dense open is nonempty because Spec A is nonempty, which gives u,v≠0 and g=uv≠0. The other steps are genuine fraction calculations and I checked each one: step 2, C_a=0 forces a^r b=0, so b⊗1=0, a contradiction; step 4, localizing a basis of any size, independence by clearing powers of v; step 5, localized exactness; step 6, the kernels Ann_{B_g}(b/1) and (b/1)B_g. Small cases checked: A[t]/(t^2) with b=t; ℤ[t]/(2t), which the hypothesis excludes; b a unit; A[t] with b=t (infinite basis). proof_deps equals the union of the steps' uses, and no SGA source is cited. No duplicate of the item in the DAG: the lem-trf and lem-sbc generic-flatness nodes give flatness only. Accepted tool_use: lem-sfb-reduced-polynomial-module-generic-freeness, generic algebra used as a black box, with no freeness node in sk-i-curve-zero. No new nodes, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AnnihilatorQuotientsGenericFree",
+  "declaration": "Algebra.annihilator_quotients_generic_free",
+  "file": "lean/Sheaf/RingTheory/AnnihilatorQuotientsGenericFree.lean",
+  "statement": "theorem annihilator_quotients_generic_free (A : Type u) [CommRing A] [IsDomain A] (B : Type v) [CommRing B] [Algebra A B] [Algebra.FiniteType A B] (b : B) (hb : TensorProduct.tmul A (1 : Localization.AtPrime (⊥ : Ideal A)) b ≠ 0) (I J : Ideal B) (hI : I = (Ideal.span ({b} : Set B)).annihilator) (hJ : J = Ideal.span ({b} : Set B)) : Algebra.FiniteType A (B ⧸ I) ∧ Algebra.FiniteType A (B ⧸ J) ∧ (∃ i : (B ⧸ I) →ₗ[A] B, (∀ x : B, i (Ideal.Quotient.mk I x) = b * x) ∧ Function.Injective i ∧ Function.Exact i (Ideal.Quotient.mkₐ A J).toLinearMap ∧ Function.Surjective (Ideal.Quotient.mkₐ A J) ∧ (∀ a : A, a ≠ 0 → Nontrivial (Localization (Algebra.algebraMapSubmonoid (B ⧸ I) (Submonoid.powers a)))) ∧ ∃ g : A, g ≠ 0 ∧ Module.Free (Localization.Away g) (Localization (Algebra.algebraMapSubmonoid (B ⧸ I) (Submonoid.powers g))) ∧ Module.Free (Localization.Away g) (Localization (Algebra.algebraMapSubmonoid (B ⧸ J) (Submonoid.powers g))) ∧ Nontrivial (Localization (Algebra.algebraMapSubmonoid (B ⧸ I) (Submonoid.powers g))) ∧ ∃ (ig : (Localization (Algebra.algebraMapSubmonoid (B ⧸ I) (Submonoid.powers g))) →ₗ[Localization.Away g] (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g)))) (qg : (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) →ₐ[Localization.Away g] (Localization (Algebra.algebraMapSubmonoid (B ⧸ J) (Submonoid.powers g)))) (c : ((Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) ⧸ ((Ideal.span ({(algebraMap B (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) b)} : Set (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))))).annihilator)) ≃ₐ[Localization.Away g] (Localization (Algebra.algebraMapSubmonoid (B ⧸ I) (Submonoid.powers g)))) (d : ((Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) ⧸ (Ideal.span ({(algebraMap B (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) b)} : Set (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g)))))) ≃ₐ[Localization.Away g] (Localization (Algebra.algebraMapSubmonoid (B ⧸ J) (Submonoid.powers g)))), (∀ x : B ⧸ I, ig (algebraMap (B ⧸ I) (Localization (Algebra.algebraMapSubmonoid (B ⧸ I) (Submonoid.powers g))) x) = algebraMap B (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) (i x)) ∧ (∀ x : B, qg (algebraMap B (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) x) = algebraMap (B ⧸ J) (Localization (Algebra.algebraMapSubmonoid (B ⧸ J) (Submonoid.powers g))) (Ideal.Quotient.mk J x)) ∧ Function.Injective ig ∧ Function.Exact ig qg ∧ Function.Surjective qg ∧ (∀ x : B, c (Ideal.Quotient.mk ((Ideal.span ({(algebraMap B (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) b)} : Set (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))))).annihilator) (algebraMap B (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) x)) = algebraMap (B ⧸ I) (Localization (Algebra.algebraMapSubmonoid (B ⧸ I) (Submonoid.powers g))) (Ideal.Quotient.mk I x)) ∧ (∀ x : Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g)), d (Ideal.Quotient.mk (Ideal.span ({(algebraMap B (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) b)} : Set (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))))) x) = qg x) ∧ (∀ x : Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g)), ig (c (Ideal.Quotient.mk ((Ideal.span ({(algebraMap B (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) b)} : Set (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))))).annihilator) x)) = (algebraMap B (Localization (Algebra.algebraMapSubmonoid B (Submonoid.powers g))) b) * x))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0056dd1a8",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Read the item node, its 6 stmt_dep lean records, Stacks 0575 source, the delivered module and the report (Worker report + Second reading present). Every clause matches: domain A; K = Localization.AtPrime ⊥; Algebra.FiniteType B; hb with K first per the base-change convention; I and J fixed by the equations hI and hJ; quotients of finite type; i pinned by i(x̄)=bx, injective, exact with mkₐ J, surjective; C_a nontrivial for all a≠0; ∃ g≠0 with C_g and D_g Module.Free over Localization.Away g via Mathlib's global localizationAlgebra instance, no basis bound; C_g nontrivial; ig and qg pinned on generators, injective/exact/surjective; c and d pinned to the quotient maps; ig∘c = multiplication by b/1 on all of B_g. No extra hypotheses; universes u and v independent. Edge cases (b a unit, infinite rank, ℤ[t]/(2t) excluded, field, B=0) fine. lean.statement verbatim; no clash in side-live; docstrings carry source and blueprint; only sorry. Notes: algebraMapSubmonoid localization is the same Mathlib notion; isos written in reverse direction; second reading was a self-check. No recompile (no FIX)."
+ }
+}

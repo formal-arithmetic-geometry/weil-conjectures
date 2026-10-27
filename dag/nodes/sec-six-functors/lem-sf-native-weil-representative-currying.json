@@ -1,0 +1,161 @@
+{
+ "id": "lem-sf-native-weil-representative-currying",
+ "kind": "statement",
+ "title": "Derived currying from the native tensor presentation",
+ "statement": "In the setting of [def-sf-native-weil-tensor-presentation], any presentation N of the native tensor m has derived currying bijections Hom(A tensor K,L) equivalent to Hom(A,M.weilHom(K,L)), natural in all three variables. On K-flat P,Q and K-injective I, inverse currying of Q(phi) followed by M.weilRepresentatives.model(P,I) inverse is N.model(P,Q) followed by Q(psi), for a chain map psi whose every homogeneous tensor summand is the unsigned underived tensor-Hom counit applied to the corresponding product-Hom projection of phi. No native closed structure or forgetting compatibility is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, derived adjunction in step 2; Stacks 08J9, 0A97"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-tensor-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Use the generic NativeCurrying chain and homotopy equivalences for the underived parameterized adjunction in N. K-flatness makes internal Hom into a K-injective again K-injective. Combine the generic derived equivalence with N.model and the prescribed Hom model in M.",
+   "uses": [
+    "lem-sf-native-ordinary-representative-currying",
+    "def-sf-native-weil-tensor-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, derived adjunction in step 2; Stacks 08J9, 0A97"
+   }
+  },
+  {
+   "text": "Generic derived naturality and N.model_naturality give a natural isomorphism of the restricted three-variable Hom functors. The product of Q, opposite K-flat localization from N, and K-injective localization is a localization. Fully faithful precomposition extends this isomorphism to all derived objects.",
+   "uses": [
+    "def-sf-native-weil-tensor-presentation",
+    "lem-sf-native-ordinary-representative-currying",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, derived adjunction in step 2; Stacks 08J9, 0A97"
+   }
+  },
+  {
+   "text": "The preimage equation identifies the descended equivalence on representatives. Apply derivedEquiv_symm_map to phi. The actual chain uncurrying map psi satisfies the homogeneous counit formula by NativeCurrying.uncurry_component.",
+   "uses": [
+    "lem-sf-native-ordinary-representative-currying"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, derived adjunction in step 2; Stacks 08J9, 0A97"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-ordinary-representative-currying",
+  "def-sf-native-weil-tensor-presentation",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, derived adjunction in step 2; Stacks 08J9, 0A97; native total-complex formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural tensor Hom currying on K flat and K injective complexes descends through localization to the derived category",
+   "results": "Found HasDerivedCategory.standard, IsLocalization.instIsLocalizedModuleTensorProductMap, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Localization.Monoidal.instLifting₂LocalizedMonoidalToMonoidalCategoryCompFunctorFlipCurriedTensorObjWhiskeringRightTensorBifunctor. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithfulWhiskeringLeft\"",
+   "results": "Found CategoryTheory.Localization.fullyFaithfulWhiskeringLeft, CategoryTheory.ObjectProperty.SerreClassLocalization.fullyFaithfulWhiskeringLeft. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective.*(Hom|hom)|[Ee]valuation.*[Cc]ompat|ParametrizedAdjunction",
+   "results": "Found Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilRingedTensorModel",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native tensor model, derived adjunction in step 2; Stacks 08J9, 0A97 Parent records cor-coef-verdier-weil-equivariance; blueprint_refs ancestor returns None.",
+   "via": [
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilRepresentativeCurrying",
+  "file": "lean/Sheaf/Paper/NativeWeilRepresentativeCurrying.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_representative_currying",
+  "statement": "theorem native_weil_representative_currying\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]\n    {M : NativeClosedHomModels k₀ l X} {S : CoefficientClosedStructure M.ordinaryHom}\n    {m : MonoidalCategory (DerivedCategory (ProEtaleWeilSheaf k₀ l X))}\n    {t : @MonoidalCategory.tensor _ _ m ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor}\n    (N : NativeWeilTensorPresentation k₀ l X M S m t) :\n    ∃ e : ∀ A K L : DerivedCategory (ProEtaleWeilSheaf k₀ l X),\n      (m.tensorObj A K ⟶ L) ≃ (A ⟶ M.weilHom.obj (op K, L)),\n      (∀ (A A' K K' L L' : DerivedCategory (ProEtaleWeilSheaf k₀ l X))\n        (f : A' ⟶ A) (g : K' ⟶ K) (h : L ⟶ L')\n        (φ : A ⟶ M.weilHom.obj (op K, L)),\n        (e A' K' L').symm (f ≫ φ ≫ M.weilHom.map (g.op, h)) =\n          (@MonoidalCategory.tensor _ _ m).map (Prod.mkHom f g) ≫ (e A K L).symm φ ≫ h) ∧\n      (∀ (P Q I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)\n        (hP : NativeTensorKFlat k₀ l X N.tensor P)\n        (_hQ : NativeTensorKFlat k₀ l X N.tensor Q) (hI : I.IsKInjective)\n        (φ : Q ⟶ CochainComplex.bifunctorHomObj (ihomBifunctor k₀ l X) P I),\n        ∃ ψ : CochainComplex.mapBifunctor P Q N.tensor ⟶ I,\n          (∀ (p q n : ℤ) (hpq : p + q = n),\n            HomologicalComplex.ιMapBifunctor P Q N.tensor (.up ℤ) p q n hpq ≫ ψ.f n =\n              (N.tensor.obj (P.X p)).map (φ.f q ≫\n                CochainComplex.bifunctorHomπ (ihomBifunctor k₀ l X) P I q p n hpq) ≫\n                  (N.adjunction.adj (P.X p)).counit.app (I.X n)) ∧\n          (N.model P Q hP).hom ≫ DerivedCategory.Q.map ψ =\n            (e (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj P)\n              (DerivedCategory.Q.obj I)).symm\n                (DerivedCategory.Q.map φ ≫ (M.weilRepresentatives.model P I hI).inv))",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-weil-ringed-tensor-model",
+  "worker": "stage3",
+  "summary": "Derived currying from the native tensor presentation. The Lean declaration and proof steps specify the exact representative interface needed by the parent tensor model.",
+  "blueprint": "Native tensor model, derived adjunction in step 2; Stacks 08J9, 0A97; serves the internal-Hom/evaluation/transposition paragraph of cor-coef-verdier-weil-equivariance through the parent chain.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Use only K-injective resolutions in the native Grothendieck abelian category, to instantiate the generic K-injective localization; the unit has no such resolution theorem and its tensor/duality route is retained."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T034614-L-3665275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T034614-L-3665275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

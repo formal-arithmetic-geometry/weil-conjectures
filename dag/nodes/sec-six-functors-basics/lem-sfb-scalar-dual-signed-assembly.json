@@ -1,0 +1,418 @@
+{
+ "id": "lem-sfb-scalar-dual-signed-assembly",
+ "kind": "statement",
+ "title": "Signed cochain assembly of a natural additive dual comparison",
+ "statement": "Let $R$ be a commutative ring, $(\\mathcal C,J)$ a site small in the module universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], and $B$ a sheaf of commutative rings. Use $B$-module sheaves [def-weil-sheaf-of-modules-category] and internal Hom [def-pur-sheaf-hom]. Let $T:R\\text{-}\\operatorname{Mod}\\to\\operatorname{Mod}(B)$ be an additive functor (it preserves addition of morphisms). For every $R$-module $V$ suppose a $B$-linear sheaf morphism $\\eta_V:T(V^*)\\to\\mathcal Hom_B(TV,B)$ is given, where $V^*=\\operatorname{Hom}_R(V,R)$, with\n$$\\mathcal Hom_B(Tf,1_B)\\circ\\eta_W=\\eta_V\\circ T(f^*)\\quad(f:V\\to W).$$\nLet $F^\\bullet$ be any integer cochain complex of $R$-modules and put $F^\\vee=\\operatorname{Hom}_R^\\bullet(F,R[0])$ using the module-valued total Hom complex [def-sc-module-total-hom-complex]. Its coordinate in degree $q$ is $(F^{-q})^*$, with differential $\\phi\\mapsto-(-1)^q\\phi d_F^{-q-1}$. Apply $T$ termwise to complexes and write $D(TF,B)$ for the signed sheaf dual of [def-sc-signed-sheaf-dual-complex]. The morphisms $\\eta_{F^{-q}}$, preceded by $T$ of the scalar coordinate isomorphisms, define a unique chain map\n$$\\kappa_F:T(F^\\vee)\\longrightarrow D(TF,B).$$\nIts differential compatibility in these coordinates is\n$$d_D^q\\eta_{F^{-q}}=\\eta_{F^{-q-1}}T\\bigl(-(-1)^q(d_F^{-q-1})^*\\bigr).$$\nIt is contravariantly natural in cochain maps $F\\to G$. If all $\\eta_{F^r}$ are isomorphisms, $\\kappa_F$ is an isomorphism of cochain complexes, and its localization is an isomorphism in $D(B)$ [def-weil-abstract-derived-category]. If $F^r=0$ outside $[a,b]$, both $T(F^\\vee)$ and $D(TF,B)$ vanish outside $[-b,-a]$, including for the zero complex and $a>b$. No exactness of $T$ or finite projectivity of $F^r$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X (section-hom-complexes) and 08JJ (lemma-dual-perfect-complex), signed Hom differential and degreewise duals; additive-functor assembly extracted from returned step 6. Agent-written formulation for an arbitrary additive T and a supplied natural comparison."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-sc-module-total-hom-complex",
+  "def-sc-signed-sheaf-dual-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\tau_q:(F^\\vee)^q\\xrightarrow{\\sim}(F^{-q})^*$ for projection to the factor $p=-q$ in [def-sc-module-total-hom-complex]. Every other factor has target $R[0]^{p+q}=0$. The inverse inserts a functional into that factor and zero into all other factors; both composites are identities and both maps are $R$-linear. The target differential is zero, so the defining total-Hom differential gives $\\tau_{q+1}d_{F^\\vee}^q=\\epsilon_q(d_F^{-q-1})^*\\tau_q$, where $\\epsilon_q=-(-1)^q\\in\\{1,-1\\}$.",
+   "uses": [
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, specialized to target R[0]; scalar analogue in more-algebra.tex, Tag 0A8H, section-hom-complexes."
+   }
+  },
+  {
+   "text": "Additivity gives $T(0)=0$ by cancelling in $T(0)=T(0)+T(0)$, and $T(-g)=-T(g)$ by applying $T$ to $g+(-g)=0$. Thus $T(\\epsilon_qg)=\\epsilon_qT(g)$. Applying $T$ degreewise is legitimate: $T(d^{q+1})T(d^q)=T(d^{q+1}d^q)=0$, and functoriality sends the chain-map equations to chain-map equations. Morphisms and their identities are the degreewise ones of [def-weil-abstract-derived-category]; addition and cancellation for module-sheaf maps are sectionwise in [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, signed Hom differential; elementary additive-functor identities, agent-written."
+   }
+  },
+  {
+   "text": "For a module map $g$, put $H(g)=\\mathcal Hom_B(Tg,1_B)$; on every localized site it sends $h$ to $h\\circ Tg$ by [def-pur-sheaf-hom], so it is additive in $g$. For $d=d_F^{-q-1}$ the supplied naturality gives $H(d)\\eta_{F^{-q}}=\\eta_{F^{-q-1}}T(d^*)$. Multiplication by $\\epsilon_q$ and Step 2 give $d_D^q\\eta_{F^{-q}}=\\epsilon_qH(d)\\eta_{F^{-q}}=\\eta_{F^{-q-1}}T(\\epsilon_qd^*)$, using exactly the differential of [def-sc-signed-sheaf-dual-complex]. Set $\\kappa_F^q=\\eta_{F^{-q}}T(\\tau_q)$. Step 1 now yields $d_D^q\\kappa_F^q=\\kappa_F^{q+1}T(d_{F^\\vee}^q)$. This is the chain-map equation; a chain map with these components is unique since equality of chain maps is degreewise.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-sc-signed-sheaf-dual-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, sign convention; agent-written assembly from the assumed naturality equation."
+   }
+  },
+  {
+   "text": "For a cochain map $f:F\\to G$, scalar precomposition has degree-$q$ coordinate $(f^{-q})^*$. It commutes with the signed differentials because $f^{-q}d_F^{-q-1}=d_G^{-q-1}f^{-q-1}$: applying a functional $\\phi$ gives $\\epsilon_q\\phi f^{-q}d_F^{-q-1}=\\epsilon_q\\phi d_G^{-q-1}f^{-q-1}$. Sheaf precomposition $H(f^{-q})$ is a cochain map for the same displayed equation after applying $T$. Naturality of $\\eta$ and the coordinate projection give $H(f^{-q})\\kappa_G^q=\\eta_{F^{-q}}T((f^{-q})^*)T(\\tau_q^G)=\\kappa_F^qT((f^\\vee)^q)$. These are all components of the required contravariant naturality square. Precomposition reverses composites and preserves identities, so these squares are natural for the contravariant dual functors.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-sc-signed-sheaf-dual-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes; direct precomposition calculation, agent-written."
+   }
+  },
+  {
+   "text": "If the specified $\\eta_{F^r}$ are invertible, set $\\lambda^q=T(\\tau_q^{-1})\\eta_{F^{-q}}^{-1}$. Functoriality gives $\\lambda^q\\kappa_F^q=1$ and $\\kappa_F^q\\lambda^q=1$. Multiplying the chain-map equation of Step 3 on its two sides by these inverses gives $T(d_{F^\\vee}^q)\\lambda^q=\\lambda^{q+1}d_D^q$. Hence $\\lambda$ is an inverse chain map. For the localization functor $Q$ of [def-weil-abstract-derived-category], $Q(\\lambda)Q(\\kappa_F)=Q(1)=1$ and $Q(\\kappa_F)Q(\\lambda)=1$, which proves the derived isomorphism without constructing a derived functor of $T$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, ordinary complexes; elementary inverse and functoriality calculation, agent-written."
+   }
+  },
+  {
+   "text": "The identity of $T(0)$ equals $T(1_0)=T(0)=0$. Evaluating on every object of the site shows every section of $T(0)$ is zero. Thus $T$ takes zero modules to zero sheaves, and also takes any module isomorphic to zero to a zero sheaf. If $q<-b$ or $q>-a$, then $-q>b$ or $-q<a$, so $F^{-q}=0$ and $(F^{-q})^*=0$. Step 1 and the preceding observation give $T(F^\\vee)^q=0$. Also $(TF)^{-q}=0$, and [def-pur-sheaf-hom] gives $D(TF,B)^q=\\mathcal Hom_B(0,B)=0$, since every localized module map from zero is zero. The same reasoning applies for every $q$ when $a>b$, and for the zero complex; no endpoint or nonzero assumption was used.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-pur-sheaf-hom",
+    "def-sc-signed-sheaf-dual-complex",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, degree reversal only; zero and support calculations from the definitions, agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "def-sc-signed-sheaf-dual-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A8X, section-hom-complexes, and Tag 08JJ, lemma-dual-perfect-complex, for the sign and reversal conventions. The arbitrary additive-functor assembly is proved explicitly here, not claimed as the statement of 08JJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor from modules to sheaves equipped with a natural comparison to internal duals induces a signed Hom cochain complex comparison, isomorphic if termwise comparisons are isomorphisms",
+   "results": {
+    "top": [
+     "CochainComplex.HomComplex",
+     "CategoryTheory.Functor.mapHomotopyEquiv",
+     "CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app",
+     "CategoryTheory.Functor.map_homogical_complex_additive",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso",
+     "CochainComplex.mappingCone.mapHomologicalComplexXIso'",
+     "CategoryTheory.Functor.commShiftMapCochainComplex",
+     "CochainComplex.mappingCone.mapHomologicalComplexIso"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toSingleEquiv gives external cochain coordinates in AddCommGrpCat; additive mapHomologicalComplex and Hom differential lemmas do not assemble a specified natural module-to-internal-sheaf-dual comparison under T or assert its bounds."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Assemble a natural module dual comparison under an additive functor into an isomorphism of cochain complexes Hom into the coefficient in degree zero with differential minus negative one power times precomposition",
+   "results": {
+    "top": [
+     "groupCohomology.inhomogeneousCochainsIso",
+     "CochainComplex.HomComplex.Cochain.fromSingleEquiv",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv_toSingleMk",
+     "CochainComplex.HomComplex.Cochain.fromSingleEquiv_fromSingleMk",
+     "CochainComplex.HomComplex.Cochain.toSingleMk_v",
+     "CategoryTheory.ProjectiveResolution.cochainComplexXIso",
+     "HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toSingleEquiv gives external cochain coordinates in AddCommGrpCat; additive mapHomologicalComplex and Hom differential lemmas do not assemble a specified natural module-to-internal-sheaf-dual comparison under T or assert its bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex, Functor.Additive",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Functor.Additive'",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toSingleEquiv gives external cochain coordinates in AddCommGrpCat; additive mapHomologicalComplex and Hom differential lemmas do not assemble a specified natural module-to-internal-sheaf-dual comparison under T or assert its bounds."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.Cochain.toSingleEquiv",
+   "results": {
+    "top": [
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv_toSingleMk",
+     "CochainComplex.HomComplex.Cochain.toSingleMk_toSingleEquiv",
+     "CochainComplex.HomComplex.Cochain.toSingleLinearEquiv_apply",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv_apply",
+     "CochainComplex.HomComplex.Cochain.toSingleLinearEquiv_symm_apply",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv_symm_apply",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv_smul"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toSingleEquiv gives external cochain coordinates in AddCommGrpCat; additive mapHomologicalComplex and Hom differential lemmas do not assemble a specified natural module-to-internal-sheaf-dual comparison under T or assert its bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "hom.*[Tt]o.*[Ss]ingle|[Hh]om.*[Ss]ingle|dual.*[Cc]omplex",
+   "results": {
+    "top": [
+     "Mathlib/Algebra/Homology/SingleHomology.lean",
+     "Mathlib/Algebra/Homology/SingleHomology.lean",
+     "Mathlib/Algebra/Homology/SingleHomology.lean",
+     "Mathlib/Algebra/Homology/SingleHomology.lean",
+     "Mathlib/Algebra/Homology/SingleHomology.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexSingle.lean"
+    ],
+    "n_hits": 25,
+    "note": "",
+    "sub": "Algebra/Homology"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toSingleEquiv gives external cochain coordinates in AddCommGrpCat; additive mapHomologicalComplex and Hom differential lemmas do not assemble a specified natural module-to-internal-sheaf-dual comparison under T or assert its bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "toSingleEquiv|toSingleLinearEquiv|δ_v",
+   "results": {
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean"
+    ],
+    "n_hits": 23,
+    "note": "",
+    "sub": "Algebra/Homology/HomotopyCategory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: toSingleEquiv gives external cochain coordinates in AddCommGrpCat; additive mapHomologicalComplex and Hom differential lemmas do not assemble a specified natural module-to-internal-sheaf-dual comparison under T or assert its bounds."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex|map_neg|toSingleEquiv|isoOfComponents",
+   "results": {
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean"
+    ],
+    "n_hits": 25,
+    "note": "",
+    "sub": "Algebra/Homology"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic prolongation, single-target cochain coordinates, shifts and componentwise isomorphisms do not state the supplied natural module-to-internal-sheaf-dual comparison for arbitrary additive T, its signed assembly and bounds. Relevant HomComplexSingle.lean:155-180 and HomologicalComplex.lean:504-536 were read; the assembly is a direct computation, not a one-line specialization of one declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural additive module dual comparison assembles into a signed cochain comparison for any additive functor to sheaves of modules",
+   "results": {
+    "top": [
+     "CategoryTheory.Functor.commShiftIso_map₂CochainComplex_flip_hom_app",
+     "CategoryTheory.Functor.commShiftMapCochainComplex",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+     "CategoryTheory.Functor.mapHomologicalComplex_commShiftIso_eq",
+     "CharacterModule.dual",
+     "CochainComplex.singleFunctor",
+     "SheafOfModules.instPreadditive"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic prolongation, single-target cochain coordinates, shifts and componentwise isomorphisms do not state the supplied natural module-to-internal-sheaf-dual comparison for arbitrary additive T, its signed assembly and bounds. Relevant HomComplexSingle.lean:155-180 and HomologicalComplex.lean:504-536 were read; the assembly is a direct computation, not a one-line specialization of one declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Additive, HomologicalComplex",
+   "results": {
+    "top": [
+     "HomologicalComplex.eval_additive",
+     "HomologicalComplex.instAdditiveSingle",
+     "CategoryTheory.instFaithfulHomologicalComplexMapHomologicalComplex",
+     "CategoryTheory.instAdditiveHomologicalComplexMapHomologicalComplex",
+     "CategoryTheory.instFullHomologicalComplexMapHomologicalComplexOfFaithful",
+     "CategoryTheory.Functor.map_homogical_complex_additive",
+     "CategoryTheory.Functor.mapHomologicalComplex_linear",
+     "HomologicalComplex.instAdditiveHomologyFunctor"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic prolongation, single-target cochain coordinates, shifts and componentwise isomorphisms do not state the supplied natural module-to-internal-sheaf-dual comparison for arbitrary additive T, its signed assembly and bounds. Relevant HomComplexSingle.lean:155-180 and HomologicalComplex.lean:504-536 were read; the assembly is a direct computation, not a one-line specialization of one declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor equipped with a natural comparison from the scalar module dual to the internal sheaf dual induces a natural signed dual cochain map, which is an isomorphism if its components are isomorphisms",
+   "results": {
+    "top": [
+     "CochainComplex.shiftEval_hom_app",
+     "CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₁",
+     "CochainComplex.shiftShortComplexFunctor'_hom_app_τ₁",
+     "CochainComplex.HomComplex.Cochain.fromSingleEquiv",
+     "CochainComplex.HomComplex.Cochain.v_comp_XIsoOfEq_hom",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv",
+     "CochainComplex.shiftShortComplexFunctorIso_add'_hom_app",
+     "CochainComplex.HomComplex.Cochain.v_comp_XIsoOfEq_inv"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic prolongation, single-target cochain coordinates, shifts and componentwise isomorphisms do not state the supplied natural module-to-internal-sheaf-dual comparison for arbitrary additive T, its signed assembly and bounds. Relevant HomComplexSingle.lean:155-180 and HomologicalComplex.lean:504-536 were read; the assembly is a direct computation, not a one-line specialization of one declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "toSingleEquiv|toSingleLinearEquiv|δ_v",
+   "results": {
+    "top": [
+     "168",
+     "182",
+     "183",
+     "184",
+     "189"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "sub": "Algebra/Homology/HomotopyCategory/HomComplexSingle.lean"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic prolongation, single-target cochain coordinates, shifts and componentwise isomorphisms do not state the supplied natural module-to-internal-sheaf-dual comparison for arbitrary additive T, its signed assembly and bounds. Relevant HomComplexSingle.lean:155-180 and HomologicalComplex.lean:504-536 were read; the assembly is a direct computation, not a one-line specialization of one declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a natural transformation between contravariant additive functors on modules to sign reversed cochain dual complexes, with componentwise inverse and reversed support interval",
+   "results": {
+    "top": [
+     "ChainComplex.linearYonedaObj",
+     "CochainComplex.ConnectData.map_f",
+     "CochainComplex.HomComplex.Cochain.toSingleMk",
+     "CochainComplex.HomComplex.Cochain.toSingleEquiv",
+     "CochainComplex.HomComplex.Cochain.fromSingleEquiv",
+     "CategoryTheory.Functor.mapCochainComplexSingleFunctor",
+     "CochainComplex.HomComplex.Cochain.toSingleMk_v",
+     "CochainComplex.HomComplex.Cochain.fromSingleMk"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic prolongation, single-target cochain coordinates, shifts and componentwise isomorphisms do not state the supplied natural module-to-internal-sheaf-dual comparison for arbitrary additive T, its signed assembly and bounds. Relevant HomComplexSingle.lean:155-180 and HomologicalComplex.lean:504-536 were read; the assembly is a direct computation, not a one-line specialization of one declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scalar-perfect-dual-realization",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Paragraph 2 final sentence, coefficient dual of a locally constant perfect complex: signed cochain assembly of supplied degreewise dual comparisons, naturality and reversed bounds.",
+   "via": [
+    "lem-sfb-scalar-perfect-dual-realization",
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-scalar-dual-signed-assembly",
+  "worker": "stage1",
+  "summary": "Statement and statement dependencies unchanged. Six elementary computation steps prove the scalar coordinates, additive prolongation, signed comparison and uniqueness, contravariant naturality, explicit inverse and localization, and reversed support including empty intervals. No new nodes: every subargument is a direct calculation from the cited definitions and the supplied naturality. New logged Mathlib searches checked generic ingredients but found no exact match.",
+  "blueprint": "det-thm-sf-ctf-stability-internal-hom, main-20261015 proof paragraph 2 final sentence: the dual P^vee of a locally constant perfect complex. This item realizes only the ordinary signed cochain assembly subargument of the coefficient-dual realization; it makes no derived internal-Hom or perfectness claim."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-f44df9fdb",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-f44df9fdb (reviewer sub-agent of L); spot-checked: I read the item in full and recomputed every step; there are no new nodes. Statement and stmt_deps are byte-identical to side-live, where the item is still unsplit. The item is not on the drop list, has no repair note and cites no SGA. Signs: def-sc-module-total-hom-complex follows Stacks 0A8X (sites-cohomology l.8571), d=d_M z-(-1)^n z d_L, so with target R[0] the degree-q coordinate is (F^{-q})^* and the differential is -(-1)^q phi d^{-q-1}. This matches def-sc-signed-sheaf-dual-complex. Step 3: applying the eta-naturality with f=d gives d_D kappa^q = kappa^{q+1} T(d^q), which I recomputed. Step 4: D(Tf) is a chain map by contravariance of precomposition, and the naturality square comes from eta naturality at f^{-q}. Step 5 builds a two-sided inverse chain map, so Q(kappa) is an iso; invertibility of eta is used only there. Step 6 uses T(0)=0 and Hom(0,B)=0, covering a>b and the zero complex. Small case: Z -2-> Z in degrees 0,1 checks both signs. Duplicate search over citers of the signed dual: lem-sc-affine-finite-free-dual-complex-comparison is a special affine case and lem-sc-hom-complex-to-single is a different statement, so neither duplicates the item. The parent lem-sfb-scalar-perfect-dual-realization uses it as stated (T=C_B, eta=beta) and there is no cycle. The steps are genuinely elementary and proof_deps equals the union of the step uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ScalarDualSignedAssembly",
+  "declaration": "CategoryTheory.scalarDual_signed_assembly",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarDualSignedAssembly.lean",
+  "statement": "theorem scalarDual_signed_assembly {C : Type u} [Category.{u} C] (J : GrothendieckTopology C) (R : Type u) [CommRing R] (B : Sheaf J CommRingCat.{u}) (T : ModuleCat.{u} R ⥤ ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) [T.Additive] (η : ∀ V : ModuleCat.{u} R, T.obj (ModuleCat.of R (Module.Dual R V)) ⟶ SheafOfModules.homObj (R := B) (T.obj V) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))) (hη : ∀ {V W : ModuleCat.{u} R} (f : V ⟶ W), η W ≫ SheafOfModules.homObjMap (R := B) (T.map f) (𝟙 _) = T.map (ModuleCat.ofHom f.hom.dualMap) ≫ η V) : ∃ τ : ∀ (F : CochainComplex (ModuleCat.{u} R) ℤ) (q : ℤ), (CochainComplex.moduleHomComplex F ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R))).X q ≅ ModuleCat.of R (Module.Dual R (F.X (-q))), (∀ (F : CochainComplex (ModuleCat.{u} R) ℤ) (q : ℤ) (z : (CochainComplex.moduleHomComplex F ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R))).X q), (τ F q).hom z = (z.v (-q) 0 (neg_add_cancel q) ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (ModuleCat.of R R)).hom).hom) ∧ (∀ (F : CochainComplex (ModuleCat.{u} R) ℤ) (q : ℤ), (CochainComplex.moduleHomComplex F ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R))).d q (q + 1) ≫ (τ F (q + 1)).hom = (τ F q).hom ≫ ModuleCat.ofHom (-q.negOnePow • (F.d (-(q + 1)) (-q)).hom.dualMap)) ∧ ∃ κ : ∀ F : CochainComplex (ModuleCat.{u} R) ℤ, (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj (CochainComplex.moduleHomComplex F ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R))) ⟶ signedSheafDualComplex (R := B) ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj F) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)), (∀ (F : CochainComplex (ModuleCat.{u} R) ℤ) (q : ℤ), @id (T.obj ((CochainComplex.moduleHomComplex F ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R))).X q) ⟶ SheafOfModules.homObj (R := B) (T.obj (F.X (-q))) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))) ((κ F).f q) = T.map (τ F q).hom ≫ η (F.X (-q))) ∧ (∀ (F : CochainComplex (ModuleCat.{u} R) ℤ) (κ' : (T.mapHomologicalComplex (ComplexShape.up ℤ)).obj (CochainComplex.moduleHomComplex F ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R))) ⟶ signedSheafDualComplex (R := B) ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj F) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))), (∀ q : ℤ, @id (T.obj ((CochainComplex.moduleHomComplex F ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R))).X q) ⟶ SheafOfModules.homObj (R := B) (T.obj (F.X (-q))) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))) (κ'.f q) = T.map (τ F q).hom ≫ η (F.X (-q))) → κ' = κ F) ∧ (∀ (F : CochainComplex (ModuleCat.{u} R) ℤ) (q : ℤ), η (F.X (-q)) ≫ (-q.negOnePow • SheafOfModules.homObjMap (R := B) (T.map (F.d (-(q + 1)) (-q))) (𝟙 _)) = T.map (ModuleCat.ofHom (-q.negOnePow • (F.d (-(q + 1)) (-q)).hom.dualMap)) ≫ η (F.X (-(q + 1)))) ∧ (∀ (F G : CochainComplex (ModuleCat.{u} R) ℤ) (f : F ⟶ G), ∃ g : CochainComplex.moduleHomComplex G ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R)) ⟶ CochainComplex.moduleHomComplex F ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R)), ∃ h : signedSheafDualComplex (R := B) ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj G) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) ⟶ signedSheafDualComplex (R := B) ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj F) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)), (∀ q : ℤ, g.f q ≫ (τ F q).hom = (τ G q).hom ≫ ModuleCat.ofHom (f.f (-q)).hom.dualMap) ∧ (∀ q : ℤ, @id (SheafOfModules.homObj (R := B) (T.obj (G.X (-q))) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) ⟶ SheafOfModules.homObj (R := B) (T.obj (F.X (-q))) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))) (h.f q) = SheafOfModules.homObjMap (R := B) (T.map (f.f (-q))) (𝟙 _)) ∧ (T.mapHomologicalComplex (ComplexShape.up ℤ)).map g ≫ κ F = κ G ≫ h) ∧ (∀ F : CochainComplex (ModuleCat.{u} R) ℤ, (∀ r : ℤ, IsIso (η (F.X r))) → IsIso (κ F) ∧ IsIso ((@DerivedCategory.Q _ _ _ (HasDerivedCategory.standard _)).map (κ F))) ∧ (∀ (F : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ), (∀ r : ℤ, r < a ∨ b < r → IsZero (F.X r)) → ∀ q : ℤ, q < -b ∨ -a < q → IsZero (((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj (CochainComplex.moduleHomComplex F ((CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R)))).X q) ∧ IsZero ((signedSheafDualComplex (R := B) ((T.mapHomologicalComplex (ComplexShape.up ℤ)).obj F) (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))).X q))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e808d207",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Single theorem scalarDual_signed_assembly (sorry only); node unchanged except lean; statement verbatim. Clause-by-clause match: additive T, eta naturality orientation (homObjMap contravariant first slot), tau pinned to z.v(-q,0)≫singleObjXSelf with differential sign -(-1)^q recomputed from Mathlib δ, signedSheafDualComplex sign matches, kappa components and uniqueness, contravariant naturality with component-pinned g/h, IsIso of chain map and of DerivedCategory.Q image, bounds [-b,-a] for all a,b incl. a>b/zero complex. No hollow defs, no extra hypotheses or universe restriction, docstrings with source/blueprint and proof steps. Advisory: SiteCoveringAxioms import unused."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261023T090657-L-684806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.scalarDual_signed_assembly"
+  ],
+  "sorry_after": []
+ }
+}

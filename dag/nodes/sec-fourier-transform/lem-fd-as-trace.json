@@ -183,7 +183,46 @@
   "lem-fd-as-cover-affine-line"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier",
+     "module": "WeilConjectures.WeilSheaf.ArtinSchreierTrace",
+     "lines": [
+      530,
+      551
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
  "chapter": "sec-fourier-transform",
  "unit": "sk-lem-as-properties",
  "lean": {
@@ -255,5 +294,26 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-620318dd0 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 18 cited statements, the main-20261015 unit sk-lem-as-properties, lem-fd-as-trace.md/.proof.md, and sk-def-as/def-fd-artin-schreier-sheaf.md. No new nodes. Statement unchanged and not weakened. The proof uses the current AS_q definition (sk-def-as, and the blueprint_update of def-fd-artin-schreier-sheaf). The statement holds under both the p-cover and q-cover readings (step 6 trace transitivity). The source error is accepted: the unit's paragraph still computes on the degree-p cover, and for F_4 the two covers have degree 2 vs 4; the maintainer should record this in HUMAN.md. Steps checked: clause 1 of lem-a1-artin-schreier-trace-cover-map with b=1; lem-zl-finite-adic-direct-image (finite morphism, separated finite-type schemes, Lambda=E); equivariance from lem-fix-weil-operations; idempotent splitting in the heart; m_a a k_0-isomorphism since a≠0; J_X hypotheses on A^1_k; def-fd-trace-function's E-model prescription; induction y^{q^j}=y+sum b^{q^i}; Mathlib trace leaf; the double-sum transitivity. Small cases checked: q=2, q=4 with u=1,omega, p=3 over F_9. Sign verified from def-weil-frobenius-detailed (gamma=phi_q^{-1}): point transport h'(ybar g_s^n)=h(ybar), then the direct-image Weil map gives F h(ybar)=h(ybar') with gamma^n(y(ybar'))=y(ybar), so F h(y)=h(y^{q^n}) and the scalar is psi(Tr), not psi(-Tr). FIX (E5): step 3 justified this with one compressed and literally inaccurate sentence about restriction; I rewrote step 3 with the explicit reindexing (same uses, 1680 chars) in fixes/dag/nodes/sec-fourier-transform/lem-fd-as-trace.json. Batch-5 check: the item's closure contains neither nt-assume-trace-formula, nt-assume-poincare-duality, sk-thm-trace-transport nor sk-thm-poincare-duality. All 75 trf/pod-chapter nodes it reaches are already in the closure of its statement deps (mostly via def-weil-local-frobenius-trace). Flagged citations accepted: sk-def-fourier-set, sk-def-as and def-fd-trace-function are general definitions; lem-fix-weil-operations, lem-a1-constructible-pullback-t-exact, lem-pod-integral-pullback-composition and lem-weil-frobenius-point-transport-natural are generic coherence/exactness infrastructure, neither stated by nor a step of the trace formula or Poincare duality. No step uses either theorem. All 8 declared tool_uses accepted as generic black boxes.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $k_0=\\mathbf F_q$, fix the nondegenerate additive character\n$\\psi=\\Psi\\circ\\operatorname{Tr}_{k_0/\\mathbf F_p}$ of [def-fd-additive-character],\nlet $a\\in k_0^\\times$, and let $\\mathcal L_{\\psi,ax}$ be the\nArtin–Schreier sheaf of [def-fd-artin-schreier-sheaf] on\n$\\mathbf A^1_{k_0}$ attached to the linear function $x\\mapsto ax$.\nThen the *trace function* of $\\mathcal L_{\\psi,ax}$ is\n\n$$\nt_{\\mathcal L_{\\psi,ax}}(u)=\\psi\\bigl(\\operatorname{Tr}_{\\kappa(u)/k_0}(au)\\bigr)\n=\\Psi\\bigl(\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au)\\bigr),\n$$\n\nfor every closed point $u$ (with the local Frobenius convention of\n[def-weil-local-frobenius-trace]); in particular, on the\n$\\mathbf F_{q^n}$-points of the line,\n\n$$\nt_{\\mathcal L_{\\psi,ax}}(x)=\\psi\\bigl(\\operatorname{Tr}_{\\mathbf F_{q^n}/k_0}(ax)\\bigr).\n$$",
+  "proof": [
+   {
+    "text": "Fix a closed point $u$ of $\\mathbf A^1_{k_0}$ of degree $n$, with\n$u\\in\\kappa(u)\\subset \\overline k$ its image and geometric point\n$\\bar u$, and let $F_u$ be the local Frobenius operator of\n[def-weil-local-frobenius-trace] (the $n$-fold iterate of the\ngeometric Frobenius), which acts on functions on the fibre by pullback\nalong $y\\mapsto y^{q^n}$. By the affine-line covering\n[lem-fd-as-cover-affine-line], the fibre of\n$\\pi:Y\\to\\mathbf A^1_{k_0}$, $y\\mapsto y^p-y$, over $\\bar u$ is\nthe set\n\n$$\nY_{\\bar u}=\\{y\\in\\overline k:\\ y^p-y=au\\},\n$$\n\nwhich is an $\\mathbf F_p$-torsor (the difference of two roots is a\nroot of $X^p-X$, hence lies in $\\mathbf F_p$; the polynomial\n$T^p-T-au$ is separable). The stalk\n$(\\pi_*\\overline{\\mathbf Q}_\\ell)_{\\bar u}$ is the space of functions on\n$Y_{\\bar u}$, with $\\sigma_c$ ($c\\in\\mathbf F_p$) acting by pullback along\n$y\\mapsto y+c$, and $(\\mathcal L_{\\psi,ax})_{\\bar u}$ is identified by [lem-wft-as-comparison]\n(with $a=1$ and the function $ax$) with the image of the\nidempotent $e_\\Psi$ of [def-fd-artin-schreier-sheaf], on which $\\sigma_c$\nacts by $\\Psi(c)$. For $y\\in Y_{\\bar u}$, induction on $j$ gives\n\n$$\ny^{p^j}=y+\\sum_{0\\leq i<j}(au)^{p^i},\n\\qquad\\text{so}\\qquad\ny^{q^n}=y^{p^m}=y+\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au),\n\\quad m=[\\kappa(u):\\mathbf F_p],\n$$\n\nbecause the conjugates of $au\\in\\kappa(u)$ over $\\mathbf F_p$ are the\n$(au)^{p^i}$, $0\\le i<m$. Hence $F_u$ acts on the functions on\n$Y_{\\bar u}$ as $\\sigma_t$ with\n$t=\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au)\\in\\mathbf F_p$, and so on\nthe rank-one $\\Psi$-isotypic stalk by the scalar $\\Psi(t)$. By\ntransitivity of the trace,\n$\\Psi(\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au))\n=\\Psi(\\operatorname{Tr}_{k_0/\\mathbf F_p}\\operatorname{Tr}_{\\kappa(u)/k_0}(au))\n=\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(au))$, which is the announced\nformula; for an $\\mathbf F_{q^n}$-point the same computation applies with\n$\\kappa(u)$ replaced by $\\mathbf F_{q^n}$.",
+    "uses": [
+     "def-weil-local-frobenius-trace",
+     "lem-fd-as-cover-affine-line",
+     "lem-wft-as-comparison",
+     "def-fd-artin-schreier-sheaf"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,113 @@
+{
+ "id": "lem-sfb-rational-p1-left-projection-naturality",
+ "kind": "lemma",
+ "title": "Naturality of the fixed left-factor projection",
+ "status": "split",
+ "statement": "For any commutative condensed ring Λ, morphism g : X → S of schemes, morphism k : K → K′ in the unbounded derived category of internal Λ_S-module objects, and object N in the analogous category on X, the fixed left-factor projection map of [def-sfb-projective-diagonal-composition] satisfies (k ⊗ id) ≫ projectionMap(g,K′,N) = projectionMap(g,K,N) ≫ Rg_*(Lg^*(k) ⊗ id). No properness or invertibility is assumed.",
+ "stmt_deps": [
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-proetale-rational-localizing-projection-helpers",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-proetale-projection-exchange-maps",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "clause (3), each constituent is a natural transformation"
+ },
+ "proof": [
+  {
+   "text": "The native traceProjection is the right-factor projection mate conjugated by the source and target braidings. Use braiding naturality in the left variable on S, the right projection mate naturality in its S argument, and braiding naturality in the right variable on X. Compose the three commuting squares and combine the direct-image maps by functoriality. Abstract the normalized projection family before unfolding the shared tensor bundle; its heterogeneous normalization becomes ordinary equality and transfers the native square to projectionMap.",
+   "uses": [
+    "def-sfb-projective-diagonal-composition",
+    "def-sfb-proetale-rational-localizing-projection-helpers",
+    "def-sfb-projective-diagonal-pullback",
+    "def-sfb-proetale-projection-exchange-maps",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-proetale-rational-localizing-projection-helpers",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-proetale-projection-exchange-maps",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "C1 formalization of constituent naturality in clause (3)"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the tensor shift isomorphism and of the left factor derived projection comparison",
+   "results": "8 hits, including Functor.commShiftIso_hom_naturality; none gives the normalized internal-module comparisons.",
+   "date": "2026-10-27",
+   "verdict": "Use the native naturality API and transfer along normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.shift_app_comm",
+   "results": "1 exact hit in Mathlib.CategoryTheory.Shift.CommShift.",
+   "date": "2026-10-27",
+   "verdict": "Native tensor-shift naturality ingredient; left projection uses the project mate API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorShiftIso_naturality|projectionMap_naturality|trace_projection_naturality",
+   "results": "0 Mathlib hits. Project rg found a private native left-projection proof in RationalP1DiagonalTensor, which is reused here, but no public theorem for either fixed comparison. Blueprint clause (3) states constituent naturality.",
+   "date": "2026-10-27",
+   "verdict": "Prove the normalized comparison lemmas from the existing native interfaces."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1UnitCounit",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "proof clause (3), naturality of the canonical constituents",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1ProjectionNaturality",
+  "file": "lean/Sheaf/Paper/RationalP1ProjectionNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.projectionMap_naturality",
+  "statement": "theorem projectionMap_naturality {X S : Scheme.{u}} (g : X ⟶ S)\n    {K K' : DerivedCategory (Modules Λ S)} (k : K ⟶ K')\n    (N : DerivedCategory (Modules Λ X)) :\n    tensorHom k (𝟙 _) ≫ projectionMap Λ g K' N =\n      projectionMap Λ g K N ≫\n        (moduleObjectDerivedPushforward Λ g).map\n          (tensorHom ((moduleObjectDerivedPullback Λ g).map k) (𝟙 N))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-12803",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T235837-L-1460279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-12803",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T235837-L-1460279",
+  "kind": "interface",
+  "note": "independent cc review: UnitInversionCondition/CounitInversionCondition bodies vs the old unitInversions/counitInversion conclusions (verbatim); Assembly signature vs the clone (identical); new node stmt_deps vs the owners of the declarations their statements use; unit realized (empty) vs the dropped CartesianCoefficients import"
+ }
+}

@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-finite-free-algebra-pseudocoherent-resolution",
+ "kind": "statement",
+ "title": "Finite-free algebra resolutions from base-ring pseudo-coherence",
+ "statement": "Let $A$ be a commutative ring and $B$ a possibly noncommutative unital $A$-algebra (the image of $A$ lies in the centre of $B$). Suppose $B$ is finite free as an $A$-module, that is, $B\\cong A^{\\oplus r}$ as $A$-modules for some finite $r\\geq0$. Let $M$ be an object of the unbounded derived category of right $B$-modules [def-weil-abstract-derived-category]. If the underlying object $\\operatorname{Res}_A M\\in D(A)$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex], then $M$ is isomorphic in $D(\\operatorname{Mod}\\!\\text{-}B)$ to a bounded-above cochain complex $F^\\bullet$ with each $F^i$ a finite free right $B$-module.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSF, lemma-pseudo-coherent-over-algebra."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a complex $K^\\bullet$ of right $B$-modules representing $M$. By pseudo-coherence its restriction to $A$ is isomorphic to a bounded-above finite-free $A$-complex $E^\\bullet$. Choose $b\\in\\mathbf Z$ with $E^i=0$ for $i>b$; hence $H^i(K)=0$ for $i>b$. Restriction of scalars keeps the underlying additive groups, kernels and images, so this is also vanishing as right $B$-modules. We construct, for $n=b+1,b,b-1,\\ldots$, a finite-free right $B$-complex $F_{\\geq n}$ supported in $[n,b]$ and a chain map $\\alpha_n:F_{\\geq n}\\to K$ inducing isomorphisms on $H^i$ for $i>n$ and a surjection for $i=n$. At $n=b+1$ take the zero complex and zero map. Each extension will keep all previously chosen terms and maps.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSF, lemma-pseudo-coherent-over-algebra, proof; upper bound and descending-induction invariant; start with the zero complex"
+   }
+  },
+  {
+   "text": "Suppose the stage $n$ is constructed. Form $T=C(\\alpha_n)$ with $T^i=K^i\\oplus F_{\\geq n}^{i+1}$ and $d_T(x,y)=(d_Kx+\\alpha_n y,-d_Fy)$. In the long exact sequence of its cone triangle, for $i\\geq n$ the map $H^i(F_{\\geq n})\\to H^i(K)$ is surjective and the map $H^{i+1}(F_{\\geq n})\\to H^{i+1}(K)$ is injective. Exactness therefore gives $H^i(T)=0$ for every $i\\geq n$. These statements hold over $B$ and after restriction to $A$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSF, lemma-pseudo-coherent-over-algebra, proof; cone and its cohomology vanishing"
+   }
+  },
+  {
+   "text": "As an $A$-complex $F_{\\geq n}$ is bounded finite free: if $F^i\\cong B^{\\oplus s_i}$, the given $A$-basis of $B$ gives $F^i\\cong A^{\\oplus rs_i}$. Its identity is an $n$-pseudo-coherent witness. The brutal truncation $E_{\\geq n-1}\\to E$, followed by the derived isomorphism to $\\operatorname{Res}_A K$, witnesses $(n-1)$-pseudo-coherence of $\\operatorname{Res}_A K$: cohomology is unchanged above $n-1$, and removing incoming boundaries makes the map surjective in degree $n-1$. Restriction preserves the displayed cone formula and hence gives a distinguished triangle over $A$. Apply [lem-sc-cone-pseudo-coherent] with its parameter $m=n-1$ to obtain $(n-1)$-pseudo-coherence of $\\operatorname{Res}_A T$. Its cohomology vanishes above $n-1$ by Step 2, so [lem-sc-finite-cohomology] gives a finite set of $A$-module generators of $H^{n-1}(T)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-ring-m-pseudo-coherent",
+    "lem-sc-cone-pseudo-coherent",
+    "lem-sc-finite-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSF, lemma-pseudo-coherent-over-algebra, proof; finite base-ring obstruction group, using Tags 064R and 064S"
+   }
+  },
+  {
+   "text": "Choose cycles $z_1,\\ldots,z_s\\in T^{n-1}$ lifting those $A$-generators. They generate cohomology also as a right $B$-module: an $A$-linear expression $\\sum_j a_j[z_j]$ equals $\\sum_j[z_j]\\iota(a_j)$ under restriction through the central scalar map $\\iota:A\\to B$. Set $F^{n-1}=B^{\\oplus s}$ and define the right $B$-linear map $\\beta:F^{n-1}\\to T^{n-1}$ by its basis images $z_j$. Then $d_T\\beta=0$, and the induced map to $H^{n-1}(T)$ is surjective. Since $T^{n-1}=K^{n-1}\\oplus F^n$, write $\\beta=(a,-d)$. The cycle equation says $d_Ka=\\alpha_n^n d$ and $d_F^n d=0$. Thus adjoining $F^{n-1}$ with differential $d$ and chain-map component $a$ produces $\\alpha_{n-1}:F_{\\geq n-1}\\to K$, keeping all higher data. An empty generating set gives $s=0$ and is allowed.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSF, lemma-pseudo-coherent-over-algebra, proof; lift a finite set of obstruction generators and read off the two components of beta"
+   }
+  },
+  {
+   "text": "Let $T'=C(\\alpha_{n-1})$. For $i\\geq n-1$ the terms $T'^i$, their outgoing differentials, and their cycles agree with those of $T$. The only change affecting their boundaries is in degree $n-1$: $T'^{n-2}=K^{n-2}\\oplus F^{n-1}$, and its differential is $(u,v)\\mapsto(d_Ku,0)+\\beta(v)$. Consequently $H^{n-1}(T')=H^{n-1}(T)/\\operatorname{im}(\\overline\\beta)=0$, while $H^i(T')=H^i(T)=0$ for $i\\geq n$. The long exact cone sequence now gives that $H^i(\\alpha_{n-1})$ is an isomorphism for $i\\geq n$ (both adjacent cone groups vanish) and is surjective for $i=n-1$ (the following cone group vanishes). This proves exactly the induction invariant for the next stage.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSF, lemma-pseudo-coherent-over-algebra, proof; verification of the improved approximation, by the explicit cone boundaries"
+   }
+  },
+  {
+   "text": "Take the terms, differentials and chain-map components fixed by this descending recursion, obtaining $F^\\bullet$ and $\\alpha:F^\\bullet\\to K^\\bullet$. Every relation $d^{i+1}d^i=0$ and $d_K\\alpha^i=\\alpha^{i+1}d^i$ already holds at stage $n=i$. Each term is finite free over $B$, and $F^i=0$ for $i>b$. For a fixed $j$, stage $n=j-1$ has already fixed all three terms and both differentials computing $H^j(F)$, and $H^j(\\alpha_{j-1})$ is an isomorphism. Subsequent stages change none of these data, so $H^j(\\alpha)$ is an isomorphism for every $j$. Hence $\\alpha$ is a quasi-isomorphism and becomes an isomorphism in $D(\\operatorname{Mod}\\!\\text{-}B)$, as required.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0CSF, lemma-pseudo-coherent-over-algebra, proof; assemble the degreewise stationary construction and check every cohomology degree"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sf-derived-homology-long-exact",
+  "def-pc-ring-m-pseudo-coherent",
+  "lem-sc-cone-pseudo-coherent",
+  "lem-sc-finite-cohomology"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0CSF, lemma-pseudo-coherent-over-algebra, proof",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent underlying complex over a ring has bounded above finite free resolution over a finite free noncommutative algebra",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.HasProjectiveDimensionLE [Mathlib/CategoryTheory/Abelian/Projective/Dimension]; CochainComplex.IsKProjective [Mathlib/Algebra/Homology/HomotopyCategory/KProjective]; CategoryTheory.HasProjectiveDimensionLT [Mathlib/CategoryTheory/Abelian/Projective/Dimension]; CategoryTheory.HasInjectiveDimensionLE [Mathlib/CategoryTheory/Abelian/Injective/Dimension]; ModuleCat.projectiveResolution [Mathlib/Algebra/Category/ModuleCat/LeftResolution]; CategoryTheory.HasInjectiveDimensionLT [Mathlib/CategoryTheory/Abelian/Injective/Dimension]; CochainComplex.isKProjective_of_projective [Mathlib/Algebra/Homology/HomotopyCategory/KProjective]; CategoryTheory.HasProjectiveDimensionLT.mk' [Mathlib/CategoryTheory/Abelian/Projective/Dimension]",
+   "date": "2026-10-23",
+   "verdict": "no match: generic projective resolutions, finite algebra maps and restriction of scalars do not give a finite-free resolution from pseudo-coherence over the base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If B is an A algebra finite free as an A module and M in D(B) is pseudo coherent over A then M has a bounded above finite free B resolution",
+   "results": "[leansearch] OK 8 hit(s); AlgHom.Finite [Mathlib.RingTheory.Finiteness.Defs]; RingHom.Finite [Mathlib.RingTheory.Finiteness.Defs]; RingHom.finite_algebraMap [Mathlib.RingTheory.Finiteness.Defs]; RingHom.FiniteType [Mathlib.RingTheory.FiniteType]; Algebra.TensorProduct.instFree [Mathlib.RingTheory.TensorProduct.Free]; Algebra.FiniteType.instFreeAlgebraOfFinite [Mathlib.RingTheory.FiniteType]; RingHom.FinitePresentation [Mathlib.RingTheory.FinitePresentation]; Algebra.Smooth.finitePresentation [Mathlib.RingTheory.Smooth.Basic]",
+   "date": "2026-10-23",
+   "verdict": "no match: generic projective resolutions, finite algebra maps and restriction of scalars do not give a finite-free resolution from pseudo-coherence over the base."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"Module\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic projective resolutions, finite algebra maps and restriction of scalars do not give a finite-free resolution from pseudo-coherence over the base."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|finite.free.*resolution",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: generic projective resolutions, finite algebra maps and restriction of scalars do not give a finite-free resolution from pseudo-coherence over the base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars detects pseudo coherence for complexes over an algebra finite projective over the commutative base",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.FormallyUnramified.projective_of_restrictScalars [Mathlib/RingTheory/Unramified/Finite]; CommRingCat.moduleCatRestrictScalarsPseudofunctor [Mathlib/Algebra/Category/ModuleCat/Pseudofunctor]; RingCat.moduleCatRestrictScalarsPseudofunctor [Mathlib/Algebra/Category/ModuleCat/Pseudofunctor]; CommRingCat.moduleCatExtendScalarsPseudofunctor [Mathlib/Algebra/Category/ModuleCat/Pseudofunctor]; CochainComplex.isKProjective_of_projective [Mathlib/Algebra/Homology/HomotopyCategory/KProjective]; CommRingCat.moduleCatRestrictScalarsPseudofunctor_obj [Mathlib/Algebra/Category/ModuleCat/Pseudofunctor]; Rep.standardComplex.x_projective [Mathlib/RepresentationTheory/Homological/Resolution]; CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp [Mathlib/Algebra/Category/ModuleCat/Pseudofunctor]",
+   "date": "2026-10-23",
+   "verdict": "no match: generic projective resolutions, finite algebra maps and restriction of scalars do not give a finite-free resolution from pseudo-coherence over the base."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-space-pseudocoherence-twist-test",
+  "date": "2026-10-23",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the application of 0CSF to the endomorphism algebra.",
+   "via": [
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-free-algebra-pseudocoherent-resolution",
+  "worker": "stage1",
+  "summary": "Realized Tag 0CSF by a descending cone induction with explicit right-module maps, cone signs, obstruction finiteness over the arbitrary commutative base, and degreewise stabilization. Reused existing DAG statements; no new nodes. Corrected the source proof's smallest-index typo by taking an upper cohomology bound; the item statement is unchanged.",
+  "blueprint": "Supports the recorded ancestor-place chain ending with projective-space twist detection (0CSG (5) implies (1)), which applies 0CSF to its endomorphism algebra, under direct-images proof (3). Searched the latest blueprint and all imported blueprint nodes; no equivalent statement found. The inherited nearest-blueprint-ancestor is null, as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-cone-pseudo-coherent",
+    "why": "Generic ring-theoretic cone approximation lemma (064R), applied over A at m=n-1; the constructible six-functor unit supplies no such algebraic finiteness tool."
+   },
+   {
+    "node": "lem-sc-finite-cohomology",
+    "why": "Generic top-cohomology finite-generation lemma (064S) over A, without Noetherianity; needed for the finite obstruction generators and absent from this six-functor unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-cone-pseudo-coherent",
+  "lem-sc-finite-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-e165e6088",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-e165e6088 (reviewer sub-agent of L); spot-checked: Read Stacks 0CSF (perfect.tex lemma-pseudo-coherent-over-algebra, l.8469-8551) and 064R(1)/064S(1) (more-algebra.tex l.15910/15965), and the item in full. The statement is byte-identical to Q40's created version and matches 0CSF: commutative A, central A-algebra B finite free over A, Res_A M pseudo-coherent, conclusion a bounded-above finite-free right B-model. The parent twist-test uses it as stated. There are no new nodes, no unit edits and no repair or re-split note. Steps checked against the cone convention of def-weil-abstract-derived-category (C(f)^r=L^r+K^{r+1}, d=(d_L x+f y,-d_K y)). Step 1: the zero stage at b+1 is valid because H^i(K)=0 for i>b. Step 2: the long exact sequence gives H^i(T)=0 for i>=n. Step 3: Res F_{>=n} is n-pseudo-coherent via the identity; sigma_{>=n-1}E gives (n-1)-pseudo-coherence of Res K; 064R(1) with m=n-1 and 064S(1) are applied only over the commutative A, and their hypotheses hold. Step 4: computed d_T(a,-d)=(d_K a-alpha d, d_F d), so the chain-map and d^2 equations hold; A-generators are B-generators. Step 5: verified the T'^{n-2} differential (d_K u+a v,-d v), so H^{n-1}(T')=H^{n-1}(T)/im beta=0; the long exact sequence gives the invariant. Step 6: degreewise stationarity gives a quasi-isomorphism. Confirmed the source error: Stacks' 'smallest index' should be an upper bound, e.g. a field complex in all degrees <=0 has no smallest index; the repair follows 064U and the statement is unchanged. Edge cases: A=0, r=0, M=0, acyclic M, B=A, B=M_k(A). The duplicate search (rg -L for 0CSF, the label, and pseudo-coherent with noncommutative/restriction) found only the item and its parent; lem-pc-ring-finite-cone-free-model needs a commutative ring, so it is not a duplicate. Accepted tool_uses: lem-sc-cone-pseudo-coherent and lem-sc-finite-cohomology, generic 064R/064S over A. No SGA citation; proof_deps equals the union of uses. Minor: the report mentions a citations.json that the delivery does not contain."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteFreeAlgebraPseudoCoherentResolution",
+  "declaration": "DerivedCategory.exists_finite_free_resolution_of_restrictScalars_pseudoCoherent",
+  "file": "lean/Sheaf/RingTheory/FiniteFreeAlgebraPseudoCoherentResolution.lean",
+  "statement": "theorem exists_finite_free_resolution_of_restrictScalars_pseudoCoherent (A : Type u) [CommRing A] (B : Type v) [Ring B] [Algebra A B] [Module.Free A B] [Module.Finite A B] [HasDerivedCategory.{wA} (ModuleCat.{max u v t} A)] [HasDerivedCategory.{wB} (ModuleCat.{max u v t} Bᵐᵒᵖ)] (M : DerivedCategory (ModuleCat.{max u v t} Bᵐᵒᵖ)) (hM : IsPseudoCoherent (((ModuleCat.restrictScalars (algebraMap A Bᵐᵒᵖ)).mapHomologicalComplexUpToQuasiIso (ComplexShape.up ℤ)).obj M)) : ∃ (F : CochainComplex (ModuleCat.{max u v t} Bᵐᵒᵖ) ℤ) (b : ℤ), F.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free Bᵐᵒᵖ (F.X i) ∧ Module.Finite Bᵐᵒᵖ (F.X i)) ∧ Nonempty (Q.obj F ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "Q19",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7db2082d1",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Every node clause matches: CommRing A; Ring B with Algebra A B (central, not commutative); Free+Finite A B; M in DerivedCategory(ModuleCat.{max u v t} Bᵐᵒᵖ); hypothesis is the dep's exact IsPseudoCoherent on the canonical restriction along algebraMap A Bᵐᵒᵖ via mapHomologicalComplexUpToQuasiIso (by definition what mapDerivedCategory unfolds to; uses the any-ring preservesHomology_restrictScalars instance); conclusion ∃ F b, IsStrictlyLE b, degreewise finite free over Bᵐᵒᵖ, Nonempty (Q.obj F ≅ M), a derived-category isomorphism. No extra hypotheses; universes u, v, t, wA, wB independent and bound. Edge cases A=0, r=0, M zero/acyclic, B=A, matrix algebras, unbounded below covered. Node differs from live only by the added lean field; statement verbatim in file; one sorry; source/blueprint docstrings and six proof steps present; plain imports are proof_dep modules, all present in live. No duplicate for 0CSF in the live trees or slopmaster2. Not recompiled (no file changed). Advisory: the second reading was by the same worker, as the report states."
+ }
+}

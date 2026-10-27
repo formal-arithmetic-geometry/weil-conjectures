@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-chart-normal-integration-square",
+ "kind": "statement",
+ "title": "Integration under the actual normal differential",
+ "statement": "Use the finite coefficient setting P of [def-pur-conventions], arbitrary finite E/Q_l and positive level n. Let V be affine with a finite-type map aV to Spec P.field.k; d is any natural number. Let C, B (and A where composable maps are used) be affine etale d-charts over V and e, v their etale maps over V, with the actual canonical comparisons of [def-pur-general-chart-comparisons] and [def-pur-chart-affine-comparison-data]. For every normalized compact-support presentation N (and every normalized finite twist transport t where used), the following equality holds, in the small pro-etale derived categories with the stated canonical pullback identity/composition constraints. Its complete formal statement is:\n\ntheorem chart_normal_integration_square (P : PurityFiniteSetting.{u})\n    {V : Scheme.{u}} [IsAffine V] {d : ℕ}\n    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]\n    {C B : Chart V d} (e : Map C B)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates) :\n    r P aV e ≪≫\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) e.hom).leftDerivedFunctor.mapIso\n        (ChartFactors.beta P d B.proj aV N) ≪≫\n      (Dnc.pullComparison P e.hom (P.diagonalTwistEtale B.X d) ≪≫\n        (ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} P.Coefficient) C.X).mapDerivedCategory.mapIso\n          (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n            P.diagonalExponent_annihilates t e.hom\n            (P.diagonalExponent_isUnit (B.proj ≫ aV)) d)) =\n      ChartFactors.beta P d C.proj aV N",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Integration under the actual normal differential; parent proof Step 8"
+ },
+ "stmt_deps": [
+  "def-pur-general-chart-comparisons",
+  "def-pur-chart-affine-comparison-data",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "identify the two normal bundles using the actual graded conormal pullback\nmap. In degree one this is the differential, by the coordinate-difference formula.\nOn pulled-back coordinate frames vector integration commutes with arbitrary base\nchange: compact-support exchange and the actual adjunction counits define both\nmaps. Changing a frame multiplies by a linear bundle automorphism; the ordered\ntrace is invariant under it. Hence the same equation holds for this differential.\nApply the integration site-comparison theorem, including its tensor and adjoint\nnormalizations, and cancel the compared normal-bundle model isomorphisms. The\nremaining coefficient comparison is precisely pullComparison followed by nu-star\nof vectorIntegrationBaseCoefficientPullback, as displayed. In rank zero the trace\nand all comparisons are the identity; on the empty scheme the arrow is unique.\nNo ramification or flatness condition on the coefficient ring is used.",
+   "uses": [
+    "cor-pur-vector-bundle-purity",
+    "lem-amb-linear-trace-invariance",
+    "lem-pur-vector-integration-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-pur-vector-bundle-purity",
+  "lem-amb-linear-trace-invariance",
+  "lem-pur-vector-integration-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Integration under the actual normal differential"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of exceptional composition mates for etale maps, source and normal comparison with diagonal purity, identity and composition",
+   "results": "Etale ring-map and etale-locus facts; no comparison equation",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Generic adjunction mate equations",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "standingExceptionalComposition",
+   "results": "No Mathlib declaration; local library has the definition and composition-tensor-mate package",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ChartExceptionalMateCoherence",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-chart-exceptional-mate-coherence",
+   "place": "proof Step 8"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartNormalIntegrationSquare",
+  "file": "lean/Sheaf/Paper/ChartNormalIntegrationSquare.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ChartComparisons.chart_normal_integration_square",
+  "statement": "theorem chart_normal_integration_square (P : PurityFiniteSetting.{u})\n    {V : Scheme.{u}} [IsAffine V] {d : ℕ}\n    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]\n    {C B : Chart V d} (e : Map C B)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient)\n    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent\n      P.diagonalExponent_annihilates) :\n    r P aV e ≪≫\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) e.hom).leftDerivedFunctor.mapIso\n        (ChartFactors.beta P d B.proj aV N) ≪≫\n      (Dnc.pullComparison P e.hom (P.diagonalTwistEtale B.X d) ≪≫\n        (ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} P.Coefficient) C.X).mapDerivedCategory.mapIso\n          (Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent\n            P.diagonalExponent_annihilates t e.hom\n            (P.diagonalExponent_isUnit (B.proj ≫ aV)) d)) =\n      ChartFactors.beta P d C.proj aV N",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T101744-L-3732556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T101744-L-3732556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

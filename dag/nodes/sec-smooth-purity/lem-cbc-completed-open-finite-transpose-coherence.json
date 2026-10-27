@@ -1,0 +1,335 @@
+{
+ "id": "lem-cbc-completed-open-finite-transpose-coherence",
+ "kind": "statement",
+ "title": "Finite reduction comparisons preserve the strict open-unit transpose",
+ "statement": "Let $(A,I)$ be a Noetherian adic datum with finite perfect quotients $P_n=A/I^n$ and completed coefficient sheaves $A_V=\\lim_n(P_n)_V$ [def-weil-pbc-adic-coefficient-datum]. Let $(j:U\\hookrightarrow T,j':U'\\hookrightarrow T',u:T'\\to T,v:U'\\to U)$ be a cartesian open square [def-cbc-open-immersion-square]. Work on small pro-etale ringed sites and strict tower derived categories. Use the exact open adjunctions $J_j\\dashv j^*$, $J_{j'}\\dashv j'^*$ [lem-pur-site-restriction-module-adjunction-exact], derived strict-tower pullback [def-weil-pbc-completed-pullback], and scalar restriction $r_V$ along $\\underline A_V\\to A_V$ [def-pc-sheaf-restrict-scalars]. For any $K\\in D(\\operatorname{Mod}(A_U))$, let $K_\\bullet$ be its strict reduction tower and use the canonical open-tensor identification $(j_!K)_\\bullet\\simeq J_jK_\\bullet$. Put\n$$Q=Lu^*_{\\operatorname{Tow}}(j_!K)_\\bullet,\\quad C=Lv^*_{\\operatorname{Tow}}K_\\bullet,\\quad M=r_UK_\\bullet,\\quad H=G_vM,\\quad N=G_uJ_jM.$$\nHere $G,J$ on constant-$A$ towers are [def-cbc-strict-constant-tower-operations, def-cbc-strict-tower-open-extension]. Fix the canonical finite-reduction/scalar comparisons $a:r_{T'}Q\\simeq N$ and $d:r_{U'}C\\simeq H$ of [lem-weil-pbc-constant-completion-equivalence], using the open-tensor unit normalization [lem-sf-open-tensor-normalization]. Let $e:r_{T'}J_{j'}C\\simeq J_{j'}r_{U'}C$ be the comparison induced by the identity of the underlying extension-by-zero presheaves before abelian sheafification [def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification], and put $b=J_{j'}(d)e$. Let $c:r_{U'}j'^*\\simeq G_{j'}r_{T'}$ be the canonical scalar/restriction identification. For $x:C\\to j'^*Q$ define\n$$\\Psi(x)=G_{j'}(a)\\circ c_Q\\circ r_{U'}(x)\\circ d^{-1}:H\\to G_{j'}N.$$\nThe specified comparisons intertwine the two open-adjunction transposes:\n$$a\\circ r_{T'}(\\operatorname{adj}_{A}(x))\\circ b^{-1}=\\varepsilon'_N\\circ J_{j'}(\\Psi(x)),$$\nwhere $\\operatorname{adj}_{A}(x):J_{j'}C\\to Q$ is the completed-ring transpose and $\\varepsilon'$ is the constant-$A$ open counit [def-weil-pbc-adjunction-mate]. If $x$ is the pullback by $v$ of the open unit of $K_\\bullet$, followed by the inverse-image square compositor and the specified quotient/open source identification, then\n$$\\Psi(x)=G_v(\\eta_M)\\text{ followed by }G_vG_jJ_jM\\simeq G_{j'}G_uJ_jM,$$\nwhere $\\eta_M:M\\to G_jJ_jM$ is the constant-$A$ open unit. Both identities are induced on simultaneous strict diagram representatives, commute with all quotient transitions, and descend to their unbounded derived categories. They are natural in $K$ and in $x$. No completeness, quasi-compactness, origin witness or bound on cohomological degrees is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange paragraph and final derived-limit paragraph; agent-written refinement of the specified scalar/reduction and open-unit comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-open-immersion-square",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-completed-pullback",
+  "def-pc-sheaf-restrict-scalars",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sf-open-tensor-normalization",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-strict-tower-operations",
+  "def-cbc-completed-open-scalar-quotient-interface",
+  "def-cbc-completed-scalar-pullback-interface",
+  "def-cbc-completed-pullback-counit-transport"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary scalar/open comparison in cbcRealizationScalarOpen is by definition the inverse mate of exchangeOrdinaryResPull. Whiskering the adjunctions and comparison by the strict diagram index preserves this equation, componentwise. Apply exact_localization_inverse_mate to obtain the same equation on whole derived tower categories. Identify the right-derived/exact presentation of each specified open adjunction with the exact localized adjunction using the proved generic exact_adjunction_eq helper in SemilinearEvaluationDerivedAdjunction. This proves scalarMate without any evaluation of derived morphisms.",
+   "uses": [
+    "def-cbc-completed-open-scalar-quotient-interface",
+    "def-cbc-completed-scalar-pullback-interface",
+    "lem-sf-exact-localization-inverse-mate",
+    "lem-sf-semilinear-evaluation-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sk-prop-sf-cbc.proof.md",
+    "place": "The open-extension exchange factor; formal comparison of the fixed scalar/open adjunction and inverse-image square."
+   }
+  },
+  {
+   "text": "For any pair of adjunctions and mate-compatible scalar square, expand the inverse Hom bijection as the left functor of x followed by the counit. Naturality of the scalar/open map and the mate counit equation give scalarTranspose. Conjugate by the specified source and corner isomorphisms and use counit naturality. Substitution of extensionComparison and psi is exactly the first conjunct.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sk-prop-sf-cbc.proof.md",
+    "place": "The open-extension exchange factor; formal comparison of the fixed scalar/open adjunction and inverse-image square."
+   }
+  },
+  {
+   "text": "Apply the proved inverse natural-transformation normalization of the constant tower square, which reuses the existing cbcEvaluationConstantTowerSquare helper. Identify its specified compositor with constantSquare at the natural-isomorphism level, then take components. Substitute this equality into the scalar-restriction square.",
+   "uses": [
+    "lem-cbc-constant-tower-square-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sk-prop-sf-cbc.proof.md",
+    "place": "The open-extension exchange factor; formal comparison of the fixed scalar/open adjunction and inverse-image square."
+   }
+  },
+  {
+   "text": "Use the proved exchangeResPull_square helper: exact descent of the ordinary ring-restriction/pullback cube gives compatibility with both specified ringed-square compositors. Invert this isomorphism equality and evaluate at the input tower to obtain restrictionSquare. This uses only the helper, not the proper base-change assertion of the containing normalization module.",
+   "uses": [
+    "lem-weil-pbc-ring-restriction-pullback-square",
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sk-prop-sf-cbc.proof.md",
+    "place": "The open-extension exchange factor; formal comparison of the fixed scalar/open adjunction and inverse-image square."
+   }
+  },
+  {
+   "text": "Naturality of exchangeResPull transports unitArrow through the source, corner and quotient/open comparisons, cancelling their inverses. Apply restrictionSquare to move the integral square through scalar restriction. Naturality of the v scalar comparison moves the open unit to the constant side. Naturality of constantSquare moves the scalar/open comparison across the square. Apply the unit equation of scalarMate under the constant v pullback and compose with the square component. This direct calculation proves the second conjunct on whole derived strict towers, retaining all transitions and using no faithfulness of evaluation, flatness, completeness, or boundedness. The private scalarSquareUnit lemma treats the compositor as a parameter during this calculation and is then applied to the specified constantSquare; this prevents expansion of the derived compositors without changing their value. Transport both endpoints along the equality between scalar restriction of the reduction object and restricted.obj K before composing these identities. Reflexive endpoint transports cancel. This keeps the fixed derived compositor folded throughout the object conversion.",
+   "uses": [
+    "def-cbc-completed-pullback-counit-transport",
+    "def-cbc-completed-open-scalar-quotient-interface",
+    "def-cbc-completed-scalar-pullback-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sk-prop-sf-cbc.proof.md",
+    "place": "The open-extension exchange factor; formal comparison of the fixed scalar/open adjunction and inverse-image square."
+   }
+  },
+  {
+   "text": "The already proved naturality and strict-representative clauses are retained: every displayed comparison is natural, and the strict scalar/open comparison is its ordinary inverse mate at every index. Their proofs use no K-flat resolution or tensor calculation.",
+   "uses": [
+    "def-cbc-completed-open-scalar-quotient-interface",
+    "def-cbc-completed-scalar-pullback-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sk-prop-sf-cbc.proof.md",
+    "place": "The open-extension exchange factor; formal comparison of the fixed scalar/open adjunction and inverse-image square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-completed-open-scalar-quotient-interface",
+  "def-cbc-completed-pullback-counit-transport",
+  "def-cbc-completed-scalar-pullback-interface",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-constant-tower-square-normalization",
+  "lem-sf-exact-localization-inverse-mate",
+  "lem-sf-semilinear-evaluation-derived-adjunction",
+  "lem-weil-pbc-ring-restriction-pullback-square",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sk-prop-sf-cbc.proof.md",
+  "place": "M2 shorter proof from the published mate definitions, section-normalized compositor uniqueness, and scalar-restriction cube; statement and unit route unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatIso",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction or sheaf pullback comparisons do not establish finite quotient-tower and open-unit compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "(open|Open).*(unit|Unit|mate|Mate).*(scalar|Scalar|reduc|Reduc)|(scalar|Scalar|reduc|Reduc).*(open|Open).*(unit|Unit|mate|Mate)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction or sheaf pullback comparisons do not establish finite quotient-tower and open-unit compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of finite reduction of completed ring module sheaves with the open extension by zero adjunction transpose on derived strict inverse systems",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.module\", \"AdicCompletion\", \"AdicCompletion.submodule\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"AdicCompletion.congr\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.map_zero\", \"IsAdicComplete.StrictMono.of_lift\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction or sheaf pullback comparisons do not establish finite quotient-tower and open-unit compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adic ring on a proetale open cartesian square, finite reduction and restriction of scalars intertwine pullback of the open adjunction unit and the inverse exchange transpose on strict towers",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst'\", \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"AlgebraicGeometry.pullbackSpecIso_inv_fst\", \"AlgebraicGeometry.pullbackSpecIso_hom_fst'\", \"Algebra.IsEtaleAt.comp\", \"AlgebraicGeometry.pullbackSpecIso_hom_snd\", \"AlgebraicGeometry.pullbackSpecIso_inv_snd\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction or sheaf pullback comparisons do not establish finite quotient-tower and open-unit compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction or sheaf pullback comparisons do not establish finite quotient-tower and open-unit compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a ringed diagram topos show that quotient tensor comparison commutes with inverse image composition and extension by zero adjunction units, before localizing strict complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagramComp\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"LightCondensed.ihomPoints_symm_comp\", \"SheafOfModules.sheafificationCompPullback\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction or sheaf pullback comparisons do not establish finite quotient-tower and open-unit compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "(open|extensionByZero).*(restrictScalars|transpose|homEquiv)|(restrictScalars).*(extensionByZero|open.*unit)",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, derived-adjunction, and module pullback results do not state these specified finite-reduction/open-unit strict-tower comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite quotient tensor comparisons preserve open extension by zero adjunction units and counits on unbounded derived categories of towers of module sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoZero\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"IsOpenMap.adjunction\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, derived-adjunction, and module pullback results do not state these specified finite-reduction/open-unit strict-tower comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv\", \"CategoryTheory.Adjunction.mk'_homEquiv\", \"CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv\", \"CategoryTheory.Adjunction.corepresentableBy_homEquiv\", \"CategoryTheory.Adjunction.representableBy_homEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.homEquiv_apply\", \"CategoryTheory.Adjunction.homEquiv_unit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, derived-adjunction, and module pullback results do not state these specified finite-reduction/open-unit strict-tower comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on ringed sites, restriction of scalars and finite quotient reduction commute with the extension by zero adjunction transpose and its pulled back unit on derived strict towers",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, derived-adjunction, and module pullback results do not state these specified finite-reduction/open-unit strict-tower comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient ring for sheaves commutes with taking the adjunct under extension by zero and open restriction; quotient tensor comparison preserves inverse image composition and open units",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction, derived-adjunction, and module pullback results do not state these specified finite-reduction/open-unit strict-tower comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-completed-open-strict-mate-identification",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof first sentence, the two isomorphisms defining def-cbc-completed-exchange-map: final open factor; finite exchange, its scalar/reduction unit-transpose normalization (returned item Steps 2-3).",
+   "via": [
+    "lem-cbc-completed-open-strict-mate-identification",
+    "lem-cbc-complete-proetale-strict-tower-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-completed-open-finite-transpose-coherence",
+  "worker": "stage1",
+  "summary": "Q94 expands the scalar/open counit calculation, checks finite quotient and pulled-back open-unit normalization on simultaneous strict representatives, and descends through the existing K-flat and exact-localization tools. Statement unchanged; no new nodes, no attachment, no SGA route.",
+  "blueprint": "thm-cbc-complete-proetale proof first sentence, finite open factor in def-cbc-completed-exchange-map; the finite exchange paragraph of lem-cbc-completed-extension-zero-comparison, with the unit-transpose refinement required by the parent split. No derived-limit argument is needed for this finite strict-tower identity.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-kflat-replacements",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-common-quotient-reduction-tower",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-common-quotient-pullback-comparison",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-scalar-restriction-kflat",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   },
+   {
+    "node": "lem-sp-exact-derived-transformation-pasting",
+    "why": "Generic ringed-site tensor, coefficient comparison, K-flat resolution, or localization tool used with its stated hypotheses; does not replace the finite-open exchange route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-flat-common-quotient-reduction-tower",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-common-quotient-pullback-comparison",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-sp-exact-derived-transformation-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-a50d10f5f",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-a50d10f5f (reviewer sub-agent of L); spot-checked: First split; the statement is identical to the live copy (still unsplit there), and there is no repair note. 0 new nodes, 7 steps. Step 1 applies lem-cbc-ringed-open-scalar-adjunction (constant A -> A_{T'}, object U'): the presheaf-identity e and the counit identity hold on derived strict towers, with c inserted correctly. Step 2's counit algebra checks out when recomputed: a r(adj x) b^-1 = eps'_N J(Psi x) for every derived x, so the elementary flag is right. Steps 3-4 meet the hypotheses of flat-common-quotient-reduction-tower and ringed-common-quotient-pullback-comparison (flatness and common quotients from constant-completion-equivalence; insertion invertible on S_n-modules, so a and d are the insertion maps). Step 5's generator chase gives G(a)c r(x) = kappa G_v(eta_M) d through the unit summand description, the open-tensor identity normalization and composition coherence; the types match. Steps 6-7: simultaneous strict K-flat replacements are preserved by J, Res (flat) and u^*; descent uses the resolving-class lemma and exact pasting only for exact functors. This matches the parent mate-identification's Step 2 use. Edge cases checked: K=0, U empty, U=T, I=A. No cycle, no duplicate (checked cbc-finite-open-exchange-scalars, completed-ring-strict-finite-exchange, sp-proper-open-coefficient-mate, sp-open-exceptional-scalar-locality), no SGA. Batch-5: lem-trf-geometric-inverse-image-exact, reached via ringed-common-quotient-pullback-comparison, is generic exactness of geometric inverse image, outside both assumptions; accepted. Generic tool_uses accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedOpenFiniteTransposeCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.completedOpenFiniteTransposeCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.source",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.corner",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.restricted",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.openTarget",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.ambientTarget",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.sourceComparison",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.cornerComparison",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.extensionComparison",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.psi",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.constantSquare",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.unitArrow",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.completedOpenFiniteTransposeCoherence",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.completedOpenFiniteTransposeCoherence_naturality",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.strictScalarOpen",
+   "AlgebraicGeometry.Scheme.CompletedOpenFiniteTranspose.completedOpenFiniteTransposeCoherence_strict"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedOpenFiniteTransposeCoherence.lean",
+  "statement": "theorem completedOpenFiniteTransposeCoherence (sq : OpenImmersionSquare v j' j g) (K : d.derived U) : (∀ x : (corner d (v := v)).obj K ⟶ (d.towerPull j').obj ((source d (j := j) (g := g)).obj K), (extensionComparison d (j' := j') (v := v) K).inv ≫ (exchangeTowerRes d T').map (((cbcRealizationTowerAdj d j').homEquiv _ _).symm x) ≫ (sourceComparison d (j := j) (g := g) K).hom = (ProEtale.StrictTower.J A j').map (psi d (j := j) (g := g) K x) ≫ (ProEtale.StrictTower.jAdj A j').counit.app ((ambientTarget d (j := j) (g := g)).obj K)) ∧ psi d (j := j) (g := g) K (unitArrow d sq K) = (ProEtale.StrictTower.G A v).map ((ProEtale.StrictTower.jAdj A j).unit.app ((restricted d (U := U)).obj K)) ≫ (constantSquare (A := A) sq).hom.app ((ProEtale.StrictTower.J A j).obj ((restricted d (U := U)).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Both derived identities, naturality and strict representative equation are retained. Plain scalar/open, quotient/open, scalar/pullback and actual/datum transport helpers are cited through the three existing:true definition-node owners added in this repair. The integral StrictTowerRingedSquare is built inline from the adic datum and def-weil-pbc-strict-tower-operations; the completed-reduction-pullback-square theorem is unused and is not a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-97f4e17ca",
+  "group": "Q91",
+  "result": "fix",
+  "note": "Re-delivery after 593438 F1/F2 RETURN. Lean delta: only the unitArrow ringed square, now an inline StrictTowerRingedSquare literal with the same fields as integralTowerRingedSquare. The theorem stmt_dep is dropped and the landed def-weil-pbc-strict-tower-operations is added (allowed). Three existing:true definition nodes on unchanged published modules own the cbcRealization*, exchange*Res* and cbcDatumTowerTransport helpers. check_existing, check_record and check_new_node are clean; no cycle in stmt/proof closure; Lean import layout pre-existing (landed mate-identification already imports the realization module). Item statement matches the node in all clauses, naturality and strict clause, and edge cases; lean.statement verbatim; sorry only in theorems. FIX (records only, no Lean): whole JSON for the 3 new nodes adding body owners to stmt_deps with single-id TeX cites (four-corners, exact-pullback-interface, ring-restriction-pullback-comparison, strict-tower-operations, bounded-constructible-tower). This repairs the combined-bracket cite of strict-tower-operations that was missing from stmt_deps, and adds exchangeScalar_comm to the scalar-pullback declarations. Advisory: cbcOpenShriek / cbcPullToRestriction / reductionTowerPullbackIso have no citable definition owner."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ee9e1",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261026T023519-L-571642",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + new ConstantTowerSquareNormalization vs clone diff, node JSON field diff, unit sk-prop-sf-cbc realized (empty), sandbox compile of both modules + 2 direct importers, #print axioms of proof helpers vs statement data"
+ }
+}

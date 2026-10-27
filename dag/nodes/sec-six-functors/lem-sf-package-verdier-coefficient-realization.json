@@ -11,100 +11,73 @@
  },
  "stmt_deps": [
   "def-fix-six-functor-datum",
-  "def-weil-boundary-duality-input"
+  "def-weil-boundary-duality-input",
+  "def-sf-verdier-exchange-data",
+  "def-sf-finite-verdier-biduality-predicate",
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-integral-verdier-conclusion-predicate",
+  "def-sf-rational-verdier-data",
+  "def-sf-rational-verdier-identifications",
+  "def-sf-common-stage-verdier-data",
+  "def-sf-all-stage-verdier-exchange-package"
  ],
  "proof": [
   {
-   "text": "Fix a scheme $T$ and a finite level $A_n$ from the statement. Its separated finite-type hypothesis and $\\ell\\ne p$ are exactly the hypotheses of [thm-fix-general-biduality]. On the small pro-etale site that theorem makes $D_T=R\\mathcal Hom(-,Ra_T^!A_n)$ an exact anti-equivalence of $D^b_{ctf}(T,A_n)$ and makes $\\delta_M$ a natural isomorphism. The map denoted $\\delta$ here is the transpose of evaluation in [lem-weil-duality-pairing]; exchanging the two tensor factors uses the tensor symmetry. Thus this proves the finite-stage clause for the specified evaluation map, without a boundary-duality hypothesis.",
+   "text": "For every T and n, take the pro-etale conjunct of finite_stage_verdier_biduality at the positive level n+1. Its predicate already fixes the evaluation transpose. Apply boundary_duality_input separately at its zero-based index n.",
    "uses": [
     "thm-fix-general-biduality",
-    "lem-weil-duality-pairing"
+    "cor-weil-boundary-duality-discharge"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-fix-general-biduality.proof.md",
-    "place": "Finite-stage geometric biduality and its evaluation-compatible pro-etale transport"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [cor-weil-boundary-duality-discharge] to the given $Y$ and $A_n$. Its conclusion quantifies over every locally closed piece $T$ and closed immersion $i:Z\\hookrightarrow T$ occurring in [def-weil-boundary-duality-input], so it applies to precisely the $i$ and $L$ in the item. It asserts invertibility of the canonical $\\beta_L$, not just existence of some isomorphism between its source and target. In the cited definition $\\beta_L$ is the transpose of the displayed pairing $i^*D_TL\\otimes^LRi^!L\\to Ri^!(D_TL\\otimes^LL)\\to\\omega_Z$. Hence it is the evaluation-defined boundary comparison required here. The corollary discharges the entire boundary input after geometric biduality; that input was not assumed in step 1.",
+   "text": "Apply coef_rational_operations to the identity of T with its proper compactification. Retain its structure system S. Specialize both field stages to E and the scalar map to the identity. Retain the resulting identification I and its structure-system dualizing identification. In particular I.wX, I.DX and I.homX refer to the same integral dualizing datum.",
    "uses": [
-    "cor-weil-boundary-duality-discharge",
-    "def-weil-boundary-duality-input"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
-    "place": "Boundary input discharged after biduality; identification of beta by evaluation"
-   }
-  },
-  {
-   "text": "At $R$, [prop-coef-integral-dualizing] identifies the derived-complete object $\\omega_{T,R}$ used in [thm-coef-integral-verdier] with the value of the constructible exceptional right adjoint at the coefficient unit, so it is the $Ra_T^!R$ of this item. Apply the integral theorem on exactly its completed coefficient-sheaf category. It gives $D^b_c(T,R)=D^b_{ctf}(T,R)$ and an exact anti-equivalence for the actual internal Hom into this $\\omega_{T,R}$. If $\\dim T\\le d$ and the input reductions have common Tor interval $[a,b]$, its output reductions have common interval $[-b-2d,-a]$. Its canonical reduction maps identify $(D_{T,R}M)\\otimes_R^LA_n$ with $D_{T,n}M_n$, preserve evaluation and its transposes, and identify the reduction of the actual $\\delta_M$ with $\\delta_{M_n}$. The same theorem asserts that this natural $\\delta_M$ is invertible. These are exactly the integral preservation, bounds and coefficient-map assertions; no independent choice of double-dual isomorphism is made.",
-   "uses": [
-    "prop-coef-integral-dualizing",
-    "thm-coef-integral-verdier"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
-    "place": "Integral preservation and uniform interval; reduction of actual evaluation and double dual; with prop-coef-integral-dualizing value-at-unit assertion"
-   }
-  },
-  {
-   "text": "Apply [thm-coef-rational-verdier] to $T$ and the given finite extension $E/\\mathbf Q_\\ell$. It gives the exact $E$-linear anti-equivalence on the specified rationalization of $D^b_c(T,R)$, with evaluation and the natural invertible $\\delta$ obtained by rationalizing their integral maps. By [lem-coef-rational-operations], its dual is $R\\mathcal Hom_E(-,\\omega_{T,E})$ and $\\omega_{T,E}=Ra_{T,E}^!E$, with these identifications preserving evaluations. Thus the anti-equivalence is the $D_T$ in the item. For every finite $E\\subset L$, the comparison in the rational theorem preserves evaluation and $\\delta$ and satisfies the scalar-extension unit and associator equations. This supplies the coherent comparisons used at a common field stage in the next step.",
-   "uses": [
-    "thm-coef-rational-verdier",
     "lem-coef-rational-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
-    "place": "Rationalize integral duality and its actual maps; finite coefficient-field comparisons"
-   }
+   "elementary": true
   },
   {
-   "text": "For $\\overline{\\mathbf Q}_\\ell$, apply [thm-coef-qbar-verdier] on the common finite coefficient-field category specified in the item. It sends a representative $(E,M)$ to $(E,D_{T,E}M)$ and asserts that the resulting exact anti-equivalence is internal Hom into $Ra_T^!\\overline{\\mathbf Q}_\\ell$. Its descended evaluation and biduality are therefore the common-stage maps required here. Its statement includes compatibility with finite scalar extension and retracts, so the same conclusion holds for objects and maps represented as retracts at a common finite stage. In particular the descended $\\delta$ is a natural isomorphism on the entire stated category, not merely on a separately selected collection of representatives.",
+   "text": "At s=Spec(D.k), form the actual completed regular module U in degree zero. The constant-coefficient theorem gives integral constructibility; integral_residue_tor identifies it with finite-Tor constructibility. Invertibility of l on s follows from finiteFieldDatumPrimeUnit and the residue-field algebra maps. The inclusion of U is definitionally ringUnit, so its unit comparison is the identity. Apply lem-sf-integral-dualizing-exceptional-unit with S and I.wX to obtain the ambient exceptional-value identification.",
    "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-coef-integral-residue-tor",
+    "lem-sf-integral-dualizing-exceptional-unit",
+    "lem-weil-structure-direct-images-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integral_verdier_biduality to I.wX.omega and I.wX.reduction. Combine it with the exceptional-value isomorphism, I.DX, I.homX and the retained rational dualizing identification. This gives the full integral/rational realization conjunct using identical witnesses throughout.",
+   "uses": [
+    "thm-coef-integral-verdier",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Keep coef_rational_verdier unchanged as the rational conclusion. From coef_qbar_verdier retain its duality, internal-Hom realization and dualizing predicate, discarding only its separate assertions for exceptional functors.",
+   "uses": [
+    "thm-coef-rational-verdier",
     "thm-coef-qbar-verdier"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-coef-qbar-verdier.proof.md",
-    "place": "Common-stage descent of duals, evaluation and biduality, including retracts"
-   }
+   "elementary": true
   },
   {
-   "text": "The exchange theorem below has input $M\\in D^b_{ctf}(X,\\Lambda)$. At $A_n$ this is precisely $\\mathcal C_{X,A_n}$. At $R$ step 3 proved that it is all of $\\mathcal C_{X,R}$. At $E$ and $\\overline{\\mathbf Q}_\\ell$, [def-weil-finite-tor-amplitude] defines the finite-Tor categories to equal the rationalized and common-stage bounded constructible categories. Thus every $M$ allowed by this item lies in the stated domain of that theorem. This does not identify arbitrary bounded constructible finite-ring complexes with finite-Tor ones.",
+   "text": "Apply verdier_exchange to f. Its Assertion already has exactly the finite-Tor ring domains and the entire field-stage categories in the statement, including the actual epsilon components and coefficient/shift squares. Pair it with the scheme assertions just constructed.",
    "uses": [
-    "def-weil-finite-tor-amplitude"
+    "sk-thm-sf-verdier-exchange"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
-    "place": "For (7): coefficient domains for the exchange; field finite-Tor convention"
-   }
-  },
-  {
-   "text": "Use [sk-thm-sf-verdier-exchange] for $f:X\\to Y$ and the $M$ just checked. It uses the constructible exceptional adjoint, has no ambient admissibility hypothesis, and gives the canonical comparison $c:Rf^!\\omega_Y\\xrightarrow{\\sim}\\omega_X$ and the natural isomorphism $\\varepsilon_{f,M}:D_YRf_!M\\xrightarrow{\\sim}Rf_*D_XM$ at all four stages. In the normalization of [def-sf-verdier-exchange-data], this is the arrow obtained from projection and evaluation by the exceptional, tensor--Hom and ordinary adjunctions and then substitution of $c$. Equivalently it is the inverse tensor--Hom exchange followed by $Rf_*R\\mathcal Hom_X(M,c)$. This identifies the canonical map, rather than replacing it by an arbitrary isomorphism. The theorem explicitly supplies finite reduction, scalar extension and shift compatibility on the stated domains, with completed integral and rationalized/common-stage field comparisons. Together with steps 1--5 this proves every clause of the item, using only the constructible exceptional functor.",
-   "uses": [
-    "sk-thm-sf-verdier-exchange",
-    "def-sf-verdier-exchange-data"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
-    "place": "Steps 1--2 and final compatibility sentence, with the canonical evaluation normalization"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "cor-weil-boundary-duality-discharge",
-  "def-sf-verdier-exchange-data",
-  "def-weil-boundary-duality-input",
-  "def-weil-finite-tor-amplitude",
+  "lem-coef-integral-residue-tor",
   "lem-coef-rational-operations",
-  "lem-weil-duality-pairing",
-  "prop-coef-integral-dualizing",
+  "lem-sf-integral-dualizing-exceptional-unit",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-structure-direct-images-constructible",
   "sk-thm-sf-verdier-exchange",
   "thm-coef-integral-verdier",
   "thm-coef-qbar-verdier",
@@ -113,8 +86,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
-  "place": "For (7): assembly of finite geometric duality, boundary discharge, integral, rational and common-stage duality; unconditional exchange supplied by sk-thm-sf-verdier-exchange"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (7), assembled from the declared coefficient theorems, with the integral exceptional-unit identification isolated as a strictly smaller object-comparison lemma."
  },
  "mathlib_searches": [
   {
@@ -219,5 +192,50 @@
   "group": "Q143",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-ae3414d4f (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The item is unsplit on live and has no repair note of its own (the re-split note is on the parent prop-functor-package and is resolved). Against live, the statement, stmt_deps, blueprint and source are unchanged. The item and all cited nodes are absent from route-pivot-dropped; there is no cycle (transitive closure over live plus the item), no SGA citation, and every cited node is reviewed and on the sk-thm-sf-package route. Source: main-20261015 prop-functor-package.proof 'For (7)'. Its fix-cor-verdier-exchange is correctly replaced by the unit theorem sk-thm-sf-verdier-exchange: fix-cor assumes exceptional admissibility, which def-fix-six-functor-datum (4) says is not assumed and false in general, so citing it would be E1. Step 1: thm-fix-general-biduality gives the anti-equivalence of D^b_ctf(A_n) with δ an iso, on pro-étale with the same Ra^!; δ is the transpose of evaluation from lem-weil-duality-pairing. Step 2: cor-weil-boundary-duality-discharge covers every Y, A_n, locally closed piece and closed immersion with canonical β_L; the source proof derives it from biduality, so there is no circularity. Step 3: prop-coef-integral-dualizing represents Hom(Ra_!K,R_s), so by Yoneda ω_R is the right-adjoint value at the unit; thm-coef-integral-verdier states D^b_c=D^b_ctf, the anti-equivalence, the [-b-2d,-a] bounds, the reductions of evaluation and δ, and δ iso. Step 4: the rational theorem uses the raw rationalization (checked def-weil-rationalization-karoubi), and lem-coef-rational-operations identifies D_E with RHom into Ra^!E. Step 5: the Q̄ theorem includes the internal-Hom identification, descended δ and retracts. Step 6: correct elementary domain check (D^b_ctf := D^b_c at the field stages by definition). Step 7: the unconditional exchange at all four stages with c: Rf^!ω_Y≅ω_X. Advisory: its statement says only 'canonical'; the match with the def-sf-verdier-exchange-data arrow comes from its construction, the same convention as the Q17-PASSed thm-sf-verdier-exchange. Stage 2 should pin ε to that arrow. Edge cases checked: empty X, f=id, n=1, R/ϖ, d=0. No changes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.VerdierCoefficientRealization",
+  "declaration": "WeilConjectures.verdier_coefficient_realization",
+  "declarations": [
+   "WeilConjectures.VerdierCoefficientRealizationOn",
+   "WeilConjectures.verdier_coefficient_realization"
+  ],
+  "file": "lean/Sheaf/Paper/VerdierCoefficientRealization.lean",
+  "statement": "theorem verdier_coefficient_realization (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : (∀ (T : Scheme.{u}) [T.Over (Spec (.of D.k))] [IsSeparated (T ↘ Spec (.of D.k))] [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))], VerdierCoefficientRealizationOn D C E T) ∧ VerdierExchange.Assertion C.l C.Qbar D C.different f",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of returned immutable head fc2b4dd0d36a: replace the seven theorem statement-dependency edges by definition nodes recording exactly the existing interfaces used, in their original modules. The theorem and its evaluation-defined epsilon remain unchanged; proof dependencies and the accepted split are preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46fe0e50b",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery of fc2b4dd0 (H2 RETURN). Lean byte-identical (sha caaaaba5); item delta = stmt_deps (7 theorem stmt_deps replaced by def-sf-verdier-exchange-data + 7 new existing:true def nodes owning exactly FiniteProEtaleVerdierBiduality, IntegralFiniteExtension.DualizingDatum, IntegralVerdier.Conclusion, RationalVerdier.Datum/Conclusion, RationalOperations.structureSystem/HomIdentification/DualizingIdentification, CoefQbarVerdier.Duality/InternalHom/Dualizing, VerdierExchange.Package/Assertion) + lean.note. check_existing and check_new_node clean on all 7; owner modules unchanged side-live vs live; no prior def owner; no id collision; no stmt/proof cycle; new-node TeX matches the Lean bodies. Maths re-read: hypotheses exact, levels n+1, ε pinned to StageData.epsilon via StageConclusion.components, ω identified with Ra^!(unit) at every stage, edge cases empty/d=0/n=1/id covered, sorry only, docstrings fine. Advisories: integralDualizingCompactification (theorem prop-coef-integral-dualizing) uncited; same-module helpers (IntegralVerdier.dual/delta/comparison, RationalVerdier.Extension/units, RationalOperations.coefficientUnit, CoefQbarTensor) and integralDualizingFiniteTerm remain theorem-owned, and def-sf-integral-hom-reduction-models is not cited by the integral/rational new nodes; Second reading by the same worker (H11 advisory). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-aa105",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T095000-L-3280149",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs published dependency theorems (coef_rational_operations witnesses, finite_stage_verdier_biduality, boundary_duality_input, integral_verdier_biduality, coef_qbar_verdier, verdier_exchange); new sorried lemma vs System.integralLeft/DualizingDatum.coherent/integralDualizingFiniteTerm; removed FiniteTorAmplitudeSites import vs unit realized lists (empty)"
  }
 }

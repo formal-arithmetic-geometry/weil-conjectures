@@ -1,0 +1,312 @@
+{
+ "id": "lem-trf-maximum-history-smooth-deletion",
+ "kind": "statement",
+ "title": "Smooth comparison and deletion for finite maximum histories",
+ "statement": "Let $V$ be totally ordered with least element $\\bot$, and let $\\nu$ be a resolution invariant calculus on embedded rational pairs [def-trf-resolution-invariant-calculus-data]. Let $A=(X\\hookrightarrow P)$ and $B=(Y\\hookrightarrow Q)$ be such pairs [def-trf-labeled-embedded-resolution], with a smooth map $v:Q\\to P$ and a specified cartesian identification $Y=X\\times_PQ$. Suppose $T_A,T_B$ are finite admissible maximum-extension histories [def-trf-admissible-embedded-history], each starting empty and stopping at its first regular strict transform. Label each nonempty center by its positive maximum in $L=(V\\setminus\\{\\bot\\})^{\\mathrm{op}}$.\n\nThere is a canonical smooth comparison identifying $T_B$ with the pullback of $T_A$ after deleting exactly the centers with empty inverse image. At every original stage, the pulled-back ambient scheme is the ordinary blowup in the extended ambient center ideal; the pulled-back scheme-theoretic strict transform is also the intrinsic blowup in the extended ideal on the strict transform. These identifications are cartesian over the initial schemes, commute with the closed inclusions and transition maps, and the comparison maps to the original stages are smooth. The retained centers have exactly their original labels, and their ambient and intrinsic ideals are the extended ideals. At a label whose inverse-image stratum is nonempty, that same value is the next maximum for the restricted history. At an empty inverse-image stratum the center ideal is the unit ideal, the stage is an identity, and its deletion does not change the local invariant or ordered history data. After the last original label the pulled-back invariant is $\\bot$ everywhere, so $T_B$ has no extra stages. These statements also hold for an empty $Y$ and for a map meeting only the regular locus; no constant relative dimension is required.\n\nThe comparisons satisfy the identity and composition laws. Precisely, for smooth $R\\xrightarrow{w}Q\\xrightarrow{v}P$ with the corresponding cartesian embedded pairs and maximum histories, extending each center ideal first along $v$ and then along $w$ gives the same ideal as extension along $v\\circ w$; two-step deletion retains the same labels as direct deletion. Under the canonical associativity identification of fibre products, the composite ambient and strict-transform comparisons equal the direct comparison. The same laws hold for the diagrams indexed by all lower cuts of $L$, with identity stages inserted at missing labels.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose VIII 2.3.1, 2.3.4--2.3.5 and 2.3.11--2.3.13, printed pp.91--94; conditional history argument extracted from lem-trf-embedded-resolution-ambient-comparison, old Steps 3--4 and 6: flat blowup and strict-transform comparison, induction deleting empty centers, and composition of smooth comparisons. BMT Theorem 6.1 Addendum and section 6.3 are the underlying detailed reference, archival copy WANTED; no Stacks tag states this conditional resolution-history lemma."
+ },
+ "stmt_deps": [
+  "def-trf-resolution-invariant-calculus-data",
+  "def-trf-labeled-embedded-resolution",
+  "def-trf-admissible-embedded-history"
+ ],
+ "proof": [
+  {
+   "text": "Write the stages of $T_A$ as $(X_i\\hookrightarrow P_i)_{0\\leq i\\leq n}$, the ambient center ideals as $I_i$, and their restrictions to $X_i$ as $J_i$. Write $m_i>\\bot$ for the maximum before extension $i$. By [def-trf-resolution-invariant-calculus-data], the positive maxima strictly decrease. For every prefix, its smooth pullback with empty centers deleted exists and is admissible, and its values and reduced stratum ideals are the pullbacks of the original ones. Apply this clause to the specified initial cartesian pair and to successive prefixes, retaining the prefix comparisons. At index zero the comparison is the given cartesian identification and no labels have been used. We will prove by induction on $i$ that the contracted prefix has the ordinary base-changed ambient and strict-transform stages, is a sequence of maximum extensions with the surviving original labels, and has exactly these pulled-back values and ideals. This is an induction on the finite original history, not on the value set.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "def-trf-admissible-embedded-history"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, pp.87--88; 2.3.4--2.3.5 and 2.3.13, pp.91--94; agent-written induction for the specified conditional calculus"
+   }
+  },
+  {
+   "text": "Here is the geometric induction step, including empty centers. Put $\\widehat P_i=Q\\times_P P_i$ and $\\widehat X_i=Q\\times_P X_i$. Their maps to $P_i,X_i$ are smooth by [lem-pc-proper-base-change], since each is a base change of $v$, and flat by [lem-pc-smooth-flat]. Extend $I_i$ and $J_i$ to these schemes. With the comparison defined in [def-nagata-blowup-flat-base-change-map], [thm-nagata-blowup-flat-base-change] gives\n$\\operatorname{Bl}_{I_i\\mathcal O_{\\widehat P_i}}\\widehat P_i\\cong Q\\times_P P_{i+1}$.\nApply [thm-nagata-strict-transform-is-blowup] first to $X_i\\hookrightarrow P_i$ and then to $\\widehat X_i\\hookrightarrow\\widehat P_i$: both scheme-theoretic strict transforms are their intrinsic blowups. Apply the same flat blowup comparison to $\\widehat X_i\\to X_i$ with ideal $J_i$. It identifies the new strict transform with $Q\\times_P X_{i+1}$. The morphisms to the ambient blowups are precisely [def-nagata-strict-transform-blowup-comparison]; their canonical lifts commute with these base changes (the explicit chart check is Step 7). Thus the closed inclusions and transition maps agree, not just the underlying schemes. At every stage the two maps to the original stages are base changes of $v$, hence smooth. No fixed relative dimension enters either cited smoothness or flatness assertion.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-smooth-flat",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "thm-nagata-strict-transform-is-blowup",
+    "def-nagata-strict-transform-blowup-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0805 (lemma-flat-base-change-blowing-up) and 080E (lemma-strict-transform), clause (1); morphisms.tex Tags 01VB (lemma-base-change-smooth), 01VF (lemma-smooth-flat)"
+   }
+  },
+  {
+   "text": "Suppose the inverse image of the $m_i$-stratum is empty. Its extended ambient and intrinsic ideals are the unit ideals, by [def-trf-resolution-invariant-calculus-data]. The unit ideal is invertible, so [cor-nagata-blowup-cartier-iso] makes both blowups identities via their structure maps; the intrinsic strict-transform identification is the one from Step 2. Delete this empty stage. The calculus compares precisely the deleted smooth pullback with the original prefix, so the values before and after this insertion are the same values at the same points. The order of earlier surviving ideals and labels is unchanged: deletion removes this entry and does not renumber a retained label. The history comparison of [def-trf-admissible-embedded-history] deletes exactly these unit-ideal stages. In particular, an intrinsic blowup which happens to be an isomorphism is NOT deleted if its ambient center is nonempty.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "cor-nagata-blowup-cartier-iso",
+    "def-trf-admissible-embedded-history"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.1 and 2.1.4, p.87; 2.3.4--2.3.5(i), pp.91--92; divisors.tex Tag 0807, lemma-blow-up-effective-Cartier-divisor"
+   }
+  },
+  {
+   "text": "If the inverse-image $m_i$-stratum is nonempty, choose a point in it. All values on the restricted current strict transform are at most $m_i$, since they are values at points of $X_i$; the chosen point has value $m_i$. Hence its maximum is exactly $m_i$. Its full equality locus is exactly the inverse image of the original equality locus. The calculus [def-trf-resolution-invariant-calculus-data] identifies the reduced stratum ideals with the extended ideals, so Step 2 is precisely the maximum extension at this locus, with the original label $m_i$ in $L$. Earlier indices with empty strata were identities by Step 3; thus this is the NEXT maximum extension of the contracted history. This proves the induction step, for both alternatives, and preserves every earlier ideal as part of the history data.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.5(i)--(ii), p.92, and 2.3.13, p.94; elementary maximum argument from the calculus conditions"
+   }
+  },
+  {
+   "text": "At index $n$ every value on $X_n$ is $\\bot$, since $X_n$ is regular, and the calculus [def-trf-resolution-invariant-calculus-data] pulls back these values. Therefore every value on $\\widehat X_n$ is $\\bot$, so its strict transform is regular. Before each retained stage there is a positive value by Step 4, so that strict transform is not regular. The contracted tower consequently starts empty, uses maximum extensions only, and stops at first regularity. By the uniqueness up to canonical ordinary blowup identifications in [lem-trf-maximum-history-finite-realization], it is canonically the supplied history $T_B$, which obeys the same rule for the same calculus. It has no further maximum extensions. If $Y$ is empty every stratum is empty and the contracted history has length zero. If $v$ meets only the regular locus of $X$, all initial values on $Y$ are $\\bot$; the same uniqueness makes $T_B$ empty, so the induction has retained no center. These conclusions also cover an initially regular $X$ and $n=0$.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "lem-trf-maximum-history-finite-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.1, p.91, 2.3.5, p.92, and 2.3.11, p.93; conditional uniqueness and stopping argument"
+   }
+  },
+  {
+   "text": "For composition, take smooth $R\\xrightarrow{w}Q\\xrightarrow{v}P$; their composite is smooth by [lem-trf-smooth-composition]. At a corresponding stage let $I$ be any ambient or intrinsic center ideal. On affine pieces with ring maps $A\\to B\\to C$, extending twice gives $(IB)C=IC$: both sides consist of finite sums of images of elements of $I$ times coefficients in $C$. This equality respects restriction, so gives equality of the sheaf ideals of [def-nagata-extended-ideal]. An ideal which becomes the unit ideal over $Q$ remains the unit ideal over $R$. If it is nonunit over $Q$, the second restriction retains it exactly when its extension over $R$ is nonunit. Thus the two deletion procedures and direct deletion retain exactly the same ordered subsequence of original labels. The identity map extends each ideal to itself and deletes no nonempty center. This proves both the ideal and label laws without assuming either smooth map surjective.",
+   "uses": [
+    "lem-trf-smooth-composition",
+    "def-nagata-extended-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, pp.87--88; elementary transitivity of ideal extension in the functoriality convention 2.3.4"
+   }
+  },
+  {
+   "text": "Check equality of the geometric maps used above, not merely existence of isomorphisms. In [def-nagata-blowup-flat-base-change-map] the ambient comparison applies Proj to the degreewise coefficient map [def-nagata-flat-pullback-rees-map]. For $A\\to B\\to C$, degree $d$ sends $c\\otimes(b\\otimes a)$ to $cb\\,a$ in $I^dC$, whether performed once or twice. On a blowup chart with denominator $a\\in I$, the corresponding fraction map sends a coefficient to its image and $j/a^r$ to the fraction of the images. Direct and two-step maps therefore agree on every chart and on chart overlaps. For the closed strict-transform inclusion, the chart map specified in [def-nagata-strict-transform-blowup-comparison] is $B\\otimes_A A[I/a]\\to B[IB/\\varphi(a)]$, with exactly the same coefficient and fraction formula. Applying a further coefficient map gives the same formula, proving the compatibility claimed in Step 2 and the composition equation for strict transforms as well. The identity coefficient map fixes every fraction. Equality on this chart cover proves equality of the scheme maps. The coefficient and fraction calculations apply also to unit ideals, so contraction does not change these equations.",
+   "uses": [
+    "def-nagata-blowup-flat-base-change-map",
+    "def-nagata-flat-pullback-rees-map",
+    "def-nagata-strict-transform-blowup-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0805 (lemma-flat-base-change-blowing-up), 080E (lemma-strict-transform), and 0806 (lemma-universal-property-blowing-up); elementary check of the displayed canonical coefficient maps"
+   }
+  },
+  {
+   "text": "Induct on the original stages again, using the identity and composition equalities of Step 7 at each extension and the identical retained labels of Step 6. The initial equality is the specified cartesian identification; at the next stage the two comparison maps agree by the chart calculation, and deleting a unit-ideal identity leaves that equality intact. This proves the identity and composition laws for the entire diagrams. The reassociation of iterated fibre products is the unique map with the given projections, by [def-pc-fibre-product], so these are exactly the laws under the associativity identification in the statement. Finally, index a diagram by a lower cut of $L$ by taking the stage after its finitely many retained labels, as in [def-trf-labeled-embedded-resolution]. Cuts with the same retained labels use the same stage; missing labels carry unit ideals and identity transitions. The equalities already proved on the finite diagrams therefore give the asserted equalities at every cut and on every transition between cuts.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-labeled-embedded-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, pp.87--88, and 2.3.4--2.3.5(ii), pp.91--92; elementary finite-diagram and lower-cut reindexing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-resolution-invariant-calculus-data",
+  "def-trf-admissible-embedded-history",
+  "lem-pc-proper-base-change",
+  "lem-pc-smooth-flat",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-strict-transform-is-blowup",
+  "def-nagata-strict-transform-blowup-comparison",
+  "cor-nagata-blowup-cartier-iso",
+  "lem-trf-maximum-history-finite-realization",
+  "lem-trf-smooth-composition",
+  "def-nagata-extended-ideal",
+  "def-nagata-flat-pullback-rees-map",
+  "def-pc-fibre-product",
+  "def-trf-labeled-embedded-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.1--2.1.9, pp.86--88; 2.3.1, 2.3.4--2.3.5, 2.3.11--2.3.13, pp.91--94. Agent-written conditional maximum-history induction; geometric inputs Stacks Tags 0805, 080E, 0807, 01VB, 01VF and 01VA."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-maximum-history-smooth-deletion: Smooth pullback of finite maximum stratum blowup histories deletes exactly empty centers preserves invariant labels and satisfies identity and composition",
+   "results": "{\"t\": \"2026-10-22T06:09:34Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-maximum-history-smooth-deletion: Smooth pullback of finite maximum stratum blowup histories deletes exactly empty centers preserves invariant labels and satisfies identity and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_comp\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"ContMDiffVectorBundle.pullback\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"RingHom.isStandardSmooth_stableUnderComposition\"], \"digest\": \"8924bd66bc074fff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-smooth-deletion: Smooth pullback of finite maximum stratum blowup histories deletes exactly empty centers preserves invariant labels and satisfies identity and composition",
+   "results": "{\"t\": \"2026-10-22T06:09:44Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-smooth-deletion: Smooth pullback of finite maximum stratum blowup histories deletes exactly empty centers preserves invariant labels and satisfies identity and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"Algebra.IsStandardSmoothOfRelativeDimension.trans\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"SingularManifold.comap_f\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.IsStandardSmoothOfRelativeDimension.comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"2bf1b16564c16a21\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-smooth-deletion: Compare maximum center recursion after arbitrary smooth base change using flat base change of blowups and strict transforms, retaining labels of nonempty centers",
+   "results": "{\"t\": \"2026-10-22T06:10:33Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-smooth-deletion: Compare maximum center recursion after arbitrary smooth base change using flat base change of blowups and strict transforms, retaining labels of nonempty centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\"], \"digest\": \"f744e2a574b4addb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-22T06:09:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone",
+   "results": "{\"t\": \"2026-10-22T06:09:34Z\", \"tool\": \"grep\", \"query\": \"desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-smooth-deletion: smooth pullback of finite maximum invariant blowup histories deletes empty centers and preserves labels and composition",
+   "results": "{\"t\": \"2026-10-23T09:30:44Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-smooth-deletion: smooth pullback of finite maximum invariant blowup histories deletes empty centers and preserves labels and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\", \"SingularManifold.comap_f\", \"InverseSystem.globalEquiv_compatibility\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"c2e5101b7de94016\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern smoothness, standard smooth charts or abstract inverse systems; none states comparison of finite maximum-center embedded histories, retained center ideals and invariant labels"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone",
+   "results": "{\"t\": \"2026-10-23T09:32:58Z\", \"tool\": \"grep\", \"query\": \"desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern smoothness, standard smooth charts or abstract inverse systems; none states comparison of finite maximum-center embedded histories, retained center ideals and invariant labels"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-maximum-history-smooth-deletion: finite maximum center resolution sequences commute with smooth base change after deleting empty blowups",
+   "results": "{\"t\": \"2026-10-23T09:32:58Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-maximum-history-smooth-deletion: finite maximum center resolution sequences commute with smooth base change after deleting empty blowups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.Smooth.baseChange\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"RingHom.Smooth.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"d52c19a38fdcd790\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern smoothness, standard smooth charts or abstract inverse systems; none states comparison of finite maximum-center embedded histories, retained center ideals and invariant labels"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-23T09:32:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern smoothness, standard smooth charts or abstract inverse systems; none states comparison of finite maximum-center embedded histories, retained center ideals and invariant labels"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-smooth-deletion: compare recursive blowups at greatest invariant strata under flat smooth restriction, dropping the unit ideal stages",
+   "results": "{\"t\": \"2026-10-23T09:35:02Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-smooth-deletion: compare recursive blowups at greatest invariant strata under flat smooth restriction, dropping the unit ideal stages\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\"], \"digest\": \"8a7278ca45a9adf8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the read hits concern smoothness, standard smooth charts or abstract inverse systems; none states comparison of finite maximum-center embedded histories, retained center ideals and invariant labels"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-embedded-resolution-ambient-comparison",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Re-split of lem-trf-embedded-resolution-ambient-comparison, old Steps 3--4 and 6: flat blowup and strict-transform comparison, induction deleting empty centers, and composition of smooth comparisons.",
+   "via": [
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-maximum-history-smooth-deletion",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported fields. Wrote the conditional induction on finite original stages, ordinary ambient and intrinsic blowup comparisons, empty-center deletion, next-maximum argument, final-bottom stopping, and coefficient/chart verification of identity and composition. Reused all geometric tools; no new nodes or Lean work. Read every cited statement and ILO/Stacks source; citations.json quotes the exact clauses used.",
+  "blueprint": "The historical ancestry to lem-trf-local-term-locality is retained; the latest ancestor now follows the contracting-correspondence route. This item completes the already-created resolution-support branch from lem-trf-embedded-resolution-ambient-comparison, old Steps 3--4 and 6, without altering any unit/chapter route. ILO VIII 2.3.4--2.3.5 supplies contraction/synchronization, 2.3.13 the arbitrary-dimension convention. Steps 1--5 realize smooth comparison/deletion; Steps 6--8 realize composition and lower-cut laws.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Uses only clause (2), smooth base-change stability, for the maps at each pulled-back stage; no local-term or resolution route is replaced."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Smooth stage comparison maps are flat, so the ordinary flat blowup comparison applies."
+   },
+   {
+    "node": "def-nagata-blowup-flat-base-change-map",
+    "why": "Specifies the canonical coefficientwise comparison whose functoriality is checked, rather than an arbitrary blowup isomorphism."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Ordinary blowup under a flat stage comparison is the cartesian pullback; no resolution assertion is taken from this tool."
+   },
+   {
+    "node": "thm-nagata-strict-transform-is-blowup",
+    "why": "Identifies a scheme-theoretic strict transform with the intrinsic extended-ideal blowup, with its structure maps."
+   },
+   {
+    "node": "def-nagata-strict-transform-blowup-comparison",
+    "why": "Specifies the lift and fraction chart map of the closed inclusion, needed to check its naturality explicitly."
+   },
+   {
+    "node": "cor-nagata-blowup-cartier-iso",
+    "why": "The unit ideal is invertible, so an empty center gives an identity blowup."
+   },
+   {
+    "node": "def-nagata-extended-ideal",
+    "why": "Uses the inverse-image ideal construction, to verify extension under composition on affine pieces."
+   },
+   {
+    "node": "def-nagata-flat-pullback-rees-map",
+    "why": "Specifies the degreewise coefficient maps, whose identity and composition equations are checked on elements."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "The universal property fixes the associativity identification and the equality of projection-preserving maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-pc-smooth-flat",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "thm-nagata-strict-transform-is-blowup",
+  "def-nagata-strict-transform-blowup-comparison",
+  "cor-nagata-blowup-cartier-iso",
+  "def-nagata-extended-ideal",
+  "def-nagata-flat-pullback-rees-map",
+  "def-pc-fibre-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-a86d556a0",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-a86d556a0 (reviewer sub-agent of L); spot-checked: Read the item and all 15 cited statements in full. No new nodes; the statement and stmt_deps are unchanged against live, where the item is still unsplit, so nothing supersedes this delivery. The 8 steps carry every argument of parent old Steps 3, 4 and 6 listed in the Q74 packet: flat ambient blowup base change; smoothness and flatness of the stage maps; strict transform as the extended-ideal blowup; the label induction; unit ideal and unchanged values at empty strata; next maximum; final-bottom stopping and identification with T_B via the uniqueness clause of finite-realization; identity and composition of ideals, labels, chart maps and lower cuts. No cycle. Hypotheses checked: thm-nagata-strict-transform-is-blowup holds for an arbitrary morphism (blueprint md read); flatness comes from base change of v (lem-pc-proper-base-change (2) and lem-pc-smooth-flat); the unit ideal is invertible, so cor-nagata-blowup-cartier-iso applies. Sources checked: ILO VIII 2.3.1, 2.3.4, Remark 2.3.5(i), 2.3.11 and 2.3.13 (pp.91-94); Stacks 0805 and 080E(1), with the tag-to-label map verified. Small cases: open avoiding the node of xy=0 (center deleted, T_B empty), a surjective smooth map, a disjoint union with only the regular part hit, and two-step deletion. Accepted generic tool_uses: pc base change and smooth-flat, nagata flat base change, strict-transform blowup and cartier-iso. No SGA source. Advisory: Step 2 silently uses the transitivity of extended ideals that Step 6 proves."
+ }
+}

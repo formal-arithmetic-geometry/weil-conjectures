@@ -1,0 +1,141 @@
+{
+ "id": "lem-sp-reduction-tensor-comparison-descent",
+ "kind": "statement",
+ "title": "Descent of prescribed strict tensor balancing to a derived reduction comparison",
+ "statement": "Fix ell,E,T,D,r and a strict tensor balancing datum C as in lem-sp-reduction-strict-tensor-balancing. Fix any source and sequence-target closed derived tensor structures, their K-flat total tensor models, symmetries, and RingedDerivedTensorCoherence records. There exist a natural derived reduction tensor isomorphism mu and a CoreMonoidal structure. Combined with exactly the input ordinary and chain comparisons C, they form data W satisfying SpReductionMonoidalTensor. Reduction preserves the flat-term K-flat class on the sequence site, and the representative square SpReductionDerived for mu is the square using exactly C.chain and the recorded reduction counit. No geometric comparison and no existence of closed tensor structures is asserted here.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL (sites-modules.tex), 07A4, 0G7E and 0D6D; blueprint/latest integral direct-image proof (3)."
+ },
+ "stmt_deps": [
+  "def-sp-reduction-monoidal-comparison-data",
+  "lem-sp-reduction-strict-tensor-balancing"
+ ],
+ "proof": [
+  {
+   "text": "Identify ordinary reduction with the sequence projection by its normalized generator/transition equations. Uniqueness of the universal left-derived comparison identifies its derived pullback with the given reduction and its actual counit.",
+   "uses": [
+    "lem-pur-sequence-site-completion-projection",
+    "det-sp-reduction-tower-normalized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use unbounded flat-term K-flat resolutions. Total tensors stay in that class and ringed pullback preserves that class on the sequence site. The source and target comparison isomorphisms therefore compute every object of the representative square.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the prescribed strict balancing chain isomorphism in the representative square. Two-variable localization extends it to an invertible natural transformation, uniquely with that square on resolving representatives. This supplies mu and the stated derived equation on whole systems.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sp-reduction-strict-tensor-balancing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the normalized ringed derived strong monoidal structure through the counit-compatible reduction identification. Its tensorator equals the inverse of mu by uniqueness of descent of the same representative comparison. Associators multiply a,b,c to abc; the unit inserts 1. The input normalized coherence makes these exactly the existing signed-total constraints.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sequence-site-completion-projection",
+  "det-sp-reduction-tower-normalized",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sp-reduction-strict-tensor-balancing",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), refined from the existing eight-step proof of lem-sp-reduction-derived-monoidal-tower."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of scalars strong monoidal K flat complexes of sheaf modules",
+   "results": "8 hits: light condensed monoidal structures and ordinary module flatness; no coherent derived reduction system comparison.",
+   "date": "2026-10-25",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CoreMonoidal\"",
+   "results": "CoreMonoidal and its structural projections and constructors only.",
+   "date": "2026-10-25",
+   "verdict": "Generic monoidal interface; no normalized reduction-system comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension of scalars to inverse systems preserves tensor products with K flat representative comparisons",
+   "results": "8 hits: ordinary module flatness, direct-limit tensor maps, and Kan-extension exactness.",
+   "date": "2026-10-25",
+   "verdict": "No match for the derived system comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "sp_reduction_derived_monoidal|kFlat_total_tensor_model|changeOfRings_isKFlat_independentCoefficients",
+   "results": "Mathlib service: 0 hits. Local rg: existing total-tensor and scalar-extension lemmas supply the two representative-class proofs. No existing strict reduction balancing, normalized descent or geometric square theorem.",
+   "date": "2026-10-25",
+   "verdict": "Reuse the two existing representative-class theorems; state only the three missing comparison steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityReductionDerivedMonoidalTower",
+  "date": "2026-10-25",
+  "group": "T7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-reduction-derived-monoidal-tower",
+   "place": "Comparison interfaces and original proof steps 1--8",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityReductionTensorDescent",
+  "file": "lean/Sheaf/Paper/SmoothPurityReductionTensorDescent.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_reduction_tensor_comparison_descent",
+  "statement": "theorem sp_reduction_tensor_comparison_descent (D : SpCoefficientTowersAbelian l E T)\n    (r : SpReductionTower l E T D) (C : SpReductionStrictTensor l E T D r)\n    (source : SpIntegralClosed l E T)\n    (sourceModel : SemilinearSections.Models.{u + 1, u, u + 1}\n      (Scheme.ProEt.topology T) (spIntegralSectionRing l E T) source)\n    (sourceSymmetry : @SymmetricCategory\n      (DerivedCategory (spIntegralSectionModules l E T)) _ source.monoidal)\n    (sourceCoherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1, u + 2}\n      (Scheme.ProEt.topology T) (spIntegralSectionRing l E T)\n      source sourceModel sourceSymmetry)\n    (target : SpSystemClosed l E T)\n    (targetModel : SemilinearSections.Models.{u + 1, u, u + 1}\n      (coefficientSequenceTopology (Scheme.ProEt.topology T))\n      (spMonoidalSystemRing l E T) target)\n    (targetSymmetry : @SymmetricCategory\n      (DerivedCategory (spMonoidalSystems l E T)) _ target.monoidal)\n    (targetCoherence : RingedDerivedTensorCoherence.{u + 1, u, u + 1, u + 2}\n      (coefficientSequenceTopology (Scheme.ProEt.topology T)) (spMonoidalSystemRing l E T)\n      target targetModel targetSymmetry) :\n    ∃ (μ : source.tensor ⋙ spMonoidalReduction l E T D r ≅\n        ((spMonoidalReduction l E T D r).prod (spMonoidalReduction l E T D r)) ⋙ target.tensor)\n      (monoidal : @Functor.CoreMonoidal\n        (DerivedCategory (spIntegralSectionModules l E T)) _ source.monoidal\n        (DerivedCategory (spMonoidalSystems l E T)) _ target.monoidal\n        (spMonoidalReduction l E T D r)),\n      let W : SpReductionMonoidalData l E T D r := {\n        source := source\n        sourceModel := sourceModel\n        target := target\n        targetModel := targetModel\n        sourceSymmetry := sourceSymmetry\n        sourceCoherence := sourceCoherence\n        targetSymmetry := targetSymmetry\n        targetCoherence := targetCoherence\n        μ := μ\n        monoidal := monoidal\n        ordinary := C.ordinary\n        chain := C.chain }\n      SpReductionMonoidalTensor l E T D r W ∧\n        ∃ hSystem : SpReductionSystemKflat l E T D r W,\n          SpReductionDerived l E T D r W hSystem",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0d5a4",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T164359-L-1006995",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0d5a4",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T164359-L-1006995",
+  "kind": "interface",
+  "note": "independent cc review: item theorem's assembly proof and the 47 relocated interface declarations (byte-identical to the clone apart from blueprint tags) against node lem-sp-reduction-derived-monoidal-tower, the new def node and the three new sorry nodes (strict balancing, descent, geometric square)"
+ }
+}

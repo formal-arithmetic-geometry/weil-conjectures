@@ -1,0 +1,335 @@
+{
+ "id": "lem-trf-spectral-completion-scalar-envelope",
+ "kind": "statement",
+ "title": "Spectral norms in a scalar envelope inside the norm completion",
+ "statement": "Let $F$ be a field [def-weil-field] with a nontrivial real-valued multiplicative nonarchimedean absolute value, $H=\\widehat F$ its metric completion [lem-sfb-normed-field-completion], and $F\\subseteq Q\\subseteq H$ an intermediate field with the restricted absolute value. Let $E/F$ be a finite field extension with minimal-polynomial spectral norm $s=s_{E/F}$ [lem-trf-incomplete-spectral-algebra-norm]. Let $\\mathcal C$ be the metric completion of $(E,s)$, namely Cauchy sequences modulo sequences tending to zero, with norm $N([(e_j)])=\\lim_j s(e_j)$. Termwise sums and products and multiplication by scalar Cauchy sequences make $\\mathcal C$ a commutative $H$-algebra, and the canonical map $E\\hookrightarrow\\mathcal C$ is an isometric algebra embedding. Inside $\\mathcal C$ put $M=\\sum_{e\\in E}Qe$, the set of finite $Q$-linear combinations of elements of $E$. Then $M$ is a finite-dimensional reduced commutative $Q$-algebra containing $E$. For $z\\in M$, let $p_z(Z)=Z^r+\\sum_{i=1}^r a_iZ^{r-i}$ be its monic polynomial of least positive degree annihilating $z$, and put $\\sigma_{M/Q}(z)=\\max_{1\\le i\\le r}|a_i|_Q^{1/i}$. The restriction of $N$ to $M$ is a definite, power-multiplicative nonarchimedean $Q$-algebra norm (in particular $N(qz)=|q|_Q N(z)$), and $$N(z)\\le\\sigma_{M/Q}(z)\\quad(z\\in M),\\qquad \\sigma_{M/Q}(e)=s_{E/F}(e)\\quad(e\\in E).$$ No weak stability, completeness of $F$ or $Q$, or separability of $E/F$ is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 5.3.3/2, printed p.215 (scan PDF p.221), norm-completion diagram and the two spectral inequalities; Theorems 3.2.1/2 and 3.2.2/2. Primary scan read 2026-10-25; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-sfb-normed-field-completion",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-incomplete-spectral-algebra-norm], $s$ is a definite normalized ultrametric $F$-algebra norm; by [lem-trf-algebraic-spectral-norm-powers], $s(e^m)=s(e)^m$ for $m\\ge1$. Apply [lem-trf-normed-algebra-completed-scalars] to $A=E$ and $n=s$. Its Cauchy quotient is exactly $\\mathcal C$ in the statement, and supplies the asserted $H$-algebra, the isometric $F$-algebra embedding of $E$, and all the asserted norm identities. Restrict the scalar identity from $H$ to its subfield $Q$.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-algebraic-spectral-norm-powers",
+    "lem-trf-normed-algebra-completed-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "spectralAlgNorm, lines 663–679; completion construction as in Analysis/Normed/Module/Completion.lean:75–89, with the completed-scalar input explicitly separated."
+   }
+  },
+  {
+   "text": "Choose an $F$-basis $e_1,\\ldots,e_d$ of $E$. Expanding elements of $E$ in this basis shows $M=\\sum_{i=1}^dQe_i$. Each product $e_ie_j$ is an $F$-linear combination of the $e_k$, so multiplying two such $Q$-linear combinations stays in $M$; also $1\\in E\\subset M$. Thus $M$ is a finite-dimensional commutative unital $Q$-algebra. If $z^m=0$ for $m\\ge1$, then $0=N(z^m)=N(z)^m$ and definiteness gives $z=0$, proving reducedness. The $d+1$ powers $1,z,\\ldots,z^d$ are linearly dependent. A nonzero annihilating polynomial can be divided by its leading coefficient; a monic one of least degree exists. Its degree is positive because $1\\ne0$ and $Q$ embeds in $\\mathcal C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "Elementary scalar-span and polynomial arguments from the completed algebra and norm identities of step 1; comparison with spectralNorm at line 381."
+   }
+  },
+  {
+   "text": "Write $p_z(Z)=Z^r+\\sum_{i=1}^ra_iZ^{r-i}$. Suppose $t=N(z)>\\sigma_{M/Q}(z)$. Then $t>0$ and $|a_i|_Qt^{r-i}<t^r$ for every $1\\le i\\le r$. The identities of step 1 give $N(a_iz^{r-i})=|a_i|_Qt^{r-i}$, including $r-i=0$ since $N(1)=1$. Iterating the strong triangle inequality over these $r\\ge1$ terms gives $N(\\sum_i a_iz^{r-i})<t^r$. But $p_z(z)=0$ identifies this sum with $-z^r$, whose norm is $t^r$, a contradiction. Hence $N(z)\\le\\sigma_{M/Q}(z)$. This argument uses only the explicit norm identities, so applies even though $M$ may have zero divisors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "Elementary dominant-term argument underlying norm_root_le_spectralValue, lines 237–285; that declaration has a field target and is NOT applied to M."
+   }
+  },
+  {
+   "text": "Fix $e\\in E$, and let $f\\in F[Z]$ and $g\\in Q[Z]$ be its monic minimal polynomials over $F$ and in $M/Q$, respectively. Divide the coefficientwise image $f_Q$ by $g$. The remainder annihilates $e$; if nonzero, dividing by its leading coefficient contradicts the least degree of $g$. Thus $g\\mid f_Q$. Choose an algebraic closure $\\Omega/Q$ by [def-weil-algebraic-closure]. Both polynomials split there by [lem-weil-alg-closed-linear-factorization]; their positive degrees give nonempty root multisets, and every root of $g$ is a root of $f_Q$ since $g\\mid f_Q$. Give $\\Omega$ its $Q$-spectral algebra norm by [lem-trf-incomplete-spectral-algebra-norm], which has the positive-power property by [lem-trf-algebraic-spectral-norm-powers]. Apply [lem-trf-tate-root-spectral-formula] to each polynomial. Their spectral values are the maxima of this same norm on their roots, so $\\sigma_{M/Q}(e)\\le s_{E/F}(e)$: coefficient norms of $f_Q$ equal those of $f$. Conversely step 3 and the isometry of step 1 give $s_{E/F}(e)=N(e)\\le\\sigma_{M/Q}(e)$. This proves equality, including $e=0$ (then $f=g=Z$).",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-alg-closed-linear-factorization",
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-algebraic-spectral-norm-powers",
+    "lem-trf-tate-root-spectral-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "max_norm_root_eq_spectralValue, lines 294–335, together with the incomplete-base spectral algebra norm and its power identity at 663–679; elementary Euclidean division in the finite scalar envelope."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "lem-trf-algebraic-spectral-norm-powers",
+  "lem-trf-normed-algebra-completed-scalars",
+  "def-weil-algebraic-closure",
+  "lem-weil-alg-closed-linear-factorization",
+  "lem-trf-tate-root-spectral-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "place": "Agent proof from the read Mathlib root/spectral formula and completion constructions. BGR Proposition 5.3.3/2 is the intended comparison source but its local archival copy is WANTED; no unread BGR proof is asserted to have been followed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Cc]ompletion.*[Rr]educed",
+   "results": {
+    "t": "2026-10-24T16:37:36Z",
+    "tool": "grep",
+    "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Cc]ompletion.*[Rr]educed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib spectralNorm_unique requires a complete base and a field target; scalar-envelope algebras may have several factors. spectralNorm_extends concerns base elements only; no completion-envelope comparison is stated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extending scalars inside a spectral norm completion preserves the minimal polynomial spectral norm on a finite algebraic field extension",
+   "results": {
+    "t": "2026-10-24T16:37:37Z",
+    "tool": "leansearch",
+    "query": "Extending scalars inside a spectral norm completion preserves the minimal polynomial spectral norm on a finite algebraic field extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralNorm_extends",
+     "spectralAlgNorm_extends",
+     "instNormedCommRingRestrictScalars",
+     "spectralNorm.normedSpace",
+     "spectralNorm.normedField",
+     "spectralNorm.spectralMulAlgNorm_eq_of_mem_roots",
+     "spectralNorm_unique"
+    ],
+    "digest": "9cd73b02deeec036"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib spectralNorm_unique requires a complete base and a field target; scalar-envelope algebras may have several factors. spectralNorm_extends concerns base elements only; no completion-envelope comparison is stated."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"Completion\"",
+   "results": {
+    "t": "2026-10-24T16:37:37Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"Completion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib spectralNorm_unique requires a complete base and a field target; scalar-envelope algebras may have several factors. spectralNorm_extends concerns base elements only; no completion-envelope comparison is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let F be a valued field Q an intermediate field in its completion and E a finite extension of F with its spectral norm. The algebra Q E inside the normed completion of E is reduced finite over Q and its spectral norm restricts to that of E",
+   "results": {
+    "t": "2026-10-24T16:37:38Z",
+    "tool": "leanfinder",
+    "query": "Let F be a valued field Q an intermediate field in its completion and E a finite extension of F with its spectral norm. The algebra Q E inside the normed completion of E is reduced finite over Q and its spectral norm restricts to that of E",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm_unique_field_norm_ext",
+     "spectralNorm.normedField",
+     "spectralAlgNorm_def",
+     "spectralAlgNorm",
+     "spectralMulAlgNorm_def",
+     "spectralNorm.nontriviallyNormedField"
+    ],
+    "digest": "b7f07cd682feb768"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib spectralNorm_unique requires a complete base and a field target; scalar-envelope algebras may have several factors. spectralNorm_extends concerns base elements only; no completion-envelope comparison is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectral norms agree on algebraic subextensions after enlarging an incomplete valued base field within its metric completion and forming the finite reduced scalar envelope",
+   "results": {
+    "t": "2026-10-24T16:37:40Z",
+    "tool": "leanfinder",
+    "query": "Spectral norms agree on algebraic subextensions after enlarging an incomplete valued base field within its metric completion and forming the finite reduced scalar envelope",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm_unique_field_norm_ext",
+     "spectralAlgNorm_extends",
+     "spectralNorm_eq_invariantExtension",
+     "spectralMulAlgNorm_def",
+     "spectralAlgNorm_def",
+     "spectralNorm_unique",
+     "spectralNorm_extends",
+     "spectralMulAlgNorm"
+    ],
+    "digest": "6146fc313ec1033d"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib spectralNorm_unique requires a complete base and a field target; scalar-envelope algebras may have several factors. spectralNorm_extends concerns base elements only; no completion-envelope comparison is stated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite extension E of F with the minimal polynomial spectral norm embedded in its completion, and F subset Q subset completion F, has the same spectral norm in the finite Q span of E",
+   "results": {
+    "t": "2026-10-24T17:14:17Z",
+    "tool": "leansearch",
+    "query": "A finite extension E of F with the minimal polynomial spectral norm embedded in its completion, and F subset Q subset completion F, has the same spectral norm in the finite Q span of E",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm",
+     "spectralAlgNorm",
+     "spectralAlgNorm_def",
+     "spectralNorm.normedField",
+     "spectralNorm.normedSpace",
+     "algNormFromConst",
+     "spectralNorm_extends",
+     "spectralNorm_eq_invariantExtension"
+    ],
+    "digest": "f9eadefbcfb47263"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: the read spectral norm declarations concern field extensions, and spectralNorm_unique additionally requires a complete base. They do not state this scalar-envelope algebra comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"Completion\"",
+   "results": {
+    "t": "2026-10-24T17:14:18Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"Completion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: the read spectral norm declarations concern field extensions, and spectralNorm_unique additionally requires a complete base. They do not state this scalar-envelope algebra comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Cc]ompletion.*[Rr]educed",
+   "results": {
+    "t": "2026-10-24T17:14:18Z",
+    "tool": "grep",
+    "query": "spectralNorm.*[Cc]ompletion|[Cc]ompletion.*spectralNorm|[Cc]ompletion.*[Rr]educed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: the read spectral norm declarations concern field extensions, and spectralNorm_unique additionally requires a complete base. They do not state this scalar-envelope algebra comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebraic extension E of an incomplete ultrametric field F spans a reduced finite dimensional Q algebra in its spectral completion for F subset Q subset completion F, and the minimal polynomial spectral norm restricts to that of E",
+   "results": {
+    "t": "2026-10-24T17:16:27Z",
+    "tool": "leanfinder",
+    "query": "A finite algebraic extension E of an incomplete ultrametric field F spans a reduced finite dimensional Q algebra in its spectral completion for F subset Q subset completion F, and the minimal polynomial spectral norm restricts to that of E",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm_eq_invariantExtension",
+     "spectralNorm_extends_of_finiteDimensional",
+     "spectralAlgNorm_extends",
+     "spectralAlgNorm",
+     "spectralMulAlgNorm",
+     "spectralAlgNorm_def",
+     "spectralMulAlgNorm_def",
+     "spectralNorm.nontriviallyNormedField"
+    ],
+    "digest": "c39c7a723c39c328"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: the read spectral norm declarations concern field extensions, and spectralNorm_unique additionally requires a complete base. They do not state this scalar-envelope algebra comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-gauss-spectral-coefficient-cartesian",
+  "date": "2026-10-25",
+  "group": "O2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Proposition 5.3.3/2, printed pp.214–215 (scan PDF pp.220–221). Supporting input for Proposition 5.3.3/2: Proposition 5.3.3/2, printed p.215 (scan PDF p.221), norm-completion diagram and the two spectral inequalities; Theorems 3.2.1/2 and 3.2.2/2.",
+   "via": [
+    "lem-trf-gauss-spectral-coefficient-cartesian",
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-spectral-completion-scalar-envelope",
+  "worker": "stage1",
+  "summary": "Preserved the statement and proved the norm comparison by a direct dominant-term estimate and minimal-polynomial divisibility with the existing incomplete-base root formula. Isolated only the general completion construction over completed scalars; no weak stability, completeness of the intermediate field, or separability was introduced.",
+  "blueprint": "Historical analytic branch of lem-trf-local-term-locality recorded in blueprint.from: supplies the norm-completion diagram and spectral comparison in BGR Proposition 5.3.3/2. Current latest unit uses contracting correspondences; this supporting analytic input does not replace that route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NO-ea18f865e",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-ea18f865e (reviewer sub-agent of L); spot-checked: Read in full: the item, which was unsplit on base with statement and stmt_deps unchanged, and the new node lem-trf-normed-algebra-completed-scalars. Every cited statement is a Mathlib leaf: incomplete-spectral-algebra-norm, algebraic-spectral-norm-powers, tate-root-spectral-formula, def-weil-algebraic-closure, alg-closed-linear-factorization, def-weil-field and normed-field-completion. I checked Mathlib Completion.lean:75-89 (its NormedAlgebra keeps the original scalars, so it is not a match) and SpectralNorm.lean:286-298 (max_norm_root_eq_spectralValue). BGR 5.3.3/2 is not in literature/; it is correctly marked WANTED and the proof is marked agent. Step 1: the two spectral-norm nodes give exactly the hypotheses of the new node with A=E and n=s; restricting H-homogeneity to Q is substitution. Step 2 is genuinely elementary: span, closure under products, reducedness from the power law plus definiteness, and positive degree because N(1)=1. Step 3, the dominant-term argument, checked including i=r via N(1)=1, zero coefficients and t>0; it does not assume M is a field. Step 4: g divides f_Q by Euclidean division and minimality; in Omega/Q the spectral norm meets every hypothesis of the Tate root formula; the roots of g are a sub-multiset of those of f_Q, which gives sigma<=s, and the reverse comes from step 3 plus isometry. Route: everything is in sk-i-curve-zero or a Mathlib leaf; no tool_uses. New node: B1-B4 and B9 hold; leansearch, loogle, leanfinder and grep searches are recorded; the statement is true (scalar Cauchy estimate, limits of the norm laws, diagonal completeness), tested on A=F, finite field products and the trivial absolute value. It is not a restatement of the item, which keeps M, reducedness and both inequalities. No duplicate: weak-spectral-completion-product does this completion only inline, under extra coordinate hypotheses; the field-completion and complete-base uniqueness nodes are different statements. Item tested on Q_7-split sqrt2 (C=Q_7xQ_7, sigma=s=1), E=F and the inseparable case. No changes."
+ }
+}

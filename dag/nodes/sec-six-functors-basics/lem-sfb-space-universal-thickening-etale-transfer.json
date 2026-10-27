@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-space-universal-thickening-etale-transfer",
+ "kind": "statement",
+ "title": "Etale transport and descent of a given universal first-order thickening",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $Z\\xrightarrow{p}Y\\to X$ morphisms of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with $p$ representable etale [def-weil-etale-morphism]. A first-order thickening means a representable closed immersion whose ideal has square zero [def-weil-closed-immersion]. For $A\\to X$, call $A\\hookrightarrow A^+$ over $X$ universal if, for every first-order thickening $T\\hookrightarrow T'$ of algebraic spaces over $X$ and every $X$-map $a:T\\to A$, there is exactly one $X$-map $a^+:T'\\to A^+$ restricting to the composite $T\\to A\\hookrightarrow A^+$. (1) If $Y\\hookrightarrow Y^+$ is universal over $X$, there is an etale $Z^+\\to Y^+$ whose pullback along $Y\\hookrightarrow Y^+$ is $p:Z\\to Y$, unique up to unique isomorphism inducing the identity on $Z$. The induced $Z\\hookrightarrow Z^+$ is a universal first-order thickening over $X$. Consequently, if $Z\\hookrightarrow W$ is any other universal thickening over $X$, its canonical map $W\\to Y^+$ extending $p$ is etale and the square $Z\\to W$ over $Y\\to Y^+$ is cartesian. (2) Conversely, suppose $p$ is surjective and an etale map of first-order thickenings $(Z\\hookrightarrow Z^+)\\to(Y\\hookrightarrow Y^+)$ over $X$ is cartesian. If $Z\\hookrightarrow Z^+$ is universal over $X$, then $Y\\hookrightarrow Y^+$ is universal over $X$. Fibre products are [lem-trf-space-fibre-products-etale-covers]. No formal unramifiedness hypothesis is needed beyond the displayed universal properties.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0605, lemma-etale-morphism-of-universal-thickenings, (1)-(2); Tag 0601, section-universal-thickening, for the universal property."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-square-zero-extension-data"
+ ],
+ "proof": [
+  {
+   "text": "First record the base-change facts used below. For any first-order immersion $A_0\\hookrightarrow A$ and any $B\\to A$, the ideal of $A_0\\times_A B$ is the image of the pulled-back ideal; products of two generators are zero, so this is again first order. On every scheme base change a square-zero ideal lies in every prime. Thus the immersion is surjective, and the surjective-closed-immersion lemma makes it integral and universally injective. These are exactly the scheme-test hypotheses of integral-radicial etale invariance. The thickening base-change lemma also gives a homeomorphism on point spaces after every algebraic-space base change. In particular a map between two such thickenings is surjective if its reduction is surjective: conjugate its point map by the two homeomorphisms.",
+   "uses": [
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-sfb-space-thickening-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 09ZX (lemma-base-change-thickening); the fundamental equivalence preceding equation-equivalence-etale-spaces; spaces-morphisms.tex Tag 03MB (lemma-closed-immersion-ideals)."
+   }
+  },
+  {
+   "text": "For a representable etale map $E\\to A$ and an affine scheme test $T_0\\hookrightarrow T$ with $b:T\\to A$, the pullback $E_T\\to T$ is an etale morphism of schemes. By the definition of etale it is flat and unramified, so the cited scheme flat-unramified lifting theorem gives the unique section of $E_T\\to T$ extending the prescribed section over $T_0$. Composing with $E_T\\to E$ gives the unique lift. This also works for arbitrary first-order space tests: cover $T$ by affine etale scheme charts, whose reductions are affine closed subschemes. Apply the just proved affine lifting. On overlaps cover again by affine etale scheme charts; affine uniqueness equates the restrictions. Spaces are fppf sheaves, so these maps glue uniquely: after each scheme test of $T$ apply the sheaf equalizer to the pulled-back covering, and uniqueness gives naturality. The same chart argument shows that universality of a first-order thickening can be checked on affine scheme tests. Agreement of maps to $X$ is checked on these covers. All reduced tests are first order by step 1. This argument uses only scheme infinitesimal lifting, not the chartwise formal-etaleness theorem for spaces.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-ideal-closed-subspace-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0603 (lemma-check-universal-first-order-thickening) and Tag 04AL (lemma-representable-property-formally-property), representable etale case, using more-morphisms.tex Tag 04FF (lemma-unramified-flat-formally-etale)."
+   }
+  },
+  {
+   "text": "Apply integral-radicial etale invariance to $Y\\hookrightarrow Y^+$, with hypotheses checked in step 1. Essential surjectivity lifts $p$ to chartwise etale $q:Z^+\\to Y^+$ with specified reduction $Y\\times_{Y^+}Z^+\\cong Z$. Full faithfulness gives exactly one isomorphism between any two such lifts inducing the identity on $Z$; its inverse lifts the inverse reduction. To prove $q$ representable, fix a scheme $H\\to Y^+$ and put $H_0=Y\\times_{Y^+}H$. Both $H_0$ and $F_0=Z\\times_YH_0$ are schemes, the latter because $p$ is representable. Scheme thickening-site invariance lifts the etale scheme $F_0\\to H_0$ to an etale SCHEME $V\\to H$. Meanwhile $F=Z^+\\times_{Y^+}H$ is chartwise etale over $H$ by permanence, with reduction $F_0$. Full faithfulness of the algebraic-space etale-object equivalence for $H_0\\hookrightarrow H$ lifts the reduction isomorphism $V_{H_0}\\cong F_{H_0}$ and its inverse, proving $F\\cong V$. Thus $F$ is a scheme and $F\\to H$ is etale, so $q$ is representable etale. The cartesian square gives a first-order $Z\\hookrightarrow Z^+$ by step 1. This construction uses only the first-order immersion, not its universality, and applies below to test thickenings.",
+   "uses": [
+    "lem-sfb-space-integral-radicial-etale-invariance",
+    "sbc-lem-thickening-etale-site",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0605 (lemma-etale-morphism-of-universal-thickenings), proof (1), using Tag 05ZH (theorem-topological-invariance); representability checked with etale-cohomology.tex Tag 03SI (proposition-topological-invariance), clause (1)."
+   }
+  },
+  {
+   "text": "Given a first-order test $T\\hookrightarrow T'$ over $X$ and $a:T\\to Z$, universality of $Y\\hookrightarrow Y^+$ supplies the unique $b:T'\\to Y^+$ extending $pa$. Etale lifting for $q$, extended to space tests in step 2, gives a unique $a^+:T'\\to Z^+$ over $b$ restricting to $a$. Any other $X$-extension to $Z^+$ has composite with $q$ equal to $b$ by universality of $Y^+$, and hence equals $a^+$ by the same etale uniqueness. This proves universality of $Z\\hookrightarrow Z^+$, without a formal-unramifiedness assumption.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0605 (lemma-etale-morphism-of-universal-thickenings), proof (1)."
+   }
+  },
+  {
+   "text": "For another universal $Z\\hookrightarrow W$, apply universality of $Z^+$ to the test $Z\\hookrightarrow W$ with reduction $\\mathrm{id}_Z$, and universality of $W$ in the reverse direction. Both composites extend $\\mathrm{id}_Z$; uniqueness makes them identities. Thus $W\\cong Z^+$ compatibly with $Z$ and $X$. The composite $W\\cong Z^+\\xrightarrow qY^+$ is the canonical extension of $p$, since universality of $Y^+$ gives uniqueness for this test. It is etale and its reduction square is cartesian, since those assertions hold for $q$ and are preserved under the displayed isomorphism. This proves the remaining assertion of (1).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0601 (section-universal-thickening), uniqueness remark; Tag 0605 (lemma-etale-morphism-of-universal-thickenings), (1)."
+   }
+  },
+  {
+   "text": "Now assume (2), and write $q:Z^+\\to Y^+$ for its given etale map. It is surjective by step 1 and surjectivity of $p$. For a first-order test $T\\hookrightarrow T'$ and $a:T\\to Y$, set $U=T\\times_Y Z$ and let $c:U\\to Z$ be the projection. The etale-cover base-change theorem makes $U\\to T$ representable etale and surjective. Apply the lifting construction of step 3 to $T\\hookrightarrow T'$ to get representable etale $v:U'\\to T'$ with reduction $U$; it is surjective by step 1. The immersion $U\\hookrightarrow U'$ is first order. Universality of $Z^+$ therefore supplies the unique $X$-map $e:U'\\to Z^+$ extending $c$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-integral-radicial-etale-invariance",
+    "sbc-lem-thickening-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0605 (lemma-etale-morphism-of-universal-thickenings), proof (2), construction of the lifted test cover using Tag 05ZH."
+   }
+  },
+  {
+   "text": "First prove uniqueness of an extension to $Y^+$ for every test in (2), without assuming existence. If $b_1,b_2:T'\\to Y^+$ are $X$-maps extending $a$, etale lifting for $q$ gives $e_i:U'\\to Z^+$ over $b_i v$ with reduction $c$. The reduction compatibility follows from the cartesian given square. Step 2 allows this lifting for the space test $U\\hookrightarrow U'$. Universality of $Z^+$ makes $e_1=e_2$, since these are $X$-maps extending the very same $c$. Therefore $b_1v=qe_1=qe_2=b_2v$. The surjective etale cover $v$ and the sheaf property imply $b_1=b_2$. This proves uniqueness on every test, in particular on the overlap tests needed next.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0605 (lemma-etale-morphism-of-universal-thickenings), proof (2): corrected uniqueness argument; representable lifting proved in step 2 using more-morphisms.tex Tag 04FF."
+   }
+  },
+  {
+   "text": "Put $d=qe:U'\\to Y^+$ using step 6. On $R'=U'\\times_{T'}U'$ the two maps $d\\operatorname{pr}_1,d\\operatorname{pr}_2$ reduce to the same $Y$-map on $R=U\\times_TU$: both equal $a$ composed with $R\\to T$. The immersion $R\\hookrightarrow R'$ is the base change of $T\\hookrightarrow T'$, hence first order. Apply the uniqueness just proved in step 7 to this test and its common reduction to $Y$. This gives equality of the two maps to $Y^+$, although the two maps from $R$ to $Z$ may differ. The fppf-sheaf equalizer now descends $d$ along $v$ to $b:T'\\to Y^+$. Concretely this is sheaf descent after every scheme test of $T'$, compatible by uniqueness. Its restriction is $a$ and it is over $X$, since both identities hold after the cover $U\\to T$ or $U'\\to T'$. Step 7 gives its uniqueness. This proves (2).",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0605 (lemma-etale-morphism-of-universal-thickenings), proof (2), corrected overlap comparison and sheaf descent; Tag 09ZX for the overlap thickening."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-sfb-space-thickening-base-change",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-integral-radicial-etale-invariance",
+  "sbc-lem-thickening-etale-site",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0605 (lemma-etale-morphism-of-universal-thickenings), (1)-(2), and Tag 0603 (lemma-check-universal-first-order-thickening); the invalid overlap sentence in proof (2) is repaired by steps 7-8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale maps lift universal first order thickenings and universality descends along surjective etale morphisms",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, StandardEtalePair.HasMap.map, Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale, StandardEtalePair.lift_X",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"thickening\"",
+   "results": "12 hits: Disjoint.exists_uniform_thickening_of_basis, Disjoint.exists_uniform_thickening, Metric.cthickening, Metric.thickening, Metric.self_subset_cthickening, Metric.isClosed_cthickening, Metric.isOpen_thickening, Metric.cthickening_empty",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*thicken|thicken.*universal",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A universal square zero thickening pulls back along etale maps and descends along an etale cover",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, CategoryTheory.Precoverage.ZeroHypercover.isPullback_of_forall_isPullback, RingHom.Etale.propertyIsLocal, CategoryTheory.Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.Scheme.Cover.pullbackCover, CategoryTheory.Precoverage.ZeroHypercover.pullback₁",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal infinitesimal extensions are functorial and cartesian for an etale morphism of algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.Etale.formallyEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern rings, schemes, or metric thickenings; none states the algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale transport and surjective etale descent of universal square zero thickenings of algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern scheme etale permanence, scheme categories or ring formal etaleness, not the universal lifting property for thickenings of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "universal.*thicken|thicken.*universal",
+   "results": "0 hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern scheme etale permanence, scheme categories or ring formal etaleness, not the universal lifting property for thickenings of algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal first order thickening is preserved and reflected by a surjective etale map of algebraic spaces",
+   "results": "8 hits: Algebra.IsStandardEtale.of_surjective, Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern scheme etale permanence, scheme categories or ring formal etaleness, not the universal lifting property for thickenings of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"thickening\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern scheme etale permanence, scheme categories or ring formal etaleness, not the universal lifting property for thickenings of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal infinitesimal square zero extensions of algebraic spaces are invariant under etale localization",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.FormallyEtale.localization_map, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.formallyEtale, Algebra.etaleLocus_eq_univ_iff, Algebra.FormallyEtale.localization_base, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-24",
+   "verdict": "no match: these results concern scheme etale permanence, scheme categories or ring formal etaleness, not the universal lifting property for thickenings of algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-universal-conormal",
+  "date": "2026-10-24",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06D9 (lemma-lci-formally-smooth), using the unramified lci deformation of Tag 06D8 (lemma-lci-unobstructed). Supporting input in the conormal construction of criteria.tex lemma-lci-unobstructed: existence of the universal first-order thickening and interpretation of its ideal. Supporting input: Tag 0605, lemma-etale-morphism-of-universal-thickenings, (1)-(2); Tag 0601, section-universal-thickening, for the universal property..",
+   "via": [
+    "lem-sfb-space-universal-conormal",
+    "lem-sfb-relative-finite-hilbert-lci-lift",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-universal-thickening-etale-transfer",
+  "worker": "stage1",
+  "summary": "Q10 checked the unchanged statement against Stacks 0601/0605, reused existing invariance, infinitesimal lifting, thickening, ideal and space-sheaf nodes, and gave the complete transfer/descent argument. The source incorrectly equates the two maps from the reduced overlap to Z; steps 7-8 first prove uniqueness of extensions to Y+ and then compare the composites. No new nodes are required. The first dry run exposed return paths through the general thickening-of-a-scheme and space chart-locality nodes. Those citations were replaced by the independent scheme thickening-site theorem and representable pullback to the closed scheme flat-unramified lifting theorem; no new nodes or statement changes.",
+  "blueprint": "The inherited from.place identifies the supporting 0605 input to universal-conormal construction for the alteration/algebraicity route below det-thm-sf-ctf-stability-direct-images (3). The latest blueprint proof was read. blueprint_refs.py ancestor prints None, matching the inherited null ancestor. No chapter/unit route is replaced; all eight steps supply this supporting input. Whole-blueprint searches for thickening and 0605 found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "Generic scheme theorem verifies integrality, universal injectivity and surjectivity on scheme tests before applying the same-unit etale-invariance theorem."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Foundational algebraic-space fibre products and stability of etale covers are used in the test-cover descent, not any trace-formula argument."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic etale permanence and its scheme-source criterion check representability and etaleness of the lifted cover; no unit step is replaced."
+   },
+   {
+    "node": "sbc-lem-thickening-etale-site",
+    "why": "Generic scheme topological-invariance theorem supplies an etale scheme lift after a scheme test. Algebraic-space EtSp full faithfulness then proves representability of its lift without invoking the cyclic general thickening-of-a-scheme theorem."
+   },
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "The closed scheme infinitesimal-lifting theorem applies to the scheme pullback of each representable etale map; step 2 extends it to space tests by written-out sheaf gluing."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "sbc-lem-thickening-etale-site",
+  "lem-weil-pbc-flat-unramified-formally-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-fc579b096",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-fc579b096 (reviewer sub-agent of L); spot-checked: First split of an unsplit item: no repair note, and live and side-live are unsplit. Statement and stmt_deps are identical to live. There are 8 steps and no new nodes, proof_deps equals the union of the step uses, and the closure has no cycle. I confirmed that the removed lem-sfb-thickening-of-scheme-space and lem-sfb-etale-space-infinitesimal-lifting do reach the item. I read Stacks spaces-more-morphisms 0601/0603/0605 with its proof, the definition of morphisms of thickenings, and etale-cohomology 03SI. Source error confirmed: in the proof of 0605(2), c∘pr1 and c∘pr2 on W×_TW are the projections of Z×_YZ, which differ for the fold map Spec k⊔Spec k→Spec k. The repair is correct: step 7 proves uniqueness into Y+ by lifting b_i∘v along representable étale q with the same reduction c, so universality of Z+ gives e1=e2 and v is an epimorphism; step 8 compares d∘pr_i in Y+ on R⊂R' and descends. Steps 1-6 check out. The ideal-image formula keeps square zero; surjective closed immersion gives integral, universally injective and surjective, which are the hypotheses of the 05ZH node. Scheme lifting via def-weil-etale (flat and unramified) and 04FF, with the 0603 gluing written out. Step 3 proves Z+ representable via the 03SI étale scheme lift V plus EtSp full faithfulness for H0⊂H. In step 4 I checked the compatibility q(Z→Z+)a = b|T. In (2), 'cartesian' follows from p étale (an étale, bijective closed immersion is an isomorphism), so nothing is weakened. Advisory: step 1 does not write out why a first-order immersion is a homeomorphism on points; only surjectivity is used and that is elementary. 'Representable étale' is the DAG convention, and it fits the only citer, lem-sfb-space-universal-conormal steps 3-5. Batch-5: the item's proof closure contains 88 sec-trace-formula nodes, all algebraic-space foundations (definitions, fppf descent, fibre products, étale permanence), and no trace-formula or Poincaré-duality steps. The flagged ideal-correspondence (03MB), thickening-base-change (09ZX), integral-radicial invariance (05ZH) and chartwise permanence (03FR-03FV) are generic, so accepted. The 5 declared tool_uses are accepted. No SGA citation; no duplicate node."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceUniversalThickeningEtaleTransfer",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.universalSpaceFirstOrderThickening_etale_lift",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsUniversalSpaceFirstOrderThickening",
+   "AlgebraicGeometry.AlgebraicSpace.universalSpaceFirstOrderThickening_etale_lift",
+   "AlgebraicGeometry.AlgebraicSpace.universalSpaceFirstOrderThickening_etale_canonical",
+   "AlgebraicGeometry.AlgebraicSpace.universalSpaceFirstOrderThickening_etale_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceUniversalThickeningEtaleTransfer.lean",
+  "statement": "theorem universalSpaceFirstOrderThickening_etale_lift {S : Scheme.{u}} {Z Y X Y' : AlgebraicSpace S} (p : Z ⟶ Y) (f : Y ⟶ X) (j : Y ⟶ Y') (f' : Y' ⟶ X) (hp : IsEtale p.hom.hom) (hY : IsUniversalSpaceFirstOrderThickening f j f') : ∃ (Z' : AlgebraicSpace S) (i : Z ⟶ Z') (q : Z' ⟶ Y'), IsEtale q.hom.hom ∧ IsPullback p i j q ∧ IsUniversalSpaceFirstOrderThickening (p ≫ f) i (q ≫ f') ∧ ∀ (Z'' : AlgebraicSpace S) (i' : Z ⟶ Z'') (q' : Z'' ⟶ Y'), IsEtale q'.hom.hom → IsPullback p i' j q' → ∃! e : Z' ≅ Z'', i ≫ e.hom = i' ∧ e.hom ≫ q' = q",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Three theorem declarations jointly render parts (1), its consequence, and (2). The helper predicate renders exactly the universal property introduced in this node, using the existing IsSpaceFirstOrderThickening from the added landed definition dependency. No source statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-441c8853d",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Clauses match Stacks 0601/0605 and the node: the IsUniversalSpaceFirstOrderThickening helper (all space tests, ∃! X-map, real Prop), (1) étale cartesian lift with ∃! iso over Y' fixing Z, universality over X, canonical-map consequence (∃! plus étale and cartesian), (2) with surjective p, étale q, first-order j, maps over X, cartesian square ⇒ Y' universal. No extra hypotheses or universe restriction. Reuses landed IsSpaceFirstOrderThickening through the added landed stmt_dep def-sfb-space-square-zero-extension-data, which is allowed, unchanged and adds no cycle. No space-level duplicate in side-live. lean.statement verbatim, declarations complete, docstrings carry source, blueprint and steps 1-8 with the overlap repair. Plain imports are the proof_dep modules, all present. Sorry only. Not recompiled (no change). Advisory: second reading by the same worker."
+ }
+}

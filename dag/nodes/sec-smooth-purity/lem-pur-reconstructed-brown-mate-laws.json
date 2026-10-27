@@ -1,0 +1,112 @@
+{
+ "id": "lem-pur-reconstructed-brown-mate-laws",
+ "kind": "statement",
+ "title": "Brown refinement mates are invertible and compose",
+ "statement": "Fix a prime $\\ell$, a normed finite extension $E/\\mathbf Q_\\ell$, a field $k$ whose characteristic is prime and different from $\\ell$, separated finite-type $k$-schemes $X,Y$, a $k$-morphism $f:X\\to Y$, and a specified normalized compact-support comparison family $C$ [lem-pur-compact-support-condensed-realization]. Use the actual functors, maps, supplied pairs, and normalized Brown data of [def-pur-reconstructed-refinement-data]. For a refinement $w:c\\to d$, normalized Brown packages $D_1,D_2$, an integral object $L$ on $Y$, and supplied systems $A_1,A_2$ over $L$, the actual Brown mate $\\rho_{12}:D_2.\\operatorname{output}(L)\\to D_1.\\operatorname{output}(L)$ is invertible. It is defined by the inverse of the first transported Hom bijection applied to the forward system comparison followed by the second counit. For composable refinements $r:c\\to d$, $s:d\\to e$ and three such packages and supplied systems, $\\rho_{13}(s\\circ r)=\\rho_{12}(r)\\circ\\rho_{23}(s)$. These are equations of actual system maps, with no reconstructed or scalar trace conclusion.",
+ "stmt_deps": [
+  "def-pur-reconstructed-refinement-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "blueprint sk-prop-sp-unique-adjoint categorical proof, Transposes and\nUniqueness; parent proof Steps 4 and 6."
+ },
+ "proof": [
+  {
+   "text": "the Brown Hom formula sends each defined mate to its prescribed system\ncomparison followed by the second counit. Define the reverse arrow by transposing\nthe inverse system comparison followed by the first counit under the second Hom\nbijection. Both outputs lie in the common intrinsic origin domain. Naturality of\nthe system comparison and the two counit equations show that each composite has\nthe same transpose as the identity. Injectivity of the Brown Hom bijections proves\nthey are inverse. For three compactifications transpose the composite of mates;\nuse both counit equations, naturality, and composition of the intrinsic refinement\nmaps conjugated by beta. The resulting transpose is that of the direct mate, so\ninjectivity proves composition. These are equations of system maps.",
+   "uses": [
+    "lem-pur-brown-tower-finite-site-comparison",
+    "lem-pur-compact-support-condensed-realization",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-brown-tower-finite-site-comparison",
+  "lem-pur-compact-support-condensed-realization",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.proof.md",
+  "place": "blueprint sk-prop-sp-unique-adjoint categorical proof, Transposes and\nUniqueness; parent proof Steps 4 and 6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact conservative derived evaluations detect equality of maps between systems concentrated in a single degree",
+   "results": "CochainComplex.fromSingle₀Equiv and chain-map extensionality; no project geometric comparison.",
+   "date": "2026-10-26",
+   "verdict": "Generic tools only; the project-specific normalization calculation is not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a counit preserving comparison of right adjoints along an isomorphism of left adjoints",
+   "results": "Adjunction.rightAdjointUniq and its counit formulas; the Brown domain here is restricted, with explicitly transported system maps.",
+   "date": "2026-10-26",
+   "verdict": "Use the counit uniqueness argument; no exact project statement."
+  },
+  {
+   "tool": "grep",
+   "query": "systemRefinement_(id|comp)|hom_formula|single_degree_square|condensedProjection_refinement",
+   "results": "Remote Mathlib grep: OK 0 hits. Local rg on the project found systemRefinement_id and systemRefinement_comp, Brown hom_formula, same-compactification single_degree_square, and condensedProjection_refinement; their signatures were read.",
+   "date": "2026-10-26",
+   "verdict": "These supply substeps of the recorded proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ReconstructedPairRefinementCoherence",
+  "date": "2026-10-26",
+  "group": "A5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "blueprint sk-prop-sp-unique-adjoint categorical proof, Transposes and\nUniqueness; parent proof Steps 4 and 6.",
+   "via": [
+    "lem-pur-reconstructed-pair-refinement-coherence",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReconstructedBrownMateLaws",
+  "file": "lean/Sheaf/Paper/ReconstructedBrownMateLaws.lean",
+  "declaration": "WeilConjectures.ReconstructedPairRefinement.reconstructedBrownMateLaws",
+  "statement": "theorem reconstructedBrownMateLaws :\n    (∀ (c d : Compactification f)\n    (D₁ : At l E k C X Y f c) (D₂ : At l E k C X Y f d) (w : c.Refinement d)\n    (L : CondensedERealization.Integral l E Y.scheme)\n    (A₁ : D₁.Supplied L) (A₂ : D₂.Supplied L), IsIso (mate D₁ D₂ w L A₁ A₂)) ∧\n    (∀ (c d e : Compactification f)\n    (D₁ : At l E k C X Y f c) (D₂ : At l E k C X Y f d) (D₃ : At l E k C X Y f e)\n    (r : c.Refinement d) (s : d.Refinement e)\n    (L : CondensedERealization.Integral l E Y.scheme)\n    (A₁ : D₁.Supplied L) (A₂ : D₂.Supplied L) (A₃ : D₃.Supplied L),\n    mate D₁ D₃ (r.comp s) L A₁ A₃ = mate D₂ D₃ s L A₂ A₃ ≫ mate D₁ D₂ r L A₁ A₂)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-039cd",
+  "group": "A5",
+  "result": "fix",
+  "landing": "20261025T204354-L-2947874",
+  "kind": "interface",
+  "note": "independent cc review: delivered ReconstructedPairRefinementData.lean vs clone item module (verbatim prefix); 5 sorried lemmas vs old Coherence fields (4 verbatim, TraceTransport generalized, true via scalar_refinement/RefinementCoherence.realization/condensedProjection_refinement); item node vs proof"
+ }
+}

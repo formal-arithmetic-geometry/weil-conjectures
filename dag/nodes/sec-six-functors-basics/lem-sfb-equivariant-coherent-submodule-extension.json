@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-equivariant-coherent-submodule-extension",
+ "kind": "statement",
+ "title": "Extension of a coherent equivariant submodule across an invariant open",
+ "statement": "Let $F$ be a field [def-weil-field], let $G$ be an affine group scheme of finite type over $F$ [def-sc-group-scheme, def-weil-finite-type-morphism], and let $Y$ be a separated finite-type $F$-scheme [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism] with action $a:G\\times_FY\\to Y$. A $G$-linearized quasi-coherent module means a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent] $M$ with an isomorphism $a^*M\\simeq\\operatorname{pr}_2^*M$ [def-pc-module-pullback] satisfying the identity and cocycle conditions; morphisms commute with these isomorphisms. A coherent linearized module is one whose underlying module is coherent. Let $j:U\\hookrightarrow Y$ be an invariant open subscheme [def-weil-open-immersion], meaning $a^{-1}(U)=G\\times_FU$ as open subschemes of $G\\times_FY$. For every $G$-linearized quasi-coherent module $M$ on $Y$ and every coherent $G$-linearized submodule $N\\subseteq j^*M$, there is a coherent $G$-linearized submodule $L\\subseteq M$ whose restriction $j^*L\\subseteq j^*M$ equals $N$ as a submodule with its given linearization. No coherence assumption is imposed on $M$ and no smoothness or reductivity assumption on $G$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Agent-formulated consequence of Tag 07TU (lemma-colimit-coherent) and Tag 09VH (lemma-pushforward), with Tag 077S (lemma-abelian). Coherence of images uses coherent.tex Tag 01Y1 (lemma-coherent-Noetherian-quasi-coherent-sub-quotient). These tags supply ingredients, not this exact extension statement."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-weil-open-immersion",
+  "def-a1-scheme-groupoid-laws",
+  "def-sfb-scheme-groupoid-module",
+  "def-sfb-equivariant-coherent-gzero"
+ ],
+ "proof": [
+  {
+   "text": "First verify the geometric hypotheses of the groupoid results. The scheme $\\operatorname{Spec}F$ is Noetherian: a field has only the ideals $0,F$, and its spectrum is one point. Hence $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Put $R=G\\times_FY$ and $p=\\operatorname{pr}_2$. By [lem-sfb-finite-type-composition-base-change], $p$ and $R\\to\\operatorname{Spec}F$ are of finite type, so the same Noetherian theorem makes $R$ Noetherian. The map $G\\to\\operatorname{Spec}F$ is flat by [lem-pc-flat-field]; its base change $p$ is flat by [lem-weil-pbc-flat-morphism-base-change]. It is affine, quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence], since $G$ is affine. The scheme isomorphism $\\tau(g,y)=(g,gy)$ has inverse $(g,z)\\mapsto(g,g^{-1}z)$ and satisfies $a=p\\circ\\tau$. Consequently $a$ has the same flatness, quasi-compactness and quasi-separatedness properties as $p$. These are identities of scheme morphisms furnished by the group action, and hold for nonreduced $G$ as well.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-pc-flat-field",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 07TU (lemma-colimit-coherent), hypotheses; supporting morphisms.tex Tags 01T3, 01T4, 01T6, 01U9, 01SD and 01S7"
+   }
+  },
+  {
+   "text": "Use the action groupoid with objects $Y$, arrows $R$, source $s=p$, target $t=a$, identity $e(y)=(1,y)$, inversion $(g,y)\\mapsto(g^{-1},gy)$, and composition $((g,hy),(h,y))\\mapsto(gh,y)$. The group and action identities verify exactly the laws of [def-a1-scheme-groupoid-laws]: sources and targets, units, inverses and associativity. With this convention the groupoid isomorphism $t^*M\\to s^*M$ is precisely the given linearization $a^*M\\to p^*M$; its two identities and the definition of equivariant morphisms agree with [def-sfb-scheme-groupoid-module]. Make the same identification on the invariant open $U$. Thus the groupoid results below apply to the given linearized modules, with no change of coefficient category.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-a1-scheme-groupoid-laws",
+    "def-sfb-scheme-groupoid-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LI (definition-groupoid-module), specialized to the action groupoid"
+   }
+  },
+  {
+   "text": "The inclusion $j$ is quasi-compact by [lem-sfb-noetherian-open-immersion-qc]. It is quasi-separated because its diagonal is the identity after the canonical identification $U\\times_YU=U$. Since $Y$ is quasi-compact, [lem-weil-pbc-qcqs-morphism-permanence](2) makes $U$ quasi-compact; choose a finite affine open cover $(V_b)$ of $U$. Invariance gives both Cartesian squares for the groupoid map $(U,G\\times_FU)\\to(Y,G\\times_FY)$: the source square is the product square, and the target square is the equality $a^{-1}(U)=G\\times_FU$ in the hypothesis. The restricted groupoid on $U$ also has flat source and target, as needed for its abelian structure in step 4: its source $\\operatorname{pr}_2:G\\times_FU\\to U$ is the base change of the flat map $G\\to\\operatorname{Spec}F$ [lem-pc-flat-field], and its target $a|_{G\\times_FU}$ is the base change of the flat map $a$ along $j$ by the target Cartesian square, so both are flat by [lem-weil-pbc-flat-morphism-base-change]. Apply [lem-sfb-cartesian-groupoid-pushforward-adjunction]. Ordinary $j_*$ therefore carries quasi-coherent linearized modules on $U$ to such modules on $Y$, and ordinary adjunction transposes of equivariant maps are equivariant. The underlying restriction $j^*j_*T\\to T$ is the identity on every open contained in $U$, so its adjunction counit is an equivariant isomorphism.",
+   "uses": [
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-flat-field",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-sfb-cartesian-groupoid-pushforward-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 09VH (lemma-pushforward); properties.tex Tag 01OX and schemes.tex quasi-compact composition"
+   }
+  },
+  {
+   "text": "In the equivariant quasi-coherent category on $U$, form $Q=(j^*M)/N$. It is quasi-coherent and has its quotient linearization by [lem-sfb-groupoid-module-limits-colimits]. Transpose the quotient map $j^*M\\to Q$ under the adjunction of step 3 to obtain an equivariant map $v:M\\to j_*Q$. Define $P=\\ker(v)$, with its inclusion into $M$. The same structural theorem computes this kernel on underlying modules and equips it with its induced linearization. Restricting this kernel to $U$ is sectionwise restriction of a kernel. Under the counit $j^*j_*Q=Q$, the restriction of $v$ is exactly the quotient map by the adjunction identity. Hence $j^*P=N$ as submodules of $j^*M$. This identification is equivariant: both are the kernel of the same equivariant quotient map, with its induced kernel structure. We have not asserted coherence of $P$.",
+   "uses": [
+    "lem-sfb-groupoid-module-limits-colimits",
+    "lem-sfb-cartesian-groupoid-pushforward-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 077S (lemma-abelian) and 09VH (lemma-pushforward); kernel construction of the equivariant preimage"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-noetherian-groupoid-coherent-approximation] to $P$ on the action groupoid: all its geometric hypotheses were verified in step 1. Obtain a small nonempty filtered diagram of coherent linearized modules $P_i$ with equivariant cocone $u_i:P_i\\to P$. By [lem-sfb-groupoid-module-limits-colimits] this is a colimit of underlying module sheaves. By [lem-weil-pbc-quasi-coherent-module-colimit-evaluation], on each affine $V_b\\subseteq U\\subseteq Y$ the cocone $P_i(V_b)\\to P(V_b)=N(V_b)$ is a colimit of $\\mathcal O_Y(V_b)$-modules. The $P_i$ need not be submodules of $P$.",
+   "uses": [
+    "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+    "lem-sfb-groupoid-module-limits-colimits",
+    "lem-weil-pbc-quasi-coherent-module-colimit-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 07TU (lemma-colimit-coherent) and 077R (lemma-colimits), followed by affine evaluation"
+   }
+  },
+  {
+   "text": "For each affine $V_b$ of the finite cover, apply [lem-weil-pbc-module-finite-type-affine-generators] with ambient scheme $U$, $H=N$ and $K=V=V_b$. It is compact by [lem-weil-pbc-affine-scheme-qcqs], and $N$ is coherent, hence of finite type. Obtain finitely many sections $n_{b,r}\\in N(V_b)$ whose associated map from a finite free module sheaf surjects onto $N|_{V_b}$. By [lem-weil-pbc-filtered-colimit-modules-elementwise](1), each $n_{b,r}$ lifts to a section of some $P_i(V_b)$. There are finitely many such sections over all $b,r$. Filteredness supplies a single object $i_0$ receiving arrows from their finitely many objects; transport each chosen lift along its arrow. The cocone identities say its image remains $n_{b,r}$. Thus $u_{i_0}|_{V_b}:P_{i_0}|_{V_b}\\to N|_{V_b}$ is surjective as a sheaf map: its image contains the specified generators. This holds on every member of the cover, so $j^*u_{i_0}:j^*P_{i_0}\\to N$ is surjective. If the list of generators is empty, use any object of the nonempty index category; if $U$ is empty, the same argument has an empty cover.",
+   "uses": [
+    "lem-weil-pbc-module-finite-type-affine-generators",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 07TU applied with the finite-generator argument of properties.tex Tags 01PB (lemma-finite-type-module), 01PF (lemma-extend); algebra.tex Tag 00D6"
+   }
+  },
+  {
+   "text": "Let $L$ be the image of the equivariant composite $P_{i_0}\\to P\\hookrightarrow M$. By [lem-sfb-groupoid-module-limits-colimits], kernels and cokernels are computed on the underlying modules, so this image is a quasi-coherent linearized submodule of $M$ and is the quotient $P_{i_0}/\\ker(P_{i_0}\\to M)$. Its kernel is quasi-coherent. Since $Y$ is locally Noetherian and $P_{i_0}$ is coherent, [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2) makes this quotient coherent. Notice that the quotient theorem is applied to the coherent source $P_{i_0}$, not to the possibly noncoherent target $M$.",
+   "uses": [
+    "lem-sfb-groupoid-module-limits-colimits",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077S (lemma-abelian), image as kernel/cokernel; coherent.tex Tag 01Y1 (lemma-coherent-Noetherian-quasi-coherent-sub-quotient)"
+   }
+  },
+  {
+   "text": "Restriction to an open computes kernels and sheaf cokernels locally, hence computes images. The image of $j^*P_{i_0}\\to j^*M$ is therefore $j^*L$. The map factors through $j^*P=N$ from step 4 and surjects onto $N$ by step 6, so this image is exactly the prescribed submodule $N$. All these maps are equivariant. The induced map $j^*L\\to N$ is an isomorphism of underlying modules and therefore an equivariant isomorphism by the reflection assertion of [lem-sfb-groupoid-module-limits-colimits]. It commutes with the inclusions into $j^*M$, so the equality is of the specified submodules with their given linearizations. This is the required coherent linearized $L\\subseteq M$.",
+   "uses": [
+    "lem-sfb-groupoid-module-limits-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 077S (lemma-abelian), local computation of kernels and cokernels on the invariant open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-scheme-groupoid-laws",
+  "def-sc-group-scheme",
+  "def-sfb-scheme-groupoid-module",
+  "lem-pc-flat-field",
+  "lem-sfb-cartesian-groupoid-pushforward-adjunction",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-flat-noetherian-groupoid-coherent-approximation",
+  "lem-sfb-groupoid-module-limits-colimits",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-module-finite-type-affine-generators",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-coherent-module-colimit-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Agent assembly of Tags 09VH, 077S, 077R and 07TU; finite-stage capture uses properties.tex 01PB/01PF and algebra.tex 00D6; image coherence is coherent.tex 01Y1. The exact extension theorem is not stated in these sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(equivariant|lineariz).*(coherent|submodule|extend)|(coherent|submodule).*(equivariant|lineariz)",
+   "results": "{\"t\": \"2026-10-23T23:27:25Z\", \"tool\": \"grep\", \"query\": \"(equivariant|lineariz).*(coherent|submodule|extend)|(coherent|submodule).*(equivariant|lineariz)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary localizations, abstract group representations or local presentations, not extension of rationally linearized coherent sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivariant coherent submodule on an invariant open extends to the whole noetherian scheme inside a quasi-coherent module",
+   "results": "{\"t\": \"2026-10-23T23:27:26Z\", \"tool\": \"leansearch\", \"query\": \"An equivariant coherent submodule on an invariant open extends to the whole noetherian scheme inside a quasi-coherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.invtSubmodule.coe_top\", \"AlgebraicGeometry.affineOpensRestrict\", \"ClosedSubmodule.ext\", \"Submodule.IsFullyInvariant\", \"HomogeneousSubmodule.ext\", \"Submodule.ext\", \"HomogeneousSubmodule.ext_iff\", \"ClosedSubmodule.ext_iff\"], \"digest\": \"ff0dfd92e9c05f7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary localizations, abstract group representations or local presentations, not extension of rationally linearized coherent sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coherent\", \"submodule\"",
+   "results": "{\"t\": \"2026-10-23T23:27:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Coherent\\\", \\\"submodule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary localizations, abstract group representations or local presentations, not extension of rationally linearized coherent sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let an affine algebraic group act on a noetherian scheme, and U be an invariant open. Extend a coherent equivariant submodule on U to a coherent equivariant submodule of a quasi-coherent module on the scheme",
+   "results": "{\"t\": \"2026-10-23T23:27:27Z\", \"tool\": \"leanfinder\", \"query\": \"Let an affine algebraic group act on a noetherian scheme, and U be an invariant open. Extend a coherent equivariant submodule on U to a coherent equivariant submodule of a quasi-coherent module on the scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"ModuleCat.Tilde.sectionsSubmodule\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"Representation.subrepresentation_apply\", \"Rep.subrepresentation\"], \"digest\": \"dafa21320c56a453\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary localizations, abstract group representations or local presentations, not extension of rationally linearized coherent sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type subobjects of restrictions of rational equivariant quasi-coherent sheaves lift to finite type equivariant subobjects before restriction",
+   "results": "{\"t\": \"2026-10-23T23:27:28Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type subobjects of restrictions of rational equivariant quasi-coherent sheaves lift to finite type equivariant subobjects before restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\"], \"digest\": \"76d19b3c6c66b63a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern ordinary localizations, abstract group representations or local presentations, not extension of rationally linearized coherent sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a coherent equivariant subsheaf on an invariant open of a noetherian scheme to a coherent equivariant subsheaf inside a quasi-coherent sheaf",
+   "results": "{\"t\": \"2026-10-23T23:52:36Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a coherent equivariant subsheaf on an invariant open of a noetherian scheme to a coherent equivariant subsheaf inside a quasi-coherent sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.QuasicoherentData.coversTop\"], \"digest\": \"2c54b1b9a7fbf87c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary quasi-coherent presentation, restriction, or abstract group representations; none gives this rational group-scheme equivariant extension inside a specified ambient module"
+  },
+  {
+   "tool": "grep",
+   "query": "(equivariant|lineariz).*(coherent|subsheaf)|(coherent|subsheaf).*(equivariant|lineariz)",
+   "results": "{\"t\": \"2026-10-23T23:53:06Z\", \"tool\": \"grep\", \"query\": \"(equivariant|lineariz).*(coherent|subsheaf)|(coherent|subsheaf).*(equivariant|lineariz)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary quasi-coherent presentation, restriction, or abstract group representations; none gives this rational group-scheme equivariant extension inside a specified ambient module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent equivariant subsheaf on an invariant open extends inside a quasi coherent sheaf on a noetherian scheme",
+   "results": "{\"t\": \"2026-10-23T23:53:06Z\", \"tool\": \"leansearch\", \"query\": \"A coherent equivariant subsheaf on an invariant open extends inside a quasi coherent sheaf on a noetherian scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"SheafOfModules.QuasicoherentData.mk.injEq\", \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"AlgebraicGeometry.instIsAffineHomιBasicOpen\", \"AlgebraicGeometry.coe_opensRestrict_apply_coe\", \"SheafOfModules.QuasicoherentData.noConfusion\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp\"], \"digest\": \"2ed7d48758a26e21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary quasi-coherent presentation, restriction, or abstract group representations; none gives this rational group-scheme equivariant extension inside a specified ambient module"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"submodule\"",
+   "results": "{\"t\": \"2026-10-23T23:53:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Quasicoherent\\\", \\\"submodule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary quasi-coherent presentation, restriction, or abstract group representations; none gives this rational group-scheme equivariant extension inside a specified ambient module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type subobjects after restriction to an invariant open lift to finite type equivariant subobjects of a rational quasi coherent representation",
+   "results": "{\"t\": \"2026-10-23T23:53:47Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type subobjects after restriction to an invariant open lift to finite type equivariant subobjects of a rational quasi coherent representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.instConcreteCategoryHomSubtypeFGModuleCatLinearMapIdCarrierObjModuleCatIsFGV\", \"FDRep.instHasFiniteLimits\", \"FDRep.instLargeCategory\", \"FDRep.instHasKernels\", \"Rep.invariantsFunctor\", \"Condensed.finFree\", \"Rep.quotientToInvariantsFunctor_map_hom\", \"Rep.instIsRightAdjointModuleCatInvariantsFunctor\"], \"digest\": \"b201fb69505b27ed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits give ordinary quasi-coherent presentation, restriction, or abstract group representations; none gives this rational group-scheme equivariant extension inside a specified ambient module"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-coherent-localization-sequence",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration proof's localization/devissage step: pass from the fixed closed subscheme to its open complement. Supporting extension step: extend a coherent equivariant submodule from an invariant open inside a specified quasi-coherent ambient module, using Stacks 07TU and 09VH.",
+   "via": [
+    "lem-sfb-equivariant-coherent-localization-sequence",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-equivariant-coherent-submodule-extension",
+  "worker": "Q32",
+  "summary": "Checked the action groupoid hypotheses without smoothness or reductivity; assembled the equivariant preimage kernel, coherent approximation, finite affine generator capture, and coherent image. All inputs already exist in the DAG, so no new nodes were created. The statement is unchanged.",
+  "blueprint": "Supports the original alteration/moduli/concentration chain recorded in blueprint.from.place, specifically the coherent submodule extension used by equivariant coherent localization; latest sk-thm-sf-ctf-stability-direct-images.proof.md (3). The created.item ancestry stops at Sheaf.SixFunctors.CtfStabilityDirectImages, a module rather than a DAG node, so blueprint_refs.py ancestor returns None; existing from.node=null and the detailed inherited place/via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic Coherent modules on a locally Noetherian scheme: kernels, cokernels, sums, quasi-coherent sub- and quotient modules used as a foundational input in this extension proof; the constructibility unit has no separate replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-module-finite-type-affine-generators",
+    "why": "Generic Finite affine sections generating on a compact open used as a foundational input in this extension proof; the constructibility unit has no separate replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-colimit-evaluation",
+    "why": "Generic Affine evaluation of a quasi-coherent module colimit used as a foundational input in this extension proof; the constructibility unit has no separate replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-module-finite-type-affine-generators",
+  "lem-weil-pbc-quasi-coherent-module-colimit-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-f6728d695",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-f6728d695 (reviewer sub-agent of L); spot-checked: I read the item and all 17 cited node statements in full; the delivery has no new nodes and the statement is unchanged. The item is unsplit in live, so no other group has split it, and there is no re-split note. I checked the Stacks sources: groupoids 09VH (l.2696), 077R/077S (l.2755/2775), 07TU (l.3009) and coherent 01Y1 (l.2329). The proof is correctly marked as an agent assembly, and nothing cites SGA. Steps: step 1 gets flat, qc and qs for s=pr_2 and t=a=p∘τ, and Noetherianity of Y and R; step 2 checks the action groupoid and that the direction t^*M→s^*M is a^*M→pr_2^*M; step 3 checks j qcqs, invariance as the Cartesian t-square, and the 09VH adjunction and counit; step 4 shows j^*P=N for P=ker(M→j_*((j^*M)/N)); step 5 applies 07TU and 01ID on affine V_b; step 6 captures finitely many generators at a single stage via 01PF, 00D6(1) and filteredness; step 7 gets coherence of L from 01Y1(2) applied to the coherent P_{i0}, never to M; step 8 gets j^*L=N with its linearization by reflection of isomorphisms. I tested G_m acting on A^1 with M=F[x,x^{-1}] (L=x^{-n}F[x]), U empty, U=Y, and nonreduced G; all pass. One gap fixed: step 4 applies lem-sfb-groupoid-module-limits-colimits to the restricted groupoid on U, whose flat source and target were never checked. Step 3 now adds a sentence: pr_2 on G×U is flat by flat-field plus base change, and a|_{G×U} is the base change of a along j by the Cartesian t-square, hence flat. Step 3 uses gain lem-pc-flat-field and lem-weil-pbc-flat-morphism-base-change, both already proof_deps. The three generic pbc tool_uses are accepted as foundational. The citer lem-sfb-equivariant-coherent-localization-sequence uses the statement as stated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantCoherentSubmoduleExtension",
+  "declaration": "AlgebraicGeometry.EquivariantCoherent.exists_equivariant_coherent_submodule_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantCoherentSubmoduleExtension.lean",
+  "statement": "theorem exists_equivariant_coherent_submodule_extension {F : Type u} [Field F] (G Y U : Over (Spec (.of F))) [GrpObj G] [ModObj G Y] [ModObj G U] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (j : U ⟶ Y) [IsModHom G j] [IsOpenImmersion j.left] (DY : ActionGroupoidModel G Y) (DU : ActionGroupoidModel G U) (M : Scheme.GroupoidModule (source G Y) (target G Y) (identityArrow G Y) (inverseArrow G Y) DY.comp DY.laws) (N : Coherent DU) (n : underlying N ⟶ (Scheme.Modules.tensorPullback j.left).obj M.moduleObj) [Mono n] (hn : ∀ (ha : target G U ≫ j.left = (G ◁ j).left ≫ target G Y) (hp : source G U ≫ j.left = (G ◁ j).left ≫ source G Y), (Scheme.Modules.tensorPullback (target G U)).map n ≫ (mixedCompComparison (target G U) (G ◁ j).left j.left (target G Y) ha M.moduleObj).hom ≫ (Scheme.Modules.tensorPullback (G ◁ j).left).map ((pullbackIso (target G Y)).inv.app M.moduleObj ≫ M.beta.hom ≫ (pullbackIso (source G Y)).hom.app M.moduleObj) ≫ (mixedCompComparison (source G U) (G ◁ j).left j.left (source G Y) hp M.moduleObj).inv = (linearization N).hom ≫ (Scheme.Modules.tensorPullback (source G U)).map n) : ∃ (L : Coherent DY) (l : L.obj ⟶ M), Mono l.val ∧ ∃ e : (Scheme.Modules.tensorPullback j.left).obj (underlying L) ≅ underlying N, IsPullbackMap j L N e.hom ∧ (Scheme.Modules.tensorPullback j.left).map l.val = e.hom ≫ n",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d752a406e",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Read item, all 11 stmt_dep records, the delivered module and EquivariantCoherentGZero source. Clause by clause: F field; G GrpObj affine LOFT+QC; Y separated LOFT+QC with ModObj; M quasi-coherent GroupoidModule with no coherence (beta: a^*M ≅ pr2^*M); invariant open as IsOpenImmersion + IsModHom (equivalent to a^-1(U)=G×U); N : Coherent DU (full 01BV) with Mono n; hn equivariance arrows traced and consistent with IsPullbackMap, ha/hp provable so not vacuous; DY/DU unique via group_coordinate + laws. Conclusion: L coherent, l equivariant mono, e equivariant iso with j^*l = e≫n, i.e. same submodule with linearization. No smoothness/reductivity, single universe. Edge cases U empty, U=Y, M or N zero, nonreduced G covered. Node diff vs live: only lean + 3 landed definition stmt_deps; dep records identical; statement verbatim; docstrings with source, blueprint id and 8 proof steps; sorry only; no duplicate (rg of live Lean trees); both report sections present. No file changed, so no compile; worker reports clean scompile. No findings."
+ }
+}

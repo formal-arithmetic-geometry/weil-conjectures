@@ -1,0 +1,432 @@
+{
+ "id": "lem-sfb-scheme-etale-tensor-hom-comparison",
+ "kind": "statement",
+ "title": "Tensor and finitely presented internal Hom under the small-etale module comparison",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention]. Use its Zariski and small etale sites [def-sc-zariski-site, def-weil-pbc-etale-site], with structure sheaf $\\mathcal O_{T,\\mathrm{et}}(u:V\\to T)=\\Gamma(V,\\mathcal O_V)$. For a quasi-coherent Zariski module $M$ [pqf-def-coherent], let $A_T(M)=M_{\\mathrm{et}}$ be the canonical associated module sheaf, $A_T(M)(u)=\\Gamma(V,u^*M)$ [def-sc-etale-qcoherent-module, def-pc-module-pullback]; use the canonical equivalence and its restriction comparisons [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence]. Tensor products and sheaf Hom are those of [def-pur-sheaf-tensor-product, def-pur-sheaf-hom]. For quasi-coherent Zariski modules $M,N$, the canonical tensor comparison is an isomorphism\n$$A_T(M)\\otimes_{\\mathcal O_{T,\\mathrm{et}}}A_T(N)\\xrightarrow{\\sim}A_T(M\\otimes_{\\mathcal O_T}N).$$\nOn local tensor sections it sends $m\\otimes n$ to their tensor section after pullback. If $M$ is of finite presentation, meaning Zariski locally the cokernel of a map $\\mathcal O^{\\oplus a}\\to\\mathcal O^{\\oplus b}$ with $a,b<\\infty$ [def-weil-pbc-module-finite-type-presentation], then $\\mathcal Hom_{\\mathcal O_T}(M,N)$ is quasi-coherent [lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent] and the canonical evaluation comparison is an isomorphism\n$$A_T(\\mathcal Hom_{\\mathcal O_T}(M,N))\\xrightarrow{\\sim}\\mathcal Hom_{\\mathcal O_{T,\\mathrm{et}}}(A_T(M),A_T(N)).$$\nThis comparison sends the image of a Zariski local module morphism to its associated etale morphism. Both comparisons are natural in their module arguments and commute with restriction to a further small-etale scheme object, under the canonical restriction and pullback comparisons of the cited equivalence. No Noetherian or separation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 06VE (lemma-equivalence-quasi-coherent-limits), parts (7),(8), only the small etale site, and their proof. The already-existing Zariski sheaf-Hom quasi-coherence lemma supplies the essential-image input."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "pqf-def-coherent",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-module-pullback",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=\\epsilon^*$. The cited equivalence identifies $L(F)$ with $A_T(F)$ for quasi-coherent $F$. The tensor product $M\\otimes N$ is quasi-coherent by the cited tensor-closure theorem. Apply the ringed-topos tensor-pullback isomorphism to $\\epsilon$, and invert its displayed direction, to obtain $A_T(M)\\otimes A_T(N)\\simeq A_T(M\\otimes N)$. This is the canonical comparison: the defining balanced pairing for tensor pullback sends pulled-back local sections $m,n$ to the pullback of $m\\otimes n$, with scalar coefficients multiplied. Indeed $(s\\otimes m)\\otimes(t\\otimes n)\\mapsto st\\otimes(m\\otimes n)$ is balanced, and the reverse formula is $s\\otimes(m\\otimes n)\\mapsto(s\\otimes m)\\otimes(1\\otimes n)$. The two composites are the identity by balancing; the formulas extend through sheafification. Thus this isomorphism has the section formula in the statement. The sites are taken small in the stipulated module universe.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE(7), proof via Tag 03EL (sites-modules.tex, lemma-tensor-product-pullback)."
+   }
+  },
+  {
+   "text": "Assume $M$ finitely presented and put $H=\\mathcal Hom(M,N)$, which is quasi-coherent by the cited theorem. Its evaluation $H\\otimes M\\to N$ sends $h\\otimes m$ to $h(m)$. Apply $A_T$ and compose with the tensor comparison of step 1. This gives an evaluation pairing $A_T(H)\\otimes A_T(M)\\to A_T(N)$. It defines a module map $\\theta:A_T(H)\\to\\mathcal Hom(A_T(M),A_T(N))$ directly: for an etale object $U$ and $h\\in A_T(H)(U)$, its component on $W\\to U$ is $m\\mapsto\\mathrm{ev}_W(h|_W,m)$. Bilinearity gives module linearity and the restriction law of the pairing gives a morphism on the slice. This construction is exactly the evaluation comparison. On an associated Zariski morphism $h$ it gives the associated morphism, since $\\mathrm{ev}(h,m)=h(m)$ before and after applying the functor.",
+   "uses": [
+    "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE(8); sites-modules.tex Tag 0GMX (remark-pullback-internal-hom), defining evaluation comparison."
+   }
+  },
+  {
+   "text": "Work on a Zariski open $V$ with a presentation $\\mathcal O_V^a\\xrightarrow{B}\\mathcal O_V^b\\xrightarrow{p}M|_V\\to0$, writing $B(e_k)=\\sum_i b_{ik}e_i$. The finite-presentation Hom-kernel theorem identifies $H|_V$ with the kernel of $\\alpha:(N|_V)^b\\to(N|_V)^a$, $\\alpha((x_i))_k=\\sum_i b_{ik}x_i$, by $h\\mapsto(h(p(e_i)))_i$. Apply $A_V$. It preserves finite sums: on all modules $\\epsilon_V^*$ is a left adjoint by the module adjunction and hence preserves their coproducts; moreover $A_V(\\mathcal O_V)=\\mathcal O_{V,\\mathrm{et}}$ by the section formula. All finite sums in question are quasi-coherent. The image of $\\alpha$ is quasi-coherent by the image theorem, so the short exact sequence $0\\to H|_V\\to(N|_V)^b\\to\\operatorname{im}\\alpha\\to0$ is a sequence of quasi-coherent modules. Exactness of $A_V$ and preservation of monomorphisms therefore identify $A_V(H|_V)$ with the kernel of the same matrix $\\alpha_{\\mathrm{et}}:(A_V(N|_V))^b\\to(A_V(N|_V))^a$. Here the coefficients are the images of $b_{ik}$ in the etale structure sheaf. Likewise $A_V(p)$ is the cokernel of the associated presentation.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sc-etale-qcoherent-module",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE(8), expanded finite-presentation kernel argument in sites-modules.tex Tag 0GN2 (lemma-pullback-internal-hom)."
+   }
+  },
+  {
+   "text": "Compute the target Hom on the same chart. Write $Q=A_V(M|_V)$ and $P=A_V(N|_V)$. For every $W$ of $V_{\\mathrm{et}}$, slice restriction preserves the cokernel presentation $\\mathcal O^a\\to\\mathcal O^b\\to Q\\to0$. A morphism $Q|_W\\to P|_W$ is consequently a morphism $\\mathcal O_W^b\\to P|_W$ annihilating $B|_W$, uniquely, by the cokernel universal property. Such a map is uniquely specified by its basis images $x_i\\in P(W)$: on any further object $Z\\to W$ it sends $(r_i)_i$ to $\\sum_i r_i x_i|_Z$. Annihilating the $k$th relation says precisely $\\sum_i b_{ik}|_W x_i=0$. Thus evaluation on $p(e_i)$ gives a bijection between $\\mathcal Hom(Q,P)(W)$ and $\\ker(\\alpha_{\\mathrm{et}}(W))$. Both directions commute with restriction and scalar multiplication by these explicit formulas. Sectionwise kernels are sheaf kernels, so $\\mathcal Hom(Q,P)$ is the kernel sheaf of $\\alpha_{\\mathrm{et}}$. This is an elementary cokernel calculation, not an appeal to exactness of sections of a cokernel.",
+   "uses": [
+    "lem-weil-pbc-finite-type-restriction-exact",
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE(8); sites-modules.tex Tag 0GN2, kernel rows, with the cokernel universal-property argument of Tag 0GMY (lemma-internal-hom-exact)."
+   }
+  },
+  {
+   "text": "Under the two kernel identifications, $\\theta$ of step 2 is the identity: evaluating it on the image of the $i$th basis section is exactly the image of $h(p(e_i))$, by its evaluation formula. Thus $\\theta$ is invertible over $V_{\\mathrm{et}}$. These charts test the global map. In fact $T_{\\mathrm{et}}/V=V_{\\mathrm{et}}$: composition and cancellation of etale morphisms give the identical objects, arrows and coverings. The restriction comparisons of the equivalence identify $A_T(F)|_V$ with $A_V(F|_V)$; internal Hom restricts by its slice definition. The chosen Zariski opens cover every etale object after inverse image, since open immersions are etale. The local inverses agree on overlaps, being inverses to the same map $\\theta$, and glue uniquely by the sheaf condition. Hence $\\theta$ is an isomorphism globally. This uses arbitrary open overlaps, with no claim that intersections are affine.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE(8), local reduction in sites-modules.tex Tag 0GN2 and normalization of the equivalence."
+   }
+  },
+  {
+   "text": "Finally check the asserted compatibilities of the actual maps. For module arrows $f:M\\to M'$ and $g:N\\to N'$, the tensor naturality square on local pure tensors sends $m\\otimes n$ along either path to $f(m)\\otimes g(n)$. These tensors locally generate the sheafified tensor, so the square commutes. For Hom, precomposition by $f:M'\\to M$ and postcomposition by $g:N\\to N'$ send a local transformation $h$ to $g h f$; evaluation on $m'$ along both paths is $g(h(f(m')))$. Equality on all slice objects proves equality of the Hom maps. For slice restriction, the tensor square sends $m\\otimes n$ to the tensor of their restrictions along both paths, using the cited pure-tensor restriction isomorphism. The Hom square follows on every slice object from $(h(m))|_W=h|_W(m|_W)$. Consequently restricting the evaluation pairing and then forming the transformation on a slice is the same as forming that transformation after restriction. These are identities of pairings and transformations on all further objects, so they apply to every section, not only to a Zariski-origin section. The inverse isomorphisms inherit the same squares.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE(7),(8); sites-modules.tex Tags 03EL and 0GMX, natural pairings and slice restriction."
+   }
+  },
+  {
+   "text": "To express the last restriction square using the scheme object $u:U\\to T$, identify $T_{\\mathrm{et}}/U$ with $U_{\\mathrm{et}}$ by etale composition and cancellation. The equivalence supplies $A_T(F)|_U\\simeq A_U(u^*F)$. Here $u^*M$ is finitely presented, and $u^*M,u^*N$ are quasi-coherent. There is also the required scheme Hom identification: $u$ is flat, so exact pullback carries the local matrix kernel for $H$ in step 3 to the kernel of that matrix with pulled-back coefficients; the finite-presentation Hom-kernel theorem applied on $U$ identifies this same kernel with $\\mathcal Hom(u^*M,u^*N)$. The comparison is the evaluation comparison because both identifications send a map to its values on the same pulled-back generators. This is the three-line kernel consequence of the cited results (Modules Tag 0C6I), not an extra assumption on the comparison equivalence. Substituting these identifications into the slice square of step 6 gives exactly the requested small-etale scheme-object restriction square.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-tensor-pullback-finite-presentation",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE(8), canonical restriction comparisons; modules.tex Tag 0C6I (lemma-pullback-internal-hom), finite-presentation kernel argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-sc-etale-qcoherent-module",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-finite-type-restriction-exact",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-etale-site",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 06VE(7),(8), with its tensor pullback proof (03EL) and the finite-presentation kernel proof of sites-modules.tex Tag 0GN2 expanded using the existing exactness comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homObj|internalHom|sheafHom",
+   "results": "{\"t\": \"2026-10-23T21:05:19Z\", \"tool\": \"grep\", \"query\": \"homObj|internalHom|sheafHom\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Presheaf.lean\"], \"digest\": \"d2590856488441bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change from Zariski to etale topology preserves sheaf Hom from a finitely presented quasi coherent module",
+   "results": "{\"t\": \"2026-10-23T21:05:19Z\", \"tool\": \"leansearch\", \"query\": \"Change from Zariski to etale topology preserves sheaf Hom from a finitely presented quasi coherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafHom\", \"CategoryTheory.Presheaf.IsSheaf.hom\", \"CategoryTheory.sheafHom'\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.Pseudofunctor.sheafHom\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"AlgebraicGeometry.Scheme.Modules.Hom\"], \"digest\": \"b3dc2339dc9c9a2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme the associated small etale sheaf of Hom between quasi coherent Zariski modules agrees with internal Hom of their associated etale sheaves when the first module is finitely presented",
+   "results": "{\"t\": \"2026-10-23T21:05:26Z\", \"tool\": \"leanfinder\", \"query\": \"For a scheme the associated small etale sheaf of Hom between quasi coherent Zariski modules agrees with internal Hom of their associated etale sheaves when the first module is finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"AlgebraicGeometry.Scheme.Modules.instCategory\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.isFinitePresentation\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.sheafifyHomEquiv\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"digest\": \"e26d02ff2ab075f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Tt]ensor|[Tt]ensor.*etale|etale.*[Hh]om",
+   "results": "{\"t\": \"2026-10-23T21:07:47Z\", \"tool\": \"grep\", \"query\": \"etale.*[Tt]ensor|[Tt]ensor.*etale|etale.*[Hh]om\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between Zariski and small etale quasicoherent modules preserves tensor products and sheaf Hom from finitely presented modules",
+   "results": "{\"t\": \"2026-10-23T21:07:50Z\", \"tool\": \"leanfinder\", \"query\": \"The equivalence between Zariski and small etale quasicoherent modules preserves tensor products and sheaf Hom from finitely presented modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.presentation\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\"], \"digest\": \"35038849ebb03ff6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The small etale association functor for quasicoherent modules preserves tensor products and finite presentation internal Hom",
+   "results": "{\"t\": \"2026-10-23T21:09:31Z\", \"tool\": \"leansearch\", \"query\": \"The small etale association functor for quasicoherent modules preserves tensor products and finite presentation internal Hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instTensorProduct\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.mapFree\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf\"], \"digest\": \"3239edecb5e52180\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-23T21:09:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.Hom\", \"PresheafOfModules.instAddCommGroupHom\", \"PresheafOfModules.instAddHom\", \"PresheafOfModules.instNegHom\", \"PresheafOfModules.instSubHom\", \"PresheafOfModules.instZeroHom\", \"PresheafOfModules.unitHomEquiv\", \"PresheafOfModules.Hom.app\"], \"digest\": \"cd1d70eeb5cdf355\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits; completion universal properties, generic module pullback, free presentations and Type-valued sheaf Hom do not identify tensor products and module-valued internal Hom across the Zariski/small-etale comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Tt]ensor|[Tt]ensor.*etale|etale.*[Hh]om",
+   "results": "{\"t\": \"2026-10-23T21:50:50Z\", \"tool\": \"grep\", \"query\": \"etale.*[Tt]ensor|[Tt]ensor.*etale|etale.*[Hh]om\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits. Generic module pullback adjunctions, free presentations, finite-presentation quasicoherence, constant-coefficient condensed tensors and presheaf morphisms do not state the Zariski/small-etale tensor and internal-Hom comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of sheaf Hom from a finitely presented module along a flat morphism of ringed sites is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T21:50:51Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of sheaf Hom from a finitely presented module along a flat morphism of ringed sites is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\"], \"digest\": \"007989ed7b1dbdb5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits. Generic module pullback adjunctions, free presentations, finite-presentation quasicoherence, constant-coefficient condensed tensors and presheaf morphisms do not state the Zariski/small-etale tensor and internal-Hom comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-23T21:50:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.Hom\", \"PresheafOfModules.instAddCommGroupHom\", \"PresheafOfModules.instAddHom\", \"PresheafOfModules.instNegHom\", \"PresheafOfModules.instSubHom\", \"PresheafOfModules.instZeroHom\", \"PresheafOfModules.unitHomEquiv\", \"PresheafOfModules.Hom.app\"], \"digest\": \"cd1d70eeb5cdf355\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits. Generic module pullback adjunctions, free presentations, finite-presentation quasicoherence, constant-coefficient condensed tensors and presheaf morphisms do not state the Zariski/small-etale tensor and internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between Zariski and small etale quasicoherent modules preserves tensor products and sheaf Hom from finitely presented modules",
+   "results": "{\"t\": \"2026-10-23T21:50:51Z\", \"tool\": \"leanfinder\", \"query\": \"The equivalence between Zariski and small etale quasicoherent modules preserves tensor products and sheaf Hom from finitely presented modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.presentation\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\"], \"digest\": \"35038849ebb03ff6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits. Generic module pullback adjunctions, free presentations, finite-presentation quasicoherence, constant-coefficient condensed tensors and presheaf morphisms do not state the Zariski/small-etale tensor and internal-Hom comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homObj|internalHom|sheafHom",
+   "results": "{\"t\": \"2026-10-23T21:53:47Z\", \"tool\": \"grep\", \"query\": \"homObj|internalHom|sheafHom\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Presheaf.lean\"], \"digest\": \"d2590856488441bd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits. Generic module pullback adjunctions, free presentations, finite-presentation quasicoherence, constant-coefficient condensed tensors and presheaf morphisms do not state the Zariski/small-etale tensor and internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change from Zariski to etale topology preserves the tensor product and internal Hom from a finitely presented quasicoherent module",
+   "results": "{\"t\": \"2026-10-23T21:53:48Z\", \"tool\": \"leanfinder\", \"query\": \"Change from Zariski to etale topology preserves the tensor product and internal Hom from a finitely presented quasicoherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"LightCondensed.instMonoidalClosedLightCondMod\"], \"digest\": \"56ed8b808a31d5ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits. Generic module pullback adjunctions, free presentations, finite-presentation quasicoherence, constant-coefficient condensed tensors and presheaf morphisms do not state the Zariski/small-etale tensor and internal-Hom comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-completion-internal-hom",
+  "date": "2026-10-24",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; full faithfulness in the first paragraph, via the Hom computation 08B6 used in 08B9. Auxiliary scheme-site comparison needed to apply the scheme completion computation on small etale charts: Stacks 06VE(7),(8).",
+   "via": [
+    "lem-sfb-space-completion-internal-hom",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-etale-tensor-hom-comparison",
+  "worker": "stage1",
+  "summary": "Proved tensor comparison using the existing ringed-topos tensor theorem, and Hom comparison by evaluation and a finite local presentation. Both Hom objects are explicitly kernels of the same matrix; naturality and slice restriction are checked on tensors and evaluations. No new nodes and no statement change.",
+  "blueprint": "Auxiliary scheme comparison in the inherited completion/internal-Hom prerequisite chain. The latest sk-thm-sf-ctf-stability proof uses perfect local models and compactification; this subordinate Stacks 06VE calculation supplies the inherited coherent-completion input without changing that unit route. No blueprint node states this comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic zariski and small etale quasi-coherent modules agree functorially tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "why": "Generic the tensor product of quasi-coherent modules is quasi-coherent, with sections over affine opens the tensor product of sections tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic underived tensor comparison for pullback of modules on ringed topoi tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+    "why": "Generic sheaf hom from a finitely presented module into a quasi-coherent module is quasi-coherent tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+    "why": "Generic sheaf hom applied to a finite presentation is a kernel of finite sums tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module pullback and pushforward adjunction on arbitrary ringed topoi tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic left adjoints preserve colimits tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic cokernel and image of a morphism of quasi-coherent modules: quasi-coherent, computed on affine opens tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic exact functors preserve kernels, cokernels, images, inverse images and homology tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "why": "Generic arbitrary coproducts of quasi-coherent modules are quasi-coherent tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-restriction-exact",
+    "why": "Generic restriction of module sheaves to a slice is exact tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "why": "Generic cokernels and epimorphisms read off from exactness in an abelian category tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Generic limits of sheaves of modules exist and are computed sectionwise tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic open immersions are etale; etale morphisms compose and cancel tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic restriction to a localized site commutes with the sheaf tensor product tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-finite-presentation",
+    "why": "Generic tensor pullback preserves finite presentation tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic the pullback of a quasi-coherent module is quasi-coherent tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "why": "Generic flat module pullback is exact and direct image preserves injectives tool in the Stacks 06VE tensor/finite-presentation argument; used with the hypotheses quoted in citations.json. The unit has no separate scheme-module replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+  "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-finite-type-restriction-exact",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-tensor-pullback-finite-presentation",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-6a9038c7c",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-6a9038c7c (reviewer sub-agent of L); spot-checked: I read the item's 7 steps and every cited statement. There are no new nodes. Statement and stmt_deps are byte-identical to side-live, so nothing was weakened; the item is still unsplit in live and side-live, and no repair note exists. Source is Stacks descent.tex 06VE (7),(8) with their proofs (03EL; flat (S_et)->(S_Zar) plus 0GN2), and (9) confirms the restriction to the small site. Step 1: the trf equivalence makes A_T equal to eps^*, and 03EL tensor pullback applied to eps (with tensor quasi-coherence) gives the comparison. Step 2: theta is built from evaluation; H is quasi-coherent by the f.p. Hom node. Step 3: the 01CO(2) kernel row on a Zariski chart V; finite sums via the module adjunction (left adjoint); all terms quasi-coherent (sum, image and cokernel nodes); the exact-finiteness node (06VE(5), landed) and exact-functor (a) give A_V(H|_V) = ker(alpha_et). Step 4: 093U restriction keeps the presentation, then the cokernel universal property and sectionwise kernels. Step 5: T_et/V = V_et by etale cancellation, the composition isomorphism of pullbacks, local iso implies iso, no affine overlaps used. Step 6: naturality and restriction checked on pure tensors and evaluations. Step 7: etale implies flat, so exact pullback of the kernel row, plus f.p. pullback (01BQ) and quasi-coherent pullback give 0C6I. proof_deps equals the union of uses, and off-unit generic tools are declared in tool_uses. Duplicate search (06VE/0GN2/0C6I/pullback-internal-hom) found only derived/perfect, constant-coefficient, pro-etale isomorphism and big-fppf variants. Edge cases: T empty; a=0; b=0; Spec Z with M=Z/2, N=O gives Zariski Hom 0 and small-etale O[2]=0 because U is flat over Z, so the sides agree, while the big site fails as 06VE(9) says. Batch-5 flag: the exact-finiteness node reaches lem-trf-scheme-zariski-etale-quasi-coherent-equivalence. That node is the generic Zariski/etale quasi-coherent equivalence (03DX/03FH), not given by the trace-formula or Poincare assumption and not a trace-formula proof step. The item already had it as a base stmt_dep, so the delivery adds no new reach. Accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeEtaleTensorHomComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scheme_etale_tensor_hom_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeEtaleTensorHomComparison.lean",
+  "statement": "theorem scheme_etale_tensor_hom_comparison (c : ∀ T : Scheme.{u}, ZariskiEtaleModuleContext T) : ∃ t : ∀ (T : Scheme.{u}) (M N : T.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent], (SheafOfModules.siteSheafTensorRight (A := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) ((c T).extension.obj N)).obj ((c T).extension.obj M) ≅ (c T).extension.obj (M ⊗ N), (∀ (T : Scheme.{u}) (M N : T.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent] (W : T.Opens) (m : Γ(M, W)) (n : Γ(N, W)), (t T M N).hom.val.app (op ((AlgebraicGeometry.gabberOpenEtale T).obj W)) (SheafOfModules.siteSheafTensorTmul (A := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) ((c T).extension.obj M) ((c T).extension.obj N) (op ((AlgebraicGeometry.gabberOpenEtale T).obj W)) (((c T).adjunction.unit.app M).app W m) (((c T).adjunction.unit.app N).app W n)) = ((c T).adjunction.unit.app (M ⊗ N)).app W (tmulSection m n)) ∧ (∀ (T : Scheme.{u}) (M M' N N' : T.Modules) [M.IsQuasicoherent] [M'.IsQuasicoherent] [N.IsQuasicoherent] [N'.IsQuasicoherent] (f : M ⟶ M') (g : N ⟶ N'), (SheafOfModules.siteSheafTensorRight (A := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) ((c T).extension.obj N)).map ((c T).extension.map f) ≫ SheafOfModules.siteSheafTensorSecondMap (A := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) ((c T).extension.obj M') ((c T).extension.map g) ≫ (t T M' N').hom = (t T M N).hom ≫ (c T).extension.map (f ⊗ₘ g)) ∧ ∃ q : ∀ (T : Scheme.{u}) (M N : T.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent] [M.IsFinitePresentation], (SheafOfModules.homObj (R := T.sheaf) M N).IsQuasicoherent, ∃ h : ∀ (T : Scheme.{u}) (M N : T.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent] [M.IsFinitePresentation] (V : T.Etale), ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N)).val.obj (op V) ≃ₗ[T.etaleStructurePresheaf.obj (op V)] (SheafOfModules.homObj (R := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) ((c T).extension.obj M) ((c T).extension.obj N)).val.obj (op V), (∀ (T : Scheme.{u}) (M N : T.Modules) [iM : M.IsQuasicoherent] [iN : N.IsQuasicoherent] [iP : M.IsFinitePresentation] (V : T.Etale) (s : ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N)).val.obj (op V)) (m : ((c T).extension.obj M).val.obj (op V)), (h T M N V s).app (op (Over.mk (𝟙 V))) m = ((c T).extension.map ((ihom.ev M).app N)).val.app (op V) ((@t T M (SheafOfModules.homObj (R := T.sheaf) M N) iM (@q T M N iM iN iP)).hom.val.app (op V) (SheafOfModules.siteSheafTensorTmul (A := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) ((c T).extension.obj M) ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N)) (op V) m s))) ∧ (∀ (T : Scheme.{u}) (M M' N N' : T.Modules) [M.IsQuasicoherent] [M'.IsQuasicoherent] [N.IsQuasicoherent] [N'.IsQuasicoherent] [M.IsFinitePresentation] [M'.IsFinitePresentation] (f : M' ⟶ M) (g : N ⟶ N') (V : T.Etale) (s : ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N)).val.obj (op V)), h T M' N' V (((c T).extension.map (SheafOfModules.homObjMap (R := T.sheaf) f g)).val.app (op V) s) = (SheafOfModules.homObjMap (R := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) ((c T).extension.map f) ((c T).extension.map g)).val.app (op V) (h T M N V s)) ∧ (∀ (T : Scheme.{u}) (M N : T.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent] [M.IsFinitePresentation] (V W : T.Etale) (g : W ⟶ V) (s : ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N)).val.obj (op V)), h T M N W (((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N)).val.map g.op s) = PresheafOfModules.restrictOverMap g (h T M N V s)) ∧ (∀ (U T : Scheme.{u}) (a : U ⟶ T) [Etale a], ∃ (hp : (smallEtaleModulePushforward a).IsRightAdjoint) (r : smallEtaleModulePushforward a ⋙ (c T).restriction ≅ (c U).restriction ⋙ pushforward a), (∀ (G : SmallEtaleModules U) (W : T.Opens), (r.hom.app G).app W = G.val.presheaf.map (AlgebraicGeometry.gabberPreimageEtaleIso a W).hom.op) ∧ let P := smallEtaleModulePullback a hp let p := zariskiEtalePullbackComparison a (c U) (c T) hp r ∃ k : ∀ A B : SmallEtaleModules T, (SheafOfModules.siteSheafTensorRight (A := ⟨U.etaleStructurePresheaf, U.isSheaf_etaleStructurePresheaf⟩) (P.obj B)).obj (P.obj A) ≅ P.obj ((SheafOfModules.siteSheafTensorRight (A := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) B).obj A), (∀ (A B : SmallEtaleModules T) (V : T.Etale) (m : A.val.obj (op V)) (n : B.val.obj (op V)), (k A B).hom.val.app (op (a.Etale.obj V)) (SheafOfModules.siteSheafTensorTmul (A := ⟨U.etaleStructurePresheaf, U.isSheaf_etaleStructurePresheaf⟩) (P.obj A) (P.obj B) (op (a.Etale.obj V)) (((smallEtaleModuleAdjunction a hp).unit.app A).val.app (op V) m) (((smallEtaleModuleAdjunction a hp).unit.app B).val.app (op V) n)) = ((smallEtaleModuleAdjunction a hp).unit.app ((SheafOfModules.siteSheafTensorRight (A := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) B).obj A)).val.app (op V) (SheafOfModules.siteSheafTensorTmul (A := ⟨T.etaleStructurePresheaf, T.isSheaf_etaleStructurePresheaf⟩) A B (op V) m n)) ∧ (∀ (M N : T.Modules) [M.IsQuasicoherent] [N.IsQuasicoherent], (SheafOfModules.siteSheafTensorRight (A := ⟨U.etaleStructurePresheaf, U.isSheaf_etaleStructurePresheaf⟩) ((c U).extension.obj ((tensorPullback a).obj N))).map (p.hom.app M) ≫ SheafOfModules.siteSheafTensorSecondMap (A := ⟨U.etaleStructurePresheaf, U.isSheaf_etaleStructurePresheaf⟩) (P.obj ((c T).extension.obj M)) (p.hom.app N) ≫ (k ((c T).extension.obj M) ((c T).extension.obj N)).hom ≫ P.map (t T M N).hom = (t U ((tensorPullback a).obj M) ((tensorPullback a).obj N)).hom ≫ (c U).extension.map (schemeEtaleTensorPullbackIso a M N).hom ≫ p.hom.app (M ⊗ N)) ∧ ∀ (M N : T.Modules) [iM : M.IsQuasicoherent] [iN : N.IsQuasicoherent] [iF : M.IsFinitePresentation], letI : ((tensorPullback a).obj M).IsFinitePresentation := isFinitePresentation_tensorPullback a M letI : (SheafOfModules.homObj (R := T.sheaf) M N).IsQuasicoherent := @q T M N iM iN iF ∃ b : (tensorPullback a).obj (SheafOfModules.homObj (R := T.sheaf) M N) ≅ SheafOfModules.homObj (R := U.sheaf) ((tensorPullback a).obj M) ((tensorPullback a).obj N), b.hom = schemeEtaleHomPullbackMap a M N ∧ ∃ j : ∀ W : U.Etale, (P.obj ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N))).val.obj (op W) ≃ₗ[U.etaleStructurePresheaf.obj (op W)] (SheafOfModules.homObj (R := ⟨U.etaleStructurePresheaf, U.isSheaf_etaleStructurePresheaf⟩) (P.obj ((c T).extension.obj M)) (P.obj ((c T).extension.obj N))).val.obj (op W), (∀ (V W : U.Etale) (g : W ⟶ V) (s : (P.obj ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N))).val.obj (op V)), j W ((P.obj ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N))).val.map g.op s) = PresheafOfModules.restrictOverMap g (j V s)) ∧ (∀ (W : U.Etale) (s : (P.obj ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N))).val.obj (op W)) (m : (P.obj ((c T).extension.obj M)).val.obj (op W)), (j W s).app (op (Over.mk (𝟙 W))) m = (P.map ((t T M (SheafOfModules.homObj (R := T.sheaf) M N)).hom ≫ (c T).extension.map ((ihom.ev M).app N))).val.app (op W) ((k ((c T).extension.obj M) ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N))).hom.val.app (op W) (SheafOfModules.siteSheafTensorTmul (A := ⟨U.etaleStructurePresheaf, U.isSheaf_etaleStructurePresheaf⟩) (P.obj ((c T).extension.obj M)) (P.obj ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N))) (op W) m s))) ∧ (∀ (V : T.Etale) (s : ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N)).val.obj (op V)) (m : ((c T).extension.obj M).val.obj (op V)), (j (a.Etale.obj V) (((smallEtaleModuleAdjunction a hp).unit.app ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N))).val.app (op V) s)).app (op (Over.mk (𝟙 (a.Etale.obj V)))) (((smallEtaleModuleAdjunction a hp).unit.app ((c T).extension.obj M)).val.app (op V) m) = ((smallEtaleModuleAdjunction a hp).unit.app ((c T).extension.obj N)).val.app (op V) ((h T M N V s).app (op (Over.mk (𝟙 V))) m)) ∧ ∀ (W : U.Etale) (s : (P.obj ((c T).extension.obj (SheafOfModules.homObj (R := T.sheaf) M N))).val.obj (op W)), h U ((tensorPullback a).obj M) ((tensorPullback a).obj N) W (((c U).extension.map b.hom).val.app (op W) ((p.inv.app (SheafOfModules.homObj (R := T.sheaf) M N)).val.app (op W) s)) = (SheafOfModules.homObjMap (R := ⟨U.etaleStructurePresheaf, U.isSheaf_etaleStructurePresheaf⟩) (p.hom.app M) (p.inv.app N)).val.app (op W) (j W s))",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The Hom isomorphisms are linear equivalences on every etale object with the full restriction law, accommodating section universes u and u+1 without a universe equality. The final conjunct explicitly states both restriction squares for every etale a : U ⟶ T via zariskiEtalePullbackComparison, the unit-normalized etale tensor comparison, and the canonical scheme Hom map defined by transposing pulled-back evaluation. The proof-only sheaf-compose helper is owned by this item; the equivalence dependency retains its original principal declaration.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleHasSheafCompose",
+   "AlgebraicGeometry.Scheme.Modules.schemeEtaleTensorPullbackIso",
+   "AlgebraicGeometry.Scheme.Modules.schemeEtaleHomPullbackMap",
+   "AlgebraicGeometry.Scheme.Modules.scheme_etale_tensor_hom_comparison"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-24bc0aa3d",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Re-delivery fixes both RETURN findings of 2a002a71. H3: the new final part covers every étale a:U⟶T with r fixed on every open (gabberPreimageEtaleIso, as in the dependency theorem) and p := zariskiEtalePullbackComparison. Tensor square (p_M⊗p_N)≫k≫P(t_T) = t_U≫A_U(schemeEtaleTensorPullbackIso)≫p_{M⊗N}, with k fixed by its unit-section formula. Scheme Hom map b.hom = schemeEtaleHomPullbackMap (curry of pulled-back ev); its iso claim is Stacks 0C6I. j fixed by restriction law and evaluation on all sections. Hom square h_U(A_U(b)(p_H⁻¹ s)) = homObjMap(p_M,p_N⁻¹)(j s); types and variance checked by hand. H13/H2: trf equivalence record identical to side-live; helper HasSheafCompose (true, Mathlib needs UnivLE) moved into the item module with docstring and listed in lean.declarations. lean.statement verbatim equal to the file (script check). Node fields other than lean unchanged. No hollow definitions, only sorry proofs, docstrings carry source and blueprint id with steps 1–7, all imports exist. Edge cases empty T, zero modules, ranks 0, u/u+1 sections OK. No compile (no file changed)."
+ }
+}

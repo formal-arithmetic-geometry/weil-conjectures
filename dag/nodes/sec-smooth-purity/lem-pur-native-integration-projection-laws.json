@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-native-integration-projection-laws",
+ "kind": "statement",
+ "title": "Native inverse projection naturality and unit normalization",
+ "statement": "For the actual fg operations at either native finite-coefficient site [def-pur-composite-integration-operations], inverse projection satisfies F(L tensor P h) followed by q(L,K prime) = q(L,K) followed by F L tensor h whenever the two components are invertible. At the tensor unit, F(twistUnit inverse) followed by F(beta(P1,L)) and q(L,1) equals the inverse right unitor of F L whenever that component is invertible. These assertions hold for every L and arrow h, independently of the supplied twisted adjunctions, and are exactly IntegrationProjectionLaws for the selected native composite operation.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
+ },
+ "stmt_deps": [
+  "def-pur-composite-integration-operations"
+ ],
+ "proof": [
+  {
+   "text": "Specialize the actual projection natural transformation to fixed L and h. Multiply its naturality square by the two component inverses to obtain the inverse square. Only those two components must be invertible.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
+   }
+  },
+  {
+   "text": "Expand the native compactification projection. Right unitality of the proper counit mate follows from monoidal unitality and the adjunction triangle. Cancel the unit comparisons of the open tensor map and pullback compositor. Invert this right-unit identity; braiding-unit compatibility identifies its source map with inverse twistUnit followed by beta. The ordinary site also has Etale.projectionMap_rightUnitality. Apply the identical counit/open construction at the pro-etale site.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Expanded Step 6, last paragraphs: rewriting the composite affine counit as coefficient tensor the unit trace; explicit typed native calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientCounit|tensorAction_trace_contraction|projectionMap_rightUnitality",
+   "results": "Existing tensorAction_trace_contraction is proved; Etale.projectionMap_rightUnitality is available; no native precompositor contraction or both-site inverse projection package found.",
+   "date": "2026-10-25",
+   "verdict": "Existing lemmas cover constituent steps, not the native source-identification or both-site projection package."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive twisted pullback counits contract two traces through inverse projection formula before compositor cancellation",
+   "results": "8 hits, including ChosenPullbacksAlong.cartesianMonoidalCategorySnd_mapPullbackAdj_counit_app and ExponentiableMorphism.pushforwardComp_hom_counit_assoc; no match.",
+   "date": "2026-10-25",
+   "verdict": "Pullback counits in Cartesian categories do not supply the twisted tensor-action formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\", \"comp\"",
+   "results": "12 hits, including Adjunction.comp_counit_app and monoidal adjunction counit lemmas.",
+   "date": "2026-10-25",
+   "verdict": "comp_counit_app is a constituent step; none gives the native contraction or projection package."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of twisted pullback adjunction counits factors through inverse projection formula and composite trace",
+   "results": "8 hits: chosen-pullback composition counits, exponentiable pushforward counits and scheme module pullback composition.",
+   "date": "2026-10-25",
+   "verdict": "No match for either remaining native-map identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompositeIntegrationCounit",
+  "date": "2026-10-25",
+  "group": "A8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Expanded Step 6, final canonical reassociations; native typed operation presentation and component calculations.",
+   "via": [
+    "lem-pur-composite-integration-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeIntegrationProjectionLaws",
+  "file": "lean/Sheaf/Paper/NativeIntegrationProjectionLaws.lean",
+  "declaration": "WeilConjectures.PurityIntegration.nativeIntegrationProjectionLaws",
+  "declarations": [
+   "WeilConjectures.PurityIntegration.IntegrationProjectionLaws",
+   "WeilConjectures.PurityIntegration.nativeProjectionAssertion",
+   "WeilConjectures.PurityIntegration.nativeIntegrationProjectionLaws"
+  ],
+  "statement": "theorem nativeIntegrationProjectionLaws (b : Bool) (R : Type (u + 1)) [CommRing R] [Finite R] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact f] [QuasiCompact g] : nativeProjectionAssertion b R f g",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d996e",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T122503-L-1776253",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d996e",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T122503-L-1776253",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositeIntegrationOperations vs clone's CompositeIntegrationCounit (verbatim relocation, diff), item proof vs node steps, new sorry statements IntegrationProjectionLaws/PrecompositorContraction vs native projection/compositor laws and Etale.projectionMap_rightUnitality; importers ProjectionPurityAgreement and AffineOrderedIntegrationTransposes compiled against delivered modules (exit 0)"
+ }
+}

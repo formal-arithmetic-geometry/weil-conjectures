@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-abelian-hom-finite-free",
+ "kind": "statement",
+ "title": "Homomorphisms of abelian varieties form a finite free abelian group",
+ "statement": "Let $k$ be a field [def-weil-field] and let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety]. Write $\\operatorname{Hom}_k(A,B)$ for the $k$-group-scheme homomorphisms [def-sc-group-scheme], with pointwise addition induced by the group law of $B$. Then $\\operatorname{Hom}_k(A,B)$ is a free abelian group of finite rank: it has a finite $\\mathbf Z$-basis [def-weil-pbc-free-module]. In particular $\\operatorname{End}_k(A)=\\operatorname{Hom}_k(A,A)$, with pointwise addition and multiplication given by composition, is a unital associative ring whose additive group is free of finite rank; its multiplicative identity is $\\mathrm{id}_A$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-av-commutative], the group law of every abelian variety is commutative. Thus the pointwise sum $(f+g)(x)=f(x)+g(x)$ and inverse $(-f)(x)=-f(x)$ of group-scheme homomorphisms are again group-scheme homomorphisms: these maps are composites of the diagonal, $(f,g)$, and the multiplication or inverse maps, and preservation of addition is the commutative-group identity $(f(x)+g(x))+(f(y)+g(y))=(f(x)+f(y))+(g(x)+g(y))$. The group identities hold as identities of these composites. Consequently every $\\operatorname{Hom}_k(X,Y)$ is an abelian group, and composition is additive in each variable.",
+   "uses": [
+    "lem-sc-av-commutative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, §1, printed p.8, and the Hom and End conventions of §10, printed pp.42–43."
+   }
+  },
+  {
+   "text": "Choose $\\ell=2$ if $\\operatorname{char}k\\ne2$, and $\\ell=3$ otherwise; in either case $\\ell$ is a prime different from $\\operatorname{char}k$. By [lem-sfb-abelian-tate-action-saturation], each $M=\\operatorname{Hom}_k(X,Y)$ embeds additively in $H=\\operatorname{Hom}_{\\mathbf Z_\\ell}(T_\\ell X,T_\\ell Y)\\cong\\mathbf Z_\\ell^{4\\dim X\\dim Y}$. The ring $\\mathbf Z_\\ell$ is contained in the characteristic-zero field $\\mathbf Q_\\ell$ by [def-weil-l-adic-numbers], so a nonzero integer cannot annihilate a nonzero element of $H$. Thus every such $M$ is torsion-free. In particular, for a positive-dimensional $k$-simple variety $C$, put $E=\\operatorname{End}_k(C)$. By [lem-trf-torsionfree-rationalization-injective], regard $E$ as a subgroup of $E^0=E\\otimes_{\\mathbf Z}\\mathbf Q$. No finite-dimensionality of $E^0$ is assumed here.",
+   "uses": [
+    "lem-sfb-abelian-tate-action-saturation",
+    "def-weil-l-adic-numbers",
+    "lem-trf-torsionfree-rationalization-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.6, printed p.45; proof of Theorem 10.15, printed p.49, before the choice of a rational basis."
+   }
+  },
+  {
+   "text": "Let $e_1,\\ldots,e_r\\in E$ be any finite rationally independent family, let $V=\\sum_i\\mathbf Qe_i\\subseteq E^0$, and let $\\Lambda=E\\cap V$. Use these coordinates to embed $V$ additively into $\\mathbf R^r$. By [lem-sfb-abelian-degree-polynomial], the degree on $V$ is represented by a rational polynomial $P$ with $P(0)=0$. Extend its coefficients to $\\mathbf R$. For $0\\ne a\\in\\Lambda$, [lem-sfb-simple-isogeny-decomposition] says that $a:C\\to C$ is an isogeny; hence $P(a)=\\deg(a)$ is a positive integer. A real polynomial is continuous because it is a finite sum of finite products of continuous coordinate functions. Therefore $U=\\{x:|P(x)|<1\\}$ is an open neighbourhood of zero in $\\mathbf R^r$ and $U\\cap\\Lambda=\\{0\\}$. Translating $U$ by any $a\\in\\Lambda$ shows that every singleton in $\\Lambda$ is open in its subspace topology. Thus $\\Lambda$ is a discrete integer submodule of $\\mathbf R^r$, including the case $r=0$.",
+   "uses": [
+    "lem-sfb-abelian-degree-polynomial",
+    "lem-sfb-simple-isogeny-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Theorem 10.15, printed p.49, degree-polynomial discreteness argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-discrete-real-submodule-finite] to the discrete subgroup in the previous step: $\\Lambda$ is finitely generated. It is torsion-free as a subgroup of $E$, so [lem-trf-fg-torsionfree-group-free] gives a finite integer basis $b_1,\\ldots,b_s$. This is a rational basis of $V$: if $\\sum_j q_jb_j=0$ with $q_j\\in\\mathbf Q$, choose an integer $D>0$ with every $Dq_j\\in\\mathbf Z$. Then $\\sum_j(Dq_j)b_j=0$ in $E^0$, hence in $E$ by step 2; integer independence gives $Dq_j=0$ and therefore $q_j=0$. Rational spanning follows because $\\Lambda$ contains $e_1,\\ldots,e_r$, which span $V$. Consequently $s=r$, and $|\\Lambda/\\ell\\Lambda|=\\ell^r$, by reducing these basis coordinates modulo $\\ell$.",
+   "uses": [
+    "lem-sfb-discrete-real-submodule-finite",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Theorem 10.15, printed p.49, the subgroup $\\mathbf QM\\cap\\operatorname{End}(C)$ and the reference there to ANT 4.15."
+   }
+  },
+  {
+   "text": "Write $H=\\operatorname{End}_{\\mathbf Z_\\ell}(T_\\ell C)$ and $N=4(\\dim C)^2$. Tate action sends $\\ell\\Lambda$ into $\\ell H$, since $\\iota(\\ell b)=\\ell\\iota(b)$, so it defines a homomorphism $\\Lambda/\\ell\\Lambda\\to H/\\ell H$. This homomorphism is injective. Indeed, if $a\\in\\Lambda$ maps into $\\ell H$, [lem-sfb-abelian-tate-action-saturation] gives $a=\\ell b$ with $b\\in E$. In $E^0$ one has $b=a/\\ell\\in V$, so $b\\in\\Lambda$. This proves that the kernel is zero, and applying the same argument to differences proves injectivity. The same cited node gives $H\\cong\\mathbf Z_\\ell^N$, and [def-weil-l-adic-numbers] gives $\\mathbf Z_\\ell/\\ell\\mathbf Z_\\ell\\cong\\mathbf Z/\\ell\\mathbf Z$. Hence $|H/\\ell H|=\\ell^N$. Comparing cardinalities with the previous step yields $\\ell^r\\leq\\ell^N$, so $r\\leq N$. This bounds every finite rationally independent family of actual endomorphisms, without yet choosing a basis of $E^0$.",
+   "uses": [
+    "lem-sfb-abelian-tate-action-saturation",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Lemma 10.16 and proof of Theorem 10.15, printed p.49; explicit finite-rank argument filling the transition to a rational basis."
+   }
+  },
+  {
+   "text": "The possible sizes of finite rationally independent families in $E$ form a nonempty subset of $\\{0,\\ldots,N\\}$, so choose a family of maximal size. Its rational span contains every element of $E$: otherwise an element outside that span could be appended to obtain a larger independent family. Every element of $E^0$ is a finite sum $\\sum_j a_j\\otimes q_j=\\sum_j q_j(a_j\\otimes1)$ with $a_j\\in E$ and $q_j\\in\\mathbf Q$; hence the family spans $E^0$ as well. For this finite-dimensional $V=E^0$, the subgroup $\\Lambda=E\\cap V$ in steps 3–4 is all of $E$. Their conclusion proves that $\\operatorname{End}_k(C)$ is a free abelian group of finite rank for every positive-dimensional $k$-simple $C$. This is where the finite rational basis is first chosen.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Theorem 10.15, printed p.49, final sentence for simple varieties; the preceding rank bound makes that choice legitimate."
+   }
+  },
+  {
+   "text": "By [lem-sfb-simple-isogeny-decomposition], choose finite products $P=\\prod_i A_i$, $Q=\\prod_j B_j$ of positive-dimensional $k$-simple varieties and isogenies $p:P\\to A$ and $q:B\\to Q$; the latter is the quasi-inverse of an isogeny $Q\\to B$. Choose quasi-inverses $p':A\\to P$, $q':Q\\to B$ and positive integers $n,m$ with $p\\circ p'=[n]_A$ and $q'\\circ q=[m]_B$. Send $f:A\\to B$ to the finite matrix $(\\pi_j\\circ q\\circ f\\circ p\\circ\\iota_i)_{i,j}$ in $\\prod_{i,j}\\operatorname{Hom}_k(A_i,B_j)$, where $\\iota_i$ inserts into one product factor and $\\pi_j$ projects to one. This is an additive map. A group homomorphism out of a finite product is the sum of its restrictions to the factors, since the identity of the product is $\\sum_i\\iota_i\\pi_i$. Thus a zero matrix means $qfp=0$. Composing gives $0=q'(qfp)p'=(q' q)f(pp')=[m]_B\\circ f\\circ[n]_A=mn f$, since a group homomorphism commutes with integer multiplication. Thus $f=0$ by the torsion-freeness proved in step 2. This proves injectivity, also for empty products.",
+   "uses": [
+    "lem-sfb-simple-isogeny-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Theorem 10.15, printed p.50, reduction to simple factors; quasi-inverse identities as in Remark 8.6."
+   }
+  },
+  {
+   "text": "For each pair $A_i,B_j$, if there is no nonzero homomorphism, its Hom group is zero. Otherwise choose one $h:A_i\\to B_j$; [lem-sfb-simple-isogeny-decomposition] makes it an isogeny, with quasi-inverse $v:B_j\\to A_i$ and $hv=[t]_{B_j}$ for some $t>0$. The map $f\\mapsto vf$ embeds $\\operatorname{Hom}_k(A_i,B_j)$ into $\\operatorname{End}_k(A_i)$: if $vf=0$, then $tf=hvf=0$, so $f=0$ by step 2. Each latter endomorphism group has a finite integer basis by step 6. Consequently [lem-weil-subgroup-finite-free-abelian-group-free] makes each simple-factor Hom group finite free. The finite product of these groups has the finite basis formed by inserting each factor's basis into its own coordinate, with other coordinates zero. Applying the same subgroup result to the injection in step 7 now proves that $\\operatorname{Hom}_k(A,B)$ has a finite integer basis.",
+   "uses": [
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Theorem 10.15, printed p.50, the embeddings $\\operatorname{Hom}(A_i,B_j)\\hookrightarrow\\operatorname{End}(A_i)$ and the finite-product conclusion."
+   }
+  },
+  {
+   "text": "Specialize the preceding conclusion to $B=A$. On $\\operatorname{End}_k(A)$ define multiplication by $fg=f\\circ g$. Associativity of morphism composition gives $(fg)h=f(gh)$; its identity laws give $\\mathrm{id}_Af=f=f\\mathrm{id}_A$. Additivity of composition from step 1 gives both distributive laws: $f(g+h)=fg+fh$ and $(f+g)h=fh+gh$. Together with the pointwise abelian-group law these are the unital associative ring axioms. Its additive group has the finite basis already obtained, and its multiplicative identity is exactly $\\mathrm{id}_A$. For the zero abelian variety the additive group and ring each have one element; its empty basis and $1=0=\\mathrm{id}_A$ satisfy the same assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, §10, printed pp.42–43, endomorphism-ring convention; Theorem 10.15 for its additive group."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-av-commutative",
+  "lem-sfb-abelian-tate-action-saturation",
+  "def-weil-l-adic-numbers",
+  "lem-trf-torsionfree-rationalization-injective",
+  "lem-sfb-abelian-degree-polynomial",
+  "lem-sfb-simple-isogeny-decomposition",
+  "lem-sfb-discrete-real-submodule-finite",
+  "lem-trf-fg-torsionfree-group-free",
+  "lem-weil-subgroup-finite-free-abelian-group-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, proof of Theorem 10.15, printed pp.49–50; finite-rank transition expanded using saturation modulo ell before choosing a rational basis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms between abelian varieties form a finite rank free abelian group",
+   "results": "8 hits; logged top results: Module.Finite.addMonoidHom, Module.Free.addMonoidHom, FGModuleCat.instFiniteHom, FGModuleCat.instFiniteHomModuleCatObjIsFG, AddCommGrpCat.instAddCommGroupHom, WeierstrassCurve.Affine.Point.toClass, CharacterModule.instAddCommGroup, RootDatum",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/free Hom instances assume finite/free underlying modules; they do not prove finite freeness of geometric homomorphisms of abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Hom\", \"Finite\"",
+   "results": "12 hits; logged top results: AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appTop, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/free Hom instances assume finite/free underlying modules; they do not prove finite freeness of geometric homomorphisms of abelian varieties"
+  },
+  {
+   "tool": "grep",
+   "query": "abelian[Vv]ariety|[Aa]belian[Vv]ariety|[Hh]om.*[Aa]belian.*[Ff]ree",
+   "results": "4 hits; logged top results: Mathlib/Algebra/FreeAbelianGroup/Finsupp.lean, Mathlib/GroupTheory/FreeAbelianGroup.lean, Mathlib/GroupTheory/FreeAbelianGroup.lean, Mathlib/GroupTheory/FreeAbelianGroup.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/free Hom instances assume finite/free underlying modules; they do not prove finite freeness of geometric homomorphisms of abelian varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The group Hom A B of two abelian varieties is a finitely generated torsion free Z module",
+   "results": "8 hits; logged top results: Module.Finite.addMonoidHom, AddGrpCat.Hom, AddMonoid.FG.to_moduleFinite_int, AddCommGrpCat.instAddCommGroupHom, AddCommGrpCat.Hom, ModuleCat.instAddCommGroupHom, CommGrpCat.Hom, Module.Free.addMonoidHom",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/free Hom instances assume finite/free underlying modules; they do not prove finite freeness of geometric homomorphisms of abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The endomorphism ring of an abelian variety is a lattice of finite rank over the integers",
+   "results": "8 hits; logged top results: CategoryTheory.finrank_endomorphism_eq_one, finrank_algHom, CategoryTheory.finrank_endomorphism_simple_eq_one, CategoryTheory.finrank_hom_simple_simple_le_one, card_algHom_le_finrank, FGModuleCat.instFiniteHomModuleCatObjIsFG, FGModuleCat.instFiniteHom, Finite.algHom",
+   "date": "2026-10-22",
+   "verdict": "no match: finite/free Hom instances assume finite/free underlying modules; they do not prove finite freeness of geometric homomorphisms of abelian varieties"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polarized-abelian-odd-level-rigidity",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43.",
+   "via": [
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-hom-finite-free",
+  "worker": "stage1",
+  "group": "Q41",
+  "summary": "Checked Milne I Theorem 10.15 and its inputs. Proved the item in nine steps, retaining arbitrary k and both Hom and End conclusions. Added three statement-only geometric inputs and one exact Mathlib leaf for discrete integer submodule finiteness. Filled the missing finite-rank transition using saturated Tate action modulo ell before choosing a maximal independent family. Reused existing commutativity, torsion-free rationalization, finite-basis and subgroup leaves. No Lean edits or compilation. Repair after the side-completion promotion refusal: rebased the retained split through deliver.py onto the current DAG; reread all current cited statements and verified all thirteen citation quotes. The current item remains unsplit with the same statement and metadata, and the four supporting nodes remain absent. No dependency replacement is needed. Corrected the lattice exact-name grep verdict to acknowledge its recorded match. On the renewed repair pass, the initial server dry run passed at 8f26edc5f79. Reread each current cited statement and Milne input against the retained returned-head material; no dependency replacement is required. Expanded step 4 to give the integer-denominator relation and its use of the already proved rationalization injection explicitly. Current return fb3a2bc36ee: the first fresh server dry run passed at bd38f559cf2; current cited statements and all thirteen quotation records were rechecked. Step 5 now writes the quotient-map well-definedness, and step 6 writes the finite tensor-sum formula for rational spanning. No statement or dependency changed. Repair of returned head 41cef598e72 on 2026-10-23: first dry run passed at 06fc78e6608; all current dependency statements and citation quotes reread. Expanded step 7 with the full composite q-prime(qfp)p-prime=[m]f[n]=mn f, and corrected the first retained LeanFinder result summary to its unchanged actual search log. No statement or dependency changes.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3), through the recorded ILO X/de Jong level-rigidity prerequisite; the inherited nearest blueprint ancestor is null, as tools/blueprint_refs.py ancestor reports. The item is an auxiliary Milne theorem below that route, not a change to the unit statement or its proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-av-commutative",
+    "why": "Supplies the commutative group law needed to form pointwise abelian Hom groups; the unit has no replacement for this geometric tool."
+   },
+   {
+    "node": "lem-trf-torsionfree-rationalization-injective",
+    "why": "Embeds the torsion-free endomorphism group in its actual rational tensor product; a generic group-theoretic tool, not a change of unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-av-commutative",
+  "lem-trf-torsionfree-rationalization-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-dacccdb00",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-dacccdb00 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's nine steps, all four new nodes, the five cited existing statements, Milne AV I Prop 10.1, 10.5, 10.13, Thm 10.15 and Lemma 10.16 with Remark 8.6, and Mathlib instModuleFinite_of_discrete_submodule (ZLattice/Basic.lean:488-490), which matches exactly. This is the fourth push of the same split. 7433f18, fb3a2bc and 41cef59 were all PASSed, and each landing was refused only because the side completion was never promoted to the live DAG. In clones/live the item is still unsplit and the four new ids are absent. There is no repair note for this item. Against 41cef59 the new nodes are byte-identical. The only changes are in step 7, which now writes 0=q'(qfp)p'=(q'q)f(pp')=[m]f[n]=mn f with correct directions, and in split_report (one search-summary line, the date and the summary). The mathematics is correct. Steps 3-4 show Lambda=E∩V is discrete through |P|<1 and translation, then the lattice leaf and the finite-basis lemma give a rational basis. Step 5 uses saturation mod ell to bound r<=4dim^2, which fills Milne's gap. Step 7 is the Poincare matrix injection, using torsion-freeness. Step 8 embeds Hom(A_i,B_j) into End(A_i) via hv=[t]. Step 9 gives the ring axioms, and the zero variety works. All three statement-only nodes are true over any k with ell != char k. None restates an item clause or duplicates an existing node (the existing nodes are over an algebraically closed field or are definitions), and no SGA source appears. Batch-5 check: lem-trf-torsionfree-rationalization-injective (G torsion-free implies G->G⊗Q injective) has a closure of definitions plus one pbc localization lemma. lem-trf-fg-torsionfree-group-free is a Mathlib leaf with an empty closure. Both are generic algebra and neither is a step of the proof of the trace formula or of Poincare duality, so both are accepted. I also accept the generic tool uses lem-sc-av-commutative and the rationalization lemma. No fixes. Maintainer note: this is a side-completion promotion loop; L should promote the split instead of returning it again."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.HomFiniteFree",
+  "declaration": "AlgebraicGeometry.abelianVariety_hom_finite_free",
+  "declarations": [
+   "AlgebraicGeometry.abelianVarietyHomSubgroup",
+   "AlgebraicGeometry.abelianVarietyHom",
+   "AlgebraicGeometry.abelianVariety_hom_finite_free"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/HomFiniteFree.lean",
+  "statement": "theorem abelianVariety_hom_finite_free {k : Type u} [Field k] (A B : Over (Spec (.of k))) [GrpObj A] [GrpObj B] [IsAbelianVariety A] [IsAbelianVariety B] : (∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ (abelianVarietyHom A B))) ∧ ∃ r : Ring (abelianVarietyHom A A), r.toAddCommGroup = Additive.addCommGroup ∧ (∀ f g : abelianVarietyHom A A, (r.mul f g).val = g.val ≫ f.val) ∧ r.one.val = 𝟙 A ∧ ∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ (abelianVarietyHom A A))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Constructs the actual subgroup of k-scheme morphisms satisfying IsMonHom and uses Additive for its canonical pointwise abelian group. States finite integer bases and existence of the associative unital endomorphism ring, with additive structure equal to the canonical one, multiplication f*g=f composed with g, and one=id_A."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50da2830a",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Item changed only in lean; 4 stmt_dep records identical to live; statement verbatim, one sorry, lines <=91, docstrings with source+blueprint and all 9 proof steps. Hypotheses: Field k (universe u), A B : Over (Spec k) with GrpObj + IsAbelianVariety, exactly the node. Hom = real Subgroup {f | IsMonHom f} of A ⟶ B with the pointwise Hom.commGroup (commutative via isCommMonObj), as Additive; no sorry or choice. Conclusions: ∃ n, Basis (Fin n) ℤ Hom; ∃ Ring on End with toAddCommGroup = canonical Additive.addCommGroup, mul = g≫f (f∘g), one = 𝟙 A (pins the ring, not a tautology), plus End basis. Zero variety and n=0 covered; arbitrary k and characteristic. No existing Hom-group declaration in side-live Sheaf/WeilConjectures; Mathlib yonedaCommGrpGrpObj is the bundled Grp C form, not usable with the Over+GrpObj convention (advisory). Plain imports = modules of the stated proof deps (trf rationalization, Padics, ZLattice, PID). No changes, no compile. Advisories: second reading by the same worker; End-basis clause redundant with B=A."
+ }
+}

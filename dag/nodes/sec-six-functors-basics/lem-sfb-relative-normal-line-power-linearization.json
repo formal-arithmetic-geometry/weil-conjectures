@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-relative-normal-line-power-linearization",
+ "kind": "statement",
+ "title": "Positive-power linearization of a relatively very ample line over an affine base",
+ "statement": "Let $A$ be a commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], $r\\geq0$, and $C=A[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$. Write $T=\\operatorname{Spec}C=\\mathbf G_{m,S}^r$ [def-sc-gm-ga], where $C$ has $A$-basis $t^u$ for $u\\in\\mathbf Z^r$, $t^ut^v=t^{u+v}$, $\\Delta(t^u)=t^u\\otimes t^u$, $\\varepsilon(t^u)=1$, and antipode $t^u\\mapsto t^{-u}$. Assume $A$ is Noetherian [def-weil-pbc-noetherian-ring]. Let $f:X\\to S$ be separated and of finite type [def-pc-scheme, def-weil-pbc-scheme-conventions], and suppose every local ring of $X$ is an integrally closed domain [def-weil-pbc-normal-ring]. Let $a:T\\times_S X\\to X$ be an $S$-action, with the unit and associativity identities as scheme-morphism equalities [def-pc-fibre-product]. Let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module] relatively very ample over $S$ [def-trf-relatively-very-ample]. Then there exists an integer $m\\geq1$ such that $L^{\\otimes m}$ [def-pur-sheaf-tensor-product] admits a $T$-linearization. A $T$-linearization of an invertible module $M$ means an isomorphism $\\theta:p_2^*M\\xrightarrow{\\sim}a^*M$ on $T\\times_S X$ [def-pc-module-pullback], restricting to $1_M$ along the identity and satisfying $\\theta_{gh,x}=\\theta_{g,hx}\\theta_{h,x}$ on $T\\times_S T\\times_S X$ as an equality of pulled-back sheaf maps. Empty or disconnected $X$, the zero ring, nonreduced $A$, and $r=0$ are allowed; normality is required of $X$, not of $S$.",
+ "source": {
+  "document": "literature/thomason-equivariant-resolution-linearization.pdf",
+  "place": "WANTED local copy. R. W. Thomason, Equivariant resolution, linearization, and Hilbert's fourteenth problem over arbitrary base schemes, Adv. Math. 65 (1987), proof of Theorem 3.3, printed p.32, first paragraph: the positive-power linearization input before choosing a coherent submodule of sections. Read primary article online at https://www.researchgate.net/publication/243015730_Equivariant_resolution_linearization_and_Hilbert%27s_fourteenth_problem_over_arbitrary_base_schemes . This is the split-torus case of that input; no Stacks tag is asserted for this theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-sc-gm-ga",
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-trf-relatively-very-ample",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-ring-diagonalizable-group",
+  "def-sfb-equivariant-coherent-gzero",
+  "def-sfb-scheme-groupoid-module"
+ ],
+ "proof": [
+  {
+   "text": "The single affine open $S=\\operatorname{Spec}A$ is a Noetherian affine cover, so $S$ is locally Noetherian by [pqf-def-locnoeth]. Since $f$ is of finite type, it is locally of finite type; [pqf-lem-locnoeth-lft] makes $X$ locally Noetherian. Its local rings are domains by the given normality. Write $q=p_2:T\\times_SX\\to X$ and $e_X(x)=(1,x)$. From the specified Laurent coordinate algebra, $T\\times_SX$ is exactly the Laurent-space scheme $Y$ in the next input: over $\\operatorname{Spec}R\\subseteq X$, the tensor product $C\\otimes_A R$ has the basis $t^u$ and is $R[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]$. The inverse coefficient maps send $t_i\\otimes1$ to $t_i$ and $1\\otimes b$ to $b$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; the affine Laurent coordinate identification is by the given basis and tensor universal property."
+   }
+  },
+  {
+   "text": "Pullback preserves invertibility: a rank-one frame pulls back to a rank-one frame because $\\mathcal O_Y\\otimes_{g^{-1}\\mathcal O_X}g^{-1}\\mathcal O_X=\\mathcal O_Y$ [def-sc-invertible-module, def-pc-module-pullback]. Apply [lem-sfb-normal-laurent-line-invariance] to $N=a^*L$ on $Y=T\\times_SX$. All its hypotheses hold by step 1 and normality of $X$. The action unit $a e_X=1_X$ identifies $e_X^*a^*L$ with $L$, using the pullback composition isomorphisms. Thus its conclusion gives an isomorphism $\\theta_0:q^*L\\xrightarrow{\\sim}a^*L$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-sfb-normal-laurent-line-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Agent proof of the split-torus linearization input in Thomason, proof of Theorem 3.3, p.32; geometric input derived from Tags 0BD7 and 0BDA, with the normalized cocycle checked by finite Laurent supports."
+   }
+  },
+  {
+   "text": "The restriction $\\alpha=e_X^*\\theta_0$ is an automorphism of $L$. Every endomorphism of a line is multiplication by a unique regular scalar: in a local frame it is multiplication by its value on that frame, and changing the frame by a unit leaves that scalar unchanged. Therefore the local scalars glue; for an automorphism they glue to a unit. Define $\\theta=\\theta_0\\circ q^*(\\alpha^{-1})$. Since $q e_X=1_X$, its restriction along $e_X$ is $\\alpha\\alpha^{-1}=1_L$. Pullbacks and compositions here are the tensor pullbacks of [def-pc-module-pullback]; the assertions can equally be checked in these local frames.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Agent proof of the split-torus linearization input in Thomason, proof of Theorem 3.3, p.32; geometric input derived from Tags 0BD7 and 0BDA, with the normalized cocycle checked by finite Laurent supports."
+   }
+  },
+  {
+   "text": "On $T\\times_ST\\times_SX$, the two maps $\\theta_{gh,x}$ and $\\theta_{g,hx}\\theta_{h,x}$ have the same source and target, by associativity of the action. Their ratio is an automorphism of a line, hence a unique global unit $d$ by the frame calculation of step 3. The identity restriction of $\\theta$ gives $d(1,h,x)=1$ and $d(g,1,x)=1$ as equalities of regular functions on the two identity faces, not merely on geometric points. We prove that $d=1$ by the following local calculation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Agent proof of the split-torus linearization input in Thomason, proof of Theorem 3.3, p.32; geometric input derived from Tags 0BD7 and 0BDA, with the normalized cocycle checked by finite Laurent supports."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and set $R=\\mathcal O_{X,x}$, a domain. Pull $d$ and its inverse back to the Laurent scheme over $\\operatorname{Spec}R$; write the resulting inverse Laurent polynomials as $P,Q$ in the $2r$ variables $g,h$. Order $\\mathbf Z^{2r}$ lexicographically. For finite nonempty supports over a domain, the least (respectively greatest) exponent of a product is the sum of the least (respectively greatest) exponents: its coefficient is the product of the two extremal nonzero coefficients, since no other pair gives that extremum. Since $PQ=1$, their widths satisfy $(\\max P-\\min P)+(\\max Q-\\min Q)=0$. Both widths are nonnegative in this ordered group, so both are zero. Thus $P=cg^uh^v$ for a unit $c\\in R^\\times$. The face identities say $ch^v=1$ and $cg^u=1$; uniqueness of Laurent coefficients forces $c=1$ and $u=v=0$. Consequently $P=1$. On any affine open $U\\subseteq X$, expand $d-1$ in Laurent monomials. Each coefficient has zero germ at every $x\\in U$ by this calculation, so it is zero by the sheaf axiom. Thus $d=1$ on the opens $T^2\\times_SU$ covering $T^2\\times_SX$. This proves the required cocycle. When $r=0$ the exponent group is zero and the same calculation applies. The argument is local at each $x$, so disconnected $X$ requires no choice of a common exponent. If $X$ is empty all sheaf maps are unique. We have linearized $L$ itself; taking $m=1$ gives the stated positive tensor power.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Agent proof of the split-torus linearization input in Thomason, proof of Theorem 3.3, p.32; geometric input derived from Tags 0BD7 and 0BDA, with the normalized cocycle checked by finite Laurent supports."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-sfb-normal-laurent-line-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Agent proof of the split-torus linearization input in Thomason, proof of Theorem 3.3, p.32; geometric input derived from Tags 0BD7 and 0BDA, with the normalized cocycle checked by finite Laurent supports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian ring a split torus acting on a normal scheme admits a linearization on a positive tensor power of any relatively very ample line bundle",
+   "results": "{\"t\": \"2026-10-24T04:05:39Z\", \"tool\": \"leanfinder\", \"query\": \"Over a Noetherian ring a split torus acting on a normal scheme admits a linearization on a positive tensor power of any relatively very ample line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.AffineSpace\", \"Rep.diagonal_succ_projective\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"CommRing.Pic.mapAlgebra_apply\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"2384b902c6b0b902\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"lineariz\"",
+   "results": "{\"t\": \"2026-10-24T04:05:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"lineariz\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "linearization|linearisation|Sumihiro|Thomason",
+   "results": "{\"t\": \"2026-10-24T04:05:37Z\", \"tool\": \"grep\", \"query\": \"linearization|linearisation|Sumihiro|Thomason\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic torus action on a normal scheme linearizes some tensor power of an invertible sheaf",
+   "results": "{\"t\": \"2026-10-24T04:05:37Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic torus action on a normal scheme linearizes some tensor power of an invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.linearization\", \"Rep.linearization_obj_ρ\", \"TensorPower.mulEquiv\", \"Rep.coe_linearization_obj_ρ\", \"Rep.linearization_δ_hom\", \"Module.Invertible.rTensorEquiv\", \"Rep.linearizationOfMulActionIso\", \"Rep.linearization_μ_hom\"], \"digest\": \"c478b0a93cf16a00\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively very ample invertible sheaf on a normal scheme with a multiplicative group action over an affine ring has a linearized positive power",
+   "results": "{\"t\": \"2026-10-24T04:05:40Z\", \"tool\": \"leanfinder\", \"query\": \"A relatively very ample invertible sheaf on a normal scheme with a multiplicative group action over an affine ring has a linearized positive power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Proj.pow_apply\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Proj.basicOpen_pow\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\"], \"digest\": \"19fc52f2760ad5d7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projective-spectrum constructions, abstract group representations, Laurent Hopf algebra structures and ordinary section lemmas do not assert the stated relative equivariant sheaf theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus action on a normal scheme over a ring admits a linearization of every invertible sheaf",
+   "results": "{\"t\": \"2026-10-24T04:45:24Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus action on a normal scheme over a ring admits a linearization of every invertible sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.linearizationTrivialIso_inv_hom\", \"Rep.linearizationOfMulActionIso\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\"], \"digest\": \"fc5fbcc9f230d228\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: projective section lemmas, tensor powers and Rep.linearization concern different objects, not linearizations of invertible sheaves under group-scheme actions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"lineariz\"",
+   "results": "{\"t\": \"2026-10-24T04:45:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"lineariz\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: projective section lemmas, tensor powers and Rep.linearization concern different objects, not linearizations of invertible sheaves under group-scheme actions"
+  },
+  {
+   "tool": "grep",
+   "query": "linearization|linearisation|Sumihiro|Thomason",
+   "results": "{\"t\": \"2026-10-24T04:45:25Z\", \"tool\": \"grep\", \"query\": \"linearization|linearisation|Sumihiro|Thomason\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: projective section lemmas, tensor powers and Rep.linearization concern different objects, not linearizations of invertible sheaves under group-scheme actions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relatively very ample invertible sheaf on a normal scheme with a split torus action has a linearized tensor power",
+   "results": "{\"t\": \"2026-10-24T04:45:25Z\", \"tool\": \"leansearch\", \"query\": \"A relatively very ample invertible sheaf on a normal scheme with a split torus action has a linearized tensor power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorPower.mulEquiv\", \"TensorPower.gMul_def\", \"Module.Invertible.rTensorEquiv\", \"Rep.linearizationOfMulActionIso\", \"Submodule.tensorInvEquiv\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\"], \"digest\": \"6bce7c8d1cfe298a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: projective section lemmas, tensor powers and Rep.linearization concern different objects, not linearizations of invertible sheaves under group-scheme actions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-torus-diagonal-projective-embedding",
+  "date": "2026-10-24",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Relative torus quotient input: invariant affine covering of the normal ample source after finite étale splitting of the torus. This is the relative-base replacement for the field-only Sumihiro lemma. Supporting input: Equivariant projective embedding before selecting boundary-avoiding weight charts. Supporting first step: linearize a positive tensor power of the initial relatively very ample line before choosing weight sections.",
+   "via": [
+    "lem-sfb-relative-torus-diagonal-projective-embedding",
+    "lem-sfb-relative-split-torus-invariant-affines",
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-normal-line-power-linearization",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Replaced the unexpanded Thomason input by a direct split-torus proof: Laurent line invariance gives an unnormalized isomorphism; identity normalization and the explicitly proved Laurent-support extremum calculation force the cocycle. One new action-free geometric statement-only node; no new elementary algebra node. All base/empty/disconnected/rank-zero cases checked.",
+  "blueprint": "Relative torus quotient input: invariant affine covering of the normal ample source after finite étale splitting of the torus. This is the relative-base replacement for the field-only Sumihiro lemma. Supporting input: Equivariant projective embedding before selecting boundary-avoiding weight charts. Supporting first step: linearize a positive tensor power of the initial relatively very ample line before choosing weight sections. The inherited ancestor is null as confirmed by blueprint_refs.py ancestor; retained it. Realizes the initial positive-power linearization input in the relative diagonal projective-embedding argument, taking m=1.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-2ad7b7d70",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-2ad7b7d70 (reviewer sub-agent of L); spot-checked: Item statement and stmt_deps are byte-identical to the Q144 creation copy; only the proof fields and split_report changed, and m=1 is a witness for the existential. New node lem-sfb-normal-laurent-line-invariance (Pic of X x G_m^r over a normal locally Noetherian X is pulled back along e) is true: the normal integral components, flatness, integral fibres, Tag 0BD7 (divisors lemma-in-image-pullback, l.6966) and Tag 0BDA (lemma-open-subscheme-UFD, l.7187) for the generic fibre give it. Tested on Spec k, Spec(k x k), r=0, empty X and singular normal X; the cusp/node shows normality is needed. It passes B1-B7 and is not a duplicate: I compared it with normal-noetherian-generic-line-pullback, normal-base-fibrewise-line-locality, normal-variety-affine-parameter-picard, smooth-generic-trivial-line-descent, affine-cell-picard-product, normal-group-vertical-cartier-descent, normal-product-square-descent and normal-line-bundle-power-linearization (over an algebraically closed field only). It does not restate the item: there is no action and no cocycle in it. Steps: (1) locnoeth via pqf-def-locnoeth plus the Mathlib leaf 01T6, and T x_S X = X x Spec Z[t^±]; (2) the new node applied to a^*L with ae=1 gives theta_0; (3) End(L)=O(X), and theta=theta_0 q^*(alpha^-1) restricts to 1; (4) the cocycle ratio is a unit d with both face identities; (5) units of R[g^±,h^±] over the domain O_{X,x} are monomials (lexicographic extremal-exponent argument), so the faces force d=1 stalkwise, then coefficientwise on affine U. All of this is correct and elementary as written. No SGA, no cycle, no tool_uses needed. Nit: the report mentions citations.json, which is not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeNormalLinePowerLinearization",
+  "declaration": "AlgebraicGeometry.exists_relative_normal_line_tensorPow_linearization",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeNormalLinePowerLinearization.lean",
+  "statement": "theorem exists_relative_normal_line_tensorPow_linearization (A : Type u) [CommRing A] [IsNoetherianRing A] (r : ℕ) (X : Over (Spec (.of A))) [ModObj (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X X] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (hnormal : ∀ x : X.left, IsDomain (X.left.presheaf.stalk x) ∧ IsIntegrallyClosed (X.left.presheaf.stalk x)) (L : X.left.Modules) [L.IsInvertible] (hL : Scheme.Modules.IsRelativelyVeryAmple X.hom L) : ∃ m : ℕ, 1 ≤ m ∧ ∃ D : ActionGroupoidModel (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X X, ∃ theta : (Scheme.groupoidModulePullback (source (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X X)).obj (L.tensorPow m) ≅ (Scheme.groupoidModulePullback (target (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X X)).obj (L.tensorPow m), Scheme.groupoidModuleUnitLaw (source (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X X) (target (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X X) (identityArrow (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X X) D.laws.source_id D.laws.target_id (L.tensorPow m) theta.symm ∧ Scheme.groupoidModuleCocycleLaw (source (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X X) (target (ringDiagonalizableGroup A (ULift.{u} (Fin r → ℤ))).X X) D.comp D.laws.source_comp D.laws.target_comp (L.tensorPow m) theta.symm",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b819b870d",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Node statement unchanged; only lean + 3 landed def-node stmt_deps (ring-diagonalizable-group, equivariant-coherent-gzero, scheme-groupoid-module) added, no cycle. Clauses match: IsNoetherianRing A; torus = ringDiagonalizableGroup A (ULift (Fin r→ℤ)) = node's Laurent Hopf algebra and identical to parent citer's DiagonalProjectiveAction.torus abbrev; IsSeparated+LOFT+QC = finite type; pointwise IsDomain∧IsIntegrallyClosed stalks on X only; ModObj action; IsInvertible + IsRelativelyVeryAmple; ∃ m≥1, tensorPow m; theta: source(snd)^* ≅ target(smul)^*, unit/cocycle laws of def-sfb-scheme-groupoid-module on theta.symm (c^*β = fst^*β≫snd^*β, fst=(g,hx), snd=(h,x), c=(gh,x)) equivalent to forward cocycle. ∃ D ActionGroupoidModel is unique (group_coordinate + source_comp pin both coordinates), so not a weakening. Edge cases A=0, nonreduced, r=0, empty/disconnected X covered; single universe u. No existing theorem; Linearization structures elsewhere field-only. No defs, sorry-only proof, docstrings with source/blueprint/5 proof steps, lean.statement verbatim. Note: RingGroupSchemes.splitTorus duplication pre-exists; proof dep normal-laurent-line-invariance has no Lean record (proof-only)."
+ }
+}

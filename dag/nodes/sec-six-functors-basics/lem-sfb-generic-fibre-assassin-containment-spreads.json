@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-generic-fibre-assassin-containment-spreads",
+ "kind": "statement",
+ "title": "Generic containment of fibre associated points spreads to a nonempty base open",
+ "statement": "Let $f:X\\to Y$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism]. Let $F$ be a quasi-coherent $\\mathcal O_X$-module of finite type [pqf-def-coherent], and let $U\\subseteq X$ be an open subscheme [def-weil-open-immersion]. Assume that $|Y|$ is irreducible [def-weil-irreducible-components] and let $\\eta$ be its generic point [def-sc-generic-point]. For $y\\in Y$, use the scheme-theoretic fibre $X_y$ and the tensor pullback $F_y$ [def-pc-module-pullback]; associated points are [def-trf-relative-assassin]. If $\\operatorname{Ass}_{X_\\eta}(F_\\eta)\\subseteq |U_\\eta|$, there exists a nonempty open subscheme $V\\subseteq Y$ such that for every $y\\in |V|$ one has $\\operatorname{Ass}_{X_y}(F_y)\\subseteq |U_y|$. No Noetherian hypothesis on $Y$ and no quasi-compactness hypothesis on $U$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05KP (lemma-good-case), statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-weil-open-immersion",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-pc-module-pullback",
+  "def-trf-relative-assassin"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-generic-flat-reduced-base-model] to $f$: it gives an integral affine open $W$ of $Y_{\\mathrm{red}}$, mapping homeomorphically onto a nonempty open $V_0\\subseteq Y$, with identical residue fields and identical scheme fibres. Set $X_W=X\\times_YW$, $F_W=q_X^*F$ and $U_W=q_X^{-1}U$. Pullback preserves quasi-coherence by [lem-weil-pbc-module-pullback-quasi-coherent]; and [lem-weil-pbc-module-pullback-finite-type] ensures that $F_W$ is of finite type, with the same local generating bounds. The generic containment hypothesis transfers to $W$ by [lem-sfb-fibre-assassin-containment-base-change], applied to $W\\to Y$. A nonempty open of $W$ with the required containment therefore gives an open of $Y$ with the same property, by the reverse implication of the same node at every point. It suffices henceforth to prove the result over $Y=\\operatorname{Spec}A$ with $A$ a domain and generic field $K$. The extra flatness of $X_W\\to W$ supplied by the reduction tool is not needed.",
+   "uses": [
+    "lem-trf-generic-flat-reduced-base-model",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-sfb-fibre-assassin-containment-base-change",
+    "lem-weil-pbc-module-pullback-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), first paragraph, reduction and affine base restriction; the existing generic-flat reduced-base tool packages these operations."
+   }
+  },
+  {
+   "text": "By the finite-type definition [def-weil-finite-type-morphism], choose a finite affine covering $X=\\bigcup_{i=1}^rX_i$, $X_i=\\operatorname{Spec}B_i$, with $B_i$ a finite type $A$-algebra. Associatedness is a condition on the stalk and its local ring [def-trf-relative-assassin], so for any open immersion $T\\subseteq Z$ one has $\\operatorname{Ass}_T(G|_T)=\\operatorname{Ass}_Z(G)\\cap T$: both stalks and local rings at a point of $T$ are identical. Apply this to every fibre chart $(X_i)_y\\subseteq X_y$. The hypothesis holds on every chart. If each chart yields a nonempty base open $V_i$, their finite intersection is nonempty since each contains the generic point of the irreducible base; on this intersection every fibre associated point is in a chart and hence in $U_y$. If $r=0$, take $V=Y$. We may work on one affine chart $X=\\operatorname{Spec}B$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), second paragraph, finite affine covering and locality of associatedness."
+   }
+  },
+  {
+   "text": "Put $N=\\Gamma(X,F)$. By [lem-weil-pbc-affine-finite-type-generating-sections] this is a finite $B$-module, and the counit of [lem-weil-pbc-affine-tilde-gamma-adjunction] gives $F\\cong\\widetilde N$. On the fibre over a field $\\kappa=\\kappa(y)$ the coordinate ring is $B_\\kappa=B\\otimes_A\\kappa$. The fibre module is $N_\\kappa=N\\otimes_A\\kappa$: [lem-weil-pbc-module-pullback-affine-sections] gives $N\\otimes_B(B\\otimes_A\\kappa)$, identified with $N\\otimes_A\\kappa$ by $n\\otimes(b\\otimes c)\\mapsto bn\\otimes c$, with inverse $n\\otimes c\\mapsto n\\otimes(1\\otimes c)$. Pullback quasi-coherence follows from [lem-weil-pbc-module-pullback-quasi-coherent]. If $b_1,\\ldots,b_d$ generate $B$ over $A$, their tensors generate $B_\\kappa$ over $\\kappa$. A field is Noetherian (its only ideals are zero and the whole field), so [lem-weil-pbc-finite-type-algebra-noetherian] makes $B_\\kappa$ Noetherian. Thus [lem-sfb-affine-associated-points-primes] applies to every fibre, including $K$.",
+   "uses": [
+    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sfb-affine-associated-points-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), third paragraph, affine finite module and Noetherian fibre rings; Properties Tag 01PB and Divisors Tag 02OK."
+   }
+  },
+  {
+   "text": "The principal opens $D(g)\\subseteq U$, $g\\in B$, cover $U$ by [lem-weil-pbc-spec-localization-away-basic-open]. Their inverse images cover $U_K$. Since $B_K$ is Noetherian, its spectrum has the descending-chain condition on closed subsets: a descending chain of closed subsets gives an ascending chain of their radical ideals, which stabilizes. Consequently [lem-sfb-noetherian-space-compact-subsets] gives a finite subcover of $U_K$. Choose $g_1,\\ldots,g_m\\in B$ with $D(g_j)\\subseteq U$ and $U_K=\\bigcup_jD(g_j\\otimes1)$. The case $U_K=\\varnothing$ allows $m=0$. Only $U_K$, rather than $U$, was required to be quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), third paragraph, finite principal subcover of the generic-fibre open."
+   }
+  },
+  {
+   "text": "Define $\\mu:N\\to N^{\\oplus m}$ by $n\\mapsto(g_jn)_j$. Its generic-field version $\\mu_K$ is injective. Indeed, let $z\\in N_K$ satisfy $(g_j\\otimes1)z=0$ for every $j$. Each $\\mathfrak q\\in\\operatorname{Ass}_{B_K}(N_K)$ corresponds by [lem-sfb-affine-associated-points-primes] to a generic-fibre associated point, hence lies in $U_K$ and avoids some $g_j\\otimes1$. That element is invertible in $(B_K)_{\\mathfrak q}$, so $z/1=0$ in $(N_K)_{\\mathfrak q}$. Now [lem-weil-pbc-module-injects-localizations-associated-primes] gives $z=0$. This argument also covers an empty assassin: the cited map into the empty product is injective.",
+   "uses": [
+    "lem-sfb-affine-associated-points-primes",
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), third paragraph, injectivity of the generic multiplication map. This proves it directly using Tag 0311, without needing Tag 0565."
+   }
+  },
+  {
+   "text": "Let $C=\\operatorname{coker}(\\mu)=N^{\\oplus m}/\\mu(N)$. It is a finite $B$-module: take the images of the finite generating tuples of $N^{\\oplus m}$. Thus $P=N\\oplus C$ is finite. Apply [lem-trf-algebra-module-simultaneous-generic-flatness] to $A\\to B$ and $P$. Obtain $0\\ne h\\in A$ such that $P_h$ is flat as an $A$-module. The summand maps identify $P_h=N_h\\oplus C_h$, so $N_h$ and $C_h$ are each $A$-flat. Explicitly, for an injection $L\\to L\\prime$, a vector killed after tensoring with $N_h$ maps by the split inclusion to one killed in $L\\otimes_AP_h$; flatness kills that image, and the tensor of the projection sends it back to the original vector. This proves injectivity after tensoring with $N_h$, and the same inclusion/projection argument proves it for $C_h$, using the flatness definition [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "lem-trf-algebra-module-simultaneous-generic-flatness",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), third paragraph, generic flatness applied simultaneously to the finite source and cokernel; Algebra Tag 051T."
+   }
+  },
+  {
+   "text": "The canonical map $N_h\\to N_K$ is injective. For every $0\\ne a\\in A$, multiplication $A\\xrightarrow{a}A$ is injective because $A$ is a domain. Tensoring with the flat module $N_h$ makes multiplication by $a$ on $N_h$ injective, by [def-weil-pbc-flat-ring-map]. The fraction-zero criterion in [def-weil-pbc-module-localization] then says that localization at $A\\setminus\\{0\\}$ is injective on $N_h$. This localization is $N_K$: iterated fractions identify $(n/h^r)/a$ with $n/(h^ra)$. If $z\\in\\ker\\mu_h$, its image in $N_K$ is killed by $\\mu_K$, hence is zero by Step 5, and therefore $z=0$. Thus $\\mu_h$ is injective.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), third paragraph, flatness implies torsion-freeness and the generic zero kernel vanishes; expanded directly from flatness and fractions, instead of quoting More on Algebra Tag 0538."
+   }
+  },
+  {
+   "text": "There is a short exact sequence $0\\to N_h\\xrightarrow{\\mu_h}N_h^{\\oplus m}\\to C_h\\to0$. To verify the right-hand assertions directly, every fraction $c/h^r$ in $C_h$ lifts to $v/h^r$ in $(N^{\\oplus m})_h$, since $N^{\\oplus m}\\to C$ is surjective. If $v/h^r$ maps to zero in $C_h$, the fraction-zero criterion [def-weil-pbc-module-localization] gives $h^e[v]=0$ in $C$ for some $e$, so $h^ev=\\mu(n)$ for some $n\\in N$. Then $v/h^r=\\mu_h(n/h^{r+e})$. The finite direct-sum localization is coordinatewise, using a common denominator for its finitely many coordinates. This proves exactness; injectivity is Step 7.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), third paragraph, the localized short exact sequence; explicit fraction proof of its cokernel identification."
+   }
+  },
+  {
+   "text": "For any $y\\in D(h)\\subseteq\\operatorname{Spec}A$, put $\\kappa=\\kappa(y)$. Apply [lem-weil-pbc-flat-quotient-tensor-injective] with base ring $A$, short exact sequence from Step 8, flat quotient $C_h$, and module $\\kappa$. It makes $\\kappa\\otimes_A\\mu_h$ injective. Since $h$ has nonzero, hence invertible, image in $\\kappa$, the map $N_h\\otimes_A\\kappa\\to N\\otimes_A\\kappa$, $(n/h^r)\\otimes c\\mapsto n\\otimes h^{-r}c$, is an isomorphism inverse to $n\\otimes c\\mapsto(n/1)\\otimes c$. The same formula in each coordinate identifies the induced map with $\\mu_\\kappa:N_\\kappa\\to N_\\kappa^{\\oplus m}$, $z\\mapsto((g_j\\otimes1)z)_j$. Thus this precise multiplication map is injective on every fibre over $D(h)$.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), last paragraph, tensoring the short exact sequence with residue fields, using Algebra Tag 00HL."
+   }
+  },
+  {
+   "text": "Fix $y\\in D(h)$ and let $x\\in\\operatorname{Ass}_{X_y}(F_y)$. Step 3 and [lem-sfb-affine-associated-points-primes] give a prime $\\mathfrak q\\in\\operatorname{Ass}_{B_\\kappa}(N_\\kappa)$ corresponding to $x$. By the element-annihilator definition [def-weil-pbc-annihilator-associated-primes], choose $z$ with $\\operatorname{Ann}(z)=\\mathfrak q$. This $z$ is nonzero, since a prime ideal is proper whereas $\\operatorname{Ann}(0)=B_\\kappa$. If $x$ were outside every $D(g_j\\otimes1)$, every $g_j\\otimes1$ would belong to $\\mathfrak q$, so $\\mu_\\kappa(z)=0$, contradicting Step 9. Hence $x\\in\\bigcup_jD(g_j\\otimes1)\\subseteq U_y$. This proves containment for the chart on the nonempty base open $D(h)$, which contains the prime $(0)$ because $h\\ne0$.",
+   "uses": [
+    "lem-sfb-affine-associated-points-primes",
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), last paragraph, reverse implication from injectivity to containment of associated points, written via element annihilators."
+   }
+  },
+  {
+   "text": "Perform Steps 3--10 for the finitely many affine charts of Step 2. The resulting opens $D(h_i)$ all contain the generic point, so their finite intersection $V\\prime$ is nonempty and open. For every $y\\in V\\prime$ and associated point $x\\in X_y$, choose a chart containing $x$; the stalk equality of Step 2 shows it is an associated point of that fibre chart, so Step 10 puts it in $U_y$. Finally transfer $V\\prime\\subseteq W$ back to $Y$ as in Step 1: the homeomorphism maps it onto a nonempty open $V\\subseteq V_0\\subseteq Y$, and [lem-sfb-fibre-assassin-containment-base-change] identifies the two containment conditions pointwise. This gives the required $V$ with no Noetherian hypothesis on $Y$ and no quasi-compactness hypothesis on $U$.",
+   "uses": [
+    "lem-sfb-fibre-assassin-containment-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05KP (lemma-good-case), second paragraph and conclusion, finite-chart assembly and descent from the reduced affine base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-generic-flat-reduced-base-model",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-sfb-fibre-assassin-containment-base-change",
+  "def-weil-finite-type-morphism",
+  "def-trf-relative-assassin",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-affine-associated-points-primes",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-trf-algebra-module-simultaneous-generic-flatness",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-module-pullback-finite-type"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05KP (lemma-good-case), full proof; injectivity is obtained directly from Tag 0311 rather than the two intermediate localization maps of Tag 0565."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme over an irreducible base a finite type quasi coherent sheaf whose generic fibre associated points lie in an open has this property over a nonempty base open",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.component_nontrivial\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens) [Nonempty ↥↑U], Nontrivial ↑(X.presheaf.obj (Opposite.op U))\", \"doc\": \"For any scheme $X$ and any non-empty open subset $U$ of $X$, the ring of global sections $\\\\Gamma(X, U)$ is non-trivial (i.e., contains at least two distinct elements).\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral.component_integral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsIntegral X] (U : X.Opens) [Nonempty ↥↑U],\\n  IsDomain ↑(X.presheaf.obj (Opposite.op U))\", \"doc\": \"For any integral scheme $X$ and any non-empty open subset $U \\\\subseteq X$, the ring of sections $\\\\Gamma(U, \\\\mathcal{O}_X)$ is an integral domain.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an open subset contains the assassin of the generic fibre then after shrinking the irreducible base it contains the associated points of every fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [hX : IrreducibleSpace ↥X]\\n  [inst : IrreducibleSpace ↥Y], (CategoryTheory.ConcreteCategory.hom f.base) (genericPoint ↥X) = genericPoint ↥Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsIntegral X] {U : X.Opens}\\n  (hU : AlgebraicGeometry.IsAffineOpen U) [h : Nonempty ↥↑U],\\n  hU.primeIdealOf ⟨genericPoint ↥X, ⋯⟩ = genericPoint ↥(AlgebraicGeometry.Spec (X.presheaf.obj (Opposite.op U)))\", \"doc\": \"For an integral scheme $X$ and an affine open subset $U \\\\subseteq X$, the prime ideal associated with the generic point of $X$ in the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(U, \\\\mathcal{O}_X))$ coin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.preimage_eq_top_of_closedPoint_mem\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  {U : X.Opens},\\n  (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U →\\n    (TopologicalSpace.Opens.map f.base).obj U = ⊤\", \"doc\": \"For any open subset $ U $ of a scheme $ X $, if the closed point of a local ring $ R $ is mapped into $ U $ by a morphism $ f $, then the preimage of $ U $ under $ f $ is the entire space $ X $, i.e.,\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"PrimeSpectrum.quasiSober\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R], QuasiSober (PrimeSpectrum R)\", \"doc\": \"The prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$, equipped with the Zariski topology, is a quasi-sober topological space. This means that every irreducible closed subset of $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.exists_toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} {P : ↥↑U → Prop}, (∃ x, P x) ↔ ∃ x, ∃ (hx : x ∈ U), P ⟨x, hx⟩\", \"doc\": \"For any open subset $ U $ of a scheme $ X $ and any property $ P $ on the restricted scheme $ U $, there exists an element $ (x, \\\\text{hx}) $ in $ U $ satisfying $ P $ if and only if there exists an e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"IsOpen\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "assassin|associated.*generic|generic.*associated",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Containment of fibre associated points in an open spreads from the generic point of an irreducible base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [hX : IrreducibleSpace X] [IrreducibleSpace Y] :\\n  f (genericPoint X) = genericPoint Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\n  {\"name\": \"IsGenericPoint.isIrreducible\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(h : IsGenericPoint x S) : IsIrreducible S\", \"doc\": \"If $ x $ is a generic point of a set $ S $, meaning the closure of $ \\\\{x\\\\} $ equals $ S $, then $ S $ is irreducible.\"}\n  {\"name\": \"genericPoints.ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : genericPoints α\", \"doc\": \"In a quasi-sober topological space, this function maps each irreducible component to its unique generic point, whose closure is the component itself.\"}\n  {\"name\": \"genericPoints.isGenericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(x : genericPoints α) : IsGenericPoint x.1 (component x).1\", \"doc\": \"For any generic point $ x $ in a topological space $ \\\\alpha $, the point $ x $ is a generic point of its associated irreducible component $ \\\\overline{\\\\{x\\\\}} $.\"}\n  {\"name\": \"IsGenericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(x : α) (S : Set α) : Prop\", \"doc\": \"The point $ x $ is a generic point of the set $ S $ if the closure of the singleton set $ \\\\{x\\\\} $ in the topological space is equal to $ S $.\"}\n  {\"name\": \"genericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] [IrreducibleSpace α] : α\", \"doc\": \"In a quasi-sober topological space that is irreducible, this is the unique point $ x $ such that the closure of $ \\\\{x\\\\} $ equals the entire space. This follows from the quasi-sober property ensuring e\"}\n  {\"name\": \"genericPoints.component\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(x : genericPoints α) : irreducibleComponents α\", \"doc\": \"For a generic point $ x $ in a topological space $ \\\\alpha $, this function returns the irreducible component of $ \\\\alpha $ given by the closure of the singleton set $ \\\\{x\\\\} $. Specifically, it maps $ \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give scheme fibres, generic points, Chevalley constructibility or associated primes under localization; they do not state this scheme fibre-assassin assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Containment of associated points of the generic fibre in an open spreads to a nonempty open subset of an irreducible base",
+   "results": "{\"t\": \"2026-10-23T23:02:36Z\", \"tool\": \"leanfinder\", \"query\": \"Containment of associated points of the generic fibre in an open spreads to a nonempty open subset of an irreducible base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"genericPoint_specializes\", \"IsGenericPoint.mem_open_set_iff\", \"genericPoint_spec\", \"genericPoints.isGenericPoint_ofComponent\", \"genericPoints.isGenericPoint\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\", \"genericPoints.ofComponent\"], \"digest\": \"a1f5cc33f4c2a8f7\"} Read hits: Only generic-point topology, finite type predicates and finite-type module data were returned; none states generic spreading of fibre-assassin containment.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "assassin|associated.*generic|generic.*associated",
+   "results": "{\"t\": \"2026-10-23T23:05:19Z\", \"tool\": \"grep\", \"query\": \"assassin|associated.*generic|generic.*associated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: Only generic-point topology, finite type predicates and finite-type module data were returned; none states generic spreading of fibre-assassin containment.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Containment of fibre associated points in an open spreads from the generic point of an irreducible base",
+   "results": "{\"t\": \"2026-10-23T23:05:19Z\", \"tool\": \"leansearch\", \"query\": \"Containment of fibre associated points in an open spreads from the generic point of an irreducible base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"IsGenericPoint.isIrreducible\", \"genericPoints.ofComponent\", \"genericPoints.isGenericPoint\", \"IsGenericPoint\", \"genericPoint\", \"genericPoints.component\"], \"digest\": \"8af536ce2342c9b1\"} Read hits: Only generic-point topology, finite type predicates and finite-type module data were returned; none states generic spreading of fibre-assassin containment.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"IsOpen\"",
+   "results": "{\"t\": \"2026-10-23T23:05:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\", \\\"IsOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read hits: Only generic-point topology, finite type predicates and finite-type module data were returned; none states generic spreading of fibre-assassin containment.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite type schemes and a finite type quasi coherent module, generic containment of fibre associated points in an arbitrary open persists after shrinking the base",
+   "results": "{\"t\": \"2026-10-23T23:05:20Z\", \"tool\": \"leanfinder\", \"query\": \"For finite type schemes and a finite type quasi coherent module, generic containment of fibre associated points in an arbitrary open persists after shrinking the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\"], \"digest\": \"3f5a3b181f0742d6\"} Read hits: Only generic-point topology, finite type predicates and finite-type module data were returned; none states generic spreading of fibre-assassin containment.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-assassin-open-constructible",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CVV (spaces-divisors-lemma-relative-assassin-constructible) and Tag 05LW (morphisms-lemma-constructible-containing-open). Subinput of 0CVV: its final sentence reducing to the scheme theorem 05KR. Subinput of 05KR: final paragraph, application of lemma-good-case on the irreducible closed subscheme when its generic point satisfies containment.",
+   "via": [
+    "lem-sfb-scheme-assassin-open-constructible",
+    "lem-sfb-space-assassin-containment-constructible",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-generic-fibre-assassin-containment-spreads",
+  "worker": "stage1",
+  "summary": "Followed Tag 05KP without adding base Noetherianity or quasi-compactness of the open. Reused the reduced affine base tool and existing finite-module generic flatness and flat-cokernel tensor lemmas. Added the general affine associated-point/prime comparison Tag 02OK. Made the generic injection, torsion-free kernel argument, localized cokernel, residue-field map and final annihilator test explicit. The statement is unchanged.",
+  "blueprint": "Preserves the inherited compactification/direct-image preservation prerequisite chain in blueprint.from.place. Tag 05KR uses this generic good case; Steps 1--11 realize the three paragraphs of Tag 05KP. The ancestor command returns None for this pre-existing chain, so blueprint.from.node remains null and its inherited via list is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-generic-flat-reduced-base-model",
+    "why": "Supplies the generic reduced integral affine base and fibre comparison for the reduction in 05KP; no node of this unit packages that preparation."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic affine-module or associated-prime tool used exactly as its statement in the 05KP argument; no node of this unit gives this input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-finite-type-generating-sections",
+    "why": "Generic affine-module or associated-prime tool used exactly as its statement in the 05KP argument; no node of this unit gives this input."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine-module or associated-prime tool used exactly as its statement in the 05KP argument; no node of this unit gives this input."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Generic affine-module or associated-prime tool used exactly as its statement in the 05KP argument; no node of this unit gives this input."
+   },
+   {
+    "node": "lem-trf-algebra-module-simultaneous-generic-flatness",
+    "why": "Supplies non-Noetherian generic flatness for the finite source and cokernel in 05KP; not the geometric route of the other unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Preserves the finite-type coefficient hypothesis under reduction and affine base restriction; generic sheaf input not supplied by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-generic-flat-reduced-base-model",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-trf-algebra-module-simultaneous-generic-flatness",
+  "lem-weil-pbc-module-pullback-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-3abfbd0bd",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-3abfbd0bd (reviewer sub-agent of L); spot-checked: Read Stacks 05KP (more-morphisms.tex l.6941-7022) in full and 02OK (divisors.tex) in full. The item statement is unchanged and agrees with 05KP. It adds no Noetherian base and no quasi-compact U. This is a first split of a Q37-created leaf; there is no re-split note. I checked all 11 steps against the cited statements. Step 1: the 0578 reduced-model tool gives integral affine W, a homeomorphism onto open V_0, and identified fibres; 05KQ handles any base change, used in both directions. Step 2: finite affine charts; Ass is stalk-local; nonempty opens contain η. Step 3: N finite, F≅Ñ, fibre N⊗_Aκ, B_κ Noetherian. Step 4: compactness of U_K only. Step 5: 02OK forward plus 0311 for an arbitrary module over the Noetherian B_K. Step 6: 051T on N⊕C, summands flat. Step 7: torsion-free gives N_h⊂N_K and ker μ_h=0. Step 8: localized exact sequence written out. Step 9: 00HL with flat cokernel C_h, h a unit in κ. Step 10: 02OK converse and an annihilator contradiction. Step 11: intersect and transfer back. The only route change is 0311 in place of 0565, which is equivalent. New node lem-sfb-affine-associated-points-primes is exactly 02OK. Its notions are cited and its searches have all three kinds. Not a duplicate: lem-sc-associated-localization-fg (058A, algebra only), def-sc-associated-points, lem-sc-ass-weakass-*, lem-sfb-noetherian-associated-points-finite and lem-trf-flat-pullback-associated-points state other things. Tested on F=0, a field, and k[ε]. Edge cases of the item: empty X, U_K empty (m=0), non-reduced Y, non-Noetherian A. No cycle. No SGA. Batch-5 flags: def-trf-relative-assassin is a general definition; lem-trf-generic-flat-reduced-base-model and lem-trf-algebra-module-simultaneous-generic-flatness are generic algebra and scheme tools; their closures (84/8 nodes) reach no trace-formula or Poincaré node or nt-assume leaf, so all three are accepted. The declared tool_uses are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericFibreAssassinContainmentSpreads",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.genericFibreAssassinContainment_spreads",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFibreAssassinContainmentSpreads.lean",
+  "statement": "theorem genericFibreAssassinContainment_spreads {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] (F : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (U : X.Opens) [IrreducibleSpace Y] (η : Y) (hη : IsGenericPoint η Set.univ) (hU : associatedPoints ((tensorPullback (f.fiberι η)).obj F) ⊆ (f.fiberι η) ⁻¹' (U : Set X)) : ∃ V : Y.Opens, (V : Set Y).Nonempty ∧ ∀ (y : Y), y ∈ V → associatedPoints ((tensorPullback (f.fiberι y)).obj F) ⊆ (f.fiberι y) ⁻¹' (U : Set X)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e2fcb0de",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Matches Stacks 05KP clause by clause: finite type = LocallyOfFiniteType + QuasiCompact; F = IsQuasiCoherentFiniteType (quasi-coherent and finite type, not finite presentation); U any opens; IrreducibleSpace Y plus explicit IsGenericPoint η univ; fibres via the real tensorPullback along fiberι; associatedPoints = maximal ideal of the stalk is an element-annihilator associated prime (def-trf-relative-assassin); conclusion ∃ nonempty V, ∀ y ∈ V, with the node's quantifier order. No Noetherian or compactness assumption added; one universe u. lean.statement verbatim in the file; one theorem, a single sorry, no defs; docstrings carry 05KP, the blueprint id and 11 proof steps; stmt_deps unchanged and the declarations used belong to them; all plain proof-dep imports exist. Live item is split with no lean record and no module, so no supersession; first delivery. Edge cases empty X, F=0, U=∅, non-reduced or non-Noetherian base, zero stalk all OK. Not compiled since no file changed; worker's clean compile (10.0 s, 8.6 s) accepted."
+ }
+}

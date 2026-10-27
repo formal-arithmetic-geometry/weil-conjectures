@@ -1,0 +1,371 @@
+{
+ "id": "lem-sfb-compact-remainder-coercivity",
+ "kind": "statement",
+ "title": "Compact remainder estimate gives coercivity on the kernel complement",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $E$ be a Hilbert space, meaning a real inner product space complete for its inner product norm. Let $F,Z$ be real normed vector spaces, with norms satisfying definiteness, the triangle inequality and $\\|av\\|=|a|\\|v\\|$. Let $T:E\\to F$ and $J:E\\to Z$ be bounded linear maps. Assume that $J$ is compact, meaning every bounded sequence $(x_n)$ in $E$ has a subsequence for which $(Jx_n)$ converges in $Z$. Suppose there is $C>0$ such that $\\|x\\|_E\\leq C(\\|Tx\\|_F+\\|Jx\\|_Z)$ for all $x\\in E$. Put $K=\\{x\\in E:Tx=0\\}$ and $K^\\perp=\\{v\\in E:\\langle w,v\\rangle=0\\text{ for every }w\\in K\\}$. Then there exists $D>0$ such that $\\|v\\|_E\\leq D\\|Tv\\|_F$ for every $v\\in K^\\perp$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §2 proof of Corollary (2.4)(ii), compactness and norm-estimate argument (2.5), printed p.290; abstract Hilbert-space kernel-complement formulation isolated by NU, with normalized-sequence proof in report.md; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Argue by contradiction. If no $D>0$ works, then for each integer $n\\geq1$ choose $x_n\\in K^\\perp$ with $\\|x_n\\|>n\\|Tx_n\\|$. Thus $x_n\\ne0$; put $v_n=x_n/\\|x_n\\|$. Linearity and norm homogeneity give $v_n\\in K^\\perp$, $\\|v_n\\|=1$ and $\\|Tv_n\\|<1/n$. Consequently $Tv_n\\to0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 proof of Corollary (2.4)(ii), printed p.290, compactness/norm-estimate argument (2.5); abstract normalized-sequence proof written by Q98, rather than a numbered assertion of Demailly. PDF absent locally; source pages read online."
+   }
+  },
+  {
+   "text": "The sequence $(v_n)$ is bounded since every norm equals $1$. The compactness hypothesis on $J$, with exactly the sequential meaning given in the statement, supplies strictly increasing indices $n_j$ and $z\\in Z$ such that $Jv_{n_j}\\to z$. Write $u_j=v_{n_j}$; then $\\|u_j\\|=1$, $u_j\\in K^\\perp$ and $\\|Tu_j\\|<1/n_j\\to0$, since $n_j\\geq j$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 proof of Corollary (2.4)(ii), printed p.290, compactness/norm-estimate argument (2.5); abstract normalized-sequence proof written by Q98, rather than a numbered assertion of Demailly. PDF absent locally; source pages read online."
+   }
+  },
+  {
+   "text": "Apply the assumed estimate to $u_i-u_j$ and use linearity and the triangle inequality: $\\|u_i-u_j\\|\\leq C(\\|Tu_i\\|+\\|Tu_j\\|+\\|Ju_i-z\\|+\\|Ju_j-z\\|)$. Given $\\varepsilon>0$, choose $N$ so each of the four terms is less than $\\varepsilon/(4C)$ for $i,j\\geq N$. This proves that $(u_j)$ is Cauchy in $E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 proof of Corollary (2.4)(ii), printed p.290, compactness/norm-estimate argument (2.5); abstract normalized-sequence proof written by Q98, rather than a numbered assertion of Demailly. PDF absent locally; source pages read online."
+   }
+  },
+  {
+   "text": "Completeness of the Hilbert space $E$ means that this Cauchy sequence has a limit $u\\in E$. The reverse triangle inequality $|\\|u\\|-1|=|\\|u\\|-\\|u_j\\||\\leq\\|u-u_j\\|$ gives $\\|u\\|=1$. Boundedness of $T$ provides $M\\geq0$ with $\\|Th\\|\\leq M\\|h\\|$ for all $h$. Hence $\\|Tu\\|\\leq M\\|u-u_j\\|+\\|Tu_j\\|\\to0$, so $Tu=0$ and $u\\in K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 proof of Corollary (2.4)(ii), printed p.290, compactness/norm-estimate argument (2.5); abstract normalized-sequence proof written by Q98, rather than a numbered assertion of Demailly. PDF absent locally; source pages read online."
+   }
+  },
+  {
+   "text": "For each $j$, the definition of $u_j\\in K^\\perp$ applied to $u\\in K$ gives $\\langle u,u_j\\rangle=0$. Symmetry and bilinearity of the real inner product therefore yield $\\|u_j-u\\|^2=\\|u_j\\|^2-2\\langle u,u_j\\rangle+\\|u\\|^2=2$. This contradicts $u_j\\to u$, which makes $\\|u_j-u\\|<1$ eventually. The supposition that every $D>0$ fails is impossible; this proves the required existence of $D>0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 proof of Corollary (2.4)(ii), printed p.290, compactness/norm-estimate argument (2.5); abstract normalized-sequence proof written by Q98, rather than a numbered assertion of Demailly. PDF absent locally; source pages read online."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Proof (3), existing analytic prerequisite chain through lem-sfb-elliptic-sobolev-closed-range. Abstract normalized-sequence argument by Q98, motivated by Demailly VI §2 Corollary (2.4)(ii), printed p.290; the abstract statement is not a numbered theorem there."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Hilbert space linear operator with compact remainder estimate is bounded below on the orthogonal complement of its kernel",
+   "results": "{\"t\": \"2026-10-24T02:29:20Z\", \"tool\": \"leanfinder\", \"query\": \"A Hilbert space linear operator with compact remainder estimate is bounded below on the orthogonal complement of its kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCoercive.bounded_below\", \"ContinuousLinearMap.isUnit_of_forall_le_norm_inner_map\", \"ContinuousLinearMap.bounds_bddBelow\", \"IsCoercive.isClosed_range\", \"ContinuousLinearMap.orthogonal_ker\", \"IsCoercive.antilipschitz\", \"IsCoercive.range_eq_top\", \"IsCoercive.continuousLinearEquivOfBilin\"], \"digest\": \"5d47a82deeb2a02b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lax–Milgram assumes a coercive bilinear form; orthogonal_ker only identifies an orthogonal complement; compact-operator bounded-image facts do not give the asserted kernel-complement estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactOperator\", \"ker\"",
+   "results": "{\"t\": \"2026-10-24T02:29:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsCompactOperator\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lax–Milgram assumes a coercive bilinear form; orthogonal_ker only identifies an orthogonal complement; compact-operator bounded-image facts do not give the asserted kernel-complement estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "Peetre|compact.*remainder|remainder.*compact|ker.*orthogonal|orthogonal.*ker",
+   "results": "{\"t\": \"2026-10-24T02:29:19Z\", \"tool\": \"grep\", \"query\": \"Peetre|compact.*remainder|remainder.*compact|ker.*orthogonal|orthogonal.*ker\", \"sub\": \"Analysis/Normed/Operator/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lax–Milgram assumes a coercive bilinear form; orthogonal_ker only identifies an orthogonal complement; compact-operator bounded-image facts do not give the asserted kernel-complement estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If norm x is bounded by norm Tx plus norm Kx where K is compact then norm x is bounded by norm Tx on the orthogonal complement of ker T",
+   "results": "{\"t\": \"2026-10-24T02:29:19Z\", \"tool\": \"leansearch\", \"query\": \"If norm x is bounded by norm Tx plus norm Kx where K is compact then norm x is bounded by norm Tx on the orthogonal complement of ker T\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.orthogonal_ker\", \"IsCompactOperator.image_subset_compact_of_bounded\", \"isCompactOperator_iff_isCompact_closure_image_closedBall\", \"isCompactOperator_iff_image_ball_subset_compact\", \"IsCompactOperator.isCompact_closure_image_of_bounded\", \"isCompactOperator_iff_isCompact_closure_image_ball\", \"IsCompactOperator.image_subset_compact_of_isVonNBounded\", \"ContinuousLinearMap.IsStarNormal.orthogonal_range\"], \"digest\": \"8feaa767a4089357\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lax–Milgram assumes a coercive bilinear form; orthogonal_ker only identifies an orthogonal complement; compact-operator bounded-image facts do not give the asserted kernel-complement estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "Peetre|compact.*remainder|remainder.*compact|orthogonal.*ker|ker.*orthogonal",
+   "results": {
+    "t": "2026-10-24T03:01:25Z",
+    "tool": "grep",
+    "query": "Peetre|compact.*remainder|remainder.*compact|orthogonal.*ker|ker.*orthogonal",
+    "sub": "Analysis/",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/InnerProductSpace/Adjoint.lean",
+     "Mathlib/Analysis/InnerProductSpace/Adjoint.lean",
+     "Mathlib/Analysis/InnerProductSpace/Adjoint.lean",
+     "Mathlib/Analysis/InnerProductSpace/Adjoint.lean",
+     "Mathlib/Analysis/InnerProductSpace/Adjoint.lean",
+     "Mathlib/Analysis/InnerProductSpace/Orthogonal.lean",
+     "Mathlib/Analysis/InnerProductSpace/Orthogonal.lean",
+     "Mathlib/Analysis/InnerProductSpace/MeanErgodic.lean"
+    ],
+    "digest": "41507a88793fdfd7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read: orthogonal_ker identifies the closure of an adjoint range; Fredholm lemmas assume closed range or concern a compact endomorphism minus a scalar identity. None states this estimate for arbitrary T and J."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Peetre lemma compact error estimate gives a lower bound on the orthogonal complement of the kernel",
+   "results": {
+    "t": "2026-10-24T03:01:26Z",
+    "tool": "leansearch",
+    "query": "Peetre lemma compact error estimate gives a lower bound on the orthogonal complement of the kernel",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Submodule.orthogonal_eq_inter",
+     "ContinuousLinearMap.orthogonal_ker",
+     "ContinuousLinearMap.orthogonal_range",
+     "Submodule.instHasOrthogonalProjectionOrthogonal",
+     "ClosedSubmodule.orthogonal_eq_inter",
+     "Submodule.isClosed_orthogonal",
+     "Submodule.ker_orthogonalProjection",
+     "Submodule.sub_starProjection_mem_orthogonal"
+    ],
+    "digest": "699f7cdf4af72dc7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read: Lax–Milgram assumes a coercive bilinear form; bounds_bddBelow concerns upper operator bounds; orthogonal_ker and compact-image lemmas give no kernel-complement lower bound. The second phrasing also found no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactOperator\", \"ker\"",
+   "results": {
+    "t": "2026-10-24T03:01:26Z",
+    "tool": "loogle",
+    "query": "\"IsCompactOperator\", \"ker\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the kernel query returned no hits; the bound query gives compact images of bounded sets, not this lower-bound estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded linear map between a Hilbert space and a normed space with an estimate norm x at most C times norm Tx plus norm Jx for a compact operator J is bounded below on the orthogonal complement of its kernel",
+   "results": {
+    "t": "2026-10-24T03:01:27Z",
+    "tool": "leanfinder",
+    "query": "A bounded linear map between a Hilbert space and a normed space with an estimate norm x at most C times norm Tx plus norm Jx for a compact operator J is bounded below on the orthogonal complement of its kernel",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsCoercive.bounded_below",
+     "ContinuousLinearMap.bounds_bddBelow",
+     "IsCoercive.isClosed_range",
+     "ContinuousLinearMap.exists_preimage_norm_le",
+     "ContinuousLinearMap.isUnit_of_forall_le_norm_inner_map",
+     "ContinuousLinearMap.exists_approx_preimage_norm_le",
+     "ContinuousLinearMap.nonlinearRightInverseOfSurjective_nnnorm_pos",
+     "ContinuousLinearMap.bounds_nonempty"
+    ],
+    "digest": "7b80cbb5952d653f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read: Lax–Milgram assumes a coercive bilinear form; bounds_bddBelow concerns upper operator bounds; orthogonal_ker and compact-image lemmas give no kernel-complement lower bound. The second phrasing also found no one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Peetre|IsCompactOperator|isClosed_range|bounded_below",
+   "results": {
+    "t": "2026-10-24T03:01:46Z",
+    "tool": "grep",
+    "query": "Peetre|IsCompactOperator|isClosed_range|bounded_below",
+    "sub": "Analysis/Normed/Operator/",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean",
+     "Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean",
+     "Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean",
+     "Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean",
+     "Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean",
+     "Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean",
+     "Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean",
+     "Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean"
+    ],
+    "digest": "aebdbe326b109be9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read: orthogonal_ker identifies the closure of an adjoint range; Fredholm lemmas assume closed range or concern a compact endomorphism minus a scalar identity. None states this estimate for arbitrary T and J."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If norm x is at most C times norm T x plus norm J x and J is compact then T restricted to its kernel orthogonal complement is bounded below",
+   "results": {
+    "t": "2026-10-24T03:01:46Z",
+    "tool": "leansearch",
+    "query": "If norm x is at most C times norm T x plus norm J x and J is compact then T restricted to its kernel orthogonal complement is bounded below",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsCoercive.bounded_below",
+     "ContinuousLinearMap.bounds_bddBelow",
+     "NormedAddGroupHom.bounds_bddBelow",
+     "ContinuousLinearMap.orthogonal_ker",
+     "isCompactOperator_iff_image_ball_subset_compact",
+     "compactOperator",
+     "isCompactOperator_iff_isCompact_closure_image_ball",
+     "isCompactOperator_iff_isCompact_closure_image_closedBall"
+    ],
+    "digest": "667b6cb81fca22be"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read: Lax–Milgram assumes a coercive bilinear form; bounds_bddBelow concerns upper operator bounds; orthogonal_ker and compact-image lemmas give no kernel-complement lower bound. The second phrasing also found no one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactOperator\", \"bound\"",
+   "results": {
+    "t": "2026-10-24T03:01:46Z",
+    "tool": "loogle",
+    "query": "\"IsCompactOperator\", \"bound\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "IsCompactOperator.isCompact_closure_image_of_bounded",
+     "IsCompactOperator.image_subset_compact_of_bounded",
+     "IsCompactOperator.isCompact_closure_image_of_isVonNBounded",
+     "IsCompactOperator.image_subset_compact_of_isVonNBounded"
+    ],
+    "digest": "7039350e1d691e98"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the kernel query returned no hits; the bound query gives compact images of bounded sets, not this lower-bound estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Peetre inequality: compact perturbation estimate implies closed range and a uniform norm bound away from the kernel",
+   "results": {
+    "t": "2026-10-24T03:01:47Z",
+    "tool": "leanfinder",
+    "query": "Peetre inequality: compact perturbation estimate implies closed range and a uniform norm bound away from the kernel",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CocompactMapClass.norm_le",
+     "LinearMap.bound_of_shell",
+     "ContinuousLinearMap.opNorm_le_of_shell",
+     "ContinuousLinearMap.opNorm_le_of_shell'",
+     "SemilinearMapClass.bound_of_shell_semi_normed",
+     "LinearMap.clmOfExistsBoundedImage_apply",
+     "ContinuousLinearMap.exists_approx_preimage_norm_le",
+     "ContinuousLinearMap.exists_preimage_norm_le"
+    ],
+    "digest": "7e6ab716244cdc85"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read: Lax–Milgram assumes a coercive bilinear form; bounds_bddBelow concerns upper operator bounds; orthogonal_ker and compact-image lemmas give no kernel-complement lower bound. The second phrasing also found no one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-sobolev-closed-range",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §2 proof of Corollary (2.4)(ii), compactness and norm-estimate argument (2.5), printed p.290; abstract Hilbert-space kernel-complement formulation isolated by NU, with normalized-sequence proof in report.md; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf",
+   "via": [
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-compact-remainder-coercivity",
+  "worker": "stage1",
+  "summary": "Q98 preserves the statement and gives five explicit elementary steps: normalization, the assumed sequential compactness, the Cauchy estimate, completeness and boundedness, and the squared-distance contradiction. No new nodes: every inference is a few lines from the hypotheses and inline definitions. Mathlib searches in two phrasings found no match; project attachment and DAG/blueprint duplicate searches were negative. Demailly printed pp.289–290 read online.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3), existing prerequisite chain through Sobolev closed range. This discharges the compactness/norm-estimate input isolated in lem-sfb-elliptic-sobolev-closed-range; the latest blueprint has no separate abstract coercivity statement. The inherited blueprint.from.node is null, as confirmed by blueprint_refs ancestor; its provenance and via chain are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-1c83d74ca",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-1c83d74ca (reviewer sub-agent of L); spot-checked: I read the item in full; this is a 0-new-node S1 split and the statement is unchanged from the NU base. The statement is the standard Peetre/compact-remainder lemma and is true: on a real Hilbert space E, with T, J bounded and J sequentially compact, ‖x‖≤C(‖Tx‖+‖Jx‖) implies ‖v‖≤D‖Tv‖ on (ker T)^⊥. It matches step 4 of lem-sfb-elliptic-sobolev-closed-range (E=H^k, F=L²(H), Z=L²(G), J compact Rellich), so the target is not weakened. Steps 1–5 checked: (1) the negation with D=n gives x_n≠0, and v_n is normalised in K^⊥ with ‖Tv_n‖<1/n; (2) the stated sequential compactness gives Ju_j→z and n_j≥j; (3) the estimate on u_i−u_j gives four terms each <ε/(4C), so the sequence is Cauchy; (4) completeness of E gives u with ‖u‖=1 by the reverse triangle inequality, and Tu=0 by the operator bound, without completeness of F; (5) ⟨u,u_j⟩=0, so ‖u_j−u‖²=2, a contradiction. All steps are a few lines and need no citation (C1/C2 fine; D fine). Small cases: E=0, T injective, T=0 vacuous, J=0 gives D=C; ℓ² with T x=(x_n/n) and J=id shows compactness is needed. Duplicate search with rg -L over the snapshot DAG (subsequence, Peetre, Hilbert, \\perp in sfb): only hilbert-orthogonal-projection and the elliptic parents, none a duplicate. I agree with the Mathlib no-match verdicts (Lax–Milgram and the Fredholm/compact-image lemmas are different facts). Demailly VI §2 (2.4)(ii)/(2.5), pp.289–290, is WANTED locally and proof_origin.by=agent is honest about that. The proof_origin blueprint file exists (latest→main-20261024, proof (3)). No SGA, no tool_uses, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.CompactRemainderCoercivity",
+  "declaration": "ContinuousLinearMap.exists_pos_norm_le_on_orthogonal_ker_of_compact_remainder",
+  "file": "lean/Sheaf/Analysis/CompactRemainderCoercivity.lean",
+  "statement": "theorem exists_pos_norm_le_on_orthogonal_ker_of_compact_remainder {E : Type u} {F : Type v} {Z : Type w} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E] [NormedAddCommGroup F] [NormedSpace ℝ F] [NormedAddCommGroup Z] [NormedSpace ℝ Z] (T : E →L[ℝ] F) (J : E →L[ℝ] Z) (hJ : ∀ x : ℕ → E, (∃ M : ℝ, ∀ n : ℕ, ‖x n‖ ≤ M) → ∃ (φ : ℕ → ℕ) (z : Z), StrictMono φ ∧ Filter.Tendsto (fun n : ℕ => J (x (φ n))) Filter.atTop (nhds z)) (hestimate : ∃ C : ℝ, 0 < C ∧ ∀ x : E, ‖x‖ ≤ C * (‖T x‖ + ‖J x‖)) : ∃ D : ℝ, 0 < D ∧ ∀ v : E, v ∈ T.ker.orthogonal → ‖v‖ ≤ D * ‖T v‖",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e8109055",
+  "group": "NW",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: complete real inner product space E; real normed spaces F, Z with no extra assumptions; T, J bounded linear; J compact in the node's sequential sense (StrictMono subsequence, limit in Z); estimate with C>0; T.ker.orthogonal = Submodule.orthogonal with the node's inner-product order; conclusion with D>0 and the same quantifier order; universes u v w independent. Node record differs from live only in the new lean field; lean.statement verbatim in the file; only stmt_dep def-weil-field; no new nodes or definitions; proof is sorry; docstrings carry the source place, the blueprint id and the five proof steps. The lemma and its proof are true; edge cases E=0, T=0, J=0, T injective, F or Z not complete checked. No duplicate found in the project Lean trees or Mathlib. The 'Second reading by NW' section is the author's own comparison, disclosed as such. No compile run since nothing was changed; worker reports a clean compile."
+ }
+}

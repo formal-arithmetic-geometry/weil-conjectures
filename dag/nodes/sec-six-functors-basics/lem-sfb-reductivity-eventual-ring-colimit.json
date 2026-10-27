@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-reductivity-eventual-ring-colimit",
+ "kind": "statement",
+ "title": "Reductivity of a smooth affine model descends along a ring colimit",
+ "statement": "Let $I$ be a small nonempty directed set, $(A_i)_{i\\in I}$ a directed system of nonzero commutative rings, and $A=\\varinjlim_i A_i$ a nonzero ring [def-weil-pbc-category-colimit]. Fix $i_0\\in I$ and a smooth affine group scheme $H_{i_0}$ of finite presentation over $\\operatorname{Spec}A_{i_0}$ [def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-sbc-locally-finite-presentation]. Group schemes and reductivity have the meanings of [def-sfb-pinned-split-root-realization]; in particular reductivity requires connected reductive geometric fibres, and no torus or pinning is part of this hypothesis. Write $H_i=H_{i_0}\\times_{\\operatorname{Spec}A_{i_0}}\\operatorname{Spec}A_i$ for $i\\geq i_0$, and $H=H_{i_0}\\times_{\\operatorname{Spec}A_{i_0}}\\operatorname{Spec}A$ [def-weil-affine-spectrum, def-pc-fibre-product]. If $H$ is reductive over $A$, there is $i_1\\geq i_0$ such that $H_i$ is reductive over all of $\\operatorname{Spec}A_i$ for every $i\\geq i_1$. No injectivity, flatness or Noetherian hypothesis on the ring system is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Corollary 3.1.11, printed pp.88--89, implication from reductivity of the limit group to eventual reductivity of the models. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this group-scheme reductivity theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sfb-pinned-split-root-realization",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Work on the directed tail $i\\geq i_0$, which has the same ring colimit: each original index has a common upper bound with $i_0$, so compatible cocones on this tail extend uniquely. Put $S_i=\\operatorname{Spec}A_i$ and $S=\\operatorname{Spec}A$, with projections $p_{ji}:S_j\\to S_i$ and $p_i:S\\to S_i$. By [lem-weil-pbc-spec-colimit-limit] the transition morphisms $p_{ji}$, being morphisms between affine schemes, are affine, and $S$ with the maps $p_i$ is the limit of the system $(S_i)$ in schemes; the affine-limit theorem gives the same identification, compatibly with these projections. Each $S_i$ is quasi-compact and quasi-separated. Base change preserves smoothness, affineness and finite presentation, so all $H_i\\to S_i$ and $H\\to S$ retain these properties. The group operations base change by the fibre-product universal property, and their equations remain equations after base change.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.1.11, printed pp.88-89, proof; Conrad PDF WANTED locally, read online."
+   }
+  },
+  {
+   "text": "Define $U_i\\subseteq S_i$ to be the points where the identity component of the geometric fibre of $H_i$ is reductive, and define $U\\subseteq S$ similarly for $H$. Applying the first clause of [lem-sfb-reductive-torus-fibre-openness] at each point of $U_i$ shows that $U_i$ is open. The field-extension invariance lemma, applied to the residue-field extension at a point of $S_j$ over $S_i$ (or of $S$ over $S_i$), gives $p_{ji}^{-1}(U_i)=U_j$ and $p_i^{-1}(U_i)=U$. Since $H$ is reductive, all its geometric fibres are connected and reductive, so $U=S$. Set $Z_i=S_i\\setminus U_i$. These are closed, and $p_{ji}^{-1}(Z_i)=Z_j$, while $p_i^{-1}(Z_i)=\\varnothing$.",
+   "uses": [
+    "lem-sfb-reductive-torus-fibre-openness",
+    "lem-sfb-geometric-neutral-reductivity-field-invariance",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.1.11, printed pp.88-89, proof; Conrad PDF WANTED locally, read online."
+   }
+  },
+  {
+   "text": "Each underlying space $|S_i|$ is spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Each $p_{ji}$ is spectral: apply the quasi-compact inverse-image assertion of [lem-a1-filtered-spectrum-topological-limit] to the two-term directed ring diagram $A_i\\to A_j$, whose colimit is $A_j$. The constructible topology refines the Zariski topology, because quasi-compact opens form a basis in a spectral space and are open in its constructible topology. Hence the closed subset $Z_i$ is also closed in the constructible topology. If every $Z_i$ were nonempty, [lem-weil-pbc-spectral-limit-constructible-closed-nonempty] would give a compatible family $z_i\\in Z_i$. By the prime-family identification in [lem-a1-filtered-spectrum-topological-limit], this family comes from a point $z\\in S$. But $p_{i_0}(z)\\in Z_{i_0}$ contradicts $p_{i_0}^{-1}(Z_{i_0})=\\varnothing$. Therefore $Z_a=\\varnothing$ for some $a\\geq i_0$. Pullback compatibility gives $Z_i=\\varnothing$ for all $i\\geq a$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-a1-filtered-spectrum-topological-limit",
+    "def-weil-spectral-space",
+    "def-weil-pbc-constructible-topology",
+    "lem-weil-pbc-spectral-limit-constructible-closed-nonempty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.1.11, printed pp.88-89, proof; Conrad PDF WANTED locally, read online."
+   }
+  },
+  {
+   "text": "Connectedness requires a separate argument. For $H_{i_0}\\to S_{i_0}$ let $Y_{i_0}$ be the locus where the geometric connected-component count is $1$. Its local constructibility follows from [lem-sfb-geometric-connected-fibre-locus-constructible], using finite presentation from step 1. Since $S_{i_0}$ is quasi-compact and quasi-separated, [lem-trf-locally-constructible-qcqs-global] makes $Y_{i_0}$ constructible. By [lem-weil-pbc-geometric-component-count-base-change], its inverse image in $S$ is all of $S$, since every geometric fibre of $H$ is connected. The same count identity identifies $p_{ii_0}^{-1}(Y_{i_0})$ with the one-component locus of $H_i$. A group fibre is nonempty because it has an identity point, so count $1$ is exactly connectedness here.",
+   "uses": [
+    "lem-sfb-geometric-connected-fibre-locus-constructible",
+    "lem-trf-locally-constructible-qcqs-global",
+    "lem-weil-pbc-geometric-component-count-base-change",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.1.11, printed pp.88-89, proof; Conrad PDF WANTED locally, read online."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-limit-contained-in-constructible] to $Y_{i_0}\\subseteq S_{i_0}$ and the scheme limit of step 1. All stages are quasi-compact and quasi-separated, all transitions are affine, and $p_{i_0}(S)\\subseteq Y_{i_0}$ by step 4. Thus there is $b\\geq i_0$ for which $p_{ii_0}(S_i)\\subseteq Y_{i_0}$ for every $i\\geq b$. By step 4, all geometric fibres of these $H_i$ are connected.",
+   "uses": [
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.1.11, printed pp.88-89, proof; Conrad PDF WANTED locally, read online."
+   }
+  },
+  {
+   "text": "Choose a common upper bound $i_1$ of $a$ and $b$. For every $i\\geq i_1$, step 3 makes each geometric identity component reductive and step 5 makes each geometric fibre connected. Each whole geometric fibre over an algebraic closure of a residue field therefore equals its identity component and is reductive. For an arbitrary homomorphism $A_i\\to\\Omega$ to an algebraically closed field, with image point $s$, the fibre $(H_i)_\\Omega$ is the base change of the fibre over $\\kappa(s)$ to $\\Omega$; it is connected because the geometric component count does not depend on the algebraically closed extension of $\\kappa(s)$ [lem-weil-pbc-geometric-component-count-base-change], and its identity component is reductive by the clause on arbitrary algebraically closed extensions in [lem-sfb-geometric-neutral-reductivity-field-invariance]. Together with the smooth affine finite-presentation properties of step 1, this is exactly reductivity of $H_i$ in [def-sfb-pinned-split-root-realization]. None of the arguments used injective or flat ring maps, or a Noetherian base.",
+   "uses": [
+    "lem-weil-pbc-geometric-component-count-base-change",
+    "lem-sfb-geometric-neutral-reductivity-field-invariance",
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.1.11, printed pp.88-89, proof; Conrad PDF WANTED locally, read online."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-reductive-torus-fibre-openness",
+  "lem-sfb-geometric-neutral-reductivity-field-invariance",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "def-weil-spectral-space",
+  "def-weil-pbc-constructible-topology",
+  "lem-weil-pbc-spectral-limit-constructible-closed-nonempty",
+  "lem-sfb-geometric-connected-fibre-locus-constructible",
+  "lem-trf-locally-constructible-qcqs-global",
+  "lem-weil-pbc-geometric-component-count-base-change",
+  "lem-weil-pbc-limit-contained-in-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad Corollary 3.1.11, pp.88-89; follows the reductive-locus/connectedness route, replacing its closed-complement ring calculation by Stacks 0A2W spectral compactness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Reductivity of a smooth affine group scheme descends along a filtered colimit of rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [IsReduced ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  AlgebraicGeometry.IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.hasColimits\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"CategoryTheory.Limits.HasColimits AlgebraicGeometry.AffineScheme\", \"doc\": \"The category of affine schemes admits all colimits, meaning that for any small diagram in this category, there exists a colimit object within the category of affine schemes.\"}\n  {\"name\": \"RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Given a filtered category $\\\\mathcal{J}$, a diagram $F : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, a colimit cocone $c$ for $F$, and a ring homomorphism $f : R \\\\to S$ of essential finite type, if morphisms $a : S \"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.coprodDesc_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.RespectsIso fun {R S\", \"doc\": \"Let $ P $ be a morphism property for schemes defined by the affineAnd $ Q $ condition, where $ Q $ is a property of ring homomorphisms that respects isomorphisms and is closed under products. If two m\"}\n  {\"name\": \"AlgebraicGeometry.affine_isReduced_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsReduced (AlgebraicGeometry.Spec R) ↔ IsReduced ↑R\", \"doc\": \"For a commutative ring $ R $, the affine scheme $ \\\\operatorname{Spec}(R) $ is reduced (i.e., all its local rings have no nonzero nilpotent elements) if and only if the ring $ R $ itself is reduced (i.\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ {k : Type u_1} {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  (∀ (B : Subalgebra k A), B.FG → Algebra.IsGeometricallyReduced k ↥B) → Algebra.IsGeometricallyReduced k A\", \"doc\": \"If every finitely generated subalgebra of $ A $ over $ k $ is geometrically reduced, then $ A $ itself is geometrically reduced over $ k $. This means that for any field extension $ L $ of $ k $, the \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fixed smooth affine group scheme with reductive geometric fibres over a direct limit has reductive fibres at a sufficiently large stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, each object is compact and quasi-separated, and the limit of the diagram is affine, there exists an object in the diagram \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [IsReduced ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  AlgebraicGeometry.IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"module\": \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced\", \"type\": \"∀ {k : Type u_1} {A : Type u_2} [inst : Field k] [inst_1 : Ring A] [inst_2 : Algebra k A],\\n  (∀ (B : Subalgebra k A), B.FG → Algebra.IsGeometricallyReduced k ↥B) → Algebra.IsGeometricallyReduced k A\", \"doc\": \"If every finitely generated subalgebra of $ A $ over $ k $ is geometrically reduced, then $ A $ itself is geometrically reduced over $ k $. This means that for any field extension $ L $ of $ k $, the \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsReductive\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|reductivity",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"14\", \"text\": \"This file is a home for lemmas about semisimple and reductive Lie algebras.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas.lean\", \"line\": \"18\", \"text\": \"  algebra with an irreducible faithful finite-dimensional representation is reductive.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"71\", \"text\": \"are called *reductive*, if the coefficients are a field of characteristic zero.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Semisimple/Defs.lean\", \"line\": \"74\", \"text\": \"the label 'reductive' should mean when the coefficients are not a field of characteristic zero. -/\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductive group schemes descend to a stage of a directed system of base rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[HasRingHomProperty P Q] (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (s : Γ(c.pt, ⊤)) [∀ i, CompactSpace (D.obj i)]\\n  [∀ i, QuasiSeparatedSpace (D.obj i)] : ∃ (i : I) (t : Γ(D.obj i, ⊤)), s = (c.π.app i).appTop t\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern root pairings, reduced schemes, ring colimits or general descent frameworks; none states reductivity of group schemes or descent of a pinned split realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reductive smooth affine group scheme over a direct limit of rings is reductive at all sufficiently large stages",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsReduced; AlgebraicGeometry.isReduced_of_isAffine_isReduced; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit; AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit; AlgebraicGeometry.affine_isReduced_iff; Algebra.isReduced_of_isGeometricallyReduced; Algebra.IsGeometricallyReduced.of_forall_fg",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern reduced algebras, general scheme base change, finite-group representations or Lie algebras, not reductivity of geometric neutral components of group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-reductive-finite-type-spreading",
+  "date": "2026-10-24",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Rational split realization of a finite reduced root datum; Spreading the given split complex triple in Conrad Proposition 6.2.12, first proof paragraph, printed p.211; include a chosen base and generators before specializing. Supporting limit-property input: Conrad Corollary 3.1.11, reductivity of a fixed smooth affine model descends to a stage; used before recovering the split torus and pinning.",
+   "via": [
+    "lem-sfb-split-reductive-finite-type-spreading",
+    "lem-sfb-rational-split-root-realization",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductivity-eventual-ring-colimit",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Separated reductivity of geometric neutral components from connectedness, following Conrad Corollary 3.1.11. Reused openness, connected-count constructibility/base change, spectral compactness and scheme-limit containment nodes; created one field-invariance input, statement-only, with actual logged searches. No Lean declaration matches.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability direct-image route, inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting limit-property input before recovering the split torus and pinning. No equivalent latest blueprint node exists. The inherited null ancestor and via list are retained; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-colimit-limit",
+    "why": "Generic scheme limit input to Conrad Corollary 3.1.11: Spec of a ring colimit is the scheme limit with affine transitions; no step of this unit supplies a replacement. Added by the maintainer review."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic scheme base-change, limit, or constructibility input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme base-change, limit, or constructibility input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme base-change, limit, or constructibility input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme base-change, limit, or constructibility input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme base-change, limit, or constructibility input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic topological spectrum/compactness input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-a1-filtered-spectrum-topological-limit",
+    "why": "Generic topological spectrum/compactness input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "def-weil-spectral-space",
+    "why": "Generic topological spectrum/compactness input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "def-weil-pbc-constructible-topology",
+    "why": "Generic topological spectrum/compactness input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-limit-constructible-closed-nonempty",
+    "why": "Generic topological spectrum/compactness input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-trf-locally-constructible-qcqs-global",
+    "why": "Generic scheme base-change, limit, or constructibility input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-component-count-base-change",
+    "why": "Generic scheme base-change, limit, or constructibility input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   },
+   {
+    "node": "lem-weil-pbc-limit-contained-in-constructible",
+    "why": "Generic scheme base-change, limit, or constructibility input to Conrad Corollary 3.1.11; no step of this unit supplies a replacement. Used only as its stated black-box lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-a1-filtered-spectrum-topological-limit",
+  "def-weil-spectral-space",
+  "def-weil-pbc-constructible-topology",
+  "lem-weil-pbc-spectral-limit-constructible-closed-nonempty",
+  "lem-trf-locally-constructible-qcqs-global",
+  "lem-weil-pbc-geometric-component-count-base-change",
+  "lem-weil-pbc-limit-contained-in-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NP-16706db1c",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-16706db1c (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-sfb-geometric-neutral-reductivity-field-invariance and the statements of all 17 cited nodes. Checked Milne Prop. 1.34 (pp.16-17) and 6.46 (p.135) in the local PDF; Conrad Cor. 3.1.11 / Ex. 3.4.1 is not in literature/ (WANTED), but the statement and route are the standard limit argument. Item statement and stmt_deps are identical to live and side-live, where the item is still unsplit; no repair note applies. The new node is true: identity components commute with field extension (Milne 1.34), and reductivity is invariant between algebraically closed fields. It is statement-only, self-contained, strictly smaller than the item, and no duplicate was found (checked against maximal-torus-field-extension, unipotent-radical-existence, torus-fibre-openness, 055F count). Steps 2-5 are correct as written: openness of U_i from the first clause of the openness node; pullback equalities from the new node; spectral transitions from the a1 node applied to a two-term system; 0A2W contradiction through the Spec-limit homeomorphism; E_1 constructible via 055I + 053W; 05F4 eventual containment. Tested cases: trivial group; A×A->A projection with G_m/G_a; nonflat k[t]->k; disconnected finite constant group. Repaired two citation gaps (C1) in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-reductivity-eventual-ring-colimit.json. (1) Step 1 never established that the transitions Spec A_j->Spec A_i are affine, a hypothesis of both 01YX and 05F4; it now cites lem-weil-pbc-spec-colimit-limit. (2) Step 6 only controlled fibres over algebraic closures of residue fields, but the definition requires every A_i->Omega; it now cites the 055F count node and the new node's arbitrary-extension clause, and elementary is set to false. proof_deps was recomputed and the tool_uses entry added. Batch-5 flags: lem-trf-finite-type-component-open-qc (components of finite-type k-schemes are open and qc), lem-trf-noetherian-constructible-subset-criterion and lem-trf-locally-constructible-qcqs-global (053W collation) are all generic scheme topology, not statements or steps of the trace formula or Poincaré duality; accepted. Declared generic tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

@@ -1,0 +1,568 @@
+{
+ "id": "lem-sfb-compact-parameter-functional",
+ "kind": "statement",
+ "title": "Compact-parameter operation for a contractive functional",
+ "statement": "Let $B$ be a normed field, let $X$ be a nonempty compact Hausdorff topological space, and give $C(X,B)$ its supremum norm. Suppose $L:C(X,B)\\to B$ is $B$-linear and $|L(g)|\\leq\\|g\\|_\\infty$ for every $g\\in C(X,B)$. For a profinite space $P$ (compact Hausdorff with a basis of clopen sets) and $f\\in C(P\\times X,B)$, put\n$$J_P(f)(p)=L(x\\mapsto f(p,x)).$$\nFor every $p_0\\in P$ and $\\epsilon>0$, there is an open neighbourhood $V$ of $p_0$ such that for all $p\\in V$,\n$$\\sup_{x\\in X}|f(p,x)-f(p_0,x)|\\leq\\epsilon/2,\\qquad |J_P(f)(p)-J_P(f)(p_0)|\\leq\\epsilon/2.$$\nIn particular $J_P(f)$ is continuous. With the action $(cf)(p,x)=c(p)f(p,x)$, this gives a $C(P,B)$-linear map $J_P:C(P\\times X,B)\\to C(P,B)$, and for every finite index set $T$ and family $(f_t)_{t\\in T}$,\n$$J_P\\left(\\sum_{t\\in T}f_t\\right)=\\sum_{t\\in T}J_P(f_t).$$\nFor every continuous map $u:P'\\to P$ of profinite spaces,\n$$J_{P'}(f\\circ(u\\times\\mathrm{id}_X))=J_P(f)\\circ u.$$\nEmpty $P$, empty $P'$ and empty finite sums are allowed. No completeness or nonarchimedean hypothesis on $B$ is assumed. All spaces use [def-weil-size-convention].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel analytic input; extraction of returned integral proof steps 8–9: compact-parameter estimate, pointwise module linearity, finite sums and naturality for an arbitrary contractive functional. Agent-formulated auxiliary assertion; exact literature reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Write $f_p(x)=f(p,x)$. The map $x\\mapsto(p,x)$ is continuous, so $f_p\\in C(X,B)$ and $J_P(f)(p)$ is defined. Fix $p_0$ and $\\epsilon>0$. The function $h(p,x)=|f(p,x)-f(p_0,x)|$ is continuous: both arguments of the subtraction are continuous compositions, subtraction is continuous in a normed field, and the norm is continuous by the triangle inequality. Thus $W=\\{(p,x):h(p,x)<\\epsilon/2\\}$ is open and contains $\\{p_0\\}\\times X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image scalar analytic input; agent expansion, compact-parameter functional argument, step 1"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-compact-product-open-neighborhoods] to the compact subsets $\\{p_0\\}\\subseteq P$ and $X\\subseteq X$ and the open set $W$ of step 1. A singleton is compact because one member of any open cover covers it; $X$ is compact by hypothesis. We obtain open $V\\subseteq P$ and $O\\subseteq X$ with $p_0\\in V$, $X\\subseteq O$, and $V\\times O\\subseteq W$. Since $O=X$, for all $p\\in V$ and $x\\in X$ we have $|f_p(x)-f_{p_0}(x)|<\\epsilon/2$.",
+   "uses": [
+    "lem-sfb-compact-product-open-neighborhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image scalar analytic input; agent expansion, compact-parameter functional argument, step 2"
+   }
+  },
+  {
+   "text": "For $p\\in V$, taking the supremum of the pointwise inequalities gives $\\|f_p-f_{p_0}\\|_\\infty\\leq\\epsilon/2$: the number $\\epsilon/2$ is an upper bound for every value. By linearity and contractivity, $|J_P(f)(p)-J_P(f)(p_0)|=|L(f_p-f_{p_0})|\\leq\\|f_p-f_{p_0}\\|_\\infty\\leq\\epsilon/2$. This proves both estimates. Since $\\epsilon/2<\\epsilon$, the neighbourhood $V$ proves continuity at $p_0$ by the metric definition. If $P$ is empty there are no points to check, and its unique $B$-valued function is continuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image scalar analytic input; agent expansion, compact-parameter functional argument, step 3"
+   }
+  },
+  {
+   "text": "Pointwise operations preserve continuity in the normed field $B$. In particular $(cf)(p,x)=c(p)f(p,x)$ is continuous, and the module axioms hold pointwise. For $f,g\\in C(P\\times X,B)$ and $c\\in C(P,B)$, linearity of $L$ gives $J_P(f+g)(p)=L(f_p+g_p)=J_P(f)(p)+J_P(g)(p)$, $J_P(0)(p)=0$, and $J_P(cf)(p)=L(c(p)f_p)=c(p)J_P(f)(p)$. Function extensionality makes these identities in $C(P,B)$, so $J_P$ is $C(P,B)$-linear. Induction on the finite set $T$, starting from $L(0)=0$ and using the addition identity, proves the finite-sum formula, including $T=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image scalar analytic input; agent expansion, compact-parameter functional argument, step 4"
+   }
+  },
+  {
+   "text": "For continuous $u:P'\\to P$, the product map $u\\times\\mathrm{id}_X$ is continuous. The section at $p'$ of $f\\circ(u\\times\\mathrm{id}_X)$ is literally $f_{u(p')}$. Hence $J_{P'}(f\\circ(u\\times\\mathrm{id}_X))(p')=L(f_{u(p')})=J_P(f)(u(p'))$. Both sides are continuous by step 3 and composition. Function extensionality gives the asserted equality, also when $P'$ is empty. None of these arguments uses completeness, a nonarchimedean inequality, or nonemptiness of the parameter spaces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct-image scalar analytic input; agent expansion, compact-parameter functional argument, step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-compact-product-open-neighborhoods"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), scalar tame-kernel analytic auxiliary: proof from the existing compact-product neighbourhood lemma and the defining identities of a contractive linear functional."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(curry|compLeftContinuous|compCLM|postcomp).*",
+   "results": {
+    "t": "2026-10-22T06:06:10Z",
+    "tool": "grep",
+    "query": "(curry|compLeftContinuous|compCLM|postcomp).*",
+    "sub": "Topology/ContinuousMap",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousMap/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Sigma.lean",
+     "Mathlib/Topology/ContinuousMap/ContinuousMapZero.lean",
+     "Mathlib/Topology/ContinuousMap/ContinuousMapZero.lean",
+     "Mathlib/Topology/ContinuousMap/ContinuousMapZero.lean",
+     "Mathlib/Topology/ContinuousMap/ContinuousMapZero.lean",
+     "Mathlib/Topology/ContinuousMap/Interval.lean"
+    ],
+    "digest": "4b8980582d6e2a2c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full quantitative and module-natural statement: ContinuousMap.curry (CompactOpen.lean:430–435, read) gives compact-open continuity, while the uniform section estimate and the C(P,B)-linear, finite-sum and base-precomposition laws require additional arguments. EvalCLM and CLM postcomposition hits do not state this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded linear functional on continuous functions on a compact space induces a continuous parameterwise operation on continuous functions on a product",
+   "results": {
+    "t": "2026-10-22T06:06:11Z",
+    "tool": "leansearch",
+    "query": "A bounded linear functional on continuous functions on a compact space induces a continuous parameterwise operation on continuous functions on a product",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"curry\"",
+   "results": {
+    "t": "2026-10-22T06:06:11Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"curry\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "ContinuousMap.curry",
+     "ContinuousMap.uncurry",
+     "ContinuousMap.continuous_mkD_of_uncurry",
+     "ContinuousMap.continuous_of_continuous_uncurry",
+     "ContinuousMap.continuous_uncurry",
+     "ContinuousMap.continuousOn_mkD_of_uncurry",
+     "ContinuousMap.continuous_curry",
+     "ContinuousMap.continuousOn_of_continuousOn_uncurry"
+    ],
+    "digest": "871f4d2f506bf099"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full quantitative and module-natural statement: ContinuousMap.curry (CompactOpen.lean:430–435, read) gives compact-open continuity, while the uniform section estimate and the C(P,B)-linear, finite-sum and base-precomposition laws require additional arguments. EvalCLM and CLM postcomposition hits do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a contractive linear functional I on C(K,B), applying I in the compact K variable gives a C(P,B) linear map natural under precomposition in P",
+   "results": {
+    "t": "2026-10-22T06:06:24Z",
+    "tool": "leanfinder",
+    "query": "Given a contractive linear functional I on C(K,B), applying I in the compact K variable gives a C(P,B) linear map natural under precomposition in P",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.linearIsometryBoundedOfCompact_apply_apply",
+     "ContinuousLinearEquiv.toCompactConvergenceCLM_apply",
+     "ContDiffMapSupportedIn.toBoundedContinuousFunctionLM",
+     "ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM",
+     "ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM_eq_of_scalars",
+     "ContDiffMapSupportedIn.toBoundedContinuousFunctionLM_eq_of_scalars",
+     "CompactlySupportedContinuousMap.compLinearMap",
+     "CompactConvergenceCLM"
+    ],
+    "digest": "84d4a9bf061a46ac"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full quantitative and module-natural statement: ContinuousMap.curry (CompactOpen.lean:430–435, read) gives compact-open continuity, while the uniform section estimate and the C(P,B)-linear, finite-sum and base-precomposition laws require additional arguments. EvalCLM and CLM postcomposition hits do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "curry|compLeftContinuous",
+   "results": {
+    "t": "2026-10-22T06:07:20Z",
+    "tool": "grep",
+    "query": "curry|compLeftContinuous",
+    "sub": "Topology/ContinuousMap/Compact.lean",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full quantitative and module-natural statement: ContinuousMap.curry (CompactOpen.lean:430–435, read) gives compact-open continuity, while the uniform section estimate and the C(P,B)-linear, finite-sum and base-precomposition laws require additional arguments. EvalCLM and CLM postcomposition hits do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition of the curried map of a continuous function on P times K by a continuous linear functional on C(K,B) is continuous, linear over C(P,B), and natural in P",
+   "results": {
+    "t": "2026-10-22T06:07:29Z",
+    "tool": "leanfinder",
+    "query": "Postcomposition of the curried map of a continuous function on P times K by a continuous linear functional on C(K,B) is continuous, linear over C(P,B), and natural in P",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PointwiseConvergenceCLM.postcomp",
+     "ContinuousLinearMap.postcomp_compactConvergenceCLM",
+     "ContinuousMap.evalCLM",
+     "PointwiseConvergenceCLM.evalCLM",
+     "WeakSpace.map",
+     "PointwiseConvergenceCLM.mkCLM",
+     "Continuous.clm_bundle_apply₂",
+     "LinearMap.continuous_uncurry_of_isContPerfPair"
+    ],
+    "digest": "fbdec0df2a11abe9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full quantitative and module-natural statement: ContinuousMap.curry (CompactOpen.lean:430–435, read) gives compact-open continuity, while the uniform section estimate and the C(P,B)-linear, finite-sum and base-precomposition laws require additional arguments. EvalCLM and CLM postcomposition hits do not state this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a continuous function on P times compact K and a contractive B linear functional on C(K,B), applying the functional to each K section defines a continuous C(P,B) linear operation natural in P",
+   "results": {
+    "t": "2026-10-22T06:07:49Z",
+    "tool": "leansearch",
+    "query": "For a continuous function on P times compact K and a contractive B linear functional on C(K,B), applying the functional to each K section defines a continuous C(P,B) linear operation natural in P",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousOn.clm_bundle_apply",
+     "CompactConvergenceCLM.term_→L_c[_]_",
+     "BoundedContinuousFunction.toContinuousMapLinearMap_apply",
+     "BoundedContinuousFunction.evalCLM",
+     "ContinuousLinearMap.precomp_compactConvergenceCLM",
+     "ContinuousMap.instIsBoundedSMul",
+     "BoundedContinuousFunction.mkOfCompact",
+     "InnerProductSpace.continuousLinearMapOfBilin"
+    ],
+    "digest": "cd61489dae93898a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full quantitative and module-natural statement: ContinuousMap.curry (CompactOpen.lean:430–435, read) gives compact-open continuity, while the uniform section estimate and the C(P,B)-linear, finite-sum and base-precomposition laws require additional arguments. EvalCLM and CLM postcomposition hits do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "curry|compLeftContinuous",
+   "results": {
+    "t": "2026-10-22T06:07:49Z",
+    "tool": "grep",
+    "query": "curry|compLeftContinuous",
+    "sub": "Topology/Algebra/Module/Spaces/ContinuousLinearMap.lean",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "243",
+     "251",
+     "476"
+    ],
+    "digest": "527e6a232fdb99cf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full quantitative and module-natural statement: ContinuousMap.curry (CompactOpen.lean:430–435, read) gives compact-open continuity, while the uniform section estimate and the C(P,B)-linear, finite-sum and base-precomposition laws require additional arguments. EvalCLM and CLM postcomposition hits do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "continuous_curry|def curry|theorem curry|norm_coe_le_norm|norm_le",
+   "results": {
+    "t": "2026-10-23T09:48:55Z",
+    "tool": "grep",
+    "query": "continuous_curry|def curry|theorem curry|norm_coe_le_norm|norm_le",
+    "sub": "Topology/ContinuousMap",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Compact.lean",
+     "Mathlib/Topology/ContinuousMap/Compact.lean",
+     "Mathlib/Topology/ContinuousMap/Compact.lean"
+    ],
+    "digest": "5ad7a765a47e1aa7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: ContinuousMap.curry and curry_apply (CompactOpen.lean:430–436, read) give compact-open continuity of the section family, but not all quantitative and C(P,B)-module-natural clauses. Supremum norm facts in Compact.lean:182–219 were read; they supply no full-item declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For compact X and normed E, currying a continuous map P times X to E is continuous for the supremum norm on C(X,E)",
+   "results": {
+    "t": "2026-10-23T09:48:55Z",
+    "tool": "leansearch",
+    "query": "For compact X and normed E, currying a continuous map P times X to E is continuous for the supremum norm on C(X,E)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.curry",
+     "ContinuousMap.continuous_curry",
+     "ContinuousMap.instNorm",
+     "ContinuousMap.uncurry",
+     "ContinuousMultilinearMap.curryLeft",
+     "Homeomorph.curry",
+     "ContinuousMap.normedSpace",
+     "ContinuousMultilinearMap.curryRight"
+    ],
+    "digest": "f78d8edadc995325"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: ContinuousMap.curry and curry_apply (CompactOpen.lean:430–436, read) give compact-open continuity of the section family, but not all quantitative and C(P,B)-module-natural clauses. Supremum norm facts in Compact.lean:182–219 were read; they supply no full-item declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"curry\"",
+   "results": {
+    "t": "2026-10-23T09:48:55Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"curry\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "ContinuousMap.curry",
+     "ContinuousMap.uncurry",
+     "ContinuousMap.continuous_mkD_of_uncurry",
+     "ContinuousMap.continuous_of_continuous_uncurry",
+     "ContinuousMap.continuous_uncurry",
+     "ContinuousMap.continuousOn_mkD_of_uncurry",
+     "ContinuousMap.continuous_curry",
+     "ContinuousMap.continuousOn_of_continuousOn_uncurry"
+    ],
+    "digest": "871f4d2f506bf099"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: ContinuousMap.curry and curry_apply (CompactOpen.lean:430–436, read) give compact-open continuity of the section family, but not all quantitative and C(P,B)-module-natural clauses. Supremum norm facts in Compact.lean:182–219 were read; they supply no full-item declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous function on a product with a compact space curries to a continuous map into continuous functions with the supremum norm",
+   "results": {
+    "t": "2026-10-23T09:49:06Z",
+    "tool": "leanfinder",
+    "query": "A continuous function on a product with a compact space curries to a continuous map into continuous functions with the supremum norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.continuous_curry",
+     "ContinuousMap.uncurry",
+     "ContinuousMap.curry",
+     "ContinuousMap.continuous_uncurry_of_continuous",
+     "ContinuousMap.continuous_uncurry",
+     "ContinuousMap.uncurry_apply",
+     "Homeomorph.curry",
+     "continuous_curry"
+    ],
+    "digest": "66f584ced9ae6ee0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: ContinuousMap.curry and curry_apply (CompactOpen.lean:430–436, read) give compact-open continuity of the section family, but not all quantitative and C(P,B)-module-natural clauses. Supremum norm facts in Compact.lean:182–219 were read; they supply no full-item declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_eq_iSup_norm|instNormedAddCommGroup|isUniformEmbedding_equivBoundedOfCompact|norm_le",
+   "results": {
+    "t": "2026-10-23T09:53:20Z",
+    "tool": "grep",
+    "query": "norm_eq_iSup_norm|instNormedAddCommGroup|isUniformEmbedding_equivBoundedOfCompact|norm_le",
+    "sub": "Topology/ContinuousMap/Compact.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "67",
+     "83",
+     "87",
+     "207",
+     "208"
+    ],
+    "digest": "26c2dd5e53eefaf5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: hits concerning continuous-function supremum norms, currying, Riesz functionals or multilinear maps omit the parameter estimate and the C(P,B)-linear natural operation. The relevant source declarations in Compact.lean and CompactOpen.lean were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compact space K and arbitrary normed additive group E, C(K,E) has supremum norm topology equal to compact open topology without E being complete",
+   "results": {
+    "t": "2026-10-23T09:53:30Z",
+    "tool": "leanfinder",
+    "query": "For a compact space K and arbitrary normed additive group E, C(K,E) has supremum norm topology equal to compact open topology without E being complete",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.instNormedAddCommGroup",
+     "ContinuousMap.instNorm",
+     "ContinuousMap.normedSpace",
+     "ContinuousMap.norm_le",
+     "ContinuousMap.norm_lt_iff",
+     "ContinuousMap.instSeminormedAddCommGroup",
+     "BoundedContinuousFunction.norm_mkOfCompact",
+     "ContinuousMap.instNormOneClassOfNonempty"
+    ],
+    "digest": "aad7c8c624d6ff90"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: hits concerning continuous-function supremum norms, currying, Riesz functionals or multilinear maps omit the parameter estimate and the C(P,B)-linear natural operation. The relevant source declarations in Compact.lean and CompactOpen.lean were read."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.parameter|contractive|compLeftContinuous",
+   "results": {
+    "t": "2026-10-23T09:54:45Z",
+    "tool": "grep",
+    "query": "compact.parameter|contractive|compLeftContinuous",
+    "sub": "Topology/ContinuousMap",
+    "ok": true,
+    "n_hits": 15,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Basic.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean",
+     "Mathlib/Topology/ContinuousMap/Bounded/Normed.lean"
+    ],
+    "digest": "af0fa56842093e7d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: ContinuousLinearMap.compLeftContinuous (Algebra.lean:595–598, read) postcomposes an already continuous family and is linear only over a fixed scalar semiring; it does not state the quantitative section estimate or C(P,B)-linearity and parameter naturality. The explicit proof remains necessary."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"compLeftContinuous\"",
+   "results": {
+    "t": "2026-10-23T09:54:46Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"compLeftContinuous\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: ContinuousLinearMap.compLeftContinuous (Algebra.lean:595–598, read) postcomposes an already continuous family and is linear only over a fixed scalar semiring; it does not state the quantitative section estimate or C(P,B)-linearity and parameter naturality. The explicit proof remains necessary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a bounded linear functional on continuous functions on compact X, parameterwise application to f on P times X is continuous and linear over C(P,B), commutes with finite sums and precomposition in P",
+   "results": {
+    "t": "2026-10-23T09:54:46Z",
+    "tool": "leansearch",
+    "query": "For a bounded linear functional on continuous functions on compact X, parameterwise application to f on P times X is continuous and linear over C(P,B), commutes with finite sums and precomposition in P",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousLinearMap.compLeftContinuous",
+     "ContinuousOn.clm_bundle_apply",
+     "PointwiseConvergenceCLM.precomp",
+     "ContinuousLinearMap.sum_apply",
+     "BoundedContinuousFunction.coe_sum",
+     "FormalMultilinearSeries.compContinuousLinearMap_applyComposition",
+     "ContinuousLinearMap.precomp_compactConvergenceCLM",
+     "ContinuousLinearMap.precomp"
+    ],
+    "digest": "b0401cf143cb87a4"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: ContinuousLinearMap.compLeftContinuous (Algebra.lean:595–598, read) postcomposes an already continuous family and is linear only over a fixed scalar semiring; it does not state the quantitative section estimate or C(P,B)-linearity and parameter naturality. The explicit proof remains necessary."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a contractive linear functional on C(X,B), prove the uniform epsilon over two parameter estimate, C(P,B) linearity, finite sums, and naturality under parameter precomposition",
+   "results": {
+    "t": "2026-10-23T09:54:56Z",
+    "tool": "leanfinder",
+    "query": "Given a contractive linear functional on C(X,B), prove the uniform epsilon over two parameter estimate, C(P,B) linearity, finite sums, and naturality under parameter precomposition",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "exists_lt_rieszContentAux_add_pos",
+     "AlternatingMap.bound_of_shell_of_continuous",
+     "ContDiffMapSupportedIn.toBoundedContinuousFunctionLM_eq_of_scalars",
+     "ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM_eq_of_scalars",
+     "MultilinearMap.bound_of_shell_of_continuous",
+     "ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM",
+     "rieszContentAux_le",
+     "FDerivMeasurableAux.norm_sub_le_of_mem_A"
+    ],
+    "digest": "219709d29252ba06"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the full item: hits concerning continuous-function supremum norms, currying, Riesz functionals or multilinear maps omit the parameter estimate and the C(P,B)-linear natural operation. The relevant source declarations in Compact.lean and CompactOpen.lean were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-complete-scalar-integral",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), scalar tame-kernel analytic input; extraction of returned integral proof steps 8–9: compact-parameter estimate, pointwise module linearity, finite sums and naturality for an arbitrary contractive functional. Agent-formulated auxiliary assertion; exact literature reference WANTED.",
+   "via": [
+    "lem-sfb-prime-to-ell-complete-scalar-integral",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-compact-parameter-functional",
+  "worker": "stage1",
+  "summary": "The statement is unchanged. Expanded the compact-parameter argument into the open norm-difference set, application of the existing generalized tube lemma, supremum and contractivity bounds, pointwise module and finite-sum identities, and explicit parameter precomposition. No new nodes are needed. Checked arbitrary normed fields and empty parameters and sums; retained all previous search records and added the searches actually run in this sandbox.",
+  "blueprint": "The current latest direct-images proof, paragraph (3), uses the open direct-image coefficient comparison. This item is the inherited scalar analytic auxiliary below that step: steps 1–3 supply compact-parameter continuity and its quantitative bound, and steps 4–5 supply the module, finite-sum and naturality identities. The ancestor command returns None for this inherited created chain; its existing blueprint.from.node and via are preserved. The blueprint itself states no compact-parameter functional theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-406a6b95e",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-406a6b95e (reviewer sub-agent of L); spot-checked: Ordinary first split with 0 new nodes; the item is still unsplit in live and side-live and has no repair note. The statement and stmt_deps are byte-identical to live; proof_deps equals the union of step uses, [lem-sfb-compact-product-open-neighborhoods]. That node is a same-unit Mathlib leaf; I checked it against generalized_tube_lemma, Compact.lean:752-759, and it matches with no separation or nonemptiness hypotheses. Step 1: W=h^{-1}(-inf,eps/2) is open and contains {p0}xX. Step 2: tube lemma on {p0} and X, so O=X and the bound holds on VxX. Step 3: the sup bound needs only least upper bound; then B-linearity and contractivity give both estimates, continuity follows since eps/2<eps, and empty P is vacuous. Step 4: J(cf)(p)=c(p)L(f_p), so J is C(P,B)-linear, with finite sums by induction including empty T. Step 5: the section of f∘(u×id) at p' is f_{u(p')}, so naturality holds, including empty P'. Edge cases checked: empty P, P' and T; singleton X; L=0; archimedean, nonarchimedean and trivial absolute values; no completeness used. Profinite P and Hausdorff X are unused but harmless, and the statement is unchanged. Source paragraph (3) of the direct-images proof (main-20261015; latest has identical text) contains no such lemma; proof_origin=agent and WANTED are declared honestly. Step sources use the latest/ path like 11 other nodes; cosmetic. Citer prime-to-ell-complete-scalar-integral step 4 uses exactly the statement. Duplicate grep for contractive/compact-parameter statements found nothing equivalent. No SGA cited, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.CompactParameterFunctional",
+  "declaration": "ContinuousMap.exists_compactParameterFunctional",
+  "file": "lean/Sheaf/Topology/CompactParameterFunctional.lean",
+  "statement": "theorem exists_compactParameterFunctional (B : Type w) [NormedField B] (X : Type v) [TopologicalSpace X] [CompactSpace X] [T2Space X] [Nonempty X] (L : C(X, B) →ₗ[B] B) (hL : ∀ g : C(X, B), ‖L g‖ ≤ ‖g‖) : ∃ J : ∀ P : Profinite.{u}, C(P × X, B) →ₗ[B] C(P, B), (∀ (P : Profinite.{u}) (f : C(P × X, B)) (p : P), J P f p = L (f.curry p)) ∧ (∀ (P : Profinite.{u}) (f : C(P × X, B)) (p₀ : P) (ε : ℝ), 0 < ε → ∃ V : Set P, IsOpen V ∧ p₀ ∈ V ∧ ∀ p ∈ V, ‖f.curry p - f.curry p₀‖ ≤ ε / 2 ∧ ‖J P f p - J P f p₀‖ ≤ ε / 2) ∧ (∀ (P : Profinite.{u}) (c : C(P, B)) (f : C(P × X, B)), J P (c.comp ContinuousMap.fst * f) = c * J P f) ∧ (∀ (P : Profinite.{u}) (T : Type t) [Fintype T] (f : T → C(P × X, B)), J P (∑ i, f i) = ∑ i, J P (f i)) ∧ (∀ (P P' : Profinite.{u}) (a : C(P', P)) (f : C(P × X, B)), J P' (f.comp (a.prodMap (ContinuousMap.id X))) = (J P f).comp a)",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The uniquely specified family is B-linear with the explicit parameter-function scalar identity; together these state C(P,B)-linearity for precisely the action in the node. The continuous codomain bundles continuity. No auxiliary data is chosen from an existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad1140d51",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Lean statement ContinuousMap.exists_compactParameterFunctional matches the node clause by clause: NormedField B only (no completeness or nonarchimedean assumption); X compact, T2 and Nonempty; L B-linear and contractive; P : Profinite.{u} with no Nonempty; J fixed by J P f p = L (f.curry p) via curry_apply, so it is not arbitrary; open-V estimates with weak <= eps/2, the first being the sup norm of the section difference; C(P,B)-linearity via c.comp fst * f; finite sums over Fintype T, including empty T; naturality via a.prodMap id. Universes are explicit and bound, as the size convention requires. The node record differs from live only in the lean field, and lean.statement is verbatim. The proof dep generalized_tube_lemma was read and its plain import is the proof_dep module. The landed citer primeToEll_completeScalar_integral uses the same J-shape inline, consistent and not a duplicate def. Not superseded, since the live lean field is null. Docstrings carry the source place, the blueprint tag and 5 proof steps; body is sorry. No compile was needed because no file was changed."
+ }
+}

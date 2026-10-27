@@ -1,0 +1,156 @@
+{
+ "id": "lem-sp-tower-compositor-finite-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-composition-comparisons",
+   "place": "Proof (3), the tower composition isomorphisms have the finite composition isomorphisms as their levels.",
+   "via": [
+    "lem-sp-tower-adjoint-compositor-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite normalization of the given tower left compositor",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-composition",
+ "statement": "Fix distinct primes p and ell, a field k of characteristic p, a finite extension E of Q_ell, separated finite-type k-schemes X,Y,Z, and smooth k-morphisms f:X->Y and g:Y->Z of pure relative dimensions d,e. Let cf,cg,ch be compactifications of f,g,fg. Use the actual section-normalized coefficient-tower coordinates b,o,q, finite coordinates z, uniform ctf preservation hP, and a supplied Calculus cal of [def-sp-coefficient-tower-shriek-interfaces]. For each n let vf_n,vg_n,vh_n be Evaluation structures for these compactifications, normalized by their prescribed Fcomparison words. Let A_n be a FiniteAdjointCompositorDatum of [lem-sp-finite-adjoint-compositor-transposes] for the coefficient ring R_n=O_E/ell^(n+1), whose left compositor alpha_n has its prescribed etale normalization. For every n and uniform ctf tower M on X, evaluation of the actual arrow cal.composition.composition(f,g,cf,cg,ch) followed by vh_n(M) equals vg_n(F_f M), followed by F_g,n(vf_n(M)), followed by alpha_n(M_n). No right compositor, reduction identity or normalization preservation is asserted here.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+  "place": "Proof (3), first two sentences; parent lem-sp-tower-adjoint-compositor-realization, finite-evaluation part of steps 2--3."
+ },
+ "stmt_deps": [
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "det-sp-tower-gluing",
+  "lem-sp-finite-adjoint-compositor-transposes",
+  "sk-def-sfb-dc-setting",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof": [
+  {
+   "text": "The supplied cal.coherence.composition_finite is the evaluation equation for the actual tower compositor in the fixed module coordinates. Every Evaluation comparison equals the same realization-counit/Fcomparison word by its normalization field. Replace cal.finite.evaluation by vf,vg,vh in that equation.",
+   "uses": [
+    "def-sp-coefficient-tower-shriek-interfaces"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By cal.finite.finite_origin the fixed-coordinate evaluation M_n has a bounded-below etale witness. The intrinsic coordinate equivalence transports this witness to one for the intrinsic module object M_n. Since M is uniform ctf, M_n is finite ctf, so the normalization field of A_n applies to that witness. It writes alpha_n as the etale compositor transported through finiteAdjointSiteSupportIso. Finite compact-site coherence identifies the same transported etale word with finiteCanonicalComposition for the chosen compactifications; its common-refinement equations handle cf,cg,ch.",
+   "uses": [
+    "def-sp-coefficient-tower-shriek-interfaces",
+    "lem-sp-finite-adjoint-compositor-transposes",
+    "lem-sp-finite-compact-site-coherence",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality transports the witness equation to M_n. Substitute it into the first equation and cancel the fully faithful intrinsic-to-fixed derived equivalence. This gives exactly the displayed intrinsic evaluation identity; no faithfulness of the tower evaluation functor is used.",
+   "uses": [
+    "def-sp-coefficient-tower-shriek-interfaces",
+    "lem-sp-finite-adjoint-compositor-transposes"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "lem-sp-finite-adjoint-compositor-transposes",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-comparisons.proof.md",
+  "place": "Proof (3), first two sentences; parent lem-sp-tower-adjoint-compositor-realization, finite-evaluation part of steps 2--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a compact support compositor on constructible finite coefficient pro etale derived categories",
+   "results": "8 unrelated hits, including SheafOfModules.Finite.evaluationPreservesFiniteLimits and SheafOfModules.evaluationPreservesLimit.",
+   "date": "2026-10-25",
+   "verdict": "No match: finite-limit evaluation does not identify the geometric derived compact-support compositor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between left adjoints induces the unique isomorphism between right adjoints preserving their counits",
+   "results": "Generic adjunction uniqueness, including CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit.",
+   "date": "2026-10-25",
+   "verdict": "Covers the parent categorical glue, but not this left finite-normalization identity."
+  },
+  {
+   "tool": "grep",
+   "query": "composition_finite|finiteCompactSiteCoherence|AdjunctionEvaluation in Mathlib, via msearch grep",
+   "results": "0 hits. Local library search found cal.coherence.composition_finite and finite compact-site coherence, which are the steps used here.",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib theorem for this geometric identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerAdjointCompositorRealization",
+  "date": "2026-10-25",
+  "group": "M4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerCompositorFiniteEvaluation",
+  "file": "lean/Sheaf/Paper/TowerCompositorFiniteEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.towerCompositorFiniteEvaluation",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-25",
+  "statement": "theorem towerCompositorFiniteEvaluation\n    (p : ℕ) [Fact p.Prime] (_hpl : p ≠ l) (k : Type u) [Field k] [CharP k p]\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Z.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n    [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))]\n    [QuasiCompact (Z ↘ Spec (.of k))]\n    [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [IsSeparated g] [LocallyOfFiniteType g]\n    (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g]\n    (z : SpTowerCalculus.FiniteCoordinates l E)\n    (hP : SpTowerCalculus.Preservation l E k b o q)\n    (cal : SpTowerCalculus.Calculus l E k b o q z hP)\n    (vf : ∀ n : ℕ, SpTowerCalculus.Evaluation l E b o q cf n)\n    (vg : ∀ n : ℕ, SpTowerCalculus.Evaluation l E b o q cg n)\n    (vh : ∀ n : ℕ, SpTowerCalculus.Evaluation l E b o q ch n)\n    (A : ∀ n : ℕ, FiniteAdjointCompositorDatum (SpTowerShriek.R l E n) cf cg ch)\n    (n : ℕ) (M : SpTowerCalculus.C l E b q X) :\n    (spDerivedCoefficientEvaluation l E Z (q.abelian Z) n).map\n        ((cal.composition.composition f g (f ≫ g) rfl cf cg ch).hom.app M) ≫\n      (vh n).comparison.hom.app M.obj =\n    (vg n).comparison.hom.app ((SpTowerCalculus.F l E b o q cf).obj M.obj) ≫\n      (reductionCompactSupport (SpTowerShriek.R l E n) cg.i cg.g).map\n        ((vf n).comparison.hom.app M.obj) ≫\n      ((A n).alpha.hom.app ((SpTowerGluing.level l E b q X n).obj M)).hom"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sp-tower-compositor-finite-evaluation",
+  "worker": "M4",
+  "summary": "Only the finite evaluation identity of the supplied left compositor is split off. The parent proves all categorical, reduction and normalization conclusions from this identity.",
+  "blueprint": "det-sp-composition-comparisons proof (3), finite levels of tower composition.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-finite-compact-site-coherence",
+    "why": "The finite-level proper/open site-normalization square identifies the given finite alpha and the cal fixed-coordinate compositor; this does not replace any purity argument."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Bounded-below compatibility and canonical refinement/composition words identify the finite canonical comparison, used as a geometric compact-support tool."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T143656-L-1074015",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261025T143656-L-1074015",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

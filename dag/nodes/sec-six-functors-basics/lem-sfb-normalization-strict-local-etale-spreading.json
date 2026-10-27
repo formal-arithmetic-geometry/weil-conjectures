@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-normalization-strict-local-etale-spreading",
+ "kind": "statement",
+ "title": "Finite normalization models and spreading strict-local etaleness to a base neighbourhood",
+ "statement": "Let $B$ be a commutative Noetherian ring and let $C$ be a finite $B$-algebra whose local rings at primes are integrally closed domains [def-weil-pbc-noetherian-ring, def-weil-finitely-generated-module, def-weil-pbc-normal-ring]. Let $g\\in C$ have injective multiplication on $C$, put $C_g=C[1/g]$ [def-weil-ring-localization-away], and let $F$ be a finite $C_g$-algebra with $\\operatorname{Spec}F\\to\\operatorname{Spec}C_g$ etale [def-weil-pbc-finite-etale-category]. Let $E\\subseteq F$ be the integral closure of $C$ in $F$, the subring of elements satisfying a monic polynomial with coefficients in the image of $C$ [def-weil-pbc-integral-closure]. Then $E$ is a finite $C$-module and a finitely presented $C$-algebra [def-weil-pbc-finitely-presented-algebra]. The canonical localization map induces an isomorphism $E[1/g]\\simeq F$ of $C_g$-algebras. The integral closure of $C$ in $C_g$ is precisely the image of the injective structural map $C\\to C_g$.\nMoreover, fix $v\\in\\operatorname{Spec}B$ and a geometric point $\\bar v$ over $v$, and let $A=\\mathcal O_{\\operatorname{Spec}B,\\bar v}^{\\mathrm{sh}}$ with its structural $B$-algebra map [def-sc-ring-strict-henselization]. If\n$$\\operatorname{Spec}(E\\otimes_B A)\\longrightarrow\\operatorname{Spec}(C\\otimes_B A)$$\nis etale, then, with $B_v$ the localization at $v$ [def-weil-pbc-localization-at-prime], $\\operatorname{Spec}(E\\otimes_B B_v)\\to\\operatorname{Spec}(C\\otimes_B B_v)$ is etale, and there exists $h\\in B\\setminus v$ such that\n$$\\operatorname{Spec}(E\\otimes_B B[1/h])\\longrightarrow\\operatorname{Spec}(C\\otimes_B B[1/h])$$\nis finite etale [def-weil-pbc-module-tensor-product]. Its restriction to the principal open defined by $g$ is the base change of $\\operatorname{Spec}F\\to\\operatorname{Spec}C_g$, through the stated canonical localization isomorphism. No connectedness, nonemptiness, or field hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 07RP, lemma-descend-etale, for the localization system over B_v; Tag 032L, algebra.tex lemma-Noetherian-normal-domain-finite-separable-extension, for normalization finiteness; Tag 0CBF, algebra.tex lemma-integral-closure-commutes-colim-smooth, for its open restriction; Tag 02VN, descent.tex lemma-descending-property-etale, for strict-local faithful-flat descent. Returned proof steps 4-5 and 10."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-normal-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-pbc-integral-closure",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Make C Noetherian using IsNoetherianRing.of_finite. Normal prime localizations imply C is reduced by Mathlib isReduced_ofLocalizationMaximal. Apply integral_totalFraction_mem_range_of_normal to identify C with its integral closure in FractionRing C. The existing reduced-normal equivalence then decomposes C as a finite product of integrally closed domains R_i. All R_i are Noetherian, since their projections from C are surjective. The empty product covers the zero ring.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a normal Noetherian domain R with fraction field K, an etale K-algebra D is a finite product of finite separable field extensions, by Algebra.Etale.iff_exists_algEquiv_prod. Apply IsIntegralClosure.finite in each field. The integral closure in D injects linearly into the product of these finite closures, so Module.Finite.of_injective proves it finite over R. This is the private finite_closure_etale_fraction helper.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Regularity of g makes each image g_i nonzero: otherwise g kills the nonzero coordinate idempotent. Thus C_g maps into each fraction field K_i. Base-change F to D_i = K_i tensor_(C_g) F and use the preceding helper. The product of the maps C_g to K_i is injective; etale flatness of F and TensorProduct.includeLeft_injective preserve this injection on tensoring. TensorProduct.piRight identifies its coordinates with the maps F to D_i. Hence the integral closure of C in F injects C-linearly into the finite product of the integral closures of R_i in D_i. Noetherianity and Module.Finite.of_injective give finiteness of E. Finite module implies finite type, then Algebra.FinitePresentation.of_finiteType gives finite presentation.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use IsIntegral.exists_multiple_integral_of_isLocalization for C to C_g and the integrality of F over C_g. Every x in F has a power g^n for which g^n x belongs to E, giving the surjectivity clause of IsLocalization. Units come from C_g; equality reflection comes from the actual subtype inclusion E to F. Regularity gives injectivity of C to C_g. Lift C_g into FractionRing C, prove the lift injective, and restrict integral closedness there to C_g. IsIntegrallyClosedIn.integralClosure_eq_bot_iff yields the stated equality.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-normal-ring-integrally-closed-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the specified strict-henselization presentation P of R = B_v, Module.flat_iff_strictHenselization applied to A gives R-flatness. Descend the pointings of P to an R-algebra map A to K. Its kernel contains the extension of the maximal ideal of R, so that extension is proper. The maximal-ideal criterion gives Module.FaithfullyFlat R A. This construction uses a uniquely determined colimit morphism, not an arbitrary existence witness.",
+   "uses": [
+    "lem-sfb-strict-henselization-module-flatness",
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The private tensor_rebase equivalence sends ((c tensor r) tensor a) to c tensor (r smul a). Check the square with the two normalization maps on pure tensors. Transfer etaleness over A through this square. Use IsPushout.tensorProduct_tensorProduct and tensor symmetry to identify the resulting map with ordinary scalar extension over R; apply Mathlib Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat. This proves the exact map over B_v etale.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite R-algebras S and T with S to T finite, let Z be the complement of the etale locus of S to T in Spec T. Finite presentation makes Z closed (Mathlib Algebra.isOpen_etaleLocus). Since T is integral over R, its image in Spec R is closed. The hypothesis over R_p implies no point over p belongs to Z: localized prime rings are identified by IsLocalization.isLocalization_isLocalization_atPrime_isLocalization and IsLocalization.algEquiv. Choose a basic open D(h) around p disjoint from this image. The same prime-localization argument shows T tensor_R R_h formally etale over S, hence over S tensor_R R_h by restriction of scalars. Finiteness and Noetherianity give finite presentation, so the canonical tensor map is etale. This proves etale_spread_finite without an inverse-limit diagram.",
+   "uses": [
+    "lem-weil-pbc-integral-spec-closed-map",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the finite model with B_h. IsPushout.tensorProduct_tensorProduct and the usual finite tensor-product module instance prove the canonical map finite. IsLocalization.tensorProduct_tensorProduct applied to E to F yields precisely the localization at g tensor 1, because Submonoid.map_powers identifies the denominator submonoid. This uses normalizationCoverBaseChangeMap itself as the algebra structure, so no unspecified localization isomorphism is substituted. Assemble all conjunctions and the chosen h.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-ring-localization-away",
+  "lem-sfb-strict-henselization-module-flatness",
+  "def-sc-ring-strict-henselization",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 030C, 034M and 032L for algebraic normalization; denominator clearing for the canonical localization; descent.tex Tag 02VN implemented by Mathlib etale tensor descent. The finite-map closed-image/etale-locus argument replaces the original limits.tex Tag 07RP route. Tensor identifications are proved explicitly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a normal noetherian algebra in a finite etale cover of a dense principal open is finite and etaleness after strict henselization spreads to a Zariski neighbourhood",
+   "results": "{\"t\": \"2026-10-22T06:04:37Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a normal noetherian algebra in a finite etale cover of a dense principal open is finite and etaleness after strict henselization spreads to a Zariski neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.etaleLocus\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.IsEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.IsEtaleAt.comp\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"5f7888e3be4f2ea6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale locus neighbourhoods invert elements in the source algebra and do not supply a finite integral-closure model or descent from a geometric strict localization to an open in Spec B; standard-etale integral-closure comparison alone supplies neither assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite normalization model which is etale after strict local base change is etale over an open neighbourhood of the base point",
+   "results": "{\"t\": \"2026-10-22T06:04:38Z\", \"tool\": \"leanfinder\", \"query\": \"A finite normalization model which is etale after strict local base change is etale over an open neighbourhood of the base point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.etaleLocus_eq_univ_iff_etale\"], \"digest\": \"ee0de975e9b217a5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale locus neighbourhoods invert elements in the source algebra and do not supply a finite integral-closure model or descent from a geometric strict localization to an open in Spec B; standard-etale integral-closure comparison alone supplies neither assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T06:04:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"mem_adjoin_map_integralClosure_of_isStandardEtale\"], \"digest\": \"fb5c99245432ccfb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale locus neighbourhoods invert elements in the source algebra and do not supply a finite integral-closure model or descent from a geometric strict localization to an open in Spec B; standard-etale integral-closure comparison alone supplies neither assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(normaliz|integralClosure).*(strictHensel|neighbou|IsEtale)|(strictHensel|neighbou|IsEtale).*(normaliz|integralClosure)",
+   "results": "{\"t\": \"2026-10-22T06:04:27Z\", \"tool\": \"grep\", \"query\": \"(normaliz|integralClosure).*(strictHensel|neighbou|IsEtale)|(strictHensel|neighbou|IsEtale).*(normaliz|integralClosure)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale locus neighbourhoods invert elements in the source algebra and do not supply a finite integral-closure model or descent from a geometric strict localization to an open in Spec B; standard-etale integral-closure comparison alone supplies neither assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite normalization along a dense open and descent of etaleness from a strict henselization to an open neighbourhood",
+   "results": "{\"t\": \"2026-10-22T06:04:28Z\", \"tool\": \"leansearch\", \"query\": \"Finite normalization along a dense open and descent of etaleness from a strict henselization to an open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"Algebra.FormallyEtale.of_isLocalization\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\"], \"digest\": \"d4a1a966b8111804\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale locus neighbourhoods invert elements in the source algebra and do not supply a finite integral-closure model or descent from a geometric strict localization to an open in Spec B; standard-etale integral-closure comparison alone supplies neither assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(normaliz|integralClosure).*(strictHensel|neighbou|IsEtale)|(strictHensel|neighbou|IsEtale).*(normaliz|integralClosure)",
+   "results": "{\"t\": \"2026-10-22T11:32:46Z\", \"tool\": \"grep\", \"query\": \"(normaliz|integralClosure).*(strictHensel|neighbou|IsEtale)|(strictHensel|neighbou|IsEtale).*(normaliz|integralClosure)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale loci, standard etale presentations, or normalization maps; none supplies both the finite normal-open model and strict-local descent to an open of Spec B"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite normalization along a dense open and descent of etaleness from a strict henselization to an open neighbourhood",
+   "results": "{\"t\": \"2026-10-22T11:32:47Z\", \"tool\": \"leansearch\", \"query\": \"Finite normalization along a dense open and descent of etaleness from a strict henselization to an open neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"Algebra.FormallyEtale.of_isLocalization\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\"], \"digest\": \"d4a1a966b8111804\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale loci, standard etale presentations, or normalization maps; none supplies both the finite normal-open model and strict-local descent to an open of Spec B"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T11:32:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"mem_adjoin_map_integralClosure_of_isStandardEtale\"], \"digest\": \"fb5c99245432ccfb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale loci, standard etale presentations, or normalization maps; none supplies both the finite normal-open model and strict-local descent to an open of Spec B"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite integral closure in a finite etale cover of a principal open and etaleness spreading from strict henselization to a base neighbourhood",
+   "results": "{\"t\": \"2026-10-22T11:32:53Z\", \"tool\": \"leanfinder\", \"query\": \"Finite integral closure in a finite etale cover of a principal open and etaleness spreading from strict henselization to a base neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.IsEtaleAt\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalization_Away\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"19615da20137498a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale loci, standard etale presentations, or normalization maps; none supplies both the finite normal-open model and strict-local descent to an open of Spec B"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite normalization model which is etale after strict local base change is etale over an open neighbourhood of the base point",
+   "results": "{\"t\": \"2026-10-22T11:33:23Z\", \"tool\": \"leanfinder\", \"query\": \"A finite normalization model which is etale after strict local base change is etale over an open neighbourhood of the base point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.isOpen_etaleLocus\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.of_isLocalizationAway\"], \"digest\": \"dd5e480a0ce604fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern etale loci, standard etale presentations, or normalization maps; none supplies both the finite normal-open model and strict-local descent to an open of Spec B"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-tame-root-etale-extension",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), open direct image, inherited finite-cover Kummer input: Tag 07RP, lemma-descend-etale, for the localization system over B_v; Tag 032L, algebra.tex lemma-Noetherian-normal-domain-finite-separable-extension, for normalization finiteness; Tag 0CBF, algebra.tex lemma-integral-closure-commutes-colim-smooth, for its open restriction; Tag 02VN, descent.tex lemma-descending-property-etale, for strict-local faithful-flat descent. Returned proof steps 4-5 and 10.",
+   "via": [
+    "lem-sfb-snc-tame-root-etale-extension",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normalization-strict-local-etale-spreading",
+  "worker": "stage1",
+  "group": "Q65",
+  "summary": "Statement unchanged mathematically; added missing definition references for finite presentation and prime localization. Eight explicit proof steps reuse only existing DAG statements. Verified componentwise normal-open finiteness, denominator-localization isomorphism, dense-open identity, actual fpqc covering, and the directed finite-denominator system. No new nodes or Mathlib leaves.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), open direct image, inherited finite-cover Kummer input: Tag 07RP, lemma-descend-etale, for the localization system over B_v; Tag 032L, algebra.tex lemma-Noetherian-normal-domain-finite-separable-extension, for normalization finiteness; Tag 0CBF, algebra.tex lemma-integral-closure-commutes-colim-smooth, for its open restriction; Tag 02VN, descent.tex lemma-descending-property-etale, for strict-local faithful-flat descent. Returned proof steps 4-5 and 10. The split realizes precisely normalization finiteness/open restriction and strict-local-to-base-neighbourhood spreading. The inherited ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic decomposition of a normal Noetherian affine into clopen integral components; no replacement of the inherited normalization route."
+   },
+   {
+    "node": "lem-sbc-finite-etale-open-integral-closure",
+    "why": "Generic normalization finiteness on each integral component, exactly the inherited Tag 032L route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Restriction of the original cover to a clopen component uses general etale base change."
+   },
+   {
+    "node": "lem-sbc-normal-dense-open-integral-section",
+    "why": "Generic integral-section extension on the dense principal open proves the image equality for C."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic faithful flatness of the actual strict localization over B_v."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-base-change",
+    "why": "Generic tensor stability makes the actual covering of Spec(C tensor B_v) faithfully flat."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Converts faithful flatness into the surjectivity required for the fpqc cover."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic fpqc descent of etaleness, rather than descent of a newly chosen model."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic affine inverse-limit identification for the finite-denominator system."
+   },
+   {
+    "node": "lem-weil-pbc-descend-etale",
+    "why": "Generic limit descent applied to the fixed finitely presented normalization morphism over the localization system."
+   },
+   {
+    "node": "lem-weil-pbc-finite-product-integral-closure",
+    "why": "Generic identification of the integral closure of a finite product of ring maps with the product of the component integral closures, used to assemble E from the components E_j."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-faithfully-flat-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-1bd2a633d",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-1bd2a633d (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement in full. The statement is unchanged apart from two added definition links (finitely presented algebra, localization at a prime); both are used, and the only citer, lem-sfb-snc-tame-root-etale-extension, still gets every clause it uses. Small cases tested, none failing: C=0, g a unit, g=0, C=k×k with a noninjective C→F, B=0, v maximal or not. Step-by-step checks: step 1, the trf components lemma's hypotheses match the normal-ring definition, and g_j≠0 on a nonzero component, so D(g) is dense. Step 2, lem-sbc-finite-etale-open-integral-closure is applied with X=X_j, U=D(g_j), V=X_j, which gives Γ(P)=F_j. Step 3, finite module ⇒ finite type ⇒ finitely presented over Noetherian C. Step 4, the exponent N(n−i−1) in the denominator calculation is correct. Step 5, dense-open integral-section applied with U=X. Step 6, B_v→A is faithfully flat; base-changing to C⊗B_v gives a singleton fpqc cover (affine, flat, surjective), and the étale base change is E⊗_B A (Tag 02VN, read). Step 7, the directed system of finite subsets of B∖v has colimit B_v, and Tag 07RP (read) applies with S_0, X_0, Y_0 affine and f_0 locally of finite presentation. Step 8 is the elementary finiteness and punctured base-change identification. No SGA is cited. Duplicate search found no node stating the item. FIX, one fault: step 2 proved the finite-product integral-closure identity E=∏E_j inline, but the existing node lem-weil-pbc-finite-product-integral-closure states exactly that (C5). The corrected item in fixes/ cites it in step 2, adds it to proof_deps and declares it in split_report.tool_uses; nothing else is changed. Batch-5 check: lem-trf-normal-topologically-noetherian-components is the generic Stacks 0357 component decomposition with generic dependencies. Neither the trace-formula nor the Poincaré-duality assumption gives it, and it is not a step of their proofs, so I accept the citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalizationStrictLocalEtaleSpreading",
+  "declaration": "Algebra.normalization_strictLocal_etale_spreading",
+  "declarations": [
+   "Algebra.normalizationModelBaseChangeMap",
+   "Algebra.normalizationCoverBaseChangeMap",
+   "Algebra.normalization_strictLocal_etale_spreading"
+  ],
+  "file": "lean/Sheaf/RingTheory/NormalizationStrictLocalEtaleSpreading.lean",
+  "statement": "theorem normalization_strictLocal_etale_spreading (B : Type u) (C : Type v) [CommRing B] [CommRing C] [IsNoetherianRing B] [Algebra B C] [Module.Finite B C] (hnormal : ∀ (p : Ideal C) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (g : C) (hg : Function.Injective (fun c : C ↦ g * c)) (F : Type w) [CommRing F] [Algebra (Localization.Away g) F] [Algebra C F] [IsScalarTower C (Localization.Away g) F] [Algebra B F] [IsScalarTower B C F] [Module.Finite (Localization.Away g) F] [Algebra.Etale (Localization.Away g) F] : Module.Finite C (integralClosure C F) ∧ Algebra.FinitePresentation C (integralClosure C F) ∧ IsLocalization.Away (algebraMap C (integralClosure C F) g) F ∧ Function.Injective (algebraMap C (Localization.Away g)) ∧ integralClosure C (Localization.Away g) = ⊥ ∧ ∀ (v : Ideal B) [v.IsPrime] (K A : Type (max u s)) [Field K] [CommRing A] [Algebra (IsLocalRing.ResidueField (Localization.AtPrime v)) K] [IsSepClosure (IsLocalRing.ResidueField (Localization.AtPrime v)) K] [Algebra (Localization.AtPrime v) K] [IsScalarTower (Localization.AtPrime v) (IsLocalRing.ResidueField (Localization.AtPrime v)) K] [Algebra (Localization.AtPrime v) A] [Algebra B A] [IsScalarTower B (Localization.AtPrime v) A], Algebra.StrictHenselizationPresentationIn.{u, s} (Localization.AtPrime v) K A → (normalizationModelBaseChangeMap B C F A).Etale → (normalizationModelBaseChangeMap B C F (Localization.AtPrime v)).Etale ∧ ∃ h : B, h ∉ v ∧ (normalizationModelBaseChangeMap B C F (Localization.Away h)).Finite ∧ (normalizationModelBaseChangeMap B C F (Localization.Away h)).Etale ∧ @IsLocalization ((integralClosure C F) ⊗[B] (Localization.Away h)) _ (Submonoid.powers ((algebraMap C (integralClosure C F) g) ⊗ₜ[B] (1 : Localization.Away h))) (F ⊗[B] (Localization.Away h)) _ (normalizationCoverBaseChangeMap B C F (Localization.Away h)).toAlgebra",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical open isomorphisms are expressed by IsLocalization.Away and IsLocalization for the actual normalization inclusion, before and after scalar extension. These universal properties give the unique compatible localization isomorphisms, including their C_g-algebra structures. The two helper definitions are the specified tensor maps, built with Algebra.TensorProduct.map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5c341392",
+  "group": "Q09",
+  "result": "pass",
+  "note": "First lean record (live lean=null); only node.lean changed; all 10 stmt_dep records byte-identical to side-live; lean.statement verbatim in file. Clause-by-clause: Noetherian B, Module.Finite B C, prime-local normality = recorded inline form, injective g-multiplication, finite+etale F over Localization.Away g, E = actual integralClosure C F; StrictHenselizationPresentationIn.{u,s} over B_v with IsSepClosure K and compatible B-structure (universe max u s, not vacuous). Conclusions: Module.Finite and FinitePresentation of E; IsLocalization.Away along the actual inclusion (canonical C_g-iso); injective C→C_g and integralClosure C C_g = ⊥; etale over B_v; ∃ h ∉ v with finite+etale map over B[1/h]; final IsLocalization along the actual tensor inclusion gives the base-change clause. Helpers are real Algebra.TensorProduct.map data with source/blueprint docstrings; proof only sorry; 8-step docstring. Edge cases C=0, F=0, g=0/1, B=0, h=1, disconnected C covered. No extra assumptions, no pro-etale content. Non-blocking: strictHenselization_faithfullyFlat uses a different presentation, so stage 3 needs a bridge."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261025T071053-L-66809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

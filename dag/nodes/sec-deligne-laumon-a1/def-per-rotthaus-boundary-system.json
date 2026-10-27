@@ -1,0 +1,132 @@
+{
+ "id": "def-per-rotthaus-boundary-system",
+ "kind": "definition",
+ "title": "Semilocal completion normalization boundary system",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $B$ be a commutative ring and $x\\in B$. For a finite set $\\gamma\\subseteq\\operatorname{Max}B$, put $S_\\gamma=B\\setminus\\bigcup_{\\mathfrak m\\in\\gamma}\\mathfrak m$, $B_\\gamma=S_\\gamma^{-1}B$, and $D_\\gamma=\\varprojlim_j B_\\gamma/(x)^j$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion]. For $\\mathfrak n\\in\\gamma$, put $C=\\varprojlim_j B_{\\mathfrak n}/(x)^j$. The canonical localization map $B_\\gamma\\to B_{\\mathfrak n}$ induces the coordinatewise principal completion map $D_\\gamma\\to C$ [def-trf-adic-ring-completion-map]. For a prime $\\mathfrak s\\subset C$, put $\\mathfrak s_\\gamma=\\mathfrak s\\cap D_\\gamma$ and $E_\\gamma=\\overline{D_\\gamma/\\mathfrak s_\\gamma}$, the integral closure in its own fraction field [def-weil-pbc-integral-closure]. The canonical map $B\\to E_\\gamma$ is the composite through $B_\\gamma$, $D_\\gamma$ and its quotient. Define $\\Delta(x)=\\{Q\\cap B:\\gamma\\subseteq\\operatorname{Max}B\\text{ finite},\\ \\mathfrak n\\in\\gamma,\\ Q\\text{ prime minimal over }xE_\\gamma\\}$.",
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-trf-adic-ring-completion-map",
+  "def-weil-pbc-integral-closure"
+ ],
+ "source": {
+  "document": "https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf",
+  "place": "Theorem 5.3 (Rotthaus Hilfssatz), printed p.11, definitions of Γ(n), Bγ, completed localization maps, contracted primes, normalization and Δ(x)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "semilocal localization finite maximal ideals principal completion normalization boundary",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Finite.of_isLocalized_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Semilocal\", \"type\": \"(H : ∀ (P : Ideal R) [P.IsMaximal], Module.Finite (Rₚ P) (Mₚ P)) : Module.Finite R M\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{m}$ of a commutative semiring $R$, the localization $M_\\\\mathfrak{m}$ is a finitely generated module over $R_\\\\mathfrak{m}$, then the module $M$ is finitely generat\"}\n  {\"name\": \"isPrincipalIdealRing_of_isPrincipalIdealRing_isLocalization_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Semilocal\", \"type\": \"[IsDomain R] (hpid : ∀ (P : Ideal R) [P.IsMaximal], IsPrincipalIdealRing (Rₚ P)) : IsPrincipalIdealRing R\", \"doc\": \"If $ R $ is an integral domain and for every maximal ideal $ \\\\mathfrak{m} $ of $ R $, the localization $ R_\\\\mathfrak{m} $ is a principal ideal ring, then $ R $ itself is a principal ideal ring.\"}\n  {\"name\": \"Module.Finite.of_localized_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Semilocal\", \"type\": \"(H : ∀ (P : Ideal R) [P.IsMaximal], Module.Finite (Localization P.primeCompl) (LocalizedModule P.primeCompl M)) :\\n  Module.Finite R M\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ an $ R $-module. If for every maximal ideal $ P $ of $ R $, the localization of $ M $ at the complement of $ P $ is a finitely generated module over the l\"}\n  {\"name\": \"Submodule.fg_of_isLocalized_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Semilocal\", \"type\": \"(N : Submodule R M) (H : ∀ (P : Ideal R) [P.IsMaximal], (Submodule.localized' (Rₚ P) P.primeCompl (f P) N).FG) : N.FG\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ an $ R $-module, and $ N $ a submodule of $ M $. If for every maximal ideal $ \\\\mathfrak{p} $ of $ R $, the localization of $ N $ at the complement of $ \\\\math\"}\n  {\"name\": \"Ideal.IsMaximal.of_isLocalization_of_disjoint\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \"[IsLocalization M S] {J : Ideal S} [(Ideal.comap (algebraMap R S) J).IsMaximal] : J.IsMaximal\", \"doc\": \"Let $ R $ be a commutative semiring, $ M \\\\subseteq R $ a submonoid, and $ S $ the localization of $ R $ at $ M $. If $ J \\\\subseteq S $ is an ideal such that its contraction $ J \\\\cap R $ is a maximal i\"}\n  {\"name\": \"IsLocalRing.maximalIdeal.isMaximal\", \"module\": \"Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic\", \"type\": \": (maximalIdeal R).IsMaximal\", \"doc\": \"In a local semiring $ R $, the set of all non-units forms a maximal ideal. This ideal is proper, contains the zero element, is closed under addition and scalar multiplication, and has no proper ideals\"}\n  {\"name\": \"Submodule.fg_of_localized_maximal\", \"module\": \"Mathlib.RingTheory.LocalProperties.Semilocal\", \"type\": \"(N : Submodule R M) (H : ∀ (P : Ideal R) [P.IsMaximal], (N.localized P.primeCompl).FG) : N.FG\", \"doc\": \"Let $ R $ be a commutative semiring, $ M $ an $ R $-module, and $ N $ a submodule of $ M $. If for every maximal ideal $ P $ of $ R $, the localization of $ N $ at the complement of $ P $ is finitely \"}\n  {\"name\": \"IsLocalRing.maximal_ideal_unique\", \"module\": \"Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic\", \"type\": \": ∃! I : Ideal R, I.IsMaximal\", \"doc\": \"There exists a unique maximal ideal $ I $ in the local semiring $ R $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching semilocal-completion boundary system. Reuse Mathlib localization, completion, quotient, fraction ring and integral closure, and the existing project principalRingMap."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "semilocalization away from a finite set of maximal ideals and canonical maps on principal adic completions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) {S : Type u_3} [inst_2 : Field K]\\n  [inst_3 : CommSemiring S] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K]\\n  (v : IsDedekindDomain.HeightOneSpectrum R) [inst_6 : Algebra S K],\\n  ⇑(algebraMap S (IsDedekindDomain\", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the algebra map from a base ring $ S $ to the adic completion of $ K $ with respect to $ v $ is equal to the \"}\n  {\"name\": \"IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              DFunLike (IsDedekindDomain.FiniteAdeleRing R K) (IsDedekindDomain.HeightOneSpe\", \"doc\": \"The finite adele ring of a Dedekind domain $ R $ is equipped with a dependent function structure over the set of height one prime ideals of $ R $, mapping each prime ideal to its adic completion of th\"}\n  {\"name\": \"IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              DFunLike (IsDedekindDomain.FiniteAdeleRing R K) (IsDedekindDomain.HeightOneSpe\", \"doc\": \"The finite adele ring of a Dedekind domain $ R $ with fraction field $ K $ is canonically isomorphic to the dependent function space over the height one prime ideals of $ R $, where each component is \"}\n  {\"name\": \"AdicCompletion.evalOneₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → AdicCompletion I R →ₐ[R] R ⧸ I\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $, this function defines the $ R $-algebra homomorphism from the $ I $-adic completion of $ R $ to the quotient ring $ R/I $. It projects an element of th\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletionIntegers_apply\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R) (r : R),\\n  ↑((algebraMap R ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers K v)) r) = ↑((\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $ and a height one prime ideal $ v $, the canonical algebra homomorphism from $ R $ to the valuation subring of adic completion integers at $ v $ co\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] → [IsFractionRing R K] → IsDedekindDomain.HeightOneSpectrum R → Type u_2\", \"doc\": \"Given a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, this constructs the completion of $ K $ with respect to the non-Archimedean valuation induced by $ v $. The\"}\n  {\"name\": \"AdicCompletion.factor_evalₐ_eq_eval\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {n : ℕ} (x : AdicCompletion I R) (h : I ^ n ≤ I ^ n • ⊤),\\n  (Ideal.Quotient.factor h) ((AdicCompletion.evalₐ I n) x) = (AdicCompletion.eval I R n) x\", \"doc\": \"For any natural number $ n $, an element $ x $ in the $ I $-adic completion of a commutative ring $ R $, and the hypothesis $ I^n \\\\subseteq I^n \\\\cdot \\\\top $, the quotient factor map applied to the alg\"}\n  {\"name\": \"PrimeSpectrum.piLocalizationToMaximal\", \"module\": \"Mathlib/RingTheory/Spectrum/Maximal/Localization\", \"type\": \"(R : Type u_1) → [inst : CommSemiring R] → PrimeSpectrum.PiLocalization R →+* MaximalSpectrum.PiLocalization R\", \"doc\": \"The ring homomorphism induced by component-wise evaluation, mapping the product of localizations at all prime ideals of a commutative semiring $ R $ to the product of localizations at maximal ideals. \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching semilocal-completion boundary system. Reuse Mathlib localization, completion, quotient, fraction ring and integral closure, and the existing project principalRingMap."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.principalRingMap",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AdicCompletion.principalRingMap'\n",
+   "date": "2026-10-24",
+   "verdict": "No matching semilocal-completion boundary system. Reuse Mathlib localization, completion, quotient, fraction ring and integral closure, and the existing project principalRingMap."
+  },
+  {
+   "tool": "grep",
+   "query": "semilocal|semiLocal",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Localization/Finiteness.lean\", \"line\": \"31\", \"text\": \"* Move the results that `Module.Finite` over a semilocal ring is a local property from\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/Finiteness.lean\", \"line\": \"32\", \"text\": \"  `Mathlib/RingTheory/LocalProperties/Semilocal.lean` to this file.\"}\n\nProject rg: No matches.\nDAG search: blueprint_refs.py search \"semilocal completion\": 0 blueprint nodes match. Targeted DAG rg found this item, its proof lemmas and related singular-defect statements, no definition node.\nExisting canonical principal completion map: Sheaf/RingTheory/AdicRingCompletionMap.lean, AdicCompletion.principalRingMap (def-trf-adic-ring-completion-map), reused.",
+   "date": "2026-10-24",
+   "verdict": "No matching semilocal-completion boundary system. Reuse Mathlib localization, completion, quotient, fraction ring and integral closure, and the existing project principalRingMap."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-rotthaus-finite-boundary",
+  "date": "2026-10-24",
+  "group": "Q82"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The semilocal completion and normalization boundary objects in the Rotthaus criterion used by the ancestor regular-local-model argument.",
+   "via": [
+    "lem-per-qe-rotthaus-finite-boundary",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.RingTheory.RotthausBoundarySystem",
+  "declaration": "RingTheory.Rotthaus.boundary",
+  "file": "lean/Sheaf/RingTheory/RotthausBoundarySystem.lean",
+  "statement": "def boundary {B : Type u} [CommRing B] (x : B) (n : MaximalSpectrum B) (s : PrimeSpectrum (LocalCompletion x n)) : Set (Ideal B)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "RingTheory.Rotthaus.denominators",
+   "RingTheory.Rotthaus.Semilocalization",
+   "RingTheory.Rotthaus.LocalCompletion",
+   "RingTheory.Rotthaus.Completion",
+   "RingTheory.Rotthaus.toLocal",
+   "RingTheory.Rotthaus.completionToLocal",
+   "RingTheory.Rotthaus.contractedPrime",
+   "RingTheory.Rotthaus.Normalization",
+   "RingTheory.Rotthaus.normalizationMap",
+   "RingTheory.Rotthaus.boundary"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab1f26448",
+  "group": "Q82",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab1f26448",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Read the item, the new node def-per-rotthaus-boundary-system and both modules against KS Thm 5.3 and every stmt_dep record. All clauses are faithful: Noetherian, IsNagataRing, IsAdicComplete span{x}, IsGRing of B/xB, MaximalSpectrum n, C = AdicCompletion of B_n, minimal singular s via IsRegularLocalRing, Γ(n) = Finset with n∈γ, semilocalization by ⨅ primeCompl, canonical D_γ→C via principalRingMap∘liftAlgHom, s_γ by comap, E_γ = integralClosure in FractionRing, Δ by minimalPrimes of span{x} contracted to B, height as ringKrullDim of the localization > 0, conclusion comap ≠ ⊥. No stronger hypotheses; x=0, unit x, empty γ and local B covered; one universe u. Helper defs have real data and source/blueprint docstrings; statements verbatim; theorem proof is sorry; no duplicates in Mathlib or the project trees; node diff is only lean and the added stmt_dep. Maintainer note: the item is unreached once the drop list is excluded (its citers qe-complete-pair-lifting and gabber-adic-quasi-excellence lead to the targets only through dropped gabber-absolute-equivariant-modification); it has no twin."
+ }
+}

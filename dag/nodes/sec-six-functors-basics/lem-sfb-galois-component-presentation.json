@@ -25,172 +25,50 @@
  ],
  "proof": [
   {
-   "text": "For any field extension $F/e$, the scheme $B_F$ is of finite type over $F$ by [lem-sfb-finite-type-composition-base-change](2). A field is Noetherian: its only ideals are $(0)$ and $(1)$. Its spectrum is quasi-compact, so [lem-weil-pbc-finite-type-over-noetherian] shows that $B_F$ is Noetherian. Taking $F=e$ proves the assertion for $B$, and this also supplies Noetherianity for each scalar extension used below.",
+   "text": "Apply [lem-sfb-galois-geometrically-integral-splitting] to $B$, using its normality, geometric reducedness and finite type. It gives Noetherianity, a finite Galois extension $e_0/e$, and finitely many nonempty clopen normal geometrically integral components of $B_{e_0}$. The properness clause applies because $B$ is proper. Choose one component $X$.",
    "uses": [
-    "lem-sfb-finite-type-composition-base-change",
-    "lem-weil-pbc-finite-type-over-noetherian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01T4 (lemma-base-change-finite-type), 01T6 (lemma-finite-type-noetherian)"
-   }
-  },
-  {
-   "text": "Apply [lem-sbc-generic-components-split] to the finite-type morphism $B\\to\\operatorname{Spec}e$. It gives a finite field extension $L/e$, with etale spectrum map, for which every component of $B_L$ is geometrically irreducible. At the unique point of $\\operatorname{Spec}L$, [lem-weil-pbc-etale-residue-field-extension-separable] says that $L/e$ is separable algebraic. Apply [lem-weil-pbc-finite-galois-receiving-separable-extensions] with the one extension $L/e$: choose a finite Galois extension $e_0/e$ and an $e$-embedding $L\\hookrightarrow e_0$. Regard this embedding as the intermediate field structure.",
-   "uses": [
-    "lem-sbc-generic-components-split",
-    "lem-weil-pbc-etale-residue-field-extension-separable",
-    "lem-weil-pbc-finite-galois-receiving-separable-extensions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 054R (lemma-finite-extension-geometrically-irreducible-components); fields.tex Tags 09DT (lemma-normal-closure), 0EXM (lemma-normal-closure-galois); morphisms.tex Tag 02G8"
-   }
-  },
-  {
-   "text": "For $F=L,e_0$, write $p_F:B_F\\to B$. The spectrum map of $F/e$ is finite by [lem-weil-pbc-spec-finite-ring-map-finite], etale by [lem-weil-pbc-finite-separable-extension-etale], and surjective by [lem-pc-field-extension-surjective]. Its base change $p_F$ is finite by [lem-trf-finite-radicial-basechange] and is etale surjective by the singleton-cover case of [lem-weil-pbc-etale-covering-base-change]. Step 1 gives $B_F$ Noetherian, while $B$ is normal integral by hypothesis. Thus [lem-fin-etale-normal-components] applies to $p_F$: both $B_L$ and $B_{e_0}$ are finite disjoint unions of nonempty clopen normal integral components. They are nonempty because $p_F$ is surjective and $B$ is nonempty.",
-   "uses": [
-    "lem-weil-pbc-spec-finite-ring-map-finite",
-    "lem-weil-pbc-finite-separable-extension-etale",
-    "lem-pc-field-extension-surjective",
-    "lem-trf-finite-radicial-basechange",
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-fin-etale-normal-components"
+    "lem-sfb-galois-geometrically-integral-splitting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, printed p.150; component normality: Stacks algebra.tex Tag 033C (lemma-normal-goes-up); morphisms.tex Tags 01WL, 02GO"
+    "place": "X 2.3 Step 2, printed p.150, first sentence; returned steps 1--4"
    }
   },
   {
-   "text": "For each clopen component $Z$ of $B_L$, take its inverse-image open subscheme $Z_{e_0}$ in $B_{e_0}$. For every extension $E/e_0$ its inverse image $Z_E$ is nonempty and irreducible by the geometric irreducibility supplied in step 2 (use the field tower $L\\subseteq e_0\\subseteq E$). Moreover $Z_E$ is open in $B_E$, which is reduced by the hypothesis on $B$ and [def-pc-geometrically-irreducible]. Reducedness restricts to an open subscheme because its local rings are the same local rings. Hence $Z_E$ is integral by [def-pc-integral-scheme]. In particular the $Z_{e_0}$ form a disjoint clopen irreducible covering, so they are precisely the components of $B_{e_0}$: an irreducible subset cannot meet both a clopen and its complement, and maximality then identifies each component. Thus every component is geometrically integral. Choose one and call it $X$. It is normal by step 3. The scheme $B_{e_0}$ is proper over $e_0$ by [lem-weil-pbc-proper-base-change]; its clopen subscheme $X$ is closed with the restricted scheme structure, so [lem-weil-pbc-closed-immersion-proper](c) makes $X$ proper over $e_0$.",
+   "text": "Apply [lem-sfb-galois-clopen-component-cover] to $e_0/e$, $B$ and these components, with $A=\\operatorname{Aut}_e(e_0)$. It gives transitivity on components and, for $H=\\{a\\in A:aX=X\\}$, a finite etale surjective restriction $u:X\\to B$ whose geometric fibres are single nonempty $H$-orbits, retaining the residue-field embeddings.",
    "uses": [
-    "def-pc-geometrically-irreducible",
-    "def-pc-integral-scheme",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-closed-immersion-proper"
+    "lem-sfb-galois-clopen-component-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, printed p.150, choice of the component Y_0; geometric integrality follows from geometric reducedness and the components split in Tag 054R"
+    "place": "X 2.3 Step 2, printed p.150, Galois transitivity and decomposition subgroup; returned steps 6--8"
    }
   },
   {
-   "text": "Put $A=\\operatorname{Aut}_e(e_0)$. Define its left action on $B_{e_0}$ by $a\\mapsto\\operatorname{id}_B\\times\\operatorname{Spec}(a^{-1})$; the inverse compensates for the contravariance of $\\operatorname{Spec}$. The fibre-product universal property [def-pc-fibre-product] gives the action law, $p_{e_0}a=p_{e_0}$, and compatibility with the same action on $\\operatorname{Spec}e_0$. Each action map is an isomorphism, and therefore permutes irreducible components. Let $H=\\{a\\in A:aX=X\\}$. Restricting the action to $H$ defines a semilinear action on $X$; the restriction $u=p_{e_0}|_X$ satisfies $uh=u$ for every $h\\in H$.",
-   "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, printed p.150, Galois action and decomposition subgroup H"
-   }
-  },
-  {
-   "text": "Let $(X_i)$ be all the clopen components of $B_{e_0}$, including $X$, and put $u_i=p_{e_0}|_{X_i}$. Their inclusions form an etale covering by [lem-weil-pbc-open-immersion-etale]. Composing this covering with the singleton etale covering $p_{e_0}$ of step 3, [lem-weil-pbc-etale-covering-composition] says that every $u_i$ is etale. The inclusions are also closed immersions, hence finite by [lem-weil-pbc-closed-immersion-finite]; [lem-weil-pbc-finite-composition] makes every $u_i$ finite. Each $u_i$ is proper by [lem-weil-pbc-finite-proper], so its image is closed by the definition of properness [def-weil-proper-morphism]. Its image is open by [lem-weil-pbc-etale-morphism-open-map] and nonempty since $X_i$ is nonempty. The integral space $B$ is irreducible, hence has no nonempty proper clopen subset. Consequently every $u_i$, and in particular $u$, is surjective.",
-   "uses": [
-    "lem-weil-pbc-open-immersion-etale",
-    "lem-weil-pbc-etale-covering-composition",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-finite-composition",
-    "lem-weil-pbc-finite-proper",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-etale-morphism-open-map",
-    "def-pc-integral-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, printed p.150, component restriction; Stacks morphisms.tex Tags 02GP, 035C, 01WK and 01WG"
-   }
-  },
-  {
-   "text": "Fix any geometric point $\\bar b:\\operatorname{Spec}\\Omega\\to B$ with $\\Omega$ algebraically closed. By [def-weil-geometric-fibre] and [lem-weil-pbc-fibre-product-affine-spectra], the full fibre of $p_{e_0}$ is $\\operatorname{Spec}(\\Omega\\otimes_e e_0)$. Choose an $e$-embedding $i:e_0\\hookrightarrow\\Omega$ using [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed]. The isomorphism in [lem-exc-finite-galois-tensor-decomposition](1), applied to $e_0/e$ and tensored along $i$ on the first factor, gives\n$$\\Omega\\otimes_e e_0\\simeq\\prod_{a\\in A}\\Omega,\\qquad c\\otimes b\\longmapsto(c\\,i(a(b)))_a.$$\nHere tensoring an isomorphism preserves its inverse; extension of scalars on a finite product is identified componentwise, with inverse obtained by summing the finitely many orthogonal coordinate idempotents. This verifies the displayed map directly. A prime of the finite product of fields selects exactly one coordinate: exactly one coordinate idempotent is outside the prime. The fibre is therefore a finite disjoint union of copies of $\\operatorname{Spec}\\Omega$, with geometric points indexed by the embeddings $i\\circ a$. The action in step 5 permutes these indices by composition with automorphisms of $e_0$, hence simply transitively. This is a statement about geometric fibre points, including their residue-field embeddings.",
-   "uses": [
-    "def-weil-geometric-fibre",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-    "lem-exc-finite-galois-tensor-decomposition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03SF (section-finite-etale-under-galois), Galois-cover geometric fibres; explicit scalar-extension calculation from the tensor decomposition"
-   }
-  },
-  {
-   "text": "Each $u_i$ is surjective, so its base change to $\\bar b$ is nonempty by [lem-weil-pbc-surjective-base-change]. It is the clopen part of the full fibre lying in $X_i$. By step 7 each such nonempty part contains a geometric point. For components $X_i,X_j$, choose points $x_i,x_j$ above the same $\\bar b$. An element $a\\in A$ takes $x_i$ to $x_j$ by step 7. Then $aX_i$ and $X_j$ meet at $x_j$; the components in step 3 are disjoint, so $aX_i=X_j$. Thus $A$ is transitive on components. For two points $x,y$ of the geometric fibre of $u$, step 7 gives $a\\in A$ with $ax=y$. Now $aX$ meets $X$, so $aX=X$ and $a\\in H$. The fibre is nonempty by surjectivity and consists of one $H$-orbit. Since $\\bar b$ was arbitrary, this proves the assertion for every geometric fibre.",
-   "uses": [
-    "lem-weil-pbc-surjective-base-change"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, printed p.150, transitivity on components and the contracted product; explicit stabilizer-fibre argument"
-   }
-  },
-  {
-   "text": "The action of $H$ on $e_0$ is faithful because $H$ is a subgroup of $\\operatorname{Aut}_e(e_0)$ (using inverses on the spectrum does not change its kernel). To check faithfulness on $X$, suppose $h\\in H$ induces the identity of $X$. Choose a point $x\\in X$, possible since $X$ is nonempty. On the residue field at $x$, semilinearity and the identity action imply $j(h^{-1}(c))=j(c)$ for all $c\\in e_0$, where $j:e_0\\to\\kappa(x)$ is the structural field homomorphism. A unital homomorphism from a field into a field is injective, since its kernel is a proper ideal of the field. Thus $h^{-1}(c)=c$ for every $c$, and $h=1$. This proves faithfulness and retains the compatibility with the structure map established in step 5.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "X 2.3 Step 2, printed p.150, application of 2.2 to the decomposition subgroup; explicit check of the faithful-action hypothesis"
-   }
-  },
-  {
-   "text": "Choose an effective Cartier divisor $D\\subseteq B$ with support $C$. Since $u$ is etale it is flat by [def-weil-etale-morphism]. Apply [lem-pc-flat-pullback-effective-cartier-ideal] to obtain the effective Cartier divisor $D_X=D\\times_B X$ on $X$. Locally if $D$ has equation $t$, then $D_X$ has equation $u^*t$, a nonzerodivisor, and its zero set is exactly $u^{-1}C$. For every $h\\in H$, the equality $uh=u$ implies that pullback by $h$ preserves the ideal generated by these equations: $h^*(u^*\\mathcal I_D)\\mathcal O_X=u^*\\mathcal I_D\\mathcal O_X$. Consequently $D_X$ itself is $H$-stable, not only its support. This also includes the empty divisor.",
+   "text": "The open subscheme $X$ is nonempty and $H$-stable by its definition, and $u$ is flat because it is etale [def-weil-etale-morphism]. Apply [lem-sfb-semilinear-open-faithful-cartier] with $L=e_0$. Its restricted canonical action is faithful on $X$ and $e_0$, semilinear and $u$-invariant. For an effective Cartier divisor with support $C$, it supplies the $H$-stable pullback divisor with support $u^{-1}C$, including the empty divisor.",
    "uses": [
     "def-weil-etale-morphism",
-    "lem-pc-flat-pullback-effective-cartier-ideal"
+    "lem-sfb-semilinear-open-faithful-cartier"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 02OO (lemma-pullback-effective-Cartier-defined), case (6); ILO X 2.3 Step 2, printed p.150, Z_0 intersected with Y_0"
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, printed p.150, application of 2.2 to the component and boundary; returned steps 5, 9--10"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-sbc-generic-components-split",
-  "lem-weil-pbc-etale-residue-field-extension-separable",
-  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
-  "lem-weil-pbc-spec-finite-ring-map-finite",
-  "lem-weil-pbc-finite-separable-extension-etale",
-  "lem-pc-field-extension-surjective",
-  "lem-trf-finite-radicial-basechange",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-fin-etale-normal-components",
-  "def-pc-geometrically-irreducible",
-  "def-pc-integral-scheme",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-closed-immersion-proper",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-etale-covering-composition",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-finite-composition",
-  "lem-weil-pbc-finite-proper",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "def-weil-geometric-fibre",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-  "lem-exc-finite-galois-tensor-decomposition",
-  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-galois-geometrically-integral-splitting",
+  "lem-sfb-galois-clopen-component-cover",
   "def-weil-etale-morphism",
-  "lem-pc-flat-pullback-effective-cartier-ideal"
+  "lem-sfb-semilinear-open-faithful-cartier"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "X 2.3 Step 2, printed p.150: expanded component/decomposition-subgroup reduction, with the explicit geometric-fibre and faithfulness arguments written by NL; auxiliary Stacks sources are specified step by step."
+  "place": "ILO X 2.3 Step 2, printed p.150, short assembly of three extracted statement-only lemmas. All ten original arguments, including canonical action, faithfulness and Cartier stability, are preserved verbatim with an extraction map in the Q44 report."
  },
  "mathlib_searches": [
   {
@@ -288,30 +166,9 @@
   "date": "2026-10-22",
   "item": "lem-sfb-galois-component-presentation",
   "worker": "stage1",
-  "summary": "Expanded the ILO component presentation in ten steps, reusing existing component-splitting, Galois-envelope, normal-component and flat Cartier-pullback nodes. The statement is unchanged. The proof explicitly verifies geometric integrality, component-map surjectivity, transitivity on geometric fibres, and faithfulness of the semilinear stabilizer action. No new nodes.",
-  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), through the recorded alteration/tame-boundary chain: realizes ILO X 2.3 Step 2 (p.150), from choosing k_0 and Y_0 to the decomposition subgroup and its component presentation. blueprint_refs.py ancestor reports None for this existing creation chain; retain the inherited null from.node and explicit place/via.",
-  "tool_uses": [
-   {
-    "node": "lem-sbc-generic-components-split",
-    "why": "General field or scheme lemma used with its stated hypotheses in the component presentation of ILO X 2.3 Step 2; the constructible-finite-Tor unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
-    "why": "General field or scheme lemma used with its stated hypotheses in the component presentation of ILO X 2.3 Step 2; the constructible-finite-Tor unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-fin-etale-normal-components",
-    "why": "General field or scheme lemma used with its stated hypotheses in the component presentation of ILO X 2.3 Step 2; the constructible-finite-Tor unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-exc-finite-galois-tensor-decomposition",
-    "why": "General field or scheme lemma used with its stated hypotheses in the component presentation of ILO X 2.3 Step 2; the constructible-finite-Tor unit has no replacement for this tool."
-   },
-   {
-    "node": "lem-pc-flat-pullback-effective-cartier-ideal",
-    "why": "General field or scheme lemma used with its stated hypotheses in the component presentation of ILO X 2.3 Step 2; the constructible-finite-Tor unit has no replacement for this tool."
-   }
-  ]
+  "summary": "Repair of the human-requested re-split: three independent statement-only unsplit nodes distribute all ten returned arguments: steps 1--4 (splitting and proper components), steps 6--8 (component covers and geometric-fibre orbits), and steps 5,9,10 (restricted semilinear action, faithfulness and stable Cartier boundary). The item statement is unchanged and its proof is a three-step assembly. The report preserves all ten original steps verbatim with their assignments.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), alteration route through ILO X 2.3 Step 2, p.150: first-sentence splitting and properness, component transitivity/decomposition-group fibres, and the faithful semilinear action and pulled-back boundary are realized by three new nodes. blueprint_refs.py ancestor still reports None for the inherited creation chain; retain the inherited null ancestor and explicit place/via.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-sbc-generic-components-split",
@@ -323,10 +180,10 @@
  "reviewed": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NL-a5c3771da",
-  "group": "NL",
+  "reviewer": "NT-cc-Q44-81e6da6e9",
+  "group": "Q44",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-a5c3771da (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit (item + NL report), no new nodes, statement and stmt_deps unchanged. The item is still unsplit in live and side-live. Its closure (519 nodes) has no node on either route-pivot-dropped list and no cycle; the only citer, lem-sfb-equivariant-smooth-galois-model, is not in it. Source: ILO X 2.3 Steps 1-2, printed p.150 (PDF p.156). The hypotheses match the Step-1 reductions and the conclusions are what Step 2 and the parent (steps 1 and 5) use. Step checks: (1) finite-type base change, and a finite-type scheme over Spec of a field is Noetherian. (2) 054R splitting L/e with étale spectrum, separable residue extension, Galois envelope with n=1. (3) p_F is finite, étale and surjective; lem-fin-etale-normal-components applies (W Noetherian, B normal integral). (4) For E ⊇ e0 ⊇ L each Z_E is irreducible and nonempty, and reduced as an open of reduced B_E, hence integral; the clopen pieces are the components; X proper by base change plus closed immersion. Minor: the step treats the clopen pieces of B_L as irreducible components without saying so; this is the same elementary clopen argument the step writes for B_{e0}, so no change. (5) I checked the left-action law of id×Spec(a⁻¹) and uh=u. (6) Each u_i is étale (covering composition) and finite, with closed and open nonempty image in irreducible B, hence surjective. (7) I checked that clause (1) of the tensor decomposition, base changed along i, gives c⊗b↦(c·i(a(b)))_a, and that the action is simply transitive on the |A| coordinate points. (8) This gives transitivity on components and one H-orbit in each geometric fibre of u. (9) Faithfulness on X from injectivity of e0→κ(x). (10) étale⇒flat; the 02OO flat pullback is Cartier, and h*(u*I)=u*I since uh=u. Edge cases checked: B already geometrically integral (A=1); B=Spec K with K/e separable (H=Gal(e0/K), fibres simply transitive); imperfect e; C empty. No duplicate presentation node in the DAG. I accept the five tool_uses (054R splitting, Galois envelope, 033C normal components, Galois tensor decomposition clause 1, 02OO flat Cartier pullback): all are generic and used through their statements only. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-81e6da6e9 (reviewer sub-agent of L); spot-checked: I read the delivery against the human re-split note (released 2026-10-22). The item is still the 10-step NL split in live and side-live, and none of the new ids exists there, so the delivery is not superseded. All ten old arguments now sit in three statement-only nodes of comparable size. The splitting node takes old steps 1-4 (2834 chars), the clopen-cover node steps 6-8 (2982 chars) and the semilinear-open-faithful-cartier node steps 5, 9 and 10 (1997 chars). The item statement is unchanged, and its proof is a 3-step assembly of about 1100 chars. Sources checked: ILO X 2.3 Step 2, p.150 (Galois k0 with geometrically irreducible components, decomposition subgroup H, 2.2 applied to (Y0/S0, Z0∩Y0)), Stacks 054R and Stacks 02OO case (6). No SGA is cited. Maths checked node by node. Splitting: 054R, then Galois closure, then p finite étale surjective; lem-fin-etale-normal-components gives normal integral clopen pieces; geometric reducedness gives geometric integrality; properness follows by base change and closed immersion. Normality is necessary (x²+y² over ℝ is a counterexample without it). Cover: Ω⊗e0 ≅ ∏_A Ω, A acts simply transitively on Ω-points; u_i has open, closed, nonempty image in irreducible B, so it is surjective; this gives transitivity on components and one H_i-orbit per fibre. Semilinear: α_hα_k=α_hk; faithfulness through the injection L→κ(x); flat pullback is Cartier; stability from u r_h=u. Edge cases checked: A=1, B=Spec K, imperfect e, empty D, X=Spec L. No duplicates found against generic-components-split, fin-etale-normal-components, common-field-semilinear-induction, flat-pullback-cartier or the field-torsor and affine-torsor nodes. The assembly hypotheses match exactly, and every item clause is covered. FIX: lem-sfb-galois-clopen-component-cover used 'finite Galois' without defining it and listed def-weil-pbc-separable-algebraic-extension in stmt_deps without citing it. I added the finite/separable/normal gloss and made Y_b̄=Y×_B Spec Ω explicit for an arbitrary geometric point. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-galois-clopen-component-cover.json. split_report.tool_uses is empty and there is nothing new to accept.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.GaloisComponentPresentation",
@@ -345,5 +202,17 @@
   "group": "NL",
   "result": "pass",
   "note": "lean.statement is verbatim equal to the file signature; the snapshot node differs from side-live only by the added lean record (no statement_change). Every hypothesis matches the node with nothing stronger: field e; IsIntegral (includes nonempty); IsProper implies finite type; GeometricallyReduced b; stalkwise normality as in the project convention (EtaleNormalComponents). Every conclusion is rendered: IsNoetherian B; finite Galois L with A = L ≃ₐ[e] L; clopen irreducible component U that is integral, normal, proper and GeometricallyIntegral over L; action pinned to id×Spec(g⁻¹) by its two projection laws and checked against Aut_mul_def and Spec contravariance; transitivity on components; H exactly the stabilizer; restriction r pinned by U.ι mono; injective r (faithful on the scheme; faithful on L by the subgroup); u finite, étale, surjective and H-invariant; geometric-fibre orbit via Ω-lifts, valid for finite étale u and true by node steps 7-8; ideal-level H-stable invertible pullback. Edge cases: empty B, A=1, Spec K, imperfect e, empty divisor. No hollow definitions, sorry only, docstrings carry the source place, blueprint and 10 steps. No pro-étale content and no new nodes. Advisory: some unused private proof-dependency imports. No recompile (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

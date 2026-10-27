@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-stack-topology-open-substacks",
+ "kind": "statement",
+ "title": "Topology and open substacks of a Deligne--Mumford stack",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal X$ be a Deligne--Mumford stack over $S$, with stack, atlas, representability and 2-fibre products as in [def-sfb-stable-pointed-moduli-groupoids]. Define $|\\mathcal X|$ to be the set of maps $\\operatorname{Spec}K\\to\\mathcal X$ from fields modulo the equivalence relation that two maps become 2-isomorphic over a common field extension. Give it the topology in which $W\\subseteq|\\mathcal X|$ is open precisely when its inverse image in an etale surjective scheme atlas $A\\to\\mathcal X$ is open in $|A|$; this is independent of the atlas. For a scheme this is its usual topological space. An open substack is a strictly full substack $\\mathcal U\\subseteq\\mathcal X$ whose 2-base change by every scheme $T\\to\\mathcal X$ is an open subscheme of $T$. The assignment $\\mathcal U\\mapsto|\\mathcal U|\\subseteq|\\mathcal X|$ is an inclusion-preserving bijection from open substacks to open subsets. For every morphism $f:\\mathcal Y\\to\\mathcal X$ of Deligne--Mumford stacks and every open substack $\\mathcal U$, the open substack $\\mathcal Y\\times_{\\mathcal X}\\mathcal U$ corresponds to the subset $|f|^{-1}(|\\mathcal U|)$ of $|\\mathcal Y|$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 06FJ (lemma-open-substacks); Tag 04XL (lemma-topology-points); Tag 04XG (definition-points) and Tag 04XH (lemma-points-cartesian) for the field-point and inverse-image conventions. Restricted to Deligne--Mumford stacks."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "The common-extension relation is reflexive and symmetric. For transitivity, suppose representatives $x/K$ and $y/L$ become isomorphic over $E$, and $y/L$ and $z/N$ become isomorphic over $F$. Apply [lem-weil-common-extension-fields] to the extensions $E/L,F/L$, obtaining embeddings into $M$ agreeing on $L$. Pull the two isomorphisms to $M$ and compose them through the common pullback of $y$. This gives the required isomorphism between $x|_M$ and $z|_M$. Pullback and composition here are those of [def-sfb-stable-pointed-moduli-groupoids]. Thus the quotient defining points exists in the standing universe.",
+   "uses": [
+    "lem-weil-common-extension-fields",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XF (lemma-equivalence); Tag 04XG (definition-points)"
+   }
+  },
+  {
+   "text": "For a scheme $T$, [lem-weil-pbc-morphism-from-spec-field] identifies a map $\\operatorname{Spec}K\\to T$ with a point $t$ and an embedding $\\kappa(t)\\to K$. Equivalent maps have the same image point. Conversely, two maps with image $t$ become equal over a common extension of their fields over $\\kappa(t)$, by [lem-weil-common-extension-fields]. Every point is represented by its residue-field map. This gives a canonical bijection between the field-point quotient and the ordinary point set of $T$, compatible with scheme morphisms.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-common-extension-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BV (lemma-scheme-points), using schemes.tex Tag 01J9"
+   }
+  },
+  {
+   "text": "Postcomposition sends an isomorphism after a common field extension to another such isomorphism, so every stack morphism induces a well-defined map on points. For a 2-fibre product $\\mathcal Z\\times_{\\mathcal X}\\mathcal Y$, two field representatives whose images in $|\\mathcal X|$ coincide have, by definition, pullbacks over a common field with an isomorphism between those images. The triple of these two pullbacks and that isomorphism is an object of the 2-fibre product [def-sfb-stable-pointed-moduli-groupoids]. Consequently its point set surjects onto $|\\mathcal Z|\\times_{|\\mathcal X|}|\\mathcal Y|$. Only surjectivity is asserted: different comparison isomorphisms need not give the same point.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XH (lemma-points-cartesian), explicit proof"
+   }
+  },
+  {
+   "text": "Let $p:A\\to\\mathcal X$ be the given etale surjective atlas. For a field object $x:\\operatorname{Spec}K\\to\\mathcal X$, its pullback $E=A\\times_{\\mathcal X}\\operatorname{Spec}K$ is a surjective algebraic space over $\\operatorname{Spec}K$ by the atlas convention [def-sfb-stable-pointed-moduli-groupoids]. Take a surjective etale scheme cover $C\\to E$ as supplied by [lem-a1-space-affine-etale-cover]. Apply the current chart-test equivalence in [lem-sfb-stack-chartwise-smooth-etale-calculus] to the representable surjective map $E\\to\\operatorname{Spec}K$ and its chosen surjective etale scheme chart $C\\to E$. It says exactly that the scheme map $C\\to\\operatorname{Spec}K$ is surjective. Since its target has a point, choose a point of $C$ and its residue-field map. Writing $L$ for that residue field, step 2 applied to $C\\to\\operatorname{Spec}K$ gives the embedding $K\\to L$. The resulting field object of $E$ is a triple: an $L$-object of $A$ and an isomorphism to $x|_L$. Thus $|p|$ is surjective. The same argument applies to any representable surjective scheme-source morphism. With $R=A\\times_{\\mathcal X}A$, step 3 now shows that the image of $|R|\\to |A|\\times|A|$ is exactly the relation of having the same image in $|\\mathcal X|$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-a1-space-affine-etale-cover",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04XI (lemma-characterize-surjective), 04XJ (lemma-points-presentation)"
+   }
+  },
+  {
+   "text": "For another etale surjective scheme atlas $A'\\to\\mathcal X$, put $E=A\\times_{\\mathcal X}A'$. Both projections are etale and surjective by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Choose a surjective etale scheme cover $C\\to E$ by [lem-a1-space-affine-etale-cover]. Composition gives etale surjective scheme maps $a:C\\to A$ and $b:C\\to A'$. Here ordinary scheme surjectivity follows from the same node's chart test, applied to each representable surjective projection $E\\to A$ or $E\\to A'$ with chart $C\\to E$ and the identity scheme base change. They are continuous, since scheme morphisms are morphisms of locally ringed spaces [def-pc-scheme], and open by [lem-weil-pbc-etale-morphism-open-map]. A continuous open surjection $q$ detects openness: $q^{-1}(V)$ open implies $V=q(q^{-1}(V))$ open, and continuity proves the converse. The inverse images on $C$ of $|p|^{-1}(W)$ and $|p'|^{-1}(W)$ coincide. Hence these subsets are open simultaneously, proving atlas independence. For each atlas the prescribed opens form a topology, since inverse image preserves arbitrary unions and finite intersections.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-a1-space-affine-etale-cover",
+    "def-pc-scheme",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XL (lemma-topology-points), first paragraph; scheme openness Tag 03WT"
+   }
+  },
+  {
+   "text": "The topology just constructed agrees with a scheme's topology: use its identity atlas and the point bijection of step 2. More generally, for any scheme map $T\\to\\mathcal X$ and open $W\\subseteq|\\mathcal X|$, cover $T\\times_{\\mathcal X}A$ by a surjective etale scheme $C$ [lem-a1-space-affine-etale-cover]. Its composite $C\\to T$ is etale surjective by [lem-sfb-stack-chartwise-smooth-etale-calculus]: etaleness uses base change and composition, and ordinary scheme surjectivity uses the chart test for $T\\times_{\\mathcal X}A\\to T$ with chart $C$. It therefore is an open continuous surjection by [lem-weil-pbc-etale-morphism-open-map, def-pc-scheme]. The inverse image of $W$ on $C$ is the inverse image of the open $|p|^{-1}(W)$ under the scheme morphism $C\\to A$, hence open. Openness descends to $T$ by the calculation in step 5. This also proves continuity for a morphism of DM stacks by testing its composite with an atlas of its source.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XL (lemma-topology-points), continuity clause"
+   }
+  },
+  {
+   "text": "Write $s,t:R\\to A$ for the atlas relation. Subsets of $|\\mathcal X|$ correspond to subsets $V\\subseteq|A|$ saturated under equality of their images, by surjectivity in step 4: the maps are $W\\mapsto|p|^{-1}(W)$ and $V\\mapsto|p|(V)$. Saturation is equivalent to $s^{-1}(V)=t^{-1}(V)$ on point sets, by step 3 and the description of the relation in step 4. For open $V$, view it as its open subscheme of $A$. Its two pullbacks are open subspaces of $R$. Their point images are $|s|^{-1}(V)$ and $|t|^{-1}(V)$: projection gives one containment, and step 3 lifts a pair of representatives with equal image after a common extension for the reverse containment. These open subspaces are equal precisely when their point sets are equal, by the open-subspace classification in [lem-a1-space-etale-open-image]. Thus the open subsets of $|\\mathcal X|$ correspond exactly to invariant open subschemes of $A$.",
+   "uses": [
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06FJ (lemma-open-substacks), second correspondence; Tag 04XJ"
+   }
+  },
+  {
+   "text": "An etale atlas is smooth by [lem-sfb-stack-chartwise-smooth-etale-calculus]. Apply [lem-sfb-invariant-open-substack-descent] to $p:A\\to\\mathcal X$. Its hypotheses hold because a DM stack has representable diagonal and this smooth surjective scheme atlas. It gives an inclusion-preserving bijection between open substacks $\\mathcal U$ and invariant open subschemes $V=A\\times_{\\mathcal X}\\mathcal U$. Compose it with step 7's bijection. If $\\mathcal U_1\\subseteq\\mathcal U_2$, their atlas pullbacks satisfy $V_1\\subseteq V_2$ by the inclusion-preserving clause of descent, and $|p|(|V_1|)\\subseteq|p|(|V_2|)$ by direct image of subsets. Hence the composite preserves inclusion. It remains to identify its assigned subset with $|\\mathcal U|$.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-invariant-open-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06FJ (lemma-open-substacks), using Tag 0507 (lemma-substacks-presentation)"
+   }
+  },
+  {
+   "text": "For a strictly full substack, two field objects in $\\mathcal U$ which become isomorphic in $\\mathcal X$ over an extension are already isomorphic in $\\mathcal U$ there. Hence $|\\mathcal U|\\to|\\mathcal X|$ is injective. Step 3 applied to $V=A\\times_{\\mathcal X}\\mathcal U$ gives $|V|=|p|^{-1}(|\\mathcal U|)$ as subsets of $|A|$: one inclusion follows by projection, and a pair with equal images lifts to a field object of $V$ for the other. Since $|p|$ is surjective, $|p|(|V|)=|\\mathcal U|$. This identifies the bijection in step 8 with the assignment in the statement and proves both its surjectivity and injectivity.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06FJ (lemma-open-substacks), identification of the assignment; Tag 04XH"
+   }
+  },
+  {
+   "text": "For $f:\\mathcal Y\\to\\mathcal X$, put $\\mathcal V=\\mathcal Y\\times_{\\mathcal X}\\mathcal U$. For any scheme $T\\to\\mathcal Y$, associativity of the triple description of 2-fibre products identifies $T\\times_{\\mathcal Y}\\mathcal V$ with $T\\times_{\\mathcal X}\\mathcal U$, an open subscheme of $T$. Thus $\\mathcal V$ is the open substack obtained by pullback (take its strictly full essential image). Its point image is $|f|^{-1}(|\\mathcal U|)$: projection proves containment; if a field representative in $\\mathcal Y$ has image in $|\\mathcal U|$, choose a representative in $\\mathcal U$ and an isomorphism after a common extension; the resulting triple is a point of $\\mathcal V$. Strict fullness makes its map to $|\\mathcal Y|$ injective as in step 9. The already proved classification therefore assigns exactly the asserted inverse image to this open substack.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XH (lemma-points-cartesian); definition of open substack, Tag 04YM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-a1-space-affine-etale-cover",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-pc-scheme",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-invariant-open-substack-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tags 04XF, 04XG, 04XH, 04XI, 04XJ, 04XL, 0507, 06FJ; etale-atlas specialization, with explicit common-refinement and field-triple arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open substacks of an algebraic stack are in inclusion preserving bijection with open subsets of its topological space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.opensRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (U : X.Opens) → (↑U).Opens ≃ { V // V ≤ U }\", \"doc\": \"For a scheme $X$ and an open subset $U$ of $X$, there is a canonical equivalence between the open subsets of $U$ and the open subsets of $X$ contained in $U$. This equivalence arises from the open imm\"}\n  {\"name\": \"AlgebraicGeometry.coe_opensRestrict_symm_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) (a : { V // V ≤ U }),\\n  ↑((AlgebraicGeometry.opensRestrict U).symm a) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom U.ι.base) ⁻¹' ↑↑((Equiv.subtypeEquivProp ⋯).symm a)\", \"doc\": \"For a scheme $X$ and an open subset $U$ of $X$, there is a canonical equivalence between the open subsets of $U$ and the open subsets of $X$ contained in $U$. This equivalence arises from the open imm\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.mem_ι_image_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens) {x : ↥U} {V : (↑U).Opens},\\n  ↑x ∈ (AlgebraicGeometry.Scheme.Hom.opensFunctor U.ι).obj V ↔ x ∈ V\", \"doc\": \"For a point $x$ in an open subset $U$ of a scheme $X$ and an open subset $V$ of $U$, the point $x$ (viewed as an element of $X$) lies in the image of the canonical inclusion morphism $\\\\iota: X|_U \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.isoOfLE\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} → {U V : X.Opens} → U ≤ V → (↑((TopologicalSpace.Opens.map V.ι.base).obj U) ≅ ↑U)\", \"doc\": \"For a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, the restriction of $V$ to $U$ (obtained via the preimage under the inclusion morphism $V \\\\to X$) is isomorphic to\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.opensEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] → X.Opens ≃ { U // U ≤ AlgebraicGeometry.Scheme.Hom.opensRange f }\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, there is a bijection between the open subsets of $ X $ and the open subsets of $ Y $ contained in the image of $ f $, given by mapping each open subset \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.over_def\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens), ↑U ↘ X = U.ι\", \"doc\": \"For any scheme $X$ and open subset $U$ of $X$, the canonical morphism from $U$ to $X$ in the over category $\\\\mathsf{Sch}/X$ (constructed via coercion) is equal to the inclusion morphism $\\\\iota: U \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme_carrier\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens), ↥↑U = ↑↑U\", \"doc\": \"The underlying topological space of the scheme structure on an open subset $ U $ of a scheme $ X $ is equal to $ U $ itself as a subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.opensRange_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens), AlgebraicGeometry.Scheme.Hom.opensRange U.ι = U\", \"doc\": \"The image of the canonical inclusion morphism from the restricted scheme $X|_U$ to $X$ is equal to the open subset $U$ itself, i.e., the topological image of the morphism $\\\\iota: X|_U \\\\to X$ coincides\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The underlying topological space of an algebraic stack classifies its open substacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toTopCat\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \": TopCat\", \"doc\": \"The function that maps a locally ringed space (a topological space equipped with a sheaf of commutative rings with local stalks) to its underlying topological space, forgetting the sheaf structure.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \": QuasiSober X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme_carrier\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \": (U : Type u) = (U : Set X)\", \"doc\": \"The underlying topological space of the scheme structure on an open subset $ U $ of a scheme $ X $ is equal to $ U $ itself as a subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCoeSortType\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": CoeSort Scheme Type*\", \"doc\": \"Every scheme can be canonically coerced to its underlying topological space, given by the carrier function that extracts the spatial component of the scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_X\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {s : Type u_1} (X : AlgebraicGeometry.Scheme) (U : s → X.Opens) (hU : TopologicalSpace.IsOpenCover U) (i : s),\\n  (X.openCoverOfIsOpenCover U hU).X i = ↑(U i)\", \"doc\": \"For a scheme $X$ and an open cover $\\\\{U_i\\\\}$ of its underlying topological space, the underlying topological space of the open subscheme corresponding to $U_i$ in the constructed open cover of $X$ is \"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.coeCarrier\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \": CoeOut (SheafedSpace C) TopCat\", \"doc\": \"There is a canonical map from a sheafed space over a category $\\\\mathcal{C}$ to its underlying topological space, obtained by forgetting the sheaf structure and extracting the spatial component via the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.toLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.LocallyRingedSpace\", \"doc\": \"The function mapping a scheme to its underlying locally ringed space structure, which consists of a topological space equipped with a sheaf of commutative rings where every stalk is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  (U : X.Opens) (hU : (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U) {Z : CommRingCat}\\n  (h : R ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (X.presheaf.g\", \"doc\": \"For a scheme $ X $, the type of open subsets of its underlying topological space.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Substack\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "openSubstack|OpenSubstack|AlgebraicStack|algebraic.stack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stack has a topological space of points given by field valued objects up to common extension and open subcategories correspond to open sets",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme → Type u_1\", \"doc\": \"For a scheme $X$, the type of open subsets of its underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forgetToTop\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"CategoryTheory.Functor AlgebraicGeometry.Scheme TopCat\", \"doc\": \"The functor that maps each scheme to its underlying topological space and each morphism of schemes to the underlying continuous map between topological spaces, obtained by composing the forgetful func\"}\n  {\"name\": \"TopCat.Presheaf.stalk\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.Limits.HasColimits C] → {X : TopCat} → TopCat.Presheaf C X → ↑X → C\", \"doc\": \"The stalk of a presheaf $\\\\mathcal{F}$ on a topological space $X$ at a point $x$ is the object in the category $\\\\mathcal{C}$ obtained by applying the stalk functor at $x$ to $\\\\mathcal{F}$.\"}\n  {\"name\": \"TopCat.Presheaf.stalkFunctor\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.Limits.HasColimits C] → {X : TopCat} → ↑X → CategoryTheory.Functor (TopCat.Presheaf C X) C\", \"doc\": \"Given a topological space `X` and a category `C` with all colimits, this defines the stalk functor at a point `x \\\\in X`. It is a functor from the category of presheaves on `X` with values in `C` to th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski\", \"type\": \"AlgebraicGeometry.Scheme.zariskiTopology.Subcanonical\", \"doc\": \"The Zariski topology on the category of schemes is the Grothendieck topology where covering families are collections of open immersions whose images cover the target scheme. This topology satisfies th\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace\", \"type\": \"Type (u + 1)\", \"doc\": \"A topological space equipped with a sheaf of commutative rings such that every stalk is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.opensDiagram_obj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (i : I)\\n  (U : (D.obj i).Opens) (j : CategoryTheory.Over i),\\n  (AlgebraicGeometry.opensDiagram D i U).obj j = ↑((TopologicalSpace.Opens.map (D.map j.hom).base).obj U)\", \"doc\": \"For a diagram $ D : I \\to \\text{Sch} $ of schemes indexed by a category $ I $, and an open subset $ U $ of $ D(i) $, this functor maps each object $ j $ in the over category $ I/i $ to the preimage of $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/BigZariski\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by open immersions as covering morphisms. A sieve is covering if it contains a family of open immersions whose images cover the target sc\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The topology on a Deligne Mumford stack is independent of its etale atlas and open substacks correspond to open sets",
+   "results": "8 hits; AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_X, AlgebraicGeometry.Scheme.Opens.toScheme_carrier, AlgebraicGeometry.isBasis_affine_open, ChartedSpaceCore.toTopologicalSpace, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.zariskiPretopology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover scheme topology and scheme opens, not stack field-point quotient topology and its open-substack classification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open substacks of a Deligne Mumford stack correspond to open subsets of its quotient topological space of field valued points",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Opens, AlgebraicGeometry.opensRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_stalk_iso, AlgebraicGeometry.IsOpenImmersion.opensEquiv_apply_coe, AlgebraicGeometry.IsOpenImmersion.opensEquiv, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.scheme_toScheme, AlgebraicGeometry.Scheme.Cover.fromGlued_open_map, AlgebraicGeometry.Scheme.Opens.instCoeOut",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover scheme topology and scheme opens, not stack field-point quotient topology and its open-substack classification"
+  },
+  {
+   "tool": "grep",
+   "query": "OpenSubstack|openSubstack|DeligneMumford|AlgebraicStack",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover scheme topology and scheme opens, not stack field-point quotient topology and its open-substack classification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OpenSubstack\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover scheme topology and scheme opens, not stack field-point quotient topology and its open-substack classification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stacks have an underlying topological space defined using field points and an atlas quotient topology",
+   "results": "8 hits; AlgebraicGeometry.Scheme, AlgebraicGeometry.Scheme.toLocallyRingedSpace, AlgebraicGeometry.Scheme.forgetToTop, AlgebraicGeometry.Scheme.forget, AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace, AlgebraicGeometry.Scheme.hasCoeToTopCat, AlgebraicGeometry.Scheme.forgetToTop_obj, AlgebraicGeometry.Scheme.forget_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits cover scheme topology and scheme opens, not stack field-point quotient topology and its open-substack classification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coarse-moduli-open-restriction",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Coarse moduli schemes restrict to open substacks. The inherited creation chain ends at a Lean module rather than a DAG node; the explicit main-20261015 anchor is paragraph (3) of det-thm-sf-ctf-stability-direct-images, the alteration-moduli prerequisite below the Rj_* preservation input. Supporting input: Topology of the open substack before constructing its image in the coarse scheme.",
+   "via": [
+    "lem-sfb-coarse-moduli-open-restriction",
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-topology-open-substacks",
+  "worker": "stage1",
+  "summary": "Repair of returned head d32d8d54bb4: rebased by the official delivery tool, reread all nine current cited statements, and adjusted step 4 to use the newly explicit equivalence between field-extension surjectivity and surjectivity of every scheme chart after base change in lem-sfb-stack-chartwise-smooth-etale-calculus. Added its exact current clause to citations.json. Revalidated the permanence and etale-implies-smooth clauses used in steps 5, 6 and 8, and all other step citations. Preserved the statement, ten-step route, metadata and logged searches; no new nodes or Mathlib leaves. On resumption, also made the chart-test applications to the common atlas refinement and arbitrary scheme test explicit in steps 5 and 6, with verbatim citation coverage.",
+  "blueprint": "main-20261015 det-thm-sf-ctf-stability-direct-images proof (3): generic stack-topology tool below the inherited alteration/moduli and coarse-open restriction prerequisite. The creation chain ends at a Lean module, so ancestor tool reports None; preserved explicit textual anchor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-common-extension-fields",
+    "why": "Common extension of two fields over a fixed field for transitivity and scheme point identification; a generic algebra tool absent from this unit."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Replace an algebraic-space fibre product by a surjective etale scheme chart; a generic atlas tool absent from this unit."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Only the inclusion-preserving open-subspace/open-subset bijection is used to test equality of open subspaces of the atlas relation; a generic algebraic-space tool absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-common-extension-fields",
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-cbaad3bfc",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-cbaad3bfc (reviewer sub-agent of L); spot-checked: Fifth push of the item (earlier heads 40bd FIX, b740 FIX, 2a51 PASS, d32d FIX). It has no new nodes and no Mathlib leaves. The statement and metadata are unchanged from d32d; only the proof and split_report changed. There is no repair note and no SGA source. Steps 4-6 now get ordinary scheme surjectivity of C->Spec K, C->A, C->A' and C->T from the chart-test equivalence that lem-sfb-stack-chartwise-smooth-etale-calculus now states; each of these applications is correct. The step-8 'full vs strictly full' FIX of earlier heads is no longer needed: the base descent node (now split) says 'strictly full substack (closed under isomorphism)', checked against the d32d snapshot, which said only 'full'. Re-applying the old paragraph would now be false. I read stacks-properties 04XH (l.802, surjectivity only), 04XL (l.938), 04YM (l.1769, strictly full) and 06FJ (l.1849). The statement is a correct DM, etale-atlas specialisation with true extra clauses (scheme case, continuity, |f|^{-1} pullback). I checked all 10 steps against the cited statements: 0H7K over the middle field; the Spec K bijection; the triple surjection; atlas surjectivity via the a1 cover plus chart test; the open-surjection argument of 04XL; the 03BZ open-subspace classification on R; 0507 descent with etale implying smooth; strict fullness for injectivity. Edge cases checked: empty stack and atlas, empty and whole opens, identity scheme atlas, BG with finite etale G, imperfect fields. There is no cycle. Batch-5: the four flagged cites reach trf only through generic algebraic-space, fppf-descent and projective-bundle nodes (def-trf-algebraic-space etc.), with no trace-formula, sk-thm-trace or PD node in the closure, so I accepted them. I also accepted the three generic tool_uses. Maintainer note: the new base node lem-sfb-stack-point-topology (Q18, unsplit) overlaps the item's topology clauses (steps 1-6). It is a parallel overlap between existing nodes, not this delivery's duplicate; the item also carries the open-substack classification. The null blueprint from.node is inherited metadata."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackTopologyOpenSubstacks",
+  "declaration": "CategoryTheory.moduliOpenSubstack_pointImage_bijection",
+  "declarations": [
+   "CategoryTheory.OpenModuliSubstack.pointImage",
+   "CategoryTheory.moduliPoints_eq_iff_common_field",
+   "CategoryTheory.moduliPointIsClosed_compl_iff",
+   "CategoryTheory.moduliSchemePoint_topology",
+   "CategoryTheory.moduliOpenSubstack_pointImage_bijection",
+   "CategoryTheory.moduliOpenSubstack_pointImage_pullback"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackTopologyOpenSubstacks.lean",
+  "statement": "theorem moduliOpenSubstack_pointImage_bijection {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (hF : IsDeligneMumfordModuliStack F) : ∃ e : OpenModuliSubstack F ≃ {W : Set (ModuliPoints F) // ModuliPointIsClosed F Wᶜ}, (∀ U : OpenModuliSubstack F, (e U).val = U.pointImage) ∧ ∀ U V : OpenModuliSubstack F, U.IsContainedIn V → (e U).val ⊆ (e V).val",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Return L repair: removes the duplicate moduliPointTopology and reuses ModuliPointIsClosed and moduliChartPreimage from def-sfb-dm-stack-morphism-properties for every topology clause. Scheme agreement is an equivalence characterized by identity-chart preimages. Removes the unused smooth-presentation theorem dependency and import. The common-field quotient, actual point image, inclusion-preserving classification and projection-compatible 2-fibre-product pullback are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be518f5f1",
+  "group": "NR",
+  "result": "pass",
+  "note": "Return L repaired via option (a): moduliPointTopology deleted; topology clauses use def-sfb-dm-stack-morphism-properties ModuliPointIsClosed/moduliChartPreimage; theorem stmt_dep lem-sfb-smooth-presentation-closed-subsets and its import removed (all 4 stmt_deps are landed def nodes; node differs from live only in lean+stmt_deps). Checked: common-field Quot equality (04XF/04XG), per-atlas closed-complement iff open chart preimage (atlas independence 04XL; chart preimage of complement = complement), scheme equivalence pinned by identity-chart preimages plus usual opens, OpenModuliSubstack strictly full with pinned open scheme tests, equiv to closed-complement subsets with (e U).val = actual pointImage and inclusion preservation (06FJ), arbitrary-f pullback with predicate, 2-fibre-product equivalence with projection, and pointImage = |f|^{-1}|U| (04XH). No extra hypotheses; universes independent; edge cases (empty, whole/empty W, identity f/atlas, imperfect fields) covered. Statement verbatim, declarations = file, single real def, sorry only in theorems, docstrings with source/blueprint/steps, no name clash live, proof_dep imports justified. Advisory: global moduliPointTopologicalSpace (smooth atlases) relation is for lem-sfb-stack-point-topology. No file changed, no compile."
+ }
+}

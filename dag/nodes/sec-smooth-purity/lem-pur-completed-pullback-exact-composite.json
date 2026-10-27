@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-completed-pullback-exact-composite",
+ "kind": "lemma",
+ "title": "Exact cochain composite comparison with prescribed derived square",
+ "status": "split",
+ "statement": "Let C1,C2,D1,D2 be abelian categories with chosen derived categories. Let A:C1 to C2, B:C2 to D2, C:C1 to D1, D,D0:D1 to D2 be additive functors, with A,B,C,D exact. Suppose c1 identifies the cochain composites A then B and C then D0, and c2:D0 is naturally isomorphic to D. There exists a unique natural isomorphism from DA then DB to DC then DD whose component on each cochain complex P satisfies the precise factorization square in the Lean statement: composing its component with the C and D quotient factorization maps equals the B image of the A factorization map, then the B factorization, then Q(c1_P), then Q of the cochain image of c2. No equivalence hypothesis on any of these functors is required.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05RR, localization construction of derived categories; Mathlib.CategoryTheory.Localization.Predicate and Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor. Existing complete exact-composite proof from def-pur-completed-pullback-tensor-comparison, extracted without mathematical change."
+ },
+ "proof": [
+  {
+   "text": "Form the two factorization isomorphisms from Q followed by each derived composite to its ordinary cochain composite followed by Q. They are composites of Functor.mapDerivedCategoryFactors, the functor associators and whiskerings. Compose c1 with the cochain image of c2. This uses only the canonical exact-functor localization API of Mathlib.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Equip the two derived composites with Localization.Lifting structures from these factorization isomorphisms. Apply CategoryTheory.Localization.liftNatIso to the ordinary cochain comparison. Its component formula Localization.liftNatTrans_app, followed by reassociation and cancellation of the target factorization, gives the required normalized square.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness use Iso.ext and Localization.natTrans_ext for the quasi-isomorphism localization Q. The prescribed square identifies both components after postcomposing with the same factorization isomorphism, so cancellation gives component equality on Q(P). Expand the two composite factorizations using NatTrans.comp_app, the associator component formulas and functoriality. This is exactly the displayed equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "The complete existing private derivedCompositeIso_existsUnique proof in CompletedPullbackTensorComparison; extracted to keep the parent below its compilation limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "Three hits: Localization.liftNatIso, liftNatIso_hom and liftNatIso_inv in Mathlib.CategoryTheory.Localization.Predicate. The lift is used in the proof; the normalized exact-composite square is assembled here.",
+   "date": "2026-10-27",
+   "verdict": "Found the general localization lifting API, used in the complete proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between composites of exact functors descends uniquely to derived categories with a prescribed cochain factorization square",
+   "results": "Eight hits, including Functor.mapDerivedCategoryFactors, its homotopy version, factorization component lemmas, the localization lifting instance, single-functor comparisons and Ext functoriality. These provide the factorizations used here, but not the full normalized composite statement.",
+   "date": "2026-10-27",
+   "verdict": "Found factorization API, not this exact normalized composite statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso",
+   "results": "No hit in the msearch grep service. Local source imports expose the ordinary composition API, but the existing proof uses localization directly to retain its specified component formula.",
+   "date": "2026-10-27",
+   "verdict": "No replacement for the normalization and uniqueness proof."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorComparison",
+  "date": "2026-10-27",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Exact localization comparison used to construct the canonical cochain-normalized finite evaluation isomorphism.",
+   "via": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorProofImplementations",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorProofImplementations.lean",
+  "declaration": "WeilConjectures.completedPullbackDerivedCompositeIso_existsUnique",
+  "declarations": [
+   "WeilConjectures.completedPullbackDerivedCompositeIso_existsUnique"
+  ],
+  "statement": "theorem completedPullbackDerivedCompositeIso_existsUnique\n    {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]\n    [Abelian C₁] [Abelian C₂] [Abelian D₁] [Abelian D₂]\n    [HasDerivedCategory C₁] [HasDerivedCategory C₂]\n    [HasDerivedCategory D₁] [HasDerivedCategory D₂]\n    (A : C₁ ⥤ C₂) (B : C₂ ⥤ D₂) (C : C₁ ⥤ D₁) (D D₀ : D₁ ⥤ D₂)\n    [A.Additive] [B.Additive] [C.Additive] [D.Additive] [D₀.Additive]\n    [PreservesFiniteLimits A] [PreservesFiniteColimits A]\n    [PreservesFiniteLimits B] [PreservesFiniteColimits B]\n    [PreservesFiniteLimits C] [PreservesFiniteColimits C]\n    [PreservesFiniteLimits D] [PreservesFiniteColimits D]\n    (c₁ : A.mapHomologicalComplex (.up ℤ) ⋙ B.mapHomologicalComplex (.up ℤ) ≅\n      C.mapHomologicalComplex (.up ℤ) ⋙ D₀.mapHomologicalComplex (.up ℤ)) (c₂ : D₀ ≅ D) :\n    ∃! e : A.mapDerivedCategory ⋙ B.mapDerivedCategory ≅\n      C.mapDerivedCategory ⋙ D.mapDerivedCategory,\n      ∀ P : CochainComplex C₁ ℤ,\n        e.hom.app (DerivedCategory.Q.obj P) ≫\n            D.mapDerivedCategory.map (C.mapDerivedCategoryFactors.hom.app P) ≫\n            D.mapDerivedCategoryFactors.hom.app\n              ((C.mapHomologicalComplex (.up ℤ)).obj P) =\n          B.mapDerivedCategory.map (A.mapDerivedCategoryFactors.hom.app P) ≫\n            B.mapDerivedCategoryFactors.hom.app\n              ((A.mapHomologicalComplex (.up ℤ)).obj P) ≫\n            DerivedCategory.Q.map (c₁.hom.app P) ≫\n            DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c₂ (.up ℤ)).hom.app\n              ((C.mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T123436-L-2298432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261027T123436-L-2298432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

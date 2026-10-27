@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-equivariant-galois-polynomial-envelope",
+ "kind": "statement",
+ "title": "A compatible finite Galois polynomial envelope for a nonfaithful field action",
+ "statement": "Let $K$ be a field and $H$ a finite group with an action $A:H\\to\\operatorname{Aut}(K)$ by field automorphisms, not necessarily faithful. Put $H_0=A(H)$ and $F=K^{H_0}=\\{x\\in K:A_h(x)=x\\text{ for every }h\\in H\\}$. Let $I$ be a finite set, possibly empty, and let $f_i\\in K[T]$ be monic of degree $d_i\\ge1$. For each $i$, suppose given a nonempty finite set $B_i$, finite separable extensions $K_{ib}/K$, and a $K$-algebra isomorphism $K[T]/(f_i)\\cong\\prod_{b\\in B_i}K_{ib}$. Then there exists an extension $M\\supseteq K\\supseteq F$ such that $M/F$ and $M/K$ are finite Galois and there are $K$-embeddings $K_{ib}\\hookrightarrow M$ for every $i,b$. Each polynomial has a complete linear factorization $f_i(T)=\\prod_{\\nu=1}^{d_i}(T-\\beta_{i\\nu})$ in $M[T]$. For this $M$ the set\n$$J=\\{(h,\\sigma)\\in H\\times\\operatorname{Aut}_F(M):\\sigma|_K=A_h\\}$$\nis a finite group with componentwise multiplication, and $\\rho:J\\to H$, $(h,\\sigma)\\mapsto h$, is surjective. The second projection gives an action of $J$ on $M$ extending $A$ through $\\rho$. For $N=\\ker\\rho$, the map $(1,\\sigma)\\mapsto\\sigma$ identifies $N$ with $\\operatorname{Aut}_K(M)$ and $M^N=K$. The subfield $K$ is the specified embedded copy, so every embedding asserted above fixes that copy pointwise.\n\nFields, extensions, towers and polynomial rings use [def-weil-field], [def-pc-field-extension], [def-pc-field-tower] and [def-weil-polynomial-ring]. Finite Galois means finite-dimensional, separable algebraic [def-weil-pbc-separable-algebraic-extension] and normal: every element's minimal polynomial splits into linear factors. Superscripts denote elements fixed by all automorphisms in the indicated group.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 5.6, printed p.614 (proof omitted), finite-group field envelope; Stacks Fields 09I3 (lemma-galois-over-fixed-field) and 0BME (lemma-lift-maps), especially (2). Agent elaboration preserved as old steps 5--8 in the delivery report.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "The image $H_0=A(H)$ is finite and acts faithfully on $K$ by its inclusion into $\\operatorname{Aut}(K)$. Its fixed field is precisely the stated $F$, since asking that every element of the image fix $x$ is equivalent to asking that every $A_h$ fix $x$. Apply [lem-wf-finite-field-action-fixed-degree] to $H_0$ and $K$: $K/F$ is finite Galois. No faithfulness of $A$ on $H$ has been assumed.",
+   "uses": [
+    "lem-wf-finite-field-action-fixed-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3, lemma-galois-over-fixed-field; apply to the image of the action."
+   }
+  },
+  {
+   "text": "For each $(i,b)$, separable transitivity [lem-zl-separable-permanence] applied to $F\\subseteq K\\subseteq K_{ib}$ gives separability of $K_{ib}/F$. This extension is finite: if $(u_s)$ spans $K/F$ and $(v_t)$ spans $K_{ib}/K$, then the finitely many $u_sv_t$ span $K_{ib}/F$, by expanding each coefficient of $\\sum_t c_tv_t$ in the $u_s$. Apply [lem-weil-pbc-finite-galois-receiving-separable-extensions] over $F$ to the finite family consisting of $K$ and all $K_{ib}$. It supplies a finite Galois extension $M/F$, an $F$-embedding $j:K\\hookrightarrow M$, and $F$-embeddings $e_{ib}:K_{ib}\\hookrightarrow M$. Always include $K$ in this family, even when $I$ is empty. Equip $M$ with its $K$-extension structure through $j$; henceforth $K\\subseteq M$ denotes this specified copy.",
+   "uses": [
+    "lem-zl-separable-permanence",
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09HB, lemma-separable-permanence; 09DT, lemma-normal-closure; 0EXM, lemma-normal-closure-galois; finite spanning-set calculation."
+   }
+  },
+  {
+   "text": "The $e_{ib}$ need not initially be $K$-linear. Write $a_{ib}:K\\hookrightarrow M$ for their restrictions. The map $\\tau_{ib}:a_{ib}(K)\\xrightarrow{\\sim}j(K)$ defined by $a_{ib}(x)\\mapsto j(x)$ is an $F$-isomorphism between subfields of $M$. Both contain the same image of $F$. Since $M/F$ is algebraic normal, [lem-sfb-normal-intermediate-isomorphism-lifts] extends $\\tau_{ib}$ to an $F$-automorphism $s_{ib}$ of $M$. Then $u_{ib}=s_{ib}\\circ e_{ib}$ is a field embedding with $u_{ib}(x)=j(x)$ for every $x\\in K$. These are the required $K$-embeddings. This argument does not identify different copies of $K$ without a comparison map.",
+   "uses": [
+    "lem-sfb-normal-intermediate-isomorphism-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BME, lemma-lift-maps (2), applied to the isomorphism between the two embedded copies of K."
+   }
+  },
+  {
+   "text": "Apply [lem-dl-a1-galois-over-intermediate] to $F\\subseteq K\\subseteq M$. It gives that $M/K$ is separable algebraic and normal. An $F$-spanning set of $M$ also spans $M$ over $K$, since $F\\subseteq K$, so $M/K$ is finite. Thus both $M/F$ and $M/K$ are finite Galois, with the original structure map $j$ on $K$.",
+   "uses": [
+    "lem-dl-a1-galois-over-intermediate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I2, lemma-galois-goes-up, and the elementary spanning-set observation of lemma-finite-goes-up."
+   }
+  },
+  {
+   "text": "Fix $i$. Let $t_{ib}\\in K_{ib}$ be the $b$th coordinate of the image of $T$ under the given isomorphism $K[T]/(f_i)\\cong\\prod_b K_{ib}$, and let $m_{ib}\\in K[T]$ be its minimal polynomial. The minimal-polynomial definition [def-weil-pbc-separable-algebraic-extension] gives $m_{ib}(t_{ib})=0$. The polynomial $P_i=\\prod_b m_{ib}$ therefore vanishes at every coordinate $t_{ib}$. Its class in the product algebra, hence in $K[T]/(f_i)$, is zero. By the definition of the quotient by $(f_i)$, this means $P_i=f_iq_i$ for some $q_i\\in K[T]$. Each $m_{ib}$ is also the minimal polynomial of $u_{ib}(t_{ib})$ in $M$: the embedding $u_{ib}$ fixes $K$, so a polynomial evaluates to zero before applying it if and only if it evaluates to zero afterwards. Normality of $M/K$ now makes every $m_{ib}$ a product of linear factors in $M[T]$; concatenating these products makes the monic nonzero $P_i$ split there. Apply [lem-trf-divisor-of-split-polynomial] in the field $M$ to $f_i\\mid P_i$. It gives $f_i=c\\prod_{\\nu=1}^{n_i}(T-\\beta_{i\\nu})$. Leading coefficients give $c=1$ because $f_i$ is monic. Degrees then give $n_i=d_i$, the required complete factorization. This argument allows repeated roots; no squarefreeness inference is needed.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-trf-divisor-of-split-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HN, lemma-normal-goes-up, proof: divisors of split polynomials split; section-normal (09HL), normality meaning. Quotient-kernel calculation written by Q16."
+   }
+  },
+  {
+   "text": "Define $J$ as in the statement. It contains $(1,\\mathrm{id}_M)$. For compatible pairs $(h,\\sigma)$ and $(g,\\tau)$ and $x\\in K$, one has $\\sigma\\tau(j(x))=\\sigma(j(A_g(x)))=j(A_hA_g(x))=j(A_{hg}(x))$. Thus their product is compatible. The equation $\\sigma\\circ j=j\\circ A_h$ implies $\\sigma^{-1}\\circ j=j\\circ A_{h^{-1}}$, proving closure under inverses. Hence $J$ is a subgroup of $H\\times\\operatorname{Aut}_F(M)$, and its projections are homomorphisms. By [lem-weil-pbc-finite-galois-fixed-field], applied to $M/F$, the second factor is finite. Since $H$ is finite, $J$ is finite. The second projection acts on $M$ by field automorphisms, and compatibility gives exactly its asserted restriction to $K$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I1, lemma-finite-Galois, finiteness; elementary compatible-pair subgroup and action calculations, elaborating de Jong Lemma 5.6."
+   }
+  },
+  {
+   "text": "Every $A_h$ fixes $F$ by its definition. On the embedded subfield $K$ it is therefore an $F$-automorphism. Apply [lem-sfb-normal-intermediate-isomorphism-lifts] with ambient extension $M/F$ and both intermediate subfields equal to $K$. It gives $\\sigma\\in\\operatorname{Aut}_F(M)$ extending $A_h$. Consequently $(h,\\sigma)\\in J$ and $\\rho(h,\\sigma)=h$. This proves that $\\rho$ is surjective, including when distinct elements of $H$ induce the same field automorphism.",
+   "uses": [
+    "lem-sfb-normal-intermediate-isomorphism-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BME, lemma-lift-maps (2); extend A_h over the fixed base F."
+   }
+  },
+  {
+   "text": "An element of $N=\\ker\\rho$ has first coordinate $1$. Its compatibility equation is $\\sigma\\circ j=j$, which says precisely that $\\sigma$ fixes $K$ pointwise. Conversely every $K$-automorphism of $M$ fixes $F$ and yields $(1,\\sigma)\\in N$. The maps $(1,\\sigma)\\mapsto\\sigma$ and $\\sigma\\mapsto(1,\\sigma)$ are inverse group homomorphisms. Under the second-projection action, being fixed by $N$ is therefore equivalent to being fixed by every $K$-automorphism of $M$. Apply [lem-weil-pbc-finite-galois-fixed-field] to the finite Galois extension $M/K$ from step 4. Its fixed-field clause gives $M^N=j(K)$, written $K$ with our fixed embedding. All the $u_{ib}$ from step 3 fix this same embedded copy, completing every clause.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09I1, lemma-finite-Galois, and 09DW, theorem-galois-theory, fixed-field assertion; elementary kernel identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-zl-separable-permanence",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-sfb-normal-intermediate-isomorphism-lifts",
+  "lem-dl-a1-galois-over-intermediate",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-trf-divisor-of-split-polynomial",
+  "lem-weil-pbc-finite-galois-fixed-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Agent elaboration of de Jong Lemma 5.6 field-theory step, using Tags 09I3, 09HB, 09DT, 0EXM, 09I2, 0BME, 09HN, 09I1, 09DW. Prior argument in Q50 report, old steps 5–8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting possibly nonfaithfully on a field lifts to a finite group acting on a finite Galois extension splitting finitely many finite separable algebras with kernel fixed field the original field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsGaloisGroup.fixedPoints\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (L : Type u_4) [inst : Group G] [inst_1 : Field L] [inst_2 : MulSemiringAction G L] [Finite G]\\n  [FaithfulSMul G L], IsGaloisGroup G (↥(FixedPoints.subfield G L)) L\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ L $, then $ G $ is the Galois group of the field extension $ L $ over the subfield of elements fixed by the action of $ G $.\"}\n  {\"name\": \"IsGaloisGroup\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"(G : Type u_1) →\\n  (A : Type u_2) →\\n    (B : Type u_3) →\\n      [inst : Group G] →\\n        [inst_1 : CommSemiring A] → [inst_2 : Semiring B] → [Algebra A B] → [MulSemiringAction G B] → Prop\", \"doc\": \"G is the Galois group of B over A, given that B is an algebra over A and G acts on B as a multiplicative semiring action\"}\n  {\"name\": \"IsGaloisGroup.of_isGalois\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (K : Type u_3) (L : Type u_4) [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [IsGalois K L],\\n  IsGaloisGroup Gal(L/K) K L\", \"doc\": \"If $ K/L $ is a Galois extension (i.e., algebraic, normal, and separable), then the Galois group $ \\\\text{Gal}(K/L) $ satisfies the Galois group condition over $ L $ and $ K $, meaning it acts as a mul\"}\n  {\"name\": \"FixedPoints.toAlgAutMulEquiv\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"(G : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Group G] →\\n      [inst_1 : Field F] →\\n        [inst_2 : MulSemiringAction G F] → [Finite G] → [FaithfulSMul G F] → G ≃* Gal(F/↥(FixedPoints.subfield G F))\", \"doc\": \"For a finite group $ G $ acting faithfully on a field $ F $, this constructs a group isomorphism from $ G $ to the group of $ \\\\mathrm{FixedSubfield}(G, F) $-algebra automorphisms of $ F $, where the i\"}\n  {\"name\": \"fixedByFinite\", \"module\": \"Mathlib/FieldTheory/KrullTopology\", \"type\": \"(K : Type u_1) →\\n  (L : Type u_2) → [inst : Field K] → [inst_1 : Field L] → [inst_2 : Algebra K L] → Set (Subgroup Gal(L/K))\", \"doc\": \"The set of subgroups of the Galois group $\\\\text{Gal}(L/K)$ obtained by taking the fixing subgroup for each finite intermediate field $E$ between $K$ and $L$, where each subgroup consists of automorphi\"}\n  {\"name\": \"IsGalois.of_fixed_field\", \"module\": \"Mathlib/FieldTheory/Galois/Basic\", \"type\": \"∀ (E : Type u_2) [inst : Field E] (G : Type u_3) [inst_1 : Group G] [Finite G] [inst_3 : MulSemiringAction G E],\\n  IsGalois (↥(FixedPoints.subfield G E)) E\", \"doc\": \"If a finite group $ G $ acts on a field $ E $, then the extension $ E $ over the subfield of elements fixed by all elements of $ G $ is a Galois extension (i.e., it is algebraic, normal, and separable\"}\n  {\"name\": \"IsGaloisGroup.intermediateField\", \"module\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup\", \"type\": \"∀ (G : Type u_1) (K : Type u_3) (L : Type u_4) [inst : Group G] [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : MulSemiringAction G L] (F : IntermediateField K L) [Finite G]\\n  [hGKL : IsGaloisGroup G K L], IsGaloisGroup (↥(fixingSubgroup G ↑F)) (↥F) L\", \"doc\": \"For a finite Galois extension $ L/K $ with Galois group $ G $, and an intermediate field $ F $ (i.e., $ K \\\\subseteq F \\\\subseteq L $), the subgroup of $ G $ consisting of all automorphisms that fix eve\"}\n  {\"name\": \"FixedPoints.toAlgAut_bijective\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u_1) (F : Type u_2) [inst : Group G] [inst_1 : Field F] [inst_2 : MulSemiringAction G F] [Finite G]\\n  [FaithfulSMul G F], Function.Bijective ⇑(MulSemiringAction.toAlgAut G (↥(FixedPoints.subfield G F)) F)\", \"doc\": \"If $ G $ is a finite group acting faithfully on a field $ F $, then the group homomorphism from $ G $ to the group of $ \\\\mathrm{FixedSubfield}(G, F) $-algebra automorphisms of $ F $ is bijective.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field Galois theorems and restriction maps are ingredients; no hit constructs the common polynomial envelope together with the compatible-pair group for a nonfaithful action"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, IntermediateField.fixedField",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsGalois.fixedField_fixingSubgroup\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_2} [Field E] [Algebra F E] (K : IntermediateField F E) [FiniteDimensional F E] [h : IsGalois F E] : IntermediateField.fixedField K.fixingSubgroup = K\", \"doc\": \"See `InfiniteGalois.fixedField_fixingSubgroup` for the infinite case,\\ni.e. without the `[FiniteDimensional F E]` assumption.\"}\n  {\"name\": \"IsGalois.fixedField_eq_iff_fixingSubgroup_eq\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_2} [Field E] [Algebra F E] [FiniteDimensional F E] [IsGalois F E] {K : IntermediateField F E} {H : Subgroup Gal(E/F)} : IntermediateField.fixedField H = K ↔ K.fixingSubgroup = H\", \"doc\": \"\"}\n  {\"name\": \"IsGalois.of_fixedField_normal_subgroup\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {K : Type u_3} {L : Type u_4} [Field K] [Field L] [Algebra K L] [IsGalois K L] (H : Subgroup Gal(L/K)) [hn : H.Normal] : IsGalois K ↥(IntermediateField.fixedField H)\", \"doc\": \"If `H` is a normal Subgroup of `Gal(L / K)`, then `fixedField H` is Galois over `K`.\"}\n  {\"name\": \"IsGalois.fixedField_top\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_2} [Field E] [Algebra F E] [IsGalois F E] [FiniteDimensional F E] : IntermediateField.fixedField ⊤ = ⊥\", \"doc\": \"See `InfiniteGalois.fixedField_bot` for the infinite case,\\ni.e. without the `[FiniteDimensional F E]` assumption.\"}\n  {\"name\": \"IsGalois.of_fixedField_eq_bot\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" (F : Type u_1) [Field F] (E : Type u_2) [Field E] [Algebra F E] [FiniteDimensional F E] (h : IntermediateField.fixedField ⊤ = ⊥) : IsGalois F E\", \"doc\": \"\"}\n  {\"name\": \"IsGalois.fixedField_le_iff_fixingSubgroup_le\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_2} [Field E] [Algebra F E] [FiniteDimensional F E] [IsGalois F E] {K : IntermediateField F E} {H : Subgroup Gal(E/F)} : IntermediateField.fixedField H ≤ K ↔ K.fixingSubgroup ≤ H\", \"doc\": \"\"}\n  {\"name\": \"IsGalois.tfae\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_2} [Field E] [Algebra F E] [FiniteDimensional F E] : [IsGalois F E, IntermediateField.fixedField ⊤ = ⊥, Nat.card Gal(E/F) = Module.finrank F E, ∃ p, p.Separable ∧ Polynomial.IsSplittingField F E p].TFAE\", \"doc\": \"Equivalent characterizations of a Galois extension of finite degree.\"}\n  {\"name\": \"IsGalois.intermediateFieldEquivSubgroup_symm_apply_toDual\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_2} [Field E] [Algebra F E] [FiniteDimensional F E] [IsGalois F E] (H : Subgroup Gal(E/F)) : IsGalois.intermediateFieldEquivSubgroup.symm (OrderDual.toDual H) = IntermediateField.fixedField H\", \"doc\": \"\"}\n  {\"name\": \"IsGalois.intermediateFieldEquivSubgroup_symm_apply\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_2} [Field E] [Algebra F E] [FiniteDimensional F E] [IsGalois F E] (H : (Subgroup Gal(E/F))ᵒᵈ) : IsGalois.intermediateFieldEquivSubgroup.symm H = IntermediateField.fixedField (OrderDual.ofDual H)\", \"doc\": \"\"}\n  {\"name\": \"IsGalois.galoisCoinsertionIntermediateFieldSubgroup\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {F : Type u_1} [Field F] {E : Type u_2} [Field E] [Algebra F E] [FiniteDimensional F E] [IsGalois F E] : GaloisCoinsertion (⇑OrderDual.toDual ∘ IntermediateField.fixingSubgroup) (IntermediateField.fixedField ∘ ⇑OrderDual.toDual)\", \"doc\": \"The Galois correspondence as a `GaloisCoinsertion`.\"}\n  {\"name\": \"IsGalois.normalAutEquivQuotient\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {K : Type u_3} {L : Type u_4} [Field K] [Field L] [Algebra K L] [FiniteDimensional K L] [IsGalois K L] (H : Subgroup Gal(L/K)) [H.Normal] : Gal(L/K) ⧸ H ≃* Gal(↥(IntermediateField.fixedField H)/K)\", \"doc\": \"If `H` is a normal Subgroup of `Gal(L / K)`, then `Gal(fixedField H / K)` is isomorphic to\\n`Gal(L / K) ⧸ H`.\"}\n  {\"name\": \"IsGalois.normalAutEquivQuotient_apply\", \"module\": \"Mathlib.FieldTheory.Galois.Basic\", \"type\": \" {K : Type u_3} {L : Type u_4} [Field K] [Field L] [Algebra K L] [FiniteDimensional K L] [IsGalois K L] (H : Subgroup Gal(L/K)) [H.Normal] (σ : Gal(L/K)) : (IsGalois.normalAutEquivQuotient H) ↑σ = (AlgEquiv.restrictNormalHom ↥(IntermediateField.fixedField H)) σ\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field Galois theorems and restriction maps are ingredients; no hit constructs the common polynomial envelope together with the compatible-pair group for a nonfaithful action"
+  },
+  {
+   "tool": "grep",
+   "query": "fixedField|restrictNormalHom|liftNormal",
+   "results": "[grep] OK 19 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/Galois/Abelian.lean\", \"line\": \"37\", \"text\": \"      obtain ⟨x, rfl⟩ := AlgEquiv.restrictNormalHom_surjective M x\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Abelian.lean\", \"line\": \"38\", \"text\": \"      obtain ⟨y, rfl⟩ := AlgEquiv.restrictNormalHom_surjective M y\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/GaloisClosure.lean\", \"line\": \"151\", \"text\": \"    α ∈ L.fixingSubgroup ↔ α.restrictNormalHom L = 1 := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/GaloisClosure.lean\", \"line\": \"153\", \"text\": \"    AlgEquiv.restrictNormalHom_apply]\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"52\", \"text\": \"* `InfiniteGalois.restrictNormalHomContinuous` : Any `restrictNormalHom` is continuous.\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"78\", \"text\": \"  FiniteGrp.ofHom (AlgEquiv.restrictNormalHom L₂.unop)\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"85\", \"text\": \"  ConcreteCategory.ext (AlgEquiv.restrictNormalHom_id _ _)\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"101\", \"text\": \"  apply IsScalarTower.AlgEquiv.restrictNormalHom_comp k L₃ L₂ L₁\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"line\": \"135\", \"text\": \"    val := fun L ↦ σ.restrictNormalHom L.unop\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"18\", \"text\": \"`IntermediateField.fixedField` are inverses of each other between intermediate fields and\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"27\", \"text\": \"* `fixedField_fixingSubgroup` : the field fixed by the\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"32\", \"text\": \"* `restrict_fixedField` : For a Galois intermediate field `M`, the fixed field of the image of `H`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"34\", \"text\": \"* `fixingSubgroup_fixedField` : If `H` is closed, the fixing subgroup of the fixed field of `H`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"line\": \"85\", \"text\": \"lemma fixedField_fixingSubgroup (L : IntermediateField k K) [IsGalois k K] :\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"21\", \"text\": \"- `fixedField H` where `H : Subgroup Gal(E/F)`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"27\", \"text\": \"- `IntermediateField.fixingSubgroup_fixedField` : If `E/F` is finite dimensional (but not\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"28\", \"text\": \"  necessarily Galois) then `fixingSubgroup (fixedField H) = H`\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"29\", \"text\": \"- `IsGalois.fixedField_fixingSubgroup`: If `E/F` is finite dimensional and Galois\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/Basic.lean\", \"line\": \"30\", \"text\": \"  then `fixedField (fixingSubgroup K) = K`\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field Galois theorems and restriction maps are ingredients; no hit constructs the common polynomial envelope together with the compatible-pair group for a nonfaithful action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite group action on a field extends through a surjective group homomorphism to a common finite Galois splitting field of finitely many separable polynomials",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct the fiber product of a finite field automorphism group and a nonfaithful acting group over restriction to an intermediate Galois field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"finGaloisGroupMap\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"{k : Type u_1} →\\n  {K : Type u_2} →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          {L₁ L₂ : (FiniteGaloisIntermediateField k K)ᵒᵖ} →\\n            (L₁ ⟶ L₂) → ((Opposite.unop L₁).finGaloisGroup ⟶ (Opposite.unop L₂).finGaloisGroup)\", \"doc\": \"For finite Galois intermediate fields $L_1$ and $L_2$ in a Galois extension $K/k$, this constructs a group homomorphism from $\\\\text{Gal}(L_1/k)$ to $\\\\text{Gal}(L_2/k)$ by restricting automorphisms of \"}\n  {\"name\": \"InfiniteGalois.toAlgEquivAux_eq_liftNormal\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop) (x : K)\\n  (L : FiniteGaloisIntermediateField k K),\\n  x ∈ L.toIntermediateField → Infin\", \"doc\": \"For an infinite Galois extension $ K/k $, the automorphism of $ K $ induced by an element $ g $ in the profinite Galois group $ \\\\text{Gal}(K/k) $ (defined as the inverse limit of finite Galois groups)\"}\n  {\"name\": \"finGaloisGroupFunctor\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"(k : Type u_1) →\\n  (K : Type u_2) →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] → CategoryTheory.Functor (FiniteGaloisIntermediateField k K)ᵒᵖ FiniteGrp.{u_2}\", \"doc\": \"The functor assigns to each finite Galois intermediate field $L$ in a Galois extension $K/k$ its Galois group $\\\\text{Gal}(L/k)$ as an object in the category of finite groups. For each field inclusion \"}\n  {\"name\": \"InfiniteGalois.algEquivToLimit\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"(k : Type u_3) →\\n  (K : Type u_4) →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          Gal(K/k) →* ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop\", \"doc\": \"The monoid homomorphism from the Galois group $\\\\text{Gal}(K/k)$ to the limit of the profinite Galois group functor, which maps each automorphism $\\\\sigma$ to the compatible family of its restrictions t\"}\n  {\"name\": \"InfiniteGalois.mk_toAlgEquivAux\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop) (x : K)\\n  (L : FiniteGaloisIntermediateField k K) (hx' : InfiniteGalois.toAlgEquivAux✝\", \"doc\": \"For any element $g$ in the profinite Galois group $\\\\mathrm{Gal}(K/k)$, any $x \\\\in L$ where $L$ is a finite Galois intermediate field, and any $x \\\\in L$, the automorphism of $K$ induced by $g$ evaluate\"}\n  {\"name\": \"InfiniteGalois.toAlgEquivAux_eq_proj_of_mem\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop) (x : K)\\n  (L : FiniteGaloisIntermediateField k K) (hx : x ∈ L.toIntermediateField),\\n  \", \"doc\": \"For a Galois extension $K/k$, an element $g$ in the profinite Galois group $\\\\text{Gal}(K/k)$, an element $x \\\\in K$, and a finite Galois intermediate field $L$ containing $x$, the automorphism $\\\\text{t\"}\n  {\"name\": \"InfiniteGalois.proj\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"{k : Type u_3} →\\n  {K : Type u_4} →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          (L : FiniteGaloisIntermediateField k K) →\\n            ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop →*\\n              Gal(↥L.to\", \"doc\": \"The group homomorphism from the profinite Galois group (defined as the limit of the profinite Galois group functor) to the Galois group $\\\\text{Gal}(L/k)$ of a finite Galois intermediate field $L$, obt\"}\n  {\"name\": \"AlgEquiv.restrictNormalHom\", \"module\": \"Mathlib/FieldTheory/Normal/Defs\", \"type\": \"{F : Type u_1} →\\n  [inst : Field F] →\\n    {K₁ : Type u_3} →\\n      [inst_1 : Field K₁] →\\n        [inst_2 : Algebra F K₁] →\\n          (E : Type u_6) →\\n            [inst_3 : Field E] →\\n              [inst_4 : Algebra F E] →\\n                [inst_5 : Algebra E K₁] → [IsScalarTower F E K₁] → [Normal F E]\", \"doc\": \"The monoid homomorphism from the Galois group $\\\\text{Gal}(K_1/F)$ to $\\\\text{Gal}(E/F)$, defined by restricting each automorphism $\\\\chi$ to the subfield $E$. This homomorphism sends $\\\\chi$ to $\\\\chi|_E$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field Galois theorems and restriction maps are ingredients; no hit constructs the common polynomial envelope together with the compatible-pair group for a nonfaithful action"
+  },
+  {
+   "tool": "grep",
+   "query": "tower_top|of_isGalois|normalClosure",
+   "results": "{\"t\": \"2026-10-23T04:11:39Z\", \"tool\": \"grep\", \"query\": \"tower_top|of_isGalois|normalClosure\", \"sub\": \"FieldTheory/Galois\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Galois/Abelian.lean\", \"Mathlib/FieldTheory/Galois/Abelian.lean\", \"Mathlib/FieldTheory/Galois/Abelian.lean\", \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"Mathlib/FieldTheory/Galois/Profinite.lean\", \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"Mathlib/FieldTheory/Galois/Infinite.lean\", \"Mathlib/FieldTheory/Galois/Infinite.lean\"], \"digest\": \"650b9ecbfcad3fc0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations are field-theory ingredients, not the entire compatible polynomial envelope"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, IsScalarTower",
+   "results": "{\"t\": \"2026-10-23T04:11:40Z\", \"tool\": \"loogle\", \"query\": \"IsGalois, IsScalarTower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsGalois.tower_top_of_isGalois\", \"IsGaloisGroup.normal_of_isGalois\", \"prod_galRestrict_eq_norm\", \"Algebra.isInvariant_of_isGalois'\", \"Algebra.isInvariant_of_isGalois\", \"Ideal.exists_comap_galRestrict_eq\", \"IsDecompositionField.rank_right\", \"IsInertiaField.rank_right\"], \"digest\": \"bf8f97e2463bd1a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations are field-theory ingredients, not the entire compatible polynomial envelope"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monic polynomial whose quotient algebra is a finite product of separable fields splits over a finite normal extension containing embeddings of all the factors",
+   "results": "{\"t\": \"2026-10-23T04:11:48Z\", \"tool\": \"leanfinder\", \"query\": \"A monic polynomial whose quotient algebra is a finite product of separable fields splits over a finite normal extension containing embeddings of all the factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicClosure.Monics.splits_finsetProd\", \"Polynomial.Monic.exists_splits_map\", \"Normal.exists_isSplittingField\", \"IsGalois.is_separable_splitting_field\", \"Polynomial.SplittingFieldAux.splits\", \"Normal.splits\", \"Normal.splits'\", \"Polynomial.SplittingField.splits\"], \"digest\": \"223311871f5d360a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations are field-theory ingredients, not the entire compatible polynomial envelope"
+  },
+  {
+   "tool": "grep",
+   "query": "nonfaithful|polynomial.envelope|compatible.pair|fiberProduct",
+   "results": "{\"t\": \"2026-10-23T04:15:55Z\", \"tool\": \"grep\", \"query\": \"nonfaithful|polynomial.envelope|compatible.pair|fiberProduct\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations are field-theory ingredients, not the entire compatible polynomial envelope"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite group action on a field lifts to a finite Galois splitting extension with a surjective compatible-pair group and original field fixed by the kernel",
+   "results": "{\"t\": \"2026-10-23T04:15:56Z\", \"tool\": \"leansearch\", \"query\": \"A finite group action on a field lifts to a finite Galois splitting extension with a surjective compatible-pair group and original field fixed by the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGalois.of_fixed_field\", \"IsGaloisGroup.fixedPoints\", \"IsGaloisGroup.isGalois\", \"FixedPoints.toAlgAut_surjective\", \"IsGaloisGroup.intermediateField\", \"IsGaloisGroup.fixedPoints_eq_bot\", \"fixedByFinite\", \"Field.absoluteGaloisGroup\"], \"digest\": \"5a7b7a89a5f629c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations are field-theory ingredients, not the entire compatible polynomial envelope"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsGalois, IntermediateField.fixedField",
+   "results": "{\"t\": \"2026-10-23T04:15:56Z\", \"tool\": \"loogle\", \"query\": \"IsGalois, IntermediateField.fixedField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsGalois.fixedField_fixingSubgroup\", \"IsGalois.fixedField_eq_iff_fixingSubgroup_eq\", \"IsGalois.of_fixedField_normal_subgroup\", \"IsGalois.fixedField_top\", \"IsGalois.of_fixedField_eq_bot\", \"IsGalois.fixedField_le_iff_fixingSubgroup_le\", \"IsGalois.tfae\", \"IsGalois.intermediateFieldEquivSubgroup_symm_apply_toDual\"], \"digest\": \"0a6ad84ed87e1950\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations are field-theory ingredients, not the entire compatible polynomial envelope"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonfaithful finite group action on a field lifts through a surjection to a finite group on a finite Galois extension splitting prescribed finite separable quotient algebras, with kernel fixed field equal to the starting field",
+   "results": "{\"t\": \"2026-10-23T04:16:00Z\", \"tool\": \"leanfinder\", \"query\": \"A nonfaithful finite group action on a field lifts through a surjection to a finite group on a finite Galois extension splitting prescribed finite separable quotient algebras, with kernel fixed field equal to the starting field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.toAlgAut_surjective\", \"IsGaloisGroup.to_isFractionRing\", \"finGaloisGroupMap\", \"IsGaloisGroup.fixedPoints\", \"IsGaloisGroup.of_isFractionRing\", \"IsGaloisGroup.iff_isFractionRing\", \"FixedPoints.toAlgAutMulEquiv\", \"IsGaloisGroup\"], \"digest\": \"2f376d6d3c6fd490\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations are field-theory ingredients, not the entire compatible polynomial envelope"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite Galois field extension containing several separable extensions with an automorphism group fiber product lifting an arbitrary finite acting group",
+   "results": "{\"t\": \"2026-10-23T04:16:02Z\", \"tool\": \"leanfinder\", \"query\": \"Finite Galois field extension containing several separable extensions with an automorphism group fiber product lifting an arbitrary finite acting group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.isGalois\", \"IsGaloisGroup\", \"finGaloisGroupMap\", \"FiniteGaloisIntermediateField.finGaloisGroup\", \"finGaloisGroupFunctor\", \"IsGaloisGroup.of_isGalois\", \"IsGaloisGroup.finite\", \"IsGaloisGroup.of_isFractionRing\"], \"digest\": \"a1ec4cc9a61cb081\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations are field-theory ingredients, not the entire compatible polynomial envelope"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-finite-residue-domination",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, second paragraph, application of Lemma 5.6 at the maximal points of the nonsplit locus. Extraction of old steps 5--8: compatible Galois envelope.",
+   "via": [
+    "lem-sfb-equivariant-finite-residue-domination",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equivariant-galois-polynomial-envelope",
+  "worker": "stage1",
+  "summary": "Q16 wrote eight proof steps using existing nodes only. Common F-embeddings are explicitly corrected to K-embeddings; polynomial factorization uses an annihilating product of component minimal polynomials and the existing divisor-splitting leaf; compatible-pair subgroup, surjectivity and kernel are checked explicitly. Statement unchanged; empty index set and nonfaithful actions retained.",
+  "blueprint": "Realizes the field-envelope subargument of det-thm-sf-ctf-stability-direct-images proof (3), via equivariant residue domination and de Jong Lemma 5.6; inherited null ancestor chain retained as reported by blueprint_refs ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Generic finite-family Galois envelope over F; this unit has no alternative field-theory construction. This is an auxiliary tool within the prescribed alteration route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-dc626ca9e",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-dc626ca9e (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full; there are no new nodes. The statement and stmt_deps are byte-identical to the Q50-run copy, where the item was unsplit with no proof. No repair note exists and no SGA is cited. The steps are correct and each cited node's hypotheses hold where it is used. Step 1 applies Artin's theorem (09I3, lem-wf) to the faithful image A(H), whose fixed field is F. Step 2 gets K_ib/F separable from lem-zl and finite by spanning sets; the receiving envelope then gives M/F finite Galois with F-maps j and e_ib. Step 3 lifts j∘a_ib⁻¹ (liftNormal, 0BME(2)) to correct e_ib into K-embeddings. Step 4 gives M/K Galois by tower_top, and finite. Step 5: the product of component minimal polynomials is killed by the K-algebra isomorphism, so f_i divides it; it splits by normality of M/K, so Splits.of_dvd applies, a monic f_i gives c=1, and there are d_i factors. Step 6 checks the subgroup, finiteness and action explicitly. Step 7 lifts j∘A_h∘j⁻¹, so ρ is surjective even for non-injective A. Step 8 identifies ker ρ with Aut_K(M) and gets M^N=j(K) from the fixed-field leaf. Edge cases checked: I empty; trivial A, where J=H×Aut_K(M); faithful A with no polynomials, where M=K; B_i empty is impossible; characteristic p dividing |H|. Accepted tool_use: lem-weil-pbc-finite-galois-receiving-separable-extensions (sk-thm-p1), a generic black-box field envelope. Batch-5: lem-trf-divisor-of-split-polynomial is the Mathlib leaf Polynomial.Splits.of_dvd, generic polynomial algebra outside the trace-formula and Poincaré assumptions and their proofs. It is the only sec-trace-formula node in the 29-node closure, so the citation is accepted. Maintainer note: the existing unsplit sibling lem-sfb-finite-semilinear-field-envelope (Q141) overlaps in the J/ρ/N clauses but does not specialize to the item; it is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.EquivariantGaloisPolynomialEnvelope",
+  "declaration": "exists_equivariant_galois_polynomial_envelope",
+  "file": "lean/Sheaf/FieldTheory/EquivariantGaloisPolynomialEnvelope.lean",
+  "statement": "theorem exists_equivariant_galois_polynomial_envelope (K : Type u) [Field K] (H : Type t) [Group H] [Finite H] [MulSemiringAction H K] (I : Type w) [Finite I] (f : I → Polynomial K) (d : I → ℕ) (hmonic : ∀ i : I, (f i).Monic) (hdegree : ∀ i : I, (f i).natDegree = d i) (hpositive : ∀ i : I, 1 ≤ d i) (B : I → Type z) [∀ i : I, Finite (B i)] [∀ i : I, Nonempty (B i)] (E : (i : I) → B i → Type v) [∀ (i : I) (b : B i), Field (E i b)] [∀ (i : I) (b : B i), Algebra K (E i b)] (hfinite : ∀ (i : I) (b : B i), FiniteDimensional K (E i b)) (hseparable : ∀ (i : I) (b : B i), Algebra.IsSeparable K (E i b)) (quotientEquiv : ∀ i : I, (Polynomial K ⧸ Ideal.span {f i}) ≃ₐ[K] ((b : B i) → E i b)) : ∃ (M : Type (max u v)) (_ : Field M) (_ : Algebra K M) (_ : Algebra (FixedPoints.subfield H K) M) (_ : IsScalarTower (FixedPoints.subfield H K) K M), FiniteDimensional (FixedPoints.subfield H K) M ∧ IsGalois (FixedPoints.subfield H K) M ∧ FiniteDimensional K M ∧ IsGalois K M ∧ (∀ (i : I) (b : B i), Nonempty (E i b →ₐ[K] M)) ∧ (∃ beta : (i : I) → Fin (d i) → M, ∀ i : I, (f i).map (algebraMap K M) = ∏ nu : Fin (d i), (Polynomial.X - Polynomial.C (beta i nu))) ∧ ∃ (J : Subgroup (H × (M ≃ₐ[FixedPoints.subfield H K] M))) (rho : J →* H) (action : J →* (M ≃ₐ[FixedPoints.subfield H K] M)), (∀ p : H × (M ≃ₐ[FixedPoints.subfield H K] M), p ∈ J ↔ ∀ x : K, p.2 (algebraMap K M x) = algebraMap K M (p.1 • x)) ∧ Finite J ∧ (∀ g : J, rho g = g.val.1) ∧ Function.Surjective rho ∧ (∀ g : J, action g = g.val.2) ∧ (∀ (g : J) (x : K), action g (algebraMap K M x) = algebraMap K M (rho g • x)) ∧ ∃ e : rho.ker ≃* (M ≃ₐ[K] M), (∀ (n : rho.ker) (x : M), e n x = n.val.val.2 x) ∧ (∀ y : M, (∀ n : rho.ker, n.val.val.2 y = y) ↔ y ∈ Set.range (algebraMap K M))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c94bff25",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Statement exists_equivariant_galois_polynomial_envelope matches every clause of the node: F = FixedPoints.subfield H K (not necessarily faithful MulSemiringAction); I may be empty; f_i monic of degree d_i ≥ 1; K-algebra iso K[X]/(f_i) ≃ₐ[K] Π_b E i b with E i b finite separable; M/F and M/K finite Galois with F→K→M scalar tower; K-embeddings; factorization into exactly d_i linear factors; J defined by an exact membership iff; Finite J; rho and action pinned to the coordinates; rho surjective; compatibility with the action on K; rho.ker ≃* Aut_K(M) pinned to the second projection; M^N = range algebraMap. No extra hypotheses; universes bound, M : Type (max u v) satisfiable. Edge cases checked: empty I, trivial/nonfaithful action, characteristic dividing |H|. Statement deps read; only the lean field changed; imports exist; no definitions; proof is sorry only; docstrings carry source, blueprint tag and the 8 proof steps. Report has a Worker report and a Second reading by Q11. No duplicate declaration (sibling semilinear-field-envelope is a distinct node with no Lean). No findings; not recompiled since nothing changed."
+ }
+}

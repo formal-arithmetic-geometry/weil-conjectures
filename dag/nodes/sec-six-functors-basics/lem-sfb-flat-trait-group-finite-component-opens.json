@@ -1,0 +1,424 @@
+{
+ "id": "lem-sfb-flat-trait-group-finite-component-opens",
+ "kind": "statement",
+ "title": "Finite-presentation invariant open pieces of a flat group sheaf over a trait",
+ "statement": "Let $R$ be a strictly henselian discrete valuation ring [def-sc-discrete-valuation-ring, def-weil-pbc-henselian-terminology], meaning a henselian local ring with separably closed residue field, $S=\\operatorname{Spec}R$, and $F$ an fpqc sheaf of groups on $S$-schemes. A group sheaf takes values in groups, not necessarily commutative. A group scheme has multiplication, identity and inverse morphisms satisfying the group identities. An fpqc sheaf means a contravariant set-valued functor on $S$-schemes satisfying the covering equalizer condition of [def-weil-pbc-fpqc-covering]. Suppose an fpqc morphism $p:T\\to S$ makes $F_T$ representable as a group sheaf by a separated flat $T$-group scheme $P$ locally of finite presentation. Flatness is [def-weil-flat-morphism]; separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. There exist an open subgroup subfunctor $H\\subseteq F$ and a set-indexed covering family of $H$-invariant open subfunctors $(U_a\\subseteq F)_{a\\in A}$ [def-pc-subfunctor]. Open means that for every scheme $V$ and section in $F(V)$ the inverse image subfunctor is represented by an open subscheme of $V$ [def-weil-open-immersion]; covering means that these opens cover every such $V$. The sheaves $H_T$ and $(U_a)_T$ are represented by separated flat schemes of finite presentation over $T$. For each $a$ there is a finite field extension $L_a/K$, where $K$ is the fraction field of $R$, such that, writing $R_a$ for the integral closure of $R$ in $L_a$ [def-weil-pbc-integral-closure] and $B_a=\\operatorname{Spec}R_a$, the canonical morphism $b_a:B_a\\to S$ is integral [def-weil-finite-integral-morphism], surjective, flat and quasi-compact, hence fpqc, and has finite underlying fibres. The extension may be ramified; no etaleness or finiteness of $R_a$ as an $R$-module is required. The scheme $B_a$ is a semi-trait: its ring is a domain with finitely many maximal ideals, Noetherian [def-weil-pbc-noetherian-ring] and normal [def-weil-pbc-normal-ring], of dimension one (strict prime-ideal chains have length at most one and some chain has length one). Over $B_a$, $(U_a)_{B_a}$ is a finite union of $H_{B_a}$-invariant open subfunctors $V_{aj}$ for which $(h,x)\\mapsto(hx,x)$ from $H_{B_a}\\times_{B_a}V_{aj}$ to $V_{aj}\\times_{B_a}V_{aj}$ is surjective as a morphism of fppf sheaves [def-pc-fppf-site]. This local-lifting description persists after every further base change. No representability of $F$, $H$, or $U_a$ over $S$ is asserted.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Lemma 4.2.4 and its following action argument, printed pp.59-61 (4.2 Step 5), for the subgroup and special-fibre component pieces. Agent extension for generic-only pieces: finite Galois-stable unions of generic H-cosets split over a finite field extension; replace finite etale covers by normalization in a finite possibly ramified extension. Source field case 4.1 and normalization argument 4.2.1 supply the field and normalization inputs. This is invariant-open structure, not representability on S. Repair of E2 at returned head 1373c1175ce; full justification and ramified lattice test in report.md. Local archive WANTED; primary scan https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-flat-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-subfunctor",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fppf-site",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-henselian-terminology",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use the component-envelope lemma, and let $Z_0$ be the identity component of $F_s$. Put $H=E_F(Z_0)$. The identity section lies in $H$, and inversion preserves it by isomorphism compatibility. Here $R$ is strictly henselian, so the lemma's corrected neutral-product clause applies and gives $E_{F\\times_SF}(Z_0\\times_sZ_0)=H\\times_SH$. This equality is not used over a nonhenselian DVR. For multiplication $m:F\\times_SF\\to F$, $(x,y)\\mapsto(xy,y)$ is an automorphism with inverse $(z,y)\\mapsto(zy^{-1},y)$; hence $m$ is a projection up to this automorphism and is flat and locally finitely presented after the representing cover, by the cited base-change statements. On the special fibre, $m$ maps $Z_0\\times_sZ_0$ onto $Z_0$ since $z=m(z,1)$. The envelope lemma's flat-map compatibility now gives $m(H\\times_SH)\\subset H$. Thus $H$ is an open subgroup, and the envelope lemma gives that $H_T$ is separated flat and of finite presentation. In particular, no subgroup property is inferred merely from existence or minimality of an envelope.",
+   "uses": [
+    "lem-sfb-trait-component-minimal-envelope",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2 Step 5, printed pp.59-61; agent assembly of cited inputs"
+   }
+  },
+  {
+   "text": "Apply the coset-space lemma to this $H$. Choose its covering opens $Q_a\\subset Q=H\\backslash F$ and put $U_a=F\\times_Q Q_a$. These are open subfunctors by their scheme-test definition. For a section $x\\in F(V)$ the map $V\\to Q$ induced by $x$ pulls the covering opens $Q_a$ back to opens covering $V$, so the $U_a$ cover in exactly the sense of the statement. Since $q(hx)=q(x)$, they are $H$-invariant. The sheaf $(U_a)_T$ is represented by the inverse-image open of $Q_{a,T}$ in $P$. The coset lemma gives $q_T$ flat separated and finitely presented; $Q_{a,T}\\to T$ is finitely presented by base change. Their composite is finitely presented by the cited composition theorem. This open subscheme of the separated flat $T$-scheme $P$ remains separated and flat, by restricting the diagonal and stalk maps. This proves all the finite-presentation assertions before making any normalization cover.",
+   "uses": [
+    "lem-sfb-fpqc-open-subgroup-coset-space",
+    "lem-sfb-space-flat-proper-fp-locality",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2 Step 5, printed pp.59-61; agent assembly of cited inputs"
+   }
+  },
+  {
+   "text": "Fix $a$. Take the finite affine etale atlas $W_{ai}\\to Q_a$ of the coset lemma. Apply the finite-base splitting theorem to the finite family $W_{ai}\\to S$. Its hypotheses hold: $S$ is Noetherian, and the atlas pieces are separated etale of finite presentation. We get a finite surjection $C_a\\to S$ with $W_{ai}\\times_SC_a$ a finite disjoint union of open subschemes of $C_a$. It is essential here that the theorem applies to the separated scheme charts, not that $Q_a\\to S$ be separated. These open charts jointly surject onto $Q_a\\times_SC_a$.",
+   "uses": [
+    "lem-sfb-fpqc-open-subgroup-coset-space",
+    "lem-trf-finite-base-splits-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Inherited trait descent in proof (3); auxiliary finite etale chart splitting is Orgogozo Lemma 9.1.3, read online, as stated in the cited node"
+   }
+  },
+  {
+   "text": "Write $C_a=\\operatorname{Spec}D_a$, where $D_a$ is a finite $R$-algebra. A point of its nonempty generic fibre corresponds to a prime $\\mathfrak p_a\\subset D_a$ contracting to zero. Set $L_a=\\operatorname{Frac}(D_a/\\mathfrak p_a)$; this is a finite extension of $K$ since $(D_a/\\mathfrak p_a)\\otimes_RK$ is a finite-dimensional domain over $K$, hence a field. Every element $x$ of $D_a/\\mathfrak p_a$ is integral over $R$: choose finite module generators, express multiplication by $x$ on them by a matrix over $R$, and apply its monic characteristic polynomial using the adjugate identity; it annihilates all generators and hence $1$. Thus every element is integral, so its inclusion in $L_a$ factors through the integral closure $R_a$ by its definition. Thus $B_a=\\operatorname{Spec}R_a$ maps to $C_a$ over $S$. This passage uses no etaleness or module-finiteness of $R_a$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition of a finite algebra and integral closure; elementary generic component of a finite surjective scheme over a domain"
+   }
+  },
+  {
+   "text": "Apply the integral-closure Dedekind theorem to $R\\subset L_a$: the base is a Noetherian dimension-one domain because it is a DVR: every ideal of a PID is finitely generated, and every nonzero prime is generated by an irreducible and is maximal; the nonzero maximal ideal gives dimension exactly one. It gives that $R_a$ is a Noetherian normal domain of dimension one and that $B_a\\to S$ is surjective with finite fibres. All maximal ideals of $R_a$ lie over the maximal ideal of $R$: for an integral extension the contraction of a maximal ideal is maximal (in the quotient, a subring over which a field is integral is a field). Hence the finite closed fibre contains all maximal ideals, so $R_a$ is semilocal. The inclusion $R\\subset R_a\\subset L_a$ makes $R_a$ torsion free over the PID $R$, so the cited flatness theorem makes it flat. The affine map $B_a\\to S$ is quasi-compact, and is integral by the definition of $R_a$. Together with surjectivity it is fpqc. This proves all assertions about the normalization cover, without excellence.",
+   "uses": [
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09IG (lemma-integral-closure-Dedekind); torsion-free flatness is Tag 0AUW (lemma-dedekind-torsion-free-flat), PID case"
+   }
+  },
+  {
+   "text": "Pull the split atlas of Step 3 back along $B_a\\to C_a$. It gives finitely many maps $s_j:O_j\\to Q_{a,B_a}$, with $O_j\\subset B_a$ open, jointly surjective. Each is a section over $O_j$ of the etale map $Q_{a,B_a}\\to B_a$. A section is a monomorphism; it is etale by the cited chartwise-etale permanence theorem, since both its source and target are etale over $O_j$. The etale-monomorphism theorem makes $s_j$ an open immersion. Define $V_{aj}=F_{B_a}\\times_{Q_{B_a}}s_j(O_j)$. They are $H_{B_a}$-invariant open subfunctors and their finite union is $(U_a)_{B_a}$. On $s_j(O_j)\\simeq O_j$, the map $V_{aj}\\to B_a$ factors through $O_j$, so $V_{aj}\\times_{B_a}V_{aj}=V_{aj}\\times_{Q_{B_a}}V_{aj}$. Restricting the torsor isomorphism of the coset lemma identifies this last sheaf with $H_{B_a}\\times_{B_a}V_{aj}$ by $(h,x)\\mapsto(hx,x)$. In particular the required action map is fppf-surjective.",
+   "uses": [
+    "lem-sfb-fpqc-open-subgroup-coset-space",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W5 (lemma-etale-universally-injective-open); section maps are etale by Tag 03FV (lemma-etale-permanence); torsor identity is Tag 06PH"
+   }
+  },
+  {
+   "text": "Finally, the isomorphism in Step 6 is an isomorphism of sheaves defined by multiplication and the projections. Pulling it back to any $B_a$-scheme preserves its inverse and both inverse identities. The pulled-back $V_{aj}$ are again invariant opens and still cover the pulled-back $U_a$, as is checked by inverse images on every scheme test. The pulled-back action maps are therefore still surjective as fppf sheaf maps. No step has asserted representability of $F$, $H$, or $U_a$ on $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/anantharaman-groupes-dimension-un.pdf",
+    "place": "4.2 Step 5, printed pp.59-61; agent assembly of cited inputs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-trait-component-minimal-envelope",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-fpqc-open-subgroup-coset-space",
+  "lem-sfb-space-flat-proper-fp-locality",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-trf-finite-base-splits-etale",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-integral-closure",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-fpqc-covering",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-etale-monomorphism-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Agent repair of Anantharaman 4.2 Step 5 over a strictly henselian trait; nonhenselian product/subgroup claims removed as false. Retained etale coset-space charts and Orgogozo 9.1.3 normalization construction in Steps 2-7; scan read online, local archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated flat locally finitely presented fpqc group sheaf over a trait has a finitely presented open subgroup and a cover by finitely presented invariant open subfunctors almost homogeneous after finite etale base change",
+   "results": "{\"t\": \"2026-10-24T11:45:06Z\", \"tool\": \"leanfinder\", \"query\": \"A separated flat locally finitely presented fpqc group sheaf over a trait has a finitely presented open subgroup and a cover by finitely presented invariant open subfunctors almost homogeneous after finite etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"2ec1404c6e277af7\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for the returned finite-etale version (refuted by E2); no match: module finite presentation and topological OpenSubgroup results do not construct scheme-test open subgroup/component pieces of an fpqc group sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Anantharaman open subgroup of finite presentation with connected special fibre and finite presentation component open subfunctors of a flat group over a trait",
+   "results": "{\"t\": \"2026-10-24T11:45:00Z\", \"tool\": \"leansearch\", \"query\": \"Anantharaman open subgroup of finite presentation with connected special fibre and finite presentation component open subfunctors of a flat group over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OpenSubgroup.mk\", \"OpenSubgroup\", \"OpenSubgroup.instSubgroupClass\", \"OpenSubgroup.isOpen'\", \"OpenSubgroup.hasCoeSubgroup\", \"OpenSubgroup.toSubgroup\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"OpenAddSubgroup.mk\"], \"digest\": \"71df72de13b55637\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for the returned finite-etale version (refuted by E2); no match: module finite presentation and topological OpenSubgroup results do not construct scheme-test open subgroup/component pieces of an fpqc group sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"ConnectedComponent\"",
+   "results": "{\"t\": \"2026-10-24T11:45:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"ConnectedComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for the returned finite-etale version (refuted by E2); no match: module finite presentation and topological OpenSubgroup results do not construct scheme-test open subgroup/component pieces of an fpqc group sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|openSubgroup|almost.homogeneous",
+   "results": "{\"t\": \"2026-10-24T11:45:01Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|openSubgroup|almost.homogeneous\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for the returned finite-etale version (refuted by E2); no match: module finite presentation and topological OpenSubgroup results do not construct scheme-test open subgroup/component pieces of an fpqc group sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type open pieces of a locally finite type flat group scheme over a discrete valuation ring from components of its closed fibre",
+   "results": "{\"t\": \"2026-10-24T11:45:10Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type open pieces of a locally finite type flat group scheme over a discrete valuation ring from components of its closed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\"], \"digest\": \"bc91072161a889d2\"}",
+   "date": "2026-10-24",
+   "verdict": "Historical search for the returned finite-etale version (refuted by E2); no match: module finite presentation and topological OpenSubgroup results do not construct scheme-test open subgroup/component pieces of an fpqc group sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|generic.*coset|coset.*generic|ramified.*descent",
+   "results": "{\"t\": \"2026-10-24T12:09:47Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|generic.*coset|coset.*generic|ramified.*descent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; normalization/integral-closure definitions, finite-presentation morphism properties and affine open-cover lemmas do not construct invariant group-sheaf pieces or split generic cosets after a ramified normalization cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generic cosets of an open subgroup of an algebraic group split after a finite separable field extension and the integral closure of a DVR gives an integral faithfully flat cover with finite fibres",
+   "results": "{\"t\": \"2026-10-24T12:09:48Z\", \"tool\": \"leansearch\", \"query\": \"Generic cosets of an open subgroup of an algebraic group split after a finite separable field extension and the integral closure of a DVR gives an integral faithfully flat cover with finite fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure\", \"integralClosure.isIntegralClosure\", \"Ring.NormalClosure\", \"galRestrict.congr_simp\", \"integralClosure_le_span_dualBasis\", \"instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure\", \"minpoly.instAlgebraSubtypeMemSubringSubalgebraIntegralClosure\", \"completeIntegralClosure\"], \"digest\": \"2cb71651956b039d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; normalization/integral-closure definitions, finite-presentation morphism properties and affine open-cover lemmas do not construct invariant group-sheaf pieces or split generic cosets after a ramified normalization cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-24T12:09:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; normalization/integral-closure definitions, finite-presentation morphism properties and affine open-cover lemmas do not construct invariant group-sheaf pieces or split generic cosets after a ramified normalization cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented group sheaf over a discrete valuation ring has finite presentation invariant open pieces almost homogeneous under a finite presentation open subgroup after normalization in a finite possibly ramified extension of the generic field",
+   "results": "{\"t\": \"2026-10-24T12:09:49Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finitely presented group sheaf over a discrete valuation ring has finite presentation invariant open pieces almost homogeneous under a finite presentation open subgroup after normalization in a finite possibly ramified extension of the generic field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"RingHom.finitePresentation_isLocal\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"Module.isLocallyConstant_rankAtStalk\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\"], \"digest\": \"b06ce93e74a4b6bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; normalization/integral-closure definitions, finite-presentation morphism properties and affine open-cover lemmas do not construct invariant group-sheaf pieces or split generic cosets after a ramified normalization cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type invariant open pieces of a group over a trait become finite unions of homogeneous opens on an integral normalization cover allowing ramification",
+   "results": "{\"t\": \"2026-10-24T12:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type invariant open pieces of a group over a trait become finite unions of homogeneous opens on an integral normalization cover allowing ramification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\"], \"digest\": \"40d25d0c3eeb47b1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read hits; normalization/integral-closure definitions, finite-presentation morphism properties and affine open-cover lemmas do not construct invariant group-sheaf pieces or split generic cosets after a ramified normalization cover"
+  },
+  {
+   "tool": "grep",
+   "query": "GroupScheme|almost.homogeneous|component.*envelope|coset.*sheaf",
+   "results": "{\"t\": \"2026-10-24T12:37:06Z\", \"tool\": \"grep\", \"query\": \"GroupScheme|almost.homogeneous|component.*envelope|coset.*sheaf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: no theorem constructs finite-presentation invariant group-sheaf opens over a trait"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"ConnectedComponent\"",
+   "results": "{\"t\": \"2026-10-24T12:37:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"ConnectedComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: no theorem constructs finite-presentation invariant group-sheaf opens over a trait"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal finite presentation open subfunctor with prescribed special fibre component of a flat fpqc group sheaf over a trait",
+   "results": "{\"t\": \"2026-10-24T12:37:07Z\", \"tool\": \"leansearch\", \"query\": \"Minimal finite presentation open subfunctor with prescribed special fibre component of a flat fpqc group sheaf over a trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.Presentation.IsFinite.mk\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.mk\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.Presentation.IsFinite\"], \"digest\": \"0b4d38b5e6141939\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: no theorem constructs finite-presentation invariant group-sheaf opens over a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented group sheaf over a discrete valuation ring has finite presentation invariant open pieces homogeneous after normalization in a finite field extension",
+   "results": "{\"t\": \"2026-10-24T12:37:11Z\", \"tool\": \"leanfinder\", \"query\": \"A flat locally finitely presented group sheaf over a discrete valuation ring has finite presentation invariant open pieces homogeneous after normalization in a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"RingHom.finitePresentation_holdsForLocalizationAway\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"RingHom.finitePresentation_isLocal\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"RingHom.finitePresentation_ofLocalizationSpanTarget\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\"], \"digest\": \"923daab85d42cd02\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: no theorem constructs finite-presentation invariant group-sheaf opens over a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented group sheaf over a trait there is a smallest open with prescribed connected component of the special fibre and finitely many generic components",
+   "results": "{\"t\": \"2026-10-24T12:44:23Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat locally finitely presented group sheaf over a trait there is a smallest open with prescribed connected component of the special fibre and finitely many generic components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.component_nontrivial\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\"], \"digest\": \"ba37c0acbfc86bea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the hits: no theorem constructs finite-presentation invariant group-sheaf opens over a trait"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a strictly henselian discrete valuation ring the minimal open envelope of the special identity component of a flat group sheaf is compatible with taking products",
+   "results": "{\"t\": \"2026-10-24T13:36:02Z\", \"tool\": \"leanfinder\", \"query\": \"Over a strictly henselian discrete valuation ring the minimal open envelope of the special identity component of a flat group sheaf is compatible with taking products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.const_mul_cancel\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\"], \"digest\": \"c1adeff05ac10ada\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Connected component envelopes of flat locally finitely presented group schemes over a strictly henselian trait preserve products",
+   "results": "{\"t\": \"2026-10-24T13:36:02Z\", \"tool\": \"leansearch\", \"query\": \"Connected component envelopes of flat locally finitely presented group schemes over a strictly henselian trait preserve products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier\", \"CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q'\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier\", \"AlgebraicGeometry.Flat.comp\", \"Condensed.instPreservesFiniteProductsOppositeProfiniteVal\", \"AlgebraicGeometry.Flat.instDescScheme\"], \"digest\": \"7cfe63a6855bd618\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStrictHenselian\", \"ConnectedComponent\"",
+   "results": "{\"t\": \"2026-10-24T13:36:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStrictHenselian\\\", \\\"ConnectedComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "henselian.*component|component.*henselian|IsStrictHenselian",
+   "results": "{\"t\": \"2026-10-24T13:36:03Z\", \"tool\": \"grep\", \"query\": \"henselian.*component|component.*henselian|IsStrictHenselian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat group sheaf over a strictly henselian trait has finitely presented invariant open pieces that become homogeneous after a finite fraction field extension",
+   "results": "{\"t\": \"2026-10-24T13:37:22Z\", \"tool\": \"leanfinder\", \"query\": \"A flat group sheaf over a strictly henselian trait has finitely presented invariant open pieces that become homogeneous after a finite fraction field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"Module.isLocallyConstant_rankAtStalk\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\"], \"digest\": \"46271dc32a8289c2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a henselian valuation ring every generic connected component of the product of two finite presentation special component envelopes specializes to their product special fibre",
+   "results": "{\"t\": \"2026-10-24T13:37:25Z\", \"tool\": \"leanfinder\", \"query\": \"Over a henselian valuation ring every generic connected component of the product of two finite presentation special component envelopes specializes to their product special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"HenselianLocalRing\", \"HenselianRing\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.TFAE\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"47fa382d6b118f26\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat group schemes over a strictly henselian discrete valuation ring have finite presentation open subgroups and invariant homogeneous open pieces",
+   "results": "{\"t\": \"2026-10-24T13:48:53Z\", \"tool\": \"leansearch\", \"query\": \"Flat group schemes over a strictly henselian discrete valuation ring have finite presentation open subgroups and invariant homogeneous open pieces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OpenSubgroup\", \"OpenSubgroup.mk\", \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"OpenSubgroup.instSubgroupClass\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"OpenSubgroup.toSubgroup\", \"OpenSubgroup.isOpen'\"], \"digest\": \"2c0b6db9544bc19e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T13:48:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianLocalRing\\\", \\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "group.*henselian|henselian.*group|component.*envelope",
+   "results": "{\"t\": \"2026-10-24T13:48:53Z\", \"tool\": \"grep\", \"query\": \"group.*henselian|henselian.*group|component.*envelope\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological open subgroups, general flatness/permanence, Henselian ring definitions or sheaves of modules; no strict-local group-sheaf component-envelope theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-flat-group-fpqc-effectivity",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input: Lemma 4.2.4 and its following action argument, printed pp.59-61 (4.2 Step 5), for the subgroup and special-fibre component pieces. Agent extension for generic-only pieces: finite Galois-stable unions of generic H-cosets split over a finite field extension; replace finite etale covers by normalization in a finite possibly ramified extension. Source field case 4.1 and normalization argument 4.2.1 supply the field and normalization inputs. This is invariant-open structure, not representability on S. Repair of E2 at returned head 1373c1175ce; full justification and ramified lattice test in report.md.; E2/E3 correction at d3afac39330: only the strictly henselian trait case; arbitrary-DVR parent application disputed",
+   "via": [
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-flat-trait-group-finite-component-opens",
+  "worker": "stage1",
+  "summary": "Repair E2/E3 of d3afac39330: restrict neutral-envelope product compatibility to strictly henselian traits; correct the item to that strict-local case because the arbitrary-DVR finite-presentation subgroup assertion is false. Explicit twisted C2*C2 degeneration counterexample and both returned tests are in report.md. Step 1 now checks the strict-local hypothesis before using the corrected product lemma. Coset node and Steps 2-7 are retained. Two new statement-only intermediate nodes, no Lean or compiler. The unrestricted parent effectivity proof needs separate repair before applying this corrected lemma.",
+  "blueprint": "Realizes the inherited strict-local trait descent branch of det-thm-sf-ctf-stability-direct-images proof (3), preserving Anantharaman 4.2 Step 5 below the fixed unit route. from.node remains null as returned by tools/blueprint_refs.py ancestor; fills precise places for both new nodes. STATEMENT-DISPUTED correction: this item now assumes a strictly henselian DVR; the fixed chapter/unit route is unchanged. The immediate arbitrary-DVR parent cannot apply the corrected statement directly and is reported for maintainer repair.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-base-splits-etale",
+    "why": "Generic tool splitting a finite family of separated etale scheme charts; the ctf unit contains no such geometric theorem."
+   },
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Generic commutative-algebra normalization theorem 09IG; no CTF-specific proof route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-pid-torsion-free-module-flat",
+    "why": "Generic PID flatness criterion needed for the normalization fpqc cover."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space tool: Step 6 takes from its statement only that a morphism between two objects chartwise etale over O_j is chartwise etale, making the chart section s_j etale; no node of the ctf unit states this."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-base-splits-etale",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NL-6cd2aef63",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-6cd2aef63 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, every cited statement, and the live base item and parent. Coset node checked against Stacks 0DU1 and 06PH. Anantharaman is still WANTED, so I judged the parts attributed to it mathematically. (1) E7 statement change from 'DVR' to 'strictly henselian DVR' is justified. I verified the counterexample. R=F_2[t]_(t), R'=R[u]/(u^2+u+t) is finite etale with two closed points, and tau(u)=u+1 fixes t. G_A=x^2-tx is an additive subgroup with generic fibre Z/2 and special fibre alpha_2, a single point. P is lfp, separated and flat, and its descent datum is a valid cocycle. Any open subgroup must contain <a,b>=C2*C2, which is infinite, so H_{R'} is not of finite presentation. The change is named in the report. Parent lem-sfb-trait-flat-group-fpqc-effectivity (live, split, reviewed by Q48) applies this item over an arbitrary DVR in its Step 1. That step is now invalid. Maintainer: record this in HUMAN.md and release a stage-1 repair note for the parent (strict-henselization reduction plus descent). (2) Steps 1-7 are correct. Step 1: shear automorphism, the flat-map clause and the strictly henselian product clause make H a subgroup. Step 2: fp by base change plus composition. Step 3: S is Noetherian and the charts are affine separated etale fp. Step 4: integrality and L_a/K finite. Step 5: Krull-Akizuki hypotheses checked, PID flatness, semilocal. Step 6: chartwise-etale permanence and etale monomorphism give open immersions; restricted torsor iso. Step 7: base change. (3) Envelope node: existence and minimality hold by local finiteness of components; the flat-map clause is true; the strictly henselian product clause holds via unique valuation extension and geometric irreducibility of group components. It is consistent with the counterexample: the envelope exists there but is not a subgroup. Coset node: Q_T is etale by 0DU1 and q_T is a torsor by 06PH. Q is quasi-separated because P is separated, and q_T is representable by schemes as an open of P x_T V. Descent uses fpqc descent of etale sheaves, which is true but not given by the cited tags; the future splitter must find a non-SGA source. Neither new node restates the item, and the rg -L duplicate search found none. (4) Batch-5 flags all accepted: they are generic algebraic-space tools, Orgogozo's etale splitting, or the definition def-trf-algebraic-space, never steps of the trace formula or Poincare duality proofs. (5) FIX: Step 6 uses lem-trf-space-chartwise-etale-permanence (unit sk-i-curve-zero, off-route) without declaring it. I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-flat-trait-group-finite-component-opens.json. Declared tool uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatTraitGroupFiniteComponentOpens",
+  "declaration": "AlgebraicGeometry.flatTraitGroup_finite_component_opens",
+  "declarations": [
+   "AlgebraicGeometry.traitPieceRestriction",
+   "AlgebraicGeometry.traitPieceNormalizationMap",
+   "AlgebraicGeometry.flatTraitGroup_finite_component_opens"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatTraitGroupFiniteComponentOpens.lean",
+  "statement": "theorem flatTraitGroup_finite_component_opens (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] (F : (Over (Spec (.of R)))ᵒᵖ ⥤ GrpCat.{u}) (hF : Presieve.IsSheaf (Scheme.fpqcTopology.over (Spec (.of R))) (F ⋙ forget GrpCat)) (T : Scheme.{u}) (p : T ⟶ Spec (.of R)) (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage (Spec (.of R))) (P : Over T) [IsSeparated P.hom] [Flat P.hom] [LocallyOfFinitePresentation P.hom] (e : (Over.map p).op ⋙ (F ⋙ forget GrpCat) ≅ yoneda.obj P) : ∃ (H : Subfunctor (F ⋙ forget GrpCat)) (A : Type (u + 1)) (U : A → Subfunctor (F ⋙ forget GrpCat)), (∀ W, ∃ G : Subgroup (F.obj W), (G : Set (F.obj W)) = H.obj W) ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ i ↦ IsOpenImmersion i.left) H.ι ∧ (∀ a, AlgebraicSpace.IsRepresentableWith (fun _ _ i ↦ IsOpenImmersion i.left) (U a).ι) ∧ (⨆ a, U a).sheafify (Scheme.zariskiTopology.over (Spec (.of R))) = ⊤ ∧ (∀ a W (h x : F.obj W), h ∈ H.obj W → x ∈ (U a).obj W → h * x ∈ (U a).obj W) ∧ (∃ X : Over T, Nonempty ((Over.map p).op ⋙ H.toFunctor ≅ yoneda.obj X) ∧ IsSeparated X.hom ∧ Flat X.hom ∧ LocallyOfFinitePresentation X.hom ∧ QuasiCompact X.hom ∧ QuasiSeparated X.hom) ∧ (∀ a, ∃ X : Over T, Nonempty ((Over.map p).op ⋙ (U a).toFunctor ≅ yoneda.obj X) ∧ IsSeparated X.hom ∧ Flat X.hom ∧ LocallyOfFinitePresentation X.hom ∧ QuasiCompact X.hom ∧ QuasiSeparated X.hom) ∧ ∀ a, ∃ (L : Type u) (_ : Field L) (_ : Algebra (FractionRing R) L) (_ : Algebra R L) (_ : IsScalarTower R (FractionRing R) L), FiniteDimensional (FractionRing R) L ∧ IsIntegralHom (traitPieceNormalizationMap R L) ∧ Surjective (traitPieceNormalizationMap R L) ∧ Flat (traitPieceNormalizationMap R L) ∧ QuasiCompact (traitPieceNormalizationMap R L) ∧ (∀ s, Set.Finite ((traitPieceNormalizationMap R L) ⁻¹' {s})) ∧ IsDomain (integralClosure R L) ∧ IsNoetherianRing (integralClosure R L) ∧ IsIntegrallyClosed (integralClosure R L) ∧ ringKrullDim (integralClosure R L) = 1 ∧ Finite (MaximalSpectrum (integralClosure R L)) ∧ ∃ (n : ℕ) (V : Fin n → Subfunctor ((Over.map (traitPieceNormalizationMap R L)).op ⋙ (F ⋙ forget GrpCat))), (∀ j, V j ≤ traitPieceRestriction (traitPieceNormalizationMap R L) (U a)) ∧ (∀ j, AlgebraicSpace.IsRepresentableWith (fun _ _ i ↦ IsOpenImmersion i.left) (V j).ι) ∧ (⨆ j, V j).sheafify (Scheme.zariskiTopology.over (Spec (.of (integralClosure R L)))) = traitPieceRestriction (traitPieceNormalizationMap R L) (U a) ∧ (∀ j W (h x : F.obj ((Over.map (traitPieceNormalizationMap R L)).op.obj W)), h ∈ (traitPieceRestriction (traitPieceNormalizationMap R L) H).obj W → x ∈ (V j).obj W → h * x ∈ (V j).obj W) ∧ ∀ j (W : Over (Spec (.of (integralClosure R L)))) (x y : F.obj (op ((Over.map (traitPieceNormalizationMap R L)).obj W))), x ∈ (V j).obj (op W) → y ∈ (V j).obj (op W) → ∃ (I : Type u) (Wᵢ : I → Over (Spec (.of (integralClosure R L)))) (f : ∀ i, Wᵢ i ⟶ W), Presieve.ofArrows (fun i ↦ (Wᵢ i).left) (fun i ↦ (f i).left) ∈ Scheme.fppfPrecoverage W.left ∧ ∀ i, ∃ h : F.obj (op ((Over.map (traitPieceNormalizationMap R L)).obj (Wᵢ i))), h ∈ (traitPieceRestriction (traitPieceNormalizationMap R L) H).obj (op (Wᵢ i)) ∧ h * (F.map ((Over.map (traitPieceNormalizationMap R L)).map (f i)).op y) = F.map ((Over.map (traitPieceNormalizationMap R L)).map (f i)).op x",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing scheme-test representability predicate from def-trf-algebraic-space for open subfunctors; adds that landed definition to stmt_deps. Covering is Zariski-local membership, not sectionwise union. The final universal scheme-test fppf lifts include every further base change. The two real-data helpers give literal restriction and the canonical integral-closure spectrum map. Repair of returned head 61a2caa4705b: the direct owner def-weil-pbc-krull-dimension-ring is now in stmt_deps for ringKrullDim. All record changes are delivered inside the item node, avoiding the rejected reviewer-side full-node --apply-fixes path. Applies the recovered independent-review fix: the representing morphism p is assumed fpqc via Presieve.singleton p membership in Scheme.fpqcPrecoverage, without imposing quasi-compactness on p itself."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0daef82eb",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Re-delivery of returned head 61a2caa4705b, whose FIX could not land because it was given as a full node json. The module is byte-identical to that fix file (diff): p is fpqc via Presieve.singleton p ∈ Scheme.fpqcPrecoverage. The node json changes only lean and stmt_deps: stmt_deps adds def-weil-pbc-krull-dimension-ring, the owner of ringKrullDim, on base since 10-11. The statement, proof and proof_deps are unchanged, there is no statement_change, and lean.statement matches the file verbatim. Independent clause check passed: strict henselian DVR; GrpCat fpqc sheaf; separated flat lfp P via Yoneda iso; open subgroup H (Subgroup carrier and IsRepresentableWith open immersion); Zariski-sheafified covering of H-invariant open U_a; separated, flat, finitely presented (lfp+qc+qs) representatives over T; finite L with canonical integral-closure Spec map (integral, surjective, flat, qc, finite fibres); domain, Noetherian, integrally closed, ringKrullDim=1, finite MaximalSpectrum; Fin n invariant open V_j with sheafified union equal to the restricted U_a; fppf-local lifts h*y=x for all W over B_a, which covers further base change. Edge cases (empty A, n=0, empty tests) and universes are fine. Helpers carry real data, only the theorem is sorry, docstrings and both report sections are present. Compile evidence: the identical file compiled clean in the 61a2 review (18.0 s). Advisory only: A : Type (u+1) is harmless."
+ }
+}

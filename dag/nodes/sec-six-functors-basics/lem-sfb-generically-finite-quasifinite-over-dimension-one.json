@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-generically-finite-quasifinite-over-dimension-one",
+ "kind": "statement",
+ "title": "Generic algebraicity gives quasi-finiteness over a point of local dimension at most one",
+ "statement": "Let $g:Z\\to S$ be a morphism of schemes [def-pc-scheme] locally of finite type [def-weil-finite-type-morphism], and let $s\\in S$. Suppose that $\\mathcal O_{S,s}$ is Noetherian [def-weil-pbc-noetherian-ring] and has Krull dimension at most $1$ [def-weil-pbc-krull-dimension-ring]. Suppose that for every generic point $\\eta$ of every irreducible component of $Z$ [def-sc-generic-point, def-weil-irreducible-components], the induced extension $\\kappa(g(\\eta))\\subseteq\\kappa(\\eta)$ of residue fields [def-weil-residue-field] is algebraic, meaning that every element satisfies a nonzero polynomial over $\\kappa(g(\\eta))$. Then $g$ is quasi-finite at every $z\\in Z$ with $g(z)=s$, in the sense of [pqf-def-quasifinite]. No properness, normality, or global Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, condition (1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "def-weil-residue-field",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Fix $z\\in Z$ with $g(z)=s$. Choose affine opens $V=\\operatorname{Spec}R$ containing $s$ and $U=\\operatorname{Spec}A$ containing $z$ with $U\\subseteq g^{-1}(V)$, and let $\\mathfrak p$ represent $s$. Apply [lem-sfb-generic-algebraicity-localized-affine-model] to this chart and the assumed generic algebraicity. It gives the local ring $B=R_{\\mathfrak p}$ with maximal ideal $\\mathfrak m=\\mathfrak pB$, the isomorphism $B\\cong\\mathcal O_{S,s}$, the residue-field identification $k=B/\\mathfrak m=\\kappa(s)$, and the finite type $B$-algebra $C=A\\otimes_RB$. Thus $B$ is Noetherian with $\\dim B\\le1$. For every minimal prime $Q'$ of $C$, put $q=Q'\\cap B$. The same statement gives algebraicity of $\\kappa(Q')/\\kappa(q)$, with the canonical field maps.",
+   "uses": [
+    "lem-sfb-generic-algebraicity-localized-affine-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, label lemma-quasi-finite-in-codim-1, proof of condition (2), localization paragraph; affine-local generic-point and minimal-prime transfer made explicit (returned proof steps 1–4)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-local-dimension-one-closed-residue-algebraicity] to this $B$, its maximal ideal $\\mathfrak m$, and $C$. Step 1 verifies each hypothesis: $B$ is Noetherian local of dimension at most one, $C$ is of finite type over $B$, and every minimal-prime residue extension is algebraic. Hence every prime $P$ of $C$ contracting to $\\mathfrak m$ satisfies $\\operatorname{trdeg}_k\\kappa(P)=0$, for precisely the field $k=B/\\mathfrak m$ fixed in Step 1. This conclusion also covers vertical components and nonreduced rings.",
+   "uses": [
+    "lem-sfb-local-dimension-one-closed-residue-algebraicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, label lemma-quasi-finite-in-codim-1, proof of condition (2), reduced-component and vertical/horizontal dimension-inequality paragraphs (returned proof steps 5–7)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-localized-affine-residue-criterion-quasifinite] to the original locally finite type morphism $g$, the same chart $U\\to V$, and $s$. Its rings $B,C$ and field $k$ are exactly those of Step 1, and Step 2 supplies its condition for every prime over $\\mathfrak m$. The cited statement identifies $U_s$ with $\\operatorname{Spec}(C/\\mathfrak mC)$, proves that space finite and discrete, and concludes that $g$ is quasi-finite in $Z,S$ at every $u\\in U$ over $s$. In particular it is quasi-finite at the chosen $z$. Since $z$ was arbitrary, the assertion follows.",
+   "uses": [
+    "lem-sfb-localized-affine-residue-criterion-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, label lemma-quasi-finite-in-codim-1, proof of condition (2), closed points of the fibre and final quasi-finiteness paragraph, with affine tensor identifications (returned proof steps 8–10)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-generic-algebraicity-localized-affine-model",
+  "lem-sfb-local-dimension-one-closed-residue-algebraicity",
+  "lem-sfb-localized-affine-residue-criterion-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AB6, label lemma-quasi-finite-in-codim-1, proof of condition (2); the localized model, componentwise height inequality and closed-fibre comparison are separate worker tasks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism with algebraic residue extensions at generic points is quasi finite over target points whose local ring is Noetherian of dimension at most one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFiniteType fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define quasi-finiteness or assume finiteness/quasi-finiteness already; none deduces pointwise quasi-finiteness from generic algebraicity and local target dimension at most one. The grep hit defines residue degree only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A generically finite morphism is quasi finite at every point above a point of codimension one in a locally Noetherian target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] (p : Ideal S) [inst_5 : p.IsPrime] [Algebra.QuasiFiniteAt R p]\\n  (f : S →ₐ[R] T),\\n  f.SurjectiveOnStalks → ∀ (q : Ideal T) [inst_7 : q.IsPrim\", \"doc\": \"Let $ R $, $ S $, and $ T $ be commutative rings with a ring homomorphism $ f : S \\\\to T $ that is surjective on stalks. If $ \\\\mathfrak{p} \\\\subseteq S $ is a prime ideal that is quasi-finite over $ R $\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [IsScalarTower R S T] (p : Ideal S)\\n  [inst_7 : p.IsPrime] [Algebra.QuasiFiniteAt R p],\\n  (algebraMap S T).SurjectiveO\", \"doc\": \"If the algebra homomorphism from $ S $ to $ T $ is surjective on stalks and $ q $ is a prime ideal in $ T $ lying over a prime ideal $ p $ in $ S $ that is quasi-finite over $ R $, then $ q $ is also \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define quasi-finiteness or assume finiteness/quasi-finiteness already; none deduces pointwise quasi-finiteness from generic algebraicity and local target dimension at most one. The grep hit defines residue degree only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"LocallyQuasiFinite\", \"krullDim\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define quasi-finiteness or assume finiteness/quasi-finiteness already; none deduces pointwise quasi-finiteness from generic algebraicity and local target dimension at most one. The grep hit defines residue degree only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generically finite morphism of schemes is quasi finite over points of local dimension at most one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally quasi-finite if for every affine open subset $ U \\\\subseteq Y $, and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the \"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define quasi-finiteness or assume finiteness/quasi-finiteness already; none deduces pointwise quasi-finiteness from generic algebraicity and local target dimension at most one. The grep hit defines residue degree only."
+  },
+  {
+   "tool": "grep",
+   "query": "(generically|birational).*(finite|dimension)|quasi.?finite.*(dimension|codim)|finrank.*residue",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ResidueField.lean\", \"line\": \"149\", \"text\": \"  Module.finrank (Y.residueField (f x)) (X.residueField x)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits define quasi-finiteness or assume finiteness/quasi-finiteness already; none deduces pointwise quasi-finiteness from generic algebraicity and local target dimension at most one. The grep hit defines residue degree only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism with algebraic extensions at generic points is quasi finite over a point with Noetherian local ring of dimension at most one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFiniteType fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).EssFiniteType\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is locally of finite type and any point $ x \\\\in X $, the induced ring homomorphism on the stalks $ \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x} $ is of es\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the semantic hits are definitions, finite-morphism implications, permanence, or quasi-finiteness consequences; the Loogle and grep queries have no hits. No result derives pointwise quasi-finiteness from generic algebraicity and target local dimension at most one."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generically finite morphisms are quasi finite over codimension one points without a normality assumption",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every immersion of schemes is a quasi-finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the semantic hits are definitions, finite-morphism implications, permanence, or quasi-finiteness consequences; the Loogle and grep queries have no hits. No result derives pointwise quasi-finiteness from generic algebraicity and target local dimension at most one."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"ringKrullDim\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the semantic hits are definitions, finite-morphism implications, permanence, or quasi-finiteness consequences; the Loogle and grep queries have no hits. No result derives pointwise quasi-finiteness from generic algebraicity and target local dimension at most one."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes with algebraic generic residue extensions is quasi finite over target points of local dimension at most one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally quasi-finite if for every affine open subset $ U \\\\subseteq Y $, and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the \"}\n  {\"name\": \"Algebra.QuasiFinite.casesOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure such that for every prime ideal $ P $ in $ R $, the tensor product of the resi\"}\n  {\"name\": \"Algebra.QuasiFinite.recOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure and satisfying the quasi-finite condition, meaning $ S $ is finitely generated\"}\n  {\"name\": \"Algebra.QuasiFinite.instFiniteResidueField\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"[QuasiFinite R S] (P : Ideal R) [P.IsPrime] (Q : Ideal S) [Q.IsPrime] [Q.LiesOver P] :\\n  Module.Finite P.ResidueField Q.ResidueField\", \"doc\": \"For a quasi-finite algebra $ S $ over a commutative ring $ R $, if $ Q $ is a prime ideal in $ S $ lying over a prime ideal $ P $ in $ R $, then the residue field of $ Q $ is a finite extension of the\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyQuasiFinite f] : LocallyQuasiFinite (f ∣_ V)\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, if $ f $ is locally quasi-finite, then the restriction of $ f $ to $ V $ is also locally quasi-finite.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the semantic hits are definitions, finite-morphism implications, permanence, or quasi-finiteness consequences; the Loogle and grep queries have no hits. No result derives pointwise quasi-finiteness from generic algebraicity and target local dimension at most one."
+  },
+  {
+   "tool": "grep",
+   "query": "(generically|birational).*(finite|dimension)|quasi.?finite.*(dimension|codim)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the semantic hits are definitions, finite-morphism implications, permanence, or quasi-finiteness consequences; the Loogle and grep queries have no hits. No result derives pointwise quasi-finiteness from generic algebraicity and target local dimension at most one."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-modification-codimension-one",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Stacks 0BFP repair: Tag 0AB6, lemma-quasi-finite-in-codim-1, condition (1); its application in Tag 0AB7, lemma-finite-in-codim-1, supplies the codimension-one route in 0BFP(2).",
+   "via": [
+    "lem-sfb-normal-modification-codimension-one",
+    "lem-sfb-nodal-trait-rational-domination",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-generically-finite-quasifinite-over-dimension-one",
+  "worker": "stage1",
+  "summary": "Q119 landing-refusal repair, 2026-10-23: reapplied the retained proof, proof dependencies, proof origin and split report to the current shared parent, retaining all other fields exactly. The original ten-step proof still equals returned-proof.json. The three statement-only tasks retain its arguments in groups 1–4, 5–7 and 8–10. Re-read all three assembly citations and the 22 original dependency statements against Stacks 0AB6 and 02IJ. Fixed doubled TeX backslashes in every assembly step and aligned the minimal-prime notation Q' and contraction q with the first cited statement. The resulting assembly has 1840 characters, below 3000; no step exceeds 2000. Existing searches and citations remain valid and unchanged. Initial dry run 991ab451254 passed; a final dry run follows this substantive rebase and notation repair. Live promotion remains L's responsibility.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; Step 5: isomorphism near every codimension-zero and codimension-one point of the regular resolution before applying point-blowup domination.; Stacks 0BFP repair: Tag 0AB6, lemma-quasi-finite-in-codim-1, condition (1); its application in Tag 0AB7, lemma-finite-in-codim-1, supplies the codimension-one route in 0BFP(2).; realizes the same codimension-one prerequisite by localized affine model, local component dimension bound, and fibre-to-chart comparison.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-trf-affine-dimension-inequality",
+  "lem-kun-closed-point-field",
+  "pqf-lem-locqf-fibre-discrete"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-06096a925",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-06096a925 (reviewer sub-agent of L); spot-checked: Sixth delivery of the 2026-10-21 re-split. The five earlier heads (dde4, f64b, baff, b43c, 05af) were each PASSed and then refused at landing because the side completion was never promoted. Diff of the JSON-normalized files against the 05af snapshot: the three new nodes (generic-algebraicity-localized-affine-model, local-dimension-one-closed-residue-algebraicity, localized-affine-residue-criterion-quasifinite) are byte-identical. In the item, the statement, stmt_deps, proof_deps, source and step uses are unchanged. Only two things changed: Step 1 now writes Q′ and q=Q′∩B, which is the cited node's own notation, and the split_report summary. I re-read the item and all three new statements. The item matches Stacks 0AB6 condition (1) and is not weakened. The assembly is 1840 characters; in each step the hypotheses are exactly the previous conclusions. (1) Localized-affine-model is true: A→C is a localization, minimal primes correspond, the closure of a component of U is a component of Z, and residue fields are unchanged. (2) Local-dimension-one is true by 02IJ / lem-trf-affine-dimension-inequality applied to B/q↪C/Q, in both the vertical and the horizontal case. I tested k[t]_(t) with B[x], B[x]/(tx) and B[1/t]. (3) Residue-criterion is true: F=C/mC is Artinian, its spectrum is finite and discrete, and pqf-lem-locqf-fibre-discrete applies; A^1_k fails its hypothesis as it should. Duplicate scan of the 150 node files new since 05af: lem-sfb-closed-fibre-point-quasifinite-criterion (N8) is a pointwise isolated-point criterion, not a duplicate of node 3; the Q19 Artinian and field-point nodes are unrelated. No SGA is used, there are no fixes and no tool_uses. Maintainer: L must promote the side completion; another re-delivery cannot fix the landing refusal."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GenericAlgebraicityQuasiFiniteDimensionOne",
+  "declaration": "AlgebraicGeometry.quasiFiniteAtPoint_of_generic_algebraic_of_local_dim_le_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GenericAlgebraicityQuasiFiniteDimensionOne.lean",
+  "statement": "theorem quasiFiniteAtPoint_of_generic_algebraic_of_local_dim_le_one {Z S : Scheme.{u}} (g : Z ⟶ S) [LocallyOfFiniteType g] (s : S) [IsNoetherianRing (S.presheaf.stalk s)] (hdim : ringKrullDim (S.presheaf.stalk s) ≤ 1) (hgeneric : ∀ (T : Set Z), T ∈ irreducibleComponents Z → ∀ (η : Z), IsGenericPoint η T → @Algebra.IsAlgebraic (S.residueField (g η)) (Z.residueField η) _ _ (g.residueFieldMap η).hom.toAlgebra) : ∀ z : Z, g z = s → Scheme.Hom.IsQuasiFiniteAtPoint g z",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The older identical per node names a module deleted on 2026-10-20. The source lookup confirms that module is unavailable; this live sfb node supplies the statement using the existing dependency definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3831c4d6",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Lean matches Stacks 0AB6(1) and the node clause by clause: Scheme.{u}, LocallyOfFiniteType g, Noetherian stalk at s with ringKrullDim ≤ 1, every component and generic point algebraic via the canonical residueFieldMap algebra, conclusion ∀ z over s IsQuasiFiniteAtPoint (pqf-def-quasifinite). No extra assumptions; 'finite (or algebraic)' taken as the weaker algebraic hypothesis. Snapshot node differs from side-live only by the lean field; lean.statement verbatim; item not dropped (only the lem-per copy is). Not a duplicate: Mathlib has no 0AB6; DominantIntegralCurveQuasiFinite and ProperBirationalCurveFinite are narrower statements of other nodes. Only sorry, docstrings with source, blueprint id and 10 steps, private imports exist live and are not dropped. No compile needed (no change); worker's scompile and dry run were clean."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-locally-noetherian-decent-quasiseparated",
+ "kind": "statement",
+ "title": "A locally Noetherian decent algebraic space is quasi-separated",
+ "statement": "Let $X$ be an algebraic space over $\\operatorname{Spec}\\mathbf Z$ [def-trf-algebraic-space, def-weil-affine-spectrum], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Assume $X$ is locally Noetherian: every scheme admitting a representable etale map to $X$ is locally Noetherian [pqf-def-locnoeth]. Assume $X$ is decent: for every field $L$ [def-weil-field] and every morphism $\\operatorname{Spec}L\\to X$, its pullback over every affine scheme mapping to $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. Then $X$ is quasi-separated: the absolute diagonal $X\\to X\\times_{\\operatorname{Spec}\\mathbf Z}X$ is quasi-compact on scheme tests. Equivalently, for every pair of affine schemes $U,V$ with representable etale maps to $X$, the scheme $U\\times_X V$ is quasi-compact. No quasi-compactness or finite-type hypothesis is imposed on $X$.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated). Decency is written explicitly as quasi-compactness of field-spectrum maps, as in the existing locally-separated-space-decent node."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "pqf-def-locnoeth",
+  "def-weil-field",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Fix affine etale scheme charts $U\\to X$ and $V\\to X$, and put $W=U\\times_XV$ and $p:W\\to U$. By [def-trf-algebraic-space], $W$ is a scheme and $p$ is etale, since it is a scheme test of $V\\to X$. Hence $p$ is flat and locally of finite presentation by [def-weil-etale-morphism], and locally quasi-finite by [lem-weil-pbc-unramified-quasi-finite-at-points]. The map $j:W\\to V\\times_{\\mathbf Z}U$ is a monomorphism: a section is a pair of sections of $V,U$ with equal images in the sheaf of sets $X$, so the pair determines it. The structure map $V\\to\\operatorname{Spec}\\mathbf Z$ has affine source, hence is separated by [lem-weil-pbc-affine-source-morphism-separated]. Apply [lem-a1-space-monic-diagonal-tests] with its $X=V$, $Y=W$, $T=S=\\operatorname{Spec}\\mathbf Z$, and $B=U$, using the monomorphism $j$. Its closed-diagonal conclusion says precisely that $p$ is separated. Thus all four hypotheses needed for the fibre-degree lemmas hold without any quasi-separatedness assumption on our original space $X$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-a1-space-monic-diagonal-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BB6, first paragraph; separatedness required by Tags 086R and 07RY made explicit via scheme-test diagonals."
+   }
+  },
+  {
+   "text": "For each $u\\in U$, compose $\\operatorname{Spec}\\kappa(u)\\to U$ with $U\\to X$. Decency, in exactly the field-map formulation of the item, says that $V\\times_X\\operatorname{Spec}\\kappa(u)$ is quasi-compact, since $V$ is affine. This is $W_u$ by the universal property of the fibre product: both specify a $V$-section with prescribed image in $X$. It is etale over $\\kappa(u)$ by [def-trf-algebraic-space]. By [lem-weil-pbc-etale-fibre-discrete-separable-points], it is a disjoint union of spectra of finite separable extensions of $\\kappa(u)$. These open components cover a quasi-compact space, so only finitely many occur. By [lem-weil-pbc-finite-affine-coproduct-spectrum] their union is the spectrum of their finite product of fields. This product is a finite-dimensional $\\kappa(u)$-algebra, so $W_u$ is finite with a well-defined nonnegative degree $\\delta(u)$. This includes the empty fibre, whose algebra is zero and degree is zero.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BB6, finite-fibre argument, using directly the field-map definition of decency instead of choosing monomorphic residue representatives; morphisms.tex Tag 02GL."
+   }
+  },
+  {
+   "text": "The affine scheme $U$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], and locally Noetherian by the hypothesis on $X$, so it is Noetherian. By [lem-weil-pbc-noetherian-finitely-many-components] its irreducible components are finite in number. By [lem-weil-pbc-scheme-sober] each has a generic point $\\eta_i$. Put $n=\\max_i\\delta(\\eta_i)$, taking $n=0$ when $U$ is empty. The new lemma [lem-sfb-flat-lfp-lqf-degree-superlevel-open] makes $D=\\{u:\\delta(u)\\ge n+1\\}$ open. It is empty: if it met a component at $u$, its intersection with that component would be a nonempty open and would contain its generic point (the closure of that point is the component), contradicting the choice of $n$. By [lem-sc-irreducible-components-cover], every point lies in an irreducible component; thus $\\delta(u)\\le n$ for all $u$. This produces a uniform bound from finite generic degrees, rather than assuming quasi-compactness of $W$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-scheme-sober",
+    "lem-sfb-flat-lfp-lqf-degree-superlevel-open",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BB6, generic-degree maximum and emptiness of U_{n+1}; more-morphisms.tex Tag 086R."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-fp-lqf-bounded-stratification] to $p:W\\to U$: step 1 supplies flatness, local finite presentation, separatedness and local quasi-finiteness, and steps 2 and 3 supply finite fibres with degree bounded by $n$. It gives closed subsets $\\varnothing=Z_{-1}\\subseteq Z_0\\subseteq\\cdots\\subseteq Z_n=U$ and disjoint locally closed strata $S_r=Z_r\\setminus Z_{r-1}$ covering $U$. Use [lem-weil-pbc-reduced-induced-closed-subscheme] to give each $Z_r$ its reduced induced closed-subscheme structure and $S_r$ its open-subscheme structure inside $Z_r$. Applying the cited universal property to the morphism $S_r\\to U$ shows that $W_r=W\\times_US_r\\to S_r$ is finite locally free of degree $r$ for every $0\\le r\\le n$. Empty strata and degree zero are permitted.",
+   "uses": [
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BB6, application of more-morphisms.tex Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded)."
+   }
+  },
+  {
+   "text": "Each $S_r$ is quasi-compact. Here is the topological argument, so no finiteness theorem about subschemes is being suppressed. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], closed subsets of the Noetherian scheme $U$ satisfy the minimal condition. Equivalently, every nonempty family of open subsets has a maximal member. For any subset $A\\subseteq U$ and any cover $A\\subseteq\\bigcup_{i\\in I}O_i$ by ambient opens, take a maximal finite union among $\\{\\bigcup_{i\\in J}O_i:J\\subseteq I\\text{ finite}\\}$. Adjoining any $O_i$ cannot enlarge it, so this finite union contains all the $O_i$ and covers $A$. Thus every subspace $A$ is quasi-compact, in particular $S_r$ with its locally closed subspace topology.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0BB6 final paragraph expanded using the minimal condition for Noetherian spaces; properties.tex lemma-Noetherian-topology."
+   }
+  },
+  {
+   "text": "The map $W_r\\to S_r$ is finite by [def-pc-finite-locally-free], hence affine by [def-weil-finite-integral-morphism]. Cover the quasi-compact scheme $S_r$ by finitely many affine opens, using [lem-weil-pbc-affine-opens-basis]. The inverse image of each is affine by [lem-weil-pbc-affine-morphism-permanence](1),(2), hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. These finitely many inverse images cover $W_r$; any open cover of $W_r$ therefore has a finite subcover, by taking finite subcovers on the finitely many inverse images. Thus $W_r$ is quasi-compact. This argument also handles $S_r=\\varnothing$.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BB6, final paragraph, finite-locally-free strata are quasi-compact; affine-cover proof spelled out."
+   }
+  },
+  {
+   "text": "The projections $W_r\\to W$ are continuous and their images cover $W$. Indeed, let $w\\in W$; since the $S_r$ partition $U$, the point $u=p(w)$ lies in some $S_r$, and we write $s$ for the corresponding point of the scheme $S_r$, lying over $u$. The ring $\\kappa(w)\\otimes_{\\kappa(u)}\\kappa(s)$ is a tensor product of two field extensions of $\\kappa(u)$, hence nonzero and has a prime ideal; by [lem-weil-pbc-fibre-product-points] there is a point of $W_r=W\\times_US_r$ mapping to $w$. Pull any open cover of $W$ back to each quasi-compact $W_r$, choose a finite subcover there, and combine these for $0\\le r\\le n$. The resulting finite set of opens covers $W$. Hence $U\\times_XV$ is quasi-compact for every pair of affine etale charts. Apply [lem-sfb-etale-affine-pairs-test-quasiseparated] to obtain quasi-compactness on scheme tests of $\\Delta_X$, as required. We use a finite partition by locally closed images, not an isomorphism of $W$ with their scheme coproduct. No global quasi-compactness of $X$ was used.",
+   "uses": [
+    "lem-sfb-etale-affine-pairs-test-quasiseparated",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0BB6, final sentence and opening reduction via spaces-properties.tex Tag 0AHR."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-a1-space-monic-diagonal-tests",
+  "lem-sc-irreducible-components-cover",
+  "lem-sfb-etale-affine-pairs-test-quasiseparated",
+  "lem-sfb-flat-lfp-lqf-degree-superlevel-open",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 0BB6 (lemma-locally-Noetherian-decent-quasi-separated), complete proof; scheme-test separatedness and finite-union arguments expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every locally Noetherian decent algebraic space is quasi separated",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥X], AlgebraicGeometry.QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every affine scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is itself quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsSeparated], QuasiSeparatedSpace ↥X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X], AlgebraicGeometry.QuasiSeparated X.toSpecΓ\", \"doc\": \"If the underlying topological space of a scheme $X$ is quasi-separated, then the canonical morphism from $X$ to the affine scheme associated with its ring of global sections $\\\\operatorname{Spec}(\\\\Gamm\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hY : QuasiSeparatedSpace ↥Y] [AlgebraicGeometry.QuasiSeparated f],\\n  QuasiSeparatedSpace ↥X\", \"doc\": \"If $ Y $ is a quasi-separated topological space and the morphism $ f: X \\\\to Y $ of schemes is quasi-separated, then the underlying topological space of $ X $ is also quasi-separated.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Z : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X] {f : Z ⟶ X}\\n  [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Every open immersion $ f: Z \\to X $ into a locally Noetherian scheme $ X $ is a quasi-compact morphism. That is, if $ X $ admits an open cover by Noetherian schemes and $ f $ is an open immersion (a mo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness of the diagonal of a decent algebraic space with locally Noetherian etale charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"@AlgebraicGeometry.QuasiSeparated = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\to Y $ of schemes, the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥X],\\n  AlgebraicGeometry.QuasiCompact\\n    (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"For any quasi-separated scheme $ X $, the diagonal morphism $ X \\to X \\times X $ (constructed as the product of the identity morphism with itself) is quasi-compact. This follows from the definition of q\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  QuasiSeparatedSpace ↥X ↔\\n    AlgebraicGeometry.QuasiCompact\\n      (CategoryTheory.Limits.prod.lift (CategoryTheory.CategoryStruct.id X) (CategoryTheory.CategoryStruct.id X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [QuasiSeparatedSpace ↥Y] (f g : X ⟶ Y),\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.equalizer.ι f g)\", \"doc\": \"If $ Y $ is a quasi-separated scheme, then the equalizer morphism $ \\\\iota $ of any two morphisms $ f, g : X \\\\to Y $ is quasi-compact. This follows from the property that in a quasi-separated space, th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiSeparated\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]ecent|AlgebraicSpace",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Data/Ordmap/Ordset.lean\", \"line\": \"33\", \"text\": \"because there is a decent amount of slop in the actual data structure invariants, so the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally Noetherian decent algebraic spaces have quasi compact diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\to Y $ of schemes, the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": QuasiSeparatedSpace X ↔ QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"A scheme $X$ is quasi-separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"[QuasiSeparatedSpace X] : QuasiCompact (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any quasi-separated scheme $ X $, the diagonal morphism $ X \\to X \\times X $ (constructed as the product of the identity morphism with itself) is quasi-compact. This follows from the definition of q\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.QuasiSeparated f ↔\\n    autoParam (AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal._autoParam\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"[IsAffine Y] (f : X ⟶ Y) :\\n  AffineTargetMorphismProperty.diagonal (fun X _ _ _ ↦ CompactSpace X) f ↔ QuasiSeparatedSpace X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": @QuasiSeparated = MorphismProperty.diagonal @QuasiCompact\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is quasi-separated if and only if its diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact. This establishes the equivalence between the quasi-separatedness p\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes or general category theory; none supplies this algebraic-space descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every locally Noetherian decent algebraic space is quasi separated",
+   "results": "{\"t\": \"2026-10-23T15:04:35Z\", \"tool\": \"leanfinder\", \"query\": \"Every locally Noetherian decent algebraic space is quasi separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\"], \"digest\": \"65e096fc1c53acb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locally-Noetherian quasi-separatedness does not apply to an algebraic space; no algebraic-space decency or diagonal result found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compact diagonal of an algebraic space whose field valued points are quasi compact and whose etale charts are locally Noetherian",
+   "results": "{\"t\": \"2026-10-23T15:04:37Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi compact diagonal of an algebraic space whose field valued points are quasi compact and whose etale charts are locally Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\"], \"digest\": \"87fa1f6e3511c6ca\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locally-Noetherian quasi-separatedness does not apply to an algebraic space; no algebraic-space decency or diagonal result found"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]ecent|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T15:04:51Z\", \"tool\": \"grep\", \"query\": \"[Dd]ecent|AlgebraicSpace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Data/Ordmap/Ordset.lean\"], \"digest\": \"035261f8bac28890\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locally-Noetherian quasi-separatedness does not apply to an algebraic space; no algebraic-space decency or diagonal result found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally Noetherian decent algebraic spaces have quasi compact diagonal",
+   "results": "{\"t\": \"2026-10-23T15:04:52Z\", \"tool\": \"leansearch\", \"query\": \"Locally Noetherian decent algebraic spaces have quasi compact diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\"], \"digest\": \"5c5a77b85f1d2c5a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locally-Noetherian quasi-separatedness does not apply to an algebraic space; no algebraic-space decency or diagonal result found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiSeparated\"",
+   "results": "{\"t\": \"2026-10-23T15:04:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"QuasiSeparated\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme locally-Noetherian quasi-separatedness does not apply to an algebraic space; no algebraic-space decency or diagonal result found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-affine-neighbourhood-scheme-descent",
+  "date": "2026-10-23",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: descent: Tag 0B8F proof, third input 0B88; descend the scheme using the finite-point affine condition. Auxiliary for the present split: quasi-separatedness needed for the finite-field-extension limit in the final paragraph of Tag 0B88.",
+   "via": [
+    "lem-sfb-geometric-affine-neighbourhood-scheme-descent",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-locally-noetherian-decent-quasiseparated",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0BB6 against the field-map decency formulation; kept the statement and its hypotheses unchanged. Seven proof steps expose separatedness, finite fibres, the generic-point bound, bounded stratification and finite-cover compactness. Reused the existing 07RY stratification and generic scheme tools; added only the 086R open-degree locus and the 0AHR etale-pair test as statement-only nodes. No project attachment or Mathlib leaf found.",
+  "blueprint": "The inherited nearest imported ancestor is null, as blueprint_refs.py ancestor reports. The recorded route is det-thm-sf-ctf-stability-direct-images proof (3), via the geometric affine-neighbourhood descent input for Tag 0B88; this item supplies its locally-Noetherian/decent quasi-separatedness prerequisite without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-monic-diagonal-tests",
+    "why": "Generic scheme or algebraic-space diagonal/fibre/topology tool within the fixed Tag 0BB6 proof; it does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme or algebraic-space diagonal/fibre/topology tool within the fixed Tag 0BB6 proof; it does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme or algebraic-space diagonal/fibre/topology tool within the fixed Tag 0BB6 proof; it does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "why": "Generic scheme or algebraic-space diagonal/fibre/topology tool within the fixed Tag 0BB6 proof; it does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme or algebraic-space diagonal/fibre/topology tool within the fixed Tag 0BB6 proof; it does not replace the constructibility unit route."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme or algebraic-space diagonal/fibre/topology tool within the fixed Tag 0BB6 proof; it does not replace the constructibility unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-monic-diagonal-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-118851a3a",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-118851a3a (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full against Stacks 0BB6 (decent-spaces.tex l.3272, full proof), 086R (more-morphisms lemma-stratify-flat-fp-lqf), 07RY and 0AHR (spaces-properties lemma-characterize-quasi-separated; its (3)=>(1) proof uses only affine opens of an etale atlas, so the etale-pair variant is true). The item statement is unchanged and every step checks out. Step 1: the monic-diagonal-tests instantiation (X=V, T=S=Spec Z, B=U, Y=W) correctly gives a separated p. Step 2 applies field-map decency to get finite etale fibres, empty case included. Step 3: the new 086R node plus generic points shows {delta>=n+1} is empty, so the fibre degrees are bounded. Step 4 applies the 07RY universal property to S_r inside (Z_r)_red. Steps 5 and 6 are genuinely elementary: subspaces of a Noetherian space are quasi-compact, and finite implies affine gives quasi-compact W_r. New 086R node: hypotheses complete; tested on an open immersion, d=0, and the line with doubled origin, which shows separatedness is needed. It is not a duplicate of the 07RY, 07RZ, maximal-degree-locus or space-etale-maximum-degree nodes, which all assume a bound or quasi-compactness. New 0AHR node: tested on the plane with doubled origin. It is not a duplicate of the def-sfb-space-absolute-quasi-separated definition (all affine maps), lem-sfb-space-qs-atlas-criterion (07S4) or the scheme-only criterion. It is a generic test, not a restatement of the item. Batch-5 flags: def-trf-algebraic-space and lem-trf-space-fibre-products-etale-covers are a general definition and a generic fibre-product lemma, both already in the base stmt_deps; def-sfb-space-absolute-quasi-separated is a definition; lem-a1-space-monic-diagonal-tests is a generic diagonal formula reaching sec-trace-formula only through the definition. None is a trace-formula or Poincare step. I accept the six generic scheme/space tool_uses. No SGA. FIX (C1): step 7 claimed that W_r=W x_U S_r -> W cover W 'since the S_r partition U', which is surjectivity of points of fibre products (01JT) and was uncited. The fixed step gives the kappa(w) tensor kappa(s) nonzero argument and cites the existing Mathlib leaf lem-weil-pbc-fibre-product-points, also added to step 7 uses and proof_deps. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-locally-noetherian-decent-quasiseparated.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyNoetherianDecentQuasiSeparated",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isAbsolutelyQuasiSeparated_of_locallyNoetherian_of_decent",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyNoetherianDecentQuasiSeparated.lean",
+  "statement": "theorem isAbsolutelyQuasiSeparated_of_locallyNoetherian_of_decent (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hdecent : ∀ (K : Type u) [Field K] (b : Spec (CommRingCat.of K) ⟶ Spec (.of (ULift.{u} ℤ))) (c : yoneda.obj (Over.mk b) ⟶ X.obj.obj) (U : Over (Spec (.of (ULift.{u} ℤ)))), IsAffine U.left → ∀ a : yoneda.obj U ⟶ X.obj.obj, ∃ (W : Over (Spec (.of (ULift.{u} ℤ)))) (p : W ⟶ U) (q : yoneda.obj W ⟶ yoneda.obj (Over.mk b)), IsPullback q (yoneda.map p) c a ∧ CompactSpace W.left) : IsAbsolutelyQuasiSeparated X ∧ ∀ (U V : Over (Spec (.of (ULift.{u} ℤ)))) (a : yoneda.obj U ⟶ X.obj.obj) (b : yoneda.obj V ⟶ X.obj.obj), IsAffine U.left → IsAffine V.left → IsEtale a → IsEtale b → ∃ (W : Over (Spec (.of (ULift.{u} ℤ)))) (p : W ⟶ U) (q : W ⟶ V), IsPullback (yoneda.map p) (yoneda.map q) a b ∧ CompactSpace W.left",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b6b0a267",
+  "group": "N5",
+  "result": "pass",
+  "note": "Clause-by-clause against node and Stacks 0BB6 (decent-spaces.tex l.3272). X : AlgebraicSpace (Spec ULift ℤ). hln is over all EtaleSite objects (IsLocallyNoetherian of the source scheme). hdecent is field-map decency over arbitrary affine tests, with the IsPullback square pinning the fibre product (same format as landed DecentSpaceFiniteFieldMap). Conclusion is the landed IsAbsolutelyQuasiSeparated (0AHR(3)) plus the affine étale-pair clause; square orientations checked. Node diff vs live: lean plus stmt_dep def-sfb-space-absolute-quasi-separated (landed, reviewed, owns the def). Statement verbatim; sorry only; no defs; docstrings carry source, blueprint id and 7-step proof; no duplicate decency/locNoeth def; private imports exist; report sections present; edge cases (empty X/U/fibres, field universe u) ok. No compile (no file changed); worker's compile evidence is clean. No findings."
+ }
+}

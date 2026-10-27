@@ -1,0 +1,129 @@
+{
+ "id": "lem-pe-coefficient-stratified-essential-image",
+ "kind": "lemma",
+ "title": "Stratified descent of etale origin with independent coefficient size",
+ "statement": "Let X be a scheme, A an arbitrary commutative ring in the coefficient universe, S a finite constructible locally closed scheme stratification, and F a fixed-scalar module sheaf on the coefficient-sized pro-etale site. Suppose each pullback along a stratum immersion is in the essential image of the corresponding fixed-scalar etale comparison inverse image. Then F itself is in that essential image. Neither finite local models nor Noetherian coefficients nor quasi-compactness of X are assumed. Stratification and pullbacks are as in [def-sfb-affine-locally-constructible-proetale-modules], and comparison is [def-weil-pbc-site-comparison-morphism].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AK, lemma-compare-constructible, finite-partition induction with etale origins already supplied on the strata"
+ },
+ "stmt_deps": [
+  "def-sfb-affine-locally-constructible-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use coefficient-sized Zariski locality [lem-pe-coefficient-origin-open-cover]. Induct strongly on the number of strata for all schemes. For any point select its stratum and apply [lem-sf-constructible-partition-local-closed-stratum] to obtain an affine neighborhood where its pullback immersion is closed and its complementary open is quasi-compact. If there are no strata, there are no points and the open cover is empty.",
+   "uses": [
+    "lem-pe-coefficient-origin-open-cover",
+    "lem-sf-constructible-partition-local-closed-stratum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the comparison/pullback and composite-pullback isomorphisms by conjugating the sectionwise direct-image isomorphisms under the canonical Kan-extension/sheafification adjunctions. Transport each stratum origin through the Cartesian pullback square. Pull the stratification first to the affine neighborhood and then to the complement. The selected stratum is empty there; erase its Fin index using succAbove and apply the strong induction hypothesis to the remaining strata. These mates and the erased stratification are implemented as fully proved private helpers in the item, with no remaining hole.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The selected closed stratum has etale origin by the proved pullback helper, and the complement by induction. Apply affine open-closed gluing [lem-pe-coefficient-origin-affine-open-closed]. The neighborhoods cover X, so the first step finishes. Full-image closed immersions are retained as closed immersions, with no false isomorphism assertion.",
+   "uses": [
+    "lem-pe-coefficient-origin-affine-open-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-coefficient-origin-open-cover",
+  "lem-sf-constructible-partition-local-closed-stratum",
+  "lem-pe-coefficient-origin-affine-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "U7",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AK, lemma-compare-constructible, actual finite-stratum induction in Lean; two coefficient-sized descent steps isolated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pro-etale module sheaf locally constant on each stratum of a finite constructible stratification is classical and its affine inverse limit continuity map is an isomorphism",
+   "results": "['CompHausLike.LocallyConstantModule.functor', 'LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor', 'LightCondMod.LocallyConstant.functorIsoDiscreteAux₂', 'CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor', 'LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat', 'LightCondMod.isDiscrete_tfae', 'LightCondMod.LocallyConstant.functorIsoDiscreteComponents', 'LightCondMod.ofSheafLightProfinite']",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuityMap\"",
+   "results": "[]",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison_essImage_of_stratification|coefficientStratified|proEtaleComparisonSets_continuous",
+   "results": "[]",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented locally constant proetale module descends to the etale site, and etale origin is stable under finite stratifications and continuous on affine cofiltered limits.",
+   "results": "['Algebra.Etale.finitePresentation', 'SheafOfModules.isFinitePresentation', 'SheafOfModules.IsFinitePresentation.mk', 'SheafOfModules.IsFinitePresentation', 'SheafOfModules.quasicoherentDataOfIsFinitePresentation', 'Profinite.exists_locallyConstant', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget', 'SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation']",
+   "date": "2026-10-25",
+   "verdict": "No coefficient-sized etale/pro-etale local-system, stratified-origin, or affine comparison continuity theorem was found. The existing original-site results fix the coefficient universe."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientStratifiedContinuity",
+  "date": "2026-10-26",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "proof finite-stratification paragraph: open-closed induction and Zariski locality",
+   "via": [
+    "lem-pe-coefficient-stratified-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientStratifiedEssentialImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientStratifiedEssentialImage.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientFixed_essImage_of_stratification",
+  "statement": "theorem coefficientFixed_essImage_of_stratification (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (S : Scheme.Stratification X)\n    (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A))\n    (hS : ∀ k : Fin S.n,\n      (Functor.sheafPullbackConstruction.sheafPullback\n        (Scheme.smallModelComparisonInclusion.{u, v} (S.domain k))\n        (ModuleCat.{max v (u + 1)} A)\n        (Scheme.smallModelComparisonEtaleTopology.{u, v} (S.domain k))\n        (Scheme.coefficientProEtaleModelTopology.{u, v} (S.domain k))).essImage\n          ((Scheme.coefficientProEtaleFixedModulePullback.{u, v} (S.immersion k) A).obj F)) :\n    (Functor.sheafPullbackConstruction.sheafPullback\n      (Scheme.smallModelComparisonInclusion.{u, v} X) (ModuleCat.{max v (u + 1)} A)\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X)).essImage F",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261025T180758-L-4033505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T203354-L-2809955",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

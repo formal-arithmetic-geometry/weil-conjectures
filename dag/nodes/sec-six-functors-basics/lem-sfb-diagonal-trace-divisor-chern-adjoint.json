@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-diagonal-trace-divisor-chern-adjoint",
+ "kind": "statement",
+ "title": "The two tower Chern components of the diagonal divisor",
+ "statement": "theorem diagonalTrace_divisorChernAdjoint_components\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (Y : Scheme.{u})\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (hS : IsUnit (l : Γ(ProjectiveLine Y, ⊤)))\n    (hX : IsUnit (l : Γ(diagonalSurface Y, ⊤)))\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨\n      f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))\n    (p : Presentation l E f) :\n    ∃ β : unit (ProjectiveLine Y) (Arings l E (ProjectiveLine Y)) ⟶\n        (line l E p.chernS)⟦(2 : ℤ)⟧,\n      (SpTowerShriek.adjunction l E p.base p.model.geometry).homEquiv _ _\n          ((p.model.coefficientPullback.derivedIso l E).hom ≫\n            firstChern l E p.chernX (diagonalPic Y)) =\n        β ≫ p.model.twistedUnit l E + p.model.chernAdjoint l E",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), diagonal components before trace; the additivity and adjunction steps of lem-amb-p1-diagonal-chern-components, using tower Chern pullback"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sp-tower-class-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Factor diagonalPic as the pullback of an invertible base module times the hyperplane class of p.model.",
+   "uses": [
+    "lem-sfb-diagonal-trace-diagonal-pic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use tower_lineBundleClass_mul for additivity of the actual integral constant-system line class. The reduction and scalar functors are additive by their adjunctions, and endpoint composition distributes over sums. This proves firstChernR_mul and firstChern_mul without expanding the line-class comparison in this module.",
+   "uses": [
+    "lem-sfb-tower-line-bundle-class-additive",
+    "def-sp-tower-class-chern"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply tower_firstChern_pullback to the base line, with p.normalizedS, p.normalizedX and the model coefficient and line pullback comparisons. This identifies the base summand with pullback of its base Chern morphism followed by the shifted line comparison.",
+   "uses": [
+    "lem-sp-tower-chern-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take adjuncts of the sum. The hom equivalence is additive; naturality in its source identifies the base summand with beta followed by twistedUnit. The other adjunct is chernAdjoint by definition.",
+   "uses": [
+    "def-sfb-diagonal-trace-presentation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sp-tower-class-chern",
+  "lem-sfb-diagonal-trace-diagonal-pic",
+  "lem-sfb-tower-line-bundle-class-additive",
+  "lem-sp-tower-chern-pullback"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), diagonal components before trace; the additivity and adjunction steps of lem-amb-p1-diagonal-chern-components, using tower Chern pullback",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "First Chern classes preserve tensor products as addition and their pullback adjunction preserves the sum of morphisms",
+   "results": "8 hits: CategoryTheory.tensor_sum, VectorField.mpullbackWithin_add_apply, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, LinearMap.lTensor_add, CategoryTheory.tensorRight_additive, VectorField.mpullback_add, VectorField.mpullback_add_apply, CategoryTheory.MonoidalPreadditive.add_tensor",
+   "date": "2026-10-27",
+   "verdict": "No exact scheme-theoretic or tower-derived statement. Generic additive adjunction lemmas are used in the proved combination."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first Chern class of a tensor product is the sum of the first Chern classes, compatibly with pullback and adjunction",
+   "results": "8 hits: CommRing.Pic.mk_tensor, CommRing.Pic.mul_eq_tensor, KaehlerDifferential.tensorKaehlerEquiv_tmul, KaehlerDifferential.tensorKaehlerEquivBase_tmul, KaehlerDifferential.tensorKaehlerEquiv_tmul_D, CommRing.Pic.mapAlgebra_apply, FDRep.char_tensor, CommRing.Pic.mapAlgebra",
+   "date": "2026-10-27",
+   "verdict": "No exact scheme-theoretic or tower-derived statement. Generic additive adjunction lemmas are used in the proved combination."
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*mapHom|firstChern.*mul|homAddEquiv_add",
+   "results": "1 hits: Mathlib/CategoryTheory/Adjunction/Additive.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact scheme-theoretic or tower-derived statement. Generic additive adjunction lemmas are used in the proved combination."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePretraceComponents",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), diagonal components before trace; the additivity and adjunction steps of lem-amb-p1-diagonal-chern-components, using tower Chern pullback",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-pretrace-components"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceDivisorChernAdjoint",
+  "file": "lean/Sheaf/Paper/DiagonalTraceDivisorChernAdjoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_divisorChernAdjoint_components",
+  "statement": "theorem diagonalTrace_divisorChernAdjoint_components\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (Y : Scheme.{u})\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (hS : IsUnit (l : Γ(ProjectiveLine Y, ⊤)))\n    (hX : IsUnit (l : Γ(diagonalSurface Y, ⊤)))\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨\n      f = pullback.snd (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))\n    (p : Presentation l E f) :\n    ∃ β : unit (ProjectiveLine Y) (Arings l E (ProjectiveLine Y)) ⟶\n        (line l E p.chernS)⟦(2 : ℤ)⟧,\n      (SpTowerShriek.adjunction l E p.base p.model.geometry).homEquiv _ _\n          ((p.model.coefficientPullback.derivedIso l E).hom ≫\n            firstChern l E p.chernX (diagonalPic Y)) =\n        β ≫ p.model.twistedUnit l E + p.model.chernAdjoint l E",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.DiagonalTraceFinitePretraceComponents",
+  "worker": "S4",
+  "summary": "The two tower Chern components of the diagonal divisor",
+  "blueprint": "paragraph (2), diagonal components before trace; the additivity and adjunction steps of lem-amb-p1-diagonal-chern-components, using tower Chern pullback",
+  "tool_uses": [
+   {
+    "node": "lem-sp-tower-chern-pullback",
+    "why": "Generic functoriality of the Kummer Chern morphism under scheme pullback, used with the normalized model comparisons; it makes no assertion about trace or integration."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T034739-L-3681203",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T034739-L-3681203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-affine-residue-lisse-tree",
+ "kind": "statement",
+ "title": "Residue-lisse refinement on qcqs weakly etale objects of an affine open-closed tree",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite extension, and $X$ any scheme. Let $K,L$ be integral constructible complexes of completed integral $E$-coefficient sheaves on $X_{\\mathrm{proet}}$ [def-weil-derived-complete-integral-detailed]. Each affine open $U$ admits a finite qcqs open-closed tree [def-sfb-qcqs-open-closed-tree] such that, on every qcqs weakly etale object $V$ of each nonempty leaf $S$, the ordinary uncompleted derived pullback [def-sf-ordinary-integral-derived-pullback] of either input along $V\\to S\\to U\\to X$ is complete. For each input and object there are integers $a\\le b$ such that the exponent-one residue cohomology vanishes outside $[a,b]$ [def-weil-integral-derived-reduction] and in every degree has locally constant models [def-weil-proetale-locally-constant-sheaf] finite as modules over the exponent-one residue coefficient ring. No projective model or finite chart family is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.5.5--6.5.8; Stacks topology.tex Tag 09Y4, lemma-constructible-partition-refined-by-stratification"
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-sfb-qcqs-open-closed-tree",
+  "def-sf-ordinary-integral-derived-pullback",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-integral-derived-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Take the common finite residue-cohomology interval. Choose the constructible stratification of every cohomology sheaf of both inputs in that interval and pull these finitely many partitions back to U. Use the existing constructible-cut helper to choose qc open neighborhoods and their complementary cuts. Iterate the binary pullback replacement over all strata, preserving earlier factorizations, and recursively forget ambient structural maps to obtain QcqsOpenClosedTree with each nonempty leaf factoring through a stratum of every partition.",
+   "uses": [
+    "lem-fix-constructible-open-closed-refinement",
+    "def-fix-scheme-refinement-tree"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Completeness on every qcqs weakly etale leaf object is the ordinary restriction theorem proved separately, with no ambient qcqs or invertibility assumption.",
+   "uses": [
+    "lem-sf-affine-constructible-restriction-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing finiteModels_of_lisse_stalks helper to obtain finite module models on every original residue stratum. Pull these models through the actual leaf factorization and use the constant-module pullback composition isomorphism. The ordinary integral reduction/homology comparison transfers both these models and the original cohomology bounds to the composite ordinary pullback. Outside the common interval use the zero model. Empty leaves impose no conditions.",
+   "uses": [
+    "lem-fix-constructible-residue-tree",
+    "lem-fix-ordinary-integral-reduction-homology",
+    "lem-pur-proetale-module-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-scheme-refinement-tree",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-fix-constructible-residue-tree",
+  "lem-fix-ordinary-integral-reduction-homology",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-sf-affine-constructible-restriction-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Stacks Topology Tag 09Y4 and Bhatt--Scholze Lemmas 6.5.5--6.5.8; direct binary constructible-cut iteration and ordinary reduction/homology transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary proetale pullback of a derived complete integral complex along an immersion preserves derived completeness",
+   "results": "Eight general etale morphism and pullback-category hits; none is the completed-coefficient restriction or residue refinement. Local project search found the existing qcqs restriction proof whose underlying ingredients have no qcqs assumption.",
+   "date": "2026-10-27",
+   "verdict": "no exact Mathlib match; reuse the project restriction and chart APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimitsOfSize\", \"SheafOfModules\"",
+   "results": "SheafOfModules.forgetPreservesLimitsOfSize and evaluationPreservesLimitsOfSize; two presheaf analogues. These support limits but do not identify completed-coefficient pullback or the quotient unit.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSfDerivedComplete|constructible_residue_tree|ordinaryCompositeCompletionUnit_isIso",
+   "results": "msearch Mathlib grep returned no hits. Project rg found ConstructibleResidueTree, QcqsCompletionUnitRestriction and QcqsOrdinaryRestrictionExact. Their private proved helpers supply the normalization, residue-model and limit arguments.",
+   "date": "2026-10-27",
+   "verdict": "reuse existing project proofs locally; avoid their extra ambient hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteTorAffineProjectiveCharts",
+  "date": "2026-10-27",
+  "group": "A9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "\"Thus coherence is inherited from the individual maps on the stated domains\"; ordinary tensor completeness on the stated integral finite-Tor domain, via common projective charts: Residue-lisse refinement on qcqs weakly etale objects of an affine open-closed tree",
+   "via": [
+    "lem-sf-finite-tor-ordinary-tensor-complete",
+    "lem-sf-primitive-completion-effectivity",
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-finite-tor-affine-projective-charts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.AffineResidueLisseTree",
+  "file": "lean/Sheaf/SixFunctors/AffineResidueLisseTree.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.affineResidueLisseTree",
+  "statement": "theorem affineResidueLisseTree\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : Scheme.{u}) (K L : IntegralOnSlice.D.{u, u} l E X none)\n    (hK : sfIntegralConstructible l E X K)\n    (hL : sfIntegralConstructible l E X L)\n    (U : X.Opens) [IsAffine U.toScheme] :\n    ∃ tree : QcqsOpenClosedTree U.toScheme,\n      ∀ (S : Scheme.{u}) (p : tree.Path S), p.IsLeaf → Nonempty S →\n        ∀ (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V]\n          (r : V ⟶ S) [WeaklyEtale r]\n          (M : IntegralOnSlice.D.{u, u} l E X none), M = K ∨ M = L →\n          IntegralOnSlice.IsComplete l E V none\n            ((ordinaryIntegralDerivedPull l E (r ≫ p.toRoot ≫ U.ι)).obj M) ∧\n          ∃ a b : ℤ, a ≤ b ∧\n            (∀ q : ℤ, q < a ∨ b < q → IsZero\n              ((DerivedCategory.homologyFunctor _ q).obj\n                ((scalarReductionDerivedExtension l E V 0).obj\n                  ((ordinaryIntegralDerivedPull l E (r ≫ p.toRoot ≫ U.ι)).obj M)))) ∧\n            (∀ q : ℤ, IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses V\n              (Padic.coefficientExtensionRing l E 1)\n              (fun N ↦ Module.Finite (ULift.{u + 1}\n                (Padic.coefficientExtensionRing l E 1)) N)\n              ((DerivedCategory.homologyFunctor _ q).obj\n                ((scalarReductionDerivedExtension l E V 0).obj\n                  ((ordinaryIntegralDerivedPull l E (r ≫ p.toRoot ≫ U.ι)).obj M))))",
+  "branch": "sheaf-dag",
+  "by": "A9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T034618-L-3665902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261027T034618-L-3665902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -65,6 +65,15 @@
   "note": "attached by the lead's tool attach.py 2026-10-21 04:14 UTC for group Q104, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_e47efb5a.jsonl.gz: Assuming only monoidal categories, lax monoidal F, a monoid A and its modules/maps, modObjObj supplies the transported module ove"
  },
  "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Functor.mapMod",
+    "CategoryTheory.Functor.modObjObj",
+    "CategoryTheory.Functor.act_mapMod_obj"
+   ]
+  },
   "slopmaster2": {
    "state": "closed",
    "decls": [
@@ -104,5 +113,26 @@
   }
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-def-sfb-transport"
+ "unit": "sk-def-sfb-transport",
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $F\\colon\\mathcal C\\to\\mathcal D$ be a lax monoidal functor between monoidal categories,\nwith structure maps $\\mu^F_{X,Y}\\colon FX\\otimes FY\\to F(X\\otimes Y)$ and\n$\\varepsilon^F\\colon\\mathbf 1\\to F\\mathbf 1$. Let $\\mathcal R$ be a monoid object of\n$\\mathcal C$ ([det-def-sfb-ring-object-monoid]). Then $F\\mathcal R$ is a monoid object of\n$\\mathcal D$, with multiplication $F(\\mu)\\circ\\mu^F_{\\mathcal R,\\mathcal R}$ and unit\n$F(\\eta)\\circ\\varepsilon^F$. For an $\\mathcal R$-module object $M$\n([det-def-sfb-module-objects-definition]), the morphism\n$$\nF\\mathcal R\\otimes FM\\xrightarrow{\\mu^F_{\\mathcal R,M}}F(\\mathcal R\\otimes M)\n\\xrightarrow{F\\gamma_M}FM\n$$\nmakes $FM$ an $F\\mathcal R$-module object. For an $\\mathcal R$-linear map $f$, the map\n$Ff$ is $F\\mathcal R$-linear. This defines the functor\n$$\n\\operatorname{mapMod}(F)\\colon\\Mod_{\\mathcal R}(\\mathcal C)\\to\\Mod_{F\\mathcal R}(\\mathcal D),\n$$\nwhich commutes with the forgetful functors.",
+  "proof": [
+   {
+    "text": "A lax monoidal functor sends monoid objects to monoid objects. The monoid axioms for\n$F\\mathcal R$ follow from those of $\\mathcal R$, naturality of $\\mu^F$, and the\nassociativity and unitality axioms of the lax structure.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Unit law for $FM$: by naturality of $\\mu^F$ and lax unitality\n$F(\\lambda_M)\\mu^F_{\\mathbf 1,M}(\\varepsilon^F\\otimes FM)=\\lambda_{FM}$,\n$$\nF(\\gamma_M)\\mu^F(F\\eta\\,\\varepsilon^F\\otimes FM)\n=F(\\gamma_M(\\eta\\otimes M))\\mu^F(\\varepsilon^F\\otimes FM)\n=F(\\lambda_M)\\mu^F(\\varepsilon^F\\otimes FM)=\\lambda_{FM}.\n$$\nAssociativity of the action follows in the same way, from naturality of $\\mu^F$, the\nassociativity axiom of the lax structure, and associativity of $\\gamma_M$. Linearity of\n$Ff$ is naturality of $\\mu^F$ applied to $\\gamma_N(\\mathcal R\\otimes f)=f\\gamma_M$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

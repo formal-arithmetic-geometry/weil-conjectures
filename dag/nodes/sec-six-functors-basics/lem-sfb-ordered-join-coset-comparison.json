@@ -1,0 +1,435 @@
+{
+ "id": "lem-sfb-ordered-join-coset-comparison",
+ "kind": "statement",
+ "title": "Uniform equivariant comparison with the ordered join of cosets",
+ "statement": "Let $G$ be a group, $H\\subseteq G$ a subgroup, $n\\geq1$ and $a_0,\\ldots,a_n\\in G$. For a set $Y$, let $B_q(Y)$, $q\\geq0$, be the free abelian group with specified basis the ordered $(q+1)$-tuples $[y_0,\\ldots,y_q]$, with repeated entries allowed [def-weil-pbc-free-module]. Put $B_{-1}(Y)=\\mathbf Z$ on the empty tuple and $B_q(Y)=0$ for $q<-1$. The boundary $d$ is alternating deletion, with $d[y]=1$ and $d(1)=0$ in degree $-1$. On $B_q(H)$ and $B_q(G)$ the action of $H$ is diagonal left translation, trivial in degree $-1$.\nLet $X_i=Ha_i$ for $0\\leq i\\leq n$, as separately labeled sets, and let $J_q$ be the ordered-join groups with basis $[(i_0,x_0),\\ldots,(i_q,x_q)]$, $i_0<\\cdots<i_q$, $x_j\\in Ha_{i_j}$, augmentation $J_{-1}=\\mathbf Z$ and alternating deletion boundary, as in [lem-sfb-ordered-join-partial-contraction] for $r=n+1$. Let $H$ act on $J_q$ by left translation of every vertex, $g[(i_0,x_0),\\ldots,(i_q,x_q)]=[(i_0,gx_0),\\ldots,(i_q,gx_q)]$ for $g\\in H$ (each $Ha_i$ is stable under left translation by $H$), and trivially on $J_{-1}$. For $h\\in H$, let $S^h$ be the explicit operator $S$ defined in that node with chosen vertices $v_i(h)=ha_i$. Define $P_q:B_q(H)\\to J_q$ on basis symbols, extended additively, by\n$$P_{-1}=1,\\qquad P_0[h_0]=[(0,h_0a_0)],\\qquad P_q[h_0,\\ldots,h_q]=S^{h_0}_{q-1}\\bigl(P_{q-1}(d[h_0,\\ldots,h_q])\\bigr)\\quad(1\\leq q\\leq n).$$\nThen $dP_q=P_{q-1}d$ for $0\\leq q\\leq n$, and $P_q(gz)=gP_q(z)$ for $g\\in H$ in all degrees $-1\\leq q\\leq n$.\nFor each $0\\leq q\\leq n$ there is a fixed finite list of integers $c_\\lambda$, strictly increasing color lists $i_{\\lambda,0}<\\cdots<i_{\\lambda,q}$ in $\\{0,\\ldots,n\\}$ and indices $j_{\\lambda,k}\\in\\{0,\\ldots,q\\}$ such that, for all $h_0,\\ldots,h_q\\in H$,\n$$P_q[h_0,\\ldots,h_q]=\\sum_\\lambda c_\\lambda[(i_{\\lambda,0},h_{j_{\\lambda,0}}a_{i_{\\lambda,0}}),\\ldots,(i_{\\lambda,q},h_{j_{\\lambda,q}}a_{i_{\\lambda,q}})].$$\nThe entire list is independent of the values of the $h_j$; repeated formal terms may be retained, so no equality test on vertices is required.\nErasing color labels defines homomorphisms $e_q:J_q\\to B_q(G)$, with $e_{-1}=1$. They commute with $d$ and with $H$-translation. Consequently $A_q=e_qP_q$ is an $H$-equivariant augmented chain map through degree $n$, with $A_{-1}=1$. In degree $n$, its image is contained in the integer span of tuples $[h_0a_0,\\ldots,h_na_n]$ with $h_i\\in H$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent arithmetic expansion below local continuous-cocycle descent; extracted argument of lem-sfb-homogeneous-cocycle-rectangle-detection, original steps 2–4. Not asserted by the blueprint text; continuous-coefficient partial-resolution comparison reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "lem-sfb-ordered-join-partial-contraction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the recursive comparison lemma for the chain-map and input-independent finite-formula clauses. Its proof uses the original contraction induction and color-only expansion. Equivariance is proved separately by induction on arity: tuple maps commute with deletion, the chosen vertices for h translate to those for gh, and naturality of the contraction gives the induction step. The arity-zero and arity-one cases are evaluated directly on basis vectors.",
+   "uses": [
+    "def-sfb-ordered-join-coset-chains",
+    "lem-sfb-ordered-join-coset-recursion",
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply erasure-boundary compatibility for every integer degree. Check erasure equivariance on Finsupp basis vectors: mapping the vertex list by left multiplication is the same as translating each colored vertex before taking the list. The tuple-map evaluation on tupleTerm follows directly from its linearCombination definition and preservation of length.",
+   "uses": [
+    "def-sfb-ordered-join-coset-chains",
+    "lem-sfb-ordered-join-coset-erasure-boundary"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The arity-zero comparison has a constant basis value, so linearCombination is total coefficient sum times the empty face. A degree-minus-one colored symbol has cardinality zero and hence no colors; its erased list is empty. This proves both augmentation formulas, and erasure sends the empty face to the empty tuple.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the comparison and erasure identities by associativity of linear maps to obtain chain-map and equivariance identities for A=eP. Handle the equality arityDegree(q)=q-1 separately in the zero and successor cases to avoid dependent index transports. Apply the proved comparison augmentation and linearity of erasure to obtain A_{-1}=1.",
+   "uses": [
+    "lem-sfb-ordered-join-coset-recursion",
+    "lem-sfb-ordered-join-coset-erasure-boundary"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In fact erasure of every degree-n join chain lies in the desired span, independently of P. A degree-n symbol has n+1 colors, so its color set equals all of Fin(n+1). Each vertex therefore supplies a witness h_i∈H for x_i=h_i a_i. Its erased list is ofFn(i↦h_i a_i), a generator of the stated span. Extend by finite sums and scalar multiplication, then apply this to P of the input chain.",
+   "uses": [
+    "def-sfb-ordered-join-coset-chains"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-ordered-join-coset-chains",
+  "lem-sfb-ordered-join-coset-recursion",
+  "lem-sfb-ordered-join-coset-erasure-boundary",
+  "lem-sfb-ordered-join-partial-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent ordered-coset expansion, calculations 1–7; the arithmetic is not asserted by the blueprint itself."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant augmented chain map from homogeneous group tuple chains to the ordered join of subgroup cosets, with a uniform finite coordinate formula",
+   "results": {
+    "t": "2026-10-22T06:10:40Z",
+    "tool": "leanfinder",
+    "query": "Equivariant augmented chain map from homogeneous group tuple chains to the ordered join of subgroup cosets, with a uniform finite coordinate formula",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.barComplex.d",
+     "groupHomology.inhomogeneousChains",
+     "groupHomology.inhomogeneousChains.d",
+     "Rep.standardComplex",
+     "Rep.barComplex",
+     "Rep.barComplex.d_single",
+     "Rep.FiniteCyclicGroup.resolution.π",
+     "groupHomology.chainsMap₂"
+    ],
+    "digest": "53f2fcff6c96c2c6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: standard/bar complexes and general chain-map constructors do not construct the ordered-coset join comparison with uniform integral coordinate formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"barResolution\", \"homotopy\"",
+   "results": {
+    "t": "2026-10-22T06:10:26Z",
+    "tool": "loogle",
+    "query": "\"barResolution\", \"homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: standard/bar complexes and general chain-map constructors do not construct the ordered-coset join comparison with uniform integral coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "(ordered.?join|coset).*(chain.?map|contraction)|(chain.?map|contraction).*(ordered.?join|coset)",
+   "results": {
+    "t": "2026-10-22T06:10:25Z",
+    "tool": "grep",
+    "query": "(ordered.?join|coset).*(chain.?map|contraction)|(chain.?map|contraction).*(ordered.?join|coset)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: standard/bar complexes and general chain-map constructors do not construct the ordered-coset join comparison with uniform integral coordinate formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct an equivariant chain map from homogeneous bar chains to a finite ordered join using contractions based at the first coordinate",
+   "results": {
+    "t": "2026-10-22T06:10:27Z",
+    "tool": "leansearch",
+    "query": "Construct an equivariant chain map from homogeneous bar chains to a finite ordered join using contractions based at the first coordinate",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChainComplex.ofHom",
+     "Homotopy.nullHomotopicMap'",
+     "CochainComplex.fromSingle₀Equiv",
+     "Homotopy.ofEq",
+     "homotopic",
+     "AlgebraicTopology.AlternatingFaceMapComplex.map",
+     "Homotopy.noConfusionType",
+     "Homotopy.homologyMap_eq"
+    ],
+    "digest": "0737225268db9387"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: standard/bar complexes and general chain-map constructors do not construct the ordered-coset join comparison with uniform integral coordinate formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a subgroup H of G construct a partial resolution map from the homogeneous H complex to chains with strictly increasing colors and vertices in cosets H a_i; the map is H equivariant and uses fixed finite integer formulas",
+   "results": {
+    "t": "2026-10-22T06:11:46Z",
+    "tool": "leanfinder",
+    "query": "For a subgroup H of G construct a partial resolution map from the homogeneous H complex to chains with strictly increasing colors and vertices in cosets H a_i; the map is H equivariant and uses fixed finite integer formulas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.FiniteCyclicGroup.resolution.π_f",
+     "Rep.FiniteCyclicGroup.resolution.π",
+     "Rep.barComplex",
+     "groupHomology.inhomogeneousChains",
+     "Rep.barComplex.d",
+     "Rep.barResolution_complex",
+     "Rep.standardComplex",
+     "Rep.FiniteCyclicGroup.resolution_π"
+    ],
+    "digest": "c14240b2071e12d6"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: standard/bar complexes and general chain-map constructors do not construct the ordered-coset join comparison with uniform integral coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "standardComplex|contractingHomotopy|homotopyEquiv|extraDegeneracy",
+   "results": {
+    "t": "2026-10-22T06:11:19Z",
+    "tool": "grep",
+    "query": "standardComplex|contractingHomotopy|homotopyEquiv|extraDegeneracy",
+    "sub": "RepresentationTheory/Homological/Resolution.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "9",
+     "59",
+     "62",
+     "134",
+     "135"
+    ],
+    "digest": "b7ece8c75173baae"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: standard/bar complexes and general chain-map constructors do not construct the ordered-coset join comparison with uniform integral coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "def mkInductive|def forget₂ToModuleCatHomotopyEquiv|def extraDegeneracyCompForgetAugmented",
+   "results": {
+    "t": "2026-10-22T06:12:23Z",
+    "tool": "grep",
+    "query": "def mkInductive|def forget₂ToModuleCatHomotopyEquiv|def extraDegeneracyCompForgetAugmented",
+    "sub": "RepresentationTheory/Homological",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean",
+     "Mathlib/RepresentationTheory/Homological/Resolution.lean"
+    ],
+    "digest": "97f1306067d8e0e0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: standard/bar complexes and general chain-map constructors do not construct the ordered-coset join comparison with uniform integral coordinate formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "(ordered.?join|coset).*(chain.?map|contraction)|(chain.?map|contraction).*(ordered.?join|coset)",
+   "results": {
+    "t": "2026-10-22T09:39:52Z",
+    "tool": "grep",
+    "query": "(ordered.?join|coset).*(chain.?map|contraction)|(chain.?map|contraction).*(ordered.?join|coset)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern standard/bar complexes, their differential or extra degeneracy, and abstract chain-map or homotopy constructors; none gives the specified ordered-coset comparison or its uniform coordinate formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivariant chain map from homogeneous bar chains to a finite ordered join using first-coordinate contractions",
+   "results": {
+    "t": "2026-10-22T09:39:53Z",
+    "tool": "leansearch",
+    "query": "An equivariant chain map from homogeneous bar chains to a finite ordered join using first-coordinate contractions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChainComplex.ofHom",
+     "CochainComplex.fromSingle₀Equiv",
+     "Homotopy.nullHomotopicMap'",
+     "homotopic",
+     "HomologicalComplex.Hom.ext_iff",
+     "Homotopy.ofEq",
+     "HomologicalComplex.Hom.ext",
+     "Homotopy.homologyMap_eq"
+    ],
+    "digest": "79bec480ef9eade1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern standard/bar complexes, their differential or extra degeneracy, and abstract chain-map or homotopy constructors; none gives the specified ordered-coset comparison or its uniform coordinate formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Rep.barComplex\", \"Homotopy\"",
+   "results": {
+    "t": "2026-10-22T09:39:53Z",
+    "tool": "loogle",
+    "query": "\"Rep.barComplex\", \"Homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern standard/bar complexes, their differential or extra degeneracy, and abstract chain-map or homotopy constructors; none gives the specified ordered-coset comparison or its uniform coordinate formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivariant augmented chain map from homogeneous group tuple chains to the ordered join of subgroup cosets has a fixed finite integer coordinate formula",
+   "results": {
+    "t": "2026-10-22T09:39:55Z",
+    "tool": "leanfinder",
+    "query": "An equivariant augmented chain map from homogeneous group tuple chains to the ordered join of subgroup cosets has a fixed finite integer coordinate formula",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupHomology.inhomogeneousChains.d",
+     "groupHomology.inhomogeneousChains",
+     "Rep.FiniteCyclicGroup.resolution.π_f",
+     "Rep.barComplex.d",
+     "Rep.standardComplex.ε",
+     "Rep.standardComplex",
+     "Rep.FiniteCyclicGroup.resolution.π",
+     "Rep.standardComplex.d"
+    ],
+    "digest": "a90e3abd6fc1a59e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern standard/bar complexes, their differential or extra degeneracy, and abstract chain-map or homotopy constructors; none gives the specified ordered-coset comparison or its uniform coordinate formula."
+  },
+  {
+   "tool": "grep",
+   "query": "standardComplex|mkInductive|extraDegeneracyCompForgetAugmented|forget₂ToModuleCatHomotopyEquiv",
+   "results": {
+    "t": "2026-10-22T09:40:35Z",
+    "tool": "grep",
+    "query": "standardComplex|mkInductive|extraDegeneracyCompForgetAugmented|forget₂ToModuleCatHomotopyEquiv",
+    "sub": "RepresentationTheory/Homological/Resolution.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "59",
+     "62",
+     "141",
+     "160",
+     "162"
+    ],
+    "digest": "2a20ac0dbc4120d9"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern standard/bar complexes, their differential or extra degeneracy, and abstract chain-map or homotopy constructors; none gives the specified ordered-coset comparison or its uniform coordinate formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A partial chain comparison from the homogeneous bar resolution to the join of n+1 H torsors is equivariant and is a finite formula in input coordinates",
+   "results": {
+    "t": "2026-10-22T09:40:39Z",
+    "tool": "leanfinder",
+    "query": "A partial chain comparison from the homogeneous bar resolution to the join of n+1 H torsors is equivariant and is a finite formula in input coordinates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.barComplex.d",
+     "classifyingSpaceUniversalCover_obj",
+     "Rep.standardComplex.xIso",
+     "Rep.barComplex.d_single",
+     "AlgebraicTopology.DoldKan.hσ",
+     "classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule",
+     "classifyingSpaceUniversalCover",
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂"
+    ],
+    "digest": "ad439489c8480188"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern standard/bar complexes, their differential or extra degeneracy, and abstract chain-map or homotopy constructors; none gives the specified ordered-coset comparison or its uniform coordinate formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-homogeneous-cocycle-rectangle-detection",
+  "date": "2026-10-22",
+  "group": "Q129"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), proper/open direct-image stability, agent arithmetic expansion: construction and uniform equivariance of the ordered-coset join comparison; original rectangle-detection proof. This arithmetic argument is absent from the blueprint text.",
+   "via": [
+    "lem-sfb-homogeneous-cocycle-rectangle-detection",
+    "lem-sfb-local-norm-algcl-cocycle-descent",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-ordered-join-coset-comparison",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven steps construct the additive maps, pair deletion signs, prove the chain and equivariance inductions, recursively build the uniform finite coordinate lists, check erasure on bases and identify top-degree support. No new nodes. Existing contraction statement supplies exactly its identity, naturality and formal expansion clauses. No project attachment found; inherited searches retained and six logged searches added.",
+  "blueprint": "Realizes the ordered-coset comparison subproblem of paragraph (3) in the agent arithmetic expansion below local continuous-cocycle descent. The current blueprint does not assert this chain calculation. The ancestor command returns None (inherited creation chain ends at a Lean-module item), so the inherited null ancestor and via list are retained. Whole-blueprint searches for ordered join and coset found no matching statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-ece76f865",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-ece76f865 (reviewer sub-agent of L); spot-checked: This is a first split of a statement-only node with no new nodes; there is no re-split note in coord. The statement and stmt_deps are unchanged, and proof_deps equal the union of the step uses (def-weil-pbc-free-module, lem-sfb-ordered-join-partial-contraction). Every step takes only what the contraction node's statement gives. Step 3 uses the identity dS+Sd=id in degree q-1, which lies in [0,r-2] for r=n+1, so the top degree n is never contracted. Step 4 uses naturality with u_i equal to left multiplication by g on Ha_i, which sends ha_i to (gh)a_i, giving gS^h=S^{gh}g. Step 5 uses the formal expansion clause: the face reindexing rho_t sends the inner h'_0 correctly, and inserted or replaced vertices h_0a_i get index 0. Steps 1, 2, 6 and 7 are elementary: additive extension on bases, the d^2 sign pairing, the erasure chain map, and the forced colour list 0..n in top degree. I checked n=1 by hand: P_1[h0,h1]=-[(0,h1a0),(1,h0a1)]+[(0,h0a0),(1,h0a1)] and dP_1=P_0d, uniform and equivariant. Image containment is exactly what the parent's step needs. Source: main-20261015 direct-images proof paragraph (3) (lines 19-25), which I read; it has no ordered-join arithmetic, the node marks the proof as agent-written and records a WANTED reference, and blueprint.from.node=null is inherited. No SGA is used. No duplicate was found by rg -L, and Mathlib's standard and bar complexes concern unrestricted tuples. No changes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.OrderedJoinCosetComparison",
+  "declaration": "AlgebraicTopology.OrderedJoin.CosetComparison.orderedJoinCosetComparison",
+  "declarations": [
+   "AlgebraicTopology.OrderedJoin.CosetComparison.orderedJoinCosetComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/OrderedJoinCosetComparison.lean",
+  "statement": "theorem orderedJoinCosetComparison (H : Subgroup G) (n : ℕ) (hn : 1 ≤ n) (a : Fin (n + 1) → G) : (∀ q : ℕ, q ≤ n → (boundary (Coset H a) (q : ℤ) (arityDegree q)).comp (comparison H a (q + 1)) = (comparison H a q).comp (tupleBoundary H (q : ℤ) (arityDegree q))) ∧ (∀ (k : ℕ), k ≤ n + 1 → ∀ g : H, (comparison H a k).comp (tupleMap (fun h : H ↦ g * h) (arityDegree k)) = (chainMap (translateVertex H a g) (arityDegree k)).comp (comparison H a k)) ∧ (∀ q : ℕ, q ≤ n → ∃ L : List (ℤ × Symbol (fun _ : Fin (n + 1) ↦ Fin (q + 1)) (q : ℤ)), ∀ h : Fin (q + 1) → H, comparison H a (q + 1) (tupleTerm (q : ℤ) (List.ofFn h)) = (L.map (fun t ↦ t.1 • chainMap (fun i j ↦ vertex H a (h j) i) (q : ℤ) (Finsupp.single t.2 1))).sum) ∧ (∀ q : ℤ, (tupleBoundary G q (q - 1)).comp (erasure H a q) = (erasure H a (q - 1)).comp (boundary (Coset H a) q (q - 1))) ∧ (∀ (q : ℤ) (g : H), (erasure H a q).comp (chainMap (translateVertex H a g) q) = (tupleMap (fun x : G ↦ (g : G) * x) q).comp (erasure H a q)) ∧ (∀ z : TupleChain H (-1), comparison H a 0 z = (z.sum (fun _ m ↦ m)) • symbolTerm (Coset H a) (-1) ⟨∅, fun i hi ↦ False.elim (Finset.notMem_empty i hi)⟩) ∧ (∀ z : Chain (Coset H a) (-1), erasure H a (-1) z = (z.sum (fun _ m ↦ m)) • tupleTerm (-1) ([] : List G)) ∧ (∀ q : ℕ, q ≤ n → (tupleBoundary G (q : ℤ) (arityDegree q)).comp (erasedComparison H a (q + 1)) = (erasedComparison H a q).comp (tupleBoundary H (q : ℤ) (arityDegree q))) ∧ (∀ (k : ℕ), k ≤ n + 1 → ∀ g : H, (erasedComparison H a k).comp (tupleMap (fun h : H ↦ g * h) (arityDegree k)) = (tupleMap (fun x : G ↦ (g : G) * x) (arityDegree k)).comp (erasedComparison H a k)) ∧ (∀ z : TupleChain H (-1), erasedComparison H a 0 z = (z.sum (fun _ m ↦ m)) • tupleTerm (-1) ([] : List G)) ∧ LinearMap.range (erasedComparison H a (n + 1)) ≤ Submodule.span ℤ (Set.range (fun h : Fin (n + 1) → H ↦ tupleTerm (n : ℤ) (List.ofFn (fun i ↦ (h i : G) * a i))))",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The explicit constructions have been extracted verbatim to OrderedJoinCosetChains and remain publicly reexported. The theorem signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79a38b636",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: n>=1, all a_i, H<=G in any universe; TupleChain = lists of length q+1 ->0 Z (augmented, zero below -1); comparison = the node's recursion P_q = S^{h0}_{q-1} P_{q-1} d via the dependency's contraction with vertex ha_i (headD default unreachable); H-action on J via chainMap translateVertex present; chain-map identities for 0<=q<=n, equivariance for degrees -1..n, uniform formula with the list stated before all tuple values (Symbol over Fin(q+1) indices, repeats kept), erasure chain map, equivariant, e_-1=1, A=eP augmented equivariant chain map, top image containment only. lean.statement verbatim; node change is the lean record only; dependency record identical to live; n=1 hand computation dP_1=P_0d checked; edge cases (equal h, coinciding cosets, trivial H) fine; no duplicate in Sheaf/WeilConjectures/Mathlib (Rep.standardComplex is a different notion); docstrings and source place present; only sorry. Minor note: local Coset subtype instead of Mathlib right coset. No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6dd4c",
+  "group": "J5",
+  "result": "fix",
+  "landing": "20261026T091820-L-3378067",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (identical statement); 12 moved defs vs clone block (verbatim, public re-export, 0 importers); split sorries vs item conjuncts 1,3 and 4 (verbatim, true); axioms via scratch --all compile"
+ }
+}

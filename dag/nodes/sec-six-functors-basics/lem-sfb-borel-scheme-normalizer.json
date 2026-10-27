@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-borel-scheme-normalizer",
+ "kind": "statement",
+ "title": "The scheme-theoretic normalizer of a Borel subgroup",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A group is solvable if its successive scheme-theoretic derived subgroups eventually become trivial, where the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. A Borel subgroup is a maximal smooth connected solvable subgroup. Let $G$ be smooth and connected and let $B\\subseteq G$ be a Borel subgroup. For every commutative $F$-algebra $A$ and every $g\\in G(A)$, if $g_{A\\prime}B(A\\prime)g_{A\\prime}^{-1}=B(A\\prime)$ for every commutative $A$-algebra $A\\prime$, then $g\\in B(A)$. Thus the normalizer subgroup functor $N_G(B)$ equals $B$ on all test algebras, including nonreduced ones. No reductivity hypothesis is imposed on $G$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.48 (Normalizer Theorem), printed p.367, with the normalizer scheme of Lemma 17.47, printed p.366. The equality is scheme-theoretic, not just an equality on F-points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sfb-borel-subgroup-scheme"
+ ],
+ "proof": [
+  {
+   "text": "We prove the stated functor equality by strong induction on $d=\\dim G$, simultaneously for every smooth connected affine group of dimension $d$ over the fixed algebraically closed field and every Borel in it. If $B=G$, the conclusion is immediate, so assume $B\\ne G$. Choose a maximal torus $T\\subseteq B$ which is maximal in $G$ by [lem-sfb-borel-maximal-torus-conjugacy]. By [lem-sfb-maximal-torus-centralizer-borel], $C_G(T)\\subseteq B$. Apply [lem-sfb-cartan-containing-normalizer-smooth] with $H=B$: the normalizer functor is represented by a smooth closed affine finite-type subgroup $N\\subseteq G$. It remains to show $N(F)\\subseteq B(F)$; the passage from this inclusion to equality on arbitrary algebras is carried out in the last step.",
+   "uses": [
+    "lem-sfb-borel-maximal-torus-conjugacy",
+    "lem-sfb-maximal-torus-centralizer-borel",
+    "lem-sfb-cartan-containing-normalizer-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, first two paragraphs, printed p.367. Strong induction includes dimension zero; the argument below either closes directly or invokes a strictly smaller dimension."
+   }
+  },
+  {
+   "text": "Fix $x\\in N(F)$. The tori $T$ and $xTx^{-1}$ are maximal in the smooth connected group $B$. Apply the conjugacy assertion of [lem-sfb-borel-maximal-torus-conjugacy] to $B$: choose $b\\in B(F)$ with $b(xTx^{-1})b^{-1}=T$. Replace $x$ by $bx$. This replacement preserves membership in $N(F)$, and proving $bx\\in B(F)$ proves the original assertion. We may therefore assume $xTx^{-1}=T$. The morphism $\\varphi:T\\to T$, $t\\mapsto xtx^{-1}t^{-1}$, is a homomorphism: on every test algebra its two factors take values in the commutative group $T$, and expanding $\\varphi(t_1t_2)$ gives $\\varphi(t_1)\\varphi(t_2)$.",
+   "uses": [
+    "lem-sfb-borel-maximal-torus-conjugacy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, third paragraph and displayed commutator homomorphism, printed p.367."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-torus-endomorphism-kernel-dichotomy] to $\\varphi$. First suppose its kernel contains $S\\simeq\\mathbf G_m^s$ with $s\\geq1$. Then $x$ commutes with $S$ after every scalar extension. Put $C=C_G(S)$, smooth and connected by [lem-sfb-torus-centralizer-smooth-connected]. Since $S\\subseteq T\\subseteq B$, the existing [lem-sfb-torus-centralizer-borel-intersection] applies to $(G,B,S)$: the scheme-theoretic intersection $D=C\\times_G B$ is a Borel of $C$. Since $x\\in C(F)$ and conjugation by $x$ preserves $B$, it preserves $D$ as a subgroup scheme.",
+   "uses": [
+    "lem-sfb-torus-endomorphism-kernel-dichotomy",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-torus-centralizer-borel-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, non-surjective commutator case, printed p.367."
+   }
+  },
+  {
+   "text": "If $C\\ne G$, then $\\dim C<\\dim G$. Indeed [lem-sfb-borel-quotient-proper-geometry], applied to $G$ with the identity subgroup and quotient $\\operatorname{id}_G$, makes $G$ an integral affine variety; $C$ is smooth, hence reduced by [sbc-lem-smooth-geometrically-reduced], so $C\\ne G$ as closed subschemes of the integral scheme $G$ forces $|C|\\ne|G|$ (a reduced closed subscheme with the whole underlying space of the integral, hence reduced, $G$ is $G$ itself); [lem-wf-affine-dimension-drop] applies to this proper closed subset $C$. The induction hypothesis for the smooth connected group $C$ and its Borel $D$ therefore gives $x\\in D(F)\\subseteq B(F)$.",
+   "uses": [
+    "lem-sfb-borel-quotient-proper-geometry",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-dimension-drop"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, first induction branch, printed p.367."
+   }
+  },
+  {
+   "text": "If $C=G$, then $S$ is central in $G$. Form $q:G\\to J=G/S$ using [lem-sfb-affine-normal-quotient-geometry]; $J$ is smooth connected affine of finite type. By [lem-sfb-quotient-borel-torus-images], $E=q(B)$ is a Borel of $J$, and $B\\to E$ is faithfully flat. Its inverse image is exactly $B$: a test point in $q^{-1}(E)$ lifts locally to a point of $B$ with the same image, and their ratio lies in $S\\subseteq B$; membership in the closed subgroup $B$ descends because its defining ideal vanishes faithfully flat locally only if it vanishes. Moreover $\\dim J=\\dim G-s<\\dim G$. To check the dimension formula, use the left translation action of $G$ on $J$ and [lem-sfb-smooth-group-orbit-geometry]: the orbit map at $q(e)$ is the surjective map $q$, the orbit is all of $J$, which is reduced by [sbc-lem-smooth-geometrically-reduced], and its stabilizer is $S$. Thus the orbit dimension formula gives the displayed equality. Since $x$ normalizes $B$, $q(x)$ normalizes its image $E$ (check after local lifts along $B\\to E$). Induction applied to $(J,E)$ gives $q(x)\\in E(F)$, whence $x\\in q^{-1}(E)(F)=B(F)$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-quotient-borel-torus-images",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, central-torus quotient induction branch, printed p.367; Proposition 1.66 for the quotient dimension formula."
+   }
+  },
+  {
+   "text": "It remains to treat the case that $\\varphi:T\\to T$ is faithfully flat. By [lem-sfb-chevalley-scheme-line-stabilizer], choose a finite-dimensional rational $G$-representation $V$ and a line $L=Fv$, $v\\ne0$, whose scheme-theoretic stabilizer is $N$. The action on this line is a character $\\chi:N\\to\\mathbf G_m$. Because $x,T\\subseteq N$, the identity $\\chi(xtx^{-1}t^{-1})=1$ holds on every test algebra. Faithful flatness of $\\varphi$ implies that $\\chi|_T=1$: its coordinate functions become those of the constant map after the injective pullback along $\\varphi$. In particular $T$ fixes $v$. The character here is a character of $N$, not an assumed character of $G$.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, surjective commutator case, printed p.367; Theorem 4.27 for the line stabilizer."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-perfect-solvable-unipotent-torus] to $B$ and let $U$ be its smooth connected unipotent normal subgroup with torus quotient $p:B\\to B/U$. By [lem-sfb-solvable-torus-complements], $p|_T$ is an isomorphism. For every test point $b$ set $t=(p|_T)^{-1}p(b)$ and $u=bt^{-1}$; then $u\\in U$, so $b=ut$. The restriction $\\chi|_U$ is trivial by [lem-sfb-unipotent-to-multiplicative-trivial]. Together with $\\chi|_T=1$, this shows that $B$ fixes $v$ on every test algebra.",
+   "uses": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-solvable-torus-complements",
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, B fixes the vector, printed p.367; Theorem 16.33 for the solvable decomposition."
+   }
+  },
+  {
+   "text": "Obtain the quotient $\\pi:G\\to Q=G/B$ from [lem-sfb-algebraic-group-homogeneous-quotient]. It is an fpqc covering, and [lem-sfb-borel-quotient-proper-geometry] makes $Q$ proper and geometrically integral, hence nonempty connected and reduced. The orbit morphism $a:G\\to V$, $g\\mapsto gv$, has equal pullbacks to $G\\times_QG$: a pair there is $(g,gb)$ for $b\\in B$, and $gbv=gv$ by the previous step. Consequently it descends to $\\bar a:Q\\to V$ by [lem-weil-pbc-fpqc-representable-descent]. By [lem-weil-pbc-proper-reduced-algclosed-global-sections-product], $\\Gamma(Q,\\mathcal O_Q)=F$. Each coordinate of $\\bar a$ is therefore constant, with value its value at $\\pi(e)$, so $\\bar a$ is the constant morphism $v$. Thus $G$ fixes $v$ scheme-theoretically, and hence stabilizes $L$; the defining property of $L$ gives $G\\subseteq N$, or $G=N$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-borel-quotient-proper-geometry",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, complete connected quotient forces constant orbit, printed p.367; A.75(g)."
+   }
+  },
+  {
+   "text": "Now $B$ is normal in $G$ since $G=N$. By [lem-sfb-affine-normal-quotient-geometry], the same quotient $Q=G/B$ is affine: the quotient there and $Q$ agree by their coset and local-lift descriptions (define the maps after local lifts; [lem-weil-pbc-fpqc-representable-descent] glues them and their inverse identities). The preceding step gives $\\Gamma(Q,\\mathcal O_Q)=F$, so the affine scheme $Q$ is $\\operatorname{Spec}F$. Since the kernel of $G\\to G/B$ is $B$, this implies $G=B$, and in particular $x\\in B(F)$. This closes the surjective branch without appealing to a normal-Borel corollary. Every induction use above has strictly smaller dimension, and the other branches close without induction, so strong induction proves $N(F)\\subseteq B(F)$ in all dimensions, including zero.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, final assertion, printed p.367; agent expansion via proper affine quotient in place of the citation to 17.33(b)."
+   }
+  },
+  {
+   "text": "Finally let $I$ be the ideal cutting out $B$ in the affine finite-type scheme $N$. Smoothness of $N$ makes its coordinate algebra reduced by [sbc-lem-smooth-geometrically-reduced]. Every $f\\in I$ vanishes at every $F$-point of $N$, because all these points lie in $B(F)$. By [lem-wf-affine-nullstellensatz-vanishing], $f=0$. Hence $I=0$ and $N=B$ as schemes, not merely on field points. Evaluating their representing functors on an arbitrary commutative $F$-algebra $A$ gives the requested implication. Conversely every point of $B(A)$ normalizes $B$ after every extension by the group laws, so the two subgroup functors are equal.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.48, smoothness reduction and final scheme-theoretic conclusion, printed p.367."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-borel-maximal-torus-conjugacy",
+  "lem-sfb-maximal-torus-centralizer-borel",
+  "lem-sfb-cartan-containing-normalizer-smooth",
+  "lem-sfb-torus-endomorphism-kernel-dichotomy",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-torus-centralizer-borel-intersection",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "lem-wf-affine-dimension-drop",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-quotient-borel-torus-images",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sfb-chevalley-scheme-line-stabilizer",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-solvable-torus-complements",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.48, printed p.367, with explicit fpqc descent, dimension decreases and reduced-normalizer conclusion; final normal-Borel implication expanded using the affine quotient."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Borel subgroup of a connected linear algebraic group equals its scheme theoretic normalizer",
+   "results": "{\"t\": \"2026-10-23T14:53:23Z\", \"tool\": \"leanfinder\", \"query\": \"A Borel subgroup of a connected linear algebraic group equals its scheme theoretic normalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.normalCore_isClosed\", \"Sylow.normalizer_normalizer\", \"Subgroup.connectedComponentOfOne\", \"Subgroup.Normal.pathComponentOne\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"instNormalCommutatorClosure\", \"Subgroup.is_normal_topologicalClosure\", \"OpenNormalSubgroup.pathComponentOne\"], \"digest\": \"927f06ce5d5d8c55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract subgroup normalizers and Cartan or zero-root Lie-subalgebra normalizers do not assert the scheme-theoretic normalizer theorem for Borel subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalizer group scheme of a Borel subgroup in a smooth connected affine algebraic group is the Borel subgroup itself",
+   "results": "{\"t\": \"2026-10-23T14:57:28Z\", \"tool\": \"leanfinder\", \"query\": \"The normalizer group scheme of a Borel subgroup in a smooth connected affine algebraic group is the Borel subgroup itself\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sylow.normalizer_normalizer\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"Sylow.normalizer_sup_eq_top\", \"Sylow.normalizer_sup_eq_top'\", \"normalizerCondition_iff_only_full_group_self_normalizing\", \"Subgroup.NormalizerCondition.normal_of_coatom\"], \"digest\": \"f7f3c4e2d1af4bb3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract subgroup normalizers and Cartan or zero-root Lie-subalgebra normalizers do not assert the scheme-theoretic normalizer theorem for Borel subgroups."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel subgroups of connected algebraic groups are self normalizing",
+   "results": "{\"t\": \"2026-10-23T14:53:20Z\", \"tool\": \"leansearch\", \"query\": \"Borel subgroups of connected algebraic groups are self normalizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.le_normalizer\", \"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"Subgroup.normalizer\", \"Sylow.normalizer_normalizer\", \"normalizerCondition_iff_only_full_group_self_normalizing\", \"AddSubgroup.normal_in_normalizer\", \"AddSubgroup.le_normalizer\", \"NormalizerCondition\"], \"digest\": \"cea2bdc4e70455a3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract subgroup normalizers and Cartan or zero-root Lie-subalgebra normalizers do not assert the scheme-theoretic normalizer theorem for Borel subgroups."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-23T14:56:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract subgroup normalizers and Cartan or zero-root Lie-subalgebra normalizers do not assert the scheme-theoretic normalizer theorem for Borel subgroups."
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borel.subgroup|normalizer.*borel|borel.*normalizer",
+   "results": "{\"t\": \"2026-10-23T14:53:20Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|borel.subgroup|normalizer.*borel|borel.*normalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract subgroup normalizers and Cartan or zero-root Lie-subalgebra normalizers do not assert the scheme-theoretic normalizer theorem for Borel subgroups."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalizer subgroup scheme of a Borel subgroup in a smooth connected affine algebraic group equals that Borel subgroup",
+   "results": "{\"t\": \"2026-10-23T20:14:11Z\", \"tool\": \"leanfinder\", \"query\": \"The normalizer subgroup scheme of a Borel subgroup in a smooth connected affine algebraic group equals that Borel subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"Subgroup.normalizer_eq_top\", \"Subgroup.normalizer_eq_top_iff\", \"Subgroup.normal_in_normalizer\", \"Sylow.normalizer_normalizer\", \"LieSubalgebra.normalizer_engel\"], \"digest\": \"73ebf9b8e8624e2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra Cartan normalizers and abstract subgroup normalizers do not give the Borel group-scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"normalizer\"",
+   "results": "{\"t\": \"2026-10-23T20:15:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"normalizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra Cartan normalizers and abstract subgroup normalizers do not give the Borel group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borel.subgroup|normalizer.*borel|borel.*normalizer",
+   "results": "{\"t\": \"2026-10-23T20:16:37Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|borel.subgroup|normalizer.*borel|borel.*normalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra Cartan normalizers and abstract subgroup normalizers do not give the Borel group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Borel subgroups of connected algebraic group schemes are self normalizing including infinitesimal points",
+   "results": "{\"t\": \"2026-10-23T20:16:37Z\", \"tool\": \"leansearch\", \"query\": \"Borel subgroups of connected algebraic group schemes are self normalizing including infinitesimal points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieSubalgebra.IsCartanSubalgebra.self_normalizing\", \"Subgroup.le_normalizer\", \"normalizerCondition_iff_only_full_group_self_normalizing\", \"NormalizerCondition\", \"Sylow.normalizer_normalizer\", \"LieSubmodule.ucs_eq_self_of_normalizer_eq_self\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"AddSubgroup.normalizer\"], \"digest\": \"710d475aedacae91\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Lie-algebra Cartan normalizers and abstract subgroup normalizers do not give the Borel group-scheme theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-multiplicative-isogeny-borel-comparison",
+  "date": "2026-10-24",
+  "group": "Q105"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. Supporting input in the proof of Milne Proposition 18.18: Theorem 17.48 puts the central multiplicative kernel inside the chosen Borel, scheme-theoretically.",
+   "via": [
+    "lem-sfb-multiplicative-isogeny-borel-comparison",
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-borel-scheme-normalizer",
+  "worker": "stage1",
+  "summary": "Read Milne 17.47--17.48; split the normalizer theorem by strong dimension induction, retaining scheme-theoretic smoothness and all test algebras. Three reusable supporting statements are new; the current DAG supplies the torus-centralizer/Borel intersection statement, with logged Mathlib searches. No statement or hypotheses changed. Expanded the line-character argument on N, proper-quotient descent and final Nullstellensatz argument. Repair of the returned delivery: removed the colliding new-node file, reused the existing intersection node from lem-sfb-borel-opposite-root-dichotomy, reread its statement and refreshed the verbatim step-3 citation. Rebased all item metadata on the current read clone.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain at the Borel-normalizer input to Milne Proposition 18.18. blueprint_refs ancestor returns None for this existing chain, so its inherited null ancestor is retained. Whole-blueprint searches for normalizer, maximal torus, Cartan and torus centralizer found no exact statement.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-dimension-drop",
+    "why": "Generic scheme-theoretic tool for the normalizer proof: Proper closed subsets have strictly smaller dimension. The unit has no algebraic-group-specific replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme-theoretic tool for the normalizer proof: Representable presheaves satisfy fpqc descent. The unit has no algebraic-group-specific replacement for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic scheme-theoretic tool for the normalizer proof: Global functions on a proper reduced scheme over an algebraically closed field. The unit has no algebraic-group-specific replacement for this general fact."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme-theoretic tool for the normalizer proof: Smooth morphisms have geometrically reduced fibres. The unit has no algebraic-group-specific replacement for this general fact."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic scheme-theoretic tool for the normalizer proof: Residue fields of closed points and the vanishing principle. The unit has no algebraic-group-specific replacement for this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-dimension-drop",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-45b51c81a",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-45b51c81a (reviewer sub-agent of L); spot-checked: Read Milne 17.46–17.48 (pp.365–367), 17.10 with the remark after 17.12 (pp.354–355) and 12.9 (p.233). The 10 steps follow Milne's induction, and I checked every cited statement, hypothesis by hypothesis. Step 3 uses the live torus-centralizer-borel-intersection with S⊆T⊆B. Step 5 gets dim J = dim G − s from orbit geometry with stabilizer S. Step 6 correctly uses the character of N instead of Milne's character of G. Steps 8–9 replace Milne's citation of 17.33(b) with fpqc descent plus Γ(Q,O)=F and the affine quotient. Step 10 upgrades to scheme equality by reducedness and the Nullstellensatz. FIX: step 4 passed from C≠G as subschemes to C a proper closed subset without saying why; I added that C is reduced (sbc-lem-smooth-geometrically-reduced) inside integral G, and proof_deps is unchanged. The three new nodes are true and are not duplicates: max-torus conjugacy (17.10/17.12; distinct from torus-normalizer-borel-transitivity and general-borel-flag-variety); Cartan-containing normalizer smooth (17.47, gives N°=H° and does not restate the item); torus-endomorphism dichotomy (12.9 via an integer matrix; tested on t^p, rank-deficient maps, the trivial map and r=0). All three are statement-only with searches recorded. Batch-5: every flagged citation is a generic algebraic-group or scheme fact whose closure reaches only generic trf foundations (fppf/fpqc descent, vector complement, flat tensor, algebraic-space and schematically-dense definitions), none of them trace formula or Poincaré duality, so accepted. The five tool_uses (dimension drop, fpqc representable descent, proper reduced global sections, smooth⇒reduced, Nullstellensatz) are accepted as generic. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.BorelSchemeNormalizer",
+  "declaration": "AlgebraicGeometry.borelGroupScheme_normalizer_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/BorelSchemeNormalizer.lean",
+  "statement": "theorem borelGroupScheme_normalizer_iff {F : Type u} [Field F] [IsAlgClosed F] (G B : Over (Spec (.of F))) [GrpObj G] [GrpObj B] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [Smooth G.hom] [ConnectedSpace G.left] (i : B ⟶ G) (hB : IsBorelGroupScheme i) (A : CommAlgCat.{u} F) (g : (algSpec (.of F)).obj (op A) ⟶ G) : (∀ (A' : CommAlgCat.{u} F) (f : A ⟶ A'), Set.range (fun b : (algSpec (.of F)).obj (op A') ⟶ B ↦ ((algSpec (.of F)).map f.op ≫ g) * (b ≫ i) * ((algSpec (.of F)).map f.op ≫ g)⁻¹) = Set.range (fun b : (algSpec (.of F)).obj (op A') ⟶ B ↦ b ≫ i)) ↔ ∃ b : (algSpec (.of F)).obj (op A) ⟶ B, b ≫ i = g",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf8d207e3",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Only the lean record and stmt_deps (+ the landed def-sfb-borel-subgroup-scheme) differ from live; the statement is verbatim in the file with a single sorry. Clause check: algebraically closed F; G affine finite-type smooth connected GrpObj over Spec F; the landed IsBorelGroupScheme i (B affine and finite type because it is closed in G); arbitrary A : CommAlgCat.{u} F and g a Spec A point over F; hypothesis is full range equality of g_{A'}·B(A')·g_{A'}⁻¹ and B(A') for every F-algebra map A→A'; conclusion ∃ b, b≫i = g. The ↔ renders the node's N_G(B)=B clause, and the converse is true because IsClosedSubgroupScheme extends IsMonHom. No extra assumptions; universes are uniform in u. Edge cases checked: B=G, dim 0, zero algebra, F[ε], non-injective f, char p. No scheme normalizer definition exists in Mathlib or the project (RankOneRoots.normalizer covers rational points only). Source and blueprint docstrings and the 10-step plan are present; proof_dep imports exist. No compile, since no file was changed. Advisory H11: the second reading is a self-pass under the direct-delivery policy."
+ }
+}

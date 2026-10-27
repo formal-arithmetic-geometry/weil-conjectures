@@ -1,0 +1,249 @@
+{
+ "id": "lem-trf-acyclic-injective-hom-bicomplex",
+ "kind": "statement",
+ "title": "First-quadrant Hom bicomplex of an acyclic source and injective terms",
+ "statement": "Let $\\mathcal C$ be a small site in the chosen universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], let $R$ be a sheaf of commutative rings, and work with $R$-module sheaves [def-weil-sheaf-of-modules-category]. Let $K^\\bullet$ be an integer-indexed acyclic cochain complex [def-pc-cochain-complex-modules, def-pc-acyclic-complex-modules], and let $b\\in\\mathbf Z$ satisfy $K^r=0$ for $r>b$. Let $J^\\bullet$ be a cochain complex with $J^q=0$ for $q<0$ and each $J^q$ injective [def-sp-injective-resolutions]; no augmentation or acyclicity of $J^\\bullet$ is assumed. The formulas\n$$D^{p,q}=\\operatorname{Hom}_R(K^{b-p},J^q)\\quad(p,q\\geq0),\\qquad D^{p,q}=0\\quad\\text{otherwise},$$\n$$d_I(h)=h\\circ d_K^{b-p-1},\\qquad d_{II}(h)=d_J^q\\circ h$$\nwith zero boundary maps define a commuting first-quadrant double complex of abelian groups [def-sp-double-complex-total]. Every row $D^{\\bullet,q}$ is exact, including its left endpoint: for $p>0$ every $h:K^{b-p}\\to J^q$ with $h\\circ d_K^{b-p-1}=0$ has the form $h=g\\circ d_K^{b-p}$ for some $g:K^{b-p+1}\\to J^q$, and for $p=0$ every such $h$ is zero. The finite-diagonal total complex\n$$\\operatorname{Tot}(D)^n=\\bigoplus_{p+q=n}D^{p,q},\\qquad d_{\\operatorname{Tot}}=d_I+(-1)^pd_{II}\\ \\text{on }D^{p,q}$$\nis acyclic.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07AA, example-hom-complex-into-sheaf, the Hom double complex and its other filtration, used in Tag 07AC, lemma-existence-derived-lower-shriek, zero abutment for an acyclic source. Explicit first-quadrant reindexing, injective extension at every row including its endpoint, and finite-filtration argument from the parent proof, old steps 3, 5 and 6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Composition of module-sheaf maps is additive in each variable. For $p,q\\geq0$, $d_I^2(h)=h\\circ d_K^{b-p-1}\\circ d_K^{b-p-2}=0$, $d_{II}^2(h)=d_J^{q+1}\\circ d_J^q\\circ h=0$, and both mixed composites equal $d_J^q\\circ h\\circ d_K^{b-p-1}$. Across the boundary of the quadrant the relevant composites are zero. Thus these formulas give the asserted commuting double complex. Its degree-$n$ diagonal has only the terms $0\\leq p\\leq n$, and is empty for $n<0$. The stated total differential squares to zero: its mixed terms have coefficients $(-1)^{p+1}$ and $(-1)^p$ and cancel.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AA, example-hom-complex-into-sheaf; explicit reindexing and sign calculation"
+   }
+  },
+  {
+   "text": "Fix $q\\geq0$, $p>0$, put $r=b-p$, and suppose $h:K^r\\to J^q$ satisfies $h\\circ d_K^{r-1}=0$. By acyclicity, $\\ker d_K^r=\\operatorname{im}d_K^{r-1}$. The cokernel universal property therefore descends $h$ to $K^r/\\ker d_K^r=\\operatorname{im}d_K^r\\subseteq K^{r+1}$ in the abelian category of module sheaves. Extend this descended map along the indicated monomorphism to $g:K^{r+1}\\to J^q$ by the defining extension property of the injective object $J^q$. Then $h=g\\circ d_K^r=d_I(g)$, while every such boundary is a cocycle because $d_K^2=0$. This argument uses sheaf quotients, not surjectivity on sections.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-abelian",
+    "def-pc-acyclic-complex-modules",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0135, definition-injective; the row-exactness calculation underlying sites-cohomology Tag 07AA, expanded from the definitions"
+   }
+  },
+  {
+   "text": "At $p=0$, the upper support bound gives $K^{b+1}=0$, hence $\\ker d_K^b=K^b$. Acyclicity says $\\operatorname{im}d_K^{b-1}=K^b$. Thus $h\\circ d_K^{b-1}=0$ forces $h=0$ by the cokernel universal property. This is exactness at the left endpoint, whose incoming term is zero. Rows with $q<0$ are zero. Together with the preceding step, every row is exact in all integer degrees.",
+   "uses": [
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07AA, example-hom-complex-into-sheaf; agent-supplied check at the top degree of the acyclic source"
+   }
+  },
+  {
+   "text": "Apply the second spectral sequence of the existing first-quadrant double-complex theorem to $D$. Its page is ${}^{\\prime\\prime}E_1^{q,p}=H_I^p(D^{\\bullet,q})=0$ by the row exactness just proved. The page-to-next-page homology isomorphisms show inductively that all later pages and their stable entries are zero. The theorem identifies these stable entries with the associated graded pieces of the image filtration on $H^n(\\operatorname{Tot}D)$ and supplies $F^0H^n=H^n(\\operatorname{Tot}D)$ and $F^{n+1}H^n=0$ for $n\\geq0$. Each quotient $F^iH^n/F^{i+1}H^n$ is zero, so $F^iH^n=F^{i+1}H^n$; descending induction from $i=n$ to $0$ gives $H^n(\\operatorname{Tot}D)=0$. In negative degrees the total complex is zero. Thus it is acyclic. No cohomological property or augmentation of $J$ was used.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-spectral-sequence",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0130 and 0132, lemma-ss-double-complex and lemma-first-quadrant-ss; zero row page and finite image-filtration argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-acyclic-complex-modules",
+  "def-pc-cochain-complex-modules",
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "def-sp-spectral-sequence",
+  "def-weil-sheaf-of-modules-category",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07AA, example-hom-complex-into-sheaf, with the general first-quadrant convergence of homology.tex Tags 0130/0132; expanded to any nonnegative termwise-injective target, without requiring it to resolve a sheaf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The first quadrant double complex Hom from a bounded above acyclic complex into a bounded below complex of injectives has exact rows and acyclic total complex",
+   "results": "8 hits; CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, HomologicalComplex.exact_of_degreewise_exact, HomologicalComplex.IsSupportedOutside.exactAt, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt, HomologicalComplex.exact_iff_degreewise_exact, CategoryTheory.InjectiveResolution.exact_succ, HomologicalComplex.exactAt_of_isSupported. Answer digest 2e58c8099990bd12.",
+   "date": "2026-10-22",
+   "verdict": "no match: isKInjective_of_injective gives K-injectivity of a bounded-below target, and nonempty_homotopy_zero gives null-homotopies. Neither states the specified reindexed commuting bicomplex, endpoint-exact rows, or its finite-diagonal total acyclicity as a one-line specialization. Other hits are definitions and exactness of resolutions, not this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Hom double complex with acyclic source and injective target terms has zero row cohomology and zero total cohomology",
+   "results": "8 hits; CochainComplex.IsKInjective.nonempty_homotopy_zero, CochainComplex.IsKInjective.homotopyZero_def, HomologicalComplex.double, HomologicalComplex.acyclic_iff, CochainComplex.HomComplex, HomologicalComplex.Acyclic, HomologicalComplex.acyclic_of_isZero, HomologicalComplex.instHasZeroObject. Answer digest c41ea008e1598709.",
+   "date": "2026-10-22",
+   "verdict": "no match: isKInjective_of_injective gives K-injectivity of a bounded-below target, and nonempty_homotopy_zero gives null-homotopies. Neither states the specified reindexed commuting bicomplex, endpoint-exact rows, or its finite-diagonal total acyclicity as a one-line specialization. Other hits are definitions and exactness of resolutions, not this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"total\"",
+   "results": "3 hits; Function.Injective.isStrictTotalOrder_onFun, MvPolynomial.weightedTotalDegree_rename_of_injective, Bundle.TotalSpace.mk_injective. Answer digest 087e9ee0eb2d82da.",
+   "date": "2026-10-22",
+   "verdict": "no match: isKInjective_of_injective gives K-injectivity of a bounded-below target, and nonempty_homotopy_zero gives null-homotopies. Neither states the specified reindexed commuting bicomplex, endpoint-exact rows, or its finite-diagonal total acyclicity as a one-line specialization. Other hits are definitions and exactness of resolutions, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(acyclic|exact).*(total|doubleComplex)|((total|doubleComplex).*(acyclic|exact))",
+   "results": "2 hits; Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean. Answer digest c010d76eaec420bc. Mathlib subdirectory: Algebra/Homology.",
+   "date": "2026-10-22",
+   "verdict": "no match: isKInjective_of_injective gives K-injectivity of a bounded-below target, and nonempty_homotopy_zero gives null-homotopies. Neither states the specified reindexed commuting bicomplex, endpoint-exact rows, or its finite-diagonal total acyclicity as a one-line specialization. Other hits are definitions and exactness of resolutions, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reindex a bounded above acyclic complex against nonnegative injectives to form a first quadrant Hom bicomplex; its rows and totalization are acyclic",
+   "results": "8 hits; CochainComplex.isKInjective_of_injective, HomologicalComplex.isSupported_iff, HomologicalComplex.IsSupportedOutside, CochainComplex.cm5b.instIsStrictlyGEI, CochainComplex.cm5b.I, HomologicalComplex.IsSupported, CochainComplex.IsKInjective, HomologicalComplex.IsStrictlySupported. Answer digest ee6df1115c30f908.",
+   "date": "2026-10-22",
+   "verdict": "no match: isKInjective_of_injective gives K-injectivity of a bounded-below target, and nonempty_homotopy_zero gives null-homotopies. Neither states the specified reindexed commuting bicomplex, endpoint-exact rows, or its finite-diagonal total acyclicity as a one-line specialization. Other hits are definitions and exactness of resolutions, not this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, HomologicalComplex.Acyclic",
+   "results": "0 hits; . Answer digest 4f53cda18c2baa0c.",
+   "date": "2026-10-22",
+   "verdict": "no match: isKInjective_of_injective gives K-injectivity of a bounded-below target, and nonempty_homotopy_zero gives null-homotopies. Neither states the specified reindexed commuting bicomplex, endpoint-exact rows, or its finite-diagonal total acyclicity as a one-line specialization. Other hits are definitions and exactness of resolutions, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(acyclic|exact).*(total|doubleComplex)|((total|doubleComplex).*(acyclic|exact))",
+   "results": "2 hits: Mathlib/Algebra/Homology/TotalComplexShift.lean, Mathlib/Algebra/Homology/TotalComplexShift.lean. Answer digest c010d76eaec420bc. Mathlib subdirectory: Algebra/Homology.",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-below K-injectivity and null-homotopies do not state the specified reindexed commuting bicomplex and its endpoint-exact rows; identifying its signed finite total with the standard Hom complex would require a further argument. Resolution exactness, support and generic complex definitions do not cover the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Hom double complex with acyclic source and injective target terms has zero row cohomology and zero total cohomology",
+   "results": "8 hits: CochainComplex.IsKInjective.nonempty_homotopy_zero, CochainComplex.IsKInjective.homotopyZero_def, HomologicalComplex.double, HomologicalComplex.acyclic_iff, CochainComplex.HomComplex, HomologicalComplex.Acyclic, HomologicalComplex.acyclic_of_isZero, HomologicalComplex.instHasZeroObject. Answer digest c41ea008e1598709.",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-below K-injectivity and null-homotopies do not state the specified reindexed commuting bicomplex and its endpoint-exact rows; identifying its signed finite total with the standard Hom complex would require a further argument. Resolution exactness, support and generic complex definitions do not cover the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, HomologicalComplex.Acyclic",
+   "results": "0 hits: . Answer digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-below K-injectivity and null-homotopies do not state the specified reindexed commuting bicomplex and its endpoint-exact rows; identifying its signed finite total with the standard Hom complex would require a further argument. Resolution exactness, support and generic complex definitions do not cover the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first quadrant double complex Hom from a bounded above acyclic complex into a bounded below complex of injectives has exact rows and acyclic total complex",
+   "results": "8 hits: CochainComplex.isKInjective_of_injective, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.InjectiveResolution.exact₀, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact_succ, HomologicalComplex.exact_of_degreewise_exact, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt. Answer digest a26f8d1e7f05bd2e.",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-below K-injectivity and null-homotopies do not state the specified reindexed commuting bicomplex and its endpoint-exact rows; identifying its signed finite total with the standard Hom complex would require a further argument. Resolution exactness, support and generic complex definitions do not cover the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"total\"",
+   "results": "3 hits: Function.Injective.isStrictTotalOrder_onFun, MvPolynomial.weightedTotalDegree_rename_of_injective, Bundle.TotalSpace.mk_injective. Answer digest 087e9ee0eb2d82da.",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-below K-injectivity and null-homotopies do not state the specified reindexed commuting bicomplex and its endpoint-exact rows; identifying its signed finite total with the standard Hom complex would require a further argument. Resolution exactness, support and generic complex definitions do not cover the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reindex a bounded above acyclic complex against nonnegative injectives to form a first quadrant Hom bicomplex; its rows and totalization are acyclic",
+   "results": "8 hits: CochainComplex.cm5b.I, CochainComplex.cm5b.instIsStrictlyGEI, CochainComplex.isKInjective_of_injective, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.cm5b, CochainComplex.IsKInjective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, HomologicalComplex.isGrothendieckAbelian. Answer digest 2ded4e811642f791.",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-below K-injectivity and null-homotopies do not state the specified reindexed commuting bicomplex and its endpoint-exact rows; identifying its signed finite total with the standard Hom complex would require a further argument. Resolution exactness, support and generic complex definitions do not cover the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-acyclic-coproduct-ext-orthogonal-hom",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: The spectral-sequence argument proving acyclicity of Hom from the bounded-above acyclic free-sum test complex; no site functor or lower shriek is part of this lemma. Supporting acyclic/injective calculation in Stacks 07AA/07AC: old steps 3, 5 and 6 of the Hom-acyclicity proof; explicitly includes the left endpoint and finite-filtration convergence.",
+   "via": [
+    "lem-trf-acyclic-coproduct-ext-orthogonal-hom",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-acyclic-injective-hom-bicomplex",
+  "worker": "stage1",
+  "summary": "Kept the statement and its seven statement dependencies unchanged. Wrote the bicomplex identities, injective-extension proof of positive row exactness, separate left endpoint, and vanishing of the total using the existing first-quadrant spectral-sequence theorem and its finite filtration. No new nodes: these are direct calculations from the cited definitions plus an existing generic tool theorem. No exact project attachment or Mathlib match covers all clauses.",
+  "blueprint": "Realizes the supporting acyclic/injective calculation specified in blueprint.from.place: reindexed Hom bicomplex, endpoint-exact rows and finite-filtration zero abutment, in the 07AA/07AC derived-lower-shriek branch descending from lem-trf-local-term-locality. The current latest blueprint locality proof supplies the ancestor; this generic homological subargument does not replace a geometric step of its unit.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic first-quadrant row spectral sequence and finite image-filtration abutment, used for a double complex of abelian groups; the trace-locality unit contains no general double-complex convergence theorem. This is precisely the spectral-sequence tool called for by the item source, not a replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-bae2352aa",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-bae2352aa (reviewer sub-agent of L); spot-checked: Head bae2352a is one commit with the item and its report, and creates no new nodes. The statement, stmt_deps, source and blueprint are unchanged from the version that landed through the Q57 FIX (e76eb931 fixes/); I compared them field by field. Only the empty proof was filled, with 4 steps. No re-split note applies: coord/repair-notes is absent from the snapshot. The item contains no SGA text, and its dependency closure (142 nodes, BFS over stmt_deps and proof_deps) contains no cycle. review_split.py reports 'no such node' for every citation; this is a symlink artefact, and all 9 cited ids resolve with find -L. Source: Stacks sites-cohomology.tex l.8172 (07AA example-hom-complex-into-sheaf) and l.9375-9410 (07AC, spectral sequence 'abuts to zero as K is acyclic'). The homology tags check out in tags/tags: 0130, 0132 and 0135. The proof is correctly marked agent-written because J is generalised from a resolution to any nonnegative complex of injectives. Step 1: the indices of d_I are correct (Hom(K^{b-p},J^q) to D^{p+1,q}); the mixed composites both equal d_J h d_K; the Tot sign cancellation is stated in def-sp-double-complex-total. Step 2 (p>0): h kills ker d^r = im d^{r-1}, so it factors through coim = im d^r; injectivity of J^q extends this along im d^r into K^{r+1}, giving h = g d^r. This is elementary from def-sp-abelian, def-pc-acyclic and def-sp-injective-resolutions. Step 3 (p=0): K^{b+1}=0 makes d^{b-1} epi, so h=0. Step 4: thm-sp-double-complex-spectral-sequences (II) states ''E_1^{q,p} = H^p_I(D^{.,q}), which is 0 by steps 2-3. Later pages vanish by def-sp-spectral-sequence, and with F^0=H^n and F^{n+1}=0, descending induction gives H^n=0. It is correctly marked non-elementary. Edge cases checked: K=0; the two-term identity K with J having nonzero cohomology; K concentrated in degree b; negative b; dropping the support bound breaks p=0 (identity K^b to K^{b+1}). No duplicates: lem-trf-source-hom-double-complex-model, lem-trf-injective-hom-double-cohomology, lem-trf-ext-orthogonal-adjoint-acyclic, lem-sbc-ext-injective-edge-quasi-iso, lem-sfb-hom-total-triangular-resigning, lem-sp-first-quadrant-extended-total-exact and lem-weil-pbc-double-complex-cokernel-homology-iso all state different results. Accepted tool_use: thm-sp-double-complex-spectral-sequences, generic first-quadrant convergence used as a black box (sk-i-curve-zero has none) and already the Q57 parent's tool. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AcyclicInjectiveHomBicomplex",
+  "declaration": "CategoryTheory.exists_acyclic_injective_hom_bicomplex",
+  "file": "lean/Sheaf/CategoryTheory/AcyclicInjectiveHomBicomplex.lean",
+  "statement": "theorem exists_acyclic_injective_hom_bicomplex {C : Type u} [Category.{v} C] (P : Precoverage C) (_hP : P.IsSiteForCoverings) (R : Sheaf P.toGrothendieck CommRingCat.{max u v w}) (K J : CochainComplex (ringedSiteModules.{max u v w} ((sheafCompose P.toGrothendieck (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})).obj R)) ℤ) (b : ℤ) (_hK : K.Acyclic) (_hKb : ∀ r : ℤ, b < r → IsZero (K.X r)) (_hJ : ∀ q : ℤ, q < 0 → IsZero (J.X q)) (_hI : ∀ q : ℤ, Injective (J.X q)) : ∃ D : HomologicalComplex₂ AddCommGrpCat.{max u v w} (ComplexShape.up ℤ) (ComplexShape.up ℤ), ∃ e : ∀ p q : ℕ, ((D.X (p : ℤ)).X (q : ℤ)) ≃+ (K.X (b - (p : ℤ)) ⟶ J.X (q : ℤ)), (∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((D.X p).X q)) ∧ (∀ (p q : ℕ) (x : (D.X (p : ℤ)).X (q : ℤ)), e (p + 1) q (((D.d (p : ℤ) ((p + 1 : ℕ) : ℤ)).f (q : ℤ)) x) = K.d (b - ((p + 1 : ℕ) : ℤ)) (b - (p : ℤ)) ≫ e p q x) ∧ (∀ (p q : ℕ) (x : (D.X (p : ℤ)).X (q : ℤ)), e p (q + 1) (((D.X (p : ℤ)).d (q : ℤ) ((q + 1 : ℕ) : ℤ)) x) = e p q x ≫ J.d (q : ℤ) ((q + 1 : ℕ) : ℤ)) ∧ (∀ q : ℤ, (D.flip.X q).Acyclic) ∧ (∀ (p q : ℕ), 0 < p → ∀ h : K.X (b - (p : ℤ)) ⟶ J.X (q : ℤ), K.d (b - (p : ℤ) - 1) (b - (p : ℤ)) ≫ h = 0 → ∃ g : K.X (b - (p : ℤ) + 1) ⟶ J.X (q : ℤ), K.d (b - (p : ℤ)) (b - (p : ℤ) + 1) ≫ g = h) ∧ (∀ (q : ℕ) (h : K.X b ⟶ J.X (q : ℤ)), K.d (b - 1) b ≫ h = 0 → h = 0) ∧ (D.total (ComplexShape.up ℤ)).Acyclic",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01b94099d",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Lean statement verbatim equal to node lean.statement. Checked every clause against the node and recorded deps: IsSiteForCoverings site (independent universes u v), CommRingCat.{max u v w} ring sheaf via forget₂ into ringedSiteModules, K.Acyclic, upper bound b, J vanishing in negative degrees and termwise Injective (no extra hypothesis). D pinned by AddEquivs e to Hom(K^{b-p},J^q) for p,q≥0, IsZero outside the quadrant, d_I = precomposition with K.d (b-(p+1)) (b-p), d_II = postcomposition with J.d q (q+1). Every row exact via D.flip.X q for all q:ℤ. p>0 extension clause and p=0 vanishing clause stated. Mathlib up-ℤ total has ε₁=1 and ε₂=(-1)^p, so it is the node's Tot. Edge cases b<0, n<0, K=0, J with cohomology, empty site all covered. One sorry, no definitions, docstrings with source and blueprint. Advisory H11: the Second reading section is the worker's self-audit under the dispatcher policy, while the Worker report matches the node clause by clause. No compile, since nothing was changed."
+ }
+}

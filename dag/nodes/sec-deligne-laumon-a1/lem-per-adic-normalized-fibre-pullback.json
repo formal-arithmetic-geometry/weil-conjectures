@@ -1,0 +1,228 @@
+{
+ "id": "lem-per-adic-normalized-fibre-pullback",
+ "kind": "statement",
+ "title": "Pullback of normalized lattice fibres and independence of charts",
+ "statement": "Let $k$ be a field, $\\ell$ a prime invertible in $k$, and $X$ a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties]. Fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$ and finite intermediate fields $E\\subset L$ over $\\mathbf Q_\\ell$. Write $A_E=\\mathcal O_E$, choose a uniformizer $\\varpi_E$, and put $B_{E,X}=\\varprojlim_{n\\ge1}(A_E/\\varpi_E^n)_X$ and $E_X=B_{E,X}[1/\\varpi_E]$ [def-weil-l-adic-coefficient-extension, def-weil-pbc-adic-coefficient-datum]. These are the continuous completed coefficient sheaves on the small pro-etale site [def-weil-pbc-proetale-site]. Use the derived-complete constructible integral categories with compatible etale-origin witnesses [def-weil-pbc-bounded-constructible-complete], their raw rationalizations $D^b_c(X,E)$ [def-weil-pbc-rational-category], their bounded localized standard t-structures [prop-weil-localized-tstructure], and the pair category $D^b_c(X,\\overline{\\mathbf Q}_\\ell)$ [def-weil-pbc-qbar-category], with the finite scalar functors $T_{L/E}$ and associators of [prop-weil-pbc-scalar-extension].\n\nWrite $\\mathscr A_E(Z)$ for the finite-stage standard heart, $J_Z$ for its continuous rational realization [lem-per-continuous-rational-derived-realization], and $\\omega_{\\bar z,E}$ for the normalized exact finite-dimensional geometric fibre [lem-per-adic-normalized-fibre-exactness]. Its lattice prescription on an affine etale chart of a lisse stratum is $M_{\\bar z}=\\varprojlim_n(N_n)_{\\bar z}$ and $\\omega_{\\bar z,E}(F)=M_{\\bar z}[1/\\varpi_E]$, with a fractional lattice arrow $u/\\varpi_E^a$ acting by $\\varpi_E^{-a}\\varprojlim_n u_n$.\n\nFor a morphism $g:Y\\to X$ of separated finite-type $k$-schemes and a geometric point $\\bar y$ of $Y$, put $\\bar x=g\\bar y$. Use actual completed rational pullback and its heart restriction [def-weil-pbc-completed-pullback, lem-per-adic-stratified-pullback-texact]. There is a natural isomorphism $\\alpha_{g,F}:\\omega_{\\bar y,E}(g^*F)\\xrightarrow{\\sim}\\omega_{\\bar x,E}(F)$ with the following specified integral normalization. On any affine etale lattice chart $U\\to S$ through a lift of $\\bar x$ on a lisse stratum, let $N_\\bullet$ be the normalized finite-free etale reduction tower of the lattice [lem-per-lisse-completed-system-comparison]. At every level the tower map is the coefficient-linear inverse-image stalk comparison $c_{g,N_n}:(g^{-1}N_n)_{\\bar y}\\to(N_n)_{\\bar x}$, sending the germ of a pulled section to its original germ [lem-weil-pbc-inverse-image-stalk-germ]. The integral comparison is the inverse limit of these maps and $\\alpha$ is its localization at $\\varpi_E$. It computes the actual pulled lattice under the $J$ comparison with derived module inverse image on $Y\\times_X S$. If the pulled chart is not affine as a scheme, this description holds on every affine open neighbourhood of the chosen lifted point in $U\\times_X(Y\\times_X S)$.\n\nThese maps commute with quotient transitions and all fractional lattice maps, and satisfy the identity and composite-pullback equations for the actual functor comparisons. On a common etale refinement a change of lattice is represented, using fully faithful raw lattice rationalization, by a fractional integral map. Conjugation by its normalized fibre map identifies the two computations of $\\alpha$. The same identification holds on changing chart and adapted stratification. Equality of fractional representatives, meaning that a uniformizer power annihilates their cleared difference, gives identical rational fibre comparisons. Thus the comparison is independent of all these choices, with no flatness hypothesis on $g$ and no assertion that arbitrary pro-etale stalks commute with inverse limits.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4),(6); Remark 6.8.15; finite pullback stalk normalization, Stacks Tag 03Q1, etale-cohomology.tex lemma-stalk-pullback(3)"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "prop-weil-localized-tstructure",
+  "def-weil-pbc-qbar-category",
+  "prop-weil-pbc-scalar-extension",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-per-adic-normalized-fibre-exactness",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "lem-per-adic-stratified-pullback-texact"
+ ],
+ "proof": [
+  {
+   "text": "Obtain normalized fibres ω and the objectwise unit- and lattice-normalized isomorphisms p. This is only the objectwise construction, with neither naturality nor identity/composition coherence.",
+   "uses": [
+    "lem-per-normalized-pullback-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the naturality theorem to each heart arrow. NatIso.ofComponents assembles p.component into a natural isomorphism α. Its hom components are definitionally those of p, so both normalization clauses transfer literally.",
+   "uses": [
+    "lem-per-normalized-pullback-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the coherence theorem for p. Since α has literally the same components, its identity and composition equations are the required ones, with the underlying raw isomorphisms retained.",
+   "uses": [
+    "lem-per-normalized-pullback-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In the local-normalization clause replace the supplied PullLimit by HasLimit.isoOfNatIso of pullTowerIso. Its projection is HasLimit.isoOfNatIso_hom_π. Both comparisons have identical projections, hence their homs agree by limit.hom_ext, their isomorphisms agree by Iso.ext and their proof fields agree by proof irrelevance. Transport the local equation along this equality. Assemble all five fields of NormalizedPullback.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-per-normalized-pullback-objects",
+  "lem-per-normalized-pullback-naturality",
+  "lem-per-normalized-pullback-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4),(6), Remark 6.8.15; original eight-step proof factored into objectwise construction, arrow naturality, and raw coherence; limit universal property proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized finite-level etale stalk comparisons form inverse-limit fibre isomorphisms for completed adic pullback and are independent of lattice charts",
+   "results": "8 hits: StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv, StandardEtalePresentation.lift_bijective, StandardEtalePair.homEquiv_apply_coe, StandardEtalePresentation.mapEquiv, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePresentation.mk.inj",
+   "date": "2026-10-22",
+   "verdict": "no match: general stalk, module completion, scalar associativity or rank facts do not state this normalized constructible adic assertion; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.fiber, SheafOfModules.pullback",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general stalk, module completion, scalar associativity or rank facts do not state this normalized constructible adic assertion; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse.*(stalk|fibre|fiber)|adic.*(rank|scalar)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general stalk, module completion, scalar associativity or rank facts do not state this normalized constructible adic assertion; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibres of a constructible continuous E sheaf commute with completed inverse image via inverse limits of etale reduction stalks",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, TopCat.stalkToFiber, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, TopCat.stalkToFiber_germ, TopCat.Presheaf.stalkPullbackInv",
+   "date": "2026-10-22",
+   "verdict": "no match: general stalk, module completion, scalar associativity or rank facts do not state this normalized constructible adic assertion; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric fibers of continuous l-adic sheaves commute with completed pullback through inverse limits of finite etale stalks",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, SheafOfModules.pullbackComp, CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_comp, CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_comp_assoc, TopCat.Sheaf.pullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, stalks or algebraic adic completion, not continuous constructible adic heart fibres with normalized lattice-chart independence; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Ff]ib|normalized.*[Ff]ib|lisse.*pullback",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, stalks or algebraic adic completion, not continuous constructible adic heart fibres with normalized lattice-chart independence; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalk inverse image lisse adic rational sheaves comparison",
+   "results": "8 hits: TopCat.Presheaf.stalkPullbackIso, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ, AlgebraicGeometry.LocallyRingedSpace.stalkMap_inv_hom_assoc, AlgebraicGeometry.Scheme.stalkMap_inv_hom, ModuleCat.Tilde.stalkIso_inv, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.Scheme.Opens.germ_stalkIso_inv, AlgebraicGeometry.Scheme.Opens.stalkIso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, stalks or algebraic adic completion, not continuous constructible adic heart fibres with normalized lattice-chart independence; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso",
+   "results": "3 hits: CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, stalks or algebraic adic completion, not continuous constructible adic heart fibres with normalized lattice-chart independence; no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberComapIso|def pullbackComp",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/Point/Comap.lean (grep restricted to CategoryTheory/Sites/Point)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, stalks or algebraic adic completion, not continuous constructible adic heart fibres with normalized lattice-chart independence; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite free adic local system reduction towers rationalization natural fiber pullback isomorphism independent of lattice",
+   "results": "8 hits: AdicCompletion.transitionMap_comp_reduceModIdeal, IsAdicComplete.StrictMono.mkQ_comp_lift, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.eval_comp_of, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.transitionMap_comp_eval_apply, AdicCompletion.transitionMap_comp_eval, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic sheaf pullback, stalks or algebraic adic completion, not continuous constructible adic heart fibres with normalized lattice-chart independence; no one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-adic-normalized-fibre-comparisons",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: ordinary pullback is exact and constructible support pulls back; re-split of lem-per-adic-normalized-fibre-comparisons, old proof steps 1,2,3,6.",
+   "via": [
+    "lem-per-adic-normalized-fibre-comparisons",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-adic-normalized-fibre-pullback",
+  "worker": "stage1",
+  "group": "Q71",
+  "summary": "Unchanged statement. Eight-step proof constructs the finite-level germ maps and their inverse limit, identifies actual completed pullback using the existing lisse and continuous-realization comparisons, and proves fraction, lattice, chart, stratification, unit and composition compatibility. Reuses existing nodes; creates none.",
+  "blueprint": "lem-per-smooth-pullback-t-exact: first proof paragraph, ordinary pullback and constructible support; expands old normalized-fibre-comparisons proof steps 1,2,3,6 through the recorded ancestor chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme hypothesis verification for the adic realization; no perverse-route replacement."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic finite-dimensionality verification over a field; no node of this unit states the scheme dimension bound."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic finite-level etale inverse-image stalk comparison with its unit germ normalization; not supplied by the lisse adic comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-3b35bfe84",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-3b35bfe84 (reviewer sub-agent of L); spot-checked: PASS, no changes. Shape: one commit with the item JSON and the Q71 report; no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to the NU creation copy, and proof_deps equals the union of the step uses. Cycle check: the item is not reachable from its 11741 transitive deps. No SGA. Coverage: the new proof carries every argument of the parent's old steps 1, 2, 3 and 6 that was assigned to this item: chart, normalized fibre and fraction rule (new 2, 4); finite germ linearity, transitions, identity and composite (new 3, 8); limit, actual pullback through J, lisse pullback, t-exact local model and non-affine pulled chart (new 2, 4, 5); lattice, chart, stratification and representative independence (new 6, 7). The scalar part correctly stays with the sibling. Sources read: Bhatt-Scholze Proposition 6.8.4(1),(4),(6), with (4) used only on affine (qcqs) refinements, and Stacks 03Q1 lemma-stalk-pullback(3), whose content is carried by the cited lem-weil-pbc-inverse-image-stalk-germ. Each cited statement says what its step takes: normalized-fibre-exactness gives charts, N_bullet and choice independence; continuous-rational-derived-realization gives completed pullback as derived module inverse image with identity, composition and restriction; stratified-pullback-texact gives the degree-0 finite free local model without flatness; lisse-completed-system-comparison gives reduction and rationalization commuting with pullback, plus full faithfulness. Step 5's cleared-difference argument holds even when the integral Hom has torsion. The step 6 conjugation and the step 8 composite equation are well typed. Edge cases checked: empty strata, rank 0, a constant rank-r chart, non-flat g and closed immersions. Accepted tool uses: stalk-germ (sk-thm-p1, also a tool use of the parent), fibre-dimension bound (sk-prop-sf-cbc), and the Mathlib leaf finite-type-over-noetherian."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicNormalizedFibrePullback",
+  "declaration": "AlgebraicGeometry.Scheme.AdicFibreComparison.adic_normalized_fibre_pullback",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.NormalizedPullback",
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.adic_normalized_fibre_pullback"
+  ],
+  "file": "lean/Sheaf/Paper/AdicNormalizedFibrePullback.lean",
+  "statement": "theorem adic_normalized_fibre_pullback : ∃ ω : Fibres (k := k) l R, Nonempty (NormalizedPullback l R ω)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Pullback-only statement on the actual completed raw heart functor, reusing the recorded normalized fibre and comparison definitions. Integral normalization is required on every chosen affine open neighbourhood of the lifted point of the pulled chart, with the exact derived counit and finite reduction units; identity and composition use the actual raw comparisons. No scalar-extension, common-stage-descent or rank theorem is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94e3847bd",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Delivery is the single new module AdicNormalizedFibrePullback; node fields unchanged except lean. NormalizedPullback restates the pull clauses of the accepted N0 parent (6f9fd062 PASS) inline (parent import would be a cycle): pull is a natural iso on the actual heartPull for arbitrary g; local_normalization is ∀ C/hC/N/φ/s and ∀ affine open W₀ of pullback g C.map (D ≅ W₀, projections; satisfiable since a stratum domain can be any immersion); pullTowerIso stalk maps; PullLimit projections; q pinned by the e/e' pullModelMap counit and germ equation, δ by the finite unit mate, η by integral sections, ψ = q≫pull φ≫η; identity/composition HEq to R.identity/composition.raw; unit_normalization on every presentation. No extra hypotheses or universe restriction; statement verbatim; docstrings carry source place, blueprint and all 8 steps; only sorry. Edge cases (empty strata, rank 0, id/composite, non-flat, non-affine, torsion Hom) covered. Advisory: def-per-adic-fibre-comparison-data/coherence-data decls used but not in stmt_deps (base stmt_deps unchanged); proof-only imports; empty second-reading section by policy. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T124035-L-1928578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

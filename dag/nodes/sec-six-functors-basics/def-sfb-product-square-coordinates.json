@@ -1,0 +1,105 @@
+{
+ "id": "def-sfb-product-square-coordinates",
+ "kind": "definition",
+ "title": "Product square coordinates and square difference",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme and let $X_i\\to S$ for $i=1,2,3$ be schemes over $S$. Using fibre products [def-pc-fibre-product], put $C=(X_1\\times_S X_2)\\times_S X_3$, $P=(X_1\\times_S X_1)\\times_S(X_2\\times_S X_2)$ and $Q=P\\times_S X_3$. For $a,b\\in\\{0,1\\}$, define $r_{ab}:Q\\to C$ by the fibre-product universal property from the coordinate projections, so that $r_{ab}(x_0,x_1,y_0,y_1,z)=(x_a,y_b,z)$. Define $\\pi:Q\\to P$ to be the first projection. For an invertible $\\mathcal O_C$-module $A$ [def-sc-invertible-module], its square difference is the $\\mathcal O_Q$-module $$D(A)=r_{00}^*A\\otimes r_{11}^*A\\otimes(r_{01}^*A)^\\vee\\otimes(r_{10}^*A)^\\vee,$$ where each pullback is the tensor pullback [def-pc-module-pullback], each tensor is the sheaf tensor product [def-pur-sheaf-tensor-product], and $M^\\vee=\\mathcal{H}om_{\\mathcal O_Q}(M,\\mathcal O_Q)$ is the dual of an invertible module [def-sc-invertible-module]. The tensor product is associated to the right, $D(A)=r_{00}^*A\\otimes(r_{11}^*A\\otimes((r_{01}^*A)^\\vee\\otimes(r_{10}^*A)^\\vee))$. These constructions require no smoothness, separatedness, finiteness or integrality hypothesis on the schemes.",
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Guo, Section 5.1, Theorems of cube and square: definitions of W, r_J, pi and s(L; X_1, X_2), printed p.11, March 31, 2026 version; coordinates reordered from W x_S W to (X_1 x_S X_1) x_S (X_2 x_S X_2)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coordinate projection maps and square difference of an invertible sheaf on a triple product of schemes",
+   "results": "{\"t\": \"2026-10-24T11:26:54Z\", \"tool\": \"leansearch\", \"query\": \"Coordinate projection maps and square difference of an invertible sheaf on a triple product of schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"EuclideanSpace.projₗ\", \"AlgebraicGeometry.Scheme.Pullback.carrierEquiv_symm_fst\", \"Trivialization.prod_symm_apply_proj\", \"AffineMap.proj\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.ctorIdx\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_fst\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc\"], \"digest\": \"d4fdc9d67e071c31\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projection and pullback-carrier constructions do not define the four-factor square of invertible modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Four coordinate pullbacks defining the square difference of a line bundle on a product of three schemes",
+   "results": "{\"t\": \"2026-10-24T11:26:55Z\", \"tool\": \"leanfinder\", \"query\": \"Four coordinate pullbacks defining the square difference of a line bundle on a product of three schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.t'\", \"AlgebraicGeometry.Scheme.Pullback.t\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"AlgebraicGeometry.Scheme.Pullback.v\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.hy\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint\"], \"digest\": \"5f1b34dd40bea483\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned projection and pullback-carrier constructions do not define the four-factor square of invertible modules."
+  },
+  {
+   "tool": "grep",
+   "query": "squareParameter|squareCoordinate|squareDifference|squareProjection",
+   "results": "{\"t\": \"2026-10-24T11:26:53Z\", \"tool\": \"grep\", \"query\": \"squareParameter|squareCoordinate|squareDifference|squareProjection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match in Mathlib; the separate project source search found the exact existing definitions in Sheaf.AlgebraicGeometry.NormalProductSquareDescent, recorded without duplication."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-square-after-finite-extension",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Guo Section 5.1 product square coordinates and square difference used in Claim 5.2.1 and in the statement of the finite-extension square assertion.",
+   "via": [
+    "lem-sfb-field-square-after-finite-extension",
+    "lem-sfb-field-product-square-power"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalProductSquareDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.squareDifference",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.squareParameter",
+   "AlgebraicGeometry.Scheme.Modules.squareCoordinate",
+   "AlgebraicGeometry.Scheme.Modules.squareDifference",
+   "AlgebraicGeometry.Scheme.Modules.squareProjection"
+  ],
+  "statement": "noncomputable def squareDifference {S : Scheme.{u}} (X₁ X₂ X₃ : Over S)\n    (A : ((X₁ ⨯ X₂) ⨯ X₃).left.Modules) :\n    (squareParameter X₁ X₂ ⨯ X₃).left.Modules",
+  "branch": "sheaf-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair requested by the independent reviewer: attach a definition node to the already landed plain constructions, with no new Lean module or copy. squareParameter is P; squareCoordinate is r_ab, with false=0 and true=1; squareDifference is D(A), using homObj into the tensor unit for each dual; squareProjection is pi. The definitions have ambient S : Scheme.{u}; squareDifference is defined even for noninvertible modules and specializes literally to the invertible case of this node. None selects data from normal_product_square_descent."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-144acbe39",
+  "group": "Q14",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-144acbe39",
+  "group": "Q14",
+  "result": "fix",
+  "note": "Re-delivery of d626a2fa: H2 resolved (item stmt_deps now cite new def-sfb-product-square-coordinates with existing:true record on the four landed plain defs in NormalProductSquareDescent; normal-product-square-descent theorem dropped); H9 resolved (unused private imports and FieldTower removed; NormalProductSquareDescent re-exports the needed classes; worker reports clean scompile). Item differs from side-live only in stmt_deps/lean; lean.statement verbatim; maths unchanged and correct (smooth, separated, LFP+QC, geometrically integral; Module.Finite K in Type u; literal A_K and base-changed r_ab; signs +,+,-,- with homObj duals; Nonempty iso; single sorry). F1 fixed: the new node claimed left-associated tensor, but Mathlib ⊗ is infixr (Monoidal/Category.lean:117), so squareDifference is right-associated; fixes/def-sfb-product-square-coordinates.json changes only that sentence to right association with the explicit formula. No Lean change, no compile."
+ }
+}

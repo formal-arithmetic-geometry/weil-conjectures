@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-space-fppf-cover",
+ "kind": "definition",
+ "title": "Fppf covering family of algebraic spaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ and $(X_i)_{i\\in I}$ be algebraic spaces over $S$ [def-trf-algebraic-space], indexed by an arbitrary set $I$, and let $f_i:X_i\\to X$. The family is an fppf covering if every $f_i$ is flat and locally of finite presentation on compatible etale scheme charts [def-sfb-space-morphism-properties], and the family is jointly surjective on field-valued point classes [def-trf-algebraic-space-jointly-surjective-family]. Equivalently, the union of the images $|f_i|(|X_i|)$ is all of $|X|$. The index set and individual covering members may be empty; no nonemptiness or finiteness restriction is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-topologies.tex",
+  "place": "Tag 03Y8, Definition definition-fppf-covering, lines 761-772"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fppf covering family of algebraic spaces flat locally of finite presentation jointly surjective",
+   "results": "{\"t\": \"2026-10-24T13:58:24Z\", \"tool\": \"leansearch\", \"query\": \"fppf covering family of algebraic spaces flat locally of finite presentation jointly surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.surjectiveFamiliesPretopology\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.Cover.Over\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.jointlySurjectivePretopology\", \"AlgebraicGeometry.Scheme.instSmallPrecoverage\"], \"digest\": \"10b1db8c89d733cb\"}",
+   "date": "2026-10-24",
+   "verdict": "Only scheme covering notions in Mathlib; reuse the exact existing project definition IsFppfCover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fppf covering family algebraic spaces flat locally finitely presented jointly surjective",
+   "results": "{\"t\": \"2026-10-24T13:58:28Z\", \"tool\": \"leanfinder\", \"query\": \"fppf covering family algebraic spaces flat locally finitely presented jointly surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.Cover\", \"AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"AlgebraicGeometry.Scheme.Hom.cover\"], \"digest\": \"76c1766218be5e9e\"}",
+   "date": "2026-10-24",
+   "verdict": "Only scheme covering notions in Mathlib; reuse the exact existing project definition IsFppfCover."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFppfCover|fppf.*cover AlgebraicGeometry/Sites",
+   "results": "{\"t\": \"2026-10-24T13:58:53Z\", \"tool\": \"grep\", \"query\": \"IsFppfCover|fppf.*cover\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"609c32a9b230a998\"}",
+   "date": "2026-10-24",
+   "verdict": "Only scheme covering notions in Mathlib; reuse the exact existing project definition IsFppfCover."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsFppfCover lean/WeilConjectures lean/Sheaf; scan dag/nodes/def-*.json for IsFppfCover; tools/blueprint_refs.py search \"fppf covering\"",
+   "results": "No WeilConjectures match. Sheaf/AlgebraicGeometry/AlgebraicSpaceFppfCoveringCalculus.lean:48 defines IsFppfCover; other hits are consumers or its calculus. No definition node records IsFppfCover. Blueprint search returns four scheme-site/Picard nodes, not algebraic-space fppf coverings.",
+   "date": "2026-10-24",
+   "verdict": "Existing exact declaration, no new Lean definition or module; add its definition-node owner as requested by H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-chart-comparison",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Stacks 06FM final representable compatibility clause: fppf locality on the target uses the covering families of Stacks 03Y8. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Finite-type calculus and representable compatibility for stacks. Input to the present split: General chart comparison used in the finite-type supporting input; Stacks 06FM, not a finite-type clause.",
+   "via": [
+    "lem-sfb-stack-smooth-chart-comparison",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFppfCoveringCalculus",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsFppfCover",
+  "statement": "def IsFppfCover {S : Scheme.{u}} {I : Type w} {X : AlgebraicSpace S}\n    {Xᵢ : I → AlgebraicSpace S} (f : ∀ i : I, Xᵢ i ⟶ X) : Prop",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 repair of returned head 17ed3529a3d7: record the existing plain Prop-valued definition at AlgebraicSpaceFppfCoveringCalculus.lean:48. Its actual data are chartwise flatness, local finite presentation, and joint surjectivity. No theorem conclusion or .choose is used, and no definition is copied or restated."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17e13d8b1",
+  "group": "O1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17e13d8b1",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 17ed3529a3d7. Compared with side-live, the item differs only in lean and stmt_deps: the theorem stmt_deps were replaced by definition owners (def-sfb-surjective-moduli-map, the new existing:true def-sfb-space-fppf-cover for IsFppfCover/03Y8, def-trf-scheme-algebraic-space for schemeSpace, plus the dm-stack-morphism-properties and moduli-chart-normalization definitions). Statement, proof and proof_deps are unchanged. New def-sfb-space-smooth-local-source-target matches 06F8 (i)-(iii) (IsPullback orientation correct; pointImage = exists u over x); not hollow, no existing duplicate. SmoothChartAll/Some match 06FM (1)/(2): ModuliSpaceTest @Smooth includes representability; the comparison is the canonical moduliTwoFiberLift into F x_G V; (B) asks only a surjective. Scheme charts = IsRepresentable, equivalent with RespectsIso. Main theorem gives all four equivalences; space clause and representable base-change clause correct (all presentations equivalent under RespectsIso). hfppf unused and its index universe pinned at u+1: weaker hypothesis only. lean.statement verbatim; 3 sorry; docstrings OK. No file changed, so no compile."
+ }
+}

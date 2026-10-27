@@ -1,0 +1,112 @@
+{
+ "id": "def-sp-exceptional-bc-integral-maps",
+ "kind": "definition",
+ "title": "Reconstruction and transpose maps for integral exceptional base change",
+ "status": "split",
+ "import_flags": [
+  "unreachable"
+ ],
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a Cartesian square $fu=vf'$, its vertical compactification and tower adjunctions, and a canonical integral comparison datum [def-sp-exceptional-bc-integral-comparisons]. Use the actual compactification exchange and its tower counit mate [def-sp-tower-mate-data]. Define $a_K,b_K$ by composing the pullback and exceptional reduction comparisons. Define the reduction of integral compact-support exchange by conjugating the actual tower exchange by the fixed compact-support and pullback comparisons. When tower exchange is invertible, define its integral exceptional reconstruction as the inverse on Hom sets of fully faithful integral reduction applied to $a_K$, the tower mate, and $b_K^{-1}$. Given an integral compact-support exchange isomorphism, define its integral transpose by applying the adjunction for $f'$ to its inverse followed by the pulled-back counit. These constructions have real data and assert no existence or invertibility theorem.",
+ "stmt_deps": [
+  "def-sp-exceptional-bc-integral-comparisons",
+  "def-sp-tower-mate-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
+  "place": "Paragraph (3), maps a_K, b_K, reconstruction T_K and the integral transpose"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical integral compact support and completed pullback tower comparison data for a Cartesian square",
+   "results": "8 hits: CategoryTheory.Limits.pullbackComparison, CategoryTheory.BicartesianSq.toIsPullback, CategoryTheory.CommSq.cone, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase, CategoryTheory.CommSq.cocone, CategoryTheory.Limits.Types.isPullback_iff, CategoryTheory.BicartesianSq.of_isPullback_isPushout, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder",
+   "date": "2026-10-25",
+   "verdict": "No matching simultaneous integral exceptional-base-change comparison datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical integral compact support and completed pullback tower comparison data for a Cartesian square",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', CompHausLike.HasExplicitPullback, AlgebraicGeometry.Scheme.Pullback.t', AlgebraicGeometry.ExistsHomHomCompEqCompAux.g, CompHausLike.pullback.condition, CompHausLike.pullback.cone_π, CompHausLike.pullback, CompHausLike.pullback.lift",
+   "date": "2026-10-25",
+   "verdict": "No matching simultaneous integral exceptional-base-change comparison datum."
+  },
+  {
+   "tool": "grep",
+   "query": "IntegralData|PullModel|CofinalReduction",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No matching simultaneous integral exceptional-base-change comparison datum."
+  },
+  {
+   "tool": "grep",
+   "query": "IntegralData|PullModel|CofinalReduction in dag/nodes, Mathlib, lean/WeilConjectures, lean/Sheaf",
+   "results": "No upstream or Mathlib matching record. Existing CofinalReduction and Reconstruction reused. Other IntegralData and PullModel names describe different scalar/tensor data. blueprint_refs search integral base change comparison: zero blueprint nodes.",
+   "date": "2026-10-25",
+   "verdict": "This packages the square-specific comparisons; no second construction of completed reduction or pullback."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-exceptional-bc",
+  "date": "2026-10-25",
+  "group": "NH"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-exceptional-bc",
+   "place": "Clause (3), reconstruction and transpose formulas",
+   "via": [
+    "det-sp-tower-exceptional-bc"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalBaseChangeIntegralMaps",
+  "declaration": "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.reconstructed",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.source",
+   "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.target",
+   "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.exchangeReduction",
+   "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.reconstructed",
+   "AlgebraicGeometry.ProEtale.SpExceptionalBaseChange.integralTranspose"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalBaseChangeIntegralMaps.lean",
+  "statement": "def reconstructed (x : SpTowerShriek.OpenExchange l E b o) (hb : IsIso (SpTowerMate.beta l E b o q a x)) (K : sfIntegralConstructibleCategory l E Y) : (constructibleIntegralPullback l E u').obj (s.right.obj K) ⟶ s.right'.obj ((constructibleIntegralPullback l E v).obj K)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1d8c9b7a",
+  "group": "NH",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1d8c9b7a",
+  "group": "NH",
+  "result": "fix",
+  "note": "Re-delivery after 6d49 landing refusal (duplicate completionMap_isIso). b1d8 drops the lean/Sheaf/SixFunctors overrides; main already has the correct import order (TensorAdjunctionReductionSquares imports GeneratorReductionStatement, which declares the lemma at line 197). The three Lean modules, the item node and both integral def nodes are byte-identical to 4e17/6d49 (cmp/diff -rq), so the 4e17 maths review carries over; re-read confirms faithful hypotheses, pinned clauses (1)-(3), edge cases, one sorry, docstrings. The re-delivery dropped the accepted 6d49 H12 fix: def-sp-tower-mate-data stmt_deps again lack the owners det-sp-tower-shriek-levels, det-sp-mixed-base-change, det-sp-scalar-extension-functor, def-sp-reduction-direct-image-comparison, det-sp-reduction-exceptional, def-weil-pbc-cartesian-square (uses re-counted by grep). Re-applied fixes/def-sp-tower-mate-data.json (identical to the accepted 6d49 fix; bracketed citations = stmt_deps; all on main; no cycle). prop-coef-integral-exceptional-adjoint rebind target exists (IntegralExceptionalAdjoint.lean:585), unused by the item. JSON-only fix, so no compile; report gives server compiles 20.2/48.2/58.6 s."
+ }
+}

@@ -1,0 +1,276 @@
+{
+ "id": "lem-sfb-semilinear-finite-normalization-model",
+ "kind": "statement",
+ "title": "Semilinear action on a finite normalization model",
+ "statement": "Let $k$ be a field [def-weil-field], let $S$ be an integral projective finite-type $k$-scheme [def-pc-integral-scheme, def-kun-projective, def-weil-finite-type-morphism], put $K=k(S)$ [def-sc-function-field], and let $M/K$ be a finite field extension [def-pc-field-extension]. Let $J$ be a finite group acting on $S$ and on $k$ compatibly with the structure map, write $h_j$ for its action on $S$, and suppose $\\sigma:J\\to\\operatorname{Aut}(M)$ is a group homomorphism with\n$$\\sigma_j|_K=(h_{j^{-1}})^*:K\\longrightarrow K.$$\nHere $h^*$ is pullback on the generic stalk, and group actions are allowed to be nonfaithful and to move $k$. Let $u:B\\to S$ be the normalization of $S$ in $M$ [def-fin-normalization-extension]. Then $B$ is normal integral and projective of finite type over $k$, $u$ is finite and surjective [def-weil-finite-integral-morphism, def-weil-surjective-morphism], and the canonical map $\\eta_B:\\operatorname{Spec}M\\to B$ identifies the generic point and function field of $B$ with $M$. The generic fibre $B\\times_S\\operatorname{Spec}K$ is $\\operatorname{Spec}M$. There is a unique action $a:J\\to\\operatorname{Aut}(B)$ satisfying\n$$u\\circ a_j=h_j\\circ u,\\qquad a_j\\circ\\eta_B=\\eta_B\\circ\\operatorname{Spec}(\\sigma_j^{-1}).$$\nThis action on $B$ is compatible with the specified action on $k$. Normal means that every local ring is an integrally closed domain. Projective means admitting a closed immersion into a finite-dimensional projective space over the target, with no linearization of the group action assumed. The generic fibre is the fibre product of [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent equivariant integral-closure-chart expansion of Tag 035H definition-normalization-X-in-Y and Tag 035I lemma-characterize-normalization; finiteness from Tag 0AVK lemma-nagata-normalization-finite-general; projectivity over Spec k as in varieties.tex Tag 0GK4 lemma-normalize-projective."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-fin-normalization-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $p:S\\to\\operatorname{Spec}k$ and $f:\\operatorname{Spec}M\\to\\operatorname{Spec}K\\to S$. Projectivity makes $p$ proper, hence separated. Since $p$ is of finite type over an affine scheme, $S$ is quasi-compact and quasi-separated. Apply the normalization-in-a-residue-field-extension theorem at the generic point of $S$, whose residue field is $K$. Its specified relative normalization is exactly $B$, and its generic morphism is $\\eta_B$. Thus $B$ is normal integral, $u$ is integral, $u\\eta_B=f$, and $\\eta_B$ identifies its function field with $M$. The same theorem supplies the qcqs hypothesis on $f$ needed below.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-normalization-in-residue-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035H definition-normalization-X-in-Y, 035I lemma-characterize-normalization and 035L lemma-normal-normalization; apply at the generic point."
+   }
+  },
+  {
+   "text": "Apply finiteness of normalization in a finite function-field extension to the integral finite-type $k$-scheme $S$ and $M/K$: $u$ is finite. A finite morphism is closed. Its image contains the generic point of $S$, since $u\\eta_B=f$, so its closed image is all of the integral scheme $S$. Thus $u$ is surjective.",
+   "uses": [
+    "lem-fin-normalization-extension-finite",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AVK lemma-nagata-normalization-finite-general, field-variety case; Tag 01WN lemma-finite-proper."
+   }
+  },
+  {
+   "text": "Use the finite-over-projective theorem with base $\\operatorname{Spec}k$, $T=S$, $Y=B$; $p$ is projective in its convention, since it has a closed immersion into some $\\mathbf P^N_k$ over $k$ and is quasi-compact, being of finite type. A field is Noetherian because its only ideals are $0$ and $k$. This base is affine, so the theorem gives a closed immersion $B\\hookrightarrow\\mathbf P^N_k$ for some finite $N$, exactly the required convention. Also $u$ is proper because it is finite, hence of finite type by the definition of proper; composition with $p$ shows $B$ is of finite type over $k$.",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0GK4 lemma-normalize-projective, proof using finite projectivity and composition; global embedding over the affine field base follows the cited finite-over-projective statement."
+   }
+  },
+  {
+   "text": "Choose a nonempty affine open $U=\\operatorname{Spec}A$ of $S$ and write $C=\\overline A^{\\,M}$. The affine normalization description gives $u^{-1}U=\\operatorname{Spec}C$, with its structure map induced by $A\\subset C\\subset M$. Put $T=A\\setminus\\{0\\}$; $T^{-1}A=K$. Integral-closure localization identifies $T^{-1}C$ with the integral closure of $K$ in $T^{-1}M=M$. Every $z\\in M$ is integral over $K$: linear dependence of $1,z,\\ldots,z^{[M:K]}$, divided by its last nonzero coefficient, gives a monic relation. Thus $T^{-1}C=M$. The tensor-localization isomorphism $C\\otimes_AK\\cong T^{-1}C$ sends $c\\otimes(a/s)$ to $ac/s$; its inverse sends $c/s$ to $c\\otimes(1/s)$, well-defined by the localization relations. Since $f$ and $\\operatorname{Spec}K\\to S$ factor through the open $U$ and $u^{-1}U=B\\times_SU$, one has $B\\times_S\\operatorname{Spec}K=u^{-1}U\\times_U\\operatorname{Spec}K$. The affine fibre-product theorem, with $R=A$, now gives $B\\times_S\\operatorname{Spec}K=\\operatorname{Spec}M$, canonically with the map $\\eta_B$.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035H definition-normalization-X-in-Y, affine charts; algebra.tex Tag 0307 lemma-integral-closure-localize; schemes.tex Tag 01I4 lemma-fibre-product-affine-schemes."
+   }
+  },
+  {
+   "text": "For $j\\in J$ put $t_j=\\operatorname{Spec}(\\sigma_j^{-1})$. Since pullback reverses composition, the hypothesis gives $(h_j)^*|_K=\\sigma_j^{-1}|_K$, hence $f\\circ t_j=h_j\\circ f$. The map $q_j=h_j^{-1}\\circ u:B\\to S$ is integral: postcomposing an integral morphism with a scheme isomorphism merely relabels the affine charts in its definition. There is a factorization $f=q_j\\circ(\\eta_B\\circ t_j)$. Apply the relative-normalization universal property to $f$, $q_j$, and $\\eta_B\\circ t_j$ to obtain $a_j:B\\to B$ with $q_j a_j=u$ and $a_j\\eta_B=\\eta_Bt_j$. Multiplying the first equation by $h_j$ gives $u a_j=h_j u$. The uniqueness clause applies too, since integral implies affine; it says that any two maps with these two equations agree.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sbc-relative-normalization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035I lemma-characterize-normalization, applied to the integral factorization with target map h_j^{-1} composed with u."
+   }
+  },
+  {
+   "text": "The identity of $B$ satisfies the two equations for $j=1$, so uniqueness gives $a_1=1$. For $i,j\\in J$, $u a_i a_j=h_i h_j u=h_{ij}u$. Moreover $t_i\\circ t_j=\\operatorname{Spec}(\\sigma_j^{-1}\\circ\\sigma_i^{-1})=\\operatorname{Spec}(\\sigma_{ij}^{-1})=t_{ij}$, so $a_i a_j\\eta_B=\\eta_Bt_{ij}$. Uniqueness for the integral target map $h_{ij}^{-1}u$ gives $a_i a_j=a_{ij}$. Taking $i=j^{-1}$ on both sides makes $a_{j^{-1}}$ the two-sided inverse of $a_j$. Therefore these maps form the asserted action by automorphisms, even if either original action has a kernel.",
+   "uses": [
+    "lem-sbc-relative-normalization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035I lemma-characterize-normalization, uniqueness; elementary multiplication of the defining commuting squares."
+   }
+  },
+  {
+   "text": "Any other asserted action has, for each $j$, the two equations characterizing $a_j$, so the same uniqueness proves equality of the actions. If $b_j$ is the specified geometric action on $\\operatorname{Spec}k$, compatibility on $S$ means $p h_j=b_j p$. Therefore $(pu)a_j=p h_j u=b_j(pu)$. This proves compatibility with the given action on $k$ without any requirement that the action fix $k$ or linearize a projective embedding.",
+   "uses": [
+    "lem-sbc-relative-normalization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035I lemma-characterize-normalization, uniqueness, followed by composition with the structure morphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism",
+  "lem-fin-finite-over-projective",
+  "lem-fin-normalization-extension-finite",
+  "lem-pc-projective-proper",
+  "lem-sbc-relative-normalization-universal-property",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-qcqs-over-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 035H, 035I, 035L, 0AVK; agent assembly and semilinear universal-property calculation. Projectivity: varieties.tex Tag 0GK4; localization: algebra.tex Tag 0307."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite semilinear group action on a scheme and a finite extension of its function field extends uniquely to the finite normalization, which remains projective over the ground field",
+   "results": "{\"t\": \"2026-10-22T06:11:26Z\", \"tool\": \"leanfinder\", \"query\": \"A finite semilinear group action on a scheme and a finite extension of its function field extends uniquely to the finite normalization, which remains projective over the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.to_isFractionRing\", \"IsGaloisGroup.iff_isFractionRing\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"IsGaloisGroup.of_isFractionRing\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\"], \"digest\": \"d4498ecdac6cc946\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization constructions give ingredients, but not the finite normal projective model together with its semilinear action and specified generic field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalize a projective integral variety in a finite field extension with compatible semilinear automorphisms of the base and field; obtain a finite normal projective scheme with the lifted group action",
+   "results": "{\"t\": \"2026-10-22T06:12:32Z\", \"tool\": \"leansearch\", \"query\": \"Normalize a projective integral variety in a finite field extension with compatible semilinear automorphisms of the base and field; obtain a finite normal projective scheme with the lifted group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"b66c3105e95a83fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization constructions give ingredients, but not the finite normal projective model together with its semilinear action and specified generic field"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(map|[Aa]ut|[Aa]ction|[Ff]inite)|([Aa]ut|[Aa]ction).*normalization",
+   "results": "{\"t\": \"2026-10-22T06:12:56Z\", \"tool\": \"grep\", \"query\": \"normalization.*(map|[Aa]ut|[Aa]ction|[Ff]inite)|([Aa]ut|[Aa]ction).*normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"d17f0d2bf7ac02c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization constructions give ingredients, but not the finite normal projective model together with its semilinear action and specified generic field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"map\"",
+   "results": "{\"t\": \"2026-10-22T06:12:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Polynomial.integralNormalization_map\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.coequifibered_normalizationDiagramMap\"], \"digest\": \"f7e092f90ee7e670\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization constructions give ingredients, but not the finite normal projective model together with its semilinear action and specified generic field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure charts of a projective variety in a finite extension glue equivariantly for automorphisms moving the ground field",
+   "results": "{\"t\": \"2026-10-22T06:13:27Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure charts of a projective variety in a finite extension glue equivariantly for automorphisms moving the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero\", \"AlgebraicGeometry.Proj.awayι_toSpecZero\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc\"], \"digest\": \"4f2ea7736578d6c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization constructions give ingredients, but not the finite normal projective model together with its semilinear action and specified generic field"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(map|[Aa]ut|[Aa]ction|[Ff]inite)|([Aa]ut|[Aa]ction).*normalization",
+   "results": "{\"t\": \"2026-10-23T04:29:45Z\", \"tool\": \"grep\", \"query\": \"normalization.*(map|[Aa]ut|[Aa]ction|[Ff]inite)|([Aa]ut|[Aa]ction).*normalization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"d17f0d2bf7ac02c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give normalization descent and uniqueness, integral-closure actions fixing the base, or field Galois theory; none states this semilinear projective normalization theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a compatible group action on an integral scheme and a finite extension of its function field uniquely to its normalization, including semilinear automorphisms of the ground field",
+   "results": "{\"t\": \"2026-10-23T04:29:45Z\", \"tool\": \"leansearch\", \"query\": \"Extend a compatible group action on an integral scheme and a finite extension of its function field uniquely to its normalization, including semilinear automorphisms of the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"instSMulDistribClassAlgEquiv\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"integralClosure.coe_smul\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"galRestrict\", \"galRestrictHom\", \"IsIntegralClosure.MulSemiringAction\"], \"digest\": \"21a28e0a0a815071\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give normalization descent and uniqueness, integral-closure actions fixing the base, or field Galois theory; none states this semilinear projective normalization theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"map\"",
+   "results": "{\"t\": \"2026-10-23T04:29:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Polynomial.integralNormalization_map\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.coequifibered_normalizationDiagramMap\"], \"digest\": \"f7e092f90ee7e670\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give normalization descent and uniqueness, integral-closure actions fixing the base, or field Galois theory; none states this semilinear projective normalization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite field extension with compatible semilinear group actions on an integral projective variety and its function field gives a unique group action on the finite projective normalization",
+   "results": "{\"t\": \"2026-10-23T04:29:46Z\", \"tool\": \"leanfinder\", \"query\": \"A finite field extension with compatible semilinear group actions on an integral projective variety and its function field gives a unique group action on the finite projective normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.iff_isFractionRing\", \"IsGaloisGroup.to_isFractionRing\", \"IsIntegralClosure.MulSemiringAction\", \"IsGaloisGroup.of_isFractionRing\", \"FractionRing.mulSemiringAction_of_isGaloisGroup\", \"IsGaloisGroup.toFractionRing\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"FixedPoints.normal\"], \"digest\": \"9f878c725fdcbfdd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give normalization descent and uniqueness, integral-closure actions fixing the base, or field Galois theory; none states this semilinear projective normalization theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphisms of a scheme and of an algebraic function field extension lift to unique automorphisms of the relative normalization by its universal property",
+   "results": "{\"t\": \"2026-10-23T04:30:39Z\", \"tool\": \"leanfinder\", \"query\": \"Automorphisms of a scheme and of an algebraic function field extension lift to unique automorphisms of the relative normalization by its universal property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgEquiv.liftNormal\", \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"galLiftEquiv_apply\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgEquiv.liftNormal_commutes\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\"], \"digest\": \"4a0f7847a32741f7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits give normalization descent and uniqueness, integral-closure actions fixing the base, or field Galois theory; none states this semilinear projective normalization theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-galois-alteration-domination",
+  "date": "2026-10-22",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong (1997), §§3.2 and 3.8, pp.605,608, and Situation 5.3, p.613; general semilinear conjugate-product/projective-domination form of ILO X Theorem 3.4 Step 4, pp.160--161. Nonseparable extensions use the purely inseparable-then-Galois convention of ILO X Remark 3.3.2, p.158. Re-split of the semilinear domination argument, old steps 4--5.",
+   "via": [
+    "lem-sfb-semilinear-galois-alteration-domination",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semilinear-finite-normalization-model",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing normalization and projective-cover nodes; no new nodes. Twisted integral target maps give the semilinear action by relative-normalization descent; uniqueness proves all action laws. The generic fibre is calculated by localization. The statement is unchanged.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof (3), via the recorded alteration-reduction ancestor chain: supplies the finite normalization model used in the semilinear conjugate-product domination argument, old steps 4--5 of lem-sfb-semilinear-galois-alteration-domination. The ancestor tool returns null for this new-target chain; preserved its inherited from.node=null and via list. Whole-blueprint searches for semilinear normalization, normalization model, integral closure, and finite covers gave no equivalent semilinear theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "General finite-cover projective embedding over the affine Noetherian base Spec k; this is a geometric tool, and no node in the item unit states the global projective-space version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-over-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-335393d1a",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-335393d1a (reviewer sub-agent of L); spot-checked: Read the 7-step split, the statements of all 14 proof_deps, Stacks 035H/035I/035L/0AVK (morphisms.tex), 0GK4 (varieties.tex) and 0307 (algebra.tex). The statement, stmt_deps and blueprint fields are unchanged from live; the live item is still unsplit; there are no new nodes. Mathematics checked: the σ/h contravariance (σ_j^{-1}|_K=h_j^*, f t_j=h_j f, t_i t_j=t_{ij}); the twisted integral target q_j=h_j^{-1}u in the relative-normalization universal property; uniqueness gives the group laws and unique action; surjectivity from finite⇒closed plus the generic point; generic fibre via localization of the integral closure; compatibility with k does not assume k-linearity. Small cases checked: S=Spec k, M=K with S not normal, M/K purely inseparable, a non-faithful action, Frobenius acting on k. Route: lem-fin-normalization-extension-finite is Lean-closed; lem-sbc-relative-normalization-universal-property and lem-sfb-finite-type-composition-base-change are Mathlib leaves; lem-fin-finite-over-projective is accepted as the declared tool_use. Not a duplicate: lem-sfb-semilinear-normalization-finite-model assumes S normal, M/K separable and a surjection ρ, and also asserts generic étaleness. FIX, item JSON only: step 3 now notes that p is quasi-compact, as the def-pc-projective-morphism convention of lem-fin-finite-over-projective requires; step 4 now states the reduction B×_S Spec K=u^{-1}U×_U Spec K before the affine fibre-product theorem. The report claimed step 4 contained this sentence; it did not.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilinearFiniteNormalizationModel",
+  "declaration": "AlgebraicGeometry.semilinear_finite_normalization_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearFiniteNormalizationModel.lean",
+  "statement": "theorem semilinear_finite_normalization_model (k : Type u) [Field k] (S : Scheme.{u}) [IsIntegral S] (p : S ⟶ Spec (.of k)) [IsHProjective p] [LocallyOfFiniteType p] [QuasiCompact p] (M : Type u) [Field M] [Algebra S.functionField M] [Module.Finite S.functionField M] (J : Type v) [Group J] [Finite J] (σk : J →* (k ≃+* k)) (h : J →* Aut S) (hscalar : ∀ j : J, (h j).hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (σk j⁻¹).toRingHom)) (σ : J →* (M ≃+* M)) (hgeneric : ∀ (j : J) (z : S.functionField), σ j (algebraMap S.functionField M z) = algebraMap S.functionField M ((Scheme.functionFieldAut (h j⁻¹)).hom z)) : IsIntegral (S.normalizationIn M) ∧ (∀ b : S.normalizationIn M, IsDomain ((S.normalizationIn M).presheaf.stalk b) ∧ IsIntegrallyClosed ((S.normalizationIn M).presheaf.stalk b)) ∧ IsHProjective (S.fromNormalizationIn M ≫ p) ∧ LocallyOfFiniteType (S.fromNormalizationIn M ≫ p) ∧ QuasiCompact (S.fromNormalizationIn M ≫ p) ∧ IsFinite (S.fromNormalizationIn M) ∧ Surjective (S.fromNormalizationIn M) ∧ (∃ ξ : S.normalizationIn M, IsGenericPoint ξ Set.univ ∧ (S.fromSpecOfAlgebraFunctionField M).toNormalization (IsLocalRing.closedPoint M) = ξ ∧ IsIso ((S.fromSpecOfAlgebraFunctionField M).toNormalization.residueFieldMap (IsLocalRing.closedPoint M))) ∧ IsPullback (S.fromSpecOfAlgebraFunctionField M).toNormalization (Spec.map (CommRingCat.ofHom (algebraMap S.functionField M))) (S.fromNormalizationIn M) S.fromSpecFunctionField ∧ ∃! a : J →* Aut (S.normalizationIn M), ∀ j : J, (a j).hom ≫ S.fromNormalizationIn M = S.fromNormalizationIn M ≫ (h j).hom ∧ (S.fromSpecOfAlgebraFunctionField M).toNormalization ≫ (a j).hom = Spec.map (CommRingCat.ofHom (σ j⁻¹).toRingHom) ≫ (S.fromSpecOfAlgebraFunctionField M).toNormalization ∧ (a j).hom ≫ S.fromNormalizationIn M ≫ p = (S.fromNormalizationIn M ≫ p) ≫ Spec.map (CommRingCat.ofHom (σk j⁻¹).toRingHom)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2fec1cb2a",
+  "group": "N0",
+  "result": "pass",
+  "note": "Item JSON differs from live only in lean; statement verbatim in file, single sorry, imports exist. Hypotheses match node: IsIntegral S, IsHProjective+LocallyOfFiniteType+QuasiCompact p (recorded conventions), Module.Finite K M (no separability), J finite in universe v, hscalar = left geometric action Spec(σk j⁻¹) (Aut_mul_def composition, Spec contravariant), hgeneric uses functionFieldAut (h j⁻¹) = generic stalk pullback h_{j⁻¹}^*. Conclusions: IsIntegral B, stalks IsDomain∧IsIntegrallyClosed (node's normal), projective/finite type of u≫p, IsFinite∧Surjective u, η_B=toNormalization hits the generic point with iso residueFieldMap, IsPullback generic fibre with canonical projections, ∃! a : J →* Aut B with u a_j = h_j u, a_j η_B = η_B Spec(σ_j⁻¹) (variance checked satisfiable via SpecMap_functionFieldAut_hom_fromSpecFunctionField), plus k-compatibility clause derivable from clause 1 + hscalar, so ∃! not weakened. Edge cases S=Spec k, M=K non-normal S, inseparable M/K, non-faithful J, Frobenius OK; shared universe u forced by normalizationIn and harmless. Docstrings/source/blueprint/proof plan present; no new defs; no duplicate. No compile (no file changed)."
+ }
+}

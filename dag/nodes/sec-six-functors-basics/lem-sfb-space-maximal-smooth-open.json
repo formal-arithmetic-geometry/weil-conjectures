@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-space-maximal-smooth-open",
+ "kind": "statement",
+ "title": "Largest smooth open of an arbitrary algebraic-space morphism",
+ "statement": "Let $B$ be a scheme [def-pc-scheme] and use algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention]. Smoothness is tested on compatible etale scheme charts using [def-sbc-smooth-morphisms]. An open subspace is a subfunctor whose pullback along every scheme-valued object is an open subscheme. Let $h:X\\to Y$ be any morphism of algebraic spaces over $B$. There exists a largest open subspace $W_h\\subseteq X$ such that $h|_{W_h}:W_h\\to Y$ is smooth. Flatness and local finite presentation for algebraic-space morphisms are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. If $h$ is locally of finite presentation and $v:Y^\\prime\\to Y$ is flat, then the largest smooth open of $h^\\prime:X\\times_YY^\\prime\\to Y^\\prime$ equals $W_h\\times_YY^\\prime$. Here $X\\times_YY^\\prime$ is the sheaf fibre product, assigning to each test scheme the pairs of sections with equal images; for schemes it is [def-pc-fibre-product]. No flatness hypothesis on $h$, or finite-presentation hypothesis on $v$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0DZI, lemma-where-smooth, existence and clause (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use compatible etale scheme presentation diagrams $ha=bf$, with $a:U\\to X$, $b:V\\to Y$. Such diagrams cover $X$, and smoothness can be checked on them: apply the presentation criterion to smoothness, which is etale local on source-and-target. More precisely, $f$ is smooth on a neighbourhood of $u\\in U$ if and only if $h$ is smooth on a neighbourhood of $a(u)$. For the forward implication choose an open $O\\subset U$ containing $u$ with $f|_O$ smooth. Its etale image is an open subspace $I\\subset X$, and $O\\to I$ is surjective etale. The diagram $O\\to V$ over $I\\to Y$ is a presentation diagram with surjective source arrow, so $h|_I$ is smooth by the criterion. Conversely, restrict any presentation diagram to the inverse image of a smooth open of $X$; the criterion makes its scheme arrow smooth. Restricting a smooth scheme arrow to an open is allowed by the stated etale locality (open immersions are etale).",
+   "uses": [
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-a1-space-etale-open-image",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DZI proof: etale source locality, expanded through Tag 03MJ (lemma-local-source-target)."
+   }
+  },
+  {
+   "text": "Let $O_h\\subset |X|$ be the union of the underlying opens of all open subspaces $I\\subset X$ with $h|_I$ smooth. This is a set of opens in the fixed universe. The inclusion-preserving correspondence between open subsets and open subspaces gives an open subspace $W_h$ with point set $O_h$. To show $h|_{W_h}$ smooth, choose a surjective compatible scheme presentation $U\\to W_h$, $V\\to Y$. The inverse images of the $I$ cover $U$ by open subschemes; their scheme arrows to $V$ are smooth by the presentation criterion. Scheme source locality makes $U\\to V$ smooth, and the criterion makes $W_h\\to Y$ smooth. Every smooth open $I$ lies in $W_h$, by inclusion of point sets. This proves maximality and uniqueness. The construction includes the empty union; source locality explicitly allows the empty scheme. By step 1, in every presentation $U\\to V$ its smooth point set is exactly the inverse image of $|W_h|$.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-etale-presentation-property-criterion",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DZI proof: union construction using Tag 03ZF; open-subspace correspondence is Tag 03BZ."
+   }
+  },
+  {
+   "text": "Now assume $h$ locally of finite presentation and $v:Y^{\\prime}\\to Y$ flat. Choose surjective etale scheme atlases $V\\to Y$, $V^{\\prime}\\to Y^{\\prime}$, and $U\\to X\\times_YV$. Their fibre products exist as algebraic spaces and the etale scheme pullbacks are schemes. Put $T=V\\times_YV^{\\prime}$, $U_T=U\\times_VT$. Then $T\\to Y^{\\prime}$ and $U_T\\to X^{\\prime}=X\\times_YY^{\\prime}$ are surjective etale: each factors as composites of base changes of the chosen atlases. Thus $U\\to V$ and $U_T\\to T$ are compatible scheme presentations. The map $g:T\\to V$ is flat: it is the base change of $V^{\\prime}\\to Y^{\\prime}\\to Y$, whose first arrow is etale and hence smooth and flat, and whose second arrow is flat. Flatness is stable under composition and base change. The map $f:U\\to V$ is locally of finite presentation by the chart test applied to $h$. No finite-presentation hypothesis on $g$ was used.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DZI proof: translate clause (2) to schemes by compatible etale charts; Tag 03MJ and Tag 0410."
+   }
+  },
+  {
+   "text": "Apply the scheme flat-base-change lemma to $f:U\\to V$ and $g:T\\to V$ from step 3. For every $u_T\\in U_T$, $U_T\\to T$ is smooth at $u_T$ if and only if $f$ is smooth at its image $u\\in U$. Step 1 identifies these conditions respectively with smoothness of $h^{\\prime}$ at the image $x^{\\prime}\\in X^{\\prime}$ and of $h$ at the image $x\\in X$. Step 2 identifies them with $x^{\\prime}\\in|W_{h^{\\prime}}|$ and $x\\in|W_h|$. Since $U_T\\to X^{\\prime}$ is surjective, this proves $|W_{h^{\\prime}}|=p^{-1}(|W_h|)$ for $p:X^{\\prime}\\to X$. The point calculus identifies the latter subset with the open subspace $X^{\\prime}\\times_XW_h$, and equality of point sets of open subspaces implies equality of subfunctors. Finally $X^{\\prime}\\times_XW_h=W_h\\times_YY^{\\prime}$: on every test scheme both sides are pairs of sections of $W_h$ and $Y^{\\prime}$ with equal image in $Y$.",
+   "uses": [
+    "lem-sfb-scheme-lfp-smooth-flat-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DZI proof, clause (2): Morphisms Tag 02V4 (lemma-set-points-where-fibres-smooth), case (2); open equality via Tag 03BZ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-a1-space-etale-open-image",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-sfb-scheme-lfp-smooth-flat-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0DZI (lemma-where-smooth), existence and (2), with omitted chart and union details expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of algebraic spaces the largest smooth open commutes with smooth precomposition and flat base change when locally of finite presentation",
+   "results": "8 hits; AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmooth_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothLocus|AlgebraicSpace|AlgebraicStack",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean. Mathlib source read: Morphisms/Smooth.lean lines 296-345 concern schemes; no algebraic-space or algebraic-stack declaration.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The smooth locus of a morphism of algebraic spaces is compatible with flat base change and smooth morphisms of the source",
+   "results": "8 hits; AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsSmooth.casesOn, RingHom.isStandardSmooth_isStableUnderBaseChange, Algebra.smoothLocus, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.FormallySmooth.isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothLocus\"",
+   "results": "12 hits; Algebra.smoothLocus, Algebra.smoothLocus_eq_univ, Algebra.isOpen_smoothLocus, Algebra.smoothLocus_eq_univ_iff, Algebra.smoothLocus_comap_of_isLocalization, Algebra.basicOpen_subset_smoothLocus_iff, Algebra.basicOpen_subset_smoothLocus_iff_smooth, Algebra.smoothLocus_eq_compl_support_inter",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary map of algebraic spaces has a maximal smooth open compatible with flat base extension for a locally finitely presented map",
+   "results": "8 hits; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme or ring results, not the asserted algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The largest smooth open of a morphism of algebraic spaces commutes with flat base change when the morphism is locally of finite presentation",
+   "results": "8 hits: AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat. Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"smoothLocus\"",
+   "results": "loogle: Loogle is currently under load, please try again later.",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|smoothLocus",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean. Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descendsAlong|codescendsAlong|of_smooth_tensorProduct_of_faithfullyFlat|isSmooth_iff",
+   "results": "0 hits: . Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "0 hits: . Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An arbitrary algebraic space morphism has a largest open subspace where it is smooth",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.instIsSmoothOfIsOpenImmersion, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion. Scheme smoothness/base-change or faithfully-flat global descent results; none states pointwise reflection under merely flat base change.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-maximal-smooth-open",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the initial maximal smooth open and its flat base change to the coefficient ring. Supporting input: Tag 0DZR proof, choose the maximal smooth open in an atlas using Tag 0DZI; reduce flat base change to the same algebraic-space result.",
+   "via": [
+    "lem-sfb-stack-maximal-smooth-open",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-maximal-smooth-open",
+  "worker": "stage1",
+  "summary": "Expanded the union of smooth chart images and flat base-change chart reduction, keeping the arbitrary-morphism statement unchanged. Added only the scheme pointwise lfp/flat base-change result (02V4(2)); existing nodes cover presentation descent, scheme locality and open-subspace topology.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the recorded alteration/moduli/deformation chain: Tag 0DZR atlas construction uses Tag 0DZI. The current latest direct-image blueprint is read; this is below its unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Open image and open-subspace correspondence for algebraic spaces; this unit has no duplicate topology theorem."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Equality/inclusion of open subfunctors detected on points and pullback of open sets."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Existence of space fibre products and preservation of surjective etale presentations."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme open-immersion property used to restrict smooth chart maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-077120054",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-077120054 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against Stacks 0DZI (spaces-morphisms.tex l.7297, existence and clause (2)) and 02V4 case (2) (morphisms.tex l.7354, with its flat-permanence proof). The item statement is unchanged from base (live is still unsplit, there is no repair note and no competing delivery), and it matches 0DZI(2) exactly: h is arbitrary for existence; for the base change, h is lfp and v is flat. Step 1 is the pointwise presentation-diagram equivalence via 03MJ (criterion clauses (1)/(2)), 04R3, 02GP and 03BZ; both directions check out. Step 2 is the union construction with 01V6 (empty cover included) and the point calculus; it gives maximality. In step 3 I verified that T=V×_YV′ is a scheme, that T→Y′ and U_T→X′ are surjective étale (U_T is a base change of U→X×_YV followed by one of T→Y′), that g is flat by étale⇒flat and stability under composition and base change, and that f is lfp by the 0410 chart test. Step 4 applies the new lemma, translates through step 1 on both presentations, gets p⁻¹|W_h| by surjectivity of U_T→X′, then equates subfunctors via the image-of-fibre-product clause. The 'details omitted' of 0DZI are written out (D5). The new node lem-sfb-scheme-lfp-smooth-flat-base-change is exactly 02V4(2), self-contained, with stmt_deps equal to its bracketed ids and four kinds of search. Small cases hold (Spec k→Spec k[ε] with a flat g; empty U_T), and non-flat g is the counterexample, so the flatness hypothesis is needed. It duplicates nothing: lem-sfb-scheme-flat-smooth-point-base-change is case (1) and needs f flat, as do the flat space-locus nodes. It is strictly smaller than the item, and there is no cycle. Batch-5 flags: every listed citation (03MJ criterion, 04R3 scheme properties, a1 open-image and point calculus, trf 02X2 fibre products, 04XC chartwise calculus, 03MM/0410 chart test) is a generic space or scheme foundation. Their trf/pod closure consists of foundational trf lemmas, plus thm-pd-spreading-out (EGA IV §8 limits) through def-sfb-stable-pointed-moduli-groupoids. None is a step of the trace formula or Poincaré duality, and the parent already cites the chartwise node, so all are accepted. Tool_uses accepted: a1 open-image, a1 point calculus, trf fibre products and pbc open-immersion-étale. No SGA. No changes."
+ }
+}

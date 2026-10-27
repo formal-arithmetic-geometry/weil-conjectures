@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-unramified-pseudo-torsor",
+ "kind": "statement",
+ "title": "A locally finite type pseudo torsor under an unramified group is unramified",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $B$ an algebraic space over $S$, and $G$ and $X$ algebraic spaces over $B$ [def-trf-algebraic-space]. Suppose $G$ is a group algebraic space: multiplication $m:G\\times_B G\\to G$, identity $e:B\\to G$, and inversion $i:G\\to G$ induce group structures on $G(T)$, natural in every scheme $T\\to B$. Suppose $a:G\\times_B X\\to X$ is an action, so $a(gh,x)=a(g,a(h,x))$ and $a(e,x)=x$ on all test schemes. Assume that the morphism\n$$G\\times_B X\\longrightarrow X\\times_B X,\\qquad (g,x)\\longmapsto(a(g,x),x)$$\nis an isomorphism; this condition defines a pseudo $G$-torsor and does not require $X\\to B$ to be surjective. If $G\\to B$ and $X\\to B$ are locally of finite type and $G\\to B$ is unramified, then $X\\to B$ is unramified. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Local finite type and unramifiedness for algebraic spaces mean the corresponding scheme properties [def-weil-finite-type-morphism, def-weil-unramified-morphism] on etale scheme charts of source and target.",
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 0DSK (lemma-pseudo-torsor-implications), part (1); pseudo torsor is Definition 04TW (definition-pseudo-torsor)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-group-space-over-cartesian"
+ ],
+ "proof": [
+  {
+   "text": "Write $f:X\\to B$. For an arbitrary $z\\in|X|$, choose a representative $x:\\operatorname{Spec}K\\to X$ using the field-valued description of points in [lem-trf-space-fibre-products-etale-covers]. Put $b=fx$, $X_K=X\\times_B\\operatorname{Spec}K$, $G_K=G\\times_B\\operatorname{Spec}K$ and $p:X_K\\to X$. The same node supplies these algebraic spaces and their sheaf fibre products. The pair $(x,\\mathrm{id})$ gives a section $s:\\operatorname{Spec}K\\to X_K$, whose image projects to $z$. Base changing the given pseudo-torsor isomorphism gives $\\phi_K:G_K\\times_K X_K\\xrightarrow{\\sim}X_K\\times_K X_K$, with $\\phi_K(g,t)=(a_K(g,t),t)$. This last assertion follows by taking the fibre product of the original isomorphism and its inverse.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tags 0DSK(1), 04TW; reduction to a field with a point, using the given representative of z."
+   }
+  },
+  {
+   "text": "The section $s$ gives an isomorphism $\\theta:G_K\\to X_K$, $g\\mapsto a_K(g,s)$. Explicitly its inverse is $r(t)=\\operatorname{pr}_1\\phi_K^{-1}(t,s)$. Since the second component of $\\phi_K$ is its second input, $\\phi_K^{-1}(t,s)=(r(t),s)$, so $\\theta r(t)=t$. Conversely $\\phi_K(g,s)=(\\theta(g),s)$ gives $r\\theta(g)=g$. These formulas are morphisms of sheaves over $\\operatorname{Spec}K$, so are mutually inverse morphisms of algebraic spaces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04TX (lemma-characterize-trivial-pseudo-torsors), part (2); explicit verification of the omitted proof."
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-unramified-permanence], $G_K\\to\\operatorname{Spec}K$ is unramified, as a base change of $G\\to B$. Hence $f_K:X_K\\to\\operatorname{Spec}K$ is unramified: via $\\theta$ from step 2 its source etale charts and their scheme structure morphisms are the very same charts as for $G_K\\to\\operatorname{Spec}K$. Thus the chart definition of unramifiedness is unchanged.",
+   "uses": [
+    "lem-sfb-space-unramified-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSK(1), last sentence; spaces-morphisms.tex Tag 03ZJ (lemma-base-change-unramified)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-unramified-locus-base-change] to the locally finite type morphism $f$ and the base change $b:\\operatorname{Spec}K\\to B$. It gives $U(f_K)=X_K\\times_X U(f)$. Step 3 gives $U(f_K)=X_K$, so the point represented by $s$ belongs to $p^{-1}U(f)$ and consequently $z\\in U(f)$. Since $z$ was arbitrary, the open subspace $U(f)$ is all of $X$, and $f$ is unramified. If $|X|$ is empty the same equality of opens is vacuous. No section over $B$, nonempty fibre over every point of $B$, flatness or finite presentation was assumed.",
+   "uses": [
+    "lem-sfb-space-unramified-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 05W2 (lemma-where-unramified), specialized to Z=Y=B, as used in Tag 0DSK(1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-unramified-permanence",
+  "lem-sfb-space-unramified-locus-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 0DSK (lemma-pseudo-torsor-implications), proof of (1); Tag 04TX(2) expanded by the explicit inverse."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PseudoTorsor|pseudo.?torsor|AlgebraicSpace|AlgebraicStack",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type pseudo torsor under an unramified group algebraic space is unramified",
+   "results": "Returned Algebra.Unramified.mk, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.Unramified.finiteType, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Unramified.formallyUnramified, AlgebraicGeometry.FormallyUnramified.mk, AlgebraicGeometry.FormallyUnramified.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unramified\", \"Torsor\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo torsor X under an unramified group algebraic space G over B is unramified over B when X and G are locally of finite type",
+   "results": "Returned AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, Algebra.Unramified.formallyUnramified, AlgebraicGeometry.formallyUnramified_iff.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simply transitive group action on an algebraic space, local finite type and an unramified group imply the acted-on space is unramified, allowing empty fibres",
+   "results": "Returned Algebra.Unramified.finiteType, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Unramified.comp, Algebra.Unramified.formallyUnramified, Algebra.unramifiedLocus_eq_univ_iff, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "unramified.*torsor|torsor.*unramified|IsPretransitive|IsTorsor",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "PseudoTorsor|pseudo.?torsor|unramified.*torsor|torsor.*unramified",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme/ring declarations do not concern pseudo torsors of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo torsor for an unramified group algebraic space, locally of finite type over its base, is unramified",
+   "results": "Returned AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.Unramified.mk, AlgebraicGeometry.FormallyUnramified, Algebra.Unramified.formallyUnramified, Algebra.Unramified.finiteType, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.FormallyEtale.iff_unramified_and_smooth.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme/ring declarations do not concern pseudo torsors of algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unramified\", \"Torsor\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme/ring declarations do not concern pseudo torsors of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type pseudo torsor under an unramified group algebraic space is unramified, without a surjectivity assumption",
+   "results": "Returned AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, Algebra.Unramified.finiteType, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, Algebra.Unramified.formallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme/ring declarations do not concern pseudo torsors of algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|AlgebraicStack|PseudoTorsor|pseudo.?torsor",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme/ring declarations do not concern pseudo torsors of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simply transitive action of an unramified algebraic group on an algebraic space implies that the space is unramified if locally of finite type; empty fibres allowed",
+   "results": "Returned AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Unramified.formallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, Algebra.Unramified.finiteType, Algebra.unramifiedLocus_eq_univ_iff.",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme/ring declarations do not concern pseudo torsors of algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-atlas-automorphism-diagonal-test",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Stabilizer criterion for membership in the DM locus. Atlas construction and field-point test of Tag 0DSN, supporting the infinitesimal DM-locus input. Proof steps 3 and 4: identify the descended open as the maximal open with unramified relative diagonal. Supporting general algebraic-space input for the Isom pseudo-torsor argument in Tag 0CL0(4).",
+   "via": [
+    "lem-sfb-smooth-atlas-automorphism-diagonal-test",
+    "lem-sfb-algebraic-stack-dm-point-stabilizer",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-unramified-pseudo-torsor",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0DSK(1), reusing the existing 05W2 unramified-locus and unramified-permanence nodes. A representative of each source point provides a rational point in its field fibre; the pseudo-torsor trivialization and its inverse are written explicitly. This removes the need for a separate field-extension descent lemma. No statement change or new nodes. Searched the live Lean source, current blueprint and Mathlib.",
+  "blueprint": "The inherited from.place traces the supporting Isom pseudo-torsor argument in Tag 0CL0(4), used by the DM-locus input to det-thm-sf-ctf-stability-direct-images proof (3). Steps 1–4 supply exactly its 0DSK(1) prerequisite. The ancestor command returns None, retained as in the live blueprint.from.node; the full inherited via chain and precise place are preserved. The latest blueprint places thm-sf-ctf-stability under sk-thm-sf-kunneth-verdier; no unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Foundational algebraic-space fibre products and the definition of points by field-valued representatives; this is independent of trace formula and supplies the field reduction in Stacks 0DSK(1)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-097cbf5c4",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-097cbf5c4 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The item matches Stacks 0DSK(1) and 04TW (spaces-groupoids.tex l.603-720) hypothesis by hypothesis: pseudo-torsor isomorphism, G and X locally of finite type, G unramified, no surjectivity assumed. The statement and stmt_deps are unchanged and there are no new nodes. Live and side-live both still show the item unsplit, so it is not superseded. Step 1: lem-trf-space-fibre-products-etale-covers gives fibre products and field-valued points; the section is s=(x,id) and phi_K is the base change of the isomorphism and its inverse. Step 2: theta(g)=a_K(g,s) and r(t)=pr1 phi_K^{-1}(t,s); both composites checked on T-points, so the step is genuinely elementary (explicit 04TX(2)). Step 3: the base-change clause of lem-sfb-space-unramified-permanence makes G_K->Spec K unramified, and transporting this along the isomorphism theta over Spec K is elementary. Step 4: lem-sfb-space-unramified-locus-base-change applied to f (lft) and b gives X_K = X_K x_X U(f), so z is in U(f); an open subspace containing every point is X, a one-line consequence of the definitions. Edge cases checked: X empty, an empty fibre over a point of B, G=B (X->B a monomorphism), transcendental or inseparable K. Duplicate search found only lem-sfb-space-infinitesimal-lift-pseudotorsor and lem-sfb-group-space-unramified-identity-test, both different statements. Tool use of lem-trf-space-fibre-products-etale-covers accepted as foundational algebraic-space material. Batch-5 flags on the permanence and locus-base-change nodes are generic: their closure reaches only the definition def-trf-algebraic-space, which is neither the trace formula, Poincare duality nor a step of their proofs. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedPseudoTorsor",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.unramified_of_pseudoTorsor",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedPseudoTorsor.lean",
+  "statement": "theorem unramified_of_pseudoTorsor {S : Scheme.{u}} (B : AlgebraicSpace S) (G X : Over B.obj) [GrpObj G] [ModObj G X] (hG : IsAlgebraicSpace G.left) (hX : IsAlgebraicSpace X.left) (hiso : IsIso (ModObj.leftSMul G X)) (hGft : MapIsLocally (@LocallyOfFiniteType) (ObjectProperty.homMk G.hom : (⟨G.left, hG⟩ : AlgebraicSpace S) ⟶ B)) (hXft : MapIsLocally (@LocallyOfFiniteType) (ObjectProperty.homMk X.hom : (⟨X.left, hX⟩ : AlgebraicSpace S) ⟶ B)) (hGunr : MapIsLocally (@IsUnramified) (ObjectProperty.homMk G.hom : (⟨G.left, hG⟩ : AlgebraicSpace S) ⟶ B)) : MapIsLocally (@IsUnramified) (ObjectProperty.homMk X.hom : (⟨X.left, hX⟩ : AlgebraicSpace S) ⟶ B)",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Returned delivery H2 repaired: the canonical cartesian instance is owned by def-sfb-group-space-over-cartesian. This module imports that definition and the existing MapIsLocally chart test, with Mathlib GrpObj, ModObj and leftSMul. No quotient theorem is a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73ed2ccea",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Statement matches Stacks 0DSK(1)+04TW clause by clause: arbitrary space B; G,X : Over B.obj with algebraicity witnesses; GrpObj/ModObj in groupSpaceOverCartesian (= Over.cartesianMonoidalCategory, landed by maintenance 9ff13a9, snapshot node identical to main); pseudo-torsor = IsIso leftSMul ((g,x)->(gx,x)), no surjectivity; LFT for G,X and unramified for G and X via MapIsLocally (all compatible étale chart pairs, equivalent to Stacks' definition). No extra assumptions or universes. Edge cases: empty X/fibres, G=B, empty base, any field. Node delta vs main: only lean added and stmt_deps +def-sfb-space-morphism-properties +def-sfb-group-space-over-cartesian, both landed owners; quotient theorem citation removed (H2 resolved). lean.statement verbatim; sorry-only; docstrings carry source, blueprint id and 4 proof steps; report has Worker report and Second reading. Advisory: SpaceChartwiseUnramified (lem-sfb-space-universal-conormal module) duplicates MapIsLocally IsUnramified there; the item correctly uses the def-node owner. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,208 @@
+{
+ "id": "lem-trf-primitive-element-separated-valuations",
+ "kind": "statement",
+ "title": "An integral primitive element separating one valuation branch",
+ "statement": "Let $F$ be a field with a nontrivial nonarchimedean real absolute value $|\\cdot|:F\\to\\mathbf R_{\\geq0}$ (that is, $|a|=0$ exactly for $a=0$, $|ab|=|a||b|$, $|a+b|\\leq\\max(|a|,|b|)$, and some $a$ has $|a|\\notin\\{0,1\\}$) [def-weil-field], and put $A=\\{a\\in F:|a|\\leq1\\}$, $\\mathfrak m_A=\\{a:|a|<1\\}$ [def-trf-valuation-ring]. Let $E/F$ be finite separable [def-weil-pbc-separable-algebraic-extension], and let $C$ be the integral closure of $A$ in $E$ [def-weil-pbc-integral-closure]. Suppose $C$ has precisely the finitely many distinct maximal ideals $\\mathfrak m_1,\\ldots,\\mathfrak m_r$, with $r\\geq1$, and $C_{\\mathfrak m_i}$ are valuation rings extending $A$. Suppose $\\kappa=A/\\mathfrak m_A\\subseteq l=C/\\mathfrak m_1$ is finite separable. Then there exists $x\\in C$ with $E=F(x)$, whose residue $\\bar x\\in l$ is nonzero and generates $l$ over $\\kappa$, and with $x\\in\\mathfrak m_i$ for every $i>1$. This includes $l=\\kappa$ and $r=1$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 2.2.1, converse proof, printed p. 11: choice of x_0 in the product of the other maximal ideals and primitive perturbation x=x_0+zy, with zy in every maximal ideal. Primary text https://arxiv.org/html/0707.3953v3#S2.SS2."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-valuation-ring",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Apply the primitive-element theorem to the assumed finite separable extension $l/\\kappa$ to choose a generator $b$. If $l=\\kappa$, choose $b=1$ instead. Otherwise a generator cannot be zero, since $\\kappa(0)=\\kappa$. Thus in either case $b\\ne0$ and $l=\\kappa(b)$. Distinct maximal ideals of $C$ are pairwise coprime: if $\\mathfrak m_i+\\mathfrak m_j$ were proper, maximality would force $\\mathfrak m_j\\subseteq\\mathfrak m_i$, hence equality. The Chinese remainder isomorphism applied to this finite family, followed by taking a representative in $C$, gives $x_0$ with residue $b$ at $\\mathfrak m_1$ and zero at every other $\\mathfrak m_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 030N (fields-lemma-primitive-element) and 00DT (algebra-lemma-chinese-remainder); applied to the stated residue extension and maximal ideals."
+   }
+  },
+  {
+   "text": "Nontriviality supplies $t\\in F$ with $0<|t|<1$: replace an element of absolute value greater than one by its inverse if necessary. In $A$, an element of absolute value one has its inverse in $A$, whereas an element of absolute value less than one cannot be a unit. The latter elements form the ideal $\\mathfrak m_A$, so it is the unique maximal ideal. The extension $A\\subset C$ is integral by the definition of $C$. Maximal contraction therefore gives $\\mathfrak m_i\\cap A=\\mathfrak m_A$ for every $i$. In particular $t\\in\\mathfrak m_i$ for all $i$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-maximal-contracts-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, converse proof, printed p. 11; primitive perturbation paragraph, read at https://arxiv.org/html/0707.3953v3#S2.SS2.; explicit elementary details supplied by Q131 (local PDF absent)."
+   }
+  },
+  {
+   "text": "Choose $y\\in E$ with $E=F(y)$ by the primitive-element theorem. By separable algebraicity, $y$ has a monic polynomial $P(T)=T^d+\\sum_{j<d}a_jT^j$ over $F$, with $d\\ge1$. Fix an integer $N\\ge0$ so large that $|a_j||t|^{N(d-j)}\\le1$ for every $j<d$. Such an integer exists explicitly by taking $N\\ge\\max(0,\\max_{j<d,\\ a_j\\ne0}\\log|a_j|/((d-j)(-\\log|t|)))$ and rounding up. The element $w=t^Ny$ satisfies the monic polynomial $T^d+\\sum_{j<d}a_jt^{N(d-j)}T^j$ over $A$, obtained by multiplying $P(y)=0$ by $t^{Nd}$. Hence $w\\in C$ by the definition of integral closure. Also $F(w)=F(y)=E$, since $t^N\\in F^\\times$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, converse proof, printed p. 11; primitive perturbation paragraph, read at https://arxiv.org/html/0707.3953v3#S2.SS2.; explicit elementary details supplied by Q131 (local PDF absent)."
+   }
+  },
+  {
+   "text": "There are only finitely many proper intermediate fields $F\\subseteq H\\subsetneq E$. For each such $H$ at most one scalar $c\\in F$ can satisfy $x_0+cw\\in H$: if two distinct scalars $c,c'$ did, subtraction and division by $c-c'\\in F^\\times$ would give $w\\in H$, contradicting $F(w)=E$. Thus there is a finite set $B\\subset F$ outside of which $x_0+cw$ belongs to no proper intermediate field. For $c\\notin B$, the intermediate field $F(x_0+cw)$ must consequently be $E$.",
+   "uses": [
+    "lem-zl-finite-intermediate-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030N, fields-lemma-primitive-element, equivalence (1)--(2); elementary affine-line exclusion argument supplied explicitly."
+   }
+  },
+  {
+   "text": "The scalars $t^n$, $n\\ge1$, are pairwise distinct, because their absolute values $|t|^n$ strictly decrease. Choose $n\\ge1$ with $t^n\\notin B$ and set $x=x_0+t^nw$. Then $F(x)=E$ by the preceding step. As $w\\in C$ and $t\\in\\mathfrak m_i$, the correction $t^nw$ lies in every $\\mathfrak m_i$; it also lies in $C$, which is a subring. Therefore $x\\in C$, its residue at $\\mathfrak m_1$ is $b\\ne0$, and $x\\in\\mathfrak m_i$ for every $i>1$. For $r=1$ the other congruences are empty, and when $E=F$ there are no proper intermediate fields to exclude. This proves all clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proposition 2.2.1, converse proof, printed p. 11; primitive perturbation paragraph, read at https://arxiv.org/html/0707.3953v3#S2.SS2.; explicit elementary details supplied by Q131 (local PDF absent)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-pc-crt-ideal-quotient-product",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-zl-finite-intermediate-fields"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 2.2.1, converse proof, printed p. 11; primitive perturbation paragraph, read at https://arxiv.org/html/0707.3953v3#S2.SS2.; explicit elementary details supplied by Q131 (local PDF absent).",
+  "note": "Temkin primitive-perturbation route checked in the primary HTML text; local PDF is WANTED. Monic scaling and finite-exception arguments supplied explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable valued field extension has an integral primitive element with prescribed nonzero primitive residue at one valuation and zero residue at every other valuation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap\", \"module\": \"Mathlib/RingTheory/Valuation/Extension\", \"type\": \"∀ {K : outParam (Type u_5)} {L : outParam (Type u_6)} {Γ₀ : outParam (Type u_7)} {Γ₁ : outParam (Type u_8)}\\n  [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [inst_3 : LinearOrderedCommGroupWithZero Γ₀]\\n  [inst_4 : LinearOrderedCommGroupWithZero Γ₁] (vK : Valuation K Γ₀) (vL : Valuation L\", \"doc\": \"For any element $x$ in the valuation subring $K_0$, the composition of the algebra map from the residue field of $K_0$ to the residue field of $L_0$ with the residue map of $K_0$ equals the compositio\"}\n  {\"name\": \"Valuation.FiniteField.algebraMap_eq_one\", \"module\": \"Mathlib/RingTheory/Valuation/FiniteField\", \"type\": \"∀ {Γ₀ : Type u_1} [inst : LinearOrderedCommMonoidWithZero Γ₀] {A : Type u_2} [inst_1 : Ring A] (v : Valuation A Γ₀)\\n  {Fq : Type u_3} [inst_2 : Field Fq] [Finite Fq] [inst_4 : Algebra Fq A] (a : Fq), a ≠ 0 → v ((algebraMap Fq A) a) = 1\", \"doc\": \"For any non-zero element $ a $ in a finite field $ \\\\mathbb{F}_q $, the valuation $ v $ of the image of $ a $ under the canonical algebra homomorphism $ \\\\text{algebraMap}(\\\\mathbb{F}_q, A) $ satisfies $\"}\n  {\"name\": \"Valued.ResidueField\", \"module\": \"Mathlib/Topology/Algebra/Valued/ValuedField\", \"type\": \"(K : Type u_1) →\\n  [inst : Field K] →\\n    {Γ₀ : outParam (Type u_2)} → [inst_1 : LinearOrderedCommGroupWithZero Γ₀] → [vK : Valued K Γ₀] → Type u_1\", \"doc\": \"For a field $ K $ equipped with a valuation into a linearly ordered commutative group with zero $ \\\\Gamma_0 $, this is the residue field obtained by quotienting the ring of integers $ \\\\mathcal{O}_K $ (\"}\n  {\"name\": \"Valuation.pow_coeff_zero_ne_zero_of_unit\", \"module\": \"Mathlib/RingTheory/Valuation/Minpoly\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {Γ₀ : Type u_2} [inst_1 : LinearOrderedCommGroupWithZero Γ₀] (v : Valuation K Γ₀)\\n  {L : Type u_3} [inst_2 : Field L] [inst_3 : Algebra K L] [FiniteDimensional K L] (x : L),\\n  IsUnit x → v ((minpoly K x).coeff 0) ^ (Module.finrank K L / (minpoly K x).natDegree) ≠ 0\", \"doc\": \"For a unit element $ x $ in a finite-dimensional field extension $ L $ over $ K $, the valuation $ v $ of the constant term of the minimal polynomial of $ x $ raised to the power of the degree of the \"}\n  {\"name\": \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"module\": \"Mathlib/NumberTheory/LocalField/Basic\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : ValuativeRel K] [inst_2 : TopologicalSpace K]\\n  [inst_3 : IsNonarchimedeanLocalField K], Finite (IsLocalRing.ResidueField ↥(ValuativeRel.valuation K).integer)\", \"doc\": \"For any non-Archimedean local field $ K $, its residue field (obtained by quotienting the valuation ring $ \\\\mathcal{O}_K $ by its unique maximal ideal) is a finite field.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_exists_uniformizer\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R),\\n  ∃ π, (IsDedekindDomain.HeightOneSpectrum.valuation K v) π = WithZero.exp (-1)\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, and a height one prime ideal $ v $ in $ R $, there exists an element $ \\\\pi \\\\in K $ such that the valuation $ v(\\\\pi) = -1 $. This element $ \\\\pi $ \"}\n  {\"name\": \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} [inst : CommRing A] [inst_1 : IsDomain A] [inst_2 : IsDiscreteValuationRing A]\\n  [inst_3 : Field K] [inst_4 : Algebra A K] [inst_5 : IsFractionRing A K] {x : K},\\n  (IsDedekindDomain.HeightOneSpectrum.valuation K (IsDiscreteValuationRing.maximalIdeal A)) x ≤ 1 →\\n    ∃ \", \"doc\": \"For any element $ x $ in the fraction field $ K $ of a discrete valuation ring $ A $, if the valuation of $ x $ with respect to the maximal ideal of $ A $ is at most $ 1 $, then $ x $ belongs to $ A $\"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Primitive element theorem with simultaneous congruences in the semilocal integral closure of a valuation ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} [inst : CommRing A] [inst_1 : IsDomain A] [inst_2 : IsDiscreteValuationRing A]\\n  [inst_3 : Field K] [inst_4 : Algebra A K] [inst_5 : IsFractionRing A K] {x : K},\\n  (IsDedekindDomain.HeightOneSpectrum.valuation K (IsDiscreteValuationRing.maximalIdeal A)) x ≤ 1 →\\n    ∃ \", \"doc\": \"For any element $ x $ in the fraction field $ K $ of a discrete valuation ring $ A $, if the valuation of $ x $ with respect to the maximal ideal of $ A $ is at most $ 1 $, then $ x $ belongs to $ A $\"}\n  {\"name\": \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"module\": \"Mathlib/RingTheory/Valuation/AlgebraInstances\", \"type\": \"∀ {K : Type u_1} [inst : Field K] (v : Valuation K (WithZero (Multiplicative ℤ))) (L : Type u_2) [inst_1 : Field L]\\n  [inst_2 : Algebra K L] {x : L} (hx : x ∈ integralClosure (↥v.valuationSubring) L),\\n  IsIntegral ↥v.valuationSubring ⟨x, hx⟩\", \"doc\": \"If an element $ x $ of $ L $ belongs to the integral closure of the valuation subring $ v.\\\\text{valuationSubring} $ in $ L $, then $ x $ is integral over $ v.\\\\text{valuationSubring} $.\"}\n  {\"name\": \"Valuation.HasExtension.instAlgebraInteger\", \"module\": \"Mathlib/RingTheory/Valuation/Extension\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : Ring A] →\\n        [inst_2 : Algebra R A] →\\n          {ΓR : Type u_6} →\\n            {ΓA : Type u_7} →\\n              [inst_3 : LinearOrderedCommGroupWithZero ΓR] →\\n                [inst_4 : LinearOrderedCommGroupWithZero ΓA]\", \"doc\": \"Given a commutative ring $ R $ with a valuation $ v_R $, an $ R $-algebra $ A $ with a valuation $ v_A $ extending $ v_R $, there exists an algebra structure from the valuation ring of $ R $ to the va\"}\n  {\"name\": \"ValuationSubring.algebra\", \"module\": \"Mathlib/RingTheory/Valuation/AlgebraInstances\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] →\\n    (v : Valuation K (WithZero (Multiplicative ℤ))) →\\n      (L : Type u_2) →\\n        [inst_1 : Field L] →\\n          [inst_2 : Algebra K L] →\\n            (E : Type u_3) →\\n              [inst_3 : Field E] →\\n                [inst_4 : Algebra K E] →\\n                \", \"doc\": \"Given a valuation $ v $ on a field $ K $ with valuation subring $ \\\\mathcal{O}_v $, and field extensions $ L $ and $ E $ equipped with compatible algebra structures over $ K $, the integral closure of \"}\n  {\"name\": \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"module\": \"Mathlib/RingTheory/Valuation/AlgebraInstances\", \"type\": \"∀ {K : Type u_1} [inst : Field K] (v : Valuation K (WithZero (Multiplicative ℤ))) (L : Type u_2) [inst_1 : Field L]\\n  [inst_2 : Algebra K L] {x : ↥(integralClosure (↥v.valuationSubring) L)}, IsIntegral (↥v.valuationSubring) x\", \"doc\": \"Every element $ x $ in the integral closure of the valuation subring $ v.\\\\text{valuationSubring} $ in $ L $ is integral over the valuation subring $ v.\\\\text{valuationSubring} $.\"}\n  {\"name\": \"NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal\", \"module\": \"Mathlib/Topology/Algebra/Valued/WithVal\", \"type\": \"∀ {Γ₀ : Type u_2} [inst : LinearOrderedCommGroupWithZero Γ₀] {K : Type u_3} [inst_1 : Field K] (v : Valuation K Γ₀)\\n  (R : Type u_4) [inst_2 : CommRing R] [inst_3 : Algebra R K] [IsIntegralClosure R ℤ K],\\n  IsIntegralClosure R ℤ (WithVal v)\", \"doc\": \"If $ R $ is a commutative ring equipped with a valuation $ v $, then the ring $ R $ with valuation, denoted $ \\\\text{WithVal}(v) $, inherits the commutative ring structure from $ R $. This instance ass\"}\n  {\"name\": \"LocalSubring.exists_le_valuationSubring_of_isIntegrallyClosedIn\", \"module\": \"Mathlib/RingTheory/Valuation/LocalSubring\", \"type\": \"∀ {K : Type u_3} [inst : Field K] {x : K} {R : LocalSubring K},\\n  x ∉ R.toSubring → ∀ [IsIntegrallyClosedIn (↥R.toSubring) K], ∃ V, R ≤ V.toLocalSubring ∧ x ∉ V\", \"doc\": \"For a field $ K $, a local subring $ R $ of $ K $, and an element $ x $ not in the subring of $ R $, if $ R $'s subring is integrally closed in $ K $, then there exists a valuation subring $ V $ of $ \"}\n  {\"name\": \"Subring.exists_le_valuationSubring_of_isIntegrallyClosedIn\", \"module\": \"Mathlib/RingTheory/Valuation/LocalSubring\", \"type\": \"∀ {K : Type u_3} [inst : Field K] {x : K} {R : Subring K},\\n  x ∉ R → ∀ [IsIntegrallyClosedIn (↥R) K], ∃ V, R ≤ V.toSubring ∧ x ∉ V\", \"doc\": \"Let $ K $ be a field and $ R $ a subring of $ K $ that is integrally closed in $ K $. If $ x $ is an element of $ K $ not in $ R $, then there exists a valuation subring $ V $ of $ K $ such that $ R $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Field.IsPrimitiveElement, ValuationRing",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Field.IsPrimitiveElement'",
+   "date": "2026-10-24",
+   "verdict": "no match: Loogle rejected the identifier; second semantic phrasing and source grep also read"
+  },
+  {
+   "tool": "grep",
+   "query": "primitive.*valuation|valuation.*primitive|primitive.*semilocal|semilocal.*primitive",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Choose a primitive element of a finite separable field extension satisfying congruences at finitely many valuation rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Field.exists_primitive_element\", \"module\": \"Mathlib.FieldTheory.PrimitiveElement\", \"type\": \": ∃ α : E, F⟮α⟯ = ⊤\", \"doc\": \"There exists an element $\\\\alpha \\\\in E$ such that the field extension generated by adjoining $\\\\alpha$ to $F$ equals the entire field $E$, i.e., $F(\\\\alpha) = E$.\"}\n  {\"name\": \"Field.exists_primitive_element_of_finite_top\", \"module\": \"Mathlib.FieldTheory.PrimitiveElement\", \"type\": \"[Finite E] : ∃ α : E, F⟮α⟯ = ⊤\", \"doc\": \"Every finite field extension $ E $ of $ F $ admits a primitive element $ \\\\alpha \\\\in E $, i.e., there exists $ \\\\alpha $ such that the field extension generated by $ \\\\alpha $ over $ F $ equals $ E $, de\"}\n  {\"name\": \"Field.exists_primitive_element_of_finite_bot\", \"module\": \"Mathlib.FieldTheory.PrimitiveElement\", \"type\": \"[Finite F] [FiniteDimensional F E] : ∃ α : E, F⟮α⟯ = ⊤\", \"doc\": \"If $ F $ is a finite field and $ E $ is a finite-dimensional field extension of $ F $, then there exists an element $ \\\\alpha \\\\in E $ such that $ E $ is generated by $ \\\\alpha $ over $ F $, i.e., $ E = \"}\n  {\"name\": \"Field.primitive_element_inf_aux\", \"module\": \"Mathlib.FieldTheory.PrimitiveElement\", \"type\": \"[Algebra.IsSeparable F E] : ∃ γ : E, F⟮α, β⟯ = F⟮γ⟯\", \"doc\": \"In a separable field extension $ E $ over $ F $, for any two elements $ \\\\alpha, \\\\beta \\\\in E $, there exists an element $ \\\\gamma \\\\in E $ such that the subfield $ F(\\\\alpha, \\\\beta) $ is equal to the subf\"}\n  {\"name\": \"Field.primitive_element_iff_algHom_eq_of_eval\", \"module\": \"Mathlib.FieldTheory.PrimitiveElement\", \"type\": \"(α : E) (φ : E →ₐ[F] A) : F⟮α⟯ = ⊤ ↔ ∀ ψ : E →ₐ[F] A, φ α = ψ α → φ = ψ\", \"doc\": \"For a field extension $ E/F $, an element $ \\\\alpha \\\\in E $ generates $ E $ over $ F $ (i.e., $ F(\\\\alpha) = E $) if and only if for every pair of $ F $-algebra homomorphisms $ \\\\phi, \\\\psi : E \\\\to A $ in\"}\n  {\"name\": \"NumberField.is_primitive_element_of_infinitePlace_lt\", \"module\": \"Mathlib.NumberTheory.NumberField.InfinitePlace.Basic\", \"type\": \"{x : 𝓞 K} {w : InfinitePlace K} (h₁ : x ≠ 0) (h₂ : ∀ ⦃w'⦄, w' ≠ w → w' x < 1)\\n  (h₃ : IsReal w ∨ |(w.embedding x).re| < 1) : ℚ⟮(x : K)⟯ = ⊤\", \"doc\": \"Let $ K $ be a number field with ring of integers $ \\\\mathcal{O}_K $, and let $ x \\\\in \\\\mathcal{O}_K $ be a nonzero element. Suppose that for every infinite place $ w' $ of $ K $ distinct from a fixed i\"}\n  {\"name\": \"Field.primitive_element_iff_algHom_eq_of_eval'\", \"module\": \"Mathlib.FieldTheory.PrimitiveElement\", \"type\": \"(α : E) : F⟮α⟯ = ⊤ ↔ Function.Injective fun φ : E →ₐ[F] A ↦ φ α\", \"doc\": \"For an element $\\\\alpha \\\\in E$, the field extension $F(\\\\alpha)$ equals $E$ if and only if the map sending each $F$-algebra homomorphism $\\\\phi : E \\\\to A$ to $\\\\phi(\\\\alpha)$ is injective.\"}\n  {\"name\": \"Field.exists_primitive_element_iff_finite_intermediateField\", \"module\": \"Mathlib.FieldTheory.PrimitiveElement\", \"type\": \": (Algebra.IsAlgebraic F E ∧ ∃ α : E, F⟮α⟯ = ⊤) ↔ Finite (IntermediateField F E)\", \"doc\": \"An algebraic field extension $ E/F $ has a primitive element $ \\\\alpha $ such that $ E = F(\\\\alpha) $ if and only if the set of intermediate fields between $ F $ and $ E $ is finite.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "primitive.*valuation|valuation.*primitive|primitive.*semilocal|semilocal.*primitive",
+   "results": "OK: 0 hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not impose the simultaneous residues and primitive generation together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Primitive element theorem with prescribed residues in the semilocal integral closure of a valuation ring",
+   "results": "OK: 8 hits. integralClosure.isIntegral, IsAdjoinRoot.mkOfPrimitiveElement, IsDiscreteValuationRing.exists_prime, Valuation.Integers.integrallyClosed, mem_integralClosure_iff, ValuationSubring.isIntegral_of_mem_ringOfIntegers', ValuationSubring.isIntegral_of_mem_ringOfIntegers, minpoly.prime_of_isIntegrallyClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not impose the simultaneous residues and primitive generation together"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"primitive\", \"element\"",
+   "results": "OK: 12 hits. Algebra.adjoin_eq_top_of_primitive_element, IntermediateField.adjoin_minpoly_coeff_of_exists_primitive_element, Field.exists_primitive_element_of_finite_intermediateField, Field.primitive_element_inf_aux, Field.exists_primitive_element_of_finite_top, Field.finite_intermediateField_of_exists_primitive_element, Field.exists_primitive_element_iff_finite_intermediateField, Field.exists_primitive_element_of_finite_bot",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not impose the simultaneous residues and primitive generation together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable valued field extension has an integral primitive element with prescribed nonzero generating residue at one maximal ideal and zero residues at the others",
+   "results": "OK: 8 hits. Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Valued.ResidueField, IsDiscreteValuationRing.exists_lift_of_le_one, IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation, instIsSeparableResidueFieldOfQuotientIdeal, Polynomial.UniversalCoprimeFactorizationRing.exists_liesOver_residueFieldMap_bijective",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not impose the simultaneous residues and primitive generation together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Primitive element theorem with simultaneous congruences in a semilocal integral closure",
+   "results": "OK: 8 hits. PowerBasis.exists_smodEq, mem_adjoin_of_smul_prime_smul_of_minpoly_isEisensteinAt, mem_adjoin_of_smul_prime_pow_smul_of_minpoly_isEisensteinAt, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk, Algebra.ZariskisMainProperty.of_isIntegral, Algebra.zariskisMainProperty_iff, Algebra.ZariskisMainProperty, galLift",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not impose the simultaneous residues and primitive generation together"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valued-decompletion-etale",
+  "date": "2026-10-24",
+  "group": "Q81"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proposition 2.2.1 and its proof, printed p. 11; preliminary facts on completions used there; Lemma 2.1.6 for the etale terminology. Supporting decompletion input: Proposition 2.2.1, converse proof, printed p. 11: choice of x_0 in the product of the other maximal ideals and primitive perturbation x=x_0+zy, with zy in every maximal ideal. Primary text https://arxiv.org/html/0707.3953v3#S2.SS2.",
+   "via": [
+    "lem-trf-valued-decompletion-etale",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-primitive-element-separated-valuations",
+  "worker": "stage1",
+  "summary": "Q131 retained the statement and previous searches, and supplied CRT residue selection, maximal contraction, explicit monic rescaling, finite-intermediate-field exclusion and residue-preserving perturbation. All non-elementary inputs already have Mathlib-leaf nodes; no new nodes. Edge cases l=kappa, r=1 and E=F checked.",
+  "blueprint": "Realizes the inherited semistable-alteration/Temkin Proposition 2.2.1 primitive-perturbation input below lem-trf-local-term-locality, proof (1)--(2); no change of unit route. Whole-blueprint searches for primitive element and Chinese remainder found no duplicate item."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-cb043b8e3",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-cb043b8e3 (reviewer sub-agent of L); spot-checked: Read the item in full, all 5 steps, and the statement of every cited node. There are no new nodes. Step 1: the primitive element b of l/κ is nonzero, with b=1 when l=κ; coprimality of distinct maximal ideals is argued explicitly; CRT (lem-pc-crt-ideal-quotient-product, Stacks 00DT at algebra.tex:2616, verified) gives x_0. Step 2: t with 0<|t|<1 exists; m_A is the unique maximal ideal; m_i∩A=m_A by lem-weil-pbc-integral-maximal-contracts-maximal applied to the integral extension A→C. Step 3: the monic rescaling w=t^N y is written out, and I checked the bound on N. Step 4: each proper intermediate field excludes at most one scalar; finiteness comes from lem-zl-finite-intermediate-fields. Step 5: distinct t^n avoid the finite bad set B, and the correction t^n w lies in every m_i. Edge cases l=κ (including κ=F_2), r=1 and E=F work. The unused valuation-ring hypothesis is harmless. All cited inputs are existing mathlib-status nodes, so no tool_uses are needed. The statement gains only an inline restatement of the axioms of a nonarchimedean absolute value: same meaning, and it closes a B3 gap; the report's 'unchanged' claim is slightly inaccurate. The Temkin PDF is absent and marked WANTED; the proof is self-contained, so no unread source carries the argument. No duplicate found in the DAG; the consumer lem-trf-valued-decompletion-etale uses exactly these conclusions."
+ }
+}

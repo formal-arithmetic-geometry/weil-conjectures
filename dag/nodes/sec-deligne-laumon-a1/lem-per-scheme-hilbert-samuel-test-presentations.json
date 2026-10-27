@@ -1,0 +1,488 @@
+{
+ "id": "lem-per-scheme-hilbert-samuel-test-presentations",
+ "kind": "statement",
+ "title": "Hilbert--Samuel test presentations for schemes with nilpotents",
+ "statement": "Let $X$ be any scheme of finite type over $\\mathbf Q$, locally closed in a smooth finite-type scheme $Z$; $X$ need not be reduced or generically reduced [def-weil-finite-type-morphism, def-weil-closed-immersion, def-sbc-smooth-morphisms]. For $x\\in X$ put $h_x(n)=\\operatorname{length}(\\mathcal O_{X,x}/\\mathfrak m_x^{n+1})$, $\\Lambda f(n)=\\sum_{i=0}^n f(i)$, and $H_X(x)=\\Lambda^{\\operatorname{trdeg}_{\\mathbf Q}\\kappa(x)}h_x$ [def-weil-pbc-module-length, def-kun-transcendence-degree, def-weil-residue-field]. Then $H_X$ has finite image on $X$ and closed upper level sets for lexicographic order. Under smooth blowups with center contained in a constant-$H_X$ locus, with normal crossings with the recorded boundary, it cannot increase at points lying above that locus; any decreasing sequence of retained Hilbert--Samuel levels from a fixed finite-dimensional initial input stabilizes.\n\nAt every specified point and level there is, after open and etale localization, a marked-ideal presentation in the precise finite-test sense of [def-trf-hilbert-samuel-presentation]. The chart can be chosen surjective over an open neighbourhood of the specified point. Namely it has smooth support $N$ in a smooth envelope, coherent ideal $I$ and positive mark $b$, with cosupport $\\{\\operatorname{ord}I\\ge b\\}$ equal to the retaining-level locus on a neighbourhood where that level is maximal [pqf-def-coherent, def-trf-marked-ideal-order]. Its tests are the smooth normal-crossings blowups in cosupport, line products, and exceptional intersection blowups. At every blowup test the scheme takes scheme-theoretic strict transform; at a line test it takes ordinary pullback. The marked ideal takes controlled transform for admissible blowups and ordinary pullback for line and exceptional-intersection tests. For retaining-level loci the exceptional-test scheme transform may equivalently be computed by the ordinary-pullback convention of [def-trf-hilbert-samuel-presentation] [def-nagata-global-blowup, def-nagata-strict-transform]. Equality of retaining-level loci holds after every finite test sequence. Empty cosupport removes the specified level.\n\nAt a nonregular germ, in a minimal smooth envelope (whose defining ideal has zero linear part in the cotangent space), a presentation is etale-locally test-equivalent to one with full-envelope support $N=Z$ and order exactly $b$ at every cosupport point. The equivalence class at the retained level is intrinsic: it is unchanged by the chosen minimal envelope and coefficient data, with the earlier center ideals, their order and induced exceptional birth data identified. Adding a smooth factor pulls back this class, replacing $h$ by its iterated sum in the fibre-local dimension and replacing the extended level by the corresponding sum in relative dimension. This includes smooth morphisms of the intrinsic schemes, using local embeddings. Equal-dimensional comparisons of the full-envelope presentations are test equivalences; when envelope dimensions differ, the comparison is made after adjoining the relative smooth parameters. These assertions persist through finite permissible histories. The test boundary starts empty when a presentation is chosen; earlier center ideals are retained separately, including intrinsic identity stages. This is a presentation theorem, with no numerical resolution word or global maximum-center algorithm asserted.",
+ "source": {
+  "document": "literature/bierstone-milman-temkin/Q-universal-desingularization.pdf",
+  "place": "BMT arXiv:0905.3580v1, §§6.1--6.3, pp.13--15, especially maximal-order minimal-envelope presentation p.14; BM2 Chapter III and BM4 §7 as referenced there. Online text consulted; archival local PDF and BM2/BM4 WANTED. No Stacks tag gives this presentation theorem."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-weil-pbc-module-length",
+  "def-kun-transcendence-degree",
+  "def-weil-residue-field",
+  "def-weil-etale-morphism",
+  "def-trf-hilbert-samuel-presentation",
+  "pqf-def-coherent",
+  "def-trf-marked-ideal-order",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-jet-diagram-hilbert-control] to affine charts of $X$, with their actual quotient algebras, not their reductions. It identifies $H_X$ with finite principal-parts fibre dimensions and Taylor-diagram counting functions, and gives locally finitely many diagrams. [lem-trf-extended-hilbert-local-upper-bound] gives an open neighbourhood of each $a$ on which every value is pointwise at most $H_X(a)$. For any threshold $v$, the strict sublevel $H_X<v$ is the union of these neighbourhoods for its points; hence the upper level set is closed. Finite type gives a finite affine cover by [def-weil-finite-type-morphism]; a finite union of the finite local value sets is finite. All these cited statements allow nilpotents and nonclosed points.",
+   "uses": [
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-extended-hilbert-local-upper-bound",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-per-nonreduced-regular-hilbert-coefficients] at $a$, with $Q\\ge\\max d_i-1$. On its one smooth support $N$ set $m_{i\\gamma}=d_i-|\\gamma|$ and choose a positive common multiple $b$ of the finitely many positive weights; put $I=\\sum(c_{i\\gamma}^{b/m_{i\\gamma}})$. For an empty list take $(I,b)=(0,1)$. [lem-trf-logarithmic-differential-transform] gives $\\operatorname{ord}I=\\min (b/m_{i\\gamma})\\operatorname{ord}c_{i\\gamma}$, so cosupport is exactly the coefficient order locus. [lem-trf-coefficient-order-hilbert-equality] identifies that locus with $H_X=H_X(a)$ after shrinking. Its block hypotheses at $a$ are the supplied five conditions. It also asks for the vertex-derivative and forbidden-derivative conditions (4),(5) at every point $y\\in N$, while the datum gives them only on its coefficient order locus. Shrink $N$ to an irreducible affine neighbourhood of $a$; this is possible because its local rings are regular, hence domains, by [lem-weil-pbc-smooth-scheme-over-field-regular]. On that neighbourhood the Jacobian determinants in (4), regular functions that are units at $a$, remain units. Each membership in (4),(5) says that certain coefficient functions $c_{i\\gamma}$ have zero Taylor expansion. At $a$ the Taylor map is faithfully flat by [lem-trf-implicit-taylor-coordinate-calculus], so their germs are zero. Hence these functions vanish on the irreducible neighbourhood, and the memberships hold at every $y$. The finite ideal is coherent by [pqf-lem-coherent-ft-locnoeth], since $N$ is locally Noetherian by [lem-weil-pbc-smooth-scheme-over-field-regular].",
+   "uses": [
+    "lem-per-nonreduced-regular-hilbert-coefficients",
+    "lem-trf-logarithmic-differential-transform",
+    "lem-trf-coefficient-order-hilbert-equality",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-trf-implicit-taylor-coordinate-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "For a smooth center in this equality locus, [lem-trf-marked-controlled-blowup-charts] supplies smooth supports, ordered transverse boundary and the regular controlled transform. [lem-trf-formal-coefficient-transform-criterion] applies to the actual defining ideal with no reducedness assumption: $H'\\le H_X(a)$; equality is exactly the transformed coefficient order locus, with the same five conditions. Its coefficients are $c'_{i\\gamma}=e^{-m_{i\\gamma}}\\sigma^*c_{i\\gamma}$. Therefore $\\sum((c'_{i\\gamma})^{b/m_{i\\gamma}})=e^{-b}\\sigma^*I$, term by term. Off the center use the same chart statement, which says the marked pair is unchanged. Repeat the argument at each point of any smooth locally constant-$H_X$ center to obtain the claimed nonincrease over that center.",
+   "uses": [
+    "lem-trf-marked-controlled-blowup-charts",
+    "lem-trf-formal-coefficient-transform-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "Set up induction on finite tests, retaining the bound $H_j\\le L_j=\\Lambda^{\\ell_j}H_X(a)$, equality exactly at cosupport, the five coefficient conditions there, and the ordered transverse boundary. Store full supported multiplication identities over every source point in cosupport. In a permissible chart meeting $N'$, write $Y_h=e$, $Y_k=e(\\eta_k+U_k)$ and $Z=eZ'$. [lem-trf-coordinate-blowup-division-generators] gives generators $f_i'=e^{-d_i}\\sigma^*f_i$ of the actual saturated ideal. For $Z^\\beta f_i=\\sum q_hf_h$, put $v=\\operatorname{ord}_{(Y,Z)}(Z^\\beta f_i)$, so $v\\ge d_i+|\\beta|$. Its filtration estimate makes $e^{d_h-d_i-|\\beta|}\\sigma^*q_h$ regular and gives supported identities for $(Z')^\\beta f_i'$. The supports restrict only $Z$, so mixing $Y$ does not change them. Differentiation gives $g_j'=e^{-1}\\sigma^*g_j$ and the same transverse Jacobians. The forbidden derivative memberships persist because the coordinate ideals $(Z'^\\ell)$ are $e$-saturated. On $e=0$ the pure transverse degree-$d_i$ forms remain the source forms. These statements retain certificates even over points whose order dropped. Taylor compatibility with regular models is [lem-trf-implicit-taylor-coordinate-calculus].",
+   "uses": [
+    "lem-trf-coordinate-blowup-division-generators",
+    "lem-trf-implicit-taylor-coordinate-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "A line test appends a free coefficient variable. [lem-trf-formal-coefficient-transform-criterion] and [lem-trf-jet-diagram-hilbert-control] give ordinary coefficient pullback and $L_{j+1}=\\Lambda L_j$, retaining all certificates. For sequences whose first differing index is $q$, partial sums agree below $q$ and their difference at $q$ is the original difference. Hence summation preserves and reflects lexicographic comparisons; it is injective since $F(0)=\\Lambda F(0)$ and $F(q+1)=\\Lambda F(q+1)-\\Lambda F(q)$. This proves the bound and equality assertions for line tests, including nonclosed points. The new zero section is a free coefficient-coordinate boundary; the existing boundary remains ordered.",
+   "uses": [
+    "lem-trf-formal-coefficient-transform-criterion",
+    "lem-trf-jet-diagram-hilbert-control"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "For an exceptional-intersection test first compute the auxiliary ordinary pullback prescribed by [def-trf-hilbert-samuel-presentation]. Its coordinate charts replace two coefficient parameters by $W_u=e,W_v=e(\\xi+V)$, by [lem-trf-permissible-coordinate-chart]. Trace the two boundary germs backwards. Before any permissible exceptional divisor they are free variables over an earlier $X$, so the jet free-variable formula applies. Otherwise take the last permissible blowup affecting the germ. Step 4 stored whole-series certificates over its cosupport source point, including lower-level points on its exceptional fibre. Subsequent line and boundary substitutions preserve those identities; the pure transverse forms remain the source forms because the transverse variables are not translated. Apply [lem-per-hilbert-boundary-supported-certificates] at the new points of $N$: equality holds exactly at the new coefficient order locus, with all five conditions there, and strict drops cannot return to $L_j$. Outside $N$, a first nonzero essential transverse direction makes one of the stored vertex derivatives of order $d_i-1$ a unit; the earlier retained blocks have zero direction. Thus its first dropping block contributes a nonzero remainder independent of the earlier prefix columns, giving strict lexicographic drop by the homogeneous-division criterion [lem-trf-homogeneous-continuous-formal-division]. For the actual scheme take saturation by $e$: the certificate node says saturation leaves an equality germ unchanged and cannot raise a strictly smaller function. Keep the auxiliary model and its quotient onto the actual model through subsequent substitutions and saturations; at any new candidate equality point its coefficient certificates make $e$ injective, so the auxiliary and strict germs coincide there. Hence both conventions give the same retaining-level loci. This is a prefix dimension count, not invariance at lower-level images.",
+   "uses": [
+    "def-trf-hilbert-samuel-presentation",
+    "lem-trf-permissible-coordinate-chart",
+    "lem-per-hilbert-boundary-supported-certificates",
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-homogeneous-continuous-formal-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "Steps 3--6 close the induction on every finite prefix. The order formulas of [lem-trf-logarithmic-differential-transform] identify the coefficient order locus with the cosupport of the prescribed transformed $I$ in each case. At an equality point all five conditions are available for the next permissible test; [lem-trf-extended-hilbert-local-upper-bound] supplies its pointwise upper neighbourhood if needed. The two equal loci allow exactly the same next smooth centers, and normal crossings is the same condition on the same ordered ambient boundary. Thus all finite-depth predicates of [def-trf-hilbert-samuel-presentation] hold, with one initial chart and empty boundary. An etale chart maps onto an open neighbourhood of $a$ by [lem-weil-pbc-etale-morphism-open-map]; replacing the base by that image makes it surjective. Empty cosupport has empty equality locus, so removes the level.",
+   "uses": [
+    "lem-trf-logarithmic-differential-transform",
+    "lem-trf-extended-hilbert-local-upper-bound",
+    "def-trf-hilbert-samuel-presentation",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "Choose a minimal smooth envelope using [lem-trf-smooth-embedding-etale-comparison]. Apply steps 2--7 there. If its coefficient support has codimension $r=0$, no transverse variable exists. A nonempty vertex list would then have degree zero, making a generator a unit in a proper defining ideal. Thus the list is empty and the Taylor ideal is zero. [lem-trf-diagonal-taylor-faithful-flatness] and [lem-weil-pbc-faithfully-flat-ideal-contraction] first contract the zero ideal to the localized ambient chart. The original ambient stalk maps faithfully flatly to that chart stalk: it is flat by [lem-trf-etale-local-ring-flatness] and local, hence faithfully flat by [lem-weil-pbc-flat-local-hom-faithfully-flat]. A second ideal contraction makes the original defining germ zero, so $X$ has the smooth ambient local ring, regular by [lem-weil-pbc-smooth-scheme-over-field-regular]. At a nonregular germ, therefore $r>0$. In retraction coordinates $p:Z\\to N$, take $J=(z_1^b,\\ldots,z_r^b)+p^*I$. [lem-trf-marked-ideal-transverse-suspension] gives the same finite tests and order exactly $b$ throughout cosupport on the whole envelope. At a regular germ the empty coefficient construction still works, with infinite order for its zero ideal and no finite-order claim.",
+   "uses": [
+    "lem-trf-smooth-embedding-etale-comparison",
+    "lem-trf-diagonal-taylor-faithful-flatness",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-trf-marked-ideal-transverse-suspension",
+    "lem-trf-etale-local-ring-flatness",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "For two minimal envelopes use [lem-trf-smooth-embedding-etale-comparison] to identify the pointed closed pairs on a common etale neighbourhood, respecting the specified earlier intrinsic ideals. At depth zero both presentations have the same intrinsic equality locus by step 7. Induct on depth: the same locus and ordered boundary give the same next centers, and the same geometric test transforms the same embedded scheme; step 7 identifies both next cosupports with its retaining-level locus. This proves equivalence for arbitrary coefficient choices and their suspensions. The same argument starts at any identified transformed germ in a finite permissible history, retaining the ordered earlier ideals even at intrinsic identity stages. Exceptional birth data is the ordered data induced by those same centers; it is not inserted into the freshly empty test boundary.",
+   "uses": [
+    "lem-trf-smooth-embedding-etale-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "For a smooth intrinsic map $Y\\to X$ use [sbc-thm-etale-local-normal-form] to factor it locally as etale followed by a projection from $X\\times\\mathbf A^r$. Use a local embedding of $X$ and its ambient product to compute the presentation upstairs. [lem-trf-jet-diagram-hilbert-control] gives $H_Y=\\Lambda^rH_X$; [lem-trf-smooth-local-tangent-cone-extension] gives $h_y=\\Lambda^s h_x$ for the fibre-local dimension $s$ by counting polynomial monomials in its graded isomorphism and summing graded-piece lengths using [lem-weil-pbc-length-additive-short-exact]. The coefficient data pull back by [lem-trf-formal-coefficient-transform-criterion]. Repeating the induction of steps 3--7 for these data treats all next centers upstairs, without requiring them to descend. Equal-dimensional full-envelope comparisons are therefore equivalences by step 9; for different dimensions apply the same argument after adjoining the smooth parameters. The ideal-pullback clause of the envelope comparison retains earlier ideals, so the argument applies at every stage of the finite histories.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-trf-jet-diagram-hilbert-control",
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-weil-pbc-length-additive-short-exact",
+    "lem-trf-formal-coefficient-transform-criterion",
+    "lem-trf-smooth-embedding-etale-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  },
+  {
+   "text": "Fix a finite smooth coordinate cover near the initial $X$ and let $d$ bound its coordinate dimensions. Smooth-center blowups have local coordinate-subspace models by [lem-trf-smooth-pair-blowup-local-models]; [lem-trf-coordinate-subspace-blowup-charts] shows that each chart has the same number of coordinates. Thus all strict transforms reached by permissible blowups have local smooth envelopes of dimension at most $d$, without any assertion of reducedness. [lem-trf-jet-diagram-hilbert-control] expresses every reached level as a diagram counting function in $e\\le d$ variables. Pad a diagram $D\\subset\\mathbf N^e$ to $d$ variables by including every exponent with a nonzero last coordinate: its complement consists of $(\\alpha,0)$ for $\\alpha\\notin D$, so the counting function is unchanged. The fixed-$d$ descending-chain assertion of the same node rules out an infinite strict descent, including subsequences separated by arbitrary plateaus. Line tests sum the reference level; this termination assertion concerns retained levels of permissible blowup histories from the fixed finite-dimensional input.",
+   "uses": [
+    "lem-trf-smooth-pair-blowup-local-models",
+    "lem-trf-coordinate-subspace-blowup-charts",
+    "lem-trf-jet-diagram-hilbert-control"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-hilbert-samuel-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-per-hilbert-boundary-supported-certificates",
+  "lem-per-nonreduced-regular-hilbert-coefficients",
+  "lem-trf-coefficient-order-hilbert-equality",
+  "lem-trf-coordinate-blowup-division-generators",
+  "lem-trf-coordinate-subspace-blowup-charts",
+  "lem-trf-diagonal-taylor-faithful-flatness",
+  "lem-trf-etale-local-ring-flatness",
+  "lem-trf-extended-hilbert-local-upper-bound",
+  "lem-trf-formal-coefficient-transform-criterion",
+  "lem-trf-homogeneous-continuous-formal-division",
+  "lem-trf-implicit-taylor-coordinate-calculus",
+  "lem-trf-jet-diagram-hilbert-control",
+  "lem-trf-logarithmic-differential-transform",
+  "lem-trf-marked-controlled-blowup-charts",
+  "lem-trf-marked-ideal-transverse-suspension",
+  "lem-trf-permissible-coordinate-chart",
+  "lem-trf-smooth-embedding-etale-comparison",
+  "lem-trf-smooth-local-tangent-cone-extension",
+  "lem-trf-smooth-pair-blowup-local-models",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-length-additive-short-exact",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "pqf-lem-coherent-ft-locnoeth",
+  "sbc-thm-etale-local-normal-form"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.11--2.3.13, printed pp.93--94, route reference; detailed BMT arXiv:0905.3580v1 §§5.2,6.1--6.3,6.5--6.6, read online at https://arxiv.org/html/0905.3580; BM2 (1997), Chapter III, especially Theorems 7.14,7.20,9.6. Archival BMT and BM2 WANTED. No Stacks tag states this presentation theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel functions on arbitrary nonreduced rational schemes admit maximal order marked ideal presentations in minimal smooth envelopes compatible with strict transforms",
+   "results": "; 8 hits: Algebra.Smooth.exists_span_eq_top_isStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.IsSmoothAt.exists_notMem_smooth",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Presentations of the Hilbert Samuel function of a nonreduced scheme by test equivalent marked ideals",
+   "results": "; 8 hits: AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsReduced, isReduced_ofLocalizationMaximal, AlgebraicGeometry.Scheme.nilradical, AlgebraicGeometry.Scheme.IdealSheafData.mk, HomogeneousIdeal.ext_iff, AlgebraicGeometry.Scheme.nilradical_eq_bot",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|marked.?ideal|test.?equivalen",
+   "results": "; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A standard basis of an ideal in a smooth local ring gives a marked ideal whose admissible tests preserve the Hilbert Samuel level",
+   "results": "; 8 hits: Ideal.adic_basis, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Ideal.ringFilterBasis, Ideal.hasBasis_nhds_adic, Ideal.adic_module_basis, Ideal.ringBasis, Ideal.hasBasis_nhds_zero_adic, Ideal.selfBasis",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern basic smoothness, reducedness, localization or normalization; none gives this Hilbert--Samuel presentation/head or generically reduced strict-transform assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert Samuel marked ideal presentations for nonreduced schemes preserved by finite permissible blowup tests",
+   "results": "{\"t\": \"2026-10-24T07:06:54Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert Samuel marked ideal presentations for nonreduced schemes preserved by finite permissible blowup tests\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.isReduced_of_isOpenImmersion\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.instIsReducedSpecOfIsReducedCarrier\"], \"digest\": \"8a1d6446c13b5ef5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern reducedness, basic smooth charts, adic bases and Rees membership, not the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "{\"t\": \"2026-10-24T07:07:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern reducedness, basic smooth charts, adic bases and Rees membership, not the item."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|marked.?ideal|test.?equivalen",
+   "results": "{\"t\": \"2026-10-24T07:07:31Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|marked.?ideal|test.?equivalen\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern reducedness, basic smooth charts, adic bases and Rees membership, not the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert Samuel function finite marked ideal presentations strict transform nonreduced scheme",
+   "results": "{\"t\": \"2026-10-24T07:08:06Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert Samuel function finite marked ideal presentations strict transform nonreduced scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\"], \"digest\": \"f79867c7c740bfd9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern reducedness, basic smooth charts, adic bases and Rees membership, not the item."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|StandardBasis|standard.?basis|MarkedIdeal",
+   "results": "{\"t\": \"2026-10-24T07:08:07Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|StandardBasis|standard.?basis|MarkedIdeal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern reducedness, basic smooth charts, adic bases and Rees membership, not the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal in a smooth characteristic zero scheme has regular coefficient standard basis data giving its equimultiple Hilbert Samuel stratum",
+   "results": "{\"t\": \"2026-10-24T07:08:07Z\", \"tool\": \"leanfinder\", \"query\": \"An ideal in a smooth characteristic zero scheme has regular coefficient standard basis data giving its equimultiple Hilbert Samuel stratum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Ideal.adic_basis\", \"Algebra.IsSmoothAt\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"mem_reesAlgebra_iff\", \"Ideal.adic_module_basis\", \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\"], \"digest\": \"04ce720c5a6c75bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern reducedness, basic smooth charts, adic bases and Rees membership, not the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-generically-reduced-rational-invariant-calculus",
+  "date": "2026-10-24",
+  "group": "Q84"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (duality), regular-resolution branch: BMT §6.2 minimal-envelope presentation, with the actual nonreduced structure sheaf.",
+   "via": [
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-scheme-hilbert-samuel-test-presentations",
+  "worker": "stage1",
+  "summary": "Q07: keep nilpotents and use existing arbitrary-ideal formal and jet statements; add regular coefficient existence and supported boundary certificates, assemble finite tests, suspension, intrinsic comparison and DCC. Clarify strict transforms at blowup tests and ordinary pullbacks at line tests; prove retaining-locus agreement with the exceptional ordinary-pullback convention in the existing definition and report that discrepancy explicitly.",
+  "blueprint": "Current latest/main-20261024 ancestor lem-per-artin-gabber-affine-curve proof Step 3 (duality), through the recorded historical regular-resolution branch; no change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-coefficient-order-hilbert-equality",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-coordinate-blowup-division-generators",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-coordinate-subspace-blowup-charts",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-diagonal-taylor-faithful-flatness",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-etale-local-ring-flatness",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-extended-hilbert-local-upper-bound",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-formal-coefficient-transform-criterion",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-homogeneous-continuous-formal-division",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-implicit-taylor-coordinate-calculus",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-jet-diagram-hilbert-control",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-logarithmic-differential-transform",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-marked-controlled-blowup-charts",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-marked-ideal-transverse-suspension",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-permissible-coordinate-chart",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-smooth-embedding-etale-comparison",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-smooth-local-tangent-cone-extension",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-trf-smooth-pair-blowup-local-models",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic local algebra/marked-ideal/smooth geometry input for the inherited regular-resolution branch; the perverse-curve unit has no such local presentation lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-coefficient-order-hilbert-equality",
+  "lem-trf-coordinate-blowup-division-generators",
+  "lem-trf-coordinate-subspace-blowup-charts",
+  "lem-trf-diagonal-taylor-faithful-flatness",
+  "lem-trf-etale-local-ring-flatness",
+  "lem-trf-extended-hilbert-local-upper-bound",
+  "lem-trf-formal-coefficient-transform-criterion",
+  "lem-trf-homogeneous-continuous-formal-division",
+  "lem-trf-implicit-taylor-coordinate-calculus",
+  "lem-trf-jet-diagram-hilbert-control",
+  "lem-trf-logarithmic-differential-transform",
+  "lem-trf-marked-controlled-blowup-charts",
+  "lem-trf-marked-ideal-transverse-suspension",
+  "lem-trf-permissible-coordinate-chart",
+  "lem-trf-smooth-embedding-etale-comparison",
+  "lem-trf-smooth-local-tangent-cone-extension",
+  "lem-trf-smooth-pair-blowup-local-models",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "sbc-thm-etale-local-normal-form"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-07c542119",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-07c542119 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps, both new statement-only nodes, the statements of all 27 cited nodes plus the def-trf presentation, coefficient-datum and supported-division definitions, the reduced trf analogues, the parent's citing steps 3/6/8/9, and ILO VIII 2.3.11-13 (pdf pp.99-100). ILO only refers to Bierstone-Milman/BMT; those papers are not in literature/, so WANTED and proof_origin by=agent are correct. Statement: the base item said 'always strict transform', which is ill-typed at a line test. The delivery uses strict transform at blowup tests and pullback at line tests, and adds that for exceptional tests the strict transform and the def's ordinary-pullback convention give the same retaining-level loci. This strengthens the statement and is true. The strict transform is a quotient of the pullback, so its Hilbert-Samuel function is pointwise smaller. At points where the pullback keeps the level, the coefficient conditions make the quotient free over the coefficient variables, so the exceptional equation is a nonzerodivisor and the two models agree near the retained locus. The old y^6=x^4 counterexample used a history divisor as test boundary; the test boundary here starts empty, so it does not apply. New nodes: lem-per-nonreduced-regular-hilbert-coefficients is a generalization of lem-trf-regular-hilbert-coefficient-data without its reducedness hypothesis (Bierstone-Milman 1997 does not need it), not a duplicate; tested on z^2=0 and the zero ideal. lem-per-hilbert-boundary-supported-certificates is a conditional formal statement; tested on Z^d+c(W), Z^2+W and the empty family; the saturation clause follows from freeness. Neither duplicates the coefficient-order equality, formal transform criterion, homogeneous division or reduced propagation nodes. Steps: checked step 4's estimate v>=d_i+|beta|, the injectivity of iterated summation, the identity h_y = Lambda^s h_x from the graded isomorphism, the padding argument for the descending-chain step, and the r=0 regularity argument via two faithfully flat contractions. FIX (E1/C3), step 2: lem-trf-coefficient-order-hilbert-equality assumes the block conditions (4),(5) at every point of N, but the datum gives them only on the coefficient order locus. Added an argument: shrink N to an irreducible neighbourhood (regular local rings are domains), where the Jacobians stay units, and the memberships hold because the coefficient germs vanish by faithful flatness of the Taylor map. lem-trf-implicit-taylor-coordinate-calculus is now in step 2's uses; proof_deps are unchanged. Batch-5: the stated-plus-proof closure of all 21 flagged nodes reaches no assumption leaf, trace-transport, thm-trf or Poincare-duality theorem. The only exception is the generic lem-pod-separated-finite-type-base-change. The four defs are general definitions; the 17 lem-trf nodes are characteristic-zero local algebra and blowup geometry, not part of either assumed proof. All accepted, and the declared tool_uses are accepted. No SGA cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeHilbertSamuelTestPresentations",
+  "declaration": "AlgebraicGeometry.HilbertSamuel.scheme_function_local_finite_upperSemicontinuous",
+  "declarations": [
+   "AlgebraicGeometry.HilbertSamuel.scheme_function_local_finite_upperSemicontinuous",
+   "AlgebraicGeometry.HilbertSamuel.scheme_function_nonincrease",
+   "AlgebraicGeometry.HilbertSamuel.scheme_function_no_infinite_drops",
+   "AlgebraicGeometry.HilbertSamuel.scheme_local_presentations",
+   "AlgebraicGeometry.HilbertSamuel.scheme_local_minimal_presentations",
+   "AlgebraicGeometry.HilbertSamuel.scheme_presentation_full_maximalOrder",
+   "AlgebraicGeometry.HilbertSamuel.scheme_presentation_intrinsic_comparison",
+   "AlgebraicGeometry.HilbertSamuel.scheme_presentation_history_comparison",
+   "AlgebraicGeometry.HilbertSamuel.scheme_function_smooth_pullback",
+   "AlgebraicGeometry.HilbertSamuel.scheme_presentation_smooth_pullback",
+   "AlgebraicGeometry.HilbertSamuel.scheme_presentation_empty_maximum",
+   "AlgebraicGeometry.HilbertSamuel.scheme_local_presentations_surjective",
+   "AlgebraicGeometry.HilbertSamuel.scheme_function_reachable_stabilizes",
+   "AlgebraicGeometry.HilbertSamuel.scheme_localFunction_smooth_pullback",
+   "AlgebraicGeometry.HilbertSamuel.scheme_presentation_finite_history",
+   "AlgebraicGeometry.HilbertSamuel.scheme_exceptional_strict_retaining_locus",
+   "AlgebraicGeometry.HilbertSamuel.scheme_presentation_empty_level",
+   "AlgebraicGeometry.HilbertSamuel.scheme_presentation_smooth_comparison",
+   "AlgebraicGeometry.HilbertSamuel.scheme_presentation_intrinsic_smooth_charts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeHilbertSamuelTestPresentations.lean",
+  "statement": "theorem scheme_function_local_finite_upperSemicontinuous {X Z : Scheme.{u}} (p : Z ⟶ Spec (.of (ULift.{u} ℚ))) (i : X ⟶ Z) [Smooth p] [LocallyOfFiniteType p] [QuasiCompact p] [IsImmersion i] [LocallyOfFiniteType (i ≫ p)] [QuasiCompact (i ≫ p)] : (∀ (x : X) (n : ℕ), Module.length (X.presheaf.stalk x) ((X.presheaf.stalk x) ⧸ IsLocalRing.maximalIdeal (X.presheaf.stalk x) ^ (n + 1)) < ⊤) ∧ (Set.range (function (i ≫ p))).Finite ∧ (∀ H : ℕ → ℕ, IsClosed {x : X | le H (function (i ≫ p) x)})",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2fc12411f",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Item node changes only in lean; lean.statement verbatim; the def-trf-hilbert-samuel-presentation record in the snapshot is identical to live; no new nodes or dependency modules. All 19 theorems are exactly `by sorry` with no definitions, and every docstring has the source place, the blueprint id and the node proof steps. Clause map checked against the live HilbertSamuelPresentation/Invariant/StrictTransform declarations: finite image and closed lex upper sets; nonincrease on the strict transform for LocallyConstantCenter (stated without the NC condition, true by BMT 6.1); stabilization over ReflTransGen BlowupTransition (BM Cor 3.20, dimension-bounded diagram counts); LocalPresentationAt and a surjective chart over open V with the maximal-level bound; strict transform at blowups, pullback at lines, controlled transform; exceptional strict-vs-pullback retaining-locus theorem; finite history; empty level and empty maximum; full maximal order at a nonregular minimal germ; intrinsic and history comparison with ordered earlier ideals; H_Y=Λ^r H_X and h_y=Λ^s h_x; presentation pullback, intrinsic smooth charts, different-dimension comparison; Presents requires an empty test boundary. Edge cases: empty X, nilpotents, nonclosed points, regular germ excluded, r=0, zero-length histories, single universe u. Imports resolve, lines ≤100, autoImplicit false; report has Worker report and Second reading by Q62. No compile (no change). Base note: def-weil-pbc-module-length has no lean record."
+ }
+}

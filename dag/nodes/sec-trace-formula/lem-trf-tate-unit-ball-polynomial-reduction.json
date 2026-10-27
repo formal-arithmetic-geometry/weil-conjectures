@@ -1,0 +1,479 @@
+{
+ "id": "lem-trf-tate-unit-ball-polynomial-reduction",
+ "kind": "statement",
+ "title": "Coefficient reduction of the Tate Gauss unit ball",
+ "statement": "Let $K$ be a field [def-weil-field] with a real-valued multiplicative nonarchimedean absolute value, and put $V=\\{a\\in K:|a|\\le1\\}$ and $\\mathfrak m=\\{a\\in K:|a|<1\\}$. Then $V$ is a local subring of $K$ with maximal ideal $\\mathfrak m$, and $k=V/\\mathfrak m$ is a field; write $a\\mapsto\\bar a$ for its residue map. For $r\\ge0$, let $T_r=K\\langle X_1,\\ldots,X_r\\rangle$ be the restricted-series ring [def-trf-restricted-series-presentation], with $\\|\\sum_\\nu c_\\nu X^\\nu\\|_G=\\sup_\\nu|c_\\nu|$. Put $U_r=\\{f\\in T_r:\\|f\\|_G\\le1\\}$. This is a unital subring, and the assignment $\\operatorname{red}:U_r\\to k[X_1,\\ldots,X_r]$, $\\sum_\\nu c_\\nu X^\\nu\\mapsto\\sum_\\nu\\bar c_\\nu X^\\nu$, is a well-defined surjective unital ring homomorphism to the polynomial ring [def-weil-pbc-mv-polynomial-ring]. Its kernel is exactly $\\{f\\in U_r:\\|f\\|_G<1\\}$. It sends a constant $a\\in V$ to the constant polynomial $\\bar a$. The assertions include $r=0$ and trivial absolute values; completeness is not required.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "the valuation-ring and coefficient-reduction paragraph before Proposition 3, printed p.9 (PDF p.10) Primary PDF read online by Q02 on 2026-10-24; local archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "The absolute-value axioms give $|0|=0$, $|1|=|-1|=1$, $|-a|=|a|$, $|ab|=|a||b|$ and $|a+b|\\le\\max(|a|,|b|)$. Consequently $0,1\\in V$, $-V\\subset V$, $V+V\\subset V$ and $VV\\subset V$, so $V$ is a unital subring of $K$. Likewise $0\\in\\mathfrak m$, $-\\mathfrak m\\subset\\mathfrak m$, and $a,b\\in\\mathfrak m$ imply $|a+b|<1$; if $a\\in\\mathfrak m$ and $b\\in V$, then $|ab|\\le|a|<1$. Thus $\\mathfrak m$ is an ideal of $V$, proper because $1\\notin\\mathfrak m$.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "If $a\\in V\\setminus\\mathfrak m$, then $|a|=1$, so $a\\ne0$ and its field inverse has $|a^{-1}|=1$ and belongs to $V$. An element of $\\mathfrak m$ cannot be a unit in $V$, since $ab=1$ with $b\\in V$ would give $1=|ab|\\le|a|<1$. Hence every proper ideal of $V$ is contained in $\\mathfrak m$, and any ideal strictly containing $\\mathfrak m$ contains a unit and is all of $V$. This proves that $V$ is local, meaning that $\\mathfrak m$ is its unique maximal ideal.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "Apply the quotient-ring construction of [def-weil-pbc-algebra-hom-quotient] to $V$ and its ideal $\\mathfrak m$ (as a $V$-algebra via the identity). It gives a surjective unital ring map $q:V\\to k=V/\\mathfrak m$ with kernel $\\mathfrak m$. In particular $q(1)\\ne0$. Each nonzero class $q(a)$ has $a\\notin\\mathfrak m$ and inverse $q(a^{-1})$ by step 2. Thus $k$ is a field, and $q(a)=0$ exactly when $|a|<1$. Write $q(a)=\\bar a$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "For $f=\\sum_\\nu c_\\nu X^\\nu\\in T_r$, the cofinite convergence in [def-trf-restricted-series-presentation] says that $S_\\epsilon(f)=\\{\\nu:|c_\\nu|\\ge\\epsilon\\}$ is finite for each real $\\epsilon>0$. In particular all coefficient norms are bounded above by $B=\\max(\\{1\\}\\cup\\{|c_\\nu|:\\nu\\in S_1(f)\\})$. The range of coefficient norms is nonempty (the zero multi-index exists also for $r=0$), so its real supremum is finite. By the defining property of a supremum, $\\|f\\|_G\\le1$ if and only if $|c_\\nu|\\le1$ for every $\\nu$.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "The restricted-series ring is a subring of the formal series ring by [def-trf-restricted-series-presentation]. Thus for $f,g\\in U_r$ their sum, negative and product already belong to $T_r$. The preceding coefficient criterion puts $0,1,-f,f+g$ in $U_r$. For the product, the Cauchy coefficient is $(fg)_\\nu=\\sum_{\\alpha+\\beta=\\nu}c_\\alpha d_\\beta$; this sum is finite since $0\\le\\alpha_i\\le\\nu_i$ for all $1\\le i\\le r$. Every summand has absolute value at most one. Induction on the number of summands using $|a+b|\\le\\max(|a|,|b|)$ (the empty sum has norm zero) bounds this coefficient by one. Thus $fg\\in U_r$ and $U_r$ is a unital subring.",
+   "uses": [
+    "def-trf-restricted-series-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "For $f\\in U_r$ every $c_\\nu$ lies in $V$. Step 3 shows that $\\bar c_\\nu\\ne0$ implies $|c_\\nu|\\ge1$, so the nonzero reduced coefficients are supported on the finite set $S_1(f)$ of step 4. The finite-coefficient description of [def-weil-pbc-mv-polynomial-ring] therefore defines the polynomial $\\operatorname{red}(f)=\\sum_\\nu\\bar c_\\nu X^\\nu$. Its coefficients prescribe it uniquely; the expression is independent of the finite set used to contain its support.",
+   "uses": [
+    "def-trf-restricted-series-presentation",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "Addition of series and of polynomials is coefficientwise, and $q$ preserves addition and zero. Hence $\\operatorname{red}(f+g)=\\operatorname{red}(f)+\\operatorname{red}(g)$ and $\\operatorname{red}(0)=0$. For each multi-index $\\nu$, the finite Cauchy formula of step 5 and the quotient ring homomorphism give\n$$\\overline{(fg)_\\nu}=q\\!\\left(\\sum_{\\alpha+\\beta=\\nu}c_\\alpha d_\\beta\\right)=\\sum_{\\alpha+\\beta=\\nu}\\bar c_\\alpha\\bar d_\\beta.$$\nThe last expression is exactly the coefficient of the polynomial product $\\operatorname{red}(f)\\operatorname{red}(g)$ by [def-weil-pbc-mv-polynomial-ring]. Equality of all coefficients proves multiplicativity. The only nonzero coefficient of $1$ is its constant coefficient $1$, and $q(1)=1$, so $\\operatorname{red}(1)=1$. This proves that $\\operatorname{red}$ is a unital ring homomorphism.",
+   "uses": [
+    "def-trf-restricted-series-presentation",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "Given a polynomial $P=\\sum_{\\nu\\in S}b_\\nu X^\\nu$ with $S$ finite, choose for each of its finitely many coefficients a lift $a_\\nu\\in V$ under the surjection $q$. The finite series $f=\\sum_{\\nu\\in S}a_\\nu X^\\nu$ is restricted: outside $S$ all coefficients are zero. All coefficients have norm at most one, so $f\\in U_r$, and its reduction is $P$. Thus $\\operatorname{red}$ is surjective, including for $P=0$ by the empty lift. A constant series $a\\in V$ has reduction the constant polynomial $\\bar a$ by its coefficients.",
+   "uses": [
+    "def-trf-restricted-series-presentation",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "By equality of polynomial coefficients and $\\ker q=\\mathfrak m$, one has $\\operatorname{red}(f)=0$ if and only if $|c_\\nu|<1$ for every $\\nu$. If $\\|f\\|_G<1$, this follows from $|c_\\nu|\\le\\|f\\|_G$. Conversely assume every $|c_\\nu|<1$. The set $S_{1/2}(f)$ is finite, so\n$$M=\\max\\bigl(\\{1/2\\}\\cup\\{|c_\\nu|:\\nu\\in S_{1/2}(f)\\}\\bigr)<1.$$\nOutside that set the coefficient norms are less than $1/2$, and inside they are at most $M$; therefore every coefficient norm is at most $M$, and $\\|f\\|_G\\le M<1$. This proves the asserted kernel equality without assuming that the supremum of an arbitrary family of numbers less than one is less than one.",
+   "uses": [
+    "def-trf-restricted-series-presentation",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  },
+  {
+   "text": "All sums used for the ring-map calculation are finite sums in individual coefficients, and the bounds in steps 4 and 9 use only cofinite convergence, so no completeness was used. If $r=0$, the multi-index set has one element and the constructions reduce to $V\\to V/\\mathfrak m$. For a trivial absolute value, restrictedness at $\\epsilon=1$ forces finite support, $V=K$, $\\mathfrak m=0$, and the reduction is the identity on polynomials after the canonical identification $K/(0)=K$; the open unit ball consists of the zero series. Thus both stated edge cases are included.",
+   "uses": [
+    "def-trf-restricted-series-presentation",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Bosch, Lectures on Formal and Rigid Geometry (April 2008), Section 1.2, printed pp.8–9 (PDF pp.9–10): coefficient description and Gauss norm, then the reduction paragraph before Proposition 3. Online primary PDF read by Q36 on 2026-10-24; local archival copy WANTED.",
+    "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-trf-restricted-series-presentation",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Q36 supplies the elementary details of the reduction paragraph in Bosch Section 1.2, printed p.9 (PDF p.10); primary PDF read online, archival copy WANTED. The coefficient proof also justifies the imported generality without completeness or nontriviality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient reduction identifies the Gauss norm unit ball in a Tate algebra modulo its open unit ball with the polynomial ring over the residue field",
+   "results": {
+    "t": "2026-10-24T09:03:02Z",
+    "tool": "leanfinder",
+    "query": "Coefficient reduction identifies the Gauss norm unit ball in a Tate algebra modulo its open unit ball with the polynomial ring over the residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.weierstrassMod",
+     "PreTilt.mk_untilt_eq_coeff_zero",
+     "Polynomial.gaussNorm_intAdicAbv_le_one",
+     "PowerSeries.weierstrassDistinguished",
+     "PowerSeries.algEquivQuotientWeierstrassDistinguished",
+     "PowerSeries.weierstrassUnit",
+     "PowerSeries.IsWeierstrassDivisorAt.mod'",
+     "PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod"
+    ],
+    "digest": "8839f5c96c556795"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Restricted.lean:33-110 defines the cofinite restricted subring and proves closure; GaussNorm.lean:55-263 gives norms and conditional multiplicativity. Neither gives the coefficient-reduction homomorphism from its norm unit ball to residue polynomials or its kernel. Formal power-series residue fields and Weierstrass quotients concern different rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of the integral Tate algebra by the topologically nilpotent elements is the polynomial ring of the residue field",
+   "results": {
+    "t": "2026-10-24T09:03:41Z",
+    "tool": "leanfinder",
+    "query": "The quotient of the integral Tate algebra by the topologically nilpotent elements is the polynomial ring of the residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.residueFieldOfPowerSeries",
+     "PowerSeries.algEquivQuotientWeierstrassDistinguished",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient_apply",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient_symm_apply",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply",
+     "Polynomial.residueFieldMapCAlgEquiv"
+    ],
+    "digest": "a33614537cc7efb2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Restricted.lean:33-110 defines the cofinite restricted subring and proves closure; GaussNorm.lean:55-263 gives norms and conditional multiplicativity. Neither gives the coefficient-reduction homomorphism from its norm unit ball to residue polynomials or its kernel. Formal power-series residue fields and Weierstrass quotients concern different rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction modulo elements of norm less than one of the ring of strictly convergent power series of norm at most one is a multivariate polynomial algebra over the residue field",
+   "results": {
+    "t": "2026-10-24T09:03:39Z",
+    "tool": "leansearch",
+    "query": "Reduction modulo elements of norm less than one of the ring of strictly convergent power series of norm at most one is a multivariate polynomial algebra over the residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.degree_weierstrassMod_lt",
+     "PowerSeries.residueFieldOfPowerSeries",
+     "PowerSeries.algEquivQuotientWeierstrassDistinguished",
+     "Polynomial.IsDistinguishedAt.algEquivQuotient",
+     "PowerSeries.IsWeierstrassDivisorAt.mod_coe_eq_self",
+     "MvPolynomial.toMvPowerSeries_isDenseInducing",
+     "PowerSeries.instIsLocalRing",
+     "PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient"
+    ],
+    "digest": "1d7b115c3059cab9"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Restricted.lean:33-110 defines the cofinite restricted subring and proves closure; GaussNorm.lean:55-263 gives norms and conditional multiplicativity. Neither gives the coefficient-reduction homomorphism from its norm unit ball to residue polynomials or its kernel. Formal power-series residue fields and Weierstrass quotients concern different rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"gaussNorm\", \"IsRestricted\"",
+   "results": {
+    "t": "2026-10-24T09:03:39Z",
+    "tool": "loogle",
+    "query": "\"gaussNorm\", \"IsRestricted\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Restricted.lean:33-110 defines the cofinite restricted subring and proves closure; GaussNorm.lean:55-263 gives norms and conditional multiplicativity. Neither gives the coefficient-reduction homomorphism from its norm unit ball to residue polynomials or its kernel. Formal power-series residue fields and Weierstrass quotients concern different rings."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRestricted|gaussNorm|residue|reduction",
+   "results": {
+    "t": "2026-10-24T09:07:30Z",
+    "tool": "grep",
+    "query": "IsRestricted|gaussNorm|residue|reduction",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Restricted.lean"
+    ],
+    "digest": "f8a23b96ae6f13fe"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Restricted.lean:33-110 defines the cofinite restricted subring and proves closure; GaussNorm.lean:55-263 gives norms and conditional multiplicativity. Neither gives the coefficient-reduction homomorphism from its norm unit ball to residue polynomials or its kernel. Formal power-series residue fields and Weierstrass quotients concern different rings."
+  },
+  {
+   "tool": "grep",
+   "query": "residue|reduction|map|coeff_mul",
+   "results": {
+    "t": "2026-10-24T09:32:11Z",
+    "tool": "grep",
+    "query": "residue|reduction|map|coeff_mul",
+    "sub": "RingTheory/MvPowerSeries",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/MvPowerSeries/Rename.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Rename.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Rename.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Rename.lean",
+     "Mathlib/RingTheory/MvPowerSeries/Rename.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean",
+     "Mathlib/RingTheory/MvPowerSeries/LinearTopology.lean"
+    ],
+    "digest": "765856aa436d587c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Restricted.lean:33-110 and GaussNorm.lean:55-110. They give restricted subrings and Gauss norms, not the residue-polynomial map or kernel. Other grep hits concern formal series operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate algebra reduction modulo the maximal ideal of the valuation ring is the polynomial algebra over the residue field",
+   "results": {
+    "t": "2026-10-24T09:32:11Z",
+    "tool": "leansearch",
+    "query": "Tate algebra reduction modulo the maximal ideal of the valuation ring is the polynomial algebra over the residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.residueFieldOfPowerSeries",
+     "IsLocalRing.residue",
+     "IsLocalRing.ResidueField",
+     "WeierstrassCurve.reduction",
+     "LaurentSeries.powerSeriesAlgEquiv",
+     "LaurentSeries.powerSeriesRingEquiv",
+     "IsLocalization.AtPrime.equivQuotMaximalIdeal.congr_simp",
+     "IsLocalRing.ResidueField.algebraMap_eq"
+    ],
+    "digest": "f3a33f43101dd782"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Weierstrass division over adically complete local rings, residue fields of formal power-series rings (a different quotient), or the ordinary residue map. None states coefficient reduction of the Tate Gauss unit ball or its strict kernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRestricted\", \"map\"",
+   "results": {
+    "t": "2026-10-24T09:32:11Z",
+    "tool": "loogle",
+    "query": "\"IsRestricted\", \"map\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "MvPowerSeries.isRestricted_map"
+    ],
+    "digest": "01ccc5724a857f76"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: isRestricted_map only preserves restrictedness under a norm-bounded coefficient function; it supplies neither a residue-polynomial ring map nor its strict kernel. The pinned local Restricted.lean ends at line 111 and does not have this newer hit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficientwise residue reduction of restricted power series in the Gauss unit ball gives a surjective ring map to polynomials with kernel the open unit ball",
+   "results": {
+    "t": "2026-10-24T09:32:12Z",
+    "tool": "leanfinder",
+    "query": "Coefficientwise residue reduction of restricted power series in the Gauss unit ball gives a surjective ring map to polynomials with kernel the open unit ball",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.weierstrassMod",
+     "PowerSeries.weierstrassDistinguished",
+     "PowerSeries.residueFieldOfPowerSeries",
+     "PowerSeries.weierstrassUnit",
+     "PowerSeries.IsWeierstrassDivisorAt.mod'",
+     "PowerSeries.constantCoeff_surj",
+     "PowerSeries.ker_coeff_eq_max_ideal",
+     "PowerSeries.exists_isWeierstrassDivision"
+    ],
+    "digest": "375a10c0bd0e8504"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Weierstrass division over adically complete local rings, residue fields of formal power-series rings (a different quotient), or the ordinary residue map. None states coefficient reduction of the Tate Gauss unit ball or its strict kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral restricted power series reduce coefficientwise to polynomials over a residue field",
+   "results": {
+    "t": "2026-10-24T09:33:04Z",
+    "tool": "leanfinder",
+    "query": "Integral restricted power series reduce coefficientwise to polynomials over a residue field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.weierstrassMod",
+     "PowerSeries.weierstrassDistinguished",
+     "PowerSeries.residueFieldOfPowerSeries",
+     "PowerSeries.weierstrassUnit",
+     "PowerSeries.IsWeierstrassDivisorAt.mod",
+     "PowerSeries.exists_isWeierstrassDivision",
+     "PowerSeries.weierstrassDiv",
+     "PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod"
+    ],
+    "digest": "ce32a9bf4ac76601"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Weierstrass division over adically complete local rings, residue fields of formal power-series rings (a different quotient), or the ordinary residue map. None states coefficient reduction of the Tate Gauss unit ball or its strict kernel."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-tate-unit-coefficient-criterion",
+  "date": "2026-10-24",
+  "group": "Q02"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Power-bounded elements are integral over a presentation unit ball. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic input: Supremum seminorm estimates on affinoid algebras. The unit criterion used to construct a maximal point of the auxiliary hypersurface 1-Yf=0 in the proof of the Tate Gauss/supremum comparison. Bosch Section 1.2, the valuation-ring and coefficient-reduction paragraph before Proposition 3, printed p.9 (PDF p.10); prerequisite of the unit-criterion argument.",
+   "via": [
+    "lem-trf-tate-unit-coefficient-criterion",
+    "lem-trf-affinoid-supremum-seminorm-calculus",
+    "lem-trf-affinoid-powerbounded-integral",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-tate-unit-ball-polynomial-reduction",
+  "worker": "stage1",
+  "summary": "Q36 preserves the statement and proves valuation-ring locality, the residue field, boundedness of the Gauss supremum, closure of its unit ball, finite reduction support, the ring-map laws, polynomial lifting and the strict kernel bound in explicit elementary steps. Added the existing quotient-ring definition as a statement/proof dependency; no new nodes or clause restatements. Mathlib and project searches found no full attachment or leaf. Checked incomplete and trivially valued fields and r=0.",
+  "blueprint": "Historical analytic input under lem-trf-local-term-locality through the existing normalization chain, as specified by blueprint.from: Bosch Section 1.2 reduction used in the Tate unit criterion. The current latest blueprint local-term node has the contracting-correspondence formulation; this split changes no unit/chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-2eac663d6",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-2eac663d6 (reviewer sub-agent of L); spot-checked: I read the item, the report and all four cited statements in full. The statement is byte-identical to clones/live (unsplit, no proof); this is the item's first split and no new nodes are created. The added stmt_dep def-weil-pbc-algebra-hom-quotient is justified by V/m in the statement. The 10 steps are all elementary and correct. Steps 1-3: closure of V and m, locality via |a|=1 implies a^-1 in V, and k a field via the quotient node (q surjective, ker q = m). Step 4: S_eps is finite, the sup is finite and nonempty, and ||f|| <= 1 iff every |c_nu| <= 1. Step 5: the finite Cauchy sums plus the ultrametric inequality give closure of U_r. Steps 6-8: the support of red(f) lies in the finite set S_1, the ring-map laws hold through q, and surjectivity follows by lifting finitely many coefficients. Step 9: the kernel argument correctly uses S_{1/2} and M = max({1/2} plus finitely many) < 1, avoiding the false claim that a sup of numbers below 1 is below 1. Step 10: r=0 and the trivial absolute value are handled. Small cases tested: Q with the p-adic absolute value (incomplete), f = sum p^n X^n, red f = 1, ||f-1|| = 1/p; the trivial absolute value gives the polynomials and the identity map. Every cited node is a definition or Mathlib leaf, so nothing leaves the unit route and no tool_uses are needed; there is no cycle (the only citer is lem-trf-tate-unit-coefficient-criterion). No duplicate found in the DAG (rg -L over Gauss, unit ball and coefficient reduction). Mathlib's MvPowerSeries/Restricted.lean has no reduction map, so the item is not a leaf; the recorded searches cover leansearch, leanfinder, loogle and grep. The Bosch section 1.2 PDF is absent from literature, so the WANTED line and proof_origin agent are correct. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateUnitBallPolynomialReduction",
+  "declaration": "RestrictedSeries.tateUnitBallPolynomialReduction",
+  "file": "lean/Sheaf/RingTheory/TateUnitBallPolynomialReduction.lean",
+  "statement": "theorem tateUnitBallPolynomialReduction (K : Type u) [NormedField K] [IsUltrametricDist K] (r : ℕ) : ∃ V : Subring K, (∀ a : K, a ∈ V ↔ ‖a‖ ≤ 1) ∧ IsLocalRing V ∧ ∃ m : Ideal V, (∀ a : V, a ∈ m ↔ ‖(a : K)‖ < 1) ∧ m.IsMaximal ∧ IsField (V ⧸ m) ∧ ∃ U : Subring (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))), (∀ f : MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ)), f ∈ U ↔ MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) f.val ≤ 1) ∧ ∃ red : U →+* MvPolynomial (Fin r) (V ⧸ m), Function.Surjective red ∧ (∀ (f : U) (ν : Fin r →₀ ℕ), ∃ a : V, (a : K) = MvPowerSeries.coeff ν f.val.val ∧ MvPolynomial.coeff ν (red f) = Ideal.Quotient.mk m a) ∧ (∀ f : U, f ∈ RingHom.ker red ↔ MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) f.val.val < 1) ∧ (∀ a : V, ∃ f : U, f.val = constants K r (a : K) ∧ red f = MvPolynomial.C (Ideal.Quotient.mk m a))",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4335415b",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Node, report (Worker report + Second reading by Q77), module and all 4 stmt_deps read (live RestrictedSeries.constants; Mathlib IsRestricted.subring, gaussNorm). Every clause matches: NormedField+IsUltrametricDist (no completeness or nontriviality); V Subring carrier ‖a‖≤1, IsLocalRing; m carrier ‖a‖<1, IsMaximal, IsField (V⧸m); T_r = IsRestricted.subring at radius 1; U carrier gaussNorm≤1 (bounded, so the true sup); red →+* pinned coefficientwise to residue classes; surjective; ker ↔ gaussNorm<1; constants clause with membership. Edge cases r=0, trivial norm, incomplete K covered; universe u bound. Node differs from live only in lean; statement verbatim; source/blueprint docstrings with the 10-step proof; sorry only; no definitions, so no duplicates. Parallel Q69 e3a575ef was superseded and never landed (live lean None). No fixes, no compile needed."
+ }
+}

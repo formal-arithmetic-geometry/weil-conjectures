@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.GRingAffineCover
 import Sheaf.AlgebraicGeometry.JTwoAffineCover
 import Sheaf.AlgebraicGeometry.UniversallyCatenaryAffineCover
-import WeilConjectures.RingTheory.GRing
+import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Excellence detected on affine open covers
 
@@ -46,6 +46,29 @@ theorem isExcellent_of_affine_open_cover
     (∀ V : X.Opens, IsAffineOpen V → IsExcellent Γ(X, V)) ∧
       (∀ W : X.Opens,
         ∀ V : (W.toScheme).affineOpens, IsExcellent Γ(W.toScheme, V)) := by
-  sorry
+  let A : I → X.affineOpens := fun i ↦ ⟨U i, haff i⟩
+  have hA : ⨆ i, (A i : X.Opens) = ⊤ := hcover.iSup_eq_top
+  have : IsLocallyNoetherian X :=
+    isLocallyNoetherian_of_affine_cover hA (fun i ↦ (hexc i).1.1)
+  have hG := isGRing_of_affine_open_cover A hA (fun i ↦ (hexc i).1.2.1)
+  have hJ := j2_of_affine_open_cover X I A hA (fun i ↦ (hexc i).1.2.2)
+  -- The range of the cover is small even when its original index type is not.
+  have hRange : ⨆ j : Set.range U, (j : X.Opens) = ⊤ := by
+    exact (iSup_range' (fun V : X.Opens ↦ V) U).trans hcover.iSup_eq_top
+  have hRangeAff : ∀ j : Set.range U, IsAffineOpen (j : X.Opens) := by
+    rintro ⟨_, i, rfl⟩
+    exact haff i
+  have hRangeCat : ∀ j : Set.range U, IsUniversallyCatenary Γ(X, (j : X.Opens)) := by
+    rintro ⟨_, i, rfl⟩
+    exact (hexc i).2
+  have hC := universallyCatenary_of_affineOpenCover X
+    (fun j : Set.range U ↦ (j : X.Opens)) hRangeAff hRange hRangeCat
+  have hAll : ∀ V : X.Opens, IsAffineOpen V → IsExcellent Γ(X, V) := by
+    intro V hV
+    exact ⟨⟨(hG ⟨V, hV⟩).1, hG ⟨V, hV⟩, hJ ⟨V, hV⟩⟩, hC V hV⟩
+  refine ⟨hAll, ?_⟩
+  intro W V
+  exact hAll (W.ι ''ᵁ (V : W.toScheme.Opens))
+    (V.property.image_of_isOpenImmersion W.ι)
 
 end AlgebraicGeometry

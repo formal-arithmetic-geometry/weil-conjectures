@@ -1,0 +1,136 @@
+{
+ "id": "def-sfb-rational-abelian-endomorphism-action",
+ "kind": "definition",
+ "title": "Rational abelian endomorphisms and their canonical Tate action",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field] and $A/k$ an abelian variety [def-sc-abelian-variety] with its group-scheme structure [def-sc-group-scheme]. Let $R$ be the additive group of group-scheme endomorphisms of $A$, where addition is pointwise addition in $A$, and put $E=R\\otimes_{\\mathbf Z}\\mathbf Q$ [def-weil-pbc-module-tensor-product]. For every prime $\\ell$, use the rational Tate module $V_\\ell A$ and componentwise integral action $V_\\ell(a)$ of [sk-def-av-tate], over the field $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers]. This action is additive in $a$. The rational Tate action is the canonical $\\mathbf Z$-linear extension $E\\to\\operatorname{End}_{\\mathbf Q_\\ell}(V_\\ell A)$ of the balanced bilinear map $(a,q)\\mapsto q V_\\ell(a)$; thus a pure tensor $a\\otimes q$ acts by $qV_\\ell(a)$.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "sk-def-av-tate",
+  "def-weil-l-adic-numbers"
+ ],
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, section 10, pp.43--47: End^0(A), the representation on T_ell A, and Remark 10.11."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "endomorphism ring of an abelian variety and its rational Tate module action",
+   "results": "8 hits: AddMonoid.End.instRing, addMonoidEndRingEquivInt_apply, Module.End.instMonoid, Module.End.baseChangeHom, Module.End.pow_apply, ModuleCat.endRingEquiv, LieModule.instIsFaithfulEnd, Module.End.instRing",
+   "date": "2026-10-24",
+   "verdict": "Generic endomorphism rings and base change; no rational geometric endomorphism action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical rational extension of the action of abelian variety endomorphisms on a Tate module from End(A) tensor Q",
+   "results": "8 hits: Module.End.baseChangeHom, Module.endTensorEndAlgHom_apply, Module.End.baseChangeHom_apply_apply, LinearMap.tensorProductEnd, AddMonoidHom.toRatLinearMap, LinearMap.tensorProductEnd_apply, CharacterModule.instLinearMapClassIntAddCircleRatOfNat, RootPairing.Hom.weightHom",
+   "date": "2026-10-24",
+   "verdict": "No geometric rational endomorphism action. TensorProduct.lift supplies its universal extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.lsmul, TensorProduct.lift",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No existing action found."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalEndomorphism|RationalEndomorphisms|TateModuleMap",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib action."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalEndomorphismTate|RationalEndomorphisms|rationalTateModuleMap_add in lean/WeilConjectures and lean/Sheaf; rational endomorphism in DAG/blueprint",
+   "results": "No declaration matches. Existing WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule has rationalTateModuleMap for integral homomorphisms only. blueprint_refs.py search: 0 blueprint nodes match rational endomorphism. DAG matches are statements using End(A) tensor Q, not definitions of this action.",
+   "date": "2026-10-24",
+   "verdict": "The underlying notions are existing group-object morphisms and tensor products. Their canonical rational Tate-action interface is missing."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-tate-charpoly",
+  "date": "2026-10-24",
+  "group": "Q151"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Milne I Remark 10.11 and Proposition 10.20: extending the integral componentwise action to End(A) tensor Q, needed to state the rational characteristic polynomial.",
+   "via": [
+    "lem-sfb-abelian-tate-charpoly",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.RationalEndomorphismAction",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.RationalEndomorphisms",
+  "declarations": [
+   "AlgebraicGeometry.IsAbelianVariety.RationalEndomorphisms",
+   "AlgebraicGeometry.IsAbelianVariety.rationalTateModuleMap_add",
+   "AlgebraicGeometry.IsAbelianVariety.integralEndomorphismTateAction",
+   "AlgebraicGeometry.IsAbelianVariety.rationalEndomorphismTateAction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/RationalEndomorphismAction.lean",
+  "statement": "abbrev RationalEndomorphisms {k : Type u} [Field k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] : Type u",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a12de73eb",
+  "group": "Q151",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a12de73eb",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Item clauses match node and Milne I Thm 10.9/Prop 10.20/Rem 10.11: alg-closed k, abelian variety A, g = dim A, E = Additive(Grp.mk A ⟶ Grp.mk A) ⊗[ℤ] ℚ (pointwise addition via Mathlib Grp-in-Grp commutative structure), ∃ monic P of natDegree 2g in ℚ[X] with P.map = LinearMap.charpoly of the rational Tate action for all primes ℓ ≠ ringChar k, explicit uniqueness among monic degree-2g realizers, integral u = a⊗1 ⇒ ℤ coefficients, dim 0 ⇒ P = 1. New def node def-sfb-rational-abelian-endomorphism-action: real TensorProduct.lift data, a⊗q ↦ q·rationalTateModuleMap a over the upstream action; well-definedness rationalTateModuleMap_add is a named sorry theorem with docstring and matching node clause; no duplicate in DAG or project Lean; live item unbound. Statements verbatim, imports are proof-dep modules or mathlib_match, docstrings with source/blueprint and the 6 proof steps, sorry only, lines ≤ 100, both report sections present. No file changed, no compile. Advisory: Q83's later-landed EndomorphismDegreeMultiplicative module can be imported in stage 3."
+ }
+}

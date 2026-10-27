@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-normal-subgroup-lie-ideal",
+ "kind": "statement",
+ "title": "The Lie algebra of a normal closed subgroup is an ideal",
+ "statement": "Let $k$ be any field [def-weil-field]. Let $G,N$ be affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], and let $i:N\\hookrightarrow G$ be a closed normal subgroup inclusion [def-sc-group-scheme-subgroup]. Write $\\mathfrak g=T_{G/k,e_G}$ and $\\mathfrak n=T_{N/k,e_N}$ for their identity tangent spaces [def-sc-scheme-tangent-space, def-sc-dual-numbers], equipped with the canonical Lie brackets induced by group commutators [def-wf-lie-algebra]. The differential $di:\\mathfrak n\\to\\mathfrak g$ is an injective homomorphism of finite-dimensional $k$-Lie algebras. Its image $I=di(\\mathfrak n)$ is an ideal of $\\mathfrak g$, that is, $[\\mathfrak g,I]\\subseteq I$. If $N$ is commutative as a group scheme, then $\\mathfrak n$ has zero bracket, and hence $[I,I]=0$. No smoothness, reducedness, connectedness, perfectness or characteristic restriction is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "10.12 (p.190), 10.14 (p.190), 10.19--10.22 and Theorem 10.23 (pp.192--193): tangent injection, conjugation action on Lie(N), and its differential. Lemma 23.68 (p.506) explicitly uses the commutative-normal-subgroup specialization. No Stacks tag states the normal-subgroup Lie-ideal assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-wf-lie-algebra",
+  "def-wf-lie-algebra-derivation"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-affine-group-lie-tangent-calculus], $\\mathfrak n$ and $\\mathfrak g$ are finite dimensional and $di$ is a $k$-linear Lie homomorphism. By [lem-sfb-affine-group-dual-number-calculus], $di$ is injective. We use that node's notation $E_{J,R}(v)$ for the dual-number point of $J$ attached to $v\\in\\operatorname{Lie}(J)\\otimes_k R$; its naturality identifies $i(E_{N,R}(v))$ with $E_{G,R}((di\\otimes1)v)$.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.6, 10.14, 10.19, 10.22--10.23, printed pp.188,190,192--193"
+   }
+  },
+  {
+   "text": "Choose a faithful closed embedding $\\rho:G\\hookrightarrow\\operatorname{GL}_{m,k}$ by [lem-sfb-affine-group-faithful-linear-representation]. Its differential is injective by [lem-sfb-affine-group-dual-number-calculus]. Fix $x\\in\\mathfrak g$, $y\\in\\mathfrak n$ and put $z=di(y)$, $X=d\\rho(x)$, $Y=d\\rho(z)$. By [lem-sfb-affine-group-lie-tangent-calculus], $d\\rho([x,z])=XY-YX$. Set $A=k[\\epsilon,\\delta]/(\\epsilon^2,\\delta^2)$ and $D=k[\\eta]/(\\eta^2)$. Base change $E_{G,k}(x)$ along $\\eta\\mapsto\\epsilon$ and $E_{N,k}(y)$ along $\\eta\\mapsto\\delta$, and denote the resulting points by $a\\in G(A)$, $b\\in N(A)$. Naturality gives $\\rho(a)=1+\\epsilon X$ and $\\rho(i(b))=1+\\delta Y$. Multiplying these matrices and their inverses $1-\\epsilon X$, $1-\\delta Y$ gives\n$$\\rho(ai(b)a^{-1}i(b)^{-1})=(1+\\epsilon X+\\delta Y+\\epsilon\\delta XY)(1-\\epsilon X)(1-\\delta Y)=1+\\epsilon\\delta(XY-YX).$$\nThe same is the image under $\\rho$ of $q=E_{G,k}([x,z])\\in G(D)$ after $j:D\\to A$, $\\eta\\mapsto\\epsilon\\delta$. Injectivity of $\\rho_A$ therefore identifies $G(j)(q)$ with this commutator.",
+   "uses": [
+    "lem-sfb-affine-group-faithful-linear-representation",
+    "lem-sfb-affine-group-dual-number-calculus",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.11, 10.19 and proof of Theorem 10.23, printed pp.189,192--193; explicit two-parameter commutator expansion"
+   }
+  },
+  {
+   "text": "Normality in [def-sc-group-scheme-subgroup], applied to the algebra $A$, implies $ai(b)a^{-1}i(b)^{-1}\\in i(N(A))$. We descend this membership to $q\\in G(D)$ explicitly. Write $G=\\operatorname{Spec}C$. By [lem-weil-pbc-closed-immersion-affine-cover-criterion], $i$ is given by a surjection $C\\to C/J$ with $N=\\operatorname{Spec}(C/J)$. By [def-weil-affine-spectrum], $q$ is a $k$-algebra map $\\phi:C\\to D$, and its base change belongs to $N(A)$ precisely when $j\\phi(J)=0$. The map $j$ is injective: $1,\\epsilon,\\delta,\\epsilon\\delta$ are a $k$-basis of $A$, so $c+d\\eta\\mapsto c+d\\epsilon\\delta$ has zero kernel. Thus $\\phi(J)=0$ and $\\phi$ factors uniquely through $C/J$. The resulting point of $N(D)$ reduces to its identity, since its image in $G(k)$ is the identity and $i_k$ is injective. By [lem-sfb-affine-group-dual-number-calculus], this point is $E_{N,k}(w)$ for some $w\\in\\mathfrak n$, and naturality and injectivity of $E_{G,k}$ give $di(w)=[x,di(y)]$. Consequently the linear subspace $I=di(\\mathfrak n)$ satisfies $[\\mathfrak g,I]\\subseteq I$, the ideal condition of [def-wf-lie-algebra].",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-affine-spectrum",
+    "lem-sfb-affine-group-dual-number-calculus",
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 23.68, printed p.506, normal-ideal assertion; explicit closed-subgroup descent using Stacks Tag 01QO (lemma-closed-immersion), literature/stacks-project/morphisms.tex"
+   }
+  },
+  {
+   "text": "Suppose $N$ is commutative. For $u,v\\in\\mathfrak n$ put $U=d\\rho(di(u))$, $V=d\\rho(di(v))$. The two tangent points of $N$ over $A$ commute, so their images under $\\rho i$ have commutator $1$. The multiplication in step 2 gives $1+\\epsilon\\delta(UV-VU)=1$; independence of the basis coefficient $\\epsilon\\delta$ gives $UV-VU=0$. Bracket preservation in [lem-sfb-affine-group-lie-tangent-calculus] now gives $d\\rho(di([u,v]))=0$. Both differentials are injective by [lem-sfb-affine-group-dual-number-calculus], hence $[u,v]=0$. Finally $[di(u),di(v)]=di([u,v])=0$, proving $[I,I]=0$.",
+   "uses": [
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-sfb-affine-group-dual-number-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.19, 10.22--10.23, printed pp.192--193; Lemma 23.68, printed p.506, commutative specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-sfb-affine-group-dual-number-calculus",
+  "lem-sfb-affine-group-faithful-linear-representation",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-weil-affine-spectrum",
+  "def-wf-lie-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit two-parameter matrix proof of the normal-ideal assertion used in Lemma 23.68 (p.506), using 10.14, 10.19 and Theorem 10.23 (pp.190,192--193); closed-subgroup descent from Stacks Tag 01QO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The tangent Lie algebra of a normal closed subgroup scheme is an ideal in the Lie algebra of the group and is abelian when the subgroup is commutative",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.abelian_derivedAbelianOfIdeal\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (I : LieIdeal R L),\\n  IsLieAbelian ↥(LieAlgebra.derivedAbelianOfIdeal I)\", \"doc\": \"For any Lie ideal $ I $ in a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, the derived ideal $ \\\\text{derivedAbelianOfIdeal}(I) $ is abelian. This means that for all elements $ x, y $ in \"}\n  {\"name\": \"LieIdeal.isLieAbelian_iff\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {I : LieIdeal R L},\\n  IsLieAbelian ↥I ↔ I ≤ LieModule.ker R L ↥I\", \"doc\": \"A Lie ideal $ I $ over a commutative ring $ R $ of a Lie algebra $ \\\\mathfrak{g} $ is abelian (i.e., $[x, y] = 0$ for all $ x, y \\\\in I $) if and only if $ I $ is contained in the kernel of the Lie modu\"}\n  {\"name\": \"LieSubmodule.lie_abelian_iff_lie_self_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (I : LieIdeal R L),\\n  IsLieAbelian ↥I ↔ ⁅I, I⁆ = ⊥\", \"doc\": \"A Lie submodule $ I $ is abelian if and only if the Lie bracket of $ I $ with itself is the trivial submodule $ \\\\{0\\\\} $.\"}\n  {\"name\": \"LieAlgebra.derivedAbelianOfIdeal\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"{R : Type u} →\\n  {L : Type v} → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → LieIdeal R L → LieIdeal R L\", \"doc\": \"Given a Lie ideal $ I $ in a Lie algebra $ L $ over a commutative ring $ R $, this function returns the derived ideal corresponding to the derived length of $ I $. If the derived length is $ 0 $, it r\"}\n  {\"name\": \"LieIdeal\", \"module\": \"Mathlib/Algebra/Lie/Ideal\", \"type\": \"(R : Type u) → (L : Type v) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Type v\", \"doc\": \"A Lie ideal over a commutative ring $ R $ is a Lie submodule of a Lie algebra $ L $ over $ R $, meaning it is an additive subgroup of $ L $ closed under scalar multiplication by $ R $ and the Lie brac\"}\n  {\"name\": \"LieIdeal.isLieAbelian_of_trivial\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (I : LieIdeal R L)\\n  [h : LieModule.IsTrivial L ↥I], IsLieAbelian ↥I\", \"doc\": \"If a Lie ideal $ I $ of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial $ \\\\mathfrak{g} $-module structure (i.e., $[l, m] = 0$ for all $ l \\\\in \\\\mathfrak{g} $ and $ m \\\\in I $)\"}\n  {\"name\": \"LieAlgebra.center\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"(R : Type u) → (L : Type v) → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → LieIdeal R L\", \"doc\": \"The center of a Lie algebra $L$ over a commutative ring $R$ is the Lie ideal consisting of all elements $z \\\\in L$ such that $[x, z] = 0$ for all $x \\\\in L$.\"}\n  {\"name\": \"LieAlgebra.abelian_iff_derived_one_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (I : LieIdeal R L),\\n  IsLieAbelian ↥I ↔ LieAlgebra.derivedSeriesOfIdeal R L 1 I = ⊥\", \"doc\": \"A Lie ideal $ I $ of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ is abelian if and only if its first derived ideal $[I, I]$ is the trivial submodule $\\\\{0\\\\}$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie ideal inclusions and normalizers and manifold Lie groups do not construct the tangent ideal of a normal subgroup scheme over an arbitrary field"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The differential of a normal algebraic subgroup inclusion is injective and identifies its Lie algebra with an ideal; a commutative algebraic group has zero Lie bracket",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"instBracketAddGroupLieAlgebra\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"The Lie bracket operation on the Lie algebra of an additive group modeled on a normed vector space, defined as the zero map since the additive group is abelian and its Lie algebra is abelian (all brac\"}\n  {\"name\": \"LieIdeal.incl_injective\", \"module\": \"Mathlib.Algebra.Lie.Ideal\", \"type\": \"(I : LieIdeal R L) : Function.Injective I.incl\", \"doc\": \"For any Lie ideal $ I $ of a Lie algebra $ L $ over a commutative ring $ R $, the canonical inclusion map $ I \\\\to L $ is injective.\"}\n  {\"name\": \"LieSubalgebra.inclusion_injective\", \"module\": \"Mathlib.Algebra.Lie.Subalgebra\", \"type\": \": Function.Injective (inclusion h)\", \"doc\": \"The canonical inclusion map from a Lie subalgebra $ K $ to a larger Lie subalgebra $ K' $ (where $ K \\\\subseteq K' $) is injective, meaning distinct elements in $ K $ remain distinct in $ K' $.\"}\n  {\"name\": \"AddGroupLieAlgebra.bracket_def\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {H : Type u_2} [inst_1 : TopologicalSpace H] {E : Type u_3}\\n  [inst_2 : NormedAddCommGroup E] [inst_3 : NormedSpace 𝕜 E] {I : ModelWithCorners 𝕜 E H} {G : Type u_4}\\n  [inst_4 : TopologicalSpace G] [inst_5 : ChartedSpace H G] [inst_6 : AddGroup G] (\", \"doc\": \"For any elements $v$ and $w$ in the Lie algebra of an additive group modeled on a normed vector space, the Lie bracket $[v, w]$ is zero. This follows from the abelian nature of the additive group, whi\"}\n  {\"name\": \"LieAlgebra.Extension.incl_injective\", \"module\": \"Mathlib.Algebra.Lie.Extension\", \"type\": \"(E : Extension R M L) : Injective E.incl\", \"doc\": \"The inclusion homomorphism from the abelian Lie ideal $ N $ into the Lie algebra extension $ \\\\text{Ext} $ is injective, preserving the $ R $-module structure and Lie bracket compatibility within the s\"}\n  {\"name\": \"instLieAlgebraAddGroupLieAlgebra\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \"{G : Type*} [TopologicalSpace G] [ChartedSpace H G] [AddGroup G] [LieAddGroup I (minSmoothness 𝕜 3) G] :\\n  LieAlgebra 𝕜 (AddGroupLieAlgebra I G)\", \"doc\": \"For a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, a model with corners $I$ on $E$, and a charted space $G$ modeled on $I$ equipped with an additive group struc\"}\n  {\"name\": \"GroupLieAlgebra\", \"module\": \"Mathlib.Geometry.Manifold.GroupLieAlgebra\", \"type\": \": Type _\", \"doc\": \"The Lie algebra of a group $ G $, defined as the tangent space at the identity element $ 1 $, modeled on the normed vector space $ E $ via the model with corners $ I $.\"}\n  {\"name\": \"LieSubalgebra.incl_range\", \"module\": \"Mathlib.Algebra.Lie.Subalgebra\", \"type\": \": K.incl.range = K\", \"doc\": \"The image of the canonical inclusion map from a Lie subalgebra $\\\\mathfrak{g}'$ into its ambient Lie algebra $\\\\mathfrak{g}$ is equal to $\\\\mathfrak{g}'$ itself, i.e., the range of the inclusion map coin\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie ideal inclusions and normalizers and manifold Lie groups do not construct the tangent ideal of a normal subgroup scheme over an arbitrary field"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieAlgebra\", \"Normal\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\", \"module\": \"Mathlib.Algebra.Lie.Engel\", \"type\": \" {R : Type u₁} {L : Type u₂} [CommRing R] [LieRing L] [LieAlgebra R L] {K : LieSubalgebra R L} (hK₁ : LieAlgebra.IsEngelian R ↥K) (hK₂ : K < K.normalizer) : ∃ K', LieAlgebra.IsEngelian R ↥K' ∧ K < K'\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"module\": \"Mathlib.Algebra.Lie.Weights.Cartan\", \"type\": \" (R : Type u_1) (L : Type u_2) [CommRing R] [LieRing L] [LieAlgebra R L] (H : LieSubalgebra R L) [LieRing.IsNilpotent ↥H] : (LieAlgebra.zeroRootSubalgebra R L H).normalizer = LieAlgebra.zeroRootSubalgebra R L H\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie ideal inclusions and normalizers and manifold Lie groups do not construct the tangent ideal of a normal subgroup scheme over an arbitrary field"
+  },
+  {
+   "tool": "grep",
+   "query": "LieIdeal.*[Nn]ormal|[Nn]ormal.*LieIdeal|[Cc]ommutative.*LieAlgebra|LieAlgebra.*[Cc]ommutative",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Engel.lean\", \"line\": \"201\", \"text\": \"    LieSubalgebra.exists_nested_lieIdeal_ofLe_normalizer hKK' hK'\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanSubalgebra.lean\", \"line\": \"114\", \"text\": \"theorem LieIdeal.normalizer_eq_top {R : Type u} {L : Type v} [CommRing R] [LieRing L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanSubalgebra.lean\", \"line\": \"115\", \"text\": \"    [LieAlgebra R L] (I : LieIdeal R L) : (I : LieSubalgebra R L).normalizer = ⊤ := by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Rank.lean\", \"line\": \"26\", \"text\": \"* `LieAlgebra.rank R L` is the rank of a Lie algebra `L` over a commutative ring `R`.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"86\", \"text\": \"    ⁅(⊤ : LieIdeal R L), N⁆ ≤ N' ↔ N ≤ N'.normalizer := by rw [lie_le_iff]; tauto\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"89\", \"text\": \"    GaloisConnection (fun N : LieSubmodule R L M => ⁅(⊤ : LieIdeal R L), N⁆) normalizer :=\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"111\", \"text\": \"lemma _root_.LieIdeal.idealizer_eq_normalizer (I : LieIdeal R L) :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"166\", \"text\": \"theorem exists_nested_lieIdeal_ofLe_normalizer {K : LieSubalgebra R L} (h₁ : H ≤ K)\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"167\", \"text\": \"    (h₂ : K ≤ H.normalizer) : ∃ I : LieIdeal R K, (I : LieSubalgebra R K) = ofLe h₁ := by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Free.lean\", \"line\": \"108\", \"text\": \"If `α` is a type, and `R` is a commutative ring, then `FreeLieAlgebra R α` is\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie ideal inclusions and normalizers and manifold Lie groups do not construct the tangent ideal of a normal subgroup scheme over an arbitrary field"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine group scheme over any field the Lie algebra of a closed normal subgroup is an ideal and is abelian when the subgroup is commutative",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.abelian_derivedAbelianOfIdeal\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (I : LieIdeal R L),\\n  IsLieAbelian ↥(LieAlgebra.derivedAbelianOfIdeal I)\", \"doc\": \"For any Lie ideal $ I $ in a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, the derived ideal $ \\\\text{derivedAbelianOfIdeal}(I) $ is abelian. This means that for all elements $ x, y $ in \"}\n  {\"name\": \"LieIdeal.isLieAbelian_iff\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] {I : LieIdeal R L},\\n  IsLieAbelian ↥I ↔ I ≤ LieModule.ker R L ↥I\", \"doc\": \"A Lie ideal $ I $ over a commutative ring $ R $ of a Lie algebra $ \\\\mathfrak{g} $ is abelian (i.e., $[x, y] = 0$ for all $ x, y \\\\in I $) if and only if $ I $ is contained in the kernel of the Lie modu\"}\n  {\"name\": \"LieAlgebra.derivedAbelianOfIdeal\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"{R : Type u} →\\n  {L : Type v} → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → LieIdeal R L → LieIdeal R L\", \"doc\": \"Given a Lie ideal $ I $ in a Lie algebra $ L $ over a commutative ring $ R $, this function returns the derived ideal corresponding to the derived length of $ I $. If the derived length is $ 0 $, it r\"}\n  {\"name\": \"LieIdeal.isLieAbelian_of_trivial\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (I : LieIdeal R L)\\n  [h : LieModule.IsTrivial L ↥I], IsLieAbelian ↥I\", \"doc\": \"If a Lie ideal $ I $ of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $ has a trivial $ \\\\mathfrak{g} $-module structure (i.e., $[l, m] = 0$ for all $ l \\\\in \\\\mathfrak{g} $ and $ m \\\\in I $)\"}\n  {\"name\": \"LieAlgebra.ofAbelianIsSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (L : Type v) [inst : LieRing L] [IsLieAbelian L], LieAlgebra.IsSolvable L\", \"doc\": \"Every abelian Lie algebra is solvable.\"}\n  {\"name\": \"LieAlgebra.abelian_of_le_center\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  ∀ I ≤ LieAlgebra.center R L, IsLieAbelian ↥I\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ \\\\mathfrak{g} $ over $ R $, if $ I $ is a Lie ideal of $ \\\\mathfrak{g} $ contained in the center of $ \\\\mathfrak{g} $, then $ I $ is abelian (i.e., $[x,y]\"}\n  {\"name\": \"LieSubmodule.lie_abelian_iff_lie_self_eq_bot\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (I : LieIdeal R L),\\n  IsLieAbelian ↥I ↔ ⁅I, I⁆ = ⊥\", \"doc\": \"A Lie submodule $ I $ is abelian if and only if the Lie bracket of $ I $ with itself is the trivial submodule $ \\\\{0\\\\} $.\"}\n  {\"name\": \"LieAlgebra.center\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"(R : Type u) → (L : Type v) → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → LieIdeal R L\", \"doc\": \"The center of a Lie algebra $L$ over a commutative ring $R$ is the Lie ideal consisting of all elements $z \\\\in L$ such that $[x, z] = 0$ for all $x \\\\in L$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie ideals require the ideal property as input, and manifold Lie groups are not arbitrary-field affine group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The differential of a normal algebraic subgroup inclusion has Lie ideal image over an arbitrary field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieHom.IsIdealMorphism\", \"module\": \"Mathlib.Algebra.Lie.Ideal\", \"type\": \": Prop\", \"doc\": \"For a Lie algebra homomorphism $ f : L → L' $ over a commutative ring $ R $, the image of $ f $ forms a Lie ideal of $ L' $. This is expressed by the equality between the Lie ideal generated by the im\"}\n  {\"name\": \"LieHom.idealRange\", \"module\": \"Mathlib.Algebra.Lie.Ideal\", \"type\": \": LieIdeal R L'\", \"doc\": \"For a Lie algebra homomorphism $ f : L → L' $ over a commutative ring $ R $, the Lie ideal generated by the image of $ f $ is defined as the Lie submodule spanned by the image subset in $ L' $. This i\"}\n  {\"name\": \"LieSubalgebra.coe_ofLe\", \"module\": \"Mathlib.Algebra.Lie.Subalgebra\", \"type\": \": (ofLe h : Submodule R K') = LinearMap.range (Submodule.inclusion h)\", \"doc\": \"For Lie subalgebras $ K $ and $ K' $ over a commutative ring $ R $ with $ K \\\\subseteq K' $, the underlying submodule of the Lie subalgebra $ \\\\text{ofLe}(h) $ (where $ h $ is the inclusion $ K \\\\subsete\"}\n  {\"name\": \"LieHom.range_subset_idealRange\", \"module\": \"Mathlib.Algebra.Lie.Ideal\", \"type\": \": (f.range : Set L') ⊆ f.idealRange\", \"doc\": \"For a Lie algebra homomorphism $ f : L → L' $ over a commutative ring $ R $, the Lie ideal generated by the image of $ f $ is the smallest Lie ideal in $ L' $ containing the image subset. It is constr\"}\n  {\"name\": \"LieIdeal.incl_isIdealMorphism\", \"module\": \"Mathlib.Algebra.Lie.Ideal\", \"type\": \": I.incl.IsIdealMorphism\", \"doc\": \"The canonical inclusion map from a Lie ideal $ I $ into its ambient Lie algebra $ L $ over a commutative ring $ R $ is an ideal morphism, meaning the image of $ I $ under this inclusion is closed unde\"}\n  {\"name\": \"LieSubalgebra.inclusion\", \"module\": \"Mathlib.Algebra.Lie.Subalgebra\", \"type\": \": K →ₗ⁅R⁆ K'\", \"doc\": \"Given Lie subalgebras $ K $ and $ K' $ over a commutative ring $ R $ with $ K \\\\subseteq K' $, this is the canonical Lie algebra homomorphism from $ K $ to $ K' $ defined by inclusion, sending each ele\"}\n  {\"name\": \"LieIdeal.incl_idealRange\", \"module\": \"Mathlib.Algebra.Lie.Ideal\", \"type\": \": I.incl.idealRange = I\", \"doc\": \"The Lie ideal generated by the image of the canonical inclusion map from a Lie ideal $ I $ into its ambient Lie algebra $ L $ is equal to $ I $ itself.\"}\n  {\"name\": \"LieIdeal.inclusion\", \"module\": \"Mathlib.Algebra.Lie.Ideal\", \"type\": \"{I₁ I₂ : LieIdeal R L} (h : I₁ ≤ I₂) : I₁ →ₗ⁅R⁆ I₂\", \"doc\": \"Given Lie ideals $ I₁ $ and $ I₂ $ of a Lie algebra $ L $ over a commutative ring $ R $ with $ I₁ \\\\subseteq I₂ $, this is the canonical Lie algebra homomorphism from $ I₁ $ to $ I₂ $ defined by inclus\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie ideals require the ideal property as input, and manifold Lie groups are not arbitrary-field affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieIdeal\", \"Normal\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"LieIdeal.idealizer_eq_normalizer\", \"module\": \"Mathlib.Algebra.Lie.Normalizer\", \"type\": \" {R : Type u_1} {L : Type u_2} [CommRing R] [LieRing L] [LieAlgebra R L] (I : LieIdeal R L) : LieSubmodule.idealizer I = LieSubmodule.normalizer I\", \"doc\": \"\"}\n  {\"name\": \"LieSubalgebra.exists_nested_lieIdeal_ofLe_normalizer\", \"module\": \"Mathlib.Algebra.Lie.Normalizer\", \"type\": \" {R : Type u_1} {L : Type u_2} [CommRing R] [LieRing L] [LieAlgebra R L] {H K : LieSubalgebra R L} (h₁ : H ≤ K) (h₂ : K ≤ H.normalizer) : ∃ I, ↑R (↥K) I = LieSubalgebra.ofLe h₁\", \"doc\": \"A Lie subalgebra `H` is an ideal of any Lie subalgebra `K` containing `H` and contained in the\\nnormalizer of `H`.\"}\n  {\"name\": \"LieIdeal.normalizer_eq_top\", \"module\": \"Mathlib.Algebra.Lie.CartanSubalgebra\", \"type\": \" {R : Type u} {L : Type v} [CommRing R] [LieRing L] [LieAlgebra R L] (I : LieIdeal R L) : (↑R L I).normalizer = ⊤\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie ideals require the ideal property as input, and manifold Lie groups are not arbitrary-field affine group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "lie_mem_range_lieAlgebraMap|LieIdeal.*[Nn]ormal|[Nn]ormal.*LieIdeal|[Cc]ommutative.*LieAlgebra",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/Algebra/Lie/Engel.lean\", \"line\": \"201\", \"text\": \"    LieSubalgebra.exists_nested_lieIdeal_ofLe_normalizer hKK' hK'\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanSubalgebra.lean\", \"line\": \"114\", \"text\": \"theorem LieIdeal.normalizer_eq_top {R : Type u} {L : Type v} [CommRing R] [LieRing L]\"}\n  {\"file\": \"Mathlib/Algebra/Lie/CartanSubalgebra.lean\", \"line\": \"115\", \"text\": \"    [LieAlgebra R L] (I : LieIdeal R L) : (I : LieSubalgebra R L).normalizer = ⊤ := by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"86\", \"text\": \"    ⁅(⊤ : LieIdeal R L), N⁆ ≤ N' ↔ N ≤ N'.normalizer := by rw [lie_le_iff]; tauto\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"89\", \"text\": \"    GaloisConnection (fun N : LieSubmodule R L M => ⁅(⊤ : LieIdeal R L), N⁆) normalizer :=\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"111\", \"text\": \"lemma _root_.LieIdeal.idealizer_eq_normalizer (I : LieIdeal R L) :\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"166\", \"text\": \"theorem exists_nested_lieIdeal_ofLe_normalizer {K : LieSubalgebra R L} (h₁ : H ≤ K)\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Normalizer.lean\", \"line\": \"167\", \"text\": \"    (h₂ : K ≤ H.normalizer) : ∃ I : LieIdeal R K, (I : LieSubalgebra R K) = ofLe h₁ := by\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Free.lean\", \"line\": \"108\", \"text\": \"If `α` is a type, and `R` is a commutative ring, then `FreeLieAlgebra R α` is\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie ideals require the ideal property as input, and manifold Lie groups are not arbitrary-field affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal closed subgroup schemes have tangent Lie ideals, including non smooth group schemes and positive characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieIdeal\", \"module\": \"Mathlib/Algebra/Lie/Ideal\", \"type\": \"(R : Type u) → (L : Type v) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Type v\", \"doc\": \"A Lie ideal over a commutative ring $ R $ is a Lie submodule of a Lie algebra $ L $ over $ R $, meaning it is an additive subgroup of $ L $ closed under scalar multiplication by $ R $ and the Lie brac\"}\n  {\"name\": \"instLieAlgebraGroupLieAlgebra\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              {I : ModelWithCorners 𝕜 E H} →\\n                {G : Type u_4}\", \"doc\": \"For a Lie group $ G $ modeled on a nontrivially normed field $ \\\\mathbb{K} $, the tangent space $ \\\\mathfrak{g} = T_eG $ at the identity element $ e $ is equipped with a $ \\\\mathbb{K} $-Lie algebra struc\"}\n  {\"name\": \"GroupLieAlgebra\", \"module\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra\", \"type\": \"{𝕜 : Type u_1} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {H : Type u_2} →\\n      [inst_1 : TopologicalSpace H] →\\n        {E : Type u_3} →\\n          [inst_2 : NormedAddCommGroup E] →\\n            [inst_3 : NormedSpace 𝕜 E] →\\n              ModelWithCorners 𝕜 E H →\\n                (G : Type u_4) → [in\", \"doc\": \"The Lie algebra of a group $ G $, defined as the tangent space at the identity element $ 1 $, modeled on the normed vector space $ E $ via the model with corners $ I $.\"}\n  {\"name\": \"LieIdeal.normalizer_eq_top\", \"module\": \"Mathlib/Algebra/Lie/CartanSubalgebra\", \"type\": \"∀ {R : Type u} {L : Type v} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (I : LieIdeal R L),\\n  (LieIdeal.toLieSubalgebra R L I).normalizer = ⊤\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ \\\\mathfrak{g} $ over $ R $, the normalizer of a Lie ideal $ \\\\mathfrak{i} \\\\subseteq \\\\mathfrak{g} $ is equal to the entire Lie algebra $ \\\\mathfrak{g} $. T\"}\n  {\"name\": \"LieIdeal.idealizer_eq_normalizer\", \"module\": \"Mathlib/Algebra/Lie/Normalizer\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] (I : LieIdeal R L),\\n  LieSubmodule.idealizer I = LieSubmodule.normalizer I\", \"doc\": \"For any Lie ideal $ I $ in a Lie algebra $ L $ over a commutative ring $ R $, the idealizer of $ I $ (the set of elements in $ L $ that commute with $ I $ under the Lie bracket to keep $ I $ as an ide\"}\n  {\"name\": \"LieAlgebra.center\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"(R : Type u) → (L : Type v) → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → LieIdeal R L\", \"doc\": \"The center of a Lie algebra $L$ over a commutative ring $R$ is the Lie ideal consisting of all elements $z \\\\in L$ such that $[x, z] = 0$ for all $x \\\\in L$.\"}\n  {\"name\": \"LieSubalgebra.exists_nested_lieIdeal_ofLe_normalizer\", \"module\": \"Mathlib/Algebra/Lie/Normalizer\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  {H K : LieSubalgebra R L} (h₁ : H ≤ K),\\n  K ≤ H.normalizer → ∃ I, LieIdeal.toLieSubalgebra R (↥K) I = LieSubalgebra.ofLe h₁\", \"doc\": \"For any Lie subalgebras $ H $ and $ K $ of a Lie algebra $ \\\\mathfrak{g} $ over a commutative ring $ R $, if $ H \\\\subseteq K $ and $ K $ is contained in the normalizer of $ H $ in $ \\\\mathfrak{g} $, the\"}\n  {\"name\": \"LieSubmodule.lie_bot\", \"module\": \"Mathlib/Algebra/Lie/IdealOperations\", \"type\": \"∀ {R : Type u} {L : Type v} {M : Type w} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] [inst_4 : LieRingModule L M] [inst_5 : LieAlgebra R L] (I : LieIdeal R L), ⁅I, ⊥⁆ = ⊥\", \"doc\": \"For any Lie submodule $ I $ of an $ R $-module $ M $ over a Lie ring $ L $, the Lie bracket of $ I $ with the trivial submodule $ \\\\{0\\\\} $ is equal to the trivial submodule $ \\\\{0\\\\} $. This follows from\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie ideals require the ideal property as input, and manifold Lie groups are not arbitrary-field affine group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-charzero-lie-semisimple-converse",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Lemma 23.68, printed p.506, implication from semisimple Lie algebra to semisimple connected algebraic group. This is the converse direction to the existing lem-sfb-char-zero-semisimple-group-lie. Supporting input for the Q77 split: 10.12 (p.190), 10.14 (p.190), 10.19--10.22 and Theorem 10.23 (pp.192--193): tangent injection, conjugation action on Lie(N), and its differential. Lemma 23.68 (p.506) explicitly uses the commutative-normal-subgroup specialization. No Stacks tag states the normal-subgroup Lie-ideal assertion.",
+   "via": [
+    "lem-sfb-charzero-lie-semisimple-converse",
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-subgroup-lie-ideal",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary-field statement. Reused existing Lie tangent calculus, dual-number calculus and faithful linear representation nodes; wrote the normality/closed-immersion descent and commutative-case matrix calculation explicitly. No new nodes or Mathlib leaves. Searches found only abstract Lie ideals or manifold Lie groups, not this group-scheme assertion.",
+  "blueprint": "Retains the inherited blueprint.from (ancestor tool returns None). Realizes the supporting normal-commutative-subgroup input to Milne Lemma 23.68 in the inherited direct-images alteration route; uses the faithful-matrix/dual-number calculation of Milne 10.23, also present in latest blueprint sk-p-comparison, without using its characteristic-zero stability assertions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Generic affine closed-immersion criterion (Stacks 01QO), used to descend a point through the injective algebra map k[eta]/eta^2 -> k[epsilon,delta]/(epsilon^2,delta^2); no same-unit node replaces this scheme-theoretic criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-9c1bc53fa",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-9c1bc53fa (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The statement is byte-identical to the base unsplit node, which had no proof, so nothing was weakened. There are no new nodes and no re-split note. Sources checked: Milne iAG 2017 10.11, 10.14, 10.19-10.22 and Thm 10.23 (pp.189-193), and Lemma 23.68 (p.506), whose proof has 'Lie(N) is a commutative ideal'. Step 1: tangent-calculus and dual-number-calculus statements give finite dimension, a linear bracket-preserving di, injectivity for a closed subgroup, and naturality of E. Step 2: the faithful-representation node gives a closed embedding rho with every rho_A injective, and d rho is injective. I recomputed (1+eX)(1+dY)(1-eX)(1-dY)=1+ed(XY-YX) with the correct factor order; it equals rho of q=E([x,z]) pushed along eta->ed. Step 3: normality holds for every algebra, so it applies to the non-reduced A. 01QO (lem-weil-pbc-closed-immersion-affine-cover-criterion) gives N=Spec(C/J). Since j: k[eta]->A is injective by the basis, phi(J)=0. The factored point reduces to e_N because i_k is injective, so it is E_N(w) with di(w)=[x,di(y)], which is the ideal condition. Step 4: commuting N-points and the same expansion give UV=VU, and bracket preservation plus the injective differentials give [u,v]=0. Edge cases: N=1, N=G, finite etale N, mu_p and alpha_p in characteristic p including p=2, and Ga in Ga x| Gm (commutative, normal, not central: [g,I]!=0 but [I,I]=0). The rg -L duplicate search found no existing node with this statement; lem-wf-mixed-commutator-tangent needs both vectors in one subgroup, so it does not cover the normality step. I accept the tool_use of 01QO (a Mathlib leaf from another unit, used only for the affine surjection). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalSubgroupLieIdeal",
+  "declaration": "AlgebraicGeometry.GrpObj.normal_subgroup_lie_ideal",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalSubgroupLieIdeal.lean",
+  "statement": "theorem normal_subgroup_lie_ideal {k : Type u} [Field k] (G N : Over (Spec (.of k))) [GrpObj G] [GrpObj N] [IsAffine G.left] [IsAffine N.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType N.hom] [QuasiCompact N.hom] (i : N ⟶ G) [IsClosedSubgroupScheme i] [IsNormalSubgroupScheme i] : FiniteDimensional k (Lie N) ∧ FiniteDimensional k (Lie G) ∧ Function.Injective (differential i) ∧ (differential i).IsIdealMorphism ∧ (IsCommMonObj N → (∀ x y : Lie N, ⁅x, y⁆ = 0) ∧ ∀ x y : Lie G, x ∈ (differential i).range → y ∈ (differential i).range → ⁅x, y⁆ = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing canonical GrpObj.Lie and GrpObj.differential, not an arbitrarily chosen Lie structure or linear map. LieHom.IsIdealMorphism means the actual differential image is an ideal; the conditional last conjunct explicitly states zero bracket both on Lie N and on its actual image. The added statement dependency def-wf-lie-algebra-derivation owns the already recorded upstream canonical Lie model; no notion is duplicated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18befbfad",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Checked against side-live sources and Milne 10.12-10.23 and Lemma 23.68 as quoted in the node and report. Every clause matches: Field k; GrpObj over Spec k with IsAffine and LocallyOfFiniteType plus QuasiCompact for both groups; IsClosedSubgroupScheme and IsNormalSubgroupScheme match def-sc-group-scheme-subgroup (normal range for every k-algebra R); canonical GrpObj.Lie and differential i (postcomposition on tangent points, Lie hom by its type); FiniteDimensional for both; Injective; IsIdealMorphism, equivalent to [g,I] in I; conditional IsCommMonObj N gives zero bracket on Lie N and on the image. No extra assumptions. Node diff against base: only the lean record and the required added stmt_dep def-wf-lie-algebra-derivation, owner of GrpObj.Lie. lean.statement matches the file verbatim. Proof is sorry only; no definitions; source and blueprint docstrings with the 4-step proof; private import of the proof dependency's module AffineGroupDualNumberCalculus. Edge cases ok: N=1, N=G, finite etale, alpha_p and mu_p, char 2, commutative non-central normal subgroup. No duplicate declaration found. Not recompiled per instructions; worker reports a clean compile. No findings."
+ }
+}

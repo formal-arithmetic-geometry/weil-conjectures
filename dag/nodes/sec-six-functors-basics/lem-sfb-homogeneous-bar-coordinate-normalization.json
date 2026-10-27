@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-homogeneous-bar-coordinate-normalization",
+ "kind": "statement",
+ "title": "Homogeneous coordinates preserve the normalized derived bar model and coefficient augmentation",
+ "statement": "Let $A$ be a commutative condensed ring on a small coherent profinite site, $G$ a profinite group with $\\underline G(S)=C(S,G)$, and $N$ an internal $A$-module with trivial $G$-action [sk-def-sfb-condensed-ring, def-weil-size-convention, sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Write $U$ for forgetting the action, $F=\\Gamma_G$ for invariants and $Q$ for localization at quasi-isomorphisms [def-weil-abstract-derived-category]. Fix a nonnegative equivariant injective resolution $s:N[0]\\to I$, whose underlying resolution $Us$ is injective [def-sp-injective-resolutions]. Put\n$$T=\\operatorname{Tot}_{p,q\\geq0}\\underline{\\operatorname{Hom}}_A(A[\\underline G^{p+1}],UI^q),\\qquad V=\\operatorname{Tot}_{p,q\\geq0}\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],UI^q).$$\nUse the homogeneous action $(g\\cdot f)(h_i)=g\\cdot_{I^q}f(g^{-1}h_i)$ and alternating deletion differential for $T$, and the action-dependent inhomogeneous bar differential for $V$; both totals have vertical sign $(-1)^p$ [def-sfb-condensed-homogeneous-functions, def-sfb-condensed-equivariant-bar-data, def-sp-double-complex-total]. Let $\\delta:I\\to T$ be constants in bar degree zero. There is a cochain isomorphism $\\chi:F(T)\\xrightarrow{\\sim}V$ with slice formulas\n$$\\chi(f)(g_1,\\ldots,g_p)=f(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_p),$$\n$$\\chi^{-1}(c)(h_0,\\ldots,h_p)=h_0\\cdot c(h_0^{-1}h_1,\\ldots,h_{p-1}^{-1}h_p).$$\nThese formulas commute with both differentials and all profinite base changes, including $p=0$. Write $v=\\chi F(\\delta)$, the bar-zero inclusion of invariants. In the compatible model $\\mathscr B_A(G;N)=QV$ of [lem-sfb-condensed-derived-invariant-bar], the isomorphism $Q(\\chi):QF(T)\\xrightarrow{\\sim}\\mathscr B_A(G;N)$ is an isomorphism in $D(\\mathcal M)$, and the normalized bar isomorphism is\n$$\\epsilon=Q(v)\\circ u_I^{-1}\\circ RF(Qs),$$\nwhere $u_I$ is the canonical derived-unit isomorphism [def-sfb-right-derived-functor].\n\nPut $R_N^p=\\underline{\\operatorname{Hom}}_A(A[\\underline G^{p+1}],N)$ with diagonal argument action and deletion differential, and $U_N^p=\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],N)$ with the trivial-action inhomogeneous differential. Postcomposition with $s^0$ into bidegree $(p,0)$ defines equivariant $t:R_N\\to T$ and $j_{\\rm chain}:U_N\\to V$, representing the underived-to-derived map $j=Q(j_{\\rm chain})$. These are cochain maps, and $t$ takes the constant augmentation of $N$ to $\\delta s$. For every nonnegative equivariant complex $K$ and equivariant cochain map $e:K\\to R_N$, let $\\rho:F(K)\\to U_N$ be prefix evaluation of $e$ by the displayed formula. Then\n$$\\chi\\circ F(te)=j_{\\rm chain}\\circ\\rho.$$\nIn degree $p$ the common component is $x\\mapsto[(g_1,\\ldots,g_p)\\mapsto s^0(e^p(x)(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_p))]$ in $(p,0)$, and all other components vanish. No quasi-isomorphism assumption on $e$ or acyclicity assumption on the terms of $K$ or $R_N$ is made.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-homogeneous-functions",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-sfb-right-derived-functor"
+ ],
+ "proof": [
+  {
+   "text": "Work on every slice over a profinite $S$, not just at global points. By [def-sfb-condensed-equivariant-bar-data], an internal function is a natural family of evaluations on all $W\\to S$. By [def-sfb-condensed-action-module] and [def-sfb-condensed-homogeneous-functions], being invariant means exactly $f(ah_0,\\ldots,ah_p)=a f(h_0,\\ldots,h_p)$ after every such base change. Consequently it is the equivariant internal Hom appearing in [lem-sfb-condensed-injective-bar-rows]: the free-generator adjunction sends $f$ to $[z]\\otimes[h]\\mapsto f|_z(h)$, with the parameter $z$ carrying trivial action. Conversely restrict an equivariant map to these generators. The two operations are inverse by the free adjunction. Apply that lemma to each injective $I^q$. Its formula gives $\\chi_{p,q}^{-1}(c)(h)=h_0c(h_0^{-1}h_1,\\ldots,h_{p-1}^{-1}h_p)$ and its inverse is evaluation at $(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_p)$. Indeed consecutive quotients telescope to $h_0^{-1}h_i$ and equivariance gives $h_0 f(1,h_0^{-1}h_1,\\ldots,h_0^{-1}h_p)=f(h)$. This also verifies the formulas on every slice.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sfb-condensed-action-module",
+    "def-sfb-condensed-homogeneous-functions",
+    "lem-sfb-condensed-injective-bar-rows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED."
+   }
+  },
+  {
+   "text": "The coface formulas in [lem-sfb-condensed-injective-bar-rows] identify alternating deletion with the action-dependent inhomogeneous differential. Explicitly, deletion of the first prefix gives $g_1c(g_2,\\ldots,g_{p+1})$, deletion of prefix $i$ for $1\\le i\\le p$ replaces adjacent arguments by $g_ig_{i+1}$, and the last deletion drops $g_{p+1}$, with signs $(-1)^i$. In degree zero, $f(h)=h m$, so deletion gives $gm-m$. The lemma's naturality in equivariant maps of injectives, applied to $d_I^q$, gives vertical compatibility. All prefix and quotient maps commute with pullback of profinite parameters; this is also part of its base-change assertion.",
+   "uses": [
+    "lem-sfb-condensed-injective-bar-rows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED."
+   }
+  },
+  {
+   "text": "In each degree $n$, invariants commute with the finite diagonal sum: a tuple is fixed after every base change if and only if each of its finitely many components is fixed. The inclusions and projections therefore give $F(T)^n=\\bigoplus_{p+q=n}F(T^{p,q})$. Summing the slice isomorphisms of steps 1-2 yields $\\chi$. The degreewise inverse is the sum of their inverses. Both preserve $p$ and hence commute with the sign $(-1)^p$ in [def-sp-double-complex-total]. They are inverse cochain maps. Negative degrees are zero, and the diagonal at zero has one summand. Constants in bar degree zero evaluate at $1$ to the same coefficient; thus $v=\\chi F(\\delta)$ is exactly the invariant inclusion into bar degree zero, with no extra sign.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-condensed-action-injective-infrastructure] with $R=A$ and $J=G$. Both categories are Grothendieck abelian, $F$ has the normalized invariant adjunction, and its computation unit $u_I$ is invertible since $I$ is a nonnegative complex of injectives. Kernels commute with the condition of being fixed on every slice, so $F$ is left exact. By [lem-sfb-homogeneous-injective-total-target], $U$ is exact and preserves injectives, and constants give the stated cochain map $\\delta$. Apply [lem-sfb-condensed-injective-bar-rows] separately to each equivariantly injective $I^q$: these are exactly the augmented horizontal rows of $V$. Thus every hypothesis of [lem-sfb-condensed-bar-total-augmentation] holds for $a=s$, with the stipulated underlying injective resolution $Us$. Its specified augmentation $b_I:F(I)\\to V$ is a quasi-isomorphism, and its columns represent the entire derived internal Hom diagram on this same resolution. Step 3 identifies $v=b_I$, so $QV$ is the compatible model in [lem-sfb-condensed-derived-invariant-bar]. Write $u_{N[0]}$ for the derived unit of [def-sfb-right-derived-functor]. Naturality says $RF(Qs)u_{N[0]}=u_I QF(s)$. Hence $u_I^{-1}RF(Qs)$ is the canonical resolution-computation comparison, with its normalization fixed by the actual unit, rather than just by cohomology. Composing with $Q(b_I)=Q(v)$ gives precisely $\\epsilon=Q(v)u_I^{-1}RF(Qs)$. Finally localization [def-weil-abstract-derived-category] takes the cochain isomorphism and inverse of step 3 to inverse derived morphisms $Q(\\chi)$ and $Q(\\chi^{-1})$.",
+   "uses": [
+    "lem-sfb-homogeneous-injective-total-target",
+    "lem-sfb-condensed-action-injective-infrastructure",
+    "lem-sfb-condensed-injective-bar-rows",
+    "lem-sfb-condensed-bar-total-augmentation",
+    "lem-sfb-condensed-derived-invariant-bar",
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED."
+   }
+  },
+  {
+   "text": "Postcompose evaluations with $s^0$ to define $t$ and $j_{\\rm chain}$ in $(p,0)$. The equivariance of $s$ means $s^0(gn)=g s^0(n)$ on every slice. Thus postcomposition respects the homogeneous action and the action face of the inhomogeneous differential; it respects the other faces by linearity. Also $d_I^0s^0=0$, since $s$ is a cochain map out of $N[0]$. The extra vertical component of either total differential is therefore zero, including its factor $(-1)^p$. These facts prove both cochain identities directly from [def-sfb-condensed-equivariant-bar-data] and [def-sp-double-complex-total]. On a constant $n$, $t$ is the constant $s^0(n)$ in $(0,0)$, exactly $\\delta s$; all other components of the augmentation vanish. For each $p$, put $H_p=\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],-)$. By naturality of the derived unit in [def-sfb-right-derived-functor], $\\eta_{UI}QH_p(Us)=RH_p(QUs)\\eta_{UN[0]}$. The canonical computation identifies $RH_p(QUN[0])$ with $QH_p(UI)$ by $\\eta_{UI}^{-1}RH_p(QUs)$; consequently the underived-to-derived map becomes exactly $QH_p(Us)$ in this model. These are the postcomposition maps already constructed. They respect every face, so their compatible total is $j=Q(j_{\\rm chain})$.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sp-double-complex-total",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED."
+   }
+  },
+  {
+   "text": "For $x\\in F(K^p)(S)$, equivariance of $e$ makes $e^p(x)$ invariant on every slice. Prefix evaluation defines $\\rho^p(x)$ as an internal function by the natural evaluation-family description of [def-sfb-condensed-equivariant-bar-data]. It is linear and commutes with restrictions. Its cochain identity can be checked without an injectivity assumption on $N$: for an invariant homogeneous function $f$, the first deleted prefix is $g_1 f(1,g_2,g_2g_3,\\ldots)$, each interior deletion multiplies the adjacent arguments, and the last drops the last argument. These are precisely the inhomogeneous faces. Since the action on $N$ is trivial the first coefficient action is the identity. In degree zero the difference is $n-n=0$. Combining this calculation with $e^{p+1}d_K=d_{R_N}e^p$ proves $\\rho$ is a cochain map. No assertion that $R_N$ is acyclic has entered this calculation.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data",
+    "def-sfb-condensed-action-module",
+    "def-sfb-condensed-homogeneous-functions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED."
+   }
+  },
+  {
+   "text": "Evaluate the two composites on any slice and any $x\\in F(K^p)$. In both cases the only nonzero total component is $(p,0)$ and its value is\n$$ (g_1,\\ldots,g_p)\\longmapsto s^0\\bigl(e^p(x)(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_p)\\bigr). $$\nThis is evaluation followed by postcomposition on both sides; these commute by the internal-function specification [def-sfb-condensed-equivariant-bar-data]. Hence equality of the natural evaluation families gives $\\chi F(te)=j_{\\rm chain}\\rho$. For $p=0$ the expression is $s^0(e^0(x)(1))$, so the same identity holds. Only equivariance and the cochain identities were used for $K,e$; neither a quasi-isomorphism of $e$ nor termwise acyclicity of $K$ or $R_N$ is required.",
+   "uses": [
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-action-module",
+  "def-sfb-condensed-homogeneous-functions",
+  "lem-sfb-condensed-injective-bar-rows",
+  "def-sp-double-complex-total",
+  "lem-sfb-homogeneous-injective-total-target",
+  "lem-sfb-condensed-action-injective-infrastructure",
+  "lem-sfb-condensed-bar-total-augmentation",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED.; assembly using existing internal-bar nodes and explicit slice calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "inhomogeneous.*[Ii]so|isoStandardComplex|homogeneousCochains",
+   "results": "{\"t\": \"2026-10-22T06:04:47Z\", \"tool\": \"grep\", \"query\": \"inhomogeneous.*[Ii]so|isoStandardComplex|homogeneousCochains\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\"], \"digest\": \"918283b35dfb2718\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep or TopRep coordinate results do not state this derived internal condensed bar identification with its compatible-resolution augmentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous and inhomogeneous cochains with condensed module coefficients give an isomorphism of derived bar totals compatible with a single injective coefficient resolution",
+   "results": "{\"t\": \"2026-10-22T06:04:47Z\", \"tool\": \"leansearch\", \"query\": \"The homogeneous and inhomogeneous cochains with condensed module coefficients give an isomorphism of derived bar totals compatible with a single injective coefficient resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"groupCohomology.inhomogeneousCochainsIso\", \"groupCohomology.coindIso\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"groupHomology.inhomogeneousChainsIso\", \"groupCohomology.cochainsIso₁\", \"groupCohomologyIso\", \"groupCohomology.inhomogeneousCochains\"], \"digest\": \"fe4d59e84cd48d86\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep or TopRep coordinate results do not state this derived internal condensed bar identification with its compatible-resolution augmentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"barComplex\", \"iso\"",
+   "results": "{\"t\": \"2026-10-22T06:04:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"barComplex\\\", \\\"iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Rep.barComplex.isoStandardComplex\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\"], \"digest\": \"258688a84f1aff9f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep or TopRep coordinate results do not state this derived internal condensed bar identification with its compatible-resolution augmentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homogeneous internal function cochains on a profinite group identify with inhomogeneous cochains by ordered prefix products and this identification preserves the normalized derived bar augmentation and the underived to derived map",
+   "results": "{\"t\": \"2026-10-22T06:04:57Z\", \"tool\": \"leanfinder\", \"query\": \"Homogeneous internal function cochains on a profinite group identify with inhomogeneous cochains by ordered prefix products and this identification preserves the normalized derived bar augmentation and the underived to derived map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.inhomogeneousCochainsIso\", \"inhomogeneousCochains.d_eq\", \"groupCohomology.dArrowIso₀₁\", \"groupCohomology.comp_d₀₁_eq\", \"groupCohomology.comp_d₁₂_eq\", \"groupCohomology.dArrowIso₀₁_hom_right\", \"groupCohomology.dArrowIso₀₁_hom_left\", \"groupCohomology.comp_d₂₃_eq\"], \"digest\": \"f479a1a05f8da50a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep or TopRep coordinate results do not state this derived internal condensed bar identification with its compatible-resolution augmentations."
+  },
+  {
+   "tool": "grep",
+   "query": "isoStandardComplex|def inhomogeneousCochainsIso",
+   "results": "{\"t\": \"2026-10-22T06:05:09Z\", \"tool\": \"grep\", \"query\": \"isoStandardComplex|def inhomogeneousCochainsIso\", \"sub\": \"RepresentationTheory/Homological\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\"], \"digest\": \"3139faceae4d0c54\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep or TopRep coordinate results do not state this derived internal condensed bar identification with its compatible-resolution augmentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordered prefix coordinate change identifies invariant homogeneous function totals with the compatible injective derived inhomogeneous bar and carries coefficient augmentation to the row zero inclusion",
+   "results": "{\"t\": \"2026-10-22T06:05:26Z\", \"tool\": \"leanfinder\", \"query\": \"The ordered prefix coordinate change identifies invariant homogeneous function totals with the compatible injective derived inhomogeneous bar and carries coefficient augmentation to the row zero inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FormalMultilinearSeries.compChangeOfVariables_blocksFun\", \"FormalMultilinearSeries.compPartialSumTargetSet_image_compPartialSumSource\", \"RootPairing.chainCoeff_chainTopIdx_aux\", \"RootPairing.chainBotCoeff_chainTopIdx\", \"FormalMultilinearSeries.compChangeOfVariables\", \"ComplexShape.prev_π₁\", \"RootPairing.GeckConstruction.apply_sum_inl_eq_zero_of_mem_span_h\", \"ComplexShape.prev_π₂\"], \"digest\": \"a8a9c2d6a95295ff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary Rep or TopRep coordinate results do not state this derived internal condensed bar identification with its compatible-resolution augmentations."
+  },
+  {
+   "tool": "grep",
+   "query": "inhomogeneousCochainsIso|isoStandardComplex|homogeneousCochains",
+   "results": "{\"t\": \"2026-10-22T11:19:08Z\", \"tool\": \"grep\", \"query\": \"inhomogeneousCochainsIso|isoStandardComplex|homogeneousCochains\", \"sub\": \"RepresentationTheory/Homological\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\"], \"digest\": \"267e77b8de934a21\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Rep, topological cochains, or general derived resolution comparisons; none gives the internal condensed compatible bar total with the coefficient augmentation asserted here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"inhomogeneousCochainsIso\"",
+   "results": "{\"t\": \"2026-10-22T11:19:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"inhomogeneousCochainsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"groupCohomology.inhomogeneousCochainsIso\"], \"digest\": \"2ea13bb9b69f9a2d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Rep, topological cochains, or general derived resolution comparisons; none gives the internal condensed compatible bar total with the coefficient augmentation asserted here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homogeneous and inhomogeneous internal condensed group cochain totals are isomorphic naturally in an injective resolution, with the canonical derived invariant augmentation",
+   "results": "{\"t\": \"2026-10-22T11:19:09Z\", \"tool\": \"leansearch\", \"query\": \"The homogeneous and inhomogeneous internal condensed group cochain totals are isomorphic naturally in an injective resolution, with the canonical derived invariant augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.iso\", \"groupCohomology.coindIso\", \"groupCohomology.cochainsIso₁\", \"groupCohomology.dArrowIso₀₁\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"groupCohomologyIsoExt\"], \"digest\": \"12202bb8f2d3e5d1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Rep, topological cochains, or general derived resolution comparisons; none gives the internal condensed compatible bar total with the coefficient augmentation asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant homogeneous internal condensed module functions identify with inhomogeneous bar cochains by prefix products, compatible with injective coefficient resolutions and their derived augmentation",
+   "results": "{\"t\": \"2026-10-22T11:19:14Z\", \"tool\": \"leanfinder\", \"query\": \"Invariant homogeneous internal condensed module functions identify with inhomogeneous bar cochains by prefix products, compatible with injective coefficient resolutions and their derived augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.inhomogeneousCochainsIso\", \"ContinuousCohomology.homogeneousCochains\", \"inhomogeneousCochains.d_eq\", \"groupCohomology.inhomogeneousCochains\", \"Rep.barResolution_complex\", \"groupCohomology.cochainsIso₁\", \"groupHomology.inhomogeneousChains.ext\", \"groupCohomology.inhomogeneousCochains.ext\"], \"digest\": \"81924473b8770503\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Rep, topological cochains, or general derived resolution comparisons; none gives the internal condensed compatible bar total with the coefficient augmentation asserted here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural change from homogeneous invariant functions to inhomogeneous cochains for internal modules over a condensed ring, respecting a single double complex resolution and augmentation",
+   "results": "{\"t\": \"2026-10-22T11:20:41Z\", \"tool\": \"leanfinder\", \"query\": \"A natural change from homogeneous invariant functions to inhomogeneous cochains for internal modules over a condensed ring, respecting a single double complex resolution and augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.homogeneousCochains\", \"groupCohomology.inhomogeneousCochains\", \"groupCohomology.cochainsFunctor_obj\", \"groupCohomology.cochainsFunctor\", \"groupCohomology.inhomogeneousCochainsIso\", \"groupCohomology.cochainsMap\", \"groupCohomology.cochainsFunctor_map\", \"groupCohomology.cochainsMap_f\"], \"digest\": \"af605cb6352fcd0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Rep, topological cochains, or general derived resolution comparisons; none gives the internal condensed compatible bar total with the coefficient augmentation asserted here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-resolution-bar-normalization",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent expansion of the resolution normalization helper, old proof steps 4-6 (coordinate isomorphism, derived augmentation normalization, and coefficient-row compatibility). Exact independent internal-bar reference WANTED.",
+   "via": [
+    "lem-sfb-equivariant-resolution-bar-normalization",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-homogeneous-bar-coordinate-normalization",
+  "worker": "stage1",
+  "summary": "Reused the existing internal injective bar-row coordinate theorem and total-augmentation theorem. Checked their hypotheses for the specified resolution, assembled the finite-diagonal isomorphism, and wrote the coefficient-row and arbitrary-source identities on every slice. No new nodes and no statement change. Ordinary representation and topological-cochain results are not matches for internal condensed derived bar data. Repair of returned head fb5e6a7f846: revalidated all eleven cited statements against the current live DAG and retained its unchanged statement and metadata. Made the derived-unit naturality equations explicit in steps 4 and 5, so both normalization and coefficient insertion are pinned to the current canonical comparisons; rechecked all citation quotes.",
+  "blueprint": "Paragraph (3), open direct image, of the current direct-images proof: the resolution normalization helper, old steps 4-6. The seven steps realize the coordinate change, canonical derived augmentation, and coefficient-row identity without changing the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-1ad349e6d",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-1ad349e6d (reviewer sub-agent of L); spot-checked: This is a re-push of fb5e6a7f846d, which got a PASS from review and was refused at landing only because it was not yet promoted to live. The item is still unsplit in live and side-live, and there is no repair note for it. I read the item in full. Statement, stmt_deps, proof_deps, source, blueprint and steps 1-3 and 6-7 are byte-identical to the previous head. Steps 4 and 5 now write out the unit-naturality equations RF(Qs)u_{N[0]}=u_I QF(s) and η_{UI}QH_p(Us)=RH_p(QUs)η_{UN[0]}. I checked their directions against η:Q∘F_K⇒RF∘Q in def-sfb-right-derived-functor. u_I^{-1}RF(Qs) is the canonical computation isomorphism, and the underived-to-derived map becomes QH_p(Us), which is j_chain column by column. Both are correct. I re-read the statements of all 11 cited nodes; snapshot, live and side-live are identical. Every hypothesis of bar-total-augmentation is supplied: Grothendieck abelian categories and the normalized adjunction come from action-injective-infrastructure with R=A and J=G; U is exact and preserves injectives, with Us an injective resolution and δ given, by homogeneous-injective-total-target; invariants are left exact as a right adjoint; the rows are exact by bar-rows on injective I^q. By hand: χ^{-1}χ=id by invariance, and χχ^{-1}=id by ordered telescoping, so G need not be commutative. The cofaces include gm-m at p=0. t and j_chain are cochain maps because the action on N is trivial and d_I^0 s^0=0. Prefix evaluation is a cochain map for any coefficients, and both composites agree in bidegree (p,0). Edge cases checked: p=0, negative degrees, the trivial group, and N=0 or A=0. There are no new nodes, no SGA citation and no cycle. The duplicate candidates (topological-homogeneous-cochain-coordinates, injective-bar-rows rows only, and the Mathlib Rep/TopRep APIs) state different results. Batch-5 flag: lem-sfb-condensed-injective-bar-rows reaches lem-trf-free-module-sheaf-universal-property through lem-sfb-condensed-free-linearization-tensor. That node is Stacks 04BL, the generic universal property of the free module sheaf B[E]. It is not part of the trace-formula or Poincaré-duality content, so I accept the citation. No fixes."
+ }
+}

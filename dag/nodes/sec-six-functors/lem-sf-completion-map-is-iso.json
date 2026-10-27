@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-completion-map-is-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Maps-used sentence; generator realization step 3 and its recursive completion transport.",
+   "via": [
+    "lem-sf-generator-reduction-coherence",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility of recursive completion transport",
+ "statement": "Fix l, E, a scheme family, input locations and Operations [def-sf-generator-reduction-data]. Let K satisfy Admissible with common intervals. For a word B of length at most three satisfying Word.admissible at every vertex, its recursively defined ordinary-ringed-to-integral completionMap is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence; generator realization step 3 and its recursive completion transport."
+ },
+ "stmt_deps": [
+  "def-sf-generator-reduction-data",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the word of length at most three. Inputs and units have identity completion map. A tensor vertex has two children of length at most two. Extract their recursive admissibility and apply the induction hypotheses. Their integral values satisfy the short-word integral domain lemma. Primitive effectivity gives the isomorphism of the actual tensor completion unit; the tensor functor maps the product of the two child isomorphisms to an isomorphism, and composition proves the result.",
+   "uses": [
+    "lem-sf-short-word-integral-domain",
+    "lem-sf-primitive-completion-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; generator realization step 3 and its recursive completion transport."
+   }
+  },
+  {
+   "text": "For pullback, the child has length at most two and its recursive domain. Map its inductive comparison through ordinary pullback, and compose with the primitive pullback unit isomorphism. For proper image apply ordinary direct image to both the child comparison and its reconstruction-unit isomorphism, then compose with the fixed proper realization isomorphism. For open extension just apply its functor to the inductive child comparison. These are exactly the defining clauses of Word.completionMap.",
+   "uses": [
+    "lem-sf-short-word-integral-domain",
+    "lem-sf-primitive-completion-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; generator realization step 3 and its recursive completion transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-short-word-integral-domain",
+  "lem-sf-primitive-completion-effectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence; generator realization step 3 and its recursive completion transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete constructible complexes are stable under pullback tensor and proper direct image, and completion units are isomorphisms",
+   "results": "Eight generic derived-category and sheaf-pullback matches; no match for the strict quotient completion maps or the finite-word integral domain.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion comparison is invertible on derived complete constructible finite Tor complexes; coefficient reduction commutes with tensor and adjunction generators",
+   "results": "Eight adic-completion tensor-product matches, none for the specified derived whole-system maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso, CategoryTheory.Functor.map",
+   "results": "CategoryTheory.Functor.map_isIso and map_inv give the elementary induction step but do not give the primitive completion instances or the integral domain.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completionMap_isIso|tensorAdjunctionReductionSquares|openInterchangeReductionSquares; completion units in Mathlib.CategoryTheory and project SixFunctors",
+   "results": "No match from msearch; local source search finds the assigned theorem and the two generator lemmas, which import its module. The quotient units and word domains are project-specific; Mathlib provides composition and functorial preservation of IsIso.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.GeneratorReductionStatement",
+  "date": "2026-10-25",
+  "group": "T7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ShortWordCompletionIsomorphism",
+  "file": "lean/Sheaf/SixFunctors/ShortWordCompletionIsomorphism.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.completionMap_isIso",
+  "statement": "theorem completionMap_isIso (o : Operations l E)\n    {a : S} (B : Word W location a)\n    (_hLength : B.length ≤ 3)\n    (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))\n    (lo hi torLo torHi : ℤ)\n    (_hAdm : ∀ k : I, Admissible l E\n      (IntegralSystemRealization.calculus l E (W (location k))) (K k) lo hi torLo torHi)\n    (_hIntermediate : Word.admissible l E W location o K lo hi torLo torHi B) :\n    IsIso (B.completionMap l E W location o K)",
+  "branch": "sheaf-dag",
+  "by": "T7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f911a",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261025T144114-L-1185107",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a25ee",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261026T001415-L-4190115",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs lem-sf-generator-reduction-coherence nodes (proof_deps = 4 forward squares + substitution + tensor squares); moved completionMap_isIso byte-identical to live; restored structuralReductionWordSubstitution identical to K4 dc9dd96 signature and its node; tensor adaptation = one import line, compiled"
+ }
+}

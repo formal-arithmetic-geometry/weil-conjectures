@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-separable-point-closure-universal-density",
+ "kind": "statement",
+ "title": "Universal density and geometric reducedness of a separable-point closure",
+ "statement": "Let $k$ be a field [def-weil-field], let $k^{\\mathrm{sep}}$ be a separable closure (an algebraic separable extension which is separably closed), and let $Z$ be a locally finite type $k$-scheme [def-pc-scheme, def-weil-finite-type-morphism]. Let $T\\subset Z(k^{\\mathrm{sep}})$ be stable under every $k$-automorphism of $k^{\\mathrm{sep}}$, where a point is a $k$-morphism $\\operatorname{Spec}k^{\\mathrm{sep}}\\to Z$. Let $Y\\hookrightarrow Z$ be the reduced induced closed subscheme on the closure of the images of $T$ [lem-weil-pbc-reduced-induced-closed-subscheme]. For every field extension $L/k$ inside a common algebraically closed overfield containing $k^{\\mathrm{sep}}$, $Y_L$ is reduced. The induced points of $T$ are schematically dense in $Y_{k^{\\mathrm{sep}}}$: on every open affine, a function vanishing at all those points in that affine is zero. For every integer $m\\geq1$, the tuples in $T^m$ are schematically dense in $(Y_{k^{\\mathrm{sep}}})^m$, and remain so after any field extension of $k^{\\mathrm{sep}}$. Here $Y_L$ and the products mean scheme fibre products [def-pc-fibre-product], reduced means all local rings have no nonzero nilpotents, and schematic density means precisely the stated test on regular functions. The empty set $T$ is allowed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 3.3 Lemma 4, printed p.67, geometric reducedness from schematic density of separable points; coefficient-basis and product-density extension of this argument by O4, used in 7.1 Lemma 4. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=k^{\\mathrm{sep}}$. Every $t\\in T$ factors through $Y$: on an affine of $Z$, the ideal of the reduced closure consists of functions vanishing on that closure, so its image under $t$ is zero in the field $K$, by [lem-weil-pbc-reduced-induced-closed-subscheme]. The images of these factorizations are dense in $Y$ by the definition of closure. Let $U=\\operatorname{Spec}B$ be any affine open of $Y$, and let $T_U$ be the points landing in $U$. Their images are dense in $U$, since every nonempty open of $U$ is open in $Y$ and meets $T$. If $b\\in B$ evaluates to zero at every $t\\in T_U$, its zero locus contains this dense set and hence is all of $\\operatorname{Spec}B$. By [lem-weil-pbc-affine-open-section-vanishing-prime] and [lem-weil-pbc-zero-locus-eq-iff-radical-eq], $b$ lies in $\\sqrt{(0)}$. The ring $B$ is reduced by [lem-weil-pbc-affine-scheme-reduced-iff], because $Y$ is reduced, so $b=0$. Thus $B\\to K^{T_U}$, $b\\mapsto(t(b))_t$, is injective.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme), 01J2 (lemma-affine-reduced); algebra.tex Tag 00E0 (lemma-Zariski-topology)."
+   }
+  },
+  {
+   "text": "For this $U$, let $W$ be the kernel of evaluation $B\\otimes_kK\\to K^{T_U}$, with $(b\\otimes c)(t)=t(b)c$. It is a $K$-linear subspace. For $\\sigma\\in\\operatorname{Aut}_k(K)$ and $f\\in W$, evaluation gives $(\\sigma f)(t)=\\sigma(f(\\sigma^{-1}t))=0$. Here $\\sigma^{-1}t\\in T_U$: $T$ is stable and $\\sigma$ fixes the underlying image in the $k$-scheme $Y$, hence preserves membership in $U$. Thus $W$ is stable under every $\\sigma$. The extension $K/k$ is algebraic normal separable by [lem-weil-pbc-separable-closure-exists-galois], so [lem-sfb-galois-stable-subspace-descent], with $M=B$, says $W=W_0\\otimes_kK$, where $W_0=\\{b:b\\otimes1\\in W\\}$. Step 1 gives $W_0=0$, whence $W=0$. In particular evaluation on $T_U$ is injective on $B_K=B\\otimes_kK$.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-sfb-galois-stable-subspace-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix A.64–A.65, printed pp.580–581: invariant subspaces of scalar extensions; applied to the evaluation kernel. The application is written by Q160."
+   }
+  },
+  {
+   "text": "Let $E/K$ be any field extension. Choose a $K$-basis $(e_j)$ of $E$ by [lem-weil-pbc-vector-space-basis-through-vector]. A tensor $f\\in B_K\\otimes_KE$ has a finite expression $f=\\sum_j b_j\\otimes e_j$, after expanding its finitely many scalar coefficients in that basis. If it vanishes at every induced $E$-point of $T_U$, then $\\sum_j b_j(t)e_j=0$ for each $t$. The numbers $b_j(t)$ lie in $K$, so independence of the $e_j$ gives $b_j(t)=0$ for all $j,t$. Step 2 gives $b_j=0$ and $f=0$. Thus $B_K\\otimes_KE\\to E^{T_U}$ is injective for every $E/K$, including $E=K$. We used only finite sums; tensor bilinearity and the tower identification are [def-weil-vector-space-scalar-extension].",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tensor products Tag 00CV and associativity Tag 00D0; coefficient-basis argument written by Q160, extending the density argument of BLR 3.3 Lemma 4."
+   }
+  },
+  {
+   "text": "Fix an allowed $L/k$ and a common algebraically closed overfield $E$ containing $L$ and $K$ with compatible $k$-embeddings. For each affine $U=\\operatorname{Spec}B$ of $Y$, step 3 embeds $B\\otimes_kE\\cong B_K\\otimes_KE$ into $E^{T_U}$. A nilpotent has zero image in each field $E$, hence is zero by injectivity. Also $B\\otimes_kL\\to(B\\otimes_kL)\\otimes_LE\\cong B\\otimes_kE$ is injective: choose an $L$-basis of $B\\otimes_kL$ by [lem-weil-pbc-vector-space-basis-through-vector]; its scalar-extended vectors are an $E$-basis by [def-weil-vector-space-scalar-extension], so a nonzero finite coordinate vector stays nonzero. Therefore $B\\otimes_kL$ is reduced too. By [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-open-fibre-product], the $U_L=\\operatorname{Spec}(B\\otimes_kL)$ form an affine open cover of $Y_L$. Each is reduced by [lem-weil-pbc-affine-scheme-reduced-iff]; every point of $Y_L$ has its local ring in one such open, proving that $Y_L$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-scalar-extension",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4/01JQ (lemma-fibre-product-affine-schemes/lemma-fibre-product-affines), 01JR (lemma-open-fibre-product), 01J2; coefficient proof of the geometric-reducedness argument of BLR 3.3 Lemma 4, printed p.67."
+   }
+  },
+  {
+   "text": "For $m\\ge1$ choose affine opens $U_i=\\operatorname{Spec}B_i$ of $Y$ and set $A_i=B_i\\otimes_kK$. Evaluation $A_i\\to K^{T_{U_i}}$ is injective by step 2. We prove by induction that $C_m=A_1\\otimes_K\\cdots\\otimes_KA_m$ is detected by $\\prod_iT_{U_i}$. The case $m=1$ is step 2. For the induction step, choose a $K$-basis $(c_j)$ of $A_m$, using [lem-weil-pbc-vector-space-basis-through-vector], and write $f=\\sum_j a_j\\otimes c_j$, $a_j\\in C_{m-1}$, with finite support. Suppose all tuple evaluations of $f$ vanish. Fix a tuple $s$ in the first $m-1$ sets. The element $\\sum_j a_j(s)c_j\\in A_m$ evaluates to zero at every $t_m\\in T_{U_m}$, so it is zero. Independence gives $a_j(s)=0$. Varying $s$ and using the induction hypothesis gives $a_j=0$, hence $f=0$. For any $E/K$, apply the coefficient-basis argument of step 3 to this injective evaluation on $C_m$: writing a tensor as $\\sum_j f_j\\otimes e_j$ in a $K$-basis of $E$ shows that its vanishing at all induced tuples forces every $f_j$ to vanish, hence to be zero. Thus $C_m\\otimes_KE\\to E^{\\prod_iT_{U_i}}$ is injective. These tensor expressions use [def-weil-vector-space-scalar-extension].",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tensor products Tag 00CV and associativity Tag 00D0; finite tensor induction and coefficient expansion written by Q160, making explicit the product-density extension in the item source."
+   }
+  },
+  {
+   "text": "The affine products $(U_1)_K\\times_K\\cdots\\times_K(U_m)_K$, and their $E$-base changes, form open covers of $(Y_K)^m$ and $((Y_K)^m)_E$, with coordinate rings $C_m$ and $C_m\\otimes_KE$ by [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-open-fibre-product]. It remains to justify the density test on an arbitrary affine open, rather than only on these cover members. For any ring $A$ with an injective evaluation $A\\to F^S$ at $F$-rational points, suppose $b/g^r\\in A_g$ vanishes at every $s\\in S$ with $g(s)\\ne0$. Then $b(s)=0$ at those points, and $g(s)b(s)=0$ at all other points as well. Thus $gb$ evaluates to zero everywhere, so $gb=0$ and $b/g^r=0$ in $A_g$. This proves injectivity on every principal open of each cover member. The principal opens form a basis and their section rings are the localizations, by [lem-weil-pbc-spec-localization-away-basic-open] and [lem-weil-pbc-affine-open-section-vanishing-prime]. Any open affine of the product is covered by such principal opens contained in it; a section vanishing at its $T^m$ points restricts to zero on each, hence is zero by the sheaf axiom. This proves every requested schematic-density assertion, including $m=1$ over $K$ and arbitrary $E/K$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4, 01JQ, 01JR and the structure sheaf on principal opens; localization-and-sheaf argument written by Q160."
+   }
+  },
+  {
+   "text": "If $T=\\varnothing$, its image closure is empty and $Y$ is the empty reduced induced closed subscheme by [lem-weil-pbc-reduced-induced-closed-subscheme]. Every field base change is empty and every positive power is empty; the section ring on the empty open is the zero ring, so reducedness and the vanishing tests hold. More generally any empty $T_U$ or empty affine factor in the preceding arguments forces its coordinate ring to be zero by step 1 or step 2; hence the injections, coefficient calculations and induction also include these cases. No quasi-compactness or separatedness of $Z$ has been used.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme), empty closed subset; empty-case verification by Q160."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-sfb-galois-stable-subspace-descent",
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "def-weil-vector-space-scalar-extension",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01J3, 01J2, 01I4, 01JQ, 01JR; Milne Algebraic Groups A.64–A.65 for Galois descent. Q160 writes the evaluation-kernel, coefficient, product and localization arguments; motivated by BLR 3.3 Lemma 4, printed p.67 (online scan read; local PDF missing)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "schematicClosure|schematicImage|isGeometricallyReduced",
+   "results": "{\"t\": \"2026-10-24T07:42:09Z\", \"tool\": \"grep\", \"query\": \"schematicClosure|schematicImage|isGeometricallyReduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic closure of separable rational points is geometrically reduced after field extension",
+   "results": "{\"t\": \"2026-10-24T07:42:10Z\", \"tool\": \"leansearch\", \"query\": \"Schematic closure of separable rational points is geometrically reduced after field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.mk\", \"IsSepClosure.recOn\", \"separableClosure\", \"separableClosure.isSepClosure\", \"IsSepClosure.separable\", \"SeparableClosure\"], \"digest\": \"4be8af09c6083516\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsGeometricallyReduced",
+   "results": "{\"t\": \"2026-10-24T07:42:10Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsGeometricallyReduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.of_injective\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_field_iff\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.mk\"], \"digest\": \"ca1288991d61b5ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Galois stable set of points over a separable closure has geometrically reduced Zariski closure in a scheme over a field",
+   "results": "{\"t\": \"2026-10-24T07:42:13Z\", \"tool\": \"leanfinder\", \"query\": \"A Galois stable set of points over a separable closure has geometrically reduced Zariski closure in a scheme over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"AlgebraicGeometry.IsReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"Algebra.IsGeometricallyReduced.of_injective\"], \"digest\": \"07fbdb95fe44a478\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski closure of a Galois invariant family of separable rational points remains schematically dense after base extension and finite products",
+   "results": "{\"t\": \"2026-10-24T07:46:04Z\", \"tool\": \"leanfinder\", \"query\": \"Zariski closure of a Galois invariant family of separable rational points remains schematically dense after base extension and finite products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\"], \"digest\": \"b1a43e7501ba8d72\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; definitions, general smooth/cotangent criteria, field or dominance facts do not state this scheme-level assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois invariant separable rational points have geometrically reduced Zariski closure and are universally schematically dense",
+   "results": "{\"t\": \"2026-10-24T08:14:12Z\", \"tool\": \"leanfinder\", \"query\": \"Galois invariant separable rational points have geometrically reduced Zariski closure and are universally schematically dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.IsDominant.denseRange\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.isDominant_iff\", \"AlgebraicGeometry.dominant_eq_topologically\"], \"digest\": \"5569be3c7fc200c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: density of a dominant map and definitions of separable closure or geometric reducedness do not give the Galois-stable evaluation-kernel argument or finite-product universal density."
+  },
+  {
+   "tool": "grep",
+   "query": "schematicallyDense|schematically_dense|dense.*separable",
+   "results": "{\"t\": \"2026-10-24T08:17:36Z\", \"tool\": \"grep\", \"query\": \"schematicallyDense|schematically_dense|dense.*separable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: density of a dominant map and definitions of separable closure or geometric reducedness do not give the Galois-stable evaluation-kernel argument or finite-product universal density."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced closure of Galois invariant separable points is universally schematically dense",
+   "results": "{\"t\": \"2026-10-24T08:17:36Z\", \"tool\": \"leansearch\", \"query\": \"The reduced closure of Galois invariant separable points is universally schematically dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosure.recOn\", \"separableClosure\", \"SeparableClosure\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"IsSepClosure.isGalois\", \"IsSepClosure.sep_closed\", \"isSepClosure_iff\", \"AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant\"], \"digest\": \"31eac7493e78a2c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: density of a dominant map and definitions of separable closure or geometric reducedness do not give the Galois-stable evaluation-kernel argument or finite-product universal density."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsDominant",
+   "results": "{\"t\": \"2026-10-24T08:17:36Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsDominant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated\", \"AlgebraicGeometry.IsSchemeTheoreticallyDominant.of_isDominant\", \"AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isDominant\"], \"digest\": \"36b5e46fd2648d35\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: density of a dominant map and definitions of separable closure or geometric reducedness do not give the Galois-stable evaluation-kernel argument or finite-product universal density."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-canonical-group-dilatation-defect-drop",
+  "date": "2026-10-24",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 7.1 Lemma 4 proof: geometric reducedness and closed subgroup property of the closure; separate general closure-and-product density input.",
+   "via": [
+    "lem-sfb-canonical-group-dilatation-defect-drop",
+    "lem-sfb-lft-closed-subgroup-group-smoothening",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-separable-point-closure-universal-density",
+  "worker": "stage1",
+  "summary": "Q160 retained the statement and its statement dependencies verbatim, found no exact finished project declaration or Mathlib theorem, and supplied seven steps. Existing invariant-subspace descent identifies the evaluation kernel over the separable closure; finite coefficient arguments prove universal evaluation injectivity, reducedness and finite-product density, with the principal-open test proving the assertion on arbitrary affine opens. No new nodes.",
+  "blueprint": "The item is a created prerequisite of lem-sfb-canonical-group-dilatation-defect-drop: its inherited BLR 7.1 Lemma 4 place requires geometric reducedness and product density of the separable-point closure. Steps 1–4 supply the former and steps 5–6 the latter. The current blueprint sk-thm-sf-ctf-stability direct-images proof (3) and unit were read. blueprint_refs.py ancestor returns node=None for the inherited chain, which is retained; no blueprint node states this item.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-39dd3a9cd",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-39dd3a9cd (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. Shape: one commit touching the item and its report. Live is unsplit with no repair note, and the statement, stmt_deps, blueprint and source are identical to live. No new nodes. The statement is true and necessary as tested: empty T works, and without Galois stability the ℝ/ℂ point counterexample fails. Step 1: reduced-induced (1) with affine-section (a) and the radical lemma give injectivity B→K^{T_U}; T_U is dense in U. Step 2: I checked (σf)(t)=σ(f(σ⁻¹t)). separable-closure-exists-galois (2) makes K/k normal and separable. lem-sfb-galois-stable-subspace-descent (same unit, any M) gives W=W₀⊗K, and W₀=0. Source: Milne iAG A.64–A.65, printed pp.580–581, read. Step 3: the basis argument over E/K is correct. Step 4: B⊗_kE is reduced and B⊗_kL embeds into it; affine charts cover Y_L. Step 5: the product induction is correct. Step 6: the localization gb=0 argument and the principal-open basis with the sheaf axiom handle arbitrary affines. Step 7: the empty case is elementary. Route: off-unit nodes are mathlib leaves or slopmaster2-closed (reduced-induced), so no tool_uses are needed. No SGA. No duplicate: lem-pc-rational-points-dense needs smoothness and all K-points. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparablePointClosureUniversalDensity",
+  "declaration": "AlgebraicGeometry.separable_point_closure_universal_density",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparablePointClosureUniversalDensity.lean",
+  "statement": "theorem separable_point_closure_universal_density {k K : Type u} [Field k] [Field K] [Algebra k K] [IsSepClosure k K] (Z : Over (Spec (.of k))) [LocallyOfFiniteType Z.hom] (T : Set (Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ Z)) (hstable : ∀ (σ : K ≃ₐ[k] K) (t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ Z), t ∈ T → ∃ t' ∈ T, t'.left = Spec.map (CommRingCat.ofHom σ.toRingHom) ≫ t.left) (Y : Scheme.{u}) (i : Y ⟶ Z.left) [IsClosedImmersion i] [IsReduced Y] (hclosure : Set.range i = closure (Set.range (fun t : T ↦ t.val.left (IsLocalRing.closedPoint K)))) : (∀ (L : Type u) [Field L] [Algebra k L] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra k Ω] [Algebra K Ω] [Algebra L Ω] [IsScalarTower k K Ω] [IsScalarTower k L Ω], IsReduced (pullback (i ≫ Z.hom) (Spec.map (CommRingCat.ofHom (algebraMap k L))))) ∧ (∀ (E : Type u) [Field E] [Algebra K E] [Algebra k E] [IsScalarTower k K E] (m : ℕ), 1 ≤ m → ∀ (U : (∏ᶜ (fun _ : Fin m ↦ Over.mk (pullback.snd (i ≫ Z.hom) (Spec.map (CommRingCat.ofHom (algebraMap k E)))))).left.affineOpens) (s : (∏ᶜ (fun _ : Fin m ↦ Over.mk (pullback.snd (i ≫ Z.hom) (Spec.map (CommRingCat.ofHom (algebraMap k E)))))).left.presheaf.obj (Opposite.op U.1)), (∀ (x : Over.mk (𝟙 (Spec (.of E))) ⟶ ∏ᶜ (fun _ : Fin m ↦ Over.mk (pullback.snd (i ≫ Z.hom) (Spec.map (CommRingCat.ofHom (algebraMap k E)))))), (∀ j : Fin m, ∃ t ∈ T, x.left ≫ (Pi.π (fun _ : Fin m ↦ Over.mk (pullback.snd (i ≫ Z.hom) (Spec.map (CommRingCat.ofHom (algebraMap k E))))) j).left ≫ pullback.fst (i ≫ Z.hom) (Spec.map (CommRingCat.ofHom (algebraMap k E))) ≫ i = Spec.map (CommRingCat.ofHom (algebraMap K E)) ≫ t.left) → ∀ hx : x.left (IsLocalRing.closedPoint E) ∈ U.1, Scheme.evaluation _ U.1 (x.left (IsLocalRing.closedPoint E)) hx s = 0) → s = 0)",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f806ca1a",
+  "group": "O4",
+  "result": "pass",
+  "note": "Only the lean field differs from the live node; lean.statement is verbatim in the file. Field, IsSepClosure, LocallyOfFiniteType Z.hom, T as k-morphisms in Over(Spec k), and stability under all K ≃ₐ[k] K match the node. Y is given as a reduced closed immersion with image = closure, which is exactly the reduced induced subscheme by uniqueness (3) of the recorded dependency, so no extra hypothesis. Y_L reduced for all L inside an algebraically closed Ω with compatible towers. One density clause covers all E/K and m≥1 on all affine opens of (Y_E)^m; the points are the E-points induced by tuples in T^m (coordinate composites through the mono i), and residue-field vanishing equals evaluation in E; E=K, m=1 is the plain case. Empty T and empty U are covered, m=0 excluded as in the node, char p and imperfect k allowed; single universe u is forced by the fibre products. Only Mathlib notions, no hollow definitions, only sorry, docstrings carry source, blueprint id and 7 proof steps, no pro-étale substitute, both report sections present. Not recompiled (no file changed); the worker reports a clean compile. No findings."
+ }
+}

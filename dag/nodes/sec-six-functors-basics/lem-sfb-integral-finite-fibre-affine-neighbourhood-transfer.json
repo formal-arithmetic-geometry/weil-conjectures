@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+ "kind": "statement",
+ "title": "Affine neighbourhood transfer for a finite set under an integral finite-fibre cover",
+ "statement": "Let $Z$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], let $Y$ be a scheme, and let $q:Y\\to Z$ be an integral surjective morphism with finite underlying fibres [def-weil-finite-integral-morphism]. For every finite subset $E\\subseteq|Z|$, the following are equivalent: there is an affine open subscheme of $Z$ containing $E$; there is an affine open subscheme of $Y$ containing the entire inverse image $q^{-1}(E)$. Affine means isomorphic to the spectrum of a commutative ring [def-weil-affine-spectrum]. The morphism $q$ need not be flat or finite, and $Y$ need not be locally Noetherian. Empty $E$ is allowed.",
+ "source": {
+  "document": "literature/anantharaman-groupes-dimension-un.pdf",
+  "place": "Proposition 4.1.3 (OCR 4.1.5), printed p.55; equivalence for a finite set under an integral surjective morphism with set-theoretically finite fibres. The paper cites Raynaud, Un critere d effectivite de descente, Corollary 5.8. Local archive WANTED; primary scan read at https://www.numdam.org/article/MSMF_1973__33__5_0.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "If $E=\\varnothing$, both conditions hold: the empty open is $\\operatorname{Spec}(0)$, since the zero ring has no proper prime ideals. For any $E$, if an affine open $U\\subseteq Z$ contains $E$, integrality makes $q$ affine, so $q^{-1}(U)$ is an affine open of $Y$ containing $q^{-1}(E)$. This proves the forward implication, including the empty case.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, printed p.15; necessity and the empty-set edge case (written out)"
+   }
+  },
+  {
+   "text": "For the converse suppose $E$ is nonempty and $V=\\operatorname{Spec}A\\subseteq Y$ is an affine open containing $E\\prime=q^{-1}(E)$. Surjectivity makes $E\\prime$ nonempty; finite fibres make it finite. Enumerate its primes in $A$ by $\\mathfrak p_1,\\ldots,\\mathfrak p_r$. Set $S=A\\setminus\\bigcup_i\\mathfrak p_i$, a multiplicative subset, and $F\\prime=\\operatorname{Spec}S^{-1}A$. The scheme $Z$ is quasi-separated because it is locally Noetherian. The integral map $q$ is affine and therefore quasi-separated; thus $Y$ is quasi-separated as well.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, printed p.15; finite inverse image and construction of the semilocalization; avoids the optional separatedness reduction"
+   }
+  },
+  {
+   "text": "The image of $F\\prime\\to V$ is the primes disjoint from $S$. A prime $\\mathfrak r$ is disjoint from $S$ exactly when $\\mathfrak r\\subseteq\\bigcup_i\\mathfrak p_i$, and finite prime avoidance says this is equivalent to $\\mathfrak r\\subseteq\\mathfrak p_i$ for some $i$. Hence its image is $H\\prime$, the union of the generalizations of the points of $E\\prime$. All those generalizations lie in the open $V$. Here a generalization $a$ of $b$ means $b\\in\\overline{\\{a\\}}$.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, printed p.15; the image of the finite-point localization; Stacks Tags 00E3 and 00DS"
+   }
+  },
+  {
+   "text": "The map $F\\prime\\to V$ is flat and a monomorphism by the localization leaf. Composing with the open inclusion $V\\hookrightarrow Y$ gives a flat monomorphism $j\\prime:F\\prime\\to Y$: its stalk maps are unchanged, and equality of two composites into $Y$ is equality into $V$, hence equality into $F\\prime$. Since $F\\prime$ is affine it is quasi-compact; since $Y$ is quasi-separated, $j\\prime$ is quasi-compact. Thus $H\\prime$ is represented by a quasi-compact flat monomorphism, with affine source.",
+   "uses": [
+    "lem-sfb-localization-spectrum-flat-monomorphism",
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, printed p.15; admissibility upstairs, with the flatness, monomorphism and quasi-compactness checks"
+   }
+  },
+  {
+   "text": "Let $H$ be the union of the generalizations of points of $E$. Then $q^{-1}(H)=H\\prime$. One inclusion follows from continuity. Conversely, take $y$ with $q(y)$ generalizing $e\\in E$. The integral morphism $q$ is closed, so the closed subset $q(\\overline{\\{y\\}})$ contains the closure of $\\{q(y)\\}$ and therefore contains $e$. Consequently some $e\\prime\\in\\overline{\\{y\\}}$ maps to $e$; it belongs to $E\\prime$, and $y$ generalizes $e\\prime$. This is a closed-map argument and does not assume flatness or a going-down theorem.",
+   "uses": [
+    "pqf-lem-integral-univclosed",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, printed p.15; equality of the two subsets under inverse image"
+   }
+  },
+  {
+   "text": "Apply integral descent of a subset represented by a quasi-compact flat monomorphism to $q$, $H$, and $j\\prime$ of step 4. Its hypotheses hold: $Z$ is locally Noetherian, $q$ is integral and surjective, and step 5 identifies the image of $j\\prime$ with $q^{-1}(H)$. It gives a quasi-compact flat monomorphism $j:F\\to Z$ with image $H$ and a cartesian square $F\\prime\\simeq Y\\times_ZF$.",
+   "uses": [
+    "lem-sfb-integral-descent-flat-monomorphism-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, printed p.15; application of Theorem 3.3, including its cartesian identification"
+   }
+  },
+  {
+   "text": "The projection $p:F\\prime\\to F$ in that square is surjective, since it is a base change of $q$. It is universally closed: for every further base change to $T\\to F$, its pullback is the base change $Y\\times_ZT\\to T$ of $q$, which is closed because $q$ is integral and hence universally closed. The source $F\\prime$ is affine, so the existing surjective-universally-closed affine-target theorem (Stacks Tag 05YU) proves that $F$ is affine.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "pqf-lem-integral-univclosed",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-surjective-universally-closed-affine-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, printed p.15; affineness downstairs; the existing 05YU node subsumes the source's Chevalley application"
+   }
+  },
+  {
+   "text": "Apply the quasi-affine neighbourhood theorem to $j:F\\to Z$. The map is a quasi-compact flat monomorphism by step 6; $F$ is affine by step 7, hence is itself a quasi-compact open subscheme of an affine scheme; and $Z$ is quasi-separated by step 2. We obtain a quasi-compact quasi-affine open $U\\subseteq Z$ containing $H$, and hence containing $E$. Choose an isomorphism of $U$ with an open subscheme $W$ of an affine scheme $\\operatorname{Spec}B$, as supplied by the meaning of quasi-affine.",
+   "uses": [
+    "lem-sfb-flat-monomorphism-quasiaffine-neighbourhood",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, printed p.15; application of Proposition 3.4"
+   }
+  },
+  {
+   "text": "Write $\\operatorname{Spec}B\\setminus W=V(J)$ for an ideal $J$; this is the definition of a Zariski closed subset of a spectrum. The finitely many points of $E$ correspond to primes $\\mathfrak m_i\\in W$. Thus $J\\not\\subseteq\\mathfrak m_i$ for every $i$. Finite prime avoidance gives $b\\in J$ outside all the $\\mathfrak m_i$. The principal open $D(b)$ contains these points, is contained in $W$, and is affine. Transporting it through $W\\simeq U$ gives an affine open of $Z$ containing $E$, as required.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Corollary 3.8, printed p.15; last sentence: finite points in a quasi-affine scheme; explicit prime-avoidance argument (Stacks Tag 00DS)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-sfb-localization-spectrum-flat-monomorphism",
+  "def-weil-open-immersion",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-lem-integral-univclosed",
+  "def-weil-proper-morphism",
+  "lem-sfb-integral-descent-flat-monomorphism-subset",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-surjective-universally-closed-affine-target",
+  "lem-sfb-flat-monomorphism-quasiaffine-neighbourhood",
+  "lem-weil-pbc-affine-ideals-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Corollary 3.8, printed p.15, with Theorem 3.3 and Proposition 3.4. Primary scan read online; archive WANTED. Agent supplies explicit semilocalization, closed-map argument and final prime avoidance, and uses the existing Stacks 05YU node for affine descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an integral surjective morphism with finite fibres onto a locally Noetherian scheme a finite subset has an affine neighbourhood if and only if its inverse image does",
+   "results": "{\"t\": \"2026-10-24T12:37:54Z\", \"tool\": \"leanfinder\", \"query\": \"For an integral surjective morphism with finite fibres onto a locally Noetherian scheme a finite subset has an affine neighbourhood if and only if its inverse image does\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.locallyOfFiniteType_iff\"], \"digest\": \"8534f1f0695bbd96\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral morphisms are affine and universally closed, and flat descent transports morphism properties, but no hit gives the finite-set neighbourhood equivalence without flatness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of the AF property along integral surjective morphisms with finite fibres",
+   "results": "{\"t\": \"2026-10-24T12:37:54Z\", \"tool\": \"leansearch\", \"query\": \"Descent of the AF property along integral surjective morphisms with finite fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"25d5f70666b87f19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral morphisms are affine and universally closed, and flat descent transports morphism properties, but no hit gives the finite-set neighbourhood equivalence without flatness"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-24T12:37:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral morphisms are affine and universally closed, and flat descent transports morphism properties, but no hit gives the finite-set neighbourhood equivalence without flatness"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*affine.*neigh|affine.*neigh.*integral|finite.*subset.*affine",
+   "results": "{\"t\": \"2026-10-24T12:37:55Z\", \"tool\": \"grep\", \"query\": \"integral.*affine.*neigh|affine.*neigh.*integral|finite.*subset.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral morphisms are affine and universally closed, and flat descent transports morphism properties, but no hit gives the finite-set neighbourhood equivalence without flatness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley integral surjective cover finite inverse image of a finite set contained in affine open descends affine neighbourhood",
+   "results": "{\"t\": \"2026-10-24T12:38:03Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley integral surjective cover finite inverse image of a finite set contained in affine open descends affine neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineCover\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.instIsAffineXSchemeAffineCover\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\"], \"digest\": \"f39f12942a00e610\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral morphisms are affine and universally closed, and flat descent transports morphism properties, but no hit gives the finite-set neighbourhood equivalence without flatness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral surjective morphism with finite fibres descends the existence of affine open neighbourhoods of a finite set of points",
+   "results": "{\"t\": \"2026-10-24T13:22:18Z\", \"tool\": \"leanfinder\", \"query\": \"An integral surjective morphism with finite fibres descends the existence of affine open neighbourhoods of a finite set of points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\"], \"digest\": \"cab1480f0d474cf7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral affineness and generic flat descent do not prove finite-set affine-neighbourhood transfer for a possibly nonflat integral surjection"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*affine.*neigh|affine.*neigh.*integral|finite.*subset.*affine",
+   "results": "{\"t\": \"2026-10-24T13:26:55Z\", \"tool\": \"grep\", \"query\": \"integral.*affine.*neigh|affine.*neigh.*integral|finite.*subset.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral affineness and generic flat descent do not prove finite-set affine-neighbourhood transfer for a possibly nonflat integral surjection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine neighbourhood of a finite subset descends along an integral surjective morphism with finite topological fibres",
+   "results": "{\"t\": \"2026-10-24T13:26:56Z\", \"tool\": \"leansearch\", \"query\": \"Affine neighbourhood of a finite subset descends along an integral surjective morphism with finite topological fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\"], \"digest\": \"be17b74939e4c19f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral affineness and generic flat descent do not prove finite-set affine-neighbourhood transfer for a possibly nonflat integral surjection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"IsAffineOpen\"",
+   "results": "{\"t\": \"2026-10-24T13:26:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\", \\\"IsAffineOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral affineness and generic flat descent do not prove finite-set affine-neighbourhood transfer for a possibly nonflat integral surjection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite set of points and all its generalizations in a locally Noetherian scheme has a common affine open if its inverse image under an integral surjection does",
+   "results": "{\"t\": \"2026-10-24T13:29:54Z\", \"tool\": \"leanfinder\", \"query\": \"A finite set of points and all its generalizations in a locally Noetherian scheme has a common affine open if its inverse image under an integral surjection does\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.IsLocallyNoetherian\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_iSup_eq_top\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\"], \"digest\": \"a4a29e02a40b6d51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: integral affineness and generic flat descent do not prove finite-set affine-neighbourhood transfer for a possibly nonflat integral surjection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+  "date": "2026-10-24",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited strict-local trait group descent; the Anantharaman 4.2.2 / 4.1.3 finite-set affine-neighbourhood branch; Anantharaman Proposition 4.1.3, printed p.55, using Raynaud Corollary 3.8, printed p.15 (the imported source's 5.8 is an OCR error).",
+   "via": [
+    "lem-sfb-semitrait-almost-homogeneous-affine-neighbourhoods",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-finite-fibre-affine-neighbourhood-transfer",
+  "worker": "stage1",
+  "summary": "Preserved the statement, including nonflat/nonfinite covers and the empty set. Read the Anantharaman statement and Raynaud Corollary 3.8 with its two prerequisites. Added two statement-only Raynaud lemmas and one Mathlib localization leaf. Wrote finite-point localization, the closed-map equality of generalization loci, affine descent by the existing 05YU theorem, and finite prime avoidance explicitly. No exact project Lean attachment was found. All cited node statements were checked and quoted in citations.json.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), inherited strict-local trait group descent; the Anantharaman 4.2.2 / 4.1.3 finite-set affine-neighbourhood branch; supports the inherited Anantharaman affine-neighbourhood branch; ancestor command returns None, so the existing null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "why": "Generic scheme-theoretic tool used exactly as stated in the finite-set localization/descent argument; no node in this unit supplies this assertion. It does not replace the direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-universally-closed-affine-target"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-d98da7307",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-d98da7307 (reviewer sub-agent of L); spot-checked: Every step of the 9-step split holds. I checked each one against the statements of the nodes it cites. Step 1: empty E gives Spec 0; the forward direction uses affine-morphism permanence. Step 2: E' is finite, and Z (locally Noetherian) and Y (q affine) are quasi-separated. Step 3: the localization embedding plus prime avoidance (needs r>=1, true since E' is nonempty) shows the semilocalization's image is the set of generizations of E'. Step 4: the new leaf gives a flat monomorphism into V; composing with the open immersion and using qcqs permanence makes j' quasi-compact. Step 5: I re-derived the closed-map argument for q^{-1}(H)=H'. Steps 6-7: the descent node's cartesian square makes p a base change of q, hence surjective and universally closed; Stacks 05YU (limits.tex:2876, read and matches the node) then makes F affine. 05YU is an off-unit node used as a black box; it is declared in tool_uses and I accept it. Steps 8-9: the quasi-affine open U, then prime avoidance on J, gives an affine D(b) containing E. The Mathlib leaf is correct: of_isLocalization (Preimmersion.lean:93), the Mono instance (:65), Flat.SpecMap_iff (:67), flat_algebraMap_iff (:31) and IsLocalization.flat (:37) were all read. In the descent node, I checked that H is closed under generization (by going-up). Its cartesian clause follows from existence, because two qc flat monomorphisms with the same image are isomorphic (fibres from lem-per-flat-monomorphism-local-structure). The neighbourhood node passes the empty, identity and doubled-origin-plane tests. No duplicates: dag/nodes searched for flat monomorphism, quasi-affine open and finite-set affine neighbourhood. No new node restates a clause of the item. Not verified: the Raynaud and Anantharaman scans are not in the archive (WANTED, proof_origin agent) and network access is blocked, so I could not reread them. The two unsplit nodes are taken from the worker's reading of Raynaud Thm 3.3(ii) and Prop. 3.4. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralFiniteFibreAffineNeighbourhoodTransfer",
+  "declaration": "AlgebraicGeometry.exists_affineOpen_iff_preimage_of_integral_surjective_finite_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralFiniteFibreAffineNeighbourhoodTransfer.lean",
+  "statement": "theorem exists_affineOpen_iff_preimage_of_integral_surjective_finite_fibres {Y Z : Scheme.{u}} [IsLocallyNoetherian Z] (q : Y ⟶ Z) [IsIntegralHom q] [Surjective q] (hfinite : ∀ z : Z, (q ⁻¹' {z}).Finite) (E : Set Z) (hE : E.Finite) : (∃ U : Z.Opens, IsAffineOpen U ∧ E ⊆ (U : Set Z)) ↔ ∃ V : Y.Opens, IsAffineOpen V ∧ q ⁻¹' E ⊆ (V : Set Y)",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-401b36b2b",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Clause-by-clause match of node vs Lean: IsLocallyNoetherian only on Z, IsIntegralHom (not IsFinite), AlgebraicGeometry.Surjective, set-theoretic finite fibres ∀ z, (q⁻¹'{z}).Finite, E : Set Z with E.Finite (empty allowed), ↔ between ∃ affine open U ⊇ E and ∃ affine open V ⊇ q⁻¹'E (entire preimage). Single universe u forced by q; no extra flat/finite/separated/Noetherian-on-Y assumptions. Edge cases ∅, Z=∅, identity, nonflat, non-finite integral fine. Only the lean record differs from the live node; lean.statement is verbatim in the file; dep records are the recorded Mathlib decls; proof import SurjectiveUniversallyClosedAffineTarget exists (T1 record). Docstrings carry sources, blueprint id and all 9 proof steps; sorry only; no defs; report has Worker report + Second reading by Q25 (a worker self-check). No duplicate: exists_invariant_affine_neighbourhood is a different finite-flat statement. Source scans WANTED, not reread. No compile (no change)."
+ }
+}

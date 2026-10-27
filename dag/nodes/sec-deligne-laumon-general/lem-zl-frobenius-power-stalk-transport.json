@@ -1,0 +1,135 @@
+{
+ "id": "lem-zl-frobenius-power-stalk-transport",
+ "kind": "statement",
+ "title": "Local Frobenius transport for an equivariant power translate at supplied geometric lifts",
+ "statement": "Let $k_1/k_0$, $X,C,c,\\theta,r$ be a cartesian finite-field constant extension with $\\#k_1=(\\#k_0)^r$ [def-pc-base-change, def-zl-source-constant-field-restriction]. Let $P,Q$ be $F_r$-algebras with invertible return and let $e:F_jP\\simeq Q$ satisfy $F_r(e)\\,;\\phi_Q=c_{j,r}(P)\\,;F_j(\\phi_P)\\,;e$, where $c$ is the coherent iterated-pullback commutor [lem-zl-frobenius-power-return-commutation]. Let $A,B$ be constructible source Weil sheaves on $C$ whose underlying Weil objects equal the transports of $P,Q$ through $\\theta$. Supply any geometric point $s$ of $\\bar C$, a natural $m$, and fixed-point squares $s\\,;\\operatorname{Fr}_C^m=\\sigma_1^m\\,;s$ and $T_j(s)\\,;\\operatorname{Fr}_C^m=\\sigma_1^m\\,;T_j(s)$, with $T_j$ the actual composite defined in [lem-zl-frobenius-power-deck-points]. Then the source Frobenius modules $B_s^{(m)}$ and $A_{T_j(s)}^{(m)}$ [def-weil-local-frobenius-trace] are equivalent. There are no finite points, ambient sheaf, monomorphisms, or point-existence conclusions in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraphs 1--3: original Weil returns and local Frobenius powers; geometric orbit step in sk-i-dl-general-real."
+ },
+ "stmt_deps": [
+  "def-pc-base-change",
+  "def-zl-source-constant-field-restriction",
+  "def-weil-local-frobenius-trace",
+  "lem-zl-frobenius-power-return-commutation",
+  "lem-zl-frobenius-power-deck-points"
+ ],
+ "proof": [
+  {
+   "text": "Construct beta=theta^{-1} Fr_X^j theta and the carrier isomorphism alpha: beta^* A -> B explicitly using inverse-automorphism pushforward, pushforward composition and theta_* e. Its definition contains no unproved data. Use the single-return comparison to obtain its compatibility with the Weil structures. Conjugating theta ; Fr_C = Fr_X^r ; theta and commuting powers proves beta commutes with Fr_C.",
+   "uses": [
+    "lem-zl-frobenius-power-translate-structure",
+    "lem-zl-frobenius-power-return-commutation",
+    "def-zl-source-constant-field-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For positive m, prove that the maps on global sections induced by alpha intertwine transports along the m-fold returns, by induction on m. The base case is globalSectionsTransport_comm_of_upperStar after frobeniusPowStr_one. In the successor step factor a transport of length m+1 into transports of lengths m and 1 through the point t ; Fr_C^{-m}. Commutation of beta with powers of Fr_C gives the two required squares. Apply the induction hypothesis and the single-return identity, then recompose with globalSectionsTransport_frobeniusPowStr_comp.",
+   "uses": [
+    "lem-zl-frobenius-power-translate-structure",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At s, the alpha-induced map T from the stalk of A at s ; beta to the stalk of B at s is invertible: globalSectionsTransport_eq_of_iso expresses it using pullback-composition isomorphisms, pullback of alpha and the identity scalar isomorphism. The actual composite s ; beta equals frobeniusPowerTranslatePoint. For m>0 apply the transport identity to the two supplied squares with the same scalar sigma_1^m; frobeniusEnd_stalkAt identifies these transports with the local Frobenii. For m=0 both Frobenii are identities. Apply FrobeniusModule.Equiv.ofComp to the linear equivalence of T and invert it to get the required B-to-A equivalence.",
+   "uses": [
+    "lem-zl-frobenius-power-deck-points",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-frobenius-power-translate-structure",
+  "lem-zl-frobenius-power-return-commutation",
+  "def-zl-source-constant-field-restriction",
+  "def-weil-local-frobenius-trace",
+  "lem-zl-frobenius-power-deck-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Steps 1--3 of lem-zl-frobenius-power-stalk-transport: explicit carrier comparison, induction on transports, and evaluation at supplied fixed-point squares."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stalks of a Frobenius-equivariant sheaf at a geometric point and its Frobenius translate are isomorphic as Frobenius modules",
+   "results": "Eight results on presheaf or ringed-space stalk isomorphisms, including PresheafedSpace.stalkMap.stalkIso. None handles pro-etale Weil power-return structures.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The iterated structure isomorphisms of an endofunctor algebra commute using the functor iteration addition isomorphism",
+   "results": "Eight unrelated small-object-iteration results. Repository search instead found the proved source IsoAlgebra.strIterate_add_hom.",
+   "date": "2026-10-26",
+   "verdict": "source addition identity used"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusPow.*(comm|add)|IsoAlgebra.*comm",
+   "results": "Remote Mathlib grep returned zero hits. Additional repository rg searches found the proved source IsoAlgebra.strIterate_add_hom and WeilSheaf.nonempty_equiv_stalkAt, but no combined power-translate stalk theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match; partial source identities used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.GeometricPowerOrbitStalk",
+  "date": "2026-10-26",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraphs 1--3: original Weil returns and local Frobenius powers; geometric orbit step in sk-i-dl-general-real.",
+   "via": [
+    "lem-zl-geometric-power-orbit-stalk",
+    "lem-zl-semisimple-frobenius-orbit-descent",
+    "lem-zl-geometric-constituent-orbit",
+    "lem-zl-pair-eigenvalue-geometric-constituent",
+    "lem-zl-pair-eigenvalue-curve-test",
+    "lem-zl-smooth-affine-constituent-purity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.FrobeniusPowerStalkTransport",
+  "file": "lean/Sheaf/DeligneLaumon/FrobeniusPowerStalkTransport.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.nonempty_stalk_equiv_of_equivariant_power_translate",
+  "statement": "theorem nonempty_stalk_equiv_of_equivariant_power_translate\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k₀))]\n    {k₁ : Type u} [Field k₁] [Finite k₁] [Algebra k₀ k₁]\n    [Algebra.IsAlgebraic k₀ k₁] [Fact (ringChar k₁ ≠ l)]\n    {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₁))] {c : C ⟶ X}\n    (hc : IsPullback c (C ↘ Spec (CommRingCat.of k₁)) (X ↘ Spec (CommRingCat.of k₀))\n      (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₁))))\n    (r : ℕ) (hr : Nat.card k₁ = Nat.card k₀ ^ r)\n    (P Q : IsoAlgebra (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X r))\n    (j : ℕ)\n    (e : (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X j).obj P.carrier ≅ Q.carrier)\n    (he : (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X r).map e.hom ≫ Q.str.hom =\n      (ProEtaleWeilSheaf.frobeniusPowerCommIso j r).hom.app P.carrier ≫\n        (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X j).map P.str.hom ≫ e.hom)\n    (A B : WeilSheaf k₁ l C)\n    (hA : A.obj = (IsoAlgebra.mapOfNatIso (ProEtaleWeilSheaf.transportCommIso\n      (Scheme.Hom.geometricFiberBaseChangeIso hc) r\n      (Scheme.Hom.geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius\n        hc r hr))).obj P)\n    (hB : B.obj = (IsoAlgebra.mapOfNatIso (ProEtaleWeilSheaf.transportCommIso\n      (Scheme.Hom.geometricFiberBaseChangeIso hc) r\n      (Scheme.Hom.geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius\n        hc r hr))).obj Q)\n    (s : Spec (.of (AlgebraicClosure k₁)) ⟶ (C ↘ Spec (.of k₁)).geometricFiber)\n    (m : ℕ)\n    (hs : s ≫ ((C ↘ Spec (.of k₁)).geometricGaloisFrobenius ^ m).hom =\n      (specGeometricFrobenius k₁ ^ m).hom ≫ s)\n    (hs' : Scheme.Hom.frobeniusPowerTranslatePoint hc j s ≫\n        ((C ↘ Spec (.of k₁)).geometricGaloisFrobenius ^ m).hom =\n      (specGeometricFrobenius k₁ ^ m).hom ≫\n        Scheme.Hom.frobeniusPowerTranslatePoint hc j s) :\n    Nonempty ((B.stalkAt s m hs).Equiv\n      (A.stalkAt (Scheme.Hom.frobeniusPowerTranslatePoint hc j s) m hs'))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T065845-L-3269080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261026T235906-L-1466375",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

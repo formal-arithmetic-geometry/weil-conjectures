@@ -17,101 +17,87 @@
  ],
  "proof": [
   {
-   "text": "First let $g:U'\\to U$ be a surjective etale morphism. By [lem-trf-etale-relation-restriction-quotient], the restricted relation is etale and the quotient map is an isomorphism when $g$ is surjective. Thus a surjective etale refinement of the atlas may be used without changing the quotient.",
+   "text": "The kernel-pair assertion of [lem-trf-etale-relation-kernel-pair] makes the presheaf quotient unit injective: lift two classes to representatives, lift their equal images to R, and use the coequalizer equation. The injection of restricted quotient presheaves from [lem-trf-etale-pullback-relation-presheaf] therefore embeds each restricted quotient into F. Apply Mathlib Subfunctor.sheafify to its range inside F. Subfunctor.sheafifyLift and to_sheafify_lift_unique prove the sheafification universal property. Thus the intermediate quotient sheaves exist in the original value universe, with no global sheafification instance.",
    "uses": [
-    "lem-trf-etale-relation-restriction-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WW, first reduction, using Tags 02VH and 02WT."
-   }
-  },
-  {
-   "text": "Choose an affine open covering $U=\\bigcup_iU_i$ and let $U'=\\coprod_iU_i\\to U$ be the resulting surjective etale map. The scheme coproduct lemma [lem-weil-pbc-scheme-coproduct-family] makes $U'$ a scheme with the $U_i$ as pairwise disjoint open-and-closed summands. The restriction lemma, applied first to $U'\\to U$ and then to each (generally non-surjective) etale summand inclusion $U_i\\to U'$, shows that every restricted relation $R_i$ is etale; it does not identify an individual quotient $F_i=U_i/R_i$ with $F$.",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-trf-etale-relation-restriction-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WW, first and second paragraphs: replace by an affine coproduct and restrict the relation."
-   }
-  },
-  {
-   "text": "For each affine $U_i$, apply [lem-trf-etale-affine-quotient-representable]. It gives representability of every base change of $h_{U_i}\\to F_i$ and representability of the diagonal of $F_i$. The kernel-pair lemma [lem-trf-etale-relation-kernel-pair] identifies $h_{R_i}$ with $h_{U_i}\\times_{F_i}h_{U_i}$. For an fppf presentation $T_j\\to T$ of a section of $F_i$, this identification gives $T_j\\times_{F_i}h_{U_i}\\cong T_j\\times_{a_j,U_i,t}R_i$, a base change of the etale map $t$; reflexivity makes $t$ surjective. Etaleness descends along the resulting fpqc cover by [lem-galois-fpqc-descend-etale], while surjectivity is checked after the same jointly surjective cover. Therefore $F_i$ is an algebraic space and $U_i\\to F_i$ is an etale surjective atlas by [def-trf-algebraic-space].",
-   "uses": [
-    "lem-trf-etale-affine-quotient-representable",
     "lem-trf-etale-relation-kernel-pair",
-    "lem-galois-fpqc-descend-etale",
-    "def-trf-algebraic-space",
-    "def-weil-etale-morphism"
+    "lem-trf-etale-pullback-relation-presheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 0265 (presentation-quasi-compact), first, second and third proof steps, followed by Tag 02WV."
+    "place": "Tags 02WW (theorem-presentation), 0265 (lemma-presentation-quasi-compact), and 02WV (lemma-when-it-works-it-works)."
    }
   },
   {
-   "text": "The maps $U_i\\to U$ are flat and locally of finite presentation because they are etale; the projections $s,t:R\\to U$ are surjective by reflexivity of the equivalence relation and are flat and locally of finite presentation for the same reason. Therefore [lem-trf-etale-relation-finding-opens] applies to each restriction and gives a representable open immersion $F_i\\to F$. The images cover $F$: a section of the quotient is fppf-locally represented by a map to $U$, and after refining that cover the inverse image of the affine open covering places the representative in one $U_i$.",
+   "text": "Apply [lem-trf-etale-quotient-affine-open-cover] to V.affineCover and the quotient sheaves constructed in step 1. Its restricted chart relations are monomorphic etale equivalence relations. For each affine chart, [lem-trf-etale-affine-quotient-representable] gives the diagonal and quotient-map representability; [lem-trf-representable-etale-quotient-presentation] makes the chart map surjective etale. Hence each chart quotient is an algebraic space by [def-trf-algebraic-space].",
    "uses": [
-    "lem-trf-etale-relation-finding-opens",
-    "def-weil-etale-morphism"
+    "lem-trf-etale-quotient-affine-open-cover",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-representable-etale-quotient-presentation",
+    "def-trf-algebraic-space"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WW, affine-summand paragraph, using Tag 02WU (finding-opens)."
+    "place": "Tags 02WW (theorem-presentation), 0265 (lemma-presentation-quasi-compact), and 02WV (lemma-when-it-works-it-works)."
    }
   },
   {
-   "text": "The coproduct $\\coprod_iF_i$ is an algebraic space by [lem-trf-algebraic-space-coproduct], because the coproduct of the scheme atlases $\\coprod_iU_i$ is a scheme. The sheaf $F$ and its open subfunctors $F_i$ satisfy all hypotheses of [lem-trf-algebraic-space-open-gluing]: each $F_i$ is algebraic, each map is representable and open, the family is jointly surjective, and the coproduct is algebraic. Hence $F$ is an algebraic space.",
+   "text": "Use the existence clause of [lem-trf-fppf-sheaf-coproduct-partition] to form the coproduct H of chart quotient sheaves. The coproduct of their scheme atlases is the explicit coproduct from step 2, so [lem-trf-algebraic-space-coproduct] makes H algebraic. Each chart inclusion in F is representable open and hence mono: base change along a section and use monicity of the representing open scheme map. The local lifting clause of step 2 makes H to F locally surjective, hence epi by sheaf separation. Apply [lem-trf-algebraic-space-open-gluing].",
    "uses": [
+    "lem-trf-fppf-sheaf-coproduct-partition",
     "lem-trf-algebraic-space-coproduct",
     "lem-trf-algebraic-space-open-gluing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WW, final paragraph, using Tags 02WQ and 02WR."
+    "place": "Tags 02WW (theorem-presentation), 0265 (lemma-presentation-quasi-compact), and 02WV (lemma-when-it-works-it-works)."
    }
   },
   {
-   "text": "Because $F$ is now an algebraic space, its diagonal is representable, so for every scheme $T\\to F$ the fibre product $T\\times_Fh_V$ is a scheme. Choose an fppf cover $T_j\\to T$ and representatives $a_j:T_j\\to V$ of the given section. The kernel-pair lemma [lem-trf-etale-relation-kernel-pair] gives\n$T_j\\times_Fh_V\\cong T_j\\times_{a_j,V,t}R$, a base change of the etale map $t$; reflexivity makes $t$ surjective. Thus the pullback of $q$ to each $T_j$ is etale and surjective, and [lem-galois-fpqc-descend-etale] descends etaleness along the fpqc cover while surjectivity is local on the base. The same kernel-pair isomorphism gives $h_R\\cong h_V\\times_Fh_V$. Finally, the quotient-sheaf coequalizer definition gives the stated bijection from maps $F\\to G$ to maps $h_V\\to G$ equalizing $s,t$.",
+   "text": "Representability of the diagonal implies representability of the quotient map by [def-trf-algebraic-space] and [def-pc-fibre-product]: for scheme tests T and V, pull the diagonal back along their pair on T times_S V. Its representing scheme has projections to T and V; the two pullback universal properties identify its sections with pairs having equal F image. Apply [lem-trf-representable-etale-quotient-presentation] to obtain etaleness and surjectivity of every scheme test and an etale covering family lifting each section. Its generated sieve is covering in the over-topology and naturality extends the lifts to its arrows. The square is [lem-trf-etale-relation-kernel-pair].",
    "uses": [
-    "lem-trf-etale-relation-kernel-pair",
-    "lem-galois-fpqc-descend-etale",
     "def-trf-algebraic-space",
-    "def-pc-fppf-site",
-    "def-weil-pbc-sheafification"
+    "def-pc-fibre-product",
+    "lem-trf-representable-etale-quotient-presentation",
+    "lem-trf-etale-relation-kernel-pair"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/spaces.tex",
-    "place": "Tag 02WV and the quotient-sheaf universal property used in Tag 02WW."
+    "place": "Tags 02WW (theorem-presentation), 0265 (lemma-presentation-quasi-compact), and 02WV (lemma-when-it-works-it-works)."
+   }
+  },
+  {
+   "text": "An equalizing map descends along the presheaf coequalizer. Surjectivity of the hom-set map in [def-weil-pbc-sheafification] extends this to F; injectivity and coequalizer hom_ext give uniqueness.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tags 02WW (theorem-presentation), 0265 (lemma-presentation-quasi-compact), and 02WV (lemma-when-it-works-it-works)."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-fppf-site",
+  "def-pc-fibre-product",
   "def-trf-algebraic-space",
-  "def-weil-etale-morphism",
   "def-weil-pbc-sheafification",
-  "lem-galois-fpqc-descend-etale",
   "lem-trf-algebraic-space-coproduct",
   "lem-trf-algebraic-space-open-gluing",
   "lem-trf-etale-affine-quotient-representable",
-  "lem-trf-etale-relation-finding-opens",
+  "lem-trf-etale-pullback-relation-presheaf",
+  "lem-trf-etale-quotient-affine-open-cover",
   "lem-trf-etale-relation-kernel-pair",
-  "lem-trf-etale-relation-restriction-quotient",
-  "lem-weil-pbc-scheme-coproduct-family"
+  "lem-trf-fppf-sheaf-coproduct-partition",
+  "lem-trf-representable-etale-quotient-presentation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces.tex",
-  "place": "Tags 02WW, 02WV, 02WT, 02WU, 02WQ, 02WR and Groupoids Tags 045Y/045Z; affine presentation and open-gluing proof expanded with kernel-pair and fpqc-descent inputs."
+  "place": "Tags 02WW (theorem-presentation), 0265 (lemma-presentation-quasi-compact), and 02WV (lemma-when-it-works-it-works)."
  },
  "mathlib_searches": [
   {
@@ -174,19 +160,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-etale-relation-quotient",
   "worker": "stage1",
-  "summary": "Repair of returned delivery: separated arbitrary-etale restriction (injectivity) from the surjective-cover quotient isomorphism, corrected the summand step, added a kernel-pair support lemma, cited fpqc etale descent, and expanded the final atlas argument using the representable diagonal and local quotient calculation. The quotient and hypotheses are unchanged.",
-  "blueprint": "Realizes the blueprint ancestor lem-trf-local-term-locality place “Polarized scheme descent input to the descent sentence: first form the quotient by the etale relation (Stacks 02WW).” Steps 1–6 follow the affine-refinement, kernel-pair, fpqc-descent, open-gluing, and presentation paragraphs."
+  "summary": "Q104 repair of the 3400-character re-split return: created two independent statement-only tasks, for affine quotient open charts and for representable quotient atlas descent. The item now assembles these with the existing affine representability, coproduct, open-gluing and kernel-pair nodes. The statement, hypotheses and all six original arguments are preserved; detailed allocation and full prior argument are retained in the report.",
+  "blueprint": "Polarized scheme descent input to the descent sentence: first form the quotient by the etale relation (Stacks 02WW). The two new tasks refine the same Stacks 02WW route; steps 1-3 assemble affine charts and open gluing, step 4 supplies presentation properties, step 5 supplies universality."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q30-e3652dcff",
-  "group": "Q30",
+  "reviewer": "NT-cc-Q104-e425c6ebf",
+  "group": "Q104",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q30-e3652dcff (reviewer sub-agent of L); spot-checked: Full mathematical review completed; review.md records source checks, every proof step and new node, edge cases, route compliance, and repaired prior faults. No remaining errors or repairs."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-e425c6ebf (reviewer sub-agent of L); spot-checked: I read the re-split note, the base six-step proof (live, unchanged by anyone else), the delivered item, both new nodes in full and every cited statement. Sources checked: Stacks spaces.tex 02WT (l.1284), 02WU (l.1310), 02WV (l.1431, displayed pullback chain), 0265 and 02WW (l.1603, all paragraphs). Diff against base: the item's statement, stmt_deps and lean are unchanged; the proof is now 5 steps and 1754 characters, and proof_deps equals the union of the step uses. Allocation: old steps 1, 2 and 4 become the new node lem-trf-etale-quotient-affine-open-cover (coproduct U, etale R_U and R_i, Q≅F, representable open immersions F_i→F, fppf-local covering). The pullback/descent of old step 3 and the atlas part of old step 6 become the new node lem-trf-representable-etale-quotient-presentation. That node is 02WV with 'U/R algebraic' weakened to 'q representable'; its displayed isomorphism P_x×_T T_α ≅ T_α×_{a_α,V,t}R with map s∘pr_R matches Stacks' orientation. Old step 5 stays as item step 3, a pure assembly of the coproduct and open-gluing lemmas, with all five gluing hypotheses checked. Item step 2: the affine-representability node gives exactly node 2's hypothesis plus the representable diagonal, hence F_i is algebraic. Step 4 writes out the diagonal pullback and then cites node 2 and the kernel-pair node. Step 5 is elementary through the universal-property sheafification definition, without local surjectivity (C4 respected). No argument was dropped or blurred, the two new nodes are of comparable size, and neither restates the item. Small cases tested: V empty, diagonal R, two points with the universal relation (no disjointness of images claimed), overlapping affines (none assumed affine), T empty. Duplicate search with rg -L over 02WV/0265/02WW and 'etale equivalence relation' found no duplicate: the a1 atlas-presentation, sfb atlas-bootstrap, a1 affine-atlas-open-cover and finite-neighbourhood nodes state different things. Same unit sk-i-curve-zero throughout, no tool_uses, no SGA, item not on the dropped list. Batch-5 check: both flagged citations are new statement-only splits of this item. They state generic algebraic-space facts (Stacks 02WW/02WV), neither of which is part of the trace formula or Poincaré duality. The item already enters the batch-5 closure generically, through lem-a1-etale-sheaf-algebraic-space-realization ← … ← thm-weil-final-betti and not through the trace formula, so it is accepted. Minor: the report mentions a citations.json that is not in the commit, which is harmless. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleRelationQuotient",
@@ -211,5 +197,26 @@
   "result": "pass",
   "note": "Statement, dependencies, source proof, edge cases, docstrings, canonical helper, route-pivot compliance, report sections, and scompile evidence all checked; no fixes required."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261023T123752-L-1248390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,340 @@
+{
+ "id": "lem-sfb-syntomic-etale-source-locality",
+ "kind": "statement",
+ "title": "Syntomicity is preserved and detected by etale source covers",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. In this statement, a morphism $g:T\\to B$ is called syntomic if it is flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation], and for every $b\\in B$ every local ring of its scheme-theoretic fibre $T_b=T\\times_B\\operatorname{Spec}\\kappa(b)$ [def-pc-scheme-fibre, def-weil-residue-field] is a complete-intersection local ring over $\\kappa(b)$ in the meaning of [lem-trf-lci-pointwise-criterion]. (1) If $f$ is syntomic and $h:U\\to X$ is etale [def-weil-etale-morphism], then $f\\circ h$ is syntomic. (2) If $(h_i:U_i\\to X)_{i\\in I}$ is a set-indexed family of etale morphisms whose images cover the underlying set of $X$, and every $f\\circ h_i$ is syntomic, then $f$ is syntomic. No quasi-compactness, separation, Noetherianity, or field-base hypothesis is imposed. The empty covering family is allowed when $X$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 036S (lemma-syntomic-syntomic-local-source); etale maps are syntomic by morphisms.tex Tag 02GQ (lemma-etale-syntomic). The stated fibre criterion is morphisms.tex Tags 01UE (lemma-syntomic-locally-standard-syntomic) and 01UG (lemma-local-complete-intersection)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "lem-trf-lci-pointwise-criterion",
+  "def-weil-etale-morphism",
+  "def-sfb-complete-intersection-fibres"
+ ],
+ "proof": [
+  {
+   "text": "First handle flatness and local finite presentation. For (1), precomposition by the etale $h$ preserves both properties by [lem-sfb-scheme-etale-source-target-properties], applied separately with $P$ flat and locally of finite presentation. For (2), the last assertion of the same node applied to the jointly surjective family $(h_i)$ descends these two properties from the composites. Thus in each direction $f$ and every composite under consideration are flat and locally of finite presentation. It remains to check the local rings of their ordinary fibres.",
+   "uses": [
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036S (lemma-syntomic-syntomic-local-source); flatness and local-finite-presentation part, also the first paragraph of Tag 05B7 (lemma-syntomic-permanence)."
+   }
+  },
+  {
+   "text": "For each locally finitely presented map $g:T\\to S$ just obtained and each $s\\in S$, write $k=\\kappa(s)$. Its fibre $T_s$ is covered by affine opens with finitely presented $k$-algebras: take affine opens $\\operatorname{Spec}D\\subset T$ mapping into $\\operatorname{Spec}R\\subset S$ with $s\\in\\operatorname{Spec}R$, use [lem-weil-pbc-lfp-affine-opens-finite-presentation], and pull back to $s$. The pulled-back open is $\\operatorname{Spec}(D\\otimes_R k)$ by [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-open-immersion-base-change]; its algebra is finitely presented by [lem-weil-pbc-finite-presentation-base-change-composition]. These opens cover since they are inverse images of a source cover. Their displayed finite presentations give finite type by forgetting the finite list of relations. By [lem-weil-pbc-affine-open-stalk-localization] every stalk of $T_s$ is the localization at a prime of one such finite type $k$-algebra, hence is essentially of finite type by [def-weil-pbc-essentially-finite-type-algebra].",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-essentially-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01UE (lemma-syntomic-locally-standard-syntomic) and 01UF (lemma-syntomic-flat-fibres), fibre-local-ring setup; affine fibre charts and finite presentation by base change."
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ and put $k=\\kappa(s)$. For (1), base change $h$ to $e:U_s\\to X_s$ using [lem-weil-pbc-etale-scheme-base-change]. For (2), [lem-weil-pbc-etale-covering-base-change] makes the maps $e_i:(U_i)_s\\to X_s$ etale and jointly surjective. Here $U\\times_X X_s\\cong U_s$ (and likewise for $U_i$): the forward map sends $(u,(x,t))$ with $h(u)=x$ to $(u,t)$, and the inverse sends $(u,t)$ to $(u,(h(u),t))$; these are inverse by the fibre-product universal property. Write $e:Z\\to X_s$ for any such map, $z\\in Z$, $x=e(z)$, $A=\\mathcal O_{X_s,x}$ and $B=\\mathcal O_{Z,z}$. Step 2 gives local $k$-algebras essentially of finite type. The local map $A\\to B$ is flat because $e$ is etale and therefore flat by [def-weil-etale-morphism, def-weil-flat-morphism].",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B7 (lemma-syntomic-permanence), reduction to a fibre over a field; morphisms.tex Tag 02GO and topologies.tex etale covering base change."
+   }
+  },
+  {
+   "text": "The closed fibre of $A\\to B$ is $B/\\mathfrak m_A B\\cong\\kappa(z)$. Indeed, choose affine neighbourhoods of $x$ and $z$ for $e$. By [lem-weil-pbc-affine-open-stalk-localization] the two stalks are the corresponding prime localizations. If these are $\\operatorname{Spec}E'\\subseteq Z$ over $\\operatorname{Spec}E\\subseteq X_s$ and $\\mathfrak p\\subset E$ is the prime of $x$, the fibre $Z_x$ meets $\\operatorname{Spec}E'$ in the open subscheme $\\operatorname{Spec}(E'\\otimes_E\\kappa(\\mathfrak p))$ by [lem-weil-pbc-open-immersion-base-change] and [lem-weil-pbc-fibre-product-affine-spectra]. Apply [lem-weil-pbc-fibre-ring-local-ring-iso] to $E\\to E'$: the stalk at $z$ of the fibre over $x$ is $B/\\mathfrak m_A B$ (localizing the base ideal at $x$ replaces it by $\\mathfrak m_A$). By [lem-weil-pbc-etale-fibre-discrete-separable-points], that stalk is the field $\\kappa(z)$, a finite separable extension of $\\kappa(x)$. All these maps preserve the original $k$-action, as their fractions send $a/b$ to its image divided by the image of $b$. This field is essentially of finite type over $k$: if $B=W^{-1}D$ with $D$ finite type, its quotient is $\\overline W^{-1}(D/J)$ for the inverse image $J$ of $\\mathfrak m_A B$, and $D/J$ is generated by the images of the generators of $D$. It is a regular local ring of dimension zero, so is a complete-intersection local $k$-algebra by taking itself as regular presentation ring and the empty regular sequence in [def-trf-complete-intersection-local-algebra]. Apply [lem-sfb-flat-local-ci-source-fibre] to conclude $B$ is CI over $k$ if and only if $A$ is CI over $k$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-fibre-ring-local-ring-iso",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-trf-complete-intersection-local-algebra",
+    "lem-sfb-flat-local-ci-source-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tags 09Q7 (lemma-avramov) and 09Q6 (lemma-check-lci-agrees), applied to the flat local map on the ordinary fibre; morphisms.tex Tag 02GL describes its closed fibre."
+   }
+  },
+  {
+   "text": "In (1), every $A=\\mathcal O_{X_s,x}$ is CI by syntomicity of $f$, so step 4 gives that every $\\mathcal O_{U_s,z}$ is CI. Together with step 1 this proves $f\\circ h$ syntomic. In (2), for each $s$ and $x\\in X_s$, joint surjectivity in step 3 supplies $i$ and $z\\in(U_i)_s$ over $x$. Syntomicity of $f\\circ h_i$ makes $B$ CI; step 4 makes $A$ CI. Step 1 supplies flatness and local finite presentation of $f$, giving exactly syntomicity as defined in the item. If a fibre is empty there is no local ring to test. If $X$ is empty, flatness and local finite presentation and the fibre condition are all vacuous, so the empty covering family causes no exception.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 036S (lemma-syntomic-syntomic-local-source), assembly of the two clauses; the fibrewise argument is the etale specialization of Tag 05B7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-fibre-ring-local-ring-iso",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-trf-complete-intersection-local-algebra",
+  "lem-sfb-flat-local-ci-source-fibre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 036S (lemma-syntomic-syntomic-local-source), with its fibrewise descent argument taken in the etale case from Tag 05B7 (lemma-syntomic-permanence); dpa.tex Tags 09Q7 and 09Q6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism preserves and reflects complete intersection local rings of schemes locally of finite type over a field",
+   "results": "{\"t\": \"2026-10-23T11:56:20Z\", \"tool\": \"leanfinder\", \"query\": \"An etale morphism preserves and reflects complete intersection local rings of schemes locally of finite type over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"762f8df3d9ce73c6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale or smooth morphisms, openness, or lifting pairs of points to a fibre product; none states syntomicity or complete-intersection descent. The full-source complete-intersection hit is only a presentation-dimension docstring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Syntomic morphisms are local for surjective etale covers on the source",
+   "results": "{\"t\": \"2026-10-23T11:57:29Z\", \"tool\": \"leansearch\", \"query\": \"Syntomic morphisms are local for surjective etale covers on the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.sourceLocalClosure\", \"Algebra.FormallyEtale.iff_of_surjective\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"292e703dbe7319fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale or smooth morphisms, openness, or lifting pairs of points to a fibre product; none states syntomicity or complete-intersection descent. The full-source complete-intersection hit is only a presentation-dimension docstring."
+  },
+  {
+   "tool": "grep",
+   "query": "Syntomic|CompleteIntersection|complete.intersection",
+   "results": "{\"t\": \"2026-10-23T12:01:00Z\", \"tool\": \"grep\", \"query\": \"Syntomic|CompleteIntersection|complete.intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Basic.lean\"], \"digest\": \"08e65e9beea7152f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale or smooth morphisms, openness, or lifting pairs of points to a fibre product; none states syntomicity or complete-intersection descent. The full-source complete-intersection hit is only a presentation-dimension docstring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Syntomic\"",
+   "results": "{\"t\": \"2026-10-23T12:01:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale or smooth morphisms, openness, or lifting pairs of points to a fibre product; none states syntomicity or complete-intersection descent. The full-source complete-intersection hit is only a presentation-dimension docstring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Syntomic morphisms of schemes are preserved by precomposition with etale morphisms and descend along a jointly surjective family of etale source maps",
+   "results": "{\"t\": \"2026-10-23T12:01:02Z\", \"tool\": \"leanfinder\", \"query\": \"Syntomic morphisms of schemes are preserved by precomposition with etale morphisms and descend along a jointly surjective family of etale source maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\"], \"digest\": \"34c600cb9cbfa0bf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale or smooth morphisms, openness, or lifting pairs of points to a fibre product; none states syntomicity or complete-intersection descent. The full-source complete-intersection hit is only a presentation-dimension docstring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented morphisms with local complete intersection fibres satisfy descent for etale coverings of the source",
+   "results": "{\"t\": \"2026-10-23T12:01:02Z\", \"tool\": \"leanfinder\", \"query\": \"Flat locally finitely presented morphisms with local complete intersection fibres satisfy descent for etale coverings of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"a8e43a392ec57b25\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale or smooth morphisms, openness, or lifting pairs of points to a fibre product; none states syntomicity or complete-intersection descent. The full-source complete-intersection hit is only a presentation-dimension docstring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an etale map of schemes locally of finite type over a field the source local ring is a complete intersection if and only if the target local ring is a complete intersection",
+   "results": "{\"t\": \"2026-10-23T12:01:37Z\", \"tool\": \"leansearch\", \"query\": \"For an etale map of schemes locally of finite type over a field the source local ring is a complete intersection if and only if the target local ring is a complete intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"RingHom.Etale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.Etale.of_isLocalizationAway\"], \"digest\": \"1041657993e4f72a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale or smooth morphisms, openness, or lifting pairs of points to a fibre product; none states syntomicity or complete-intersection descent. The full-source complete-intersection hit is only a presentation-dimension docstring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"CompleteIntersection\"",
+   "results": "{\"t\": \"2026-10-23T12:01:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"CompleteIntersection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale or smooth morphisms, openness, or lifting pairs of points to a fibre product; none states syntomicity or complete-intersection descent. The full-source complete-intersection hit is only a presentation-dimension docstring."
+  },
+  {
+   "tool": "grep",
+   "query": "Syntomic|CompleteIntersection|IsLocalCompleteIntersection|isJointlySurjectivePreserving",
+   "results": "{\"t\": \"2026-10-23T12:04:23Z\", \"tool\": \"grep\", \"query\": \"Syntomic|CompleteIntersection|IsLocalCompleteIntersection|isJointlySurjectivePreserving\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/Cover/Over.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\"], \"digest\": \"2d0abcbb68b24592\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern etale or smooth morphisms, openness, or lifting pairs of points to a fibre product; none states syntomicity or complete-intersection descent. The full-source complete-intersection hit is only a presentation-dimension docstring."
+  },
+  {
+   "tool": "grep",
+   "query": "Syntomic|lci|complete.intersection",
+   "results": "{\"t\": \"2026-10-23T14:55:16Z\", \"tool\": \"grep\", \"query\": \"Syntomic|lci|complete.intersection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flatness, smoothness, etale maps, or finite type, not the complete-intersection assertion. The sole complete-intersection grep hit is only a presentation-dimension docstring at Mathlib/RingTheory/Extension/Presentation/Basic.lean:103."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat locally finitely presented morphisms with complete intersection fibres descend under etale coverings of the source",
+   "results": "{\"t\": \"2026-10-23T14:55:17Z\", \"tool\": \"leansearch\", \"query\": \"Flat locally finitely presented morphisms with complete intersection fibres descend under etale coverings of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat.mk\"], \"digest\": \"277eb9c281f0c93c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flatness, smoothness, etale maps, or finite type, not the complete-intersection assertion. The sole complete-intersection grep hit is only a presentation-dimension docstring at Mathlib/RingTheory/Extension/Presentation/Basic.lean:103."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Syntomic\"",
+   "results": "{\"t\": \"2026-10-23T14:55:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Syntomic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flatness, smoothness, etale maps, or finite type, not the complete-intersection assertion. The sole complete-intersection grep hit is only a presentation-dimension docstring at Mathlib/RingTheory/Extension/Presentation/Basic.lean:103."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Syntomic scheme morphisms are preserved and detected by jointly surjective etale source covers",
+   "results": "{\"t\": \"2026-10-23T14:55:19Z\", \"tool\": \"leanfinder\", \"query\": \"Syntomic scheme morphisms are preserved and detected by jointly surjective etale source covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"1c59c9e77da16b9c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flatness, smoothness, etale maps, or finite type, not the complete-intersection assertion. The sole complete-intersection grep hit is only a presentation-dimension docstring at Mathlib/RingTheory/Extension/Presentation/Basic.lean:103."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalCompleteIntersection|complete.intersection|Avramov|Syntomic",
+   "results": "{\"t\": \"2026-10-23T15:03:58Z\", \"tool\": \"grep\", \"query\": \"IsLocalCompleteIntersection|complete.intersection|Avramov|Syntomic\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Basic.lean\"], \"digest\": \"08e65e9beea7152f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flatness, smoothness, etale maps, or finite type, not the complete-intersection assertion. The sole complete-intersection grep hit is only a presentation-dimension docstring at Mathlib/RingTheory/Extension/Presentation/Basic.lean:103."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Syntomic morphisms, equivalently flat locally finitely presented maps with local complete intersection fibres, are local on the source for etale covers",
+   "results": "{\"t\": \"2026-10-23T15:04:00Z\", \"tool\": \"leanfinder\", \"query\": \"Syntomic morphisms, equivalently flat locally finitely presented maps with local complete intersection fibres, are local on the source for etale covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"8c7ab15c16b48045\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flatness, smoothness, etale maps, or finite type, not the complete-intersection assertion. The sole complete-intersection grep hit is only a presentation-dimension docstring at Mathlib/RingTheory/Extension/Presentation/Basic.lean:103."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lci-etale-pointwise-invariance",
+  "date": "2026-10-23",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Etale chart comparison in the fibrewise complete-intersection locus: apply syntomic source locality to structural morphisms and to the open image of a source neighbourhood; supporting the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images.",
+   "via": [
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-syntomic-etale-source-locality",
+  "worker": "stage1",
+  "summary": "Q100: proved both clauses by structural etale descent, affine ordinary-fibre charts, and the flat-local complete-intersection criterion. One new statement-only algebra node; no statement change and no Lean writing.",
+  "blueprint": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. The ancestor tool returns None for this inherited non-blueprint chain; the latest blueprint direct-image proof was read, and its route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Finite presentations on arbitrary compatible affine opens supply the ordinary fibre charts. This is a generic scheme/algebra tool; no node of the stability unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Computes the coordinate algebra of each affine ordinary fibre chart. This is a generic scheme/algebra tool; no node of the stability unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Ensures pulled-back source charts are opens of the ordinary fibre. This is a generic scheme/algebra tool; no node of the stability unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Preserves finite presentation on the ordinary fibre chart algebra. This is a generic scheme/algebra tool; no node of the stability unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identifies fibre stalks with prime localizations of their affine coordinate rings. This is a generic scheme/algebra tool; no node of the stability unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Preserves etaleness on an individual ordinary fibre. This is a generic scheme/algebra tool; no node of the stability unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Gives the jointly surjective family on each ordinary fibre. This is a generic scheme/algebra tool; no node of the stability unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-local-ring-iso",
+    "why": "Identifies the closed fibre of the local-ring map as the stalk of the scheme fibre. This is a generic scheme/algebra tool; no node of the stability unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Identifies the last stalk as a finite separable residue field. This is a generic scheme/algebra tool; no node of the stability unit supplies this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-fibre-ring-local-ring-iso",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-23d23151a",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-23d23151a (reviewer sub-agent of L); spot-checked: I read Stacks 036S/05B7 (descent.tex), 09Q7/09Q6 (dpa.tex) and Algebra 00SB. The item statement is unchanged and correct. The new node lem-sfb-flat-local-ci-source-fibre is the exact essentially-finite-type-over-a-field case of Avramov 09Q7, translated into the 00SB notion by 09Q6. It is true and statement-only; tested on A=B, k→k[t]/(t^2), k→(x,y)^2 Artinian, and the non-flat A→κ(A). A DAG search finds no duplicate. Steps 1-5 follow the etale case of 05B7: flat and lfp via the same-unit lem-sfb-scheme-etale-source-target-properties; affine fibre charts; etale base change and covering base change on fibres; closed fibre = κ(z) via the fibre-ring and etale-fibre lemmas; a field is CI with the empty sequence. There is no cycle, no SGA, and live has not split the item. The 9 tool_uses are generic pbc leaves or closed nodes: accepted. Batch-5: def-trf-complete-intersection-local-algebra is a general definition (00SB), and lem-trf-smooth-composition (reached through lem-sfb-scheme-etale-source-target-properties) is generic smooth composition. Neither is part of the trace formula or Poincare duality: accepted. FIX (C1): step 4 used without citing it that the fibre Z_x meets Spec E' in Spec(E'⊗_E κ(p)). I added the sentence and cited lem-weil-pbc-open-immersion-base-change and lem-weil-pbc-fibre-product-affine-spectra; both were already in proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SyntomicEtaleSourceLocality",
+  "declaration": "AlgebraicGeometry.syntomic_etale_source_locality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SyntomicEtaleSourceLocality.lean",
+  "statement": "theorem syntomic_etale_source_locality {X S : Scheme.{u}} (f : X ⟶ S) : ((Flat f ∧ LocallyOfFinitePresentation f ∧ f.HasCompleteIntersectionFibres) → ∀ (U : Scheme.{u}) (h : U ⟶ X), Etale h → Flat (h ≫ f) ∧ LocallyOfFinitePresentation (h ≫ f) ∧ (h ≫ f).HasCompleteIntersectionFibres) ∧ (∀ (I : Type v) (U : I → Scheme.{u}) (h : ∀ i : I, U i ⟶ X), (∀ i : I, Etale (h i)) → (∀ x : X, ∃ (i : I) (z : U i), h i z = x) → (∀ i : I, Flat (h i ≫ f) ∧ LocallyOfFinitePresentation (h i ≫ f) ∧ (h i ≫ f).HasCompleteIntersectionFibres) → Flat f ∧ LocallyOfFinitePresentation f ∧ f.HasCompleteIntersectionFibres)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair of returned ca68d1b97d4c: maintenance commit 474770ef2d1 extracted the two fibre predicates verbatim into Sheaf.AlgebraicGeometry.CompleteIntersectionFibres, owned by the now-landed def-sfb-complete-intersection-fibres, and repaired the old locus owner. This locality module imports and cites that definition instead of the unused locus theorem. Its signature and proof plan are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3290b39c",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of ca68d1b97d4c: stmt_deps now cite the landed def-sfb-complete-intersection-fibres (Sheaf.AlgebraicGeometry.CompleteIntersectionFibres: IsCompleteIntersectionAtFiberPoint with canonical ΓSpecIso/fiberToSpecResidueField/germ κ(s)-action, HasCompleteIntersectionFibres ∀ s y) instead of the theorem lem-trf-syntomic-locus-base-change. Node differs from live only in stmt_deps and lean; statement, proof and proof_deps unchanged (no H7); lean.statement verbatim in file. Syntomic = Flat ∧ LocallyOfFinitePresentation ∧ CI fibres; IsCompleteIntersectionLocalAlgebra (00SD) matches lci_pointwise_criterion's local-ring meaning. Clauses (1) ascent along Etale h with h ≫ f, and (2) descent from any I : Type v étale family covering the points of X, both match; no extra hypotheses; empty I, X, U and fibres covered; universes u, v bound. sorry only, source and blueprint docstrings with the 5 proof steps, nothing hollow, no pro-étale; report has Worker report and Second reading by Q51. No compile (no file changed)."
+ }
+}

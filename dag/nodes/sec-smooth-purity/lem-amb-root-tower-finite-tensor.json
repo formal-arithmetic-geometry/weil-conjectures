@@ -1,0 +1,365 @@
+{
+ "id": "lem-amb-root-tower-finite-tensor",
+ "kind": "statement",
+ "title": "Root tower projections and normalized finite tensor reduction",
+ "statement": "Fix a prime $\\ell$ and a scheme $T$ on which $\\ell$ is invertible [def-pc-scheme]. On the small pro-etale site [def-weil-pbc-proetale-site] use the root sheaves $M_{s,T}=\\mu_{\\ell^s,T}^{\\mathrm{pro}}$ with transitions $u\\mapsto u^\\ell$ [def-pur-roots-of-unity-sheaf], and let $L_T=\\varprojlim_{s\\geq1}M_{s,T}$ with projections $p_{s,T}$ [def-pur-sheaf-inverse-limit]. Put $Z_T=(\\mathbf Z_\\ell)_T$ and $R_{s,T}=(\\mathbf Z/\\ell^s)_T$, with constant sheaves [def-weil-pbc-constant-sheaf] and $\\ell$-adic integers [def-weil-l-adic-numbers]. The $Z_T$-action on $L_T$ is $(a x)_s=x_s^{a\\bmod\\ell^s}$, extended from constant scalars by sheafification. Use ordinary sheaf tensors [def-pur-sheaf-tensor-product].\n\nFor every $r\\geq1$, $p_{r,T}$ is locally surjective, and for every site object $U$,\n$$\\ker(p_{r,T}(U))=\\ell^rL_T(U).$$\nHere the kernel is in additive notation, so $p_r(x)=1$ in root notation. More precisely, for such an $x$ the compatible tuple $d_r(x)_s=x_{s+r}$ belongs to $M_{s,T}(U)$, satisfies $\\ell^r d_r(x)=x$, and commutes with restrictions.\n\nFor any commutative $\\mathbf Z_\\ell$-algebra $B$ with $\\ell^rB=0$, let $B_T$ be its constant ring sheaf and put $H_T=L_T\\otimes_{Z_T}B_T$. The $B_T$-linear map\n$$\\alpha_{r,T}:H_T\\longrightarrow M_{r,T}\\otimes_{R_{r,T}}B_T,\\qquad x\\otimes b\\longmapsto p_{r,T}(x)\\otimes b$$\nis an isomorphism. Its inverse is normalized as follows: for local sections $u$ of $M_{r,T}$ and $b$ of $B_T$, the section $\\alpha_{r,T}^{-1}(u\\otimes b)$ is the unique gluing of $x_i\\otimes b|_{U_i}$ for any cover on which lifts $p_r(x_i)=u|_{U_i}$ exist; this value is independent of the cover and the lifts. There is no flatness assumption on $B$ over $\\mathbf Z/\\ell^r$.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0990, lemma-proetale-enough-w-contractible; agent extraction of returned root-projection reduction steps 2-4. The root-kernel shift and normalized tensor inverse are agent arguments, not assertions of Tag 0990."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-l-adic-numbers",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-twist-sheaves",
+  "def-pur-twist-coefficient-rings",
+  "def-pur-finite-tate-line-signed-comparison",
+  "def-pur-inverse-image-tensor-hom-sections"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved epimorphic root transitions [lem-pur-twist-root-transitions]. Forget additive structure to obtain a sequence of set sheaves with epimorphic transitions. The forgetful functor preserves this limit. Pro-etale repleteness [det-pe-replete-epimorphism] makes every set-valued limit projection epic; transport along the preserved-limit isomorphism and use [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective] to obtain local surjectivity of the additive root projection.",
+   "uses": [
+    "lem-pur-twist-root-transitions",
+    "det-pe-replete-epimorphism",
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence; proetale.tex Tag 0990, lemma-proetale-enough-w-contractible, via the existing repleteness theorem"
+   }
+  },
+  {
+   "text": "Iterate the transition identity on the underlying units. If the positive r-th coordinate of x vanishes, its positive (s+r)-th coordinate is killed by ell^s and hence determines an s-th root. These roots form a compatible cone, whose limit section d_r(x) has the required coordinates. The same transition identity gives ell^r d_r(x)=x. Conversely the r-th root group is killed by ell^r. Injectivity of root inclusions and sectionwise limit extensionality prove that d_r commutes with restrictions.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03PK, section-kummer: root equations; agent shift calculation using the sectionwise limit of sites-modules.tex Tags 03DB and 03CO"
+   }
+  },
+  {
+   "text": "Restrict the completed scalar action to constant ell-adic scalars. Its defining coordinate equation makes the root projection linear for reduction to the constant residue ring. Mathlib PadicInt.ker_toZModPow and RingHom.liftOfSurjective show that the algebra map to B factors through this residue ring, since ell^r vanishes in B. The normalized scalar-extension lift [lem-sp-scalar-extension-binary-coherence] defines the forward morphism and computes its value on pure tensors.",
+   "uses": [
+    "def-pur-twist-sheaves",
+    "def-pur-twist-coefficient-rings",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, section-tensor-product, and Tag 03CY, lemma-sheafification-presheaf-modules; agent specialization to the root projection"
+   }
+  },
+  {
+   "text": "Use the canonical scalar-extension embedding [lem-sp-scalar-extension-dual-tower-core]. Its composite with the kernel inclusion of p_r is zero: step 2 writes every kernel section as ell^r y, and preservation of natural-number multiplication makes its image zero because ell^r vanishes in the coefficient sheaf. The projection is epic by step 1. Mathlib Abelian.epiDesc therefore constructs the unique additive descent q from finite roots, satisfying p_r followed by q equal to the tensor embedding. This is the categorical gluing of local lifts; no witnesses of arbitrary mere existence are used as data.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-tower-core",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, section-tensor-product; agent gluing argument from steps 1 and 2"
+   }
+  },
+  {
+   "text": "Regard the target as a residue-ring module by restriction of scalars. Any additive map between modules over a constant residue-ring sheaf is linear: restrict along its sheafification unit, represent each residue by an integer, and use preservation of integer multiplication. Mathlib PresheafOfModules.restrictHomEquivOfIsLocallySurjective descends this linearity from the constant presheaf. Apply this to q and extend scalars using the normalized scalar-extension lift to obtain the B-linear reverse map.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK and Tag 03CY; sites.tex Tag 00WK, lemma-sections-sheafification; agent balancing check"
+   }
+  },
+  {
+   "text": "The reverse map takes p_r(x) tensor b to x tensor b by the descent equation. Pure-tensor extensionality proves one inverse identity. Cancel the epic p_r to prove that q followed by the forward map is the finite tensor embedding; this gives the other identity by the same extensionality theorem. For any covering sieve and prescribed local lifts, naturality of the isomorphism and of pure tensors proves the reverse implication of the normalization. Conversely the local gluing equations imply that the forward image is the prescribed finite tensor by sheaf separatedness, and application of the inverse gives the claimed equality. No flatness hypothesis enters.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-sp-scalar-extension-dual-tower-core"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK and Tag 03CY; agent inverse check on the defining tensor generators"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-root-transitions",
+  "det-pe-replete-epimorphism",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-twist-sheaves",
+  "def-pur-twist-coefficient-rings",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sp-scalar-extension-dual-tower-core",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "C3: sectionwise root-kernel shift, normalized scalar-extension API, and Mathlib abelian epimorphism descent. Root transitions and pro-etale repleteness supply local surjectivity; scalar balancing is descended along the constant-sheaf unit. This is the categorical realization of the gluing argument of Section 03EK and Tag 03CY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|TateModule|proetale",
+   "results": "{\"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"7bd5a9f58fe6453b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites.",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Tt]ensor|[Tt]ensor.*quotient|[Tt]ensor.*[Ee]pi",
+   "results": "{\"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Free/Basic.lean\"], \"digest\": \"6aca47463c85e6bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites.",
+   "sub": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse limit of the sheaves of ell power roots of unity surjects onto each finite root sheaf and its kernel is multiplication by ell to that power",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.isIso_toLimit\", \"ProfiniteGrp.isoLimittoFiniteQuotientFunctor\", \"InverseSystem.invLimEquiv_symm_apply_coe\", \"InverseSystem.isNatEquiv_piEquivLim\", \"SheafOfModules.hasLimit\", \"SheafOfModules.hasLimitsOfShape\", \"InverseSystem.piEquivLim\", \"InverseSystem.invLimEquiv.congr_simp\"], \"digest\": \"d9677ae8fc3ac63a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"quotient\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.quotientTensorEquiv\", \"TensorProduct.tensorQuotientEquiv\", \"TensorProduct.quotientTensorQuotientEquiv\", \"TensorProduct.quotientTensorEquiv_apply_tmul_mk\", \"TensorProduct.tensorQuotientEquiv_apply_mk_tmul\", \"TensorProduct.quotientTensorEquiv_symm_apply_mk_tmul\", \"TensorProduct.tensorQuotientEquiv_symm_apply_tmul_mk\", \"TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk\"], \"digest\": \"e69a81507dfa396a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary tensor of sheaves with an annihilated algebra factors through the scalar quotient without flatness",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.tensorQuotientEquiv\", \"QuotSMulTop.algebraMapTensorEquivTensorQuotSMulTop\", \"TensorProduct.tensorQuotEquivQuotSMul\", \"Module.Flat.ker_lTensor_eq\", \"LinearMap.tensorKerEquiv\", \"Module.Flat.tensorSubmoduleAlgebraEquivMul\", \"TensorProduct.tensorQuotMapSMulEquivTensorQuot\", \"QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop\"], \"digest\": \"12318fc087ba0ef5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"rootsOfUnity\", \"rootsOfUnity_one\", \"rootsOfUnity_zero\", \"rootsOfUnity_inf_rootsOfUnity\", \"rootsOfUnity_eq_ker\", \"ker_zpowGroupHom_eq_rootsOfUnity\", \"rootsOfUnity_le_of_dvd\", \"instSubsingletonSubtypeUnitsMemSubgroupRootsOfUnityOfNatNat\"], \"digest\": \"b3162e76aceb5175\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale inverse limit roots of unity projection surjective with kernel ell power times Tate module",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_rootsOfUnityCircleEquiv_comp_rootsOfUnityAddChar\", \"AdicCompletion.kerProj_surjective\", \"surjective_fontaineTheta\", \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"cyclotomicCharacter.toFun_apply\", \"Ideal.rootsOfUnityMapQuot_apply\", \"AdicCompletion.evalOneₐ_surjective\", \"cyclotomicCharacter.toFun\"], \"digest\": \"b487a9a81b93796c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf of modules epimorphism M to N kernel q M tensor an algebra killed by q gives isomorphism M tensor A to N tensor over quotient ring A",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.ofEpi\", \"LinearMap.kerLTensorEquivOfSurjective\", \"SheafOfModules.GeneratingSections.opEpi_comp\", \"LinearMap.tensorKerEquiv\", \"SheafOfModules.GeneratingSections.ofEpi_I\", \"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.relationsOfIsCokernelFree_s\"], \"digest\": \"b6b7606a583ce63f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module quotient-tensor equivalences, finite ring roots, profinite group limits and abstract limit lifts do not state the normalized root-sheaf assertion on arbitrary pro-etale sites."
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|TateModule|proetale",
+   "results": "{\"t\": \"2026-10-22T07:53:18Z\", \"tool\": \"grep\", \"query\": \"rootsOfUnity|TateModule|proetale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern profinite group presentations, Fontaine theta, abstract algebraic tensor quotients or etale algebras; none states this pro-etale root-sheaf lifting, sectionwise kernel division and normalized tensor assertion.",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring the pro etale Tate root sheaf with an algebra killed by ell power agrees with tensoring the finite root sheaf",
+   "results": "{\"t\": \"2026-10-22T07:53:18Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring the pro etale Tate root sheaf with an algebra killed by ell power agrees with tensoring the finite root sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.Etale.comp\", \"Algebra.Etale.baseChange\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"RingHom.Etale\", \"Algebra.FormallyEtale.of_restrictScalars\"], \"digest\": \"0609b0f16e6d028e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern profinite group presentations, Fontaine theta, abstract algebraic tensor quotients or etale algebras; none states this pro-etale root-sheaf lifting, sectionwise kernel division and normalized tensor assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-22T07:53:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"surjective_rootsOfUnityCircleEquiv_comp_rootsOfUnityAddChar\"], \"digest\": \"4cbd07b395c4dcf1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern profinite group presentations, Fontaine theta, abstract algebraic tensor quotients or etale algebras; none states this pro-etale root-sheaf lifting, sectionwise kernel division and normalized tensor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a scheme with ell invertible the inverse limit of root of unity sheaves surjects onto each finite level with kernel ell power times the limit and tensor reduction",
+   "results": "{\"t\": \"2026-10-22T07:53:29Z\", \"tool\": \"leanfinder\", \"query\": \"On a scheme with ell invertible the inverse limit of root of unity sheaves surjects onto each finite level with kernel ell power times the limit and tensor reduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_fontaineTheta\", \"AlgebraicGeometry.pointsPi_surjective\", \"ProfiniteGrp.toLimit_surjective\", \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"surjective_rootsOfUnityCircleEquiv_comp_rootsOfUnityAddChar\", \"AdicCompletion.kerProj_surjective\", \"Perfection.coeff_surjective\", \"LightProfinite.surjective_transitionMap\"], \"digest\": \"10837154994991c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern profinite group presentations, Fontaine theta, abstract algebraic tensor quotients or etale algebras; none states this pro-etale root-sheaf lifting, sectionwise kernel division and normalized tensor assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "root|Tate|quotient",
+   "results": "{\"t\": \"2026-10-22T07:58:54Z\", \"tool\": \"grep\", \"query\": \"root|Tate|quotient\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern profinite group presentations, Fontaine theta, abstract algebraic tensor quotients or etale algebras; none states this pro-etale root-sheaf lifting, sectionwise kernel division and normalized tensor assertion.",
+   "sub": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-22T07:58:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"TensorProduct\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.quotientTensorEquiv\", \"TensorProduct.tensorQuotientEquiv\", \"TensorProduct.quotientTensorQuotientEquiv\", \"TensorProduct.quotientTensorEquiv_apply_tmul_mk\", \"TensorProduct.tensorQuotientEquiv_apply_mk_tmul\", \"TensorProduct.quotientTensorEquiv_symm_apply_mk_tmul\", \"TensorProduct.tensorQuotientEquiv_symm_apply_tmul_mk\", \"TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk\"], \"digest\": \"e69a81507dfa396a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern profinite group presentations, Fontaine theta, abstract algebraic tensor quotients or etale algebras; none states this pro-etale root-sheaf lifting, sectionwise kernel division and normalized tensor assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules quotient by an integer and ordinary tensor with an annihilated algebra is an isomorphism without flatness",
+   "results": "{\"t\": \"2026-10-22T07:59:05Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of modules quotient by an integer and ordinary tensor with an annihilated algebra is an isomorphism without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotSMulTop.quotSMulTopTensorEquivQuotSMulTop\", \"QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop\", \"LinearMap.tensorKerEquiv\", \"TensorProduct.tensorQuotMapSMulEquivTensorQuot\", \"TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor\", \"TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ\", \"TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor\", \"TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ\"], \"digest\": \"0b3693c2c2c76590\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern profinite group presentations, Fontaine theta, abstract algebraic tensor quotients or etale algebras; none states this pro-etale root-sheaf lifting, sectionwise kernel division and normalized tensor assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "def quotientTensorEquiv|def tensorQuotientEquiv|def quotientTensorQuotientEquiv|theorem quotientTensorEquiv_apply_tmul_mk",
+   "results": "{\"t\": \"2026-10-22T08:20:17Z\", \"tool\": \"grep\", \"query\": \"def quotientTensorEquiv|def tensorQuotientEquiv|def quotientTensorQuotientEquiv|theorem quotientTensorEquiv_apply_tmul_mk\", \"sub\": \"LinearAlgebra/TensorProduct/Quotient.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"56\", \"105\", \"131\", \"270\"], \"digest\": \"34c34a115722eb04\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the inspected hits concern profinite group presentations, Fontaine theta, abstract algebraic tensor quotients or etale algebras; none states this pro-etale root-sheaf lifting, sectionwise kernel division and normalized tensor assertion.",
+   "sub": "LinearAlgebra/TensorProduct/Quotient.lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-amb-tate-root-projection-reduction",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-amb-vector-bundle-purity",
+   "place": "Proof paragraph 1, the Tate coefficient in the vector-bundle integration formula; returned root-projection reduction steps 2-4: root lifting, shift kernel division and normalized ordinary finite scalar reduction.",
+   "via": [
+    "lem-amb-tate-root-projection-reduction",
+    "lem-amb-finite-tate-site-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-amb-root-tower-finite-tensor",
+  "worker": "stage1",
+  "summary": "Proved transition epimorphy using arbitrary-base Kummer and etale-to-pro-etale cover tools, then applied the existing repleteness theorem. Wrote the sectionwise kernel shift and constructed the normalized inverse by gluing lifts and checking all balancing relations. Reused existing nodes throughout, searched project Lean and Mathlib with two phrasings, and preserved the statement and historical searches. No new nodes.",
+  "blueprint": "thm-amb-vector-bundle-purity.proof.md paragraph 1, the Tate coefficient of vector-bundle integration; precisely the returned root-projection reduction steps 2-4 recorded in blueprint.from.place. This refines the coefficient prerequisite without changing the vector-bundle purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Kummer local lifting on the arbitrary scheme U; the unit has no general root-transition exactness statement."
+   },
+   {
+    "node": "lem-pur-etale-proetale-cover",
+    "why": "An etale lifting cover is a cover for the pro-etale topology used here."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Etale lifting maps are weakly etale, so they compose to objects of the given site."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Weakly etale composites ensure the lifting schemes remain objects over T."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+    "why": "Converts sectionwise local root lifts to categorical epis and converts limit epis back to local lifts."
+   },
+   {
+    "node": "det-pe-replete-epimorphism",
+    "why": "The general sequential-limit projection theorem supplies a compatible infinite root lift; it is a generic pro-etale topos tool."
+   },
+   {
+    "node": "def-pur-sheaf-inverse-limit",
+    "why": "The definition gives the componentwise compatible-tuple description."
+   },
+   {
+    "node": "def-pur-roots-of-unity-sheaf",
+    "why": "The root equation and power transitions are the definitions needed for the explicit kernel shift."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Uses ordinary sheaf tensor construction rather than any derived tensor or flatness result."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Its extension universal property extends the balanced presheaf maps and tests their composites."
+   },
+   {
+    "node": "def-weil-pbc-constant-sheaf",
+    "why": "The scalar ring is sheafification of a constant ring presheaf."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Locally represents a section of the constant residue ring by a residue, to check balancing with an integer lift."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "det-pe-replete-epimorphism",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-roots-of-unity-sheaf",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-a05808a64",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-a05808a64 (reviewer sub-agent of L); spot-checked: Read all six steps of the item and every cited statement; the statement, stmt_deps and blueprint are byte-identical to the base, and the item is still unsplit in live and side-live. Step 1: Kummer on U (lem-amb-kummer-any-base, ℓ invertible on U) gives an étale cover with v^ℓ=u, and v^{ℓ^{s+1}}=1 puts v in M_{s+1}. The cover is pro-étale and its members are weakly étale over T. Repleteness (det-pe-replete-epimorphism) and the set-sheaf epi criterion then make p_r epi and locally surjective. Step 2: checked y_s=x_{s+r}, y_s^{ℓ^s}=x_r=1, (ℓ^r y)_s=x_s, the converse, and naturality. Steps 3-6: α is Z_T-balanced because Z_ℓ→B factors through Z/ℓ^r. Lift differences ℓ^r y give y⊗ℓ^r b=0. For R_r-balancing, c is locally a constant residue (00WK lemma) and an integer lift is used. Both composites are the identity on pure tensors, and uniqueness of the extension through sheafification makes them equal as sheaf maps. No flatness is used. Edge cases: separably closed point with B=F_ℓ and r=2, B=0, T empty, r=1. Accepted tool_uses: det-pe-replete-epimorphism, lem-weil-pbc-site-sheafification-sections-local, det-pe-morphisms-etale-comparison(1); the Kummer and epi-criterion units are in sk-prop-an's uses. Acyclic; no SGA; Stacks tags 03PL/0990/03EK/03CY/00WK/03DB/03CO all resolve. No whole-item duplicate: lem-pur-twist-sheaf-locally-free(2) is over the completed Ẑ_ℓ, only for Z/ℓ^r, and has no normalized inverse. Advisory: lem-pur-twist-root-transitions already states that root transitions are epi; step 1's correct, on-route re-derivation is kept. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RootTowerFiniteTensor",
+  "declaration": "AlgebraicGeometry.Scheme.rootTower_finite_tensor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.rootTowerProjection",
+   "AlgebraicGeometry.Scheme.rootTowerTensorScalar",
+   "AlgebraicGeometry.Scheme.rootTowerResidueScalar",
+   "AlgebraicGeometry.Scheme.rootTowerTensor",
+   "AlgebraicGeometry.Scheme.rootTowerTensorPure",
+   "AlgebraicGeometry.Scheme.rootTower_finite_tensor"
+  ],
+  "file": "lean/Sheaf/Paper/RootTowerFiniteTensor.lean",
+  "statement": "theorem rootTower_finite_tensor (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (hT : ∀ x : T, IsUnit (l : T.presheaf.stalk x)) (r : ℕ) : Sheaf.IsLocallySurjective (rootTowerProjection T l r) ∧ (∀ (U : T.ProEt) (x : (purTwistZlOne T l).obj.obj (op U)), (rootTowerProjection T l r).hom.app (op U) x = 0 ↔ ∃ y : (purTwistZlOne T l).obj.obj (op U), l ^ (r + 1) • y = x) ∧ (∃ d : ∀ U : T.ProEt, {x : (purTwistZlOne T l).obj.obj (op U) // (rootTowerProjection T l r).hom.app (op U) x = 0} → (purTwistZlOne T l).obj.obj (op U), (∀ (U : T.ProEt) (x : {x : (purTwistZlOne T l).obj.obj (op U) // (rootTowerProjection T l r).hom.app (op U) x = 0}) (s : ℕ), (proEtaleRootsOfUnityInclusion T (l ^ (s + 1))).hom.app (op U) ((rootTowerProjection T l s).hom.app (op U) (d U x)) = (proEtaleRootsOfUnityInclusion T (l ^ (s + r + 2))).hom.app (op U) ((rootTowerProjection T l (s + r + 1)).hom.app (op U) x.val)) ∧ (∀ (U : T.ProEt) (x : {x : (purTwistZlOne T l).obj.obj (op U) // (rootTowerProjection T l r).hom.app (op U) x = 0}), l ^ (r + 1) • d U x = x.val) ∧ ∀ (U V : T.ProEt) (f : V ⟶ U) (x : {x : (purTwistZlOne T l).obj.obj (op U) // (rootTowerProjection T l r).hom.app (op U) x = 0}) (y : {y : (purTwistZlOne T l).obj.obj (op V) // (rootTowerProjection T l r).hom.app (op V) y = 0}), y.val = (purTwistZlOne T l).obj.map f.op x.val → d V y = (purTwistZlOne T l).obj.map f.op (d U x)) ∧ ∀ (B : Type (u + 1)) [CommRing B] [Algebra ℤ_[l] B] (hB : ((l ^ (r + 1) : ℕ) : B) = 0), ∃ e : rootTowerTensor T l B ≅ tateFiniteLine T l B r (rootTowerResidueScalar l r B hB), (∀ (U : T.ProEt) (b : (tateFiniteCoefficient T B).obj.obj (op U)) (x : (purTwistZlOne T l).obj.obj (op U)), e.hom.val.app (op U) (rootTowerTensorPure T l B U b x) = tateFiniteTensor T l B r (rootTowerResidueScalar l r B hB) U b ((rootTowerProjection T l r).hom.app (op U) x)) ∧ ∀ (U : T.ProEt) (a : (proEtaleRootsOfUnitySheaf T (l ^ (r + 1))).obj.obj (op U)) (b : (tateFiniteCoefficient T B).obj.obj (op U)) (S : Sieve U) (_hS : S ∈ ProEt.topology T U) (x : ∀ (V : T.ProEt) (f : V ⟶ U), S f → (purTwistZlOne T l).obj.obj (op V)) (_hx : ∀ (V : T.ProEt) (f : V ⟶ U) (hf : S f), (rootTowerProjection T l r).hom.app (op V) (x V f hf) = (proEtaleRootsOfUnitySheaf T (l ^ (r + 1))).obj.map f.op a) (h : (rootTowerTensor T l B).val.obj (op U)), (∀ (V : T.ProEt) (f : V ⟶ U) (hf : S f), (rootTowerTensor T l B).val.map f.op h = rootTowerTensorPure T l B V ((tateFiniteCoefficient T B).obj.map f.op b) (x V f hf)) ↔ h = e.inv.val.app (op U) (tateFiniteTensor T l B r (rootTowerResidueScalar l r B hB) U b a)",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1e59868a",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 3e715d43: module byte-identical (sha256 e638b2d7…); only stmt_deps changed, replacing det-def-sp-tate-twist-locally-free → def-pur-finite-tate-line-signed-comparison (existing:true owner of tateFiniteCoefficient/Scalar/Line/Tensor, unconditional in A) and lem-pur-isomorphism-inverse-image-tensor-hom → def-pur-inverse-image-tensor-hom-sections (owns purScalarSection); other nine retained, all definition nodes; node vs side-live differs only in lean/stmt_deps; no live landing for the item. Maths re-checked: r+1 exponent encoding consistent, limit.π projection, IsLocallySurjective, kernel iff, shift d with index s+r+1 plus division and naturality, constant Z_l action via completion map, arbitrary B : Type (u+1) with ℓ^(r+1)B=0 and no flatness, unique ZMod→B scalar, e.hom pinned on pure tensors, inverse = unique gluing over every covering sieve/lift family. Edge cases r=0, ℓ=2, B=0, nonflat B, empty scheme. Docstrings carry source and blueprint and all 6 steps; sorry only; lean.statement verbatim. No files changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261023T151808-L-409983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

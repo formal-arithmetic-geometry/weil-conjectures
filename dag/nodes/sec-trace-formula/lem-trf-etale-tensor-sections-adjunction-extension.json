@@ -1,0 +1,285 @@
+{
+ "id": "lem-trf-etale-tensor-sections-adjunction-extension",
+ "kind": "statement",
+ "title": "Adjunction construction of maps from etale tensor sections",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $T_{\\mathrm{et}}$ its small etale site [def-weil-pbc-etale-site], and $\\mathcal O_{\\mathrm{et}}(u:V\\to T)=\\Gamma(V,\\mathcal O_V)$ its structure-ring sheaf. Use the Zariski site [def-sc-zariski-site] and presheaves of modules [def-weil-presheaf-modules-sheafification]. Let $M$ be any Zariski $\\mathcal O_T$-module and $G$ any sheaf of $\\mathcal O_{\\mathrm{et}}$-modules [def-weil-sheaf-of-modules-category]. Let $P_M$ be the module presheaf $P_M(u)=\\Gamma(V,u^*M)$ with the unit-normalized restrictions [lem-sc-etale-qcoherent-presheaf-functorial] and pullback [def-pc-module-pullback]. Write $G_u(A)=G(A\\hookrightarrow V\\xrightarrow{u}T)$ for the Zariski module on $V$, for $A\\subseteq V$ open, and $G_T(W)=G(W\\hookrightarrow T)$. For $i_W:W\\hookrightarrow T$, write $\\kappa_W:M|_W\\xrightarrow{\\sim}i_W^*M$ for the unit-compatible comparison [lem-weil-pbc-open-immersion-module-pullback-restriction]. Given an $\\mathcal O_T$-linear map $\\beta:M\\to G_T$, define $b_u:M\\to u_*G_u$ on each open $W\\subseteq T$ by\n$$b_{u,W}(m)=G(V_W\\to W)(\\beta_W(m)),\\qquad V_W=u^{-1}W.$$\nLet $a_u:u^*M\\to G_u$ be the adjoint of $b_u$ under the scheme-module adjunction [lem-pc-module-pullback-adjunction], and let $\\Theta_{M,G}(\\beta)_u=\\Gamma(V,a_u)$. Then these components form a morphism of module presheaves $\\Theta_{M,G}(\\beta):P_M\\to G$ and satisfy\n$$\\Theta_{M,G}(\\beta)_{i_W}\\circ\\Gamma(W,\\kappa_W)=\\beta_W$$\nfor every open $W$. The assignment is natural in $M$ and $G$: for $h:M'\\to M$ and a module map $k:G\\to G'$,\n$$\\Theta_{M',G'}(k_T\\circ\\beta\\circ h)=k\\circ\\Theta_{M,G}(\\beta)\\circ P_h,$$\nwhere $(P_h)_u=\\Gamma(V,u^*h)$ and $k_T$ is restriction to Zariski opens [lem-sc-etale-tensor-sections-map-naturality]. No quasi-coherence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 070S, lemma-compare-sites, omitted proof of (2): extension of a module map from Zariski opens, old tensor-sections split steps 3-6 (agent-supplied intermediate lemma; the source omits the small-site proof)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-etale-tensor-sections-map-naturality",
+  "def-sc-zariski-site",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-gabber-h0-zariski-constructions",
+  "new-etale-tensor-open-section-iso"
+ ],
+ "proof": [
+  {
+   "text": "Construct b_u explicitly on every open using G on the base-change arrow after beta. The scalar square is the naturality of the scheme structure map and the formula for morphismRestrict_appTop, conjugated by restrictFunctorΓ. Naturality on opens follows from beta naturality, G functoriality and morphismRestrict_homOfLE. Transpose b_u with the specified tensor-pullback adjunction and transport its top-open sections along tensorExtensionTopIso. Module-map linearity and semilinearity of G prove component linearity; the ring transport cancels because the top-open comparison is an isomorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-etale-site",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-gabber-h0-zariski-constructions"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "agent",
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070S, lemma-compare-sites (2), omitted small-site proof; agent-supplied adjunction calculation using Tag 0096, sheaves.tex, lemma-adjoint-pullback-pushforward-modules."
+   }
+  },
+  {
+   "text": "For a triangle f : Vprime to V, u : V to T and v=f composed with u, construct d_f explicitly by G on restricted scheme morphisms. The same scalar square and restriction square make this a Zariski module map. Extensionality on every open, functoriality of G and morphismRestrict_comp prove b_u followed by u_*d_f equals b_v followed by the inverse pushforward-composition identification.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "agent",
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070S, lemma-compare-sites (2), omitted small-site proof; agent-supplied adjunction calculation using Tag 0096, sheaves.tex, lemma-adjoint-pullback-pushforward-modules."
+   }
+  },
+  {
+   "text": "The unit equation for conjugateEquiv identifies the Hom transpose under the composite adjunction of c followed by a_v with b_v followed by inverse pushforward composition. Injectivity of the u-adjunction Hom equivalence and step 2 show that the f-transpose of c followed by a_v is a_u followed by d_f. Evaluate at the whole open and simplify the unit restriction there. The top-open isomorphisms commute with f by morphismRestrict_ι and cancellation of their underlying scheme isomorphisms. Functoriality of G now gives the presheaf naturality square. Assemble the explicitly additive components into a natural transformation.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "agent",
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070S, lemma-compare-sites (2), omitted small-site proof; agent-supplied adjunction calculation using Tag 0096, sheaves.tex, lemma-adjoint-pullback-pushforward-modules."
+   }
+  },
+  {
+   "text": "For an open W, use the generic unit_leftAdjointUniq_hom_app equation for the comparison defining tensorOpenSectionIso. Naturality with the equality W.ι preimage W = top and the ordinary restriction-unit formula show that the inverse open-section comparison is the tensor unit on W followed by this equality transport. Naturality of a_W and the adjunction equation then replace its value by b_W. The remaining three arrows in the small etale site compose to tensorExtensionBaseOpenIso.inv: their underlying arrows are equal after composing with the monomorphism W.ι. Applying G gives the required open normalization. This directly proves the unit calculation, without the separate open-restriction compatibility theorem.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "new-etale-tensor-open-section-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "agent",
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070S, lemma-compare-sites (2), omitted small-site proof; agent-supplied adjunction calculation using Tag 0096, sheaves.tex, lemma-adjoint-pullback-pushforward-modules."
+   }
+  },
+  {
+   "text": "Naturality of a module-presheaf morphism k on the base-change arrow proves b(k_T beta h)=h followed by b(beta) followed by u_*k_u. Apply the two naturality identities of homEquiv.symm and then take top-open sections. Naturality of k on the top-open isomorphism gives the asserted equality in both variables. This is proved componentwise, so the separate tensor-sections-map naturality theorem is unnecessary. Empty schemes, empty opens, zero modules and identity arrows satisfy the same functorial and unit identities.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "by": "agent",
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 070S, lemma-compare-sites (2), omitted small-site proof; agent-supplied adjunction calculation using Tag 0096, sheaves.tex, lemma-adjoint-pullback-pushforward-modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-pbc-gabber-h0-zariski-constructions",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "new-etale-tensor-open-section-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 070S, lemma-compare-sites (2), omitted small-site proof; agent-supplied adjunction calculation using Tag 0096, sheaves.tex, lemma-adjoint-pullback-pushforward-modules. Formalized by W3 using explicit sectionwise maps and the generic left-adjoint comparison unit equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a Zariski module M to restriction of an etale module sheaf G extends naturally to maps Gamma V u pullback M to G V by the scheme module adjunction",
+   "results": "8 hits: ModuleCat.Tilde.res_apply, AlgebraicGeometry.Scheme.Modules.Hom.app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrict, ModuleCat.Tilde.res_const. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:39-126, Sheaf/PushforwardContinuous.lean:257-285 and AlgebraicGeometry/Modules/Sheaf.lean:170-190,415-454. They give individual adjunctions, not sitewise naturality of the displayed transposed construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"homEquiv\"",
+   "results": "12 hits: PresheafOfModules.unitHomEquiv, PresheafOfModules.unitHomEquiv_apply_coe, PresheafOfModules.freeHomEquiv, PresheafOfModules.freeAdjunction_homEquiv, PresheafOfModules.ModuleColimit.homEquiv', PresheafOfModules.ModuleColimit.homEquiv, PresheafOfModules.colimitAdjunction_homEquiv, PresheafOfModules.ModuleColimit.homEquiv_naturality_left. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:39-126, Sheaf/PushforwardContinuous.lean:257-285 and AlgebraicGeometry/Modules/Sheaf.lean:170-190,415-454. They give individual adjunctions, not sitewise naturality of the displayed transposed construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|adjunction",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:39-126, Sheaf/PushforwardContinuous.lean:257-285 and AlgebraicGeometry/Modules/Sheaf.lean:170-190,415-454. They give individual adjunctions, not sitewise naturality of the displayed transposed construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend maps from a module on a scheme to an etale sheaf by transposing maps on every etale scheme using pullback pushforward adjunction",
+   "results": "8 hits: TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Sheaf.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:39-126, Sheaf/PushforwardContinuous.lean:257-285 and AlgebraicGeometry/Modules/Sheaf.lean:170-190,415-454. They give individual adjunctions, not sitewise naturality of the displayed transposed construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme module adjunction constructs a natural transformation from the presheaf of pullback sections on the small etale site given maps from M to G on Zariski opens",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.mapPresheaf_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.PullbackConstruction.adjunction. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:39-126, Sheaf/PushforwardContinuous.lean:257-285 and AlgebraicGeometry/Modules/Sheaf.lean:170-190,415-454. They give individual adjunctions, not sitewise naturality of the displayed transposed construction.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction|homEquiv_naturality",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:166-190, 423-454. Generic adjunctions do not state the sitewise compatibility for the pullback-sections presheaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps from pullback section presheaves on the small etale site are constructed by transposing Zariski module maps and are natural in the etale object",
+   "results": "SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; TopCat.Presheaf.pullback; AlgebraicGeometry.Scheme.Modules.pullback; TopCat.Presheaf.stalkPullbackHom; SheafOfModules.pullbackObjUnitToUnit; TopCat.Presheaf.pullbackObjObjOfImageOpen; PresheafOfModules.sectionsMap; read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:166-190, 423-454 and Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:39-126. Generic adjunctions do not state the sitewise compatibility for the pullback-sections presheaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.Modules\", \"Adjunction\"",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:166-190, 423-454 and Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:39-126. Generic adjunctions do not state the sitewise compatibility for the pullback-sections presheaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Zariski module map to an etale module sheaf extends to a natural map from pullback sections using scheme module adjunction",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.app; ModuleCat.Tilde.res_apply; ModuleCat.Tilde.toOpen; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.Hom.mapPresheaf; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.Hom; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l; read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:166-190, 423-454 and Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:39-126. Generic adjunctions do not state the sitewise compatibility for the pullback-sections presheaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left adjoint to restriction from small etale module sheaves to Zariski module sheaves is sheafification of the presheaf of global sections of scheme pullbacks",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.sheafificationCompPullback; PresheafOfModules.sheafificationAdjunction; PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification; SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.sheafificationAdjunction_homEquiv_apply; read Mathlib/AlgebraicGeometry/Modules/Sheaf.lean:166-190, 423-454 and Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:39-126. Generic adjunctions do not state the sitewise compatibility for the pullback-sections presheaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-zariski-etale-tensor-sections",
+  "date": "2026-10-22",
+  "group": "Q118"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C) in the specialization chain below lem-trf-local-term-locality: Zariski and small etale quasi-coherent modules agree functorially. Historical imported ancestry retained. More precisely: the change-of-topology tensor pullback used in the section-algebra comparison; Stacks 070S(2). Auxiliary omitted proof of (2): extension of a module map from Zariski opens, old tensor-sections split steps 3-6.",
+   "via": [
+    "lem-trf-zariski-etale-tensor-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-tensor-sections-adjunction-extension",
+  "worker": "stage1",
+  "summary": "Supplied the omitted extension argument in five steps using existing nodes only. Constructed the sectionwise maps, compared their adjoints using the explicitly normalized composition unit, and verified the open normalization and both-variable naturality. Statement and statement dependencies retained. No quasi-coherence used.",
+  "blueprint": "Historical ancestry through lem-trf-local-term-locality retained: this is the change-of-topology tensor-section auxiliary input below the earlier section-algebra descent chain, not a new proof of a contracting-correspondence assertion. Steps realize Stacks 070S(2), omitted small-site proof, extension of module maps. Latest blueprint and current unit read; no equivalent blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic scheme-module Hom adjunction supplies the transpose and its injectivity and two-variable naturality; this auxiliary change-of-topology argument has no unit-local replacement."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-presheaf-functorial",
+    "why": "Generic unit-normalized composition and the pullback-sections restriction formula are used to compute the naturality square."
+   },
+   {
+    "node": "lem-sc-etale-tensor-sections-map-naturality",
+    "why": "Generic naturality of tensor-section restrictions makes P_h a presheaf morphism; no trace-formula step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-9054a235b",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-9054a235b (reviewer sub-agent of L); spot-checked: I read the item in full: statement unchanged against live, 5 steps, no new nodes. Source: Stacks 070S (descent.tex, lemma-compare-sites) omits the proof of (2), and proof_origin correctly marks the argument as agent-supplied via Tag 0096. Step 1: G_u is a Zariski module because an open A of V gives an étale object A→V→T and Zariski covers are étale covers; b_u commutes with restrictions and is u^♯-semilinear, matching the u_* action in lem-pc-module-pullback-adjunction; a_u is the transpose with u_*a_u∘η=b_u. Step 2: d_g, and G(V'_W→V_W)G(V_W→W)=G(V'_W→W) gives u_*d_g∘b_u=b_v, with u_*g_*=v_* quoted from lem-sc-etale-qcoherent-presheaf-functorial. Step 3: I checked the transposes symbol by symbol. The first is v_*a_v∘η^v=b_v by the c_{g,u} unit normalization, the second is b_v by step 2; injectivity of the Hom bijection then gives the naturality square, with ρ_g(s)=c(g^*s) in the right orientation. Step 4: κ(m)=η(m) on the base open W, so Θ_{i_W}κ=G(id)β_W=β_W. Step 5: naturality of k plus two-variable naturality of the adjunction, and P_h is a presheaf morphism by lem-sc-etale-tensor-sections-map-naturality. Edge cases checked: empty T, V or W, M=0 or G=0, g=id, non-quasi-coherent M. No cycle: the parent is not in the closure. No duplicate found in the DAG scan. No SGA. Accepted tool_uses: lem-pc-module-pullback-adjunction, lem-sc-etale-qcoherent-presheaf-functorial and lem-sc-etale-tensor-sections-map-naturality, all generic and already stmt_deps. Live and side-live still show the item unsplit, and there is no re-split note."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsAdjunctionExtension",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsAdjunctionExtension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorExtensionOpenFunctor",
+   "AlgebraicGeometry.Scheme.Modules.tensorExtensionZariskiPresheaf",
+   "AlgebraicGeometry.Scheme.Modules.tensorExtensionZariskiRestriction",
+   "AlgebraicGeometry.Scheme.Modules.tensorExtensionTopIso",
+   "AlgebraicGeometry.Scheme.Modules.tensorExtensionBaseOpenIso",
+   "AlgebraicGeometry.Scheme.Modules.tensorExtensionBaseChangeArrow",
+   "AlgebraicGeometry.Scheme.Modules.tensorExtensionZariskiMap",
+   "AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsAdjunctionExtension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsAdjunctionExtension.lean",
+  "statement": "theorem etaleTensorSectionsAdjunctionExtension (T : Scheme.{u}) : ∃ Θ : ∀ (M : T.Modules) (G : _root_.PresheafOfModules.{u} (T.etaleStructurePresheaf ⋙ forget₂ CommRingCat.{u} RingCat.{u})) (hG : Presheaf.IsSheaf T.smallEtaleTopology G.presheaf), (M ⟶ tensorExtensionZariskiRestriction (𝟙 T) G hG) → (etaleTensorSectionsPresheaf M ⟶ G.presheaf), (∀ (M : T.Modules) (G : _root_.PresheafOfModules.{u} (T.etaleStructurePresheaf ⋙ forget₂ CommRingCat.{u} RingCat.{u})) (hG : Presheaf.IsSheaf T.smallEtaleTopology G.presheaf) (β : M ⟶ tensorExtensionZariskiRestriction (𝟙 T) G hG), (∀ U : T.Etale, ∃ b : M ⟶ (pushforward U.hom).obj (tensorExtensionZariskiRestriction U.hom G hG), (∀ (W : T.Opens) (m : Γ(M, W)), b.app W m = G.presheaf.map (tensorExtensionBaseChangeArrow U.hom W).op (β.app W m)) ∧ (∀ s : Γ((tensorPullback U.hom).obj M, ⊤), (Θ M G hG β).app (op U) s = G.presheaf.map (tensorExtensionTopIso U.hom).inv.op ((((Classical.choose (exists_tensorPullbackAdjunction U.hom)).homEquiv M (tensorExtensionZariskiRestriction U.hom G hG)).symm b).app ⊤ s))) ∧ (∀ (U : T.Etale) (r : Γ(U.left, ⊤)) (s : Γ((tensorPullback U.hom).obj M, ⊤)), (Θ M G hG β).app (op U) ((((tensorPullback U.hom).obj M).smul r).hom s) = @SMul.smul ((T.etaleStructurePresheaf ⋙ forget₂ CommRingCat.{u} RingCat.{u}).obj (op U)) (G.obj (op U)) inferInstance r ((Θ M G hG β).app (op U) s)) ∧ (∀ (W : T.Opens) (m : Γ(M, W)), (Θ M G hG β).app (op (Scheme.Etale.mk W.ι)) ((tensorOpenSectionIso T M W).inv m) = G.presheaf.map (tensorExtensionBaseOpenIso T W).inv.op (β.app W m))) ∧ (∀ (M' M : T.Modules) (G G' : _root_.PresheafOfModules.{u} (T.etaleStructurePresheaf ⋙ forget₂ CommRingCat.{u} RingCat.{u})) (hG : Presheaf.IsSheaf T.smallEtaleTopology G.presheaf) (hG' : Presheaf.IsSheaf T.smallEtaleTopology G'.presheaf) (β : M ⟶ tensorExtensionZariskiRestriction (𝟙 T) G hG) (h : M' ⟶ M) (k : G ⟶ G') (U : T.Etale) (s : Γ((tensorPullback U.hom).obj M', ⊤)), (Θ M' G' hG' (h ≫ β ≫ tensorExtensionZariskiMap (𝟙 T) hG hG' k)).app (op U) s = k.app (op U) ((Θ M G hG β).app (op U) (((tensorPullback U.hom).map h).app ⊤ s)))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The module sheaf G is unbundled as its actual PresheafOfModules and sheaf-condition proof. Theta is an additive natural transformation with explicit componentwise linearity, equivalently a module-presheaf morphism. Its components are pinned to the specified adjunction transpose of the sectionwise formula for b, including canonical top-open transports. No quasi-coherence assumption. All helpers are explicit constructions for this same notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d131493f0",
+  "group": "NP",
+  "result": "pass",
+  "note": "Every node clause is matched by the Lean: G is an arbitrary module sheaf given as its PresheafOfModules plus the sheaf-condition proof; b_u is pinned sectionwise by G(V_W→W)(β_W m); a_u is the transpose under exists_tensorPullbackAdjunction, which is unique because the recorded dependency pins the unit on every open and section; Θ is a module-presheaf morphism (natural-transformation type plus Γ(V,O_V)-linearity clause), its components are fully pinned, it satisfies the open normalization through tensorOpenSectionIso (Γ(κ_W)), and it is natural in M and G. No quasi-coherence, finiteness, non-emptiness or universe restriction; empty and zero edge cases covered. The added stmt_deps (gabber-h0 constructions, new-etale-tensor-open-section-iso) are landed, used and acyclic. The §1(B) dependency module restrictFunctorIsoTensorPullback(_unit) correctly states κ and its unit equation for the project's tensorPullback; the node previously had no lean record. Pilot gates met: helpers are real constructions, only the two theorems are sorry, source and blueprint docstrings present, no pro-étale substitute, no SGA. Advisory only: the item imports TensorPullbackOpenRestriction without using it (H9); G_T overlaps def-sfb zariskiEtaleModuleRestriction up to a canonical iso. No file changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T083417-L-2345871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

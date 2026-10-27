@@ -1,0 +1,228 @@
+{
+ "id": "lem-trf-simplicial-abelian-descending-correction",
+ "kind": "statement",
+ "title": "Descending degeneracy corrections preserve lower faces and realize upper faces",
+ "statement": "Let $G:\\Delta^{\\mathrm{op}}\\to\\mathrm{Ab}$ be a simplicial abelian group with face homomorphisms $d_i$ and degeneracy homomorphisms $s_i$ [def-weil-pbc-simplicial-object]. Let $n\\geq2$, $0\\leq k\\leq n$, and let $a_i\\in G_{n-1}$ for $0\\leq i\\leq n$, $i\\ne k$, satisfy $d_i a_j=d_{j-1}a_i$ for $i<j$ with $i,j\\ne k$. Suppose $v\\in G_n$ satisfies $d_iv=a_i$ for all $i<k$. Define $w_n=v$ and, in descending order for $n\\geq r>k$, $$b_r=a_r-d_rw_r,\\qquad w_{r-1}=w_r+s_{r-1}b_r.$$ For every $k\\leq r\\leq n$ one has $d_iw_r=a_i$ whenever $i<k$ or $r<i\\leq n$. In addition, at every $r>k$, $d_i b_r=0$ and $d_i(s_{r-1}b_r)=0$ for $i<k$, while $d_{i-1}b_r=0$ and $d_i(s_{r-1}b_r)=0$ for $r<i\\leq n$, and $d_r(s_{r-1}b_r)=b_r$. When $k=n$ the sequence consists only of $w_n=v$; when $k=0$ all lower-face assertions are empty.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, third paragraph (lines 5788-5803): the descending upper-face correction induction and preservation of the previously fixed lower faces, specialized additively."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of the face operators, applying the contravariant functor $G$ to the simplex face-face identity gives $d_i d_j=d_{j-1}d_i$ for $i<j$. All these operators are homomorphisms, since $G$ takes values in $\\mathrm{Ab}$, so they preserve zero, sums and differences.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "lem-weil-pbc-simplex-face-face-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, third paragraph (lines 5788-5803): the descending upper-face correction induction and preservation of the previously fixed lower faces, specialized additively."
+   }
+  },
+  {
+   "text": "Induct downwards on $r$ from $n$ to $k$, with invariant $P(r)$: $d_iw_r=a_i$ for $i<k$ and for $r<i\\leq n$. At $r=n$ the upper range is empty, and the lower assertions are exactly the hypothesis on $v=w_n$. The recursion defines the finitely many remaining $w_r$ because $r>k\\geq0$ makes $s_{r-1}:G_{n-1}\\to G_n$ a valid operator.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, third paragraph (lines 5788-5803): the descending upper-face correction induction and preservation of the previously fixed lower faces, specialized additively."
+   }
+  },
+  {
+   "text": "Assume $P(r)$ with $r>k$ and set $b_r=a_r-d_rw_r$. For $i<k$ we have $i<r$ and both $i,r\\ne k$; compatibility and Step 1 give $$d_i b_r=d_i a_r-d_i d_rw_r=d_{r-1}a_i-d_{r-1}d_iw_r=0.$$ For $r<i\\leq n$ both $r,i\\ne k$; the same compatibility with the pair $(r,i)$ gives $$d_{i-1}b_r=d_{i-1}a_r-d_{i-1}d_rw_r=d_ra_i-d_rd_iw_r=0.$$ These are exactly the asserted defect vanishings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, third paragraph (lines 5788-5803): the descending upper-face correction induction and preservation of the previously fixed lower faces, specialized additively."
+   }
+  },
+  {
+   "text": "Use the mixed identities with degeneracy index $r-1$. For $i<k$, necessarily $i<r-1$, so $d_i(s_{r-1}b_r)=s_{r-2}(d_i b_r)=0$. This case occurs only when $r\\geq2$; if $r=1$, then $k=0$ and the lower range is empty, so $s_{-1}$ is never used. For $r<i\\leq n$, $i>(r-1)+1$, hence $d_i(s_{r-1}b_r)=s_{r-1}(d_{i-1}b_r)=0$. Finally the adjacent identity gives $d_r(s_{r-1}b_r)=b_r$. Here we used Step 3 and preservation of zero by homomorphisms.",
+   "uses": [
+    "lem-trf-simplicial-mixed-face-degeneracy-identities"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, third paragraph (lines 5788-5803): the descending upper-face correction induction and preservation of the previously fixed lower faces, specialized additively."
+   }
+  },
+  {
+   "text": "For $w_{r-1}=w_r+s_{r-1}b_r$, Step 4 and additivity give $d_iw_{r-1}=a_i+0=a_i$ for $i<k$ and for $i>r$, while $$d_rw_{r-1}=d_rw_r+b_r=d_rw_r+(a_r-d_rw_r)=a_r.$$ Thus $P(r-1)$ holds. Finite descending induction proves all $P(r)$, and Steps 3 and 4 prove all additional assertions at each correction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, third paragraph (lines 5788-5803): the descending upper-face correction induction and preservation of the previously fixed lower faces, specialized additively."
+   }
+  },
+  {
+   "text": "If $k=n$, there are no correction indices and only $w_n=v$ remains, with the asserted invariant supplied by the hypothesis. If $k=0$, all lower-face ranges in the preceding argument are empty; the upper-face calculation and the adjacent identity still apply, including the final correction $r=1$ using $s_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, third paragraph (lines 5788-5803): the descending upper-face correction induction and preservation of the previously fixed lower faces, specialized additively."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-simplex-face-face-identity",
+  "lem-trf-simplicial-mixed-face-degeneracy-identities"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08NZ, lemma-simplicial-group-kan, proof, third paragraph (lines 5788-5803): the descending upper-face correction induction and preservation of the previously fixed lower faces, specialized additively."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a simplicial abelian group descending degeneracy corrections prescribe upper faces while preserving already fixed lower faces",
+   "results": "{\"t\": \"2026-10-22T06:44:48Z\", \"tool\": \"leanfinder\", \"query\": \"In a simplicial abelian group descending degeneracy corrections prescribe upper faces while preserving already fixed lower faces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.P_σ.σ\", \"SimplexCategoryGenRel.P_δ.δ\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\", \"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_σ\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.of_succ\", \"AlgebraicTopology.DoldKan.HigherFacesVanish\", \"SimplexCategory.factor_δ_spec\"], \"digest\": \"ea8f0d40174a7010\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures and pinned SimplicialObject/Basic.lean:115-199 and SimplicialSet/KanComplex.lean:35-60. The mixed identities and generator normal forms do not assert a correction recursion; hornFilling assumes KanComplex. DoldKan/Faces.lean:43-50,160-162 HigherFacesVanish.induction only kills zero-valued upper faces of a morphism using Hσ; it neither prescribes arbitrary compatible elements nor preserves prescribed lower faces, so it is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"δ_comp_σ\"",
+   "results": "{\"t\": \"2026-10-22T06:44:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"δ_comp_σ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.δ_comp_σ_self\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ_assoc\", \"CategoryTheory.SimplicialObject.δ_comp_σ_self\", \"CategoryTheory.SimplicialObject.δ_comp_σ_succ\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_self'\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ'\"], \"digest\": \"9b40362f94d2db61\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures and pinned SimplicialObject/Basic.lean:115-199 and SimplicialSet/KanComplex.lean:35-60. The mixed identities and generator normal forms do not assert a correction recursion; hornFilling assumes KanComplex. DoldKan/Faces.lean:43-50,160-162 HigherFacesVanish.induction only kills zero-valued upper faces of a morphism using Hσ; it neither prescribes arbitrary compatible elements nor preserves prescribed lower faces, so it is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "descending|horn|correction|fill.*face|face.*fill",
+   "results": "{\"t\": \"2026-10-22T06:44:37Z\", \"tool\": \"grep\", \"query\": \"descending|horn|correction|fill.*face|face.*fill\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures and pinned SimplicialObject/Basic.lean:115-199 and SimplicialSet/KanComplex.lean:35-60. The mixed identities and generator normal forms do not assert a correction recursion; hornFilling assumes KanComplex. DoldKan/Faces.lean:43-50,160-162 HigherFacesVanish.induction only kills zero-valued upper faces of a morphism using Hσ; it neither prescribes arbitrary compatible elements nor preserves prescribed lower faces, so it is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For compatible horn faces in a simplicial abelian group adding s r minus one of a r minus d r w corrects face r and preserves faces below k and above r",
+   "results": "{\"t\": \"2026-10-22T06:44:38Z\", \"tool\": \"leansearch\", \"query\": \"For compatible horn faces in a simplicial abelian group adding s r minus one of a r minus d r w corrects face r and preserves faces below k and above r\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplex with its low faces fixed can have the higher faces corrected in decreasing order by subtracting degenerate face defects",
+   "results": "{\"t\": \"2026-10-22T06:45:08Z\", \"tool\": \"leanfinder\", \"query\": \"A simplex with its low faces fixed can have the higher faces corrected in decreasing order by subtracting degenerate face defects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet.PtSimplex.RelStruct.δ_map_of_gt\", \"SSet.PtSimplex.MulStruct.δ_map_of_gt\", \"SSet.PtSimplex.RelStruct.δ_map_of_lt\", \"SSet.PtSimplex.MulStruct.δ_map_of_lt\", \"SimplexCategoryGenRel.P_δ.δ\", \"SimplexCategoryGenRel.faces.δ\", \"SSet.σ_comp_σ_apply\", \"SSet.δ_comp_δ_apply\"], \"digest\": \"52605f3a3b8943e2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures and pinned SimplicialObject/Basic.lean:115-199 and SimplicialSet/KanComplex.lean:35-60. The mixed identities and generator normal forms do not assert a correction recursion; hornFilling assumes KanComplex. DoldKan/Faces.lean:43-50,160-162 HigherFacesVanish.induction only kills zero-valued upper faces of a morphism using Hσ; it neither prescribes arbitrary compatible elements nor preserves prescribed lower faces, so it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a simplicial abelian group descending degeneracy corrections prescribe upper faces while preserving already fixed lower faces",
+   "results": "{\"t\": \"2026-10-23T20:06:58Z\", \"tool\": \"leanfinder\", \"query\": \"In a simplicial abelian group descending degeneracy corrections prescribe upper faces while preserving already fixed lower faces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.DoldKan.HigherFacesVanish\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_σ\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.of_succ\", \"SimplexCategoryGenRel.P_δ.δ\", \"SimplexCategory.factor_δ\"], \"digest\": \"a7172f7fc9a7258d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures and SimplicialObject/Basic.lean:115-190 and DoldKan/Faces.lean:43-50,160-162. Mixed identities are inputs only. HigherFacesVanish.induction eliminates zero-valued high faces, not arbitrary compatible targets with lower-face preservation and all stated defect equalities; it is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SimplicialObject\", \"δ_comp_σ\"",
+   "results": "{\"t\": \"2026-10-23T20:06:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"SimplicialObject\\\", \\\"δ_comp_σ\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.δ_comp_σ_self\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ_assoc\", \"CategoryTheory.SimplicialObject.δ_comp_σ_self\", \"CategoryTheory.SimplicialObject.δ_comp_σ_succ\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_self'\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ'\"], \"digest\": \"9b40362f94d2db61\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures and SimplicialObject/Basic.lean:115-190 and DoldKan/Faces.lean:43-50,160-162. Mixed identities are inputs only. HigherFacesVanish.induction eliminates zero-valued high faces, not arbitrary compatible targets with lower-face preservation and all stated defect equalities; it is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "descending|horn|correction|fill.*face|face.*fill",
+   "results": "{\"t\": \"2026-10-23T20:06:59Z\", \"tool\": \"grep\", \"query\": \"descending|horn|correction|fill.*face|face.*fill\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures and SimplicialObject/Basic.lean:115-190 and DoldKan/Faces.lean:43-50,160-162. Mixed identities are inputs only. HigherFacesVanish.induction eliminates zero-valued high faces, not arbitrary compatible targets with lower-face preservation and all stated defect equalities; it is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For compatible horn faces in a simplicial abelian group adding the degeneracy of the face defect corrects the upper faces in descending order",
+   "results": "{\"t\": \"2026-10-23T20:06:59Z\", \"tool\": \"leansearch\", \"query\": \"For compatible horn faces in a simplicial abelian group adding the degeneracy of the face defect corrects the upper faces in descending order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.δ_comp_σ_of_le_assoc\", \"SSet.δ_comp_σ_succ_apply\", \"SimplexCategory.δ_comp_σ_of_le_assoc\", \"SSet.δ_comp_σ_self_apply\", \"SimplexCategory.δ_comp_σ_succ\", \"CategoryTheory.SimplicialObject.δ_comp_σ_of_le_assoc\", \"SimplexCategory.δ_comp_σ_of_le\", \"CategoryTheory.SimplicialObject.δ_comp_σ_self'_assoc\"], \"digest\": \"405adb34704d80a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures and SimplicialObject/Basic.lean:115-190 and DoldKan/Faces.lean:43-50,160-162. Mixed identities are inputs only. HigherFacesVanish.induction eliminates zero-valued high faces, not arbitrary compatible targets with lower-face preservation and all stated defect equalities; it is not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simplex with its low faces fixed can have the higher faces corrected in decreasing order by subtracting degenerate face defects",
+   "results": "{\"t\": \"2026-10-23T20:07:01Z\", \"tool\": \"leanfinder\", \"query\": \"A simplex with its low faces fixed can have the higher faces corrected in decreasing order by subtracting degenerate face defects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.P_δ.δ\", \"SSet.PtSimplex.RelStruct.δ_map_of_gt\", \"SSet.PtSimplex.MulStruct.δ_map_of_gt\", \"SSet.PtSimplex.RelStruct.δ_map_of_lt\", \"SimplexCategoryGenRel.faces.δ\", \"SSet.PtSimplex.MulStruct.δ_map_of_lt\", \"SSet.PtSimplex.MulStruct.δ_castSucc_castSucc_map\", \"SSet.PtSimplex.MulStruct.δ_succ_castSucc_map\"], \"digest\": \"15a0b4438088ccf6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures and SimplicialObject/Basic.lean:115-190 and DoldKan/Faces.lean:43-50,160-162. Mixed identities are inputs only. HigherFacesVanish.induction eliminates zero-valued high faces, not arbitrary compatible targets with lower-face preservation and all stated defect equalities; it is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simplicial-abelian-horn-filling",
+  "date": "2026-10-22",
+  "group": "Q45"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Direct simplicial abelian-group input: termwise surjective quasi-isomorphism has boundary lifting (Stacks 08P1). In the proof of Stacks 08P1, the invocation of the simplicial-group Kan lemma to fill all faces except one (08NZ). Separate argument in Stacks 08NZ: descending correction with lower- and upper-face preservation (old proof Steps 4--7).",
+   "via": [
+    "lem-trf-simplicial-abelian-horn-filling",
+    "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-simplicial-abelian-descending-correction",
+  "worker": "stage1",
+  "summary": "Expanded the descending induction of Stacks 08NZ into six elementary calculation steps, with both defect vanishings and endpoint index checks. Reused the existing simplex face-face leaf and recorded only the mixed identities as one new Mathlib leaf. Statement unchanged.",
+  "blueprint": "Realizes the inherited simplicial-horn-filling subargument of lem-trf-local-term-locality through the existing from/via chain: Stacks 08NZ third paragraph, the descending correction and preservation of lower faces."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-888e2c0f3",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-888e2c0f3 (reviewer sub-agent of L); spot-checked: PASS, no fixes needed. The item's statement is unchanged; it is the additive form of the third paragraph of Stacks 08NZ (lemma-simplicial-group-kan, lines 5788-5803), with z^r = s_{n-r-1}(...) mapped to s_{r-1}b_r. I checked all six steps by hand. Step 1: contravariance of the face-face leaf gives d_i d_j = d_{j-1} d_i for i<j. Step 3, lower range i<k<r: compatibility for the pair (i,r) gives d_i b_r = 0. Step 3, upper range r<i<=n: compatibility for (r,i) gives d_{i-1} b_r = 0; in both ranges neither index equals k. Step 4: i<=r-2 gives d_i s_{r-1} = s_{r-2} d_i, i>r gives d_i s_{r-1} = s_{r-1} d_{i-1}, and d_r s_{r-1} = id. The degrees are typed, and r=1 forces k=0, so s_{-1} is never used. Step 5 is correct additivity, and the k=n and k=0 edge cases are right. I also tested n=2 with k=0,1,2 by hand. The new Mathlib leaf lem-trf-simplicial-mixed-face-degeneracy-identities is Stacks 0167 (2)-(4); I checked its four clauses against SimplicialObject/Basic.lean lines 149 (of_le), 156 (self), 168 (succ) and 186 (of_gt'), one declaration per clause, for an arbitrary category. Its n=1 and n=2 cases are correctly typed. It is strictly smaller than the item and is not a duplicate: a DAG grep found only the simplicial-set d_i s_i = id leaf, presentation and reconstruction nodes that assume the identities, and the comonad-only version. There is no repair note for this item; the parent horn-filling's re-split note is resolved. On live and side-live the item and the sibling prefix-correction are still unsplit, so the delivery is not superseded. No SGA is cited and the blueprint from/via fields are consistent. Advisory: citations.json and searches.jsonl, which the report mentions, are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.SimplicialAbelianDescendingCorrection",
+  "declaration": "CategoryTheory.SimplicialObject.abelianDescendingCorrection_spec",
+  "declarations": [
+   "CategoryTheory.SimplicialObject.abelianDescendingCorrection",
+   "CategoryTheory.SimplicialObject.abelianDescendingDefect",
+   "CategoryTheory.SimplicialObject.abelianDescendingCorrection_spec"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/SimplicialAbelianDescendingCorrection.lean",
+  "statement": "theorem abelianDescendingCorrection_spec (G : SimplicialObject AddCommGrpCat.{u}) {m : ℕ} (k : Fin (m + 3)) (a : (i : Fin (m + 3)) → i ≠ k → G _⦋m + 1⦌) (ha : ∀ (i j : Fin (m + 2)), i ≤ j → ∀ (hi : i.castSucc ≠ k) (hj : j.succ ≠ k), G.δ i (a j.succ hj) = G.δ j (a i.castSucc hi)) (v : G _⦋m + 2⦌) (hv : ∀ (i : Fin (m + 3)), i < k → ∀ (hi : i ≠ k), G.δ i v = a i hi) : abelianDescendingCorrection G k a v (m + 2) = v ∧ (∀ (r : Fin (m + 3)), k ≤ r → ∀ (i : Fin (m + 3)), i < k ∨ r < i → ∀ (hi : i ≠ k), G.δ i (abelianDescendingCorrection G k a v r.val) = a i hi) ∧ (∀ (r : Fin (m + 3)) (hr : k < r), (∀ (i : Fin (m + 2)), i.val < k.val → G.δ i (abelianDescendingDefect G k a v r hr) = 0 ∧ G.δ i.castSucc (G.σ ⟨r.val - 1, by omega⟩ (abelianDescendingDefect G k a v r hr)) = 0) ∧ (∀ (i : Fin (m + 3)), r < i → G.δ ⟨i.val - 1, by omega⟩ (abelianDescendingDefect G k a v r hr) = 0 ∧ G.δ i (G.σ ⟨r.val - 1, by omega⟩ (abelianDescendingDefect G k a v r hr)) = 0) ∧ G.δ r (G.σ ⟨r.val - 1, by omega⟩ (abelianDescendingDefect G k a v r hr)) = abelianDescendingDefect G k a v r hr)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a952c0fc",
+  "group": "Q12",
+  "result": "pass",
+  "note": "First stage-2 delivery (side-live: item split, lean null, no abelianDescending* declaration). Every clause checked against the node and Stacks 08NZ lines 5788-5803 (x^r = w_{n-r}). n>=2 written as degree m+2; a is a family over i != k; ha covers each pair i<j once via castSucc/succ; Nat.rec at m+2-r with guard t<m+2-k computes w_r for k<=r<=n; defect b_r correct; lower/upper vanishing and d_r s_{r-1} b_r = b_r present and true (face-face plus mixed identities; hand-checked n=2, k=0..2); k=n and k=0 handled by the ranges; one free universe u, no extra assumptions. Real defs, sole sorry is the spec theorem, docstrings have source place, blueprint id and six steps, lean.statement verbatim. Consistent with and not a duplicate of the landed PrefixCorrection sibling. Advisory: the second reading is a declared single-worker self-reread. No fixes, not recompiled per instructions."
+ }
+}

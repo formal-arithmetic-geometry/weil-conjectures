@@ -1,0 +1,109 @@
+{
+ "id": "def-weil-boundary-projection-comparison-data",
+ "kind": "definition",
+ "title": "Canonical boundary projection components and comparison square",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $C$ be a Grothendieck abelian closed symmetric monoidal coefficient category with additive tensor product and functorial flat resolutions, and assume the etale, pro-etale and comparison inverse images preserve flat objects. Use ordinary derived categories on small etale and pro-etale sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. For $i:Z\\to T$ write $C_W=\\nu_W^*$, $F_e=Ri_{e,*}$, $F_p=Ri_{p,*}$, $s_e=Li_e^*$, $s_p=Li_p^*$, $\\rho:s_pC_T\\cong C_Zs_e$, and $b:C_TF_e\\to F_pC_Z$ for the canonical pullback square and its ordinary-adjunction direct-image mate [def-weil-boundary-exceptional-comparison-data]. For etale $B$ on $Z$ and $M$ on $T$, put $Q=B\\otimes^Ls_eM$. Let $c_{W;K,L}:C_W(K\\otimes^LL)\\cong C_WK\\otimes^LC_WL$ be the canonical monoidal comparison, with exactly the orientation inverse to the tensor comparison used to define the evaluation-Hom arrow [def-sf-evaluation-hom-site-comparison]. Define $\\pi_e:F_eB\\otimes^LM\\to F_eQ$ and $\\pi_p:F_pC_ZB\\otimes^LC_TM\\to F_p(C_ZB\\otimes^Ls_pC_TM)$ to be the actual ordinary-counit-defined projection components [def-kun-projection-formula-map], on the respective sites.\n\nDefine $h:C_ZQ\\cong C_ZB\\otimes^Ls_pC_TM$ by $c_Z$ followed by $1\\otimes\\rho_M^{-1}$. For isomorphisms $b_B:C_TF_eB\\cong F_pC_ZB$ and $b_Q:C_TF_eQ\\cong F_pC_ZQ$, define $u:C_T(F_eB\\otimes^LM)\\cong F_pC_ZB\\otimes^LC_TM$ by $c_T$ followed by $b_B\\otimes1$, and $v:C_TF_eQ\\cong F_p(C_ZB\\otimes^Ls_pC_TM)$ by $b_Q$ followed by $F_p(h)$. Define the projection-comparison property to mean: $Q$ is bounded below; there exist such $b_B,b_Q$ with hom exactly $b$ at $B,Q$; and\n$$v^{-1}\\circ\\pi_p=C_T(\\pi_e)\\circ u^{-1}.$$\nIn addition, for every isomorphism $e:F_eB\\otimes^LM\\cong F_eQ$ with $e.\\mathrm{hom}=\\pi_e$, there exists an isomorphism $e_p$ with hom $\\pi_p$ and\n$$e_p^{-1}\\circ v=u\\circ C_T(e^{-1}).$$\nThis defines a property of the canonical arrows and a conditional inverse square; it asserts neither that the property holds nor unconditional invertibility.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-boundary-exceptional-comparison-data",
+  "def-sf-evaluation-hom-site-comparison",
+  "def-kun-projection-formula-map"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "Second paragraph: restriction of evaluation through tensor-Hom and exceptional adjunction, and its double-dual compatibility; ordinary-to-pro-etale realization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived etale proetale projection comparison canonical direct image mate tensor square",
+   "results": "8 hits: Algebra.Etale.formallyEtale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd; Algebra.FormallyEtale.instTensorProduct; AlgebraicGeometry.Scheme.Etale; Algebra.Etale.baseChange; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; RingHom.formallyEtale_algebraMap",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project definition without copying its data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary direct image counit projection formula comparison square and inverse square on etale proetale sites",
+   "results": "8 hits: Condensed.profiniteSolidCounit; CategoryTheory.Equivalence.sheafCongr.counitIso; CategoryTheory.Equivalence.sheafCongr.counitIso_inv_app_val_app; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; CategoryTheory.Equivalence.sheafCongr.counitIso_hom_app_val_app; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι; CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing project definition without copying its data."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionComparison|FiniteDualityCompatibility|boundaryDualizingEtaleIso in Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search projection comparison / duality compatibility",
+   "results": "msearch grep: 0 Mathlib hits. Project: exact definitions tensorObject, tensorComparison, tensorTargetIso, etaleProjection, proetaleProjection, projectionSourceIso, projectionTargetIso, ProjectionComparison in Sheaf/Paper/BoundaryProEtaleProjectionComparison.lean:75-187. Upstream has distinct scalar-extension/open projection comparisons. DAG definition-record scan finds no owner of these declarations; theorem lem-weil-boundary-proetale-projection-comparison owns them. Blueprint search projection comparison: two unrelated nodes; duality compatibility: zero.",
+   "date": "2026-10-24",
+   "verdict": "The exact project definition is attached only to a theorem node; add an existing:true definition attachment, not a second definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-boundary-finite-site-realization",
+  "date": "2026-10-24",
+  "group": "Q48"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Second paragraph: restriction of evaluation through tensor-Hom and exceptional adjunction, and its double-dual compatibility; ordinary-to-pro-etale realization.",
+   "via": [
+    "lem-weil-boundary-finite-site-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryProEtaleProjectionComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryComparison.ProjectionComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.tensorObject",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.tensorComparison",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.tensorTargetIso",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.etaleProjection",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.proetaleProjection",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.projectionSourceIso",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.projectionTargetIso",
+   "AlgebraicGeometry.ProEtale.BoundaryComparison.ProjectionComparison"
+  ],
+  "statement": "def ProjectionComparison {Z T : Scheme.{u}} (i : Z ⟶ T)\n    (B : DerivedCategory (Sheaf Z.smallEtaleTopology C))\n    (M : DerivedCategory (Sheaf T.smallEtaleTopology C)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-only attachment requested by the independent return of immutable head 6aea078378b6. The declaration remains in its published module; no construction or theorem is copied or redefined."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2863f38f",
+  "group": "Q48",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2863f38f",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Re-delivery of a6f095b71d2e (passed review, refused at landing because it carried def-weil-boundary-composition-mate, which Q54 had landed). This head drops that node file and cites the landed node, whose declarations include boundaryDualizingEtaleIso/ProIso/ComparisonIso. cmp against a6f0: the Lean module and all three node jsons are byte-identical; the report changes only in its repair and provenance paragraphs. Item statement, proof and proof_deps are unchanged; +7 stmt_deps, all existing; the new existing:true nodes def-weil-boundary-projection-comparison-data and def-weil-finite-duality-compatibility are not present on live or side-live, and no other def node owns these declarations. Spot checks: hypotheses add nothing beyond the node; EtaleHypotheses matches the node; BasicConclusion and EvaluationConclusion clauses complete; AmbientDualityPairing is a Prop with b, e and delta uniquely pinned, so the existentials hide no free data; theta, chi and q^p are pinned; alpha and beta have the node's factor order; edge cases empty Z/T, i=id, n=1. Gates OK. No file changed, no compile run."
+ }
+}

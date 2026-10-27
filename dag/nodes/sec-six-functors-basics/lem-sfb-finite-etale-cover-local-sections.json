@@ -1,0 +1,439 @@
+{
+ "id": "lem-sfb-finite-etale-cover-local-sections",
+ "kind": "statement",
+ "title": "Etale local splitting of a cover over a finite scheme",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $p:Z\\to U$ be a finite morphism of $S$-schemes [def-weil-finite-integral-morphism]. Let $W$ be an algebraic space over $S$ [def-trf-algebraic-space] and let $q:W\\to Z$ be representable, surjective and etale [def-trf-scheme-algebraic-space, def-weil-etale-morphism]. Then there exist an $S$-scheme $U'$, a surjective etale morphism $v:U'\\to U$, and a morphism\n$$\\sigma:Z\\times_UU'\\longrightarrow W\\times_UU'$$\nwhich is a section of $q_{U'}:W\\times_UU'\\to Z\\times_UU'$ [def-pc-fibre-product, lem-trf-space-fibre-products-etale-covers]. Neither flatness of $p$ nor separatedness or quasi-compactness of $q$ is assumed. Empty schemes are allowed.",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 05XQ, lemma-surjection-space-of-sections."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "Representability of $q$ makes $W$ a scheme: test the definition on $Z\\to Z$, so $W=W\\times_ZZ$ is represented. Fix $u\\in U$ and restrict to an affine open neighbourhood $U_0$ of $u$. The base-changed $Z_0$ is finite over $U_0$, hence affine, and its fibre over $u$ is a finite set $\\{z_1,\\ldots,z_r\\}$. Choose $w_i\\in W$ over $z_i$ and an affine open neighbourhood $A_i$ of $w_i$ in $W\\times_UU_0$. Put $A=\\coprod_iA_i$ and $H=Z_0\\amalg A$, with the induced maps to $U_0$. These are finite coproducts of affines, hence affine. The map $a:A\\to Z_0$ restricts on each summand to $q$ composed with an open immersion, so is etale, as is checked on those open summands. If $r=0$, the closed-image property of $p$ gives the neighbourhood $U_0\\setminus p(Z_0)$ of $u$ on which $Z$ is empty; the unique empty-domain map is already a section there. Hence assume $r>0$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XQ, lemma-surjection-space-of-sections, reduction to schemes and choice of the finitely many points; use affine neighbourhoods of the chosen lifts instead of an entire separated atlas"
+   }
+  },
+  {
+   "text": "The finite ring map defining $Z_0\\to U_0$ is of finite type and quasi-finite at every prime, so this map is locally quasi-finite. Since $a$ is etale, it is unramified, and the unramified quasi-finiteness theorem makes $a$ locally quasi-finite. Composition makes $A\\to U_0$ locally quasi-finite. Therefore $H\\to U_0$ is locally quasi-finite, checked on its open summands, and is locally of finite type. Every chosen $z_i$ and $w_i$ is isolated in the fibre: in an affine neighbourhood in the definition of local quasi-finiteness its fibre singleton is open, hence also open in the entire fibre. Finally $H\\to U_0$ is separated because $H$ is affine. Thus the isolated-point splitting theorem applies to $H\\to U_0$ and the pairwise distinct list consisting of all the $z_i$ and the marked $w_i$ in their separate summands.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-map-quasi-finite",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "def-weil-etale-morphism",
+    "lem-a1-scheme-lqf-composition",
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XQ, lemma-surjection-space-of-sections, application of the separated locally-finite-type isolated-point splitting lemma: verification of its hypotheses"
+   }
+  },
+  {
+   "text": "Apply the isolated-point splitting theorem once to this list in $H$. It gives an etale neighbourhood $(T,t)\\to(U_0,u)$ and finitely many clopen pieces finite over $T$, each with singleton fibre over $t$ and finite purely inseparable residue extension over $\\kappa(t)$; the remaining clopen has no point above any marked point. Intersect the pieces with the original clopen summands $Z_0$ and $A_i$. These intersections are still clopen and finite: locally a clopen subscheme of a finite $R$-algebra $C$ has ring $C/I$, a quotient of the finite $R$-module $C$. The intersections retaining the marked fibre points give\n$$Z_T=D\\amalg\\coprod_{j\\in J}V_j,$$\nwhere $J$ is finite, $(V_j)_t=\\{z_j'\\}$ and $D_t=\\varnothing$, and give clopen finite pieces $B_l\\subseteq A_T$ with $(B_l)_t=\\{b_l\\}$ over the original marked $w_i$. Their residue fields are finite purely inseparable over $\\kappa(t)$. Every point of $(A_i)_T$ over $t$ mapping to its marked $w_i$ lies in one of these $B_l$. The map $D\\to T$ is finite by the same quotient argument, since $Z_T\\to T$ is finite. Delete its closed image, which misses $t$. Replace $T$ by that open neighbourhood, so $D=\\varnothing$.",
+   "uses": [
+    "lem-sfb-etale-splits-isolated-purely-inseparable",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XQ, lemma-surjection-space-of-sections, simultaneous isolated-point decomposition and deletion of the unused finite component"
+   }
+  },
+  {
+   "text": "For each $j$, the point $z_j'$ maps to some original $z_i$. There is a point of $(A_i)_T$ above $z_j'$ and mapping to the original $w_i$: apply the fibre-product point description to $A_i\\to Z_0$ and $Z_T\\to Z_0$. The relevant ring is\n$$\\kappa(z_j')\\otimes_{\\kappa(z_i)}\\kappa(w_i).$$\nThe field-extension faithfully-flat lemma and surjectivity on spectra give a prime of this ring (start with the zero prime of $\\kappa(z_j')$). This point lies over $t$, hence lies in a piece $B_{l(j)}$ by the exhaustion clause of step 3. Its singleton fibre point $b_{l(j)}$ therefore maps to $z_j'$. Choices for different $j$ need not use distinct $B_l$; their restrictions to the disjoint $V_j$ below suffice.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XQ, lemma-surjection-space-of-sections, choice of a matching finite piece above each point of the split finite scheme"
+   }
+  },
+  {
+   "text": "Set $C_j=B_{l(j)}\\cap a_T^{-1}(V_j)$. This is a clopen subscheme of $B_{l(j)}$, contains $b_{l(j)}$, and is finite over $T$ by the quotient-of-a-finite-module argument of step 3. The morphism $f_j:C_j\\to V_j$ is finite by finite permanence over a separated target, since both schemes are finite over $T$. It is etale: $\\{a:A\\to Z_0,\\mathrm{id}_{Z_0}\\}$ is a jointly surjective etale family, so the covering-base-change theorem makes $a_T$ etale, and the restriction to the open source $C_j$ and open target $V_j$ preserves etaleness. Its fibre over $z_j'$ is exactly $\\{b_{l(j)}\\}$, since every such point lies over $t$. The residue extension $\\kappa(b_{l(j)})/\\kappa(z_j')$ is purely inseparable. Indeed both fields contain $\\kappa(t)$ compatibly and every element of the larger field has a $p$-power in $\\kappa(t)\\subseteq\\kappa(z_j')$ in characteristic $p$; in characteristic zero both equal $\\kappa(t)$.",
+   "uses": [
+    "lem-weil-pbc-finite-permanence-over-separated",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XQ, lemma-surjection-space-of-sections, finite etale maps between matching pieces and their singleton purely inseparable fibres"
+   }
+  },
+  {
+   "text": "Apply the finite-unramified singleton-fibre theorem to $f_j$ at $z_j'$: finiteness, uniqueness of the fibre point and the purely inseparable residue extension were proved in step 5, and etaleness supplies unramifiedness. It gives an open neighbourhood $O_j$ of $z_j'$ on which $f_j$ is a closed immersion. This restricted morphism is still etale: restrict the source by an open immersion, compose with $f_j$, then cancel the open immersion of its target using etale composition and cancellation. The etale closed-immersion theorem makes it an open immersion and an isomorphism onto its open image, which contains $z_j'$. Shrink $O_j$ to that image. Thus\n$$f_j^{-1}(O_j)\\xrightarrow{\\sim}O_j.$$\nThis is the singleton finite-etale argument used in the source, assembled from the two existing nodes rather than introduced as another lemma.",
+   "uses": [
+    "lem-weil-pbc-finite-unramified-one-point-closed",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-closed-immersion-open",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XQ, lemma-surjection-space-of-sections, the singleton finite-etale fibre gives an isomorphism on a neighbourhood"
+   }
+  },
+  {
+   "text": "For each $j$, $V_j\\setminus O_j$ is closed in $V_j$ and its image under the finite map $V_j\\to T$ is closed. None of these images contains $t$, since $(V_j)_t=\\{z_j'\\}\\subseteq O_j$. Delete their finite union from $T$. On the resulting open neighbourhood $N$ of $t$, every $(V_j)_N$ lies in $O_j$, so\n$$(C_j)_N\\xrightarrow{\\sim}(V_j)_N.$$\nIts inverse followed by $(C_j)_N\\to A_N\\to W_N$ is a section over $(V_j)_N$. The clopen pieces $(V_j)_N$ are pairwise disjoint and exhaust $Z_N$ by step 3; the coproduct mapping property therefore combines these morphisms into $\\sigma_N:Z_N\\to W_N$. On every summand $q_N\\sigma_N$ is the identity, hence it is the identity on $Z_N$. The morphism $N\\to U$ is etale, being the composite of open immersions and $T\\to U_0$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XQ, lemma-surjection-space-of-sections, shrinking away the bad closed images and assembling the inverse maps"
+   }
+  },
+  {
+   "text": "Perform this construction for every $u\\in U$, choosing one neighbourhood $N_u\\to U$ with a point over $u$, and put $U'=\\coprod_{u\\in U}N_u$. The induced map $v:U'\\to U$ is surjective because each $u$ has its selected lift. It is etale since on each open summand it is the etale map $N_u\\to U$, and etaleness is defined locally on source and target. Pulling back the open-and-closed summands of $U'$ gives the disjoint open covering $Z\\times_UU'=\\coprod_u Z_{N_u}$: this follows directly from the fibre-product universal property, or by restricting to each summand. The maps $\\sigma_{N_u}$ combine by the coproduct mapping property to $\\sigma:Z\\times_UU'\\to W\\times_UU'$, with $q_{U'}\\sigma=\\mathrm{id}$ checked on the summands. All structure maps are over $U$, hence over $S$. The index set and the coproduct are in the stated universes. If $U$ is empty use the empty coproduct; if $Z$ is empty use $U'=U$ and the unique map from the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-etale-morphism",
+    "def-pc-fibre-product",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 05XQ, lemma-surjection-space-of-sections, passage from pointed etale neighbourhoods to a surjective etale morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-ring-map-quasi-finite",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "def-weil-etale-morphism",
+  "lem-a1-scheme-lqf-composition",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-etale-splits-isolated-purely-inseparable",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-finite-permanence-over-separated",
+  "lem-weil-pbc-etale-covering-base-change",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-finite-unramified-one-point-closed",
+  "lem-weil-pbc-etale-closed-immersion-open",
+  "def-pc-fibre-product",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 05XQ, lemma-surjection-space-of-sections, proof. The simultaneous application to a finite disjoint union of affine neighbourhoods makes the selected lifts explicit; the singleton step is decomposed as Tags 04DG and 04HL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For Z finite over U and W etale surjective over Z there exists an etale surjection U prime to U such that W has a section over Z times U prime",
+   "results": "8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-23",
+   "verdict": "no match: etale categories and permanence supply no simultaneous section over the finite scheme. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Mathlib/RingTheory/Etale/QuasiFinite.lean:379-389 (Tag 00UJ): it isolates a finite component near one prime, not a section of an arbitrary etale cover; several further geometric steps are needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsEtale\", \"section\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: etale categories and permanence supply no simultaneous section over the finite scheme. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Mathlib/RingTheory/Etale/QuasiFinite.lean:379-389 (Tag 00UJ): it isolates a finite component near one prime, not a section of an arbitrary etale cover; several further geometric steps are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale cover of a finite scheme over a base can be split by an etale covering of that base",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-23",
+   "verdict": "no match: etale categories and permanence supply no simultaneous section over the finite scheme. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Mathlib/RingTheory/Etale/QuasiFinite.lean:379-389 (Tag 00UJ): it isolates a finite component near one prime, not a section of an arbitrary etale cover; several further geometric steps are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective etale morphism W to a finite scheme Z over U admits a section after an etale surjective base change U prime to U",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: etale categories and permanence supply no simultaneous section over the finite scheme. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Mathlib/RingTheory/Etale/QuasiFinite.lean:379-389 (Tag 00UJ): it isolates a finite component near one prime, not a section of an arbitrary etale cover; several further geometric steps are needed."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etale_isIdempotentElem_forall_liesOver_eq|spaceOfSections|sectionSpace|WeilRestrict",
+   "results": "5 hits: Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean; subdirectory RingTheory/Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: etale categories and permanence supply no simultaneous section over the finite scheme. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Mathlib/RingTheory/Etale/QuasiFinite.lean:379-389 (Tag 00UJ): it isolates a finite component near one prime, not a section of an arbitrary etale cover; several further geometric steps are needed."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[sS]ection|[sS]ection.*exists",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry/Morphisms",
+   "date": "2026-10-23",
+   "verdict": "no match: etale categories and permanence supply no simultaneous section over the finite scheme. Read Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Mathlib/RingTheory/Etale/QuasiFinite.lean:379-389 (Tag 00UJ): it isolates a finite component near one prime, not a section of an arbitrary etale cover; several further geometric steps are needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective etale map to a scheme finite over a base admits a section after an etale covering of the base",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:35:40Z",
+    "tool": "leanfinder",
+    "query": "A surjective etale map to a scheme finite over a base admits a section after an etale covering of the base",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "Algebra.IsStandardEtale.of_surjective",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "Algebra.Etale.exists_subalgebra_fg",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass"
+    ],
+    "digest": "c46b77094c7841d7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved etale permanence, etale categories, and ring-level standard-etale facts give no simultaneous section over an arbitrary finite scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "04DH|finite_etale_one_point|spaceOfSections|WeilRestrict",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T21:36:40Z",
+    "tool": "grep",
+    "query": "04DH|finite_etale_one_point|spaceOfSections|WeilRestrict",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved etale permanence, etale categories, and ring-level standard-etale facts give no simultaneous section over an arbitrary finite scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite etale morphism with a singleton fibre and identical residue field is an isomorphism near that fibre",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:36:40Z",
+    "tool": "leansearch",
+    "query": "A finite etale morphism with a singleton fibre and identical residue field is an isomorphism near that fibre",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply",
+     "AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff",
+     "AlgebraicGeometry.Scheme.residueFieldCongr",
+     "AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField",
+     "AlgebraicGeometry.Scheme.residueFieldCongr.congr_simp",
+     "AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc",
+     "AlgebraicGeometry.Scheme.Etale"
+    ],
+    "digest": "eb28e0487211d300"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved etale permanence, etale categories, and ring-level standard-etale facts give no simultaneous section over an arbitrary finite scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsEtale",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:36:40Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsEtale",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "query rejected by Loogle (unknown identifier); no absence conclusion drawn from this call"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[sS]ection|[sS]ection.*exists",
+   "sub": "AlgebraicGeometry/Morphisms",
+   "results": {
+    "t": "2026-10-23T21:37:28Z",
+    "tool": "grep",
+    "query": "exists.*[sS]ection|[sS]ection.*exists",
+    "sub": "AlgebraicGeometry/Morphisms",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved etale permanence, etale categories, and ring-level standard-etale facts give no simultaneous section over an arbitrary finite scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil restriction of a surjective etale morphism along a finite morphism is locally inhabited in the etale topology",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:37:29Z",
+    "tool": "leanfinder",
+    "query": "Weil restriction of a surjective etale morphism along a finite morphism is locally inhabited in the etale topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.IsStandardEtale.of_surjective",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "RingHom.Etale.propertyIsLocal",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.Scheme.instCategoryEtale"
+    ],
+    "digest": "dfc8a97d9f9bc6ec"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved etale permanence, etale categories, and ring-level standard-etale facts give no simultaneous section over an arbitrary finite scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsEtale\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:40:24Z",
+    "tool": "loogle",
+    "query": "\"IsFinite\", \"IsEtale\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved etale permanence, etale categories, and ring-level standard-etale facts give no simultaneous section over an arbitrary finite scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-locally-free-relative-hom-space",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CI (lemma-hilbert-stack-relative-space); finite Hilbert construction in examples-stacks.tex Tag 05WC. Input to the Tag 06CI proof: Weil restriction of algebraic spaces along finite locally free scheme maps. Supporting input to the Tag 05YF proof: Tag 05Y7, relative Hom spaces from a finite locally free source, before imposing compatibility with the map to Z. Tag 05Y7 proof, second paragraph, via Tag 05Y5: surjectivity of the target-atlas comparison uses Tag 05XQ.",
+   "via": [
+    "lem-sfb-finite-locally-free-relative-hom-space",
+    "lem-sfb-finite-locally-free-weil-restriction",
+    "lem-sfb-relative-finite-hilbert-algebraic",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-etale-cover-local-sections",
+  "worker": "stage1",
+  "summary": "Kept statement and statement dependencies unchanged. Split Stacks 05XQ using existing 02LO and finite-unramified singleton-fibre nodes. Explicitly verified isolatedness, separatedness, matching lifts after etale base change, clopen finiteness, purely inseparable residue fields, shrinking by finite closed images, and coproduct assembly. No new nodes or Mathlib leaves; actual searches appended and previous records retained.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry, precisely the Tag 05Y7/05Y5 relative-Hom atlas surjectivity input 05XQ. Read latest main-20261024 unit and direct-images proof; no change to its higher-level route. The ancestry resolver returns null for from.node, as in the imported item; retained its complete from.place and via chain. Whole-blueprint searches by tag, finite scheme, isolated, section gave no same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-6443f4493",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-6443f4493 (reviewer sub-agent of L); spot-checked: Read the item and the source in full: Stacks criteria.tex Tag 05XQ lemma-surjection-space-of-sections, statement and proof. The delivery has no new nodes, and proof_deps equal the union of the step uses. The statement is unchanged against live and side-live, where the item is still unsplit; there is no repair note and no SGA citation. The added hypothesis 'q representable' was already in the base, and both citers (etale-sections-finite-locally-free, finite-locally-free-relative-hom-space) apply the item only to representable maps. Steps checked against the cited statements. Step 1: W is a scheme by representability, Z_0 is affine (finite permanence (b)), the fibre is finite, a|A_i is q composed with an open immersion, and r=0 is handled by the closed image. Step 2: all hypotheses of 02LO (lem-sfb-etale-splits-isolated-purely-inseparable) hold for H=Z_0⊔A: locally quasi-finite through the finite ring map, unramified and composition; locally of finite type; separated because H is affine; the marked points are distinct because they lie in distinct summands. Step 3: clopen pieces are Spec(Ce), so finite. D_t=∅ because every fibre point of Z_0 over u is marked (the text leaves this implicit), and the exhaustion of the B_l is correct. Step 4: (A_i)_T=A_i×_{Z_0}Z_T, and a nonempty tensor of residue fields gives the lift through faithful flatness and surjectivity on spectra. Step 5: f_j is finite by 035D and étale as the base change of a, using the {a,id} covering trick; the fibre is a singleton, and κ(b)/κ(z_j') is purely inseparable because it sits between fields over κ(t). Step 6: 04DG and then the étale closed immersion lemma replace the source's 04DH argument validly. Steps 7–8: shrinking by finite closed images, coproduct assembly and the empty cases are correct. Checked edge cases including a non-separated W (affine line with a doubled origin) and characteristic p. rg -L finds no duplicate 05XQ or 04DH node. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleCoverLocalSections",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finite_etale_cover_local_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleCoverLocalSections.lean",
+  "statement": "theorem finite_etale_cover_local_sections {S : Scheme.{u}} (Z U : Over S) (p : Z ⟶ U) [IsFinite p.left] (W : AlgebraicSpace S) (q : W ⟶ schemeSpace Z) (hq : IsRepresentable q.hom.hom) (he : IsEtale q.hom.hom) (hs : IsSurjective q.hom.hom) : ∃ (U' : Over S) (v : U' ⟶ U), Etale v.left ∧ Surjective v.left ∧ ∃ σ : Limits.pullback ((Scheme.fppfTopology.over S).yoneda.map p) ((Scheme.fppfTopology.over S).yoneda.map v) ⟶ Limits.pullback (q.hom ≫ (Scheme.fppfTopology.over S).yoneda.map p) ((Scheme.fppfTopology.over S).yoneda.map v), σ ≫ Limits.pullback.map (q.hom ≫ (Scheme.fppfTopology.over S).yoneda.map p) ((Scheme.fppfTopology.over S).yoneda.map v) ((Scheme.fppfTopology.over S).yoneda.map p) ((Scheme.fppfTopology.over S).yoneda.map v) q.hom (𝟙 _) (𝟙 _) (Category.comp_id _) ((Category.comp_id _).trans (Category.id_comp _).symm) = 𝟙 _",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The section is a morphism between the actual fppf-sheaf fibre products. Its composite with the canonical pullback.map of q is the identity. Schemes over S use Over S and the existing schemeSpace Yoneda construction; no auxiliary definitions or extra geometric hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f0ae456c",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Read the node, all 8 stmt_dep records, the Stacks 05XQ source (criteria.tex l.1103) and the live AlgebraicSpace/schemeSpace/Mathlib Etale, IsFinite and pullback.map declarations. Every clause matches the node: Over S schemes with [IsFinite p.left]; W : AlgebraicSpace S; q : W ⟶ schemeSpace Z with the recorded scheme-test IsRepresentable/IsEtale/IsSurjective (no name shadowing); ∃ U' (v : U' ⟶ U), Etale ∧ Surjective; σ between the fppf-sheaf pullbacks, encoded like lem-trf-space-fibre-products-etale-covers, with σ ≫ pullback.map q 𝟙 𝟙 = 𝟙. No flatness, separatedness, quasi-compactness, Nonempty instance or universe restriction is added; empty cases are covered. The node differs from side-live only in its lean field and the statement appears verbatim in the file. No new definitions, proof is sorry only, docstrings carry the source, blueprint id and 8 proof steps, and all imports exist. No 05XQ duplicate found in the project trees. No findings."
+ }
+}

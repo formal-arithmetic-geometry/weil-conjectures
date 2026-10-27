@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-koszul-h1-flat-quotient-base-change-surjective",
+ "kind": "statement",
+ "title": "Surjectivity of first Koszul homology base change for a flat quotient",
+ "statement": "Let $A\\to B$ and $A\\to A'$ be homomorphisms of commutative rings. Let $r\\geq0$, $f_1,\\ldots,f_r\\in B$, $I=(f_1,\\ldots,f_r)$, and suppose that $B/I$ is flat as an $A$-module [def-weil-pbc-flat-ring-map]. Put $B'=B\\otimes_A A'$ with its tensor-product algebra multiplication, and $f_i'=f_i\\otimes1$ [def-weil-pbc-module-tensor-product]. For the Koszul complexes and homology of [def-weil-pbc-koszul-complex], the canonical $B'$-linear map\n$$H_1(K_B(f_1,\\ldots,f_r))\\otimes_A A'\\longrightarrow H_1(K_{B'}(f_1',\\ldots,f_r'))$$\nis surjective. On pure tensors it sends $[\\sum_i b_i e_i]\\otimes a'$ to the homology class of $\\sum_i(b_i\\otimes a')e_i$, where $\\sum_i b_if_i=0$. No flatness of $B$ or $A'$ over $A$, finite-presentation, Noetherian, nonzero-ring, or nonempty-sequence hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 063Q (lemma-base-change-H1-regular), including the canonical map described by scalar extension of cycles."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-koszul-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=B^{\\oplus r}$, $F=\\bigwedge_B^2E$, $Z=\\ker(d_1:E\\to B)$ and $H=H_1(K_B(f))$. The formulas and homology definition in [def-weil-pbc-koszul-complex] give $d_1(e_i)=f_i$, $d_2(e_i\\wedge e_j)=f_ie_j-f_je_i$, $\\operatorname{im}d_1=I$, and $H=Z/\\operatorname{im}d_2$. Consequently the sequences $0\\to I\\xrightarrow{j}B\\to B/I\\to0$, $Z\\xrightarrow{u}E\\xrightarrow{q}I\\to0$, and $F\\xrightarrow{v}Z\\xrightarrow{p}H\\to0$ are exact, where $j,u$ are inclusions, $q(e_i)=f_i$, and $v$ is $d_2$ with codomain restricted to $Z$. Indeed $\\ker q=Z$, $q$ is onto by generation of $I$, and $\\ker p=\\operatorname{im}v$ by the quotient definition.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 063Q (lemma-base-change-H1-regular), opening complex and its three exact sequences"
+   }
+  },
+  {
+   "text": "Write $K'_\\bullet=K_{B'}(f')$. For $n=0,1,2$, the basis $e_J$ of $K_n$ stated in [def-weil-pbc-koszul-complex] gives an isomorphism $\\alpha_n:K_n\\otimes_A A'\\to K'_n$ sending $(b e_J)\\otimes a'$ to $(b\\otimes a')e'_J$. The inverse sends $c e'_J$, for $c=\\sum_t b_t\\otimes a'_t\\in B'$, to $\\sum_t(b_t e_J)\\otimes a'_t$. This is independent of the tensor expression for $c$ by the bilinear universal property of [def-weil-pbc-module-tensor-product]; the two composites fix pure tensors and basis coefficients, hence are identities. The formulas for $d_1,d_2$ in step 1 show on $e_i\\otimes a'$ and $(e_i\\wedge e_j)\\otimes a'$ that $\\alpha_{n-1}(d_n\\otimes1)=d'_n\\alpha_n$ for $n=1,2$: both sides are respectively $(f_i\\otimes a')$ and $(f_i\\otimes a')e'_j-(f_j\\otimes a')e'_i$. Thus the maps used below have exactly the base-changed Koszul differentials.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 063Q (lemma-base-change-H1-regular), identification of the tensorized complex in degrees 0, 1, 2"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-quotient-tensor-injective] to $0\\to I\\xrightarrow{j}B\\to B/I\\to0$ over $A$, with $N=A'$. Its only flatness hypothesis is the assumed flatness of $B/I$. It gives injectivity of $j\\otimes1:I\\otimes_A A'\\to B'$; to use the stated left-tensor version, conjugate by the mutually inverse flips $x\\otimes a'\\mapsto a'\\otimes x$, which exist by [def-weil-pbc-module-tensor-product]. Right exactness [lem-weil-pbc-tensor-right-exact] applied to $Z\\xrightarrow{u}E\\xrightarrow{q}I\\to0$ gives $\\ker(q\\otimes1)=\\operatorname{im}(u\\otimes1)$. Since $d'_1\\alpha_1=(j\\otimes1)(q\\otimes1)$ and $j\\otimes1$ is injective, $\\alpha_1$ maps this kernel onto $Z'=\\ker d'_1$. Therefore the map $t:Z\\otimes_A A'\\to Z'$, induced by $\\alpha_1(u\\otimes1)$, is surjective.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 063Q (lemma-base-change-H1-regular), first two tensorized exact sequences and surjectivity onto the new cycle module"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-tensor-right-exact] applied to $F\\xrightarrow{v}Z\\xrightarrow{p}H\\to0$, the map $p\\otimes1:Z\\otimes_A A'\\to H\\otimes_A A'$ is onto and its kernel is $\\operatorname{im}(v\\otimes1)$. Let $\\pi':Z'\\to H_1(K'_\\bullet)$ be the quotient map. The map $\\pi't$ annihilates $\\operatorname{im}(v\\otimes1)$: step 2 identifies $t(v\\otimes1)$ with the second Koszul differential $d'_2\\alpha_2$, whose image is a boundary. Hence it factors uniquely through a map $\\beta:H\\otimes_A A'\\to H_1(K'_\\bullet)$. It is surjective: any target homology class has a cycle representative $z'$, step 3 supplies $y\\in Z\\otimes_A A'$ with $t(y)=z'$, and $\\beta((p\\otimes1)y)=[z']$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 063Q (lemma-base-change-H1-regular), last tensorized exact sequence and displayed cokernel surjection"
+   }
+  },
+  {
+   "text": "For $z=\\sum_i b_i e_i\\in Z$, the construction gives $\\beta([z]\\otimes a')=[\\sum_i(b_i\\otimes a')e'_i]$, the claimed canonical map. It is $B'$-linear: for $b\\in B$ and $a',c'\\in A'$, multiplication by $b\\otimes c'$ in the source sends $[z]\\otimes a'$ to $[bz]\\otimes c'a'$, and the displayed formula sends this to $(b\\otimes c')\\beta([z]\\otimes a')$. Pure tensors generate both $B'$ and $H\\otimes_A A'$ by [def-weil-pbc-module-tensor-product], so this equality proves linearity for all scalars and elements. The argument also applies to $r=0$ (then $Z=H=0$), to zero rings, and to empty degree-two bases; it uses no flatness of $B$ or $A'$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 063Q (lemma-base-change-H1-regular), canonical map on cycles and its scalar linearity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 063Q (lemma-base-change-H1-regular), full proof, with the coordinate maps and quotient factorization expanded; algebra.tex Tag 00HL (lemma-flat-tor-zero) is the flat-quotient input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "First Koszul homology tensor a base algebra maps surjectively to the first Koszul homology after base change if the quotient by the sequence is flat over the base",
+   "results": "{\"t\": \"2026-10-23T22:38:23Z\", \"tool\": \"leanfinder\", \"query\": \"First Koszul homology tensor a base algebra maps surjectively to the first Koszul homology after base change if the quotient by the sequence is flat over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorProductTo_surjective\", \"KaehlerDifferential.mapBaseChange_surjective\", \"Algebra.FiniteType.baseChangeAux_surj\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"Algebra.Extension.tensorH1Cotangent\", \"KaehlerDifferential.map_surjective\", \"KaehlerDifferential.map_surjective_of_surjective\", \"Algebra.Extension.toKaehler_surjective\"], \"digest\": \"d65176e8c255b580\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits concern naive cotangent homology, Kahler differentials, ordinary regular sequences under flat scalar extension, or ordinary immersion permanence; none states the asserted Koszul homology comparison or universal relative immersion theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of base change on first Koszul homology when the zeroth Koszul homology is flat",
+   "results": "{\"t\": \"2026-10-23T22:38:20Z\", \"tool\": \"leansearch\", \"query\": \"Surjectivity of base change on first Koszul homology when the zeroth Koszul homology is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.IsStableUnderBaseChange\", \"KaehlerDifferential.mapBaseChange_surjective\", \"Module.FaithfullyFlat.instTensorProduct\", \"RingHom.surjective_isStableUnderBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"Module.Flat.isBaseChange\", \"KaehlerDifferential.tensorKaehlerEquiv\", \"Algebra.FiniteType.baseChangeAux_surj\"], \"digest\": \"ff39365baeee7b35\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits concern naive cotangent homology, Kahler differentials, ordinary regular sequences under flat scalar extension, or ordinary immersion permanence; none states the asserted Koszul homology comparison or universal relative immersion theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"homology\"",
+   "results": "{\"t\": \"2026-10-23T22:38:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits concern naive cotangent homology, Kahler differentials, ordinary regular sequences under flat scalar extension, or ordinary immersion permanence; none states the asserted Koszul homology comparison or universal relative immersion theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*(surj|baseChange)|H1Regular|H₁Regular|base.change.H1",
+   "results": "{\"t\": \"2026-10-23T22:38:20Z\", \"tool\": \"grep\", \"query\": \"Koszul.*(surj|baseChange)|H1Regular|H₁Regular|base.change.H1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits concern naive cotangent homology, Kahler differentials, ordinary regular sequences under flat scalar extension, or ordinary immersion permanence; none states the asserted Koszul homology comparison or universal relative immersion theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ring maps A to B and A to C and a finite sequence f in B with B modulo f flat over A, H1 of K(B,f) tensor C surjects onto H1 of K(B tensor C,f tensor 1)",
+   "results": "{\"t\": \"2026-10-23T22:38:28Z\", \"tool\": \"leanfinder\", \"query\": \"For ring maps A to B and A to C and a finite sequence f in B with B modulo f flat over A, H1 of K(B,f) tensor C surjects onto H1 of K(B tensor C,f tensor 1)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorH1Cotangent\", \"KaehlerDifferential.tensorProductTo_surjective\", \"KaehlerDifferential.mapBaseChange_surjective\", \"Algebra.FiniteType.baseChangeAux_surj\", \"KaehlerDifferential.map_surjective\", \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"Algebra.Extension.toKaehler_surjective\"], \"digest\": \"7a3a5c048cc3de7a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The hits concern naive cotangent homology, Kahler differentials, ordinary regular sequences under flat scalar extension, or ordinary immersion permanence; none states the asserted Koszul homology comparison or universal relative immersion theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*(surj|baseChange)|H1Regular|base.change.H1",
+   "results": "{\"t\": \"2026-10-23T23:24:38Z\", \"tool\": \"grep\", \"query\": \"Koszul.*(surj|baseChange)|H1Regular|base.change.H1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No Koszul homology base-change declaration found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of tensor base change on first homology of a Koszul complex with flat zeroth homology",
+   "results": "{\"t\": \"2026-10-23T23:24:38Z\", \"tool\": \"leansearch\", \"query\": \"Surjectivity of tensor base change on first homology of a Koszul complex with flat zeroth homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.kerLTensorEquivOfSurjective\", \"Module.FaithfullyFlat.instTensorProduct\", \"HomologicalComplex.instEpiHomologyπ\", \"Module.Flat.ker_lTensor_eq\", \"Algebra.Extension.tensorH1Cotangent\", \"CategoryTheory.ShortComplex.isIso_homologyMap_of_isIso\", \"ChainComplex.isIso_homologyι₀\", \"HomologicalComplex.homologyIsKernel\"], \"digest\": \"53a879bf267d4fcc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The flat-cokernel kernel equivalence supplies an input, not the Koszul statement; H1Cotangent is cotangent homology, not Koszul homology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"homology\"",
+   "results": "{\"t\": \"2026-10-23T23:24:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Koszul\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No Koszul homology base-change declaration found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First Koszul homology base change is surjective when the quotient by the sequence is flat over the base ring",
+   "results": "{\"t\": \"2026-10-23T23:24:39Z\", \"tool\": \"leanfinder\", \"query\": \"First Koszul homology base change is surjective when the quotient by the sequence is flat over the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.mapBaseChange_surjective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"KaehlerDifferential.map_surjective\", \"Algebra.Presentation.differentials.surjective_hom₁\", \"KaehlerDifferential.tensorProductTo_surjective\", \"Algebra.Extension.toKaehler_surjective\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"Algebra.FiniteType.baseChangeAux_surj\"], \"digest\": \"4a8704e14a654c94\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Kahler differential and cotangent comparison surjections concern different modules; no Koszul homology comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complex of modules whose zeroth cokernel is flat, tensoring gives a surjection on first homology without flatness of the terms",
+   "results": "{\"t\": \"2026-10-23T23:25:38Z\", \"tool\": \"leanfinder\", \"query\": \"For a complex of modules whose zeroth cokernel is flat, tensoring gives a surjection on first homology without flatness of the terms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"rTensor_exact\", \"lTensor_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.lTensor_exact\"], \"digest\": \"75e4e7a94bfa442d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The exactness hits assume the tensor factor is flat; here only the zeroth cokernel is flat."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-h1-immersion-universal-koszul",
+  "date": "2026-10-24",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Apply the flat-groupoid algebraicity theorem to the action groupoid; unlike the smooth-groupoid theorem this does not require H smooth. Algebraicity step: criteria.tex Tag 06FI applies the general bootstrap theorem Tag 06DC to the flat locally finitely presented quotient presentation. Supporting input: Tag 06CL (lemma-lci-locus-stack-in-groupoids); examples-stacks.tex Tag 05WB (lemma-hilbert-d-stack). Proof input: 06CL application of spaces-more-morphisms lemma-where-lci to Z -> X_y over T. Supporting source-locus input: Tag 06CE proof, first two sentences, applying Tag 06CA to the relative morphism. Scheme input for the compatible-chart reduction in Tag 06CA: more-morphisms.tex Tag 06B8, pointwise base-change equivalence. Immersion input to the scheme chart argument: 063V(2), for passage from a Koszul chart with flat source to all parameter base changes, including the fibre. Supporting input: Tag 063Q (lemma-base-change-H1-regular), including the canonical map described by scalar extension of cycles.",
+   "via": [
+    "lem-sfb-relative-h1-immersion-universal-koszul",
+    "lem-sfb-scheme-relative-lci-base-change-points",
+    "lem-sfb-space-relative-lci-source-locus",
+    "lem-sfb-space-relative-lci-parameter-open",
+    "lem-sfb-relative-finite-hilbert-lci-open",
+    "lem-sfb-fppf-stack-algebraicity-bootstrap",
+    "lem-sfb-flat-groupoid-algebraic-quotient",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-koszul-h1-flat-quotient-base-change-surjective",
+  "worker": "stage1",
+  "summary": "Read Stacks 063Q and 00HL and split the proof into the three exact sequences, explicit low-degree scalar-extension coordinates, lifting of cycles using the existing flat-quotient and right-exactness Mathlib leaves, quotient factorization, and the pure-tensor formula and B-prime linearity. The statement is unchanged. No new nodes: the non-elementary inputs already exist. Checked r=0, zero rings, a unit generator and nonflat base change. No exact project Lean attachment was found.",
+  "blueprint": "The inherited from.place traces this algebraic input to det-thm-sf-ctf-stability-direct-images, proof (3), through the relative-immersion prerequisite to the alteration branch. The current latest blueprint has the same direct-image node id in sk-thm-sf-ctf-stability-direct-images.proof.md. These steps realize the explicitly named 063Q supporting input of that inherited chain; the item is not a unit key node. Blueprint searches for Koszul, 063Q and flat quotient give no imported node stating this result; same_as remains [].",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-af3756e98",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-af3756e98 (reviewer sub-agent of L); spot-checked: I read the whole item and its split. The statement is unchanged and agrees with Stacks 063Q (more-algebra.tex lemma-base-change-H1-regular, lines 7935-7990), hypothesis by hypothesis: arbitrary ring maps A->B and A->A', only B/(f) assumed A-flat, and the conclusion is surjectivity, not an isomorphism. The 5 steps expand the source's proof by three exact sequences. Step 1 gets d1, d2, Z and H from the def-weil-pbc-koszul-complex statement. Step 2 is an explicit isomorphism K_n tensor_A A' to K'_n in degrees up to 2, using the bilinear universal property; it is elementary and does not need lem-sc-koszul-base-change-iso from another unit, which is base change over B rather than A. Step 3 applies lem-weil-pbc-flat-quotient-tensor-injective (= 00HL, checked in algebra.tex line 9037) to 0->I->B->B/I->0 with B/I flat, and lem-weil-pbc-tensor-right-exact (surjectivity of q holds), so Z tensor A' maps onto Z'. Step 4 gets the cokernel factorization and surjectivity. Step 5 gets the pure-tensor formula and B'-linearity. proof_deps equals the union of the step uses. I tested r=0, a unit generator, zero rings, and A=Z, B=Z x Z/2, f=(0,1), A'=Z/2, where both H_1 are Z/2 x 0 and the map is the identity. The delivery has 0 new nodes. 063Q occurs only in the item and its parent lem-sfb-relative-h1-immersion-universal-koszul; the parent cites the item, the item does not cite the parent, so there is no cycle. No other H_1-Koszul node states this comparison, and there is no Lean attachment. There is no re-split note for the item, which is still unsplit live. There is no SGA, and tool_uses is empty because all cited nodes are pbc Mathlib leaves or definitions. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulH1FlatQuotientBaseChange",
+  "declaration": "ExteriorAlgebra.exists_koszulH1_baseChange_surjective",
+  "file": "lean/Sheaf/RingTheory/KoszulH1FlatQuotientBaseChange.lean",
+  "statement": "theorem exists_koszulH1_baseChange_surjective (A : Type u) (B : Type v) (A' : Type w) [CommRing A] [CommRing B] [CommRing A'] [Algebra A B] [Algebra A A'] (r : ℕ) (f : Fin r → B) [Module.Flat A (B ⧸ Ideal.span (Set.range f))] : ∃ β : (((ModuleCat.restrictScalars (algebraMap A B)).obj ((koszulComplex B r f).homology 1)) ⊗[A] A') →+ (koszulComplex (B ⊗[A] A') r (fun i ↦ f i ⊗ₜ[A] (1 : A'))).homology 1, Function.Surjective β ∧ (∀ (b : B) (c : A') (h : (koszulComplex B r f).homology 1) (a : A'), β ((b • h) ⊗ₜ[A] (c * a)) = (b ⊗ₜ[A] c) • β (h ⊗ₜ[A] a)) ∧ (∀ (z : (koszulComplex B r f).cycles 1) (a : A'), ∃ z' : (koszulComplex (B ⊗[A] A') r (fun i ↦ f i ⊗ₜ[A] (1 : A'))).cycles 1, (∀ i : Fin r, (exteriorPower.oneEquiv (B ⊗[A] A') (Fin r →₀ (B ⊗[A] A')) ((koszulComplex (B ⊗[A] A') r (fun j ↦ f j ⊗ₜ[A] (1 : A'))).iCycles 1 z')) i = (exteriorPower.oneEquiv B (Fin r →₀ B) ((koszulComplex B r f).iCycles 1 z)) i ⊗ₜ[A] a) ∧ β (((koszulComplex B r f).homologyπ 1 z) ⊗ₜ[A] a) = (koszulComplex (B ⊗[A] A') r (fun i ↦ f i ⊗ₜ[A] (1 : A'))).homologyπ 1 z')",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The additive comparison is uniquely characterized by its formula on every cycle tensor. The scalar identity for b ⊗ c acting on h ⊗ a is the full tensor-algebra linearity condition, since pure tensors generate both the scalar ring and the source. No arbitrary comparison map or module structure is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-976324912",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Stacks 063Q (more-algebra.tex 7935-7990) read. Lean matches node clause by clause: arbitrary A→B, A→A' (CommRing/Algebra, independent universes u v w), r:ℕ, f:Fin r→B, only [Module.Flat A (B ⧸ span (range f))]; source H1 via restrictScalars(algebraMap A B) ⊗[A] A', target H1 of the recorded koszulComplex over B⊗[A]A' on f i ⊗ₜ 1. ∃ β additive is uniquely pinned by the cycle-coefficient clause (homologyπ onto, iCycles/oneEquiv injective); linearity identity on pure tensors equals full B'-linearity; Function.Surjective. Edge cases r=0,1, zero rings, unit ideal, f=0 OK; no extra hypotheses. H4: nonempty_koszulBaseChangeIso (scalar extension of a sequence in A, Nonempty, same universe) and exists_koszul_coefficient_extension are different; no existing H1 flat-quotient comparison. lean.statement verbatim in file (checked); stmt_deps exact; docstrings with 063Q, blueprint id, 5 proof steps; proof sorry only; report has Worker report and Second reading by Q05. No compile (no change); worker reports clean compile."
+ }
+}

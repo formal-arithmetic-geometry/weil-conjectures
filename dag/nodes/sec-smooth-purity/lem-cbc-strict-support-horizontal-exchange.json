@@ -1,0 +1,225 @@
+{
+ "id": "lem-cbc-strict-support-horizontal-exchange",
+ "kind": "statement",
+ "title": "Horizontal pasting for the two-factor strict compact-support exchange",
+ "statement": "Let $B$ be a commutative ring. For each scheme $T$ use $D(\\mathcal T_T)$, where $\\mathcal T_T$ is the category of strict inverse systems of constant $B$-module sheaves on $T_{\\mathrm{proet}}$, with the normalized functors $G_u,R_u,J_j$ [def-cbc-strict-constant-tower-operations, def-cbc-strict-tower-open-extension]. Let $c=(j:X\\hookrightarrow V,p:V\\to Y)$ be a supplied compactification of a separated finite-type map $f:X\\to Y$, with $j$ quasi-compact and $p$ proper [def-weil-pbc-projection-compactification]. For arbitrary $g:Y'\\to Y$ and $h:Y''\\to Y'$, form the base-changed compactifications $c',c''$, ambient maps $\\bar g,\\bar h$ and open-side maps $g':X'\\to X$, $h':X''\\to X'$ [def-cbc-compact-support-square]. Put $F_c=R_pJ_j$ and similarly $F_{c'},F_{c''}$. Let $E_{p,g}:G_gR_p\\to R_{p'}G_{\\bar g}$ be the adjunction mate of the pullback-composition square [def-weil-pbc-adjunction-mate], and let $\\beta_{j,\\bar g}:G_{\\bar g}J_j\\cong J_{j'}G_{g'}$ be exactly the inverse open-unit transpose of [lem-cbc-strict-tower-proper-open-calculus]. Define the actual transformation\n$$e^c_g=(R_{p'}\\beta_{j,\\bar g})\\circ(E_{p,g}J_j):G_gF_c\\to F_{c'}G_{g'}.$$\nFor every derived strict tower $M$, with no finite-origin, boundedness or completeness restriction, these transformations are natural in $M$ and the identity-base-change transformation is the identity under the canonical identity comparisons. For $c_{g,h}:G_hG_g\\xrightarrow{\\sim}G_{g\\circ h}$, the inverse of the canonical pullback compositor, the following is an equality of derived strict-tower transformations:\n$$e^c_{g\\circ h}=(F_{c''}c_{g',h'})\\circ(e^{c'}_hG_{g'})\\circ(G_he^c_g)\\circ(c_{g,h}^{-1}F_c).$$\nThe open maps occurring here satisfy the specified transpose-normalized equation\n$$\\beta_{j,\\bar g\\circ\\bar h}=(J_{j''}c_{g',h'})\\circ(\\beta_{j',\\bar h}G_{g'})\\circ(G_{\\bar h}\\beta_{j,\\bar g})\\circ(c_{\\bar g,\\bar h}^{-1}J_j).$$\nBoth equalities use the actual normalized adjunctions and composition identifications and hold before evaluation at any finite level; no assertion of faithfulness of derived evaluation is involved.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7, remark-base-change, and remark-compose-base-change-horizontal; the proper/open strict-tower composite is the agent-formulated consequence extracted from the blueprint coherence sentence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projection-compactification",
+  "def-cbc-compact-support-square",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-strict-tower-composition-maps"
+ ],
+ "proof": [
+  {
+   "text": "Work throughout in the specified $D(\\mathcal T_T)$. Apply the pullback-square pasting statement [lem-cbc-strict-tower-pullback-square-pasting] with its three vertical maps $j,j_1,j_2$ replaced by $p,p',p''$ and its transverse maps by $g,h,\\bar g,\\bar h$. It identifies the outer pullback square with the paste of the two inner squares, with exactly the compositors of [def-cbc-strict-constant-tower-operations]. Apply clause 1 of [lem-weil-pbc-mate-pasting] to $L_1=G_p,L_2=G_{p'},L_3=G_{p''}$ and their normalized right adjoints, and to the transverse functors $G_g,G_h,G_{\\bar g},G_{\\bar h}$. Writing $E_g=E_{p,g}$ and $E_h=E_{p',h}$ gives\n$$E_{p,g\\circ h}=(R_{p''}c_{\\bar g,\\bar h})\\circ(E_hG_{\\bar g})\\circ(G_hE_g)\\circ(c_{g,h}^{-1}R_p).$$\nThis is mate pasting on the derived tower categories themselves; the cited square lemma allows arbitrary maps and imposes no boundedness or coefficient restriction.",
+   "uses": [
+    "lem-cbc-strict-tower-pullback-square-pasting",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0E47 (remark-compose-base-change-horizontal); agent-written strict-tower specialization and proper/open two-factor calculation."
+   }
+  },
+  {
+   "text": "Apply the first paragraph about the open comparison in [lem-cbc-strict-tower-proper-open-calculus] to the cartesian squares for $j,\\bar g$ and $j',\\bar h$. Its inverse-unit-transpose normalization is precisely the normalization required here, and its successive-base-change assertion, written with the specified compositors, is\n$$\\beta_{j,\\bar g\\circ\\bar h}=(J_{j''}c_{g',h'})\\circ(\\beta_{j',\\bar h}G_{g'})\\circ(G_{\\bar h}\\beta_{j,\\bar g})\\circ(c_{\\bar g,\\bar h}^{-1}J_j).$$\nThat assertion is for arbitrary $B$ on unbounded derived strict towers; the later finite-origin hypothesis in the cited node concerns invertibility of $\\gamma_Q$, not this open comparison or its coherence.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0E47 (remark-compose-base-change-horizontal); agent-written strict-tower specialization and proper/open two-factor calculation."
+   }
+  },
+  {
+   "text": "Substitute the two equations just obtained into $e^c_{g\\circ h}=(R_{p''}\\beta_{j,\\bar g\\circ\\bar h})(E_{p,g\\circ h}J_j)$. Functoriality cancels the consecutive $R_{p''}(c_{\\bar g,\\bar h}^{-1}J_j)$ and $R_{p''}(c_{\\bar g,\\bar h}J_j)$. The remaining middle pair, at $M$, is\n$$R_{p''}G_{\\bar h}(\\beta_{j,\\bar g,M})\\circ E_{h,G_{\\bar g}J_jM}\n=E_{h,J_{j'}G_{g'}M}\\circ G_hR_{p'}(\\beta_{j,\\bar g,M}),$$\nwhich is the naturality equation for $E_h$ at the morphism $\\beta_{j,\\bar g,M}:G_{\\bar g}J_jM\\to J_{j'}G_{g'}M$. Regrouping adjacent factors now gives\n$$(R_{p''}J_{j''}c_{g',h'})\\circ\\bigl((R_{p''}\\beta_{j',\\bar h})(E_hJ_{j'})G_{g'}\\bigr)\\circ G_h\\bigl((R_{p'}\\beta_{j,\\bar g})(E_gJ_j)\\bigr)\\circ(c_{g,h}^{-1}R_pJ_j).$$\nBy the definition of $e$ and $F$, this is exactly the required horizontal equation. All manipulations are functoriality, inverse cancellation, associativity and naturality of natural transformations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0E47 (remark-compose-base-change-horizontal); agent-written strict-tower specialization and proper/open two-factor calculation."
+   }
+  },
+  {
+   "text": "The mate construction [def-weil-pbc-adjunction-mate] is a natural transformation, and the open comparisons are natural by [lem-cbc-strict-tower-proper-open-calculus]; their whiskerings and composite therefore give naturality of $e^c_g$ in $M$. For an identity base change, insert the canonical identity comparisons from [def-cbc-strict-constant-tower-operations]. The pullback square then becomes the identity square, whose mate is the identity by clause 4 of [lem-weil-pbc-mate-pasting]; the open comparison is also the identity by [lem-cbc-strict-tower-proper-open-calculus]. Thus $e^c_1$ is the composite of two identities. The argument has used only actual tower-category transformations, never evaluation, invertibility of proper exchange, or a finite-origin, boundedness or completeness hypothesis.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0E47 (remark-compose-base-change-horizontal); agent-written strict-tower specialization and proper/open two-factor calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-tower-pullback-square-pasting",
+  "def-cbc-strict-constant-tower-operations",
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A7 (remark-base-change), 0E47 (remark-compose-base-change-horizontal); agent-written strict-tower specialization and proper/open two-factor calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "proper.*open.*pasting|compactSupport.*exchange|compactSupport.*baseChange",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.NatTrans",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict tower compact support exchange satisfies horizontal base change pasting",
+   "results": "CategoryTheory.Limits.pasteHorizIsPullback; CategoryTheory.Limits.pasteHorizIsPushout; CategoryTheory.Limits.leftSquareIsPullback; RingHom.IsStableUnderBaseChange; CategoryTheory.TwoSquare.lanBaseChange; IsBaseChange.of_comp; CategoryTheory.TwoSquare.lanBaseChange_app; LinearMap.baseChange_baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite of proper base change and open extension by zero base change on derived strict towers satisfies identity and horizontal pasting before evaluation",
+   "results": "ModuleCat.extendScalars_assoc'; ModuleCat.extendScalarsComp; ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc_assoc; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.extendScalars_id_comp_assoc; ModuleCat.extendScalars_comp_id; ModuleCat.extendScalars_id_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For constant ring sheaf inverse systems compact support exchange obtained from adjunction mates composes under two successive base changes",
+   "results": "LightCondensed.ihomPoints_symm_comp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this normalized derived pro-etale tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*[Hh]orizontal|[Hh]orizontal.*strict|compactSupport.*exchange|shriekBaseChange",
+   "results": "Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full strict-tower statement; generic mate hits are reused through the existing lem-weil-pbc-mate-pasting Mathlib leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Horizontal composition of compact support base change maps for unbounded derived strict towers of proetale module sheaves",
+   "results": "Mathlib.Tactic.BicategoryLike.HorizontalComp.e; CategoryTheory.NatTrans.hcomp; CategoryTheory.Bicategory.leftAdjointSquare.hcomp; CategoryTheory.Bicategory.rightAdjointSquare.hcomp; IsBaseChange.of_comp; Mathlib.Tactic.BicategoryLike.instInhabitedHorizontalComp.default; CategoryTheory.NatTrans.hcomp_app; SheafOfModules.pullbackComp",
+   "date": "2026-10-22",
+   "verdict": "no match for the full strict-tower statement; generic mate hits are reused through the existing lem-weil-pbc-mate-pasting Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_vcomp\"",
+   "results": "CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp; CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.Bicategory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match for the full strict-tower statement; generic mate hits are reused through the existing lem-weil-pbc-mate-pasting Mathlib leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict inverse systems of module sheaves compact support exchange satisfies horizontal pasting with normalized open transpose and derived proper adjunction mates",
+   "results": "LightCondensed.ihomPoints_symm_comp; AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app_assoc; AlgebraicGeometry.PresheafedSpace.GlueData.f_invApp_f_app; AlgebraicGeometry.PresheafedSpace.GlueData.π_ιInvApp_π; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app_assoc; AlgebraicGeometry.PresheafedSpace.GlueData.f_invApp_f_app_assoc; AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app; TopCat.Sheaf.interUnionPullbackConeLift_right",
+   "date": "2026-10-22",
+   "verdict": "no match for the full strict-tower statement; generic mate hits are reused through the existing lem-weil-pbc-mate-pasting Mathlib leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Whiskering the mate of a composite pullback square with extension by zero gives the composite of compactly supported exchange transformations",
+   "results": "PresheafOfModules.pullbackComp; CategoryTheory.mateEquiv_square; SheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.comp; CategoryTheory.mateEquiv_hcomp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.conjugateEquiv_pullbackComp_inv; CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom",
+   "date": "2026-10-22",
+   "verdict": "no match for the full strict-tower statement; generic mate hits are reused through the existing lem-weil-pbc-mate-pasting Mathlib leaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-cbc-complete-proetale",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof: 'natural by the corresponding properties of the two factors (the coherence of [def-cbc-exchange-map] and of the completed map of [thm-weil-pbc-complete-proetale])', identity and horizontal-pasting part.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-strict-support-horizontal-exchange",
+  "worker": "stage1",
+  "summary": "Reuse the arbitrary-map strict pullback-square pasting lemma, general mate-pasting Mathlib leaf and normalized strict-tower open calculus; give the actual two-factor horizontal calculation using naturality of proper exchange. No statement change and no new nodes.",
+  "blueprint": "thm-cbc-complete-proetale proof final coherence sentence: identity and horizontal pasting of the two factors, before derived inverse limits.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q86-ebc496af0",
+  "group": "Q86",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-ebc496af0 (reviewer sub-agent of L); spot-checked: Read all four steps of the item, all six statement dependencies and the two other cited nodes (lem-cbc-strict-tower-pullback-square-pasting, lem-weil-pbc-mate-pasting) in full, plus Stacks sites-cohomology.tex Tag 07A7 (l.4033) and Tag 0E47 (l.4094) and the blueprint main-20261015 proof of thm-cbc-complete-proetale. There are no new nodes, no statement change and no repair note: this is the first split of a statement-only node created by Q146. Step 1: the square-pasting lemma applies with j,j1,j2=p,p',p'' and a,b=ḡ,h̄, since ḡ≫p=p'≫g. Clause 1 of the mate-pasting lemma then gives the E_{p,gh} formula. I checked every type in the chain. Step 1 leaves implicit that whiskering a square by isomorphisms of its transverse functors whiskers its mate the same way; I checked this from the component formula of def-weil-pbc-adjunction-mate, and it is elementary. The report wrongly calls this 'clause 3', but the node itself does not cite clause 3. Step 2: the first open paragraph of lem-cbc-strict-tower-proper-open-calculus holds for arbitrary B on unbounded strict towers and gives exactly the stated β equation. Both squares are cartesian open squares, and the finite-origin hypothesis of that node, which concerns γ, is not used. Step 3: I redid the substitution, the cancellation of the c_{ḡ,h̄} factors, the naturality of E_h at β_{j,ḡ} and the regrouping into F_{c''}c∘e_hG∘G_he∘c^{-1}F; all correct. Step 4: naturality holds because e is a composite of natural transformations, and the identity law follows from mate-pasting clause 4 and the identity clause for β. Edge cases checked: identity g or h, j=id (reduces to Stacks 0E47), p=id, B=0. No duplicates among the cbc strict, pasting and exchange nodes (direct-image coherence, composition-pasting coherence, finite normalized pasting, the proper/open calculus). No SGA is cited and there are no tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictSupportHorizontalExchange",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.supportExchange_comp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.supportExchange_id",
+   "AlgebraicGeometry.ProEtale.StrictTower.supportExchange_comp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictSupportHorizontalExchange.lean",
+  "statement": "theorem supportExchange_comp {X X₁ X₂ Y Y₁ Y₂ : Scheme.{u}} {f : X ⟶ Y} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂} (c : Compactification f) (c₁ : Compactification f₁) (c₂ : Compactification f₂) [QuasiCompact c.i] (g : Y₁ ⟶ Y) (h : Y₂ ⟶ Y₁) (a : c₁.Z ⟶ c.Z) (b : c₂.Z ⟶ c₁.Z) (gX : X₁ ⟶ X) (hX : X₂ ⟶ X₁) (sp₁ : IsPullback a c₁.g c.g g) (sp₂ : IsPullback b c₂.g c₁.g h) (sj₁ : IsPullback gX c₁.i c.i a) (sj₂ : IsPullback hX c₂.i c₁.i b) : (compositionE B c c₂ (hX ≫ gX) (h ≫ g) (b ≫ a) (sj₂.paste_horiz sj₁).w (sp₂.paste_horiz sp₁).w (sj₂.paste_horiz sj₁) = Functor.whiskerLeft (compositionF B c) (gComp B h g).hom ≫ Functor.whiskerRight (compositionE B c c₁ gX g a sj₁.w sp₁.w sj₁) (G B h) ≫ Functor.whiskerLeft (G B gX) (compositionE B c₁ c₂ hX h b sj₂.w sp₂.w sj₂) ≫ Functor.whiskerRight (gComp B hX gX).inv (compositionF B c₂)) ∧ ((beta B (hX ≫ gX) c₂.i c.i (b ≫ a) (sj₂.paste_horiz sj₁).w (sj₂.paste_horiz sj₁)).hom = Functor.whiskerLeft (J B c.i) (gComp B b a).hom ≫ Functor.whiskerRight (beta B gX c₁.i c.i a sj₁.w sj₁).hom (G B b) ≫ Functor.whiskerLeft (G B gX) (beta B hX c₂.i c₁.i b sj₂.w sj₂).hom ≫ Functor.whiskerRight (gComp B hX gX).inv (J B c₂.i))",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the already landed compositionF and compositionE from def-cbc-strict-tower-composition-maps; no duplicate compact-support functor or exchange construction. The main theorem states both horizontal equations; supportExchange_id gives the identity normalization. Naturality is part of the existing natural transformation compositionE."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f1c69b1d",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read the item node, the delivered module, the report (Worker report and Second reading by Q46 present) and the side-live dependency Lean (compositionF/compositionE, exchange = mateEquiv of squareG, beta = (asIso betaInv).symm, gComp : G(f≫g) ≅ G g ⋙ G f, gId, beta_comp, beta_id). Both conjuncts of supportExchange_comp and the identity clause match the node factor by factor (gComp.hom = c^{-1}, gComp.inv = c), with outer squares built by paste_horiz. Arbitrary cartesian presentations include Compactification.baseChange; no extra hypotheses; universes are Scheme.{u} and B : Type (u+1), as in the dependency. The only record changes are the lean field and the added stmt_dep def-cbc-strict-tower-composition-maps, which is landed, allowed by brief-stage2 l.177, and acyclic. The statement field is verbatim. Docstrings give source place, blueprint tag and proof steps; proofs are sorry only; no new definitions. Duplicate search: compositionPastingCoherence and RefinementExchangeCoherence state vertical/refinement laws, not this horizontal one. Edge cases: identity g/h, j = id, p = id, B = 0, empty schemes. No compile (no file changed). Advisory only: the second conjunct restates beta_comp at NatTrans level, as the node demands; the ProjectionCompactification import supplies nothing in the statement; QuasiCompact c.i is unused but is a node hypothesis."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261024T190824-L-96453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.StrictTower.supportExchange_comp",
+   "AlgebraicGeometry.ProEtale.StrictTower.supportExchange_id"
+  ],
+  "sorry_after": []
+ }
+}

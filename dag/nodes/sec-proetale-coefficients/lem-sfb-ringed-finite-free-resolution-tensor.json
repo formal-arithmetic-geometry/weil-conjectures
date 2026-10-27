@@ -59,7 +59,7 @@
    }
   },
   {
-   "text": "The ordinary symmetry of sheaf tensor is induced by $x\\otimes y\\mapsto y\\otimes x$ by [lem-pc-sheaf-modules-tensor-closed]. For any two complexes $P,L$, define $\\sigma:\\operatorname{Tot}(P\\otimes_B L)\\to\\operatorname{Tot}(L\\otimes_B P)$ on the $(p,q)$ summand by $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$. With the total differential in [def-pc-tensor-complex-sheaves], $\\sigma d$ has coefficients $(-1)^{(p+1)q}=(-1)^{pq+q}$ on $y\\otimes d_Px$ and $(-1)^{p+p(q+1)}=(-1)^{pq}$ on $d_Ly\\otimes x$; these are the coefficients in $d\\sigma$. Hence this is a cochain map. Interchanging again gives the sign $(-1)^{pq+qp}=1$, so it is an isomorphism. The formulas commute with restrictions and cochain maps, and induce maps on the direct sum since each summand goes to one summand. In particular for $L=N[0]$ all interchange signs are $1$.",
+   "text": "The ordinary symmetry of sheaf tensor is induced by $x\\otimes y\\mapsto y\\otimes x$ by [lem-pc-sheaf-modules-tensor-closed]. For any two complexes $P,L$, define $\\sigma:\\operatorname{Tot}(P\\otimes_B L)\\to\\operatorname{Tot}(L\\otimes_B P)$ on the $(p,q)$ summand by $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$. With the total differential in [def-pc-tensor-complex-sheaves], $\\sigma d$ has coefficients $(-1)^{(p+1)q}=(-1)^{pq+q}$ on $y\\otimes d_Px$ and $(-1)^{p+p(q+1)}=(-1)^{pq}$ on $d_Ly\\otimes x$; these are the coefficients in $d\\sigma$. Hence this is a cochain map. Interchanging again gives the sign $(-1)^{pq+qp}=1$, so it is an isomorphism. The formulas commute with restrictions and cochain maps, and induce maps on the direct sum since each summand goes to one summand. In particular for $L=N[0]$ all interchange signs are $1$. Lean reuses CochainComplex.Monoidal.braiding, its ι_braiding_hom formula, and braiding_naturality through a private generic monoidal lemma.",
    "uses": [
     "lem-pc-sheaf-modules-tensor-closed",
     "def-pc-tensor-complex-sheaves"
@@ -83,9 +83,11 @@
    }
   },
   {
-   "text": "In $\\operatorname{Tot}(N[0]\\otimes_B K)$ the only nonzero summand of total degree $i$ has bidegree $(0,i)$. Its term is $N\\otimes_B K^i$ and its differential is $1_N\\otimes d_K^i$, since $d_{N[0]}=0$ and $(-1)^0=1$ [def-pc-tensor-complex-sheaves]. Transport through $\\gamma_i$ of step 1: the differential becomes $\\delta_i=\\gamma_{i+1}(1_N\\otimes d_K^i)\\gamma_i^{-1}$, and $\\delta_{i+1}\\delta_i=\\gamma_{i+2}(1_N\\otimes(d_K^{i+1}d_K^i))\\gamma_i^{-1}=0$. Hence the $\\gamma_i$ are a cochain isomorphism onto $T_N(K)$. If the transported differential of $K$ has matrix $(a^i_{kj})$ on an object of the site, it sends $e_j$ to $\\sum_k a^i_{kj}e_k$. Applying $1_N\\otimes d$ to $\\sum_j z_j\\otimes e_j$ and then $\\gamma_{i+1}$ gives $\\bigl(\\sum_j a^i_{kj}z_j\\bigr)_k$. This formula respects restriction, so also applies to locally specified matrices. Composing its localization with step 5 proves the stated isomorphism and the asserted differential.",
+   "text": "In $\\operatorname{Tot}(N[0]\\otimes_B K)$ the only nonzero summand of total degree $i$ has bidegree $(0,i)$. Its term is $N\\otimes_B K^i$ and its differential is $1_N\\otimes d_K^i$, since $d_{N[0]}=0$ and $(-1)^0=1$ [def-pc-tensor-complex-sheaves]. Transport through $\\gamma_i$ of step 1: the differential becomes $\\delta_i=\\gamma_{i+1}(1_N\\otimes d_K^i)\\gamma_i^{-1}$, and $\\delta_{i+1}\\delta_i=\\gamma_{i+2}(1_N\\otimes(d_K^{i+1}d_K^i))\\gamma_i^{-1}=0$. Hence the $\\gamma_i$ are a cochain isomorphism onto $T_N(K)$. If the transported differential of $K$ has matrix $(a^i_{kj})$ on an object of the site, it sends $e_j$ to $\\sum_k a^i_{kj}e_k$. Applying $1_N\\otimes d$ to $\\sum_j z_j\\otimes e_j$ and then $\\gamma_{i+1}$ gives $\\bigl(\\sum_j a^i_{kj}z_j\\bigr)_k$. This formula respects restriction, so also applies to locally specified matrices. Composing its localization with step 5 proves the stated isomorphism and the asserted differential. Lean collapses the single left tensor factor with mapBifunctorSingle₁Iso, transports by Hom.isoOfComponents, and proves the summand equation using a private generic collapse lemma. For the sectionwise calculation, each matrix entry is a unit endomorphism. Its values on 1 form a compatible scalar section; sheafification preserves scalar multiplication, so its tensor action is multiplication by that section. Expand coordinateInverse as its finite sum and evaluate each entry. Empty sums cover rank zero.",
    "uses": [
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": true,
    "source": {
@@ -94,11 +96,14 @@
    }
   },
   {
-   "text": "For a specified exact sequence $0\\to B^m\\xrightarrow fB^n\\xrightarrow gM\\to0$, put $K^{-1}=B^m$, $K^0=B^n$, $d^{-1}=f$, all other terms zero, and $\\epsilon^0=g$. Since $gf=0$ this is a cochain augmentation. Its cohomology is $H^{-1}K=\\ker f=0$, $H^0K=\\operatorname{coker}f\\cong M$ via $g$, and zero in all other degrees. The last isomorphism follows from exactness: $\\operatorname{im}f=\\ker g$ and $g$ is an epimorphism in the abelian category [def-weil-sheaf-of-modules-category]. Thus $\\epsilon$ is a quasi-isomorphism by [def-pc-quasi-iso-modules]. A specified isomorphism $B^r\\to M$ likewise gives a cochain isomorphism in degree zero. Steps 1–6 apply to these very complexes, with identity coordinate trivializations and ranks zero outside $[-1,0]$ or $\\{0\\}$, giving the two displayed special cases and their actual transported differentials. The cohomology formula used here is that of [def-weil-abstract-derived-category].",
+   "text": "For a specified exact sequence $0\\to B^m\\xrightarrow fB^n\\xrightarrow gM\\to0$, put $K^{-1}=B^m$, $K^0=B^n$, $d^{-1}=f$, all other terms zero, and $\\epsilon^0=g$. Since $gf=0$ this is a cochain augmentation. Its cohomology is $H^{-1}K=\\ker f=0$, $H^0K=\\operatorname{coker}f\\cong M$ via $g$, and zero in all other degrees. The last isomorphism follows from exactness: $\\operatorname{im}f=\\ker g$ and $g$ is an epimorphism in the abelian category [def-weil-sheaf-of-modules-category]. Thus $\\epsilon$ is a quasi-isomorphism by [def-pc-quasi-iso-modules]. A specified isomorphism $B^r\\to M$ likewise gives a cochain isomorphism in degree zero. Steps 1–6 apply to these very complexes, with identity coordinate trivializations and ranks zero outside $[-1,0]$ or $\\{0\\}$, giving the two displayed special cases and their actual transported differentials. The cohomology formula used here is that of [def-weil-abstract-derived-category]. Lean constructs the specified cone augmentation using finite_free_mono_cokernel_kflat [lem-sfb-finite-free-mono-cokernel-kflat]. Tensoring the cone commutes with its defining finite biproduct, and the coordinate isomorphisms identify its map with the stated transported differential. The degree-zero corollary uses single_flat, bounded-flat K-flatness, and the normalized fixed-tensor comparison directly.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pc-quasi-iso-modules",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-sfb-finite-free-mono-cokernel-kflat",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
    ],
    "elementary": true,
    "source": {
@@ -118,12 +123,14 @@
   "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-kflat-fixed-tensor-triangulated",
   "def-weil-abstract-derived-category",
-  "def-pc-quasi-iso-modules"
+  "def-pc-quasi-iso-modules",
+  "lem-sfb-finite-free-mono-cokernel-kflat"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YQ, 06YP and 06YU (bounded-flat-K-flat and K-flat derived tensor); finite-coordinate expansion from sites-modules.tex Section 03EK; augmentation checked from homology Definition 0115"
+  "place": "Tags 06YQ, 06YP and 06YU; coordinate computation in sites-modules.tex Section 03EK",
+  "note": "H9: all four theorem proofs are now complete, including finiteFreeResolution_tensor. The main proof uses the existing finite-free flatness, bounded-flat K-flatness, normalized fixed-tensor descent, signed interchange, and transported coordinate complex. The sectionwise matrix formula is proved with private scalar-action and finite-sum helpers, without flatness of N or points. No statement, public definition, or public import changed; no new proof obligations."
  },
  "mathlib_searches": [
   {
@@ -278,5 +285,27 @@
   "group": "Q65",
   "result": "pass",
   "note": "Statement matches lem-sfb-ringed-finite-free-resolution-tensor clause by clause; only the item's lean field changed and all 10 stmt_dep files equal side-live. Flatness and K-flatness are conclusions (IsFlatOnSite, IsKFlatIndependentCoefficients). gamma is pinned in both directions by coordinateMap/coordinateInverse (Pi.lift of N◁π_j≫ρ, and Σ π_j≫ρ⁻¹≫N◁Pi.ι_j; checked mutually inverse). delta = γ⁻¹(N◁d)γ. sigma is pinned on every (p,q) piece by (-1)^{pq}β (sign check redone against Mathlib ε₂). tau is pinned on the (0,i) piece. c equals representativeIso on flat K-flat L, and comparison is the explicit composite through Qε. The local-matrix clause over every U is true. The two-term and degree-zero clauses hold, and the SES and iso augmentations are pinned (inr≫ε=g[0]). EssentiallySmall.{r} is the dependency convention; no flatness of N, no points. nt_compile --json: clean in 55.6 s at load 200 (timed out at 60 s at load 254; worker had 42-45 s). Advisories: representativeIso and the other aliases come from the kflat-fixed-tensor theorem module (a proof_dep; .choose of a stmt_dep); the augmentation corollaries give the tensor iso as Nonempty, while the canonical one follows from the main theorem and the only citer needs iso classes; the second-reading section is brief; compile time is near the limit under load."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261023T231526-L-3613348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

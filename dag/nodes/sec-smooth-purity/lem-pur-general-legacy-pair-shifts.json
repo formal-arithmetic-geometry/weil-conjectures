@@ -1,0 +1,207 @@
+{
+ "id": "lem-pur-general-legacy-pair-shifts",
+ "kind": "statement",
+ "title": "Additive stagewise shifts on the older rational pair category",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and any scheme $Y$; no structure map from $Y$ to $k$ is assumed. Let $I$ be the finite coefficient subfields of $\\Omega$ [def-weil-finite-subextension-directed-set]. For $E\\in I$, fix the small model $\\widetilde E=\\mathrm{Shrink}(E)$ and its algebra equivalence $s_E:\\widetilde E\\cong E$, and put $i_{EL}=s_L^{-1}\\circ(E\\hookrightarrow L)\\circ s_E$. Let $\\mathcal A_E^{\\mathrm{old}}$ be the full subcategory of the completed integral derived category whose objects are derived complete and whose reductions modulo every positive uniformizer power are finite-torsion constructible in a single finite cohomological interval independent of the power [def-weil-derived-complete-integral-detailed]. Here the specified presentation is exactly $\\mathrm{boundedConstructibleDerivedCompleteIntegralCategory}(D,\\ell,\\ell\\ne p,\\widetilde E,Y)$, with its functors $\\mathrm{integralDerivedReduction}$. Set $C_E^{\\mathrm{old}}=\\mathcal A_E^{\\mathrm{old}}[1/\\varpi_E]$, the raw Hom scalar localization [def-weil-rationalization-karoubi], namely $\\mathrm{rationalConstructibleCategory}(D,\\ell,\\ell\\ne p,\\widetilde E,Y)$. Its scalar transition $T^{\\mathrm{old}}_{EL}$ is $\\mathrm{rationalScalarExtension}$ along $i_{EL}$. These named presentations specify the categories and maps in the assertions below; no identification with a different presentation of the integral predicate is asserted.\n\nUse the tensor-normalized system $S^{\\mathrm{old}}$ [lem-pur-general-legacy-stage-coherence], its literal pair category $P^{\\mathrm{old}}$ [def-sf-directed-common-stage-data], and the specified Hom groups [lem-pur-general-legacy-hom-coordinates]. Let $\\sigma_{EL,n}:T^{\\mathrm{old}}_{EL}(-[n])\\cong(T^{\\mathrm{old}}_{EL}-)[n]$ be the prescribed scalar shift comparisons [lem-weil-scalar-extension-exact-triangulated, lem-weil-scalar-associator-shifts]. There is a coherent integer-shift structure [def-weil-triangulated-category] on this fixed pair category for which\n$$(E,K)[n]=(E,K[n]),\\qquad [L,u][n]=[L,\\sigma_{FL,n,H}^{-1}\\circ u[n]\\circ\\sigma_{EL,n,K}].$$\nEvery shift functor is additive for the specified colimit group laws. There are coherent shift comparisons $\\beta_{E,n,K}:j_E(K[n])\\cong(j_EK)[n]$ whose hom components are identities on these literal shifted pairs. A stage zero pair is zero. The canonical $\\theta_{EL}:j_LT^{\\mathrm{old}}_{EL}\\cong j_E$ commutes with these already fixed comparisons; explicitly\n$$\\beta_{E,n,K}\\circ\\theta_{EL,K[n]}=\\theta_{EL,K}[n]\\circ\\beta_{L,n,T^{\\mathrm{old}}_{EL}K}\\circ j_L(\\sigma_{EL,n,K}).$$",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Old owning proof argument 7; AlgebraicallyClosedCoefficients.lean:512-549, 829-949 (associator_commShift, shift_exists, shiftAdditive, inclusionCommShift, zero_exists, transitionIso_commShift).",
+  "note": "Construction material from old argument 7 (retained verbatim): For the retained finite-field legacy realization: The normalized scalar associator commutes with integer shifts. Transfer this property along the functor equalities and the specified HEq of associators. Use the proved upstream StageSystem stagewise shift construction and its identity inclusion comparisons. Its shiftMorphism has additive stage components, hence its descended functor is additive by the upstream morphism API. Transport additivity across the equality of the specified and native preadditive structures. The image of a stage zero is zero. The transition identifications commute with shifts by the upstream coherence proof. For each n use the stage shift functors as components of shiftMorphism, with scalar shift comparisons as its transition data. The compatibility equation for this morphism is exactly the scalar associator shift equation. Descending it gives the displayed conjugated representative formula; the same equation shows independence of later-stage representative. Descend the finite-stage zero and addition isomorphisms at each literal pair; all coherence diagrams become the finite-stage diagrams. Inclusion comparisons have identity components. Additivity of the stage components gives the descended additive shiftMorphism functor for the native preadditive structure; transfer across homGroup_eq_native from the Hom node. For theta use its representative alpha_(E,L,L) and the scalar associator shift equation, then cancel the identity inclusion comparisons. The stage zero remains zero because its identity representative is zero."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-general-legacy-stage-coherence",
+  "def-sf-directed-common-stage-data",
+  "lem-pur-general-legacy-hom-coordinates",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-weil-scalar-associator-shifts",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Suppress the superscript old, keeping the named categories unchanged. The rationalization node gives the additive stage shifts $S_{E,n}$ and zero objects; scalar exactness gives the prescribed coherent $\\sigma_{EL,n}$. The legacy coherence node identifies the actual associator with the tensor associator transported along the coefficient-map equality. By scalar associator shift compatibility it satisfies\n$$S_{M,n}(\\alpha_{ELM,K})\\circ\\sigma_{LM,n,T_{EL}K}\\circ T_{LM}(\\sigma_{EL,n,K})=\\sigma_{EM,n,K}\\circ\\alpha_{ELM,K[n]}.$$\nHere equality transport causes no new assumption: eliminate the equality $i_{LM}i_{EL}=i_{EM}$, whereupon its equality isomorphism is the identity and the equation is exactly the cited tensor equation. Thus it also holds for repeated fields. We use no comparison with the datum-free coefficient system.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-scalar-extension-exact-triangulated",
+    "lem-weil-scalar-associator-shifts",
+    "lem-pur-general-legacy-stage-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old argument 7, associator_commShift; live AlgebraicallyClosedCoefficients.lean:512-535."
+   }
+  },
+  {
+   "text": "For each integer $n$ use the family $\\Phi_E=S_{E,n}$ and $b_{EL}=\\sigma_{EL,n}$ in associative-stage family descent, with both systems equal to $S^{\\mathrm{old}}$. Its entire tower hypothesis is the equation in step 1. The descended functor $Q_n$ has $Q_n(E,K)=(E,K[n])$ and\n$$Q_n[L,u]=[L,\\sigma_{FL,n,H}^{-1}\\circ u[n]\\circ\\sigma_{EL,n,K}].$$\nThe helper proves representative independence and functoriality, including self-transitions. Its identity-component inclusion comparison gives $Q_nj_E=j_ES_{E,n}$ on objects and arrows.",
+   "uses": [
+    "lem-pur-associative-stage-family-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old argument 7, shiftMorphism and descent of the displayed shifted representative."
+   }
+  },
+  {
+   "text": "Write $z_{E,K}:K[0]\\to K$ and $c_{E,m,n,K}:K[m+n]\\to(K[m])[n]$ for the stage shift isomorphisms. Coherence of the prescribed scalar comparisons means exactly\n$$z_{L,TK}\\circ\\sigma_{EL,0,K}=T(z_{E,K}),$$\n$$c_{L,m,n,TK}\\circ\\sigma_{EL,m+n,K}=\\sigma_{EL,m,K}[n]\\circ\\sigma_{EL,n,K[m]}\\circ T(c_{E,m,n,K}),\\quad T=T_{EL}.$$\nThe first equation makes $z_E$ a compatible transformation from the zero-shift family to the identity family. The second makes $c_{E,m,n}$ a compatible transformation from the $(m+n)$-shift family to the composite $n$-after-$m$ family. Apply the helper also to their inverses. Its identity and composite comparisons identify the resulting targets with $1$ and $Q_nQ_m$. This gives natural isomorphisms $z:Q_0\\cong1$ and $c_{m,n}:Q_{m+n}\\cong Q_nQ_m$ whose components at $(E,K)$ are precisely $j_E(z_{E,K})$ and $j_E(c_{E,m,n,K})$.",
+   "uses": [
+    "lem-weil-scalar-extension-exact-triangulated",
+    "lem-pur-associative-stage-family-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old argument 7: descend the finite-stage shift-zero and shift-add isomorphisms."
+   }
+  },
+  {
+   "text": "Check the shift associativity and the two unit diagrams at an arbitrary pair $(E,K)$. Substitute the components from step 3 and replace every $Q_nj_E$ on an arrow by $j_ES_{E,n}$ from step 2. Each composite is now $j_E$ applied to the corresponding stage composite. The two associativity composites agree by the stage shift associativity equation; the zero-plus-$n$ and $n$-plus-zero composites agree by the two stage unit equations. Thus $(Q_n,z,c)$ is a coherent integer-shift structure. Since $Q_{-n}$ composes with $Q_n$ to $Q_0\\cong1$ in either order, all shifts are autoequivalences. Set $\\beta_{E,n,K}=1$ on the literal shifted pair. Naturality is step 2, and its zero/add equations reduce to $z_{(E,K)}=j_Ez_{E,K}$ and $c_{m,n,(E,K)}=j_Ec_{E,m,n,K}$, which hold by construction.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-pur-associative-stage-family-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old argument 7: finite-stage coherence diagrams and identity inclusion comparisons."
+   }
+  },
+  {
+   "text": "Use the Hom-coordinate node to put two arbitrary arrows over a common $L$ and write them $[L,u],[L,v]$, whose sum is $[L,u+v]$. Stage shifts are additive (the induced linear shifts of rationalization), and stage composition is bilinear. Hence, putting $s=\\sigma_{EL,n,K}$ and $t=\\sigma_{FL,n,H}$, the representative of $Q_n([L,u]+[L,v])$ is\n$$t^{-1}(u+v)[n]s=t^{-1}u[n]s+t^{-1}v[n]s.$$\nThis proves additivity for the specified colimit group laws, since the Hom node identifies them with the representative sum laws. For a zero object $0_E$ of any stage, additivity of $j_E$ gives $1_{j_E0_E}=j_E(1_{0_E})=j_E(0)=0$. Every arrow into or out of this object is zero by composing with its identity, so $(E,0_E)$ is zero. Nonemptiness of $I$ gives a zero pair.",
+   "uses": [
+    "lem-pur-general-legacy-hom-coordinates",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old argument 7: shiftAdditive, zero_exists and equality with native preadditive Hom laws."
+   }
+  },
+  {
+   "text": "It remains to check the specified $\\theta$, rather than choose another transition isomorphism. The pair-category definition represents $\\theta_{EL,K}$ at $L$ by $a_K=\\alpha_{ELL,K}$. Put $T=T_{EL}$ and $U=T_{LL}$. The associator shift equation from step 1 with $(E,L,L)$ is\n$$a_K[n]\\circ\\sigma_{LL,n,TK}\\circ U(\\sigma_{EL,n,K})=\\sigma_{EL,n,K}\\circ a_{K[n]}.$$\nShifting the representative of $\\theta_{EL,K}$ by step 2 gives\n$$[L,\\sigma_{EL,n,K}^{-1}\\circ a_K[n]\\circ\\sigma_{LL,n,TK}].$$\nBy the definition of $j_L$, the representative of $j_L(\\sigma_{EL,n,K})$ is $U(\\sigma_{EL,n,K})$. Compose the last two displayed representatives: cancel $\\sigma_{EL,n,K}^{-1}\\sigma_{EL,n,K}$ using the associator equation to obtain $[L,a_{K[n]}]=\\theta_{EL,K[n]}$. Common-stage composition is exactly composition of these maps. Since both $\\beta$ components are identities, this equality is the required displayed square. The calculation allows $E=L$ and never sets $T_{LL}$ or $\\alpha_{ELL}$ equal to identities.",
+   "uses": [
+    "def-sf-directed-common-stage-data",
+    "lem-weil-scalar-associator-shifts",
+    "lem-pur-general-legacy-stage-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old argument 7: transitionIso_commShift; StageSystem/Shift.lean transIso_commShift."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "lem-weil-scalar-associator-shifts",
+  "lem-pur-general-legacy-stage-coherence",
+  "lem-pur-associative-stage-family-descent",
+  "lem-pur-general-legacy-hom-coordinates",
+  "def-sf-directed-common-stage-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained old argument 7, expanded following live Sheaf/Paper/AlgebraicallyClosedCoefficients.lean:512-535, 829-949 and WeilConjectures/CategoryTheory/StageSystem/Shift.lean; the blueprint unit supplies the common-stage coefficient route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integer shifts on a finite coefficient pair category descend from stagewise additive shift functors with identity inclusion comparisons and canonical shift compatible transition isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s); CochainComplex.shiftShortComplexFunctorIso_add'_hom_app, CochainComplex.shiftShortComplexFunctorIso, CochainComplex.shiftFunctorAdd'_eq, CategoryTheory.Functor.ShiftSequence.shiftIso, CategoryTheory.GradedObject.hasShift, CochainComplex.shiftFunctorAdd'_hom_app_f', CochainComplex.shiftFunctorAdd', CochainComplex.shiftFunctorAdd_eq",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.NatTrans.CommShift",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor, CategoryTheory.NatTrans.CommShift.of_iso_inv, CategoryTheory.NatTrans.CommShift.of_iso_symm, CategoryTheory.NatTrans.CommShift.of_isIso, CategoryTheory.Functor.CommShift.ofComp_compatibility, CategoryTheory.NatTrans.CommShift.comp",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "shiftMorphism|PairCategory.*[Ss]hift|associator_commShift",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Additivity of a descended shift on a common stage pair category from its additive stage components",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.shiftAdd, CategoryTheory.ShiftMkCore.add, CategoryTheory.HasShift.Induced.add.congr_simp, CategoryTheory.shiftFunctorAdd_hom_app_obj_of_induced, CategoryTheory.shiftFunctorAdd, CategoryTheory.DifferentialObject.shiftFunctorAdd, CategoryTheory.HasShift.Induced.add, CochainComplex.instAdditiveIntShiftFunctor",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|descNatTrans|tr_mapAt",
+   "results": "; 0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: generic shifts do not identify the specified legacy scalar stages, fixed Hom groups and transition identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integer shifts on the legacy finite coefficient pair category are additive for directed colimit Hom groups and canonical transition identifications commute with these shifts",
+   "results": "; 8 hits: CochainComplex.shiftFunctorAdd'_eq, CochainComplex.instAdditiveHomologicalComplexIntUpShiftFunctor, CategoryTheory.ShiftedHom.comp_add, CategoryTheory.ShiftedHom.add_comp, CochainComplex.shiftFunctorAdd_eq, CategoryTheory.ShiftedHom.map_add, HomRel.IsCompatibleWithShift, CategoryTheory.HasShift.Induced.add_hom_app_obj",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: generic shifts do not identify the specified legacy scalar stages, fixed Hom groups and transition identifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integer shift on a directed common stage category preserves addition and commutes with canonical transition isomorphisms",
+   "results": "; 8 hits: DerivedCategory.instAdditiveShiftFunctorInt, CategoryTheory.shiftAdd, CategoryTheory.ShiftMkCore.add, CochainComplex.instAdditiveHomologicalComplexIntUpShiftFunctor, CategoryTheory.Functor.FullyFaithful.hasShift, CategoryTheory.HasShift.induced, CategoryTheory.shiftFunctorAdd, CategoryTheory.Functor.CommShift.isoAdd",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: generic shifts do not identify the specified legacy scalar stages, fixed Hom groups and transition identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasShift, CategoryTheory.Functor.CommShift",
+   "results": "; 12 hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: generic shifts do not identify the specified legacy scalar stages, fixed Hom groups and transition identifications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Old owning proof argument 7; AlgebraicallyClosedCoefficients.lean:512-549, 829-949 (associator_commShift, shift_exists, shiftAdditive, inclusionCommShift, zero_exists, transitionIso_commShift).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-legacy-pair-shifts",
+  "worker": "stage1",
+  "summary": "Kept the exact legacy statement. Constructed shifts through a general associative-stage family descent helper without identity-normalization hypotheses; proved zero/add coherence, identity inclusion comparisons, additivity for the fixed colimit groups, zero pairs and the actual transition square. Similar datum-free and normalized PBC nodes do not apply to these fixed presentations.",
+  "blueprint": "Nearest ancestor def-weil-algebraically-closed-coefficients, old owning proof argument 7: associator shift compatibility; stage shiftMorphism; stage zero/add coherence; additive quotient Hom; zero pair; canonical transition square."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NO-c5e514139",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-c5e514139 (reviewer sub-agent of L); spot-checked: Read the item and the new node lem-pur-associative-stage-family-descent in full, every cited statement, the parent def-weil-algebraically-closed-coefficients (its step 4 cites the item), unit sk-def-sf-operations (uses=[], steps=[], so no route constraint), the qlbar-two-colimit blueprint section and the verbatim old argument 7, and the Lean source it follows (AlgebraicallyClosedCoefficients.lean:505-540 and 825-955; StageSystem/Functor.lean:1-256). Item statement and stmt_deps are unchanged; the categories are the fixed legacy presentations, with no identification with the datum-free system. Step 1: the associator shift equation is exactly NatTrans.CommShift for α : T_LM T_EL ⇒ T_EM; lem-weil-scalar-associator-shifts covers arbitrary algebra maps between the small models; equality elimination works because σ is defined for every algebra map. Step 2: the helper's tower with Φ = S_n and b = σ is literally the step 1 equation, and the conjugation formula matches shiftRepresentative. Step 3: expanding CommShift.zero and CommShift.add gives exactly the helper's compatibility condition c∘U(η) = η∘b, for the zero-shift family against the identity family and for the (m+n)-shift family against the composite family. Step 4: each coherence diagram is j_E of the stage diagram; β = 1. Step 5: additivity follows from common-stage representatives and the native group law of hom-coordinates; the zero pair from 1 = j_E(0) = 0. Step 6: θ is represented by α_ELL; composing at stage L and cancelling σ with the (E,L,L) associator equation gives θ_{K[n]}, valid for E = L. New node: checked true directly (representative independence matches tr_mapAt, transformation naturality matches Hom.mapAt_naturality, identity and composite families descend); it matches the Lean StageSystem.Morphism API; tested on a singleton index with non-identity T_ii and on non-faithful transitions. It is not a duplicate: lem-sbc-coherent-pair-functor-descent needs U_EE = 1 and b_EE = 1, prop-weil-pbc-descent-functors needs unit equations, and the other descent nodes have unit cocycles or fixed categories. It is not a restated clause of the item. Form B1-B9 OK; searches recorded with three kinds of tool. proof_deps equals the union of uses. No SGA. No tool_uses needed (unconstrained unit). Advisory: the new node has no lean_audit field, though the report says it records the declarations; the statement of lem-weil-scalar-extension-exact-triangulated says only 'preserves shifts', while its proof builds the coherent CommShift ℤ comparisons the item uses."
+ }
+}

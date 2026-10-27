@@ -1,4 +1,5 @@
 module
+public import Sheaf.Paper.ParameterRootBoundaryData
 public import Sheaf.Paper.ProfiniteDerivedEvaluation
 public import Sheaf.Paper.RootTowerCoordinateFace
 public import Sheaf.Paper.RootTowerLisseMorphismExtension
@@ -21,69 +22,7 @@ open scoped CategoryTheory.Obj TensorProduct
 namespace AlgebraicGeometry.ProEtale.RootBoundary
 variable (F : Type u) [NormedField F]
 variable (p : ℕ) {R : Type u} [CommRing R] {r : ℕ} (t : Fin r → R)
-/-- The existing compatible prime-to-p root algebra, viewed as an affine scheme.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison). -/
-def tower : Scheme.{u} := Spec (.of (tameRootAlgebra p t))
-/-- The quotient by all original boundary parameters.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison). -/
-abbrev stratumRing := R ⧸ Ideal.span (Set.range t)
-/-- The scheme-theoretic common-zero stratum, including the empty list of parameters.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison). -/
-def stratumScheme : Scheme.{u} := Spec (.of (stratumRing t))
-/-- The closed inclusion of the common-zero stratum.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison). -/
-def stratumInclusion : stratumScheme t ⟶ Spec (.of R) :=
-  Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span (Set.range t))))
-/-- The root relations vanish when every root and every boundary parameter is set to zero.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison).
 
-Proof: On each power relation the evaluated root is zero, its exponent is positive,
-and the original parameter is zero in the quotient by the parameter ideal. On each
-transition relation both sides evaluate to zero, because the quotient m/n is positive
-for positive n dividing m. The kernel contains the generating relations, hence their ideal. -/
-theorem roots_vanish : Ideal.span (tameRootRelations p t) ≤ RingHom.ker
-    (MvPolynomial.eval₂Hom (Ideal.Quotient.mk (Ideal.span (Set.range t)))
-      (fun _ : Fin r × TameRootOrder p ↦ 0)) := by
-  sorry
-/-- The actual quotient homomorphism setting every compatible root to zero.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison). -/
-def zeroRoots : tameRootAlgebra p t →+* stratumRing t :=
-  Ideal.Quotient.lift _
-    (MvPolynomial.eval₂Hom (Ideal.Quotient.mk (Ideal.span (Set.range t)))
-      (fun _ : Fin r × TameRootOrder p ↦ 0)) (roots_vanish p t)
-/-- The canonical map of the common-zero stratum into the full compatible-root tower.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison). -/
-def boundary : stratumScheme t ⟶ tower p t :=
-  Spec.map (CommRingCat.ofHom (zeroRoots p t))
-/-- The canonical boundary map lies over the stratum inclusion.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison).
-
-Proof: The composite ring homomorphism from the base ring to the zero-root quotient
-is the quotient map, since evaluation acts on constants by that quotient map. Apply
-contravariance of Spec and the equality of these ring maps. -/
-theorem boundary_square : boundary p t ≫ parameterRootProjection p t = stratumInclusion t := by
-  sorry
-/-- The recorded actual profinite test scheme, rather than a formal product or discrete set.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison). -/
-abbrev test (X : Scheme.{u}) (P : Profinite.{u}) := (profiniteToProEtOf X).obj P
-/-- The existing base-change map between actual profinite test schemes.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison). -/
-abbrev testMap {X Y : Scheme.{u}} (f : X ⟶ Y) (P : Profinite.{u}) :=
-  RootCoordinateFace.testMap f P
-/-- The full-tower test projection to the affine base.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison). -/
-abbrev qP (P : Profinite.{u}) := (test (tower p t) P).hom ≫ parameterRootProjection p t
 /-- The existing open subscheme obtained by inverting the product of the original parameters.
 Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
 (blueprint: def-sfb-root-boundary-comparison). -/
@@ -104,16 +43,9 @@ Source: the root-tower boundary calculation, paragraph (3) of the direct-image p
 Proof: The defining pullback lift for the test map commutes with projection. Compose
 this equality with the full-tower projection and reassociate the composites. -/
 theorem puncture_square (P : Profinite.{u}) : jP p t P ≫ qP p t P = vP p t P := by
-  sorry
-/-- The actual boundary-test map lies over the stratum inclusion.
-Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
-(blueprint: def-sfb-root-boundary-comparison).
+  exact (Category.assoc _ _ _).symm.trans
+    (congrArg (· ≫ parameterRootProjection p t) (pullback.lift_snd _ _ _))
 
-Proof: The defining pullback lift for the boundary-test map commutes with its
-projection. Compose with the full-tower projection, use boundary_square, and reassociate. -/
-theorem test_boundary_square (P : Profinite.{u}) :
-    testMap (boundary p t) P ≫ qP p t P = (test (stratumScheme t) P).hom ≫ stratumInclusion t := by
-  sorry
 /-- A module considered as an object of the unbounded derived category in degree zero.
 Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
 (blueprint: def-sfb-root-boundary-comparison). -/
@@ -282,7 +214,7 @@ structural map composed with the supplied scheme morphism. Its second projection
 is therefore exactly the structural projection followed by that morphism. -/
 theorem testMap_projection {X Y : Scheme.{u}} (g : X ⟶ Y) (P : Profinite.{u}) :
     testMap g P ≫ (test Y P).hom = (test X P).hom ≫ g := by
-  sorry
+  exact pullback.lift_snd _ _ _
 /-- The actual restriction of punctured-tower sections along a continuous parameter map.
 Source: the root-tower boundary calculation, paragraph (3) of the direct-image proof
 (blueprint: def-sfb-root-boundary-comparison). -/

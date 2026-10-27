@@ -11,6 +11,10 @@ import Sheaf.Paper.OpenExtensionConstantModelConstructible
 import Sheaf.Paper.CondensedOpenExtensionProducts
 import Sheaf.Paper.IntegralOpenExtensionReduction
 import Sheaf.CategoryTheory.PretriangulatedKernelSplit
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-!
 # Integral extension by zero

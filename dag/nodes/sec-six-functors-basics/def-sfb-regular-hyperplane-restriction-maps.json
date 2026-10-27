@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-regular-hyperplane-restriction-maps",
+ "kind": "definition",
+ "title": "Canonical twisted hyperplane restriction and cohomology connecting maps",
+ "status": "split",
+ "statement": "For a field $k$, $n\\geq0$, $X=\\mathbf P^n_k$, a module $E$ on $X$, $d\\in\\mathbf Z$, and $t\\in\\Gamma(X,\\mathcal O_X(1))$, use the twists of [def-pc-projective-space-twist] and put $E(d)=E\\otimes\\mathcal O_X(d)$. Define $m_{E,d,t}:E(d)\\to E(1+d)$ to be $\\operatorname{id}_E\\otimes\\mu_t$, where $\\mu_t:\\mathcal O_X(d)\\to\\mathcal O_X(1+d)$ is multiplication by $t$ using the canonical twist multiplication. For any scheme morphism $i:H\\to Y$ and modules $E,L$ on $Y$, let $T_i=i^*$ and $\\eta$ be the section-normalized tensor-pullback adjunction of [def-pc-module-pullback], and let $c_i(E,L):T_i(E\\otimes L)\\xrightarrow{\\sim}T_iE\\otimes T_iL$ be [def-sc-tensor-pullback-power-comparison]. Define the canonical restriction $\\rho_{i,E,L}:E\\otimes L\\to i_*(T_iE\\otimes T_iL)$ to be $i_*c_i(E,L)\\circ\\eta_{E\\otimes L}$. In the projective-space situation above, for any $i:H\\to X$, define restricted multiplication $T_iE\\otimes T_i\\mathcal O_X(d)\\to T_iE\\otimes T_i\\mathcal O_X(1+d)$ to be $c_i(E,\\mathcal O_X(1+d))\\circ T_i(m_{E,d,t})\\circ c_i(E,\\mathcal O_X(d))^{-1}$. Finally, for any scheme morphism $i:H\\to Y$, modules $A,B$ on $Y$ and $N$ on $H$, and a specified short exact sequence $S:0\\to A\\xrightarrow{f}B\\xrightarrow{g}i_*N\\to0$, fix $q\\geq0$ and assume the canonical edge map $e_{i,N,q}:H^q(Y,i_*N)\\to H^q(H,N)$ of [def-weil-pbc-module-cohomology-fmap] is an isomorphism, with cohomology as in [pqf-def-cohomology]. Define the edge-transported connecting map $H^q(H,N)\\to H^{q+1}(Y,A)$ as $\\delta_{S,q}\\circ e_{i,N,q}^{-1}$, where $\\delta_{S,q}$ is [def-sc-module-cohomology-boundary]. All these are fixed constructions; no regularity, coherence, infinitude of $k$, or closed-immersion assumption is required to define them.",
+ "stmt_deps": [
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-sc-tensor-pullback-power-comparison",
+  "def-sc-module-cohomology-boundary",
+  "def-weil-pbc-module-cohomology-fmap",
+  "pqf-def-cohomology"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08A0 (lemma-exact-sequence-induction, multiplication by the linear section) and Tag 0EGK (remark-exact-sequence-induction-cohomology, twisted restriction and associated connecting maps); existing constructions in Sheaf.AlgebraicGeometry.CoherentRegularHyperplaneRestriction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical twisted hyperplane multiplication restriction map pullback tensor comparison connecting morphism cohomology edge inverse",
+   "results": "8 hits, including HomologicalComplex.restrictionMap, CochainComplex.ConnectData.restrictionLEIso_inv_f and restrictionGEIso_inv_f, lTensor.inverse_of_rightInverse, rTensor.inverse, and Algebra.H1Cotangent.δ; none defines these geometric maps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication on a twisted module by a section of O(1), canonical restriction via pullback adjunction and tensor comparison, and edge-transported cohomology boundary",
+   "results": "8 hits in nonabelian/group cohomology and cotangent modules; none defines these geometric maps.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "regularHyperplaneMultiplication|regularHyperplaneRestriction|regularHyperplaneRestrictedMultiplication|regularHyperplaneConnecting",
+   "results": "msearch Mathlib grep: 0 hits. rg in lean/WeilConjectures, lean/Sheaf and dag/nodes finds the four concrete definitions in Sheaf.AlgebraicGeometry.CoherentRegularHyperplaneRestriction (lines 65,75,84,97), listed only under theorem node lem-sfb-coherent-regular-hyperplane-restriction; no definition node owns them. blueprint_refs.py search hyperplane finds only det-sp-tower-classes and det-sp-zero-section-affine-space; neither defines these maps.",
+   "date": "2026-10-23",
+   "verdict": "existing project definitions; no definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fixed-hyperplane-restriction-cohomology",
+  "date": "2026-10-23",
+  "group": "Q44"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0EGK twisted restriction sequence and long exact cohomology sequence: the canonical multiplication, restriction, restricted multiplication, and boundary transported by the edge isomorphism used to state the fixed-section structural input.",
+   "via": [
+    "lem-sfb-fixed-hyperplane-restriction-cohomology",
+    "lem-sfb-hyperplane-cohomology-tail-bound",
+    "lem-sfb-free-quotient-kernel-regularity-bound",
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentRegularHyperplaneRestriction",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneMultiplication",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneMultiplication",
+   "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneRestriction",
+   "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneRestrictedMultiplication",
+   "AlgebraicGeometry.ProjectiveSpace.regularHyperplaneConnecting"
+  ],
+  "statement": "def regularHyperplaneMultiplication (k : Type u) [Field k] (n : ℕ)\n    (E : (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).Modules) (d : ℤ)\n    (t : Γ(twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1, ⊤)) :\n    E ⊗ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d ⟶\n      E ⊗ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (1 + d)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership repair requested by the independent stage-2 review of immutable head 591fbf28f16c (R1 H2). These four existing plain definitions have concrete data; no choice from exists_coherent_regular_hyperplane is used. The module is unchanged and no declaration is copied, moved or added. The item cites this definition node in place of the finite-family theorem node."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-527558414",
+  "group": "Q44",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-527558414",
+  "group": "Q44",
+  "result": "fix",
+  "note": "R1/R2 repairs verified: pqf-def-coherent byte-identical to live; new existing:true def-sfb-regular-hyperplane-restriction-maps owns the 4 unchanged plain defs (checked against its TeX), stmt_deps cover their owners; Lean byte-identical to 591f. All other clauses match (any field, n≥1, ker=zeroLocus, IsCoherent E/G, Mono for all d, SES, edge IsIso ∀q, initial injection + 3 exact positions with δ∘e⁻¹, linear surjectivity). F1 H3: product clause RHS c∘i^*(m_v)∘c⁻¹ makes it pure unit naturality, never involving v|_H, which tail-bound needs. FIX adds the conjunct ∀ d v v', sectionsMap(unit O(1)) v = … v' → RestrictedMultiplication v = … v'; no new decls or stmt_deps; record statement regenerated verbatim; nt_compile --json clean 3.8 s."
+ }
+}

@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
+public import Sheaf.Paper.RationalLocalizingTwist
 public import Sheaf.Paper.LocalizingExceptionalAdjoint
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
@@ -21,28 +22,15 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 
-import WeilConjectures.Compactification.ProjectiveSpace
-import Sheaf.Compactification.BoundaryRefinement
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Paper.CartesianCoefficientTwists
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.AffineScheme
+import Sheaf.Paper.AffineLineAdjunctionAssembly
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+import Sheaf.Paper.UnboundedLocalizingPullback
+import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.Paper.CompactificationCoherenceCocycle
 import Sheaf.Paper.CondensedModuleDerivedPushpull
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 import Sheaf.Paper.MateOpenRestriction
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Rational affine-line compact-support adjunction
@@ -68,42 +56,18 @@ algebraic-closure conventions of the source.
 @[expose] public section
 
 set_option autoImplicit false
+set_option Elab.async false
 
 universe u
 
-open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Scheme
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Scheme MonoidalCategory
 open AlgebraicGeometry.ProEtale
 open AlgebraicGeometry.ProEtale.CondensedRing
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The localizing derived category used in the affine-line statement.
-Source: blueprint `sk-def-localizing-closure` (blueprint: det-cor-affine-space-rational-line). -/
-abbrev rationalLocalizingCategory
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :=
-  (CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X)).FullSubcategory
-
-/-- The full inclusion of the localizing category into the ambient derived category.
-Source: blueprint `sk-def-localizing-closure` (blueprint: det-cor-affine-space-rational-line). -/
-noncomputable abbrev rationalLocalizingInclusion
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :=
-  (CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X)).ι
-
-/-- Derived tensor with a specified Tate line, placed in degree zero.
-Source: blueprint `sk-def-sp-tate-twist` (blueprint: det-cor-affine-space-rational-line). -/
-noncomputable def rationalTwistFunctor
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
-    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) :
-    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) ⥤
-      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj Λ X)) :=
-  (derivedTensor Λ X).flip.obj ((DerivedCategory.singleFunctor _ 0).obj L)
+attribute [local irreducible] upperStar Functor.leftDerivedFunctor Functor.mapDerivedCategory
 
 /-- The recorded Nagata choice for the affine projection as a morphism over k.
 The instance arguments are the existing affine-space and composition instances, written
@@ -127,6 +91,8 @@ noncomputable def affineLineChosenCompactification
     (inferInstanceAs (QuasiCompact (V ↘ Spec (.of k))))
     (inferInstanceAs (IsSeparated (V ↘ Spec (.of k))))
     (Over.homMk (𝔸(PUnit.{u + 1}; V) ↘ V) rfl)
+
+attribute [local irreducible] affineLineChosenCompactification
 
 /-- The complete assertion for one of the two rational coefficient conventions.
 Source: blueprint `sk-cor-affine-space-rational-line`
@@ -178,6 +144,234 @@ noncomputable def affineLineRationalAssertion
     ∃! (e : G ≅ P), (∀ N,
       F.map (e.hom.app N) ≫ adjP.counit.app N = adjG.counit.app N)
 
+private theorem rationalClosureEq
+    (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))
+    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] :
+    localizingClosureProEtale (RationalP1.coefficient ℓ c).X X =
+      CategoryTheory.localizingClosure
+        (constantModelBoundedConstructible (RationalP1.coefficient ℓ c).X X) := by
+  apply (localizingClosure_ctf_equals_bc ℓ X (RationalP1.coefficient ℓ c).X ?_).1.2.2.2.1
+  cases c with
+  | none => exact Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))
+  | some E => exact Or.inr (Or.inr (Or.inl ⟨E, Or.inr ⟨Iso.refl _⟩⟩))
+
+private theorem rationalAdmissible
+    (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ)) :
+    IsLocalizingAdmissibleCoefficient ℓ (RationalP1.coefficient.{u} ℓ c).X := by
+  cases c with
+  | none => exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))
+  | some E => exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)))
+
+private theorem rationalOpenAdjunction
+    (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    {U X : Scheme.{u}} [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [CompactSpace U] [QuasiSeparatedSpace U]
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] :
+    ∃ (J : rationalLocalizingCategory (RationalP1.coefficient ℓ c).X U ⥤
+          rationalLocalizingCategory (RationalP1.coefficient ℓ c).X X)
+      (R : rationalLocalizingCategory (RationalP1.coefficient ℓ c).X X ⥤
+          rationalLocalizingCategory (RationalP1.coefficient ℓ c).X U),
+      Nonempty (J ⋙ rationalLocalizingInclusion (RationalP1.coefficient ℓ c).X X ≅
+        rationalLocalizingInclusion (RationalP1.coefficient ℓ c).X U ⋙
+          (openImmersionLowerShriek (RationalP1.coefficient ℓ c).X j).mapDerivedCategory) ∧
+      Nonempty (R ⋙ rationalLocalizingInclusion (RationalP1.coefficient ℓ c).X U ≅
+        rationalLocalizingInclusion (RationalP1.coefficient ℓ c).X X ⋙
+          (upperStar (RationalP1.coefficient ℓ c).X j).mapDerivedCategory) ∧
+      Nonempty (J ⊣ R) := by
+  unfold rationalLocalizingCategory rationalLocalizingInclusion
+  rw [← rationalClosureEq ℓ c U, ← rationalClosureEq ℓ c X]
+  obtain ⟨he, hs, _, adj, _⟩ := mateOpenImmersion (RationalP1.coefficient ℓ c).X ℓ k
+    (ringChar k) (Fact.out : (ringChar k).Prime).pos (Fact.out : ringChar k ≠ ℓ)
+    (rationalAdmissible ℓ c) j
+  exact ⟨mateOpenExtension _ j he, mateOpenPullback _ j hs,
+    ⟨Iso.refl _⟩, ⟨Iso.refl _⟩, ⟨adj⟩⟩
+
+attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
+attribute [-instance] RationalP1.internalMonoidal RationalP1.internalTensorCommShift
+  supportModules_grothendieck hasTensor_cochainComplex monoidalCategoryStruct_cochainComplex
+  monoidalCategory_cochainComplex in
+section
+
+attribute [local irreducible] RationalP1.line RationalP1.lineComparison
+  monoidal_leftDerivedUpperStar Functor.singleFunctorCompLeftDerivedFunctorIso
+  RationalP1.coefficient upperStarFromPoint DerivedCategory.singleFunctors
+  Mod.monoidalClosed DerivedCategory.monoidalClosed
+  RationalP1.push RationalP1.exceptional
+
+@[irreducible] private noncomputable def shiftedTensorPullIso
+    {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [MonoidalCategory D] [HasShift C ℤ] [HasShift D ℤ]
+    (F : C ⥤ D) [F.Monoidal] [F.CommShift ℤ]
+    (L : C) (M : D) (e : F.obj L ≅ M) :
+    (tensorRight L ⋙ shiftFunctor C (2 : ℤ)) ⋙ F ≅
+      F ⋙ tensorRight M ⋙ shiftFunctor D (2 : ℤ) :=
+  Functor.isoWhiskerLeft (tensorRight L) (F.commShiftIso (2 : ℤ)) ≪≫
+    Functor.isoWhiskerRight ((Functor.Monoidal.commTensorRight F L).symm ≪≫
+      Functor.isoWhiskerLeft F ((curriedTensor D).flip.mapIso e))
+      (shiftFunctor D (2 : ℤ))
+
+@[irreducible] private noncomputable def pullSingleLineIso
+    (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (ℓ : X.residueField x)]
+    [∀ y : Y, Invertible (ℓ : Y.residueField y)] :
+    (moduleObjectDerivedPullback (RationalP1.coefficient ℓ c).X f).obj
+      ((DerivedCategory.singleFunctor _ 0).obj (RationalP1.line ℓ c Y)) ≅
+        (DerivedCategory.singleFunctor _ 0).obj (RationalP1.line ℓ c X) :=
+  ((upperStar (RationalP1.coefficient ℓ c).X f).singleFunctorCompLeftDerivedFunctorIso.app _) ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso (RationalP1.lineComparison ℓ c f)
+
+@[irreducible] private noncomputable def rationalTwistPullIso
+    (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (ℓ : X.residueField x)]
+    [∀ y : Y, Invertible (ℓ : Y.residueField y)] :
+    RationalP1.twist (RationalP1.coefficient ℓ c).X Y (RationalP1.line ℓ c Y) ⋙
+      (upperStar (RationalP1.coefficient ℓ c).X f).mapDerivedCategory ≅
+    (upperStar (RationalP1.coefficient ℓ c).X f).leftDerivedFunctor ⋙
+      RationalP1.twist (RationalP1.coefficient ℓ c).X X (RationalP1.line ℓ c X) := by
+  let Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
+    (RationalP1.coefficient ℓ c).X
+  let F : DerivedCategory (DiagonalCoefficients.Modules Λ Y) ⥤
+      DerivedCategory (DiagonalCoefficients.Modules Λ X) := moduleObjectDerivedPullback Λ f
+  let : F.Monoidal := monoidal_leftDerivedUpperStar Λ f
+  let : F.CommShift ℤ := unboundedLocalizingPullbackCommShift Λ f
+  let LY := (DerivedCategory.singleFunctor _ 0).obj (RationalP1.line ℓ c Y)
+  let LX := (DerivedCategory.singleFunctor _ 0).obj (RationalP1.line ℓ c X)
+  let e : F.obj LY ≅ LX :=
+    pullSingleLineIso ℓ c f
+  dsimp only [RationalP1.twist, rationalTwistFunctor, derivedTensor]
+  exact Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm ≪≫
+    shiftedTensorPullIso F LY LX e
+
+private theorem counitCompatibleUnique
+    {C D : Type*} [Category C] [Category D] {F : C ⥤ D} {P G : D ⥤ C}
+    (adjP : F ⊣ P) (adjG : F ⊣ G) :
+    ∃! e : G ≅ P, ∀ N, F.map (e.hom.app N) ≫ adjP.counit.app N = adjG.counit.app N := by
+  refine ⟨adjG.rightAdjointUniq adjP, fun N ↦
+    adjG.rightAdjointUniq_hom_app_counit adjP N, ?_⟩
+  intro e he
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply (adjP.homEquiv _ N).symm.injective
+  exact (he N).trans (adjG.homEquiv_symm_rightAdjointUniq_hom_app adjP N).symm
+
+/-- Compose the open and projective-line adjunctions for a unified rational coefficient. -/
+private theorem rationalAffineLineOne
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (V : Scheme.{u}) [V.Over (Spec (.of k))]
+    [LocallyOfFiniteType (V ↘ Spec (.of k))]
+    [QuasiCompact (V ↘ Spec (.of k))]
+    [IsSeparated (V ↘ Spec (.of k))]
+    (c : Option (PadicAlgCl.FiniteIntermediateField ℓ)) :
+      affineLineRationalAssertion (RationalP1.coefficient ℓ c).X V
+        (affineLineChosenCompactification k V)
+        (fun X ↦ rationalTwistFunctor (RationalP1.coefficient ℓ c).X X
+          (RationalP1.line ℓ c X)) := by
+  let Λ := (RationalP1.coefficient ℓ c).X
+  let A := 𝔸(PUnit.{u + 1}; V)
+  let B := ProjectiveLine V
+  let p : A ⟶ V := A ↘ V
+  let q : B ⟶ V := B ↘ V
+  let j : A ⟶ B := ProjectiveLine.affineChart V
+  let : A.Over (Spec (.of k)) := ⟨p ≫ (V ↘ Spec (.of k))⟩
+  have : LocallyOfFiniteType (A ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType (p ≫ (V ↘ Spec (.of k))))
+  have : QuasiCompact (A ↘ Spec (.of k)) :=
+    inferInstanceAs (QuasiCompact (p ≫ (V ↘ Spec (.of k))))
+  have : IsSeparated (A ↘ Spec (.of k)) :=
+    inferInstanceAs (IsSeparated (p ≫ (V ↘ Spec (.of k))))
+  have : LocallyOfFiniteType (B ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType (q ≫ (V ↘ Spec (.of k))))
+  have : QuasiCompact (B ↘ Spec (.of k)) :=
+    inferInstanceAs (QuasiCompact (q ≫ (V ↘ Spec (.of k))))
+  have : IsSeparated (B ↘ Spec (.of k)) :=
+    inferInstanceAs (IsSeparated (q ≫ (V ↘ Spec (.of k))))
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace (V ↘ Spec (.of k))
+  have : CompactSpace A := QuasiCompact.compactSpace_of_compactSpace p
+  have : CompactSpace B := QuasiCompact.compactSpace_of_compactSpace q
+  have : QuasiSeparatedSpace V :=
+    quasiSeparatedSpace_of_quasiSeparated (V ↘ Spec (.of k))
+  have : QuasiSeparatedSpace A := quasiSeparatedSpace_of_quasiSeparated p
+  have : QuasiSeparatedSpace B := quasiSeparatedSpace_of_quasiSeparated q
+  have : QuasiCompact j := quasiCompact_of_compactSpace j
+  have : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian
+    (V ↘ Spec (.of k))
+  have : IsNoetherian V := ⟨⟩
+  have : IsLocallyNoetherian B := LocallyOfFiniteType.isLocallyNoetherian q
+  have : IsNoetherian B := ⟨⟩
+  have : CompactSpace (diagonalSurface V) :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.fst q q)
+  have : IsLocallyNoetherian (diagonalSurface V) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.fst q q)
+  have : IsNoetherian (diagonalSurface V) := ⟨⟩
+  obtain ⟨J, R, ⟨hJ⟩, ⟨hR⟩, ⟨adjJ⟩⟩ := rationalOpenAdjunction ℓ c k j
+  let Q := RationalP1.push ℓ c k (ringChar k) (Fact.out : ringChar k ≠ ℓ) V
+  let S := RationalP1.exceptional ℓ c k (ringChar k) (Fact.out : ringChar k ≠ ℓ) V
+  obtain ⟨adjQ⟩ := RationalP1.rationalP1_adjunction_assembly ℓ c k V
+  let F := J ⋙ Q
+  let P := S ⋙ R
+  have hQ : Q ⋙ rationalLocalizingInclusion Λ V ≅
+      rationalLocalizingInclusion Λ B ⋙ (lowerStar Λ q).rightDerivedFunctor := by
+    unfold Q RationalP1.push
+    exact Iso.refl _
+  have hS : S ⋙ rationalLocalizingInclusion Λ B ≅
+      rationalLocalizingInclusion Λ V ⋙ (upperStar Λ q).leftDerivedFunctor ⋙
+        RationalP1.twist Λ B (RationalP1.line ℓ c B) := by
+    unfold S RationalP1.exceptional
+    exact Iso.refl _
+  let standard : Compactification p :=
+    { Z := B, g := q, i := j, comm := (ProjectiveLine.affineChart_over V).symm,
+      isProper := inferInstance, isOpenImmersion := inferInstance }
+  let c₀ : Compactification.BoundaryCompactification p :=
+    ⟨⟨affineLineChosenCompactification k V,
+      (affineLineChosenCompactification k V).quasiCompact_openImmersion inferInstance⟩⟩
+  let c₁ : Compactification.BoundaryCompactification p := ⟨⟨standard, inferInstance⟩⟩
+  have : p.IsOver (Spec (.of k)) := ⟨rfl⟩
+  obtain ⟨φ, _⟩ := compactification_coherence_cocycle Λ ℓ (rationalAdmissible ℓ c) k p
+  have hA := rationalClosureEq ℓ c A
+  let I : rationalLocalizingCategory Λ A ⥤ (localizingClosureProEtale Λ A).FullSubcategory :=
+    (localizingClosureProEtale Λ A).lift (rationalLocalizingInclusion Λ A)
+      (fun K ↦ hA.symm ▸ K.property)
+  have hF : F ⋙ rationalLocalizingInclusion Λ V ≅
+      rationalLocalizingInclusion Λ A ⋙
+        rightDerivedLowerShriekOfCompactification Λ (affineLineChosenCompactification k V) :=
+    Functor.isoWhiskerLeft J hQ ≪≫
+      Functor.isoWhiskerRight hJ (lowerStar Λ q).rightDerivedFunctor ≪≫
+        Functor.isoWhiskerLeft I (φ c₁ c₀)
+  let : ∀ x : A, Invertible (ℓ : A.residueField x) := fun x ↦
+    (RationalP1.residueIsUnit ℓ k (ringChar k) (Fact.out : ringChar k ≠ ℓ)
+      A (A ↘ Spec (.of k)) x).invertible
+  let : ∀ x : B, Invertible (ℓ : B.residueField x) := fun x ↦
+    (RationalP1.residueIsUnit ℓ k (ringChar k) (Fact.out : ringChar k ≠ ℓ)
+      B (B ↘ Spec (.of k)) x).invertible
+  have hcomp : (upperStar Λ q).leftDerivedFunctor ⋙
+      (upperStar Λ j).leftDerivedFunctor ≅ (upperStar Λ p).leftDerivedFunctor :=
+    (leftDerivedUpperStarComp Λ j q).symm ≪≫
+      eqToIso (congrArg (fun f : A ⟶ V ↦ moduleObjectDerivedPullback Λ f)
+        (ProjectiveLine.affineChart_over V))
+  have hP : P ⋙ rationalLocalizingInclusion Λ A ≅
+      rationalLocalizingInclusion Λ V ⋙ (upperStar Λ p).leftDerivedFunctor ⋙
+        RationalP1.twist Λ A (RationalP1.line ℓ c A) :=
+    Functor.isoWhiskerLeft S hR ≪≫
+      Functor.isoWhiskerRight hS (upperStar Λ j).mapDerivedCategory ≪≫
+      Functor.isoWhiskerLeft (rationalLocalizingInclusion Λ V ⋙
+        (upperStar Λ q).leftDerivedFunctor) (rationalTwistPullIso ℓ c j) ≪≫
+      Functor.isoWhiskerLeft (rationalLocalizingInclusion Λ V)
+        (Functor.isoWhiskerRight hcomp (RationalP1.twist Λ A (RationalP1.line ℓ c A)))
+  let adjP : F ⊣ P := adjJ.comp adjQ
+  exact ⟨J, R, hJ, hR, adjJ, F, Q, hF, hQ, Iso.refl _, P, hP, adjP,
+    fun G adjG ↦ counitCompatibleUnique adjP adjG⟩
+
+end
+
+attribute [local semireducible] RationalP1.coefficient RationalP1.line
+
 /-- Rational affine-line compact-support adjunction, for every finite coefficient
 subextension and for the finite-subextension-valued algebraic closure.  The three assertions
 are respectively clauses (1), (2), and (3) of the source statement.
@@ -205,17 +399,16 @@ Apply clause 1 of `det-sf-mate-open-restriction` and transport across this equal
 (`det-def-localizing-closure-ctf-equals-bc`). This proves preservation and J adjoint R.
 7. For (j,q), lower shriek is Rq_* j_! by definition. Compare the chosen compactification
 to this one by `det-sf-comp-coherence-cocycle`, then use step 6 to obtain F isomorphic JQ.
-8. Composition of exact module pullbacks gives j^* q^* isomorphic p^*. Levelwise exact
-pullback commutes with shift, and `det-prop-sfb-cartesian-coefficients-twists` identifies
-pullback of the Tate twist. Thus j^*(q^*N(1)[2]) is p^*N(1)[2]
-(`sk-def-sfb-module-pushforward-pullback`, `sk-prop-sfb-cartesian-coefficients`).
-9. Compose the natural Hom bijections of J adjoint R and Rq_* adjoint q^*(1)[2], supplied
-by `det-prop-p1-adjunction-rational-triangle`, using steps 7 and 8. This gives F adjoint P
-and preservation by P of the required localizing subcategory.
-10. Any exceptional right adjoint G supplied by `sk-prop-sf-existence` is a right adjoint
-to the same F. Transpose its counit under F adjoint P. Uniqueness of right adjoints gives
-the natural isomorphism G to P and its uniqueness under the displayed counit identity
-(`det-sp-unique-right-adjoint`).
+8. Strong monoidality of derived pullback, its single-functor comparison and the
+canonical rational Tate-line pullback identify tensoring with the pulled-back line.
+The pullback CommShift comparison moves shift two, and derived pullback composition
+identifies the result with p-star followed by the Tate twist and shift two.
+9. Supply the canonical diagonal data to the projective-line triangle theorem through
+`lem-sfb-rational-p1-adjunction-assembly`. Compose its adjunction Q adjoint S with
+J adjoint R to obtain JQ adjoint SR. Steps 7 and 8 identify the ambient functors.
+10. For any other right adjoint G of F, Mathlib's `Adjunction.rightAdjointUniq` gives
+the isomorphism G to P and the counit identity. Injectivity of the adjunction Hom
+bijection proves uniqueness, component by component.
 -/
 theorem det_cor_affine_space_rational_line
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
@@ -233,6 +426,12 @@ theorem det_cor_affine_space_rational_line
       (affineLineChosenCompactification k V)
       (fun X ↦ rationalTwistFunctor (Profinite.padicAlgClRingObj ℓ) X
         (spQbarTwist X ℓ)) := by
-  sorry
+  constructor
+  · intro E
+    simpa only [RationalP1.coefficient, RationalP1.line] using
+      rationalAffineLineOne ℓ k V (some E)
+  · simpa only [RationalP1.coefficient, RationalP1.line] using
+      rationalAffineLineOne ℓ k V none
+
 
 end AlgebraicGeometry.ProEtale.CondensedRing

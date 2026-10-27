@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-ring-complex-ordered-cech-section-coordinates",
+ "kind": "statement",
+ "title": "Localization coordinates of the unaugmented ordered Cech sections",
+ "statement": "Let $A$ be a commutative ring, $I\\subset A$ an ideal, and $f:\\operatorname{Fin}(r)\\to A$ a finite family with $\\operatorname{span}(f)=I$. Let $L_f$ be the actual unaugmented ordered Cech section complex of the structure module on $U=\\operatorname{Spec}(A)\\setminus V(I)$, with scalars restricted to $A$, and let $b:A\\to L_f^0$ be the restriction map, as in [def-weil-pbc-ring-complex-ordered-cech-construction]. There exist $A$-linear isomorphisms $E_q:L_f^q\\cong\\prod_{t:\\operatorname{Fin}(q+1)\\hookrightarrow_o\\operatorname{Fin}(r)}A_{\\prod_i f(t(i))}$ for every $q\\ge0$, using the localizations of [def-weil-ring-localization-away], and $A$-algebra maps $l_{q,t,j}$ from the localization of the face deleting $j$ to that of $t$, such that $E_0(b(a))_t$ is the image of $a$ and $E_{q+1}(dx)_t=\\sum_j(-1)^j l_{q,t,j}((E_qx)_{t\\setminus j})$. Empty families, zero and repeated generators, and the zero ring are allowed. This is a statement about the unaugmented sections, without a cone, inverse rotation, or augmentation projection.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(d); cohomology.tex Tags 01EQ and 01FJ, definition-ordered-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-ordered-cech-construction",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Every generator belongs to I. The image in Spec A of an ordered intersection in U is the principal open of the product: membership is equivalent to every factor lying outside the prime ideal. Containment in U follows by taking any one factor, since the tuple has q+1 entries. This also handles the empty generating family, where there are no tuples.",
+   "uses": [
+    "def-weil-pbc-ring-complex-ordered-cech-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On that principal open the structure-ring sections are a localization. Transport the canonical A-algebra equivalence between localizations along the equality of opens. Restriction of the structural ring map agrees with the algebra map from A; hence this ring equivalence is linear for the actual twice-restricted scalar action. Take the product of these equivalences.",
+   "uses": [
+    "def-weil-pbc-ring-complex-ordered-cech-construction",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define each face algebra map by conjugating the actual restriction ring homomorphism through the face and full-intersection ring equivalences. Functoriality of restriction proves that the map commutes with A. In each signed summand, the inverse face equivalence cancels its forward equivalence. Additivity and integer linearity then identify the alternating differential.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex",
+    "def-weil-pbc-ring-complex-ordered-cech-construction",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the extension-by-zero term isomorphisms to pass from the natural-indexed ordered complex to its integer extension. The extend_d_eq identity cancels the successive term isomorphisms. The definition of alternatingCechZero cancels the inverse term isomorphism in degree zero, leaving precisely restriction of the structural map from A.",
+   "uses": [
+    "def-sc-alternating-cech-total-complex",
+    "def-weil-pbc-ring-complex-ordered-cech-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-ordered-cech-construction",
+  "def-weil-ring-localization-away",
+  "def-sc-alternating-cech-total-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(d), with the ordered restriction differential of cohomology.tex Tags 01EQ and 01FJ; explicit section-coordinate construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of the structure sheaf on a principal open are the localization away from its defining element",
+   "results": "Returned principal-open localization and section isomorphism APIs. The pinned source supplies IsLocalization.Away for basic-open structure-ring sections; used IsLocalization.algEquiv. No exact ordered section-coordinate theorem.",
+   "date": "2026-10-26",
+   "verdict": "use localization APIs, prove products and differential compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Structure sheaf sections over an intersection of principal opens are isomorphic to localization at the product compatibly with restriction",
+   "results": "Returned StructureSheaf section-localization results and IsAffineOpen localization instances; checked actual APIs in the pinned sources. No theorem includes the present ordered-complex and scalar-restriction data.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization.algEquiv|IsLocalization.Away.*Γ|algebraMap_self_map",
+   "results": "StructureSheaf.lean supplies the basic-open localization instance and constant restriction identity. Local searches found the existing construction and original fibre-coordinate theorem, but no unaugmented coordinate theorem. Blueprint search for principal localization found no duplicate.",
+   "date": "2026-10-26",
+   "verdict": "construct the coordinates directly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexOrderedCechCoordinates",
+  "date": "2026-10-26",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 099D(d): principal-open section coordinates and the ordered restriction differential before forming the augmented fibre",
+   "via": [
+    "lem-weil-pbc-ring-complex-ordered-cech-coordinates",
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexOrderedCechSectionCoordinates",
+  "file": "lean/Sheaf/Paper/RingComplexOrderedCechSectionCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ringComplexOrderedCech_sections_coordinates",
+  "statement": "theorem ringComplexOrderedCech_sections_coordinates (A : CommRingCat.{u}) (I : Ideal A)\n    (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = I) :\n    let L := ringComplexOrderedCechSections A I f\n    ∃ (e : ∀ q : ℕ, (L.X (q : ℤ)).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A]\n            ((t : Fin (q + 1) ↪o Fin r) → Localization.Away (∏ i, f (t i))))\n          (l : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)),\n            Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i))) →ₐ[A]\n              Localization.Away (∏ i, f (t i))),\n          (∀ (x : A) (t : Fin 1 ↪o Fin r),\n            e 0 ((ringComplexOrderedCechFirst A I f).val.app (op ⟨PUnit.unit⟩) x) t =\n              algebraMap A (Localization.Away (∏ i, f (t i))) x) ∧\n          (∀ (q : ℕ) (x : (L.X (q : ℤ)).val.obj (op ⟨PUnit.unit⟩))\n            (t : Fin (q + 2) ↪o Fin r),\n            e (q + 1) ((L.d (q : ℤ) ((q : ℤ) + 1)).val.app\n              (op ⟨PUnit.unit⟩) x) t =\n              ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n                l q t j (e q x ((Fin.succAboveOrderEmb j).trans t)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T070240-L-3495955",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T070240-L-3495955",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

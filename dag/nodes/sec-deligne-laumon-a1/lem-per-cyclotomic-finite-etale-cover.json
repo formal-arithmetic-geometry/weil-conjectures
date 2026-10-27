@@ -1,0 +1,265 @@
+{
+ "id": "lem-per-cyclotomic-finite-etale-cover",
+ "kind": "statement",
+ "title": "The primitive-root cover after inverting its order",
+ "statement": "Let $N\\ge1$ be an integer and let $C_N=\\mathbf Z[1/N,T]/(\\Phi_N(T))$, where $\\Phi_N$ is the $N$th cyclotomic polynomial, characterized by the monic factorization $T^n-1=\\prod_{d\\mid n}\\Phi_d(T)$ for positive $n$. Then\n$$\\operatorname{Spec}C_N\\longrightarrow\\operatorname{Spec}\\mathbf Z[1/N]$$\nis finite, etale and surjective [def-weil-affine-spectrum], [def-weil-finite-integral-morphism], [def-weil-etale-morphism]. If $\\zeta$ is the class of $T$, then $\\zeta^N=1$ and $1-\\zeta^a$ is a unit of $C_N$ for every $1\\le a<N$. In every algebraically closed geometric fibre, $\\zeta$ is a primitive $N$th root of unity. Consequently, for every scheme $W$ on which $N$ is invertible, the projection $W\\times_{\\operatorname{Spec}\\mathbf Z[1/N]}\\operatorname{Spec}C_N\\to W$ is a finite surjective etale morphism; if a group acts on $W$ and trivially on $C_N$, the projection preserves the geometric inertia groups for that same group. Here a primitive $N$th root means an element of multiplicative order exactly $N$ (equivalently, its $N$th power is $1$ and no power with exponent $1\\leq a<N$ is $1$). A geometric point is a morphism $\\operatorname{Spec}\\Omega\\to W$ for an algebraically closed field $\\Omega$ [def-weil-geometric-point]; its geometric inertia is its stabilizer in the acting group. Fibre products are as in [def-pc-fibre-product], polynomial rings as in [def-weil-polynomial-ring], $\\mathbf Z[1/N]$ as in [def-weil-ring-localization-away], and the quotient algebra as in [def-weil-pbc-algebra-hom-quotient].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Lemma 5.3.7, proof: the base change by Spec(Z[1/N,mu_N]), printed p.124. Primitive-root presentation of that base change."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "def-weil-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\mathbf Z[1/N]$, $f=\\Phi_{N,R}$ and $C=R[T]/(f)$. By [lem-per-cyclotomic-monic-positive-degree], $f$ is monic of positive degree $d$. By [lem-weil-pbc-monic-quotient-free], the classes of $1,T,\\ldots,T^{d-1}$ form an $R$-basis of $C$, so $C$ is finite over $R$. The affine morphism $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ is therefore finite by [def-weil-finite-integral-morphism]. In the defining cyclotomic factorization separate the factor indexed by $N$: $T^N-1=f(T)Q(T)$, with $Q=\\prod_{e\\mid N,\\ e<N}\\Phi_{e,R}$. Evaluating in the quotient gives $\\zeta^N=1$, so $\\zeta$ is a unit with inverse $\\zeta^{N-1}$. For $N=1$ the product $Q$ is empty and equals $1$.",
+   "uses": [
+    "lem-per-cyclotomic-monic-positive-degree",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.7, p.124, primitive-root base change; finite-algebra verification by monic division"
+   }
+  },
+  {
+   "text": "Differentiate $T^N-1=fQ$ and evaluate at $\\zeta$. Since $f(\\zeta)=0$, this gives $N\\zeta^{N-1}=f'(\\zeta)Q(\\zeta)$. Its left side is a unit: $N$ is inverted in $R$ and $\\zeta$ is a unit by step 1. Thus $f'(\\zeta)$ has inverse $Q(\\zeta)(N\\zeta^{N-1})^{-1}$. Apply [lem-weil-pbc-standard-etale-monic-derivative] with $S=R$ and $Q=f$. Its etale algebra $R[T,Y]/(f,Yf'-1)$ is isomorphic to $C$: send $T$ to $\\zeta$ and $Y$ to this inverse; the inverse map sends the class of $T$ in $C$ to the class of $T$. The two composites fix $T$, and also $Y$ because an inverse of $f'$ is unique. Hence $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ is etale.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00UB, 00UC, definition-standard-etale and lemma-standard-etale (1), applied to the cyclotomic factorization"
+   }
+  },
+  {
+   "text": "For a prime $\\mathfrak p\\subset R$, take an algebraic closure $\\Omega$ of $\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime, def-weil-algebraic-closure]. By coefficient naturality and positive degree in [lem-per-cyclotomic-monic-positive-degree], the image of $f$ in $\\Omega[T]$ is the monic nonconstant polynomial $\\Phi_{N,\\Omega}$. Algebraic closedness gives a root $z\\in\\Omega$. Evaluation $R[T]\\to\\Omega$, $T\\mapsto z$, kills $(f)$ and descends to $C\\to\\Omega$. Its kernel is a prime ideal whose contraction to $R$ is $\\mathfrak p$: the coefficient map factors through the residue field and its injective field embedding in $\\Omega$. The associated point of $\\operatorname{Spec}C$ therefore maps to $\\mathfrak p$ [def-weil-affine-spectrum]. Since every prime has such a lift, the morphism is surjective.",
+   "uses": [
+    "lem-per-cyclotomic-monic-positive-degree",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-algebraic-closure",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.7, p.124, surjectivity of the primitive-root base change; explicit geometric-point lifting"
+   }
+  },
+  {
+   "text": "For any field $K$ receiving an $R$-algebra homomorphism $C\\to K$, let $z$ be the image of $\\zeta$. The image of $N$ is invertible, hence nonzero. Coefficient naturality [lem-per-cyclotomic-monic-positive-degree] gives $\\Phi_{N,K}(z)=0$, so [lem-per-cyclotomic-field-root-criterion] makes $z$ primitive of order $N$. In particular this applies to every $\\Omega$-valued point of each geometric fibre, by composing it with the projection to $\\operatorname{Spec}C$ [def-pc-fibre-product, def-weil-geometric-point]. This proves the primitive-root assertion in every algebraically closed geometric fibre.",
+   "uses": [
+    "lem-per-cyclotomic-monic-positive-degree",
+    "lem-per-cyclotomic-field-root-criterion",
+    "def-pc-fibre-product",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 5.3.7, p.124, meaning of adjoining primitive roots; Mathlib cyclotomic root criterion"
+   }
+  },
+  {
+   "text": "Fix $1\\leq a<N$. For every prime $\\mathfrak q\\subset C$, apply the field calculation in step 4 to $C\\to\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime]. If the residue of $1-\\zeta^a$ were zero, primitivity would imply $N\\mid a$, impossible for $0<a<N$. The kernel of $C\\to\\kappa(\\mathfrak q)$ is $\\mathfrak q$: indeed $c/1\\in\\mathfrak qC_{\\mathfrak q}$ exactly when $sc\\in\\mathfrak q$ for some $s\\notin\\mathfrak q$, and primality makes this equivalent to $c\\in\\mathfrak q$. Thus $1-\\zeta^a$ belongs to no prime ideal. By clause (ii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] it is a unit. For $N=1$ there is no such $a$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology, unit criterion; applied to the field-root calculation of step 4"
+   }
+  },
+  {
+   "text": "Let $W$ be any scheme on which $N$ is invertible. Its structural morphism factors uniquely through $\\operatorname{Spec}R$: by [lem-weil-pbc-morphism-into-affine-scheme], morphisms $W\\to\\operatorname{Spec}R$ correspond to ring maps $R\\to\\Gamma(W,\\mathcal O_W)$, and such a map exists and is unique because the integer $N$ is a unit of $\\Gamma(W,\\mathcal O_W)$ (it is one on every open), so $1/N$ must go to its inverse and $x/N^n\\mapsto xN^{-n}$ is well defined [def-weil-ring-localization-away]. Apply [lem-weil-pbc-finite-morphism-permanence] clause (a), [lem-weil-pbc-etale-scheme-base-change], and [lem-weil-pbc-surjective-base-change] to the finite etale surjective morphism established in steps 1--3. Its base change $P=W\\times_{\\operatorname{Spec}R}\\operatorname{Spec}C\\to W$ is finite, etale and surjective. These three statements allow arbitrary schemes and arbitrary base changes, so no Noetherian, connectedness or reducedness assumption on $W$ is needed.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL (lemma-base-change-finite), 02GO (lemma-base-change-etale), 01S1 (lemma-base-change-surjective)"
+   }
+  },
+  {
+   "text": "Let $G$ act on $W$ and trivially on $\\operatorname{Spec}C$. Every automorphism $g$ of $W$ preserves its structural map to $\\operatorname{Spec}R$: the composite with $g$ is again a morphism $W\\to\\operatorname{Spec}R$, hence equals the structural one by the uniqueness in step 6 [lem-weil-pbc-morphism-into-affine-scheme], so $G$ acts on $P$ by $g(w,c)=(gw,c)$. A geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to P$ is exactly a compatible pair $(\\bar w,\\bar c)$ of morphisms to the two factors [def-pc-fibre-product]. For each $g\\in G$, the equality $g\\bar y=\\bar y$ holds if and only if $g\\bar w=\\bar w$ and $g\\bar c=\\bar c$, by uniqueness in the fibre-product universal property. The second equality always holds. Consequently $G_{\\bar y}=G_{\\bar w}$ as subgroups of the same $G$, and the inertia homomorphism of the projection is the identity on this subgroup.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 5.3.6 and proof of Lemma 5.3.7, printed p.124, trivial action on the cyclotomic factor and inertness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-cyclotomic-monic-positive-degree",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "lem-per-cyclotomic-field-root-criterion",
+  "def-pc-fibre-product",
+  "def-weil-geometric-point",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 5.3.6 and Lemma 5.3.7, printed p.124; explicit verification of its cyclotomic base change using the cited Mathlib polynomial facts and Stacks 00UC, 00E0, 01WL, 02GO, 01S1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The scheme of primitive Nth roots of unity over Z with N inverted is a finite etale surjective cover",
+   "results": "{\"t\": \"2026-10-24T00:27:46Z\", \"tool\": \"leanfinder\", \"query\": \"The scheme of primitive Nth roots of unity over Z with N inverted is a finite etale surjective cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"surjective_rootsOfUnityCircleEquiv_comp_rootsOfUnityAddChar\", \"IsCyclotomicExtension.isCyclotomicExtension_zero_iff\", \"rootsOfUnity.fintype\", \"modularCyclotomicCharacter.spec\", \"IsCyclotomicExtension.singleton_one_of_algebraMap_bijective\", \"modularCyclotomicCharacter.aux\", \"modularCyclotomicCharacter'.spec'\", \"cyclotomicCharacter.spec\"], \"digest\": \"9cdc786d9e295110\"}; The hits concern abstract roots of unity and cyclotomic field extensions. None asserts this scheme cover, its unit differences, and equivariant inertia preservation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]yclotomic.*[Ee]tale|[Ee]tale.*[Cc]yclotomic|primitive.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-24T00:29:00Z\", \"tool\": \"grep\", \"query\": \"[Cc]yclotomic.*[Ee]tale|[Ee]tale.*[Cc]yclotomic|primitive.*[Ee]tale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The hits concern abstract roots of unity and cyclotomic field extensions. None asserts this scheme cover, its unit differences, and equivariant inertia preservation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Primitive roots of unity define a finite etale faithfully flat algebra after inverting their order",
+   "results": "{\"t\": \"2026-10-24T00:29:00Z\", \"tool\": \"leansearch\", \"query\": \"Primitive roots of unity define a finite etale faithfully flat algebra after inverting their order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"primitiveRoots\", \"IsPrimitiveRoot.zpow_eq_one_iff_dvd\", \"mem_primitiveRoots\", \"Polynomial.roots_of_cyclotomic\", \"IsPrimitiveRoot.zpowers_eq\", \"Polynomial.cyclotomic.roots_to_finset_eq_primitiveRoots\", \"IsCyclotomicExtension.zeta_spec\", \"isPrimitiveRoot_of_mem_primitiveRoots\"], \"digest\": \"4f5998ddbde3ed33\"}; The hits concern abstract roots of unity and cyclotomic field extensions. None asserts this scheme cover, its unit differences, and equivariant inertia preservation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cyclotomic\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-24T00:29:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cyclotomic\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The hits concern abstract roots of unity and cyclotomic field extensions. None asserts this scheme cover, its unit differences, and equivariant inertia preservation.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The primitive Nth roots scheme Spec Z[1/N,T]/cyclotomic N is finite etale surjective and preserves inertia under trivial action",
+   "results": "{\"t\": \"2026-10-24T01:27:32Z\", \"tool\": \"leanfinder\", \"query\": \"The primitive Nth roots scheme Spec Z[1/N,T]/cyclotomic N is finite etale surjective and preserves inertia under trivial action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"modularCyclotomicCharacter'.spec'\", \"modularCyclotomicCharacter.spec\", \"cyclotomicCharacter.spec\", \"IsPrimitiveRoot.embeddingsEquivPrimitiveRoots\", \"IsCyclotomicExtension.fromZetaAut_spec\", \"modularCyclotomicCharacter.aux\", \"cyclotomicCharacter.toFun_spec\", \"IsCyclotomicExtension.isCyclotomicExtension_zero_iff\"], \"digest\": \"0bb02853d89b005b\"}; No hit states the whole cyclotomic scheme cover, unit differences and inertia assertion. Auxiliary polynomial matches are recorded on their own leaves.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.cyclotomic, Algebra.Etale",
+   "results": "{\"t\": \"2026-10-24T01:27:32Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.cyclotomic, Algebra.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hit states the whole cyclotomic scheme cover, unit differences and inertia assertion. Auxiliary polynomial matches are recorded on their own leaves.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]yclotomic.*[Ee]tale|[Ee]tale.*[Cc]yclotomic|primitive.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-24T01:27:31Z\", \"tool\": \"grep\", \"query\": \"[Cc]yclotomic.*[Ee]tale|[Ee]tale.*[Cc]yclotomic|primitive.*[Ee]tale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hit states the whole cyclotomic scheme cover, unit differences and inertia assertion. Auxiliary polynomial matches are recorded on their own leaves.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Primitive roots of unity after inverting the exponent give a finite surjective etale cover of an arbitrary scheme",
+   "results": "{\"t\": \"2026-10-24T01:29:41Z\", \"tool\": \"leanfinder\", \"query\": \"Primitive roots of unity after inverting the exponent give a finite surjective etale cover of an arbitrary scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.cover_I₀\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.instUniqueI₀SchemeCover\", \"Algebra.IsStandardEtale.of_surjective\", \"StandardEtalePair.hasMap_X\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"StandardEtalePresentation.lift_bijective\"], \"digest\": \"49df4c6c24779d2f\"}; No hit states the whole cyclotomic scheme cover, unit differences and inertia assertion. Auxiliary polynomial matches are recorded on their own leaves.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-abelian-inert-rigidification-cover",
+  "date": "2026-10-24",
+  "group": "Q105"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular local model and purity), through the recorded rigidification ancestry: ILO VIII Lemma 5.3.7, printed p.124, the sentence adjoining Spec(Z[1/N,mu_N]) with trivial group action.",
+   "via": [
+    "lem-per-abelian-inert-rigidification-cover",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-cyclotomic-finite-etale-cover",
+  "worker": "stage1",
+  "summary": "Expanded the primitive-root base change of ILO VIII 5.3.7 into seven steps. The derivative identity gives etaleness, positive-degree monic specialization gives surjectivity, the field-root criterion and prime-ideal unit test give unit differences, and the fibre-product universal property gives inertia equality. Added two exact Mathlib leaves for general polynomial facts, reusing all existing geometric tools. Statement hypotheses and conclusions are unchanged; primitive and inertia terminology is made explicit.",
+  "blueprint": "Ancestor proof Step 3 (regular local model and purity), through the recorded rigidification ancestry: ILO VIII Lemma 5.3.7, printed p.124, the sentence adjoining Spec(Z[1/N,mu_N]) with trivial group action. Steps 1--5 verify the cyclotomic ring; step 6 is its arbitrary base change; step 7 proves inertness for the same group."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-3dd63e0ab",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-3dd63e0ab (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps), both new nodes, the statements of all 16 cited nodes, ILO VIII 5.3.6-5.3.7 (printed p.124 = PDF p.130), the parent lem-per-abelian-inert-rigidification-cover steps 2 and 6, and the Mathlib sources. The item is still unsplit in clones/live and side-live, so it is not superseded. The statement is unchanged; the delivery only adds explanatory text and five stmt_deps that the statement now uses. Steps 1-5 are correct. Step 1: monic quotient, free basis, finite. Step 2: N zeta^{N-1}=f'(zeta)Q(zeta) makes f' a unit, giving an explicit isomorphism with the standard etale algebra of lem-weil-pbc-standard-etale-monic-derivative. Step 3: a root in an algebraic closure of kappa(p), and the kernel contracts to p. Step 4: N is nonzero in every receiving field, and isRoot_cyclotomic_iff applies. Step 5: residue fields plus the unit criterion of basic-opens clause (ii). Step 6: the three base-change leaves allow arbitrary base. Step 7: the fibre-product stabilizer argument. Small cases: N=1 (C=Z); N=2 (1-zeta=2); N=6 (non-coprime a); Phi_2 over F_2 shows the root criterion needs N nonzero in K. New nodes: monic-positive-degree matches Basic.lean 263/292/331 one clause each. field-root-criterion is Roots.lean:98, with IsDomain from the field and NeZero from the hypothesis; IsPrimitiveRoot at PrimitiveRoots.lean:63-65 is the stated definition. All three search kinds are recorded. Both nodes are strictly smaller than the item (no D1). A DAG search found no duplicate. FIX (C1): steps 6 and 7 used, without citation, that a scheme on which N is invertible maps to Spec Z[1/N] in exactly one way, and that automorphisms preserve that map. I added the existing Mathlib leaf lem-weil-pbc-morphism-into-affine-scheme (Gamma-Spec adjunction) and def-weil-ring-localization-away to step 6, the same leaf to step 7, and recomputed proof_deps. No tool_uses entry is needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CyclotomicFiniteEtaleCover",
+  "declaration": "AlgebraicGeometry.cyclotomic_finite_etale_cover",
+  "declarations": [
+   "AlgebraicGeometry.cyclotomicCoverBase",
+   "AlgebraicGeometry.cyclotomicCoverRing",
+   "AlgebraicGeometry.cyclotomicCoverRoot",
+   "AlgebraicGeometry.cyclotomicCoverMap",
+   "AlgebraicGeometry.cyclotomic_finite_etale_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CyclotomicFiniteEtaleCover.lean",
+  "statement": "theorem cyclotomic_finite_etale_cover (N : ℕ) (hN : 1 ≤ N) : IsFinite (cyclotomicCoverMap.{u} N) ∧ Etale (cyclotomicCoverMap.{u} N) ∧ Surjective (cyclotomicCoverMap.{u} N) ∧ cyclotomicCoverRoot.{u} N ^ N = 1 ∧ (∀ a : ℕ, 1 ≤ a → a < N → IsUnit (1 - cyclotomicCoverRoot.{u} N ^ a)) ∧ (∀ (Ω : Type w) [Field Ω] [IsAlgClosed Ω] (φ : cyclotomicCoverRing.{u} N →+* Ω), IsPrimitiveRoot (φ (cyclotomicCoverRoot.{u} N)) N) ∧ (∀ (W : Scheme.{u}), IsUnit (N : Scheme.Γ.obj (op W)) → ∃ s : W ⟶ Spec (.of (cyclotomicCoverBase.{u} N)), IsFinite (pullback.fst s (cyclotomicCoverMap.{u} N)) ∧ Etale (pullback.fst s (cyclotomicCoverMap.{u} N)) ∧ Surjective (pullback.fst s (cyclotomicCoverMap.{u} N)) ∧ ∀ (G : Type v) [Group G] (ρ : G →* Aut W), ∃! σ : G →* Aut (pullback s (cyclotomicCoverMap.{u} N)), (∀ g : G, (σ g).hom ≫ pullback.fst s (cyclotomicCoverMap.{u} N) = pullback.fst s (cyclotomicCoverMap.{u} N) ≫ (ρ g).hom ∧ (σ g).hom ≫ pullback.snd s (cyclotomicCoverMap.{u} N) = pullback.snd s (cyclotomicCoverMap.{u} N)) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ pullback s (cyclotomicCoverMap.{u} N)), {g : G | y ≫ (σ g).hom = y} = {g : G | (y ≫ pullback.fst s (cyclotomicCoverMap.{u} N)) ≫ (ρ g).hom = y ≫ pullback.fst s (cyclotomicCoverMap.{u} N)})",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary abbreviations specialize the existing localization, AdjoinRoot quotient, root, and Spec.map constructions. The induced action is uniquely characterized by both projections, and inertia preservation is equality of stabilizer subsets of the original group. ULift of the integers permits arbitrary scheme universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21f180b83",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in the lean record; lean.statement matches the file verbatim; proof is only sorry; not superseded (live/side-live still split, no lean). Clause check: ULift Z[1/N] localization, AdjoinRoot cyclotomic quotient with root zeta, IsFinite/Etale/Surjective of Spec.map, zeta^N=1, 1-zeta^a unit for all 1<=a<N, IsPrimitiveRoot for every alg-closed Omega (universe w), W any Scheme.{u} with N a unit in Gamma, base change finite/etale/surjective. The ∃ s is over the subsingleton Hom(W, Spec Z[1/N]), so canonical. The ∃! σ action has its equations checked against Aut_mul_def. Inertia stated as equal stabilizer sets with Ω : Type u. Edge cases N=1, N=2, composite N, char | N, empty W, arbitrary G, universes OK. No cyclotomic/primitive-root/group-action definition node in the DAG (only the fs-log-specific action node). Docstrings carry source and blueprint and all 7 steps; both report sections present. Advisory: ∀ s would be easier for citers than ∃ s (equivalent); the second reading is by the same worker. No compile run (no change)."
+ }
+}

@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-square-action-proj-translation-extension",
+ "kind": "statement",
+ "title": "Translations extend near the image of the square-condition section-ring Proj map",
+ "statement": "Let $S$ be an affine scheme [def-pc-scheme] and $H\\to S$ a smooth separated morphism of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with an $S$-group scheme structure and connected fibres $H_s=H\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-fibre-product, def-weil-residue-field, def-weil-connected-scheme]. An $S$-group scheme means a scheme $H$ with $S$-morphisms $m:H\\times_SH\\to H$, $i:H\\to H$, $e:S\\to H$ satisfying associativity, identity and inverse identities; separated means its diagonal is a closed immersion. Let $X\\to S$ be a separated morphism of finite presentation, equipped with an action $a:H\\times_SX\\to X$, meaning that $a(e,x)=x$ and $a(g,a(h,x))=a(gh,x)$ as morphism identities. Let $M$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For any $S$-scheme $B$, put $X_B=X\\times_SB$, with structure map $q_B:X_B\\to B$, and let $M_B$ be the tensor pullback of $M$ [def-pc-module-pullback]. For $g\\in H(B)=\\operatorname{Hom}_S(B,H)$ let $\\tau_g:X_B\\to X_B$ be the action $x\\mapsto gx$. Say that $M$ satisfies the square condition for this action if, for every such $B$ and every $g,h\\in H(B)$, there is an invertible $\\mathcal O_B$-module $N$ and an isomorphism $$\\tau_{gh}^*M_B\\otimes M_B\\cong\\tau_g^*M_B\\otimes\\tau_h^*M_B\\otimes q_B^*N.$$ All tensors are module sheaf tensors [def-pur-sheaf-tensor-product]. This is equality of the translation differences in the group of invertible-module classes modulo modules pulled back from $B$; no coherence or chosen isomorphisms are part of the condition. Assume that $M$ satisfies this square condition. Assume that the opens $X_s$, over all positive integers $n$ and sections $s\\in\\Gamma(X,M^{\\otimes n})$, cover $X$. Let $$A=\\Gamma_*(X,M)=\\bigoplus_{n\\geq0}\\Gamma(X,M^{\\otimes n})$$ be the graded section ring [def-sc-invertible-section-ring], let $P=\\operatorname{Proj}(A)$ [def-pc-proj], and let $r:X\\to P$ be the canonical morphism of [lem-sc-ample-proj-canonical-map]. For every affine $S$-scheme $B$ whose structure morphism $B\\to S$ is smooth, write $P_B=P\\times_SB$ and $r_B=r\\times_S\\mathrm{id}_B:X_B\\to P_B$ [def-pc-fibre-product]. For every $g\\in H(B)$ there exist open subschemes $U_g,U^{\\prime}_g\\subseteq P_B$, both containing the image of $r_B$, and a $B$-isomorphism $\\sigma_g:U_g\\xrightarrow{\\sim}U^{\\prime}_g$ such that $\\sigma_g\\circ r_B=r_B\\circ\\tau_g$, where $r_B$ is factored through the indicated opens. No compatibility between the isomorphisms for different $g$ is asserted.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf",
+  "place": "Guo, section 5.6 (Picard-admissibility), section 6.1 (flat base change), and Proposition 6.2, first assertion before (i)--(iii), printed pp.14--15, March 31, 2026 version, read online; local copy WANTED. Smooth affine test-base specialization of that assertion, identifying its Proj with the base change of P; proof referred there to Raynaud, Faisceaux amples sur les schemas en groupes et les espaces homogenes, chapitre V, proposition 3.1 and corollaire 3.6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-connected-scheme",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-pc-proj",
+  "lem-sc-ample-proj-canonical-map",
+  "def-weil-open-immersion",
+  "def-sfb-section-ring-proj-affine-base"
+ ],
+ "proof": [
+  {
+   "text": "Fix a smooth affine $B\\to S$. It is flat by [lem-pc-smooth-flat]. The finite-presentation hypothesis includes quasi-compactness. By [lem-pc-quasi-compact-base-change] and [lem-weil-pbc-separated-base-change], $q:Y=X_B\\to B$ is quasi-compact and separated. Since $B$ is affine, [lem-weil-pbc-qcqs-over-affine] makes $Y$ quasi-compact and quasi-separated. Put $R=\\Gamma(S,\\mathcal O_S)$ and $T=\\Gamma(B,\\mathcal O_B)$. Applying [lem-pc-flat-base-change-cohom] in degree zero to $M^{\\otimes n}$ gives $\\Gamma(Y,M_B^{\\otimes n})=\\Gamma(X,M^{\\otimes n})\\otimes_R T$. The maps send $s\\otimes b$ to $b\\,s_B$; their product on two pure tensors is $(s\\otimes b)(t\\otimes c)=st\\otimes bc$, so they form a graded $T$-algebra isomorphism. By [lem-nagata-affine-proj-scalar-extension], $P_B$ identifies with $P_L=\\operatorname{Proj}\\Gamma_*(Y,L)$ for $L=M_B$. Under this identification $r_B=r_L$: on the pulled-back standard charts both maps have the fraction formula $t/s^k\\mapsto t_B/s_B^k$ of [lem-sc-ample-proj-canonical-map]. These charts cover by the scalar-extension node. The original section opens pull back to a cover of $Y$, so $r_L$ is defined everywhere.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-pc-flat-base-change-cohom",
+    "lem-nagata-affine-proj-scalar-extension",
+    "lem-sc-ample-proj-canonical-map",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH, lemma-flat-base-change-cohomology, degree zero; constructions.tex Tag 01N2, lemma-base-change-map-proj; Guo section 6.1"
+   }
+  },
+  {
+   "text": "Fix $g\\in H(B)$ and write $\\tau=\\tau_g:Y\\to Y$. The action identities give the inverse $\\tau_{g^{-1}}$. Put $K=\\tau^*L$, $J=\\tau_{g^{-1}}^*L$ and $D=\\tau_{g^2}^*L$. They are invertible by the local rank-one description [def-sc-invertible-module]. Every translate is covered by its positive-power section opens: pull back the covering for $L$ along the corresponding automorphism. Applying the assumed square identity to $(g,g^{-1})$, and then pulling that identity back by $\\tau$, using that $\\tau^*$ carries tensor products to tensor products [lem-pc-scheme-pullback-monoidal-existing], gives invertible modules $N_0,N_1$ on $B$ and isomorphisms $L^{\\otimes2}\\cong K\\otimes J\\otimes q^*N_0$ and $K^{\\otimes2}\\cong D\\otimes L\\otimes q^*N_1$. In the second formula use $\\tau_{g^{-1}}\\circ\\tau_g=\\mathrm{id}$, $\\tau_g\\circ\\tau_g=\\tau_{g^2}$ and $q\\tau=q$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-pc-scheme-pullback-monoidal-existing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Section 5.6 and Corollary 5.8; direct substitution in the assumed square condition"
+   }
+  },
+  {
+   "text": "Let $t\\in\\Gamma(Y,K^{\\otimes n})$, $n>0$, and $y\\in Y_t$. Since positive-power section opens for $J$ cover, choose $m>0$ and $u\\in\\Gamma(Y,J^{\\otimes m})$ nonzero at $y$. The first identity of Step 2 identifies $t^{\\otimes m}\\otimes u^{\\otimes n}\\otimes q^*v$ with a section $s$ of $L^{\\otimes2nm}$, for any $v\\in\\Gamma(B,N_0^{\\otimes nm})$. The module $N_0^{\\otimes nm}$ is invertible and thus quasi-coherent of finite type; [lem-weil-pbc-affine-finite-type-generating-sections] gives a global generator family. At $q(y)$ some member $v$ has nonzero residue. Then $s(y)\\ne0$ and $Y_s\\subseteq Y_t$. Indeed, in a local frame $s$ has coefficient $a^m b^n c$, where $a,b,c$ are the coefficients of $t,u,q^*v$. A product in the residue field is nonzero exactly when every factor is nonzero. Thus each $K$-section open is refined at every point by an $L$-section open.",
+   "uses": [
+    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Agent argument from Corollary 5.8; affine generation: Stacks properties.tex Tag 01PB, lemma-finite-type-module"
+   }
+  },
+  {
+   "text": "Conversely, let $s\\in\\Gamma(Y,L^{\\otimes d})$, $d>0$, and $y\\in Y_s$. Choose $e>0$ and $u\\in\\Gamma(Y,D^{\\otimes e})$ nonzero at $y$. Apply [lem-weil-pbc-affine-finite-type-generating-sections] on the affine $B$ to $N_1^{\\otimes de}$ and choose a global section $v$ nonzero at $q(y)$. The second identity of Step 2 carries $u^{\\otimes d}\\otimes s^{\\otimes e}\\otimes q^*v$ to $t\\in\\Gamma(Y,K^{\\otimes2de})$. Its residue at $y$ is nonzero and $Y_t\\subseteq Y_s$, since its local coefficient is the product of those of $u^d,s^e,q^*v$. This proves the other refinement condition. No base twist was assumed globally trivial.",
+   "uses": [
+    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Agent argument from Corollary 5.8, applied after translation; affine generation as in Step 3"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-cofinal-section-opens-proj-neighborhood] to $Y/B,L,K$, with the two covers of Step 2 and the refinements of Steps 3--4. It gives $\\theta:V_L\\simeq V_K$ with $\\theta r_L=r_K$. Pullback along $\\tau$ gives a graded $T$-algebra isomorphism $\\alpha:\\Gamma_*(Y,L)\\simeq\\Gamma_*(Y,K)$: on each degree it is pullback of sections, inverse to pullback by $\\tau^{-1}$ with the canonical line identifications, and it preserves multiplication of tensor sections. By [prop-nagata-relative-proj-functoriality] it induces $F:P_K\\simeq P_L$. Concretely, [lem-nagata-affine-proj-scalar-extension] applied to both rings equal to $T$ with the identity map, the graded rings $\\Gamma_*(Y,L)$, $\\Gamma_*(Y,K)$ and the graded isomorphism $\\alpha$ (after $T\\otimes_T\\Gamma_*(Y,L)=\\Gamma_*(Y,L)$) gives $F$ as the morphism cartesian over $\\operatorname{Spec}(\\mathrm{id}_T)$, with $F^{-1}(D_+(s))=D_+(\\tau^*s)$ and the chart ring map $t/s^k\\mapsto\\tau^*t/(\\tau^*s)^k$. The canonical-map formula [lem-sc-ample-proj-canonical-map] gives $F r_K=r_L\\tau$: over $D_+(s)$ both composites are defined on $r_K^{-1}D_+(\\tau^*s)=\\tau^{-1}(Y_s)$ and induce $t/s^k\\mapsto\\tau^*t/(\\tau^*s)^k=\\tau^*(t/s^k)$ on global sections, and $D_+(s)$ is affine. Set $U_g=V_L$, $U'_g=F(V_K)$ and $\\sigma_g=F\\theta$, transported through $P_L=P_B$ from Step 1. Both opens contain $r_B(Y)$, since $F(r_K(Y))=r_L(\\tau(Y))=r_L(Y)$. Finally $\\sigma_g r_B=F r_K=r_B\\tau_g$, as required.",
+   "uses": [
+    "lem-sfb-cofinal-section-opens-proj-neighborhood",
+    "lem-nagata-affine-proj-scalar-extension",
+    "prop-nagata-relative-proj-functoriality",
+    "lem-sc-ample-proj-canonical-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Agent assembly of the cofinal-section comparison; graded isomorphism functoriality: constructions.tex Tag 01MY, lemma-morphism-proj; Guo Proposition 6.2 first assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-smooth-flat",
+  "lem-pc-flat-base-change-cohom",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-sc-ample-proj-canonical-map",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sfb-cofinal-section-opens-proj-neighborhood",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-pc-scheme-pullback-monoidal-existing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Proposition 6.2 first assertion and Corollary 5.8, read online; Raynaud proof unavailable. Explicit section-open refinement and Proj comparison assembly written by Q74."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A group action preserving the theorem of the square on a line bundle extends translations to neighborhoods of the image in the section ring Proj",
+   "results": "{\"t\": \"2026-10-24T03:46:14Z\", \"tool\": \"leansearch\", \"query\": \"A group action preserving the theorem of the square on a line bundle extends translations to neighborhoods of the image in the section ring Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.smul_def\", \"Projectivization.smul_mk\", \"Projectivization.instMulAction.congr_simp\", \"Projectivization.instMulAction\", \"Rep.coe_linearization_obj_ρ\", \"AlgebraicGeometry.Proj.mul_apply\", \"MulSemiringAction.toRingAut\", \"IsLocalRing.ResidueField.residue_smul\"], \"digest\": \"59637363fc262607\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard admissible line bundle translations extend to isomorphisms of open neighborhoods in the section ring projective spectrum",
+   "results": "{\"t\": \"2026-10-24T03:46:16Z\", \"tool\": \"leanfinder\", \"query\": \"Picard admissible line bundle translations extend to isomorphisms of open neighborhoods in the section ring projective spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.awayι\"], \"digest\": \"dc0f5c838e0da677\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-24T03:49:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\"], \"digest\": \"188fcc15769692ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|squareCondition|translation.*Proj|Proj.*translation",
+   "results": "{\"t\": \"2026-10-24T03:49:32Z\", \"tool\": \"grep\", \"query\": \"Picard.admiss|squareCondition|translation.*Proj|Proj.*translation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A translation by a section of a connected smooth group extends to an isomorphism of open neighborhoods containing the image in Proj of the section ring of a square-condition line bundle",
+   "results": "{\"t\": \"2026-10-24T03:51:14Z\", \"tool\": \"leanfinder\", \"query\": \"A translation by a section of a connected smooth group extends to an isomorphism of open neighborhoods containing the image in Proj of the section ring of a square-condition line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\"], \"digest\": \"5e8c166f88dfda51\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-24T03:51:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Proj\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\"], \"digest\": \"027ebdb1533d5365\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and source; Proj chart open immersions and restriction maps, vector-space projectivization actions, and Proj-to-Spec isomorphisms do not extend translations of a square-condition invertible module to neighborhoods in its section-ring Proj."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An automorphism from a connected smooth group acting on a scheme with a square condition line bundle preserves the topology generated by nonvanishing loci of positive power sections",
+   "results": "{\"t\": \"2026-10-24T04:22:03Z\", \"tool\": \"leanfinder\", \"query\": \"An automorphism from a connected smooth group acting on a scheme with a square condition line bundle preserves the topology generated by nonvanishing loci of positive power sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.toAutHomeo_apply\", \"CategoryTheory.PreGaloisCategory.toAutHomeo\", \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_isHomeomorph\", \"CategoryTheory.PreGaloisCategory.toAut_isHomeomorph\", \"CategoryTheory.PreGaloisCategory.toAut_continuous\", \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply\", \"CategoryTheory.PreGaloisCategory.autMap\", \"CategoryTheory.PreGaloisCategory.toAutMulEquiv\"], \"digest\": \"e3869369fc7dbf5b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|squareCondition|translation.*Proj|Proj.*translation",
+   "results": "{\"t\": \"2026-10-24T04:28:11Z\", \"tool\": \"grep\", \"query\": \"Picard.admiss|squareCondition|translation.*Proj|Proj.*translation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A translation of a scheme by a group section extends to open neighborhoods in Proj of the section ring of a line bundle satisfying the theorem of the square",
+   "results": "{\"t\": \"2026-10-24T04:28:12Z\", \"tool\": \"leansearch\", \"query\": \"A translation of a scheme by a group section extends to open neighborhoods in Proj of the section ring of a line bundle satisfying the theorem of the square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc\", \"AlgebraicGeometry.Proj.mul_apply\"], \"digest\": \"1c87fcebe9ebca57\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the hits; open-immersion isomorphisms assume open immersions already, Proj chart and stalk comparisons concern one graded ring, and reduced-source dominant extensionality does not construct the comparison between two section rings. None states this neighborhood comparison or a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-action-proj-immersion-locus-stable",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Guo, Proposition 5.9, final assertion, printed pp.13--14, and Corollary 6.6(ii), printed p.16 (Raynaud VI, Theorem 2.1), applied to the left translation action of G on itself. Some positive tensor power satisfies the theorem of the square; the section criterion then detects ampleness.; auxiliary to lem-sfb-symmetric-line-power-prolongation, proof step 3 (local ample line on H_W). Supporting input: Guo, Corollary 6.5, sufficient direction, affine-locus specialization; square condition is Picard-admissibility of section 5.6; Guo, section 6.1 and Proposition 6.2(iii), printed pp.14--15 (affine-base, smooth separated finite-presentation specialization); auxiliary for the target-open immersion locus: translation-extension assertion preceding clauses (i)--(iii) in Guo Proposition 6.2, with smooth affine test bases as in section 6.1.",
+   "via": [
+    "lem-sfb-square-action-proj-immersion-locus-stable",
+    "lem-sfb-square-action-affine-orbit-criterion",
+    "lem-sfb-group-affine-section-ampleness",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-square-action-proj-translation-extension",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Identified the smooth affine base-change section algebra, used the square identity and its translate to prove mutual refinement of the original and translated section opens explicitly, and assembled the desired translation via one new general cofinal-section Proj-neighborhood comparison. All base twists are handled by affine global generation, with no coherence or global triviality assumption.",
+  "blueprint": "Auxiliary to the inherited Guo ampleness chain attached to sk-thm-sf-ctf-stability; inherited from.node is null. Realizes Guo Proposition 6.2 first assertion through Corollary 5.8 and section 6.1, with no change to the unit route. The current whole-blueprint searches found no equivalent imported assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Smoothness of the affine test-base map supplies flatness for the section comparison."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic degree-zero flat base change for all quasi-coherent tensor powers, not only the structure sheaf."
+   },
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Generic graded algebra Proj base-change comparison with specified charts."
+   },
+   {
+    "node": "lem-sc-ample-proj-canonical-map",
+    "why": "Generic canonical section-ring morphism and normalized fraction maps."
+   },
+   {
+    "node": "lem-weil-pbc-affine-finite-type-generating-sections",
+    "why": "Global generation of each invertible base twist on affine B."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "A graded equivalence induces an isomorphism of Proj; no substitute route for the six-functor unit."
+   },
+   {
+    "node": "lem-pc-quasi-compact-base-change",
+    "why": "Generic stability and affine-base finiteness tool to verify precisely the qcqs hypothesis of the section-ring comparison."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic stability and affine-base finiteness tool to verify precisely the qcqs hypothesis of the section-ring comparison."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic stability and affine-base finiteness tool to verify precisely the qcqs hypothesis of the section-ring comparison."
+   },
+   {
+    "node": "lem-pc-scheme-pullback-monoidal-existing",
+    "why": "Generic tensor comparison f^*(M⊗N)≅f^*M⊗f^*N used to pull the square identity back along the translation; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-smooth-flat",
+  "lem-pc-flat-base-change-cohom",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-sc-ample-proj-canonical-map",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-pc-scheme-pullback-monoidal-existing"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-02acf42fa",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-02acf42fa (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 5 steps, the new node lem-sfb-cofinal-section-opens-proj-neighborhood, the statement of every cited node, and Guo §5.6, Lemma 5.7, Cor. 5.8, §6.1 and Prop. 6.2 (pp. 14–15, pdftotext). Guo gives no proof of the first assertion of 6.2 and only refers to Raynaud V 3.1/3.6, so marking the proof agent-written is correct. The item's statement and stmt_deps are the same as on live and match Prop. 6.2: S affine, smooth affine test base B, τ_g = t_{g^{-1}}. Step 1 is correct: flat base change of Γ(M^n) using qcqs X/S, then the Nagata scalar-extension Proj, then r_B = r_L chart by chart. Step 2 is correct: the square identity at (g,g^{-1}) gives L² ≅ K⊗J⊗q*N0, and pulling back by τ gives K² ≅ D⊗L⊗q*N0. Steps 3 and 4 are correct: the products t^m u^n q*v and u^d s^e q*v land in degrees 2nm and 2de, and the containments go the right way. Step 5 is correct. The new node is true and not a restatement of the item: under 01PW with Y qcqs, O_P → r_*O_Y is an isomorphism, the affinization maps glue through a closed equalizer (P separated over B, no reducedness needed), and the same argument gives the inverses. Small cases checked: L=K; trivial modules; O(1) vs O(2) on P¹; O(1,0) vs O(0,1) on P¹×P¹, where refinement fails as it should; Y empty. No duplicate turned up in searches of the snapshot and the live DAG. I repaired two citation faults (C1/C4). First, step 2 pulls back a tensor product without a citation; it now cites lem-pc-scheme-pullback-monoidal-existing, added as a declared tool. Second, step 5 used the chart formula of F, which prop-nagata-relative-proj-functoriality(2) does not state; it now cites lem-nagata-affine-proj-scalar-extension over the identity T→T with β=α, which gives that formula, and the check F r_K = r_L τ is written out. proof_deps and tool_uses are updated. The statement and the new node are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SquareActionProjTranslationExtension",
+  "declaration": "AlgebraicGeometry.SchemeAction.exists_proj_translation_neighborhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/SquareActionProjTranslationExtension.lean",
+  "statement": "theorem exists_proj_translation_neighborhood (S : Scheme.{u}) [IsAffine S] (H X : Over S) [GrpObj H] [ModObj H X] [Smooth H.hom] [IsSeparated H.hom] [LocallyOfFinitePresentation H.hom] [QuasiCompact H.hom] (hH : ∀ s : S, ConnectedSpace (H.hom.fiber s)) [IsSeparated X.hom] [LocallyOfFinitePresentation X.hom] [QuasiCompact X.hom] (M : X.left.Modules) [M.IsInvertible] (hsquare : ∀ (B : Over S) (g h : B ⟶ H), ∃ N : B.left.Modules, N.IsInvertible ∧ Nonempty (((tensorPullback ((lift ((snd X B ≫ (g * h)) • fst X B) (snd X B)).left)).obj ((tensorPullback (fst X B).left).obj M) ⊗ (tensorPullback (fst X B).left).obj M) ≅ (((tensorPullback ((lift ((snd X B ≫ g) • fst X B) (snd X B)).left)).obj ((tensorPullback (fst X B).left).obj M) ⊗ (tensorPullback ((lift ((snd X B ≫ h) • fst X B) (snd X B)).left)).obj ((tensorPullback (fst X B).left).obj M)) ⊗ (tensorPullback (snd X B).left).obj N))) (hcover : ∀ x : X.left, ∃ (d : ℕ) (s : sectionRingGrade M d), 0 < d ∧ x ∈ nonvanishingLocus (M.tensorPow d) (s.val d)) : ∀ (B : Over S) [IsAffine B.left] [Smooth B.hom] (g : B ⟶ H), ∃ rB : (X ⊗ B).left ⟶ Limits.pullback (sectionRingProjStructure X.hom M) B.hom, rB ≫ Limits.pullback.fst (sectionRingProjStructure X.hom M) B.hom = (fst X B).left ≫ sectionRingProjMap M hcover ∧ rB ≫ Limits.pullback.snd (sectionRingProjStructure X.hom M) B.hom = (snd X B).left ∧ ∃ (U U' : (Limits.pullback (sectionRingProjStructure X.hom M) B.hom).Opens) (σ : U.toScheme ≅ U'.toScheme) (rU : (X ⊗ B).left ⟶ U.toScheme) (rU' : (X ⊗ B).left ⟶ U'.toScheme), rU ≫ U.ι = rB ∧ rU' ≫ U'.ι = rB ∧ σ.hom ≫ U'.ι ≫ Limits.pullback.snd (sectionRingProjStructure X.hom M) B.hom = U.ι ≫ Limits.pullback.snd (sectionRingProjStructure X.hom M) B.hom ∧ rU ≫ σ.hom = (lift ((snd X B ≫ g) • fst X B) (snd X B)).left ≫ rU'",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-17d497d5a",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Re-delivery after H13 (95cf): the only changes vs side-live are the item lean + stmt_dep and the new def node def-sfb-section-ring-proj-affine-base with its two modules; the dep records lem-sc-ample-proj-canonical-map and def-sc-invertible-section-ring are unchanged vs live. Item statement unchanged; the Lean matches every clause: affine S; GrpObj/ModObj H over S, smooth + separated + LFP + qc, fibres ConnectedSpace; X separated + LFP + qc; invertible M; hsquare over all B with Nonempty iso τ_gh^*M_B⊗M_B≅(τ_g^*⊗τ_h^*)⊗q^*N, τ via lift((snd≫g)•fst, snd); positive-degree cover; ∀ affine smooth B and g; ∃ rB pinned by both pullback projections (true since p∘r=f); U, U' contain im r_B via factorization; σ over B; rU≫σ=τ≫rU'. New def node: real degree-zero coefficient data (DirectSum.of 0 ∘ unitSectionsEquiv), laws stated in the node and true (GMul (0,0) = unitor∘tmul), r = choose of the normalized ∃ theorem, structure map = toSpecZero≫Spec(c∘f#)≫isoSpec.inv; no existing owner on live. Statement fields verbatim, docstrings OK, only sorry, report has Worker report + Second reading. No recompile; worker dry run OK."
+ }
+}

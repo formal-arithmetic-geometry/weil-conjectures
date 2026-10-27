@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-field-groupoid-restriction-open",
+ "kind": "statement",
+ "title": "Arbitrary field restriction of a groupoid has an open surjective arrow projection",
+ "statement": "Let $k$ be a field [def-weil-field], $V=\\operatorname{Spec}k$ [def-weil-affine-spectrum], and $(V,R,s,t,e,i,c)$ an absolute groupoid scheme [def-a1-groupoid-scheme]. Let $K/k$ be any field extension [def-pc-field-extension], put $V_K=\\operatorname{Spec}K$, and put $R_K=V_K\\times_{V,t}R\\times_{s,V}V_K$ [def-pc-fibre-product]. On a test scheme $T$, write a point of $R_K$ as $(u,r,v)$ with $t(r)=q(u)$ and $s(r)=q(v)$, where $q:V_K\\to V$ is induced by $k\\to K$. The operations $s_K(u,r,v)=v$, $t_K(u,r,v)=u$, $e_K(u)=(u,e(q(u)),u)$, $i_K(u,r,v)=(v,i(r),u)$ and $c_K((u,r,v),(v,r^{\\prime},w))=(u,c(r,r^{\\prime}),w)$ define an absolute groupoid scheme on $(V_K,R_K)$. The middle projection $p:R_K\\to R$ is surjective and open on underlying topological spaces. No finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LQ (lemma-restrict-groupoid-on-field), dotted arrow in its diagram; restriction groupoid operations are those of Groupoids Tag 02VB (lemma-restrict-groupoid)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-a1-groupoid-scheme",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-sfb-groupoid-restriction-projections"
+ ],
+ "proof": [
+  {
+   "text": "Construct the displayed operations as scheme morphisms using the universal property of [def-pc-fibre-product]. For identity the three components are $(\\mathrm{id}_{V_K},e\\circ q,\\mathrm{id}_{V_K})$; their compatibility is $teq=seq=q$. For inverse use the two exchanged endpoint projections and $i$ on the arrow component; $ti=s$ and $si=t$ give compatibility. On $D=R_K\\times_{s_K,V_K,t_K}R_K$, the two middle-arrow projections $r,r^{\\prime}:D\\to R$ satisfy $s(r)=q(v)=t(r^{\\prime})$, hence induce a map into $R\\times_{s,V,t}R$. Compose it with $c$ and take the outer endpoints $u,w$. The identities $tc(r,r^{\\prime})=t(r)=q(u)$ and $sc(r,r^{\\prime})=s(r^{\\prime})=q(w)$ supply the map $c_K:D\\to R_K$. The source and target are the endpoint projections. These constructions give exactly the formulas in the statement, on every test scheme, and commute with precomposition.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VB (lemma-restrict-groupoid), expanded omitted verification using the fibre-product universal property and Tag 0231 groupoid axioms."
+   }
+  },
+  {
+   "text": "Check the groupoid axioms on an arbitrary test scheme $T$, as required by [def-a1-groupoid-scheme]. For $a=(u,r,v)$, identity has both endpoints $u$, and inversion exchanges endpoints. The two unit composites are $(u,c(e(q(u)),r),v)=(u,r,v)$ and $(u,c(r,e(q(v))),v)=(u,r,v)$. The inverse composites are $c_K(i_K(a),a)=(v,c(i(r),r),v)=(v,e(q(v)),v)=e_K(v)$ and $c_K(a,i_K(a))=(u,c(r,i(r)),u)=(u,e(q(u)),u)=e_K(u)$. For three composable triples with middle arrows $r,r^{\\prime},r^{\\prime\\prime}$, both associations retain the same two outer endpoints, while their middle arrows agree by $c(c(r,r^{\\prime}),r^{\\prime\\prime})=c(r,c(r^{\\prime},r^{\\prime\\prime}))$. Source and target of a composite are its last and first endpoints. Thus these operations give a groupoid for every $T$, naturally in $T$, which is precisely an absolute groupoid scheme.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02VB (lemma-restrict-groupoid), expanded omitted verification using the fibre-product universal property and Tag 0231 groupoid axioms."
+   }
+  },
+  {
+   "text": "Put $B=V_K\\times_{q,V,t}R$, with projections to $V_K$ and $b:B\\to R$, and give $B$ the map $h=s\\circ b:B\\to V$. The iterated fibre-product universal property identifies $R_K$ with $B\\times_{h,V,q}V_K$: the maps in both directions send $(u,r,v)$ to $((u,r),v)$ and back. They are inverse because all three projections agree, so uniqueness in the universal property applies. Write $a:R_K\\to B$ for the projection. Then $p=b\\circ a$. Here $b$ is the base change of $q$ along $t$, and $a$ is its base change along $h$. Both $V_K$ and $V$ have exactly one point by [def-weil-affine-spectrum]; consequently $q$ is surjective.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LQ (lemma-restrict-groupoid-on-field), defining cartesian diagram and first sentence of proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-scheme-over-field-universally-open] with field $k$, scheme $X=V_K$, and base scheme $S=R$ carrying $t:R\\to V$. It says that $b:B\\to R$ is open. Apply it again with $S=B$ carrying $h:B\\to V$; it says that $a:R_K\\to B$ is open. The ordering of the two factors is immaterial: the swap maps are inverse by the fibre-product universal property, and an isomorphism induces a homeomorphism since its continuous maps are inverse. Apply [lem-weil-pbc-surjective-base-change] to the surjective $q$ from step 3, first along $t$ and then along $h$. It gives surjectivity of $b$ and $a$. These two cited statements allow arbitrary schemes over $k$ and arbitrary base changes; neither requires finite type or finite presentation.",
+   "uses": [
+    "lem-sc-scheme-over-field-universally-open",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LQ (lemma-restrict-groupoid-on-field), proof: use Morphisms Tags 0383 (lemma-scheme-over-field-universally-open) and 01S1 (lemma-base-change-surjective)."
+   }
+  },
+  {
+   "text": "For every open subset $O\\subseteq R_K$, one has $p(O)=b(a(O))$: first $a(O)$ is open in $B$, then $b(a(O))$ is open in $R$. For every point $r_0\\in R$, choose $z\\in B$ with $b(z)=r_0$, then $y\\in R_K$ with $a(y)=z$. This gives $p(y)=r_0$. Hence $p$ is open and surjective. No part of the construction or the two base-change applications imposed a finiteness condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LQ (lemma-restrict-groupoid-on-field), composition of the two projections; elementary topological verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-a1-groupoid-scheme",
+  "def-weil-affine-spectrum",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LQ proof route, together with the explicit expansion of the omitted verification in groupoids.tex Tag 02VB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a groupoid scheme along a field extension has open surjective arrow projection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.surjective_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being surjective for morphisms of schemes is Zariski local at the target. That is, if a morphism $ f: X \\\\to Y $ is surjective, then for any Zariski covering sieve on $ Y $, there exist\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on morphism properties in the category of schemes, asserting that the property is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.instSurjectiveDescI₀SchemeF\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme}\\n  (𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X),\\n  AlgebraicGeometry.Surjective (CategoryTheory.Limits.Sigma.desc fun i => 𝒰.f i)\", \"doc\": \"For any scheme $ X $ and a cover $ \\\\mathcal{U} $ of $ X $ defined by a precoverage $ P $, the morphism obtained by taking the coproduct (disjoint union) of the morphisms $ \\\\mathcal{U}.f(i) $ in the co\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.isOpenMap_fromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"The canonical morphism from the glued scheme constructed via an open cover to the original scheme is an open map, meaning it maps open subsets of the glued scheme to open subsets of the original schem\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.fromGlued_open_map\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰).base)\", \"doc\": \"For any open cover 𝒰 of a scheme X, the underlying continuous map of the canonical morphism from the glued scheme constructed from 𝒰 to X is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ (D : AlgebraicGeometry.Scheme.GlueData) (x : ↥D.glued),\\n  ∃ i y, (CategoryTheory.ConcreteCategory.hom (D.ι i).base) y = x\", \"doc\": \"For every point $ x $ in the glued scheme $ X $, there exists an index $ i $ and a point $ y $ in the open subset $ U(i) $ such that the inclusion morphism $ \\\\iota_i $ maps $ y $ to $ x $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The map Spec K times Spec k R times Spec k Spec K to R is open and surjective for a field extension K over k",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (k : Type u_1) (K : Type u_2) (R : Type u_3) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  [inst_3 : CommRing R] [inst_4 : Algebra k R] [IsPurelyInseparable k K],\\n  IsHomeomorph (PrimeSpectrum.comap (algebraMap R (TensorProduct k R K)))\", \"doc\": \"Let $ k \\\\to K $ be a purely inseparable field extension and $ R $ a commutative semiring equipped with a $ k $-algebra structure. The induced map on prime spectra given by preimage under the canonical\"}\n  {\"name\": \"AlgebraicGeometry.Spec.map_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {R S : CommRingCat}, Function.Surjective AlgebraicGeometry.Spec.map\", \"doc\": \"The function assigning to each ring homomorphism $ f : R → S $ the induced morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ is surjective, meaning every morphism of schemes betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (K : Type u_2) (R : Type u_3) (S : Type u_4) [inst : Field K] [inst_1 : CommRing R] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R K] [inst_4 : Algebra R S] (L : Type u_5) [inst_5 : Field L] [inst_6 : Algebra R L]\\n  [inst_7 : Algebra K L] [inst_8 : IsScalarTower R K L] [IsPurelyInseparable K L],\\n  Is\", \"doc\": \"Let $ R $ be a commutative semiring, $ K $ and $ S $ be $ R $-algebras, and $ L $ be a field extending $ K $ as a purely inseparable field extension. The map induced by the tensor product $ K \\\\otimes_\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"AlgebraicGeometry.Polynomial.isOpenMap_comap_C\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/IsOpenComapC\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], IsOpenMap (PrimeSpectrum.comap Polynomial.C)\", \"doc\": \"The map from the prime spectrum of $ R[X] $ to the prime spectrum of $ R $ induced by the constant polynomial embedding is an open map in the Zariski topology.\"}\n  {\"name\": \"MvPolynomial.isOpenMap_comap_C\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {σ : Type u_1}, IsOpenMap (PrimeSpectrum.comap MvPolynomial.C)\", \"doc\": \"The preimage map $\\\\operatorname{Spec}(R[\\\\sigma]) \\\\to \\\\operatorname{Spec}(R)$ induced by the constant polynomial embedding $R \\\\to R[\\\\sigma]$ is an open map with respect to the Zariski topology on the p\"}\n  {\"name\": \"AlgebraicGeometry.specTargetImageRingHom_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {A : CommRingCat} (f : X ⟶ AlgebraicGeometry.Spec A),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.specTargetImageRingHom f))\", \"doc\": \"The ring homomorphism associated to the target image of a morphism of schemes is surjective, i.e., for a morphism $ f $ of schemes, the induced ring homomorphism $ \\\\operatorname{specTargetImageRingHom\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*restrict|restrict.*groupoid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Field extension restriction of a scheme groupoid is open and surjective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W e) :\\n  (X.ofRestrict h).appLE V W e =\\n    X.presheaf.map (homOfLE (show X.ofRestrict h ''ᵁ _ ≤ _ by exact Set.image_subset_iff.mpr e)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ constructed via $h$ is an open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrict_presheaf_map\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W) (i : V ⟶ W) :\\n  (X.restrict h).presheaf.map i =\\n    X.presheaf.map\\n      (homOfLE (show X.ofRestrict h ''ᵁ W.unop ≤ X.ofRestrict h ''ᵁ V.unop from Set.image_mono i.unop.le)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ is an open immersion. This means th\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \"[IsOpenImmersion f] : SurjectiveOnStalks f\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, if $ f $ is an open immersion, then the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenImmersion (X.ofRestrict h)\", \"doc\": \"The morphism from the restricted scheme $ X|_U $ to $ X $, constructed via an open immersion $ h: U \\\\to X $, is an open immersion. This means the underlying continuous map is the open embedding $ h $,\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instOfRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(X : LocallyRingedSpace) {U : TopCat} (f : U ⟶ X.toTopCat) (hf : IsOpenEmbedding f) :\\n  LocallyRingedSpace.IsOpenImmersion (X.ofRestrict hf)\", \"doc\": \"Given a locally ringed space $ X $, an open subset $ U $, and an open embedding $ f: U \\to X $, the morphism from the restricted locally ringed space $ X|_U $ to $ X $ is an open immersion. This means \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrict\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": Scheme\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open embedding $h: U \\to X$, the restriction of $X$ to $U$ forms a scheme by inheriting the local affine structure thr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : Scheme.{u}\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.morphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : (f ⁻¹ᵁ U).toScheme ⟶ U\", \"doc\": \"Given a morphism of schemes $f: X \\\\to Y$ and an open subset $U$ of $Y$, this defines the restriction of $f$ as a morphism from the open subscheme $X|_{f^{-1}(U)}$ to the open subscheme $Y|_U$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: no internal scheme-groupoid theorem; ordinary groupoids, group objects, topological groups, pure-inseparable extensions and residue-field parametrizations do not give the stated general field-groupoid result in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*restrict|restrict.*groupoid",
+   "results": "15 hits; Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean, Mathlib/Geometry/Manifold/StructureGroupoid.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: group objects over a base have a single structure map; manifold structure groupoids concern partial homeomorphisms. Neither states restriction of an absolute scheme groupoid with two potentially different endpoint maps. Surjective base change is reused as the existing Mathlib leaf, not as a match for the whole item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of internal groupoid schemes along arbitrary object morphisms",
+   "results": "8 hits; AlgebraicGeometry.Scheme.GrpObjAsOverPullback, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: group objects over a base have a single structure map; manifold structure groupoids concern partial homeomorphisms. Neither states restriction of an absolute scheme groupoid with two potentially different endpoint maps. Surjective base change is reused as the existing Mathlib leaf, not as a match for the whole item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: group objects over a base have a single structure map; manifold structure groupoids concern partial homeomorphisms. Neither states restriction of an absolute scheme groupoid with two potentially different endpoint maps. Surjective base change is reused as the existing Mathlib leaf, not as a match for the whole item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of an internal groupoid in schemes along a map of objects gives a groupoid with triples as arrows",
+   "results": "8 hits; AlgebraicGeometry.Scheme.GrpObjAsOverPullback, AlgebraicGeometry.Scheme.canonicallyOverPullback, AlgebraicGeometry.Scheme.monObjAsOverPullback, AlgebraicGeometry.Scheme.Cover.instCategoryI₀Pullback₁, AlgebraicGeometry.Scheme.Pullback.v, AlgebraicGeometry.Scheme.instIsOverFstOverInferInstanceOverClassId, AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_f, AlgebraicGeometry.Scheme.Pullback.gluing",
+   "date": "2026-10-24",
+   "verdict": "no match: group objects over a base have a single structure map; manifold structure groupoids concern partial homeomorphisms. Neither states restriction of an absolute scheme groupoid with two potentially different endpoint maps. Surjective base change is reused as the existing Mathlib leaf, not as a match for the whole item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-open-image-closed",
+  "date": "2026-10-24",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: apply 04Q9 to the kernel relation on the field spectrum and its pair groupoid. Supporting Second proof paragraph of 04Q9: apply 04Q6 to the morphism from the reduced source into the closure groupoid. Supporting Tag 04Q6, first proof paragraph: openness of the restriction projection, and the restriction construction used before it.",
+   "via": [
+    "lem-sfb-field-groupoid-open-image-closed",
+    "lem-sfb-field-kernel-relation-immersion-closed",
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-groupoid-restriction-open",
+  "worker": "stage1",
+  "summary": "Q69: retained the complete statement and all five statement dependencies. Expanded restriction operations and all groupoid laws; factored the arrow projection into two base changes of the field extension, using two existing Mathlib leaves. No new nodes, attachments, or statement correction.",
+  "blueprint": "The inherited blueprint.from.place records the supporting field-groupoid restriction input for the direct-image chain rooted at det-thm-sf-ctf-stability-direct-images, proof (3). Read its current proof in literature/blueprint/latest. Steps 1-2 construct the restriction used in Stacks 04Q6; steps 3-5 prove its open surjective projection using 04LQ. The ancestor command returns None because the inherited created.item chain has no mechanically recognized blueprint ancestor; retain that existing null and its explicit place/via rather than fabricate an ancestor. Searches of the entire blueprint for groupoid restriction, restrict groupoid, universally open, and 01S1 found no matching item."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-8aef68ffa",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-8aef68ffa (reviewer sub-agent of L); spot-checked: I read the item in full: unchanged statement and stmt_deps, 5 steps, 0 new nodes. Statement checked against Stacks 02VB (groupoids.tex:3474, proof omitted) and 04LQ (more-groupoids.tex:1002–1038). R_K = V_K ×_{V,t} R ×_{s,V} V_K with t_K first and s_K last agrees with 02VB's diagram. The item asks only for open and surjective, which 04LQ implies (it also gives flat and affine), with no finiteness. Steps 1–2: I checked every fibre-product equation and every H-point groupoid law against def-a1-groupoid-scheme's conventions (sc = s pr_1, tc = t pr_0): units, both inverses, associativity, s_K i_K = t_K. All hold. Step 3: R_K ≅ B ×_{h,V,q} V_K with h = s∘b, and q is surjective because both spectra have one point (def-weil-affine-spectrum). Step 4: lem-sc-scheme-over-field-universally-open (0383) and lem-weil-pbc-surjective-base-change (01S1) apply with X = V_K and S = R via t or B via h, up to the factor swap. Both are Mathlib leaves, so no tool_uses are needed. Step 5 is set-level composition. Edge cases checked: K = k; the trivial groupoid becomes the pair groupoid; s ≠ t as maps to Spec k; inseparable and transcendental K/k. I searched the DAG for duplicates: def-sfb-restricted-groupoid-relation (relation only, no laws), the sibling perfect-restriction (homeomorphism statement, expands the same 02VB construction inline) and the fppf and invariant-open restrictions. None is a duplicate. from.node is null, inherited from the Q40 created.item chain, with place and via present. No SGA citation. proof_deps equals the union of the uses. GOAL.md and coord/dag-sync.md are absent from the snapshot; their content is covered by the brief."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldGroupoidRestrictionOpen",
+  "declaration": "AlgebraicGeometry.field_groupoid_restriction_open",
+  "declarations": [
+   "AlgebraicGeometry.groupoidRestrictionMiddle",
+   "AlgebraicGeometry.field_groupoid_restriction_open"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldGroupoidRestrictionOpen.lean",
+  "statement": "theorem field_groupoid_restriction_open (k K : Type u) [Field k] [Field K] [Algebra k K] {R : Scheme.{u}} (s t : R ⟶ Spec (CommRingCat.of k)) (e : Spec (CommRingCat.of k) ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) : (∃ (eK : Spec (CommRingCat.of K) ⟶ pullback (groupoidSaturationMap s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (iK : pullback (groupoidSaturationMap s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ pullback (groupoidSaturationMap s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (cK : pullback (groupoidRestrictionSource s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (groupoidRestrictionTarget s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ⟶ pullback (groupoidSaturationMap s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))), IsGroupoidScheme (groupoidRestrictionSource s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (groupoidRestrictionTarget s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) eK iK cK ∧ eK ≫ groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K))) = Spec.map (CommRingCat.ofHom (algebraMap k K)) ≫ e ∧ iK ≫ groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K))) = groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K))) ≫ i ∧ (∀ (T : Scheme.{u}) (a b : T ⟶ pullback (groupoidSaturationMap s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (h : a ≫ groupoidRestrictionSource s t (Spec.map (CommRingCat.ofHom (algebraMap k K))) = b ≫ groupoidRestrictionTarget s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (hm : (a ≫ groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ≫ s = (b ≫ groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ≫ t), (pullback.lift a b h ≫ cK) ≫ groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K))) = pullback.lift (a ≫ groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (b ≫ groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) hm ≫ c)) ∧ Surjective (groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ IsOpenMap (groupoidRestrictionMiddle s t (Spec.map (CommRingCat.ofHom (algebraMap k K))))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses groupoidSaturationMap, groupoidRestrictionSource and groupoidRestrictionTarget through their definition node def-sfb-groupoid-restriction-projections (existing:true in Sheaf.AlgebraicGeometry.CohenMacaulayGroupoidDoubleRestriction). The theorem node lem-sfb-cm-groupoid-double-restriction is not a statement dependency. The middle projection is the concrete composite of pullback projections. Lean module byte-identical to returned head 4fad425c2c87; H2 repaired by definition ownership."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a8f28367",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery repairs the H2 fault of 4fad425c2c87: theorem node lem-sfb-cm-groupoid-double-restriction removed from stmt_deps and replaced by new def node def-sfb-groupoid-restriction-projections (existing:true on groupoidSaturationMap/RestrictionSource/RestrictionTarget in CohenMacaulayGroupoidDoubleRestriction, not moved or copied). Module byte-identical to the previous head; item differs only in stmt_deps and lean.note, statement unchanged vs live. New node statement matches the def bodies (W=pullback g t, h=snd≫s, R_B=pullback h g, s_B=snd, t_B=fst≫fst), lean.statement verbatim, no duplicate owner in side-live. Item maths re-checked against IsGroupoidScheme: endpoints forced, middle equations pin eK/iK/cK, composition orientation correct, Surjective∧IsOpenMap of the real middle projection, no finiteness. Docstrings, sorry-only proof and both report sections present. Non-blocking: the helpers' docstrings still name the theorem node as blueprint. No compile (no change)."
+ }
+}

@@ -1,6 +1,9 @@
 module
 public import Sheaf.RingTheory.LogRegularSaturationNormality
-public import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
+public import Sheaf.AlgebraicGeometry.LogEtaleRestrictionStalkComparison
+public import Sheaf.AlgebraicGeometry.LogRegularSharpChart
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.GroupTheory.MonoidLocalization.GrothendieckGroup
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank

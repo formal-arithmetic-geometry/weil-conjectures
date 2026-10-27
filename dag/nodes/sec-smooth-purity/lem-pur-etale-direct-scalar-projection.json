@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-etale-direct-scalar-projection",
+ "kind": "lemma",
+ "title": "Scalar compatibility of the ordered direct-image projection",
+ "statement": "Let A and B be commutative rings, φ:A→B a unital map, and D_R(T) the ordinary unbounded derived category of constant R-module sheaves on the small etale site of a scheme T [def-weil-pbc-derived-categories]. Write Q_T for scalar extension, δ_T for its normalized tensor comparison [def-pur-exceptional-coefficient-normalizations], L_R(p) for geometric derived pullback, a_p:Q_Y;L_B(p)≅L_A(p);Q_X for scalarPullbackIso, and χ_p for its counit mate scalarMate [lem-pur-etale-scalar-mate-projection]. Semicolon composes in application order. Put τ_p(K,E)=δ_X(L_A(p)K,E);(a_p(K)⁻¹⊗id), a map Q_X(L_A(p)K⊗E)→L_B(p)Q_YK⊗Q_XE. For every scheme morphism p:X→Y, let R_R(p) be derived direct image and Π_R(p;K,E):K⊗R_R(p)E→R_R(p)(L_R(p)K⊗E) the canonical counit projection conjugated by the signed tensor symmetries on source and target [def-kun-projection-formula-map, lem-kun-tensor-sym]; this formula defines Π even when p is not proper. For every K∈D_A(Y) and E∈D_A(X), Q_Y(Π_A(p;K,E));χ_p(L_A(p)K⊗E);R_B(p)(τ_p(K,E)) = δ_Y(K,R_A(p)E);(id⊗χ_p(E));Π_B(p;Q_YK,Q_XE). No finiteness, properness, flatness or boundedness hypotheses occur. The actual Π is orderedDirectProjection, so this specifies maps and not just an isomorphism class.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-pur-etale-scalar-mate-projection",
+  "def-kun-projection-formula-map",
+  "lem-kun-tensor-sym"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings and preceding projection lemma; agent extraction of the proper counit scalar square from parent proof step 2; tensor normalization in sites-cohomology.tex Tag 07A4"
+ },
+ "proof": [
+  {
+   "text": "Apply tensorProjectionAdjunct with the identity map into derived direct image. Its transpose formula identifies orderedDirectProjection, with its two specified signed symmetries, with the rightAdjointProjectionMap of the flipped tensor bifunctors and the flipped geometric tensor comparison. The existing theorem already proves both symmetry coherence and cancellation. This identification is the private lemma orderedDirectProjection_flip.",
+   "uses": [
+    "lem-amb-tensor-projection-adjunct",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Curry the normalized scalar tensor comparison in each variable, using its naturality on the product category. Apply etaleScalarPullback_tensor with the arguments reversed. Expand the tensor of the two scalar/pullback comparison components in the second-variable-first order to obtain exactly the comparison hypothesis of rightAdjointProjectionMap_mate for the flipped tensor bifunctors.",
+   "uses": [
+    "lem-pur-etale-scalar-pullback-tensor-coherence",
+    "def-pur-exceptional-coefficient-normalizations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved source-library theorem CategoryTheory.Adjunction.rightAdjointProjectionMap_mate from WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat to the two geometric adjunctions, the flipped geometric and scalar tensor comparisons, scalarPullbackIso.hom, and scalarMate. Its counit hypothesis is precisely mateEquiv_counit because scalarMate is defined as that mate. This yields the projection square with the forward scalar/pullback comparison at the target.",
+   "uses": [
+    "lem-pur-etale-scalar-mate-projection",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Rewrite both ordered projections by the identification in step 1. Postcompose the desired equation with direct image of tensoring scalarPullbackIso.hom in the first factor; it is an isomorphism and hence monic. Functoriality, natural-transformation component composition, and inverse-hom cancellation cancel the inverse comparison on the left. The resulting equality is exactly step 3.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projection-formula-map",
+  "def-pur-exceptional-coefficient-normalizations",
+  "lem-amb-tensor-projection-adjunct",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-pur-etale-scalar-pullback-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U2",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 counit projection square; formal assembly by the existing source-library rightAdjointProjectionMap_mate, with tensorProjectionAdjunct and etaleScalarPullback_tensor fixing the specified comparisons."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension commutes with projection formula for compactly supported derived direct image",
+   "results": "Eight unrelated hits (compactly supported continuous maps and presheaf pushforward); no derived scalar/projection square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction",
+   "results": "mateEquiv, mateEquiv_counit, mateEquiv_vcomp and related generic mate identities.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical tools only; canonical scalar and tensor normalization still need transport."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*[Pp]rojection|[Pp]rojection.*scalar",
+   "results": "Mathlib/Analysis/CStarAlgebra/Projection.lean only. Local project search found FieldProjectionProperSquare and FieldProjectionOpenSquare for pro-etale field coefficient systems, and ProjectionScalarSquare for pro-etale ring sheaves; these do not state the ordinary-etale constant-coefficient squares.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate in the required categories. Blueprint search scalar projection found det-cor-sf-direct-image-ctf-open-tor, a Tor-bound result rather than either coherence equation."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactScalarCoherence",
+  "date": "2026-10-26",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof, paragraph 2: the explicit projective-line trace commutes with coefficient reduction, and composition of its adjunctions gives the corresponding compatibilities for affine space; the scalar/projection and scalar/composition identifications needed before transposing; Scalar compatibility of the ordered direct-image projection",
+   "via": [
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleDirectScalarProjection",
+  "file": "lean/Sheaf/Paper/EtaleDirectScalarProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleDirectScalarProjection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.orderedDirectProjectionNat",
+   "AlgebraicGeometry.Etale.orderedDirectProjection",
+   "AlgebraicGeometry.Etale.orderedDirectProjection_eq",
+   "AlgebraicGeometry.Etale.etaleDirectScalarProjection"
+  ],
+  "statement": "theorem etaleDirectScalarProjection\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (K : DerivedCategoryModule A Y) (E : DerivedCategoryModule A X) :\n    (scalarExtension φ Y).map (orderedDirectProjection A p K E) ≫\n      (scalarMate φ p).app\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj\n          ((upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.obj K)).obj E) ≫\n      (lowerStar (ModuleCat.{u + 1} B) p).rightDerivedFunctor.map\n        ((ExceptionalCoefficients.tensorIso φ X).hom.app\n            ((upperStar (ModuleCat.{u + 1} A) p).leftDerivedFunctor.obj K, E) ≫\n          ((derivedTensor (ModuleCat.{u + 1} B) X).map\n            ((scalarPullbackIso φ p).inv.app K)).app ((scalarExtension φ X).obj E)) =\n    (ExceptionalCoefficients.tensorIso φ Y).hom.app\n        (K, (lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj E) ≫\n      ((derivedTensor (ModuleCat.{u + 1} B) Y).obj\n        ((scalarExtension φ Y).obj K)).map ((scalarMate φ p).app E) ≫\n      orderedDirectProjection B p ((scalarExtension φ Y).obj K)\n        ((scalarExtension φ X).obj E)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261026T002529-L-95931",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T084459-L-3685067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

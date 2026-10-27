@@ -27,6 +27,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Sheaf.Paper.NormalizedTowerLissePropagation
 
 /-! # Common lisse strata for a normalized tower
 
@@ -36,6 +37,7 @@ Source: Stacks Project and the local-effectivity argument in amplification (c).
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 
 universe u v w
 
@@ -402,7 +404,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def inverseImageCoefficientIso
     {Z W : Scheme.{u}} (g : W ⟶ Z) (D : Type (u + 1)) [CommRing D] :
-    letI := constantRingInverseImage_isIso g D
+    haveI := NormalizedTowerCoefficients.constantRingInverseImage_isIso g D
     proEtaleModuleInverseImage g (adicLisseConstantRing Z D) ⋙
       pbcRestrict (coefficientIso g D).inv ≅
     proEtaleRingModulePullback g (adicLisseConstantRing Z D)
@@ -441,7 +443,7 @@ attribute [local irreducible] fixedConstantPullbackIso
 private noncomputable def inverseImageConstantModuleIso
     {Z W : Scheme.{u}} (g : W ⟶ Z) (D : Type (u + 1)) [CommRing D]
     (M : ModuleCat.{u + 1} D) :
-    letI := constantRingInverseImage_isIso g D
+    haveI := NormalizedTowerCoefficients.constantRingInverseImage_isIso g D
     (pbcRestrict (coefficientIso g D).inv).obj
       ((proEtaleModuleInverseImage g (adicLisseConstantRing Z D)).obj
         ((adicLisseConstantModules Z D).obj M)) ≅
@@ -523,17 +525,12 @@ private theorem nonempty_over_iso_iff
       (((restrictionOverIso e.hom U).app M).symm ≪≫ i ≪≫
         (restrictionOverIso e.hom U).app N)⟩
 
-private def nativeSieveFiniteLisse (Z : Scheme.{u}) (D : Type (u + 1)) [CommRing D]
-    (F : pbcModules Z (adicLisseConstantRing Z D)) : Prop :=
-  ∃ S : Sieve (⊤_ Z.ProEt), S ∈ ProEt.topology Z (⊤_ Z.ProEt) ∧
-    ∀ (U : Z.ProEt) (f : U ⟶ ⊤_ Z.ProEt), S f →
-      ∃ M : ModuleCat.{u + 1} D, Finite M ∧
-        Nonempty (F.over U ≅ ((adicLisseConstantModules Z D).obj M).over U)
+private abbrev nativeSieveFiniteLisse := NormalizedNativeSieveFiniteLisse
 
 private theorem relative_lisse_iff_native
     {Z W : Scheme.{u}} (g : W ⟶ Z) (D : Type (u + 1)) [CommRing D]
     (F : pbcModules W ((adicTowerInverseImage g).obj (adicLisseConstantRing Z D))) :
-    letI := constantRingInverseImage_isIso g D
+    haveI := NormalizedTowerCoefficients.constantRingInverseImage_isIso g D
     IsRelativelyFiniteLisseModule g D F ↔ nativeSieveFiniteLisse W D
       ((pbcRestrict (coefficientIso g D).inv).obj F) := by
   have := constantRingInverseImage_isIso g D
@@ -693,7 +690,7 @@ private theorem native_common_strata
     (hconstructible : ∀ q : ℤ, IsConstructibleProEtaleCoefficientModuleSheaf Z D (F q))
     (hbounded : ∀ q : ℤ, (q < a ∨ b < q) → IsZero (F q)) :
     ∃ S : Stratification Z, ∀ (i : Fin S.n) (q : ℤ),
-      letI := constantRingInverseImage_isIso (S.immersion i) D
+      haveI := NormalizedTowerCoefficients.constantRingInverseImage_isIso (S.immersion i) D
       nativeSieveFiniteLisse (S.domain i) D
         ((proEtaleRingModulePullback (S.immersion i) (adicLisseConstantRing Z D)
           (adicLisseConstantRing (S.domain i) D) (coefficientIso (S.immersion i) D)).obj
@@ -815,6 +812,25 @@ theorem normalizedTower_common_lisse_strata
           (pbcLevelConstantComparison X d n).hom)).obj
             ((DerivedCategory.homologyFunctor _ q).obj
               ((adicTowerPullback (S.immersion i)
-                ((pbcAdicRings X d).obj (op n))).obj (M.level n)))) := by sorry
+                ((pbcAdicRings X d).obj (op n))).obj (M.level n)))) := by
+  let D : Type (u + 1) := A ⧸ d.ideal ^ (0 + 1)
+  let F : ℤ → pbcModules X (adicLisseConstantRing X D) := fun q ↦
+    (pbcRestrict (pbcLevelConstantComparison X d 0).hom).obj
+      ((DerivedCategory.homologyFunctor _ q).obj (M.level 0))
+  have hF : ∀ q, IsConstructibleProEtaleCoefficientModuleSheaf X D (F q) := by
+    intro q
+    simpa only [F, D] using hconstructible q
+  have hzero : ∀ q, q < a ∨ b < q → IsZero (F q) := by
+    intro q hq
+    exact (pbcRestrict (pbcLevelConstantComparison X d 0).hom).map_isZero
+      (hbounded 0 q hq)
+  obtain ⟨S, hS⟩ := NormalizedTowerCoefficients.native_common_strata X D (fun q ↦ F q) a b
+    (fun q ↦ hF q) hzero
+  refine ⟨S, ?_⟩
+  apply normalizedTower_lisse_of_native_strata X d M S a b hab hbounded
+  intro i q
+  haveI := NormalizedTowerCoefficients.constantRingInverseImage_isIso (S.immersion i) D
+  refine ⟨NormalizedTowerCoefficients.coefficientIso (S.immersion i) D, ?_⟩
+  simpa only [NormalizedNativeSieveFiniteLisse, F, D] using hS i q
 
 end AlgebraicGeometry.Scheme

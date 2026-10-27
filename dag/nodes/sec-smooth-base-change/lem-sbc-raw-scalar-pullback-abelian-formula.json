@@ -15,22 +15,18 @@
  ],
  "proof": [
   {
-   "text": "Proof: Fix x and unfold abelianHigherDirectImageRawPullback. Its source free abelian\nsheaf is RawModuleScalarComparison.freeAbelian S U, since evaluation of whiskering\nby AddCommGrpCat.free is composition with that functor. Its first two maps are the\nsingle of the composite inverse-image comparison and the inverse derived-single\ncomparison, which are abelianSourceFactor. Its middle map is derived inverse image\nof x. Its last two maps are the shift comparison and the shift of the single\ncomparison followed by the single of the inverse coefficient upperStarComp. Expand\nrestrictedOverCoefficient to identify these last maps with abelianCoefficientFactor.\nApply Category.assoc to the first two maps. The Over triangle proofs coincide by\nproof irrelevance. No module class z, scalar comparison, or inverse-image coherence\nsquare is used. The same calculation covers degree zero, zero x, and identity f. Present raw class inputs and outputs at their native derived Hom types using the concrete identity functions in def-sbc-raw-class-native-morphisms. These return the input element itself; unfolding their identity bodies makes no mathematical change.",
-   "uses": [
-    "def-sbc-raw-class-native-morphisms"
-   ],
+   "text": "Proof: Fix x and unfold abelianHigherDirectImageRawPullback. Its source free abelian\nsheaf is RawModuleScalarComparison.freeAbelian S U, since evaluation of whiskering\nby AddCommGrpCat.free is composition with that functor. Its first two maps are the\nsingle of the composite inverse-image comparison and the inverse derived-single\ncomparison, which are abelianSourceFactor. Its middle map is derived inverse image\nof x. Its last two maps are the shift comparison and the shift of the single\ncomparison followed by the single of the inverse coefficient upperStarComp. Expand\nrestrictedOverCoefficient to identify these last maps with abelianCoefficientFactor.\nApply Category.assoc to the first two maps. The Over triangle proofs coincide by\nproof irrelevance. No module class z, scalar comparison, or inverse-image coherence\nsquare is used. The same calculation covers degree zero, zero x, and identity f.",
+   "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [
-  "def-sbc-raw-class-native-morphisms"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "group": "V3",
-  "date": "2026-10-21",
-  "document": "Stacks Project; existing raw-map calculations with explicit native class values",
-  "place": "Tags 03FD, 03D7 and 03Q8; identity presentation of the same classes and unchanged categorical equations"
+  "group": "K4",
+  "date": "2026-10-25",
+  "document": "Stacks Project; canonical adopted source proofs",
+  "place": "Tags 03FD, 03D7 and 03Q8; retire duplicate native-class presentations and reuse the same raw-factor equations"
  },
  "mathlib_searches": [
   {
@@ -81,15 +77,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarPullbackAbelianFormula",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarPullbackAbelianFormula.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleScalarPullbackAbelianFormula",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleScalarPullbackAbelianFormula.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_pullback_abelian_formula",
-  "statement": "theorem rawModuleScalar_pullback_abelian_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B) :\n    ∀ (x : (abelianHigherDirectImageRawPresheaf (B.hom ≫ k) q\n      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B)).obj\n        (op U)),\n      rawAbelianClassMorphism (A.hom ≫ k)\n        (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U\n        (abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)\n        (by rw [← Category.assoc, Over.w]) q _ _\n        ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom\n          (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G)) U x) =\n      abelianSourceFactor f.left (B.hom ≫ k) (A.hom ≫ k)\n        (by rw [← Category.assoc, Over.w]) (RawModuleScalarComparison.freeAbelian S U) ≫\n      (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map\n        (rawAbelianClassMorphism (B.hom ≫ k)\n          (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B) q U x) ≫\n      abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)\n        (q : ℤ) A B f",
+  "statement": "theorem rawModuleScalar_pullback_abelian_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B) :\n    ∀ (x : (abelianHigherDirectImageRawPresheaf (B.hom ≫ k) q\n      (restrictedOverCoefficient ((moduleAbelianForget Λ W).obj G) B)).obj\n        (op U)),\n      abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)\n        (by rw [← Category.assoc, Over.w]) q _ _\n        ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom\n          (Over.w f).symm).inv.app ((moduleAbelianForget Λ W).obj G)) U x =\n      abelianSourceFactor f.left (B.hom ≫ k) (A.hom ≫ k)\n        (by rw [← Category.assoc, Over.w]) (RawModuleScalarComparison.freeAbelian S U) ≫\n      (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map x ≫\n      abelianCoefficientFactor ((moduleAbelianForget Λ W).obj G)\n        (q : ℤ) A B f",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-21",
-  "note": "Presentation repair only: rawModuleClassMorphism and rawAbelianClassMorphism return their inputs at the definitionally equal derived Hom types. The mathematical statement, binders and degree conventions are unchanged."
+  "by": "K4",
+  "date": "2026-10-25",
+  "note": "Use the canonical raw Hom carriers. The former native-class functions return their inputs, the native coefficient is the canonical coefficient abbreviation, and the compatibility forget and derived comparison are the canonical functors and isomorphisms. No mathematical binder, hypothesis or equation changes."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -102,16 +98,27 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-aa2a9",
-  "group": "V3",
+  "reviewer": "C-80e7b",
+  "group": "K4",
   "result": "fix",
-  "landing": "20261021T061739-L-1825145",
+  "landing": "20261025T095554-L-3447682",
   "kind": "interface",
-  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
+  "note": "independent cc review: K4 80e7 retirement of RawModuleScalarSourceFactors + PullbackFormulas + PullbackAbelianFormula vs clone 66b1ce0e (no remaining importers/citers; WC abelian theorem statement equal after unfolding identity rawAbelianClassMorphism and forget abbrev; G2 04fdc95 precedent); 4 delivered modules + importer RawModuleScalarSourceClassFormula compiled rc=0"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "statement_change": {
   "date": "2026-10-21",
   "by": "V3 stage 2",

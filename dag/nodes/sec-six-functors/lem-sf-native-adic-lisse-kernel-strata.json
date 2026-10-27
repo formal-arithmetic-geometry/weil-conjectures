@@ -1,0 +1,219 @@
+{
+ "id": "lem-sf-native-adic-lisse-kernel-strata",
+ "kind": "statement",
+ "title": "Lisse native coefficient morphisms have finite kernel and cokernel strata",
+ "statement": "Fix a prime $\\ell$, put $\\Omega=\\overline{\\mathbf Q}_\\ell$ with its $\\ell$-adic absolute-value topology, and use the small pro-etale site [def-weil-pbc-proetale-site] and sheaves of modules [def-weil-sheaf-of-modules-category]. For any scheme $X$, let $B_X$ be the sheaf of locally finite continuous $\\Omega$-valued functions: its sections on $U$ are continuous functions $|U|\\to\\Omega$ such that every point has an open neighbourhood on which the values span a finite-dimensional $\\mathbf Q_\\ell$-space. Restrictions are by precomposition. This is the coefficient construction used in [def-sf-native-weil-derived-framework], applied to $X$ itself. Write $\\mathcal A_X=\\operatorname{Mod}(B_X)$. Call an object lisse if it is pro-etale locally isomorphic to $B_U^{\\oplus r_U}$ with $r_U$ a finite nonnegative integer, allowed to vary with the covering member $U$. Let $X$ have Noetherian underlying topological space, meaning every descending chain of closed subsets stabilizes. Let $u:M\\to N$ be a morphism of lisse objects of $\\mathcal A_X$. There exist finite partitions of $X$ by locally closed constructible subschemes [def-weil-locally-closed-subset, def-weil-constructible-subset] on which, respectively, the restrictions of $\\ker u$ and $\\operatorname{coker}u$ are lisse. The two partitions may be different. No normality, reducedness, or constant-rank hypothesis on $u$ is assumed.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+  "place": "Abelian.lean:337-436, especially IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel at lines 429-436 (finite partitions of lisse kernels and cokernels). Native rank-stratification version of the constructibility argument in Bhatt-Scholze, Section 6.8; no identification with its coefficient sheaf is assumed."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-sf-native-weil-derived-framework",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\ker u$ and $C=\\operatorname{coker}u$. The exact module inverse image of [lem-sf-native-adic-pullback-exact-lisse] gives, for every $g:T\\to X$, the canonical identifications $g^*K\\cong\\ker(g^*u)$ and $g^*C\\cong\\operatorname{coker}(g^*u)$: apply $g^*$ to the exact kernel sequence $0\\to K\\to M\\to N$ and the exact cokernel sequence $M\\to N\\to C\\to0$. The same node supplies lisseness of $g^*M,g^*N$ and the comparison $h^*g^*\\cong(g\\circ h)^*$. These comparisons always use the native coefficient map, not an identification with another coefficient theory.",
+   "uses": [
+    "lem-sf-native-adic-pullback-exact-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "Lines 354-361 and 415-423: exact inverse image and composition comparisons in the induction"
+   }
+  },
+  {
+   "text": "For each closed subset $Z\\subseteq|X|$, let $P(Z)$ assert that there is a finite family of locally closed subschemes of $X$ whose images partition $Z$ and on which the restrictions of both $K$ and $C$ are lisse. Induct over strict inclusion of closed subsets. This is legitimate from the assumed descending-chain condition: a nonempty collection of counterexamples with no minimal member would recursively give an infinite strictly descending chain. The empty closed subset satisfies $P$ by the empty family. Fix nonempty $Z$ and assume $P(Z_0)$ for every proper closed $Z_0\\subsetneq Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "Lines 346-352: closed-subset induction and empty base case"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-closed-subset-closed-subscheme], choose a closed immersion $i:T\\hookrightarrow X$ with image $Z$. A closed immersion is a homeomorphism onto its closed image [def-weil-closed-immersion]. Thus $T$ is nonempty. Every open cover of $T$ is a relative-open cover of $Z$, so [lem-sfb-noetherian-space-compact-subsets], applied to $Z\\subseteq|X|$, gives its finite subcover. Hence $T$ is quasi-compact. By [lem-sf-native-adic-pullback-exact-lisse], $i^*M$ and $i^*N$ are lisse. All hypotheses for the generic-open lemma are now available; no Noetherian hypothesis on the local rings of $T$ has been used.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "def-weil-closed-immersion",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-sf-native-adic-pullback-exact-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "Lines 353-361: closed support as a quasi-compact nonempty scheme"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-native-adic-generic-lisse-kernel] to $i^*u:i^*M\\to i^*N$ on $T$. It gives a nonempty open subscheme $j:U\\hookrightarrow T$ on which $\\ker(j^*i^*u)$ and $\\operatorname{coker}(j^*i^*u)$ are lisse. Apply the exactness and composition comparisons of [lem-sf-native-adic-pullback-exact-lisse] to get $(i\\circ j)^*K\\cong\\ker(j^*i^*u)$ and $(i\\circ j)^*C\\cong\\operatorname{coker}(j^*i^*u)$. Consequently the restrictions of the original $K,C$ to this $U$ are lisse.",
+   "uses": [
+    "lem-sf-native-adic-generic-lisse-kernel",
+    "lem-sf-native-adic-pullback-exact-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "Lines 360-361 and 415-423: generic-open lemma and identification with restrictions of the original kernel and cokernel"
+   }
+  },
+  {
+   "text": "Write $S=i(|U|)\\subseteq Z$. Since $i$ identifies $T$ with $Z$ and $U$ is open [def-weil-open-immersion], choose an open $O\\subseteq X$ with $S=Z\\cap O$ [def-weil-locally-closed-subset]. The map $U\\to O$ is a closed immersion: its homeomorphism onto the closed subset $Z\\cap O$ is the restriction of $i$, and its structure-sheaf surjection is the restriction to $O$ of the one for $i$ [def-weil-closed-immersion]. Thus $U\\to X$ factors as a closed immersion into $O$ followed by an open immersion, so is a locally closed subscheme. The remainder $Z_0=Z\\setminus S=Z\\cap(X\\setminus O)$ is closed in $X$ and is strictly smaller than $Z$, since $U$ is nonempty. Every locally closed subset of the Noetherian space $X$ is constructible by [def-weil-constructible-subset] (Stacks Tag 005L, label lemma-constructible-Noetherian-space). In particular $S$ is constructible.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-locally-closed-subset",
+    "def-weil-closed-immersion",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "Lines 362-406: proper closed remainder and constructibility of the new stratum; Stacks schemes.tex Definition 01IO and topology.tex Tag 005L"
+   }
+  },
+  {
+   "text": "The induction hypothesis $P(Z_0)$ supplies finitely many locally closed subschemes of $X$ partitioning $Z_0$, with lisse restrictions of $K$ and $C$. Adjoin the single subscheme $U\\to X$ from the preceding steps. Its image $S$ is disjoint from $Z_0$ and $S\\cup Z_0=Z$, so this is a finite partition of $Z$ with the required lisse restrictions. Every old stratum is constructible as well, since it is locally closed in the Noetherian space $X$ [def-weil-constructible-subset]. This proves $P(Z)$. Taking $Z=|X|$ gives a single common partition, which may be used for each of the two partitions requested in the statement. The induction has also covered the empty scheme.",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+    "place": "Lines 378-424 and 429-436: adjoining the open stratum and taking the top closed subset"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sf-native-adic-generic-lisse-kernel",
+  "def-weil-open-immersion",
+  "def-weil-locally-closed-subset",
+  "def-weil-constructible-subset"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+  "place": "Read-only native source, exists_stratification_kernel_cokernel, lines 337-424, and isAdicStratifiedLisseSheaf_kernel_cokernel, lines 429-436. Expanded the induction in words; coefficient-specific generic lisseness is a separate statement-only node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kernels and cokernels of morphisms of lisse locally finite continuous algebraic closure l adic module sheaves admit a finite stratification on a Noetherian scheme",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"FGModuleCat.instHasFiniteLimits\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\"], \"digest\": \"13c4841952c51a97\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicLisseSheaf\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicLisseSheaf|IsAdicConstructibleSheaf|locallyFiniteFunctions",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernels and cokernels of lisse continuous l adic module sheaves have a finite lisse stratification on a Noetherian scheme",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"TopModuleCat.isColimitCoker\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"ModuleCat.cokernelIsColimit\", \"ModuleCat.kernelIsLimit\", \"CategoryTheory.ComposableArrows.Exact.cokerIsoKer'\", \"LieModuleHom.ker_toSubmodule\"], \"digest\": \"261cd105a2bf9767\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel and cokernel of a morphism of local systems over a topological field are stratified local systems on a noetherian scheme",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"Profinite.NobelingProof.succ_exact\", \"instAbelianCondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CompHausLike.LocallyConstantModule.functor\", \"instAbelianLightCondMod\", \"CategoryTheory.Abelian.isoModSerre_kernel_eq_isLocal_of_rightAdjoint\", \"CategoryTheory.IsGrothendieckAbelian.GabrielPopescuAux.kernel_ι_d_comp_d\"], \"digest\": \"ca1e3b05a9cd8dc1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the recorded hits do not state this assertion for the specified locally finite continuous coefficient sheaves; finite presentation, discrete sheaves and generic pullback constructions do not supply its coefficient comparison or local lisse conclusion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-constructible-abelian",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean_candidates": [
+  {
+   "declaration": "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel",
+   "file": "lean/WeilConjectures/SixFunctors/ProEtale/Adic/Abelian.lean",
+   "line": 429,
+   "note": "Exact statement for NoetherianSpace X; own and transitive sorry flags false in liveb2378f05 map."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Native coefficient local calculation for the inherited route prop-functor-package clause 3 (localization triangle); the seed ancestor is None. Abelian.lean:337-436, especially IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel at lines 429-436 (finite partitions of lisse kernels and cokernels). Native rank-stratification version of the constructibility argument in Bhatt-Scholze, Section 6.8; no identification with its coefficient sheaf is assumed.",
+   "via": [
+    "lem-sf-native-weil-constructible-abelian",
+    "lem-sf-native-weil-shriek-triangulated",
+    "lem-sf-weil-compact-image-localization-triangle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-adic-lisse-kernel-strata",
+  "worker": "stage1",
+  "summary": "Kept the full statement and all existing search/candidate metadata. Replaced the absent proof by explicit Noetherian induction on closed supports, using existing native exact-pullback, closed-support realization, and topological quasi-compactness nodes. One new statement-only generic-open lemma isolates the coefficient-specific matrix/rank argument without asserting finite stratification. Empty support, nonempty proper remainder, original-kernel restriction comparisons, and constructibility are checked explicitly.",
+  "blueprint": "The seeded native chain has blueprint ancestor None; this realizes its inherited prop-functor-package clause 3 localization/constructible-abelian support calculation, by the native Abelian.lean generic-open then closed-subset induction route (lines 228-436). No unit/chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NS-5ebe13e17",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-5ebe13e17 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The item statement is unchanged and matches Abelian.lean:429-436 (Noetherian space; lisse F and G give stratified-lisse kernel and cokernel). Step 1: the exactness and composition clauses of lem-sf-native-adic-pullback-exact-lisse give g^*K≅ker g^*u and g^*C≅coker g^*u. Step 2: Noetherian induction on closed Z, set up from the DCC, base case P(∅). Step 3: closed-subset-closed-subscheme gives T; the homeomorphism of def-weil-closed-immersion and lem-sfb-noetherian-space-compact-subsets make T nonempty and quasi-compact; i^*M and i^*N are lisse. Step 4: the new node plus the composition and exactness comparisons give (i∘j)^*K and (i∘j)^*C lisse, the same chain as Lean 418-425. Step 5: U=i^{-1}(O) is a closed immersion into O and open into X, which is an immersion by definition; Z_0 is a proper closed subset; constructibility is the 005L clause of def-weil-constructible-subset, also elementary because every subset of a Noetherian space is retrocompact. Step 6: adjoining the new stratum gives a disjoint finite cover, and one common partition works for both. New node lem-sf-native-adic-generic-lisse-kernel equals Lean 232-235 (CompactSpace, Nonempty; ∃ nonempty U with ker and coker of U.ι^*φ lisse); the Lean body 236-327 has no sorry. Tested: a one-point Y, φ=0, an isomorphism, a rank jump at a closed point (U is the maximal-rank open), and the profinite non-Noetherian example, which concerns stratifications only. The node is statement-only, self-contained and cites its definition nodes, with five searches of four kinds. It is strictly smaller than the item (no stratification, no Noetherian hypothesis), so D1/D2 do not apply. Duplicate grep over the Lean names and lisse/kernel/generic-open finds no existing node; continuous-finite-free-kernel-model, qcqs-stratification, pbc-lisse-generic-kernel and zl generic-lissity are different statements. Off-unit citations are only Mathlib leaves and definitions, so no tool_uses; no cycle; no SGA. First split, not a re-split delivery."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.Adic.Abelian",
+  "declaration": "AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel",
+  "statement": "theorem IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel {Y : Scheme.{u}}\n    [NoetherianSpace Y] {F G : AdicSheaf l Y} (hF : IsAdicLisseSheaf F) (hG : IsAdicLisseSheaf G)\n    (φ : F ⟶ G) :\n    IsAdicStratifiedLisseSheaf (kernel φ) ∧ IsAdicStratifiedLisseSheaf (cokernel φ)",
+  "branch": "slopmaster2",
+  "by": "Q49",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing native-coefficient statement at Abelian.lean:429-436. NoetherianSpace is solely topological; IsAdicStratifiedLisseSheaf independently quantifies a finite partition into locally closed constructible subschemes for each object. The coefficients and lisse notions are the declarations already recorded by def-sf-native-weil-derived-framework. No coefficient comparison or added ring-theoretic hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03d5a756f",
+  "group": "Q49",
+  "result": "pass",
+  "note": "existing:true attachment of AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isAdicStratifiedLisseSheaf_kernel_cokernel (Adic/Abelian.lean:429-436, identical in side-live and slopmaster2); snapshot differs from side-live only in the lean field; statement verbatim. Clauses checked against the definitions: locallyFiniteFunctions/adicConstantSheaf = B_X with precomposition, AdicSheaf = Mod(B_X), IsAdicLisseSheaf with per-member rank n≥0, NoetherianSpace is the only hypothesis, two independent IsAdicStratifiedLisseSheaf existentials (IsImmersion, IsConstructible range, unique cover, lisse pullback), Scheme.{u} unrestricted. All used decls are recorded by the stmt_deps (framework node's declarations, ProEt site, IsLocallyClosed, IsConstructible). No duplicate owner in live/side-live. Edge cases empty X, rank 0, φ=0, varying ranks fine. Advisory H11: pro-forma second-reading section. Nothing compiled (no files changed)."
+ }
+}

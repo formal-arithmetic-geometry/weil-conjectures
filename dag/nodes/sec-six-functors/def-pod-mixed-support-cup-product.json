@@ -27,7 +27,10 @@
   "sk-def-sf-exchanges",
   "sk-def-pairing-data",
   "lem-sf-integral-direct-image-constructible",
-  "lem-sf-integral-compact-support-constructible"
+  "lem-sf-integral-compact-support-constructible",
+  "def-pur-finite-pullback-tensor-comparison",
+  "def-pod-integral-tensor-constraints",
+  "def-sf-rational-common-tensor-symmetries"
  ],
  "proof": [],
  "proof_deps": [],
@@ -104,14 +107,29 @@
  "blueprint_kind": "definition",
  "blueprint_order": 2250,
  "blueprint_uses": [],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-package",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $K,L\\in D^b_{ctf}(X,A)$. The *mixed-support cup product* is the canonical map\n\n$$\n\\smile _c:\\  R\\Gamma _c(X,K)\\otimes _A^LR\\Gamma (X,L) \\longrightarrow R\\Gamma _c\\bigl(X,K\\otimes ^L_{A_X}L\\bigr)\n$$\n\nobtained as the composite of the projection transformation for $Rf_!$, applied to the pair $K,\\; L'=Ra_{X*}L\\in D^b_{ctf}(s,A)$,\n\n$$\nRa_{X!}K\\otimes _A^LRa_{X*}L \\longrightarrow Ra_{X!}\\bigl(K\\otimes ^L_{A_X}La_X^*Ra_{X*}L\\bigr),\n$$\n\nand the map induced by the counit $La_X^*Ra_{X*}L\\to L$. The same construction at the $\\mathcal O_E$-, $E$-, and $\\overline{\\mathbf Q}_{\\ell }$-stages is obtained by levelwise application and transport.\n\nThe cup product is associative and unital, graded-commutative, and\ncompatible with finite reduction and base change of the coefficient ring.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement"
+  ],
+  "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $\\Lambda\\in\\{A,\\mathcal O_E,E,\\overline{\\mathbf Q}_{\\ell}\\}$ be an admissible coefficient ring, regarded as a condensed ring, and let $K,L\\in D^b_{ctf}(X,\\Lambda)\\subseteq D(X_{\\mathrm{pro\\acute et}},\\Lambda)$. The *mixed-support cup product* is the canonical map\n\n$$\n\\smile _c:\\  R\\Gamma _c(X,K)\\otimes _\\Lambda^LR\\Gamma (X,L) \\longrightarrow R\\Gamma _c\\bigl(X,K\\otimes ^L_{\\Lambda_X}L\\bigr)\n$$\n\nobtained as the composite of the projection transformation for $Rf_!$, applied to the pair $K,\\; L'=Ra_{X*}L\\in D^b_{ctf}(s,\\Lambda)$,\n\n$$\nRa_{X!}K\\otimes _\\Lambda^LRa_{X*}L \\longrightarrow Ra_{X!}\\bigl(K\\otimes ^L_{\\Lambda_X}La_X^*Ra_{X*}L\\bigr),\n$$\n\nand the map induced by the counit $La_X^*Ra_{X*}L\\to L$.\n\nThe cup product is associative and unital, graded-commutative, and\ncompatible with reduction modulo $\\pi_E^n$ and extension of scalars along maps of admissible coefficient rings ([sk-prop-scalar-six]).",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
   "date": "2026-10-17",
@@ -131,5 +149,31 @@
   "group": "Q129",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-dda97fc26 (reviewer sub-agent of L); spot-checked: Read the whole item and the new node against main-20261015 def-pod-mixed-support-cup-product (order 2594; the master order-2250 text is the same) and every cited statement. Item: the setting matches sk-def-set/sk-def-ops (no properness). PF_{a_X,K,Ra_{X*}L} matches sk-def-sf-exchanges, with second input Ra_{X*}L as in the source. The counit comes from fix-prop-adjunctions (1). Fib_s and the inverse tensor comparison of lem-sf-point-fibre-derived-tensor apply because their hypotheses hold. The four pro-etale coefficient stages match def-weil-derived-pullback-tensor-hom and def-weil-finite-coefficient-point. The typed right-support convention is a correct reading of 'graded-commutative' (H_c^0(A^1)=0 while H^0(A^1)=A). Associativity and unit reuse prop-pod-cup-product-coherence. The forward references are kept out of stmt_deps, and the transitive-closure check finds no cycle. New node prop-sf-mixed-cup-coefficient-change is the claim extracted from the definition, not a restated proof clause (D1/D2 fine), and no node in the DAG duplicates it; thm-trf-finite-coefficient-map gives only the finite-level u_c. Each passage was checked and is true, including the nonflat Z/l^2->Z/l case: tested on G_m, and u_o holds because K has finite Tor amplitude and Rf_* finite cohomological dimension. The node is self-contained and statement-only with nine searches; X=s, empty X, torsion-under-rationalization and m=n were also tested. Two citation repairs in fixes/: (1) the item cited thm-sf-ctf-stability (ii)-(iv) but also needs (i) for La_X^*Ra_{X*}L; it now cites (i)-(iv) and names the intermediate objects on X. (2) The new node now cites lem-pur-derived-change-of-rings for S_T/S_s and has it in stmt_deps; no cycle. The report says import_flags 'unreachable' was added, but that is a maintainer field the preflight forbids on a new node, so it is correctly absent. The maintainer should flag the node unreachable and record the item's two forward references in pointers. No SGA, no tool_uses, no statement weakened.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodMixedSupportCupProduct",
+  "declaration": "WeilConjectures.SixFunctorDatum.poincareMixedSupportCupProducts",
+  "declarations": [
+   "WeilConjectures.SixFunctorDatum.finiteRightSupportCup",
+   "WeilConjectures.SixFunctorDatum.integralRightSupportCup",
+   "WeilConjectures.SixFunctorDatum.rationalRightSupportCup",
+   "WeilConjectures.SixFunctorDatum.commonRightSupportCup",
+   "WeilConjectures.SixFunctorDatum.poincareMixedSupportCupProducts"
+  ],
+  "file": "lean/Sheaf/Paper/PodMixedSupportCupProduct.lean",
+  "statement": "def poincareMixedSupportCupProducts (S : SixFunctorDatum D C E (m + 1) (Nat.succ_le_succ (Nat.zero_le m))) (d : ℕ) (G : PoincareDualitySetting D.k₀ d) (c : Compactification (G.structureMorphism D.k))",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing pairing-data left cups and defines the four right-support cups by canonical signed swaps. H2 repair: the signed swaps are owned by def-pur-finite-pullback-tensor-comparison, def-pod-integral-tensor-constraints and def-sf-rational-common-tensor-symmetries, not by the unused derived-pullback tensor-isomorphism theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-926385f37",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (15c0): item node differs from side-live base only in lean and three added stmt_deps (def-pur-finite-pullback-tensor-comparison, def-pod-integral-tensor-constraints, new def-sf-rational-common-tensor-symmetries); theorem lem-pur-derived-pullback-tensor-iso removed; statement verbatim. Lean module unchanged apart from docstring, so prior maths check stands: left cups = sk-def-pairing-data PF(K,Ra_*L)+counit+inverse tensor iso; right-support = braiding ≫ μ ≫ Fib(support σ), target RΓ_c(L⊗K); PoincareDualitySetting geometry, m+1, no properness/orientation. New existing:true node owns pullbackTensor{Rational,Common}Braiding(_existsUnique) (DerivedPullbackTensorIso.lean:428/444/527/550): localization/all-L pinning matches statement; .choose of ∃!; same as the landed Q51 integral owner; no other def owner; stmt_deps exist; no cycle. No sorry or hollow defs, docstrings ok, both report sections present. No compile (no file changed)."
  }
 }

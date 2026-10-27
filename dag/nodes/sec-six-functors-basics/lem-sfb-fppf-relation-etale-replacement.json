@@ -1,0 +1,401 @@
+{
+ "id": "lem-sfb-fppf-relation-etale-replacement",
+ "kind": "statement",
+ "title": "Etale-local etale quotient presentations for affine flat locally quasi-finite relations",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. For $S$-schemes $V,R$, an equivalence relation $j=(s,t):R\\to V\\times_SV$ [def-pc-fibre-product] means that $j$ is injective on sections over every $S$-scheme $T$ and identifies $R(T)$ with an equivalence relation on $V(T)$. Write $V/R$ for the sheafification [def-weil-pbc-sheafification] on the big fppf site [def-pc-fppf-site] of $T\\mapsto V(T)/R(T)$. Assume $V$ is affine, and $s,t$ are flat [def-weil-flat-morphism], locally of finite presentation [def-sbc-locally-finite-presentation] and locally quasi-finite [pqf-def-quasifinite]. There exist a finite set $I$, affine $S$-schemes $W_i$ and etale maps $g_i:W_i\\to V$ [def-weil-etale-morphism] with jointly surjective images, such that, writing $R_i=W_i\\times_{g_i,V,s}R\\times_{t,V,g_i}W_i$, for each $i\\in I$ there are $S$-schemes $\\overline W_i,\\overline R_i$, an equivalence relation $\\overline R_i\\to\\overline W_i\\times_S\\overline W_i$ with etale projections, and an isomorphism of fppf sheaves $W_i/R_i\\simeq\\overline W_i/\\overline R_i$. All these objects and the finite covering belong to the chosen site bound. The finite set may be empty when $V$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04S6 (theorem-final-bootstrap), proof, affine locally quasi-finite case: finite etale quasi-splitting cover, division by the open finite locally free subgroupoid, and the open-identity etaleness argument. Uses spaces-more-groupoids.tex Tag 04S0 (lemma-quasi-splitting-affine-scheme) and bootstrap.tex Tag 04S4 (lemma-divide-subgroupoid)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-quasifinite",
+  "def-weil-etale-morphism",
+  "def-sfb-restricted-groupoid-relation"
+ ],
+ "proof": [
+  {
+   "text": "The given equivalence relation has a canonical groupoid structure [def-a1-groupoid-scheme]: identities, inversion and composition are the unique arrows with the prescribed endpoints; the groupoid laws hold because an arrow is determined by its endpoints. Apply [lem-trf-affine-square-monomorphism-absolute-separated] to $V$ and $j$ to obtain that $R\\to\\operatorname{Spec}\\mathbf Z$ is separated, even when $S$ is not separated. Factor this structure morphism through each of $s,t:R\\to V$. Clause (b) of [lem-weil-pbc-separated-cancellation] gives that $s$ and $t$ are separated. Thus the separated-projection hypotheses for pointed quasi-splitting are available.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-trf-affine-square-monomorphism-absolute-separated",
+    "lem-weil-pbc-separated-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), affine locally quasi-finite case; separatedness as in spaces.tex Tag 0265, lemma-presentation-quasi-compact, first proof paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-groupoid-pointed-quasisplitting] at every $v\\in V$. It supplies affine etale charts $g_v:W_v\\to V$ whose images contain $v$, restricted groupoids $R_v$, and open finite locally free subgroupoids $P_v\\subset R_v$. The images are open by [lem-a1-space-etale-open-image], specialized to scheme morphisms (schemes are algebraic spaces). They cover $V$. By [lem-weil-pbc-affine-scheme-qcqs] and [def-weil-pbc-quasi-compact-scheme], choose a finite subcover and label its charts by a finite set $I$. These are the original charts of the subcover, so their $P_i$ are retained without any shrinking. If $V$ is empty, take $I=\\varnothing$.",
+   "uses": [
+    "lem-sfb-affine-groupoid-pointed-quasisplitting",
+    "lem-a1-space-etale-open-image",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), paragraph beginning Choose u in U: pointwise Tag 04S0 charts and finite covering"
+   }
+  },
+  {
+   "text": "Fix $i\\in I$ and abbreviate $W=W_i$, $A=R_i$, $P=P_i$. The fibre-product description shows that $A(T)$ is exactly the relation $g_i(x)\\sim g_i(y)$ on $W(T)$, so $A\\to W\\times_SW$ is monic and $P\\to W\\times_SW$ is monic. The projections $A\\to W$ are flat, locally finitely presented and locally quasi-finite by the quasi-splitting input. In particular the first projection is locally of finite type, by [pqf-def-quasifinite]. Apply [lem-trf-monomorphism-finite-type-composite-lqf] to $A\\to W\\times_SW\\to W$ to obtain the separatedness and local quasi-finiteness of the relation map required for division. All hypotheses of [lem-sfb-divide-finite-flat-subgroupoid] now hold: $W$ is affine, $P$ is a subgroupoid, its projections are finite locally free, and its relation map is monic. Obtain $q:W\\to\\overline W$, affine $\\overline W$, and a groupoid $(\\overline W,\\overline R)$ restricting along $q$ to $(W,A)$. Also $q$ is surjective finite locally free, $P=W\\times_{\\overline W}W$, and $P=A\\times_{\\overline R,\\overline e}\\overline W$.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-trf-monomorphism-finite-type-composite-lqf",
+    "lem-sfb-divide-finite-flat-subgroupoid"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), quasi-split affine case: application of Tag 04S4 (lemma-divide-subgroupoid)"
+   }
+  },
+  {
+   "text": "By [def-pc-finite-locally-free] and [def-pc-fppf-site], the singleton $\\{q:W\\to\\overline W\\}$ is an fppf covering. Use the restriction formula from division and put $B=\\overline R\\times_{\\overline s,\\overline W}W$. The arrow $A=W\\times_{\\overline W,\\overline t}\\overline R\\times_{\\overline s,\\overline W}W\\to B$ is a base change of $q$, hence an fppf covering by the site axioms. The composite $A\\to B\\to W$ is the original flat locally finitely presented projection. The source-and-target clause of [lem-sfb-representable-fppf-etale-open-descent], with target cover $W\\to\\overline W$ and source cover $A\\to B$, implies that $\\overline s$ is flat and locally of finite presentation. Interchanging $s$ and $t$ proves the same assertions for $\\overline t$. No source-local assertion for etaleness is used.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-pc-fppf-site",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), factorization through R-bar x_U-bar U; source and target descent of flatness and local finite presentation"
+   }
+  },
+  {
+   "text": "The morphism $A\\to\\overline R$ is the composite of two base changes of the fppf covering $q$; it is therefore an fppf covering by the base-change and composition axioms [def-pc-fppf-site]. The cartesian unit square supplied by [lem-sfb-divide-finite-flat-subgroupoid] identifies its pullback of $\\overline e:\\overline W\\to\\overline R$ with the open immersion $P\\hookrightarrow A$. Apply the target-local open-immersion assertion of [lem-sfb-representable-fppf-etale-open-descent] to conclude that $\\overline e$ is an open immersion.",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-sfb-divide-finite-flat-subgroupoid",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), cartesian unit square and descent of the open immersion"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-groupoid-open-unit-etale] to $(\\overline W,\\overline R)$: step 4 gives flat locally finitely presented projections and step 5 gives an open unit. Thus $\\overline s,\\overline t$ are etale. Apply [lem-sfb-fppf-groupoid-restriction-quotient] to this groupoid and the fppf covering $q$. Its restriction is $(W,A)$ and its relation map is monic by step 3, so $\\overline R\\to\\overline W\\times_S\\overline W$ is monic and is an equivalence relation. The same cited statement gives the canonical isomorphism $W/A\\simeq\\overline W/\\overline R$ of fppf sheaves. This constructs all the required data for each $i$.",
+   "uses": [
+    "lem-sfb-groupoid-open-unit-etale",
+    "lem-sfb-fppf-groupoid-restriction-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), Tag 02VH quotient comparison and final open-unit etaleness argument"
+   }
+  },
+  {
+   "text": "The point-indexed choices and the constructed schemes can be taken in the universes fixed in [def-weil-size-convention]: all constructions use the stated bounded sites, affine etale charts and finite fibre products and quotients from the cited inputs. Passing to representatives in the chosen skeleton preserves the morphisms and their properties. The finite subcover is a set in the same bound, including its empty case. This verifies the size clause as well as the finite covering clause.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04S6 (theorem-final-bootstrap), cardinality convention in affine covering paragraph and finite chart construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "lem-trf-affine-square-monomorphism-absolute-separated",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-sfb-affine-groupoid-pointed-quasisplitting",
+  "lem-a1-space-etale-open-image",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-quasifinite",
+  "lem-trf-monomorphism-finite-type-composite-lqf",
+  "lem-sfb-divide-finite-flat-subgroupoid",
+  "def-pc-finite-locally-free",
+  "def-pc-fppf-site",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "lem-sfb-groupoid-open-unit-etale",
+  "lem-sfb-fppf-groupoid-restriction-quotient",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 04S6 (theorem-final-bootstrap), affine locally quasi-finite quasi-splitting and division paragraphs; open-unit argument. Uses Tags 04S0, 04S4, 02VH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme with a flat locally finitely presented locally quasi finite equivalence relation has etale local charts whose quotient presentations are etale equivalence relations",
+   "results": {
+    "t": "2026-10-23T09:51:40Z",
+    "tool": "leanfinder",
+    "query": "An affine scheme with a flat locally finitely presented locally quasi finite equivalence relation has etale local charts whose quotient presentations are etale equivalence relations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+     "AlgebraicGeometry.IsEtale.instIsSmooth",
+     "StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation",
+     "Algebra.Etale.finitePresentation",
+     "Algebra.isOpen_etaleLocus",
+     "Algebra.etaleLocus_eq_univ_iff_etale",
+     "RingHom.Etale.propertyIsLocal"
+    ],
+    "digest": "97749e20ed6fb3d2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Groupoid\", \"IsEtale\"",
+   "results": {
+    "t": "2026-10-23T09:56:43Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Groupoid\", \"IsEtale\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "divide.subgroupoid|quasi.split.*groupoid|etale.*equivalence.relation",
+   "results": {
+    "t": "2026-10-23T09:56:42Z",
+    "tool": "grep",
+    "query": "divide.subgroupoid|quasi.split.*groupoid|etale.*equivalence.relation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dividing a flat quasi finite equivalence relation by a finite locally free open subrelation gives an etale equivalence relation",
+   "results": {
+    "t": "2026-10-23T09:56:43Z",
+    "tool": "leansearch",
+    "query": "Dividing a flat quasi finite equivalence relation by a finite locally free open subrelation gives an etale equivalence relation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale",
+     "DiscreteQuotient.mk.injEq",
+     "DiscreteQuotient.mk",
+     "Equiv.div",
+     "LocallyConstant.discreteQuotient",
+     "instTopologicalSpaceQuot",
+     "Quot.finite",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified"
+    ],
+    "digest": "e18a714bcd49a723"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local reduction of quasi finite flat scheme groupoids by finite locally free subgroupoids",
+   "results": {
+    "t": "2026-10-23T09:56:53Z",
+    "tool": "leanfinder",
+    "query": "Etale local reduction of quasi finite flat scheme groupoids by finite locally free subgroupoids",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "Algebra.isOpen_etaleLocus",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "Algebra.etaleLocus_eq_univ_iff_etale",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "Algebra.Etale.exists_subalgebra_fg"
+    ],
+    "digest": "a939b67182bcf0a6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*equivalence.relation|divide.subgroupoid|quasi.split.*groupoid",
+   "results": {
+    "t": "2026-10-23T12:05:25Z",
+    "tool": "grep",
+    "query": "etale.*equivalence.relation|divide.subgroupoid|quasi.split.*groupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary morphism permanence does not give affine etale quotient replacements or their fppf quotient comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine flat locally quasi finite equivalence relation has etale local presentations by etale equivalence relations",
+   "results": {
+    "t": "2026-10-23T12:05:30Z",
+    "tool": "leanfinder",
+    "query": "An affine flat locally quasi finite equivalence relation has etale local presentations by etale equivalence relations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "Algebra.Etale.finitePresentation",
+     "AlgebraicGeometry.IsEtale.instIsSmooth",
+     "RingHom.Etale.propertyIsLocal",
+     "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "Algebra.etaleLocus_eq_univ_iff_etale"
+    ],
+    "digest": "fca963bed5ab92eb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary morphism permanence does not give affine etale quotient replacements or their fppf quotient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-space-atlas-bootstrap",
+  "date": "2026-10-23",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4).",
+   "via": [
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-relation-etale-replacement",
+  "worker": "stage1",
+  "summary": "Read Stacks 04S6, 04S0/04RK, 04S4 and 02VH/02YK. Reused division and open-unit inputs, extracted pointed affine quasi-splitting and fppf groupoid restriction invariance, verified every cited hypothesis and bounded empty case; no statement change.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), supporting alteration/moduli/algebraicity branch recorded in blueprint.from.place; realizes its final-bootstrap affine locally quasi-finite prerequisite, without changing the unit route. The inherited ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "def-a1-groupoid-scheme",
+    "why": "Generic tool: Groupoid laws for prescribed scheme morphisms. Used only for the indicated scheme geometry or covering step; this unit has no replacement for that input and its final-bootstrap route is retained."
+   },
+   {
+    "node": "lem-trf-affine-square-monomorphism-absolute-separated",
+    "why": "Generic tool: Absolute affine-square embedding of a monic relative relation. Used only for the indicated scheme geometry or covering step; this unit has no replacement for that input and its final-bootstrap route is retained."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic tool: Open images of representable etale morphisms of algebraic spaces. Used only for the indicated scheme geometry or covering step; this unit has no replacement for that input and its final-bootstrap route is retained."
+   },
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Generic tool: Quasi-finite morphisms and finite fibres. Used only for the indicated scheme geometry or covering step; this unit has no replacement for that input and its final-bootstrap route is retained."
+   },
+   {
+    "node": "lem-trf-monomorphism-finite-type-composite-lqf",
+    "why": "Generic tool: A monomorphism with a locally finite type composite is unramified and locally quasi-finite. Used only for the indicated scheme geometry or covering step; this unit has no replacement for that input and its final-bootstrap route is retained."
+   },
+   {
+    "node": "def-pc-finite-locally-free",
+    "why": "Generic tool: Finite locally free morphisms. Used only for the indicated scheme geometry or covering step; this unit has no replacement for that input and its final-bootstrap route is retained."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Generic tool: Size convention. Used only for the indicated scheme geometry or covering step; this unit has no replacement for that input and its final-bootstrap route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-a1-groupoid-scheme",
+  "lem-trf-affine-square-monomorphism-absolute-separated",
+  "lem-a1-space-etale-open-image",
+  "pqf-def-quasifinite",
+  "lem-trf-monomorphism-finite-type-composite-lqf",
+  "def-pc-finite-locally-free",
+  "def-weil-size-convention"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-4714c336a",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-4714c336a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and all 16 cited statements in full, against Stacks 04S6 (bootstrap.tex l.1446-1650), 04S4, 04S0 with Situation quasi-splitting and the 04RK quasi-split clause, 02VH/045Z and 02YK. No repair note, so this is an ordinary one-level split; the statement is unchanged. Steps 1-7 follow the 04S6 affine lqf route and their hypotheses are met. Step 1: the affine-square lemma gives R absolutely separated, and cancellation (b) makes s,t separated. Step 2: 04S0 charts and a finite subcover that keeps the chosen P_i. Step 3: the monomorphism/lft lemma gives j separated and lqf, so division applies. Step 4: s̄,t̄ are flat and lfp by source+target descent. Step 5: ē is an open immersion via the cartesian unit square. Step 6: the open-unit lemma makes s̄,t̄ etale, and 02VH gives the quotient isomorphism and reflects monicity. Local quasi-finiteness of s̄ is not descended because nothing needs it. New node 1 is 04S0 under lqf everywhere; an open subgroupoid contains the whole unit and is finite locally free. New node 2 is 02VH plus 02YK across the product fppf cover U'xU' -> UxU; it is true, and the covering hypothesis is necessary. There are no duplicates: the existing trf restriction nodes need an etale g, and q may be ramified. Neither new node restates the item. Edge cases checked: empty V, the diagonal relation, q = id. The graph stays acyclic and proof_deps equals the union of uses. The declared tool_uses are generic and accepted. Batch-5: the affine-square-monomorphism and monomorphism-lqf nodes are generic scheme lemmas outside both assumed statements. The open-image, divide and descent nodes reach sec-trace-formula only through def-trf-algebraic-space or the fppf base-change site axiom. All five are accepted, none needs an assumption leaf. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfRelationEtaleReplacement",
+  "declaration": "AlgebraicGeometry.fppf_relation_etale_replacement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfRelationEtaleReplacement.lean",
+  "statement": "theorem fppf_relation_etale_replacement {S : Scheme.{u}} {R V : Over S} (s t : R ⟶ V) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [IsAffine V.left] [Flat s.left] [Flat t.left] [LocallyOfFinitePresentation s.left] [LocallyOfFinitePresentation t.left] (hs : s.left.IsLocallyQuasiFinite) (ht : t.left.IsLocallyQuasiFinite) : ∃ (I : Type u) (_ : Finite I) (W : I → Over S) (g : ∀ i : I, W i ⟶ V), (∀ i : I, IsAffine (W i).left ∧ Etale (g i).left) ∧ (∀ v : V.left, ∃ (i : I) (w : (W i).left), (g i).left w = v) ∧ ∀ i : I, ∃ (Wbar Rbar : Over S) (sbar tbar : Rbar ⟶ Wbar), Mono (prod.lift sbar tbar) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ Wbar ↦ ∃ r : T ⟶ Rbar, r ≫ sbar = a ∧ r ≫ tbar = b)) ∧ Etale sbar.left ∧ Etale tbar.left ∧ Nonempty ((presheafToSheaf (Scheme.fppfTopology.over S) (Type (u + 1))).obj (coequalizer (uliftYoneda.{u + 1}.map (restrictedEtaleRelationSource s t (g i))) (uliftYoneda.{u + 1}.map (restrictedEtaleRelationTarget s t (g i)))) ≅ (presheafToSheaf (Scheme.fppfTopology.over S) (Type (u + 1))).obj (coequalizer (uliftYoneda.{u + 1}.map sbar) (uliftYoneda.{u + 1}.map tbar)))",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-015907d27",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Clause-by-clause check of fppf_relation_etale_replacement against the node: Mono(prod.lift s t) plus the Equivalence condition over every T : Over S; IsAffine V; Flat/LFP/IsLocallyQuasiFinite on s and t; finite I : Type u that may be empty; affine W_i with etale g_i that jointly cover V; R_i = restrictedEtaleRelation (orientation W×_{g,s}R×_{t,g}W checked at side-live lines 31-48); replacement Wbar/Rbar monic, Equivalence, etale projections; Nonempty iso of the fppf-sheafified ulift-Yoneda coequalizers, acceptable because the node only asks for existence and Wbar/Rbar are existential. No extra assumptions. lean.statement is verbatim in the file. Only stmt_deps (+ landed def-sfb-restricted-groupoid-relation, identical to side-live) and the lean record changed. No duplicate declaration found. No defs; the only proof is sorry. Docstrings carry source, blueprint tag and 7-step proof. Encoding consistent with the landed quasisplitting and restriction-quotient theorems. Edge cases checked: empty V, diagonal relation, relation already etale. No compile because no file was changed."
+ }
+}

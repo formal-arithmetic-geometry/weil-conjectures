@@ -299,11 +299,26 @@
   "thm-trf-lefschetz-verdier"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-trace-formula",
  "unit": "sk-thm-trace-formula",
  "blueprint_update": {
-  "snapshot": "main-20261015",
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "proof"
+  ],
   "statement": "Fix the global finite-field datum $p,a,q,k_0,k$, where $q=p^a$, and\nthe coefficient conventions, $A=A_{E,n}$. Let $X_0$ be a separated\nfinite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, let\n$K\\in D^b_{ctf}(X,A)$ have an explicit etale-origin witness, and let\n$\\psi:L\\Phi^*K\\to K$ be a Frobenius coefficient morphism of\n[def-trf-frobenius-coefficient-morphism], with iterates $\\psi_m$ and\nglobal operators $F_{c,m}(\\psi)$; no invertibility of $\\psi$ is\nassumed. Assume the exceptional-adjoint admissibility hypotheses of\n[def-trf-admissibility] for the graph correspondences and fixed-point\nbase changes on a chosen compactification defined over $k_0$, as in\nthe Grothendieck–Lefschetz formula over a finite ring below (at the\nfinite stage these hold automatically, and the proof does not use\nthem). For\n$y\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar y$ one has\n$\\Phi^m\\bar y=\\bar y$ (the fixed points of\n[thm-trf-frobenius-fixed-points]), and $\\psi_m$ induces a stalk\nendomorphism\n$\\psi_{m,\\bar y}:K_{\\bar y}\\cong(L\\Phi^{m*}K)_{\\bar y}\\to K_{\\bar y}$.\nThen for every $m\\geq1$\n\n$$\n\\boxed{\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(X,K)\\bigr)\n=\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar y}\\mid K_{\\bar y}\\bigr)\n}\n$$\n\nin $A$, both sides being categorical traces of endomorphisms of\nperfect complexes. This is the coefficient-morphism variant of the\nfinite-coefficient trace formula; for the scheme-Frobenius map\n$\\psi=u_1$ of a strict Weil complex it gives the\nGrothendieck–Lefschetz formula over a finite ring.",
   "proof": [
    {
@@ -315,10 +330,12 @@
     "elementary": false
    },
    {
-    "text": "*Step 0: conventions.* For $r\\geq1$ the finite-field datum\n$(p,a,q,k_0,k)$ may be replaced by $(p,ar,q^r,\\mathbf F_{q^r},k)$\n([def-weil-finite-field-fiber]); every result cited below is stated for\nan arbitrary datum. For a finite field $F$ of characteristic $p$, a\nseparated finite-type $F$-scheme $S_0$ with $S=S_0\\times_Fk$, a complex\n$K\\in D^b_{ctf}(S,A)$ and a Frobenius coefficient morphism $\\psi$ on\n$K$ for the $|F|$-power scheme Frobenius $\\Phi_S$, and $m\\geq1$, write\n$\\mathrm{TF}(S_0,K,\\psi,m)$ for the identity\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{s\\in S_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nwhere $F_m\\subseteq k$ is the extension of degree $m$ of $F$. Every\ncomplex in $D^b_{ctf}$ has an explicit étale-origin witness\n([lem-sf-proetale-constructible-origin]), and every separated\nfinite-type morphism between separated finite-type $k$-schemes is\nexceptionally admissible at the finite stage\n([rem-ptr-trf-admissibility-12], [thm-sf-preservation-class]). We prove\n$\\mathrm{TF}$ for all such data; the theorem is the case\n$(F,S_0)=(k_0,X_0)$.",
+    "text": "*Step 0: conventions.* For $r\\geq1$ the finite-field datum\n$(p,a,q,k_0,k)$ may be replaced by $(p,ar,q^r,\\mathbf F_{q^r},k)$\n([def-weil-finite-field-fiber]); every result cited below is stated for\nan arbitrary datum. For a finite field $F$ of characteristic $p$, a\nseparated finite-type $F$-scheme $S_0$ with $S=S_0\\times_Fk$, a complex\n$K\\in D^b_{ctf}(S,A)$ and a Frobenius coefficient morphism $\\psi$ on\n$K$ for the $|F|$-power scheme Frobenius $\\Phi_S$, and $m\\geq1$, write\n$\\mathrm{TF}(S_0,K,\\psi,m)$ for the identity\n$$\n\\operatorname{tr}_A\\bigl(F_{c,m}(\\psi)\\mid R\\Gamma_c(S,K)\\bigr)\n=\\sum_{s\\in S_0(F_m)}\\operatorname{tr}_A\\bigl(\\psi_{m,\\bar s}\\mid K_{\\bar s}\\bigr),\n$$\nwhere $F_m\\subseteq k$ is the extension of degree $m$ of $F$. Every\ncomplex in $D^b_{ctf}$ has an explicit étale-origin witness\n([lem-sf-proetale-constructible-origin]), and every separated\nfinite-type morphism between separated finite-type $k$-schemes is\nexceptionally admissible at the finite stage in the sense of\n[def-trf-admissibility] (the adjunction on $D^b_{ctf}$ is\n[thm-sf-ambient-adjoint-class], the preservation\n[thm-sf-preservation-class]). We prove\n$\\mathrm{TF}$ for all such data; the theorem is the case\n$(F,S_0)=(k_0,X_0)$.",
     "uses": [
      "def-weil-finite-field-fiber",
      "lem-sf-proetale-constructible-origin",
+     "def-trf-admissibility",
+     "thm-sf-ambient-adjoint-class",
      "thm-sf-preservation-class"
     ],
     "elementary": false
@@ -371,7 +388,7 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
   "date": "2026-10-17",

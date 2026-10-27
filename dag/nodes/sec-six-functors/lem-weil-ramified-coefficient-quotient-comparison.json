@@ -22,67 +22,52 @@
  },
  "proof": [
   {
-   "text": "Use the compatible same-index maps $\\iota_n$ and projections of the scalar-extension definition to define $c_W:R_W\\to S_W$ by $\\pi^L_n c_W=(\\iota_n)_W\\pi^E_n$. Its component at $n=em$ factors through $B_{E,W,m}$: the map $\\mathcal O_E/t^{em}\\to\\mathcal O_L/v^{em}$ kills $t^m$ by Step 1, and its factor is exactly $j_m$. Consequently $\\pi^L_{em}c_W=(j_m)_W\\pi^E_m$. This proves the coefficient square needed at every level, rather than assuming that the same-index map is already an isomorphism. Put $R^E_W=R_W$ and $R^L_W=S_W$. Write $r^F:g^{-1}R^F_Y\\to R^F_X$ for the completed structure maps induced by the finite projections and $c^g_{A_{F,n}}$. At every level $n$, naturality of the constant-ring maps gives\n$$(\\iota_n)_X c^g_{A_{E,n}}=c^g_{A_{L,n}}g^{-1}(\\iota_n)_Y.$$\nIndeed their adjoints extend the same map of constant presheaves, sending $a$ to its included residue on $X$, so sheafification gives equality. After projection to $B_{L,X,n}$, both $c_Xr^E$ and $r^Lg^{-1}c_Y$ are therefore\n$$(\\iota_n)_X c^g_{A_{E,n}}g^{-1}\\pi^E_{Y,n}.$$\nThe limit universal property yields $c_Xr^E=r^Lg^{-1}c_Y$. This proves compatibility on the completed coefficient sheaves by their finite projections.",
+   "text": "Take the unique completed coefficient map of lem-weil-finite-free-completed-scalar-comparison. Define the finite ring diagram using the literal quotient factor maps and identify its underlying ring-sheaf diagram with integralCoefficientSheafSystem by NatTrans.ofOpSequence. The limit equations then give projection_reduction for every pair a ≤ b. For n ≤ index(e,n), quotient induction and the specified formula for j_n identify the same-index inclusion with reduction to n followed by j_n. This proves the ramified projection square. The same quotient-induction calculation proves the transition square for the ramified maps for arbitrary a ≤ b.",
    "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
     "def-weil-integral-scalar-extension",
     "def-weil-completed-integral-coefficients",
-    "def-weil-proetale-inverse-image"
+    "def-weil-ramified-pullback-tower-data"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1), inverse-limit coefficient sheaves; agent calculation of their components"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the canonical quotient clause of the constant-completion equivalence to $A=\\mathcal O_E$, $I=(t)$ on $W_{\\mathrm{proet}}$, and to $A=\\mathcal O_L$, $I=(v)$ on the same site. Noetherianity was checked in Step 1; the sites are taken small in the sheaf universe. Thus the actual limit projections induce $R_W/t^mR_W\\cong B_{E,W,m}$ and $S_W/v^{em}S_W\\cong B_{L,W,em}$. The constants $u,u^{-1}$ define mutually inverse sections of $S_W$, so Step 1 gives equality of ideal sheaves $t^mS_W=v^{em}S_W$. Hence $B_{L,W,em}$ is canonically $S_W/t^mS_W$ with its actual projection from $S_W$. This uses the degree-zero quotient clause only, and imposes no completeness or flatness condition on $P$.",
+   "text": "Use the projection_surjective and uniformizer_kernel theorems proved inside lem-sp-completed-coefficient-regular-quotients. Apply the completed target constant-section ring homomorphism to the (n+1)st power of the given principal ideal equality. The constant-section compatibility of the completed inclusion and index(e,n)+1=e(n+1) identify the target projection kernel with the image ideal of the source projection kernel.",
    "uses": [
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-sp-completed-coefficient-regular-quotients",
+    "lem-weil-finite-free-completed-scalar-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M (lemma-completion-flat), canonical quotient identifications, with the ideal powers; as packaged in lem-weil-pbc-constant-completion-equivalence"
-   }
+   "elementary": true
   },
   {
-   "text": "For $R=R_W$, $S=S_W$, the map $(R/t^mR)\\otimes_R S\\to S/t^mS$ sends $\\bar r\\otimes s$ to $\\overline{c_W(r)s}$. Its inverse sends $\\bar s$ to $\\bar1\\otimes s$: changing $s$ by $t^m s'$ changes the image by $\\bar1\\otimes t^m s'=\\overline{t^m}\\otimes s'=0$. The two composites are identities, since $\\bar1\\otimes c_W(r)s=\\bar r\\otimes s$. These bilinear formulas commute with restriction, and therefore define inverse maps of the sheaf tensor products, including when quotient sections lift only after a cover. Combine with Step 3. By the coefficient square in Step 2 the resulting coefficient isomorphism is precisely $\\bar a\\otimes s\\mapsto j_m(\\bar a)\\pi^L_{em}(s)$.",
+   "text": "Prove the general sectionwise quotient base-change criterion directly. For a commuting ring-sheaf square R→S, R→A, S→B, A→B with sectionwise surjective quotient maps and ker(S→B)=c(ker(R→A))S, the tensor map sends s⊗a to q(s)j(a). Every tensor is s⊗1, since a lifts to R. The linear map v(s)=s⊗1 kills the image ideal of ker(R→A), by balancing. Thus a tensor killed by the displayed map is zero; surjectivity follows by lifting a B-section to S. These linear equivalences commute with restrictions. Sheafification and its counit give the normalized sheaf-module isomorphism. Transport along the fixed scalarWitness object equality to obtain coefficientIso and coefficient_formula.",
    "uses": [
     "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-ringed-tensor-section-calculus"
+    "def-weil-ramified-pullback-tower-data"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), sheafified balanced tensor; explicit quotient inverse using Tag 093M as established in Step 3"
-   }
+   "elementary": true
   },
   {
-   "text": "Write $q^F_{b,a}$ for quotient reduction from level $b$ to $a$. On quotient representatives,\n$$q^L_{e(m+1),em}j_{m+1}(\\bar a)=j_m q^E_{m+1,m}(\\bar a),\\qquad q^L_{e(m+1),em}\\pi^L_{e(m+1)}(s)=\\pi^L_{em}(s).$$\nBoth first expressions are the residue of the same element of $\\mathcal O_E$ in $\\mathcal O_L/v^{em}$; the second equality is the limit-projection identity. Applying these equations to $\\bar a,b,s$ in Step 6 shows that its two transition composites both have image $(g^{-1}((p\\otimes1)\\otimes j_m(q^E_{m+1,m}\\bar a)))\\otimes(j_m(q^E_{m+1,m}b)\\pi^L_{em}(s))$. Thus $\\widetilde d_\\bullet$ is a map of the specified towers, including their restricted completed-scalar actions. For a chain map $f:P\\to P'$, either composite replaces $p$ by $f(p)$ in Step 6 and leaves the coefficient factors unchanged. The pure pairings determine tensor maps, so these generator equalities are equalities of sheaf maps, also on sections that require covers.",
+   "text": "Choose the isomorphisms just constructed together with their proved tensor formulas. Rewrite the coefficient_transitions goal by those formulas. Quotient transition maps preserve multiplication, their square with j was proved by representatives in step 1, and their composites with completed projections are projection_reduction. The two factors therefore agree. Package the completed map, its two projection equations, the coefficient isomorphisms, tensor formulas, and transition equations into Coefficients.",
    "uses": [
-    "def-pur-integral-derived-operations",
-    "def-weil-pbc-ringed-tensor-section-calculus"
+    "def-weil-ramified-pullback-tower-data",
+    "def-weil-completed-integral-coefficients"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product); quotient and inverse-limit transition calculations with the towers of def-pur-integral-derived-operations"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
   "def-weil-integral-scalar-extension",
   "def-weil-completed-integral-coefficients",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "def-pur-integral-derived-operations"
+  "def-weil-ramified-pullback-tower-data",
+  "lem-sp-completed-coefficient-regular-quotients",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Separate source subargument of lem-weil-ramified-pullback-tower-identification, steps 2,3,4,7"
+  "place": "Tags 093M (lemma-completion-flat) and 03EK (section-tensor-product); explicit sectionwise balanced quotient calculation and finite-projection identities, formalized by G6 on 2026-10-27."
  },
  "mathlib_searches": [
   {
@@ -150,13 +135,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-cc983",
-  "group": "H3",
-  "result": "fix",
-  "landing": "20261021T174242-L-3772858",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T103425-L-1073061",
   "kind": "interface",
-  "note": "independent cc review: delivered RamifiedPullbackTowerData vs clone item block (verbatim apart from docstrings), identification signature vs clone (identical), two sorry lemmas vs nodes and source (true, not restatements), proof_deps vs Lean names used, sandbox compile of all 5 modules + #print axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

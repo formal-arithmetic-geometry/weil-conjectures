@@ -1,0 +1,299 @@
+{
+ "id": "lem-trf-algebraic-union-finite-tower-descent",
+ "kind": "statement",
+ "title": "Descent of finite field towers along an algebraic union",
+ "statement": "Let $A\\subseteq M\\subseteq\\Omega$ be fields [def-weil-field] with $M/A$ algebraic (each element satisfies a nonzero polynomial over $A$). Let $B\\subseteq\\Omega$ be a field containing $A$, finite-dimensional over $A$, and let $BM$ denote the smallest subfield of $\\Omega$ containing $B$ and $M$. Given a finite tower of intermediate fields $$M=F_0\\subseteq F_1\\subseteq\\cdots\\subseteq F_n=BM,$$ there exist an intermediate field $A\\subseteq A_0\\subseteq M$, finite-dimensional over $A$, and fields $$A_0=E_0\\subseteq E_1\\subseteq\\cdots\\subseteq E_n=BA_0\\subseteq BM$$ such that $ME_i=F_i$ for all $i$ and $[E_{i+1}:E_i]=[F_{i+1}:F_i]$ for every $0\\le i<n$. Identity steps and $n=0$ are allowed. All composita are taken inside $\\Omega$, and every displayed degree is vector-space dimension.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49, the inference from a tower over the maximal tame extension to a finite moderately ramified base; explicit algebraic finite-data formulation by NB.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "If $n=0$, then $BM=M$, hence $B\\subseteq M$. Take $A_0=E_0=B$. This is finite over $A$, and $ME_0=M=F_0$; there are no degree conditions. Henceforth assume $n\\ge1$. Choose a finite spanning family for the $A$-vector space $B$ (given by finite-dimensionality), and apply [lem-weil-span-independent-subfamily] to extract an $A$-basis $b_1,\\ldots,b_s$ of $B$. Here $s\\ge1$ since $1\\ne0$ in $B$.",
+   "uses": [
+    "lem-weil-span-independent-subfamily"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49: agent-written finite-data expansion, zero-length case and finite generating data"
+   }
+  },
+  {
+   "text": "Inside $\\Omega$ put $V=\\{\\sum_{j=1}^s m_jb_j:m_j\\in M\\}$. Every product $b_jb_k$ and $1$ is an $A$-linear combination of the $b_l$, since these form an $A$-basis of the field $B$. Thus $V$ is closed under multiplication, contains $1$, and is a commutative $M$-algebra of dimension at most $s$. It is an integral domain, being a subring of the field $\\Omega$. By [lem-weil-pbc-finite-dimensional-domain-is-field], $V$ is a field. It contains $M$ and $B$, so $BM\\subseteq V$ by the defining minimality of the compositum. Conversely each displayed sum belongs to $BM$. Therefore $BM=V$; in particular $BM/M$ has a finite spanning family consisting of elements of $B$.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49: agent-written finite-data expansion, finite span equals the compositum"
+   }
+  },
+  {
+   "text": "Choose finite $M$-bases $v_i=(v_{i,1},\\ldots,v_{i,d_i})$ for all $F_i$, taking $v_0=(1)$. Here is a bounded construction for the intervening fields: start with the empty independent family in $F_i$ and append an element outside its span whenever it does not yet span $F_i$. Appending preserves independence, since a relation with nonzero new coefficient would put that element in the old span. Every such family is also independent in $BM$, so [lem-sfb-independent-family-spanning-cardinality], applied over $M$ to the spanning set $\\{b_1,\\ldots,b_s\\}$ of $BM$, bounds its length by $s$. Hence after at most $s$ additions it spans $F_i$. For $F_n=BM$ specifically use [lem-weil-span-independent-subfamily] on $b_1,\\ldots,b_s$ over $M$; this chooses $v_n$ from that family, so each $v_{n,j}$ lies in $B$. Each $d_i\\ge1$ because $1\\in F_i$ is nonzero.",
+   "uses": [
+    "lem-sfb-independent-family-spanning-cardinality",
+    "lem-weil-span-independent-subfamily"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49: agent-written finite-data expansion, finite bases, with the last basis chosen inside B"
+   }
+  },
+  {
+   "text": "Write the following finitely many identities in these bases, with coefficients in $M$: for every $i$, the expansion of $1$ in $v_i$ and of each $v_{i,j}v_{i,k}$ in $v_i$; for $i<n$, the expansion of each $v_{i,j}$ in $v_{i+1}$; and the expansion of each $b_j$ in $v_n$. Let $C\\subseteq M$ be the union of all coefficients appearing in these identities, and let $A_0=A(C)\\subseteq M$ be the subfield generated by $A$ and $C$. There are only finitely many indices and every basis is finite, so $C$ is finite. Each of its elements is algebraic over $A$ by the hypothesis on $M/A$. Applying [lem-weil-pbc-algebraic-generators-finite-extension] to precisely this finite set proves $[A_0:A]<\\infty$. Every recorded identity now has coefficients in $A_0$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49: agent-written finite-data expansion, one finite coefficient field (Stacks Tag 09GH, fields-lemma-algebraic-finitely-generated)"
+   }
+  },
+  {
+   "text": "For each $i$ set $E_i=\\{\\sum_{j=1}^{d_i} a_jv_{i,j}:a_j\\in A_0\\}\\subseteq F_i$. The recorded identity for $1$ shows $1\\in E_i$, hence $A_0\\subseteq E_i$. The multiplication identities show that the product of any two displayed sums is again such a sum. Addition and additive inverses are closed by the same formula. Thus $E_i$ is a commutative finite-dimensional $A_0$-algebra and a nonzero domain inside $\\Omega$. By [lem-weil-pbc-finite-dimensional-domain-is-field], it is a field. Moreover $v_i$ is independent over $A_0$: an $A_0$-linear relation is an $M$-linear relation because $A_0\\subseteq M$, and its coefficients vanish by the chosen $M$-basis property. Therefore $v_i$ is an $A_0$-basis of $E_i$, so $[E_i:A_0]=d_i=[F_i:M]$ by [def-weil-vector-space-dimension].",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49: agent-written finite-data expansion, multiplication tables produce actual fields with the chosen bases"
+   }
+  },
+  {
+   "text": "The recorded inclusion identities imply $E_i\\subseteq E_{i+1}$: substitute the $A_0$-linear expansion of each $v_{i,j}$ into any $A_0$-linear combination. Since $v_0=(1)$, $E_0=A_0$. At the other endpoint, $v_n\\subseteq B$ implies $E_n\\subseteq BA_0$. Conversely all $b_j$ belong to $E_n$ by their recorded expansions. Since $E_n$ is a field containing $A_0\\supseteq A$, it then contains every $A$-linear combination of the $b_j$, hence all of $B$. The minimality of the compositum gives $BA_0\\subseteq E_n$. Thus $E_n=BA_0$. All these fields lie inside $BM$ by construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49: agent-written finite-data expansion, the nested tower and its two endpoints"
+   }
+  },
+  {
+   "text": "For every $i$, the field $ME_i$ is contained in $F_i$ because $M,E_i\\subseteq F_i$. Conversely $ME_i$ contains every $v_{i,j}$ and every coefficient in $M$, so it contains every $M$-linear combination of $v_i$, namely all of $F_i$. Thus $ME_i=F_i$ for every $i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49: agent-written finite-data expansion, recovery after taking the compositum with M"
+   }
+  },
+  {
+   "text": "For $i<n$, the finite family $v_{i+1}$ spans $E_{i+1}$ over $E_i$, because it already spans over $A_0\\subseteq E_i$. It also spans $F_{i+1}$ over $F_i$, because it already spans over $M\\subseteq F_i$. Thus both successive extensions are finite. Apply [lem-weil-pbc-field-degree-multiplicativity] to $A_0\\subseteq E_i\\subseteq E_{i+1}$ and to $M\\subseteq F_i\\subseteq F_{i+1}$. Using the basis cardinalities from step 5 gives $d_i[E_{i+1}:E_i]=d_{i+1}=d_i[F_{i+1}:F_i]$. As $d_i\\ge1$, cancellation in the natural numbers gives the required equality of successive degrees. No step required a strict inclusion, so identity steps are included.",
+   "uses": [
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Proof of Theorem 6.3.1, first paragraph, printed p. 49: agent-written finite-data expansion, equality of degrees (Stacks Tag 09G9, fields-lemma-multiplicativity-degrees)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-span-independent-subfamily",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-sfb-independent-family-spanning-cardinality",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-weil-vector-space-dimension",
+  "lem-weil-pbc-field-degree-multiplicativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Q123 finite-basis proof of the finite descent inference in Theorem 6.3.1, first paragraph, printed p. 49. The paper states the inference without this general finite-data argument. Supporting sources: Stacks Tags 09GH and 09G9 in literature/stacks-project/fields.tex, and the cited existing Mathlib leaves. Temkin source read at source.url; the named local PDF is missing (WANTED in report)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite tower of finite field extensions over a directed union of algebraic subfields descends to a finite subextension preserving all degrees",
+   "results": "OK 8 hits: Algebra.IsAlgebraic.tower_bot, Algebra.IsAlgebraic.tower_top, IntermediateField.isAlgebraic_tower_top, IntermediateField.finrank_dvd_of_le_right, IsAlgebraic.tower_top, finiteExts, Field.finite_intermediateField_of_exists_primitive_element, IsGalois.tower_top_of_isGalois; ; digest 0d33ed835d678efa",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite chain of intermediate fields over an algebraic union descends to one finite base field with the same successive dimensions",
+   "results": "OK 8 hits: Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet, Field.FiniteDimensional.of_finite_intermediateField, IntermediateField.finiteDimensional_iSup_of_finite, Field.Emb.Cardinal.filtration_succ, IntermediateField.exists_lt_finrank_of_infinite_dimensional, IntermediateField.finiteDimensional_iSup_of_finset', IntermediateField.finiteDimensional_iSup_of_finset, IntermediateField.relfinrank_mul_relfinrank; ; digest 12e881a515d63256",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField, Module.finrank",
+   "results": "OK 12 hits: IntermediateField.finrank_dvd_of_le_left, IntermediateField.finrank_le_of_le_left, IntermediateField.finrank_lt_of_gt, IntermediateField.eq_of_le_of_finrank_eq', IntermediateField.eq_iff_finrank_eq_of_le', IntermediateField.eq_of_le_of_finrank_le', IntermediateField.finrank_dvd_of_le_right, IntermediateField.finrank_eq_finrank_subalgebra; ; digest 5e77339b6878bb54",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "descen.*(finrank|degree|field)|exists.*(finrank|degree).*adjoin",
+   "results": "OK 1 hits: Mathlib/RingTheory/LocalRing/ResidueField/Basic.lean; ; digest 4f24ad1d3afd8f18",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend finite dimensional field extension and intermediate subfields along a filtered union of fields",
+   "results": "OK 8 hits: IntermediateField.finiteDimensional_iSup_of_finite, IntermediateField.finiteDimensional_iSup_of_finset, IntermediateField.finiteDimensional_iSup_of_finset', IntermediateField.Lifts.union, Field.Emb.Cardinal.filtration_succ, IntermediateField.exists_finset_of_mem_supr', IntermediateField.induction_on_adjoin, IntermediateField.finiteDimensional_sup; ; digest 884ccaae1f39e20c",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations do not state this lemma or a one-line generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "descen.*(finrank|degree)|exists.*(finrank|degree).*adjoin",
+   "results": {
+    "t": "2026-10-24T09:42:59Z",
+    "tool": "grep",
+    "query": "descen.*(finrank|degree)|exists.*(finrank|degree).*adjoin",
+    "sub": "FieldTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; tower rank laws, finite joins, algebraicity and finite intermediate-field results do not provide simultaneous descent of a prescribed tower preserving degrees."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite tower of intermediate subfields of a compositum of a finite field extension and an algebraic extension descends to a finite base subextension preserving degrees",
+   "results": {
+    "t": "2026-10-24T09:43:00Z",
+    "tool": "leanfinder",
+    "query": "A finite tower of intermediate subfields of a compositum of a finite field extension and an algebraic extension descends to a finite base subextension preserving degrees",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IntermediateField.relfinrank_mul_relfinrank",
+     "IntermediateField.finInsepDegree_le_of_left_le",
+     "Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet",
+     "FiniteGaloisIntermediateField.instFiniteDimensionalSubtypeMemIntermediateFieldMin",
+     "IntermediateField.finiteDimensional_sup",
+     "FiniteGaloisIntermediateField.instFiniteDimensionalSubtypeMemIntermediateFieldMin_1",
+     "finiteExts",
+     "Field.FiniteDimensional.of_finite_intermediateField"
+    ],
+    "digest": "05ebcd7666c32322"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; tower rank laws, finite joins, algebraicity and finite intermediate-field results do not provide simultaneous descent of a prescribed tower preserving degrees."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tower of finite field extensions over an algebraic union descends to a finite subextension with all the same degrees",
+   "results": {
+    "t": "2026-10-24T09:43:18Z",
+    "tool": "leansearch",
+    "query": "A tower of finite field extensions over an algebraic union descends to a finite subextension with all the same degrees",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Field.insepDegree_mul_insepDegree_of_isAlgebraic",
+     "IntermediateField.finrank_dvd_of_le_right",
+     "FiniteField.Extension",
+     "Field.lift_sepDegree_mul_lift_sepDegree_of_isAlgebraic",
+     "Algebra.IsAlgebraic.tower_top",
+     "finiteExts",
+     "Algebra.IsAlgebraic.tower_bot",
+     "Field.finInsepDegree_mul_finInsepDegree_of_isAlgebraic"
+    ],
+    "digest": "092eb685cd3d3850"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; tower rank laws, finite joins, algebraicity and finite intermediate-field results do not provide simultaneous descent of a prescribed tower preserving degrees."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneously spread out a finite chain of finite dimensional subfield algebras using finitely many multiplication constants",
+   "results": {
+    "t": "2026-10-24T09:43:20Z",
+    "tool": "leanfinder",
+    "query": "Simultaneously spread out a finite chain of finite dimensional subfield algebras using finitely many multiplication constants",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IntermediateField.finiteDimensional_iSup_of_finite",
+     "IntermediateField.finiteDimensional_iSup_of_finset'",
+     "IntermediateField.finiteDimensional_iSup_of_finset",
+     "FiniteDimensional.trans",
+     "IntermediateField.finiteDimensional_sup",
+     "IntermediateField.exists_lt_finrank_of_infinite_dimensional",
+     "Field.FiniteDimensional.of_finite_intermediateField",
+     "Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet"
+    ],
+    "digest": "b5671d525dab8549"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned hits; tower rank laws, finite joins, algebraicity and finite intermediate-field results do not provide simultaneous descent of a prescribed tower preserving degrees."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-valued-tame-prime-tower",
+  "date": "2026-10-24",
+  "group": "NB"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: §2.1, p. 9 (maximal tame extension has pro-p absolute Galois group); §6.1 opening, p. 36 (criterion); proof of Theorem 6.3.1, first paragraph, p. 49 (finite tame descent and prime-degree towers). Supporting input: Proof of Theorem 6.3.1, first paragraph, printed p. 49, the inference from a tower over the maximal tame extension to a finite moderately ramified base; explicit algebraic finite-data formulation by NB.",
+   "via": [
+    "lem-trf-valued-tame-prime-tower",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-algebraic-union-finite-tower-descent",
+  "worker": "stage1",
+  "group": "Q123",
+  "summary": "Expanded the finite descent inference into eight explicit steps using finite bases, simultaneous coefficient capture, actual subfields and degree cancellation. The statement is unchanged; its finite-dimensionality and dimension notions are now explicit statement dependencies. Reused five existing theorem leaves and the existing dimension definition; no new nodes. Checked zero-length and identity steps, arbitrary characteristic, and non-disjoint composita.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: §2.1, p. 9 (maximal tame extension has pro-p absolute Galois group); §6.1 opening, p. 36 (criterion); proof of Theorem 6.3.1, first paragraph, p. 49 (finite tame descent and prime-degree towers). Supporting input: Proof of Theorem 6.3.1, first paragraph, printed p. 49, the inference from a tower over the maximal tame extension to a finite moderately ramified base; explicit algebraic finite-data formulation by NB. This split realizes the finite descent of the prime-degree tower in Temkin Theorem 6.3.1 proof, printed p. 49. The current blueprint locality proof was read; the algebraic finite-data lemma is a supporting input below that unit, not a replacement of its route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-51c695be7",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-51c695be7 (reviewer sub-agent of L); spot-checked: The statement is unchanged, true and not weakened. It is the algebraic form of the inference 'there exists a finite moderately ramified K' with K'L/K' split into p-steps' in Temkin 0707.3953v3, first paragraph of the proof of Thm 6.3.1, printed p. 49. The local PDF is absent, so I read the author's PDF from source.url via pdftotext in /tmp. The parent lem-trf-valued-tame-prime-tower uses the item with M=T, B=D, which matches the hypotheses, and the item does not restate the parent. All eight steps check. (1) n=0: B⊆M, A_0=B; A-basis of B by lem-weil-span-independent-subfamily. (2) BM is the M-span of the b_j, a field by lem-weil-pbc-finite-dimensional-domain-is-field; its algebra and domain hypotheses are checked in the step. (3) M-bases v_i, length bounded by lem-sfb-independent-family-spanning-cardinality; v_n is chosen inside B and v_0=(1). (4) The finite coefficient set (units, multiplication tables, inclusions, b_j) generates A_0, finite over A by lem-weil-pbc-algebraic-generators-finite-extension. (5) E_i, the A_0-span of v_i, is a field of degree d_i over A_0. (6)-(7) Elementary inclusions give E_n=BA_0 and ME_i=F_i. (8) Degree multiplicativity and cancellation since d_i≥1. Edge cases tested: n=0, identity steps with B⊆M, Q(√2,√3,…) with B=Q(2^{1/4}), algebraically closed M, inseparable towers. No new nodes. The DAG search found no duplicate and there is no re-split repair note. The added stmt_deps are justified. No fixes and no tool_uses."
+ }
+}

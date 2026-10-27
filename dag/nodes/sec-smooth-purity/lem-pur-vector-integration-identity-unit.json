@@ -1,0 +1,165 @@
+{
+ "id": "lem-pur-vector-integration-identity-unit",
+ "kind": "statement",
+ "title": "Constant derived unit under identity inverse image",
+ "statement": "For any commutative ring A and scheme S, the constant derived-unit comparison ordinaryFiniteUnitPullback A (identity S) of [def-asd-ordinary-finite-p1-arrows] equals the component at that unit of affineLinearPullbackId A S of [def-amb-affine-linear-trace-action]. No Noetherian, finite-coefficient, or invertibility hypothesis is needed.",
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-amb-affine-linear-trace-action"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: simultaneous trivializations, specified affine-space counits and linear frame independence; geometric-descent Step 7"
+ },
+ "proof": [
+  {
+   "text": "Prove the identity constant-sheaf comparison for a general Grothendieck abelian coefficient category. Apply the hom-equivalence of the constant-sheaf adjunction composed with identity inverse image and transported along the terminal-sections isomorphism. The left-adjoint uniqueness equation and upperStarId_hom_app_unit_app reduce equality to the terminal pullback identity; terminalIsTerminal.hom_ext identifies its canonical isomorphisms. This is the existing ConstantPullbackIdentityCoherence proof with general coefficients.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows",
+    "def-amb-affine-linear-trace-action"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: simultaneous trivializations, specified affine-space counits and linear frame independence; geometric-descent Step 7"
+   }
+  },
+  {
+   "text": "Apply SheafExactDegreeZero.unit_id to an arbitrary exact additive endofunctor F and an isomorphism F≅id. Its inverse-map equality gives equality of isomorphisms by Iso.ext_inv. Taking hom yields exact single-complex identity coherence, including the specified mapDerivedCategoryIdIso.",
+   "uses": [
+    "def-geo-exact-degree-zero-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/CategoryTheory/ExactDegreeZero.lean",
+    "place": "SheafExactDegreeZero.unit_id"
+   }
+  },
+  {
+   "text": "Expand ordinaryFiniteUnitPullback and affineLinearPullbackId, and the definition of singleFunctorCompLeftDerivedUpperStarIso. Substitute the constant-sheaf identity and the exact single-complex identity. The two composites now have the same left-derived/exact comparison and agree definitionally.",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows",
+    "def-amb-affine-linear-trace-action",
+    "def-geo-exact-degree-zero-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: simultaneous trivializations, specified affine-space counits and linear frame independence; geometric-descent Step 7"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Identity normalization from the original paragraph, using the proved exact degree-zero unit identity; Lean implementation H1, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized etale affine space compact support trace is invariant under a linear change of vector bundle frames",
+   "results": "LinearMap.traceAux_eq, Algebra.normalizedTrace_algebraMap, Algebra.normalizedTrace_trans, Algebra.normalizedTrace_eq_of_fininteDimensional_apply, Algebra.normalizedTrace_eq_of_fininteDimensional, Algebra.normalizedTrace_eq_of_finiteDimensional_apply, Algebra.normalizedTrace_eq_of_finiteDimensional, Algebra.traceMatrix_localizationLocalization",
+   "date": "2026-10-25",
+   "verdict": "No exact comparison for the specified etale derived functors; constituent APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-25",
+   "verdict": "No exact comparison for the specified etale derived functors; constituent APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "vectorIntegration.*swap|swap.*[Ff]rame|[Ff]rame.*[Tt]race",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No exact comparison for the specified etale derived functors; constituent APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In compactly supported etale cohomology, the chart source comparisons for a vector bundle block swap differ by the pullback action of the invertible transition matrix, before applying the affine trace counit.",
+   "results": "Trivialization.coe_coordChangeL, Trivialization.coordChangeL, VectorBundleCore.trivializationAt_coordChange_eq, Trivialization.coordChangeL_symm_apply, Trivialization.coordChangeL_apply', Trivialization.coe_coordChangeL', VectorBundleCore.coordChange, VectorBundleCore.coordChange_comp",
+   "date": "2026-10-25",
+   "verdict": "No exact comparison for the specified etale derived functors; constituent APIs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support exchange for two local vector bundle frames differs by the linear transition action before composing with any counit.",
+   "results": "inCoordinates_apply_eq₂, IsLocalFrameOn.congr, IsLocalFrameOn.coeff_congr, VectorBundleCore.inCoordinates_eq, Trivialization.isLocalFrameOn_localFrame_baseSet, IsLocalFrameOn.coeff_eq_of_eq, IsLocalFrameOn.eventually_eq_sum_coeff_smul, ContinuousLinearMap.inCoordinates_eq",
+   "date": "2026-10-25",
+   "verdict": "No exact comparison for the specified etale derived functors; constituent APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an exact functor, its derived functor applied to the complex concentrated in degree zero agrees naturally with applying the functor first, compatibly with identity functors",
+   "results": "CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp, CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc",
+   "date": "2026-10-25",
+   "verdict": "No exact comparison for the specified etale derived functors; constituent APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryIdIso.*single|upperStarConstantSheafIso.*[Ii]d",
+   "results": "No Mathlib matches. Project source has separate derived single-functor and constant-sheaf coherence lemmas.",
+   "date": "2026-10-25",
+   "verdict": "Constituent API only; not the specified comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationSwapLocal",
+  "date": "2026-10-25",
+  "group": "V2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: simultaneous frames and invariance of the specified affine counits",
+   "via": [
+    "lem-pur-vector-integration-swap-local",
+    "lem-pur-vector-trace-geometric-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationIdentityUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationIdentityUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_identity_unit",
+  "statement": "theorem vectorIntegration_identity_unit (A : Type (u + 1)) [CommRing A]\n    (S : Scheme.{u}) :\n    (ordinaryFiniteUnitPullback A (𝟙 S)).hom =\n      (affineLinearPullbackId A S).hom.app (ordinaryFiniteUnit A S)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-25"
+ },
+ "proof_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-amb-affine-linear-trace-action",
+  "def-geo-exact-degree-zero-interface"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T164544-L-1033174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261026T023245-L-537390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

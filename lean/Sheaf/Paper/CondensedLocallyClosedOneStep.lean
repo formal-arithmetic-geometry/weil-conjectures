@@ -11,6 +11,8 @@ import Sheaf.Paper.CondensedConstructibleGenericLfp
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import Sheaf.Paper.CondensedOpenClosedRecollement
 import Sheaf.Paper.ProfinitePointPullback
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 
 /-! # One open/closed step for a constructible condensed sheaf -/
 

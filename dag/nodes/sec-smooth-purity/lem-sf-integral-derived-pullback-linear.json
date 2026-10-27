@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-integral-derived-pullback-linear",
+ "kind": "lemma",
+ "title": "Constant-scalar linearity of the normalized integral derived pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Assigned DAG statement, Rational level paragraph: the integral maps are O_E-linear; pullback component before extending its Hom maps to rational coefficients.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "Fix a prime l, a finite extension E of Q_l with valuation ring O_E [def-weil-l-adic-coefficient-extension], schemes X and Y, and a scheme morphism f : X -> Y [def-weil-scheme-morphism-properties]. Let integralDerivedPullback be the existing normalized descent of the finite-pullback Roos construction [def-pur-integral-derived-operations], on the ambient derived categories of modules over the completed coefficient sheaves. Equip both categories with their published constant O_E actions [lem-weil-integral-constructible-linear]. This functor is additive and O_E-linear on every Hom group. No completeness, constructibility, dimension, finiteness or geometric hypothesis on the objects or schemes is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), lemma-pushforward-Noetherian-case: inverse-limit formula for completed pullback; constant-scalar calculation for its normalized Roos representative. Context: Bhatt--Scholze, Lemma 6.5.9(4), pp. 50--51."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-pur-integral-derived-operations",
+  "lem-weil-integral-constructible-linear"
+ ],
+ "proof": [
+  {
+   "text": "At positive level n+1 define the natural finite scalar endomorphism by multiplication by the image of a in the constant finite coefficient sheaf. The underived reduction/restriction adjunction transports this endomorphism because the projection of the completed constant section is its specified finite residue. The finite pullback/direct-image adjunction transports it because the direct coefficient map is adjoint to the same constant sections. Indeed, for any adjunction L ⊣ R and central actions μ,ν with R(ν)=μR, naturality of μ at the adjunction unit and injectivity of the Hom equivalence imply L(μ)=νL. Restriction back to completed coefficients preserves the endomorphism by the same residue formula. These additive functors therefore give a linear module-level composite, and applying them termwise gives linearity and additivity of every prescribed pullback level.",
+   "uses": [
+    "def-weil-integral-reduction-tower",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-scalar-extension-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case: inverse-limit formula for completed pullback; constant-scalar calculation for its normalized Roos representative. Context: Bhatt--Scholze, Lemma 6.5.9(4), pp. 50--51."
+   }
+  },
+  {
+   "text": "The strict tower functor preserves addition and scalar multiplication componentwise. The Roos map is the shift by -1 of the mapping-cone map with the same product map in both coordinates. Product extensionality proves preservation of addition and scalar multiplication by the product map. Extensionality from the two mapping-cone summands proves the corresponding equations for the cone map, and the additive linear shift preserves them. Hence the specified strict pullback complex functor is additive and linear for the sheaf-module constant action. Identify the published natural chain scalar action with a times the identity using the canonical constant-section normalization. This gives preservation of that actual chain action.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case: inverse-limit formula for completed pullback; constant-scalar calculation for its normalized Roos representative. Context: Bhatt--Scholze, Lemma 6.5.9(4), pp. 50--51."
+   }
+  },
+  {
+   "text": "Use the existing integralDerivedPullbackComparison and the localization of good K-flat complexes, without choosing a new descent. Good complexes are closed under binary products, so they have binary biproducts. The localization is additive and essentially surjective. The comparison identifies its composite with the normalized pullback with an additive functor; the proved biproduct descent argument therefore gives additivity of the normalized pullback. Full faithfulness of precomposition with the localization, together with the scalar formula for Q, descends preservation of the actual chain scalar endomorphisms to all derived objects. Finally express a times any derived morphism as the natural scalar endomorphism followed by that morphism, using the published unique constant-section linear structure. Functoriality of composition and the descended endomorphism equality prove the required Hom linearity.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case: inverse-limit formula for completed pullback; constant-scalar calculation for its normalized Roos representative. Context: Bhatt--Scholze, Lemma 6.5.9(4), pp. 50--51."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-reduction-tower",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-integral-constructible-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), lemma-pushforward-Noetherian-case: inverse-limit formula for completed pullback; constant-scalar calculation for its normalized Roos representative. Context: Bhatt--Scholze, Lemma 6.5.9(4), pp. 50--51. Lean realization by X6 (2026-10-26): adjunction transport of central actions, diagonal product/cone linearity, and descent along the existing good-complex localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized inverse limit of finite coefficient derived pullbacks is additive and linear for the constant valuation ring action",
+   "results": "Returned DirectLimit.vadd_def, DirectLimit.instAddActionOfAddActionHomClass, DirectLimit.instVAdd, ModuleCat.directLimitCocone_pt_isAddCommGroup, instAdditiveFunctorColim, PadicInt.limNthHom_add, ProfiniteGrp.isIso_toLimit, ContinuousCohomology.instAdditiveActionTopModuleCatInvariants. None states linearity for the normalized integral pro-etale pullback.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized inverse limit derived pullback of integral pro etale sheaves preserves the constant coefficient ring scalar action",
+   "results": "Returned AlgebraicGeometry.Scheme.Hom.normalizationDiagram, BDeRhamPlus, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, StandardEtalePresentation.toPresentation_algebra_smul, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Modules.map_smul, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars. None states linearity for the normalized integral pro-etale pullback.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralDerivedPullback|Roos.*Linear|Linear.*Roos",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorHom",
+  "date": "2026-10-25",
+  "group": "B7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralDerivedPullbackLinear",
+  "file": "lean/Sheaf/Paper/IntegralDerivedPullbackLinear.lean",
+  "declaration": "WeilConjectures.integralDerivedPullback_linear",
+  "statement": "theorem integralDerivedPullback_linear (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (integralDerivedPullback l E f).Additive ∧\n      (integralDerivedPullback l E f).Linear (Padic.coefficientExtensionIntegers l E)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T201440-L-2518597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X6",
+  "result": "pass",
+  "landing": "20261026T003210-L-152589",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

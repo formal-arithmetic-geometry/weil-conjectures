@@ -25,46 +25,56 @@
  ],
  "proof": [
   {
-   "text": "Let $K\\subseteq M$ be the maximal submodule with nowhere-dense support in $\\operatorname{Supp}(M)$ supplied by [lem-sc-hilbert-embedded-points-affine-removal], so $M'=M/K$. Localization at the powers of $f$ is exact, so $0\\to K\\to M\\to M'\\to0$ gives $0\\to K_f\\to M_f\\to(M')_f\\to0$ and a canonical isomorphism $(M')_f\\cong M_f/K_f$.",
-   "uses": [
-    "lem-sc-hilbert-embedded-points-affine-removal"
-   ],
-   "elementary": false,
+   "text": "For any localization map g:M→N over R→A=S⁻¹R, prove Supp_A(N)=comap⁻¹(Supp_R(M)) directly from the element-annihilator characterization of support and the fraction equations. For S=powers(f), the induced map Supp(M_f)→Supp(M) is an open embedding, by PrimeSpectrum.localization_away_isOpenEmbedding and restriction to the inverse image of support. Preimages along an open embedding preserve nowhere density, so localization preserves nowhere-dense support.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02M7 (proof omitted in the source); localization of the exact sequence defining the quotient"
+    "place": "Tag 02M7 (proof omitted); explicit agent proof by localization and Noetherian kernel stabilization"
    }
   },
   {
-   "text": "Characterize $K$. Since $R$ is Noetherian and the modules are finite, supports of submodules of $M$ are closed and $\\operatorname{Supp}(M)$ has finitely many irreducible components, with generic points the minimal primes $\\mathfrak q_1,\\dots,\\mathfrak q_r$ of $\\operatorname{Supp}(M)$ (Tag 0052); so a submodule $N\\subseteq M$ has nowhere-dense support in $\\operatorname{Supp}(M)$ iff $N_{\\mathfrak q_i}=0$ for all $i$. Hence $K\\subseteq E:=\\ker\\bigl(M\\to\\prod_i M_{\\mathfrak q_i}\\bigr)$, and $E$ has nowhere-dense support, so maximality in [lem-sc-hilbert-embedded-points-affine-removal] gives $K=E$. The minimal primes of $\\operatorname{Supp}(M_f)=\\operatorname{Supp}(M)\\cap D(f)$ are the $\\mathfrak q_i$ with $f\\notin\\mathfrak q_i$, and $(M_f)_{\\mathfrak q_i}=M_{\\mathfrak q_i}$ for those; for $f\\in\\mathfrak q_i$, $M_{\\mathfrak q_i}$ is a finite $R_{\\mathfrak q_i}$-module supported only at the closed point, hence killed by a power of $\\mathfrak q_iR_{\\mathfrak q_i}$, hence by a power of $f$, so $(M_{\\mathfrak q_i})_f=0$. Localizing the exact sequence $0\\to K\\to M\\to\\prod_i M_{\\mathfrak q_i}$ (finite product) at $f$ therefore gives $K_f=\\ker\\bigl(M_f\\to\\prod_{f\\notin\\mathfrak q_i}(M_f)_{\\mathfrak q_i}\\bigr)$, which by the same characterization applied to $M_f$ is the maximal submodule of $M_f$ with nowhere-dense support in $\\operatorname{Supp}(M_f)$.",
-   "uses": [
-    "lem-sc-hilbert-embedded-points-affine-removal"
-   ],
-   "elementary": false,
+   "text": "The support of a sum of submodules lies in the union of their supports: if both submodules vanish at a prime, multiply the two annihilators of a decomposition m=x+y to kill m outside that prime. A finite union of nowhere dense sets is nowhere dense. Therefore a maximal submodule with nowhere dense support contains every submodule with that property, by applying maximality to their sum.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 0052 (finitely many irreducible components); Tag 02M7 proof omitted in algebra.tex"
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M7 (proof omitted); explicit agent proof by localization and Noetherian kernel stabilization"
    }
   },
   {
-   "text": "Applying [lem-sc-hilbert-embedded-points-affine-removal] to the finite $R_f$-module $M_f$ over the Noetherian ring $R_f$, its quotient is $(M_f)'=M_f/K_f$ by Step 2. Combined with Step 1 this gives the canonical isomorphism $(M')_f\\cong(M_f)'$.",
-   "uses": [
-    "lem-sc-hilbert-embedded-points-affine-removal"
-   ],
-   "elementary": false,
+   "text": "Let t be multiplication by f on the Noetherian module M. Apply LinearMap.eventually_iSup_ker_pow_eq and Module.End.eventually_disjoint_ker_pow_range_pow at a common n. An element killed by localization is killed by some f^k and hence belongs to ker(t^n). Its intersection with range(t^n) is zero. Thus localization is injective on f^n M.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 02M7 (label algebra-lemma-remove-embedded-primes-localize)"
+    "place": "Tag 02M7 (proof omitted); explicit agent proof by localization and Noetherian kernel stabilization"
+   }
+  },
+  {
+   "text": "For N⊆M_f, let D be its inverse image in M and L=f^n D using Step 3. The Galois insertion Submodule.localized'gi gives D_f=N. The fraction identity (f^n m)/(f^n s)=m/s gives L_f=D_f=N. Localization is injective on L because L⊆f^n M. For any finite module whose localization map is injective, contraction of the annihilator of its localization equals its annihilator. By Module.support_eq_zeroLocus and PrimeSpectrum.closure_image_comap_zeroLocus, Supp(L) is the closure of the image of Supp(L_f). The same holds in Supp(M), by its induced topology. An inducing map sends a nowhere dense set to a nowhere dense set (Topology.IsInducing.isNowhereDense_image), and closure preserves nowhere density. Consequently, if N has nowhere dense support in Supp(M_f), L has nowhere dense support in Supp(M).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M7 (proof omitted); explicit agent proof by localization and Noetherian kernel stabilization"
+   }
+  },
+  {
+   "text": "Apply Steps 1 and 2 to get K.localized(powers f)≤Kf. Apply Step 4 to N=Kf and Step 2 to get L≤K. Localizing this inclusion gives Kf=L.localized(powers f)≤K.localized(powers f). Thus K.localized(powers f)=Kf. Mathlib localizedQuotientEquiv gives (M/K)_f≃M_f/Kf. IsLocalizedModule.linearEquiv_symm_apply proves the required equality on the images of every m∈M.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M7 (proof omitted); explicit agent proof by localization and Noetherian kernel stabilization"
    }
   }
  ],
- "proof_deps": [
-  "lem-sc-hilbert-embedded-points-affine-removal"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 02M7 (source proof marked omitted)"
+  "place": "Tag 02M7, proof omitted; P1 proves the localization assertion directly using Noetherian kernel stabilization and support closures, 2026-10-23"
  },
  "mathlib_searches": [
   {
@@ -153,5 +163,26 @@
   "result": "pass",
   "note": "R Noetherian CommRing, M finite (Module.Finite), f arbitrary; K, Kf binders with the G1 Maximal IsNowhereDense-in-Module.support predicate over R and over Localization (powers f) on LocalizedModule; conclusion R_f-linear equiv LocalizedModule (M/K) = M_f/Kf compatible with mkLinearMap and mkQ (canonical iso); node statement unchanged; no new definitions"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261023T123927-L-1296647",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

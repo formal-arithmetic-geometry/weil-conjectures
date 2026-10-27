@@ -1,0 +1,193 @@
+{
+ "id": "lem-trf-cotangent-retract-transitivity-vanishing",
+ "kind": "statement",
+ "title": "Cotangent transitivity and vanishing for a ring retraction",
+ "statement": "Let $R,S$ be commutative rings and $j:R\\to S$, $r:S\\to R$ ring homomorphisms with $r\\circ j=\\mathrm{id}_R$. Use the standard cotangent complexes and their square-induced maps [lem-trf-cotangent-resolution-coherence] in the ordinary-module derived categories [def-weil-abstract-derived-category]; derived extension of scalars is the universal total left derived functor of termwise tensor extension [def-weil-module-base-change]. Then $L_{R/R}$ for the identity map is a zero object, and the canonical transitivity triangle for $R\\xrightarrow j S\\xrightarrow r R$ has the form $L_{S/R}\\otimes_{S,r}^{\\mathbf L}R\\longrightarrow L_{R/R}\\longrightarrow L_{R/S}\\longrightarrow (L_{S/R}\\otimes_{S,r}^{\\mathbf L}R)[1]$, with zero middle object. In particular, if $L_{R/S}=0$ for the map $r$, then $L_{S/R}\\otimes_{S,r}^{\\mathbf L}R=0$ in $D(R)$. No flatness, finite generation or Tor-vanishing hypothesis on $j$ or $r$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08R1 (lemma-bootstrap), displayed transitivity triangle and vanishing of its middle and third terms; identity-cotangent transport through localization at {1} as in returned Step 2."
+ },
+ "stmt_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "For the identity $R\\to R$, take the constant simplicial $R$-algebra $Q_\\bullet=R$, the polynomial algebra on the empty set. By [lem-trf-constant-polynomial-resolution-retraction] it is a polynomial resolution with identity augmentation. The comparison of [lem-trf-cotangent-resolution-coherence] identifies $L_{R/R}$ with $s(\\Omega^1_{Q_\\bullet/R}\\otimes_{Q_\\bullet}R)$. Every $R$-derivation out of $R$ is zero, since it vanishes on each element of the image of the identity. The universal property in [def-weil-pbc-kahler-differentials] therefore gives $\\Omega^1_{R/R}=0$: its identity endomorphism corresponds to the zero derivation and hence equals the zero endomorphism. All terms of the displayed differential complex are zero. Its image in $D(R)$ is a zero object, so $L_{R/R}=0$.",
+   "uses": [
+    "lem-trf-constant-polynomial-resolution-retraction",
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QH (lemma-cotangent-complex-polynomial-algebra), empty-variable case; Tag 08QI (remark-resolution), constant polynomial resolution; Tag 08R1 (lemma-bootstrap), vanishing of L_{B/B}."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cotangent-transitivity-triangle] to the triple $R\\xrightarrow j S\\xrightarrow r R$. Put $X=L_{S/R}\\otimes_{S,r}^{\\mathbf L}R$, $Y=L_{R/R}$ and $Z=L_{R/S}$. Since $r\\circ j=\\mathrm{id}_R$, the middle term is the cotangent complex of the identity map, so step 1 makes $Y$ a zero object. The cited theorem gives the canonical distinguished triangle $X\\xrightarrow uY\\xrightarrow vZ\\xrightarrow dX[1]$ in $D(R)$, with the standard square-induced first two arrows. Its theorem applies to arbitrary ring maps, so no flatness or Tor hypothesis has entered.",
+   "uses": [
+    "lem-trf-cotangent-transitivity-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QX (proposition-triangle), equation-triangle; Tag 08R1 (lemma-bootstrap), displayed triangle."
+   }
+  },
+  {
+   "text": "Assume now $Z=L_{R/S}=0$. Apply clause (iii) of [lem-weil-pbc-hom-into-triangle-exact] to the distinguished triangle of step 2 with $W=X[1]$ and $c=\\mathrm{id}_{X[1]}$. Its hypothesis is $u[1]\\circ c=0$, which holds because $Y=0$ and the additive shift sends a zero object to a zero object. We obtain $k:X[1]\\to Z$ with $\\mathrm{id}_{X[1]}=d\\circ k=0$, since $Z=0$. Applying the inverse additive shift $[-1]$ of [def-weil-triangulated-category] gives $\\mathrm{id}_X=0$. Thus every map into or out of $X$ is zero (compose with its identity), and the zero maps between $X$ and the zero object are inverse isomorphisms. Consequently $X=0$ in $D(R)$, as asserted.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08R1 (lemma-bootstrap), vanishing of the first term; derived.tex Tag 0149 (lemma-representable-homological), applied to the twice rotated triangle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-triangulated-category",
+  "lem-trf-constant-polynomial-resolution-retraction",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-cotangent-transitivity-triangle",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QH (lemma-cotangent-complex-polynomial-algebra), 08QI (remark-resolution), 08QX (proposition-triangle), and 08R1 (lemma-bootstrap); derived.tex Tag 0149 (lemma-representable-homological)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a retraction of commutative rings R to S to R the vanishing of the relative cotangent complex L R over S implies that L S over R derived tensor S R is zero",
+   "results": "8 hits; top=['Algebra.Extension.tensorH1Cotangent', 'Algebra.Generators.CotangentSpace.compEquiv_symm_zero', 'Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange', 'Algebra.Extension.tensorCotangentSpace', 'retractionKerCotangentToTensorEquivSection', 'Algebra.Extension.cotangentComplex_mk', 'Algebra.Extension.tensorCotangent', 'Algebra.Extension.formallySmooth_iff_split_injection']; note=; digest=5277d98be2d1fa59. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(retract|transitivity|triangle)|cotangentComplex.*[Ii]sZero",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cotangent transitivity triangle along a split commutative ring map",
+   "results": "8 hits; top=['Ideal.mapCotangent', 'Algebra.Extension.CotangentSpace.map_comp_apply', 'KaehlerDifferential.kerCotangentToTensor', 'Algebra.Extension.CotangentSpace.map_comp', 'Ideal.mapCotangent_toCotangent', 'Algebra.Extension.Cotangent.of_add', 'Algebra.Generators.map_comp_cotangentCompAwaySec', 'Algebra.Extension.Cotangent.map_comp']; note=; digest=bd912f7266416137. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.cotangentComplex, IsZero",
+   "results": "0 hits; top=[]; note=loogle: unknown identifier 'IsZero'; digest=4f53cda18c2baa0c. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cotangent transitivity for a split ring map R to S to R gives a distinguished triangle L S over R derived tensor S R to zero to L R over S and vanishing of L R over S forces its first term zero",
+   "results": "8 hits; top=['Algebra.Extension.formallySmooth_iff_split_injection', 'Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange', 'Algebra.Generators.Cotangent.exact', 'Algebra.Extension.tensorH1Cotangent', 'Algebra.Generators.CotangentSpace.exact', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'Algebra.FormallySmooth.iff_split_injection', 'Algebra.FormallySmooth.kerCotangentToTensor_injective_iff']; note=; digest=f664385e04c6c111. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.cotangentComplex",
+   "results": "12 hits; top=['Algebra.Extension.cotangentComplex', 'Algebra.Extension.H1Cotangent.val_zero', 'Algebra.Extension.subsingleton_h1Cotangent', 'Algebra.Extension.Cotangent.map_sub_map', 'Algebra.Extension.h1Cotangentι_ext', 'Algebra.Extension.h1Cotangentι_ext_iff', 'Algebra.Extension.h1Cotangentι_apply', 'Algebra.Extension.exact_hCotangentι_cotangentComplex']; note=; digest=bb7ca485915d6d22. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cotangent transitivity triangle for a ring retraction R to S to R has zero middle object and if L R over S vanishes then L S over R derived tensor R vanishes",
+   "results": "8 hits; top=['Algebra.Generators.Cotangent.exact', 'retractionKerCotangentToTensorEquivSection', 'Algebra.Extension.tensorH1Cotangent', 'Algebra.Generators.CotangentSpace.exact', 'Algebra.H1Cotangent.exact_map_δ', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange', 'Algebra.Extension.exact_cotangentComplex_toKaehler']; note=; digest=8debea9cbea5fed7. Read returned signatures and Extension/Cotangent/Basic.lean:53–65: these concern the presentation linear map or Jacobi–Zariski sequence in low degrees, not the full derived cotangent triangle. Mathlib's general triangle exactness is reused through the existing Hom-into-triangle leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*(retract|transitivity|triangle)|cotangentComplex.*[Ii]sZero",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read returned signatures and Extension/Cotangent/Basic.lean:53–65: these concern the presentation linear map or Jacobi–Zariski sequence in low degrees, not the full derived cotangent triangle. Mathlib's general triangle exactness is reused through the existing Hom-into-triangle leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The full derived cotangent complex of the identity ring map is zero and transitivity for a retraction gives vanishing after derived tensor",
+   "results": "8 hits; top=['retractionOfSectionOfKerSqZero_tmul_D', 'retractionOfSectionOfKerSqZero', 'sectionOfRetractionKerToTensorAux_prop', 'Algebra.Extension.cotangentComplex', 'retractionKerCotangentToTensorEquivSection', 'Algebra.Extension.H1Cotangent', 'Algebra.Extension.Cotangent.map_id', 'retractionOfSectionOfKerSqZero_comp_kerToTensor']; note=; digest=90bab389db7509b0. Read returned signatures and Extension/Cotangent/Basic.lean:53–65: these concern the presentation linear map or Jacobi–Zariski sequence in low degrees, not the full derived cotangent triangle. Mathlib's general triangle exactness is reused through the existing Hom-into-triangle leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.cotangentComplex",
+   "results": "12 hits; top=['Algebra.Extension.cotangentComplex', 'Algebra.Extension.H1Cotangent.val_zero', 'Algebra.Extension.subsingleton_h1Cotangent', 'Algebra.Extension.Cotangent.map_sub_map', 'Algebra.Extension.h1Cotangentι_ext', 'Algebra.Extension.h1Cotangentι_ext_iff', 'Algebra.Extension.h1Cotangentι_apply', 'Algebra.Extension.exact_hCotangentι_cotangentComplex']; note=; digest=bb7ca485915d6d22. Read returned signatures and Extension/Cotangent/Basic.lean:53–65: these concern the presentation linear map or Jacobi–Zariski sequence in low degrees, not the full derived cotangent triangle. Mathlib's general triangle exactness is reused through the existing Hom-into-triangle leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fundamental exact triangle of derived cotangent complexes for a split ring homomorphism and acyclicity of the derived base change",
+   "results": "8 hits; top=['Algebra.Generators.Cotangent.exact', 'Algebra.Generators.H1Cotangent.exact_δ_map', 'Algebra.H1Cotangent.exact_δ_mapBaseChange', 'KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange', 'Algebra.Generators.CotangentSpace.exact', 'Algebra.H1Cotangent.exact_map_δ', 'Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange', 'Algebra.Extension.exact_cotangentComplex_toKaehler']; note=; digest=1ee43b705005fcb7. Read returned signatures and Extension/Cotangent/Basic.lean:53–65: these concern the presentation linear map or Jacobi–Zariski sequence in low degrees, not the full derived cotangent triangle. Mathlib's general triangle exactness is reused through the existing Hom-into-triangle leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-bootstrap",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Vanishing of the full cotangent complex for etale ring maps (Step 3 there): the Tor-vanishing bootstrap from the diagonal cotangent complex to $L_{B/A}$ (Stacks Tag 08R1). Re-split argument: Tag 08R1 (lemma-bootstrap), displayed transitivity triangle and vanishing of its middle and third terms; identity-cotangent transport through localization at {1} as in returned Step 2.",
+   "via": [
+    "lem-trf-cotangent-bootstrap",
+    "lem-trf-etale-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cotangent-retract-transitivity-vanishing",
+  "worker": "stage1",
+  "summary": "Q89 checked the complete statement against Stacks 08R1/08QX. Reused the constant polynomial resolution, resolution comparison, transitivity triangle, and existing representable-Hom exactness leaf; no new nodes. Proved identity cotangent vanishing using the empty-variable constant resolution and wrote out the two-zero-term argument via an identity factoring through Z. Statement and hypotheses unchanged; no flatness is used.",
+  "blueprint": "The historical auxiliary chain in blueprint.from supports the cotangent bootstrap (08R1). Steps 1–3 realize its identity-middle-term vanishing, transitivity triangle, and zero-first-term inference. The current latest lem-trf-local-term-locality proof is the contracting-correspondence route and does not itself state a cotangent result; this auxiliary split does not alter its statement or the unit realization."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-a27580771",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-a27580771 (reviewer sub-agent of L); spot-checked: I read the item and its three steps in full. The delivery creates no new nodes. The statement and stmt_deps are byte-identical to the live node, which is still unsplit, and there is no repair note, so this is not a re-split order. Source: Stacks 08R1 (lemma-bootstrap, cotangent.tex l.1586) uses the triangle for B→B⊗B→B, with L_{B/B}=0 from 08QH (l.414) and the third term zero by hypothesis. The item is exactly that triangle-and-two-zeros argument for a general ring retraction, and the bootstrap's step-2 instantiation (ι₂, μ) matches it. Step 1: constant-polynomial-resolution with E=∅ gives a polynomial resolution in coherence's sense; coherence gives L_{R/R}≃s(Ω_{Q/R}⊗R), and Ω_{R/R}=0 by the Kähler universal property, so elementary is justified. Step 2: transitivity-triangle with A=R, P=S, B=R; since r∘j=id the middle term is L_{R/R}; the first term is L_{S/R}⊗^L_{S,r}R and the third is L_{R/S}; no flatness or Tor hypothesis is needed. Step 3: hom-into-triangle (iii) with W=X[1] and c=id; u[1]c=0 because Y[1]=0, so id_{X[1]} factors through Z=0, hence X≅0. Every cited node exists and none is merged; there is no cycle (601 ancestors walked). The cited statement nodes are all in unit sk-i-curve-zero; the off-unit citations are Mathlib leaves or definitions, so no tool_uses entry is needed. No SGA is cited. My duplicate scan of the whole DAG found no node stating L_{X/X}=0 or this retraction triangle. Small cases checked: id/id; S=R[t] with t↦0 (triangle R→0→R[1], hypothesis fails, so nothing is asserted); S=R×R with r a projection (étale, conclusion true). One cosmetic point, left unchanged: source.place still mentions the localization-at-{1} transport, while the proof uses the empty-variable resolution."
+ }
+}

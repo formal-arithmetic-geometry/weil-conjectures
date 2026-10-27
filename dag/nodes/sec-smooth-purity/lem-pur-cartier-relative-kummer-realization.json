@@ -1,0 +1,445 @@
+{
+ "id": "lem-pur-cartier-relative-kummer-realization",
+ "kind": "statement",
+ "title": "Finite-root realization of a relative Cartier Kummer class",
+ "statement": "Fix the finite coefficient datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, a finite extension $F/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_F$ and uniformizer $\\varpi_F$, $n\\geq1$, and $A=\\mathcal O_F/\\varpi_F^n$. Use the prescribed pro-etale twist of [def-coefficient-twists-detailed] and ordinary constant-$A$ module derived categories [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Put $N=\\ell^n$ and $R=\\mathbf Z/N\\mathbf Z$. Then $NA=0$. For every $k$-scheme $S$, the etale roots sheaf $\\mu^{\\mathrm{et}}_{N,S}$ is a flat $R_S$-module and\n$$L_S:=\\mu^{\\mathrm{et}}_{N,S}\\otimes^L_{R_S}A_S\\cong\\mu^{\\mathrm{et}}_{N,S}\\otimes_{R_S}A_S$$\nis concentrated in degree zero. No flatness of $A$ over $R$ is required. For $C_S=\\nu_S^*$ [def-sf-comparison-derived-pullback], the roots-projection convention of [def-pur-frame-class] gives the specified isomorphism $\\theta_S:C_SL_S\\xrightarrow{\\sim}A_S(1)$.\n\nLet $T,B$ be separated finite-type $k$-schemes, $T\\to B$ smooth of relative dimension $d$, and $i:D\\hookrightarrow T$ an effective Cartier divisor smooth over $B$ of pure codimension one [def-sbc-smooth-morphisms, def-pc-divisor-line-bundle, def-pur-frame-class]. Put $W=T\\setminus D$. Let $c^e_{D,A}:i_*A_D\\to L_T[2]$ be the relative supported Kummer morphism of [lem-asd-ordinary-supported-kummer], for $(\\mathcal O_T(D),s_D|_W)$ in the Yoneda convention [def-asd-ordinary-supported-kummer-boundary], and let $c^p_{D,A}:i_*A_D\\to A_T(1)[2]$ be [lem-amb-cartier-kummer-map]. Under the canonical supported-constant source comparison $\\epsilon_i:C_T(i_*A_D)\\xrightarrow{\\sim}i_*A_D$, one has the equality of actual derived morphisms\n$$\\theta_T[2]\\circ C_T(c^e_{D,A})=c^p_{D,A}\\circ\\epsilon_i.$$\nBoth morphisms are the relative roots Kummer boundary followed by derived scalar extension from $R$ to $A$, with the displayed comparison on the pro-etale target. Under the supported-Hom identification [lem-pur-supported-hom], the relative divisor class $\\operatorname{cl}(D)$ of [lem-pur-divisor-class] is $c^p_{D,A}$, with the normalization of [def-pur-cartier-agreement-maps]. For every etale neighbourhood $U\\to T$ on which $D_U=V(f)$, its restriction is $-\\partial\\kappa(f)$, with $\\partial$ and $\\kappa$ as in [def-pur-frame-class].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 1, relative Kummer class: finite-root twist, relative supported morphism, Yoneda sign and supported-class agreement; expanded realization proof steps 3--5"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-sf-comparison-derived-pullback",
+  "def-pur-frame-class",
+  "lem-asd-ordinary-supported-kummer",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-supported-hom",
+  "lem-pur-divisor-class",
+  "def-pur-cartier-agreement-maps",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-sbc-smooth-morphisms",
+  "def-pc-divisor-line-bundle",
+  "def-kun-derived-tensor",
+  "def-asd-ordinary-supported-kummer-scalar",
+  "def-pur-supported-constant-exchange-maps",
+  "def-pur-exact-derived-hom-map",
+  "def-pur-supported-class-operations"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\ell=\\varpi_F b$ in $\\mathcal O_F$. Then $\\ell^n=\\varpi_F^n b^n$ is zero in $A$, so the quotient map from $\\mathbf Z$ factors through $R=\\mathbf Z/\\ell^n\\mathbf Z$. This is exactly the annihilating exponent used in [def-pur-frame-class]. Since $\\ell\\ne\\operatorname{char}k$, $N=\\ell^n$ is invertible on every $k$-scheme $S$. No divisibility condition on $n$ has been introduced.",
+   "uses": [
+    "def-pur-frame-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+    "place": "Final paragraph: choose an exponent killing the finite coefficients"
+   }
+  },
+  {
+   "text": "Apply finite_etale_torsion_twist_line over ULift(ZMod N) in degree one to obtain flatness. The already proved residueLineData helper in P1KummerScalarEndpointExistence, applied to the empty Cartier divisor, supplies the normalized root-line map and its universal derived scalar-unit property. For any other universal unit, its Hom bijection supplies the compatible map to the degree-zero representative; IsDerivedBaseChange.isIso proves that map invertible. This includes the empty scheme and uses no flatness of A over the residue ring.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-sp-p1-kummer-scalar-endpoint-existence",
+    "def-asd-ordinary-supported-kummer-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ (lemma-bounded-flat-K-flat) and 06YU (definition-derived-tor); finite root line as in etale-cohomology.tex, section-kummer"
+   }
+  },
+  {
+   "text": "Write the positive coefficient level as n+1. The coefficient ring is definitionally finiteTateCoefficient at index n; relativeCartierProExt directly selects the published class on that branch. finite_tate_site_descent supplies a root-normalized comparison. finiteTate_local_root_tensors_hom_ext proves uniqueness by evaluating both normalized comparisons on every locally lifted pure tensor. This is exactly RelativeCartierRootNormalized.",
+   "uses": [
+    "def-pur-conventions",
+    "lem-amb-finite-tate-site-descent",
+    "lem-pur-finite-tate-local-root-tensors-ext",
+    "def-amb-finite-tate-site-comparison-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+    "place": "Final paragraph: identify the extended finite-root target with the prescribed Tate twist"
+   }
+  },
+  {
+   "text": "The chosen pair in cartier_kummer_map satisfies CartierEtaleKummerNormalization. At the positive level and the annihilating exponent this proves that agreementCartierEtale is the normalized supported boundary. Take the unique R-coefficient boundary from ordinary_supported_kummer_uniqueBoundary and apply supported_kummer_boundary_scalar directly to this boundary and agreementCartierEtale. This gives the required R-boundary witness and full normalized derived scalar square.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "def-amb-cartier-kummer-data",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-supported-kummer-boundary-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+    "place": "Paragraphs 1--3 and final paragraph: relative torsor, supported realization and derived scalar extension"
+   }
+  },
+  {
+   "text": "The same chosen pair satisfies CartierKummerRealization, supplying normalized source and target isomorphisms and its Ext composition equation. Under the comparison adjunction the source constant comparison agrees with the monoidal unit comparison: prove this using the sheafification adjunction and the monoidal adjunction unit formula. The uniqueness clause of supported-constant-exchange-normalization therefore identifies the supplied source map with gamma. Apply Ext.hom to the realization equation; Ext.comp_hom, Ext.mk₀_hom and Ext.mapExactFunctor_hom turn it into the stated equality of actual derived morphisms with functorialCupExactHom. The target is already root normalized, as required.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "def-amb-cartier-kummer-data",
+    "lem-pur-supported-constant-exchange-normalization",
+    "def-pur-exact-derived-hom-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+    "place": "Relative-boundary normalization and final scalar-extension paragraph: actual normalized realization"
+   }
+  },
+  {
+   "text": "Apply cartier_class_agreement to identify the global generalDivisorClass with agreementCartierMap. Apply divisor_class to the smooth codimension-one Cartier family. The uniqueness of generalDivisorEtaleClasses identifies its supplied class family with the existing chosen family. Its local restriction clause is then exactly the negative frameBoundary formula on every etale principal presentation.",
+   "uses": [
+    "lem-pur-cartier-class-agreement",
+    "lem-pur-divisor-class",
+    "def-pur-cartier-agreement-maps",
+    "def-pur-frame-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+    "place": "Clause (a), using the live Yoneda-normalized correction of lem-pur-divisor-class"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-frame-class",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sp-p1-kummer-scalar-endpoint-existence",
+  "def-asd-ordinary-supported-kummer-scalar",
+  "def-pur-conventions",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-finite-tate-local-root-tensors-ext",
+  "def-amb-finite-tate-site-comparison-data",
+  "lem-amb-cartier-kummer-map",
+  "def-amb-cartier-kummer-data",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-asd-supported-kummer-boundary-scalar",
+  "lem-pur-supported-constant-exchange-normalization",
+  "def-pur-exact-derived-hom-map",
+  "lem-pur-cartier-class-agreement",
+  "lem-pur-divisor-class",
+  "def-pur-cartier-agreement-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "B8: root and twist clauses proved, unused Ext transport pruned; final Kummer realization retains its named obligation and proof in words."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For finite torsion coefficients the relative Cartier divisor Kummer class is minus the supported Kummer boundary of a local equation and has a roots of unity etale realization",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "Algebra.etaleLocus_eq_compl_support",
+     "Algebra.Generators.cMulXSubOneCotangent_eq",
+     "Algebra.Generators.cotangentCompAwaySec",
+     "Algebra.Generators.cMulXSubOneCotangent",
+     "Algebra.Generators.cotangentCompAwaySec_apply",
+     "Algebra.Generators.basisCotangentAway_apply",
+     "StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x",
+     "Algebra.smoothLocus_eq_compl_support_inter"
+    ],
+    "note": "",
+    "digest": "065f729a1db6db3e",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; the hits concern etale algebra loci or perfectoid theta, not relative supported Kummer morphisms and their signed site realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection from the l adic Tate module realizes a supported Cartier class by derived scalar extension of the etale Kummer morphism without flat coefficients",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "BDeRhamPlus",
+     "BDeRham",
+     "WittVector.factorPowSucc_comp_fontaineThetaModPPow",
+     "PreTilt.mk_comp_untilt_eq_coeff_zero",
+     "WittVector.fontaineThetaModPPow_teichmuller",
+     "WittVector.mk_pow_fontaineTheta",
+     "WittVector.factorPowSucc_fontaineThetaModPPow_eq",
+     "WittVector.fontaineTheta_teichmuller"
+    ],
+    "note": "",
+    "digest": "fc50eb3ad2352ab8",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; the hits concern etale algebra loci or perfectoid theta, not relative supported Kummer morphisms and their signed site realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Sheaf\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; the hits concern etale algebra loci or perfectoid theta, not relative supported Kummer morphisms and their signed site realization"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|supported.*[Cc]artier|[Cc]artier.*[Cc]lass",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read returned signatures; the hits concern etale algebra loci or perfectoid theta, not relative supported Kummer morphisms and their signed site realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of the etale relative Kummer boundary agrees with the proetale divisor class under the roots projection comparison",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative supported Kummer morphism of a Cartier divisor with finite torsion coefficients agrees under etale to proetale comparison with its divisor class",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "StandardEtalePair.homEquiv_apply_coe",
+     "StandardEtalePair.hasMap_X",
+     "StandardEtalePair.homEquiv",
+     "Algebra.etaleLocus_eq_compl_support",
+     "StandardEtalePair.homEquiv_symm_apply",
+     "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+     "Algebra.basicOpen_subset_etaleLocus_iff",
+     "StandardEtalePair.lift_X"
+    ],
+    "note": "",
+    "digest": "3dd9b0a48522d1db",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; etale algebra presentations and field-theoretic Kummer extensions do not state a supported sheaf Kummer morphism or its site realization"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|supported.*[Cc]artier|[Cc]artier.*[Cc]lass",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; etale algebra presentations and field-theoretic Kummer extensions do not state a supported sheaf Kummer morphism or its site realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Sheaf\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; etale algebra presentations and field-theoretic Kummer extensions do not state a supported sheaf Kummer morphism or its site realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Kummer divisor class is realized by derived scalar extension of the roots of unity supported morphism and exact etale to proetale inverse image",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "adjoinRootXPowSubCEquiv.congr_simp",
+     "adjoinRootXPowSubCEquiv_symm_eq_root",
+     "adjoinRootXPowSubCEquiv",
+     "autAdjoinRootXPowSubC_root",
+     "KummerExtension.termK[_√_]",
+     "adjoinRootXPowSubCEquiv_root",
+     "autAdjoinRootXPowSubCHom",
+     "autAdjoinRootXPowSubC"
+    ],
+    "note": "",
+    "digest": "1ddb386959049ec2",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; etale algebra presentations and field-theoretic Kummer extensions do not state a supported sheaf Kummer morphism or its site realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image from the etale to the proetale topos preserves the relative roots of unity Kummer boundary and its canonical supported morphism after derived coefficient extension",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "StandardEtalePair.hasMap_X",
+     "StandardEtalePair.homEquiv_symm_apply",
+     "StandardEtalePresentation.toPresentation_σ'",
+     "StandardEtalePresentation.hasMap",
+     "StandardEtalePair.inv_aeval_X_g",
+     "StandardEtalePair.HasMap.map",
+     "StandardEtalePair.homEquiv_apply_coe",
+     "StandardEtalePair.homEquiv"
+    ],
+    "note": "",
+    "digest": "42166aa146794389",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned signatures; etale algebra presentations and field-theoretic Kummer extensions do not state a supported sheaf Kummer morphism or its site realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-line-zero-class-etale-realization",
+  "date": "2026-10-22",
+  "group": "Q123"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 1, relative Kummer class: finite-root twist, relative supported morphism, Yoneda sign and supported-class agreement; expanded realization proof steps 3--5",
+   "via": [
+    "lem-pur-line-zero-class-etale-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-cartier-relative-kummer-realization",
+  "worker": "stage1",
+  "summary": "Split using existing finite-root flatness, K-flat coefficient extension, normalized root/site and supported-source comparisons, ordinary boundary uniqueness and Cartier descent; identified the live global divisor class and its negative Yoneda local boundary. No new nodes or statement changes.",
+  "blueprint": "thm-pur-rank-one-thom, Step 1: global relative Cartier Kummer class and its finite-root supported realization (expanded steps 3--5); the unit integration route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Finite etale root lines, specialized to coefficient R, supply flatness on arbitrary schemes; this is coefficient algebra, not a replacement purity route."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic K-flat criterion for the degree-zero root sheaf on the small etale site."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic computation of derived coefficient extension on the flat root line."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Ordinary relative supported Kummer arrow and its scalar-extension formula; this is precisely the construction used by the unit."
+   },
+   {
+    "node": "lem-amb-cartier-kummer-map",
+    "why": "Published normalized pro-etale Cartier morphism, the object this item realizes."
+   },
+   {
+    "node": "lem-asd-cartier-boundary-existence",
+    "why": "Uniqueness of the relative Yoneda normalization identifies the ordinary components, not just their absolute Chern classes."
+   },
+   {
+    "node": "lem-amb-cartier-kummer-descent",
+    "why": "Unique normalized realization of the ordinary Cartier family."
+   },
+   {
+    "node": "lem-pur-supported-constant-exchange-normalization",
+    "why": "Generic closed constant-source exchange, characterized by preserving the restriction quotient."
+   },
+   {
+    "node": "lem-pur-supported-hom",
+    "why": "Generic identification of supported cohomology with actual derived morphisms."
+   },
+   {
+    "node": "lem-pur-divisor-class",
+    "why": "Existing normalized global divisor class and its local equation formula; no alternate purity route is used."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Generic local freeness of Z_l(1) with quotient mu_{l^n}: pro-etale local lifting of roots, used only to see that a root-normalized finite Tate comparison is unique."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-supported-constant-exchange-normalization",
+  "lem-pur-divisor-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O2-5490a16e1",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-5490a16e1 (reviewer sub-agent of L); spot-checked: No new nodes and the statement is unchanged apart from the def-kun-derived-tensor stmt_dep for the displayed derived tensor. The item is a Q123 2026-10-22 statement-only child with no re-split note of its own; it is not on the drop list, still unsplit in live and side-live, and has no cycle. Steps 1-4, 6 and 7 are checked against the cited statements and their hypotheses. Step 2: finite-etale-twist-line with ring R makes mu flat, 06YQ (checked in tags; the 06YS citation in lem-pc-bounded-above-flat-kflat-site is a mis-tag, maintainer note) gives K-flatness, and derived-change-of-rings uses the identity resolution, so flatness of A is never needed. Step 3: sigma from finite-root-site-comparison composed with the inverse of theta_{n} from tate-root-projection-reduction equals the inverse roots projection of def-pur-frame-class. Step 4: the scalar-extension clause of asd-ordinary-supported-kummer plus supported-root-scalar-site-comparison. Steps 6-7: class-agreement and divisor-class, with the Yoneda local sign -dkappa(f). Edge cases checked: n=1, ramified e>n where A is not flat over R, empty S or D, and D=V(t). Two faults, both fixed: (1) step 5 asserted that the realization's target comparison is theta_T, but CartierKummerRealization only gives some root-normalized q; the fix proves theta_T is root-normalized (using p_{n-1}) and that root-normalized comparisons are unique, since roots lift pro-etale locally by twist-sheaf-locally-free(2) and the unit images of z(x)a generate locally; epsilon_i is unique by the d.Lrho=rho'.q characterization. (2) step 2 did not tie the displayed tensor to def-kun-derived-tensor; one sentence and the use were added. The fix was left by an earlier interrupted pass; I re-checked it and kept it. Batch-5: lem-pod-etale-stalk-tensor-scalar (generic stalk/scalar-extension algebra) and lem-poincare-compatible-primitive-roots (local triviality of mu) are neither assumption nor a step of their proofs, and both are already in the stmt_dep closure; the fix adds nothing to the batch-5 closure. Accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CartierRelativeKummerRealization",
+  "declaration": "WeilConjectures.PurityFiniteSetting.relativeCartierKummer_realization",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.relativeCartierRootRing",
+   "WeilConjectures.PurityFiniteSetting.relativeCartierRootZero",
+   "WeilConjectures.PurityFiniteSetting.relativeCartierRoots",
+   "WeilConjectures.PurityFiniteSetting.relativeCartierScalar",
+   "WeilConjectures.PurityFiniteSetting.relativeCartierRoots_realization",
+   "WeilConjectures.PurityFiniteSetting.relativeCartierProLine",
+   "WeilConjectures.PurityFiniteSetting.relativeCartierProExt",
+   "WeilConjectures.PurityFiniteSetting.relativeCartierProMap",
+   "WeilConjectures.PurityFiniteSetting.RelativeCartierRootNormalized",
+   "WeilConjectures.PurityFiniteSetting.relativeCartierTwist_realization",
+   "WeilConjectures.PurityFiniteSetting.relativeCartierKummer_realization"
+  ],
+  "file": "lean/Sheaf/Paper/CartierRelativeKummerRealization.lean",
+  "statement": "theorem relativeCartierKummer_realization (P : PurityFiniteSetting.{u}) {B T D : Scheme.{u}} (b : B ⟶ Spec (.of P.field.k)) [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] (v : T ⟶ B) (d : ℕ) [SmoothOfRelativeDimension d v] [IsSeparated (v ≫ b)] [LocallyOfFiniteType (v ≫ b)] [QuasiCompact (v ≫ b)] (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible) [Smooth (i ≫ v)] (_hcodim : ∀ z : D, ringKrullDim (T.presheaf.stalk (i z)) = ringKrullDim (D.presheaf.stalk z) + (1 : WithBot ℕ∞)) : Etale.SupportedKummerBoundary P.Coefficient P.diagonalExponent P.diagonalExponent_annihilates i hI (P.diagonalExponent_isUnit (v ≫ b)) (P.agreementCartierEtale (v ≫ b) i hI) ∧ (∃ κR : Ext ((Etale.lowerStar (ModuleCat.{u + 1} P.relativeCartierRootRing) i).obj (Etale.ordinaryFiniteConstant P.relativeCartierRootRing D)) (P.relativeCartierRoots T) 2, Etale.SupportedKummerBoundary P.relativeCartierRootRing P.diagonalExponent P.relativeCartierRootZero i hI (P.diagonalExponent_isUnit (v ≫ b)) κR ∧ Etale.SupportedKummerScalar P.relativeCartierScalar P.diagonalExponent P.relativeCartierRootZero P.diagonalExponent_annihilates i κR (P.agreementCartierEtale (v ≫ b) i hI)) ∧ (∃ q : P.frameTwist T 1 ≅ P.relativeCartierProLine T, P.RelativeCartierRootNormalized T q ∧ IsIso (SupportedConstantNormalization.gamma P.Coefficient i) ∧ functorialCupExactHom (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T) 2 (P.agreementCartierEtale (v ≫ b) i hI).hom ≫ ((DerivedCategory.singleFunctor _ 0).map q.hom)⟦(2 : ℤ)⟧' = (DerivedCategory.singleFunctor _ 0).map (SupportedConstantNormalization.gamma P.Coefficient i) ≫ P.relativeCartierProMap (v ≫ b) i hI) ∧ P.generalDivisorClass (v ≫ b) i hI = P.agreementCartierMap (v ≫ b) i hI ∧ ∀ (U : Scheme.{u}) (e : U ⟶ T) [Etale e] (f : Γ(U, ⊤)) (t : U.zeroLocusSubscheme {f} ⟶ D) (sq : ChosenCartesianSquare t (U.zeroLocusSubschemeι {f}) i e), HEq (P.functorialCupPullback true i (U.zeroLocusSubschemeι {f}) e t sq (v ≫ b) 2 1 (P.generalDivisorClass (v ≫ b) i hI)) (-(P.frameBoundary U (e ≫ v ≫ b) f))",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The same root realization, normalized twist comparison and Kummer realization statements are retained. The unused Ext presentation equality is pruned because relativeCartierProExt now selects the identical published class by a direct successor match. No coefficient object or normalization changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a1d6a4ae",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Re-delivery of the dbeda4e3 H2 RETURN. stmt_deps now cite def-pur-supported-constant-exchange-maps (gamma), def-pur-exact-derived-hom-map (functorialCupExactHom) and def-pur-supported-class-operations (functorialCupPullback) instead of the two theorems; lem-pur-supported-constant-exchange-normalization stays in proof_deps. Both new nodes are existing:true with lean.statement verbatim from side-live (gamma l.292, functorialCupExactHom l.1645), TeX matches the bodies, and check_new_node is clean. F1 fixed: gamma's comparePullback = supportSiteComparisonCoefficientPullbackIso is owned by def-per-site-comparison-pullback-data, which the new node did not cite; fixes/def-pur-supported-constant-exchange-maps.json adds the stmt_dep and the citation (no cycle). Lean compile repair: relativeCartierProLine is now a direct match; the new named sorry theorem relativeCartierProExt_type (Ext type equality, true by unfolding Coefficient = ULift coefficientExtensionRing level = finiteTateCoefficient (level-1) after cases; dbeda type-checked the same transport by cases+simpa) is used by .mp to transport the same cartier_kummer_map .choose class. This is the prescribed named-sorry-helper form and is not hollow. All theorem signatures are unchanged and the mathematics is as accepted in dbeda (all clauses, edge cases n=1, ramified, empty, d=0). No recompile (record-only fix); worker reports 42.3/42.9 s clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-33dde",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T201454-L-2533881",
+  "kind": "interface",
+  "note": "independent cc review: delivered CartierRelativeKummerRealization.lean and its node file against the clone; relativeCartierProExt and RelativeCartierRootNormalized old/new bodies against the change record; #print axioms on a scratch copy; new proof_deps against the clone DAG (all exist, no cycle); grep found no importers"
+ }
+}

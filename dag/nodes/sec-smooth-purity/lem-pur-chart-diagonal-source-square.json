@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-chart-diagonal-source-square",
+ "kind": "statement",
+ "title": "Naturality of the actual diagonal source comparison",
+ "statement": "Use the finite coefficient setting P of [def-pur-conventions], arbitrary finite E/Q_l and positive level n. Let V be affine with a finite-type map aV to Spec P.field.k; d is any natural number. Let C, B (and A where composable maps are used) be affine etale d-charts over V and e, v their etale maps over V, with the actual canonical comparisons of [def-pur-general-chart-comparisons] and [def-pur-chart-affine-comparison-data]. For every normalized compact-support presentation N (and every normalized finite twist transport t where used), the following equality holds, in the small pro-etale derived categories with the stated canonical pullback identity/composition constraints. Its complete formal statement is:\n\ntheorem chart_diagonal_source_square (P : PurityFiniteSetting.{u})\n    {V : Scheme.{u}} [IsAffine V] {d : ℕ}\n    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]\n    {C B : Chart V d} (e : Map C B)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :\n    q P aV e N ≪≫\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) e.hom).leftDerivedFunctor.mapIso\n        (alpha P aV B) = alpha P aV C ≪≫ eps P aV e N",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Naturality of the actual diagonal source comparison; parent proof Step 4, parent proof Step 5"
+ },
+ "stmt_deps": [
+  "def-pur-general-chart-comparisons",
+  "def-pur-chart-affine-comparison-data",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "factor the map of self-products through the pullback of the target's first\nprojection. Near the diagonal its first factor is etale and the centre is Cartesian;\nremove the closed off-diagonal component to obtain this neighbourhood. Source-etale\nrestriction followed by inverse smooth base change is precisely sourceOrdinary.\nSource-etale/base-change interchange for the dualizing sigma cocycle and vertical\npasting identify its composite with the inverse of each self-product base-change\nmate. Pull back along the source diagonal. Its two projection composites are the\nidentity, so the pullback composition constraints give finiteDiagonalRestriction.\nTransport along sourceComparison, diagonalDualizingComparison and pullComparison;\nthese constraints cancel on both routes and give the displayed square. This uses\nonly the specified counit mates and applies also in dimension zero and on empty\nschemes; neither a coordinate-compatible map nor an orientation is assumed.",
+   "uses": [
+    "lem-pur-chart-cartesian-domain",
+    "lem-pur-dualizing-sigma-cocycle-locality",
+    "lem-pur-smooth-exceptional-tensor-pasting",
+    "lem-pur-diagonal-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-chart-cartesian-domain",
+  "lem-pur-dualizing-sigma-cocycle-locality",
+  "lem-pur-smooth-exceptional-tensor-pasting",
+  "lem-pur-diagonal-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Naturality of the actual diagonal source comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of exceptional composition mates for etale maps, source and normal comparison with diagonal purity, identity and composition",
+   "results": "Etale ring-map and etale-locus facts; no comparison equation",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Generic adjunction mate equations",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "standingExceptionalComposition",
+   "results": "No Mathlib declaration; local library has the definition and composition-tensor-mate package",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the specified geometric and adjunction comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ChartExceptionalMateCoherence",
+  "date": "2026-10-25",
+  "group": "W3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-chart-exceptional-mate-coherence",
+   "place": "proof Step 4, proof Step 5"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChartDiagonalSourceSquare",
+  "file": "lean/Sheaf/Paper/ChartDiagonalSourceSquare.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ChartComparisons.chart_diagonal_source_square",
+  "statement": "theorem chart_diagonal_source_square (P : PurityFiniteSetting.{u})\n    {V : Scheme.{u}} [IsAffine V] {d : ℕ}\n    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]\n    {C B : Chart V d} (e : Map C B)\n    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :\n    q P aV e N ≪≫\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) e.hom).leftDerivedFunctor.mapIso\n        (alpha P aV B) = alpha P aV C ≪≫ eps P aV e N",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T101744-L-3732556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261025T101744-L-3732556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

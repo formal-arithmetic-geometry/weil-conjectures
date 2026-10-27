@@ -1,0 +1,154 @@
+{
+ "id": "lem-pur-normalized-coefficient-tensor-square",
+ "kind": "statement",
+ "title": "Normalized tensor coefficient square for arbitrary universal derived pullbacks",
+ "statement": "Let $C,D$ be small sites with commutative ring sheaves $R,S$, and let $f$ be a presented ringed pullback [def-pur-cochain-tensor-coherence-data]. Let $R\\to R\\prime$, $S\\to S\\prime$ be a compatible coefficient square with changed pullback $f\\prime$ and fixed ordinary scalar-association isomorphism $\\kappa$ [def-pur-cochain-coefficient-arrows]. Give universal total left-derived pullbacks $F,F\\prime,E_R,E_S$ of these four ordinary pullbacks, with their actual cochain counits, between the unbounded derived module categories [def-weil-abstract-derived-category]. For the published K-flat derived tensors [def-pur-derived-tensor-pullback-normalization], there exist four representative-normalized tensor isomorphisms $\\nu,\\nu\\prime,\\varepsilon_R,\\varepsilon_S$ and a natural isomorphism $b:E_RF\\prime\\simeq FE_S$ in diagrammatic composition order. The isomorphism $b$ is characterized uniquely by $b_{Q(P)} E_S(\\epsilon_{F,P})\\epsilon_{E_S,fP}=F\\prime(\\epsilon_{E_R,P})\\epsilon_{F\\prime,E_RP}Q(\\kappa_P)$ for flat-term K-flat $P$. They satisfy $F\\prime(\\varepsilon_{R;M,N})\\nu\\prime_{E_RM,E_RN}(b_M\\otimes b_N)=b_{T_R(M,N)}E_S(\\nu_{M,N})\\varepsilon_{S;FM,FN}$ for every pair of unbounded derived inputs. No flatness of the coefficient maps is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition); parent coefficient normalization proof steps 5-6."
+ },
+ "stmt_deps": [
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-derived-tensor-pullback-normalization",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For each of the four edges apply the universal canonical tensor normalization theorem. Retain its target canonical shift normalization for the naturality of the published representative isomorphisms. No comparison is chosen from unconstrained existence: the tensor isomorphisms are those of the canonical normalization theorem.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The flat-term K-flat class is preserved by each of the four ringed pullbacks. Thus the two composite counits are invertible on a common resolving complex. Lift the ordinary scalarAssociation degreewise to its existing kappa components, and use comparison_descent_iso to descend this isomorphism between the two composite functors. Its representative equation and uniqueness are exactly the unary descent characterization.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-pullback-resolving-computation",
+    "def-pur-cochain-coefficient-arrows",
+    "lem-trf-ringed-kflat-word-comparison-descent",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the two normalized tensor squares on each path. Naturality of the second tensor comparison moves the first edge counits through it, and naturality of the second counit moves the first cochain tensor comparison through that counit. Both composite squares therefore have composite counits and the composite ordinary tensor maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On a resolving pair P,Q their total tensor is resolving. Apply the scalar-association representative equation at P,Q and their tensor. The first coefficient identity of cochainPullbackTensorCoherence identifies the two ordinary routes. Naturality of canonicalRepresentativeIso identifies the scalar-association tensor map on the target models. Precompose by the invertible source model, postcompose by the tensor of the invertible target computation maps, substitute the two composite normalization equations, and cancel those isomorphisms. This proves the derived tensor square on the resolving pair.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flat-term K-flat resolutions and fully faithful restriction to resolving pairs detect equality of the two natural transformations. Hence the tensor equation holds on all derived inputs. Unary descent uniqueness proves the final uniqueness clause for the scalar-association isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-derived-resolving-pair-restriction",
+    "lem-trf-ringed-kflat-word-comparison-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-cochain-coefficient-arrows",
+  "lem-pc-kflat-resolution",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-derived-resolving-pair-restriction",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-trf-ringed-kflat-word-comparison-descent",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-pullback-resolving-computation",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Q1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent coefficient normalization argument, implemented using unary descent and two-variable faithful restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived tensor comparison commutes with scalar extension and the normalized coefficient square on K flat complexes",
+   "results": "8 hits: Kaehler differential tensor comparisons, LinearMap.tensorKerEquiv and Module.Flat.baseChange; none states a normalized derived sheaf coefficient square.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "12 hits, including CoreMonoidal and its lax/oplax constructions and transport. These package monoidal functors but do not normalize the coefficient square.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparison.*coher|coefficient.*descent",
+   "results": "msearch grep returned 0 hits. Repository rg additionally found the parent tensorComparison_coefficients and its canonical tensor and cochain descent ingredients. The new theorem gives their completed scalar-square argument with the four universal functors and counits as explicit data.",
+   "date": "2026-10-26",
+   "verdict": "no existing complete duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteDerivedComparisonNormalization",
+  "date": "2026-10-26",
+  "group": "Q1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The current blueprint sentence: These actions commute with finite reduction and scalar extension to Qlb; parent finite normalization proof steps 5-6 implement the canonical tensor coefficient square.",
+   "via": [
+    "lem-pur-finite-derived-comparison-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedCoefficientTensorSquare",
+  "file": "lean/Sheaf/Paper/NormalizedCoefficientTensorSquare.lean",
+  "declaration": "CategoryTheory.NormalizedCoefficientTensor.normalizedCoefficientTensorSquare",
+  "statement": "theorem normalizedCoefficientTensorSquare\n    (f : RingedPullback.{u, u, u, u, u} R S) (k : CochainPullback.Comparison.{u, u, u, u, u} f)\n    (a : CochainPullback.CoefficientSquare.{u, u, u, u, u} f) (k' : CochainPullback.Comparison.{u,\n      u, u, u, u} (CochainPullback.changed.{u, u, u, u, u} f a))\n    [HasDerivedCategory.{w} (Modules.{u, u, u} a.R')]\n    [HasDerivedCategory.{w} (Modules.{u, u, u} a.S')]\n    (df : DerivedCategory (Modules.{u, u, u} R) ⥤\n      DerivedCategory (Modules.{u, u, u} S))\n    (df' : DerivedCategory (Modules.{u, u, u} a.R') ⥤\n      DerivedCategory (Modules.{u, u, u} a.S'))\n    (dR : DerivedCategory (Modules.{u, u, u} R) ⥤\n      DerivedCategory (Modules.{u, u, u} a.R'))\n    (dS : DerivedCategory (Modules.{u, u, u} S) ⥤\n      DerivedCategory (Modules.{u, u, u} a.S'))\n    (ef : DerivedCategory.Q.{w} ⋙ df ⟶\n      CochainPullback.pull.{u, u, u, u, u} f ⋙ DerivedCategory.Q.{w})\n    (ef' : DerivedCategory.Q.{w} ⋙ df' ⟶\n      CochainPullback.pull.{u, u, u, u, u} (CochainPullback.changed f a) ⋙\n        DerivedCategory.Q.{w})\n    (eR : DerivedCategory.Q.{w} ⋙ dR ⟶ extend.{u, u, u} a.sourceMap ⋙ DerivedCategory.Q.{w})\n    (eS : DerivedCategory.Q.{w} ⋙ dS ⟶ extend.{u, u, u} a.targetMap ⋙ DerivedCategory.Q.{w})\n    (hdf : df.IsLeftDerivedFunctor ef\n      (HomologicalComplex.quasiIso (Modules.{u, u, u} R) (.up ℤ)))\n    (hdf' : df'.IsLeftDerivedFunctor ef'\n      (HomologicalComplex.quasiIso (Modules.{u, u, u} a.R') (.up ℤ)))\n    (hdR : dR.IsLeftDerivedFunctor eR\n      (HomologicalComplex.quasiIso (Modules.{u, u, u} R) (.up ℤ)))\n    (hdS : dS.IsLeftDerivedFunctor eS\n      (HomologicalComplex.quasiIso (Modules.{u, u, u} S) (.up ℤ))) :\n    ∃ (nu : Phi.{u, u, u, u, u, w, w} (R := R) (S := S) df ≅ Psi.{u, u, u, u, u, w, w} (R := R)\n        (S := S) df)\n      (nu' : Phi.{u, u, u, u, u, w, w} (R := a.R') (S := a.S') df' ≅ Psi.{u, u, u, u, u, w, w}\n        (R := a.R') (S := a.S') df')\n      (epsR : Phi.{u, u, u, u, u, w, w} (R := R) (S := a.R') dR ≅ Psi.{u, u, u, u, u, w, w} (R\n        := R) (S := a.R') dR)\n      (epsS : Phi.{u, u, u, u, u, w, w} (R := S) (S := a.S') dS ≅ Psi.{u, u, u, u, u, w, w} (R\n        := S) (S := a.S') dS)\n      (b : dR ⋙ df' ≅ df ⋙ dS),\n      IsNormalized.{u, u, u, u, u, w, w} (R := R) (S := S) f k df ef nu.hom ∧\n      IsNormalized.{u, u, u, u, u, w, w} (R := a.R') (S := a.S')\n        (CochainPullback.changed.{u, u, u, u, u} f a) k' df' ef' nu'.hom ∧\n      IsNormalized.{u, u, u, u, u, w, w} (R := R) (S := a.R') (extensionPullback.{u, u, u}\n          a.sourceMap)\n        (extensionComparison.{u, u, u} a.sourceMap)\n        dR eR epsR.hom ∧\n      IsNormalized.{u, u, u, u, u, w, w} (R := S) (S := a.S') (extensionPullback.{u, u, u}\n          a.targetMap)\n        (extensionComparison.{u, u, u} a.targetMap)\n        dS eS epsS.hom ∧\n      (∀ (P : CochainPullback.Complex.{u, u, u} R), P.IsKFlatIndependentCoefficients →\n        (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X n)) →\n        b.hom.app ((DerivedCategory.Q.{w} (C := Modules.{u, u, u} R)).obj P) ≫ dS.map\n        (ef.app P) ≫\n            eS.app ((CochainPullback.pull.{u, u, u, u, u} f).obj P) =\n          df'.map (eR.app P) ≫ ef'.app ((extend.{u, u, u} a.sourceMap).obj P) ≫\n            (DerivedCategory.Q.{w} (C := Modules.{u, u, u} a.S')).map (CochainPullback.kappa.{u,\n          u, u,\n        u, u} f k a k' P).hom) ∧\n      (∀ M N : DerivedCategory (Modules.{u, u, u} R),\n        df'.map (epsR.hom.app (M, N)) ≫\n            nu'.hom.app (dR.obj M, dR.obj N) ≫\n            (Functor.uncurry.obj (canonicalDerivedTensor.{u, u, u, w} a.S')).map\n              (Prod.mkHom (b.hom.app M) (b.hom.app N)) =\n          b.hom.app (((canonicalDerivedTensor.{u, u, u, w} R).obj M).obj N) ≫\n            dS.map (nu.hom.app (M, N)) ≫\n            epsS.hom.app (df.obj M, df.obj N)) ∧\n      (∀ b' : dR ⋙ df' ≅ df ⋙ dS,\n        (∀ (P : CochainPullback.Complex.{u, u, u} R), P.IsKFlatIndependentCoefficients →\n          (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X n)) →\n          b'.hom.app ((DerivedCategory.Q.{w} (C := Modules.{u, u, u} R)).obj P) ≫ dS.map\n        (ef.app P) ≫\n              eS.app ((CochainPullback.pull.{u, u, u, u, u} f).obj P) =\n            df'.map (eR.app P) ≫ ef'.app ((extend.{u, u, u} a.sourceMap).obj P) ≫\n              (DerivedCategory.Q.{w} (C := Modules.{u, u, u} a.S')).map\n          (CochainPullback.kappa.{u, u,\n        u, u, u} f k a k' P).hom) → b' =\n                b)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T114211-L-2273300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T114211-L-2273300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

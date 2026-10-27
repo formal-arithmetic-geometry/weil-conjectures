@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-algebraic-dolbeault-derivative-comparison",
+ "kind": "statement",
+ "title": "Algebraic cohomology and the Dolbeault derivative",
+ "statement": "Let $X$ be a smooth projective scheme over $\\mathbf C$ [def-pc-scheme], [def-sbc-smooth-morphisms], [def-pc-projective-morphism]. Its analytification $M=X^{\\mathrm{an}}$ (the space of complex points with its analytic topology and holomorphic charts) is a finite disjoint union of compact Kähler manifolds; dimensions may differ between components. A Kähler metric means a Hermitian metric whose associated real $(1,1)$-form is closed, and on $M$ one may use the restriction of the Fubini--Study metric from a projective embedding. Write $A^{p,q}(M)$ for the complex vector space of smooth complex differential forms of type $(p,q)$, with $d_{\\mathrm{an}}=\\partial+\\bar\\partial$, and put $H^{p,q}_{\\bar\\partial}(M)=\\ker(\\bar\\partial:A^{p,q}\\to A^{p,q+1})/\\operatorname{im}(\\bar\\partial:A^{p,q-1}\\to A^{p,q})$, with negative-degree spaces zero. Let $\\Omega^1_{X/\\mathbf C}$ be the sheaf obtained by gluing Kähler differential modules [def-weil-pbc-kahler-differentials], let $\\Omega^0=\\mathcal O_X$, and let $d_X:\\mathcal O_X\\to\\Omega^1_{X/\\mathbf C}$ be the universal $\\mathbf C$-linear derivation. There are canonical $\\mathbf C$-linear isomorphisms $c_{p,q}:H^q(X,\\Omega^p_{X/\\mathbf C})\\cong H^{p,q}_{\\bar\\partial}(M)$ for $p=0,1$ and all $q\\geq0$. The algebraic cohomology here is right-derived global sections in Zariski sheaves of $\\mathbf C$-vector spaces, canonically agreeing with module cohomology [pqf-def-cohomology]. For every $a\\in H^q(X,\\mathcal O_X)$ and every $\\bar\\partial$-closed $\\alpha\\in A^{0,q}(M)$ representing $c_{0,q}(a)$, one has $c_{1,q}(H^q(X,d_X)(a))=[(-1)^q\\partial\\alpha]$, using the Dolbeault resolution with differential $\\bar\\partial$ and its chain map $(-1)^q\\partial$ in resolution degree $q$.",
+ "source": {
+  "document": "literature/popa-kodaira-dimension.pdf",
+  "place": "WANTED locally: Popa, proof of Theorem 1.6.6, printed pp.26--27, algebraic cohomology identified with forms of types (0,j) and (1,j). Read online https://people.math.harvard.edu/~mpopa/271/Kodaira-posted.pdf. The comparison here makes explicit the GAGA and Dolbeault compatibility used there."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-weil-pbc-kahler-differentials",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-pc-projective-proper] $X\\to\\operatorname{Spec}\\mathbf C$ is proper, hence separated and of finite type [def-weil-proper-morphism]. $\\mathbf P^N_{\\mathbf C}=\\mathbf P(\\{0,\\dots,N\\};\\operatorname{Spec}\\mathbf C)$ [def-nagata-projective-space-base-change] is proper by [lemma-nagata-projective-space-base-change-proper]; it is smooth, since its standard opens $D_+(T_j)$ of [lem-weil-pbc-projective-space-twisting-sheaf-charts], base changed to $\\mathbf C$, are affine spaces $\\mathbf A^N_{\\mathbf C}$, smooth by [sbc-lem-affine-space-smooth], and smoothness is local on the source [lem-weil-pbc-smooth-local-on-source]. Hence [lem-sfb-smooth-analytification-cotangent] applies to the closed immersion $X\\hookrightarrow\\mathbf P^N_{\\mathbf C}$ given by projectivity and makes $M$ a closed complex submanifold of $\\mathbf P^N(\\mathbf C)$. The latter is compact as the continuous quotient of the unit sphere in $\\mathbf C^{N+1}$, hence $M$ is compact. Its connected components are open (use connected coordinate balls), so compactness gives finitely many, each compact. On an affine projective chart restrict the Fubini--Study form $\\omega=i\\partial\\bar\\partial\\log(1+\\lVert z\\rVert^2)$. Its Hermitian quadratic form, up to a positive constant, is $((1+\\lVert z\\rVert^2)\\lVert v\\rVert^2-|\\langle z,v\\rangle|^2)/(1+\\lVert z\\rVert^2)^2>0$ for $v\\ne0$ by Cauchy--Schwarz. The local potentials differ on overlaps by the logarithm of the squared norm of an invertible holomorphic transition function, whose $\\partial\\bar\\partial$ is zero. Thus these forms glue. The differential identities of [lem-sfb-dolbeault-acyclic-resolution] give $d\\omega=0$. Restriction to each holomorphic tangent subspace preserves positivity and closedness. This constructs the stated Kähler metric, also when dimensions differ.",
+   "uses": [
+    "lem-sfb-smooth-analytification-cotangent",
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "def-nagata-projective-space-base-change",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §4, Definition (4.1), Examples (4.4),(4.6), printed pp.296--297; coordinate verification expanded by the agent"
+   }
+  },
+  {
+   "text": "Let $F_0=\\mathcal O_X,F_1=\\Omega^1_{X/\\mathbf C}$. The structure sheaf has rank one, and [lem-ag-smooth-relative-differentials-finite-locally-free] says that $F_1$ is finite locally free, without constant rank. Apply [lem-sfb-gaga-derived-coherent-sections] to both. The isomorphisms of [lem-sfb-smooth-analytification-cotangent] identify their analytic sheaves with $\\Omega_M^p$, $p=0,1$. By [lem-pe-ringed-site-derived-evaluation-slice], applied on the sites of opens with ring sheaf $\\mathcal O_X$ and then with the constant ring sheaf $\\mathbf C$, both cohomology conventions identify canonically with underlying abelian sheaf cohomology. Naturality in multiplication by every $\\lambda\\in\\mathbf C$ makes these identifications complex-linear. The enough-injectives hypothesis holds by [lem-sc-ringed-space-module-sheaves-enough-injectives], for each of these ringed spaces. This justifies the module-cohomology convention in the statement without interpreting $d_X$ as O-linear.",
+   "uses": [
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-smooth-analytification-cotangent",
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "Proof of Theorem 1.6.6, printed pp.26--27; agent expansion of its GAGA--Dolbeault input"
+   }
+  },
+  {
+   "text": "By [lem-sfb-dolbeault-acyclic-resolution] the complexes $\\mathcal A_M^{p,\\bullet}$ with differential $\\bar\\partial$ are bounded-below global-section-acyclic resolutions of $\\Omega_M^p$. Apply [lem-sfb-ringed-acyclic-resolution-derived-maps] with the identity morphism of the constant-$\\mathbf C$ ringed topos of $M$; enough injectives follows from [lem-sc-ringed-space-module-sheaves-enough-injectives]. It supplies the canonical derived-resolution isomorphism $Q\\Gamma(M,\\mathcal A_M^{p,\\bullet})\\cong R\\Gamma(M,\\Omega_M^p[0])$. Compose its inverse with $g_{F_p}$ and the analytic sheaf identification from step 2. Apply the functor $H^q$ to this composite derived isomorphism; by the definition of complex cohomology its target is precisely the kernel/image quotient $H^{p,q}_{\\bar\\partial}(M)$. Here $g_{F_p}$ is read in $D^+(\\operatorname{Ab})$ through the exact forgetful functor; both derived sections are computed from injective resolutions in sheaves of $\\mathbf C$-vector spaces. For $\\lambda\\in\\mathbf C$, multiplication by $\\lambda$ on $\\Omega_M^p$ and on $\\mathcal A_M^{p,\\bullet}$ is an augmentation-preserving map of resolutions, so the identity-morphism case of [lem-sfb-ringed-acyclic-resolution-derived-maps] makes the resolution comparison commute with it; $g_{F_p}$ is $\\mathbf C$-linear, being a morphism of $D^+(\\operatorname{Vect}_{\\mathbf C})$. Hence $H^q$ of the composite is $\\mathbf C$-linear. Define $c_{p,q}$ to be this map. Thus the comparison is constructed before taking degrees, rather than by choosing individual vector-space isomorphisms.",
+   "uses": [
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-ringed-acyclic-resolution-derived-maps",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "Proof of Theorem 1.6.6, printed pp.26--27; agent expansion of its GAGA--Dolbeault input"
+   }
+  },
+  {
+   "text": "Write $j_p:F_p\\to\\pi_*\\Omega_M^p$ for the coefficient maps underlying the GAGA arrows after the cotangent identification. The last formula of [lem-sfb-smooth-analytification-cotangent] gives the equality of complex-linear sheaf maps $j_1d_X=\\pi_*(d_{\\mathrm{hol}})j_0$, checked on every local regular function. Consequently the two maps $F_0[0]\\to R\\pi_*\\Omega_M^1[0]$ agree: each is induced by that same coefficient map followed by the natural map from direct to derived pushforward. Applying $R\\Gamma$ gives $g_{F_1}R\\Gamma(d_X)=R\\Gamma(d_{\\mathrm{hol}})g_{F_0}$. This uses the actual coefficient maps defining $g$, not a claim that analytification is functorial on non-O-linear maps.",
+   "uses": [
+    "lem-sfb-smooth-analytification-cotangent",
+    "lem-sfb-gaga-derived-coherent-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "Proof of Theorem 1.6.6, printed pp.26--27; agent expansion of its GAGA--Dolbeault input"
+   }
+  },
+  {
+   "text": "Set $T^r=(-1)^r\\partial:\\mathcal A_M^{0,r}\\to\\mathcal A_M^{1,r}$. By [lem-sfb-dolbeault-acyclic-resolution], $\\bar\\partial T^r=(-1)^{r+1}\\partial\\bar\\partial=T^{r+1}\\bar\\partial$, so $T$ is a complex-linear chain map. In degree zero it extends $d_{\\mathrm{hol}}$ on the holomorphic-function augmentations. The identity-morphism case of [lem-sfb-ringed-acyclic-resolution-derived-maps] therefore identifies $Q\\Gamma(T)$ with $R\\Gamma(d_{\\mathrm{hol}})$ under the derived comparisons used to define $c$. Taking $H^q$ in this equality and in step 4 yields $c_{1,q}H^q(d_X)=[T^q]c_{0,q}$. For any closed representative $\\alpha$ this is exactly $[(-1)^q\\partial\\alpha]$. A change $\\alpha\\mapsto\\alpha+\\bar\\partial\\beta$ changes the output by $\\bar\\partial((-1)^{q+1}\\partial\\beta)$, so the formula holds for every representative. For $q=0$ the negative-degree space is zero, and for empty $M$ all the spaces vanish.",
+   "uses": [
+    "lem-sfb-dolbeault-acyclic-resolution",
+    "lem-sfb-ringed-acyclic-resolution-derived-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "Proof of Theorem 1.6.6, printed pp.26--27; agent expansion of its GAGA--Dolbeault input"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-weil-abstract-derived-category",
+  "def-weil-proper-morphism",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-pc-projective-proper",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sfb-dolbeault-acyclic-resolution",
+  "lem-sfb-gaga-derived-coherent-sections",
+  "lem-sfb-ringed-acyclic-resolution-derived-maps",
+  "lem-sfb-smooth-analytification-cotangent",
+  "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/popa-kodaira-dimension.pdf",
+  "place": "Proof of Theorem 1.6.6, printed pp.26--27. Expanded from online Popa, Serre GAGA §§11--12, Demailly IV §6 and VI §4, and local Stacks Tags 015E, 0D6E, 01F1; the three analytic documents are WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Dolbeault|GAGA|analytification|FubiniStudy|Fubini.Study",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract sheaf cohomology and ring derivations do not give GAGA/Dolbeault comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "GAGA comparison for coherent cohomology and holomorphic differential forms",
+   "results": "OK 8 hits: Algebra.formallySmooth_iff, groupCohomology.comp_d₀₁_eq, Algebra.formallyEtale_iff, Algebra.FormallySmooth.iff_subsingleton_and_projective, groupCohomology.cocyclesIso₀_hom_comp_f, Algebra.FormallySmooth.subsingleton_h1Cotangent, ContinuousCohomology.MultiInd.complex, CommRingCat.KaehlerDifferential.map. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract sheaf cohomology and ring derivations do not give GAGA/Dolbeault comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Dolbeault\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract sheaf cohomology and ring derivations do not give GAGA/Dolbeault comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic sheaf cohomology of differential forms over complex numbers is identified with Dolbeault cohomology compatibly with the exterior derivative",
+   "results": "OK 8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.HomComplex.leftHomologyData'_H_coe, groupCohomology.isoShortComplexH1, groupCohomology.isoShortComplexH1_hom, groupCohomology.isoShortComplexH2, groupCohomology.comp_d₀₁_eq, groupCohomology.dArrowIso₀₁, groupCohomology.isoShortComplexH2_hom. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract sheaf cohomology and ring derivations do not give GAGA/Dolbeault comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebraic de Rham differential corresponds to partial on the Dolbeault resolution of a smooth projective complex variety",
+   "results": "OK 8 hits: Algebra.H1Cotangent.δ, Algebra.Generators.H1Cotangent.δAux, Algebra.Generators.H1Cotangent.δ_eq_δAux, KaehlerDifferential.D, CommRingCat.KaehlerDifferential.d, Algebra.Extension.toKaehler, CommRingCat.KaehlerDifferential.D, KaehlerDifferential.quotKerTotalEquiv_symm_comp_D. ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract sheaf cohomology and ring derivations do not give GAGA/Dolbeault comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic coherent cohomology on a projective complex scheme agrees with analytic Dolbeault cohomology compatibly with the universal derivation",
+   "results": "OK 8 hits: Algebra.FormallySmooth.projective_kaehlerDifferential, Algebra.FormallySmooth.iff_subsingleton_and_projective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk, Algebra.formallySmooth_iff, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, groupCohomologyIso, CategoryTheory.Sheaf.cohomologyPresheaf, groupCohomologyIsoExt. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic ring derivations and abstract cohomology do not supply GAGA or Dolbeault comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|GAGA|analytification|FubiniStudy|Fubini.Study",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic ring derivations and abstract cohomology do not supply GAGA or Dolbeault comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "GAGA comparison for coherent cohomology and holomorphic differential forms",
+   "results": "OK 8 hits: Algebra.formallySmooth_iff, groupCohomology.comp_d₀₁_eq, Algebra.formallyEtale_iff, Algebra.FormallySmooth.iff_subsingleton_and_projective, groupCohomology.cocyclesIso₀_hom_comp_f, Algebra.FormallySmooth.subsingleton_h1Cotangent, ContinuousCohomology.MultiInd.complex, CommRingCat.KaehlerDifferential.map. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic ring derivations and abstract cohomology do not supply GAGA or Dolbeault comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Dolbeault\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic ring derivations and abstract cohomology do not supply GAGA or Dolbeault comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The algebraic de Rham differential is computed by the signed holomorphic derivative on a Dolbeault resolution",
+   "results": "OK 8 hits: Algebra.Generators.H1Cotangent.δAux, KaehlerDifferential.D, CommRingCat.KaehlerDifferential.d, CommRingCat.KaehlerDifferential.D, KaehlerDifferential.derivationQuotKerTotal, KaehlerDifferential.DLinearMap, KaehlerDifferential.derivationTensorProduct, KaehlerDifferential.derivationQuotKerTotal_apply. ",
+   "date": "2026-10-24",
+   "verdict": "no match: algebraic ring derivations and abstract cohomology do not supply GAGA or Dolbeault comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hodge-first-differential-zero",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative.",
+   "via": [
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algebraic-dolbeault-derivative-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the comparison as a composite of derived GAGA and the Dolbeault acyclic-resolution comparison. Kept the statement unchanged. Proved the non-O-linear derivative square directly on coefficient sheaves and checked the signed resolution chain map and independence of representatives. Created three strictly smaller analytic inputs and reused existing scalar-forgetting, differential local-freeness, and resolution-naturality nodes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Algebraic cohomology and the Dolbeault derivative. The current latest blueprint direct-images proof (3) uses direct-image constructibility; this inherited Popa prerequisite realizes its existing algebraic-Dolbeault support chain. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "Generic smooth-cotangent finite-local-freeness theorem, with variable rank; needed to apply GAGA to Omega^1."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic scalar-forgetting comparison applied on sites of opens to reconcile module and complex-linear cohomology; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Generic enough-injectives theorem for ringed spaces, applied to constant C coefficients on X and M."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Step 1 takes only projective implies proper, hence separated and finite type, to apply the analytification node to X."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Step 1 takes only properness of P^N over C (separated, finite type) to apply the analytification node to the projective embedding."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "why": "Step 1 takes only the standard affine charts of projective space to see that P^N_C is smooth."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Step 1 takes only smoothness of affine space over C for the standard charts of P^N_C."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-pc-projective-proper",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-50a6ae1a0",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-50a6ae1a0 (reviewer sub-agent of L); spot-checked: Read the item and all three new nodes in full, every cited statement, the parent hodge-first-differential-zero (step 2 is its only citer) and the unit route; Popa, Serre GAGA and Demailly are WANTED and not local, the item's proof_origin is agent, and I checked against the standard results. The statement is true, unchanged and as the parent uses it. The sign (-1)^q is forced, because plain ∂ anticommutes with ∂̄ and is not a chain map. Small cases checked: empty, P^1, elliptic curve, q=0, q>dim. Fubini-Study: positivity, overlap gluing and dω=0 checked. Step-4 sheaf square j_1 d_X = π_*(d_hol) j_0 and the step-5 identity-case resolution naturality checked; the result is independent of the representative. Two repairs plus one clarification. (1) C1, step 1: it applied the analytification node to X ↪ P^N_C without showing that X and P^N_C are separated, finite type and smooth. I added lem-pc-projective-proper, def-weil-proper-morphism, lemma-nagata-projective-space-base-change-proper, def-nagata-projective-space-base-change, lem-weil-pbc-projective-space-twisting-sheaf-charts, sbc-lem-affine-space-smooth and lem-weil-pbc-smooth-local-on-source, set the step to elementary=false, and declared the four off-route tools in split_report.tool_uses. (2) E5, step 3: it composed a D^+(Ab) resolution comparison with g_F in D^+(Vect_C) and never justified the asserted C-linearity of c_{p,q}. I added the forgetful-functor reading, plus scalar naturality from the identity case of lem-sfb-ringed-acyclic-resolution-derived-maps. (3) Clarification: the cotangent node now states that (O_X)^an ≅ O_M is h⊗f ↦ h f^an, which step 4 needs. lem-pe-ringed-site-derived-evaluation-slice is on route because the unit uses sk-prop-sf-comparison; the declared tool uses for lem-ag-smooth-relative-differentials-finite-locally-free and lem-sc-ringed-space-module-sheaves-enough-injectives are accepted. A DAG-wide search for GAGA, analytif, Dolbeault and holomorphic found no duplicates. No SGA source is used, and no new node restates the item.; 2 file(s) fixed by the reviewer"
+ }
+}

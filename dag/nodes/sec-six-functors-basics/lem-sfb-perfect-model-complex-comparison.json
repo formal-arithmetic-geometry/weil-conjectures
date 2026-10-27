@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-perfect-model-complex-comparison",
+ "kind": "statement",
+ "title": "Cochain comparison of the two completed coefficient models",
+ "statement": "Let X be a scheme [def-pc-scheme], A a commutative ring, I an ideal and P any cochain complex [def-weil-abstract-derived-category]. Write F for the small-site module precomposition of [def-sfb-adic-stratified-perfect-data]. The F-image of the actual termwise completed constant complex is isomorphic, as a cochain complex, to termwise restriction along the canonical ring isomorphism [lem-sfb-completion-ring-comparison] of AdicPerfectModel.model from [lem-sfb-adic-perfect-model-complete-reduction]. The assertion is Nonempty of a cochain isomorphism; it contains no localization or completeness predicate or assumptions.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 reverse implication, completed coefficient model calculation; equivalent-site sheafification and scalar-extension presentation of the same model"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-abstract-derived-category",
+  "def-sfb-adic-stratified-perfect-data",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "lem-sfb-completion-ring-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Precomposition along AsSmall.down commutes with module sheafification. Whisker the module-sheafification unit to obtain a presheaf module morphism; extend it by the small-site module-sheafification adjunction. After forgetting to abelian sheaves this is exactly Mathlib pushforwardContinuousSheafificationCompatibility, as follows by its unit equation and the sheafification Hom equivalence. It is therefore invertible. Naturality follows from the abelian-sheaf comparison and faithfulness.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-sfb-completion-ring-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-ring isomorphism carries the transported constant-ring sheafification unit to the normalized unit: apply toSheafify_pullbackSheafificationCompatibility and cancel the comparison with its inverse. The actual constant-module presheaf, transported to the small site, is the normalized constant-module presheaf, by the sectionwise identity. Apply step 1 and the existing moduleSheafificationComparison under the normalized ring-unit square. This gives a natural isomorphism from transported actual constant modules to restriction of normalized constant modules along sfbModelConstantsIso.hom.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-sfb-adic-stratified-perfect-data",
+    "lem-sfb-completion-ring-comparison",
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The object and map equalities of completedAdicChangeData identify actual scalar extension with sectionwise scalar extension followed by module sheafification. On the equivalent site its tensor presheaf is isomorphic to the scalar-extension presheaf of the transported module, by the identity on pure tensors. The restrictions agree by changeOfRingsMap_tmul and the morphism maps agree by extendScalars.map_tmul. Apply step 1 to obtain the natural comparison of transported scalar extension with scalar extension along the transported ring map.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-sfb-adic-stratified-perfect-data",
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transported actual base map followed by sfbModelCompletionIso.hom equals sfbModelConstantsIso.hom followed by the normalized coefficient map. Test this equality against every positive finite projection; use sfbModelCompletionIso_projection, the defining projection equations of CompletedConstantReduction.base, and naturality of sfbModelConstantsIso on the quotient map. Restriction along a ring isomorphism is an equivalence, with inverse restriction along its inverse. Uniqueness of left adjoints identifies extension along the inverse with this restriction. The existing scalarChangeComp then transports extension across the preceding commutative ring square.",
+   "uses": [
+    "lem-sfb-completion-ring-comparison",
+    "def-sfb-adic-stratified-perfect-data",
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker and compose the natural isomorphisms of steps 2--4 to compare the two completed-realization functors on coefficient modules. Apply its components to P.X q. Its naturality equation for P.d i j is precisely the differential square for HomologicalComplex.Hom.isoOfComponents. This constructs the asserted isomorphism before localization, without boundedness, perfectness, Noetherianity or a completeness assumption. Every step also applies to zero rings, I=0, I=A and empty X.",
+   "uses": [
+    "def-sfb-adic-stratified-perfect-data",
+    "lem-sfb-adic-perfect-model-complete-reduction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-completion-ring-comparison",
+  "def-weil-pbc-sheafification",
+  "def-sfb-adic-stratified-perfect-data",
+  "lem-sfb-adic-perfect-model-complete-reduction"
+ ],
+ "proof_origin": {
+  "by": "A6 stage 3",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11 coefficient-model calculation; explicit equivalent-site module sheafification and tensor comparison, followed by scalar-extension adjunction uniqueness and the cochain naturality squares."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of ringed sites identifies the scalar extended constant complex after localization in the derived category",
+   "results": "Eight generic derived-category hits, including mapDerivedCategory and the localization functor; no identification of these completed coefficient complexes.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryFactors",
+   "results": "Unknown identifier in the remote Mathlib index. Local project search finds the exact-functor factor API and equivalent-site module comparison helpers.",
+   "date": "2026-10-26",
+   "verdict": "Use project APIs; no ready-made model identification."
+  },
+  {
+   "tool": "grep",
+   "query": "sfbCompletedModel|sfbModelCompletionIso|pushforwardContinuousSheafificationCompatibility",
+   "results": "Mathlib has the generic continuous-pushforward/sheafification compatibility. Project rg finds sfbCompletedModel and the assigned completion theorem, but no complex comparison with its required AsSmall universe.",
+   "date": "2026-10-26",
+   "verdict": "Generic sheafification comparison is reused."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfbPerfectModelCompletionTransport",
+  "date": "2026-10-26",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-perfect-model-completion-transport",
+   "place": "Steps 1--2: ring/projection comparison and derived complex identification.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfbPerfectModelComplexComparison",
+  "file": "lean/Sheaf/Paper/SfbPerfectModelComplexComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbPerfectModel_complex_comparison",
+  "statement": "theorem sfbPerfectModel_complex_comparison (X : Scheme.{u})\n    (A : Type (u + 1)) [CommRing A] (I : Ideal A)\n    (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) :\n    let F := proEtaleModuleToModel.{u} (X := X)\n      ((adicLisseForget.{u} X).obj (adicLisseCompletedRing X I))\n    Nonempty\n      (((F.mapHomologicalComplex (.up ℤ)).obj\n        (((completedAdicChange X (CompletedConstantReduction.base X I)).mapHomologicalComplex\n          (.up ℤ)).obj ((CompletedConstantReduction.constantComplex X A).obj P))) ≅\n        (((ConstantCompletion.res (sfbModelCompletionIso X I).hom).mapHomologicalComplex\n          (.up ℤ)).obj\n            (AdicPerfectModel.model (coefficientProEtaleModelTopology.{u, 0} X) I P)))",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261025T212737-L-226304",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T000924-L-4147810",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

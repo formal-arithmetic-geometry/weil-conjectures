@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-limit-test-surjective-representable",
+ "kind": "statement",
+ "title": "Surjectivity of a representable morphism can be tested on finite presentation affines",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention]. Let $f:\\mathcal F\\to\\mathcal G$ be a morphism over $S$-schemes of categories fibred in groupoids (categories with cartesian lifts along every base map and groupoid fibres). Suppose $f$ is representable by algebraic spaces [def-trf-algebraic-space]: for each $S$-scheme $T$ and $y\\in\\mathcal G(T)$, the $2$-fibre product $\\mathcal F\\times_{\\mathcal G}h_T$, whose objects are triples $(a,t,\\alpha:f(a)\\cong y|_t)$, is an algebraic space $W_y$ over $T$. Here $h_T$ is the groupoid of maps into $T$, with only identity arrows. Assume $\\mathcal G$ is limit preserving on objects: for every small directed inverse system of affine $S$-schemes $T_i$ with limit $T$, every object of $\\mathcal G(T)$ is isomorphic to the pullback of an object of some $\\mathcal G(T_i)$. If $W_y\\to T$ is surjective for every affine $S$-scheme $T$ locally of finite presentation [def-sbc-locally-finite-presentation] and every $y\\in\\mathcal G(T)$, then $W_y\\to T$ is surjective for every $S$-scheme $T$ and every $y\\in\\mathcal G(T)$. Surjectivity here means surjectivity on points, where points of an algebraic space are field-valued maps modulo common field extensions [lem-trf-space-fibre-products-etale-covers].",
+ "source": {
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 07WI (lemma-check-property-limit-preserving), for the property surjective."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-fibred-groupoid-limit-preserving",
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof": [
+  {
+   "text": "First record the formal base-change identification used below. For an $S$-map $u:T'\\to T$, an object $y\\in\\mathcal G(T)$ and an isomorphism $\\sigma:u^*y\\cong y'$, one has $W_{y'}\\cong W_y\\times_TT'$ over $T'$; the right side exists by [lem-trf-space-fibre-products-etale-covers]. Indeed, on a test $v:Z\\to T'$, compose an isomorphism $\\alpha:f(a)\\cong v^*y'$ with $(v^*\\sigma)^{-1}$ to obtain $f(a)\\cong(uv)^*y$. Composition with $v^*\\sigma$ reverses this operation, on both objects and arrows. These operations commute with pullback (using the cartesian-lift identifications), so they identify the two represented functors on test schemes. Morphisms of algebraic spaces are natural transformations by [def-trf-algebraic-space], so the inverse transformations give the asserted isomorphism, with the projection to $T'$ unchanged.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 07WI (lemma-check-property-limit-preserving), last sentence: the identity F_y = F_{y_i} times_{V_i} V; formal identification expanded on test objects"
+   }
+  },
+  {
+   "text": "For now let $V=\\operatorname{Spec}A$ be affine, with structure map factoring through an affine open $U=\\operatorname{Spec}R\\subseteq S$, so that $A$ is an $R$-algebra. Following the second proof of Stacks 00QN, let $I$ be the set of pairs $(E,K)$ with $E\\subseteq A$ finite and $K\\subseteq R[X_e;e\\in E]$ a finite set of polynomials vanishing under $X_e\\mapsto e$, ordered by $(E,K)\\le(E',K')$ iff $E\\subseteq E'$ and $K\\subseteq K'$ inside $R[X_e;e\\in E']$. It is a subset of a set built from $A$, hence small; $(\\emptyset,\\emptyset)\\in I$, and $(E\\cup E',K\\cup K')$ bounds two pairs, so $I$ is a nonempty directed set. Put $A_{(E,K)}=R[X_e;e\\in E]/(K)$, finitely presented over $R$, with the $R$-algebra maps $X_e\\mapsto e$ to $A$ and $X_e\\mapsto X_e$ between the stages; they are compatible. Write $i=(E,K)$ and $A_i=A_{(E,K)}$ below. This is a colimit in $R$-algebras [def-weil-pbc-category-colimit]. Given compatible $R$-algebra maps $b_{(E,K)}:A_{(E,K)}\\to B$, put $\\phi(a)=b_{(\\{a\\},\\emptyset)}(X_a)$; compatibility gives $b_{(E,K)}(X_e)=\\phi(e)$ for all $e\\in E$. The stages $(\\{a,a',a+a',aa'\\},\\{X_{a+a'}-X_a-X_{a'},X_{aa'}-X_aX_{a'}\\})$, $(\\{1\\},\\{X_1-1\\})$ and $(\\{a,ra\\},\\{X_{ra}-rX_a\\})$ show that $\\phi$ is an $R$-algebra map, and then $\\phi$ composed with $A_{(E,K)}\\to A$ agrees with $b_{(E,K)}$ on the generators $X_e$. Any compatible $u:A\\to B$ has $u(a)=b_{(\\{a\\},\\emptyset)}(X_a)=\\phi(a)$, which gives uniqueness. The index set is chosen explicitly because the hypothesis on $\\mathcal G$ is stated for small directed systems.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QN (lemma-ring-colimit-fp), second proof: the directed set of pairs (S, E) and the algebras A_{S,E}; the colimit check that Stacks calls clear is written out"
+   }
+  },
+  {
+   "text": "The same cocone is a colimit in commutative rings. To check its universal property [def-weil-pbc-category-colimit], take any compatible ring maps $b_i:A_i\\to B$. Their composites $R\\to B$ agree, since any two indices have a common upper bound and all transition maps are $R$-linear; nonemptiness supplies one such composite. Equip $B$ with this $R$-algebra structure. The $R$-algebra colimit property from step 2 gives a unique compatible map $A\\to B$. Conversely any compatible ring map $A\\to B$ must induce this same map on $R$, by factoring $R\\to A$ through any $A_i$, so uniqueness also holds among ring maps.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QN (lemma-ring-colimit-fp), its directed algebra-colimit presentation viewed as a ring colimit; universal-property verification"
+   }
+  },
+  {
+   "text": "Put $V_i=\\operatorname{Spec}A_i$. By [lem-weil-pbc-spec-colimit-limit], the scheme $V$ with its actual projections is the inverse limit of the affine schemes $V_i$. All maps are over $U$, hence over $S$, because the ring maps are $R$-algebra maps. The scheme-limit universal property also holds over $S$: any factorization through $V$ respects its $S$-structure after composing with any one projection, and the directed index set is nonempty. Each $V_i\\to S$ is locally of finite presentation by [def-sbc-locally-finite-presentation]: at every point use the whole affine source $V_i$, the affine open $U$ of the original target $S$, and the finitely presented ring map $R\\to A_i$. In particular no quasi-separatedness or quasi-compactness assumption on $S$ is being used.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 07WI (lemma-check-property-limit-preserving), affine inverse-limit presentation; Limits Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); finite-presentation chart from Morphisms Tag 01TP (definition-finite-presentation)"
+   }
+  },
+  {
+   "text": "Let $y\\in\\mathcal G(V)$. The limit-preserving-on-objects hypothesis now gives an index $i$, an object $y_i\\in\\mathcal G(V_i)$ and an isomorphism $p_i^*y_i\\cong y$. The representability hypothesis gives the algebraic space $W_{y_i}$ over $V_i$. Since $V_i$ is affine and locally of finite presentation over $S$, the test hypothesis says precisely that $W_{y_i}\\to V_i$ is surjective on point classes. Step 1 identifies $W_y\\to V$ with the base change of this morphism along $p_i:V\\to V_i$. Only descent of this single object is needed: no full faithfulness on arrows and no limit preservation of $\\mathcal F$ is assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 07WI (lemma-check-property-limit-preserving), proof: y comes from y_i by (2), and F_{y_i} to V_i has the property by (3)"
+   }
+  },
+  {
+   "text": "Prove this base change is surjective directly with the point convention of [lem-trf-space-fibre-products-etale-covers]. Represent a point of $V$ by $a:\\operatorname{Spec}K\\to V$. Surjectivity of $W_{y_i}\\to V_i$ gives a representative $b:\\operatorname{Spec}L\\to W_{y_i}$ whose image point is the point of $p_i a$. Equality of these point classes means that after maps from $K$ and $L$ into a common extension field $M$, the two maps to $V_i$ agree. Thus $(b|_M,a|_M)$ is an $M$-valued point of $W_{y_i}\\times_{V_i}V$, and its projection represents the original point of $V$. Step 1 gives the required point of $W_y$. This proves the assertion whenever $V$ is affine and maps into an affine open of $S$; if $V$ has no points the same surjectivity assertion is vacuous.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), common-field-extension proof; Tag 03BU (definition-points). This expands base-change stability used at the end of Tag 07WI"
+   }
+  },
+  {
+   "text": "Finally take an arbitrary $S$-scheme $T$ and $y\\in\\mathcal G(T)$. Represent any point class of $T$ by $a:\\operatorname{Spec}K\\to T$, with image $t$. Apply [lem-weil-pbc-affine-opens-basis] first on $S$ to choose an affine open $U$ containing the image of $t$, and then on $T$ to choose an affine open $V$ with $t\\in V\\subseteq T\\times_SU$. Since $\\operatorname{Spec}K$ has one point, its map factors through $V$ by the open-subscheme description in [def-weil-open-immersion]. Steps 2-6 applied to $y|_V$ give a point of $W_{y|_V}$ above the resulting point of $V$. Step 1 identifies this space with $W_y\\times_TV$; its projection to $W_y$ therefore gives a point above the original point of $T$. Every point has been lifted, proving surjectivity. This includes the empty $T$, for which there is no point to lift, and does not require affine intersections or a finite covering.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/criteria.tex",
+    "place": "Tag 07WI (lemma-check-property-limit-preserving), first affine reduction, here expanded at the end on field-valued points using Schemes Tag 01IT (lemma-basis-affine-opens)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space",
+  "def-weil-open-immersion",
+  "def-weil-pbc-category-colimit",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/criteria.tex",
+  "place": "Tag 07WI (lemma-check-property-limit-preserving), surjectivity specialization; approximation via the second proof of Algebra Tag 00QN; pointwise base-change argument from spaces-properties.tex Tag 03H4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of categories fibred in groupoids representable by algebraic spaces is surjective if it is surjective after every test by an affine scheme of finite presentation and the target is limit preserving on objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on morphism properties in the category of schemes, asserting that the property is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i))\\n  [CategoryTheory.Presheaf.IsLocallySurjective\", \"doc\": \"The morphism from the Yoneda embedding of a glued scheme constructed via Zariski gluing data to a sheaf is locally surjective with respect to the Zariski topology. This means that for every scheme, th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"For any morphisms $f : X \\\\to S$ and $g : Y \\\\to S$ in the category of schemes, the comparison morphism induced by the forgetful functor from schemes to types is surjective. This means that every compat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Function.Surjective (CategoryTheory.Limits.pullbackComparison AlgebraicGeometry.Scheme.forget f g)\", \"doc\": \"The function obtained by applying the forgetful functor from the category of schemes to the category of sets to the pullback comparison morphism is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P\", \"doc\": \"In the category of schemes, a morphism property is preserved under jointly surjective families of morphisms. This means that if a property holds for each morphism in a jointly surjective family, then \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.surjective_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Surjective f ↔ Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is surjective if and only if the underlying continuous map between their topological spaces is surjective.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme surjectivity, Yoneda limits and Zariski local representability do not state this descent test for a representable morphism of fibred groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Check surjectivity of a representable natural transformation on finitely presented affine test schemes using descent of objects from filtered limits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.Surjective (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"The canonical morphism from the affine space $\\\\mathbb{A}^n_S$ to the base scheme $S$ is surjective, meaning its underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val}\\n  (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i))\\n  [CategoryTheory.Presheaf.IsLocallySurjective\", \"doc\": \"The morphism from the Yoneda embedding of a glued scheme constructed via Zariski gluing data to a sheaf is locally surjective with respect to the Zariski topology. This means that for every scheme, th\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme surjectivity, Yoneda limits and Zariski local representability do not state this descent test for a representable morphism of fibred groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRepresentable\", \"Surjective\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme surjectivity, Yoneda limits and Zariski local representability do not state this descent test for a representable morphism of fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "limitPreserving|limit_preserving|surjective.*[Rr]epresentable|[Rr]epresentable.*surjective",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme surjectivity, Yoneda limits and Zariski local representability do not state this descent test for a representable morphism of fibred groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of representable morphisms of fibered groupoids can be tested on finitely presented affine schemes when objects descend from inverse limits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.Surjective f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map on topological spaces is surjective, then $ f $ is a surjective morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isFinitelyPresentable\", \"module\": \"Mathlib.CategoryTheory.Presentable.Finite\", \"type\": \": MorphismProperty C\", \"doc\": \"A morphism $ f $ in a category $ \\\\mathcal{C} $ is said to be finitely presentable if the corresponding object $ (Y, f) $ in the under category $ \\\\mathcal{C}\\\\downarrow X $ is finitely presentable, mean\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"CategoryTheory.Functor.representable_preservesLimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Yoneda\", \"type\": \"(G : J ⥤ Cᵒᵖ) : PreservesLimit G F\", \"doc\": \"Every representable contravariant functor from a category $\\\\mathcal{C}$ to the category of types preserves limits of diagrams in $\\\\mathcal{C}$. This means that if a diagram in $\\\\mathcal{C}$ has a limi\"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.SurjectiveOnStalks\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme surjectivity, Yoneda limits and Zariski local representability do not state this descent test for a representable morphism of fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "limitPreserving|limit_preserving|surjective.*[Rr]epresentable|[Rr]epresentable.*surjective",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or Zariski sheaf representability, not the object-descent criterion for representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRepresentable\", \"Surjective\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or Zariski sheaf representability, not the object-descent criterion for representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable morphism of categories fibred in groupoids is surjective if its target preserves objects over directed affine inverse limits and it is surjective on finitely presented affine tests",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective, AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, CategoryTheory.extensiveTopology.surjective_of_isLocallySurjective_sheaf_of_types",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or Zariski sheaf representability, not the object-descent criterion for representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of a representable morphism of fibered groupoids can be tested on affine schemes locally of finite presentation when target objects descend from directed limits",
+   "results": "OK 8 hits: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.surjective_isZariskiLocalAtTarget, AlgebraicGeometry.Surjective, AlgebraicGeometry.SurjectiveOnStalks.mk, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_surjective, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.targetAffineLocally, AlgebraicGeometry.affineLocally",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or Zariski sheaf representability, not the object-descent criterion for representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Check that a natural transformation represented by algebraic spaces is surjective by descending objects to finitely presented affine schemes in a filtered inverse limit",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.specTargetImageRingHom_surjective, AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective, AlgebraicGeometry.surjective_iff, AlgebraicGeometry.Surjective",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or Zariski sheaf representability, not the object-descent criterion for representable morphisms of fibred groupoids"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-representable-diagonal-criterion",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: middle paragraph of the proof of Tag 07Y4: reduce surjectivity to affine schemes locally of finite presentation over the base.",
+   "via": [
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-limit-test-surjective-representable",
+  "worker": "stage1",
+  "summary": "Split Stacks 07WI for surjectivity in seven explicit steps using an explicit small directed finite-presentation approximation (second proof of Algebra 00QN), the spectrum-limit and affine-basis nodes. The ring/algebra colimit comparison, representable base-change identification and common-field-extension argument are expanded. Repair of the 2026-10-22 16:13 UTC landing return at acc0d2761f5: reconstructed from the current live unsplit node, preserving all inherited fields and retaining only the six split-owned fields from the returned sandbox. Read every current cited statement; all nine proof-dependency statements and all ten verbatim quotes remain unchanged, so no hypothesis or mathematical argument requires alteration. Read the source and retained search results, and repeated the project attachment search. Initial current-base dry run 289f661802d passed; final dry run and direct push follow the saved audit. Audit time: 2026-10-23T04:27:58+00:00. No new nodes or Mathlib leaves. Reviewer repair (re-applied, 5th head): step 2 uses the small directed set of pairs (E,K) from the second proof of 00QN, because lem-weil-pbc-filtered-category-directed-cofinal gives only a nonempty directed set, while the hypothesis on G covers small directed systems.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: middle paragraph of the proof of Tag 07Y4: reduce surjectivity to affine schemes locally of finite presentation over the base. Steps 1-7 realize exactly this finite-presentation test reduction. The existing ancestry has null from.node because created.item eventually names a Lean module rather than a DAG node; the inherited via list and full place are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Existence of sheaf fibre products of algebraic spaces and explicit field-point convention for the elementary base-change argument; the unit has no replacement definition/construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NS-6ae739cb3",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-6ae739cb3 (reviewer sub-agent of L); spot-checked: Fifth head of this delivery; 5d1ad983, a14ad758, 77ac3ed0 and acc0d276 were each FIXed. Against acc0 only split_report.date and split_report.summary changed, so the reviewer's step-2 repair was lost a fourth time and I re-applied it. Source checks: I reread Stacks 07WI in criteria.tex (statement and proof) and the second proof of Algebra 00QN. The statement is the P=surjective case of 07WI over an arbitrary S: f representable by algebraic spaces, object-only limit preservation for small directed affine systems, affine lfp tests, and surjectivity on field-point classes. The statement is unchanged; there are no new nodes, no repair note and no SGA citation. Steps 1 and 3-7 are correct: step 1 composes with (v^*sigma)^{-1} in the right direction; step 3 identifies the ring colimit with the R-algebra colimit; step 4 uses spec-colimit-limit with V_i over U as the lfp chart; step 6 is the 03H4 common-extension argument and does not use the etale clause; step 7 takes an affine open in S and then an affine V inside T x_S U. Edge cases checked: empty T, A=0, f=id, empty F. Fault C3/C4 in step 2: it claims a SMALL directed system, but the current lem-weil-pbc-filtered-category-directed-cofinal gives only 'a nonempty directed set', while the hypothesis on G covers only small directed systems. FIX: step 2 uses the 00QN index set of pairs (E,K), which is small, nonempty and directed. The colimit universal property is written out and checked, including the cases a=a' and a'=0; the step cites def-weil-pbc-category-colimit and is elementary. The two pbc nodes are removed from uses, proof_deps and tool_uses; proof_deps equals the union of the step uses; proof_origin names 00QN. The summary records the repair. Accepted tool_use: lem-trf-space-fibre-products-etale-covers, used only for fibre products and the point convention. Maintainer note: this repair has now been lost on four re-deliveries; land the fix file, not the delivered head.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LimitTestSurjectiveRepresentable",
+  "declaration": "CategoryTheory.surjective_of_affine_locallyOfFinitePresentation_tests",
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitTestSurjectiveRepresentable.lean",
+  "statement": "theorem surjective_of_affine_locallyOfFinitePresentation_tests {S : Scheme.{u}} {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)} (hF : IsFibredInGroupoids F) (hG : IsFibredInGroupoids G) (f : BasedFunctor F G) (hf : IsRepresentableByAlgebraicSpaces f) (hLimits : FibredGroupoidLimit.ObjectsDescend G) (hTests : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) G), IsAffine T.left → LocallyOfFinitePresentation T.hom → ∀ (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange f T t Z p → AlgebraicSpace.IsJointlySurjective (fun _ : Unit ↦ p)) : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) G) (Z : AlgebraicSpace S) (p : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange f T t Z p → AlgebraicSpace.IsJointlySurjective (fun _ : Unit ↦ p)",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed fibred-groupoid and object-descent interfaces and singleton joint surjectivity on field-valued point classes. Tests every algebraic-space presentation over T; presentation independence follows from equivalence over the test scheme. No descent of arrows or stack condition is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4dc469a1b",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read Stacks 07WI and the declarations IsFibredInGroupoids, moduliTwoFiberProduct, HasSpaceBaseChange, IsRepresentableByAlgebraicSpaces, discreteModuli, FibredGroupoidLimit.ObjectsDescend and AlgebraicSpace.IsJointlySurjective. Each clause matches: arbitrary S, both categories fibred in groupoids, f representable with the real projection p, object-only descent along small directed affine limits, affine locally finitely presented tests, surjectivity on field-point classes. Quantifying over all presentations (Z,p) is equivalent to the node's claim, since presentations are unique up to an isomorphism over T and hf gives existence. Against live, only lean and stmt_deps changed; the three added stmt_deps are landed nodes with Lean records on base; dependency node files are byte-identical to live; lean.statement is verbatim in the file. Edge cases (empty T, S or F; one-element system; zero ring; non-qc/qs S; universes) are fine. No definitions, proof is sorry, docstrings carry source place, blueprint tag and seven proof steps, all variables bound, no existing duplicate found. Not recompiled per instruction; no findings."
+ }
+}

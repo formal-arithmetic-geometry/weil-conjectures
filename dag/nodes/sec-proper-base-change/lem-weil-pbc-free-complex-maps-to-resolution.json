@@ -97,7 +97,32 @@
   "item": "lem-weil-pbc-residue-field-pd-ge-embedding-dimension",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "free_complex_maps_to_resolution"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "free_complex_maps_to_resolution",
+     "module": "WeilConjectures.AlgebraicGeometry.FreeComplexMapsToResolution",
+     "lines": [
+      28,
+      68
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -141,5 +166,37 @@
   "landing": "20261013T100201-L-2497170",
   "kind": "interface",
   "note": "independent Codex review: Matched the corrected node and recorded interface with Lean, checked the sole direct importer and forced adaptation, and verified compilation and axioms."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a commutative ring and $\\varphi:M\\to N$ a homomorphism of $R$-modules. Let $\\cdots\\to N_2\\xrightarrow{\\partial_2}N_1\\xrightarrow{\\partial_1}N_0\\xrightarrow{\\eta}N\\to0$ be an exact sequence of $R$-modules (a resolution of $N$; finitely many $N_i$ may be nonzero). Let $\\cdots\\to F_2\\xrightarrow{\\delta_2}F_1\\xrightarrow{\\delta_1}F_0\\xrightarrow{\\pi}M$ be $R$-linear maps with $\\delta_{i-1}\\circ\\delta_i=0$ for $i\\ge2$ and $\\pi\\circ\\delta_1=0$ (a complex over $M$, not necessarily exact), every $F_i$ being a free $R$-module. Then there are $R$-linear maps $\\alpha_i:F_i\\to N_i$ ($i\\ge0$) with $\\eta\\circ\\alpha_0=\\varphi\\circ\\pi$ and $\\partial_i\\circ\\alpha_i=\\alpha_{i-1}\\circ\\delta_i$ for all $i\\ge1$.",
+  "proof": [
+   {
+    "text": "Base degree. Exactness of the target at $N$ makes $\\eta:N_0\\to N$ surjective. Since $F_0$ is free, it is projective. Apply the lifting property of projective modules to the surjection $\\eta$ and the linear map $\\varphi\\pi:F_0\\to N$. This gives $\\alpha_0:F_0\\to N_0$ with $\\eta\\alpha_0=\\varphi\\pi$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "First differential. Put $g_1=\\alpha_0\\delta_1:F_1\\to N_0$. The calculation $\\eta g_1=\\varphi\\pi\\delta_1=0$ shows that $g_1$ factors as a linear map $\\bar g_1:F_1\\to\\ker\\eta$, explicitly $x\\mapsto g_1(x)$ with its kernel-membership just checked. Exactness at $N_0$ says $\\operatorname{im}\\partial_1=\\ker\\eta$, so $q_1:N_1\\to\\ker\\eta$, $y\\mapsto\\partial_1(y)$, is surjective. The projectivity of the free module $F_1$ gives $\\alpha_1$ with $q_1\\alpha_1=\\bar g_1$. Composing with the inclusion $\\ker\\eta\\hookrightarrow N_0$ gives $\\partial_1\\alpha_1=\\alpha_0\\delta_1$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Inductive extension. Suppose $n\\ge1$ and maps $\\alpha_0,\\ldots,\\alpha_n$ have been chosen satisfying the augmentation identity and $\\partial_i\\alpha_i=\\alpha_{i-1}\\delta_i$ for $1\\le i\\le n$. Set $g_{n+1}=\\alpha_n\\delta_{n+1}$. Then $\\partial_n g_{n+1}=\\partial_n\\alpha_n\\delta_{n+1}=\\alpha_{n-1}\\delta_n\\delta_{n+1}=0$. Thus $g_{n+1}$ defines a linear map $\\bar g_{n+1}:F_{n+1}\\to\\ker\\partial_n$ by the same elementwise formula. Exactness at $N_n$ makes $q_{n+1}:N_{n+1}\\to\\ker\\partial_n$, $y\\mapsto\\partial_{n+1}(y)$, a surjective linear map. Apply the lifting property of the projective module $F_{n+1}$ to obtain $\\alpha_{n+1}$ with $q_{n+1}\\alpha_{n+1}=\\bar g_{n+1}$. Composing with the kernel inclusion gives precisely $\\partial_{n+1}\\alpha_{n+1}=\\alpha_n\\delta_{n+1}$; the earlier equations are preserved because the earlier maps are retained.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For each admissible finite tuple of maps choose one extension furnished above, and recursively start with the base map and apply these choices. The first-differential step starts the recursion, and the inductive extension supplies every subsequent degree. The resulting family $(\\alpha_i)_{i\\ge0}$ has the stated augmentation identity and all chain identities. Only the target was required to be exact; for the source the two zero-composite hypotheses were exactly those used in the displayed calculations.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

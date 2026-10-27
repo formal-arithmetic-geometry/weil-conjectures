@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-fibrewise-flatness-criterion",
+ "kind": "statement",
+ "title": "Pointwise fibre criterion for flatness with finitely presented source",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme], with morphisms $p:X\\to S$, $q:Y\\to S$ and $f:X\\to Y$ such that $q\\circ f=p$. Assume that $p$ is locally of finite presentation [def-sbc-locally-finite-presentation] and that $q$ is locally of finite type [def-weil-finite-type-morphism]. Fix $x\\in X$, put $y=f(x)$ and $s=p(x)$, and let $f_s:X_s\\to Y_s$ be the induced map of scheme-theoretic fibres over $s$ [def-pc-scheme-fibre, def-pc-fibre-product]. Regard $x$ as the corresponding point of $X_s$. If $p$ is flat at $x$ and $f_s$ is flat at $x$, then $f$ is flat at $x$ and $q$ is flat at $y$ [def-weil-flat-morphism].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 039C, more-morphisms-theorem-criterion-flatness-fibre, implication (1) to (2), specialized to the structure sheaf; no openness assertion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write R = O_{S,p(x)}, B = O_{Y,f(x)}, C = O_{X,x}. Stalk-map composition identifies the composite R → B → C with the given R-flat stalk map [lem-weil-pbc-scheme-stalk-map-composition]. Choose affine opens V around p(x) and U around x mapping into V. Their section map A → D is finitely presented. The germ maps identify R and C as A_a and D_c [lem-weil-pbc-affine-open-stalk-localization]. Localize A → D at A minus a; finite presentation is preserved [lem-trf-localization-finite-presentation-ring-map]. This set maps outside c, so localization transitivity [lem-weil-pbc-localization-of-localization] exhibits C as a localization of that finitely presented R-algebra. Germ compatibility proves the scalar tower. Mathlib supplies essential finite type of R → B directly [lem-trf-locally-finite-type-stalk-essentially-finite-type].",
+   "uses": [
+    "lem-weil-pbc-scheme-stalk-map-composition",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-trf-localization-finite-presentation-ring-map",
+    "lem-weil-pbc-localization-of-localization",
+    "lem-trf-locally-finite-type-stalk-essentially-finite-type"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre projections have surjective stalk maps with kernels m_R B and m_R C [lem-sbc-scheme-fibre-stalk-quotient]. The fibre map and projections form a commuting square by the pullback projection equation; the general commuting-stalk-square lemma for locally ringed spaces, proved from stalk-map composition and point congruences and specialized to the underlying locally ringed spaces, gives the commuting square of ring maps [lem-weil-pbc-scheme-stalk-map-composition]. The first isomorphism theorem identifies the quotient map B/m_R B → C/m_R C with the given fibre stalk map, conjugated by the two quotient equivalences. Composition with bijective ring maps preserves flatness, so the quotient map is flat.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-weil-pbc-scheme-stalk-map-composition",
+    "def-pc-fibre-product",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sfb-finite-type-local-closed-fibre-approximation] to R → B. Obtain a local, essentially finitely presented R-algebra T and a surjective local R-algebra map u:T → B, inducing the specified equivalence T/m_R T ≅ B/m_R B. Give C its T-action through B. Transport the flat quotient map in step 2 across this equivalence, checking the formula on each class [t]. The standard quotient-tensor equivalence identifies C/m_R C with (T/m_R T) tensor_T C, with this precise action. Apply [lem-weil-pbc-criterion-flatness-fibre] to R → T → C and M=C, using the two localization models, R-flatness of C, and its nonzero rank-one free C-module structure. This gives T R-flat and C T-flat.",
+   "uses": [
+    "lem-sfb-finite-type-local-closed-fibre-approximation",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "lem-weil-pbc-criterion-flatness-fibre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local flat map T → C is faithfully flat [lem-pc-local-flat-faithful-flat-reflects-surjective], so its algebra map is injective: the faithful scalar action is the instance obtained from [lem-weil-pbc-faithfully-flat-universally-injective]. Since T → C factors through u, u is injective and hence bijective. Compose R → T with the bijective u to obtain flatness of R → B. Cancel u from the flat composite T → B → C, using the inverse ring equivalence, to obtain flatness of B → C. These are exactly the two requested pointwise flatness conclusions.",
+   "uses": [
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-stalk-map-composition",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-trf-localization-finite-presentation-ring-map",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-trf-locally-finite-type-stalk-essentially-finite-type",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "def-pc-fibre-product",
+  "def-weil-pbc-flat-ring-map",
+  "lem-sfb-finite-type-local-closed-fibre-approximation",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-criterion-flatness-fibre",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 039C, theorem-criterion-flatness-fibre, implication (1) to (2), specialized to the structure sheaf. Algebra Tag 05UV supplies the approximation; Tag 00R7 gives flatness over it. In the rank-one structure-sheaf case, Tags 00HR and 05CK make the approximation map bijective. Affine localization replaces the unused combined stalk-data node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism X to Y over S, X locally finitely presented over S and Y locally of finite type over S: flatness over S and flatness of the fibre at x imply flatness over Y at x",
+   "results": "{\"t\": \"2026-10-22T04:38:57Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism X to Y over S, X locally finitely presented over S and Y locally of finite type over S: flatness over S and flatness of the fibre at x imply flatness over Y at x\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"ae7999962a6a4cda\"}; Hits Flat.of_stalkMap, Flat.stalkMap, Flat.iff_flat_stalkMap, Flat.isStableUnderBaseChange and UniversallyOpen.of_flat characterize or preserve already known flatness; they do not deduce it from fibre flatness.",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits Flat.of_stalkMap, Flat.stalkMap, Flat.iff_flat_stalkMap, Flat.isStableUnderBaseChange and UniversallyOpen.of_flat characterize or preserve already known flatness; they do not deduce it from fibre flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local fibre criterion without Noetherian hypotheses: if X is flat and locally finitely presented over S, Y locally finite type over S, and X_s to Y_s is flat at x, then X to Y is flat at x and Y to S is flat at f(x)",
+   "results": "{\"t\": \"2026-10-22T04:39:54Z\", \"tool\": \"leanfinder\", \"query\": \"Local fibre criterion without Noetherian hypotheses: if X is flat and locally finitely presented over S, Y locally finite type over S, and X_s to Y_s is flat at x, then X to Y is flat at x and Y to S is flat at f(x)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"60720929287b38d3\"}; Flat and its locality instances, UniversallyOpen.of_flat and LocallyOfFinitePresentation do not state the local fibre criterion.",
+   "date": "2026-10-22",
+   "verdict": "no match: Flat and its locality instances, UniversallyOpen.of_flat and LocallyOfFinitePresentation do not state the local fibre criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-22T04:38:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: No hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"IsLocalHom\"",
+   "results": "{\"t\": \"2026-10-22T04:39:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"IsLocalHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.isLocalHom\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\"], \"digest\": \"ea893088441030a8\"}; Module.FaithfullyFlat.of_flat_of_isLocalHom assumes flatness; Module.FaithfullyFlat.isLocalHom assumes faithful flatness. Neither is a criterion from closed-fibre flatness.",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.FaithfullyFlat.of_flat_of_isLocalHom assumes flatness; Module.FaithfullyFlat.isLocalHom assumes faithful flatness. Neither is a criterion from closed-fibre flatness."
+  },
+  {
+   "tool": "grep",
+   "query": "criterion.*flatness.*fib|flat.*closedFiber|flat.*fiber.*iff|flat.*fibre.*iff",
+   "results": "{\"t\": \"2026-10-22T04:38:56Z\", \"tool\": \"grep\", \"query\": \"criterion.*flatness.*fib|flat.*closedFiber|flat.*fiber.*iff|flat.*fibre.*iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits in AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match: No hits in AlgebraicGeometry."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*[Ff]iber|flat.*[Ff]ibre|[Ff]iber.*flat|[Ff]ibre.*flat|criterion.*flat",
+   "results": "{\"t\": \"2026-10-22T04:39:50Z\", \"tool\": \"grep\", \"query\": \"flat.*[Ff]iber|flat.*[Ff]ibre|[Ff]iber.*flat|[Ff]ibre.*flat|criterion.*flat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"a052f0d0c02170d9\"}; RingTheory/Flat/EquationalCriterion.lean is the equational criterion. RingTheory/Smooth/Fiber.lean assumes flatness to prove formal smoothness; neither supplies the fibre flatness criterion.",
+   "date": "2026-10-22",
+   "verdict": "no match: RingTheory/Flat/EquationalCriterion.lean is the equational criterion. RingTheory/Smooth/Fiber.lean assumes flatness to prove formal smoothness; neither supplies the fibre flatness criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrewise criterion for flatness of a morphism of schemes with finitely presented source over the base",
+   "results": "{\"t\": \"2026-10-22T04:38:56Z\", \"tool\": \"leansearch\", \"query\": \"Fibrewise criterion for flatness of a morphism of schemes with finitely presented source over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"RingHom.Flat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"3178717a9231abd9\"}; Module.flat_of_isLocalized_span is a localization criterion; the scheme hits Flat, flat_iff, Flat.mk and Flat.iff_flat_stalkMap are definitions and local criteria, not the fibre criterion.",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.flat_of_isLocalized_span is a localization criterion; the scheme hits Flat, flat_iff, Flat.mk and Flat.iff_flat_stalkMap are definitions and local criteria, not the fibre criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "criterion.*flatness.*fib|flat.*closedFiber|flat.*fiber.*iff|flat.*fibre.*iff",
+   "results": "{\"t\": \"2026-10-22T04:58:36Z\", \"tool\": \"grep\", \"query\": \"criterion.*flatness.*fib|flat.*closedFiber|flat.*fiber.*iff|flat.*fibre.*iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits characterize flatness, preserve known flatness, or assume flatness for faithful flatness/smoothness; none is this pointwise fibre criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise fibre criterion flatness schemes finitely presented source finite type target flat over base and fibre imply flatness of both maps",
+   "results": "{\"t\": \"2026-10-22T04:58:36Z\", \"tool\": \"leansearch\", \"query\": \"Pointwise fibre criterion flatness schemes finitely presented source finite type target flat over base and fibre imply flatness of both maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Flat.mk\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"Module.flat_iff_of_isLocalization\"], \"digest\": \"5b243e45394e4968\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits characterize flatness, preserve known flatness, or assume flatness for faithful flatness/smoothness; none is this pointwise fibre criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-22T04:58:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits characterize flatness, preserve known flatness, or assume flatness for faithful flatness/smoothness; none is this pointwise fibre criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For X to Y to S, X locally of finite presentation over S and Y locally of finite type, flatness of X over S at x and of X_s over Y_s at x imply both X flat over Y at x and Y flat over S at its image",
+   "results": "{\"t\": \"2026-10-22T04:58:39Z\", \"tool\": \"leanfinder\", \"query\": \"For X to Y to S, X locally of finite presentation over S and Y locally of finite type, flatness of X over S at x and of X_s over Y_s at x imply both X flat over Y at x and Y flat over S at its image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\"], \"digest\": \"fa6aa505ff876ed7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits characterize flatness, preserve known flatness, or assume flatness for faithful flatness/smoothness; none is this pointwise fibre criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*[Ff]iber|flat.*[Ff]ibre|[Ff]iber.*flat|[Ff]ibre.*flat|criterion.*flat",
+   "results": "{\"t\": \"2026-10-22T04:58:53Z\", \"tool\": \"grep\", \"query\": \"flat.*[Ff]iber|flat.*[Ff]ibre|[Ff]iber.*flat|[Ff]ibre.*flat|criterion.*flat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\", \"Mathlib/RingTheory/Flat/EquationalCriterion.lean\"], \"digest\": \"d38fcc3ca98cd977\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits characterize flatness, preserve known flatness, or assume flatness for faithful flatness/smoothness; none is this pointwise fibre criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"IsLocalHom\"",
+   "results": "{\"t\": \"2026-10-22T04:58:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"IsLocalHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.isLocalHom\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\"], \"digest\": \"ea893088441030a8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits characterize flatness, preserve known flatness, or assume flatness for faithful flatness/smoothness; none is this pointwise fibre criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local fibre criterion without Noetherian hypotheses: flatness over the base and on the closed fibre imply flatness of a local map from an essentially finite type algebra to an essentially finitely presented algebra",
+   "results": "{\"t\": \"2026-10-22T04:58:54Z\", \"tool\": \"leanfinder\", \"query\": \"Local fibre criterion without Noetherian hypotheses: flatness over the base and on the closed fibre imply flatness of a local map from an essentially finite type algebra to an essentially finitely presented algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.propertyIsLocal\", \"instFlatAtPrime\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.ofLocalizationPrime\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"e9ecbec2599e41e0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits characterize flatness, preserve known flatness, or assume flatness for faithful flatness/smoothness; none is this pointwise fibre criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-flat-locus-base-change",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction; the inherited de Jong morphism-scheme/Hilbert-scheme prerequisite, through Tag 05XC: Tag 05VK and the proof of Tag 05VJ, Tag 039C, more-morphisms-theorem-criterion-flatness-fibre, implication (1) to (2), specialized to the structure sheaf; no openness assertion.",
+   "via": [
+    "lem-sfb-relative-flat-locus-base-change",
+    "lem-sfb-universal-surjective-flat-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fibrewise-flatness-criterion",
+  "worker": "stage1",
+  "summary": "Repair of human re-split order: statement and statement dependencies unchanged. Extracted original steps 1-4 into compatible stalk data and original steps 5-7 into approximation rigidity, two statement-only unsplit nodes of comparable mathematical workload. Existing approximation construction is reused, and scalar transfer from old step 8 remains explicit in the assembly. Every original argument is preserved verbatim and assigned in report.md.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration/Hilbert prerequisite through the relative flat locus: expands precisely Tag 039C (1) to (2), without its openness assertion. New local prerequisites implement original steps 1-4 and 5-7; three assembly steps preserve the same route."
+ },
+ "tool_uses": [
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-criterion-flatness-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-5abffc330",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-5abffc330 (reviewer sub-agent of L); spot-checked: Re-split answers the released 2026-10-22 note with two new statement-only nodes and no lost argument. Old steps 1-4 (about 2936 chars) become lem-sfb-fibre-flatness-compatible-stalk-data. Old steps 5-7 (about 1585 chars) become lem-sfb-flat-closed-fibre-approximation-rigidity together with the existing closed-fibre approximation node. Old step 8 is written out in assembly step 3. The assembly has 3 steps and 1622 chars; proof_deps equal the union of the uses. Item statement and stmt_deps are byte-identical to live; it is the structure-sheaf case of Stacks 039C (1)=>(2) (more-morphisms.tex 4588). Compat node: true. V comes from p's lfp chart and W from the every-affine finite-type definition; it claims only p(U),q(W) in V. The P and Q localizations are checked via affine-open-stalk-localization. The fibre clause is 0HA1 / lem-sbc-scheme-fibre-stalk-quotient for p and q, with f_s(x_s)=y_s by uniqueness. Rigidity node: true. 00R7 (algebra.tex 32992, DAG lem-weil-pbc-criterion-flatness-fibre) applies with S=T, S'=M=C, C nonzero and free of rank one. Then 00HR and 05CK make T->C injective, so ker u=0. Edge cases checked: field base, u=id, and k[eps]->k (excluded by the closed-fibre isomorphism hypothesis). No duplicates: 05UV has no DAG node of its own; also checked sbc-finite-presentation-stalk-localization-model (affine only, one map), trf polynomial cover, composite-fibre-local-models (Noetherian) and 00R7. No SGA. All stmt_deps exist. Advisory: the item's tool_uses still lists two entries inherited from the old split that the proof no longer cites; harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibrewiseFlatnessCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.flatAt_and_base_flatAt_of_fiber_flatAt",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibrewiseFlatnessCriterion.lean",
+  "statement": "theorem Scheme.Hom.flatAt_and_base_flatAt_of_fiber_flatAt {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (hf : f ≫ q = p) [LocallyOfFinitePresentation p] [LocallyOfFiniteType q] (x : X) (hp : (p.stalkMap x).hom.Flat) (hfs : ((pullback.map p (S.fromSpecResidueField (p x)) q (S.fromSpecResidueField (p x)) f (𝟙 _) (𝟙 S) (by simpa only [Category.comp_id] using hf.symm) (by simp)).stalkMap (p.asFiber x)).hom.Flat) : (f.stalkMap x).hom.Flat ∧ (q.stalkMap (f x)).hom.Flat",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d8117e80",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 039C (1)=>(2) for O_X, without openness, clause by clause. Types S X Y : Scheme.{u}; hf : f ≫ q = p; [LocallyOfFinitePresentation p] [LocallyOfFiniteType q], no QuasiCompact or Noetherian hypothesis added. f_s = canonical pullback.map p _ q _ f 𝟙 𝟙S; argument order and eq₁ (p ≫ 𝟙 = f ≫ q) checked at HasPullback.lean:270; the pullbacks are definitionally p.fiber/q.fiber (p x); fibre point p.asFiber x. Hypotheses hp and hfs and both conclusions are pointwise stalkMap .hom.Flat, as in def-weil-flat-morphism. The statement is verbatim in the file. Only the node's lean record changed; the rest equals side-live, which has no prior lean record. Dependency records are Mathlib declarations; proof-dependency imports exist (FibreStalkQuotient, FlatOfFlatClosedFiber). Docstrings carry Tag 039C and the blueprint tag; the theorem docstring follows steps 1-8. No defs, nothing hollow, only sorry. No Mathlib duplicate, and the name and path are new. Advisory only: the H11 second reading is a self-reread under the dispatcher policy. No FIX, so nothing compiled."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261023T131822-L-2156968",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-relative-global-ci-koszul-regular",
+ "kind": "statement",
+ "title": "Relative global complete-intersection equations are Koszul-regular",
+ "statement": "Let $R$ be a commutative ring, let $n,c\\geq0$, and let $f_1,\\ldots,f_c\\in P=R[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring]. Suppose the specified presentation $P/(f_1,\\ldots,f_c)$ is a relative global complete intersection over $R$ [def-weil-pbc-relative-global-complete-intersection]. Then $H_i(K_\\bullet(P;f_1,\\ldots,f_c))=0$ for every $i>0$; that is, $f_1,\\ldots,f_c$ is Koszul-regular [def-weil-pbc-koszul-regular-sequence]. Empty sequences and the zero quotient are allowed, with no Noetherian assumption on $R$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D2 (lemma-relative-global-complete-intersection-koszul)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=(f_1,\\ldots,f_c)$ and $K=K_\\bullet(P;f_1,\\ldots,f_c)$. The differential formula of [def-weil-pbc-koszul-complex] gives $d(e_j\\wedge z)=f_jz-e_j\\wedge dz$. Thus if $dz=0$, $f_jz=d(e_j\\wedge z)$ is a boundary. Every generator $f_j$ therefore annihilates every homology class, and so $I H_i(K)=0$. This is the explicit calculation of Tag 0663, not an extra lemma.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D2 (lemma-relative-global-complete-intersection-koszul), proof"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak Q\\subset P$ containing $I$. The ideal $\\mathfrak q=\\mathfrak Q/I$ in $P/I$ is prime: a product of residue classes belongs to it exactly when a product of representatives belongs to $\\mathfrak Q$. Its inverse image is $\\mathfrak Q$. Apply [lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence] to this prime and the specified presentation. It gives regularity of $f_1/1,\\ldots,f_c/1$ in $P_{\\mathfrak Q}$. By [lem-weil-pbc-regular-sequence-koszul-regular], their Koszul homology vanishes in every positive degree. Neither result assumes that $R$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "lem-weil-pbc-regular-sequence-koszul-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D2 (lemma-relative-global-complete-intersection-koszul), proof"
+   }
+  },
+  {
+   "text": "For any prime $\\mathfrak Q\\subset P$, localize the complex at $T=P\\setminus\\mathfrak Q$. Exactness of localization [lem-weil-pbc-localization-module-exact] identifies localized cycles with the kernel of the localized differential and localized boundaries with its image; applying it also to $0\\to\\operatorname{im}d_{i+1}\\to\\ker d_i\\to H_i(K)\\to0$ identifies $H_i(K)_{\\mathfrak Q}$ with $H_i(T^{-1}K)$. By [lem-sc-koszul-base-change-iso], $T^{-1}K$ is the Koszul complex of $f_j/1$ over $P_{\\mathfrak Q}$: on each standard wedge basis, the scalar-extension identification sends $a/s$ times a wedge to that same wedge with coefficient $a/s$. Hence Step 2 gives $H_i(K)_{\\mathfrak Q}=0$ for $i>0$ whenever $I\\subseteq\\mathfrak Q$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-sc-koszul-base-change-iso",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D2 (lemma-relative-global-complete-intersection-koszul), proof"
+   }
+  },
+  {
+   "text": "If $I\\not\\subseteq\\mathfrak Q$, some $f_j\\notin\\mathfrak Q$. Step 1 says that $f_j$ kills $H_i(K)$, hence also every fraction in $H_i(K)_{\\mathfrak Q}$. But $f_j$ acts bijectively on this localization by [def-weil-pbc-module-localization], since $f_j\\in P\\setminus\\mathfrak Q$. Consequently this localized module is zero. This also handles the unit-ideal case $P/I=0$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D2 (lemma-relative-global-complete-intersection-koszul), proof"
+   }
+  },
+  {
+   "text": "Fix $i>0$. Steps 3 and 4 give $H_i(K)_{\\mathfrak m}=0$ for every maximal ideal $\\mathfrak m$ of $P$. Apply [lem-weil-pbc-linear-map-bijective-at-maximal-localizations] to the map $0\\to H_i(K)$. Each localized map is bijective, so this map is bijective and $H_i(K)=0$. Since the complex has zero terms in negative degrees, its negative homology is zero too. This is precisely Koszul-regularity by [def-weil-pbc-koszul-regular-sequence]. For $c=0$, $K$ is simply $P$ in degree zero, so the same conclusion holds.",
+   "uses": [
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D2 (lemma-relative-global-complete-intersection-koszul), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-sc-koszul-base-change-iso",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D2 (lemma-relative-global-complete-intersection-koszul), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The defining equations of a relative global complete intersection over any commutative ring form a Koszul regular sequence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular\", \"module\": \"Mathlib/RingTheory/Regular/RegularSequence\", \"type\": \"{R : Type u_1} → (M : Type u_3) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → List R → Prop\", \"doc\": \"A predicate indicating that a sequence of elements in a commutative ring $ R $ is regular on an $ R $-module $ M $, meaning each element in the sequence is a non-zerodivisor on the quotient of $ M $ b\"}\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ), Algebra.IsStandardSmooth R S\", \"doc\": \"Given a finite index set $\\\\iota$ and a submersive presentation $P$ of an $R$-algebra $S$ with generating set $\\\\sigma$, the algebra $S$ is standard smooth over $R$. This means $S$ is isomorphic to a lo\"}\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ),\\n  P.dimension = n → Algebra.IsStandardSmoothOfRelativeDimension n R S\", \"doc\": \"Let $ R $ be a commutative ring and $ S $ an $ R $-algebra. If $ S $ admits a submersive presentation with a finite generating set $ \\\\iota $, and the dimension of this presentation (defined as the dif\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"RingTheory.Sequence.isRegular_iff\", \"module\": \"Mathlib/RingTheory/Regular/RegularSequence\", \"type\": \"∀ {R : Type u_1} (M : Type u_3) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (rs : List R),\\n  RingTheory.Sequence.IsRegular M rs ↔ RingTheory.Sequence.IsWeaklyRegular M rs ∧ ⊤ ≠ Ideal.ofList rs • ⊤\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a list $ rs $ of elements in $ R $, the sequence $ rs $ is a regular sequence on $ M $ if and only if it is a weakly regular sequence and the i\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] [IsLocalization.AtPrime S p] {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs →\\n    (∀ r ∈ rs, r ∈ p) → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraM\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ its localization at the complement of a prime ideal $ p $, and $ rs $ a list of elements in $ R $. If $ rs $ forms a weakly regular sequence in $ R $ and every e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular sequences, standard smooth presentations and generic homology-zero criteria do not give the relative complete-intersection fibre-dimension criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative global complete intersection equations have zero positive Koszul homology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.ExactAt.isZero_homology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"[K.HasHomology i] (h : K.ExactAt i) : IsZero (K.homology i)\", \"doc\": \"If a homological complex $ K $ is exact at index $ i $, then its homology object at $ i $ is a zero object.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Subsingleton Ω[S⁄R]\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over $ R $, then the module of Kähler differentials $ \\\\Omega_{S/R} $ is zero.\"}\n  {\"name\": \"HomologicalComplex.exactAt_iff_isZero_homology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"[K.HasHomology i] : K.ExactAt i ↔ IsZero (K.homology i)\", \"doc\": \"For a homological complex $ K $ in a category with zero morphisms and an index $ i $ where $ K $ has homology, the complex is exact at $ i $ if and only if its homology object $ H_i(K) $ is a zero obj\"}\n  {\"name\": \"HomologicalComplex.homologyIsCokernel\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"(hi : c.prev j = i) [K.HasHomology j] : IsColimit (CokernelCofork.ofπ (K.homologyπ j) (K.toCycles_comp_homologyπ i j))\", \"doc\": \"For a homological complex $ K $ with homology at index $ j $, the homology object at $ j $ is defined as the cokernel of the morphism from the cycles at $ j $ to the homology, established by showing t\"}\n  {\"name\": \"HomologicalComplex.HasHomology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {ι : Type u_2} → {c : ComplexShape ι} → HomologicalComplex C c → ι → Prop\", \"doc\": \"For a homological complex $ K $ in a category with zero morphisms and an index $ i $, this property asserts that the short complex formed by the objects $ K_{\\\\text{prev}(i)} $, $ K_i $, and $ K_{\\\\text\"}\n  {\"name\": \"HomogeneousIdeal.toIdeal_irrelevant\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal\", \"type\": \": 𝒜₊.toIdeal = RingHom.ker (GradedRing.projZeroRingHom 𝒜)\", \"doc\": \"The underlying ideal of the homogeneous ideal $\\\\mathcal{A}_+$ consisting of elements with zero zeroth component is equal to the kernel of the ring homomorphism projecting the graded ring $\\\\mathcal{A}$\"}\n  {\"name\": \"HomologicalComplex.pOpcyclesIso\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \": K.X j ≅ K.opcycles j\", \"doc\": \"The canonical projection from the object $ K_i $ to the right homology object at index $ i $ is an isomorphism when the homological complex has homology at $ i $.\"}\n  {\"name\": \"HomologicalComplex.homologyIsKernel\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"(hi : c.next i = j) : IsLimit (KernelFork.ofι (K.homologyι i) (K.homologyι_comp_fromOpcycles i j))\", \"doc\": \"For a homological complex $ K $ in a category with zero morphisms and an index $ i $, the homology object $ H(K_i) $ at $ i $ satisfies the universal property of the kernel of the first differential $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular sequences, standard smooth presentations and generic homology-zero criteria do not give the relative complete-intersection fibre-dimension criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"Regular\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular sequences, standard smooth presentations and generic homology-zero criteria do not give the relative complete-intersection fibre-dimension criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]elative[Gg]lobal[Cc]omplete[Ii]ntersection|[Kk]oszul[Rr]egular",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular sequences, standard smooth presentations and generic homology-zero criteria do not give the relative complete-intersection fibre-dimension criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre dimension criterion for acyclicity of a polynomial Koszul complex over an arbitrary base ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"ℕ → (R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"Given a natural number $ n $, a commutative ring $ R $, and a commutative ring $ S $ equipped with an $ R $-algebra structure, the proposition that $ S $ is a standard smooth algebra of relative dimen\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] {P : Algebra.PreSubmersivePresentation R S ι σ} (x : ↥P.ker),\\n  P.cotangentComplexAux (Algebra.Extension.Cotangent.mk x) = 0 ↔\\n    ∀ (i : σ), (MvPolyno\", \"doc\": \"For a pre-submersive presentation $ P $ of an algebra over a commutative ring $ R $ with finite $ \\\\sigma $, the cotangent complex auxiliary map sends an element $ x $ in the kernel of $ P $ to zero in\"}\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ),\\n  P.dimension = n → Algebra.IsStandardSmoothOfRelativeDimension n R S\", \"doc\": \"Let $ R $ be a commutative ring and $ S $ an $ R $-algebra. If $ S $ admits a submersive presentation with a finite generating set $ \\\\iota $, and the dimension of this presentation (defined as the dif\"}\n  {\"name\": \"Algebra.IsStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Prop\", \"doc\": \"The property that $ S $ is a standard smooth algebra over $ R $, meaning $ S $ is isomorphic to a polynomial ring $ R[x_1, \\\\ldots, x_n] $ localized at an element $ f $, with the Jacobian matrix of the\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"Algebra.SubmersivePresentation.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Finite σ] [Finite ι] (P : Algebra.SubmersivePresentation R S ι σ), Algebra.IsStandardSmooth R S\", \"doc\": \"Given a finite index set $\\\\iota$ and a submersive presentation $P$ of an $R$-algebra $S$ with generating set $\\\\sigma$, the algebra $S$ is standard smooth over $R$. This means $S$ is isomorphic to a lo\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (n : ℕ) {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [H : Algebra.IsStandardSmoothOfRelativeDimension n R S], Algebra.IsStandardSmooth R S\", \"doc\": \"If $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, then $ S $ is a standard smooth algebra over $ R $. This follows from the fact that the localized polynomial ring structur\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.id\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ (R : Type u) [inst : CommRing R], Algebra.IsStandardSmoothOfRelativeDimension 0 R R\", \"doc\": \"The identity algebra $ R $ over itself is a standard smooth algebra of relative dimension 0.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary regular sequences, standard smooth presentations and generic homology-zero criteria do not give the relative complete-intersection fibre-dimension criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The defining equations of a relative global complete intersection form a Koszul regular sequence",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension, RingTheory.Sequence.IsRegular, Algebra.SubmersivePresentation.isStandardSmooth, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, RingTheory.Sequence.IsWeaklyRegular, Algebra.SubmersivePresentation.linearIndependent_aeval_val_pderiv_relation, Algebra.IsStandardSmooth, RingTheory.Sequence.isRegular_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth presentations and generic homology-zero criteria do not assert the fibre-dimension criterion for Koszul regularity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative global complete intersection equations have vanishing positive Koszul homology",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential, HomologicalComplex.Acyclic, HomologicalComplex.ExactAt.isZero_homology, HomologicalComplex.acyclic_iff, MvPolynomial.vanishingIdeal_zeroLocus_eq_radical, HomologicalComplex.exactAt_iff_isZero_homology, HomologicalComplex.homologyIsCokernel, HomologicalComplex.HasHomology",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth presentations and generic homology-zero criteria do not assert the fibre-dimension criterion for Koszul regularity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre dimension criterion for acyclicity of the Koszul complex of a polynomial presentation over an arbitrary base ring",
+   "results": "8 hits: Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.SubmersivePresentation.isStandardSmooth, Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.out",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth presentations and generic homology-zero criteria do not assert the fibre-dimension criterion for Koszul regularity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-syntomic-polynomial-kernel-koszul-regular",
+  "date": "2026-10-24",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, second half, the zero on the left of Jacobi-Zariski for A to B to its strict henselization. Component for the ind-etale left-injectivity argument: Syntomic polynomial presentation kernels are locally Koszul-regular. The relative-global-chart equations input in the forward proof of Tag 07D3.",
+   "via": [
+    "lem-sfb-syntomic-polynomial-kernel-koszul-regular",
+    "lem-sfb-ind-etale-jacobi-zariski-left-injective",
+    "lem-sfb-strict-henselization-naive-cotangent",
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-global-ci-koszul-regular",
+  "worker": "stage1",
+  "summary": "Checked Tag 07D2 and its inputs 00SV(1), 062F, 0663 and localization exactness. Reused all needed DAG nodes; wrote the contraction and localization arguments explicitly. The specified presentation, arbitrary base, empty sequence and zero quotient are retained. No new nodes.",
+  "blueprint": "Supporting algebra for det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/cotangent chain: the relative-global-chart equations input in Tag 07D3. The ancestor tool returns from.node=None because the inherited chain ends at a Lean module; the inherited from/via are retained. Latest blueprint direct-image proof and unit read.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+    "why": "Tag 00SV(1) is the generic local algebra input explicitly used in Tag 07D2, not a replacement for a six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic regular-sequence-to-Koszul theorem 062F, explicitly required by Tag 07D2; no six-functor unit theorem supplies this algebra result."
+   },
+   {
+    "node": "lem-sc-koszul-base-change-iso",
+    "why": "Generic scalar extension identification for the same finite Koszul complex, used only for localization; no six-functor unit theorem supplies this algebra identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-relative-global-complete-intersection-local-regular-sequence",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-sc-koszul-base-change-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-024d2d9eb",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-024d2d9eb (reviewer sub-agent of L); spot-checked: I read the whole delivery: five steps, no new nodes. The item statement is identical to live and matches Stacks 07D2 (more-algebra.tex l.8386): the given presentation, arbitrary R, no Noetherian assumption. The item is still unsplit on live and side-live, so no other group superseded it. Step 1: the formula D(v∧x)=φ(v)x−v∧Dx from def-weil-pbc-koszul-complex gives f_j z=d(e_j∧z), so (f) kills H_i. This is a correct elementary step; lem-k3-koszul-generator-homotopy could be cited (advisory). Step 2: forms q=Q/I with inverse image Q, then applies 00SV(1) (local-regular-sequence node, same hypotheses) and 062F (needs only injectivity, no Noetherian). Step 3: localization exactness (00CS) gives H_i(K)_Q=H_i(T⁻¹K); lem-sc-koszul-base-change-iso (whole complexes, any algebra) identifies T⁻¹K with K_{P_Q}(f/1). Step 4: an f_j outside Q both kills the localized homology and acts bijectively on it, so it is 0; this also covers S=0. Step 5: 00HN(6) applied to 0→H_i, plus negative degrees vanish, gives Koszul-regular exactly as defined. Edge cases c=0, c>n, a unit f_j, R=0 and non-Noetherian R all hold. Grepping 07D2, 0663 and relative-global-CI+Koszul found no duplicate; main-20261015 has no statement of this item. No SGA. I accept the three tool_uses (00SV, 062F, Koszul base change): all generic algebra that 07D2 needs. The inherited from.node=null is a base-node matter. No fixes."
+ }
+}

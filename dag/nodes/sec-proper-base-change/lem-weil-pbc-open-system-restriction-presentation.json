@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-open-system-restriction-presentation",
+ "kind": "statement",
+ "title": "Restriction coefficients on a system of open subspaces",
+ "statement": "Let I be a preordered set, V_i an antitone family of opens of a topological space T, E a subset of every V_i, and A an abelian sheaf on T. Define F_i as the constructed inverse image of A to V_i. Transpose the unit-preserving inverse-image composition isomorphism to define the transition f-maps. These obey the identity and composition laws on sections. Their inverse images to E identify with the constant diagram of A restricted to E via the inverse composition isomorphisms, and this identification obeys the sectionwise unit compatibility required for a spectral-limit coefficient presentation.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7, 01F8, 03F3 and 0A37; restriction-system setup for Tag 0A3D(2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Use a reducible abbreviation of the subtype-val inclusion. Construct inclusions, stage inverse images, transition f-maps and the constant coefficient diagram explicitly using the inverse-image adjunction and its uniquely unit-preserving composition isomorphism. No theorem with an arbitrary existence witness supplies data.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The leftAdjointUniq unit identity identifies both composite transition units with the ambient inclusion unit. Injectivity of the adjunction Hom bijection gives identity and composition of transitions. The same cancellation after postcomposition with the composition isomorphism proves coefficient compatibility. Evaluate the resulting sheaf morphism equalities on sections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The constant coefficient functor exists by the ordinary constant-diagram construction; it uses no existence theorem to select data.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J8",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7, 01F8, 03F3 and 0A37; restriction-system setup for Tag 0A3D(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a sheaf on an open subspace; inverse image adjunction composition constant diagram colimit",
+   "results": "Scheme restriction and section isomorphisms; sheafAdjunctionContinuous and colimConstAdj. No normalized open-subspace cohomology comparison.",
+   "date": "2026-10-25",
+   "verdict": "reuse adjunction and colimit API; no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology on an intersection of compact open subspaces of a spectral space is the directed colimit",
+   "results": "Condensed locally constant diagram colimits, no sheaf cohomology match. Loogle coconePointUniqueUpToIso finds colimit uniqueness component equations.",
+   "date": "2026-10-25",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(restrict|open)|IsOpenEmbedding.*cohomology; spectralSpace; leftAdjointUniq",
+   "results": "Found Mathlib open-embedding spectralSpace and adjunction uniqueness; project general spectral-limit lifting and object localization AddEquiv, but not the required comparison square.",
+   "date": "2026-10-25",
+   "verdict": "reuse existing general dependencies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift",
+  "date": "2026-10-25",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Punctured-neighborhood class-lifting proof: explicit geometry, restriction coefficients, and canonical map comparison in steps 1 through 5",
+   "via": [
+    "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.OpenSystemRestrictionPresentation",
+  "file": "lean/Sheaf/Topology/OpenSystemRestrictionPresentation.lean",
+  "declaration": "TopCat.OpenSystem.restriction_presentation",
+  "statement": "theorem restriction_presentation (V : I → Opens T) (hV : Antitone V) (E : Set T) (hE : ∀ i, E ⊆ V i) (A : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u}) : (∀ (i : I) (U : Opens (V i)) (s : (stageSheaf V A i).obj.obj (op U)), HEq ((transition V hV A i i le_rfl).hom.app (op U) s) s) ∧ (∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (U : Opens (V i)) (s : (stageSheaf V A i).obj.obj (op U)), HEq ((transition V hV A i k (hij.trans hjk)).hom.app (op U) s) ((transition V hV A j k hjk).hom.app (op ((Opens.map (inclusionOfLE (hV hij))).obj U)) ((transition V hV A i j hij).hom.app (op U) s))) ∧ (∀ (i j : I) (h : i ≤ j) (U : Opens (V i)) (s : (stageSheaf V A i).obj.obj (op U)), HEq (((coefficientIso V E hE A i).inv ≫ (coefficients (I := I) E A).map (homOfLE h) ≫ (coefficientIso V E hE A j).hom).hom.app (op ((Opens.map (inclusionOfLE (hE i))).obj U)) (((adjunction (inclusionOfLE (hE i))).unit.app (stageSheaf V A i)).hom.app (op U) s)) (((adjunction (inclusionOfLE (hE j))).unit.app (stageSheaf V A j)).hom.app (op ((Opens.map (inclusionOfLE (hV h))).obj U)) ((transition V hV A i j h).hom.app (op U) s)))",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-25",
+  "declarations": [
+   "TopCat.OpenSystem.inclusion",
+   "TopCat.OpenSystem.inclusionOfLE",
+   "TopCat.OpenSystem.inverseImage",
+   "TopCat.OpenSystem.adjunction",
+   "TopCat.OpenSystem.restrictionIso",
+   "TopCat.OpenSystem.stageSheaf",
+   "TopCat.OpenSystem.transition",
+   "TopCat.OpenSystem.coefficients",
+   "TopCat.OpenSystem.coefficientIso",
+   "TopCat.OpenSystem.restriction_presentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

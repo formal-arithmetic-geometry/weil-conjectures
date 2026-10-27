@@ -1,0 +1,299 @@
+{
+ "id": "lem-trf-fp-affine-limit-overlap-cocycle",
+ "kind": "statement",
+ "title": "Eventual invertible overlap comparisons and cocycles for local module models",
+ "statement": "Let $I$ be a small nonempty directed set and $(S_i,p_{ji})_{i\\in I}$ an inverse system of schemes [def-pc-scheme], where $p_{ji}:S_j\\to S_i$ for $j\\geq i$ is affine [pqf-def-affine-morphism]. Assume each $S_i$ is quasi-compact and quasi-separated [def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism]. Let $S=\\varprojlim_i S_i$ be the scheme limit with projections $p_i$ (so compatible families of maps from any scheme into the $S_i$ factor uniquely through $S$). For sheaves of modules [def-weil-sheaf-of-modules-category], finite presentation means locally admitting an exact sequence $\\mathcal O^m\\to\\mathcal O^n\\to F\\to0$ with finite $m,n$. All pullbacks are tensor pullbacks [def-pc-module-pullback], with their canonical composition identifications.\nFix $i\\in I$, a finite affine open cover $(V_a)_{a\\in A}$ of $S_i$, and finitely presented quasi-coherent modules $N_a$ on $V_a$ [pqf-def-coherent]. Let $F$ be a sheaf of $\\mathcal O_S$-modules and suppose that, for $U_a=p_i^{-1}V_a$ and the restricted projection $q_a:U_a\\to V_a$, isomorphisms $e_a:q_a^*N_a\\xrightarrow{\\sim}F|_{U_a}$ are given. Then there exist $j\\geq i$ and the following data. Put $V_{a,j}=p_{ji}^{-1}V_a$ and $N_{a,j}=(p_{ji}|_{V_{a,j}})^*N_a$.\nFor every $a,b$ there is an isomorphism\n$$\\theta_{ab}:N_{a,j}|_{V_{a,j}\\cap V_{b,j}}\\xrightarrow{\\sim}N_{b,j}|_{V_{a,j}\\cap V_{b,j}}.$$\nIts pullback to $U_a\\cap U_b$ equals $e_b^{-1}\\circ e_a$, after restriction and the canonical tensor-pullback composition identifications. On all triple intersections one has $\\theta_{bc}\\circ\\theta_{ab}=\\theta_{ac}$, and $\\theta_{aa}=\\mathrm{id}$ on $V_{a,j}$.\nMore precisely, the isomorphisms can be represented on finite affine covers of the pair intersections by maps with specified inverse maps; both inverse-composite equations hold there. On finite affine covers of intersections of pair charts these maps and inverses agree; their glued maps on the full pair intersections satisfy the identity and cocycle equations on finite affine covers of the triple intersections and hence everywhere. All these covers and equations occur at the same stage $j$, and remain valid under further pullback. No global module on $S_j$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR, lemma-descend-modules-finite-presentation, first proof (affine reduction and Zariski gluing); extracted intermediate assertion: Returned proof Step 3 (comparison maps) and Steps 4--6: lift overlap maps and inverses, enforce inverse identities, overlap agreement, and triple cocycles."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite affine covers W_{ab,r} of every V_a intersection V_b using the quasi-separated affine-cover criterion and the finite-affine-cover lemma. Choose finite affine covers H_{ab,rr',t} of W_{ab,r} intersection W_{ab,r'}. Choose finite affine covers T_{abc,s} of V_a intersection V_b intersection V_c subordinate to each of the three pair covers. Here is why the last choice is finite: the triple intersection is the finite union over r of W_{ab,r} intersection V_c; each such intersection is quasi-compact by the same criterion, so the triple intersection is quasi-compact. Its intersections with one chart from each pair cover form a finite open cover; refine that cover by affine neighbourhoods and take a finite subcover. Empty intersections use empty covers. All opens are chosen in S_i, and subsequently only their inverse images are used.",
+   "uses": [
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof, affine reduction and Zariski gluing; explicit details of the omitted gluing argument"
+   }
+  },
+  {
+   "text": "For every chosen affine C contained in S_i write C_k=p_{ki}^{-1}C for k>=i and C_infty=p_i^{-1}C. Restricted limit cones and affine projections give the limit C_infty=lim C_k. Every C_k and C_infty is affine, because transition maps and projections are affine. Put R_{C,k}=Gamma(C_k,O). Affine schemes are qcqs, so the global-sections comparison gives R_{C,infty}=colim_{k>=i} R_{C,k}. Inverse image preserves all the inclusions, intersections and unions in Step 1, so the chosen covers cover the corresponding domains at every stage, including the limit. The tail is small, directed and nonempty (it contains i).",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof, affine reduction and Zariski gluing; explicit details of the omitted gluing argument"
+   }
+  },
+  {
+   "text": "On an affine C contained in V_a let M_{a,C}=Gamma(C,N_a|C). It is finitely presented by the affine finite-presentation criterion. The affine tilde/Gamma equivalence and tilde-pullback comparison identify N_{a,k}|C_k with the sheaf associated to R_{C,k} tensor_{R_{C,i}} M_{a,C}. Indeed on pure tensors the comparison is r tensor m |-> r eta(m); the affine-sections comparison is bijective. These identifications are natural for module maps. Extension of a finite presentation R^m -> R^n -> M -> 0 gives the presentation R'^m -> R'^n -> R' tensor_R M -> 0 by tensor right exactness. Hence all these chart modules, at every subsequent stage and on every refinement chart, are finitely presented and quasi-coherent. For an inclusion of charts, the same pure-tensor formula is restriction followed by scalar extension. For two successive projections the two formulas both send r tensor(s tensor m) to rs tensor m; canonical tensor-pullback associativity makes these the prescribed composition identifications.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "lem-weil-pbc-module-pullback-affine-sections-bijective",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-pc-tensor-pullback-composition-associativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof, affine reduction and Zariski gluing; explicit details of the omitted gluing argument"
+   }
+  },
+  {
+   "text": "Set alpha_ab=e_b^{-1} composed with e_a on U_a intersection U_b, using the identifications in Step 3. On each W_{ab,r,infty}, alpha_ab and its inverse induce linear maps between the scalar extensions of M_{a,W} and M_{b,W}. Apply the map clause of affine finitely presented module descent separately to these two maps for every ordered pair and chart. There are finitely many charts and maps; directedness supplies a single k>=i above the resulting indices. Pull the lifted linear maps to k and use the affine tilde/Gamma equivalence to obtain sheaf maps u_{ab,r} and v_{ab,r} on W_{ab,r,k}. Their pullbacks are exactly alpha_ab and alpha_ab^{-1}. This step has not asserted that either lift is invertible.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof, affine reduction and Zariski gluing; explicit details of the omitted gluing argument"
+   }
+  },
+  {
+   "text": "On each W_{ab,r,k}, compare v_{ab,r} composed with u_{ab,r} to the identity of N_{a,k}, and u_{ab,r} composed with v_{ab,r} to the identity of N_{b,k}. After limit pullback they are identities because alpha_ab has the specified inverse. On affine sections Step 3 identifies these with pairs of maps between fixed finitely presented R_{W,k}-modules with equal base changes. Apply the equality clause of affine module descent to both pairs. A common upper bound of the finitely many indices makes all inverse equations hold. Transport all u and v by pullback to that bound. The affine tilde/Gamma equivalence reflects the resulting sectionwise equations, so both inverse-composite equations hold as sheaf equations on each full pair chart.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof, affine reduction and Zariski gluing; explicit details of the omitted gluing argument"
+   }
+  },
+  {
+   "text": "Restrict u_{ab,r} and u_{ab,r'} to each H_{ab,rr',t} pulled to the current stage. Their source and target are restrictions of the same N_a and N_b; their limit pullbacks are both the restriction of alpha_ab. The restrictions of v_{ab,r} and v_{ab,r'} similarly both pull back to alpha_ab^{-1}. By Steps 2--3 each comparison is on an affine inverse system and involves finitely presented modules. Apply the equality clause of affine module descent to these two pairs on each refinement chart. Choose a common later stage. Faithfulness of the affine sections comparison gives equality there on each H chart. Since these charts cover each intersection of pair charts, equality holds on those full intersections by the separatedness axiom for the target module sheaf.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof, affine reduction and Zariski gluing; explicit details of the omitted gluing argument"
+   }
+  },
+  {
+   "text": "For each a,b glue the compatible u_{ab,r} to theta_ab on the full pair intersection, and glue v_{ab,r} to psi_ab. Explicitly, for an open E in that intersection and a section x of the source on E, apply each local map to x restricted to E intersection W_{ab,r}. The resulting target sections agree on double intersections by Step 6, so the target sheaf axiom gives a unique section on E. Uniqueness proves additivity, scalar linearity, commutation with restriction, and uniqueness of the assembled map. Checking on the pair-chart cover shows psi_ab theta_ab=1 and theta_ab psi_ab=1 by Step 5. Checking on its inverse-image cover at the limit also shows p^*theta_ab=alpha_ab and p^*psi_ab=alpha_ab^{-1}: restriction of tensor pullback to an open is its tensor formula on that open. Thus these are isomorphisms with the required specified limit comparison.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof, affine reduction and Zariski gluing; explicit details of the omitted gluing argument"
+   }
+  },
+  {
+   "text": "At the limit alpha_aa=e_a^{-1}e_a=1. On U_a intersection U_b intersection U_c, alpha_bc alpha_ab=(e_c^{-1}e_b)(e_b^{-1}e_a)=e_c^{-1}e_a=alpha_ac. Test theta_aa=1 on the affine V_a, and theta_bc theta_ab=theta_ac on each T_{abc,s} from Step 1, pulled to the current stage. By Steps 2--3 these tests concern maps of fixed finitely presented modules over the appropriate affine ring system, and their base changes are equal by the displayed cancellations. Apply the equality clause of affine module descent to every such test, and take a common upper bound j. Pull all preceding data to j. The affine equivalence reflects all test equations, and the sheaf axiom gives the identity on V_{a,j} and the cocycle on every whole triple intersection. The T charts are subordinate to all three pair covers, so all three factors are restrictions of the maps already constructed, with the same source and target.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof, affine reduction and Zariski gluing; explicit details of the omitted gluing argument"
+   }
+  },
+  {
+   "text": "Every map and inverse at j is the pullback of a map constructed at an earlier stage. Functoriality of tensor pullback preserves equalities, identities and compositions; the composition identifications used throughout agree by tensor-pullback associativity. Every finite covering survives further inverse image. Thus the chart maps and inverse witnesses, their overlap agreements, inverse equations and identity/cocycle equations all occur at j and persist at every later stage. If A is empty then S_i is empty, the cover data and all tests are empty, and j=i works. If some pair or triple intersection is empty its equations are unique sheaf maps on the empty open. The construction produces only the required local comparison isomorphisms.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-tensor-pullback-composition-associativity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZR, first proof, affine reduction and Zariski gluing; explicit details of the omitted gluing argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections-bijective",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-pc-tensor-pullback-composition-associativity",
+  "lem-pc-fp-module-map-descent-affine",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZR first proof (details explicitly omitted there), expanded using Algebra Tag 05N7 and affine quasi-coherent comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given finitely presented modules on the affine charts of a stage of an inverse system of qcqs schemes with affine transitions, and identifications of their limit pullbacks with a common sheaf, their overlap isomorphisms satisfy a descent cocycle at a later stage",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_snd; AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_fst; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; AlgebraicGeometry.Scheme.Cover.gluedCover; SheafOfModules.QuasicoherentData.IsFinitePresentation.",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates and scheme pullback cocycles do not lift module overlap maps, inverse witnesses, or their equations to an eventual stage."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finitely presented module models on a finite affine cover acquire compatible invertible overlap comparisons and cocycle equations after passing to a later affine transition stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, if $\\\\mathcal{M}$ satisfies the finite presentation condition (i.e., locally isomorphic to the coke\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [inst_2 : ∀ (X : C), (J.over X).WEqualsLoca\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, this function const\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{R}$ on a site $(\\\\mathcal{C}, J)$ has finite presentation, then its local generators data satisfies the finite type condition under th\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates and scheme pullback cocycles do not lift module overlap maps, inverse witnesses, or their equations to an eventual stage."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\", \"cocycle\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates and scheme pullback cocycles do not lift module overlap maps, inverse witnesses, or their equations to an eventual stage."
+  },
+  {
+   "tool": "grep",
+   "query": "(cocycle|descentData|descent_data).*(eventual|[lL]imit|[fF]inite[Pp]resentation)|(eventual|[fF]inite[Pp]resentation).*(cocycle|descentData)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-presentation predicates and scheme pullback cocycles do not lift module overlap maps, inverse witnesses, or their equations to an eventual stage."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a directed inverse limit of quasi-compact quasi-separated schemes with affine transition maps, overlap isomorphisms between finitely presented local module models and their cocycle equations descend to one finite stage",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give structure-sheaf sections, scheme morphisms, ring algebra descent, sheaf presentations or colimit existence; none states eventual finite-presentation module overlap isomorphisms with specified limit maps and cocycles."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinitePresentation\", \"cocycle\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give structure-sheaf sections, scheme morphisms, ring algebra descent, sheaf presentations or colimit existence; none states eventual finite-presentation module overlap isomorphisms with specified limit maps and cocycles."
+  },
+  {
+   "tool": "grep",
+   "query": "(cocycle|overlap).*(finitePresentation|IsFinitePresentation|eventual)|finitePresentation.*(cocycle|overlap)",
+   "results": "0 hits: ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give structure-sheaf sections, scheme morphisms, ring algebra descent, sheaf presentations or colimit existence; none states eventual finite-presentation module overlap isomorphisms with specified limit maps and cocycles."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation sheaves of modules on an inverse limit of schemes with affine transition morphisms: descent of transition isomorphisms and cocycle equations",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.Presentation.IsFinite, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.recOn, SheafOfModules.Presentation",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give structure-sheaf sections, scheme morphisms, ring algebra descent, sheaf presentations or colimit existence; none states eventual finite-presentation module overlap isomorphisms with specified limit maps and cocycles."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimit of commutative rings: morphisms and relations between finite presentation modules descend, and local isomorphisms glue to a cocycle at some stage",
+   "results": "8 hits: RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, SheafOfModules.Presentation.isColimit, CommRingCat.preservesFilteredColimits_coyoneda, CommRingCat.FilteredColimits.colimitCocone, CommRingCat.preservesColimit_coyoneda_of_finitePresentation, CommRingCat.FilteredColimits.colimitCoconeIsColimit, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give structure-sheaf sections, scheme morphisms, ring algebra descent, sheaf presentations or colimit existence; none states eventual finite-presentation module overlap isomorphisms with specified limit maps and cocycles."
+  },
+  {
+   "tool": "grep",
+   "query": "(colimit|directLimit|IsFiltered|IsColimit)",
+   "results": "24 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give structure-sheaf sections, scheme morphisms, ring algebra descent, sheaf presentations or colimit existence; none states eventual finite-presentation module overlap isomorphisms with specified limit maps and cocycles."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fp-modules-affine-limit-descent",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Fibrewise ampleness-to-projectivity input below lem-trf-local-term-locality: in the proof of 0D2S used by lem-trf-proper-fibrewise-ample-projective, descend the chosen line bundle after the proper Noetherian approximation. Finite-presentation module and map descent used to descend the tensor-inverse witness of the chosen line bundle. Returned proof Step 3 (comparison maps) and Steps 4--6: lift overlap maps and inverses, enforce inverse identities, overlap agreement, and triple cocycles.",
+   "via": [
+    "lem-trf-fp-modules-affine-limit-descent",
+    "lem-trf-invertible-affine-limit-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fp-affine-limit-overlap-cocycle",
+  "worker": "stage1",
+  "summary": "Expanded the omitted affine/Zariski-gluing argument of 01ZR using existing 05N7 module map/equality descent, fixed finite-stage affine refinements, inverse witnesses, sheaf-local gluing and eventual cocycle equations. No new nodes and no statement changes. Avoided the circular use of the parent module descent theorem and its isomorphism corollary.",
+  "blueprint": "The inherited ancestry points to lem-trf-local-term-locality via invertible-affine-limit-descent and fp-modules-affine-limit-descent. This is the 01ZR local overlap argument in that historical fibrewise-ampleness auxiliary route, not a direct clause of the current contracting-correspondence blueprint proof. The current latest blueprint was read; no matching overlap-module statement occurs.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic affine quasi-coherent module comparison used only to translate fixed chart modules, maps and equations into the affine 05N7 algebra argument; no statement of this curve unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-tilde-pullback-base-change",
+    "why": "Generic affine quasi-coherent module comparison used only to translate fixed chart modules, maps and equations into the affine 05N7 algebra argument; no statement of this curve unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections-bijective",
+    "why": "Generic affine quasi-coherent module comparison used only to translate fixed chart modules, maps and equations into the affine 05N7 algebra argument; no statement of this curve unit supplies it."
+   },
+   {
+    "node": "lem-pc-tensor-pullback-composition-associativity",
+    "why": "Coherence of the specified tensor-pullback composition identifications, a generic tool independent of the curve route."
+   },
+   {
+    "node": "lem-pc-fp-module-map-descent-affine",
+    "why": "The affine 05N7 map-lifting and eventual-equality clauses are generic algebra tools for the prescribed 01ZR Zariski-gluing route; the unit has no replacement algebraic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-module-pullback-affine-sections-bijective",
+  "lem-pc-tensor-pullback-composition-associativity",
+  "lem-pc-fp-module-map-descent-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-86734a1e4",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-86734a1e4 (reviewer sub-agent of L); spot-checked: I read the item and all 16 cited statements in full. The delivery writes out the gluing details that Stacks 01ZR's first proof omits (limits.tex lemma-descend-modules-finite-presentation, which only says 'affine case = 05N7, then Zariski glueing'), and no step uses a cited node's proof. Step 1: pair and triple intersections are quasi-compact by 01KO(1) and covered by finite affine opens (01IT); intersections are never assumed affine. Step 2: 01YX(1)(2) gives affine chart limits and 01Z0 gives R_∞=colim R_k over I_{≥i}. Step 3: criterion (0)/(b) gives finitely presented chart sections; the tilde counit, the affine-sections bijection with its unit formula and 00DF give stage models that stay finitely presented. Steps 4-6 and 8 apply the map and equality clauses of 05N7 (lem-pc-fp-module-map-descent-affine) to finitely many affine charts, for both α and α^{-1}, the inverse equations, agreement on H-charts, θ_aa=1 on V_a and the cocycle on T-charts, each followed by sheaf locality. Steps 7 and 9 are rightly marked elementary: gluing module maps sectionwise, and functoriality plus associativity of pullback. The union of step uses equals proof_deps, and the closure contains neither the item nor its parent, so there is no cycle. There are no new nodes. The Noetherian lem-pc-fp-* overlap nodes are not duplicates or generalizations. Small cases tested: constant system, single chart, A=∅, empty overlaps, non-separated S_i. The five off-unit tool_uses are generic affine/05N7 tools and are accepted. First delivery, not superseded (live item still unsplit), no re-split note, no SGA. No changes."
+ }
+}

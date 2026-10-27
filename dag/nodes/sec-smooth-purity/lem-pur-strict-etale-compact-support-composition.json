@@ -1,0 +1,158 @@
+{
+ "id": "lem-pur-strict-etale-compact-support-composition",
+ "kind": "statement",
+ "title": "Compact-support coefficient projection cocycle before exceptional adjoints",
+ "statement": "Let a,b be composable coefficient changes, with arbitrary commutative coefficient rings, elements and monotone reindexings. Fix a compactification c of a scheme morphism and actual strict compact-support realizations S1,S2,S3 [def-per-strict-etale-system-interfaces]. Fix normalized exact coefficient transports Xij,Yij,Zij at the source, target and compactification, and compact-support transports P12,P23,P13 [def-pur-strict-etale-coefficient-transport-interfaces]. There exist tensor-unit-normalized ordinary and representative-normalized derived composition isomorphisms AX,AY,AZ for these transports. For every K, their derived components satisfy S3.functor(AX_K) ≫ P13.projection.inv_K = P23.projection.inv_(X12 K) ≫ Y23(P12.projection.inv_K) ≫ AY_(S1 K). No exceptional right adjoint, finite coefficient ring, quotient flatness or derived evaluation faithfulness is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng, Construction 4.1, Construction 5.15 and Proposition 2.29(2); tensor/adjunction normalization underlying the coefficient composition step."
+ },
+ "stmt_deps": [
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "def-per-strict-etale-system-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-pur-strict-etale-transport-associator at X,Y,Z to obtain the ordinary unit-normalized associators. On complexes paste the factorization isomorphisms of the two coefficient transports with the complex of each ordinary associator. Localization.liftNatIso descends this natural isomorphism. Its representative formula follows from liftNatTrans_app and cancellation of the last factorization isomorphism. Pairing it with the ordinary associator yields AX,AY,AZ.",
+   "uses": [
+    "lem-pur-strict-etale-transport-associator",
+    "def-pur-strict-etale-coefficient-transport-interfaces",
+    "lem-sfb-exact-derived-natural-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-pur-strict-etale-inverse-transport-composition to the open inverse-image squares, and multiply by their inverses to get the corresponding equation for their inverse transformations. The mate equivalence commutes with pasting (mateEquiv_vcomp), and is natural under transformations of both coefficient functors. Apply its inverse and the openMate equations of P12,P23,P13 to obtain the open-extension composition equation. Apply the same pasting and naturality formula forward to the proper inverse-image squares, using properMate, and cancel inverses to get the proper-direct-image inverse comparison equation.",
+   "uses": [
+    "lem-pur-strict-etale-inverse-transport-composition",
+    "def-pur-strict-etale-coefficient-transport-interfaces",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand each inverse compact-support projection as proper direct image of the open-comparison hom followed by the proper-comparison inverse. Apply the proper direct-image functor to the open composition equation, then substitute the proper inverse-comparison composition equation. Naturality of the second proper comparison moves the first open comparison past it. Functoriality recombines the remaining two maps as Y23 applied to P12.projection.inv. This is exactly the required equation for every K.",
+   "uses": [
+    "def-pur-strict-etale-coefficient-transport-interfaces"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-strict-etale-transport-associator",
+  "def-pur-strict-etale-coefficient-transport-interfaces",
+  "lem-sfb-exact-derived-natural-iso",
+  "lem-pur-strict-etale-inverse-transport-composition",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.15, coefficient composition; ordinary associator and one inverse-image square isolated, derived associators, mate pasting, and projection algebra implemented in Lean by C2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "['CategoryTheory.mateEquiv', 'CategoryTheory.mateEquiv_counit', 'CategoryTheory.mateEquiv_counit_symm', 'CategoryTheory.unit_mateEquiv', 'CategoryTheory.unit_mateEquiv_symm', 'CategoryTheory.conjugateEquiv_mateEquiv_vcomp', 'CategoryTheory.mateEquiv_conjugateEquiv_vcomp', 'CategoryTheory.mateEquiv_vcomp']; digest b8ac30fd6644aa85",
+   "date": "2026-10-25",
+   "verdict": "No exact match for strict coefficient transports or their normalized compact-support cocycle; Mathlib provides the ordinary scalar adjunction and generic mate calculus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of adjunction mates for tensor scalar extension natural transformations",
+   "results": "['ModuleCat.homEquiv_extendScalarsComp', 'CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc', 'CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor', 'CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ', 'CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc', 'CategoryTheory.leftAdjointMate_comp_evaluation_assoc', 'CategoryTheory.leftAdjointMate_comp', 'CategoryTheory.comp_leftAdjointMate']; digest 11758bd5c892b83d",
+   "date": "2026-10-25",
+   "verdict": "No exact match for strict coefficient transports or their normalized compact-support cocycle; Mathlib provides the ordinary scalar adjunction and generic mate calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|siteCoefficientTensor.*[Cc]omp|restrictScalars.*[Cc]omp",
+   "results": "['Mathlib/Algebra/Algebra/RestrictScalars.lean', 'Mathlib/Algebra/Lie/TensorProduct.lean', 'Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean', 'Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean', 'Mathlib/Algebra/Category/ModuleCat/Presheaf.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean']; digest f20807c37dbad6e9",
+   "date": "2026-10-25",
+   "verdict": "No exact match for strict coefficient transports or their normalized compact-support cocycle; Mathlib provides the ordinary scalar adjunction and generic mate calculus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor scalar extension functor associator composition left adjoints restrict scalars",
+   "results": "[\"ModuleCat.extendScalars_assoc'\", 'ModuleCat.homEquiv_extendScalarsComp', 'ModuleCat.extendScalarsComp_hom_app_one_tmul', 'ModuleCat.extendScalars_assoc_assoc', 'ModuleCat.extendScalars_assoc', 'ModuleCat.extendRestrictScalarsAdj_homEquiv_apply', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply', 'ModuleCat.extendScalars_id_comp_assoc']; digest 4baac19620d4d8d9",
+   "date": "2026-10-25",
+   "verdict": "No exact match for strict coefficient transports or their normalized compact-support cocycle; Mathlib provides the ordinary scalar adjunction and generic mate calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of extension of scalars on sheaves of modules and naturality of adjunction mates",
+   "results": "[\"ModuleCat.ExtendScalars.map'_comp\", 'PresheafOfModules.pullbackPushforwardAdjunction', 'CategoryTheory.sheafComposeNatTrans_fac', 'ModuleCat.restrictCoextendScalarsAdj', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars', 'ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply', 'SheafOfModules.PullbackConstruction.adjunction', 'PresheafOfModules.pullback']; digest 0a4fd6c95a39884a",
+   "date": "2026-10-25",
+   "verdict": "No exact match for strict coefficient transports or their normalized compact-support cocycle; Mathlib provides the ordinary scalar adjunction and generic mate calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict inverse systems of module sheaves coefficient scalar extension reindexing and compact support transport interfaces",
+   "results": "['PresheafOfModules.pushforward', 'SheafOfModules.pushforwardNatIso_inv', 'PresheafOfModules.restrictScalars', 'SheafOfModules.PullbackConstruction.adjunction', 'ModuleCat.ExtendRestrictScalarsAdj.unit', 'PresheafOfModules.pullback', 'SheafOfModules.restrictScalars', \"ModuleCat.RestrictScalars.obj'\"]; digest 89b4f62979160639",
+   "date": "2026-10-25",
+   "verdict": "No exact match for strict coefficient transports or their normalized compact-support cocycle; Mathlib provides the ordinary scalar adjunction and generic mate calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "['SheafOfModules.restrictScalars', 'SheafOfModules.instAdditiveRestrictScalars', 'SheafOfModules.restrictScalars_obj_val', 'SheafOfModules.restrictScalars_map_val']; digest e9c522decffc41f9",
+   "date": "2026-10-25",
+   "verdict": "No exact match for strict coefficient transports or their normalized compact-support cocycle; Mathlib provides the ordinary scalar adjunction and generic mate calculus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCoefficientSystemAdjoint",
+  "date": "2026-10-26",
+  "group": "J7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Coefficient compatibility of exceptional inverse image: the compatible coefficient operations in the earlier adic-stage route, specifically composition of scalar and reindexing maps before passage to a limit. The latest blueprint has replaced the adic construction by condensed Brown representability; this worker preserves the assigned strict-system lemma and its unit route.",
+   "via": [
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictEtaleCompactSupportComposition",
+  "file": "lean/Sheaf/Paper/StrictEtaleCompactSupportComposition.lean",
+  "declaration": "AlgebraicGeometry.strictEtaleCompactSupportTransport_composition",
+  "declarations": [
+   "AlgebraicGeometry.strictEtaleCompactSupportTransport_composition"
+  ],
+  "statement": "theorem strictEtaleCompactSupportTransport_composition {O₁ O₂ O₃ : Type (u + 1)} [CommRing O₁] [CommRing O₂] [CommRing O₃] {ell₁ : O₁} {ell₂ : O₂} {ell₃ : O₃} {phi₁₂ : O₁ →+* O₂} {phi₂₃ : O₂ →+* O₃} {r₁₂ r₂₃ : ℕ →o ℕ} {a : StrictEtaleCoefficientChange O₁ O₂ ell₁ ell₂ phi₁₂ r₁₂} {b : StrictEtaleCoefficientChange O₂ O₃ ell₂ ell₃ phi₂₃ r₂₃} {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {S₁ : StrictEtaleCompactSupport O₁ ell₁ c} {S₂ : StrictEtaleCompactSupport O₂ ell₂ c} {S₃ : StrictEtaleCompactSupport O₃ ell₃ c} {X₁₂ : StrictEtaleCoefficientTransport a X S₁.PX S₂.PX} {Y₁₂ : StrictEtaleCoefficientTransport a Y S₁.PY S₂.PY} {Z₁₂ : StrictEtaleCoefficientTransport a c.Z S₁.PZ S₂.PZ} {X₂₃ : StrictEtaleCoefficientTransport b X S₂.PX S₃.PX} {Y₂₃ : StrictEtaleCoefficientTransport b Y S₂.PY S₃.PY} {Z₂₃ : StrictEtaleCoefficientTransport b c.Z S₂.PZ S₃.PZ} {X₁₃ : StrictEtaleCoefficientTransport (a.comp b) X S₁.PX S₃.PX} {Y₁₃ : StrictEtaleCoefficientTransport (a.comp b) Y S₁.PY S₃.PY} {Z₁₃ : StrictEtaleCoefficientTransport (a.comp b) c.Z S₁.PZ S₃.PZ} (P₁₂ : StrictEtaleCompactSupportTransport a c S₁ S₂ X₁₂ Y₁₂ Z₁₂) (P₂₃ : StrictEtaleCompactSupportTransport b c S₂ S₃ X₂₃ Y₂₃ Z₂₃) (P₁₃ : StrictEtaleCompactSupportTransport (a.comp b) c S₁ S₃ X₁₃ Y₁₃ Z₁₃) : ∃ (AX : StrictEtaleTransportComposition X₁₂ X₂₃ X₁₃) (AY : StrictEtaleTransportComposition Y₁₂ Y₂₃ Y₁₃) (_AZ : StrictEtaleTransportComposition Z₁₂ Z₂₃ Z₁₃), ∀ K, S₃.functor.map (AX.derived.hom.app K) ≫ P₁₃.projection.inv.app K = P₂₃.projection.inv.app (X₁₂.derived.obj K) ≫ Y₂₃.derived.map (P₁₂.projection.inv.app K) ≫ AY.derived.hom.app (S₁.functor.obj K)",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-78877",
+  "group": "J7",
+  "result": "fix",
+  "landing": "20261025T204745-L-3005538",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T001058-L-4167053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

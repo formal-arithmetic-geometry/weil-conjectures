@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-diagonal-trace-scalar-comparisons",
+ "kind": "statement",
+ "title": "Scalar restrictions and unit-normalized direct-image squares",
+ "statement": "Let l be prime, E=ULift Q_l, f:X→S a scheme morphism, and choose the localizations of def-sfb-diagonal-trace-models at X and S. Given a coefficient-tower Base b, its geometric operations g over f [def-sp-tower-shriek-data], normalized Chern data cS,cX [def-sp-tower-class-chern], and specified total right derived models Rf,Rt for constant-coefficient direct image and its strict-tower version, there are exact scalar Restriction records rS,rX, normalized Coefficients records for cS,cX [def-sfb-diagonal-trace-coefficients], a total right derived completed direct image Rc, and ordinary direct-image squares identity on all sections. The varying square has ExactSquareOfUniverses data with canonicalDiagonalRightDerived(g.push) and Rt; the completed square has ExactSquare data with Rc and Rf. Both retain the full common-unit normalization on all complexes. This assertion involves neither twisting, a projective-line model, derived limits nor Milnor invertibility.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-chern",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), scalar restrictions and direct-image comparisons before R lim"
+ },
+ "proof": [
+  {
+   "text": "Apply exists_diagonalTraceOrdinaryScalars to obtain exact scalar restrictions, both normalized coefficient cones, and the two sectionwise ordinary direct-image isomorphisms.",
+   "uses": [
+    "lem-sfb-diagonal-trace-ordinary-scalars"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Obtain the unit-isomorphism criterion on restricted K-injectives for both destination pushforwards. Choose Rc as canonicalDiagonalRightDerived of completed direct image; its source is Grothendieck abelian by the ringed-site K-injective-resolution theorem.",
+   "uses": [
+    "lem-sfb-diagonal-trace-restricted-push-acyclic",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-diagonal-canonical-right-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an ordinary square F⋙V≅U⋙G with U,V exact, form the two full cochain units for RF⋙D(V) and D(U)⋙RG. The first is invertible on K-injectives by RF.computation and exactness of V; the second by the preceding acyclicity criterion. An additive functor carries quasi-isomorphisms between K-injectives to quasi-isomorphisms, since these maps are homotopy equivalences. Thus both units derive F⋙V. Mathlib rightDerivedUnique gives their comparison isomorphism, including when source and destination localization universes differ. Its rightDerivedNatTrans_app equation, conjugated by the exact-functor localization factorization isomorphisms, is exactly the full ExactSquareOfUniverses normalization. Apply this proved helper to the varying square and completed square, and repackage the latter as ExactSquare.",
+   "uses": [
+    "lem-sfb-diagonal-trace-ordinary-scalars",
+    "lem-sfb-diagonal-trace-restricted-push-acyclic",
+    "lem-diagonal-canonical-right-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-ordinary-scalars",
+  "lem-sfb-diagonal-trace-restricted-push-acyclic",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-diagonal-canonical-right-derived"
+ ],
+ "proof_origin": {
+  "by": "J9",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), scalar restrictions and direct-image comparisons before R lim"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right derived direct image commutes with inverse limit of strict towers and with restriction of scalars, normalized on K injective complexes",
+   "results": "8 hits; localCohomology.diagram, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-27",
+   "verdict": "No specialized constructor. Generic exact-functor unit comparisons are used in the combining proof where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesKInjectiveComplexes\"",
+   "results": "0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No specialized constructor. Generic exact-functor unit comparisons are used in the combining proof where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_diagonalTraceChernTwist|exists_diagonalTraceGeometricModel|exists_diagonalTraceScalarComparisons",
+   "results": "0 hits; ",
+   "date": "2026-10-27",
+   "verdict": "No specialized constructor. Generic exact-functor unit comparisons are used in the combining proof where applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceComparisonPartial",
+  "date": "2026-10-27",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), scalar restrictions and direct-image comparisons before R lim"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceScalarComparisons",
+  "file": "lean/Sheaf/Paper/DiagonalTraceScalarComparisons.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.exists_diagonalTraceScalarComparisons",
+  "statement": "theorem exists_diagonalTraceScalarComparisons (l : ℕ) [Fact l.Prime]\n    {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    (f : X ⟶ S) (b : SpTowerShriek.Base l (ULift.{u} (Padic l)))\n    (g : SpTowerShriek.Geometry l (ULift.{u} (Padic l)) b f)\n    (cS : Chern l (ULift.{u} (Padic l)) S)\n    (cX : Chern l (ULift.{u} (Padic l)) X)\n    (nS : cS.Normalized l (ULift.{u} (Padic l)))\n    (nX : cX.Normalized l (ULift.{u} (Padic l)))\n    (Rf : DiagonalRightDerived\n      (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f))\n    (Rt : DiagonalRightDerived (diagonalTraceSystemPush l f)) :\n    let E := ULift.{u} (Padic l)\n    letI : g.push.Additive := g.pushAdditive\n    letI : HasKInjectiveResolutions (Systems X (Arings l E X)) := b.kinjective X\n    ∃ (rS : Restriction l E S) (rX : Restriction l E X),\n      letI : rS.F.Additive := rS.additive\n      letI : rX.F.Additive := rX.additive\n      letI : PreservesFiniteLimits rS.F := rS.limits\n      letI : PreservesFiniteColimits rS.F := rS.colimits\n      letI : PreservesFiniteLimits rX.F := rX.limits\n      letI : PreservesFiniteColimits rX.F := rX.colimits\n      Nonempty (Coefficients l E S cS rS) ∧\n      Nonempty (Coefficients l E X cX rX) ∧\n      ∃ Rc : DiagonalRightDerived (diagonalTracePush l f),\n      ∃ varyingOrdinary : g.push ⋙ rS.F ≅ rX.F ⋙ diagonalTraceSystemPush l f,\n      ∃ varying_sections : ∀ (M : Systems X (Arings l E X)) (n : ℕ) (U : S.ProEtᵒᵖ)\n          (x : (((g.push ⋙ rS.F).obj M).obj (op n)).obj.obj U),\n        HEq (((varyingOrdinary.hom.app M).app (op n)).hom.app U x) x,\n      Nonempty (ExactSquareOfUniverses g.push (diagonalTraceSystemPush l f)\n        rX.F rS.F (canonicalDiagonalRightDerived g.push) Rt varyingOrdinary) ∧\n      ∃ completedOrdinary : diagonalTracePush l f ⋙ diagonalCompletedRestriction l S ≅\n        diagonalCompletedRestriction l X ⋙\n          lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f,\n      ∃ completed_sections : ∀ (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)\n          (x : ((diagonalTracePush l f ⋙ diagonalCompletedRestriction l S).obj M).obj.obj U),\n        HEq ((completedOrdinary.hom.app M).hom.app U x) x,\n      Nonempty (ExactSquare (diagonalTracePush l f)\n        (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)\n        (diagonalCompletedRestriction l X) (diagonalCompletedRestriction l S)\n        Rc Rf completedOrdinary)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T235941-L-1473108",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261027T012858-L-2343300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

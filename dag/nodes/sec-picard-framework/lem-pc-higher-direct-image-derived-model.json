@@ -128,5 +128,39 @@
   "kind": "proof",
   "note": "independent cc review: Sheaf re-export module and node lean record (existing:true) vs WeilConjectures.AlgebraicGeometry.HigherDirectImageDerivedModel theorem (verbatim statement, sorry-free, standard axioms) and the live node statement"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $f:X\\to T$ be a proper morphism which is locally of finite presentation\nand let $\\mathcal F$ be an $\\mathcal O_X$-module of finite presentation\nwhich is flat over $T$. Then there is an object $E$ of the derived category\n$D(\\mathcal O_T)$ ([def-pc-derived-category]) such that\n\n- **(a)** $H^n(E)=0$ for all $n<0$;\n- **(b)** $H^q(E)\\cong R^qf_*\\mathcal F$ for all $q\\ge0$\n  ([def-pc-derived-direct-image]);\n- **(c)** for every cartesian square ([def-pc-base-change]) with\n  $g:T'\\to T$, $g':X'\\to X$ and $f':X'\\to T'$, the base-change map\n  $Lg^*E\\to Rf'_*(g'^*\\mathcal F)$ is an isomorphism in $D(\\mathcal O_{T'})$,\n  where $Lg^*$ is the derived pullback of [def-pc-derived-pullback]; in\n  particular $H^q(Lg^*E)\\cong R^qf'_*(g'^*\\mathcal F)$ for every $q\\ge0$.",
+  "proof": [
+   {
+    "text": "Take $E=Rf_*(\\mathcal F[0])$, computed by an injective resolution of\n$\\mathcal F$ in degrees $\\ge0$. Then $E$ has no cohomology in negative\ndegrees, and $H^q(E)$ is the $q$-th right derived functor of $f_*$ at\n$\\mathcal F$, that is $R^qf_*\\mathcal F$; this gives (a) and (b).",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For (c), let $c$ be the comparison map from $Lg'^*(\\mathcal F[0])$ to\n$g'^*\\mathcal F[0]$. The canonical base-change map\n$Lg^*Rf_*(\\mathcal F[0])\\to Rf'_*(Lg'^*\\mathcal F[0])$ followed by\n$Rf'_*(c)$ is an isomorphism in $D(\\mathcal O_{T'})$ by\n[lem-pc-relatively-flat-canonical-module-base-change], since $f$ is proper, hence\nquasi-compact and separated, and $\\mathcal F$ is flat over $T$ (Stacks,\nTag 0A1D, and Tag 0B91 (2)); here $c$ is itself an isomorphism, by the\nsame lemma. Taking $H^q$ and applying (b) on $X'$ to the module\n$g'^*\\mathcal F$ gives $H^q(Lg^*E)\\cong R^qf'_*(g'^*\\mathcal F)$.",
+    "uses": [
+     "lem-pc-relatively-flat-canonical-module-base-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

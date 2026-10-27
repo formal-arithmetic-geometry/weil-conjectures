@@ -1,0 +1,93 @@
+{
+ "id": "lem-sfb-pullback-extend-scalars-comparison",
+ "kind": "definition",
+ "title": "Inverse image commutes with scalar extension for internal modules",
+ "statement": "Let g:Y→X be a morphism of schemes, R and S ring objects in abelian sheaves on X_proet, with R commutative, and φ:R→S a monoid-object morphism [sk-def-sfb-change-of-scalars]. For the monoidal inverse image g* and its module transport [sk-def-sfb-transport], there is a natural isomorphism g*_S ∘ Ext_φ ≅ Ext_(g*φ) ∘ g*_R. No finiteness, exactness or noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 5.4.1 (inverse-image compatibility); the monoidal adjunction argument already used in BoundedConstructibleExtendScalars.lean"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-transport"
+ ],
+ "proof": [
+  {
+   "text": "Compose extension/restriction adjunctions with the monoidal inverse-image adjunction. The two right adjoints are naturally isomorphic: commute mapMod with comap, compose restrictions of scalars, and use naturality of the inverse-image adjunction unit on φ. Uniqueness of left adjoints gives the displayed natural isomorphism.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-transport-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-transport-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 5.4.1 (inverse-image compatibility); the monoidal adjunction argument already used in BoundedConstructibleExtendScalars.lean",
+  "note": "F4: complete Lean proof, no new sorry or axiom. The unit route through constructible heart closure and bounded constructible cohomology is retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension of scalars for internal module objects commutes with monoidal inverse image",
+   "results": "{\"t\": \"2026-10-22T04:51:18Z\", \"tool\": \"leanfinder\", \"query\": \"extension of scalars for internal module objects commutes with monoidal inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalarsId_inv_app_apply\", \"CategoryTheory.Mod_.comap_obj_mod\", \"ModuleCat.extendScalars_id_comp_assoc\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"ModuleCat.extendScalars_comp_id_assoc\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\"], \"digest\": \"8fc1c48f83506588\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapMod\"",
+   "results": "{\"t\": \"2026-10-22T04:51:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapMod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"PointedContMDiffMap.instAlgebraSomeENatTopContMDiffMapModelWithCornersSelf\", \"PointedContMDiffMap.instIsScalarTowerSomeENatTopContMDiffMapModelWithCornersSelf\", \"LeftInvariantDerivation.instFunLikeContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instLinearMapClassContMDiffMapModelWithCornersSelfSomeENatTop\", \"LeftInvariantDerivation.instCoeDerivationContMDiffMapModelWithCornersSelfSomeENatTop\"], \"digest\": \"a5a913423bb068ad\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*extendScalars|constructible.*kernel|IsConstructibleModuleObject",
+   "results": "{\"t\": \"2026-10-22T04:51:21Z\", \"tool\": \"grep\", \"query\": \"mapMod.*extendScalars|constructible.*kernel|IsConstructibleModuleObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension of internal modules preserves local finite presentation and commutes with inverse image",
+   "results": "{\"t\": \"2026-10-22T04:57:40Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension of internal modules preserves local finite presentation and commutes with inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"ModuleCat.ExtendScalars.obj'\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"PresheafOfModules.pullback\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"LinearEquiv.extendScalarsOfIsLocalization\", \"LinearEquiv.extendScalarsOfSurjective_symm\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\"], \"digest\": \"acfa775ab17a0814\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact internal pro-etale module statement. Existing library proofs and categorical infrastructure are used instead."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory",
+  "date": "2026-10-22",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-bounded-constructible",
+   "place": "The triangulatedness argument: closure in the heart followed by the bounded cohomology criterion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sfb-bounded-constructible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackExtendScalarsComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackExtendScalarsComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.pullbackExtendScalarsComparison",
+  "statement": "def pullbackExtendScalarsComparison :\n    Mod.extendScalars φ ⋙ (upperStar Ab.{u + 1} g).mapMod S ≅\n      (upperStar Ab.{u + 1} g).mapMod R ⋙\n        Mod.extendScalars ((upperStar Ab.{u + 1} g).map φ)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-22"
+ }
+}

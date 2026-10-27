@@ -1,0 +1,381 @@
+{
+ "id": "lem-sfb-condensed-action-injective-restriction",
+ "kind": "statement",
+ "title": "Exact induction and injective restriction for condensed product actions",
+ "statement": "Let $A$ be a commutative condensed ring [sk-def-sfb-condensed-ring] on the small coherent profinite site in the universes of [def-weil-size-convention], and let $G,H$ be profinite groups. For $P=1,G,H,G\\times H$, let $\\mathcal A_P(A)$ be the category of internal $A$-modules with an $A$-linear action of the condensed group $\\underline P$, with the inflation adjunctions of [lem-sfb-condensed-product-action-inflation]. Internal modules are those of [sk-def-sfb-module-objects]; write $U_P:\\mathcal A_P(A)\\to\\mathcal A_1(A)$ for forgetting the action, $A[S]$ for the free internal module on a profinite set $S$ [def-sfb-condensed-free-module-adjunction], and $\\underline{\\operatorname{Hom}}_A$ for the internal module Hom [lem-pc-sheaf-modules-tensor-closed].\nFor every profinite $S$, the module $A[S]$ is the sheafification of $V\\mapsto\\bigoplus_{V\\to S}A(V)$ and is flat: $A[S]\\otimes_A-$ is exact. The equivalence with sectionwise module sheaves preserves these tensor and internal-Hom operations. The functors $U_P$ and restriction $\\operatorname{Res}_H:\\mathcal A_{G\\times H}(A)\\to\\mathcal A_H(A)$ preserve and reflect exactness. The exact left adjoint of $U_P$ is $M\\mapsto A[P]\\otimes_AM$ with translation action; the exact left adjoint of $\\operatorname{Res}_H$ is $M\\mapsto A[G]\\otimes_AM$ with translation by $G$ and the given $H$-action on $M$. Its adjunction sends $f:M\\to\\operatorname{Res}_H X$ to $[g]\\otimes m\\mapsto g f(m)$. In particular these restriction and forgetful functors preserve injective objects.\nFor every $N\\in\\mathcal A_{G\\times H}(A)$ a nonnegative equivariant injective resolution $N[0]\\to I^\\bullet$ exists. For any such resolution, $U_{G\\times H}I^q$ and $\\operatorname{Res}_H I^q$ are injective, while $(I^q)^H$ is injective in $\\mathcal A_G(A)$ and $U_G((I^q)^H)$ is injective in $\\mathcal A_1(A)$. Both $I^\\bullet$ and $(I^\\bullet)^H$ are K-injective in their respective action categories; $(I^\\bullet)^H$ represents $R\\Gamma_H^G(N[0])$ in $D(\\mathcal A_G(A))$, without requiring it to resolve $N^H[0]$. These assertions include trivial groups, the empty profinite set, zero modules and the zero ring.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated formal internal-bar input; Returned proof steps 1–2: sectionwise/internal equivalence, flat represented free modules, exact induction, injective restrictions and H-invariant K-injective resolution. Exact ordinary condensed-module reference WANTED in report.md."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "lem-sfb-condensed-product-action-inflation",
+  "sk-def-sfb-module-objects",
+  "def-weil-size-convention",
+  "def-sfb-condensed-free-module-adjunction",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-sp-injective-resolutions",
+  "sk-def-sfb-derived-categories",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-modobj-internal-hom",
+  "def-weil-pbc-kinjective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Let $E$ be the internal-to-sectionwise module equivalence. The site's size hypothesis and strong monoidal abelian sheafification are supplied by [sk-def-sfb-sheaf-tensor], so [def-weil-pbc-internal-abelian-sheaf-module-equivalence] applies. By [lem-pe-internal-section-tensor-comparison], $E$ is exact and identifies relative tensors by the local formula $m\\otimes n\\mapsto m\\otimes n$. It also identifies internal Homs: [def-sfb-modobj-internal-hom] and [lem-pc-sheaf-modules-tensor-closed] give the two tensor-Hom adjunctions, and for each test module $T$ they identify\n$\\operatorname{Hom}(T,E\\underline{\\operatorname{Hom}}_A(M,N))=\\operatorname{Hom}(E^{-1}T\\otimes_A M,N)=\\operatorname{Hom}(T\\otimes_A EM,EN)$.\nThe representing isomorphism and its inverse are the maps corresponding to the identity maps under these natural bijections; their composites are identities by the same bijections. Thus the comparison preserves the internal-Hom operation, including its evaluation map.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pe-internal-section-tensor-comparison",
+    "def-sfb-modobj-internal-hom",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 03EO (lemma-internal-hom-adjoint-tensor); internal comparison is the agent argument using the cited equivalence."
+   }
+  },
+  {
+   "text": "For a profinite $S$, put $B(V)=A(V)$ and $E_S(V)=C(V,S)$. The sheafification of $V\\mapsto B(V)[E_S(V)]$ is the free module on $E_S$ by [lem-trf-free-module-sheaf-universal-property]. Comparing its generator adjunction with [def-sfb-condensed-free-module-adjunction] identifies it with the sectionwise realization of $A[S]$: both inverse comparison maps send $[s]$ to $[s]$. Its displayed presheaf is precisely $V\\mapsto\\bigoplus_{V\\to S}A(V)$. Apply [lem-pc-sites-modules-j-shriek-flat] to the ringed profinite site and its object $S$; this sheaf is $j_{S!}B_S$ and its tensor functor is exact. Transport along the exact tensor comparison [lem-pe-internal-section-tensor-comparison] proves internal flatness of $A[S]$. No constancy assumption on the condensed ring has been used.",
+   "uses": [
+    "lem-trf-free-module-sheaf-universal-property",
+    "def-sfb-condensed-free-module-adjunction",
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04BL (lemma-universal-module), free-module construction; Tag 03EV (lemma-j-shriek-flat), clause (2)."
+   }
+  },
+  {
+   "text": "Use CondensedDerivedRestriction.forgetExact of [def-sfb-condensed-derived-invariants] for forgetting each action: it preserves finite limits and colimits and detects exactness. For product restriction, restrictionLimits and restrictionColimits give preservation; apply forgetExact first to the product-action complex and then to its H-restriction. The underlying module complexes agree definitionally, hence their exactness equivalences prove reflection as well.",
+   "uses": [
+    "def-sfb-condensed-derived-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CX (section-sheafification), exact module sheafification; the kernel and quotient action formulas are the agent argument."
+   }
+  },
+  {
+   "text": "Apply ProductForgetting.exists_datum of [lem-sfb-product-action-exact-forgetting] to the profinite first group and profinite retained group. For the plain induction choose both groups equal to P and use plainInduction; for the product induction use G,H and induction. The recorded freeGroup and generator are definitionally restrictionFree and restrictionGenerator, and forgetFirst is restriction along inr. Copy the underlying tensor comparison, additive functor, exactness and normalized adjunction. For the translation formula, apply the inverse underlying comparison to its recorded action equation and cancel hom followed by inv on sections. For product actions write p=(fst p,snd p), using extensionality of continuous maps, before the same cancellation. The inverse-transpose formulas agree definitionally. These are local existential witnesses inside the proofs, never data definitions chosen from unproved existence.",
+   "uses": [
+    "lem-sfb-product-action-exact-forgetting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Agent construction of internal induction from the two cited universal properties; blueprint paragraph (3), formal internal-bar input."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-rg-right-adjoint-preserves-injectives] to each exact induction adjunction of step 4. Its left adjoint preserves monomorphisms because it is exact, so $U_P$ and $\\operatorname{Res}_H$ preserve injectives. For $F=(-)^H:\\mathcal A_{G\\times H}(A)\\to\\mathcal A_G(A)$, [def-sfb-condensed-derived-invariants] supplies the exact left adjoint, inflation along $G\\times H\\to G$. The same right-adjoint lemma shows that $F$ preserves injectives. Consequently if $J$ is injective with product action, $U_{G\\times H}J$, $\\operatorname{Res}_H J$ and $J^H$ are injective; applying the already established result for $U_G$ to $J^H$ shows that $U_G(J^H)$ is injective as well. In the Lean assembly, the exactness instance for projection inflation is the existing restrictionLimits theorem of def-sfb-condensed-derived-invariants. The two preceding induction theorems supply precisely their injective-preservation conjuncts; no induction witness is selected in a definition.",
+   "uses": [
+    "lem-exc-rg-right-adjoint-preserves-injectives",
+    "def-sfb-condensed-derived-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 015Z (lemma-adjoint-preserve-injectives), implication (a) to (c)."
+   }
+  },
+  {
+   "text": "Use the existing abelian and Grothendieck action-category instances of [def-sfb-condensed-derived-invariants]. Mathlib IsGrothendieckAbelian.enoughInjectives ([lem-sp-grothendieck-enough-injectives]) supplies enough injectives, and injectiveResolution N ([lem-weil-pbc-left-exact-injective-resolution-degree-zero]) gives a nonnegative resolution of every N. For any supplied resolution I, InjectiveResolution.cochainComplex extends it by zero to integer degrees and its existing instances give injective terms in every degree, including negative ones. Apply the three injective-preservation results of step 5 to each term, then apply forgetting for G to the invariant term. This proves all four asserted injectivities.",
+   "uses": [
+    "def-sfb-condensed-derived-invariants",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K (lemma-injective-resolutions-exist), clause (1); enough injectives is Tag 079H (injectives.tex, theorem-injective-embedding-grothendieck)."
+   }
+  },
+  {
+   "text": "The original resolution complex is K-injective by the existing Mathlib instance for InjectiveResolution.cochainComplex. Its termwise V-image is strictly supported in degrees at least zero, since the additive functor preserves zero objects. Step 5 makes all its terms injective. Apply CochainComplex.isKInjective_of_injective at the bound zero ([lem-weil-pbc-bounded-below-injectives-kinjective]). For the total derived comparison, use the proved source-library definition Functor.rightDerivedFunctorObjQIso on I.cochainComplex: it is the inverse right-derived unit, with the quotient-to-derived comparison isomorphisms. Compose it with the image under V.functor.rightDerivedFunctor of DerivedCategory.singleFunctorIsoCompQ at N followed by asIso (DerivedCategory.Q.map I.ι'). The map I.ι' is a quasi-isomorphism by the injective-resolution API, so this is an isomorphism. The resulting endpoints are exactly RF(N[0]) and Q(F(I)). No quasi-isomorphism from N^H[0] to the invariant complex is asserted or used. The broader kInjective_computes theorem about homotopy categories and ordinary derived cohomology is not needed.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-sfb-condensed-derived-invariants",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013R (lemma-acyclic-is-zero), bounded-below injectives; Tags 070H and 070I (definition-K-injective and lemma-K-injective), computation in the unbounded derived category."
+   }
+  },
+  {
+   "text": "For a trivial group the induction formulas reduce to $A[1]\\otimes_A M=A\\otimes_A M\\cong M$ and invariants are the identity. For $S=\\varnothing$, the displayed free presheaf is zero on nonempty test objects and is also zero on the empty test object, since $A(\\varnothing)=0$ by the empty-cover sheaf condition; hence $A[\\varnothing]=0$ and its tensor functor is exact. For a zero module all maps and actions above are the unique zero maps. Over the zero ring every unital module is zero, so its action categories have one object up to unique isomorphism and all assertions hold. The proofs used neither nontriviality of groups nor nonzero coefficients.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Elementary specializations of the explicit constructions in steps 1–7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-modobj-internal-hom",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-trf-free-module-sheaf-universal-property",
+  "def-sfb-condensed-free-module-adjunction",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "def-sfb-condensed-derived-invariants",
+  "lem-sfb-product-action-exact-forgetting",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal-module induction and invariants input. Stage-3 K7 proved action_injective_restriction using the induction conjuncts, Mathlib injective-resolution and K-injective instances, and the canonical upstream rightDerivedFunctorObjQIso. Stage-3 D6 proves forget_tensor_induction and product_tensor_induction from the existing normalized ProductForgetting.exists_datum, exact forgetting and restriction in CondensedDerivedInvariants, sectionwise cancellation of comparison isomorphisms, and the exact-adjoint injectivity lemma. The original comparison theorem restriction_free_flat_comparison remains open with its original proof plan (steps 1 and 2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and forgetting profinite condensed group actions preserve injective internal modules by exact free-module induction",
+   "results": "{\"t\": \"2026-10-22T05:58:42Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction and forgetting profinite condensed group actions preserve injective internal modules by exact free-module induction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatFunctor\", \"CondensedMod.ofSheafProfinite\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf\", \"Condensed.profiniteFree\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatCondensedDiscrete\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatLightCondensedDiscrete\"], \"digest\": \"b3205c50a1af7ff6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-ring CondensedMod free functors and set-theoretic Function.Injective actions do not state internal-module induction, exactness or injective restriction for a variable condensed ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a commutative condensed ring free modules on profinite sets are flat and restriction from product group actions preserves injectives",
+   "results": "{\"t\": \"2026-10-22T05:58:42Z\", \"tool\": \"leansearch\", \"query\": \"For a commutative condensed ring free modules on profinite sets are flat and restriction from product group actions preserves injectives\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"Action\"",
+   "results": "{\"t\": \"2026-10-22T05:58:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"Injective\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Function.Injective.addAction\", \"Function.Injective.mulAction\", \"Function.Injective.subtractionMonoid\", \"Function.Injective.subtractionCommMonoid\", \"Function.Injective.mulActionWithZero\", \"Function.Injective.distribMulAction\", \"AddAction.toPerm_injective\", \"MulAction.toPerm_injective\"], \"digest\": \"a7085b8e65e36384\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-ring CondensedMod free functors and set-theoretic Function.Injective actions do not state internal-module induction, exactness or injective restriction for a variable condensed ring."
+  },
+  {
+   "tool": "grep",
+   "query": "(injective.*(forget|restrict)|(forget|restrict).*injective|Condensed.*flat|flat.*Condensed)",
+   "results": "{\"t\": \"2026-10-22T05:58:43Z\", \"tool\": \"grep\", \"query\": \"(injective.*(forget|restrict)|(forget|restrict).*injective|Condensed.*flat|flat.*Condensed)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Ergodic/MeasurePreserving.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Concrete.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/CategoryTheory/ConcreteCategory/EpiMono.lean\", \"Mathlib/CategoryTheory/ConcreteCategory/EpiMono.lean\", \"Mathlib/CategoryTheory/ConcreteCategory/EpiMono.lean\", \"Mathlib/CategoryTheory/ConcreteCategory/EpiMono.lean\", \"Mathlib/CategoryTheory/ConcreteCategory/EpiMono.lean\"], \"digest\": \"1465dff667211100\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-ring CondensedMod free functors and set-theoretic Function.Injective actions do not state internal-module induction, exactness or injective restriction for a variable condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact induction by tensoring with the free internal module on a profinite group is left adjoint to restriction of internal group actions and hence restriction preserves categorical injectives",
+   "results": "{\"t\": \"2026-10-22T05:59:34Z\", \"tool\": \"leanfinder\", \"query\": \"Exact induction by tensoring with the free internal module on a profinite group is left adjoint to restriction of internal group actions and hence restriction preserves categorical injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"91cb06231aa77085\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-ring CondensedMod free functors and set-theoretic Function.Injective actions do not state internal-module induction, exactness or injective restriction for a variable condensed ring."
+  },
+  {
+   "tool": "grep",
+   "query": "(Injective|flat|induction|restrict)",
+   "results": "{\"t\": \"2026-10-22T05:59:23Z\", \"tool\": \"grep\", \"query\": \"(Injective|flat|induction|restrict)\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/Discrete/Colimit.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\"], \"digest\": \"16cbec8ff491c56e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-ring CondensedMod free functors and set-theoretic Function.Injective actions do not state internal-module induction, exactness or injective restriction for a variable condensed ring."
+  },
+  {
+   "tool": "grep",
+   "query": "(injective.*(forget|restrict)|(forget|restrict).*injective)",
+   "results": "{\"t\": \"2026-10-22T05:59:23Z\", \"tool\": \"grep\", \"query\": \"(injective.*(forget|restrict)|(forget|restrict).*injective)\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean\", \"Mathlib/RepresentationTheory/AlgebraRepresentation/Basic.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/Tannaka.lean\", \"Mathlib/RepresentationTheory/FDRep.lean\", \"Mathlib/RepresentationTheory/FDRep.lean\", \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"Mathlib/RepresentationTheory/Rep/Basic.lean\"], \"digest\": \"1e30ea7bb003b2ca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-ring CondensedMod free functors and set-theoretic Function.Injective actions do not state internal-module induction, exactness or injective restriction for a variable condensed ring."
+  },
+  {
+   "tool": "grep",
+   "query": "(injective.*(restrict|forget)|(restrict|forget).*injective)",
+   "results": "{\"t\": \"2026-10-22T09:00:21Z\", \"tool\": \"grep\", \"query\": \"(injective.*(restrict|forget)|(restrict|forget).*injective)\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-ring CondensedMod free constructions, abstract Action category and function-injectivity results do not state the conjunction for internal actions over a variable condensed ring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact induction for internal group actions on sheaves of modules and bounded below injective resolutions",
+   "results": "{\"t\": \"2026-10-22T09:00:22Z\", \"tool\": \"leansearch\", \"query\": \"Exact induction for internal group actions on sheaves of modules and bounded below injective resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.instAbelian\", \"groupCohomology.H1InfRes\", \"MulAction.injective_ofQuotientStabilizer\", \"AddAction.injective_ofQuotientStabilizer\", \"Function.Injective.mulActionHom_embedding.congr_simp\", \"Function.Injective.mulActionHom_embedding_apply\", \"Function.Injective.mulActionHom_embedding_isInjective\", \"CategoryTheory.PreGaloisCategory.toAut_injective_of_non_trivial\"], \"digest\": \"b51a97ca36051834\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-ring CondensedMod free constructions, abstract Action category and function-injectivity results do not state the conjunction for internal actions over a variable condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"Action\"",
+   "results": "{\"t\": \"2026-10-22T09:00:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"Injective\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Function.Injective.addAction\", \"Function.Injective.mulAction\", \"Function.Injective.subtractionMonoid\", \"Function.Injective.subtractionCommMonoid\", \"Function.Injective.mulActionWithZero\", \"Function.Injective.distribMulAction\", \"AddAction.toPerm_injective\", \"MulAction.toPerm_injective\"], \"digest\": \"a7085b8e65e36384\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-ring CondensedMod free constructions, abstract Action category and function-injectivity results do not state the conjunction for internal actions over a variable condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and forgetting internal profinite group actions on modules over a condensed ring preserve injective objects",
+   "results": "{\"t\": \"2026-10-22T09:00:23Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction and forgetting internal profinite group actions on modules over a condensed ring preserve injective objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteFree\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor\", \"CondensedMod.IsSolid\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"CondensedMod.LocallyConstant.instFaithfulModuleCatCondensedDiscrete\", \"CondensedMod.LocallyConstant.functor\"], \"digest\": \"c6f7a2237b9ec759\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-ring CondensedMod free constructions, abstract Action category and function-injectivity results do not state the conjunction for internal actions over a variable condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free sheaf modules on representable profinite sets are flat; exact left adjoints imply restriction preserves categorical injectives",
+   "results": "{\"t\": \"2026-10-22T09:00:46Z\", \"tool\": \"leanfinder\", \"query\": \"Free sheaf modules on representable profinite sets are flat; exact left adjoints imply restriction preserves categorical injectives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteFree\", \"LightCondensed.free\", \"Condensed.free\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\"], \"digest\": \"3929c6dc18067c2b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-ring CondensedMod free constructions, abstract Action category and function-injectivity results do not state the conjunction for internal actions over a variable condensed ring."
+  },
+  {
+   "tool": "grep",
+   "query": "(profiniteFree|IsSolid)",
+   "results": "{\"t\": \"2026-10-22T09:01:05Z\", \"tool\": \"grep\", \"query\": \"(profiniteFree|IsSolid)\", \"sub\": \"Condensed/Solid.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"16\", \"21\", \"24\", \"25\", \"45\"], \"digest\": \"d752f26ffa6ac71b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned constant-ring CondensedMod free constructions, abstract Action category and function-injectivity results do not state the conjunction for internal actions over a variable condensed ring."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-product-bar-comparison",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image; formal internal product-to-successive-bar input. Returned proof steps 1–2: sectionwise/internal equivalence, flat represented free modules, exact induction, injective restrictions and H-invariant K-injective resolution.",
+   "via": [
+    "lem-sfb-condensed-product-bar-comparison",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-action-injective-restriction",
+  "worker": "stage1",
+  "summary": "Reused the existing variable-ring ringed-site flatness node and internal/sectionwise tensor equivalence; wrote the explicit generator induction adjunction and underlying kernel/cokernel actions. Applied existing exact-adjoint, enough-injectives and K-injective computation nodes. No new nodes and no changes to the statement.",
+  "blueprint": "Current main-20261015 direct-images proof, paragraph (3), open-image branch, formal internal-bar infrastructure. Existing ancestor command returns None because created.item eventually names a Lean module rather than a DAG node; retained inherited null from.node and full via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   },
+   {
+    "node": "lem-trf-free-module-sheaf-universal-property",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   },
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   },
+   {
+    "node": "lem-exc-rg-right-adjoint-preserves-injectives",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   },
+   {
+    "node": "lem-sp-kinjective-computes",
+    "why": "Generic ringed-site module or homological-algebra input used in the internal action argument; this unit has no replacement for the stated input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-trf-free-module-sheaf-universal-property",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-exc-rg-right-adjoint-preserves-injectives",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-7b6ea0589",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-7b6ea0589 (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes, and its statement is byte-identical to the base (checked against the Q137/Q139 snapshot copies); only status, proof, proof_deps, proof_origin, searches and two stmt_deps changed. Step 1 checks out: sk-def-sfb-sheaf-tensor (1) meets the monoidal-sheafification hypothesis of the internal/sectionwise equivalence. lem-pe-internal-section-tensor-comparison gives exactness and the tensor comparison, and internal Hom follows by Yoneda from def-sfb-modobj-internal-hom and lem-pc-sheaf-modules-tensor-closed (03EO). Step 2 checks out: the uniqueness clause of lem-trf-free-module-sheaf-universal-property identifies the composite free module with B[h_S]. Its presheaf ⊕_{V→S}A(V) is the extension-by-zero presheaf of lem-pc-sites-modules-j-shriek-flat (Stacks 03EV (2), read), with the same restriction maps, so A[S] is flat for every S and for any condensed ring A, constant or not. Step 3 checks out: the action on the sheafified cokernel is well defined, and the exact sheafification leaf gives creation and reflection of exactness. Step 4: I verified the induction formulas myself. The equivariance is g0g f(hm)=(g0g,h)f(m), the inverse is t([1]⊗m), and t([g]⊗m)=g t([1]⊗m). Exactness comes from step 2 flatness detected after forgetting. Steps 5–7 check out: the right-adjoint-preserves-injectives leaf applies to the induction adjunctions and to inflation ⊣ (−)^H. Grothendieck gives enough injectives and a resolution in degrees ≥0, bounded-below injective complexes are K-injective, and lem-sp-kinjective-computes (2) gives (I)^H = RΓ_H^G(N[0]); the step correctly does not claim it resolves N^H. Step 8: I checked trivial groups, S=∅ (A(∅)=0 from the empty cover), S=pt, the zero ring, and the case A=Z. Batch-5 flag on lem-trf-free-module-sheaf-universal-property: it is the generic Stacks 04BL free-module universal property, its closure contains only 3 definition nodes and no other trace-formula or Poincaré-duality node, so it lies outside both assumptions and I accept it. There is no SGA citation and no cycle. The tool_uses are generic ringed-site and homological tools, accepted. Advisories: (1) The stmt_dep def-weil-pbc-kinjective-resolutions (étale-site K-injective) is redundant, since sk-def-sfb-derived-categories already defines K-injective. (2) Maintainer note: lem-sfb-product-action-exact-forgetting (NE, unsplit) already states the induction adjunction, flatness of R[G] and preservation of injectives for J=H. lem-sfb-sheaf-action-grothendieck-inflation already gives step 3, and lem-sfb-condensed-action-injective-infrastructure overlaps the RΓ part. The item proves these correctly inline, and its statement is broader. Later work should cite one node so the induction is formalized only once."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedActionInjectiveRestriction",
+  "declaration": "Profinite.CondensedAction.action_injective_restriction",
+  "declarations": [
+   "Profinite.CondensedAction.restrictionFree",
+   "Profinite.CondensedAction.restrictionGenerator",
+   "Profinite.CondensedAction.restrictionEquivalence",
+   "Profinite.CondensedAction.restrictionRing",
+   "Profinite.CondensedAction.restrictionHomEvaluation",
+   "Profinite.CondensedAction.restriction_free_flat_comparison",
+   "Profinite.CondensedAction.ForgetTensorInduction",
+   "Profinite.CondensedAction.forget_tensor_induction",
+   "Profinite.CondensedAction.ProductTensorInduction",
+   "Profinite.CondensedAction.product_tensor_induction",
+   "Profinite.CondensedAction.action_injective_restriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedActionInjectiveRestriction.lean",
+  "statement": "theorem action_injective_restriction (V : ProductInvariants A.toMon G H) : (∀ N : ActionModule A.toMon (G × H), Nonempty (InjectiveResolution N)) ∧ V.functor.PreservesInjectiveObjects ∧ ∀ (N : ActionModule A.toMon (G × H)) (I : InjectiveResolution N), (∀ q : ℤ, Injective (I.cochainComplex.X q).module ∧ Injective ((inflate (ContinuousMonoidHom.inr G H)).obj (I.cochainComplex.X q)) ∧ Injective (V.functor.obj (I.cochainComplex.X q)) ∧ Injective (V.functor.obj (I.cochainComplex.X q)).module) ∧ I.cochainComplex.IsKInjective ∧ CochainComplex.IsKInjective ((V.functor.mapHomologicalComplex (.up ℤ)).obj I.cochainComplex) ∧ Nonempty (V.functor.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj N) ≅ DerivedCategory.Q.obj ((V.functor.mapHomologicalComplex (.up ℤ)).obj I.cochainComplex))",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Four statement theorems render the free/sheafification/tensor/internal-Hom comparisons, universal exact forgetful induction, exact product induction, and all equivariant injective-resolution assertions. The two induction specifications have natural comparisons with the actual relative tensor and normalized generalized-element action and adjunction formulas. No induced object is chosen from a mere existence assertion. Existing action-category structures are imported from CondensedDerivedInvariants; no downstream product-bar comparison is imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21b3627fc",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Only the item's lean record changed; its statement appears verbatim in the file, all proofs are sorry, docstrings and lines are fine. Every node clause is rendered: A[S] identified with the sheafification of the free presheaf (generator to generator) and flat via tensorLeft finite limits/colimits for every S; the tensor comparison pinned on pure tensors and natural; the equalizer Hom to SheafOfModules.homObj comparison pinned by real evaluation and natural via the unique equalizer lift; forgetting and Res_H preserve and reflect exactness (K.Exact iff mapped Exact); the induction structures pin p[g]⊗m=[pg]⊗m, (g0,h)[g]⊗m=[g0g]⊗hm and untranspose [g]⊗m to g·f(m) (or (g,1)·f(m)), and are exact; forgetting, Res_H and (−)^H preserve injectives; for all N there is an InjectiveResolution, and for every I and every q in Z the four injectivity conjuncts hold; I and I^H are K-injective; (I)^H represents RΓ_H^G(N[0]) as a Nonempty iso to the canonical rightDerivedFunctor, without claiming it resolves N^H. ProductInvariants is normalized. Edge cases covered (trivial groups, empty S, zero modules and zero ring, all degrees, universes bound). Advisories: the abelian/derived instances come from def-sfb-condensed-derived-invariants and CondensedBar.Ring from def-sfb-condensed-equivariant-bar-data, neither in stmt_deps (S2 cannot add existing nodes; no cycle); the RΓ clause is object-level only, which all citers accept; the induction specs duplicate lem-sfb-product-action-exact-forgetting's theorem-module structures (that node is a citer, so it cannot be imported); def-weil-pbc-kinjective-resolutions is an unused stmt_dep. No fixes; no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T064451-L-2183428",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Profinite.CondensedAction.restriction_free_flat_comparison"
+  ],
+  "sorry_after": [
+   "Profinite.CondensedAction.restriction_free_flat_comparison"
+  ]
+ }
+}

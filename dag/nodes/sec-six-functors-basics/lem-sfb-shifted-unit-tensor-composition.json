@@ -1,0 +1,290 @@
+{
+ "id": "lem-sfb-shifted-unit-tensor-composition",
+ "kind": "statement",
+ "title": "Ordered tensor composition on shifted regular units",
+ "statement": "Let $\\mathcal X$ be a small site and $R$ a sheaf of commutative rings in the universes of [def-weil-size-convention]. Use ordinary sheaves of $R$-modules [def-weil-sheaf-of-modules-category], their unbounded derived category $D(R)$ [def-weil-abstract-derived-category], and the K-flat derived tensor with its usual unitors and signed cochain symmetry [lem-sf-ringed-derived-closed-symmetric-monoidal]. Put $I=R[0]$, $S_n=I[-n]$ for $n\\in\\mathbf Z$, and $m:I\\otimes_R^LI\\to I$ equal to unit multiplication. Use the signed tensor/shift comparisons of [lem-weil-pbc-derived-tensor-shift-descent]: first-shift extraction is unsigned and second-shift extraction by $b$ multiplies a summand with first-factor degree $a$ by $(-1)^{ab}$. Let $r_{p,q}:S_{p+q}\\xrightarrow{\\sim}S_p\\otimes_R^LS_q$ be the inverse of the comparison obtained by extracting first the first shift, then the second, followed by $m[-p-q]$, with ordinary addition of shifts.\n\nDefine $\\kappa_{Z,q}:Z\\otimes_R^LS_q\\xrightarrow{\\sim}Z[-q]$ to be extraction of the second shift $-q$ followed by the shifted right unitor. For every derived object $Z$ it is natural in $Z$, on arbitrary derived morphisms. One has $\\kappa_{I,q}=\\lambda_{S_q}$, with $\\lambda$ the left unitor. For all integers $p,q$ and arbitrary derived arrows $f:S_p\\to I$, $g:S_q\\to I$, the following is an equality of maps $S_p\\otimes_R^LS_q\\to I$:\n$$m(f\\otimes g)=g\\lambda_{S_q}(f\\otimes1)=g\\kappa_{I,q}(f\\otimes1)=g f[-q]\\kappa_{S_p,q}.$$\nThere is a function $t:\\mathbf Z\\times\\mathbf Z\\to\\{1,-1\\}$ fixed solely by these integer shift/extraction conventions, uniformly for all small sites and all $R$, such that\n$$\\kappa_{S_p,q}r_{p,q}=t_{p,q}\\operatorname{can}_{p,q},\\qquad t_{p,0}=t_{0,q}=1,$$\nwhere $\\operatorname{can}_{p,q}:S_{p+q}\\xrightarrow{\\sim}S_p[-q]$ is ordinary shift addition. Consequently\n$$m(f\\otimes g)r_{p,q}=t_{p,q}\\,g f[-q]\\operatorname{can}_{p,q}.$$\nThe function $t$ is independent of $R$, the site and the arrows, including when $R=0$. The equalities concern morphisms in the derived category; neither $f$ nor $g$ is required to admit a chain-map representative between the displayed unit complexes.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated internal bar normalization below the direct-image argument; extracted old steps 5–6, derived unitor naturality and signed single-summand calculation. Agent-formulated; exact non-SGA reference WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-derived-tensor-shift-descent"
+ ],
+ "proof": [
+  {
+   "text": "We may compute the structural maps on the displayed unit complexes. By [lem-pc-sheaf-modules-tensor-closed], tensoring a module sheaf with $R$ is naturally the identity, so $R$ is flat by [def-pc-flat-sheaf-modules]. Each $I[-n]$ is bounded with flat terms and hence K-flat by [lem-pc-kflat-closure]. Using the definition [def-pc-kflat-complex] and the shift functor [def-weil-abstract-derived-category], the same argument shows that shifting a flat-term K-flat complex preserves this property: it preserves flat terms, and tensoring an acyclic complex with the shift is a shift of the original acyclic tensor, by [lem-weil-pbc-total-tensor-integer-shifts]. Thus the stability assumption in [lem-weil-pbc-derived-tensor-shift-descent] holds. Its representative comparisons and those of [lem-sf-ringed-derived-closed-symmetric-monoidal] identify the structural maps used below with their total-complex formulas. This computation chooses representatives only for structural maps, never for the arrows $f,g$.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-kflat-closure",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal bar normalization supplied by agent; proof step 1. Sign convention: Stacks Tag 0FNH, item-shift-tensor; no claim that the blueprint spells out this auxiliary argument."
+   }
+  },
+  {
+   "text": "Write $t^2_{-q}$ for second-shift extraction. By [lem-weil-pbc-derived-tensor-shift-descent] it is an isomorphism natural in the first variable on every derived arrow. The right unitor is a natural isomorphism by [lem-sf-ringed-derived-closed-symmetric-monoidal] and [def-sfb-monoidal-category]. Hence $\\kappa_{Z,q}=\\rho_Z[-q]\\,t^2_{-q}(Z,I)$ is a natural isomorphism, and for every $h:Z\\to Z'$ its naturality equation is $\\kappa_{Z',q}(h\\otimes1)=h[-q]\\kappa_{Z,q}$. This uses naturality in $D(R)$ itself, including inverses of quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal bar normalization supplied by agent; proof step 2. Sign convention: Stacks Tag 0FNH, item-shift-tensor; no claim that the blueprint spells out this auxiliary argument."
+   }
+  },
+  {
+   "text": "For $Z=I$, the only first-factor degree is $0$, so second-shift extraction has coefficient $(-1)^{(-q)0}=1$ by [lem-weil-pbc-total-tensor-integer-shifts]. On the sole nonzero summand $R\\otimes_RR$ both $\\rho_I[-q]t^2_{-q}(I,I)$ and $\\lambda_{S_q}$ are multiplication $a\\otimes b\\mapsto ab$. The structural representative identifications of step 1 therefore give $\\kappa_{I,q}=\\lambda_{S_q}$ in $D(R)$. The same multiplication formula gives $m=\\lambda_I=\\rho_I$.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-derived-tensor-shift-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal bar normalization supplied by agent; proof step 3. Sign convention: Stacks Tag 0FNH, item-shift-tensor; no claim that the blueprint spells out this auxiliary argument."
+   }
+  },
+  {
+   "text": "Tensor bifunctoriality gives $f\\otimes g=(1_I\\otimes g)(f\\otimes1_{S_q})$. Naturality of the left unitor at the derived arrow $g:S_q\\to I$ gives $m(1_I\\otimes g)=g\\lambda_{S_q}$, since $m=\\lambda_I$. Using step 3 and then step 2 with $h=f$ yields precisely $m(f\\otimes g)=g\\lambda_{S_q}(f\\otimes1)=g\\kappa_{I,q}(f\\otimes1)=g f[-q]\\kappa_{S_p,q}$. These are typed equalities from $S_p\\otimes_R^LS_q$ to $I$; no realization of $f$ or $g$ by a chain map was used.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal bar normalization supplied by agent; proof step 4. Sign convention: Stacks Tag 0FNH, item-shift-tensor; no claim that the blueprint spells out this auxiliary argument."
+   }
+  },
+  {
+   "text": "Compute $r_{p,q}$ and $\\kappa_{S_p,q}$ on the unit complexes using step 1. In the comparison whose inverse is $r_{p,q}$, extracting the first shift $-p$ is unsigned. After this extraction the first factor is the unshifted $I$, so extracting the second shift $-q$ is also unsigned. Thus this comparison is the multiplication isomorphism $R\\otimes_RR\\to R$ on the unique summand in degree $p+q$, with no scalar sign. Its inverse sends a local section $a$ to $a\\otimes1$. In contrast, the extraction in $\\kappa_{S_p,q}$ has first-factor degree $p$, so its coefficient is $(-1)^{(-q)p}=(-1)^{pq}$. Its remaining right unitor is multiplication. Consequently $\\kappa_{S_p,q}r_{p,q}=(-1)^{pq}\\operatorname{can}_{p,q}$ as maps in $D(R)$, since ordinary shift addition is unsigned on these complexes. The local formulas determine maps of sheaves (simple tensors generate the tensor presheaf, and its sheafification defines the sheaf tensor).",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal bar normalization supplied by agent; proof step 5. Sign convention: Stacks Tag 0FNH, item-shift-tensor; no claim that the blueprint spells out this auxiliary argument."
+   }
+  },
+  {
+   "text": "Define $t_{p,q}$ to be $1$ when $pq$ is even and $-1$ when $pq$ is odd. This is a function of the integers alone, before choosing a site or a ring; it equals the coefficient in step 5 and gives $t_{p,0}=t_{0,q}=1$. Precompose the equality of step 4 by $r_{p,q}$ and substitute step 5 to obtain the final formula. All formulas also hold for the zero ring, where every displayed map is the unique map between zero objects. We have not attempted to recover $t_{p,q}$ from those maps, so this degenerate case causes no ambiguity in the uniformly defined function.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), internal bar normalization supplied by agent; proof step 6. Sign convention: Stacks Tag 0FNH, item-shift-tensor; no claim that the blueprint spells out this auxiliary argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-sfb-monoidal-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), auxiliary internal-bar normalization; explicit derived-naturality and single-summand argument, using Stacks Tag 0FNH for the signed tensor conventions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "shift.*[Tt]ensor|[Tt]ensor.*shift|[Ss]hifted.*comp",
+   "results": "{\"t\": \"2026-10-22T06:07:02Z\", \"tool\": \"grep\", \"query\": \"shift.*[Tt]ensor|[Tt]ensor.*shift|[Ss]hifted.*comp\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KProjective.lean\"], \"digest\": \"90ba6f8d8e330aac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cochain bifunctor shift maps, unitor naturality and CommShift₂Setup signs are ingredients; none states the ordered tensor/composition law on arbitrary derived arrows with the universal shifted-regular-unit normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In derived categories of module sheaves unitor naturality identifies the tensor of two shifted unit endomorphisms with Yoneda composition with signs independent of the coefficient ring",
+   "results": "{\"t\": \"2026-10-22T06:07:02Z\", \"tool\": \"leansearch\", \"query\": \"In derived categories of module sheaves unitor naturality identifies the tensor of two shifted unit endomorphisms with Yoneda composition with signs independent of the coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.rightUnitor_naturality_assoc\", \"CategoryTheory.MonoidalCategory.rightUnitor_naturality\", \"CategoryTheory.Localization.Monoidal.leftUnitor_naturality\", \"CategoryTheory.Localization.Monoidal.rightUnitor_naturality\", \"CategoryTheory.MonoidalCategory.leftUnitorNatIso\", \"CategoryTheory.MonoidalCategory.rightUnitorNatIso\", \"CategoryTheory.Dial.rightUnitor_naturality\", \"CategoryTheory.Dial.leftUnitor_naturality\"], \"digest\": \"f230479fcf267bb8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cochain bifunctor shift maps, unitor naturality and CommShift₂Setup signs are ingredients; none states the ordered tensor/composition law on arbitrary derived arrows with the universal shifted-regular-unit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorShift\"",
+   "results": "{\"t\": \"2026-10-22T06:07:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"tensorShift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cochain bifunctor shift maps, unitor naturality and CommShift₂Setup signs are ingredients; none states the ordered tensor/composition law on arbitrary derived arrows with the universal shifted-regular-unit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary derived morphisms from negatively shifted regular units, tensor followed by multiplication equals ordered shifted composition up to a universal integer Koszul sign normalized to one in degree zero",
+   "results": "{\"t\": \"2026-10-22T06:07:14Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary derived morphisms from negatively shifted regular units, tensor followed by multiplication equals ordered shifted composition up to a universal integer Koszul sign normalized to one in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommShift₂Setup.int_ε\", \"HomologicalComplex.leftUnitor'_inv_comm\", \"CategoryTheory.CommShift₂Setup.hε\", \"HomologicalComplex.rightUnitor'_inv_comm\", \"HomologicalComplex.leftUnitor'_inv_comm_assoc\", \"CategoryTheory.CommShift₂Setup.int_z\", \"HomologicalComplex.leftUnitor'_inv\", \"HomologicalComplex.leftUnitor'\"], \"digest\": \"c5ae86583fc5f671\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cochain bifunctor shift maps, unitor naturality and CommShift₂Setup signs are ingredients; none states the ordered tensor/composition law on arbitrary derived arrows with the universal shifted-regular-unit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorShift₁Iso|mapBifunctorShift₂Iso",
+   "results": "{\"t\": \"2026-10-22T06:08:49Z\", \"tool\": \"grep\", \"query\": \"mapBifunctorShift₁Iso|mapBifunctorShift₂Iso\", \"sub\": \"Algebra/Homology/BifunctorShift.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"17\", \"19\", \"22\", \"77\", \"95\"], \"digest\": \"71fa8123c3cc1ec2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: cochain bifunctor shift maps, unitor naturality and CommShift₂Setup signs are ingredients; none states the ordered tensor/composition law on arbitrary derived arrows with the universal shifted-regular-unit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorShift[₁₂]Iso|leftUnitor_naturality",
+   "results": "{\"t\": \"2026-10-23T11:27:06Z\", \"tool\": \"grep\", \"query\": \"mapBifunctorShift[₁₂]Iso|leftUnitor_naturality\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\", \"Mathlib/Algebra/Homology/BifunctorShift.lean\"], \"digest\": \"9e3f4b3c2cf2badc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general unitor naturality, cochain shift comparisons or graded-object tensors; none gives all clauses for arbitrary derived arrows from negatively shifted regular units on a small ringed site."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication of shifted unit derived morphisms is composition with tensor shift sign",
+   "results": "{\"t\": \"2026-10-23T11:27:07Z\", \"tool\": \"leansearch\", \"query\": \"Multiplication of shifted unit derived morphisms is composition with tensor shift sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.shiftFunctorAdd'\", \"AddChar.mulShift_mulShift\", \"CochainComplex.shiftFunctorAdd'.congr_simp\", \"CategoryTheory.ShiftedHom.comp_mk₀\", \"CategoryTheory.Pretriangulated.Triangle.shiftFunctorAdd'\", \"CategoryTheory.Adjunction.shift_unit_app\", \"CategoryTheory.ShiftedHom.mk₀_comp\", \"CategoryTheory.Adjunction.shift_unit_app_assoc\"], \"digest\": \"e915ff75cd69b521\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general unitor naturality, cochain shift comparisons or graded-object tensors; none gives all clauses for arbitrary derived arrows from negatively shifted regular units on a small ringed site."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftUnitor_naturality\"",
+   "results": "{\"t\": \"2026-10-23T11:27:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"leftUnitor_naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Bicategory.leftUnitor_naturality\", \"CategoryTheory.Bicategory.leftUnitor_naturality_assoc\", \"CategoryTheory.Limits.coprod.leftUnitor_naturality\", \"CategoryTheory.MonoidalCategory.leftUnitor_naturality\", \"CategoryTheory.MonoidalCategory.leftUnitor_naturality_assoc\", \"SemimoduleCat.MonoidalCategory.leftUnitor_naturality\", \"CategoryTheory.CartesianMonoidalCategory.ofChosenFiniteProducts.leftUnitor_naturality\", \"CategoryTheory.GradedObject.mapBifunctorLeftUnitor_naturality\"], \"digest\": \"f6ad0bfed106c543\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general unitor naturality, cochain shift comparisons or graded-object tensors; none gives all clauses for arbitrary derived arrows from negatively shifted regular units on a small ringed site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of morphisms from shifted units to the unit in a derived category equals shifted composition up to the Koszul sign",
+   "results": "{\"t\": \"2026-10-23T11:27:10Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product of morphisms from shifted units to the unit in a derived category equals shifted composition up to the Koszul sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommShift₂Setup.hε\", \"CategoryTheory.CommShift₂Setup.int_ε\", \"CategoryTheory.CommShift₂Setup.int_z\", \"HomologicalComplex.leftUnitor'_inv_comm\", \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"HomologicalComplex.rightUnitor'_inv_comm\", \"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"HomologicalComplex.leftUnitor'_inv_comm_assoc\"], \"digest\": \"64d0ec9345322fbc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general unitor naturality, cochain shift comparisons or graded-object tensors; none gives all clauses for arbitrary derived arrows from negatively shifted regular units on a small ringed site."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graded endomorphisms of the tensor unit: cup product agrees with Yoneda product via naturality of unitors and tensor shift comparisons",
+   "results": "{\"t\": \"2026-10-23T11:27:39Z\", \"tool\": \"leanfinder\", \"query\": \"Graded endomorphisms of the tensor unit: cup product agrees with Yoneda product via naturality of unitors and tensor shift comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GradedObject.Monoidal.instHasTensorTensorUnit\", \"CategoryTheory.GradedObject.Monoidal.instHasTensorTensorUnit_1\", \"CategoryTheory.GradedObject.Monoidal.instHasMapProdObjFunctorMapBifunctorCurriedTensorSingle₀TensorUnit\", \"CategoryTheory.GradedObject.Monoidal.instHasMapProdObjFunctorMapBifunctorCurriedTensorSingle₀TensorUnit_1\", \"CategoryTheory.GradedObject.Monoidal.triangle\", \"CategoryTheory.GradedObject.Monoidal.tensorUnit₀\", \"CategoryTheory.GradedObject.Monoidal.leftUnitor_naturality\", \"CategoryTheory.GradedObject.Monoidal.rightUnitor_naturality\"], \"digest\": \"97f2c23d22b153de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give general unitor naturality, cochain shift comparisons or graded-object tensors; none gives all clauses for arbitrary derived arrows from negatively shifted regular units on a small ringed site."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-inflation-graded-cup",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), agent-formulated internal bar normalization below the direct-image argument; extracted argument 3: old steps 5–6, arbitrary-derived-arrow unitor calculation and universal integer sign; exact source reference WANTED, not literally in the blueprint paragraph.",
+   "via": [
+    "lem-sfb-internal-inflation-graded-cup",
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-shifted-unit-tensor-composition",
+  "worker": "stage1",
+  "summary": "NH supplies six explicit steps, reusing existing tensor descent and monoidal interfaces. No new nodes, no statement change. Computes the universal sign (-1)^(pq) without choosing chain-map representatives for f or g. Searched the current project, whole imported blueprint and Mathlib; no exact attachment or leaf.",
+  "blueprint": "Current latest direct-images proof paragraph (3), auxiliary internal bar normalization in the inherited creation chain. The blueprint does not state the shifted-unit calculation itself; this is marked agent-written. The inherited blueprint.from.node is null and blueprint_refs.py ancestor reports None; no maintainer-owned ancestry field was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "Foundational ringed-site tensor/shift tool used for the auxiliary bar calculation; no stability or direct-image unit argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-integer-shifts",
+    "why": "Foundational ringed-site tensor/shift tool used for the auxiliary bar calculation; no stability or direct-image unit argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-derived-tensor-shift-descent",
+    "why": "Foundational ringed-site tensor/shift tool used for the auxiliary bar calculation; no stability or direct-image unit argument is replaced."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Foundational ringed-site tensor/shift tool used for the auxiliary bar calculation; no stability or direct-image unit argument is replaced."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Ordinary module-sheaf tensor unit, used only to check that R is flat before applying the resolving tensor model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-closure",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-a24a32d38",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-a24a32d38 (reviewer sub-agent of L); spot-checked: I read all six steps and every cited statement, and I accept the delivery as is. The delivery changes only the item and the NH report, with no new nodes. Compared key by key with the live node, which is still unsplit, the statement, stmt_deps, blueprint and created fields are identical; only the proof, proof_deps, proof_origin, mathlib_searches, split_report and status changed. I recomputed the sign myself with the shift convention of def-weil-abstract-derived-category ((K[1])^r=K^{r+1}, so S_n is R in degree n) and Stacks more-algebra.tex l.18385, item-shift-tensor (0FNH): extracting the first shift is unsigned and extracting the second has sign (-1)^{pb}. In r_{p,q} both extractions are unsigned, since the first factor already has degree 0 when the second shift is extracted. In kappa_{S_p,q} the sign is (-1)^{(-q)p}=(-1)^{pq}. So kappa r=(-1)^{pq} can, which agrees with the delivery. Step 1: R is flat by the unit isomorphism of lem-pc-sheaf-modules-tensor-closed together with def-pc-flat-sheaf-modules, each S_n is K-flat by lem-pc-kflat-closure, and the shift-stability hypothesis of the descent node is checked correctly through s^2. Step 2: naturality of kappa=rho[-q] t^2 for every derived h follows from the descent node's naturality of t^2 in the first variable plus naturality of rho. Step 3: kappa_{I,q}=lambda_{S_q} and m=lambda_I=rho_I, both being multiplication on R(x)R. Step 4: I checked the types of all four composites. Step 6: t is defined on ZxZ before any site or ring, and the R=0 case is handled. Edge cases checked: p or q equal to 0, p=q=1 (sign -1), negative and even integers, characteristic 2. The proof is agent-written and says so honestly: paragraph (3) of the main-20261015 direct-images proof does not contain this calculation, and a WANTED line is recorded. No SGA source is cited. proof_deps equals the union of the step uses. Searches for duplicates (lem-pur-total-tensor-signed-coherence, lem-pur-derived-tensor-additive-constraints, lem-sc-scheme-canonical-shift-unit-associativity) found none. All five declared tool_uses are accepted as generic tensor/shift tools: kflat-closure, total-tensor-integer-shifts, derived-tensor-shift-descent, ringed-derived-closed-symmetric-monoidal and sheaf-modules-tensor-closed."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ShiftedUnitTensorComposition",
+  "declaration": "CategoryTheory.ShiftedRegularUnit.shifted_unit_tensor_composition",
+  "declarations": [
+   "CategoryTheory.ShiftedRegularUnit.leftUnit",
+   "CategoryTheory.ShiftedRegularUnit.rightUnit",
+   "CategoryTheory.ShiftedRegularUnit.kappa",
+   "CategoryTheory.ShiftedRegularUnit.can",
+   "CategoryTheory.ShiftedRegularUnit.split",
+   "CategoryTheory.ShiftedRegularUnit.Identities",
+   "CategoryTheory.ShiftedRegularUnit.RingedIdentities",
+   "CategoryTheory.ShiftedRegularUnit.shifted_unit_tensor_composition"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ShiftedUnitTensorComposition.lean",
+  "statement": "theorem shifted_unit_tensor_composition : ∃ t : ℤ × ℤ → ℤˣ, (∀ p : ℤ, t (p, 0) = 1) ∧ (∀ q : ℤ, t (0, q) = 1) ∧ ∀ {C : Type c} [Category.{v} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max c v u}] [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] (R : Sheaf J CommRingCat.{max c v u}) [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)], RingedIdentities.{c, v, u, w} J R t",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper maps are actual composites of the canonical native K-flat derived tensor shift comparisons, localization unit identification and ordinary shift addition. Identities expands all naturality, unitor, ordered-composition and sign clauses; the integer-unit-valued sign is existentially quantified before the site and coefficient ring. Independent site object, arrow, coefficient and derived-Hom universes are preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c5b16ca1",
+  "group": "Q33",
+  "result": "fix",
+  "note": "Lean exact against node: I=Q(single 0 R) with unitIso=ε; split=inverse(first extraction, shifted second extraction, shiftFunctorAdd'(-q,-p), m⟦-(p+q)⟧); kappa=second extraction then ρ⟦-q⟧; can=shiftFunctorAdd'(-p,-q); 5 Identities conjuncts (naturality on all derived arrows, κ_I=λ_{S_q}, 3-equality chain for arbitrary f,g, κr=t·can, consequence); ∃ t:ℤ×ℤ→ℤˣ before all sites with t(p,0)=t(0,q)=1. Sign convention checked: commShift₂CurriedTensor = localization of Mathlib map₂CochainComplex, second shift (n₁*y).negOnePow, first unsigned. Edge cases p/q=0, p=q=1, R=0, char 2, independent universes OK. Node differs from live only in lean; statement verbatim; no hollow defs; single sorry; no duplicate found. Sole fault H11: 'Second reading by Q33' was a self-audit → fixes/lem-sfb-shifted-unit-tensor-composition.report.md (worker report verbatim + real clause-by-clause second reading). Advisories: RingedDerivedNative.monoidal/unitIso owned by uncited lem-sf-ringed-derived-native-tensor; base theorem stmt_dep shift-descent rendered by concrete upstream commShift₂CurriedTensor with same normalization. No compile (no Lean changed)."
+ }
+}

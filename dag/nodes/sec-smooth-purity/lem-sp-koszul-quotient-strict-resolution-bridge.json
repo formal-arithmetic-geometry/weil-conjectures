@@ -1,0 +1,402 @@
+{
+ "id": "lem-sp-koszul-quotient-strict-resolution-bridge",
+ "kind": "statement",
+ "title": "Strict Koszul to quotient comparison on one K-flat resolution",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, $R$ a sheaf of commutative rings, and $t\\in\\Gamma(\\mathcal C,R)$ with injective multiplication on $R$. Assume countable products of $R$-module sheaves are exact. Use unbounded derived categories with localization $\\mathcal Q$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For $j\\geq1$ let $B_j=R/t^jR$ and $L_j=[R\\xrightarrow{t^j}R]$ in degrees $[-1,0]$, augmented to $B_j$, with transitions $(t,1)$ and quotient reduction [def-pur-principal-koszul-quotient-towers]. Use right total tensor [def-pc-tensor-complex-sheaves], restricted derived scalar extension [lem-pur-derived-change-of-rings, def-pc-sheaf-restrict-scalars], and the normalized Roos model $\\mathsf R=\\operatorname{Cone}(1-s)[-1]$ in reordered coordinates $(v,u)$ with differential $(dv,-du-(1-s)v)$ [def-weil-strict-roos-model, lem-weil-strict-roos-comparison].\n\nFor every unbounded complex $M$ and every flat-term K-flat resolution $f:P\\to M$ [def-pc-kflat-complex, lem-pc-kflat-resolution], there is a span of strict tower maps\n$$(M\\otimes_RL_j)_j\\xleftarrow{f\\otimes1}(P\\otimes_RL_j)_j\\xrightarrow{1\\otimes\\epsilon_j}(\\operatorname{Res}(P\\otimes_RB_j))_j$$\nwhose arrows are levelwise quasi-isomorphisms. Its components induce canonical isomorphisms $\\mathcal Q(M\\otimes_RL_j)\\cong\\operatorname{Res}(\\mathcal Q(M)\\otimes_R^LB_j)$ in $D(R)$, compatible with all quotient transitions. The span gives an isomorphism\n$$s_f:\\mathcal Q\\mathsf R_j(M\\otimes_RL_j)\\xrightarrow{\\sim}\\mathcal Q\\mathsf R_j\\operatorname{Res}(P\\otimes_RB_j).$$\nLet $u_M:M\\to\\mathsf R_j(M\\otimes_RL_j)$ and $v_P:P\\to\\mathsf R_j\\operatorname{Res}(P\\otimes_RB_j)$ be the strict augmentations with components $m\\mapsto m\\otimes1$ and $p\\mapsto p\\otimes\\overline1$, respectively, and zero shifted components. Writing $e=\\mathcal Q(f)$, one has\n$$s_f\\,\\mathcal Q(u_M)=\\mathcal Q(v_P)e^{-1}.$$\nFor each $j$ the projection of this map is $\\mathcal Q(p\\mapsto p\\otimes\\overline1)e^{-1}$, the actual canonical quotient reduction. In particular these identities hold for a single $P$ simultaneously at all levels and identify the completion units themselves, without requiring $M$ to be K-flat or derived complete.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Reduction-as-cone and completeness sentences: one K-flat model for the entire quotient tower, including exact units; returned proof steps 7--8. Stacks 06YT (sites-cohomology.tex, lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change), 0A0E (algebraization.tex, lemma-derived-completion-koszul), 0941 (lemma-derived-limit-is-ok)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-strict-roos-model",
+  "lem-weil-strict-roos-comparison",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-sp-koszul-roos-comparison-data",
+  "def-pe-principal-power-ring-quotients",
+  "def-weil-pbc-successive-derived-quotient-data",
+  "def-pc-flat-sheaf-modules",
+  "def-sp-kflat-scalar-tower-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Multiplication by $t^j$ is a composite of $j$ monomorphisms, hence is injective. Thus $H^{-1}(L_j)=0$, $H^0(L_j)=B_j$, and $\\epsilon_j:L_j\\to B_j[0]$ induces the identity on $H^0$; it is a quasi-isomorphism. Its square with the transitions commutes: in degree zero both composites are the quotient $R\\to B_j$, and in degree $-1$ both are zero. The differential square for $(t,1)$ is $t^jt=t^{j+1}$.",
+   "uses": [
+    "def-pur-principal-koszul-quotient-towers",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN (definition-K-flat) and 06YU (definition-derived-tor), principal regular two-term resolution; elementary cohomology calculation"
+   }
+  },
+  {
+   "text": "Apply the bounded-above finite-free complex assertion of lem-sfb-ringed-finite-free-resolution-tensor with $B=R$, $K=L_j$, $b=0$, ranks one in degrees $-1,0$ and zero elsewhere, and the identity frames. It makes $L_j$ K-flat. Therefore lem-pur-kflat-tensor-quasiiso-independent, applied to $f:P\\to M$ with second factor $L_j$, makes $b_j=f\\otimes1_{L_j}$ a quasi-isomorphism for every $j$. This uses no K-flatness of $M$.",
+   "uses": [
+    "lem-sfb-ringed-finite-free-resolution-tensor",
+    "lem-pur-kflat-tensor-quasiiso-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ (lemma-bounded-flat-K-flat) and 06YP (lemma-K-flat-quasi-isomorphism)"
+   }
+  },
+  {
+   "text": "Apply lem-pur-kflat-tensor-quasiiso-independent to $\\epsilon_j:L_j\\to B_j[0]$ with second factor the given K-flat $P$. This proves $\\epsilon_j\\otimes1_P$ is a quasi-isomorphism. To put $P$ first, use the signed interchange $x\\otimes p\\mapsto(-1)^{rq}p\\otimes x$ for $x\\in L_j^r$, $p\\in P^q$, and the same formula on $B_j[0]$. The total differential formula shows it is a chain isomorphism: the two coefficients become $(-1)^{(r+1)q}$ and $(-1)^{r(q+1)+r}$, respectively, equal to $(-1)^{rq+q}$ and $(-1)^{rq}$. Interchange is natural in degree-zero cochain maps. Conjugating gives precisely $a_j=1_P\\otimes\\epsilon_j:P\\otimes L_j\\to\\operatorname{Res}(P\\otimes B_j)$. Hence $a_j$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism); signed total-tensor interchange, written out"
+   }
+  },
+  {
+   "text": "Put $X_j=M\\otimes L_j$, $Z_j=P\\otimes L_j$, and $Y_j=\\operatorname{Res}(P\\otimes B_j)$. Functoriality of tensor and the square in step 1 give strict tower maps $b:Z\\to X$ and $a:Z\\to Y$. In detail $b_j(1_P\\otimes(t,1))=(1_M\\otimes(t,1))b_{j+1}$ and $a_j(1_P\\otimes(t,1))=(1_P\\otimes\\mathrm{red})a_{j+1}$. Localizing the component span gives $c_j=\\mathcal Q(a_j)\\mathcal Q(b_j)^{-1}:\\mathcal QX_j\\xrightarrow{\\sim}\\mathcal QY_j$. Apply lem-pe-kflat-scalar-tower-realization to $K=\\mathcal Q M$, $e=\\mathcal Q f$ and the rings $B_j$. Its computation comparisons $\\epsilon_j^{\\mathrm{der}}:\\operatorname{Res}(K\\otimes_R^LB_j)\\xrightarrow{\\sim}\\mathcal QY_j$ identify all strict reductions with the canonical derived transitions. Thus $(\\epsilon_j^{\\mathrm{der}})^{-1}c_j$ are the claimed component isomorphisms, compatible with every composite transition.",
+   "uses": [
+    "def-pur-principal-koszul-quotient-towers",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "lem-pe-kflat-scalar-tower-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), K-flat computation; strict tensor naturality"
+   }
+  },
+  {
+   "text": "The Roos comparison lemma descends the strict cone construction to the derived category of towers, so it sends the levelwise quasi-isomorphisms $a,b$ to isomorphisms. Set $A=\\mathcal Q\\mathsf R(a)$, $B=\\mathcal Q\\mathsf R(b)$ and $s_f=AB^{-1}$. The stipulated coordinates are the braiding of the strict Roos model's coordinates: $(u,v)$ becomes $(v,u)$, and $(-du-(1-s)v,dv)$ becomes $(dv,-du-(1-s)v)$. Tower maps act diagonally in either ordering. This gives exactly the requested isomorphism on the specified normalized models.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), strict-cone functoriality and comparison"
+   }
+  },
+  {
+   "text": "Let $w_P:P\\to\\mathsf R Z$ have components $p\\mapsto p\\otimes1$ and zero shifted components. The tower transitions fix these components. They are cochain maps, since $d(1)=0$ in degree zero. In the Roos differential the extra term vanishes because $(1-s)(p\\otimes1)_j=0$. Diagonal functoriality now gives strict equalities $\\mathsf R(b)w_P=u_Mf$ and $\\mathsf R(a)w_P=v_P$: in each unshifted coordinate the equalities are $f(p)\\otimes1$ and $p\\otimes\\overline1$, and all shifted coordinates are zero. Localizing, $B\\mathcal Q(w_P)=\\mathcal Q(u_M)e$ and $A\\mathcal Q(w_P)=\\mathcal Q(v_P)$. Multiplication by inverses yields $s_f\\mathcal Q(u_M)=\\mathcal Q(v_P)e^{-1}$.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-pur-principal-koszul-quotient-towers",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); explicit augmentation calculation in the strict cone coordinates"
+   }
+  },
+  {
+   "text": "Projecting the last identity to level $j$ gives $\\mathcal Q(p\\mapsto p\\otimes\\overline1)e^{-1}$. Indeed evaluation in the strict Roos model selects the unshifted $j$th coordinate. By the unit identity $\\epsilon_j^{\\mathrm{der}}u_j(K)e=\\mathcal Q(p\\mapsto p\\otimes\\overline1)$ of lem-pe-kflat-scalar-tower-realization this is the actual derived quotient unit, under its specified comparison, rather than just some map to an isomorphic object. The Roos comparison identifies zero-shifted-component strict augmentations with the canonical derived-limit maps, so the identity also identifies the completion units. Every construction above used the originally given $P$ and $f$ for all $j$; no completeness or boundedness hypothesis entered.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-pe-kflat-scalar-tower-realization",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change) and 0941 (lemma-derived-limit-is-ok), computation of units and evaluation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-principal-koszul-quotient-towers",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-ringed-finite-free-resolution-tensor",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pe-kflat-scalar-tower-realization",
+  "lem-weil-strict-roos-comparison",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Reduction-as-cone and completeness sentences, refined using Stacks 06YP, 06YQ, 06YY and 0941 with explicit strict-tower and unit computations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site for a regular global section the Koszul completion of any unbounded complex is canonically isomorphic to the Roos complex of quotient tensors of one K flat resolution preserving all quotient units",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CategoryTheory.Abelian.LeftResolution.chainComplexXIso",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "CategoryTheory.instIsIsoToRightDerivedZero'",
+     "CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self",
+     "CategoryTheory.Abelian.LeftResolution.chainComplexXOneIso",
+     "CategoryTheory.instIsIsoFromLeftDerivedZero'",
+     "CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self",
+     "Algebra.FormallySmooth.iff_injective_lTensor_residueField"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract resolutions, Tor, ordinary adic completion or generic quasi-isomorphisms, not a strict sheaf quotient tower span on one K-flat resolution with its specified completion unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"quasiIso\"",
+   "results": {
+    "subdirectory": "",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract resolutions, Tor, ordinary adic completion or generic quasi-isomorphisms, not a strict sheaf quotient tower span on one K-flat resolution with its specified completion unit."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk][Ff]lat|[Kk]_flat|Koszul",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 1,
+    "hits": [
+     "Mathlib/Algebra/Homology/LocalCohomology.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract resolutions, Tor, ordinary adic completion or generic quasi-isomorphisms, not a strict sheaf quotient tower span on one K-flat resolution with its specified completion unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A common K flat resolution gives quasi-isomorphisms of entire principal Koszul and quotient tensor towers identifying the completion unit with the quotient augmentation",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "quasiIso_comp",
+     "QuasiIso",
+     "quasiIso_iff",
+     "CategoryTheory.InjectiveResolution.quasiIso",
+     "quasiIso_of_isIso",
+     "QuasiIsoAt.mk",
+     "CategoryTheory.ProjectiveResolution.quasiIso",
+     "HomologicalComplex.mem_quasiIso_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract resolutions, Tor, ordinary adic completion or generic quasi-isomorphisms, not a strict sheaf quotient tower span on one K-flat resolution with its specified completion unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring an arbitrary sheaf complex with a finite free resolution of a regular quotient computes restricted derived scalar extension naturally in all powers and identifies reduction maps",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CategoryTheory.Tor'_obj_obj",
+     "CategoryTheory.Tor_obj",
+     "CategoryTheory.Tor",
+     "CategoryTheory.Tor'",
+     "Rep.Tor",
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "Rep.Tor_obj",
+     "Algebra.tensorH1CotangentOfIsLocalization"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern abstract resolutions, Tor, ordinary adic completion or generic quasi-isomorphisms, not a strict sheaf quotient tower span on one K-flat resolution with its specified completion unit."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|KFlat|k_flat",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 1,
+    "hits": [
+     "Mathlib/Algebra/Homology/LocalCohomology.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are ordinary flat module criteria, cotangent base change, generic derived localization, or an unrelated representation resolution; none states the strict ringed-site tower comparison with its units."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Koszul complex of a non zero divisor computes derived quotient tensors for unbounded complexes compatibly with inverse limit augmentations",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso",
+     "DerivedCategory",
+     "HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso",
+     "HomologicalComplex.homologyIsCokernel",
+     "DerivedCategory.quotientCompQhIso",
+     "HomologicalComplexUpToQuasiIso.quotientCompQhIso",
+     "tensorKaehlerQuotKerSqEquiv_symm_tmul_D",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are ordinary flat module criteria, cotangent base change, generic derived localization, or an unrelated representation resolution; none states the strict ringed-site tower comparison with its units."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"quasiIso\"",
+   "results": {
+    "subdirectory": "",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are ordinary flat module criteria, cotangent base change, generic derived localization, or an unrelated representation resolution; none states the strict ringed-site tower comparison with its units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded free resolution of a regular quotient gives a natural quasi isomorphism from tensor Koszul complexes to derived scalar extension",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "KaehlerDifferential.tensorKaehlerEquivBase",
+     "Algebra.Extension.tensorH1Cotangent",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+     "Algebra.Extension.tensorCotangent",
+     "tensorKaehlerQuotKerSqEquiv_tmul_D",
+     "Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+     "KaehlerDifferential.tensorKaehlerEquiv_left_inv",
+     "Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are ordinary flat module criteria, cotangent base change, generic derived localization, or an unrelated representation resolution; none states the strict ringed-site tower comparison with its units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A common K flat resolution compares the strict principal Koszul tensor tower and quotient tensor tower preserving the Roos completion unit",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "Module.Flat.tfae_equational_criterion",
+     "Module.Flat.iff_rTensor_exact'",
+     "Module.Flat.of_flat_tensorProduct",
+     "Module.Flat.exists_factorization_of_isFinitelyPresented",
+     "Module.Flat.iff_rTensor_exact",
+     "Module.Flat.iff_lTensor_exact'",
+     "Module.Flat.of_forall_exists_factorization",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are ordinary flat module criteria, cotangent base change, generic derived localization, or an unrelated representation resolution; none states the strict ringed-site tower comparison with its units."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-power-torsion-sheaf-limit-complete",
+  "date": "2026-10-22",
+  "group": "O4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Reduction-as-cone and completeness sentences: one K-flat model for the entire quotient tower, including exact units; returned proof steps 7--8. Stacks 06YT (sites-cohomology.tex, lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change), 0A0E (algebraization.tex, lemma-derived-completion-koszul), 0941 (lemma-derived-limit-is-ok).",
+   "via": [
+    "lem-sp-power-torsion-sheaf-limit-complete"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-koszul-quotient-strict-resolution-bridge",
+  "worker": "stage1",
+  "summary": "ND checked the regular Koszul resolution, both tensor quasi-isomorphisms, strict transition squares, normalized Roos coordinates and exact unit equations. Reused existing generic tool nodes; no new nodes or statement changes. Fresh logged Mathlib searches found no exact attachment or Mathlib match.",
+  "blueprint": "sk-lem-sp-tower proof: reduction modulo a power is a cone; completeness sentence. Steps 1-4 justify the Koszul/quotient tower on one resolution; steps 5-7 compare its Roos model and actual units.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-finite-free-resolution-tensor",
+    "why": "Only its general bounded-above finite-free K-flatness assertion is used, for the explicit two-term L_j; the unit has no such foundational tensor lemma."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "Generic preservation of quasi-isomorphisms by tensoring with a K-flat complex, used twice; it does not replace any reconstruction step of this unit."
+   },
+   {
+    "node": "lem-pe-kflat-scalar-tower-realization",
+    "why": "Generic K-flat scalar-extension computation with transition and unit normalization, used for the quotient rings; the unit gives no such representative-level tool."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic exact-product strict Roos functor and normalized augmentation comparison; used to localize the explicitly constructed span and read its unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-ringed-finite-free-resolution-tensor",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pe-kflat-scalar-tower-realization",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-ND-57f049f52",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-57f049f52 (reviewer sub-agent of L); spot-checked: First split of an unsplit item. No repair note applies, and live and side-live still have the item unsplit. Compared with side-live, only the proof, proof_deps, proof_origin, status, split_report and the searches changed; the statement, stmt_deps and blueprint fields are identical. No new nodes, no SGA. Each step checked against the statement of the node it cites. Step 1: injectivity of t^j gives a quasi-isomorphism epsilon_j, and the (t,1) squares commute in both degrees. Step 2: lem-sfb-ringed-finite-free-resolution-tensor applies with b=0 and ranks 1,1, so L_j is K-flat, and lem-pur-kflat-tensor-quasiiso-independent puts the K-flat factor second, so f⊗1 is a quasi-isomorphism without M being K-flat. Step 3: I recomputed both signs of the interchange (-1)^{rq}; it is natural at r=0 and gives exactly 1_P⊗epsilon_j. Step 4: c_j intertwines the transitions. lem-pe-kflat-scalar-tower-realization applies (flat-term K-flat P, b_n a_{n+1}=a_n, T_n=Res(P⊗B_n)), and its formula epsilon_n d_n = Q(t_n) epsilon_{n+1} gives compatibility with the derived transitions. Step 5: the Roos functor is defined on D(Tow), so the levelwise quasi-isomorphisms become isomorphisms. The braided coordinates (y,z)->(v,u) match the item's differential. Step 6: w_P is a chain map (d1=0, (1-s)w=0), and R(b)w=u_M f, R(a)w=v_P, so s_f Q(u_M)=Q(v_P)e^{-1}. Step 7: the unit identity of the scalar-tower node and the augmentation clause of the Roos node give the claimed units. Stacks 06YP/06YQ/06YT/06YY/0A0E/0941 labels checked in tags/tags. Edge cases checked: t a unit, M=0, Z with t=2 and M=Z/2, Z/4 (where regularity is needed). No cycle (closure of 278 nodes). The four declared tool_uses are generic and accepted. Advisory overlap: lem-pur-derived-complete-koszul-reconstruction states step 3's quasi-isomorphism for a K-flat P, but it is not a duplicate of the item."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KoszulQuotientStrictResolutionBridge",
+  "declaration": "CategoryTheory.KoszulQuotientStrictResolution.koszulQuotientStrictResolutionBridge",
+  "declarations": [
+   "CategoryTheory.KoszulQuotientStrictResolution.koszulSpanLeft",
+   "CategoryTheory.KoszulQuotientStrictResolution.towerRoos",
+   "CategoryTheory.KoszulQuotientStrictResolution.towerRoosMap",
+   "CategoryTheory.KoszulQuotientStrictResolution.coordinates",
+   "CategoryTheory.KoszulQuotientStrictResolution.scalarTower",
+   "CategoryTheory.KoszulQuotientStrictResolution.derivedScalarTower",
+   "CategoryTheory.KoszulQuotientStrictResolution.koszulQuotientStrictResolutionBridge"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/KoszulQuotientStrictResolutionBridge.lean",
+  "statement": "theorem koszulQuotientStrictResolutionBridge [HasExactLimitsOfShape (Discrete ℕ) (Modules R)] (hreg : Mono (globalSectionMultiplication R (unitSection R s))) (M P : CochainComplex (Modules R) ℤ) (f : P ⟶ M) (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) (hflat : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (R := R) (P.X i)) (hf : QuasiIso f) : ∃ (b : ∀ n : ℕ, B R s (n + 1) ⟶ B R s n) (h : ∀ n : ℕ, quotient R s (n + 1) ≫ b n = quotient R s n) (a : koszulTensorTower R P (unitSection R s) ⟶ scalarTower p N R s b h P) (c : (Functor.const ℕᵒᵖ).obj P ⟶ scalarTower p N R s b h P) (e : (localize R).obj P ≅ (localize R).obj M), e.hom = (localize R).map f ∧ (∀ n : ℕ, c.app (op n) = (NatTrans.mapHomologicalComplex (N.ordinaryAdjunction (quotient R s n)).unit (.up ℤ)).app P) ∧ (∀ n : ℕ, koszulRepresentativeAugmentation R P (unitSection R s) n ≫ a.app (op n) = c.app (op n)) ∧ (∀ (n : ℕ) (i j : ℤ), i ≠ 0 → summand R s n P i j (i + j) rfl ≫ (a.app (op n)).f (i + j) = 0) ∧ (∀ n : ℕ, QuasiIso ((koszulSpanLeft R s f).app (op n)) ∧ QuasiIso (a.app (op n))) ∧ ∃ (beta : ∀ n : ℕ, (localize R).obj ((koszulTensorTower R P (unitSection R s)).obj (op n)) ≅ (localize R).obj ((koszulTensorTower R M (unitSection R s)).obj (op n))) (gamma : ∀ n : ℕ, (localize R).obj ((koszulTensorTower R M (unitSection R s)).obj (op n)) ≅ (derivedEnd p N (quotient R s n)).obj ((localize R).obj M)), (∀ n : ℕ, (beta n).hom = (localize R).map ((koszulSpanLeft R s f).app (op n))) ∧ (∀ n : ℕ, IsIso (epsilon p N (quotient R s n) P ((localize R).obj M) e)) ∧ (∀ n : ℕ, (gamma n).hom ≫ epsilon p N (quotient R s n) P ((localize R).obj M) e = (beta n).inv ≫ (localize R).map (a.app (op n))) ∧ (∀ (n m : ℕ) (hnm : n ≤ m), (localize R).map ((koszulTensorTower R M (unitSection R s)).map (homOfLE hnm).op) ≫ (gamma n).hom = (gamma m).hom ≫ (derivedScalarTower p N R s b h M).map (homOfLE hnm).op) ∧ ∃ (uM : M ⟶ towerRoos R (koszulTensorTower R M (unitSection R s))) (vP : P ⟶ towerRoos R (scalarTower p N R s b h P)) (left : (localize R).obj (towerRoos R (koszulTensorTower R P (unitSection R s))) ≅ (localize R).obj (towerRoos R (koszulTensorTower R M (unitSection R s)))) (right : (localize R).obj (towerRoos R (koszulTensorTower R P (unitSection R s))) ≅ (localize R).obj (towerRoos R (scalarTower p N R s b h P))) (sf : (localize R).obj (towerRoos R (koszulTensorTower R M (unitSection R s))) ≅ (localize R).obj (towerRoos R (scalarTower p N R s b h P))), (∀ q : ℤ, uM.f (q + 1) ≫ (coordinates R (koszulTensorTower R M (unitSection R s)) q).hom = biprod.lift ((Pi.lift (koszulRepresentativeAugmentation R M (unitSection R s))).f (q + 1)) 0) ∧ (∀ q : ℤ, vP.f (q + 1) ≫ (coordinates R (scalarTower p N R s b h P) q).hom = biprod.lift ((Pi.lift (fun n : ℕ ↦ c.app (op n))).f (q + 1)) 0) ∧ left.hom = (localize R).map (towerRoosMap R (koszulSpanLeft R s f)) ∧ right.hom = (localize R).map (towerRoosMap R a) ∧ sf.hom = left.inv ≫ right.hom ∧ (localize R).map uM ≫ sf.hom = e.inv ≫ (localize R).map vP ∧ (∀ n : ℕ, (localize R).map uM ≫ sf.hom ≫ (localize R).map (roosEval (koszulTowerComplex R (scalarTower p N R s b h P)) n) = e.inv ≫ (localize R).map (c.app (op n))) ∧ (∀ n : ℕ, e.inv ≫ (localize R).map (c.app (op n)) = (N.adjunction (quotient R s n)).unit.app ((localize R).obj M) ≫ epsilon p N (quotient R s n) P ((localize R).obj M) e)",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded symmetric scalar-first Koszul total tensor; the quotient side is the actual restricted termwise scalar extension, with the augmentation fixed by its unit and by vanishing on all nonzero Koszul-degree summands. Uses the existing actual principal quotient rings and normalized scalar presentations, not an arbitrary quotient map or comparison. The same f and P occur at all levels. localize is the standard homotopy quotient followed by Qh, canonically compared with Q by quotientCompQhIso. Reordered coordinates are the explicit braiding of roosχ. Added statement dependencies are already-landed interfaces used by the signature; no new notion or dependency repair is introduced. Returned H2 repaired by citing def-sp-kflat-scalar-tower-constructions for the seven existing scalar-tower definitions; lem-pe-kflat-scalar-tower-realization is retained only in proof_deps. Lean source and mathematical statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e69ce765e",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at head 73aad002 fixes exactly the returned point. The Lean is identical to the 73aad version, whose mathematics was checked in full with no other fault. The only change to the item JSON: stmt_deps replaces theorem lem-pe-kflat-scalar-tower-realization with new def node def-sp-kflat-scalar-tower-constructions; the theorem stays in proof_deps; lean.note appended. New node: existing:true on the 7 KFlatScalarTower defs (ordinaryEnd, derivedEnd, localize, ordinaryStep, derivedStep, computation, epsilon) in Sheaf.Algebra.Homology.KFlatScalarTowerRealization, read against side-live lines 44-108. Its TeX matches the composites, epsilon's statement matches the file exactly, the data are real (no .choose of the theorem), its stmt_deps are adequate, it has the required fields (status split, import_flags []), and no other def node owns these declarations in side-live or live. Edge cases as before. No compile needed (no changed file)."
+ }
+}

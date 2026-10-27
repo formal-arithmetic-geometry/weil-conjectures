@@ -1,0 +1,488 @@
+{
+ "id": "lem-sfb-space-qcqs-permanence",
+ "kind": "statement",
+ "title": "Quasi-compact and quasi-separated permanence for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Point spaces carry the atlas topology [def-a1-space-point-topology]. An algebraic space is quasi-compact if its point space is quasi-compact (every open cover has a finite subcover); it is quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback along every affine scheme mapping to its target has quasi-compact point space; it is quasi-separated if its relative diagonal is quasi-compact. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. For any morphism $f:X\\to Y$, if $X$ is quasi-compact and $Y$ is quasi-separated, then $f$ is quasi-compact; if in addition $X$ is quasi-separated, then $f$ is also quasi-separated.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 073B, lemma-quasi-compact-quasi-separated-permanence, parts (1)-(2) only."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-affine-spectrum",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\operatorname{Spec}\\mathbf Z$ and apply [lem-sfb-space-change-base-to-integers] with $S'=B$: replace $X,Y,f$ by $j_!X,j_!Y,j_!f$, algebraic spaces over $B$. By its part (1) every $S$-scheme atlas of $X$ stays an atlas of $j_!X$ and sheaf fibre products over $S$ go to those over $B$; the absolute diagonals of the statement are the diagonals over $B$ of these spaces. A field-valued point of $j_!X$ is a field-valued point of $X$ together with its induced map to $S$, and part (3) identifies the representable etale scheme maps to $X$ and to $j_!X$, so the final topologies of [def-a1-space-point-topology] agree and $|j_!X|=|X|$, likewise for every space over $S$. Choose an affine scheme $W$ and a representable surjective etale atlas $p:W\\to X$ by [lem-sfb-qc-space-affine-etale-atlas], using the assumed quasi-compactness of $|X|$; by part (1) it is an atlas of $j_!X$. To show that $a_X:j_!X\\to B$ is quasi-compact, let $T\\to B$ be an arbitrary affine scheme test. Pulling back the one-member surjective etale family $\\{W\\to X\\}$ along $X\\times_BT\\to X$, and using $(X\\times_BT)\\times_XW\\simeq W\\times_BT$, the base change $W\\times_BT\\to X\\times_BT$ is a representable surjective etale map by [lem-trf-space-fibre-products-etale-covers] over the base $B$.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), proof of (1), with Z = Spec Z; atlas input: spaces-properties.tex Tag 03H6 (lemma-quasi-compact-affine-cover)."
+   }
+  },
+  {
+   "text": "Write $W=\\operatorname{Spec}A$ and $T=\\operatorname{Spec}C$. By [lem-weil-pbc-fibre-product-affine-spectra], $W\\times_BT\\simeq\\operatorname{Spec}(A\\otimes_{\\mathbf Z}C)$, which is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. The final assertion of [lem-a1-space-finite-affine-subatlas] (a representable surjective etale atlas from a quasi-compact scheme has quasi-compact target point space), applied to the atlas $W\\times_BT\\to X\\times_BT$ of step 1, gives quasi-compactness of $X\\times_BT$. Since this holds for every affine $T\\to B$, it proves that $a_X$ is quasi-compact by the definition in the item.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-a1-space-finite-affine-subatlas"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), proof of (1), checking quasi-compactness of X over Spec Z; spaces-properties.tex Tag 03E4 (lemma-quasi-compact-space)."
+   }
+  },
+  {
+   "text": "Let $a_Y:j_!Y\\to B$ be the absolute structure map. Its relative diagonal is the absolute diagonal of $Y$, so the hypothesis that $Y$ is quasi-separated says exactly that $a_Y$ is quasi-separated. We have $a_Y\\circ j_!f=a_X$, quasi-compact by steps 1-2. Apply [lem-sfb-space-qc-cancellation] over the base scheme $B$ to $j_!f$ and $a_Y$: $j_!f$ is quasi-compact. To return to $S$, let $T\\to Y$ be an affine test over $S$; part (1) of [lem-sfb-space-change-base-to-integers] gives $j_!(X\\times_YT)\\simeq j_!X\\times_{j_!Y}T$, and the point spaces agree as in step 1, so $X\\times_YT$ has quasi-compact point space. Hence $f$ is quasi-compact, proving the first clause and the quasi-compact assertion in the second.",
+   "uses": [
+    "lem-sfb-space-qc-cancellation",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 073B (lemma-quasi-compact-quasi-separated-permanence), (1), and 03KS (lemma-quasi-compact-permanence)."
+   }
+  },
+  {
+   "text": "Assume now that $X$ is also quasi-separated. Work over $B$ as in step 1. Put $P=X\\times_YX$ and $Q=X\\times_BX$, using [lem-trf-space-fibre-products-etale-covers]; by part (1) of [lem-sfb-space-change-base-to-integers] $P$ is $j_!$ of the fibre product over $S$, and an affine test $T\\to P$ over $S$ is the same as one over $B$, with the same point space of every pullback (step 1). For any affine scheme $T\\to P$, write its two maps as $u,v:T\\to X$; they satisfy $fu=fv$. On every test scheme a section of $X\\times_PT$ is a pair $(x,t)$ with $x=u(t)=v(t)$. This is exactly a section of $X\\times_QT$, where $T\\to Q$ is induced by $(u,v)$. Thus these two sheaf fibre products are canonically isomorphic. The latter has quasi-compact point space since the absolute diagonal $X\\to Q$ is quasi-compact. Consequently every affine test of the relative diagonal $X\\to P$ has quasi-compact source. This proves that $f$ is quasi-separated. Together with step 3 this proves the second clause. The argument uses neither quasi-compactness of $Y$ nor affineness of intersections of opens.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KR (lemma-compose-after-separated), proof on scheme tests, specialized to g = Y to Spec Z; Tag 073B (lemma-quasi-compact-quasi-separated-permanence), (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-sfb-space-qc-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), proof of (1)-(2), with the affine-atlas check of the structure map and the scheme-test proof of Tag 03KR expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces, morphisms from a quasi compact quasi separated source to a quasi separated target are quasi compact and quasi separated, and fibre products of qcqs algebraic spaces are qcqs",
+   "results": {
+    "t": "2026-10-23T09:46:33Z",
+    "tool": "leanfinder",
+    "query": "For algebraic spaces, morphisms from a quasi compact quasi separated source to a quasi separated target are quasi compact and quasi separated, and fibre products of qcqs algebraic spaces are qcqs",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact",
+     "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty",
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.instQuasiCompactFstScheme"
+    ],
+    "digest": "579ee1babeafeb79"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T09:48:17Z",
+    "tool": "grep",
+    "query": "algebraic space|AlgebraicSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": {
+    "t": "2026-10-23T09:48:17Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a compact quasi separated algebraic space to a quasi separated algebraic space is quasi compact and quasi separated; fibre products of compact quasi separated algebraic spaces remain compact quasi separated",
+   "results": {
+    "t": "2026-10-23T09:48:27Z",
+    "tool": "leanfinder",
+    "query": "A morphism from a compact quasi separated algebraic space to a quasi separated algebraic space is quasi compact and quasi separated; fibre products of compact quasi separated algebraic spaces remain compact quasi separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1",
+     "AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact",
+     "AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace",
+     "AlgebraicGeometry.QuasiCompact"
+    ],
+    "digest": "7ffcc8078ec1412a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms between quasi compact quasi separated algebraic spaces and their fibre products are quasi compact and quasi separated",
+   "results": {
+    "t": "2026-10-23T09:49:30Z",
+    "tool": "leansearch",
+    "query": "Morphisms between quasi compact quasi separated algebraic spaces and their fibre products are quasi compact and quasi separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+     "AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+     "AlgebraicGeometry.QuasiSeparated",
+     "AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace"
+    ],
+    "digest": "4dea653b94b2a06a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T12:14:24Z",
+    "tool": "grep",
+    "query": "algebraic space|AlgebraicSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not arbitrary algebraic spaces; the whole-Mathlib algebraic-space search has zero hits. Read QuasiSeparated.lean lines 245-257: QuasiCompact.of_comp and quasiCompact_of_compactSpace quantify over Scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi compact morphisms from quasi compact algebraic spaces to quasi separated algebraic spaces",
+   "results": {
+    "t": "2026-10-23T12:14:24Z",
+    "tool": "leansearch",
+    "query": "Quasi compact morphisms from quasi compact algebraic spaces to quasi separated algebraic spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.QuasiCompact.mk",
+     "AlgebraicGeometry.quasiCompact_of_noetherianSpace_source",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen",
+     "AlgebraicGeometry.QuasiCompact.of_comp"
+    ],
+    "digest": "1532a817716a9d8c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not arbitrary algebraic spaces; the whole-Mathlib algebraic-space search has zero hits. Read QuasiSeparated.lean lines 245-257: QuasiCompact.of_comp and quasiCompact_of_compactSpace quantify over Scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": {
+    "t": "2026-10-23T12:14:24Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not arbitrary algebraic spaces; the whole-Mathlib algebraic-space search has zero hits. Read QuasiSeparated.lean lines 245-257: QuasiCompact.of_comp and quasiCompact_of_compactSpace quantify over Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces with quasi compact source and quasi separated target is quasi compact, and is quasi separated if its source is quasi separated",
+   "results": {
+    "t": "2026-10-23T12:14:27Z",
+    "tool": "leanfinder",
+    "query": "A morphism of algebraic spaces with quasi compact source and quasi separated target is quasi compact, and is quasi separated if its source is quasi separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "AlgebraicGeometry.QuasiCompact",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact",
+     "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty",
+     "AlgebraicGeometry.quasiSeparated_isStableUnderComposition"
+    ],
+    "digest": "811a7c8456f7eb74"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not arbitrary algebraic spaces; the whole-Mathlib algebraic-space search has zero hits. Read QuasiSeparated.lean lines 245-257: QuasiCompact.of_comp and quasiCompact_of_compactSpace quantify over Scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cancellation of quasi compactness for algebraic space morphisms whose composite is quasi compact and second arrow is quasi separated",
+   "results": {
+    "t": "2026-10-23T12:15:27Z",
+    "tool": "leansearch",
+    "query": "Cancellation of quasi compactness for algebraic space morphisms whose composite is quasi compact and second arrow is quasi separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "AlgebraicGeometry.quasiCompact_isStableUnderComposition",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace",
+     "AlgebraicGeometry.IsSeparated.comp_iff",
+     "AlgebraicGeometry.IsSeparated.of_comp",
+     "AlgebraicGeometry.QuasiSeparated"
+    ],
+    "digest": "ea3f2981f633ddd2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not arbitrary algebraic spaces; the whole-Mathlib algebraic-space search has zero hits. Read QuasiSeparated.lean lines 245-257: QuasiCompact.of_comp and quasiCompact_of_compactSpace quantify over Scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact.of_comp\"",
+   "results": {
+    "t": "2026-10-23T12:15:27Z",
+    "tool": "loogle",
+    "query": "\"QuasiCompact.of_comp\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.QuasiCompact.of_comp"
+    ],
+    "digest": "1d286c97de0400c5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not arbitrary algebraic spaces; the whole-Mathlib algebraic-space search has zero hits. Read QuasiSeparated.lean lines 245-257: QuasiCompact.of_comp and quasiCompact_of_compactSpace quantify over Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable morphisms of algebraic spaces, if the composite is quasi compact and the second map is quasi separated, then the first map is quasi compact",
+   "results": {
+    "t": "2026-10-23T12:15:31Z",
+    "tool": "leanfinder",
+    "query": "For composable morphisms of algebraic spaces, if the composite is quasi compact and the second map is quasi separated, then the first map is quasi compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.quasiCompact_isStableUnderComposition",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact",
+     "AlgebraicGeometry.quasiCompact_comp",
+     "AlgebraicGeometry.QuasiSeparated.of_comp",
+     "AlgebraicGeometry.quasiSeparated_isStableUnderComposition",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace"
+    ],
+    "digest": "31c808f4a6ef0398"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not arbitrary algebraic spaces; the whole-Mathlib algebraic-space search has zero hits. Read QuasiSeparated.lean lines 245-257: QuasiCompact.of_comp and quasiCompact_of_compactSpace quantify over Scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiCompact.of_comp|quasiCompact_of_compactSpace",
+   "results": {
+    "t": "2026-10-23T12:18:58Z",
+    "tool": "grep",
+    "query": "QuasiCompact.of_comp|quasiCompact_of_compactSpace",
+    "sub": "AlgebraicGeometry/Morphisms",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean"
+    ],
+    "digest": "9aeb587b11439084"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not arbitrary algebraic spaces; the whole-Mathlib algebraic-space search has zero hits. Read QuasiSeparated.lean lines 245-257: QuasiCompact.of_comp and quasiCompact_of_compactSpace quantify over Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness cancels on the right of a quasi separated morphism of algebraic spaces: g composed with f quasi compact implies f quasi compact",
+   "results": {
+    "t": "2026-10-23T12:19:01Z",
+    "tool": "leanfinder",
+    "query": "Quasi compactness cancels on the right of a quasi separated morphism of algebraic spaces: g composed with f quasi compact implies f quasi compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.QuasiCompact.of_comp",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated",
+     "AlgebraicGeometry.quasiCompact_isStableUnderComposition",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty",
+     "AlgebraicGeometry.quasiSeparated_isStableUnderComposition",
+     "AlgebraicGeometry.QuasiSeparated.of_comp",
+     "AlgebraicGeometry.quasiCompact_comp",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact"
+    ],
+    "digest": "b7e2c81d7746e94f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not arbitrary algebraic spaces; the whole-Mathlib algebraic-space search has zero hits. Read QuasiSeparated.lean lines 245-257: QuasiCompact.of_comp and quasiCompact_of_compactSpace quantify over Scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fp-etale-presentation-criterion",
+  "date": "2026-10-23",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting finite-presentation criterion for the etale scheme presentation in Tag 07SK, first paragraph, including its omitted finiteness checks and the finiteness of the descended quotient. Supporting input to the finite-presentation criterion: Reverse direction: quasi-compactness of R to W and finite-presentation finiteness conditions for Y to T.",
+   "via": [
+    "lem-sfb-fp-etale-presentation-criterion",
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-qcqs-permanence",
+  "worker": "stage1",
+  "summary": "Checked Tags 073B, 03KS and 03KR; four proof steps establish quasi-compactness of the absolute structure map by an affine atlas, apply general quasi-compact cancellation, and prove quasi-separatedness directly on affine diagonal tests. One new statement-only cancellation node, no new clause restatements. Statement retained; no Lean attachment or Mathlib match for algebraic spaces.",
+  "blueprint": "Inherited direct-image/alteration-moduli/finite-presentation prerequisite route, specifically lem-sfb-fp-etale-presentation-criterion reverse direction: finiteness of R to W and Y to T. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) supplies the parent direct-image context. Steps 1-3 realize the requested Tag 073B(1) input; step 4 realizes Tag 073B(2). The ancestor tool returns null, retained with the inherited via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Only its generic continuous-surjection preservation of quasi-compactness is used; this topological fact is not stated by a node of this unit."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Existence of sheaf fibre products of algebraic spaces and base change of surjective etale families; a generic foundation of algebraic spaces (already a statement dependency of the item), no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-621946643",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-621946643 (reviewer sub-agent of L); spot-checked: FIX: the item statement is unchanged and matches Stacks 073B(1)-(2) (spaces-morphisms.tex, label lemma-quasi-compact-quasi-separated-permanence). The new node lem-sfb-space-qc-cancellation is Stacks 03KS (lemma-quasi-compact-permanence): true, statement only, self-contained, three kinds of search recorded. It is not a clause of the item and not a duplicate (grep for 03KS and a statement search over the space and stack nodes found nothing). Step 2 is correct: two Mathlib leaves plus the final sentence of lem-a1-space-finite-affine-subatlas. Step 3 uses cancellation with a_Y quasi-separated and is correct. Step 4 is the 03KR monomorphism identity X×_P T = X×_Q T, which I checked on sections, and is correct. Fault (C1/E5): step 1 says 'regard the spaces over B = Spec Z' and cites nothing for it. The spaces live over S, so this is the change of base j_! (Stacks 03I4, which Stacks' own proof uses as 'Z = S = Spec Z'). The DAG has it as lem-sfb-space-change-base-to-integers (split, reviewed, same unit, on base). Steps 3 and 4 also never bring the result back from j_!f to f. The fix cites that node in steps 1, 3 and 4: part (1) keeps atlases and fibre products, part (3) plus the field points give |j_!X| = |X|, and the conclusions are brought back to f. It also updates proof_deps and adds the off-unit lem-trf-space-fibre-products-etale-covers to split_report.tool_uses. Batch 5: every listed citation is a generic algebraic-space foundation, not a step of the trace-formula or Poincaré proof, so all are accepted. The same holds for the change-base node the fix adds. lem-a1-space-finite-affine-subatlas as a tool use is accepted. No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQcqsPermanence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.qcqs_permanence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQcqsPermanence.lean",
+  "statement": "theorem qcqs_permanence {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hX : CompactSpace (Point X.obj.obj)) (hY : IsAbsolutelyQuasiSeparated Y) : MapIsQuasiCompact f.hom.hom ∧ (IsAbsolutelyQuasiSeparated X → MapIsQuasiCompact (pullback.diagonal f.hom.hom))",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed absolute quasi-separatedness affine-test criterion (Stacks 0AHR), point topology and MapIsQuasiCompact. The second conclusion is quasi-compactness of the canonical relative diagonal. Adds the two landed definition owners to stmt_deps without changing the mathematical statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-11970f380",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 073B(1)-(2): arbitrary S, CompactSpace (Point X) for qc, IsAbsolutelyQuasiSeparated (0AHR(3), correct for non-qs S) for qs, MapIsQuasiCompact f.hom.hom, and IsAbsolutelyQuasiSeparated X → MapIsQuasiCompact (pullback.diagonal f.hom.hom). No extra hypotheses, single universe u, edge cases (empty X/Y, non-qc Y) covered. Node changes only lean plus stmt_deps gaining the landed owners def-sfb-proper-curve-moduli and def-sfb-space-absolute-quasi-separated (allowed); lean.statement verbatim. Public imports = stmt deps, private imports = recorded proof deps; docstrings carry source and blueprint; sorry only; worker report and NX second-reading sections present. Note: relative qs written inline instead of MapIsQuasiSeparated (def-sfb-stack-qcqs-morphism); definitionally identical, same idiom as owner ProperCurveModuli l.94; not blocking. No recompile (no file changed)."
+ }
+}

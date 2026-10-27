@@ -46,99 +46,72 @@
  ],
  "proof": [
   {
-   "text": "Each standing scheme is Noetherian and qcqs: a field is Noetherian, then apply [lem-weil-pbc-finite-type-over-noetherian] and [lem-weil-pbc-locally-noetherian-quasi-separated]. A finite ring is Noetherian by the ascending chain condition on its finite ideal set. The two finite-discrete coefficient lemmas identify its condensed pullback with constant $A$. Hence [det-pe-finite-tor-comparison-noetherian] identifies the étale and pro-étale Dctf subcategories. Obtain $e$ and the uniform geometric bound from [lem-sfb-finite-proper-geometric-cd-bound], and classicality of the localizing closure from [lem-sfb-finite-classical-localizing].",
+   "text": "Use the normalized finite discrete section-action encoding. The fixed-interval equivalence in finiteCtfInternalEtaleRealization identifies each internal Dctf generator with an etale realization. The derived encoding is exact and an equivalence, and hence transports the replete triangulated etale-origin-homology subcategory. Exact ambient coproducts make this property localizing for Hom-universe index sets. For an arbitrary existing coproduct, its nonzero support embeds into the endomorphisms of its coproduct object, so it can be shrunk to that universe. Thus the transported classical subcategory is localizing in the required object universe.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-    "det-pe-finite-tor-comparison-noetherian",
-    "lem-sfb-finite-proper-geometric-cd-bound",
-    "lem-sfb-finite-classical-localizing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Transfer: coefficient and generator conventions"
-   }
-  },
-  {
-   "text": "The bound $2e$ allows [det-ctf-finite-proper-tor] to send an étale $C$ of Tor interval $[a,b]$ into the small target category with interval $[a,b+2e]$. Proper maps are qcqs (finite type and [lem-pc-separated-quasi-separated]). The bounded-below comparison [sk-thm-pe-direct-image-comparison] identifies $Rp_*\\nu_X^*C$ with $\\nu_Y^*Rp_{\\mathrm{ét},*}C$. Thus $Rp_*$ preserves the small subcategory.",
-   "uses": [
-    "det-ctf-finite-proper-tor",
-    "lem-pc-separated-quasi-separated",
-    "sk-thm-pe-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements and Transfer: preservation of generators"
-   }
-  },
-  {
-   "text": "By [lem-sfb-finite-proper-classical-coproducts], $Rp_*$ preserves sums of classical complexes. It is triangulated by [lem-pc-right-derived-functor-triangulated]. Therefore the classical objects sent into $\\Loc(\\Dctf(Y,A))$ form a replete triangulated subcategory closed under ambient sums and containing $\\Dctf(X,A)$. Minimality [sk-def-localizing-closure] gives preservation of its closure. Apply [lem-weil-pbc-triangulated-functor-restriction] for the exact restriction, proving (1).",
-   "uses": [
-    "lem-sfb-finite-proper-classical-coproducts",
-    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-finite-discrete-normalized-encoding",
+    "lem-sfb-finite-ctf-internal-etale-realization",
     "sk-def-localizing-closure",
-    "lem-weil-pbc-triangulated-functor-restriction"
+    "lem-sfb-localizing-subcategory-universe"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Transfer: localizing minimality"
-   }
+   "elementary": false
   },
   {
-   "text": "For (2), fix $m$ and set $N=m-2e-2$. The canonical mate [def-weil-pbc-ambient-ringed-exchange] is natural for $K\\to\\tau_{\\geq N}K$. Its left vertical map is invertible in degree $m$ by [lem-sfb-finite-proper-classical-truncation] and exact $g^*$. The right one is invertible by the same lemma after base change: [lem-sfb-finite-classical-localizing] makes $g'^*K$ classical, and exact pullback commutes with truncation. The bottom mate is invertible by [sk-thm-properbasechange], since its input is bounded below and its underlying cohomology is killed by $\\ell^n$. This theorem's exchange is the same unit--square--counit mate. Hence $\\mathcal H^m\\beta_K$ is invertible for every $m$, proving (2).",
+   "text": "Apply the existing continuous_finiteProper_preserves proof in FiniteProperBaseChange to get preservation of internal Dctf. This is the finite-Tor and bounded etale comparison argument of that node, specialized to the same continuous finite discrete coefficient ring.",
    "uses": [
-    "def-weil-pbc-ambient-ringed-exchange",
-    "lem-sfb-finite-proper-classical-truncation",
-    "lem-sfb-finite-classical-localizing",
-    "sk-thm-properbasechange"
+    "det-thm-sfb-proper-base-change-finite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Étale statements: bounded-below proper base change and naturality"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the adopted source theorem isIso_sigmaComparison_rightDerivedLowerStar_of_etaleOriginHomology to the encoded family. Its finite-amplitude and left-complete truncation argument already proves arbitrary classical coproduct preservation. Transport the canonical colimit through encodingDerivedPushforwardIso and reflect it through the target equivalence. Shrinking nonzero support extends preservation to all existing coproducts. Intersect the transported classical subcategory with the inverse image of the target localizing closure; this is replete, triangulated, and closed under coproducts, and contains Dctf by the preceding step. Minimality gives preservation of the closure. Triangulatedness of the ordinary right derived functor gives exactness.",
+   "uses": [
+    "lem-sf-finite-discrete-encoding-compactification",
+    "lem-pc-right-derived-functor-triangulated",
+    "det-def-localizing-closure-existence",
+    "sk-def-localizing-closure",
+    "lem-sfb-source-etale-origin-proper-coproducts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For base change, encode each internal Dctf generator as a bounded constructible etale antecedent, apply the existing ordinary proper exchange theorem, and transport invertibility by finiteCoefficientExchangeEncoding_isIso. The explicit identity monoid isomorphism identifies the finite-discrete coefficient models. Identify finiteProperExchange with the specified condensedAmbientExchange using finitePullbackCongr_eqToIso. The proved triangulated-locus lemma transports termwise coherent shifts and exactness to total inverse images and compatible shifts to their right adjoints; their units and counits commute with shifts, so the specified mate is shift-compatible and has a triangulated isomorphism locus. Properness is preserved by the chosen pullback. Clause (1) supplies coproduct preservation by both proper direct images. Both derived inverse images preserve coproducts as left adjoints; the general constructible-pullback argument proves preservation of the localizing closure by the upper inverse image. Thus both composites preserve every existing coproduct in the source closure. Intersect the closure with the isomorphism locus. This intersection is localizing by naturality and the coproduct universal property and contains every Dctf generator, so minimality proves invertibility on the entire closure.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-finite",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "det-proper-base-change-unbounded-pullback",
+    "det-def-localizing-closure-existence",
+    "sk-def-localizing-closure",
+    "lem-sfb-condensed-ambient-exchange-triangulated"
+   ],
+   "elementary": false
   },
   {
    "text": "Apply [det-proper-image-localizing-open] to the admissible coefficient $A$ with its discrete topology. It gives all open assertions in (3). For a compactification compose its exact sum-preserving restriction with that of (1). The two canonical coproduct comparisons compose, preserving each coprojection, so the composite preserves sums and the small subcategory, including the empty family.",
    "uses": [
     "det-proper-image-localizing-open"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-    "place": "Extension by zero and composition"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-ambient-ringed-exchange",
-  "det-ctf-finite-proper-tor",
-  "det-pe-finite-tor-comparison-noetherian",
+  "det-def-localizing-closure-existence",
+  "det-proper-base-change-unbounded-pullback",
   "det-proper-image-localizing-open",
+  "det-thm-sfb-proper-base-change-finite",
   "lem-pc-right-derived-functor-triangulated",
-  "lem-pc-separated-quasi-separated",
-  "lem-sfb-finite-classical-localizing",
-  "lem-sfb-finite-proper-classical-coproducts",
-  "lem-sfb-finite-proper-classical-truncation",
-  "lem-sfb-finite-proper-geometric-cd-bound",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-triangulated-functor-restriction",
-  "sk-def-localizing-closure",
-  "sk-thm-pe-direct-image-comparison",
-  "sk-thm-properbasechange"
+  "lem-sf-finite-discrete-encoding-compactification",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-sfb-condensed-ambient-exchange-triangulated",
+  "lem-sfb-finite-ctf-internal-etale-realization",
+  "lem-sfb-localizing-subcategory-universe",
+  "lem-sfb-source-etale-origin-proper-coproducts",
+  "sk-def-localizing-closure"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-  "place": "Étale statements: fibre bound and finite Tor; Transfer repaired by bounded-below comparison and the same relative finite-window argument on classical cohomology; Extension by zero"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+  "place": "K3: preserve the proper-image and open proofs; complete base change by the bounded etale-origin exchange and its coefficient-encoding comparison, using the proved condensed ambient exchange triangulated-locus lemma and coproduct extension."
  },
  "mathlib_searches": [
   {
@@ -337,7 +310,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-90c338b01 (reviewer sub-agent of L); spot-checked: Every argument of the old proof is still present in the re-split. The item statement and stmt_deps are byte-identical to the live node. The 17-step, 15,969-character proof is now a 5-step assembly of about 2,600 characters. Mapping of old steps: 1→new step 1. 2→lem-sfb-finite-proper-geometric-cd-bound plus new step 2 (det-ctf-finite-proper-tor with d=2e). 3→new step 2. 4→lem-sfb-finite-classical-localizing. 5–10→lem-sfb-finite-proper-classical-truncation, stated for every S→Y, which covers both old 9 and old 10. 11–12→lem-sfb-finite-proper-classical-coproducts. 13→new step 3. 14→the existing sk-thm-properbasechange: I read its statement and its 9 proof steps, and it states exactly the D^+_class proét exchange with torsion cohomology, for the def-weil-pbc-ambient-ringed-exchange mate, via the same classical-equivalence, forget and transport argument. The blueprint proof also cites it here. 15→new step 4. 16–17→new step 5. The four new nodes are statement-only, unsplit, with created.item set and source pointing to main-20261015. The preflight requires this; the drafts are kept in the report. I checked each new node for truth: the fibre bound after base change (0A3V and fibre-dimension invariance) and the geometric torsion cd ≤ 2e with cd(Ω)=0; closure of classical cohomology (BS weak Serre, exact Grothendieck sums, pullback commuting with ν*, Dctf classical for qcqs T); the truncation window (095U relative cd 2e after any base change; the cone τ≤N−1 needs N<m−2e+1, and the node requires the stronger N<m−2e−1); and the coproducts (qcqs bounded-below continuity plus the window, empty family included). Small cases e=0 and empty fibres hold. I checked every item hypothesis: Y quasi-compact, d=2e covering ℓ-power torsion, the S=Y and S=Y' uses of the truncation node, τ≥N K bounded below, classical and killed by ℓ^n for sk-thm-properbasechange, and finite ℓ-power A admissible for det-proper-image-localizing-open. None of the 4 new nodes duplicates an existing one: I compared lem-amb-proper-coproducts (étale, Noetherian), lem-sfb-adic-proper-bounded-below-coproducts, det-proper-unbounded-window-ii-general, det-pe-unbounded-classical-truncation, lem-sfb-unbounded-direct-image-truncation-stability, lem-exc-finite-cd-derived-coproduct-criterion, lem-weil-pbc-proetale-module-cohomology-coproducts and lem-kun/cbc/fin fibre-bound nodes. Batch-5 flag on sk-thm-properbasechange: accepted. Proper base change is outside both assumptions, and the blueprint cites it itself. The reached node lem-pod-lisse-module-sheaves-as-module-objects is a generic lisse/FLC module-object equivalence. The base step 14 already reached it through thm-weil-pbc-bounded-below. I recomputed the closures: both contain 32 trf/pod nodes, and the delivery adds none. There is no SGA citation. Maintainer note: lem-sfb-finite-proper-classical-truncation carries about 5k characters of the old steps 5–10. Its own split should create the neighbourhood-vanishing and weakly-contractible-evaluation nodes drafted in the report."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -369,23 +353,13 @@
   "fixed_by": "NT-stage2-cc-2ebc27823"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "V9",
+  "reviewer": "COMPILER",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261019T034334-L-422872",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.finiteCompactificationLocalizing",
-   "AlgebraicGeometry.ProEtale.finiteOpenLocalizing",
-   "AlgebraicGeometry.ProEtale.finiteProperLocalizing",
-   "AlgebraicGeometry.ProEtale.finiteProperLocalizing_baseChange"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.finiteProperLocalizing",
-   "AlgebraicGeometry.ProEtale.finiteProperLocalizing_baseChange"
-  ]
+  "landing": "20261026T222731-L-687688",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

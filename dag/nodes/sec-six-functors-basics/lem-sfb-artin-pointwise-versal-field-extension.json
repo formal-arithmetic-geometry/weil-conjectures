@@ -1,0 +1,235 @@
+{
+ "id": "lem-sfb-artin-pointwise-versal-field-extension",
+ "kind": "statement",
+ "title": "Versality at one point survives a finite residue extension",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Work with schemes [def-pc-scheme] in the universes of [def-weil-size-convention]. Let $\\mathcal F$ be a category fibred in groupoids over $S$-schemes: each fibre is a groupoid, with pullback functors and coherent identity and composition isomorphisms. Assume the Rim--Schlessinger condition: for every diagram of $R$-algebras $A\\to B\\leftarrow B'$ with $B'\\to B$ surjective with square-zero kernel, the restriction functor $\\mathcal F(\\operatorname{Spec}(A\\times_B B'))\\to\\mathcal F(\\operatorname{Spec}A)\\times_{\\mathcal F(\\operatorname{Spec}B)}\\mathcal F(\\operatorname{Spec}B')$ is an equivalence, where the fibre product retains the specified isomorphism over $B$. Let $U$ be a scheme locally of finite type over $S$ [def-weil-finite-type-morphism], $x\\in\\mathcal F(U)$, and $u\\in U$ a finite type point, meaning $\\operatorname{Spec}\\kappa(u)\\to U$ is of finite type [def-weil-residue-field]. Versality at $u$ means that for every surjection $A'\\to A$ of Artinian local $R$-algebras with residue field identified with $k=\\kappa(u)$, every map $a:\\operatorname{Spec}A\\to U$ reducing to $u$, every $\\eta\\in\\mathcal F(\\operatorname{Spec}A')$, and every isomorphism $\\eta|_A\\cong a^*x$, there are a lift $a':\\operatorname{Spec}A'\\to U$ and an isomorphism $\\eta\\cong(a')^*x$ inducing the prescribed isomorphism. Artinian means that descending chains of ideals stabilize, local means that there is a unique maximal ideal, and all maps respect the indicated residue fields. Assume $x$ is versal at $u$. Let $L/k$ be any finite field extension [def-pc-field-extension], including inseparable extensions, and let $u_L:\\operatorname{Spec}L\\to U$ be the composite with $u$. For every surjection $B'\\to B$ of Artinian local $R$-algebras with residue fields identified with $L$, every map $b:\\operatorname{Spec}B\\to U$ restricting to $u_L$, every $\\eta\\in\\mathcal F(\\operatorname{Spec}B')$, and every isomorphism $\\eta|_B\\cong b^*x$, there are a lift $b':\\operatorname{Spec}B'\\to U$ and an isomorphism $\\eta\\cong(b')^*x$ extending that isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07XG (lemma-versal-change-of-field), with Tag 07XF (definition-versal); the square-zero condition implies its Artinian nilpotent version by successive square-zero thickenings."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-pc-field-extension",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-pointwise-versal-lifting"
+ ],
+ "proof": [
+  {
+   "text": "Fix the data $q:B'\\twoheadrightarrow B$, $b$, $\\eta$ and $\\theta:\\eta|_B\\cong b^*x$ in the conclusion. Put $C=B\\times_L k$ and $C'=B'\\times_L k$. The residue-restriction lemma makes these Artinian local rings with residue field $k$, and gives a surjection $q_C:C'\\twoheadrightarrow C$ inducing the identity on $k$. Their $R$-algebra structures are $r\\mapsto(r_B,r_k)$ and $r\\mapsto(r_{B'},r_k)$; these pairs lie in the pullbacks because all residue maps are compatible with $R\\to k\\to L$. The maximal ideals of $B$ and $B'$ are nilpotent by the Artinian local structure lemma.",
+   "uses": [
+    "lem-sfb-artinian-finite-residue-restriction",
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 07W8 (situation-change-of-fields), comparison functor and preservation of surjections; artin.tex Tag 07XG (lemma-versal-change-of-field)."
+   }
+  },
+  {
+   "text": "Apply the affine pinching pushout lemma to the surjection $B\\to L$ and the map $k\\to L$. It identifies $\\operatorname{Spec}C$ with the pushout of $\\operatorname{Spec}B$ and $\\operatorname{Spec}k$ over $\\operatorname{Spec}L$. The maps $b:\\operatorname{Spec}B\\to U$ and $u:\\operatorname{Spec}k\\to U$ agree over $L$, by the hypothesis on $b$. They therefore give a unique map $a_C:\\operatorname{Spec}C\\to U$ restricting to $b$ and $u$. It is an $S$-map: its composite to $S$ and the structural map agree on both members of the same pushout.",
+   "uses": [
+    "lem-sfb-affine-closed-pinching-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0ET0 (lemma-basic-example-pushout); artin.tex Tag 07WX (lemma-change-of-field), pushout square."
+   }
+  },
+  {
+   "text": "We need the given square-zero gluing hypothesis for the residue maps $D\\to L$, with $D=B$ or $B'$. Here is its explicit iteration. Write $\\mathfrak m=\\ker(D\\to L)$, choose $N\\geq1$ with $\\mathfrak m^N=0$ using step 1, and set $D_r=D/\\mathfrak m^r$, $C_r=D_r\\times_L k$ for $1\\leq r\\leq N$. We claim that the restriction functor $\\mathcal F(C_r)\\to\\mathcal F(k)\\times_{\\mathcal F(L)}\\mathcal F(D_r)$ is an equivalence. At $r=1$ this is the identity, since $D_1=L$ and $C_1=k$. For the induction, the coordinate formula for a fibre product gives $C_{r+1}=C_r\\times_{D_r}D_{r+1}$. The map $D_{r+1}\\to D_r$ has kernel $\\mathfrak m^r/\\mathfrak m^{r+1}$, whose square is zero since $2r\\geq r+1$. The assumed gluing equivalence thus gives $\\mathcal F(C_{r+1})\\simeq\\mathcal F(C_r)\\times_{\\mathcal F(D_r)}\\mathcal F(D_{r+1})$. Substitute the induction hypothesis. An object is now a $k$-object and a $D_{r+1}$-object with an identification over $L$: the intermediate $D_r$-object is identified with the restriction of the latter and can be eliminated using that identification. Morphisms are precisely pairs compatible over $L$, so the elimination is fully faithful as well as essentially surjective. This proves the claim. At $r=N$ we obtain $E_D:\\mathcal F(D\\times_L k)\\simeq\\mathcal F(k)\\times_{\\mathcal F(L)}\\mathcal F(D)$. These are the actual restriction functors; in particular $E_{B'}$ and $E_B$ commute with restriction along $q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WX (lemma-change-of-field), equivalence of fibre categories; square-zero hypothesis expanded by the maximal-ideal filtration."
+   }
+  },
+  {
+   "text": "Let $x_u=u^*x$. The restriction $\\theta|_L$ identifies $\\eta|_L$ with $x_u|_L$. Essential surjectivity of $E_{B'}$ gives $w'\\in\\mathcal F(C')$ and isomorphisms $w'|_{B'}\\cong\\eta$ and $w'|_k\\cong x_u$ compatible with this identification. Over $B$, compose the first with $\\theta$ to obtain $w'|_B\\cong b^*x$; over $k$ use the second. The two components agree over $L$ by the chosen compatibility. Full faithfulness of $E_B$ therefore supplies an isomorphism $\\alpha:w'|_C\\cong a_C^*x$ whose $B$-component is exactly this composite and whose $k$-component is the chosen identification with $x_u$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tag 07WX (lemma-change-of-field), essential surjectivity and full faithfulness, in the proof of Tag 07XG (lemma-versal-change-of-field)."
+   }
+  },
+  {
+   "text": "Apply the assumed versality at $u$ to $q_C:C'\\twoheadrightarrow C$, $a_C$, $w'$ and $\\alpha$. All rings are Artinian local $R$-algebras with the specified residue field $k$ by step 1, and $a_C$ reduces to $u$ by step 2. We obtain $a':\\operatorname{Spec}C'\\to U$ lifting $a_C$ and $\\gamma:w'\\cong(a')^*x$ restricting to $\\alpha$. Restrict $a'$ to $\\operatorname{Spec}B'$ to define $b'$. Since $a_C|_B=b$, we have $b'|_B=b$. If $\\lambda:w'|_{B'}\\cong\\eta$ is the chosen isomorphism of step 4, then $\\gamma|_{B'}\\circ\\lambda^{-1}$ is the desired $\\eta\\cong(b')^*x$. Over $B$ its value is $\\alpha|_B\\circ(\\lambda|_B)^{-1}=\\theta$ by the prescribed $B$-component of $\\alpha$. This gives the required lift with the original isomorphism, without any separability assumption on $L/k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 07WD (lemma-change-of-fields-smooth), proof by preservation of surjections; artin.tex Tag 07XG (lemma-versal-change-of-field)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-artinian-finite-residue-restriction",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-sfb-affine-closed-pinching-pushout"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07XG (lemma-versal-change-of-field), expanded using Tag 07WX (lemma-change-of-field), formal-defos.tex Tag 07W8 (situation-change-of-fields) and Tag 07WD (lemma-change-of-fields-smooth)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A formally versal family at a point stays infinitesimally versal after a finite extension of its residue field",
+   "sub": "",
+   "results": "Read 8 returned hits: Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.QuasiFinite.instFiniteResidueField, RingHom.FormallyEtale, AlgebraicGeometry.FormallyUnramified.recOn, Algebra.FormallySmooth.of_perfectField, Algebra.FormallyEtale.of_isSeparable, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, AlgebraicGeometry.FormallyUnramified.casesOn",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field finiteness and formal etaleness of algebras do not give deformation lifting for a fibred groupoid; Loogle substring hits are universal localization maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal versality at one point of a fibred groupoid is preserved by finite residue field extensions under Rim Schlessinger",
+   "sub": "",
+   "results": "Read 8 returned hits: Algebra.instFiniteResidueFieldOfFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.instFormallyUnramifiedResidueField_1, RingHom.EssFiniteType.residueFieldMap, AlgebraicGeometry.IsEtale.of_comp, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.FormallyUnramified.of_map_maximalIdeal",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field finiteness and formal etaleness of algebras do not give deformation lifting for a fibred groupoid; Loogle substring hits are universal localization maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\"",
+   "sub": "",
+   "results": "Read 12 returned hits: AddOreLocalization.universalAddHom, OreLocalization.universalMulHom, AddOreLocalization.universalAddHom_commutes, OreLocalization.universalMulHom_commutes, AddOreLocalization.universalAddHom_unique, OreLocalization.universalMulHom_unique, AddOreLocalization.universalAddHom_apply, OreLocalization.universalMulHom_apply",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field finiteness and formal etaleness of algebras do not give deformation lifting for a fibred groupoid; Loogle substring hits are universal localization maps."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bversal\\b|Schlessinger|deformation.*groupoid",
+   "sub": "",
+   "results": "Read 3 returned hits: Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean, Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field finiteness and formal etaleness of algebras do not give deformation lifting for a fibred groupoid; Loogle substring hits are universal localization maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Versality for a category fibred in groupoids is unchanged by finite extension of the marked residue field",
+   "sub": "",
+   "results": "Read 8 returned hits: AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, Algebra.QuasiFinite.instFiniteResidueField, Algebra.instFiniteResidueFieldOfFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, CategoryTheory.MorphismProperty.IsStableUnderBaseChangeAlong",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field finiteness and formal etaleness of algebras do not give deformation lifting for a fibred groupoid; Loogle substring hits are universal localization maps."
+  },
+  {
+   "tool": "grep",
+   "query": "\\bversal\\b|Schlessinger|deformation.*groupoid",
+   "sub": "",
+   "results": "Read 3 hits: Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean, Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean, Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring or scheme morphisms, residue-field finiteness, Ore universal maps, or weak limits; none states lifting for a category fibred in groupoids after finite residue-field extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth map of deformation groupoids remains smooth after finite residue field extension",
+   "sub": "",
+   "results": "Read 8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange, RingHom.Smooth.isStableUnderBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsSmooth.recOn, RingHom.FormallySmooth.respectsIso, Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring or scheme morphisms, residue-field finiteness, Ore universal maps, or weak limits; none states lifting for a category fibred in groupoids after finite residue-field extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\"",
+   "sub": "",
+   "results": "Read 12 hits: AddOreLocalization.universalAddHom, OreLocalization.universalMulHom, AddOreLocalization.universalAddHom_commutes, OreLocalization.universalMulHom_commutes, AddOreLocalization.universalAddHom_unique, OreLocalization.universalMulHom_unique, AddOreLocalization.universalAddHom_apply, OreLocalization.universalMulHom_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring or scheme morphisms, residue-field finiteness, Ore universal maps, or weak limits; none states lifting for a category fibred in groupoids after finite residue-field extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal versality at a point of a category fibred in groupoids is preserved by a finite extension of its residue field",
+   "sub": "",
+   "results": "Read 8 hits: Algebra.instFormallyUnramifiedResidueField_1, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.instFormallyUnramifiedResidueField, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, RingHom.EssFiniteType.residueFieldMap, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring or scheme morphisms, residue-field finiteness, Ore universal maps, or weak limits; none states lifting for a category fibred in groupoids after finite residue-field extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rim Schlessinger Artinian deformation lifting after restricting scalars from a finite field extension",
+   "sub": "",
+   "results": "Read 8 hits: Algebra.FormallySmooth.of_restrictScalars, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.of_perfectField, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.Extension.homInfinitesimal, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_lift",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern smooth ring or scheme morphisms, residue-field finiteness, Ore universal maps, or weak limits; none states lifting for a category fibred in groupoids after finite residue-field extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-versal-base-change-smooth",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXM proof, application of lemma-versal-change-of-field to the right vertical deformation functor.",
+   "via": [
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-pointwise-versal-field-extension",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 07XG into residue restriction, affine scheme pushout, explicit square-zero iteration of the stated Rim--Schlessinger assumption, gluing of the prescribed deformation isomorphism, and application of versality over k followed by restriction to B prime. Reused three existing nodes, created none, kept the statement unchanged and checked inseparable extensions. No project Lean attachment or Mathlib match was found.",
+  "blueprint": "Supports the inherited direct-image alteration route through the smooth nodal-curve stack: the fixed-point field-extension argument used in Tag 0CXM (lemma-base-change-versal). Realizes the pointwise versality input already specified by blueprint.from.place; the current latest unit and direct-image proof were read, and no unit or chapter route was changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-55f2f82b1",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-55f2f82b1 (reviewer sub-agent of L); spot-checked: I read the whole item and its unchanged statement, the three cited node statements and Stacks artin.tex Tag 07XG (line 1759, via 07WX/07WD). The delivery adds no new nodes, no re-split note applies, there are no tool_uses and no SGA citations. Step 1: residue-restriction applies to the finite extension L/k; the R-structures on C=B×_L k and C'=B'×_L k are well defined because b is over S, restricts to u_L, and q is an R-map; nilpotence of the maximal ideals is supplied for step 3. Step 2: the pinching pushout with A=B, D=L, T=k gives a unique a_C over S with a_C|_k=u. Step 3: I checked C_r×_{D_r}D_{r+1}=C_{r+1} by coordinates; the kernel m^r/m^{r+1} is square-zero; the item's RS condition covers all R-algebras, so it applies here; 2-fibre-product associativity gives E_D. Step 4: the object (x_u, η, θ|_L) and the morphism (μ, θ∘λ|_B) are compatible over L, so essential surjectivity and full faithfulness give w' and α with the prescribed components. Step 5: versality over k gives a' and γ with γ|_C=α; with b'=a'|_{B'}, the cancellation (γ|_{B'}∘λ^{-1})|_B=θ holds. Edge cases checked: L=k, B=L (N=1), B'=B and a purely inseparable L/k. proof_deps equals the union of the step uses. No duplicate: lem-sfb-artin-versal-field-lifting has a global versality hypothesis and a finite-type RS condition, and no node isolates the square-zero→nilpotent iteration. The only citer, lem-sfb-artin-versal-base-change-smooth, is unaffected. Blueprint provenance is preserved."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinPointwiseVersalFieldExtension",
+  "declaration": "CategoryTheory.isVersalAtField_finite_residue_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinPointwiseVersalFieldExtension.lean",
+  "statement": "theorem isVersalAtField_finite_residue_extension (R : Type u) [CommRing R] [IsNoetherianRing R] (F : BasedCategory.{v, w} (Over (Spec (.of R)))) (hF : IsFibredInGroupoids F) (hRS : ∀ (A B C D : CommRingCat.{u}) (sA : Spec A ⟶ Spec (.of R)) (sB : Spec B ⟶ Spec (.of R)) (sC : Spec C ⟶ Spec (.of R)) (sD : Spec D ⟶ Spec (.of R)) (q : C ⟶ A), Function.Surjective q.hom → (RingHom.ker q.hom) ^ 2 = ⊥ → ∀ (i : Over.mk sA ⟶ Over.mk sB) (j : Over.mk sA ⟶ Over.mk sC), j.left = Spec.map q → ∀ (k : Over.mk sB ⟶ Over.mk sD) (l : Over.mk sC ⟶ Over.mk sD), IsPushout i j k l → ∀ (x₀ : Functor.Fiber F.p (Over.mk sA)) (y : Functor.Fiber F.p (Over.mk sB)) (z : Functor.Fiber F.p (Over.mk sC)) (a : x₀.val ⟶ y.val) (b : x₀.val ⟶ z.val), F.p.IsHomLift i a → F.p.IsHomLift j b → ∃ (t : Functor.Fiber F.p (Over.mk sD)) (c : y.val ⟶ t.val) (d : z.val ⟶ t.val), F.p.IsHomLift k c ∧ F.p.IsHomLift l d ∧ IsPushout a b c d) (U : Over (Spec (.of R))) [LocallyOfFiniteType U.hom] (x : Functor.Fiber F.p U) (u₀ : U.left) (hft : LocallyOfFiniteType (U.left.fromSpecResidueField u₀) ∧ QuasiCompact (U.left.fromSpecResidueField u₀)) (hx : IsVersalAtField F x (U.left.residueField u₀) (U.left.fromSpecResidueField u₀)) (L : Type u) [Field L] [Algebra (U.left.residueField u₀) L] [Module.Finite (U.left.residueField u₀) L] : IsVersalAtField F x L (Spec.map (CommRingCat.ofHom (algebraMap (U.left.residueField u₀) L)) ≫ U.left.fromSpecResidueField u₀)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5111f171",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Item Lean matches node and Stacks 07XG clause by clause: Noetherian R, IsFibredInGroupoids F, RS hypothesis as total-category IsPushout over a square-zero affine pushout (checked equivalent to the restriction equivalence both ways; arbitrary R-algebras, same encoding as algebraicModuliStack_rimSchlessinger), U locally of finite type, finite-type point (LFT∧QC), any finite L/κ(u₀) without separability, conclusion IsVersalAtField at Spec L→Spec κ→U. New def node def-sfb-pointwise-versal-lifting (IsVersalAtField) matches its node text and 07XF (unmarked form equivalent), real Prop, docstrings ok; no duplicate (ArtinCriterion.IsVersalAt is theorem-owned, Spec ℤ, residue point only; formal-object and proper-curve versality differ). lean.statement verbatim for both records; statement unchanged; stmt_deps add only the two Lean-used def nodes; proof only sorry; universes bound; edge cases L=κ, B=L, B'=B, inseparable L, empty U ok. No file changed, no compile. Advisory: report omits the ArtinCriterion.IsVersalAt special case."
+ }
+}

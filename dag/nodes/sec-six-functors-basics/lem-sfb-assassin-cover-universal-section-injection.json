@@ -1,0 +1,254 @@
+{
+ "id": "lem-sfb-assassin-cover-universal-section-injection",
+ "kind": "statement",
+ "title": "A flat affine chart covering relative associated primes gives a universally injective section map",
+ "statement": "Let $R\\to C\\to D$ be homomorphisms of commutative rings and let $P$ be a $C$-module. Suppose $C$ is a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra], $P$ is a finitely presented $C$-module [def-weil-pbc-module-finite-type-presentation], $P$ is flat over $R$, and $D$ is flat over $C$ [def-weil-pbc-flat-ring-map]. Suppose the image of $\\operatorname{Spec}D\\to\\operatorname{Spec}C$ [def-weil-affine-spectrum] contains every prime $\\mathfrak q\\subset C$ which is an element-annihilator associated prime of the $C$-module $P\\otimes_R\\kappa(\\mathfrak p)$, where $\\mathfrak p\\subset R$ is the inverse image of $\\mathfrak q$ [def-weil-pbc-annihilator-associated-primes, def-weil-residue-field]. Then the canonical $R$-linear map $u:P\\to P\\otimes_CD$, $p\\mapsto p\\otimes1$, is universally injective over $R$: for every $R$-module $L$, the map $u\\otimes_R1_L:P\\otimes_RL\\to(P\\otimes_CD)\\otimes_RL$ is injective [def-weil-pbc-module-tensor-product]. No faithful-flatness assumption on $C\\to D$ is made.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05DH (lemma-base-change-universally-flat)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [
+  {
+   "text": "For a prime $\\mathfrak q$ of $C$ with inverse image $\\mathfrak p$ in $R$, let $u_{\\mathfrak q}:P_{\\mathfrak q}\\to(P\\otimes_CD)_{\\mathfrak q}$ be the localization of $u$ at $C\\setminus\\mathfrak q$. The universal-injectivity localization criterion [lem-trf-universal-injective-check-stalks], applied to $R\\to C$ and the $C$-linear map $u$, says that $u$ is universally injective over $R$ if and only if every $u_{\\mathfrak q}$ is universally injective over $R_{\\mathfrak p}$. That node tests with $L\\otimes_Ru$; the flip isomorphisms $x\\otimes l\\mapsto l\\otimes x$ given by the tensor universal property [def-weil-pbc-module-tensor-product] conjugate $L\\otimes_Ru$ to $u\\otimes_R1_L$ (check on pure tensors), so the two tests agree, over $R$ and over each $R_{\\mathfrak p}$. Thus it suffices to prove that every $u_{\\mathfrak q}$ is universally injective over $R_{\\mathfrak p}$.",
+   "uses": [
+    "lem-trf-universal-injective-check-stalks",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DH proof, first sentence, invoking Algebra Tag 05CL (lemma-universally-injective-check-stalks)."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q$ and $\\mathfrak p=\\mathfrak q\\cap R$; we check hypotheses (local map, essential finite presentation, finite presentation, flatness) of [lem-sfb-assassin-cover-universal-section-injection-local] for $R_{\\mathfrak p}\\to C_{\\mathfrak q}\\to D_{\\mathfrak q}$ and $N=P_{\\mathfrak q}$, where $D_{\\mathfrak q}$ is $D$ localized at the image of $C\\setminus\\mathfrak q$ [def-weil-pbc-module-localization]. (a) Elements of $R\\setminus\\mathfrak p$ map into $C\\setminus\\mathfrak q$, so $r/a\\mapsto r/a$ is a ring map $R_{\\mathfrak p}\\to C_{\\mathfrak q}$; it sends $\\mathfrak pR_{\\mathfrak p}$ into $\\mathfrak qC_{\\mathfrak q}$, so it is local. (b) A presentation $C\\cong R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ [def-weil-pbc-finitely-presented-algebra] gives the finitely presented $R_{\\mathfrak p}$-algebra $B=R_{\\mathfrak p}[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$, which is $C$ localized at the image of $R\\setminus\\mathfrak p$; $C_{\\mathfrak q}$ is the localization of $B$ at the image $W$ of $C\\setminus\\mathfrak q$, by $(c/a)/(c'/a')\\mapsto ca'/(ac')$ with inverse $c/s\\mapsto(c/1)/(s/1)$. So $R_{\\mathfrak p}\\to C_{\\mathfrak q}$ is essentially of finite presentation. (c) A presentation $C^b\\to C^a\\to P\\to0$ [def-weil-pbc-module-finite-type-presentation] localizes, by exactness of localization, to $C_{\\mathfrak q}^b\\to C_{\\mathfrak q}^a\\to P_{\\mathfrak q}\\to0$. (d) $P_{\\mathfrak q}$ is $R$-flat by [lem-pc-affine-flat-module-localization-preserves-flatness] (for $R\\to C$, $P$ and $C\\setminus\\mathfrak q$); $R\\setminus\\mathfrak p$ acts invertibly on it, so it is an $R_{\\mathfrak p}$-module through $R\\to R_{\\mathfrak p}$ and [lem-weil-pbc-flat-over-localization] makes it $R_{\\mathfrak p}$-flat. (e) $D_{\\mathfrak q}$ is $C$-flat by [lem-pc-affine-flat-module-localization-preserves-flatness] (for $C\\to D$, the module $D$ and the image of $C\\setminus\\mathfrak q$), and the last clause of [lem-weil-pbc-flat-over-localization] for $C\\to C_{\\mathfrak q}\\to D_{\\mathfrak q}$ makes $C_{\\mathfrak q}\\to D_{\\mathfrak q}$ flat. (f) The map $P_{\\mathfrak q}\\otimes_{C_{\\mathfrak q}}D_{\\mathfrak q}\\to(P\\otimes_CD)_{\\mathfrak q}$, $(x/s)\\otimes(d/t)\\mapsto(x\\otimes d)/(st)$, is an isomorphism (inverse $(x\\otimes d)/s\\mapsto(x/s)\\otimes(d/1)$) under which $x/s\\mapsto(x/s)\\otimes1$ becomes $u_{\\mathfrak q}$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DH proof, second paragraph: apply Lemma 05DG (lemma-base-change-universally-flat-local) to R_p→S_q→S'_q and N_q."
+   }
+  },
+  {
+   "text": "Image hypothesis. Put $F=C\\otimes_R\\kappa(\\mathfrak p)$ and $M=P\\otimes_R\\kappa(\\mathfrak p)$; $C$ acts on $M$ through $C\\to F$. The maps $[x/s]\\mapsto(x\\otimes1)/s$ and $(x\\otimes(r/a))/s\\mapsto[rx/(as)]$ are inverse $C_{\\mathfrak q}$-isomorphisms $P_{\\mathfrak q}/\\mathfrak pP_{\\mathfrak q}\\cong M_{\\mathfrak q}$ ($\\mathfrak pP$ maps to $0$, $a\\in R\\setminus\\mathfrak p$ acts invertibly). Let $Q\\subset C_{\\mathfrak q}$ be a prime with inverse image $\\mathfrak pR_{\\mathfrak p}$ in $R_{\\mathfrak p}$ and $Q=\\operatorname{Ann}_{C_{\\mathfrak q}}(w)$, $w=z/s$, $z\\in M$, $s\\in C\\setminus\\mathfrak q$; let $\\mathfrak q''\\subseteq\\mathfrak q$ be its inverse image in $C$, so $\\mathfrak q''\\cap R=\\mathfrak p$. The field $\\kappa(\\mathfrak p)$ is Noetherian [def-weil-pbc-noetherian-ring] (its ideals are $0$ and itself), and $F$ is of finite type over it (images of generators of $C$), so $F$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian] and $\\mathfrak q''F=(a_1\\otimes1,\\dots,a_n\\otimes1)$ for some $a_i\\in\\mathfrak q''$. Since $(a_i/1)w=0$, the kernel criterion of [def-weil-pbc-module-localization] gives $t_i\\in C\\setminus\\mathfrak q$ with $t_ia_iz=0$; put $t=t_1\\cdots t_n\\notin\\mathfrak q$ and $z'=tz$. If $a\\in\\mathfrak q''$, write $a\\otimes1=\\sum\\varphi_i(a_i\\otimes1)$ in $F$; then $az'=\\sum\\varphi_i\\,t\\,a_iz=0$. If $az'=0$, then $(t/1)(a/1)w=0$ with $t/1$ a unit, so $a/1\\in Q$ and $a\\in\\mathfrak q''$. Hence $\\mathfrak q''=\\operatorname{Ann}_C(z')$ is an associated prime of $M$ [def-weil-pbc-annihilator-associated-primes] with inverse image $\\mathfrak p$, so the hypothesis gives a prime $\\mathfrak r\\subset D$ over $\\mathfrak q''$. As $\\mathfrak q''\\subseteq\\mathfrak q$, $\\mathfrak r$ misses the image of $C\\setminus\\mathfrak q$, so by [lem-weil-pbc-localization-spectrum-embedding] it is the inverse image of a prime $\\mathfrak r'$ of $D_{\\mathfrak q}$. The inverse image of $\\mathfrak r'$ in $C_{\\mathfrak q}$ and $Q$ both contract to $\\mathfrak q''$ in $C$, so they are equal by injectivity in [lem-weil-pbc-localization-spectrum-embedding]. Thus $Q$ lies in the image of $\\operatorname{Spec}D_{\\mathfrak q}\\to\\operatorname{Spec}C_{\\mathfrak q}$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-annihilator-associated-primes",
+    "lem-weil-pbc-localization-spectrum-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DH proof, second sentence ('Thus we may apply Lemma 05DG'), hypothesis (6) of Tag 05DG for R_p -> S_q -> S'_q; the transfer of associated primes follows Algebra Tag 0310 (lemma-associated-primes-localize), part (2), over the Noetherian fibre ring."
+   }
+  },
+  {
+   "text": "By Steps 2 and 3 all hypotheses of [lem-sfb-assassin-cover-universal-section-injection-local] hold for $R_{\\mathfrak p}\\to C_{\\mathfrak q}\\to D_{\\mathfrak q}$ and $P_{\\mathfrak q}$, so $P_{\\mathfrak q}\\to P_{\\mathfrak q}\\otimes_{C_{\\mathfrak q}}D_{\\mathfrak q}$, which is $u_{\\mathfrak q}$ by Step 2(f), is universally injective over $R_{\\mathfrak p}$. Since $\\mathfrak q$ was arbitrary, Step 1 proves that $u$ is universally injective over $R$.",
+   "uses": [
+    "lem-sfb-assassin-cover-universal-section-injection-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DH proof, second paragraph: apply Lemma 05DG (lemma-base-change-universally-flat-local) to R_p→S_q→S'_q and N_q."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-universal-injective-check-stalks",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-flat-over-localization",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-sfb-assassin-cover-universal-section-injection-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05DH (lemma-base-change-universally-flat), proof via Tag 05CL and local Tag 05DG."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented algebra S over R and finitely presented S module N flat over R: a flat map S to T whose spectrum covers every fibre associated prime makes N to N tensor T universally injective over R",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.FaithfullyFlat.injective_of_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u_3}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [Module.FaithfullyFlat R S],\\n  Function.Injective ⇑(algebraMap S (TensorProduct R S T)) → Function.Injective ⇑(algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the algebra map $ S \\\\to S \\\\otimes_R T $ is injective, then the algebra map $ R \\\\to T $ is injective.\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (TensorProduct R S M)],\\n  Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Descent\", \"type\": \"RingHom.CodescendsAlong (fun {R S} [CommRing R] [CommRing S] f => Function.Injective ⇑f)\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FaithfullyFlat\", \"doc\": \"If a ring homomorphism becomes injective after base change along a faithfully flat ring homomorphism, then the original homomorphism is injective. Formally, given commutative rings $R, S, R', S'$ with\"}\n  {\"name\": \"Module.Flat.iff_rTensor_injective\", \"module\": \"Mathlib/RingTheory/Flat/Tensor\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.Flat R M ↔ ∀ ⦃I : Ideal R⦄, I.FG → Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I))\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every finitely generated ideal $ I $ of $ R $, the linear map induced by tensoring the inclusion $ I \\\\to R $ with $ M $ is i\"}\n  {\"name\": \"Module.Flat.iff_lTensor_injective\", \"module\": \"Mathlib/RingTheory/Flat/Tensor\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.Flat R M ↔ ∀ ⦃I : Ideal R⦄, I.FG → Function.Injective ⇑(LinearMap.lTensor M (Submodule.subtype I))\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every finitely generated ideal $ I $ of $ R $, the linear map induced by the inclusion $ I \\\\subseteq R $, when tensored wit\"}\n  {\"name\": \"Module.FaithfullyFlat\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"(R : Type u) → (M : Type v) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"The property that $ M $ is a faithfully flat module over the commutative ring $ R $, meaning it is flat and the functor $ -\\\\otimes_R M $ is faithful.\"}\n  {\"name\": \"RingHom.FaithfullyFlat\", \"module\": \"Mathlib/RingTheory/RingHom/FaithfullyFlat\", \"type\": \"{R : Type u_3} → {S : Type u_4} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces an $ R $-module structure on $ S $ via scalar multiplication defined by $ f $. The property that $ S $ is a faithfully \"}\n  {\"name\": \"Module.Flat.iff_rTensor_injective'\", \"module\": \"Mathlib/RingTheory/Flat/Tensor\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.Flat R M ↔ ∀ (I : Ideal R), Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I))\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every ideal $ I $ of $ R $, the linear map $ I \\\\otimes_R M \\\\to R \\\\otimes_R M $ induced by the inclusion $ I \\\\hookrightarrow \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensoring preserves an already injective map, and faithful-flat descent reflects an already tensor-injective map. Neither proves universal injectivity of N -> N tensor_S T from coverage of the relative assassin; here S -> T need not be faithfully flat."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat algebra map covering relative associated primes gives an injective map on module sections after tensoring with every base module",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.rTensor_preserves_injective_linearMap\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Flat R M] (f : N →ₗ[R] P) (hf : Function.Injective f) : Function.Injective (f.rTensor M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, and $ f: N \\\\to P $ is an injective $ R $-linear map, then the induced linear map $ f \\\\otimes \\\\text{id}_M : N \\\\otimes_R M \\\\to P \\\\otimes_R M \"}\n  {\"name\": \"Module.FaithfullyFlat.injective_of_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Descent\", \"type\": \"[Module.FaithfullyFlat R S] (H : Function.Injective (algebraMap S (S ⊗[R] T))) : Function.Injective (algebraMap R T)\", \"doc\": \"If $ S $ is a faithfully flat $ R $-module and the algebra map $ S \\\\to S \\\\otimes_R T $ is injective, then the algebra map $ R \\\\to T $ is injective.\"}\n  {\"name\": \"Module.flat_iff\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  Module.Flat R M ↔\\n    ∀ ⦃P : Type u⦄ [inst_3 : AddCommMonoid P] [inst_4 : Module R P] [Module.Finite R P] (N : Submodule R P),\\n      N.FG → Function.Injective ⇑(LinearMap.rTensor M N.subtype)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every finitely generated $ R $-module $ P $ and every finitely generated submodule $ N $ of $ P $, the induced linear map $\"}\n  {\"name\": \"Algebra.TensorProduct.includeLeft_injective\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Module.Flat R A] (hb : Function.Injective (algebraMap R B)) : Function.Injective (includeLeft : A →ₐ[S] A ⊗[R] B)\", \"doc\": \"If $ A $ is a flat $ R $-module and the canonical algebra map $ R \\\\to B $ is injective, then the natural algebra homomorphism $ A \\\\to A \\\\otimes_R B $ given by $ a \\\\mapsto a \\\\otimes 1 $ is injective.\"}\n  {\"name\": \"Module.Flat.toAlgebra_injective\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Function.Injective (toAlgebra e)\", \"doc\": \"The linear map from the flat module $ M $ to the algebra $ A $ is injective.\"}\n  {\"name\": \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\", \"module\": \"Mathlib.RingTheory.Flat.Tensor\", \"type\": \": Flat R M ↔ ∀ ⦃I : Ideal R⦄, I.FG → Function.Injective (TensorProduct.lift ((lsmul R M).comp I.subtype))\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. Then $M$ is a flat module if and only if for every finitely generated ideal $I$ of $R$, the canonical linear map from the tensor product $I \\\\oti\"}\n  {\"name\": \"Module.Flat.iff_lTensor_injective'\", \"module\": \"Mathlib.RingTheory.Flat.Tensor\", \"type\": \": Flat R M ↔ ∀ (I : Ideal R), Function.Injective (lTensor M I.subtype)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every ideal $ I $ of $ R $, the linear map induced by the inclusion of $ I $ into $ R $ on the tensor product $ M \\\\otimes_R \"}\n  {\"name\": \"LinearMap.lTensor_injective_of_exact_of_flat\", \"module\": \"Mathlib.RingTheory.Flat.Equalizer\", \"type\": \"[Module.Flat R P] (f : N →ₗ[R] P) (hf : Function.Surjective f) (g : M →ₗ[R] N) (hg : Function.Injective g)\\n  (H : Function.Exact g f) (A : Type*) [AddCommGroup A] [Module R A] : Function.Injective (g.lTensor A)\", \"doc\": \"Given a commutative semiring $ R $, if $ P $ is a flat $ R $-module, and $ 0 \\\\to M \\\\xrightarrow{g} N \\\\xrightarrow{f} P \\\\to 0 $ is an exact sequence with $ f $ surjective and $ g $ injective, then for \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensoring preserves an already injective map, and faithful-flat descent reflects an already tensor-injective map. Neither proves universal injectivity of N -> N tensor_S T from coverage of the relative assassin; here S -> T need not be faithfully flat."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"Flat\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensoring preserves an already injective map, and faithful-flat descent reflects an already tensor-injective map. Neither proves universal injectivity of N -> N tensor_S T from coverage of the relative assassin; here S -> T need not be faithfully flat."
+  },
+  {
+   "tool": "grep",
+   "query": "[Uu]niversally[Ii]njective|[Uu]niversally.*[Ii]njective|associatedPrimes",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Lasker.lean\", \"line\": \"130\", \"text\": \"    (fun J : Submodule R M ↦ (J.colon Set.univ).radical) '' t = N.associatedPrimes := by\"}\n  {\"file\": \"Mathlib/RingTheory/Lasker.lean\", \"line\": \"154\", \"text\": \"lemma mem_associatedPrimes {N : Submodule R M} {t : Finset (Submodule R M)}\"}\n  {\"file\": \"Mathlib/RingTheory/Lasker.lean\", \"line\": \"156\", \"text\": \"    (q.colon Set.univ).radical ∈ N.associatedPrimes := by\"}\n  {\"file\": \"Mathlib/RingTheory/Lasker.lean\", \"line\": \"166\", \"text\": \"    (s₀ : Finset N.associatedPrimes) (hs₀ : IsLowerSet (s₀ : Set N.associatedPrimes))\"}\n  {\"file\": \"Mathlib/RingTheory/Lasker.lean\", \"line\": \"168\", \"text\": \"    (p : N.associatedPrimes) (hq : (q.colon Set.univ).radical = p) :\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean\", \"line\": \"20\", \"text\": \"* `associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule` :\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean\", \"line\": \"36\", \"text\": \"namespace Module.associatedPrimes\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean\", \"line\": \"40\", \"text\": \"lemma mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean\", \"line\": \"41\", \"text\": \"    (p : Ideal R') (ass : p.comap (algebraMap R R') ∈ associatedPrimes R M) :\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean\", \"line\": \"42\", \"text\": \"    p ∈ associatedPrimes R' M' := by\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean\", \"line\": \"38\", \"text\": \"* `associatedPrimes.finite`: There are only finitely many associated primes of a\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean\", \"line\": \"98\", \"text\": \"  obtain ⟨p, hp⟩ := associatedPrimes.nonempty A (M ⧸ N)\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean\", \"line\": \"99\", \"text\": \"  rw [AssociatedPrimes.mem_iff, isAssociatedPrime_iff] at hp\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean\", \"line\": \"158\", \"text\": \"theorem associatedPrimes.finite : (associatedPrimes A M).Finite := by\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean\", \"line\": \"161\", \"text\": \"  | subsingleton N => simp [associatedPrimes.eq_empty_of_subsingleton]\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"line\": \"23\", \"text\": \"- `associatedPrimes`: The set of associated primes of a module.\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"line\": \"28\", \"text\": \"- `associatedPrimes.eq_singleton_of_isPrimary`: In a Noetherian ring, `I.radical` is the only\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"line\": \"66\", \"text\": \"protected def associatedPrimes : Set (Ideal R) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"line\": \"85\", \"text\": \"instance (I : N.associatedPrimes) : I.1.IsPrime := I.2.1\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"line\": \"87\", \"text\": \"protected theorem AssociatePrimes.mem_iff : I ∈ N.associatedPrimes ↔ N.IsAssociatedPrime I :=\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"line\": \"124\", \"text\": \"lemma biUnion_associatedPrimes_eq_compl_regular [IsNoetherianRing R] :\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"line\": \"125\", \"text\": \"    ⋃ p ∈ associatedPrimes R M, p = { r : R | IsSMulRegular M r }ᶜ :=\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"line\": \"126\", \"text\": \"  Eq.trans (biUnion_associatedPrimes_eq_zero_divisors R M) <| by\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"line\": \"53\", \"text\": \"    have hexist : ∃ p ∈ associatedPrimes R M, Module.annihilator R N ≤ p := by\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/LinearMap.lean\", \"line\": \"54\", \"text\": \"      rcases associatedPrimes.nonempty R M with ⟨Ia, hIa⟩\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensoring preserves an already injective map, and faithful-flat descent reflects an already tensor-injective map. Neither proves universal injectivity of N -> N tensor_S T from coverage of the relative assassin; here S -> T need not be faithfully flat."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat source change covering the relative assassin induces a pure injection of flat finitely presented modules over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.HasGoingDown.of_flat\", \"module\": \"Mathlib/RingTheory/Ideal/GoingDown\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S],\\n  Algebra.HasGoingDown R S\", \"doc\": \"If $ S $ is a flat $ R $-module, then the algebra $ S $ over the commutative ring $ R $ satisfies the going-down property. This means that for any chain of prime ideals in $ R $ and a corresponding ch\"}\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M]\\n  (Mₚ : (P : Ideal S) → [P.IsMaximal] → Type u_4) [inst_7 : (P : Ideal S) → [inst : P\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib/RingTheory/Flat/Localization\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M] (s : Set S),\\n  Ideal.span s = ⊤ →\\n    ∀ (Mₛ : ↑s → Type u_5) [inst_7 : (r : ↑s) → Add\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"Module.Flat.out\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommSemiring R} {inst_1 : AddCommMonoid M} {inst_2 : Module R M}\\n  [self : Module.Flat R M] ⦃P : Type u⦄ [inst_3 : AddCommMonoid P] [inst_4 : Module R P] [Module.Finite R P]\\n  (N : Submodule R P), N.FG → Function.Injective ⇑(LinearMap.rTensor M N.subtype)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any finitely generated $ R $-module $ P $ and any finitely generated submodule $ N \\\\subseteq P $, the canonical linear map $ N \\\\ot\"}\n  {\"name\": \"Module.Flat.tfae_equational_criterion\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  [Module.Flat R M, ∀ (I : Ideal R), Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype I)),\\n      ∀ {l : ℕ} {f : Fin l → R} {x : Fin l → M}, ∑ i, f i ⊗ₜ[R] x i = 0 → TensorProduct.VanishesT\", \"doc\": \"Let $R$ be a commutative ring and $M$ be an $R$-module. The following statements are equivalent:\\n1. $M$ is a flat $R$-module.\\n2. For every ideal $I$ of $R$, the map $I \\\\otimes_R M \\\\to R \\\\otimes_R M$ i\"}\n  {\"name\": \"Module.flat_iff\", \"module\": \"Mathlib/RingTheory/Flat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  Module.Flat R M ↔\\n    ∀ ⦃P : Type u⦄ [inst_3 : AddCommMonoid P] [inst_4 : Module R P] [Module.Finite R P] (N : Submodule R P),\\n      N.FG → Function.Injective ⇑(LinearMap.rTensor M N.subtype)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every finitely generated $ R $-module $ P $ and every finitely generated submodule $ N $ of $ P $, the induced linear map $\"}\n  {\"name\": \"Module.freeLocus_eq_univ\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  [Module.Flat R M], Module.freeLocus R M = Set.univ\", \"doc\": \"For a commutative ring $ R $ and an $ R $-module $ M $ that is finitely generated and flat, the free locus of $ M $—the set of prime ideals $ \\\\mathfrak{p} $ in the prime spectrum of $ R $ where the lo\"}\n  {\"name\": \"Module.FaithfullyFlat.of_specComap_surjective\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Flat A B],\\n  Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) → Module.FaithfullyFlat A B\", \"doc\": \"Let $ A $ and $ B $ be commutative rings, and suppose $ B $ is an $ A $-algebra that is flat as an $ A $-module. If the induced map on prime spectra, given by taking preimages under the algebra homomo\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: flat tensoring preserves an already injective map, and faithful-flat descent reflects an already tensor-injective map. Neither proves universal injectivity of N -> N tensor_S T from coverage of the relative assassin; here S -> T need not be faithfully flat."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely presented flat module over R and a flat C-algebra D whose spectrum covers fibre associated primes give universal injectivity of P to P tensor_C D over R",
+   "results": "[leanfinder] OK 8 hits: TensorProduct.toIntegralClosure_injective_of_flat; Module.FaithfullyFlat.injective_of_tensorProduct; Module.FaithfullyFlat; RingHom.FaithfullyFlat.codescendsAlong_injective; Module.FaithfullyFlat.of_specComap_surjective; Module.FaithfullyFlat.of_comap_surjective; Module.Flat.iff_rTensor_injective; Module.Flat.toAlgebra_injective. No exact theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, associatedPrimes, Function.Injective, TensorProduct",
+   "results": "[loogle] OK 0 hit(s).",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Uu]niversal.*[Ii]njective|associatedPrimes (Mathlib/RingTheory/)",
+   "results": "[grep] OK 25 hits: associated-prime and localization declarations in Lasker, Ideal/AssociatedPrime and Regular; no theorem for this universal section injection.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat finitely presented algebra and module with spectrum covering associated primes implies universal injectivity after flat base change",
+   "results": "[leansearch] OK 8 hits: RingHom.Flat; Module.Flat.iff_lift_lsmul_comp_subtype_injective; Module.flat_of_isLocalized_span; Module.flat_iff; Module.FaithfullyFlat.of_comap_surjective; Module.FaithfullyFlat.of_specComap_surjective; Module.Flat.out; Module.Flat.iff_lTensor_injective'. Ingredients only; no exact theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-flat-fp-projectivity-purity",
+  "date": "2026-10-24",
+  "group": "Q12"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n). Proof of Tag 05UD, final application of Tag 05UA: flatness at a point is detected at the associated generalizations in its fibre. Subinput of Tag 05UA: Tag 0AT4 (lemma-upstairs-finite-type-injective-into-flat-mod-m). Subinput: Tag 05U7 (lemma-flat-finite-type-local-colimit-free), first assertion, omitting the additional Mittag-Leffler conclusion. Supporting geometric input: Tag 05MF (lemma-flat-finite-type-affine-neighbourhood-projective), over a henselian local base, used in the free-neighbourhood paragraph of Tag 05U7. Supporting input for Tag 05MF: Tag 05ME (lemma-flat-finite-presentation-affine-neighbourhood-projective), applied after the affine-space and finite-presentation reductions. Tag 05ME proof, first paragraph: projective sections give universal purity; second paragraph: relative purity gives projective sections. Tag 05MD backward implication: universal injectivity of the section map from relative-assassin coverage, Tag 05DH.",
+   "via": [
+    "lem-sfb-affine-flat-fp-projectivity-purity",
+    "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood",
+    "lem-sfb-henselian-flat-point-free-affine-neighbourhood",
+    "lem-sfb-henselian-flat-finite-module-residue-free-colimit",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-assassin-cover-universal-section-injection",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Stacks flat.tex Tag 05DH and split its proof into the universal-injectivity localization criterion (existing generic node) and the genuine local base-change lemma 05DG as one new statement-only node. The parent now assembles the two source steps without changing hypotheses, including the no-faithful-flatness clause. The new local node records the exact 05DG hypotheses and conclusion, and both nodes have current Mathlib search records.",
+  "blueprint": "Realizes the Tag 05DH clause in the blueprint ancestor chain: after localizing at q over p, apply Tag 05DG to R_p→S_q→S'_q; the parent steps are exactly the two paragraphs of the 05DH proof.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-universal-injective-check-stalks",
+    "why": "Generic universal-injectivity localization criterion from Algebra Tag 05CL; the six-functors unit supplies no replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic fact that localizing an A-module flat over R keeps it R-flat; used for P_q and D_q, no six-functors node gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-universal-injective-check-stalks",
+  "lem-pc-affine-flat-module-localization-preserves-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-a7023d0af",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-a7023d0af (reviewer sub-agent of L); spot-checked: I read Stacks flat.tex 05DH and 05DG (statements and proofs) in full, plus the cited 05CL node. The item statement matches 05DH (1)-(4) exactly, with exact-annihilator associated primes, and is unchanged; there is no re-split note and no SGA citation. The new node lem-sfb-assassin-cover-universal-section-injection-local is exactly 05DG (1)-(6). It is true, strictly smaller than the parent (whose proof also needs the 05CL reduction and the associated-prime transfer), and a real lemma, since its proof needs 05DE, faithful flatness and 05DF. rg -L over dag/nodes for 05DG, universally-flat-local and homothety finds no duplicate: 05DE, 05FV and 05UA are distinct. Small cases check out: N=0; S'=0 forces N=0 by Nakayama; S'=S. FIX 1 (B3/B4): the new node's statement had broken TeX with no math delimiters (R\\toS, \\toSpec, \\toN) and no inline citations for finitely presented algebra, localization, flat and Spec. I rewrote it in TeX with the same mathematics and added def-weil-pbc-finitely-presented-algebra, def-weil-pbc-module-localization and def-weil-affine-spectrum to stmt_deps. FIX 2 (D5/E5): item step 2 waved hypothesis (6) through with 'localize exactly as in the 05DH reduction'. That step is not formal because C is not Noetherian. I split it into step 2 (local map; essential finite presentation from a presentation of C; P_q finitely presented; P_q R_p-flat and C_q->D_q flat via lem-pc-affine-flat-module-localization-preserves-flatness and lem-weil-pbc-flat-over-localization; the tensor-localization identification with u_q) and step 3. Step 3 transfers associated primes the 0310(2) way: the fibre ring F is Noetherian (lem-weil-pbc-finite-type-algebra-noetherian), clearing denominators gives q''=Ann_C(tz), and primes lift to D_q via lem-weil-pbc-localization-spectrum-embedding. Step 4 applies the new node. I also added the tensor-flip sentence to step 1 (05CL tests with L⊗u, the item with u⊗1_L) and recomputed proof_deps as the union of the step uses. Tool uses accepted: lem-trf-universal-injective-check-stalks (declared by the delivery) and lem-pc-affine-flat-module-localization-preserves-flatness (added by me to split_report.tool_uses). Batch-5 check: lem-trf-universal-injective-check-stalks is Stacks 05CL, pure commutative algebra, reviewed and Lean-bound. Its closure is tensor/localization algebra, and it is neither a statement nor a proof step of the trace formula or of Poincaré duality, so the citation is accepted. Corrected files are in fixes/dag/nodes/sec-six-functors-basics/; details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AssassinCoverUniversalSectionInjection",
+  "declaration": "RingTheory.section_rTensor_injective_of_relative_associatedPrimes_covered",
+  "file": "lean/Sheaf/RingTheory/AssassinCoverUniversalSectionInjection.lean",
+  "statement": "theorem section_rTensor_injective_of_relative_associatedPrimes_covered (R : Type u) (C : Type v) (D : Type w) (P : Type x) [CommRing R] [CommRing C] [CommRing D] [Algebra R C] [Algebra C D] [AddCommGroup P] [Module C P] [Module R P] [IsScalarTower R C P] [Algebra.FinitePresentation R C] [Module.FinitePresentation C P] [Module.Flat R P] [Module.Flat C D] (hcover : ∀ (p : PrimeSpectrum R) (q : PrimeSpectrum C), q.asIdeal.comap (algebraMap R C) = p.asIdeal → q.asIdeal ∈ annihilatorAssociatedPrimes C (P ⊗[R] p.asIdeal.ResidueField) → q ∈ Set.range (PrimeSpectrum.comap (algebraMap C D))) : ∀ (L : Type (max u v w x y)) [AddCommGroup L] [Module R L], Function.Injective ((((TensorProduct.mk C P D).flip (1 : D)).restrictScalars R).rTensor L)",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c2cdda5e",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Statement matches Stacks 05DH and the node clause by clause: FinitePresentation R C, Module.FinitePresentation C P, Flat R P, Flat C D, hcover with element-annihilator Ass_C(P⊗_Rκ(p)) and p = q∩R ⇒ q ∈ range of PrimeSpectrum.comap, conclusion: for all R-modules L (universe max u v w x y, smaller ones via ULift) rTensor L of p↦p⊗1 is injective. No faithful-flat, Noetherian or nontrivial binders. lean.statement verbatim. The added stmt_dep def-sc-finitely-presented-module (landed, Module.FinitePresentation) is a correct citation completion since def-weil-pbc-module-finite-type-presentation records the sheaf classes. No defs, sorry only, source and blueprint docstrings with the 4 proof steps, proof-dep imports exist in live, no duplicate in live Lean or Mathlib. No compile (no file changed)."
+ }
+}

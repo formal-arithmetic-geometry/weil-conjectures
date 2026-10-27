@@ -1,0 +1,520 @@
+{
+ "id": "lem-sfb-norm-algcl-ordered-finite-model-filtration",
+ "kind": "statement",
+ "title": "Ordered finite-field models and filtration for norm-continuous constructible modules",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting], and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with the extended $\\ell$-adic norm topology. On profinite sets with finite jointly surjective covers put\n$$C(S)=\\{f\\in C(S,\\Omega):f(S)\\subset E\\text{ for some finite }\\mathbf Q_\\ell\\subset E\\subset\\Omega\\},\\quad B(S)=C(S,\\Omega),\\quad A_E(S)=C(S,E).$$\nUse the condensed rings [sk-def-sfb-qlbar-condensed, def-sfb-continuous-map-condensed-ring], their coefficient pullbacks $R_T=p_T^*R$ [sk-def-sfb-pulled-back-coefficients], and the ordinary unbounded derived categories $D(R_T)$ of internal module objects [sk-def-sfb-module-objects, sk-def-sfb-derived-categories]. Constructible always means finite constant local models on a finite constructible locally closed stratification [sk-def-sfb-constructible], and lisse means finite free on a pro-étale cover [def-sfb-lisse-coefficient-module]. For a locally closed immersion $a:S\\hookrightarrow X$ define $a_!=i_*j_!$ for an open-then-closed factorization $a=i\\circ j$ [def-weil-closed-immersion, def-weil-open-immersion, def-sfb-module-open-lower-shriek, def-sfb-module-lower-star].\n\nLet $M$ be a constructible $B_X$-module. Suppose given a finite constructible locally closed scheme partition $X=\\coprod_a S_a$, finite intermediate fields $E_a\\subset\\Omega$, lisse $A_{E_a,S_a}$-modules $L_a$, and $B_{S_a}$-linear isomorphisms\n$$\\phi_a:B_{S_a}\\otimes_{A_{E_a,S_a}}L_a\\xrightarrow{\\sim}M|_{S_a}.$$\nWrite $a_a:S_a\\hookrightarrow X$ and $F_a=(a_a)_!L_a$. There is a finite locally closed scheme stratification $X=\\coprod_{t=1}^m R_t$ whose successive unions $V_t=\\bigcup_{s\\le t}|R_s|$ are open ($V_0=\\varnothing$, $V_m=X$), together with a choice $a(t)$ for each $t$, such that $|R_t|\\subseteq|S_{a(t)}|$ and\n$$V'_t=F_{a(t)}|_{R_t}\\text{ is lisse over }A_{E_{a(t)},R_t},\\qquad\n\\psi_t:B_{R_t}\\otimes_{A_{E_{a(t)},R_t}}V'_t\\xrightarrow{\\sim}M|_{R_t}.$$\nThe refinement may be chosen adapted to every $F_a$ (each $F_a|_{R_t}$ is lisse over its own coefficient field). Refinement here asserts containment of images, with no assumption that $R_t\\to X$ factors through $S_{a(t)}$. In the actual fibre product\n$$W_t=R_t\\times_X S_{a(t)},\\qquad q_t:W_t\\to R_t,$$\nthe map $q_t$ is a surjective closed immersion, and $q_t^*\\psi_t$ agrees with the pullback of $\\phi_{a(t)}$ under the canonical restriction, scalar and extension-by-zero identifications.\n\nFor $v_t:V_t\\hookrightarrow X$ and $r_t:R_t\\hookrightarrow X$, the open counits give monomorphisms $M_t=(v_t)_!(M|_{V_t})\\hookrightarrow M$ and a finite filtration\n$$0=M_0\\subseteq M_1\\subseteq\\cdots\\subseteq M_m=M,\\qquad\nM_t/M_{t-1}\\cong(r_t)_!\\bigl(B_{R_t}\\otimes_{A_{E_{a(t)},R_t}}V'_t\\bigr).$$\nEach resulting short exact sequence gives the corresponding distinguished triangle of degree-zero objects in $D(B_X)$. The stratification and filtration need not have nonempty strata or strict successive inclusions; empty $X$ and zero $M$ are included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), proper coefficient-change obligation; extraction of the returned topology-comparison proof, old steps 7, 8. Agent extraction; exact norm-topology reference remains WANTED. "
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-constructible",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-change-of-scalars",
+  "def-constructible-stratification",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The field k is Noetherian (its only ideals are 0 and k), so the finite-type theorem makes X Noetherian. Apply the locally closed lisse-extension theorem separately to each finite coefficient field E_a and L_a. Normalized factorization independence identifies the supplied extension with the canonical one. It says precisely that F_a=(a_a)_!L_a is constructible in the finite constant scalar-model convention. Choose a finite adapted stratification P_a for each F_a using that definition. There are finitely many P_a even though their coefficient rings differ; the geometric refinement theorem has an unused coefficient parameter.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "sk-def-sfb-constructible",
+    "lem-sfb-locally-closed-module-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordered finite-model obligation; generation converse in sk-cor-coefficient-heart-ii-generation.proof.md"
+   }
+  },
+  {
+   "text": "Apply the common-refinement theorem to the given partition (S_a) and all the P_a simultaneously. Obtain scheme strata R_t with open prefixes V_t, each image contained in some S_a and in a stratum of every P_a. For each a apply clause (2) of the lisse-refinement theorem with coefficient A_{E_a}: it explicitly assumes image containment only and concludes F_a|_{R_t} lisse. Choose a(t) with |R_t| contained in |S_{a(t)}| and put V'_t=F_{a(t)}|_{R_t}. Empty strata can be omitted. For empty X take m=0.",
+   "uses": [
+    "new-det-lem-coefficient-heart-common-stratification-refinement",
+    "new-det-lem-coefficient-heart-common-stratification-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), simultaneous ordered refinement; sk-lem-coefficient-heart-common-stratification clauses (1),(2)"
+   }
+  },
+  {
+   "text": "Fix t and write a=a(t), r:R_t->X. Form W=R_t times_X S_a with projections q:W->R_t and b:W->S_a. The base-change immersion theorem makes q an immersion. It is surjective: for x in R_t its image lies in S_a, and the residue-field isomorphism of an immersion at the unique point over that image gives a point of the fibre product over x. Its image is therefore all of R_t, a closed set, so the closed-image immersion theorem makes q a surjective closed immersion. Apply the condensed surjective-closed equivalence with coefficient B. Thus q^* on B-modules is fully faithful and reflects isomorphisms. No factorization of r through S_a has been used.",
+   "uses": [
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "new-lem-weil-pbc-condensed-surjective-closed-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), actual fibre-product correction; Stacks schemes.tex Tags 01JY and 01IQ, proetale.tex Tag 09AB"
+   }
+  },
+  {
+   "text": "Use the normalized restriction isomorphism a_a^*(a_a)_!L_a -> L_a from locally closed module extension coherence, and inverse-image composition for r q=a_a b. They identify q^*V'_t with b^*L_a. Pullback commutes with ordinary relative scalar extension: its strong monoidal comparison identifies the two arrows defining the relative-tensor coequalizer, and its left-adjoint property preserves that coequalizer. Use the coefficient composition identification to identify q^*B_{R_t}=B_W and q^*A_{E_a,R_t}=A_{E_a,W}. Consequently b^*phi_a defines an isomorphism q^*(B_{R_t} tensor_{A_{E_a,R_t}} V'_t) -> q^*(M|_{R_t}). Full faithfulness in step 3 gives a unique B_{R_t}-linear map psi_t with exactly this pullback. Since q^* reflects isomorphisms, psi_t is invertible. Its defining equation is the requested compatibility, with the normalized extension restriction rather than any unsupported scheme factorization.",
+   "uses": [
+    "lem-sfb-locally-closed-module-extension-coherence",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-finite-upper-star-tensor",
+    "lem-sfb-finite-upper-star-exact",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-pullback-from-point-comp",
+    "new-lem-weil-pbc-condensed-surjective-closed-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), descent of the prescribed finite-model isomorphisms; Stacks proetale.tex Tags 09AA, 09AB, 09BN"
+   }
+  },
+  {
+   "text": "For every open prefix v_t:V_t->X apply the module localization sequence with coefficient B_X to its complementary reduced closed subscheme. It gives a monomorphism epsilon_t:(v_t)_!v_t^*M -> M, namely the specified counit. For W=V_{t-1} inside V_t, the closed-image immersion theorem makes R_t->V_t closed, since its image is V_t minus V_{t-1}. The same localization sequence on V_t gives 0 -> u_!u^*(M|_{V_t}) -> M|_{V_t} -> c_*c^*(M|_{V_t}) -> 0, where u:V_{t-1}->V_t and c:R_t->V_t. All these open immersions are quasi-compact: the locally closed extension theorem includes Noetherianity of these subschemes and quasi-compactness of their opens.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-coefficient-heart-locally-closed-extension",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open-support filtration; Stacks proetale.tex Tag 09AH (lemma-ses-associated-to-open)"
+   }
+  },
+  {
+   "text": "Apply the exact functor (v_t)_! to the sequence in step 5. The normalized composition comparisons identify its first term with M_{t-1} and its last term with (r_t)_!(M|_{R_t}), including the change from closed-then-open to open-then-closed factorization. The first arrow followed by epsilon_t equals epsilon_{t-1}: under the composite open adjunction both maps are the transpose of the identity of M|_{V_{t-1}}. Thus these are inclusions of the same counit subobjects of M, not merely unrelated monomorphisms. Their cokernels give M_t/M_{t-1} isomorphic to (r_t)_!(M|_{R_t}). Apply (r_t)_! to psi_t^{-1} to obtain exactly the displayed quotient with B_{R_t} tensor_{A_{E_{a(t)},R_t}} V'_t. The empty and whole open prefixes give M_0=0 and M_m=M.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-locally-closed-module-extension-coherence",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), exact supported quotient and counit compatibility; Stacks proetale.tex Tag 09AH"
+   }
+  },
+  {
+   "text": "Apply the short-exact-sequence derived-triangle theorem in the abelian category of internal B_X-modules to each sequence in step 6. This produces the distinguished triangle of the specified degree-zero objects in the ordinary unbounded derived category. The construction imposes neither strict inclusions nor positive ranks. If M=0 every term and quotient is zero; if X is empty the empty stratification and filtration work.",
+   "uses": [
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), filtration triangles; Stacks derived.tex Tag 0152 (lemma-derived-canonical-delta-functor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "sk-def-sfb-constructible",
+  "new-det-lem-coefficient-heart-common-stratification-refinement",
+  "new-det-lem-coefficient-heart-common-stratification-lisse",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "lem-sfb-locally-closed-module-extension-coherence",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-finite-upper-star-tensor",
+  "lem-sfb-finite-upper-star-exact",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-pullback-from-point-comp",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-coefficient-heart-locally-closed-extension",
+  "lem-sf-derived-ses-triangle",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), finite-model obligation. Assembly from existing ordered-refinement, finite-field support, arbitrary-condensed topological-invariance and module-localization statements; not a norm-topology theorem asserted by the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible module with norm continuous algebraic closure coefficients has an ordered open stratification with finite coefficient field lisse models and its open extension filtration has the supported finite model quotients",
+   "results": {
+    "t": "2026-10-22T06:03:09Z",
+    "tool": "leanfinder",
+    "query": "A constructible module with norm continuous algebraic closure coefficients has an ordered open stratification with finite coefficient field lisse models and its open extension filtration has the supported finite model quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ChevalleyThm.chevalley_polynomialC",
+     "Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor",
+     "Ideal.Filtration.Stable.exists_forall_le",
+     "Field.Emb.Cardinal.filtration_apply",
+     "ChevalleyThm.chevalley_mvPolynomialC",
+     "PrimeSpectrum.BasicConstructibleSetData.g",
+     "Ideal.Filtration.Stable.bounded_difference",
+     "HahnEmbedding.Seed.toArchimedeanStrata"
+    ],
+    "digest": "6cbe0a0d37a9dfdf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructible subsets, algebraic-closure field filtrations and condensed module infrastructure do not give ordered finite-field models or their scheme-stratum filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refine finite field models of condensed constructible sheaves to an ordered scheme stratification using surjective closed immersion invariance without assuming factorization of stratum morphisms",
+   "results": {
+    "t": "2026-10-22T06:03:20Z",
+    "tool": "leanfinder",
+    "query": "Refine finite field models of condensed constructible sheaves to an ordered scheme stratification using surjective closed immersion invariance without assuming factorization of stratum morphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.isConstructible_image",
+     "AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image",
+     "PrimeSpectrum.exists_range_eq_of_isConstructible",
+     "PrimeSpectrum.BasicConstructibleSetData",
+     "PrimeSpectrum.ConstructibleSetData",
+     "PrimeSpectrum.BasicConstructibleSetData.g",
+     "PrimeSpectrum.BasicConstructibleSetData.n",
+     "Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover"
+    ],
+    "digest": "a6e747a86ed98560"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructible subsets, algebraic-closure field filtrations and condensed module infrastructure do not give ordered finite-field models or their scheme-stratum filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"filtration\"",
+   "results": {
+    "t": "2026-10-22T06:03:21Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"filtration\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructible subsets, algebraic-closure field filtrations and condensed module infrastructure do not give ordered finite-field models or their scheme-stratum filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "(stratif|constructible).*(ordered|filtration|finiteModel)|(finiteModel).*(stratif|filtration)",
+   "results": {
+    "t": "2026-10-22T06:03:21Z",
+    "tool": "grep",
+    "query": "(stratif|constructible).*(ordered|filtration|finiteModel)|(finiteModel).*(stratif|filtration)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructible subsets, algebraic-closure field filtrations and condensed module infrastructure do not give ordered finite-field models or their scheme-stratum filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible condensed coefficient sheaf finite local models on ordered locally closed strata and extension by zero filtration",
+   "results": {
+    "t": "2026-10-22T06:03:21Z",
+    "tool": "leansearch",
+    "query": "Constructible condensed coefficient sheaf finite local models on ordered locally closed strata and extension by zero filtration",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.lanLightCondSet",
+     "Condensed",
+     "LightCondensed",
+     "instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+     "instCategoryCondensed",
+     "Condensed.free",
+     "CondensedMod.ofSheafProfinite",
+     "Condensed.ofSheafForgetCompHaus"
+    ],
+    "digest": "5b511c975aaff09b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructible subsets, algebraic-closure field filtrations and condensed module infrastructure do not give ordered finite-field models or their scheme-stratum filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "stratif.*(filtration|finiteModel)|finiteModel.*stratif|extensionByZero.*filtration",
+   "results": {
+    "t": "2026-10-22T07:14:22Z",
+    "tool": "grep",
+    "query": "stratif.*(filtration|finiteModel)|finiteModel.*stratif|extensionByZero.*filtration",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned hits; algebraic module filtrations, coborder lifts and sheaf colimit infrastructure do not state ordered pro-etale finite-field lisse models with the prescribed quotient and fibre-product compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"filtration\"",
+   "results": {
+    "t": "2026-10-22T07:14:23Z",
+    "tool": "loogle",
+    "query": "\"Sheaf\", \"filtration\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned hits; algebraic module filtrations, coborder lifts and sheaf colimit infrastructure do not state ordered pro-etale finite-field lisse models with the prescribed quotient and fibre-product compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaf ordered locally closed stratification extension by zero filtration and finite scalar field lisse models",
+   "results": {
+    "t": "2026-10-22T07:14:23Z",
+    "tool": "leansearch",
+    "query": "Constructible sheaf ordered locally closed stratification extension by zero filtration and finite scalar field lisse models",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.lanLightCondSet",
+     "IsModuleFiltration",
+     "AlgebraicGeometry.LocallyRingedSpace.𝒪",
+     "CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+     "Condensed.lanSheafProfinite",
+     "IsModuleFiltration.mk",
+     "CategoryTheory.instZeroHomSheaf",
+     "PresheafOfModules.Sheafify.zero_smul"
+    ],
+    "digest": "d20c547cae5b8f5c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned hits; algebraic module filtrations, coborder lifts and sheaf colimit infrastructure do not state ordered pro-etale finite-field lisse models with the prescribed quotient and fibre-product compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered open support filtration of constructible pro etale module sheaves with finite coefficient field lisse models on reduced locally closed strata",
+   "results": {
+    "t": "2026-10-22T07:14:31Z",
+    "tool": "leanfinder",
+    "query": "Ordered open support filtration of constructible pro etale module sheaves with finite coefficient field lisse models on reduced locally closed strata",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_lift_of_germInjective_aux",
+     "localCohomology",
+     "localCohomology.ofDiagram",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+     "Ideal.Filtration.Stable.exists_forall_le",
+     "Ideal.Filtration.Stable.bounded_difference",
+     "localCohomology.ofSelfLERadical",
+     "Ideal.Filtration.Stable.exists_pow_smul_eq"
+    ],
+    "digest": "6610e914c522a795"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned hits; algebraic module filtrations, coborder lifts and sheaf colimit infrastructure do not state ordered pro-etale finite-field lisse models with the prescribed quotient and fibre-product compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along a locally closed immersion and finite common stratification compatible with given scalar extension isomorphisms",
+   "results": {
+    "t": "2026-10-22T07:14:33Z",
+    "tool": "leanfinder",
+    "query": "Extension by zero along a locally closed immersion and finite common stratification compatible with given scalar extension isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.liftCoborder_app",
+     "AlgebraicGeometry.Scheme.Hom.liftCoborder_ι",
+     "AlgebraicGeometry.IsOpenImmersion.lift_app",
+     "AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc",
+     "AlgebraicGeometry.IsOpenImmersion.lift",
+     "AlgebraicGeometry.exists_lift_of_germInjective_aux",
+     "AlgebraicGeometry.Scheme.Modules.restrict",
+     "AlgebraicGeometry.spread_out_of_isGermInjective'"
+    ],
+    "digest": "803184559eaef5ce"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned hits; algebraic module filtrations, coborder lifts and sheaf colimit infrastructure do not state ordered pro-etale finite-field lisse models with the prescribed quotient and fibre-product compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constructible-algcl-topology-comparison",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), proper coefficient-change obligation; extraction of the returned topology-comparison proof, old steps 7, 8.",
+   "via": [
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-norm-algcl-ordered-finite-model-filtration",
+  "worker": "Q139",
+  "summary": "No statement change and no new nodes. Reuse the finite-field support constructibility and image-only ordered refinement statements; descend the given isomorphisms along actual surjective closed fibre-product projections. Build the open counit filtration directly from arbitrary-ring module localization and normalized immersion composition, then apply the ordinary derived SES triangle. No global finite coefficient field or flatness of C to B is used.",
+  "blueprint": "main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), finite-model support obligation. The inherited created.item chain has no blueprint ancestor (blueprint_refs.py ancestor prints None); retain its null from.node and recorded via chain. Supporting blueprint common-stratification clauses (1),(2) and generation converse/single-sheaf paragraphs.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "why": "Generic tool: Constructibility of a locally closed lisse coefficient extension. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Generic tool: Local models and constructible sheaves. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "new-det-lem-coefficient-heart-common-stratification-refinement",
+    "why": "Generic tool: coefficientHeart_commonStratification_refinement. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "new-det-lem-coefficient-heart-common-stratification-lisse",
+    "why": "Generic tool: coefficientHeart_commonStratification_lisse. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+    "why": "Generic tool: condensedSurjectiveClosedPullback isEquivalence. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-locally-closed-module-extension-coherence",
+    "why": "Generic tool: Normalized locally closed extension on module sheaves. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "Generic tool: Pushforward and pullback of module objects. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-finite-upper-star-tensor",
+    "why": "Generic tool: $g^*$ commutes with the tensor product. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-finite-upper-star-exact",
+    "why": "Generic tool: $g^*$ is exact. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "sk-def-sfb-change-of-scalars",
+    "why": "Generic tool: Restriction, extension and coextension of scalars. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "sk-def-sfb-pullback-from-point-comp",
+    "why": "Generic tool: $f^*\\circ p_Y^*\\cong p_X^*$. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic tool: Ringed pro-etale open-closed localization. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-coefficient-heart-locally-closed-extension",
+    "why": "Generic tool: Exact locally closed coefficient extension through the scheme-theoretic closure. Used only for the refinement, support, coefficient-pullback or derived-triangle assembly stated in the proof; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic existence of the reduced closed complement to an open prefix; no unit node replaces this scheme construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "sk-def-sfb-constructible",
+  "new-det-lem-coefficient-heart-common-stratification-refinement",
+  "new-det-lem-coefficient-heart-common-stratification-lisse",
+  "new-lem-weil-pbc-condensed-surjective-closed-equivalence",
+  "lem-sfb-locally-closed-module-extension-coherence",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-finite-upper-star-tensor",
+  "lem-sfb-finite-upper-star-exact",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-pullback-from-point-comp",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-coefficient-heart-locally-closed-extension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-0d3b1096d",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-0d3b1096d (reviewer sub-agent of L); spot-checked: I read all 7 steps against the full statement of each cited node. The statement is identical to the Q50 creation. Replacing the stmt_dep sk-def-sfb-derived-extension-of-scalars by ordinary change-of-scalars, stratification and fibre-product deps is correct: the statement only writes ordinary B⊗_A L. There are no new nodes and no repair note, so the re-split spreading rule does not apply. Step checks: (1) X is Noetherian (finite type over k); the lisse-extension support node with Λ=E_a gives (a_!L)[0] in D^b_c, so a_!L is constructible; coherence identifies the extension; P_a comes from sk-def-sfb-constructible(2). (2) Common refinement over {(S_a)}∪{P_a} gives image containment and open prefixes; lisse clause (2) applied per E_a makes the stratification adapted to every F_a. (3) q is a base-changed immersion (01JY); it is surjective by the residue-field iso of an immersion plus the fibre-product universal property; its closed image makes it a closed immersion (01IQ); the surjective-closed equivalence is stated for arbitrary condensed Λ, so it covers B. No E3 factorization is assumed; tested on X=Spec k[ε]/ε² with S=X_red. (4) r_a, pullback composition, the strong-monoidal and left-adjoint abelian pullback preserving the relative-tensor coequalizer, and pullback-from-point-comp give b^*φ_a; full faithfulness and conservativity give ψ_t; the compatibility holds by construction. (5)-(6) Localization 09AH node with reduced complements and quasi-compact opens; R_t→V_t is closed; γ composition and counit transposition give M_t/M_{t-1}≅(r_t)_!(B⊗V'_t). (7) The SES triangle node applies. Edge cases checked: empty X, zero M, a single point, mixed fields, empty strata. No duplicate in the DAG (rg -L search). No SGA. The 14 declared tool_uses are acceptable generic tools. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormAlgclOrderedFiniteModelFiltration",
+  "declaration": "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.orderedFiniteModelFiltration",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.finiteField_isTopologicalRing",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.algcl_isTopologicalRing",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.scalarInclusion",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.scalarInclusion_isMonHom",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.scalarExtension",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.noetherianSpace",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.extension",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.RestrictionNormalized",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.fibreRestriction",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.refinedModel",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.ModelCompatible",
+   "AlgebraicGeometry.ProEtale.NormAlgclOrderedModels.orderedFiniteModelFiltration"
+  ],
+  "file": "lean/Sheaf/Paper/NormAlgclOrderedFiniteModelFiltration.lean",
+  "statement": "theorem orderedFiniteModelFiltration (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ) (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (M : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X.left)) (hM : IsConstantModelConstructible (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X.left M) (P : Scheme.Stratification X.left) (E : Fin P.n → PadicAlgCl.FiniteIntermediateField ℓ) (L : ∀ a : Fin P.n, Mod (Sheaf (Scheme.ProEt.topology (P.domain a)) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj (E a)) (P.domain a))) (hL : ∀ a : Fin P.n, IsLisseCoefficientModule (Profinite.continuousMapRingObj (E a)) (L a)) (φ : ∀ a : Fin P.n, (scalarExtension ℓ (E a) (P.domain a)).obj (L a) ≅ (CondensedRing.upperStar (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) (P.immersion a)).obj M) : ∃ ρ : ∀ a : Fin P.n, (CondensedRing.upperStar (Profinite.continuousMapRingObj (E a)) (P.immersion a)).obj ((extension X (Profinite.continuousMapRingObj (E a)) (P.immersion a) (P.isImmersion a)).obj (L a)) ≅ L a, (∀ a : Fin P.n, RestrictionNormalized X (Profinite.continuousMapRingObj (E a)) (P.immersion a) (P.isImmersion a) (L a) (ρ a)) ∧ ∃ (R : X.left.FiniteLocallyClosedStratification) (V : Fin (R.n + 1) → X.left.Opens) (a : Fin R.n → Fin P.n), (∀ t : Fin (R.n + 1), (V t : Set X.left) = ⋃ s : Fin R.n, ⋃ (_ : s.val < t.val), R.stratum s) ∧ V 0 = ⊥ ∧ V (Fin.last R.n) = ⊤ ∧ (∀ t : Fin R.n, R.stratum t ⊆ P.stratum (a t)) ∧ (∀ (b : Fin P.n) (t : Fin R.n), IsLisseCoefficientModule (Profinite.continuousMapRingObj (E b)) (refinedModel ℓ X (E b) (P.immersion b) (P.isImmersion b) (L b) (R.immersion t))) ∧ ∃ ψ : ∀ t : Fin R.n, (scalarExtension ℓ (E (a t)) (R.domain t)).obj (refinedModel ℓ X (E (a t)) (P.immersion (a t)) (P.isImmersion (a t)) (L (a t)) (R.immersion t)) ≅ (CondensedRing.upperStar (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) (R.immersion t)).obj M, (∀ t : Fin R.n, IsClosedImmersion (pullback.fst (R.immersion t) (P.immersion (a t))) ∧ Surjective (pullback.fst (R.immersion t) (P.immersion (a t))) ∧ ModelCompatible (scalarInclusion ℓ (E (a t))) (P.immersion (a t)) (R.immersion t) ((extension X (Profinite.continuousMapRingObj (E (a t))) (P.immersion (a t)) (P.isImmersion (a t))).obj (L (a t))) (L (a t)) M (φ (a t)) (ρ (a t)) (ψ t)) ∧ (∀ t : Fin (R.n + 1), Mono (coefficientHeartOpenCounit (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) M (V t))) ∧ IsZero (coefficientHeartOpenTerm (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) M (V 0)) ∧ IsIso (coefficientHeartOpenCounit (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) M (V (Fin.last R.n))) ∧ ∃ d : ∀ t : Fin R.n, coefficientHeartOpenTerm (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) M (V t.castSucc) ⟶ coefficientHeartOpenTerm (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) M (V t.succ), ∀ t : Fin R.n, d t ≫ coefficientHeartOpenCounit (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) M (V t.succ) = coefficientHeartOpenCounit (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) M (V t.castSucc) ∧ Nonempty (cokernel (d t) ≅ (extension X (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) (R.immersion t) (R.isImmersion t)).obj ((scalarExtension ℓ (E (a t)) (R.domain t)).obj (refinedModel ℓ X (E (a t)) (P.immersion (a t)) (P.isImmersion (a t)) (L (a t)) (R.immersion t)))) ∧ ∃ h : (ShortComplex.mk (d t) (cokernel.π (d t)) (cokernel.condition (d t))).ShortExact, h.singleTriangle ∈ distTriang _",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bf874edc",
+  "group": "Q128",
+  "result": "pass",
+  "note": "First S2 delivery; node unchanged from the accepted Q139 split; lean.statement verbatim. All clauses match: ℓ prime, char p>0, p≠ℓ; X separated finite type over k (Noetherian derived); B=continuousMapRingObj(PadicAlgCl), A_E=continuousMapRingObj E, B⊗L via the real E⊂Ω postcomposition (scalarInclusion); M constructible (IsConstantModelConstructible, qcqs branch); P a Scheme.Stratification with E,L,lisse,φ; F_a=coefficientHeartLocallyClosedExtension (i_* j_!); ρ pinned by the open-unit/closed-counit equation; R a finite locally closed partition, V = prefix unions with V0=⊥ and Vm=⊤, image-only containment, lisse for every b; ψ pinned by ModelCompatible on the actual pullback with q surjective closed (fully faithful); counits mono, M0 zero, last counit iso; d pinned by d≫ε=ε'; cokernel ≅ (r_t)_!(B⊗V'); ShortExact plus singleTriangle in the ordinary DerivedCategory. Edge cases (empty X, zero M, empty strata, rank 0, mixed fields, non-reduced strata, universes) OK. No hollow defs, one sorry, docstrings carry all 7 steps, report sections present; no recompile (no change). Advisories only: coefficientHeartOpenTerm/OpenCounit come from the theorem node det-lem-coefficient-heart-filtration, and other owners are not in stmt_deps (unchanged since stage 1); local A_E→B inclusion parallels the sibling NormAlgclComparison route; universe-0 continuousMapRingObj; Nonempty quotient iso suffices for the only citer (lem-sfb-constructible-algcl-topology-comparison step 3)."
+ }
+}

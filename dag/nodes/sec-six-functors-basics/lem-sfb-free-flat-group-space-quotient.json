@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-free-flat-group-space-quotient",
+ "kind": "statement",
+ "title": "Algebraic-space quotient of a free flat group-space action",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], and let $B,Z$ be algebraic spaces over $S$ with a morphism $Z\\to B$ [def-trf-algebraic-space]. A group algebraic space $G$ over $B$ means an algebraic space $G\\to B$ whose functor on $B$-schemes is a sheaf of groups, with multiplication, identity and inverse given by morphisms over $B$. Let $a:G\\times_B Z\\to Z$ be a left action over $B$: on every test scheme its maps satisfy $1z=z$ and $(gh)z=g(hz)$, naturally under pullback. Assume the action is free on every test scheme, meaning $gz=z$ implies $g=1$, and assume $G\\to B$ is flat and locally of finite presentation, tested on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Form the fppf sheafification $F=Z/G$ of the orbit presheaf on $S$-schemes [def-pc-fppf-site, def-weil-pbc-sheafification]. Then $F$ is an algebraic space, and $q:Z\\to F$ is surjective, flat and locally of finite presentation. Moreover $q$ has fppf local sections on every scheme test $T\\to F$, and the morphism $G\\times_B Z\\to Z\\times_F Z$, $(g,z)\\mapsto(gz,z)$, is an isomorphism of fppf sheaves. Surjectivity means surjectivity on field-valued point classes [lem-trf-space-fibre-products-etale-covers]; all fibre products are sheaf fibre products.",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 06PH, lemma-quotient-free-action."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-group-space-over-cartesian"
+ ],
+ "proof": [
+  {
+   "text": "We use algebraic spaces as discrete fppf stacks: unique gluing of sections gives descent of objects and arrows. Their diagonals are representable by schemes by [def-trf-algebraic-space]; a scheme is an algebraic space by [def-trf-scheme-algebraic-space]. Their etale scheme charts are representable smooth surjections by [lem-sfb-fibred-groupoid-representable-smooth-calculus]. Thus they satisfy [def-sfb-algebraic-moduli-stack], and maps between them are representable by algebraic spaces by the same calculus. We can consequently apply [lem-sfb-stack-chartwise-smooth-etale-calculus] to algebraic-space maps: flatness and local finite presentation are stable under arbitrary base change and composition, and etale maps have both properties. The chart interpretation agrees with the assumed chartwise flatness and local finite presentation of $G\\to B$: for charts $V\\to B$ and $W\\to G\\times_BV$, [lem-sfb-space-local-properties-chart-test] tests flatness and local finite presentation on $W\\to V$, independently of the charts. The calculus instead tests a property after every scheme base change $T\\to B$. These agree: etale scheme charts are surjective, flat and locally of finite presentation, so the algebraic-space source-and-target clause of [lem-sfb-representable-fppf-etale-open-descent], applied to $V\\to B$ and $W\\to G\\times_BV$, says that $G\\to B$ has the property in the calculus sense if and only if $W\\to V$ has it. Taking identity target charts gives the same interpretation for maps to schemes.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH (lemma-quotient-free-action), base-change conventions; spaces-morphisms.tex Tags 03MO and 03XR."
+   }
+  },
+  {
+   "text": "Let $P(T)$ be the set of orbits in $Z(T)$, where two sections can be related only if their maps to $B$ agree, and then by an element of the corresponding group $G(T)$. The map $P\\to B$ is well defined because the action is over $B$. Since $B$ is an fppf sheaf, the universal property [def-weil-pbc-sheafification] extends it uniquely to $F\\to B$ with composite $Z\\to B$ the given map. Form $R=G\\times_BZ$, an algebraic space by [lem-trf-space-fibre-products-etale-covers], with $s(g,z)=z$ and $t(g,z)=gz$. Its identity, inverse and composition are $(1,z)$, $(g^{-1},gz)$ and $(h,gz)\\circ(g,z)=(hg,z)$. The action axioms give the groupoid laws. If $gz=hz$, then $(h^{-1}g)z=z$, so freeness gives $g=h$. Thus $(t,s)$ is injective on all test-scheme sections and identifies $R$ with an equivalence relation. The orbit presheaf and hence its sheafification are exactly $P$ and $F$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH (lemma-quotient-free-action), action groupoid and freeness."
+   }
+  },
+  {
+   "text": "The natural map $R\\to Z\\times_FZ$, $(g,z)\\mapsto(gz,z)$, is an isomorphism of sheaves. Indeed, for $(x,y)$ over $T$ with $q(x)=q(y)$, [lem-weil-pbc-site-sheafification-sections-local] applied to their orbit classes gives an fppf covering $T_i\\to T$ on which $x_i=g_i y_i$ for some $g_i$. Their maps to $B$ agree globally, since $F\\to B$ was constructed in step 2. On every overlap $g_i=g_j$ by freeness. The fppf sheaf property of $G$ [def-trf-algebraic-space] glues them uniquely to $g$, with $x=gy$ by the sheaf property of $Z$. Uniqueness also gives compatibility with pullback. This constructs a natural inverse. Furthermore, for every $f\\in F(T)$, the local-section clause of the same sheafification lemma gives an fppf covering $T_i\\to T$ and orbit classes represented by $z_i\\in Z(T_i)$ with $q(z_i)=f|_{T_i}$. Thus $q$ already has fppf local sections on every scheme test.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH (lemma-quotient-free-action), torsor clauses; spaces-groupoids.tex lemma-quotient-pre-equivalence."
+   }
+  },
+  {
+   "text": "For $f\\in F(T)$ put $E=h_T\\times_FZ$, a sheaf. Choose the covering and lifts $z_i$ of step 3. The kernel-pair isomorphism identifies $E\\times_TT_i$ with $T_i\\times_{z_i,Z,s}R$: a point is $(u,x)$ with $q(x)=q(z_i(u))$, uniquely $(u,g)$ with $x=gz_i(u)$. This is also $T_i\\times_BG$, hence an algebraic space by [lem-trf-space-fibre-products-etale-covers] and [def-trf-scheme-algebraic-space]. Choose etale scheme charts of these local algebraic spaces in the working universe. The covering index and charts lie in that universe [def-weil-size-convention], and their scheme coproduct exists by [lem-weil-pbc-scheme-coproduct-family] and belongs to the ambient big site. Therefore all hypotheses, including the chart-size condition, of [lem-sfb-fppf-local-algebraic-space] hold. It follows that $E$ is an algebraic space over $T$, before any assertion of algebraicity of $F$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-scheme-algebraic-space",
+    "def-weil-size-convention",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-fppf-local-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 04SK (lemma-locally-algebraic-space); Tag 06PH, local calculation underlying Tag 06PG."
+   }
+  },
+  {
+   "text": "Each $E\\times_TT_i\\simeq T_i\\times_BG\\to T_i$ is flat and locally of finite presentation by step 1 and the hypothesis on $G\\to B$. It has a section $u\\mapsto(u,1)$, so it is surjective. Let $T'=\\coprod_iT_i$, which exists by [lem-weil-pbc-scheme-coproduct-family] in [def-weil-size-convention]. The maps $T_i\\to T$ are flat and locally of finite presentation by [def-pc-fppf-site]; the open-source locality of [lem-sfb-stack-chartwise-smooth-etale-calculus] gives these properties for $T'\\to T$. It is surjective because the family covers. Similarly $E\\times_TT'\\to T'$ has both properties, since on the disjoint open pieces it is the displayed projection. Apply the algebraic-space clause of [lem-sfb-representable-fppf-etale-open-descent] to $E\\to T$ with the single cover $T'\\to T$. Thus $E\\to T$ is flat and locally of finite presentation. It is surjective on field-valued point classes: a field point of $T$ lifts to a point of some covering $T_i$ after field extension, and the displayed section then lifts it to $E$. No quasi-compactness of the covering is required.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-size-convention",
+    "def-pc-fppf-site",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-representable-fppf-etale-open-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PG (lemma-covering-quotient); spaces-descent.tex Tags 041W and 041T."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-fppf-space-atlas-bootstrap] to the fppf sheaf $F$ and $q:Z\\to F$. The source $Z$ is an algebraic space by hypothesis. For every $T$ and $f\\in F(T)$, step 4 gives the required algebraic space $E$, and step 5 gives surjectivity, flatness and local finite presentation of its projection. Thus $F$ is an algebraic space. The same projections show that $q$ is flat and locally of finite presentation on charts; field-point surjectivity follows from the local lifts of step 3. Step 3 also gives all requested local sections and the exact isomorphism $G\\times_BZ\\simeq Z\\times_FZ$ with formula $(g,z)\\mapsto(gz,z)$. These prove every clause.",
+   "uses": [
+    "lem-sfb-fppf-space-atlas-bootstrap"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 06PH (lemma-quotient-free-action), using Tag 04S6 (theorem-final-bootstrap), condition (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-local-properties-chart-test",
+  "def-weil-pbc-sheafification",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "def-weil-size-convention",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sfb-fppf-local-algebraic-space",
+  "def-pc-fppf-site",
+  "lem-sfb-representable-fppf-etale-open-descent",
+  "lem-sfb-fppf-space-atlas-bootstrap"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 06PH (lemma-quotient-free-action), using the representable fppf atlas formulation (3) of Tag 04S6; Tag 06PG descent and Tag 04SK local algebraicity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Gg]erbe|[Qq]uotient.*[Ff]ree.*[Aa]ction",
+   "results": "1 hits: Mathlib/Topology/Covering/Quotient.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free action flat locally finitely presented group algebraic space quotient fppf torsor",
+   "results": "8 hits: AddTorsor.noConfusionType, AddTorsor.noConfusion, AddAction.selfEquivOrbitsQuotientProd', MulAction.selfEquivOrbitsQuotientProd, AddTorsor, AddAction.selfEquivOrbitsQuotientProd, MulAction.selfEquivOrbitsQuotientProd', MulAction.orbitRel.Quotient",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Torsor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free action of a flat locally finitely presented group algebraic space has an algebraic space quotient and the quotient map is an fppf torsor",
+   "results": "8 hits: isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, isCoveringMapOn_quotientMk_of_properlyDiscontinuousSMul, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, isAddQuotientCoveringMap_quotientMk_of_properlyDiscontinuousVAdd, isQuotientCoveringMap_iff, IsQuotientCoveringMap.isCancelSMul, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fppf sheaf orbit quotient of a free action of a flat group algebraic space is representable by an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.Limits.SingleObj.Types.colimitEquivQuotient, CategoryTheory.Limits.SingleObj.colimitTypeRelEquivOrbitRelQuotient, Rep.quotientToCoinvariantsFunctor, Rep.coinvariantsFunctor_obj_carrier, MulAction.automorphize",
+   "date": "2026-10-23",
+   "verdict": "no match: set actions, topological covering spaces, Zariski representability or scheme morphisms do not give the fppf algebraic-space quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|quotient.*free.*action",
+   "results": "1 hits: Mathlib/Topology/Covering/Quotient.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern set torsors, topological quotients or scheme properties, not representability of this fppf algebraic-space quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Quotient\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern set torsors, topological quotients or scheme properties, not representability of this fppf algebraic-space quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free action of a flat locally finitely presented group algebraic space has an algebraic space fppf quotient and torsor projection",
+   "results": "8 hits: isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, isCoveringMapOn_quotientMk_of_properlyDiscontinuousSMul, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, isAddQuotientCoveringMap_quotientMk_of_properlyDiscontinuousVAdd, IsQuotientCoveringMap.isCancelSMul, isCoveringMapOn_quotientMk_of_properlyDiscontinuousVAdd, isQuotientCoveringMap_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern set torsors, topological quotients or scheme properties, not representability of this fppf algebraic-space quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf sheaf quotient of free flat finitely presented group action is an algebraic space torsor",
+   "results": "8 hits: AddTorsor.noConfusionType, AddTorsor, MulAction.selfEquivOrbitsQuotientProd, AddTorsor.mk, MulAction.orbitRel.Quotient, AddAction.selfEquivOrbitsQuotientProd', MulAction.selfEquivOrbitsQuotientProd', AddAction.selfEquivOrbitsQuotientProd",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern set torsors, topological quotients or scheme properties, not representability of this fppf algebraic-space quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf equivalence relation with flat locally finitely presented projections on an algebraic space has an algebraic space quotient",
+   "results": "8 hits: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ, AlgebraicGeometry.LocallyRingedSpace.coequalizer, AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern set torsors, topological quotients or scheme properties, not representability of this fppf algebraic-space quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-inertia-algebraic-space-quotient",
+  "date": "2026-10-23",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Generic flat-inertia quotient and smoothness descent, used on the stack of invertible modules. Supporting input of the quotient construction: Stacks 06QJ, converse, free stabilizer action on the arrow space and application of Bootstrap 06PH.",
+   "via": [
+    "lem-sfb-flat-inertia-algebraic-space-quotient",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-free-flat-group-space-quotient",
+  "worker": "stage1",
+  "summary": "Six-step proof from Stacks 06PH/06PG using existing 04S6(3) bootstrap and 04SK fppf locality. Constructed the relation, proved its kernel-pair identity by unique gluing, computed local scheme-test pullbacks, descended flatness and local finite presentation, and applied the bootstrap. No new nodes and no statement change.",
+  "blueprint": "Retains the inherited null nearest ancestor and via chain. Supporting quotient input of Stacks 06QJ in the stable-Picard/moduli prerequisite to det-thm-sf-ctf-stability-direct-images (3). Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md. Whole-blueprint searches for 06PH, quotient free action, flat equivalence relation and fppf quotient found no duplicate. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre products and point-class convention for algebraic spaces, not a trace-formula result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-4efd8f69b",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-4efd8f69b (reviewer sub-agent of L); spot-checked: Read in full: the item (statement identical to base; unsplit on live and side-live; first delivery; no re-split note; no new nodes), Stacks bootstrap.tex 06PH (l.1985), 06PG (l.1950) and 04S6 (l.1446), and the statements of all 15 cited nodes. Step 2 (the relation; freeness gives injectivity) is a correct elementary step. Step 3: the kernel-pair isomorphism and the fppf local sections follow from both clauses of the sheafification-sections-local node plus freeness and gluing in G and Z. Step 4: E×_T T_i ≅ T_i×_B G, then 04SK, whose size condition follows from the universe convention and the scheme-coproduct node. Step 5: flatness and lfp descend along the single cover ∐T_i→T by the algebraic-space clause of the descent node (no quasi-compactness needed); surjectivity comes from the identity section. Step 6 applies 04S6(3) and recovers q flat, lfp and surjective. Tested: trivial G; G acting on itself (F=B); α_p on G_a (Frobenius quotient, fppf but not etale); a torsor with no global section; empty Z; non-abelian G. Duplicate search (06PH/06PG/free action/torsor) finds only finite-group scheme quotients and the parent citer. FIX: step 1 claimed that the item's chart-tested flat/lfp hypothesis on G→B matches the stack calculus's after-every-base-change convention, citing only the chart-test node, which does not give base change. I added lem-sfb-representable-fppf-etale-open-descent (algebraic-space source-and-target clause, applied to etale charts) with two sentences; it was already in proof_deps and creates no cycle. Batch-5 flags: def-trf-scheme-algebraic-space is a general definition. The seven sfb nodes reach sec-trace-formula only through def-trf-algebraic-space and generic algebraic-space foundations; I enumerated the whole closure: trf nodes are units sk-i-curve-zero/sk-i-additivity, pod nodes are sk-lem-finite basics, and there is no nt-assume leaf, trace-formula/Poincaré theorem or batch-4 target. These are not steps of either assumed proof. No SGA source is used. The tool_uses entry for the fibre-product node is generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeFlatGroupSpaceQuotient",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.free_flat_groupSpace_quotient",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.groupSpaceOrbitPresheaf",
+   "AlgebraicGeometry.AlgebraicSpace.groupSpaceQuotient",
+   "AlgebraicGeometry.AlgebraicSpace.groupSpaceQuotientMap",
+   "AlgebraicGeometry.AlgebraicSpace.free_flat_groupSpace_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeFlatGroupSpaceQuotient.lean",
+  "statement": "theorem free_flat_groupSpace_quotient {S : Scheme.{u}} (B : AlgebraicSpace S) (G Z : Over B.obj) [GrpObj G] [ModObj G Z] (hG : IsAlgebraicSpace G.left) (hZ : IsAlgebraicSpace Z.left) (hfree : ∀ T : Over S, Function.Injective ((prod.lift (ModObj.smul (M := G) (X := Z)).left.hom (CartesianMonoidalCategory.snd G Z).left.hom).app (op T))) (hflat : MapIsFlat (ObjectProperty.homMk G.hom : (⟨G.left, hG⟩ : AlgebraicSpace S) ⟶ B)) (hlfp : MapIsLocallyOfFinitePresentation (ObjectProperty.homMk G.hom : (⟨G.left, hG⟩ : AlgebraicSpace S) ⟶ B)) : ∃ (F : AlgebraicSpace S) (q : Z.left ⟶ F.obj) (e : F.obj.obj ⋙ uliftFunctor.{u + 1, u} ≅ (groupSpaceQuotient G Z).obj), Functor.whiskerRight q.hom uliftFunctor.{u + 1, u} ≫ e.hom = groupSpaceQuotientMap G Z ∧ MapIsFlat (ObjectProperty.homMk q : (⟨Z.left, hZ⟩ : AlgebraicSpace S) ⟶ F) ∧ MapIsLocallyOfFinitePresentation (ObjectProperty.homMk q : (⟨Z.left, hZ⟩ : AlgebraicSpace S) ⟶ F) ∧ IsJointlySurjective (fun _ : Unit ↦ q.hom) ∧ (∀ (T : Over S) (x : F.obj.obj.obj (op T)), ∃ R : Sieve T, R ∈ (Scheme.fppfTopology.over S) T ∧ ∀ (U : Over S) (f : U ⟶ T), R f → ∃ z : Z.left.obj.obj (op U), q.hom.app (op U) z = F.obj.obj.map f.op x) ∧ IsPullback (ModObj.smul (M := G) (X := Z)).left (CartesianMonoidalCategory.snd G Z).left q q",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "§1(B), explicitly required by the H2 return for lem-sfb-unramified-pseudo-torsor: the old module owned the generic cartesian instance, forcing consumers to cite an unrelated quotient theorem for a definition. The instance is moved unchanged to Sheaf.AlgebraicGeometry.GroupSpaceOverCartesian, owned by def-sfb-group-space-over-cartesian; this quotient module publicly imports it and no longer redeclares it. All quotient constructions and the theorem statement are unchanged. The remaining quotient sheafification note holds: Type (u+1), identified with a u-valued algebraic-space model after ULift. Maintenance 2026-10-25: the extracted definition is now an explicit statement dependency of this consumer; the extraction is landed separately because this consumer is outside the requesting item dependency closure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b28ca4036",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_deps, Stacks 06PH, the module and the report. Hypotheses match the node with nothing extra: GrpObj/ModObj over B.obj with the pullback cartesian structure; hfree (injectivity of (smul,snd)) is equivalent to the node's freeness; hflat/hlfp are the landed chart tests. The orbit coequalizer, its (u+1) presheafToSheaf and the canonical quotient map are real constructions, and the e/q equation ties F and q to the canonical quotient with no universe restriction. All conclusion clauses are present and correctly oriented: q flat, q lfp, field-point surjectivity, fppf local sections, and the IsPullback square for (g,z)->(gz,z). The item differs from live only in lean and one landed added stmt_dep (allowed); the other dependency nodes are identical; the statement is verbatim; docstrings carry the source, blueprint tag and 6 proof steps; only sorry; non-public imports are the proof_dep modules. Edge cases checked: empty Z, trivial G, alpha_p, torsors without sections, non-abelian G. No duplicate in live. Advisory: IsJointlySurjective's owner def-trf-algebraic-space-jointly-surjective-family is reached only through the theorem stmt_dep lem-trf-space-fibre-products-etale-covers. No files changed, so no compile."
+ }
+}

@@ -207,7 +207,18 @@
   "lem-weil-pbc-w-local-partition"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -253,5 +264,35 @@
   "landing": "20261015T154203-L-161575",
   "kind": "interface",
   "note": "independent Codex review: Unchanged theorem signature and delivered proof matched the node; DAG dependencies agree; module and both direct importers compile cleanly; all four proved declarations use only permitted axioms."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Suppose $A\\to B$ identifies every local ring: for every prime $q\\subset B$,\nthe map $A_{q\\cap A}\\to B_q$ is an isomorphism. If $\\operatorname{Spec}A$ and\n$\\operatorname{Spec}B$ are w-local [def-weil-pbc-w-local] and every maximal\nideal of $B$ contracts to a maximal ideal of $A$, then $B/A$ is ind-Zariski\n[def-weil-pbc-ind-etale-algebra].",
+  "proof": [
+   {
+    "text": "Consider an arbitrary finitely presented algebra $P/A$ with a map $P\\to B$.\nAt a maximal ideal $q$ of $B$, its finitely many generators become fractions\nin $A_{q\\cap A}$. Choose a common denominator and then clear the finitely\nmany defining relations. This gives $f\\notin q\\cap A$ and $P\\to A_f$ inducing\nthe given local map. Equality with $P\\to B$, and invertibility of $f$, hold\non an open neighbourhood $O_q$ of $q$, since only finitely many equalities\nmust be checked.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "By [lem-weil-pbc-w-local-partition], the closed points of\n$\\operatorname{Spec}B$ have a finite clopen partition subordinate to finitely\nmany $O_q$'s. Its extension to $\\operatorname{Spec}B$ is still subordinate to\nthese opens. Write $B=\\prod_{j=1}^mB_j$ for the corresponding idempotent\ndecomposition. The local factorizations give\n\n$$\n P\\longrightarrow\\prod_{j=1}^mA_{f_j}\n \\longrightarrow\\prod_{j=1}^mB_j=B.\n$$",
+    "uses": [
+     "lem-weil-pbc-w-local-partition"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Here is the finite-presentation argument turning this into the claimed\ncolimit, rather than merely a supply of local maps. Take all finite products\nof principal localizations equipped with an $A$-map to $B$. Two have a common\nsuccessor by applying the displayed factorization to their tensor product.\nFor two parallel maps, impose equality on finitely many algebra generators in\ntheir target; the resulting finitely presented quotient still maps to $B$,\nand the displayed factorization equalizes the two maps at a successor. Thus\nthis category is filtered. Polynomial algebras show that its colimit surjects\nonto $B$; imposing one equation shows injectivity. This is the ind-Zariski\npresentation of [def-weil-pbc-ind-etale-algebra].",
+    "uses": [
+     "def-weil-pbc-ind-etale-algebra"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

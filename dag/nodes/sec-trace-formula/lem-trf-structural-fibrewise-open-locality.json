@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-structural-fibrewise-open-locality",
+ "kind": "statement",
+ "title": "Open-base locality of structural and geometric-fibre conditions",
+ "statement": "Let $S$ be a scheme, let $(S_i)_{i\\in I}$ be an arbitrary open cover, and let $C,F,X$ be schemes over $S$, and let $p:C\\to S$, $q:F\\to S$, $j:F\\to C$ and $r:C\\to X$ be morphisms over $S$, with $q=p\\circ j$ [def-weil-scheme-over-base]. Fix $d,e\\geq0$. The following structural conditions hold globally if and only if they hold after restriction to every $S_i$ [def-pc-fibre-product]: $p,q$ are flat [def-weil-flat-morphism] and finitely presented [def-sbc-locally-finite-presentation], their nonempty fibres have pure dimensions $d,e$ [def-weil-pure-dimension], $j$ is a closed immersion [def-weil-closed-immersion], and $q$ is etale [def-weil-etale-morphism]. The same locality assertion holds for any chosen subset of these conditions. The condition that $j(F)$ lies in the relative smooth locus of $p$ [def-sbc-smooth-morphisms] is also local in this sense. More generally, let $P$ be any rule assigning a proposition to diagrams $F_\\Omega\\to C_\\Omega\\to X_\\Omega$ of schemes over algebraically closed fields, invariant under isomorphisms of such diagrams. The condition that $P$ holds on every chosen algebraic-closure geometric fibre [def-weil-geometric-fibre] of $(j,r)$ is equivalent to its holding for the restriction over every $S_i$. This last assertion requires no invariance of $P$ under field extension: for a point $s\\in S_i$ use the same residue-field closure on $S$ and $S_i$. There is no finiteness assumption on the cover or on $S$, and empty schemes, empty marking, nonproper curves and nonseparated curves are allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01TP (definition-finite-presentation), 01TQ (lemma-locally-finite-presentation-characterize), 01U3 (definition-flat), and 01QO (lemma-closed-immersion); open-target locality of quasi-compactness of the map and its diagonal and etaleness, as in the existing locality nodes. Geometric-fibre identity over an open neighbourhood; returned Step 14, agent-written assembly."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-weil-scheme-over-base"
+ ],
+ "proof": [
+  {
+   "text": "For an open $V\\subset S$ put $Y_V=Y\\times_SV$ for $Y=C,F,X$. Identify $Y_V$ with the open subscheme $a_Y^{-1}(V)\\subset Y$, where $a_Y$ is its structure map: a pair of maps $T\\to Y$, $T\\to V$ agreeing over $S$ is exactly a map $T\\to Y$ whose composite to $S$ factors through $V$. The factor is unique by the open-factorization lemma. This verifies the fibre-product universal property and gives the identification with both projections. The restrictions of $j,r$ are therefore their actual restrictions to these opens; $q=p\\circ j$ gives $j^{-1}(C_V)=F_V$. At $y\\in Y_V$, open restriction preserves the local ring and the induced local ring map: neighbourhoods contained in $Y_V$ are cofinal among neighbourhoods of $y$. In particular $\\kappa_V(s)=\\kappa_S(s)$ for $s\\in V$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Open restriction and fibre-product universal property; agent-written identification using the cited definitions and open-factorization lemma"
+   }
+  },
+  {
+   "text": "Apply the local-ring identification of Step 1 to $p$ and $q$. At a point above $S_i$ the local homomorphism defining flatness is the same before and after restriction. By the definition of a flat morphism, global flatness implies flatness of every restriction; conversely, each point of $C$ or $F$ lies above some $S_i$, so flatness of all restrictions gives flatness at that point. This proves the flatness equivalence separately for $p$ and $q$.",
+   "uses": [
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "definition-flat (flatness at a point and flatness everywhere)"
+   }
+  },
+  {
+   "text": "Let $a:Y\\to S$ be either $p$ or $q$. Finite presentation means local finite presentation, quasi-compactness and quasi-separatedness. Global finite presentation restricts to each $S_i$ by the base-change assertion (3) of the qcqs permanence node. Conversely, assume every $a_i:Y_i\\to S_i$ is finitely presented. Target-open locality gives local finite presentation of $a$, and quasi-compact target locality gives quasi-compactness of $a$. For quasi-separatedness put $D=Y\\times_SY$ and $D_i=D\\times_SS_i$. The $D_i$ are an open cover of $D$ by Step 1. The restriction of $\\Delta_a:Y\\to D$ to $D_i$ is $\\Delta_{a_i}:Y_i\\to Y_i\\times_{S_i}Y_i$: maps to either displayed product are pairs of maps to $Y_i$ with the same structural map, so the product identification and the equality of the two diagonals follow from uniqueness in the fibre-product universal property. Each $\\Delta_{a_i}$ is quasi-compact. Apply quasi-compact target locality to $\\Delta_a$ on this cover. Its quasi-compactness is precisely quasi-separatedness of $a$. Thus all three defining conditions of finite presentation hold.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-quasi-separated-morphism",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-separated-lfp-target-open-locality",
+    "lem-pc-quasi-compact-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "definition-finite-presentation; locality of local finite presentation and quasi-compactness, including application to the diagonal"
+   }
+  },
+  {
+   "text": "The opens $C_i=p^{-1}(S_i)$ cover $C$, and the inverse image of $C_i$ under $j$ is $F_i$ by Step 1. Apply clause (1) of the closed/finite/etale target-locality node to $j:F\\to C$ and this cover: $j$ is a closed immersion exactly when all $j_i$ are. Apply clause (3) of the same node to $q:F\\to S$ and the cover $(S_i)$: $q$ is etale exactly when all $q_i$ are. These applications impose no conditions on $p$ or $r$.",
+   "uses": [
+    "lem-weil-pbc-closed-finite-etale-zariski-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Open-target locality for closed immersions and etaleness, as recorded by the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Fix $s\\in S_i$ and first take $T=\\operatorname{Spec}\\kappa(s)$. For each $Y=C,F,X$, the projection $(Y\\times_SS_i)\\times_{S_i}T\\to Y\\times_ST$ is an isomorphism. Its inverse is given by the same map to $Y$ and the unique factorization of $T\\to S$ through $S_i$; each composite has the original projections, hence is the identity by the fibre-product universal property. Thus the entire ordinary fibre over $s$ is unchanged, rather than merely an open part of it. The induced homeomorphism identifies irreducible components and chains of irreducible closed subsets in each component, so pure dimension $d$ for $C_s$ and $e$ for $F_s$ is unchanged. Since every $s$ belongs to some $S_i$, this gives both implications of the pure-fibre-dimension assertions. Empty fibres agree on both sides and impose no condition.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pure-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Fibre-product universal property and the definition of pure dimension; agent-written comparison"
+   }
+  },
+  {
+   "text": "Interpret the relative smooth locus as the set of points admitting an open neighbourhood on which the structural morphism is smooth. For $c\\in C_i$, if $p$ is smooth on an open neighbourhood $W\\subset C$ of $c$, clause (a) of the smooth-restriction node makes $W\\cap C_i\\to S_i$ smooth. Conversely, if $p_i$ is smooth on an open neighbourhood $W_i\\subset C_i$ of $c$, then $W_i$ is open in $C$ and clause (b), with target open $S_i\\subset S$, makes $W_i\\to S$ smooth. The two smooth loci therefore agree on $C_i$. For each $f\\in F$ choose $i$ with $q(f)\\in S_i$; then $j(f)\\in C_i$ and the assertion $j(f)$ lies in the smooth locus is identical for $j$ and $j_i$. This proves locality of the image-containment condition without requiring the marking to be nonempty or $p$ to be globally smooth.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "definition-smooth and lemma-smooth-characterize; open restriction and composition with a target open immersion"
+   }
+  },
+  {
+   "text": "For the chosen algebraic closure $\\Omega=\\overline{\\kappa(s)}$ at $s\\in S_i$, use the same residue-field closure on $S$ and $S_i$ via Step 1. Repeat the explicit mutually inverse maps of Step 5 with $T=\\operatorname{Spec}\\Omega$. They are isomorphisms over this fixed $\\Omega$ for $F,C,X$. They intertwine $j_\\Omega,r_\\Omega$: both composites have the same projections to the original schemes and to $T$, so uniqueness in the fibre-product universal property makes them equal. The hypothesis on $P$ therefore identifies its truth on the two fibre diagrams. Global truth restricts to each $S_i$, and truth on every restriction implies global truth by choosing an $i$ containing each $s$. No change of field is made. Steps 2--6 established each structural equivalence independently, so taking a conjunction over any chosen subset gives exactly the stated subset assertion. All arguments use a covering only to locate a single point or apply the cited arbitrary-cover locality; for $S=\\varnothing$ all schemes over $S$ are empty and the same statements are vacuous (the structural morphisms and their diagonals are empty isomorphisms).",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-geometric-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Geometric fibre as the fibre product with the chosen algebraic closure; agent-written diagram comparison and quantifier argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-open-immersion",
+  "def-weil-pure-dimension",
+  "def-weil-quasi-separated-morphism",
+  "lem-pc-quasi-compact-local-on-target",
+  "lem-sfb-separated-lfp-target-open-locality",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Assembly of definition-finite-presentation, definition-flat, definition-smooth and the cited existing locality nodes; the diagram comparison is proved directly from the fibre-product universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flatness finite presentation pure fibre dimensions a closed immersion marking and etaleness are local on an open cover of the base and any isomorphism invariant geometric fibre predicate is local too",
+   "results": "{\"t\": \"2026-10-22T06:10:09Z\", \"tool\": \"leanfinder\", \"query\": \"Flatness finite presentation pure fibre dimensions a closed immersion marking and etaleness are local on an open cover of the base and any isomorphism invariant geometric fibre predicate is local too\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasRingHomProperty.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.IsLocalAtTarget\", \"AlgebraicGeometry.HasRingHomProperty.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.universally_isLocalAtTarget\", \"AlgebraicGeometry.IsLocalAtSource\"], \"digest\": \"99ac4b6094c3563a\"}; General locality instances and diagonal locality supply structural ingredients, but no declaration states this combined geometric-diagram predicate and relative-smooth-locus comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi compactness of a morphism and its diagonal can be checked on an open cover of the target so finite presentation is local on the base and geometric fibres agree under open restriction",
+   "results": "{\"t\": \"2026-10-22T06:10:09Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi compactness of a morphism and its diagonal can be checked on an open cover of the target so finite presentation is local on the base and geometric fibres agree under open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source\", \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.of_forall_source_exists_preimage\"], \"digest\": \"6f7ecf034876349d\"}; General locality instances and diagonal locality supply structural ingredients, but no declaration states this combined geometric-diagram predicate and relative-smooth-locus comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness finite presentation pure fibre dimensions a closed immersion marking and etaleness are local on an open cover of the base and any isomorphism invariant geometric fibre predicate is local too",
+   "results": "{\"t\": \"2026-10-22T06:09:58Z\", \"tool\": \"leansearch\", \"query\": \"Flatness finite presentation pure fibre dimensions a closed immersion marking and etaleness are local on an open cover of the base and any isomorphism invariant geometric fibre predicate is local too\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; General locality instances and diagonal locality supply structural ingredients, but no declaration states this combined geometric-diagram predicate and relative-smooth-locus comparison.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsLocalAtTarget",
+   "results": "{\"t\": \"2026-10-22T06:09:58Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsLocalAtTarget\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsLocalAtTarget'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; General locality instances and diagonal locality supply structural ingredients, but no declaration states this combined geometric-diagram predicate and relative-smooth-locus comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]inite[Pp]resentation.*[Ii]sLocal|[Ff]inite[Pp]resentation.*[Oo]pen[Cc]over|[Ff]lat.*[Ii]sLocal",
+   "results": "{\"t\": \"2026-10-22T06:09:58Z\", \"tool\": \"grep\", \"query\": \"[Ff]inite[Pp]resentation.*[Ii]sLocal|[Ff]inite[Pp]resentation.*[Oo]pen[Cc]over|[Ff]lat.*[Ii]sLocal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"4581c4db03d017b8\"}; General locality instances and diagonal locality supply structural ingredients, but no declaration states this combined geometric-diagram predicate and relative-smooth-locus comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*fiber.*restrict|fiber.*openCover|iff_of_openCover|quasiSeparated.*iff",
+   "results": "{\"t\": \"2026-10-23T09:25:27Z\", \"tool\": \"grep\", \"query\": \"geometric.*fiber.*restrict|fiber.*openCover|iff_of_openCover|quasiSeparated.*iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Properties.lean\", \"Mathlib/AlgebraicGeometry/ColimitsOver.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\"], \"digest\": \"d8d4ead7c6781102\"}; Read the hits: general morphism-property locality, stalk restriction and fibre maps do not state the full structural and arbitrary diagram-predicate assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibres of a diagram agree when restricting the base to an open neighbourhood and every isomorphism invariant fibre property is local on the base",
+   "results": "{\"t\": \"2026-10-23T09:25:28Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibres of a diagram agree when restricting the base to an open neighbourhood and every isomorphism invariant fibre property is local on the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtSource.resLE\", \"AlgebraicGeometry.topologically_isLocalAtSource'\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.of_forall_source_exists_preimage\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"AlgebraicGeometry.Flat.instMorphismRestrict\"], \"digest\": \"5f12ba2c18b2d984\"}; Read the hits: general morphism-property locality, stalk restriction and fibre maps do not state the full structural and arbitrary diagram-predicate assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover",
+   "results": "{\"t\": \"2026-10-23T09:25:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_openCover\"], \"digest\": \"9aaa0f0bfe5a4af3\"}; Read the hits: general morphism-property locality, stalk restriction and fibre maps do not state the full structural and arbitrary diagram-predicate assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Structural morphism conditions flat finitely presented etale closed immersion and isomorphism invariant geometric fibre diagram predicates are local on arbitrary open covers of the base",
+   "results": "{\"t\": \"2026-10-23T09:25:29Z\", \"tool\": \"leanfinder\", \"query\": \"Structural morphism conditions flat finitely presented etale closed immersion and isomorphism invariant geometric fibre diagram predicates are local on arbitrary open covers of the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalAtTarget\", \"AlgebraicGeometry.IsLocalAtSource\", \"AlgebraicGeometry.IsZariskiLocalAtSource\", \"AlgebraicGeometry.IsZariskiLocalAtTarget\", \"AlgebraicGeometry.sourceLocalClosure\", \"AlgebraicGeometry.universally_isLocalAtTarget\", \"AlgebraicGeometry.universally_isZariskiLocalAtTarget\", \"AlgebraicGeometry.IsZariskiLocalAtSource.mk'\"], \"digest\": \"ab39c2ff52844671\"}; Read the hits: general morphism-property locality, stalk restriction and fibre maps do not state the full structural and arbitrary diagram-predicate assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a scheme diagram to an open neighbourhood of a point then its geometric fibre with a fixed algebraic closure is canonically isomorphic to the original fibre and all diagram predicates agree",
+   "results": "{\"t\": \"2026-10-23T09:27:28Z\", \"tool\": \"leanfinder\", \"query\": \"Restrict a scheme diagram to an open neighbourhood of a point then its geometric fibre with a fixed algebraic closure is canonically isomorphic to the original fibre and all diagram predicates agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiberι_asFiber\", \"AlgebraicGeometry.Scheme.OpenCover.restrict_f\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv\", \"AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal\", \"AlgebraicGeometry.opensDiagram\", \"AlgebraicGeometry.opensDiagram_map\", \"AlgebraicGeometry.Scheme.Hom.fiberHomeo_apply\", \"AlgebraicGeometry.opensDiagramι\"], \"digest\": \"1496734cc39aaca5\"}; Read the hits: general morphism-property locality, stalk restriction and fibre maps do not state the full structural and arbitrary diagram-predicate assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-semistable-marked-base-change",
+  "date": "2026-10-22",
+  "group": "Q117"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Arbitrary base change of semistable marked curves and fibrewise stability. Re-split argument: Open-base locality of structural and geometric-fibre conditions (returned item Steps 14).",
+   "via": [
+    "lem-trf-semistable-marked-base-change",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-structural-fibrewise-open-locality",
+  "worker": "stage1",
+  "summary": "Proved each structural condition independently using existing locality leaves; finite presentation includes the quasi-compact diagonal test. Constructed the ordinary and chosen-closure geometric fibre identifications from projections, checked compatibility with both diagram arrows, and compared smooth neighbourhoods using open restriction/composition. No new nodes or statement changes.",
+  "blueprint": "Nearest imported ancestor lem-trf-local-term-locality, semistable-alteration/nearby-cycle route recorded in blueprint.from.place, specifically the base-change parent's returned Step 14: open-base locality for the semistable marked pair. The latest blueprint was read; it does not contain a separate statement of this auxiliary locality result."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-380cfacdd",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-380cfacdd (reviewer sub-agent of L); spot-checked: Read in full: the item is a first split (0 new nodes), the statement is unchanged against live, and live/side-live still have it unsplit with no repair note, so it is not superseded and not a re-split. Steps 1-7 checked against each cited statement. S1 gives the open-subscheme identification Y×_S V = a^{-1}(V) by the universal property plus the factorization lemma (existence+uniqueness), and local rings/residue fields are unchanged. S2 is flatness pointwise per def-weil-flat-morphism. S3 checks finite presentation as lfp+qc+qs, matching Stacks 01TP: forward by qcqs-permanence clause (3); backward with lfp from lem-sfb-separated-lfp-target-open-locality and qc from lem-pc-quasi-compact-local-on-target. For qs the same qc-locality is applied to Δ_a over the cover D_i of Y×_S Y, with D_i ≅ Y_i×_{S_i}Y_i (the correct diagonal over S); no qs-base assumption is used. S4 applies closed-finite-etale clause (1) to j with cover C_i and j^{-1}(C_i)=F_i, and clause (3) to q. S5 shows the whole fibre over s is unchanged via κ_{S_i}(s)=κ_S(s), so pure dimension is unchanged. S6 reads the smooth locus as having an open smooth nbhd, which is equivalent to Stacks 01V5 smooth-at-x; it uses clauses (a)/(b) of lem-weil-pbc-smooth-restrict-open-subschemes. S7 uses the same chosen Ω on S and S_i; the isomorphisms intertwine j_Ω, r_Ω, P transfers by isomorphism-invariance, and no field change is made. Every cited statement node is a Mathlib leaf, so it counts as a tool and the route is fine with no tool_uses needed. All three search kinds are recorded. Edge cases checked: empty S, empty fibres, empty marking, infinite cover, nonseparated C. A DAG search found no duplicate. Minor: the report lists sandbox citations.json/searches.jsonl as files written; no effect on the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StructuralFibrewiseOpenLocality",
+  "declaration": "AlgebraicGeometry.structuralFibrewiseConditions_iff_openCover",
+  "declarations": [
+   "AlgebraicGeometry.structuralFibrewiseConditions",
+   "AlgebraicGeometry.structuralFibrewiseConditions_iff_openCover",
+   "AlgebraicGeometry.marking_smoothNeighbourhood_iff_openCover",
+   "AlgebraicGeometry.geometricDiagramPredicate_iff_openCover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StructuralFibrewiseOpenLocality.lean",
+  "statement": "theorem structuralFibrewiseConditions_iff_openCover {S : Scheme.{u}} (C F : Over S) (j : F ⟶ C) (d e : ℕ) (I : Type w) (U : I → S.Opens) (hU : ∀ s : S, ∃ i : I, s ∈ U i) (A : Set (Fin 8)) : (∀ k ∈ A, structuralFibrewiseConditions C F j d e k) ↔ ∀ i : I, ∀ k ∈ A, structuralFibrewiseConditions ((Over.pullback (U i).ι).obj C) ((Over.pullback (U i).ι).obj F) ((Over.pullback (U i).ι).map j) d e k",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c90d076f8",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Only the item's lean record changed; it is complete and its statement is verbatim in the file. Checked against all 9 stmt_dep records: Flat, LocallyOfFinitePresentation∧QuasiCompact∧QuasiSeparated (finite presentation per Stacks 01TP and def-sbc-lfp), ordinary Scheme.Hom.fiber with a Nonempty guard plus IsPureDimension, IsClosedImmersion j.left, Etale F.hom; the Over S category gives q=p∘j; any subset via A : Set (Fin 8); the cover is any family U : I → S.Opens with hU and its own universe w; restriction is the canonical Over.pullback (U i).ι. The smooth locus is a smooth open neighbourhood, without a global lfp assumption. The geometric part uses the def-weil-geometric-fibre point, and the local side uses the same closure through the factorization g with g ≫ ι = ȳ, as the node prescribes; hP is invariance over a fixed Ω, a weaker hypothesis that is still true by Step 7. Edge cases checked: empty S/I/F/fibres, d=e=0, nonseparated curves, universes. The definition is a real list of existing predicates, theorems are sorry, docstrings carry source, blueprint id and steps, lines ≤100, three search kinds recorded. qc/qs without their own stmt_deps are the components of the cited finite-presentation node: not a fault. No compile run, as no file changed."
+ }
+}

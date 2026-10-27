@@ -1,0 +1,154 @@
+{
+ "id": "lem-sfb-internal-bar-character-deletion",
+ "kind": "statement",
+ "title": "Existence of the normalized degree-one character deletion cochain map",
+ "statement": "Let $A$ be a commutative condensed ring, $G$ any profinite group and $D$ a resolution of [lem-sfb-condensed-internal-bar-resolution], with the sizes and internal modules of [sk-def-sfb-condensed-ring, sk-def-sfb-module-objects, def-sfb-condensed-action-module, def-weil-size-convention]. Use the complex and component identifications of [def-sfb-internal-bar-character-data]. For every additive condensed character $a$ of [def-sfb-condensed-unipotent-class] there exists a cochain map $L_a:P\\to P[1]$ with IsLift: its components are equivariant and, for every profinite $S$, send $[g_0,\\dots,g_{n+1}]$ to $a(g_0^{-1}g_1)[g_1,\\dots,g_{n+1}]$. There is no ordered iteration, augmentation comparison, or inhomogeneous cochain in this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-written internal-bar expansion, extracted from lem-sfb-internal-bar-character-lifts."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-bar-character-data"
+ ],
+ "proof": [
+  {
+   "text": "For every profinite $S$, the proposed image $a(g_0^{-1}g_1)[g_1,\\ldots,g_n]$ is a section of $P_{n-1}(S)$, natural under every $T\\to S$: $a$ is a condensed morphism, and the generator map and scalar multiplication commute with restriction. The free-module universal property and generator equality test of [lem-sfb-condensed-free-linearization-tensor] therefore give a unique internal $A$-linear $L_{a,n}$. For $u\\in C(S,G)$, $(ug_0)^{-1}(ug_1)=g_0^{-1}g_1$, and $u$ takes the remaining generator to $[ug_1,\\ldots,ug_n]$. The scalar is unchanged because the coefficient action is trivial. Thus the generator equivariance test of [lem-sfb-condensed-group-algebra-exact-forgetful] proves equivariance. Put all the other components equal to zero as stated.",
+   "uses": [
+    "lem-sfb-condensed-free-linearization-tensor",
+    "lem-sfb-condensed-group-algebra-exact-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the chain identity on generalized generators using [lem-sfb-condensed-free-linearization-tensor]. For $n\\geq2$ write $a_{ij}=a(g_i^{-1}g_j)$. In $\\partial_{n-1}L_{a,n}+L_{a,n-1}\\partial_n$, deleting $g_i$ for $i\\geq2$ gives the same tuple with coefficients $(-1)^{i-1}a_{01}$ and $(-1)^ia_{01}$, which cancel. The remaining tuple $[g_2,\\ldots,g_n]$ has coefficient $a_{01}+a_{12}-a_{02}=0$, because $g_0^{-1}g_2=(g_0^{-1}g_1)(g_1^{-1}g_2)$ and $a(xy)=a(x)+a(y)$. At $n=1$ the two terms are zero since the unaugmented $d_P^0$ and $L_a^0$ are zero; at $n=0$ and in positive degrees the same holds. Thus $d_PL_a=-L_ad_P$ in every degree. As $d_{P[1]}=-d_P$, these are exactly the cochain-map equations for $P\\to P[1]$.",
+   "uses": [
+    "lem-sfb-condensed-free-linearization-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Equality on free generators determines the transported components by lem-sfb-condensed-free-linearization-tensor. Cancel the term and shift isomorphisms to recover equality in every negative degree. At degree zero both maps are zero because their target is P^1=0; in positive degrees their source is zero. The Lean theorem deletion_unique proves this separately, and exists_unique_deletion combines it with the existence statement.",
+   "uses": [
+    "lem-sfb-condensed-free-linearization-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-free-linearization-tensor",
+  "lem-sfb-condensed-group-algebra-exact-forgetful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image; agent-written internal-bar expansion, extracted from lem-sfb-internal-bar-character-lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Additive characters define degree one chain maps on homogeneous bar complex by deleting the first vertex",
+   "results": "{\"t\": \"2026-10-26T06:39:25Z\", \"tool\": \"leanfinder\", \"query\": \"Additive characters define degree one chain maps on homogeneous bar complex by deleting the first vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex.d\", \"groupHomology.inhomogeneousChains.d\", \"Rep.barComplex.d_single\", \"Rep.standardComplex.d\", \"Rep.barComplex.d_def\", \"Rep.standardComplex.εToSingle₀\", \"Rep.barComplex\", \"Rep.FiniteCyclicGroup.chainComplexFunctor\"], \"digest\": \"85be8a1bec56ec81\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.toSingle\"",
+   "results": "{\"t\": \"2026-10-26T06:39:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex.toSingle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CochainComplex.toSingle₀Equiv\", \"CochainComplex.toSingle₀Equiv_apply\", \"CochainComplex.toSingle₀Equiv_symm_apply_f_zero\", \"CochainComplex.toSingle₀Equiv_symm_apply_f_succ\"], \"digest\": \"ef0386adb4262fe1\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "grep",
+   "query": "character.*(barComplex|chainMap)|barComplex.*character",
+   "results": "{\"t\": \"2026-10-26T06:41:10Z\", \"tool\": \"grep\", \"query\": \"character.*(barComplex|chainMap)|barComplex.*character\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordered products of additive group characters are cocycles in inhomogeneous group cochains with trivial coefficients",
+   "results": "{\"t\": \"2026-10-26T06:44:43Z\", \"tool\": \"leansearch\", \"query\": \"Ordered products of additive group characters are cocycles in inhomogeneous group cochains with trivial coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.cocyclesMk\", \"groupCohomology.cocyclesOfIsCocycle₁\", \"groupCohomology.cocycles\", \"groupCohomology.mem_cocycles₁_of_addMonoidHom\", \"AddChar.instAddCommGroup\", \"groupCohomology.iCocycles\", \"groupCohomology.instFunLikeSubtypeForallProdCarrierVModuleCatMemSubmoduleCocycles₂\", \"AddChar.coe_mul\"], \"digest\": \"a3f459eeca588cdd\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal condensed character deletion gives a unique chain map to the shift of a homogeneous bar complex",
+   "results": "{\"t\": \"2026-10-26T06:44:43Z\", \"tool\": \"leansearch\", \"query\": \"Internal condensed character deletion gives a unique chain map to the shift of a homogeneous bar complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.ofHom\", \"CochainComplex.homOfDegreewiseSplit\", \"HomologicalComplex.Hom.mk\", \"HomologicalComplex.Hom.ext_iff\", \"HomologicalComplex.Hom.mk.noConfusion\", \"ChainComplex.truncate\", \"Homotopy.shift\", \"CochainComplex.HomComplex.Cochain.shift\"], \"digest\": \"0fa4681d5977fd34\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated degree one character deletion chain maps on the homogeneous bar have ordered product coefficients after augmentation",
+   "results": "{\"t\": \"2026-10-26T06:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated degree one character deletion chain maps on the homogeneous bar have ordered product coefficients after augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.hσ'_eq'\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.on_Γ₀_summand_id\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.induction\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.of_P\", \"AlgebraicTopology.DoldKan.PInfty\", \"AlgebraicTopology.DoldKan.hσ\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"AlgebraicTopology.DoldKan.hσ'_eq_zero\"], \"digest\": \"6be1b464c62f384f\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The hits describe discrete representations, generic complex maps or list recursion, not these internal condensed bar maps. The relevant source-library cupHom calculation assumes a commutative group and cannot be applied to the stated arbitrary profinite group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InternalBarCharacterLifts",
+  "date": "2026-10-26",
+  "group": "R4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Existence of the normalized degree-one character deletion cochain map; character-lift calculation below direct-images paragraph (3).",
+   "via": [
+    "lem-sfb-internal-bar-character-lifts",
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InternalBarCharacterDeletion",
+  "file": "lean/Sheaf/CategoryTheory/InternalBarCharacterDeletion.lean",
+  "declaration": "Profinite.CondensedAction.InternalBarCharacter.exists_deletion",
+  "statement": "theorem exists_deletion (D : Resolution A.toMon G) (a : Character A G) :\n    ∃ L : complex D ⟶ (complex D)⟦(1 : ℤ)⟧, IsLift D a L",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-26",
+  "declarations": [
+   "Profinite.CondensedAction.InternalBarCharacter.exists_deletion",
+   "Profinite.CondensedAction.InternalBarCharacter.deletion_unique",
+   "Profinite.CondensedAction.InternalBarCharacter.exists_unique_deletion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f251e",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T082841-L-2231382",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f251e",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T082841-L-2231382",
+  "kind": "interface",
+  "note": "independent cc review: 7 moved defs vs clone (identical except blueprint docstring tags), Lifts/exists_lifts byte-identical, three new sorry statements vs Resolution boundary/diagonal/augmentation fields and Mathlib shift sign conventions, item node only proof/proof_deps/proof_origin/lean changed; no importers of the item"
+ }
+}

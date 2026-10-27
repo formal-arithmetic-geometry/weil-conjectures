@@ -1,0 +1,35 @@
+## Worker report
+
+1. Files written: dag/nodes/sec-six-functors-basics/lem-sfb-dense-singleton-fibres-tail-lifting.json (statement, split; no full Mathlib match); citations.json; report.md. The search command also wrote searches.jsonl. No new nodes and no new Mathlib leaves.
+2. Attachments: none. Searched lean/WeilConjectures for the exact blueprint tag and dense/singleton/fibre terminology. No project declaration supplies every clause. Mathlib Continuous.isClosedMap is a general compact-to-Hausdorff closedness fact, not an attachment or a match for the full item.
+3. WANTED: a published reference for the dense-singleton-fibre tail-lifting auxiliary, in the open-direct-image context of the current blueprint, paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md. Its compactness ingredients are available in Stacks, so no missing source obstructs the proof. The existing item already explicitly records the external-reference request; this proof is marked agent-written.
+4. Corrections: the item was statement-only. Its statement is true as written and is unchanged. Its contextual source is not a theorem asserting the auxiliary; the proof and report distinguish this. The latest blueprint paragraph (3) was read; it gives the open-direct-image preservation context. The unit and chapter records were also read. This small topology auxiliary realizes the existing parent's final tail argument and does not change the unit or chapter route. The ancestor command returns None, in agreement with the inherited blueprint.from.node; its via chain and precise contextual place are retained. No statement dispute, route departure, target change, or omitted clause.
+5. Unfinished: no mathematical argument remains in this split. No Lean was written or compiled. Independent maintainer review remains after direct delivery.
+
+## Searches and reuse
+
+There was no earlier sandbox item, report, or searches.jsonl to resume. Read the current item and retained all its historical search records. Ran the required search command for the item with LeanFinder, Loogle, grep and LeanSearch, then a second semantic phrasing about irreducible closed maps and kernel images. The latter found isClosedMap_iff_kernImage and IsClosedMap.frequently_nhds_fiber: these give neither the singleton-fibre nonemptiness argument nor this tail-lifting statement in one line. Separate closed-map searches found Continuous.isClosedMap, whose actual signature and proof were read at Mathlib/Topology/Separation/Hausdorff.lean:673–674. All executed search records were added verbatim with their actual query strings and result objects; none is invented.
+
+Searched the whole DAG by compact/Hausdorff/closed-image terminology, by Continuous.isClosedMap, and by Stacks Tag 08YD. Searched imported blueprint nodes with blueprint_refs.py for singleton, compact Hausdorff, closed map and 08YD, and read the latest blueprint matches for singleton fibres. No node states the whole item. Existing nodes already supply all three ingredients of closedness; therefore no new compact-to-Hausdorff node is needed.
+
+## Not duplicates
+
+No new nodes. In particular, lem-sfb-compact-hausdorff-surjection-quotient only states the quotient-map property. Its source mentions 08YD, but its statement does not assert closedness, so it is not cited for that assertion. Instead the proof cites the three existing compactness leaves whose statements actually supply the successive conclusions. No clause of the item was extracted as a new node.
+
+## Review by Q156
+
+I read Stacks topology.tex, Tag 08YD (lemma-closed-map), including the paragraph proving closedness by compactness of a closed subset, compactness of its continuous image and closedness in a Hausdorff target. I also read the three source statements and proofs at Tags 005C (lemma-closed-in-quasi-compact), 04Z9 (lemma-image-quasi-compact, assertion (1)), and 08YB (lemma-quasi-compact-in-Hausdorff, assertion (1)). The current blueprint, accessed only through literature/blueprint/latest, supplies the paragraph (3) context, not this lemma. No new node needs an additional source.
+
+Step 1 is a pointwise equivalence: failure to belong to the image of the complement means no point outside U lies over y. This proves exactly the displayed equality, without assuming that the fibre is nonempty. No topology theorem is hidden here.
+
+For Step 2 I opened the statements of lem-weil-pbc-closed-in-quasi-compact, lem-weil-pbc-continuous-image-quasi-compact, and lem-sfb-compact-subset-hausdorff-closed. The first explicitly gives compactness in the induced topology for a closed subset of a compact space; apply it to C=T minus U. The second applies to a continuous map whose entire domain is compact, so I restrict q to C and write out why its inverse images are relatively open. Its image is precisely q(C), with the topology induced from V. The third explicitly asserts closedness of every compact subset of a Hausdorff space, with no compactness assumption on V; that is exactly the final inference. Taking the complement proves openness of B_U. This is the only non-elementary step, and all three uses have full verbatim statement quotations in citations.json. All three nodes have status mathlib and no route approval is needed.
+
+Step 3 uses density only through its defining neighbourhood property: a point u of the nonempty open U lies in the closure of S, so U meets S. For s in that intersection the assumption is equality of the WHOLE fibre with {s}. Thus q(s) lies outside q(C). This proves nonemptiness, even when U is not saturated. I wrote out the contradiction as well, to avoid mistaking the image q(U) for B_U.
+
+Step 4 uses the given explicit tail property, at the nonempty open B_U, for the same arbitrary N. The set identity gives containment of the whole fibre. Surjectivity, used separately here, gives its nonemptiness. No choice of a simultaneous sequence of lifts, metrizability, countability of a basis, distinctness of the v_k, or openness of q is assumed.
+
+Small cases: U=T gives C empty and B_U=V, as required. A singleton space gives the unique fibre and every k works. With T empty, a map v from the nonempty natural numbers into V and a surjection from T cannot both exist; in any event there is no nonempty U, so the quantified conclusion has no exceptional case. Finite discrete examples force S=T and hence singleton fibres everywhere; the proof still applies. Fibres at points not in q(S) may have multiple points: Step 3 only chooses its witness in S and Step 4 works for arbitrary nonempty fibres, so no unintended injectivity assumption has slipped in. Every proof step is shorter than 2000 characters; total assembly is below 3000 characters. I checked sections B–E of delivery-errors.md against the files: self-contained unchanged statement, exact citations, no hidden non-elementary fact, no new-node relabelling, all hypotheses available, and no circular dependency. No SGA source is used.
+
+## Validation
+
+The required server dry run is run with deliver.py --no-push; its final result and the direct-delivery result are reported by the tool session.

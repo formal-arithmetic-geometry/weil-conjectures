@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-root-cell-semisimplicity-criterion",
+ "kind": "statement",
+ "title": "Semisimplicity from a root cell and opposite-root identities",
+ "statement": "Let $k$ be an algebraically closed field and $\\mathcal R=(M,\\Phi,M^\\vee,\\Phi^\\vee)$ a finite reduced root datum with a base $\\Delta$, as in [def-sfb-pinned-split-root-realization]. Assume $\\Phi$ spans $M\\otimes_{\\mathbf Z}\\mathbf Q$ and $\\mathbf Z\\Phi^\\vee=M^\\vee$. Put $T=D_k(M)$ and let $\\Phi^+$ be the positive roots. Let $H$ be a $k$-group scheme which is smooth [def-sbc-smooth-morphisms], connected [def-weil-connected-scheme], separated (its diagonal is a closed immersion) and of finite type [def-weil-finite-type-morphism]; affineness is not an assumption. Suppose there are immersed homomorphisms $j:T\\to H$ and $x_\\alpha:\\mathbf G_{a,k}\\to H$ for all roots, where immersion means isomorphism onto a locally closed subscheme and $\\mathbf G_a(R)=(R,+)$. Suppose, for some orderings, multiplication\n$$\\prod_{\\alpha\\in-\\Phi^+}\\mathbf A^1_k\\times T\\times\\prod_{\\alpha\\in\\Phi^+}\\mathbf A^1_k\\longrightarrow H,\\quad (a,t,b)\\longmapsto\\left(\\prod x_\\alpha(a_\\alpha)\\right)j(t)\\left(\\prod x_\\alpha(b_\\alpha)\\right)$$\nis an open immersion with dense image. With $\\chi_\\alpha(t)=t(e^\\alpha)$ and $j\\alpha^\\vee$ the monomial cocharacter, assume on points over every commutative $k$-algebra that\n$$j(t)x_\\alpha(z)j(t)^{-1}=x_\\alpha(\\chi_\\alpha(t)z),\\qquad\nx_\\alpha(u)x_{-\\alpha}(v)=x_{-\\alpha}\\left(\\frac v{1+uv}\\right)j\\alpha^\\vee(1+uv)x_\\alpha\\left(\\frac u{1+uv}\\right)$$\nwhere the second identity is required when $1+uv$ is invertible. Suppose also that $n_\\alpha=x_\\alpha(1)x_{-\\alpha}(-1)x_\\alpha(1)$ satisfies $n_\\alpha x_\\alpha(z)n_\\alpha^{-1}=x_{-\\alpha}(-z)$. Then $H$ is affine and semisimple, $j$ identifies $T$ with a closed maximal torus, and the root datum of $(H,T)$ is the specified $\\mathcal R$, with $x_\\alpha(\\mathbf G_a)$ the root subgroup labelled $\\alpha$ and monomial coroot $\\alpha^\\vee$. Semisimple means having no nontrivial smooth connected solvable normal subgroup, where solvable means that the iterated commutator subgroup becomes trivial. Group schemes, full torus characters, roots and geometric coroots have the meanings of [def-sfb-pinned-split-root-realization]. There is no restriction on the characteristic of $k$; the zero datum is allowed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 6.3.14, equation (6.3.5), and proof of Proposition 6.3.15, printed pp.227--229; field criterion extracted from the proof, with the Weyl representative written as the three-factor rank-one word Read online; local PDF WANTED. No Stacks tag states this group-theoretic input."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "First let $q:H\\to C$ be any homomorphism to a commutative group scheme. For each $\\alpha$, choose $t\\in T(k)$ with $c=\\chi_\\alpha(t)\\ne1$. Such a point exists: in coordinates a nonzero integer exponent of $\\alpha$ gives a nonconstant Laurent monomial on the infinite algebraically closed field. For every $k$-algebra and $z$ the given conjugation identity gives\n$$x_\\alpha(z)=[j(t),x_\\alpha(z/(c-1))].$$\nHence $qx_\\alpha=1$ as a scheme homomorphism. Put $u=1$, $v=s-1$ in the assumed opposite-root identity, for any unit $s$ in any test algebra. Applying $q$ gives $qj\\alpha^\\vee(s)=1$. Since the coroots generate $M^\\vee$, the map from the product of their copies of $\\mathbf G_m$ onto $T$ has a monomial section: choose an integer right inverse of the surjection from the free group on the coroots to the free lattice $M^\\vee$. Thus $qj=1$. Consequently $q$ is trivial on the entire given open cell. These are identities of morphisms, not just identities on $k$-points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.3.15, first paragraph of proof, printed p.228; equation (6.3.5), p.227"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-barsotti-chevalley-decomposition] to the smooth connected separated finite-type $k$-group $H$. It gives $L\\hookrightarrow H$ affine and $p:H\\to C$ with kernel $L$, where $C$ is an abelian variety, hence commutative and separated. Step 1 makes $p$ trivial on the dense open cell. The group $H$ is reduced by [sbc-lem-smooth-geometrically-reduced]. Therefore $p=1$ on $H$: the equalizer with the identity-valued morphism is closed by separatedness of $C$, and each section of its ideal vanishes on a dense open of a reduced scheme, so is zero. The scheme-theoretic kernel of $p$ is now all of $H$, so $L=H$. This proves affineness before using any theorem for affine algebraic groups.",
+   "uses": [
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.3.15, Chevalley argument, printed p.228; Milne Theorem 8.27, pp.154-155"
+   }
+  },
+  {
+   "text": "Write $U_\\alpha=x_\\alpha(\\mathbf G_a)$ and identify $T$ with its image. These are closed subgroup schemes: [lem-sfb-algebraic-group-homomorphism-factorization] factors each homomorphism through a closed image as the fppf quotient by its kernel; the assumed immersion has trivial kernel, so that quotient map is an isomorphism. At the identity, the open cell and [lem-sc-product-tangent-space-direct-sum] identify\n$$\\mathfrak h=\\operatorname{Lie}(T)\\oplus\\bigoplus_{\\alpha\\in\\Phi} L_\\alpha,\\qquad L_\\alpha=dx_\\alpha(k).$$\nIndeed on dual-number points the differential of multiplication is addition, so these are precisely the tangent inclusions of the displayed factors. Each $L_\\alpha$ has dimension one. Differentiating the assumed conjugation formula in the root parameter, while retaining the whole torus as a group functor, makes $L_\\alpha$ have character $\\alpha$; $T$ acts trivially on its own tangent space. In particular the zero weight is exactly $\\operatorname{Lie}(T)$, even when the differential of a root character is zero.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sc-product-tangent-space-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.3.15, tangent decomposition, printed pp.227-228; Stacks Tag 0BEB, varieties-lemma-tangent-space-product"
+   }
+  },
+  {
+   "text": "By [lem-sfb-torus-centralizer-smooth-connected], $Z=C_H(T)$ is a smooth connected affine closed subgroup. By [lem-sfb-lie-normalizer-centralizer-invariants] and step 3, $\\operatorname{Lie}(Z)=\\mathfrak h^T=\\operatorname{Lie}(T)$. Apply [lem-sfb-smooth-subgroup-tangent-generation] to the ambient group $Z$, the singleton family consisting of $T$, and the closed subgroup $T\\subseteq Z$. Its tangent spanning hypothesis holds, so $Z=T$. Any torus containing $T$ is commutative and hence lies in $C_H(T)=T$; therefore $T$ is maximal. All centralizers here are scheme-theoretic, including on nonreduced test algebras.",
+   "uses": [
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-lie-normalizer-centralizer-invariants",
+    "lem-sfb-smooth-subgroup-tangent-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.3.15, maximal-torus argument, printed p.228; Milne Proposition 10.34 and Theorem 17.38"
+   }
+  },
+  {
+   "text": "For each $\\alpha\\in\\Phi$, reducedness of the specified root datum says that the positive rational ray through $\\alpha$ contains no other root. Thus its positive-ray tangent subspace in $\\mathfrak h$ is $L_\\alpha$. Apply [lem-sfb-torus-positive-ray-subgroup] to the conjugation action of $T$ on $H$. The subgroup it constructs has tangent space $L_\\alpha$; the two comparison implications in that statement, applied to the smooth connected $T$-stable closed subgroup $U_\\alpha$, identify it with $U_\\alpha$. In particular, if a smooth connected $T$-stable closed subgroup $K\\subseteq H$ has $L_\\alpha\\subseteq\\operatorname{Lie}(K)$, then $U_\\alpha\\subseteq K$. This is the integration step needed below; mere inclusion of tangent spaces in positive characteristic would not suffice.",
+   "uses": [
+    "lem-sfb-torus-positive-ray-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.64(a),(b), printed pp.348-349; Conrad (6.3.6), p.228"
+   }
+  },
+  {
+   "text": "Let $U=R_u(H)$, supplied by [lem-sfb-unipotent-radical-existence]. The intersection $I=U\\cap T$ is trivial. To see this scheme-theoretically, [lem-sfb-unipotent-to-multiplicative-trivial] identifies smooth unipotence with an embedding into a unitriangular matrix group; restricting that embedding makes the closed subgroup $I$ unipotent. The inclusion $I\\to T$ is then trivial by the same lemma. Since it is also a monomorphism, $I=1$. On dual numbers this gives $\\operatorname{Lie}(U)\\cap\\operatorname{Lie}(T)=0$. Normality makes $\\operatorname{Lie}(U)$ stable under $T$, so [lem-sfb-split-torus-representation-weight-decomposition] and step 3 show that if $U\\ne1$, it contains some $L_\\alpha$ in its Lie algebra. Here nontrivial smooth connected $U$ has positive dimension and nonzero tangent space: a zero-dimensional smooth connected group over an algebraically closed field is the identity. Step 5 now gives $U_\\alpha\\subseteq U$. Normality and the assumed $n_\\alpha$ identity give $U_{-\\alpha}\\subseteq U$. Setting $u=1$, $v=s-1$ in the Gauss identity expresses $j\\alpha^\\vee(s)$ as a product of elements of these two root subgroups, so $j\\alpha^\\vee$ factors through $U\\cap T=1$. This is impossible: $\\alpha^\\vee\\ne0$ since $\\langle\\alpha,\\alpha^\\vee\\rangle=2$ in the integer lattice, and its composite with $\\chi_\\alpha$ is the nonconstant scheme map $s\\mapsto s^2$, also in characteristic two. Thus $U=1$ and $H$ is reductive.",
+   "uses": [
+    "lem-sfb-unipotent-radical-existence",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 6.3.15, final paragraph, printed p.229; Milne Proposition 16.64 replaces the dynamic intersection calculation"
+   }
+  },
+  {
+   "text": "The torus character identification $X^*(T)=M$ is [lem-sfb-multiplicative-character-antiduality]. Since $H$ is reductive and $T$ is maximal, [lem-sfb-reductive-rank-one-reflections] supplies its geometric root datum, whose roots are the nonzero full-torus weights of $\\mathfrak h$. By step 3 these are exactly the specified $\\Phi$. The uniqueness in [lem-sfb-reductive-root-subgroup-parametrizations], or equivalently step 5, identifies its $\\alpha$-root subgroup with $U_\\alpha$. Since $\\Phi$ spans $M\\otimes\\mathbf Q$, [lem-sfb-semisimple-roots-span] proves that $H$ is semisimple in the precise solvable-normal-subgroup sense of the item. It remains to check equality of the coroots, rather than just equality of the roots.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-roots-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9, Theorem 21.11, and Proposition 21.48, printed pp.233-234,428-430,439"
+   }
+  },
+  {
+   "text": "Fix $\\alpha$. By [lem-sfb-reductive-rank-one-reflections], the centralizer $H_\\alpha$ of the largest subtorus in $\\ker\\alpha$ is reductive of semisimple rank one and contains $T$. Both $U_{\\pm\\alpha}$ lie in it, since that subtorus acts trivially in the given conjugation formulas. Apply [lem-sfb-split-rank-one-classification] to $(H_\\alpha,T)$. It identifies this pair with a central split torus times one of $\\operatorname{SL}_2,\\operatorname{PGL}_2,\\operatorname{GL}_2$, with the diagonal torus. Choose the orientation so that $\\alpha$ is the ratio of the first diagonal entry to the second. The standard upper and lower unitriangular subgroups have weights $\\pm\\alpha$ and tangent spaces $L_{\\pm\\alpha}$, so step 5 identifies them with $U_{\\pm\\alpha}$. Consequently, in these coordinates,\n$$x_\\alpha(u)=I_2+auE_{12},\\qquad x_{-\\alpha}(v)=I_2+bvE_{21}$$\nfor $a,b\\in k^\\times$, where $E_{ij}$ is the matrix unit, with central coordinate $1$ and with matrix classes in the PGL case. The scalars follow simply because an automorphism of the affine line fixing zero is a degree-one polynomial, so a group-scheme automorphism of $\\mathbf G_a$ over a field is scalar. In these models the geometric coroot $\\gamma_\\alpha^\\vee(s)$ is $\\operatorname{diag}(s,s^{-1})$, with central coordinate $1$. Indeed the Weyl matrix $E_{12}-E_{21}$ swaps the two diagonal entries and fixes the central factor. For any torus character $\\chi$ this gives $s_\\alpha(\\chi)=\\chi-\\langle\\chi,\\gamma_\\alpha^\\vee\\rangle\\alpha$ by subtraction of its two matrix exponents. The uniqueness of the cocharacter satisfying this reflection identity in [lem-sfb-reductive-rank-one-reflections] identifies this explicit diagonal map with the geometric coroot.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-split-rank-one-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.33, Corollary 20.34, and proof of Theorem 21.11, printed pp.418-419,429-430"
+   }
+  },
+  {
+   "text": "In any of the three matrix models, direct multiplication of the two matrices in step 8, with $w_c=1+abuv$ invertible, gives\n$$x_\\alpha(u)x_{-\\alpha}(v)=x_{-\\alpha}(v/w_c)\\gamma_\\alpha^\\vee(w_c)x_\\alpha(u/w_c).$$\nCompare this with the assumed formula, with $w=1+uv$. These are two factorizations of the same element in $U_{-\\alpha}TU_\\alpha$, so the original open-cell immersion forces equality of their factors: set every other root coordinate to zero in that immersion. This is the shape of the cell when $\\alpha\\in\\Phi^+$. When $\\alpha\\in-\\Phi^+$, compare instead the inverses of the two factorizations, $x_\\alpha(-u/w)\\,j\\alpha^\\vee(w)^{-1}x_{-\\alpha}(-v/w)$ and $x_\\alpha(-u/w_c)\\,\\gamma_\\alpha^\\vee(w_c)^{-1}x_{-\\alpha}(-v/w_c)$, which lie in $U_\\alpha TU_{-\\alpha}$ with $\\alpha$ negative and $-\\alpha$ positive; there the positive-root parameters give $v/w=v/w_c$, hence $(ab-1)uv^2=0$, and the torus factors are compared through their inverses, with the same conclusions below. Work over $B=k[u,v,w^{-1},w_c^{-1}]$. Equality of the positive-root parameters yields $u/w=u/w_c$, hence $(ab-1)u^2v=0$ in this domain; therefore $ab=1$. Now both formulas hold with $w_c=w$ over every test algebra. Equality of the torus factors gives $j\\alpha^\\vee(1+uv)=\\gamma_\\alpha^\\vee(1+uv)$. Setting $u=1$, $v=s-1$ over $k[s,s^{-1}]$ proves equality of the two cocharacters as scheme morphisms. This verifies every coroot, completing the root-datum identification. For $\\Phi=\\varnothing$, the spanning assumption gives $M=0$; the zero-weight calculation and step 4 already give $H=T=1$, so no rank-one argument is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Equation (6.3.5), printed p.227, compared with the SL2 matrix identity (4.2.1), printed p.120; explicit agent calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-product-tangent-space-direct-sum",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-barsotti-chevalley-decomposition",
+  "lem-sfb-lie-normalizer-centralizer-invariants",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-semisimple-roots-span",
+  "lem-sfb-smooth-subgroup-tangent-generation",
+  "lem-sfb-split-rank-one-classification",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-torus-centralizer-smooth-connected",
+  "lem-sfb-torus-positive-ray-subgroup",
+  "lem-sfb-unipotent-radical-existence",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Proposition 6.3.15, printed pp.227-229; follows its field argument, using existing Milne positive-ray comparison to supply its dynamic integration step and an explicit rank-one matrix comparison for the coroot clause"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group with a big cell of root subgroups and opposite rank one relations is semisimple",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSimple R L], LieAlgebra.IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.booleanGenerators\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], IsCompactlyGenerated.BooleanGenerators {I | IsAtom I}\", \"doc\": \"The set of atomic Lie ideals in a semisimple Lie algebra forms a set of Boolean generators for the complete lattice of Lie submodules. This means the set is closed under finite meets, joins, and compl\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"module\": \"Mathlib/Algebra/Lie/InvariantForm\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  (Φ : LinearMap.BilinForm K L),\\n  Φ.Nondegenerate →\\n    LinearMap.BilinForm.lieInvariant L Φ →\\n      Φ.IsRefl → (∀ (I : LieIdeal K L), IsAtom I → ¬IsLieAbelian ↥I) → LieAlgebra.IsSemi\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $K$ admits a non-degenerate invariant bilinear form, then $\\\\mathfrak{g}$ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.sSupIndep_isAtom\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.IsSemisimple R L], sSupIndep {I | IsAtom I}\", \"doc\": \"In a semisimple Lie algebra $ L $ over a commutative ring $ R $, the set of all atoms (minimal non-zero ideals) in the lattice of Lie ideals is supremum-independent. This means that for every atom $ I\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Triviality of the unipotent radical from torus weights and opposite root SL2 subgroups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  {α\", \"doc\": \"An element $ x $ belongs to the $ \\\\mathfrak{sl}_2 $-subalgebra generated by an $ \\\\mathfrak{sl}_2 $-triple $ (h,e,f) $ corresponding to a non-zero root $ \\\\alpha $ if and only if $ x $ can be expressed \"}\n  {\"name\": \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L]\\n  [LieModule.IsTriangularizable K (↥H) L] [CharZero K] {α : LieModule.Weight K (↥H) L},\\n  α.IsN\", \"doc\": \"If the Killing form of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring is non-degenerate, and $\\\\alpha$ is a non-zero weight of $\\\\mathfrak{g}$, then there exist elements $h, e, f \\\\in \\\\mathfrak{g}$\"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  (α\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with non-degenerate Killing form and a non-zero weight $\\\\alpha$, the $\\\\mathfrak{sl}_2$-submodule generated by the $\\\\mathfrak{sl}_2$-triple associated \"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubalgebraOfRoot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} →\\n              [inst_4 : H.IsCartanSubalgebra] →\\n                [LieAlgebra.IsKilling K L] →\\n         \", \"doc\": \"Given a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a non-degenerate Killing form and a non-zero weight $\\\\alpha$, this constructs the $\\\\mathfrak{sl}_2$-subalgebra of $\\\\mathfrak{g}$ generated by e\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} →\\n              [inst_4 : H.IsCartanSubalgebra] →\\n                [LieAlgebra.IsKilling K L] →\\n         \", \"doc\": \"Given a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a non-degenerate Killing form and a non-zero weight $\\\\alpha$, this constructs the $\\\\mathfrak{sl}_2$-submodule of $\\\\mathfrak{g}$ generated by th\"}\n  {\"name\": \"LieAlgebra.zero_rootSpace_eq_top_of_nilpotent\", \"module\": \"Mathlib/Algebra/Lie/Weights/Cartan\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing.IsNilpotent L], LieAlgebra.rootSpace ⊤ 0 = ⊤\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, if $\\\\mathfrak{g}$ is nilpotent, then the zero root space of $\\\\mathfrak{g}$ (defined as the intersection of generalized 0-eigenspaces for a\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\", \"Group\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotentRadical|[Ss]emisimple.*[Gg]roup|[Rr]oot.*[Ss]ubgroup",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CongruenceSubgroups.lean\", \"line\": \"322\", \"text\": \"lemma _root_.Subgroup.IsArithmetic.conj (𝒢 : Subgroup (GL (Fin 2) ℝ)) [𝒢.IsArithmetic]\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"145\", \"text\": \"def _root_.AddSubgroup.upperCentralSeriesAux (G : Type*) [AddGroup G] :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"199\", \"text\": \"theorem _root_.AddSubgroup.upperCentralSeries_one (G : Type*) [AddGroup G] :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"401\", \"text\": \"def _root_.AddSubgroup.lowerCentralSeries {G : Type*} [AddGroup G] (S : AddSubgroup G) :\"}\n  {\"file\": \"Mathlib/GroupTheory/Nilpotent.lean\", \"line\": \"422\", \"text\": \"alias _root_.AddSubgroup.lowerCentralSeries_one := AddSubgroup.top_lowerCentralSeries_one\"}\n  {\"file\": \"Mathlib/GroupTheory/Commutator/Basic.lean\", \"line\": \"453\", \"text\": \"  rw [_root_.commutator_def, Subgroup.map_commutator]\"}\n  {\"file\": \"Mathlib/GroupTheory/Perm/MaximalSubgroups.lean\", \"line\": \"203\", \"text\": \"lemma _root_.Subgroup.isPretransitive_of_stabilizer_lt\"}\n  {\"file\": \"Mathlib/GroupTheory/IsPerfect.lean\", \"line\": \"50\", \"text\": \"lemma _root_.Subgroup.isPerfect_iff : IsPerfect H ↔ ⁅H, H⁆ = H := by\"}\n  {\"file\": \"Mathlib/GroupTheory/IsPerfect.lean\", \"line\": \"54\", \"text\": \"lemma _root_.Subgroup.commutator_eq_self [hH : IsPerfect H] : ⁅H, H⁆ = H :=\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"85\", \"text\": \"def _root_.IsPGroup.toSylow [Fact p.Prime] {P : Subgroup G}\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"98\", \"text\": \"@[simp] theorem _root_.IsPGroup.toSylow_coe [Fact p.Prime] {P : Subgroup G}\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"102\", \"text\": \"@[simp] theorem _root_.IsPGroup.mem_toSylow [Fact p.Prime] {P : Subgroup G}\"}\n  {\"file\": \"Mathlib/GroupTheory/Sylow.lean\", \"line\": \"106\", \"text\": \"theorem _root_.IsPGroup.le_sylow_of_normal {N : Subgroup G} [N.Normal] (h : IsPGroup p N)\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Basic.lean\", \"line\": \"410\", \"text\": \"theorem _root_.Subgroup.Characteristic.comap_quotient_mk {H : Subgroup G} [hH : H.Characteristic]\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Basic.lean\", \"line\": \"425\", \"text\": \"def _root_.MonoidHom.domRestrictHomKerEquiv (A : Type*) [CommGroup A] (H : Subgroup G) [H.Normal] :\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Basic.lean\", \"line\": \"435\", \"text\": \"theorem _root_.MonoidHom.domRestrictHomKerEquiv_apply_coe (A : Type*) [CommGroup A] (H : Subgroup G)\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean\", \"line\": \"289\", \"text\": \"    simp only [rootsOfUnity.val_mkOfPowEq_coe, Subgroup.coe_mul, Units.val_mul]\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"189\", \"text\": \"protected def _root_.Con.subgroup (c : Con G) : Subgroup G where\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"196\", \"text\": \"theorem _root_.Con.mem_subgroup_iff {c : Con G} {x : G} :\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"204\", \"text\": \"theorem _root_.Con.subgroup_quotientGroupCon (H : Subgroup G) [H.Normal] :\"}\n  {\"file\": \"Mathlib/GroupTheory/QuotientGroup/Defs.lean\", \"line\": \"222\", \"text\": \"def _root_.Subgroup.orderIsoCon :\"}\n  {\"file\": \"Mathlib/GroupTheory/IsSubnormal.lean\", \"line\": \"85\", \"text\": \"inductive _root_.AddSubgroup.IsSubnormal {G : Type*} [AddGroup G] : AddSubgroup G → Prop where\"}\n  {\"file\": \"Mathlib/GroupTheory/Index.lean\", \"line\": \"633\", \"text\": \"lemma _root_.AddSubgroup.index_toSubgroup {G : Type*} [AddGroup G] (H : AddSubgroup G) :\"}\n  {\"file\": \"Mathlib/GroupTheory/Index.lean\", \"line\": \"643\", \"text\": \"lemma _root_.AddSubgroup.relIndex_toSubgroup {G : Type*} [AddGroup G] (H K : AddSubgroup G) :\"}\n  {\"file\": \"Mathlib/GroupTheory/Index.lean\", \"line\": \"650\", \"text\": \"class _root_.AddSubgroup.FiniteIndex {G : Type*} [AddGroup G] (H : AddSubgroup G) : Prop where\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductivity criterion for algebraic groups from opposite root subgroups and a maximal torus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subalgebra.LinearDisjoint.of_basis_left_op\", \"module\": \"Mathlib.RingTheory.LinearDisjoint\", \"type\": \"{ι : Type*} (a : Basis ι R A) (H : LinearIndependent B.op (MulOpposite.op ∘ A.val ∘ a)) : A.LinearDisjoint B\", \"doc\": \"Let $ A $ and $ B $ be subalgebras of an $ R $-algebra $ S $, where $ R $ is a commutative semiring. If $ \\\\{a_i\\\\}_{i \\\\in I} $ is a basis for $ A $ over $ R $, and the set $ \\\\{\\\\text{op}(a_i)\\\\}_{i \\\\in I\"}\n  {\"name\": \"Subgroup.op_inj\", \"module\": \"Mathlib.Algebra.Group.Subgroup.MulOpposite\", \"type\": \"{S T : Subgroup G} : S.op = T.op ↔ S = T\", \"doc\": \"For any subgroups $S$ and $T$ of a group $G$, the equality of their corresponding subgroups in the opposite group $G^\\\\mathrm{op}$ implies $S = T$, i.e., $S^\\\\mathrm{op} = T^\\\\mathrm{op} \\\\leftrightarrow \"}\n  {\"name\": \"RootPairing.IsIrreducible.mk'\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"{K : Type*} [Field K] [Module K M] [Module K N] [Nontrivial M] (P : RootPairing ι K M N)\\n  (h : ∀ (q : Submodule K M), (∀ i, q ∈ invtSubmodule (P.reflection i)) → q ≠ ⊥ → q = ⊤) : P.IsIrreducible\", \"doc\": \"A root pairing $ P $ over a field $ K $ is irreducible if every non-trivial submodule $ q \\\\subseteq M $ invariant under all reflections $ P.reflection i $ must satisfy $ q = M $. Formally, for any sub\"}\n  {\"name\": \"Subgroup.op\", \"module\": \"Mathlib.Algebra.Group.Subgroup.MulOpposite\", \"type\": \"(H : Subgroup G) : Subgroup Gᵐᵒᵖ\", \"doc\": \"For a subgroup $H$ of a group $G$, this constructs the corresponding subgroup of the opposite group $G^\\\\mathrm{op}$ consisting of elements whose underlying elements in $G$ belong to $H$. The subgroup \"}\n  {\"name\": \"AddSubgroup.op_inj\", \"module\": \"Mathlib.Algebra.Group.Subgroup.MulOpposite\", \"type\": \"∀ {G : Type u_2} [inst : AddGroup G] {S T : AddSubgroup G}, S.op = T.op ↔ S = T\", \"doc\": \"For any additive group $ G $ and additive subgroups $ S $ and $ T $ of $ G $, the equality of their opposite subgroups $ S^{\\text{op}} = T^{\\text{op}} $ in $ G^{\\text{op}} $ holds if and only if $ S = T \"}\n  {\"name\": \"RootPairing.IsReduced.mk\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Reduced\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N},\\n  (∀ (i j : ι), ¬LinearIndependent R ![P.root i, P.root j] → P.root i = P.root j ∨ P.root i =\", \"doc\": \"For any two indices $ i, j $, if the vectors $ P.root(i) $ and $ P.root(j) $ are not linearly independent over $ R $, then $ P.root(i) = P.root(j) $ or $ P.root(i) = -P.root(j) $.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\", \"module\": \"Mathlib.Algebra.Lie.Weights.IsSimple\", \"type\": \"[IsSimple K L] : (rootSystem H).IsIrreducible\", \"doc\": \"For a simple Lie algebra $ L $ over a field $ K $, the root system associated with $ L $ via the non-degenerate Killing form is irreducible.\"}\n  {\"name\": \"Subgroup.Normal.of_op\", \"module\": \"Mathlib.Algebra.Group.Subgroup.MulOppositeLemmas\", \"type\": \"∀ {G : Type u_2} [inst : Group G] {H : Subgroup G}, H.op.Normal → H.Normal\", \"doc\": \"If the opposite subgroup $ H^\\\\mathrm{op} $ is normal in the opposite group $ G^\\\\mathrm{op} $, then the original subgroup $ H $ is normal in the group $ G $. This follows from the fact that conjugation\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, abstract root pairings, birationality definitions, or general scheme morphisms; none constructs or characterizes the stated algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]eductive|[Ss]emisimple|[Uu]nipotent[Rr]adical",
+   "results": "{\"t\": \"2026-10-24T10:27:06Z\", \"tool\": \"grep\", \"query\": \"[Rr]eductive|[Ss]emisimple|[Uu]nipotent[Rr]adical\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: focused AlgebraicGeometry search has no group-scheme theorem with the required hypotheses and conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotentRadical|semisimple.*group|root.*subgroup",
+   "results": "{\"t\": \"2026-10-24T11:01:06Z\", \"tool\": \"grep\", \"query\": \"unipotentRadical|semisimple.*group|root.*subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra, module, or abstract root-system facts do not state the group-scheme criterion; the AlgebraicGeometry grep and Loogle found no matches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimplicity of algebraic group schemes from torus weights and opposite root subgroups",
+   "results": "{\"t\": \"2026-10-24T11:01:07Z\", \"tool\": \"leansearch\", \"query\": \"Semisimplicity of algebraic group schemes from torus weights and opposite root subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSemisimpleModule\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"LieAlgebra.IsSemisimple\", \"IsSemisimpleModule.exists_linearEquiv_dfinsupp\", \"MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra\", \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"instIsSemisimpleModuleDFinsupp\"], \"digest\": \"17af32ab7e9b8a68\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra, module, or abstract root-system facts do not state the group-scheme criterion; the AlgebraicGeometry grep and Loogle found no matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\", \"Group\"",
+   "results": "{\"t\": \"2026-10-24T11:01:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimple\\\", \\\"Group\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra, module, or abstract root-system facts do not state the group-scheme criterion; the AlgebraicGeometry grep and Loogle found no matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected algebraic group with root subgroups and a dense root cell is affine and semisimple",
+   "results": "{\"t\": \"2026-10-24T11:01:11Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected algebraic group with root subgroups and a dense root cell is affine and semisimple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsSemisimple\", \"LieAlgebra.IsKilling.instSemisimple\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsSimple.instIsSemisimple\", \"LieAlgebra.IsSemisimple.booleanGenerators\", \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple\"], \"digest\": \"c5e050ea283741d6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra, module, or abstract root-system facts do not state the group-scheme criterion; the AlgebraicGeometry grep and Loogle found no matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Opposite root Gauss identities imply reductivity of an algebraic group in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-24T11:01:12Z\", \"tool\": \"leanfinder\", \"query\": \"Opposite root Gauss identities imply reductivity of an algebraic group in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.IsG2.toIsReduced\", \"RootPairing.IsNotG2.toIsReduced\", \"RootPairing.EmbeddedG2.toIsReduced\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"RootPairing.IsG2.toIsIrreducible\", \"RootPairing.EmbeddedG2.instIsG2OfIsIrreducible\", \"RootPairing.GeckConstruction.instIsIrreducible\"], \"digest\": \"f76a907f14135f24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned Lie-algebra, module, or abstract root-system facts do not state the group-scheme criterion; the AlgebraicGeometry grep and Loogle found no matches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-split-integral-prolongation",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for existence in Theorem 6.1.17: Integral prolongation of a given split rational reductive group Supporting input: Lemma 6.3.14, equation (6.3.5), and proof of Proposition 6.3.15, printed pp.227--229; field criterion extracted from the proof, with the Weyl representative written as the three-factor rank-one word",
+   "via": [
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-root-cell-semisimplicity-criterion",
+  "worker": "stage1",
+  "summary": "Nine-step proof using existing nodes only. Proves affineness by killing the Barsotti-Chevalley abelian quotient, computes full-torus tangent weights, proves maximality, integrates a root line in the unipotent radical using the existing positive-ray comparison, and excludes that radical by opposite-root Gauss identities. Uses the existing roots-span criterion for semisimplicity. Identifies the specified coroots by explicit matrix Gauss comparison in the three rank-one models. All hypotheses and the statement are retained, including arbitrary characteristic and the zero datum. No new nodes.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability, direct-images proof (3), inherited alteration/moduli/reductivity route: realizes the field semisimplicity prerequisite of lem-sfb-rational-split-integral-prolongation using Conrad Proposition 6.3.15. Preserves inherited from.node=null and via list (blueprint_refs.py ancestor reports None); from.place already specifies this exact supporting input. Whole-blueprint searches for root cell, opposite root, semisimplicity criterion, Gauss, and semisimple found no equivalent blueprint theorem.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Used only to know H is reduced before extending the equality p=1 from its dense open cell; this is a generic smoothness tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-sc-product-tangent-space-direct-sum",
+    "why": "Used only to differentiate the finite product in the given root-cell chart. This generic tangent-space tool supplies no algebraic-group structure theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-product-tangent-space-direct-sum"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-84721abfe",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-84721abfe (reviewer sub-agent of L); spot-checked: I read the whole nine-step proof (no new nodes, statement and stmt_deps unchanged) and the full statements of all 16 cited nodes. Milne Prop. 16.64 (pp.348-349) matches lem-sfb-torus-positive-ray-subgroup. Steps 1-8 check out. Step 1: the commutator x(z)=[j(t),x(z/(c-1))] and the integer section of Z^Phi->M^vee. Step 2: Barsotti-Chevalley quotient killed on the dense cell, with H reduced and C separated. Step 3: closed images via trivial kernel, product tangent space, full-torus weights. Step 4: C_H(T)=T. Step 5: by reducedness the positive ray is L_alpha. Step 6: U∩T=1 via the unitriangular embedding, the weight argument, and alpha∘alpha^vee=s^2 in every characteristic. Step 7: roots span gives semisimplicity. Step 8: I checked the reflection identity by hand for SL2, PGL2 and GL2. Step 9: I recomputed the matrix product. Gap repaired: step 9 compares factors in U_{-alpha}TU_alpha, which is the cell's shape only when alpha is positive. For negative alpha the fix compares the inverses, which lie in U_alpha TU_{-alpha}; only the step-9 text changes. Batch-5 flags: all 11 citations are general algebraic-group results whose closures reach only generic scheme and commutative-algebra lemmas filed under sec-trace-formula, not the trace formula, Poincare duality or their proofs, so all are accepted. Tool uses accepted: smooth-geometrically-reduced and product tangent space. Conrad's PDF is WANTED and unread; it is the source of the unchanged statement.; 1 file(s) fixed by the reviewer"
+ }
+}

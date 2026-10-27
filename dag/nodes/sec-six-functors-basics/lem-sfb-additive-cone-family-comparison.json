@@ -1,0 +1,111 @@
+{
+ "id": "lem-sfb-additive-cone-family-comparison",
+ "kind": "statement",
+ "title": "Additive comparison of epimorphic augmentation cone families",
+ "statement": "Let C and D be abelian categories and E:C -> D an additive functor. Let K_n, L_n be integer cochain complexes, f_n:K_n -> L_n, and t_nm:K_m -> K_n, q_nm:L_m -> L_n supplied for every n<=m, with t_nm f_n = f_m q_nm. Let epsilon:T -> Q be a morphism of strict inverse towers of D-complexes. Supply level isomorphisms eK_n:E(K_n) -> T_n and eQ_n:E(L_n) -> Q_n identifying each E(f_n) with epsilon_n, and suppose eK intertwines every t_nm. If each E(f_n) is epimorphic, the target comparisons also intertwine every q_nm. Consequently the images of the homotopy cofibers of f_n are isomorphic, naturally for every n<=m and the given strict square maps, to the actual levels of the mapping cone of the transposed tower morphism epsilon. No Koszul, sheaf, scalar or exactness hypothesis is used.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Section Cones and termwise split sequences, definition-cone (014E) and lemma-functorial-cone (014F); Mathlib mappingCone.mapHomologicalComplexIso and mappingCone.map_comp."
+ },
+ "proof": [
+  {
+   "text": "Cancel E(f_m) in each strict transition square, using its epimorphy, the augmentation identifications, eK naturality and epsilon naturality. This proves eQ naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the additive cone comparison and the cone isomorphism of the source and target level isomorphisms. The additive cone comparison is natural: check the two cone summand inclusions, whose sum of projections is the identity. Composition of cone maps proves naturality under the strict squares. A direct computation identifies homotopyCofiber.mapArrowHom with mappingCone.map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use only the proved private levelConeTowerIso helper of FlatConstantTensorProZeroCones to identify levelwise cones with evaluation of the cone of the transposed tower. Its naturality finishes the stated comparison. No pro-zero result is used.",
+   "uses": [
+    "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-constant-tensor-pro-zero-cones"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Finite cone construction; the proved private additive-cone calculation is adapted from PrincipalConeExactEquivalence, and tower evaluation uses levelConeTowerIso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive exact functor maps homotopy cofibers to mapping cones naturally",
+   "results": "Found mappingCone.mapHomologicalComplexIso and related finite cone comparisons.",
+   "verdict": "Use that isomorphism and prove the finite square and family compatibility.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homotopyCofiber\", \"mapHomologicalComplex\"",
+   "results": "Ten relevant cone and complex functor hits.",
+   "verdict": "The underlying comparison is available, but not this epimorphism-cancellation family statement.",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCofiber|map.*[Cc]one.*[Ii]so",
+   "results": "Twenty-five Mathlib hits. Project private mapCone_natural and levelConeTowerIso proofs inspected.",
+   "verdict": "Reuse the tower evaluation helper and adapt the small additive naturality proof locally, avoiding principal-completion imports.",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicResidueKoszulCoefficientConeComparison",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-residue-koszul-coefficient-cone-comparison",
+   "place": "Proved finite categorical assembly of proof step 3, isolated after profiling to keep every file below 60 seconds."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AdditiveConeFamilyComparison",
+  "file": "lean/Sheaf/CategoryTheory/AdditiveConeFamilyComparison.lean",
+  "declaration": "CategoryTheory.additiveConeFamilyComparison",
+  "statement": "theorem additiveConeFamilyComparison\n    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]\n    (E : C ⥤ D) [E.Additive]\n    (K L : ℕ → CochainComplex C ℤ) (f : ∀ n, K n ⟶ L n)\n    (t : ∀ n m : ℕ, n ≤ m → (K m ⟶ K n))\n    (q : ∀ n m : ℕ, n ≤ m → (L m ⟶ L n))\n    (hc : ∀ n m h, t n m h ≫ f n = f m ≫ q n m h)\n    {T Q : ℕᵒᵖ ⥤ CochainComplex D ℤ} (ε : T ⟶ Q)\n    (eK : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj (K n) ≅ T.obj (op n))\n    (eQ : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj (L n) ≅ Q.obj (op n))\n    (haug : ∀ n, (E.mapHomologicalComplex (.up ℤ)).map (f n) ≫ (eQ n).hom =\n      (eK n).hom ≫ ε.app (op n))\n    (ht : ∀ n m h, (E.mapHomologicalComplex (.up ℤ)).map (t n m h) ≫ (eK n).hom =\n      (eK m).hom ≫ T.map (homOfLE h).op)\n    (hfepi : ∀ n, Epi ((E.mapHomologicalComplex (.up ℤ)).map (f n))) :\n    ∃ e : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj\n        (HomologicalComplex.homotopyCofiber (f n)) ≅\n      (CochainComplex.mappingCone\n        ((HomologicalComplex.functorEquivalence D (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.obj\n          (op n),\n      ∀ n m h, (E.mapHomologicalComplex (.up ℤ)).map\n          (HomologicalComplex.homotopyCofiber.mapArrowHom (f m) (f n)\n            (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)\n            (Arrow.homMk (t n m h) (q n m h) (hc n m h))) ≫ (e n).hom =\n        (e m).hom ≫ (CochainComplex.mappingCone\n          ((HomologicalComplex.functorEquivalence D (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map\n            (homOfLE h).op",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3caba",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T135627-L-4051345",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-3caba",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T135627-L-4051345",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (byte-identical), node proof fields vs Lean proof, new sorry statements vs RingedKoszulSystem/QuotientTensorTower defs and flat_and_quotients, adapted ConeProZero vs published (proof-only), §3b importer compile"
+ }
+}

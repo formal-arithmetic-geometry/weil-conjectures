@@ -18,6 +18,7 @@ public import Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
+public import Mathlib.CategoryTheory.Sites.LocalSite
 
 /-! # Evaluation and connected components of lisse condensed sheaves
 
@@ -146,6 +147,27 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
+
+/-- Pull a point scalar to the affine terminal object using the monoidal inverse image.
+This is a construction on the underlying abelian sheaves, not a chosen ring homomorphism.
+Source: HRS (3.1)--(3.2), Remark 3.2
+(blueprint: def-zl-condensed-lisse-evaluation-model). -/
+def affineScalarSection (T : Scheme.{u}) (r : condensedScalarRing Λ) :
+    Evaluation.A (Scheme.ProEt.topology T) (condensedRingObj Λ T)
+      (Scheme.ProEt.mk (𝟙 T)) :=
+  let rmap : 𝟙_ Ab.{u + 1} ⟶ Λ.obj.obj (op (⊤_ Profinite.{u})) :=
+    AddCommGrpCat.ofHom
+      (((AddMonoidHom.mulRight r).comp (Int.castAddHom (condensedScalarRing Λ))).comp
+        AddEquiv.ulift.toAddMonoidHom)
+  let s : 𝟙_ (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ⟶ Λ :=
+    ((constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
+      terminalIsTerminal).homEquiv (𝟙_ Ab.{u + 1}) Λ).symm rmap
+  let t : 𝟙_ (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) ⟶ condensedRingObj Λ T :=
+    Functor.LaxMonoidal.ε (upperStarFromPoint T) ≫ (upperStarFromPoint T).map s
+  (t.hom.app (op (Scheme.ProEt.mk (𝟙 T))))
+    ((toSheafify (Scheme.ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj (𝟙_ Ab.{u + 1}))).app
+        (op (Scheme.ProEt.mk (𝟙 T))) (ULift.up 1))
 
 /-- Restriction to the genuine profinite slice site, with finite jointly surjective covers.
 Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
@@ -288,7 +310,9 @@ def componentSymmetric
   Nonempty (componentDerived Λ T α).Braided
 
 /-- The actual pullback induces the lisse equivalence and commutes with section-ring
-realization after scalar transport along the coefficient comparison.
+realization after scalar transport along the coefficient comparison. The section-ring
+isomorphism preserves the point scalar map, with the latter computed by monoidal pullback
+of the corresponding map from the abelian unit and evaluation on the terminal object.
 Source: HRS Proposition 4.3(3)
 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
 def componentComparisons
@@ -313,6 +337,9 @@ def componentComparisons
   ∃ a : Evaluation.A ((coherentTopology Profinite.{u}).over (affineComponentSpace T))
       (profiniteCoefficient Λ (affineComponentSpace T)) (Over.mk (𝟙 (affineComponentSpace T))) ≅
       Evaluation.A (Scheme.ProEt.topology T) (condensedRingObj Λ T) (Scheme.ProEt.mk (𝟙 T)),
+    (∀ r : condensedScalarRing Λ,
+      a.hom.hom (profiniteScalarMap Λ (affineComponentSpace T) r) =
+        affineScalarSection Λ T r) ∧
     Nonempty (Evaluation.F ((coherentTopology Profinite.{u}).over (affineComponentSpace T))
         (profiniteCoefficient Λ (affineComponentSpace T))
         (Over.mk (𝟙 (affineComponentSpace T))) Over.mkIdTerminal ⋙ componentDerived Λ T α ≅

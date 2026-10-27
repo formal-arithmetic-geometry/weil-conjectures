@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-proetale-projection-mate-slice-presentation",
+ "kind": "statement",
+ "title": "Ordinary-slice presentation of the native pro-etale projection mate",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes, let $R,S$ be commutative ring sheaves on their small pro-etale sites, and fix $c:f^{-1}R\\cong S$ [def-weil-proetale-inverse-image]. Use native derived module operations $L=Lf^*$ and $D=Rf_*$ [def-weil-pbc-proetale-operations], tensor models $a,b$ determined on flat-term K-flat representatives [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the canonical counit projection mate $\\pi$ [def-weil-pbc-projection-formula-map]. Fix $E\\in D(S)$ and $U\\in Y_{\\mathrm{proet}}$. Let $r_U:D(R)\\to D(R|_U)$ be the exact termwise restriction to the ordinary site-object slice [def-weil-pbc-ringed-derived-restriction]. There exist exact integer-shift-compatible endofunctors $F_U,G_U$ of $D(R|_U)$, a shift-compatible natural transformation $\\tau_U:F_U\\to G_U$, and natural isomorphisms $s:r_U\\circ F\\cong F_U\\circ r_U$ and $t:r_U\\circ G\\cong G_U\\circ r_U$, where $F(P)=D(E)\\otimes_a P$ and $G(P)=D(E\\otimes_b L(P))$. The actual arrows satisfy $t_P\\circ r_U(\\pi_P)=\\tau_U(r_U P)\\circ s_P$ for every $P$. The site and coefficients keep their native universes. No perfectness, boundedness, or isomorphism claim for $\\tau_U$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04IF, lemma-localize-morphism-ringed-topoi; sites-cohomology.tex, Tag 08FI, lemma-restrict-K-injective-to-open, and Tag 0B56, equation-projection-formula-map."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-projection-formula-map",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Obtain a normalized global package g and compatible ordinary-slice package l from ringedProjectionRestriction. Compare the supplied native coefficient functors to those of g using proEtaleProjectionGlobalComparison.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-restriction",
+    "lem-weil-pbc-proetale-projection-global-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ringedProjectionTensorExact for both local fixed-factor tensor functors. Exact pullback is triangulated; equip its right adjoint with the induced compatible shifts, so that it too is triangulated. Form the local natural transformation by whiskering the adjunction unit, tensor comparison and counit. The second tensor-comparison shift equation and bifunctor shift naturality show this transformation commutes with shifts.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-tensor-exact",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build natural source and target restriction isomorphisms by fixed-factor whiskering of tensor restriction, direct-image restriction and pullback restriction. Compose these with the global-model isomorphisms. Apply restriction to the model-comparison equation and use l.ProjectionCompatible; functoriality and associativity give exactly the required equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-restriction",
+    "lem-weil-pbc-proetale-projection-global-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-restriction",
+  "lem-weil-pbc-proetale-projection-global-comparison",
+  "lem-weil-pbc-ringed-projection-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6 and 0B56; ordinary-slice restriction from sites-modules.tex Tag 04IF. Explicit categorical assembly from two smaller normalization and exactness statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the derived projection formula mate to a site object slice is a natural transformation between exact functors, compatible with tensor and direct image restriction",
+   "results": "8 hits: CategoryTheory.sheafComposeNatTrans, CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, CategoryTheory.Functor.IsCoverDense.Types.appHom_restrict, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map', CategoryTheory.sheafComposeNatTrans_fac, CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map, CategoryTheory.sheafComposeNatIso",
+   "date": "2026-10-23",
+   "verdict": "No exact projection-mate transport theorem; ordinary categorical and derived-functor APIs only."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.CommShift",
+   "results": "0 hits: . loogle: unknown identifier 'Functor.CommShift'",
+   "date": "2026-10-23",
+   "verdict": "No exact projection-mate transport theorem; ordinary categorical and derived-functor APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "proEtaleProjection.*(Exact|Slice)|ringedProjectionMateExact|projectionMateSlicePresentation",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No exact projection-mate transport theorem; ordinary categorical and derived-functor APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PerfectProjectionFormula",
+  "date": "2026-10-23",
+  "group": "U5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Proof, first paragraph, locality implicit in 'Hence it contains every perfect complex'; Stacks 0944, first locality sentence before the stupid-truncation argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleProjectionMateSlicePresentation",
+  "file": "lean/Sheaf/Paper/ProEtaleProjectionMateSlicePresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleProjectionMateSlicePresentation",
+  "statement": "theorem proEtaleProjectionMateSlicePresentation (U : Y.ProEt) :\n    Nonempty (ProEtaleProjectionMateSlicePresentation f R S c a b E U)",
+  "branch": "sheaf-dag",
+  "by": "U5",
+  "date": "2026-10-23",
+  "note": "The existing projectionMateSlicePresentation uses RingedTensorCorner and the same-universe ringed model; it cannot be instantiated with the native pro-etale category. ringedProjectionRestriction supplies localized canonical operations, but does not directly compare its tensor/adjunction models with the arbitrary native ProEtaleTensorModel arguments of the item. This theorem supplies that actual-arrow transport and exact local presentation; it does not assert invertibility for perfect coefficients. No choice from this theorem is used to define an object.",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEtaleProjectionMateSlicePresentation",
+   "AlgebraicGeometry.Scheme.proEtaleProjectionMateSlicePresentation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-58ea3",
+  "group": "U5",
+  "result": "pass",
+  "landing": "20261024T191427-L-349376",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T012940-L-2350938",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

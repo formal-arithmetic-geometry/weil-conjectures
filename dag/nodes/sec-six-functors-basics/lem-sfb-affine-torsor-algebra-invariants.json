@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-affine-torsor-algebra-invariants",
+ "kind": "statement",
+ "title": "Invariant sections and surjections after pullback to an affine torsor",
+ "statement": "Let $R$ be a commutative ring, $S=\\operatorname{Spec}R$, and $G=\\operatorname{Spec}H$ a flat affine $S$-group scheme [def-weil-affine-spectrum, def-weil-flat-morphism]. Here a group scheme means a group object in $S$-schemes, with multiplication, inverse and identity satisfying the group diagrams; $H$ has the resulting comultiplication $\\Delta:H\\to H\\otimes_R H$ and counit $\\varepsilon:H\\to R$. Tensor products are those of [def-weil-pbc-module-tensor-product], with their commutative algebra structures. Let $X=\\operatorname{Spec}A$ carry a right $G$-action $a:X\\times_SG\\to X$, with coaction $\\rho_A:A\\to A\\otimes_RH$. Let $Y$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $q:X\\to Y$ be an invariant surjective flat locally finitely presented morphism, with these properties tested on etale scheme charts [def-sfb-space-morphism-properties]. Assume $(x,g)\\mapsto(x,xg)$ is an isomorphism $X\\times_SG\\simeq X\\times_YX$ of fppf sheaves [def-pc-fppf-site]. A quasi-coherent commutative algebra on $Y$ is a commutative unital algebra sheaf on $Y_{\\mathrm{et}}$ whose underlying module is quasi-coherent [def-trf-space-quasi-coherent-module]. Pullbacks below are tensor pullbacks [def-trf-space-etale-module-functors]. For each such algebra $\\mathcal B$, put $E_{\\mathcal B}=\\Gamma(X,q^*\\mathcal B)$. The canonical identification $a^*q^*\\mathcal B\\simeq p_1^*q^*\\mathcal B$ arising from $qa=qp_1$ induces an $R$-algebra coaction $\\rho_{\\mathcal B}:E_{\\mathcal B}\\to E_{\\mathcal B}\\otimes_RH$ extending $\\rho_A$, with $(\\rho_{\\mathcal B}\\otimes1)\\rho_{\\mathcal B}=(1\\otimes\\Delta)\\rho_{\\mathcal B}$ and $(1\\otimes\\varepsilon)\\rho_{\\mathcal B}=1$. Pullback of sections gives a natural ring isomorphism $\\Gamma(Y,\\mathcal B)\\simeq E_{\\mathcal B}^G$, where $E_{\\mathcal B}^G=\\{e:\\rho_{\\mathcal B}(e)=e\\otimes1\\}$. Every surjection $\\mathcal B\\twoheadrightarrow\\mathcal C$ induces a surjective equivariant homomorphism $E_{\\mathcal B}\\twoheadrightarrow E_{\\mathcal C}$, and the preceding isomorphisms commute with this homomorphism and with positive powers. No reductivity, finite generation of the algebras, or finite-type hypothesis on $X$ or $Y$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), applied to the single fppf torsor cover, and schemes.tex Tag 01IB (lemma-equivalence-quasi-coherent). Algebra/coaction and invariant-section translation of the descent datum; not a verbatim assertion of either tag."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-pc-fppf-site",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Put $M=q^*\\mathcal B$. By pullback preservation of quasi-coherence, $M$ is quasi-coherent on $X_{\\mathrm{et}}$. Use the scheme Zariski-etale equivalence, whose comparisons preserve sections on opens and scheme pullbacks, to regard it as a Zariski quasi-coherent module. The affine tilde/Gamma equivalence reconstructs it from $E=\\Gamma(X,M)$. The affine fibre-product formula identifies $X\\times_SG$ with $\\operatorname{Spec}(A\\otimes_RH)$. For $p:X\\times_SG\\to X$, the affine pullback-section comparison therefore gives\n$$\\Gamma(X\\times_SG,p^*M)=E\\otimes_A(A\\otimes_RH)\\simeq E\\otimes_RH,$$\nwhere $e\\otimes(a\\otimes h)\\mapsto ae\\otimes h$ has inverse $e\\otimes h\\mapsto e\\otimes(1\\otimes h)$. The comparison sends $e\\otimes c$ to $c\\,p^*e$, so it respects multiplication and the unit for the algebra $M$: both products of two pure tensors give $cc' p^*(ee')$. All these identifications are natural in $\\mathcal B$.",
+   "uses": [
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IB (lemma-equivalence-quasi-coherent), 01I9 (lemma-widetilde-pullback), 01I4 (lemma-fibre-product-affine-schemes); spaces-properties.tex 03GA; descent.tex 03DX and 03LC(1)."
+   }
+  },
+  {
+   "text": "Write $p=p_1$ and let $\\theta:a^*M\\xrightarrow{\\sim}p^*M$ be the comparison through $(qa)^*\\mathcal B=(qp)^*\\mathcal B$. Define $\\rho_{\\mathcal B}$ as pullback of sections along $a$, followed by $\\Gamma(\\theta)$ and Step 1's identification. This is an $R$-algebra map: tensor pullback has multiplication $(b\\otimes u)(c\\otimes v)=bc\\otimes uv$ and unit $1\\otimes1$, while the composition comparisons send $b\\otimes(c\\otimes u)$ to $b\\,a^\\sharp(c)\\otimes u$ and preserve these operations. For $r\\in R$, both structure maps send it to $r\\otimes1$. For $f\\in A$, naturality of the comparison for $\\mathcal O_Y\\to\\mathcal B$ gives $\\rho_{\\mathcal B}(f\\cdot1_M)=\\rho_A(f)\\cdot1_M$; here $q^*\\mathcal O_Y=\\mathcal O_X$ by the mutually inverse local maps $b\\otimes r\\mapsto bq^\\sharp(r)$ and $b\\mapsto b\\otimes1$. Thus the coaction extends $\\rho_A$.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-sfb-space-module-tensor-composition",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 (lemma-adjoint-pullback-pushforward-modules), 03D8 (lemma-push-pull-composition-modules); schemes.tex 01I9. Explicit algebra translation of the canonical descent datum."
+   }
+  },
+  {
+   "text": "On $X\\times_SG\\times_SG$, let $u(x,g,h)=(xg,h)$ and $v(x,g,h)=(x,gh)$. The action identity $a\\circ u=a\\circ v$ identifies the two pullbacks of a section of $M$. The comparison through $q$ used to define $\\theta$ satisfies the cocycle identity: both iterated comparisons are the identification through the same pullback of $\\mathcal B$. There is no unspecified coherence here: on a local iterated tensor $b\\otimes(c\\otimes(d\\otimes m))$, either reassociation gives $b\\,u^\\sharp(c)\\,(\\text{composite})^\\sharp(d)\\otimes m$. Under the affine pullback formula on the triple product, the successive-action path on a section $e$ is $(\\rho_{\\mathcal B}\\otimes1)\\rho_{\\mathcal B}(e)$, and the multiplication path is $(1\\otimes\\Delta)\\rho_{\\mathcal B}(e)$: the two ring maps are respectively $\\rho_A$ on the $A$ factor and $\\Delta$ on the $H$ factor. They are equal. Pulling back instead along $i(x)=(x,1_G)$, the identity $a i=1_X$ and the same normalized tensor comparison give $(1\\otimes\\varepsilon)\\rho_{\\mathcal B}(e)=e$. This proves both coaction identities with the right-action convention of the statement.",
+   "uses": [
+    "def-sfb-space-module-tensor-composition",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 (lemma-push-pull-composition-modules); schemes.tex 01I9 and 01I4. Cocycle and identity calculation for the pullback datum of spaces-descent.tex 04W8."
+   }
+  },
+  {
+   "text": "The hypotheses make $\\{q:X\\to Y\\}$ a singleton fppf covering. Apply full faithfulness of quasi-coherent descent to $\\mathcal O_Y$ and $\\mathcal B$. Sections of a module $N$ are precisely module maps $\\mathcal O\\to N$: a compatible section family $s$ gives $r\\mapsto rs$, and evaluation at $1$ is the inverse. The structure module is quasi-coherent by its one-generator presentation. Also $q^*\\mathcal O_Y=\\mathcal O_X$, with the normalization in Step 2. Consequently full faithfulness identifies $\\Gamma(Y,\\mathcal B)$ with those $e\\in E$ whose corresponding map $\\mathcal O_X\\to M$ commutes with the two descent data on $X\\times_YX$. The given torsor isomorphism replaces its projections by $p$ and $a$. The compatibility is exactly $\\theta(a^*e)=p^*e$, which is $\\rho_{\\mathcal B}(e)=e\\otimes1$ by Step 1. This proves bijectivity of pullback onto $E^G$, without assuming exactness of an invariants functor. Pullback preserves addition, multiplication and $1$, so this bijection is a ring isomorphism.",
+   "uses": [
+    "lem-sfb-space-fppf-qcoh-descent",
+    "def-weil-sheaf-of-modules-category",
+    "def-trf-space-quasi-coherent-module",
+    "def-sfb-space-module-tensor-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 04W8 (proposition-fpqc-descent-quasi-coherent), full faithfulness; fppf specialization via spaces-topologies.tex 0DFQ; the Hom-from-structure-module interpretation is expanded here."
+   }
+  },
+  {
+   "text": "Let $t:\\mathcal B\\twoheadrightarrow\\mathcal C$ be a surjection. Tensor pullback $q^*$ preserves epimorphisms directly from its adjunction: if $u,v:q^*\\mathcal C\\to N$ agree after $q^*t$, their adjuncts $\\mathcal C\\to q_*N$ agree after $t$, hence agree, and therefore $u=v$. Both pulled-back modules are quasi-coherent. By the exact Zariski-etale comparison on schemes, their corresponding Zariski morphism on $X$ is still surjective. Indeed its quasi-coherent Zariski cokernel maps to its zero etale cokernel, and the equivalence reflects zero objects. Apply the affine-image/cokernel formula to this morphism: on the affine open $X$ its image is its image on sections and its cokernel has sections $\\Gamma(X,q^*\\mathcal C)/\\operatorname{im}\\Gamma(X,q^*t)$. Since that cokernel is zero, $E_{\\mathcal B}\\to E_{\\mathcal C}$ is surjective. No flatness of a module or finite-generation hypothesis has been used.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE (lemma-equivalence-quasi-coherent-limits), part (5); schemes.tex Tags 01IB, 01IC (lemma-kernel-cokernel-quasi-coherent), 01LB; adjunction as in sites-modules.tex 03D7."
+   }
+  },
+  {
+   "text": "For any algebra map $t:\\mathcal B\\to\\mathcal C$, write $T=\\Gamma(X,q^*t)$. Naturality of tensor pullback and its normalized composition comparisons gives\n$$(T\\otimes1)\\rho_{\\mathcal B}(e)=\\rho_{\\mathcal C}(T(e)).$$\nThus $T$ is equivariant, including for the surjection in Step 5. For $s\\in\\Gamma(Y,\\mathcal B)$, functoriality gives $T(q^*s)=q^*(t(s))$; this is the required commuting square between the ring isomorphisms of Step 4. Finally $q^*(s^n)=(q^*s)^n$ and $T(e^n)=T(e)^n$ for $n\\ge1$, by induction using multiplicativity. If $e$ is invariant, then $\\rho(e^n)=\\rho(e)^n=(e\\otimes1)^n=e^n\\otimes1$. These formulas prove all the asserted power compatibilities.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-sfb-space-module-tensor-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7 and 03D8, naturality; elementary multiplicative calculation for positive powers."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-module-tensor-composition",
+  "lem-sfb-space-fppf-qcoh-descent",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-scheme-etale-module-exact-finiteness-comparison",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "04W8 full faithfulness; affine coaction translation and explicit compatibility calculations, using schemes.tex 01IB and 01I9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat torsor descent identifies quasi coherent algebra sheaves on a quotient algebraic space with equivariant algebras on its affine torsor and global sections with invariants",
+   "results": "{\"t\": \"2026-10-24T07:05:39Z\", \"tool\": \"leansearch\", \"query\": \"Faithfully flat torsor descent identifies quasi coherent algebra sheaves on a quotient algebraic space with equivariant algebras on its affine torsor and global sections with invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"Module.FaithfullyFlat.bijective_of_tensorProduct\", \"RingHom.FaithfullyFlat\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.Flat.iff_flat_tensorProduct\", \"SheafOfModules.isQuasicoherent\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.AffineScheme.ΓIsEquiv\"], \"digest\": \"97693224030e0f80\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|Comodule|equivariant.*algebra|torsor",
+   "results": "{\"t\": \"2026-10-24T07:07:45Z\", \"tool\": \"grep\", \"query\": \"coaction|Comodule|equivariant.*algebra|torsor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coaction\", \"Algebra\"",
+   "results": "{\"t\": \"2026-10-24T07:07:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"coaction\\\", \\\"Algebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent algebras on an algebraic space with an affine group torsor correspond to equivariant algebras with invariant global sections",
+   "results": "{\"t\": \"2026-10-24T07:07:47Z\", \"tool\": \"leanfinder\", \"query\": \"Quasi coherent algebras on an algebraic space with an affine group torsor correspond to equivariant algebras with invariant global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.ΓIsEquiv\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe\", \"SheafOfModules.QuasicoherentData.X\", \"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.QuasicoherentData.I\", \"AlgebraicGeometry.AffineScheme.Γ\", \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\"], \"digest\": \"daf6a7cc0a7ab0ae\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|Comodule|equivariant.*algebra|torsor",
+   "results": "{\"t\": \"2026-10-24T07:38:42Z\", \"tool\": \"grep\", \"query\": \"coaction|Comodule|equivariant.*algebra|torsor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: scheme morphism descent, structure-sheaf/affine-space sections, and ring faithfully-flat descent do not state quasi-coherent algebra invariants on an algebraic-space torsor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjection of quasi coherent algebras pulls back to a surjection on sections of an affine torsor and descent identifies sections with invariants",
+   "results": "{\"t\": \"2026-10-24T07:38:43Z\", \"tool\": \"leansearch\", \"query\": \"A surjection of quasi coherent algebras pulls back to a surjection on sections of an affine torsor and descent identifies sections with invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.presieveOfSections_surjective\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"Algebra.QuasiFinite.of_surjective_algHom\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"e540cfc3544aec2f\"}; Read the returned signatures: scheme morphism descent, structure-sheaf/affine-space sections, and ring faithfully-flat descent do not state quasi-coherent algebra invariants on an algebraic-space torsor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coaction\", \"Algebra\"",
+   "results": "{\"t\": \"2026-10-24T07:38:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"coaction\\\", \\\"Algebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: scheme morphism descent, structure-sheaf/affine-space sections, and ring faithfully-flat descent do not state quasi-coherent algebra invariants on an algebraic-space torsor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a quasi-coherent algebra on an algebraic space are invariant elements after pullback to an affine faithfully flat group scheme torsor",
+   "results": "{\"t\": \"2026-10-24T07:38:44Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of a quasi-coherent algebra on an algebraic space are invariant elements after pullback to an affine faithfully flat group scheme torsor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓRestrictAlgebra\", \"AlgebraicGeometry.AffineScheme.Γ\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.AffineSpace.homOfVector_over\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\"], \"digest\": \"0256d7232196b17e\"}; Read the returned signatures: scheme morphism descent, structure-sheaf/affine-space sections, and ring faithfully-flat descent do not state quasi-coherent algebra invariants on an algebraic-space torsor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat descent of morphisms between quasi coherent modules over algebraic spaces",
+   "results": "{\"t\": \"2026-10-24T07:38:45Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat descent of morphisms between quasi coherent modules over algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"RingHom.FaithfullyFlat.codescendsAlong_bijective\"], \"digest\": \"52c42409357c4744\"}; Read the returned signatures: scheme morphism descent, structure-sheaf/affine-space sections, and ring faithfully-flat descent do not state quasi-coherent algebra invariants on an algebraic-space torsor.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-power-reductive-free-affine-quotient",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Proposition 9.7.8, printed p.528, with Lemma 9.2.5(3) and Theorem 4.3.1 (power-lifting formulation of geometric reductivity and the adequate Serre criterion). The assertion that q is affine finitely presented is fppf descent from the trivial torsor projection. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: translation of the affine torsor descent datum to coactions, surjections, and invariant sections.",
+   "via": [
+    "lem-sfb-power-reductive-free-affine-quotient",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-torsor-algebra-invariants",
+  "worker": "stage1",
+  "summary": "Expanded the affine torsor descent datum into the canonical right coaction, checked its identities, descended sections via full faithfulness, and proved surjectivity using the affine cokernel formula. Reused existing nodes throughout; no new nodes or changed statement.",
+  "blueprint": "Supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), via the inherited alteration/moduli/reductive-quotient chain: affine torsor descent in lem-sfb-power-reductive-free-affine-quotient. Steps 1-3 give the coaction; Step 4 gives invariant sections; Steps 5-6 give surjections and compatibilities. The inherited blueprint.from.node is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison between scheme Zariski and small-etale quasi-coherent modules, including pullbacks and open sections; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine tensor pullback formula with its section-unit normalization; used to translate the same torsor datum into a coaction."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "why": "Generic affine image/cokernel section computation; used solely to pass from a sheaf surjection on the affine torsor to a surjection of modules."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-1db4ae43e",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-1db4ae43e (reviewer sub-agent of L); spot-checked: I read the whole item and all 12 cited statements. The statement and stmt_deps are byte-identical to clones/live, so nothing was weakened. There are no new nodes. Source checks: Stacks 04W8 (spaces-descent proposition-fpqc-descent-quasi-coherent) and 06VE(5) (descent, étale exactness); 01IB, 01I9, 01I4, 03GA, 03DX, 03LC, 03D7, 03D8, 0DFQ and 01IC resolve to the labels stated. Step 1: the affine pullback formula, with V=X=Spec A and U=X×G affine, gives E⊗_R H; multiplicativity holds on local tensors. Step 2: θ comes from the pinned γ of def-sfb-space-module-tensor-composition; I recomputed that ρ_B extends ρ_A. Step 3: coassociativity checked pointwise, e((xg)h)=e(x(gh)); counit via i=(1,e_G). Step 4: with the torsor iso, pr1 corresponds to p and pr2 to a; the canonical datum is θ^{-1}, so compatibility is ρ(e)=e⊗1, and the fully faithful fppf descent of the space gives Γ(Y,B)≅E^G as rings. Step 5: q^* preserves epis as a left adjoint; exactness of A_X on 0→Im→G→Coker→0 and the reflection of zero objects give Coker=0; the affine cokernel formula then gives surjectivity on Γ. Step 6 is correctly marked elementary. Edge cases checked: trivial G, empty Y, G_a translation, and the C_2 swap (no surjectivity on invariants, consistent with the statement). No duplicates found. The three generic tool_uses are accepted. Batch 5: the closure of the new citations (1455 nodes, 37 of them trf/pod) is already contained in the batch-5 closure without the item. The trf nodes are the general definition def-trf-algebraic-space and the Zariski/étale quasi-coherent comparison (03DX/06VE), which is not a step of the trace formula or of Poincaré duality, so they are accepted. Advisory for the maintainer: read literally, the inherited 'surjective tested on charts' is very strong; Step 4 holds under either reading, and the parent must still verify the hypothesis."
+ }
+}

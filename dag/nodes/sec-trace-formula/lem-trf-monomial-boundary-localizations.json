@@ -1,0 +1,250 @@
+{
+ "id": "lem-trf-monomial-boundary-localizations",
+ "kind": "statement",
+ "title": "Monomial-ratio uniformizers and exhaustion of boundary primes",
+ "statement": "Let $G$ be a free abelian group of finite rank and let $P\\subseteq G$ be a finitely generated additive submonoid generating $G$ as a group, with $P\\cap(-P)=\\{0\\}$. Let $I$ be a finite set and let $\\nu_i:G\\to\\mathbf Z$ be surjective homomorphisms such that\n$$P=\\{g\\in G:\\nu_i(g)\\ge0\\text{ for all }i\\in I\\}.$$\nFor each $i$ fix $f_i\\in P$ with $\\nu_i(f_i)=0$ and $\\nu_j(f_i)>0$ for every $j\\ne i$. Let $R$ be a Noetherian commutative integral domain [def-weil-pbc-noetherian-ring] and let $z:P\\to R$ satisfy $z^0=1$, $z^{q+q'}=z^qz^{q'}$ and $z^q\\ne0$ for all $q$. Put $\\mathfrak p_i=(z^q:\\nu_i(q)>0)R$ and assume each $\\mathfrak p_i$ is prime and satisfies $z^q\\in\\mathfrak p_i\\Longleftrightarrow\\nu_i(q)>0$. Then the $\\mathfrak p_i$ are distinct nonzero primes. For each $i$ and each $e_i\\in G$ with $\\nu_i(e_i)=1$, there is $N_i\\ge0$ such that $e_i+N_i f_i\\in P$ and\n$$\\pi_i=z^{e_i+N_i f_i}/z^{N_i f_i}\\in A_i=R_{\\mathfrak p_i}$$\nis nonzero, belongs to the maximal ideal, and generates that ideal [def-weil-pbc-localization-at-prime]. For every $q\\in P$, writing $m=\\nu_i(q)$ and $g=q-me_i$, there is $M\\ge0$ such that $g+Mf_i\\in P$, $\\nu_i(g+Mf_i)=0$, and\n$$u_q=z^{g+Mf_i}/z^{Mf_i}\\in A_i^\\times,\\qquad z^q=u_q\\pi_i^m.$$\nThe ring $A_i$ is a Noetherian local domain and a discrete valuation ring [def-sc-discrete-valuation-ring] with fraction field $\\operatorname{Frac}(R)$. Its normalized additive valuation satisfies $v_i(z^q)=\\nu_i(q)$. Each $\\mathfrak p_i$ has height one, meaning that it is nonzero and there is no prime strictly between $(0)$ and $\\mathfrak p_i$. Every prime of $R$ containing a chart monomial contains some $\\mathfrak p_i$; consequently the height-one primes containing a chart monomial are exactly these $\\mathfrak p_i$. If $I=\\varnothing$, the hypotheses force $P=G=0$ and no prime contains any chart monomial.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-formulated refinement of Expose VI 1.6(i)--(ii), printed p. 70 (model notation, not a theorem asserted there). Extracted from lem-trf-complete-toric-facet-valuations retained proof steps 12--17; the full original argument is retained in report.md. Underlying DVR and height algebra: Stacks Tags 00PD (lemma-characterize-dvr) and 00KQ (proposition-dimension)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "If $I=\\varnothing$, the half-space description gives $P=G$. Sharpness then gives $G=P=\\{0\\}$. The only chart monomial is $z^0=1$, which belongs to no prime. Henceforth assume $I\\ne\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebra for the chart models in Expose VI 1.6(i)--(ii), printed p. 70; the explicit argument is not asserted in ILO. DVR input: Stacks Tag 00PD (lemma-characterize-dvr)."
+   }
+  },
+  {
+   "text": "Fix $i$ and choose $e_i$ with $\\nu_i(e_i)=1$, possible by surjectivity. For any $h\\in G$ with $\\nu_i(h)\\ge0$, choose an integer $T\\ge0$ with $T\\nu_j(f_i)\\ge-\\nu_j(h)$ for every $j\\ne i$. Such a $T$ exists because $I$ is finite and these coefficients are positive integers. Then all normals are nonnegative on $h+Tf_i$, so $h+Tf_i\\in P$. In particular choose $N_i$ this way for $h=e_i$, and put $a_i=e_i+N_if_i$, $b_i=N_if_i$. Thus $\\nu_i(a_i)=1$ and $\\nu_i(b_i)=0$. The nonzero element $z^{a_i}$ belongs to $\\mathfrak p_i$, proving $\\mathfrak p_i\\ne(0)$. For $i\\ne j$, $z^{f_j}\\in\\mathfrak p_i\\setminus\\mathfrak p_j$ by the membership hypothesis; hence the primes are pairwise distinct and incomparable.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebra for the chart models in Expose VI 1.6(i)--(ii), printed p. 70; the explicit argument is not asserted in ILO. DVR input: Stacks Tag 00PD (lemma-characterize-dvr)."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-localization-at-prime], $A_i$ is local with maximal ideal $\\mathfrak p_iA_i$. Since $z^{b_i}\\notin\\mathfrak p_i$, the fraction $\\pi_i=z^{a_i}/z^{b_i}$ lies in this ideal. The fraction relation shows $R\\hookrightarrow A_i\\hookrightarrow\\operatorname{Frac}(R)$: a denominator is outside the proper prime and hence nonzero, and $r/s=0$ forces $ur=0$ for some nonzero $u$, thus $r=0$. Consequently $A_i$ is a domain and $\\pi_i\\ne0$. Its fraction field is $\\operatorname{Frac}(R)$, because every fraction of $R$ is a quotient of elements of $A_i$, and conversely fractions of elements of $A_i\\subseteq\\operatorname{Frac}(R)$ remain in that field.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebra for the chart models in Expose VI 1.6(i)--(ii), printed p. 70; the explicit argument is not asserted in ILO. DVR input: Stacks Tag 00PD (lemma-characterize-dvr)."
+   }
+  },
+  {
+   "text": "For $q\\in P$ put $m=\\nu_i(q)\\ge0$ and $g=q-me_i$. Then $\\nu_i(g)=0$; Step 2 gives $M\\ge0$ such that $c=g+Mf_i\\in P$. Put $d=Mf_i$. Both $z^c$ and $z^d$ are outside $\\mathfrak p_i$, so $u_q=z^c/z^d$ is a unit, with inverse $z^d/z^c$. The equality $q+d+mb_i=c+ma_i$ in $G$ is an equality between elements of $P$. Multiplicativity gives $z^qz^d(z^{b_i})^m=z^c(z^{a_i})^m$. Dividing by the displayed nonzero denominators in $A_i$ proves $z^q=u_q\\pi_i^m$. This includes $m=0$, and $\\nu_i(c)=0$ as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebra for the chart models in Expose VI 1.6(i)--(ii), printed p. 70; the explicit argument is not asserted in ILO. DVR input: Stacks Tag 00PD (lemma-characterize-dvr)."
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak p_iA_i$ is generated by the images of the monomials with $\\nu_i(q)>0$: extending an ideal generated by a set allows the same finite sums with coefficients in $A_i$. By Step 4, each such generator is $\\pi_i(u_q\\pi_i^{\\nu_i(q)-1})$, hence lies in $(\\pi_i)$. Step 3 gives the reverse containment. Thus the maximal ideal is exactly $(\\pi_i)$, with its generator nonzero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebra for the chart models in Expose VI 1.6(i)--(ii), printed p. 70; the explicit argument is not asserted in ILO. DVR input: Stacks Tag 00PD (lemma-characterize-dvr)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-noetherian] to $R$ and the multiplicative set $R\\setminus\\mathfrak p_i$ to see that $A_i$ is Noetherian. The fraction construction of Step 3 has all three localization properties in that statement. Now [lem-sc-principal-ideal-dvr] applies: $A_i$ is a Noetherian local domain with maximal ideal generated by the nonzero $\\pi_i$. Thus it is a DVR, and $\\pi_i$ is a uniformizer as defined in [def-sc-discrete-valuation-ring].",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-principal-ideal-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), localization clause; 00PD (lemma-characterize-dvr), condition (4) implies (1)."
+   }
+  },
+  {
+   "text": "Let $v_i$ be the normalized additive valuation of this DVR on its fraction field, identified with $\\operatorname{Frac}(R)$ in Step 3. It is nonnegative on nonzero elements of $A_i$, and $v_i(\\pi_i)=1$. A unit $u$ has value zero: $0=v_i(uu^{-1})=v_i(u)+v_i(u^{-1})$ and both summands are nonnegative. Apply the multiplication and power identities of [lem-sc-dvr-valuation-arithmetic] to Step 4 to obtain $v_i(z^q)=0+m=\\nu_i(q)$; for $m=0$ the same assertion follows directly from $z^q=u_q$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-valuation-arithmetic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), normalized valuation construction in the proof; Tag 00IE (definition-value-group)."
+   }
+  },
+  {
+   "text": "By [lem-sc-dvr-dimension-one], $\\dim A_i=1$. By [lem-weil-pbc-localization-dimension-chains-below-prime], this is the supremum of lengths of prime chains below $\\mathfrak p_i$. Since $R$ is a domain, $(0)$ is prime, and Step 2 gives $(0)\\subsetneq\\mathfrak p_i$. A prime strictly between these would give a chain of length two, contradicting that supremum. Thus each $\\mathfrak p_i$ has height one in precisely the stated sense.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), dimension-one characterization; 00KF (definition-height) and 00E3 (lemma-spec-localization)."
+   }
+  },
+  {
+   "text": "Let $Q$ be a prime containing a chart monomial $z^q$. Suppose $\\mathfrak p_i\\not\\subseteq Q$ for every $i$. Since $\\mathfrak p_i$ is generated by its positive-$\\nu_i$ monomials, choose $q_i\\in P$ with $\\nu_i(q_i)>0$ and $z^{q_i}\\notin Q$; otherwise all generators, hence the ideal, would be in $Q$. Put $h=\\sum_{i\\in I}q_i$. Nonnegativity gives $\\nu_j(h)\\ge\\nu_j(q_j)\\ge1$ for every $j$, while primality gives $z^h=\\prod_i z^{q_i}\\notin Q$. Choose an integer $T\\ge1$ with $T\\nu_j(h)\\ge\\nu_j(q)$ for all $j$. The half-space equality gives $Th-q\\in P$. Therefore $(z^h)^T=z^qz^{Th-q}\\in Q$, contradicting primality. Some $\\mathfrak p_i$ is thus contained in $Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebra for the chart models in Expose VI 1.6(i)--(ii), printed p. 70; the explicit argument is not asserted in ILO. DVR input: Stacks Tag 00PD (lemma-characterize-dvr)."
+   }
+  },
+  {
+   "text": "If $Q$ additionally has height one, $(0)\\subsetneq\\mathfrak p_i\\subseteq Q$ forces $Q=\\mathfrak p_i$ by the stipulated no-intermediate-prime meaning of height one. Conversely, each $\\mathfrak p_i$ has height one by Step 8 and contains the chart monomial $z^{a_i}$ from Step 2. Together with Step 1 this proves the exact classification and every degenerate clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent-written algebra for the chart models in Expose VI 1.6(i)--(ii), printed p. 70; the explicit argument is not asserted in ILO. DVR input: Stacks Tag 00PD (lemma-characterize-dvr)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sc-dvr-dimension-one",
+  "lem-sc-dvr-valuation-arithmetic",
+  "lem-sc-principal-ideal-dvr",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-localization-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Explicit monomial fraction and boundary exhaustion argument for the model notation of Expose VI 1.6(i)--(ii), printed p. 70; algebraic inputs read in Stacks Tags 00FN, 00PD, 00KF and 00E3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Primitive facet lattice normals and prime monomial boundary ideals give explicit monomial ratio uniformizers in localizations of a Noetherian domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal (PowerSeries R)} [I.IsPrime],\\n  PowerSeries.X ∉ I →\\n    ∀ {S : Set R},\\n      Ideal.span S = Ideal.map PowerSeries.constantCoeff I →\\n        S.Finite → ∃ T, I = Ideal.span T ∧ T.Finite ∧ T.ncard = S.ncard\", \"doc\": \"If the formal variable $ X $ is not in the ideal $ I $ of univariate power series over a ring $ R $, and the image of $ I $ under the constant coefficient homomorphism is finitely generated by a set $\"}\n  {\"name\": \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.Smooth R S],\\n  ∃ s, Ideal.span s = ⊤ ∧ ∀ x ∈ s, Algebra.IsStandardSmooth R (Localization.Away x)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $S$ be a smooth $R$-algebra. Then there exists a set of elements $s \\\\subseteq S$ such that the ideal generated by $s$ is the whole ring $S$, and for every\"}\n  {\"name\": \"exists_reduced_fraction'\", \"module\": \"Mathlib/RingTheory/Localization/Away/Basic\", \"type\": \"∀ {R : Type u_3} [inst : CommRing R] (x : R) (B : Type u_4) [inst_1 : CommRing B] [inst_2 : Algebra R B]\\n  [inst_3 : IsLocalization.Away x B] [IsDomain R] [WfDvdMonoid R] {b : B},\\n  b ≠ 0 → Irreducible x → ∃ a n, ¬x ∣ a ∧ selfZPow x B n * (algebraMap R B) a = b\", \"doc\": \"Let `R` be an integral domain with well-founded divisibility, and let `x \\\\in R` be an irreducible element. Let $B$ be the localization of `R` at the powers of `x`. For any non-zero element $b \\\\in B$, \"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuation_exists_uniformizer\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (v : IsDedekindDomain.HeightOneSpectrum R),\\n  ∃ π, v.intValuation π = WithZero.exp (-1)\", \"doc\": \"For a Dedekind domain $A$ and a height one prime ideal $v$, there exists an element $\\\\pi \\\\in A$ such that the valuation $v(\\\\pi)$ equals $-1$ in the multiplicative integers with zero $\\\\mathbb{Z}^\\\\times\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_exists_uniformizer\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R),\\n  ∃ π, (IsDedekindDomain.HeightOneSpectrum.valuation K v) π = WithZero.exp (-1)\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, and a height one prime ideal $ v $ in $ R $, there exists an element $ \\\\pi \\\\in K $ such that the valuation $ v(\\\\pi) = -1 $. This element $ \\\\pi $ \"}\n  {\"name\": \"Algebra.exists_aeval_invOf_eq_zero_of_idealMap_adjoin_sup_span_eq_top\", \"module\": \"Mathlib/RingTheory/Polynomial/Ideal\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (x : S) (I : Ideal R),\\n  I ≠ ⊤ →\\n    ∀ [inst_3 : Invertible x],\\n      Ideal.map (algebraMap R ↥(Algebra.adjoin R {x})) I ⊔ Ideal.span {⟨x, ⋯⟩} = ⊤ →\\n        ∃ p, p.leadingCoeff - 1 ∈ I ∧ (Polynomial.aeva\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$. Let $x \\\\in S$ be an invertible element and let $I$ be a proper ideal of $R$. Let $R[x]$ denote the $R$-subalgebra of $S$ generated by $x$.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.basisCotangent_localizationAway_apply\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S] (x : Unit),\\n  (Algebra.SubmersivePresentation.localizationAway S r).basisCotangent x = Algebra.Generators.cMulXSubOneCotangent S r\", \"doc\": \"In the submersive presentation of an $ R $-algebra $ S $ obtained by localizing at an element $ r $, the basis element of the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ is represented by the equival\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_uniformizer_ne_zero\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra R K] [inst_4 : IsFractionRing R K] (v : IsDedekindDomain.HeightOneSpectrum R),\\n  Classical.choose ⋯ ≠ 0\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, the uniformizer associated with a height one prime ideal $ v $ (an element $ \\\\pi \\\\in K $ such that $ v(\\\\pi) = 1 $) is non-zero. This ensures the \"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Height one primes containing monomials are exhausted by facet primes using an interior monomial and saturation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.mem_ideal_span_monomial_image\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Ideal\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : CommSemiring R] {x : MvPolynomial σ R} {s : Set (σ →₀ ℕ)},\\n  x ∈ Ideal.span ((fun s => (MvPolynomial.monomial s) 1) '' s) ↔ ∀ xi ∈ x.support, ∃ si ∈ s, si ≤ xi\", \"doc\": \"A multivariate polynomial $ x $ belongs to the ideal generated by monomials corresponding to a set $ S $ of exponent vectors if and only if every monomial in the support of $ x $ is component-wise gre\"}\n  {\"name\": \"AlgebraicGeometry.Polynomial.imageOfDf\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/IsOpenComapC\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Polynomial R → Set (PrimeSpectrum R)\", \"doc\": \"For a polynomial $ f $ over a commutative semiring $ R $, this set consists of all prime ideals $ \\\\mathfrak{p} $ in the prime spectrum of $ R $ such that there exists a natural number $ i $ where the \"}\n  {\"name\": \"MvPolynomial.mem_image_comap_C_basicOpen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_2} [inst : CommRing R] {σ : Type u_1} (f : MvPolynomial σ R) (x : PrimeSpectrum R),\\n  x ∈ PrimeSpectrum.comap MvPolynomial.C '' ↑(PrimeSpectrum.basicOpen f) ↔ ∃ i, MvPolynomial.coeff i f ∉ x.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R)$ lies in the image of the preimage of the basic open set $D(f)$ under the constant polynomial embedding $C : R \\\\to R[\\\\sigma]$ if and only if ther\"}\n  {\"name\": \"PowerSeries.exist_eq_span_eq_ncard_of_X_notMem\", \"module\": \"Mathlib/RingTheory/PowerSeries/Ideal\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal (PowerSeries R)} [I.IsPrime],\\n  PowerSeries.X ∉ I →\\n    ∀ {S : Set R},\\n      Ideal.span S = Ideal.map PowerSeries.constantCoeff I →\\n        S.Finite → ∃ T, I = Ideal.span T ∧ T.Finite ∧ T.ncard = S.ncard\", \"doc\": \"If the formal variable $ X $ is not in the ideal $ I $ of univariate power series over a ring $ R $, and the image of $ I $ under the constant coefficient homomorphism is finitely generated by a set $\"}\n  {\"name\": \"MvPolynomial.mem_ideal_span_X_image\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Ideal\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : CommSemiring R] {x : MvPolynomial σ R} {s : Set σ},\\n  x ∈ Ideal.span (MvPolynomial.X '' s) ↔ ∀ m ∈ x.support, ∃ i ∈ s, m i ≠ 0\", \"doc\": \"For a multivariate polynomial $ x $ over a commutative semiring $ R $ with variables indexed by $ \\\\sigma $, and a subset $ s \\\\subseteq \\\\sigma $, the polynomial $ x $ belongs to the ideal generated by \"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (q :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"The homogeneous ideal of elements with zero zeroth component (the irrelevant ideal) is not contained within the homogeneous ideal defined by the condition that all homogeneous fractions $\\\\frac{(\\\\text{\"}\n  {\"name\": \"RingPreordering.IsOrdering.toIsPrime\", \"module\": \"Mathlib/Algebra/Order/Ring/Ordering/Defs\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {P : RingPreordering R} [self : P.IsOrdering], P.support.IsPrime\", \"doc\": \"For any commutative ring $ R $ and a ring preordering $ P $ that satisfies antisymmetry (i.e., $ a \\\\leq b $ and $ b \\\\leq a $ implies $ a = b $), the support of $ P $ (the set of elements $ g \\\\in R $ w\"}\n  {\"name\": \"RingPreordering.instIsPrimeSupport\", \"module\": \"Mathlib/Algebra/Order/Ring/Ordering/Basic\", \"type\": \"∀ {F : Type u_2} [inst : Field F] (P : RingPreordering F), P.support.IsPrime\", \"doc\": \"For any field $ K $ equipped with a preordering, the support of the preordering (the set of non-negative elements) forms a prime ideal in $ K $.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"MonoidAlgebra\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.*(uniformizer|height.one|valuation)|facet.*(prime|valuation)",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/AsPolynomial.lean\", \"line\": \"317\", \"text\": \"lemma valuation_monomial_eq_valuation_X_pow (n : ℕ) {a : K} (ha : a ≠ 0) :\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/AsPolynomial.lean\", \"line\": \"347\", \"text\": \"lemma valuation_inv_monomial_eq_valuation_X_zpow (n : ℕ) {a : K} (ha : a ≠ 0) :\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/IsTrivialOn.lean\", \"line\": \"41\", \"text\": \"lemma valuation_aeval_monomial_eq_valuation_pow (w : B) (n : ℕ) {a : A} (ha : a ≠ 0) :\"}\n  {\"file\": \"Mathlib/RingTheory/Valuation/IsTrivialOn.lean\", \"line\": \"47\", \"text\": \"  rw [← valuation_aeval_monomial_eq_valuation_pow _ _ (leadingCoeff_ne_zero.mpr hp)]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization at a monomial facet prime is a discrete valuation ring with monomial valuation given by the primitive facet normal",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian domain with a sharp saturated monoid chart and prime facet ideals has discrete valuation ring localizations with monomial ratio uniformizers",
+   "results": "Hits: IsDedekindDomainDvr, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, IsDiscreteValuationRing, IsDedekindDomainDvr.is_dvr_at_nonzero_prime, IsDedekindDomain.isDedekindDomainDvr, IsDiscreteValuationRing.TFAE, IsDedekindDomain.HeightOneSpectrum.intValuation_exists_uniformizer, IsDedekindDomain.HeightOneSpectrum.valuation_exists_uniformizer. Read returned types; no declaration proves the chart-specific bundled assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.*(uniformizer|height.one|valuation)|facet.*(prime|valuation)",
+   "results": "Hits: Mathlib/FieldTheory/RatFunc/AsPolynomial.lean, Mathlib/FieldTheory/RatFunc/AsPolynomial.lean, Mathlib/RingTheory/Valuation/IsTrivialOn.lean, Mathlib/RingTheory/Valuation/IsTrivialOn.lean. Read returned types; no declaration proves the chart-specific bundled assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization at a prime monomial facet ideal has a monomial ratio uniformizer and valuation equal to the facet normal",
+   "results": "Hits: Localization.AtPrime, AlgebraicGeometry.StructureSheaf.Localizations, LocalizedModule.AtPrime, ModuleCat.Tilde.Localizations, AlgebraicGeometry.StructureSheaf.instAtPrimeLocalizationsValCarrierTopMemOpensAsIdeal, HomogeneousLocalization.AtPrime, IsLocalizedModule.AtPrime, instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization. Read returned types; no declaration proves the chart-specific bundled assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"MonoidAlgebra\"",
+   "results": "No hits. Read returned types; no declaration proves the chart-specific bundled assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Facet ideals exhaust primes containing a monomial; explicit lattice monomial fractions generate the localized maximal ideals",
+   "results": "Hits: AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.ne_top, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.denom_notMem, IsLocalization.AtPrime.mk'_mem_maximal_iff, Ideal.mem_of_localization_maximal. Read returned types; no declaration proves the chart-specific bundled assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-toric-facet-valuations",
+  "date": "2026-10-22",
+  "group": "Q138"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) nearby-duality alteration ancestry of lem-trf-local-term-locality, through log-regular divisorial structure: Boundary-prime and valuation input to the complete-local recognition equality, replacing the unsupported converse application of VI 1.6. Re-split of the retained facet-valuation proof, steps 12--17: Monomial-ratio uniformizers and exhaustion of boundary primes.",
+   "via": [
+    "lem-trf-complete-toric-facet-valuations",
+    "lem-trf-complete-toric-kato-recognition",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monomial-boundary-localizations",
+  "worker": "stage1",
+  "summary": "Constructed the monomial fractions by finite facet inequalities, verified units by explicit inverse and the factorization by cross multiplication, proved maximal-ideal generation, applied existing Noetherian localization and principal-maximal-ideal DVR nodes, and used existing dimension and valuation nodes. Proved boundary exhaustion directly by a finite product contradiction. No new nodes, no statement change.",
+  "blueprint": "Realizes the boundary-prime and valuation algebra in the nearby-duality alteration ancestry of lem-trf-local-term-locality, proof (1)--(2), via lem-trf-complete-toric-facet-valuations retained steps 12--17; the ancestor and current sk-i-curve-zero route are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-2b515d3b0",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-2b515d3b0 (reviewer sub-agent of L); spot-checked: I read the whole item. Ten steps, no new nodes. The statement, stmt_deps, source and blueprint are byte-identical to the Q138 statement-only node, so nothing is weakened. Every argument of the parent's old steps 12–17 is kept: 12→2/3, 13→2/3, 14→4/5, 15→6/8, 16→7, 17→9/10. The item does not cite its parent, so there is no cycle. Checks: I recomputed the identity q+d+mb_i=c+ma_i in P, so z^q=u_qπ^m holds with u_q a unit (ν_i(c)=ν_i(d)=0). p_iA_i=(π) because each generator equals π·u_qπ^{m-1}. A_i is Noetherian by lem-weil-pbc-localization-noetherian, and lem-sc-principal-ideal-dvr (slopmaster2-closed) makes it a DVR. v(z^q)=ν(q) follows from units having value 0 and lem-sc-dvr-valuation-arithmetic. Height one follows from dim A_i=1 and the chain supremum, since an intermediate prime gives a chain of length 2. Exhaustion: h=Σq_i has all ν_j(h)≥1, Th−q∈P, and z^{Th}∈Q gives a contradiction. Edge cases tested: I=∅ forces G=0; |I|=1; m=0; N with k[x]; N² with k[x,y]. ILO VI 1.4/1.6 (PDF pp. 75–76) give the models only, so proof_origin=agent is correct. All cited nodes are definitions, Mathlib leaves or Lean-closed nodes, so no tool_uses are needed. No duplicate was found among the lem-per-monomial-boundary-purity-criterion, the localized-unit-divisor-lift and the divisorial-chart nodes. Advisory: step 7 takes v≥0 on A_i and v(π)=1 as the definition of the normalized valuation, while old step 16 cited the off-unit split node lem-sc-dvr-valuation-ring-characterization. I accept this as definitional (Stacks 00PD). No SGA is used."
+ }
+}

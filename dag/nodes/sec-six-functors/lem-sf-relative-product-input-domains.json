@@ -1,0 +1,314 @@
+{
+ "id": "lem-sf-relative-product-input-domains",
+ "kind": "statement",
+ "title": "Finite-Tor and witnessed domains for all relative-product factors",
+ "statement": "Fix distinct primes $p,\\ell$, integers $a,n\\geq1$, $k=\\overline{\\mathbf F}_{p^a}$, a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$ and a uniformizer $\\varpi_E$. Put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, choose $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$, and fix the six-functor datum [def-sf-datum] for these parameters. Integral pullbacks and tensors are completed; field coefficients use rationalization and a common finite coefficient field. Let $B$ be a separated finite-type $k$-scheme, let $f:X\\to B$ and $g:Y\\to B$ be separated finite-type morphisms, and let $K\\in D^b_{ctf}(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$. Write $T=X\\times_BY$, $u:T\\to X$, $v:T\\to Y$, $h=fu=gv$, $P=Lu^*K$, $Q=Rf_!K$ and $H=P\\otimes^L_\\Lambda Lv^*L$. Then $X,Y,T$ are separated finite type over $k$, and $u,v,h$ are separated finite type. The objects\n$$P,\\ Lv^*L,\\ H\\quad\\text{on }T,\\qquad Q\\quad\\text{on }B,$$\n$$Rv_!P,\\ Lg^*Q,\\ Rv_!P\\otimes^L L,\\ Lg^*Q\\otimes^L L,\\ L\\otimes^L Lg^*Q\\quad\\text{on }Y$$\nbelong to the indicated $D^b_{ctf}$ categories. Their compact-support images on $B$, and the tensors $Rg_!L\\otimes^L Q$ and $Q\\otimes^L Rg_!L$, also belong to $D^b_{ctf}(B,\\Lambda)$. Thus both projection components at $(v,P,L)$ and $(g,L,Q)$ have finite-Tor second argument. At $\\Lambda=A_{E,n}$ every displayed bounded constructible pro-etale input admits an etale-origin witness: it is isomorphic to the pullback of a bounded constructible etale complex under the comparison of sites. In particular $H$ and $K$ lie in the witnessed domains of the finite compact-support composition and exchange. At $\\mathcal O_E$ the corresponding witnesses exist for each finite reduction in the derived-complete coefficient construction. At $E$ and $\\overline{\\mathbf Q}_\\ell$ the operations and these finite witnesses are formed from integral presentations, after choosing a common finite coefficient field for the objects involved. These assertions concern the completed and transported coefficient categories, not discrete non-torsion etale coefficients. The same domain assertions apply to every other pair of separated finite-type maps into a separated finite-type base and every pair of finite-Tor inputs.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Typing preceding the displayed relative map and the paragraph concerning its finite-Tor second argument; returned proof step 1"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-tor-amplitude",
+  "def-exchange-projection"
+ ],
+ "proof": [
+  {
+   "text": "The maps u and v are the chosen pullback projections. Apply Mathlib separatedness and finite-type base-change instances, then the composition instances with f and B’s structure map. Use the finite-type structure already carried by each SixFunctorSpace. This proves the first six conjunctions.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Typing of the relative composite and its finite-Tor input paragraph"
+   }
+  },
+  {
+   "text": "Use the supplied SixFunctorDatum finiteCoherence.pullDomain and supportDomain, transporting across finitePullback and finiteSupport. Use finiteTensorNormalization to read finiteTensorDomainStage’s output property in ambient coordinates. The private objects_property lemma applies these closure facts in the exact order of the 22 displayed objects, retaining K and L, both Y tensor orders, every support image and both final tensors. No product isomorphism is used. Isomorphism invariance of intrinsic constructibility follows by restricting to fixed modules and applying the fixed-module constructibility comparison.",
+   "uses": [
+    "def-sf-datum",
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-pbc-proetale-constant-module-constructibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Typing of the relative composite and its finite-Tor input paragraph"
+   }
+  },
+  {
+   "text": "For an intrinsically bounded constructible finite object, bound its finite cohomological support above and below. Apply finiteRing_constructibleDerived_origin’s essential-image criterion. Transport its etale origin isomorphism across the canonical realization equivalence, using mapDerivedCategoryCompIso, and retain the bounded-below image F, its FixedEtaleOriginWitness and the comparison to the inverse realization. Apply this to each object established in the previous step.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-pbc-etale-origin-witness",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Typing of the relative composite and its finite-Tor input paragraph"
+   }
+  },
+  {
+   "text": "For any integral constructible object on any SixFunctorSpace, map the standing prime unit to each residue field, then apply integral_residue_tor to its existing constructibility proof. For every positive reduction, integral constructibility already supplies bounded intrinsic constructibility. Apply the preceding finite-origin argument separately at each level. Thus every integral object in the displayed stage list has both required properties, without extra assumptions on its position in that list.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-structure-direct-images-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Typing of the relative composite and its finite-Tor input paragraph"
+   }
+  },
+  {
+   "text": "The private stage_presented lemma compares the exact 22-object lists through any supplied coefficient comparison with its tensor comparison. For pullback and support it composes the comparison component with the image of the previously obtained isomorphism; for tensor it composes the tensor comparison with the mapped product of the two input isomorphisms. Assemble these into List.Forall₂ with reflexive scheme labels. At rational coefficients take the raw localization’s actual integral input objects K.obj and L.obj, apply the integral argument to the entire list and use the supplied rationalization and rationalExchangeComparison.tensor.",
+   "uses": [
+    "def-sf-datum",
+    "def-sf-operation-stages",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Typing of the relative composite and its finite-Tor input paragraph"
+   }
+  },
+  {
+   "text": "At algebraically closed coefficients take the finite compositum of K.stage and L.stage and their actual transported objects Kr and Lr. Their underlying objects are integral representatives because rationalization is raw. Apply the previous list comparison first to integral-to-rational passage in this coefficient stage, then to the commonStageComparison and commonStageExchangeComparison.tensor, with the canonical isoToStage isomorphisms of K and L. The private presented_trans proof composes the two Forall₂ relations entrywise. Apply the integral argument at this coefficient field to provide all finite witnesses.",
+   "uses": [
+    "def-sf-datum",
+    "def-sf-operation-stages",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+    "place": "Typing of the relative composite and its finite-Tor input paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-sf-datum",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-weil-pbc-etale-origin-witness",
+  "def-sf-operation-stages",
+  "lem-coef-integral-residue-tor",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-structure-direct-images-constructible",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Typing of the relative composite and its finite-Tor input paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite Tor constructible complexes under pullback tensor compact support direct image and etale origin",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme [Mathlib/AlgebraicGeometry/Morphisms/Finite]; AlgebraicGeometry.Scheme.instHasPullbacksEtale [Mathlib/AlgebraicGeometry/Morphisms/Etale]; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite [Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite]; AlgebraicGeometry.IsFinite.instSndScheme [Mathlib/AlgebraicGeometry/Morphisms/Finite]; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange [Mathlib/AlgebraicGeometry/Morphisms/FiniteType]; AlgebraicGeometry.IsFinite.instFstScheme [Mathlib/AlgebraicGeometry/Morphisms/Finite]; AlgebraicGeometry.Scheme.Hom.isConstructible_image [Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation]; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType [Mathlib/AlgebraicGeometry/AffineTransitionLimit]",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric stability and ordinary sheaf pullbacks do not give bounded finite-Tor preservation plus witnessed completed coefficient domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric stability and ordinary sheaf pullbacks do not give bounded finite-Tor preservation plus witnessed completed coefficient domains"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor|etaleOrigin|compactSupport",
+   "results": "[grep] OK 0 hit(s); ; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric stability and ordinary sheaf pullbacks do not give bounded finite-Tor preservation plus witnessed completed coefficient domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback and derived tensor preserve bounded constructible finite Tor amplitude with etale origin witnesses",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.pullback [Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous]; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits [Mathlib.CategoryTheory.Sites.Pullback]; SheafOfModules.pullbackComp [Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous]; SheafOfModules.instIsLeftAdjointPullback [Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous]; SheafOfModules.PullbackConstruction.adjunction [Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous]; AlgebraicGeometry.pullbackSpecIso [Mathlib.AlgebraicGeometry.Pullbacks]; SheafOfModules.pullbackPushforwardAdjunction [Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous]; Algebra.FormallyEtale.instTensorProduct [Mathlib.RingTheory.Etale.Basic]",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric stability and ordinary sheaf pullbacks do not give bounded finite-Tor preservation plus witnessed completed coefficient domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian product separated finite type schemes projections composed morphism finite Tor sheaves",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.IsFinite.instSndScheme [Mathlib/AlgebraicGeometry/Morphisms/Finite]; AlgebraicGeometry.IsFinite.instFstScheme [Mathlib/AlgebraicGeometry/Morphisms/Finite]; AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme [Mathlib/AlgebraicGeometry/Morphisms/FiniteType]; AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme [Mathlib/AlgebraicGeometry/Morphisms/FiniteType]; AlgebraicGeometry.instCartesianMonoidalCategoryScheme [Mathlib/AlgebraicGeometry/Limits]; AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift [Mathlib/AlgebraicGeometry/Morphisms/Separated]; AlgebraicGeometry.pointsPi [Mathlib/AlgebraicGeometry/PointsPi]; AlgebraicGeometry.IsSeparated.instFstScheme [Mathlib/AlgebraicGeometry/Morphisms/Separated]",
+   "date": "2026-10-22",
+   "verdict": "no match: geometric stability and ordinary sheaf pullbacks do not give bounded finite-Tor preservation plus witnessed completed coefficient domains"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor|etaleOrigin|compactSupport",
+   "results": "{\"t\": \"2026-10-22T07:56:30Z\", \"tool\": \"grep\", \"query\": \"constructibleFiniteTor|etaleOrigin|compactSupport\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern geometric permanence or ordinary sheaf pullback; none states all derived finite-Tor and witnessed coefficient domains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback and tensor and compact support direct image preserve bounded constructible finite Tor sheaves",
+   "results": "{\"t\": \"2026-10-22T07:56:30Z\", \"tool\": \"leansearch\", \"query\": \"Derived pullback and tensor and compact support direct image preserve bounded constructible finite Tor sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullback\", \"SheafOfModules.pullback\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.instIsLeftAdjointPullback\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\"], \"digest\": \"789b7d9ecff1de85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern geometric permanence or ordinary sheaf pullback; none states all derived finite-Tor and witnessed coefficient domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T07:56:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"Constructible\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern geometric permanence or ordinary sheaf pullback; none states all derived finite-Tor and witnessed coefficient domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible finite Tor complexes preserved by pullback tensor compact support pushforward with etale origin witnesses",
+   "results": "{\"t\": \"2026-10-22T07:56:39Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded constructible finite Tor complexes preserved by pullback tensor compact support pushforward with etale origin witnesses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"RingHom.IsStableUnderBaseChange.pullback_fst_appTop\", \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\"], \"digest\": \"91dbf8c5fe37b123\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern geometric permanence or ordinary sheaf pullback; none states all derived finite-Tor and witnessed coefficient domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex on the proetale site of a scheme descends to the etale site and completed integral operations preserve constructibility",
+   "results": "{\"t\": \"2026-10-22T07:57:48Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded constructible complex on the proetale site of a scheme descends to the etale site and completed integral operations preserve constructibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"37a72234d11f4409\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern geometric permanence or ordinary sheaf pullback; none states all derived finite-Tor and witnessed coefficient domains"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-kunneth-relative",
+  "date": "2026-10-22",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Typing preceding the displayed relative map and the paragraph concerning its finite-Tor second argument; returned proof step 1",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-relative-product-input-domains",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied explicit geometric, coefficient-stage, projection-domain and witnessed-domain arguments. Reused existing generic preservation and origin statements; no new nodes. Kept finite witnesses of integral presentations separate from rational objects and completed non-torsion coefficients.",
+  "blueprint": "thm-sf-kunneth-relative: typing of all objects in the displayed relative composite; finite-Tor second-variable paragraph; proof (1)--(4) domain prerequisites.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Geometric finite-type permanence for the projections and structure maps, before any product operation. This is a generic prerequisite, not a replacement for a relative-product proof step."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Geometric separatedness of the projections under base change. This is a generic prerequisite, not a replacement for a relative-product proof step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Only separatedness of composites, applied to the structure maps. This is a generic prerequisite, not a replacement for a relative-product proof step."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Only the independent pullback, tensor and compact-support preservation clauses (i),(ii),(iv), as explicitly required by the relative-product typing paragraph. This is a generic prerequisite, not a replacement for a relative-product proof step."
+   },
+   {
+    "node": "lem-sf-package-coefficient-domain-realization",
+    "why": "Only preservation by pullback, tensor and compact support at higher coefficients and identification with specified coefficient-passage values. This is a generic prerequisite, not a replacement for a relative-product proof step."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Uniform finite-Tor membership of derived-complete integral constructible objects, rather than treating it as a definition. This is a generic prerequisite, not a replacement for a relative-product proof step."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Essential surjectivity on bounded constructible complexes supplies each finite etale-origin witness. This is a generic prerequisite, not a replacement for a relative-product proof step."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Only its bounded-below witnessed input domain for the composition component. This is a generic prerequisite, not a replacement for a relative-product proof step."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Only its witnessed finite input domain with a given compactification for the exchange component. This is a generic prerequisite, not a replacement for a relative-product proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-coef-integral-residue-tor"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-fc61e0c80",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-fc61e0c80 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 8 steps and every cited statement. There are no new nodes. The statement is byte-identical to live, where the item is still unsplit. The two added stmt_deps (def-weil-finite-tor-amplitude, def-exchange-projection) are notions the statement uses. Source: main-20261015 sk-thm-sf-kunneth-relative _section.md, the composite α^{-1}, PF_q^{-1}, Ex_!^{-1}, σ, PF_g^{-1}, σ and its finite-Tor typing sentence. The item types exactly those objects and both PF domains (v,P,L) and (g,L,Q), with u=π_X and v=π_Y as in the parent. Step 1: the two projections are the correct base changes; lem-sfb (1),(2) and pbc separated base change apply, and only clause (e) of proper-fp-permanence is used; Stacks 01KU/01T3/01T4 checked. Step 2: thm-sf-ctf-stability (i),(ii),(iv) are applied in a valid order and their hypotheses hold. Step 3: the package lemma states verbatim that pullback, tensor and both direct images restrict; lem-coef-integral-residue-tor gives D^b_c=D^b_ctf at O_E, and the field stages are equal by definition. Step 4: an instance of the def-exchange-projection typing, so elementary is correct. Steps 5 and 7: def-weil-finite-torsion-constructibility is the intrinsic category of lem-sf-proetale-constructible-origin(ii), so essential surjectivity gives each witness; it is applied separately at each O_E reduction (proetale 09AK/09AL checked). Step 6: H is in the 𝒟^+_et domain of comp-composition for (v,g); K is in the input domain of thm-cbc-finite-level-proetale for square (u,v,f,g), and B is qcqs anyway. Step 8: integral presentations and the common field are handled correctly. Edge cases checked: empty X or Y, g=id, n=1, Q̄ inputs over different fields. Duplicates: lem-pur-relative-product-geometric-factors (Q112, unsplit) overlaps the finite-stage geometry and witness clauses but is finite-coefficient only and asserts invertibility, so it is not a duplicate. Maintainer note: that node could later cite this item. Tool uses accepted: the geometric permanence lemmas, ctf-stability, the package lemma, residue-tor, constructible-origin, and the domains of comp-composition and cbc. Batch-5 finding: the citation of lem-sf-package-coefficient-domain-realization reaches lem-trf-counit-realization-substitution only through lem-fd-rational-coefficient-category-comparison, in the package lemma's common-stage descent step. That chain is generic coefficient-category coherence, not a step of the trace formula or of Poincaré duality, and the item uses only the preservation clauses. It is genuinely outside the assumed statements and is accepted. No SGA citations. proof_deps equals the union of uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RelativeProductInputDomains",
+  "declaration": "WeilConjectures.relative_product_input_domains",
+  "declarations": [
+   "WeilConjectures.RelativeProductInputs.space",
+   "WeilConjectures.RelativeProductInputs.left",
+   "WeilConjectures.RelativeProductInputs.right",
+   "WeilConjectures.RelativeProductInputs.objects",
+   "WeilConjectures.RelativeProductInputs.stageObjects",
+   "WeilConjectures.RelativeProductInputs.finiteWitness",
+   "WeilConjectures.RelativeProductInputs.integralWitness",
+   "WeilConjectures.RelativeProductInputs.presented",
+   "WeilConjectures.RelativeProductInputs.finiteObjects",
+   "WeilConjectures.RelativeProductInputs.commonPassage",
+   "WeilConjectures.relative_product_input_domains"
+  ],
+  "file": "lean/Sheaf/Paper/RelativeProductInputDomains.lean",
+  "statement": "theorem relative_product_input_domains (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (S : SixFunctorDatum D C E n hn) {X Y B : SixFunctorSpace D} [IsSeparated B.obj.hom] (f : X ⟶ B) (g : Y ⟶ B) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left] (cf : Compactification f.hom.left) (cg : Compactification g.hom.left) (cv : Compactification (right f g).hom.left) (ch : Compactification ((left f g) ≫ f).hom.left) : (IsSeparated X.obj.hom ∧ LocallyOfFiniteType X.obj.hom ∧ QuasiCompact X.obj.hom) ∧ (IsSeparated Y.obj.hom ∧ LocallyOfFiniteType Y.obj.hom ∧ QuasiCompact Y.obj.hom) ∧ (IsSeparated (space f g).obj.hom ∧ LocallyOfFiniteType (space f g).obj.hom ∧ QuasiCompact (space f g).obj.hom) ∧ (IsSeparated (left f g).hom.left ∧ LocallyOfFiniteType (left f g).hom.left ∧ QuasiCompact (left f g).hom.left) ∧ (IsSeparated (right f g).hom.left ∧ LocallyOfFiniteType (right f g).hom.left ∧ QuasiCompact (right f g).hom.left) ∧ (IsSeparated (((left f g) ≫ f).hom.left) ∧ LocallyOfFiniteType (((left f g) ≫ f).hom.left) ∧ QuasiCompact (((left f g) ≫ f).hom.left)) ∧ (∀ (K : proEtaleDerivedCategory X.obj.left (Padic.coefficientExtensionRing C.l E n)) (L : proEtaleDerivedCategory Y.obj.left (Padic.coefficientExtensionRing C.l E n)), finiteTorConstructible C.l E n hn X.obj.left K → finiteTorConstructible C.l E n hn Y.obj.left L → ∀ M ∈ finiteObjects D C E n hn f g cf cg cv ch K L, finiteTorConstructible C.l E n hn M.1.obj.left M.2 ∧ finiteWitness D C E n hn M.1 M.2) ∧ (∀ (K : sfIntegralConstructibleCategory C.l E X.obj.left) (L : sfIntegralConstructibleCategory C.l E Y.obj.left), finiteTorConstructibleIntegral C.l E X.obj.left K.obj → finiteTorConstructibleIntegral C.l E Y.obj.left L.obj → ∀ M ∈ stageObjects S.higher.integral S.higher.integralTensor f g cf cg cv ch K L, finiteTorConstructibleIntegral C.l E M.1.obj.left M.2.obj ∧ integralWitness D C E M.1 M.2) ∧ (∀ (K : sfRationalConstructibleCategory C.l E X.obj.left) (L : sfRationalConstructibleCategory C.l E Y.obj.left), ∃ (K₀ : sfIntegralConstructibleCategory C.l E X.obj.left) (L₀ : sfIntegralConstructibleCategory C.l E Y.obj.left), (∀ M ∈ stageObjects S.higher.integral S.higher.integralTensor f g cf cg cv ch K₀ L₀, finiteTorConstructibleIntegral C.l E M.1.obj.left M.2.obj ∧ integralWitness D C E M.1 M.2) ∧ presented (fun Z : SixFunctorSpace D ↦ sfRationalConstructibleLocalization C.l E Z.obj.left) (stageObjects S.higher.integral S.higher.integralTensor f g cf cg cv ch K₀ L₀) (stageObjects S.higher.rational S.higher.rationalTensor f g cf cg cv ch K L)) ∧ (∀ (K : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left) (L : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar Y.obj.left), ∃ (E₀ : Padic.FiniteCoefficientFields C.l C.Qbar) (K₀ : sfIntegralConstructibleCategory C.l (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀) X.obj.left) (L₀ : sfIntegralConstructibleCategory C.l (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀) Y.obj.left), (∀ M ∈ stageObjects (S.closure.coefficientStages E₀).integral (S.closure.coefficientStages E₀).integralTensor f g cf cg cv ch K₀ L₀, finiteTorConstructibleIntegral C.l (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀) M.1.obj.left M.2.obj ∧ integralWitness D C (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀) M.1 M.2) ∧ presented (A := fun Z : SixFunctorSpace D ↦ sfIntegralConstructibleCategory C.l (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀) Z.obj.left) (A' := fun Z : SixFunctorSpace D ↦ generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar Z.obj.left) (catA := fun Z ↦ inferInstanceAs (Category (sfIntegralConstructibleCategory C.l (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀) Z.obj.left))) (catB := fun Z ↦ inferInstanceAs (Category (generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar Z.obj.left))) (commonPassage D C E₀) (stageObjects (S.closure.coefficientStages E₀).integral (S.closure.coefficientStages E₀).integralTensor f g cf cg cv ch K₀ L₀) (stageObjects S.closure.commonStage S.closure.commonStageTensor f g cf cg cv ch K L))",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a0591724",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Statement matches the node at all four coefficient stages and adds no hypotheses. T is the real fibre product; the 6 geometric clauses are conclusions. All 22 object positions match the node. The finite stage uses ambient operations, which the datum identifies with its finite stage; finiteWitness is the input condition of the recorded exchange/composition theorems. The integral stage uses the completed operations with a witness at every reduction. The rational and Q̄_ℓ stages use one joint integral presentation, compared via the localization (same objects, no idempotents) and via rationalization plus the recorded inclusion. lean.statement is byte-identical to the file; the node file adds only the lean record; docstrings are present, no proof beyond sorry, no duplicate. Notes only: the second reading was done by the worker itself; the docstring says 'current blueprint'; the package-realization lemma, a proof dep only, has no Lean record."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261025T205556-L-3295175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

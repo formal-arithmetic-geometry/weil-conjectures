@@ -1,0 +1,218 @@
+{
+ "id": "lem-sf-evaluation-bidual-comparison-transport",
+ "kind": "statement",
+ "title": "Transport of a duality category with its evaluation and double-dual maps",
+ "statement": "Let $\\mathcal C,\\mathcal C'$ be locally small symmetric monoidal closed categories [def-nagata-category, def-sfb-monoidal-category], with internal Homs $H,H'$ and natural bijections $\\operatorname{Hom}(B,H(K,M))=\\operatorname{Hom}(B\\otimes K,M)$ and similarly in $\\mathcal C'$. Denote their counits by $\\mathrm{ev}$. Let $F:\\mathcal C\\to\\mathcal C'$ be strong symmetric monoidal, meaning its specified natural tensor and unit isomorphisms satisfy the associativity, unit and symmetry axioms. Fix objects $W\\in\\mathcal C$, $W'\\in\\mathcal C'$ and an isomorphism $w:FW\\xrightarrow{\\sim}W'$. Put $DK=H(K,W)$ and $D'P=H'(P,W')$, as contravariant functors. Define $\\delta_K:K\\to DDK$ and $\\delta'_P:P\\to D'D'P$ as the transposes of evaluation with its factors interchanged by the symmetry, as in [lem-weil-duality-pairing].\n\nLet $\\mathcal B\\subseteq\\mathcal C$ and $\\mathcal B'\\subseteq\\mathcal C'$ be full subcategories closed under isomorphisms. Assume $D$ preserves $\\mathcal B$, $F$ restricts to an equivalence $\\mathcal B\\simeq\\mathcal B'$, and for every $K\\in\\mathcal B$ the canonical comparison $\\beta_{K,W}:FH(K,W)\\to H'(FK,FW)$, defined by transposing pulled-forward evaluation, is invertible. Put $c_K=H'(1,w)\\circ\\beta_{K,W}:FDK\\xrightarrow{\\sim}D'FK$.\n\nThen $D'$ preserves $\\mathcal B'$, $c$ is a natural comparison of the restricted contravariant functors, and the following equations hold under the monoidal identifications:\n$$\\mathrm{ev}'_{FK}\\circ(c_K\\otimes1)=w\\circ F(\\mathrm{ev}_K),\\qquad\n\\delta'_{FK}=D'(c_K^{-1})\\circ c_{DK}\\circ F(\\delta_K).$$\nIf $D:\\mathcal B^{\\mathrm{op}}\\to\\mathcal B$ is an anti-equivalence and all $\\delta_K$ on $\\mathcal B$ are isomorphisms, then $D':(\\mathcal B')^{\\mathrm{op}}\\to\\mathcal B'$ is an anti-equivalence and all its specified $\\delta'_P$ are isomorphisms. These conclusions use the displayed evaluation-transpose comparisons and specified double-dual maps; no invertibility or duality on the ambient categories is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+  "place": "Proof, final paragraph: evaluation comparisons identify their transposes and transport duality along the constructible equivalence"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sfb-monoidal-category",
+  "lem-weil-duality-pairing"
+ ],
+ "proof": [
+  {
+   "text": "Use MonoidalClosed.uncurry_injective and uncurry_natural_left/right from Mathlib. The existing ihomComparison_ev supplies evaluation compatibility of the canonical comparison, and map_pre_app_comp_ihomComparison_app supplies naturality in the first variable. Postcompose with ihom.map w; pre_comm_ihom_map gives the coefficient naturality square.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+    "place": "Proof, final paragraph: evaluation comparisons identify their transposes and transport duality along the constructible equivalence"
+   }
+  },
+  {
+   "text": "For each P in B′ choose a preimage K under the restricted equivalence E. Its image FK is isomorphic to P. Compose evaluationDualComparison at K with ihomIsoOfIsoLeft of FK ≅ P. Since DK is in B, FDK is in B′; repleteness puts D′P in B′. NatIso.ofComponents and ObjectProperty.isoMk lift the canonical comparisons, and comparison_natural proves naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+    "place": "Proof, final paragraph: evaluation comparisons identify their transposes and transport duality along the constructible equivalence"
+   }
+  },
+  {
+   "text": "The displayed evaluation identity follows from comparison_ev by braiding naturality and Functor.LaxBraided.braided. For the bidual identity first prove F(δK) followed by c_DK equals δ′_FK followed by pre(c_K.hom). Uncurry both sides: comparison_ev, tensorator naturality, uncurry_toIhomIhom and preservation of the braiding identify their evaluations. Postcompose with pre(c_K.inv); pre_map and the inverse equation cancel.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+    "place": "Proof, final paragraph: evaluation comparisons identify their transposes and transport duality along the constructible equivalence"
+   }
+  },
+  {
+   "text": "If δK is invertible on B, comparison_bidual expresses δ′_FK as a composite of isomorphisms. For arbitrary P in B′ choose FK ≅ P and use toIhomIhom_naturality to express δ′_P as its conjugate by that isomorphism and its double internal-Hom image. Finally ObjectProperty.liftDualEquivalence applied to toIhomIhomNatTrans constructs the target anti-equivalence. The assumed source anti-equivalence is not needed for this stronger elementary inference.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+    "place": "Proof, final paragraph: evaluation comparisons identify their transposes and transport duality along the constructible equivalence"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+  "place": "Proof, final paragraph: evaluation comparisons identify their transposes and transport duality along the constructible equivalence; U1 Lean proof using existing closed-category APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strong symmetric monoidal functor with evaluation compatible internal Hom isomorphisms preserves the canonical double dual morphism for a chosen dualizing object",
+   "results": "8 hits; CategoryTheory.frobeniusMorphism_mate; CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight; CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation; CategoryTheory.coev_expComparison; CategoryTheory.tensorRightHomEquiv; CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation; CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft. Rigid-object and ordinary linear-dual results do not state evaluation-normalized duality relative to an arbitrary W on full subcategories, with the specified double-dual equation and anti-equivalence transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport biduality under a symmetric closed monoidal functor using comparisons for K and its dual with formula D of inverse c composed c dual composed F delta",
+   "results": "8 hits; CategoryTheory.hasRightDualOfEquivalence; CategoryTheory.hasLeftDualOfEquivalence; CategoryTheory.rigidCategoryOfEquivalence; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso; CategoryTheory.ExactPairing.ofFaithful; CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso; CategoryTheory.Monoidal.functorHasRightDual; CategoryTheory.frobeniusMorphism_mate. Rigid-object and ordinary linear-dual results do not state evaluation-normalized duality relative to an arbitrary W on full subcategories, with the specified double-dual equation and anti-equivalence transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, \"double\"",
+   "results": "0 hits; . Rigid-object and ordinary linear-dual results do not state evaluation-normalized duality relative to an arbitrary W on full subcategories, with the specified double-dual equation and anti-equivalence transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]idual|doubleDual|double[Dd]ual|ihomComparison",
+   "results": "16 hits; Mathlib/Analysis/Normed/Lp/lpHolder.lean; Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean; Mathlib/Analysis/Normed/Module/DoubleDual.lean; Mathlib/Analysis/Normed/Module/DoubleDual.lean; Mathlib/Analysis/Normed/Module/DoubleDual.lean; Mathlib/Analysis/Normed/Module/DoubleDual.lean; Mathlib/Analysis/Normed/Module/DoubleDual.lean; Mathlib/Analysis/Fourier/FiniteAbelian/PontryaginDuality.lean. Rigid-object and ordinary linear-dual results do not state evaluation-normalized duality relative to an arbitrary W on full subcategories, with the specified double-dual equation and anti-equivalence transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation compatible Hom comparison transports double dual maps under strong symmetric monoidal functors",
+   "results": "8 hits; Module.Dual.eval; Module.Dual.eval_naturality; CategoryTheory.tensorRightHomEquiv_whiskerLeft_comp_evaluation; Module.Dual.eval_comp_comp_evalEquiv_eq; CategoryTheory.ExactPairing.evaluation; LinearEquiv.trans_dualMap_symm_flip; CategoryTheory.tensorRightHomEquiv_tensor; CategoryTheory.tensorRightHomEquiv. Rigid-object and ordinary linear-dual results do not state evaluation-normalized duality relative to an arbitrary W on full subcategories, with the specified double-dual equation and anti-equivalence transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport an anti-equivalence on a full subcategory through a strong symmetric monoidal functor with internal Hom comparison and preserve evaluation and biduality maps",
+   "results": "8 hits; CategoryTheory.MonoidalClosed.ofEquiv; CategoryTheory.Equivalence.congrFullSubcategory; CategoryTheory.Equivalence.congrFullSubcategory_functor; CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply; CategoryTheory.Equivalence.fullyFaithfulInverse; CategoryTheory.rigidCategoryOfEquivalence; CategoryTheory.Equivalence.congrFullSubcategory_counitIso; CategoryTheory.Equivalence.fullyFaithfulFunctor. Rigid-object and ordinary linear-dual results do not state evaluation-normalized duality relative to an arbitrary W on full subcategories, with the specified double-dual equation and anti-equivalence transport.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.ihomComparison",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.LaxMonoidal.ihomComparison'; no result states transport for arbitrary W on replete full subcategories with the specified double-dual equation. Read Closed/Basic.lean:145–190 and Closed/Functor.lean:78–120; the latter is cartesian-closed, so does not state this general symmetric-monoidal item.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|toIhomIhom|bidual",
+   "results": "0 hits: ; zero literal hits are not absence of the differently named expComparison/curry interface, inspected by the subsequent grep; no result states transport for arbitrary W on replete full subcategories with the specified double-dual equation. Read Closed/Basic.lean:145–190 and Closed/Functor.lean:78–120; the latter is cartesian-closed, so does not state this general symmetric-monoidal item.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong symmetric monoidal functors preserve evaluation and the canonical double dual map relative to a dualizing object and transport duality equivalences",
+   "results": "8 hits: CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.symmetricCategoryOfFullyFaithful, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Monoidal.functorHasRightDual, CategoryTheory.Monoidal.rigidFunctorCategory, CategoryTheory.ExactPairing.evaluation, CategoryTheory.Functor.Monoidal.mk, CategoryTheory.Monoidal.Transported.instSymmetricCategory; no result states transport for arbitrary W on replete full subcategories with the specified double-dual equation. Read Closed/Basic.lean:145–190 and Closed/Functor.lean:78–120; the latter is cartesian-closed, so does not state this general symmetric-monoidal item.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong symmetric monoidal functor whose internal Hom comparisons at a dualizing object are isomorphisms transports evaluation, the canonical double dual morphism, and an anti-equivalence on full subcategories",
+   "results": "8 hits: CategoryTheory.hasRightDualOfEquivalence, CategoryTheory.hasLeftDualOfEquivalence, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.rigidCategoryOfEquivalence, CategoryTheory.ExactPairing.ofFullyFaithful, CategoryTheory.exactPairingOfFaithful; no result states transport for arbitrary W on replete full subcategories with the specified double-dual equation. Read Closed/Basic.lean:145–190 and Closed/Functor.lean:78–120; the latter is cartesian-closed, so does not state this general symmetric-monoidal item.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "grep",
+   "query": "curry|evaluation|expComparison",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; no result states transport for arbitrary W on replete full subcategories with the specified double-dual equation. Read Closed/Basic.lean:145–190 and Closed/Functor.lean:78–120; the latter is cartesian-closed, so does not state this general symmetric-monoidal item.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.curry, CategoryTheory.MonoidalClosed.curry_injective, CategoryTheory.MonoidalClosed.uncurry_curry, CategoryTheory.MonoidalClosed.curry_uncurry, CategoryTheory.MonoidalClosed.id_eq, CategoryTheory.MonoidalClosed.curry_eq_iff, CategoryTheory.MonoidalClosed.eq_curry_iff, CategoryTheory.MonoidalClosed.comp_eq; no result states transport for arbitrary W on replete full subcategories with the specified double-dual equation. Read Closed/Basic.lean:145–190 and Closed/Functor.lean:78–120; the latter is cartesian-closed, so does not state this general symmetric-monoidal item.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of evaluation after the symmetry is compatible with a monoidal functor and change of dualizing object; transport a contravariant equivalence on a replete full subcategory",
+   "results": "8 hits: CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorRightHomEquiv, CategoryTheory.coev_expComparison, CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.tensorRightHomEquiv_tensor, CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation; no result states transport for arbitrary W on replete full subcategories with the specified double-dual equation. Read Closed/Basic.lean:145–190 and Closed/Functor.lean:78–120; the latter is cartesian-closed, so does not state this general symmetric-monoidal item.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-finite-duality-site-comparison",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, final paragraph: evaluation comparisons identify their transposes and transport duality along the constructible equivalence",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-evaluation-bidual-comparison-transport",
+  "worker": "stage1",
+  "summary": "Proved the formal transport directly from the assumed natural tensor-Hom bijections. Nine explicit elementary steps check evaluation, comparison naturality, closure of the replete subcategory, equality of the two untransposes, naturality of the specified double-dual map, its invertibility, and an explicit contravariant quasi-inverse. No new lemma duplicates a clause of the item; no ambient equivalence, rigidness or biduality is assumed. Statement unchanged.",
+  "blueprint": "Realizes the final paragraph of lem-weil-finite-duality-site-comparison: evaluation-defined Hom comparisons identify the transpose double-dual map, and duality transports along the constructible equivalence. The current main-20261015 version retains precisely these clauses in its statement, but has no proof; the original master proof supplies the sentence being expanded. All geometric site-comparison inputs stay with the parent."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-b2a4cbcff",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-b2a4cbcff (reviewer sub-agent of L); spot-checked: I read the whole item and recomputed all nine steps by hand; I made no fixes and there are no tool_uses. The delivery has zero new nodes. It is not a re-split order: there is no repair note, the item is not in the dropped list, and it is still unsplit in live and side-live. Statement: the types of beta, c_K and Equation 2 are correct; the chain FK→FDDK→D'FDK→D'D'FK uses c_K^{-1} after the contravariant D', and only c_K needs to be invertible. Steps: (1) U = ev∘(t⊗1) is the inverse bijection by Yoneda; (2) gives Equation 1. (3) The naturality of c reduces to U(H(a,1)) on both sides. (5) and (6) are the two untransposes: (5) uses step 2 at DK, naturality of mu, the transpose identity for delta and the symmetry axiom of F; (6) uses the naturality rule with a=c_K and naturality of tau. They agree, which gives Equation 2. (7) delta' is natural on all of C'. (8) delta' is invertible on B' by conjugation. (9) The quasi-inverse is T^op. Each step is a formal manipulation of a few lines, so elementary=true is justified. Source: the master lem-weil-finite-duality-site-comparison final paragraph ('Hom comparisons are defined by evaluation … double-dual map'). The live parent's step 6 supplies every hypothesis: beta only at K and D_eK in B, D preserving B, and F=nu^* restricting to an equivalence on D^b_ctf; no ambient equivalence is needed. Edge cases checked: F=id with w=id; a nontrivial w; empty B; W=0. Duplicate search: lem-coef-finite-bidual-transpose (unsplit) is only the scalar-extension special case of steps 5–6 and does not apply to nu^*; it could later cite this item. lem-coef-closed-adjunction-naturality needs an extra adjunction, and lem-trf-closed-evaluation-naturality is a different statement; neither is a duplicate. Advisory: the stmt_dep lem-weil-duality-pairing only fixes the convention for delta and was inherited from Q02."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EvaluationBidualComparisonTransport",
+  "declaration": "CategoryTheory.MonoidalClosed.evaluationBidualComparisonTransport",
+  "declarations": [
+   "CategoryTheory.MonoidalClosed.evaluationDualComparison",
+   "CategoryTheory.MonoidalClosed.evaluationBidualComparisonTransport"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/EvaluationBidualComparisonTransport.lean",
+  "statement": "theorem evaluationBidualComparisonTransport [SymmetricCategory C] [SymmetricCategory C'] (F : C ⥤ C') [F.Braided] {W : C} {W' : C'} (w : F.obj W ≅ W') (B : ObjectProperty C) (B' : ObjectProperty C') [B.IsClosedUnderIsomorphisms] [B'.IsClosedUnderIsomorphisms] (hD : ∀ K : C, B K → B ((ihom K).obj W)) (hF : ∀ K : C, B K → B' (F.obj K)) [(B'.lift (B.ι ⋙ F) (fun K ↦ hF K.obj K.property)).IsEquivalence] (hβ : ∀ (K : C), B K → IsIso ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app W)) : ∃ hD' : ∀ P : C', B' P → B' ((ihom P).obj W'), (∃ c : B.liftDual (internalHom.flip.obj W) hD ⋙ B'.lift (B.ι ⋙ F) (fun K ↦ hF K.obj K.property) ≅ (B'.lift (B.ι ⋙ F) (fun K ↦ hF K.obj K.property)).op ⋙ B'.liftDual (internalHom.flip.obj W') hD', ∀ K : B.FullSubcategoryᵒᵖ, (c.hom.app K).hom = (evaluationDualComparison F w K.unop.obj (hβ K.unop.obj K.unop.property)).hom) ∧ (∀ (K : C) (hK : B K), ((evaluationDualComparison F w K (hβ K hK)).hom ⊗ₘ 𝟙 (F.obj K)) ≫ (β_ ((ihom (F.obj K)).obj W') (F.obj K)).hom ≫ (ihom.ev (F.obj K)).app W' = Functor.LaxMonoidal.μ F ((ihom K).obj W) K ≫ F.map ((β_ ((ihom K).obj W) K).hom ≫ (ihom.ev K).app W) ≫ w.hom ∧ toIhomIhom W' (F.obj K) = F.map (toIhomIhom W K) ≫ (evaluationDualComparison F w ((ihom K).obj W) (hβ ((ihom K).obj W) (hD K hK))).hom ≫ (pre (evaluationDualComparison F w K (hβ K hK)).inv).app W') ∧ ((B.liftDual (internalHom.flip.obj W) hD).IsEquivalence → (∀ (K : C), B K → IsIso (toIhomIhom W K)) → (B'.liftDual (internalHom.flip.obj W') hD').IsEquivalence ∧ ∀ (P : C'), B' P → IsIso (toIhomIhom W' P))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b44b33bb",
+  "group": "NI",
+  "result": "pass",
+  "note": "Matched every clause to the node. F strong symmetric monoidal = [F.Braided]; beta = existing ihomComparison (mate of the tensorator), invertible only on B, and the c at DK uses hβ via hD; delta = upstream toIhomIhom, whose left-tensor uncurry beta≫ev equals the node's right-tensor U(delta)=ev∘tau; c = asIso beta ≪≫ ihom.mapIso w, a real construction; naturality is an iso of the liftDual/lift functors with components fixed to c_K; equation 1 has mu restored and follows from ihomComparison_ev and the braided axiom; equation 2 is F delta ≫ c_DK ≫ (pre c_K.inv).app W', types checked; the anti-equivalence clause keeps both hypotheses and both conclusions. No ambient equivalence, extra structure or universe restriction. Docstrings carry the source place, blueprint tag and 9 steps; proof is only sorry; lean.statement matches the file verbatim; node diff vs side-live touches only lean; report has both sections. No duplicate: EvaluationTransposeCoherence and ClosedEvaluationDualCriterion state other results, and the dep lem-weil-duality-pairing takes delta as input. Edge cases checked: empty B, F=id/w=id, arbitrary w, non-invertible delta outside B. Advisory: the Sheaf.Paper.DualityPairing public import only serves the stmt_dep convention. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261022T145653-L-2039775",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

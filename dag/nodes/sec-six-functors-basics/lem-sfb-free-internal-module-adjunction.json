@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-free-internal-module-adjunction",
+ "kind": "statement",
+ "title": "Free left internal modules over an arbitrary monoid object",
+ "statement": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda)$ be a monoidal category [def-sfb-monoidal-category] and let $R$ be a monoid object with multiplication $\\mu$ and unit $\\eta$ [sk-def-sfb-ring-object]. Let $U_R:\\operatorname{Mod}_R(\\mathcal C)\\to\\mathcal C$ forget the left module structure [sk-def-sfb-module-objects]. For $X\\in\\mathcal C$, the object $R\\otimes X$ has a left $R$-action $(\\mu\\otimes\\mathrm{id}_X)\\circ\\alpha_{R,R,X}^{-1}$. With maps $\\mathrm{id}_R\\otimes h$ this gives a functor $F_R:\\mathcal C\\to\\operatorname{Mod}_R(\\mathcal C)$ and an adjunction $F_R\\dashv U_R$. Explicitly, for each left module $(M,\\gamma_M)$ there are natural inverse bijections\n$$\\operatorname{Hom}_R(F_RX,M)\\cong\\operatorname{Hom}_{\\mathcal C}(X,U_RM),\\qquad\nf\\longmapsto U_R(f)\\circ(\\eta\\otimes\\mathrm{id}_X)\\circ\\lambda_X^{-1},\\qquad\n g\\longmapsto\\gamma_M\\circ(\\mathrm{id}_R\\otimes g).$$\nNo braiding, additivity, commutativity of $R$, or existence of any limits or colimits is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/lem-sfb-modobj-grothendieck.proof.md",
+  "place": "Final paragraph, the free module and the displayed Hom bijection. General project implementation: CategoryTheory.Mod.freeModObj, free and freeForgetAdjunction, lean/WeilConjectures/CategoryTheory/Monoidal/Mod/Abelian.lean:44-111."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "freeForgetAdjunction|freeModObj|def free|Adjunction",
+   "results": "0 hits:  (searched CategoryTheory/Monoidal/Mod.lean)",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary ModuleCat, presheaf modules and Monad.adj do not state the internal-module comparison for an arbitrary monoid in an arbitrary monoidal category. The complete free internal module adjunction is in the project source, not Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Free internal module on an object of a monoidal category left adjoint to module objects forgetful functor",
+   "results": "8 hits: ModuleCat.adj, MonCat.adj, AddMonCat.adj, CategoryTheory.Monad.adj, PresheafOfModules.freeAdjunction, ModuleCat.instIsRightAdjointForget, CategoryTheory.Mod_.forget, TopModuleCat.instIsLeftAdjointTopCatFree",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary ModuleCat, presheaf modules and Monad.adj do not state the internal-module comparison for an arbitrary monoid in an arbitrary monoidal category. The complete free internal module adjunction is in the project source, not Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, CategoryTheory.Adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary ModuleCat, presheaf modules and Monad.adj do not state the internal-module comparison for an arbitrary monoid in an arbitrary monoidal category. The complete free internal module adjunction is in the project source, not Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The free module object adjunction for left modules over a monoid object in a monoidal category without a braiding",
+   "results": "8 hits: ModuleCat.adj, ModuleCat.adj_homEquiv, ModuleCat.FreeMonoidal.εIso, ModuleCat.free_η_freeMk, ModuleCat.free_ε_one, Rep.leftRegularTensorTrivialIsoFree, ModuleCat.free_δ_freeMk, ModuleCat.instIsRightAdjointForget",
+   "date": "2026-10-25",
+   "verdict": "no match: ordinary ModuleCat, presheaf modules and Monad.adj do not state the internal-module comparison for an arbitrary monoid in an arbitrary monoidal category. The complete free internal module adjunction is in the project source, not Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-modobj-grothendieck-any-ring",
+  "date": "2026-10-25",
+  "group": "NG"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-formal-closed-support",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-formal-closed-support",
+   "place": "Adjunction paragraph: K-injective existence via a generator for module objects; free-module-on-a-generator argument, final paragraph of lem-sfb-modobj-grothendieck.proof.md.",
+   "via": [
+    "lem-sfb-sheaf-modobj-grothendieck-any-ring",
+    "lem-route-formal-closed-support-adjunction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "branch": "slopmaster2",
+  "declarations": [
+   "CategoryTheory.Mod.freeModObj",
+   "CategoryTheory.Mod.free",
+   "CategoryTheory.Mod.freeDesc",
+   "CategoryTheory.Mod.freeForgetAdjunction"
+  ],
+  "note": "attached by the lead's tool attach.py 2026-10-25 08:26 UTC for group NH, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_liveb2378f05.jsonl.gz: Assuming only C : Type u, Category.{v} C, MonoidalCategory C, A : C and MonObj A, freeModObj"
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.freeModObj",
+     "module": "WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian",
+     "lines": [
+      44,
+      54
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Mod.free",
+     "module": "WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian",
+     "lines": [
+      56,
+      69
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Mod.freeDesc",
+     "module": "WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian",
+     "lines": [
+      71,
+      78
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Mod.freeForgetAdjunction",
+     "module": "WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian",
+     "lines": [
+      90,
+      113
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
+}

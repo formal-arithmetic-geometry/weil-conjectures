@@ -1,0 +1,337 @@
+{
+ "id": "lem-sfb-flat-ring-diagram-tensor-cohomology",
+ "kind": "statement",
+ "title": "Derived tensor cohomology under a flat change of ring diagram",
+ "statement": "Let $R,A,B,R_1,A_1,B_1$ be commutative rings with compatible homomorphisms $R\\to A$, $R\\to B$, $R\\to R_1$, $A\\to A_1$, $B\\to B_1$, $R_1\\to A_1$, and $R_1\\to B_1$. Put $D=A\\otimes_R B$ and $D_1=A_1\\otimes_{R_1}B_1$, with their induced homomorphism $D\\to D_1$ [def-weil-pbc-module-tensor-product, def-weil-module-base-change]. Suppose $R_1$ is flat over $R$, $A_1$ is flat over $A\\otimes_R R_1$, and $B_1$ is flat over $R_1\\otimes_R B$ [def-weil-pbc-flat-ring-map]. For any $M\\in D(A)$, the unbounded derived category of ordinary modules [def-weil-abstract-derived-category], use K-flat derived tensor products [def-pc-module-kflat-complex]. The canonical scalar-extension map is an isomorphism of $D_1$-modules, for every $i\\in\\mathbf Z$:\n$$H^i(M\\otimes_R^{\\mathbf L}B)\\otimes_D D_1\\ \\xrightarrow{\\ \\sim\\ }\\ H^i((M\\otimes_A^{\\mathbf L}A_1)\\otimes_{R_1}^{\\mathbf L}B_1).$$\nOn both cohomology groups the two factor-ring actions commute; these are the displayed tensor-ring module structures. The map is induced by the units of scalar extension on the two factors and extension of the base ring, followed by the $D_1$-action on cohomology. It is natural in $M$ and compatible with the augmentation maps of K-flat and free resolutions used to compute the derived tensor products. No boundedness or flatness of $A$ or $B$ over $R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJD (lemma-lemma-tor-independent-flat-compare), with the hypotheses of Tag 08HW (lemma-tor-independent-flat); cohomology module actions and canonical comparison as in its proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_0=A\\otimes_RR_1$, $B_0=R_1\\otimes_RB$ and $D_0=A_1\\otimes_{R_1}B_0$. The map $A\\to A_0$ is flat: for an exact sequence of $A$-modules, its tensor with $A_0$ identifies with its tensor over $R$ with $R_1$, which is exact by [lem-weil-pbc-flat-tensor-exact]. The assumed flatness of $A_0\\to A_1$ and [lem-pc-module-flat-transitive] therefore give flatness of $A\\to A_1$. Notice the canonical ring identifications $D_0=A_1\\otimes_RB=D\\otimes_AA_1$ and $D_1=D_0\\otimes_{B_0}B_1$; the maps send the factor generators to the indicated factor generators. No flatness of $A$ or $B$ over $R$ has entered.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pc-module-flat-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJD (lemma-lemma-tor-independent-flat-compare), proof; hypotheses of Tag 08HW (lemma-tor-independent-flat)."
+   }
+  },
+  {
+   "text": "Choose a complex representing $M$ and K-flat resolutions $P\\to M$ over $A$ and $F\\to B[0]$ over $R$, with flat terms, by [lem-pc-source-module-kflat-resolution]. Set $P_1=P\\otimes_AA_1$ and $F_1=F\\otimes_RR_1$. Both are K-flat over their respective new rings by [lem-pc-kflat-extension-of-scalars]. Since $R_1$ is flat over $R$, [lem-pc-flat-scalar-extension-homology-adjunct], with its $A=E=R$, $D=R_1$ and $\\varphi$ the unit chain map, gives isomorphisms $R_1\\otimes_RH^i(F)\\cong H^i(F_1)$ and $R_1\\otimes_RH^i(B[0])\\cong H^i(B_0[0])$, both $r\\otimes[z]\\mapsto[z\\otimes r]$; this formula commutes with the augmentation, so $F_1\\to B_0[0]$ is a quasi-isomorphism. The K-flat scalar-extension counit [lem-pc-kflat-scalar-extension-counit] identifies $P_1$ with $X=M\\otimes_A^{\\mathbf L}A_1$ in $D(A_1)$. These statements hold for unbounded $P,F$.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-flat-scalar-extension-homology-adjunct",
+    "lem-pc-kflat-scalar-extension-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJD (lemma-lemma-tor-independent-flat-compare), proof; hypotheses of Tag 08HW (lemma-tor-independent-flat)."
+   }
+  },
+  {
+   "text": "First compute with $B_0$. By [lem-pc-balanced-derived-tensor-model], $C=\\operatorname{Tot}(P\\otimes_RF)$ represents $M\\otimes_R^{\\mathbf L}B$ and $C_0=\\operatorname{Tot}(P_1\\otimes_{R_1}F_1)$ represents $X\\otimes_{R_1}^{\\mathbf L}B_0$, with the commuting factor actions on cohomology. There is a chain isomorphism $\\theta:C_0\\to C\\otimes_AA_1$ sending $(p\\otimes a)\\otimes(f\\otimes r)$ to $(p\\otimes f)\\otimes ar$, with inverse $(p\\otimes f)\\otimes a\\mapsto(p\\otimes a)\\otimes(f\\otimes1)$. Balancing gives well-defined inverse maps; on bidegree $(j,k)$ both differentials are $d_P\\otimes1+(-1)^j1\\otimes d_F$, so they commute with the maps. Degreewise these formulas extend to the direct sums defining the total complexes. They commute with the $A_1$ action. They also commute with the endomorphisms induced by $b\\in B$ on the resolved factor, by functoriality in that factor [lem-pc-derived-tensor-second-factor-functor]; together with the $R_1$ action this gives $B_0$-linearity on cohomology. Thus the cohomology identification is $D_0$-linear.",
+   "uses": [
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJD (lemma-lemma-tor-independent-flat-compare), proof; hypotheses of Tag 08HW (lemma-tor-independent-flat)."
+   }
+  },
+  {
+   "text": "Flatness of $A\\to A_1$ allows [lem-pc-flat-scalar-extension-homology-adjunct], with its $A=E=A$, $D=A_1$, $Q=C$ (using $A\\otimes_AC=C$) and $\\varphi$ the unit chain map, to identify $H^i(C)\\otimes_AA_1$ with $H^i(C\\otimes_AA_1)$, with map $[z]\\otimes a\\mapsto[z\\otimes a]$. Put $T_i=H^i(M\\otimes_R^{\\mathbf L}B)$. The balancing isomorphism $T_i\\otimes_DD_0\\cong T_i\\otimes_AA_1$ sends $t\\otimes(a\\otimes b)$, writing $D_0=A_1\\otimes_RB$, to $bt\\otimes a$; its inverse sends $t\\otimes a$ to $t\\otimes(a\\otimes1)$. Combining this with $H^i(\\theta)^{-1}$ gives $\\phi_0:T_i\\otimes_DD_0\\xrightarrow{\\sim}H^i(X\\otimes_{R_1}^{\\mathbf L}B_0)$. The flat cohomology identification is natural in all chain endomorphisms; hence it respects the $B$ action as well as $A_1$, and $\\phi_0$ is $D_0$-linear. Its underlying map before adjoining $D_0$ sends a class represented by $p\\otimes f$ to the class of $(p\\otimes1)\\otimes(f\\otimes1)$.",
+   "uses": [
+    "lem-pc-flat-scalar-extension-homology-adjunct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJD (lemma-lemma-tor-independent-flat-compare), proof; hypotheses of Tag 08HW (lemma-tor-independent-flat)."
+   }
+  },
+  {
+   "text": "Now use the tower $R_1\\to B_0\\to B_1$. Restrict $X$ from $A_1$ to $R_1$ and choose a K-flat representative $K$ of it over $R_1$ with flat terms [lem-pc-source-module-kflat-resolution]. The ordinary-ring case of [lem-sfb-successive-derived-quotient-normalization] gives the canonical natural isomorphism $(X\\otimes_{R_1}^{\\mathbf L}B_0)\\otimes_{B_0}^{\\mathbf L}B_1\\cong X\\otimes_{R_1}^{\\mathbf L}B_1$, represented by $(K\\otimes_{R_1}B_0)\\otimes_{B_0}B_1\\to K\\otimes_{R_1}B_1$, $(x\\otimes s)\\otimes t\\mapsto x\\otimes st$. Here $K\\otimes_{R_1}B_0$ is K-flat over $B_0$ [lem-pc-kflat-extension-of-scalars], so by [lem-pc-kflat-scalar-extension-counit] it represents $X\\otimes_{R_1}^{\\mathbf L}B_0$ and its termwise extension represents the derived extension to $B_1$. Since $B_1$ is flat over $B_0$, [lem-pc-flat-scalar-extension-homology-adjunct], with its $A=R_1$, $E=B_0$, $D=B_1$, $Q=K$, identifies $H^i(K\\otimes_{R_1}B_1)$ with $B_1\\otimes_{B_0}H^i(K\\otimes_{R_1}B_0)$ by $b\\otimes[z]\\mapsto b[z\\otimes1]$, the canonical scalar unit. These identifications respect the $A_1$ action: multiplication by any $a\\in A_1$ is an $R_1$-linear endomorphism of $X$, and naturality of both identifications commutes with its induced maps. They are also $B_1$-linear, so are $D_1$-linear for the commuting $A_1,B_1$ actions. Neither $B_0$ nor $B_1$ needs to be flat over $R_1$.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-pc-kflat-scalar-extension-counit",
+    "lem-pc-flat-scalar-extension-homology-adjunct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJD (lemma-lemma-tor-independent-flat-compare), proof; hypotheses of Tag 08HW (lemma-tor-independent-flat)."
+   }
+  },
+  {
+   "text": "Tensor $\\phi_0$ over $B_0$ with $B_1$ and use step 5. For any $D$-module $T$, the ring identification $D_1=D_0\\otimes_{B_0}B_1$ gives the elementary balancing isomorphism $(T\\otimes_DD_0)\\otimes_{B_0}B_1\\cong T\\otimes_DD_1$, $(t\\otimes d_0)\\otimes b_1\\mapsto t\\otimes(d_0\\otimes b_1)$, whose inverse takes $t\\otimes(d_0\\otimes b_1)$ to $(t\\otimes d_0)\\otimes b_1$. Apply it to $T_i$. The resulting $D_1$-linear isomorphism is exactly the displayed source and target of the item. This only tensors an existing isomorphism and rebrackets balanced tensor products.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJD (lemma-lemma-tor-independent-flat-compare), proof; hypotheses of Tag 08HW (lemma-tor-independent-flat)."
+   }
+  },
+  {
+   "text": "Finally identify the map, not just the modules. Before extending coefficients, step 4 uses precisely the chain units $p\\mapsto p\\otimes1$ and $f\\mapsto f\\otimes1$. Since $P$ and $F$ are K-flat with flat terms, the unit normalization (1) of [lem-pur-sheaf-ring-derived-coefficient-adjunction] for $A\\to A_1$ and $R\\to R_1$, on the one-object site of [lem-weil-pbc-singleton-site-module-comparison], says these are the derived scalar units on the chosen models. Step 5 uses the tower isomorphism whose unit identity in [lem-sfb-successive-derived-quotient-normalization] identifies the two successive units with the unit for $R_1\\to B_1$. Thus the composite before adjoining $D_1$ is the comparison induced by the ring diagram. Its $D_1$-linear extension is uniquely determined by $t\\otimes d\\mapsto d\\,\\gamma_i(t)$, so it is the map specified in the statement. The balanced-model identifications [lem-pc-balanced-derived-tensor-model] are canonical under changing resolutions and natural in $M$; [lem-pc-derived-tensor-second-factor-functor] supplies the same naturality for the resolved coefficient. The explicit $\\theta$ formula commutes with maps of augmented complexes on either factor. Hence the comparison commutes with the augmentations and changes of the K-flat resolutions, including bounded-above free resolutions, which are K-flat by [lem-pc-module-bounded-flat-kflat] (free modules are flat), and is natural in $M$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-singleton-site-module-comparison",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pc-balanced-derived-tensor-model",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0DJD (lemma-lemma-tor-independent-flat-compare), proof; hypotheses of Tag 08HW (lemma-tor-independent-flat)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-module-flat-transitive",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-flat-scalar-extension-homology-adjunct",
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0DJD (lemma-lemma-tor-independent-flat-compare), proof; hypotheses of Tag 08HW (lemma-tor-independent-flat)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat change of a diagram of rings compares derived tensor product cohomology after extension of scalars",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (TensorProduct R S M)],\\n  Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Module.Flat.iff_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S],\\n  Module.Flat S (TensorProduct R S M) ↔ Module.Flat R M\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ a faithfully flat $ R $-algebra. Then an $ R $-module $ M $ is flat over $ R $ if and only if the tensor product $ S \\\\otimes_R M $ is flat as an $ S\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: underived tensor equivalences, exact flat tensor and group homology do not provide this arbitrary ring-diagram derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If R prime is flat over R and A prime and B prime are flat over their base changes then derived tensor cohomology base change is an isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.AlgebraTensorModule.cancelBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": M ⊗[A] (A ⊗[R] N) ≃ₗ[B] M ⊗[R] N\", \"doc\": \"Let $R, A, B$ be commutative semirings, and let $A$ and $B$ be $R$-algebras. Let $M$ be an $A$-module and a $B$-module, such that the actions of $A$ and $B$ commute. Let $N$ be an $R$-module. Then the\"}\n  {\"name\": \"TensorProduct.AlgebraTensorModule.distribBaseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": A ⊗[R] (M ⊗[R] N) ≃ₗ[A] (A ⊗[R] M) ⊗[A] (A ⊗[R] N)\", \"doc\": \"Let $R$ and $A$ be commutative semirings, let $A$ be an $R$-algebra, and let $M$ and $N$ be $R$-modules. There is a canonical $A$-linear isomorphism between the extension of scalars of the tensor prod\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] : B ⊗[A] Ω[A⁄R] ≃ₗ[B] Ω[B⁄S]\", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"Module.Flat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{S} [CommSemiring S] [Algebra R S] [Module S M] [IsScalarTower R S M] [Flat S M] [Flat R N] : Flat S (M ⊗[R] N)\", \"doc\": \"Let $R$ and $S$ be commutative semirings, and let $S$ be an $R$-algebra. Let $M$ be an $S$-module and $N$ be an $R$-module. Assume that the scalar actions of $R$ and $S$ on $M$ are compatible (i.e., t\"}\n  {\"name\": \"Algebra.TensorProduct.cancelBaseChange\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \": A ⊗[S] (S ⊗[R] B) ≃ₐ[T] A ⊗[R] B\", \"doc\": \"Let `R`, `S`, `T` be commutative semirings. Let `S` be an `R`-algebra. Let `A` be an algebra over both `S` and `T`, and `B` be an algebra over both `R` and `T`. If the various scalar actions are compa\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivBase\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] : (S ⊗[R] Ω[A⁄R]) ≃ₗ[S] Ω[B⁄S]\", \"doc\": \"Let $R \\\\to S$ and $R \\\\to A$ be homomorphisms of commutative rings. If $B$ is the pushout of these maps (i.e., $B$ is isomorphic to the tensor product algebra $S \\\\otimes_R A$), then there is a natural \"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: underived tensor equivalences, exact flat tensor and group homology do not provide this arbitrary ring-diagram derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"tensor\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"groupHomology.H1ToTensorOfIsTrivial\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \" {k G : Type u} [CommRing k] [Group G] (A : Rep.{u, u, u} k G) [A.IsTrivial] : ↑(groupHomology.H1 A) →ₗ[ℤ] TensorProduct ℤ (Additive (Abelianization G)) ↑A\", \"doc\": \"If a `G`-representation on `A` is trivial, this is the natural map `H₁(G, A) → Gᵃᵇ ⊗[ℤ] A`\\nsending `⟦single g a⟧` to `⟦g⟧ ⊗ₜ a`.\"}\n  {\"name\": \"groupHomology.H1ToTensorOfIsTrivial_H1π_single\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.LowDegree\", \"type\": \" {k G : Type u} [CommRing k] [Group G] {A : Rep.{u, u, u} k G} [A.IsTrivial] (g : G) (a : ↑A) : (groupHomology.H1ToTensorOfIsTrivial A) ((CategoryTheory.ConcreteCategory.hom (groupHomology.H1π A)) ((CategoryTheory.ConcreteCategory.hom (groupHomology.cycles₁IsoOfIsTrivial A).inv) fun₀ | g => a)) = Ad\", \"doc\": \"\"}\n  {\"name\": \"groupHomology.coinvariantsTensorResProjectiveResolutionIso\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupHomology.Shapiro\", \"type\": \" {k G : Type u} [CommRing k] [Group G] (S : Subgroup G) (A : Rep.{u, u, u} k ↥S) (P : CategoryTheory.ProjectiveResolution (Rep.trivial k G k)) : HomologicalComplex.coinvariantsTensorObj A ((Rep.resFunctor S.subtype).mapProjectiveResolution P).complex ≅ HomologicalComplex.coinvariantsTensorObj (Rep.i\", \"doc\": \"Given a projective resolution `P` of `k` as a `k`-linear `G`-representation, a subgroup\\n`S ≤ G`, and a `k`-linear `S`-representation `A`, this is an isomorphism of complexes\\n`(A ⊗ Res(S)(P))_S ≅ (Ind_\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: underived tensor equivalences, exact flat tensor and group homology do not provide this arbitrary ring-diagram derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*base.*change|base.*change.*flat",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: underived tensor equivalences, exact flat tensor and group homology do not provide this arbitrary ring-diagram derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"extendScalars\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide ordinary scalar associativity, flat exactness, or cotangent and Ext specializations, not the six-ring unbounded tensor cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an unbounded complex of A modules and a flat change of the diagram R to A and B, derived tensor cohomology commutes with extension to A prime tensor over R prime B prime",
+   "results": "8 hits: Algebra.Extension.tensorH1Cotangent, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.rTensor_exact, Module.Flat.lTensor_exact",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide ordinary scalar associativity, flat exactness, or cotangent and Ext specializations, not the six-ring unbounded tensor cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.*independent.*flat|flat.*compare|homology.*extendScalars|extendScalars.*homology",
+   "results": "2 hits: Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide ordinary scalar associativity, flat exactness, or cotangent and Ext specializations, not the six-ring unbounded tensor cohomology comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change for unbounded derived tensor product cohomology of a commutative ring diagram",
+   "results": "8 hits: Module.FaithfullyFlat.instTensorProduct, Module.Flat.isBaseChange, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, IsBaseChange.pi, KaehlerDifferential.cotangentComplexBaseChange_tmul, RingHom.Flat.isStableUnderBaseChange, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide ordinary scalar associativity, flat exactness, or cotangent and Ext specializations, not the six-ring unbounded tensor cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical associativity for unbounded derived extension of scalars along a tower of commutative rings",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_id_comp_assoc, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, ModuleCat.extendScalars_comp_id_assoc, CategoryTheory.Abelian.Ext.comp_assoc, CategoryTheory.Abelian.Ext.smul_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide ordinary scalar associativity, flat exactness, or cotangent and Ext specializations, not the six-ring unbounded tensor cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesFiniteLimits_extendScalars_of_flat|extendScalarsComp|homologyFunctorIso",
+   "results": "8 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits provide ordinary scalar associativity, flat exactness, or cotangent and Ext specializations, not the six-ring unbounded tensor cohomology comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-stalk-condition-etale-charts",
+  "date": "2026-10-23",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH scheme case: pass from the geometric condition to Tag 0DJ8 via Tag 0DKG. Supporting algebra input: the canonical cohomology comparison cited in Tag 0DKG as More on Algebra, lemma-lemma-tor-independent-flat-compare.",
+   "via": [
+    "lem-sfb-space-stalk-condition-etale-charts",
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-ring-diagram-tensor-cohomology",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0DJD against 08HW. Reused existing unbounded K-flat, flat-extension and scalar-tower statements; wrote the balanced chain isomorphism, cohomology maps, commuting actions and canonical-unit/augmentation checks. No new node or statement change.",
+  "blueprint": "Generic algebra input to the inherited direct-image/base-change route: the 0DJD comparison used by the stalk-condition reduction. Latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3) now refers directly to proper base change; the inherited algebra item is still split faithfully to its own Stacks source. The ancestor utility returns None, as already recorded on the live item.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-source-module-kflat-resolution",
+    "why": "Existence of ordinary-module unbounded K-flat resolutions of M and B. No node in the current unit states this algebraic tool."
+   },
+   {
+    "node": "lem-pc-kflat-extension-of-scalars",
+    "why": "Preservation of ordinary-module K-flatness under scalar extension to A1 and R1. No node in the current unit states this algebraic tool."
+   },
+   {
+    "node": "lem-pc-flat-scalar-extension-homology-adjunct",
+    "why": "Unbounded flat scalar-extension cohomology identification H^i(Q) tensor D = H^i(Q tensor D) with its explicit transpose formula (steps 2, 4, 5). No node in the current unit states this algebraic tool."
+   },
+   {
+    "node": "lem-pc-kflat-scalar-extension-counit",
+    "why": "K-flat counit identifies P tensor_A A1 with the derived scalar extension. No node in the current unit states this algebraic tool."
+   },
+   {
+    "node": "lem-pc-balanced-derived-tensor-model",
+    "why": "Balanced ordinary-module total tensors and their canonical commuting factor actions, independence and naturality. No node in the current unit states this algebraic tool."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Functoriality in the resolved coefficient complex and its derived endomorphisms. No node in the current unit states this algebraic tool."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic derived scalar extension for the ordinary-ring tower R1 to B0 to B1, with its unit identity. No node in the current unit states this algebraic tool."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-above-flat K-flat criterion, to include free resolutions among the permitted models; no node in the current unit states this algebraic tool."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Unit normalization x -> x tensor 1 of derived scalar extension on K-flat flat-term models (step 7). No node in the current unit states this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-singleton-site-module-comparison",
+    "why": "Ordinary modules as module sheaves on the one-object site, respecting the scalar-extension unit (step 7). No node in the current unit states this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pc-kflat-extension-of-scalars",
+  "lem-pc-flat-scalar-extension-homology-adjunct",
+  "lem-pc-kflat-scalar-extension-counit",
+  "lem-pc-balanced-derived-tensor-model",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-singleton-site-module-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-dd8788264",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-dd8788264 (reviewer sub-agent of L); spot-checked: I read Stacks more-algebra 0DJD (lemma-lemma-tor-independent-flat-compare) and 08HW (lemma-tor-independent-flat) in full. The item's statement matches 0DJD under the 08HW hypotheses and is unchanged. The 7 steps follow the source's two-stage proof (first the case B0=R1⊗_R B, then the flat map B0→B1). Checks: A→A0→A1 is flat by flat-tensor-exact and module-flat-transitive; θ and its inverse agree on generators, the total differentials and signs match, and direct sums commute with ⊗A1; D0=D⊗_A A1 and D1=D0⊗_{B0}B1 are correct. Every cited statement says what its step uses, and no step relies on a cited node's proof. No new node is created and no repair note exists for this item. Fault fixed (batch-5): the item cited lem-trf-flat-projective-hom-models (sec-trace-formula). Only its generic first paragraph was used, but its proof closure contains 5 trace-formula nodes. I replaced it with lem-pc-flat-scalar-extension-homology-adjunct in steps 2, 4 and 5 (unbounded flat cohomology isomorphism with explicit transpose; step 5 now argues on a K-flat flat-term representative via kflat-extension-of-scalars and the counit). In step 7 I replaced it with lem-pur-sheaf-ring-derived-coefficient-adjunction (1) (unit x↦x⊗1 on K-flat flat-term models) together with lem-weil-pbc-singleton-site-module-comparison. After the fix nothing cited reaches the trace-formula or Poincaré chapters, and there is no cycle. proof_deps and split_report.tool_uses are updated, and all steps are under 2000 characters. Near-duplicates (lem-pc-flat-base-derived-tensor-comparison, lem-pc-tor-independent-kflat-localized-comparison, lem-pc-derived-tensor-flat-second-localization, lem-sfb-relative-tensor-faithfully-flat-comparison, the bounded-only lem-pc-flat-tensor-complex-cohom) do not state the item. Small cases checked: identity diagram; M=0; k[t]→k with B1=k[x], where Tor_1⊗k[x] is kept; A1=0.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatRingDiagramTensorCohomology",
+  "declaration": "ModuleCat.FlatRingDiagram.flat_ring_diagram_tensor_cohomology",
+  "declarations": [
+   "ModuleCat.FlatRingDiagram.UnitNormalized",
+   "ModuleCat.FlatRingDiagram.tensorRingMap",
+   "ModuleCat.FlatRingDiagram.restrictionSquare",
+   "ModuleCat.FlatRingDiagram.sourceDerived",
+   "ModuleCat.FlatRingDiagram.targetDerived",
+   "ModuleCat.FlatRingDiagram.unitAround",
+   "ModuleCat.FlatRingDiagram.comparison",
+   "ModuleCat.FlatRingDiagram.cohomologyComparison",
+   "ModuleCat.FlatRingDiagram.flat_ring_diagram_tensor_cohomology"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatRingDiagramTensorCohomology.lean",
+  "statement": "theorem flat_ring_diagram_tensor_cohomology (hR : (algebraMap R R₁).Flat) (hA : (Algebra.TensorProduct.lift (IsScalarTower.toAlgHom R A A₁) (IsScalarTower.toAlgHom R R₁ A₁) (fun _ _ ↦ Commute.all _ _)).toRingHom.Flat) (hB : (Algebra.TensorProduct.lift (IsScalarTower.toAlgHom R R₁ B₁) (IsScalarTower.toAlgHom R B B₁) (fun _ _ ↦ Commute.all _ _)).toRingHom.Flat) : ∃ (r : ordinaryDerivedExtendScalars (algebraMap R B) ⊣ derivedRestrictScalars (algebraMap R B)) (a : ordinaryDerivedExtendScalars (algebraMap A A₁) ⊣ derivedRestrictScalars (algebraMap A A₁)) (b : ordinaryDerivedExtendScalars (algebraMap R₁ B₁) ⊣ derivedRestrictScalars (algebraMap R₁ B₁)), UnitNormalized (algebraMap R B) r ∧ UnitNormalized (algebraMap A A₁) a ∧ UnitNormalized (algebraMap R₁ B₁) b ∧ ∀ i : ℤ, ∃ (S : DerivedCategory (ModuleCat.{u} A) ⥤ ModuleCat.{u} (A ⊗[R] B)) (T : DerivedCategory (ModuleCat.{u} A₁) ⥤ ModuleCat.{u} (A₁ ⊗[R₁] B₁)) (eS : S ⋙ restrictScalars (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom ≅ sourceDerived R A B ⋙ DerivedCategory.homologyFunctor (ModuleCat.{u} B) i) (eT : T ⋙ restrictScalars (Algebra.TensorProduct.includeRight : B₁ →ₐ[R₁] A₁ ⊗[R₁] B₁).toRingHom ≅ sourceDerived R₁ A₁ B₁ ⋙ DerivedCategory.homologyFunctor (ModuleCat.{u} B₁) i) (c : S ⋙ extendScalars (tensorRingMap R A B R₁ A₁ B₁) ⟶ ordinaryDerivedExtendScalars (algebraMap A A₁) ⋙ T), IsIso c ∧ (∀ (M : DerivedCategory (ModuleCat.{u} A)) (x : S.obj M) (s : A), eS.hom.app M ((s ⊗ₜ[R] (1 : B)) • x) = (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map ((sourceDerived R A B).map (s • 𝟙 M)) (eS.hom.app M x)) ∧ (∀ (N : DerivedCategory (ModuleCat.{u} A₁)) (x : T.obj N) (s : A₁), eT.hom.app N ((s ⊗ₜ[R₁] (1 : B₁)) • x) = (DerivedCategory.homologyFunctor (ModuleCat.{u} B₁) i).map ((sourceDerived R₁ A₁ B₁).map (s • 𝟙 N)) (eT.hom.app N x)) ∧ ∀ (M : DerivedCategory (ModuleCat.{u} A)) (x : S.obj M), eT.hom.app ((ordinaryDerivedExtendScalars (algebraMap A A₁)).obj M) (c.app M ((1 : A₁ ⊗[R₁] B₁) ⊗ₜ[A ⊗[R] B, tensorRingMap R A B R₁ A₁ B₁] x)) = (cohomologyComparison R A B R₁ A₁ B₁ r a b i).app M (eS.hom.app M x)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical natural comparison is fixed by the normalized derived scalar units and adjunction transpose. Source and target lifts specify both commuting tensor-ring actions. Helpers introduce only the comparison data belonging to this node; all derived scalar extension and exact-restriction constructions are the published ones."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ddec8523",
+  "group": "ND",
+  "result": "pass",
+  "note": "Clause-by-clause match with 0DJD/08HW: hR/hA/hB flatness on R→R₁, A⊗_R R₁→A₁, R₁⊗_R B→B₁ (correct factor order), no flatness/boundedness of A,B over R; unbounded D(A); source = res_{A→R}⋙L(R→B), target = L(A→A₁)⋙res⋙L(R₁→B₁) via published ordinaryDerivedExtendScalars; D/D₁ actions pinned by S,T with eS/eT and a⊗1 = H^i(s•𝟙) equations; c pinned by eT(c(1⊗x)) = cohomologyComparison(eS x), the transpose of unitAround (a.unit, restriction squares, b.unit), plus D₁-linearity; IsIso c natural ∀ i:ℤ. The ∃ adjunctions r,a,b are unique by UnitNormalized (counit iso on K-flat, Q ess. surj.) and satisfiable. Mechanical theorem stmt_dep lem-pur-derived-change-of-rings: ordinaryDerivedChangeOfRings = Classical.choice of nonempty_ordinaryDerivedChangeOfRings, so the statement uses a theorem-constructed object → PASS on that point. Records: only lean + landed stmt_dep added; statement verbatim; dep records identical to live; imports exist. No duplicates found; helpers reuse mapRingHom/derivedRestrictScalarsCompIso/mapDerivedCategoryHomologyFunctorIso. Single universe u inherited from the dep interface. Advisory: second reading in-thread by the same worker. Not compiled (no change); worker's clean compile."
+ }
+}

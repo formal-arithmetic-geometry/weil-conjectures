@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-isogeny-postcomposition-degree",
+ "kind": "statement",
+ "title": "Postcomposition by an isogeny multiplies degree extended by zero",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $A,B,C$ be abelian varieties over $k$ [def-sc-abelian-variety] of the same dimension $g\\geq1$ [def-kun-topological-krull-dimension]. Let $h:A\\to B$ and $u:B\\to C$ be group-scheme homomorphisms [def-sc-group-scheme], with $u$ an isogeny [def-sc-isogeny]. For a homomorphism $f$ between these varieties define $d(f)$ to be the order of its scheme-theoretic kernel when $f$ is an isogeny, and $0$ otherwise. Then $u\\circ h$ is an isogeny if and only if $h$ is an isogeny, and\n$$d(u\\circ h)=(\\deg u)d(h).$$\nNo separability assumption is imposed on $u$ or $h$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 7.1 and the identification of degree with function-field degree, printed p.32; multiplicativity in Remark 8.6, printed p.36. The tower formula is Stacks Project, Morphisms, Tag 02NZ, lemma-degree-composition, in literature/stacks-project/morphisms.tex; the zero case uses the finite map on the closed image."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-kun-topological-krull-dimension",
+  "def-sc-group-scheme",
+  "def-sc-isogeny"
+ ],
+ "proof": [
+  {
+   "text": "Suppose $h$ is an isogeny. By [def-sc-isogeny], both $h$ and $u$ are surjective. For every point $c$ of $C$, choose $b$ over $c$ under $u$ and then $a$ over $b$ under $h$; hence $u\\circ h$ is surjective. It is a group-scheme homomorphism, since composition preserves the multiplication compatibility diagrams in [def-sc-group-scheme]. Apply [lem-sfb-equal-dimension-isogeny-criterion] to $A,C$, whose dimensions both equal $g$, to conclude that $u\\circ h$ is an isogeny.",
+   "uses": [
+    "def-sc-isogeny",
+    "def-sc-group-scheme",
+    "lem-sfb-equal-dimension-isogeny-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 7.1 and following degree paragraph, printed p.32; Remark 8.6, printed p.36. Finite-map cancellation and constant finite locally free rank multiplication make the composite and zero cases explicit."
+   }
+  },
+  {
+   "text": "Conversely suppose $u\\circ h$ is an isogeny. By [lem-sc-isogeny-degree], $u$ and $u\\circ h$ are finite. A finite morphism is separated, as recorded in [lem-weil-pbc-finite-permanence-over-separated]; apply that node to $h$ followed by $u$ to deduce that $h$ is finite. The scheme-theoretic kernel $\\ker h=A\\times_{B,h,e_B}\\operatorname{Spec}k$ is the base change of $h$ along the identity section, by [def-sc-group-scheme]. Finiteness is preserved by arbitrary base change by [lem-trf-finite-radicial-basechange], so this kernel is finite over $k$. Apply [lem-sfb-finite-kernel-equal-dimension-isogeny] to $h$: the field is algebraically closed, $A,B$ are abelian varieties, their dimensions agree (the topological Krull dimensions of the statement equal the local-ring dimensions of [def-pc-dimension] by [lem-pc-scheme-dimension-local-rings]), and the kernel has just been proved finite. Thus $h$ is surjective, and together with its finite kernel this makes it an isogeny by [def-sc-isogeny].",
+   "uses": [
+    "lem-sc-isogeny-degree",
+    "lem-weil-pbc-finite-permanence-over-separated",
+    "def-sc-group-scheme",
+    "lem-trf-finite-radicial-basechange",
+    "lem-sfb-finite-kernel-equal-dimension-isogeny",
+    "def-sc-isogeny",
+    "lem-pc-scheme-dimension-local-rings",
+    "def-pc-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 7.1 and following degree paragraph, printed p.32; Remark 8.6, printed p.36. Finite-map cancellation and constant finite locally free rank multiplication make the composite and zero cases explicit."
+   }
+  },
+  {
+   "text": "Assume $h$ is an isogeny, so step 1 makes $v=u\\circ h$ an isogeny too. For each of $h,u,v$, [lem-sc-isogeny-degree] identifies the kernel order with the constant rank of its structure-sheaf pushforward, hence its finite-flat degree. Apply [lem-sfb-finite-kernel-equal-dimension-isogeny] to each map to obtain finite local freeness: all source and target dimensions are $g$, also in the sense of [def-pc-dimension] by [lem-pc-scheme-dimension-local-rings], and all three kernels are finite. In the fibre-degree convention [def-pc-finite-locally-free], their degrees are therefore $d(h),\\deg u,d(v)$ respectively. Apply [lem-sfb-finite-locally-free-degree-composition] to $h$ followed by $u$: $v$ has constant degree $d(h)\\deg u$. Compare this with its degree $d(v)$ at the identity point $e_C:\\operatorname{Spec}k\\to C$, which exists by [def-sc-group-scheme]. This yields $d(u\\circ h)=d(h)\\deg u=(\\deg u)d(h)$. All kernel orders and fibre degrees are algebra dimensions; no point counting or separability is used.",
+   "uses": [
+    "lem-sc-isogeny-degree",
+    "lem-sfb-finite-kernel-equal-dimension-isogeny",
+    "def-pc-finite-locally-free",
+    "lem-sfb-finite-locally-free-degree-composition",
+    "def-sc-group-scheme",
+    "lem-pc-scheme-dimension-local-rings",
+    "def-pc-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 7.1 and following degree paragraph, printed p.32; Remark 8.6, printed p.36. Finite-map cancellation and constant finite locally free rank multiplication make the composite and zero cases explicit."
+   }
+  },
+  {
+   "text": "If $h$ is not an isogeny, step 2 shows by contrapositive that $u\\circ h$ is not an isogeny. The definition of $d$ in the statement then gives $d(h)=d(u\\circ h)=0$, so $d(u\\circ h)=0=(\\deg u)d(h)$. Together with steps 1 and 3 this proves the equivalence and the formula in all cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 7.1 and following degree paragraph, printed p.32; Remark 8.6, printed p.36. Finite-map cancellation and constant finite locally free rank multiplication make the composite and zero cases explicit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-isogeny",
+  "def-sc-group-scheme",
+  "lem-sfb-equal-dimension-isogeny-criterion",
+  "lem-sc-isogeny-degree",
+  "lem-weil-pbc-finite-permanence-over-separated",
+  "lem-trf-finite-radicial-basechange",
+  "lem-sfb-finite-kernel-equal-dimension-isogeny",
+  "def-pc-finite-locally-free",
+  "lem-sfb-finite-locally-free-degree-composition",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-pc-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 7.1 and following degree paragraph, printed p.32; Remark 8.6, printed p.36. Finite-map cancellation and constant finite locally free rank multiplication make the composite and zero cases explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition of a homomorphism between equal dimensional abelian varieties with an isogeny multiplies its degree extended by zero by the degree of the isogeny",
+   "results": "8 hits; WeierstrassCurve.VariableChange.map_map, WeierstrassCurve.map_map, WeierstrassCurve.Affine.Point.map_map, WeierstrassCurve.VariableChange.mul_def, WeierstrassCurve.Jacobian.comp_equiv_comp, WeierstrassCurve.map_variableChange, WeierstrassCurve.Projective.comp_equiv_comp, WeierstrassCurve.VariableChange.instMul",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial-composition degrees, Weierstrass variable changes, and composition stability of finite/flat scheme maps do not give the kernel-order formula or the nonisogeny case"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degrees of finite flat morphisms of abelian varieties multiply under composition including inseparable isogenies",
+   "results": "8 hits; WeierstrassCurve.Affine.Point.map_map, WeierstrassCurve.map_map, RingHom.IsStandardSmoothOfRelativeDimension.comp, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, RingHom.Flat.stableUnderComposition, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, RingHom.Flat.comp",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial-composition degrees, Weierstrass variable changes, and composition stability of finite/flat scheme maps do not give the kernel-order formula or the nonisogeny case"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The geometric degree of a composite of two isogenies of abelian varieties is the product of their degrees",
+   "results": "8 hits; Polynomial.natDegree_comp, Polynomial.natDegree_comp_le, Polynomial.natDegree_comp_eq_of_mul_ne_zero, AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, Polynomial.IsMonicOfDegree.comp, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, AlgebraicGeometry.instSurjectiveCompScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial-composition degrees, Weierstrass variable changes, and composition stability of finite/flat scheme maps do not give the kernel-order formula or the nonisogeny case"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial-composition degrees, Weierstrass variable changes, and composition stability of finite/flat scheme maps do not give the kernel-order formula or the nonisogeny case"
+  },
+  {
+   "tool": "grep",
+   "query": "isogenyDegree|IsIsogeny|isogeny.*degree",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: polynomial-composition degrees, Weierstrass variable changes, and composition stability of finite/flat scheme maps do not give the kernel-order formula or the nonisogeny case"
+  },
+  {
+   "tool": "grep",
+   "query": "finrank_comp|IsFiniteLocallyFreeOfDegree.*comp|fiberDegree_comp",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of finite locally free morphisms of constant degrees has degree the product",
+   "results": "8 hits; Polynomial.natDegree_comp, AlgebraicGeometry.IsFinite.comp_iff, AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, Polynomial.IsMonicOfDegree.comp, Polynomial.natDegree_comp_le, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.locallyOfFiniteType_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finrank_comp\"",
+   "results": "3 hits; RingHom.finrank_comp_left_of_bijective, RingHom.finrank_comp_right_of_bijective, AlgebraicGeometry.Scheme.Hom.finrank_comp_left_of_isIso",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree of a composite of finite locally free morphisms of schemes of constant degrees m and n is m times n",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instCompScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.comp_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*(mul|comp)|finrank.*(mul|comp)",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "grep",
+   "query": "isogenyDegree|IsIsogeny|isogeny.*degree",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyFreeOfDegree\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free scheme morphism of rank m followed by one of rank n has constant rank m times n",
+   "results": "8 hits; AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition by an isogeny between abelian varieties preserves being an isogeny and multiplies degree extended by zero",
+   "results": "8 hits; CategoryTheory.MorphismProperty.RespectsIso.postcomp, CategoryTheory.isIso_comp_right_iff, CategoryTheory.isIso_comp_left_iff, CategoryTheory.IsIso.comp_isIso', WeierstrassCurve.map_map, CategoryTheory.IsIso.comp_isIso, WeierstrassCurve.VariableChange.map_map, CategoryTheory.Iso.trans_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Postcomposing a homomorphism of abelian varieties with an isogeny multiplies its degree and preserves the nonisogeny case",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.postcomp, ModuleCat.AlternatingMap.postcomp, Abelianization.map_map_apply, Abelianization.map_comp, CategoryTheory.ObjectProperty.instIsMultiplicativeIsoModSerre, AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant, Polynomial.degreeMonoidHom, CochainComplex.instIsMultiplicativeIntDegreewiseEpiWithInjectiveKernel",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: composition stability and isomorphism invariance, polynomial degree, Ext postcomposition and Weierstrass maps do not state isogeny-degree multiplication with zero extension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isogeny-relative-tate-determinant",
+  "date": "2026-10-23",
+  "group": "Q106"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Proposition 10.20, printed pp.50–52 (degree is the Tate determinant for endomorphisms), Remark 10.11, printed p.47 (rational degree), and the isogeny inverse construction in Remark 8.6, printed p.36. Relative form obtained by composing h and lambda with one common integral multiple of the rational inverse; multiplicativity of isogeny degree cancels that common factor. Zero is assigned to non-isogenies. Supporting geometric input: composition by the integral inverse isogeny, including zero degrees for nonisogenies.",
+   "via": [
+    "lem-sfb-isogeny-relative-tate-determinant",
+    "lem-sfb-abelian-trace-intersection",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-isogeny-postcomposition-degree",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Proved preservation by the surjective equal-dimension criterion, reflection by finite-map cancellation and the finite-kernel criterion, and the degree formula by the existing constant-degree finite locally free composition node. Handled nonisogenies by contraposition and the zero convention. No new nodes.",
+  "blueprint": {
+   "realizes": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Proposition 10.20, printed pp.50–52 (degree is the Tate determinant for endomorphisms), Remark 10.11, printed p.47 (rational degree), and the isogeny inverse construction in Remark 8.6, printed p.36. Relative form obtained by composing h and lambda with one common integral multiple of the rational inverse; multiplicativity of isogeny degree cancels that common factor. Zero is assigned to non-isogenies. Supporting geometric input: composition by the integral inverse isogeny, including zero degrees for nonisogenies.",
+   "context": "Read latest blueprint sk-thm-sf-ctf-stability-direct-images proof (3). The item serves the inherited auxiliary abelian level-rigidity chain; the ancestor command returns None. Its inherited explicit from.place and via are retained.",
+   "same_as_search": "blueprint_refs.py search isogeny, degree composition, finite locally free, constant degree, degree multiplication; none states this item. Existing endomorphism-only multiplicativity is not the relative assertion for A,B,C."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-e7711823e",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-e7711823e (reviewer sub-agent of L); spot-checked: I read the four-step split in full; no new nodes, statement and stmt_deps unchanged, no re-split note. Source: Milne AV I Prop 7.1 (a)-(d) and the degree paragraph (printed p.32), Remark 8.6 (p.36), both checked in the extracted PDF. Step 1: a composite of surjections is surjective, so lem-sfb-equal-dimension-isogeny-criterion makes u∘h an isogeny; OK. Step 2: u∘h finite (lem-sc-isogeny-degree), u separated, so h is finite (Stacks 035D node); ker h is a base change of h, hence finite (lem-trf-finite-radicial-basechange); lem-sfb-finite-kernel-equal-dimension-isogeny then gives h surjective, so h is an isogeny. Step 3: the rank-d pushforward gives fibre degree d; the finite-kernel criterion gives finite local freeness; lem-sfb-finite-locally-free-degree-composition gives degree d(h)deg u, compared with d(v) at e_C; OK. Step 4: contrapositive of step 2, both sides 0; elementary. Small cases checked: h=0, h an isomorphism, Frobenius with a nonreduced kernel, a projection followed by an inclusion. FIX: the finite-kernel criterion states dim A = dim B in the sense of def-pc-dimension (local rings), while the item uses topological Krull dimension. Steps 2 and 3 now cite def-pc-dimension and lem-pc-scheme-dimension-local-rings (Stacks 04MU), added to text, uses and proof_deps. Batch-5 check: lem-sfb-equal-dimension-isogeny-criterion reaches lem-trf-fppf-covering-base-change only through the Milne iAG 5.39 homomorphism theorem. That node is a Mathlib leaf (Stacks 021O: fppf coverings are stable under base change), a general site fact. It is neither given by nor part of the proofs of the trace-formula or Poincaré-duality assumptions, so the citation is accepted. No duplicates: lem-sfb-abelian-degree-multiplicative covers endomorphisms only. No SGA sources.; 1 file(s) fixed by the reviewer"
+ }
+}

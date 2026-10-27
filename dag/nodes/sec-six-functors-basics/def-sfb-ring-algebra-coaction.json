@@ -1,0 +1,140 @@
+{
+ "id": "def-sfb-ring-algebra-coaction",
+ "kind": "definition",
+ "title": "Algebra coactions over commutative rings",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $R$ be a commutative ring, $C$ a commutative Hopf $R$-algebra with comultiplication $\\Delta$ and counit $\\epsilon$, and $E$ a commutative $R$-algebra [def-weil-pbc-algebra-hom-quotient]. An algebra coaction is an $R$-algebra map $\\rho:E\\to E\\otimes_R C$ [def-weil-pbc-module-tensor-product, lem-weil-pbc-algebra-tensor-pushout-universal-property] satisfying $(1\\otimes\\epsilon)\\rho=1_E$ and $(\\rho\\otimes1)\\rho=(1\\otimes\\Delta)\\rho$, with the standard tensor unit and associativity identifications. For an affine group scheme $G$ over $\\operatorname{Spec}R$ [def-sc-group-scheme, pqf-def-affine-morphism, def-weil-affine-spectrum], its algebra coactions are those for the canonical coordinate Hopf algebra $C=\\Gamma(G,\\mathcal O_G)$ [def-sfb-affine-coordinate-hopf-algebra]. Scalar extension of $G$ uses the group law transported by the pullback functor [def-pc-base-change]; its structure morphism remains affine. The canonical coordinate Hopf structure on a bundled group is exposed for typeclass inference. No field, finite-generation, flatness or nonzero-algebra assumption is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sc-group-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-affine-spectrum",
+  "def-sfb-affine-coordinate-hopf-algebra",
+  "def-pc-base-change"
+ ],
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Lemma 9.2.5, affine algebra actions, pp.522--523; Proposition 9.3.1(i), p.524; https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An algebra coaction over any commutative ring is an algebra map to the tensor product satisfying counit and coassociativity",
+   "results": "{\"t\": \"2026-10-24T07:54:31Z\", \"tool\": \"leansearch\", \"query\": \"An algebra coaction over any commutative ring is an algebra map to the tensor product satisfying counit and coassociativity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Coalgebra.toCoalgebraStruct\", \"CoalgebraStruct.comul\", \"CoalgebraStruct.mk\", \"Bialgebra.ofAlgHom\", \"CoalgebraStruct\", \"Coalgebra.coassoc\", \"Coalgebra.TensorProduct.map\", \"Coalgebra.mk\"], \"digest\": \"89499ef46475c6e6\"}; No algebra coaction over arbitrary rings. Project rg finds HopfAction.AlgebraCoaction with [Field k], RelativeHopf.Coaction with [Field k] and a module rather than algebra map. No upstream declaration or DAG definition covers the ring notion. tools/blueprint_refs.py search coaction: 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraCoaction|ComoduleAlgebra",
+   "results": "{\"t\": \"2026-10-24T08:02:42Z\", \"tool\": \"grep\", \"query\": \"AlgebraCoaction|ComoduleAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No algebra coaction over arbitrary rings. Project rg finds HopfAction.AlgebraCoaction with [Field k], RelativeHopf.Coaction with [Field k] and a module rather than algebra map. No upstream declaration or DAG definition covers the ring notion. tools/blueprint_refs.py search coaction: 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counital coassociative coaction of a commutative Hopf algebra over a commutative ring on a commutative algebra",
+   "results": "{\"t\": \"2026-10-24T08:02:42Z\", \"tool\": \"leanfinder\", \"query\": \"Counital coassociative coaction of a commutative Hopf algebra over a commutative ring on a commutative algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HopfAlgebra.ofAlgHom\", \"Bialgebra.mk'\", \"HopfAlgCat.of_comul\", \"HopfAlgebra\", \"Bialgebra.ofAlgHom\", \"HopfAlgebraStruct\", \"CommSemiring.toHopfAlgebra\", \"HopfAlgCat.of\"], \"digest\": \"5e1622f1000cf5df\"}; No algebra coaction over arbitrary rings. Project rg finds HopfAction.AlgebraCoaction with [Field k], RelativeHopf.Coaction with [Field k] and a module rather than algebra map. No upstream declaration or DAG definition covers the ring notion. tools/blueprint_refs.py search coaction: 0 matches.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-ring-invariant-power-lifting",
+  "date": "2026-10-24",
+  "group": "Q110"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Ring-level algebra coactions required to state universal invariant power lifting.",
+   "via": [
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RingAlgebraCoaction",
+  "declaration": "RingHopfAction.AlgebraCoaction",
+  "declarations": [
+   "RingHopfAction.AlgebraCoaction",
+   "AlgebraicGeometry.AffineGroupAction.baseChange_isAffineHom",
+   "AlgebraicGeometry.AffineGroupAction.coordinateHopf",
+   "AlgebraicGeometry.AffineGroupAction.Coaction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RingAlgebraCoaction.lean",
+  "statement": "structure AlgebraCoaction (R : Type u) [CommRing R] (C : Type v) [CommRing C] [HopfAlgebra R C] (E : Type w) [CommRing E] [Algebra R E]",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04e198897",
+  "group": "Q110",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04e198897",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Statement unchanged; item gains only lean plus stmt_deps on the new def-sfb-ring-algebra-coaction and the landed reductive-terminology def. Clause check: Grp(Over(Spec R)) with Smooth, IsAffineHom, LFP, QC, QS on G.X.hom; hgeom applies IsReductive to every algebraically closed Ω:Type u; IsUnipotent includes Smooth, so 'smooth' unipotent subgroup is kept; the other IsReductive parts follow from base change. G' is Over.pullback.mapGrp (project convention); C' is the canonical Hopf structure via affineCoordinateHopfAlgebra. AlgebraCoaction counit and coassoc are correct (right coaction). heq, hb and the conclusion (1≤N, invariant a, f a=b^N) match the node. E, F unrestricted in universes v, w; R' shares u with R (fibre-product convention). New node justified: live HopfAction.AlgebraCoaction and RelativeHopf.Coaction are field-only, no Mathlib comodule-algebra, no name clash in side-live. Helpers are real (inferInstanceAs, canonical instance). Docstrings and blueprint tags present; one sorry; lean.statement verbatim; report sections present. Edge cases R=0, trivial group, b=0, N=0, char p, torus/Ga checked. No compile run (no file changed)."
+ }
+}

@@ -184,7 +184,32 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-cartesian-coefficients",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.condensedPushforwardHom_id"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.condensedPushforwardHom_id",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+     "lines": [
+      642,
+      648
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
   "declaration": "AlgebraicGeometry.ProEtale.condensedPushforwardHom_id",
@@ -202,5 +227,44 @@
   "group": "Q51",
   "result": "pass",
   "note": "Only change: item lean record existing:true -> AlgebraicGeometry.ProEtale.condensedPushforwardHom_id (side ModuleObject/Basic.lean:641-648); node otherwise identical to live and live has no lean record. The statement is verbatim, and the blueprint source names this exact declaration. Clauses: Λ is any Mon(Sheaf(coherentTopology Profinite.{u}) Ab.{u+1}) (MonObj omitted, so more general; no commutativity); X : Scheme.{u} with no hypotheses; η_id = condensedPushforwardHom (the def-sfb-eta record); the pushforward is lowerStar; lowerStarId is built from Over.pullbackId, whose hom is pullback.fst, i.e. the projection V×_X X→V; direction is inv.app at condensedRingObj. Probe applying it to bundled condensed rings compiled clean in 33.1 s (load ~175); control with a false line errored. Second-reading section is the standard direct-delivery text, accepted for existing bindings. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a condensed ring and $X$ a scheme. Then\n$\\eta_{\\mathrm{id}_X}\\colon\\Lambda_X\\to(\\mathrm{id}_X)_*\\Lambda_X$\n([def-sfb-eta]) is the inverse of the identity isomorphism\n$(\\mathrm{id}_X)_*\\cong\\mathrm{id}$ of the pushforward of\n[def-sfb-finite-lower-star] at $\\Lambda_X$, given by restriction along the canonical\nisomorphisms $V\\times_XX\\cong V$.",
+  "proof": [
+   {
+    "text": "Write $F=p^*\\Lambda$, a sheaf on $(\\Spec\\Z)_{\\mathrm{proét}}$, so that\n$\\Lambda_X=\\pi_X^*F$ for every scheme $X$. Let $f\\colon X\\to Y$. By\n[def-sfb-alpha] and [def-sfb-pullback-from-point-comp-iso],\n$\\alpha_f$ is the inverse of the composition isomorphism\n$(\\pi_Y\\circ f)^*F\\cong f^*\\pi_Y^*F$, followed by $\\pi_Y\\circ f=\\pi_X$. By\n[def-sfb-eta], $\\eta_f$ is the mate of $\\alpha_f$ under $f^*\\dashv f_*$.",
+    "uses": [
+     "def-sfb-alpha",
+     "def-sfb-pullback-from-point-comp-iso",
+     "def-sfb-eta"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The composition isomorphism of pullbacks is, by definition\n([def-sfb-finite-upper-star-comp]), conjugate to the composition isomorphism of\npushforwards ([def-sfb-finite-lower-star-comp]). So under the adjunction\n$\\pi_Y^*\\dashv\\pi_{Y*}$, the morphism $\\eta_f\\colon\\pi_Y^*F\\to f_*\\pi_X^*F$\ncorresponds to\n$$\nF\\longrightarrow\\pi_{X*}\\pi_X^*F\\cong\\pi_{Y*}f_*\\pi_X^*F,\n$$\nthe unit of $\\pi_X^*\\dashv\\pi_{X*}$ followed by the inverse of the\ncomposition isomorphism $\\pi_{Y*}f_*\\cong(\\pi_Y\\circ f)_*=\\pi_{X*}$.",
+    "uses": [
+     "def-sfb-finite-upper-star-comp",
+     "def-sfb-finite-lower-star-comp"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For $f=\\mathrm{id}_X$, both sides of the claim correspond, under\n$\\pi_X^*\\dashv\\pi_{X*}$, to morphisms $F\\to\\pi_{X*}(\\mathrm{id}_X)_*\\pi_X^*F$.\nThese morphisms agree by the left unit law relating the composition\nisomorphism $\\pi_{X*}(\\mathrm{id}_X)_*\\cong\\pi_{X*}$ and the identity\nisomorphism $(\\mathrm{id}_X)_*\\cong\\mathrm{id}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "That unit law holds on sections. The pushforwards are restrictions along base\nchange functors, and both sides are the restriction along the same canonical\nisomorphism $V\\times_{\\Spec\\Z}X\\times_XX\\cong V\\times_{\\Spec\\Z}X$. Maps into a\nfibre product are determined by their projections.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

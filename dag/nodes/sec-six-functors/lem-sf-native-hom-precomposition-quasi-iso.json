@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-native-hom-precomposition-quasi-iso",
+ "kind": "statement",
+ "title": "Native Weil Hom into a K-injective target inverts source quasi-isomorphisms",
+ "statement": "Fix a finite field k_0, a prime l different from its characteristic, and a k_0-scheme X. Let W be the native category of pro-etale Weil sheaves of coefficient modules on the geometric fiber of X. Let H be its native internal-Hom bifunctor, with conjugation Weil structure. If a: K -> L is any quasi-isomorphism of integer-indexed cochain complexes in W and I is any K-injective complex in W, the native product-Hom precomposition map Hom_H(L,I) -> Hom_H(K,I) is a quasi-isomorphism. The product Hom has the actual source-library row-sign differential (-1)^p(d_I f - f d_K). No boundedness or monomorphism assumption is imposed. The fixed-pair category is [def-weil-endofunctor-fixed-pair-category], with the geometric site and size conventions of [def-weil-pbc-proetale-site, def-weil-size-convention].",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A95 (lemma-RHom-well-defined), source-variable case, and Tag 08BJ; agent-formulated native equivariant specialization. The proof uses a flat separator and the signed source-cone calculation rather than localized-site section cohomology."
+ },
+ "proof": [
+  {
+   "text": "The underlying coefficient sheaves have a flat separator, by the sheaf flat-resolution theorem and its inheritance by internal modules. Compare the old Mod.tensorLeft with the categorical relative tensor using their coequalizer universal properties. If P is flat, Mod.tensorLeft P is exact.",
+   "uses": [
+    "lem-sfb-sheaf-functorial-flat-resolution",
+    "lem-sfb-modobj-flat-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use symmetry/transposition and the module tensor-Hom adjunction to identify Hom(P,Hom(M,N)) additively and naturally with Hom(M tensor_R P,N). The signed cochain equivalence multiplies the (p,n) component by (-1)^(p*n). If K is acyclic and I K-injective, every cocycle from K tensor_R P to I is a coboundary. Thus every map P to a cycle of Hom(K,I) lifts to the previous degree. Apply the separator property to kernel(d) -> cokernel(previous d); this map vanishes, proving acyclicity.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For any quasi-isomorphism a its cone is acyclic. The signed bifunctor source-cone isomorphism identifies Hom(Cone(a),I) with Cone(Hom(a,I))[-1]. Step 2 and shift stability imply that Cone(Hom(a,I)) is acyclic, and the cone criterion gives the ordinary module Hom quasi-isomorphism.",
+   "uses": [
+    "lem-sf-signed-bifunctor-cone-iso",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting Frobenius is right adjoint to exact integer-orbit induction, so preserves K-injective complexes. It is exact and conservative. Its product comparison gives the chain isomorphism from underlying native Hom to ordinary module Hom; check the differential and source-map square after every product projection. Apply step 3 to the forgotten source map, then reflect quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sheaf-functorial-flat-resolution",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-sf-signed-bifunctor-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A95, native specialization using the library flat-separator and signed-cochain APIs, E3 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Precomposition of internal Hom complexes with a quasi isomorphism into a K injective target is a quasi isomorphism",
+   "results": "8 results about ordinary quasi-isomorphism composition and homology maps; no native internal-Hom theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An acyclic source has an acyclic internal Hom complex into a K injective complex using a flat separator",
+   "results": "8 results, including CochainComplex.IsKInjective.rightOrthogonal, CochainComplex.IsKInjective, and CochainComplex.isKInjective_iff_rightOrthogonal; useful K-injective facts but no native internal-Hom invariance.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bifunctorHomMapLeft|exists_comp_d_eq|quasiIso_iff_acyclic",
+   "results": "0 Mathlib hits. Local library search found BifunctorHom.exists_comp_d_eq, module transposition, flat separators, and signed source-cone isomorphism; these are used in the proof.",
+   "date": "2026-10-25",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.DerivedHomSingleResolution",
+  "date": "2026-10-25",
+  "group": "E3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Source-variable invariance input for step 2 of lem-sf-weil-derived-hom-single-resolution, serving the opening lisse-duality comparison of lem-a1-local-boundary-duality through the existing parent route.",
+   "via": [
+    "Sheaf.WeilSheaf.DerivedHomSingleResolution"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeHomPrecompositionQuasiIso",
+  "file": "lean/Sheaf/WeilSheaf/NativeHomPrecompositionQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomMapLeft",
+  "statement": "theorem quasiIso_bifunctorHomMapLeft\n    {K L I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ}\n    (a : K ⟶ L) [QuasiIso a] [I.IsKInjective] :\n    QuasiIso (CochainComplex.bifunctorHomMapLeft\n      (H := ihomBifunctor k₀ l X) (Y := I) a)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T002503-L-3114173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261025T002503-L-3114173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

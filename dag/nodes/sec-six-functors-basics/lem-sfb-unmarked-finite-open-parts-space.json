@@ -1,0 +1,1095 @@
+{
+ "id": "lem-sfb-unmarked-finite-open-parts-space",
+ "kind": "statement",
+ "title": "The unmarked finite-open-part functor is an etale algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes [def-weil-size-convention], and let $f:X\\to Y$ be an $S$-morphism of schemes, separated [def-weil-proper-morphism] and locally of finite type [def-weil-finite-type-morphism]. Define a contravariant functor $P$ on $S$-schemes by letting $P(T)$ consist of pairs $(a,Z)$, where $a:T\\to Y$ is an $S$-map and $Z\\subseteq X\\times_{Y,a}T$ is an open subscheme [def-pc-fibre-product, def-weil-open-immersion] whose projection to $T$ is finite [def-weil-finite-integral-morphism]; restriction is pullback of the pair. This functor is an algebraic space $E$ over $S$ [def-trf-algebraic-space]: there are natural bijections $E(T)\\simeq P(T)$, with $E(T)$ its value as a sheaf. Forgetting $Z$ gives a morphism $p:E\\to Y$ that is etale in the chartwise sense: for every representable etale chart $V\\to E$ from a scheme, the composite $V\\to Y$ is etale [def-weil-etale-morphism]. All schemes in an etale atlas of $E$ can be chosen in the chosen universe. No flatness or local finite presentation of $f$, section of $f$, separatedness of $p$, or scheme representability of $E$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04QH (proposition-finite-algebraic-space), restricted to scheme source and target; equation-finite and lemma-finite-sheaf. Etale is chartwise, not an assertion that the morphism is representable."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For an $S$-map $h:T'\\to T$, set $(a,Z)|_{T'}=(ah,Z\\times_TT')$. The fibre-product universal property identifies this with an open subscheme of $X\\times_YT'$; open immersions and finite morphisms remain so after base change. Identity and composition of these restrictions follow from the canonical fibre-product identifications. Thus this is the stated presheaf $P$, with natural projection $p:P\\to h_Y$. Apply finite-open-pair fppf descent to this exact presheaf to obtain its sheaf property.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-sfb-finite-open-parts-fppf-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 04PC, 04PD (equation-finite-conditions, equation-finite) and 04PE (lemma-finite-sheaf), part (1)."
+   }
+  },
+  {
+   "text": "Test the relative diagonal $P\\to P\\times_{h_Y}P$ on a scheme $T$ and two pairs $(a,Z_1),(a,Z_2)$. Apply the equality-locus lemma to $M=X\\times_YT\\to T$. It gives an open $V\\subseteq T$ such that a map $T'\\to T$ pulls the two pairs back equally exactly when it factors through $V$. This is precisely the functor represented by the diagonal pullback. Hence the relative diagonal is represented by open immersions. For two arbitrary pairs $(a_1,Z_1),(a_2,Z_2)$ on $T$, first impose $a_1=a_2$: the equalizer is the scheme $D=T\\times_{Y\\times_SY}Y$ via $(a_1,a_2)$ and the diagonal of $Y$. On $D$ impose equality of the two pulled-back opens by the same lemma. The resulting open subscheme of $D$ represents the absolute diagonal pullback. Thus the absolute diagonal of $P$ is representable by schemes.",
+   "uses": [
+    "lem-sfb-finite-open-equality-locus",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04PK (lemma-finite-diagonal), proof and relative-to-absolute diagonal factorization."
+   }
+  },
+  {
+   "text": "Choose the family $(a_i:U_i\\to Y,W_i)$ of the finite-open geometric chart-family lemma, whose hypotheses are exactly the given separatedness and local finite type of $f$. The natural transformation $c_i:h_{U_i}\\to P$ sends $h:T\\to U_i$ to $(a_i h,h^*W_i)$; finite base change makes this a pair and the pullback identities prove naturality. For a test pair $(b,Z)$ on $T$, form $B=T\\times_YU_i$. Pull $Z$ and $W_i$ back to $X\\times_YB$; both are finite over $B$. The equality-locus lemma gives an open $B_i\\subseteq B$ representing the subfunctor where they agree. Directly on sections, $B_i$ therefore represents $h_T\\times_Ph_{U_i}$. Its projection to $T$ is an open immersion followed by the base change of the etale $a_i$, hence etale. This proves representable etaleness of every $c_i$, without presupposing algebraicity of $P$.",
+   "uses": [
+    "lem-sfb-finite-open-geometric-chart-family",
+    "lem-sfb-finite-open-equality-locus",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG (lemma-finite-surjective-etale-cover), construction of pairs, and Tag 04QE (lemma-finite-criterion-etale), scheme-test proof."
+   }
+  },
+  {
+   "text": "Take the scheme coproduct $U=\\coprod_{i\\in I}U_i$, with the componentwise map $a:U\\to Y$. The $c_i$ glue uniquely across its disjoint open components to a map $c:h_U\\to P$: on any $T\\to U$, the inverse images $T_i$ of the components form a disjoint open covering of $T$, the pulled-back pairs agree on their empty intersections, and the sheaf property of $P$ gives the unique pair on $T$. This construction commutes with restriction by uniqueness. On every test scheme $T\\to P$, the pullback of $c$ is the scheme coproduct of the $B_i$ from step 3: maps into this coproduct are precisely disjoint open decompositions with component maps, and equality of pairs is checked on this open covering. Its projection to $T$ is etale since that holds on each open component. Likewise $a$ is etale by the source-local test. Both $I$ and the $U_i$ belong to $\\mathcal U$, so their coproduct belongs to $\\mathcal U$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source",
+    "lem-sfb-finite-open-parts-fppf-sheaf",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG (lemma-finite-surjective-etale-cover), disjoint union of the chosen scheme charts. Use the sheaf-gluing formulation, which does not require a separate finite-locality theorem."
+   }
+  },
+  {
+   "text": "For each test scheme $T\\to P$ and point $t\\in T$, restrict its pair to $\\operatorname{Spec}\\kappa(t)\\to T$. The chart-family lifting property supplies an index $i$, an extension $\\kappa(t)\\hookrightarrow L$, and a map $\\operatorname{Spec}L\\to U_i$ inducing that restricted pair after extension. By the section description in step 3 this gives a map $\\operatorname{Spec}L\\to B_i\\subseteq T\\times_PU$ whose image in $T$ is $t$. Every point $t$ is therefore in the image of $T\\times_PU\\to T$, so this projection is surjective. We have proved a representable surjective etale scheme atlas $c:h_U\\to P$.",
+   "uses": [
+    "lem-sfb-finite-open-geometric-chart-family",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QG (lemma-finite-surjective-etale-cover), geometric-point surjectivity argument and scheme-test definition of surjectivity."
+   }
+  },
+  {
+   "text": "The sheaf $P$, its representable absolute diagonal, and the atlas just constructed satisfy the three defining conditions for an algebraic space. Let $E$ be this sheaf with that property; then $E(T)=P(T)$, naturally, and $p:E\\to Y$ forgets $Z$. Regard $Y$ as its scheme algebraic space. The atlas composite $U\\to E\\to Y$ is $h_a:h_U\\to h_Y$ for the etale scheme morphism $a$ of step 4; it is representable etale, since for every scheme $T\\to Y$ the fibre product $h_T\\times_{h_Y}h_U$ is represented by the scheme fibre product $T\\times_YU$, whose projection to $T$ is the base change of the etale $a$, hence etale. Conversely, for a scheme chart $V\\to E$ with $V\\to E\\to Y$ representable etale, testing on $\\mathrm{id}_Y$ shows that the scheme morphism $V\\to Y$ is etale. Source-atlas detection, clause (3), now implies that $p$ is chartwise etale: every representable etale scheme chart $V\\to E$ has etale composite $V\\to Y$. The atlas of step 4 is in the chosen universe. This proves all the positive assertions of the statement.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-scheme-algebraic-space",
+    "lem-trf-space-etale-source-atlas-detection",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 04QH (proposition-finite-algebraic-space), verification of the three defining conditions and final use of Tag 03FS (spaces-properties-lemma-etale-local)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-sfb-finite-open-parts-fppf-sheaf",
+  "lem-sfb-finite-open-equality-locus",
+  "def-pc-fibre-product",
+  "lem-sfb-finite-open-geometric-chart-family",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-local-on-source",
+  "def-weil-size-convention",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-etale-source-atlas-detection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 04QH (proposition-finite-algebraic-space), with Tags 04PE, 04PK, 04QE, 04QG and its geometric-point proof; size-bounded choice of charts made explicit in the geometric chart-family input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite[Pp]art|finite_part|finite.*open.*(functor|sheaf)|04QH",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T14:47:11Z",
+    "tool": "grep",
+    "query": "finite[Pp]art|finite_part|finite.*open.*(functor|sheaf)|04QH",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, local representability requiring already constructed open charts, or unrelated finiteness. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:18-29,51-57 and Morphisms/Etale.lean:41-44; none constructs the finite-open-part functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of finite open parts of a separated locally finite type morphism is an etale algebraic space",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:11Z",
+    "tool": "leansearch",
+    "query": "The sheaf of finite open parts of a separated locally finite type morphism is an etale algebraic space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.IsFiniteType.mk",
+     "AlgebraicGeometry.LocallyRingedSpace.𝒪",
+     "Algebra.FormallyEtale.of_isSeparable_aux",
+     "AlgebraicGeometry.LocallyOfFiniteType.mk",
+     "AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+     "TopologicalSpace.Opens.instFinite",
+     "AlgebraicGeometry.LocallyOfFiniteType.casesOn",
+     "AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion"
+    ],
+    "digest": "b50a5329085d3647"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, local representability requiring already constructed open charts, or unrelated finiteness. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:18-29,51-57 and Morphisms/Etale.lean:41-44; none constructs the finite-open-part functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"Etale\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:11Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"Etale\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, local representability requiring already constructed open charts, or unrelated finiteness. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:18-29,51-57 and Morphisms/Etale.lean:41-44; none constructs the finite-open-part functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated locally finite type morphism of schemes, its functor of finite open subschemes is an algebraic space etale over the target",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:13Z",
+    "tool": "leanfinder",
+    "query": "For a separated locally finite type morphism of schemes, its functor of finite open subschemes is an algebraic space etale over the target",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.Scheme.instCategoryEtale",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.Scheme.Etale.forget",
+     "AlgebraicGeometry.Scheme.instFullEtaleOverForget",
+     "AlgebraicGeometry.Scheme.etalePretopology"
+    ],
+    "digest": "055e0790813dc07d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, local representability requiring already constructed open charts, or unrelated finiteness. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:18-29,51-57 and Morphisms/Etale.lean:41-44; none constructs the finite-open-part functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the functor of finite clopen subspaces as an algebraic space, without flatness",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T14:47:14Z",
+    "tool": "leanfinder",
+    "query": "Representability of the functor of finite clopen subspaces as an algebraic space, without flatness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "instRepresentablyFlatOpensCarrierMap",
+     "AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+     "Condensed.finYoneda",
+     "LightCondensed.finYoneda",
+     "AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "DiscreteQuotient.finsetClopens"
+    ],
+    "digest": "22c83ea479592f79"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme etale morphisms, local representability requiring already constructed open charts, or unrelated finiteness. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:18-29,51-57 and Morphisms/Etale.lean:41-44; none constructs the finite-open-part functor."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagonal|equal.*locus|equality.*locus",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:08:10Z",
+    "tool": "grep",
+    "query": "finite.*diagonal|equal.*locus|equality.*locus",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean"
+    ],
+    "digest": "3f93c9c41008acfa"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(part|open).*sheaf|finite.*subscheme.*functor",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:08:10Z",
+    "tool": "grep",
+    "query": "finite.*(part|open).*sheaf|finite.*subscheme.*functor",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "grep",
+   "query": "splits_off|isCompl_of_quasiFiniteAt|purelyInseparable.*[Ee]tale|exists_etale",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:08:10Z",
+    "tool": "grep",
+    "query": "splits_off|isCompl_of_quasiFiniteAt|purelyInseparable.*[Ee]tale|exists_etale",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean"
+    ],
+    "digest": "5de151a4ae5547b1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite open subschemes of a morphism descend uniquely under faithfully flat base change",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:10Z",
+    "tool": "leansearch",
+    "query": "Finite open subschemes of a morphism descend uniquely under faithfully flat base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange"
+    ],
+    "digest": "20db9dac1feb47f2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsOpenImmersion\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:11Z",
+    "tool": "loogle",
+    "query": "\"IsFinite\", \"IsOpenImmersion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSheaf\", \"IsFinite\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:11Z",
+    "tool": "loogle",
+    "query": "\"IsSheaf\", \"IsFinite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"IsEtale\", \"IsFinite\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:11Z",
+    "tool": "loogle",
+    "query": "\"LocallyQuasiFinite\", \"IsEtale\", \"IsFinite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of the finite open part functor is representable by open subschemes",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:11Z",
+    "tool": "leansearch",
+    "query": "The diagonal of the finite open part functor is representable by open subschemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.relativelyRepresentable.diag_iff",
+     "CategoryTheory.Functor.relativelyRepresentable.of_diag",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
+     "CategoryTheory.Functor.relativelyRepresentable.diag_of_map_from_obj",
+     "AlgebraicGeometry.IsImmersion.instDiagonalScheme",
+     "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+     "AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover",
+     "AlgebraicGeometry.isSeparated_iff"
+    ],
+    "digest": "87ada4286bdc1800"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous etale splitting of isolated fibre points into disjoint finite pieces with radicial special fibres",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:11Z",
+    "tool": "leansearch",
+    "query": "Simultaneous etale splitting of isolated fibre points into disjoint finite pieces with radicial special fibres",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.isOpen_etaleLocus",
+     "AlgebraicGeometry.IsEtale",
+     "Algebra.etaleLocus",
+     "Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+     "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+     "Algebra.Etale.iff_exists_algEquiv_prod",
+     "Algebra.exists_etale_of_isEtaleAt",
+     "Algebra.etaleLocus_eq_univ_iff_etale"
+    ],
+    "digest": "72929d69d7942c56"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality locus of two open subschemes finite over the base is open and commutes with arbitrary base change",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:12Z",
+    "tool": "leanfinder",
+    "query": "Equality locus of two open subschemes finite over the base is open and commutes with arbitrary base change",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+     "AlgebraicGeometry.isPullback_opens_inf",
+     "AlgebraicGeometry.IsFinite.instMorphismRestrict",
+     "AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsFinite.instFstScheme",
+     "AlgebraicGeometry.IsFinite.instSndScheme",
+     "AlgebraicGeometry.IsImmersion.instιScheme",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme"
+    ],
+    "digest": "ba241463a5cf7cd1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated locally finite type scheme morphism splits selected isolated fibre points into finite clopen pieces with purely inseparable residue fields on an etale neighborhood",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:14Z",
+    "tool": "leanfinder",
+    "query": "A separated locally finite type scheme morphism splits selected isolated fibre points into finite clopen pieces with purely inseparable residue fields on an etale neighborhood",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType",
+     "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+     "AlgebraicGeometry.Scheme.Hom.discrete_fiber",
+     "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+     "AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+     "AlgebraicGeometry.Scheme.Etale"
+    ],
+    "digest": "3796678528e39984"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of open subschemes finite over the base of a scheme morphism is an fppf sheaf",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:08:15Z",
+    "tool": "leanfinder",
+    "query": "The functor of open subschemes finite over the base of a scheme morphism is an fppf sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instMorphismRestrict",
+     "AlgebraicGeometry.LocallyOfFiniteType",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.IsFinite.instLocallyOfFiniteType",
+     "AlgebraicGeometry.IsFinite.finite_app",
+     "AlgebraicGeometry.Scheme.Hom.finite_app",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.IsFinite"
+    ],
+    "digest": "86915f9fa28b07bc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(open|part).*fppf|fppf.*finite.*open",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:10:27Z",
+    "tool": "grep",
+    "query": "finite.*(open|part).*fppf|fppf.*finite.*open",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagonal|equal.*locus|open.*diagonal",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:10:27Z",
+    "tool": "grep",
+    "query": "finite.*diagonal|equal.*locus|open.*diagonal",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean"
+    ],
+    "digest": "970fe0296c74151c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "grep",
+   "query": "surjective.*etale.*(finite|quasi)|finite.*surjective.*etale",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:10:27Z",
+    "tool": "grep",
+    "query": "surjective.*etale.*(finite|quasi)|finite.*surjective.*etale",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of algebraic spaces, the functor assigning open subspaces finite over the base is an fppf sheaf and maps from an algebraic space are its pairs",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:27Z",
+    "tool": "leansearch",
+    "query": "For a morphism of algebraic spaces, the functor assigning open subspaces finite over the base is an fppf sheaf and maps from an algebraic space are its pairs",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor",
+     "AlgebraicGeometry.Scheme.Hom.opensFunctor",
+     "AlgebraicGeometry.IsFinite.recOn",
+     "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.opensFunctor",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.opensFunctor",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor",
+     "AlgebraicGeometry.Scheme.Hom.app",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.forgetMapIsOpenImmersion"
+    ],
+    "digest": "c1a7828e57adeee6"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"AlgebraicGeometry.IsFinite\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:27Z",
+    "tool": "loogle",
+    "query": "\"IsOpenImmersion\", \"AlgebraicGeometry.IsFinite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSheafFor\", \"Fppf\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:27Z",
+    "tool": "loogle",
+    "query": "\"IsSheafFor\", \"Fppf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"Surjective\", \"LocallyQuasiFinite\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:27Z",
+    "tool": "loogle",
+    "query": "\"IsEtale\", \"Surjective\", \"LocallyQuasiFinite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated locally quasi-finite morphism has an etale scheme atlas of its finite open part functor",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:27Z",
+    "tool": "leansearch",
+    "query": "A separated locally quasi-finite morphism has an etale scheme atlas of its finite open part functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.LocallyQuasiFinite.recOn",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+     "AlgebraicGeometry.LocallyQuasiFinite.mk",
+     "AlgebraicGeometry.instLocallyQuasiFiniteCompScheme",
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace"
+    ],
+    "digest": "c3791676c034aca2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of the sheaf of open finite parts is representable by an open immersion",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:27Z",
+    "tool": "leansearch",
+    "query": "The diagonal of the sheaf of open finite parts is representable by an open immersion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+     "AlgebraicGeometry.IsImmersion.instDiagonalScheme",
+     "AlgebraicGeometry.IsImmersion.instLiftSchemeId",
+     "AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.of_isIso",
+     "AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal",
+     "AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion"
+    ],
+    "digest": "c6601438741eaf78"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative diagonal of the finite part functor is an open immersion represented by a scheme",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:28Z",
+    "tool": "leanfinder",
+    "query": "The relative diagonal of the finite part functor is an open immersion represented by a scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+     "AlgebraicGeometry.IsImmersion.instDiagonalScheme",
+     "AlgebraicGeometry.IsImmersion.instLiftSchemeId",
+     "AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme",
+     "AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion",
+     "AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange",
+     "AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne",
+     "AlgebraicGeometry.IsOpenImmersion.instSndScheme"
+    ],
+    "digest": "4c644d4ccaa2f628"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor of finite open subspaces of a morphism is an fppf sheaf with values pairs",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:29Z",
+    "tool": "leanfinder",
+    "query": "The functor of finite open subspaces of a morphism is an fppf sheaf with values pairs",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PresheafIsFinite",
+     "CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat",
+     "CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits",
+     "LightProfinite.instWEqualsLocallyBijectiveCoherentTopology",
+     "TopCat.Presheaf.SheafCondition.instFinalPairwiseOpensLeCoverPairwiseToOpensLeCover",
+     "CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize",
+     "CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits",
+     "CategoryTheory.coherentTopology.isLocallySurjective_iff"
+    ],
+    "digest": "1784443ddbc583cb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjective etale scheme atlas for the sheaf of finite open subspaces of a separated locally quasi-finite morphism",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:10:30Z",
+    "tool": "leanfinder",
+    "query": "Surjective etale scheme atlas for the sheaf of finite open subspaces of a separated locally quasi-finite morphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.instSurjectiveDescI₀SchemeF",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.instCategoryEtale"
+    ],
+    "digest": "41734b208bd077d0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(geometric|fiber).*([Ll]ift|[Nn]eigh)|exists_etale_isCompl",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:13:27Z",
+    "tool": "grep",
+    "query": "finite.*(geometric|fiber).*([Ll]ift|[Nn]eigh)|exists_etale_isCompl",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean"
+    ],
+    "digest": "e29727c0b0067e05"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a finite open subscheme of a geometric fibre of a separated locally quasi-finite morphism to a finite open subscheme over an etale neighbourhood",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:13:27Z",
+    "tool": "leansearch",
+    "query": "Lift a finite open subscheme of a geometric fibre of a separated locally quasi-finite morphism to a finite open subscheme over an etale neighbourhood",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.IsOpenImmersion.lift.congr_simp",
+     "AlgebraicGeometry.IsOpenImmersion.lift",
+     "AlgebraicGeometry.IsOpenImmersion.instLift",
+     "AlgebraicGeometry.LocallyQuasiFinite.mk",
+     "AlgebraicGeometry.LocallyQuasiFinite.recOn",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift.congr_simp",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift_range"
+    ],
+    "digest": "43a39288a358ec8c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsFinite\", \"IsOpenImmersion\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:13:27Z",
+    "tool": "loogle",
+    "query": "\"IsEtale\", \"IsFinite\", \"IsOpenImmersion\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every geometric finite open part of a separated locally quasi-finite scheme morphism there is an affine etale neighbourhood with a finite open subscheme inducing that part",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:13:28Z",
+    "tool": "leanfinder",
+    "query": "For every geometric finite open part of a separated locally quasi-finite scheme morphism there is an affine etale neighbourhood with a finite open subscheme inducing that part",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.locallyQuasiFinite_iff",
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.reduce_to_affine_nbhd",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.locallyOfFiniteType_iff",
+     "AlgebraicGeometry.LocallyOfFiniteType"
+    ],
+    "digest": "3843ceccdec9aaa7"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale locally a chosen union of geometric isolated fibre components extends to an open finite part, without flatness",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:13:29Z",
+    "tool": "leanfinder",
+    "query": "Etale locally a chosen union of geometric isolated fibre components extends to an open finite part, without flatness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.isOpen_etaleLocus",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "RingHom.Etale.propertyIsLocal",
+     "Algebra.etaleLocus",
+     "RingHom.Etale.ofLocalizationSpanTarget",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "Algebra.isOpen_unramifiedLocus"
+    ],
+    "digest": "b6c081b2f0687318"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*open.*part|geometric.*finite.*part|finite.*etale.*atlas",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "t": "2026-10-23T20:14:55Z",
+    "tool": "grep",
+    "query": "finite.*open.*part|geometric.*finite.*part|finite.*etale.*atlas",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean"
+    ],
+    "digest": "9d625071524054d3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded family of etale neighbourhoods and finite open subschemes covers all finite open parts of geometric fibres",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:14:55Z",
+    "tool": "leansearch",
+    "query": "A bounded family of etale neighbourhoods and finite open subschemes covers all finite open parts of geometric fibres",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.affineOpenCover",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen",
+     "AlgebraicGeometry.Scheme.affineCover",
+     "AlgebraicGeometry.Scheme.OpenCover.compactSpace",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "AlgebraicGeometry.Scheme.OpenCover",
+     "AlgebraicGeometry.Scheme.directedAffineCover"
+    ],
+    "digest": "3f8a753c30ef0dc3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsFinite\"",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:14:55Z",
+    "tool": "loogle",
+    "query": "\"IsEtale\", \"IsFinite\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated locally quasi-finite map of small schemes there is a small set of affine etale neighbourhoods with finite open parts realizing every geometric finite open part",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T20:14:56Z",
+    "tool": "leanfinder",
+    "query": "For a separated locally quasi-finite map of small schemes there is a small set of affine etale neighbourhoods with finite open parts realizing every geometric finite open part",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.locallyQuasiFinite_iff",
+     "AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.locallyOfFiniteType_iff",
+     "AlgebraicGeometry.LocallyOfFiniteType"
+    ],
+    "digest": "08bcae0e381edca5"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etale/quasi-finite facts, generic representability/descent, or unrelated sheaves do not state this finite-part algebraic-space assertion; candidate source files read as reported."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-section-marked-finite-parts-scheme",
+  "date": "2026-10-23",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Pointed affine etale quasi-splitting of a flat locally quasi-finite groupoid. Supporting input: finite-part parameter scheme and its residue-field point used before the affine quasi-splitting. Unmarked finite-part algebraic space used in the proof of Tag 04RI, first paragraph (Proposition 04QH).",
+   "via": [
+    "lem-sfb-section-marked-finite-parts-scheme",
+    "lem-sfb-affine-groupoid-pointed-quasisplitting",
+    "lem-sfb-fppf-relation-etale-replacement",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unmarked-finite-open-parts-space",
+  "worker": "stage1",
+  "summary": "Read Stacks finite-part construction and its proof, checked hypotheses and existing DAG/Lean sources, and split into fppf descent, an open equality locus, and a universe-bounded field-lifting family. The item constructs representable etale chart maps by equality loci, proves their coproduct surjective on scheme tests, checks the algebraic-space definition and uses the existing chartwise source-atlas theorem. Three statement-only inputs; no statement change and no Lean writing or compilation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: affine locally quasi-finite relation; finite etale quasi-splitting charts and quotient by the open finite locally free subrelation (Tags 04S0, 04S4). Supporting input: Pointed affine etale quasi-splitting of a flat locally quasi-finite groupoid. Supporting input: finite-part parameter scheme and its residue-field point used before the affine quasi-splitting. Unmarked finite-part algebraic space used in the proof of Tag 04RI, first paragraph (Proposition 04QH). This supporting subdivision implements the finite-part algebraic-space input through descent, equality loci and geometric finite-part charts; the current blueprint direct-image proof (3) is read from latest. The ancestor tool returns None for this created-node chain, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-etale-source-atlas-detection",
+    "why": "Generic scheme or algebraic-space calculus used in the displayed scheme tests/atlas detection, with exactly its stated hypotheses; the unit supplies no separate finite-part version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-etale-source-atlas-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-6c04c400e",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-6c04c400e (reviewer sub-agent of L); spot-checked: Read the item, its 6 steps and the 3 new unsplit nodes in full, together with Stacks spaces-more-groupoids 04PE, 04PG, 04PK, 04QE, 04QG and 04QH, and more-morphisms 02LO. The item statement is unchanged and matches 04QH for schemes: separated plus locally finite type, chartwise étale, nothing weakened. The new nodes are true. The fppf sheaf node is 04PE(1) and needs no separatedness. The equality-locus node is the 04PK construction: D is closed because finite maps are closed, and the fibre surjectivity gives the universal property. The chart family follows from 02LO at the finitely many isolated image points over an algebraic closure, with one chart per finite subset of a fixed geometric fibre, so the family is U-small; separatedness is genuinely needed. No new node restates an item clause, and the item carries the real construction: charts c_i through equality loci, the coproduct gluing, surjectivity on points and the definition check. Duplicate search by tags and keywords found nothing; the nearest nodes are section-marked, 04RU groupoid, SGA4 XVII presentation and trf coproduct-equality. Batch-5: def-trf-scheme-algebraic-space is a general definition. The closure of lem-trf-space-etale-source-atlas-detection (Stacks 03EC/03FS) contains only generic algebraic-space trf nodes, with no trace-formula or Poincaré proof node and no assume leaf, so it is outside both assumptions; its tool_use is accepted. No SGA citations. FIX in step 6: it did not justify that h_a: h_U→h_Y is representable étale in the def-trf sense, nor how representable étaleness of V→E→Y gives scheme étaleness of V→Y. Added both, with uses def-pc-fibre-product and lem-weil-pbc-etale-base-change-finite-limits; both were already in proof_deps. Advisory: step 4 treats a Zariski cover as an fppf cover without comment, which is elementary.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnmarkedFiniteOpenPartsSpace",
+  "declaration": "AlgebraicGeometry.exists_unmarked_finite_open_parts_space",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnmarkedFiniteOpenPartsSpace.lean",
+  "statement": "theorem exists_unmarked_finite_open_parts_space {S : Scheme.{u}} (X Y : Over S) (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] : ∃ (E : AlgebraicSpace S) (p : E.obj.obj ⟶ yoneda.obj Y) (e : ∀ T : Over S, E.obj.obj.obj (op T) ≃ (Σ a : T ⟶ Y, {Z : (pullback f.left a.left).Opens // IsFinite (Z.ι ≫ pullback.snd f.left a.left)})), (∀ (T : Over S) (x : E.obj.obj.obj (op T)), (e T x).1 = p.app (op T) x) ∧ (∀ (T T' : Over S) (h : T' ⟶ T) (x : E.obj.obj.obj (op T)), ∃ b : pullback f.left (e T' (E.obj.obj.map h.op x)).1.left ⟶ pullback f.left (e T x).1.left, b ≫ pullback.fst f.left (e T x).1.left = pullback.fst f.left (e T' (E.obj.obj.map h.op x)).1.left ∧ b ≫ pullback.snd f.left (e T x).1.left = pullback.snd f.left (e T' (E.obj.obj.map h.op x)).1.left ≫ h.left ∧ (e T' (E.obj.obj.map h.op x)).2.val = b ⁻¹ᵁ (e T x).2.val) ∧ (∀ (V : Over S) (c : yoneda.obj V ⟶ E.obj.obj), AlgebraicSpace.IsEtale c → Etale (yoneda.preimage (c ≫ p)).left)",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The sigma type is exactly the finite-open-pair set. The bijections and the two projection equations plus inverse-image equation specify its pullback restriction without a second finite-part functor definition. The last conjunct is scheme-chart etaleness; the same-universe atlas is part of AlgebraicSpace S."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-adf3bd617",
+  "group": "Q22",
+  "result": "pass",
+  "note": "The statement matches node and Stacks 04QH for schemes. Hypotheses are exactly IsSeparated and LocallyOfFiniteType on f.left. P(T) is the literal sigma of an S-map a and an open of pullback f.left a.left with finite projection to T. Natural bijections e: the forgetful p is checked by conjunct 1, and restriction is the pullback by the canonical map b, fixed by its two projection equations, with the open b⁻¹ᵁZ. Chartwise étaleness: every representable étale chart c from a scheme has Etale (yoneda.preimage (c≫p)).left; p is not claimed representable étale. Atlas universe comes from the AlgebraicSpace definition. All types are in Type u. The statement field is verbatim. The 9 stmt_dep records are consistent, and the node differs from live only in lean. No duplicate: QuasiFiniteFinitePartsPresentation is a different notion and the sibling nodes have no lean. Not superseded live. Proof is sorry only; docstrings carry the source place and the 6 steps. Advisories: plain Mathlib proof-input imports unused by the statement; the second reading was done by the author. No compile run since no file changed."
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "id": "lem-a1-algebraic-space-fpqc-etale-local-extension",
+ "kind": "statement",
+ "title": "Etale local extension on an affine fpqc singleton",
+ "statement": "Let E be an algebraic space over S [def-trf-algebraic-space], let T and Tprime be affine schemes over S [def-pc-scheme], and let f:Tprime->T be flat [def-weil-flat-morphism] and surjective. Suppose a section x of E on Tprime has equal restrictions along every pair g,h:Z->Tprime with fg=fh. Then there exist an S-scheme W, a surjective etale [def-weil-etale-morphism] map p:W->T, and a section y of E on W such that y and x restrict equally to W times_T Tprime [def-pc-fibre-product]. No separatedness or finiteness condition is imposed on E or W.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0APL, Gabber proof, construction V=U times_E Tprime, effective descent to W, and descent of the invariant map bprime to U; stops before etale sheaf gluing."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Regard x as c:Tprime->E. The affine source Tprime is quasi-compact. Apply [lem-a1-qc-map-affine-etale-neighbourhood] to choose an affine U with a representable etale map u:U->E and a representing scheme V=Tprime times_E U. The projection V->Tprime is surjective, etale, separated and locally quasi-finite. The two restrictions of c over D=Tprime times_T Tprime agree by the hypothesis. Thus the two pullbacks of V to D represent the same fibre product D times_E U. Their comparison retains the U coordinate and changes the distinguished Tprime coordinate. On the triple overlap both successive and direct comparisons retain every base coordinate and the U coordinate, so the fibre-product universal property verifies the cocycle of [def-pd-descent-datum] using [def-pc-fibre-product].",
+   "uses": [
+    "lem-a1-qc-map-affine-etale-neighbourhood",
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-a1-separated-lqf-fpqc-effective-descent] to the datum of step 1. It gives W->T and an isomorphism V ≅ W times_T Tprime compatible with transport. By [lem-galois-fpqc-descend-etale], W->T is etale. It is surjective: lift any point of T to Tprime using the flat surjection, then to V using its surjectivity, and map the lift to W. The singleton f is fpqc by [def-weil-pbc-fpqc-covering], since source and target are affine. No quasi-compactness of V is needed.",
+   "uses": [
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-galois-fpqc-descend-etale",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write Wprime=W times_T Tprime, identified with V. Its map bprime to U is invariant under transport, since transport retains the U coordinate. The cover Wprime->W is fpqc by [lem-galois-fpqc-covering-base-change]. Scheme-valued descent [lem-weil-pbc-fpqc-representable-descent] glues bprime to b:W->U. Its composite to S agrees with W->T->S after Wprime->W; uniqueness of scheme-valued descent with target S makes it an S-map. The composite y:W->U->E is the required local extension. The pullback defining V gives the equality between its restriction to Wprime and the restriction of x from Tprime.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-qc-map-affine-etale-neighbourhood",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product",
+  "lem-a1-separated-lqf-fpqc-effective-descent",
+  "lem-galois-fpqc-descend-etale",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0APL, Gabber proof, construction V=U times_E Tprime, effective descent to W, and descent of the invariant map bprime to U; stops before etale sheaf gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an invariant map to an algebraic space on an affine faithfully flat cover there is an etale local extension over the base",
+   "results": "Eight hits: etale stability under base change, the scheme etale site and ring-level etale descent, no extension theorem for algebraic spaces.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; Mathlib has no algebraic-space notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isSheaf_type_propQCTopology_iff\"",
+   "results": "AlgebraicGeometry.isSheaf_type_propQCTopology_iff, the absolute affine criterion.",
+   "date": "2026-10-26",
+   "verdict": "Used for the absolute part; the relative total-presheaf construction and chart extension are additional arguments."
+  },
+  {
+   "tool": "grep",
+   "query": "fpqc.*(sheaf|section)|IsSheaf.*fpqc",
+   "results": "Mathlib Sites/Fpqc and Sites/SheafQuasiCompact; constant-sheaf fpqc results. Local search found no algebraic-space etale local extension or relative affine criterion.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate; checked the source declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcSheaf",
+  "date": "2026-10-26",
+  "group": "U2"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Tag 0APL, Gabber proof, construction V=U times_E Tprime, effective descent to W, and descent of the invariant map bprime to U; stops before etale sheaf gluing. Supporting the fpqc descent input of the Loc_X-to-Cov_X argument.",
+   "via": [
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcLocalExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFpqcLocalExtension.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_etale_local_extension_of_affine_fpqc",
+  "statement": "theorem exists_etale_local_extension_of_affine_fpqc {S : Scheme.{u}} (E : AlgebraicSpace S) {T T' : Over S} [IsAffine T.left] [IsAffine T'.left] (f : T' ⟶ T) [Flat f.left] [Surjective f.left] (x : E.obj.obj.obj (op T')) (hx : ∀ {Z : Over S} (g h : Z ⟶ T'), g ≫ f = h ≫ f → E.obj.obj.map g.op x = E.obj.obj.map h.op x) : ∃ (W : Over S) (p : W ⟶ T), Etale p.left ∧ Surjective p.left ∧ ∃ y : E.obj.obj.obj (op W), E.obj.obj.map (pullback.fst p f).op y = E.obj.obj.map (pullback.snd p f).op x",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T083132-L-2278410",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T083132-L-2278410",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

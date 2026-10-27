@@ -1,0 +1,263 @@
+{
+ "id": "lem-trf-homogeneous-division-extra-variables",
+ "kind": "statement",
+ "title": "Supported homogeneous division under complementary-variable perturbations",
+ "statement": "Let $L$ be a field [def-weil-field], let $m,r,s\\ge0$, and use the polynomial rings $L[V_1,\\ldots,V_r]$ and $L[U_1,\\ldots,U_m,V_1,\\ldots,V_r]$ [def-weil-pbc-mv-polynomial-ring]. Let $\\alpha_1,\\ldots,\\alpha_s\\in\\mathbf N^r$ be distinct ordered vectors, $d_i=|\\alpha_i|$, $D=\\bigcup_i(\\alpha_i+\\mathbf N^r)$, and $\\Delta_i=\\{\\beta:\\alpha_i+\\beta\\notin\\bigcup_{j<i}(\\alpha_j+\\mathbf N^r)\\}$. Let $H_i(U,V)$ be homogeneous polynomials of total degree $d_i$, allowing zero polynomials, and put $h_i(V)=H_i(0,V)$. Then the following are equivalent:\n(i) For every $t\\ge0$, the indexed family $\\{V^\\beta h_i:\\beta\\in\\Delta_i,\\ |\\beta|+d_i=t\\}\\amalg\\{V^\\gamma:\\gamma\\notin D,\\ |\\gamma|=t\\}$ is an $L$-basis of the homogeneous degree-$t$ polynomials in $V$.\n(ii) For every $t\\ge0$, the indexed family $\\{U^\\mu V^\\beta H_i:\\beta\\in\\Delta_i,\\ |\\mu|+|\\beta|+d_i=t\\}\\amalg\\{U^\\mu V^\\gamma:\\gamma\\notin D,\\ |\\mu|+|\\gamma|=t\\}$ is an $L$-basis of the homogeneous degree-$t$ polynomials in $(U,V)$.\nIn the second family the orthant diagram is $\\mathbf N^m\\times D$ and the quotient supports are $\\mathbf N^m\\times\\Delta_i$, so these are exactly the unique supported homogeneous division properties of [def-trf-supported-homogeneous-division]. No monotonicity of $D$ or first-exponent hypothesis on the $H_i$ is assumed. The equivalence remains valid after any extension of $L$, with the polynomials mapped coefficientwise; if the equivalent properties hold over $L$, they hold after every such extension. The empty vertex list, either empty variable list, and a vertex of degree zero are included.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Route: VIII 2.3.11--2.3.13, printed pp.93--94. Detailed algebraic input: Bierstone--Milman, Canonical desingularization in characteristic zero, Invent. Math. 128 (1997), Lemma 7.7, printed pp.263--264, implication (c) to (a) and its converse; degree-by-degree formulation. Read online at https://mahalex.net/seminars/gabber/Bierstone-Milman%20Canonical%20desingularization%20in%20characteristic%20zero.pdf; BM is WANTED locally. No Stacks tag states this supported division comparison."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-supported-homogeneous-division"
+ ],
+ "proof": [
+  {
+   "text": "Fix $t$. Assign a generator index $(i,\\beta)$ to $\\alpha_i+\\beta$ and a remainder index $\\gamma$ to $\\gamma$. Every exponent in $D$ lies in exactly one first orthant: take the least $i$ with $\\alpha_i\\le\\gamma$ coordinatewise, then $\\beta=\\gamma-\\alpha_i\\in\\Delta_i$. Conversely this assignment determines $i,\\beta$ uniquely. It preserves degree. Thus the degree-$t$ restricted index set bijects with the degree-$t$ monomials in $V$. The all-variable index set bijects with the degree-$t$ monomials in $(U,V)$ by keeping $\\mu$. Both are finite, since every coordinate is at most $t$. Adding zero $U$ coordinates to the vertices gives precisely $\\mathbf N^m\\times D$ and $\\mathbf N^m\\times\\Delta_i$. These are the supported quotient and remainder indices in [def-trf-supported-homogeneous-division]; only its indexed-family definition is used, not its monotonicity or finite-test conditions.",
+   "uses": [
+    "def-trf-supported-homogeneous-division"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94, for the resolution route; algebra refinement of Bierstone--Milman 1997, Lemma 7.7, pp.263--264 (online PDF in source.place; WANTED locally). The argument below is written by Q41."
+   }
+  },
+  {
+   "text": "Assume (i). Every homogeneous degree-$t$ polynomial has a unique expression $\\sum_{|\\mu|\\le t}U^\\mu p_\\mu(V)$, where $p_\\mu$ is homogeneous of degree $t-|\\mu|$: group its monomials by their $U$ exponent. Expand each $p_\\mu$ uniquely in the basis from (i) for that degree. Comparing $U$ coefficients proves both spanning and independence. Hence the unperturbed family $B_t^0=\\{U^\\mu V^\\beta h_i\\}\\amalg\\{U^\\mu V^\\gamma\\}$, with exactly the indices of (ii), is a basis. This coefficient argument uses the finite monomial expansion of [def-weil-pbc-mv-polynomial-ring].",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94, for the resolution route; algebra refinement of Bierstone--Milman 1997, Lemma 7.7, pp.263--264 (online PDF in source.place; WANTED locally). The argument below is written by Q41."
+   }
+  },
+  {
+   "text": "Order the finite indices of $B_t^0$ by increasing $|\\mu|$, breaking ties arbitrarily. The difference of the perturbed generator and its corresponding old basis vector is $U^\\mu V^\\beta(H_i-h_i)$. Each monomial of $H_i-h_i$ has positive $U$ degree. Grouping this difference by $U^\\nu$, its nonzero coefficients have $|\\nu|>|\\mu|$ and are homogeneous in $V$ of degree $t-|\\nu|$. Expand each coefficient in the corresponding restricted basis from (i), exactly as in step 2. Thus each new vector equals its old vector plus a combination of old vectors strictly later in this order. Remainder vectors are unchanged. The coordinate matrix is triangular with diagonal $1$. Apply [lem-weil-pbc-triangular-change-of-basis], with $R=L$, the degree-$t$ polynomial space as the free module, and $B_t^0$ as its basis (enumerate the finite index set). Its unit-diagonal hypotheses hold. The resulting basis is exactly (ii).",
+   "uses": [
+    "lem-weil-pbc-triangular-change-of-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94, for the resolution route; algebra refinement of Bierstone--Milman 1997, Lemma 7.7, pp.263--264 (online PDF in source.place; WANTED locally). The argument below is written by Q41."
+   }
+  },
+  {
+   "text": "Assume (ii). Express a degree-$t$ polynomial $p(V)$ in its full basis and set $U=0$. Terms with $\\mu\\ne0$ vanish and those with $\\mu=0$ become exactly the restricted family, since $H_i(0,V)=h_i(V)$. Thus the restricted family spans. Step 1 bijects its indices with the monomial basis of the same degree. Send each monomial basis vector to the corresponding restricted vector, giving a surjective endomorphism of this finite free $L$-module. Apply [lem-weil-pbc-finite-module-surjective-endomorphism-bijective]; $L$ is commutative and the finite monomial basis supplies finite generation. The endomorphism is injective too, so the restricted indexed family is independent and is a basis. This proves (i) for every $t$.",
+   "uses": [
+    "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94, for the resolution route; algebra refinement of Bierstone--Milman 1997, Lemma 7.7, pp.263--264 (online PDF in source.place; WANTED locally). The argument below is written by Q41."
+   }
+  },
+  {
+   "text": "For a field embedding $L\\to E$, each fixed-degree family is the same finite square coefficient matrix, now mapped into $E$, in the monomial bases of step 1. If it is a basis over $L$, its inverse matrix also has entries in $L$; mapping both matrices to $E$ preserves the two inverse identities, so it is a basis over $E$. This proves preservation for either equivalent property. The arguments in steps 1--4 apply over the field $E$ itself, proving the equivalence there whether or not the properties held over $L$. Grouping the generator coefficients by $i$ gives the quotient supported in $\\mathbf N^m\\times\\Delta_i$, and the remaining coefficients the remainder outside $\\mathbf N^m\\times D$; uniqueness of basis coefficients is exactly uniqueness of these supported homogeneous polynomials.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94, for the resolution route; algebra refinement of Bierstone--Milman 1997, Lemma 7.7, pp.263--264 (online PDF in source.place; WANTED locally). The argument below is written by Q41."
+   }
+  },
+  {
+   "text": "No step requires a first exponent or monotonicity. If $s=0$, $D$ is empty and both families are the full monomial families. If $m=0$, the families coincide; if $r=0$, the only $V$ exponent is $0$ and step 1 still applies. A degree-zero vertex has $H_i=h_i$ constant, so its perturbation difference is zero; if its constant vanishes and its index occurs, the zero vector prevents both properties. A zero $H_i$ whose quotient support is nonempty prevents both basis assertions in a degree containing one of its indices; if that support is empty, it contributes no vector to either family. Empty degree components use the empty basis and the zero-module endomorphism; degree zero uses the constant monomial. All stated degenerate cases are therefore included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94, for the resolution route; algebra refinement of Bierstone--Milman 1997, Lemma 7.7, pp.263--264 (online PDF in source.place; WANTED locally). The argument below is written by Q41."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-supported-homogeneous-division",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-triangular-change-of-basis",
+  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11--2.3.13, printed pp.93--94, for the resolution route; algebra refinement of Bierstone--Milman 1997, Lemma 7.7, pp.263--264 (online PDF in source.place; WANTED locally). The argument below is written by Q41."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supported.*division|division.*homogeneous|triangular.*homogeneous|homogeneous.*triangular",
+   "results": "{\"t\": \"2026-10-23T11:38:48Z\", \"tool\": \"grep\", \"query\": \"supported.*division|division.*homogeneous|triangular.*homogeneous|homogeneous.*triangular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial grading, homogenization, Groebner division and presentation-Jacobian declarations do not lift an arbitrary supported homogeneous division basis through extra-variable perturbations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-homogeneous-division-extra-variables: a homogeneous polynomial division basis stays a basis after adding variables and perturbing generators by terms in the new variables",
+   "results": "{\"t\": \"2026-10-23T11:38:48Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-homogeneous-division-extra-variables: a homogeneous polynomial division basis stays a basis after adding variables and perturbing generators by terms in the new variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize\", \"MvPolynomial.IsHomogeneous\", \"Polynomial.homogenize_dvd\", \"MvPolynomial.IsHomogeneous.pderiv\", \"Polynomial.homogenize_mul\", \"MvPolynomial.IsHomogeneous.finSuccEquiv_coeff_isHomogeneous\", \"MvPolynomial.IsHomogeneous.rename_isHomogeneous_iff\", \"MvPolynomial.homogeneousComponent_of_mem\"], \"digest\": \"bd20130b7d27ffd3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial grading, homogenization, Groebner division and presentation-Jacobian declarations do not lift an arbitrary supported homogeneous division basis through extra-variable perturbations"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, LinearEquiv, homogeneousSubmodule",
+   "results": "{\"t\": \"2026-10-23T11:38:49Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, LinearEquiv, homogeneousSubmodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'homogeneousSubmodule'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "query rejected: loogle: unknown identifier 'homogeneousSubmodule'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-homogeneous-division-extra-variables: homogeneous polynomials whose restrictions at extra variables zero give supported monomial division have unique supported division with the extra variables by a triangular degree filtration",
+   "results": "{\"t\": \"2026-10-23T11:38:49Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-homogeneous-division-extra-variables: homogeneous polynomials whose restrictions at extra variables zero give supported monomial division have unique supported division with the extra variables by a triangular degree filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.weightedDecomposition\", \"Polynomial.homogenize_dvd\", \"MonomialOrder.div\", \"MvPolynomial.support_divMonomial\", \"MonomialOrder.div_set\", \"MonomialOrder.div_single\", \"MvPolynomial.IsHomogeneous.inj_right\", \"MvPolynomial.decomposition.decompose'_eq\"], \"digest\": \"b68963f5d57c3c85\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial grading, homogenization, Groebner division and presentation-Jacobian declarations do not lift an arbitrary supported homogeneous division basis through extra-variable perturbations"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous, Basis",
+   "results": "{\"t\": \"2026-10-23T11:41:34Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.IsHomogeneous, Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Basis'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "query rejected: loogle: unknown identifier 'Basis'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-homogeneous-division-extra-variables: lift a homogeneous division basis from A[Y] to A[U,Y] for homogeneous generators by a finite block triangular matrix with invertible diagonal blocks",
+   "results": "{\"t\": \"2026-10-23T11:41:36Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-homogeneous-division-extra-variables: lift a homogeneous division basis from A[Y] to A[U,Y] for homogeneous generators by a finite block triangular matrix with invertible diagonal blocks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"HomogeneousLocalization.awayMap_mk\", \"HomogeneousLocalization.NumDenSameDeg\", \"Algebra.SubmersivePresentation.jacobianRelationsOfHasCoeffs\", \"Polynomial.homogenize\", \"HomogeneousLocalization.Away.mk\"], \"digest\": \"af54dbf60b0bb427\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial grading, homogenization, Groebner division and presentation-Jacobian declarations do not lift an arbitrary supported homogeneous division basis through extra-variable perturbations"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous, Module.Basis",
+   "results": "{\"t\": \"2026-10-23T11:45:48Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.IsHomogeneous, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LinearMap.toMvPolynomial_isHomogeneous\", \"LinearMap.polyCharpoly_coeff_isHomogeneous\"], \"digest\": \"e835c5b623df672b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned polynomial grading, homogenization, Groebner division and presentation-Jacobian declarations do not lift an arbitrary supported homogeneous division basis through extra-variable perturbations"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*division|division.*basis|basis.*homogeneous|homogeneous.*basis",
+   "results": "{\"t\": \"2026-10-23T13:05:20Z\", \"tool\": \"grep\", \"query\": \"homogeneous.*division|division.*basis|basis.*homogeneous|homogeneous.*basis\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern homogenization, homogeneous coefficients, monomial support bases or polynomial representations, not equivalence of these two supported indexed division families; read the listed source declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous polynomial supported division basis is preserved when adding extra variables and homogeneous perturbations vanishing when the new variables are zero",
+   "results": "{\"t\": \"2026-10-23T13:05:21Z\", \"tool\": \"leansearch\", \"query\": \"Homogeneous polynomial supported division basis is preserved when adding extra variables and homogeneous perturbations vanishing when the new variables are zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize\", \"MvPolynomial.IsHomogeneous.finSuccEquiv_coeff_isHomogeneous\", \"MvPolynomial.support\", \"Polynomial.homogenize_dvd\", \"MvPolynomial.basisRestrictSupport\", \"MvPolynomial.homogeneousComponent_of_mem\", \"Polynomial.homogenize_X\", \"MvPolynomial.homogeneousComponent\"], \"digest\": \"f5417813fe47d56b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern homogenization, homogeneous coefficients, monomial support bases or polynomial representations, not equivalence of these two supported indexed division families; read the listed source declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.IsHomogeneous, Module.Basis",
+   "results": "{\"t\": \"2026-10-23T13:05:21Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial.IsHomogeneous, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"LinearMap.toMvPolynomial_isHomogeneous\", \"LinearMap.polyCharpoly_coeff_isHomogeneous\"], \"digest\": \"e835c5b623df672b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern homogenization, homogeneous coefficients, monomial support bases or polynomial representations, not equivalence of these two supported indexed division families; read the listed source declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-homogeneous-division-extra-variables: homogeneous polynomial division basis lifts from setting extra variables to zero by triangular change of basis",
+   "results": "{\"t\": \"2026-10-23T13:05:22Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-homogeneous-division-extra-variables: homogeneous polynomial division basis lifts from setting extra variables to zero by triangular change of basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous.finSuccEquiv_coeff_isHomogeneous\", \"Polynomial.homogenize_dvd\", \"Polynomial.homogenize_eq_of_isHomogeneous\", \"Polynomial.eval_homogenize\", \"Polynomial.homogenize\", \"Polynomial.aeval_homogenize_X_one\", \"Polynomial.homogenizeLM\", \"MvPolynomial.IsHomogeneous.coeff_isHomogeneous_of_optionEquivLeft_symm\"], \"digest\": \"5a93cd8349cad542\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern homogenization, homogeneous coefficients, monomial support bases or polynomial representations, not equivalence of these two supported indexed division families; read the listed source declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-homogeneous-division-extra-variables: lift an indexed basis of homogeneous polynomials over a field through complementary variable perturbations using the filtration by degree in new variables",
+   "results": "{\"t\": \"2026-10-23T13:05:47Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-homogeneous-division-extra-variables: lift an indexed basis of homogeneous polynomials over a field through complementary variable perturbations using the filtration by degree in new variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.homogenize\", \"MvPolynomial.IsHomogeneous.finSuccEquiv_coeff_isHomogeneous\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"Polynomial.homogenizeLM\", \"LinearMap.toMvPolynomial_isHomogeneous\", \"MvPolynomial.weightedHomogeneousComponent\", \"MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination\", \"MvPolynomial.weightedDecomposition\"], \"digest\": \"629e5df08dff4652\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern homogenization, homogeneous coefficients, monomial support bases or polynomial representations, not equivalence of these two supported indexed division families; read the listed source declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coefficient-locus-uniform-division",
+  "date": "2026-10-23",
+  "group": "Q18"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "ILO VIII 2.3.11--2.3.13, pp.93--94: local Hilbert--Samuel presentation input; refined by BM 1997 Chapter III, Theorem 9.6 and its block induction (9.7)--(9.14), with the five formal conditions (7.2). Subargument: BM 1997 completion of Theorem 9.6, p.282, using Theorem 8.1 and Lemma 7.7. Returned steps 9--10. Algebraic subargument: BM Lemma 7.7, restricted versus all-variable supported homogeneous bases.",
+   "via": [
+    "lem-trf-coefficient-locus-uniform-division",
+    "lem-trf-regular-hilbert-coefficient-data",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-homogeneous-division-extra-variables",
+  "worker": "Q41",
+  "summary": "Proved both implications by finite monomial indexing, coefficient grouping, triangular unit-diagonal perturbation, and specialization plus the existing finite-module endomorphism lemma. Proved field-extension preservation by mapping inverse coefficient matrices. Retained statement and ancestry; no new nodes. Checked BM Lemma 7.7 online, ILO VIII 2.3.11--2.3.13 locally, all cited node statements, and degenerate cases. BM is WANTED locally; proof marked agent.",
+  "blueprint": "The inherited local-Hilbert--Samuel algebra branch under lem-trf-local-term-locality, through coefficient-locus-uniform-division: BM Lemma 7.7 restricted versus all-variable homogeneous division. Current latest ancestor and unit read; no route change or higher-level edit. Whole-blueprint searches homogeneous division, triangular, nilpotent, basis scalar found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-triangular-change-of-basis",
+    "why": "Generic finite triangular unit-diagonal basis-change tool; it proves the perturbation step for the new-variable degree ordering. No statement of this unit supplies this linear algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-module-surjective-endomorphism-bijective",
+    "why": "Generic finite-module linear algebra tool, already a Mathlib leaf; turns the explicit square spanning family after specialization into a basis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-triangular-change-of-basis",
+  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-e9f299817",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-e9f299817 (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and every cited statement. The cited nodes are def-weil-field, def-weil-pbc-mv-polynomial-ring, def-trf-supported-homogeneous-division, lem-weil-pbc-triangular-change-of-basis and lem-weil-pbc-finite-module-surjective-endomorphism-bijective (Orzech leaf). Step 1: the least-vertex map is a genuine degree-preserving bijection onto the monomials, and N^m×D and N^m×Δ_i match the Δ of the def node. Step 2: a basis in each summand U^μ·L[V]_{t−|μ|} gives a basis of the unperturbed family. Step 3: every monomial of H_i−h_i has positive U-degree, so errors land only in blocks with larger |μ|; the matrix is triangular with diagonal 1 and the triangular lemma applies exactly. Step 4: U=0 is a ring map, so the restricted family spans; the step-1 bijection makes this a surjective endomorphism of a finite module, which the Orzech leaf makes bijective. Step 5: the extension follows from mapped inverse matrices. Step 6: the degenerate cases hold. Small cases checked: H=V+U gives the basis {V+U,U}; H=U fails on both sides; a two-vertex r=2 case gives a unit triangular matrix. The only citer (coefficient-locus-uniform-division) uses only (i)⇒(ii), exactly as supplied. ILO VIII 2.3.11–2.3.13 (pp. 93–94) checked locally for the BM route; BM 1997 Lemma 7.7 is WANTED and the proof is marked agent-origin. No SGA source, no new nodes, no duplicate: supported-taylor-presentation-pivots is a different power-series rank statement. There is no re-split note and the base had no proof. The worker filled split_report.tool_uses themselves, contrary to C8, but the content is accurate and is left for the maintainer. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HomogeneousDivisionExtraVariables",
+  "declaration": "MonomialDiagram.hasUniqueDivision_extraVariables_iff",
+  "declarations": [
+   "MonomialDiagram.hasUniqueDivision_extraVariables_iff",
+   "MonomialDiagram.hasUniqueDivision_extraVariables_map"
+  ],
+  "file": "lean/Sheaf/RingTheory/HomogeneousDivisionExtraVariables.lean",
+  "statement": "theorem hasUniqueDivision_extraVariables_iff {L : Type u} [Field L] {m r s : ℕ} (α : Fin s → Fin r →₀ ℕ) (hα : Function.Injective α) (H : Fin s → MvPolynomial (Fin m ⊕ Fin r) L) (hH : ∀ i : Fin s, (H i).IsHomogeneous (α i).degree) : (∀ t : ℕ, HasUniqueDivision (generated α) α (fun i ↦ MvPolynomial.eval₂Hom MvPolynomial.C (Sum.elim (fun _ : Fin m ↦ 0) (MvPolynomial.X : Fin r → MvPolynomial (Fin r) L)) (H i)) t) ↔ (∀ t : ℕ, HasUniqueDivision (generated (fun i ↦ Finsupp.mapDomain (Sum.inr : Fin r → Fin m ⊕ Fin r) (α i))) (fun i ↦ Finsupp.mapDomain (Sum.inr : Fin r → Fin m ⊕ Fin r) (α i)) H t)",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The main theorem states the two equivalent basis conditions using the recorded HasUniqueDivision notion; the second theorem states preservation of both conditions under arbitrary field extensions, with independent coefficient universes. Applying the first theorem over the extension field states the equivalence there."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20d0895d3",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read item node, 3 stmt_deps, live SupportedHomogeneousDivision.lean, delivered module and report. (i) = ∀t HasUniqueDivision (generated α) α (eval₂Hom C (Sum.elim 0 X) ∘ H): exactly the restricted family. (ii) uses vertices mapDomain inr α_i = (0,α_i); generated/quotientSupport give ℕ^m×D and ℕ^m×Δ_i. ↔ with ∀t on both sides. Only assumptions: hα injective and IsHomogeneous (α i).degree (zero allowed); no monotone/first-exponent/finite-test/characteristic assumption. Field-extension theorem: f : L →+* E with E : Type v (independent universe) preserves (i) and (ii); equivalence over E is the iff theorem at map f ∘ H. Mathematics checked: least-dividing-vertex bijection, U=0 specialization, unit-triangular perturbation; small examples agree. Edge cases s=0, m=0, r=0, t=0, zero H_i, degree-0 vertex covered. Item node differs from live only in lean (live lean null); lean.statement matches file verbatim; proof-dep declarations exist (TriangularChangeOfBasis, OrzechProperty via FiniteType). Docstrings give source and blueprint plus proof steps; no defs, only sorry. Report has Worker report and Second reading by N5. Not recompiled (no change). Advisory only: public Eval import likely redundant."
+ }
+}

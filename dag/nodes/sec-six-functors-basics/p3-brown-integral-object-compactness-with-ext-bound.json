@@ -1,0 +1,135 @@
+{
+ "id": "p3-brown-integral-object-compactness-with-ext-bound",
+ "kind": "statement",
+ "title": "Objectwise integral compactness with the uniform Ext bound explicit",
+ "statement": "Let ℓ be prime and E a finite intermediate extension of Q_ℓ. Let k have characteristic p>0 different from ℓ, and X be separated and finite type over k. Let Λ be the condensed valuation ring O_E. Suppose d assigns a natural number to each constant-model constructible sheaf C, and Hom(C[0],N[0][q]) is subsingleton for every constructible N and q>d(C). Then each bounded constructible finite-Tor object in Loc(Dctf(X,Λ)) is compact, with respect to any specified coproduct structure. The Ext bound is an essential explicit assumption, not a claimed consequence of the field hypothesis.",
+ "stmt_deps": [
+  "def-sfb-padic-integers-condensed-ring",
+  "sk-def-sfb-dc-setting",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "def-pc-compact-object"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.md",
+  "place": "compactness clause, with the uniform Ext bound explicit as in integralConstructibleCompactness"
+ },
+ "proof": [
+  {
+   "text": "Apply integralConstructibleCompactness with the given bound d and its vanishing proof. Its final clause supplies coproducts in Loc(Dbc) and compactness of each bounded constructible object.",
+   "uses": [
+    "det-prop-int-compactness-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply localizingClosure_ctf_equals_bc to the identity isomorphism of the integral coefficient object. Extract equality of Loc(Dctf) with Loc(Dbc) and rewrite the dependent compactness assertion along this equality.",
+   "uses": [
+    "det-def-localizing-closure-ctf-equals-bc"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the returned coproduct proof with the caller-supplied proof by proof irrelevance, and apply the compactness clause to K and its bounded constructible membership.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-prop-int-compactness-compact",
+  "det-def-localizing-closure-ctf-equals-bc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.md",
+  "place": "compactness clause, with the uniform Ext bound explicit as in integralConstructibleCompactness",
+  "note": "Conditional specialization of existing integral compactness, preserving its Ext-bound hypothesis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact object localizing subcategory bounded constructible finite Tor amplitude arbitrary field",
+   "results": "Eight derived t-structure hits, no arbitrary-field compactness theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsCompactObject",
+   "results": "No match; project-specific name is not in the index.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "integralConstructibleCompactness|localizingClosure_ctf_equals_bc",
+   "results": "Both existing theorem signatures retain all required hypotheses and supply the compactness and equality used here. No import of BrownHypotheses is needed.",
+   "date": "2026-10-27",
+   "verdict": "project results reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactness in a full localizing subcategory and uniform Ext bounds for bounded constructible complexes",
+   "results": "Eight hits on Ext size and derived t-structure infrastructure; no compactness theorem.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypothesesArbitraryFieldCompactness",
+  "date": "2026-10-27",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-sfb-brown-arbitrary-field-compactness-obligation",
+   "place": "missing uniform Ext bound in the arbitrary-field compactness obligation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypothesesArbitraryFieldCompactness",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypothesesArbitraryFieldCompactness.lean",
+  "declaration": "CategoryTheory.brownHypotheses_integral_object_compactness_of_ext_bounded",
+  "statement": "theorem brownHypotheses_integral_object_compactness_of_ext_bounded\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    (d : ConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X → ℕ)\n    (hd : ∀ (C N : ConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X)\n      (q : ℤ), (d C : ℤ) < q →\n        Subsingleton (((DerivedCategory.singleFunctor _ 0).obj C.obj) ⟶\n          ((DerivedCategory.singleFunctor _ 0).obj N.obj)⟦q⟧))\n    (hSums : HasCoproducts.{u + 1}\n      (localizingClosureProEtale (Profinite.padicIntegersRingObj ℓ E) X).FullSubcategory)\n    (K : (localizingClosureProEtale (Profinite.padicIntegersRingObj ℓ E) X).FullSubcategory)\n    (hK : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X K.obj ∧\n      DerivedCategory.finiteTorAmplitude _ K.obj) :\n    @IsCompactObject _ _ _ hSums K",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T235926-L-1470412",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T235926-L-1470412",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

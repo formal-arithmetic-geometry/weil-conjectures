@@ -1,0 +1,305 @@
+{
+ "id": "lem-sf-normalized-field-purity-trace",
+ "kind": "statement",
+ "title": "The specified field purity family, inverse orientation and counit trace at common stages",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ inside a fixed algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$, with valuation ring $R=\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=R/(\\varpi^n)$ for $n\\ge1$. Let $f:X\\to Y$ be smooth separated of pure relative dimension $r\\ge0$ between separated finite-type $k$-schemes. Use the actual operation datum [def-fix-six-functor-datum] and twists [def-coefficient-twists-detailed]. Integral categories mean modules over the completed coefficient sheaf, derived complete with constructible reductions in one finite cohomological interval independent of $n$; finite categories mean $D^b_{ctf}(-,A_n)$. Write $H_\\Lambda(L)=Lf^*L(r)[2r]$, $G_\\Lambda(L)=Rf^!L$, $P_\\Lambda=Rf_!$, and $\\epsilon_\\Lambda:P_\\Lambda G_\\Lambda\\to\\mathrm{id}$ for the actual exceptional counit. At finite levels use the specified smooth purity map [def-pur-smooth-purity-map] and trace [def-pur-smooth-trace].\n\nUse $D^b_c(-,E)=D^b_c(-,R)[1/\\varpi]$ and the common finite-field-stage category $D^b_c(-,\\Omega)$ of [def-fix-six-functor-datum]. For every finite coefficient field $F$, choose the simultaneous integral natural family $\\gamma_{\\mathcal O_F}$ of [lem-pur-adic-purity-scalar-naturality]. At each field stage use the purity object presented by a specified normalized integral lattice and its purity component, as in [thm-pur-rational-and-qbar-purity]. Denote the transported maps by $\\gamma_{\\Lambda,L}:H_\\Lambda L\\to G_\\Lambda L$, for $\\Lambda=E,\\Omega$, and put $\\eta_{\\Lambda,L}=\\gamma_{\\Lambda,L}^{-1}$ and $t_{\\Lambda,L}=\\epsilon_{\\Lambda,L}\\circ P_\\Lambda(\\gamma_{\\Lambda,L})$.\n\nThese are well-defined isomorphisms $\\gamma,\\eta$ and morphisms $t$ on the specified presentations, using one and the same normalized integral family for purity and trace. For rationalization, finite coefficient-field extension $E\\subset F$, or passage to a common finite field representing an $\\Omega$-object, let $C_X,C_Y$ be the corresponding coefficient functors, and use the canonical natural comparisons $a:C_XH\\xrightarrow{\\sim}H'C_Y$, $b:C_XG\\xrightarrow{\\sim}G'C_Y$, $c:C_YP\\xrightarrow{\\sim}P'C_X$, where a prime denotes the target coefficient stage. For every object $L$ on these domains, the actual maps satisfy\n$$b_L C_X(\\gamma_L)=\\gamma'_{C_YL}a_L,\\qquad a_L C_X(\\eta_L)=\\eta'_{C_YL}b_L,$$\n$$C_Y(t_L)=t'_{C_YL}\\,P'(a_L)\\,c_{HL}.$$\nThe first equation uses the tensor associators, identity comparisons and triple-extension cocycles of the specified integral natural family. All three equations respect these identity and composite coefficient comparisons, and can be checked in one common finite field containing the representatives of their arrows. In particular they do not posit a reduction functor from a field to $A_n$.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (6), rationalization and common-stage coefficient passage of purity and smooth trace; auxiliary coefficient-domain statement extracted from the returned split"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-coefficient-twists-detailed",
+  "def-pur-smooth-purity-map",
+  "def-pur-smooth-trace",
+  "lem-pur-adic-purity-scalar-naturality",
+  "thm-pur-rational-and-qbar-purity",
+  "def-pur-rational-scalar-comparison-data",
+  "def-pur-adic-purity-scalar-naturality-data",
+  "def-pur-canonical-rational-purity-realization"
+ ],
+ "proof": [
+  {
+   "text": "First check the domain of the integral input. By [lem-pur-rational-lattice-adic-domain], every integral representative in the raw rational category belongs to the derived-complete uniform finite-Tor category; this applies to both $X$ and $Y$ in the present separated finite-type setting. Apply [lem-pur-adic-purity-scalar-naturality] on that domain, selecting its simultaneous natural family once for all finite fields, with its specified finite reductions. For a presented lattice $L_0$, take the image of its component and its inverse under rationalization. The field-purity theorem [thm-pur-rational-and-qbar-purity] identifies this image with the specified purity component on that presentation. Thus no independent choice of a field orientation or trace has entered.",
+   "uses": [
+    "lem-pur-rational-lattice-adic-domain",
+    "lem-pur-adic-purity-scalar-naturality",
+    "thm-pur-rational-and-qbar-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+    "place": "Step 1: integral lattice and its specified adic component"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-rational-transport] to the integral exact linear functors and natural transformations. On a localized arrow $u/\\varpi^m$, naturality is the integral equality multiplied by $\\varpi^{-m}$; equations between components remain equations because localization is a functor. The localized $H,G$ and the finite-field comparisons $a,b$ are the actual ones, including map actions, by [lem-pur-rational-scalar-comparison-identification]. That statement identifies $b$ with the counit-preserving exceptional mate and retains the integral purity square and its associators. The compact-support functor is the localized one by [def-weil-integral-rational-qbar-compact-support], and [lem-coef-rational-operations] identifies the localized exceptional adjunction with the actual one, preserving counits. Consequently, for rationalization and for finite field extension, we have both\n$$b_L C_X(\\gamma_L)=\\gamma'_{C_YL}a_L,\\qquad C_Y(\\epsilon_L)=\\epsilon'_{C_YL}P'(b_L)c_{GL}.$$\nFor the second equality at an integral extension, it is precisely the adjoint-transpose characterization in [lem-pur-adic-purity-scalar-naturality]; localization preserves that equality.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "lem-pur-rational-scalar-comparison-identification",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-coef-rational-operations",
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.proof.md",
+    "place": "Localized adjunction, actual compact support, counits and finite scalar extension"
+   }
+  },
+  {
+   "text": "Since the components are isomorphisms, functoriality gives $C_X(\\eta_L)=C_X(\\gamma_L)^{-1}$. Left-compose the first equation of Step 2 by $\\eta'_{C_YL}$ and right-compose it by $C_X(\\eta_L)$. Cancelling the inverse pairs gives\n$$a_L C_X(\\eta_L)=\\eta'_{C_YL}b_L.$$\nThe two inverse identities for $\\gamma,\\eta$ are likewise images of the integral inverse identities. This proves the inverse equation for precisely the chosen component, without introducing any other orientation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+    "place": "Step 1: apply the coefficient functor to the isomorphism and its inverse"
+   }
+  },
+  {
+   "text": "Use the counit identity of Step 2 and naturality of $c$ at $\\gamma_L:HL\\to GL$, namely $c_{GL}C_Y(P\\gamma_L)=P'(C_X\\gamma_L)c_{HL}$. With all composition read right to left, functoriality then gives\n$$\\begin{aligned}\nC_Y(t_L)&=C_Y(\\epsilon_L)C_Y(P\\gamma_L)\\\\\n&=\\epsilon'_{C_YL}P'(b_L)c_{GL}C_Y(P\\gamma_L)\\\\\n&=\\epsilon'_{C_YL}P'(b_L C_X\\gamma_L)c_{HL}\\\\\n&=\\epsilon'_{C_YL}P'(\\gamma'_{C_YL})P'(a_L)c_{HL}\\\\\n&=t'_{C_YL}P'(a_L)c_{HL}.\n\\end{aligned}$$\nThis calculation also shows that transporting the integral composite $\\epsilon P\\gamma$ gives exactly the composite defining the field trace.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-rational-operations.proof.md",
+    "place": "Last two paragraphs: counit-preserving coefficient passage; explicit trace calculation"
+   }
+  },
+  {
+   "text": "The identity and successive-extension equations for $a,b$ are those in [lem-pur-rational-scalar-comparison-identification]. For $c$ use [lem-pur-compact-support-integral-coefficient-comparison], the comparison by which [lem-pur-adic-purity-scalar-naturality] defines $b$: on $D^b_{ctf}(X,\\mathcal O_E)$, which contains every integral representative by Step 1, it is the identity for $F=E$, commutes with the shift comparisons, and for $E\\subset F\\subset L$ satisfies the tensor-associator cocycle $c_{L/E,M}\\circ\\alpha^Y_{P_EM}=P_L(\\alpha^X_M)\\circ c_{L/F,C_{F/E,X}M}\\circ C_{L/F,Y}(c_{F/E,M})$. These are equations between components, so the localization of [prop-weil-pbc-rational-transport] carries them to the rational $c$; for rationalization itself $c$ is the identity on objects of [def-weil-integral-rational-qbar-compact-support]. Thus all three comparison systems are coherent. To check the inverse equation for a composite extension, substitute the two successive inverse equations and cancel the intermediate $b^{-1}b$ (equivalently invert the pasted purity square). For the trace equation substitute the two successive equations of Step 4; naturality of the second $c$ moves the image of $P'(a)$ past it. The remaining composite is the direct $c$ by its cocycle and the direct $a$ by its cocycle, the associator $H_L(\\alpha^Y)$ being absorbed by naturality of $t$. Identity comparisons give identity equations. Rationalization preserves the same substitutions and cancellations.",
+   "uses": [
+    "lem-pur-rational-scalar-comparison-identification",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality",
+    "prop-weil-pbc-rational-transport",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+    "place": "Steps 1 and 2: retain coefficient identity and associator equations"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-descent-functors] to these coherent finite-stage functors and transformations. By [lem-pur-common-stage-smooth-operation-identification], the descended $H,G$, their map actions, and the components of $\\gamma,\\eta$ agree with the specified smooth operations and purity presentations. The descended $P$ has object $(E,P_E M)$, the compact-support prescription of [def-weil-integral-rational-qbar-compact-support]; its map on a representative $u$ over $F$ is $c_{F/E'}^{-1}P_F(u)c_{F/E}$ by the descent formula. The counits descend as compatible transformations by Step 2 and have component represented by $\\epsilon_{E,L}$, since [lem-coef-rational-operations] preserves the actual exceptional counits. The finite-stage Hom adjunctions therefore induce the common-stage adjunction: on representatives apply the finite-stage bijection; the counit compatibility makes it independent of enlargement, and the inverse bijections give the inverse on the colimit. Thus this descended counit is the actual exceptional counit of the operation datum. Its composite with $P\\gamma$ is represented by the same finite-stage $t$.",
+   "uses": [
+    "prop-weil-pbc-descent-functors",
+    "lem-pur-common-stage-smooth-operation-identification",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Common-stage representative formula and descent of compatible transformations"
+   }
+  },
+  {
+   "text": "Finally, by [def-weil-algebraically-closed-coefficients], every arrow in any of the finitely many diagrams has a representative over some finite coefficient field; take a common overfield of those finitely many fields. Steps 2--5 give the three equations there, with the prescribed comparisons. They consequently give the equations in the common-stage category. A change of representatives gives equal arrows after some further finite extension; the coherence of Step 5 then gives the same equations. This proves well-definedness on the specified presentations, identity and composite compatibility, and the common-stage checking assertion. The construction used only integral reduction towers, their rationalizations and finite field extensions.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+    "place": "Step 2: passage to a common finite coefficient field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rational-lattice-adic-domain",
+  "lem-pur-adic-purity-scalar-naturality",
+  "thm-pur-rational-and-qbar-purity",
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-rational-scalar-comparison-identification",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-coef-rational-operations",
+  "prop-weil-pbc-descent-functors",
+  "lem-pur-common-stage-smooth-operation-identification",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.proof.md",
+  "place": "Steps 1 and 2, assembled with the actual-operation identification and counit transport interfaces"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smooth orientation trace commutes with rationalization and common finite field scalar extension",
+   "results": "{\"t\": \"2026-10-22T06:11:31Z\", \"tool\": \"leansearch\", \"query\": \"Smooth orientation trace commutes with rationalization and common finite field scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.normalizedTrace_eq_of_finiteDimensional\", \"Algebra.Smooth.comp\", \"SMulCommClass.rat\", \"Algebra.Smooth.baseChange\", \"Orientation.map_eq_det_inv_smul\", \"Algebra.TensorProduct.instCompatibleSMulRat\", \"smooth_functions_tower\", \"ContMDiffSection.coe_smul\"], \"digest\": \"51c00329f47f1d8d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|smoothTrace|rational.*counit|counit.*rational",
+   "results": "{\"t\": \"2026-10-22T06:11:31Z\", \"tool\": \"grep\", \"query\": \"purity|smoothTrace|rational.*counit|counit.*rational\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"counit\", \"map\"",
+   "results": "{\"t\": \"2026-10-22T06:11:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"counit\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Comma.mapLeftIso_counitIso_hom_app_left\", \"CategoryTheory.Comma.mapLeftIso_counitIso_hom_app_right\", \"CategoryTheory.Comma.mapLeftIso_counitIso_inv_app_left\", \"CategoryTheory.Comma.mapLeftIso_counitIso_inv_app_right\", \"CategoryTheory.Comma.mapRightIso_counitIso_hom_app_left\", \"CategoryTheory.Comma.mapRightIso_counitIso_hom_app_right\", \"CategoryTheory.Comma.mapRightIso_counitIso_inv_app_left\", \"CategoryTheory.Comma.mapRightIso_counitIso_inv_app_right\"], \"digest\": \"595f92f1e9125ea4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization and finite coefficient field extension preserve a chosen smooth purity isomorphism and its exceptional adjunction trace",
+   "results": "{\"t\": \"2026-10-22T06:11:57Z\", \"tool\": \"leanfinder\", \"query\": \"Rationalization and finite coefficient field extension preserve a chosen smooth purity isomorphism and its exceptional adjunction trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_finiteType\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"RingHom.isStandardSmoothOfRelativeDimension_algebraMap\", \"Algebra.Smooth.exists_subalgebra_fg\", \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"Algebra.FormallySmooth.of_perfectField\"], \"digest\": \"cfe332a8a3d7c404\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization and finite field scalar extension preserve a normalized smooth purity natural isomorphism and its exceptional adjunction counit trace",
+   "results": "{\"t\": \"2026-10-22T07:54:16Z\", \"tool\": \"leanfinder\", \"query\": \"Rationalization and finite field scalar extension preserve a normalized smooth purity natural isomorphism and its exceptional adjunction counit trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\"], \"digest\": \"63f63041c73268d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|smoothTrace|smoothPurity",
+   "results": "{\"t\": \"2026-10-22T07:54:33Z\", \"tool\": \"grep\", \"query\": \"purity|smoothTrace|smoothPurity\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth orientation and exceptional counit trace compatible with coefficient scalar extension and rationalization",
+   "results": "{\"t\": \"2026-10-22T07:54:34Z\", \"tool\": \"leansearch\", \"query\": \"Smooth orientation and exceptional counit trace compatible with coefficient scalar extension and rationalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ContMDiffSection.coe_smul\", \"Algebra.TensorProduct.instCompatibleSMulRat\", \"Algebra.Smooth.baseChange\", \"ContMDiffSection.coe_nsmul\", \"ContMDiffMap.coe_nsmul\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\"], \"digest\": \"ccc87509084a0cf9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of twisted smooth pullback and exceptional inverse image descends from integral coefficients to localized and algebraically closed coefficient categories",
+   "results": "{\"t\": \"2026-10-22T07:56:15Z\", \"tool\": \"leanfinder\", \"query\": \"A natural isomorphism of twisted smooth pullback and exceptional inverse image descends from integral coefficients to localized and algebraically closed coefficient categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"e79690bc927c05ca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-normalized-orientation-perfect-duality",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (6), rationalization and common-stage coefficient passage of purity and smooth trace",
+   "via": [
+    "lem-sf-package-normalized-orientation-perfect-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-normalized-field-purity-trace",
+  "worker": "stage1",
+  "summary": "Reused existing integral domain, simultaneous scalar-naturality, localized comparison, counit identification and common-stage descent nodes. Wrote the inverse cancellation and counit/naturality trace calculation explicitly, retaining actual maps, coefficient cocycles and finite-stage representatives. Statement unchanged; no new nodes.",
+  "blueprint": "prop-functor-package proof, clause (6): rationalization and common-stage passage of the normalized smooth orientation and its trace; localized exceptional adjunction identified by the final paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rational-lattice-adic-domain",
+    "why": "Checks the precise lattice domain before invoking integral purity; no lattice-domain theorem is provided in this package unit."
+   },
+   {
+    "node": "lem-pur-adic-purity-scalar-naturality",
+    "why": "Supplies the simultaneous integral normalized family, scalar square and actual counit mate used by field passage."
+   },
+   {
+    "node": "thm-pur-rational-and-qbar-purity",
+    "why": "Generic coefficient localization/descent or operation identification used without replacing the package unit route."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic coefficient localization/descent or operation identification used without replacing the package unit route."
+   },
+   {
+    "node": "lem-pur-rational-scalar-comparison-identification",
+    "why": "Identifies localized functors and comparisons with actual operations rather than objectwise isomorphic replacements."
+   },
+   {
+    "node": "lem-coef-rational-operations",
+    "why": "Generic coefficient localization/descent or operation identification used without replacing the package unit route."
+   },
+   {
+    "node": "lem-pur-compact-support-integral-coefficient-comparison",
+    "why": "Supplies the identity, shift and tensor-associator cocycle of the integral compact-support comparison c that defines the counit mate b; no package-unit node states it."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Generic coefficient localization/descent or operation identification used without replacing the package unit route."
+   },
+   {
+    "node": "lem-pur-common-stage-smooth-operation-identification",
+    "why": "Identifies the generic descended functors and component representatives with the specified smooth operations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rational-lattice-adic-domain",
+  "lem-pur-adic-purity-scalar-naturality",
+  "thm-pur-rational-and-qbar-purity",
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-rational-scalar-comparison-identification",
+  "lem-coef-rational-operations",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "prop-weil-pbc-descent-functors",
+  "lem-pur-common-stage-smooth-operation-identification"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-2274f4c2f",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-2274f4c2f (reviewer sub-agent of L); spot-checked: I read the item, all 12 cited statements, the unit record and the blueprint sources (thm-pur-rational-and-qbar-purity proof Steps 1-2, lem-coef-rational-operations proof, prop-functor-package clause (6)). The statement and stmt_deps are unchanged from the base, there are no new nodes and the Mathlib searches cover all three kinds. Step 1: the lattice-domain lemma puts every integral representative in D^b_ctf, which is the domain of the scalar-naturality family. Step 2: the counit equation C(eps)=eps'P'(b)c_{GL} is exactly the adjoint-transpose definition of b in the statement of lem-pur-adic-purity-scalar-naturality, localized through lem-coef-rational-operations. Steps 3-4: I recomputed the inverse cancellation and the trace calculation, including all types and the naturality of c at gamma. Steps 6-7: descent and the common-stage colimit check out against prop-weil-pbc-descent-functors, lem-pur-common-stage-smooth-operation-identification and def-weil-algebraically-closed-coefficients. Fault C4/E6 in Step 5: it took the cocycle of c from lem-cbc-rational-compact-support-coefficient-coherence. That node's b^f compares a different presentation: the raw rational extensions of Rp_*j_!, built from the prop-weil-pbc-scalar-extension and ringed-slice comparisons. The item's c is the c that lem-pur-adic-purity-scalar-naturality uses to define b, namely lem-pur-compact-support-integral-coefficient-comparison, and no node identifies the two. Repair: Step 5 now cites lem-pur-compact-support-integral-coefficient-comparison for the identity, shift and associator cocycle on D^b_ctf, localized by prop-weil-pbc-rational-transport. It also writes out the absorption of H_L(alpha^Y) by naturality of t. proof_deps and split_report.tool_uses are updated to match; that node is a declared tool use from sk-thm-sf-compatibility, like scalar-naturality. A DFS from the new citation does not reach the item, so there is no cycle. Edge cases checked: L=0, empty schemes, F=E, r=0, torsion lattices and ramified F/E.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedFieldPurityTrace",
+  "declaration": "WeilConjectures.NormalizedFieldPurityTrace.normalizedFieldPurityTrace",
+  "declarations": [
+   "WeilConjectures.NormalizedFieldPurityTrace.trace",
+   "WeilConjectures.NormalizedFieldPurityTrace.PassageEquations",
+   "WeilConjectures.NormalizedFieldPurityTrace.sourcePrimeInvertible",
+   "WeilConjectures.NormalizedFieldPurityTrace.targetPrimeInvertible",
+   "WeilConjectures.NormalizedFieldPurityTrace.rationalGamma",
+   "WeilConjectures.NormalizedFieldPurityTrace.smallOperation",
+   "WeilConjectures.NormalizedFieldPurityTrace.closedOperation",
+   "WeilConjectures.NormalizedFieldPurityTrace.smallGamma",
+   "WeilConjectures.NormalizedFieldPurityTrace.closedGamma",
+   "WeilConjectures.NormalizedFieldPurityTrace.commonSourceComparison",
+   "WeilConjectures.NormalizedFieldPurityTrace.commonSourceScalar",
+   "WeilConjectures.NormalizedFieldPurityTrace.CommonSourceComposition",
+   "WeilConjectures.NormalizedFieldPurityTrace.Conclusion",
+   "WeilConjectures.NormalizedFieldPurityTrace.normalizedFieldPurityTrace"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedFieldPurityTrace.lean",
+  "statement": "theorem normalizedFieldPurityTrace (A : AdicPurityScalarNaturality.Data P.field P.coefficients f r S) : Nonempty (Conclusion P f r S A)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Uses the published canonical rationalIso, smallModelIso and commonIso, their actual exceptional counits, and the supplied simultaneous normalized integral family. The added landed definition dependencies own the integral family, canonical rational purity realization, and source-localization and coefficient-comparison coordinates used in the signature. RationalScalarComparisonIdentification remains a private proof import and proof dependency. The real component helpers and common-stage square are split into NormalizedFieldPurityTraceData and NormalizedFieldPurityTraceCommonStage to respect the per-file compiler limit; the primary module imports both."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9800df581",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 6a03 (H2) is fixed: stmt_deps now cites def-pur-rational-scalar-comparison-data in place of the theorem lem-pur-rational-scalar-comparison-identification, plus def-pur-adic-purity-scalar-naturality-data and def-pur-canonical-rational-purity-realization. The Data module imports the Data modules publicly; the theorem modules are imported privately in the primary module. Consumer rewrites and the orphan module are dropped. Item node diff is stmt_deps and lean.note only. Every signature name is in the three landed owners' declarations. Maths unchanged and correct: A tied to rationalIso by rationalizes; localization and a pinned; purity/inverse/trace equations for rationalization, E<=F and common stages; unit and composite cocycles; common_check including m=0. One sorry, no hollow defs, no lines over 100, no unbound variables or universe restriction; edge cases r=0, empty schemes, E=F, n=1 covered. Advisory: rationalSource, sourceScalar, commonSource and commonSourceComparison are owned by def-pur-canonical-purity-source-transports, which is uncited. No compile run (no file changed)."
+ }
+}

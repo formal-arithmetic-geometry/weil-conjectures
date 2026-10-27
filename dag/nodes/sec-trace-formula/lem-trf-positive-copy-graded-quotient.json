@@ -1,0 +1,263 @@
+{
+ "id": "lem-trf-positive-copy-graded-quotient",
+ "kind": "statement",
+ "title": "Quasi-coherent positive-copy graded algebra and symmetric quotient",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\mathcal E$ be a quasi-coherent sheaf of commutative unital $\\mathcal O_S$-algebras [def-weil-pbc-quasi-coherent-algebra]. Define homogeneous sheaves $\\mathcal B_0=\\mathcal O_S$ and $\\mathcal B_n=\\mathcal E$ for $n\\geq1$, writing $a[n]$ for a section in the degree-$n$ copy. Give their categorical sheaf direct sum the multiplication $a[m]b[n]=(ab)[m+n]$ for $m,n>0$, degree-zero action through $\\mathcal O_S\\to\\mathcal E$, and unit in degree zero. These operations define a commutative unital graded sheaf algebra [def-weil-pbc-graded-sheaf-structures], and its underlying module is quasi-coherent. For every affine open $V=\\operatorname{Spec}R\\subseteq S$ [def-weil-affine-spectrum], putting $A=\\mathcal E(V)$, there is a canonical graded $R$-algebra identification\n$$\\mathcal B(V)=R\\oplus\\bigoplus_{n\\geq1}A[n],$$\nwith the indicated multiplication, compatible with inclusions of affine opens. The degree-one inclusion of $\\mathcal E$ extends uniquely to a degree-preserving morphism of sheaf algebras\n$$q:\\operatorname{Sym}_{\\mathcal O_S}(\\mathcal E)\\longrightarrow\\mathcal B,$$\nwhere the source is the quasi-coherent symmetric algebra [lem-weil-pbc-quasi-coherent-symmetric-algebra] with symmetric-degree grading [lem-weil-pbc-symmetric-algebra-graded]. The map $q$ is the identity in degree zero and is surjective in every degree. No finite-type, local-freeness, or injectivity hypothesis on the algebra structure map is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0B3I, morphisms-lemma-finite-projective: the canonical embedding into P(h_*O_T); explicit graded-quotient verification of this embedding in the returned item, written by the worker. Returned proof Steps 2 and 3: construction of the graded algebra and its degreewise symmetric quotient."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-graded-sheaf-structures",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-graded"
+ ],
+ "proof": [
+  {
+   "text": "On sections define the zero-zero product in O_X, mixed products through the structure ring homomorphism of E, and positive-positive products in E. Construct the bilinear maps using LinearMap.mul and composition with the algebra structure map. Check naturality by ring-hom multiplicativity and naturality of the structure map. Check associativity in the eight zero/positive cases, commutativity in the four cases, and both unit laws in the two cases. Apply the total-algebra theorem to these homogeneous operations; it supplies B, its coproduct cocone, and the multiplication and scalar equations.",
+   "uses": [
+    "def-weil-pbc-quasi-coherent-algebra",
+    "def-weil-pbc-graded-sheaf-structures",
+    "lem-trf-graded-sheaf-algebra-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CF, section-symmetric-exterior: homogeneous operations on a sheaf direct sum; explicit case verification for this algebra written by Q146"
+   }
+  },
+  {
+   "text": "Every homogeneous piece is quasi-coherent: the unit module is free of rank one, and positive pieces are E. Reindex the coproduct by ULift ℕ in the scheme universe. Quasi-coherent coproduct closure and the unique comparison isomorphism imply that B is quasi-coherent. On an affine open, quasiCoherentModuleColimitEvaluation makes the evaluated coproduct a module colimit. Reindex back to ℕ and compare with ModuleCat.coproductCoconeIsColimit, whose point is the sectionwise direct sum. The resulting isomorphism sends each direct-sum generator to its evaluated sheaf inclusion by the colimit comparison identity, so its hom is exactly positiveCopySectionSum. Therefore this map is bijective.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-weil-pbc-quasi-coherent-module-colimit-evaluation",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I7 (lemma-compare-constructions), 01IB (lemma-equivalence-quasi-coherent), 01ID (lemma-colimit-quasi-coherent); the coproduct argument applied to the positive-copy family"
+   }
+  },
+  {
+   "text": "The inclusions are module-sheaf morphisms and therefore natural under every restriction. The homogeneous multiplication and scalar equations already supplied by the total-algebra theorem give precisely the graded algebra compatibility required in the statement, without making a sectionwise coproduct claim on a nonaffine open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01ID, lemma-colimit-quasi-coherent: comparison respects the summand maps; multiplication and restriction calculation written by Q146"
+   }
+  },
+  {
+   "text": "Apply the canonical symmetric algebra sheaf core universal property to i_1. It constructs the unique algebra-sheaf map q with the required generator equation. Its scalar equation follows by evaluating the commutative triangle Under.w q and using the degree-zero inclusion equation.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-core"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CF, section-symmetric-exterior; the sheaf symmetric-algebra universal property recorded in the cited node"
+   }
+  },
+  {
+   "text": "For each open U apply Mathlib Submodule.pow_induction_on_right' to the range of the generator map. A scalar in degree zero has its prescribed scalar lift; sums have sums of lifts; if x has a lift a in degree n and m=ι(b) is a generator, then x*m maps to i_n(a)i_1(b)=i_{n+1}(G.mul(a,b)). This proves the homogeneous membership clause on every open directly, without an affine symmetric-algebra comparison or a separate grading theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 00DM, algebra-section-tensor-algebra (homogeneous pieces spanned by products), and Tag 01CF, section-symmetric-exterior (symmetric-degree grading of the sheaf)"
+   }
+  },
+  {
+   "text": "In degree zero lift r by algebraMap(r). In degree one lift a by ι(a). Inductively, if s lifts a in degree n+1, then s*ι(1_E) belongs to the next submodule power and maps to i_{n+1}(a)i_1(1_E)=i_{n+2}(a), by the homogeneous product equation and a*1_E=a. Thus every degree is surjective even on sections. Any algebra-sheaf map satisfying all clauses satisfies the generator clause, so uniqueness follows from the core universal property.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I, morphisms-lemma-finite-projective, the degree-one element represented by 1 in the pushforward algebra; explicit homogeneous lifts written by Q146"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-quasi-coherent-algebra",
+  "def-weil-pbc-graded-sheaf-structures",
+  "lem-trf-graded-sheaf-algebra-total",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-quasi-coherent-module-colimit-evaluation",
+  "pqf-def-coherent",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0B3I positive-copy graded quotient; W7 formalizes the sheaf coproduct by ring sheafification, uses existing quasi-coherent coproduct and affine-evaluation theorems, and proves the symmetric-degree clauses by submodule-power induction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "symmetric.*(sheaf|surjec)|graded.*(sheaf|quotient)|constant.*graded",
+   "results": "1 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; general graded/Proj/sheaf constructions, no positive-copy quasi-coherent algebra and degreewise symmetric quotient. Searched Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra.lift",
+   "results": "6 hits; SymmetricAlgebra.lift, IsSymmetricAlgebra.equiv_toAlgHom, IsSymmetricAlgebra.equiv_apply, SymmetricAlgebra.lift_ι_apply, SymmetricAlgebra.lift_ι, SymmetricAlgebra.lift_comp_ι; read SymmetricAlgebra/Basic.lean: the lift is a ring-level universal property, not a graded sheaf quotient theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-coherent algebra E gives a quasi-coherent graded algebra O_S plus E in every positive degree and a surjective graded map from Sym E",
+   "results": "8 hits; GradedAlgebra, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData, SheafOfModules.Presentation, Algebra.QuasiFinite.recOn, SheafOfModules.QuasicoherentData.presentation, Algebra.QuasiFinite.casesOn, ExteriorAlgebra.gradedAlgebra; general graded/Proj/sheaf constructions, no positive-copy quasi-coherent algebra and degreewise symmetric quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a quasi-coherent commutative algebra E on a scheme S, the graded algebra B with B zero equal to O_S and every positive degree equal to E is quasi-coherent and is a graded quotient of the symmetric algebra of E",
+   "results": "8 hits; AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, HomogeneousLocalization, AlgebraicGeometry.Proj, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier; general graded/Proj/sheaf constructions, no positive-copy quasi-coherent algebra and degreewise symmetric quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homogen|positive.*degree.*(algebra|sheaf)|SymmetricAlgebra|symmetricAlgebra",
+   "results": "25 hits; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; general graded/Proj/sheaf constructions, no positive-copy quasi-coherent algebra and degreewise symmetric quotient. Searched Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The symmetric algebra on a sheaf of commutative algebras surjects degree by degree onto the homogenized algebra with degree zero the base ring and positive graded components the given algebra",
+   "results": "8 hits; SymmetricAlgebra.algHom_surjective, HomogeneousLocalization.mk_surjective, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, HomogeneousLocalization.Away.mk_surjective, SymAlg.unsym_surjective, SymAlg.sym_surjective, GradedRing.projZeroRingHom'_surjective, SymmetricPower.range_mk; algHom_surjective is TensorAlgebra to SymmetricAlgebra, not Sym(E) to the positive-copy sheaf algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "positive.copy|graded.*sheaf.*quotient|symmetric.*sheaf.*surject",
+   "results": "0 hits; none. Searched Mathlib/AlgebraicGeometry. The results give general affine/graded or symmetric-algebra constructions, not this positive-copy graded algebra sheaf and degreewise quotient. SymmetricAlgebra.lift and lift_ι_apply were read in Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean:99,113.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra.lift",
+   "results": "6 hits; SymmetricAlgebra.lift, IsSymmetricAlgebra.equiv_toAlgHom, IsSymmetricAlgebra.equiv_apply, SymmetricAlgebra.lift_ι_apply, SymmetricAlgebra.lift_ι, SymmetricAlgebra.lift_comp_ι. The results give general affine/graded or symmetric-algebra constructions, not this positive-copy graded algebra sheaf and degreewise quotient. SymmetricAlgebra.lift and lift_ι_apply were read in Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean:99,113.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi-coherent algebra sheaf gives a quasi-coherent graded algebra with base ring in degree zero and the algebra in every positive degree and a graded symmetric algebra quotient",
+   "results": "8 hits; SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent, SymmetricAlgebra.instCommRing, SheafOfModules.IsQuasicoherent.mk, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.presentation, GradedAlgebra. The results give general affine/graded or symmetric-algebra constructions, not this positive-copy graded algebra sheaf and degreewise quotient. SymmetricAlgebra.lift and lift_ι_apply were read in Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean:99,113.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a quasi-coherent commutative algebra E on a scheme S, the graded sheaf algebra O_S plus a copy of E in every positive degree is quasi-coherent and receives a degreewise surjection from Sym(E)",
+   "results": "8 hits; AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, SymmetricAlgebra, SymmetricPower, TensorAlgebra.gradedAlgebra, AlgebraicGeometry.Proj.toSheafedSpace, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing, TensorAlgebra.GradedAlgebra.ι, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective. The results give general affine/graded or symmetric-algebra constructions, not this positive-copy graded algebra sheaf and degreewise quotient. SymmetricAlgebra.lift and lift_ι_apply were read in Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean:99,113.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogenized commutative algebra with degree zero R and positive components A is a graded quotient of SymmetricAlgebra R A, via products a times one to the n minus one",
+   "results": "8 hits; MvPolynomial.gradedAlgebra, SymmetricAlgebra, ExteriorAlgebra.gradedAlgebra, TensorAlgebra.gradedAlgebra, SymmetricAlgebra.instCommRing, SymmetricAlgebra.instCommSemiring, ExteriorAlgebra.GradedAlgebra.ι_apply, ExteriorAlgebra.GradedAlgebra.liftι. The results give general affine/graded or symmetric-algebra constructions, not this positive-copy graded algebra sheaf and degreewise quotient. SymmetricAlgebra.lift and lift_ι_apply were read in Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean:99,113.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-projective-bundle",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Stein-factorization step: the finite morphism S_0 -> S is projective in the EGA/ILO projective-bundle convention, using the pushforward module and affine Proj embedding of Tag 0B3I. Returned proof Steps 2 and 3: construction of the graded algebra and its degreewise symmetric quotient.",
+   "via": [
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-positive-copy-graded-quotient",
+  "worker": "stage1",
+  "summary": "Checked the unmodified statement and proved all clauses in six steps: homogeneous algebra laws, affine coproduct comparison and quasi-coherence, natural graded affine sections, the sheaf symmetric universal property, preservation of degrees, and explicit degreewise lifts j(a)j(1)^(n-1). Reused existing nodes; created no auxiliary nodes. Project Lean searches found no full attachment.",
+  "blueprint": "Stein-factorization step: the finite morphism S_0 -> S is projective in the EGA/ILO projective-bundle convention, using the pushforward module and affine Proj embedding of Tag 0B3I. Returned proof Steps 2 and 3: construction of the graded algebra and its degreewise symmetric quotient. Realizes the positive-copy construction needed in returned Steps 2 and 3 of lem-trf-finite-projective-bundle; this is below the fixed unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "The general sheaf symmetric universal property and affine comparison are tools for this quotient construction; the trace-formula unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "Pure products span each symmetric degree, a general algebraic tool used to check preservation of degrees; it does not replace the trace-formula route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-fc593e295",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-fc593e295 (reviewer sub-agent of L); spot-checked: Read the item's six steps in full against every cited statement and Stacks 0B3I (morphisms.tex:11237ff). Live item still unsplit, no repair note, not dropped. Statement, stmt_deps and blueprint unchanged; no SGA; no new nodes. Step 1: associativity checked in all zero-degree cases; bilinearity holds through eta; the extension to the sum follows from def-weil-pbc-graded-sheaf-structures. Step 2: restriction-colimits (1)(2), then affine-tilde (3) gives E|_V iso A~, (4) gives M~ as coproduct, so B|_V iso M~, quasi-coherence by pqf-def-coherent, and (2) gives theta_V. Step 3: summandwise products and restriction for arbitrary affine W in V; no affine-intersection assumption (E1 ok). Step 4: clause (a) of the sheaf-Sym node applies to any commutative target. Step 5: clause (b) and the pure-product spanning node give degree preservation, then the sheaf uniqueness axiom. Step 6: the right inverse a -> j(a)j(1)^(n-1) gives surjectivity even on sections. Tested E=O_S, O_S^2, 0, Z->Z/2 noninjective, and non-finitely-generated E; no finiteness used. Accepted tool_uses: lem-weil-pbc-quasi-coherent-symmetric-algebra and lem-weil-pbc-symmetric-algebra-graded, both generic symmetric-algebra tools. No duplicate: proj-affine-comparison, symmetric-sheaf-map-degreewise-surjective and def-trf-canonical-symmetric-graded-algebra are distinct. FIX (C1): Step 2 used O_V = R~ ('affine structure-sheaf construction') with no node. It now cites lem-weil-pbc-spec-tilde-free-module (mathlib, case n=1), added to uses and proof_deps in fixes/dag/nodes/sec-trace-formula/lem-trf-positive-copy-graded-quotient.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PositiveCopyGradedQuotient",
+  "declaration": "AlgebraicGeometry.exists_positiveCopyGradedQuotient",
+  "declarations": [
+   "AlgebraicGeometry.positiveCopyPiece",
+   "AlgebraicGeometry.positiveCopySectionSum",
+   "AlgebraicGeometry.exists_positiveCopyGradedQuotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PositiveCopyGradedQuotient.lean",
+  "statement": "theorem exists_positiveCopyGradedQuotient (X : Scheme.{u}) (E : X.CommAlgebraSheaf) [E.toModule.IsQuasicoherent] : ∃ (B : X.CommAlgebraSheaf) (i : ∀ n : ℕ, positiveCopyPiece E n ⟶ B.toModule) (G : GradedSheafAlgebra (positiveCopyPiece E)), Nonempty (IsColimit (Cofan.mk B.toModule i)) ∧ B.toModule.IsQuasicoherent ∧ G.unit = 𝟙 (SheafOfModules.unit X.ringCatSheaf) ∧ (∀ (U : X.Opens) (r s : Γ(X, U)), HEq (G.mul 0 0 U r s) (r * s)) ∧ (∀ (U : X.Opens) (n : ℕ) (r : Γ(X, U)) (a : E.right.obj.obj (op U)), HEq (G.mul 0 (n + 1) U r a) (E.hom.hom.app (op U) r * a)) ∧ (∀ (U : X.Opens) (n : ℕ) (a : E.right.obj.obj (op U)) (r : Γ(X, U)), HEq (G.mul (n + 1) 0 U a r) (a * E.hom.hom.app (op U) r)) ∧ (∀ (U : X.Opens) (m n : ℕ) (a b : E.right.obj.obj (op U)), HEq (G.mul (m + 1) (n + 1) U a b) (a * b)) ∧ (∀ (U : X.Opens) (m n : ℕ) (a : (positiveCopyPiece E m).val.obj (op U)) (b : (positiveCopyPiece E n).val.obj (op U)), (i (m + n)).val.app (op U) (G.mul m n U a b) = (@id (B.right.obj.obj (op U)) ((i m).val.app (op U) a)) * (@id (B.right.obj.obj (op U)) ((i n).val.app (op U) b))) ∧ (∀ (U : X.Opens) (r : Γ(X, U)), (i 0).val.app (op U) r = B.hom.hom.app (op U) r) ∧ (∀ U : X.affineOpens, Function.Bijective (positiveCopySectionSum E B i U.1)) ∧ ∃! q : SymmetricAlgebraSheaf.algebra E.toModule ⟶ B, (∀ (U : X.Opens) (a : E.right.obj.obj (op U)), q.right.hom.app (op U) ((SymmetricAlgebraSheaf.inclusion E.toModule).val.app (op U) a) = (i 1).val.app (op U) a) ∧ (∀ (U : X.Opens) (n : ℕ) (s : SymmetricAlgebra Γ(X, U) (E.toModule.val.obj (op U))), s ∈ (SymmetricAlgebra.ι Γ(X, U) (E.toModule.val.obj (op U))).range ^ n → ∃ a : (positiveCopyPiece E n).val.obj (op U), q.right.hom.app (op U) (SymmetricAlgebraSheaf.sectionMap E.toModule (op U) s) = (i n).val.app (op U) a) ∧ (∀ (U : X.Opens) (r : Γ(X, U)), q.right.hom.app (op U) ((SymmetricAlgebraSheaf.algebra E.toModule).hom.hom.app (op U) r) = (i 0).val.app (op U) r) ∧ (∀ (U : X.Opens) (n : ℕ) (a : (positiveCopyPiece E n).val.obj (op U)), ∃ s : SymmetricAlgebra Γ(X, U) (E.toModule.val.obj (op U)), s ∈ (SymmetricAlgebra.ι Γ(X, U) (E.toModule.val.obj (op U))).range ^ n ∧ q.right.hom.app (op U) (SymmetricAlgebraSheaf.sectionMap E.toModule (op U) s) = (i n).val.app (op U) a)",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5301c55dd",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement matches every node clause. X : Scheme.{u}, E : CommAlgebraSheaf with toModule quasi-coherent (= IsQuasiCoherentAlgebra), no extra hypotheses. positiveCopyPiece is real data (unit sheaf in degree 0, E.toModule in degree n+1). B is the coproduct cocone in X.Modules and is quasi-coherent; G : GradedSheafAlgebra has unit 𝟙 and all four degree cases pinned by HEq (types defeq); B's multiplication and B.hom are tied to G and i 0; the affine section-sum map is bijective, which with the product clauses gives the graded R-algebra identification, natural under restriction. ∃! q from the recorded SymmetricAlgebraSheaf.algebra: q∘j = i 1; range ι^n lands in i n on sections (sheaf degree preservation, since i n is split mono); identity in degree 0; homogeneous preimages in every degree (Step 6 right inverse j(a)j(1)^(n-1)). Edge cases checked: E=0, n=0/1, non-injective structure map, non-finite E, universes. Records: only the lean field changed; statement verbatim; docstrings carry the source places and the 6 proof steps; plain imports are proof-dep modules (Tilde, CoherentFiniteType). No hollow def, sorry only in the theorem, no duplicate (CanonicalSymmetricGradedAlgebra is a different notion). Advisory: SymmetricAlgebraSheaf construction decls (owner def node lem-weil-pbc-symmetric-algebra-sheaf-construction, the witnesses of the cited ∃-theorem) are used without that node in stmt_deps. Compile not reproduced (no file changed); the worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261024T021940-L-2880529",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

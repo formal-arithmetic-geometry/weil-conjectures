@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-polynomial-test-universally-open",
+ "kind": "statement",
+ "title": "Polynomial base changes test universal openness of an affine morphism",
+ "statement": "Let $\\varphi:A\\to C$ be a homomorphism of commutative rings, and put $f=\\operatorname{Spec}(\\varphi):\\operatorname{Spec}(C)\\to\\operatorname{Spec}(A)$ [def-weil-affine-spectrum]. For $n\\geq0$, let $\\varphi_n:A[t_1,\\ldots,t_n]\\to C[t_1,\\ldots,t_n]$ be the coefficientwise extension of $\\varphi$, sending every variable to the corresponding variable [def-weil-pbc-mv-polynomial-ring]; the case $n=0$ means $\\varphi$ itself. If every $\\operatorname{Spec}(\\varphi_n)$ is an open map, then $f$ is universally open: for every scheme $T$ [def-pc-scheme] and every morphism $T\\to\\operatorname{Spec}(A)$, the projection $\\operatorname{Spec}(C)\\times_{\\operatorname{Spec}(A)}T\\to T$ [def-pc-fibre-product] sends open subsets to open subsets. No finiteness, reducedness, or Noetherian hypothesis is imposed on $A,C$, or $T$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F31, lemma-test-universally-open, implication (3) => (1), specialized to an affine morphism; the proof explicitly identifies polynomial extensions and arbitrary affine tensor base changes"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix any commutative $A$-algebra $B$. Set $D=B\\otimes_A C$, $j:B\\to D$, $b\\mapsto b\\otimes1$, and $q_B=\\operatorname{Spec}(j)$; for $g\\in D$ write $D_D(g)=\\{\\mathfrak p:g\\notin\\mathfrak p\\}$. Apply [lem-sfb-tensor-principal-polynomial-model] to $g$ to obtain finite $n$, $h\\in S=C[t_1,\\ldots,t_n]$, and $e:A[t_1,\\ldots,t_n]\\to B$ with $q_B(D_D(g))=\\operatorname{Spec}(e)^{-1}(\\operatorname{Spec}(\\varphi_n)(D_S(h)))$. The set $D_S(h)$ is open by [lem-weil-pbc-spec-localization-away-basic-open]. Its image is open by the assumed openness of every $\\operatorname{Spec}(\\varphi_n)$. Since $\\operatorname{Spec}(e)$ is continuous, $q_B(D_D(g))$ is open. This holds for every $B,g$, without finiteness assumptions.",
+   "uses": [
+    "lem-sfb-tensor-principal-polynomial-model",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, proof of (3) implies (1), affine algebra paragraph, lines 21755--21784"
+   }
+  },
+  {
+   "text": "For every commutative $A$-algebra $B$ and every $g\\in D_B=B\\otimes_A C$, step 1 proves that $q_B(D_{D_B}(g))$ is open. These are exactly the quantified hypotheses of [lem-sfb-principal-affine-test-universally-open] for the given $A\\to C$, with the same tensor multiplication and map $b\\mapsto b\\otimes1$. Its conclusion therefore makes $\\operatorname{Spec}(C)\\times_{\\operatorname{Spec}(A)}T\\to T$ open for every scheme $T$ and every morphism $T\\to\\operatorname{Spec}(A)$. This is the required universal openness.",
+   "uses": [
+    "lem-sfb-principal-affine-test-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, proof of (3) implies (1), affine reduction, lines 21742--21759"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-tensor-principal-polynomial-model",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-sfb-principal-affine-test-universally-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F31, lemma-test-universally-open, implication (3) implies (1); affine polynomial specialization argument, with the cartesian square verified by universal properties"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universal openness of a ring map can be tested after adjoining finitely many polynomial variables",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.UniversallyOpen.mk, Polynomial.isOpenMap_comap_C",
+   "date": "2026-10-22",
+   "verdict": "no match: universal-openness definitions and locality do not give the polynomial test; MvPolynomial.isOpenMap_comap_C is only openness of the projection Spec(R[x_j]) to Spec(R)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyOpen\", \"AffineSpace\"",
+   "results": "Actual search: 0 hits; none",
+   "date": "2026-10-22",
+   "verdict": "no match: universal-openness definitions and locality do not give the polynomial test; MvPolynomial.isOpenMap_comap_C is only openness of the projection Spec(R[x_j]) to Spec(R)"
+  },
+  {
+   "tool": "grep",
+   "query": "test.*[Uu]niversally.*[Oo]pen|[Uu]niversally.*[Oo]pen.*test|[Uu]niversally[Oo]pen.*[Pp]olynomial|[Uu]niversally[Oo]pen.*[Aa]ffineSpace",
+   "results": "Actual search: 0 hits; none",
+   "date": "2026-10-22",
+   "verdict": "no match: universal-openness definitions and locality do not give the polynomial test; MvPolynomial.isOpenMap_comap_C is only openness of the projection Spec(R[x_j]) to Spec(R)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme morphism is universally open if all its base changes by affine spaces of finite dimension are open maps",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, AlgebraicGeometry.UniversallyOpen.instIsMultiplicativeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: universal-openness definitions and locality do not give the polynomial test; MvPolynomial.isOpenMap_comap_C is only openness of the projection Spec(R[x_j]) to Spec(R)"
+  },
+  {
+   "tool": "grep",
+   "query": "universally.*[Oo]pen|[Uu]niversally[Oo]pen|[Uu]niversally_open",
+   "results": "Actual search: 0 hits; none. Subdirectory: RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: universal-openness definitions and locality do not give the polynomial test; MvPolynomial.isOpenMap_comap_C is only openness of the projection Spec(R[x_j]) to Spec(R)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isOpenMap\", \"MvPolynomial\"",
+   "results": "Actual search: 1 hits; MvPolynomial.isOpenMap_comap_C",
+   "date": "2026-10-22",
+   "verdict": "no match: universal-openness definitions and locality do not give the polynomial test; MvPolynomial.isOpenMap_comap_C is only openness of the projection Spec(R[x_j]) to Spec(R)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Spec of S[x1,...,xn] to Spec of R[x1,...,xn] is open for every natural n then R to S is universally open under every tensor base change",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.out, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: universal-openness definitions and locality do not give the polynomial test; MvPolynomial.isOpenMap_comap_C is only openness of the projection Spec(R[x_j]) to Spec(R)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyOpen\", \"MvPolynomial\"",
+   "results": "Actual search: 0 hits; none.",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give definitions/locality of universal openness, openness of affine-space projections, or base-change results requiring extra smoothness, finite-presentation or standard-open-immersion hypotheses; none deduces universal openness from the polynomial tests alone."
+  },
+  {
+   "tool": "grep",
+   "query": "test.*universallyOpen|universallyOpen.*test|universallyOpen.*polynomial|universallyOpen.*MvPolynomial",
+   "results": "Actual search: 0 hits; none.",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give definitions/locality of universal openness, openness of affine-space projections, or base-change results requiring extra smoothness, finite-presentation or standard-open-immersion hypotheses; none deduces universal openness from the polynomial tests alone."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is universally open if its base changes to finite dimensional affine spaces are open",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen.mk, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyClosed, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.Scheme.Hom.isOpenMap.",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give definitions/locality of universal openness, openness of affine-space projections, or base-change results requiring extra smoothness, finite-presentation or standard-open-immersion hypotheses; none deduces universal openness from the polynomial tests alone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal openness of an affine morphism is tested by openness after adjoining finitely many polynomial variables",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.targetAffineLocally_affineAnd_iff', AlgebraicGeometry.AffineSpace.isOpenMap_over, AlgebraicGeometry.HasRingHomProperty.of_iSup_eq_top, AlgebraicGeometry.HasRingHomProperty.iff_of_iSup_eq_top, AlgebraicGeometry.targetAffineLocally_affineAnd_iff, AlgebraicGeometry.Scheme.Hom.isOpenMap.",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give definitions/locality of universal openness, openness of affine-space projections, or base-change results requiring extra smoothness, finite-presentation or standard-open-immersion hypotheses; none deduces universal openness from the polynomial tests alone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Spec B polynomial ring to Spec A polynomial ring is open for every finite number of variables, then every tensor base change of A to B has open spectrum map",
+   "results": "Actual search: 8 hits; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, AlgebraicGeometry.Polynomial.isOpenMap_comap_C, PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, Algebra.Smooth.baseChange, RingHom.isStandardSmooth_isStableUnderBaseChange.",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give definitions/locality of universal openness, openness of affine-space projections, or base-change results requiring extra smoothness, finite-presentation or standard-open-immersion hypotheses; none deduces universal openness from the polynomial tests alone."
+  },
+  {
+   "tool": "grep",
+   "query": "UniversallyOpen|universallyOpen_iff",
+   "results": "Actual search: 5 hits in AlgebraicGeometry/Morphisms/UniversallyOpen.lean, at lines 42, 46, 48, 49, 51 (class, deprecated alias, underlying-open-map lemma and namespace). Source read directly.",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give definitions/locality of universal openness, openness of affine-space projections, or base-change results requiring extra smoothness, finite-presentation or standard-open-immersion hypotheses; none deduces universal openness from the polynomial tests alone."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyOpen\"",
+   "results": "Actual search: 12 hits; AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource, AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget, AlgebraicGeometry.UniversallyOpen.instIsMultiplicativeScheme, AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionScheme, AlgebraicGeometry.UniversallyOpen.instRespectsIsoScheme, AlgebraicGeometry.UniversallyOpen.instIsStableUnderCompositionSchemeTopologicallyIsOpenMap, AlgebraicGeometry.UniversallyOpen.",
+   "date": "2026-10-22",
+   "verdict": "no match: the results give definitions/locality of universal openness, openness of affine-space projections, or base-change results requiring extra smoothness, finite-presentation or standard-open-immersion hypotheses; none deduces universal openness from the polynomial tests alone."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal openness of an affine morphism follows from openness of its maps on spectra after adjoining finitely many polynomial variables",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.AffineSpace.isOpenMap_over, AlgebraicGeometry.HasRingHomProperty.of_iSup_eq_top, AlgebraicGeometry.HasRingHomProperty.iff_of_iSup_eq_top, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.HasRingHomProperty.iff_of_source_openCover, AlgebraicGeometry.HasRingHomProperty.of_source_openCover, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.universallyOpen_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space projections and universal-openness definitions/locality do not state the polynomial test."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"UniversallyOpen\", \"MvPolynomial\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space projections and universal-openness definitions/locality do not state the polynomial test."
+  },
+  {
+   "tool": "grep",
+   "query": "test.*universallyOpen|universallyOpen.*polynomial|universallyOpen.*MvPolynomial",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: affine-space projections and universal-openness definitions/locality do not state the polynomial test."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-dominant-normal-base-universally-open",
+  "date": "2026-10-22",
+  "group": "NQ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; justification that the full fibre product has a dense generic point after a finite extension of constants; finite normal-base openness proof: polynomial-base-change test upgrading openness to arbitrary scheme base change",
+   "via": [
+    "lem-sfb-finite-dominant-normal-base-universally-open",
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polynomial-test-universally-open",
+  "worker": "stage1",
+  "summary": "Q125 repairs the mandatory work-spreading return: two new comparable statement-only unsplit nodes take the finite tensor polynomial/cartesian-image argument and the principal-open affine-to-arbitrary-base criterion. The unchanged statement is assembled in two short steps. Every original argument is allocated and preserved verbatim in report.md for the next workers. No Lean is written or compiled. Rebased the retained Q125 delivery onto the current DAG after return of head 1fb5d7ad0e3; reread every current statement dependency and proof citation and distinguished the newly present 01JY generic-neighborhood node in report.md. Continued the landing repair for returned head 596256b6702: compared against the current DAG again and made the quantified hypothesis match in assembly step 2 explicit, retaining all original hypotheses, children and logged searches. Landing-return repair on 2026-10-23: refreshed the item from the current live node, reread its current dependencies, and made D, j, q_B and the principal-open notation explicit in assembly step 1. The fresh dry run found the newly added 01IT node lem-sf-hom-comparison-affine-inputs; its full statement was checked and its different sheaf-theoretic purpose documented in Not duplicates. The two statement-only children and their search records are retained.",
+  "blueprint": "Realizes the polynomial-base-change upgrade in the item's existing blueprint.from.place, below det-thm-sf-ctf-stability-direct-images proof (3), through the finite dominant normal-base openness prerequisite. The ancestor command returns None, agreeing with the inherited blueprint.from.node=null; no chapter or unit route is changed. Whole-blueprint searches for universally open, universal openness, polynomial base changes, and the relevant Stacks tags found no duplicate. The first new node carries old steps 2--4; the second carries old steps 1,5,6. The inherited null ancestor and via chain are retained, with the item prepended for its children."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-bab22772f",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-bab22772f (reviewer sub-agent of L); spot-checked: This is the fourth push of the same re-split. 1fb5d7ad0e31, 596256b67021 and a2f03d69a502 were each PASSed by a reader and then returned at landing. Against the a2f03d69a502 snapshot, both new nodes are byte-identical. In the item, the statement, stmt_deps, proof_deps, source, blueprint and lean fields are unchanged. Only proof step 1 is reworded: it now defines D, j, q_B and D_D(g) itself, matching the notation of the polynomial-model statement. The report adds one comparison: lem-sf-hom-comparison-affine-inputs (01IT), which is about constructible complexes on affine covers and is not a duplicate. I re-read Stacks more-morphisms.tex Tag 0F31, lines 21725-21786, the case (3)=>(1). I checked the model node by hand: k(h)=g; k o phi_n = j o e; the pushout via B tensor_R (R tensor_A C) = B tensor_A C, with w o k = u on t_i; the cartesian Spec square; alpha^-1 D(h) = D(g); and the image identity for arbitrary subsets of a cartesian square. The criterion node is also correct: principal opens form a basis; P x_T W is identified with Spec(B tensor_A C) as the open subscheme q^-1(W); and gluing over an arbitrary affine cover needs no quasi-compactness. Assembly step 1 uses clause (i) of lem-weil-pbc-spec-localization-away-basic-open, the item's hypothesis at the n given by the model, and continuity of Spec(e). Step 2 matches the criterion's quantifiers exactly. The six old steps are split 3+3 into children of comparable size, and neither child restates the item. Edge cases hold: n=0, g=0, zero rings, empty T and infinite covers. No SGA source is used. There are no fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PolynomialTestUniversallyOpen",
+  "declaration": "AlgebraicGeometry.universallyOpen_specMap_of_isOpenMap_mvPolynomial",
+  "file": "lean/Sheaf/AlgebraicGeometry/PolynomialTestUniversallyOpen.lean",
+  "statement": "theorem universallyOpen_specMap_of_isOpenMap_mvPolynomial {A C : Type u} [CommRing A] [CommRing C] (φ : A →+* C) (h : ∀ n : ℕ, IsOpenMap (Spec.map (CommRingCat.ofHom (MvPolynomial.map (σ := Fin n) φ)))) : UniversallyOpen (Spec.map (CommRingCat.ofHom φ))",
+  "branch": "sheaf-dag",
+  "by": "Q48",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c716ce98b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Statement matches the node and Stacks 0F31 (3)=>(1) clause by clause: arbitrary CommRing A and C, φ : A →+* C, the hypothesis ∀ n : ℕ IsOpenMap of Spec.map (MvPolynomial.map (σ := Fin n) φ) including n = 0, and conclusion Mathlib UniversallyOpen (open under every base change in Scheme.{u}). No extra hypotheses, the universe is consistent, and lean.statement is verbatim in the file. The node only gains a lean record (diffed against side-live). The module docstring and the theorem docstring both carry the source place and blueprint tag, and the theorem docstring has all six proof steps. The proof is a single sorry and there are no definitions. No duplicate in Mathlib (no 0F31 hits), side Sheaf/WeilConjectures or the DAG; the parent module only cites the node in a docstring. The report has both required sections. No findings."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

@@ -34,317 +34,55 @@
   "def-weil-pbc-adjunction-mate",
   "def-weil-derived-tensor",
   "lem-pur-system-level-left-extension",
-  "def-weil-exceptional-inverse-image"
+  "def-weil-exceptional-inverse-image",
+  "def-coef-finite-adjunction-system-data",
+  "def-coef-cartesian-section-data"
  ],
  "proof": [
   {
-   "text": "First work on the small etale sites. Denote their strict $A_\\bullet$-module system categories by $\\mathscr S_W^{\\mathrm{et}}$. They are module categories on the ringed topos of inverse sequences, hence Grothendieck abelian by the ringed-site theorem. The ordinary system inverse/direct-image theorem constructs $P_u\\dashv S_u=Ru_{*,\\bullet}$ on unbounded derived categories, with $e_nS_u\\cong Ru_{*,n}e_n$ including the evaluated units and counits. Exact open extension $J_j\\dashv P_j$ applies termwise. Thus $F=S_pJ_j$ is an actual exact functor on $D(\\mathscr S_X^{\\mathrm{et}})$ and $e_nF=F_n^{\\mathrm{et}}e_n$ on this entire unbounded category. No assertion on unrestricted pro-etale compact supports is needed.",
+   "text": "Use the existing finiteAdjunctionDiagramRealization theorem to obtain the actual normalized realization r, geometry, sections comparison, signed symmetries and Enriched structure. Discard its additional dualizing and coherence witnesses.",
    "uses": [
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-pur-system-level-left-extension"
+    "lem-coef-finite-adjunction-diagram-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Ordinary ringed system operations; preparation for the middle RHom calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "For a family $(K_i)$ the canonical sum map $\\bigoplus_i FK_i\\to F(\\bigoplus_i K_i)$ evaluates to the corresponding finite compact-support sum map: $J_j$ preserves sums because it is a left adjoint, and proper etale derived direct image preserves sums for module coefficients. Evaluations are exact and coproducts of systems are levelwise, so this map is an isomorphism. Brown representability for the unbounded derived category of a Grothendieck abelian category now gives $F\\dashv G$ on the ambient etale system categories. Its unit $\\eta$ and counit $\\epsilon$ already are natural derived system maps with triangle identities.",
+   "text": "Apply normalizedSupportEtalePresentation to r.support, r.F and r.supportIso. Compare the resulting normalized right adjoint H with r.G by r.adjunction.rightAdjointUniq. Whiskering this isomorphism with the inclusion gives rightComparison. Naturality and unit_rightAdjointUniq_hom_app identify the two Hom bijections; compose with its inverse to obtain exactly EtaleOrigin.transpose.",
    "uses": [
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
-    "lem-grothendieck-derived-brown-right-adjoint",
-    "lem-pur-system-level-left-extension"
+    "lem-coef-normalized-support-etale-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Brown construction of the system adjunction; Stacks 0F5Y and etale-cohomology Tag 0F0D"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $L_n=LE_n\\dashv e_n$ as in the coefficient-evaluation theorem. Thus $(L_nK)_r=K\\otimes^L_{A_n}A_r$ for $r\\le n$, zero otherwise; in particular $e_nL_n=1$. Use its actual maps $\\sigma_{m,n}:L_nT_{m,n}\\to L_m$. The system tensor operations, including their projection maps, are formed on the ringed sequence site by K-flat resolutions and the inverse-image/direct-image counits. The proper projection map for $S_p$ evaluates to the finite etale projection map, which is invertible on all unbounded finite-coefficient inputs. Exact open extension has its tensor comparison. Consequently the actual compact-support projection map is invertible on the etale system category, by conservative evaluation. Applying it to a constant coefficient module $A_r$ also gives the unbounded finite coefficient-change maps $q_{n,r}$. The coefficient-change target is the ordinary etale one: derived extension and exact restriction are adjoint, and their commutation with geometric pullback identifies the two composites of right adjoints by counit-compatible uniqueness. Open extension commutes with restriction termwise. Thus the projection with $A_r$ gives the changed-coefficient compact support, not merely its underlying $A_n$-complex.",
-   "uses": [
-    "lem-pur-coefficient-evaluation-derived-left-adjoint",
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-amb-proper-coproducts-projection",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pc-derived-adjoint-functors",
-    "det-sp-unique-right-adjoint",
-    "lem-pur-system-level-left-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "System projection construction; Stacks 06YS and 0F0G"
-   }
+   "text": "Prove MateEvaluation directly: apply injectivity of the finite inverse Hom equivalence, precompose with the invertible support-evaluation comparison, and use its naturality and r.counit. The ordinary conjugateEquiv_counit identity turns the system mate into the given transformation followed by the other counit. Substitute the two supplied compatibility equations, move the right comparison past the finite transformation by naturality, and apply conjugateEquiv_counit at the finite level. The inverse mate identity is symm_apply_apply.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Define $a_n:L_n^YF_n^{\\mathrm{et}}\\to FL_n^X$ as the $L_n^Y\\dashv e_n^Y$ transpose of the identity $F_n^{\\mathrm{et}}=e_n^YFL_n^X$. This is an actual system transformation. At $r\\le n$ its component is the coefficient-change projection $q_{n,r}$, by the counit definition of that projection; above $n$ both sides vanish. Thus $a_n$ is invertible. The maps $a_n$ also respect the $\\sigma_{m,n}$: explicitly the two maps from $L_nF_nT^X_{m,n}$ to $FL_m$ are $F(\\sigma^X_{m,n})a_n$ and $a_m\\sigma^Y_{m,n}L_n(q_{m,n}^{-1})$. Under $L_n^Y\\dashv e_n^Y$ both transpose to $q_{m,n}^{-1}$, using the displayed formula for precomposition with $\\sigma$ in the evaluation theorem. Equality follows from this adjunction bijection, without faithfulness of evaluation on arbitrary maps.",
+   "text": "The finite_exceptional theorem supplies invertibility of every quotient mate b. The adjunction homEquiv_unit and homEquiv_counit identities give both degree-zero formulas. Applying the derived-limit functor to the two inverse identities of Enriched.iso proves both limit inverse equations; functors preserve its isomorphism.",
    "uses": [
-    "lem-pur-coefficient-evaluation-derived-left-adjoint",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-weil-pbc-adjunction-mate"
+    "lem-coef-finite-exceptional"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Derived free insertion comparisons and their truncation compatibility"
-   }
+   "elementary": true
   },
   {
-   "text": "For every $K\\in D(X_{\\mathrm{et}},A_n)$ and $N\\in D(\\mathscr S_Y^{\\mathrm{et}})$ compute naturally\n$$\\operatorname{Hom}(K,e_nGN)=\\operatorname{Hom}(L_nK,GN)=\\operatorname{Hom}(FL_nK,N)\\cong\\operatorname{Hom}(L_nF_nK,N)=\\operatorname{Hom}(F_nK,N_n).$$\nThe final functor is represented by the finite etale right adjoint $G_n^{\\mathrm{et}}N_n$ (the same Brown argument at one level). Yoneda gives a natural isomorphism $\\theta_n:e_nG\\cong G_n^{\\mathrm{et}}e_n$. Fix precisely this isomorphism. The defining equality identifies the evaluated counit with $\\epsilon_n$; uniqueness of the counit-compatible identification of right adjoints leaves no choice of signs or automorphisms. The existing etale coefficient-system adjoint theorem supplies these same ambient finite adjoints and counit-compatible evaluations. On finite constructible inputs their pro-etale transports are exactly the definition of $Rf_n^!$; finite-Tor preservation is a separate theorem, used next.",
+   "text": "Specialize systemAdjunctionTransposeCoherence to the proetale selector and each W equal to X or Y. The existing coefficient sheaf and transition definitions agree with these selectors. This supplies SystemTensorTransposeCoherence for every requested calculus A.",
    "uses": [
-    "lem-pur-coefficient-evaluation-derived-left-adjoint",
-    "lem-grothendieck-derived-brown-right-adjoint",
-    "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
-    "lem-galois-yoneda-hom-bijection",
-    "det-sp-unique-right-adjoint",
-    "lem-coef-finite-exceptional",
-    "lem-pur-etale-coefficient-system-adjoint",
-    "def-weil-exceptional-inverse-image"
+    "lem-coef-system-adjunction-transpose-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Identification of the levels by representability, not a lift of finite functors"
-   }
-  },
-  {
-   "text": "Precompose the Hom calculation of the preceding step with $\\sigma_{m,n}$. The evaluation theorem says that on its left this is $h\\mapsto t^{GN}_{m,n}T^X_{m,n}(h)$. On its right the compatibility of $a$ with $\\sigma$ says that it is $h\\mapsto t^N_{m,n}T^Y_{m,n}(h)q_{m,n}^{-1}$. Transposing by $F_n\\dashv G_n$ therefore identifies the actual reduction map of $GN$ with\n$$G_n(t^N_{m,n})b_{m,n,N_m},\\qquad b_{m,n}=G_n(T^Y_{m,n}\\epsilon_m)G_n(q_{m,n,G_m}^{-1})\\eta_{n,T^X_{m,n}G_m}.$$\nThis identity is determined on every test $K$ in the Hom calculation, hence by Yoneda. Changing from the Brown finite adjoints to the specified constructible ones conjugates this formula by their counit-compatible isomorphisms, exactly as in the unique-adjoint coefficient theorem. Evaluating the actual unit gives $\\eta_n$ too: under the same Hom calculation it is the transpose of $1_{F_nM_n}$.",
-   "uses": [
-    "lem-pur-coefficient-evaluation-derived-left-adjoint",
-    "def-weil-pbc-adjunction-mate",
-    "lem-galois-yoneda-hom-bijection",
-    "det-sp-unique-adjoint-coefficients",
-    "det-sp-unique-right-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Transitions and unit from the derived evaluation adjunctions"
-   }
-  },
-  {
-   "text": "On bounded constructible finite-Tor levels, the finite exceptional theorem identifies this $b$ with its canonical invertible coefficient comparison and supplies the two unit/counit mate identities. The compact-support comparisons $q$ and the formula for the reduction maps of $F$ are the projection comparisons of the system operations. Consequently normalized inputs are sent to normalized outputs by both $F$ and $G$: their reduction maps are composites of the displayed invertible maps. Finite constructibility and finite Tor amplitude are preserved separately at each $n$ by exact open extension followed by proper finite direct image, and by the finite exceptional preservation theorem. For the former use lem-trf-open-ctf and cor-sf-direct-image-ctf-proetale on the finite-dimensional compactification; for the latter use thm-sf-preservation-class. No uniform bound is used. This restricts the actual ambient adjunction to the stated full subcategories. These are the levelwise-finite subcategories in the statement, not the uniformly bounded subcategories of sk-def-sp-normalized-towers.",
-   "uses": [
-    "lem-coef-finite-exceptional",
-    "cor-sf-direct-image-ctf-proetale",
-    "lem-pur-coefficient-system-derived-comparison",
-    "def-coef-normalized-dvr-tower",
-    "lem-trf-open-ctf",
-    "thm-sf-preservation-class",
-    "def-weil-exceptional-inverse-image",
-    "lem-kun-dimension-finite-type"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Restriction to normalized finite-Tor constructible systems"
-   }
-  },
-  {
-   "text": "The mate cocycle can also be checked independently. For $k\\ge m\\ge n$, transpose $b_{m,n,T_{k,m}N}T_{m,n}(b_{k,m,N})$ under $F_n\\dashv G_n$. Ordinary mate pasting gives the composite $T_{m,n}T_{k,m}\\epsilon_k$ after $q_{k,m}^{-1}$ and $q_{m,n}^{-1}$. Coefficient associativity and the cocycle of $q$ identify it with the transpose of $b_{k,n,N}$. For $m=n$ the mate word is $G_n\\epsilon_n\\,\\eta_nG_n=1$. This proves the cocycle and identity indices using finite adjunctions. The finite exceptional theorem gives the same canonical cocycle.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-mate",
-    "lem-coef-finite-exceptional",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Mate cocycle and identity indices"
-   }
-  },
-  {
-   "text": "The system triangle identities hold because $\\eta,\\epsilon$ were obtained with the Brown adjunction, before restricting objects or evaluating. Explicitly the Hom transposes are $h\\mapsto G(h)\\eta_M$ and $g\\mapsto\\epsilon_NF(g)$; their composites reduce by naturality to $h\\epsilon_{FM}F\\eta_M=h$ and $G\\epsilon_N\\eta_{GN}g=g$. These are equations in the ambient ordinary derived category of systems. They remain equations on the full normalized subcategories.",
-   "uses": [
-    "lem-grothendieck-derived-brown-right-adjoint",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Actual unit/counit and triangle identities before total limit"
-   }
-  },
-  {
-   "text": "Apply the unbounded system inverse/direct-image construction to $\\nu_W:W_{\\mathrm{proet}}\\to W_{\\mathrm{et}}$. The unit and counit are actual system maps; their evaluations are the finite site-comparison maps. Unbounded finite-coefficient full faithfulness implies that the system unit is invertible. For any system whose every level has etale origin, the counit is likewise invertible, by conservative evaluation. Thus $\\nu_W^*$ identifies $D(\\mathscr S_W^{\\mathrm{et}})$ with the full subcategory of pro-etale derived systems with etale-origin levels. Finite constructible levels have this origin. The actual compact-support comparison $\\nu_Y^*F\\to Rp_{*,\\bullet}J_j\\nu_X^*$ is the proper direct-image mate after exact open extension. Its evaluations are invertible by unbounded etale/pro-etale direct-image comparison. Transfer the adjunction and its specified maps along these equivalences. This constructs $\\mathcal F_f,\\mathcal E_f$ on every system in $\\mathscr N$, without a common bound and without postulating a pro-etale ambient exceptional adjoint.",
-   "uses": [
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-sfb-unbounded-site-comparison",
-    "lem-sfb-unbounded-direct-image-comparison",
-    "lem-sf-proetale-constructible-origin",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-pbc-adjunction-mate",
-    "lem-pur-system-level-left-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Etale-origin realization of the normalized pro-etale system adjunction"
-   }
-  },
-  {
-   "text": "We next identify the mapping systems using closed adjunctions on the ordinary ringed sequence sites. For normalized $M$ and arbitrary $N$, let $H^{\\mathrm{sys}}_W(M,N)$ be their ringed-site derived internal Hom. Its $n$th evaluation is the finite derived internal Hom. Indeed for a test $K$ on the level-$n$ site the canonical tensor map $L_n(K\\otimes^LM_n)\\to L_nK\\otimes^LM$ is invertible: at $r\\le n$ this is normalization of $M$ and tensor associativity, and above $n$ both are zero. The map is the $L_n\\dashv e_n$ transpose of the level-$n$ identity, so exists before evaluation. The closed and evaluation adjunctions give\n$$\\operatorname{Hom}(K,e_nH^{\\mathrm{sys}}(M,N))=\\operatorname{Hom}(L_nK\\otimes^LM,N)=\\operatorname{Hom}(K\\otimes^LM_n,N_n).$$\nFor internal sheaf Hom apply this calculation also on each localized site; the same ringed-site statements apply there. Yoneda gives the asserted finite internal-Hom identification, preserving evaluation.",
-   "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-pur-coefficient-evaluation-derived-left-adjoint",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-galois-yoneda-hom-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Ordinary mapping systems; Stacks 08J9 and 06YS"
-   }
-  },
-  {
-   "text": "The evaluation calculus supplies an actual system map $\\mathcal I_W(M,N)\\otimes^LM\\to N$. Its closed transpose gives $\\mathcal I_W(M,N)\\to H^{\\mathrm{sys}}_W(M,N)$; the preceding finite-Hom identification shows every evaluation is the identity, so this map is invertible. For normalized etale inputs, the pullback tensor map and evaluation similarly transpose to an actual comparison $\\nu_W^*H^{\\mathrm{sys}}_{W,\\mathrm{et}}\\to H^{\\mathrm{sys}}_{W,\\mathrm{proet}}$. Its evaluations are invertible by thm-sf-hom-comparison-constructible: the first input is finite-Tor and both inputs are bounded constructible at each level. Thus the pro-etale Hom system has etale origin.\nCarry out the representing calculation on etale systems. Since $s_{\\mathrm{et}}$ is punctual, $\\widehat{\\mathcal H}_W=Ra_{W,*,\\bullet}^{\\mathrm{et}}H^{\\mathrm{sys}}_{W,\\mathrm{et}}(M,N)$ is an ordinary derived $A_\\bullet$-module system, representing\n$$P\\longmapsto\\operatorname{Hom}(a_W^*P\\otimes^LM,N).$$\nThis uses the closed and inverse/direct-image adjunctions. The site-comparison unit and derived pushforward composition identify its image in abelian-group towers with the pro-etale mapping system $\\mathcal H_W$. Global sections on the pro-etale coefficient point are taken here, not silently identified with forgetting coefficients.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-galois-yoneda-hom-bijection",
-    "thm-sf-hom-comparison-constructible",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-system-level-left-extension",
-    "lem-sfb-unbounded-site-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Identify the specified fiberwise mapping systems by their actual evaluation maps"
-   }
-  },
-  {
-   "text": "For an arbitrary test coefficient system $P$ on $s$, the system projection isomorphism constructed above gives $a_Y^*P\\otimes^LFM\\cong F(a_X^*P\\otimes^LM)$. Hence\n$$\\operatorname{Hom}(P,\\widehat{\\mathcal H}_Y(FM,N))\\cong\\operatorname{Hom}(a_Y^*P\\otimes^LFM,N)\\cong\\operatorname{Hom}(F(a_X^*P\\otimes^LM),N)\\cong\\operatorname{Hom}(a_X^*P\\otimes^LM,GN)\\cong\\operatorname{Hom}(P,\\widehat{\\mathcal H}_X(M,GN)).$$\nEvery bijection is an actual system adjunction or the system projection isomorphism. It is natural for all $P$, so Yoneda gives a specified mapping-system isomorphism with inverse. Restriction to abelian-group towers gives $\\Phi$. The inverse equations follow from the inverse representing bijections, in the ordinary derived category of coefficient systems; no equality is inferred from finite evaluations.",
-   "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-galois-yoneda-hom-bijection",
-    "lem-amb-proper-coproducts-projection",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Middle RHom adjunction as an isomorphism of ordinary derived systems"
-   }
-  },
-  {
-   "text": "The representing bijections use the actual counit $FGN\\to N$ and projection map, so their finite evaluations are the ordinary finite tensor-Hom/counit transposes. This can be read by testing on $L_nP_n$ in the same calculation, rather than lifting a finite transpose. The counit-compatible identifications already fix the finite adjunctions; the standard finite internal adjunction and site comparison identify their derived mapping-complex maps with those in the statement. At degree-zero Hom the forward and inverse maps are $h\\mapsto G(h)\\eta_M$ and $g\\mapsto\\epsilon_NF(g)$ by the actual adjunction. Their inverse identities were proved as system identities in the representing calculation.",
-   "uses": [
-    "lem-pur-coefficient-evaluation-derived-left-adjoint",
-    "prop-asd-internal-adjunction",
-    "thm-weil-pbc-site-comparison",
-    "det-sp-unique-right-adjoint",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Specified finite evaluations of the system mapping adjunction"
-   }
-  },
-  {
-   "text": "Apply the total derived inverse-limit functor to $\\Phi$ and its already specified inverse. A functor preserves compositions and identities, so their images are inverse isomorphisms in $D(\\operatorname{Ab})$. Naturality and the evaluation/transpose identities are carried along by the same functor.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Pass to total derived inverse limit only after constructing the system isomorphism"
-   }
-  },
-  {
-   "text": "For a specified ordinary transformation between system compact-support functors, take its ordinary adjunction mate using the actual units and counits above. Its evaluation is the finite mate because the identifications preserve those units and counits. For composition comparisons use the composite adjunction; ordinary mate pasting gives the horizontal and vertical composition laws as equalities of derived system transformations. Counit-compatible uniqueness identifies different choices of ambient right adjoints. Thus this applies to the geometric composition maps used by the citers. It makes no claim of lifting transformations specified only at the finite levels.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-mate-pasting",
-    "det-sp-unique-right-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Naturality and composition by ordinary system mates"
-   }
-  },
-  {
-   "text": "Finally form tensors on flat-term K-flat system resolutions. K-flat existence, the flat-term K-flat total-tensor model and the ringed-site closed structure make these operations and their evaluation transposes independent of representatives. Composing their actual system maps with $\\eta,\\epsilon$ and using the system closed-adjunction bijection produces actual tensor-Hom transposes. Evaluation of those composites and bijections is the finite construction by the preceding internal-Hom identification. Their compatibility with transitions is therefore a property of these constructed system maps, rather than a criterion for lifting unrelated finite maps.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-pur-kflat-total-tensor-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-    "place": "Tensor-evaluation transposes on ordinary system resolutions; Stacks 06YS, 08J9, 0A95"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "cor-sf-direct-image-ctf-proetale",
-  "def-coef-normalized-dvr-tower",
-  "def-weil-exceptional-inverse-image",
-  "def-weil-pbc-adjunction-mate",
-  "det-sp-unique-adjoint-coefficients",
-  "det-sp-unique-right-adjoint",
-  "lem-amb-proper-coproducts-projection",
-  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-finite-adjunction-diagram-realization",
   "lem-coef-finite-exceptional",
-  "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-grothendieck-derived-brown-right-adjoint",
-  "lem-kun-dimension-finite-type",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-kflat-resolution",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pur-coefficient-evaluation-derived-left-adjoint",
-  "lem-pur-coefficient-system-derived-comparison",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-etale-coefficient-system-adjoint",
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-pur-system-level-left-extension",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sfb-unbounded-direct-image-comparison",
-  "lem-sfb-unbounded-site-comparison",
-  "lem-trf-open-ctf",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "prop-asd-internal-adjunction",
-  "thm-sf-hom-comparison-constructible",
-  "thm-sf-preservation-class",
-  "thm-weil-pbc-site-comparison"
+  "lem-coef-normalized-support-etale-presentation",
+  "lem-coef-system-adjunction-transpose-coherence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
-  "place": "Middle RHom calculation and final paragraph; ordinary system realization supplied by Brown and derived evaluation/closed adjunctions."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Existing finite normalized/enriched realization plus ordinary etale-presentation descent; explicit right-adjoint uniqueness, mate-counit calculation and functorial inverse-limit identities, Z5 2026-10-25."
  },
  "mathlib_searches": [
   {
@@ -470,143 +208,32 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-coef-cartesian-section-adjoint-mates",
   "worker": "stage1",
-  "summary": "Replaced all level-lifting arguments by Brown on the Grothendieck category of strict etale coefficient systems, derived left adjoints of evaluation and counit-normalized uniqueness. Derived sigma maps identify the transitions. Actual system projection/closed adjunctions represent the mapping-system isomorphism. Uniformizer powers throughout; levelwise finite-Tor domain without extra uniform bounds; etale-origin comparison handles pro-etale systems. No new nodes.",
-  "blueprint": "Realizes the middle RHom calculation and final unit/counit paragraph of main-20261015 prop-coef-integral-exceptional-adjoint.proof.",
-  "tool_uses": [
-   {
-    "node": "cor-sf-direct-image-ctf-proetale",
-    "why": "Steps 7: The pro-étale direct image for all finite-Tor objects. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "det-sp-unique-adjoint-coefficients",
-    "why": "Steps 6: Right adjoints inherit the coefficient comparisons. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-amb-proper-coproducts-projection",
-    "why": "Steps 3, 13: The proper projection formula on the ambient category. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-etale-proper-derived-lower-star-coproducts-for-grothendieck",
-    "why": "Steps 2, 5: Coproduct preservation for proper étale derived direct image. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-grothendieck-derived-brown-right-adjoint",
-    "why": "Steps 2, 5, 9: Grothendieck derived Brown right adjoint. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Steps 7: Finiteness of the dimension of a finite type scheme. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pc-derived-adjoint-functors",
-    "why": "Steps 3: Derived functors of adjoint functors are adjoint. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Steps 3, 17: Existence of K-flat resolutions on a ringed site. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pc-right-derived-functor-triangulated",
-    "why": "Steps 1: The unbounded right derived functor is triangulated. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pur-coefficient-evaluation-derived-left-adjoint",
-    "why": "Steps 3, 4, 5, 6, 11, 14: Derived extension from one level of a varying-coefficient system. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pur-coefficient-system-derived-comparison",
-    "why": "Steps 1, 2, 3, 7, 10, 12, 13: Derived direct image and evaluation of coefficient systems. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Steps 8: Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pur-etale-coefficient-system-adjoint",
-    "why": "Steps 5: Ordinary etale adjoint on strict coefficient systems. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pur-kflat-total-tensor-model",
-    "why": "Steps 17: K-flat total tensor model for flat-term resolutions. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pur-ringed-site-grothendieck-abelian",
-    "why": "Steps 1: Sheaves of modules on a small ringed site are Grothendieck abelian. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Steps 1, 3, 10: Restriction and extension by zero for modules on a localized site. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-pur-system-level-left-extension",
-    "why": "Steps 1, 2, 3, 10, 12: Derived left extension from coefficient levels. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-sf-proetale-constructible-origin",
-    "why": "Steps 10: Constructible pro-étale coefficients are of étale origin. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-sfb-unbounded-direct-image-comparison",
-    "why": "Steps 10: Unbounded direct-image comparison. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-sfb-unbounded-site-comparison",
-    "why": "Steps 10, 12: Unbounded comparison: full faithfulness and sums. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-trf-open-ctf",
-    "why": "Steps 7: Extension by zero preserves constructibility and Tor amplitude. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Steps 3, 4, 13: Exactness data for the ringed-topos projection mate. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Steps 3: Derived pullback on ringed topoi computed by K-flat resolutions. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Steps 3, 11, 12: Derived tensor comparison for arbitrary ringed topoi. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Steps 3: Module pullback and pushforward adjunction on arbitrary ringed topoi. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "prop-asd-internal-adjunction",
-    "why": "Steps 14: Internal ambient adjunction. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "thm-sf-hom-comparison-constructible",
-    "why": "Steps 12: Internal-Hom comparison for finite-Tor constructible inputs. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "thm-sf-preservation-class",
-    "why": "Steps 7: The preservation clauses of exceptional-adjoint admissibility are theorems on the coefficient class. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Steps 14: Bounded-below site comparison. This is a generic foundational or finite-coefficient input to the ordinary system construction; no theorem of the biduality unit supplies this input, and no geometric biduality route is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Step 12: compares derived global sections along the etale/pro-etale adjunction and the point projection; this generic ringed-site composition theorem provides an actual comparison before total inverse limit."
-   }
-  ]
+  "summary": "Repair of the long-proof return: six independent statement-only unsplit arguments cover all seventeen returned steps. The parent statement is unchanged; its proof is a short assembly. All old arguments and their citations are retained verbatim in the report for the next workers. Actual system maps, counit normalizations and absence of a common level bound are explicit.",
+  "blueprint": "First paragraph normalization; second paragraph middle RHom calculation; final paragraph units, counits and triangle identities before total inverse limit."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q03-58f643215",
-  "group": "Q03",
+  "reviewer": "NT-cc-NF-3da53edba",
+  "group": "NF",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-58f643215 (reviewer sub-agent of L); spot-checked: Read all 17 steps and 49 dependency statements; checked Zheng pp. 21–24, 34–38, current blueprint and Stacks sources. Ordinary Brown construction, coefficient mates and mapping-system adjunction check out. No dropped dependencies or long steps. Accepted 30 tool uses; review.md records edge cases and stale maintainer-owned source metadata."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-3da53edba (reviewer sub-agent of L); spot-checked: Re-split of the long proof; the item statement is unchanged. I read the six new nodes in full against the 17 returned steps, the main-20261015 prop-coef-integral-exceptional-adjoint proof (middle RHom calculation and final unit/counit paragraph), master lem-coef-finite-exceptional, and every cited statement. Each old argument now sits in a new node with a self-contained statement: steps 1-3 in projection, 4-6 in free-insertion, 7-10 in descent, 11-12 in internal-Hom, 13-15 in enriched, 16-17 in coherence. The Brown construction of old step 2 is not lost: the existing, accepted tool lem-pur-etale-coefficient-system-adjoint states that right adjoint. The nodes are of comparable size, none restates the item, and the 6-step assembly applies each node once. Checks that pass: the a_n/sigma and b_{m,n} types; m=n (q=1, b=1 by the triangle identity); f=id; zero systems; L_n is left adjoint to e_n given the transition direction; the internal-Hom level computation under normalization; representability of Hat-H via a^* ⊣ Ra_* and the closed adjunction; levelwise ctf preservation with no uniform bound; the nu equivalence on N; ramified E (only powers of varpi are used). No cycles, no SGA, blueprint ancestry is correct. FIX, C5/B2-B3: (1) the internal-Hom node restated, as its own content, e_nH(M,N) ≅ RHom(M_n,N_n) preserving evaluation for cartesian M and arbitrary N. The existing same-unit node lem-coef-semilinear-derived-sections already states this. The node now cites it and keeps only the I_W→H invertibility (restricted to pro-etale, where I_W is defined), the nu comparison (finiteness hypothesis made explicit), representability and the tower identification. (2) The projection node now cites the same node for the construction of e_nF ≅ F_ne_n and of q (= b_{m,n} for Rp_*); invertibility on unbounded inputs stays as its own content. (3) The enriched node's unnamed 'canonical etale/pro-etale mapping-system comparisons' now names the tower identifications of lem-coef-system-internal-hom-representability, added as a stmt_dep. Item step 4 now also uses lem-coef-semilinear-derived-sections, which is in the item's unit. Noted, not changed: the new nodes lack lean_audit; the free-insertion node partly overlaps lem-pur-etale-coefficient-system-adjoint's loose transition-mate clause, but it fixes the precise identification; the coherence node is close to formal.; 4 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "tool_uses": [
   "cor-sf-direct-image-ctf-proetale",
   "det-sp-unique-adjoint-coefficients",
@@ -638,5 +265,39 @@
   "thm-sf-preservation-class",
   "thm-weil-pbc-site-comparison",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.CartesianSectionAdjointMates",
+  "declaration": "WeilConjectures.CartesianSectionAdjoint.cartesianSectionAdjointMates",
+  "declarations": [
+   "WeilConjectures.CartesianSectionAdjoint.EtaleOrigin",
+   "WeilConjectures.CartesianSectionAdjoint.MateEvaluation",
+   "WeilConjectures.CartesianSectionAdjoint.cartesianSectionAdjointMates"
+  ],
+  "file": "lean/Sheaf/Paper/CartesianSectionAdjointMates.lean",
+  "statement": "theorem cartesianSectionAdjointMates (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : ∃ (SX : CoefficientDerivedSystemCalculus l E X) (SZ : CoefficientDerivedSystemCalculus l E c.Z) (SY : CoefficientDerivedSystemCalculus l E Y) (r : Realization l E D hl f c SX SZ SY) (g : Geometry l E f SX SY) (s : SectionsPush g) (βX : @SymmetricCategory (coefficientSequenceDerived l E X) _ SX.systemClosed.monoidal) (βY : @SymmetricCategory (coefficientSequenceDerived l E Y) _ SY.systemClosed.monoidal) (Φ : Enriched r g s βX βY), Nonempty (EtaleOrigin l E D hl f c r) ∧ MateEvaluation l E D hl f c r ∧ (∀ (m n : ℕ) (h : n ≤ m), IsIso (FiniteExceptional.b l E D hl f c h)) ∧ (∀ (M : (domain l E X).FullSubcategory) (N : (domain l E Y).FullSubcategory) (h : r.F.obj M ⟶ N), r.adjunction.homEquiv M N h = r.adjunction.unit.app M ≫ r.G.map h) ∧ (∀ (M : (domain l E X).FullSubcategory) (N : (domain l E Y).FullSubcategory) (h : M ⟶ r.G.obj N), (r.adjunction.homEquiv M N).symm h = r.F.map h ≫ r.adjunction.counit.app N) ∧ (∀ (M : (domain l E X).FullSubcategory) (N : (domain l E Y).FullSubcategory), IsIso (coefficientMappingLimit.{u+1}.map (Φ.iso.hom.app (op M, N))) ∧ coefficientMappingLimit.{u+1}.map (Φ.iso.hom.app (op M, N)) ≫ coefficientMappingLimit.{u+1}.map (Φ.iso.inv.app (op M, N)) = 𝟙 _ ∧ coefficientMappingLimit.{u+1}.map (Φ.iso.inv.app (op M, N)) ≫ coefficientMappingLimit.{u+1}.map (Φ.iso.hom.app (op M, N)) = 𝟙 _) ∧ (∀ (W : Scheme.{u}) (_hW : W = X ∨ W = Y), ∀ A : SemilinearSections.Data.{u + 1, u, u} (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf.{u, u} l E W) (coefficientSequenceCommRingTransition.{u, u} l E W), SemilinearSections.SystemTensorTransposeCoherence.{u + 1, u, u} (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf.{u, u} l E W) (coefficientSequenceCommRingTransition.{u, u} l E W) A)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: the statement imports Sheaf.Paper.CartesianSectionData, owned by def-coef-cartesian-section-data, for the publicly re-exported Enriched/mapping, internal-Hom comparison and tensor-transpose definitions. The three theorem nodes are no longer added as statement dependencies. Existing proof dependencies and the mathematical statement are unchanged; EtaleOrigin uses the transparent comparison-presentation abbreviation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90ce0f148",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Re-delivery after 7e4c RETURN H2 fixes it. New definition node def-coef-cartesian-section-data (Sheaf.Paper.CartesianSectionData) publicly re-exports Enriched, mappingSource/Target, finiteMapping*, SystemInternalHom.Representability/Et/coefficients/ComparisonImage.P,R,derivedAdjunction and SystemTensorTransposeCoherence, plus one transparent abbrev; no data copied, no choice, no sorry; same shape as NB 7c76 def-trf-blowup-square-pullback-maps (landed). Node text matches the definitions clause by clause (Representability fields, the 6 Enriched fields, the 5 coherence conjuncts) and its 8 stmt_deps cover every citation; lem-coef-derived-system-evaluation-calculus is the only record of coefficientSequenceGlobalHom and is already a base stmt_dep. Item stmt_deps = base + def-coef-finite-adjunction-system-data + the new node; the three theorem nodes are dropped; proof_deps unchanged. Only 4 files differ from side-live; the item module differs from 7e4c only in imports and the EtaleOrigin field type; signature equals lean.statement. Re-checked hypotheses (no extra assumption, no uniform bound, pro-étale universes u+1/u), all conclusion clauses (EtaleOrigin pinned by the transpose equation, conjugateEquiv mates, b invertible, degree-zero formulas, Φ.component, R lim isomorphism with both inverse identities, tensor coherence for W ∈ {X, Y}), edge cases n = 0, m = n, empty schemes, zero systems, f = id; docstrings, no hollow definitions. Source latest→main-20261024 lem-coef-finite-exceptional.proof paragraphs 2-3. No compile (no file changed). Advisory: Etale.SystemProjection.Support and SemilinearSections.Data are cited only through the new definition node; its lean.declarations lists the re-exported names."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261025T102017-L-3767539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

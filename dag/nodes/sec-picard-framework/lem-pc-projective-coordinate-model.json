@@ -125,7 +125,32 @@
   "def-pc-scheme"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_isStandard_iso_proj"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_isStandard_iso_proj",
+     "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CurveProjection",
+     "lines": [
+      38,
+      109
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-coherence",
  "split_report": {
@@ -158,5 +183,30 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be an integral scheme over a field $k$, equipped with a\nclosed immersion\n$i:X\\hookrightarrow\\mathbf P^n_k$ over $k$. There are an integral\nstandard graded $k$-algebra $S$ and an isomorphism\n$X\\cong\\operatorname{Proj}(S)$ of schemes over $k$.",
+  "proof": [
+   {
+    "text": "Let $\\eta$ be the generic point of $X$. Its image in projective space\ncorresponds to a homogeneous prime $I$ not containing the irrelevant\nideal, by [def-pc-proj]. This constructs $I$ without a choice of\nequations or any coherent-cohomology theorem. Put\n$S=k[x_0,\\ldots,x_n]/I$. The quotient $S$ is a\ndomain, its degree-zero part is $k$, and the images of the finitely\nmany $x_i$ generate it in degree one; these are exactly the conditions\nof [def-pc-standard-graded-algebra].",
+    "uses": [
+     "def-pc-proj",
+     "def-pc-standard-graded-algebra"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "We check the claimed identification on each standard affine chart of\n$\\mathbf P^n_k$. A nonempty inverse image in $X$ is an affine closed\nsubscheme of that chart and is integral. Its defining ideal is\ntherefore the prime ideal corresponding to its generic point, which\nis $\\eta$. The same prime is obtained from $I$ by homogeneous\nlocalization followed by degree zero. Thus the chart is\n$\\operatorname{Spec}(S_{(x_i)})$. If the inverse image is empty,\n$x_i\\in I$ and the localized quotient is the zero ring, giving the\nsame empty chart. These identifications commute with further\nlocalization on overlaps, so they glue to an isomorphism\n$X\\cong\\operatorname{Proj}(S)$, which is over $k$ since all the chart\nidentifications are $k$-linear.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

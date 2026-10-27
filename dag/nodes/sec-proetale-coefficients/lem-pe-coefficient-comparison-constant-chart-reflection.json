@@ -1,0 +1,152 @@
+{
+ "id": "lem-pe-coefficient-comparison-constant-chart-reflection",
+ "kind": "lemma",
+ "title": "Reflection of a single constant chart under coefficient-sized comparison",
+ "statement": "Let X be any scheme, A any commutative ring in max(v,u+1), F an A-module sheaf on the coefficient-sized etale site, V an object of that site, and M an A-module in the same coefficient universe. Use the comparison inverse image P and inclusion i of [def-weil-pbc-site-comparison-morphism], with the coefficient-sized models of [def-weil-proetale-inverse-image], and constant sheaves [def-weil-pbc-constant-sheaf]. An isomorphism (P F).over i(V) ≅ constant M on the pro-etale slice implies that F.over V ≅ constant M on the etale slice. There is no covering hypothesis, no finite generation or finite presentation hypothesis on M, and no Noetherian hypothesis on A.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099T, lemma-fully-faithful; Tag 099Y, lemma-compare-locally-constant, localization and descent of constant charts"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient-sized comparison unit is invertible. Restrict its underlying presheaf map along AsSmall.up and AffineEtale.Spec; these two dense-subsite restriction functors are fully faithful and hence reflect isomorphisms. The unit is the composite of the left-Kan-extension unit and the restriction of the pro-etale sheafification unit. Full faithfulness of the inclusion makes the Kan unit invertible. For an affine etale object W, use the constant presentation indexed by PUnit, with vertex W and identity projection maps, in the coefficient presentation-sheafification theorem. Its vertex conclusion makes the second factor invertible. This proves invertibility on the affine etale basis and hence on all etale sheaves.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pe-coefficient-comparison-presentation-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let P and R be the comparison inverse and direct images. The inclusion preserves terminal objects. Compose the constant-sheaf adjunction on the etale site with P left adjoint to R. The right adjoint is terminal evaluation on the pro-etale site, since R is sectionwise restriction. Uniqueness of left adjoints gives k: P(constant_et M) isomorphic to constant_pro M. Compose the invertible unit at constant_et M with R(k), obtaining d: constant_et M isomorphic to R(constant_pro M).",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write R_V for direct image along Over.post of the inclusion. Sectionwise precomposition gives q_H: (R H).over V isomorphic to R_V(H.over i(V)); the underlying presheaf isomorphism is the identity. Restrict the invertible unit at F and then compose q_(P F) with R_V(e). The resulting target is R_V(constant_pro_slice M). Use the inverse constant-restriction isomorphism on the pro-etale site, then q_(constant_pro M) inverse, then the inverse restriction of d, then constant restriction on the etale site. This gives the desired isomorphism F.over V to constant_et_slice M. Continuity of Over.post follows from finite-limit preservation and cover preservation. All steps preserve M and the coefficient universe; none assumes V nonempty or M nonzero.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pe-coefficient-comparison-presentation-sheafification",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-site-constant-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099T, lemma-fully-faithful, and Tag 099Y, comparison of constant charts; sectionwise direct image avoids transporting the slice sites. The unit is proved from the coefficient-sized presentation-sheafification theorem; the remaining argument is adjunction uniqueness and restriction of constant sheaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale sheaf of modules is locally constant when its proetale pullback has finitely presented constant local models",
+   "results": [
+    "CategoryTheory.Sheaf.isConstant_of_forget",
+    "CategoryTheory.Sheaf.isConstant_iff_forget",
+    "CompHausLike.LocallyConstantModule.functor"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Forgetful value-category comparisons do not reflect a specified model along the etale/pro-etale site inclusion. No exact chart-reflection theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"sheafPushforwardContinuous\"",
+   "results": [],
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstant.*reflect|reflect.*IsLocallyConstant",
+   "results": [],
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match. Local repository searches found the ULift-only finiteLocalSystemsTwist, the fixed-universe comparison unit, the coefficient presentation sheafification theorem, and the separate constant-chart counit theorem. None states reflection of one specified chart in arbitrary coefficient size."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image along the etale to proetale comparison is fully faithful and reflects a constant sheaf of modules on a single etale object, for arbitrary coefficient universes.",
+   "results": [
+    "CategoryTheory.Sheaf.isConstant_of_forget",
+    "CategoryTheory.Sheaf.isConstant_iff_forget",
+    "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+    "CategoryTheory.fullyFaithfulSheafToPresheaf"
+   ],
+   "date": "2026-10-26",
+   "verdict": "No comparison chart-reflection theorem. Constant-sheaf/value-category reflection concerns different functors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientComparisonFiniteReflection",
+  "date": "2026-10-26",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "First sentence: finite local-system comparison handles a single stratum; Tag 099T identifies an etale sheaf from its inverse image on each constant etale chart.",
+   "via": [
+    "lem-pe-coefficient-comparison-finite-reflection",
+    "lem-pe-coefficient-comparison-constructibility-test"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonConstantChartReflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonConstantChartReflection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientComparison_constant_over_reflect",
+  "statement": "theorem coefficientComparison_constant_over_reflect (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (F : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A))\n    (V : Scheme.smallModelComparisonEtaleSite.{u, v} X)\n    (M : ModuleCat.{max v (u + 1)} A)\n    (e : ((Functor.sheafPullbackConstruction.sheafPullback\n      (Scheme.smallModelComparisonInclusion.{u, v} X) (ModuleCat.{max v (u + 1)} A)\n      (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n      (Scheme.coefficientProEtaleModelTopology.{u, v} X)).obj F).over\n        ((Scheme.smallModelComparisonInclusion.{u, v} X).obj V) ≅\n      (constantSheaf ((Scheme.coefficientProEtaleModelTopology.{u, v} X).over\n        ((Scheme.smallModelComparisonInclusion.{u, v} X).obj V))\n        (ModuleCat.{max v (u + 1)} A)).obj M) :\n    Nonempty (F.over V ≅\n      (constantSheaf ((Scheme.smallModelComparisonEtaleTopology.{u, v} X).over V)\n        (ModuleCat.{max v (u + 1)} A)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261026T065243-L-2772292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261026T091428-L-3341674",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

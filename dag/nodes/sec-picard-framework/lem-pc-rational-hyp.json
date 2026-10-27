@@ -69,7 +69,52 @@
   "def-pc-smooth-projective-curve"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.RationalPoint",
+     "lines": [
+      194,
+      206
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_section",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.RationalPoint",
+     "lines": [
+      99,
+      128
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_section",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.RationalPoint",
+     "lines": [
+      262,
+      276
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-picard-pic-split",
  "split_report": {
@@ -119,20 +164,31 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $k$ be a field and let $X$ be a\nsmooth projective curve over\n$k$ which has a $k$-rational point $\\sigma$. Then the hypotheses of\n[thm-pc-pic-split] (with $S=\\operatorname{Spec}(k)$, $f:X\\to\\operatorname{Spec}(k)$) are\nsatisfied: $f$ has the section $\\sigma$, and\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for every\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/k)_{fppf})$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field and let $X$ be a\nsmooth projective curve over\n$k$ (more generally, an integral proper scheme over $k$) which has a\n$k$-rational point $\\sigma$. Then the hypotheses of\n[thm-pc-pic-split] (with $S=\\operatorname{Spec}(k)$, $f:X\\to\\operatorname{Spec}(k)$) are\nsatisfied: $f$ has the section $\\sigma$, and\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for every\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/k)_{fppf})$. The second condition also holds,\nwithout a rational point, whenever $X$ is smooth of relative dimension $1$,\nproper and geometrically integral over $k$.",
   "proof": [
    {
-    "text": "The section $\\sigma$ verifies the first condition. By\n[lem-pc-h0-proper-variety] (1) (or the first part of Varieties,\nLemma 33.26.2), $k':=H^0(X,\\mathcal{O}_X)$ is a finite field extension of $k$;\nthe $k$-rational point induces a $k$-algebra homomorphism $k'\\to k$, and\na field homomorphism over $k$ is injective, so $k'=k$. Hence\n$f_*\\mathcal{O}_X=\\mathcal{O}_k$, and for $T\\in(\\mathit{Sch}/k)_{fppf}$: the structure morphism\n$T\\to\\operatorname{Spec}(k)$ is flat ([lem-pc-flat-field]), so by\n[lem-pc-flat-base-change-cohom] applied to $f:X\\to\\operatorname{Spec} k$ and\nFlat $\\mathcal{F}=\\mathcal{O}_X$,\n\n$$\nf_{T,*}\\mathcal{O}_{X_T}=g^*f_*\\mathcal{O}_X=g^*\\mathcal{O}_k=\\mathcal{O}_T\n$$\n\nwhere $g:T\\to\\operatorname{Spec}(k)$; this is [lem-pc-structure-pushforward], as $H^0(X,\\mathcal{O}_X)=k$. This proves the claim.",
+    "text": "The section $\\sigma$ verifies the first condition. Since $X$ is an\nintegral proper scheme over $k$, by [lem-pc-h0-proper-variety] (1)\n$k':=H^0(X,\\mathcal{O}_X)$ is a finite field extension of $k$; the\n$k$-rational point induces a $k$-algebra homomorphism $k'\\to k$, and a\nfield homomorphism over $k$ is injective, so $k'=k$. Hence $X$ is a\nproper $k$-scheme with $H^0(X,\\mathcal{O}_X)=k$, and\n[lem-pc-structure-pushforward] shows that\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for every\nscheme $T$ over $k$, in particular for every\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/k)_{fppf})$. This proves the claim.",
     "uses": [
      "lem-pc-h0-proper-variety",
-     "lem-pc-flat-field",
-     "lem-pc-flat-base-change-cohom",
+     "lem-pc-structure-pushforward"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "If instead $X$ is smooth of relative dimension $1$, proper and\ngeometrically integral over $k$, then $H^0(X,\\mathcal{O}_X)=k$ by\n[lem-pc-h0-proper-variety] (2), and [lem-pc-structure-pushforward] gives\nthe second condition in the same way, without using $\\sigma$.",
+    "uses": [
+     "lem-pc-h0-proper-variety",
      "lem-pc-structure-pushforward"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

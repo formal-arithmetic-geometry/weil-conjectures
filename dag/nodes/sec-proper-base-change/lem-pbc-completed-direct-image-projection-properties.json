@@ -1,0 +1,133 @@
+{
+ "id": "lem-pbc-completed-direct-image-projection-properties",
+ "kind": "statement",
+ "title": "Completed finite quotient projection is invertible and natural",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $d$ an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. Write $R_T$ for the completed coefficient sheaf and $R_{T,n}$ for its positive finite quotient sheaf, indexed by $n+1$ [def-weil-pbc-bounded-constructible-tower]. Let $F=Rf_{*,d}$ and $G_n=Rf_{*,R_n}$ be the direct images using the canonical completed and finite coefficient maps [def-sf-completed-module-direct-image]. Write $E_{T,n}\\dashv U_{T,n}$ for extension and restriction along the limit projection $R_T\\to R_{T,n}$ and $e_n:U_{X,n}F\\cong G_nU_{Y,n}$ for the derived comparison whose ordinary comparison is identity on sections and whose derived units are the universal right-derived units. Define $\\pi_n(K):E_{Y,n}F(K)\\to G_nE_{X,n}(K)$ as the scalar-adjunction transpose of $F(\\eta_{X,n}(K));(e_n)_{E_{X,n}K}$. Then $\\pi_n(K)$ is invertible for every $n\\in\\mathbb{N}$ and every unbounded $K\\in D(R_X)$. Moreover, for every $h:K\\to L$, one has $E_{Y,n}(F(h));\\pi_n(L)=\\pi_n(K);G_n(E_{X,n}(h))$.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-sf-completed-module-direct-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Projection formula, equation-projection-formula-map (Tag 0B56), lines 13660-13679; lemma-projection-formula (Tag 0944), lines 13683-13720; scalar-extension specialization of derived adjunction."
+ },
+ "proof": [
+  {
+   "text": "Construct the finite quotient unit-module identification by the canonical finite-ring comparison and its limit-projection equation. Normalize the completed and finite complex units with the generic identity-factor theorem. Retain the ordinary functor presentations, and supply their defining equalities, the section-normalized ordinary comparison and its universal-derived-unit-normalized derived comparison.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-pbc-right-derived-complex-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved scalar-projection perfectness theorem to these finite coefficient sheaves, the nth quotient identification and the input K. That theorem combines tensor projection perfectness with cancellation and conservative restriction.",
+   "uses": [
+    "lem-pbc-completed-scalar-projection-perfect-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For naturality apply the Hom adjunction bijection to both sides. Naturality of that bijection reduces the assertion to naturality of the scalar unit and e. Functoriality and associativity give the equality, independently of perfectness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pbc-completed-scalar-projection-perfect-iso",
+  "lem-pbc-right-derived-complex-unit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expands the scalar-extension identification in the canonical projection morphism using the published coefficient-change and K-flat normalization declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with derived extension of scalars along a perfect finite quotient; the scalar adjunction mate is a natural isomorphism",
+   "results": "Derived adjunction unit and counit constructions; no scalar/tensor normalization for the specified pro-etale coefficient presentations.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "results": "Mathlib.CategoryTheory.Adjunction.Basic: homEquiv_naturality_left_symm. Reused adjunction naturality in the complete assembly proof.",
+   "date": "2026-10-27",
+   "verdict": "generic naturality available; no coefficient-normalization statement"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(scalar|restrict)|(scalar|restrict).*projection",
+   "results": "9 unrelated Mathlib geometric-projection hits. Local library: PerfectProjectionFormula proves tensor invertibility; ProEtaleRingSheafChangeAdjunction handles restriction/direct-image units. FiniteCoefficientDirectImage has a private etale constant-ring bounded-below scalarMate_restrict_eq_projection, with a different encoding and extra boundedness hypotheses.",
+   "date": "2026-10-27",
+   "verdict": "reuse perfect projection and coefficient-change declarations; a generic unbounded pro-etale scalar-to-tensor normalization remains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a derived scalar extension and pushforward comparison is the tensor projection morphism for a morphism of ringed topoi",
+   "results": "8 presheaf restriction/pushforward definitions, including PresheafOfModules.restrictScalars; no derived normalization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "blueprint search",
+   "query": "scalar projection; restriction tensor",
+   "results": "One unrelated finite etale direct-image node for scalar projection; no restriction tensor node. Also read the current latest perfect-projection-formula statement and proof.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate of the new comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedTowerDirectImage",
+  "date": "2026-10-27",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Finite-level projection-formula clause: identify its scalar-adjunction mate with the tensor projection before applying perfectness.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.CompletedTowerDirectImage",
+  "file": "lean/Sheaf/Paper/CompletedTowerDirectImage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedDirectImageProjectionFormula_properties",
+  "statement": "theorem completedDirectImageProjectionFormula_properties (d : AdicCoefficientDatum A) :\n    (∀ (n : ℕ) (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))),\n      IsIso (completedDirectImageProjectionFormula f d n K)) ∧\n    ∀ (n : ℕ) (K L : DerivedCategory (pbcModules X (pbcAdicCompletion X d)))\n      (h : K ⟶ L),\n      (pbcDerivedExtend (pbcAdicProjection Y d n)).map\n          ((completedDerivedDirectImage f d).map h) ≫\n        completedDirectImageProjectionFormula f d n L =\n      completedDirectImageProjectionFormula f d n K ≫\n        (completedFiniteDerivedDirectImage f d n).map\n          ((pbcDerivedExtend (pbcAdicProjection X d n)).map h)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T222649-L-679938",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T222649-L-679938",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

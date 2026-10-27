@@ -1,0 +1,115 @@
+{
+ "id": "lem-coef-support-point-sections-comparison-existence",
+ "kind": "lemma",
+ "title": "The whole-derived native point-sections scalar square",
+ "statement": "Fix a prime l and a finite extension E of Q_l. For every scheme W, there is a functor isomorphism comparison : quotientSections l E W ≅ coefficientSequenceDerivedRestriction l E W ⋙ integralSections l E W satisfying exactly sectionsComparisonUnit l E W comparison, using the actual R-module-valued functors and unit equation of def-coef-support-point-sections-data. No finite-evaluation data, open tensor comparison or compact-support operation is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2; support-open-tensor argument, step 4; Stacks sites-cohomology.tex, lemma-derived-pushforward-composition (0D6E) and 0941."
+ },
+ "stmt_deps": [
+  "def-coef-support-point-sections-data",
+  "def-coef-constant-scalar-tower-sections",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary quotient-system sections factor through exact completed coefficient restriction. Apply unbounded derived direct-image composition to the ringed coefficient/point square, retain the constant R action, and normalize by the universal derived unit. This constructs comparison and comparison_unit. Scalar restriction need not preserve K-injectives: use K-flat inverse images and derived adjunction/composition instead.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Native-interface specialization of derived direct-image composition and sequence evaluation (support-open-tensor step 4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections of sheaf module towers commute with exact evaluation and scalar restriction",
+   "results": "Eight generic global-section, restriction and evaluation facts; no unit-normalized native derived model.",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the existing project interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived compact support reduction tower transitions and normalized open tensor finite evaluation",
+   "results": "Eight unrelated condensed module and test-function facts. Loogle NatTrans.naturality found the generic naturality square used in assembly, not a model construction.",
+   "date": "2026-10-25",
+   "verdict": "No matching native interface."
+  },
+  {
+   "tool": "grep",
+   "query": "SectionsModel|GammaEvaluation|SystemOpenModel|FiniteOpenModel; extensionByZero.*tensor; rightDerived.*Evaluation",
+   "results": "Project search found only data definitions and model consumers; Mathlib search found no such construction. Blueprint search point sections found det-pbc-torsion-stalk-proetale-point, which concerns a geometric point, not R-linear sequence sections. Existing open normalization uses independently chosen localized-site tensors and is insufficient by direct application.",
+   "date": "2026-10-25",
+   "verdict": "New interface specialization, retaining the stated construction dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefSupportOpenTensorModel",
+  "date": "2026-10-25",
+  "group": "G6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, mapping-complex adjunction and specified natural maps before limits; returned expansion lem-coef-tower-evaluation-pairing, steps 4-5: Compact-support reduction realization with normalized open tensor comparison. Native interface specialization: step 4. Whole-derived scalar square only.",
+   "via": [
+    "lem-coef-support-open-tensor-model",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefSupportPointSectionsComparisonExistence",
+  "file": "lean/Sheaf/Paper/CoefSupportPointSectionsComparisonExistence.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.sectionsComparison_exists",
+  "statement": "theorem sectionsComparison_exists (W : Scheme.{u}) :\n    ∃ comparison : quotientSections l E W ≅\n        coefficientSequenceDerivedRestriction.{u, u} l E W ⋙ integralSections l E W,\n      sectionsComparisonUnit l E W comparison",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T123013-L-1823418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T123013-L-1823418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

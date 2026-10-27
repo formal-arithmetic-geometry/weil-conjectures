@@ -1,0 +1,123 @@
+{
+ "id": "lem-sp-scalar-extension-evaluation-objects",
+ "kind": "statement",
+ "title": "Sectionwise tensor evaluation comparison",
+ "statement": "Let C be a category essentially small in the coefficient universe max(c,v,r), J a Grothendieck topology, B,tau and D,sigma inverse sequences of commutative ring sheaves, alpha_n : B_n to D_n level maps, phi a morphism of their ring systems, M a B-system, and n a natural number [def-coef-semilinear-system-models]. Assume phi has component alpha_n at every (n,U). There are sectionwise D_n(U)-linear isomorphisms from changeOfRingsPresheaf(alpha_n, evaluation_n M)(U) to the coefficient-transported restriction of changeOfRingsPresheaf(phi,M) at (n,U). Each isomorphism sends the pure tensor a tensor x to the corresponding raw-system tensor a tensor x.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+ },
+ "proof": [
+  {
+   "text": "The coefficient morphism has components alpha_n by hypothesis, and the coefficient transports from evaluation_ring are identity ring maps. Substitute these ring-map equalities in the two extension-of-scalars modules. They become identical, and their identity isomorphism has the displayed value on pure tensors.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules), applied to vertical restriction in blueprint classes (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation on the sequence site commutes with extension of scalars of sheaves of modules",
+   "results": "SheafOfModules.evaluation and ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; no sequence-site scalar-extension comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing sheafification and tensor adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of extension of scalars of a sheaf of modules represents linear maps with restricted scalars",
+   "results": "SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars and evalAt_apply.",
+   "date": "2026-10-27",
+   "verdict": "Algebraic ingredients only; the evaluated sheafification comparison is additional."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtensionSection|sheafScalar.*[Aa]djunction|evaluation.*[Aa]djunction; Mathlib module-sheaf ChangeOfRings and Presheaf.Sheafify",
+   "results": "ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.sheafificationAdjunction; fixed-coefficient evaluation adjunctions. No combined sequence-site statement.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerLineEvaluationUniversal",
+  "date": "2026-10-27",
+  "group": "P5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "classes (2), evaluation of ordinary coefficient extension, the tensor and sheafification part of the universal property",
+   "via": [
+    "lem-sp-scalar-extension-evaluation-presheaf",
+    "lem-sp-scalar-extension-evaluation-comparison",
+    "lem-sp-scalar-extension-evaluation",
+    "lem-sp-tower-line-evaluation-universal",
+    "def-sp-tower-class-diagonal"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarExtensionEvaluationObjects",
+  "file": "lean/Sheaf/Paper/ScalarExtensionEvaluationObjects.lean",
+  "declaration": "WeilConjectures.SemilinearSections.scalarExtension_evaluation_objects",
+  "statement": "theorem scalarExtension_evaluation_objects\n    (M : Systems.{c, v, max c v r} J B τ) (n : ℕ) :\n    ∃ e : ∀ U : Cᵒᵖ,\n    (SheafOfModules.changeOfRingsPresheaf.{v, c, max c v r}\n      (α n) ((evaluation.{c, v, max c v r} J B τ n).obj M)).obj U ≅\n      ((PresheafOfModules.pushforward (F := Prod.sectR n C)\n        (eqToHom (evaluation_ring.{c, v, max c v r} J D σ n).symm).hom).obj\n          (SheafOfModules.changeOfRingsPresheaf.{v, c, max c v r}\n            φ M)).obj U,\n      ∀ (U : Cᵒᵖ) (a : (D n).obj.obj U) (x : M.val.obj (op (n, U.unop))),\n        (e U).hom (a ⊗ₜ[(B n).obj.obj U,((α n).hom.app U).hom] x) =\n          (show (systemRing.{c, v, max c v r} J D σ).obj.obj (op (n, U.unop)) from a)\n            ⊗ₜ[(B n).obj.obj U,(φ.hom.app (op (n, U.unop))).hom] x",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T021343-L-2760843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261027T021343-L-2760843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

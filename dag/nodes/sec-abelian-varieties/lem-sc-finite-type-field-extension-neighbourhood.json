@@ -1,0 +1,213 @@
+{
+ "id": "lem-sc-finite-type-field-extension-neighbourhood",
+ "kind": "statement",
+ "title": "Finite type near a contracted prime from module-neighbourhood descent",
+ "statement": "Let $k$ be a field and $K/k$ a field extension [def-pc-field-extension]. For each commutative $k$-algebra $C$ write $C_K=C\\otimes_kK$ [def-weil-pbc-module-tensor-product], and for $v\\in C$ write $C_v$ and $M_v$ for ring and module localization at $1,v,v^2,\\ldots$ [def-weil-pbc-module-localization]. Assume the following neighbourhood-surjectivity principle [lem-sc-module-surjectivity-field-extension-neighbourhood]: for every commutative $k$-algebra $C$, every $C$-linear map $\\varphi:M\\to N$ of arbitrary $C$-modules, every $v\\in C_K$, and every prime ideal $P\\subset C_K$ with $v\\notin P$, surjectivity of $(\\varphi\\otimes_k\\mathrm{id}_K)_v$ implies that some $d\\in C$ with $d\\otimes1\\notin P$ makes $\\varphi_d:M_d\\to N_d$ surjective. Let $A,B$ be commutative $k$-algebras and $\\alpha:A\\to B$ a $k$-algebra homomorphism. Let $\\mathfrak q_K\\subset B_K$ be prime, put $\\mathfrak q=\\{b\\in B:b\\otimes1\\in\\mathfrak q_K\\}$, and let $u\\in B_K\\setminus\\mathfrak q_K$. If $(B_K)_u$ is a finite type $A_K$-algebra via $\\alpha\\otimes_k\\mathrm{id}_K$ [def-weil-pbc-finite-type-algebra], then there is $c\\in B\\setminus\\mathfrak q$ such that $B_c$ is a finite type $A$-algebra.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C4Y (varieties-lemma-change-fields-flat), assertion (1): agent-written finite-generator coefficient-subalgebra consequence under the explicitly stated module-neighbourhood principle; not a verbatim Stacks lemma"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-localization",
+  "lem-sc-module-surjectivity-field-extension-neighbourhood",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite $A_K$-algebra generators $y_1,\\ldots,y_r$ of $(B_K)_u$. Write $y_i=z_i/u^{n_i}$ with $z_i\\in B_K$. Express $u$ and every $z_i$ as finite sums $\\sum_j b_j\\otimes\\lambda_j$, and collect their finitely many $B$-coefficients into $t_1,\\ldots,t_m$. These choices use only the polynomial-generation definition, the fraction construction, and the fact that pure tensors generate the tensor product. Empty lists of generators or coefficients are allowed.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QP (algebra-lemma-finite-type-descends), finite-generator coefficient-subalgebra argument, adapted to a principal localization using the explicitly assumed neighbourhood-surjectivity principle; Tag 00F3 (algebra-definition-finite-type). Agent-written adaptation, not the statement of 00QP."
+   }
+  },
+  {
+   "text": "Let $C=\\alpha(A)[t_1,\\ldots,t_m]\\subseteq B$, explicitly the subring of polynomial expressions in the $t_j$ with coefficients from $\\alpha(A)$. It contains the image of $k$, so is a commutative $k$-algebra. The chosen expressions give elements $v,w_i\\in C_K$ mapping to $u,z_i$ under the map $\\iota_K:C_K\\to B_K$ induced by inclusion. The localized map $F:(C_K)_v\\to(B_K)_u$ sends $a/v^n$ to $\\iota_K(a)/u^n$. Its image is a subalgebra over $A_K$ (coefficients map through $C_K$), and contains every $y_i=F(w_i/v^{n_i})$. Every polynomial in the $y_i$ therefore belongs to its image, so $F$ is surjective. This uses no injectivity of $\\iota_K$.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QP (algebra-lemma-finite-type-descends), finite-generator coefficient-subalgebra argument, adapted to a principal localization using the explicitly assumed neighbourhood-surjectivity principle; Tag 00F3 (algebra-definition-finite-type). Agent-written adaptation, not the statement of 00QP."
+   }
+  },
+  {
+   "text": "Put $P=\\iota_K^{-1}(\\mathfrak q_K)$. This is a prime ideal of $C_K$: its quotient maps injectively to the domain $B_K/\\mathfrak q_K$. Since $\\iota_K(v)=u\\notin\\mathfrak q_K$, we have $v\\notin P$. Regard $\\iota:C\\to B$ as a $C$-linear map of $C$-modules. Its scalar extension localized at $v$ is exactly $F$ of Step 2, because on fractions it is $a/v^n\\mapsto\\iota_K(a)/u^n$; here the action of $v$ on $B_K$ is multiplication by $u$. Apply the neighbourhood-surjectivity principle assumed in the statement, in the precise form of [lem-sc-module-surjectivity-field-extension-neighbourhood], with base algebra $C$, modules $C,B$, map $\\iota$, element $v$ and prime $P$. It gives $d\\in C$ with $d\\otimes1\\notin P$ and surjective $\\iota_d:C_d\\to B_{\\iota(d)}$. Set $c=\\iota(d)\\in B$. Then $c\\otimes1=\\iota_K(d\\otimes1)\\notin\\mathfrak q_K$, so $c\\notin\\mathfrak q$. No finiteness of $B$ as a $C$-module is needed.",
+   "uses": [
+    "lem-sc-module-surjectivity-field-extension-neighbourhood",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QP (algebra-lemma-finite-type-descends), finite-generator coefficient-subalgebra argument, adapted to a principal localization using the explicitly assumed neighbourhood-surjectivity principle; Tag 00F3 (algebra-definition-finite-type). Agent-written adaptation, not the statement of 00QP."
+   }
+  },
+  {
+   "text": "For any $x\\in B_c$, surjectivity gives $x=\\iota_d(g/d^n)=g(t_1,\\ldots,t_m)/c^n$ for some $g\\in C$, written as a polynomial with coefficients in $\\alpha(A)$. Thus $x=g(t_1/1,\\ldots,t_m/1)(1/c)^n$. Consequently $t_1/1,\\ldots,t_m/1,1/c$ generate $B_c$ as an $A$-algebra. By the finite-type definition, $B_c$ is of finite type over $A$, and Step 3 gives the required $c\\notin\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QP (algebra-lemma-finite-type-descends), finite-generator coefficient-subalgebra argument, adapted to a principal localization using the explicitly assumed neighbourhood-surjectivity principle; Tag 00F3 (algebra-definition-finite-type). Agent-written adaptation, not the statement of 00QP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sc-module-surjectivity-field-extension-neighbourhood"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QP (algebra-lemma-finite-type-descends), finite-generator coefficient-subalgebra argument, adapted to a principal localization using the explicitly assumed neighbourhood-surjectivity principle; Tag 00F3 (algebra-definition-finite-type). Agent-written adaptation, not the statement of 00QP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a localization of a scalar extended algebra at a prime is finite type, some principal neighbourhood of its contracted prime is finite type over the original base algebra",
+   "results": "Hits: instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl, Algebra.QuasiFiniteAt, RingHom.localization_away_map_finiteType, RingHom.localization_away_map_finite, RingHom.finiteType_holdsForLocalizationAway, RingHom.EssFiniteType.holdsForLocalization, RingHom.finiteType_localizationPreserves. No theorem gives the stated neighbourhood descent; component localization, quasi-finiteness and global finiteness results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Localization.Away",
+   "results": "Hits: instFiniteTypeAway, Algebra.exists_unramified_of_isUnramifiedAt, Algebra.FiniteType.of_span_eq_top_target, Algebra.FiniteType.of_span_eq_top_source, Algebra.ZariskisMainProperty.exists_fg_and_exists_notMem_and_awayMap_bijective, Algebra.QuasiFiniteAt.exists_fg_and_exists_notMem_and_awayMap_bijective, Localization.exists_finite_awayMapₐ_of_surjective_awayMapₐ, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq. No theorem gives the stated neighbourhood descent; component localization, quasi-finiteness and global finiteness results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]inite[Tt]ype.*(desc|[Ll]ocal|[Tt]ensor)|finiteType.*(desc|[Ll]ocal|[Tt]ensor)",
+   "results": "Hits: Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/FinitePresentationLocal.lean, Mathlib/RingTheory/Finiteness/FiniteTypeLocal.lean, Mathlib/RingTheory/Finiteness/FiniteTypeLocal.lean, Mathlib/RingTheory/Finiteness/FiniteTypeLocal.lean. Global descent requires the entire scalar extension to have the finiteness property; localization and spanning-cover results do not descend from a single upstairs principal open.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type descends near one point under extension of the ground field",
+   "results": "Hits: AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, Algebra.FiniteType.baseChange, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, IntermediateField.finiteDimensional_right. No theorem gives the stated neighbourhood descent; component localization, quasi-finiteness and global finiteness results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite generation of an algebra descends to a neighbourhood of a contracted prime from one principal open after a field extension, by descending surjectivity of a finitely generated coefficient subalgebra",
+   "results": "Hits: Algebra.QuasiFiniteAt, Algebra.FiniteType.of_span_eq_top_source, instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl, Algebra.EssFiniteType.cond, Algebra.FiniteType.of_span_eq_top_target, Algebra.quasiFinite_iff, RingHom.EssFiniteType.holdsForLocalization. No theorem gives the stated neighbourhood descent; component localization, quasi-finiteness and global finiteness results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]inite[Tt]ype.*(desc|[Ll]ocal|[Tt]ensor)|finiteType.*(desc|[Ll]ocal|[Tt]ensor)",
+   "results": "Hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean. No hit states the assumed-principle pointwise field-extension descent. Hits concern global descent, localization, spanning covers, essential finite type, or quasi-finiteness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite type descends near a contracted prime under field extension",
+   "results": "Hits: instFintypeElemIdealPrimesOver, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, primesOver_finite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl, Algebra.QuasiFinite.iff_finite_primesOver, Ideal.Factors.finiteDimensional_quotient_pow, Ideal.under_liesOver_of_liesOver. No hit states the assumed-principle pointwise field-extension descent. Hits concern global descent, localization, spanning covers, essential finite type, or quasi-finiteness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Localization.Away",
+   "results": "Hits: instFiniteTypeAway, Algebra.exists_unramified_of_isUnramifiedAt, Algebra.FiniteType.of_span_eq_top_target, Algebra.FiniteType.of_span_eq_top_source, Algebra.ZariskisMainProperty.exists_fg_and_exists_notMem_and_awayMap_bijective, Algebra.QuasiFiniteAt.exists_fg_and_exists_notMem_and_awayMap_bijective, Localization.exists_finite_awayMapₐ_of_surjective_awayMapₐ, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq. No hit states the assumed-principle pointwise field-extension descent. Hits concern global descent, localization, spanning covers, essential finite type, or quasi-finiteness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type of a localized scalar extension descends near the contracted prime assuming module surjectivity descends on principal neighbourhoods",
+   "results": "Hits: instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl, Module.Finite.of_localizationSpan', instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl, Module.Finite.of_localizationSpan_finite', RingHom.finiteType_isLocal, RingHom.EssFiniteType.holdsForLocalization, Module.Finite.of_isLocalization, Module.Finite.of_isLocalized_maximal. No hit states the assumed-principle pointwise field-extension descent. Hits concern global descent, localization, spanning covers, essential finite type, or quasi-finiteness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "codescendsAlong_faithfullyFlat|of_finiteType_tensorProduct_of_faithfullyFlat|finiteType_localizationPreserves",
+   "results": "Hits: Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/Finiteness/Descent.lean, Mathlib/RingTheory/RingHom/FiniteType.lean, Mathlib/RingTheory/RingHom/FiniteType.lean, Mathlib/RingTheory/RingHom/FiniteType.lean. Source read: Finiteness/Descent.lean:79 requires finite type of the entire tensor product; RingHom/FiniteType.lean:60,63 localizes an already finite-type map. Neither states the pointwise conditional conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finitely generated coefficient subalgebra gives finite type descent at one point from a principal localization after extending the ground field",
+   "results": "Hits: RingHom.finiteType_ofLocalizationSpan, RingHom.finiteType_ofLocalizationSpanTarget, RingHom.finiteType_holdsForLocalizationAway, Algebra.EssFiniteType.cond, RingHom.EssFiniteType.holdsForLocalization, RingHom.localization_away_map_finiteType, RingHom.finiteType_localizationPreserves, Algebra.instEssFiniteTypeLocalization. No hit states the assumed-principle pointwise field-extension descent. Hits concern global descent, localization, spanning covers, essential finite type, or quasi-finiteness.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-lfp-field-extension-pointwise-descent",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-ntorsion-etale",
+ "blueprint": {
+  "from": {
+   "node": "lem-sc-mult-n-etale-kernel",
+   "place": "Historical algebraic-closure reduction for etaleness, pointwise finite-presentation descent: original base proof step 3, descent of finite algebra generators via their coefficient subalgebra.",
+   "via": [
+    "lem-sc-lfp-field-extension-pointwise-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sc-finite-type-field-extension-neighbourhood",
+  "worker": "stage1",
+  "summary": "Four-step coefficient-subalgebra proof, adapting Stacks 00QP to one principal open by the explicitly assumed arbitrary-module neighbourhood-surjectivity principle. Verified the prime is contracted to the coefficient algebra, the inclusion is linear over that algebra, and the final finite generating set includes the inverse of the descended denominator. Statement unchanged; no new nodes. Repeated logged Mathlib searches found component results only.",
+  "blueprint": "Realizes the historical algebraic-closure/pointwise finite-presentation descent branch of lem-sc-mult-n-etale-kernel, through lem-sc-lfp-field-extension-pointwise-descent: its Step 2 needs descent of finite algebra generators. The latest blueprint proof Step 2 still descends etaleness of finite fibres after algebraically closed base change, but uses the already-finite-presentation isogeny and does not state this auxiliary algebra lemma. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NI-418b4bb24",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-418b4bb24 (reviewer sub-agent of L); spot-checked: I read the item, all four steps and the statements of the cited nodes in full. Shape: one commit with the item and a report that has a 'Review by NI' section, and no new nodes. Compared with live and side-live (item unsplit, no proof), the statement, stmt_deps, source, blueprint and created fields are byte-identical. Only proof, proof_deps, proof_origin, status, the added split_report and the 6 appended searches changed. The base's 5 searches are kept, and all three search kinds are present. Source: Stacks 00QP (algebra.tex:31443) uses a coefficient subalgebra; this delivery replaces 00QP's global faithful-flatness step with the assumed principle applied to the inclusion C into B, and is marked by=agent. The assumed principle is true: Spec C_K -> Spec C is open (0383), local maps are faithfully flat, so D(v) maps to an open set disjoint from Supp coker, and a D(d) inside it gives coker_d = 0. So the hypothesis is not vacuous. Step 1: generators z_i/u^{n_i}, pure-tensor coefficients t_j. Step 2: C = alpha(A)[t] is a k-algebra; v and w_i lift; F is well defined because iota_K(v) = u; A_K factors through C_K, so F is surjective, without using injectivity. Step 3: P = iota_K^{-1}(q_K) is prime and v is not in P; localizing the C_K-module B_K at v gives (B_K)_u, so the principle applies to the C-linear map C -> B for arbitrary modules. It gives d with c = iota(d) and c⊗1 not in q_K. Step 4: t_j/1 and 1/c generate B_c over A, through the original alpha. Edge cases checked: K = k, u = 1, empty lists, B = 0 (vacuous), zero divisors. The parent lem-sc-lfp-field-extension-pointwise-descent Step 2 uses exactly this statement. Duplicate check: lem-weil-pbc-finite-type-descends-faithfully-flat and the fpqc-descend-locally-finite-type node are global descent, not this pointwise statement. Route: the only statement cited is in the same unit; the rest are definitions or Mathlib leaves; no tool_uses are needed and there is no SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteTypeFieldExtensionNeighbourhood",
+  "declaration": "RingHom.exists_finiteType_away_of_fieldExtension",
+  "file": "lean/Sheaf/RingTheory/FiniteTypeFieldExtensionNeighbourhood.lean",
+  "statement": "theorem exists_finiteType_away_of_fieldExtension {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] {A : Type w} {B : Type x} [CommRing A] [CommRing B] [Algebra k A] [Algebra k B] (hdesc : ∀ (C : Type x) [CommRing C] [Algebra k C] (M : Type (max x y)) (N : Type (max x z)) [AddCommGroup M] [AddCommGroup N] [Module C M] [Module C N] (φ : M →ₗ[C] N) (v : C ⊗[k] K) (P : Ideal (C ⊗[k] K)) [P.IsPrime], v ∉ P → Function.Surjective (LocalizedModule.map (Submonoid.powers v) (φ.baseChange (C ⊗[k] K))) → ∃ d : C, algebraMap C (C ⊗[k] K) d ∉ P ∧ Function.Surjective (LocalizedModule.map (Submonoid.powers d) φ)) (α : A →ₐ[k] B) (qK : Ideal (B ⊗[k] K)) [qK.IsPrime] (u : B ⊗[k] K) (hu : u ∉ qK) (hfinite : RingHom.FiniteType ((algebraMap (B ⊗[k] K) (Localization.Away u)).comp (Algebra.TensorProduct.map α (AlgHom.id k K)).toRingHom)) : ∃ c : B, c ∉ Ideal.comap (algebraMap B (B ⊗[k] K)) qK ∧ RingHom.FiniteType ((algebraMap B (Localization.Away c)).comp α.toRingHom)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce0434f72",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Only the item's lean record changed (vs side-live); lean.statement verbatim in file; single sorry. Clause-by-clause match: k, K fields with Algebra; hdesc renders the assumed neighbourhood principle in exactly the landed dep's Lean shape (baseChange on (C⊗K)⊗_C M, LocalizedModule.map powers, d⊗1 ∉ P); α : A →ₐ[k] B; qK prime; q = comap includeLeft qK; u ∉ qK; FiniteType of (B⊗K)_u over A⊗K via TensorProduct.map α id; conclusion ∃ c ∉ q with B_c FiniteType over A via α. Universes independent; hdesc's C in Type x and modules in max x y/z only weaken the assumption (y=z=0 is enough for the proof); advisory: y and z are unneeded. Edge cases K=k, u=1, empty lists, B=0 and nilpotent u (vacuous) covered. stmt_deps are Mathlib records plus the landed dep module; no duplicate found; docstrings have source place, blueprint id and 4 steps; both report sections present. No file changed, so no compile."
+ }
+}

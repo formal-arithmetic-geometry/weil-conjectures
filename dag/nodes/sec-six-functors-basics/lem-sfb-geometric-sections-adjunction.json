@@ -1,0 +1,508 @@
+{
+ "id": "lem-sfb-geometric-sections-adjunction",
+ "kind": "statement",
+ "title": "Normalized module equivalence and geometric section adjunction",
+ "statement": "Let $k$ be a field, $k^s/k$ a separable closure [def-pd-separable-closure], $s=\\operatorname{Spec}k$, $\\bar s=\\operatorname{Spec}k^s$, and $G=\\operatorname{Aut}_k(k^s)$ with its Krull topology. Use small sites in the compatible universes of [def-weil-size-convention]. For a profinite set $P$ put $T[P]=\\varprojlim_i\\coprod_{P_i}T$ over its finite quotients [lem-weil-pbc-profinite-test-object-functor].\n\nLet $R$ be any commutative condensed ring, $R_T=p_T^*R$, and use internal modules and ordinary unbounded derived categories [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-derived-categories]. Write $\\mathcal M_R$ for internal condensed $R$-modules and $\\mathcal A_G(R)$ for such modules with an $R$-linear action of the condensed group $\\underline G(P)=C(P,G)$ [def-sfb-condensed-action-module].\n\nLet $a:X\\to s$ be a qcqs $k$-scheme. Fix the normalized equivalence $E$ and ring comparison $E(R_s)\\cong p_G^{-1}R$ specified in [lem-sfb-field-action-topos-coefficients]. Transport of internal modules gives an exact additive equivalence $E_R:\\operatorname{Mod}_{R_s}\\simeq\\mathcal A_G(R)$ whose section normalization is $(E_RN)(P)=\\Gamma(\\bar s[P],N|_{\\bar s[P]})$ as an $R(P)$-module. Along an action-site arrow $(f,b)$ its restriction is $m\\mapsto b\\cdot f^*m$; the equivalence identifies internal modules with section-ring module sheaves without changing underlying sections or restrictions. Termwise $E_R$ induces an equivalence of ordinary unbounded derived categories preserving K-injective complexes.\n\nFor every map $\\varphi:R\\to R'$ the comparison $E_R\\operatorname{Res}_s\\cong\\operatorname{Res}_G E_{R'}$ is the identity on section groups, restrictions and action maps, with $R(P)$ acting through $\\varphi_P$. Define $F_R=E_Ra_*$ using the actual module pushforward [sk-def-sfb-module-pushforward-pullback]. There is a natural identification $(F_RM)(P)=\\Gamma(X^s[P],M|_{X^s[P]})$, $X^s=X\\times_k k^s$, from the canonical test identification $X\\times_s\\bar s[P]\\cong X^s[P]$, including scalar actions and the action induced by right translations on $G$. Its additive left adjoint is $a^*E_R^{-1}$ with the composite adjunction.\n\nThe categories $\\operatorname{Mod}_{R_X}$, $\\operatorname{Mod}_{R_s}$, $\\mathcal M_R$ and $\\mathcal A_G(R)$ are Grothendieck abelian. Trivial inflation $\\mathcal M_R\\to\\mathcal A_G(R)$ is exact with additive right adjoint $\\Gamma_G$, the submodule of sections fixed after all profinite base changes. Under $E_R$ it is the actual module direct image along $p_s$, equivalently along $p_G$; its adjunction bijection restricts the codomain to invariant sections. These constructions include the zero ring and trivial $G$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3): descent of the coefficient-topology comparison from a separable closure Agent structural input; exact literature proof WANTED."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-size-convention",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-field-action-topos-coefficients",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sp-grothendieck-abelian",
+  "def-sfb-condensed-equivariant-bar-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-field-action-topos-coefficients] with the given separable closure and the given ring $R$. It supplies the equivalence of set topoi, its section normalization, and the isomorphism of ring objects $E(R_s)\\cong p_G^{-1}R$. By [lem-sfb-action-topos-geometric-restriction] there is an equivalence $\\mathscr E^K\\simeq\\operatorname{Sh}(C_K)$ for the action site $C_K$ of [lem-sfb-internal-action-site-presentation], so the action topos is presented by a small site, and its ring is $R_K=p_K^{-1}R$ with $K=\\underline G$. Thus this is an equivalence of ringed topoi to which [lem-weil-pbc-ringed-presentation-transport] applies. Reconstruct section-ring module sheaves by [def-weil-pbc-internal-abelian-sheaf-module-equivalence] on both sides. On the action side use the module equivalence in [lem-sfb-internal-action-site-presentation]; by [def-sfb-condensed-action-module], whose actions are natural operations of $C(P,G)$ on the section modules of the same reconstruction, its target is $\\mathcal A_G(R)$. The resulting composite is $E_R$. All three comparisons retain underlying section groups; addition and the scalar action are the images of their structure maps. In particular $(E_RN)(P)=N(\\bar s[P])$ with its $R(P)$-action, and the action-site restriction along $(f,b)$ is $b\\cdot f^*$. This also proves the asserted agreement between the internal and section-ring models.",
+   "uses": [
+    "lem-sfb-field-action-topos-coefficients",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-weil-pbc-ringed-presentation-transport",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), separable-closure descent input: lift the normalized field equivalence to modules. Agent assembly of the cited ringed-topos statements."
+   }
+  },
+  {
+   "text": "The ringed equivalence in the previous step is additive and exact and induces the termwise equivalence on ordinary unbounded derived categories, preserving K-injectives, by [lem-weil-pbc-ringed-presentation-transport]. The internal/section-ring identifications are additive exact equivalences by [lem-sfb-section-ring-lax-pushforward-coherence]. Their action-site counterpart is additive by [lem-sfb-internal-action-site-presentation] and exact by [lem-weil-pbc-equivalence-injective-resolutions]. For completeness these auxiliary equivalences preserve K-injectives directly: a chain map $A\\to C(H)I$ from an acyclic complex is, under a quasi-inverse, a chain map $C(H^{-1})A\\to I$ from an acyclic complex. A null-homotopy there is carried back termwise, and the unit and counit identify the resulting null-homotopy with one for the original map. The quasi-inverse argument also identifies quasi-isomorphisms, so its termwise unit and counit descend to the mutually inverse unbounded localizations. Hence these changes of module model preserve every claimed property of $E_R$.",
+   "uses": [
+    "lem-weil-pbc-ringed-presentation-transport",
+    "lem-sfb-section-ring-lax-pushforward-coherence",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary unbounded derived lift of the field equivalence; supporting Stacks Tag 08BJ, derived.tex lemma-adjoint-preserve-K-injectives."
+   }
+  },
+  {
+   "text": "Let $\\varphi:R\\to R'$ and let $N$ be an $R'_s$-module. By [sk-def-sfb-change-of-scalars], scalar restriction retains its underlying object and maps and precomposes its action with $\\varphi$. The ring comparison of [lem-sfb-field-action-topos-coefficients] is natural in ring maps. Consequently both $E_R\\operatorname{Res}_sN$ and $\\operatorname{Res}_GE_{R'}N$ have section group $N(\\bar s[P])$ and scalar action $r m=\\varphi_P(r)m$. Both have restriction $m\\mapsto b\\cdot f^*m$ along $(f,b)$, using [lem-sfb-internal-action-site-presentation]. Identity maps on these groups therefore give an equivariant linear natural isomorphism, natural also in $N$ and in $\\varphi$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-field-action-topos-coefficients",
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), coefficient-map compatibility of the normalized module equivalence."
+   }
+  },
+  {
+   "text": "Use the actual module pushforward of [sk-def-sfb-module-pushforward-pullback]. Its underlying abelian sheaf is the pushforward of [def-sfb-finite-lower-star], so $(E_Ra_*M)(P)=M(X\\times_s\\bar s[P])$. The base-change isomorphism in [lem-sfb-relative-profinite-test-labels], with $Y=X^s$ over $\\bar s$, identifies $X\\times_s\\bar s[P]=X^s\\times_{\\bar s}\\bar s[P]\\cong X^s[P]$, naturally in $P$. This gives the section formula for $F_R$. Its scalar action is restriction of the $R_s$-action through the actual pushforward coefficient map; the equality of internal and sectionwise actions is [lem-sfb-section-ring-lax-pushforward-coherence]. In the free $G$-test presentation, the maps $(g,t)\\mapsto(gb(t),f(t))$ of [lem-sfb-field-action-topos-coefficients] become the corresponding maps of these fiber products after base change by $X$. Restriction of $M$ along those maps therefore gives precisely the stated right-translation action and the $b\\cdot f^*$ restriction formula, with no choice of a second action.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-finite-lower-star",
+    "lem-sfb-relative-profinite-test-labels",
+    "lem-sfb-section-ring-lax-pushforward-coherence",
+    "lem-sfb-field-action-topos-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), geometric section functor; Bhatt-Scholze Examples 4.1.9-4.1.10 and the module direct-image definition, Stacks Tag 03D6."
+   }
+  },
+  {
+   "text": "For $A\\in\\mathcal A_G(R)$ and $M\\in\\operatorname{Mod}_{R_X}$, the equivalence and the specified module adjunction of [sk-def-sfb-module-pushforward-pullback] give natural additive bijections\n$$\\operatorname{Hom}_{R_X}(a^*E_R^{-1}A,M)\\cong\\operatorname{Hom}_{R_s}(E_R^{-1}A,a_*M)\\cong\\operatorname{Hom}_{\\mathcal A_G(R)}(A,E_Ra_*M).$$\nThis is exactly the composite adjunction of [def-weil-pbc-composite-adjunction]. The functor $a^*E_R^{-1}$ is additive because each factor is additive. Its unit and counit are the composite ones specified by that node.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), left adjoint of the geometric section functor; Stacks Tag 03D7 and categories.tex Tag 0DV0."
+   }
+  },
+  {
+   "text": "On the chosen small pro-étale sites of $X$ and $s$, and on the coherent profinite site, reconstructed ring-sheaf modules are Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck]. The reconstruction equivalence of [def-weil-pbc-internal-abelian-sheaf-module-equivalence] transfers this to $\\operatorname{Mod}_{R_X}$, $\\operatorname{Mod}_{R_s}$ and $\\mathcal M_R$: transport colimits and a generator by the equivalence; preservation of kernels and cokernels by [lem-weil-pbc-equivalence-injective-resolutions] transfers exactness of filtered colimits. A generator remains one since the equivalence is fully faithful. Apply [lem-sfb-sheaf-action-grothendieck-inflation] on the profinite site to $K=\\underline G$ to obtain the Grothendieck property for $\\mathcal E_{\\underline G}$ of the reconstructed ring; by [def-sfb-condensed-action-module] and the same reconstruction equivalence, which keeps section modules and is compatible with the sectionwise actions, this is $\\mathcal A_G(R)$ with its specified additive structure. Apply its inflation assertion to the map $\\underline G\\to1$; since $\\mathcal E_1(R)=\\operatorname{Mod}(R)$, this is additive exact trivial inflation.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-sfb-sheaf-action-grothendieck-inflation",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), existence of the abelian and unbounded derived setting; Stacks injectives.tex Tag 079Q and the small action-site module theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-sheaf-product-fixed-adjunction] on the coherent profinite site with $K=\\underline G$ (and the unused second group trivial). It constructs the additive functor $\\Gamma_G$, whose sections are exactly those fixed after every profinite base change, and the adjunction from trivial inflation whose transpose restricts the codomain to these sections. By [lem-sfb-action-topos-geometric-restriction], the actual module inverse image along $p_G$ is this trivial inflation. The actual direct image, with scalar action induced by its coefficient map, has the module adjunction of [lem-weil-pbc-ringed-topoi-module-adjunction]. Both right adjoints thus represent the same Hom functor: transpose the counit of either adjunction through the other; the triangle identities make these two maps inverse. This identifies $p_{G*}$ with $\\Gamma_G$. Under the normalized field equivalence, [lem-sfb-field-action-topos-coefficients] identifies $p_{s*}N(P)$ with the same invariant subobject of $N(\\bar s[P])$, by restriction. That inclusion is linear, since its scalar action comes from $R\\to p_{s*}R_s$. Hence the set-level comparison is the actual module comparison, and its transpose is the same restriction of codomain. All invoked action statements include the trivial group and zero ring; the displayed formulas also apply to the empty profinite test and the empty scheme, where module sections are zero.",
+   "uses": [
+    "lem-sfb-sheaf-product-fixed-adjunction",
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-sfb-field-action-topos-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), normalized invariant-section direct image and adjunction. Agent assembly of the field equalizer, the fixed-subsheaf adjunction and Stacks Tag 03D7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-field-action-topos-coefficients",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-section-ring-lax-pushforward-coherence",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-finite-lower-star",
+  "lem-sfb-relative-profinite-test-labels",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-sheaf-action-grothendieck-inflation",
+  "lem-sfb-sheaf-product-fixed-adjunction",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), separable-closure descent input: section-normalized module, unbounded derived and invariant-adjunction assembly from the cited existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Geometric sections over separable closure identify structure direct image with internal condensed Galois modules and admit exact pullback left adjoint",
+   "results": {
+    "t": "2026-10-22T06:00:53Z",
+    "tool": "leanfinder",
+    "query": "Geometric sections over separable closure identify structure direct image with internal condensed Galois modules and admit exact pullback left adjoint",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CondensedMod.LocallyConstant.adjunction",
+     "LightCondMod.LocallyConstant.adjunction",
+     "CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+     "CondensedSet.LocallyConstant.adjunction",
+     "LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+     "LightCondSet.LocallyConstant.adjunction",
+     "CompHausLike.LocallyConstant.adjunction",
+     "LightCondSet.sequentialAdjunction"
+    ],
+    "digest": "ebd273e973784e99"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: discrete constant-ring condensed adjunctions and sheaf constructors do not give the geometric field-module equivalence or its section-normalized structure adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ringed field topos equivalence yields exact module equivalence commuting with restriction of condensed scalars and geometric section functors",
+   "results": {
+    "t": "2026-10-22T06:00:42Z",
+    "tool": "leansearch",
+    "query": "Ringed field topos equivalence yields exact module equivalence commuting with restriction of condensed scalars and geometric section functors",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Adjunction\"",
+   "results": {
+    "t": "2026-10-22T06:00:43Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"Adjunction\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Condensed.freeForgetAdjunction",
+     "Condensed.setAbAdjunction",
+     "LightCondensed.freeForgetAdjunction",
+     "CondensedMod.LocallyConstant.adjunction",
+     "CondensedSet.LocallyConstant.adjunction",
+     "CondensedSet.topCatAdjunctionCounitEquiv",
+     "CondensedSet.topCatAdjunctionCounit",
+     "CondensedSet.compactlyGeneratedAdjunctionCounitHomeo"
+    ],
+    "digest": "f95cc7f61aab5109"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: discrete constant-ring condensed adjunctions and sheaf constructors do not give the geometric field-module equivalence or its section-normalized structure adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Proetale).*(geometricSections|[Gg]alois|[Ii]nflation)|geometricSections",
+   "results": {
+    "t": "2026-10-22T06:00:42Z",
+    "tool": "grep",
+    "query": "(Condensed|Proetale).*(geometricSections|[Gg]alois|[Ii]nflation)|geometricSections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: discrete constant-ring condensed adjunctions and sheaf constructors do not give the geometric field-module equivalence or its section-normalized structure adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module transport through the field action topos preserves K injectives and identifies pushforward with sections over geometric profinite tests",
+   "results": {
+    "t": "2026-10-22T06:01:39Z",
+    "tool": "leanfinder",
+    "query": "Internal module transport through the field action topos preserves K injectives and identifies pushforward with sections over geometric profinite tests",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightCondMod.LocallyConstant.functorToPresheaves",
+     "Condensed.profiniteFree",
+     "LightCondMod.ofSheafLightProfinite",
+     "CondensedMod.ofSheafCompHaus",
+     "LightCondMod.LocallyConstant.functor"
+    ],
+    "digest": "47d44a3571bceba7"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: discrete constant-ring condensed adjunctions and sheaf constructors do not give the geometric field-module equivalence or its section-normalized structure adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of ringed topoi induces exact equivalence of internal modules compatible with condensed Galois action and geometric sections",
+   "results": {
+    "t": "2026-10-22T09:34:34Z",
+    "tool": "leanfinder",
+    "query": "Equivalence of ringed topoi induces exact equivalence of internal modules compatible with condensed Galois action and geometric sections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CondensedMod.isDiscrete_tfae",
+     "CondensedMod",
+     "CondensedMod.LocallyConstant.adjunction",
+     "CondensedMod.LocallyConstant.fullyFaithfulFunctor",
+     "LightCondMod.LocallyConstant.adjunction",
+     "CondensedMod.LocallyConstant.functor",
+     "LightCondMod.isDiscrete_tfae",
+     "LightCondMod"
+    ],
+    "digest": "04fd608adc825a0d"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: hits concern ordinary discrete-ring condensed modules, general sheaf equivalences or scalar restriction; none supplies the normalized field action equivalence, geometric pushforward and all adjunction clauses. See report for the source reading."
+  },
+  {
+   "tool": "grep",
+   "query": "(geometricSections|[Gg]alois.*[Cc]ondensed|[Cc]ondensed.*[Gg]alois)",
+   "results": {
+    "t": "2026-10-22T09:34:52Z",
+    "tool": "grep",
+    "query": "(geometricSections|[Gg]alois.*[Cc]ondensed|[Cc]ondensed.*[Gg]alois)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: hits concern ordinary discrete-ring condensed modules, general sheaf equivalences or scalar restriction; none supplies the normalized field action equivalence, geometric pushforward and all adjunction clauses. See report for the source reading."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized equivalence between module sheaves on a field pro etale site and internal condensed Galois modules",
+   "results": {
+    "t": "2026-10-22T09:34:52Z",
+    "tool": "leansearch",
+    "query": "Normalized equivalence between module sheaves on a field pro etale site and internal condensed Galois modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.mk.inj",
+     "CategoryTheory.Equivalence.sheafCongr",
+     "CategoryTheory.Equivalence.sheafCongr_functor",
+     "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+     "AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv",
+     "SheafOfModules.mk.injEq",
+     "CondensedMod.isDiscrete_tfae",
+     "CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense"
+    ],
+    "digest": "a2c23227f6d853cb"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: hits concern ordinary discrete-ring condensed modules, general sheaf equivalences or scalar restriction; none supplies the normalized field action equivalence, geometric pushforward and all adjunction clauses. See report for the source reading."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Equivalence\", \"Module\"",
+   "results": {
+    "t": "2026-10-22T09:34:53Z",
+    "tool": "loogle",
+    "query": "\"Equivalence\", \"Module\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "ModuleCat.equivalenceSemimoduleCat",
+     "ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat",
+     "ModuleCat.forget₂AddCommGroupIsEquivalence",
+     "ModuleCat.restrictScalarsEquivalenceOfRingEquiv",
+     "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv",
+     "ModuleCat.restrictScalarsEquivalenceOfRingEquiv_additive",
+     "ModuleCat.restrictScalarsEquivalenceOfRingEquiv_functor",
+     "ModuleCat.Algebra.restrictScalarsEquivalenceOfRingEquiv_linear"
+    ],
+    "digest": "6fd26ddc93287600"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: hits concern ordinary discrete-ring condensed modules, general sheaf equivalences or scalar restriction; none supplies the normalized field action equivalence, geometric pushforward and all adjunction clauses. See report for the source reading."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale sheaves over a field as condensed Galois representations with arbitrary condensed ring coefficients and invariant section adjunction",
+   "results": {
+    "t": "2026-10-22T09:35:19Z",
+    "tool": "leanfinder",
+    "query": "Pro etale sheaves over a field as condensed Galois representations with arbitrary condensed ring coefficients and invariant section adjunction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CondensedMod.LocallyConstant.adjunction",
+     "Condensed.profiniteSolid",
+     "CondensedMod.ofSheafProfinite",
+     "Condensed.profiniteFree",
+     "LightCondMod.ofSheafLightProfinite",
+     "CondensedMod.isDiscrete_tfae",
+     "Condensed.lanSheafProfinite",
+     "CondensedMod.LocallyConstant.functor"
+    ],
+    "digest": "ee69b56544f7dc65"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: hits concern ordinary discrete-ring condensed modules, general sheaf equivalences or scalar restriction; none supplies the normalized field action equivalence, geometric pushforward and all adjunction clauses. See report for the source reading."
+  },
+  {
+   "tool": "grep",
+   "query": "def CondensedMod|def adjunction|variable.*Ring|def functor",
+   "results": {
+    "t": "2026-10-22T09:35:36Z",
+    "tool": "grep",
+    "query": "def CondensedMod|def adjunction|variable.*Ring|def functor",
+    "sub": "Condensed/Discrete/Module.lean",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "35",
+     "42",
+     "53",
+     "67",
+     "79"
+    ],
+    "digest": "7b24a74405e65f20"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match for the whole item: hits concern ordinary discrete-ring condensed modules, general sheaf equivalences or scalar restriction; none supplies the normalized field action equivalence, geometric pushforward and all adjunction clauses. See report for the source reading."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-condensed-galois-global-descent",
+  "date": "2026-10-22",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), separable-closure descent input; returned global-descent proof steps 4-5: Normalized module equivalence and geometric section adjunction.",
+   "via": [
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-geometric-sections-adjunction",
+  "worker": "stage1",
+  "summary": "Seven-step assembly using existing normalized field/action and generic ringed-site results; no new nodes or statement changes. Explicit coefficient, base-change, composite-adjunction and invariant-codomain formulas. Read all cited statements and wrote verbatim citation witnesses.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), separable-closure descent support for coefficient/direct-image comparison. This structural input is agent formulated; the blueprint does not itself prove its combined statement. The inherited created.item chain is broken at Sheaf.SixFunctors.CtfStabilityDirectImages; blueprint_refs ancestor reports None. The explicit provenance at lem-sfb-admissible-direct-image names det-thm-sf-ctf-stability-direct-images; no maintainer-owned ancestry field was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-presentation-transport",
+    "why": "Generic ringed-site/module/category infrastructure used only for its stated transport, exactness, section or adjunction property; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-sfb-section-ring-lax-pushforward-coherence",
+    "why": "Generic ringed-site/module/category infrastructure used only for its stated transport, exactness, section or adjunction property; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ringed-site/module/category infrastructure used only for its stated transport, exactness, section or adjunction property; it does not replace the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-site/module/category infrastructure used only for its stated transport, exactness, section or adjunction property; it does not replace the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-sfb-section-ring-lax-pushforward-coherence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-2a5d0af47",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-2a5d0af47 (reviewer sub-agent of L); spot-checked: Read the whole item, every cited node's statement, and paragraph (3) of the main-20261015 direct-images proof, which contains no separable-closure argument; the item is agent structural support, so by=agent is correct and no SGA is used. The statement is byte-identical to the one Q30 created, with nothing weakened. The split adds no new nodes. Fault C4 in step 1: the step credited the action-topos small-site presentation to lem-sfb-internal-action-site-presentation, which only defines the site C_K and states the module equivalence. The set-topos equivalence E^K ≃ Sh(C_K) is the statement of lem-sfb-action-topos-geometric-restriction, and ringed-presentation-transport needs it. Fixed by citing that node in step 1, with the ring R_K = p_K^{-1}R. The identification of A_G(R) with the equivariant module category of the reconstructed ring was also uncited; fixed by citing def-sfb-condensed-action-module in steps 1 and 6. proof_deps was recomputed and the corrected item is in fixes/dag/nodes/sec-six-functors-basics/. An earlier run in this directory, cut off by the session limit at 20:41, had written the same step-1 repair independently. Steps 2-7 check out: unbounded derived and K-injective transport come from the transport node's statement. Step 4 uses relative-profinite-test-labels over s-bar with Y = X^s to get X^s[P]; s-bar[P] = G×P with left translation, and b acts by right translation. The adjunction in step 5 is the composite of E_R^{-1} ⊣ E_R and a^* ⊣ a_*. In step 6, inflation goes along G → 1. In step 7, p_{G*} = Γ_G by uniqueness of adjoints, and the field node gives p_{s*} by restriction. Edge cases checked: zero ring, G = 1, P empty, X empty. No cycle: the item is not reachable from any cited node, including the added ones. lem-sfb-field-action-derived-section-transport depends on this item through global descent, so not citing it is correct. Accepted tool uses: ringed-presentation-transport, ring-sheaves-grothendieck, ringed-topoi-module-adjunction, section-ring-lax-pushforward-coherence. Maintainer note: the from.node of the blueprint ancestry is null, a fault inherited from earlier nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeometricSectionsAdjunction",
+  "declaration": "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.geometric_sections_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.fieldSets",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.actionSets",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.actionUnderlying",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.NormalizedModules",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.geometricFunctor",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.geometricLeft",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.geometricAdjunction",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.geometricSection",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.GeometricNormalization",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.ScalarNormalization",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.Assertion",
+   "AlgebraicGeometry.ProEtale.GeometricSectionsAdjunction.geometric_sections_adjunction"
+  ],
+  "file": "lean/Sheaf/Paper/GeometricSectionsAdjunction.lean",
+  "statement": "theorem geometric_sections_adjunction (h : FieldActionTopos.Normalization k Ω) (X : Scheme.{u}) (a : X ⟶ Spec (.of k)) [CompactSpace X] [QuasiSeparatedSpace X] : Assertion k Ω h X a",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of return L at 7efa4a54d83b, option (b). The statement is expressed directly over FieldActionTopos.Normalization, the original internal and condensed action module categories, CondensedBar.ActionAbelian and ScalarAction, actual ModuleObject lowerStar/upperStar, and the internal/section-module equivalence. No direct or transitive global-descent import remains; none of its helper declarations is used or copied. Field sections use h.free and h.sections, with the actual point-unit scalar map and labeled h.free restrictions. Geometric sections evaluate the actual composite lowerStar followed by the field equivalence; the three coordinates characterize the canonical test isomorphism. The invariant direct-image comparison is specified over the actual underlying abelian point adjunction, retaining its unit, counit, mate and cover restriction. No global-descent record or source module is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a92d4ec3",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Option (b) repair of the 7efa return: no import of CondensedGaloisGlobalDescent (recursive closure of public and private imports over side-live checked) and no copied global-descent helpers; node changes only lean and stmt_deps (adds the landed def-sfb-condensed-equivariant-bar-data). Clauses checked against node and upstream sources: E_R pinned to h (sections = h.sections after underlying, R(P)-linear via the actual point unit then h.cover, b·f^* restriction, generalized actions); exact and additive, derived equivalence in derived form, K-injectives both ways; ScalarNormalization uses Mod.comap and ScalarAction, identity on sections; F_R = lowerStar ⋙ E_R; tests iso to profiniteToProEtOf(X^s) fixed by X, Spec Ω and P coordinates (canonical); real composite adjunction; four Grothendieck clauses, exact inflation, Invariants/FixedAll; actual point direct image characterized by underlying unit/counit, pointMate and pointRestriction. Edge cases (zero ring, trivial G, empty P, empty X, non-flat φ) and universes fine; lean.statement verbatim; 12 declarations match; docstrings ok; sorry only. Advisories: setAction is owned by a theorem node and reached via the field-action stmt_dep; underlying unique only up to a global unit of R, as in the previously accepted versions. No compile (no file changed)."
+ }
+}

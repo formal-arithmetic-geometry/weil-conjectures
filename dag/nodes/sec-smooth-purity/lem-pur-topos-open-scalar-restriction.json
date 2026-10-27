@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-topos-open-scalar-restriction",
+ "kind": "statement",
+ "title": "Ordinary scalar extension commutes with element-site restriction",
+ "statement": "Let (C,J), A,R,S,a and ET,EV be the sectionwise scalar-extension models of [def-pur-topos-open-scalar-section-data]. There is a natural isomorphism rho:E_T L_S ≅ L_R E_V. At every element-site object (U,f), it sends the local pure tensor m tensor s to the same tensor in the scalar extension of the restricted module. This holds for every sheaf A, without subterminality or a flatness assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 04IE; scalar-extension specialization, using continuous cocontinuous precomposition."
+ },
+ "stmt_deps": [
+  "def-pur-topos-open-scalar-section-data"
+ ],
+ "proof": [
+  {
+   "text": "The continuous cocontinuous element projection commutes with sheafification of additive presheaves. Lift its compatibility through the module sheafification Hom equivalence. On the scalar-extension presheaf, restriction is definitionally the corresponding scalar-extension presheaf on the element site. Transport the resulting sheafification isomorphism by ET.obj_eq and EV.obj_eq.",
+   "uses": [
+    "lem-weil-pbc-element-site-descent",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The defining sheafification Hom equivalence says the compatibility map takes each sheafification-unit tensor to the same tensor. Its generator formula proves naturality after scalar-adjunction transposition: maps out of scalar extension are determined on tensors m tensor 1. Taking the inverse gives rho in the stated direction and its pure-tensor formula.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-element-site-descent",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL and 04IE; element-site sheafification and unit-generator characterization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars for sheaves of modules commutes with restriction along a continuous cocontinuous functor",
+   "results": "ModuleCat scalar extension/restriction Hom equivalences and presheaf restriction; no sheaf comparison.",
+   "date": "2026-10-24",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility",
+   "results": "pushforwardContinuousSheafificationCompatibility and its sheafification-unit formula in Mathlib.CategoryTheory.Sites.CoverLifting.",
+   "date": "2026-10-24",
+   "verdict": "Used for the underlying additive sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardContinuousSheafificationCompatibility",
+   "results": "Mathlib/CategoryTheory/Sites/CoverLifting.lean:382,414 gives the comparison and its unit formula.",
+   "date": "2026-10-24",
+   "verdict": "Lift through module sheafification to preserve scalar action."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ToposOpenScalarUnit",
+  "date": "2026-10-24",
+  "group": "R7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Purity transport Step 1 and Step 3, coefficient compatibility of the open constituent: normalization of scalar balancing by the actual open-adjunction unit, before taking an inverse-exchange adjunct.",
+   "via": [
+    "lem-pur-topos-open-scalar-derived-from-ordinary",
+    "lem-pur-topos-open-scalar-unit",
+    "lem-pur-topos-scalar-inverse-exchange-mate",
+    "lem-pur-finite-free-compact-composition",
+    "lem-pur-finite-universal-smooth-trace",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ToposOpenScalarRestriction",
+  "file": "lean/Sheaf/CategoryTheory/ToposOpenScalarRestriction.lean",
+  "declaration": "SheafOfModules.ToposOpenScalar.exists_toposOpenScalarRestriction",
+  "statement": "theorem exists_toposOpenScalarRestriction\n    (ET : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} a)\n    (EV : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} (sliceMap A a)) :\n    ∃ rho : ET.E ⋙ restriction S A ≅ restriction R A ⋙ EV.E,\n      ∀ (M : ringedSiteModules.{u} (derivedChangeRingIndependentCoefficients J R))\n        (U : Cᵒᵖ) (f : A.obj.obj U) (m : M.val.obj U) (t : S.obj.obj U),\n        (rho.hom.app M).val.app (elementObj A U f) (tensorSection a ET M U m t) =\n          tensorSection (sliceMap A a) EV ((restriction R A).obj M)\n            (elementObj A U f) m t",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-24"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-7b71a",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T234251-L-2548466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-7b71a",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T234251-L-2548466",
+  "kind": "interface",
+  "note": "independent cc review: the residual derived-from-ordinary statement against its node and the DerivedChangeOfRingsCochainModel structure, judged true; the moved section defs against the clone HEAD of ToposOpenScalarUnit, verbatim; the item node proof/proof_deps against the Lean assembly; importers of the item, none"
+ }
+}

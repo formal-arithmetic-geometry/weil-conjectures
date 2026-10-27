@@ -1,0 +1,327 @@
+{
+ "id": "lem-sfb-space-qc-open-enlargement-induction",
+ "kind": "statement",
+ "title": "Induction by enlarging a fixed quasi-compact open of an algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ a quasi-compact quasi-separated algebraic space over $S$ [def-trf-algebraic-space]: every open cover has a finite subcover and the absolute diagonal is quasi-compact. Let $W_0\\subset X$ be a quasi-compact open subspace [def-a1-space-open-subspace], and let $\\mathcal P$ be an isomorphism-invariant property of quasi-compact open subspaces of $X$. An elementary distinguished square $(W_1\\subset W_2,f:V\\to W_2)$ means an open immersion $W_1\\to W_2$, a representable etale map $f$, and an isomorphism $V\\times_{W_2}Z\\to Z$, where $Z$ is the reduced closed subspace with underlying set $|W_2|\\setminus|W_1|$ [lem-sfb-space-reduced-closed-support]; underlying point sets carry the atlas topology [def-a1-space-point-topology]. Assume (i) $\\mathcal P(W_0)$; and (ii) for every such square with $W_1,W_2$ quasi-compact open in $X$, $W_0\\subset W_1$, and $V$ an affine scheme, $\\mathcal P(W_1)$ implies $\\mathcal P(W_2)$. Then $\\mathcal P(X)$ holds. In every square quantified over in (ii), $H=W_1\\times_{W_2}V$ is a quasi-compact open subscheme of $V$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09IT, lemma-induction-principle-enlarge; its distinguished-square setting and the quasi-compact overlap observation in the proof of lemma-induction-principle."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-reduced-closed-support",
+  "def-a1-space-point-topology",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "First verify the additional overlap assertion. For any square in (ii), the inclusion $W_1\\to X$ is quasi-compact by [lem-sfb-space-qcqs-permanence], since $W_1$ is quasi-compact and $X$ is quasi-separated. Its pullback along the affine scheme $V\\to W_2\\to X$ is quasi-compact by [lem-sfb-space-quasicompact-affine-tests]. This pullback equals $H=W_1\\times_{W_2}V$, because $W_2\\to X$ is a monomorphism. By [def-a1-space-open-subspace] it is represented by an open subscheme of $V$. The scheme-test clause of the quasi-compactness lemma therefore makes this open subscheme quasi-compact. This proves the overlap assertion for all the quantified squares, independently of $\\mathcal P$.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GP (lemma-induction-principle), quasi-compact overlap observation; spaces-morphisms.tex Tags 073B, 03HF, 03HD"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-change-base-to-integers] to $S\\to\\operatorname{Spec}\\mathbf Z$, and then [lem-sfb-qcqs-space-splitting-filtration] to $j_!X$. This use is legitimate for arbitrary $S$: the former node identifies scheme atlases and their fibre products, and its equivalence identifies subspaces and their scheme tests. Hence open subspaces and their point topology, reduced closed subspaces, representable etale maps and quasi-compactness are unchanged. The absolute diagonal is the diagonal of this same space over $\\operatorname{Spec}\\mathbf Z$, so it too is unchanged. Transporting the filtration back gives quasi-compact opens $\\emptyset=U_{n+1}\\subset U_n\\subset\\cdots\\subset U_1=X$ and surjective representable etale maps $f_p:V_p\\to U_p$, with $V_p$ quasi-compact separated schemes, isomorphic over the reduced complements $Z_p=U_p\\setminus U_{p+1}$. Every transported chart has its map to $S$ by composition through $X$.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-qcqs-space-splitting-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IT (lemma-induction-principle-enlarge), first proof paragraph; decent-spaces.tex Tag 07ST; spaces.tex Tags 03I4, 04SG"
+   }
+  },
+  {
+   "text": "Set $A_p=W_0\\cup U_p$. Finite unions of quasi-compact opens are quasi-compact: restrict any open cover to each member, take finite subcovers there, and unite them. Thus $A_p$ lies in the domain of $\\mathcal P$. We prove $\\mathcal P(A_p)$ by descending induction on $p$. The initial value is $A_{n+1}=W_0$, covered by (i). Fix $p\\le n$ and assume $\\mathcal P(A_{p+1})$. By [lem-weil-pbc-qcqs-finite-affine-open-cover], choose a finite affine open cover $V_p=\\bigcup_{i=1}^{m}V_{p,i}$. Define $B_0=A_{p+1}$ and $B_i=A_{p+1}\\cup\\bigcup_{j\\le i}f_p(V_{p,j})$. By [lem-a1-space-etale-open-image] each image is a quasi-compact open subspace. Each $B_i$ is consequently a quasi-compact open containing $W_0$, and surjectivity of $f_p$ gives $B_m=A_p$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IT (lemma-induction-principle-enlarge), induction and finite affine-cover construction"
+   }
+  },
+  {
+   "text": "For $1\\le i\\le m$, the composite $V_{p,i}\\to U_p\\to X$ is representable etale by [lem-trf-space-representable-etale-scheme-tests]. Its image lies in $B_i$, so [lem-a1-space-etale-open-image] factors it through $B_i$; the factor is also etale, being its base change along the open $B_i\\to X$. Let $C_i$ be the reduced closed complement of $B_{i-1}$ in $B_i$, supplied by [lem-sfb-space-reduced-closed-support]. Its support lies in $U_p\\setminus U_{p+1}$: points outside $U_p$ or in $U_{p+1}$ already lie in $B_0$. Thus $C_i\\to X$ factors through the open $U_p$. Moreover it factors through $Z_p$. Indeed, on etale affine charts the ideal of $Z_p$ is the radical ideal of that closed subset, as specified in the filtration node; its image in the reduced chart of $C_i$ vanishes in every residue field, hence belongs to every prime and is zero. These local factorizations are unique through the closed immersion, hence agree on overlaps. This is the explicit reduced-source factorization needed here.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-qcqs-space-splitting-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IT, enlarged and affine-refined squares; Tag 08GN (lemma-make-more-elementary-distinguished-squares), reduced-complement restriction argument"
+   }
+  },
+  {
+   "text": "The isomorphism $V_p\\times_{U_p}Z_p\\simeq Z_p$ of step 2, pulled back along $C_i\\to Z_p$, identifies $V_p\\times_{U_p}C_i$ with $C_i$. Every point of $C_i$ belongs to $f_p(V_{p,i})$: a point of $B_i$ outside $B_{i-1}$ can only have been added by this $i$th image. Under the preceding isomorphism, the open subspace $V_{p,i}\\times_{U_p}C_i$ therefore has full point image in $C_i$, using the fibre-product image formula of [lem-a1-space-point-open-calculus]. The full-image open clause of that node makes it the whole of $C_i$. Since $C_i\\to B_i\\to X$ already factors through $U_p$, the fibre product just obtained also equals $V_{p,i}\\times_{B_i}C_i$. Consequently $(B_{i-1}\\subset B_i,V_{p,i}\\to B_i)$ is an elementary distinguished square. This proves the square condition directly, rather than citing the omitted proof of Tag 08GN.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IT, assertion that the affine-refined pairs are elementary distinguished squares; Tag 08GN (1), argument filled in"
+   }
+  },
+  {
+   "text": "Starting with $\\mathcal P(B_0)=\\mathcal P(A_{p+1})$, apply (ii) to the squares of steps 4--5 in increasing order of $i$. Their lower opens are quasi-compact, contain $W_0$, and their other charts $V_{p,i}$ are affine, so every hypothesis of (ii) holds. This finite induction gives $\\mathcal P(B_m)=\\mathcal P(A_p)$ and completes the descending induction. If the chosen affine cover is empty, $V_p$ is empty and its surjectivity implies $U_p=\\emptyset$; then $A_p=A_{p+1}=W_0$ and no application of (ii) is needed. Finally $A_1=W_0\\cup X=X$, hence $\\mathcal P(X)$ holds. Together with step 1 this proves all clauses, including when $X$ is empty or $W_0=X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 09IT (lemma-induction-principle-enlarge), last proof paragraph; finite and descending induction assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "def-a1-space-open-subspace",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-qcqs-space-splitting-filtration",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 09IT (lemma-induction-principle-enlarge), direct filtration proof; the reduced-complement argument of Tag 08GN is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "distinguished.*square|induction.*(qcqs|quasi.?compact)|enlarg.*open",
+   "sub": "AlgebraicGeometry",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: compact_open_induction_on is induction on scheme opens by affine open unions, not enlargement through etale distinguished squares for algebraic spaces; the other hits concern scheme covers or quasi-compactness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induction from a fixed quasi compact open of an algebraic space by affine elementary distinguished squares",
+   "sub": "",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.of_affine_open_cover",
+     "AlgebraicGeometry.compact_open_induction_on",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact",
+     "AlgebraicGeometry.QuasiCompactCover.recOn",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen",
+     "AlgebraicGeometry.QuasiCompactCover.rec"
+    ],
+    "note": "",
+    "digest": "503be0eabebed669"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: compact_open_induction_on is induction on scheme opens by affine open unions, not enlargement through etale distinguished squares for algebraic spaces; the other hits concern scheme covers or quasi-compactness."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsCompact",
+   "sub": "",
+   "results": {
+    "hits": 12,
+    "top": [
+     "AlgebraicGeometry.IsAffineOpen.isCompact",
+     "AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen",
+     "AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.Scheme.Hom.isCompact_preimage",
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "AlgebraicGeometry.compact_open_induction_on",
+     "AlgebraicGeometry.isCompact_basicOpen",
+     "AlgebraicGeometry.QuasiCompact.isCompact_preimage"
+    ],
+    "note": "",
+    "digest": "524393bc5aa43ff2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: compact_open_induction_on is induction on scheme opens by affine open unions, not enlargement through etale distinguished squares for algebraic spaces; the other hits concern scheme covers or quasi-compactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated algebraic space, a property of quasi compact open subspaces propagates from a fixed open to the whole space by elementary distinguished squares with affine charts",
+   "sub": "",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.compact_open_induction_on",
+     "AlgebraicGeometry.reduce_to_affine_global",
+     "AlgebraicGeometry.quasiCompactCover_iff",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered",
+     "AlgebraicGeometry.of_affine_open_cover",
+     "AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover"
+    ],
+    "note": "",
+    "digest": "47879b06e5ebf910"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: compact_open_induction_on is induction on scheme opens by affine open unions, not enlargement through etale distinguished squares for algebraic spaces; the other hits concern scheme covers or quasi-compactness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nisnevich induction principle enlarging a quasi compact open in a qcqs algebraic space",
+   "sub": "",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.compact_open_induction_on",
+     "AlgebraicGeometry.reduce_to_affine_global",
+     "AlgebraicGeometry.reduce_to_affine_nbhd",
+     "AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact",
+     "AlgebraicGeometry.of_affine_open_cover",
+     "AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource"
+    ],
+    "note": "",
+    "digest": "4cd2eac6d56aeec0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: compact_open_induction_on is induction on scheme opens by affine open unions, not enlargement through etale distinguished squares for algebraic spaces; the other hits concern scheme covers or quasi-compactness."
+  },
+  {
+   "tool": "grep",
+   "query": "compact_open_induction_on",
+   "sub": "AlgebraicGeometry/Morphisms",
+   "results": {
+    "hits": 4,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean"
+    ],
+    "note": "",
+    "digest": "91d515cdb0e5eeec"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: source read at Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:241; compact_open_induction_on concerns schemes and affine open unions, not algebraic spaces and etale distinguished squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-perfect-open-retract",
+  "date": "2026-10-24",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, distinguished-square paragraph: lift a perfect object on U as a direct summand of a restriction. Supporting input for the retract construction: Tag 09IT, enlargement induction used by the proof of Tag 09IV underlying Tag 09IX.",
+   "via": [
+    "lem-sfb-space-perfect-open-retract",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-qc-open-enlargement-induction",
+  "worker": "stage1",
+  "summary": "Followed Tag 09IT with explicit descending induction from the fixed open, finite affine refinement, and reduced-complement verification; proved the additional overlap clause by quasi-compactness permanence and base change. Reused all prerequisite nodes and created no new nodes. Corrected the source proof base-case union typo in the argument; statement unchanged.",
+  "blueprint": "The inherited provenance traces the perfect-open-retract prerequisite to det-thm-sf-ctf-stability-direct-images (3), via Tag 09IV/09IX. This split supplies its Tag 09IT enlargement-induction input. Searched all blueprint nodes: no equivalent statement, so same_as remains empty; inherited from.node is null as reported by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebraic-space open-image and quasi-compact image calculus required by the affine chart refinement; no statement in the item unit supplies it."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point image under fibre product and full-image open criterion used to identify the complement pullback; no statement in the item unit supplies it."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic composition and base-change calculus for etale maps used to restrict each chart; no statement in the item unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "why": "Generic finite affine covering of a quasi-compact scheme, used only for the filtration charts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-460d91f22",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-460d91f22 (reviewer sub-agent of L); spot-checked: Read the item and all 12 cited statements in full, and read Stacks spaces-perfect.tex for 09IT (statement and whole proof), 08GN, 08GP and the square definition, plus decent-spaces 07ST, which is stated over Spec Z. The statement matches 09IT hypothesis by hypothesis and is unchanged. Representable étale agrees with étale because V is an affine scheme. The overlap clause is the observation in the 08GP proof. Step 1: qcqs-permanence plus affine-tests plus the monomorphism W_2→X give H qc open. Step 2: the transport through j_! is justified by clauses (1)-(3) of the change-of-base node; qs is absolute by definition. Step 3: the induction claim is P(W_0∪U_p) with base W_0, and the report correctly names the source typo (∩ should be ∪); B_m = A_p is checked. Step 4: |C_i| ⊂ U_p\\U_{p+1}; C_i factors through Z_p by reducedness and the radical-ideal charts, which is an elementary argument. Step 5: pulling back the filtration isomorphism and the full-image clause of point-open-calculus prove 08GN(1) for this case. Step 6: every hypothesis of (ii) is checked, including empty covers. Edge cases tested: X=∅, W_0=X, V_p=∅. Not a duplicate of the 08GP node lem-sfb-space-qcqs-distinguished-square-induction. proof_deps equals the union of uses, there is no cycle and no SGA citation. Accepted tool uses: a1 etale-open-image and point-open-calculus, trf representable-etale-scheme-tests (03EC), and the Mathlib leaf finite affine cover. Batch-5: six citations reach sec-trace-formula only through the general definition def-trf-algebraic-space. lem-trf-space-representable-etale-scheme-tests is foundational 03EC calculus whose closure holds only trf foundations; it is not a step of the trace formula or of Poincaré duality, so all are outside the assumptions. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQcOpenEnlargementInduction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.qc_open_enlargement_induction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQcOpenEnlargementInduction.lean",
+  "statement": "theorem qc_open_enlargement_induction {S : Scheme.{u}} (X : AlgebraicSpace S) (hXqc : CompactSpace (Point X.obj.obj)) (hXqs : IsAbsolutelyQuasiSeparated X) (W₀ : OpenSubspace X) (hW₀ : CompactSpace (Point W₀.val.toFunctor)) (P : Subfunctor X.obj.obj → Prop) (h_iso : ∀ (A B : OpenSubspace X), CompactSpace (Point A.val.toFunctor) → CompactSpace (Point B.val.toFunctor) → ∀ e : A.val.toFunctor ≅ B.val.toFunctor, e.hom ≫ B.val.ι = A.val.ι → (P A.val ↔ P B.val)) (h_start : P W₀.val) (h_step : ∀ (W₁ W₂ : OpenSubspace X), CompactSpace (Point W₁.val.toFunctor) → CompactSpace (Point W₂.val.toFunctor) → W₀ ≤ W₁ → ∀ (h₁₂ : W₁ ≤ W₂) (Y : AlgebraicSpace S) (e : Y.obj.obj ≅ W₂.val.toFunctor) (V : Over S), IsAffine V.left → ∀ f : yoneda.obj V ⟶ Y.obj.obj, IsEtale f → ∀ C : ClosedSubspace Y, IsReduced (C.val : AlgebraicSpace S) → pointImage C.val.arrow.hom.hom = (pointImage (Subfunctor.homOfLe h₁₂ ≫ e.inv))ᶜ → IsIso (Limits.pullback.snd f C.val.arrow.hom.hom) → P W₁.val → P W₂.val) : P ⊤ ∧ ∀ (W₁ W₂ : OpenSubspace X), CompactSpace (Point W₁.val.toFunctor) → CompactSpace (Point W₂.val.toFunctor) → W₀ ≤ W₁ → ∀ (h₁₂ : W₁ ≤ W₂) (Y : AlgebraicSpace S) (e : Y.obj.obj ≅ W₂.val.toFunctor) (V : Over S), IsAffine V.left → ∀ f : yoneda.obj V ⟶ Y.obj.obj, IsEtale f → ∀ C : ClosedSubspace Y, IsReduced (C.val : AlgebraicSpace S) → pointImage C.val.arrow.hom.hom = (pointImage (Subfunctor.homOfLe h₁₂ ≫ e.inv))ᶜ → IsIso (Limits.pullback.snd f C.val.arrow.hom.hom) → ∃ (H : Over S) (i : H ⟶ V) (a : yoneda.obj H ⟶ W₁.val.toFunctor), IsPullback a (yoneda.map i) (Subfunctor.homOfLe h₁₂ ≫ e.inv) f ∧ IsOpenImmersion i.left ∧ CompactSpace H.left",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-88664ceac"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-88664ceac",
+  "group": "Q49",
+  "result": "fix",
+  "note": "Read 09IT (spaces-perfect.tex l.1490), the item, all stmt_dep declarations (OpenSubspace, Point/pointTopologicalSpace, pointImage, ClosedSubspace, IsReduced, exists_unique_reduced_closed_subspace, IsEtale, IsAbsolutelyQuasiSeparated), the report and the module. All clauses match the node, edge cases are covered, the added stmt_dep is a landed def node, and there is no duplicate. H3: h_iso required invariance under arbitrary abstract isomorphisms between different qc opens. That is not in Stacks 09IT, the proof never uses it, and the only citer lem-sfb-space-perfect-open-retract (P(W) = 'U ⊂ W ∧ …') cannot satisfy it (counterexample X = U ⊔ U′). FIX: h_iso is restricted to isomorphisms over X (e.hom ≫ B.val.ι = A.val.ι), the literal reading of the node, which every P satisfies; docstrings adjusted; new verbatim statement in lean-record.json. The fixed file compiled once with nt_compile --json: 4.0 s, exit 0, clean."
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-scalar-localization-tensor-comparison-of-universes",
+ "kind": "statement",
+ "title": "Normalized restricted tensor comparison with independent site universes",
+ "statement": "Let C be a category with independent object and morphism universes, essentially small in coefficient universe u, J a Grothendieck topology, with additive and commutative-ring sheafification, locally-bijective detection for additive sheafification and composition with the commutative-ring forgetful functor. For commutative ring sheaves R,S, a ring-sheaf morphism phi:R -> S, and an R-module sheaf M, there is an isomorphism from Res_phi(S) tensor_R M to Res_phi(changeOfRingsOfUniverses phi M). It sends every local pure tensor s tensor m, through the canonical sheaf-tensor unit, to the sheafification class of the same sectionwise scalar-extension tensor. The supporting interface defines that tensor unit, its naturality, the normalized regular tensor unitor, and the sectionwise predicate for a normalized extension unit. These use the actual tensor of [def-pur-sheaf-tensor-product], restriction [def-pc-sheaf-restrict-scalars], and sheafification [def-weil-presheaf-modules-sheafification].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; sectionwise tensor and module sheafification"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "The sectionwise identity on tensors identifies the tensor presheaf with restricted scalar extension; its naturality is the pure-tensor restriction formula.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction commutes with module sheafification: after forgetting to abelian sheaves the canonical comparison is the identity, hence is invertible. Compose this comparison with tensorObjIsoSheafification. Naturality of the sheafification unit proves the pure-tensor formula. The regular tensor unitor and its inverse section formula follow from the sheafification adjunction triangle identity.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; sectionwise tensor and module sheafification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of sheaves of modules is sheafification of the sectionwise tensor product and extension of scalars restricts to tensor with the target ring",
+   "results": "Found presheaf tensorObj, tensorObjMap and tensorObj_map_tmul, and sheafification scalar laws. No normalized sheaf-module extension comparison.",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.tensorObjIsoSheafification",
+   "results": "No Mathlib identifier of this name. The source library has the comparison, used in the proof.",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationAdjunction",
+   "results": "Found module sheafificationAdjunction and its Hom equivalence in Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification.",
+   "verdict": "no exact match",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ScalarLocalizationTelescopeOfUniverses",
+  "date": "2026-10-27",
+  "group": "X8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "Proof, first paragraph ('Lf^* is exact', cohomology sheaves are pullbacks): rational-coefficient realization and normalized Hom transport used to justify that pullback; scalar-localization substep: Normalized restricted tensor comparison with independent site universes",
+   "via": [
+    "lem-weil-pbc-scalar-localization-telescope-of-universes",
+    "lem-per-rational-realization-hom-transport",
+    "lem-per-constructible-rational-hom-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ScalarLocalizationTensorComparisonOfUniverses",
+  "file": "lean/Sheaf/CategoryTheory/ScalarLocalizationTensorComparisonOfUniverses.lean",
+  "declaration": "SheafOfModules.exists_scalarTelescopeTensorComparisonOfUniverses",
+  "statement": "theorem exists_scalarTelescopeTensorComparisonOfUniverses (φ : R ⟶ S)\n    (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :\n    ∃ e : (cochainModulesMonoidal R).tensorObj\n        ((restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (unit.{vC, uC, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) M ≅\n        (restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (changeOfRingsOfUniverses.{vC, uC, u, u} φ M),\n      ∀ (V : Cᵒᵖ) (s : S.obj.obj V) (m : M.val.obj V),\n        e.hom.val.app V\n          ((scalarTelescopeTensorUnitOfUniverses\n            ((restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n              (unit.{vC, uC, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) M).app V\n            ((show ((restrictScalars.{u}\n                ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n                  (unit.{vC, uC, u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n                    S))).val.obj V\n              from s) ⊗ₜ[R.obj.obj V] m)) =\n        (toSheafify J (changeOfRingsPresheafOfUniverses.{vC, uC, u, u} φ M).presheaf).app V\n          (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T112445-L-1586053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261027T112445-L-1586053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

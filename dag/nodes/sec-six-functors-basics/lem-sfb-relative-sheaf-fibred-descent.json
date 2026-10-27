@@ -1,0 +1,198 @@
+{
+ "id": "lem-sfb-relative-sheaf-fibred-descent",
+ "kind": "statement",
+ "title": "Faithful relative sheaves over a stack have effective descent",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes as in [def-weil-size-convention]. Let $q:\\mathcal F\\to\\mathcal G$ be a morphism of categories fibred in groupoids on $S$-schemes, with morphisms, pullbacks and etale stack descent as in [def-sfb-stable-pointed-moduli-groupoids]. Suppose that $\\mathcal G$ is an etale stack and each functor $q_T:\\mathcal F(T)\\to\\mathcal G(T)$ is faithful (injective on each set of arrows). For every $S$-scheme $T$ and $y\\in\\mathcal G(T)$ define a presheaf $P_y$ on schemes over $T$ by $P_y(V\\xrightarrow{h}T)=\\{(x,\\phi):x\\in\\mathcal F(V),\\ \\phi:h^*y\\xrightarrow{\\sim}q(x)\\}/\\cong$, where an isomorphism from $(x,\\phi)$ to $(x',\\phi')$ is an arrow $a:x\\to x'$ with $q(a)\\phi=\\phi'$, and restrictions use pullback. Assume that each $P_y$ is a sheaf for jointly surjective etale scheme coverings: compatible local classes glue uniquely. Then $\\mathcal F$ is an etale stack, meaning that isomorphisms form etale sheaves and every etale descent datum for objects is effective. No representability or atlas hypothesis on either fibred groupoid is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 0CKJ (lemma-relative-sheaf-over-stack-is-stack), specialized to the big etale site of S-schemes; inverting the isomorphism in the displayed relative presheaf gives the orientation used here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Fix an etale cover $(T_i\\to T)$ and $x,x'\\in\\mathcal F(T)$. Use the pullbacks and stack convention of [def-sfb-stable-pointed-moduli-groupoids]; all overlap arrows below include the canonical pullback identifications. If $a,b:x\\to x'$ have equal restrictions, then $q(a),q(b)$ have equal restrictions. The isomorphism-sheaf condition for the assumed stack $\\mathcal G$ gives $q(a)=q(b)$, and faithfulness of $q_T$ gives $a=b$. This proves separatedness for the presheaf of isomorphisms of $x,x'$. The same argument applies over every scheme over $T$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 0CKJ (lemma-relative-sheaf-over-stack-is-stack), proof, Descent for morphisms"
+   }
+  },
+  {
+   "text": "Let $a_i:x|_{T_i}\\xrightarrow{\\sim}x'|_{T_i}$ agree on $T_i\\times_TT_j$. The isomorphism-sheaf condition for $\\mathcal G$ in [def-sfb-stable-pointed-moduli-groupoids] glues their images to $b:q(x)\\xrightarrow{\\sim}q(x')$ over $T$. In the relative presheaf $P_{q(x')}$ compare the classes of $(x,b^{-1})$ and $(x',\\mathrm{id})$. They restrict to the same class on each $T_i$, since $q(a_i)b^{-1}|_{T_i}=\\mathrm{id}$. Separatedness of this sheaf, which is a hypothesis of the item, makes the global classes equal. Equality of isomorphism classes in a groupoid means there is an isomorphism of representatives (composable isomorphisms and their inverses collapse any zigzag to one arrow). Thus there is $a:x\\xrightarrow{\\sim}x'$ with $q(a)b^{-1}=\\mathrm{id}$, or $q(a)=b$. Faithfulness of $q_{T_i}$ gives $a|_{T_i}=a_i$. Uniqueness follows from step 1. As $T,x,x'$ were arbitrary, isomorphisms in $\\mathcal F$ form etale sheaves.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 0CKJ (lemma-relative-sheaf-over-stack-is-stack), proof, Descent for morphisms"
+   }
+  },
+  {
+   "text": "Take an object descent datum: $x_i\\in\\mathcal F(T_i)$ and $d_{ij}:x_j|_{T_{ij}}\\xrightarrow{\\sim}x_i|_{T_{ij}}$ with $d_{ij}d_{jk}=d_{ik}$ on triple overlaps, where $T_{ij}=T_i\\times_TT_j$. Applying $q$ preserves this equation. Effective descent in the assumed stack $\\mathcal G$, with the convention of [def-sfb-stable-pointed-moduli-groupoids], therefore gives $y\\in\\mathcal G(T)$ and isomorphisms $e_i:y|_{T_i}\\xrightarrow{\\sim}q(x_i)$ such that $q(d_{ij})e_j=e_i$. In the presheaf $P_y$, the classes of $(x_i,e_i)$ consequently agree on every overlap: the arrow $d_{ij}$ is exactly an isomorphism of the corresponding pairs.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 0CKJ (lemma-relative-sheaf-over-stack-is-stack), proof, Descent of objects"
+   }
+  },
+  {
+   "text": "By the sheaf hypothesis on $P_y$, the matching family in step 3 glues to a class in $P_y(T)$. Choose a representative $(x,e)$ with $x\\in\\mathcal F(T)$ and $e:y\\xrightarrow{\\sim}q(x)$. Equality of its restriction with the class of $(x_i,e_i)$ gives an isomorphism $c_i:x|_{T_i}\\xrightarrow{\\sim}x_i$ satisfying $q(c_i)e|_{T_i}=e_i$. On $T_{ij}$ compute\n$$q(d_{ij}c_j)e=q(d_{ij})e_j=e_i=q(c_i)e.$$\nCancel the invertible arrow $e$ and use faithfulness of $q_{T_{ij}}$ to obtain $d_{ij}c_j=c_i$. Hence these $c_i$ identify the original descent datum with the pullback of $x$, so it is effective. Along with step 2 this is precisely the etale stack condition of [def-sfb-stable-pointed-moduli-groupoids]. Only the given sheaf and stack hypotheses, equality of isomorphism classes, and this displayed arrow calculation have been used; no representability is needed.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 0CKJ (lemma-relative-sheaf-over-stack-is-stack), proof, Descent of objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks.tex",
+  "place": "Tag 0CKJ (lemma-relative-sheaf-over-stack-is-stack), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descent of objects and arrows in a faithful category fibred in groupoids over a stack with relative sheaves of isomorphism classes",
+   "results": "OK 8 hits: HasFibers.instFaithfulFibι, CategoryTheory.Pseudofunctor.DescentData.instIsIsoαCategoryObjLocallyDiscreteOppositeCatMkOpHom, CategoryTheory.Pseudofunctor.DescentData.ofObj, CategoryTheory.Pseudofunctor.DescentData.iso, CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful, CategoryTheory.Functor.Fiber.instFaithfulFiberInclusion",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithful morphism of fibred groupoids into a stack has stack source if each presheaf of relative isomorphism classes is a sheaf",
+   "results": "OK 8 hits: CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful, CategoryTheory.Pseudofunctor.IsStackFor, CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor', CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor', CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStack\", \"Faithful\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeSheaf|relative_sheaf|[Ff]aithful.*[Ss]tack|[Ss]tack.*[Ff]aithful",
+   "results": "OK 6 hits: Mathlib/CategoryTheory/SingleObj.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative sheaves over a stack in groupoids are stacks in groupoids",
+   "results": "OK 8 hits: CategoryTheory.Pseudofunctor.IsPrestack.isSheaf, CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.IsPrestackFor.isSheafFor', CategoryTheory.Pseudofunctor.sheafHom, CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor, CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_α",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme representability and abstract pseudofunctor descent do not assert faithful relative-sheaf descent or algebraic-stack algebraicity; inspected IsStack.lean lines 46-88 and DescentData.lean lines 471-486"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithful morphism of categories fibred in groupoids to a stack is a stack when its relative isomorphism class presheaves are sheaves",
+   "results": "OK 8 hits: CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful, CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor, CategoryTheory.Pseudofunctor.isPrestackFor_iff_isSheafFor', CategoryTheory.Pseudofunctor.IsStackFor, CategoryTheory.Functor.IsLocallyFaithful.of_faithful",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Descent/IsStack.lean lines 46-87 and DescentData.lean lines 471-486; these define stack/prestack descent or use an existing stack hypothesis, rather than infer it from faithful relative class sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent for a faithful fibred groupoid over a stack whose relative isomorphism classes form sheaves",
+   "results": "OK 8 hits: CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, HasFibers.instFaithfulFibι, CategoryTheory.Pseudofunctor.IsPrestackFor.fullyFaithful, CategoryTheory.Pseudofunctor.DescentData.ofObj, CategoryTheory.Functor.IsLocallyFaithful.of_faithful, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.DescentData, CategoryTheory.Pseudofunctor.CoGrothendieck.instFaithfulαCategoryObjLocallyDiscreteOppositeCatMkOpFiberForgetInducedFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Descent/IsStack.lean lines 46-87 and DescentData.lean lines 471-486; these define stack/prestack descent or use an existing stack hypothesis, rather than infer it from faithful relative class sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-representable-source-algebraic",
+  "date": "2026-10-23",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tags 05UN (lemma-open-fibred-category-is-algebraic) and 05UM (lemma-representable-morphism-to-algebraic); local finite presentation uses stacks-morphisms.tex Tags 06Q2 (definition-locally-finite-presentation) and 06Q3 (lemma-composition-finite-presentation). Supporting input: faithful relative-sheaf descent in the stack assertion of Tag 05UN, before constructing the pulled-back atlas.",
+   "via": [
+    "lem-sfb-stack-representable-source-algebraic",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-sheaf-fibred-descent",
+  "worker": "stage1",
+  "summary": "Four direct steps following Stacks 0CKJ prove separatedness and gluing for isomorphisms, form the relative matching family from an object datum, and glue its class with an explicit faithfulness calculation. Statement and its hypotheses unchanged. No new nodes: the source uses only the assumed sheaf and stack conditions and elementary groupoid manipulations. Upstream and Mathlib searches found no exact attachment or leaf.",
+  "blueprint": "Supporting relative-sheaf descent input to 05UN, at the exact inherited blueprint.from.place on the alteration/moduli route below det-thm-sf-ctf-stability-direct-images, proof (3). Read the current latest blueprint proof. All four steps realize this supporting descent input without changing the unit route. The ancestor command returns None because the inherited creation chain ends at a Lean module; existing blueprint.from.node and via are retained, as maintained fields, and same_as was searched with no match."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-6d6df48f4",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-6d6df48f4 (reviewer sub-agent of L); spot-checked: Read the item in full against Stacks 0CKJ (stacks.tex 1334-1395, lemma-relative-sheaf-over-stack-is-stack) and the stack clause of def-sfb-stable-pointed-moduli-groupoids. The hypotheses match: G is a stack, fibre functors are faithful, and the relative class presheaf is a sheaf. The item inverts the source's f:F(x)->h^*y to phi:h^*y->q(x); in groupoids this gives a canonically isomorphic presheaf, so nothing is weakened. The site is specialised to etale coverings of S-schemes. Step 1: the Isom sheaf of G plus faithfulness gives separatedness. Step 2: I checked the orientation of the pairs (x,b^{-1}) and (x',id) in P_{q(x')}, where q(a_i)b^{-1}=id; sheafness gives a with q(a)=b, and faithfulness gives a|=a_i. Step 3: with d_ij:x_j->x_i, effective descent in G gives y and e_i with q(d_ij)e_j=e_i, so the classes match on overlaps. Step 4: I re-derived q(d_ij c_j)e=e_i=q(c_i)e; cancelling e and using faithfulness gives d_ij c_j=c_i, so the datum is effective. The source proof cites no further lemma, so the elementary flags are justified (C1/D3). No new nodes. lem-sfb-representable-fibred-category-stack is a scheme-representable special case, not a duplicate. The citer lem-sfb-stack-representable-source-algebraic supplies exactly the item's hypotheses, with no cycle. Edge cases checked: q=id, discrete groupoids, nontrivial automorphisms, empty cover. No SGA, no tool_uses, no re-split note. One minor slip: the report mentions a citations.json that was not delivered, which does not affect the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RelativeSheafFibredDescent",
+  "declaration": "CategoryTheory.isModuliStack_of_faithful_relative_sheaf",
+  "declarations": [
+   "CategoryTheory.FibredRelativeSection",
+   "CategoryTheory.FibredRelativeSection.Restricts",
+   "CategoryTheory.HasEtaleSheafRelativeClasses",
+   "CategoryTheory.isModuliStack_of_faithful_relative_sheaf"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RelativeSheafFibredDescent.lean",
+  "statement": "theorem isModuliStack_of_faithful_relative_sheaf {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)) (q : BasedFunctor F G) (hF : IsFibredInGroupoids F) (hG : IsModuliStack G) (hq : ∀ T : Over S, (moduliFiberMap q T).Faithful) (hrelative : HasEtaleSheafRelativeClasses q) : IsModuliStack F",
+  "branch": "sheaf-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The relative sheaf hypothesis is expressed by unique gluing of representatives up to vertical isomorphism on all covering sieves of all slice objects. Comparisons q(x) → y over h encode the inverse of phi : h*y ≅ q(x) using the fibred-groupoid cartesian property; no cleavage, representability or atlas is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e357cf95",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Read the node, Stacks 0CKJ (stacks.tex 1334-1395), the dependency's IsFibredInGroupoids/moduliFiberMap/IsModuliStack and the delivered module. Hypotheses are exact and nothing extra is assumed: BasedFunctor q, hF CFG, hG IsModuliStack, fibrewise faithfulness via moduliFiberMap. P_y is encoded as representatives with a comparison q(x)->y over h, which in a CFG corresponds to the node's phi without a cleavage. Restricts = equality of a class with a restricted class. HasEtaleSheafRelativeClasses = matching along all sieve-category arrows, gluing, and uniqueness up to vertical iso on every etaleTopology.over S covering sieve, i.e. the sheaf condition. Conclusion IsModuliStack F. Edge cases fine (empty sieve, empty fibres, q=id, automorphisms, universes). No hollow definitions, sorry-only theorem, source/blueprint docstrings with the 4 proof steps, statement verbatim, declarations listed, no duplicate names in lean/Sheaf, node changed only in lean. Report has Worker report and Second reading sections. Redundant base field is harmless. No compile (no change)."
+ }
+}

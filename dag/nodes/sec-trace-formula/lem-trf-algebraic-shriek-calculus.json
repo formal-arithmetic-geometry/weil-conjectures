@@ -20,152 +20,70 @@
  ],
  "proof": [
   {
-   "text": "Use ordinary module complexes throughout, identifying modules with sheaves on a one-object ringed site. For any map $T\\to B$, choose a K-injective $T$-resolution $K\\to I$; these exist because module categories are Grothendieck. Give $\\operatorname{Hom}_T(B,I)$ the action $(b h)(b')=h(b'b)$, and call its derived object $C_B^T(K)$. The degreewise adjunction is explicitly $v\\mapsto(m\\mapsto[b\\mapsto v(bm)])$, with inverse evaluation at $1$. It is an adjunction of Hom complexes, so if $N$ is an acyclic $B$-complex then $\\operatorname{Hom}_B^\\bullet(N,\\operatorname{Hom}_T(B,I))=\\operatorname{Hom}_T^\\bullet(N,I)$ is acyclic. Thus the coinduced complex is K-injective over $B$. The K-injective Hom-bijection on both sides descends this adjunction to $D(B)\\to D(T)$ and $C_B^T$. Changing K-injective resolutions gives homotopy-equivalent outputs: a quasi-isomorphism of K-injectives is a homotopy equivalence by that same bijection. This makes $C_B^T$ a functor, right adjoint to restriction, with counit $h\\mapsto h(1)$. On forgetting the action its model is exactly $R\\operatorname{Hom}_T(B,K)$ by the definition of derived Hom.",
+   "text": "Write $C_B^T$ for derived coinduction. The cited adjunction gives its functor, underlying Hom and evaluation counit. For $R\\to B\\to C$, the two adjunction bijections give $\\operatorname{Hom}_C(N,C_C^BC_B^R K)=\\operatorname{Hom}_R(N,K)$ naturally; hence they identify $C_C^BC_B^R$ with $C_C^R$. On Hom models the comparison and inverse are $h\\mapsto(c\\mapsto[b\\mapsto h(bc)])$ and $v\\mapsto(c\\mapsto v(c)(1))$; the counit is $v(1)(1)$.",
    "uses": [
-    "lem-weil-pbc-ring-modules-grothendieck-abelian",
-    "lem-sfb-grothendieck-k-injective",
-    "lem-sc-kinjective-quasi-iso-comparison",
-    "def-pur-derived-internal-hom"
+    "lem-trf-derived-coinduction-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tags 0A70 (lemma-right-adjoint), 0A71 (lemma-RHom-ext); the K-injective model and explicit ordinary adjunction."
+    "place": "Tags 0A70, 0A71 and 0C0F, restriction--coinduction adjunctions and their composition."
    }
   },
   {
-   "text": "For $T\\to B\\to C$, the composite coinduction on a K-injective $I$ is computed by $\\operatorname{Hom}_B(C,\\operatorname{Hom}_T(B,I))$, since step 1 makes the inner complex K-injective. The chain isomorphism from $\\operatorname{Hom}_T(C,I)$ sends $h$ to $(c\\mapsto[b\\mapsto h(bc)])$; its inverse is $v\\mapsto(c\\mapsto v(c)(1))$. Both maps are $C$-linear and commute with differentials. The composite of the two counits is $v\\mapsto v(1)(1)$, exactly evaluation of the inverse image at $1\\in C$. This proves the canonical composition comparison, with its counit compatibility, for arbitrary ring maps and unbounded complexes.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0C0F (lemma-composition-right-adjoints), explicit coinduction comparison."
-   }
-  },
-  {
-   "text": "Let $T\\to B=T/(s)$ have $s$ a nonzerodivisor. If $B=0$, both coinduction and tensor with $B$ are zero, proving the claim immediately; assume $B\\ne0$ for the regular-sequence calculation. The two-term resolution $[T\\xrightarrow{s}T]$ in degrees $-1,0$ makes $B$ perfect over $T$. The sequence $(s)$ is Koszul-regular, and its conormal has basis $\\bar s$ by the cited regular-sequence results. The dual Koszul calculation gives $H^i(C_B^T(T))=0$ for $i\\ne1$ and $H^1(C_B^T(T))\\cong B$, with its $B$-action, by evaluating the dual of $\\bar s$. Since an object with only one cohomology module is isomorphic to that module in its cohomological degree, $C_B^T(T)\\cong B[-1]$ in $D(B)$. The perfect-algebra coinduction tensor comparison therefore gives $C_B^T(L)\\cong L\\otimes_T^{\\mathbf L}B[-1]$ for every $L\\in D(T)$.",
+   "text": "Define $F_P(K)=C_A^P(K\\otimes_R^{\\mathbf L}P)[n]$. The refinement lemma identifies this with the model after adjoining variables whose images lift to $P$. Two surjective presentations have a common polynomial presentation, so give isomorphic functors. For a surjection take $P=R$; for the identity evaluation $\\operatorname{Hom}_R(R,I)=I$ gives the identity model.",
    "uses": [
-    "lem-weil-pbc-regular-sequence-koszul-regular",
-    "lem-weil-pbc-regular-sequence-conormal-free",
-    "lem-sc-koszul-regular-sequence-dual-complex",
-    "lem-trf-perfect-algebra-coinduction-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0BZH (lemma-compute-for-effective-Cartier-algebraic), principal case; duality.tex Tag 0BQZ."
-   }
-  },
-  {
-   "text": "For a chosen $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$, define $F_P(K)=C_A^P(K\\otimes_R^{\\mathbf L}P)[n]$; extension of scalars is a functor on all of $D(R)$. Compare it with $Q=P[y]\\twoheadrightarrow A$. Lift the image of $y$ to $g\\in P$, and let $\\pi:Q\\twoheadrightarrow P$ send $y$ to $g$. Multiplication by $y-g$ is injective: the leading nonzero coefficient of a polynomial survives multiplication by this monic polynomial. Compute scalar extensions using a K-flat $R$-representative $F$; $F\\otimes_RQ$ is K-flat over $Q$ since its tensor with an acyclic $Q$-complex is $F$ tensored with that underlying $R$-complex. The termwise identity $(F\\otimes_RQ)\\otimes_QP=F\\otimes_RP$ and step 3 give $C_P^Q(K\\otimes_R^{\\mathbf L}Q)[1]\\cong K\\otimes_R^{\\mathbf L}P$. Apply $C_A^P$ and step 2 to get $F_Q\\cong F_P$, including the shift $[n]$. Iterating treats any finite number of added variables. Any two presentations $P_1,P_2$ have the common polynomial presentation $R[x_1,\\ldots,x_n,y_1,\\ldots,y_m]\\twoheadrightarrow A$; surjectivity supplies all the necessary lifts. Comparing each with the common presentation proves well-definedness up to isomorphism of functors. We claim no independence of the chosen lifts, orientation, or canonical comparisons between different presentations.",
-   "uses": [
+    "lem-trf-coinduction-polynomial-refinement",
     "lem-pur-derived-change-of-rings",
-    "lem-pc-derived-tensor-second-factor-functor"
+    "lem-trf-derived-coinduction-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tags 0BZI (section-relative-dualizing-complex-algebraic) and 0BZJ (lemma-well-defined)."
+    "place": "Tags 0BZI and 0BZJ, polynomial models and common refinements."
    }
   },
   {
-   "text": "When $R\\twoheadrightarrow A$ is surjective, take the zero-variable presentation $P=R$. Its model is $C_A^R$, so step 1 proves all assertions in (i) concerning that map. For $A=R$ this complex is $\\operatorname{Hom}_R(R,I)\\cong I$ by evaluation, so the identity map has identity model. The arbitrary-ring composition assertion of (i) was proved in step 2.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0BZI, surjective and identity cases; Tags 0A70, 0A71, 0C0F."
-   }
-  },
-  {
-   "text": "We record the hypotheses needed for flat base change. A finite polynomial algebra $P$ over the Noetherian ring $R$ is Noetherian by the finite-type-algebra Noetherian theorem: use the presentation with zero kernel. The same applies to every finite polynomial algebra used below, over $R$, $B$, or a Noetherian $R'$. A quotient $A$ of $P$ is generated by $1$ as a $P$-module. The finite-free-resolution theorem gives a bounded-above finite-free resolution of this module, so $A[0]$ is pseudo-coherent over $P$. Polynomial extension is flat: its monomial basis makes tensor with it a direct sum of copies of the original module, preserving injections. For any flat map $P\\to P'$ and $A'=A\\otimes_PP'$, the equality $N\\otimes_AA'=N\\otimes_PP'$ for $A$-modules shows $A\\to A'$ flat as well.",
+   "text": "For (iii), set $P'=R'[x_1,\\ldots,x_n]$ and $A'=A\\otimes_RR'$. The finite-type Noetherian theorem makes $P$ Noetherian. Polynomial rings are free over their base by monomials; $P\\to P'$ is flat since tensoring is tensoring over $R$ with $R'$. Thus $M=K\\otimes_RP$ is bounded below. Apply the quotient base-change lemma and shift by $n$; both coefficient complexes are $K\\otimes_RP'$.",
    "uses": [
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-finite-free-resolution-noetherian",
-    "def-pc-ring-pseudo-coherent-complex",
-    "def-weil-pbc-flat-ring-map"
+    "lem-trf-coinduction-flat-quotient-base-change",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0BZN hypotheses; algebra.tex Tags 00FN (finite type over Noetherian) and 00LP (finite-free resolutions)."
+    "place": "Tag 0BZN (lemma-flat-bc), quotient base-change comparison."
    }
   },
   {
-   "text": "For the quotient $P\\twoheadrightarrow A$ and a flat map $P\\to P'$, define a comparison $C_A^P(M)\\otimes_A^{\\mathbf L}A'\\to C_{A'}^{P'}(M\\otimes_P^{\\mathbf L}P')$ by the coinduction adjunction of step 1. Its adjunct is the scalar extension of the evaluation counit $C_A^P(M)\\to M$. Indeed, after restriction to $P'$, the source is the ordinary tensor $C_A^P(M)\\otimes_PP'$: both extension functors are exact by flatness, and the identification is $h\\otimes(a\\otimes p')\\mapsto ah\\otimes p'$. Forgetting the $A'$-action, the resulting comparison is precisely $R\\operatorname{Hom}_P(A,M)\\otimes_PP'\\to R\\operatorname{Hom}_{P'}(A\\otimes_PP',M\\otimes_PP')$, since the adjunction counit is evaluation at $1$. If $M\\in D^+(P)$, step 6 verifies the pseudo-coherence hypothesis and the flat derived-Hom base-change lemma makes this map an isomorphism. Restriction of scalars reflects isomorphisms, because the underlying cohomology modules of a cone are unchanged. Thus the comparison is an isomorphism in $D(A')$, not just after forgetting its action.",
+   "text": "For (ii), choose $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow B$, $Q=P[y_1,\\ldots,y_m]$, $Q'=B[y_1,\\ldots,y_m]\\twoheadrightarrow C$. The same quotient comparison for $P\\to Q$, applied to $M=K\\otimes_RP$, gives $C_B^P(M)\\otimes_B^{\\mathbf L}Q'\\cong C_{Q'}^Q(K\\otimes_RQ)$. Apply $C_C^{Q'}$, use step 1 and add shifts $n+m$: the result is the model for $R\\to C$.",
    "uses": [
-    "lem-trf-pseudocoherent-rhom-flat-base-change"
+    "lem-trf-coinduction-flat-quotient-base-change",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Section 0E28 (section-base-change-trivial-duality), Equation 0E29 and Tags 0E2A (lemma-check-base-change-is-iso), 0BZM (lemma-flat-bc-surjection); evaluation description of the map."
+    "place": "Tag 0BZT (lemma-composition-shriek-algebraic); Q′ in its first displayed equality."
    }
   },
   {
-   "text": "For (iii), base-change the chosen presentation to $P'=R'[x_1,\\ldots,x_n]$. The map $P\\to P'$ is flat since tensor with $P'$ over $P$ is tensor with $R'$ over $R$ on restricted modules. If $K\\in D^+(R)$, then $M=(K\\otimes_R^{\\mathbf L}P)[n]\\in D^+(P)$, since $P$ is $R$-free. Apply step 7. The two coefficient complexes agree because $(K\\otimes_R P)\\otimes_PP'=K\\otimes_RP'=(K\\otimes_RR')\\otimes_{R'}P'$, computed by exact flat extensions. This gives exactly the displayed isomorphism of (iii). Step 4 permits replacing either chosen presentation model by any other one.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0BZN (lemma-flat-bc), including the double-base-change identity of more-algebra.tex Tag 08YU."
-   }
-  },
-  {
-   "text": "For (ii), choose $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow B$, choose generators $c_1,\\ldots,c_m$ of $C$ over $B$, and put $Q=P[y_1,\\ldots,y_m]$, $Q'=B[y_1,\\ldots,y_m]$. Let $\\chi:Q'\\twoheadrightarrow C$ send $y_j$ to $c_j$. For $M=K\\otimes_RP$ with $K\\in D^+(R)$, step 7 applied to the flat map $P\\to Q$ gives $C_B^P(M)\\otimes_B^{\\mathbf L}Q'\\cong C_{Q'}^Q(M\\otimes_PQ)$. Apply $C_C^{Q'}$; step 2 identifies its composite with $C_C^Q$. Adding the shifts gives\n$$b^!a^!K\\cong C_C^{Q'}(C_{Q'}^Q(K\\otimes_RQ))[n+m]\\cong C_C^Q(K\\otimes_RQ)[n+m]=(ba)^!K.$$\nHere $Q$ has exactly $n+m$ variables over $R$ and surjects onto $C$. Thus the chosen polynomial models give the asserted comparison; step 4 gives it for any other model. Zero generators are allowed in either factor.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0BZT (lemma-composition-shriek-algebraic); the scalar extension in its first displayed line must be by Q′=B[y], not by Q=P[y]."
-   }
-  },
-  {
-   "text": "If $A=0$, the open-immersion assertion is immediate: $D(A)$ is the zero category and both functors are zero. Henceforth assume $A\\ne0$. Suppose now $j:\\operatorname{Spec}A\\to\\operatorname{Spec}R$ is an open immersion. By its definition all stalk homomorphisms are isomorphisms, so they are flat; the affine flatness criterion makes $R\\to A$ flat. Its stalks therefore have Tor dimension zero: apply the flat-resolution Tor comparison to the length-zero flat resolution. The one-member affine cover makes $\\operatorname{Spec}R$ locally Noetherian by definition; the spectrum quasi-compactness lemma makes it Noetherian. Since $j$ is finite type by the standing hypothesis, the affine polynomial-resolution theorem supplies a finite projective $P$-resolution of $A$ for the chosen $P\\twoheadrightarrow A$. Step 6 also supplies a finite-free resolution. Truncate this latter resolution at its projective syzygy using the cited kernel-projectivity theorem; the syzygy is finitely generated because $P$ is Noetherian. This is a bounded finite-projective resolution, so $A$ is perfect over $P$. If the projective dimension is zero, use $A[0]$ itself. All these facts hold without $R$ being regular.",
+   "text": "For (iv), an open immersion has isomorphic local rings, so the affine criterion makes $R\\to A$ flat. It is a monomorphism by restriction of its structure sheaf, hence its self fibre product is itself. The affine fibre-product formula gives $A\\otimes_RA=A$. The flat polynomial-quotient theorem makes $A$ perfect over $P$; the graph-dual lemma gives $\\omega=C_A^P(P)[n]\\cong A$ in $D(A)$.",
    "uses": [
     "def-weil-open-immersion",
-    "def-weil-flat-morphism",
     "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-pc-flat-resolution-tor-comparison",
-    "lem-pc-affine-polynomial-resolution-of-stalkwise",
-    "lem-weil-pbc-projective-resolution-kernel-projective",
-    "def-pc-perfect-ring-complex",
-    "pqf-def-locnoeth",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0C0H (lemma-upper-shriek-localize), perfect polynomial model for its unbounded form; more-morphisms.tex Tag 069C; algebra.tex Tags 00LP, 00O5. Properties Tag 01OV; Algebra Tag 00E8."
-   }
-  },
-  {
-   "text": "The open immersion is a monomorphism: two maps to its open subscheme with the same composite have the same underlying map and sheaf map, since the inclusion restricts the structure sheaf. Hence its self fibre product is itself. The affine-fibre-product theorem identifies the resulting multiplication map $A\\otimes_RA\\to A$ as an isomorphism, with both coprojections identified with the identity. Set $P_A=P\\otimes_RA=A[x_1,\\ldots,x_n]$, and write $a_i$ for the images of $x_i$ in $A$. The scalar extension of $P\\twoheadrightarrow A$ is the evaluation $P_A\\to A$, $x_i\\mapsto a_i$, since $A\\otimes_RA=A$. Its kernel is generated by $x_i-a_i$: subtracting the evaluation of a polynomial gives a sum of multiples of these differences. Successively quotienting by the first $i$ differences leaves a polynomial ring over $A$ in the remaining variables, and the next difference is monic. Thus this sequence is Koszul-regular; its conormal basis is the classes of these differences. The dual Koszul theorem gives $R\\operatorname{Hom}_{P_A}(A,P_A)\\cong A[-n]$, as an underlying $P_A$-complex; its sole nonzero cohomology is identified $A$-linearly using the ordered conormal generator.",
-   "uses": [
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-regular-sequence-koszul-regular",
-    "lem-weil-pbc-regular-sequence-conormal-free",
-    "lem-sc-koszul-regular-sequence-dual-complex"
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-trf-flat-epimorphism-polynomial-dual"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0C0H, self-base-change argument; explicit polynomial graph resolution, using duality.tex Tag 0BQZ."
+    "place": "Tag 0C0H (lemma-upper-shriek-localize), flat self-base-change and polynomial dualizing object."
    }
   },
   {
-   "text": "Put $\\omega=C_A^P(P)[n]\\in D(A)$. Apply the existing perfect derived-Hom base-change theorem to $P\\to P_A$, the perfect $P$-complex $A[0]$ from step 10, and target $P[0]$. Flatness identifies the base-changed first argument with $A\\otimes_RA=A$. The scalar extension of the underlying $P$-complex of $\\omega$ therefore has cohomology $A$ in degree $0$ and zero elsewhere, by step 11. On the other hand extension by $P_A$ on that complex is extension by $A$ over $R$. For every $A$-module $N$, multiplication $N\\otimes_RA\\to N$ is an isomorphism because $A\\otimes_RA=A$; flatness of $A/R$ makes this true for complexes without a bound. Thus $\\omega$ itself has cohomology only in degree $0$, and $H^0(\\omega)\\cong A$. This is $A$-linear: the coefficient action of $A\\subset P_A$ agrees with the original action under the equality of the two coprojections into $A\\otimes_RA$, and the top Koszul identification is linear for that action. Consequently truncation gives $\\omega\\cong A[0]$ in $D(A)$. We do not attempt to lift an arbitrary isomorphism after forgetting the action.",
-   "uses": [
-    "lem-pc-base-change-rhom-perfect"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0C0H, base change by the open immersion itself; more-algebra.tex Tag 0A6A, perfect case."
-   }
-  },
-  {
-   "text": "For arbitrary $K\\in D(R)$, apply the perfect-algebra coinduction tensor comparison to $P\\twoheadrightarrow A$ and $K\\otimes_R^{\\mathbf L}P$. It gives\n$$\\varphi^!K\\cong (K\\otimes_R^{\\mathbf L}P)\\otimes_P^{\\mathbf L}\\omega\\cong K\\otimes_R^{\\mathbf L}\\omega\\cong K\\otimes_R^{\\mathbf L}A.$$\nThe middle equality preserves the $A$-action: choose a K-flat $R$-representative $F$ of $K$; $F\\otimes_RP$ is K-flat over $P$ by the identity $(F\\otimes_RP)\\otimes_PN=F\\otimes_RN$, and rebracket $(F\\otimes_RP)\\otimes_P\\omega=F\\otimes_R\\omega$ termwise. The last equality is induced by step 12 using the derived tensor functor with an $A$-complex. This proves (iv) on the full unbounded category. The empty open has $A=0$ and gives the zero functor; $n=0$ is the empty Koszul complex and requires no shift. Together with steps 4--9 this proves all clauses with their stated bounds.",
+   "text": "Perfect coinduction--tensor comparison gives $F_P(K)\\cong(K\\otimes_R^{\\mathbf L}P)\\otimes_P^{\\mathbf L}\\omega\\cong K\\otimes_R^{\\mathbf L}A$. Rebracket on a K-flat $R$-representative $F$: $(F\\otimes_RP)\\otimes_P\\omega=F\\otimes_R\\omega$, preserving the $A$-action. This works for unbounded $K$; $A=0$ and zero variables give the zero and identity cases. The complex $F\\otimes_RP$ is K-flat over $P$: tensoring an acyclic $P$-complex $N$ gives $F\\otimes_RN$, which is acyclic.",
    "uses": [
     "lem-trf-perfect-algebra-coinduction-tensor",
     "lem-pc-derived-tensor-second-factor-functor"
@@ -173,37 +91,23 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0C0H, with Tag 0BZE for the unbounded tensor calculation and Tag 0A6A perfect base change."
+    "place": "Tag 0C0H; Tag 0BZU (lemma-upper-shriek-is-tensor-functor), perfect polynomial coinduction."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ring-modules-grothendieck-abelian",
-  "lem-sfb-grothendieck-k-injective",
-  "lem-sc-kinjective-quasi-iso-comparison",
-  "def-pur-derived-internal-hom",
-  "lem-weil-pbc-regular-sequence-koszul-regular",
-  "lem-weil-pbc-regular-sequence-conormal-free",
-  "lem-sc-koszul-regular-sequence-dual-complex",
-  "lem-trf-perfect-algebra-coinduction-tensor",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-coinduction-polynomial-refinement",
   "lem-pur-derived-change-of-rings",
-  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-trf-coinduction-flat-quotient-base-change",
   "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-finite-free-resolution-noetherian",
-  "def-pc-ring-pseudo-coherent-complex",
-  "def-weil-pbc-flat-ring-map",
-  "lem-trf-pseudocoherent-rhom-flat-base-change",
   "def-weil-open-immersion",
-  "def-weil-flat-morphism",
   "lem-weil-pbc-flat-morphism-affine-criterion",
-  "lem-pc-flat-resolution-tor-comparison",
-  "lem-pc-affine-polynomial-resolution-of-stalkwise",
-  "lem-weil-pbc-projective-resolution-kernel-projective",
-  "def-pc-perfect-ring-complex",
-  "pqf-def-locnoeth",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
   "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-pc-base-change-rhom-perfect"
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-trf-flat-epimorphism-polynomial-dual",
+  "lem-trf-perfect-algebra-coinduction-tensor",
+  "lem-pc-derived-tensor-second-factor-functor"
  ],
  "proof_origin": {
   "by": "agent",
@@ -273,6 +177,41 @@
    "results": "{\"t\": \"2026-10-17T21:18:05Z\", \"tool\": \"leanfinder\", \"query\": \"Twisted inverse image for commutative rings using a polynomial resolution is independent of the polynomial presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.ofHasCoeffs_σ'\", \"coe_polyEquivTensor'_symm\", \"AdjoinRoot.symm_mapRingEquiv\", \"Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul\", \"MvPolynomial.comapEquiv_symm_coe\", \"AdjoinRoot.symm_mapAlgEquiv\", \"Ideal.polynomialQuotientEquivQuotientPolynomial_symm_mk\", \"AdjoinRoot.Polynomial.quotQuotEquivComm_symm_mk_mk\"], \"digest\": \"e92b157d6acc8a81\"} Read the returned signatures: No algebraic exceptional inverse-image construction. Hits concern ordinary ring presentations, exact-functor localization or sheaf pushforward; none supplies the clauses of this item.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic upper shriek functor for finite type Noetherian rings composition and flat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"RingHom.EssFiniteType.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"RingHom.StableUnderComposition fun {R S} [CommRing R] [CommRing S] => RingHom.EssFiniteType\", \"doc\": \"The property of being of essential finite type is stable under composition of ring homomorphisms between commutative semirings. Specifically, if $ f : R \\\\to S $ and $ g : S \\\\to T $ are ring homomorphi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|relativeDualizing|derivedCoinduction",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Twisted inverse image on derived module categories via polynomial presentations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Core\", \"type\": \": MvPolynomial ι R₀\", \"doc\": \"In a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\iota $, the inverse of the Jacobian unit $ \\\\operatorname{det}^{-1} $ is expressed as a multivariate polynomial over\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (P : CategoryTheory.Projectiv\", \"doc\": \"Given additive functors between abelian categories and projective resolutions of objects, the inverse of the isomorphism relating the left-derived functor to projective resolutions satisfies a natural\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Y.Modules ⥤ X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).inv.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).hom\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the inverse of the pseudofunctor's composition map on the opposite category is equal to the natural trans\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapId_inv_τl\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ (x : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapId x).inv.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackId (Opposite.unop x.as)).inv\", \"doc\": \"For any scheme $X$, the inverse of the identity morphism in the module pseudofunctor applied to $X$ has its left component equal to the inverse of the natural isomorphism between the pullback of the i\"}\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": SheafOfModules.{v} S ⥤ SheafOfModules.{v} R\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M U x) : ((pushforwardComp φ ψ).inv.app M).val.app U x = x\", \"doc\": \"For any sheaf of modules $ M $, object $ U $ in $ \\\\mathcal{C}^\\\\mathrm{op} $, and element $ x $ in the module $ M(U) $, applying the inverse natural isomorphism of the composed pushforward functors $ \\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial presentation derived Hom shifted by dimension defines exceptional inverse image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], CategoryTheory.NatTrans.CommShift (DerivedCategory.quotientCompQhIso C).hom ℤ\", \"doc\": \"This natural transformation establishes that the integer-indexed shift operation on homological complexes commutes with the composition of the quotient functor to the homotopy category and the derived\"}\n  {\"name\": \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory.Q.CommShift ℤ\", \"doc\": \"The derived category, constructed by localizing the homotopy category of integer-indexed chain complexes at quasi-isomorphisms, is equipped with a commutative shift operation parameterized by integers\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        (n : ℤ) → DerivedCategory.singleFunctor C n ≅ (CochainComplex.singleFunctor C n).comp DerivedCategory.Q\", \"doc\": \"For each integer $ n $, the single-term complex functor from category $ \\\\mathcal{C} $ to its derived category is naturally isomorphic to the composition of the single-term cochain complex functor (con\"}\n  {\"name\": \"DerivedCategory.singleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → ℤ → CategoryTheory.Functor C (DerivedCategory C)\", \"doc\": \"For each integer $ n $, this defines a functor from category $ \\\\mathcal{C} $ to its derived category that maps objects of $ \\\\mathcal{C} $ to single-term chain complexes concentrated in degree $ n $. T\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories and integer $ n $, there is a natural isomorphism between the composition of the single-term complex functor \"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      {C₂ : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n          [inst_3 : CategoryTheory.Abelian C₂] →\\n            (F : CategoryTheory.Functor C₁ C₂) →\\n             \", \"doc\": \"For any additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories, the induced functor on integer-indexed cochain complexes commutes with the shift operation. Specifically, f\"}\n  {\"name\": \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For any additive functor $ F $ between abelian categories preserving finite limits/colimits and homology, the natural transformation associated with the derived functor factorization commutes with the\"}\n  {\"name\": \"DerivedCategory.singleFunctorsPostcompQIso\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] →\\n        DerivedCategory.singleFunctors C ≅ (CochainComplex.singleFunctors C).postcomp DerivedCategory.Q\", \"doc\": \"An isomorphism establishing that postcomposing single-term cochain complex functors with the quotient functor to the derived category is naturally equivalent to first quotienting to the homotopy categ\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary flat modules, polynomial algebra, shifts of complexes, or ordinary adjunctions, and do not give this derived coinduction comparison with its specified algebra action."
   }
  ],
  "mathlib_match": null,
@@ -307,107 +246,35 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-algebraic-shriek-calculus",
   "worker": "stage1",
-  "summary": "Constructed derived coinduction with its action and explicit counit, expanded polynomial refinement, flat base change and composition, and proved the unbounded open-immersion clause through perfect polynomial resolutions and a graph Koszul calculation. Reused existing resolution, perfect base-change and Koszul nodes; added only the pseudo-coherent flat Hom comparison and the perfect-algebra coinduction tensor input. No statement was changed.",
+  "summary": "Repairs the dedicated human re-split handoff of 2026-10-22: unchanged statement, six short assembly steps, three new independent statement-only tasks, and reuse of the existing coinduction-adjunction and flat polynomial-perfectness statements. Every old argument is mapped and retained verbatim in report.md. Repair of return L: reread current cited statements and newly added same-tag geometric comparison nodes; retain the algebraic route, document their different scopes, and deliver on the current origin/sheaf-dag.",
   "blueprint": "Realizes the algebraic-calculus input of lem-trf-relative-duality-polynomial-chart, hence the marked-dualizing subbranch of lem-trf-local-term-locality proof (1)--(2), exactly as recorded in blueprint.from.place. Does not alter the fixed trace-formula chapter or the zero-stalk unit route.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
-    "why": "Generic ordinary-module The category of modules over a ring is Grothendieck abelian used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "lem-sfb-grothendieck-k-injective",
-    "why": "Generic ordinary-module Grothendieck abelian categories have K-injective resolutions used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "lem-sc-kinjective-quasi-iso-comparison",
-    "why": "Generic ordinary-module K-injective targets turn quasi-isomorphisms into Hom bijections used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "def-pur-derived-internal-hom",
-    "why": "Generic ordinary-module Derived internal Hom on a ringed site used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
-    "why": "Generic ordinary-module A regular sequence is Koszul-regular used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "lem-weil-pbc-regular-sequence-conormal-free",
-    "why": "Generic ordinary-module The conormal module of an ideal generated by a regular sequence is free used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "lem-sc-koszul-regular-sequence-dual-complex",
-    "why": "Generic ordinary-module Dual of the Koszul resolution of a regular quotient used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
     "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic ordinary-module Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "lem-pc-derived-tensor-second-factor-functor",
-    "why": "Generic ordinary-module Derived tensor over R with a complex of A-modules used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions tool used in the indicated assembly step; the fixed curve zero-stalk route supplies no replacement for this ordinary-module algebra input."
    },
    {
     "node": "lem-weil-pbc-finite-type-algebra-noetherian",
-    "why": "Hilbert basis theorem supplies Noetherianity of polynomial presentations; the zero-stalk curve unit supplies no commutative algebra replacement."
-   },
-   {
-    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
-    "why": "Generic ordinary-module A finite module over a Noetherian ring has a resolution by finite free modules (Stacks 00LP) used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "def-pc-ring-pseudo-coherent-complex",
-    "why": "Generic ordinary-module Pseudo-coherent derived objects over a ring used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "def-weil-pbc-flat-ring-map",
-    "why": "Generic ordinary-module Flat module and flat ring map used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
+    "why": "Generic Finitely generated algebras over Noetherian rings are Noetherian tool used in the indicated assembly step; the fixed curve zero-stalk route supplies no replacement for this ordinary-module algebra input."
    },
    {
     "node": "def-weil-open-immersion",
-    "why": "Generic ordinary-module Open immersion of schemes used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "def-weil-flat-morphism",
-    "why": "Generic ordinary-module Flat morphism of schemes used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
+    "why": "Generic Open immersion of schemes tool used in the indicated assembly step; the fixed curve zero-stalk route supplies no replacement for this ordinary-module algebra input."
    },
    {
     "node": "lem-weil-pbc-flat-morphism-affine-criterion",
-    "why": "Generic ordinary-module Flatness of a scheme morphism on affine charts used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "lem-pc-flat-resolution-tor-comparison",
-    "why": "Generic ordinary-module Tor computed by an augmented flat resolution used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "lem-pc-affine-polynomial-resolution-of-stalkwise",
-    "why": "Generic ordinary-module Polynomial affine resolution from stalkwise finite Tor dimension used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "lem-weil-pbc-projective-resolution-kernel-projective",
-    "why": "Generic ordinary-module The d-th syzygy of a module of projective dimension at most d is projective used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "def-pc-perfect-ring-complex",
-    "why": "Generic ordinary-module Perfect complexes over a commutative ring used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
-   },
-   {
-    "node": "pqf-def-locnoeth",
-    "why": "The affine-cover definition verifies the Noetherian-target hypothesis in the polynomial-resolution theorem."
-   },
-   {
-    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "why": "Quasi-compactness of the affine target verifies that theorem's global Noetherian hypothesis."
+    "why": "Generic Flatness of a scheme morphism on affine charts tool used in the indicated assembly step; the fixed curve zero-stalk route supplies no replacement for this ordinary-module algebra input."
    },
    {
     "node": "lem-weil-pbc-fibre-product-affine-spectra",
-    "why": "Generic ordinary-module The fibre product of affine schemes is the spectrum of the tensor product used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
+    "why": "Generic The fibre product of affine schemes is the spectrum of the tensor product tool used in the indicated assembly step; the fixed curve zero-stalk route supplies no replacement for this ordinary-module algebra input."
    },
    {
-    "node": "lem-pc-base-change-rhom-perfect",
-    "why": "Generic ordinary-module RHom base change for a perfect complex used with the hypotheses verified in the citing proof step; no statement in the zero-stalk curve unit supplies this algebraic tool."
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic Derived tensor over R with a complex of A-modules tool used in the indicated assembly step; the fixed curve zero-stalk route supplies no replacement for this ordinary-module algebra input."
    }
   ]
  },
@@ -438,12 +305,12 @@
   "lem-pc-base-change-rhom-perfect"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q99-67e32e9c0",
-  "group": "Q99",
+  "reviewer": "NT-cc-Q07-4eb1155e3",
+  "group": "Q07",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q99-67e32e9c0 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, unit/chapter route, delivery errors, and cited Stacks sources. All hypotheses, actions, shifts, bounds, base-change coefficient categories, edge cases, duplicate candidates, and 13 proof steps check out. The Tag 0BZT notation error is correctly repaired using Q'=B[y]. No route-pivot machinery, SGA 4 source, circularity, restatement, or unresolved fault found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-4eb1155e3 (reviewer sub-agent of L); spot-checked: Re-delivery of 84e829e7, which was PASSed and then refused at landing with 'L promotes it' (return L). Delta: the three new nodes are byte-identical and only the item's split_report.summary changed. Item statement, stmt_deps, the 6-step proof (2394 chars), proof_deps and tool_uses are unchanged. All 17 cited statements are unchanged since the earlier snapshot, and I re-read them. Both live clones still hold the old 13-step split, so this delivery is not superseded. Old-step map, checked: 1 is the existing lem-trf-derived-coinduction-adjunction; 3+4 is coinduction-polynomial-refinement; 6+7 is coinduction-flat-quotient-base-change; 10 is the existing lem-trf-flat-polynomial-quotient-perfect; 11+12 is flat-epimorphism-polynomial-dual; 2, 5, 8, 9 and 13 are short assembly steps. Nothing was blurred or dropped. Truth checks. Refinement: y−g regular gives C_P^Q ≅ (−⊗P)[−m], and composition then cancels the added variables (Stacks 0BZH l.2404 and 0BZJ l.4365); m=1 sign checked; m=0 and P=0 fine. Flat quotient: Noetherian P makes A pseudo-coherent, and 0BZM l.2509 with 0E2A l.2479 give the iso for M∈D^+; D^+ is kept. In step 4, B⊗_P Q = Q' = B[y], which corrects the 0BZT typo at l.4591. Graph dual: clause 1 is the Koszul complex of x_i−a_i; clause 2 is lemma-bc-surjection to P_A with A⊗_R A = A; tested on ℤ→ℤ[1/2] with 2x−1; A=0 and n=0 fine; this fills the 'details omitted' in 0C0H l.4648. Step 5 hypotheses: affine flatness criterion, monomorphism, affine fibre product, and the existing perfectness node (flat, finite type, Noetherian). Step 6 uses perfect coinduction-tensor with K-flat rebracketing and holds for unbounded K. No cycle in the closures of the proof_deps. No SGA source. Duplicates: the nodes new to the base (def-trf-polynomial-duality-* and lem-trf-lci-koszul-duality-determinant-comparison) carry geometric lci/atlas content, not the arbitrary-input algebraic comparisons, so none is a duplicate. tool_uses are generic and accepted. Advisory: graph-dual clause 1 is a special case of refinement clause (b), a sibling overlap; step 5 does not cite def-weil-flat-morphism for the definitional flatness step. No changes."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.AlgebraicShriekCalculus",
@@ -478,5 +345,16 @@
   "result": "pass",
   "note": "Reviewed immutable files, all statement dependencies, exact declarations, source clauses, edge cases, universes and route-pivot gates. Per-file scompile.py reproduction passed with exit 0 and no diagnostics. No repairs required; detailed findings written to review.md."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

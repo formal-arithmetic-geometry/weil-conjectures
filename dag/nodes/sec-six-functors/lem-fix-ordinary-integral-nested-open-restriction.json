@@ -1,0 +1,152 @@
+{
+ "id": "lem-fix-ordinary-integral-nested-open-restriction",
+ "kind": "statement",
+ "title": "Ordinary integral pullback is successive normalized open restriction",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell. For schemes W and V, a morphism f:V→W, and opens A⊆U⊆V, the ordinary uncompleted derived pullback along A→V→W is naturally isomorphic to ordinary derived pullback along f followed by normalized exact open restriction from V to U and then from U to A. The coefficients are the completed integral coefficient sheaves. This concerns all unbounded complexes and assumes neither completeness nor closedness of either open.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-open-completed-restriction-data",
+  "def-sf-ordinary-integral-derived-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-push-pull-composition-modules (Tag 03D8); derived.tex, Tag 06YY; ordinary restriction and compositor part of step 3 of lem-fix-clopen-completed-restriction-comparison."
+ },
+ "proof": [
+  {
+   "text": "For an open immersion j, let a be composition into j left adjoint to base change on pro-etale objects. The normalized finite restriction isomorphisms send constant sections to the same constant sections. Naturality along the counit of a shows that the finite direct coefficient map is the unit of the induced sheaf adjunction followed by direct image of the inverse finite restriction isomorphism. This is openFiniteDirect, proved by the sheafification universal property.",
+   "uses": [
+    "def-pur-open-completed-restriction-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The quotient-projection equations for the completed restriction isomorphism and naturality of the sheaf-adjunction unit identify every finite projection of its adjoint direct coefficient map. The uniqueness theorem for ordinaryIntegralDirectRingMap therefore identifies that map with the specified ordinary direct coefficient map (openDirect). Lift the site adjunction to module sheaves using pushforwardPushforwardAdj: its two compatibility equations are the inverse-isomorphism identity and the sheaf-adjunction triangle identity. Uniqueness of left adjoints gives openModuleIso from the ordinary module pullback to the published exact restriction.",
+   "uses": [
+    "def-pur-open-completed-restriction-data",
+    "def-sf-ordinary-integral-pullback-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact restriction preserves finite limits and colimits, hence its exact localization is its total left derived functor. Transport exactness through openModuleIso and apply uniqueness of total left derived functors to identify ordinaryIntegralDerivedPull j with OpenCompletedRestriction.derivedRestriction j (ordinaryIntegralOpenRestrictionDerivedIso), without imposing boundedness, completeness or prime invertibility.",
+   "uses": [
+    "def-pur-open-completed-restriction-data",
+    "def-sf-ordinary-integral-derived-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use IntegralOrdinary.pullIso, which has no Noetherian, dimension, invertibility or constructibility premise, to compare the ordinary total left derived pullback with the existing ringed geometric pullback. Its specified completed coefficient family respects composition by completedPull_comp; geometricPullComposition gives the compositor. Transport it back through pullIso to obtain ordinaryIntegralDerivedPullbackComposition for arbitrary composable scheme morphisms.",
+   "uses": [
+    "lem-sf-integral-ordinary-pullback-comparison",
+    "def-strict-coefficient-ringed-geometric-data",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply ordinaryIntegralDerivedPullbackComposition first to A into V followed by f, then to A into U followed by U into V. Scheme.homOfLE_ι identifies the latter composite with A.ι. Whisker the latter compositor with ordinaryIntegralDerivedPull f and substitute ordinaryIntegralOpenRestrictionDerivedIso for the two open immersions. Composing these natural isomorphisms is precisely the stated isomorphism. All constructions also apply to empty opens, identities and zero modules.",
+   "uses": [
+    "def-pur-open-completed-restriction-data",
+    "def-sf-ordinary-integral-derived-pullback",
+    "lem-sf-integral-ordinary-pullback-comparison",
+    "def-strict-coefficient-ringed-geometric-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-open-completed-restriction-data",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-sf-ordinary-integral-derived-pullback",
+  "lem-sf-integral-ordinary-pullback-comparison",
+  "def-strict-coefficient-ringed-geometric-data",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-push-pull-composition-modules (Tag 03D8); exact open restriction and uniqueness of total left derived functors (Tag 06YY). Written Lean proof by S7, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary module pullback along an open immersion is exact restriction and composes with derived pullback",
+   "results": "Eight hits: Scheme.Modules.restrictAdjunction, restrictFunctorComp and restrictFunctorIsoPullback, among others. These concern structure-sheaf modules, rather than the pro-etale completed coefficient sheaves.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the specified functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact ordinary restriction to a clopen open subscheme commutes with derived completion and ordinary derived pullback composition",
+   "results": "Eight hits, including Scheme.Modules.restrictFunctorComp and restrictFunctorIsoPullback. No comparison for pro-etale completed integral coefficients.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryCompIso\"",
+   "results": "Seven hits including Functor.mapDerivedCategoryCompIso and its coherence lemmas in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "date": "2026-10-27",
+   "verdict": "Provides exact-functor composition after localization, but not the coefficient-normalized ordinary pullback or completion comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso|mapDerivedCategoryFactors in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; ordinaryIntegralDerivedPull in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib supplies localization factors for exact functors. Existing ordinaryCompletedIntegralPullback needs Noetherian, finite dimension, prime invertibility and constructibility. OpenCompletedRestriction.open_completed_restriction needs prime invertibility on both schemes. Neither applies to the assigned general statement.",
+   "date": "2026-10-27",
+   "verdict": "The two specified interface comparisons are not already available under the required hypotheses."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ClopenCompletedRestrictionComparison",
+  "date": "2026-10-27",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-clopen-completed-restriction-comparison",
+   "place": "lemma-push-pull-composition-modules (Tag 03D8); derived.tex, Tag 06YY; ordinary restriction and compositor part of step 3 of lem-fix-clopen-completed-restriction-comparison."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryIntegralNestedOpenRestriction",
+  "file": "lean/Sheaf/Paper/OrdinaryIntegralNestedOpenRestriction.lean",
+  "declaration": "WeilConjectures.ordinaryIntegralNestedOpenRestriction",
+  "statement": "theorem ordinaryIntegralNestedOpenRestriction\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (W V : Scheme.{u}) (f : V ⟶ W) (U A : V.Opens) (hAU : A ≤ U) :\n    Nonempty (ordinaryIntegralDerivedPull l E (A.ι ≫ f) ≅\n      ordinaryIntegralDerivedPull l E f ⋙\n        OpenCompletedRestriction.derivedRestriction l E U.ι ⋙\n          OpenCompletedRestriction.derivedRestriction l E (V.homOfLE hAU))",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261027T034749-L-3683987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T094518-L-237466",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

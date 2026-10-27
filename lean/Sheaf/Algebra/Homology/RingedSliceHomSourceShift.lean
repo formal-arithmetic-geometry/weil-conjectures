@@ -6,6 +6,7 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+public import Sheaf.CategoryTheory.RingedSiteDualityMaps
 public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 public import Sheaf.Algebra.Homology.RingedSliceEvaluationModels
 import all Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses

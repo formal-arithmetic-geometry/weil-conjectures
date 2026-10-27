@@ -1,0 +1,362 @@
+{
+ "id": "lem-pur-unit-kummer-two-site-normalization",
+ "kind": "statement",
+ "title": "Unit kummer two site normalization",
+ "statement": "Let $m\\geq1$, $A$ a finite commutative ring with $mA=0$, and $X$ a scheme on which $m$ is invertible [def-pc-scheme]. On its small etale site use the unit sheaf $\\mathbf G_m$, the roots $\\mu_m=\\ker([m]:\\mathbf G_m\\to\\mathbf G_m)$, and the Kummer short exact sequence [lem-amb-kummer-any-base, def-sc-gm-torsor]. Write $\\delta_X:\\Gamma(X,\\mathcal O_X)^\\times\\to H^1(X_{\\mathrm{et}},\\mu_m)$ for its right-derived-global-sections boundary [def-weil-pbc-sites-and-cohomology, lem-weil-pbc-right-derived-universal-delta-functor]. Put $L_X^{\\mathrm{et}}=\\mu_m^{\\mathrm{et}}\\otimes_{\\mathbf Z/m}A_X$ and $L_X^{\\mathrm{pro}}=\\mu_m^{\\mathrm{pro}}\\otimes_{\\mathbf Z/m}A_X$, with constant coefficients, sheaf tensors, comparison $\\nu_X$, and cohomology of underlying abelian sheaves [def-weil-pbc-constant-sheaf, def-pur-sheaf-tensor-product, def-weil-pbc-site-comparison-morphism, def-weil-pbc-etale-cohomology, def-pur-roots-of-unity-sheaf]. Let $c_X:\\nu_X^{-1}\\mu_m^{\\mathrm{et}}\\cong\\mu_m^{\\mathrm{pro}}$ be the same-root comparison [lem-amb-finite-root-site-comparison], and set $\\varphi_X^{\\mathrm{et}}(z)=z\\otimes1_A$, $\\varphi_X^{\\mathrm{pro}}(z)=z\\otimes1_A$. Define\n$$\\kappa_X^{\\mathrm{et}}(u)=H^1(\\varphi_X^{\\mathrm{et}})\\delta_X(u),\\qquad \\kappa_X^{\\mathrm{pro}}(u)=H^1(\\varphi_X^{\\mathrm{pro}}c_X)\\operatorname{comp}_X(\\delta_X(u)),$$\nwhere $\\operatorname{comp}_X$ is the canonical etale-to-pro-etale cohomology comparison.\n\nFor units $u,w$ on $X$ and every $v:X'\\to X$ one has, on both sites,\n$$\\kappa_X(uw)=\\kappa_X(u)+\\kappa_X(w),\\qquad v^*\\kappa_X(u)=\\kappa_{X'}(v^*u),$$\nunder the canonical roots-and-tensor pullback identifications. The coefficient comparison $\\nu_X^*L_X^{\\mathrm{et}}\\cong L_X^{\\mathrm{pro}}$ sends $\\kappa_X^{\\mathrm{et}}(u)$ to exactly $\\kappa_X^{\\mathrm{pro}}(u)$ and intertwines these identities and geometric pullback. More precisely the morphism of ordinary Kummer sequences induced by pullback of units and roots gives $v^*\\delta_X(u)=\\delta_{X'}(v^*u)$, and the coefficient square with $z\\mapsto z\\otimes1_A$ commutes as a square of abelian sheaves.\n\nFor the finite purity datum $k,\\ell,E,n,A$ of [def-pur-conventions] and $m=\\ell^n$, the projection-induced identification $L_X^{\\mathrm{pro}}\\cong A_X(1)$ of [def-pur-frame-class] sends this class to the concrete $\\kappa_X(u)$ prescribed there, for every $k$-scheme $X$ and every $n\\geq1$. No freeness or flatness of $A$ over $\\mathbf Z/m$, Cartier support, or tensor product of $\\mathbf G_m$ over $\\mathbf Z/m$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PL, lemma-kummer-sequence; explicit degree-one, coefficient-map and two-site normalization of lem-pur-supported-cup-functoriality Step 8, formulated by the agent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-amb-kummer-any-base",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-etale-cohomology",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-amb-finite-root-site-comparison",
+  "def-pur-conventions",
+  "def-pur-frame-class",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-pur-frame-kummer-class",
+  "def-sbc-raw-module-scalar-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-amb-kummer-any-base] with exponent $m$. The connecting map of [lem-weil-pbc-right-derived-universal-delta-functor] is a morphism of abelian groups. Since the group law in $\\mathbf G_m$ is multiplication, this gives $\\delta_X(uw)=\\delta_X(u)+\\delta_X(w)$. The maps $H^1(\\varphi_X^{\\mathrm{et}})$, $\\operatorname{comp}_X$ and $H^1(\\varphi_X^{\\mathrm{pro}}c_X)$ are homomorphisms: cohomology is a functor to abelian groups [def-weil-pbc-sites-and-cohomology], and the comparison is the homomorphism of [lem-cbc-abelian-etale-proetale-cohomology-comparison]. Applying these homomorphisms to the displayed equality proves additivity on each site. The scalar insertion is constructed in Lean by the scalar-extension adjunction applied to the sheafification unit, followed by forgetting scalars; its component formula and natural-transformation extensionality prove the required unique specification.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence; derived.tex Tags 015B and 05TE"
+   }
+  },
+  {
+   "text": "Let $v:X'\\to X$. The image of the inverse of $m$ is an inverse on $X'$, so [lem-amb-kummer-any-base] applies there too. Write $a:v_{\\mathrm{et}}^{-1}\\mu_{m,X}\\to\\mu_{m,X'}$ and $b:v_{\\mathrm{et}}^{-1}\\mathbf G_{m,X}\\to\\mathbf G_{m,X'}$ for pullback of roots and units; $a$ is the root isomorphism of [lem-asd-etale-finite-twist-pullback]. Pullback of units gives $b(z^m)=b(z)^m$, and $a$ is the restriction of $b$ to the kernel. Thus $(a,b,b)$ is a morphism from the inverse-image Kummer sequence to the Kummer sequence on $X'$. By [lem-weil-pbc-pullback-cohomology-long-exact-ladder], inverse image commutes with the degree-zero boundary; then naturality for morphisms of short exact sequences in [lem-weil-pbc-right-derived-universal-delta-functor] gives\n$$H^1(a)v_{\\mathrm{et}}^*\\delta_X(u)=\\delta_{X'}\\bigl(H^0(b)v_{\\mathrm{et}}^*u\\bigr)=\\delta_{X'}(v^*u).$$\nThe last equality is [lem-weil-pbc-cohomology-pullback-degree-zero] followed by the defining pullback-of-units map $b$. In particular, $b$ need not be an isomorphism, and $\\mathbf G_m$ is used only as an abelian sheaf.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PL, lemma-kummer-sequence; Section Tag 04I0, section-functoriality; derived.tex Tag 05TE"
+   }
+  },
+  {
+   "text": "Put $e:v_{\\mathrm{et}}^*L_X^{\\mathrm{et}}\\xrightarrow{\\sim}L_{X'}^{\\mathrm{et}}$ for the root-tensor pullback of [lem-asd-etale-finite-twist-pullback]. The square\n$$e\\,v_{\\mathrm{et}}^{-1}(\\varphi_X^{\\mathrm{et}})=\\varphi_{X'}^{\\mathrm{et}}a$$\ncommutes: on a local root $z$ both maps are $a(z)\\otimes1_A$. This is a sheaf identity, since the maps are induced on presheaf tensors and then sheafified [def-pur-sheaf-tensor-product]. Pullback fixes the scalar section $1_A$. Naturality of cohomology pullback with respect to coefficient maps [lem-weil-pbc-cohomology-pullback-functorial] and Step 2 now give\n$$H^1(e)v_{\\mathrm{et}}^*\\kappa_X^{\\mathrm{et}}(u)=H^1(e\\,v_{\\mathrm{et}}^{-1}\\varphi_X^{\\mathrm{et}})v_{\\mathrm{et}}^*\\delta_X(u)=\\kappa_{X'}^{\\mathrm{et}}(v^*u).$$\nNo short exact sequence has been tensored with $A$ in this argument.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section Tag 04I0, section-functoriality; coefficient-map calculation from the sheaf tensor definition"
+   }
+  },
+  {
+   "text": "Write $\\sigma_X:\\nu_X^*L_X^{\\mathrm{et}}\\cong L_X^{\\mathrm{pro}}$ for [lem-amb-finite-root-site-comparison]. Its prescribed local formula $z\\otimes a\\mapsto z\\otimes a$ gives the equality of abelian-sheaf morphisms\n$$\\sigma_X\\nu_X^{-1}(\\varphi_X^{\\mathrm{et}})=\\varphi_X^{\\mathrm{pro}}c_X.$$\nApply the naturality in the coefficient sheaf of canonical cohomology pullback [lem-weil-pbc-site-cohomology-pullback](2) to $\\nu_X$ and $\\varphi_X^{\\mathrm{et}}$. The isomorphism [lem-cbc-abelian-etale-proetale-cohomology-comparison] is this same canonical pullback. Thus, writing $C_X=H^1(\\sigma_X)\\operatorname{comp}_{X,L_X^{\\mathrm{et}}}$,\n$$C_X\\kappa_X^{\\mathrm{et}}(u)=H^1(\\sigma_X\\nu_X^{-1}\\varphi_X^{\\mathrm{et}})\\operatorname{comp}_{X,\\mu_m}\\delta_X(u)=\\kappa_X^{\\mathrm{pro}}(u).$$\nThis also identifies the additive identities of Step 1, since $C_X$ is a homomorphism.",
+   "uses": [
+    "lem-amb-finite-root-site-comparison",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099W, lemma-compare-cohomology; Tag 0GLZ, lemma-describe-pullback-from-etale; cohomology.tex Tag 01F8"
+   }
+  },
+  {
+   "text": "Let $d=d^v_m:v_{\\mathrm{proet}}^*L_X^{\\mathrm{pro}}\\xrightarrow{\\sim}L_{X'}^{\\mathrm{pro}}$ be the pullback of [lem-amb-finite-root-site-comparison], induced by pullback of roots, so $d$ sends the pullback of a local $z\\otimes a$ to $v^\\sharp(z)\\otimes a$. The composites $\\nu_Xv_{\\mathrm{proet}}$ and $v_{\\mathrm{et}}\\nu_{X'}:X'_{\\mathrm{proet}}\\to X_{\\mathrm{et}}$ are the same morphism of sites $g$, given by $U\\mapsto X'\\times_XU$ with the chosen fibre products [def-weil-proetale-inverse-image, def-weil-pbc-inverse-image, def-weil-pbc-site-comparison-morphism]. By [lem-weil-pbc-site-cohomology-pullback](4), $v_{\\mathrm{proet}}^*\\nu_X^*=H^1(c_1^{-1})g^*$ and $\\nu_{X'}^*v_{\\mathrm{et}}^*=H^1(c_2^{-1})g^*$, where $c_1:v_{\\mathrm{proet}}^{-1}\\nu_X^{-1}\\cong g^{-1}$ and $c_2:\\nu_{X'}^{-1}v_{\\mathrm{et}}^{-1}\\cong g^{-1}$ are compatible with the units. With coefficient naturality (2),\n$$H^1(d)v_{\\mathrm{proet}}^*C_X=H^1(d\\,v_{\\mathrm{proet}}^{-1}\\sigma_X\\,c_1^{-1})g^*,\\qquad C_{X'}H^1(e)v_{\\mathrm{et}}^*=H^1(\\sigma_{X'}\\nu_{X'}^{-1}(e)\\,c_2^{-1})g^*.$$\nThe two sheaf maps $g^{-1}L_X^{\\mathrm{et}}\\to L_{X'}^{\\mathrm{pro}}$ agree: a map out of $g^{-1}$ is determined by its composite with the unit of $g$, which $c_1,c_2$ carry to the composite units, and on a local tensor $z\\otimes a$ over an etale $U\\to X$ both composites give $v^\\sharp(z)\\otimes a$ over $X'\\times_XU$, by the unit formula for $\\sigma$ in [lem-amb-finite-root-site-comparison], the root-tensor pullback $e$ of [lem-asd-etale-finite-twist-pullback] and the formula for $d$. Local tensors generate the sheafified tensor [def-pur-sheaf-tensor-product]. Hence $H^1(d)v_{\\mathrm{proet}}^*C_X=C_{X'}H^1(e)v_{\\mathrm{et}}^*$, the geometric compatibility of the coefficient comparison. Substituting $\\kappa_X^{\\mathrm{et}}(u)$ and Steps 3 and 4 gives $H^1(d)v_{\\mathrm{proet}}^*\\kappa_X^{\\mathrm{pro}}(u)=\\kappa_{X'}^{\\mathrm{pro}}(v^*u)$. The pro-etale coefficient square $d\\,v_{\\mathrm{proet}}^{-1}(\\varphi_X^{\\mathrm{pro}})=\\varphi_{X'}^{\\mathrm{pro}}a^{\\mathrm{pro}}$, with $a^{\\mathrm{pro}}:v_{\\mathrm{proet}}^{-1}\\mu^{\\mathrm{pro}}_{m,X}\\to\\mu^{\\mathrm{pro}}_{m,X'}$ the root map adjoint to pullback of units, holds since both send a local root to its pulled-back root tensored with $1_A$; identities and composites are respected by the same unit argument.",
+   "uses": [
+    "lem-amb-finite-root-site-comparison",
+    "lem-weil-pbc-site-cohomology-pullback",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "composition of cohomology pullbacks along morphisms of sites (Tag 08J6 context); proetale.tex Tag 0GLZ, lemma-describe-pullback-from-etale; unit-adjoint calculation on local tensors"
+   }
+  },
+  {
+   "text": "Finally take the datum of [def-pur-conventions] and $m=\\ell^n$. The identification in [def-pur-frame-class] is $\\theta_X:A(1)_X\\cong L_X^{\\mathrm{pro}}$, and that definition prescribes the map from roots as $\\theta_X^{-1}\\varphi_X^{\\mathrm{pro}}$. Its map $\\rho_X$ sends a root to the identical root, hence is $c_X$ by the same-root characterization in [lem-amb-finite-root-site-comparison]. Consequently\n$$H^1(\\theta_X^{-1})\\kappa_X^{\\mathrm{pro}}(u)=H^1(\\theta_X^{-1}\\varphi_X^{\\mathrm{pro}}\\rho_X)\\operatorname{comp}_X\\delta_X(u),$$\nwhich is exactly the concrete formula defining $\\kappa_X(u)$ there. The hypotheses hold for every $k$-scheme: $\\ell\\ne p$ makes $m$ invertible, and $\\ell\\in(\\varpi_E)$ implies $\\ell^nA=0$. This substitution uses the given projection-induced identification and imposes no flatness or Cartier condition.",
+   "uses": [
+    "def-pur-conventions",
+    "def-pur-frame-class",
+    "lem-amb-finite-root-site-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Unit multiples'; concrete normalization is the live statement of def-pur-frame-class"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-amb-finite-root-site-comparison",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pur-conventions",
+  "def-pur-frame-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PL; proetale.tex Tags 099W and 0GLZ. C2 partial proof: the scalar-insertion existence and uniqueness is complete. The normalization and finite-frame proofs remain open, with the existing planned route retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Degree one Kummer boundary for units with arbitrary finite coefficient ring is additive natural for arbitrary scheme pullback and compatible with etale proetale root normalized comparison",
+   "results": "[leanfinder] OK 8 hit(s); StandardEtalePair.homEquiv_apply_coe [Mathlib/RingTheory/Etale/StandardEtale]; StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x [Mathlib/RingTheory/Etale/StandardEtale]; StandardEtalePair.homEquiv [Mathlib/RingTheory/Etale/StandardEtale]; StandardEtalePair.hasMap_X [Mathlib/RingTheory/Etale/StandardEtale]; StandardEtalePresentation.toPresentation_σ' [Mathlib/RingTheory/Etale/StandardEtale]; StandardEtalePair.homEquiv_symm_apply [Mathlib/RingTheory/Etale/StandardEtale]; StandardEtalePair.lift_X [Mathlib/RingTheory/Etale/StandardEtale]; StandardEtalePair.HasMap [Mathlib/RingTheory/Etale/StandardEtale]",
+   "date": "2026-10-22",
+   "verdict": "no match: Kummer field extensions, number-theoretic Kummer theorems, cotangent maps and group cohomology do not state the two-site degree-one unit-boundary normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of Kummer sequence roots of unity followed by z tensor one yields natural unit cohomology class without coefficient flatness",
+   "results": "[leanfinder] OK 8 hit(s); groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units [Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90]; Algebra.Extension.tensorH1Cotangent [Mathlib/RingTheory/Etale/Kaehler]; groupCohomology.exists_mul_galRestrict_of_norm_eq_one [Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90]; Algebra.Generators.H1Cotangent.δ_eq [Mathlib/RingTheory/Kaehler/JacobiZariski]; Algebra.tensorH1CotangentOfIsLocalization_toLinearMap [Mathlib/RingTheory/Etale/Kaehler]; IsDedekindDomain.selmerGroup.fromUnitLift [Mathlib/RingTheory/DedekindDomain/SelmerGroup]; groupCohomology.H1ofAutOnUnitsUnique [Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90]; Algebra.H1Cotangent.map [Mathlib/RingTheory/Extension/Cotangent/Basic]",
+   "date": "2026-10-22",
+   "verdict": "no match: Kummer field extensions, number-theoretic Kummer theorems, cotangent maps and group cohomology do not state the two-site degree-one unit-boundary normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Sheaf",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: Kummer field extensions, number-theoretic Kummer theorems, cotangent maps and group cohomology do not state the two-site degree-one unit-boundary normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]ummer|kummerClass|kummer_class",
+   "results": "[grep] OK 25 hit(s); Mathlib/NumberTheory/KummerDedekind.lean:13 [# Kummer-Dedekind theorem]; Mathlib/NumberTheory/KummerDedekind.lean:15 [This file proves the Kummer-Dedekind theorem on the splitting of prime ideals in an extension of]; Mathlib/NumberTheory/KummerDedekind.lean:29 [* `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` : The bijection in the Kummer-Dedekind]; Mathlib/NumberTheory/KummerDedekind.lean:35 [* `normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map` : The Kummer-Dedekind]; Mathlib/NumberTheory/KummerDedekind.lean:56 [kummer, dedekind, kummer dedekind, dedekind-kummer, dedekind kummer]; Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:45 [* `padicValNat_choose`: Kummer's Theorem. The `p`-adic valuation of `n.choose k` is the number]; Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:50 [* `sub_one_mul_padicValNat_choose_eq_sub_sum_digits`: Kummer's Theorem. Taking (`p - 1`) times the]; Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:612 [/-- **Kummer's Theorem**]; Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:622 [/-- **Kummer's Theorem**]; Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:632 [/-- **Kummer's Theorem**]; Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean:9 [public import Mathlib.NumberTheory.NumberField.Ideal.KummerDedekind]; Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean:28 [This is a special case of the so-called *Kummer's lemma* (see for example [washington_cyclotomic],]; Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean:99 [This is a special case of the so-called *Kummer's lemma*. -/]; Mathlib/FieldTheory/Perfect.lean:8 [public import Mathlib.FieldTheory.KummerPolynomial]; Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean:8 [public import Mathlib.NumberTheory.KummerDedekind]; Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean:14 [# Kummer-Dedekind criterion for the splitting of prime numbers]; Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean:16 [In this file, we give a specialized version of the Kummer-Dedekind criterion for the case of the]; Mathlib/NumberTheory/NumberField/Ideal/KummerDedekind.lean:54 [open Polynomial NumberField Ideal KummerDedekind UniqueFactorizationMonoid]; Mathlib/FieldTheory/KummerExtension.lean:14 [# Kummer Extensions]; Mathlib/FieldTheory/KummerExtension.lean:17 [Kummer theory is about the classification of finite extensions of `L` whose Galois group is cyclic]; Mathlib/FieldTheory/KummerExtension.lean:49 [TODO: relate Kummer extensions of degree 2 with the class `Algebra.IsQuadraticExtension`.]; Mathlib/FieldTheory/KummerExtension.lean:170 [scoped[KummerExtension] notation3 \"K[\" n \"√\" a \"]\" => AdjoinRoot (Polynomial.X ^ n - Polynomial.C a)]; Mathlib/FieldTheory/KummerExtension.lean:172 [attribute [nolint docBlame] KummerExtension.«termK[_√_]»]; Mathlib/NumberTheory/FLT/Three.lean:45 [  case of Kummer's lemma.]; Mathlib/RingTheory/AdjoinRoot.lean:829 [-- `normalizedFactorsMapEquivNormalizedFactorsMinPolyMk` in `NumberTheory.KummerDedekind`]",
+   "date": "2026-10-22",
+   "verdict": "no match: Kummer field extensions, number-theoretic Kummer theorems, cotangent maps and group cohomology do not state the two-site degree-one unit-boundary normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer unit classes coefficient extension etale proetale comparison naturality",
+   "results": "[leansearch] OK 8 hit(s); autAdjoinRootXPowSubCEquiv_symm_smul [Mathlib.FieldTheory.KummerExtension]; autAdjoinRootXPowSubC_root [Mathlib.FieldTheory.KummerExtension]; restrictRootsOfUnity_coe_apply [Mathlib.RingTheory.RootsOfUnity.Basic]; ValuationSubring.coe_unitGroupMulEquiv_apply [Mathlib.RingTheory.Valuation.ValuationSubring]; adjoinRootXPowSubCEquiv.congr_simp [Mathlib.FieldTheory.KummerExtension]; NumberField.Units.fundSystem_mk [Mathlib.NumberTheory.NumberField.Units.DirichletTheorem]; NumberField.Units.coe_zpow [Mathlib.NumberTheory.NumberField.Units.Basic]; Algebra.Extension.H1Cotangent.map_apply_coe [Mathlib.RingTheory.Extension.Cotangent.Basic]",
+   "date": "2026-10-22",
+   "verdict": "no match: Kummer field extensions, number-theoretic Kummer theorems, cotangent maps and group cohomology do not state the two-site degree-one unit-boundary normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]ummer|kummerClass|kummer_class",
+   "results": "[grep] OK 25 hit(s); Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/KummerDedekind.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field/Selmer Kummer theory, roots in rings, or general sheaf cohomology; none states the two-site unit-class normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology class of a unit from the Kummer sequence is natural for pullback and extension of coefficients",
+   "results": "[leansearch] OK 8 hit(s); groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units; groupCohomology.H1ofAutOnUnitsUnique; CochainComplex.HomComplex.CohomologyClass; CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply; groupCohomology.mapCocycles₁_comp_i; CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass; restrictRootsOfUnity_coe_apply; Algebra.Extension.H1Cotangent.map_apply_coe",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field/Selmer Kummer theory, roots in rings, or general sheaf cohomology; none states the two-site unit-class normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"cohomology\"",
+   "results": "[loogle] OK 3 hit(s); CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.cohomologyFunctor; CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field/Selmer Kummer theory, roots in rings, or general sheaf cohomology; none states the two-site unit-class normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer boundary of global units is additive and compatible with arbitrary scheme pullback and etale proetale comparison",
+   "results": "[leanfinder] OK 8 hit(s); IsDedekindDomain.selmerGroup.fromUnit; IsDedekindDomain.selmerGroup.fromUnitLift; IsDedekindDomain.selmerGroup.fromUnit_ker; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; Algebra.Generators.H1Cotangent.δ; Algebra.H1Cotangent.map; IsDedekindDomain.selmerGroup; Algebra.Generators.H1Cotangent.δ_map",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field/Selmer Kummer theory, roots in rings, or general sheaf cohomology; none states the two-site unit-class normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connecting homomorphism of the roots of unity exact sequence followed by z tensor one defines a natural additive unit class",
+   "results": "[leanfinder] OK 8 hit(s); IsDedekindDomain.selmerGroup.fromUnitLift; IsDedekindDomain.selmerGroup.fromUnit; Ideal.rootsOfUnityMapQuot_apply; Ideal.rootsOfUnityMapQuot; cyclotomicCharacter; NumberField.Units.rootsOfUnity_eq_torsion; rootsOfUnityUnitsMulEquiv; IsDedekindDomain.selmerGroup.fromUnit_ker",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern field/Selmer Kummer theory, roots in rings, or general sheaf cohomology; none states the two-site unit-class normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-supported-cup-functoriality",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Proof 'Unit multiples': 'kappa(uf_1)=kappa(u)+kappa(f_1)'; and pullback of those Kummer classes in the family in 'Elementary shears'.",
+   "via": [
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-unit-kummer-two-site-normalization",
+  "worker": "stage1",
+  "summary": "Q40: six explicit steps assemble the existing ordinary Kummer boundary, pullback ladder, root/tensor comparison and abelian cohomology comparison. No new node and no statement correction. Tensoring G_m or assuming coefficient flatness is unnecessary. Checked the final class against the projection-induced concrete definition for every n. Maintainer reader (Q40 review, 2026-10-22): Step 5 rewritten to compare the two composite site pullbacks through their unit-compatible composition isomorphisms instead of the unit normalization of the comparison-pullback square, which only that node's proof states.",
+  "blueprint": "lem-pur-frame-independence, proof 'Unit multiples' (additivity) and 'Elementary shears' (pullback of unit Kummer classes); also the Kummer-generator base-change step of sk-prop-a1-kummer.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-kummer-any-base",
+    "why": "Ordinary Kummer exactness for arbitrary schemes; the unit needs the same sequence and supplies no separate general exactness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "The additive connecting homomorphism and naturality for morphisms of short exact sequences; generic homological algebra, not a replacement purity route."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Underlying abelian cohomology and its functoriality on both sites; generic definition."
+   },
+   {
+    "node": "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "why": "Canonical comparison for abelian sheaves, including the root sheaf before extension of coefficients; the unit has no general comparison theorem."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Root and root-tensor inverse-image identifications for arbitrary scheme maps and coefficients; generic finite-twist tool."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Commutation of ordinary right-derived boundaries with scheme inverse image; needed before applying the coefficient map."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "Identifies the degree-zero map of the Kummer ladder with actual pullback of a global unit."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Generic sheaf-theoretic definition used for the coefficient construction; it does not replace a step of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Naturality for the etale coefficient map z tensor one."
+   },
+   {
+    "node": "lem-amb-finite-root-site-comparison",
+    "why": "Same-root, balanced-tensor and geometric-square formulas; generic coefficient comparison, not another purity proof."
+   },
+   {
+    "node": "lem-weil-pbc-site-cohomology-pullback",
+    "why": "Only coefficient naturality and composition of cohomology pullback (clauses 2 and 4) are used; its boundary convention is not used."
+   },
+   {
+    "node": "def-pur-conventions",
+    "why": "Generic sheaf-theoretic definition used for the coefficient construction; it does not replace a step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-kummer-any-base",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-amb-finite-root-site-comparison",
+  "lem-weil-pbc-site-cohomology-pullback",
+  "def-pur-conventions"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-fcb839611",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-fcb839611 (reviewer sub-agent of L); spot-checked: Read the item, all 21 cited statements, Stacks 03PL (etale-cohomology l.2842), Stacks 099W, the blueprint frame-independence 'Unit multiples'/'Elementary shears' and the unit sk-prop-a1-kummer. One commit, no new nodes, statement identical to live/side-live (still unsplit there), no repair note; the two added stmt_deps (lem-cbc abelian comparison, lem-asd finite-twist pullback) are named by the statement. Edge cases checked: m=1 (A=0), empty X, u=1, inverse units, non-flat A. Step 6 checked against def-pur-frame-class: rho_W equals c_X since both have the same identical-root adjoint, so H^1(theta^-1)kappa^pro is kappa_W, also when e does not divide n. Steps 1-4 are correct. Step 2 uses the triangle convention for delta throughout (ladder plus universal-delta naturality), consistent with the DAG's recorded reading. Maintainer note: the universal-delta node's statement is existential and its Lean proof uses the horseshoe delta; this item and def-pur-frame-class inherit that ambiguity, it is not introduced here. FIX for C3/C4 in Step 5: it needed kappa_v of lem-weil-pbc-comparison-pullback to be the unit-compatible iso, which only that node's proof states (the conjugate lemma gives uniqueness, not identity). Step 5 is rewritten to use the common composite site morphism g (U to X' x_X U), clause (4) of site-cohomology-pullback with unit-compatible c1 and c2, clause (2), and a unit check on local tensors z (x) a (sigma's unit formula, the definitions of e and d). This yields H^1(d)v*C_X = C_X' H^1(e)v*, then the class identity via Steps 3 and 4. proof_deps recomputed; comparison-pullback and conjugate-unit-equation removed from proof_deps and tool_uses; statement and stmt_deps unchanged. Declared tool uses are accepted as generic black boxes. Full file in fixes/dag/nodes/sec-smooth-purity/; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UnitKummerTwoSiteNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.UnitKummer.normalization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.UnitKummer.forgetPro",
+   "AlgebraicGeometry.Scheme.UnitKummer.etaleLine",
+   "AlgebraicGeometry.Scheme.UnitKummer.proLine",
+   "AlgebraicGeometry.Scheme.UnitKummer.proInsertion_existsUnique",
+   "AlgebraicGeometry.Scheme.UnitKummer.proInsertion",
+   "AlgebraicGeometry.Scheme.UnitKummer.tensorComparison",
+   "AlgebraicGeometry.Scheme.UnitKummer.tensorPullback",
+   "AlgebraicGeometry.Scheme.UnitKummer.comparisonForget",
+   "AlgebraicGeometry.Scheme.UnitKummer.comparison",
+   "AlgebraicGeometry.Scheme.UnitKummer.etalePullback",
+   "AlgebraicGeometry.Scheme.UnitKummer.proPullback",
+   "AlgebraicGeometry.Scheme.UnitKummer.proCohomologyPullback",
+   "AlgebraicGeometry.Scheme.UnitKummer.etaleClass",
+   "AlgebraicGeometry.Scheme.UnitKummer.proClass",
+   "AlgebraicGeometry.Scheme.UnitKummer.compareClass",
+   "AlgebraicGeometry.Scheme.UnitKummer.frameIntegralGenerator",
+   "AlgebraicGeometry.Scheme.UnitKummer.frameAbelianClass",
+   "AlgebraicGeometry.Scheme.UnitKummer.normalization",
+   "AlgebraicGeometry.Scheme.UnitKummer.frame_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/UnitKummerTwoSiteNormalization.lean",
+  "statement": "theorem normalization (A : Type (u + 1)) [CommRing A] [Finite A] (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0) : (∀ (X : Scheme.{u}) (W : X.ProEtᵒᵖ) (z : (proEtaleRootsOfUnitySheaf X m).obj.obj W), (proInsertion A m hm hA X).hom.app W z = finiteRootProGenerator A m hm hA X W 1 z) ∧ (∀ (X : Scheme.{u}) (hX : IsUnit (m : Γ(X, ⊤))), IsIso (comparison A m hm hA X hX)) ∧ (∀ (X : Scheme.{u}) (hX : IsUnit (m : Γ(X, ⊤))) (u w : Γ(X, ⊤)ˣ), etaleClass A m hA X hX (u * w) = etaleClass A m hA X hX u + etaleClass A m hA X hX w) ∧ (∀ (X : Scheme.{u}) (hX : IsUnit (m : Γ(X, ⊤))) (u w : Γ(X, ⊤)ˣ), proClass A m hm hA X hX (u * w) = proClass A m hm hA X hX u + proClass A m hm hA X hX w) ∧ (∀ {X Y : Scheme.{u}} (v : Y ⟶ X) (hX : IsUnit (m : Γ(X, ⊤))) (hY : IsUnit (m : Γ(Y, ⊤))), IsIso (etalePullback A m hm hA v hX hY) ∧ IsIso (proPullback A m hm hA v)) ∧ (∀ {X Y : Scheme.{u}} (v : Y ⟶ X) (hX : IsUnit (m : Γ(X, ⊤))), (Etale.upperStar AddCommGrpCat.{u + 1} v).map (kernel.ι (m • 𝟙 X.gmSheaf)) ≫ upperStarGmSheafToGmSheaf v = ((finiteEtaleTwistPullbackData A m hm hA).r v hX).hom ≫ kernel.ι (m • 𝟙 Y.gmSheaf) ∧ (Etale.upperStar AddCommGrpCat.{u + 1} v).map (m • 𝟙 X.gmSheaf) ≫ upperStarGmSheafToGmSheaf v = upperStarGmSheafToGmSheaf v ≫ (m • 𝟙 Y.gmSheaf)) ∧ (∀ {X Y : Scheme.{u}} (v : Y ⟶ X) (hX : IsUnit (m : Γ(X, ⊤))) (hY : IsUnit (m : Γ(Y, ⊤))) (u : Γ(X, ⊤)ˣ), Sheaf.H.map ((finiteEtaleTwistPullbackData A m hm hA).r v hX).hom 1 (Etale.cohomologyMap v (X.rootsOfUnitySheaf m) 1 (X.kummerδ₀ m hX (Additive.ofMul u))) = Y.kummerδ₀ m hY (Additive.ofMul (Units.map v.appTop.hom.toMonoidHom u))) ∧ (∀ {X Y : Scheme.{u}} (v : Y ⟶ X) (hX : IsUnit (m : Γ(X, ⊤))) (hY : IsUnit (m : Γ(Y, ⊤))), (Etale.upperStar AddCommGrpCat.{u + 1} v).map (Etale.ordinaryFiniteRootMap A m hA X) ≫ etalePullback A m hm hA v hX hY = ((finiteEtaleTwistPullbackData A m hm hA).r v hX).hom ≫ Etale.ordinaryFiniteRootMap A m hA Y) ∧ (∀ {X Y : Scheme.{u}} (v : Y ⟶ X), (proEtaleSheafInverseImage v AddCommGrpCat.{u + 1}).map (proInsertion A m hm hA X) ≫ proPullback A m hm hA v = proEtaleRootsOfUnityInverseImageMap v m ≫ proInsertion A m hm hA Y) ∧ (∀ (X : Scheme.{u}) (hX : IsUnit (m : Γ(X, ⊤))), (comparisonUpperStar AddCommGrpCat.{u + 1} X).map (Etale.ordinaryFiniteRootMap A m hA X) ≫ comparison A m hm hA X hX = (ProEtale.cartierRootsIso X m hm hX).hom ≫ proInsertion A m hm hA X) ∧ (∀ {X Y : Scheme.{u}} (v : Y ⟶ X) (hX : IsUnit (m : Γ(X, ⊤))) (hY : IsUnit (m : Γ(Y, ⊤))) (u : Γ(X, ⊤)ˣ), Sheaf.H.map (etalePullback A m hm hA v hX hY) 1 (Etale.cohomologyMap v (etaleLine A m hA X) 1 (etaleClass A m hA X hX u)) = etaleClass A m hA Y hY (Units.map v.appTop.hom.toMonoidHom u)) ∧ (∀ {X Y : Scheme.{u}} (v : Y ⟶ X) (hX : IsUnit (m : Γ(X, ⊤))) (hY : IsUnit (m : Γ(Y, ⊤))) (u : Γ(X, ⊤)ˣ), Sheaf.H.map (proPullback A m hm hA v) 1 (proCohomologyPullback v (proLine A m hm hA X) 1 (proClass A m hm hA X hX u)) = proClass A m hm hA Y hY (Units.map v.appTop.hom.toMonoidHom u)) ∧ (∀ (X : Scheme.{u}) (hX : IsUnit (m : Γ(X, ⊤))) (u : Γ(X, ⊤)ˣ), compareClass A m hm hA X hX (etaleClass A m hA X hX u) = proClass A m hm hA X hX u) ∧ (∀ {X Y : Scheme.{u}} (v : Y ⟶ X) (hX : IsUnit (m : Γ(X, ⊤))) (hY : IsUnit (m : Γ(Y, ⊤))) (x : Sheaf.H (etaleLine A m hA X) 1), Sheaf.H.map (proPullback A m hm hA v) 1 (proCohomologyPullback v (proLine A m hm hA X) 1 (compareClass A m hm hA X hX x)) = compareClass A m hm hA Y hY (Sheaf.H.map (etalePullback A m hm hA v hX hY) 1 (Etale.cohomologyMap v (etaleLine A m hA X) 1 x)))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Abelian cohomology, the ordinary Kummer boundary, both canonical coefficient squares and arbitrary geometric pullback are explicit. frame_normalization identifies the published concrete frameKummer at every finite level; no ramification divisibility or coefficient flatness hypothesis. The scalar insertion is uniquely determined sectionwise."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-176de6eb2",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Read the item, the delivered module, the report and all 18 stmt_dep records, plus the source of FiniteRootSiteComparison (spec + proved theorem), EtaleFiniteTwistPullback, AbelianEtaleProEtaleCohomologyComparison, OrdinaryFiniteP1Kummer, Kummer, PurityFrameKummer, PurityFiniteSetting, diagonalExponent, ProEtaleRootsOfUnityInverseImage and CartierReductionData. Only the lean record and 3 definition-node stmt_deps were added (no cycle, no theorem node added). lean.statement is verbatim and the 19 declarations match. Every clause maps to a conjunct: additivity on both sites; the Kummer-sequence morphism (a,b,b) with b not invertible; v*delta = delta(v*u); the etale, pro-etale and site coefficient squares; v*kappa = kappa(v*u) on both sites; sigma(kappa_et) = kappa_pro; sigma commutes with pullback for all H^1 classes; frame_normalization at every level n>=1 with m = ell^level, no e|n requirement, through frameTwist = nu*(Tate line). Canonical data: proInsertion is the choose of an exists-unique statement, tensorComparison and tensorPullback are choose of the proved spec pinned on generators, and the remaining maps are adjunction mates. Not hollow, all theorems sorry, docstrings present, real ProEt site. Edge cases m=1, empty X, u=1, non-flat A and ramified levels are covered. Advisory: forgetPro and comparisonForget duplicate the theorem-owned cartierForget and cartierForgetComparison; the first Kummer square restates a dependency law; the second reading is a self-check. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-77fd5",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261025T201523-L-2560006",
+  "kind": "interface",
+  "note": "independent cc review: delivered UnitKummerTwoSiteNormalization.lean vs published clone (6 interface changes vs change records; bodies definitionally identical); node json vs clone (proof[0] text + proof_origin only); axioms of proInsertion_existsUnique"
+ }
+}

@@ -12,64 +12,59 @@
  ],
  "proof": [
   {
-   "text": "Let $V=\\{0,1\\}^{\\mathbb N}$ with the product topology, and embed it order-preservingly in the usual Cantor subset of $[0,1]$ by $c(x)=\\sum_{n\\ge0}2x_n3^{-n-1}$; $c$ is continuous and injective, so the lexicographic order on $V$ is the order induced by $c$. Let $D\\subset V$ be the set of sequences that are eventually equal to the periodic sequence $0101\\ldots$. It is countably infinite, every nonempty basic clopen cylinder $\\{x:x_0\\ldots x_{m-1}=w\\}$ contains the infinitely many points $w0^r(01)^\\infty$, $r\\ge0$, of $D$, and no point of $D$ is eventually constant. Enumerate $D=\\{v_k:k\\ge0\\}$ without repetition. Put $a_k=2^{-k-3}$, so $\\sum_k a_k=1/4$ and the $a_k$ are strictly decreasing. The Cantor space is nonempty, compact Hausdorff, metrizable, and totally disconnected. Since $D$ is countable and $V$ has no isolated points, $V\\setminus D$ is dense. Each $v_k$ has points of $V\\setminus D$ approaching it from both lexicographic sides: $v_k$ has infinitely many coordinates equal to $1$ and infinitely many equal to $0$, so changing a late coordinate $1$ to $0$ (resp. $0$ to $1$) and then choosing the remaining tail outside the countable set $D$ gives points of $V\\setminus D$ arbitrarily close to $v_k$ that are lexicographically smaller (resp. larger). (Eventually constant points such as $w10^\\infty$ would not do: it has the immediate predecessor $w01^\\infty$ and is approached from the right only.)",
+   "text": "Apply [lem-sfb-cantor-two-sided-dense-enumeration] to $V=\\{0,1\\}^{\\mathbb N}$. Compose its bijection $\\mathbb N\\to D$ with $D\\hookrightarrow V$ to obtain the distinct sequence $(v_k)$ with range $D$, and regard its coordinate $c:V\\to[0,1]$ as real-valued by inclusion. Put $A=V\\setminus D$. The lemma gives nonempty metrizable profinite $V$, dense $A$, two-sided approximation at every $v_k$, and density of every enumeration tail.",
    "uses": [
-    "def-weil-size-convention"
+    "lem-sfb-cantor-two-sided-dense-enumeration"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), pure-topology auxiliary; explicit Cantor-space setup"
+    "place": "Paragraph (3), agent-formulated topology auxiliary; assembly Step 1"
    }
   },
   {
-   "text": "For $x\\in V$ with $x\\neq v_k$ define $h_k(x)=a_k$ when $c(x)>c(v_k)$ and $h_k(x)=-a_k$ when $c(x)<c(v_k)$; $h_k$ is locally constant on $V\\setminus\\{v_k\\}$ because $c$ is continuous. Define $f(x)=\\sum_{k\\ge0}h_k(x)$ for $x\\in V\\setminus D$. The series converges uniformly because $|h_k|\\le a_k$. Hence $f$ is continuous at every $x\\notin D$: each summand is continuous at $x$, and a finite initial segment is continuous there while the uniformly small tail is bounded by $\\sum_{k>M}a_k$. At $v_k$, the sum $g_k=\\sum_{j\\ne k}h_j(v_k)$ is well-defined; the two one-sided limits of $f$ along points of $V\\setminus D$ (which exist on both sides by Step 1) are $g_k-a_k$ and $g_k+a_k$. The first assertion follows by the same finite-head/uniform-tail argument, and the two limits are distinct by $a_k>0$.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-sfb-summable-jump-graph-compactification] to these data: the real coordinate is continuous and injective, the enumeration has range $D$ and no repetitions, and the required density and side sequences come from Step 1. With $a_k=2^{-k-3}$, form its $f$, $g_k$ and graph closure $T$, and take the first projection $q$. It gives nonempty metrizable profinite $T$, continuous surjective $q$, exactly the two distinct fibre points $t_k^-,t_k^+$ over $v_k$, and singleton fibres elsewhere. Its dense graph $\\Gamma$ consists of points with singleton whole fibres.",
+   "uses": [
+    "lem-sfb-cantor-two-sided-dense-enumeration",
+    "lem-sfb-summable-jump-graph-compactification"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), pure-topology auxiliary; uniformly convergent step-function series"
+    "place": "Paragraph (3), agent-formulated topology auxiliary; assembly Step 2"
    }
   },
   {
-   "text": "Let $T$ be the closure in $V\\times[-1/4,1/4]$ of the graph $\\Gamma_f=\\{(x,f(x)):x\\in V\\setminus D\\}$, and let $q:T\\to V$ be the first projection. The closure is compact Hausdorff and metrizable. Since $V\\setminus D$ is dense in $V$, every $v\\in V$ is the limit of base points of graph points, so $q$ is surjective. For $v\\notin D$, continuity of $f$ at $v$ makes the fibre exactly $\\{(v,f(v))\\}$. For $v=v_k$, the two one-sided sequences from Step 2 give the points $t_k^-=(v_k,g_k-a_k)$ and $t_k^+=(v_k,g_k+a_k)$ in the fibre. Conversely, any convergent sequence of graph points over bases tending to $v_k$ has, after taking a side-subsequence, one of those two limits; thus the fibre is exactly these two points.",
-   "uses": [],
-   "elementary": true,
+   "text": "Let $H:T\\to\\mathbb R$ be the second coordinate of $T\\subseteq V\\times[-1/4,1/4]$; it is continuous by the product and subspace topologies. The explicit fibre points of [lem-sfb-summable-jump-graph-compactification] give $H(t_k^+)-H(t_k^-)=(g_k+a_k)-(g_k-a_k)=2a_k=2^{-k-2}>0$. That lemma also gives Hausdorff $T$ and singleton fibres outside $D$. Apply [lem-sfb-dyadic-height-relation-isolation] to this same $q,H,v,t^-,t^+$; its relation is exactly the subspace $T\\times_VT$ in our statement, so both required ordered-pair singletons are clopen.",
+   "uses": [
+    "lem-sfb-summable-jump-graph-compactification",
+    "lem-sfb-dyadic-height-relation-isolation"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), pure-topology auxiliary; graph closure and fibre calculation"
+    "place": "Paragraph (3), agent-formulated topology auxiliary; assembly Step 3"
    }
   },
   {
-   "text": "The space $T$ is totally disconnected. Indeed, if $C\\subseteq T$ is connected, then $q(C)$ is connected in the totally disconnected space $V$, hence is a singleton; $C$ is therefore contained in one fibre of $q$, which has one or two points, and a finite subspace of the Hausdorff space $T$ is discrete. Thus every connected subset is a singleton. Consequently $T$ is a nonempty metrizable profinite space, and $V$ is one as well.",
-   "uses": [],
-   "elementary": true,
+   "text": "Apply [lem-sfb-dense-singleton-fibres-tail-lifting] with $S=\\Gamma$. Step 2 supplies compact Hausdorff $T$, Hausdorff $V$, and continuous surjective $q$. It also gives dense $\\Gamma$ and, for every $s=(x,f(x))\\in\\Gamma$, the whole fibre $q^{-1}(\\{q(s)\\})=\\{s\\}$. Step 1 supplies tail density of $v$. Thus every nonempty open $U\\subseteq T$ and $N$ admit $k\\ge N$ with $q^{-1}(\\{v_k\\})\\subseteq U$. Step 2 identifies this fibre as $\\{t_k^-,t_k^+\\}$, so both points lie in $U$. This verifies the last clause.",
+   "uses": [
+    "lem-sfb-cantor-two-sided-dense-enumeration",
+    "lem-sfb-summable-jump-graph-compactification",
+    "lem-sfb-dense-singleton-fibres-tail-lifting"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), pure-topology auxiliary; total disconnectedness"
-   }
-  },
-  {
-   "text": "Put $R=T\\times_VT$. The only off-diagonal points of $R$ are the ordered pairs $(t_k^-,t_k^+)$ and $(t_k^+,t_k^-)$, by Step 3. Fix $k$ and let $I^-=(g_k-\\tfrac32a_k,\\,g_k-\\tfrac12a_k)$ and $I^+=(g_k+\\tfrac12a_k,\\,g_k+\\tfrac32a_k)$; they are disjoint open intervals containing the heights $g_k-a_k$ and $g_k+a_k$ of $t_k^-$ and $t_k^+$, and every height in $I^+$ exceeds every height in $I^-$ by more than $a_k$ and less than $3a_k$. Let $W=\\big((V\\times I^-)\\cap T\\big)\\times\\big((V\\times I^+)\\cap T\\big)$, an open neighbourhood of $(t_k^-,t_k^+)$ in $T\\times T$. If $(x,y)\\in W\\cap R$, then $x\\ne y$ because $I^-\\cap I^+=\\emptyset$, so $(x,y)$ lies over some $v_j$ and $\\{x,y\\}=\\{t_j^-,t_j^+\\}$, whose heights differ by exactly $2a_j$. Hence $a_k<2a_j<3a_k$, so $a_k/2<a_j<3a_k/2$; since $a_j=2^{k-j}a_k$, this forces $j=k$, and then the height condition forces $(x,y)=(t_k^-,t_k^+)$. Thus $W\\cap R=\\{(t_k^-,t_k^+)\\}$ is open in $R$; it is closed because $R$ is Hausdorff. The same argument with the two factors exchanged applies to $(t_k^+,t_k^-)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), pure-topology auxiliary; clopen off-diagonal relation points"
-   }
-  },
-  {
-   "text": "Finally let $U\\subseteq T$ be nonempty open. The graph is dense in $T$, so $U$ contains a graph point $(x,f(x))$ with $x\\notin D$. The fibre over $x$ is the singleton just found, hence $x\\notin q(T\\setminus U)$. Since $T\\setminus U$ is compact and $V$ is Hausdorff, $q(T\\setminus U)$ is closed; therefore $B=V\\setminus q(T\\setminus U)$ is a nonempty open neighbourhood of $x$ and every fibre over $B$ is contained in $U$. By the choice of the sequence $(v_k)$, for every $N$ some $k\\ge N$ has $v_k\\in B$. Its whole fibre, namely $\\{t_k^-,t_k^+\\}$, lies in $U$. This proves the required tail-density assertion.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), pure-topology auxiliary; dense double fibres"
+    "place": "Paragraph (3), agent-formulated topology auxiliary; assembly Step 4"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-size-convention"
+  "lem-sfb-cantor-two-sided-dense-enumeration",
+  "lem-sfb-summable-jump-graph-compactification",
+  "lem-sfb-dyadic-height-relation-isolation",
+  "lem-sfb-dense-singleton-fibres-tail-lifting"
  ],
  "proof_origin": {
   "by": "agent",
@@ -185,16 +180,16 @@
   "date": "2026-10-22",
   "item": "lem-sfb-countable-split-profinite-cover",
   "worker": "stage1",
-  "summary": "Audited the imported pure-topology target and supplied a complete agent proof. The construction uses Cantor space, a countable dense sequence with every cylinder hit infinitely often, a uniformly convergent sum of lexicographic step functions with amplitudes tending to zero, and the closure of its graph. The fibre calculation, profiniteness, clopen off-diagonal relation points, and tail-density property are proved explicitly. No new nodes were needed; the only statement dependency is the universe convention.",
-  "blueprint": "Paragraph (3) of the cited open-direct-image proof, where the countably split Cantor-cover input is identified as a pure-topology auxiliary and an external reference is marked WANTED."
+  "summary": "Current-DAG rebase of the returned, reader-approved four-lemma re-split. Reconstructed the parent from the current shared node and retained only split-owned changes, preserving current statement, source, blueprint, review and Lean metadata. Re-read all four cited statements and the size convention; no cited statement changed and all four new ids remain absent in the current DAG. Made the height-gap calculation, identity of the relation subspace, and dense-graph singleton whole-fibre hypothesis explicit. Retained all original construction arguments in the report and every logged search; four independent statement-only nodes carry the workload.",
+  "blueprint": "Paragraph (3), open direct image, agent pure-topology auxiliary; no claim that the blueprint states the construction. The four steps retain precisely the original Cantor/graph-closure route."
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NH-28fe4aa38",
-  "group": "NH",
+  "reviewer": "NT-cc-Q117-14487f44f",
+  "group": "Q117",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-28fe4aa38 (reviewer sub-agent of L); spot-checked: There are no new nodes, and the statement is unchanged from the unsplit base on side-live. It is an agent auxiliary, not in the blueprint: grep finds no Cantor/WANTED text in the sk-thm-sf-ctf-stability files. The item's statement gives everything clause (1) of the citer lem-sfb-norm-algcl-profinite-cech-exact uses. A duplicate search over the DAG found no duplicate. Fixes, in proof text only (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-countable-split-profinite-cover.json): (E3, step 1) the step asks for 'non-endpoint' points but builds them from eventually-zero sequences. Such a point w10^inf has the immediate predecessor w01^inf and is approached from the right only, so its fibre would be a singleton and step 3 fails. Replaced by D = the sequences eventually equal to (01)^inf, with each cylinder containing w0^r(01)^inf for all r, and the two-sided approximation by points of V minus D written out. Also corrected the sum of a_k to exactly 1/4. (step 2) h_k is now defined on V minus {v_k}, so that g_k = sum over j≠k of h_j(v_k) makes sense. (E3, step 5) the claim that g_j tends to g_k is false: g_j contains the term ±a_k, so it tends to g_k ± a_k. Replaced by an exact argument: the intervals I∓ = (g_k ∓ 3a_k/2, g_k ∓ a_k/2), and a fibre over v_j has height gap exactly 2a_j, which lies in (a_k, 3a_k) only when j = k. So W ∩ R is the singleton (t_k^-, t_k^+). Steps 3, 4 and 6 were checked and are correct. Three local faults, within the FIX ceiling. The report wrongly says it wrote citations.json; this was not changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-14487f44f (reviewer sub-agent of L); spot-checked: I read the mathematics in full and found nothing to change. This head re-delivers ec6d3def, which a reader PASSed; landing refused it with 'side completion never promoted; L promotes it' (returns/Q117.md, 08:42Z). The four new nodes are byte-identical to that head. In the item only the text of Steps 3-4 and split_report.summary changed. Step 3 now writes the gap (g_k+a_k)-(g_k-a_k)=2a_k=2^{-k-2} explicitly, and Step 4 now states that each graph point has a singleton whole fibre. Both edits are correct. Compared with clones/live, only proof, proof_deps and split_report differ. Live still has the 6-step proof, and none of the new ids exists in live or side-live. The re-split note (released 2026-10-22) is met: old Step 1 is now the Cantor enumeration, Steps 2-4 the jump-graph compactification, Step 5 the dyadic isolation and Step 6 the tail lifting. The nodes are of comparable size, the assembly is under 3000 characters, no argument was dropped, no child restates the item, and there is no cycle. Checks: (1) c is strictly order preserving, each cylinder contains w0^r(01)^inf, tail density holds for any enumeration, flipping a late digit and continuing with a constant tail stays outside D, and 0^inf and 1^inf are not in D. (2) Σa_k=1/4, f is continuous on A, the side limits are g_k∓a_k (finite head plus uniform tail), q is surjective by compactness, the fibres are exact via side subsequences, and T is totally disconnected because its fibres are finite. (3) H-windows of radius a_k/2 put the gaps in (a_k,3a_k), which forces j=k; singletons are closed because T² is Hausdorff. (4) B_U is open because q is closed, and nonempty via a point of S∩U; fibres are nonempty by surjectivity. All assembly hypotheses match the cited nodes exactly. The source, paragraph (3) of direct-images.proof.md, is honestly given as context with a reference WANTED; no SGA is cited. An rg -L duplicate search found no duplicate. Maintainer note: the refusal comes from L never promoting the side completion; once that is done this head should land."
  },
  "lean": {
   "module": "Sheaf.Topology.CountableSplitProfiniteCover",
@@ -213,5 +208,17 @@
   "group": "NL",
   "result": "pass",
   "note": "Clause-by-clause match of Profinite.exists_countable_split_profinite_cover to the node: nonempty metrizable Profinite.{u} T,V; continuous surjection q : C(T,V); injective v : ℕ → V; fibre over v k exactly {tMinus k, tPlus k} with tMinus k ≠ tPlus k; ∃! fibres off range v; both ordered pairs clopen in the subtype R = {p : T × T // q p.1 = q p.2}; tail-density with N ≥ 0. No extra hypotheses, arbitrary universe, quantifier order matches. Node diff vs side-live: only the lean field. lean.statement is verbatim the file signature. Only the two used Mathlib imports, convention stmt_dep has no module. Docstrings carry the source place, the blueprint tag and the six-step corrected proof. Proof is sorry only, no definitions, no duplicate found, no competing S2 delivery. Advisory: no copyright header (also absent in 15 landed Topology modules). No compile run because no file was changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,142 @@
+{
+ "id": "lem-trf-etale-tensor-square-comparison",
+ "kind": "statement",
+ "title": "Tensor pullback comparison around an etale commutative square",
+ "statement": "Let S be a scheme [def-pc-scheme], let f:X→Y, g:Y′→Y, h:X′→X, f′:X′→Y′ be morphisms of algebraic spaces [def-trf-algebraic-space], and suppose g,h are representably etale and h≫f=f′≫g. Use the specified module tensor pullbacks and chart-unit tensor sections [def-trf-space-etale-module-functors]. There exists a natural isomorphism f^* followed by restriction along h ≅ restriction along g followed by f′^*. For every module M on Y, etale scheme V→Y′, chart q=(T→X′,T→V) for f′ over V, a,b in Γ(T,O_T), and m in M(gV), it sends a times the chart tensor b⊗m on the transported chart (T→X′→X,T→V) to the f′ chart tensor (a*b)⊗m in f′^*(M|Y′). The square need only commute: it is not required to be cartesian.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03LX (lemma-pushforward-etale-base-change-modules), including the pullback-comparison footnote; 03LV (lemma-etale-exact-pullback) and 03LW (equation-restrict-modules). Direct-image sections also spaces-morphisms.tex Tag 03M8, and ringed-site localization sites-modules.tex Tag 04J0."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Apply normalized chart tensor realization to the pairs (f,h) and (g,f′). Their composition comparisons identify the two tensor paths with tensor pullback along h≫f and f′≫g. The square equality identifies those composite morphisms.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Representably etale maps are chartwise etale by isEtale_comp. The etale clause of chart realization identifies the two horizontal tensor pullbacks with literal restriction by multiplication and insertion of one. Conjugate the composition comparisons by these identifications.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute locally: write a restricted section as 1 tensor that section, apply the first composition to multiply the outer coefficient with the pullback of the inner coefficient, and apply the inverse comparison on the other path to insert one. Etale multiplication removes that unit. The chart map for both coefficients is the identity of T, so the result is (a*b) tensor m. Balancing proves inverse identities before sheafification. The chart-normalized units transfer the formulas to the specified adjunctions.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Original proof steps 2 and 5: tensor composition and etale multiplication; this part needs only commutativity of the square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf of modules inverse image composition tensor canonical isomorphism",
+   "results": "Eight hits, including SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv in Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous, and Scheme.Modules.pullbackComp. None identifies the algebraic-space chart-limit direct image, the chosen chart adjunction or its section normalization.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing project ringed-site and chart-realization declarations; no exact Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module sheaf tensor pullback etale restriction base change",
+   "results": "Eight hits about etale ring base change and Kaehler differentials, including Algebra.Etale.baseChange and IsEtale.instIsStableUnderBaseChangeScheme. No algebraic-space module comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.trans",
+   "results": "Unknown identifier, no hits.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing project natural-isomorphism interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|etale_module_pushforward_restriction|moduleChartBaseChange",
+   "results": "24 Mathlib hits for uniqueness of adjoints, principally CategoryTheory.Adjunction.Unique and SheafOfModules pullback composition. Project search found the assigned theorem and its downstream consumers; SpaceFlatDirectImageBaseChange imports the assigned module, so its composition theorem cannot be imported here. SpaceChartTensorRealization is the available normalized composition interface. Blueprint searches: 03LX: 0 matches; tensor pullback: 0 matches; etale base change: 8 unrelated matches.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of either separate comparison. Split the independent direct-image and tensor parts of the assigned argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleModulePushforwardRestriction",
+  "date": "2026-10-26",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Original proof steps 2 and 5: tensor composition and etale multiplication; this part needs only commutativity of the square.",
+   "via": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleTensorSquareComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleTensorSquareComparison.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_tensor_square_comparison",
+  "statement": "theorem etale_tensor_square_comparison\n    (f : X ⟶ Y) (g : Y' ⟶ Y) (h : X' ⟶ X) (f' : X' ⟶ Y')\n    (hg : IsEtale g.hom.hom) (hh : IsEtale h.hom.hom)\n    (w : h.hom ≫ f.hom = f'.hom ≫ g.hom) :\n    let transport : ∀ V : Y'.EtaleSite, ModuleChart f' V →\n        ModuleChart f ((etaleMap g hg).obj V) := fun V q ↦\n      CostructuredArrow.mk (Y := (etaleMap h hh).obj q.left)\n        (CostructuredArrow.homMk q.hom.left (by\n          have hw : h.hom.hom ≫ f.hom.hom = f'.hom.hom ≫ g.hom.hom :=\n            congrArg (fun k ↦ k.hom) w\n          have hq : yoneda.map q.hom.left ≫ V.obj.hom =\n              q.left.obj.hom ≫ f'.hom.hom := by\n            exact CostructuredArrow.w q.hom\n          change yoneda.map q.hom.left ≫ (V.obj.hom ≫ g.hom.hom) =\n            q.left.obj.hom ≫ h.hom.hom ≫ f.hom.hom\n          rw [← Category.assoc, hq, Category.assoc, hw]))\n    ∃ lambda : moduleTensorPullback f ⋙ pullback h hh ≅\n        pullback g hg ⋙ moduleTensorPullback f',\n      ∀ (M : Y.Modules) (V : Y'.EtaleSite) (q : ModuleChart f' V)\n        (a b : X'.structureSheaf.obj.obj (op q.left))\n        (m : M.val.obj (op ((etaleMap g hg).obj V))),\n        (lambda.hom.app M).val.app (op q.left)\n            (a • moduleTensorSection f M ((etaleMap g hg).obj V) (transport V q) b m) =\n          moduleTensorSection f' ((pullback g hg).obj M) V q (a * b) m",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T083023-L-2251582",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T083023-L-2251582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,257 @@
+{
+ "id": "lem-a1-pulled-koszul-tower-chain-comparison",
+ "kind": "statement",
+ "title": "Ordinary pullback of principal Koszul towers and target augmentation",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $A$ and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $g:T'\\to T$ be a morphism of schemes with $\\ell$ invertible on both schemes [def-weil-scheme-morphism-properties]. On the small pro-etale sites put $R_W=\\varprojlim_{n\\geq1}S_{W,n}$, $S_{W,n}=(A/t^n)_W$, with specified projections $\\pi_{W,n}$ and quotient transitions $q_{n+1,n}$ [def-weil-completed-integral-coefficients]. All finite levels are restricted along these projections. Write $c_g:g^{-1}R_T\\to R_{T'}$ for the projection-induced ring map and $G(M)=g^{-1}M\\otimes_{g^{-1}R_T}R_{T'}$ for ordinary module pullback [def-weil-pbc-completed-pullback]. Use unbounded cochain complexes and their derived localizations $Q$ [def-weil-abstract-derived-category], sheafified tensor [def-pur-sheaf-tensor-product], and direct-sum total tensor [def-pc-tensor-complex-sheaves]. A good complex means K-flat with flat terms [def-a1-flat-term-kflat-complex]. Set $Q_{W,n}=[R_W\\xrightarrow{t^n}R_W]$ in degrees $-1,0$, with transition $(t,1)$ and augmentation $\\epsilon_{W,n}:Q_{W,n}\\to S_{W,n}[0]$ equal to $\\pi_{W,n}$ in degree zero and zero in degree minus one [def-a1-principal-completed-koszul-towers].\n\nFor every good $R_T$-complex $P$, the complexes $GP$ and $G(P\\otimes Q_{T,n})$ are good for every $n$. There is a natural isomorphism of strict towers of cochain complexes\n$$\\theta_P:(G(P\\otimes Q_{T,n}))_n\\xrightarrow{\\sim}(GP\\otimes Q_{T',n})_n.$$\nIt is the ordinary cochain tensor comparison followed by the action unitor $GR_T\\cong R_{T'}$ on each of the two Koszul terms. On a local tensor, $G(P\\otimes Q_{T,n})$ is written with elements $(x\\otimes e_i)\\otimes b$, where $e_i$ is the unit basis of $Q_{T,n}^i$ for $i=-1,0$; its image is $(x\\otimes b)\\otimes e'_i$ in the corresponding reindexed total summand. In particular $G(t^n)$ is multiplication by $t^n$, and $\\theta_P$ intertwines the source transition $G(1_P\\otimes(t,1))$ with $1_{GP}\\otimes(t,1)$, without a scalar or sign adjustment.\n\nThe target quotient augmentation\n$$a_{GP}=(1_{GP}\\otimes\\epsilon_{T',n})_n:(GP\\otimes Q_{T',n})_n\\longrightarrow(GP\\otimes S_{T',n})_n$$\nis a strict tower morphism whose every level is a quasi-isomorphism, hence a quasi-isomorphism of complexes in the strict tower category $\\operatorname{Tow}_{R_{T'}}=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(R_{T'}))$, whose exactness is levelwise [def-weil-pbc-adic-coefficient-datum]. Both $\\theta_P$ and $a_{GP}$ are natural for chain maps $P\\to P'$ between good complexes. This does not assert that $G$ preserves arbitrary quasi-isomorphisms: the augmentation here is the one over the target completed ring. The structural map $c_g$ need not be flat or invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat; principal-Koszul strict tensor/unitor and target-augmentation refinement, old proof steps 3-5."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-a1-flat-term-kflat-complex",
+  "def-a1-principal-completed-koszul-towers",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-a1-pulled-koszul-tower-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-a1-pulled-koszul-tower-normalized-iso and restrict its family, normalization and chain-map naturality to good complexes.",
+   "uses": [
+    "lem-a1-pulled-koszul-tower-normalized-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Present CompletedTowerIndependent.pull as algebraic inverse image followed by scalar extension along the actual completed structural map. The supplied adjunction and uniqueness of left adjoints give a natural isomorphism from this presentation to pull. Apply lem-weil-pbc-ringed-pullback-preserves-kflat and transport its K-flatness and termwise flatness conclusions across that natural isomorphism. This gives the private completed_pull_good for any good source complex, without using invertibility of ell or flatness of the structural map.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "def-a1-integral-completed-tower-pullback-universes",
+    "def-weil-proetale-inverse-image",
+    "def-a1-flat-term-kflat-complex",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat; the already implemented scalar-extension presentation and supplied adjunction of IntegralCompletedTowerPullbackUniverses."
+   }
+  },
+  {
+   "text": "Apply lem-a1-principal-koszul-strict-replacement on Y to P. Its last two conclusions give goodness of every H_Y(P)_n; the preservation result from step 2 gives goodness after applying G. Apply the same replacement theorem on X to GP, using step 2. Its first conclusion is exactly the levelwise quasi-isomorphism of the target comparison augmentation. Its existing comparison_naturality theorem gives the final strict chain-map naturality equation.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "def-a1-principal-completed-koszul-towers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib HomologicalComplex.quasiIso_iff_evaluation to transpose.map of the target comparison. By the concrete transpose definition, its evaluation at n is definitionally the level augmentation of step 3. That augmentation is a quasi-isomorphism for each n, so the transposed comparison is a quasi-isomorphism. This is the levelwise-homology argument of the original proof, and never applies G to an arbitrary source quasi-isomorphism.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-a1-integral-completed-tower-pullback-universes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 02MZ, lemma-inverse-systems-abelian; Mathlib/Algebra/Homology/Functor.lean, quasiIso_iff_evaluation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-pulled-koszul-tower-normalized-iso",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-a1-integral-completed-tower-pullback-universes",
+  "def-weil-proetale-inverse-image",
+  "def-a1-flat-term-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "lem-a1-principal-koszul-strict-replacement",
+  "def-a1-principal-completed-koszul-towers",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E (completed ordinary pullback preserves goodness), the existing principal Koszul strict replacement and its comparison_naturality, and homology.tex Tag 02MZ via Mathlib quasiIso_iff_evaluation. The ordinary normalized tensor subargument (original steps 2--4) is isolated in lem-a1-pulled-koszul-tower-normalized-iso."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ringed topos pullback of the tower of principal Koszul complexes on a flat K flat complex is a strict chain isomorphism preserving quotient augmentations",
+   "results": "; KaehlerDifferential.exact_mapBaseChange_map, Algebra.H1Cotangent.exact_δ_mapBaseChange, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Algebra.Generators.H1Cotangent.exact_δ_map, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "; SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Kk]oszul|[Kk]oszul.*pullback|pullbackObjFreeIso",
+   "results": "; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total tensor product of a flat K flat sheaf complex with a principal two term resolution commutes with module inverse image and has a quasi isomorphic quotient augmentation",
+   "results": "; Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', CategoryTheory.Tor'_obj_obj, Module.Flat.iff_lTensor_exact. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback preserves a principal Koszul tower and its quotient augmentation on flat term K flat sheaf complexes",
+   "results": "; SheafOfModules.pullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, SheafOfModules.pullbackObjFreeIso.congr_simp. Candidate declarations read in Mathlib; generic derivation or ordinary module operations do not state this strict Koszul/finite tower normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Kk]oszul|[Kk]oszul.*pullback|pullbackObjFreeIso",
+   "results": "{\"t\": \"2026-10-22T06:54:20Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Kk]oszul|[Kk]oszul.*pullback|pullbackObjFreeIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"digest\": \"27f15b1b97324ddf\"} The hits concern Kahler/cotangent modules, ordinary free sheaf pullback, general pullback adjunctions or generic quasi-isomorphisms; none states the completed principal strict tower, its good-complex clauses and its target augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a good complex commutes with principal Koszul tower tensor products and the target quotient augmentation is a quasi isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:54:21Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of a good complex commutes with principal Koszul tower tensor products and the target quotient augmentation is a quasi isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instIsMultiplicativeQuasiIso\", \"CategoryTheory.ShortComplex.SnakeInput.P\", \"CategoryTheory.IsPullback.exact_shortComplex'\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"CategoryTheory.IsPullback.mono_shortComplex'_f\", \"CategoryTheory.ShortComplex.SnakeInput.functorP\", \"CategoryTheory.CommSq.cocone\", \"tensorKaehlerQuotKerSqEquiv.congr_simp\"], \"digest\": \"764e7d40fbd4ed4d\"} The hits concern Kahler/cotangent modules, ordinary free sheaf pullback, general pullback adjunctions or generic quasi-isomorphisms; none states the completed principal strict tower, its good-complex clauses and its target augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "{\"t\": \"2026-10-22T06:54:21Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackId\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackIso\"], \"digest\": \"646c13e3272a1a2c\"} The hits concern Kahler/cotangent modules, ordinary free sheaf pullback, general pullback adjunctions or generic quasi-isomorphisms; none states the completed principal strict tower, its good-complex clauses and its target augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ringed topos inverse image tensor comparison identifies multiplication by a constant scalar and the transition maps of principal Koszul resolutions",
+   "results": "{\"t\": \"2026-10-22T06:54:29Z\", \"tool\": \"leanfinder\", \"query\": \"A ringed topos inverse image tensor comparison identifies multiplication by a constant scalar and the transition maps of principal Koszul resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquiv_tmul\", \"Algebra.Extension.tensorCotangentInvFun_smul_mk\", \"SheafOfModules.ιFree_mapFree_inv\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"KaehlerDifferential.tensorKaehlerEquivBase_tmul\", \"KaehlerDifferential.tensorKaehlerEquiv_tmul_D\", \"KaehlerDifferential.tensorKaehlerEquiv\", \"tensorKaehlerQuotKerSqEquiv_tmul_D\"], \"digest\": \"981bbd4a0733a4d0\"} The hits concern Kahler/cotangent modules, ordinary free sheaf pullback, general pullback adjunctions or generic quasi-isomorphisms; none states the completed principal strict tower, its good-complex clauses and its target augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary pullback of a flat term K flat complex preserves the strict tower of principal two term Koszul complexes and its target quotient augmentation",
+   "results": "{\"t\": \"2026-10-22T06:54:31Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinary pullback of a flat term K flat complex preserves the strict tower of principal two term Koszul complexes and its target quotient augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.Cotangent.exact\", \"KaehlerDifferential.exact_mapBaseChange_map\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"Algebra.Generators.CotangentSpace.exact\", \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"Module.Flat.lTensor_exact\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"39e2b08d38eae33d\"} The hits concern Kahler/cotangent modules, ordinary free sheaf pullback, general pullback adjunctions or generic quasi-isomorphisms; none states the completed principal strict tower, its good-complex clauses and its target augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-pullback-strict-tower-comparison",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "First paragraph, geometric-stalk restriction by finite-map pullback; Old proof steps 6, 7 and 9, and the tower part of step 11: ordinary completed-ring pullback, balanced finite comparison, localization naturality and shifts. Extracted argument: Tag 0G7E, lemma-pullback-K-flat; principal-Koszul strict tensor/unitor and target-augmentation refinement, old proof steps 3-5.",
+   "via": [
+    "lem-a1-finite-pullback-strict-tower-comparison",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-pulled-koszul-tower-chain-comparison",
+  "worker": "stage1",
+  "summary": "No new nodes. Reused general ringed pullback preservation, the normalized cochain tensor comparison and the principal Koszul strict replacement. Wrote out the completed-uniformizer projection equation, both Koszul terms, total differential signs, adjacent transitions, chain-map naturality and the levelwise homology argument. Statement unchanged; positive indexing agrees with the definition after n=k+1.",
+  "blueprint": "Supports the geometric-stalk restriction in the first paragraph of lem-a1-finite-map-purity via the recorded chain of completed pullback refinements. Specifically realizes parent lem-a1-finite-pullback-strict-tower-comparison step 2 (old steps 3-5): the pulled Koszul chain comparison and target augmentation. This technical argument is an agent refinement, not a claim that the blueprint paragraph contains it.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "General ringed-topos preservation of the flat-term K-flat class, with no structural-map flatness; this unit has no separate foundational pullback theorem."
+   },
+   {
+    "node": "def-weil-pbc-completed-pullback",
+    "why": "Defines the ordinary completed-ring pullback and its actual coefficient map used in the statement."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Defines the pro-etale inverse image and the constant coefficient structure map on which the projection calculation relies."
+   },
+   {
+    "node": "def-sp-completed-uniformizer-section",
+    "why": "Defines the scalar section by its constant residues, needed to calculate its image under the actual coefficient map."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Defines the balanced sheaf tensor and coefficient-extension order used in the local formulas."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "General ordinary cochain tensor comparison with its pure-tensor formula and naturality; supplies the tensor calculus, without replacing the unit geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-proetale-inverse-image",
+  "def-sp-completed-uniformizer-section",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q146-9350cdb4e",
+  "group": "Q146",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-9350cdb4e (reviewer sub-agent of L); spot-checked: Read in full: the item (statement byte-identical to the Q23-fixed version, so unchanged), all 16 cited and stmt_dep statements, Stacks 0G7E lemma-pullback-K-flat (l.3508) and 07A4 lemma-pullback-tensor-product, and the parent's steps 2 and 4, which cite this item. No new nodes. No repair note: this is a first split, not a 2026-10-21 re-split. No SGA. No cycle. proof_deps equals the union of uses, and every cited node is unmerged. Step 1: principal-koszul-strict-replacement (any W, good P) gives each P⊗Q_{T,n} good, and ringed-pullback-preserves-kflat (any c, formula u^{-1}M⊗O') gives GP and G(P⊗Q) good. Step 2: c_g has components c^g_{A/t^m}∘g^{-1}π_m, c^f = ε∘f^{-1}ρ sends constants to constants, and the uniformizer has constant residues, so c_g(t̃)=t by uniqueness into the limit, and G(t^n) corresponds to t^n under the unitor. Step 3: in the coefficient-first comparison s⊗(x⊗y) ↦ (s⊗x)⊗(1⊗y) the scalar has degree 0, so there is no sign. φ_n is a chain isomorphism, and I checked the (−1)^p differential. Step 4: φ_n G(t,1) = (t,1)φ_{n+1} holds in both degrees, adjacent squares paste to all arrows, and P-naturality gives g^{-1}f(x). Step 5: the replacement theorem applied on T′ to GP gives the levelwise quasi-isomorphisms, strictness (qπ_{n+1}=π_n) and naturality; G is never applied to a quasi-isomorphism. Step 6: H^r is levelwise by the levelwise-abelian Mathlib leaf. Edge cases: n=1, P=0, T′ empty, P=R[0], unbounded P, g=id, and the def's k-indexing with n=k+1. Duplicate search (Koszul with pullback over dag/nodes): tw-ordinary-completed-integral-pullback and cbc strict-tower-realization are different statements. Tool uses accepted: ringed-pullback-preserves-kflat and cochain-pullback-tensor-coherence are generic black boxes; the other entries are definitions. Minor, not a fault: step 1 does not list def-weil-proetale-inverse-image, which is cited in step 2."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PulledKoszulTowerChainComparison",
+  "declaration": "WeilConjectures.pulled_koszul_tower_chain_comparison",
+  "file": "lean/Sheaf/Paper/PulledKoszulTowerChainComparison.lean",
+  "statement": "theorem pulled_koszul_tower_chain_comparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{t}} (g : X ⟶ Y) (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ θ : ∀ (P : CochainComplex (CompletedTowerIndependent.Modules l E Y) ℤ), integralOperationsGoodComplex l E Y P → ((diagramPull l E g).obj (H l E Y P) ≅ H l E X ((G l E g).obj P)), ∀ (P : CochainComplex (CompletedTowerIndependent.Modules l E Y) ℤ) (hP : integralOperationsGoodComplex l E Y P), integralOperationsGoodComplex l E X ((G l E g).obj P) ∧ (∀ n : ℕ, integralOperationsGoodComplex l E X (((diagramPull l E g).obj (H l E Y P)).obj (op n))) ∧ KoszulNormalization l E g P (θ P hP) ∧ (∀ (P' : CochainComplex (CompletedTowerIndependent.Modules l E Y) ℤ) (hP' : integralOperationsGoodComplex l E Y P') (f : P ⟶ P'), Functor.whiskerRight (sourceTowerMap l E Y f) (G l E g) ≫ (θ P' hP').hom = (θ P hP).hom ≫ sourceTowerMap l E X ((G l E g).map f)) ∧ (∀ n : ℕ, QuasiIso ((PrincipalKoszulStrictReplacement.comparison l E X ((G l E g).obj P)).app (op n))) ∧ QuasiIso ((transpose l E X).map (PrincipalKoszulStrictReplacement.comparison l E X ((G l E g).obj P))) ∧ (∀ (P' : CochainComplex (CompletedTowerIndependent.Modules l E Y) ℤ) (_hP' : integralOperationsGoodComplex l E Y P') (f : P ⟶ P'), sourceTowerMap l E X ((G l E g).map f) ≫ PrincipalKoszulStrictReplacement.comparison l E X ((G l E g).obj P') = PrincipalKoszulStrictReplacement.comparison l E X ((G l E g).obj P) ≫ targetTowerMap l E X ((G l E g).map f))",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair of F1/F2: uses the independent definition owner def-a1-pulled-koszul-tower-normalization, with no import of the downstream finite comparison. Mathematical statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed4a9020e",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 6250f131 (F1 helpers owned by a theorem module with an import cycle; F2 missing stmt_dep). New def node def-a1-pulled-koszul-tower-normalization (own module PulledKoszulTowerNormalization, stmt_deps integral-completed-tower-pullback-universes / coef-ringed-tensor-hom-model / principal-completed-koszul-towers) owns the 10 helpers; bodies compared mechanically with the parent FinitePullbackStrictTowerComparison copies: identical. The item no longer imports the parent (cycle gone) and changes only lean plus +1 stmt_dep. Both statements match their files verbatim; all §5 new-node fields present; real data, no sorry in the def module; generator-pinned normalization covers both Koszul degrees; item clauses, edge cases (n=0 = exponent 1, P=0, unbounded P, g=id, empty schemes, independent t/u) unchanged and correct. Advisory: parent should re-point its duplicate helpers (maintainer note in report); proEtaleBaseChange owner not a stmt_dep, but intrinsic to the pull interface. No compile (no change); worker dry run OK 9b5a0e5ade8."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261026T070802-L-3657613",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

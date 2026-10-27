@@ -1,0 +1,260 @@
+{
+ "id": "lem-sf-ambient-clopen-restriction-uniqueness",
+ "kind": "statement",
+ "title": "Clopen factorization and restriction uniqueness for proper/open sheaf maps",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. All schemes are finite-type $k$-schemes; their structure maps are not required to be separated [def-weil-scheme-morphism-properties]. Use small pro-etale sites [def-weil-pbc-proetale-site]. For each $T$, choose either $\\mathscr M_T=\\operatorname{Mod}((A_n)_T)$ at one fixed $n$, or the category $\\mathscr M_T$ of module sheaves $M_n$ over $(A_n)_T$ with semilinear maps $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$ and compatible componentwise morphisms [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars, lem-coef-semilinear-derived-sections]. Use the ordinary unbounded derived category $D(\\mathscr M_T)$ [def-weil-abstract-derived-category]. For a scheme map $f$ write $f^*$ for exact constant-coefficient module inverse image and $P_f=D(f^*)$; for an open immersion $j$ write $j_!$ for exact extension by zero and $J_j=D(j_!)$. Use the specified adjunctions $P_f\\dashv S_f=Rf_*$ and $J_j\\dashv P_j$ [def-weil-pbc-proetale-operations, lem-pur-site-restriction-module-adjunction-exact]. System operations are constructed simultaneously on the ringed diagram site, before finite evaluation, scalar restriction or total limit [lem-coef-semilinear-derived-sections].\n\nLet $k_1:U\\hookrightarrow V$ and $i:W\\hookrightarrow Z$ be quasi-compact open immersions, let $r:U\\to W$ and $p:V\\to Z$ be proper, and assume $pk_1=ir$. Put $V_W=V\\times_ZW$, with projections $b:V_W\\to V$, $q:V_W\\to W$, and induced map $s=(k_1,r):U\\to V_W$ [def-pc-fibre-product]. No Cartesian hypothesis is imposed on this square.\n\nThe map $b$ is open, $q$ is separated, $s$ is both open and proper and hence a closed immersion, and $V_W$ is of finite type over $k$. In particular $V_W=s(U)\\amalg C$, with $C=V_W\\setminus s(U)$ an open subscheme. For either coefficient category, restriction gives an exact equivalence\n$$\\mathscr M_{V_W}\\simeq\\mathscr M_U\\times\\mathscr M_C.$$\nIts inverse sends $(F_U,F_C)$ to the module sheaf, or system of module sheaves, whose sections on $T\\to V_W$ are $F_U(T\\times_{V_W}U)\\times F_C(T\\times_{V_W}C)$. In the system case this inverse commutes with restriction of scalars and with all semilinear transitions. Under this equivalence, $s_!G=(G,0)$ and the canonical projector $\\pi_s:F\\to s_!s^*F$ is $(1,0)$.\n\nFor arbitrary $F\\in\\mathscr M_{V_W}$ and $G\\in\\mathscr M_U$, restriction, followed by the identity open unit, gives a natural bijection\n$$\\operatorname{Hom}_{\\mathscr M_V}(b_!F,(k_1)_!G)\\xrightarrow{\\sim}\\operatorname{Hom}_{\\mathscr M_U}(s^*F,G).$$\nThus two such sheaf or system maps are equal whenever their restrictions to $U$ agree. For $M\\in\\mathscr M_W$, the underived open-unit comparison $p^*i_!M\\cong b_!q^*M$ identifies its source with $b_!q^*M$, and the bijection applies with $F=q^*M$ [lem-sf-open-tensor-normalization]. The bijection is asserted in the abelian sheaf and system categories; no faithfulness of evaluation on derived morphisms is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B (lemma-shriek-proper-and-open), open-square geometry; sites.tex Tag 04TS (lemma-mapping-property-glue), disjoint-open gluing. Agent clopen Hom-bijection formulation for ambient pro-etale modules and systems; returned proof Steps 4 and 5."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-proetale-operations",
+  "lem-coef-semilinear-derived-sections",
+  "def-pc-fibre-product",
+  "lem-sf-open-tensor-normalization",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-finite-field-fiber",
+  "def-sf-integral-system-canonical-bridge",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-pur-clopen-test-piece-inclusion"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing strict-tower squareLift_clopen theorem for s. The projection b is open by base change and q is proper, hence separated; finite type and quasi-compactness of q followed by the structure map follow from Mathlib instances. Choose the open complement of the closed image of s.",
+   "uses": [
+    "def-cbc-strict-tower-proper-open-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS; ordinary ringed-site construction and categorical adjunction calculation, with Stacks 03DI and 0F7B"
+   }
+  },
+  {
+   "text": "Construct the gluing inverse as the explicit binary product of direct images on the actual ringed site: the small pro-etale site for one level, the coefficient-sequence site for systems. Restriction along an open is the explicit pushforward along the open-site map with inverse constant-ring transpose. The existing open-site adjunction identifies it with the specified inverse image by uniqueness of left adjoints. The disjoint-open section decomposition proves the gluing unit invertible. For the counit, the diagonal test map is invertible and the off-diagonal test object is empty, so projection followed by diagonal restriction is bijective. These give an equivalence whose inverse has literal product sections. Equivalences preserve finite limits and colimits. Scalar, test restriction, morphism and transition compatibilities are the componentwise formulas of this construction. The existing evaluation_smul helper computes scalar transport through the coefficient-ring equality; it does not use the open-scalar-preservation theorem. Underlying abelian sections forget the sequence-ring action before fixed-level presheaf evaluation; this is the same carrier and additive data as module evaluation, with no scalar-transport expansion.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-cbc-proper-open-clopen-projector",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS; ordinary ringed-site construction and categorical adjunction calculation, with Stacks 03DI and 0F7B"
+   }
+  },
+  {
+   "text": "Reuse the ordinary open-unit isomorphisms, disjoint-extension vanishing and clopen projectors already proved for single-level modules and varying-ring systems. They give the asserted identity and zero restrictions of the projector.",
+   "uses": [
+    "lem-cbc-proper-open-clopen-projector",
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS; ordinary ringed-site construction and categorical adjunction calculation, with Stacks 03DI and 0F7B"
+   }
+  },
+  {
+   "text": "Apply full faithfulness of b_!, obtained from its invertible adjunction unit. The isomorphism k^* ≅ b^* followed by s^* is the specified pullback compositor and squareLift projection equality. Conjugate this isomorphism through the composite open adjunction to identify b_!s_! with k_!. In the product equivalence, a map to s_!G has zero complementary component and first component a map to s^*s_!G; compose with the inverse open unit. This is a bijection. The conjugate-equivalence unit identity gives exactly the restrictionSource formula. Cancellation of the open unit proves naturality in both variables and injectivity of restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS; ordinary ringed-site construction and categorical adjunction calculation, with Stacks 03DI and 0F7B"
+   }
+  },
+  {
+   "text": "For the Cartesian projection square dispatch cartesianPull to the inverse of the existing strict/varying moduleSquareG. Their moduleSquareG_eq theorem specifies the original three-factor compositor expression, so this is the same canonical comparison. Use the proved ordinary openBetaModule normalization at one level. For systems use moduleBeta, whose inverse is defined as the open adjunct of the pullback of the unit followed by moduleSquareG inverse. The adjunction hom-equivalence identity gives exactly the beta unit equation.",
+   "uses": [
+    "lem-cbc-tower-open-beta-normalization",
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS; ordinary ringed-site construction and categorical adjunction calculation, with Stacks 03DI and 0F7B"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-coef-semilinear-system-models",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-cbc-proper-open-clopen-projector",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-tower-open-beta-normalization",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-sp-varying-ring-proper-open-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TS, explicit binary-product gluing on the ordinary and coefficient-sequence sites; existing strict/varying ordinary projector and beta APIs; Mathlib adjoint uniqueness and conjugation unit equation. R2 stage 3, 2026-10-25. The named restrictionPull comparison prevents repeated conversion through chosen inverse images."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "clopen|IsClosedImmersion.*IsOpenImmersion|IsOpenImmersion.*IsClosedImmersion",
+   "results": "6 hits; Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: open/proper stability and sheaf extensionality are present, but not this proper/open factorization together with the clopen Hom bijection for both pro-etale coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper open square induced map to fiber product is clopen and morphisms into its extension by zero are determined by restriction",
+   "results": "8 hits; AlgebraicGeometry.IsProper.instMorphismRestrict, TrivSqZeroExt.instTopologicalSpace, AlgebraicGeometry.Scheme.instIsOpenImmersionF, Opens.mayerVietorisSquare, Opens.mayerVietorisSquare', AlgebraicGeometry.IsOpenImmersion.instπWalkingCospanSchemeCospanOne, Opens.mayerVietorisSquare'_toSquare, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: open/proper stability and sheaf extensionality are present, but not this proper/open factorization together with the clopen Hom bijection for both pro-etale coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion",
+   "results": "12 hits; AlgebraicGeometry.isOpenImmersion_isMultiplicative, AlgebraicGeometry.isOpenImmersion_isStableUnderComposition, AlgebraicGeometry.isOpenImmersion_respectsIso, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Hom.opensRange, AlgebraicGeometry.IsOpenImmersion.mono",
+   "date": "2026-10-22",
+   "verdict": "no match: open/proper stability and sheaf extensionality are present, but not this proper/open factorization together with the clopen Hom bijection for both pro-etale coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clopen decomposition of proetale module sheaves and semilinear systems determines maps into extension by zero uniquely by restriction",
+   "results": "8 hits; SheafOfModules.Presentation.map_π_eq, AlgebraicGeometry.Scheme.Modules.hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, SheafOfModules.generatorsOfIsCokernelFree_π, ModuleCat.Tilde.res_const, PresheafOfModules.Sheafify.instUniqueSMulCandidate, PresheafOfModules.Sheafify.SMulCandidate.mk.inj, SheafOfModules.freeHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: open/proper stability and sheaf extensionality are present, but not this proper/open factorization together with the clopen Hom bijection for both pro-etale coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on a disjoint union of two schemes form a product category and extension by zero has fully faithful restriction unit",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.coprodPresheafObjIso, TopCat.Sheaf.isProductOfDisjoint, SheafOfModules.unit, SheafOfModules.hom_ext, SheafOfModules.instCategory, AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: structure-sheaf or topological sheaf results do not state the pro-etale semilinear-system Hom assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-ambient-proper-open-pasting",
+  "date": "2026-10-22",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\": proper/open clopen factor and restriction uniqueness (returned Steps 4,5).",
+   "via": [
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-ambient-clopen-restriction-uniqueness",
+  "worker": "stage1",
+  "summary": "Reused existing geometry and clopen module-gluing nodes, assembled the semilinear system equivalence by explicit component formulas, and proved the Hom bijection with its inverse. No new nodes; no statement change. Ordinary restriction uniqueness is not inferred from finite evaluations of derived maps. Maintainer reader fix: the open compositor b_!s_!=(k_1)_! is derived from the composite adjunction and unit-preserving conjugate uniqueness (the etale-only lem-cbc-extension-zero-composition is no longer cited); step 8 no longer cites the conditional lem-sf-open-operation-models; the off-unit adjunction tool use is declared.",
+  "blueprint": "fix-prop-projection-formula.proof.md sentence: The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]. Steps 1–2 supply the clopen geometric factor, steps 3–6 its coefficient-category realization, and steps 7–8 restriction uniqueness used in ambient proper/open pasting.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic sheaf localization, clopen gluing or adjunction tool for the ordinary coefficient-category argument; the item unit contains no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-pur-clopen-ringed-module-gluing",
+    "why": "Generic sheaf localization, clopen gluing or adjunction tool for the ordinary coefficient-category argument; the item unit contains no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic sheaf localization, clopen gluing or adjunction tool for the ordinary coefficient-category argument; the item unit contains no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheafification-restriction",
+    "why": "Generic sheaf localization, clopen gluing or adjunction tool for the ordinary coefficient-category argument; the item unit contains no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic sheaf localization, clopen gluing or adjunction tool for the ordinary coefficient-category argument; the item unit contains no replacement for this foundational statement."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic site-localization fact: exact extension by zero j_! left adjoint to exact restriction for module sheaves on a slice; the item unit has no node for it (statement and steps 5-6)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-clopen-ringed-module-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-9c82ea8c4",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-9c82ea8c4 (reviewer sub-agent of L); spot-checked: I read the whole item and all 8 steps; there are no new nodes. The statement and stmt_deps are byte-identical to the node Q144 created when it re-split lem-sf-ambient-proper-open-pasting; there it carried the old parent Steps 4-5. Geometry checks out: b is open by open-immersion base change (j=i, g=p); q is proper, hence separated; s is proper by proper-to-separated (f=r, target V_W separated over W); s is open by cancellation; s is a closed immersion by 04XV (1)<=>(2); V_W is of finite type. The clopen gluing node gives exactly the claimed equivalence, inverse formula, constant-ring identifications and empty pieces. The system transitions are levelwise and semilinear. (G,0) is left adjoint to the first projection, and the unit-preserving uniqueness of adjoints identifies it with s_!. The open unit is the identity because the slice inclusion is continuous and cocontinuous, so b_! is fully faithful. The Hom chain and its explicit inverse in step 7 are correct. Step 8's beta for g=p, j=i, j'=b, g_U=q gives p^*i_!M = b_!q^*M on H^0. Edge cases: Cartesian square (s=id), U empty, W empty, a two-point V with C the other point, and zero transitions. The tags 01W4, 01W6, 04XV, 01T3, 04TS, 03DI, 0F6Z, 04B8, 04IY, 0B65 and 0F7B exist; no SGA is cited. Fixes in the item file: (1) C4: step 6 cited lem-cbc-extension-zero-composition, an etale constant-Lambda node (its stmt_dep def-weil-pbc-extension-by-zero is the etale site) that also does not state unit preservation, which step 7 needs. Step 6 now derives the unit-preserving b_!s_! = (k_1)_! from s^*b^* = k_1^* together with def-weil-pbc-composite-adjunction and lem-weil-pbc-conjugate-iso-unit-equation. (2) C4: step 8 no longer cites lem-sf-open-operation-models, which needs TensorModels and Operations data that this item does not have; the mate form of beta^{-1} is taken from lem-sf-open-tensor-normalization itself. (3) C8: the off-unit tool use lem-pur-site-restriction-module-adjunction-exact (split, unit sk-def-sf-operations) was not declared and is now declared; the two dropped nodes are removed from tool_uses. proof_deps has been recomputed. Accepted generic tool uses: semilinear-derived-sections, clopen-ringed-module-gluing, open-tensor-normalization, module-sheafification-restriction and proetale-weakly-etale-localization. No cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.AmbientClopenRestrictionUniqueness",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.ambientClopenRestrictionUniqueness",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.Modules",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.modulesCategory",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.modulesPreadditive",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.modulesZero",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.pull",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.extension",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.openAdj",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.pullComp",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.sections",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.ringSections",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.act",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.scalarRestriction",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.transition",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.restrictionPull",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.restrictionSource",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.cartesianPull",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.Assertion",
+   "AlgebraicGeometry.ProEtale.AmbientClopenRestriction.ambientClopenRestrictionUniqueness"
+  ],
+  "file": "lean/Sheaf/SixFunctors/AmbientClopenRestrictionUniqueness.lean",
+  "statement": "theorem ambientClopenRestrictionUniqueness (K : WeilConjectures.FiniteFieldDatum.{u}) (_hl : l ≠ K.p) (U V W Z : Over (Spec (.of K.k))) [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k.left] [IsOpenImmersion i.left] [QuasiCompact k.left] [QuasiCompact i.left] [IsProper r.left] [IsProper p.left] (h : k.left ≫ p.left = r.left ≫ i.left) : IsOpenImmersion (pullback.fst p.left i.left) ∧ IsSeparated (pullback.snd p.left i.left) ∧ IsOpenImmersion (StrictTower.squareLift k.left r.left p.left i.left h) ∧ IsProper (StrictTower.squareLift k.left r.left p.left i.left h) ∧ IsClosedImmersion (StrictTower.squareLift k.left r.left p.left i.left h) ∧ LocallyOfFiniteType (pullback.snd p.left i.left ≫ W.hom) ∧ QuasiCompact (pullback.snd p.left i.left ≫ W.hom) ∧ ∀ m : Option ℕ, Assertion l E m k.left r.left p.left i.left h",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The Option level dispatcher selects the existing module category over A_(n+1) or the actual semilinear sequence-site category. Assertion records the canonical restriction equivalence, product section formula with scalar, restriction, morphism and transition compatibility, the identity/zero projector, ordinary Hom equivalence fixed by the open units, restriction injectivity, and unit-normalized cartesian beta. Additional stmt_deps are already-landed constructions used explicitly by these transparent dispatchers; none is restated. Return H2 repair: def-pur-clopen-test-piece-inclusion owns the plain Scheme.ProEt.clopenTestPiece construction used in the section formulas. The gluing theorem lem-pur-clopen-ringed-module-gluing remains only in proof_deps; its conclusion is not chosen or otherwise used to state this theorem. Lean source unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f5436958e",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Re-delivery after H2/H11 RETURN of 8b505d55042b. Lean byte-identical (sha256 ad125c8a). Node delta only: stmt_deps lem-pur-clopen-ringed-module-gluing -> def-pur-clopen-test-piece-inclusion (live, existing:true on ProEtaleClopenRingedModuleGluing, owns clopenTestPiece, reviewed_lean pass, on base blueprint-index) and lean.note; gluing theorem kept in proof_deps. Second reading now has a full hypothesis/clause table; Worker report retained. Independent re-read: hypotheses exact (finite-type over K.k, no separatedness, qc open k,i, proper r,p, non-Cartesian h); geometric conjuncts b open, q separated, s=squareLift=pullback.lift open/proper/closed, V_W finite type; Assertion pins e to the restriction pair (exact), sigma product sections with scalar/restriction/morphism/transition compatibility, s_!G=(G,0), pi=(1,0), Hom Equiv forward map via restrictionSource (types checked) with naturality and injectivity, beta^{-1} unit-normalized; dispatchers resolve to landed StrictTower/VaryingRing constructions; one sorry; docstrings and statement verbatim OK; edge cases and universes OK. No compile (no fix, Lean unchanged)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T181016-L-4062981",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

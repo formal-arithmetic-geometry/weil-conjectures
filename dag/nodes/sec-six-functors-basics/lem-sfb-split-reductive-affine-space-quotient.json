@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-split-reductive-affine-space-quotient",
+ "kind": "statement",
+ "title": "Affine-space trivialization over the split reductive quotient",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. A reductive group means a smooth affine group of finite type, geometrically connected, whose extension to an algebraic closure has no nontrivial smooth connected normal unipotent subgroup [def-sfb-reductive-torus-centralizer-terminology, def-sfb-solvable-group-structure]. A split maximal torus means a maximal torus isomorphic over the ground field to $\\mathbf G_m^r$ for an integer $r\\geq0$ [def-sfb-tori-multiplicative-type]. There exist a reductive $k$-group $H$ having a split maximal torus, a $k$-group homomorphism $q:G\\to H$, an integer $n\\geq0$, and an isomorphism of $k$-schemes $$a:G\\xrightarrow{\\sim}H\\times_k\\mathbf A^n_k,\\qquad \\operatorname{pr}_H\\circ a=q$$ [def-sbc-affine-space, def-pc-fibre-product]. For every field extension $L/k$ [def-pc-field-extension], $H_L$ is smooth affine and geometrically integral of finite type over $L$, and the scalar extension $a_L:G_L\\xrightarrow{\\sim}H_L\\times_L\\mathbf A^n_L$ is an isomorphism over $H_L$ with projection $q_L$. Geometrically integral means nonempty and integral after every field extension; integral means reduced and irreducible. The case $G=1$, with $H=1$ and $n=0$, is included.",
+ "source": {
+  "document": "literature/brion-on-linearization-of-line-bundles-2015.pdf",
+  "place": "Brion Lemma 2.3 proof, printed p.118, first three sentences (unipotent radical, affine-space variety and trivial torsor); Remark 2.2(v), p.117, for splitting over an algebraically closed field. Geometric integrality of a connected smooth algebraic group is included explicitly as a structural prerequisite.",
+  "url": "https://www.ms.u-tokyo.ac.jp/journal/pdf/jms220104.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-solvable-group-structure",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-field-extension",
+  "def-pc-fibre-product",
+  "def-weil-algebraic-closure",
+  "def-sbc-affine-space"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-unipotent-radical-existence] choose the largest smooth connected closed normal unipotent subgroup $U\\subseteq G$. The identity of $G$ is a $k$-rational point, so [lem-sbc-connected-rational-point-geometrically-connected] makes $G$ geometrically connected. Apply [lem-sfb-affine-normal-quotient-geometry] to obtain $q:G\\to H=G/U$: $H$ is smooth affine geometrically connected of finite type, $q$ is faithfully flat and finitely presented, and $(g,u)\\mapsto(g,gu)$ identifies $G\\times U$ with $G\\times_HG$.",
+   "uses": [
+    "lem-sfb-unipotent-radical-existence",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 6.46, p.135; Propositions 5.24--5.29 and 5.59, pp.105--107, 114."
+   }
+  },
+  {
+   "text": "If $V\\subseteq H$ is a smooth connected normal unipotent subgroup, [lem-sfb-affine-normal-quotient-geometry] gives its inverse image $P=q^{-1}(V)$ as a smooth connected normal closed subgroup of $G$ in an exact sequence $1\\to U\\to P\\to V\\to1$. By [lem-sfb-smooth-unipotent-extension], $P$ is unipotent. Maximality of $U$ therefore gives $P\\subseteq U$, and the reverse inclusion is automatic. Thus $P=U$, so its faithfully flat quotient $V=P/U$ is trivial. As $k$ is algebraically closed this is precisely reductivity of $H$. Apply the existence clause of [lem-sfb-reductive-borel-pair-structure] to choose a split maximal torus of $H$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-smooth-unipotent-extension",
+    "lem-sfb-unipotent-radical-existence",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Sections 6.45--6.46, p.135; Theorem 17.9, pp.354--355."
+   }
+  },
+  {
+   "text": "An algebraically closed field is perfect: every algebraic extension has all its elements in $k$. Apply [lem-sfb-perfect-unipotent-additive-series] to $U$ and write its resulting series as $U=U_0\\supseteq\\cdots\\supseteq U_m=1$, with smooth connected affine terms and additive quotients. Every tail is a split series of the kind in [def-sfb-split-solvable-right-torsors].",
+   "uses": [
+    "lem-sfb-perfect-unipotent-additive-series",
+    "def-sfb-split-solvable-right-torsors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.24, p.331; Definition 6.33, pp.132--133."
+   }
+  },
+  {
+   "text": "Construct scheme isomorphisms $b_j:U_j\\simeq\\mathbf A_k^{m-j}$ by reverse induction. For $j=m$ use $U_m=1=\\mathbf A_k^0$. Given the construction at $j+1$, [lem-sfb-affine-normal-quotient-geometry] makes $U_j\\to U_j/U_{j+1}\\simeq\\mathbf G_a=\\mathbf A_k^1$ a represented right $U_{j+1}$-torsor. Its base is affine of finite type and $U_{j+1}$ has the tail split series, so [lem-sfb-split-unipotent-affine-torsor-section] supplies a section $s_j$. The map $(x,v)\\mapsto s_j(x)v$ is an isomorphism $\\mathbf A_k^1\\times U_{j+1}\\to U_j$: its inverse takes $y$ to its quotient image $x$ and the unique $v$ in the torsor comparison with $s_j(x)v=y$. This inverse is a morphism by the torsor comparison isomorphism. Compose with $b_{j+1}$ and identify the product with $\\mathbf A_k^{m-j}$ by adjoining the coordinate $x$. At $j=0$ put $n=m$ and $b=b_0$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-split-unipotent-affine-torsor-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.56, p.344, induction on the additive series, using Proposition 16.55(b)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-split-unipotent-affine-torsor-section] to $q:G\\to H$, using the affine finite-type base $H$ and the split series of $U$. Choose an $H$-section $s:H\\to G$. The torsor comparison from [lem-sfb-affine-normal-quotient-geometry] makes $(h,u)\\mapsto s(h)u$ an isomorphism $H\\times U\\to G$. Its inverse is $g\\mapsto(q(g),u(g))$, where the second coordinate is the regular morphism determined by $s(q(g))u(g)=g$. Define $a(g)=(q(g),b(u(g)))$. The displayed inverse and $b^{-1}$ show that $a:G\\simeq H\\times\\mathbf A_k^n$ is a scheme isomorphism, and its first coordinate gives $\\operatorname{pr}_H\\circ a=q$.",
+   "uses": [
+    "lem-sfb-split-unipotent-affine-torsor-section",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.55(b) and Corollary 16.56, p.344; Brion Lemma 2.3 uses exactly this torsor trivialization."
+   }
+  },
+  {
+   "text": "For the structural clause, apply [lem-trf-smooth-connected-fibre-normal-integrality] to $H\\to\\operatorname{Spec}k$. It is smooth by step 1. Its single fibre $H$ is connected and nonempty: $q$ is faithfully flat, hence surjective, so $H=q(G)$ is the continuous image of the connected scheme $G$, and the identity is a point. The identity $e_H:\\operatorname{Spec}k\\to H$ is a section of the structure morphism, so [lem-sbc-connected-rational-point-geometrically-connected] makes $H_K$ connected for every field extension $K/k$; this is the geometric connectedness (connected after every field extension) required by the next citation (step 1 gave it only after extension to an algebraic closure). The cited statement says that $H_M$ is integral for every field extension $M/k$. In particular, for $L/k$ and every $M/L$, apply it to $M/k$ and identify $(H_L)_M=H_M$ by the fibre-product universal property. This proves geometric integrality of $H_L$, with nonemptiness again witnessed by the identity. Smoothness of $H_L/L$ follows from [lem-pc-proper-base-change](2). If $H=\\operatorname{Spec}A$, then $H_L=\\operatorname{Spec}(A\\otimes_kL)$ is affine; finite generators of $A$ as a $k$-algebra give generators of $A\\otimes_k L$ as an $L$-algebra, proving finite type.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-trf-smooth-connected-fibre-normal-integrality",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.62, p.24, with the smooth geometrically connected fibre integrality criterion (Stacks 056T/057J)."
+   }
+  },
+  {
+   "text": "Pull back $a$ and its inverse along $\\operatorname{Spec}L\\to\\operatorname{Spec}k$. Functoriality preserves their two inverse equations and $\\operatorname{pr}_H\\circ a=q$. The coordinate-algebra identity $k[t_1,\\ldots,t_n]\\otimes_k L=L[t_1,\\ldots,t_n]$ and the fibre-product universal property identify the pulled-back codomain with $H_L\\times_L\\mathbf A_L^n$. Thus the pulled-back isomorphism is the required $a_L$ over $H_L$, with first projection $q_L$, without any separability or algebraicity assumption on $L/k$. For $G=1$, choose the length-zero series, $H=1$, $n=0$, $q=\\operatorname{id}$ and the canonical product isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1(e), p.24, base change; Corollary 16.56, p.344, length-zero case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-unipotent-radical-existence",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-smooth-unipotent-extension",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-perfect-unipotent-additive-series",
+  "def-sfb-split-solvable-right-torsors",
+  "lem-sfb-split-unipotent-affine-torsor-section",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-pc-proper-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Sections 6.45--6.46; Corollary 16.24; Proposition 16.55(b) and Corollary 16.56. Assembly following Brion Lemma 2.3, printed p.118, read online because its PDF is absent locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unipotent|reductive|Borel",
+   "results": "{\"t\": \"2026-10-24T03:10:12Z\", \"tool\": \"grep\", \"query\": \"unipotent|reductive|Borel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions and abstract quotient-group maps do not construct the unipotent-radical quotient of an algebraic group or its trivialization as a variety."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T03:10:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions and abstract quotient-group maps do not construct the unipotent-radical quotient of an algebraic group or its trivialization as a variety."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of a linear algebraic group by its unipotent radical is reductive and the quotient map has a section as a variety",
+   "results": "{\"t\": \"2026-10-24T03:10:13Z\", \"tool\": \"leansearch\", \"query\": \"Quotient of a linear algebraic group by its unipotent radical is reductive and the quotient map has a section as a variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_quotient_of_nilpotent\", \"QuotientGroup.map_normal\", \"QuotientAddGroup.isQuotientMap_mk\", \"QuotientGroup.isQuotientMap_mk\", \"Representation.quotientToInvariants\", \"ValuationSubring.unitsModPrincipalUnitsEquivResidueFieldUnits\", \"Rep.quotientToInvariants\", \"AddSubgroup.quotientMapOfLE\"], \"digest\": \"7d14e0ab700687b7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions and abstract quotient-group maps do not construct the unipotent-radical quotient of an algebraic group or its trivialization as a variety."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group over an algebraically closed field is an affine space bundle over a split reductive quotient",
+   "results": "{\"t\": \"2026-10-24T03:10:14Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected affine algebraic group over an algebraically closed field is an affine space bundle over a split reductive quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\"], \"digest\": \"373c51fb95e7ab95\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-space constructions and abstract quotient-group maps do not construct the unipotent-radical quotient of an algebraic group or its trivialization as a variety."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T03:40:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie/topological bundles and affine-space definitions do not supply an algebraic-group quotient and its scheme trivialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected affine algebraic group is a product as a variety of affine space and its reductive quotient",
+   "results": "{\"t\": \"2026-10-24T03:41:16Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth connected affine algebraic group is a product as a variety of affine space and its reductive quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Prod.instLieGroup\", \"Prod.instLieAddGroup\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\"], \"digest\": \"6bdcf65ffc703cf1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie/topological bundles and affine-space definitions do not supply an algebraic-group quotient and its scheme trivialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected linear algebraic group over an algebraically closed field is a trivial affine space bundle over a reductive group",
+   "results": "{\"t\": \"2026-10-24T03:41:16Z\", \"tool\": \"leansearch\", \"query\": \"A connected linear algebraic group over an algebraically closed field is a trivial affine space bundle over a reductive group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bundle.Trivial.trivialization.isLinear\", \"Trivialization.IsLinear.mk\", \"Bundle.Trivial.contMDiffVectorBundle\", \"trivialVectorBundleCore\", \"Trivialization.IsLinear\", \"Trivialization\", \"Bundle.Trivial.vectorBundle\", \"Trivialization.toPretrivialization.isLinear\"], \"digest\": \"fb4e8e72c31452bf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie/topological bundles and affine-space definitions do not supply an algebraic-group quotient and its scheme trivialization."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|unipotent|Unipotent",
+   "results": "{\"t\": \"2026-10-24T03:41:16Z\", \"tool\": \"grep\", \"query\": \"reductive|unipotent|Unipotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract Lie/topological bundles and affine-space definitions do not supply an algebraic-group quotient and its scheme trivialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-group-picard-field-invariance",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Brion Lemma 2.3 proof, printed p.118, first three sentences (unipotent radical, affine-space variety and trivial torsor); Remark 2.2(v), p.117, for splitting over an algebraically closed field. Geometric integrality of a connected smooth algebraic group is included explicitly as a structural prerequisite.",
+   "via": [
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-reductive-affine-space-quotient",
+  "worker": "stage1",
+  "summary": "Constructed the unipotent-radical quotient using existing quotient geometry, proved reductivity by the inverse-image contradiction, obtained splitness from the existing Borel-pair existence theorem, and constructed the variety product with its projection and arbitrary field-extension clauses. Added only unipotent-extension closure and global affine-base split-unipotent torsor sections; reused existing additive series and geometric-integrality tools. No statement change.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images (3), through the recorded alteration/linearization/Picard chain: Brion Lemma 2.3, affine-space reduction through the unipotent radical. The latest blueprint was read; no route change.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "The group identity is a rational section, so connectedness becomes geometric connectedness before forming the quotient."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "A generic smooth geometrically connected fibre criterion proves integrality after every extension; it does not replace the unit route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), stability of smoothness under base change, is used for H_L."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-a74e16167",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-a74e16167 (reviewer sub-agent of L); spot-checked: I read the whole item (7 steps), both new nodes, every cited statement, and Milne iAG §6.45–6.46 p.135 and Prop 16.55(b), Cor 16.56 p.344; these match the new nodes and the item. Brion is not available locally; the item statement is unchanged. Steps 1–5 and 7 hold. Step 1 takes U=R_u(G) and forms H=G/U by quotient geometry. Step 2 shows H is reductive: the inverse image P of V is unipotent by the new extension lemma, so P=U and V=1; the Borel-pair node then gives a split maximal torus. Steps 3–4 build U≅A^m by a properly set-up reverse induction using the additive series and the torsor-section node. Step 5 builds the section and gives G≅H×A^n with pr_H∘a=q. Step 7 is elementary base change. Fault in step 6 (C4/E1): the trf integrality node needs H connected after every field extension, but step 1 gives this only over k̄. FIX: H=q(G) is connected because q is surjective, and the identity section with lem-sbc-connected-rational-point-geometrically-connected (already in proof_deps) makes every H_K connected; this node is added to step 6 uses. Both new nodes are true, self-contained, strictly smaller than the item and not duplicates. smooth-unipotent-extension = Milne 6.45; tested with trivial N or Q, a p-group in char p and U_3. split-unipotent-affine-torsor-section = Milne 16.55(b), and it follows by induction from additive-affine-torsor-section and normal-extension-torsor-reduction; tested with U=1 (S empty), G_a and U_3. Batch 5: all listed trf citations are generic Stacks facts in unit sk-i-curve-zero, not trace-formula or Poincaré steps (057J integrality cited directly; 02VL, 02W5 def, 021O, 025Y def in the closure). I accept tool uses lem-sbc-connected-rational-point-geometrically-connected, lem-trf-smooth-connected-fibre-normal-integrality and lem-pc-proper-base-change(2) as generic. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitReductiveAffineSpaceQuotient",
+  "declaration": "AlgebraicGeometry.exists_split_reductive_affine_space_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitReductiveAffineSpaceQuotient.lean",
+  "statement": "theorem exists_split_reductive_affine_space_quotient {k : Type u} [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [Smooth G.X.hom] [ConnectedSpace G.X.left] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] : ∃ (H : Grp (Over (Spec (.of k)))) (q : G ⟶ H) (n : ℕ) (a : G.X ≅ H.X ⨯ (AffineSpace (ULift.{u} (Fin n)) (Spec (.of k))).asOver (Spec (.of k))), ReductiveTorusCentralizer.IsReductive H ∧ (∃ (T : Grp (Over (Spec (.of k)))) (i : T ⟶ H) (r : ℕ), ReductiveTorusCentralizer.IsMaximalTorus i ∧ Nonempty (T ≅ MultiplicativeType.splitTorus k r)) ∧ a.hom ≫ prod.fst = q.hom.hom ∧ ∀ (L : Type u) [Field L] [Algebra k L], Smooth ((MultiplicativeType.baseChange (K := L)).obj H).X.hom ∧ IsAffine ((MultiplicativeType.baseChange (K := L)).obj H).X.left ∧ GeometricallyIntegral ((MultiplicativeType.baseChange (K := L)).obj H).X.hom ∧ LocallyOfFiniteType ((MultiplicativeType.baseChange (K := L)).obj H).X.hom ∧ QuasiCompact ((MultiplicativeType.baseChange (K := L)).obj H).X.hom ∧ ∃ aL : ((MultiplicativeType.baseChange (K := L)).obj G).X ≅ ((MultiplicativeType.baseChange (K := L)).obj H).X ⨯ (AffineSpace (ULift.{u} (Fin n)) (Spec (.of L))).asOver (Spec (.of L)), aL.hom ≫ prod.fst = ((MultiplicativeType.baseChange (K := L)).map q).hom.hom ∧ (aL.hom ≫ prod.snd).left ≫ AffineSpace.map (ULift.{u} (Fin n)) (Spec.map (CommRingCat.ofHom (algebraMap k L))) = pullback.fst G.X.hom (Spec.map (CommRingCat.ofHom (algebraMap k L))) ≫ (a.hom ≫ prod.snd).left",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f071cd767",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the statement is verbatim and no new nodes or dep modules are delivered. Every clause was checked against the IsReductive, IsMaximalTorus, baseChange and splitTorus bodies. G hypotheses are exact; H reductive with a split maximal torus (group iso to splitTorus k r); a is an Over-product (fibre product) iso with pr_H∘a = q; for all L, H_L is smooth, affine, geometrically integral and of finite type. a_L is uniquely the base change of a by the first-projection equation plus AffineSpace.isPullback_map. Edge cases G=1/n=0/r=0, reductive G, unipotent G, any characteristic and transcendental L are covered; L : Type u is the standard universe of the baseChange interface. Plain imports = recorded proof-dep modules. No defs, sorry only, docstrings with source, blueprint and 7 steps, report sections present. Brion PDF not available locally; node unchanged from the stage-1-passed version. No compile needed (no changes); no findings."
+ }
+}

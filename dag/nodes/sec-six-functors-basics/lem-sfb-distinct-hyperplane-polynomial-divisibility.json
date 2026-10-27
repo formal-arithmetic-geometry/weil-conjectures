@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-distinct-hyperplane-polynomial-divisibility",
+ "kind": "statement",
+ "title": "Divisibility by the equations of distinct hyperplanes",
+ "statement": "Let $k$ be an infinite field [def-weil-field], and let $r,m,d\\geq0$ be integers. Put $R=k[x_1,\\ldots,x_r]$ [def-weil-pbc-mv-polynomial-ring]. Let $\\ell_1,\\ldots,\\ell_m\\in R$ be nonzero homogeneous linear polynomials, no two proportional by a nonzero scalar in $k$. For every $P\\in R$ satisfying $P(a)=0$ for every $i$ and every $a\\in k^r$ with $\\ell_i(a)=0$, one has $\\prod_{i=1}^m\\ell_i\\mid P$. This product is nonzero. If, in addition, $P$ is homogeneous of degree $d$ (every monomial with nonzero coefficient has total degree $d$, allowing $P=0$), then $P=0$ when $d<m$, and $P=c\\prod_{i=1}^m\\ell_i$ for some $c\\in k$ when $d=m$. The empty family of linear polynomials is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0BC1, lemma-polynomial-ring-UFD: factoriality input for the agent-formulated hyperplane-divisibility corollary. The coordinate restriction and homogeneity argument is given in the worker report; the corollary is not claimed to be the verbatim Stacks statement."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $D_j=\\prod_{i=1}^j\\ell_i$, with $D_0=1$. By [lem-sfb-polynomial-field-ufd] the polynomial ring over $k$, in any finite number of variables including zero, is a domain. Thus every $D_j$ is nonzero, inductively: $D_0=1\\ne0$, and multiplication of two nonzero elements cannot be zero. If $r=0$, no nonzero homogeneous linear polynomial exists, so $m=0$. In this case the divisibility conclusion is $1\\mid P$, and a homogeneous polynomial of degree zero is a scalar; a polynomial homogeneous of positive degree in zero variables is zero. We may henceforth take $r>0$.",
+   "uses": [
+    "lem-sfb-polynomial-field-ufd"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC1, lemma-polynomial-ring-UFD, field-domain input; agent hyperplane argument (not a proof attributed to Stacks)"
+   }
+  },
+  {
+   "text": "Fix any nonzero linear form $\\ell=\\sum_t a_tx_t$. Choose $j$ with $a_j\\ne0$, set $A=k[x_t:t\\ne j]$ and $b=-a_j^{-1}\\sum_{t\\ne j}a_tx_t\\in A$. For $F\\in R$, let $\\overline F\\in A$ denote substitution $x_j=b$. From the monomial expansion in [def-weil-pbc-mv-polynomial-ring], write $F=\\sum_{n\\ge0}c_nx_j^n$ with finitely many $c_n\\in A$. The identity $x_j^n-b^n=(x_j-b)\\sum_{s=0}^{n-1}x_j^{n-1-s}b^s$ for $n\\ge1$ gives $F-\\overline F=(x_j-b)T$ for an explicit finite sum $T\\in R$. Since $\\ell=a_j(x_j-b)$, this proves $\\overline F=0\\Longleftrightarrow\\ell\\mid F$; the reverse implication is substitution in a product. If $F$ vanishes at every $k$-point of $\\ell=0$, then $\\overline F$ evaluates to zero on every assignment of the remaining variables, since those assignments together with $x_j=b$ give such points. Apply [lem-sfb-mvpolynomial-infinite-evaluation] to $\\overline F$ and zero to obtain $\\overline F=0$. This works also when $r=1$, where $A=k$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-sfb-mvpolynomial-infinite-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC1, lemma-polynomial-ring-UFD, field-domain input; agent hyperplane argument (not a proof attributed to Stacks)"
+   }
+  },
+  {
+   "text": "Induct on $j$ to construct $Q_j$ with $P=D_jQ_j$. For $j=0$ take $Q_0=P$. Suppose $j<m$ and such $Q_j$ is given. Use the substitution in the preceding step for $\\ell=\\ell_{j+1}$. For every $i\\le j$, $\\overline{\\ell_i}$ is a homogeneous linear polynomial in the remaining variables and is nonzero: if $\\ell_i=\\sum_t c_tx_t$ restricted to zero, its coefficient at $x_t$ for $t\\ne j_0$ would give $c_t=c_{j_0}a_t/a_{j_0}$, where $j_0$ is the chosen coordinate for $\\ell_{j+1}$. Consequently $\\ell_i=(c_{j_0}/a_{j_0})\\ell_{j+1}$; the scalar cannot be zero since $\\ell_i\\ne0$, contradicting nonproportionality. The remaining-variable polynomial ring is a domain by [lem-sfb-polynomial-field-ufd], so $\\overline{D_j}=\\prod_{i\\le j}\\overline{\\ell_i}\\ne0$, including $j=0$. The vanishing hypothesis and the preceding step give $\\overline P=0$. Substituting in $P=D_jQ_j$ yields $0=\\overline{D_j}\\,\\overline{Q_j}$, whence $\\overline{Q_j}=0$. The explicit identity of the preceding step now gives $Q_j=\\ell_{j+1}Q_{j+1}$. Thus $P=D_{j+1}Q_{j+1}$. At $j=m$ this proves the asserted divisibility.",
+   "uses": [
+    "lem-sfb-polynomial-field-ufd"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC1, lemma-polynomial-ring-UFD, field-domain input; agent hyperplane argument (not a proof attributed to Stacks)"
+   }
+  },
+  {
+   "text": "Assume now that $P$ is homogeneous of degree $d$. If $P=0$, both conclusions hold, with scalar $c=0$ when $d=m$. Otherwise write $P=D_mQ$ by the induction; $Q\\ne0$ because $P\\ne0$. Each $\\ell_i$ has total degree one, directly from its nonzero linear coefficient support. Repeated application of [lem-sfb-mvpolynomial-total-degree-product] to the nonzero prefix products gives $\\operatorname{tdeg}(D_m)=m$, starting from $\\operatorname{tdeg}(1)=0$. A nonzero homogeneous polynomial of degree $d$ has total degree $d$, since its support is nonempty and all exponent sums are $d$. Applying the same cited statement to $P=D_mQ$ gives $d=m+\\operatorname{tdeg}(Q)\\ge m$. Thus $d<m$ forces $P=0$. If $d=m$, then $\\operatorname{tdeg}(Q)=0$, so every monomial of $Q$ has exponent sum zero, hence every exponent zero. Thus $Q=c\\in k$ and $P=cD_m$. The argument includes $m=0$, where $D_m=1$.",
+   "uses": [
+    "lem-sfb-mvpolynomial-total-degree-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BC1, lemma-polynomial-ring-UFD, field-domain input; agent hyperplane argument (not a proof attributed to Stacks)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-polynomial-field-ufd",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-mvpolynomial-infinite-evaluation",
+  "lem-sfb-mvpolynomial-total-degree-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent coordinate-substitution and restriction-induction proof, using the field-domain clause of Tag 0BC1 and the cited Mathlib statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vanish|hyperplane|linear.*dvd|dvd.*linear",
+   "results": "{\"t\": \"2026-10-23T21:16:30Z\", \"tool\": \"grep\", \"query\": \"vanish|hyperplane|linear.*dvd|dvd.*linear\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations were read; polynomial extensionality, the Nullstellensatz over algebraically closed fields, univariate root products and grid vanishing require additional arguments for distinct arbitrary hyperplanes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial vanishing on each of finitely many distinct rational linear hyperplanes is divisible by the product of their defining linear forms",
+   "results": "{\"t\": \"2026-10-23T21:16:30Z\", \"tool\": \"leansearch\", \"query\": \"A polynomial vanishing on each of finitely many distinct rational linear hyperplanes is divisible by the product of their defining linear forms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.prod_multiset_X_sub_C_dvd\", \"MvPolynomial.vanishingIdeal_zeroLocus_eq_radical\", \"Multiset.prod_X_sub_C_dvd_iff_le_roots\", \"MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination\", \"IsAlgClosed.dvd_iff_roots_le_roots\", \"MvPolynomial.vanishingIdeal\", \"Polynomial.mul_divByMonic_eq_iff_isRoot\", \"Polynomial.finiteMultiplicity_X_sub_C\"], \"digest\": \"59864eb8eeb1309c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations were read; polynomial extensionality, the Nullstellensatz over algebraically closed fields, univariate root products and grid vanishing require additional arguments for distinct arbitrary hyperplanes"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, \"dvd\"",
+   "results": "{\"t\": \"2026-10-23T21:16:30Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, \\\"dvd\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.C_dvd_iff_dvd_coeff\", \"MvPolynomial.eval₂_dvd\", \"MvPolynomial.C_dvd_iff_map_hom_eq_zero\", \"MvPolynomial.exists_dvd_map_of_isAlgebraic\", \"MvPolynomial.X_dvd_X\", \"MvPolynomial.X_dvd_iff_modMonomial_eq_zero\", \"MvPolynomial.X_dvd_monomial\", \"MvPolynomial.monomial_one_dvd_iff_modMonomial_eq_zero\"], \"digest\": \"bb456147482b9bc2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations were read; polynomial extensionality, the Nullstellensatz over algebraically closed fields, univariate root products and grid vanishing require additional arguments for distinct arbitrary hyperplanes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous multivariate polynomial which vanishes on distinct linear hyperplanes is divisible by their product and is zero below the number of hyperplanes",
+   "results": "{\"t\": \"2026-10-23T21:16:31Z\", \"tool\": \"leanfinder\", \"query\": \"A homogeneous multivariate polynomial which vanishes on distinct linear hyperplanes is divisible by their product and is zero below the number of hyperplanes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination\", \"MvPolynomial.combinatorial_nullstellensatz_exists_eval_nonzero\", \"MvPolynomial.schwartz_zippel_sup_sum\", \"MvPolynomial.schwartz_zippel_sum_degreeOf\", \"MvPolynomial.exists_mem_support_not_dvd_of_forall_totalDegree_le\", \"Lagrange.X_sub_C_dvd_nodal\", \"MvPolynomial.IsHomogeneous.funext_of_le_card\", \"MvPolynomial.sum_eval_eq_zero\"], \"digest\": \"f27b61910d8001b5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations were read; polynomial extensionality, the Nullstellensatz over algebraically closed fields, univariate root products and grid vanishing require additional arguments for distinct arbitrary hyperplanes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ideal of a hyperplane in a polynomial ring over an infinite field is generated by its linear equation",
+   "results": "{\"t\": \"2026-10-23T21:16:32Z\", \"tool\": \"leanfinder\", \"query\": \"The ideal of a hyperplane in a polynomial ring over an infinite field is generated by its linear equation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.vanishingIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.YIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁\", \"WeierstrassCurve.Affine.CoordinateRing.XIdeal\", \"MvPolynomial.instIsPrimeVanishingIdealSingletonForallSet\", \"AlgebraicClosure.spanCoeffs\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal\"], \"digest\": \"86402b75e6fabc02\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations were read; polynomial extensionality, the Nullstellensatz over algebraically closed fields, univariate root products and grid vanishing require additional arguments for distinct arbitrary hyperplanes"
+  },
+  {
+   "tool": "grep",
+   "query": "vanish|hyperplane|linear.*dvd|dvd.*linear",
+   "results": "{\"t\": \"2026-10-23T21:20:24Z\", \"tool\": \"grep\", \"query\": \"vanish|hyperplane|linear.*dvd|dvd.*linear\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/SumPrimeReciprocals.lean\", \"Mathlib/NumberTheory/GaussSum.lean\", \"Mathlib/NumberTheory/GaussSum.lean\", \"Mathlib/NumberTheory/DirichletCharacter/GaussSum.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Orthogonality.lean\"], \"digest\": \"c4c0c0f144247d24\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations were read; polynomial extensionality, the Nullstellensatz over algebraically closed fields, univariate root products and grid vanishing require additional arguments for distinct arbitrary hyperplanes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial.funext\"",
+   "results": "{\"t\": \"2026-10-23T21:20:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPolynomial.funext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"MvPolynomial.funext\", \"MvPolynomial.funext_iff\", \"MvPolynomial.funext_set\", \"MvPolynomial.funext_set_iff\"], \"digest\": \"5c85228370a44eb5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations were read; polynomial extensionality, the Nullstellensatz over algebraically closed fields, univariate root products and grid vanishing require additional arguments for distinct arbitrary hyperplanes"
+  },
+  {
+   "tool": "grep",
+   "query": "vanish|hyperplane|linear.*dvd|dvd.*linear|funext",
+   "results": "{\"t\": \"2026-10-23T21:21:00Z\", \"tool\": \"grep\", \"query\": \"vanish|hyperplane|linear.*dvd|dvd.*linear|funext\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Algebra/MvPolynomial/Degrees.lean\", \"Mathlib/Algebra/MvPolynomial/CommRing.lean\", \"Mathlib/Algebra/MvPolynomial/Funext.lean\", \"Mathlib/Algebra/MvPolynomial/Funext.lean\", \"Mathlib/Algebra/MvPolynomial/Funext.lean\", \"Mathlib/Algebra/MvPolynomial/Funext.lean\", \"Mathlib/Algebra/MvPolynomial/Funext.lean\", \"Mathlib/Algebra/MvPolynomial/Polynomial.lean\"], \"digest\": \"dbf28a94f73778e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations were read; polynomial extensionality, the Nullstellensatz over algebraically closed fields, univariate root products and grid vanishing require additional arguments for distinct arbitrary hyperplanes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial vanishing on distinct hyperplanes is divisible by their linear equations product; a homogeneous polynomial of degree equal to the number of hyperplanes is a scalar multiple of that product",
+   "results": "{\"t\": \"2026-10-23T21:21:01Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial vanishing on distinct hyperplanes is divisible by their linear equations product; a homogeneous polynomial of degree equal to the number of hyperplanes is a scalar multiple of that product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination\", \"Lagrange.X_sub_C_dvd_nodal\", \"MvPolynomial.schwartz_zippel_sup_sum\", \"MvPolynomial.schwartz_zippel_sum_degreeOf\", \"MvPolynomial.combinatorial_nullstellensatz_exists_eval_nonzero\", \"Polynomial.exists_partition_polynomial_aux\", \"Polynomial.homogenize_dvd\", \"Lagrange.nodal_eq_mul_nodal_erase\"], \"digest\": \"3d17d6901c40f7c8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations were read; polynomial extensionality, the Nullstellensatz over algebraically closed fields, univariate root products and grid vanishing require additional arguments for distinct arbitrary hyperplanes"
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|linear.*dvd|dvd.*linear",
+   "results": "{\"t\": \"2026-10-23T21:39:02Z\", \"tool\": \"grep\", \"query\": \"hyperplane|linear.*dvd|dvd.*linear\", \"sub\": \"Algebra/MvPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned vanishing-ideal definitions, grid Nullstellensatz, homogeneous operations and coordinate-variable divisibility do not state divisibility by products of arbitrary nonproportional linear forms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous polynomial vanishing on distinct hyperplanes is a scalar multiple of the product of their equations if its degree is their number",
+   "results": "{\"t\": \"2026-10-23T21:39:02Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous polynomial vanishing on distinct hyperplanes is a scalar multiple of the product of their equations if its degree is their number\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.IsHomogeneous.funext_of_le_card\", \"Polynomial.homogenize\", \"Polynomial.homogenize_finsetProd\", \"MvPolynomial.IsHomogeneous.mul\", \"MvPolynomial.IsHomogeneous\", \"MvPolynomial.IsHomogeneous.prod\", \"Polynomial.homogenize_mul\", \"Polynomial.eval_homogenize\"], \"digest\": \"5141c77723ce345d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned vanishing-ideal definitions, grid Nullstellensatz, homogeneous operations and coordinate-variable divisibility do not state divisibility by products of arbitrary nonproportional linear forms"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, \"dvd\"",
+   "results": "{\"t\": \"2026-10-23T21:39:02Z\", \"tool\": \"loogle\", \"query\": \"MvPolynomial, \\\"dvd\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPolynomial.C_dvd_iff_dvd_coeff\", \"MvPolynomial.eval₂_dvd\", \"MvPolynomial.C_dvd_iff_map_hom_eq_zero\", \"MvPolynomial.exists_dvd_map_of_isAlgebraic\", \"MvPolynomial.X_dvd_X\", \"MvPolynomial.X_dvd_iff_modMonomial_eq_zero\", \"MvPolynomial.X_dvd_monomial\", \"MvPolynomial.monomial_one_dvd_iff_modMonomial_eq_zero\"], \"digest\": \"bb456147482b9bc2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned vanishing-ideal definitions, grid Nullstellensatz, homogeneous operations and coordinate-variable divisibility do not state divisibility by products of arbitrary nonproportional linear forms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial vanishing on finitely many pairwise nonproportional linear hyperplanes over an infinite field is divisible by the product of their equations",
+   "results": "{\"t\": \"2026-10-23T21:39:03Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial vanishing on finitely many pairwise nonproportional linear hyperplanes over an infinite field is divisible by the product of their equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination\", \"Lagrange.X_sub_C_dvd_nodal\", \"MvPolynomial.exists_mem_support_not_dvd_of_forall_totalDegree_le\", \"Polynomial.exists_partition_polynomial_aux\", \"Polynomial.exists_partition_polynomial\", \"char_dvd_card_solutions_of_sum_lt\", \"MvPolynomial.schwartz_zippel_sum_degreeOf\", \"MvPolynomial.schwartz_zippel_sup_sum\"], \"digest\": \"9fbc902e0be7642d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned vanishing-ideal definitions, grid Nullstellensatz, homogeneous operations and coordinate-variable divisibility do not state divisibility by products of arbitrary nonproportional linear forms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ideal of all polynomial functions vanishing on finitely many distinct rational hyperplanes is generated by the product of the linear equations",
+   "results": "{\"t\": \"2026-10-23T21:39:40Z\", \"tool\": \"leanfinder\", \"query\": \"The ideal of all polynomial functions vanishing on finitely many distinct rational hyperplanes is generated by the product of the linear equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.vanishingIdeal\", \"MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination\", \"AlgebraicClosure.spanCoeffs\", \"MvPolynomial.mem_vanishingIdeal_iff\", \"MvPolynomial.vanishingIdeal_pointToPoint\", \"FirstOrder.Ring.mvPolynomial_zeroLocus_definable\", \"Polynomial.mem_span_C_X_sub_C_X_sub_C_iff_eval_eval_eq_zero\", \"MvPolynomial.zeroLocus\"], \"digest\": \"95437400efd3ccfc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned vanishing-ideal definitions, grid Nullstellensatz, homogeneous operations and coordinate-variable divisibility do not state divisibility by products of arbitrary nonproportional linear forms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-weyl-alternant-augmentation",
+  "date": "2026-10-24",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Augmentation of a quotient of Weyl alternants. Polynomial input: the first nonzero homogeneous term of an alternant is divisible by all distinct root hyperplanes.",
+   "via": [
+    "lem-sfb-weyl-alternant-augmentation",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-distinct-hyperplane-polynomial-divisibility",
+  "worker": "stage1",
+  "summary": "Kept the complete statement including zero polynomials and the empty family. Wrote explicit linear-equation substitution and finite geometric-sum divisibility, then restriction induction over the hyperplanes and degree comparison. Reused the polynomial-field UFD/domain Mathlib leaf; created only two general Mathlib leaves for polynomial function extensionality and total-degree additivity. No project attachment was found.",
+  "blueprint": "Supports the alternant lowest-homogeneous-term step through the inherited long dependency chain. Read latest sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md (3); the coordinate algebra is below the unit route. blueprint_refs.py ancestor returns None: preserved the historical null ancestor and via chain, with the exact supporting place. Whole-DAG and blueprint searches found no same statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-93212811b",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-93212811b (reviewer sub-agent of L); spot-checked: PASS with no fixes; the review is in review.md. Shape: one commit holding the item, its report and two new nodes created by this item. There is no repair note for the item, so the re-split rule does not apply. The live and side-live copies of the item are still unsplit with a byte-identical statement, so the statement is unchanged and no other group has superseded the delivery. There is no SGA citation. The item's source, Stacks Tag 0BC1 (algebra.tex:29578, lemma-polynomial-ring-UFD), is correctly limited to the field-domain input, and the proof is marked agent-written. The blueprint ancestor is null as inherited, and the main-20261015 blueprint has no matching statement. Step 1: by lem-sfb-polynomial-field-ufd the polynomial ring is a domain (zero variables included), so every partial product D_j is nonzero. When r=0 no nonzero linear form exists, so m=0 and P is a scalar or 0. Step 2: expand F in powers of x_j with coefficients in the remaining variables; the identity x_j^n-b^n=(x_j-b)(...) gives F minus its substitution equal to (x_j-b)T, and ell=a_j(x_j-b). Pointwise vanishing on ell=0 then gives the substitution equal to 0 through the new evaluation node (MvPolynomial.funext, Funext.lean:31/79/83-86: CommRing, IsDomain, Infinite, any variable set). Step 3: I recomputed the restricted coefficients c_t-c_{j0}a_t/a_{j0}. If the restriction of an earlier form were zero, that form would be a nonzero multiple of ell_{j+1}, contradicting nonproportionality. The induction has base Q_0=P and claim P=D_jQ_j, and cancellation in the domain is correct. Step 4: the new degree node (totalDegree_mul_of_isDomain, NoZeroDivisors.lean:33/39/80-83, nonzero factors; totalDegree is the sup over the support, Degrees.lean:432-434) gives tdeg(D_m)=m and d=m+tdeg(Q). From this d<m forces P=0, and d=m forces Q constant; P=0 is handled with c=0. Duplicate search over the DAG: lem-trf-polynomial-infinite-evaluation-identity is univariate. lem-trf-infinite-field-top-form-direction (funext_set) proves nonvanishing of a homogeneous form, not equality of polynomials. lem-sfb-monomial-order-leading-product (r>=1, monomial orders) does not state total-degree additivity. No other node matches. Small cases checked: (x,y) with P=xy, and (x,x+y,x-y), where char 2 is excluded by nonproportionality. The hypotheses are needed: over F_q, x_2^q-x_2 vanishes on x_1=0 without being divisible by x_1, and the repeated family (x_1,x_1) fails for P=x_1. Edge cases r=0, r=1, m=0, P=0 and d=m=0 are covered. Both new nodes are statement-only, self-contained Mathlib leaves with exact matches. No tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.MvPolynomial.DistinctHyperplanePolynomialDivisibility",
+  "declaration": "MvPolynomial.distinct_hyperplane_polynomial_divisibility",
+  "file": "lean/Sheaf/Algebra/MvPolynomial/DistinctHyperplanePolynomialDivisibility.lean",
+  "statement": "theorem distinct_hyperplane_polynomial_divisibility {k : Type u} [Field k] [Infinite k] (r m d : ℕ) (ell : Fin m → MvPolynomial (Fin r) k) (hell_nonzero : ∀ i : Fin m, ell i ≠ 0) (hell_homogeneous : ∀ i : Fin m, (ell i).IsHomogeneous 1) (hell_nonproportional : ∀ i j : Fin m, i ≠ j → ∀ c : k, c ≠ 0 → ell i ≠ C c * ell j) (P : MvPolynomial (Fin r) k) (hvanish : ∀ i : Fin m, ∀ a : Fin r → k, eval a (ell i) = 0 → eval a P = 0) : (∏ i : Fin m, ell i) ∣ P ∧ (∏ i : Fin m, ell i) ≠ 0 ∧ (P.IsHomogeneous d → (d < m → P = 0) ∧ (d = m → ∃ c : k, P = C c * ∏ i : Fin m, ell i))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd8b1d51e",
+  "group": "N9",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: Field+Infinite k; MvPolynomial (Fin r) k; nonzero IsHomogeneous 1 forms; symmetric nonproportionality via ∀ i j, c≠0; hvanish; conclusions divisibility ∧ product≠0 ∧ (homogeneous d → (d<m→P=0) ∧ (d=m→∃c, P=C c*∏)). Edge cases m=0, r=0, r=1, P=0, d=0 covered; infinite-field and nonproportional hypotheses are necessary. lean.statement verbatim; node otherwise equals side-live; stmt_deps are the 2 Mathlib leaves used; no duplicate in Mathlib or project Lean; sorry only; docstrings carry source, blueprint id and 4-step proof plan; report has both required sections. No compile, since nothing was changed."
+ }
+}

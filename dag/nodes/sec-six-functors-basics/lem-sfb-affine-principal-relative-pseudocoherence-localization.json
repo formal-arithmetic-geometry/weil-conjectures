@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-affine-principal-relative-pseudocoherence-localization",
+ "kind": "statement",
+ "title": "Polynomial-chart pseudo-coherence under principal localization and base enlargement",
+ "statement": "Let $S=\\operatorname{Spec}R$ be an affine scheme, let $V=D_S(a)\\subseteq S$ for $a\\in R$, and let $f:X\\to V$ be a finite type morphism with $X$ affine [def-pc-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism]. Let $U=D_X(b)$ for $b\\in\\Gamma(X,\\mathcal O_X)$. Here $D_Z(t)$ denotes the principal open of an affine scheme $Z$ where the section $t$ is invertible. Let $E\\in D(\\mathcal O_X)$ and $m\\in\\mathbf Z$ [def-pc-derived-category], with $E|_U=L\\iota^*E$ for the open inclusion $\\iota$ [def-pc-derived-pullback]. If there exist $n\\geq0$ and a closed immersion $i:X\\hookrightarrow\\mathbf A^n_V$ over $V$ such that $Ri_*E$ is $m$-pseudo-coherent, then there exist $r\\geq0$ and a closed immersion $j:U\\hookrightarrow\\mathbf A^r_S$ over $S$ such that $Rj_*(E|_U)$ is $m$-pseudo-coherent [def-weil-closed-immersion, def-nagata-relative-affine-space, def-pc-derived-direct-image, def-sfb-m-pseudo-coherent-complex]. No quasi-coherence assumption on $E$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09VD, lemma-localize-relative-pseudo-coherent, principal-source-open case proved explicitly by adjoining inverses"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-derived-category",
+  "def-weil-closed-immersion",
+  "def-nagata-relative-affine-space",
+  "def-pc-derived-direct-image",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-weil-affine-spectrum",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose the immersion $i$ in the hypothesis. Write $X=\\operatorname{Spec}A$ and $B=R_a[x_1,\\ldots,x_n]$; the principal-localization open immersion identifies $V=D_S(a)$ with $\\operatorname{Spec}R_a$, so the affine-space chart gives $\\mathbf A^n_V=\\operatorname{Spec}B$. The affine description of a closed immersion gives its surjection $B\\twoheadrightarrow A$. Put $C=R[t,x_1,\\ldots,x_n]$ and $P=\\operatorname{Spec}C=\\mathbf A^{n+1}_S$. Adjoining the inverse of $a$ gives $C/(at-1)\\cong B$: apply the polynomial-localization quotient statement to $R[x_1,\\ldots,x_n]$ and $a$; its localization is $R_a[x_1,\\ldots,x_n]$, since both have the universal property of adjoining the variables and an inverse of $a$. Thus the coefficient map is a surjection $C\\twoheadrightarrow B$. It defines a closed immersion $k:\\mathbf A^n_V\\hookrightarrow P$, and $C\\twoheadrightarrow B\\twoheadrightarrow A$ is the map of $ki$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-nagata-relative-affine-space",
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VD, lemma-localize-relative-pseudo-coherent, first paragraph of the proof"
+   }
+  },
+  {
+   "text": "The inverse-adjoining relation has an explicit two-term resolution. In the first application take $D=R[x_1,\\ldots,x_n]$, $c=a$, and $T=t$. If $(cT-1)\\sum_{q=0}^N u_qT^q=0$, its constant coefficient is $-u_0=0$, and successively the coefficient of $T^q$ is $cu_{q-1}-u_q=0$, so every $u_q=0$. Together with the quotient description of step 1 this proves the exact augmented complex $0\\to C\\xrightarrow{at-1}C\\to B\\to0$. This calculation uses neither a domain assumption on $D$ nor a nonzerodivisor assumption on $c$.",
+   "uses": [
+    "lem-weil-pbc-localization-away-polynomial-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VD, proof: the polynomial-localization quotient is pseudo-coherent; explicit length-one resolution"
+   }
+  },
+  {
+   "text": "Apply the affine-quotient resolution sheafification theorem to $k$, the whole affine open $P$, the ideal $(at-1)$, and the augmented chain complex of step 2 (put its two terms in chain degrees $1,0$ and zero elsewhere). The required quotient-spectrum identification is exactly step 1. It gives a quasi-isomorphism from the associated two-term complex, in cochain degrees $-1,0$, to $(k_*\\mathcal O_{\\mathbf A^n_V})[0]$. Each term is $\\mathcal O_P$: the associated sheaf of the rank-one module $C$ is the structure sheaf, as is seen on every principal open from its localization sections. Consequently this is a bounded complex of finite free sheaves and in particular a bounded-above finite free model. By the definition of absolute pseudo-coherence, $(k_*\\mathcal O_{\\mathbf A^n_V})[0]$ is pseudo-coherent.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VD first paragraph; Tag 068C, lemma-regular-immersion-perfect, finite-free quotient resolution; schemes.tex Tag 01HV"
+   }
+  },
+  {
+   "text": "For the closed immersions used here, direct image is exact even for arbitrary module sheaves: its underlying abelian-sheaf functor is the closed-inclusion direct image, which is exact by the cited statement; kernels and cokernels of module sheaves are computed on underlying abelian sheaves with their induced module actions. Therefore on any representative complex $Rv_*=v_*$ for each such closed immersion $v$. For two composable closed immersions $v,w$, the equality $w_*v_*=(wv)_*$ follows on an open $T$ from $v^{-1}(w^{-1}T)=(wv)^{-1}T$, including the induced structure-ring action. It thus also identifies $Rw_*Rv_*$ with $R(wv)_*$. No boundedness or quasi-coherence of the representative is required.",
+   "uses": [
+    "lem-sc-closed-immersion-pushforward-exact",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09VA, lemma-closed-push-pseudo-coherent, opening of proof; modules.tex Tag 01AX"
+   }
+  },
+  {
+   "text": "Set $E'=R(ki)_*E$ on $P$. The composite $ki$ is a closed immersion. Apply the closed-pushforward pseudo-coherence equivalence to $k$ and the object $Ri_*E$: its structure-module hypothesis holds by step 3 and its input is $m$-pseudo-coherent by the hypothesis of the item. By step 4 its output $Rk_*Ri_*E$ is $E'$. Hence $E'$ is $m$-pseudo-coherent on $P$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-sfb-closed-pushforward-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VD, first paragraph: application of perfect.tex Tag 09VA"
+   }
+  },
+  {
+   "text": "Choose $h\\in C$ mapping to $b\\in A$ under the surjection in step 1. Put $W=D_P(h)=\\operatorname{Spec}C_h$, using the principal-localization open immersion, and put $Q=\\operatorname{Spec}C[z]=\\mathbf A^{n+2}_S$. There is a surjection $C_h\\twoheadrightarrow A_b$: a fraction $v/b^d$ is the image of $\\widetilde v/h^d$ for any lift $\\widetilde v\\in C$ of $v$. It gives a closed immersion $i':U\\hookrightarrow W$, whose composite with $W\\hookrightarrow P$ is $(ki)|_U$, since both ring maps send each $u\\in C$ to its image in $A_b$. The quotient $C[z]/(hz-1)\\cong C_h$ gives a closed immersion $l:W\\hookrightarrow Q$. Thus $j=li':U\\hookrightarrow Q$ is a closed immersion over $S$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "def-weil-closed-immersion",
+    "def-nagata-relative-affine-space",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VD, second paragraph and displayed diagram"
+   }
+  },
+  {
+   "text": "Restrict the local strictly perfect approximations for $E'$ to $W$. Restriction to an open has the same stalks at its points, so preserves the cohomology isomorphisms above $m$ and the surjection in degree $m$; a restricted finite-free summand remains such a summand. This proves $E'|_W$ is $m$-pseudo-coherent directly from its definition. Open restriction is the sectionwise restriction functor in the cited statement, and derived open pullback is this exact functor: in the derived-pullback formula the structure-ring map is an isomorphism. On any open $T\\subseteq W$, the preimage under $ki$ lies in $U$, because $h$ pulls back to $b$. Hence $((ki)_*F)|_W(T)=F((ki)^{-1}T)=(i'_*(F|_U))(T)$ for every module sheaf $F$ on $X$, with identical restriction maps and module actions. Apply this equality termwise to a representative of $E$ and use step 4 to obtain $E'|_W\\cong Ri'_*(E|_U)$ in $D(\\mathcal O_W)$.",
+   "uses": [
+    "def-sfb-m-pseudo-coherent-complex",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VD, second paragraph: restriction and identification with the pushforward of E restricted to U"
+   }
+  },
+  {
+   "text": "For $l$, repeat the coefficient calculation of step 2 with $D=C$, $c=h$, $T=z$. It gives the exact resolution $0\\to C[z]\\xrightarrow{hz-1}C[z]\\to C_h\\to0$. The affine-quotient sheafification statement applies on the whole $Q$, with ideal $(hz-1)$ and quotient-spectrum identification from step 6. As in step 3 its associated two-term complex has both terms $\\mathcal O_Q$, so $(l_*\\mathcal O_W)[0]$ is pseudo-coherent. Apply the closed-pushforward equivalence to $l$ and $E'|_W$, which is $m$-pseudo-coherent by step 7. It follows that $Rl_*(E'|_W)$ is $m$-pseudo-coherent. Steps 4 and 7 identify this object with $R(li')_*(E|_U)=Rj_*(E|_U)$. Taking $r=n+2$ proves the conclusion, with the given integer $m$ unchanged.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-pur-pseudo-coherent-complex",
+    "lem-sfb-closed-pushforward-pseudocoherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 09VD, final paragraph: second application of Tag 09VA and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-nagata-relative-affine-space",
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-pur-pseudo-coherent-complex",
+  "lem-sc-closed-immersion-pushforward-exact",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-sfb-closed-pushforward-pseudocoherence",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-sfb-m-pseudo-coherent-complex",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 09VD, lemma-localize-relative-pseudo-coherent, both inverse-adjoining paragraphs, with explicit resolutions and open restriction comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative pseudo coherent polynomial chart condition is preserved when localizing the affine source and enlarging a principal open base",
+   "results": "{\"t\": \"2026-10-23T17:58:37Z\", \"tool\": \"leanfinder\", \"query\": \"Relative pseudo coherent polynomial chart condition is preserved when localizing the affine source and enlarging a principal open base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.sourceAffineLocally_isLocal\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.affineAnd_isLocal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.to_basicOpen\", \"AlgebraicGeometry.targetAffineLocally_affineAnd_le\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover\"], \"digest\": \"fcf090a26cf4bd66\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of the base and source preserves relative m pseudo coherence",
+   "results": "{\"t\": \"2026-10-23T17:58:35Z\", \"tool\": \"leansearch\", \"query\": \"Localization of the base and source preserves relative m pseudo coherence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.LocalizationPreserves\", \"Algebra.FormallyUnramified.localization_base\", \"RingHom.IsStableUnderBaseChange.of_isLocalization\", \"LocalizationPreserves\", \"Algebra.FormallySmooth.localization_base\", \"RingHom.locally_localizationPreserves\", \"RingHom.IsStableUnderBaseChange.isLocalization_map\", \"Algebra.FormallyEtale.localization_map\"], \"digest\": \"a06562c737a387ac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMPseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T17:58:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsMPseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "grep",
+   "query": "relativ.*pseudo|pseudo.*localiz",
+   "results": "{\"t\": \"2026-10-23T17:58:34Z\", \"tool\": \"grep\", \"query\": \"relativ.*pseudo|pseudo.*localiz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Topology/MetricSpace/Pseudo/Basic.lean\"], \"digest\": \"122289fcf847c23b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary morphism properties, presentations, localization or gluing, or unrelated uses of pseudo; none asserts this derived-complex polynomial-chart property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative m pseudo coherence is preserved by principal localization of affine source and enlargement of a principal open affine base",
+   "results": "{\"t\": \"2026-10-23T18:29:57Z\", \"tool\": \"leanfinder\", \"query\": \"Relative m pseudo coherence is preserved by principal localization of affine source and enlargement of a principal open affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.to_basicOpen\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"AlgebraicGeometry.sourceAffineLocally_isLocal\", \"AlgebraicGeometry.affineAnd_isLocal\", \"AlgebraicGeometry.targetAffineLocally_affineAnd_le\"], \"digest\": \"ed124935052ca13f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine morphism properties or ordinary closed immersions, not finite-stage pseudo-coherence of arbitrary derived module complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|strictly.?perfect|IsMPseudoCoherent",
+   "results": "{\"t\": \"2026-10-23T18:30:00Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coher|strictly.?perfect|IsMPseudoCoherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine morphism properties or ordinary closed immersions, not finite-stage pseudo-coherence of arbitrary derived module complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed embeddings into affine space with m pseudo coherent direct image after adjoining inverses",
+   "results": "{\"t\": \"2026-10-23T18:30:01Z\", \"tool\": \"leansearch\", \"query\": \"Closed embeddings into affine space with m pseudo coherent direct image after adjoining inverses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\"], \"digest\": \"4d031a8b990d67e7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine morphism properties or ordinary closed immersions, not finite-stage pseudo-coherence of arbitrary derived module complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "{\"t\": \"2026-10-23T18:30:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine morphism properties or ordinary closed immersions, not finite-stage pseudo-coherence of arbitrary derived module complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex with m pseudo coherent pushforward to affine space remains so after restricting to a principal open embedded by inverse variables",
+   "results": "{\"t\": \"2026-10-23T18:31:37Z\", \"tool\": \"leanfinder\", \"query\": \"A complex with m pseudo coherent pushforward to affine space remains so after restricting to a principal open embedded by inverse variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.to_basicOpen\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"AlgebraicGeometry.instIsAffineHomιBasicOpen\", \"AlgebraicGeometry.sourceAffineLocally_morphismRestrict\"], \"digest\": \"aeb4946cd18bc576\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine morphism properties or ordinary closed immersions, not finite-stage pseudo-coherence of arbitrary derived module complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-pseudocoherence-all-affine-charts",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 09UU (lemma-check-relative-pseudo-coherence-on-charts, equivalence (1) and (3) for every integer m). Supporting prerequisite of 09UU proof, application to id:P -> P: identify pseudo-coherence relative to P with absolute pseudo-coherence using the zero-dimensional polynomial chart of every affine open. Supporting prerequisite of Tag 09UJ: Tag 09VD, lemma-localize-relative-pseudo-coherent, principal-source-open case proved explicitly by adjoining inverses.",
+   "via": [
+    "lem-sfb-relative-pseudocoherence-all-affine-charts",
+    "lem-sfb-flat-ambient-relative-pseudocoherence",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-principal-relative-pseudocoherence-localization",
+  "worker": "stage1",
+  "group": "Q10",
+  "summary": "Followed Stacks 09VD with explicit inverse-adjoining resolutions, exact closed direct images, and sectionwise open comparison. Reused existing nodes for every non-elementary ingredient, creating no new nodes. Retained the statement, including arbitrary E and fixed m.",
+  "blueprint": "Realizes the inherited supporting prerequisite for Tag 09UJ in blueprint.from.place, specifically Tag 09VD principal-source-open localization. Read latest sk-thm-sf-ctf-stability and det-thm-sf-ctf-stability-direct-images proof (3); no chapter or unit change. blueprint_refs ancestor returns None for this inherited chain; preserved its null ancestor and via list. Searches pseudo-coherent, pseudo coherence, localize-relative-pseudo-coherent and principal localization found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-affine-quotient-resolution-sheafification",
+    "why": "Generic affine-quotient resolution sheafification, applied to two explicit length-one free resolutions; no theorem in this unit states the sheafification comparison."
+   },
+   {
+    "node": "lem-sc-closed-immersion-pushforward-exact",
+    "why": "Generic exactness for closed-inclusion abelian direct image, applied to underlying module sheaves to compute unbounded closed direct images; no statement of the unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "lem-sc-closed-immersion-pushforward-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-42cec60b9",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-42cec60b9 (reviewer sub-agent of L); spot-checked: Read the item's 8 steps in full against Stacks more-morphisms 09VD (the item proves the U=D(g) case, which is the case the source proof writes out and the one the citer lem-sfb-relative-pseudocoherence-all-affine-charts uses) and against every cited statement. Step 2: the coefficient induction gives cT-1 injective on D[T] with no regularity of c; checked with c=0, c nilpotent and c a zero divisor. Steps 3 and 8: lem-sc-affine-quotient-resolution-sheafification is applied to the whole affine target with a two-term resolution, the terms are identified with O by the tilde-sections statement, and the result is pseudo-coherent in the sense of def-pur, which is exactly the hypothesis of lem-sfb-closed-pushforward-pseudocoherence. Step 4: R(closed)_* equals the termwise direct image via lem-sc-closed-immersion-pushforward-exact, valid for unbounded complexes. Step 6: the surjection C_h->A_b and (ki)^{-1}(W)=U are right. Step 7: E'|_W is m-pseudo-coherent by restricting the strictly perfect approximations, and E'|_W equals Ri'_*(E|_U) sectionwise. r=n+2. Edge cases checked: a=0 or nilpotent, b=0, b=1, n=0, E=0. No new nodes. No duplicate found: checked 09VD, the 09VC/09VE/065H nodes and local-on-source. Both declared tool_uses (lem-sc-affine-quotient-resolution-sheafification, lem-sc-closed-immersion-pushforward-exact) are generic black boxes that the unit does not supply; accepted. No SGA. FIX (C1): step 1 used V=D_S(a)≅Spec R_a without citing it. I added a clause to the step text and added lem-weil-pbc-principal-localization-open-immersion to step 1's uses; it was already in proof_deps, so proof_deps is unchanged. The corrected item is at fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePrincipalRelativePseudoCoherenceLocalization",
+  "declaration": "AlgebraicGeometry.affine_principal_relative_pseudoCoherence_localization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePrincipalRelativePseudoCoherenceLocalization.lean",
+  "statement": "theorem affine_principal_relative_pseudoCoherence_localization [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (S : Scheme.{u}) [IsAffine S] (a : Γ(S, ⊤)) (X : Scheme.{u}) [IsAffine X] (f : X ⟶ (S.basicOpen a).toScheme) [LocallyOfFiniteType f] [QuasiCompact f] (b : Γ(X, ⊤)) (E : schemeDerivedCategory X) (m : ℤ) (h : ∃ n : ℕ, ∃ i : X ⟶ AffineSpace (ULift.{u} (Fin n)) (S.basicOpen a).toScheme, IsClosedImmersion i ∧ i ≫ (AffineSpace (ULift.{u} (Fin n)) (S.basicOpen a).toScheme ↘ (S.basicOpen a).toScheme) = f ∧ Scheme.IsMPseudoCoherent (AffineSpace (ULift.{u} (Fin n)) (S.basicOpen a).toScheme) m ((schemeDerivedDirectImage i).obj E)) : ∃ r : ℕ, ∃ j : (X.basicOpen b).toScheme ⟶ AffineSpace (ULift.{u} (Fin r)) S, IsClosedImmersion j ∧ j ≫ (AffineSpace (ULift.{u} (Fin r)) S ↘ S) = (X.basicOpen b).ι ≫ f ≫ (S.basicOpen a).ι ∧ Scheme.IsMPseudoCoherent (AffineSpace (ULift.{u} (Fin r)) S) m ((schemeDerivedDirectImage j).obj ((derivedPullback (X.basicOpen b).ι).obj E))",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-807c2fc44",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Matches Stacks Tag 09VD (principal-open case) and the node clause by clause: S affine with a in Γ(S,⊤), V = S.basicOpen a, f finite type (LocallyOfFiniteType + QuasiCompact, per def-weil-finite-type-morphism), U = X.basicOpen b, E|_U = derivedPullback ι E, hypothesis ∃ n, closed immersion i over V with IsMPseudoCoherent of Ri_*E, conclusion ∃ r, closed immersion j over S via ι_U ≫ f ≫ ι_V with the same m. ULift (Fin n) affine space and the ∀-Y HasDerivedCategory family match the landed IsMPseudoCoherentRelativeTo. Edge cases a, b zero/nilpotent/unit, empty scheme, n = r = 0, any m and unbounded E are covered. Statement verbatim; only the lean field changed; dependency records identical to live. Imports correct; no definitions; sorry only; docstrings carry source and 8 steps; no duplicate; not superseded. Not recompiled by instruction; worker reports a clean compile."
+ }
+}

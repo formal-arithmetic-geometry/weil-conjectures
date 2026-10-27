@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-etale-scalar-pullback-compactification",
+ "kind": "lemma",
+ "title": "Scalar change commutes with the compactification pullback compositor",
+ "statement": "Let A and B be commutative rings and φ:A→B a unital homomorphism. For schemes X,Y, a map f:X→Y, a compactification c=(j:X→Z,g:Z→Y,f=j;g), and K∈D_A(Y), write Q for ordinary derived scalar extension, a_p:Q;L_B(p)≅L_A(p);Q for scalarPullbackIso and k_R:L_R(g);L_R(j)≅L_R(f) for leftDerivedUpperStarCompactificationIso. Then Q_X(k_A(K));a_f(K)⁻¹ = a_j(L_A(g)K)⁻¹;L_B(j)(a_g(K)⁻¹);k_B(Q_Y K). This is an equality of morphisms from Q_X(L_A(j)L_A(g)K) to L_B(f)Q_Y K. There are no flatness, finiteness or boundedness hypotheses.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-pur-etale-scalar-mate-projection",
+  "def-asd-compactifiable"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, with sites-modules.tex Tag 03D8; exact-to-left-derived transport in step 2 of lem-pur-etale-open-scalar-projection"
+ },
+ "proof": [
+  {
+   "text": "Apply scalarPullback_composition to c.i and c.g, with output map f and factorization c.comm. Use the proved private categorical transport_composition helper: precompose the exact composition equation by the B exact/left-derived comparison for f and postcompose by scalar extension of the inverse comparisons for c.g and c.i. Naturality of the comparisons and scalarPullbackIso cancels the inverse pairs, giving the forward composition square for the left-derived pullbacks.",
+   "uses": [
+    "lem-sf-scalar-pullback-composition",
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand leftDerivedUpperStarComp via leftDerivedFunctorNatIso and leftDerivedFunctorCompIso; the comparison for the composite exact functor cancels with its inverse. This identifies the transported compositors in the square. Regard both sides as composite object isomorphisms, use Iso.ext, and take their inverses. The proved source-library leftDerivedUpperStarCompactificationIso_eq identifies the compactification compositor with the inverse general compositor indexed by f and c.comm, yielding the displayed formula without substituting in the dependent compactification data. Only functoriality, naturality, and inverse cancellation are used, so zero objects and empty schemes are included.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sf-scalar-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S2",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition, with sites-modules.tex Tag 03D8; exact-to-left-derived transport in step 2 of lem-pur-etale-open-scalar-projection"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scalar extension commutes with composition of derived pullbacks",
+   "results": "PresheafOfModules.pullbackComp, ModuleCat.extendScalarsComp and geometric pullbackComp lemmas. None compares the normalized derived scalar square with the compactification compositor.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; use the existing project scalarPullback_composition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "Functor.mapIso and its hom, inv, symm and trans lemmas supply generic inversion and functorial transport.",
+   "date": "2026-10-27",
+   "verdict": "Generic tools suffice for taking inverses after proving the forward composition equality."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullback.*comp|scalarPullback.*[Cc]omp",
+   "results": "Project search finds ScalarPullbackComposition.scalarPullback_composition for exact mapDerivedCategory pullbacks. The desired formula uses leftDerivedFunctor and leftDerivedUpperStarCompactificationIso instead.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing exact-composition theorem and prove its transport."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleOpenScalarProjection",
+  "group": "U4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Pullback-compositor transport in step 2 of lem-pur-etale-open-scalar-projection",
+   "via": [
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-pur-etale-open-scalar-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleScalarPullbackCompactification",
+  "file": "lean/Sheaf/Paper/EtaleScalarPullbackCompactification.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarPullback_compactification",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarPullback_compactification"
+  ],
+  "statement": "theorem scalarPullback_compactification\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (K : DerivedCategoryModule A Y) :\n    (scalarExtension φ X).map\n        ((leftDerivedUpperStarCompactificationIso (ModuleCat.{u + 1} A) c).hom.app K) ≫\n      (scalarPullbackIso φ f).inv.app K =\n    (scalarPullbackIso φ c.i).inv.app\n        ((upperStar (ModuleCat.{u + 1} A) c.g).leftDerivedFunctor.obj K) ≫\n      (upperStar (ModuleCat.{u + 1} B) c.i).leftDerivedFunctor.map\n        ((scalarPullbackIso φ c.g).inv.app K) ≫\n      (leftDerivedUpperStarCompactificationIso (ModuleCat.{u + 1} B) c).hom.app\n        ((scalarExtension φ Y).obj K)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261027T094526-L-239262",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261027T112427-L-1582805",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

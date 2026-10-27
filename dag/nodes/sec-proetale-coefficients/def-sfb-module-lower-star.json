@@ -242,7 +242,87 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-module-pushforward-pullback",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_comp_forget",
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_X",
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_smul",
+    "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_additive",
+    "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_lowerStar"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      85,
+      91
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_comp_forget",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      97,
+      100
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_X",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      103,
+      105
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_smul",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      108,
+      115
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_additive",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      117,
+      119
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_lowerStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      121,
+      125
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
@@ -268,5 +348,25 @@
   "group": "N9",
   "result": "pass",
   "note": "Existing binding to AlgebraicGeometry.ProEtale.CondensedRing.lowerStar (side framework ModuleObject/UpperLowerStar/Defs.lean:88-91); only the lean field changed (checked against the side clone); the blueprint source lists the same declaration. The definition is mapMod(f_*) then Mod.comap along condensedPushforwardHom : Λ_Y ⟶ f_*Λ_X; #synth confirms mapMod uses the recorded ProEtale.laxMonoidal_lowerStar. lowerStar_comp_forget, lowerStar_obj_X and lowerStar_obj_smul state the underlying sheaf and the η_f⊗1, μ, f_*γ action; lowerStar_additive and preservesFiniteLimits_lowerStar state additivity and left exactness. lean.statement is verbatim; one universe u throughout (Scheme.{u}, Ab.{u+1}); IsCommMonObj is dropped because unused, a harmless generalization. No duplicate binding in the DAG. nt_compile --json scratch run (2.6 s): #check and #print confirm the signatures, axioms are propext, Classical.choice and Quot.sound only. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes, with coefficient rings $\\Lambda_X=p_X^*\\Lambda$\n([det-def-sfb-pulled-back-coefficients]) and categories of module objects\n$\\Mod_{\\Lambda_X}$ ([det-def-sfb-module-objects]). The *pushforward of module objects* is\n\n$$\nf_*:=\\operatorname{Res}_{\\eta_f}\\circ\\operatorname{mapMod}(f^{\\Ab}_*)\\colon\n\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y},\n$$\n\nwhere the transport ([det-def-sfb-transport]) $\\operatorname{mapMod}(f^{\\Ab}_*)$ makes $f^{\\Ab}_*M$ an\n$f^{\\Ab}_*\\Lambda_X$-module through the lax monoidal structure of the pushforward\n$f^{\\Ab}_*$ of abelian sheaves ([def-sfb-finite-lower-star],\n[def-sfb-finite-lower-star-lax-monoidal]), and $\\operatorname{Res}_{\\eta_f}$ restricts scalars\nalong $\\eta_f\\colon\\Lambda_Y\\to f^{\\Ab}_*\\Lambda_X$ ([det-def-sfb-coefficient-morphisms]). Thus the underlying sheaf of $f_*M$ is\n$f^{\\Ab}_*M$, and $\\Lambda_Y$ acts by\n\n$$\n\\Lambda_Y\\otimes f^{\\Ab}_*M\\xrightarrow{\\eta_f\\otimes1}\nf^{\\Ab}_*\\Lambda_X\\otimes f^{\\Ab}_*M\\xrightarrow{\\mu}\nf^{\\Ab}_*(\\Lambda_X\\otimes M)\\to f^{\\Ab}_*M .\n$$\n\nThe functor $f_*$ is additive and left exact.",
+  "proof": [
+   {
+    "text": "Both factors are additive. The pushforward $f^{\\Ab}_*$ is left exact, being a right\nadjoint ([def-sfb-finite-upper-lower-star-adjunction]). Finite limits of module objects\nare computed on the underlying sheaves ([det-prop-sfb-module-category]), so\n$\\operatorname{mapMod}(f^{\\Ab}_*)$ is left exact, and restriction of scalars is exact\n([det-def-sfb-change-of-scalars]). Hence $f_*$ is left exact.",
+    "uses": [
+     "def-sfb-finite-upper-lower-star-adjunction",
+     "det-def-sfb-change-of-scalars"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-finite-extension-open-exhaustion",
+ "kind": "statement",
+ "title": "Compatible opens containing rational points exhaust after a finite extension",
+ "statement": "Let $k$ be a field [def-weil-field], fix an algebraic closure $\\bar k$ [def-weil-algebraic-closure], and let $Z$ be a finite-type $k$-scheme [def-pc-scheme, def-weil-finite-type-morphism]. For every finite intermediate extension $k\\subseteq K\\subseteq\\bar k$ (finite means finite-dimensional as a $k$-vector space), suppose an open subset $U[K]\\subseteq Z_K=Z\\times_k\\operatorname{Spec}K$ is given. Assume that every $K$-rational point of $Z_K$ has image in $U[K]$, and that for each inclusion $K\\subseteq K'$ the inverse image $(U[K])_{K'}$ is contained in $U[K']$. Then $U[K]=Z_K$ for some finite intermediate extension $K/k$. No separability, perfectness, smoothness or reducedness is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix B, Lemma B.36, printed p.604"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-pc-rational-point",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\overline Z=Z_{\\bar k}$ and let $p_K:\\overline Z\\to Z_K$ be the scalar projection. Define $W_K=p_K^{-1}(U[K])$. These are open subsets of the same space $\\overline Z$. By finite-type base change, $\\overline Z$ is of finite type over $\\bar k$, hence quasi-compact by the definition of finite type over an affine base.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/varieties.tex; literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Stacks Tag 01T4 (lemma-base-change-finite-type); Milne B.36, alternative algebraic-closure argument, setup"
+   }
+  },
+  {
+   "text": "Let $x$ be a closed point of $\\overline Z$. Since $\\bar k$ is algebraically closed and $\\overline Z$ is locally of finite type over it, the structural map $\\bar k\\to\\kappa(x)$ is an isomorphism. Its inverse gives a $\\bar k$-rational point $q:\\operatorname{Spec}\\bar k\\to\\overline Z$ with image $x$. Compose $q$ with $\\overline Z\\to Z$ to obtain $a:\\operatorname{Spec}\\bar k\\to Z$.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-pc-rational-point",
+    "def-weil-affine-spectrum",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/varieties.tex; literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Stacks Tag 01TB (lemma-jacobson-finite-type-points) and Tag 00FV (theorem-nullstellensatz), algebraically closed specialization"
+   }
+  },
+  {
+   "text": "Choose from the finite-type affine cover of $Z$ an affine open $\\operatorname{Spec}A$ containing the image of $a$, and write $A=k[a_1,\\ldots,a_n]$. The map $a$ on this affine is a $k$-algebra map $\\varphi:A\\to\\bar k$. Every $\\varphi(a_i)$ is algebraic over $k$, so $K=k(\\varphi(a_1),\\ldots,\\varphi(a_n))$ is finite over $k$. Since every element of $A$ is a polynomial in the $a_i$ over $k$, $\\varphi(A)\\subseteq K$. Thus $\\varphi$ factors through $A\\to K$, giving $b:\\operatorname{Spec}K\\to Z$ whose extension to $\\bar k$ is $a$. By the fibre-product universal property, $b$ gives a $K$-rational point $b_K$ of $Z_K$, and $p_Kq$ is its composite with $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}K$. By the assumed rational-point inclusion, the image of $b_K$ lies in $U[K]$; consequently $x\\in W_K$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-pc-fibre-product",
+    "def-pc-rational-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/varieties.tex; literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Stacks Tag 09GH (lemma-algebraic-finitely-generated); affine coordinate factorization written out, rather than invoking a point-descent theorem"
+   }
+  },
+  {
+   "text": "The closed subset $C=\\overline Z\\setminus\\bigcup_K W_K$ contains no closed point of $\\overline Z$, by the preceding two steps. Apply the Jacobson statement for schemes locally of finite type over a field: the closed points of $\\overline Z$ lying in $C$ are dense in $C$. Here this set is empty, whose closure is empty, so $C=\\varnothing$. Hence the $W_K$ cover $\\overline Z$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/varieties.tex; literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Stacks Tag 0478 (lemma-locally-finite-type-Jacobson), part (2)"
+   }
+  },
+  {
+   "text": "By quasi-compactness choose $K_1,\\ldots,K_r$ with $\\overline Z=\\bigcup_{i=1}^r W_{K_i}$. Choose a finite $k$-basis of each $K_i$ and let $L\\subseteq\\bar k$ be the field generated by all these basis elements over $k$. They are algebraic, so $L/k$ is finite. It contains each $K_i$, since it contains its basis and all its $k$-linear combinations. The given compatibility and the composition of scalar projections imply $W_{K_i}\\subseteq W_L$. It follows that $W_L=\\overline Z$. If the finite subcover is empty, then $\\overline Z$ is empty; the same construction means $L=k$ and still $W_L=\\overline Z$.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-generators-finite-extension",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/varieties.tex; literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Stacks Tag 09GH (lemma-algebraic-finitely-generated); finite-subcover definition and the assumed monotonicity"
+   }
+  },
+  {
+   "text": "The field extension $L\\subseteq\\bar k$ induces a surjection $\\operatorname{Spec}\\bar k\\to\\operatorname{Spec}L$. Its base change along $Z_L\\to\\operatorname{Spec}L$ is $p_L:\\overline Z\\to Z_L$, so $p_L$ is surjective. For each $z\\in Z_L$ choose $y\\in\\overline Z$ with $p_L(y)=z$. Since $W_L=p_L^{-1}(U[L])=\\overline Z$, we have $z\\in U[L]$. Therefore $U[L]=Z_L$, as required.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/varieties.tex; literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Stacks Tag 01S1 (lemma-base-change-surjective); elementary detection of equality of subsets by surjective inverse image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-pc-rational-point",
+  "def-weil-affine-spectrum",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-pc-fibre-product",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Appendix B, Lemma B.36, printed p.604 (PDF p.616). Alternative proof via the algebraic closure, affine coordinate descent, the Jacobson property, quasi-compactness, and surjective field base change; this is not Milne's printed dimension-decrease proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*extension.*open|rational.*point.*open|open.*rational.*point",
+   "results": "{\"t\": \"2026-10-23T14:56:50Z\", \"tool\": \"grep\", \"query\": \"finite.*extension.*open|rational.*point.*open|open.*rational.*point\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine subcovers, directed covers, open-subsheme interfaces and Krull topology do not state exhaustion over varying finite field extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible opens containing rational points over every finite extension exhaust a finite type scheme over a finite extension",
+   "results": "{\"t\": \"2026-10-23T14:56:50Z\", \"tool\": \"leansearch\", \"query\": \"Compatible opens containing rational points over every finite extension exhaust a finite type scheme over a finite extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.Scheme.Opens.mem_basicOpen_toScheme\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\"], \"digest\": \"39e4f0a2bd5b0a48\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine subcovers, directed covers, open-subsheme interfaces and Krull topology do not state exhaustion over varying finite field extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"FiniteDimensional\", \"IsOpen\"",
+   "results": "{\"t\": \"2026-10-23T14:56:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"FiniteDimensional\\\", \\\"IsOpen\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine subcovers, directed covers, open-subsheme interfaces and Krull topology do not state exhaustion over varying finite field extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme over a field, an increasing compatible family of open subsets over finite field extensions containing all rational points eventually covers the scheme",
+   "results": "{\"t\": \"2026-10-23T14:56:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type scheme over a field, an increasing compatible family of open subsets over finite field extensions containing all rational points eventually covers the scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.directedAffineCover\", \"AlgebraicGeometry.iSup_affineOpens_eq_top\", \"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"AlgebraicGeometry.Scheme.OpenCover\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\"], \"digest\": \"dcb6de9019d221b3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine subcovers, directed covers, open-subsheme interfaces and Krull topology do not state exhaustion over varying finite field extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If U_K is open in X_K and contains X(K) for every finite extension K and these opens increase under extension then U_K equals X_K for some finite extension",
+   "results": "{\"t\": \"2026-10-23T14:56:54Z\", \"tool\": \"leanfinder\", \"query\": \"If U_K is open in X_K and contains X(K) for every finite extension K and these opens increase under extension then U_K equals X_K for some finite extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"krullTopology_isTotallySeparated\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"InfiniteGalois.isOpen_iff_finite\", \"AlgebraicGeometry.Scheme.Opens.exists_toScheme\", \"AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_I₀\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_X\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\"], \"digest\": \"956d84fe5b70e951\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: finite affine subcovers, directed covers, open-subsheme interfaces and Krull topology do not state exhaustion over varying finite field extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of opens in a finite type scheme over finite extensions containing every rational point eventually equals the scheme",
+   "results": "{\"t\": \"2026-10-23T18:01:52Z\", \"tool\": \"leanfinder\", \"query\": \"A compatible family of opens in a finite type scheme over finite extensions containing every rational point eventually equals the scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.iSup_affineOpens_eq_top\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover_I₀\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\"], \"digest\": \"490e06cfea9f5871\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine open covers, finite-subcover interfaces, rational-map domains or limit-cover constructions, not compatible opens over varying finite field extensions."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsOpen, FiniteDimensional",
+   "results": "{\"t\": \"2026-10-23T18:01:52Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, IsOpen, FiniteDimensional\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine open covers, finite-subcover interfaces, rational-map domains or limit-cover constructions, not compatible opens over varying finite field extensions."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*extension.*open|rational.*point.*open|open.*rational.*point",
+   "results": "{\"t\": \"2026-10-23T18:01:52Z\", \"tool\": \"grep\", \"query\": \"finite.*extension.*open|rational.*point.*open|open.*rational.*point\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine open covers, finite-subcover interfaces, rational-map domains or limit-cover constructions, not compatible opens over varying finite field extensions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible open subsets containing all rational points exhaust a finite type scheme after finite field extension",
+   "results": "{\"t\": \"2026-10-23T18:01:53Z\", \"tool\": \"leansearch\", \"query\": \"Compatible open subsets containing all rational points exhaust a finite type scheme after finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Opens\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\"], \"digest\": \"b43a6336281b86e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine open covers, finite-subcover interfaces, rational-map domains or limit-cover constructions, not compatible opens over varying finite field extensions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Milne lemma compatible opens over finite intermediate field extensions containing all rational points eventually cover the entire scheme",
+   "results": "{\"t\": \"2026-10-23T18:03:15Z\", \"tool\": \"leanfinder\", \"query\": \"Milne lemma compatible opens over finite intermediate field extensions containing all rational points eventually cover the entire scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.iSup_affineOpens_eq_top\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\"], \"digest\": \"b57e01ff9b8e9180\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are affine open covers, finite-subcover interfaces, rational-map domains or limit-cover constructions, not compatible opens over varying finite field extensions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-group-homogeneous-quotient",
+  "date": "2026-10-24",
+  "group": "Q85"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: No homomorphisms between split tori and abelian varieties. Homomorphism image factorization used before applying Milne Proposition 8.1(b). Milne Theorem 5.39 proof: existence of G/N, expanded to the independent homogeneous-space theorem 5.28 for arbitrary closed subgroups.; Milne B.37 Step 1, eventual representability after finite field extension; this split realizes B.36 itself by affine-coordinate descent and an algebraic-closure open cover, the exhaustion input to B.37 Step 1",
+   "via": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-extension-open-exhaustion",
+  "worker": "stage1",
+  "summary": "Kept all hypotheses and the conclusion of Milne B.36. Added missing statement dependencies for scalar extension, rational points and spectra. Gave a six-step algebraic-closure proof using existing Mathlib leaves throughout, with coordinate descent and finite common-field construction explicit; no new nodes. Checked the empty scheme and inseparable extensions.",
+  "blueprint": "Supports the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration-reduction chain at Milne B.37 Step 1, precisely the invocation of Milne B.36 for eventual exhaustion by compatible opens. Read the current latest blueprint direct-images proof (3); no change to chapter or unit route. The ancestor command returns None for this inherited source-only chain; retained blueprint.from.node and via, and filled the precise local source place."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-92dfb8e3e",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-92dfb8e3e (reviewer sub-agent of L); spot-checked: I read the whole delivery and changed nothing. It is one commit: the item plus its report, with no new nodes. Live still has the item unsplit with no repair note, so the delivery is not superseded. Statement: I checked it against Milne iAG2017 App. B Lemma B.36 (printed p.604, PDF p.616). It matches clause by clause: Milne's 'algebraic scheme' becomes finite type over k, the fields are finite and lie in a fixed algebraic closure, U[K] contains the K-rational points, monotonicity is stated as inverse images, and the conclusion is equality for some finite K. The text is unchanged from base; the three added stmt_deps (base change, rational point, Spec) are notions the text already uses. Both citers apply the item over k_1 inside the same algebraic closure, which the statement covers (step 7 of lem-sfb-algebraic-group-homogeneous-quotient and of lem-sfb-trivial-kernel-homogeneous-quotient). Proof: it is agent-written and openly not Milne's argument; I checked each of the six steps against the cited statements. (1) Finite-type base change, then the affine-base definition, gives quasi-compactness of Z_kbar. (2) The closed-point residue-field iso over an algebraically closed field gives a section q through each closed point. (3) Affine coordinates of A=k[a_i] map into K=k(phi(a_i)), which is finite by the IntermediateField.finiteDimensional_adjoin leaf. I verified p_K∘q = b_K∘j on both fibre-product components, so x lies in W_K. (4) The closed-subset form of the Jacobson leaf forces the closed complement C to be empty. (5) Quasi-compactness gives K_1..K_r; L is generated by their k-bases and contains each K_i. I checked p_{K_i}=π∘p_L, so monotonicity gives W_{K_i}⊆W_L; the empty-cover case uses L=k. (6) Spec kbar→Spec L is surjective, its base change p_L is surjective, so U[L]=Z_L. proof_deps equals the union of the step uses. Every statement cited is a Mathlib leaf and the rest are definitions, so there is no off-route use and no tool_uses entry. Stacks tags 01T4, 01TB, 00FV, 09GH, 0478 and 01S1 resolve to the right labels. There is no SGA citation and no duplicate in the DAG (rg -L for B.36 and the compatible-opens wording). Edge cases tested: Z empty, k algebraically closed, a purely inseparable point over an imperfect field, nonreduced Z, and a positive-dimensional affine Z."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteExtensionOpenExhaustion",
+  "declaration": "AlgebraicGeometry.exists_finiteExtension_open_eq_top",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteExtensionOpenExhaustion.lean",
+  "statement": "theorem exists_finiteExtension_open_eq_top (k Ω : Type u) [Field k] [Field Ω] [Algebra k Ω] [IsAlgClosure k Ω] (Z : Scheme.{u}) (f : Z ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (U : (K : {K : IntermediateField k Ω // FiniteDimensional k K}) → (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K.val)))).Opens) (hpoints : ∀ (K : {K : IntermediateField k Ω // FiniteDimensional k K}) (p : (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K.val)))).fieldPoints K.val), p.val.base default ∈ U K) (hmono : ∀ (K L : {K : IntermediateField k Ω // FiniteDimensional k K}) (h : K.val ≤ L.val), (baseChangeMap f (Over.homMk (U := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k L.val)))) (V := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K.val)))) (Spec.map (CommRingCat.ofHom (IntermediateField.inclusion h).toRingHom)) (by change Spec.map _ ≫ Spec.map _ = Spec.map _ rw [← Spec.map_comp] congr 1))) ⁻¹ᵁ U K ≤ U L) : ∃ K : {K : IntermediateField k Ω // FiniteDimensional k K}, U K = ⊤",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-345406270",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Statement matches Milne B.36 and the node clause by clause. k and Ω are in Type u with IsAlgClosure; Z is finite type via LocallyOfFiniteType + QuasiCompact. The index is the subtype of FiniteDimensional intermediate fields, with no separability. U K is an open of pullback f (Spec.map algebraMap), the base-change convention. hpoints uses Scheme.Hom.fieldPoints of pullback.snd (sections, i.e. K-rational points; one-point Spec K tested at default). hmono covers every K ≤ L through the recorded baseChangeMap of Spec.map inclusion. Conclusion ∃ K, U K = ⊤. Recorded statement matches the file verbatim. All seven stmt_deps are recorded and used. No new definitions, sorry only, docstrings carry source place, blueprint id and proof steps 1-6. Node copy differs from live only in lean; live node is unsplit without a module. Edge cases checked: empty Z, algebraically closed k, inseparable extensions, K=L. No findings; no file changed or compiled."
+ }
+}

@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+ "kind": "statement",
+ "title": "Knudsen forgetful morphism as the universal stable curve",
+ "statement": "Let $S$ be a scheme, $g\\geq2$ and $r\\geq0$. Use the stable ordered pointed moduli groupoids [def-sfb-stable-pointed-moduli-groupoids]. There is a natural forgetful-and-stabilizing morphism $F_r:\\overline{\\mathcal M}_{g,r+1}\\to\\overline{\\mathcal M}_{g,r}$. For every stable ordered $r$-pointed family $(X\\to T,s_1,\\ldots,s_r)$, the 2-fibre product $T\\times_{\\overline{\\mathcal M}_{g,r}}\\overline{\\mathcal M}_{g,r+1}$ is represented by the total scheme $X$, over $T$. Under this identification a point of $X$ is an additional arbitrary section of $X$, and the corresponding $(r+1)$-pointed family is obtained by stabilization: a rational component is inserted if the extra section meets a marking or node. Contraction after forgetting the last marking and stabilization are mutually inverse, naturally under arbitrary base change. Consequently the base change of $F_r$ to any scheme is a projective flat finitely presented curve, with projectivity in [def-trf-projective-bundle-morphism]. On the open subcategory where the family is smooth and the new section is disjoint from the old sections, stabilization is the identity on the underlying curve and simply appends that section. Stable ordered pointed families in this convention remain stable after arbitrary base change. Families and isomorphisms in this assertion use exactly the ordered-label convention in the definition. Schemes, fibre products, flatness and finite presentation use [def-pc-scheme], [def-pc-fibre-product], [def-weil-flat-morphism] and [def-sbc-locally-finite-presentation].",
+ "source": {
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Section 2, contraction and stabilization, especially Corollary 2.6 and Theorem 2.7, printed pp.178--180. Local PDF WANTED; publisher PDF and indexed primary-author scan consulted online.",
+  "url": "https://journals.msp.org/mscand/article/download/1622/1621/1653"
+ },
+ "stmt_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "First check the convention under pullback $T'\\to T$. A stable family is proper by the projective-bundle properness lemma, and its pullback is proper by proper base change. Regard the disjoint sections as their disjoint union: the semistable marked base-change lemma gives flatness, finite presentation, nodality and disjoint smooth sections after pullback. For every algebraically closed $\\Omega$ and $\\operatorname{Spec}\\Omega\\to T'$, its geometric fibre is the original fibre for the composite to $T$. Thus connectedness, genus and every component's stability inequality are literally the same. Apply the log-canonical algebra lemma to the pulled-back proper family: its degrees are all positive (genus zero has at least three special points, genus one at least one, and genus at least two has positive degree). Its no-zero-component clause identifies the family with the stated relative Proj and supplies projective-bundle projectivity. This verifies stability after arbitrary base change without changing projectivity conventions.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "lem-trf-projective-bundle-proper",
+    "lem-weil-pbc-proper-base-change",
+    "lem-trf-semistable-marked-base-change",
+    "lem-sfb-log-canonical-deletion-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Section 1 and Proposition 2.1; arbitrary geometric-point definition of stability."
+   }
+  },
+  {
+   "text": "Given a stable $(r+1)$-pointed family $Y$, retain only its first $r$ markings in $D$. In the degree formula for $\\omega_Y(D)$ the component containing the last marking loses exactly one special point. All other degrees stay positive. A rational component can reach zero only if it had exactly three special points, one the last marking. Such a component is smooth: if it had a self-node, its two remaining special points would be the two branches of that self-node, so it would meet no other component and would be the whole connected fibre, of arithmetic genus $1$, contradicting $g\\geq2$. A genus-one component could reach zero only if its sole special point was the last marking; it would then have no attaching branch, hence would be the entire connected fibre, contradicting $g\\geq2$. Components of larger genus keep positive degree. Thus the hypotheses of the log-canonical algebra lemma hold, with at most one zero component. Its evaluation contraction $q:Y\\to X$ gives a stable ordered $r$-pointed family and an arbitrary section $\\Delta=q t$. This is functorial in isomorphisms and arbitrary base change. Call this functor $c$; discarding $\\Delta$ defines the required $F_r$. For an arrow over $u:T\\prime\\to T$, apply $c$ to its labelled pullback isomorphism and use the canonical base-change comparison for $q$. This gives the required arrow over $u$; naturality and uniqueness of the contraction comparison respect identities and the fibre-product associativity used in composition.",
+   "uses": [
+    "lem-sfb-log-canonical-deletion-algebra",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Proposition 2.1, construction of contraction."
+   }
+  },
+  {
+   "text": "Conversely start with a stable $r$-pointed $X$ and arbitrary section $\\Delta$. Properness follows from its projective-bundle presentation. Form exactly the module $\\mathcal K$ and expansion $Z=\\operatorname{Proj}_X\\operatorname{Sym}\\mathcal K$ of the section-ideal lemma. That lemma gives a proper flat finitely presented nodal family with the disjoint ordered lifts. Its fibre description proves stability: an inserted tail has its old marking, new marking and attachment; an inserted bridge has its new marking and two attachments. Each has three special points. On every old component a lost marking or branch is replaced by an attachment, so its old stability inequality is unchanged. Genus remains $g$. The log-canonical lemma in its positive-degree case supplies projective-bundle projectivity of $Z\\to T$. These constructions define a functor $s$ to stable $(r+1)$-pointed families, compatible with all base changes and all labelled isomorphisms.",
+   "uses": [
+    "lem-sfb-section-ideal-proj-expansion",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-trf-projective-bundle-proper",
+    "def-sfb-stable-pointed-curve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Definition 2.3 and Theorem 2.4; projectivity from the logarithmic algebra."
+   }
+  },
+  {
+   "text": "For $p:s(X,\\Delta)\\to X$, the fibre description shows that the only component that becomes degree zero after deleting the new marking is the inserted tail or bridge; $p$ contracts exactly that component. If none was inserted the fibre map is an isomorphism. The uniqueness clause of the log-canonical contraction therefore identifies $c(s(X,\\Delta))$ with $(X,\\Delta)$, preserving every old section and the image of the new one. The identification is canonical and respects base change.",
+   "uses": [
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-section-ideal-proj-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Corollary 2.6, first comparison."
+   }
+  },
+  {
+   "text": "For the contraction $q:Y\\to X$ from step 2, put $\\Delta=q t$. The evaluation lemma applies: its exceptional component has the last marking and exactly two old special points. It gives the quotient $q^*\\mathcal K\\twoheadrightarrow\\mathcal O_Y(t)\\otimes q^*\\mathcal O_X(D)$. The projective-bundle quotient theorem gives an $X$-map $f:Y\\to s(X,\\Delta)$ preserving all ordered markings. Its geometric fibre maps are isomorphisms: by the evaluation lemma $f$ is the identity off the exceptional component and maps that component onto the inserted projective line by its complete degree-one linear system, and by the fibre description of the section-ideal expansion the fibre of $s(X,\\Delta)$ is exactly the fibre of $X$ with that line inserted at $\\Delta$ (or unchanged when $q$ is a fibrewise isomorphism). Apply the universal-isomorphism-open lemma to the two structural maps to $T$: the source is flat and finitely presented and proper, the target is proper and hence separated, closed and locally of finite type. Its representing open contains every geometric point, so equals $T$, and $f$ is an isomorphism. Evaluation and the quotient classification make $f$ natural in all isomorphisms of contraction diagrams and arbitrary base changes. In particular an automorphism $h$ over the identity of $(X,\\Delta)$ satisfies $fh=f$; as $f$ is an isomorphism, $h=1$. This also gives uniqueness of an arrow between two objects over a fixed $(X,\\Delta)$.",
+   "uses": [
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-section-ideal-proj-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Lemma 2.5 and Corollary 2.6; Stacks Tag 05XD for the relative isomorphism test."
+   }
+  },
+  {
+   "text": "Over $U\\to T$, the defined 2-fibre product has an object $Y$ with $\\phi:X_U\\xrightarrow{\\sim}F_r(Y)$ preserving every old label. Set $\\alpha=\\phi^{-1}$. Send this object to the section $\\alpha(qt)$ of $X_U$. An arrow $h:Y\\to Y\\prime$ satisfies $F_r(h)\\phi=\\phi\\prime$, equivalently $\\alpha\\prime F_r(h)=\\alpha$, so the section is unchanged. Reverse this assignment by applying $s$ to $X_U$ and that section, equipped with the inverse of the comparison in step 4. Steps 4 and 5 identify both composites with the identity. For two objects giving the same section, their comparisons in step 5 give an arrow between them over $X_U$; its uniqueness follows from the automorphism calculation there. Thus the equivalence is to the discrete groupoid of sections of $X_U\\to U$. By the fibre-product universal property, those sections are exactly $T$-maps $U\\to X$. Naturality of contraction, expansion and their comparisons respects pullback $U\\prime\\to U$ and canonical fibre-product associativity, giving the claimed representation over schemes. Its structural morphism is projective, flat and finitely presented by the original stable-family definition. The isomorphism $\\phi$ remains part of each object; the old labels are preserved individually.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-pc-fibre-product",
+    "def-sfb-stable-pointed-curve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Corollary 2.6, unwinding the 2-fibre product and its arrows; previous comparisons in steps 4--5."
+   }
+  },
+  {
+   "text": "On the required open subcategory, the extra section is smooth and disjoint from every old marking. The fibre description of the section-ideal expansion says that its projection $p:Z\\to X$ is an isomorphism on every geometric fibre. Apply the universal-isomorphism-open lemma with base $T$, source $Z$ and target $X$: both structural morphisms are proper, flat and finitely presented, so all its hypotheses hold. Its open contains every geometric point and hence equals $T$. Thus $p$ itself is an isomorphism. Since the canonical lifted sections map to the old sections and to $\\Delta$, this identifies the stabilization, including all labels, with the original curve with $\\Delta$ appended. The canonical projection and its inverse respect every base change.",
+   "uses": [
+    "lem-sfb-section-ideal-proj-expansion",
+    "lem-sfb-universal-isomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+    "place": "Definition 2.3, the disjoint smooth-section case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-curve",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lem-trf-semistable-marked-base-change",
+  "lem-sfb-log-canonical-deletion-algebra",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-section-ideal-proj-expansion",
+  "lem-sfb-elementary-contraction-evaluation",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-sfb-universal-isomorphism-open",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/knudsen-projectivity-stable-curves-II-1983.pdf",
+  "place": "Online primary-author scan, Section 2, Proposition 2.1, Theorem 2.4, Lemma 2.5 and Corollary 2.6; local PDF WANTED. The steps assemble the explicit constructions and retain arbitrary-base hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The forgetful morphism from stable n plus one pointed curve moduli to stable n pointed curve moduli is the universal curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Under.mapForget\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Basic\", \"type\": \"{X Y : T} (f : X ⟶ Y) : (map f) ⋙ (forget X) ≅ (forget Y)\", \"doc\": \"For any morphism $f: X \\to Y$ in a category $\\\\mathcal{T}$, the composition of the induced functor $\\\\text{map}(f)$ from the under category of $X$ to the under category of $Y$ with the forgetful functor \"}\n  {\"name\": \"CategoryTheory.forget\", \"module\": \"Mathlib.CategoryTheory.ConcreteCategory.Basic\", \"type\": \"(C : Type u) [Category.{v} C] [HasForget.{w} C] : C ⥤ Type w\", \"doc\": \"The forgetful functor from a category $\\\\mathcal{C}$ to the category of types $\\\\mathrm{Type}\\\\, w$, which maps objects in $\\\\mathcal{C}$ to their underlying types and morphisms in $\\\\mathcal{C}$ to the co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": forgetToLocallyRingedSpace.Full\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is full, meaning that for any two schemes, every morphism between their underlying locally ringed spaces ari\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forgetToTop_obj_eq_coe\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Sort _\", \"doc\": \"The functor that maps each scheme to its underlying topological space and each morphism of schemes to the underlying continuous map between topological spaces, obtained by composing the forgetful func\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forget_obj_eq_coe\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Sort _\", \"doc\": \"The functor obtained by composing the forgetful functor from schemes to topological spaces with the forgetful functor from topological spaces to types, mapping each scheme to its underlying set and ea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": X.Etale ⥤ Over X\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": forgetToLocallyRingedSpace.FullyFaithful\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is fully faithful, meaning it induces a bijection between hom-sets of schemes and hom-sets of their underlyi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": (Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Knudsen stabilization identifies the universal stable curve with the moduli of curves with one extra marking, representable and projective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The functor constructs a mapping from the over category over $ D(i') $ to the category of schemes by first applying the post-composition with $ D $, then taking the pullback along the affine open imme\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.g\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The morphism $ g $ maps the object $ D(i') $ in the diagram to the pullback of $ f $ with itself, constructed by composing the diagram's morphism $ D(h_{i'i}) $ with the unique lift provided by the pu\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, this constructs a cone over the diagram $ A.D'(j) $ by first applying the pullback functor along the affi\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.AffineSpace n S ↘ S =\\n    CategoryTheory.Limits.pullback.fst (CategoryTheory.Limits.terminal.from S)\\n      (CategoryTheory.Limits.terminal.from\\n        (AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{max u v, 0}\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is canonically isomorphic to the pullback of the unique morphisms from $ S $ and the affine $ n $-space over $ \\\\mathbb{Z} $ to \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Curve\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "grep",
+   "query": "Knudsen|universalCurve|universal_curve|pointedCurve|pointed_curve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not define stable-curve moduli or assert this moduli theorem; scheme normalization, ordinary scheme covers, and elliptic Weierstrass models do not supply it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The moduli stack of stable curves with one additional marking is the universal curve over the stable pointed curve moduli stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.CanonicallyOver\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The abbreviation denotes the class of schemes equipped with a canonical morphism to a given scheme $X$, forming the over category of schemes over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Over\", \"module\": \"Mathlib/AlgebraicGeometry/Over\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The type of morphisms from a scheme $S$ to a scheme $X$ in the category of schemes, where morphisms are morphisms of locally ringed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.instIsOverTerminalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over (⊤_ AlgebraicGeometry.Scheme)]\\n  [inst_1 : Y.Over (⊤_ AlgebraicGeometry.Scheme)] (f : X ⟶ Y),\\n  AlgebraicGeometry.Scheme.Hom.IsOver f (⊤_ AlgebraicGeometry.Scheme)\", \"doc\": \"For any schemes $X$ and $Y$ equipped with morphisms to the terminal scheme $T$, every morphism $f: X \\to Y$ automatically satisfies the commutativity condition required to be over $T$. This follows fro\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.instOverTerminalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.Over (⊤_ AlgebraicGeometry.Scheme)\", \"doc\": \"For any scheme $ X $, the type $ X.\\text{Over}(\\top) $ represents the morphisms from $ X $ to the terminal scheme $ \\top $ in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{M S T : AlgebraicGeometry.Scheme} →\\n  [inst : M.Over S] → {f : T ⟶ S} → (CategoryTheory.Limits.pullback (M ↘ S) f).CanonicallyOver T\", \"doc\": \"For any scheme $M$ equipped with a morphism to a base scheme $S$, and for any morphism $f : T \\to S$ between schemes, the cospan diagram formed by $M \\to S$ and $T \\to S$ admits a pullback in the categor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapStalkMapOverInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : X.Over Y] {x : ↥X},\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.stalkMap (X ↘ Y) x)) Y\", \"doc\": \"For any scheme $ X $ and point $ x $ in $ X $, the affine scheme $ \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) $, where $ \\\\mathcal{O}_{X,x} $ is the stalk of the structure sheaf at $ x $, is equipped with \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration describes stable pointed moduli or the universal stable curve."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting the last marked point and stabilizing a stable curve represents the universal stable curve",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.forget_obj_eq_coe\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Sort _\", \"doc\": \"The functor obtained by composing the forgetful functor from schemes to topological spaces with the forgetful functor from topological spaces to types, mapping each scheme to its underlying set and ea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.obj self = self.toLocallyRingedSpace\", \"doc\": \"The forgetful functor from schemes to locally ringed spaces maps each scheme to its underlying locally ringed space structure.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forget\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Scheme.{u} ⥤ Type u\", \"doc\": \"The functor obtained by composing the forgetful functor from schemes to topological spaces with the forgetful functor from topological spaces to types, mapping each scheme to its underlying set and ea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": forgetToLocallyRingedSpace.Full\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is full, meaning that for any two schemes, every morphism between their underlying locally ringed spaces ari\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": forgetToLocallyRingedSpace.FullyFaithful\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is fully faithful, meaning it induces a bijection between hom-sets of schemes and hom-sets of their underlyi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forgetToTop_obj_eq_coe\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Sort _\", \"doc\": \"The functor that maps each scheme to its underlying topological space and each morphism of schemes to the underlying continuous map between topological spaces, obtained by composing the forgetful func\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": X.Etale ⥤ Over X\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration describes stable pointed moduli or the universal stable curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Knudsen contraction and stabilization identify stable n plus one pointed curves with stable n pointed curves carrying an arbitrary extra section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"Fin.contractNth_apply_of_eq\", \"module\": \"Mathlib/Data/Fin/Tuple/Basic\", \"type\": \"∀ {n : ℕ} {α : Sort u_1} (j : Fin (n + 1)) (op : α → α → α) (g : Fin (n + 1) → α) (k : Fin n),\\n  ↑k = ↑j → j.contractNth op g k = op (g k.castSucc) (g k.succ)\", \"doc\": \"For a tuple $g$ of length $n+1$ with elements in type $\\\\alpha$, an index $j \\\\in \\\\mathrm{Fin}(n+1)$, and a binary operation $\\\\mathrm{op}: \\\\alpha \\\\to \\\\alpha \\\\to \\\\alpha$, if $k \\\\in \\\\mathrm{Fin}(n)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicTopology.DoldKan.homotopyPToId_eventually_constant\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/HomotopyEquivalence\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (X : CategoryTheory.SimplicialObject C) {q n : ℕ},\\n  n < q →\\n    (AlgebraicTopology.DoldKan.homotopyPToId X (q + 1)).hom n (n + 1) =\\n      (AlgebraicTopology.DoldKan.homotopyPToId X q).hom n (n +\", \"doc\": \"For any natural numbers $ q $ and $ n $ with $ n < q $, the homotopy component between the recursively constructed chain map $ P(q) $ and the identity map on the alternating face map complex $ K[X] $ \"}\n  {\"name\": \"Fin.contractNth_apply_of_lt\", \"module\": \"Mathlib/Data/Fin/Tuple/Basic\", \"type\": \"∀ {n : ℕ} {α : Sort u_1} (j : Fin (n + 1)) (op : α → α → α) (g : Fin (n + 1) → α) (k : Fin n),\\n  ↑k < ↑j → j.contractNth op g k = g k.castSucc\", \"doc\": \"For a tuple $g$ of length $n+1$ with elements in type $\\\\alpha$, an index $j \\\\in \\\\mathrm{Fin}(n+1)$, and a binary operation $\\\\mathrm{op}: \\\\alpha \\\\to \\\\alpha \\\\to \\\\alpha$, if $k \\\\in \\\\mathrm{Fin}(n)$ satis\"}\n  {\"name\": \"Fin.comp_contractNth\", \"module\": \"Mathlib/Data/Fin/Tuple/Basic\", \"type\": \"∀ {n : ℕ} {α : Sort u_1} {β : Sort u_2} (opα : α → α → α) (opβ : β → β → β) {f : α → β},\\n  (∀ (x y : α), f (opα x y) = opβ (f x) (f y)) →\\n    ∀ (j : Fin (n + 1)) (g : Fin (n + 1) → α), f ∘ j.contractNth opα g = j.contractNth opβ (f ∘ g)\", \"doc\": \"Let $\\\\alpha$ and $\\\\beta$ be types equipped with binary operations $\\\\op_\\\\alpha : \\\\alpha \\\\to \\\\alpha \\\\to \\\\alpha$ and $\\\\op_\\\\beta : \\\\beta \\\\to \\\\beta \\\\to \\\\beta$, respectively. Given a function $f : \\\\alpha \\\\t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ with injective germ map, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\\\\to Y$ s\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Q_is_eventually_constant\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/PInfty\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {X : CategoryTheory.SimplicialObject C} {q n : ℕ},\\n  n ≤ q → (AlgebraicTopology.DoldKan.Q (q + 1)).f n = (AlgebraicTopology.DoldKan.Q q).f n\", \"doc\": \"For any natural numbers $q$ and $n$ with $n \\\\leq q$, the $n$-th component of the chain map $Q(q + 1)$ coincides with the $n$-th component of $Q(q)$. This implies that the sequence of chain maps $Q(q)$\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration describes stable pointed moduli or the universal stable curve."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Curve\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration describes stable pointed moduli or the universal stable curve."
+  },
+  {
+   "tool": "grep",
+   "query": "Knudsen|universalCurve|universal_curve|stableCurve|stable_curve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration describes stable pointed moduli or the universal stable curve."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-stable-pointed-level-parameter",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve.",
+   "via": [
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+  "worker": "stage1",
+  "summary": "Split via logarithmic section algebra, explicit dual-section-ideal expansion, and the twisted direct-image evaluation calculation. Reuse the existing universal isomorphism open; retain all ordered labels, arbitrary base changes and projective-bundle projectivity. No statement change. Repair of landing return L: revalidated the current moduli-groupoid definition, made arrows over base maps and the orientation and arrow equation of the 2-fibre product explicit in steps 2 and 6, and refreshed its two literal citation quotations. Other cited statements are unchanged from the retained citation record.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Convert projective-bundle projectivity into properness; no H-projective substitution."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "Properness survives arbitrary pullback in the stable-family check."
+   },
+   {
+    "node": "lem-trf-semistable-marked-base-change",
+    "why": "Underlying marked nodal flat finitely presented family and smooth markings survive arbitrary pullback."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Construct the comparison map from the explicit invertible quotient and treat the rank-one case; generic symmetric-Proj universal property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lem-trf-semistable-marked-base-change",
+  "lem-trf-projective-bundle-quotient-geometry"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-9c760df14",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-9c760df14 (reviewer sub-agent of L); spot-checked: This head is the worker's repair of the landing refusal of 7b4f0c25: a cited statement, def-sfb-stable-pointed-moduli-groupoids, had changed live. Every statement cited by the item and the new nodes now matches clones/live. The item is still unsplit in live and side-live, has no repair note, and is not on the 10-19 drop list. Its statement is unchanged. The three new nodes are byte-identical to 7b4f; only steps 2 and 6 and the summary changed. Step 6 is correct for the current 2-fibre-product convention, phi: X_U -> F_r(Y) with F_r(h)phi = phi'. The section alpha(qt) is invariant because q'h = F_r(h)q and h t = t'. The arrow-over-u sentence added to step 2 is correct. The earlier reader FIX on 7b4f was lost, so I re-applied both repairs in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-knudsen-pointed-forgetful-universal-curve.json: (1) step 2 now excludes a self-nodal rational degree-zero component, which would be the whole fibre of genus 1 and is ruled out by g>=2; the log node needs the component smooth. (2) Step 5 now derives the fibrewise isomorphism together with the expansion node's fibre description and cites lem-sfb-section-ideal-proj-expansion in uses. Sources: I checked against Knudsen arXiv:1106.1588. K = coker(t -> (t,t)) into J^vee + O(D), C^s = Proj Sym K with lifts from K/p(J^vee) and K/p(O(D)), the noetherian Main Lemma and Theorems 5.1 and 5.2 (bridge fibre) match the expansion node; the arbitrary base follows by finite-presentation approximation. Knudsen 1983 is not local; it is WANTED and proof_origin is agent. Small cases: R^1 L^m = 0 for m>=2 by Serre duality, including the degree-0 bridge and tail. The twist checks: identity case K(-D) = O(Delta); tail case K(-D) = O + k_x = q_*O_Y(t). The isomorphism-open hypotheses hold and U = T. No duplicates: the trf pushout and blowdown nodes are over a field, and the sfb lattice nodes are DVR-only. I accept the four tool uses (trf projective-bundle-proper, proper base change, semistable-marked base change, projective-bundle quotient geometry) as generic scheme tools. Batch 5: with the delivery removed, the closure of both targets (19766 nodes) already contains every flagged citation, including the trace-transport nodes reached from lem-trf-semistable-marked-base-change. Those are reached only through definitional stmt_deps (orgogozo induction data -> nearby-cycles and Weil-category definitions -> generic derived-pullback lemmas). The delivery adds only its 3 new nodes. All flagged citations are definitions or generic facts, not steps of the trace formula or of Poincare duality, so all are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KnudsenPointedForgetfulUniversalCurve",
+  "declaration": "AlgebraicGeometry.exists_knudsen_pointed_forgetful_universal_curve",
+  "declarations": [
+   "AlgebraicGeometry.StablePointedUniversalCurve",
+   "AlgebraicGeometry.StablePointedUniversalCurve.Hom",
+   "AlgebraicGeometry.StablePointedUniversalCurve.projection",
+   "AlgebraicGeometry.StablePointedUniversalCurve.forget",
+   "AlgebraicGeometry.StablePointedUniversalCurve.based",
+   "AlgebraicGeometry.StablePointedUniversalCurve.basedProjection",
+   "AlgebraicGeometry.StablePointedUniversalCurve.forgetful",
+   "AlgebraicGeometry.StablePointedUniversalCurve.comparisonIso",
+   "AlgebraicGeometry.StablePointedUniversalCurve.representedPoint",
+   "AlgebraicGeometry.StablePointedUniversalCurve.fiberContraction",
+   "AlgebraicGeometry.StablePointedUniversalCurve.fiberExtra",
+   "AlgebraicGeometry.StablePointedUniversalCurve.IsGoodExtra",
+   "AlgebraicGeometry.StablePointedUniversalCurve.HasFiberGeometry",
+   "AlgebraicGeometry.StablePointedModuli.based",
+   "AlgebraicGeometry.StablePointedModuli.pullbackCurveMap",
+   "AlgebraicGeometry.StablePointedModuli.pullbackCurveMap_properties",
+   "AlgebraicGeometry.StablePointedModuli.familyMap",
+   "AlgebraicGeometry.StablePointedModuli.totalScheme",
+   "AlgebraicGeometry.exists_knudsen_pointed_forgetful_universal_curve"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/KnudsenPointedForgetfulUniversalCurve.lean",
+  "statement": "theorem exists_knudsen_pointed_forgetful_universal_curve (S : Scheme.{u}) (g r : ℕ) (hg : 2 ≤ g) : ∃ (c : BasedFunctor (StablePointedModuli.based S g (r + 1)) (StablePointedUniversalCurve.based S g r)) (s : BasedFunctor (StablePointedUniversalCurve.based S g r) (StablePointedModuli.based S g (r + 1))) (η : ModuliTwoIso (BasedFunctor.id (StablePointedModuli.based S g (r + 1))) (c.comp s)) (ε : ModuliTwoIso (s.comp c) (BasedFunctor.id (StablePointedUniversalCurve.based S g r))) (q : ∀ Y : StablePointedModuli S g (r + 1), Y.curve ⟶ (c.obj Y).family.curve) (hq : ∀ Y : StablePointedModuli S g (r + 1), q Y ≫ (c.obj Y).family.projection = Y.projection ≫ eqToHom (congrArg Over.left (c.w_obj Y).symm)), (∀ {Y Z : StablePointedModuli S g (r + 1)} (h : Y ⟶ Z), h.map ≫ q Z = q Y ≫ (c.map h).val.map) ∧ (∀ (Y : StablePointedModuli S g (r + 1)) (i : Fin r), Y.sections i.castSucc ≫ q Y = eqToHom (congrArg Over.left (c.w_obj Y).symm) ≫ (c.obj Y).family.sections i) ∧ (∀ Y : StablePointedModuli S g (r + 1), Y.sections (Fin.last r) ≫ q Y = eqToHom (congrArg Over.left (c.w_obj Y).symm) ≫ (c.obj Y).extra) ∧ (∀ Y : StablePointedModuli S g (r + 1), StablePointedUniversalCurve.HasFiberGeometry Y (c.obj Y) (eqToHom (congrArg Over.left (c.w_obj Y).symm)) (q Y) (hq Y)) ∧ (∀ X : StablePointedModuli S g r, ∃ R : BasedFunctor (moduliTwoFiberProduct X.familyMap (StablePointedUniversalCurve.forgetful c)) (discreteModuli (yoneda.obj X.totalScheme)), R.toFunctor.IsEquivalence ∧ (∀ Z, (yoneda.preimage (R.obj Z).hom).left = eqToHom (congrArg Over.left (R.w_obj Z)) ≫ StablePointedUniversalCurve.representedPoint c X Z) ∧ (∀ Z, (yoneda.preimage (R.obj Z).hom).left ≫ X.projection = eqToHom (congrArg Over.left (R.w_obj Z)) ≫ (yoneda.preimage Z.obj.left.hom).left) ∧ IsProjectiveBundle X.projection ∧ Flat X.projection ∧ LocallyOfFinitePresentation X.projection ∧ QuasiCompact X.projection ∧ QuasiSeparated X.projection) ∧ (∀ X : StablePointedUniversalCurve S g r, Smooth X.family.projection → (∀ i : Fin r, Disjoint (Set.range X.extra) (Set.range (X.family.sections i))) → IsIso (q (s.obj X) ≫ (ε.val.hom.app X).val.map)) ∧ (∀ (X : StablePointedModuli S g r) (T : Over S) (a : T ⟶ X.base), IsStablePointedCurve (X.pullback T a).projection (X.pullback T a).sections (X.pullback T a).section_projection)",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the recorded StablePointedModuli and its labelled cartesian pullbacks. The auxiliary universal-curve category is Knudsen C_{g,r}, with an unrestricted extra section. Contraction and stabilization are existential mutually inverse functors over schemes, with natural contraction maps, ordered marking equations and geometric rational-tail/bridge insertion. Schemes are moduli groupoids through the recorded discreteModuli (yoneda.obj Q) of def-sfb-stable-pointed-moduli-groupoids (reviewer FIX replaced a private Over-slice copy); the scheme representation is an equivalence to discreteModuli (yoneda.obj X.totalScheme), normalized by the inverse of the specified 2-fibre-product comparison. No family, map or equivalence is defined by choosing an arbitrary existence witness.",
+  "fixed_by": "NT-stage2-cc-3fe2a6178"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3fe2a6178",
+  "group": "Q06",
+  "result": "fix",
+  "note": "Read node (identical to live except lean; released stage-1 keep_plan re-split note does not hold back the statement; not dropped; no other binding), the full StablePointedModuliGroupoids dep module, IsStablePointedCurve, ProjectiveLine and the delivered module. All clauses match. c is existential but pinned: contraction maps q over the identity, natural in cartesian arrows; markings castSucc to i and last to extra; HasFiberGeometry (iso off the extra point, iso when the extra point is good, scheme fibre = P1_Omega otherwise; checked reduced at tail and bridge nodes). F_r = c then basedProjection. The 2-fibre product is the dependency's moduliTwoFiberProduct with orientation phi: X_U ≅ F_r(Y). The representing equivalence R is pinned to representedPoint = alpha(qt) and lies over T. eta and epsilon are ModuliTwoIso on total categories (base-change natural). Projective-bundle/flat/finite-presentation, smooth-disjoint IsIso(q ≫ eps) and base-change stability clauses present. Edge cases r=0, g=2, empty and nonreduced bases, Omega : Type u all OK. FINDING H4: the delivery's private schemeSlice (Over.forget Q) duplicated the dependency's h_Q = discreteModuli (yoneda.obj Q). FIXED in fixes/KnudsenPointedForgetfulUniversalCurve.lean: familyMap from discreteModuli (yoneda.obj X.base) via yoneda.preimage; pullbackCurveMap takes h with h ≫ b = a; R targets discreteModuli (yoneda.obj X.totalScheme) with yoneda.preimage pinning. Content unchanged. lean-record.json gives the verbatim statement, declarations without schemeSlice and an updated note; refit_record clean. Compile: nt_compile timed out on the side dependency at load 146; lcompile.run_set(dep, item, timeout 600) rc 0 (dep 54.6 s, item 29.3 s, no warnings). Advisories: base-change stability clause is definitional via the dependency's pullback_properties sorry (stage 3 should prove it with step 1); IsStablePointedCurve and ProjectiveLine come from outside stmt_deps."
+ }
+}

@@ -1,0 +1,247 @@
+{
+ "id": "lem-pur-ordered-affine-transpose-projection",
+ "kind": "statement",
+ "title": "Projection formula for the transpose of an ordered affine tower",
+ "statement": "Fix the finite-coefficient purity conventions [def-pur-conventions], so $k$ is the fixed algebraic closure of a finite field, $\\ell\\ne\\operatorname{char}k$, $E/\\mathbf Q_\\ell$ is finite with uniformizer $\\varpi_E$, $n\\geq1$ and $A=\\mathcal O_E/\\varpi_E^n$. Let $Y$ be a separated finite-type $k$-scheme, $p_m:X_m=\\mathbf A^m_Y\\to Y$ the projection, and $q_m:X_{m+1}\\to X_m$ the last-coordinate affine-line projection [def-sbc-affine-space], with $p_{m+1}=p_mq_m$. Put $T_m=A_{X_m}(m)[2m]$ and $F_mK=Lp_m^*K\\otimes_A^LT_m$, with twists [def-coefficient-twists-detailed]. Use ordinary finite constant-$A$ pro-etale derived categories and the constructible exceptional functors and their adjunction on bounded-below etale-origin inputs [def-weil-exceptional-inverse-image]. For $K\\in D^b_{ctf}(Y,A)$ [def-weil-finite-tor-amplitude] let $\\Gamma_{m,K}$ be exactly the ordered comparison of [def-pur-affine-space-comparison], and define\n$$\\tau_{m,K}=\\varepsilon_{p_m,K}\\circ Rp_{m!}(\\Gamma_{m,K}):Rp_{m!}F_mK\\to K,\\qquad I_m=\\tau_{m,A_Y}.$$\nLet $\\Pi_{m,K}:Rp_{m!}F_mK\\xrightarrow{\\sim}K\\otimes_A^LRp_{m!}T_m$ be the inverse canonical projection transformation [def-exchange-projection], with the same two tensor symmetries as in [def-pur-affine-line-purity-comparison]. Then the actual maps satisfy\n$$\\tau_{m,K}=(K\\otimes I_m)\\circ\\Pi_{m,K}$$\nwith the tensor-unit constraint at the target, for every $m\\geq0$; $I_0=1_{A_Y}$ and $I_1$ is the specified normalized affine-line integration. More precisely, for consecutive blocks $X\\xrightarrow fZ\\xrightarrow gY$, of respective lengths $a,b$, put $F_fM=Lf^*M(a)[2a]$ and define $\\tau_f,\\tau_g$ by the same ordered construction over their respective bases. The transpose of $c_{g,f}^{-1}\\Gamma_{f,Rg^!K}F_f(\\Gamma_{g,K})$ on $Rg_!Rf_!F_fF_gK$ is\n$$\\tau_{g,K}\\circ Rg_!(\\tau_{f,F_gK}).$$\nAll compact-support composition, source reassociation and pullback comparisons are the specified ones; no coordinate invariance or general ambient pro-etale adjoint is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/prop-pur-affine-space-composition-law.proof.md",
+  "place": "Proof Steps 2--4, returned Step 6: pasted counit and extraction of the coefficient by projection formula; agent-written extraction of the detailed argument"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-affine-space-comparison",
+  "def-exchange-projection",
+  "def-pur-affine-line-purity-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Compute the dimension-zero comparison, compact functor, counit and tateSourceIso: all are identities. Thus transpose_0 and integration_0 are identities and projection_0 is the coefficient right unitor. Its inverse followed by itself proves the coefficient formula at zero.",
+   "uses": [
+    "def-pur-ordered-affine-transpose-data",
+    "def-pur-affine-space-comparison",
+    "def-pur-ordered-affine-trace-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on dimension with the hypothesis quantified over every finite-type base and retained etale origin. Apply the single successor calculation to the induction hypothesis. This proves the coefficient formula at all dimensions.",
+   "uses": [
+    "lem-pur-ordered-affine-transpose-successor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the line normalization lemma for integration_1. The zero normalization was computed directly.",
+   "uses": [
+    "lem-pur-ordered-affine-line-transpose-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary blocks, use comparison naturality at v = eqToHom(hB);Gamma_b. Apply the compact-support functor and compose the exceptional counit. Counit naturality gives transpose naturality, including the identity at zero. Map this equality through compact_b and compose counit_b; functor.map_comp and associativity yield exactly BlockLaw.",
+   "uses": [
+    "lem-pur-ordered-affine-comparison-natural",
+    "def-pur-affine-space-comparison",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-ordered-affine-transpose-data",
+  "def-pur-ordered-affine-trace-data",
+  "def-pur-affine-space-comparison",
+  "lem-pur-ordered-affine-transpose-successor",
+  "lem-pur-ordered-affine-line-transpose-normalization",
+  "lem-pur-ordered-affine-comparison-natural",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Steps 5--6, implemented by zero calculation, dimension induction and counit-naturality block assembly; three explicit child obligations retain the original projection/counit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional transpose of an ordered tower of affine line comparisons is the inverse projection formula followed by tensor with the constant coefficient trace",
+   "results": "8 hits: Profinite.NobelingProof.GoodProducts.square_commutes, Algebra.Generators.CotangentSpace.compEquiv_symm_inr, Algebra.Generators.CotangentSpace.compEquiv, Algebra.Generators.CotangentSpace.fst_compEquiv, LinearMap.trace_tensorProduct, AlgebraicGeometry.AffineSpace.reindex, Algebra.Generators.CotangentSpace.compEquiv_symm_zero, LinearMap.trace_eq_contract'. Generic categorical counit identities do not state the concrete ordered affine compact-support result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, CategoryTheory.mateEquiv",
+   "results": "4 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_symm_apply. Generic categorical counit identities do not state the concrete ordered affine compact-support result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|compose.*counit",
+   "results": "3 hits: Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean. Generic categorical counit identities do not state the concrete ordered affine compact-support result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composite adjunction counit and projection formula identify iterated traces with tensor integration",
+   "results": "8 hits: CategoryTheory.Adjunction.comp_counit, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.counit, CategoryTheory.Bicategory.Adjunction.compCounit, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit, CategoryTheory.Bicategory.Adj.comp_r, CategoryTheory.Adjunction.toComonad_ε. Generic categorical counit identities do not state the concrete ordered affine compact-support result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "comp_counit_app|mateEquiv_counit|def comp ",
+   "results": "7 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated compact support integration of affine space is linear in a pulled back perfect complex, by associativity of projection morphisms and composition of adjunction counits",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, LightCondensed.ihomPoints_symm_comp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.coev_ev, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-pur-affine-space-composition-law",
+  "date": "2026-10-22",
+  "group": "Q109"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 2--4, returned Step 6: pasted counit and extraction of the coefficient by projection formula",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ordered-affine-transpose-projection",
+  "worker": "stage1",
+  "group": "Q158",
+  "summary": "Proved the pasted-counit formula and coefficient extraction by induction using existing projection coefficient/coherence results. No new nodes are necessary. Checked all source domains and verbatim node-statement citations; retained the statement and blueprint route.",
+  "blueprint": "prop-pur-affine-space-composition-law proof Steps 1-2: specified ordered tower and reassociation. This extraction supplies its returned Step 6 (pasted counit and coefficient trace) and unit sk-prop-an proof Step 6; does not use the blueprint permutation inference in Steps 3-4.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-projection-formula-coefficient-coherence",
+    "why": "Generic unit and coefficient associativity identities for the exact two-symmetry inverse projection; no ordered-tower trace assertion is assumed."
+   },
+   {
+    "node": "lem-sf-composition-projection-mate",
+    "why": "Generic normalized geometric composition identity for the precise projection maps, used to replace successive inverse projections by the composite one."
+   },
+   {
+    "node": "lem-sf-projection-compatible-triangle-assembly",
+    "why": "Generic identification of the compatible-triangle proper/open mate with the canonical compositor of thm-sf-comp-composition on bounded etale-origin inputs, with the composite projection identity for that compositor; added by the Q158 reader to support step 3."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Generic geometric existence of compatible compactification triangles verifies the hypothesis of the preceding identity."
+   },
+   {
+    "node": "lem-weil-pbc-adjunct-counit-identity",
+    "why": "Generic adjunction inverse-transpose equation, used only on the permitted class."
+   },
+   {
+    "node": "prop-finite-compact-support-constructibility",
+    "why": "Generic bounded constructibility of compact-support images, needed for the intermediate projection source H."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic pullback preserves finite Tor amplitude and constructibility."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Generic tensoring with a finite-Tor constructible complex preserves bounded constructibility."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic bounded constructible complexes have etale-origin witnesses."
+   },
+   {
+    "node": "thm-sf-ambient-adjoint-class",
+    "why": "Generic natural Hom bijections on bounded-below etale-origin inputs only."
+   },
+   {
+    "node": "thm-sf-preservation-class",
+    "why": "Generic exceptional pullback preserves the finite-Tor constructible domain used by line comparisons."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic canonical compact-support composition on the bounded-below etale-origin class, including identity and preservation."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Generic invertibility and naturality of the actual finite-coefficient projection map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-projection-formula-coefficient-coherence",
+  "lem-sf-composition-projection-mate",
+  "lem-sf-projection-compatible-triangle-assembly",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "prop-finite-compact-support-constructibility",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ambient-adjoint-class",
+  "thm-sf-preservation-class",
+  "thm-sf-comp-composition",
+  "lem-weil-finite-compact-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-81638d87f",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-81638d87f (reviewer sub-agent of L); spot-checked: Item lem-pur-ordered-affine-transpose-projection: a first split with 0 new nodes; statement, stmt_deps and source are unchanged. The route matches unit sk-prop-an Step 6 (the transpose of the recursive γ is the iterated trace, by the projection formula) and avoids the blueprint's permutation argument in Steps 3-4. I recomputed every step by hand. Step 2: naturality of Γ_f (a_M natural, Φ natural) and the composite counit ε_g Rg_!(ε_f) give τ_g Rg_!(τ_f). Step 5: coefficient associativity of lem-pur-projection-formula-coefficient-coherence with (Lg^*K, T_g, T_f), then naturality of π_g in its source, then the composite PF identity give (1⊗J)Π_{m+1}. Step 4 covers lengths 0 and 1 via adjunct-counit; step 6 is the unit identity at K=A. Hypotheses: preservation-class needs Y separated, which holds; each π used has a ctf coefficient and a D^b_c source (H included). Small cases m=0,1,2, K=0 and n>1 are fine. FIX (C4): step 3 said 'the canonical compact-support comparisons identify' the compatible-triangle mate α of lem-sf-composition-projection-mate with the thm-sf-comp-composition compositor used in def-pur-affine-space-comparison, but no cited node states this; thm-sf-comp-composition builds its α from the étale compositor. The existing node lem-sf-projection-compatible-triangle-assembly (Q132, on this base, no cycle) states exactly that identification and the PF identity on bounded étale-origin inputs. It is now cited in steps 3 and 5, and proof_deps and tool_uses are updated. Batch 5: lem-weil-finite-compact-projection-formula is the generic projection formula and was already in the item's closure through the stmt_dep def-pur-affine-line-purity-comparison; its chain runs through a general lisse-sheaves-as-module-objects fact, not Poincaré duality. lem-sf-composition-projection-mate (and the assembly lemma) are generic PF/composition coherence that reach only the category-theory Mathlib leaf lem-trf-adjoint-composition-coherence. Neither is a step of the trace formula or of Poincaré duality, so both are accepted. Maintainer notes: (1) the existing unsplit node lem-pur-affine-ordered-integration-transposes (Q87, same day) overlaps heavily (P_{p_m}=Γ_{p_m} with vector integration), but it is not identical and this delivery created neither; one should cite the other. (2) The item statement does not fix the compactification of p_m used for Π_{m,K}; the proof uses the recursive compatible-triangle one.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrderedAffineTransposeProjection",
+  "declaration": "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.orderedAffineTranspose_projection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OrderedAffineTranspose.orderedAffineTranspose_projection"
+  ],
+  "file": "lean/Sheaf/Paper/OrderedAffineTransposeProjection.lean",
+  "statement": "theorem orderedAffineTranspose_projection (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (K : Plus (Ring P) Y) (Ke : Etale.DerivedCategoryModule (Ring P) Y) (hKe : etaleFiniteTor (Ring P) Y Ke) (eK : (comparison (Ring P) Y).obj Ke ≅ K.obj) : (∀ d : ℕ, ∃ h : IsIso (projection P Y K.obj d), transpose P Y aY K Ke hKe eK d = projectionInverse P Y K.obj d h ≫ ((tensor (Ring P) Y).obj K.obj).map (integration P Y aY d) ≫ (moduleRightUnit (Ring P) Y K.obj).hom) ∧ HEq (integration P Y aY 0) (𝟙 (unit (Ring P) Y)) ∧ integration P Y aY 1 = lineNormalizedIntegration P Y aY ∧ ∀ a b : ℕ, BlockLaw P Y aY K Ke hKe eK a b",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-462797af1",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Read item node, all 8 stmt_deps, the module and recorded dependency sources (AffineSpacePurityComparison, AffineLinePurityComparison/CoordinateMaps, FiniteSiteTensorProjection, site/compactification comparisons). τ = compact.map(recorded Γ) then published counit; I_m = τ at the unit coefficient with canonical unit-pullback source change; Π = inverse of VectorIntegrationSite.projection (the same map the line definition inverts), invertibility asserted in the conclusion; I_0 via HEq; I_1 = AffineLinePurity.integration after canonical compactification transport. BlockLaw equals the node's c^{-1} transpose by the definition of compositionInverse plus naturality of the Hom bijection; F_gK representatives quantified universally. Edge cases d=0/1, a or b=0, empty Y and all levels covered; single universe u. No hollow defs, only the theorem is sorry, docstrings and proof steps present, statement verbatim, only lean changed, lines ≤100, 17 imports exist. Advisory: direct use of definition-node owners (finite-site-tensor-projection, line-purity-source/coordinate-maps, comparison-derived-pullback, p1-arrows, affine-trace-tower), all in the stmt_dep closure of def-pur-affine-line-purity-comparison; no theorem-owned declarations. The Q158 note that the node leaves the compactification for Π unspecified stands. No file changed, so no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b2367",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T211647-L-4017776",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, Data module and 3 child modules + nodes compared with clone sheaf-dag (theorem header byte-identical, 17 defs verbatim plus @[irreducible]); reader gate compiled the 5 delivered modules and 4 clone consumers (AffineSpaceTraceProductData/SuccessorContraction/ContractionProduct/Factorization) together, all OK; children's statements read against the AffineSpacePurity and AffineLinePurity defs"
+ }
+}

@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-closed-source-unramified-parameter-open",
+ "kind": "statement",
+ "title": "The unramified parameter open for a closed locally finite type source",
+ "statement": "Let $A,B,C$ be schemes [def-pc-scheme], let $p:A\\to B$, $q:C\\to B$ and $f:A\\to C$ be morphisms with $q\\circ f=p$, and assume that $p$ is locally of finite type [def-weil-finite-type-morphism] and is a closed map on underlying spaces (images of closed subsets are closed). Then $f$ is locally of finite type. Let $U_f\\subseteq A$ be the union of the open subschemes on which $f$ is unramified [def-weil-unramified-morphism]. The subset $B_0=|B|\\setminus p(|A|\\setminus |U_f|)$ is open and has its open subscheme structure [def-weil-open-immersion]. For every scheme $T$ and morphism $h:T\\to B$, the induced morphism $f_T:A\\times_BT\\to C\\times_BT$ [def-pc-fibre-product] is unramified if and only if $h$ factors through $B_0\\hookrightarrow B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X8, spaces-more-morphisms-lemma-where-unramified, scheme specialization; original item steps 1--4 (finite-type cancellation, point lifting, unramified locus and closed-image complement)."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply clause (a) of [lemma-nagata-finite-type-to-separated-target] to the triangle $A\\xrightarrow{f}C\\xrightarrow{q}B$. Its composite is $p$, which is locally of finite type by hypothesis, so $f$ is locally of finite type. This uses no finiteness or separatedness hypothesis on $q$.",
+   "uses": [
+    "lemma-nagata-finite-type-to-separated-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T8, lemma-permanence-finite-type."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-unramified-locus-base-change] to $f$. Its open $W_f$ is exactly the union $U_f$ in the statement. Put $Z=|A|\\setminus |U_f|$. This is closed; since $p$ is a closed map, $p(Z)$ is closed in $|B|$, and its complement $B_0$ is open. Equip it with the open subscheme structure: restrict $\\mathcal O_B$ to this open, which is locally covered by open affine charts of $B$. Its inclusion is an open immersion by [def-weil-open-immersion].",
+   "uses": [
+    "lem-trf-unramified-locus-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X8, lemma-where-unramified, construction of W; schemes.tex Tag 01IK, lemma-open-subspace-scheme."
+   }
+  },
+  {
+   "text": "Fix $h:T\\to B$, and write $r:A_T=A\\times_BT\\to A$ and $s:A_T\\to T$. The square with upper arrow $r$, lower arrow $C_T=C\\times_BT\\to C$, and vertical arrows $f_T,f$ is Cartesian: giving a test map to $A\\times_C C_T$ amounts to maps $a$ to $A$ and $t$ to $T$ with $pa=ht$, since its $C$-component must be $fa$. This is precisely the universal property of $A_T$ [def-pc-fibre-product]. Thus $f_T$ is a base change of $f$, is locally of finite type by [lem-weil-pbc-lft-base-change], and [lem-trf-unramified-locus-base-change] gives $|U_{f_T}|=r^{-1}(|U_f|)$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-lft-base-change",
+    "lem-trf-unramified-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T4 (lemma-base-change-finite-type) and 0475 (lemma-set-points-where-fibres-unramified); schemes.tex Tag 01JP, fibre product universal property."
+   }
+  },
+  {
+   "text": "A morphism is unramified exactly when its source is covered by unramified open restrictions: use the affine formulation in [def-weil-unramified-morphism]. If the restrictions cover, take their defining affine covers; their union is an affine cover with finite-type ring maps and zero relative differentials, which is that same definition globally. Consequently $f_T$ is unramified if and only if $U_{f_T}=A_T$, equivalently $r^{-1}(Z)=\\varnothing$ by the preceding step.",
+   "uses": [
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G4, definition-unramified, affine-cover definition; Tag 02GE, lemma-diagonal-unramified."
+   }
+  },
+  {
+   "text": "We claim $s(r^{-1}(Z))=h^{-1}(p(Z))$. A point $z\\in A_T$ with $r(z)\\in Z$ satisfies $h(s(z))=p(r(z))$, giving one inclusion. Conversely let $t\\in T$ and choose $a\\in Z$ with $p(a)=h(t)=:b$. The ring $\\kappa(a)\\otimes_{\\kappa(b)}\\kappa(t)$ is a tensor product of two nonzero $\\kappa(b)$-vector spaces, hence nonzero (tensor a basis vector of each), so it has a prime ideal $\\mathfrak p$ (a maximal ideal). By [lem-weil-pbc-fibre-product-points], applied to $p:A\\to B$ and $h:T\\to B$, the quadruple $(a,t,b,\\mathfrak p)$ corresponds to a point $z\\in A_T$ with $r(z)=a$ and $s(z)=t$. Therefore $t=s(z)\\in s(r^{-1}(Z))$, proving the other inclusion. Thus $r^{-1}(Z)=\\varnothing$ if and only if $h^{-1}(p(Z))=\\varnothing$, since a set is empty if and only if its image under a function is empty.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT, lemma-points-fibre-product; Tag 05X8, final paragraph, expanded point argument."
+   }
+  },
+  {
+   "text": "The condition $h^{-1}(p(Z))=\\varnothing$ says exactly that $h(|T|)\\subseteq |B_0|$. By [lem-weil-pbc-morphism-factors-through-open-subscheme] this implies a unique factorization through $B_0\\hookrightarrow B$. Conversely such a factorization has image in $B_0$, hence the same empty inverse image. Combining the preceding equivalences proves both directions of the required universal property.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HI (lemma-restrict-map-to-opens) and 01IK (lemma-open-subspace-scheme); scheme version of spaces-properties.tex Tag 03IE used in Tag 05X8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-trf-unramified-locus-base-change",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-lft-base-change",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X8, lemma-where-unramified, scheme specialization, with the final immediate implication expanded using Tag 03H4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "where.*unramified|unramifiedLocus|unramified.*locus",
+   "results": "{\"t\": \"2026-10-23T04:25:06Z\", \"tool\": \"grep\", \"query\": \"where.*unramified|unramifiedLocus|unramified.*locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern the affine unramified locus, diagonal criteria or stability under base change; none constructs the parameter open for a closed source over B."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open in the parameter base represents unramified base changes of a morphism with closed locally finite type source.",
+   "results": "{\"t\": \"2026-10-23T04:25:06Z\", \"tool\": \"leansearch\", \"query\": \"An open in the parameter base represents unramified base changes of a morphism with closed locally finite type source.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"Algebra.Unramified.baseChange\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.mk\", \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\"], \"digest\": \"45eea014a6ced7f9\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern the affine unramified locus, diagonal criteria or stability under base change; none constructs the parameter open for a closed source over B."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnramified\", \"Opens\"",
+   "results": "{\"t\": \"2026-10-23T04:25:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsUnramified\\\", \\\"Opens\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern the affine unramified locus, diagonal criteria or stability under base change; none constructs the parameter open for a closed source over B."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let X to Y be a morphism over S whose source is locally of finite type and closed over S. There is an open of S representing base changes where the morphism is unramified.",
+   "results": "{\"t\": \"2026-10-23T04:25:07Z\", \"tool\": \"leanfinder\", \"query\": \"Let X to Y be a morphism over S whose source is locally of finite type and closed over S. There is an open of S representing base changes where the morphism is unramified.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"b4eff2872f2084c2\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern the affine unramified locus, diagonal criteria or stability under base change; none constructs the parameter open for a closed source over B."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unramified parameter locus of a triangle with closed locally finite type source is the complement of the image of the non unramified locus and represents arbitrary base changes.",
+   "results": "{\"t\": \"2026-10-23T04:27:44Z\", \"tool\": \"leanfinder\", \"query\": \"The unramified parameter locus of a triangle with closed locally finite type source is the complement of the image of the non unramified locus and represents arbitrary base changes.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"Algebra.isOpen_unramifiedLocus\", \"Algebra.unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"Algebra.unramifiedLocus_eq_compl_support\", \"AlgebraicGeometry.FormallyUnramified\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"e75493ddcf30f19f\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern the affine unramified locus, diagonal criteria or stability under base change; none constructs the parameter open for a closed source over B."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subset of the base represents the base changes where a morphism from a closed locally finite type source is unramified.",
+   "results": "{\"t\": \"2026-10-23T09:25:52Z\", \"tool\": \"leanfinder\", \"query\": \"An open subset of the base represents the base changes where a morphism from a closed locally finite type source is unramified.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE\"], \"digest\": \"aa27ad8003c88cfc\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the full parameter-open assertion. The hits give ring-level unramified loci, scheme finite-type cancellation, or permanence; the required scheme parameter construction and its converse are not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "unramifiedLocus|unramified.*locus|where.*unramified",
+   "results": "{\"t\": \"2026-10-23T09:27:07Z\", \"tool\": \"grep\", \"query\": \"unramifiedLocus|unramified.*locus|where.*unramified\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the full parameter-open assertion. The hits give ring-level unramified loci, scheme finite-type cancellation, or permanence; the required scheme parameter construction and its converse are not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open parameter locus represents arbitrary base changes on which a morphism is unramified when the source is closed and locally of finite type over the parameter base.",
+   "results": "{\"t\": \"2026-10-23T09:27:08Z\", \"tool\": \"leansearch\", \"query\": \"An open parameter locus represents arbitrary base changes on which a morphism is unramified when the source is closed and locally of finite type over the parameter base.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.unramifiedLocus\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Unramified.mk\"], \"digest\": \"627fc987a539595b\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the full parameter-open assertion. The hits give ring-level unramified loci, scheme finite-type cancellation, or permanence; the required scheme parameter construction and its converse are not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFiniteType, \"of_comp\"",
+   "results": "{\"t\": \"2026-10-23T09:27:08Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFiniteType, \\\"of_comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"AlgebraicGeometry.Etale.of_comp\"], \"digest\": \"6e1b86f5fc088b0d\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the full parameter-open assertion. The hits give ring-level unramified loci, scheme finite-type cancellation, or permanence; the required scheme parameter construction and its converse are not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unramified locus of a morphism of schemes gives a universal open in the base when the source maps closedly to the base, by removing the image of its complement.",
+   "results": "{\"t\": \"2026-10-23T09:28:40Z\", \"tool\": \"leanfinder\", \"query\": \"The unramified locus of a morphism of schemes gives a universal open in the base when the source maps closedly to the base, by removing the image of its complement.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"Algebra.unramifiedLocus_eq_univ_iff\", \"Algebra.unramifiedLocus\", \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"aec957a49c091302\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the full parameter-open assertion. The hits give ring-level unramified loci, scheme finite-type cancellation, or permanence; the required scheme parameter construction and its converse are not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-universal-unramified-radicial-open",
+  "date": "2026-10-23",
+  "group": "Q158"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: second sentence, applying Tag 05XA to construct W_2; Tag 05XA proof, final application of Tag 05X9 after verifying closedness of the source and its relative self-product.; Tag 05X8, spaces-more-morphisms-lemma-where-unramified, scheme specialization; original item steps 1--4 (finite-type cancellation, point lifting, unramified locus and closed-image complement).",
+   "via": [
+    "lem-sfb-universal-unramified-radicial-open",
+    "lem-sfb-universal-closed-immersion-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-closed-source-unramified-parameter-open",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split Tag 05X8 into finite-type cancellation, the closed-image complement, the Cartesian base-change comparison, the affine-local unramified test, point lifting proving the bad-image equality, and factorization through an open. Reused existing DAG nodes throughout; no new nodes. Review FIX (NJ cc maintainer reader, 2026-10-23): step 5 point lifting now cites the scheme Mathlib leaf lem-weil-pbc-fibre-product-points (Tag 01JT) instead of the algebraic-space node lem-a1-space-fibre-product-point.",
+  "blueprint": "Realizes the inherited from.place: det-thm-sf-ctf-stability-direct-images proof (3), alteration/moduli prerequisites, specifically the Tag 05X8 prerequisite in the 05XA/05X9 parameter-open argument. The creation chain has no machine-resolvable imported ancestor (blueprint_refs.py ancestor returns None); retain from.node null and the inherited precise place/via. The current latest blueprint direct-images proof (3) is the ambient route; this item supplies its lower-level representability prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-unramified-locus-base-change",
+    "why": "Generic scheme unramified-locus base-change theorem; the unit has no separate scheme-locus theorem, and no constructibility route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-unramified-locus-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-3f3a1f45f",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-3f3a1f45f (reviewer sub-agent of L); spot-checked: S1 first split of the scheme case of Stacks 05X8 (spaces-more-morphisms l.11529, read with its proof). The statement is identical to clones/live and side-live, so nothing is weakened; no new nodes, no SGA, no repair or re-split note. All 6 steps checked against the statements of the cited nodes. Step 1: clause (a) of lemma-nagata-finite-type-to-separated-target. Step 2: lem-trf-unramified-locus-base-change, where W_f equals U_f; p(Z) is closed because p is a closed map. Step 3: I checked that A x_C C_T is isomorphic to A_T, then the lft base-change leaf and the trf base-change clause give W_{f_T} = r^{-1}(W_f). Step 4: the elementary locality argument through the 02G4/02GE form recorded in def-weil-unramified-morphism. Step 6: the open-factorisation leaf. Edge cases f=id, A empty, T empty, and x->x^2 over a field (B_0 empty) are consistent. No duplicate or cycle: the 05X8 hits in the DAG are the space/stack source-locus nodes and the parent radicial-open node, which cites the item. Batch 5: lem-trf-unramified-locus-base-change is the generic Tag 0475 scheme locus fact, reaches no assumption leaf or trace/PD proof node, and is accepted as a tool use. lem-a1-space-fibre-product-point reached sec-trace-formula only through the def-trf-algebraic-space definitions. FIX (C7): step 5 used that algebraic-space node from another unit for a scheme fact. It now cites the existing Mathlib leaf lem-weil-pbc-fibre-product-points (Tag 01JT), with the elementary remark that kappa(a) tensor_{kappa(b)} kappa(t) is nonzero and so has a prime. proof_deps and split_report.tool_uses are updated to match. Corrected item at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-closed-source-unramified-parameter-open.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSourceUnramifiedParameterOpen",
+  "declaration": "AlgebraicGeometry.exists_closedSourceUnramifiedParameterOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSourceUnramifiedParameterOpen.lean",
+  "statement": "theorem exists_closedSourceUnramifiedParameterOpen {A B C : Scheme.{u}} (p : A ⟶ B) (q : C ⟶ B) (f : A ⟶ C) (hf : f ≫ q = p) [LocallyOfFiniteType p] (hp : IsClosedMap p) : LocallyOfFiniteType f ∧ ∃ B₀ : B.Opens, (B₀ : Set B) = (p '' {z : A | ∃ O : A.Opens, z ∈ O ∧ IsUnramified (O.ι ≫ f)}ᶜ)ᶜ ∧ ∀ (T : Scheme.{u}) (h : T ⟶ B), IsUnramified (pullback.map p h q h f (𝟙 T) (𝟙 B) ((Category.comp_id p).trans hf.symm) ((Category.comp_id h).trans (Category.id_comp h).symm)) ↔ ∃ l : T ⟶ B₀.toScheme, l ≫ B₀.ι = h",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84af6fb33",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Re-delivery of returned head 9503 (H2). It applies the permitted repair: stmt_deps back to the base five definition nodes, unramifiedLocus written out inline from its definition (side-live UnramifiedLocusBaseChange l.186), locus module now a plain proof-only import; node otherwise differs from side-live only by the lean field. Every clause matches the node and Stacks 05X8 (spaces-more-morphisms lemma-where-unramified, complement formula from its proof): hf, [LocallyOfFiniteType p], IsClosedMap p, nothing on q; B0 fixed by its carrier (p '' U^c)^c (postfix c binds first); f_T = pullback.map p h q h f (1 T) (1 B) with correct square equations; factorization through B0.ι; quantifier and connective grouping checked. Edge cases A empty, T empty, f unramified, ramified over a field consistent. T in Scheme.{u} as A,B,C (Mathlib scheme pullback convention). No new definitions, sorry only, docstrings with Tag 05X8 and blueprint id, six-step proof plan, lean.statement verbatim, report has Worker report and Second reading by Q23. Not recompiled (no file changed); worker reports a clean compile."
+ }
+}

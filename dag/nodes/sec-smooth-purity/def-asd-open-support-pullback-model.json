@@ -1,0 +1,108 @@
+{
+ "id": "def-asd-open-support-pullback-model",
+ "kind": "definition",
+ "title": "Graph-free proper/open comparison for a pulled-back compactification",
+ "statement": "Let Λ be a finite commutative ring and a:V→X, p:V→U, f:X→Y, j:U→Y a cartesian square, with a and j open immersions. For a supplied compactification c of f, define P(c):R(p)_!(c.ofIsPullback sq) ⋙ Dj! ≅ Da! ⋙ R(f)_!(c) by the proper/open exchange for the proper part c.g, followed by the open-composition comparison using (c.ofIsPullback sq).i ≫ fst = a ≫ c.i. It is precisely the tail of E(c,b) from [def-asd-open-support-compactification-model], after its graph comparison. Use compactifications and unbounded functors of [def-amb-etale-compact-support]. There is no quasi-compactness hypothesis and no choice of an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Coherences (i) and (iii): restriction of the compactification diagram to an open and adjunction transposition."
+ },
+ "stmt_deps": [
+  "def-asd-open-support-compactification-model",
+  "def-amb-etale-compact-support"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward open extension by zero exchange commutes with a cartesian compactification refinement",
+   "date": "2026-10-26",
+   "results": "HasCompactSupport.extend_zero and related topological lemmas; no derived sheaf refinement exchange.",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of compactification comparison isomorphism for extension by zero along open immersions",
+   "date": "2026-10-26",
+   "results": "Scheme.Hom.appIso_inv_naturality and open-immersion sheaf restriction identities.",
+   "verdict": "No compact-support exchange coherence. The local general graph comparison theorem supplies normalization and cocycles, but not this raw one-refinement equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-26",
+   "results": "CategoryTheory.mateEquiv_hcomp in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "verdict": "Supplies abstract pasting; geometric unit and compositor identifications are still needed."
+  },
+  {
+   "tool": "grep",
+   "query": "Compactification.*(naturality|trans|cocycle); refinement.*exchange|exchange.*refinement",
+   "date": "2026-10-26",
+   "results": "No Mathlib compactification coherence. Repository signatures read: EtaleGraphComparisonBaseChange, EtaleGraphRefinementNormalization, RefinementOfIsPullback, OpenImmersionLowerShriekProjectionBaseChange. Blueprint search refinement open found zero imported blueprint nodes.",
+   "verdict": "No duplicate of the raw proper/open single-refinement equation or its explicit graph-free factor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenSupportCompactificationNaturality",
+  "date": "2026-10-26",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Coherence (i) in prop-asd-smooth-base-change.proof.md: restriction of the compactification diagram to an open, specifically the proper/open exchange and open-composition factors and their compatibility with refinements.",
+   "via": [
+    "lem-asd-open-support-compactification-naturality",
+    "lem-asd-open-restriction-compact-support-cube",
+    "lem-asd-exceptional-base-change-open-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenSupportPullbackModel",
+  "file": "lean/Sheaf/SixFunctors/OpenSupportPullbackModel.lean",
+  "declaration": "AlgebraicGeometry.Etale.openSupportPullbackIso",
+  "statement": "def openSupportPullbackIso\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X Y U V : Scheme.{u}} {f : X ⟶ Y}\n    {j : U ⟶ Y} [IsOpenImmersion j] {a : V ⟶ X} [IsOpenImmersion a]\n    {p : V ⟶ U} (sq : IsPullback a p f j) (cf : Compactification f) :\n    Rf_!(cf.ofIsPullback sq)[ModuleCat.{u + 1} Λ] ⋙\n        D((j)_!open[ModuleCat.{u + 1} Λ]) ≅\n      D((a)_!open[ModuleCat.{u + 1} Λ]) ⋙ Rf_!(cf)[ModuleCat.{u + 1} Λ]",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T023311-L-541216",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T023311-L-541216",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

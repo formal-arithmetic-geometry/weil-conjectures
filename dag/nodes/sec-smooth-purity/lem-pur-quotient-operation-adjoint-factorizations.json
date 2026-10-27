@@ -1,0 +1,341 @@
+{
+ "id": "lem-pur-quotient-operation-adjoint-factorizations",
+ "kind": "statement",
+ "title": "Tensor and pullback transition adjunct factorizations on prescribed K-flat complexes",
+ "statement": "Let $\\mathcal C,\\mathcal C'$ be sites small in the module universe, $B_m\\xrightarrow qB_n$ a map of commutative ring sheaves on $\\mathcal C$, and $g:\\operatorname{Sh}(\\mathcal C')\\to\\operatorname{Sh}(\\mathcal C)$ a geometric morphism, meaning an adjunction $g^{-1}\\dashv g_*$ with inverse image preserving finite limits [def-weil-pbc-ringed-topos-morphism, def-weil-size-convention]. Let $C_m\\xrightarrow{q'}C_n$ be ring sheaves on $\\mathcal C'$ and fix isomorphisms $c_j:g^{-1}B_j\\xrightarrow\\sim C_j$ for $j=m,n$ satisfying $c_n g^{-1}q=q'c_m$. Write $g_j^*L=C_j\\otimes_{g^{-1}B_j}g^{-1}L$, with its specified adjunction unit, termwise on complexes. Use sheafified balanced tensor and direct-sum total tensor, with differential $d(u\\otimes v)=du\\otimes v+(-1)^{\\deg u}u\\otimes dv$ [def-pur-sheaf-tensor-product, def-pc-tensor-complex-sheaves].\n\nLet $U_j,V_j$ be integer-indexed flat-term K-flat $B_j$-complexes for $j=m,n$, with arbitrary semilinear chain maps $t^U:U_m\\to\\operatorname{Res}_qU_n$, $t^V:V_m\\to\\operatorname{Res}_qV_n$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules, def-pc-sheaf-restrict-scalars]. Denote their ordinary adjuncts by $\\bar t^U(u\\otimes a)=a\\,t^U(u)$ and $\\bar t^V(v\\otimes a)=a\\,t^V(v)$, and their actual derived adjuncts by $\\alpha^U,\\alpha^V$ under the normalized derived scalar adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Put $K_j=\\operatorname{Tot}(U_j\\otimes_{B_j}V_j)$ and $F_j=g_j^*U_j$. Give $K$ its transition $t^K(u\\otimes v)=t^U(u)\\otimes t^V(v)$ and $F$ its transition $t^F(s\\otimes u)=q'(s)\\otimes g^{-1}t^U(u)$. These are the induced chain maps on these prescribed output complexes.\n\nThere are canonical chain isomorphisms\n$$\\varepsilon:K_m\\otimes_{B_m}B_n\\xrightarrow\\sim\\operatorname{Tot}((U_m\\otimes_{B_m}B_n)\\otimes_{B_n}(V_m\\otimes_{B_m}B_n)),$$\n$$\\chi:F_m\\otimes_{C_m}C_n\\xrightarrow\\sim g_n^*(U_m\\otimes_{B_m}B_n).$$\nOn local tensor generators, $\\varepsilon((u\\otimes v)\\otimes a)=(u\\otimes a)\\otimes(v\\otimes1)$ and $\\varepsilon^{-1}((u\\otimes a)\\otimes(v\\otimes b))=(u\\otimes v)\\otimes ab$. The map $\\chi$ is pinned by the equality $\\chi((1\\otimes u)\\otimes1)=1\\otimes(u\\otimes1)$ on the actual inverse-image unit generators, including all scalar multiples and all source-site objects. In transported inverse-image coordinates it is $g^{-1}u\\otimes a\\mapsto a(g^{-1}u\\otimes1)$.\n\nThe ordinary adjuncts of the actual output transitions satisfy the chain identities\n$$\\bar t^K=\\operatorname{Tot}(\\bar t^U\\otimes\\bar t^V)\\,\\varepsilon,\\qquad \\bar t^F=g_n^*(\\bar t^U)\\,\\chi.$$\nAll displayed output and scalar-extended complexes are flat-term K-flat. Under their canonical K-flat localization comparisons these are the derived identities\n$$\\alpha^K=(\\alpha^U\\otimes^{\\mathbf L}\\alpha^V)\\,\\mu,\\qquad \\alpha^F=(Lg_n^*\\alpha^U)\\,\\theta,$$\nwhere $\\mu$ is the canonical strong monoidal scalar-extension comparison and $\\theta:T_{C}Lg_m^*\\xrightarrow\\sim Lg_n^*T_B$ is the scalar-change mate normalized by insertion of $1$, with $T_B=-\\otimes^{\\mathbf L}_{B_m}B_n$ and $T_C=-\\otimes^{\\mathbf L}_{C_m}C_n$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-sfb-kflat-scalar-comparison-normalization]. In particular, if both input ordinary adjuncts are chain isomorphisms then $\\bar t^K$ is a chain isomorphism, and if $\\bar t^U$ is a chain isomorphism then $\\bar t^F$ is a chain isomorphism; the corresponding actual derived adjuncts are isomorphisms with precisely the displayed factorizations. No normalized whole-system input, replacement of transitions, boundedness, or flatness of $q$ or $q'$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (label lemma-pullback-tensor-product); also Tags 0G7E (label lemma-pullback-K-flat) and 07A6 (label lemma-adjoint). Agent-formulated actual-transition extraction of original steps 8-9 of lem-pur-quotient-expression-kflat-normalization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-kflat-scalar-comparison-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Use the exactness of geometric inverse image and ordinary scalar restriction to supply the ten functor instances. Apply the normalized scalar comparison to obtain a, a', d, d', its ordinary isomorphism, its unit square, and its localized mate square. Invert its ordinary isomorphism to obtain χ and cancel its inverse in the unit square.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), and 07A4 (lemma-pullback-tensor-product)."
+   }
+  },
+  {
+   "text": "Apply scalar-extension preservation of K-flatness to the given ordinary functor using its prescribed object and map equations. Its objectwise identification with explicit scalar extension and flatness under isomorphism give flat terms. Combine this with the K-flat total-tensor theorem and the inverse-image K-flat and flatness theorems to prove all ten Good assertions. No auxiliary homotopy-derived pair is needed.",
+   "uses": [
+    "lem-sfb-scalar-extension-kflat",
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), explicit identity-topos scalar-extension comparison."
+   }
+  },
+  {
+   "text": "Use the existing canonical scalar total-tensor comparison for a functor identified with scalar extension. Its unit-generator equation supplies epsilon on scalar-one homogeneous generators. Linearity of epsilon and bilinearity of the total tensor generator extend the equation to every scalar. Applying the inverse to this equation and multiplying the two scalar factors proves the inverse formula.",
+   "uses": [
+    "lem-pur-integral-tensor-reduction-tower-comparison",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), balanced-generator computation of the actual tensor transition."
+   }
+  },
+  {
+   "text": "Define tK to be the ordinary transpose of ε followed by the total tensor of the two input adjuncts. The adjunction inverse law proves its ordinary factorization. Its unit equation, ε on unit generators, and naturality of total-tensor coproduct injections prove its asserted formula on every homogeneous pure generator.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), inverse coequalizer comparison; ring-isomorphism transport as in the cited node."
+   }
+  },
+  {
+   "text": "Apply the general transposition identity for a commuting unit square to the two ordinary scalar adjunctions and inverse-image functors. The χ unit equation from step 1 is exactly the needed square on each cochain degree. This proves the ordinary pullback factorization for the actual pullTransition.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), unit/Hom-adjunction verification of the actual pullback transition."
+   }
+  },
+  {
+   "text": "Apply the same unit-square transposition identity to localization and each normalized derived scalar adjunction. This identifies each derived adjunct with the model counit followed by the localization of its ordinary adjunct. Naturality of the native K-flat tensor isomorphism and cancellation of adjacent model isomorphisms then give the displayed derived tensor factorization, with scalarTensorComparison exactly as defined in the statement.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product): normalized K-flat computation of scalar extension and tensor."
+   }
+  },
+  {
+   "text": "Rearrange the normalized comparison's representative equation by the exact inverse-image localization isomorphism to obtain the displayed χ representative equation. Localize the ordinary pullback factorization, substitute this representative equation, and use naturality of inverse-image localization to move the ordinary adjunct across its comparison. The derived-adjunct formula of step 6 completes the displayed derived pullback factorization.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint) and 0G7E (lemma-pullback-K-flat); normalized scalar-change mate as stated in the cited comparison lemma."
+   }
+  },
+  {
+   "text": "All factors in scalarTensorComparison are isomorphisms: the K-flat tensor model maps, the computing scalar counits, and Q(ε). Functors preserve isomorphisms, so the ordinary tensor and pullback factorizations preserve isomorphisms of the input adjuncts. Their derived adjuncts are also isomorphisms by the computing counit formula. No extra boundedness, flat coefficient-map, or transition replacement assumption is introduced.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 07A6 (lemma-adjoint), elementary isomorphism consequence of the proved factorizations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-scalar-extension-kflat",
+  "lem-sfb-scalar-hom-tensor-coherence",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "C5 Lean proof of Tags 07A2, 0G7E, 07A4 and 07A6, with Tag 03EL in sites-modules.tex; canonical scalar total comparison, normalized scalar adjunctions and native tensor localization APIs, 2026-10-24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On prescribed flat term K-flat sheaf complexes the actual semilinear transition adjoint for tensor and geometric pullback factors through monoidal scalar extension and insertion normalized scalar comparison",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback adjunctions and generic homological tensor objects do not state the actual semilinear tensor/pullback adjunct identities on the prescribed K-flat representatives"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "[loogle] OK 12 hit(s); PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id, PresheafOfModules.pullback_id_comp, PresheafOfModules.pullback_assoc, PresheafOfModulesOfCommRing.pullback, PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback adjunctions and generic homological tensor objects do not state the actual semilinear tensor/pullback adjunct identities on the prescribed K-flat representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|scalar.*adjoint|adjoint.*scalar|cochain.*pullback.*tensor",
+   "results": "[grep] OK 16 hit(s); Mathlib/LinearAlgebra/Complex/Module.lean:375, Mathlib/Analysis/CStarAlgebra/Projection.lean:39, Mathlib/Algebra/Star/SelfAdjoint.lean:596, Mathlib/Algebra/Star/SelfAdjoint.lean:603, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean:18, Mathlib/Algebra/Category/ModuleCat/Descent.lean:60, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:116, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:38, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:40, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:657, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:675, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:676, Mathlib/Analysis/InnerProductSpace/Rayleigh.lean:261, Mathlib/Analysis/Normed/Operator/ContinuousAlgEquiv.lean:129, Mathlib/Analysis/Normed/Operator/ContinuousAlgEquiv.lean:176, Mathlib/Analysis/Normed/Operator/ContinuousAlgEquiv.lean:190",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback adjunctions and generic homological tensor objects do not state the actual semilinear tensor/pullback adjunct identities on the prescribed K-flat representatives"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The chain adjoint of a tensor of semilinear sheaf complex maps and of an inverse image is the tensor of adjoints or pullback of the adjoint under canonical scalar comparison",
+   "results": "[leansearch] OK 8 hit(s); TensorProduct.adjoint_map, LinearMap.adjoint_lTensor, TopCat.Sheaf.pullback, HomologicalComplex.tensorHom, SheafOfModules.PullbackConstruction.adjunction, ContinuousLinearMap.adjointAux, TopCat.Sheaf.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback adjunctions and generic homological tensor objects do not state the actual semilinear tensor/pullback adjunct identities on the prescribed K-flat representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor and inverse image transition adjunct factorizations computed on the original K-flat chain representatives using insertion of one and balanced tensor multiplication",
+   "results": "[leanfinder] OK 8 hit(s); HomologicalComplex.unit_tensor_d₁, HomologicalComplex.ιTensorObj, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasTensor, CategoryTheory.Tor'_map_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback adjunctions and generic homological tensor objects do not state the actual semilinear tensor/pullback adjunct identities on the prescribed K-flat representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullbackPushforwardAdjunction|def adjunction|def pullbackComp",
+   "results": "[grep] OK 5 hit(s); Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:60, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:79, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:167, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:50, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean:131",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pullback adjunctions and generic homological tensor objects do not state the actual semilinear tensor/pullback adjunct identities on the prescribed K-flat representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|semilinear.*tensor|tensor.*semilinear",
+   "results": "0 hits: . Directory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf adjunctions and monoidal structures do not assert the prescribed semilinear chain transitions and their normalized derived factorizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoint semilinear transition maps on K-flat sheaf complexes commute with tensor and pullback",
+   "results": "8 hits: TensorProduct.adjoint_map, LinearMap.adjoint_lTensor, ContinuousLinearMap.adjointAux, LinearMap.adjoint_rTensor, LinearMap.adjoint, TopCat.Sheaf.pullback, SheafOfModules.PullbackConstruction.adjunction, ContinuousLinearMap.adjoint",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf adjunctions and monoidal structures do not assert the prescribed semilinear chain transitions and their normalized derived factorizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "12 hits: PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf adjunctions and monoidal structures do not assert the prescribed semilinear chain transitions and their normalized derived factorizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Actual adjunct of tensor semilinear maps of sheaf cochain complexes factors as tensor of adjuncts after scalar extension; inverse image adjunct factors through scalar change comparison",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackObjUnitToUnit, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, PresheafOfModules.Monoidal.tensorObjMap",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf adjunctions and monoidal structures do not assert the prescribed semilinear chain transitions and their normalized derived factorizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars strong monoidal on sheaves of modules chain complexes with inverse image change of rings unit normalized",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, SheafOfModules.unitToPushforwardObjUnit, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.monoidalCategory, PresheafOfModules.Monoidal.tensorObjMap",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf adjunctions and monoidal structures do not assert the prescribed semilinear chain transitions and their normalized derived factorizations"
+  },
+  {
+   "tool": "grep",
+   "query": "def adjunction|fromExtendScalars_hom_apply|def pullbackComp",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean. Directory: Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf adjunctions and monoidal structures do not assert the prescribed semilinear chain transitions and their normalized derived factorizations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-quotient-expression-kflat-normalization",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Former coefficient-twists proof step 5, as extracted in lem-pur-derived-pullback-tensor-iso: constructing the quotient tensor/pullback towers before their coherence equations; lem-pur-integral-coherence-tower former step 1, from actual quotient transitions through K-flat models and normalized transition-adjoints. Extraction: actual-transition extraction of original steps 8-9 of lem-pur-quotient-expression-kflat-normalization.",
+   "via": [
+    "lem-pur-quotient-expression-kflat-normalization",
+    "lem-pur-integral-coherence-tower",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-quotient-operation-adjoint-factorizations",
+  "worker": "stage1",
+  "summary": "NM verified the actual tensor and pullback adjunct formulas by balanced tensors and the inverse-image unit, with K-flat preservation and normalized derived adjunction supplied by existing nodes. No new nodes or statement changes.",
+  "blueprint": "Realizes the inherited former coefficient-twists step 5 / quotient-expression normalization steps 8-9 by constructing the ordinary comparisons and proving the actual transition factorizations before localization.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Normalized derived scalar adjunction identifies the actual adjunct with its ordinary representative; it is a generic tool, not a purity route."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic coequalizer comparison and its insertion-of-one scalar-adjunction mate; no node of this unit replaces this normalization."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic strong monoidal structure of ringed-topos derived pullback, used for scalar extension."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic K-flat preservation and derived tensor/pullback computation, including identity-topos ring change."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic natural K-flat localization comparison for total tensor and its maps."
+   },
+   {
+    "node": "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "why": "Generic pure-tensor ordinary comparison underlying the canonical derived pullback tensor comparison; identifies it with epsilon."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "why": "Generic uniqueness of the derived tensor comparison by its representative square; pins mu = Q(epsilon)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NM-c6e93e77d",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-c6e93e77d (reviewer sub-agent of L); spot-checked: I read the whole item, all 8 steps and the statement of every cited node; the delivery has no new nodes and leaves the statement unchanged. Stacks labels checked: 07A4 (sites-cohomology l.3684), 0G7E, 07A6, 07A2 and 03EL (sites-modules). Hand checks: ε and ε⁻¹ are well defined, both composites are the identity, and the differential carries the same (−1)^p sign on both sides. χ is the inverse of χ_h from lem-sfb-kflat-scalar-comparison-normalization (h=g, A_Y=B_m, B_Y=B_n), and θ has the same direction as that node's θ_h. Steps 3 and 5 match on generators; step 5 detects equality through the g⁻¹⊣g_* Hom bijection. Step 1 gets K-flatness from the tensor-model and pullback nodes using only ring maps, with no flatness assumed. Steps 6-7 use clause (2) of lem-pur-sheaf-ring-derived-coefficient-adjunction and the naturality in lem-weil-pbc-site-derived-tensor-descent. Cases tested: zero complexes, q=id, g=id, nonflat ℤ→ℤ/2, odd degrees. Duplicate search (rg -L over dag/nodes for adjunct, tensor-comparison and scalar-tower terms) found nothing equivalent. No SGA. One fault, C3: step 6 says the canonical derived tensor comparison of lem-weil-pbc-ringed-topoi-derived-tensor-pullback is Q(ε) on representatives, but that node's statement only says 'canonical'; the pinning is in its proof (steps 3/5), as it is in the proof of Stacks 07A4. FIX: step 6 now also cites def-weil-pbc-canonical-ringed-tensor-comparison (pure-tensor equation, which gives ε) and lem-weil-pbc-tensor-comparison-descent-representatives (unique derived comparison fixed by the representative square). proof_deps updated, two generic tool_uses added, acyclicity checked. All five original tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientOperationAdjointFactorizations",
+  "declaration": "SheafOfModules.QuotientOperation.quotient_operation_adjoint_factorizations",
+  "declarations": [
+   "SheafOfModules.QuotientOperation.Good",
+   "SheafOfModules.QuotientOperation.total",
+   "SheafOfModules.QuotientOperation.totalPure",
+   "SheafOfModules.QuotientOperation.ordinaryAdjunct",
+   "SheafOfModules.QuotientOperation.derivedAdjunct",
+   "SheafOfModules.QuotientOperation.derivedTensor",
+   "SheafOfModules.QuotientOperation.tensorModel",
+   "SheafOfModules.QuotientOperation.scalarTensorComparison",
+   "SheafOfModules.QuotientOperation.pullTransition",
+   "SheafOfModules.QuotientOperation.quotient_operation_adjoint_factorizations"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientOperationAdjointFactorizations.lean",
+  "statement": "theorem quotient_operation_adjoint_factorizations (R : Sheaf K (Type u) ⥤ Sheaf J (Type u)) (_adj : L ⊣ R) [HasDerivedCategory.{w} (Modules A)] [HasDerivedCategory.{w} (Modules B)] [HasDerivedCategory.{w} (Modules A')] [HasDerivedCategory.{w} (Modules B')] : ∃ (_ : (inverseModules IA).Additive) (_ : (inverseModules IB).Additive) (_ : PreservesFiniteLimits (inverseModules IA)) (_ : PreservesFiniteColimits (inverseModules IA)) (_ : PreservesFiniteLimits (inverseModules IB)) (_ : PreservesFiniteColimits (inverseModules IB)) (_ : PreservesFiniteLimits (restriction φ)) (_ : PreservesFiniteColimits (restriction φ)) (_ : PreservesFiniteLimits (restriction φ')) (_ : PreservesFiniteColimits (restriction φ')), ∀(m : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} φ) (m' : DerivedChangeOfRingsCochainModel.{u, u, u, w, w} φ') (Um Vm : CochainComplex (Modules A) ℤ) (Un Vn : CochainComplex (Modules B) ℤ) (hUm : Good Um) (hVm : Good Vm) (_hUn : Good Un) (_hVn : Good Vn) (tU : Um ⟶ ((restriction φ).mapHomologicalComplex (.up ℤ)).obj Un) (tV : Vm ⟶ ((restriction φ).mapHomologicalComplex (.up ℤ)).obj Vn), ∃ (a : m.E ⊣ restriction φ) (a' : m'.E ⊣ restriction φ') (d : m.T ⊣ (restriction φ).mapDerivedCategory) (d' : m'.T ⊣ (restriction φ').mapDerivedCategory) (χ : (inverseModules IA) ⋙ m'.E ≅ m.E ⋙ (inverseModules IB)) (ε : (m.E.mapHomologicalComplex (.up ℤ)).obj (total Um Vm) ≅ total ((m.E.mapHomologicalComplex (.up ℤ)).obj Um) ((m.E.mapHomologicalComplex (.up ℤ)).obj Vm)) (tK : total Um Vm ⟶ ((restriction φ).mapHomologicalComplex (.up ℤ)).obj (total Un Vn)), AdjunctionNormalized m a d ∧ AdjunctionNormalized m' a' d' ∧ (∀ M : Modules A, (inverseModules IA).map (a.unit.app M) ≫ (a_h IA IB hc inferInstance).hom.app (m.E.obj M) = a'.unit.app ((inverseModules IA).obj M) ≫ (restriction φ').map (χ.hom.app M)) ∧ (∀ (p q n : ℤ) (hpq : p + q = n) (W : Cᵒᵖ) (x : (Um.X p).val.obj W) (y : (Vm.X q).val.obj W) (b : B.obj.obj W), (ε.hom.f n).val.app W (pure m ((total Um Vm).X n) W b (totalPure Um Vm p q n hpq W x y)) = totalPure ((m.E.mapHomologicalComplex (.up ℤ)).obj Um) ((m.E.mapHomologicalComplex (.up ℤ)).obj Vm) p q n hpq W (pure m (Um.X p) W b x) (pure m (Vm.X q) W 1 y)) ∧ (∀ (p q n : ℤ) (hpq : p + q = n) (W : Cᵒᵖ) (x : (Um.X p).val.obj W) (y : (Vm.X q).val.obj W) (b c : B.obj.obj W), (ε.inv.f n).val.app W (totalPure ((m.E.mapHomologicalComplex (.up ℤ)).obj Um) ((m.E.mapHomologicalComplex (.up ℤ)).obj Vm) p q n hpq W (pure m (Um.X p) W b x) (pure m (Vm.X q) W c y)) = pure m ((total Um Vm).X n) W (b * c) (totalPure Um Vm p q n hpq W x y)) ∧ (∀ (p q n : ℤ) (hpq : p + q = n) (W : Cᵒᵖ) (x : (Um.X p).val.obj W) (y : (Vm.X q).val.obj W), (tK.f n).val.app W (totalPure Um Vm p q n hpq W x y) = totalPure Un Vn p q n hpq W ((tU.f p).val.app W x) ((tV.f q).val.app W y)) ∧ ordinaryAdjunct a tK = ε.hom ≫ (KFlatTotalTensorModel.total B).map (Prod.mkHom (ordinaryAdjunct a tU) (ordinaryAdjunct a tV)) ∧ ordinaryAdjunct a' (pullTransition IA IB hc tU) = (NatIso.mapHomologicalComplex χ (.up ℤ)).hom.app Um ≫ ((inverseModules IB).mapHomologicalComplex (.up ℤ)).map (ordinaryAdjunct a tU) ∧ Good (total Um Vm) ∧ Good (total Un Vn) ∧ Good (((inverseModules IA).mapHomologicalComplex (.up ℤ)).obj Um) ∧ Good (((inverseModules IB).mapHomologicalComplex (.up ℤ)).obj Un) ∧ Good ((m.E.mapHomologicalComplex (.up ℤ)).obj Um) ∧ Good ((m.E.mapHomologicalComplex (.up ℤ)).obj Vm) ∧ Good ((m.E.mapHomologicalComplex (.up ℤ)).obj (total Um Vm)) ∧ Good ((m'.E.mapHomologicalComplex (.up ℤ)).obj (((inverseModules IA).mapHomologicalComplex (.up ℤ)).obj Um)) ∧ Good (total ((m.E.mapHomologicalComplex (.up ℤ)).obj Um) ((m.E.mapHomologicalComplex (.up ℤ)).obj Vm)) ∧ Good (((inverseModules IB).mapHomologicalComplex (.up ℤ)).obj ((m.E.mapHomologicalComplex (.up ℤ)).obj Um)) ∧ ∃ (hEU : Good ((m.E.mapHomologicalComplex (.up ℤ)).obj Um)) (hUn : Good Un), IsIso (scalarTensorComparison m Um Vm hUm hVm hEU ε) ∧ IsIso (θ_h IA IB hc inferInstance d d') ∧ derivedAdjunct m d tK = m.T.map (tensorModel Um Vm hUm).hom ≫ scalarTensorComparison m Um Vm hUm hVm hEU ε ≫ (derivedTensor B).map (Prod.mkHom (derivedAdjunct m d tU) (derivedAdjunct m d tV)) ≫ (tensorModel Un Vn hUn).inv ∧ m'.ε.app (((inverseModules IA).mapHomologicalComplex (.up ℤ)).obj Um) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex χ (.up ℤ)).hom.app Um) = m'.T.map ((inverseModules IA).mapDerivedCategoryFactors.inv.app Um) ≫ (θ_h IA IB hc inferInstance d d').app (DerivedCategory.Q.obj Um) ≫ (inverseModules IB).mapDerivedCategory.map (m.ε.app Um) ≫ (inverseModules IB).mapDerivedCategoryFactors.hom.app ((m.E.mapHomologicalComplex (.up ℤ)).obj Um) ∧ derivedAdjunct m' d' (pullTransition IA IB hc tU) = m'.T.map ((inverseModules IA).mapDerivedCategoryFactors.inv.app Um) ≫ (θ_h IA IB hc inferInstance d d').app (DerivedCategory.Q.obj Um) ≫ (inverseModules IB).mapDerivedCategory.map (derivedAdjunct m d tU) ≫ (inverseModules IB).mapDerivedCategoryFactors.hom.app Un ∧ ((IsIso (ordinaryAdjunct a tU) ∧ IsIso (ordinaryAdjunct a tV)) → IsIso (ordinaryAdjunct a tK) ∧ IsIso (derivedAdjunct m d tK)) ∧ (IsIso (ordinaryAdjunct a tU) → IsIso (ordinaryAdjunct a' (pullTransition IA IB hc tU)) ∧ IsIso (derivedAdjunct m' d' (pullTransition IA IB hc tU)))",
+  "branch": "sheaf-dag",
+  "by": "Q129",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03cac77c4",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Read item, all 10 stmt_dep records, KFlatScalarComparisonNormalization source (AdjunctionNormalized, pure, a_h, θ_h, main theorem), KFlatTotalTensorModel.total, RingedDerivedNative.tensorIso, ringedComparisonPure. Statement verbatim; item differs from live only in lean; 10 declarations present; docstrings + 8-step proof; sorry-only; no hollow defs. All clauses render the node: Good = IsKFlatIndependentCoefficients ∧ IsFlatOnSite; tK and ε pinned on homogeneous generators (both ε formulas verbatim); tF = g^*(tU) ≫ a_h; χ = inverse of dependency χ, pinned by the unit clause; θ = dependency θ_h with the representative Q(χ) equation; ordinary and derived factorizations in the right order; all 10 Good clauses; conditional IsIso clauses; instances produced existentially, no flatness of q/q' or boundedness assumed; universes as in the dependency. Edge cases: zero, identities, non-flat Z→Z/2, odd degrees, unbounded, empty sites. Advisories: μ given by its 07A4 representative formula, not linked explicitly to ringedTopoiCanonicalDerivedTensorPullback (parent Lean does not state μ); KFlatTotalTensorModel / RingedDerivedNative / ringedComparisonPure / DerivedChangeOfRingsCochainModel owners not in stmt_deps; redundant trailing ∃ (hEU)(hUn). No FIX, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261025T002454-L-3110664",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

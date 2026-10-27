@@ -1,0 +1,212 @@
+{
+ "id": "lem-sfb-equal-dimension-isogeny-criterion",
+ "kind": "statement",
+ "title": "Surjective homomorphisms of equal-dimensional abelian varieties are isogenies",
+ "statement": "Let $k$ be any field [def-weil-field], let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety] with $\\dim A=\\dim B$ [def-kun-topological-krull-dimension], and let $f:A\\to B$ be a homomorphism of $k$-group schemes [def-sc-group-scheme]. Then $f$ is an isogeny [def-sc-isogeny] if and only if it is surjective on underlying scheme points. In particular an endomorphism of $A$ that is not an isogeny is not dominant.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 7.1 (a) iff (b), printed p.32, and its proper-image argument"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-kun-topological-krull-dimension",
+  "def-sc-group-scheme",
+  "def-sc-isogeny"
+ ],
+ "proof": [
+  {
+   "text": "If $f$ is an isogeny, it is surjective by the definition [def-sc-isogeny]. This implication needs no dimension assumption.",
+   "uses": [
+    "def-sc-isogeny"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 7.1, printed p.32: (a) iff (b) and the closed-image argument"
+   }
+  },
+  {
+   "text": "Conversely assume $f$ is surjective. Let $I\\hookrightarrow B$ be its scheme-theoretic image and $K=\\ker f$. The hypotheses of [lem-sc-image-subgroup] hold: $A$ is proper and $B$ is separated and of finite type, by [def-sc-abelian-variety]. That node gives the factorization through $I$ with $A\\to I$ surjective. Since $f$ is surjective too, the closed immersion $I\\hookrightarrow B$ is surjective on points. By [def-weil-closed-immersion] it is therefore a homeomorphism, so $\\dim I=\\dim B$. Now [lem-sfb-abelian-hom-image-dimension] gives $\\dim A=\\dim I+\\dim K$. The dimensions of $A$ and $I$ are finite by [lem-kun-dimension-finite-type], because both are abelian varieties and hence of finite type. Also $K$ is nonempty: the identity of $A$ maps to the identity of $B$, giving a $k$-point of $K$ by [def-sc-group-scheme]. Substituting $\\dim I=\\dim B=\\dim A$ in the dimension formula and cancelling this finite dimension gives $\\dim K=0$.",
+   "uses": [
+    "lem-sc-image-subgroup",
+    "def-sc-abelian-variety",
+    "def-weil-closed-immersion",
+    "lem-sfb-abelian-hom-image-dimension",
+    "lem-kun-dimension-finite-type",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 7.1, printed p.32: (a) iff (b) and the closed-image argument"
+   }
+  },
+  {
+   "text": "By [lem-sc-kernel-subgroup], $K\\hookrightarrow A$ is a closed subgroup scheme. Apply [lem-pc-zero-dimensional-closed-subscheme-finite] to this closed subscheme of the finite-type $k$-scheme $A$, using $\\dim K=0$ from step 2. It follows that $K$ is finite over $k$. Thus $f$ is a surjective homomorphism with finite scheme-theoretic kernel, which is exactly an isogeny by [def-sc-isogeny]. No reducedness of $K$ or separability of $f$ has been assumed.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "def-sc-isogeny"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, lemma-algebraic-scheme-dim-0; applied to the kernel in Milne AV I Proposition 7.1"
+   }
+  },
+  {
+   "text": "For an endomorphism $f:A\\to A$, [lem-weil-pbc-proper-to-separated] applies over $\\operatorname{Spec}k$: its source is proper and its target is separated by [def-sc-abelian-variety]. Hence $f$ is proper, and [lem-weil-pbc-proper-closed-image] says that $f(A)$ is closed. If $f$ were dominant, its image would also be dense, so it would equal $A$. The equivalence proved in steps 1–3, with $B=A$, would make $f$ an isogeny. Taking the contrapositive proves the final assertion.",
+   "uses": [
+    "lem-weil-pbc-proper-to-separated",
+    "def-sc-abelian-variety",
+    "lem-weil-pbc-proper-closed-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, Proposition 7.1, printed p.32: (a) iff (b) and the closed-image argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-isogeny",
+  "lem-sc-image-subgroup",
+  "def-sc-abelian-variety",
+  "def-weil-closed-immersion",
+  "lem-sfb-abelian-hom-image-dimension",
+  "lem-kun-dimension-finite-type",
+  "def-sc-group-scheme",
+  "lem-sc-kernel-subgroup",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-proper-closed-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 7.1, printed p.32: (a) iff (b) and the closed-image argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isogeny|IsIsogeny|IsAbelianVariety",
+   "results": "0 hits; searched AlgebraicGeometry; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern abstract group ranges, linear dimensions, or elementary scheme surjectivity; none states the abelian-variety isogeny criterion or its nondominance consequence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For abelian varieties of equal dimension a group homomorphism is an isogeny if and only if it is surjective",
+   "results": "8 hits; searched all Mathlib / remote service; GrpCat.epi_iff_range_eq_top, AddMonoidHom.range_eq_top, MonoidHom.commGroupOfSurjective, MonoidHom.range_eq_top, AddGrpCat.epi_iff_range_eq_top, GrpCat.Hom.hom', AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective, AlgebraicGeometry.instRespectsIsoSchemeSurjective",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern abstract group ranges, linear dimensions, or elementary scheme surjectivity; none states the abelian-variety isogeny criterion or its nondominance consequence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIsogeny\", \"Surjective\"",
+   "results": "0 hits; searched all Mathlib / remote service; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern abstract group ranges, linear dimensions, or elementary scheme surjectivity; none states the abelian-variety isogeny criterion or its nondominance consequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism between equal dimensional abelian varieties over a field is an isogeny",
+   "results": "8 hits; searched all Mathlib / remote service; AlgebraicGeometry.instRespectsIsoSchemeSurjective, FiniteDimensional.of_surjective, AlgebraicGeometry.instSurjectiveOfIsIsoScheme, RingHom.surjective_respectsIso, OrzechProperty.bijective_of_surjective_endomorphism, surjective_of_nonzero_of_finrank_eq_one, CategoryTheory.MorphismProperty.surjective_respectsIso, AlgebraicGeometry.surjective_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern abstract group ranges, linear dimensions, or elementary scheme surjectivity; none states the abelian-variety isogeny criterion or its nondominance consequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An endomorphism of an abelian variety which is not an isogeny has image of strictly smaller dimension",
+   "results": "8 hits; searched all Mathlib / remote service; CategoryTheory.finrank_endomorphism_eq_one, LinearMap.range_lt_top_of_det_eq_zero, LinearEquiv.mem_dilatransvections_iff_finrank, LinearMap.ker_ne_bot_of_finrank_lt, LinearMap.exists_isNilRegular_of_finrank_le_card, WeierstrassCurve.Affine.Point.map_some, LinearMap.nilRank_le_finrank, LinearMap.exists_isNilRegular",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern abstract group ranges, linear dimensions, or elementary scheme surjectivity; none states the abelian-variety isogeny criterion or its nondominance consequence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-degree-polynomial",
+  "date": "2026-10-23",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Remark 10.11, printed p.47, and Proposition 10.13 with its proof, printed pp.47–48; degree convention before Theorem 10.9, printed p.46. Homogeneous means every nonzero monomial has total degree 2g; zero restrictions are allowed. Supporting input in Milne Proposition 10.13: Chapter I, Proposition 7.1 (a) iff (b), printed p.32, and its proper-image argument",
+   "via": [
+    "lem-sfb-abelian-degree-polynomial",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equal-dimension-isogeny-criterion",
+  "worker": "stage1",
+  "summary": "Read Milne AV I Proposition 7.1 and the cited general inputs. Proved the forward implication by definition, used the existing abelian image–kernel dimension formula to deduce zero-dimensional kernel from surjectivity and equal dimensions, applied the existing zero-dimensional closed-subscheme finiteness lemma, and proved nondominance by the proper closed-image argument. No new nodes and no statement change.",
+  "blueprint": {
+   "realizes": "Supporting input to Milne Proposition 10.13 within the degree-polynomial argument named in blueprint.from.place, ultimately the stable pointed-curve level-structure alteration input to det-thm-sf-ctf-stability-direct-images proof (3). The ancestor command returns None for the inherited created chain; preserve that metadata. Steps 1–3 realize Milne AV I Proposition 7.1 (a) iff (b), and step 4 its proper-image argument.",
+   "same_as_search": "blueprint_refs.py search isogeny, kernel dimension, zero-dimensional; no blueprint node states the entire criterion. Existing multiplication-isogeny nodes are special maps, not this criterion."
+  },
+  "tool_uses": [
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "General zero-dimensional closed-subscheme finiteness, applied to the scheme-theoretic kernel; this is the Stacks 06LH algebraic-scheme input, not a replacement for the unit’s abelian isogeny argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-zero-dimensional-closed-subscheme-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q156-4194f22bf",
+  "group": "Q156",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-4194f22bf (reviewer sub-agent of L); spot-checked: Read Milne AV I §7 Prop 7.1 (PDF p.38, printed p.32): the item is (a)<=>(b) with dim A = dim B as a hypothesis, plus the proper-image argument. The statement, stmt_deps and blueprint are unchanged from clones/live, where the item is still unsplit, so the delivery is not superseded. 0 new nodes. Step 1: surjectivity is in def-sc-isogeny. Step 2: lem-sc-image-subgroup applies (A proper; B separated and of finite type, since proper includes both). Surjective onto B plus closed immersion gives a homeomorphism, so dim I = dim B. lem-sfb-abelian-hom-image-dimension gives dim A = dim I + dim K over any field. dim A and dim I are finite by lem-kun-dimension-finite-type (kundim is the same topological Krull dimension). K is nonempty via (e_A, id), so dim K = 0 with no -inf or inf issue. Step 3: lem-sc-kernel-subgroup gives K closed in A; lem-pc-zero-dimensional-closed-subscheme-finite (Stacks 06LH) gives K finite over k, so f is an isogeny; no reducedness of K is used. Step 4: IsProper.of_comp and isClosedMap leaves give a closed image; closed and dense means all of A; the result follows by contrapositive. Edge cases checked: dim 0, the zero map, [p] in characteristic p, imperfect k. No duplicate: lem-sfb-finite-kernel-equal-dimension-isogeny is the converse over an algebraically closed field. No cycle: the only citer of the item is lem-sfb-abelian-degree-polynomial. Accepted tool_use: lem-pc-zero-dimensional-closed-subscheme-finite (the generic 06LH input). No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.EqualDimensionIsogenyCriterion",
+  "declaration": "AlgebraicGeometry.isIsogeny_iff_surjective_of_topologicalKrullDim_eq",
+  "declarations": [
+   "AlgebraicGeometry.isIsogeny_iff_surjective_of_topologicalKrullDim_eq",
+   "AlgebraicGeometry.not_isDominant_of_not_isIsogeny"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/EqualDimensionIsogenyCriterion.lean",
+  "statement": "theorem isIsogeny_iff_surjective_of_topologicalKrullDim_eq {k : Type u} [Field k] {A B : Over (Spec (.of k))} [GrpObj A] [GrpObj B] [IsAbelianVariety A] [IsAbelianVariety B] (h_dim : topologicalKrullDim A.left = topologicalKrullDim B.left) (f : A ⟶ B) [IsMonHom f] : IsIsogeny f ↔ Surjective f.left",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c4740e93e",
+  "group": "NY",
+  "result": "pass",
+  "note": "Node identical to live except new lean field (live has none). Milne AV I Prop 7.1 (a)<=>(b) p.32 read; Lean isIsogeny_iff_surjective_of_topologicalKrullDim_eq binds Field k, Over(Spec k) A B with GrpObj+IsAbelianVariety (proper/smooth/connected), topologicalKrullDim equality, f with IsMonHom, concludes IsIsogeny f <-> Surjective f.left (IsIsogeny = IsMonHom+Surjective+IsFinite scheme kernel); not_isDominant_of_not_isIsogeny states the endomorphism consequence with no stray hypotheses. Edge cases dim 0, zero map, char p nonreduced kernels, imperfect k covered. No duplicate or name clash in lean/Sheaf or slopmaster2. No defs, sorry proofs, source/blueprint/proof docstrings present, lean.statement verbatim, report has Worker report and Second reading sections. No fixes; no compile needed."
+ }
+}

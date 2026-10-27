@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-relative-cech-base-change",
+ "kind": "statement",
+ "title": "Base change of augmented relative Cech complexes on fibred groupoids",
+ "statement": "Fix the universes and small-skeleton convention of [def-weil-size-convention] and a scheme $S$ [def-pc-scheme]. Categories fibred in groupoids, their morphisms, 2-isomorphisms and 2-fibre products have the meanings of [def-sfb-stable-pointed-moduli-groupoids]. Give each such category its big etale site: objects and arrows are those of the fibred category and coverings lie over jointly surjective etale families of schemes [def-weil-etale-morphism]. Abelian sheaves mean abelian-group-valued contravariant functors satisfying the covering equalizer condition [def-weil-pbc-sites-and-cohomology]. Pullback $e^{-1}$ is precomposition. For $v:\\mathcal V\\to\\mathcal X$ and an abelian sheaf $N$ on $\\mathcal V$, put $(v_*N)(x)=\\Gamma(\\mathcal V\\times_{\\mathcal X}T,N|_{\\mathcal V\\times_{\\mathcal X}T})$ for $x$ over $T$, where $\\Gamma$ is the group of compatible families over all objects and restriction is precomposition with the projection. For $f:\\mathcal U\\to\\mathcal X$ and an abelian sheaf $F$ on $\\mathcal X$, let $\\mathcal U_p$ be the $(p+1)$-fold 2-fibre product over $\\mathcal X$ with projection $f_p$. Write $E^{-1}(f,F)=F$ and $E^p(f,F)=(f_p)_*f_p^{-1}F$ for $p\\geq0$, with zero terms below degree $-1$, augmentation restriction and differential $d^p=\\sum_{j=0}^{p+1}(-1)^jd_j^*$, where $d_j$ omits the $j$-th factor. Let $e:\\mathcal Y\\to\\mathcal X$, let $\\mathcal V=\\mathcal Y\\times_{\\mathcal X}\\mathcal U$ with projection $g:\\mathcal V\\to\\mathcal Y$, and use the base-changed nerve for $E^\\bullet(g,e^{-1}F)$. There is a canonical natural isomorphism of augmented complexes of abelian sheaves $e^{-1}E^\\bullet(f,F)\\cong E^\\bullet(g,e^{-1}F)$, whose degree $-1$ component is the identity on $e^{-1}F$. It respects the augmentation and every face pullback and is natural in $F$. In particular it induces the canonical isomorphism between these complexes in the ordinary derived category of abelian sheaves. No algebraicity or representability hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06XC (lemma-base-change-cech-complex), with the etale topology; the augmented-complex formulation includes the degree -1 identity."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Every functor $w:\\mathcal A\\to\\mathcal B$ over $\\mathit{Sch}/S$ between categories fibred in groupoids preserves cartesian arrows, since all arrows are cartesian; so by [lem-sfb-fibred-site-functor-continuity], with base the big etale site of $S$-schemes, $w$ is continuous and cocontinuous for the big etale topologies. Hence [lem-weil-pbc-continuous-cocontinuous-topos-adjunction] shows that precomposition $w^{-1}$ and the compatible-family functor $R$, indexed by pairs $(a,\\psi:w(a)\\to z)$, send sheaves of sets to sheaves of sets. For $z$ over $T$, sending $(t:T'\\to T,a,\\phi:w(a)\\cong t^*z)$ to $(a,\\text{(cartesian arrow }t^*z\\to z)\\circ\\phi)$ is an equivalence from $(\\mathit{Sch}/T)\\times_{z,\\mathcal B}\\mathcal A$ onto these pairs (an arrow $w(a)\\to z$ factors uniquely through the cartesian lift), so compatible families correspond and $(w_*N)(z)=R N(z)$, compatibly with restrictions (Tag 06W6). Both formulas commute with the forgetful functor to sets, and an abelian presheaf is a sheaf when its underlying presheaf of sets is [def-weil-pbc-sites-and-cohomology]. Thus all terms of $E$ are abelian sheaves and all maps are sheaf morphisms. In a shared-target model a nerve object is $(u_0,\\ldots,u_p,x;\\gamma_i:f(u_i)\\cong x)$. Faces delete coordinates. Deleting positions $i<j$ in either order gives the same tuple, so the two occurrences in $d^{p+1}d^p$ have signs $(-1)^{i+j}$ and $(-1)^{i+j-1}$ and cancel; the two restrictions of the augmentation also agree.",
+   "uses": [
+    "lem-sfb-fibred-site-functor-continuity",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XC (lemma-base-change-cech-complex); Tag 06TS (lemma-functoriality-sheaves) via stacks.tex Tag 06NW; Tag 06W6 (equation-pushforward)."
+   }
+  },
+  {
+   "text": "Write $v_i=(y_i,u_i,\\alpha_i:f(u_i)\\cong e(y_i))$. An object of $\\mathcal V_p$ is $(v_i,y;\\beta_i:y_i\\cong y)$. The functor $h_p$ sends it to $(u_i,e(y);e(\\beta_i)\\alpha_i)$ in $\\mathcal U_p$, on arrows componentwise. The corresponding functor to $\\mathcal Y\\times_{\\mathcal X}\\mathcal U_p$ is an equivalence: an object $(y,(u_i,x;\\gamma_i),\\delta:x\\cong e(y))$ is sent back to the tuple with $v_i=(y,u_i,\\delta\\gamma_i)$ and all $\\beta_i=1$. Composing in either order is naturally isomorphic to the identity, with components $\\beta_i$ on the first side and $\\delta$ on the second. The arrow relation in [def-sfb-stable-pointed-moduli-groupoids] verifies these isomorphisms componentwise. Hence the square with sides $g_p,f_p,e,h_p$ is $2$-cartesian and $f_ph_p=e g_p$ in this model. Deleting a coordinate commutes with $h_p$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XC, test-fibre comparison; lemma-generalities, displayed tuple formula."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-fibred-presheaf-pushforward-base-change] to this square and $N=f_p^{-1}F$. Since $h_p^{-1}f_p^{-1}F=g_p^{-1}e^{-1}F$ by precomposition, it gives an isomorphism $\\beta^p:e^{-1}(f_p)_*f_p^{-1}F\\to(g_p)_*g_p^{-1}e^{-1}F$ for every $p\\geq0$. Its component at $y/T$ restricts a compatible family along the test-fibre functor induced by $h_p$. It is natural in $F$ and in arrows of $y$. Both sides are sheaves by step 1, so it is an isomorphism of sheaves.",
+   "uses": [
+    "lem-sfb-fibred-presheaf-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XC (lemma-base-change-cech-complex); Tag 075B (lemma-base-change)."
+   }
+  },
+  {
+   "text": "For a face $d_j$, restrict a compatible family $s$ and evaluate at a test object $z$ of the degree-$(p+1)$ fibre. The two composites, first face then $\\beta$ or first $\\beta$ then face, have respective values $s_{d_jh_{p+1}(z)}$ and $s_{h_pd_j(z)}$, including the coefficient restrictions. They agree by the coordinate formula of step 2. The restriction description in [lem-sfb-fibred-presheaf-pushforward-base-change] therefore gives $\\beta^{p+1}e^{-1}(d_j^*)=d_j^*\\beta^p$. Set $\\beta^{-1}=1_{e^{-1}F}$. For $t\\in F(e(y))$, both augmented composites at $z$ are the restriction of $t$ along the structural arrow to $e(y)$; hence augmentation commutes as well.",
+   "uses": [
+    "lem-sfb-fibred-presheaf-pushforward-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XC, canonical comparison; lemma-generalities-sheafified and remark-cech-complex-presheaves."
+   }
+  },
+  {
+   "text": "Add the face equalities with signs $(-1)^j$; precomposition is additive sectionwise. Together with the augmentation equality and the unique maps between zero terms below $-1$, the $\\beta^p$ define a natural isomorphism of augmented complexes. Their inverses commute with the differentials by composing the same equalities with the termwise inverses. Applying the localization functor $Q$ of [def-weil-abstract-derived-category] to this complex isomorphism and its inverse gives the claimed canonical isomorphism in the ordinary derived category. Only fibred-groupoid data and big-etale sheaf functoriality were used.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06XC, augmented formulation; derived consequence from localization definition 05RU."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-fibred-site-functor-continuity",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-fibred-presheaf-pushforward-base-change",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06XC (lemma-base-change-cech-complex), with Tag 075B; explicit tuple and compatibility details from lemma-generalities, extended by the degree -1 identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative Cech complex of sheaves on a category fibred in groupoids commutes with arbitrary 2-fibre-product base change",
+   "results": "Hits read: CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback, CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι, CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc, CategoryTheory.CompatiblePreserving.compatible, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj, CategoryTheory.GrothendieckTopology.diagramCompIso, CategoryTheory.GrothendieckTopology.diagramPullback, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Cech-nerve functoriality and site plus constructions do not give 2-fibre-product base change for the sheaf-valued relative complex"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech.*[Bb]ase[Cc]hange|[Bb]ase[Cc]hange.*[Cc]ech|[Cc]ech.*[Pp]ullback",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Cech-nerve functoriality and site plus constructions do not give 2-fibre-product base change for the sheaf-valued relative complex"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Cech complex of abelian sheaves on fibred groupoids commutes with arbitrary 2-cartesian base change as an augmented complex",
+   "results": "Hits read: CategoryTheory.SimplicialObject.augmentedCechNerve.congr_simp, ChainComplex.augment, CategoryTheory.SimplicialObject.augmentedCechNerve, CategoryTheory.Arrow.augmentedCechNerve, CategoryTheory.CosimplicialObject.augmentedCechConerve, CategoryTheory.Arrow.augmentedCechConerve, CategoryTheory.SimplicialObject.augmentedCechNerve_map_left_app, CategoryTheory.CosimplicialObject.augmentedCechConerve.congr_simp",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Cech-nerve functoriality and site plus constructions do not give 2-fibre-product base change for the sheaf-valued relative complex"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechNerve\", \"iso\"",
+   "results": "Hits read: CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi, CategoryTheory.CechNerveTerminalFrom.iso, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi_assoc, CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi_assoc, CategoryTheory.Limits.FormalCoproduct.cechIsoCechNerve, CategoryTheory.Limits.FormalCoproduct.cechIsoCechNerveApp",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Cech-nerve functoriality and site plus constructions do not give 2-fibre-product base change for the sheaf-valued relative complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change identifies the augmented relative Cech complex of a fibred category functor with the complex of its 2-pullback",
+   "results": "Hits read: CategoryTheory.Arrow.mapAugmentedCechNerve_left, CategoryTheory.Arrow.mapAugmentedCechNerve, CategoryTheory.SimplicialObject.augmentedCechNerve_map_left_app, CategoryTheory.SimplicialObject.augmentedCechNerve_obj_left_map, CategoryTheory.Arrow.mapCechNerve_app, CategoryTheory.Arrow.augmentedCechNerve_left, CategoryTheory.SimplicialObject.cechNerveEquiv, CategoryTheory.SimplicialObject.augmentedCechNerve",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Cech-nerve functoriality and site plus constructions do not give 2-fibre-product base change for the sheaf-valued relative complex"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*base.?change|base.?change.*cech|relativeCech|relative_cech",
+   "results": "{\"t\": \"2026-10-23T22:34:28Z\", \"tool\": \"grep\", \"query\": \"cech.*base.?change|base.?change.*cech|relativeCech|relative_cech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech-nerve functoriality and site plus constructions do not assert this relative abelian-sheaf comparison on fibred groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of an augmented sheaf valued Cech complex on a big etale site",
+   "results": "{\"t\": \"2026-10-23T22:34:28Z\", \"tool\": \"leansearch\", \"query\": \"Base change of an augmented sheaf valued Cech complex on a big etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.augmentedCechConerve\", \"CategoryTheory.SimplicialObject.augmentedCechNerve\", \"CochainComplex.fromSingle₀AsComplex\", \"CategoryTheory.Arrow.augmentedCechConerve\", \"ChainComplex.augment\", \"CategoryTheory.SimplicialObject.augmentedCechNerve_obj_hom_app\", \"CategoryTheory.Arrow.augmentedCechNerve\", \"CategoryTheory.SimplicialObject.cechNerveEquiv\"], \"digest\": \"bebec344f7a347f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech-nerve functoriality and site plus constructions do not assert this relative abelian-sheaf comparison on fibred groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechNerve\", \"iso\"",
+   "results": "{\"t\": \"2026-10-23T22:34:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"cechNerve\\\", \\\"iso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi\", \"CategoryTheory.CechNerveTerminalFrom.iso\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_hom_comp_pi_assoc\", \"CategoryTheory.CechNerveTerminalFrom.wideCospan.limitIsoPi_inv_comp_pi_assoc\", \"CategoryTheory.Limits.FormalCoproduct.cechIsoCechNerve\", \"CategoryTheory.Limits.FormalCoproduct.cechIsoCechNerveApp\"], \"digest\": \"6ddc8ef4568d357a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech-nerve functoriality and site plus constructions do not assert this relative abelian-sheaf comparison on fibred groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Cech complexes of abelian sheaves on categories fibred in groupoids commute with arbitrary two fibre product base change",
+   "results": "{\"t\": \"2026-10-23T22:34:29Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Cech complexes of abelian sheaves on categories fibred in groupoids commute with arbitrary two fibre product base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι\", \"CategoryTheory.GrothendieckTopology.diagramCompIso_hom_ι_assoc\", \"CategoryTheory.GrothendieckTopology.diagramCompIso\", \"CategoryTheory.GrothendieckTopology.diagramPullback\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toPullbackObj\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition\", \"CategoryTheory.CompatiblePreserving.compatible\"], \"digest\": \"0daed85c9a70c2c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech-nerve functoriality and site plus constructions do not assert this relative abelian-sheaf comparison on fibred groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a two cartesian square identifies the pushforward terms and face maps of relative Cech complexes",
+   "results": "{\"t\": \"2026-10-23T22:34:31Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to a two cartesian square identifies the pushforward terms and face maps of relative Cech complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.cechNerve_map\", \"CategoryTheory.Arrow.mapCechConerve\", \"CategoryTheory.CosimplicialObject.cechConerve_map\", \"CategoryTheory.Arrow.mapCechNerve\", \"CategoryTheory.Arrow.mapCechNerve_app\", \"CategoryTheory.Arrow.mapAugmentedCechConerve\", \"CategoryTheory.CosimplicialObject.cechConerve\", \"CategoryTheory.Arrow.mapAugmentedCechNerve\"], \"digest\": \"55c24b302cb82bc2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary categorical Cech-nerve functoriality and site plus constructions do not assert this relative abelian-sheaf comparison on fibred groupoids."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-relative-cech-module-augmentation-exact",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. Supporting input: Exact augmented relative Cech complex for stack module sheaves. Supporting input: Base change of augmented relative Cech complexes on fibred groupoids. The inherited ancestry resolver returns None; the explicit supporting passage is the current blueprint paragraph (3).",
+   "via": [
+    "lem-sfb-stack-relative-cech-module-augmentation-exact",
+    "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-cech-base-change",
+  "worker": "stage1",
+  "summary": "Read 06XC and its 075B/06TS inputs, extracted two strictly smaller statement-only inputs, wrote the nerve equivalence and all face/augmentation compatibility explicitly, and retained arbitrary fibred groupoids and abelian coefficients. Fixed inherited TeX overescaping while preserving the inherited null blueprint ancestor returned by the required resolver without changing the mathematical statement. No attachment or Mathlib match. Maintainer FIX: the new functoriality node restated lem-sfb-fibred-site-functor-continuity together with lem-weil-pbc-continuous-cocontinuous-topos-adjunction; it is dropped and step 1 cites those nodes with the Tag 06W6 test-fibre identification written out.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3): supporting cohomological input in the inherited alteration/moduli route below det-thm-sf-ctf-stability-direct-images. All five steps serve the relative-Cech exactness prerequisite; no unit-level route change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "General geometric morphism of a continuous cocontinuous site functor (Sites 00XK/00XO): precomposition and the compatible-family functor preserve sheaves; the unit has no replacement for this site infrastructure, as in lem-sfb-stack-big-etale-derived-base-change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-ebcfe66fd",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-ebcfe66fd (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement. Stacks sources checked against stacks-sheaves.tex: 06XC (l.3249) with remark-cech-complex-sections, lemma-generalities-sheafified and remark-cech-complex-presheaves; the extended complex (l.3130); 06TS (l.461, proved via 06NW); 06W6 (l.530); 075B (l.548). The live item is still unsplit with no repair note, so this is not a re-split. The statement is unchanged apart from citing def-weil-etale-morphism, and nothing is weakened. The route is termwise 075B on the nerve squares, which is equivalent to the Stacks sectionwise proof. Step 2: I checked the 2-cartesian equivalence h_p explicitly in both directions, with the natural isomorphisms (β_i, id) and δ; f_p h_p = e g_p holds strictly and deletion commutes with h_p. Steps 3–5 (075B with a strict square, face and augmentation compatibility, the complex isomorphism and Q) are correct. New node lem-sfb-fibred-presheaf-pushforward-base-change (075B, abelian presheaves, component and naturality stated) is true and has no duplicate in the DAG; kept. FIX, one fault (duplicate new node): lem-sfb-fibred-big-etale-abelian-functoriality restates existing nodes. lem-sfb-fibred-site-functor-continuity (06NU/06NW) plus lem-weil-pbc-continuous-cocontinuous-topos-adjunction (00XK/00XO) already give the sheaf preservation of precomposition and the compatible-family pushforward; lem-sfb-stack-big-etale-derived-base-change uses the same pair in step 1. The node is dropped. Step 1 now cites those two nodes and def-weil-pbc-sites-and-cohomology and writes out the 06W6 test-fibre identification. Step 3 uses only the 075B node. proof_deps is the union of the uses, and split_report.tool_uses declares the off-unit topos-adjunction node. Batch-5 flags: def-sfb-stable-pointed-moduli-groupoids is a general definition (fibred groupoids, 2-fibre products); its path to def-trf-projective-bundle-morphism is only a projectivity convention. It is not a step of the trace formula or Poincaré duality proof, so no RETURN. No SGA; no circularity (checked by closure search). blueprint.from.node is null, inherited from the creation chain; maintainer note.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FibredRelativeCech",
+  "declaration": "CategoryTheory.FibredRelativeCech.relativeCech_baseChange",
+  "declarations": [
+   "CategoryTheory.FibredRelativeCech.topology",
+   "CategoryTheory.FibredRelativeCech.Ab",
+   "CategoryTheory.FibredRelativeCech.sheafification",
+   "CategoryTheory.FibredRelativeCech.derivedCategory",
+   "CategoryTheory.FibredRelativeCech.pull",
+   "CategoryTheory.FibredRelativeCech.push",
+   "CategoryTheory.FibredRelativeCech.term",
+   "CategoryTheory.FibredRelativeCech.tuple",
+   "CategoryTheory.FibredRelativeCech.diagonal",
+   "CategoryTheory.FibredRelativeCech.nerveProperty",
+   "CategoryTheory.FibredRelativeCech.Nerve",
+   "CategoryTheory.FibredRelativeCech.projection",
+   "CategoryTheory.FibredRelativeCech.select",
+   "CategoryTheory.FibredRelativeCech.restrict",
+   "CategoryTheory.FibredRelativeCech.sheaf_functoriality",
+   "CategoryTheory.FibredRelativeCech.sheafPull",
+   "CategoryTheory.FibredRelativeCech.sheafPull_additive",
+   "CategoryTheory.FibredRelativeCech.term_isSheaf",
+   "CategoryTheory.FibredRelativeCech.sheafTerm",
+   "CategoryTheory.FibredRelativeCech.face",
+   "CategoryTheory.FibredRelativeCech.augmentation",
+   "CategoryTheory.FibredRelativeCech.degree",
+   "CategoryTheory.FibredRelativeCech.differential",
+   "CategoryTheory.FibredRelativeCech.differential_squared",
+   "CategoryTheory.FibredRelativeCech.complex",
+   "CategoryTheory.FibredRelativeCech.nerveBased",
+   "CategoryTheory.FibredRelativeCech.nerveBasedProjection",
+   "CategoryTheory.FibredRelativeCech.BaseNerve",
+   "CategoryTheory.FibredRelativeCech.baseProjection",
+   "CategoryTheory.FibredRelativeCech.baseOther",
+   "CategoryTheory.FibredRelativeCech.baseSelect",
+   "CategoryTheory.FibredRelativeCech.baseCoefficient",
+   "CategoryTheory.FibredRelativeCech.baseCoefficientIso",
+   "CategoryTheory.FibredRelativeCech.baseChange",
+   "CategoryTheory.FibredRelativeCech.baseTerm_isSheaf",
+   "CategoryTheory.FibredRelativeCech.baseTerm",
+   "CategoryTheory.FibredRelativeCech.baseFace",
+   "CategoryTheory.FibredRelativeCech.baseAugmentation",
+   "CategoryTheory.FibredRelativeCech.baseDegree",
+   "CategoryTheory.FibredRelativeCech.baseDifferential",
+   "CategoryTheory.FibredRelativeCech.baseDifferential_squared",
+   "CategoryTheory.FibredRelativeCech.baseComplex",
+   "CategoryTheory.FibredRelativeCech.comparisonDegree",
+   "CategoryTheory.FibredRelativeCech.degreeMap",
+   "CategoryTheory.FibredRelativeCech.baseDegreeMap",
+   "CategoryTheory.FibredRelativeCech.relativeCech_baseChange"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FibredRelativeCech.lean",
+  "statement": "theorem relativeCech_baseChange {U X Y : BasedCategory.{v, v} (Over S)} (hU : IsFibredInGroupoids U) (hX : IsFibredInGroupoids X) (hY : IsFibredInGroupoids Y) (f : BasedFunctor U X) (e : BasedFunctor Y X) : ∃ β : ∀ F : Ab X, ((sheafPull hY hX e).mapHomologicalComplex (ComplexShape.up ℤ)).obj (complex hU hX f F) ≅ baseComplex hU hX hY f e F, (∀ (F : Ab X) (i : ℤ), (β F).hom.f i = comparisonDegree hU hX hY f e F i) ∧ (∀ (F : Ab X) (n : ℕ) (j : Fin (n + 2)), (sheafPull hY hX e).map (face hU hX f F n j) ≫ comparisonDegree hU hX hY f e F (n + 1) = comparisonDegree hU hX hY f e F n ≫ baseFace hU hX hY f e F n j) ∧ (∀ (F G : Ab X) (a : F ⟶ G) (i : ℤ), (sheafPull hY hX e).map (degreeMap hU hX f a i) ≫ comparisonDegree hU hX hY f e G i = comparisonDegree hU hX hY f e F i ≫ baseDegreeMap hU hX hY f e a i) ∧ (∀ F : Ab X, ∃ δ : (DerivedCategory.Q (C := Ab Y)).obj (((sheafPull hY hX e).mapHomologicalComplex (ComplexShape.up ℤ)).obj (complex hU hX f F)) ≅ (DerivedCategory.Q (C := Ab Y)).obj (baseComplex hU hX hY f e F), δ.hom = DerivedCategory.Q.map (β F).hom)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The module constructs the relative nerve, compatible-family pushforward via pointwise right Kan extension, the extended sheaf complex, and its canonical comparison. These are the constructions explicitly introduced in this node, not additional hypotheses. The right complex uses the base-changed nerve Y times_X U_n as stipulated, canonically equivalent to the nerve of Y times_X U over Y. Standard sheafification and derived localization are supplied from Mathlib, without adding hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ade34ca21",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node (only lean differs from base), the full module, report (Worker report + Second reading present), Stacks 06XC/06W6/extended complex, all 6 stmt_dep records and moduliTwoFiberProduct/IsFibredInGroupoids, Mathlib Precoverage.comap/etalePrecoverage/ran. Every clause rendered: comap big etale topology, Ran compatible-family pushforward, shared-target vertical-iso nerve, E^{-1}=F, zero below, alternating faces over Fin(n+2), base-changed nerve Y×_X U_p as the node prescribes, β pinned degreewise to the canonical Ran mate (iso by the 2-cartesian square), degree -1 identity, face clause, naturality clause, derived clause as Q.map. Universes {v,v} with AddCommGrpCat.{v} = small-site convention, u independent. Edge cases OK. Named sorried sheafness/d²=0 lemmas permitted; no hollow data; statement verbatim; declarations list exact; lines ≤100; no duplicate notion. Not recompiled (no change). Advisory only: SiteCoveringAxioms import unused in code; sheafification instance is inferInstance."
+ }
+}

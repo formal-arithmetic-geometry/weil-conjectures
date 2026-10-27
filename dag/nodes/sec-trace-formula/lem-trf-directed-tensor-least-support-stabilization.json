@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-directed-tensor-least-support-stabilization",
+ "kind": "statement",
+ "title": "Least tensor supports stabilize along a directed colimit",
+ "statement": "Let $R$ be a commutative ring, $H$ an $R$-module, $I$ a small nonempty directed partially ordered set, and $(N_k,\\mu_{k\\ell})_{k\\in I}$ a directed system of $R$-modules with colimit $(N,(\\mu_k))$ [def-weil-pbc-category-colimit]. For any $R$-module $L$, say that a submodule $G\\subseteq H$ supports $y\\in H\\otimes_R L$ when $y$ belongs to the image of the inclusion-induced map $G\\otimes_R L\\to H\\otimes_R L$ [def-weil-pbc-module-tensor-product]; a least support is a supporting submodule contained in every supporting submodule. Fix $i\\in I$ and $x_i\\in H\\otimes_R N_i$, write $x_k=(1_H\\otimes\\mu_{ik})(x_i)$ for $k\\ge i$, and $x=(1_H\\otimes\\mu_i)(x_i)\\in H\\otimes_R N$. Suppose $x$ has a least support $Q\\subseteq H$ and, for every $k\\ge i$, $x_k$ has a least support $C_k\\subseteq H$. Then $Q\\subseteq C_k$ for every $k\\ge i$ and $C_\\ell\\subseteq C_k$ whenever $\\ell\\ge k\\ge i$. There exist $j\\ge i$ and $t\\in Q\\otimes_R N_j$ whose image in $H\\otimes_R N_j$ is $x_j$, and $C_k=Q$ for every $k\\ge j$. No injectivity of transition maps, finite generation of $Q$, or countability of $I$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059S (lemma-flat-ML-criterion), proof: commutative square and final paragraph beginning \"Since the $Q_j$ are decreasing\", stated for tensors with given least supports."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For $G\\subseteq H$ write $a_{G,L}:G\\otimes_RL\\to H\\otimes_RL$ for the inclusion-induced map. For every linear $f:L\\to L'$, $(1_H\\otimes f)a_{G,L}=a_{G,L'}(1_G\\otimes f)$: both sides send $g\\otimes n$ to $g\\otimes f(n)$, and pure tensors generate. Thus a support of a tensor also supports its image. Since $C_k$ supports $x_k$, it supports $x$ and every $x_\\ell$ with $\\ell\\ge k$. Leastness gives $Q\\subseteq C_k$ and $C_\\ell\\subseteq C_k$ for all $\\ell\\ge k\\ge i$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S (lemma-flat-ML-criterion), proof, commutative square and final paragraph; tensor-colimit comparison from Tag 00DD (lemma-tensor-products-commute-with-limits), and representatives/eventual equality from Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit)."
+   }
+  },
+  {
+   "text": "For any $R$-module $A$, the tensor-colimit theorem applied with fixed factor $A$ makes $N\\otimes_RA$ a colimit of $N_s\\otimes_RA$. The maps $n\\otimes a\\mapsto a\\otimes n$ and $a\\otimes n\\mapsto n\\otimes a$ are inverse by the tensor universal property and generation by pure tensors; they commute with transition maps on pure tensors. Hence $A\\otimes_RN$, with legs $1_A\\otimes\\mu_s$, is a colimit of $A\\otimes_RN_s$. As $Q$ supports $x$, choose $u\\in Q\\otimes_RN$ with $a_{Q,N}(u)=x$. The elementwise colimit theorem, for $A=Q$, gives $h\\in I$ and $v\\in Q\\otimes_RN_h$ mapping to $u$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S (lemma-flat-ML-criterion), proof, commutative square and final paragraph; tensor-colimit comparison from Tag 00DD (lemma-tensor-products-commute-with-limits), and representatives/eventual equality from Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit)."
+   }
+  },
+  {
+   "text": "The elements $a_{Q,N_h}(v)\\in H\\otimes_RN_h$ and $x_i\\in H\\otimes_RN_i$ have the same image $x$ in $H\\otimes_RN$, by step 1 and the choice of $v$. Apply the equality clause of the elementwise colimit theorem to the tensor colimit of step 2 with $A=H$. It gives a common stage $j\\ge h,i$ where their images agree. Put $t=(1_Q\\otimes\\mu_{hj})(v)$. The square in step 1 gives $a_{Q,N_j}(t)=(1_H\\otimes\\mu_{hj})a_{Q,N_h}(v)=(1_H\\otimes\\mu_{ij})(x_i)=x_j$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S (lemma-flat-ML-criterion), proof, commutative square and final paragraph; tensor-colimit comparison from Tag 00DD (lemma-tensor-products-commute-with-limits), and representatives/eventual equality from Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit)."
+   }
+  },
+  {
+   "text": "The tensor $t$ shows that $Q$ supports $x_j$, so leastness gives $C_j\\subseteq Q$. Step 1 gives $Q\\subseteq C_j$, hence $C_j=Q$. For every $k\\ge j$, again by step 1, $Q\\subseteq C_k\\subseteq C_j=Q$, and therefore $C_k=Q$. This proves the witness and all stabilization assertions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059S (lemma-flat-ML-criterion), proof, commutative square and final paragraph; tensor-colimit comparison from Tag 00DD (lemma-tensor-products-commute-with-limits), and representatives/eventual equality from Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 059S (lemma-flat-ML-criterion), proof, commutative square and final paragraph; tensor-colimit comparison from Tag 00DD (lemma-tensor-products-commute-with-limits), and representatives/eventual equality from Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "support.*(colimit|DirectLimit)|((colimit|DirectLimit).*support)|least.*tensor",
+   "results": "{\"t\": \"2026-10-22T06:47:11Z\", \"tool\": \"grep\", \"query\": \"support.*(colimit|DirectLimit)|((colimit|DirectLimit).*support)|least.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Tensor/direct-limit comparisons and finite-submodule systems do not state eventual equality of least supports."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit, TensorProduct",
+   "results": "{\"t\": \"2026-10-22T06:47:11Z\", \"tool\": \"loogle\", \"query\": \"Module.DirectLimit, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.fromDirectLimit\", \"TensorProduct.toDirectLimit\", \"TensorProduct.directLimitLeft\", \"TensorProduct.directLimitRight\", \"TensorProduct.fromDirectLimit_of_tmul\", \"TensorProduct.toDirectLimit_tmul_of\", \"TensorProduct.directLimitLeft_tmul_of\", \"TensorProduct.directLimitRight_tmul_of\"], \"digest\": \"858ad0319caf3390\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Tensor/direct-limit comparisons and finite-submodule systems do not state eventual equality of least supports."
+  },
+  {
+   "tool": "leansearch",
+   "query": "least tensor supporting submodule detected at finite stage of directed colimit",
+   "results": "{\"t\": \"2026-10-22T06:47:11Z\", \"tool\": \"leansearch\", \"query\": \"least tensor supporting submodule detected at finite stage of directed colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.FG.rTensor.directLimit_apply'\", \"Submodule.FG.lTensor.directLimit\", \"Submodule.FG.lTensor.directLimit_apply\", \"Submodule.FG.rTensor.directLimit\", \"TensorProduct.toDirectLimit\", \"Submodule.exists_fg_le_subset_range_rTensor_inclusion\", \"TensorProduct.fromDirectLimit\", \"Submodule.FG.lTensor.directLimit_apply'\"], \"digest\": \"c7bf0cccc84c1c03\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Tensor/direct-limit comparisons and finite-submodule systems do not state eventual equality of least supports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed colimit of finite free modules a least supporting submodule for a tensor equals the least supporting submodules at all sufficiently late stages",
+   "results": "{\"t\": \"2026-10-22T06:47:22Z\", \"tool\": \"leanfinder\", \"query\": \"In a directed colimit of finite free modules a least supporting submodule for a tensor equals the least supporting submodules at all sufficiently late stages\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.FG.lTensor.directedSystem\", \"Submodule.FG.rTensor.directedSystem\", \"Submodule.FG.lTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply\", \"Submodule.FG.lTensor.directLimit_apply\", \"Submodule.FG.lTensor.directLimit\", \"Submodule.FG.rTensor.directLimit\"], \"digest\": \"aed8172832b42e0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Tensor/direct-limit comparisons and finite-submodule systems do not state eventual equality of least supports."
+  },
+  {
+   "tool": "grep",
+   "query": "mem_range.*(DirectLimit|directLimit)|(DirectLimit|directLimit).*mem_range|exists.*of.*eq [LinearAlgebra/TensorProduct/DirectLimit.lean]",
+   "results": "{\"t\": \"2026-10-22T06:47:26Z\", \"tool\": \"grep\", \"query\": \"mem_range.*(DirectLimit|directLimit)|(DirectLimit|directLimit).*mem_range|exists.*of.*eq\", \"sub\": \"LinearAlgebra/TensorProduct/DirectLimit.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Tensor/direct-limit comparisons and finite-submodule systems do not state eventual equality of least supports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a tensor in a filtered direct limit has a smallest coefficient submodule its finite free stage coefficient submodules eventually stabilize to that submodule",
+   "results": "{\"t\": \"2026-10-22T06:47:37Z\", \"tool\": \"leanfinder\", \"query\": \"If a tensor in a filtered direct limit has a smallest coefficient submodule its finite free stage coefficient submodules eventually stabilize to that submodule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.FG.lTensor.directedSystem\", \"Submodule.FG.rTensor.directedSystem\", \"Submodule.FG.lTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply\", \"Submodule.FG.lTensor.directLimit_apply\", \"Submodule.FG.lTensor.directLimit\", \"Submodule.FG.rTensor.directLimit\"], \"digest\": \"aed8172832b42e0d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Tensor/direct-limit comparisons and finite-submodule systems do not state eventual equality of least supports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed colimit if a tensor and all of its stage representatives have least supporting submodules then these stage submodules eventually equal its colimit least support",
+   "results": "{\"t\": \"2026-10-22T06:48:39Z\", \"tool\": \"leanfinder\", \"query\": \"In a directed colimit if a tensor and all of its stage representatives have least supporting submodules then these stage submodules eventually equal its colimit least support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.FG.rTensor.directedSystem\", \"Submodule.FG.lTensor.directedSystem\", \"Submodule.FG.lTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply\", \"Submodule.FG.lTensor.directLimit_apply\", \"Submodule.FG.lTensor.directLimit\", \"Submodule.FG.rTensor.directLimit\"], \"digest\": \"b7a3eac79a560b04\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Tensor/direct-limit comparisons and finite-submodule systems do not state eventual equality of least supports."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.DirectLimit, TensorProduct",
+   "results": "{\"t\": \"2026-10-23T14:57:35Z\", \"tool\": \"loogle\", \"query\": \"Module.DirectLimit, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.fromDirectLimit\", \"TensorProduct.toDirectLimit\", \"TensorProduct.directLimitLeft\", \"TensorProduct.directLimitRight\", \"TensorProduct.fromDirectLimit_of_tmul\", \"TensorProduct.toDirectLimit_tmul_of\", \"TensorProduct.directLimitLeft_tmul_of\", \"TensorProduct.directLimitRight_tmul_of\"], \"digest\": \"858ad0319caf3390\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit comparisons, finitely generated submodule tensor systems, or individual representatives/eventual zero, not least-support stabilization."
+  },
+  {
+   "tool": "grep",
+   "query": "support.*(colimit|DirectLimit)|((colimit|DirectLimit).*support)|least.*tensor",
+   "results": "{\"t\": \"2026-10-23T14:57:35Z\", \"tool\": \"grep\", \"query\": \"support.*(colimit|DirectLimit)|((colimit|DirectLimit).*support)|least.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit comparisons, finitely generated submodule tensor systems, or individual representatives/eventual zero, not least-support stabilization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Least tensor supporting submodule stabilizes at a finite stage of a directed colimit",
+   "results": "{\"t\": \"2026-10-23T14:57:36Z\", \"tool\": \"leansearch\", \"query\": \"Least tensor supporting submodule stabilizes at a finite stage of a directed colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.FG.rTensor.directLimit_apply'\", \"Submodule.FG.lTensor.directLimit_apply\", \"TensorProduct.toDirectLimit\", \"Submodule.FG.lTensor.directLimit\", \"Submodule.FG.rTensor.directLimit\", \"TensorProduct.toDirectLimit_tmul_of\", \"Submodule.FG.lTensor.directedSystem\", \"TensorProduct.directLimitLeft\"], \"digest\": \"198c5201439deb91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit comparisons, finitely generated submodule tensor systems, or individual representatives/eventual zero, not least-support stabilization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a directed colimit of modules the least supporting submodules of a tensor eventually equal its least support in the colimit",
+   "results": "{\"t\": \"2026-10-23T14:57:37Z\", \"tool\": \"leanfinder\", \"query\": \"In a directed colimit of modules the least supporting submodules of a tensor eventually equal its least support in the colimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.FG.lTensor.directLimit_apply'\", \"Submodule.FG.lTensor.directLimit_apply\", \"Submodule.FG.rTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply\", \"Submodule.FG.rTensor.directedSystem\", \"TensorProduct.directLimitLeft_rTensor_of\", \"Submodule.FG.lTensor.directedSystem\", \"TensorProduct.fromDirectLimit\"], \"digest\": \"8e6fca91e1ac89f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit comparisons, finitely generated submodule tensor systems, or individual representatives/eventual zero, not least-support stabilization."
+  },
+  {
+   "tool": "grep",
+   "query": "directLimitRight|directLimitLeft|def lTensor|def rTensor [LinearAlgebra/TensorProduct/DirectLimit.lean]",
+   "results": "{\"t\": \"2026-10-23T15:01:04Z\", \"tool\": \"grep\", \"query\": \"directLimitRight|directLimitLeft|def lTensor|def rTensor\", \"sub\": \"LinearAlgebra/TensorProduct/DirectLimit.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"20\", \"21\", \"78\", \"82\", \"83\"], \"digest\": \"f32ee8bff1c6e995\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit comparisons, finitely generated submodule tensor systems, or individual representatives/eventual zero, not least-support stabilization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor with a smallest supporting submodule in a filtered module colimit is supported by that same submodule at some later stage",
+   "results": "{\"t\": \"2026-10-23T15:01:14Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor with a smallest supporting submodule in a filtered module colimit is supported by that same submodule at some later stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.FilteredColimits.M.mk_surjective\", \"Submodule.FG.rTensor.directedSystem\", \"Submodule.FG.lTensor.directedSystem\", \"Submodule.FG.lTensor.directLimit_apply'\", \"Submodule.FG.lTensor.directLimit_apply\", \"Submodule.FG.rTensor.directLimit_apply'\", \"CategoryTheory.Limits.Concrete.colimit_rep_eq_zero\", \"ModuleCat.FilteredColimits.colimitSMulAux\"], \"digest\": \"b9c405ff9387d4d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give tensor-colimit comparisons, finitely generated submodule tensor systems, or individual representatives/eventual zero, not least-support stabilization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-mittag-leffler-criterion",
+  "date": "2026-10-22",
+  "group": "Q106"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Ancestor proof (1)--(2), semistable-alteration supporting algebra through the flat Mittag-Leffler criterion: Tag 059S proof, containment in every finite-stage support and eventual equality from tensor-colimit element detection (old item steps 4--5).",
+   "via": [
+    "lem-trf-flat-mittag-leffler-criterion",
+    "lem-trf-product-noetherian-flat-mittag-leffler",
+    "lem-trf-completion-flat-mittag-leffler",
+    "lem-trf-local-flat-pure-complete-projective",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-directed-tensor-least-support-stabilization",
+  "worker": "NN",
+  "summary": "Read Tag 059S and expanded its final paragraph into an image-based tensor argument. Reused the existing tensor-colimit and filtered-module-colimit Mathlib leaves; no new nodes. Proved monotonicity by an explicit square, lifted a supporting tensor, detected equality at a common later stage, then used leastness. Statement unchanged.",
+  "blueprint": "Supports the semistable-alteration algebra beneath lem-trf-local-term-locality proof (1)--(2), at the inherited Tag 059S flat Mittag-Leffler criterion: its commutative square and final paragraph. The current ancestor and unit were read; this split supplies only the inherited supporting algebra and changes no geometric route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-4b9edd5b3",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-4b9edd5b3 (reviewer sub-agent of L); spot-checked: I read the item and all four steps in full against Stacks Tag 059S (algebra.tex lemma-flat-ML-criterion, line 21881, tags/tags line 6825): the square, the 'Q ⊂ Q_j' step and the final paragraph. Step 1 is elementary and correct. The naturality square (1_H⊗f)a_G = a_G(1_G⊗f), checked on pure tensors, makes supports pass to images, and leastness then gives Q⊆C_k and C_ℓ⊆C_k. In step 2, lem-weil-pbc-tensor-commutes-with-colimits plus the swap isomorphism, written out on pure tensors, make A⊗N a colimit with legs 1⊗μ_s. Clause (1) of lem-weil-pbc-filtered-colimit-modules-elementwise then lifts u∈Q⊗N to v∈Q⊗N_h; a nonempty directed poset is filtered. In step 3, clause (2) of the same node gives j≥h,i, and the square gives a(t)=x_j. Unlike Stacks, which tacitly uses injectivity of colim(Q⊗M_j)→colim(H⊗M_j), the proof uses only images. Step 4 uses leastness, giving C_j=Q and Q⊆C_k⊆C_j for k≥j. I tested the small cases x=0, a singleton I, Z→0 with H=Z, and 2Z⊂Z tensored with Z/2 (non-injective). The statement is unchanged against the live and side-live clones, where the item is still unsplit with an empty proof. There is no repair note, so this is not a re-split, and no parallel group has split it. The parent lem-trf-flat-mittag-leffler-criterion uses exactly the conclusions Q⊆Q_j and eventual equality. proof_deps is the union of the steps' uses; all are Mathlib leaves, so there is no cycle. There are no new nodes, no SGA citation and no tool_uses. An rg -L search for least/smallest support found no duplicate (lem-trf-flat-ml-minimal-support only gives existence of a least support). Minor: the report mentions a citations.json that the branch does not carry; this does not affect the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DirectedTensorLeastSupportStabilization",
+  "declaration": "Module.directed_tensor_least_support_stabilization",
+  "file": "lean/Sheaf/RingTheory/DirectedTensorLeastSupportStabilization.lean",
+  "statement": "theorem directed_tensor_least_support_stabilization {R : Type u} [CommRing R] {H : Type w} [AddCommGroup H] [Module R H] {I : Type v} [PartialOrder I] [Nonempty I] [IsDirectedOrder I] (F : I ⥤ ModuleCat.{v} R) (c : Cocone F) (hc : IsColimit c) (i : I) (xi : TensorProduct R H (F.obj i)) (Q : Submodule R H) (C : ∀ k : I, i ≤ k → Submodule R H) (hQ : IsLeast {G : Submodule R H | LinearMap.lTensor H (c.ι.app i).hom xi ∈ LinearMap.range (LinearMap.rTensor c.pt G.subtype)} Q) (hC : ∀ (k : I) (hk : i ≤ k), IsLeast {G : Submodule R H | LinearMap.lTensor H (F.map (homOfLE hk)).hom xi ∈ LinearMap.range (LinearMap.rTensor (F.obj k) G.subtype)} (C k hk)) : (∀ (k : I) (hk : i ≤ k), Q ≤ C k hk) ∧ (∀ (k l : I) (hk : i ≤ k) (hkl : k ≤ l), C l (hk.trans hkl) ≤ C k hk) ∧ ∃ (j : I) (hj : i ≤ j) (t : TensorProduct R Q (F.obj j)), LinearMap.rTensor (F.obj j) Q.subtype t = LinearMap.lTensor H (F.map (homOfLE hj)).hom xi ∧ ∀ (k : I) (hk : j ≤ k), C k (hj.trans hk) = Q",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ca51f89f",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: R comm ring; H in its own universe w; I : Type v nonempty directed partial order (IsDirectedOrder); F : I ⥤ ModuleCat.{v} R with any colimit cocone c/hc; x_k and x via lTensor; supports as membership in LinearMap.range of rTensor G.subtype (no injectivity assumed); IsLeast for Q and C k hk; conclusions Q ≤ C_k, C_l ≤ C_k, and ∃ j ≥ i, t ∈ Q⊗N_j with image x_j and C_k = Q for k ≥ j (same j). Node differs from side-live only in the lean field, statement field verbatim, no new nodes or definitions, proof is sorry, docstrings give source Tag 059S, blueprint id and 4 proof steps. Support predicate is written inline, as in the parent flat_mittag_leffler_criterion; no existing version found. Edge cases (empty or singleton I, xi = 0, Z→0, 2Z⊂Z ⊗ Z/2) OK. Advisory: index universe equals module universe (standard convention, ULift-equivalent). No recompile, as instructed; worker reports a clean compile."
+ }
+}

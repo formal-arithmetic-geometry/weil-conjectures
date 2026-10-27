@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-diagonal-completed-scalar-push",
+ "kind": "statement",
+ "title": "The regular coefficient comparison intertwines direct-image coefficient maps",
+ "statement": "Let l be prime, f:X to S a scheme morphism, and eX,eS CompletedRealizations of [def-sfb-diagonal-coefficient-reference]. Let bX,bS be their regular-module underlying comparisons, constructed as in [lem-sfb-diagonal-completed-section-action]. For U in S_proet and a section a of the completed coefficient ring on U, the condensed coefficient direct-image structure map sends bS(a) to bX(a times 1), where a times 1 is evaluated in the completed direct image of the regular module on X. Thus this is a statement about the two coefficient sheaves alone; it quantifies over no arbitrary module and constructs no natural isomorphism.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "lem-sfb-diagonal-completed-section-action"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient identification, expanded in lem-diagonal-completed-ordinary-square"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the unit normalization at the chosen section. This identifies every finite reduction of completedRealizationScalarSection with the specified constant-ring comparison applied to the corresponding completed projection.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-reference"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use limit.lift_π for diagonalCompletedCoefficientMap. Under the inverse-image/direct-image adjunction this says that each projection of completedPushScalar is the canonical finite constant direct-image map applied to the source projection. Evaluation of the regular-module action at one removes multiplication by one.",
+   "uses": [
+    "def-sfb-diagonal-limit-interface"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Factor each purZlReduction as the pullback of the point reduction followed by its finite constant identification. Naturality of condensedPushforwardHom with coefficientMap identifies the two finite composites up to a monoid-homomorphism between finite constant coefficient sheaves. Reconstruct its section-ring sheaf homomorphism using the existing section-ring transport. Construct the normalized constant ring maps using the existing generic constant-section ring map and sheafification; this local wrapper lets the finite coefficient ring and the scheme have independent universes. Ring-sheaf morphisms from a constant cyclic ring are unique because every element of ZMod is an integer cast and the constant sheaf is the sheafification of the constant presheaf. Evaluating this uniqueness after the constant comparison gives the canonical finite direct-image map.",
+   "uses": [
+    "lem-sfb-coefficient-pushforward-square",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-admissible-scalar-realization-exact",
+    "lem-sfb-finite-reduction-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the public normalized coefficient-ring comparison and its projection equations to transfer equality of all positive condensed reductions to equality of all projections of the completed coefficient ring. Evaluating the defining limit cone preserves the limit, so its projections are jointly injective on sections. The comparison is an isomorphism, so the original condensed sections agree. Apply this to the two sections using the preceding finite identities and cancelling the source constant comparison.",
+   "uses": [
+    "lem-diagonal-completed-coefficient-ring-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-limit-interface",
+  "lem-sfb-coefficient-pushforward-square",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-admissible-scalar-realization-exact",
+  "lem-sfb-finite-reduction-pullback",
+  "lem-diagonal-completed-coefficient-ring-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), coefficient identification, expanded in lem-diagonal-completed-ordinary-square",
+  "note": "Prove directly from normalized finite reductions, their limit property, and cyclic-ring uniqueness. No additional sorry theorem or functor comparison is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized exact equivalence of completed coefficient module sheaves identifies the module action on sections",
+   "results": "8 hits: AdicCompletion.ofLinearEquiv.congr_simp, AdicCompletion.ofLinearEquiv_apply, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_apply_coe, PresheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv, AdicCompletion.ofLinearEquiv",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing coefficient and module-object APIs. Local source searches also inspected the actual signatures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit-normalized comparison of completed coefficient rings commutes with the direct image coefficient map",
+   "results": "8 hits: LaurentSeries.comparePkg_eq_extension, AbstractCompletion.compare_coe, IsAdicComplete.ofAlgEquiv_comp_liftRingHom, IsAdicComplete.of_liftRingHom, LaurentSeries.coe_X_compare, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, UniformSpace.Completion.mapRingEquiv_apply, LaurentSeries.ratfuncAdicComplRingEquiv_apply",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing coefficient and module-object APIs. Local source searches also inspected the actual signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "sfb_integral_comparison_pullback|completedCoefficientOrdinarySquare_exists|completedRealizationScalarIso",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact match; use the existing coefficient and module-object APIs. Local source searches also inspected the actual signatures."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientOrdinarySquare",
+  "date": "2026-10-27",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), initial coefficient identification",
+   "via": [
+    "lem-diagonal-completed-ordinary-square",
+    "lem-diagonal-completed-frame"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientScalarPush",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientScalarPush.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedRealization_scalar_push",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedRealization_scalar_push",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedPushScalar",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.condensedPushScalarSection"
+  ],
+  "statement": "theorem completedRealization_scalar_push (l : ℕ) [Fact l.Prime]\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (eX : CompletedRealization l X) (eS : CompletedRealization l S)\n    (U : S.ProEtᵒᵖ)\n    (a : (Scheme.purTwistRing S (Scheme.purTwistZlCompletion S l)).obj.obj U) :\n    condensedPushScalarSection f U (completedRealizationScalarSection eS U a) =\n      completedRealizationScalarSection eX ((Scheme.proEtaleBaseChange f).op.obj U)\n        (completedPushScalar f U a)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T222802-L-695899",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T012954-L-2353879",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

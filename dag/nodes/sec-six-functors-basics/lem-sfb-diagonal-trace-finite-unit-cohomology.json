@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-unit-cohomology",
+ "kind": "statement",
+ "title": "Finite cohomology of the projective-line coefficient unit",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a tower base b, Noetherian schemes X and S, a map f:X→S, and an isomorphism e:X≅P¹_S whose composite with the projection equals f. Let g be recorded geometry for f and c its normalized coefficient pullback [def-sp-tower-class-diagonal]. Assume l is invertible on S. At every level n+1 and every integer q≠2, the q-th cohomology map of the actual evaluated coefficient adjunction unit unitArrow(l,E,c) is an isomorphism. This statement has no Chern or twist data and makes no degree-two assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), the unit and Chern components of finite projective-line cohomology (G2)"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "At level n set A=ULift R(l,E,n). Its finiteness is b.finite n, and coefficient_annihilates shows that l^(n+1) kills A. Invertibility of l on S implies invertibility of this positive power. Apply geoP1Cohomology to its actual decomposition (G2).",
+   "uses": [
+    "def-sp-tower-shriek-data",
+    "def-sp-tower-class-coefficients",
+    "sk-lem-geo-p1-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The negative Tate sheaf is in degree zero, so its shift by minus two has both cohomological bounds equal to two. For q≠2 its q-th homology is zero, including all negative q. Exact etale/pro-etale comparison and exact intrinsic realization preserve this vanishing. Apply the additive composite of realization and H^q to the two biproduct identities to construct an inverse of the mapped first injection. Compose that injection with the image of (G2), which is an isomorphism, to conclude that its first component is an isomorphism on H^q.",
+   "uses": [
+    "sk-lem-geo-p1-cohomology",
+    "def-sp-finite-intrinsic-direct-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold only geoP1DecompositionMap, geoP1SumComparison, and the ordinary biproduct decomposition; biprod.inl_desc and functoriality identify the first component with the comparison image of p1DecompositionUnit followed by the direct-image comparison. The normalization square of lem-sfb-diagonal-trace-unit-arrow-comparison has this component on its upper side and the evaluated actual tower unit on its lower side. Apply H^q to the square. The source and target comparisons remain isomorphisms, so cancel the source comparison to get the required isomorphism.",
+   "uses": [
+    "lem-sfb-diagonal-trace-unit-arrow-comparison",
+    "sk-lem-geo-p1-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-coefficients",
+  "sk-lem-geo-p1-cohomology",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "lem-sfb-diagonal-trace-unit-arrow-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), (G2); explicit cohomological biproduct extraction and arrow-comparison transport by J7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The unit for projective line direct image is an isomorphism on cohomology outside degree two",
+   "results": "Eight unrelated group-cohomology and general derived-category results; none concerns the evaluated normalized system component.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a unit and Chern class projective line decomposition at finite coefficient level is an isomorphism",
+   "results": "Eight unrelated unit or group-cohomology results; no finite system-to-ordinary comparison for this map.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.line|ProjectiveLine|[Cc]hern|[Kk]ummer in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Homology/DerivedCategory; finite_splitting|geoP1DecompositionMap|FiniteChernNormalization in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib has no projective-line Chern cohomology theorem. GeoP1Cohomology in Sheaf.AlgebraicGeometry states the ordinary fixed-scalar derived decomposition. No existing theorem identifies the cohomology of this evaluated system component. The geometric-point generator node only treats the projective line over an algebraically closed field.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; retain ordinary derived (G2) as the geometric input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteSplitting",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), finite unit/Chern splitting",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteUnitCohomology",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteUnitCohomology.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finite_unit_cohomology",
+  "statement": "theorem diagonalTrace_finite_unit_cohomology\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    (b : SpTowerShriek.Base l E) {f : X ⟶ S}\n    (e : X ≅ ProjectiveLine S) (he : e.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (g : SpTowerShriek.Geometry l E b f) (c : CoefficientPullback l E b f g)\n    (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) (q : ℤ) (hq : q ≠ 2) :\n    IsIso ((DerivedCategory.homologyFunctor _ q).map\n      ((SpTowerShriek.Ev l E S n).map (unitArrow l E c)))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235943-L-1473292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261027T012855-L-2342874",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

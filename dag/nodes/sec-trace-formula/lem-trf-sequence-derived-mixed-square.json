@@ -1,0 +1,140 @@
+{
+ "id": "lem-trf-sequence-derived-mixed-square",
+ "kind": "statement",
+ "title": "sequenceDerivedMixed",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "statement": "Use the coefficient sequence module categories, chosen geometric and scalar comparisons, and bracketing interpretation of [def-trf-quotient-system-coherence-data]. The following component equation holds for the stipulated whole-system derived functors, with exactly the coefficient-field, scheme and invertibility hypotheses displayed in the Lean signature below. No boundedness, normalization, Tor-amplitude or coefficient-flatness assumption is added.\n\nLean statement:\ntheorem sequenceDerivedMixed\n    (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) {V W Z : Scheme.{t}}\n    [∀ x : V, Invertible (l : V.residueField x)]\n    [∀ x : W, Invertible (l : W.residueField x)]\n    [∀ x : Z, Invertible (l : Z.residueField x)] (h : Z ⟶ W) (k : W ⟶ V) :\n    Functor.whiskerRight (integralComparisonSystemComposition l E h k).hom\n        (integralComparisonDerivedSequenceScalar l E L ι Z) ≫\n      Functor.whiskerLeft (integralComparisonDerivedSequencePullback l E k)\n        (integralComparisonSystemScalarPullback l E L ι h).hom ≫\n      Functor.whiskerRight (integralComparisonSystemScalarPullback l E L ι k).hom\n        (integralComparisonDerivedSequencePullback l L h) =\n    (integralComparisonSystemScalarPullback l E L ι (h ≫ k)).hom ≫\n      Functor.whiskerLeft (integralComparisonDerivedSequenceScalar l E L ι V)\n        (integralComparisonSystemComposition l L h k).hom",
+ "stmt_deps": [
+  "def-trf-quotient-system-coherence-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
+ },
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat resolution f:P → K of the entire coefficient sequence complex. Its image under DerivedCategory.Q is invertible. Naturality and cancellation of this image reduce equality of the two derived natural transformations to equality at Q(P).",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use sequencePullback_kflatgood, the preservation theorem in the sequence-system interface, to show that the geometric pullback along k of P is K-flat. The normalization clauses of integralComparisonSystemScalarPullback_existsUnique then apply to P along k and h ≫ k, and to the pullback of P along h. The scalar counit at P is invertible by the computation clause of its chosen model.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact derived geometric compositor satisfies its normalization equation: compose mapDerivedCategoryNatIso_fac with mapDerivedCategoryCompIso_fac. Postcompose both routes with the common composite target counit, made from the scalar counit at V and the two exact geometric factorization isomorphisms. It is invertible.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Expand the three scalar normalization equations. Naturality of the scalar comparison along the exact factorization for k, of the exact factorization along the ordinary scalar square for k, and of the scalar counit along the ordinary geometric compositor turns the left route into the localization of the ordinary left pasting after the source counit. Naturality of the geometric compositor along the scalar counit and its normalization turn the right route into the localization of the ordinary right pasting after the same source counit. These are equal by sequenceScalarGeometric_interchange_cochain. Invertibility of ell in the residue fields implies its stalk-unit hypotheses by the local-ring residue criterion.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-trf-sequence-scalar-generator-interchange"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Cancel the common target counit to obtain equality at Q(P). Naturality along the resolution map gives equality at Q(K); localization natural-transformation extensionality gives the asserted equality on the derived category.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-trf-sequence-scalar-generator-interchange"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "U6",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex; lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+  "place": "Tags 06YS and 0D6D; direct normalization calculation using mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_fac, followed by the existing ordinary whole-sequence interchange."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite path bracketing independence from associative and unital functor comparison isomorphisms; scalar pullback coherence descends by K-flat resolutions",
+   "results": "8 hits, exact derived functor factors and shift instances; no complete mixed sequence-system equation or finite assembly theorem.",
+   "date": "2026-10-25",
+   "verdict": "Partial tools only; no direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryCompIso_assoc",
+   "results": "0 hits: identifier not in Mathlib search index. The adopted source-library derived comparison API was read directly.",
+   "date": "2026-10-25",
+   "verdict": "Use source comparison compatibility for geometric associativity; remaining equality transport is the split step."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso_assoc|pullback_assoc|leftAdjointCompIso_assoc",
+   "results": "13 Mathlib hits, including Adjunction.leftAdjointCompIso_assoc and SheafOfModules.pullback_assoc.",
+   "date": "2026-10-25",
+   "verdict": "Ordinary three-arrow tools do not alone assert the displayed derived equations or arbitrary binary assembly theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coherence of associative unital inverse image comparisons and scalar change comparisons in derived categories",
+   "results": "8 hits: ModuleCat.extendScalars_assoc'; derived adjunction factors; coimageImageComparison_app; localizer derived comparison factors; quasi-isomorphism inversion.",
+   "date": "2026-10-25",
+   "verdict": "Partial ordinary scalar and localization APIs; no entire sequence-site mixed equation or arbitrary bracketing theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSystemMixedCoherence",
+  "date": "2026-10-25",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-trf-quotient-system-mixed-coherence",
+   "place": "Explicit component of the finite-string or derived coherence argument.",
+   "via": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SequenceDerivedMixedSquare",
+  "file": "lean/Sheaf/Paper/SequenceDerivedMixedSquare.lean",
+  "declaration": "WeilConjectures.sequenceDerivedMixed",
+  "statement": "theorem sequenceDerivedMixed\n    (l : ℕ) [Fact l.Prime]\n    (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) {V W Z : Scheme.{t}}\n    [∀ x : V, Invertible (l : V.residueField x)]\n    [∀ x : W, Invertible (l : W.residueField x)]\n    [∀ x : Z, Invertible (l : Z.residueField x)] (h : Z ⟶ W) (k : W ⟶ V) :\n    Functor.whiskerRight (integralComparisonSystemComposition l E h k).hom\n        (integralComparisonDerivedSequenceScalar l E L ι Z) ≫\n      Functor.whiskerLeft (integralComparisonDerivedSequencePullback l E k)\n        (integralComparisonSystemScalarPullback l E L ι h).hom ≫\n      Functor.whiskerRight (integralComparisonSystemScalarPullback l E L ι k).hom\n        (integralComparisonDerivedSequencePullback l L h) =\n    (integralComparisonSystemScalarPullback l E L ι (h ≫ k)).hom ≫\n      Functor.whiskerLeft (integralComparisonDerivedSequenceScalar l E L ι V)\n        (integralComparisonSystemComposition l L h k).hom",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2a332",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261025T164455-L-1022707",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261027T084501-L-3685276",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

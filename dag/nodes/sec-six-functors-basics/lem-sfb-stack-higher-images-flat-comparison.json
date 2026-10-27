@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-stack-higher-images-flat-comparison",
+ "kind": "statement",
+ "title": "Higher direct images preserve local quasi-coherence and flat comparison maps on algebraic stacks",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $B$ be a scheme [def-pc-scheme] and $f:\\mathcal X\\to\\mathcal Y$ a quasi-compact, quasi-separated morphism of algebraic stacks over $B$ [def-sfb-algebraic-moduli-stack, def-sfb-stack-qcqs-morphism]. Give each fibred category its big etale site (same objects and arrows as its big fppf site of [def-sfb-stack-quasi-coherent-algebra], with coverings the families lying over jointly surjective etale scheme maps), and structure sheaf $\\mathcal O(x)=\\Gamma(U,\\mathcal O_U)$ for $x$ over $U$. Let $F$ be a sheaf of modules [def-weil-sheaf-of-modules-category] on this site. Call $F$ locally quasi-coherent if for every object $x$ over $U$ its restriction to the small etale site $U_{\\mathrm{et}}$ [def-weil-pbc-etale-site] is the associated etale sheaf of a quasi-coherent Zariski module $F_x$ [pqf-def-coherent]; the associated sheaf on an etale $v:V\\to U$ has sections $\\Gamma(V,v^*F_x)$. For an arrow $a:x\\to y$ over $u:U\\to V$, let $c_a:u^*F_y\\to F_x$ be the canonical comparison induced by restriction, with ordinary tensor pullback [def-pc-module-pullback]. Say that $F$ has flat comparison maps if $c_a$ is an isomorphism whenever the underlying scheme map is flat; equivalently, on affine opens the corresponding ring maps are flat [def-weil-pbc-flat-ring-map]. Suppose $F$ is locally quasi-coherent and has flat comparison maps. Then $F$ is also an fppf sheaf. For every integer $i\\geq0$, the higher direct image $R^if_*F$, formed by applying $f_*$ to an injective resolution in module sheaves and taking its $i$th cohomology sheaf, is locally quasi-coherent and has flat comparison maps on $\\mathcal Y$. Computing in the big etale topology or the big fppf topology gives canonically the same result. Here on either site the direct image is the sheaf with value $(f_*F)(y)=\\Gamma(\\mathcal X\\times_{\\mathcal Y}U,F|_{\\mathcal X\\times_{\\mathcal Y}U})$ at $y:U\\to\\mathcal Y$; restriction to this fibre product is precomposition with its projection, and the restrictions of $f_*F$ are induced by the corresponding base-change maps. In degree zero $R^0f_*F=f_*F$, and its $c_a$ is the map induced by these restrictions. No Noetherian, finite-generation or finite-type hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tags 0765 (lemma-flat-comparison) and 0771 (proposition-loc-qcoh-flat-base-change), parts (1) and (4); definition-flat-base-change and section-locally-quasi-coherent specify the comparison maps and local quasi-coherence. Degree-zero direct image is the section definition, not an assertion of arbitrary-base-change quasi-coherence."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-qcqs-morphism",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-weil-pbc-flat-ring-map",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "For every algebraic stack $\\mathcal Z/B$, let $\\mathcal M_{\\mathcal Z}$ consist of the locally quasi-coherent sheaves with flat comparison maps. By [lem-sfb-stack-lqc-flat-comparison-local-structure] these subcategories are weak Serre, are preserved by smooth pullback, and have membership detected by jointly surjective smooth families. These are exactly conditions (1)--(3) of [lem-sfb-stack-smooth-descent-higher-image-criterion]. We verify its affine condition (4) next; that verification concerns every morphism between affine schemes, not just the original $f$.",
+   "uses": [
+    "lem-sfb-stack-lqc-flat-comparison-local-structure",
+    "lem-sfb-stack-smooth-descent-higher-image-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0765, proof, first paragraph; Tag 076Z, conditions (1)--(4)."
+   }
+  },
+  {
+   "text": "Let $h:X\\to Y$ be a morphism of affine schemes regarded as stacks, with $M\\in\\mathcal M_X$. For any test $y:V\\to Y$, put $Z=X\\times_YV$, $a:Z\\to V$, and $N=M|_{Z_{\\mathrm{et}}}$. The map $a$ is affine: locally where $V=\\operatorname{Spec}C$ and $Y=\\operatorname{Spec}A$, $X=\\operatorname{Spec}D$, its source is $\\operatorname{Spec}(D\\otimes_A C)$ by [lem-weil-pbc-fibre-product-affine-spectra]. Its inverse image over each affine open of $V$ is affine and therefore quasi-compact. Its relative diagonal is closed: on these affine charts it is induced by the surjection $(D\\otimes_A C)\\otimes_C(D\\otimes_A C)\\to D\\otimes_A C$, $r\\otimes s\\mapsto rs$. Hence $a$ is separated. Local quasi-coherence of $M$ says that $N$ is associated to a quasi-coherent Zariski module; [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] makes it quasi-coherent on $Z_{\\mathrm{et}}$. By [lem-sfb-stack-representable-higher-image-restriction], $(R^ih_*M)|_{V_{\\mathrm{et}}}\\simeq R^ia_*N$. The latter is quasi-coherent by [lem-sfb-space-higher-direct-image-quasi-coherent], and [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies it with an associated Zariski module. This proves local quasi-coherence for every $i$ in condition (4).",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-stack-representable-higher-image-restriction",
+    "lem-sfb-space-higher-direct-image-quasi-coherent",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0765, affine case; proof of lemma-pushforward-locally-quasi-coherent; Tag 075P and Tag 0720."
+   }
+  },
+  {
+   "text": "For a flat test arrow $b:V\\to V^{\\prime}$ over $Y$, put $Z^{\\prime}=X\\times_YV^{\\prime}$, $Z=Z^{\\prime}\\times_{V^{\\prime}}V$, and write $e:Z\\to Z^{\\prime}$, $a^{\\prime}:Z^{\\prime}\\to V^{\\prime}$ and $a:Z\\to V$. The map $e$ is flat by [lem-sfb-stack-chartwise-smooth-etale-calculus] (a scheme morphism is representable by algebraic spaces). Therefore the hypothesis on $M$ identifies $e^*(M|_{Z^{\\prime}_{\\mathrm{et}}})$ with $M|_{Z_{\\mathrm{et}}}$. Under [lem-sfb-stack-representable-higher-image-restriction], the comparison for $R^ih_*M$ is the small-etale base-change morphism for $(a^{\\prime},b)$ followed by the map on higher images of this coefficient identification. Thus it remains to check that specified base-change morphism, not merely existence of isomorphic source and target.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-representable-higher-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0765, affine case, the two cartesian squares and the final comparison map."
+   }
+  },
+  {
+   "text": "For $i=0$, [lem-sfb-space-flat-direct-image-base-change] makes the specified small-etale base-change map an isomorphism: $a^{\\prime}$ is affine, hence quasi-compact separated, $b$ is flat, and the coefficient is quasi-coherent as checked above. For $i>0$, [lem-sfb-space-affine-module-higher-image-vanishing] applied to the affine morphisms $a^{\\prime}$ and $a$ says both their higher direct images are zero; their base-change map is consequently the unique map from zero to zero, hence an isomorphism. The coefficient identification in the preceding step is also an isomorphism. This verifies the flat comparison property in every degree for condition (4).",
+   "uses": [
+    "lem-sfb-space-flat-direct-image-base-change",
+    "lem-sfb-space-affine-module-higher-image-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0765, affine case; spaces-cohomology.tex Tags 073K(1) in degree zero and 073H in positive degrees."
+   }
+  },
+  {
+   "text": "All four hypotheses of [lem-sfb-stack-smooth-descent-higher-image-criterion] now hold for the rule $\\mathcal M$. Apply its conclusion to the given quasi-compact, quasi-separated morphism $f:\\mathcal X\\to\\mathcal Y$ and the given $F\\in\\mathcal M_{\\mathcal X}$. It gives $R^if_{\\mathrm{et},*}F\\in\\mathcal M_{\\mathcal Y}$ for every $i\\geq0$. Thus the etale higher images are locally quasi-coherent and have the required comparison isomorphisms for every flat scheme arrow.",
+   "uses": [
+    "lem-sfb-stack-smooth-descent-higher-image-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0765, application of Tag 076Z after the affine calculation."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-sfb-stack-lqc-lfp-topology-comparison] hold for $F$: its comparison maps are isomorphisms for all flat arrows, in particular for flat locally finitely presented ones. It is therefore an fppf sheaf. Apply the same node also to each $G_i=R^if_{\\mathrm{et},*}F$, using the properties proved in Step 5, to see that every $G_i$ is already an fppf sheaf. Finally that node identifies $R^if_{\\mathrm{fppf},*}F$ with the fppf sheafification of $G_i$. Sheafification of an existing fppf sheaf is canonically that sheaf by its universal property. The identification uses the same underlying module presheaf and its restriction maps, so it preserves both the local quasi-coherent modules and their canonical $c_a$. This proves the asserted equality of the two topology computations.",
+   "uses": [
+    "lem-sfb-stack-lqc-lfp-topology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Tag 0771, proof of (1) and (4); stacks-sheaves.tex Tag 075R(3)."
+   }
+  },
+  {
+   "text": "In degree zero take an injective resolution $0\\to F\\to I^0\\to I^1\\to\\cdots$. The section formula for $f_*$ preserves kernels: a section is a compatible family and belonging to a kernel is checked at every object of the fibre site. Hence $\\ker(f_*I^0\\to f_*I^1)=f_*F$, so $R^0f_*F=f_*F$. This identifies the isomorphism with the specified section functor, whose comparison maps are induced by its original restriction maps, as required. No finiteness or Noetherian assumption was used in the argument.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-cohomology.tex",
+    "place": "Conventions on direct image, preceding section-pullback; degree-zero case of Tag 0771(4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-lqc-flat-comparison-local-structure",
+  "lem-sfb-stack-smooth-descent-higher-image-criterion",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-stack-representable-higher-image-restriction",
+  "lem-sfb-space-higher-direct-image-quasi-coherent",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-flat-direct-image-base-change",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "lem-sfb-stack-lqc-lfp-topology-comparison",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-cohomology.tex",
+  "place": "Tags 0765 (lemma-flat-comparison) and 0771 (proposition-loc-qcoh-flat-base-change), (1), (4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated morphism of algebraic stacks higher direct images preserve locally quasi coherent modules with the flat base change property",
+   "results": "{\"t\": \"2026-10-23T12:10:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact quasi separated morphism of algebraic stacks higher direct images preserve locally quasi coherent modules with the flat base change property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.QuasiCompact.of_comp\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"SheafOfModules.isQuasicoherent\"], \"digest\": \"7885210587194660\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme qcqs properties, scheme module pushforward, and generic sheaf presentation definitions do not state preservation of flat comparison maps for algebraic stacks; read the stored hits and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-260."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quasi compact quasi separated morphism of algebraic stacks higher direct images preserve locally quasi coherent modules with the flat base change property",
+   "results": "{\"t\": \"2026-10-23T12:10:58Z\", \"tool\": \"leansearch\", \"query\": \"For a quasi compact quasi separated morphism of algebraic stacks higher direct images preserve locally quasi coherent modules with the flat base change property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\"], \"digest\": \"6631463ffb2cf554\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme qcqs properties, scheme module pushforward, and generic sheaf presentation definitions do not state preservation of flat comparison maps for algebraic stacks; read the stored hits and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-260."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "{\"t\": \"2026-10-23T12:10:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"higherDirectImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme qcqs properties, scheme module pushforward, and generic sheaf presentation definitions do not state preservation of flat comparison maps for algebraic stacks; read the stored hits and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-260."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*comparison|locally.*quasi.*coherent|AlgebraicStack",
+   "results": "{\"t\": \"2026-10-23T12:10:59Z\", \"tool\": \"grep\", \"query\": \"flat.*comparison|locally.*quasi.*coherent|AlgebraicStack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\"], \"digest\": \"7f2725f95af3d24a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme qcqs properties, scheme module pushforward, and generic sheaf presentation definitions do not state preservation of flat comparison maps for algebraic stacks; read the stored hits and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-260."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of locally quasi coherent flat cartesian sheaves on algebraic stacks have flat comparison maps in etale and fppf topology",
+   "results": "{\"t\": \"2026-10-23T12:11:06Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images of locally quasi coherent flat cartesian sheaves on algebraic stacks have flat comparison maps in etale and fppf topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"5cad02dbe6b82c2e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme qcqs properties, scheme module pushforward, and generic sheaf presentation definitions do not state preservation of flat comparison maps for algebraic stacks; read the stored hits and Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-260."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*comparison|locally.*quasi.*coherent|AlgebraicStack",
+   "results": "{\"t\": \"2026-10-23T14:29:13Z\", \"tool\": \"grep\", \"query\": \"flat.*comparison|locally.*quasi.*coherent|AlgebraicStack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean\"], \"digest\": \"7f2725f95af3d24a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme flatness and quasicoherent predicates, not stack higher direct image preservation or etale-fppf comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of locally quasi coherent modules with flat comparison maps on quasi compact quasi separated algebraic stacks remain locally quasi coherent and have flat comparison maps",
+   "results": "{\"t\": \"2026-10-23T14:29:14Z\", \"tool\": \"leansearch\", \"query\": \"Higher direct images of locally quasi coherent modules with flat comparison maps on quasi compact quasi separated algebraic stacks remain locally quasi coherent and have flat comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsQuasicoherent.casesOn\", \"SheafOfModules.IsQuasicoherent.recOn\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"Module.Flat.of_isLocalizedModule\", \"SheafOfModules.IsQuasicoherent.mk\", \"AlgebraicGeometry.Flat.stalkMap\", \"SheafOfModules.IsQuasicoherent.rec\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\"], \"digest\": \"486ad2658fdbc1a3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme flatness and quasicoherent predicates, not stack higher direct image preservation or etale-fppf comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "{\"t\": \"2026-10-23T14:29:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"higherDirectImage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme flatness and quasicoherent predicates, not stack higher direct image preservation or etale-fppf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of locally quasi coherent modules with flat comparison maps on quasi compact quasi separated algebraic stacks remain locally quasi coherent and have flat comparison maps",
+   "results": "{\"t\": \"2026-10-23T14:29:15Z\", \"tool\": \"leanfinder\", \"query\": \"Higher direct images of locally quasi coherent modules with flat comparison maps on quasi compact quasi separated algebraic stacks remain locally quasi coherent and have flat comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.comp\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.IsQuasicoherent\"], \"digest\": \"e5bc9e2999a88511\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme flatness and quasicoherent predicates, not stack higher direct image preservation or etale-fppf comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale and fppf higher pushforwards preserve flat cartesian locally quasi coherent sheaves for qcqs morphisms of algebraic stacks",
+   "results": "{\"t\": \"2026-10-23T14:29:16Z\", \"tool\": \"leanfinder\", \"query\": \"Etale and fppf higher pushforwards preserve flat cartesian locally quasi coherent sheaves for qcqs morphisms of algebraic stacks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Flat\"], \"digest\": \"04b2a3273293e18d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme flatness and quasicoherent predicates, not stack higher direct image preservation or etale-fppf comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-flat-scalar-sections",
+  "date": "2026-10-23",
+  "group": "Q106"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images.",
+   "via": [
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-higher-images-flat-comparison",
+  "worker": "stage1",
+  "group": "Q160",
+  "summary": "Checked Stacks 0765 and 0771 against all hypotheses and kept the statement unchanged. The split applies the general smooth-descent criterion after an affine calculation using existing local quasi-coherence, degree-zero flat base change, and positive-degree affine vanishing. Five new statement-only obligations separate local structure, smooth descent, derived representable restriction and its cohomology consequence, and the weaker lfp-flat topology comparison. No Lean attachment was found.",
+  "blueprint": "Newest literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), below the inherited alteration/moduli prerequisite route recorded in blueprint.from.place. This item is a generic stack-cohomology foundation for the flat scalar-section input; it changes no unit or chapter step. Blueprint searches for flat comparison, locally quasi-coherent, general pushforward and Tags 075P, 075R, 076Z, 0764 found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic equivalence between quasi-coherent Zariski and small-etale modules, needed to check the affine condition in the stack smooth-descent criterion; no node of this unit supplies this site identification."
+   },
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Generic injective resolution definition used for the elementary degree-zero kernel computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-sp-injective-resolutions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-117bb54dc",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-117bb54dc (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes and all 7 cited existing statements in full. Checked them against Stacks 076Z, 075Y, 0764, 0765 (affine case), 0771(1)(2)(4), 06WL, 06WM, 075H, 075N, 075P, 076T and 075R(1)(3); every tag/label pair checks out. Item statement equals live (still unsplit there). Only stmt_deps change: def-sp-injective-resolutions added for a notion the statement already uses. First split, no re-split note. The 7 steps are correct. Step 1 gets criterion (1)-(3) from local-structure (06WL/06WM/075Y/0764). Step 2: a is affine and separated by the elementary tensor-chart argument, and 0720 plus the 03DX equivalence give local quasi-coherence. Step 3: e is flat by base change, and the per-degree 075P node gives the comparison as base change followed by the coefficient map. Step 4: degree 0 by 073K, positive degrees by 073H vanishing for affine a and a'. This differs from the source's 073K in all degrees but is valid and below the unit. Step 5 applies 076Z. Step 6 applies 076T/075R twice, to F and to each G_i. Step 7: elementary R^0 = f_*. Edge cases checked: empty X, F=0, f=id, non-Noetherian. All five new nodes are faithful, true, statement-only and not duplicates; rg over the snapshot, live and side-live found no existing node for these tags. None restates an item clause. The per-degree node has the derived node as its only proof_dep, as the 2026-10-21 rule asks. FIX (B2 wording, meaning unchanged): in lem-sfb-stack-representable-derived-restriction, r_y now acts on modules G on Y, and the flat-clause map is named as Lb^*r_{y'}(Rf_*F)->r_y(Rf_*F), induced termwise by restriction of f_*. Corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-stack-representable-derived-restriction.json. Batch-5: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is the generic 03DX equivalence. The def-trf-* citations (algebraic space, étale module functors, space quasi-coherent module) are general definitions. The calculus, flat-direct-image, moduli-stack and qcqs citations reach def-trf-algebraic-space only. None is part of the trace formula or Poincaré duality, so all are accepted. Tool_uses accepted: zariski-etale equivalence and def-sp-injective-resolutions. No SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

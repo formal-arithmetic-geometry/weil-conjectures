@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-exact-evaluation-transformation-descent",
+ "kind": "statement",
+ "title": "Descent of transformations through fixed composite exact-functor realizations",
+ "statement": "Let $\\mathcal M,\\mathcal B$ be abelian categories [def-sp-abelian], with their unbounded derived categories and quasi-isomorphism localizations $\\mathsf L:\\mathrm{CoCh}(\\mathcal M)\\to D(\\mathcal M)$ and $\\mathsf L_B:\\mathrm{CoCh}(\\mathcal B)\\to D(\\mathcal B)$ [def-weil-abstract-derived-category]. Let $G:\\mathcal M\\to\\mathcal B$ and $H_r:\\mathcal M\\to\\mathcal M$ ($r\\geq1$) be additive exact functors. Write $C$ for termwise application. Let $V:D(\\mathcal M)\\to D(\\mathcal B)$ and $Q_r:D(\\mathcal M)\\to D(\\mathcal M)$ be their exact induced functors with fixed canonical factorization isomorphisms [lem-weil-pbc-exact-functor-derived-factorization]\n$$v_K:V\\mathsf L K\\xrightarrow{\\sim}\\mathsf L_B C(G)K,\\qquad e_{r,K}:Q_r\\mathsf L K\\xrightarrow{\\sim}\\mathsf L C(H_r)K.$$\nFor every natural transformation $\\alpha:G\\Rightarrow GH_r$, the degreewise maps $\\alpha_{K^i}$ form a chain map $C(\\alpha)_K:C(G)K\\to C(G)C(H_r)K$, natural in every chain map $K\\to K'$. Set $w_{r,K}=v_{C(H_r)K}\\circ V(e_{r,K})$. There is a unique natural transformation $\\alpha^D:V\\Rightarrow VQ_r$ such that, for every complex $K$,\n$$\\alpha^D_{\\mathsf L K}=w_{r,K}^{-1}\\circ\\mathsf L_B(C(\\alpha)_K)\\circ v_K.$$\nIts naturality holds for every morphism in $D(\\mathcal M)$, including inverses of localized quasi-isomorphisms. No invertibility of $\\alpha$ is assumed.\n\nSuppose also that $T_m:H_1H_m\\xrightarrow{\\sim}H_{m+1}$ and $t_m:Q_1Q_m\\xrightarrow{\\sim}Q_{m+1}$ ($m\\geq1$) are natural isomorphisms satisfying\n$$e_{m+1,K}\\circ t_{m,\\mathsf L K}=\\mathsf L(C(T_m)_K)\\circ e_{1,C(H_m)K}\\circ Q_1(e_{m,K}).$$\nThen every well-typed equality of chain maps built from the $C(\\alpha)$, $C(T_m)$, their functor images, identities and compositions remains an equality after localization and conjugation by the iterated specified factorizations, using the corresponding $\\alpha^D$ and $t_m$. Equalities of natural transformations are detected on all objects $\\mathsf L K$. If all $Q_r$ preserve a full subcategory $\\mathcal C\\subseteq D(\\mathcal M)$, these transformations and equalities restrict to $\\mathcal C$, with naturality for every morphism there.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04VG, lemma-properties-left-localization, together with the natural-transformation enhancement in Mathlib/CategoryTheory/Localization/Predicate.lean: fullyFaithfulWhiskeringLeft, liftNatTrans, liftNatTrans_app, natTrans_ext. Agent degreewise/composite-factorization refinement of returned Steps 7,8,9."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of $\\alpha$ at $d_K^i$ gives $G(H_r(d_K^i))\\alpha_{K^i}=\\alpha_{K^{i+1}}G(d_K^i)$, exactly the chain-map condition. Naturality at each $f^i:K^i\\to K^{\\prime i}$ gives $C(G)C(H_r)(f)C(\\alpha)_K=C(\\alpha)_{K^{\\prime}}C(G)(f)$. These component identities prove the asserted natural transformation on complexes. The same construction applies to $T_m$, its inverse, and transformations between any composites used below.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation refinement: Mathlib/CategoryTheory/Localization/Predicate.lean, lines 278-350; explicit termwise and factorization calculation by Q105"
+   }
+  },
+  {
+   "text": "The factorizations v and e_r are supplied in the statement. Compose them using evaluationFactors to obtain the fixed lifting isomorphism for Q_r followed by V. Install v and this composite as Localization.Lifting instances. Their existence already supplies the data required by liftNatTrans; no separate proof of preservation of quasi-isomorphisms is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation refinement: Mathlib/CategoryTheory/Localization/Predicate.lean, lines 278-350; explicit termwise and factorization calculation by Q105"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-weil-pbc-localization-universal-property] to $\\mathsf L$, the two functors $F_0,F_r$, their specified factors $v,w_r$, and $\\mathsf L_B C(\\alpha)$. It gives a unique natural transformation $\\alpha^D:V\\Rightarrow VQ_r$ with precisely the displayed component formula. In particular it is natural for every derived arrow. Explicitly, if $s:K\\to K^{\\prime}$ is a quasi-isomorphism, write $z=\\mathsf L(s)$ and $b=\\alpha^D$. Naturality $VQ_r(z)b_{\\mathsf LK}=b_{\\mathsf LK^{\\prime}}V(z)$ implies $VQ_r(z)^{-1}b_{\\mathsf LK^{\\prime}}=b_{\\mathsf LK}V(z)^{-1}$ by multiplying on the left and right by the two inverses. Only $z$ is inverted; $b$ need not be invertible.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation refinement: Mathlib/CategoryTheory/Localization/Predicate.lean, lines 278-350; explicit termwise and factorization calculation by Q105"
+   }
+  },
+  {
+   "text": "Use wordFactors and evaluationFactors as the recursively specified word comparison isomorphisms. Prove the square form of normalization: the derived expression followed by the target comparison equals the source comparison followed by the localized chain expression. The identity case uses preservation of identities; vertical composition follows by associativity, the two induction hypotheses, and preservation of composition. Cancel the final comparison isomorphism to obtain the stated conjugation formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation refinement: Mathlib/CategoryTheory/Localization/Predicate.lean, lines 278-350; explicit termwise and factorization calculation by Q105"
+   }
+  },
+  {
+   "text": "For EndExpression.input, expand the product word comparison and use naturality of the derived transformation at the input word comparison, followed by the induction hypothesis on the input chain word. For EndExpression.output, apply the output derived functor to the induction hypothesis and use naturality of its word comparison at the chain-expression component. The compositor case is the supplied compatibility equation; for its inverse, postcompose with the localized forward compositor, use that equation, and cancel the two inverse pairs. Structural associators and unitors reduce to identities, with functoriality ensuring the recursively specified comparisons agree. For evaluation words, the product comparison is the input comparison mapped by the remaining derived word followed by V, then the evaluation comparison. This gives the same input-whiskering calculation. Sending an endomorphism pasting through G uses V applied to its normalized square and naturality of v.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation refinement: Mathlib/CategoryTheory/Localization/Predicate.lean, lines 278-350; explicit termwise and factorization calculation by Q105"
+   }
+  },
+  {
+   "text": "Induct on the finite expression for a well-typed chain-map composite: the generators have their conjugate formulas by Steps 3 and 4, including $T_m$ by Step 5; identities and vertical composition follow from cancellation in Step 4; each functor-image operation follows from the two whiskering calculations in Step 5. Thus each resulting derived expression, evaluated at $\\mathsf LK$, is the localization of the original chain expression conjugated by its specified endpoint factors. Equal chain expressions therefore give equal components there. Clause (3) of [lem-weil-pbc-localization-universal-property] makes these equalities equalities of natural transformations on the whole derived category, and also gives the asserted general equality-detection property.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation refinement: Mathlib/CategoryTheory/Localization/Predicate.lean, lines 278-350; explicit termwise and factorization calculation by Q105"
+   }
+  },
+  {
+   "text": "Finally precompose $V$ and its transformations with the inclusion $\\mathcal C\\hookrightarrow D(\\mathcal M)$. Each $Q_r$ restricts by hypothesis, as do its composites. Fullness means its component arrows, including the components of $t_m$ and their inverses, are arrows in $\\mathcal C$ whenever their endpoints lie there. Naturality for any arrow of $\\mathcal C$ is the already proved ambient naturality equation at that arrow. Precomposition preserves the equations just proved. This restriction does not require that a chosen representative $\\mathsf LK$ itself belong to $\\mathcal C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation refinement: Mathlib/CategoryTheory/Localization/Predicate.lean, lines 278-350; explicit termwise and factorization calculation by Q105"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04VG and Mathlib Localization.Predicate liftNatTrans_app/natTrans_ext; Z8 implements the existing expression-induction plan in Lean using normalized squares, naturality, and cancellation, without a separate quasi-isomorphism-preservation argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory_app_Q_obj|mapDerivedCategory_comp|mapDerivedCategory.*[Ww]hisker|liftNatTrans_app",
+   "results": "13 hits: Mathlib/Algebra/Homology/Localization.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full fixed composite-factorization statement: localization liftNatTrans gives the categorical descent ingredient, but the chain-map construction, iterated factors and specified compositor transport require the separate argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor natural transformation gives degreewise cochain maps and a unique derived natural transformation compatible with composition of exact functors",
+   "results": "8 hits: CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.ExactFunctor.whiskeringRight_map_app, CategoryTheory.ExactFunctor.whiskeringLeft_obj_map, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory, CategoryTheory.Functor.rightDerivedNatTrans; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full fixed composite-factorization statement: localization liftNatTrans gives the categorical descent ingredient, but the chain-map construction, iterated factors and specified compositor transport require the separate argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.mapDerivedCategory",
+   "results": "6 hits: CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.NatTrans.mapDerivedCategory, CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj, CategoryTheory.NatTrans.mapDerivedCategory_app_singleFunctor_obj_assoc, CategoryTheory.NatTrans.mapDerivedCategory_app_Q_obj, CategoryTheory.NatTrans.mapDerivedCategory_app_Q_obj_assoc; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full fixed composite-factorization statement: localization liftNatTrans gives the categorical descent ingredient, but the chain-map construction, iterated factors and specified compositor transport require the separate argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For exact additive functors F and H, an arbitrary natural transformation F to F composed with H induces chain maps and descends uniquely to the derived category with coherent composition comparisons",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.NatTrans.leftDerived_comp; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full fixed composite-factorization statement: localization liftNatTrans gives the categorical descent ingredient, but the chain-map construction, iterated factors and specified compositor transport require the separate argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness and explicit conjugation formula for descent of a degreewise natural transformation through fixed factorizations of an exact composite functor on derived categories",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.leftDerivedNatTrans_fac, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full fixed composite-factorization statement: localization liftNatTrans gives the categorical descent ingredient, but the chain-map construction, iterated factors and specified compositor transport require the separate argument"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory_app_Q_obj|mapDerivedCategory_comp|liftNatTrans_app",
+   "results": "11 hits: Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Equivalence.lean, Mathlib/CategoryTheory/Localization/Predicate.lean; read Predicate.lean 278-350, DerivedCategory/ExactFunctor.lean 36-56 and Additive.lean 183-190.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-composite-factorization and restriction statement; existing Mathlib leaves supply descent and exact factorization, with explicit recursive conjugation and whiskering argument still required"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations of exact functors descend uniquely to derived categories and preserve equations under fixed composite factorization isomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.rightDerivedUnique, CategoryTheory.NatTrans.leftDerived, CategoryTheory.ExactFunctor.whiskeringRight_obj_map, CategoryTheory.AdditiveFunctor.ofLeftExact_map; read Predicate.lean 278-350, DerivedCategory/ExactFunctor.lean 36-56 and Additive.lean 183-190.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-composite-factorization and restriction statement; existing Mathlib leaves supply descent and exact factorization, with explicit recursive conjugation and whiskering argument still required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary natural transformation between additive exact functors induces degreewise chain maps and descends through fixed composite factorizations to the unbounded derived category",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; read Predicate.lean 278-350, DerivedCategory/ExactFunctor.lean 36-56 and Additive.lean 183-190.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-composite-factorization and restriction statement; existing Mathlib leaves supply descent and exact factorization, with explicit recursive conjugation and whiskering argument still required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of localization of natural transformations with horizontal composition and prescribed functor comparison isomorphisms",
+   "results": "8 hits: CategoryTheory.Localization.comp_liftNatTrans, CategoryTheory.Localization.lift₂NatTrans_app_app, CategoryTheory.Localization.comp_liftNatTrans_assoc, CategoryTheory.Localization.lift₂NatIso_hom, CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.lift₃NatTrans_app_app_app, CategoryTheory.Localization.liftNatTrans_app, CategoryTheory.Localization.lift₂_iso_hom_app_app₁; read Predicate.lean 278-350, DerivedCategory/ExactFunctor.lean 36-56 and Additive.lean 183-190.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-composite-factorization and restriction statement; existing Mathlib leaves supply descent and exact factorization, with explicit recursive conjugation and whiskering argument still required"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory_app_Q_obj|def mapDerivedCategory|mapHomologicalComplex.*NatTrans",
+   "results": "6 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/Additive.lean, Mathlib/Algebra/Homology/Additive.lean; read Predicate.lean 278-350, DerivedCategory/ExactFunctor.lean 36-56 and Additive.lean 183-190.",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole fixed-composite-factorization and restriction statement; existing Mathlib leaves supply descent and exact factorization, with explicit recursive conjugation and whiskering argument still required"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-exact-derived-model",
+  "date": "2026-10-22",
+  "group": "Q29"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-frobenius-operator-compact-description",
+   "place": "Proof paragraph 'transports the pair ...' along the compact-support base-change identification; exact derived normalization and descent of that point-fiber map (old item Steps 1,6,7); returned exact-point proof Steps 7,8,9",
+   "via": [
+    "lem-trf-point-exact-derived-model",
+    "lem-trf-point-transport-composition",
+    "lem-trf-compact-frobenius-transport-composition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-exact-evaluation-transformation-descent",
+  "worker": "stage1",
+  "summary": "Reuse existing Mathlib leaves for exact termwise factorization and localization of arbitrary transformations. Prove the chain-map, inverse-arrow naturality, recursive factorization, whiskering, compositor, equality and full-subcategory clauses explicitly; no new nodes and no statement changes.",
+  "blueprint": "Realizes the ancestor proof paragraph 'transports the pair ... along the compact-support base-change identification': descent and coherent composition of the point-fiber transport, as isolated in returned exact-point Steps 7,8,9."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-ad3b99e4f",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-ad3b99e4f (reviewer sub-agent of L); spot-checked: I read the whole split. One commit; only the item and the report change. The item's statement is byte-identical to live and side-live. This is an ordinary first split of an empty-proof Q29 item, not a 2026-10-21 re-split, and there is no repair note. The delivery has 0 new nodes and 7 steps, and proof_deps equals the union of the uses. The three cited nodes are Mathlib leaves, so no tool_uses are needed, and there is no SGA. Source checked: Stacks categories.tex lemma-properties-left-localization (line 4406), mapped to 04VG in the tags file (line 6324). In Mathlib, CategoryTheory/Localization/Predicate.lean 278-352: liftNatTrans_app has the formula φ2⁻¹τφ1, and the Lifting.iso direction matches clause (2) of lem-weil-pbc-localization-universal-property; natTrans_ext gives clause (3). Step by step: S1 is the chain condition from naturality at d^i. S2 uses preservation of quasi-isomorphisms from the factorization node, and w_r typechecks. S3 applies clause (2) with φ1=v, φ2=w_r and gives the exact item formula with uniqueness; α is never inverted. S4: the recursion a_FE typechecks and does not depend on how a word is cut, and a_{GH_r}=w_r. S5: I redid right whiskering (naturality of [τ] at a_E), left whiskering (naturality of a_J at C(τ)_K), and the compositor hypothesis, which is literally t_m=[T_m] at LK. S6 is induction plus clause (3). S7 is restriction to a full subcategory, with no repleteness needed. Edge cases checked: α=0, identity H, empty or zero 𝒞, mixed words with G outermost. Duplicates: lem-sp-exact-derived-transformation-pasting (another unit, uses derived compositors, no prescribed t_m or formula clause) and lem-sfb-exact-derived-natural-iso (invertible case only) overlap only the base item, not anything this delivery creates. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactEvaluationTransformationDescent",
+  "declaration": "CategoryTheory.ExactEvaluationDescent.exact_evaluation_transformation_descent",
+  "declarations": [
+   "CategoryTheory.ExactEvaluationDescent.chainWord",
+   "CategoryTheory.ExactEvaluationDescent.derivedWord",
+   "CategoryTheory.ExactEvaluationDescent.wordFactors",
+   "CategoryTheory.ExactEvaluationDescent.evaluationFactors",
+   "CategoryTheory.ExactEvaluationDescent.alphaChain",
+   "CategoryTheory.ExactEvaluationDescent.transformation",
+   "CategoryTheory.ExactEvaluationDescent.EndExpression",
+   "CategoryTheory.ExactEvaluationDescent.EndExpression.chain",
+   "CategoryTheory.ExactEvaluationDescent.EndExpression.derived",
+   "CategoryTheory.ExactEvaluationDescent.EvaluationExpression",
+   "CategoryTheory.ExactEvaluationDescent.EvaluationExpression.chain",
+   "CategoryTheory.ExactEvaluationDescent.EvaluationExpression.derived",
+   "CategoryTheory.ExactEvaluationDescent.word_preserves",
+   "CategoryTheory.ExactEvaluationDescent.restrictedWord",
+   "CategoryTheory.ExactEvaluationDescent.EndExpression.restrict",
+   "CategoryTheory.ExactEvaluationDescent.EvaluationExpression.restrict",
+   "CategoryTheory.ExactEvaluationDescent.exact_evaluation_transformation_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactEvaluationTransformationDescent.lean",
+  "statement": "theorem exact_evaluation_transformation_descent [PreservesFiniteLimits G] [PreservesFiniteColimits G] [∀ r, PreservesFiniteLimits (H r)] [∀ r, PreservesFiniteColimits (H r)] [V.CommShift ℤ] [V.IsTriangulated] [∀ r, (Q r).CommShift ℤ] [∀ r, (Q r).IsTriangulated] : (∀ (r : ℕ+) (α : G ⟶ H r ⋙ G) (K : CochainComplex M ℤ) (i : ℤ), ((alphaChain G H r α).app K).f i = α.app (K.X i)) ∧ (∀ (r : ℕ+) (α : G ⟶ H r ⋙ G), ∃! δ : V ⟶ Q r ⋙ V, ∀ K : CochainComplex M ℤ, δ.app (DerivedCategory.Q.obj K) = v.hom.app K ≫ DerivedCategory.Q.map ((alphaChain G H r α).app K) ≫ (evaluationFactors G H V Q v e (.of (some r))).inv.app K) ∧ (∀ {F F' : DerivedCategory M ⥤ DerivedCategory B} (a b : F ⟶ F'), (∀ K : CochainComplex M ℤ, a.app (DerivedCategory.Q.obj K) = b.app (DerivedCategory.Q.obj K)) ↔ a = b) ∧ (∀ {F F' : DerivedCategory M ⥤ DerivedCategory M} (a b : F ⟶ F'), (∀ K : CochainComplex M ℤ, a.app (DerivedCategory.Q.obj K) = b.app (DerivedCategory.Q.obj K)) ↔ a = b) ∧ (∀ (T : ∀ m : ℕ+, H m ⋙ H 1 ≅ H (m + 1)) (t : ∀ m : ℕ+, Q m ⋙ Q 1 ≅ Q (m + 1)), (∀ (m : ℕ+) (K : CochainComplex M ℤ), (t m).hom.app (DerivedCategory.Q.obj K) ≫ (e (m + 1)).hom.app K = (Q 1).map ((e m).hom.app K) ≫ (e 1).hom.app (((H m).mapHomologicalComplex (.up ℤ)).obj K) ≫ DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso (T m) (.up ℤ)).hom.app K)) → (∀ {P R : FreeMagma (Option ℕ+)} (a : EndExpression P R) (K : CochainComplex M ℤ), (a.derived Q t).app (DerivedCategory.Q.obj K) = (wordFactors H Q e P).hom.app K ≫ DerivedCategory.Q.map ((a.chain H T).app K) ≫ (wordFactors H Q e R).inv.app K) ∧ (∀ {P R : FreeMagma (Option ℕ+)} (a : EvaluationExpression G H P R) (K : CochainComplex M ℤ), (a.derived G H V Q v e t).app (DerivedCategory.Q.obj K) = (evaluationFactors G H V Q v e P).hom.app K ≫ DerivedCategory.Q.map ((a.chain G H T).app K) ≫ (evaluationFactors G H V Q v e R).inv.app K) ∧ (∀ {P R : FreeMagma (Option ℕ+)} (a b : EndExpression P R), (∀ K : CochainComplex M ℤ, (a.chain H T).app K = (b.chain H T).app K) → a.derived Q t = b.derived Q t) ∧ (∀ {P R : FreeMagma (Option ℕ+)} (a b : EvaluationExpression G H P R), (∀ K : CochainComplex M ℤ, (a.chain G H T).app K = (b.chain G H T).app K) → a.derived G H V Q v e t = b.derived G H V Q v e t) ∧ (∀ (S : ObjectProperty (DerivedCategory M)) (hS : ∀ r X, S X → S ((Q r).obj X)), (∀ {P R : FreeMagma (Option ℕ+)} (a b : EndExpression P R), (∀ K : CochainComplex M ℤ, (a.chain H T).app K = (b.chain H T).app K) → a.restrict Q t S hS = b.restrict Q t S hS) ∧ (∀ {P R : FreeMagma (Option ℕ+)} (a b : EvaluationExpression G H P R), (∀ K : CochainComplex M ℤ, (a.chain G H T).app K = (b.chain G H T).app K) → a.restrict G H V Q v e t S = b.restrict G H V Q v e t S)))",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Fixed-realization descent with explicit degreewise maps, recursively specified factors, finite pasting syntax over Mathlib FreeMagma, and restriction to arbitrary stable full subcategories. The helper theorem word_preserves states the word-stability assertion in the final clause; all other helpers have real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c06d28b6d",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Node unchanged except its lean field; lean.statement appears verbatim in the file. Clause by clause: alphaChain is the degreewise α (conjunct 1); w_r = V(e_r) then v; the unique α^D has the node's formula with no invertibility; Lean's T_m/t_m compositor equation matches the node's. EndExpression/EvaluationExpression cover generators, inverses, identities, composition and both-sided functor images; every normalization case checked true. Full-subcategory restriction needs only Q_r-stability. No hollow defs (word_preserves is a sorried Prop helper for step 7); docstrings carry source, blueprint and the 7 proof steps; no duplicate of ExactDerivedTransformationPasting (different node). Advisory: equality detection stated only for targets D(B) and D(M); V and Q_r are general lifts that include the mapDerivedCategory case."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261022T144503-L-1758465",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

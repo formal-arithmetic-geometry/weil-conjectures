@@ -1,0 +1,142 @@
+{
+ "id": "def-pur-compact-support-projection-map",
+ "kind": "definition",
+ "title": "Canonical coefficient-first compact-support projection map",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring of universe $u+1$, let $X,Y$ be schemes of universe $u$, and use the ordinary unbounded small-etale module derived categories $D(T_{\\mathrm{et}},A)$ [def-weil-pbc-derived-categories] and their derived tensor product [def-kun-derived-tensor]. Given a morphism $f:X\\to Y$, a compactification $c=(X\\xrightarrow j\\overline X\\xrightarrow pY)$ [def-weil-compactifications-refinements], and objects $M\\in D(X_{\\mathrm{et}},A)$ and $K\\in D(Y_{\\mathrm{et}},A)$, write $F_f^c=Rp_*Dj_!$ [def-amb-etale-compact-support]. Let $\\mathrm{PF}_c:F_f^cM\\otimes^L K\\to F_f^c(M\\otimes^L Lf^*K)$ be the composite of the proper projection map [def-kun-projection-formula-map], the inverse open-extension tensor comparison [lem-pur-etale-open-derived-tensor], and the canonical derived inverse-image composition identification. Write $\\eta_{f,K}:Lf^*K\\xrightarrow\\sim D(f^*)K$ for the canonical comparison with exact termwise inverse image [lem-kun-inverse-image-monoidal], and $\\sigma$ for the signed derived tensor symmetry [lem-kun-tensor-sym]. Define the coefficient-first compact-support projection to be the actual composite\n$$P^c_{f;K,M}:K\\otimes^L F_f^cM\\xrightarrow{\\sigma_{K,F_f^cM}}F_f^cM\\otimes^L K\\xrightarrow{\\mathrm{PF}_c}F_f^c(M\\otimes^L Lf^*K)\\xrightarrow{F_f^c(1_M\\otimes\\eta_{f,K})}F_f^c(M\\otimes^L D(f^*)K)\\xrightarrow{F_f^c(\\sigma_{D(f^*)K,M}^{-1})}F_f^c(D(f^*)K\\otimes^L M).$$\nWhen $f$ has a compactifiability structure, define $P_{f;K,M}$ by this formula for its selected compactification, with $F_f=Rf_!$ the corresponding chosen compact-support functor. This defines the maps on all unbounded objects, without assuming finiteness of $A$, Noetherianity of the schemes or invertibility of these maps; it asserts no composition or refinement compatibility theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "def-kun-derived-tensor",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-kun-tensor-sym",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2, integration and its adjoint transpose: the canonical proper/open projection used in integration. Explicit existing construction: lean/Sheaf/AlgebraicGeometry/ShriekTensorComposition.lean, compactSupportProjectionMapOfCompactification and compactSupportProjectionMap (lines 149-192); Stacks more-etale.tex Tag 0F7I (lemma-shriek-well-defined), and the proper/open tensor construction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical compact support tensor projection map constructed from proper direct image and open extension by zero",
+   "results": {
+    "hits": 8,
+    "top": [
+     "HasCompactSupport.extend_zero",
+     "TestFunction.ofSupportedInLM",
+     "TestFunction.ofSupportedInCLM",
+     "HasCompactSupport.tsupport_extend_zero",
+     "ContDiffMapSupportedIn.postcompLM",
+     "ContDiffMapSupportedIn.zero_on_compl'",
+     "HasCompactSupport.tsupport_extend_zero_subset",
+     "Finsupp.lcoeFun"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib has no ordinary-etale compact-support projection; exact existing project definitions are recorded in lean, not copied"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactification construction of the coefficient first compact support projection formula morphism",
+   "results": {
+    "hits": 8,
+    "top": [
+     "Profinite.NobelingProof.πJ",
+     "Profinite.NobelingProof.Linear_CC'₁",
+     "Profinite.NobelingProof.Linear_CC'₀",
+     "Profinite.NobelingProof.πs",
+     "Profinite.NobelingProof.πs'",
+     "Profinite.NobelingProof.iso_map",
+     "Profinite.IndexFunctor.map_comp_π_app",
+     "Profinite.NobelingProof.CC_comp_zero"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib has no ordinary-etale compact-support projection; exact existing project definitions are recorded in lean, not copied"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportProjectionMap|projectionMapOfCompactification|rightDerivedLowerShriek",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib has no ordinary-etale compact-support projection; exact existing project definitions are recorded in lean, not copied"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportProjectionMap|projectionMapOfCompactification in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search compact support projection",
+   "results": "The only DAG lean record naming compactSupportProjectionMap is theorem node lem-amb-shriek-tensor-composition. ShriekTensorComposition.lean defines the two maps in lines 149-192. Upstream LowerShriekProjection.lean defines projectionMapOfCompactification, the unreordered proper/open composite. No definition node owns these coefficient-first maps; blueprint search returned 0 matches. Other definition candidates use pro-etale, condensed, primary-coefficient or rational coefficient data.",
+   "date": "2026-10-22",
+   "verdict": "existing project definition: bind both unchanged definitions to this definition-only node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integration-transpose-composition",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Paragraph 2: canonical proper/open projection in the integrations whose equalities are transposed.",
+   "via": [
+    "lem-pur-integration-transpose-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ShriekTensorComposition",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportProjectionMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactSupportProjectionMapOfCompactification",
+   "AlgebraicGeometry.Etale.compactSupportProjectionMap"
+  ],
+  "statement": "noncomputable def compactSupportProjectionMap\n    (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]\n    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) :\n    ((derivedTensor (ModuleCat.{u + 1} A) Y).obj K).obj\n        ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) ⟶\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj\n          ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj K)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Definition-only ownership requested by return L at immutable head 4203bbe51a4f (H2/H12). Both published plain definitions are unchanged, have real composite data, and neither chooses from nor invokes the owning theorem. The specified-compactification signature is: noncomputable def compactSupportProjectionMapOfCompactification\n    (A : Type (u + 1)) [CommRing A]\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) :\n    ((derivedTensor (ModuleCat.{u + 1} A) Y).obj K).obj\n        ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj M) ⟶\n      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj\n        (((derivedTensor (ModuleCat.{u + 1} A) X).obj\n          ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj K)).obj M)"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-833171d56",
+  "group": "Q49",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-833171d56",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery after RETURN L at 4203bbe51a4f (H2/H12). Lean module byte-identical to the previously reviewed head; item changes only stmt_deps (additions vs base, none lost) and lean.note. The new definition node def-pur-compact-support-projection-map has an existing:true record on unchanged Sheaf.AlgebraicGeometry.ShriekTensorComposition (compactSupportProjectionMapOfCompactification, compactSupportProjectionMap); its statement matches side-live l.176-184 verbatim and its TeX gives the same four arrows as the body, with PF_c = proper projection, inverse open comparison, compactification pullback iso (LowerShriekProjection l.122-131). All 8 of its stmt_deps exist and are cited; proof fields empty; no other owner; not yet live. lem-amb-shriek-tensor-composition is kept in proof_deps. Added owners def-sf-etale-support-compositor (alpha) and def-pur-etale-exact-pullback-unit-composition-comparisons (unboundedEtaleUpperStarCompIso) are correct and unchanged vs live. DFS: no cycle. Mechanical finding: lem-kun-inverse-image-monoidal (record = canonical leftDerivedUpperStarTensorNatIso and its components) and lem-kun-tensor-unit (record = the unitors) are constructed-object deps, PASS on that point. Statement clauses, edge cases and gates re-checked and correct. No compile (no file changed). Advisories: rightMate duplicates etaleSumRightAdjointCompIso (H4); private proof-plan imports unused by the statement (H9)."
+ }
+}

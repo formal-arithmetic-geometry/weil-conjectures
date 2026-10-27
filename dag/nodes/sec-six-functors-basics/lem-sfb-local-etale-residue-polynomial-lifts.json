@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-local-etale-residue-polynomial-lifts",
+ "kind": "statement",
+ "title": "Finite etale local polynomial lifts of residue splitting fields",
+ "statement": "Let $k$ be a field and $S$ an integral finite-type $k$-scheme. Let $s\\in S$ and let $E\\to\\operatorname{Spec}F$, where $F=\\kappa(s)$, be finite etale, with $E$ possibly empty. Put $R=\\mathcal O_{S,s}$ and $K=k(S)$. Then $R$ is a Noetherian local domain with fraction field $K$ and residue field $F$. There exist a finite set $B$, finite separable field extensions $F_b/F$, an $F$-algebra isomorphism $\\Gamma(E,\\mathcal O_E)\\cong\\prod_{b\\in B}F_b$, a finite Galois extension $L/F$ with $F$-embeddings $F_b\\hookrightarrow L$, and an element $\\alpha\\in L$ generating $L/F$. If $q\\in F[T]$ is the monic minimal polynomial of $\\alpha$, then $q$ is separable of degree $d\\ge1$ and $F[T]/(q)\\cong L$. There exists a monic $f\\in R[T]$ of degree $d$ reducing to $q$ such that $C=R[T]/(f)$ is finite free of rank $d$ with basis $1,T,\\ldots,T^{d-1}$ and $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ is finite etale. Its closed fibre is $\\operatorname{Spec}L$, and there are a nonempty finite set $A$, finite separable extensions $K_a/K$, and a $K$-algebra isomorphism $K[T]/(f)\\cong\\prod_{a\\in A}K_a$. When $E$ is empty one may take $B=\\varnothing$, $L=F$, $\\alpha=0$, $q=T$ and $f=T$.\n\nField extensions and separability use [def-pc-field-extension] and [def-weil-pbc-separable-algebraic-extension]; finite Galois means finite-dimensional, separable and normal, where normal means that every minimal polynomial splits into linear factors. Integral scheme, finite type, residue field, function field, finite morphism, etaleness, polynomial ring and Noetherian ring use [def-pc-integral-scheme], [def-weil-finite-type-morphism], [def-weil-residue-field], [def-sc-function-field], [def-weil-finite-integral-morphism], [def-weil-etale-morphism], [def-weil-polynomial-ring] and [def-weil-pbc-noetherian-ring]. Finite free with the displayed basis means that its elements are uniquely sums of scalar multiples of those basis elements. The product over an empty set is the zero ring.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 5.6, printed p.614 (proof omitted), local polynomial preparation; Stacks Algebra 00UD (lemma-make-etale-map-prescribed-residue-field), lifted minimal polynomial construction, and 00U3 (lemma-etale-over-field). Agent elaboration preserved as old steps 1--4 in the delivery report.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "The ring $k$ is Noetherian, since its only ideals are $0$ and $k$, and $\\operatorname{Spec}k$ is a one-point Noetherian scheme. Apply [lem-weil-pbc-finite-type-over-noetherian] to obtain that $S$ is Noetherian. By [pqf-def-locnoeth], choose an affine neighbourhood $U=\\operatorname{Spec}D$ of $s$ with $D$ Noetherian. By [lem-weil-pbc-spec-domain-stalks-function-field], its stalk at $s$ is $D_{\\mathfrak p}$, where $\\mathfrak p$ represents $s$; the stalk on $U$ is the stalk on $S$, since their neighbourhood systems at $s$ agree after intersection with $U$. Thus [lem-weil-pbc-localization-noetherian] makes $R$ Noetherian. By [lem-sc-integral-scheme-stalks-in-function-field], $R$ is a domain with fraction field $K$. The local ring and residue field in [def-weil-residue-field] give the unique maximal ideal $\\mathfrak m$ of $R$ and $F=R/\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); properties.tex Tag 01OV (definition-noetherian); schemes.tex Tag 01HV (lemma-spec-sheaves); integral-scheme fraction-field identifications"
+   }
+  },
+  {
+   "text": "Since the given map $E\\to\\operatorname{Spec}F$ is finite, [def-weil-finite-integral-morphism] makes $E$ affine, say $E=\\operatorname{Spec}D_E$, with $D_E=\\Gamma(E,\\mathcal O_E)$ by [def-weil-affine-spectrum]. The map is etale, so [lem-weil-pbc-etale-algebra-over-field-product] gives $D_E\\cong\\prod_{b\\in B}F_b$ for a finite set $B$ and finite separable $F_b/F$. This theorem explicitly permits the zero algebra and the empty product.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3 (lemma-etale-over-field); morphisms.tex Tag 01WH (definition-integral) for finiteness and affineness"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-galois-receiving-separable-extensions] to the finite family $(F_b/F)$, after indexing $B$ by $\\{1,\\ldots,|B|\\}$. It gives a finite separable normal extension $L/F$ and $F$-algebra maps $F_b\\to L$. Each map is injective: its kernel is an ideal of a field and cannot contain $1$, because $1$ maps to $1\\ne0$. Apply [lem-weil-pbc-finite-separable-extension-primitive-element] to $L/F$ to choose $\\alpha$ with $L=F(\\alpha)$. By [def-weil-pbc-separable-algebraic-extension], the minimal polynomial $q$ of $\\alpha$ is monic and separable. By [lem-weil-pbc-minimal-polynomial-quotient-field-iso], its degree $d$ is at least one and evaluation at $\\alpha$ gives $F[T]/(q)\\cong F(\\alpha)=L$.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09DT (lemma-normal-closure) and 0EXM (lemma-normal-closure-galois), with the primitive-element construction used in algebra.tex Tag 00UD"
+   }
+  },
+  {
+   "text": "Write $q=T^d+\\sum_{i<d}\\bar a_iT^i$. The residue map $R\\to R/\\mathfrak m=F$ is surjective, so choose $a_i\\in R$ lifting each $\\bar a_i$ and put $f=T^d+\\sum_{i<d}a_iT^i$. Its leading coefficient is exactly $1$, so $f$ is monic of degree $d$ and reduces to $q$. Put $C=R[T]/(f)$ and let $t$ be the class of $T$. By [lem-weil-pbc-monic-quotient-free], $C$ has the displayed basis $1,t,\\ldots,t^{d-1}$ and $C/\\mathfrak m C\\cong F[T]/(q)\\cong L$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UD (lemma-make-etale-map-prescribed-residue-field), coefficient lifting with R already local; monic division as in the proof of Tag 04GG (lemma-characterize-henselian)"
+   }
+  },
+  {
+   "text": "By [def-pc-separable-polynomial], choose $U,V\\in F[T]$ with $Uq+Vq'=1$. Coefficientwise lifting gives $\\widetilde U,\\widetilde V\\in R[T]$. Differentiation commutes with reduction by its coefficient formula. Consequently, for $u=f'(t)\\in C$, the element $1-\\widetilde V(t)u$ lies in $\\mathfrak m C$. Set $M=C/uC$, viewed as an $R$-module. The images of the $d$ power-basis elements of [lem-weil-pbc-monic-quotient-free] generate $M$. The identity just obtained implies $C=uC+\\mathfrak m C$: multiply it by each $c\\in C$. Hence $M=\\mathfrak m M$. Because $R$ is local, its Jacobson radical, the intersection of its maximal ideals, is its unique maximal ideal $\\mathfrak m$. Apply [lem-weil-pbc-nakayama-jacobson] with $I=\\mathfrak m$ and this finite module $M$; it gives $M=0$. Thus $uC=C$, so $uv=1$ for some $v\\in C$: the lifted derivative is a unit in $C$.",
+   "uses": [
+    "def-pc-separable-polynomial",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UD, derivative inversion; Tag 00DV (lemma-NAK), part (2), applied to C/f′(t)C to justify that no localization of C is needed"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-standard-etale-monic-derivative] with $S=R$ and $Q=f$ to the etale algebra $C'=R[T][Y]/(f,Yf'-1)$. The map $C'\\to C$ sends $T$ to $t$ and $Y$ to $u^{-1}$. Conversely $C\\to C'$ sends $t$ to the class of $T$. Their composites fix $t$ and every scalar; the composite on $C'$ also fixes $Y$, since $Y$ and the image of $u^{-1}$ are both inverses of $f'(T)$. Thus $C\\cong C'$ over $R$, and $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ is etale. It is finite in the sense of [def-weil-finite-integral-morphism]. Let $V=\\operatorname{Spec}R_V\\subseteq\\operatorname{Spec}R$ be any affine open. Its preimage in $\\operatorname{Spec}C$ is the open subscheme $V\\times_{\\operatorname{Spec}R}\\operatorname{Spec}C$, which [lem-weil-pbc-fibre-product-affine-spectra] identifies with $\\operatorname{Spec}(R_V\\otimes_RC)$. So the morphism is affine [pqf-def-affine-morphism], and $R_V\\otimes_RC$ is generated as an $R_V$-module by the elements $1\\otimes t^i$ ($0\\le i<d$), the images of the power basis of [lem-weil-pbc-monic-quotient-free].",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UC (lemma-standard-etale), part (1), and Tag 00UD; specialization when f′ is already a unit in the monic quotient"
+   }
+  },
+  {
+   "text": "For any $R$-algebra $H$, the maps on generators $h\\otimes[p(T)]\\mapsto h[p(T)]$ and $[T]\\mapsto1\\otimes t$ give mutually inverse $H$-algebra maps $H\\otimes_R C\\cong H[T]/(f_H)$: both composites fix $H$ and the class of $T$, which generate these algebras, and the relation $f$ vanishes on both sides. For $H=F$ this is the reduction isomorphism of step 4, so [lem-weil-pbc-fibre-product-affine-spectra] identifies the closed fibre with $\\operatorname{Spec}L$. For $H=K$, the same node identifies the generic fibre with $\\operatorname{Spec}(K[T]/(f_K))$. It is etale over $K$ by [lem-weil-pbc-etale-base-change-finite-limits]. Applying [lem-weil-pbc-etale-algebra-over-field-product] gives a finite product $\\prod_{a\\in A}K_a$ with each $K_a/K$ finite separable. The index set $A$ is nonempty: the monic polynomial $f_K$ has degree $d\\ge1$, so [lem-weil-pbc-monic-quotient-free] gives a basis with $d$ elements over the nonzero field $K$, whereas the empty product is the zero algebra.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U3 (lemma-etale-over-field); morphisms.tex Tag 02GO (lemma-base-change-etale); affine tensor presentation and monic division"
+   }
+  },
+  {
+   "text": "If $E$ is empty, its section ring is the zero ring, so take $B=\\varnothing$. Take the identity extension $L=F$, $\\alpha=0$, $q=T$ and $f=T$. Every element of $F$ has a degree-one minimal polynomial over $F$, which splits and is separable, so the identity extension is finite Galois. Evaluation at $0$ identifies both $F[T]/(T)$ with $F$ and $R[T]/(T)$ with $R$. The power basis is $(1)$ and $q'=f'=1$. The constructions above therefore apply with $d=1$, and the generic product may be the one-factor product $K$ itself.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00UD and 00U3, degree-one and empty-product cases, checked directly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-weil-residue-field",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-minimal-polynomial-quotient-field-iso",
+  "lem-weil-pbc-monic-quotient-free",
+  "def-pc-separable-polynomial",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-base-change-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00UD (lemma-make-etale-map-prescribed-residue-field), 00U3 (lemma-etale-over-field), 00UC (lemma-standard-etale); local finite-module strengthening using 00DV (lemma-NAK), part (2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lift a finite etale algebra over the residue field of a Noetherian local domain to a monic finite free etale algebra whose fraction field algebra is a product of finite separable fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib/RingTheory/RingHom/EssFiniteType\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} [inst_2 : IsLocalRing R]\\n  [inst_3 : IsLocalRing S] [inst_4 : IsLocalHom f], f.EssFiniteType → (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A] [Algebra.EssFiniteType K A],\\n  Algebra.FormallyEtale K A ↔ ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field-algebra product decomposition and etale factorization neighbourhoods do not construct the finite free lift with prescribed Galois closed fibre and separable generic algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, Algebra.Etale",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib.RingTheory.Polynomial.UniversalFactorizationRing\", \"type\": \" {R : Type u} [CommRing R] (P : Ideal R) [P.IsPrime] (p : Polynomial R) (f g : Polynomial P.ResidueField) (hp : p.Monic) (hf : f.Monic) (hg : g.Monic) (H : Polynomial.map (algebraMap R P.ResidueField) p = f * g) (Hpq : IsCoprime f g) : ∃ R' x x_1, ∃ (_ : Algebra.Etale R R'), ∃ Q, ∃ (x_3 : Q.IsPrime)\", \"doc\": \"If a monic polynomial `p : R[X]` factors into a product of coprime monic polynomials `p = f * g`\\nin the residue field `κ(P)` of some `P : Spec R`,\\nthen there exists an etale algebra `R'` of `R` and a \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field-algebra product decomposition and etale factorization neighbourhoods do not construct the finite free lift with prescribed Galois closed fibre and separable generic algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "separable.*residue|residue.*separable|monic.*etale|etale.*monic",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"64\", \"text\": \"    Algebra.IsSeparable (ResidueField R) (ResidueField S) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"96\", \"text\": \"    [Algebra.IsSeparable (ResidueField R) (ResidueField S)]\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"100\", \"text\": \"  have : FormallyUnramified (ResidueField R) (ResidueField S) := .of_isSeparable _ _\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"119\", \"text\": \"      Algebra.IsSeparable (ResidueField R) (ResidueField S) ∧\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"136\", \"text\": \"      Algebra.IsSeparable p.ResidueField q.ResidueField ∧\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"47\", \"text\": \"/-- A `StandardEtalePair R` is a pair `f g : R[X]` such that `f` is monic,\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"50\", \"text\": \"  /-- The monic polynomial to be quotiented out in a standard etale algebra. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"line\": \"411\", \"text\": \"  let P' : StandardEtalePair R := ⟨P.f, P.monic_f, p * P.g, have ⟨p₁, p₂, m, e⟩ := P.cond;\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances.lean\", \"line\": \"32\", \"text\": \"    Algebra.IsSeparable p.ResidueField q.ResidueField := by\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances.lean\", \"line\": \"40\", \"text\": \"instance [Algebra.IsSeparable p.ResidueField q.ResidueField] :\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances.lean\", \"line\": \"55\", \"text\": \"lemma Algebra.isSeparable_residueField_iff :\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Instances.lean\", \"line\": \"56\", \"text\": \"    Algebra.IsSeparable p.ResidueField q.ResidueField ↔ Algebra.IsSeparable (A ⧸ p) (B ⧸ q) :=\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field-algebra product decomposition and etale factorization neighbourhoods do not construct the finite free lift with prescribed Galois closed fibre and separable generic algebra"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monic lift of a separable residue polynomial over a local ring is finite etale and its generic fibre is separable",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale residue algebra admits a finite Galois splitting field and a monogenic finite etale lift over a local domain",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Module.Finite (IsLocalRing.ResidueField R) (IsLo\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the residue field of $ S $ is a finitely generated module over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.FormallyUnramified R S], Algebra.IsSeparable (IsLocalRing.ResidueField R)\", \"doc\": \"For any local rings $ R $ and $ S $ where $ S $ is formally unramified over $ R $, the residue field of $ S $ is a separable algebra over the residue field of $ R $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S]\\n  [Algebra.IsSeparable (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)],\\n \", \"doc\": \"Given commutative local rings $ R $ and $ S $ with a ring homomorphism $ R \\to S $ such that the maximal ideal of $ S $ lies over the maximal ideal of $ R $, the residue field of $ S $ is equipped with\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : IsLocalRing S] [inst_5 : IsLocalHom (algebraMap R S)] [Algebra.EssFiniteType R S],\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (IsLocalRing.ResidueFiel\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: field-algebra product decomposition and etale factorization neighbourhoods do not construct the finite free lift with prescribed Galois closed fibre and separable generic algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "basis.*[Pp]ower|basis.*[Mm]onic|[Mm]onic.*basis|isUnit.*(maximalIdeal|residue)|isUnit_of.*[Ff]inite",
+   "results": "OK: 25 hits. Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/PowerBasis.lean, Mathlib/RingTheory/PowerBasis.lean, Mathlib/RingTheory/PowerBasis.lean, Mathlib/RingTheory/PowerBasis.lean, Mathlib/RingTheory/PowerBasis.lean, Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: these are constituent standard-etale, separability, lifting or power-basis facts, not the scheme-local construction together with all residue and generic field data."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monic lift of a separable residue polynomial over a local ring is finite etale",
+   "results": "OK: 8 hits. Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.of_isSeparable, Algebra.instEtaleOfIsStandardEtale, Algebra.FormallyEtale.iff_isSeparable, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Polynomial.lifts_and_natDegree_eq_and_monic, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, HenselianLocalRing.TFAE",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: these are constituent standard-etale, separability, lifting or power-basis facts, not the scheme-local construction together with all residue and generic field data."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, Algebra.Etale",
+   "results": "OK: 1 hits. Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: these are constituent standard-etale, separability, lifting or power-basis facts, not the scheme-local construction together with all residue and generic field data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monic polynomial over a local ring whose reduction is separable defines a finite free etale algebra with power basis",
+   "results": "OK: 8 hits. StandardEtalePair.instEtaleRing, Algebra.IsStandardEtale, StandardEtalePair, Algebra.instIsStandardEtaleRing, StandardEtalePresentation, Polynomial.instEtaleUniversalCoprimeFactorizationRing, StandardEtalePair.instAlgebraRing, StandardEtalePair.g",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: these are constituent standard-etale, separability, lifting or power-basis facts, not the scheme-local construction together with all residue and generic field data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a monic polynomial has separable reduction modulo the maximal ideal then its derivative is a unit in the quotient algebra",
+   "results": "OK: 8 hits. StandardEtalePair.HasMap.isUnit_derivative_f, Polynomial.IsDistinguishedAt.toIsWeaklyEisensteinAt, Polynomial.Separable.aeval_derivative_ne_zero, Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt, HenselianLocalRing.is_henselian, HenselianRing.is_henselian, Polynomial.separable_def', Polynomial.Separable.eval₂_derivative_ne_zero",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: these are constituent standard-etale, separability, lifting or power-basis facts, not the scheme-local construction together with all residue and generic field data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-finite-residue-domination",
+  "date": "2026-10-22",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, second paragraph, application of Lemma 5.6 at the maximal points of the nonsplit locus. Extraction of old steps 1--4: local polynomial lifting.",
+   "via": [
+    "lem-sfb-equivariant-finite-residue-domination",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-local-etale-residue-polynomial-lifts",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Eight steps assemble existing local-ring, finite-etale field-algebra, finite-Galois-envelope, primitive-element, monic-quotient and standard-etale nodes. Wrote out the Nakayama argument proving that the derivative is a unit before localizing, the tensor presentation of both fibres, and the empty case. No new nodes are needed.",
+  "blueprint": "Realizes local polynomial preparation in the inherited provenance: det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-equivariant-finite-residue-domination and its de Jong Lemma 5.6 preparation. The ancestor command returns None; preserve that inherited provenance rather than inventing a blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Step 3 uses the finite Galois envelope of finitely many separable field extensions as a field-theoretic tool; no node of sk-thm-sf-ctf-stability gives this generic construction, and its use continues the existing local-polynomial route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-a3920e8b5",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-a3920e8b5 (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, every cited statement and Stacks algebra.tex 00UD (lemma-make-etale-map-prescribed-residue-field). The statement is kept as imported and is true. I tested it on: E empty (f=T, C=R), d=1, s the generic point (R=K=F), and positive characteristic (Bezout from separability). None needs henselian, normal or closed-point hypotheses. The parent lem-sfb-equivariant-finite-residue-domination uses the statement consistently in its steps 2 and 5. Steps 1-5, 7 and 8 are correct against their cited statements. Step 1: Spec k is Noetherian, so S is Noetherian by finite-type-over-noetherian; then the D_p stalk, localization-Noetherian, and the domain with fraction field K from integral-scheme-stalks. Step 2: finite implies affine; the etale-algebra-over-field product allows n=0. Step 3: the Galois envelope node gives L finite, separable and normal, then the primitive element, then q separable, and F[T]/(q) is L. Step 4: direct coefficient lifts, with the power basis and the reduction isomorphism from monic-quotient-free. Step 5: the lifted Bezout identity gives C = uC + mC; C/uC is finite; Jacobson radical = m, so Nakayama makes u a unit. Step 7: for H=F the closed fibre is Spec L; for H=K the generic fibre is etale by base change, and A is nonempty because the K-basis has d>=1 elements. Step 8: the empty case is elementary. One fault (E1/C4), repaired in step 6: finiteness was argued only on principal affine opens, but def-weil-finite-integral-morphism requires every affine open. Replaced by: preimage of any affine V = Spec R_V is Spec(R_V ⊗_R C) by lem-weil-pbc-fibre-product-affine-spectra, so the morphism is affine by pqf-def-affine-morphism, and the 1⊗t^i generate. Both nodes were added to the step's uses, and pqf-def-affine-morphism to proof_deps; proof_deps again equals the union of uses. Duplicate search with rg -L over dag/nodes (residue polynomial, monic lift, 00UD): lem-weil-pbc-etale-residue-polynomial-lift (general prime, c-scaling), etale-ring-map-prescribed-residue-field and henselian-finite-etale-field-lift (needs a henselian R) do not restate the item. There are no new nodes and no SGA. The declared tool use lem-weil-pbc-finite-galois-receiving-separable-extensions (sk-thm-p1) is generic field theory and is accepted. de Jong Lemma 5.6 is WANTED, with proof_origin by agent. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-local-etale-residue-polynomial-lifts.json.; 1 file(s) fixed by the reviewer"
+ }
+}

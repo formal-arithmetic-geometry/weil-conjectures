@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-space-unramified-radicial-parameter-open",
+ "kind": "statement",
+ "title": "The universal unramified and injective parameter locus for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and the point spaces of [def-a1-space-point-topology]. Local finite type and unramifiedness mean the chart test of [def-sfb-space-morphism-properties] applied to the scheme properties [def-weil-finite-type-morphism] and [def-weil-unramified-morphism], respectively. Universally injective means injective on point spaces after every algebraic-space base change. Let $p:A\\to B$, $q:C\\to B$, and $f:A\\to C$ satisfy $q\\circ f=p$. Suppose that $p$ is locally of finite type, and that $p$ and $p_2=p\\circ\\operatorname{pr}_1:A\\times_C A\\to B$ are closed maps on point spaces, meaning that they send closed subsets to closed subsets. Then there exists an open subspace $V\\subseteq B$ [def-a1-space-open-subspace] such that, for every algebraic space $T$ over $S$ and every $h:T\\to B$, the induced map $f_T:A\\times_B T\\to C\\times_B T$ is unramified and universally injective if and only if $h$ factors through $V\\hookrightarrow B$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X9 (spaces-more-morphisms-lemma-where-unramified-universally-injective), all three hypotheses and arbitrary algebraic-space parameter changes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-sfb-space-morphism-properties",
+  "def-weil-finite-type-morphism",
+  "def-weil-unramified-morphism",
+  "def-a1-space-open-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-closed-source-unramified-base-open] to the given triangle. Its hypotheses are precisely local finite type and closedness of $p$. Obtain an open $B_0\\subseteq B$ such that, for every algebraic-space $h:T\\to B$, $f_T$ is unramified exactly when $h$ factors through $B_0$. Put $A_0=A\\times_BB_0$, $C_0=C\\times_BB_0$, and $f_0=f_{B_0}$. Taking $h:B_0\\hookrightarrow B$ shows that $f_0$ is unramified.",
+   "uses": [
+    "lem-sfb-space-closed-source-unramified-base-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, first sentence, using Tag 05X8 (lemma-where-unramified)."
+   }
+  },
+  {
+   "text": "Put $D=A\\times_C A$. The fibre-product universal property gives $D_0:=A_0\\times_{C_0}A_0\\simeq D\\times_BB_0$, compatibly with the two projections and the diagonal: on every test scheme both sides are pairs $(a_1,a_2)$ with $f(a_1)=f(a_2)$ and their common $B$-coordinate in $B_0$. By [lem-a1-space-open-factor-scheme-tests], $D_0$ has point set $|p_2|^{-1}(|B_0|)$. By [lem-a1-space-point-open-calculus], the open subspaces $D_0\\subseteq D$ and $B_0\\subseteq B$ have point spaces homeomorphic to these open subsets of $|D|$ and $|B|$. The restricted $r:D_0\\to B_0$ is closed. Indeed any relatively closed $F\\subseteq|D_0|$ is $F^\\prime\\cap |p_2|^{-1}(|B_0|)$ for some closed $F^\\prime\\subseteq|D|$, and $r(F)=p_2(F^\\prime)\\cap |B_0|$, closed in $|B_0|$. This uses the assumed closedness only for the original $p_2$, followed by restriction to an open base.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, restriction to the unramified open does not destroy closedness; explicit relative-topology calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-unramified-diagonal-open] to $f_0$. Identify $\\Delta_{f_0}:A_0\\to D_0$ with the open subspace $J\\subseteq D_0$. By [lem-a1-space-point-open-calculus], $|J|$ is an open subset of $|D_0|$, so its complement $E=|D_0|\\setminus |J|$ is a closed subset. Since $r$ is closed, $O=|B_0|\\setminus r(E)$ is open. Choose a scheme atlas of $B_0$ as in [def-trf-algebraic-space]; [lem-a1-space-invariant-open-quotient] applied to $O$ constructs an open subspace $V\\subseteq B_0$ with point image $O$. Its composite inclusion into $B$ is open: on any scheme test it is a composite of inclusions of open subschemes. Thus it gives the required kind of open subspace of $B$.",
+   "uses": [
+    "lem-sfb-space-unramified-diagonal-open",
+    "def-trf-algebraic-space",
+    "lem-a1-space-invariant-open-quotient",
+    "def-a1-space-open-subspace",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, open diagonal (Tag 05W1) and the closed-image-complement formula for W (Tag 03BZ)."
+   }
+  },
+  {
+   "text": "For $h:T\\to B_0$, the same test-scheme description of pairs identifies $A_T\\times_{C_T}A_T$ with $D_T=D_0\\times_{B_0}T$ and its diagonal with the pullback of $J\\hookrightarrow D_0$. Its point image is the inverse image of $|J|$ under $\\pi:|D_T|\\to|D_0|$, by [lem-a1-space-open-factor-scheme-tests]. This diagonal is surjective on points exactly when no point of $D_T$ maps into $E$. By the point-lifting assertion of [lem-a1-space-point-open-calculus], a point of $E$ over $h(t)$ lifts to $D_T$ for every $t\\in|T|$ above it. Conversely any such lift projects to that point of $E$ and to a $t$. Hence the diagonal is surjective exactly when $h(|T|)\\cap r(E)=\\varnothing$, equivalently $h(|T|)\\subseteq O$, equivalently $h$ factors through $V$ by open factorization. No closedness after arbitrary base change is used.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-open-factor-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, final point-lifting square (Tag 03H4) and factorization through an open (Tag 03IE), applied to an arbitrary parameter space."
+   }
+  },
+  {
+   "text": "For any map $g:X\\to Y$ of algebraic spaces, its diagonal is surjective on points if and only if $g$ is universally injective. Here is the argument directly from the cited fibre-product and point calculus. If $g$ is universally injective, $\\operatorname{pr}_1:X\\times_YX\\to X$ is injective on points. For $d\\in|X\\times_YX|$, the points $d$ and $\\Delta_g(\\operatorname{pr}_1(d))$ have the same first projection, so they are equal. Conversely suppose $|\\Delta_g|$ is surjective. The point-lifting formula shows that every base change of $\\Delta_g$ is also surjective. For any $Y^\\prime\\to Y$, the diagonal of $g^\\prime:X^\\prime\\to Y^\\prime$ is such a base change by the fibre-product universal property. Given $x_1,x_2\\in|X^\\prime|$ with the same image in $|Y^\\prime|$, point lifting supplies $d\\in|X^\\prime\\times_{Y^\\prime}X^\\prime|$ with these projections. Lift $d$ through the surjective diagonal; both projections of a diagonal point coincide, so $x_1=x_2$. This proves injectivity for every algebraic-space test.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 040X (lemma-universally-injective), equivalence (2)--(3); the short proof is written out using Tag 03H4 rather than adding a duplicate of the general stack criterion."
+   }
+  },
+  {
+   "text": "Let now $h:T\\to B$ be arbitrary. If $f_T$ is unramified and universally injective, step 1 factors $h$ through $B_0$, uniquely since it is a subfunctor. Step 5 makes its diagonal surjective, and step 4 factors this map through $V\\subseteq B_0$. Conversely if $h$ factors through $V$, it factors through $B_0$, so step 1 gives unramifiedness; step 4 gives surjectivity of its diagonal and step 5 gives universal injectivity. The identifications of step 2 show that these are the same induced map $f_T$ as in the statement. This establishes the equivalence for every $T$ and $h$, including the empty parameter space.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05X9, assembly of both implications after restoring the original base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-closed-source-unramified-base-open",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-sfb-space-unramified-diagonal-open",
+  "def-trf-algebraic-space",
+  "lem-a1-space-invariant-open-quotient",
+  "def-a1-space-open-subspace",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 05X9 (lemma-where-unramified-universally-injective); expanded point arguments from Tags 03H4, 03IE and 040X."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces X to Y over Z with X to Z locally finite type and X to Z and X times Y X to Z closed the unramified universally injective base change functor is open in Z",
+   "results": "{\"t\": \"2026-10-23T14:16:25Z\", \"tool\": \"leanfinder\", \"query\": \"For algebraic spaces X to Y over Z with X to Z locally finite type and X to Z and X times Y X to Z closed the unramified universally injective base change functor is open in Z\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.eq\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtTarget\", \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"AlgebraicGeometry.UniversallyOpen.instIsZariskiLocalAtSource\", \"AlgebraicGeometry.UniversallyOpen.universally_isOpenMap\", \"AlgebraicGeometry.UniversallyOpen.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Hom.isOpenMap\"], \"digest\": \"4c2cc0b418171138\"}; The returned declarations concern scheme universally injective maps, scheme diagonals, or the affine unramified locus; none states the parameter-space universal property for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"UniversallyInjective\"",
+   "results": "{\"t\": \"2026-10-23T14:16:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"UniversallyInjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective\", \"AlgebraicGeometry.universallyInjective_isStableUnderComposition\", \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyInjective.respectsIso\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\"], \"digest\": \"361bb984fbaafa35\"}; The returned declarations concern scheme universally injective maps, scheme diagonals, or the affine unramified locus; none states the parameter-space universal property for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|where.*[Uu]nramified|[Uu]nramified.*[Ll]ocus|[Rr]adicial",
+   "results": "{\"t\": \"2026-10-23T14:16:19Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|where.*[Uu]nramified|[Uu]nramified.*[Ll]ocus|[Rr]adicial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned declarations concern scheme universally injective maps, scheme diagonals, or the affine unramified locus; none states the parameter-space universal property for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal unramified and universally injective locus in the parameter base of a morphism of algebraic spaces is open when the source and relative square are closed over the base",
+   "results": "{\"t\": \"2026-10-23T14:16:20Z\", \"tool\": \"leansearch\", \"query\": \"The universal unramified and universally injective locus in the parameter base of a morphism of algebraic spaces is open when the source and relative square are closed over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.recOn\", \"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.UniversallyInjective.mk\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.Scheme.Hom.injective\", \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\"], \"digest\": \"21befc4b8eddbf18\"}; The returned declarations concern scheme universally injective maps, scheme diagonals, or the affine unramified locus; none states the parameter-space universal property for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base locus where a family of maps becomes unramified and radicial is represented by an open subspace provided the source is locally finite type and the source and double product have closed projections",
+   "results": "{\"t\": \"2026-10-23T14:16:23Z\", \"tool\": \"leanfinder\", \"query\": \"The base locus where a family of maps becomes unramified and radicial is represented by an open subspace provided the source is locally finite type and the source and double product have closed projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"Algebra.unramifiedLocus\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\"], \"digest\": \"3a62b7ea302046aa\"}; The returned declarations concern scheme universally injective maps, scheme diagonals, or the affine unramified locus; none states the parameter-space universal property for algebraic spaces.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open locus in the parameter base represents simultaneous unramifiedness and universal injectivity for algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T16:18:08Z\", \"tool\": \"leansearch\", \"query\": \"An open locus in the parameter base represents simultaneous unramifiedness and universal injectivity for algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.unramifiedLocus\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"AlgebraicGeometry.UniversallyInjective.mk\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.UniversallyInjective\", \"Algebra.isOpen_unramifiedLocus\", \"Algebra.etaleLocus_eq_univ_iff\", \"AlgebraicGeometry.FormallyUnramified.recOn\"], \"digest\": \"950b0d52a7020371\"}; Read the returned hits: these are scheme morphisms or affine ring loci, not the asserted result for arbitrary algebraic spaces. In particular FormallyUnramified.isOpenImmersion_diagonal at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126 has scheme source and target.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The open subset of an algebraic space base parametrizing unramified universally injective base changes of a family with closed source and closed relative square",
+   "results": "{\"t\": \"2026-10-23T16:18:09Z\", \"tool\": \"leanfinder\", \"query\": \"The open subset of an algebraic space base parametrizing unramified universally injective base changes of a family with closed source and closed relative square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"9f50f6704beeba5f\"}; Read the returned hits: these are scheme morphisms or affine ring loci, not the asserted result for arbitrary algebraic spaces. In particular FormallyUnramified.isOpenImmersion_diagonal at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126 has scheme source and target.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|where.*[Uu]nramified|[Rr]adicial",
+   "results": "{\"t\": \"2026-10-23T16:18:49Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|where.*[Uu]nramified|[Rr]adicial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: these are scheme morphisms or affine ring loci, not the asserted result for arbitrary algebraic spaces. In particular FormallyUnramified.isOpenImmersion_diagonal at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126 has scheme source and target.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"UniversallyInjective\"",
+   "results": "{\"t\": \"2026-10-23T16:18:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"UniversallyInjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.universallyInjective_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsMultiplicativeSchemeUniversallyInjective\", \"AlgebraicGeometry.universallyInjective_isStableUnderComposition\", \"AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange\", \"AlgebraicGeometry.UniversallyInjective.respectsIso\", \"AlgebraicGeometry.UniversallyInjective\", \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\"], \"digest\": \"361bb984fbaafa35\"}; Read the returned hits: these are scheme morphisms or affine ring loci, not the asserted result for arbitrary algebraic spaces. In particular FormallyUnramified.isOpenImmersion_diagonal at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126 has scheme source and target.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a family A to C over B with A locally finite type over B and A and A times C A closed over B the radicial unramified base-change subfunctor is an open subspace of B",
+   "results": "{\"t\": \"2026-10-23T16:18:53Z\", \"tool\": \"leanfinder\", \"query\": \"For a family A to C over B with A locally finite type over B and A and A times C A closed over B the radicial unramified base-change subfunctor is an open subspace of B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_unramifiedLocus\", \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"Algebra.unramifiedLocus\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\"], \"digest\": \"838d0dd70cb8b5a9\"}; Read the returned hits: these are scheme morphisms or affine ring loci, not the asserted result for arbitrary algebraic spaces. In particular FormallyUnramified.isOpenImmersion_diagonal at Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean:126 has scheme source and target.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-universal-closed-immersion-open",
+  "date": "2026-10-23",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor. In quot-lemma-Mor-into-Hilb-open, application of spaces-more-morphisms-lemma-where-isomorphism to the first projection. Supporting input: Tag 05XA (spaces-more-morphisms-lemma-where-closed-immersion), all three hypotheses and arbitrary algebraic-space parameter changes. Supporting input: Tag 05XA proof: application of lemma-where-unramified-universally-injective after verifying closedness of the source and its relative square.",
+   "via": [
+    "lem-sfb-space-universal-closed-immersion-open",
+    "lem-sfb-space-universal-isomorphism-open",
+    "lem-sfb-space-graphs-open-in-hilbert",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-unramified-radicial-parameter-open",
+  "worker": "stage1",
+  "summary": "Followed Tag 05X9 using the existing algebraic-space unramified parameter locus, the open diagonal, restriction of closed maps to an open base, and explicit point lifting for arbitrary parameter spaces. Added only the general-target open-diagonal input; the elementary diagonal criterion is proved in three point calculations, without a duplicate of the stack criterion. Corrected doubled TeX escapes without changing the mathematical statement.",
+  "blueprint": "The inherited null-ancestor chain refers to det-thm-sf-ctf-stability-direct-images proof (3), the alteration/moduli supporting route; the newest direct-images proof (3) gives the compactification assembly. This supporting item realizes the Tag 05X9 prerequisite of Tag 05XA used in the graph/Hilbert route, as recorded in blueprint.from.place. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "The sheaf fibre-product universal property identifies the relative square and its diagonal under parameter changes; this is generic algebraic-space calculus, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-a1-space-open-factor-scheme-tests",
+    "why": "Pullback of an open has the inverse-image point set and containment gives unique factorization; Tag 05X9 explicitly uses this general tool (03IE)."
+   },
+   {
+    "node": "lem-a1-space-invariant-open-quotient",
+    "why": "Construct the open subspace with the computed open point set, the 03BZ construction explicitly required in Tag 05X9; no separate node of this unit supplies it."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Point lifting to algebraic-space fibre products, Tag 03H4, proves the arbitrary-parameter converse of Tag 05X9; no scheme-only lifting node suffices."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-open-factor-scheme-tests",
+  "lem-a1-space-invariant-open-quotient",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-185552425",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-185552425 (reviewer sub-agent of L); spot-checked: Item = Stacks 05X9 for algebraic spaces with all three hypotheses (p locally of finite type, |p| closed, |p_2| closed); the statement is unchanged from base/live and nothing was weakened. Checked against spaces-more-morphisms.tex 11528-11640, plus 05W1 and 040X in spaces-morphisms.tex. Step 1: lem-sfb-space-closed-source-unramified-base-open states 05X8 exactly, so f_0 is unramified. Step 2: D_0 = D x_B B_0, its point set is the preimage |p_2|^{-1}(|B_0|), and the restricted map r stays closed because r(F) = p_2(F') meets |B_0| in a closed set. Step 3: the new node gives the open J; E is closed and O = |B_0| minus r(E) is open; invariant-open-quotient builds V. Step 4: the diagonal of f_T is the pullback of J; point lifting gives: surjective iff h(|T|) avoids r(E) iff h factors through V. Step 5: 040X (2)<=>(3) done inline and correct. Step 6: assembly; both directions checked, including empty T. FIX (C1): steps 2 and 3 used the fact that the point space of an open subspace is homeomorphic to an open subset without citing it; I added lem-a1-space-point-open-calculus to both steps (it was already in proof_deps). New node lem-sfb-space-unramified-diagonal-open is 05W1(1) with an arbitrary space target. It is true (checked: empty source, identity, finite separable field extension, non-separated doubled-origin line), statement-only and self-contained. It is not a duplicate: lem-sfb-unramified-space-open-diagonal needs a scheme target, lem-sfb-space-unramified-open-diagonal is the converse 05W1(2), and live/side-live have no parallel copy. Batch-5 flags: def-trf-algebraic-space, def-sfb-space-morphism-properties and def-a1-space-open-subspace are definitions; the trf fibre-product node and the a1 03IE/03BZ/03H4 point-calculus nodes are generic algebraic-space foundations that reach sec-trace-formula only through the algebraic-space definition. None is a step of the proof of the trace formula or of Poincare duality, so all are accepted. The four tool_uses (trf fibre products, a1 point-calculus nodes) are inputs named in 05X9's own proof and are accepted. No SGA citation; blueprint null-ancestor chain kept with the via list extended.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceUnramifiedRadicialParameterOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_openSubspace_unramified_radicial_parameter",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.parameterBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.parameterBaseChangeMap",
+   "AlgebraicGeometry.AlgebraicSpace.exists_openSubspace_unramified_radicial_parameter"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceUnramifiedRadicialParameterOpen.lean",
+  "statement": "theorem exists_openSubspace_unramified_radicial_parameter {S : Scheme.{u}} (A C B : AlgebraicSpace S) (p : A ⟶ B) (q : C ⟶ B) (f : A ⟶ C) (w : f ≫ q = p) (hp_lft : MapIsLocally (@LocallyOfFiniteType) p) (hp_closed : ∀ Z : Set (Point A.obj.obj), IsClosed Z → IsClosed {y : Point B.obj.obj | ∃ a : PointRepresentative A.obj.obj, (Quot.mk _ a : Point A.obj.obj) ∈ Z ∧ (Quot.mk _ (a.map p.hom.hom) : Point _) = y}) (hp2_closed : ∀ Z : Set (Point (Limits.pullback f.hom f.hom).obj), IsClosed Z → IsClosed {y : Point B.obj.obj | ∃ d : PointRepresentative (Limits.pullback f.hom f.hom).obj, (Quot.mk _ d : Point (Limits.pullback f.hom f.hom).obj) ∈ Z ∧ (Quot.mk _ (d.map ((pullback.fst f.hom f.hom) ≫ p.hom).hom) : Point _) = y}) : ∃ V : OpenSubspace B, ∀ (T : AlgebraicSpace S) (h : T ⟶ B), (MapIsLocally (@IsUnramified) (parameterBaseChangeMap p q f w h) ∧ ∀ (Y : AlgebraicSpace S) (g : Y ⟶ parameterBaseChange q h) (a b : PointRepresentative (Limits.pullback (parameterBaseChangeMap p q f w h).hom g.hom).obj), (Quot.mk _ (a.map (pullback.snd (parameterBaseChangeMap p q f w h).hom g.hom).hom) : Point Y.obj.obj) = Quot.mk _ (b.map (pullback.snd (parameterBaseChangeMap p q f w h).hom g.hom).hom) → (Quot.mk _ a : Point (Limits.pullback (parameterBaseChangeMap p q f w h).hom g.hom).obj) = Quot.mk _ b) ↔ ∃ l : T.obj.obj ⟶ V.val.toFunctor, l ≫ V.val.ι = h.hom.hom",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Review FIX (2026-10-24): closedness of |p| and |p_2| and universal injectivity of f_T are stated through the point classes Point/PointRepresentative and PointRepresentative.map of the stmt_dep def-a1-space-point-topology (closed sets have closed point images; two representatives with equal image class have equal class), instead of IsClosedMap/Function.Injective of mapPoint, whose owner def-sfb-proper-curve-moduli is not a stmt_dep of the item. Equivalent: mapPoint g (Quot.mk a) is Quot.mk (a.map g) by definition, and every point is a Quot.mk. Nothing else changed.",
+  "fixed_by": "NT-stage2-cc-6d3375ec9"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d3375ec9",
+  "group": "Q02",
+  "result": "fix",
+  "note": "Statement = Stacks 05X9 (spaces-more-morphisms lemma-where-unramified-universally-injective): p lft via MapIsLocally LocallyOfFiniteType, ordinary closedness of |p| and |p∘pr1| on A×_C A, ∃ V : OpenSubspace B, ∀ T h, (MapIsLocally IsUnramified f_T ∧ injectivity on points after every algebraic-space base change) ↔ h factors through V; f_T = canonical pullback.map (real-data helpers parameterBaseChange/Map); single universe u; sorry-only proof; 6-step docstring; edge cases (empty T/A/B, identity, separable extension) fine. H2 FIX: IsClosedMap/Function.Injective of mapPoint (owner def-sfb-proper-curve-moduli, not a stmt_dep) restated equivalently via Point/PointRepresentative.map of stmt_dep def-a1-space-point-topology (closed sets have closed representative images; equal image classes ⇒ equal classes), Limits.pullback written explicitly. Complete module + lean-record (statement verbatim) in fixes/; nt_compile --json exit 0, 3.4 s, no warnings."
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "lem-zl-finite-restriction-strict-transport",
+ "kind": "statement",
+ "title": "Strict counit diagrams under semilinear isomorphism transport",
+ "statement": "Fix a prime ell, a finite coefficient extension E/Q_ell, a field k and a semilinear diagram G as in [def-zl-finite-restriction-diagram-models]. The actual source, middle and sum transport natural transformations are isomorphisms. For every cochain complex T of strict coefficient systems on X', the exchange and restriction squares commute as entire complex maps. No assertion about completion, constructible vertices, coefficient extensions or point sections is made. In particular this applies without finiteness of f and f', and includes an empty point set.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+  "place": "Finite-stalk formula and Frobenius-permutation sentences; semilinear diagram refinement, parent proof steps 1--6."
+ },
+ "stmt_deps": [
+  "def-zl-finite-restriction-diagram-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact inverse-image equivalences along u,w,c and the fibre-product isomorphism. Their inverse relabellings give inverses of the normalized direct-image mates. Pullback along c preserves products; reindex by points and apply stalk on each projection to prove that sum is invertible. Empty products are terminal objects and the same universal-property argument applies.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the two composites of the exchange square under the h-adjunction. Expand each mate as the pullback of the f-counit. Geometry identifies the scheme paths and counit naturality identifies the composites. The adjunction bijection is injective, giving equality on strict systems and hence on their termwise complexes.",
+   "uses": [
+    "lem-zl-finite-counit-restriction-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose both paths of the restriction square with every product projection. The component is pullback of the h-counit. point_paths identifies the two fibre sections; counit naturality identifies the components. The defining projection equation of sum and product extensionality give the square on entire system complexes.",
+   "uses": [
+    "lem-zl-finite-counit-restriction-towers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-zl-finite-counit-restriction-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+  "place": "Finite-stalk formula and Frobenius-permutation sentences; semilinear diagram refinement, parent proof steps 1--6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of finite geometric fibre base change counit and restriction maps under isomorphisms",
+   "results": "TopCat.Presheaf.map_restrict, Scheme.Modules.restrictFunctorAdjCounitIso, finite base change stability. These concern ordinary presheaf restrictions or geometry, not the specified strict coefficient systems.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of base change and counit under isomorphisms of commutative squares, pullback geometric fibre point permutation",
+   "results": "CategoricalPullback.CatCommSqOver.iso_hom_naturality and Scheme.Pullback comparison lemmas; none states the coefficient-system comparison or completed constructibility.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|pullback.mapIso|CommSq.map",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates supplies mateEquiv and its counit identities; Mathlib.CategoryTheory.CommSq supplies functorial preservation. No theorem about these strict coefficient-system arrows or constructibility. Searched DAG and Sheaf/WeilConjectures: no duplicate of the two argument steps; the completed Frobenius germ square is a different specialized statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRestrictionDiagramNaturality",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "Finite-stalk formula and Frobenius-permutation sentences; semilinear diagram refinement, parent proof steps 1--6.",
+   "via": [
+    "lem-zl-finite-restriction-diagram-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRestrictionStrictTransport",
+  "file": "lean/Sheaf/Paper/FiniteRestrictionStrictTransport.lean",
+  "declaration": "WeilConjectures.FiniteRestrictionNaturality.finiteRestrictionStrictTransport",
+  "statement": "theorem finiteRestrictionStrictTransport\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {k : Type u} [Field k] (G : Diagram k) :\n    IsIso (source l E G) ∧ IsIso (middle l E G) ∧ IsIso (sum l E G) ∧\n    ∀ T : CochainComplex (coefficientSequenceModules l E G.X') ℤ,\n      (exchangeSquare l E G T).Commutes ∧ (restrictionSquare l E G T).Commutes",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0bdbb",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164232-L-976036",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0bdbb",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164232-L-976036",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs split nodes strict-transport/constructible-vertices; relocated Models block vs published FiniteRestrictionDiagramNaturality (identical bar docstring tags); node proof_deps vs Lean uses"
+ }
+}

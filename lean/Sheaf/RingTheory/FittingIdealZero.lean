@@ -1,6 +1,13 @@
-import Sheaf.RingTheory.PresentationFittingIdeal
-import Mathlib.RingTheory.Finiteness.Cardinality
-import Mathlib.RingTheory.Finiteness.Prod
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group D5
+-/
+module
+
+public import Sheaf.RingTheory.PresentationFittingIdeal
+public import Mathlib.RingTheory.Finiteness.Cardinality
+public import Mathlib.RingTheory.Finiteness.Prod
 
 /-!
 # Zeroth Fitting ideal of a finite module
@@ -10,6 +17,8 @@ Source: Stacks Project, More on Algebra, Tags 07Z8 and 07ZA (blueprint: def-trf-
 This module chooses a finite free surjection and takes its zeroth kernel-minor ideal.  The
 recorded presentation-independence theorem makes this choice independent of the surjection.
 -/
+
+@[expose] public section
 
 universe u v
 

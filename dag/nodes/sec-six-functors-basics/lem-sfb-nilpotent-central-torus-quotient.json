@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-nilpotent-central-torus-quotient",
+ "kind": "statement",
+ "title": "Central torus and unipotent quotient of a smooth connected nilpotent group",
+ "statement": "Let $k$ be a field [def-weil-field], and fix an algebraic closure $\\bar k$ [def-weil-algebraic-closure]. All groups below are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]; subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group which becomes $\\mathbf G_m^r$ over $\\bar k$, for some integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Unipotent means admitting, for some $n\\geq1$, a closed immersion [def-weil-closed-immersion] into the upper unitriangular group $\\mathcal U_{n,k}\\subseteq\\operatorname{GL}_{n,k}$ [def-sc-general-linear-group]: its $A$-points are upper triangular matrices with all diagonal entries $1$, for every commutative $k$-algebra $A$. Let $G$ be smooth, connected and nilpotent, where nilpotent means that there is a finite descending series of closed normal subgroup schemes $G=G_0\\supseteq G_1\\supseteq\\cdots\\supseteq G_s=1$ such that commutators of $G$ with $G_i$ land in $G_{i+1}$ after every commutative algebra extension. There exist a central torus $T\\subseteq G$, a smooth connected unipotent affine group $Q$, and a faithfully flat homomorphism $q:G\\to Q$ whose scheme-theoretic kernel is $T$ and which represents the fppf quotient $G/T$. Here the quotient is the sheafification of $A\\mapsto G(A)/T(A)$ for faithfully flat finitely presented coverings. If $T=1$, then $q$ is an isomorphism. No perfectness assumption on $k$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.47(a),(c), printed p.341, as used in the first case of the proof of Proposition 17.81, p.379; Theorem 14.5(a),(b), pp.281–282. Quotient by the central smooth torus is the represented fppf quotient (Proposition 5.25, Corollary 5.26, Theorem 5.28 and Proposition 5.29, p.105)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-fppf-group-quotient-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Take the closed commutative centre $Z=Z(G)$ from [lem-sfb-affine-group-centre-base-change]. Apply [lem-sfb-commutative-multiplicative-part] to $C=Z$, and put $T=Z_s$. Thus $T$ is of multiplicative type and central, hence normal in $G$. By [lem-sfb-affine-normal-quotient-geometry], form $q:G\\to Q=G/T$, an affine finite-type represented fppf quotient with kernel $T$, faithfully flat and finitely presented.",
+   "uses": [
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sfb-commutative-multiplicative-part",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 16.13(a), p.328, and 16.47(a), p.341; Propositions 5.25–5.29, p.105."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nilpotent-quotient-unipotent-centre] to $G$, $D=T$, and this quotient: $G$ is connected and nilpotent by hypothesis, and $T$ contains every multiplicative-type subgroup of $Z(G)$ by its construction. It gives that $Q$ is connected and nilpotent and $Z(Q)$ is unipotent. Therefore [lem-sfb-nilpotent-unipotent-centre] gives a closed immersion $Q\\hookrightarrow\\mathcal U_{m,k}$ for some $m\\geq1$. The smoothness clause of [lem-sfb-affine-normal-quotient-geometry] makes $Q$ smooth because $G$ is smooth.",
+   "uses": [
+    "lem-sfb-nilpotent-quotient-unipotent-centre",
+    "lem-sfb-nilpotent-unipotent-centre",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemmas 16.45–16.46 and Theorem 16.47(a), pp.340–341; Corollary 5.26, p.105."
+   }
+  },
+  {
+   "text": "Put $F=\\bar k$. Smooth base change [lem-pc-proper-base-change](2) makes $G_F$ smooth. Its identity is a $k$-rational point, so [lem-sbc-connected-rational-point-geometrically-connected] makes $G_F$ connected. The base-changed central series is still central on every $F$-algebra. Each factor is commutative since $[G_i,G_i]\\subseteq[G,G_i]\\subseteq G_{i+1}$, so $G_F$ is solvable. Lie–Kolchin [lem-sfb-lie-kolchin-triangular-embedding] gives a closed immersion $G_F\\hookrightarrow B_n$. Apply [lem-sfb-triangular-diagonal-kernel]: its diagonal quotient $d:G_F\\to D$ has kernel $V\\subseteq U_n$, a group section $s:D\\to G_F$, and $D$ is a smooth connected closed subgroup of $\\mathbf G_m^n$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-triangular-diagonal-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.47(c), p.341; Theorem 16.30, pp.334–335; Theorem 16.26(a) and Corollary 16.33, pp.332–336."
+   }
+  },
+  {
+   "text": "By [lem-sfb-split-torus-subgroups-diagonalizable], write $D\\simeq D_F(M)$. The closed immersion of $Q$ into $\\mathcal U_m$ from step 2 remains a closed immersion over $F$: on coordinate rings, a surjection stays surjective after tensoring with $F$. Hence [lem-sfb-diagonalizable-to-unipotent-trivial] applied to $q_Fs:D\\to Q_F$ gives $q_Fs=1$. Its image therefore lies in $\\ker q_F=T_F$ (kernels commute with base change by the defining fibre-product equation). Thus $s$ factors as $j:D\\to T_F$ and $(d|_{T_F})j=1_D$.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-sfb-diagonalizable-to-unipotent-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 14.18(b), p.284, in the triangular realization used for Theorem 16.47(c)."
+   }
+  },
+  {
+   "text": "The kernel $I$ of $d|_{T_F}$ is the closed intersection $T_F\\cap V$. Since $V\\subseteq U_n$, also $I\\subseteq U_n$, so $I$ is unipotent directly from its closed immersion. The target $T_F$ is of multiplicative type by step 1. Apply [lem-sfb-unipotent-to-multiplicative-trivial] to the inclusion $I\\to T_F$: it is trivial. As that inclusion is injective on every algebra, $I(A)=\\{1\\}$ for every $F$-algebra $A$. For $t\\in T_F(A)$ the element $t\\,j(d(t))^{-1}$ lies in $I(A)$; hence $t=j(d(t))$. These equalities are natural in $A$ and prove that $j$ and $d|_{T_F}$ are inverse group-scheme morphisms.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollaries 14.17–14.18, p.284; explicit complementary-factor calculation underlying Lemma 16.44, p.340."
+   }
+  },
+  {
+   "text": "Thus $T_F\\simeq D$. The group $D$ is smooth, connected and a closed subgroup of a split torus, so [lem-sfb-multiplicative-type-largest-subtorus] makes it a torus. Over the algebraically closed field $F$, its torus definition says $D\\simeq\\mathbf G_m^r$ for some $r\\geq0$. Therefore $T_F\\simeq\\mathbf G_m^r$, which is precisely the torus condition on $T$ over $k$. Together with steps 1–2 this proves the asserted central torus and smooth connected unipotent fppf quotient, without perfectness of $k$.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.47(c), p.341, and Definition 12.14, p.236."
+   }
+  },
+  {
+   "text": "If $T=1$, the presheaf $A\\mapsto G(A)/T(A)$ is exactly $A\\mapsto G(A)$. Since $q$ represents its fppf sheafification and the represented group functor is already an fppf sheaf, its sheafification map is an isomorphism. Thus $q$ is an isomorphism of represented functors, hence of group schemes.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 5.20, p.104; Section 5(j), pp.116–118; the defining universal property of the represented quotient."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sfb-commutative-multiplicative-part",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-nilpotent-quotient-unipotent-centre",
+  "lem-sfb-nilpotent-unipotent-centre",
+  "lem-pc-proper-base-change",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-lie-kolchin-triangular-embedding",
+  "lem-sfb-triangular-diagonal-kernel",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-diagonalizable-to-unipotent-trivial",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-multiplicative-type-largest-subtorus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.47(a),(c), pp.340–341. The smoothness argument is written through the triangular quotient after algebraic closure, using the same Lie–Kolchin input and complementary-factor calculation as 16.47(c) and 16.44."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected nilpotent affine algebraic group over any field has a central torus with unipotent quotient",
+   "results": "{\"t\": \"2026-10-24T04:58:34Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected nilpotent affine algebraic group over any field has a central torus with unipotent quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_center_quotient_ind\", \"of_quotient_center_nilpotent\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"Group.IsNilpotent.nilpotent\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"nilpotencyClass_quotient_center\"], \"digest\": \"74eb4742803fc69e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central-quotient induction and abstract Lie-algebra Cartan results provide neither a group-scheme torus nor a unipotent fppf quotient; the Loogle hits concern nilpotent functions on schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The largest multiplicative type subgroup of a smooth connected nilpotent algebraic group is a torus and the quotient is unipotent",
+   "results": "{\"t\": \"2026-10-24T04:58:36Z\", \"tool\": \"leanfinder\", \"query\": \"The largest multiplicative type subgroup of a smooth connected nilpotent algebraic group is a torus and the quotient is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"UnitAddTorus\", \"nilpotent_center_quotient_ind\", \"of_quotient_center_nilpotent\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"nilpotent_quotient_of_nilpotent\", \"Subgroup.connectedComponentOfOne\", \"TopologicalAbelianization\"], \"digest\": \"ce16208a79fbc6e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central-quotient induction and abstract Lie-algebra Cartan results provide neither a group-scheme torus nor a unipotent fppf quotient; the Loogle hits concern nilpotent functions on schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T04:58:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNilpotent\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover\", \"AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot_of_isCompact\", \"AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot\"], \"digest\": \"0098726842ddcb84\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central-quotient induction and abstract Lie-algebra Cartan results provide neither a group-scheme torus nor a unipotent fppf quotient; the Loogle hits concern nilpotent functions on schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*torus|torus.*unipotent|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T04:58:33Z\", \"tool\": \"grep\", \"query\": \"nilpotent.*torus|torus.*unipotent|multiplicative.type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Group/TypeTags/Hom.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\"], \"digest\": \"1cd07479a7dcbe48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central-quotient induction and abstract Lie-algebra Cartan results provide neither a group-scheme torus nor a unipotent fppf quotient; the Loogle hits concern nilpotent functions on schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth connected nilpotent affine algebraic group over any field has a central torus with unipotent quotient",
+   "results": "{\"t\": \"2026-10-24T04:58:33Z\", \"tool\": \"leansearch\", \"query\": \"A smooth connected nilpotent affine algebraic group over any field has a central torus with unipotent quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_center_quotient_ind\", \"nilpotencyClass_eq_quotient_center_plus_one\", \"LieAlgebra.nilpotent_of_nilpotent_quotient\", \"nilpotencyClass_quotient_center\", \"Group.IsNilpotent.nilpotent\", \"commGroupOfNilpotencyClass\", \"LieAlgebra.non_trivial_center_of_isNilpotent\", \"of_quotient_center_nilpotent\"], \"digest\": \"cec7de90498d7329\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group central-quotient induction and abstract Lie-algebra Cartan results provide neither a group-scheme torus nor a unipotent fppf quotient; the Loogle hits concern nilpotent functions on schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*torus|torus.*unipotent|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T07:04:06Z\", \"tool\": \"grep\", \"query\": \"nilpotent.*torus|torus.*unipotent|multiplicative.type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Group/TypeTags/Hom.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\"], \"digest\": \"1cd07479a7dcbe48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Central torus with unipotent quotient for a smooth connected nilpotent group",
+   "results": "{\"t\": \"2026-10-24T07:04:07Z\", \"tool\": \"leansearch\", \"query\": \"Central torus with unipotent quotient for a smooth connected nilpotent group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_center_quotient_ind\", \"nilpotent_quotient_of_nilpotent\", \"Group.IsNilpotent.nilpotent\", \"upperCentralSeries_nilpotencyClass\", \"Group.IsNilpotent.rec\", \"of_quotient_center_nilpotent\", \"Group.IsNilpotent\", \"upperCentralSeries_eq_top_iff_nilpotencyClass_le\"], \"digest\": \"b9717b8642f9d127\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T07:04:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNilpotent\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover\", \"AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot_of_isCompact\", \"AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot\"], \"digest\": \"0098726842ddcb84\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected nilpotent affine algebraic group has a central torus and unipotent fppf quotient",
+   "results": "{\"t\": \"2026-10-24T07:04:17Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected nilpotent affine algebraic group has a central torus and unipotent fppf quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_center_quotient_ind\", \"LieAlgebra.nilpotent_of_nilpotent_quotient\", \"of_quotient_center_nilpotent\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"isNilpotent_of_ker_le_center\", \"TrivSqZeroExt.isUnit_or_isNilpotent_of_isMaximal_isNilpotent\", \"CommGroup.nilpotencyClass_le_one\", \"commGroupOfNilpotencyClass\"], \"digest\": \"005f1324c88f1c6d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nilpotent group variety over an imperfect field is a central extension of a unipotent group by a torus",
+   "results": "{\"t\": \"2026-10-24T07:04:18Z\", \"tool\": \"leanfinder\", \"query\": \"Nilpotent group variety over an imperfect field is a central extension of a unipotent group by a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNilpotent_of_ker_le_center\", \"nilpotent_center_quotient_ind\", \"nilpotencyClass_le_of_ker_le_center\", \"of_quotient_center_nilpotent\", \"Group.IsNilpotent.nilpotent\", \"Group.IsNilpotent.nilpotent'\", \"commGroupOfNilpotencyClass\", \"Group.isNilpotent_iff\"], \"digest\": \"9c23f4bb144ba055\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+  "date": "2026-10-24",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Theorem 16.47(a),(c), printed p.341, as used in the first case of the proof of Proposition 17.81, p.379; Theorem 14.5(a),(b), pp.281–282. Quotient by the central smooth torus is the represented fppf quotient (Theorem 5.28, p.110).",
+   "via": [
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nilpotent-central-torus-quotient",
+  "worker": "stage1",
+  "summary": "Read Milne 16.13(a), 16.43–16.47 and 14.17–14.18. Added three statement-only inputs: commutative multiplicative part and field extension, centre reduction, and the unipotent-centre criterion. Reused quotient geometry and triangularization, and proved the smooth central multiplicative part is a torus on all algebra points after algebraic closure. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Theorem 16.47(a),(c), printed p.341, as used in the first case of the proof of Proposition 17.81, p.379; Theorem 14.5(a),(b), pp.281–282. Quotient by the central smooth torus is the represented fppf quotient (Theorem 5.28, p.110). This split realizes the Milne 16.47 supporting prerequisite through 16.13(a), 16.45–16.46 and the algebraic-closure triangular argument. Latest blueprint direct-image proof (3) remains the overarching route; blueprint_refs ancestor returns None for this existing chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), stability of scheme smoothness under field base change, is used as a generic geometric tool."
+   },
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "A connected group has its identity as a rational point; this generic geometric connectedness lemma is needed for G over its algebraic closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-4f56ff7d9",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-4f56ff7d9 (reviewer sub-agent of L); spot-checked: I read Milne, Algebraic Groups: 16.13(a),(b) and Note 16.17 (p.328–329), and 16.43–16.48 (pp.340–341). The item is 16.47(a)+(c) for smooth G. Its statement is unchanged, and this is a first split, not a 2026-10-21 re-split. Step 1: T=Z(G)_s, using the centre node and new node 16.13(a), and the quotient node gives q with kernel T. Step 2: new node 16.45, then new node 16.46, make Q unipotent; the quotient node's smoothness clause makes Q smooth. Step 3: over k̄, G is smooth and connected (tool uses: smooth base change, identity rational point). Nilpotent implies solvable, written out against the Lie–Kolchin node's definition. Lie–Kolchin plus the triangular diagonal-kernel node give V, D and the section s. Step 4: D is diagonalizable, Q_F embeds in U_m, so q_F∘s=1 and s factors through T_F. Step 5: T_F∩V is unipotent and multiplicative, hence trivial, and the t·j(d(t))^{-1} computation gives T_F≅D. Step 6: D is a smooth connected subgroup of a split torus, so it is a torus, hence T is a torus. Step 7: elementary. I checked every hypothesis. The new nodes are 16.13(a) with field extension, 16.45 and 16.46. All three are true over any field without smoothness, and I tested them on G_m, G_a, μ_p, α_p, μ_p×α_p and U_n. None restates the item or one of its clauses. A DAG-wide and blueprint search found no duplicate; the commutative product node covers only algebraically closed fields, and the subtorus node is a different statement. There is no cycle. I accept the two generic tool_uses (precedent: central-extension-of-tori). Batch-5: all five flagged citations are algebraic-group lemmas. Their closure reaches trf only through generic descent and flatness nodes (scheme-cover descent datum, fppf covering base change, flat tensor injection, smooth fpqc descent). These are not trace-formula or Poincaré-duality steps, so I accept them. Cosmetic: the new nodes' inherited from.place gives p.110 for Thm 5.28 while the item source says p.105. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NilpotentCentralTorusQuotient",
+  "declaration": "AlgebraicGeometry.nilpotent_central_torus_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NilpotentCentralTorusQuotient.lean",
+  "statement": "theorem nilpotent_central_torus_quotient (k : Type u) [Field k] (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (hseries : ∃ (s : ℕ) (H : Fin (s + 1) → Grp (Over (Spec (.of k)))) (i : ∀ j : Fin (s + 1), H j ⟶ G), (∀ j : Fin (s + 1), IsClosedSubgroupScheme (i j).hom.hom ∧ IsNormalSubgroupScheme (i j).hom.hom) ∧ IsIso (i 0) ∧ Nonempty (H (Fin.last s) ≅ Grp.trivial _) ∧ (∀ j : Fin s, ∃ l : H j.succ ⟶ H j.castSucc, l ≫ i j.castSucc = i j.succ) ∧ ∀ (j : Fin s) (A : Type u) [CommRing A] [Algebra k A] (g : StandardGroupSchemes.affine k A ⟶ G.X) (h : StandardGroupSchemes.affine k A ⟶ (H j.castSucc).X), ∃ z : StandardGroupSchemes.affine k A ⟶ (H j.succ).X, z ≫ (i j.succ).hom.hom = g * (h ≫ (i j.castSucc).hom.hom) * g⁻¹ * (h ≫ (i j.castSucc).hom.hom)⁻¹) : ∃ (T Q : Grp (Over (Spec (.of k)))) (iT : T ⟶ G) (q : G ⟶ Q), IsAffine T.X.left ∧ LocallyOfFiniteType T.X.hom ∧ QuasiCompact T.X.hom ∧ IsClosedSubgroupScheme iT.hom.hom ∧ MultiplicativeType.IsTorus T ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (t : StandardGroupSchemes.affine k A ⟶ T.X) (g : StandardGroupSchemes.affine k A ⟶ G.X), Commute (t ≫ iT.hom.hom) g) ∧ IsAffine Q.X.left ∧ LocallyOfFiniteType Q.X.hom ∧ QuasiCompact Q.X.hom ∧ Smooth Q.X.hom ∧ ConnectedSpace Q.X.left ∧ (∃ n : ℕ, 0 < n ∧ ∃ r : Q.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k, IsClosedSubgroupScheme r ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (x : (Spec (.of A)).asOver (Spec (.of k)) ⟶ Q.X), (∀ a : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (x ≫ r)).val ⟨a⟩ ⟨a⟩ = 1) ∧ ∀ a b : Fin n, b < a → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (x ≫ r)).val ⟨a⟩ ⟨b⟩ = 0) ∧ Flat q.hom.hom.left ∧ Surjective q.hom.hom.left ∧ IsFppfGroupQuotient iT q ∧ (Nonempty (T ≅ Grp.trivial _) → IsIso q)",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Nilpotence and unitriangular unipotence are expanded verbatim as a closed normal series and equations on all commutative algebra points. Uses the existing torus and full fppf quotient predicates, including its kernel square and sheafification universal property. No perfectness hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d5808eb2",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Read item, all 12 stmt_dep records, module, report; checked IsSubgroupScheme/IsClosed/IsNormal (Defs.lean), GeneralLinearGroup.homMulEquiv, StandardGroupSchemes.affine, IsTorus (base change to AlgebraicClosure ≅ splitTorus n), IsFppfGroupQuotient (kernel pullback, fppf local surjectivity, torsor iso, coset coequalizer sheafification UP). Clause-by-clause match with node/Milne 16.47(a),(c), 14.5, 5.25-5.29: closed normal series with pointwise commutator containment, central closed torus, affine f.t. smooth connected Q with closed GL_n embedding satisfying unitriangular equations on all algebras (n>0), flat+surjective q, fppf quotient, T=1 ⇒ IsIso q. No extra hypotheses; universe u bound. lean.statement verbatim; item JSON differs from live only by two landed def stmt_deps actually used and lean. No hollow defs, sorry only, docstrings with source and blueprint tag and 7 proof steps; report sections present. Edge cases G=1, torus, unipotent, imperfect k ok. No compile (no file changed). No findings."
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "def-trf-etale-presented-recovery-coordinates",
+ "kind": "definition",
+ "title": "Coordinates for local recovery of etale module presentations",
+ "statement": "For a scheme $T$ [def-pc-scheme] and its Zariski and small etale ringed sites [lem-trf-zariski-etale-tensor-sections], define restriction to an etale chart $U$ by pushforward along the localization equivalence with the identity ring map. Define the free comparison as the adjoint of the free generator sections. For two equal structure maps define the identity-underlying-scheme isomorphism. Given a quasi-coherent $F$ [pqf-def-coherent], a tensor comparison and $b:L_U F\\simeq G|_U$, define the local section map on a test overlap by tensor-pullback composition, then the inverse tensor comparison, then $b$, and finally the equality transport. The canonical overlap comparison of pullbacks of one global module is the composite of its two tensor-composition isomorphisms [def-pc-module-pullback]. These are the existing five coordinate definitions formerly in the effective recovery module, unchanged.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof of part (2): lift local presentations to cokernels, produce the overlap cocycle, apply effective descent, and glue the resulting maps."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-trf-space-quasi-coherent-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Fully faithful tensor extension lifts a presentation by free modules to a quasicoherent cokernel and compatible local comparisons",
+   "results": "SheafOfModules.presentationOfIsCokernelFree, QuasicoherentData.presentation, quasicoherentDataOfIsFinitePresentation; these package presentations but do not lift along change of topology.",
+   "date": "2026-10-26",
+   "verdict": "No direct recovery construction; the existing free-presentation/Hom theorem remains the tool."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasicoherent module on the small etale site is recovered by restriction to the Zariski site and effective descent of free presentations",
+   "results": "SheafOfModules.QuasicoherentData and its presentation/local-generators projections.",
+   "date": "2026-10-26",
+   "verdict": "Local presentations alone do not construct compatible Zariski cokernels or their descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit",
+   "results": "Adjunction.homEquiv, left_triangle_components, right_triangle_components and toEquivalence.",
+   "date": "2026-10-26",
+   "verdict": "The Hom equivalence and triangle identities supply the final formal argument; not the local recovery or descent."
+  },
+  {
+   "tool": "grep",
+   "query": "EtalePresentedRecovery|etalePresentedModule_effectiveRecovery|isIso_counit_app; rg in Mathlib, lean/WeilConjectures, lean/Sheaf, DAG; blueprint_refs search etale presented",
+   "results": "The assigned module is the only recovery datum. Existing declarations are isQuasicoherent_cokernel, isQuasicoherent_sigma, exists_isQuasicoherent_toDescentData_iso, existsUnique_hom_of_cover, Hom.isIso_iff_isIso_app. No imported blueprint node matches etale presented.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing dependency declarations for the two genuine construction steps, and prove the adjunction tail directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtalePresentedModuleEffectiveRecovery",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 03DX recovery argument below the section-algebra change of topology: Coordinates for local recovery of etale module presentations",
+   "via": [
+    "lem-trf-etale-presented-module-effective-recovery",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtalePresentedRecoveryData",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePresentedRecoveryData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.presentedEtaleRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.presentedEtaleRestriction",
+   "AlgebraicGeometry.Scheme.Modules.presentedEtaleFreeMap",
+   "AlgebraicGeometry.Scheme.Modules.presentedEtaleSameObject",
+   "AlgebraicGeometry.Scheme.Modules.presentedEtaleLocalMap",
+   "AlgebraicGeometry.Scheme.Modules.presentedTensorOverlap"
+  ],
+  "statement": "def presentedEtaleRestriction {T : Scheme.{u}} (U : T.Etale) : SmallEtaleModules T ⥤ SmallEtaleModules U.left",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-89aa1",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T091709-L-3365885",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-89aa1",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261026T091709-L-3365885",
+  "kind": "interface",
+  "note": "independent cc review: item theorem + EtalePresentedRecovery unchanged vs clone; new Local/Descent structures = verbatim field subsets of EtalePresentedRecovery; moved defs verbatim vs published; item node vs proof as written"
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "id": "def-sf-finite-free-hom-evaluation-coordinates",
+ "kind": "definition",
+ "title": "Canonical finite-free internal Hom evaluation coordinates",
+ "status": "split",
+ "statement": "Use the ordinary small-etale derived module categories [def-weil-pbc-derived-categories], their published closed internal Hom [def-pur-derived-internal-hom] and derived scalar extension [lem-pur-derived-change-of-rings]. In a monoidal closed category with finite products, for vectors $e_i:1\\to K$, $i\\in\\mathrm{Fin}(t)$, define $\\operatorname{coord}_{e,N}:H(K,N)\\to\\prod_iN$ by component $\\operatorname{ev}\\circ(e_i\\otimes1)\\circ\\lambda^{-1}$. On a scheme $T$ and commutative coefficient ring $R$, use the standard constant-sheaf functor and its canonical derived unit identification $1\\simeq R_T[0]$. The standard vectors $R_T[0]\\to(R^t)_T[0]$ are constant-sheaf images of $a\\mapsto a e_i$, placed in degree zero. Transport them through a chosen trivialization $K\\simeq(R^t)_T[0]$, then use the preceding coordinates. Rank zero uses the empty product. These definitions specify maps, without asserting invertibility or making an arbitrary choice of coordinates.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pur-derived-internal-hom",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Paragraphs 2–3: finite-free internal Hom and standard-basis evaluation"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Cc]oordinates|[Cc]oordinates.*[Hh]om|[Ss]tandard[Bb]asis.*[Hh]om",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no exact derived etale evaluation-coordinate definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "ihom.unitIsoSelf, Pi.lift, LinearMap.single",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'ihom.unitIsoSelf'",
+   "date": "2026-10-22",
+   "verdict": "no exact derived etale evaluation-coordinate definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite free derived internal Hom coordinates evaluation at standard basis",
+   "results": "[leanfinder] OK 8 hit(s); FGModuleCat.FGModuleCatCoevaluation_apply_one, coevaluation_apply_one, coevaluation, ModuleCat.freeHomEquiv_apply, fromModuleCatToModuleCatLinearEquiv_apply, ModuleCat.freeHomEquiv, dualTensorHomEquivOfBasis_apply, dualTensorHomEquivOfBasis_toLinearMap",
+   "date": "2026-10-22",
+   "verdict": "no exact derived etale evaluation-coordinate definition"
+  },
+  {
+   "tool": "grep",
+   "query": "rg evaluationCoordinates|HomCoordinates|StandardBasis|standardBasis in lean/WeilConjectures/SixFunctors/Etale/Derived and lean/Sheaf/Paper; rg -l evaluation coordinates|standard-basis evaluation|finite-free.*coordinates dag/nodes; blueprint_refs.py search finite-free Hom",
+   "results": "No exact etale evaluation-coordinate definition. Existing rational Hom coordinates concern rationalization; lem-sf-ringed-finite-free-hom-coordinates concerns a finite-free scalar R-to-S extension, not Hom out of a finite-free first argument. Read its statement and record. blueprint search returned lem-sf-hom-comparison-finite-free, a theorem rather than this definition.",
+   "date": "2026-10-22",
+   "verdict": "new helper definition needed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite free derived internal Hom evaluation coordinates on the small etale site",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.ihom.ev, AlgebraicGeometry.Scheme.evaluation, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv, SheafOfModules.unitHomEquiv_apply_coe, AlgebraicGeometry.Scheme.evaluation_naturality_assoc, FGModuleCat.FGModuleCatEvaluation",
+   "date": "2026-10-22",
+   "verdict": "Reused ihom.ev; ordinary free-sheaf Hom equivalences do not give the derived coordinate map."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-etale-lisse-hom-reduction",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraphs 2–3: standard-basis finite-free evaluation coordinates",
+   "via": [
+    "lem-coef-etale-lisse-hom-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFreeHomEvaluationCoordinates",
+  "declaration": "WeilConjectures.lisseHomCoordinatesRing",
+  "declarations": [
+   "WeilConjectures.lisseHomModuleDerivedCategory",
+   "WeilConjectures.lisseHomEvaluationCoordinates",
+   "WeilConjectures.lisseHomConstantFunctor",
+   "WeilConjectures.lisseHomConstantUnitIso",
+   "WeilConjectures.lisseHomStandardBasis",
+   "WeilConjectures.lisseHomCoordinatesGeneral",
+   "WeilConjectures.lisseHomCoordinatesRing",
+   "WeilConjectures.lisseHomTransportBasis",
+   "WeilConjectures.lisseHomTrivializedBasis"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFreeHomEvaluationCoordinates.lean",
+  "statement": "def lisseHomCoordinatesRing (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) (t : ℕ) (K N : Etale.DerivedCategoryModule R T) (basis : Fin t → ((_root_.DerivedCategory.singleFunctor _ 0).obj ((lisseHomConstantFunctor R T).obj (ModuleCat.of R R)) ⟶ K)) : ((Etale.derivedHom (ModuleCat.{u + 1} R) T).obj (op K)).obj N ⟶ ∏ᶜ (fun _ : Fin t ↦ N)",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586601c33",
+  "group": "Q143",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586601c33",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Re-delivery after the 20565c32 RETURN (H2, three ownership points), all repaired. (1) The item and def-sf-finite-free-hom-local-calculation cite the existing:true owner def-pur-etale-scalar-pullback-iso instead of the theorem lem-pur-etale-scalar-mate-projection. (2) lem-sf-flat-model is replaced by the new existing:true def-sf-etale-bounded-flat-complex; its statement matches FlatModel.lean IsBoundedFlatComplex (Λ in u+1, X in u, arbitrary a,b, IsZero outside, flat terms), and the local-calculation module adds the public import, the only Lean change. (3) New existing:true def-sf-etale-site-perfect-complex matches SitePerfect.lean IsSitePerfect (étale cover, per-member bounds, retracts of constant Fin m → Λ, L f^* K ≅ Q P). No other DAG node owns either declaration (scan of live and side-live). New nodes' stmt_deps equal their citations; lean.statement fields are verbatim. The item changes only lean and stmt_deps (adds 6 def nodes, loses none, adds no theorem). The other changed dep records equal side-live (Q84/Y7 base movement). Theorem and coordinate modules are byte-identical to the returned head, whose mathematics was checked clause by clause and re-read: index shift, projective L, Tor intervals [a,b+2dX+1] and [a-2dS,b+2dX+1+2dS], both ctf endpoints, IsIso of the canonical etaleFiniteHomCanonical, local evaluation identity including t=0, restriction square. sorry only in the theorem; no hollow defs; no pro-étale substitute. Not compiled (no file changed). Advisory: Lean-file source.document on the ownership nodes; the item imports the old Hom/change-of-rings modules, which the rebound Q84 modules re-export; the unused inherited def-weil-site-perfect-complex stmt_dep; the second reading was by the same worker."
+ }
+}

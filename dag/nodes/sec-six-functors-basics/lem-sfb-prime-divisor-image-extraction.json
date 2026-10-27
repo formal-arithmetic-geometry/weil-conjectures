@@ -1,0 +1,348 @@
+{
+ "id": "lem-sfb-prime-divisor-image-extraction",
+ "kind": "statement",
+ "title": "Extracting the image of a prime divisor without modifying a prescribed open",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All schemes below are separated and of finite type over $k$ [def-weil-proper-morphism, def-weil-finite-type-morphism]; separated means that the diagonal is a closed immersion. Let $V$ be a normal integral scheme [def-pc-integral-scheme], and let $P$ be a normal integral proper scheme. Normal means that every local ring is an integrally closed domain. Let $f:V\\to P$ be a dominant morphism, meaning that its image is dense. Let $T\\subset V$ be an integral closed subscheme of codimension one, meaning $\\dim\\mathcal O_{V,\\eta_T}=1$ at its generic point, where a generic point has closure the whole irreducible closed subset. Let $Z\\subsetneq P$ be a closed subset with $f(T)\\subseteq Z$. There exist a normal integral proper scheme $P^{\\prime}$ and a proper birational morphism $b:P^{\\prime}\\to P$ which is an isomorphism over $P\\setminus Z$. Birational means inducing an isomorphism between dense open subschemes [def-weil-open-immersion]. The rational lift $f^{\\prime}=b^{-1}f$, where rational maps are equivalence classes of morphisms on dense open subschemes, is defined at $\\eta_T$. The reduced closure $D=\\overline{f^{\\prime}(T\\cap\\operatorname{Dom}(f^{\\prime}))}$ is an integral closed subscheme of $b^{-1}(Z)$ with $\\dim D=\\dim P-1$ [def-kun-topological-krull-dimension].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25, p.154, reference to Milne (2013), arXiv:1311.6060v2, Lemma 4.4 and its valuation/graph construction, pp.8--9, read online. Local article WANTED. Normal-source, normal-model and supported-modification refinement stated explicitly here; no single Stacks tag states this lemma."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-open-immersion",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Put $m=\\dim V$, $n=\\dim P$, $L=k(V)$ and $K=k(P)$, with function fields the generic stalks. By [lem-sc-integral-function-field-affine-fraction], nonempty affine charts have these fraction fields. Dominance gives an inclusion $K\\subseteq L$ over $k$; affine finite-type presentations make both fields finitely generated over $k$, and hence $L/K$ finitely generated. The schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to the Noetherian field spectrum. By [lem-sc-normal-dim1-dvr], normality and the specified codimension make $A=\\mathcal O_{V,\\eta_T}$ a DVR. Use its integer valuation $v:L^\\times\\to\\mathbf Z$ as in [def-sc-discrete-valuation-ring]. The residue field of $A$ is $k(T)$. The dimension formula [lem-kun-dimension-formula] gives $\\operatorname{trdeg}_k L=m$, $\\operatorname{trdeg}_k K=n$ and $\\operatorname{trdeg}_k k(T)=m-1$. Here every neighbourhood of any point in an integral finite-type scheme has the full dimension, by [lem-weil-pbc-dense-open-dimension-comparison], so the local topological dimensions in that formula are $m$ and $n$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "lem-kun-dimension-formula",
+    "lem-weil-pbc-dense-open-dimension-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed p.154, referring to Milne (2013), Lemma 4.4; valuation/residue proof read at https://arxiv.org/html/1311.6060v2, Lemma 4.4. Supported refinement is agent-written."
+   }
+  },
+  {
+   "text": "Let $p=f(\\eta_T)\\in Z$. On an affine neighbourhood $\\operatorname{Spec}B$ of $p$, the local map $B_{\\mathfrak p}\\to A$ is injective and local, using the inclusion of function fields from step 1. Since $p$ is not generic, $\\mathfrak p\\ne0$; choose $0\\ne a\\in\\mathfrak p$. Then $v(a)>0$. Thus $w=v|_{K^\\times}$ is nontrivial. Its ring $R=\\{0\\}\\cup\\{u\\in K^\\times:w(u)\\ge0\\}=A\\cap K$ contains $B_{\\mathfrak p}$ locally, so gives $c:\\operatorname{Spec}R\\to P$ centred at $p$. Its nonzero value group is a subgroup $e\\mathbf Z$ of $\\mathbf Z$, $e>0$; choose an element of value $e$. Every nonzero ideal of $R$ has a least occurring nonnegative value, and division by an element of that value expresses it as a principal ideal. Hence $R$ is a local principal ideal domain, not a field, so is a DVR in the sense of [def-sc-discrete-valuation-ring]. Its maximal ideal is $\\mathfrak m_A\\cap K$ and its residue field $\\kappa_R$ embeds into $k(T)$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed p.154, referring to Milne (2013), Lemma 4.4; valuation/residue proof read at https://arxiv.org/html/1311.6060v2, Lemma 4.4. Supported refinement is agent-written."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-abhyankar-inequality] to $K\\subseteq L$ with valuation ring $A$. Dropping the nonnegative rational-rank term gives $\\operatorname{trdeg}_{\\kappa_R}k(T)\\le\\operatorname{trdeg}_K L$. The tower formula [lem-sbc-transcendence-degree-tower], first for $k\\subseteq K\\subseteq L$ and then for $k\\subseteq\\kappa_R\\subseteq k(T)$, gives $\\operatorname{trdeg}_K L=m-n$ and $\\operatorname{trdeg}_k\\kappa_R\\ge(m-1)-(m-n)=n-1$. All quantities in the second tower are finite because $\\kappa_R$ embeds into $k(T)$ of finite transcendence degree. Also $n\\ge1$: the nongeneric point $p$ has a nonzero prime in a domain chart, so that chart, and hence $P$, has a chain of primes of length one. Choose $n-1$ algebraically independent elements of $\\kappa_R$ over $k$ and lifts $h_1,\\ldots,h_{n-1}\\in R$. If $n=1$, this is the empty list.",
+   "uses": [
+    "lem-trf-abhyankar-inequality",
+    "lem-sbc-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed p.154, referring to Milne (2013), Lemma 4.4; valuation/residue proof read at https://arxiv.org/html/1311.6060v2, Lemma 4.4. Supported refinement is agent-written."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-supported-valuation-finite-elements-model] with $X=P$, the closed set $Z$, the centred DVR $R$ and the chosen $h_i$. It gives an integral model $g:Q\\to P$ proper and birational, identical over $U=P\\setminus Z$, and a lift $c_Q:\\operatorname{Spec}R\\to Q$. At its centre $q$ all $h_i$ are regular. The model $Q$ is proper over $k$ by [lem-weil-pbc-proper-composition]. In particular it is of finite type over $k$. It has dimension $n$: its function field is $K$, and the generic-point case of [lem-kun-dimension-formula], together with [lem-weil-pbc-dense-open-dimension-comparison], identifies its dimension with $\\operatorname{trdeg}_kK$.",
+   "uses": [
+    "lem-sfb-supported-valuation-finite-elements-model",
+    "lem-weil-pbc-proper-composition",
+    "lem-kun-dimension-formula",
+    "lem-weil-pbc-dense-open-dimension-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed p.154, referring to Milne (2013), Lemma 4.4; valuation/residue proof read at https://arxiv.org/html/1311.6060v2, Lemma 4.4. Supported refinement is agent-written."
+   }
+  },
+  {
+   "text": "Take $\\nu:P^{\\prime}\\to Q$ to be the normalization in $K=k(Q)$. The normal integral model is supplied by [lem-weil-pbc-normalization-in-residue-field-extension] with $x=\\eta_Q$ and the identity extension $K/\\kappa(\\eta_Q)$; its stated integral-closure construction is the same normalization. By [lem-sc-normalization-properties], $\\nu$ is finite birational, $P^{\\prime}$ is proper, $\\dim P^{\\prime}=n$, and $\\nu$ is an isomorphism over the normal open $g^{-1}U\\cong U$. Thus $b=g\\nu$ is proper by [lem-weil-pbc-proper-composition], birational and identical over $U$. On the nonempty dense open $f^{-1}U\\subseteq V$ there is the prescribed rational lift to $P^{\\prime}$. Apply [lem-sfb-rational-map-extension-valuation-point] over $S=P$ at $\\eta_T$, using the DVR $A$, the integral Noetherian source $V$ and the proper target $b$. It extends this lift to an open neighbourhood of $\\eta_T$. Denote its value there by $x^{\\prime}$.",
+   "uses": [
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-sc-normalization-properties",
+    "lem-weil-pbc-proper-composition",
+    "lem-sfb-rational-map-extension-valuation-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed p.154, referring to Milne (2013), Lemma 4.4; valuation/residue proof read at https://arxiv.org/html/1311.6060v2, Lemma 4.4. Supported refinement is agent-written."
+   }
+  },
+  {
+   "text": "The two $P$-maps $\\operatorname{Spec}A\\to Q$ obtained from this extended lift and from $\\operatorname{Spec}A\\to\\operatorname{Spec}R\\xrightarrow{c_Q}Q$ agree generically, so are equal by [lemma-nagata-separated-valuation-lift-unique]; $Q\\to P$ is separated because it is proper. Therefore $\\nu(x^{\\prime})=q$, and the residues of the functions $h_i$ in $\\kappa(x^{\\prime})$, mapped into $k(T)$, are exactly the independent residues chosen in $\\kappa_R$. They are algebraically independent already in $\\kappa(x^{\\prime})$, so $\\operatorname{trdeg}_k\\kappa(x^{\\prime})\\ge n-1$. Since $b(x^{\\prime})=p\\in Z$ and $b$ is dominant, $x^{\\prime}$ is nongeneric; its stalk has dimension at least one. By [lem-kun-dimension-formula] and [lem-weil-pbc-dense-open-dimension-comparison], $n=\\dim\\mathcal O_{P^{\\prime},x^{\\prime}}+\\operatorname{trdeg}_k\\kappa(x^{\\prime})$. Hence both bounds are equalities and $\\operatorname{trdeg}_k\\kappa(x^{\\prime})=n-1$.",
+   "uses": [
+    "lemma-nagata-separated-valuation-lift-unique",
+    "lem-kun-dimension-formula",
+    "lem-weil-pbc-dense-open-dimension-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed p.154, referring to Milne (2013), Lemma 4.4; valuation/residue proof read at https://arxiv.org/html/1311.6060v2, Lemma 4.4. Supported refinement is agent-written."
+   }
+  },
+  {
+   "text": "Every point of $T\\cap\\operatorname{Dom}(f^{\\prime})$ specializes from $\\eta_T$, which belongs to this set. Continuity therefore identifies the closure of its image with $\\overline{\\{x^{\\prime}\\}}$. Give this irreducible closed subset its reduced induced structure by [lem-weil-pbc-reduced-induced-closed-subscheme]; it is integral, with generic residue field $\\kappa(x^{\\prime})$. Using [lem-weil-pbc-dense-open-dimension-comparison] for the integral closed subscheme, the generic-point case of [lem-kun-dimension-formula] identifies its dimension with $\\operatorname{trdeg}_k\\kappa(x^{\\prime})=n-1$. Finally $b(x^{\\prime})\\in Z$, and the inverse image of $Z$ is closed, so the entire reduced closure $D$ is contained in $b^{-1}(Z)$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-kun-dimension-formula",
+    "lem-weil-pbc-dense-open-dimension-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, printed p.154, referring to Milne (2013), Lemma 4.4; valuation/residue proof read at https://arxiv.org/html/1311.6060v2, Lemma 4.4. Supported refinement is agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-kun-dimension-formula",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "lem-trf-abhyankar-inequality",
+  "lem-sbc-transcendence-degree-tower",
+  "lem-sfb-supported-valuation-finite-elements-model",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-sc-normalization-properties",
+  "lem-sfb-rational-map-extension-valuation-point",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25 and its reference to Milne (2013), Lemma 4.4; supported-model refinement of the valuation/residue argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A prime divisor under a dominant morphism has divisorial image after a proper birational modification of the target unchanged away from the image",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [H : AlgebraicGeometry.IsDominant (CategoryTheory.CategoryStruct.comp f g)], AlgebraicGeometry.IsDominant g\", \"doc\": \"If the composition of morphisms $ f $ followed by $ g $ is dominant, then $ g $ is dominant. In other words, given schemes $ X, Y, Z $ and morphisms $ f: X \\\\to Y $, $ g: Y \\\\to Z $, if the composition \"}\n  {\"name\": \"AlgebraicGeometry.ext_of_isDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {W X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsReduced X] {f g : X ⟶ Y} [Y.IsSeparated] (ι : W ⟶ X)\\n  [AlgebraicGeometry.IsDominant ι],\\n  CategoryTheory.CategoryStruct.comp ι f = CategoryTheory.CategoryStruct.comp ι g → f = g\", \"doc\": \"Let $X$ be a reduced scheme, $Y$ a separated scheme, and $\\\\iota: W \\\\to X$ a dominant morphism. If two morphisms $f,g: X \\\\to Y$ satisfy $f \\\\circ \\\\iota = g \\\\circ \\\\iota$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.of_comp_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [H : AlgebraicGeometry.IsDominant (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsOpenImmersion g],\\n  AlgebraicGeometry.IsDominant f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f $ is dominant and $ g $ is an open immersion, then $ f $ is dominant.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.comp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.IsDominant f],\\n  AlgebraicGeometry.IsDominant (CategoryTheory.CategoryStruct.comp f g) ↔ AlgebraicGeometry.IsDominant g\", \"doc\": \"For morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ of schemes, if $ f $ is dominant, then the composition $ g \\\\circ f $ is dominant if and only if $ g $ is dominant.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (S : AlgebraicGeometry.Scheme) [inst : X.Over S] [inst_1 : Y.Over S]\\n  (f : X.PartialMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap],\\n  ∃ U, ∃ (hU : Dense ↑U) (hU' : U ≤ f.domain), AlgebraicGeometry.Scheme.PartialMap.IsOver S (f.restrict U hU\", \"doc\": \"If a rational map from a scheme $X$ to a scheme $Y$ is compatible with a base scheme $S$, then there exists an open subset $U \\\\subseteq X$ such that the restriction of the corresponding partial map to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), ∃ g, g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ between schemes $ X $ and $ Y $, there exists a partial map $ g \\\\colon X \\\\to Y $ such that the equivalence class of $ g $ under the rational map i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : IrreducibleSpace ↥X] (f : X.PartialMap Y),\\n  f.toRationalMap.fromFunctionField = f.fromFunctionField\", \"doc\": \"For irreducible schemes $X$ and $Y$, the morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ constructed from a rational map $X \\\\dashrightarrow Y$ via the function field $K(X)$ is compatible with the conversio\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization image factorization, generic rational-map representatives and valuations of Dedekind domains do not construct a supported birational model extracting the image divisor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"birational\", \"valuation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization image factorization, generic rational-map representatives and valuations of Dedekind domains do not construct a supported birational model extracting the image divisor."
+  },
+  {
+   "tool": "grep",
+   "query": "divisorial|divisor.*birational|birational.*divisor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization image factorization, generic rational-map representatives and valuations of Dedekind domains do not construct a supported birational model extracting the image divisor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extract the restricted valuation of a prime divisor on a normal proper birational model of the target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuation\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \": Valuation R ℤᵐ⁰\", \"doc\": \"For a Dedekind domain $ A $ and a height one prime ideal $ v $, this valuation maps elements of $ A $ to the multiplicative integers with zero ($\\\\mathbb{Z}^\\\\times_0$) by assigning to each nonzero elem\"}\n  {\"name\": \"multiplicity_addValuation\", \"module\": \"Mathlib.RingTheory.Valuation.PrimeMultiplicity\", \"type\": \"(hp : Prime p) : AddValuation R ℕ∞\", \"doc\": \"Given a prime element $ p $ in a commutative domain $ R $, this constructs an additive valuation on $ R $ with values in the extended natural numbers $ \\\\mathbb{N}^\\\\top $, where the valuation of an ele\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicValued\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \": Valued K ℤᵐ⁰\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, this valuation maps elements of $ K $ to the multiplicative integers with zero ($\\\\mathbb{Z}^\\times_0$) by extending the discrete valuation defined\"}\n  {\"name\": \"ValuationSubring.valuation\", \"module\": \"Mathlib.RingTheory.Valuation.ValuationSubring\", \"type\": \": Valuation K A.ValueGroup\", \"doc\": \"The canonical valuation on a field $K$ associated with a valuation subring $A$. It is the quotient map from $K$ to the value group of $A$, which is the quotient of $K$ by the group of units of $A$ (wi\"}\n  {\"name\": \"PadicInt.valuation\", \"module\": \"Mathlib.NumberTheory.Padics.PadicIntegers\", \"type\": \"(x : ℤ_[p]) : ℕ\", \"doc\": \"The function maps a p-adic integer $ x $ to its p-adic valuation, defined as the natural number obtained by applying the p-adic valuation on the p-adic number $ x $.\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(v : HeightOneSpectrum R) : Valuation K ℤᵐ⁰\", \"doc\": \"For a Dedekind domain $ R $ and its fraction field $ K $, this valuation maps elements of $ K $ to the multiplicative integers with zero ($\\\\mathbb{Z}^\\\\times_0$) by extending the integer valuation defi\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.intValuation_apply\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"{r : R} (v : IsDedekindDomain.HeightOneSpectrum R) : intValuation v r = intValuationDef v r\", \"doc\": \"For any element $ r $ in a Dedekind domain $ A $ and a height one prime ideal $ v $, the valuation $ v(r) $ is equal to the exponent of $ v $ in the unique factorization of the principal ideal $ (r) $\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuationOfNeZero\", \"module\": \"Mathlib.RingTheory.DedekindDomain.SelmerGroup\", \"type\": \": Kˣ →* Multiplicative ℤ\", \"doc\": \"For a Dedekind domain $ A $ with fraction field $ K $, the $\\\\mathfrak{p}$-adic valuation map associated to a height one prime ideal $\\\\mathfrak{p}$ defines a group homomorphism from the unit group $ K^\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization image factorization, generic rational-map representatives and valuations of Dedekind domains do not construct a supported birational model extracting the image divisor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Make the image of a prime divisor a divisor by blowing up the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.specTargetImageFactorization\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {A : CommRingCat} →\\n    (f : X ⟶ AlgebraicGeometry.Spec A) → X ⟶ AlgebraicGeometry.Spec (AlgebraicGeometry.specTargetImage f)\", \"doc\": \"For a morphism of schemes $f: X \\\\to \\\\operatorname{Spec}(A)$, this defines the canonical morphism from $X$ to the scheme-theoretic image of $f$. The scheme-theoretic image is the affine scheme $\\\\operat\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.maxPowDividing\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Factorization\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → [IsDedekindDomain R] → IsDedekindDomain.HeightOneSpectrum R → Ideal R → Ideal R\", \"doc\": \"In a Dedekind domain, for a nonzero ideal $ I $ and a height one prime ideal $ v $, this function returns the maximal power $ v^{k} $ dividing $ I $, where $ k $ is the number of times $ v $ appears i\"}\n  {\"name\": \"IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime\", \"module\": \"Mathlib/RingTheory/DedekindDomain/PID\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsDedekindDomain R] (S : Type u_2) [inst_2 : CommRing S] [inst_3 : Algebra R S]\\n  [Module.IsTorsionFree R S] [Module.Finite R S] (p : Ideal R),\\n  p ≠ ⊥ →\\n    ∀ [inst_6 : p.IsPrime] {Sₚ : Type u_3} [inst_7 : CommRing Sₚ] [inst_8 : Algebra S Sₚ]\\n      [IsLocalizat\", \"doc\": \"If $ P $ is a nonzero prime ideal in the localized ring $ S_P $, then $ P $ is a normalized prime factor of the ideal generated by $ p $ in $ S_P $, where $ p $ is the image of the algebra map from $ \"}\n  {\"name\": \"idealFactorsFunOfQuotHom\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"{R : Type u_1} →\\n  {A : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [IsDedekindDomain A] →\\n          {I : Ideal R} →\\n            {J : Ideal A} → {f : R ⧸ I →+* A ⧸ J} → Function.Surjective ⇑f → { p // p ∣ I } →o { p // p ∣ J }\", \"doc\": \"Let $R$ and $A$ be commutative rings, with ideals $I \\\\subseteq R$ and $J \\\\subseteq A$. Given a surjective ring homomorphism $f : R/I \\\\to A/J$, this definition constructs an order-preserving map from t\"}\n  {\"name\": \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"module\": \"Mathlib/NumberTheory/KummerDedekind\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {x : S} {I : Ideal R}\\n  [inst_3 : IsDomain R] [inst_4 : IsIntegrallyClosed R] [inst_5 : IsDedekindDomain S]\\n  [inst_6 : Module.IsTorsionFree R S] (hI : I.IsMaximal) (hI' : I ≠ ⊥)\\n  (hx : Ideal.comap (alg\", \"doc\": \"Let $ R \\\\subseteq S $ be rings with $ I $ a maximal nonzero ideal of $ R $, and let $ x \\\\in S $ be integral over $ R $. Suppose the conductor ideal $ (R:x) $ satisfies $ (R:x)^{-1} + I = R $. For any \"}\n  {\"name\": \"pow_sub_one_dvd_differentIdeal_aux\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Different\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u) {B : Type u_3} [inst : CommRing A] [inst_1 : Field K] [inst_2 : CommRing B]\\n  [inst_3 : Field L] [inst_4 : Algebra A K] [inst_5 : Algebra B L] [inst_6 : Algebra A B] [inst_7 : Algebra K L]\\n  [inst_8 : Algebra A L] [IsScalarTower A K L] [IsScalarTower A B \", \"doc\": \"For a maximal ideal $\\\\mathfrak{p}$ in a Dedekind domain $A$, an ideal $\\\\mathfrak{P}$ in its extension $B$, and a positive integer $e$, if $\\\\mathfrak{P}^e$ divides the image of $\\\\mathfrak{p}$ under the\"}\n  {\"name\": \"Ideal.finprod_not_dvd\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Factorization\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDedekindDomain R] (v : IsDedekindDomain.HeightOneSpectrum R)\\n  (I : Ideal R),\\n  I ≠ 0 →\\n    ¬v.asIdeal ^ ((Associates.mk v.asIdeal).count (Associates.mk I).factors + 1) ∣\\n        ∏ᶠ (v : IsDedekindDomain.HeightOneSpectrum R), v.maxPowDividing I\", \"doc\": \"In a Dedekind domain $ R $, for any nonzero ideal $ I $, the product $ \\\\prod_{v} v^{k_v} $ (where $ v^{k_v} $ is the maximal power of each height one prime ideal $ v $ dividing $ I $) is not divisible\"}\n  {\"name\": \"Ideal.liesOver_iff_dvd_map\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Basic\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [IsDedekindDomain A] [inst_3 : Algebra R A]\\n  {p : Ideal R} {P : Ideal A}, P ≠ ⊤ → ∀ [p.IsMaximal], P.LiesOver p ↔ P ∣ Ideal.map (algebraMap R A) p\", \"doc\": \"For a maximal ideal $\\\\mathfrak{p}$ in $R$ and a proper ideal $\\\\mathfrak{P}$ in $A$, $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$ (i.e., $\\\\mathfrak{P} \\\\cap R = \\\\mathfrak{p}$) if and only if $\\\\mathfrak{P}$ d\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization image factorization, generic rational-map representatives and valuations of Dedekind domains do not construct a supported birational model extracting the image divisor."
+  },
+  {
+   "tool": "grep",
+   "query": "divisorial|divisor.*birational|birational.*divisor",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization factorizations, prime-ideal image maps and rational representatives do not extract a divisor by a supported modification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extract the image of a prime divisor on a proper birational target model",
+   "results": "8 hits: Ideal.le_pow_ramificationIdx, IsLocalization.AtPrime.isPrime_map_of_liesOver, PrimeSpectrum.localization_away_comap_range, AlgebraicGeometry.Scheme.Hom.imageι, Ideal.isPrime_map_of_isLocalizationAtPrime, PrimeSpectrum.comap, AlgebraicGeometry.Scheme.Hom.image, Ideal.map_isPrime_of_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization factorizations, prime-ideal image maps and rational representatives do not extract a divisor by a supported modification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"birational\", \"valuation\"",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization factorizations, prime-ideal image maps and rational representatives do not extract a divisor by a supported modification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prime divisor under a dominant morphism becomes a divisor on a normal proper birational model of the target unchanged away from a prescribed closed subset",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization factorizations, prime-ideal image maps and rational representatives do not extract a divisor by a supported modification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rational-boundary-divisor-model",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne (2013), Proposition 4.1 proof: apply Lemma 4.4 to the image of a boundary component, then normalize; preserve the original open",
+   "via": [
+    "lem-sfb-rational-boundary-divisor-model",
+    "lem-sfb-rational-boundary-positive-stabilizer",
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-prime-divisor-image-extraction",
+  "worker": "stage1",
+  "summary": "Retained the statement. Split the valuation/residue argument, with one finite-element supported-model lemma and existing DVR, dimension, Abhyankar, normalization and proper-extension nodes. The ordinary projective graph alone does not preserve the whole prescribed open. No Lean attachment.",
+  "blueprint": "No imported blueprint ancestor is recorded (blueprint_refs ancestor reports None). The inherited Milne Lemma 4.4 valuation-and-graph place is realized by steps 1--3 and 6--7; steps 4--5 supply the supported modification and normalization required by the inherited statement. The current ctf-stability unit is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-weil-pbc-dense-open-dimension-comparison",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-trf-abhyankar-inequality",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-sbc-transcendence-degree-tower",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-sc-normalization-properties",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lemma-nagata-separated-valuation-lift-unique",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic algebraic geometry or valued-field infrastructure used exactly as stated; it supplies no constructible-category preservation step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-normal-dim1-dvr",
+  "lem-kun-dimension-formula",
+  "lem-weil-pbc-dense-open-dimension-comparison",
+  "lem-trf-abhyankar-inequality",
+  "lem-sbc-transcendence-degree-tower",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-sc-normalization-properties",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-d20b8b55e",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-d20b8b55e (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is unchanged and not weakened, and every one of its 7 steps holds. (1) A=O_{V,η_T} is a DVR by normal-dim1-dvr, and the trdeg values follow from the dimension formula with dense-open local dimension. (2) R=A∩K is a DVR centred at p=f(η_T)∈Z, nontrivial because p is not generic. (3) Abhyankar for K⊆L gives trdeg_kκ_R≥n−1 through the tower formula. (4) The new supported model is applied with X=P. (5) Normalization (normalization-properties a,b) is an isomorphism over the normal open U, and the valuation-point extension applies over S=P with source V, point η_T and target P' proper over P. (6) Separated uniqueness gives ν(x')=q; the h_i residues give trdeg≥n−1, and since x' is not generic the dimension formula forces equality. (7) The image closure is the closure of {x'}, so D is integral of dimension n−1 inside b^{-1}(Z). The edge cases n=1 and m=1 check out. The new node lem-sfb-supported-valuation-finite-elements-model is true: blow up J=(a,s)+I_Z^N with N>v(s), extended as in Stacks 080M so that V(J)⊆Z, then take products of these ideals; tags 0804/0806/02NS/080M are present in divisors.tex. It does not restate a clause of the item, and I found no duplicate in the Nagata admissible-blowup nodes or the trf chart nodes. Batch-5 flags: lem-trf-abhyankar-inequality is general valuation theory (closure of 11 generic nodes), neither assumed statement nor a step of their proofs, so I accept it; def-trf-valuation-ring is a general definition, accepted. I accept the 12 tool_uses as generic. The Milne arXiv source is WANTED, and the supported refinement is marked as agent-written. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrimeDivisorImageExtraction",
+  "declaration": "AlgebraicGeometry.exists_prime_divisor_image_extraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeDivisorImageExtraction.lean",
+  "statement": "theorem exists_prime_divisor_image_extraction {k : Type u} [Field k] [IsAlgClosed k] (V P T : Scheme.{u}) [IsIntegral V] [IsIntegral P] [IsIntegral T] (aV : V ⟶ Spec (.of k)) [IsSeparated aV] [LocallyOfFiniteType aV] [QuasiCompact aV] (aP : P ⟶ Spec (.of k)) [IsProper aP] (hV : ∀ x : V, IsDomain (V.presheaf.stalk x) ∧ IsIntegrallyClosed (V.presheaf.stalk x)) (hP : ∀ x : P, IsDomain (P.presheaf.stalk x) ∧ IsIntegrallyClosed (P.presheaf.stalk x)) (f : V ⟶ P) [IsDominant f] (hf : f ≫ aP = aV) (i : T ⟶ V) [IsClosedImmersion i] (hcodim : ringKrullDim (V.presheaf.stalk (i (genericPoint T))) = 1) (Z : TopologicalSpace.Closeds P) (hZ : Z ≠ ⊤) (himage : Set.range (i ≫ f) ⊆ (Z : Set P)) : ∃ (P' : Scheme.{u}) (b : P' ⟶ P), IsIntegral P' ∧ (∀ x : P', IsDomain (P'.presheaf.stalk x) ∧ IsIntegrallyClosed (P'.presheaf.stalk x)) ∧ IsProper (b ≫ aP) ∧ IsProper b ∧ IsIso (b ∣_ Z.compl) ∧ (∃ e : P'.PartialIso P, e.iso.hom ≫ e.target.ι = e.source.ι ≫ b) ∧ ∃ F : V.PartialMap P', F.domain = F.toRationalMap.domain ∧ F.hom ≫ b = F.domain.ι ≫ f ∧ i (genericPoint T) ∈ F.domain ∧ ∃ (D : Scheme.{u}) (j : D ⟶ P'), IsClosedImmersion j ∧ IsIntegral D ∧ Set.range j = closure (F.hom '' {x | F.domain.ι x ∈ Set.range i}) ∧ Set.range j ⊆ b ⁻¹' (Z : Set P) ∧ topologicalKrullDim D + 1 = topologicalKrullDim P",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5df79b933",
+  "group": "Q04",
+  "result": "pass",
+  "note": "I read the whole delivery against the node, the 7 statement dependencies, and Mathlib PartialIso and RationalMap.domain. Every hypothesis and conclusion clause matches: normal is the project's inline stalk form (def-weil-pbc-normal-ring), birationality is a PartialIso induced by b, the lift F sits on its maximal domain and contains i(eta_T), and the closed subscheme D is integral with range equal to the image closure, contained in b^{-1}(Z), and dim D+1=dim P. Quantifier order matches. Edge cases checked: integral schemes are nonempty, Z=P excluded, dim P=0 impossible, dim P=1 allowed. The Lean statement field matches the file verbatim and the node changes only in lean. No definitions, sorry-only proof, docstrings with source and blueprint, report has both required sections. Not recompiled; the worker's dry run passed. No findings."
+ }
+}

@@ -1,0 +1,259 @@
+{
+ "id": "lem-pur-etale-arbitrary-field-open-complement-control",
+ "kind": "statement",
+ "title": "Arbitrary-field control of complementary-open module direct images",
+ "statement": "Let $k$ be any field, let $A$ be a finite commutative ring, and let $N\\ge1$ be invertible in $k$ with $NA=0$. Let $T$ be a finite-type $k$-scheme and let $j:W\\hookrightarrow T$ be a quasi-compact open $k$-immersion [def-weil-pbc-scheme-conventions, def-weil-finite-type-morphism]. Use ordinary constant-$A$ module sheaves on small etale sites and their higher direct images [def-weil-pbc-derived-categories, def-weil-pbc-direct-image]. There exists $d\\ge0$ such that every field extension $L/k$ satisfies $\\dim(W_L)\\le d$ [def-kun-dimension, def-pc-fibre-product]. For any such $d$, the following assertions hold with the same constant $c=2d$:\n$$R^qj_*M=0\\qquad(q>c)$$\nfor every $A$-module sheaf $M$ on $W_{\\mathrm{et}}$, with no constructibility hypothesis on $M$; and $R^qj_*F$ is constructible for every constructible $A$-module sheaf $F$ and every integer $q$ [def-weil-pbc-constructible-complexes]. Equivalently, $(W,T)$ satisfies the ordinary-etale open-complement condition at $A$ with $c=2d$ [def-exc-open-complement-bound]. No separable-closedness or finite absolute cohomological-dimension hypothesis is imposed on $k$. Empty $W$ and $T$ are allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Closed-immersion paragraph, verification of the two complementary-open direct-image inputs; returned proof Step 7 and first part of Step 8; Stacks Tag 0F10 (lemma-finite-cd), arbitrary-field relative clause, with the existing dimension and coefficient-forgetting refinements"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-kun-dimension",
+  "def-pc-fibre-product",
+  "def-weil-pbc-constructible-complexes",
+  "def-exc-open-complement-bound"
+ ],
+ "proof": [
+  {
+   "text": "Write $a_T:T\\to\\operatorname{Spec}k$ and $a_W=a_Tj$. The quasi-compact open immersion $j$ is of finite type by lem-weil-pbc-qc-open-immersion-finite-type. Composition with $a_T$ is of finite type by lem-sfb-finite-type-composition-base-change (1), so $W$ is of finite type over $k$. Apply lem-kun-uniform-field-extension-dimension-bound to $a_W$ to obtain a natural $d$ bounding every $W_L$. Its statement allows empty schemes. Now fix any natural $d$ with the bound in the item, rather than only the particular bound just obtained.",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-kun-uniform-field-extension-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Closed-immersion paragraph: complementary-open input; geometry and uniform bound. Stacks morphisms.tex Tags 01T5 (lemma-immersion-locally-finite-type) and 01T3 (lemma-composition-finite-type); BaseChangeDimension.lean, exists_topologicalKrullDim_le_of_isPullback."
+   }
+  },
+  {
+   "text": "Let $M$ be any $A$-module sheaf on $W_{\\mathrm{et}}$ and let $U_WM$ be its underlying abelian sheaf. Every local section $m$ satisfies $Nm=(N1_A)m=0$, so $U_WM$ is torsion. Apply lem-kun-torsion-abelian-direct-image-dimension-bound to $a_W,a_T,j$, with $a_Tj=a_W$ and the chosen field-extension bound: $R^qj_*(U_WM)=0$ for every $q>2d$. By lem-sbc-higher-direct-image-forget-comparison this sheaf is isomorphic to $U_T(R^qj_*M)$. A module sheaf with zero underlying abelian sheaf is zero: on every object its underlying group has only the zero element. Thus $R^qj_*M=0$. No constructibility of $M$ was used.",
+   "uses": [
+    "lem-kun-torsion-abelian-direct-image-dimension-bound",
+    "lem-sbc-higher-direct-image-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F10, lemma-finite-cd (1), in the quantitative arbitrary-field refinement recorded by lem-kun-torsion-abelian-direct-image-dimension-bound; coefficient comparison: sites-cohomology.tex Tags 03FD, lemma-cohomology-modules-abelian-agree, and 072W, lemma-higher-direct-images."
+   }
+  },
+  {
+   "text": "For a constructible $A$-module sheaf $F$, the complex $F[0]$ is bounded constructible: its only possibly nonzero cohomology is $F$ in degree zero. Apply thm-dg-finite-type-constructibility to $j:W\\to T$. Both schemes are of finite type over the same field by Step 1; $A$ is finite, $NA=0$, and $N$ is invertible in $k$, exactly the coefficient hypotheses of that theorem. Hence $Rj_*F[0]$ is bounded constructible. By the definitions, each $R^qj_*F=\\mathcal H^q(Rj_*F[0])$ is constructible, for every integer $q$.",
+   "uses": [
+    "thm-dg-finite-type-constructibility",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.md",
+    "place": "Theorem statement, applied to a sheaf in degree zero; closed-immersion input of the current blueprint."
+   }
+  },
+  {
+   "text": "Take $c=2d\\ge0$. Steps 2 and 3 are respectively the two clauses of def-exc-open-complement-bound, so they give the asserted condition with this same $c$. No hypothesis on the absolute cohomological dimension or separable closedness of $k$ entered either step. If $W$ is empty, the dimension-bound lemma still supplies a bound and its sheaf category has only the zero object; both conclusions hold. Empty $T$ forces empty $W$, so that case is covered too.",
+   "uses": [
+    "def-exc-open-complement-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+    "place": "Closed-immersion paragraph: assembling the complementary-open direct-image inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-kun-uniform-field-extension-dimension-bound",
+  "lem-kun-torsion-abelian-direct-image-dimension-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "thm-dg-finite-type-constructibility",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-exc-open-complement-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/sk-prop-sf-rf-shriek-preservation.proof.md",
+  "place": "Closed-immersion paragraph: assembly of the existing quantitative dimension, torsion-abelian vanishing, coefficient-forgetting and finite-type constructibility nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact open immersion of finite type schemes over any field higher direct images of finite prime to characteristic module sheaves vanish uniformly and preserve constructibility",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.LocallyQuasiFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale",
+   "results": "[loogle] OK 12 hit(s); AlgebraicGeometry.Etale.etale_isStableUnderBaseChange; AlgebraicGeometry.Etale.instIsMultiplicativeScheme; AlgebraicGeometry.Etale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Etale; AlgebraicGeometry.Etale.instHasRingHomPropertyEtale; AlgebraicGeometry.Scheme.Etale.mk; AlgebraicGeometry.Etale.instFormallyUnramified; AlgebraicGeometry.Etale.instOfIsOpenImmersion; AlgebraicGeometry.Etale.instSmooth; AlgebraicGeometry.Etale.eq_smoothOfRelativeDimension_zero; AlgebraicGeometry.Etale.instSmoothOfRelativeDimensionOfNatNat; AlgebraicGeometry.Etale.iff_smoothOfRelativeDimension_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|[Cc]ohomological[Dd]imension|[Cc]onstructible",
+   "results": "[grep] OK 25 hit(s); Mathlib/Topology/Spectral/ConstructibleTopology.lean:14; Mathlib/Topology/Spectral/ConstructibleTopology.lean:16; Mathlib/Topology/Spectral/ConstructibleTopology.lean:21; Mathlib/Topology/Spectral/ConstructibleTopology.lean:22; Mathlib/Topology/Spectral/ConstructibleTopology.lean:23; Mathlib/Topology/Constructible.lean:16; Mathlib/Topology/Constructible.lean:18; Mathlib/Topology/Constructible.lean:21; Mathlib/Topology/Constructible.lean:26; Mathlib/Topology/Constructible.lean:27; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:117; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:118; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:121; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:123; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:124; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean:11; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean:20; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean:22; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean:27; Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean:31; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean:12; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean:14; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean:27; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean:29; Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean:30",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform finite cohomological dimension and constructible higher direct images for etale module sheaves along an open immersion over an arbitrary field",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.restrict_obj; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrict_map; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace_isOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transfer torsion abelian higher direct image vanishing via forgetful functor to finite coefficient etale module sheaves over a field",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.etaleLocus_eq_compl_support; Rep.isZero_Tor_succ_of_projective; LightCondensed.instIsGrothendieckAbelianLightCondMod; AlgebraicGeometry.Scheme.Modules.instAbelian; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; CategoryTheory.Sheaf.H; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; SheafOfModules.instAbelian",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|OpenComplementCondition|cohomologicalDimension",
+   "results": "0 hits in Mathlib/AlgebraicGeometry: ",
+   "date": "2026-10-22",
+   "verdict": "no match: no higher-direct-image or cohomological-dimension declarations in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images along open immersions of finite type schemes over arbitrary fields preserve constructible finite coefficient etale sheaves and have uniform finite dimension",
+   "results": "8 hits: AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSchemeHom_isOpenImmersion, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Scheme.Hom.image_iSup, AlgebraicGeometry.Scheme.Hom.image_iSup₂, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic etaleness, constructible subsets, open immersions or finite-type geometry, not the asserted higher direct images of etale module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "6 hits: AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType, AlgebraicGeometry.instIsOpenImmersionCompSchemeιQuasiFiniteLocusToNormalization, AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic etaleness, constructible subsets, open immersions or finite-type geometry, not the asserted higher direct images of etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme over any field a quasi compact open immersion has higher direct images of finite coefficient etale module sheaves vanishing above twice the uniform field extension dimension bound and preserves constructibility",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic etaleness, constructible subsets, open immersions or finite-type geometry, not the asserted higher direct images of etale module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale module direct image forgetting scalars torsion vanishing uniform geometric dimension bound over an arbitrary field",
+   "results": "8 hits: Algebra.Etale, Algebra.Etale.comp, Algebra.Etale.exists_subalgebra_fg, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.IsEtaleAt.comp, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern algebraic etaleness, constructible subsets, open immersions or finite-type geometry, not the asserted higher direct images of etale module sheaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-closed-chart-exceptional-preservation",
+  "date": "2026-10-22",
+  "group": "Q105"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Closed-immersion paragraph, verification of the two complementary-open direct-image inputs; returned proof Step 7 and first part of Step 8; Stacks Tag 0F10 (lemma-finite-cd), arbitrary-field relative clause, with the existing dimension and coefficient-forgetting refinements",
+   "via": [
+    "lem-pur-etale-closed-chart-exceptional-preservation",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-arbitrary-field-open-complement-control",
+  "worker": "stage1",
+  "summary": "Unchanged statement; four-step assembly using existing nodes only. Checked arbitrary base field, arbitrary module sheaves, all integer constructibility degrees, every admissible dimension bound, and empty schemes. No new nodes or Mathlib leaves.",
+  "blueprint": "Inherited null ancestor confirmed by blueprint_refs ancestor; retain the created-item chain. Steps 1–2 realize complementary-open uniform vanishing and Step 3 constructibility in the current sk-prop-sf-rf-shriek-preservation closed-immersion paragraph; Step 4 packages both. Blueprint open-complement search found only strictly narrower field hypotheses, not another statement of this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic finite-type criterion for the complementary open; no coefficient transport argument replaces it."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic all-degree coefficient-forgetting comparison used solely to transfer the torsion-abelian bound to module sheaves; no coefficient transport argument replaces it."
+   },
+   {
+    "node": "lem-kun-uniform-field-extension-dimension-bound",
+    "why": "Generic finite-type geometric dimension bound needed by the complementary-open input."
+   },
+   {
+    "node": "lem-kun-torsion-abelian-direct-image-dimension-bound",
+    "why": "Generic quantitative arbitrary-field torsion direct-image vanishing, applied to the underlying abelian sheaf."
+   },
+   {
+    "node": "thm-dg-finite-type-constructibility",
+    "why": "Generic ordinary-etale finite-type constructibility theorem giving the second complementary-open input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-kun-uniform-field-extension-dimension-bound",
+  "lem-kun-torsion-abelian-direct-image-dimension-bound",
+  "thm-dg-finite-type-constructibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-eda46ea13",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-eda46ea13 (reviewer sub-agent of L); spot-checked: Read the item and all four steps in full. The delivery has no new nodes, and the statement and stmt_deps are unchanged. Step 1: the quasi-compact open-immersion node gives that j is of finite type, and finite-type composition (1) gives the same for W. lem-kun-uniform-field-extension-dimension-bound needs locally of finite type plus quasi-compact over a field; it gives the existence of d for every field base change, empty schemes allowed. The step then fixes an arbitrary admissible d, as the item requires. Step 2: I checked the torsion-abelian vanishing hypotheses against its Lean statement at TorsionAbelianDirectImageVanishing.lean:204 (no sorry): finite-type aW and aT, aT j = aW, the field-base-change bound, and torsion via N·1_A = 0. The result is moved to A-modules with lem-sbc-higher-direct-image-forget-comparison, which holds in every degree for any Lambda, plus zero reflection, which is elementary. No cd(k) or constructibility assumption is used. Step 3: thm-dg-finite-type-constructibility has exactly the item's hypotheses (finite A killed by an N invertible in k, finite type over a field, no separatedness). Together with the D^b_c definition and R^q = H^q(Rj_*F[0]), it gives constructibility in every degree. Step 4: the two clauses of def-exc-open-complement-bound are exactly Steps 2 and 3 with c = 2d. Stacks tags 01T5, 01T3, 03FD, 072W and 0F10 are all correct in tags/tags. Tag 0F10 gives only finiteness, and the quantitative 2d comes from the existing node, as the report says. Edge cases checked: W or T empty, d = 0, j = id, N = 1 forcing A = 0, and k = R with W = G_m in A^1 (stalk of cd at most 1). No duplicate: thm-pur-open-complement-unconditional (k separably closed) and lem-exc-open-complement-known (k = F̄_q) are strictly narrower. The tool_uses are generic and accepted. Batch 5: the cited torsion-abelian node reaches only def-trf-schematically-dense-open, a general definition. Relative finite cohomological dimension is neither assumed by nor a step of the trace-formula or Poincaré-duality proofs, so the citation is allowed. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArbitraryFieldOpenComplementControl",
+  "declaration": "AlgebraicGeometry.Scheme.exists_uniform_dimension_bound_and_hasOpenComplementCondition",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArbitraryFieldOpenComplementControl.lean",
+  "statement": "theorem exists_uniform_dimension_bound_and_hasOpenComplementCondition (k : Type u) [Field k] (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 1 ≤ N) (hunit : IsUnit (N : k)) (hkill : (N : A) = 0) {W T : Scheme.{u}} (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT] (j : W ⟶ T) [IsOpenImmersion j] [QuasiCompact j] : (∃ d : ℕ, ∀ (L : Type u) [Field L] (s : Spec (.of L) ⟶ Spec (.of k)) {P : Scheme.{u}} (p₁ : P ⟶ W) (p₂ : P ⟶ Spec (.of L)), IsPullback p₁ p₂ (j ≫ aT) s → topologicalKrullDim P ≤ (d : WithBot ℕ∞)) ∧ (∀ d : ℕ, (∀ (L : Type u) [Field L] (s : Spec (.of L) ⟶ Spec (.of k)) {P : Scheme.{u}} (p₁ : P ⟶ W) (p₂ : P ⟶ Spec (.of L)), IsPullback p₁ p₂ (j ≫ aT) s → topologicalKrullDim P ≤ (d : WithBot ℕ∞)) → HasOpenComplementCondition A j (2 * d))",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3cfa03e7",
+  "group": "NE",
+  "result": "pass",
+  "note": "Lean theorem exists_uniform_dimension_bound_and_hasOpenComplementCondition matches the node clause by clause: any field k, A : Type (u+1) finite CommRing (universe forced by HasOpenComplementCondition), N ≥ 1 with IsUnit (N:k) and (N:A)=0, T finite type over k via LocallyOfFiniteType+QuasiCompact aT, j quasi-compact open immersion with W over k through j ≫ aT; first conjunct gives existence of a uniform field-extension dimension bound in exactly the IsPullback/topologicalKrullDim shape of exists_topologicalKrullDim_le_of_isPullback; second conjunct gives HasOpenComplementCondition A j (2*d) for every admissible d (definition read in full: all module sheaves M and q > c, all constructible F and all integer q). Interface matches isZero_torsion_higherDirectImage_of_forall_field_dimension_le (aX = j ≫ aT, aY = aT). No stronger hypotheses. Edge cases: empty W/T, d=0, A=0 when N=1, j=id, negative q, universes all covered. Statement field verbatim; node copy equals live except lean; no live lean record exists (no supersession); report has Worker report and Second reading by NE sections; docstrings carry source place, blueprint tag and four proof steps; proof is sorry only. Duplicate search: the isSepClosed and F̄_q variants and upstream Etale.openComplementCondition_two_mul (bound on dim T, different predicate) are not exact matches, so existing:false is right. Imports exist in side-live. No recompile (no file changed). Advisory only: hN is redundant given IsUnit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261022T145615-L-2023380",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.exists_uniform_dimension_bound_and_hasOpenComplementCondition"
+  ],
+  "sorry_after": []
+ }
+}

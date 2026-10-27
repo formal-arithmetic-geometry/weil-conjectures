@@ -182,26 +182,58 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible",
+    "AlgebraicGeometry.Etale.fourierTransformBoundedConstructible"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible",
+    "AlgebraicGeometry.Etale.fourierTransformBoundedConstructible"
+   ]
+  }
+ },
  "chapter": "sec-fourier-transform",
  "unit": "sk-prop-well-defined",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\Lambda$ be a finite commutative ring in which $p$ is invertible\nand whose exponent is invertible on $S$, and let $\\pi:V\\to S$,\n$\\pi':V'\\to S$, $b$, $\\Psi$, $r\\in\\mathbf Z$ and the projections\n$p_1,p_2$ be as in [def-fd-transform], with\n$p_2:V\\times_SV'\\to V'$ of finite type and admitting a compactification.\nAssume that $V'$ is locally of finite type over some field $k$. Let\n$D^b_c(-,\\Lambda)$ denote the full subcategory of the derived category of\nétale sheaves of $\\Lambda$-modules consisting of the bounded complexes\nwith constructible cohomology sheaves. Then for every\n$K\\in D^b_c(V,\\Lambda)$,\n\n$$\n\\operatorname{FT}_\\psi(K)\\in D^b_c(V',\\Lambda),\n$$\n\nso that $\\operatorname{FT}_\\psi$ restricts to a functor\n\n$$\n\\operatorname{FT}_\\psi:\nD^b_c(V,\\Lambda)\\longrightarrow D^b_c(V',\\Lambda).\n$$",
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\pi:V\\to S$, $\\pi':V'\\to S$, $b$, $\\Psi$, $r\\in\\mathbf Z$ and the\nprojections $p_1,p_2$ be as in [def-fd-transform], with\n$p_2:V\\times_SV'\\to V'$ of finite type and admitting a compactification.\n\n1. *Finite coefficients.* Let $\\Lambda$ be a finite commutative ring in\n   which $p$ is invertible and whose exponent is invertible on $S$, and\n   assume that $V'$ is of finite type (locally of finite type and\n   quasi-compact) over some field $k$. Let\n   $D^b_c(-,\\Lambda)$ denote the full subcategory of the derived category of\n   étale sheaves of $\\Lambda$-modules consisting of the bounded complexes\n   with constructible cohomology sheaves. Then for every\n   $K\\in D^b_c(V,\\Lambda)$ one has\n   $\\operatorname{FT}^{\\mathrm{ét}}_\\psi(K)\\in D^b_c(V',\\Lambda)$, so that\n   $\\operatorname{FT}^{\\mathrm{ét}}_\\psi$ restricts to a functor\n   $D^b_c(V,\\Lambda)\\to D^b_c(V',\\Lambda)$. For finite admissible $\\Lambda$\n   the same holds for $\\operatorname{FT}_\\psi$ on the pro-étale categories.\n2. *$\\ell$-adic coefficients.* Let $\\Lambda\\in\\{\\mathcal O_E,E,\\Qlb\\}$ be\n   regarded as a condensed ring, with $\\Psi$ valued in $\\Lambda(*)^\\times$,\n   and let $V,V',S$ be schemes of finite type over a finite or algebraically\n   closed field. Then $\\operatorname{FT}_\\psi$ restricts to an exact functor\n\n   $$\n   \\operatorname{FT}_\\psi:\n   D^b_c(V,\\Lambda)\\longrightarrow D^b_c(V',\\Lambda)\n   $$\n\n   between the bounded constructible subcategories of\n   $D(V_{\\mathrm{proét}},\\Lambda)$ and $D(V'_{\\mathrm{proét}},\\Lambda)$\n   ([det-def-sfb-bounded-constructible]).",
   "proof": [
    {
-    "text": "The kernel $\\mathcal K_\\psi$ of [def-fd-kernel] is a lisse\nrank-one module, hence of finite Tor amplitude [prop-kernel-lisse] in the\ncoefficient conventions of the proper-base-change chapter ([def-weil-pbc-qbar-category]). By [prop-functor-package] of the framework chapter, the derived\npullback $Lp_1^*$, the derived tensor product, and the derived\ncompact-support direct image $p_{2,!}$ (the compact-support direct\nimage of the separated finite-type $p_2$)\nare exact triangulated functors on their constructible and finite-Tor\ndomains; hence $Lp_1^*K\\otimes^L_E\\mathcal K_\\psi$ lies in\n$D^b_c(V\\times_SV^\\vee,E)$, and its image under $p_{2,!}$\nlies in $D^b_c(V^\\vee,E)$; the shift $[r]$ of\n[def-fd-transform] preserves boundedness and constructibility.",
+    "text": "In both cases the kernel $\\mathcal K_\\psi$ of [def-fd-kernel] is lisse of\nrank one, hence constructible and of finite Tor amplitude\n([prop-kernel-lisse]).",
     "uses": [
      "def-fd-kernel",
-     "prop-kernel-lisse",
-     "def-weil-pbc-qbar-category",
+     "prop-kernel-lisse"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(1).* By [prop-functor-package] the derived pullback $Lp_1^*$, the derived\ntensor product with the finite-Tor complex $\\mathcal K_\\psi$ and the\ncompact-support direct image $Rp_{2,!}$ along the separated finite-type\nmorphism $p_2$ are exact triangulated functors on the étale categories with\nfinite coefficients that preserve bounded constructible objects; hence\n$Lp_1^*K\\otimes^L_\\Lambda\\mathcal K_\\psi\\in D^b_c(V\\times_SV',\\Lambda)$ and\nits image under $Rp_{2,!}$ lies in $D^b_c(V',\\Lambda)$, by finiteness of\n$Rp_{2,!}$ over the finite-type $k$-scheme $V'$; the shift $[r]$ of\n[def-fd-transform] preserves boundedness and constructibility. For finite\nadmissible $\\Lambda$ the pro-étale statement follows, because $\\nu^*$\nidentifies the bounded constructible categories and commutes with the three\noperations ([sk-prop-ctf-finite-comparison]).",
+    "uses": [
      "prop-functor-package",
      "def-fd-transform"
     ],
     "elementary": false
+   },
+   {
+    "text": "*(2).* For $\\Lambda=\\mathcal O_E,E,\\Qlb$ one has\n$\\Dctf(-,\\Lambda)=\\Dbc(-,\\Lambda)$, and the operations $Lf^*$, $Rf_!$ and\n$\\otimes^{\\mathbf L}$ of the condensed six-functor formalism preserve these\ncategories ([sk-thm-sf-ctf-stability]). Thus $Lp_1^*K$ and\n$\\mathcal K_\\psi$ lie in $\\Dbc(V\\times_SV',\\Lambda)$, so does their derived\ntensor product, and $Rp_{2,!}$ of it lies in $\\Dbc(V',\\Lambda)$. Each of\nthese functors is exact, so $\\operatorname{FT}_\\psi$ is an exact functor\n$\\Dbc(V,\\Lambda)\\to\\Dbc(V',\\Lambda)$.",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
   "date": "2026-10-18",

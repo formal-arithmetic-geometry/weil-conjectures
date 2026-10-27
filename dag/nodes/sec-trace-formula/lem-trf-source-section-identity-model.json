@@ -1,0 +1,122 @@
+{
+ "id": "lem-trf-source-section-identity-model",
+ "kind": "statement",
+ "title": "Identity completion unit on the strict quotient-stalk cone",
+ "statement": "Fix $\\ell,E,D,k$ as in [def-trf-coefficient-conventions], with $\\ell\\ne D.p$ and $\\ell$ invertible on $s=\\operatorname{Spec}k$. Let $I$ have IntegralComparisonRealizationCoherence (including its reconstruction normalization), and let $I,S$ be compositor data [def-trf-stalk-compositor-tower-data] satisfying the coherent and quotient-compatible laws of [lem-trf-stalk-compositor-tower-realization]. Let $e_v$ be quotient-section-to-stalk tower isomorphisms with normalized finite germ maps [lem-trf-bounded-quotient-stalk-realization]. There exists a natural chain map $a_0:\\Gamma(s,-)\\to H(T_{\\mathrm{id}}(-))$ such that each unshifted projection sends $z$ to $[s,\\mathrm{id},\\bar z_n]$ and every shifted coordinate is zero. For every good complex $P$ representing a constructible object $N$ by $q:Q(P)\\simeq N$, localization of $a_0(P)$, preceded by the canonical sections factor, is exactly $\\operatorname{Fib}(q)$ followed by the inverse specified identity unit and the prescribed identity quotient-stalk realization arrow. The meanings of the arrows are fixed by [def-trf-source-section-stalk-cone-data].",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0F4F (lemma-point-functor): restriction/insertion germ formula, combined with the specified completion normalization; agent extraction of original Steps 9--10; blueprint thm-trf-l-function-euler-product.proof.md, Step 1, Local powers, input (b)."
+ },
+ "stmt_deps": [
+  "def-trf-source-section-stalk-cone-data",
+  "def-trf-coefficient-conventions",
+  "def-trf-stalk-compositor-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the reconstruction normalization of the coherent comparison system to obtain compatible quotient presentations, and apply the strict completion-unit model. Apply exact point sections, which preserve the products, and the normalized identity germ maps to its zero-homotopy augmentation.",
+   "uses": [
+    "lem-trf-completion-unit-strict-quotient-model",
+    "lem-trf-bounded-quotient-stalk-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coherent point-unit normalization and the simultaneous-presentation compatibility to identify the localized augmentation with the identity realization. Naturality of the unit cancels q and q inverse and proves the equation for every presentation.",
+   "uses": [
+    "lem-trf-stalk-compositor-tower-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-strict-quotient-model",
+  "lem-trf-bounded-quotient-stalk-realization",
+  "lem-trf-stalk-compositor-tower-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stages 3 extraction of source-section proof, steps 1--7; Stacks Tags 0F4F, 05V1 and the specified strict completion model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of source sections along a field automorphism agrees with geometric stalk reparametrization on both coordinates of a Roos cone",
+   "results": "8 hits, beginning AlgebraicGeometry.opensCone_π_app and AlgebraicGeometry.Scheme.Hom.resLEStalkMap; these concern open restrictions and ordinary scheme stalks.",
+   "date": "2026-10-26",
+   "verdict": "No match for the normalized completed quotient-cone construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.hom_ext",
+   "results": "0 hits; unknown identifier 'CochainComplex.mappingCocone.hom_ext'.",
+   "date": "2026-10-26",
+   "verdict": "No matching declaration found by this query."
+  },
+  {
+   "tool": "grep",
+   "query": "sourceSection|SourceSection|inverseImageRoosComparisonComplex_naturality",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A source section comparison with inverse image on a geometric point commutes with the two coordinates of the completed quotient tower Roos complex",
+   "results": "8 hits, including Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint and ΓSpecIso_hom_stalkClosedPointIso_inv. These concern ordinary structure-sheaf stalk maps.",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified completed quotient tower or either normalization construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SourceSectionStalkConeComparison",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers (b); source-section comparison, Identity completion unit on the strict quotient-stalk cone"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SourceSectionIdentityModel",
+  "file": "lean/Sheaf/Paper/SourceSectionIdentityModel.lean",
+  "declaration": "WeilConjectures.trfSourceSectionIdentityModel",
+  "declarations": [
+   "WeilConjectures.trfSourceSectionIdentityModel"
+  ],
+  "statement": "theorem trfSourceSectionIdentityModel (hl : l ≠ D.p) [∀ x : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField x)] (I : IntegralComparisonSystem.{u} l) (hI : IntegralComparisonRealizationCoherence l E E (AlgHom.id ℚ_[l] E) I) (S : TrfStalkCompositorTowerData l E D I) (hC : TrfStalkCompositorTowerCoherent l E D I S) (hQ : TrfStalkCompositorQuotientCompatible l E D I S) (e : ∀ v : Spec (.of D.k) ⟶ Spec (.of D.k), trfQuotientSectionTower l E v ≅ trfQuotientStalkTower l E v) (he : ∀ v : Spec (.of D.k) ⟶ Spec (.of D.k), ∃ (γ : ∀ n : ℕ, pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1)) ≅ finiteCoefficientModuleStalkFunctor (𝟙 (Spec (.of D.k))) (Padic.coefficientExtensionRing l E (n + 1))) (δ : ∀ n : ℕ, integralOperationsLevelPullback l E v n ⋙ pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1)) ≅ finiteCoefficientModuleStalkFunctor v (Padic.coefficientExtensionRing l E (n + 1))), TrfQuotientGermNormalized l E D v γ δ (e v)) : ∃ a₀ : (pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ) ⟶ trfQuotientStalkTower l E (𝟙 (Spec (.of D.k))) ⋙ integralOperationsRoosFunctor, (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (n : ℕ) (i : ℤ) (x : ((pointIntegralSections l E D.k).obj (P.X i))), HEq (((a₀.app P ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary ((trfQuotientStalkTower l E (𝟙 (Spec (.of D.k)))).obj P)) ≫ Pi.π (fun m ↦ ((trfQuotientStalkTower l E (𝟙 (Spec (.of D.k)))).obj P).obj (op m)) n).f i) x) ((colimit.ι ((proEtaleGeometricNeighbourhoodForget (𝟙 (Spec (.of D.k)))).op ⋙ ((((trfQuotientTower l E (Spec (.of D.k))).obj P).obj (op n)).X i).val.presheaf) (op (proEtaleConstantGermNeighbourhood (𝟙 (Spec (.of D.k)))))) (unrestrictedTowerTensorSection l E (Spec (.of D.k)) n (P.X i) (op (ProEt.mk (𝟙 (Spec (.of D.k))))) 1 x))) ∧ (∀ (P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (i : ℤ), (a₀.app P).f (i + 1) ≫ (CochainComplex.mappingCocone.snd (scalarRoosBoundary ((trfQuotientStalkTower l E (𝟙 (Spec (.of D.k)))).obj P))).v (i + 1) i (add_neg_cancel_right i 1) = 0) ∧ (∀ (N : sfIntegralConstructibleCategory l E (Spec (.of D.k))) (P : (integralOperationsGoodComplex l E (Spec (.of D.k))).FullSubcategory) (q : DerivedCategory.Q.obj P.obj ≅ N.obj), (pointFibreIntegralAmbient D l E).map (X := DerivedCategory.Q.obj P.obj) (Y := N.obj) q.hom ≫ (pointFibreIntegralAmbient D l E).map (X := N.obj) (Y := (integralDerivedPullback l E (𝟙 (Spec (.of D.k)))).obj N.obj) (integralComparisonUnit l E I (Spec (.of D.k)) N).inv ≫ trfQuotientStalkRealizationArrow l E D (𝟙 (Spec (.of D.k))) (e (𝟙 _)) N.obj P q = (trfIntegralSectionsFactors l E D).hom.app P.obj ≫ (trfIntegralModuleQ l E).map (X := ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj P.obj) (Y := integralOperationsRoos ((trfQuotientStalkTower l E (𝟙 (Spec (.of D.k)))).obj P.obj)) (a₀.app P.obj))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-66786",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T071338-L-3917727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-66786",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T071338-L-3917727",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and three new modules vs clone item module (five declarations moved verbatim) and node lem-trf-source-section-stalk-cone-comparison; two sorry statements vs the item's original Normalized clauses"
+ }
+}

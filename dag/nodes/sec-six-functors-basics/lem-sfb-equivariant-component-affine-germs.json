@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-equivariant-component-affine-germs",
+ "kind": "statement",
+ "title": "Equivariant affine component charts and canonical generic germs",
+ "statement": "Let $X,Z$ be schemes [def-pc-scheme] with finite decompositions into disjoint open and closed integral subschemes $X_i$ ($i\\in I$) and $Z_j$ ($j\\in J$) [def-pc-integral-scheme]. Denote their generic points by $\\eta_i,\\xi_j$ [def-sc-generic-point]. Let $q:X\\to Z$ be finite [def-weil-finite-integral-morphism], and let $\\phi:I\\to J$ satisfy $q(X_i)=Z_{\\phi(i)}$ and $q(\\eta_i)=\\xi_{\\phi(i)}$. Let a finite group $H$ act on $X$ by scheme automorphisms, permuting the $X_i$, with $q\\circ h=q$ and $\\phi(hi)=\\phi(i)$. Fix $j\\in J$ with $O=\\phi^{-1}(j)\\ne\\varnothing$, and a nonempty affine open $V\\subset Z_j$. Put $A=\\Gamma(V,\\mathcal O_Z)$, $W=q^{-1}V$, and $W_i=X_i\\cap W$ for $i\\in O$. Then $W$ and all $W_i$ are affine, every $W_i$ is nonempty and open and closed in $W$, and these $W_i$ cover $W$. The rings $A$ and $B_i=\\Gamma(W_i,\\mathcal O_X)$ are integral domains. The actual restriction map $\\Gamma(W,\\mathcal O_X)\\longrightarrow\\prod_{i\\in O}B_i$ is a ring isomorphism, equivariant for inverse pullback by $H$; thus $h$ induces $B_i\\cong B_{hi}$. The composite $a_i:A\\to\\Gamma(W,\\mathcal O_X)\\to B_i$ is injective. Germs give canonical identifications $\\kappa(\\xi_j)=\\operatorname{Frac}A$ and $\\kappa(\\eta_i)=\\operatorname{Frac}B_i$ [def-weil-residue-field], under which the residue-field map of $q$ is the unique fraction-field extension of $a_i$. If $D_i=\\{h\\in H:hi=i\\}$, the inverse-pullback action of $D_i$ on $\\kappa(\\eta_i)$ is the extension of its action on $B_i$ to fractions. Here $\\operatorname{Frac}R$ is the field of quotients $b/c$ with $b,c\\in R$ and $c\\ne0$, using the canonical injection of a domain $R$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01I3 (lemma-standard-open-affine), 01HV (lemma-spec-sheaves), with algebra.tex Tag 00EE (lemma-disjoint-decomposition) and morphisms.tex Tag 01RV (lemma-integral-scheme-rational-functions); agent equivariance and canonical-germ comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-finite-integral-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Since $Z_j$ is open in $Z$, the affine open $V\\subset Z_j$ is also an affine open of $Z$. Finiteness of $q$ includes affineness, so $W=q^{-1}V$ is affine. If $x\\in W\\cap X_i$, then $q(x)\\in Z_j\\cap Z_{\\phi(i)}$, hence $\\phi(i)=j$. Conversely, for each $i\\in O$, the generic point $\\xi_j$ lies in the nonempty open $V$: otherwise the closed complement would contain the dense singleton $\\{\\xi_j\\}$ and hence all of $Z_j$. Thus $\\eta_i\\in W_i$, since $q(\\eta_i)=\\xi_j$. Intersecting the given disjoint clopen decomposition of $X$ with $W$ proves that the nonempty $W_i$, $i\\in O$, are pairwise disjoint, open and closed in $W$, and cover $W$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WH (definition-integral), definition of finite morphism; elementary inverse-image and generic-point argument"
+   }
+  },
+  {
+   "text": "Put $C=\\Gamma(W,\\mathcal O_X)$ and use the affine identification $W\\cong\\operatorname{Spec}C$. For each $i\\in O$, the clopen $W_i$ corresponds by [lem-weil-pbc-spec-clopen-idempotent] to $D(e_i)$ for an idempotent $e_i\\in C$. Principal opens of affine schemes are affine by clause (b) of [lem-weil-pbc-affine-open-section-vanishing-prime]; hence $W_i$ is affine. Both $V$ and $W_i$ are nonempty affine opens of the integral schemes $Z_j$ and $X_i$, respectively. Therefore $A$ and $B_i$ are domains by the definition of integral scheme.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE (lemma-disjoint-decomposition); schemes.tex Tags 01I3 (lemma-standard-open-affine), 01HV (lemma-spec-sheaves); properties.tex Tag 01OK (definition-integral)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-sheaf-disjoint-union-product] to one $W_i$ and the union of the other components. Induction on the nonzero finite cardinality of $O$ identifies $C$ with $\\prod_{i\\in O}B_i$: for one component the map is the identity; removing one component gives the stated binary product isomorphism and the induction hypothesis on the remaining union. The resulting map has $i$th coordinate exactly restriction to $W_i$, so it is the actual map in the statement. In particular this construction chooses no abstract product identification.",
+   "uses": [
+    "lem-weil-pbc-sheaf-disjoint-union-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I5 (lemma-disjoint-union-affines), proof: product of section rings by the sheaf property; finite induction"
+   }
+  },
+  {
+   "text": "For $h\\in H$ one has $h(W)=W$ because $qh=q$, and $h(W_i)=W_{hi}$. Set $\\rho_h=(h^{-1}|_W)^*:C\\to C$ and $\\beta_{h,i}=(h^{-1}|_{W_{hi}})^*:B_i\\to B_{hi}$. These are ring isomorphisms, with inverse given by $h^*$ on the corresponding opens. Compatibility of the sheaf map of a scheme morphism with restrictions gives\n$$\\operatorname{res}_{hi}(\\rho_h(s))=\\beta_{h,i}(\\operatorname{res}_i(s)).$$\nThus the product action is $(h\\cdot b)_{hi}=\\beta_{h,i}(b_i)$, and the isomorphism of step 3 is equivariant. Pullback reverses composition, so $\\rho_{hk}=\\rho_h\\rho_k$ and $\\beta_{hk,i}=\\beta_{h,ki}\\beta_{k,i}$; this verifies the left-action convention. Also $qh^{-1}=q$ gives $\\beta_{h,i}a_i=a_{hi}$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 0091 (definition-ringed-space), 008J (definition-f-map), compatibility with restriction and composition; schemes.tex Tag 01HB (definition-locally-ringed-space); agent inverse-pullback calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-integral-function-field-affine-fraction] to $(Z_j,V,\\xi_j)$ and to $(X_i,W_i,\\eta_i)$. All its integrality, affine and nonemptiness hypotheses were checked above. It identifies $\\mathcal O_{Z_j,\\xi_j}$ and $\\mathcal O_{X_i,\\eta_i}$ as fields of fractions of $A$ and $B_i$, by the actual germ maps. Passing from an open subscheme to the ambient scheme does not change the stalk at one of its points: neighbourhoods contained in the open are cofinal, and restrictions give the inverse maps on germ representatives. Hence these are also $\\mathcal O_{Z,\\xi_j}$ and $\\mathcal O_{X,\\eta_i}$. A field has zero maximal ideal, so taking its residue field changes nothing. This gives the claimed canonical identifications $\\kappa(\\xi_j)=\\operatorname{Frac}A$ and $\\kappa(\\eta_i)=\\operatorname{Frac}B_i$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV (lemma-integral-scheme-rational-functions), integral case; schemes.tex Tag 01HV (lemma-spec-sheaves), generic stalk as localization at (0); Tag 01HB, residue field definition"
+   }
+  },
+  {
+   "text": "Let $\\lambda_i:\\kappa(\\xi_j)\\to\\kappa(\\eta_i)$ be the residue-field map of $q$, and denote the injections supplied by step 5 by $\\gamma_A$ and $\\gamma_i$. Formula (a) of [lem-weil-pbc-scheme-stalk-map-composition], followed by restriction to $W_i$, gives\n$$\\lambda_i(\\gamma_A(a))=\\gamma_i(a_i(a))\\qquad(a\\in A).$$\nThe field homomorphism $\\lambda_i$ is injective: its kernel is an ideal in a field and cannot contain $1$. If $a_i(a)=0$, the displayed formula implies $\\lambda_i(\\gamma_A(a))=0$, hence $a=0$. Thus $a_i$ is injective. Apply [lem-weil-pbc-fraction-field-lift] to $\\gamma_i\\circ a_i$. Its unique extension agrees with $\\lambda_i$ because both restrict to that map on $A$; explicitly\n$$\\lambda_i(a/c)=a_i(a)/a_i(c)\\qquad(c\\ne0).$$\nThis proves the comparison for the specified residue-field map, rather than for an unspecified field embedding.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-scheme-stalk-map-composition",
+    "lem-weil-pbc-fraction-field-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008M (lemma-compose-f-maps-stalks) and preceding germ-representative construction; agent fraction-field formula and injectivity argument"
+   }
+  },
+  {
+   "text": "If $h\\in D_i$, the automorphism $h$ restricts to $W_i$ and fixes its generic point: the homeomorphism carries the dense singleton $\\{\\eta_i\\}$ to a dense singleton in $X_i$, and the closed irreducible set $X_i$ has exactly one generic point by [lem-sc-scheme-sober]. Let $\\sigma_h$ be inverse pullback on $\\kappa(\\eta_i)$. The same germ identity (a) of [lem-weil-pbc-scheme-stalk-map-composition], now for $h^{-1}$, gives $\\sigma_h(\\gamma_i(b))=\\gamma_i(\\beta_{h,i}(b))$ for every $b\\in B_i$. Every element of the field is $b/c$ with $c\\ne0$ by step 5, so\n$$\\sigma_h(b/c)=\\beta_{h,i}(b)/\\beta_{h,i}(c).$$\nThe denominator is nonzero since $\\beta_{h,i}$ is an isomorphism. This is exactly the unique extension of $\\beta_{h,i}$ to fractions, by [lem-weil-pbc-fraction-field-lift]. Stalk-map composition, formula (b), ensures these are the inverse-pullback group actions used in step 4.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-scheme-stalk-map-composition",
+    "lem-weil-pbc-fraction-field-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 008M (lemma-compose-f-maps-stalks), germ compatibility and composition; agent substitution on fractions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-sc-generic-point",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-sheaf-disjoint-union-product",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "def-weil-residue-field",
+  "lem-weil-pbc-scheme-stalk-map-composition",
+  "lem-weil-pbc-fraction-field-lift",
+  "lem-sc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01I3, 01HV, 01I5; algebra.tex Tag 00EE; morphisms.tex Tags 01WH, 01RV; sheaves.tex Tags 008J, 008M, 0091. Agent assembly and explicit inverse-pullback/germ calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite invariant morphism on schemes with disjoint integral components decomposes affine inverse image sections equivariantly into component rings and its generic residue field map is the fraction extension of each component map",
+   "results": "{\"t\": \"2026-10-22T06:01:10Z\", \"tool\": \"leanfinder\", \"query\": \"A finite invariant morphism on schemes with disjoint integral components decomposes affine inverse image sections equivariantly into component rings and its generic residue field map is the fraction extension of each component map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\"], \"digest\": \"04944d484e0d7114\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/FunctionField.lean:116,148 identifies individual fraction fields, but no hit gives the equivariant product of varying component rings together with the canonical residue-map and action compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.functionField, IsFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:01:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.functionField, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\"], \"digest\": \"596cfc38abcc85c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/FunctionField.lean:116,148 identifies individual fraction fields, but no hit gives the equivariant product of varying component rings together with the canonical residue-map and action compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "isFractionRing|isFraction|residueFieldMap|germ",
+   "results": "{\"t\": \"2026-10-22T06:01:45Z\", \"tool\": \"grep\", \"query\": \"isFractionRing|isFraction|residueFieldMap|germ\", \"sub\": \"AlgebraicGeometry/FunctionField.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"18\", \"41\", \"43\", \"49\", \"55\"], \"digest\": \"3fad9cb620480640\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/FunctionField.lean:116,148 identifies individual fraction fields, but no hit gives the equivariant product of varying component rings together with the canonical residue-map and action compatibilities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections on a finite union of disjoint affine integral components form a product of domains compatibly with the generic residue field map of a finite scheme morphism",
+   "results": "{\"t\": \"2026-10-22T06:01:46Z\", \"tool\": \"leansearch\", \"query\": \"Sections on a finite union of disjoint affine integral components form a product of domains compatibly with the generic residue field map of a finite scheme morphism\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "functionField_isFractionRing|stalk.*residue|residueFieldMap",
+   "results": "{\"t\": \"2026-10-22T06:02:55Z\", \"tool\": \"grep\", \"query\": \"functionField_isFractionRing|stalk.*residue|residueFieldMap\", \"sub\": \"AlgebraicGeometry/FunctionField.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"116\", \"148\", \"171\"], \"digest\": \"c55ba113c3356043\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/FunctionField.lean:116,148 identifies individual fraction fields, but no hit gives the equivariant product of varying component rings together with the canonical residue-map and action compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism between disjoint unions of integral schemes the affine inverse image splits as product of component coordinate rings and the residue field map at generic points commutes with germs and fractions",
+   "results": "{\"t\": \"2026-10-22T06:03:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite morphism between disjoint unions of integral schemes the affine inverse image splits as product of component coordinate rings and the residue field map at generic points commutes with germs and fractions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.Spec_map_residueFieldMap_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\"], \"digest\": \"3012d14c0541cd55\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib/AlgebraicGeometry/FunctionField.lean:116,148 identifies individual fraction fields, but no hit gives the equivariant product of varying component rings together with the canonical residue-map and action compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphism on disjoint integral scheme components yields affine component rings with equivariant product of sections and fraction field generic stalk maps",
+   "results": "{\"t\": \"2026-10-23T09:43:22Z\", \"tool\": \"leanfinder\", \"query\": \"Finite morphism on disjoint integral scheme components yields affine component rings with equivariant product of sections and fraction field generic stalk maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsIntegralHom.instDescScheme\"], \"digest\": \"eccbf9827fb72f27\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-morphism, fraction-ring and affine naturality facts found, but none states the full equivariant product and canonical generic-field comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.functionField, IsFractionRing",
+   "results": "{\"t\": \"2026-10-23T09:47:45Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.functionField, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.functionField_isFractionRing_of_affine\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\"], \"digest\": \"596cfc38abcc85c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-morphism, fraction-ring and affine naturality facts found, but none states the full equivariant product and canonical generic-field comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "functionField_isFractionRing|residueFieldMap|germ",
+   "results": "{\"t\": \"2026-10-23T09:47:45Z\", \"tool\": \"grep\", \"query\": \"functionField_isFractionRing|residueFieldMap|germ\", \"sub\": \"AlgebraicGeometry/FunctionField.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"18\", \"41\", \"43\", \"49\", \"55\"], \"digest\": \"3fad9cb620480640\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-morphism, fraction-ring and affine naturality facts found, but none states the full equivariant product and canonical generic-field comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant finite scheme morphism induces a product of component section domains and the generic residue field map is the induced fraction field embedding",
+   "results": "{\"t\": \"2026-10-23T09:47:46Z\", \"tool\": \"leansearch\", \"query\": \"An invariant finite scheme morphism induces a product of component section domains and the generic residue field map is the induced fraction field embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.residueFieldMap\", \"AlgebraicGeometry.Scheme.descResidueField_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyRingedSpace.residueFieldMap\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.residueFieldMap_comp\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\"], \"digest\": \"0c21d726b29f6072\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-morphism, fraction-ring and affine naturality facts found, but none states the full equivariant product and canonical generic-field comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariance of restriction of scheme sections to disjoint component affine opens and naturality of the induced maps on generic fraction fields",
+   "results": "{\"t\": \"2026-10-23T09:48:46Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariance of restriction of scheme sections to disjoint component affine opens and naturality of the induced maps on generic fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineOpen.appLE_eq_away_map\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_naturality\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_naturality_assoc\", \"AlgebraicGeometry.toOpen_toSpecΓ_app_assoc\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc\", \"AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE\"], \"digest\": \"d65353ef28280b0a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: individual finite-morphism, fraction-ring and affine naturality facts found, but none states the full equivariant product and canonical generic-field comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-quotient-generic-fields",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Generic fields and component orbits in a finite quotient of a normal scheme. Repair extraction of old proof steps 5 and 7: affine component product and canonical generic-germ comparison.",
+   "via": [
+    "lem-sfb-finite-quotient-generic-fields",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-equivariant-component-affine-germs",
+  "worker": "stage1",
+  "summary": "Retained the statement and split all clauses in seven steps using existing DAG nodes only. Checked affine clopen charts, finite restriction product, inverse-pullback index directions, generic-stalk fraction identifications, injectivity, the actual residue-field map and the stabilizer action. No new nodes, Lean writing or compilation.",
+  "blueprint": "Existing added-input ancestry has no imported ancestor (blueprint_refs.py ancestor prints None), retained. Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3) is the ambient open-direct-image route; this lemma supplies the affine and generic-field comparison used below the alteration/tame-boundary input, as specified in blueprint.from.place."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-d730563d5",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-d730563d5 (reviewer sub-agent of L); spot-checked: Read the item, its 7 steps and every cited node's statement. All cited nodes are Mathlib leaves, so no tool_uses are needed, and no SGA is cited. The statement and stmt_deps are identical to the base snapshots, so no target is weakened. There are 0 new nodes, and no repair note exists, so the 2026-10-21 re-split rule does not apply. Stacks tags were checked: 01RV at morphisms.tex:12705, plus 00EE, 01I3, 01HV, 01I5, 008M, 01WH and 01OK all map to the right labels. Steps 1-6 are correct. Step 1: affineness comes from the finite-morphism definition, ξ_j∈V by density, and indices outside O are excluded by disjointness. Step 2: each clopen is D(e_i) by 00EE and is affine by clause (b) of the vanishing-prime node; the domains come from def-pc-integral-scheme. Step 3: the induction on binary restriction products is set up. Step 4: the inverse-pullback directions and the left-action law check out, and β a_i = a_{hi} follows from qh⁻¹=q. Step 5: the 01RV-node hypotheses hold, the stalk of an open subscheme equals the ambient stalk, and κ equals the stalk at a field. Step 6: formula (a) of the stalk-map node gives λ_i γ_A = γ_i a_i, which gives injectivity of a_i, and the lift node gives uniqueness. Small cases tested: one component, a Z/2 swap of two components, Galois Spec L/K, and a non-flat finite map. FIX (C1, one missing citation): step 7 used that the generic point of X_i is unique (scheme sobriety, a theorem) without citing a node. I added [lem-sc-scheme-sober] to the step 7 text, its uses and proof_deps; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantComponentAffineGerms",
+  "declaration": "AlgebraicGeometry.Scheme.equivariant_component_affine_germs",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.componentAffineChart",
+   "AlgebraicGeometry.Scheme.equivariant_component_affine_germs"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantComponentAffineGerms.lean",
+  "statement": "theorem equivariant_component_affine_germs {X Z : Scheme.{u}} {I : Type v} {J : Type w} [Finite I] [Finite J] (U : I → X.Opens) (T : J → Z.Opens) (hUc : ∀ i : I, IsClosed (U i : Set X)) (hTc : ∀ j : J, IsClosed (T j : Set Z)) (hUd : Pairwise (fun i k : I ↦ Disjoint (U i) (U k))) (hTd : Pairwise (fun j k : J ↦ Disjoint (T j) (T k))) (hU : iSup U = ⊤) (hT : iSup T = ⊤) [∀ i : I, IsIntegral (U i).toScheme] [∀ j : J, IsIntegral (T j).toScheme] (η : I → X) (ξ : J → Z) (hη : ∀ i : I, IsGenericPoint (η i) (U i : Set X)) (hξ : ∀ j : J, IsGenericPoint (ξ j) (T j : Set Z)) (q : X ⟶ Z) [IsFinite q] (φ : I → J) (hqU : ∀ i : I, q '' (U i : Set X) = (T (φ i) : Set Z)) (hqη : ∀ i : I, q (η i) = ξ (φ i)) (H : Type t) [Group H] [Finite H] [MulAction H I] (a : H →* Aut X) (haU : ∀ (h : H) (i : I), (a h).hom '' (U i : Set X) = (U (h • i) : Set X)) (haq : ∀ h : H, (a h).hom ≫ q = q) (hφ : ∀ (h : H) (i : I), φ (h • i) = φ i) (j : J) (hO : Set.Nonempty {i : I | φ i = j}) (V : Z.Opens) (hVj : V ≤ T j) (hV : IsAffineOpen V) (hVn : Set.Nonempty (V : Set Z)) : ∃ (hξV : ξ j ∈ V) (hηW : ∀ i : {i : I // φ i = j}, η i.val ∈ componentAffineChart q V (U i.val)) (hρ : ∀ h : H, q ⁻¹ᵁ V ≤ (a h⁻¹).hom ⁻¹ᵁ (q ⁻¹ᵁ V)) (hβ : ∀ (h : H) (i : {i : I // φ i = j}), componentAffineChart q V (U (h • i.val)) ≤ (a h⁻¹).hom ⁻¹ᵁ componentAffineChart q V (U i.val)) (hfix : ∀ (h : H) (i : {i : I // φ i = j}), h • i.val = i.val → (a h⁻¹).hom (η i.val) = η i.val) (hδ : ∀ (h : H) (i : {i : I // φ i = j}), h • i.val = i.val → componentAffineChart q V (U i.val) ≤ (a h⁻¹).hom ⁻¹ᵁ componentAffineChart q V (U i.val)), IsAffineOpen (q ⁻¹ᵁ V) ∧ (∀ i : {i : I // φ i = j}, IsAffineOpen (componentAffineChart q V (U i.val)) ∧ Set.Nonempty (componentAffineChart q V (U i.val) : Set X) ∧ IsClopen ((fun x : (q ⁻¹ᵁ V) ↦ (x : X)) ⁻¹' (componentAffineChart q V (U i.val) : Set X))) ∧ (⨆ i : {i : I // φ i = j}, componentAffineChart q V (U i.val)) = q ⁻¹ᵁ V ∧ IsDomain Γ(Z, V) ∧ (∀ i : {i : I // φ i = j}, IsDomain Γ(X, componentAffineChart q V (U i.val))) ∧ (∀ h : H, Function.Bijective ((a h⁻¹).hom.appLE _ _ (hρ h))) ∧ (∀ (h : H) (i : {i : I // φ i = j}), Function.Bijective ((a h⁻¹).hom.appLE _ _ (hβ h i))) ∧ (∃ e : Γ(X, q ⁻¹ᵁ V) ≃+* ((i : {i : I // φ i = j}) → Γ(X, componentAffineChart q V (U i.val))), (∀ (s : Γ(X, q ⁻¹ᵁ V)) (i : {i : I // φ i = j}), e s i = X.presheaf.map (homOfLE inf_le_right).op s) ∧ ∀ (h : H) (s : Γ(X, q ⁻¹ᵁ V)) (i : {i : I // φ i = j}), e ((a h⁻¹).hom.appLE _ _ (hρ h) s) ⟨h • i.val, (hφ h i.val).trans i.property⟩ = (a h⁻¹).hom.appLE _ _ (hβ h i) (e s i)) ∧ @IsFractionRing Γ(Z, V) _ (Z.residueField (ξ j)) _ (Z.evaluation V (ξ j) hξV).hom.toAlgebra ∧ ∀ i : {i : I // φ i = j}, Function.Injective (q.appLE V (componentAffineChart q V (U i.val)) inf_le_right) ∧ @IsFractionRing Γ(X, componentAffineChart q V (U i.val)) _ (X.residueField (η i.val)) _ (X.evaluation _ _ (hηW i)).hom.toAlgebra ∧ (∀ f : Z.residueField (ξ j) →+* X.residueField (η i.val), (∀ b : Γ(Z, V), f (Z.evaluation V (ξ j) hξV b) = X.evaluation _ _ (hηW i) (q.appLE V _ inf_le_right b)) ↔ f = ((Z.residueFieldCongr ((hqη i.val).trans (congrArg ξ i.property))).inv ≫ q.residueFieldMap (η i.val)).hom) ∧ (∀ (b c : Γ(Z, V)), c ≠ 0 → ((Z.residueFieldCongr ((hqη i.val).trans (congrArg ξ i.property))).inv ≫ q.residueFieldMap (η i.val)) (Z.evaluation V (ξ j) hξV b / Z.evaluation V (ξ j) hξV c) = X.evaluation _ _ (hηW i) (q.appLE V _ inf_le_right b) / X.evaluation _ _ (hηW i) (q.appLE V _ inf_le_right c)) ∧ (∀ (h : H) (hh : h • i.val = i.val) (b c : Γ(X, componentAffineChart q V (U i.val))), c ≠ 0 → ((X.residueFieldCongr (hfix h i hh)).inv ≫ (a h⁻¹).hom.residueFieldMap (η i.val)) (X.evaluation _ _ (hηW i) b / X.evaluation _ _ (hηW i) c) = X.evaluation _ _ (hηW i) ((a h⁻¹).hom.appLE _ _ (hδ h i hh) b) / X.evaluation _ _ (hηW i) ((a h⁻¹).hom.appLE _ _ (hδ h i hh) c))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39c19cb35",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Node unchanged except lean; 5 stmt_deps are existing Mathlib records used directly (Scheme, IsIntegral, IsGenericPoint, IsFinite, residueField); lean.statement verbatim. Hypotheses match without strengthening: MulAction H I is forced by haU; closedness is redundant; universes u/v/w/t independent. All conclusions checked true with actual maps: restriction-coordinate ring iso to Π_O B_i; h⁻¹ appLE pullbacks bijective and equivariant; a_i = q.appLE injective; IsFractionRing via Scheme.evaluation for A and B_i; q residue map (residueFieldCongr.inv ≫ residueFieldMap) as unique extension plus b/c formula; D_i inverse-pullback fraction formula. Edge cases: O nonempty, singleton, trivial H. Helper abbrev is real; sorry only; docstrings have source, blueprint and 7 steps; report has Worker report and Second reading by Q98. No compile (no change). No findings."
+ }
+}

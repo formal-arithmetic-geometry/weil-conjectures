@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-totally-acyclic-direct-image",
+ "kind": "statement",
+ "title": "Totally acyclic modules are acyclic for every ringed-topos direct image",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in a common coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with sheaves of commutative rings $\\mathcal O_{\\mathcal C},\\mathcal O_{\\mathcal D}$. Let $f:(\\operatorname{Sh}(\\mathcal C),\\mathcal O_{\\mathcal C})\\to(\\operatorname{Sh}(\\mathcal D),\\mathcal O_{\\mathcal D})$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism], with its induced module direct image [def-weil-sheaf-of-modules-category]. For a sheaf of sets $K$ on a site $\\mathcal T$ and an $\\mathcal O_{\\mathcal T}$-module $N$, put $\\Gamma(K,N)=\\operatorname{Hom}_{\\operatorname{Sh}(\\mathcal T)}(K,N_{\\mathrm{sets}})$ with pointwise abelian-group operations, and put $H^q(K,N)=R^q\\Gamma(K,-)(N)$, computed by injective resolutions in the module category [def-sp-injective-resolutions]. Let $N$ be an $\\mathcal O_{\\mathcal C}$-module that is totally acyclic, meaning $H^q(K,N)=0$ for every sheaf of sets $K$ on $\\mathcal C$ and every $q>0$. Then $$R^qf_*N=0\\quad(q>0)$$ in $\\operatorname{Mod}(\\mathcal O_{\\mathcal D})$, where the right derived functors of module direct image are computed by injective resolutions. No flatness of the structural ring map is assumed, and the geometric morphism need not come from a functor between the given sites.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0731 (lemma-limp-acyclic), assertion (4); Tag 072Y (definition-limp) and section-limp for total acyclicity."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-sp-grothendieck-enough-injectives], the module category on $\\mathcal C$ has enough injectives. Choose a nonnegative injective resolution $N\\to I^\\bullet$ [def-sp-injective-resolutions]: embed $N$ into $I^0$, embed its cokernel into $I^1$, and repeat with successive cokernels. Put $J^\\bullet=f_*I^\\bullet$. By the meaning of the right derived functors in the statement, $R^qf_*N=\\mathcal H^q(J^\\bullet)$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0731 (lemma-limp-acyclic), assertion (4), and Tag 072W (lemma-higher-direct-images), injective-resolution argument; section-limp, definition of H^q(K,N). Direct adjunction version written by Q67."
+   }
+  },
+  {
+   "text": "For $V\\in\\mathcal D$, let $h_V=\\operatorname{Hom}_{\\mathcal D}(-,V)$ and $K_V=f^{-1}(h_V^\\#)$. Sheafification adjunction [def-weil-pbc-sheafification], evaluation at $\\mathrm{id}_V$ [lem-galois-yoneda-hom-bijection], and the topos adjunction [def-weil-pbc-ringed-topos-morphism] give, for every source module $M$, $$ (f_*M)(V)\\cong\\operatorname{Hom}(h_V^\\#,f_*M)\\cong\\operatorname{Hom}(K_V,M)=\\Gamma(K_V,M). $$ These are isomorphisms of abelian groups: evaluation and sheafification adjunction preserve pointwise operations; transposing $a x+y$ gives $f^\\sharp(f^{-1}a)\\widetilde x+\\widetilde y$, so setting $a=1$ proves additivity of the last bijection. All maps are natural in $M$, hence commute with each differential of $I^\\bullet$. Consequently $J^\\bullet(V)\\cong\\Gamma(K_V,I^\\bullet)$ as complexes of abelian groups.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0731 (lemma-limp-acyclic), assertion (4), and Tag 072W (lemma-higher-direct-images), injective-resolution argument; section-limp, definition of H^q(K,N). Direct adjunction version written by Q67."
+   }
+  },
+  {
+   "text": "Fix $q>0$. The same module injective resolution computes $H^q(K_V,N)$ by the definition in the statement. Total acyclicity therefore gives $$H^q(J^\\bullet(V))\\cong H^q(\\Gamma(K_V,I^\\bullet))=H^q(K_V,N)=0$$ for every $V$. In particular, every section $z\\in J^q(V)$ with $d^qz=0$ equals $d^{q-1}y$ for some $y\\in J^{q-1}(V)$. This uses the actual sheaf of sets $K_V$, without requiring that it be represented by an object of $\\mathcal C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0731 (lemma-limp-acyclic), assertion (4), and Tag 072W (lemma-higher-direct-images), injective-resolution argument; section-limp, definition of H^q(K,N). Direct adjunction version written by Q67."
+   }
+  },
+  {
+   "text": "Kernels in the module-sheaf category are sectionwise [def-weil-sheaf-of-modules-category]. Thus $Z^q=\\ker(d^q:J^q\\to J^{q+1})$ has sections the cycles just considered. Step 3 says that $J^{q-1}\\to Z^q$ is surjective on every set of sections, so its sectionwise cokernel presheaf is zero. Its cokernel as a module sheaf is the sheafification of that presheaf, again by [def-weil-sheaf-of-modules-category], and is zero. This cokernel is $\\mathcal H^q(J^\\bullet)=R^qf_*N$, as required.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0731 (lemma-limp-acyclic), assertion (4), and Tag 072W (lemma-higher-direct-images), injective-resolution argument; section-limp, definition of H^q(K,N). Direct adjunction version written by Q67."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0731 (lemma-limp-acyclic), assertion (4), and 072W (lemma-higher-direct-images). Q67 writes the direct topos-adjunction version of the sectionwise injective-resolution argument, avoiding change of site; Categories Tag 001P (lemma-yoneda) and the sheafification universal property supply evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A totally acyclic sheaf of modules on a ringed topos is acyclic for direct image under any morphism of ringed topoi",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"instAbelianCondensedMod\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Abelian (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ forms an abelian category. This follows from the fact that the category of sheaves on the site of compact Hausdorff spaces with the coh\"}\n  {\"name\": \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u₂} [inst : CategoryTheory.Category.{v, u₂} C] [inst_1 : CategoryTheory.EssentiallySmall.{v, v, u₂} C]\\n  (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v, u₁} A]\\n  [inst_3 : CategoryTheory.Abelian A] [CategoryTheory.IsGrothendieckAbelian.{v, \", \"doc\": \"Let $\\\\mathcal{C}$ be an essentially small category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a Grothendieck abelian category. If there exists a sheafification functor for pre\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type v} [inst : CategoryTheory.SmallCategory C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁)\\n  [inst_1 : CategoryTheory.Category.{v, u₁} A] [inst_2 : CategoryTheory.Abelian A]\\n  [CategoryTheory.IsGrothendieckAbelian.{v, v, u₁} A] [inst_4 : CategoryTheory.HasSheafify J A],\\n  Categ\", \"doc\": \"Given a small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and an abelian category $\\\\mathcal{A}$ that is Grothendieck abelian with a sheafification functor, the category of sheaves on $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"HomotopyCategory.subcategoryAcyclic\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → CategoryTheory.ObjectProperty (HomotopyCategory C (ComplexShape.up ℤ))\", \"doc\": \"The full subcategory of the homotopy category of integer-indexed chain complexes consisting of objects whose 0th homology object is zero. This subcategory is defined as the homological kernel of the 0\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing cohomology over all sheaves of sets implies vanishing of all positive higher direct images of a module sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"DerivedCategory.isZero_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n i : ℤ),\\n  i < n → ∀ [hX : X.IsGE n], CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ belongs to the family $\\\\mathcal{G}_n$ of the T-structure (i.e., is isomorphic to a complex strictly supported in \"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"DerivedCategory.isZero_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n i : ℤ),\\n  n < i → ∀ [hX : X.IsLE n], CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"If an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $ (i.e., is isomorphic to a cochain complex strictly supported in degrees $ \\\\leq n $), then for every integer $ i \"}\n  {\"name\": \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For any additive functor $ F : C \\\\to D $ between abelian categories, natural number $ n $, and injective object $ X $ in $ C $, the $(n+1)$-th right-derived functor of $ F $ evaluated at $ X $ yields \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsAcyclic\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "grep",
+   "query": "totally.?acyclic|limp|acyclic.*pushforward|pushforward.*acyclic",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Tactic/GCongr/Core.lean\", \"line\": \"599\", \"text\": \"so instead we use `relImpRelLemma` to look it up.\"}\n  {\"file\": \"Mathlib/Tactic/GCongr/Core.lean\", \"line\": \"613\", \"text\": \"def relImpRelLemma (arity : Nat) : List GCongrLemma :=\"}\n  {\"file\": \"Mathlib/Tactic/GCongr/Core.lean\", \"line\": \"795\", \"text\": \"    lemmas := lemmas ++ relImpRelLemma lhsArgs.size\"}\n  {\"file\": \"Mathlib/Tactic/MinImports.lean\", \"line\": \"215\", \"text\": \"/-- `getAllImports cmd id` takes a `Syntax` input `cmd` and returns the `NameSet` of all the\"}\n  {\"file\": \"Mathlib/Tactic/MinImports.lean\", \"line\": \"226\", \"text\": \"def getAllImports (cmd id : Syntax) (dbg? : Bool := false) :\"}\n  {\"file\": \"Mathlib/Tactic/MinImports.lean\", \"line\": \"262\", \"text\": \"    let tot := getIrredundantImports (← getEnv) (← getAllImports stx id)\"}\n  {\"file\": \"Mathlib/Tactic/LinearCombination/Lemmas.lean\", \"line\": \"270\", \"text\": \"def relImpRelData : Ineq → Ineq → Option (Name × Ineq)\"}\n  {\"file\": \"Mathlib/Tactic/Recover.lean\", \"line\": \"4\", \"text\": \"Authors: Gabriel Ebner, Siddhartha Gadgil, Jannis Limperg\"}\n  {\"file\": \"Mathlib/Tactic/LinearCombination.lean\", \"line\": \"175\", \"text\": \"    match Ineq.relImpRelData hypRel goalRel with\"}\n  {\"file\": \"Mathlib/Tactic/Continuity/Init.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2023 Jannis Limperg. All rights reserved.\"}\n  {\"file\": \"Mathlib/Tactic/Continuity/Init.lean\", \"line\": \"4\", \"text\": \"Authors: Jannis Limperg\"}\n  {\"file\": \"Mathlib/Tactic/GRewrite/Core.lean\", \"line\": \"330\", \"text\": \"      lemmas := lemmas ++ relImpRelLemma args.size\"}\n  {\"file\": \"Mathlib/Tactic/Linter/UpstreamableDecl.lean\", \"line\": \"112\", \"text\": \"      let minImports := getIrredundantImports env (← getAllImports stx id)\"}\n  {\"file\": \"Mathlib/Tactic/Linter/DirectoryDependency.lean\", \"line\": \"658\", \"text\": \"  let imports := env.allImportedModuleNames\"}\n  {\"file\": \"Mathlib/Tactic/Linter/MinImports.lean\", \"line\": \"124\", \"text\": \"    let (importsSoFar, oldCumulImps) := (impState.minImports, impState.importSize)\"}\n  {\"file\": \"Mathlib/Tactic/Linter/MinImports.lean\", \"line\": \"149\", \"text\": \"    let newImports := (getIrredundantImports env (← getAllImports stx id)).filter (!isInitImport ·)\"}\n  {\"file\": \"Mathlib/Tactic/Linter/MinImports.lean\", \"line\": \"156\", \"text\": \"      let newCumulImps := -- We should always be in the situation where `getD` finds something\"}\n  {\"file\": \"Mathlib/Tactic/Linter/MinImports.lean\", \"line\": \"158\", \"text\": \"      minImportsRef.modify ({· with minImports := currImports, importSize := newCumulImps})\"}\n  {\"file\": \"Mathlib/Tactic/Linter/MinImports.lean\", \"line\": \"164\", \"text\": \"                      m!\\\"by {newCumulImps - oldCumulImps} \\\"\"}\n  {\"file\": \"Mathlib/Control/ULift.lean\", \"line\": \"4\", \"text\": \"Authors: Kim Morrison, Jannis Limperg\"}\n  {\"file\": \"Mathlib/Util/TransImports.lean\", \"line\": \"34\", \"text\": \"  let imports := (← getEnv).allImportedModuleNames\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Init.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2023 Jannis Limperg. All rights reserved.\"}\n  {\"file\": \"Mathlib/Combinatorics/SimpleGraph/Init.lean\", \"line\": \"4\", \"text\": \"Authors: Jannis Limperg\"}\n  {\"file\": \"Mathlib/Util/Tactic.lean\", \"line\": \"4\", \"text\": \"Authors: Arthur Paulino, Jannis Limperg\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean\", \"line\": \"143\", \"text\": \"private noncomputable def fullyFaithfulImp (hG : G.FullyFaithful) : G'.FullyFaithful :=\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves with vanishing cohomology on every slice are acyclic for all higher direct image functors",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.Acyclic\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {ι : Type u_2} → {c : ComplexShape ι} → HomologicalComplex C c → Prop\", \"doc\": \"A homological complex $ K $ is acyclic if, for every index $ i $, the image of the differential $ d_{\\\\text{prev}(i),i} $ equals the kernel of the differential $ d_{i,\\\\text{next}(i)} $. This means the \"}\n  {\"name\": \"HomologicalComplex.acyclic_iff\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex\", \"type\": \": K.Acyclic ↔ ∀ i, K.ExactAt i\", \"doc\": \"A homological complex $ K $ is acyclic if and only if it is exact at every index $ i $.\"}\n  {\"name\": \"TopCat.Sheaf.forget\", \"module\": \"Mathlib.Topology.Sheaves.Sheaf\", \"type\": \": TopCat.Sheaf C X ⥤ TopCat.Presheaf C X\", \"doc\": \"A sheaf on a topological space $ X $ with values in a category $ \\\\mathcal{C} $ is a presheaf that satisfies the sheaf condition for all open covers of $ X $. This means that for any open cover $ \\\\{U_i\"}\n  {\"name\": \"CategoryTheory.sheafIsAbelian\", \"module\": \"Mathlib.CategoryTheory.Sites.Abelian\", \"type\": \": Abelian (Sheaf J D)\", \"doc\": \"For any category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and an abelian category $\\\\mathcal{D}$, the category of sheaves on $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$ inherits an abelia\"}\n  {\"name\": \"HomotopyCategory.mem_subcategoryAcyclic_iff\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Acyclic\", \"type\": \"(X : HomotopyCategory C (ComplexShape.up ℤ)) :\\n  subcategoryAcyclic C X ↔ ∀ (n : ℤ), IsZero ((homologyFunctor _ _ n).obj X)\", \"doc\": \"An object $ X $ in the homotopy category belongs to the acyclic subcategory if and only if, for every integer $ n $, the $ n $-th homology object of $ X $ is zero.\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"{C : Type v} [SmallCategory.{v} C] (J : GrothendieckTopology C) (A : Type u₁) [Category.{v} A] [Abelian A]\\n  [IsGrothendieckAbelian.{v} A] [HasSheafify J A] : IsGrothendieckAbelian.{v} (Sheaf J A)\", \"doc\": \"Given a small category $\\\\mathcal{C}$ with a Grothendieck topology $J$, and an abelian category $\\\\mathcal{A}$ that is Grothendieck abelian with a sheafification functor, the category of sheaves on $\\\\ma\"}\n  {\"name\": \"CategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.RegularEpi\", \"type\": \"(J : GrothendieckTopology C) [HasSheafify J (Type u)] : IsRegularEpiCategory (Sheaf J (Type u))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheafification functor, the category of sheaves on $\\\\mathcal{C}$ with values in $\\\\mathrm{Type}\\\\, u$ has the property that every ep\"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Acyclic\", \"type\": \"(K : CochainComplex C ℤ) : subcategoryAcyclic C ((quotient _ _).obj K) ↔ K.Acyclic\", \"doc\": \"For a cochain complex $ K $ in a preadditive category $ C $ with integer indices, the image of $ K $ under the quotient functor to the homotopy category belongs to the acyclic subcategory (consisting \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "grep",
+   "query": "totally.?acyclic|\\blimp\\b|acyclic.*pushforward|pushforward.*acyclic",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results give underived pushforwards, ordinary injective vanishing, local injectivity of maps, or general sheaf infrastructure; none asserts this ringed-topos theorem without flatness."
+  },
+  {
+   "tool": "grep",
+   "query": "totally.?acyclic|\\blimp\\b|acyclic.*pushforward|pushforward.*acyclic",
+   "results": "[grep] OK 0 hit(s).  Hits read: ",
+   "date": "2026-10-23",
+   "verdict": "no match: underived sheaf/module infrastructure and generic injective-object vanishing do not assert total-acyclic-module vanishing for arbitrary ringed-topos direct image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules acyclic for sections over every sheaf of sets is acyclic for any direct image of ringed topoi",
+   "results": "[leansearch] OK 8 hit(s).  Hits read: AlgebraicGeometry.Scheme.Modules, SheafOfModules.noConfusionType, SheafOfModules.IsQuasicoherent, SheafOfModules.isSheaf, SheafOfModules, SheafOfModules.GeneratingSections, SheafOfModules.free, SheafOfModules.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: underived sheaf/module infrastructure and generic injective-object vanishing do not assert total-acyclic-module vanishing for arbitrary ringed-topos direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"IsAcyclic\"",
+   "results": "[loogle] OK 0 hit(s).  Hits read: ",
+   "date": "2026-10-23",
+   "verdict": "no match: underived sheaf/module infrastructure and generic injective-object vanishing do not assert total-acyclic-module vanishing for arbitrary ringed-topos direct image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a sheaf of modules has vanishing positive derived sections over every sheaf of sets then every higher ringed topos direct image vanishes",
+   "results": "[leanfinder] OK 8 hit(s).  Hits read: SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, CategoryTheory.plusPlusSheaf_preservesZeroMorphisms, SheafOfModules.instAbelian, CategoryTheory.Sheaf.H, instAbelianCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-23",
+   "verdict": "no match: underived sheaf/module infrastructure and generic injective-object vanishing do not assert total-acyclic-module vanishing for arbitrary ringed-topos direct image."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAcyclic|rightDerived|higherDirect",
+   "results": "[grep] OK 0 hit(s).  Hits read: ",
+   "date": "2026-10-23",
+   "verdict": "no match: underived sheaf/module infrastructure and generic injective-object vanishing do not assert total-acyclic-module vanishing for arbitrary ringed-topos direct image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher right derived pushforward of a module sheaf vanishes if the complex of sections of its injective resolution on every sheaf is exact in positive degrees",
+   "results": "[leanfinder] OK 8 hit(s).  Hits read: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact₀, CategoryTheory.hasInjectiveDimensionLT_iff, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+   "date": "2026-10-23",
+   "verdict": "no match: underived sheaf/module infrastructure and generic injective-object vanishing do not assert total-acyclic-module vanishing for arbitrary ringed-topos direct image."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-topos-relative-leray",
+  "date": "2026-10-23",
+  "group": "Q78"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: coherence of the entries R^p f_* H^q(E), using the proper case Tag 08AR. Supporting input: Tag 0734 (lemma-relative-Leray), module assertion; proof uses Tags 0731 (lemma-limp-acyclic), 03F3 (lemma-direct-image-injective-sheaf) and 015N (lemma-grothendieck-spectral-sequence). Relative Leray prerequisite: Tag 0731 (lemma-limp-acyclic), assertion (4); Tag 072Y (definition-limp) and section-limp for total acyclicity. Split here: sectionwise computation of positive direct-image cohomology by evaluation on the inverse image of a sheafified representable.",
+   "via": [
+    "lem-sfb-ringed-topos-relative-leray",
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-proper-space-coherent-derived-image",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-totally-acyclic-direct-image",
+  "worker": "stage1",
+  "summary": "Kept the full arbitrary-ringed-topos statement and wrote its proof from one source-module injective resolution. The topos adjunction identifies target sections with generalized sections over an inverse-image sheaf of sets; total acyclicity gives sectionwise exactness, and the sectionwise-kernel/sheafified-cokernel description gives vanishing. Reused existing infrastructure; no new nodes.",
+  "blueprint": "Supporting lemma for det-thm-sf-ctf-stability-direct-images proof (3), through the existing relative Leray dependency chain. Realizes the Tag 0731(4) prerequisite identified in blueprint.from.place; the current latest blueprint direct-image proof (3) assembles derived direct images. No change to the unit or chapter. Whole-blueprint searches for totally acyclic, ringed topoi, higher direct images and Tag 0731 found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic small-ringed-site module infrastructure supplies the Grothendieck property and hence injective resolutions; no stability-unit node supplies this infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-d19037d0d",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-d19037d0d (reviewer sub-agent of L); spot-checked: PASS, no changes: I read the item, its 4 steps and every cited statement in full. Delivery: one commit, item and report only, no new nodes. The item was unsplit with an empty proof on live and side-live and is not superseded. Statement, stmt_deps and source are unchanged, and no SGA is cited. Source: I read Stacks sites-cohomology section-limp, Tag 072Y, Tag 0731(4) and Tag 072W. The item defines total acyclicity with module-derived H^q(K,-) over every sheaf of sets K, which matches Stacks (equal to the abelian version by lemma-compute-cohomology-on-sheaf-sets). The conclusion covers any morphism of ringed topoi, the same scope as 0731(4). The proof replaces Stacks' change of site plus 072W with K_V=f^{-1}(h_V^#) and the topos adjunction. It is marked agent-written and is correct. Step 1: the module category is Grothendieck by lem-weil-pbc-ring-sheaves-grothendieck and has enough injectives by the Mathlib leaf, so an injective resolution exists. Step 2: (f_*M)(V) = Hom(h_V,-) by the Yoneda leaf, = Hom(h_V^#,-) by sheafification, = Hom(K_V,M) by the adjunction; it is additive by the ring-map identity with a=1, which needs f^♯(1)=1, also stated there, and natural in M. Step 3: the hypothesis applied to K_V gives H^q(J^•(V))=0. Step 4: kernels are sectionwise and the cokernel is the sheafified sectionwise cokernel, so H^q(f_*I^•)=0. Edge cases checked: q=0 correctly excluded, empty site, identity morphism, non-flat Z→F_p, non-subcanonical sites. Duplicate search over 0731, 072W and total acyclicity found only site-presented, abelian, injective-only or scheme-specific nodes. The citer lem-sfb-ringed-topos-relative-leray step 3 uses the statement as written. Mathlib searches cover all three kinds. Accepted tool_use: lem-weil-pbc-ring-sheaves-grothendieck as generic infrastructure. Minor, not changed: the inherited from.place text names 03F3 where the sibling nodes use Tag 072Z."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TotallyAcyclicDirectImage",
+  "declaration": "CategoryTheory.RingedToposMorphism.isZero_higherDirectImage_of_totallyAcyclic",
+  "file": "lean/Sheaf/CategoryTheory/TotallyAcyclicDirectImage.lean",
+  "statement": "theorem isZero_higherDirectImage_of_totallyAcyclic {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (A : Sheaf J RingCat.{u}) (B : Sheaf K RingCat.{u}) (_commA : ∀ (U : Cᵒᵖ) (a b : A.obj.obj U), a * b = b * a) (_commB : ∀ (V : Dᵒᵖ) (a b : B.obj.obj V), a * b = b * a) (f : RingedToposMorphism A B) (N : ringedSiteModules.{u} A) (I : InjectiveResolution N) (hN : ∀ (T : Sheaf J (Type u)) (q : ℕ), 0 < q → IsZero (((preadditiveCoyoneda.obj (op ((PresheafOfModules.sheafification (𝟙 A.obj)).obj ((PresheafOfModules.free A.obj).obj T.obj)))).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex |>.homology q)) (q : ℕ) (hq : 0 < q) : IsZero ((f.modules.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex |>.homology q)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The arbitrary injective resolution I computes both H^q(T,N) and R^q f_*N. Generalized sections use additive Hom from the Mathlib composite of PresheafOfModules.free and PresheafOfModules.sheafification, inlined in hN. Their adjunctions identify this additively and naturally with Hom of sheaves of sets. Commutativity is expressed sectionwise on the existing RingCat-valued ring sheaves. Repair of H2 on d1951c7c7a49: the theorem-node statement dependency and its import are removed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d78e0b10",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Re-delivery after H2 return of d1951c7c7a49 correctly applies option 2: inline Mathlib composite sheafification(free T), Cech import and extra stmt_dep removed; node non-lean fields equal live; commit touches only report, node, module. Clause-by-clause match with node and Stacks 0731(4)/072Y/section-limp: small sites at universe u per RingedToposMorphism interface, RingCat sheaves with sectionwise commutativity, arbitrary f (no flatness, no site functor), N : SheafOfModules A, arbitrary InjectiveResolution I computing both H^q(T,N) via additive Hom from the free module sheaf (= Hom_Sh(T,N_sets) with pointwise addition) and R^q f_*N via f.modules applied to I; hN covers all sheaves of sets and q>0; conclusion is IsZero of module-sheaf homology for q>0. Edge cases (q=0 excluded, empty sites, zero ring, identity morphism, non-representable test sheaves, non-flat ring map) covered; citer relative-leray usage fits. No total-acyclicity def node or Lean duplicate; statement verbatim; one sorry; docstrings with source and blueprint; no definitions/axioms/instances. No compile needed (no fix)."
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "id": "lem-sf-native-weil-tensor-geometry",
+ "kind": "statement",
+ "title": "Action-site tensor geometry before native closedness",
+ "statement": "Under the finite-field, prime, finite-type, quasi-compact and separated hypotheses of [def-sf-native-weil-closed-models], fix M, an ordinary closed structure S with symmetry beta, the fixed ordinary monoidal equality hmonoidal, and ordinary normalized tensor models hS. There exist a native derived monoidal tensor m, symmetry gamma, coefficient-unit identification delta, ordinary coefficient-unit identification epsilon, tensor-forgetting isomorphism t, NativeWeilTensorPresentation N [def-sf-native-weil-tensor-presentation], and TensorCoherence c [def-sf-ringed-forget-tensor-transposition-data]. Its unit equals nativeForget(delta), the exact-forgetting single-functor comparison, then epsilon inverse. No native derived adjunction, derived closed structure, derived Hom comparison or mate formula is in this conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models",
+  "def-sf-native-weil-tensor-presentation",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the existing native underived tensor by tensor-Hom mates, with additive parameter maps and evaluation-normalized ordinary forgetting. Construct the native chain comparison with its homogeneous-summand formula using the proved source total-tensor API. Obtain the underived ringed bridge.",
+   "uses": [
+    "lem-sf-native-weil-underived-tensor",
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-chain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "Apply ringedDerived_closed_symmetric_monoidal independently to both sites. Construct the native derived monoidal structure, symmetry and coefficient unit by the explicit inverse-equivalence transport definitions.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-sf-native-weil-tensor-ringed-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "Apply ringed_forget_tensor_descent to the bridge functor and its flat-model condition. Feed its TensorComparison to native_weil_tensor_ringed_transport to obtain t, its native representative presentation and its coherence for the fixed explicit monoidal structure.",
+   "uses": [
+    "lem-sf-ringed-forget-tensor-descent",
+    "lem-sf-native-weil-tensor-ringed-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "For c.unit:F(I) iso J, delta:I iso U and the exact-forgetting single comparison zeta:F(U) iso V, set epsilon=c.unit inverse followed by F(delta) then zeta. Cancel inverse isomorphisms to get c.unit=F(delta) followed by zeta then epsilon inverse. Assemble the original existential conclusion without changing its signature.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-underived-tensor",
+  "lem-sf-native-weil-tensor-ringed-bridge",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-sf-native-weil-tensor-ringed-structure",
+  "lem-sf-ringed-forget-tensor-descent",
+  "lem-sf-native-weil-tensor-ringed-transport",
+  "lem-sf-native-weil-tensor-chain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom/evaluation paragraph of cor-coef-verdier-weil-equivariance; native tensor geometry steps 1--3; Stacks 06YS, 06YU, 0FPT. Explicit underived tensor and monoidal/unit transport; remaining underived geometric square and representative transfer separated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor product of modules with Frobenius descent data has K-flat representative models and a symmetric monoidal forgetful functor",
+   "results": "Found AlgCat.instBraidedModuleCatForget₂, CategoryTheory.Mod_.forget, Module.Flat.of_flat_tensorProduct, CategoryTheory.Comon.instMonoidalForget, QuadraticModuleCat.instBraidedModuleCatForget₂, CategoryTheory.Mon.instMonoidalForget, ModuleCat.MonoidalCategory.symmetricCategory, FGModuleCat.tensorObj_obj. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal.transport\"",
+   "results": "Found CategoryTheory.Functor.Monoidal.transport, CategoryTheory.Functor.Monoidal.transport_ε, CategoryTheory.Functor.Monoidal.transport_η, CategoryTheory.Functor.Monoidal.transport_ε_assoc, CategoryTheory.Functor.Monoidal.transport_η_assoc, CategoryTheory.Functor.Monoidal.transport_δ, CategoryTheory.Functor.Monoidal.transport_μ, CategoryTheory.Functor.Monoidal.transport_δ_assoc. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective.*(Hom|hom)|[Ee]valuation.*[Cc]ompat|ParametrizedAdjunction",
+   "results": "Found Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilRingedTensorModel",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT Parent records cor-coef-verdier-weil-equivariance; blueprint_refs ancestor returns None.",
+   "via": [
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorGeometry",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorGeometry.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_geometry",
+  "statement": "theorem native_weil_tensor_geometry\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    (M : NativeClosedHomModels k₀ l X)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (β : @SymmetricCategory _ _ S.monoidal)\n    (hmonoidal : S.monoidal = (inferInstance : MonoidalCategory\n      (DerivedCategory (ProEtale.AdicSheaf l\n        (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))))\n    (hS : NativeOrdinaryTensorModels l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber\n      M.ordinaryHom M.ordinaryRepresentatives S β) :\n    ∃ m : MonoidalCategory (DerivedCategory (ProEtaleWeilSheaf k₀ l X)),\n    ∃ γ : @SymmetricCategory _ _ m,\n    ∃ δ : m.tensorUnit ≅ (DerivedCategory.singleFunctor _ 0).obj (adicConstant k₀ l X),\n    ∃ ε : S.monoidal.tensorUnit ≅ (DerivedCategory.singleFunctor _ 0).obj\n      (ProEtale.AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber),\n    ∃ t : @MonoidalCategory.tensor _ _ m ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor,\n    ∃ _P : NativeWeilTensorPresentation k₀ l X M S m t,\n    ∃ c : RingedForgetTensorTransposition.TensorCoherence m S.monoidal\n      γ β (nativeForget k₀ l X) t,\n      c.unit = (nativeForget k₀ l X).mapIso δ ≪≫\n        ((Functor.mapDerivedCategorySingleFunctor\n          (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) 0).app\n            (adicConstant k₀ l X)) ≪≫ ε.symm",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-weil-ringed-tensor-model",
+  "worker": "stage3",
+  "summary": "Action-site tensor geometry before native closedness. The Lean declaration and proof steps specify the exact representative interface needed by the parent tensor model.",
+  "blueprint": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT; serves the internal-Hom/evaluation/transposition paragraph of cor-coef-verdier-weil-equivariance through the parent chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T034614-L-3665275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T094352-L-218480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-specified-tower-adjunction-charts",
+ "kind": "statement",
+ "title": "Chart counits for the specified representing tower adjunction",
+ "statement": "Fix the finite-field/coefficient setting $P$ of [def-pur-conventions], separated finite-type $k$-schemes $X,Y$, an open/proper factorization $j:X\\hookrightarrow Z$, $p:Z\\to Y$ of a smooth $k$-morphism of pure dimension $d\\ge0$, and Noetherian structures on $X,Y$. Let $D,E,m$ be a field-shriek model system, a finite coefficient subfield, and an integral model as in [def-sp-field-extension-integral-models]. Then the specified tower exceptional functor $m.exceptional$ and adjunction $m.adjunction$ admit a Charts record of [det-sp-tower-gluing] at this same compactification: normalized finite coordinates and geometric calculus, the etale fibre-sum and ordered projective-line chart pairs, all open geometric properties, and chart comparisons whose local counits are the given global counit after open restriction and compact-support composition. This asserts neither a purity isomorphism nor an equality of orientations.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, local explicit counit and tower-gluing comparison at the chosen compactification"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sp-field-extension-integral-models",
+  "det-sp-tower-gluing",
+  "def-sp-tower-gluing-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Apply tower gluing at the canonical compactification, retaining its full normalized chart data. The compactification comparisons of the geometric calculus, compatible with open restrictions, transport the left functor to the fixed factorization.",
+   "uses": [
+    "det-sp-tower-gluing",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the transported right adjoint with the specified right adjoint by the unique counit-preserving isomorphism. Pull this isomorphism back to each chart and compose with the existing chart comparison. Naturality of open composition and of the open counit, followed by the counit-preserving equation, gives the new local counit identity. All chart normalization data remain those of gluing.",
+   "uses": [
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-gluing",
+  "lem-sp-coefficient-tower-shriek-calculus",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, local explicit counit and tower-gluing comparison at the chosen compactification; expansion of normalized realization and counit transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Charts with explicit integration counit for any specified right adjoint of compact support on strict coefficient towers",
+   "results": "Generic adjunction counits and condensed-space adjunctions; no strict coefficient-tower chart statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "rightAdjointUniq and its counit/unit component identities; used for formal transfer, not the geometric chart construction.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Charts|chart_counit_transport|specified_tower_adjunction_charts",
+   "results": "Mathlib hits concern manifold charts; local SmoothPurityTowerGluing provides charts at the canonical compactification, not an arbitrary prescribed adjunction.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TransportIntegralCounitRealization",
+  "date": "2026-10-27",
+  "group": "J3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 2, local explicit counit and tower-gluing comparison at the chosen compactification",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SpecifiedTowerAdjunctionCharts",
+  "file": "lean/Sheaf/Paper/SpecifiedTowerAdjunctionCharts.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.TransportIntegralCounit.specified_tower_adjunction_charts",
+  "statement": "theorem specified_tower_adjunction_charts (E : FieldShriekSystem.Index P)\n    (m : FieldExtensionTowers.IntegralModel P D E j p d)\n    [IsNoetherian X] [IsNoetherian Y]\n    [SmoothOfRelativeDimension d (j ≫ p)] :\n    Nonempty (SpTowerGluing.Charts P.coefficients.l E.val (D.base E) (D.operations E)\n      (D.coordinates E) P.field.k (X.asOver (Spec (.of P.field.k)))\n      (Y.asOver (Spec (.of P.field.k)))\n      ⟨‹IsSeparated (Y ↘ Spec (.of P.field.k))›,\n        ‹LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))›,\n        ‹QuasiCompact (Y ↘ Spec (.of P.field.k))›⟩\n      ((j ≫ p).asOver (Spec (.of P.field.k))) d (SpTowerGamma.factorization j p)\n      m.supportClosed m.exceptional m.adjunction)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1ef65",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T034700-L-3673858",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 9 new modules against clone main (integral_counit_realization statement identical; relocated decls same names/namespaces/variable binders; item public-imports them; 0 importers); new holes against CondensedStage fields, tower_gluing and FiniteNormalization"
+ }
+}

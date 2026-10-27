@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-analytic-projective-kahler-geometry",
+ "kind": "statement",
+ "title": "Compact projective complex geometry and its Fubini--Study metric",
+ "statement": "Let $n\\geq0$, work over $\\mathbf C$ [def-weil-field], and define $P=\\mathbf P^n(\\mathbf C)$ as the quotient of $\\mathbf C^{n+1}\\setminus\\{0\\}$ by multiplication by nonzero scalars, with the quotient topology and the standard holomorphic charts $U_j=\\{[z]:z_j\\ne0\\}$, $[z]\\mapsto(z_k/z_j)_{k\\ne j}$. Then $P$ is a compact Hausdorff second-countable complex manifold without boundary of complex dimension $n$. The quotient map $\\pi:\\mathbf C^{n+1}\\setminus\\{0\\}\\to P$ is holomorphic; each $U_j$ has a holomorphic section $s_j:U_j\\to\\mathbf C^{n+1}\\setminus\\{0\\}$, obtained by setting coordinate $j$ to $1$, with $\\pi\\circ s_j=\\mathrm{id}_{U_j}$. In chart coordinates $w=(w_1,\\ldots,w_n)$ the real $(1,1)$-forms\n$$\\omega_j=\\frac{i}{2\\pi}\\partial\\bar\\partial\\log(1+\\textstyle\\sum_{k=1}^n|w_k|^2)$$\nglue to a smooth real closed $(1,1)$-form $\\omega$ on $P$ that is positive definite: $\\omega(v,Jv)>0$ for every nonzero real tangent vector $v$, where $J$ is multiplication by $i$. Equivalently $g(v,w)=\\omega(v,Jw)$ is a positive definite Hermitian metric with associated form $\\omega$, so $P$ is Kähler. For $n=0$ this is the zero form and the unique metric on the zero-dimensional tangent bundle; positivity has no nonzero vector to test.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally: Demailly, Complex Analytic and Differential Geometry, V §15.A opening, printed p.277 (quotient, compactness, charts and sections), VI §4 Example (4.4), printed p.297 (Fubini--Study). Read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf. Includes explicit zero-dimensional convention."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $Z=\\mathbf C^{n+1}\\setminus\\{0\\}$. The quotient map is open: for open $O\\subset Z$, its saturation is $\\pi^{-1}\\pi(O)=\\bigcup_{\\lambda\\ne0}\\lambda O$, open since multiplication by fixed $\\lambda\\ne0$ is a homeomorphism. Thus $U_j$ is open and $\\pi:\\{z_j\\ne0\\}\\to U_j$ is a quotient map. The ratios $z_k/z_j$ are constant on its fibres and are continuous by [lem-sfb-complex-analytic-function-operations]; hence they descend to a continuous map $\\tau_j:U_j\\to\\mathbf C^n$. The continuous map $w\\mapsto\\pi(s_j(w))$, with $s_j(w)_j=1$ and $s_j(w)_k=w_k$, is its inverse, as dividing a representative by $z_j$ gives exactly this representative. These charts cover $P$. Pull back the balls with positive rational radii and centres in $(\\mathbf Q+i\\mathbf Q)^n$ along each $\\tau_j$. They form a countable basis: for any open $O$ and $x\\in O$, choose $j$ with $x\\in U_j$ and a rational ball containing $\\tau_j(x)$ inside $\\tau_j(O\\cap U_j)$. Thus $P$ is second-countable.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "V §15.A, opening quotient and chart construction, printed p.277; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf (local copy WANTED)."
+   }
+  },
+  {
+   "text": "For Hausdorffness define $A([z])_{rs}=z_r\\bar z_s/\\sum_k|z_k|^2$. Its entries descend continuously from $Z$ by the definition of quotient topology; their denominator is strictly positive. Acting on a column $a$, this matrix gives $z(\\sum_s\\bar z_s a_s)/\\|z\\|^2$, so its range is precisely $\\mathbf C z$ (it fixes $z$). Consequently equal matrices give equal lines. For two distinct points an entry has distinct real or imaginary parts. Choose disjoint real open intervals around these two values; their inverse images under that continuous real-valued entry are disjoint open neighbourhoods. This proves Hausdorffness without assuming that an arbitrary quotient is Hausdorff.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "V §15.A, the Hausdorff assertion in the projective-manifold construction; explicit separating functions supplied by N8; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf (local copy WANTED)."
+   }
+  },
+  {
+   "text": "Regard $\\mathbf C^{n+1}$ as the finite-dimensional real normed vector space with the $2n+2$ coordinate vectors $e_j,ie_j$. The unit sphere $S$ is compact in its subspace topology by [lem-cbc-euclidean-sphere-compact]. Its map to $P$ induced by $\\pi$ is continuous and onto, since any nonzero $z$ is equivalent to $z/\\|z\\|\\in S$. Given an open cover of $P$, its inverse images form an open cover of $S$. A finite subcover of $S$ gives a finite subcover of $P$ by surjectivity, which is exactly compactness.",
+   "uses": [
+    "lem-cbc-euclidean-sphere-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "V §15.A, sphere quotient and compactness, printed p.277; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf (local copy WANTED)."
+   }
+  },
+  {
+   "text": "On $U_j\\cap U_l$, write $a=s_j(w)$, so $a_j=1$. The coordinate change is $\\tau_l\\tau_j^{-1}(w)=(a_k/a_l)_{k\\ne l}$ on $a_l\\ne0$, with the same formula exchanging $j,l$ for its inverse. These functions are holomorphic by [lem-sfb-complex-analytic-function-operations], so the charts define a complex manifold of dimension $n$ without boundary (their targets are all of $\\mathbf C^n$). The expression for $\\pi$ in chart $j$ is $(z_k/z_j)_{k\\ne j}$ on $z_j\\ne0$, hence holomorphic by the same node. In these coordinates the section $s_j$ is affine-linear, hence holomorphic; its $j$th coordinate is $1$, so it lies in $Z$ and $\\pi s_j=\\mathrm{id}$.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "V §15.A, holomorphic atlas and normalized tautological section, printed p.277; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf (local copy WANTED)."
+   }
+  },
+  {
+   "text": "Set $t_j=\\|s_j(w)\\|^2=1+\\sum_{k\\ne j}|w_k|^2$ and $\\phi_j=\\log t_j$, a smooth real function since $t_j\\geq1$. Define $\\omega_j=D\\phi_j$ using [lem-sfb-local-ddbar-potential-calculus]. For the change $F=\\tau_l\\tau_j^{-1}$ above, $s_l(F(w))=s_j(w)/a_l$, whence $\\phi_l\\circ F=\\phi_j-\\log|a_l|^2$. The function $a_l$ is holomorphic and nowhere zero on this overlap. Naturality, real-linearity, and the log-modulus clause of that node give $F^*\\omega_l=D(\\phi_l\\circ F)=D\\phi_j=\\omega_j$. Thus the forms agree as tensors on every overlap and define a unique global form by using any chart at each point. Its smoothness, reality, type $(1,1)$ and closedness hold locally by the same node, hence hold globally. No holomorphic logarithm on a whole overlap has been chosen.",
+   "uses": [
+    "lem-sfb-local-ddbar-potential-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.C (3.13)–(3.19); V §15 (15.8); VI §4 (4.4), printed pp.23–25,279,297; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf (local copy WANTED)."
+   }
+  },
+  {
+   "text": "In a chart put $t=1+\\sum|w_r|^2$. Differentiating gives $\\partial\\phi/\\partial\\bar w_s=w_s/t$ and $H_{r\\bar s}=\\partial^2\\phi/(\\partial w_r\\partial\\bar w_s)=\\delta_{rs}/t-\\bar w_r w_s/t^2$. Thus $H_{r\\bar s}=\\overline{H_{s\\bar r}}$. For a real tangent vector $v$ with $dw_r(v)=a_r$, the definition of $D$ in [lem-sfb-local-ddbar-potential-calculus] gives $\\omega(v,Jv)=\\pi^{-1}\\sum_{r,s}H_{r\\bar s}a_r\\bar a_s$. Expand the finite sums to obtain\n$$t^2\\sum_{r,s}H_{r\\bar s}a_r\\bar a_s=t\\sum_r|a_r|^2-\\left|\\sum_r\\bar w_r a_r\\right|^2=\\sum_r|a_r|^2+\\sum_{r<s}|w_ra_s-w_sa_r|^2.$$\nFor the last equality, expand each square: the diagonal terms are $\\sum_{r\\ne s}|w_r|^2|a_s|^2$ and the cross terms subtract the off-diagonal terms in the squared absolute sum. All squares on the right are nonnegative, and $v\\ne0$ means some $a_r\\ne0$, so their first sum is positive. As $t>0$ and $\\pi>0$, this proves the required positivity.",
+   "uses": [
+    "lem-sfb-local-ddbar-potential-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §4 (4.4), printed p.297; explicit coordinate Hessian and sum-of-squares verification by N8; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf (local copy WANTED)."
+   }
+  },
+  {
+   "text": "In the same coordinates, for $dw(v)=a$ and $dw(w')=b$, direct evaluation gives $g(v,w')=\\omega(v,Jw')=\\pi^{-1}\\operatorname{Re}\\sum_{r,s}H_{r\\bar s}a_r\\bar b_s$. Hermitian symmetry of $H$ makes this a symmetric real bilinear form, and replacing $a,b$ by $ia,ib$ leaves it unchanged. Positivity is step 6. It is therefore a smooth $J$-invariant positive real metric, equivalently the Hermitian metric $h(v,w')=g(v,w')-i\\omega(v,w')$ on the complex tangent bundle. Its associated real form is $\\omega$, already closed in step 5, which is the Kähler condition. When $n=0$, $P$ is a point, the chart is $\\mathbf C^0$, all displayed differential forms and tangent vectors are zero, and the metric is the unique form on the zero vector space. The quantified positivity condition is then vacuous; no positive tangent vector or positive-dimensional assumption was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §4 definition (4.1) and example (4.4), printed pp.296–297; zero-dimensional case supplied explicitly; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf (local copy WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-complex-analytic-function-operations",
+  "lem-cbc-euclidean-sphere-compact",
+  "lem-sfb-local-ddbar-potential-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Demailly V §15.A and VI §4 (4.4), read online; local copy WANTED. N8 supplies quotient separation, overlap argument, Hessian positivity and dimension-zero details."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Complex projective space is a compact Hausdorff complex manifold with the Fubini Study Kahler metric",
+   "results": "[leanfinder] OK 8 hit(s) UpperHalfPlane.instIsManifoldComplexModelWithCornersSelfTopWithTopENat, instIsManifoldRealEuclideanSpaceFinOfNatNatModelWithCornersSelfTopWithTopENatCircle, TopCat.instCompactSpaceCarrierDiskBoundary, EuclideanSpace.instIsManifoldSphere, instIsManifoldRealEuclideanSpaceFinModelWithCornersSelfTopWithTopENatElemHAddNatOfNatSphere, Circle.instCompactSpace, stereographic_target, stereographic'_target",
+   "date": "2026-10-24",
+   "verdict": "no match: sphere topology and the two-dimensional linear Kahler form do not give projective complex geometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Fubini Study form on projective space is a positive closed real one one form",
+   "results": "[leanfinder] OK 8 hit(s) Orientation.kahler_ne_zero, Orientation.kahler, Orientation.kahler_apply_self, Complex.kahler, Orientation.kahler_mul, Orientation.kahler_apply_apply, Orientation.normSq_kahler, Orientation.kahler_ne_zero_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: sphere topology and the two-dimensional linear Kahler form do not give projective complex geometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FubiniStudy\"",
+   "results": "[loogle] OK 0 hit(s) ",
+   "date": "2026-10-24",
+   "verdict": "no match: sphere topology and the two-dimensional linear Kahler form do not give projective complex geometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complex projective space is compact and carries the Fubini Study Kahler metric",
+   "results": "[leansearch] OK 8 hit(s) Complex.kahler, CompactT2.projective_iff_extremallyDisconnected, instCompactSpaceMultiplicative, Circle.instCompactSpace, Orientation.kahler_map_complex, Orientation.kahler, CompHaus.instCompactSpaceCarrierToTopTrue, Complex.instProperSpace",
+   "date": "2026-10-24",
+   "verdict": "no match: sphere topology and the two-dimensional linear Kahler form do not give projective complex geometry"
+  },
+  {
+   "tool": "grep",
+   "query": "FubiniStudy|Fubini.Study|[Kk]ahler|[Kk]ähler",
+   "results": "[grep] OK 22 hit(s) Mathlib/RingTheory/Kaehler/TensorProduct.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/JacobiZariski.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/RingTheory/Kaehler/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean, Mathlib/Analysis/InnerProductSpace/TwoDim.lean, Mathlib/Analysis/InnerProductSpace/TwoDim.lean, Mathlib/Analysis/InnerProductSpace/TwoDim.lean, Mathlib/Analysis/InnerProductSpace/TwoDim.lean, Mathlib/Analysis/InnerProductSpace/TwoDim.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: sphere topology and the two-dimensional linear Kahler form do not give projective complex geometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional complex projective space has a compact Hausdorff quotient topology",
+   "results": "OK 8 hits: Projectivization.finite_of_finite, TopCat.instCompactSpaceCarrierDiskBoundary, FiniteDimensional.proper_rclike, Projectivization.finite_iff_of_finite, FiniteDimensional.proper, Complex.instProperSpace, TopCat.instCompactSpaceCarrierDisk, FiniteDimensional.proper_real. ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: projectivization hits are algebraic, compact projective objects are categorical, and sphere compactness covers only an input, not the atlas or Fubini–Study form"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projectivization\", CompactSpace",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: projectivization hits are algebraic, compact projective objects are categorical, and sphere compactness covers only an input, not the atlas or Fubini–Study form"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projectivization of a finite dimensional complex vector space is compact Hausdorff",
+   "results": "OK 8 hits: Projectivization, CompactT2.Projective, LinearAlgebra.Projectivization.termℙ, CompHaus.toStonean, CompHaus.instExtremallyDisconnectedCarrierToTopTrueOfProjective, CompHausLike.instHasPropCarrierToTop, CompHausLike.instCompactSpaceCarrierObjTopCatCompHausLikeToTop, CompactT2.projective_iff_extremallyDisconnected. ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: projectivization hits are algebraic, compact projective objects are categorical, and sphere compactness covers only an input, not the atlas or Fubini–Study form"
+  },
+  {
+   "tool": "grep",
+   "query": "Projectivization",
+   "results": "OK 5 hits: Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean, Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean, Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean, Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean, Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: projectivization hits are algebraic, compact projective objects are categorical, and sphere compactness covers only an input, not the atlas or Fubini–Study form"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-analytic-projective-structure-cohomology",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space. Supporting input: Compact projective complex geometry and its Fubini--Study metric.",
+   "via": [
+    "lem-sfb-analytic-projective-structure-cohomology",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-analytic-projective-kahler-geometry",
+  "worker": "stage1",
+  "summary": "N8 checked Demailly V §15.A and VI §4 online, searched the project, DAG, current blueprint and Mathlib. Gave explicit quotient charts, separation by rank-one projections, sphere compactness, holomorphic maps, potential overlap identity, Hessian positivity by sums of squares, and metric including n=0. Reused the existing sphere-compactness Mathlib leaf lem-cbc-euclidean-sphere-compact (reviewer FIX: the delivered duplicate leaf was dropped) and added a general local complex-Hessian calculus node; reused the existing analytic-operations Mathlib leaf. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting GAGA input in the Kodaira/Kempf prerequisite chain; Analytic structure-sheaf vanishing on projective space. Supporting input: Compact projective complex geometry and its Fubini--Study metric. The latest det-thm-sf-ctf-stability-direct-images proof (3) supplies the ancestor route; this item is the analytic projective-geometry input below its GAGA/Kodaira prerequisite, not a change to the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N8-e0c4061ac",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-e0c4061ac (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, byte-identical to the N6-created unsplit item), all 7 steps, both new nodes, cited lem-sfb-complex-analytic-function-operations and def-weil-field/def-weil-finite-dimensional-subspace, and Mathlib ProperSpace.lean:47 (isCompact_sphere) and FiniteDimension.lean:553-564 (proper, proper_real). Demailly is not local (WANTED), so I checked the mathematics by hand. Step 1: π is open via the saturation ∪λO, τ_j is a homeomorphism, and countable rational-ball basis. Step 2: the projection matrix z z̄^T/‖z‖² separates points (elementary). Step 3: sphere compactness and a continuous surjection. Step 4: transitions (a_k/a_l) are analytic. Step 5: φ_l∘F = φ_j − log|a_l|² checked; naturality, real-linearity and the log-modulus clause give F*ω_l = ω_j. Step 6: H = δ/t − w̄_r w_s/t², ω(v,Jv) = π^{-1}ΣH a ā with the wedge convention checked, and the Lagrange identity expanded by hand. Step 7: g = π^{-1} Re ΣH a b̄ is J-invariant, h = g − iω is complex-linear, and n=0 is vacuous. The new node lem-sfb-local-ddbar-potential-calculus is true (closedness, reality, holomorphic naturality, ∂∂̄ log|h|² = 0 without a branch), self-contained, statement-only, not a clause of the item, and has no DAG duplicate (scanned statements for ∂∂̄, Hessian, pluriharmonic, log|·|). FIX (C5 duplicate): the new Mathlib leaf lem-sfb-finite-dimensional-sphere-compactness duplicates the existing Mathlib leaf lem-cbc-euclidean-sphere-compact (same statement, same isCompact_sphere + proper_real). Step 3 now cites the existing leaf (a Mathlib leaf, so citing it from another unit passes the route check; no cycle). uses, proof_deps and the split_report summary are updated in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-analytic-projective-kahler-geometry.json, and the duplicate is dropped.; 1 file(s) fixed by the reviewer"
+ }
+}

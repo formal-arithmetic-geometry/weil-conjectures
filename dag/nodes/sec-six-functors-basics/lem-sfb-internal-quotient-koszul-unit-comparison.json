@@ -1,0 +1,169 @@
+{
+ "id": "lem-sfb-internal-quotient-koszul-unit-comparison",
+ "kind": "statement",
+ "title": "Actual quotient Roos augmentation compared with singleton Koszul unit",
+ "statement": "Let l be prime, E a finite extension of Q_l, and X a Noetherian scheme. Use the exact constant section transport F, small ring O and residue map q [def-sfb-internal-completion-section-transport]. Let a be any global section whose singleton list generates kernelIdeal(q) on every slice [def-weil-pbc-ringed-ideal-generators]. Let P be K-flat in the actual integral module category [sk-def-pe-derived-completion], and D any RingedKoszulLimitPresentation(O,1,a) [def-weil-pbc-ringed-koszul-system]. There is an isomorphism from F(Q(actualRoos(P))) to D.completion(F(Q(P))) whose composite with F(Q(actualAugmentation(P))) is exactly D.unit(F(Q(P))). This compares actual augmented limits on representatives and does not assert a completeness equivalence.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1), completion comparison; constant-coefficient criterion (2)--(3); Stacks 099I, 099L, 099M"
+ },
+ "stmt_deps": [
+  "def-sfb-internal-completion-section-transport",
+  "sk-def-pe-derived-completion",
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Apply koszul_quotient_resolution to obtain the strict quasi-isomorphism q from the singleton Koszul tensor tower to the transported actual quotient tower, including its ordinary-limit unit identity.",
+   "uses": [
+    "lem-sfb-internal-koszul-quotient-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply quotient_roos_limit to D.inverseLimit with D.comparison, its right-derived property and computation on K-injective towers. This gives the augmented actual Roos comparison e with the derived limit of the strict actual quotient tower.",
+   "uses": [
+    "lem-sfb-internal-quotient-roos-limit",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose D.completion.mapIso(complexIso(P)), D.inverseLimit.mapIso(D.tensorFactors.app(complex(P))) and D.inverseLimit.mapIso(Q(q)) to obtain b from D.completion(F(Q(P))) to D.inverseLimit(Q(quotientComplex(P))). Naturality of D.unit, its formula on complexes, naturality of D.comparison at q, and the ordinary-unit equation give D.unit ≫ b.hom = F(Q(actualAugmentation(P))) ≫ e.hom. Hence e ≪≫ b.symm is the required comparison; postcompose that identity with b.inv to get the required unit equation. The reused private unit_naturality and unit_app_Q are proved localization calculations from the flat-scalar module; no scalar-comparison theorem is used.",
+   "uses": [
+    "def-sfb-internal-quotient-tower-model",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-koszul-quotient-resolution",
+  "lem-sfb-internal-quotient-roos-limit",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-sfb-internal-quotient-tower-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Section derived-completion-noetherian and Lemma naive-completion (099L, 099M); sites-cohomology.tex Lemma derived-limit-is-ok (0941); algebraization.tex Lemma derived-completion-koszul (0A0E)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars along flat ring map inducing isomorphisms on quotients preserves and reflects derived adic completeness",
+   "results": "; AdicCompletion.flat_of_isNoetherian, AdicCompletion.congr, AdicCompletion.ofLinearEquiv_apply, AdicCompletion.ofLinearEquiv, IsAdicComplete, AdicCompletion.instIsScalarTower, AdicCompletion.of_bijective_iff, AdicCompletion.instModuleOfIsScalarTower",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; exact functor and homology APIs are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isIso_iff",
+   "results": "loogle: unknown identifier 'CategoryTheory.Functor.map_isIso_iff'; ",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; exact functor and homology APIs are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "IsComplete|Roos",
+   "results": "; Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/NumberTheory/Padics/ProperSpace.lean, Mathlib/NumberTheory/Padics/ProperSpace.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/Padics/PadicNumbers.lean, Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean, Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; exact functor and homology APIs are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "an adjunction unit is an isomorphism on objects in the reflective subcategory",
+   "results": "; CategoryTheory.Functor.essImage.unit_isIso, CategoryTheory.Reflective.instIsIsoAppUnitReflectorAdjunctionA, CategoryTheory.Adjunction.unitAsIsoOfIso, CategoryTheory.Adjunction.instIsIsoFunctorUnitOfIsEquivalence, CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful, CategoryTheory.Adjunction.isIso_unit_app_of_iso, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit, CategoryTheory.Adjunction.isIso_unit_of_iso",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; exact functor and homology APIs are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of a constant sheaf quotient by a principal ideal is generated by the constant generator on every slice",
+   "results": "; Polynomial.ker_constantCoeff, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, SheafOfModules.presentationOfIsCokernelFree_generators, AlgebraicGeometry.StructureSheaf.res_const', CategoryTheory.Sheaf.mem_essImage_of_isConstant, SheafOfModules.GeneratingSections.ofEpi_s, Ideal.mem_toCotangent_ker",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; exact functor and homology APIs are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRingedIdealGeneratingList|RingedKoszulLimitPresentation|mapDerivedCategory",
+   "results": "; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; exact functor and homology APIs are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact conservative functor of abelian categories induces a conservative functor on derived categories by commuting with homology",
+   "results": "; CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.preservesHomology_of_map_exact, CategoryTheory.Functor.map_distinguished_exact",
+   "date": "2026-10-25",
+   "verdict": "No specialized match; exact functor and homology APIs are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The augmented Roos homotopy inverse limit of derived quotients by powers of a regular element is the Koszul completion with the same unit",
+   "results": "; AdicCompletion, AdicCompletion.instOne, AdicCompletion.subring, AdicCompletion.module, AdicCompletion.liftRingHom.congr_simp, AdicCompletion.instCommRing, AdicCompletion.subalgebra, AdicCompletion.instAddCommGroup",
+   "date": "2026-10-25",
+   "verdict": "No exact match; reuse general functor and generating-section APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generating sections of an ideal sheaf kernel of quotient by a principal ideal are obtained from its single generator",
+   "results": "; SheafOfModules.GeneratingSections.I, SheafOfModules.QuasicoherentData.localGeneratorsData_generators, Ideal.isoBaseOfIsPrincipal_apply, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop, AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals_ideal, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app, Algebra.Generators.ker_naive",
+   "date": "2026-10-25",
+   "verdict": "No exact match; reuse general functor and generating-section APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalCompletionStacksComparison",
+  "date": "2026-10-25",
+  "group": "M9"
+ },
+ "blueprint": {
+  "same_as": [],
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Integral-models proof (1): actual and constant completion comparison",
+   "via": [
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalQuotientKoszulUnitComparison",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalQuotientKoszulUnitComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalCompletionTransport.quotient_koszul_unit_comparison",
+  "statement": "theorem quotient_koszul_unit_comparison [IsNoetherian X]\n    (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)\n    (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,\n      IsRingedIdealGeneratingList (ring l E X)\n        (ConstantCompletion.kernelIdeal (residue l E X)).module\n        (ConstantCompletion.kernelIdeal (residue l E X)).inclusion U 1\n        (fun _ ↦ a.val (op U)))\n    (P : CochainComplex (AdicCompletion.Modules l E X) ℤ)\n    (hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E X) (.up ℤ)).kFlat P)\n    (D : RingedKoszulLimitPresentation (ring l E X) 1 (fun _ ↦ a)) :\n    ∃ e : (functor l E X).obj (DerivedCategory.Q.obj (AdicCompletion.roos l E X P)) ≅\n        D.completion.obj ((functor l E X).obj (DerivedCategory.Q.obj P)),\n      (functor l E X).map (DerivedCategory.Q.map (AdicCompletion.augmentation l E X P)) ≫\n        e.hom = D.unit ((functor l E X).obj (DerivedCategory.Q.obj P))",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T123400-L-1867558",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T202030-L-2665193",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

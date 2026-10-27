@@ -1,0 +1,165 @@
+{
+ "id": "def-per-strict-diagram-pseudococones",
+ "kind": "definition",
+ "title": "Pseudococones on strict diagrams of small categories",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $J$ be a small category, $D:J\\to\\mathsf{Cat}$ a strict functor with small values, and $\\mathcal A$ a category in a containing universe [def-nagata-category, def-weil-size-convention]. Define $\\operatorname{PCone}(D,\\mathcal A)$ to have objects the families of functors $A_j:D(j)\\to\\mathcal A$ with natural isomorphisms $\\theta_a:A_kD(a)\\xrightarrow{\\sim}A_j$ for every $a:j\\to k$, satisfying $\\theta_{1_j}=1$ and $\\theta_{ba}=\\theta_a\\circ(\\theta_bD(a))$, using the strict identity and composition equalities of $D$. A morphism $(A,\\theta)\\to(B,\\eta)$ is a family of natural transformations $\\rho_j:A_j\\to B_j$ satisfying $\\rho_j\\theta_a=\\eta_a(\\rho_kD(a))$. Such morphisms are equal exactly when their families are equal. Identities and composition are componentwise; their compatibility squares and the category laws hold. For a strict cocone $c=(C,v_j)$ of $D$ [def-weil-pbc-category-colimit], define restriction $R_c:(C\\to\\mathcal A)\\to\\operatorname{PCone}(D,\\mathcal A)$ by $R_c(F)_j=Fv_j$ and identity comparisons (the isomorphisms induced by $v_kD(a)=v_j$), and by whiskering on transformations. For every functor $H:\\mathcal A\\to\\mathcal B$, postcomposition sends $(A,\\theta)$ to $(HA,H\\theta)$ and modifications to their images under $H$. A natural transformation $t:H\\to H'$ induces the natural transformation between these postcomposition functors with component $t_{A_jx}$ at $(A,j,x)$. For every functor $w:K\\to J$ between small categories, reindexing sends $(A,\\theta)$ to $(A_{w(k)},\\theta_{w(a)})$ and modifications to the reindexed families. These formulas satisfy the identity/composition coherence equations and modification compatibility squares required to define the stated functors and natural transformations.",
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-size-convention",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04AX (section-directed-colimits), coherent-family extension in lem-per-filtered-category-pseudococones, definition of PCone and restriction; Tag 04E7 (lemma-cofinal), reindexing. These are explicit categorical definitions for that extension, not a quotation of a theorem in either tag."
+ },
+ "proof": [
+  {
+   "text": "Modification equality follows by function extensionality on its transformation family and proof irrelevance of its compatibility field. Identity compatibility is the identity law. Composition compatibility follows by associativity and the two input modification squares; the category laws then hold componentwise.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For restriction, each comparison component is the image of an equality morphism. Functoriality of equality-to-morphism and proof irrelevance identify the normalization equation and the three equality morphisms in the composition equation. Naturality at the equality morphism gives compatibility of restricted transformations.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the postcomposing functor to each coherence equation and each modification square, using preservation of composition. A transformation between postcomposing functors gives compatible components by its naturality at each comparison component, and is natural in pseudococones by naturality at each modification component.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For reindexing, substitute preservation of identities and composition by the index functor in the original coherence equations. Proof irrelevance identifies the equality transports supplied by the composite diagram. Modification squares and functor laws are the original componentwise ones at the reindexed objects and arrows.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Elementary verification of the explicit coherent-family definitions extending Tag 04AX and reindexing in Tag 04E7; follows the proof docstrings of StrictDiagramPseudococone."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Category of coherent pseudococones of functors on a strict diagram of small categories with modifications and postcomposition",
+   "results": "{\"t\": \"2026-10-24T11:51:50Z\", \"tool\": \"leansearch\", \"query\": \"Category of coherent pseudococones of functors on a strict diagram of small categories with modifications and postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Functor.CoconeTypes.postcomp\", \"CategoryTheory.Limits.DiagramOfCones.mk\", \"CategoryTheory.Functor.mapCocone\", \"CategoryTheory.Limits.DiagramOfCocones.mkOfHasColimits\", \"CategoryTheory.Limits.Cocones.functoriality\", \"CategoryTheory.Limits.DiagramOfCocones\", \"CategoryTheory.cocones\"], \"digest\": \"4e4dea6072082285\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: hits are ordinary cocones or diagrams of cocones, not coherent invertible comparisons of functors and compatible modifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudococones on a strict diagram of categories and compatible natural transformations",
+   "results": "{\"t\": \"2026-10-24T11:51:52Z\", \"tool\": \"leanfinder\", \"query\": \"Pseudococones on a strict diagram of categories and compatible natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.DiagramOfCocones\", \"CategoryTheory.Functor.CoconeTypes\", \"CategoryTheory.Limits.Cocone\", \"CategoryTheory.Limits.DiagramOfCocones.obj\", \"CategoryTheory.Limits.Cocone.fromStructuredArrow\", \"CategoryTheory.Limits.DiagramOfCocones.mk.inj\", \"CategoryTheory.Limits.Cocone.category\", \"CategoryTheory.Limits.diagramOfCoconesInhabited\"], \"digest\": \"e0f421e62a8809ca\"}",
+   "date": "2026-10-24",
+   "verdict": "No exact match: hits are ordinary cocones or diagrams of cocones, not coherent invertible comparisons of functors and compatible modifications."
+  },
+  {
+   "tool": "grep",
+   "query": "Pseudococone|pseudoCocone|pseudococone",
+   "results": "{\"t\": \"2026-10-24T11:51:52Z\", \"tool\": \"grep\", \"query\": \"Pseudococone|pseudoCocone|pseudococone\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No match in Mathlib/CategoryTheory. The same expression was searched in lean/WeilConjectures and lean/Sheaf with no hits. Broader project searches found only directed-poset/additive variants, not this general-category notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-filtered-category-pseudococones",
+  "date": "2026-10-24",
+  "group": "Q74"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Completion argument behind the ancestor proof Step 3: the projective-limit etale topos in ILO XX 4.4, printed p.373. Coherent compatibility and cofinal independence. The PCone definition and its restriction/postcomposition/reindexing operations in lem-per-filtered-category-pseudococones.",
+   "via": [
+    "lem-per-filtered-category-pseudococones",
+    "lem-per-qcqs-etale-topos-inverse-limit",
+    "lem-per-admissible-modification-cohomology-presentation",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.StrictDiagramPseudococone",
+  "declaration": "CategoryTheory.StrictDiagramPseudococone",
+  "declarations": [
+   "CategoryTheory.StrictDiagramPseudococone.Hom",
+   "CategoryTheory.StrictDiagramPseudococone.hom_ext",
+   "CategoryTheory.StrictDiagramPseudococone.identity_compatible",
+   "CategoryTheory.StrictDiagramPseudococone.composition_compatible",
+   "CategoryTheory.StrictDiagramPseudococone.category",
+   "CategoryTheory.StrictDiagramPseudococone.restriction_coherence",
+   "CategoryTheory.StrictDiagramPseudococone.restrictObj",
+   "CategoryTheory.StrictDiagramPseudococone.restriction_compatible",
+   "CategoryTheory.StrictDiagramPseudococone.restriction",
+   "CategoryTheory.StrictDiagramPseudococone.postcompose_coherence",
+   "CategoryTheory.StrictDiagramPseudococone.postcomposeObj",
+   "CategoryTheory.StrictDiagramPseudococone.postcompose_compatible",
+   "CategoryTheory.StrictDiagramPseudococone.postcompose",
+   "CategoryTheory.StrictDiagramPseudococone.postcompose_transformation_compatible",
+   "CategoryTheory.StrictDiagramPseudococone.postcompose_transformation_naturality",
+   "CategoryTheory.StrictDiagramPseudococone.postcomposeMap",
+   "CategoryTheory.StrictDiagramPseudococone.reindex_coherence",
+   "CategoryTheory.StrictDiagramPseudococone.reindexObj",
+   "CategoryTheory.StrictDiagramPseudococone.reindex"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/StrictDiagramPseudococone.lean",
+  "statement": "structure StrictDiagramPseudococone {J : Type z} [SmallCategory J] (D : J ⥤ Cat.{z, z}) (A : Type u) [Category.{v} A]",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Explicit category objects, modifications, componentwise category operations, restriction, postcomposition including natural transformations, and reindexing. Named proof obligations state exactly the elementary coherence and compatibility laws included in this definition node; each is sorry with a complete proof docstring. All definition data are explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de22dd01d",
+  "group": "Q74",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de22dd01d",
+  "group": "Q74",
+  "result": "fix",
+  "note": "Lean and records correct in substance. StrictDiagramPseudococone: θ_a : D(a)⋙A_k ≅ A_j; identity and composition laws match θ_{ba}=θ_a∘θ_bD(a); modification square matches; all data explicit, only Prop laws sorried with docstrings. Restriction equivalence stated as IsEquivalence of the specified eqToIso restriction functor, with object/arrow IsColimit hypotheses met by the Category.{z} on Type z built by exists_filteredColimit_category. Vertex naturality: functor equality plus HEq on 2-cells, true. Final reindexing: w.Final = (j↓w) nonempty and connected; leg equations pin q; reindex compatibility equation correct. Objectwise equivalences: hidentity/hcomposition are the σ coherence; conclusion's equation is the λ-coherence with correct directions. No universe restriction beyond the single size universe z. No Pseudococone duplicate in Mathlib, side-live or slopmaster2. Statements verbatim in the files. Sole fault H11: the second reading is the worker's self-check. FIX: fixes/lem-per-filtered-category-pseudococones.report.md keeps the worker report and New nodes section verbatim and adds an independent clause-by-clause second reading. No Lean changed, nothing compiled."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261026T082430-L-2177095",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-affine-coefficient-one-degree-quotient",
+ "kind": "statement",
+ "title": "One-degree refinement of a supplied affine coefficient factorization",
+ "statement": "Let $D$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $S$ a finite type commutative $D$-algebra [def-weil-pbc-finite-type-algebra] which is flat over $D$ [def-weil-pbc-flat-ring-map], and $A$ a commutative $D$-algebra. Put $Y=\\operatorname{Spec}S$ [def-weil-affine-spectrum, def-pc-scheme]. Use the standard coefficient resolutions $R_E$, the sheaf dg module categories, locally perfect objects, $U$, $\\Phi_E$, $\\widehat K$, and the normalized arrows $\\nu_E$ of [def-sfb-dg-coefficient-realization].\n\nPut $Y_E=\\operatorname{Spec}(S\\otimes_D E)$, $Y_A=\\operatorname{Spec}(S\\otimes_D A)$, and $\\pi_E:Y_A\\to Y_E$ [def-pc-fibre-product]. Let $H\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y\\otimes_D R_A)$ be perfect, $K\\in D_{\\mathrm{QCoh}}(\\mathcal O_{Y_A})$, $u:H\\to\\widehat K$, and $r\\in\\mathbf Z$. Suppose the following data are supplied: a commutative finite type $D$-algebra $E$ mapping to $A$, a bounded coherent object $G\\in D(\\mathcal O_{Y_E})$ [pqf-def-coherent], an ordinary arrow $\\gamma:G\\to R\\pi_{E*}K$ [def-pc-derived-direct-image], and $s:H\\to\\Phi_E(G)$ with $\\nu_E(\\gamma)s=u$. Assume $H^i(Us)$ is onto for every $i>r$, and $H^r(Uu)$ is onto.\n\nThere exist a commutative finite type $E$-algebra $E'$ with $E\\to E'\\to A$ extending the supplied map, a bounded coherent $G'\\in D(\\mathcal O_{Y_{E'}})$, an ordinary $\\gamma':G'\\to R\\pi_{E'*}K$, and $s':H\\to\\Phi_{E'}(G')$ with $\\nu_{E'}(\\gamma')s'=u$, such that $H^i(Us')$ is onto for every $i\\ge r$. This is a conditional single-degree assertion about an already supplied factorization; it asserts neither existence of that initial factorization nor a simultaneous solution at arbitrarily many degrees. It makes no assumption on $H^i(Uu)$ below $r$, on injectivity of $H^r(Uu)$, or on flatness of coefficient maps.\n\nThe flatness of $S$ over $D$ is essential to this corrected assertion. It imposes no flatness on $D\\to E$, $E\\to E'$, or $E'\\to A$. In fact the witnesses may be chosen so that $s'$ is an isomorphism, although only the stated single-degree surjectivity is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent single-degree affine quotient subproblem of the finite-coherent descente input to the unnumbered Kiehl assertion following Tag 0CSD (lemma-flat-proper-pseudo-coherent-direct-image-general). This conditional arrow refinement is not stated in that paragraph. WANTED: Kiehl (1972), Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata, pp.287--316, the affine finite-coefficient cohomological refinement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sfb-dg-coefficient-realization",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-pc-derived-direct-image",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-affine-dg-coefficient-module-comparison]. Write $C_B=S\\otimes_D R_B$ and $T_B=S\\otimes_D B$ for a coefficient algebra $B$. The given $H$ corresponds to a perfect $P\\in D(C_A)$, and $K$ to an ordinary $T_A$-complex $L$. The arrow $u$ corresponds to $v:P\\to\\operatorname{Res}_{C_A}^{T_A}L$. These identifications retain the actual action counit and the ordinary arrows to $R\\pi_{B*}K$.",
+   "uses": [
+    "lem-sfb-affine-dg-coefficient-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Agent assembly for the corrected flat affine case: Tag 09S6, lemma-qis-equivalence; finite-stage perfect dg descent. The unrestricted imported assertion is false; see report.md, Statement corrected."
+   }
+  },
+  {
+   "text": "By [lem-sfb-affine-perfect-dg-finite-stage-descent], choose a finite type $D$-algebra $B\\to A$ and a perfect $P_B\\in D(C_B)$ with an isomorphism $\\alpha:C_A\\otimes_{C_B}^{\\mathbf L}P_B\\simeq P$. Put $E'=E\\otimes_D B$, mapping to $A$ by $e\\otimes b\\mapsto e b$, and $P'=C_{E'}\\otimes_{C_B}^{\\mathbf L}P_B$. Finite generators of $B/D$ give generators of $E'/E$, so the supplied $E\\to A$ is extended. Exact scalar extension carries a finite-cell module and its retraction to such a module and retraction, hence $P'$ is perfect. Iterated extension is extension along the composite: both are left adjoint to iterated restriction, with the comparison defined by their adjunction bijections. This gives $\\alpha':C_A\\otimes_{C_{E'}}^{\\mathbf L}P'\\simeq P$, with its specified adjunction comparison.",
+   "uses": [
+    "lem-sfb-affine-perfect-dg-finite-stage-descent",
+    "lem-sfb-ringed-dg-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Agent assembly for the corrected flat affine case: Tag 09S6, lemma-qis-equivalence; finite-stage perfect dg descent. The unrestricted imported assertion is false; see report.md, Statement corrected."
+   }
+  },
+  {
+   "text": "The augmentation $C_{E'}\\to T_{E'}$ is a quasi-isomorphism. Indeed $R_{E'}\\to E'$ is a quasi-isomorphism, and tensor with the flat $D$-module $S$ preserves cohomology: apply exact tensor to $0\\to Z^j\\to R_{E'}^j\\to B^{j+1}\\to0$ and $0\\to B^j\\to Z^j\\to H^j(R_{E'})\\to0$. Thus $H^j(C_{E'})=S\\otimes_D H^j(R_{E'})$. Set $F=T_{E'}\\otimes_{C_{E'}}^{\\mathbf L}P'$. The quasi-isomorphism equivalence [lem-sfb-dg-qis-restriction-equivalence] says its adjunction unit $\\eta:P'\\to\\operatorname{Res}_{C_{E'}}^{T_{E'}}F$ is an isomorphism. That node uses right modules; apply it to opposite algebras to get exactly left-module extension and restriction, as in [lem-sfb-ringed-dg-scalar-adjunction].",
+   "uses": [
+    "def-sfb-dg-coefficient-realization",
+    "def-weil-pbc-flat-ring-map",
+    "lem-sfb-dg-qis-restriction-equivalence",
+    "lem-sfb-ringed-dg-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Agent assembly for the corrected flat affine case: Tag 09S6, lemma-qis-equivalence; finite-stage perfect dg descent. The unrestricted imported assertion is false; see report.md, Statement corrected."
+   }
+  },
+  {
+   "text": "The affine comparison sends $F$ to a perfect ordinary object $G'$ on $Y_{E'}$. The ring $T_{E'}=S\\otimes_D E'$ is finite type over $D$: the images of generators of $S/D$, $E/D$, and $B/D$ generate it. By [lem-weil-pbc-finite-type-algebra-noetherian] it is Noetherian. Its affine spectrum is quasi-compact and locally Noetherian, hence Noetherian. Therefore [lem-pc-perfect-noetherian-cohomology] gives bounded coherent cohomology for $G'$.",
+   "uses": [
+    "lem-sfb-affine-dg-coefficient-module-comparison",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-pc-perfect-noetherian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Agent assembly for the corrected flat affine case: Tag 09S6, lemma-qis-equivalence; finite-stage perfect dg descent. The unrestricted imported assertion is false; see report.md, Statement corrected."
+   }
+  },
+  {
+   "text": "Transpose $v\\alpha'$ along $C_{E'}\\to C_A$ to obtain $a:P'\\to\\operatorname{Res}_{C_{E'}}^{T_A}L$. Transpose $a$ along $C_{E'}\\to T_{E'}$ to obtain $c:F\\to\\operatorname{Res}_{T_{E'}}^{T_A}L$; by the unit formula, $a=\\operatorname{Res}(c)\\eta$. The affine comparison makes $c$ an ordinary $\\gamma':G'\\to R\\pi_{E'*}K$. Define $s'$ by the affine comparison from $(C_A\\otimes_{C_{E'}}^{\\mathbf L}\\eta)(\\alpha')^{-1}$. Its target is precisely $\\Phi_{E'}(G')$, and it is an isomorphism because $\\eta$ and $\\alpha'$ are. To check normalization, transpose $a=\\operatorname{Res}(c)\\eta$ back along $C_{E'}\\to C_A$: its transpose is extension of $\\eta$, then extension of $c$, then the action counit on $L$. This is $v\\alpha'$ by definition of $a$. The comparison identifies that action counit composite with $\\nu_{E'}(\\gamma')$. Cancel $\\alpha'$ to get the actual equality $\\nu_{E'}(\\gamma')s'=u$.",
+   "uses": [
+    "lem-sfb-ringed-dg-scalar-adjunction",
+    "lem-sfb-affine-dg-coefficient-module-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Agent assembly for the corrected flat affine case: Tag 09S6, lemma-qis-equivalence; finite-stage perfect dg descent. The unrestricted imported assertion is false; see report.md, Statement corrected."
+   }
+  },
+  {
+   "text": "Every $H^i(Us')$ is an isomorphism, since $s'$ is, and is therefore surjective for every $i\\ge r$. This supplies the required witnesses with the prescribed coefficient map $E\\to A$. The initial $G,\\gamma,s$ and its cohomological hypotheses need not be used in the flat case: the construction proves a stronger conclusion under the corrected geometric flatness assumption. Identity tensor extensions include the zero rings and the empty spectrum; a zero $H$ descends to the zero object by the same existence statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Agent assembly for the corrected flat affine case: Tag 09S6, lemma-qis-equivalence; finite-stage perfect dg descent. The unrestricted imported assertion is false; see report.md, Statement corrected."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-dg-coefficient-module-comparison",
+  "lem-sfb-affine-perfect-dg-finite-stage-descent",
+  "lem-sfb-ringed-dg-scalar-adjunction",
+  "def-sfb-dg-coefficient-realization",
+  "def-weil-pbc-flat-ring-map",
+  "lem-sfb-dg-qis-restriction-equivalence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-pc-perfect-noetherian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Agent assembly for the corrected flat affine case: Tag 09S6, lemma-qis-equivalence; finite-stage perfect dg descent. The unrestricted imported assertion is false; see report.md, Statement corrected."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A given finite coherent coefficient factorization of a perfect dg arrow can be refined to make its first map surjective in one extra cohomological degree",
+   "results": "{\"t\": \"2026-10-24T04:48:18Z\", \"tool\": \"leanfinder\", \"query\": \"A given finite coherent coefficient factorization of a perfect dg arrow can be refined to make its first map surjective in one extra cohomological degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.right_fac\", \"DerivedCategory.left_fac\", \"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\"], \"digest\": \"5576f5ee2ffbf791\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fraction presentations, injective replacements, cocycle quotients and ordinary exactness refinements give neither finite coherent coefficient models nor the normalized single-degree arrow refinement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"cokernel\"",
+   "results": "{\"t\": \"2026-10-24T04:48:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex\\\", \\\"cokernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fraction presentations, injective replacements, cocycle quotients and ordinary exactness refinements give neither finite coherent coefficient models nor the normalized single-degree arrow refinement."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomolog.*(surject|cokernel)|coherent.*factor",
+   "results": "{\"t\": \"2026-10-24T04:48:19Z\", \"tool\": \"grep\", \"query\": \"cohomolog.*(surject|cokernel)|coherent.*factor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fraction presentations, injective replacements, cocycle quotients and ordinary exactness refinements give neither finite coherent coefficient models nor the normalized single-degree arrow refinement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A given finite coherent coefficient factorization of a perfect dg arrow can be refined to make its first map surjective in one extra cohomological degree",
+   "results": "{\"t\": \"2026-10-24T04:48:19Z\", \"tool\": \"leansearch\", \"query\": \"A given finite coherent coefficient factorization of a perfect dg arrow can be refined to make its first map surjective in one extra cohomological degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.fromSingleMk_surjective\", \"CochainComplex.HomComplex.CohomologyClass.mk_surjective\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac\", \"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\", \"CategoryTheory.ShortComplex.Exact.exact_up_to_refinements\", \"CategoryTheory.MorphismProperty.FunctorialFactorizationData.fac_app\", \"CochainComplex.cm5b.fac\"], \"digest\": \"0f2bf675bd7874ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fraction presentations, injective replacements, cocycle quotients and ordinary exactness refinements give neither finite coherent coefficient models nor the normalized single-degree arrow refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Killing one top cohomology cokernel of a finite coefficient model under a fixed perfect source retaining its normalized arrow to an ordinary complex",
+   "results": "{\"t\": \"2026-10-24T04:48:23Z\", \"tool\": \"leanfinder\", \"query\": \"Killing one top cohomology cokernel of a finite coefficient model under a fixed perfect source retaining its normalized arrow to an ordinary complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"groupCohomologyIso\", \"groupCohomology.isoShortComplexH1_hom\", \"CochainComplex.HomComplex.leftHomologyData'\"], \"digest\": \"39886806dc0398e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: fraction presentations, injective replacements, cocycle quotients and ordinary exactness refinements give neither finite coherent coefficient models nor the normalized single-degree arrow refinement."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*factorization|finite.*coherent|DifferentialGraded",
+   "results": "{\"t\": \"2026-10-24T07:20:46Z\", \"tool\": \"grep\", \"query\": \"coefficient.*factorization|finite.*coherent|DifferentialGraded\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cocycle representatives, homotopies, fractions or ordinary tensors; none supplies finite coefficient descent with a perfect ordinary model and its normalized arrow."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Refining a perfect differential graded module map through a finite coherent ordinary coefficient complex to make the first map surjective in one cohomological degree",
+   "results": "{\"t\": \"2026-10-24T07:20:47Z\", \"tool\": \"leansearch\", \"query\": \"Refining a perfect differential graded module map through a finite coherent ordinary coefficient complex to make the first map surjective in one cohomological degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.mk_surjective\", \"Algebra.Presentation.differentials.surjective_hom₁\", \"CategoryTheory.ShortComplex.exact_iff_surjective_moduleCatToCycles\", \"groupCohomology.cochainsMap_id_f_map_epi\", \"CochainComplex.HomComplex.Cochain.fromSingleMk_surjective\", \"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\", \"groupCohomology.cochainsMap_f_map_epi\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\"], \"digest\": \"6eced1d69f577750\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cocycle representatives, homotopies, fractions or ordinary tensors; none supplies finite coefficient descent with a perfect ordinary model and its normalized arrow."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"cokernel\"",
+   "results": "{\"t\": \"2026-10-24T07:20:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex\\\", \\\"cokernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cocycle representatives, homotopies, fractions or ordinary tensors; none supplies finite coefficient descent with a perfect ordinary model and its normalized arrow."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Refining a perfect differential graded module map through a finite coherent ordinary coefficient complex to make the first map surjective in one cohomological degree",
+   "results": "{\"t\": \"2026-10-24T07:20:49Z\", \"tool\": \"leanfinder\", \"query\": \"Refining a perfect differential graded module map through a finite coherent ordinary coefficient complex to make the first map surjective in one cohomological degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.toSingleMk_surjective\", \"CochainComplex.HomComplex.Cocycle.toSingleMk_surjective\", \"CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective\", \"CochainComplex.HomComplex.Cochain.fromSingleMk_surjective\", \"CochainComplex.cm5b\", \"CategoryTheory.ProjectiveResolution.extMk_surjective\", \"CochainComplex.isKInjective_of_injective_aux\", \"CategoryTheory.InjectiveResolution.extMk_surjective\"], \"digest\": \"091ab6a9454a2da3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cocycle representatives, homotopies, fractions or ordinary tensors; none supplies finite coefficient descent with a perfect ordinary model and its normalized arrow."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient descent of nullhomotopies and finite cell differential graded modules with cohomologically surjective maps",
+   "results": "{\"t\": \"2026-10-24T07:27:33Z\", \"tool\": \"leanfinder\", \"query\": \"Finite coefficient descent of nullhomotopies and finite cell differential graded modules with cohomologically surjective maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instQFactorsThroughHomotopyDown\", \"Homotopy.mkCoinductiveAux₂\", \"Homotopy.mkCoinductive\", \"HomologicalComplex.cylinder.πCompι₀Homotopy.inrX_nullHomotopy_f\", \"instQFactorsThroughHomotopyIntUp\", \"HomologicalComplex.homotopyCofiber.desc_f'\", \"Homotopy.nullHomotopicMap_f_of_not_rel_left\", \"ComplexShape.QFactorsThroughHomotopy_of_exists_prev\"], \"digest\": \"fe552532da50fced\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cocycle representatives, homotopies, fractions or ordinary tensors; none supplies finite coefficient descent with a perfect ordinary model and its normalized arrow."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*descen|descen.*perfect|quasi.*equivalence",
+   "results": "{\"t\": \"2026-10-24T07:36:11Z\", \"tool\": \"grep\", \"query\": \"perfect.*descen|descen.*perfect|quasi.*equivalence\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cocycle representatives, homotopies, fractions or ordinary tensors; none supplies finite coefficient descent with a perfect ordinary model and its normalized arrow."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-24T07:36:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cocycle representatives, homotopies, fractions or ordinary tensors; none supplies finite coefficient descent with a perfect ordinary model and its normalized arrow."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient descent of a perfect complex and factorization of its derived morphism to an arbitrary complex",
+   "results": "{\"t\": \"2026-10-24T07:36:12Z\", \"tool\": \"leansearch\", \"query\": \"Finite coefficient descent of a perfect complex and factorization of its derived morphism to an arbitrary complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac\", \"DerivedCategory.left_fac\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"CochainComplex.cm5b\", \"CochainComplex.cm5b.fac\"], \"digest\": \"e35de23922e5e98c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cocycle representatives, homotopies, fractions or ordinary tensors; none supplies finite coefficient descent with a perfect ordinary model and its normalized arrow."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a flat finite type algebra S over a Noetherian ring D, a perfect derived coefficient module descends to a finite type coefficient stage and its arrow to any ordinary complex factors through that perfect model",
+   "results": "{\"t\": \"2026-10-24T07:36:13Z\", \"tool\": \"leanfinder\", \"query\": \"Over a flat finite type algebra S over a Noetherian ring D, a perfect derived coefficient module descends to a finite type coefficient stage and its arrow to any ordinary complex factors through that perfect model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Module.Flat.exists_factorization_of_comp_eq_zero_of_free\", \"Algebra.Smooth.formallySmooth\"], \"digest\": \"5e875ba2d0a2ac2a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern cocycle representatives, homotopies, fractions or ordinary tensors; none supplies finite coefficient descent with a perfect ordinary model and its normalized arrow."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-perfect-arrow-coherent-factorization",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Affine case: finite coherent factorization for Y=Spec S; no Zariski assembly is asserted. One-degree induction: a supplied factorization surjective above r is refined at r; this is separate from initial source descent and affine comparison. Correction established by Q37: the unrestricted first-factor surjectivity fails for a nonflat affine chart; the flat affine version follows by finite perfect descent and the augmentation equivalence. The parent cannot use this corrected version without supplying flatness.",
+   "via": [
+    "lem-sfb-affine-perfect-arrow-coherent-factorization",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-coefficient-one-degree-quotient",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported nonflat single-degree assertion is false. Report gives an explicit exterior-dg counterexample with a non-finitely-generated annihilator. Corrected by requiring S flat over D, with no flatness imposed on coefficient maps, and proved using existing finite dg descent, augmentation equivalence, affine comparisons and normalized adjunctions. No new nodes. The existing parent lacks the new hypothesis and is flagged for repair; it is not edited.",
+  "blueprint": "Independent affine one-degree refinement prerequisite in the inherited from.place chain below det-thm-sf-ctf-stability-direct-images proof (3). Latest blueprint only supplies the surrounding proper/open direct-image route. This agent-created affine prerequisite is corrected rather than attributed to the blueprint or to the unnumbered Kiehl paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Hilbert basis theorem for the finite type coordinate ring; this is a Mathlib leaf."
+   },
+   {
+    "node": "lem-pc-perfect-noetherian-cohomology",
+    "why": "Generic ordinary perfect-complex cohomology theorem on a Noetherian affine scheme, following descent; the coefficient unit has no replacement for this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-pc-perfect-noetherian-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-a0658b86a",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-a0658b86a (reviewer sub-agent of L); spot-checked: I read the imported item, its only citer and every cited statement in full, and checked Stacks 0CSD with the Kiehl paragraph after it (perfect.tex:7547) and Stacks 09S6 (dga.tex:6508). (1) The imported statement is false. I checked the worker's counterexample myself: D=Z, S=F_p, A=k[t]⊕V square-zero with tV=0 and ann(t)=V not finitely generated, E=k[t], r=-1, P=<x,y,z> with dz=εx+ty, over C_A modelled by A[ε] through the Koszul zigzag. Every hypothesis holds. Any E' over E is a k-algebra, so ε acts by 0 on Φ_{E'}(G'). That forces H^1(N)=A, H^0(N)=A/t and H^-1(N)=0, so A/t would be FP_2 and V finitely generated by Schanuel, a contradiction. (2) The correction adds S flat over D (def-weil-pbc-flat-ring-map), is named in the report with the counterexample (E7 procedure), and the proof is complete. Step 1 uses the comparison statement. Step 2 uses descent, E'=E⊗B and iterated adjoints. Step 3: flatness gives H(C_{E'})=S⊗H(R_{E'}), so the augmentation is a quasi-isomorphism and the unit is an isomorphism by the qis node, applied to opposite algebras. Step 4: T_{E'} is Noetherian and perfect cohomology is bounded coherent. Step 5: transposes give ν(γ')s'=u with s' an isomorphism. Step 6 is elementary. proof_deps equals the union of uses. There are no new nodes. The tool_uses (Mathlib leaf; generic perfect-cohomology node already used by the parent) are accepted. (3) Batch-5: def-trf-cotangent-resolution-data is the general definition of polynomial resolutions and was already in the closure through the base stmt_dep def-sfb-dg-coefficient-realization. lem-trf-triangulated-subcategory-cone-system is a generic status-mathlib lemma on triangulated localization. Neither is part of the trace formula or Poincare duality, so all four listed citations are fine. MAINTAINER: step 5 of the citer lem-sfb-affine-perfect-arrow-coherent-factorization uses the item without flatness, which is false, so the parent's induction must be reopened. The report's claim that the parent statement is also refuted is overstated: the parent allows non-k-algebra E. E=Z[t] and any E with 1 lifting to E[p] fail, but the general case is open. Re-check the grandparent lem-sfb-perfect-coefficient-arrow-finite-realization on A=k[t]⊕V. The report heading should be Source error, and the finding should be recorded in HUMAN.md."
+ }
+}

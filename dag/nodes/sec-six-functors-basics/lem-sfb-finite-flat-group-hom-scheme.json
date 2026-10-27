@@ -1,0 +1,258 @@
+{
+ "id": "lem-sfb-finite-flat-group-hom-scheme",
+ "kind": "statement",
+ "title": "Affine Hom scheme for a finite locally free group source",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. An $S$-group scheme means a group object in schemes over $S$, and a homomorphism preserves multiplication, identity and inverse. Let $D$ and $G$ be $S$-group schemes, with $D\\to S$ finite locally free [def-pc-finite-locally-free], and $G\\to S$ affine [pqf-def-affine-morphism] and of finite presentation. Here finite presentation means locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. The functor on $S$-schemes $T$ given by $T\\mapsto\\operatorname{Hom}_{T\\text{-gp}}(D\\times_ST,G\\times_ST)$ is represented by an affine $S$-scheme $B$ of finite presentation: there are bijections $\\operatorname{Hom}_S(T,B)\\simeq\\operatorname{Hom}_{T\\text{-gp}}(D\\times_ST,G\\times_ST)$ natural in every $T$. Fibre products are [def-pc-fibre-product]. No smoothness, Noetherianity or reducedness assumption is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Lemma 2.1.3, second assertion and proof, printed pp.58-59; coefficient construction and group-operation equalizers. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this group-homomorphism representability assertion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $D^2=D\\times_SD$. Its first projection to $D$ is a base change of $D\\to S$, hence finite locally free by [lem-sfb-finite-locally-free-base-change]. Composing with $D\\to S$ and applying [lem-trf-finite-locally-free-composition] shows $D^2\\to S$ is finite locally free. The identity $S\\to S$ is finite, flat and locally of finite presentation, directly from the identity ring map. Apply [lem-sfb-affine-fp-relative-hom-scheme] to $(X,Y)=(D,G),(D^2,G),(S,G)$ to obtain affine finitely presented $S$-schemes $H,K,L$, respectively. For every $T/S$ their points are ordinary maps $D_T\\to G_T$, $D_T^2\\to G_T$, and $T\\to G_T$, respectively. Each application uses precisely the finite locally free source and the given affine finitely presented target $G$.",
+   "uses": [
+    "lem-sfb-finite-locally-free-base-change",
+    "lem-trf-finite-locally-free-composition",
+    "lem-sfb-affine-fp-relative-hom-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.1.3, printed pp.58-59, and Exercise 2.4.5, printed p.77; explicit group-operation fibre products. Read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For $u:D_T\\to G_T$, define two $K(T)$-points $a_T(u)=u\\circ m_D$ and $b_T(u)=m_G\\circ(u\\times_Tu)$, and two $L(T)$-points $c_T(u)=u\\circ e_D$ and $d_T(u)=e_G$. Multiplication and identity are taken after base change to $T$. All four rules commute with pullback: the induced map of fibre products has the prescribed projections, and composition of pulled-back maps is the pullback of composition. Thus [lem-galois-yoneda-fully-faithful], applied in schemes over $S$ and using the natural bijections of step 1, gives $S$-morphisms $a,b:H\\to K$ and $c,d:H\\to L$. This uses exactly the fully faithful form of Yoneda, not a claim about an arbitrary presheaf.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.1.3, printed pp.58-59, and Exercise 2.4.5, printed p.77; explicit group-operation fibre products. Read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Set $M=K\\times_SL$, $v=(a,c):H\\to M$, $w=(b,d):H\\to M$, and form $B=H\\times_{(v,w),M\\times_SM,\\Delta_M}M$. These schemes and maps exist by [def-pc-fibre-product]; the diagonal is the pair of identity maps. Its universal property gives a bijection between maps $T\\to B$ over $S$ and maps $u:D_T\\to G_T$ satisfying $u m_D=m_G(u\\times_Tu)$ and $u e_D=e_G$. Indeed the additional $M(T)$-point in the fibre product is forced to be $v(u)=w(u)$; it adds no choice. This description commutes with every $T'\\to T$ by the same universal property.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.1.3, printed pp.58-59, and Exercise 2.4.5, printed p.77; explicit group-operation fibre products. Read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Fix an affine open $U=\\operatorname{Spec}A\\subset S$. By the explicit affine-chart conclusion of [lem-sfb-affine-fp-relative-hom-scheme], write $H_U=\\operatorname{Spec}P$, $K_U=\\operatorname{Spec}Q$, $L_U=\\operatorname{Spec}C$ with $P,Q,C$ finitely presented $A$-algebras. The four arrows induce $\\alpha,\\beta:Q\\to P$ and $\\gamma,\\delta:C\\to P$. Choose finite algebra generators $q_i$ of $Q$ and $c_j$ of $C$, and set $J=(\\alpha(q_i)-\\beta(q_i),\\gamma(c_j)-\\delta(c_j))\\subset P$. For an $A$-algebra $R$, a map $P\\to R$ kills $J$ exactly when its composites with each pair agree on generators, hence on every polynomial in those generators and on all elements of $Q,C$. It therefore gives precisely the points of $B_U$ in step 3. The affine spectrum correspondence [def-weil-affine-spectrum] identifies these with maps to $\\operatorname{Spec}(P/J)$. This identification holds for all $U$-schemes: on an affine open cover use the just-proved formula; uniqueness on affine opens covering each overlap, followed by [lem-weil-pbc-scheme-morphism-gluing], glues the maps in both directions. Thus $B_U\\simeq\\operatorname{Spec}(P/J)$. If $P=A[z_1,\\ldots,z_n]/(r_1,\\ldots,r_m)$, lift the finitely many generators of $J$ to polynomials $s_1,\\ldots,s_t$; then $P/J=A[z_1,\\ldots,z_n]/(r_1,\\ldots,r_m,s_1,\\ldots,s_t)$. All index sets here are finite.",
+   "uses": [
+    "lem-sfb-affine-fp-relative-hom-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.1.3, printed pp.58-59, and Exercise 2.4.5, printed p.77; explicit group-operation fibre products. Read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Step 4 says that the inverse image of every affine open of $S$ is affine, so $B\\to S$ is affine by [pqf-def-affine-morphism]. The displayed finite presentation gives local finite presentation at every point by [def-sbc-locally-finite-presentation]. By [lem-weil-pbc-affine-morphism-permanence](3), the affine morphism is quasi-compact and quasi-separated; hence it is of finite presentation in the sense of the statement. No finite affine cover of $S$ and no Noetherian hypothesis was used.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.1.3, printed pp.58-59, and Exercise 2.4.5, printed p.77; explicit group-operation fibre products. Read online; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Finally the multiplication and identity equations in step 3 force preservation of inverses. For every $T$-scheme $V$ and $x\\in D_T(V)$, the equation $x x^{-1}=1$ gives $u(x)u(x^{-1})=1$ in the group $G_T(V)$, so $u(x^{-1})=u(x)^{-1}$. Equality on all such points implies equality of the two scheme morphisms by [lem-galois-yoneda-fully-faithful]. Conversely a group homomorphism satisfies both imposed equations by definition. Thus step 3 gives exactly the natural bijections required in the statement, and step 5 supplies their affine finitely presented representative. These constructions also work over the empty base; for the trivial group $D=S$ the identity equation leaves only the identity section, so $B=S$.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Lemma 2.1.3, printed pp.58-59, and Exercise 2.4.5, printed p.77; explicit group-operation fibre products. Read online; local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sfb-affine-fp-relative-hom-scheme",
+  "lem-sfb-finite-locally-free-base-change",
+  "lem-trf-finite-locally-free-composition",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Explicit assembly of the group-law equalizers suggested by Conrad Lemma 2.1.3 and Exercise 2.4.5 (read online; local copy WANTED), with affine-coordinate verification. Ordinary Hom prerequisite follows Tags 0BL3 and 05Y6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The group homomorphism functor from a finite flat group scheme into an affine finitely presented group scheme is representable",
+   "results": "{\"t\": \"2026-10-24T11:35:30Z\", \"tool\": \"leansearch\", \"query\": \"The group homomorphism functor from a finite flat group scheme into an affine finitely presented group scheme is representable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"GrpCat.Hom.hom'\", \"CategoryTheory.Functor.representableBy\", \"FiniteGrp.toGrp\", \"CategoryTheory.yonedaGrpObjRepresentableBy\", \"CategoryTheory.PreGaloisCategory.toAut\", \"CommGrpCat.forget_isCorepresentable\", \"groupCohomology.functor\"], \"digest\": \"c41f227e46c6157d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, GrpCat.Hom.hom', CategoryTheory.Functor.representableBy, FiniteGrp.toGrp, CategoryTheory.yonedaGrpObjRepresentableBy, CategoryTheory.PreGaloisCategory.toAut, CommGrpCat.forget_isCorepresentable, groupCohomology.functor; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-24T11:35:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "HomScheme|homScheme|hom_scheme|WeilRestriction|weilRestriction",
+   "results": "{\"t\": \"2026-10-24T11:35:30Z\", \"tool\": \"grep\", \"query\": \"HomScheme|homScheme|hom_scheme|WeilRestriction|weilRestriction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free source and an affine finitely presented target give a finitely presented affine Hom scheme of group scheme morphisms",
+   "results": "{\"t\": \"2026-10-24T11:35:32Z\", \"tool\": \"leanfinder\", \"query\": \"A finite locally free source and an affine finitely presented target give a finitely presented affine Hom scheme of group scheme morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\"], \"digest\": \"a55685d6f77e8007\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation; none states this scheme-theoretic assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine finitely presented scheme represents homomorphisms from a finite locally free group scheme to an affine finitely presented group scheme",
+   "results": "{\"t\": \"2026-10-24T11:56:40Z\", \"tool\": \"leanfinder\", \"query\": \"An affine finitely presented scheme represents homomorphisms from a finite locally free group scheme to an affine finitely presented group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.LocallyOfFinitePresentation\"], \"digest\": \"97019b2266fbdad7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern finite/affine morphisms, affine space, or ordinary scheme arrows; none represents this group-homomorphism functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"HomScheme\"",
+   "results": "{\"t\": \"2026-10-24T11:56:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"HomScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsOverHomSchemeIsoSpecSpec\", \"AlgebraicGeometry.instIsOverHomSchemeTransPullbackSymmetryOverSpecOfInferInstanceOverClassPullbackSpecIso'\"], \"digest\": \"57d706432170d842\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern finite/affine morphisms, affine space, or ordinary scheme arrows; none represents this group-homomorphism functor."
+  },
+  {
+   "tool": "grep",
+   "query": "HomScheme|homScheme|WeilRestriction|weilRestriction",
+   "results": "{\"t\": \"2026-10-24T11:56:38Z\", \"tool\": \"grep\", \"query\": \"HomScheme|homScheme|WeilRestriction|weilRestriction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern finite/affine morphisms, affine space, or ordinary scheme arrows; none represents this group-homomorphism functor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The group homomorphism scheme with finite locally free source is affine and finitely presented",
+   "results": "{\"t\": \"2026-10-24T11:56:39Z\", \"tool\": \"leansearch\", \"query\": \"The group homomorphism scheme with finite locally free source is affine and finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgHom.FinitePresentation\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.IsAffineHom\"], \"digest\": \"96965839028a23c3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern finite/affine morphisms, affine space, or ordinary scheme arrows; none represents this group-homomorphism functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relative scheme parameterizing group homomorphisms from a finite flat finitely presented group scheme into an affine group scheme is affine and of finite presentation",
+   "results": "{\"t\": \"2026-10-24T11:59:34Z\", \"tool\": \"leanfinder\", \"query\": \"A relative scheme parameterizing group homomorphisms from a finite flat finitely presented group scheme into an affine group scheme is affine and of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\"], \"digest\": \"1cf4e6580481b242\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern finite/affine morphisms, affine space, or ordinary scheme arrows; none represents this group-homomorphism functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-diagonalizable-subgroup-parameter",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Lemma 5.1.3 and Proposition 5.1.6, printed pp.136-138; Definition 6.1.1 and its following paragraph, p.186; affine localization of the etale neighborhoods; Theorem 3.2.6 and Corollary 3.2.7, printed pp.94-95; reductive specialization of the smooth surjective scheme of maximal tori, before choosing etale-local sections. No imported blueprint ancestor exists (blueprint_refs.py ancestor returns None). Supporting input to this split: Theorem 2.3.1, printed pp.67-71, normalizer-quotient assertion specialized to a split torus; smoothness of the quotient map is stated in Remark 2.3.5, printed p.71, using Proposition 2.1.2. Supporting input: Lemma 2.3.4 and proof, printed pp.69-70. The functor is written using fppf forms of H; the source equivalently uses multiplicative-type subgroups geometrically isomorphic to H. The proof constructs it from the open embedding locus in Hom(H,G) modulo the finite constant automorphism group; no assertion about the conjugacy orbit or a homogeneous quotient is included here. Supporting input: Conrad Lemma 2.3.4, opening construction inside Hom(H,G), using Lemma 2.1.3.",
+   "via": [
+    "lem-sfb-finite-diagonalizable-subgroup-parameter",
+    "lem-sfb-split-torus-normalizer-quasi-affine-quotient",
+    "lem-sfb-maximal-torus-parameter-scheme",
+    "lem-sfb-reductive-etale-pinned-splitting",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-flat-group-hom-scheme",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed ordinary Hom schemes, the multiplication and identity comparison arrows, and their common equalizer. Verified affine finite presentation by finite polynomial differences, and inverse preservation on points. Added the ordinary finitely presented Hom prerequisite and a Mathlib base-change leaf. No Lean attachment found.",
+  "blueprint": "The inherited blueprint.from.node is null: blueprint_refs.py ancestor reports None. Preserved its complete via chain and specific place. This realizes Conrad Lemma 2.1.3 below the finite diagonalizable-subgroup parameter construction in the inherited alteration/moduli prerequisite chain; read the latest direct-images proof (3). No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing and equality detection for morphisms on arbitrary affine covers; needed only to identify the locally computed equalizer, not to replace any unit argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-13478bb1a",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-13478bb1a (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps, both new nodes and every cited statement, plus Stacks more-morphisms.tex 05Y6/0BL3 (lines 20099-20190) and the Mathlib base-change instances. Conrad is not available locally (the report marks it WANTED); the item's statement and source are unchanged from creator Q01. The steps are correct. Steps 1-3 build ordinary Hom schemes H, K, L for (D,G), (D²,G), (S,G) and take B as the equalizer of the arrows a(u)=u∘m_D vs b(u)=m_G∘(u×u) and c(u)=u∘e_D vs d(u)=e_G. Step 4 computes B over an affine U as Spec(P/J), with J generated by finitely many differences on generators, and extends to all U-schemes by gluing on affine covers of overlaps. Step 5 gives affine, lfp, and qc+qs via permanence (3). Step 6 gets inverses from u(x)u(x^-1)=1 on V-points plus faithful Yoneda. Small cases checked: empty S; trivial D or G gives B=S; non-reduced D. The new node lem-sfb-affine-fp-relative-hom-scheme is true: the 0BL3 coefficient construction with a finite presentation is fp, and affine plus lfp over affine U gives fp. Its edge cases X empty, X=S, Y empty also hold. It is not a duplicate: lem-sfb-affine-finite-free-hom and affine-weil-restriction-charts give no fp, and relative-hom-space only an algebraic space. It does not restate the item, since it has no group laws. The leaf lem-sfb-finite-locally-free-base-change matches exactly, clause by clause: Finite.lean:59, Flat.lean:80, FinitePresentation.lean:85. Batch-5 flag: lem-trf-finite-locally-free-composition is a Mathlib leaf with empty proof_deps (stability of f.l.f. under composition). It is outside the trace-formula and Poincaré assumptions and not a step of their proofs, so I accept it. I accept the tool_use lem-weil-pbc-scheme-morphism-gluing (Mathlib leaf). No changes made."
+ }
+}

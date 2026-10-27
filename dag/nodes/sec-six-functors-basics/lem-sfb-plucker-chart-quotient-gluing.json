@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-plucker-chart-quotient-gluing",
+ "kind": "statement",
+ "title": "Normalized quotient pivot loci, transition cocycles and glued quotient",
+ "statement": "Let $N,r$ be integers with $0<r<N$, and let $\\mathcal I$ be the increasing $r$-subsets of $\\{1,\\ldots,N\\}$. Put $B=\\mathbf Z[p_J:J\\in\\mathcal I]$, with every $p_J$ of degree one [def-weil-pbc-mv-polynomial-ring]. For an arbitrary ordered $r$-tuple, let $p_{j_1\\ldots j_r}$ be the sorting sign times the corresponding increasing coordinate, or zero if indices repeat. For $I,K\\in\\mathcal I$ define\n$$C_{I,K}(a,b)=p_{i_1\\ldots i_{a-1}k_bi_{a+1}\\ldots i_r},\\qquad F_{I,K}=p_I^{r-1}p_K-\\det C_{I,K}.$$\nHere determinants use [def-weil-pbc-matrix-determinant]. Put $H=(F_{I,K}:I,K\\in\\mathcal I)$, $A=B/H$ with its induced grading [def-weil-pbc-algebra-hom-quotient], and $X=\\operatorname{Proj}(A)$ [def-pc-proj], with $U_I=D_+(p_I)$. On $U_I$ let $M^{(I)}$ be the $r\\times N$ matrix with identity columns indexed by $I$ and off-pivot entries\n$$x^{(I)}_{aj}=p_{i_1\\ldots i_{a-1}ji_{a+1}\\ldots i_r}/p_I\\quad(j\\notin I).$$\nOn every overlap $U_I\\cap U_K$ the matrix $D_{IK}=(M^{(I)})_K$ has unit determinant $p_K/p_I$, and\n$$M^{(K)}=g_{IK}M^{(I)},\\qquad g_{IK}=D_{IK}^{-1},\\qquad g_{IL}=g_{KL}g_{IK},\\qquad g_{II}=1.$$\nThe cocycle identity holds on each triple overlap. There exist a locally free rank-$r$ module $Q_X$ and a surjection $q_X:\\mathcal O_X^{\\oplus N}\\twoheadrightarrow Q_X$ [def-weil-sheaf-of-modules-category, def-amb-finite-locally-free-module], with frames $Q_X|_{U_I}\\cong\\mathcal O_{U_I}^{\\oplus r}$ whose transition maps are $g_{IK}$ and in which $q_X$ is the matrix $M^{(I)}$. These local quotient maps have the right inverses given by inclusion of the pivot columns.\nMoreover, for every scheme $T$ [def-pc-scheme] and surjection $q:\\mathcal O_T^{\\oplus N}\\twoheadrightarrow Q$ onto a locally free rank-$r$ module, the loci $T_I$ where $(q(e_{i_1}),\\ldots,q(e_{i_r}))$ is a frame are open and cover $T$. On $T_I$, $q$ has a unique normalized matrix with identity columns at $I$; on $T_I\\cap T_K$ changing the frame is left multiplication by the inverse $K$-column matrix. For every morphism $f:T'\\to T$, the pivot locus of $f^*q$ is exactly $f^{-1}(T_I)$, and its normalized entries are the pullbacks of those of $q$ [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 089T (lemma-gkn-representable), the subfunctors F_i, their normalized matrices, open pivot loci and sheaf-gluing paragraph. Explicit transition cocycle completion written by an agent; extracted from former proof steps 1, 5 and 6 of lem-sfb-free-quotient-grassmann-projective."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-proj",
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-pullback",
+  "def-sfb-plucker-determinant-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-plucker-determinant-locus-charts], the $U_I$ cover $X$ and $\\det M^{(I)}_J=p_J/p_I$. On $U_I\\cap U_K$ the sections $p_K/p_I$ and $p_I/p_K$ multiply to $1$, so $d=\\det D_{IK}=p_K/p_I$ is a unit. The adjugate identity [lem-weil-pbc-matrix-adjugate-identity] gives the two-sided inverse $D_{IK}^{-1}=d^{-1}\\operatorname{adj}(D_{IK})$. Thus $g_{IK}$ is a well-defined invertible matrix over the structure sheaf of the overlap.",
+   "uses": [
+    "lem-sfb-plucker-determinant-locus-charts",
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 089T, lemma-gkn-representable, normalized quotient subfunctors and their open covering; explicit determinant-chart completion by agent."
+   }
+  },
+  {
+   "text": "Put $V=M^{(I)}$ and $W=D_{IK}^{-1}V$ on the overlap. Then $W_K=1$. For any increasing $r$-subset $J$, multiplicativity of determinants [lem-sfb-matrix-cramer-determinant-identities] and the chart minor formula [lem-sfb-plucker-determinant-locus-charts] give\n$$\\det W_J=(\\det D_{IK})^{-1}\\det V_J=p_J/p_K.$$\nThe same formula for an ordered tuple follows by its sorting sign, with both sides zero for repetitions. Replace column $a$ in the identity matrix $W_K$ by column $j$ of $W$. In the determinant expansion every term except the one selecting row $a$ in that column is zero, and the remaining term is $W_{aj}$. Therefore\n$$W_{aj}=\\det W_{(k_1,\\ldots,k_{a-1},j,k_{a+1},\\ldots,k_r)}=p_{k_1\\ldots k_{a-1}jk_{a+1}\\ldots k_r}/p_K.$$\nThese are exactly the off-pivot entries defining $M^{(K)}$, and both matrices have identity $K$-columns. Hence $M^{(K)}=g_{IK}M^{(I)}$. No cancellation of a nonunit has occurred.",
+   "uses": [
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "lem-sfb-plucker-determinant-locus-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 089T, lemma-gkn-representable, normalized quotient subfunctors and their open covering; explicit determinant-chart completion by agent."
+   }
+  },
+  {
+   "text": "On a triple overlap the previous equality twice gives $g_{KL}g_{IK}M^{(I)}=M^{(L)}=g_{IL}M^{(I)}$. Taking the $I$-columns, which form the identity matrix, gives $g_{IL}=g_{KL}g_{IK}$. Also $D_{II}=1$, so $g_{II}=1$; taking $L=I$ gives $g_{KI}g_{IK}=1$. This checks the direction and the diagonal cases of the gluing cocycle.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 089T, lemma-gkn-representable, normalized quotient subfunctors and their open covering; explicit determinant-chart completion by agent."
+   }
+  },
+  {
+   "text": "Apply the sheaf-gluing clause (2) of [lem-weil-pbc-glue-sheaves-of-modules] to $\\mathcal F_I=\\mathcal O_{U_I}^{\\oplus r}$ with isomorphisms $g_{IK}:\\mathcal F_I\\to\\mathcal F_K$. Obtain $Q_X$ and frames $\\phi_I:Q_X|_{U_I}\\xrightarrow{\\sim}\\mathcal F_I$ satisfying $\\phi_K=g_{IK}\\phi_I$. These frames make $Q_X$ locally free of rank $r$ by [def-amb-finite-locally-free-module]. The maps $\\phi_I^{-1}M^{(I)}$ agree on overlaps, since $M^{(K)}=g_{IK}M^{(I)}$, and clause (1) of the gluing lemma gives a global $q_X$. In the $I$-frame its composite with the inclusion of the $I$-summands is the identity. Consequently every local target section lifts on the cover $U_I$, so $q_X$ is surjective as a sheaf map. The indicated inclusions are precisely the local right inverses in the statement.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 04TN (lemma-glue-maps), 00AL (lemma-glue-sheaves), 00AM (lemma-glue-sheaves-structures); filling the gluing paragraph of Tag 089T."
+   }
+  },
+  {
+   "text": "Now fix $T,Q,q$ as in the statement. On any trivializing open $V$ for $Q$, write $q$ as a matrix $E$. For an index $I$, let $a_I=\\det E_I$. By [lem-weil-pbc-basic-open-function], $D_V(a_I)$ is open and $a_I$ has an inverse there. The adjugate identity [lem-weil-pbc-matrix-adjugate-identity] then inverts $E_I$ on this open, so its ordered columns are a frame. Conversely a frame makes $E_I$ invertible; determinant multiplicativity [lem-sfb-matrix-cramer-determinant-identities] gives that its determinant is a unit. Thus the frame locus on $V$ is exactly $D_V(a_I)$. Changing the trivialization multiplies $E_I$ by an invertible matrix, whose determinant is a unit by the same identity, so this locus is independent of the chosen trivialization. These opens agree on intersections and define the claimed open $T_I$ in $T$.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function",
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "lem-sfb-matrix-cramer-determinant-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 089T, lemma-gkn-representable, normalized quotient subfunctors and their open covering; explicit determinant-chart completion by agent."
+   }
+  },
+  {
+   "text": "To prove these opens cover, fix $t\\in T$ and a trivialization near $t$. With $R=\\mathcal O_{T,t}$, the finite free stalk identification [lem-weil-pbc-finite-free-module-stalk-equiv] writes $q_t$ as $E_t:R^N\\to R^r$. It is surjective by stalk exactness [lem-weil-pbc-module-stalk-exact], applied to $\\mathcal O_T^{\\oplus N}\\to Q\\to0$. Choose a preimage of each of the $r$ basis vectors; their columns form $S:R^r\\to R^N$ with $E_tS=1$. Apply the explicit Cauchy--Binet formula in clause (2) of [lem-weil-pbc-matrix-left-inverse-minors] with $A=S$, $B=E_t$ and $f=1$:\n$$1=\\sum_{|I|=r}\\det((E_t)_I)\\det(S_I).$$\nHere $S_I$ consists of the $I$-rows and $(E_t)_I$ of the $I$-columns, in increasing order. If every $\\det((E_t)_I)$ belonged to the maximal ideal of $R$, this equality would put $1$ in that ideal. Some minor therefore lies outside it. The basic-open criterion [lem-weil-pbc-basic-open-function] puts $t$ in that $T_I$. This argument uses no assumption that $q$ is surjective on sections of a fixed open.",
+   "uses": [
+    "lem-weil-pbc-finite-free-module-stalk-equiv",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-matrix-left-inverse-minors",
+    "lem-weil-pbc-basic-open-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 089T, lemma-gkn-representable, normalized quotient subfunctors and their open covering; explicit determinant-chart completion by agent."
+   }
+  },
+  {
+   "text": "On $T_I$ put $b_I=q\\circ s_I:\\mathcal O^{\\oplus r}\\xrightarrow{\\sim}Q$, where $s_I$ includes the pivot summands. Define $E^{(I)}=b_I^{-1}q$. It has identity $I$-columns. Any frame with that normalization has inverse $b_I$, because its inverse sends each standard basis vector to $q(e_{i_a})$; hence the normalized matrix is unique. On $T_I\\cap T_K$ put $D=(E^{(I)})_K=b_I^{-1}b_K$. It follows directly that $E^{(K)}=D^{-1}E^{(I)}$. The same identity gives its local right inverse $s_I$ in the normalized frame.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 089T, lemma-gkn-representable, normalized quotient subfunctors and their open covering; explicit determinant-chart completion by agent."
+   }
+  },
+  {
+   "text": "Let $f:T'\\to T$. The tensor description of [def-pc-module-pullback] identifies the pullback of a displayed free module with the free module on the same basis: $1\\otimes e_a$ corresponds to $e_a$. It identifies the pulled-back matrix on $f^{-1}V$ with the entrywise image of $E$ under $f^\\sharp$. Thus its $I$-minor is the image of $a_I$ (apply the determinant's finite sum formula). At a point $t'\\mapsto t$, the stalk homomorphism is local by [def-weil-locally-ringed-space-morphism]. A unit maps to a unit; a nonunit lies in the maximal ideal by [lem-weil-pbc-local-ring-unit-criterion] and maps into the maximal ideal, so remains a nonunit. The basic-open criterion [lem-weil-pbc-basic-open-function] therefore gives $T'_I=f^{-1}(T_I)$. On these opens $f^*b_I$ is the pivot frame, so the pulled-back entries of $b_I^{-1}q$ are exactly the normalized entries of $f^*q$. The inverse is preserved because the images of the two identities $b_Ib_I^{-1}=1=b_I^{-1}b_I$ are the corresponding identities after pullback. Finally, the pulled-back pivot inclusions are right inverses on the inverse-image cover, ensuring that $f^*q$ is itself a surjection onto a locally free rank-$r$ module.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "lem-weil-pbc-basic-open-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 089T, lemma-gkn-representable, normalized quotient subfunctors and their open covering; explicit determinant-chart completion by agent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-plucker-determinant-locus-charts",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-sfb-matrix-cramer-determinant-identities",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "def-amb-finite-locally-free-module",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-finite-free-module-stalk-equiv",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-matrix-left-inverse-minors",
+  "def-pc-module-pullback",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 089T (lemma-gkn-representable), completed using explicit normalized-minor matrices, Stacks Tags 07DQ, 01HZ, 01AG, 04TN, 00AL and 00AM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized quotient matrices on Grassmannian affine charts glue to a locally free universal quotient by change of pivot matrices",
+   "results": "{\"t\": \"2026-10-22T06:02:51Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized quotient matrices on Grassmannian affine charts glue to a locally free universal quotient by change of pivot matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian.projective_quotient\", \"Module.Grassmannian\", \"Module.Grassmannian.mk.inj\", \"Module.Grassmannian.rankAtStalk_eq\", \"Submodule.quotientEquivDirectSum\", \"Submodule.quotientEquivPiSpan\", \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\"], \"digest\": \"231c710fbeb25ee9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module Grassmannians, presentations and generating-section lemmas do not construct these pivot transition maps or the glued quotient on this Proj."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grassmannian\", \"chart\"",
+   "results": "{\"t\": \"2026-10-22T06:02:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grassmannian\\\", \\\"chart\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module Grassmannians, presentations and generating-section lemmas do not construct these pivot transition maps or the glued quotient on this Proj."
+  },
+  {
+   "tool": "grep",
+   "query": "Grassmann|Plucker|plucker|pivot",
+   "results": "{\"t\": \"2026-10-22T06:02:51Z\", \"tool\": \"grep\", \"query\": \"Grassmann|Plucker|plucker|pivot\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module Grassmannians, presentations and generating-section lemmas do not construct these pivot transition maps or the glued quotient on this Proj."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grassmannian tautological quotient sheaf from normalized matrix charts",
+   "results": "{\"t\": \"2026-10-22T06:02:52Z\", \"tool\": \"leansearch\", \"query\": \"Grassmannian tautological quotient sheaf from normalized matrix charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian.mk.inj\", \"Module.Grassmannian.rec\", \"Module.Grassmannian.recOn\", \"Module.Grassmannian.termG(_,_;_)\", \"Module.Grassmannian.casesOn\", \"Module.Grassmannian.mk\", \"Module.Grassmannian.finite_quotient\", \"Module.Grassmannian.projective_quotient\"], \"digest\": \"5bb00752f7849a8f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module Grassmannians, presentations and generating-section lemmas do not construct these pivot transition maps or the glued quotient on this Proj."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjection from a free sheaf to a vector bundle has an open cover of invertible maximal minors with compatible matrix transition functions",
+   "results": "{\"t\": \"2026-10-22T06:03:02Z\", \"tool\": \"leanfinder\", \"query\": \"A surjection from a free sheaf to a vector bundle has an open cover of invertible maximal minors with compatible matrix transition functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.GeneratingSections.epi\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.GeneratingSections.π\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.LocalGeneratorsData.coversTop\", \"SheafOfModules.presentationOfIsCokernelFree_generators\"], \"digest\": \"313cd9767dbfc15c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module Grassmannians, presentations and generating-section lemmas do not construct these pivot transition maps or the glued quotient on this Proj."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grassmannian\", \"chart\"",
+   "results": "{\"t\": \"2026-10-23T04:10:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grassmannian\\\", \\\"chart\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern module Grassmannians or sheaf generators, not this Proj quotient, its normalized pivot transitions and universal quotient. RingTheory/Grassmannian.lean:46--53 explicitly lists charts and scheme Grassmannians as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "Grassmann|Plucker|plucker|pivot",
+   "results": "{\"t\": \"2026-10-23T04:10:35Z\", \"tool\": \"grep\", \"query\": \"Grassmann|Plucker|plucker|pivot\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern module Grassmannians or sheaf generators, not this Proj quotient, its normalized pivot transitions and universal quotient. RingTheory/Grassmannian.lean:46--53 explicitly lists charts and scheme Grassmannians as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grassmannian tautological quotient sheaf from normalized matrix charts",
+   "results": "{\"t\": \"2026-10-23T04:10:38Z\", \"tool\": \"leansearch\", \"query\": \"Grassmannian tautological quotient sheaf from normalized matrix charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian.mk.inj\", \"Module.Grassmannian.rec\", \"Module.Grassmannian.recOn\", \"Module.Grassmannian.termG(_,_;_)\", \"Module.Grassmannian.casesOn\", \"Module.Grassmannian.mk\", \"Module.Grassmannian.finite_quotient\", \"Module.Grassmannian.projective_quotient\"], \"digest\": \"5bb00752f7849a8f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern module Grassmannians or sheaf generators, not this Proj quotient, its normalized pivot transitions and universal quotient. RingTheory/Grassmannian.lean:46--53 explicitly lists charts and scheme Grassmannians as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized quotient matrices on Grassmannian affine charts glue to a locally free universal quotient by change of pivot matrices",
+   "results": "{\"t\": \"2026-10-23T04:10:44Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized quotient matrices on Grassmannian affine charts glue to a locally free universal quotient by change of pivot matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian.projective_quotient\", \"Module.Grassmannian\", \"Module.Grassmannian.mk.inj\", \"Module.Grassmannian.rankAtStalk_eq\", \"Submodule.quotientEquivDirectSum\", \"Submodule.quotientEquivPiSpan\", \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\"], \"digest\": \"231c710fbeb25ee9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern module Grassmannians or sheaf generators, not this Proj quotient, its normalized pivot transitions and universal quotient. RingTheory/Grassmannian.lean:46--53 explicitly lists charts and scheme Grassmannians as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjection from a free sheaf to a vector bundle has an open cover of invertible maximal minors with compatible matrix transition functions",
+   "results": "{\"t\": \"2026-10-23T04:11:58Z\", \"tool\": \"leanfinder\", \"query\": \"A surjection from a free sheaf to a vector bundle has an open cover of invertible maximal minors with compatible matrix transition functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.generatorsOfIsCokernelFree\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.generatorsOfIsCokernelFree_s\", \"SheafOfModules.generatorsOfIsCokernelFree_π\", \"SheafOfModules.presentationOfIsCokernelFree_generators\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.GeneratingSections.ofEpi\"], \"digest\": \"eca4e089a1be8ebd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern module Grassmannians or sheaf generators, not this Proj quotient, its normalized pivot transitions and universal quotient. RingTheory/Grassmannian.lean:46--53 explicitly lists charts and scheme Grassmannians as TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-quotient-grassmann-projective",
+  "date": "2026-10-22",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Free quotient Grassmannians and their projective Plücker embedding; normalized Grassmannian construction: former proof steps 1, 5, 6 (Normalized quotient pivot loci, transition cocycles and glued quotient)",
+   "via": [
+    "lem-sfb-free-quotient-grassmann-projective",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-plucker-chart-quotient-gluing",
+  "worker": "stage1",
+  "summary": "Unchanged statement; eight explicit proof steps establish the overlap matrix identities, cocycle, gluing and arbitrary-test-scheme pivot cover and pullback formulas. All supporting lemmas already exist, so no new nodes. The determinant chart theorem is moved from statement dependencies to proof dependencies because the statement defines its construction independently. Existing search history retained and five fresh logged searches added.",
+  "blueprint": "No imported blueprint ancestor (ancestor command returns None). Retained the inherited blueprint.from.place and via chain, refining former steps 1, 5 and 6 of lem-sfb-free-quotient-grassmann-projective in the Hilbert-scheme prerequisite of the det-thm-sf-ctf-stability-direct-images proof (3) route. Full-blueprint searches pivot and Grassmann found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "General open-cover gluing for modules and morphisms with the exact cocycle orientation; the unit has no replacement for this sheaf-theoretic tool. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-basic-open-function",
+    "why": "The unit and openness criterion for a regular function on an arbitrary scheme, used on local determinant functions. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Converts the given surjective sheaf map to a surjective map of local modules for the maximal-minor argument. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-module-stalk-equiv",
+    "why": "Identifies the stalk of a finite free sheaf with the expected finite free module, with no affine hypothesis. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-matrix-left-inverse-minors",
+    "why": "Generic Cauchy--Binet identity for a split rectangular matrix, used solely to prove the pivot opens cover. No node of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-unit-criterion",
+    "why": "Generic local-ring unit criterion needed to reflect invertibility along the local stalk map. No node of this unit supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-finite-free-module-stalk-equiv",
+  "lem-weil-pbc-matrix-left-inverse-minors",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-dac9fe4e4",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-dac9fe4e4 (reviewer sub-agent of L); spot-checked: This is a one-level split with no new nodes, and I read all of it. The statement is byte-identical to live and side-live, where the node is still unsplit. The only stmt_dep change moves lem-sfb-plucker-determinant-locus-charts into proof_deps: the statement builds X, U_I and M^(I) itself and cites no lemma, so this is correct. No repair note exists, so the 2026-10-21 re-split rule does not apply. I read Stacks 089T in constructions.tex (lemma-gkn-representable). The item replaces its Nakayama criterion with an equivalent determinant-minor criterion, and the proof is marked as an agent completion; no SGA is used. I read every cited statement. Step 1: det D_IK = p_K/p_I is a unit on D_+(p_I p_K), and the adjugate gives the inverse. Step 2: W_K = 1 and det W_J = p_J/p_K. The determinant of the identity with column a replaced is W_aj, which equals x^(K)_aj; checked on N=2,r=1 (P^1, g_12 = p1/p2) and on the sign convention for N=4,r=2. Step 3: the cocycle g_IL = g_KL g_IK is exactly the orientation of gluing clause (2). Step 4: φ_K = g_IK φ_I, the local maps φ_I^{-1}M^(I) agree on overlaps, clause (1) glues them, and the pivot right inverses give surjectivity. Step 5: the frame locus on a trivializing open is D_V(det E_I), by the adjugate and multiplicativity, and does not depend on the trivialization. Step 6: from E_t S = 1, clause (2) of left-inverse-minors with A=S, B=E_t, f=1 gives 1 = Σ det((E_t)_I) det(S_I), so some minor is a unit and t lies in that T_I. Step 7: b_I^{-1}q is the unique normalized matrix and E^(K) = D^{-1}E^(I). Step 8: f^*O^N ≅ O^N follows in two lines from the cited pullback definition (tensor unit, additivity of a left adjoint), and local stalk maps preserve units and nonunits, so T'_I = f^{-1}(T_I). Duplicate searches (pivot, Grassmann, free or universal quotient, pullback of free modules) found no duplicate. The tool_uses are generic sk-thm-p1 tools and are accepted; the remaining citations are Mathlib leaves or same-unit nodes. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PluckerChartQuotientGluing",
+  "declaration": "AlgebraicGeometry.Plucker.chart_quotient_gluing",
+  "declarations": [
+   "AlgebraicGeometry.Plucker.matrixOn",
+   "AlgebraicGeometry.Plucker.pivot",
+   "AlgebraicGeometry.Plucker.quotientOn",
+   "AlgebraicGeometry.Plucker.inclusion",
+   "AlgebraicGeometry.Plucker.pivotLocus",
+   "AlgebraicGeometry.Plucker.NormalizedFrame",
+   "AlgebraicGeometry.Plucker.quotientMatrix",
+   "AlgebraicGeometry.Plucker.frameOn",
+   "AlgebraicGeometry.Plucker.frameChange",
+   "AlgebraicGeometry.Plucker.QuotientCharts",
+   "AlgebraicGeometry.Plucker.PullbackCharts",
+   "AlgebraicGeometry.Plucker.chart_quotient_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PluckerChartQuotientGluing.lean",
+  "statement": "theorem chart_quotient_gluing (N r : ℕ) (_hrN : r + 1 < N) : (∀ (I : Index N r) (W : (Proj (quotientGrade N r)).Opens) (hI : W ≤ Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))), (matrixOn I W hI).submatrix id (columns I) = 1) ∧ (∀ (I K : Index N r) (W : (Proj (quotientGrade N r)).Opens) (hI : W ≤ Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))) (hK : W ≤ Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X K))), IsUnit (pivot I K W hI).det ∧ (pivot I K W hI).det = (Proj (quotientGrade N r)).presheaf.map (homOfLE hI).op (Proj.awayToSection (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I)) (fraction I (columns K))) ∧ matrixOn K W hK = (pivot I K W hI)⁻¹ * matrixOn I W hI) ∧ (∀ (I K L : Index N r) (W : (Proj (quotientGrade N r)).Opens) (hI : W ≤ Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))) (hK : W ≤ Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X K))) (_hL : W ≤ Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X L))), (pivot I L W hI)⁻¹ = (pivot K L W hK)⁻¹ * (pivot I K W hI)⁻¹ ∧ (pivot I I W hI)⁻¹ = 1) ∧ (∃ (Q : (Proj (quotientGrade N r)).Modules) (q : SheafOfModules.free (R := (Proj (quotientGrade N r)).ringCatSheaf) (ULift.{0} (Fin N)) ⟶ Q), Epi q ∧ Q.IsFiniteLocallyFreeOfRank (r + 1) ∧ ∃ φ : ∀ I : Index N r, Q.restrict (Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))).ι ≅ SheafOfModules.free (R := (Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))).toScheme.ringCatSheaf) (ULift.{0} (Fin (r + 1))), (∀ I, quotientMatrix q (Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))) (φ I) = (normalizedMatrix I).map (Proj.awayToSection (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))) ∧ NormalizedFrame q I (Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))) (φ I)) ∧ (∀ (I K : Index N r) (W : (Proj (quotientGrade N r)).Opens) (hI : W ≤ Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))) (hK : W ≤ Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X K))), frameChange (φ I) (φ K) W hI hK = (pivot I K W hI)⁻¹)) ∧ (∀ (T : Scheme.{u}) (Q : T.Modules) (q : SheafOfModules.free (R := T.ringCatSheaf) (ULift.{u} (Fin N)) ⟶ Q), Epi q → Q.IsFiniteLocallyFreeOfRank (r + 1) → ∃ (U : Index N r → T.Opens) (φ : ∀ I, Q.restrict (U I).ι ≅ SheafOfModules.free (R := (U I).toScheme.ringCatSheaf) (ULift.{u} (Fin (r + 1)))), QuotientCharts q U φ ∧ ∀ (T' : Scheme.{u}) (f : T' ⟶ T), PullbackCharts q U φ f (Sigma.desc (fun i ↦ homOfGlobalSection ((tensorPullback f).obj Q) (((tensorPullbackSectionAdjunction f).unit.app Q).app ⊤ ((SheafOfModules.freeHomEquiv Q q i).val (op ⊤))))))",
+  "branch": "newtargets-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of return L H2: the statement uses the existing determinant-coordinate definitions recorded by def-sfb-plucker-determinant-coordinates; closedImmersion_and_charts remains only a proof dependency. The Lean module is unchanged from returned head f01d2b7ea32e. Positive rank is r+1, the fixed integer Proj has universe 0, and arbitrary test schemes and pullbacks retain universe u."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d741aa2dd",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Return L H2 repaired exactly as prescribed. Item stmt_deps swaps theorem lem-sfb-plucker-determinant-locus-charts for new def-sfb-plucker-determinant-coordinates; theorem kept in proof_deps; statement, proof and Lean record unchanged; Lean module byte-identical to f01d (sha cc3d5c8d), whose full 5-conjunct review stands. New node: existing:true on Sheaf.AlgebraicGeometry.PluckerDeterminantLocusCharts. Its 13 decls (Index..normalizedMatrix, excluding closedImmersion_and_charts) were checked against the landed source; formulas match (incidence-det sorting sign, X_I^r X_K - det C, image grading, Away.mk fraction); statement verbatim from def; deps mv-poly/det/quotient/nagata-homog-loc exist; Stacks 089T/01M4 labels exist. Overlap with the theorem node's declarations list is accepted per existing:true precedent (Q07 9184). No parallel live rebinding. Report sections present. No file changed, so no compile; the worker reports a clean scompile and dry run."
+ }
+}

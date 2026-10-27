@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-fixed-residue-lifts-truncated-section",
+ "kind": "statement",
+ "title": "Fixed-residue small lifts give sections of truncated extensions",
+ "statement": "Let $R,A$ be commutative rings with an $R$-algebra structure on $A$, let $\\mathfrak q\\subset A$ be a prime ideal, and put $S=A_{\\mathfrak q}$ and $k=S/\\mathfrak qS$ [def-weil-pbc-localization-at-prime]. Let $C$ be a Noetherian local commutative $R$-algebra [def-weil-pbc-noetherian-ring] with a surjective $R$-algebra map $p:C\\twoheadrightarrow S$. Write $J=\\ker p$ and $\\mathfrak m$ for the unique maximal ideal of $C$. Suppose the following fixed-residue lifting property holds. For every surjection $\\varphi:B'\\twoheadrightarrow B$ of nonzero Artinian local commutative rings, with $\\operatorname{length}_{B'}\\ker\\varphi=1$ [def-weil-pbc-module-length], and specified isomorphisms $B'/\\mathfrak m_{B'}\\cong k$ and $B/\\mathfrak m_B\\cong k$ under which the residue map of $\\varphi$ is the identity, every pair of ring maps $\\rho:R\\to B'$ and $a:A\\to B$ satisfying $a\\circ(R\\to A)=\\varphi\\circ\\rho$ and whose composite $A\\to B\\to k$ is the canonical map $A\\to S\\to k$ admits $a':A\\to B'$ with $\\varphi a'=a$ and $a'\\circ(R\\to A)=\\rho$. Here Artinian means descending chains of ideals stabilize, and local means there is a unique maximal ideal. Then for every integer $N\\ge1$ the canonical quotient map of $R$-algebras\n$$C/(J^2+\\mathfrak m^N)\\longrightarrow C/(J+\\mathfrak m^N)$$\nhas an $R$-algebra section.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1), paragraphs beginning Let N and Applying condition (4); fixed-residue refinement of the truncated-section construction."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathfrak n=\\mathfrak qS$, $I=J^2+\\mathfrak m^N$, $L=J+\\mathfrak m^N$, $E=C/I$ and $F=C/L$. Since $p$ is surjective, $p^{-1}(\\mathfrak n)$ is maximal, hence equals $\\mathfrak m$; consequently $J\\subseteq\\mathfrak m$ and $p(\\mathfrak m)=\\mathfrak n$. Thus $\\mathfrak m^N\\subseteq I\\subseteq L\\subseteq\\mathfrak m$. Apply [lem-weil-pbc-noetherian-local-quotient-artinian-local] to both defining ideals: $E,F$ are nonzero Artinian local rings with maximal ideals the images of $\\mathfrak m$, and these maximal ideals have $N$th power zero. Quotient representatives identify $F=S/\\mathfrak n^N$: the kernel of $C\\to S/\\mathfrak n^N$ is $J+\\mathfrak m^N$, since $p(\\mathfrak m^N)=\\mathfrak n^N$. Denote the induced surjections by $\\pi:E\\to F$ and $t:S\\to F$. Reduction of either quotient modulo its maximal ideal identifies its residue field with $C/\\mathfrak m=S/\\mathfrak n=k$; the residue map of $\\pi$ is the identity.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1), paragraphs beginning Let N and Applying condition (4)"
+   }
+  },
+  {
+   "text": "Let $K=\\ker\\pi$, the image of $J$ in $E$. Apply [lem-weil-pbc-artinian-ideal-length-one-filtration] to obtain ideals $0=K_0\\subseteq\\cdots\\subseteq K_r=K$ with $K_{i+1}/K_i$ of $E$-module length one. Put $D_i=E/K_i$ and use the canonical identification $D_r=F$, $D_0=E$. Every $K_i$ lies in the maximal ideal of $E$. Its inverse image $H_i\\subset C$ therefore satisfies $\\mathfrak m^N\\subseteq H_i\\subseteq\\mathfrak m$. The quotient lemma [lem-weil-pbc-noetherian-local-quotient-artinian-local], applied to $H_i$, shows that $D_i=C/H_i$ is nonzero Artinian local with maximal ideal $\\mathfrak m/H_i$. Specify its residue identification $D_i/(\\mathfrak m/H_i)=C/\\mathfrak m=k$. Each quotient map $\\delta_i:D_i\\twoheadrightarrow D_{i+1}$ induces the identity on these specified residue fields.",
+   "uses": [
+    "lem-weil-pbc-artinian-ideal-length-one-filtration",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1), paragraphs beginning Let N and Applying condition (4)"
+   }
+  },
+  {
+   "text": "The kernel of $\\delta_i$ is $K_{i+1}/K_i$: an element of $E/K_i$ maps to zero precisely when its representative belongs to $K_{i+1}$. Its submodules for the $E$-action and the $D_i$-action are identical, since $E\\twoheadrightarrow D_i$ is surjective and the action factors through it. Hence its $D_i$-module length is also one, directly from the chain definition [def-weil-pbc-module-length]. Write $\\rho_i:R\\to D_i$ for the structural map and $\\pi_i:D_i\\to F$ for the quotient. Starting with $a_r:A\\to S\\xrightarrow{t}F=D_r$, induct downwards to maps $a_i:A\\to D_i$ satisfying $\\pi_i a_i=a_r$, $a_i\\circ(R\\to A)=\\rho_i$, and residue composite the canonical $A\\to k$. At a downward step apply the assumed fixed-residue lifting property to $\\delta_i$, $\\rho_i$, and $a_{i+1}$; its compatibility equation is $a_{i+1}\\circ(R\\to A)=\\delta_i\\rho_i$. The returned lift has the required residue composite because $\\delta_i$ is the identity on residues. Composition with $\\pi_{i+1}$ preserves the other invariant. Thus $a'=a_0:A\\to E$ satisfies $\\pi a'=t\\circ(A\\to S)$ and is $R$-compatible. If $r=0$, the starting map already gives $a'$.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1), paragraphs beginning Let N and Applying condition (4)"
+   }
+  },
+  {
+   "text": "The residue composite of $a'$ is $A\\to k$, whose kernel is $\\mathfrak q$. For $s\\notin\\mathfrak q$, $a'(s)$ therefore lies outside the maximal ideal of $E$ and is a unit by [lem-weil-pbc-local-ring-unit-criterion]. Define $b:S\\to E$ on fractions [def-weil-pbc-localization-at-prime] by $b(x/s)=a'(x)a'(s)^{-1}$. If $u(xs'-x's)=0$ with $u\\notin\\mathfrak q$, applying $a'$ and cancelling the unit $a'(u)$ proves that this formula is independent of representatives. Addition and multiplication of fractions prove it is a ring map. It is $R$-compatible since its value on $r/1$ is $\\rho_0(r)$. Moreover $\\pi b=t$: the two maps agree on $A$, and on every $x/s$ both take the value $t(x)t(s)^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1), paragraphs beginning Let N and Applying condition (4)"
+   }
+  },
+  {
+   "text": "If $x/s\\in\\mathfrak n=\\mathfrak qS$, then $x\\in\\mathfrak q$, so $a'(x)$ has zero residue in $k$. Thus $b(\\mathfrak n)$ is contained in the maximal ideal $\\mathfrak m_E$ of $E$. This ideal has $N$th power zero by Step 1; products of $N$ such images vanish, whence $b(\\mathfrak n^N)=0$. The formula $\\sigma(y+\\mathfrak n^N)=b(y)$ consequently defines an $R$-algebra map $\\sigma:F=S/\\mathfrak n^N\\to E$. For every $y\\in S$, $\\pi\\sigma(t(y))=\\pi b(y)=t(y)$ by Step 4. As $t$ is surjective, $\\pi\\sigma=\\mathrm{id}_F$. Under the quotient identifications of Step 1 this is the required section $C/(J+\\mathfrak m^N)\\to C/(J^2+\\mathfrak m^N)$. For $N=1$ both quotients equal $C/\\mathfrak m$, and for $J=0$ the quotient map itself is the identity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1), paragraphs beginning Let N and Applying condition (4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-artinian-ideal-length-one-filtration",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02HT (lemma-smooth-test-artinian), proof of (4) implies (1), paragraphs beginning Let N and Applying condition (4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Artinian lifting tests with fixed residue field produce algebra sections of truncated square-zero extensions C modulo J squared plus powers of its maximal ideal",
+   "sub": "",
+   "results": "Read 8 hits: Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.Extension.toInfinitesimal, Algebra.Extension.infinitesimal, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.mk_lift, HenselianRing",
+   "date": "2026-10-23",
+   "verdict": "No match. The hits provide formal smoothness or smooth-locus tools but do not state this implication; their use requires the separate truncation/conormal argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artinian lifting tests with residue field kappa(q) give sections of the infinitesimal presentation modulo powers of the maximal ideal",
+   "sub": "",
+   "results": "Read 8 hits: Ideal.ResidueField.liftₐ, Algebra.FormallySmooth.exists_lift, IsLocalRing.ResidueField.lift, AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, Ideal.ResidueField.lift.congr_simp, Ideal.ResidueField.liftₐ_algebraMap, IsLocalRing.ResidueField.lift_residue_apply, Algebra.FormallySmooth.lift",
+   "date": "2026-10-23",
+   "verdict": "No match. The hits provide formal smoothness or smooth-locus tools but do not state this implication; their use requires the separate truncation/conormal argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.IsSmoothAt\", \"IsArtinianRing\"",
+   "sub": "",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match. The hits provide formal smoothness or smooth-locus tools but do not state this implication; their use requires the separate truncation/conormal argument."
+  },
+  {
+   "tool": "grep",
+   "query": "artinian.*lift|lift.*artinian|truncated.*section|section.*truncated",
+   "sub": "RingTheory",
+   "results": "Read 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No match. The hits provide formal smoothness or smooth-locus tools but do not state this implication; their use requires the separate truncation/conormal argument."
+  },
+  {
+   "tool": "grep",
+   "query": "artinian.*lift|lift.*artinian|truncated.*section|section.*truncated",
+   "sub": "RingTheory",
+   "results": "0 hits read: ",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field lifts require the prime ideal to be killed; formal-smoothness lifts assume formal smoothness, which is not a hypothesis here. The other hits do not assert the fixed-residue truncated-section implication."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, Ideal.Quotient",
+   "sub": "",
+   "results": "0 hits read: ; loogle: unknown identifier 'Ideal.Quotient'",
+   "date": "2026-10-23",
+   "verdict": "unavailable: loogle: unknown identifier 'Ideal.Quotient'"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artinian local small extension lifting with fixed residue field implies split truncated square zero quotient",
+   "sub": "",
+   "results": "8 hits read: TrivSqZeroExt.lift_apply_inr, Algebra.Extension.infinitesimal, TrivSqZeroExt.lift_inlAlgHom_inrHom, TrivSqZeroExt.lift.congr_simp, liftOfDerivationToSquareZero_apply, TrivSqZeroExt.lift, derivationToSquareZeroEquivLift, Ideal.ResidueField.liftₐ",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field lifts require the prime ideal to be killed; formal-smoothness lifts assume formal smoothness, which is not a hypothesis here. The other hits do not assert the fixed-residue truncated-section implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed residue field Artinian length one lifting criterion gives sections of C modulo J squared plus powers of the maximal ideal",
+   "sub": "",
+   "results": "8 hits read: Ideal.ResidueField.liftₐ, Ideal.ResidueField.lift, IsLocalRing.finite_quotient_iff, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, IsAdicComplete.henselianRing, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.instFormallyUnramifiedResidueField, Algebra.instFiniteResidueFieldOfFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field lifts require the prime ideal to be killed; formal-smoothness lifts assume formal smoothness, which is not a hypothesis here. The other hits do not assert the fixed-residue truncated-section implication."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth",
+   "sub": "",
+   "results": "12 hits read: Algebra.FormallySmooth.inst, Algebra.FormallySmooth, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.FormallySmooth.polynomial, Algebra.FormallySmooth.of_isLocalization, Algebra.Smooth.mk, Algebra.smooth_iff",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field lifts require the prime ideal to be killed; formal-smoothness lifts assume formal smoothness, which is not a hypothesis here. The other hits do not assert the fixed-residue truncated-section implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lifting property for simple kernel extensions of Artinian local rings with specified residue field implies splitting of nilpotent truncations of a local algebra presentation",
+   "sub": "",
+   "results": "8 hits read: Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.of_split, HenselianLocalRing, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, Algebra.FormallyUnramified.lift_unique, Algebra.FormallySmooth.iff_split_surjection, Algebra.Extension.formallySmooth_iff_split_injection",
+   "date": "2026-10-23",
+   "verdict": "No match: residue-field lifts require the prime ideal to be killed; formal-smoothness lifts assume formal smoothness, which is not a hypothesis here. The other hits do not assert the fixed-residue truncated-section implication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-fixed-residue-artinian-test",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXM proof, last paragraph: More on Morphisms lemma-lifting-along-artinian-at-point, using the fixed chart residue field. Supporting input: Tag 02HX affine reduction, then Tag 02HT proof of (4) implies (1): successive fixed-residue lifts through truncated extensions.",
+   "via": [
+    "lem-sfb-smooth-fixed-residue-artinian-test",
+    "lem-sfb-artin-versal-base-change-smooth",
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fixed-residue-lifts-truncated-section",
+  "worker": "stage1",
+  "summary": "Q40: Split without changing the statement or adding nodes. Reused the existing Noetherian local quotient, ideal filtration, and unit-criterion nodes. Explicitly preserved the specified residue field and R-compatibility in downward induction; proved kernel length by identical submodule lattices; wrote the fraction extension and nilpotent-ideal descent. Checked N=1, J=0 and zero filtration. Searched project Lean and Mathlib; the existing arbitrary-residue theorem is not an attachment for this weaker fixed-residue hypothesis.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Supporting input: Tag 0CXU, representable fibre product Z and application of lemma-base-change-versal at z_0=i(u_0). Supporting input: Tag 0CXM proof, last paragraph: More on Morphisms lemma-lifting-along-artinian-at-point, using the fixed chart residue field. Supporting input: Tag 02HX affine reduction, then Tag 02HT proof of (4) implies (1): successive fixed-residue lifts through truncated extensions. Realizes the successive fixed-residue lifting and truncation-factorization prerequisite, following Tag 02HT. The inherited blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor; no new ancestor is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "why": "Generic commutative algebra quotient theorem gives Artinian test rings and nilpotent maximal ideals; the same-unit route has no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-artinian-ideal-length-one-filtration",
+    "why": "Generic Artinian ideal filtration supplies the length-one extensions; used within the Tag 02HT route."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-unit-criterion",
+    "why": "Generic local-ring unit criterion permits the explicit fraction extension to A_q."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "lem-weil-pbc-artinian-ideal-length-one-filtration",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-18fade819",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-18fade819 (reviewer sub-agent of L); spot-checked: Read the item in full, its parent lem-sfb-smooth-fixed-residue-artinian-test (steps 2-4 give exactly the fixed-residue hypothesis and the C to A_q setting), every cited statement, and Stacks algebra.tex Tag 02HT condition (4) and the proof of (4)=>(1), paragraphs 'Let N' and 'Applying condition (4)'. There B'_N = C/(J^2+m^N) and B_N = S_q/q^N, so the item follows the source's route of a filtration by small extensions. The statement is unchanged against live, there is no repair note, and live still has the node unsplit. Step 1: p^{-1}(qS) = m and p^{-1}(n^N) = J+m^N under a surjection; the quotient lemma applies to I and L. Step 2: H_i lies between I and L, so the D_i are nonzero Artinian local with residue field k. Step 3: E-submodules and D_i-submodules of K_{i+1}/K_i coincide, so the D_i-length is 1; the downward induction has its base and all three invariants written, and they are preserved because delta_i is the identity on residues. Step 4: units come from ker(A->k)=q, and the fraction map is well defined, R-compatible, and satisfies pi b = t. Step 5: b(n) lies in m_E and m_E^N = 0, so b descends to a section. Edge cases checked: N=1, J=0, r=0, C a field. No new nodes. lem-weil-pbc-artinian-lifting-truncated-section has a stronger arbitrary-residue hypothesis, so it cannot be cited here and is not a duplicate. I accept the three tool_uses: generic sk-thm-p1 algebra results, two of them Mathlib leaves and the filtration lemma Lean-closed. No SGA; proof_deps equals the union of uses; searches recorded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FixedResidueLiftsTruncatedSection",
+  "declaration": "Algebra.fixed_residue_lifts_truncated_section",
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedResidueLiftsTruncatedSection.lean",
+  "statement": "theorem fixed_residue_lifts_truncated_section {R : Type u} {A : Type v} {C : Type w} [CommRing R] [CommRing A] [CommRing C] [Algebra R A] [Algebra R C] (q : Ideal A) [q.IsPrime] [IsNoetherianRing C] [IsLocalRing C] (p : C →ₐ[R] Localization.AtPrime q) (hp : Function.Surjective p) (hlift : ∀ (B' B : Type (max u v w t)) [CommRing B'] [CommRing B] [IsArtinianRing B'] [IsArtinianRing B] [IsLocalRing B'] [IsLocalRing B] (φ : B' →+* B), Function.Surjective φ → Module.length B' (RingHom.ker φ) = 1 → ∀ (e' : IsLocalRing.ResidueField B' ≃+* q.ResidueField) (e : IsLocalRing.ResidueField B ≃+* q.ResidueField), e'.toRingHom.comp (IsLocalRing.residue B') = (e.toRingHom.comp (IsLocalRing.residue B)).comp φ → ∀ (ρ : R →+* B') (a : A →+* B), a.comp (algebraMap R A) = φ.comp ρ → (e.toRingHom.comp (IsLocalRing.residue B)).comp a = algebraMap A q.ResidueField → ∃ a' : A →+* B', φ.comp a' = a ∧ a'.comp (algebraMap R A) = ρ) : ∀ (N : ℕ), 1 ≤ N → ∃ σ : (C ⧸ (RingHom.ker p.toRingHom ⊔ IsLocalRing.maximalIdeal C ^ N)) →ₐ[R] (C ⧸ (RingHom.ker p.toRingHom ^ 2 ⊔ IsLocalRing.maximalIdeal C ^ N)), (Ideal.Quotient.factorₐ R (sup_le_sup (Ideal.pow_le_self (by decide : 2 ≠ 0)) le_rfl)).comp σ = AlgHom.id R _",
+  "branch": "sheaf-dag",
+  "by": "Q131",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2a395e5c",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 02HT (4)=>(1): all hypotheses of the fixed-residue test (Artinian local B',B, length-one kernel, specified residue isos e',e with e'∘res=e∘res∘φ, arbitrary ρ,a with R-compatibility and canonical residue composite) and the conclusion (for N≥1 an R-algebra section σ with factorₐ∘σ=id) are rendered exactly. Independent universes u v w; test universe max u v w t only strengthens the theorem and stays provable via ULift; compatible with citer lem-sfb-smooth-fixed-residue-artinian-test. Not a duplicate of artinian_lifting_truncated_section (stronger arbitrary-residue hypothesis). lean.statement verbatim; one sorry; docstrings carry source place, blueprint tag and 5 proof steps; stmt_deps correct; node otherwise identical to live. Advisory: Second reading section notes no second worker (direct-delivery policy), not a RETURN."
+ }
+}

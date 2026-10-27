@@ -1,0 +1,235 @@
+{
+ "id": "lem-trf-presheaf-field-lift-family-calculus",
+ "kind": "statement",
+ "title": "Field-extension lifting calculus for families of presheaves",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with presheaves of sets on schemes over $S$, with test schemes and universes as in [def-trf-algebraic-space, def-weil-size-convention]. Joint surjectivity means the field-extension lifting condition of [def-trf-algebraic-space-jointly-surjective-family]: every section over $(\\operatorname{Spec}K,s)$, for a field $K$ [def-weil-field] and a map $s:\\operatorname{Spec}K\\to S$, lifts to some member of the family after a field embedding $K\\to L$. (1) For an isomorphism $e:G\\xrightarrow{\\sim}F$ of presheaves, the singleton family $\\{e\\}$ is jointly surjective. (2) Let $I$ be a set and $J_i$ a set for each $i\\in I$. Let $F,G_i,H_{ij}$ be presheaves, with natural transformations $f_i:G_i\\to F$ and $g_{ij}:H_{ij}\\to G_i$. If $(f_i)_{i\\in I}$ is jointly surjective and $(g_{ij})_{j\\in J_i}$ is jointly surjective for every $i$, then $(f_i\\circ g_{ij})_{(i,j)\\in\\coprod_{i\\in I}J_i}$ is jointly surjective. (3) Let $(f_i:G_i\\to F)_{i\\in I}$ be jointly surjective and let $a:F'\\to F$ be any natural transformation of presheaves. Define $P_i$ objectwise by $P_i(T)=\\{(x',y)\\in F'(T)\\times G_i(T)\\mid a_T(x')=(f_i)_T(y)\\}$, with restriction of pairs. Then the first projections $(P_i\\to F')_{i\\in I}$ are jointly surjective. Empty index sets are allowed. No etaleness or representability of the natural transformations, and no sheaf hypothesis, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-topologies.tex",
+  "place": "Tag 041F (lemma-etale), the point-surjectivity arguments in parts (1)-(3), separated from the etale condition and stated for presheaves. Field-valued point conventions: spaces-properties.tex Tag 03BU (definition-points) and its preceding paragraph. Extracts returned steps 9,10."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "For clause (1), fix a field $K$, an $S$-structure $s$ and $x\\in F(\\operatorname{Spec}K,s)$. Evaluate the inverse natural transformation to obtain $y=(e^{-1})_{(\\operatorname{Spec}K,s)}(x)\\in G(\\operatorname{Spec}K,s)$. The inverse identity evaluated at $x$ gives $e(y)=x$. Choose the sole family index, $L=K$ and the identity embedding $K\\to K$. Restriction along this embedding is the identity by the presheaf identity axiom. These data satisfy the lifting definition, proving (1).",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), omitted proof of (1)-(3); field-valued representatives as in spaces-properties.tex Tag 03BU (definition-points) and the preceding paragraph."
+   }
+  },
+  {
+   "text": "For clause (2), fix $K,s,x$ as in the lifting definition. Apply that definition to $(f_i)$ to obtain $i$, an embedding $u:K\\to L$, and $y\\in G_i(\\operatorname{Spec}L,s_L)$ with $f_i(y)=x|_L$, where $s_L=s\\circ\\operatorname{Spec}u$. Apply it again to $(g_{ij})_j$ over this same $S$-structured field $L$, to obtain $j\\in J_i$, an embedding $v:L\\to M$, and $z\\in H_{ij}(\\operatorname{Spec}M,s_M)$ with $g_{ij}(z)=y|_M$. The composite $v\\circ u$ is an embedding since both maps are injective ring homomorphisms. The map of spectra for the composite is the composite in the reverse order, so $s_M=s_L\\circ\\operatorname{Spec}v=s\\circ\\operatorname{Spec}(v\\circ u)$. Naturality of $f_i$ and the presheaf composition axiom give $(f_i\\circ g_{ij})_M(z)=(f_i)_M(y|_M)=f_i(y)|_M=(x|_L)|_M=x|_M$. Thus $(i,j)$, $M$, $v\\circ u$, and $z$ are the required witnesses. The two successive witness fields remain in the fixed universe; no simultaneous extension or enlargement is used.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), omitted proof of (1)-(3); field-valued representatives as in spaces-properties.tex Tag 03BU (definition-points) and the preceding paragraph."
+   }
+  },
+  {
+   "text": "For clause (3), first check that the displayed objectwise formula defines a presheaf and its projection defines a natural transformation. For an $S$-morphism $r:T_1\\to T_0$ and $(x',y)\\in P_i(T_0)$, naturality gives $a_{T_1}(x'|_r)=a_{T_0}(x')|_r=(f_i)_{T_0}(y)|_r=(f_i)_{T_1}(y|_r)$. Hence restriction sends the pair to $(x'|_r,y|_r)\\in P_i(T_1)$. Identity and composite restriction agree coordinatewise because they do so in $F'$ and $G_i$; equality of pairs with their compatibility proofs reduces to equality of the coordinates. First projection commutes with restriction since both orders return $x'|_r$. The sets of compatible pairs are subsets of the indicated products in the chosen universe.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), omitted proof of (1)-(3); field-valued representatives as in spaces-properties.tex Tag 03BU (definition-points) and the preceding paragraph."
+   }
+  },
+  {
+   "text": "Now fix a field $K$, $s:\\operatorname{Spec}K\\to S$, and $x'\\in F'(\\operatorname{Spec}K,s)$. Apply the lifting definition for $(f_i)$ to $a_K(x')\\in F(\\operatorname{Spec}K,s)$. Obtain $i$, an embedding $u:K\\to L$, and $y\\in G_i(\\operatorname{Spec}L,s_L)$ with $(f_i)_L(y)=a_K(x')|_L$. Naturality of $a$ identifies the last expression with $a_L(x'|_L)$. Thus $(x'|_L,y)$ is an element of precisely the set $P_i(\\operatorname{Spec}L,s_L)$ defined in the statement, and its first projection is $x'|_L$. These are the witnesses required for joint surjectivity of $(P_i\\to F')$, proving (3).",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), omitted proof of (1)-(3); field-valued representatives as in spaces-properties.tex Tag 03BU (definition-points) and the preceding paragraph."
+   }
+  },
+  {
+   "text": "The arguments respect empty families. By the lifting definition the empty family into $F$ is jointly surjective exactly when $F(\\operatorname{Spec}K,s)$ is empty for every $K,s$: a section would require an index in the empty set, and in the absence of sections the condition is vacuous. In (2), if $I$ is empty there is therefore no $x$ to lift. If a particular $J_i$ is empty, joint surjectivity of that inner family forces $G_i$ to have no field-valued sections, so the outer lift cannot choose such an $i$ together with $y$. In (3), if $I$ is empty, any $x'$ would yield the impossible section $a_K(x')$ of $F$; hence the conclusion for the empty base-changed family is vacuous as well. No step assumes that $S$ has a field-valued point, so the empty base scheme is also included.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), omitted proof of (1)-(3); field-valued representatives as in spaces-properties.tex Tag 03BU (definition-points) and the preceding paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space-jointly-surjective-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-topologies.tex",
+  "place": "Tag 041F (lemma-etale) has proof omitted. Q145 supplies the elementary witness arguments for arbitrary presheaves, using the explicit lifting definition from Tag 03BU conventions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Joint surjectivity on field-valued point classes of presheaves on schemes is preserved by composition and presheaf fibre products",
+   "results": "{\"t\": \"2026-10-22T06:10:27Z\", \"tool\": \"leanfinder\", \"query\": \"Joint surjectivity on field-valued point classes of presheaves on schemes is preserved by composition and presheaf fibre products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop\", \"AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective\", \"AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\"], \"digest\": \"e9886d8ae6f4a7dd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.IsJointlySurjectivePreserving and Scheme.Cover refer to points of schemes, not arbitrary presheaves with field-extension lifts. Read Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean:31-105. The other hits concern affine transition limits and open covers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Field extension lifts for jointly surjective families of functors on schemes compose and lift compatible pairs in pullback functors",
+   "results": "{\"t\": \"2026-10-22T06:11:38Z\", \"tool\": \"leanfinder\", \"query\": \"Field extension lifts for jointly surjective families of functors on schemes compose and lift compatible pairs in pullback functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.g\", \"AlgebraicGeometry.Scheme.Cover.exists_lift_trans_eq\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.Pullback.lift_comp_ι\", \"AlgebraicGeometry.Scheme.Pullback.gluedLiftPullbackMap\", \"AlgebraicGeometry.Scheme.Cover.pullbackHom_map\", \"AlgebraicGeometry.Scheme.Pullback.p_comm\", \"AlgebraicGeometry.Scheme.Pullback.t'\"], \"digest\": \"085f69902dbdb0b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.IsJointlySurjectivePreserving and Scheme.Cover refer to points of schemes, not arbitrary presheaves with field-extension lifts. Read Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean:31-105. The other hits concern affine transition limits and open covers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsJointlySurjective\", \"Presheaf\"",
+   "results": "{\"t\": \"2026-10-22T06:10:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsJointlySurjective\\\", \\\"Presheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.IsJointlySurjectivePreserving and Scheme.Cover refer to points of schemes, not arbitrary presheaves with field-extension lifts. Read Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean:31-105. The other hits concern affine transition limits and open covers."
+  },
+  {
+   "tool": "grep",
+   "query": "IsJointlySurjective|field.val.*surject|surject.*field.val",
+   "results": "{\"t\": \"2026-10-22T06:10:49Z\", \"tool\": \"grep\", \"query\": \"IsJointlySurjective|field.val.*surject|surject.*field.val\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Cover/Over.lean\"], \"digest\": \"2ace35f4d9ff82e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.IsJointlySurjectivePreserving and Scheme.Cover refer to points of schemes, not arbitrary presheaves with field-extension lifts. Read Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean:31-105. The other hits concern affine transition limits and open covers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Families of natural transformations between presheaves on schemes which lift field-valued sections after field extension are stable under composition and fibre products",
+   "results": "{\"t\": \"2026-10-22T06:11:15Z\", \"tool\": \"leansearch\", \"query\": \"Families of natural transformations between presheaves on schemes which lift field-valued sections after field extension are stable under composition and fibre products\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jointly surjective families of presheaves on schemes with lifts after field extensions are closed under composition and objectwise pullback",
+   "results": "{\"t\": \"2026-10-22T06:56:55Z\", \"tool\": \"leanfinder\", \"query\": \"Jointly surjective families of presheaves on schemes with lifts after field extensions are closed under composition and objectwise pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving\", \"AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"AlgebraicGeometry.Scheme.jointlySurjectiveTopology\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\", \"AlgebraicGeometry.Scheme.surjectiveFamiliesPretopology\"], \"digest\": \"a313ab63b4570f37\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-point joint-surjectivity notions and scheme covers, not arbitrary presheaves with field-extension lifts. Read Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean:31-105."
+  },
+  {
+   "tool": "grep",
+   "query": "IsJointlySurjective|field.val.*surject|surject.*field.val",
+   "results": "{\"t\": \"2026-10-22T06:57:02Z\", \"tool\": \"grep\", \"query\": \"IsJointlySurjective|field.val.*surject|surject.*field.val\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalClosure.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\"], \"digest\": \"b53436736122985b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme-point joint-surjectivity notions and scheme covers, not arbitrary presheaves with field-extension lifts. Read Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean:31-105."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations of presheaves lifting field valued sections after extension form covering families stable under composition and pullback",
+   "results": "{\"t\": \"2026-10-22T06:57:03Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformations of presheaves lifting field valued sections after extension form covering families stable under composition and pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.instIsStableUnderCompositionComap\", \"CategoryTheory.Precoverage.IsStableUnderComposition\", \"CategoryTheory.NatTrans.onPresheaf\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderCompositionToPrecoverage\", \"CategoryTheory.Sheaf.natTransΓRes\", \"CategoryTheory.Functor.IsCoverDense.sheafYonedaHom\", \"CategoryTheory.Subfunctor.sheafifyLift\", \"CategoryTheory.Functor.IsCoverDense.sheafCoyonedaHom\"], \"digest\": \"089ec5929ef8345d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: general precoverage composition assumes a precoverage already proved stable; other hits concern sheaf restrictions and sheafification, without the field-extension lifting predicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsJointlySurjective\", \"Presheaf\"",
+   "results": "{\"t\": \"2026-10-22T06:57:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsJointlySurjective\\\", \\\"Presheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: query returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Field extension lifts of sections of functors form a transitive covering relation and compatible pairs lift in pullback presheaves",
+   "results": "{\"t\": \"2026-10-22T06:57:36Z\", \"tool\": \"leanfinder\", \"query\": \"Field extension lifts of sections of functors form a transitive covering relation and compatible pairs lift in pullback presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Meq.pullback\", \"CategoryTheory.PresheafHom.IsSheafFor.app_cond\", \"CategoryTheory.Presieve.FamilyOfElements.PullbackCompatible\", \"CategoryTheory.PresheafHom.IsSheafFor.exists_app\", \"CategoryTheory.Presieve.Arrows.PullbackCompatible\", \"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"CategoryTheory.Presieve.pullbackCompatible_iff\", \"CategoryTheory.Presieve.FamilyOfElements.Compatible.pullback\"], \"digest\": \"eb2a60ab3ba055b5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Meq.pullback and compatible-family lemmas concern descent data on a covering sieve, not extension lifts of single field-valued sections of arbitrary presheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-chartwise-etale-permanence",
+  "date": "2026-10-22",
+  "group": "Q118"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Basic chartwise etale permanence and covering base change needed to construct the enlarged etale site. Re-split of lem-trf-space-chartwise-etale-permanence: Returned steps 9,10: inverse lifts, successive field-extension lifts, and compatible-pair lifts in fibre products, independent of etaleness.",
+   "via": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-presheaf-field-lift-family-calculus",
+  "worker": "stage1",
+  "summary": "Supplied inverse, successive-extension, and compatible-pair witness proofs of all three clauses, including the objectwise presheaf laws and empty-index cases. Every lifting step uses the existing explicit joint-surjectivity definition. No new nodes or Mathlib leaves: all arguments are elementary evaluations of inverses, naturality and functor laws. Searches find no exact project attachment or Mathlib generalization specializing in one line. Statement and inherited historical ancestry retained.",
+  "blueprint": "Preserves the inherited lem-trf-local-term-locality ancestry through lem-trf-space-chartwise-etale-permanence: the elementary surjectivity part of chartwise covering axioms used by the enlarged etale-site and polarized descent input. The current main-20261015 ancestor proof concerns contracting correspondences and contains no literal field-lifting argument; this is an auxiliary node below that historical branch, proved here directly from Stacks 041F/03BU conventions, not a replacement of a unit step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-4dbe324d8",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-4dbe324d8 (reviewer sub-agent of L); spot-checked: Ordinary one-level split, made no new nodes and needs no fixes. There is no repair note for this item. Live and side-live both still show it unsplit, and the statement and stmt_deps match the base exactly. Source: Stacks Tag 041F (spaces-topologies.tex, lemma-etale; its proof says only 'Omitted', so the agent origin is correct). Point conventions: spaces-properties.tex lines 230-262, just before 03BU. The definition def-trf-algebraic-space-jointly-surjective-family states exactly the lifting condition used (for every K, s, x there are i, L, e, y with f_i(y)=x|_L) and covers arbitrary presheaves. Step 1: inverse section with L=K and the identity embedding. Step 2: applies the definition twice; I checked s_L∘Spec v = s∘Spec(v∘u) and f_i g_ij(z)=f_i(y|_M)=(x|_L)|_M=x|_M. Step 3: compatible pairs P_i form a presheaf, by naturality and the coordinatewise functor laws. Step 4: applies the definition to a_K(x'); naturality gives a_L(x'|_L), so (x'|_L, y) lies in P_i. Step 5: empty families handled correctly. Edge cases tested: empty presheaf, empty I where F has no field sections but other sections (the base change is then vacuous), G_i empty in clause (2) (hypothesis fails as it should), empty S. Every step is truly elementary and cites only the definition, so the route and tool_uses are fine and no SGA is used. The only citer, lem-trf-space-chartwise-etale-permanence step 4, uses exactly the three clauses. Not a duplicate: lem-trf-space-fibre-products-etale-covers is about etale families of algebraic spaces, and lem-trf-presheaf-pullback-etale-point-lifting is about representable-etale pullbacks. Mathlib searches were done with all three kinds of tool; one LeanSearch was recorded as unavailable. Scheme.IsJointlySurjectivePreserving (MorphismProperty.lean:41) is about scheme points only, so it is not a match."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PresheafFieldLiftFamilyCalculus",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.presheaf_field_lift_family_calculus",
+  "file": "lean/Sheaf/AlgebraicGeometry/PresheafFieldLiftFamilyCalculus.lean",
+  "statement": "theorem presheaf_field_lift_family_calculus (S : Scheme.{u}) : (∀ (F G : (Over S)ᵒᵖ ⥤ Type u) (e : G ≅ F), IsJointlySurjective (fun _ : Unit ↦ e.hom)) ∧ (∀ (I : Type v) (J : I → Type w) (F : (Over S)ᵒᵖ ⥤ Type u) (G : I → (Over S)ᵒᵖ ⥤ Type u) (H : ∀ i : I, J i → (Over S)ᵒᵖ ⥤ Type u) (f : ∀ i : I, G i ⟶ F) (g : ∀ (i : I) (j : J i), H i j ⟶ G i), IsJointlySurjective f → (∀ i : I, IsJointlySurjective (g i)) → IsJointlySurjective (fun ij : Sigma J ↦ g ij.1 ij.2 ≫ f ij.1)) ∧ (∀ (I : Type v) (F F' : (Over S)ᵒᵖ ⥤ Type u) (G : I → (Over S)ᵒᵖ ⥤ Type u) (f : ∀ i : I, G i ⟶ F) (a : F' ⟶ F), IsJointlySurjective f → IsJointlySurjective (fun i : I ↦ (PullbackCone.combine a (f i) (fun T ↦ Types.pullbackCone (a.app T) ((f i).app T)) (fun T ↦ (Types.pullbackLimitCone (a.app T) ((f i).app T)).isLimit)).fst))",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e31e43c73",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Lean matches node clauses (1)-(3) exactly: Unit-indexed singleton of e.hom; Sigma J family g ij.1 ij.2 ≫ f ij.1 with both JS hypotheses, I:Type v, J:Type w unrestricted; clause 3 uses PullbackCone.combine of Types.pullbackCone/pullbackLimitCone, read in Mathlib: objects are compatible pairs, restriction is coordinatewise (pullbackLimitCone lift), .fst is first projection, so it is the node's literal P_i. IsJointlySurjective (def-trf-algebraic-space-jointly-surjective-family, live) is exactly the field-extension lifting condition. Node differs from side-live only in lean; statement verbatim in file. Empty I/J_i/presheaf/empty S covered; no extra hypotheses; sorry only; docstrings with Stacks 041F/03BU and blueprint id plus all 5 proof steps; imports public and used. No Mathlib/project duplicate, no earlier stage-2 run, item not dropped. No compile (no files changed); worker scompile clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261023T132412-L-2266408",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.AlgebraicSpace.presheaf_field_lift_family_calculus"
+  ],
+  "sorry_after": []
+ }
+}

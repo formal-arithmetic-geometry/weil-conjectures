@@ -21,7 +21,8 @@ Source: literature/stacks-project/cohomology.tex, Lemma 01FF proof and Lemma 01E
 (blueprint: lem-sc-topological-filtered-injective-cech-acyclic).
 -/
 
-private theorem compact_cech_intersections
+/-- Tuple intersections of compact opens are compact when binary intersections are compact. -/
+theorem compact_cech_intersections
     {X : Type u} [TopologicalSpace X]
     (hpairs : ∀ U V : TopologicalSpace.Opens X,
       IsCompact (U : Set X) → IsCompact (V : Set X) →
@@ -52,7 +53,8 @@ private theorem compact_cech_intersections
       rw [he]
       exact hpairs _ _ (hc _) (ih _)
 
-private theorem compact_basis_cofinal
+/-- Finite compact-open covers are cofinal among covers of a compact basis open. -/
+theorem compact_basis_cofinal
     {X : Type u} [TopologicalSpace X]
     (hbasis : TopologicalSpace.Opens.IsBasis
       {U : TopologicalSpace.Opens X | IsCompact (U : Set X)})

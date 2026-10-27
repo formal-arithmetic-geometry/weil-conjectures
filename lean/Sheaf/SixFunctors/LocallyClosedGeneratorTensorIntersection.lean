@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.MorphismProperty.Factorization
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
 
 import all WeilConjectures.AlgebraicGeometry.ModuleCupCanonicalHZeroIdentification
-import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
 import all Sheaf.AlgebraicGeometry.ProEtaleSupportedReconstruction
 import all Sheaf.Paper.FiniteEtaleLocallyFreeModels
 import all Sheaf.Paper.CoefficientHeartLisseExtensionConstructible
@@ -836,7 +836,7 @@ private theorem lisse_flat
     ⟨U, fun k ↦ (freeAt_iff_standard Λ (U.f k) P).mpr (hU k)⟩
   apply (ObjectProperty.flat_iff_preservesFiniteLimits P).mpr
   exact preservesFiniteLimits_of_natIso
-    (Mod.relativeTensorRightIso P ≪≫
+    (Mod.ResidueOrdinary.relativeTensorRightIso P ≪≫
       (BraidedCategory.tensorLeftIsoTensorRight P).symm)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -2042,13 +2042,12 @@ theorem locallyClosedGeneratorTensorIntersection
           Disjoint (Set.range g) (Set.range (pullback.fst a b ≫ a)) →
           IsZero ((upperStar Λ g).obj ((DerivedCategory.homologyFunctor _ 0).obj
             (((generatorTensorSource Λ A B).obj L).obj M)))) := by
-  obtain ⟨e, _⟩ := actual_generator_comparison_exists Λ a b (derivedTensor Λ X)
+  have h := actual_generator_comparison_exists Λ a b (derivedTensor Λ X)
     (generatorIntersectionModule Λ a b) (derivedTensor_eq_curriedTensor Λ X)
     (generatorIntersectionModule_eq_tensor Λ a b)
+  obtain ⟨e, _⟩ := id h
   have hp := actual_tensor_properties Λ a b (derivedTensor Λ X) (fun A B C ↦ ⟨e A B C⟩)
-  have hn := And.intro (actual_generator_comparison_exists Λ a b (derivedTensor Λ X)
-    (generatorIntersectionModule Λ a b) (derivedTensor_eq_curriedTensor Λ X)
-    (generatorIntersectionModule_eq_tensor Λ a b)) hp
+  have hn := And.intro h hp
   simp only [generatorTensorSource, generatorTensorTarget, actualTensorSource,
     actualTensorTarget, functorComp_assoc] at hn ⊢
   exact hn

@@ -4,7 +4,8 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Mathlib.AlgebraicGeometry.QuasiAffine
-import WeilConjectures.AlgebraicGeometry.InvertibleSectionLocalization
+import Sheaf.AlgebraicGeometry.QuasiAffineOpenPrincipalComparisonCover
+import Sheaf.AlgebraicGeometry.AffinePrincipalAffinizationIsomorphism
 
 /-! # Cartesian affinization square for an open inside a quasi-affine scheme
 
@@ -39,6 +40,33 @@ theorem isPullback_toSpecΓ_of_isOpenImmersion
     {U V : Scheme.{u}} (u : U ⟶ V) [IsOpenImmersion u]
     [U.IsQuasiAffine] [V.IsQuasiAffine] :
     IsPullback U.toSpecΓ (𝟙 U) (Spec.map u.appTop) (u ≫ V.toSpecΓ) := by
-  sorry
+  obtain ⟨_, hcomm, _, hcover, hcharts, _⟩ :=
+    quasiAffine_open_principal_comparison_cover u
+  have himage : Spec.map u.appTop ⁻¹ᵁ (u ≫ V.toSpecΓ).opensRange =
+      U.toSpecΓ.opensRange := by
+    ext x
+    change Spec.map u.appTop x ∈ Set.range (u ≫ V.toSpecΓ) ↔
+      x ∈ Set.range U.toSpecΓ
+    constructor
+    · intro hx
+      rw [hcover] at hx
+      obtain ⟨g, hxg⟩ := Set.mem_iUnion.mp hx
+      obtain ⟨hg, hxg⟩ := Set.mem_iUnion.mp hxg
+      obtain ⟨_, _, _, _, hpre, _, haff⟩ := hcharts g hg
+      have hxf : x ∈ PrimeSpectrum.basicOpen (u.appTop g) := by
+        rw [← hpre]
+        exact hxg
+      let e := U.toSpecΓ.resLE (PrimeSpectrum.basicOpen (u.appTop g))
+        (U.basicOpen (u.appTop g)) (U.toSpecΓ_preimage_basicOpen _).ge
+      have : IsIso e := (affine_principal_affinization_isomorphism U
+        (u.appTop g) haff).2.1
+      obtain ⟨y, hy⟩ := e.homeomorph.surjective ⟨x, hxf⟩
+      refine ⟨y.1, ?_⟩
+      exact (Hom.coe_resLE_apply _ _ y).symm.trans (congrArg Subtype.val hy)
+    · rintro ⟨y, rfl⟩
+      refine ⟨y, ?_⟩
+      exact (congrArg (fun f : U ⟶ Spec Γ(V, ⊤) => f y) hcomm).symm
+  exact (IsOpenImmersion.isPullback (𝟙 U) U.toSpecΓ (u ≫ V.toSpecΓ)
+    (Spec.map u.appTop) (by simpa using hcomm) himage).flip
 
 end AlgebraicGeometry.Scheme

@@ -15,81 +15,83 @@
  ],
  "proof": [
   {
-   "text": "Fix $w\\in W$. Choose an affine open $V\\subseteq Z$ containing $c(w)$ and an affine open $U\\subseteq c^{-1}(V)$ containing $w$. Such choices use the affine-open basis of a scheme. Put $R=\\mathcal O_Z(V)$ and $A=\\mathcal O_W(U)$. The given locally finite presentation of $c$ implies that the induced $R$-algebra $A$ is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. We shall show that this affine chart is étale.",
+   "text": "For arbitrary affine opens U in Z and V in W with c(V) contained in U, use LocallyOfFinitePresentation.finitePresentation_appLE to give the section algebra Gamma(W,V) finite presentation over Gamma(Z,U). Prove its etaleness; these are precisely the section maps required by Etale.etale_appLE.",
    "uses": [
-    "def-pc-scheme",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 02HM, lemma-etale-formally-etale, converse proof, affine reduction; morphisms.tex Tag 01TQ, lemma-locally-finite-presentation-characterize."
-   }
-  },
-  {
-   "text": "The unique lifting hypothesis passes to $c|_U:U\\to V$. Indeed, given $T_0\\hookrightarrow T$, $a_0:T_0\\to U$, and $b:T\\to V$, compose with the inclusions into $W,Z$ and use the hypothesis to obtain $a:T\\to W$. A first order thickening has the same underlying space by [def-sbc-first-order-thickening], so every point of $a(T)$ already belongs to the image of $a_0$, hence lies in $U$. Restrict the continuous map of $a$ to $U$ and restrict its structure-sheaf map along $\\mathcal O_U=\\mathcal O_W|_U$; this gives a morphism $T\\to U$ by [def-weil-open-immersion]. The equations hold as maps into $U,V$ since the inclusions are injective on points and identify the restricted sheaves. Any two such lifts have identical composites into $W$ by the original uniqueness, and therefore identical continuous and sheaf maps into $U$. Thus the restricted lift is unique.",
-   "uses": [
-    "def-sbc-first-order-thickening",
-    "def-weil-open-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 02HK, lemma-formally-etale-on-opens, proof; expanded directly using the definitions."
-   }
-  },
-  {
-   "text": "Let $D$ be any commutative $R$-algebra, $I\\subseteq D$ an ideal with $I^2=0$, and $u:A\\to D/I$ an $R$-algebra map. Set $T=\\operatorname{Spec}D$ and $T_0=\\operatorname{Spec}(D/I)$. The quotient induces a closed immersion by [def-weil-closed-immersion], and its defining ideal is square zero, so this is a first order thickening [def-sbc-first-order-thickening]. The map $u$ gives $T_0\\to U=\\operatorname{Spec}A$ over $V=\\operatorname{Spec}R$. By the previous step it has a unique lift $T\\to U$ over $V$. By the unique ring-map description of morphisms between spectra [def-weil-affine-spectrum], this is exactly a unique $R$-algebra map $v:A\\to D$ whose composite with $D\\to D/I$ is $u$: functoriality of Spec identifies the two required commutative triangles with these ring equations.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "def-weil-closed-immersion",
-    "def-sbc-first-order-thickening"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 02HL, lemma-affine-formally-etale, proof, using algebra.tex Tag 00UQ; affine anti-equivalence expanded."
-   }
-  },
-  {
-   "text": "Apply [lem-per-ring-square-zero-lifts-cotangent-zero] to the unique lifts established in step 3. It gives $\\Omega_{A/R}=0$ and $H_1(L_{A/R})=0$. Together with the finite presentation from step 1, these are exactly the three ring conditions in [lem-weil-pbc-etale-ring-map-iff-etale-affine]. Its reverse implication therefore shows that $U=\\operatorname{Spec}A\\to V=\\operatorname{Spec}R$ is étale.",
-   "uses": [
-    "lem-per-ring-square-zero-lifts-cotangent-zero",
-    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 02HM, lemma-etale-formally-etale, converse proof, ring criterion (algebra.tex Tag 00UR); morphisms.tex Tag 02GJ, lemma-etale-characterize, affine comparison."
-   }
-  },
-  {
-   "text": "For every $w\\in W$ we have produced affine open neighbourhoods $U$ of $w$ and $V$ of $c(w)$ such that $c(U)\\subseteq V$ and the induced affine morphism is étale. The affine-local formulation in [def-weil-etale-morphism] (Stacks Definition 02GI) is precisely that a morphism has such charts at every point. Consequently $c$ is étale. If $W$ is empty the same pointwise criterion is vacuous, so the conclusion also covers this case.",
-   "uses": [
+    "def-sbc-locally-finite-presentation",
     "def-weil-etale-morphism"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GI, definition-etale, clauses (1)-(2), as recorded in def-weil-etale-morphism."
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HM, converse affine reduction; morphisms.tex Tag 02GI."
+   }
+  },
+  {
+   "text": "Let D be any algebra over Gamma(Z,U), I a square-zero ideal, and v:Gamma(W,V)->D/I an algebra map. The quotient map q gives a closed immersion Spec(D/I)->Spec D. Compute its kernel ideal sheaf on the affine target from the kernel of q, transported through GammaSpecIso; Ideal.le_comap_pow and I^2=0 prove that its square is zero. Thus it is a first-order thickening. The algebra compatibility equation translates by functoriality of Spec and SpecMap_appLE_fromSpec to a square into W and Z; apply the hypothesis.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HL, affine ring translation, and Tag 02HM converse."
+   }
+  },
+  {
+   "text": "A square-zero closed immersion j is surjective on points: support(j.ker)=support(j.ker^2)=support(0) is the whole target, while support(j.ker) is the closed image of j. Consequently a(Spec D) lies in V, since its composite with j factors through Spec Gamma(W,V). IsOpenImmersion.lift factors a through the chart inclusion. The two triangles cancel through the open chart inclusions. Full faithfulness of Spec identifies this factorization with a ring map r; the base triangle makes r an algebra map, and the thickening triangle says q composed with r equals v. Conversely any algebra lift gives a scheme lift, so uniqueness in the hypothesis and cancellation of the chart inclusion imply uniqueness of the algebra lift.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 02HK and 02HL, restriction to opens and affine ring translation."
+   }
+  },
+  {
+   "text": "Apply Mathlib Algebra.FormallyEtale.iff_comp_bijective to the bijectivity just proved. Its reverse implication applies FormallyUnramified.iff_comp_injective_of_small to uniqueness, giving vanishing Kahler differentials, and FormallySmooth.of_comp_surjective to existence, giving vanishing H1Cotangent. Thus these are the two stated ring lifting criteria, combined without a new intermediate declaration.",
+   "uses": [
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00UR, formally etale and etale, using Tags 00TN and 00UO."
+   }
+  },
+  {
+   "text": "Combine Algebra.FormallyEtale with the finite-presentation instance using Algebra.Etale.mk. RingHom.Etale is defined by this algebra condition. This is the ring etaleness in the affine comparison criterion, and each arbitrary affine section map now satisfies it. Supply these section maps directly to Etale.mk to conclude Etale c, including the empty source case.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HM converse; morphisms.tex Tags 02GI and 02GJ."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
   "def-sbc-first-order-thickening",
-  "def-weil-open-immersion",
-  "def-weil-affine-spectrum",
   "def-weil-closed-immersion",
-  "lem-per-ring-square-zero-lifts-cotangent-zero",
-  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
-  "def-weil-etale-morphism"
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+  "lem-weil-pbc-fp-square-zero-lifting-smooth-ring-map",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 02HM, lemma-etale-formally-etale, converse; Tags 02HK and 02HL give the affine reduction, with the ring criterion supplied by Mathlib."
+  "place": "Tags 02HK, 02HL, and 02HM converse, formalized by W2 using Mathlib Algebra.FormallyEtale.iff_comp_bijective and Algebra.Etale.mk (2026-10-26)."
  },
  "mathlib_searches": [
   {
@@ -225,5 +227,26 @@
   "result": "pass",
   "note": "Statement matches node and Stacks 02HM (2)=>(1)/02HG clause by clause: lfp c, forall affine first-order thickening j (IsClosedImmersion ∧ ker^2=⊥, the recorded upstream WeilConjectures.AlgebraicGeometry.Thickening), a0, b with a0≫c=j≫b, ∃! a with j≫a=a0 ∧ a≫c=b; conclusion Etale c. No extra hypotheses, single universe u, edge cases (empty W/T, identity thickening) covered. Node differs from live only in lean; lean.statement verbatim. Imports match the 4 live dep records. No duplicate in Mathlib or side lean. Docstrings carry Tag 02HM/02HG, the blueprint tag and the 5 proof steps; proof sorry only. nt_compile --json rc 0, clean, 3.3 s. Report has Worker report + Second reading by Q23. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T083357-L-2337063",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

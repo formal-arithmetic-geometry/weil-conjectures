@@ -1,0 +1,245 @@
+{
+ "id": "lem-a1-quasi-affine-open-principal-comparison-cover",
+ "kind": "statement",
+ "title": "Common principal-open comparison cover for an open in a quasi-affine scheme",
+ "statement": "Let $u:U\\hookrightarrow V$ be an open immersion [def-weil-open-immersion] of schemes [def-pc-scheme], with $V$ isomorphic to a quasi-compact open subscheme of an affine scheme. Put $A=\\Gamma(U,\\mathcal O_U)$, $B=\\Gamma(V,\\mathcal O_V)$, and let $r:B\\to A$ be restriction. Let $j_U:U\\to\\operatorname{Spec}A$ and $j_V:V\\to\\operatorname{Spec}B$ correspond to identity ring maps [lem-weil-pbc-morphism-into-affine-scheme, def-weil-affine-spectrum], and put $q=\\operatorname{Spec}r$. For a global section $h$ on a scheme $X$, write $X_h=\\{x:h_x\\in\\mathcal O_{X,x}^{\\times}\\}$. Then $j_V$ is an open immersion and $q\\circ j_U=j_V\\circ u$. Put $H=(j_V\\circ u)(U)$ and $I=\\{g\\in B:D(g)\\subseteq H\\}$, where $D(g)=\\{\\mathfrak p:g\\notin\\mathfrak p\\}$. The $D(g)$ for $g\\in I$ cover the open subscheme $H$. For every $g\\in I$, $V_g\\subseteq u(U)$ is affine and $j_V$ induces an isomorphism $V_g\\xrightarrow{\\sim}D(g)$. With $f=r(g)$ one has $U_f=u^{-1}(V_g)$ and $q^{-1}(D(g))=D(f)$, and $u$ restricts to an isomorphism $U_f\\xrightarrow{\\sim}V_g$. The affine opens $U_{r(g)}$, $g\\in I$, cover $U$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof: common charts V_g = U_f and their coverage"
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-quasi-affine-canonical-affine-embedding] to $V$: its stated quasi-affineness hypothesis is exactly the hypothesis on $V$, so $j_V$ is an open immersion. By the ring-map construction of $q=\\operatorname{Spec}r$ in [def-weil-affine-spectrum], both maps $q\\circ j_U$ and $j_V\\circ u$ to $\\operatorname{Spec}B$ induce the ring map $r:B\\to A$ on sections: the first induces $\\mathrm{id}_A\\circ r$, and the second induces $r\\circ\\mathrm{id}_B$. Injectivity of the bijection in [lem-weil-pbc-morphism-into-affine-scheme] gives $q\\circ j_U=j_V\\circ u$.",
+   "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01P9, lemma-quasi-affine; Tag 0ARY, lemma-cartesian-diagram-quasi-affine, first proof sentence (using Schemes Tag 01I1)"
+   }
+  },
+  {
+   "text": "By [def-weil-open-immersion], $u$ identifies $U$ with the open subscheme $u(U)$ of $V$, and $j_V$ identifies $V$ with an open subscheme of $\\operatorname{Spec}B$. Thus $H=j_V(u(U))$ is open. For $z\\in H$, clause (i) of [lem-weil-pbc-spec-localization-away-basic-open] gives $g\\in B$ with $z\\in D(g)\\subseteq H$. This $g$ belongs to $I$, and every $D(g)$ indexed by $I$ lies in $H$ by definition. Therefore these distinguished opens cover $H$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, last sentence of proof; basis supplied by Algebra Tag 00E0, lemma-Zariski-topology (14)"
+   }
+  },
+  {
+   "text": "Fix $g\\in I$. The preimage clause of [lem-weil-pbc-morphism-into-affine-scheme], applied to $j_V$ and $\\mathrm{id}_B$, gives $V_g=j_V^{-1}(D(g))$. Since $D(g)\\subseteq H\\subseteq j_V(V)$, restricting the isomorphism of $V$ with its image from [def-weil-open-immersion] gives $V_g\\simeq D(g)$, induced by $j_V$. Also $j_V^{-1}(H)=u(U)$ by injectivity of $j_V$, hence $V_g\\subseteq u(U)$. By [lem-weil-pbc-principal-localization-open-immersion] and [def-weil-open-immersion], $D(g)$ is isomorphic to the affine scheme $\\operatorname{Spec}B_g$. Composing gives $V_g\\simeq\\operatorname{Spec}B_g$, so $V_g$ is affine by [def-pc-scheme].",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, common charts; Schemes Tag 01I3, lemma-standard-open-affine"
+   }
+  },
+  {
+   "text": "Put $f=r(g)$. Applying [lem-weil-pbc-basic-open-pullback] to $u$ gives $u^{-1}(V_g)=U_f$, because pullback of a global function under the open immersion is restriction. Applying the preimage clause of [lem-weil-pbc-morphism-into-affine-scheme] to $q=\\operatorname{Spec}r$ gives $q^{-1}(D(g))=D(f)$: its corresponding ring map is $r$ by [def-weil-affine-spectrum], and the unit locus of $f\\in A$ on $\\operatorname{Spec}A$ is its distinguished open $D(f)$.",
+   "uses": [
+    "lem-weil-pbc-basic-open-pullback",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof: f is the image of g and U_f = V_g; Schemes Tag 01I1 and Modules Tag 0H78"
+   }
+  },
+  {
+   "text": "Since $V_g\\subseteq u(U)$, restrict the inverse of $u:U\\simeq u(U)$ from [def-weil-open-immersion] to $V_g$. Its image lies in $U_f=u^{-1}(V_g)$ by step 4. The two composites with $u|_{U_f}$ are identities, being restrictions of the inverse identities for $u:U\\simeq u(U)$. Thus $U_f\\simeq V_g$, and step 3 gives $U_f\\simeq\\operatorname{Spec}B_g$, so $U_f$ is affine by [def-pc-scheme]. For $x\\in U$, step 2 gives $g\\in I$ with $j_V(u(x))\\in D(g)$. Then $u(x)\\in V_g$ and $x\\in U_{r(g)}$ by steps 3 and 4. Hence the specified affine opens cover $U$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof: common charts V_g = U_f and coverage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-pc-scheme",
+  "lem-weil-pbc-basic-open-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0ARY, lemma-cartesian-diagram-quasi-affine, proof, common principal charts and their coverage, using Tag 01P9; only V needs to be quasi-affine for these clauses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme U of a quasi affine scheme V is covered by affine principal opens V_g contained in U whose inverse images are U_restriction_g",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.openCoverBasicOpenTop; AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f; AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen; AlgebraicGeometry.Scheme.AffineOpenCover; AlgebraicGeometry.Scheme.affineCover; AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le; AlgebraicGeometry.isBasis_affine_open; AlgebraicGeometry.Scheme.affineBasisCoverOfAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:60 gives the affine-basic-open basis on V, and :103 gives a cover of V, but neither supplies the adapted family indexed by D(g) contained in H, its comparison with U, and the identities for Spec(r). The ring-map preimage identities and open restrictions must be assembled with that basis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffine.isBasis_basicOpen\"",
+   "subdirectory": "",
+   "results": "1 hits: AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:60 gives the affine-basic-open basis on V, and :103 gives a cover of V, but neither supplies the adapted family indexed by D(g) contained in H, its comparison with U, and the identities for Spec(r). The ring-map preimage identities and open restrictions must be assembled with that basis."
+  },
+  {
+   "tool": "grep",
+   "query": "isBasis_basicOpen|toSpecΓ_preimage_basicOpen|preimage_basicOpen_top",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/AffineScheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:60 gives the affine-basic-open basis on V, and :103 gives a cover of V, but neither supplies the adapted family indexed by D(g) contained in H, its comparison with U, and the identities for Spec(r). The ring-map preimage identities and open restrictions must be assembled with that basis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an open immersion into a quasi affine scheme construct a common principal affine open cover from target global functions and identify both restrictions inside the target affinization",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv; AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv_apply_coe_coe; AlgebraicGeometry.isAffineOpen_opensRange; AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f; AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset; AlgebraicGeometry.Scheme.openCoverBasicOpenTop",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:60 gives the affine-basic-open basis on V, and :103 gives a cover of V, but neither supplies the adapted family indexed by D(g) contained in H, its comparison with U, and the identities for Spec(r). The ring-map preimage identities and open restrictions must be assembled with that basis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open immersion U into a quasi affine scheme V has a cover by principal opens of global functions on V contained in U, identified with distinguished opens in Spec of V sections",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; AlgebraicGeometry.IsOpenImmersion; AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec; AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway; AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap; AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv; AlgebraicGeometry.Scheme.openCoverBasicOpenTop",
+   "date": "2026-10-22",
+   "verdict": "no match: QuasiAffine.lean:60 gives the affine-basic-open basis on V, and :103 gives a cover of V, but neither supplies the adapted family indexed by D(g) contained in H, its comparison with U, and the identities for Spec(r). The ring-map preimage identities and open restrictions must be assembled with that basis."
+  },
+  {
+   "tool": "grep",
+   "query": "toSpecΓ_preimage_basicOpen|toSpecΓ_naturality|isBasis_basicOpen|instIsOpenImmersionToSpecΓ",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: canonical-map, basis, and preimage lemmas give separate ingredients; none states the specified adapted common cover and all its comparison identities. Sources of the candidate ingredients read; existing DAG Mathlib leaves reused in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given an open immersion U into a quasi affine V find common affine principal charts V_g contained in U and U_restriction_g covering U",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.affineOpensRestrict; AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion; AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion; AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv; AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion; AlgebraicGeometry.affineOpensRestrict_symm_apply_coe; AlgebraicGeometry.Scheme.openCoverBasicOpenTop",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: canonical-map, basis, and preimage lemmas give separate ingredients; none states the specified adapted common cover and all its comparison identities. Sources of the candidate ingredients read; existing DAG Mathlib leaves reused in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toSpecΓ\", \"basicOpen\"",
+   "subdirectory": "",
+   "results": "2 hits: AlgebraicGeometry.Scheme.toSpecΓ_preimage_basicOpen; AlgebraicGeometry.Scheme.Opens.toSpecΓ_preimage_basicOpen",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: canonical-map, basis, and preimage lemmas give separate ingredients; none states the specified adapted common cover and all its comparison identities. Sources of the candidate ingredients read; existing DAG Mathlib leaves reused in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion U into a quasi affine scheme V admits a cover by target global principal opens V_g identified with U_restriction_g and D(g) in Spec global sections of V",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.Scheme.openCoverBasicOpenTop; AlgebraicGeometry.Scheme.openCoverBasicOpenTop_f; AlgebraicGeometry.isAffineOpen_opensRange; AlgebraicGeometry.Scheme.AffineOpenCover.instIsOpenImmersionF; AlgebraicGeometry.reduce_to_affine_global; AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset; AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: canonical-map, basis, and preimage lemmas give separate ingredients; none states the specified adapted common cover and all its comparison identities. Sources of the candidate ingredients read; existing DAG Mathlib leaves reused in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-quasi-affine-open-affinization-square",
+  "date": "2026-10-22",
+  "group": "Q56"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Tag 0API canonical-embedding argument below lem-a1-affine-hc0, using Tag 0ARY: choose common principal charts V_g = U_f covering U (returned proof steps 1–3).",
+   "via": [
+    "lem-a1-quasi-affine-open-affinization-square",
+    "lem-a1-intersection-canonical-affine-embedding",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-quasi-affine-open-principal-comparison-cover",
+  "worker": "stage1",
+  "summary": "Q08 repaired the returned delivery at b58c1d5c9fd against the current unsplit DAG. Re-read all eight current proof dependencies, checked all fourteen literal citation quotes and retained the Stacks 0ARY/01P9 argument and logged searches. The final step now explicitly verifies the domains and both inverse identities for the restricted chart isomorphism. The statement, statement dependencies, source and ancestry agree with the current baseline; no new nodes, new hypotheses or change of route.",
+  "blueprint": "The nearest ancestor lem-a1-affine-hc0 is reached through the recorded canonical-embedding/descent chain. This item supplies the common-chart and coverage subargument of Stacks 0ARY on that chain, as identified in blueprint.from.place; it changes no unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-e2dc6ec33",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-e2dc6ec33 (reviewer sub-agent of L); spot-checked: PASS: I read all five steps of the split, every cited node statement, and the whole proof of Stacks 0ARY (properties.tex, tag 0ARY checked in tags/tags). The delivery has no new nodes, and the statement, stmt_deps, proof_deps and blueprint are unchanged from the earlier head b58c1d5c9fd. Only step 5 and split_report changed: step 5 now says the restricted inverse of u lands in U_f because of step 4, that both composites restrict the inverse identities, and which steps 2-4 it uses. It is a real repair, not an identical re-push (A6). The item departs soundly from Stacks: Stacks uses lemma-invert-f-affine, which needs qcqs; the item instead indexes by I={g: D(g)⊆H} and gets V_g≅D(g) by restricting the open immersion j_V (D(g)⊆H⊆j_V(V)). So only V needs to be quasi-affine, which matches the statement. Step checks: (1) the canonical-embedding node has exactly the hypothesis on V; both composites induce r on sections; injectivity of the bijection in morphism-into-affine gives q∘j_U=j_V∘u. (2) The open-image clause of def-weil-open-immersion makes H open; the basis clause (i) gives the cover. (3) The preimage clause with ρ=id gives V_g=j_V⁻¹D(g); restricting the iso gives V_g≅D(g); injectivity gives V_g⊆u(U); principal-localization gives D(g)≅Spec B_g, so V_g is affine by def-pc-scheme. (4) basic-open-pullback gives u⁻¹V_g=U_f; the preimage clause for Spec r gives q⁻¹D(g)=D(f), where unit locus = D(f) is elementary. (5) The restricted inverse gives U_f≅V_g; the cover of U is pointwise. proof_deps are exactly the union of the step uses, and every dependency is a Mathlib leaf, so there is no cycle and no route or tool_uses issue. Edge cases tested: U=∅; g=0 or nilpotent; V=A²∖0 with U=D(x); a non-quasi-compact U in Spec k[x_1,x_2,...]. Duplicate search: I read all four other 0ARY nodes; none states this cover, and the parent consumes exactly the item's clauses. There is no SGA citation. Batch-5 finding on lem-trf-quasi-affine-canonical-affine-embedding: accepted. It is a Mathlib leaf for Stacks 01P9 (general quasi-affine scheme theory) with no proof dependencies, neither the trace formula, Poincaré duality nor a step of their proofs, so it imports nothing assumed. The previous three heads were PASSed and returned only at landing because a side-project completion had not been promoted to the live DAG (see the side-completion promotion-loop memory note). Maintainer: promote and land this head rather than re-dispatching it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiAffineOpenPrincipalComparisonCover",
+  "declaration": "AlgebraicGeometry.Scheme.quasiAffine_open_principal_comparison_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiAffineOpenPrincipalComparisonCover.lean",
+  "statement": "theorem quasiAffine_open_principal_comparison_cover {U V : Scheme.{u}} (u : U ⟶ V) [IsOpenImmersion u] [V.IsQuasiAffine] : IsOpenImmersion V.toSpecΓ ∧ U.toSpecΓ ≫ Spec.map u.appTop = u ≫ V.toSpecΓ ∧ IsOpen (Set.range (u ≫ V.toSpecΓ)) ∧ Set.range (u ≫ V.toSpecΓ) = ⋃ (g : Γ(V, ⊤)) (_ : ((PrimeSpectrum.basicOpen g).carrier : Set (Spec Γ(V, ⊤))) ⊆ Set.range (u ≫ V.toSpecΓ)), ((PrimeSpectrum.basicOpen g).carrier : Set (Spec Γ(V, ⊤))) ∧ (∀ g : Γ(V, ⊤), ((PrimeSpectrum.basicOpen g).carrier : Set (Spec Γ(V, ⊤))) ⊆ Set.range (u ≫ V.toSpecΓ) → (V.basicOpen g : Set V) ⊆ Set.range u ∧ IsAffineOpen (V.basicOpen g) ∧ (∃ e : (V.basicOpen g).toScheme ≅ Scheme.Opens.toScheme (X := Spec Γ(V, ⊤)) (PrimeSpectrum.basicOpen g), e.hom ≫ Scheme.Opens.ι (X := Spec Γ(V, ⊤)) (PrimeSpectrum.basicOpen g) = (V.basicOpen g).ι ≫ V.toSpecΓ) ∧ U.basicOpen (u.appTop g) = u ⁻¹ᵁ V.basicOpen g ∧ Spec.map u.appTop ⁻¹ᵁ PrimeSpectrum.basicOpen g = PrimeSpectrum.basicOpen (u.appTop g) ∧ (∃ e : (U.basicOpen (u.appTop g)).toScheme ≅ (V.basicOpen g).toScheme, e.hom ≫ (V.basicOpen g).ι = (U.basicOpen (u.appTop g)).ι ≫ u) ∧ IsAffineOpen (U.basicOpen (u.appTop g))) ∧ ∀ x : U, ∃ g : Γ(V, ⊤), ((PrimeSpectrum.basicOpen g).carrier : Set (Spec Γ(V, ⊤))) ⊆ Set.range (u ≫ V.toSpecΓ) ∧ x ∈ U.basicOpen (u.appTop g)",
+  "branch": "sheaf-dag",
+  "by": "Q147",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b9386c76",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Only the lean field changed against side-live; lean.statement matches the file verbatim; one sorry theorem, no definitions, one Mathlib import. All clauses match the node: IsQuasiAffine on V only (equivalent to the qc-open-in-affine hypothesis; nothing assumed on U), toSpecΓ = maps corresponding to identity ring maps (toSpecΓ_appTop), q = Spec.map u.appTop, X_h = basicOpen, H open with an equality cover by D(g) for g in I, V_g ⊆ u(U), affineness of V_g and U_f, both isomorphisms tied to j_V and u by commuting equations (not arbitrary), U_f = u⁻¹V_g, q⁻¹D(g) = D(r g), the U_{r(g)} cover U. One universe, forced by the morphism. Edge cases U = ∅, nilpotent g, affine V, non-qc U and A²∖0 all fine. No duplicate in Mathlib or side-live (QuasiAffineOpenAffinizationSquare is the parent's pullback result). Docstrings carry source and blueprint; proof steps listed. No compile: no files changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261023T102731-L-2961798",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.quasiAffine_open_principal_comparison_cover"
+  ],
+  "sorry_after": []
+ }
+}

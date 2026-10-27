@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-adic-perfect-quotient-terms-projective",
+ "kind": "statement",
+ "title": "Projective terms of actual ordinary adic quotient complexes",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "statement": "Let X be a scheme, A a coefficient-universe commutative ring, J an ideal, and U an object of the coefficient pro-etale site. Assume every epimorphism of coefficient-universe set sheaves on the slice evaluates surjectively at its terminal object. Let P be any integer cochain complex of finite projective A-modules, without boundedness assumptions. For every n and integer degree i, the term C_n(P).X i of the actual ordinary quotient complex of def-sfb-adic-perfect-reduction-model-complexes is projective in the category of modules over the quotient ring sheaf on the slice.",
+ "stmt_deps": [
+  "def-sfb-adic-perfect-reduction-model-complexes",
+  "def-sfb-adic-residue-lift-comparisons"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09C5 and 09C6, exact sections on weakly contractible objects and finite-projective constant models."
+ },
+ "proof": [
+  {
+   "text": "Prove projectivity of the unit module on the actual coefficient slice directly. Forget a module epimorphism to abelian sheaves and then to set sheaves, preserving its epimorphism property. The given hypothesis lifts its terminal section. Restriction along each unique arrow to the terminal object gives a compatible family of lifts, hence a map from the unit by unitHomEquiv. Naturality proves that this map factors the original map. This is the general-site argument of Stacks Tag 0946, implemented in the private slice_unit_projective helper; the recorded large pro-etale-site specialization is not invoked.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0946, lemma-w-contractible; module and set sheaf epimorphism criteria."
+   }
+  },
+  {
+   "text": "Use the existing constant finite-free comparison. Transport the structure module across the canonical constant-ring isomorphism by the sectionwise ring equivalence. Ordinary scalar extension sends the structure module to the target structure module: the explicit sectionwise isomorphism B tensor_A A = B commutes with restrictions on pure tensors, and module sheafification fixes the target sheaf by its counit. Slice restriction sends the unit to the slice unit definitionally. Thus the composite H of coefficient transport, extension to the completion, slice restriction and quotient extension sends the constant-ring unit to the quotient-ring unit. Use ringedOverFunctor_additive for slice restriction and the existing additivity of the other factors. The composite additivity preserves finite products, including the empty product.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-site-constant-module-hom",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each degree choose a finite free surjection onto P.X i using Module.Finite.exists_fin'. Projectivity supplies a linear right inverse, hence a categorical retract. Apply the actual termwise realization functor F = strictPerfectConstantSheaf followed by H to this retract. The constant finite-free comparison, preservation of finite products by H and the unit isomorphism of step 2 identify F of the finite free module with a finite product of projective quotient units. This product is a finite biproduct; explicitly lift each coprojection through an epimorphism by projectivity of the unit, assemble the lifts using biproduct.desc, and check the factorization on coprojections. Retract.projective proves the required termwise projectivity. No boundedness or nonempty-rank assumption is used.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-pur-site-constant-module-hom",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W2",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/proetale.tex",
+  "place": "Tag 0946 (exact terminal evaluation); Tags 09C5 and 09C6 (finite-projective constant models), with the explicit scalar-unit tensor calculation and Mathlib finite-free retract lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor maps a bounded above cochain complex to a bounded above cochain complex and projective terms imply K projective",
+   "results": "CochainComplex.isKProjective_of_projective. No theorem realizing the concrete quotient terms as projectives on the coefficient slice.",
+   "date": "2026-10-26",
+   "verdict": "Use the bounded-above criterion; isolate the termwise sheaf calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKProjective",
+   "results": "isKProjective_of_projective, isKProjective_of_iso, and homotopy invariance. None gives termwise projectivity for this realization.",
+   "date": "2026-10-26",
+   "verdict": "The general criterion is sufficient after termwise projectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "Projective.of_retract|projective_of_retract|map_isStrictlySupported|isKProjective_of_projective",
+   "results": "HomologicalComplex.map_isStrictlySupported preserves the bound; CochainComplex.isKProjective_of_projective supplies K-projectivity. Source search found sf_weakly_contractible_projective for the large pro-etale site, not the coefficient-site slice in this statement.",
+   "date": "2026-10-26",
+   "verdict": "General ingredients exist; the concrete coefficient-slice projectivity remains."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "D4",
+  "item": "Sheaf.Paper.AdicPerfectReductionModels",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-perfect-reduction-models",
+   "place": "Intermediate statement for its proof.",
+   "via": [
+    "lem-sfb-adic-perfect-reduction-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectQuotientTermsProjective",
+  "file": "lean/Sheaf/Paper/AdicPerfectQuotientTermsProjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectQuotientComplex_terms_projective",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicPerfectQuotientComplex_terms_projective"
+  ],
+  "statement": "theorem adicPerfectQuotientComplex_terms_projective (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (U : coefficientProEtaleSiteModel.{u, v} X)\n    (_hU : AdicResidueSliceWeaklyContractible.{u, v} X U)\n    (P : CochainComplex (ModuleCat.{max v (u + 1)} A) ℤ)\n    (_hP : ∀ i : ℤ, Module.Finite A (P.X i) ∧ Module.Projective A (P.X i)) :\n    let R := fun n : ℕ ↦\n      (finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U\n    let C : (n : ℕ) → Cx (R n) := fun n ↦ adicPerfectQuotientComplex.{u, v} X J U P n\n    ∀ (n : ℕ) (i : ℤ), Projective ((C n).X i)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-94abe",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T065433-L-2969140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261026T092959-L-3484921",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

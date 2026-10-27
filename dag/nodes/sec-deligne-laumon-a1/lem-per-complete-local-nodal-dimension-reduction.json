@@ -1,0 +1,366 @@
+{
+ "id": "lem-per-complete-local-nodal-dimension-reduction",
+ "kind": "statement",
+ "title": "Dimension-lowering preparation of complete local marked log regular models",
+ "statement": "Fix an integer $d\\ge2$. Assume $U(V,W)$ from [def-per-ordinary-alteration-topology] for every reduced quasi-excellent Noetherian scheme $V$ of Krull dimension at most $d-1$ and every nowhere dense closed subset $W\\subset V$. Let $X=\\operatorname{Spec}A$, where $A$ is a nonzero normal complete Noetherian local domain of dimension $d$, and let $Z\\subset X$ be nowhere dense closed. There is a finite ordinary alteration covering $(h_a:M_a\\to X)_a$ with each $M_a$ nonempty integral excellent Noetherian, and nowhere dense closed subsets $B_a\\subset M_a$ such that $(M_a,B_a)$ is a log regular pair [def-trf-log-regular-pair]. For every $a$ there is an effective Cartier ideal $\\mathcal I_a\\subset\\mathcal O_{M_a}$ whose zero-set is $h_a^{-1}(Z)$ and is contained in $B_a$ [def-nagata-effective-cartier-ideal]. The unit ideal is permitted when $Z$ is empty. In particular the output sources are log regular; regularity of these sources is not asserted.\n\nSchemes, integral schemes, excellence, Noetherianness, normal rings, completion and Krull dimension mean [def-pc-scheme], [def-pc-integral-scheme], [def-exc-excellent-ring], [def-weil-pbc-noetherian-ring], [def-weil-pbc-normal-ring], [def-weil-pbc-adically-complete-ring], [def-kun-topological-krull-dimension].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VII 3.1--4.2, pp.81--82, stopping before the log resolution theorem 4.3: V 3.1.3--3.1.4, p.66 (partial algebraization); regular completion pullback in VII 3.2; compactification and Cartierization in 3.3; ordinary marked nodal alteration in 3.4; lower-dimensional uniformization of the base in 4.1; VI 1.9 in 4.2. The Cartier ideal is the pulled-back ideal after the blowup in 3.3; no assertion of regular models is included."
+ },
+ "stmt_deps": [
+  "def-per-ordinary-alteration-topology",
+  "def-trf-log-regular-pair",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "The residue field of $A$ has characteristic $0$ or a single prime $p$. Choose a prime $\\ell$ different from that characteristic; its image in $A$ is a unit. This is only an auxiliary parameter: we impose no degree restriction on the output. By [lem-per-complete-local-excellence], $X$ is excellent. Apply [lem-per-prime-to-ell-marked-algebraization] to $(X,Z)$: obtain $p:X^+\\to X$, the regular completion morphism $g:X^+\\to W$, and $W\\to Y_0$ with $Y_0$ affine excellent regular of dimension $d-1$ and generic fibre an integral curve. Write $Z_W$ for its marking, so $p^{-1}Z=g^{-1}Z_W$. This uses ordinary completion, not strict henselization. The generic fibre of $Z_W$ is nowhere dense in the integral generic curve (it misses its generic point), hence has dimension at most zero by [lem-pc-nowhere-dense-dim-zero].",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-pc-nowhere-dense-dim-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII 3.1, p.81; V 3.1.3--3.1.4, p.66."
+   }
+  },
+  {
+   "text": "Apply [lem-per-proper-generic-curve-preparation] to $W\\to Y_0$ and $Z_W$, with the chosen $\\ell$. It gives an affine integral excellent $Y_1$ with $\\dim Y_1\\le d-1$, a proper $P\\to Y_1$ with smooth geometrically integral generic curve, an effective Cartier divisor $E$ with finite etale generic fibre, and a dense open $P^\\circ\\subset P$ with a proper surjective generically finite map $h:P^\\circ\\to W$ satisfying $|E|\\cap P^\\circ=h^{-1}Z_W$. In the ordinary topology $h$ is a singleton cover, regardless of its generic degree. In particular Cartierization has happened before the subsequent nodal alterations.",
+   "uses": [
+    "lem-per-proper-generic-curve-preparation",
+    "def-per-ordinary-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII 3.3, p.82 (compactification and blowing up the marking); the existing preparation also supplies the generic smooth and etale hypotheses needed in 3.4."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-relative-marked-nodal-reduction] to $P\\to Y_1$ with the Cartier marking $E$. Its base hypothesis holds: $Y_1$ is affine Noetherian, hence projective over its own affine spectrum via the identity. Obtain alterations $a:C\\to P$, $b:Y'\\to Y_1$, a projective flat finitely presented nodal curve $f:C\\to Y'$, and $D,T$ as in that lemma: $D$ is finite etale over $Y'$, lies in the smooth locus, $f$ is smooth off $T$, and $a^{-1}|E|\\subseteq |D|\\cup f^{-1}T$. The base $Y'$ is integral excellent Noetherian. Since $b$ is proper dominant generically finite, [lem-trf-closed-dominant-dimension] gives $\\dim Y'=\\dim Y_1\\le d-1$.",
+   "uses": [
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII 3.4 and 4.1, p.82."
+   }
+  },
+  {
+   "text": "The induction hypothesis applies to the reduced quasi-excellent Noetherian scheme $Y'$ and nowhere dense $T$. Choose its finite ordinary alteration cover $(S_j\\to Y')_j$ with integral regular sources and inverse images $T_j$ strict normal crossings boundaries, as specified by $U$ in [def-per-ordinary-alteration-topology]. These $S_j$ are excellent: their maps are finite type and $Y'$ is excellent, so apply [lem-exc-finite-type-localization-excellent] on affine charts. By [lem-per-regular-boundary-divisorial-chart], every $(S_j,T_j)$ is log regular. This is the only use of the induction assumption; no uniformization theorem in dimension $d$ is invoked.",
+   "uses": [
+    "def-per-ordinary-alteration-topology",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-regular-boundary-divisorial-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII 4.1, p.82; VI 1.5(i), p.70."
+   }
+  },
+  {
+   "text": "Put $C_j=C\\times_{Y'}S_j$, with marking $D_j$ and morphism $f_j:C_j\\to S_j$. The nodal base-change statement [lem-trf-projective-nodal-family-geometry] supplies projectivity, flatness, finite presentation, the geometric fibres and the pulled-back smooth locus. Etaleness of $D_j\\to S_j$ follows from [lem-weil-pbc-etale-base-change-finite-limits]; the original $D$ is relative effective Cartier because it is Cartier and $D\\to Y\\prime$ is flat (etale). Thus [def-pc-relative-effective-cartier] and [lem-pc-recd-pullback] give the Cartier property of $D_j$ under this arbitrary base change. Thus [lem-trf-nodal-log-regularity] applies, giving the log regular pair $(C_j,B_j)$ with $B_j=|D_j|\\cup f_j^{-1}T_j$. Since $f$ is flat with geometrically reduced fibres, [lem-per-ordinary-alteration-cover-base-change] says the usual products $C_j\\to C$ are ordinary alteration objects and form a finite covering. In particular all their generic points map to the generic point of $C$.",
+   "uses": [
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-trf-nodal-log-regularity",
+    "lem-per-ordinary-alteration-cover-base-change",
+    "def-weil-etale-morphism",
+    "def-pc-relative-effective-cartier",
+    "lem-pc-recd-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII 4.1--4.2, p.82; VI Proposition 1.9, pp.70--71."
+   }
+  },
+  {
+   "text": "By [lem-trf-log-regular-divisorial-structure], all local rings of $C_j$ are normal domains. Pull the ideal of $E$ back along $C_j\\to C\\to P$. A local nonzero generator stays nonzero on every component because the generic points map to the generic points of the integral schemes $C$ and $P$; in each local domain it is a non-zero-divisor. Hence this is an effective Cartier ideal by [def-nagata-effective-cartier-ideal]. Its zero-set is contained in $B_j$, by the marked nodal containment. Restrict to $C_j^\\circ=C_j\\times_PP^\\circ$. The pair stays log regular under this open restriction by [lem-per-log-regular-pair-regular-pullback]. Its Cartier ideal now has zero-set equal to the inverse image of $Z_W$. The finite cover $C_j\\to C$ restricts to a cover of $C\\times_PP^\\circ$ by the ordinary base-change lemma. Compose it with the proper alteration $C\\times_PP^\\circ\\to P^\\circ$ and $h:P^\\circ\\to W$: covering-sieve transitivity in [def-per-ordinary-alteration-topology] gives a finite covering $C_j^\\circ\\to W$.",
+   "uses": [
+    "lem-trf-log-regular-divisorial-structure",
+    "def-nagata-effective-cartier-ideal",
+    "lem-per-log-regular-pair-regular-pullback",
+    "lem-per-ordinary-alteration-cover-base-change",
+    "def-per-ordinary-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII 3.3--4.2, p.82, retaining the Cartier ideal from 3.3; II 2.3.1--2.3.4, p.28."
+   }
+  },
+  {
+   "text": "Base change the last cover by the regular completion morphism $g:X^+\\to W$. The ordinary base-change lemma gives a finite cover $N_j=C_j^\\circ\\times_WX^+\\to X^+$. Its projection to $C_j^\\circ$ is regular by [lem-weil-pbc-regular-base-change], since $C_j^\\circ\\to W$ is finite type. Apply [lem-per-log-regular-pair-regular-pullback] to obtain log regular pairs $(N_j,B'_j)$. Flat pullback preserves their Cartier markings by [lem-pc-flat-pullback-effective-cartier-ideal]; their zero-sets are precisely the inverse images of $p^{-1}Z$, and lie in $B'_j$. The sources are Noetherian and excellent: $N_j\\to X^+$ is finite type, $X^+$ is complete Noetherian local, and [lem-per-complete-local-excellence], [lem-weil-pbc-finite-type-over-noetherian] and [lem-exc-finite-type-localization-excellent] apply.",
+   "uses": [
+    "lem-per-ordinary-alteration-cover-base-change",
+    "lem-weil-pbc-regular-base-change",
+    "lem-per-log-regular-pair-regular-pullback",
+    "lem-pc-flat-pullback-effective-cartier-ideal",
+    "lem-per-complete-local-excellence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII 3.2, p.82, applied to the log regular models of 4.2; Stacks Tag 07C1 (more-algebra-lemma-regular-base-change), Tag 02OO (divisors-lemma-pullback-effective-Cartier-defined)."
+   }
+  },
+  {
+   "text": "Log regularity makes each $N_j$ normal by [lem-trf-log-regular-divisorial-structure]. By [lem-trf-normal-topologically-noetherian-components] it is a finite disjoint union of nonempty open and closed integral components. Take these as $M_a$, discarding empty sources. The ordinary component-cover statement and covering-sieve transitivity show that the $M_a$ still cover $X^+$. Open restriction retains log regularity, the nowhere dense boundary and the Cartier ideal. Finally $p:X^+\\to X$ is finite surjective and generically finite, so is an ordinary singleton cover. Compose with it to obtain the required finite cover of $X$. All markings have zero-set exactly $h_a^{-1}Z$ by the two earlier inverse-image equalities. If $Z$ is empty choose the unit ideal; it is generated by $1$ and has empty zero-set. No step applies log resolution or asserts that a log regular source is regular.",
+   "uses": [
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-normal-topologically-noetherian-components",
+    "lem-per-ordinary-alteration-cover-base-change",
+    "lem-per-log-regular-pair-regular-pullback",
+    "def-per-ordinary-alteration-topology",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII 3.1--4.2, pp.81--82; stop before the Kato--Niziol theorem 4.3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-relative-effective-cartier",
+  "def-per-ordinary-alteration-topology",
+  "def-weil-etale-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-pc-flat-pullback-effective-cartier-ideal",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-recd-pullback",
+  "lem-per-complete-local-excellence",
+  "lem-per-log-regular-pair-regular-pullback",
+  "lem-per-ordinary-alteration-cover-base-change",
+  "lem-per-prime-to-ell-marked-algebraization",
+  "lem-per-proper-generic-curve-preparation",
+  "lem-per-regular-boundary-divisorial-chart",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-trf-nodal-log-regularity",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-trf-projective-nodal-family-geometry",
+  "lem-trf-relative-marked-nodal-reduction",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-regular-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VII 3.1--4.2, pp.81--82; V 3.1.3--3.1.4, p.66 and VI 1.9, pp.70--71. The auxiliary-prime device reuses the stronger existing preparations without imposing a degree condition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-complete-local-nodal-dimension-reduction: Assuming regular marked alteration coverings in lower dimension a complete normal local scheme admits an alteration covering by excellent log regular pairs whose marked closed set is Cartier",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-complete-local-nodal-dimension-reduction: Assuming regular marked alteration coverings in lower dimension a complete normal local scheme admits an alteration covering by excellent log regular pairs whose marked closed set is Cartier",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"[IsLocallyNoetherian X] (h : topologicalKrullDim X ≤ 0) : IsLocallyArtinian X\", \"doc\": \"If a scheme $ X $ is locally Noetherian and its topological Krull dimension satisfies $ \\\\dim(X) \\\\leq 0 $, then $ X $ is locally Artinian. This follows because a Noetherian topological space of dimensi\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsLocallyNoetherian X → Sort u} →\\n    (t : AlgebraicGeometry.IsLocallyNoetherian X) →\\n      ((component_noetherian : ∀ (U : ↑X.affineOpens), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))) →\\n          motive ⋯) →\\n        motive t\", \"doc\": \"Given a scheme $X$ and a proof that it is locally Noetherian, this function allows reducing arguments to the case where every affine open subset $U \\\\subseteq X$ has an associated Noetherian ring $\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.LocallyDirected.directed\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Directed\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X : AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X}\\n  {inst : CategoryTheory.Category.{v_1, u_1} 𝒰.I₀} [self : 𝒰.LocallyDirected] {i j : 𝒰.I₀}\\n  (x : ↥(CategoryTheory.Limits.\", \"doc\": \"For any scheme $X$ with a locally directed cover $\\\\mathcal{U}$ under a combined precoverage, and for any two indices $i,j$ in the zeroth component $\\\\mathcal{U}_0$, every point $x$ in the fiber product\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{n : ℕ} →\\n  {X Y : AlgebraicGeometry.Scheme} →\\n    {f : X ⟶ Y} →\\n      {motive : AlgebraicGeometry.IsSmoothOfRelativeDimension n f → Sort u_1} →\\n        (t : AlgebraicGeometry.IsSmoothOfRelativeDimension n f) →\\n          ((exists_isStandardSmoothOfRelativeDimension :\\n                ∀ (x : ↥X),\\n    \", \"doc\": \"A recursor for the proposition that a morphism of schemes is smooth of relative dimension $n$. It allows proving properties about smooth morphisms by reducing to the case where the morphism is locally\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Alteration\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|uniformi[sz]ation|quasi.?excellent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-complete-local-nodal-dimension-reduction: Assuming regular normal crossings proper etale generically finite coverings in lower dimension a complete normal local scheme admits an proper etale generically finite covering by excellent log regular pairs whose normal crossings closed set is Cartier",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: only ordinary scheme covers, normalization, smooth or etale charts; no alteration topology, completion reduction, marked nodal reduction or uniformization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "log.?[Rr]egular|[Ll]og[Ss]cheme",
+   "results": "Actual logged hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-complete-local-nodal-dimension-reduction: Lower dimensional alteration uniformization gives log regular alteration covers of a complete normal local scheme with a Cartier marked closed subset",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "grep",
+   "query": "[Aa]lteration|[Uu]niformi[sz]ation|[Ll]ogRegular",
+   "results": "Actual logged hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-complete-local-nodal-dimension-reduction: Complete normal local scheme log regular alteration covering with Cartier marking by induction on dimension",
+   "results": "Actual logged hits: AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.IsLocallyNoetherian.casesOn, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.IsLocallyArtinian.recOn, AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Alteration\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-complete-local-nodal-dimension-reduction: A complete local normal domain has marked nodal alteration models over a base of one smaller Krull dimension giving logarithmically regular pairs",
+   "results": "Actual logged hits: Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension, Algebra.IsSmoothAt",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary scheme morphisms or generic sites, not the stated alteration topology or divisorial log regularity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qe-weak-uniformization-cover",
+  "date": "2026-10-24",
+  "group": "Q147"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular local model and purity, through the small-singular-locus completion in Temkin Theorem 3.4.1: quasi-excellence of completed rational affine charts is supplied by Theorem 2.1.6. Auxiliary completion proof: Lemma 4.4 and Definition 3.2, printed pp.3,5–6; specialization with excellent B_q and quasi-excellent B/J. This auxiliary lemma supplies Ordinary weak uniformization with an integral proper covering witness. More precisely: Expose VII 3.1--4.2, pp.81--82, stopping before the log resolution theorem 4.3: V 3.1.3--3.1.4, p.66 (partial algebraization); regular completion pullback in VII 3.2; compactification and Cartierization in 3.3; ordinary marked nodal alteration in 3.4; lower-dimensional uniformization of the base in 4.1; VI 1.9 in 4.2. The Cartier ideal is the pulled-back ideal after the blowup in 3.3; no assertion of regular models is included.",
+   "via": [
+    "lem-per-qe-weak-uniformization-cover",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-complete-local-nodal-dimension-reduction",
+  "worker": "stage1",
+  "summary": "Q99: statement unchanged. Eight-step ILO VII proof, using existing marked algebraization and curve preparations with an auxiliary invertible prime, lower-dimensional ordinary uniformization and nodal log regularity, then regular completion pullback. Two statement-only generic tools separate ordinary cover base change and log regular regular pullback; no log resolution or dimension-d uniformization is used.",
+  "blueprint": "Newest blueprint ancestor lem-per-artin-gabber-affine-curve.proof.md, Step 3 (Verdier-duality branch), through the inherited regular-neighbourhood/ordinary weak-uniformization input. ILO VII 3.1--4.2 is the local geometric subargument, stopping before VII 4.3.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-pc-flat-pullback-effective-cartier-ideal",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-pc-nowhere-dense-dim-zero",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-pc-recd-pullback",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-closed-dominant-dimension",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-nodal-log-regularity",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-projective-nodal-family-geometry",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-relative-marked-nodal-reduction",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-base-change",
+    "why": "Generic scheme/logarithmic geometry tool for the ILO VII local preparation, used only with its displayed hypotheses; no node of this unit supplies this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-pc-flat-pullback-effective-cartier-ideal",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-pc-recd-pullback",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-trf-nodal-log-regularity",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-trf-projective-nodal-family-geometry",
+  "lem-trf-relative-marked-nodal-reduction",
+  "lem-weil-pbc-regular-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-dd0165d69",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-dd0165d69 (reviewer sub-agent of L); spot-checked: I read the 8-step ILO VII 3.1–4.2 split in full against ILO VII pp.81–83 and V 3.1.1–3.1.4 (p.66) and against every cited node statement; it is sound. The item statement is unchanged (byte-equal to live), and the proof stops before Kato 4.3, so the sources are log regular, not regular. Step checks: (1) a prime ℓ different from the residue characteristic is a unit in the local ring; the generic fibre of Z_W misses the generic point of W, so dim ≤ 0. (2) Every curve-preparation hypothesis comes from step 1, and h is a proper surjective alt singleton. (3) Y₁ affine is projective over itself (N=0); closed-dominant-dimension gives dim Y′ ≤ d−1. (4) Induction applies to the integral excellent Y′; the S_j are excellent by finite-type-localization. (5) D is finite étale, hence flat, hence relative Cartier, so recd-pullback applies; f_j is smooth off T_j because U ⊇ f⁻¹(Y′∖T); every nodal-log-regularity hypothesis holds. (6) The Cartier generator stays nonzero in the normal local domains because generic points map to η_C and C→P is dominant; the zero set lies in B_j; moving covers from alt/T to alt/W is an elementary slice argument. (7) g is regular, hence geometrically reduced; regular-base-change is applied on affine charts. (8) Clopen integral components plus the finite surjective p; empty Z handled. New nodes: (a) ordinary-alteration-cover-base-change is true: flatness lifts generic points, the fibre over a generic t is finite free over S′_η, generators are stable under base change, and the component clause holds via ⊔R_i; it does not duplicate the ℓ′ versions. Advisory B3: its 'nodal curve morphism' has no bracket, though def-trf-nodal-geometric-fibres is in its stmt_deps. (b) log-regular-pair-regular-pullback is true: C/IC is flat over regular A/I with regular fibre (00OF/031E), and the 00ON dimension formulas leave the rank unchanged. It is not a log-smooth or SNC duplicate, and neither new node restates the item. Dropped-route finding: BFS in side-live shows the item is reached via qe-weak-uniformization ← … ← gabber-absolute-equivariant-modification ← lem-sfb-field-log-smooth-gabber-modification ← … ← thm-weil-final-rh. That is the same sfb-revived branch as the PASSed parent Q147, so I judged it on merits. complete-local-excellence and regular-boundary-divisorial-chart are already reached (0 nodes added). proper-generic-curve-preparation adds only itself. prime-to-ell-marked-algebraization adds 38 dropped nodes (equivariant Cohen–Gabber and Elkik/rig-étale); I accepted this because VII 3.1 itself uses V 3.1.3, which is the prime-to-ℓ theorem, no ordinary node exists, and an ordinary twin would be a C5 duplicate. MAINTAINER NOTE: landing this revives that 38-node chain into the Weil closure. If that is unwanted, the route decision for the whole sfb→gabber-absolute branch needs escalation; no fix to this item avoids it. The artin-gabber repair-note ban covers that node and its three children, not this sfb-reached item. Batch 5: every flagged trf/exc node is already in the nt-target-weil/zeta closure without this item. All are generic algebra, dimension or log-geometry tools or definitions, and none is the trace formula or Poincaré duality statement; tool_uses accepted. Details are in review.md."
+ }
+}

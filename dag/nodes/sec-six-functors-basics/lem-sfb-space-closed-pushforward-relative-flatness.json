@@ -1,0 +1,297 @@
+{
+ "id": "lem-sfb-space-closed-pushforward-relative-flatness",
+ "kind": "statement",
+ "title": "Closed pushforward preserves and reflects relative module flatness",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and work with algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Closed immersions are representable and become closed immersions of schemes on every scheme test [def-weil-closed-immersion]. Modules are on the small etale ringed sites, with quasi-coherence [def-trf-space-quasi-coherent-module] and tensor pullback and direct image [def-trf-space-etale-module-functors]. Let $T$ be an $S$-scheme, $f:X\\to T$ a morphism, $i:Z\\hookrightarrow X$ a closed immersion, and $G$ a quasi-coherent $\\mathcal O_Z$-module. Relative flatness of a quasi-coherent module on $X$ or $Z$ means that on every etale scheme chart $U$ its Zariski stalk at $u$ is flat over $\\mathcal O_{T,t(u)}$, as in [def-pc-scheme-module-flat-over]. Then $G$ is flat over $T$ through $f\\circ i$ if and only if $i_*G$ is flat over $T$ through $f$. In particular $Z\\to T$ is flat in the chartwise sense [def-sfb-space-morphism-properties] if and only if $i_*\\mathcal O_Z$ is flat over $T$. Neither $i$ nor $f$ is assumed flat or of finite presentation, and no Noetherian assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0DK1, lemma-stalk-push-closed (with the source subscripts corrected: stalk at the image equals the original stalk), and quot.tex Tag 0D00, lemma-hilb-is-quot, omitted affine flatness argument. Relative-flatness assertion stated from the etale-chart/closed-pushforward stalk argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-flat-proper-coefficient",
+  "def-trf-space-module-scheme-restriction",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=i_*G$. By [lem-sfb-space-closed-immersion-quasi-coherent-modules], $F$ is quasi-coherent, without finiteness hypotheses. For any etale scheme chart $a:U\\to X$, put $V=Z\\times_XU$ and $j:V\\hookrightarrow U$. This is a closed immersion of schemes by the representability convention [def-weil-closed-immersion]. The restriction formula [lem-trf-space-etale-module-pushforward-restriction] identifies $F|_U$ with $j_*(G|_V)$ on small etale sites. Let $H$ be the Zariski quasi-coherent module corresponding to $G|_V$. The equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies the Zariski module corresponding to $F|_U$ with $j_*H$. More explicitly, use the unrestricted first clause of [lem-trf-zariski-etale-functor-comparison-square]: restriction of small etale direct image to Zariski opens is Zariski direct image, identically on sections. Thus no general base-change theorem or extra finiteness condition is needed here. We will compute ordinary Zariski stalks, not geometric stalks.",
+   "uses": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "def-weil-closed-immersion",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-zariski-etale-functor-comparison-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 03DX (proposition-equivalence-quasi-coherent), (2), and 03LC (proposition-equivalence-quasi-coherent-functorial), (3); spaces-properties.tex Tag 03LX (lemma-pushforward-etale-base-change-modules)"
+   }
+  },
+  {
+   "text": "For the scheme closed immersion $j:V\\hookrightarrow U$, identify $|V|$ with its closed image. Apply [lem-sc-closed-pushforward-abelian-stalks] to the underlying abelian sheaf of $H$. At $u\\notin j(V)$ the stalk $(j_*H)_u$ is zero. At $u=j(v)$ the comparison $(j_*H)_u\\simeq H_v$ sends the germ of a section on $W\\subseteq U$ to its germ on $j^{-1}W$. This is linear over $\\mathcal O_{T,f(a(u))}$: a germ of a base function acts on both sections by its pullback through the same composite $V\\to U\\to X\\to T$, so the germ map commutes with this action. Therefore these are identifications of modules over the actual base Zariski local ring. The zero module is flat since tensoring with it sends any injection to $0\\to0$. By the stalk criterion [def-pc-scheme-module-flat-over], $F|_U$ is flat over $T$ if and only if $G|_V$ is flat over $T$.",
+   "uses": [
+    "lem-sc-closed-pushforward-abelian-stalks",
+    "def-pc-scheme-module-flat-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 00AE (lemma-stalks-closed-pushforward), abelian-sheaf clause; morphisms.tex Tags 01U3 (definition-flat), 01U4 (lemma-flat-module-characterize)"
+   }
+  },
+  {
+   "text": "Suppose $G$ is flat over $T$ in the stipulated chartwise sense. For every $U\\to X$ as in Step 1, $V\\to Z$ is an etale scheme chart, so $G|_V$ is flat over $T$. Step 2 then gives flatness of $F|_U$. Quantifying over all these $U$ is exactly flatness of $F$ over $T$. This uses no flatness of $i$ or $f$.",
+   "uses": [
+    "def-pc-scheme-module-flat-over",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D00 (lemma-hilb-is-quot), omitted forward flatness argument expanded using Steps 1 and 2"
+   }
+  },
+  {
+   "text": "Conversely suppose $F$ is flat over $T$. Choose a surjective etale scheme atlas $U\\to X$, which exists by [def-trf-algebraic-space], and put $V=Z\\times_XU$. Then $V$ is a scheme and $V\\to Z$ is surjective etale by [lem-trf-space-fibre-products-etale-covers]. Step 2 implies that $G|_V$ is flat over $T$. To check the definition on an arbitrary etale scheme chart $W\\to Z$, form $E=W\\times_ZV$. This is a scheme; $E\\to W$ is surjective etale and $E\\to V$ is etale by the same fibre-product statement. Etale scheme maps are flat [def-weil-etale-morphism]. The pullback compatibility of [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] identifies the Zariski module on $E$ both with the pullback of the one on $V$ and with the pullback of the one on $W$. Apply [lem-trf-relative-flatness-source-cover] first to $E\\to V$: its pointwise forward implication proves flatness over $T$ on $E$. Apply its surjective-flat converse to $E\\to W$: flatness over $T$ descends to $W$. Since $W$ was arbitrary, $G$ is flat over $T$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-relative-flatness-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JZ (lemma-flat-permanence); descent.tex Tags 03DX and 03LC (1); quot.tex Tag 0D00 reverse flatness implication"
+   }
+  },
+  {
+   "text": "Apply the equivalence to $G=\\mathcal O_Z$, which is quasi-coherent (it has its one-generator free presentation). It remains to compare the two stated flatness conventions. For a scheme chart $W\\to Z$, flatness of its structure module over $T$ says exactly that $\\mathcal O_{W,w}$ is flat over $\\mathcal O_{T,t}$ for every $w$, which is flatness of $W\\to T$ [def-weil-flat-morphism]. The chart test [def-sfb-space-morphism-properties] includes the target chart $T\\xrightarrow{\\mathrm{id}}T$, so chartwise flatness of $Z\\to T$ implies these conditions. Conversely, for any target etale chart $B\\to T$ and any diagram $W\\to B$ over $Z\\to T$, apply [lem-trf-etale-local-ring-flatness] to the $\\mathcal O_{B,b}$-module $\\mathcal O_{W,w}$. It is flat over $\\mathcal O_{T,t}$ if and only if it is flat over $\\mathcal O_{B,b}$. Thus all the scheme maps $W\\to B$ in the chart test are flat. This proves precisely that $Z\\to T$ is flat if and only if $\\mathcal O_Z$ is flat over $T$, and the claimed particular case follows.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "def-weil-flat-morphism",
+    "def-sfb-space-morphism-properties",
+    "lem-trf-etale-local-ring-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05BA (lemma-etale-flat-up-down-local-ring); morphisms.tex Tag 01U3 (definition-flat); quot.tex Tag 0D00 final sentence of converse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-morphism-properties",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-sc-closed-pushforward-abelian-stalks",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-trf-etale-local-ring-flatness",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-zariski-etale-functor-comparison-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D00 (lemma-hilb-is-quot), omitted flatness argument and its reverse; expanded via Tags 03LX, 03DX, 03LC, 00AE, 02JZ, 05BA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of a quasi coherent module along a closed immersion of algebraic spaces is flat over the base if and only if the module is flat over the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.Flat f]\\n  [hg : AlgebraicGeometry.Flat g], AlgebraicGeometry.Flat (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat scheme morphisms or faithfully flat ring maps, not preservation and reflection of relative module flatness by a closed pushforward on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness of a sheaf on a closed subspace is equivalent to relative flatness of its direct image on the ambient algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.instResLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens)\\n  (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"If $f: X \\\\to Y$ is a flat morphism of schemes, then for any open subset $U \\\\subseteq X$ and $V \\\\subseteq Y$ such that $f(U) \\\\subseteq V$, the restricted morphism from the open subscheme $U$ to the ope\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.Flat f], AlgebraicGeometry.Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.Flat f\", \"doc\": \"Every open immersion of schemes is a flat morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat scheme morphisms or faithfully flat ring maps, not preservation and reflection of relative module flatness by a closed pushforward on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"pushforward\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat scheme morphisms or faithfully flat ring maps, not preservation and reflection of relative module flatness by a closed pushforward on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*pushforward|pushforward.*flat|flat.*closed.*immersion",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"line\": \"105\", \"text\": \"/-- If `B` is a faithfully flat `A`-algebra, the preimage of the pushforward of any\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat scheme morphisms or faithfully flat ring maps, not preservation and reflection of relative module flatness by a closed pushforward on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion direct image preserves and reflects flatness of quasi coherent modules over a scheme base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [Flat f] : Flat (f ∣_ V)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, then its restriction to any open subset $ V $ of the target scheme $ Y $ remains flat. This means the property of flatness is maintained when restricti\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsAffineHom f\", \"doc\": \"Every closed immersion of schemes is an affine morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with surjective stru\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsPreimmersion f] (hf : IsClosed (Set.range f)) : IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat scheme morphisms or faithfully flat ring maps, not preservation and reflection of relative module flatness by a closed pushforward on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion of algebraic spaces direct image preserves and reflects module flatness over a scheme base",
+   "results": "8 hits; top results: AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_appLE. Digest: fde0d496835346f5. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism flatness criteria or faithfully flat ideal extension; none asserts the relative module-flatness equivalence for a closed immersion of algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*pushforward|pushforward.*flat|flat.*closed.*immersion",
+   "results": "1 hits; top results: Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean. Digest: 4b64bfda97921e16. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism flatness criteria or faithfully flat ideal extension; none asserts the relative module-flatness equivalence for a closed immersion of algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative flatness of quasi coherent sheaves is preserved and reflected by direct image of a closed immersion",
+   "results": "8 hits; top results: AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Flat.instIsMultiplicativeScheme. Digest: 66e5fb9e51495b2a. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism flatness criteria or faithfully flat ideal extension; none asserts the relative module-flatness equivalence for a closed immersion of algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"pushforward\"",
+   "results": "0 hits; top results: none. Digest: 4f53cda18c2baa0c. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism flatness criteria or faithfully flat ideal extension; none asserts the relative module-flatness equivalence for a closed immersion of algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flatness over a base scheme can be checked on stalks of the extension by zero of a quasi coherent sheaf from a closed subscheme",
+   "results": "8 hits; top results: AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE. Digest: 2a8dfe0949cd40e7. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are scheme morphism flatness criteria or faithfully flat ideal extension; none asserts the relative module-flatness equivalence for a closed immersion of algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-hilbert-is-quot",
+  "date": "2026-10-23",
+  "group": "Q29"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 0D00, quot-lemma-hilb-is-quot, including naturality of the displayed mutually inverse constructions. Supporting input for the small argument omitted in Tag 0D00, and its reverse.",
+   "via": [
+    "lem-sfb-space-hilbert-is-quot",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-closed-pushforward-relative-flatness",
+  "worker": "stage1",
+  "summary": "Expanded both directions of the omitted Hilbert-to-Quot relative-flatness argument using closed scheme chart ordinary stalks, etale/Zariski comparison, and flat source descent. No new nodes; no statement change. Checked arbitrary target charts in the structure-sheaf case and no finiteness assumptions.",
+  "blueprint": "Supporting Hilbert-is-Quot prerequisite along the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain: Tag 0D00 omitted flatness argument and reverse. The current latest blueprint proof (3) is the compactification/direct-image stability assembly; this is a generic algebraic-space input below its imported alteration infrastructure, not a replacement of that assembly.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-zariski-etale-functor-comparison-square",
+    "why": "Its unrestricted first clause identifies restriction of etale direct image to Zariski opens with ordinary direct image, identically on sections."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Etale restriction of module direct image supplies the closed scheme chart calculation; a generic ringed-site tool, not an alternative six-functor stability route."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Compares the small etale modules with ordinary Zariski modules and their pullbacks/direct images, needed because the flatness definition uses ordinary stalks."
+   },
+   {
+    "node": "lem-sc-closed-pushforward-abelian-stalks",
+    "why": "Ordinary topological closed-pushforward stalk computation, used on each scheme chart; the same-unit geometric-stalk node does not state this ordinary-stalk assertion."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Fibre products of scheme charts and stability of surjective etale covers enable testing every chart of Z."
+   },
+   {
+    "node": "lem-trf-relative-flatness-source-cover",
+    "why": "Pointwise flat pullback and surjective flat descent of relative module flatness; used only to change scheme charts."
+   },
+   {
+    "node": "lem-trf-etale-local-ring-flatness",
+    "why": "Compares base local rings in the arbitrary target etale chart test, without changing the proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-closed-pushforward-abelian-stalks",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-relative-flatness-source-cover",
+  "lem-trf-etale-local-ring-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-ba7458771",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-ba7458771 (reviewer sub-agent of L); spot-checked: PASS, no repairs. Read in full: the item, the Stacks sources (quot.tex 0D00 lemma-hilb-is-quot with its omitted flatness argument in both directions, 0DK1, sheaves 00AE, flat 05BA, morphisms 02JZ) and all 16 cited statements. This is the first split of an unsplit Q29 node. There are no new nodes, the statement and stmt_deps are unchanged, there is no repair note, and nothing cites SGA. Step 1: the QCoh closed-immersion node, the 03LX etale restriction and the unrestricted first clause of the Zariski/etale comparison square together identify the Zariski module of (i_*G)|_U with j_*H; that clause has no qc-separated hypothesis. Step 2: the ordinary closed-pushforward stalks node gives a zero stalk off j(V) and the germ isomorphism on j(V), which is O_{T,t}-linear through V→U→X→T; the stalk criterion then applies. Step 3: elementary from representability. Step 4: atlas U, V=Z×_X U, and E=W×_Z V for an arbitrary chart W; E→V is etale already by the definition of a representable etale map (def-trf-algebraic-space is in uses), and 02JZ is used pointwise forward and by surjective descent with compatible maps to T. Step 5: the chart id_T gives one direction; 05BA for an arbitrary O_{B,b}-module handles any etale target chart B→T. Edge cases checked: Z empty, i=id, Spec F_2→Spec Z, a field base, nonreduced Z. No cycle; proof_deps equals the union of uses. Nearest DAG candidate lem-trf-etale-closed-support-flatness is a scheme-level statement, not a duplicate. Batch 5: all seven flagged citations (the sfb QCoh closed-immersion node, whose closure reaches def-trf-algebraic-space, plus the trf nodes 05BA, 02JZ, 03DX/03LC, 03LX, 02X2, 03FH) are generic algebraic-space, module and flatness foundations. The closure has no nt-assume node and no trace-formula or Poincaré-duality theorem, so they are outside both assumptions. The seven declared tool_uses are accepted as generic black boxes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceClosedPushforwardRelativeFlatness",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_closed_pushforward_relative_flatness",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceClosedPushforwardRelativeFlatness.lean",
+  "statement": "theorem space_closed_pushforward_relative_flatness {S : Scheme.{u}} (T : Over S) {X Z : AlgebraicSpace S} (f : X ⟶ schemeSpace T) (i : Z ⟶ X) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) (G : Z.Modules) [G.IsQuasicoherent] : (ModuleIsFlatOver (i ≫ f) G ↔ ModuleIsFlatOver f ((moduleDirectImage i).obj G)) ∧ (MapIsFlat (i ≫ f) ↔ ModuleIsFlatOver f ((moduleDirectImage i).obj (SheafOfModules.unit Z.structureSheaf)))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-341c531a1",
+  "group": "Q11",
+  "result": "pass",
+  "note": "The only change from the returned head 67cc3843cb85 is the requested H2 repair: stmt_dep lem-trf-space-enlarged-etale-ringed-site-model replaced by def-trf-scheme-algebraic-space, which owns schemeSpace through an existing:true record. Lean file and lean.statement are byte-identical. Statement re-checked clause by clause: Over S scheme T via schemeSpace (actual Yoneda sheaf), IsRepresentableWith closed immersion with no finite presentation, [G.IsQuasicoherent], moduleDirectImage, ModuleIsFlatOver (affine-local form equivalent to the stalk test by 01U4; extra target charts equivalent by 05BA, node step 5), MapIsFlat = MapIsLocally Flat. Both iff conjuncts match the node and there are no extra assumptions. All stmt_deps are definition nodes owning the declarations used. Edge cases checked: Z empty, G = 0, i = id, nonreduced Z, Spec F_2 → Spec Z. Proof is sorry only; docstrings carry source and blueprint; report sections present; no landing by another group. No file changed, so no compile."
+ }
+}

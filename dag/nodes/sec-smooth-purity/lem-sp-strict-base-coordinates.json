@@ -1,0 +1,127 @@
+{
+ "id": "lem-sp-strict-base-coordinates",
+ "kind": "statement",
+ "title": "Section-preserving base for actual ell-power strict quotient systems",
+ "statement": "Fix a prime ell and a finite extension E of Q_ell. For the actual coefficient quotients and adjacent maps of [def-sp-tower-shriek-data], there exists Base b, including a positive ramification factorization, equality with the corresponding uniformizer-power ideals, finite quotients, a section-and-map-preserving additive equivalence from the recorded coefficient towers to sequence-site module sheaves, and K-injective system resolutions. For each scheme T there is semilinear derived sections data s [lem-coef-semilinear-derived-sections] with s.systems = b.calculus T. No geometric functor, open extension or composition comparison is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), section-preserving base for actual ell-power strict quotient systems"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Use the chosen DVR description of O_E and the irreducibility of its specified uniformizer. Mathlib eq_unit_mul_pow_irreducible factors the nonzero element ell. Since its spectral absolute value is less than one, ell is not a unit; therefore the exponent is positive. Taking powers of span {ell} = span {pi}^e gives the exact ideal equalities, and finite_coefficientExtensionRing gives finiteness.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functor.ofOpSequence reconstructs the actual adjacent quotient tower and commutes with forgetting commutativity. Hence the recorded product-site ring presheaf is equal to the underlying ring presheaf of the existing systemRing. The verticalDiagramSite_isSheaf_iff theorem identifies its levelwise module sheaf condition with the sequence-site sheaf condition. Rebundle without changing any module or map; transport only along this coefficient-presheaf equality. Both inverse equivalence comparisons are identities and the resulting functor preserves addition.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-topology",
+    "def-sp-tower-shriek-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply semilinearDerivedSections independently to each scheme and retain its systems field as the calculus. Its Grothendieck structure supplies K-injective resolutions through the already proved source-library instance hasKInjectiveResolutions_of_isGrothendieckAbelian. Insert these calculi and the explicitly constructed presentation and arithmetic witnesses in Base. The retained data supplies the asserted equality by reflexivity.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-diagram-site-topology",
+  "def-sp-tower-shriek-data",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent D8",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "Expansion of the coordinate-construction step; proof in words follows the module docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strict semilinear systems of module sheaves constant quotient coefficients inverse image composition extension by zero",
+   "results": "Returned SheafOfModules.Presentation.mapGenerators and mapRelations and free-module lemmas, not coordinate transport or sequence-site geometric comparisons. A further open-tensor query returned scheme open-immersion restriction adjunctions, not module systems.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem; the project interfaces and ordinary module-sheaf tools are needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image of module sheaves over constant ring sheaves commutes with composition and exact evaluation on strict coefficient systems; extension by zero tensor adjunction transpose; vertical sheaf condition",
+   "results": "Found SheafOfModules.mk, SheafOfModules.isSheaf, SheafOfModules.pullbackComp and conjugateEquiv_pullbackComp_inv, and constantCommuteCompose. These provide ordinary ingredients but do not assert simultaneous fixed system calculi, normalized finite adjunction packages or derived open tensor transposes.",
+   "date": "2026-10-27",
+   "verdict": "No statement match. Reuse the project semilinear and open normalization interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "verticalDiagramSite_isSheaf_iff|eq_unit_mul_pow_irreducible|mapDerivedCategoryCompIso; derived.*[Cc]omp|[Cc]omp.*derived|tensor.*[Ee]xtension in Mathlib module sheaves and DerivedCategory",
+   "results": "Mathlib provides IsDiscreteValuationRing.eq_unit_mul_pow_irreducible and ordinary module pullback composition. The project provides verticalDiagramSite_isSheaf_iff, semilinearDerivedSections, constant-ring pullback normalization, and openTensorNormalization. There is no theorem of the exact strict ell-power coordinates.",
+   "date": "2026-10-27",
+   "verdict": "Arithmetic and rebundling can be proved directly; geometric coordinate transport and open support require the indicated narrower steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityStrictCoordinatesExistence",
+  "date": "2026-10-27",
+  "group": "D8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "(2), section-preserving base for actual ell-power strict quotient systems",
+   "via": [
+    "lem-sp-strict-coordinates-existence",
+    "lem-sp-strict-system-geometric-realization",
+    "lem-sp-strict-compactification-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityStrictBaseCoordinates",
+  "file": "lean/Sheaf/Paper/SmoothPurityStrictBaseCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.strictBaseCoordinates",
+  "statement": "theorem strictBaseCoordinates :\n    ∃ b : Base l E, ∀ T : Scheme.{u},\n      ∃ s : SemilinearSections.SemilinearDerivedSectionsData.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology T) (B l E T) (tau l E T),\n        s.systems = b.calculus T",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T050549-L-238104",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T050549-L-238104",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

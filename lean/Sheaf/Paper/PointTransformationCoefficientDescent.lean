@@ -16,9 +16,9 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.Paper.FiniteCoefficientPoint
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.Paper.PointFibreDerivedTensorBasic
-import Sheaf.Paper.IsomorphismDerivedPullback
-import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.Paper.IntegralScalarExtensionUniverses
+public import Sheaf.Paper.PointTransformationRationalNormalization
+public import Sheaf.Paper.PointRationalFamilyCommonStageNaturality
+import Sheaf.Paper.PointCompositeComparisonTower
 
 /-! # Descent of arbitrary integral point-section transformations
 
@@ -49,40 +49,35 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 /-- Integral sections, included in the ambient derived module category.
 Source: Weil II (1.1.3) and the recorded point sections construction
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def integralSections (E : Type u) [Field E] [Algebra ℚ_[l] E]
+abbrev integralSections (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :=
-  (sfIntegralConstructible l E (Spec (.of D.k))).ι ⋙
-    pointCompletedDerivedSections D.k l E
+  PointRationalNormalization.sections D l E
 
 /-- The recorded completed pullback with its implied residue-field invertibility supplied.
 Source: Weil II (1.1.7), the global finite-field convention
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def integralPullback (E : Type u) [Field E] [Algebra ℚ_[l] E]
+abbrev integralPullback (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :=
-  letI := Classical.choice (finiteFieldSpecCoefficientPrimeInvertible D l hl)
-  constructibleIntegralPullback l E g
+  PointRationalNormalization.pullback D l hl g E
 
 /-- The same recorded pullback on raw rational Hom tensors.
 Source: Weil II (1.1.3) and the normalized derived operations
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def rationalPullback (E : Type u) [Field E] [Algebra ℚ_[l] E]
+abbrev rationalPullback (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :=
-  letI := Classical.choice (finiteFieldSpecCoefficientPrimeInvertible D l hl)
-  rationalDerivedPullback l E g
+  PointRationalFamily.rationalPullback D l hl g E
 
 /-- The recorded pullback on the literal common-stage pair category.
 Source: Weil II (1.1.3), (1.1.7)
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def commonPullback :=
-  letI := Classical.choice (finiteFieldSpecCoefficientPrimeInvertible D l hl)
-  commonStageDerivedPullback l Ω g
+abbrev commonPullback :=
+  PointRationalFamily.commonPullback D l hl Ω g
 
 /-- Its literal object formula, used to specify representative endpoints.
 Source: Weil II (1.1.3), (1.1.7)
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def pullbackObject (A : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) :=
-  letI := Classical.choice (finiteFieldSpecCoefficientPrimeInvertible D l hl)
-  commonStagePullbackObject l Ω g A
+abbrev pullbackObject (A : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) :=
+  PointRationalFamily.pullbackObject D l hl Ω g A
 
 variable (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L)
@@ -90,127 +85,83 @@ variable (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l]
 /-- Alpha is the specified completed integral comparison, restricted to constructibles.
 Source: normalized scalar comparison in the DAG, integral hypothesis
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def integralAlpha (K : sfIntegralConstructibleCategory l E (Spec (.of D.k))) :=
-  letI := Classical.choice (finiteFieldSpecCoefficientPrimeInvertible D l hl)
-  integralPullbackScalarComparison l E L ι g K
+abbrev integralAlpha (K : sfIntegralConstructibleCategory l E (Spec (.of D.k))) :=
+  PointRationalNormalization.alpha D l hl g E L ι K
 
 /-- Phi is precisely the recorded normalized sections comparison.
 Source: normalized scalar comparison in the DAG, integral hypothesis
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def integralPhi (K : sfIntegralConstructibleCategory l E (Spec (.of D.k))) :=
-  pointSectionsScalarExtensionIso l E L ι D hl K.obj
-    ((pointIntegralConstructible_iff l E D hl K.obj).mpr K.property)
+abbrev integralPhi (K : sfIntegralConstructibleCategory l E (Spec (.of D.k))) :=
+  PointRationalNormalization.phi D l hl E L ι K
 
 /-- The rational comparison b = phi at P(K) after F(alpha inverse).
 Source: normalized scalar comparison in the DAG, rational paragraph
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def rationalB (K : sfRationalConstructibleCategory l E (Spec (.of D.k))) :=
-  letI := Classical.choice (finiteFieldSpecCoefficientPrimeInvertible D l hl)
-  (pointRationalFibre D l hl L).mapIso
-      ((rationalPullbackScalarComparison l E L ι g).app K).symm ≪≫
-    (pointRationalFibreScalarIso D l hl E L ι).app
-      ((rationalPullback D l hl g E).obj K)
+abbrev rationalB (K : sfRationalConstructibleCategory l E (Spec (.of D.k))) :=
+  PointRationalFamily.rationalB D l hl g E L ι K
 
 /-- All supplied integral transformations; no components or invertibility are prescribed.
 Source: the integral transformation hypothesis of the DAG
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def IntegralFamily :=
-  ∀ F : Index l Ω,
-    integralSections D l (Coefficient.{u} l Ω F) ⟶
-      integralPullback D l hl g (Coefficient.{u} l Ω F) ⋙
-        integralSections D l (Coefficient.{u} l Ω F)
+abbrev IntegralFamily :=
+  PointRationalNormalization.IntegralFamily D l hl Ω g
 
 /-- Compatibility uses the specified alpha and phi, in exactly their given directions.
 Source: the displayed integral hypothesis of the DAG
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def IntegralCompatible (η : IntegralFamily D l hl Ω g) : Prop :=
-  ∀ (F G : Index l Ω) (h : F ≤ G)
-    (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω F) (Spec (.of D.k))),
-    (η G).app ((sfConstructibleIntegralScalarExtension 0 l
-        (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω F)
-        (Coefficient.{u} l Ω G) (coefficientInclusion l Ω F G h) (Spec (.of D.k))).obj K) ≫
-      (integralSections D l (Coefficient.{u} l Ω G)).map
-        (integralAlpha D l hl g _ _ (coefficientInclusion l Ω F G h) K).inv ≫
-      (integralPhi D l hl _ _ (coefficientInclusion l Ω F G h)
-        ((integralPullback D l hl g (Coefficient.{u} l Ω F)).obj K)).hom =
-    (integralPhi D l hl _ _ (coefficientInclusion l Ω F G h) K).hom ≫
-      (pointIntegralModuleDerivedTensor l _ _ (coefficientInclusion l Ω F G h)).map
-        ((η F).app K)
+abbrev IntegralCompatible (η : IntegralFamily D l hl Ω g) : Prop :=
+  PointRationalNormalization.IntegralCompatible D l hl Ω g η
 
 /-- A rational family is natural for every arrow in the raw scalar localization.
 Source: the arbitrary tensor-sum assertion of the DAG
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def RationalFamily :=
-  ∀ F : Index l Ω,
-    pointRationalFibre D l hl (Coefficient.{u} l Ω F) ⟶
-      rationalPullback D l hl g (Coefficient.{u} l Ω F) ⋙
-        pointRationalFibre D l hl (Coefficient.{u} l Ω F)
+abbrev RationalFamily :=
+  PointRationalFamily.RationalFamily D l hl Ω g
 
 /-- The rational components are precisely eta tensored with the fraction field.
 The canonical size-lift normalization makes the equality an equality of actual sections.
 Source: the rational-component formula of the DAG
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def RationalNormalized (η : IntegralFamily D l hl Ω g)
+abbrev RationalNormalized (η : IntegralFamily D l hl Ω g)
     (t : RationalFamily D l hl Ω g) : Prop :=
-  ∀ (F : Index l Ω)
-    (K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω F) (Spec (.of D.k))),
-    HEq
-      ((pointRationalNormalization D l hl _ K).inv ≫
-        (ModuleCat.uliftFunctor.{u + 1, u} (Coefficient.{u} l Ω F)).mapDerivedCategory.map
-          ((t F).app K).hom ≫
-        (pointRationalNormalization D l hl _
-          ((rationalPullback D l hl g (Coefficient.{u} l Ω F)).obj K)).hom)
-      ((pointModuleDerivedRationalization l (Coefficient.{u} l Ω F)).map ((η F).app K.obj))
+  PointRationalNormalization.Components D l hl Ω g η t
 
 /-- Rational scalar compatibility, using exactly the rationalizations of alpha and phi.
 Source: equation (*) in proof step 3 of the DAG
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def RationalCompatible (t : RationalFamily D l hl Ω g) : Prop :=
-  ∀ (F G : Index l Ω) (h : F ≤ G)
-    (K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω F) (Spec (.of D.k))),
-    (t G).app ((sfRationalScalarExtension l (Coefficient.{u} l Ω F) (Spec (.of D.k)) 0
-        (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω G)
-        (coefficientInclusion l Ω F G h)).obj K) ≫
-      (rationalB D l hl g _ _ (coefficientInclusion l Ω F G h) K).hom =
-    (pointRationalFibreScalarIso D l hl _ _ (coefficientInclusion l Ω F G h)).hom.app K ≫
-      (DerivedCategory.pointFdScalarExtension (coefficientInclusion l Ω F G h).toRingHom).map
-        ((t F).app K)
+abbrev RationalCompatible (t : RationalFamily D l hl Ω g) : Prop :=
+  PointRationalFamily.RationalCompatible D l hl Ω g t
 
 /-- The normalized pullback comparison at an arbitrary common stage, including its
 specified transition identifications. Source: DAG proof steps 4--5
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def pullbackComparison
+abbrev pullbackComparison
     (A : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)))
     (N : Index l Ω) (h : A.stage ≤ N) :=
-  letI := Classical.choice (finiteFieldSpecCoefficientPrimeInvertible D l hl)
-  commonStagePullbackComparison l Ω g A N h
+  PointRationalFamily.pullbackComparison D l hl Ω g A N h
 
 /-- The comparison b on the actual coefficient-field stage models.
 Source: DAG proof steps 4--5; it is F(alpha inverse) followed by phi at P(K)
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def stageB
+abbrev stageB
     (A : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)))
     (N : Index l Ω) (h : A.stage ≤ N) :=
-  (pointStageFibre D l hl Ω N).mapIso (pullbackComparison D l hl Ω g A N h).symm ≪≫
-    (pointStageFibreScalarIso D l hl Ω A.stage N h).app
-      (pullbackObject D l hl Ω g A).obj
+  PointRationalFamily.stageB D l hl Ω g A N h
 
 /-- The component at the coefficient field of a literal pair, transported by the
 recorded Shrink algebra equivalence. Source: DAG proof step 6
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def stageComponent (t : RationalFamily D l hl Ω g)
+abbrev stageComponent (t : RationalFamily D l hl Ω g)
     (A : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) :=
-  (DerivedCategory.pointFdScalarExtension
-    (Shrink.algEquiv ℚ_[l] A.stage.val).toRingHom).map ((t A.stage).app A.obj)
+  PointRationalFamily.stageComponent D l hl Ω g t A
 
 /-- Extend that component to the very same field as a supplied representative.
 Source: DAG proof step 6, t^L at (E,K)
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def componentAt (t : RationalFamily D l hl Ω g)
+abbrev componentAt (t : RationalFamily D l hl Ω g)
     (A : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)))
     (N : Index l Ω) (h : A.stage ≤ N) :=
-  (DerivedCategory.pointFdScalarExtension (IntermediateField.inclusion h).toRingHom).map
-    (stageComponent D l hl Ω g t A)
+  PointRationalFamily.componentAt D l hl Ω g t A N h
 
 variable
   (A B : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)))
@@ -220,62 +171,48 @@ variable
 /-- A_L(u) = phi_target F_L(u) phi_source inverse.
 Source: the first common-stage action formula in the DAG
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def fibreArrow :=
-  (pointStageFibreScalarIso D l hl Ω A.stage N hA).inv.app A.obj ≫
-    (pointStageFibre D l hl Ω N).map f ≫
-    (pointStageFibreScalarIso D l hl Ω B.stage N hB).hom.app B.obj
+abbrev fibreArrow :=
+  PointRationalFamily.fibreArrow D l hl Ω A B N hA hB f
 
 /-- B_L(u) = b_target H_L(u) b_source inverse.
 Source: the second common-stage action formula in the DAG
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def pullbackArrow :=
-  (stageB D l hl Ω g A N hA).inv ≫
-    (pointStageFibre D l hl Ω N).map
-      ((rationalPullback D l hl g (Coefficient.{u} l Ω N)).map f) ≫
-    (stageB D l hl Ω g B N hB).hom
+abbrev pullbackArrow :=
+  PointRationalFamily.pullbackArrow D l hl Ω g A B N hA hB f
 
 /-- The usual finite-stage class in the recorded point-category cocone.
 Source: common-stage realization in the DAG and def-weil-point-fd-qlbar-category
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def pointClass (X Y : DerivedCategory.PointFdQbar l Ω)
+abbrev pointClass (X Y : DerivedCategory.PointFdQbar l Ω)
     (M : Index l Ω) (hX : X.1 ≤ M) (hY : Y.1 ≤ M)
     (v : (DerivedCategory.pointFdScalarExtension
         (IntermediateField.inclusion hX).toRingHom).obj X.2 ⟶
       (DerivedCategory.pointFdScalarExtension
         (IntermediateField.inclusion hY).toRingHom).obj Y.2) : X ⟶ Y :=
-  (DerivedCategory.pointFdQbarStageComp l Ω hX).inv.app X.2 ≫
-    (DerivedCategory.pointFdQbarStage l Ω M).map v ≫
-    (DerivedCategory.pointFdQbarStageComp l Ω hY).hom.app Y.2
+  PointRationalFamily.pointClass l Ω X Y M hX hY v
 
 /-- The finite-stage class of the prescribed first action formula.
 Source: DAG proof step 5
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def fibreClass :=
-  pointClass l Ω (pointQbarFibreObj D l hl Ω A) (pointQbarFibreObj D l hl Ω B)
-    N hA hB (fibreArrow D l hl Ω A B N hA hB f)
+abbrev fibreClass :=
+  PointRationalFamily.fibreClass D l hl Ω A B N hA hB f
 
 /-- The finite-stage class of the prescribed composite action formula.
 Source: DAG proof step 5
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def pullbackClass :=
-  pointClass l Ω (pointQbarFibreObj D l hl Ω (pullbackObject D l hl Ω g A))
-    (pointQbarFibreObj D l hl Ω (pullbackObject D l hl Ω g B))
-    N hA hB (pullbackArrow D l hl Ω g A B N hA hB f)
+abbrev pullbackClass :=
+  PointRationalFamily.pullbackClass D l hl Ω g A B N hA hB f
 
 /-- Extend a point-category representative using exactly its specified tensor towers.
 Source: def-weil-point-fd-qlbar-category, transition formula in the DAG proof step 7
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def pointTransport (X Y : DerivedCategory.PointFdQbar l Ω)
+abbrev pointTransport (X Y : DerivedCategory.PointFdQbar l Ω)
     (N M : Index l Ω) (hX : X.1 ≤ N) (hY : Y.1 ≤ N) (h : N ≤ M)
     (v : (DerivedCategory.pointFdScalarExtension
         (IntermediateField.inclusion hX).toRingHom).obj X.2 ⟶
       (DerivedCategory.pointFdScalarExtension
         (IntermediateField.inclusion hY).toRingHom).obj Y.2) :=
-  (pointFibreFdTensorTower (IntermediateField.inclusion hX).toRingHom
-      (IntermediateField.inclusion h).toRingHom).inv.app X.2 ≫
-    (DerivedCategory.pointFdScalarExtension (IntermediateField.inclusion h).toRingHom).map v ≫
-    (pointFibreFdTensorTower (IntermediateField.inclusion hY).toRingHom
-      (IntermediateField.inclusion h).toRingHom).hom.app Y.2
+  PointRationalFamily.pointTransport l Ω X Y N M hX hY h v
 
 /-- Same-field naturality, its preservation under every further finite extension,
 and the two actual common-stage functor actions.
@@ -324,12 +261,24 @@ def RepresentativeIndependent : Prop :=
 HEq inserts only the object equalities in the defining specifications of the two
 recorded functors. Source: DAG final paragraph and proof step 7
 (blueprint: lem-weil-point-transformation-coefficient-descent). -/
-def CommonNormalized (t : RationalFamily D l hl Ω g)
+abbrev CommonNormalized (t : RationalFamily D l hl Ω g)
     (τ : pointQbarFibre D l hl Ω ⟶ commonPullback D l hl Ω g ⋙ pointQbarFibre D l hl Ω) :
     Prop :=
-  ∀ A : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)),
-    HEq (τ.app A)
-      ((DerivedCategory.pointFdQbarStage l Ω A.stage).map (stageComponent D l hl Ω g t A))
+  PointRationalFamily.CommonNormalized D l hl Ω g t τ
+
+private theorem comparison_hom
+    (K : sfRationalConstructibleCategory l E (Spec (.of D.k))) :
+    (PointCompositeComparison.comparison D l hl g E L ι).hom.app K =
+      (rationalB D l hl g E L ι K).hom := by
+  simp only [PointCompositeComparison.comparison, rationalB, PointRationalFamily.rationalB,
+    Iso.trans_hom,
+    NatTrans.comp_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.symm_hom,
+    Iso.app_hom, Iso.app_inv, Functor.mapIso_hom,
+    PointCompositeComparison.sectionsPullback, PointCompositeComparison.pullback,
+    PointRationalFamily.rationalPullback, Functor.comp_obj,
+    Category.id_comp, Category.comp_id]
 
 /-- Arbitrary scalar-compatible integral point-section transformations descend to the
 raw rational categories and to the specified common-stage point category.
@@ -438,6 +387,27 @@ theorem coefficient_descent [IsIso g]
       ∃ τ : pointQbarFibre D l hl Ω ⟶
           commonPullback D l hl Ω g ⋙ pointQbarFibre D l hl Ω,
         CommonNormalized D l hl Ω g t τ := by
-  sorry
+  obtain ⟨t, hnorm, _, hscalar, _⟩ :=
+    PointRationalNormalization.rational_normalization D l hl Ω g η hη
+  obtain ⟨hunit, htower, hactions, _, hext, hind⟩ :=
+    PointCompositeComparison.tower_and_actions D l hl g Ω
+  have hcommon := PointRationalFamily.rational_family_common_stage_naturality
+    D l hl Ω g t hscalar
+    (fun E K ↦ heq_of_eq (by
+      have h := hunit.2 E K
+      rw [comparison_hom] at h
+      exact h))
+    (fun E L N h k K ↦ heq_of_eq (by
+      have ht := htower E L N h k K
+      simp only [comparison_hom] at ht
+      exact ht))
+    (fun A B N hA hB f ↦
+      ⟨(hactions A B N hA hB f).1, (hactions A B N hA hB f).2.1,
+        fun M h ↦ hext A B N M hA hB h f⟩)
+  refine ⟨t, hnorm, hscalar, ?_, hind, hcommon.2.2⟩
+  intro A B N hA hB f
+  exact ⟨(hcommon.1 A B N hA hB f).1,
+    fun M h ↦ hext A B N M hA hB h f,
+    (hactions A B N hA hB f).1, (hactions A B N hA hB f).2.1⟩
 
 end WeilConjectures.PointTransformationDescent

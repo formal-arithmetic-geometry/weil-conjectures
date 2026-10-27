@@ -13,9 +13,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
-import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import Mathlib.RingTheory.Flat.Basic
+import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 
 /-! # Perfect scalar extension and its tensor and tower coherence
 
@@ -254,6 +253,26 @@ noncomputable section
 
 namespace DerivedCategory.PerfectScalar
 
+private theorem kflat_extend {R S : CommRingCat.{u}} (f : R ⟶ S)
+    (P : CochainComplex (ModuleCat.{u} R) ℤ)
+    (hP : (HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ)).kFlat P) :
+    (HomologicalComplex.quasiIso (ModuleCat S) (.up ℤ)).kFlat ((E f).obj P) := by
+  have hp := (HomotopyCategory.kFlat_iff_preserves_acyclic _).1
+    ((HomotopyCategory.kFlat_quotient_obj_iff P).2 hP)
+  have hp' (L : CochainComplex (ModuleCat.{u} R) ℤ) (hL : L.Acyclic) :
+      (CochainComplex.mapBifunctor L P (curriedTensor _)).Acyclic := by
+    exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1
+      (hp ((HomotopyCategory.quotient _ _).obj L)
+        ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 hL)).2
+  rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+    HomotopyCategory.kFlat_iff_preserves_acyclic]
+  intro N hN
+  obtain ⟨L, rfl⟩ := N.quotient_obj_surjective
+  have hL := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1 hN
+  have h := CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat f.hom P hp' L hL
+  have hr := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 h
+  exact ⟨(HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) hr, hr⟩
+
 variable [∀ R : CommRingCat.{u}, HasDerivedCategory.{w} (ModuleCat.{u} R)]
 
 /-- The complete normalized scalar-coherence interface, with named projections.
@@ -394,6 +413,122 @@ def CoherenceData.Normalized (coh : CoherenceData.{u, w}) : Prop :=
   (∀ (R : CommRingCat.{u}),
     (coh.unit (𝟙 R)).hom = (coh.identity R (𝟙_ (D.{u, w} R)) (coh.unitPerfect R)).hom)
 
+private theorem Q_tensor_isIso (R : CommRingCat.{u})
+    (P Q : CochainComplex (ModuleCat.{u} R) ℤ)
+    (hk : (HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ)).kFlat P) :
+    IsIso (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := ModuleCat R)) P Q) := by
+  have hh := (HomotopyCategory.kFlat_quotient_obj_iff _).2 hk
+  have hi := DerivedMonoidal.isIso_counit_app_app_of_kFlat_left
+    (Qh.{w} (C := ModuleCat R)) (HomotopyCategory.quasiIso (ModuleCat R) (.up ℤ))
+    ((HomotopyCategory.quotient _ _).obj P) ((HomotopyCategory.quotient _ _).obj Q) hh
+  have : IsIso (Functor.LaxMonoidal.μ Qh
+      ((HomotopyCategory.quotient _ _).obj P) ((HomotopyCategory.quotient _ _).obj Q)) := hi
+  change IsIso ((_ ⊗ₘ _) ≫ (Functor.LaxMonoidal.μ Qh _ _ ≫ Qh.map _) ≫ _)
+  infer_instance
+
+private theorem unit_model_isIso (R : CommRingCat.{u}) :
+    IsIso (Functor.LaxMonoidal.ε (DerivedCategory.Q (C := ModuleCat R))) := by
+  have := DerivedCategory.isIso_ε_Qh.{w} (ModuleCat R)
+  change IsIso ((Functor.LaxMonoidal.ε Qh ≫ Qh.map
+    (Functor.LaxMonoidal.ε (HomotopyCategory.quotient _ _))) ≫ _)
+  infer_instance
+
+private theorem normalized_tensor_ext (d e : CoherenceData.{u, w})
+    (hd : d.Normalized) (he : e.Normalized)
+    {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q : D.{u, w} R)
+    (hP : IsPerfectRingComplex P) (hQ : IsPerfectRingComplex Q) :
+    d.tensor f P Q hP hQ = e.tensor f P Q hP hQ := by
+  obtain ⟨M, a, b, hlo, hhi, ht, ⟨i⟩⟩ := hP
+  have hP : IsPerfectRingComplex P := ⟨M, a, b, hlo, hhi, ht, ⟨i⟩⟩
+  obtain ⟨N, c, z, nlo, nhi, nt, ⟨j⟩⟩ := hQ
+  have hQ : IsPerfectRingComplex Q := ⟨N, c, z, nlo, nhi, nt, ⟨j⟩⟩
+  have hm : IsPerfectRingComplex.{u, w} (DerivedCategory.Q.obj M) :=
+    ⟨M, a, b, hlo, hhi, ht, ⟨Iso.refl _⟩⟩
+  have hn : IsPerfectRingComplex.{u, w} (DerivedCategory.Q.obj N) :=
+    ⟨N, c, z, nlo, nhi, nt, ⟨Iso.refl _⟩⟩
+  have := d.model f M a b hlo hhi ht
+  have := d.model f N c z nlo nhi nt
+  have := hhi
+  have hk := CochainComplex.kFlat_of_isStrictlyLE_of_flat M b (fun n ↦ by
+    have := (ht n).1
+    exact (ModuleCat.flat_iff_flat _).2 inferInstance)
+  have := Q_tensor_isIso S ((E f).obj M) ((E f).obj N) (kflat_extend f M hk)
+  have hh : (d.tensor f _ _ hm hn).hom = (e.tensor f _ _ hm hn).hom := by
+    apply (cancel_mono ((modelMap f M ⊗ₘ modelMap f N) ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Q ((E f).obj M) ((E f).obj N))).1
+    exact (hd.2.2.2.1 f M N a b c z hlo hhi nlo nhi ht nt hm hn).symm.trans
+      (he.2.2.2.1 f M N a b c z hlo hhi nlo nhi ht nt hm hn)
+  apply Iso.ext
+  apply (cancel_mono ((B f).map i.hom ⊗ₘ (B f).map j.hom)).1
+  exact (hd.1 f P Q _ _ hP hQ hm hn i.hom j.hom).symm.trans
+    ((congrArg ((B f).map (i.hom ⊗ₘ j.hom) ≫ ·) hh).trans
+      (he.1 f P Q _ _ hP hQ hm hn i.hom j.hom))
+
+private theorem normalized_unit_ext (d e : CoherenceData.{u, w})
+    (hd : d.Normalized) (he : e.Normalized)
+    {R S : CommRingCat.{u}} (f : R ⟶ S) : d.unit f = e.unit f := by
+  have := unit_model_isIso S
+  apply Iso.ext
+  apply (cancel_mono (Functor.LaxMonoidal.ε
+    (DerivedCategory.Q (C := ModuleCat S)))).1
+  exact (hd.2.2.2.2.1 f).symm.trans (he.2.2.2.2.1 f)
+
+private theorem normalized_comp_ext (d e : CoherenceData.{u, w})
+    (hd : d.Normalized) (he : e.Normalized)
+    {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T)
+    (P : D.{u, w} R) (hP : IsPerfectRingComplex P) :
+    d.comp f g P hP = e.comp f g P hP := by
+  obtain ⟨M, a, b, hlo, hhi, ht, ⟨i⟩⟩ := hP
+  have hP : IsPerfectRingComplex P := ⟨M, a, b, hlo, hhi, ht, ⟨i⟩⟩
+  have hm : IsPerfectRingComplex.{u, w} (DerivedCategory.Q.obj M) :=
+    ⟨M, a, b, hlo, hhi, ht, ⟨Iso.refl _⟩⟩
+  have := d.model (f ≫ g) M a b hlo hhi ht
+  have hh : (d.comp f g _ hm).hom = (e.comp f g _ hm).hom := by
+    apply (cancel_mono (modelMap (f ≫ g) M)).1
+    exact (hd.2.2.2.2.2.1 f g M a b hlo hhi ht hm).symm.trans
+      (he.2.2.2.2.2.1 f g M a b hlo hhi ht hm)
+  apply Iso.ext
+  apply (cancel_mono ((B (f ≫ g)).map i.hom)).1
+  exact (hd.2.1 f g P _ hP hm i.hom).symm.trans
+    ((congrArg ((B g).map ((B f).map i.hom) ≫ ·) hh).trans
+      (he.2.1 f g P _ hP hm i.hom))
+
+private theorem normalized_identity_ext (d e : CoherenceData.{u, w})
+    (hd : d.Normalized) (he : e.Normalized)
+    (R : CommRingCat.{u}) (P : D.{u, w} R) (hP : IsPerfectRingComplex P) :
+    d.identity R P hP = e.identity R P hP := by
+  obtain ⟨M, a, b, hlo, hhi, ht, ⟨i⟩⟩ := hP
+  have hP : IsPerfectRingComplex P := ⟨M, a, b, hlo, hhi, ht, ⟨i⟩⟩
+  have hm : IsPerfectRingComplex.{u, w} (DerivedCategory.Q.obj M) :=
+    ⟨M, a, b, hlo, hhi, ht, ⟨Iso.refl _⟩⟩
+  have hh : (d.identity R _ hm).hom = (e.identity R _ hm).hom := by
+    exact (hd.2.2.2.2.2.2.1 R M a b hlo hhi ht hm).symm.trans
+      (he.2.2.2.2.2.2.1 R M a b hlo hhi ht hm)
+  apply Iso.ext
+  apply (cancel_mono i.hom).1
+  exact (hd.2.2.1 R P _ hP hm i.hom).symm.trans
+    ((congrArg ((B (𝟙 R)).map i.hom ≫ ·) hh).trans
+      (he.2.2.1 R P _ hP hm i.hom))
+
+private theorem normalized_ext (d e : CoherenceData.{u, w})
+    (hd : d.Normalized) (he : e.Normalized) : d = e := by
+  have ht : @d.tensor = @e.tensor := by
+    funext R S f P Q hP hQ
+    exact normalized_tensor_ext d e hd he f P Q hP hQ
+  have hu : @d.unit = @e.unit := by
+    funext R S f
+    exact normalized_unit_ext d e hd he f
+  have hc : @d.comp = @e.comp := by
+    funext R S T f g P hP
+    exact normalized_comp_ext d e hd he f g P hP
+  have hi : d.identity = e.identity := by
+    funext R P hP
+    exact normalized_identity_ext d e hd he R P hP
+  cases d
+  cases e
+  simp only [CoherenceData.mk.injEq]
+  exact ⟨ht, hu, hc, hi⟩
+
 /-- The balanced scalar comparisons with every equation and model normalization.
 Source: Stacks 06Y6 and 0GWN (blueprint: lem-sf-perfect-scalar-tensor-coherence).
 Proof: follow the thirteen steps of perfect_scalar_tensor_coherence: finite projective
@@ -413,7 +548,15 @@ Faithfulness of localization on the models identifies the resulting derived maps
 remaining fields are propositions, so proof irrelevance identifies them. -/
 theorem perfect_scalar_tensor_coherence_data :
     ∃! d : CoherenceData.{u, w}, d.Normalized := by
-  sorry
+  obtain ⟨preserves, tensorPerfect, unitPerfect, additive, linear, model,
+    tensor, unit, comp, identity, hn, hc, hi, hm, hu, hcm, him, ha, hs,
+    hl, hr, hcl, hcr, hf, hct, hcu, hit, hiu⟩ := perfect_scalar_tensor_coherence.{u, w}
+  let d : CoherenceData.{u, w} :=
+    ⟨preserves, tensorPerfect, unitPerfect, additive, linear, model,
+      tensor, unit, comp, identity⟩
+  have hd : d.Normalized :=
+    ⟨hn, hc, hi, hm, hu, hcm, him, ha, hs, hl, hr, hcl, hcr, hf, hct, hcu, hit, hiu⟩
+  exact ⟨d, hd, fun e he ↦ normalized_ext e d he hd⟩
 
 /-- The scalar comparisons determined by their normalized finite-projective models.
 These model equations determine the data on perfect objects and arbitrary derived

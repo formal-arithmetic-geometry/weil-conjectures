@@ -1,0 +1,405 @@
+{
+ "id": "lem-sfb-normalized-finite-splitting-operations",
+ "kind": "statement",
+ "title": "Operations and pointed refinements of normalized finite splittings",
+ "statement": "Let $u:X\\to U$ be a pro-etale covering of schemes with $X$ nonempty and connected, fix a geometric point $z$ of $X$, and let a profinite abelian group $G$ act over $U$ with comparison $X[G]\\cong X\\times_UX$, $(x,g)\\mapsto(x,gx)$ [def-weil-pbc-proetale-site], [def-weil-geometric-point], [def-sfb-profinite-test-objects]. Let $\\mathcal L$ be the full subcategory of set sheaves on $U_{\\mathrm{proet}}$ whose pullbacks to $X$ are constant finite sheaves. Suppose their fibre-normalized splittings $\\phi_F:F|_X\\cong\\underline{F_{u(z)}}_X$ are unique and natural in sheaf maps, and their descent arrows are $(x,g,v)\\mapsto(x,g,g\\cdot v)$ for continuous actions on the finite fibres [def-weil-proetale-geometric-stalk], [def-weil-pbc-constant-sheaf].\n\nThe category $\\mathcal L$ is closed under finite products and contains the terminal sheaf. The normalized splittings preserve those products and the terminal object. If $R$ is a finite ring and $M$ is a sheaf of left $R$-modules whose underlying set sheaf is in $\\mathcal L$, its finite fibre is an $R$-module and the $G$-action is $R$-linear; normalized splittings identify zero, addition, negation and every scalar multiplication on all local sections [def-weil-sheaf-of-modules-category]. For any homomorphism of finite rings $a:R\\to R'$, restriction of scalars preserves these identifications. The sheaf $N$ obtained by sheafifying $R'\\otimes_R M$ belongs to $\\mathcal L$ and has canonical comparison\n$$R'\\otimes_R M_{u(z)}\\xrightarrow{\\ \\sim\\ }N_{u(z)},$$\nnormalized by $b\\otimes\\operatorname{germ}(m)\\mapsto\\operatorname{germ}(b\\otimes m)$. Its constant comparison over $X$ is given by the same formula and is $G$-equivariant for $g(b\\otimes q)=b\\otimes gq$; it is natural in module maps and compatible with composition of coefficient homomorphisms.\n\nLet also $u':X'\\to U'$ be such a connected pointed cover with group $G'$, point $z'$, and normalized splittings. Suppose maps $h:U'\\to U$, $v:X'\\to X$ and $\\theta:G'\\to G$ satisfy $uv=hu'$, $v(z')=z$ and $v(g'x')=\\theta(g')v(x')$, and their induced maps commute with both projections of the torsor comparisons. For every $F\\in\\mathcal L$, $h^*F$ is trivialized by $X'$; under the pointed fibre identification its normalized splitting is the pullback of $\\phi_F$, its action is restricted along $\\theta$, and its full descent arrow is the pullback of that for $F$. These identifications commute with compositions of such pointed refinements [def-weil-proetale-inverse-image]. Pullbacks and sheafification use [def-weil-pbc-sheafification]. For arbitrary (possibly noncommutative) coefficient rings, left scalar extension has the balanced left-adjoint meaning of [def-pod-ring-scalar-extension].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt-Scholze Section 5.1, pp.34-35; agent-formulated finite operations, stalk tensor comparison, and pointed pullback uniqueness consequence of normalized descent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-geometric-point",
+  "def-sfb-profinite-test-objects",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-sheafification",
+  "def-pod-ring-scalar-extension",
+  "def-sfb-finite-labelled-normalized-section"
+ ],
+ "proof": [
+  {
+   "text": "For a finite discrete diagram F of sheaves trivialized by W, choose finite sets A_j and their given isomorphisms after inverse image. The functor C from finite sets to sheaves on W, given by inclusion into sets, universe lift and constant sheaf, preserves finite limits: the first two functors preserve limits and set sheafification is left exact. Inverse image along W also preserves finite limits by det-pe-topos-functoriality-inverse-image. The natural isomorphism from C(A_j) to the inverse-image diagram identifies the inverse image of lim F with C(lim A_j), so lim F remains finite constant. This includes the empty diagram. Closure under isomorphism and finite products gives finite products in the full subcategory and preservation by its inclusion. The restricted stalk preserves these products because evaluation and sheaf inclusion preserve limits and its filtered neighbourhood colimit commutes with finite limits.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35, finite constant sheaves; general finite-limit calculation using Stacks 00WJ and filtered stalks."
+   }
+  },
+  {
+   "text": "The forgetful functor from continuous finite G-actions to universe-lifted sets reflects limits: the continuous-action subcategory inclusion is fully faithful, the action forgetful functor reflects limits, and the finite-set inclusion and universe lift are fully faithful. The supplied natural fibreIso identifies the composite of fibre with this forgetful functor with the restricted stalk. The stalk preserves finite products by Step 1, hence reflection forces fibre itself to preserve finite products, including the terminal object. Thus this categorical assertion needs neither a new uniqueness argument for the normalized sections nor new descent lemmas; the supplied naturality still supplies the equations with product projections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35; uniqueness hypothesis, product projections."
+   }
+  },
+  {
+   "text": "Apply the stalk construction to the module laws of $M$: addition and scalar multiplication are computed on representatives after a common pointed refinement, so $Q=M_y$ is a left $R$-module. Each map $0:1\\to M$, $+:M\\times M\\to M$, $-:M\\to M$ and $r:M\\to M$ is a map in $\\mathcal L$. Naturality of $\\phi$ for these maps, together with Step 2, identifies each operation on every local section with the same operation on constant labels. The descent comparison commutes with these sheaf maps, so its label map satisfies $g0=0$, $g(q+q')=gq+gq'$ and $g(rq)=r(gq)$. Thus the stipulated continuous finite action is $R$-linear.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35; finite module consequence of normalized descent."
+   }
+  },
+  {
+   "text": "Restriction of scalars leaves the underlying set sheaf definitionally unchanged. Thus the original finite-constancy witness hM also witnesses finite constancy of the restricted sheaf, and its normalized universal section is heterogeneously equal by reflexivity to the original one. Apply normalizedFiniteSplittings_module for the S-module M, keep its label equivalence and label equation, and specialize its scalar-operation equation to a(r). This proves the restriction assertion without any new theorem or new hypothesis.",
+   "uses": [
+    "def-pod-ring-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite coefficient consequence; balanced left coefficients, Stacks sites-modules.tex Tag 03CZ."
+   }
+  },
+  {
+   "text": "Apply the geometric scalar comparison to $u$, using its geometric inverse image and its canonical constant left-module lift. With $Q=M_y$, the linear splitting from Step 3 and the constant-module comparison give\n$$N|_X\\cong R'\\otimes_R(M|_X)\\cong R'\\otimes_R\\underline Q_X\\cong\\underline{R'\\otimes_RQ}_X.$$\nEvery displayed comparison sends the local pure tensor to the pure tensor with the same coefficient and the same finite label. This is a finite constant sheaf: the map $(R')^Q\\to R'\\otimes_RQ$, $(b_q)\\mapsto\\sum_q b_q\\otimes q$, is surjective, since all sums of pure tensors can be grouped by $q\\in Q$. Both $R'$ and $Q$ are finite. Thus $N\\in\\mathcal L$; no flatness, freeness or commutativity is used.",
+   "uses": [
+    "lem-sfb-geometric-constant-left-scalar-extension",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35; scalar sheafification calculation, using the general left-scalar geometric comparison."
+   }
+  },
+  {
+   "text": "Let $P(V)=R'\\otimes_RM(V)$ before sheafification. The pointed index of the stalk is small in the larger universe and filtered. Left scalar extension is a left adjoint to restriction by its defining universal property, so preservation of colimits gives\n$$R'\\otimes_R M_y\\cong\\varinjlim_{(V,\\bar v)}(R'\\otimes_RM(V)).$$\nThe sheafification-stalk theorem identifies the right side with $N_y$, using the underlying abelian presheaf of $P$. Operations pass through the colimit, so the resulting isomorphism $\\beta$ is $R'$-linear. Since both comparisons are induced by their coprojections, $\\beta(b\\otimes\\operatorname{germ}m)=\\operatorname{germ}(b\\otimes m)$. This also proves naturality in module maps. For the naturality assertion in Lean no choice of the comparison is needed: take any two comparison structures satisfying the germ equations. Scalar extension is a left adjoint, so the images of all stalk coprojections form a colimit cocone. Precompose the proposed naturality square with each such coprojection. The naturality equation for the induced colimit map and the two supplied germ equations reduce the square to naturality of the sheafification unit at that neighbourhood. Colimit extensionality now proves the square. In particular the proof uses no new scalar-extension or sheafification-stalk existence assumption.",
+   "uses": [
+    "def-pod-ring-scalar-extension",
+    "def-weil-proetale-geometric-stalk",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-cbc-proetale-sheafification-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35; agent stalk calculation using Stacks scalar adjunction and stalk-preserving sheafification."
+   }
+  },
+  {
+   "text": "Let $\\alpha:\\underline{R'\\otimes_RQ}_X\\to N|_X$ be the inverse of the composite in Step 5. Under the canonical identification $(u^{-1}N)_z\\cong N_y$, its stalk is $\\beta$ of Step 6: both send $b\\otimes\\operatorname{germ}m$ to the germ of the sheafification-unit tensor. Thus $\\alpha\\circ\\underline\\beta^{-1}:\\underline{N_y}_X\\to N|_X$ is normalized to the identity at $z$. Uniqueness in the hypothesis makes it $\\phi_N^{-1}$. Consequently the constant comparison of Step 5 is exactly the normalized one, with the asserted formula on all local sections.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35; fibre normalization, not a choice of an arbitrary tensor isomorphism."
+   }
+  },
+  {
+   "text": "On the overlap $X[G]$, apply scalar extension to the two pullbacks of $M$ and its descent arrow, using the natural geometric scalar comparisons of Step 5 for the two projections. Its value on a local pure tensor is\n$$(x,g,b\\otimes q)\\longmapsto(x,g,b\\otimes gq).$$\nPure tensors locally generate the sheafification, so this is equality of sheaf arrows on the entire overlap. Step 7 identifies these labels with the normalized fibre labels, proving $G$-equivariance. For $R\\xrightarrow aR'\\xrightarrow dR''$, both successive comparisons send $c\\otimes(b\\otimes m)$ to the germ or constant label of $c\\,d(b)\\otimes m$. Those generators generate the successive scalar extension, so the comparisons commute with coefficient composition. For a module map $t$ the two composites both send $b\\otimes m$ to $b\\otimes t(m)$, proving the remaining naturality.",
+   "uses": [
+    "lem-sfb-geometric-constant-left-scalar-extension",
+    "def-pod-ring-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35; explicit scalar descent and coefficient associativity on generators."
+   }
+  },
+  {
+   "text": "The equality $uv=hu'$ and the inverse-image compositors identify $u'^{-1}h^{-1}F$ with $v^{-1}u^{-1}F$. Pulling $\\phi_F$ back along $v$ therefore gives a splitting by the constant sheaf with value $Q_F$. Here inverse image preserves constant set sheaves: they are sheaf coproducts of copies of the terminal sheaf, and inverse image preserves both that object and all colimits. The natural stalk comparison identifies $(h^{-1}F)_{u'(z')}$ with $F_{u(z)}$; because $v(z')=z$, the pulled-back splitting has identity on this fibre. Thus $h^{-1}F$ lies in the analogous category on $U'$, and uniqueness there identifies its splitting with the pulled-back $\\phi_F$.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-pur-proetale-inverse-image-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35; pointed refinement by uniqueness and inverse-image composition."
+   }
+  },
+  {
+   "text": "By the two stipulated projection identities, the map of overlaps is, in the given torsor coordinates, $(x',g')\\mapsto(v(x'),\\theta(g'))$. Pull the whole descent arrow back along this map and use the splitting identified in Step 9. Substitution in its assumed formula gives\n$$(x',g',q)\\longmapsto(x',g',\\theta(g')\\cdot q).$$\nThis is substitution in morphisms of sheaves, and is valid on every test object and every local section, not merely on geometric stalks. Its label action is restriction along $\\theta$, as claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35; pointed equivariance and both projections of the supplied torsor comparison."
+   }
+  },
+  {
+   "text": "For two pointed refinements, either pullback construction is a normalized splitting at the composite chosen point, so uniqueness identifies it with the splitting of the composite. The canonical inverse-image compositors make the domains identical; all maps are the adjunction-compatible ones. In the overlap formulas the two substitutions replace $g''$ by $\\theta(\\theta'(g''))$, which is exactly the substitution for the composite. Hence both splittings and full descent arrows commute with composition. Identity refinements give identity maps by the same normalization.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, pp.34-35; uniqueness and the explicit composite overlap formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-ring-scalar-extension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-proetale-geometric-stalk",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-cbc-proetale-sheafification-geometric-stalk",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-sfb-geometric-constant-left-scalar-extension",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.1, pp.34-35, background on finite local systems; explicit operations, scalar and pointed-refinement proof from the hypotheses and the cited sheaf calculus. This is not asserted as a theorem proved there. Stage-3 A2, 2026-10-26: finite-product closure and fibre preservation proved by finite-limit comparisons and limit reflection; restriction proved from the existing module-operation assertion; scalar naturality proved by colimit extensionality and the supplied germ equations. The other five assertions retain their original proof plans and holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unique stalk normalized trivializations of finite sheaves commute with finite module operations extension of scalars and pointed maps of connected torsors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) {Z : ModuleCat R}\\n  (h : ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl ↑M) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toStalk M x)\\n      (CategoryTheory.CategoryStruct.comp (Mo\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, there exists a canonical morphism from the stalk of the sheaf $ \\\\widetilde{M} $ at the point correspon\"}\n  {\"name\": \"ModuleCat.Tilde.stalkIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)),\\n  (ModuleCat.Tilde.stalkIso M x).hom = ModuleCat.Tilde.stalkToFiberLinearMap M x\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n  {\"name\": \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toStalk M x) (ModuleCat.Tilde.stalkToFiberLinearMap M x) =\\n    ModuleCat.ofHom (LocalizedModule.mkLinearMap x.asIdeal.primeCompl ↑M)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, there exists a canonical morphism from the stalk of the sheaf $ \\\\widetilde{M} $\"}\n  {\"name\": \"ModuleCat.Tilde.stalkToFiberLinearMap_germ\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hx : x ∈ U) (s : ↑(M.tildeInModuleCat.obj (Opposite.op U))),\\n  (ModuleCat.Hom.hom (ModuleCat.Tilde.stalkToFiberLinearMap M x)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, a prime ideal $ \\\\mathfrak{p} $ in $ \\\\operatorname{Spec}(R) $, and an open set $ U $ containing $ \\\\mathfrak{p} $, the canonical morphism from the st\"}\n  {\"name\": \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (m : ↑M),\\n  (ModuleCat.Hom.hom (ModuleCat.Tilde.stalkToFiberLinearMap M x))\\n      ((CategoryTheory.ConcreteCategory.hom (ModuleCat.Tilde.toStalk M x)) m) =\\n    LocalizedModule.mk m 1\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ (viewed as a point $ x \\\\in \\\\operatorname{Spec}(R) $), the canonical morphism from the stalk $ \\\\widetilde{M}_x $ \"}\n  {\"name\": \"ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hx : x ∈ U),\\n  CategoryTheory.CategoryStruct.comp (M.tildeInModuleCat.germ U x hx) (ModuleCat.Tilde.stalkToFiberLinearMap M x\", \"doc\": \"For any open subset $ U $ of $ \\\\operatorname{Spec}(R) $ containing a point $ x $, the composition of the germ map $ \\\\widetilde{M}(U) \\\\to \\\\widetilde{M}_x $ and the stalk-to-localization map $ \\\\widetild\"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_germ_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hx : x ∈ U) (x_1 : CategoryTheory.ToType (ModuleCat.of R ↑M)),\\n  (CategoryTheory.ConcreteCategory.hom (M.tildeInModuleCat.ger\", \"doc\": \"Let $R$ be a commutative ring, $M$ be an $R$-module, and $\\\\widetilde{M}$ be the sheaf of modules on the prime spectrum $\\\\operatorname{Spec}(R)$ associated to $M$. Let $U$ be an open subset of $\\\\operat\"}\n  {\"name\": \"ModuleCat.Tilde.toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) → (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) → ModuleCat.of R ↑M ⟶ M.tildeInModuleCat.stalk x\", \"doc\": \"For a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the canonical morphism from the module $ M $ (viewed as an object in the category of $ R $-modules) to the stalk of the\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: tilde stalk formulas, profinite finite-factorization and fibre-bundle trivializations do not give finite pro-etale normalized scalar and pointed-refinement compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized finite local system splittings preserve products finite coefficient tensor reduction and pointed refinement monodromy",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.factors\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Span\", \"type\": \"{I : Type u} →\\n  (C : Set (I → Bool)) →\\n    [inst : LinearOrder I] →\\n      (s : Finset I) →\\n        ↑(Profinite.NobelingProof.π C fun x => x ∈ s) →\\n          List (LocallyConstant ↑(Profinite.NobelingProof.π C fun x => x ∈ s) ℤ)\", \"doc\": \"For a sorted finite set $ s $ in reverse order, this constructs a list of locally constant functions from the image $\\\\pi$ to $\\\\mathbb{Z}$. Each element $i \\\\in s$ contributes a function: if $x(i) = \\\\to\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ) {n : ℕ},\\n  CategoryTheory.CategoryStruct.comp\\n      (((AlgebraicTopology.DoldKan.Γ₀.splitting K).cofan (Opposite.op (\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, the morphism $ P_\\\\infty $ applied to the summand of the Γ₀-splitting corresponding to the identity epimorphi\"}\n  {\"name\": \"Profinite.exists_locallyConstant_finite_aux\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {α : Type u_1} [Finite α]\\n  (hC : CategoryTheory.Limits.IsLimit C) (f : LocallyConstant (↑C.pt.toTop) α),\\n  ∃ j g,\\n    LocallyConstant.\", \"doc\": \"Given a finite set $\\\\alpha$, a limit cone $C$ in the category of profinite spaces, and a locally constant function $f : C.\\\\text{apex} \\\\to \\\\alpha$, there exists an index $j$ in the diagram category and\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self_assoc\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] (K : ChainComplex C ℕ) {n : ℕ} {Z : C}\\n  (h : (AlgebraicTopology.AlternatingFaceMapComplex.obj (AlgebraicTopology.DoldKan.Γ₀.obj K)).X n ⟶ Z\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, the morphism $ P_\\\\infty $ associated to the alternating face map complex satisfies the identity property whe\"}\n  {\"name\": \"Profinite.exists_locallyConstant_fin_two\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) (hC : CategoryTheory.Limits.IsLimit C)\\n  (f : LocallyConstant (↑C.pt.toTop) (Fin 2)), ∃ j g, f = LocallyConstant.comap (TopCat.Hom.hom \", \"doc\": \"In a cofiltered limit of profinite spaces, every locally constant function from the limit object to a two-element set factors through some object in the diagram via a locally constant function on that\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K : ChainComplex C ℕ) [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] {Δ Δ' : SimplexCategoryᵒᵖ}\\n  (A : SimplicialObject.Splitting.IndexSet Δ) {θ : Δ ⟶ Δ'} {Δ'' : SimplexCategory} {e : Op\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, given objects $ \\\\Delta, \\\\Delta' $ in the opposite simplex category $ \\\\Delta^{\\\\text{op}} $, a morphism $ \\\\the\"}\n  {\"name\": \"InverseSystem.piSplitLE_lt\", \"module\": \"Mathlib/Order/DirectedInverseSystem\", \"type\": \"∀ {ι : Type u_6} {X : ι → Type u_8} {i : ι} [inst : PartialOrder ι] [inst_1 : DecidableEq ι]\\n  {f : InverseSystem.piLT X i × X i} {j : ι} (hj : j < i), InverseSystem.piSplitLE f ⟨j, ⋯⟩ = f.1 ⟨j, hj⟩\", \"doc\": \"For a partially ordered index set $\\\\iota$ and a family of types $X : \\\\iota \\\\to \\\\mathrm{Type}$, if $f$ is an element of the product $\\\\prod_{j \\\\leq i} X_j$ naturally isomorphic to $\\\\prod_{j < i} X_j \\\\ti\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K : ChainComplex C ℕ) [inst_2 : CategoryTheory.Limits.HasFiniteCoproducts C] {Δ Δ' : SimplexCategoryᵒᵖ}\\n  (A : SimplicialObject.Splitting.IndexSet Δ) (θ : Δ ⟶ Δ') {Δ'' : SimplexCategory} {e : Op\", \"doc\": \"For a chain complex $ K $ in a preadditive category $ \\\\mathcal{C} $ with finite coproducts, given an object $ \\\\Delta $ in the opposite simplex category $ \\\\Delta^{\\\\text{op}} $, a splitting index $ A = \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: tilde stalk formulas, profinite finite-factorization and fibre-bundle trivializations do not give finite pro-etale normalized scalar and pointed-refinement compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"restrictScalars\", \"IsIso\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: tilde stalk formulas, profinite finite-factorization and fibre-bundle trivializations do not give finite pro-etale normalized scalar and pointed-refinement compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "(normalized|normalised).*(splitting|sheaf|scalar)|(sheaf|scalar).*(normalized|normalised)",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\", \"line\": \"435\", \"text\": \"Assume for simplicity that all measures are normalized, so that the scalar factors are all `1`.\"}\n  {\"file\": \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"line\": \"166\", \"text\": \"  normalizedTrace_map F K (IsScalarTower.toAlgHom F E K) a\"}\n  {\"file\": \"Mathlib/Tactic/Ring/Basic.lean\", \"line\": \"398\", \"text\": \"/-- Cast ℕ and ℤ normalized expressions ExSums into `α`, used to evaluate scalar multiplications. -/\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"line\": \"160\", \"text\": \"  simp [fromNormalizedChainComplex, SimplicialObject.Splitting.fromNondegComplex_f]\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: tilde stalk formulas, profinite finite-factorization and fibre-bundle trivializations do not give finite pro-etale normalized scalar and pointed-refinement compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibre normalized finite sheaf trivializations are compatible with scalar extension and equivariant pointed cover refinements",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Trivialization.ext'\", \"module\": \"Mathlib.Topology.FiberBundle.Trivialization\", \"type\": \"(e e' : Trivialization F proj) (h₁ : e.toOpenPartialHomeomorph = e'.toOpenPartialHomeomorph)\\n  (h₂ : e.baseSet = e'.baseSet) : e = e'\", \"doc\": \"Two trivializations of a fiber bundle are equal if their base sets and the associated open partial homeomorphisms between the total space and the product space $B \\\\times F$ are equal.\"}\n  {\"name\": \"hom_trivializationAt\", \"module\": \"Mathlib.Topology.VectorBundle.Hom\", \"type\": \"(x₀ : B) :\\n  trivializationAt (F₁ →SL[σ] F₂) (fun x ↦ E₁ x →SL[σ] E₂ x) x₀ =\\n    (trivializationAt F₁ E₁ x₀).continuousLinearMap σ (trivializationAt F₂ E₂ x₀)\", \"doc\": \"For a point $x_0$ in the base space $B$, the trivialization of the fiber bundle of continuous linear maps between two vector bundles $E_1$ and $E_2$ at $x_0$ is constructed by composing the trivializa\"}\n  {\"name\": \"Trivialization.symmL.congr_simp\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"∀ (R : Type u_1) {B : Type u_2} {F : Type u_3} {E : B → Type u_4} [inst : NontriviallyNormedField R]\\n  [inst_1 : (x : B) → AddCommMonoid (E x)] [inst_2 : (x : B) → Module R (E x)] [inst_3 : NormedAddCommGroup F]\\n  [inst_4 : NormedSpace R F] [inst_5 : TopologicalSpace B] [inst_6 : TopologicalSpace (B\", \"doc\": \"For a nontrivially normed field $ R $, base space $ B $, fiber $ F $, and linear trivializations $ e $ and $ e_1 $ of a vector bundle over $ B $, if $ e = e_1 $, then the inverse trivialization maps $\"}\n  {\"name\": \"FiberBundle.trivializationAt'\", \"module\": \"Mathlib.Topology.FiberBundle.Basic\", \"type\": \"{B : Type u_2} →\\n  {F : Type u_3} →\\n    {inst : TopologicalSpace B} →\\n      {inst_1 : TopologicalSpace F} →\\n        {E : B → Type u_5} →\\n          {inst_2 : TopologicalSpace (Bundle.TotalSpace F E)} →\\n            {inst_3 : (b : B) → TopologicalSpace (E b)} →\\n              [self : FiberBundle F E] → \", \"doc\": \"The function assigns to each point $ b \\\\in B $ a trivialization of the projection map $ \\\\pi : E \\\\to B $, providing a local homeomorphism that makes the fiber bundle $ E $ locally homeomorphic to the p\"}\n  {\"name\": \"Bundle.ContinuousLinearMap.memTrivializationAtlas\", \"module\": \"Mathlib.Topology.VectorBundle.Hom\", \"type\": \":\\n  MemTrivializationAtlas\\n    (e₁.continuousLinearMap σ e₂ : Trivialization (F₁ →SL[σ] F₂) (π (F₁ →SL[σ] F₂)(fun x ↦ E₁ x →SL[σ] E₂ x)))\", \"doc\": \"The trivialization constructed from trivializations $ e_1 $ and $ e_2 $ of vector bundles $ E_1 $ and $ E_2 $, with scalar compatibility $ \\\\sigma: \\\\mathbb{K}_1 \\\\to \\\\mathbb{K}_2 $, belongs to the trivi\"}\n  {\"name\": \"FiberBundle.writtenInExtChartAt_trivializationAt_symm\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Basic\", \"type\": \"{x : TotalSpace F E} {y} (hy : y ∈ (extChartAt (IB.prod 𝓘(𝕜, F)) x).target) :\\n  writtenInExtChartAt (IB.prod 𝓘(𝕜, F)) (IB.prod 𝓘(𝕜, F)) (trivializationAt F E x.proj x)\\n      (trivializationAt F E x.proj).toOpenPartialHomeomorph.symm y =\\n    y\", \"doc\": \"For any point $x$ in the total space $E$ of a fiber bundle and any point $y$ in the target of the extended chart at $x$ (with respect to a product model with corners), applying the written-in-extended\"}\n  {\"name\": \"Trivialization.ext'_iff\", \"module\": \"Mathlib.Topology.FiberBundle.Trivialization\", \"type\": \"∀ {B : Type u_1} {F : Type u_2} {Z : Type u_4} [inst : TopologicalSpace B] [inst_1 : TopologicalSpace F] {proj : Z → B}\\n  [inst_2 : TopologicalSpace Z] {e e' : Trivialization F proj},\\n  e = e' ↔ e.toOpenPartialHomeomorph = e'.toOpenPartialHomeomorph ∧ e.baseSet = e'.baseSet\", \"doc\": \"Two trivializations $ e $ and $ e' $ of a fiber bundle are equal if and only if their associated partial homeomorphisms $ e.toOpenPartialHomeomorph = e'.toOpenPartialHomeomorph $ and base sets $ e.bas\"}\n  {\"name\": \"Trivialization.symm_continuousLinearEquivAt_eq\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(e : Trivialization F (π F E)) [e.IsLinear R] {b : B} (hb : b ∈ e.baseSet) :\\n  ((e.continuousLinearEquivAt R b hb).symm : F → E b) = e.symmL R b\", \"doc\": \"For a linear trivialization $ e $ of a vector bundle over a nontrivially normed field $ R $, and for any base point $ b $ in the domain of $ e $, the inverse of the continuous linear equivalence betwe\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: tilde stalk formulas, profinite finite-factorization and fibre-bundle trivializations do not give finite pro-etale normalized scalar and pointed-refinement compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique fibre normalized finite sheaf trivializations commute with products module operations scalar extension and pointed equivariant pullback",
+   "results": "{\"t\": \"2026-10-22T07:07:37Z\", \"tool\": \"leanfinder\", \"query\": \"Unique fibre normalized finite sheaf trivializations commute with products module operations scalar extension and pointed equivariant pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"instModulePullback\", \"Trivialization.pullback_linear\", \"hom_trivializationAt_apply\"], \"digest\": \"d1f5fad744d7f2ad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"constant\", \"prod\"",
+   "results": "{\"t\": \"2026-10-22T07:07:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"constant\\\", \\\"prod\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.IsLocalSite.instFaithfulSheafConstantSheafOfHasColimitsOfSizeOfHasProducts\", \"CategoryTheory.GrothendieckTopology.IsLocalSite.instFullSheafConstantSheafOfHasColimitsOfSizeOfHasProducts\"], \"digest\": \"3d696f160be241ac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(normalized|normalised).*(splitting|sheaf|scalar)|(sheaf|scalar).*(normalized|normalised)",
+   "results": "{\"t\": \"2026-10-22T07:07:38Z\", \"tool\": \"grep\", \"query\": \"(normalized|normalised).*(splitting|sheaf|scalar)|(sheaf|scalar).*(normalized|normalised)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Ring/Basic.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/Homology/Nondegenerate.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\"], \"digest\": \"cfce7567fba19c86\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibre normalized finite sheaf splittings preserve scalar extension and pointed cover monodromy",
+   "results": "{\"t\": \"2026-10-22T07:35:36Z\", \"tool\": \"leansearch\", \"query\": \"Fibre normalized finite sheaf splittings preserve scalar extension and pointed cover monodromy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"GroupExtension.Splitting.instMonoidHomClass\", \"CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"PresheafOfModules.sheafifyMap\"], \"digest\": \"e052cee908bb99e1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite local system trivializations compatible with coefficient tensor and equivariant pullback of torsors",
+   "results": "{\"t\": \"2026-10-22T07:35:43Z\", \"tool\": \"leanfinder\", \"query\": \"Finite local system trivializations compatible with coefficient tensor and equivariant pullback of torsors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hom_trivializationAt_baseSet\", \"hom_trivializationAt\", \"hom_trivializationAt_source\", \"hom_trivializationAt_target\", \"hom_trivializationAt_apply\", \"Trivialization.linearEquivAt\", \"Trivialization.linearMapAt\", \"Trivialization.IsLinear\"], \"digest\": \"1c8f8034f30e1418\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary noncommutative rings inverse image of sheaves of left modules commutes with sheafified extension of scalars and constant modules",
+   "results": "{\"t\": \"2026-10-22T07:38:06Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary noncommutative rings inverse image of sheaves of left modules commutes with sheafified extension of scalars and constant modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.Sheafify.map_smul_eq\", \"PresheafOfModules.toPresheaf_map_toSheafify\"], \"digest\": \"129c14f9774d90d6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extendScalars\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T07:38:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"extendScalars\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|extensionOfScalars|changeOfRings",
+   "results": "{\"t\": \"2026-10-22T07:38:06Z\", \"tool\": \"grep\", \"query\": \"extendScalars|extensionOfScalars|changeOfRings\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Localization.lean\"], \"digest\": \"6b7c8013557be436\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient rings commutes with left exact inverse image between sheaf topoi for left modules over noncommutative rings",
+   "results": "{\"t\": \"2026-10-22T07:39:28Z\", \"tool\": \"leanfinder\", \"query\": \"Change of coefficient rings commutes with left exact inverse image between sheaf topoi for left modules over noncommutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\"], \"digest\": \"229e94c7c4e81567\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of left modules commutes with extension of scalars along arbitrary ring homomorphism",
+   "results": "{\"t\": \"2026-10-22T07:39:29Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of sheaves of left modules commutes with extension of scalars along arbitrary ring homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullback\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply\", \"SheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullback\", \"ModuleCat.extendRestrictScalarsAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"PresheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"06d69e4ce1711ab8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(pullback|inverseImage).*(extend|scalar)|(extend|scalar).*(pullback|inverseImage)",
+   "results": "{\"t\": \"2026-10-22T07:39:29Z\", \"tool\": \"grep\", \"query\": \"(pullback|inverseImage).*(extend|scalar)|(extend|scalar).*(pullback|inverseImage)\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected sheafification adjunctions, free-module pullback, scalar restriction and commutative module scalar adjunctions; none states this normalized finite-splitting theorem or the full noncommutative geometric scalar comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-tame-finite-fibre-classification",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Finite tame sheaves over a universal residual SNC neighborhood; returned finite-fibre proof steps 11, 12: Operations and pointed refinements of normalized finite splittings",
+   "via": [
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normalized-finite-splitting-operations",
+  "worker": "stage1",
+  "summary": "Proved products, module operations, scalar fibres, full descent arrows and pointed composition explicitly. Added one statement-only general noncommutative scalar/geometric comparison; reused existing sheafification and pro-etale stalk results. Coefficient convention made explicit with the existing balanced left-scalar definition; mathematical hypotheses and conclusions unchanged. No Lean writing or compilation.",
+  "blueprint": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Finite tame sheaves over a universal residual SNC neighborhood; returned finite-fibre proof steps 11, 12: Operations and pointed refinements of normalized finite splittings; realizes the finite-operation and pointed-refinement input to finite-fibre classification, not an infinite-coefficient claim.",
+  "tool_uses": [
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "General sheaf, finite-limit, stalk or coefficient calculus used with its stated hypotheses; no geometric SNC or constructible-stability route is replaced, and this unit supplies no such general calculus."
+   },
+   {
+    "node": "lem-cbc-proetale-sheafification-geometric-stalk",
+    "why": "General sheaf, finite-limit, stalk or coefficient calculus used with its stated hypotheses; no geometric SNC or constructible-stability route is replaced, and this unit supplies no such general calculus."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "General sheaf, finite-limit, stalk or coefficient calculus used with its stated hypotheses; no geometric SNC or constructible-stability route is replaced, and this unit supplies no such general calculus."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-stalk",
+    "why": "General sheaf, finite-limit, stalk or coefficient calculus used with its stated hypotheses; no geometric SNC or constructible-stability route is replaced, and this unit supplies no such general calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-cbc-proetale-sheafification-geometric-stalk",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-proetale-inverse-image-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-b440f7cf8",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-b440f7cf8 (reviewer sub-agent of L); spot-checked: I read the item's 11 steps and the new node in full. The only statement change from the Q15 base is one appended sentence: R'⊗_R gets the balanced meaning of def-pod-ring-scalar-extension, which the base's 'finite ring, left R-modules' already implied; the target is not weakened and the citer is unaffected. No repair note, so this is not a re-split. Steps: (1-2) products and the terminal object stay in L via det-pe(3), set-sheafification exactness and filtered stalks, and the product splitting comes from uniqueness, empty case included. (3-4) The operations are maps in L, so naturality transports them, the fibre is an R-module (no commutativity needed) and the descent action is R-linear; restriction only relabels the scalars. (5) N lies in L because (R')^Q surjects onto R'⊗Q, with no flatness or freeness used. (6) Left-adjoint colimit lemma plus lem-cbc gives β with the germ formula. (7) Uniqueness pins the constant comparison as a sheaf map. (8) Equivariance on generators, with the order c·d(b) correct noncommutatively. (9-11) Compositors, preservation of constant sheaves (coproducts of terminal objects), stalk normalization at z', the substitution θ(g'), and composition under θ∘θ'. New node lem-sfb-geometric-constant-left-scalar-extension is true: Res_a commutes with f_*, so the left adjoints commute, and constant sheaves are handled through Hom_R(Q,ΓN). Tested on a point site, zero modules and M_2(F_2). It does not restate the item. No duplicate: lem-sfb-constant-scalar-geometric-adjunctions, lem-sfb-geometric-two-iso-scalar-pairing and lem-weil-pbc-canonical-ringed-tensor-comparison-construction are commutative, lem-pod-etale-stalk-tensor-scalar is étale-only, and lem-pe-constant-left-module-inverse-image keeps the ring fixed. Sources: Bhatt-Scholze 5.1 pp.34-35 is background only (proof_origin agent), Stacks 03CZ label confirmed, no SGA. Batch 5: def-pod-ring-scalar-extension is a general definition whose closure is itself plus def-weil-pbc-sheafification; it is not part of the proof of Poincaré duality or the trace formula, so accepted. tool_uses for det-pe, lem-cbc, lem-pe-constant-left-module and lem-pur-proetale-inverse-image-stalk accepted as general calculus. No cycle. Advisory only: Steps 5-6 implicitly identify module sheafification with abelian sheafification, and Steps 7 and 9-11 take the germ formula of the stalk isomorphism and compositor coherence as part of 'canonical'."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedFiniteSplittingOperations",
+  "declaration": "AlgebraicGeometry.ProEtale.normalizedFiniteSplittings_products",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteSplittingObjects",
+   "AlgebraicGeometry.ProEtale.finiteSplittingStalk",
+   "AlgebraicGeometry.ProEtale.NormalizedFiniteSplittings",
+   "AlgebraicGeometry.ProEtale.finiteSplittingLabelMap",
+   "AlgebraicGeometry.ProEtale.finiteSplittingModuleObject",
+   "AlgebraicGeometry.ProEtale.NormalizedFiniteSplittings.moduleLabel",
+   "AlgebraicGeometry.ProEtale.FiniteSplittingModuleAction",
+   "AlgebraicGeometry.ProEtale.normalizedFiniteSplittings_products",
+   "AlgebraicGeometry.ProEtale.normalizedFiniteSplittings_module",
+   "AlgebraicGeometry.ProEtale.normalizedFiniteSplittings_restrict",
+   "AlgebraicGeometry.ProEtale.FiniteSplittingScalarComparison",
+   "AlgebraicGeometry.ProEtale.normalizedFiniteSplittings_scalar",
+   "AlgebraicGeometry.ProEtale.normalizedFiniteSplittings_scalar_natural",
+   "AlgebraicGeometry.ProEtale.normalizedFiniteSplittings_scalar_comp",
+   "AlgebraicGeometry.ProEtale.FiniteSplittingRefinement",
+   "AlgebraicGeometry.ProEtale.finiteSplittingRefinedAction",
+   "AlgebraicGeometry.ProEtale.finiteSplittingRefinedLabels",
+   "AlgebraicGeometry.ProEtale.finiteSplittingRefinedParameters",
+   "AlgebraicGeometry.ProEtale.FiniteSplittingRefinement.Identifies",
+   "AlgebraicGeometry.ProEtale.normalizedFiniteSplittings_refinement",
+   "AlgebraicGeometry.ProEtale.finiteSplittingDirectImageComp",
+   "AlgebraicGeometry.ProEtale.normalizedFiniteSplittings_refinement_comp"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedFiniteSplittingOperations.lean",
+  "statement": "theorem normalizedFiniteSplittings_products (D : NormalizedFiniteSplittings W z G) : HasFiniteProducts (finiteSplittingObjects W).FullSubcategory ∧ PreservesFiniteProducts (ObjectProperty.ι (finiteSplittingObjects W)) ∧ PreservesFiniteProducts D.fibre",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The listed declarations jointly state all clauses, using the general finite-labelled normalized-section definition node rather than the tower theorem. The refinement predicate explicitly pulls the original full descent section through g along the overlap map (v, theta, id), whose two projections are specified. No tower hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1eb86329",
+  "group": "NI",
+  "result": "pass",
+  "note": "Re-delivery after the 0def2d02 RETURN; both findings repaired. (1) H2/H13: the new def node def-sfb-finite-labelled-normalized-section is existing:true on the unchanged ConnectedAbelianTowerNormalizedDescent and owns abelianTowerLabels, LabelNeighbourhood, LabelGerm, IsAbelianTowerNormalizedSection and ConstantAt. Its statement matches each definition, its lean.statement is verbatim, its 6 stmt_deps are each cited, it does not depend on the tower, and no other node owns these definitions. The item cites it instead of the theorem node. (2) The last conjunct of Identifies now pulls F's actual descentLabel section through g and an overlap map o, fixed by both pullback projections ((v, θ, id) and the structural map), and equates it with the refined descent section relabelled by a. It is correct on points and not tautological. finiteSplittingRefinedParameters is real data with docstrings and is listed. The module diff against 0def touches only these lines. The rest was re-checked: clauses, universes (site u+1/u, set sheaves and rings in Type (u+1)), edge cases, 8 sorry only in the 8 theorems, statement verbatim, 22 declarations present, no pro-étale substitute, report sections present. Advisories: profiniteProduct* is owned by the landed def-sfb-profinite-product-maps, which the item does not cite (same as the reviewed 0def head; S2 cannot change stmt_deps); the reused definitions keep the theorem node's blueprint docstrings. No compile reproduced; no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T091014-L-3295144",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

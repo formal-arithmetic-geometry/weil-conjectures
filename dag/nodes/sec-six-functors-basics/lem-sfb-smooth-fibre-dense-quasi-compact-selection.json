@@ -1,0 +1,459 @@
+{
+ "id": "lem-sfb-smooth-fibre-dense-quasi-compact-selection",
+ "kind": "statement",
+ "title": "Quasi-compact selection inside a relatively dense smooth open",
+ "statement": "Let $S$ be a scheme and let $p:X\\to S$ be smooth [def-pc-scheme, def-sbc-smooth-morphisms]. Assume $X$ is quasi-compact [def-weil-pbc-quasi-compact-scheme]. Let $U\\subseteq X$ be an open subscheme [def-weil-open-immersion] such that $U_s$ is topologically dense in $X_s$ for every $s\\in S$, where $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ and $U_s=U\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-base-change, def-weil-residue-field]. There is a quasi-compact open subscheme $W\\subseteq U$ such that $W_s$ is dense in $X_s$ for every $s\\in S$. Neither $S$ nor $U$ is assumed quasi-compact; empty schemes and empty fibres are allowed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 2.5, Lemma 3, printed pp.56-57, PDF pp.62-63; local copy WANTED; primary scan at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-open-immersion",
+  "def-pc-base-change",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "If $X$ is empty take $W=\\varnothing$. Otherwise apply [sbc-lem-slicing] to $p$. Write its charts as $e_i:D_i\\to X$, $f_i:D_i\\to T_i$, $a_i:T_i\\to S$, with $p e_i=a_i f_i$. Both $D_i,T_i$ are affine, $e_i,a_i$ are etale, and $f_i$ is smooth with a section and geometrically connected nonempty fibres. By [lem-weil-pbc-etale-morphism-open-map] the sets $e_i(D_i)$ are open. They cover $X$, so quasi-compactness gives a finite subcover; retain just these indices. This finite family is still an etale covering of $X$.",
+   "uses": [
+    "sbc-lem-slicing",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; morphisms.tex Tag 03WT; compactness applied to the images"
+   }
+  },
+  {
+   "text": "Put $E_i=e_i^{-1}(U)$. Fix $t\\in T_i$, set $s=a_i(t)$, and put $F_{i,t}=D_i\\times_{T_i}\\operatorname{Spec}\\kappa(t)$. By [lem-trf-smooth-connected-fibre-normal-integrality], applied to $f_i$ with the identity field extension, $F_{i,t}$ is nonempty and integral. Base change $e_i$ to $s$; the resulting map $e_{i,s}:D_i\\times_S\\operatorname{Spec}\\kappa(s)\\to X_s$ is etale by [lem-weil-pbc-etale-scheme-base-change]. By [lem-weil-pbc-etale-fibre-discrete-separable-points], the point of $(T_i)_s$ corresponding to $t$ is an open subscheme isomorphic to $\\operatorname{Spec}\\kappa(t)$. Its inverse image in $(D_i)_s$ is exactly $F_{i,t}$ by the fibre-product identities. Thus $F_{i,t}$ is an open subscheme of $(D_i)_s$, and the restriction $F_{i,t}\\to X_s$ is an open map by [lem-weil-pbc-etale-morphism-open-map]. For every nonempty open $H\\subset F_{i,t}$ its image in $X_s$ is nonempty open and meets $U_s$. Consequently $H$ meets $E_i\\times_{T_i}\\operatorname{Spec}\\kappa(t)$. This proves that this latter open is dense and nonempty in $F_{i,t}$; in particular $f_i(E_i)=T_i$.",
+   "uses": [
+    "lem-trf-smooth-connected-fibre-normal-integrality",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO (lemma-base-change-etale), 02GL (lemma-etale-over-field), 03WT (lemma-etale-open); varieties.tex Tag 056T and more-morphisms.tex Tag 057J"
+   }
+  },
+  {
+   "text": "Cover $E_i$ by affine opens $A_{i,\\alpha}$ of $D_i$ contained in $E_i$, using [lem-weil-pbc-affine-opens-basis]. Smoothness of $f_i$ gives flatness and local finite presentation by [lem-pc-smooth-flat], so $f_i$ is an open map by [lem-weil-pbc-flat-lfp-open]. Hence the $f_i(A_{i,\\alpha})$ form an open cover of $T_i$, by $f_i(E_i)=T_i$. The affine scheme $T_i$ is quasi-compact by clause (iii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact]. Select finitely many $A_{i,\\alpha}$ whose images cover $T_i$, and denote their union by $B_i$. For every $t$, the open $(B_i)_t$ in $F_{i,t}$ is nonempty. It is dense: in an irreducible space two nonempty opens intersect, so every nonempty open of the integral $F_{i,t}$ meets $(B_i)_t$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UA, lemma-fppf-open; schemes.tex Tag 01IT; algebra.tex Tag 00E8; finite selection after smooth slicing"
+   }
+  },
+  {
+   "text": "Let $W=\\bigcup_{i,\\alpha}e_i(A_{i,\\alpha})$, using only the finitely selected indices of both kinds. Each image is open in $X$ by [lem-weil-pbc-etale-morphism-open-map], and is contained in $U$ by the choice of $A_{i,\\alpha}$. Each $A_{i,\\alpha}$ is quasi-compact by clause (iii) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact], and its image is quasi-compact by [lem-weil-pbc-continuous-image-quasi-compact]. A finite union of these images is quasi-compact: restrict an open cover of their union to each image, choose its finite subcover, and take the union of these finitely many finite selections. Give $W$ its open subscheme structure. The map $B_i\\to X$ factors through $W$: its image lies in $W$, and restricting the structure-sheaf map to this open gives the factorization. Thus its fibre map factors through $W_s$ for every $s$.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-continuous-image-quasi-compact",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 04Z9, lemma-image-quasi-compact; morphisms.tex Tag 03WT; finite-union open-cover argument"
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ and a nonempty open $H\\subseteq X_s$. By [lem-weil-pbc-etale-covering-base-change] the retained $e_{i,s}:(D_i)_s\\to X_s$ are jointly surjective. Choose $y\\in e_{i,s}^{-1}(H)$ for one $i$, and let $t$ be its image in $(T_i)_s$, regarded as a point of $T_i$ over $s$. The open fibre identification of step 2 makes $e_{i,s}^{-1}(H)\\cap F_{i,t}$ a nonempty open of $F_{i,t}$. By step 3 this meets $(B_i)_t$. Its image is a point of $H\\cap W_s$, using the factorization of step 4. Therefore every nonempty open of $X_s$ meets $W_s$, exactly the asserted density. If $X_s$ is empty there is no such $H$ and the condition is automatic. No compactness of $S$ or $U$, nor separatedness of $X$, has been used.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO and 01S1 (lemma-base-change-etale, lemma-base-change-surjective); open-set test for density"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-slicing",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0EY4, lemma-cover-smooth-by-special, followed by finite selection over each affine sliced base; alternate assembly of the BLR 2.5 Lemma 3 selection argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A fibrewise dense open of a quasi compact smooth scheme contains a quasi compact fibrewise dense open subscheme",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.PartialMap.dense_domain",
+     "AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.RationalMap.dense_domain",
+     "AlgebraicGeometry.Scheme.Hom.denseRange",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+     "AlgebraicGeometry.IsDominant.denseRange",
+     "AlgebraicGeometry.IsDominant"
+    ],
+    "digest": "7af2b672d3c4bcb3",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: compactness of fibres, finite subcovers of an already compact open, and dense domains do not select an open simultaneously dense in all fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a quasi compact smooth family any open meeting every irreducible component of every fibre contains a quasi compact open with the same property",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactMorphismRestrict",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isCompact",
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.QuasiCompactCover.inst",
+     "AlgebraicGeometry.isRetrocompact_basicOpen",
+     "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+     "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace"
+    ],
+    "digest": "1de8c6e79b8f4627",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: compactness of fibres, finite subcovers of an already compact open, and dense domains do not select an open simultaneously dense in all fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsSmooth\", \"IsCompact\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: compactness of fibres, finite subcovers of an already compact open, and dense domains do not select an open simultaneously dense in all fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*[Cc]ompact|[Cc]ompact.*dense|[Ff]iber.*[Dd]ense",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": "AlgebraicGeometry"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: compactness of fibres, finite subcovers of an already compact open, and dense domains do not select an open simultaneously dense in all fibres."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fibrewise dense open of a quasi compact smooth scheme contains a quasi compact fibrewise dense open",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instQuasiCompactMorphismRestrict",
+     "exists_open_dense_of_open_dense_subtype",
+     "AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.IsProper.instMorphismRestrict",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE",
+     "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact"
+    ],
+    "digest": "87efd6a4466c30fe",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: compactness of fibres, finite subcovers of an already compact open, and dense domains do not select an open simultaneously dense in all fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fibrewise dense open in a quasi compact smooth scheme contains a quasi compact fibrewise dense open",
+   "results": {
+    "t": "2026-10-24T09:36:10Z",
+    "tool": "leanfinder",
+    "query": "A fibrewise dense open in a quasi compact smooth scheme contains a quasi compact fibrewise dense open",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.PartialMap.dense_domain",
+     "AlgebraicGeometry.Scheme.RationalMap.dense_domain",
+     "AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.Hom.denseRange",
+     "AlgebraicGeometry.IsDominant.denseRange",
+     "AlgebraicGeometry.IsDominant",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι"
+    ],
+    "digest": "6f3811c83794a83a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern dense domains, compact fibres, or finite affine covers of an already compact open, not simultaneous fibrewise selection."
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*[Cc]ompact|[Cc]ompact.*dense|[Ff]iber.*[Dd]ense",
+   "results": {
+    "t": "2026-10-24T09:38:13Z",
+    "tool": "grep",
+    "query": "dense.*[Cc]ompact|[Cc]ompact.*dense|[Ff]iber.*[Dd]ense",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern dense domains, compact fibres, or finite affine covers of an already compact open, not simultaneous fibrewise selection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open subset dense in every fibre of a quasi compact smooth scheme contains a quasi compact open with the same fibre density",
+   "results": {
+    "t": "2026-10-24T09:38:14Z",
+    "tool": "leansearch",
+    "query": "An open subset dense in every fibre of a quasi compact smooth scheme contains a quasi compact open with the same fibre density",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+     "exists_open_dense_of_open_dense_subtype",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+     "AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE",
+     "AlgebraicGeometry.quasiCompact_iff",
+     "AlgebraicGeometry.isCompact_basicOpen",
+     "AlgebraicGeometry.QuasiCompact.mk"
+    ],
+    "digest": "c3c087be26d4263b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern dense domains, compact fibres, or finite affine covers of an already compact open, not simultaneous fibrewise selection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Smooth\", \"IsCompact\"",
+   "results": {
+    "t": "2026-10-24T09:38:14Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Smooth\", \"IsCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern dense domains, compact fibres, or finite affine covers of an already compact open, not simultaneous fibrewise selection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite selection of affine opens meeting every geometric fibre component of a smooth quasi compact family",
+   "results": {
+    "t": "2026-10-24T09:40:38Z",
+    "tool": "leanfinder",
+    "query": "Finite selection of affine opens meeting every geometric fibre component of a smooth quasi compact family",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen",
+     "AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact",
+     "AlgebraicGeometry.Scheme.AffineCover",
+     "AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered",
+     "AlgebraicGeometry.quasiCompactCover_iff"
+    ],
+    "digest": "554b129dd8d0664d"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned facts concern dense domains, compact fibres, or finite affine covers of an already compact open, not simultaneous fibrewise selection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "date": "2026-10-24",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 2.5, preliminaries on S-density and Lemma 1(b), printed pp.55-56 (PDF pp.61-62), applied also after base change; BLR 2.5, Lemma 3, printed pp.56-57, PDF pp.62-63; local copy WANTED; primary scan at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf",
+   "via": [
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lem-sfb-birational-law-strictification",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-fibre-dense-quasi-compact-selection",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement, including arbitrary base and non-quasi-compact U. No new nodes: use the existing smooth slicing theorem, smooth connected fibre integrality, etale fibre discreteness, openness, and compactness. W is the finite union of images of selected affine opens on finitely many slicing charts. Fibre density is checked through the open individual fibres of the etale sliced bases.",
+  "blueprint": "No imported blueprint ancestor: blueprint_refs.py ancestor returns None. Retains the inherited BLR 2.5 Lemma 3 place along the via chain from lem-sfb-smooth-fibrewise-dense-open-base-change. The latest sbc-lem-slicing and the current sk-thm-sf-ctf-stability unit/proof were read. The steps supply only this auxiliary finite-selection input; no unit step is replaced. Whole-blueprint searches for quasi-compact selection, smooth section component and saturation found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-slicing",
+    "why": "Generic smooth slicing gives affine smooth families with geometrically connected fibres and etale maps to X and S; this auxiliary geometric selection argument does not replace a six-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Generic geometry/topology tool used exactly as stated; this six-functor unit has no replacement for this elementary geometric infrastructure."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Only integrality and nonemptiness of each smooth geometrically connected fibre are used; no trace-formula construction is imported."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic geometry/topology tool used exactly as stated; this six-functor unit has no replacement for this elementary geometric infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic geometry/topology tool used exactly as stated; this six-functor unit has no replacement for this elementary geometric infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic geometry/topology tool used exactly as stated; this six-functor unit has no replacement for this elementary geometric infrastructure."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic smooth implies flat and locally finitely presented, to apply the open-map theorem on a slicing chart."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic geometry/topology tool used exactly as stated; this six-functor unit has no replacement for this elementary geometric infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "why": "Generic geometry/topology tool used exactly as stated; this six-functor unit has no replacement for this elementary geometric infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-image-quasi-compact",
+    "why": "Generic geometry/topology tool used exactly as stated; this six-functor unit has no replacement for this elementary geometric infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic geometry/topology tool used exactly as stated; this six-functor unit has no replacement for this elementary geometric infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-slicing",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "lem-weil-pbc-etale-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NK-abdce6525",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-abdce6525 (reviewer sub-agent of L); spot-checked: The item is unchanged, correct as stated, and checked against BLR 2.5 Lemma 3. It splits into 5 steps with no new nodes. Stacks 0EY4 (more-morphisms.tex l.10957) matches sbc-lem-slicing. Step 1: the slicing chart images are open (étale), so a finite subcover exists because X is quasi-compact. Step 2: the section makes every chart fibre nonempty, so lem-trf-smooth-connected-fibre-normal-integrality with K=κ(t) gives integral F_{i,t}. 02GL(2) makes F_{i,t} open in (D_i)_s, and since e_{i,s} is an open map, E_i∩F_{i,t} is dense and nonempty. Step 3: affine opens inside E_i have open images (flat+lfp) covering the affine T_i, so finite selection works, and the nonempty (B_i)_t is dense in the integral fibre. Step 4: W is a finite union of quasi-compact open images inside U. Step 5: the covering base-changed to X_s is jointly surjective, and density follows. Edge cases checked: X or X_s empty, S and U not quasi-compact, imperfect residue fields. No duplicate found (product-projection-density-shrink is over a field/DVR only; the parent consumes this item). Batch-5 flag: lem-trf-smooth-connected-fibre-normal-integrality is generic scheme theory (Stacks 057J/056T), not part of the trace formula or Poincaré duality. Its proof closure contains no trace-formula or duality construction, and about 16 sfb nodes already cite it, so it is accepted as a generic tool. The tool_uses are generic geometric infrastructure, accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothFibreDenseQuasiCompactSelection",
+  "declaration": "AlgebraicGeometry.Smooth.exists_isCompact_open_fibrewise_dense",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothFibreDenseQuasiCompactSelection.lean",
+  "statement": "theorem Smooth.exists_isCompact_open_fibrewise_dense {X S : Scheme.{u}} (p : X ⟶ S) [Smooth p] [CompactSpace X] (U : X.Opens) (hU : ∀ s : S, Dense ((p.fiberι s) ⁻¹' (U : Set X))) : ∃ W : X.Opens, W ≤ U ∧ IsCompact (W : Set X) ∧ ∀ s : S, Dense ((p.fiberι s) ⁻¹' (W : Set X))",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ebf1a74e",
+  "group": "NX",
+  "result": "pass",
+  "note": "Statement matches node/BLR 2.5 Lemma 3: [Smooth p], [CompactSpace X], U : X.Opens, ∀ s Dense (p.fiberι s ⁻¹' U) with fibre = pullback p (fromSpecResidueField s); conclusion ∃ W ≤ U, IsCompact W, ∀ s fibre-dense. No extra hypotheses (no qc on S/U/p, no separatedness), single universe u, all variables bound; edge cases empty X/S/fibres, U=⊥/⊤ fine. Item JSON differs from live only in lean; lean.statement verbatim; 6 stmt_dep records existing and publicly imported (Fiber via BaseChangeConventions); docstrings carry source place, blueprint id, 5 proof steps; sorry only; no definitions/new nodes; no duplicate found. No compile (no file changed; worker compiled clean). Note: parallel Q87 00d4e781 (PASS 19:06:59, unlanded) delivers the same file with decl AlgebraicGeometry.exists_isCompact_open_fibrewise_dense vs NX's Smooth.exists_isCompact_open_fibrewise_dense, equivalent signatures — only one may land, the second must not overwrite/rebind."
+ }
+}

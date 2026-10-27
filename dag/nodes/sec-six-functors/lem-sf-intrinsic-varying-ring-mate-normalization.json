@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-intrinsic-varying-ring-mate-normalization",
+ "kind": "statement",
+ "title": "Intrinsic and varying-ring semilinear proper/open mates agree",
+ "statement": "For every inverse sequence of commutative rings in the recorded universes and every commutative square k:V→W, r:V→S, p:W→T, i:S→T with k,i quasi-compact open immersions and r,p proper, the intrinsic proper/open mate [def-coef-semilinear-proper-open-mate] is heterogeneously equal to the varying-ring proper/open mate [def-sp-varying-ring-proper-open-arrows]. The heterogeneous equality uses the actual equalities of their chosen inverse image, direct image and open extension functors; it is an equality on entire unbounded derived system categories, with no faithfulness of evaluation or coefficient-flatness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 07A7: intrinsic proper/open clopen construction and specified adjunction mate; exact-localization calculation on simultaneous coefficient systems."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-proper-open-mate",
+  "def-sp-varying-ring-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient maps agree on every section, so the ordinary push functors agree. The chosen ordinary adjunctions, inverse images and open extensions then agree; their section-normalized direct-image compositors agree.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact localization preserves the inverse mate defining beta by [lem-sf-exact-localization-inverse-mate]. The derived pullback square is the localization of its ordinary word.",
+   "uses": [
+    "lem-sf-exact-localization-inverse-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The localized ordinary projector and the intrinsic projector both restrict to the open-adjunction unit on the selected clopen image. Since the canonical extension-to-direct-image comparison is invertible, the proper-adjunction Hom bijection makes this restriction determine the projector, by the uniqueness calculation of [lem-cbc-proper-open-clopen-projector].",
+   "uses": [
+    "lem-cbc-proper-open-clopen-projector",
+    "lem-sp-varying-ring-proper-open-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize open composition using [lem-sf-exact-localization-open-compositor]. Exact-derived transformation pasting [lem-sp-exact-derived-transformation-pasting] then identifies the whole beta-projector-compositor alpha word.",
+   "uses": [
+    "lem-sf-exact-localization-open-compositor",
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take proper-adjunction mates under the identified chosen adjunctions. Heterogeneous equality transports this construction and gives the stated equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-cbc-proper-open-clopen-projector",
+  "lem-sf-exact-localization-inverse-mate",
+  "lem-sf-exact-localization-open-compositor",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-sp-varying-ring-proper-open-pasting"
+ ],
+ "proof_origin": {
+  "by": "C2 stage 3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 07A7: intrinsic proper/open clopen construction and specified adjunction mate; exact-localization calculation on simultaneous coefficient systems."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization of adjunctions preserves the left adjoint composition isomorphism normalized by the units",
+   "results": "8 hits, including Adjunction.localization_unit_app, localization_counit_app, derivedη_fac_app and derivedε_fac_app.",
+   "date": "2026-10-27",
+   "verdict": "Ingredients found; the specified compositor normalization is not a single existing Mathlib declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits including leftAdjointCompIso, its component formula and conjugateEquiv_leftAdjointCompIso_inv.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing unit/compositor characterization."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Cc]omp|normalizedAdjunction_composition",
+   "results": "6 Mathlib hits for the exact-derived factorization API; the local library supplies normalizedAdjunction_composition and normalizedAdjunction_uniqueness.",
+   "date": "2026-10-27",
+   "verdict": "Reuse these proved local lemmas; no new unproved dependency."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact localization of adjunctions preserves the left adjoint composition isomorphism normalized by the units",
+   "results": "8 hits including Adjunction.localization, derived, localization_unit_app and leftAdjointCompIso.",
+   "date": "2026-10-27",
+   "verdict": "Reuse localization and the canonical compositor; the specified compatibility calculation is proved in the delivery."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SemilinearProperOpenMatePasting",
+  "date": "2026-10-27",
+  "group": "C2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits: intrinsic proper/open mate and pasting argument (parent step 2); Normalization required in the intrinsic proper/open pasting and identity proof.",
+   "via": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.SemilinearProperOpenNormalization",
+  "file": "lean/Sheaf/SixFunctors/SemilinearProperOpenNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.Normalization.gamma_normalization",
+  "statement": "theorem gamma_normalization {V W S T : Scheme.{u}}\n    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :\n    HEq (gamma C τ k r p i h) (VaryingRing.gamma.{u} C τ k r p i h)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "independent cc review: 13 delivered Lean files (sandbox-compiled OK) and 32 direct importers (all compile; timings equal to published without artifact writing) against the item/graph/diagram nodes and clone originals; headers and public bodies identical; axioms checked"
+ }
+}

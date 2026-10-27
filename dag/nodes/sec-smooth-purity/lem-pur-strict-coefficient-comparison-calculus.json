@@ -18,112 +18,45 @@
  ],
  "proof": [
   {
-   "text": "Work at a fixed sequence level, suppressing its index. Apply [lem-pur-cochain-pullback-tensor-coherence] to the ringed morphism with coefficient map $\\phi^a$ to obtain $c_a$. Apply it also to the identity geometric morphism on $W$, equipped with $i_W^{ab}$; its pullback is exactly $S_W^{ab}$, so its normalized tensor comparison is $\\sigma_W^{ab}$ with the two formulas in the statement. To obtain $\\kappa$ as an isomorphism, use that lemma's canonical pullback-composition isomorphism. The ringed morphism with geometric part $u$ and coefficient map $u^{-1}R_Y^a\\to R_X^b$ has two factorizations: first $F_a$ then $S_X^{ab}$, or first $S_Y^{ab}$ then $F_b$. Their coefficient maps agree by $i_X^{ab}\\phi^a=\\phi^b u^{-1}i_Y^{ab}$. Each composition comparison identifies its iterated pullback with this single pullback. Composing one comparison with the inverse of the other gives $\\kappa^{ab}:S_X^{ab}F_a\\cong F_bS_Y^{ab}$. These are actual natural chain isomorphisms; Step 2 expands their scalar-association normalization.",
+   "text": "For each coefficient/sequence arrow use the unique normalized scalar association of [def-pur-cochain-coefficient-arrows], in the inverse direction, as kappa. Use its extensionComparison for sigma on R and S. The scalarAssociation_existsUnique theorem proves Normalized. This uses the already proved constructions, so the separate balanced-construction theorem is unnecessary.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "def-pur-cochain-coefficient-arrows"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, and Section 03EK tensor/bilinear universal property; agent calculation on the resulting normalized maps."
-   }
+   "elementary": false
   },
   {
-   "text": "Spell out the scalar association in Step 1. For $r\\in u^{-1}R_Y^a$, balancing $a\\phi^a(r)\\otimes x=a\\otimes rx$ in the source of $\\kappa$ gives the same image, since $i_X^{ab}\\phi^a(r)=\\phi^b i_Y^{ab}(r)$ and the latter scalar can move into $1\\otimes rx$. Balancing its outer tensor over $R_X^a$ is multiplication by $i_X^{ab}(a)$. For its proposed inverse, balancing $d i_Y^{ab}(r)\\otimes x=d\\otimes rx$ has the same image by that same square, and balancing the outer tensor over $u^{-1}R_Y^b$ multiplies by $\\phi^b(d)$. These give precisely the two displayed formulas. Composing them sends $b\\otimes(a\\otimes x)$ to $b i_X^{ab}(a)\\otimes(1\\otimes x)=b\\otimes(a\\otimes x)$ and $b\\otimes(d\\otimes x)$ to $b\\phi^b(d)\\otimes(1\\otimes x)=b\\otimes(d\\otimes x)$. Additivity and balancing determine the sectionwise tensor maps; the unique factorization through sheafification extends these equalities to sheaf maps. This argument uses generalized inverse-image generators via the already constructed comparison of Step 1, and does not assume that arbitrary inverse-image sections come from sections on $Y$.",
+   "text": "Apply [lem-pur-coefficient-comparisons-strict-totalization] to this normalized family. Retain its KappaTransitionLaws, both TensorTransitionLaws, TensorSquare and PullTensorTransitions. These are exactly the transition and square conjuncts of Laws.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-pur-coefficient-comparisons-strict-totalization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, and Section 03EK tensor/bilinear universal property; agent calculation on the resulting normalized maps."
-   }
+   "elementary": false
   },
   {
-   "text": "For $\\sigma$, moving a coefficient $r\\in R_W^a$ from $x$ to $y$ changes $(b\\otimes rx)\\otimes(1\\otimes y)$ to $(b\\otimes x)\\otimes(1\\otimes ry)$ by balancing over $R_W^b$. Its proposed inverse is balanced over $R_W^b$ because $b e d=bd e$, and over $R_W^a$ by the original tensor relation. The two composites reduce respectively to $b\\otimes(x\\otimes y)$ and $(bd\\otimes x)\\otimes(1\\otimes y)=(b\\otimes x)\\otimes(d\\otimes y)$. Thus the normalization from Step 1 has exactly the inverse claimed. Every equality is additive on tensor generators and extends uniquely through the sheafifications in [def-weil-presheaf-modules-sheafification]. This same universal property, degree by degree, proves uniqueness of both normalized families. Naturality sends $x,y$ to their images under the given module maps in these formulas, so the two orders agree.",
+   "text": "Apply [lem-pur-coefficient-comparisons-unit-composition] with the normalization and three strict-transition laws just obtained. Its two TensorLaws and its two kappa unit/composition equations supply the remaining conjuncts of Laws. Assemble the conjunctions.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-pur-coefficient-comparisons-unit-composition"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, and Section 03EK tensor/bilinear universal property; agent calculation on the resulting normalized maps."
-   }
+   "elementary": false
   },
   {
-   "text": "All four generator formulas leave cochain degrees unchanged and use only degree-zero coefficient multiplication. For example $\\sigma$ sends the first differential term $b\\otimes(dx\\otimes y)$ to $(b\\otimes dx)\\otimes(1\\otimes y)$, and the second term $(-1)^p b\\otimes(x\\otimes dy)$ to $(-1)^p(b\\otimes x)\\otimes(1\\otimes dy)$. The inverse multiplies $b,d$ without changing either sign. For $\\kappa$ the equality with the differential is $b i_X^{ab}(a)\\otimes(1\\otimes dx)$ on both sides, and for its inverse it is $b\\phi^b(d)\\otimes(1\\otimes dx)$. The fixed $c_a$ has these properties by [lem-pur-cochain-pullback-tensor-coherence]. That lemma, including its identity-geometric-morphism specialization, already supplies comparisons on the direct-sum total complexes, so no interchange with an infinite product is used. Equality on each summand implies equality on the direct sum by its defining universal property.",
+   "text": "For another normalized family, scalarAssociation_existsUnique from [def-pur-cochain-coefficient-arrows] identifies each inverse kappa, hence each kappa. canonicalRingedTensorComparison_existsUnique from [def-pur-cochain-tensor-coherence-data] makes the Comparison type subsingleton at each scalar-extension pullback; thus both sigma families agree. Function extensionality and structure equality give simultaneous uniqueness.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "def-pur-cochain-coefficient-arrows",
+    "def-pur-cochain-tensor-coherence-data"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, and Section 03EK tensor/bilinear universal property; agent calculation on the resulting normalized maps."
-   }
-  },
-  {
-   "text": "Let $\\rho_W^a:R^a_{W,m}\\to R^a_{W,n}$ be any sequence transition, and let $t_K$ be its semilinear chain transition. The induced transition on a scalar extension sends $b\\otimes x$ to $\\rho_W^b(b)\\otimes t_Kx$. For $\\kappa$ the two orders applied to $b\\otimes(a\\otimes x)$ give $\\rho_X^b(b) i_{X,n}^{ab}(\\rho_X^a(a))\\otimes(1\\otimes t_Kx)$, using $\\rho_X^b i_{X,m}^{ab}=i_{X,n}^{ab}\\rho_X^a$. For its inverse the two orders give $\\rho_X^b(b)\\phi_n^b(u^{-1}\\rho_Y^b(d))\\otimes(1\\otimes t_Kx)$ by the assumed transition square for $\\phi$. For $\\sigma$ both orders give $(\\rho_W^b(b)\\otimes t_Kx)\\otimes(1\\otimes t_Hy)$, and for its inverse they give $\\rho_W^b(b)\\rho_W^b(d)\\otimes(t_Kx\\otimes t_Hy)$. The analogous formula for $c_a$ is $(\\rho_X^a(a)\\otimes t_Kx)\\otimes(1\\otimes t_Hy)$. The generator and sheafification uniqueness from Steps 2–3 proves all these equalities as sheaf maps. These are arbitrary semilinear transitions, not only quotient-unit transitions. Hence the levelwise isomorphisms and their inverses are strict-system morphisms.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, and Section 03EK tensor/bilinear universal property; agent calculation on the resulting normalized maps."
-   }
-  },
-  {
-   "text": "To verify the coefficient/tensor square, retain all scalar generators. On $b\\otimes(a\\otimes(x\\otimes y))$ its left route first gives $b i_X^{ab}(a)\\otimes(1\\otimes(x\\otimes y))$, then $b i_X^{ab}(a)\\otimes((1\\otimes x)\\otimes(1\\otimes y))$, and finally $(b i_X^{ab}(a)\\otimes(1\\otimes x))\\otimes(1\\otimes(1\\otimes y))$. The right route first applies $c_a$, then splits $b$ by $\\sigma_X$, then applies the two $\\kappa$ maps; it gives the identical last expression. Step 1 supplies precisely the normalized $c$ and $\\sigma$ used here. Balancing and sheafification uniqueness as in Steps 2–3, and the direct-sum universal property in Step 4, extend this calculation to the stated equality of chain maps. Setting the suppressed scalar $a=1$ yields the abbreviated value in the statement. Step 5 retains every sequence transition.",
-   "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, and Section 03EK tensor/bilinear universal property; agent calculation on the resulting normalized maps."
-   }
-  },
-  {
-   "text": "The unit maps have inverses $x\\mapsto1\\otimes x$. For $a=b$, $U_X$ sends $b\\otimes(a\\otimes x)$ to $ba\\otimes x$, while $F_a(U_Y)$ sends its $\\kappa^{aa}$ image to the same element. For $\\sigma^{aa}$, applying $U_W$ in both tensor factors to $(b\\otimes x)\\otimes(1\\otimes y)$ gives $bx\\otimes y$, the same as applying $U_W$ before the tensor comparison. Thus the identified maps are identities. The map $A_W$ is balanced: moving $r\\in R_W^1$ from $d$ to $b$ replaces both expressions by $d i_W^{12}(r)i_W^{12}(b)\\otimes x$; balancing over $R_W^0$ uses $i^{02}=i^{12}i^{01}$. Its inverse is $c\\otimes x\\mapsto c\\otimes(1\\otimes x)$, and the composites are identities by balancing. These are sheaf and chain maps by the same universal property and degree-zero calculation already given.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, and Section 03EK tensor/bilinear universal property; agent calculation on the resulting normalized maps."
-   }
-  },
-  {
-   "text": "For successive $\\kappa$, start with $d\\otimes(b\\otimes(a\\otimes x))$ in $S_X^{12}S_X^{01}F_0K$. The two successive comparisons, followed by $F_2(A_Y)$, give $d i_X^{12}(b)i_X^{02}(a)\\otimes(1\\otimes x)$ in $F_2S_Y^{02}K$. Applying $A_X$ first and then $\\kappa^{02}$ gives the same value because $i_X^{02}=i_X^{12}i_X^{01}$. For successive $\\sigma$, both routes on $d\\otimes(b\\otimes(x\\otimes y))$, after the two target $A_W$ maps, give $(d i_W^{12}(b)\\otimes x)\\otimes(1\\otimes y)$, exactly as asserted. The sheafification and direct-sum uniqueness used above proves these identities on whole complexes, and Step 5 makes them strict-system equations. Finally each displayed route is an isomorphism in strict systems. If two composites are equal, multiplying by their inverses gives equality of the inverse composites; this proves every equation in the reverse direction as well. No part of these calculations used a nonzero element, division, flatness, or a bound on degrees.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, and Section 03EK tensor/bilinear universal property; agent calculation on the resulting normalized maps."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
-  "def-pc-tensor-complex-sheaves"
+  "def-pur-cochain-coefficient-arrows",
+  "lem-pur-coefficient-comparisons-strict-totalization",
+  "lem-pur-coefficient-comparisons-unit-composition",
+  "def-pur-cochain-tensor-coherence-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EL, lemma-tensor-product-pullback, and Section 03EK tensor/bilinear universal property; agent calculation on the resulting normalized maps."
+  "place": "Tag 03EL and Section 03EK; K9 assembly of existing normalized scalar-association and tensor-comparison uniqueness, strict totalization, and unit/composition declarations."
  },
  "mathlib_searches": [
   {
@@ -241,49 +174,25 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-strict-coefficient-comparison-calculus",
   "worker": "stage1",
-  "summary": "Reused the existing normalized cochain tensor/pullback and coefficient-square theorem; supplied explicit balancing, inverse, sign, arbitrary semilinear transition, full-generator square, unit, and successive-extension calculations. Statement retained. No new nodes.",
-  "blueprint": "Realizes the coefficient-compatibility clause of def-weil-frobenius-coefficient-twists (current main order 2232: actions commute with finite reduction and scalar extension), through the strict-model input extracted via lem-pur-derived-pullback-tensor-iso and lem-pur-scalar-extension-tower-coherence.",
+  "summary": "Repair of the 7513-character proof under the human re-split instruction: three statement-only unsplit tasks carry original steps 1--3, 4--6 and 7--8 respectively; the unchanged item is assembled in three short steps. Original arguments are preserved verbatim and mapped to the tasks in report.md. No Lean edits or compilation.",
+  "blueprint": "Realizes the coefficient-compatibility clause of def-weil-frobenius-coefficient-twists (current main order 2232: actions commute with finite reduction and scalar extension), through the strict-model input extracted via lem-pur-derived-pullback-tensor-iso and lem-pur-scalar-extension-tower-coherence. The new extraction preserves each of the eight strict-model arguments rather than changing the unit route.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q70-1f79b5f5d",
-  "group": "Q70",
+  "reviewer": "NT-cc-Q114-f7602ed3c",
+  "group": "Q114",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-1f79b5f5d (reviewer sub-agent of L); spot-checked: First split of lem-pur-strict-coefficient-comparison-calculus. Q06 created this node in the re-split of lem-pur-scalar-extension-tower-coherence; it has no repair note of its own, so the re-split rules do not bind it. Changes against side-live: only proof, proof_deps, proof_origin, status, split_report and the mathlib_searches, which went from 8 to 13 records with the inherited ones kept; the statement and every other field are unchanged. 0 new nodes; proof_deps equals the union of the step uses. Not in route-pivot-dropped, no SGA cited. The cited nodes' 144-node closure does not contain the item, so there is no cycle. The only cited statement, lem-pur-cochain-pullback-tensor-coherence, is in the same unit (sk-def-purity-conv); the other four cited nodes are definitions or Mathlib leaves. All of the former parent steps 3-7 (verbatim in Q06 packet lines 81-110) reappear here in fuller form: kappa in Steps 1-2, sigma and signs in 3-4, the square in 6, transitions in 5, unit and composition in 7-8. I read every cited statement. The cochain lemma gives c, its formulas, and the composition isomorphism a_P with its scalar-multiplication formula (which also covers u^{-1} commuting with tensor). def-pur-sheaf-tensor-product makes the tensor the sheafified sectionwise tensor, and def-weil-presheaf-modules-sheafification gives unique factorisation through sheafification, so no plus construction is assumed (C4 fine). def-pc-tensor-complex-sheaves gives the direct-sum Tot with the (-1)^p sign. In Step 1 I checked both factorisations in the lemma's u∘v convention: their coefficient maps i_X φ^a and φ^b u^{-1}i_Y are equal by hypothesis. I recomputed by hand every generator trace in Steps 2-8. These were: the kappa and kappa^{-1} formulas and their balancing; sigma's balancing and inverse; the differential summands; transitions for arbitrary semilinear rho; the full square on b⊗(a⊗(x⊗y)), where both routes give (b i(a)⊗(1⊗x))⊗(1⊗(1⊗y)); the U unit identities; A and its inverse; and successive kappa and sigma, which give d i12(b) i02(a)⊗(1⊗x) and (d i12(b)⊗x)⊗(1⊗y). Edge cases checked: the zero ring, the non-flat map Z→Z/2, zero transitions, odd or negative p, unbounded complexes. Stacks 03EL (sites-modules:3649), 07A4 (sites-cohomology:3684) and 03CY were checked against the tags file. The Mathlib hits pullbackComp, pullback_assoc, extendScalarsComp and extendScalars_assoc were verified at the lines given; none is an exact match. Advisory 1: the item's kappa and square are the inverse form of the cochain lemma's coefficient clause; this overlap belongs to the node as Q06 created it, and Step 6 could cite that clause. Advisory 2: the proof is 7513 characters with 0 new nodes, all elementary; if the length policy is applied, the natural cut is kappa / sigma / units-composition."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-f7602ed3c (reviewer sub-agent of L); spot-checked: PASS (re-split note of 2026-10-21; old proof 7513 chars, 8 steps). The item statement, stmt_deps and lean record are byte-identical to live. Live still has the Q70 8-step version, so the delivery is not superseded, and the item is not in route-pivot-dropped. The parent proof is 3 assembly steps (1717 chars). The report quotes all 8 old steps verbatim (I checked each against the live node). Old steps map 1–3 → lem-pur-coefficient-comparisons-balanced-construction (κ and σ exist via the single-pullback factorisation; balancing, inverses, uniqueness through sheafification, naturality), 4–6 → -strict-totalization (both differential summands, direct-sum totals, arbitrary semilinear transitions for k, k⁻¹, s, s⁻¹ and c_a, the full-generator square and its inverse), 7–8 → -unit-composition (U and A with inverses, the four unit and successive equations and their inverses). No argument is dropped. The three nodes are of comparable size (statements 1.8k/2.8k/2.7k chars), none restates the whole item, and each is a strictly smaller conditional clause carrying its own generator calculation. I hand-checked: S_XF_0 and F_1S_Y are both R_X¹⊗_{u⁻¹R_Y⁰}u⁻¹M because i_Xφ⁰=φ¹u⁻¹i_Y; k∘k⁻¹ and s∘s⁻¹ are identities and s⁻¹ is balanced; the transition values use ρ¹i_m=i_nρ⁰ and φ compatibility; the arrow types in the square match and both routes give (b i(a)⊗(1⊗x))⊗(1⊗(1⊗y)); the successive κ value is d i¹²(b) i⁰²(a)⊗(1⊗x) via i⁰²=i¹²i⁰¹; the U laws hold. Edge cases checked: zero rings, the non-flat map Z→Z/2, zero transitions, odd or negative p, unbounded complexes. Each step's hypotheses come from the item or from earlier steps. Uniqueness goes degreewise through balanced-construction plus the direct sum in def-pc-tensor-complex-sheaves. Stacks 03EL (sites-modules:3649), 03EK and 07A4 (sites-cohomology:3684) checked against the tags file. No SGA, no cycle, form B fine. Advisory: lem-pur-module-tensor-extension-equation (and the coefficient clause of the cochain lemma) is the module-level inverse form of the strict-totalization square, so its worker may cite it; lem-sfb-scalar-inverse-image-tower-diagram is the φ=id case of successive κ; lem-trf-sequence-scalar-generator-interchange is the ℓ-adic specialisation. None of these is a duplicate. balanced-construction's 'identity-morphism normalized comparison' remark cites no node, but it is descriptive only. No fixes."
  },
  "lean": {
   "module": "Sheaf.SecSmoothPurity.StrictCoefficientComparisonCalculus",
   "declaration": "CategoryTheory.CochainPullback.StrictCoefficient.strictCoefficientComparisonCalculus",
   "declarations": [
-   "CategoryTheory.CochainPullback.StrictCoefficient.Index",
-   "CategoryTheory.CochainPullback.StrictCoefficient.total",
-   "CategoryTheory.CochainPullback.StrictCoefficient.totalMap",
-   "CategoryTheory.CochainPullback.StrictCoefficient.totalIso",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Diagram",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Diagram.ringed",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Diagram.square",
-   "CategoryTheory.CochainPullback.StrictCoefficient.scalarComp",
-   "CategoryTheory.CochainPullback.StrictCoefficient.scalarUnit",
-   "CategoryTheory.CochainPullback.StrictCoefficient.diagramComp",
-   "CategoryTheory.CochainPullback.StrictCoefficient.diagramUnit",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.Normalized",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.kappaC",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.sigmaRC",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.sigmaSC",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.pullArrow",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.tensorArrow",
-   "CategoryTheory.CochainPullback.StrictCoefficient.squareArrow",
-   "CategoryTheory.CochainPullback.StrictCoefficient.tensorArrowFor",
-   "CategoryTheory.CochainPullback.StrictCoefficient.TensorTransitionLaws",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.KappaTransitionLaws",
-   "CategoryTheory.CochainPullback.StrictCoefficient.TensorLaws",
-   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.Laws",
    "CategoryTheory.CochainPullback.StrictCoefficient.strictCoefficientComparisonCalculus"
   ],
   "file": "lean/Sheaf/SecSmoothPurity/StrictCoefficientComparisonCalculus.lean",
@@ -301,5 +210,27 @@
   "group": "NE",
   "result": "pass",
   "note": "Re-delivery after RETURN on 3e097a34a3cb (H2 only; that review accepted the mathematics in full). Diff against that snapshot: the Lean module only drops the unused Preord (public) and Sheafification (private) imports; no declaration, signature, docstring or proof changed; one sorry. stmt_deps now cites the definition node def-weil-pbc-system-scalar-coherence (owns systemScalarRestrictionUnit/Composition; live signatures match scalarComp/scalarUnit) instead of the theorem lem-pur-system-scalar-coherence, and adds def-pur-cochain-tensor-coherence-data and def-pur-cochain-coefficient-arrows, which own every project declaration used (Modules, Complex, RingedPullback, Comparison, pull, comparison, CoefficientSquare, IsScalarAssociation, extensionFunctor/Pullback/Adjunction, extend). Against side-live: only stmt_deps additions and the new lean record; statement, proof and proof_deps unchanged; module not yet live. Statement field verbatim; 25 declarations listed; report has Worker report, Second reading by NE and a repair section. No compile: no file changed; worker reports a clean compile (44.4/43.5 s)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-739fa",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261023T231751-L-3641686",
+  "kind": "interface",
+  "note": "independent cc review: 739f files vs PASSed 8063b files (diff -r: Lean+DAG identical, only change record Users row + report repair text); delivered modules vs current clones/live (only the packet's changes); Users table vs grep of live importers (4/4); both direct importers compiled against the delivered set"
  }
 }

@@ -1,0 +1,294 @@
+{
+ "id": "lem-sf-integral-point-dual-models",
+ "kind": "statement",
+ "title": "Integral point dual models, completeness and canonical reductions",
+ "statement": "Fix the global finite-field coefficient datum with prime $\\ell\\ne p$ [def-weil-finite-field-fiber], a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi_E$, and $A_n=R/\\varpi_E^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Use the derived category $D(R)$ of ordinary module complexes [def-weil-abstract-derived-category] and derived completeness for the ideal $(\\varpi_E)$ in the multiplication-tower sense [def-weil-point-derived-complete-module-complex]. Then $R[0]$ is derived complete. For every perfect $C\\in D(R)$ [def-pc-perfect-ring-complex], the derived dual $C^\\vee=R\\operatorname{Hom}_R(C,R)$ [def-pur-derived-internal-hom] belongs to $D^b_{\\mathrm{fg}}(R)$ [def-weil-point-fg-complete-complexes] and is perfect. More precisely, if $P^\\bullet$ is any bounded finite projective model of $C$, the signed complex with degree $i$ term $\\operatorname{Hom}_R(P^{-i},R)$ represents $C^\\vee$ and has finite projective terms. For every $n\\geq1$, with $-\\otimes_R^LA_n:D(R)\\to D(A_n)$ the derived change of rings [lem-pur-derived-change-of-rings] (complexes of $R$- and $A_n$-modules regarded as modules on the ringed sites with one object), the canonical derived-Hom coefficient comparison is an isomorphism in $D(A_n)$\n$$C^\\vee\\otimes_R^LA_n\\xrightarrow{\\sim}R\\operatorname{Hom}_{A_n}(C\\otimes_R^LA_n,A_n).$$\nIf all $C\\otimes_R^LA_n$ admit finite free models supported in one interval $[u,v]$, independent of $n$, all displayed dual reductions admit finite free models supported in $[-v,-u]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Proof Step 2: dual finite projective models, completeness and canonical reductions; returned Steps 8–10"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-point-derived-complete-module-complex",
+  "def-weil-point-fg-complete-complexes",
+  "lem-pur-derived-change-of-rings",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the coefficient DVR theorem to make R Noetherian and identify I=(varpi_E) with the coefficient maximal ideal. Apply finite_module_adic_complete_and_hom from [lem-pod-adic-limit-finite-modules] to the finite R-module R to obtain classical I-adic completeness. For every f in I and sequence b, form partial sums S(n,k)=sum_{j<k} f^j b(n+j). Their tails lie in I^k, so adic precompleteness supplies limits a(n). Separatedness and S(n,k+1)=b(n)+f*S(n+1,k) give a(n)-f*a(n+1)=b(n). For the kernel, iterate a(n)=f^k*a(n+k); separatedness forces a(n)=0. Thus the sequence difference map is a linear bijection. This includes f=0 and uses no arbitrary witness to define data.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091R, lemma-complete-derived-complete (geometric-series argument); coefficient valuation facts as cited"
+   }
+  },
+  {
+   "text": "Use the cohomology preservation of countable products in [lem-weil-derived-limit-existence]. In degree zero, conjugate the cohomology of the Roos transition arrow by the product comparison, the single-complex homology comparison, and ModuleCat.piIsoPi. Its coordinate formula is exactly the sequence difference map of Step 1. In other degrees the cohomology of every single complex is zero, so their product is zero. The transition is therefore an isomorphism on every cohomology module and hence in the derived category. The distinguished Roos triangle has zero first object. Quantify over all f in I and all derived limits to obtain [def-weil-point-derived-complete-module-complex].",
+   "uses": [
+    "lem-weil-derived-limit-existence",
+    "def-weil-derived-limit",
+    "def-weil-point-derived-complete-module-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 091R, lemma-complete-derived-complete; 091S, definition-derived-complete; derived.tex Tag 08TC, definition-derived-limit"
+   }
+  },
+  {
+   "text": "For an arbitrary bounded finite projective representative P of C, use [lem-pod-projective-hom-evaluation-model] with N=R[0]. Transport its derived Hom model along QP isomorphic to C and Q(R[0]) isomorphic to the tensor unit. Mathlib HomComplex.Cochain.toSingleEquiv identifies degree i with Hom_R(P^{-i},R), and delta_toSingleMk gives the differential (-1)^{i+1} precomposition with d_P. Module.dual_projective and Module.dual_finite give finite projective terms. The same equivalence transfers the vanishing bounds to [-b,-a]. For perfectness of the abstract dual, use the already proved upstream theorem DerivedCategory.IsPerfect.ihom_unit, whose bounded-projective definition is definitionally IsPerfectRingComplex in this localization universe.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "lem-pod-projective-hom-evaluation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex, proof; Tag 0A66, lemma-RHom-out-of-projective"
+   }
+  },
+  {
+   "text": "The upstream proved DerivedCategory.IsPerfect.finite_homology and exists_homologyConcentratedIn give finite homology and bounds a,b for the perfect dual of Step 3. Take the finite set Icc(a,b); outside it either i<a or b<i and cohomology vanishes. The finite-homology proof is the Noetherian submodule and quotient argument [lem-weil-pbc-noetherian-submodule-finite]. Apply [lem-sf-perfect-over-derived-complete-ring] to Step 2 to obtain completeness. These are exactly the three conjuncts of [def-weil-point-fg-complete-complexes].",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-sf-perfect-over-derived-complete-ring",
+    "def-weil-point-fg-complete-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex; Tag 091S, definition-derived-complete and closure properties; algebra.tex Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation"
+   }
+  },
+  {
+   "text": "Use the proved upstream perfect-implies-dualizable theorem [prop-pod-biduality-at-the-point]. Choose an existing braiding on D(R) and swap the right-dual exact pairing to a left-dual exact pairing. The generic proved Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing from [lem-fix-monoidal-dual-hom-comparison] makes the internal Hom comparison of any strong monoidal functor invertible at C and the unit. Compose it with the image under ihom of the monoidal unit comparison. By the definition of ihomUnitComparison this composite is precisely the canonical morphism in the statement. Apply this directly to the ordinary derived scalar reduction. No ringed-site presentation comparison and no flatness of the quotient is needed.",
+   "uses": [
+    "prop-pod-biduality-at-the-point",
+    "lem-fix-monoidal-dual-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A6A, lemma-base-change-RHom, clause (1) and the preceding definition of equation-base-change-RHom"
+   }
+  },
+  {
+   "text": "For each n, take the assumed bounded finite free representative P of the reduction. Apply the signed-dual model from Step 3 over the quotient coefficient ring, using that free modules are projective. The degree equivalence transfers Module.dual_finite and the free dual basis to finite free terms, and transfers the support bounds to [-b,-a]. Transport the model along the supplied QP isomorphism and then along the inverse of the canonical isomorphism from Step 5. This yields the required representative of the reduction of the original dual, with one common interval for all n.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "prop-pod-biduality-at-the-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI, lemma-dual-perfect-complex, proof and following remark-dual-perfect-complex; Tag 0A66, lemma-RHom-out-of-projective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-weil-derived-limit-existence",
+  "def-weil-derived-limit",
+  "def-weil-point-derived-complete-module-complex",
+  "def-pc-perfect-ring-complex",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-sf-perfect-over-derived-complete-ring",
+  "def-weil-point-fg-complete-complexes",
+  "prop-pod-biduality-at-the-point",
+  "lem-fix-monoidal-dual-hom-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Step 2, final paragraph on integral duals; Lean implementation using classical adic completeness, the Roos triangle, the signed Hom calculation and formal dualizable comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over the coefficient complete discrete valuation ring the derived dual of a perfect module complex is derived complete with bounded finite cohomology and its canonical reduction is the dual of the reduction",
+   "results": "8 hits: BDeRhamPlus, AdicCompletion.map_exact, instCommRingBDeRhamPlus, BDeRham, AdicCompletion.ofLinearEquiv, AdicCompletion.of_bijective_iff, AdicCompletion.of_bijective, AdicCompletion.congr. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"dual\"",
+   "results": "0 hits: . Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "([Pp]erfect.*[Dd]ual|[Dd]ual.*[Pp]erfect|[Dd]erivedComplete)",
+   "results": "14 hits: Mathlib/Geometry/Convex/Cone/Dual.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/Topology/Algebra/Module/PerfectPairing.lean, Mathlib/Topology/Algebra/Module/TopDualPairing.lean. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over the coefficient complete discrete valuation ring the derived dual of a perfect module complex is derived complete with bounded finite cohomology and its canonical reduction is the dual of the reduction",
+   "results": "8 hits: FGModuleCat.FGModuleCatDual, Module.dual_projective, Module.Basis.dualBasis, IsAdicComplete.mk, Module.dual_finite, Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField, Module.Dual.instIsReflecive, FGModuleCat.FGModuleCatDual_coe. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective complex duality over a derived complete DVR preserves completeness and canonical quotient base change with reversed uniform Tor bounds",
+   "results": "8 hits: CochainComplex.isKProjective_of_op, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.isZero_Tor_succ_of_projective, CochainComplex.isKProjective_of_projective, CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex, CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff, CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a complete discrete valuation ring the dual of a perfect complex is perfect and derived complete and derived duality commutes with quotient base change",
+   "results": "{\"t\": \"2026-10-22T07:04:59Z\", \"tool\": \"leanfinder\", \"query\": \"Over a complete discrete valuation ring the dual of a perfect complex is perfect and derived complete and derived duality commutes with quotient base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"LinearMap.IsPerfPair.dualEval\", \"instCommRingBDeRhamPlus\", \"LinearMap.flip.instIsPerfPair\", \"LinearMap.IsPerfPair.flip\", \"LinearMap.IsPerfPair.compl₁₂\", \"LinearMap.IsPerfectCompl.flip\"], \"digest\": \"6abb05d5c7152100\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module duals, period rings, projective-resolution Ext and general pairing results do not state this derived-complete complex assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"dual\"",
+   "results": "{\"t\": \"2026-10-22T07:06:01Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"dual\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module duals, period rings, projective-resolution Ext and general pairing results do not state this derived-complete complex assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived_complete|PerfectComplex.*dual|dual.*PerfectComplex",
+   "results": "{\"t\": \"2026-10-22T07:06:01Z\", \"tool\": \"grep\", \"query\": \"derivedComplete|derived_complete|PerfectComplex.*dual|dual.*PerfectComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module duals, period rings, projective-resolution Ext and general pairing results do not state this derived-complete complex assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived dual of a perfect complex over a complete discrete valuation ring is perfect and derived complete and commutes with reduction modulo powers of a uniformizer",
+   "results": "{\"t\": \"2026-10-22T07:06:02Z\", \"tool\": \"leansearch\", \"query\": \"The derived dual of a perfect complex over a complete discrete valuation ring is perfect and derived complete and commutes with reduction modulo powers of a uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.dual_projective\", \"LinearMap.IsPerfPair.dualEval\", \"LinearMap.IsPerfPair.flip\", \"instCommRingBDeRhamPlus\", \"Module.Dual.congr\", \"Module.Invertible.instDual\", \"FractionalIdeal.dual_involutive\", \"LinearMap.IsPerfectCompl.flip\"], \"digest\": \"5e3c03c86a8366dc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module duals, period rings, projective-resolution Ext and general pairing results do not state this derived-complete complex assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite projective resolutions compute derived Hom after any change of coefficient ring with signed dual degrees and complete coefficients",
+   "results": "{\"t\": \"2026-10-22T07:11:17Z\", \"tool\": \"leanfinder\", \"query\": \"Finite projective resolutions compute derived Hom after any change of coefficient ring with signed dual degrees and complete coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.isoExt\", \"Ext\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f\", \"instHasExtModuleCatOfSmall\", \"CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc\", \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CategoryTheory.ProjectiveResolution.mk₀_comp_extMk\"], \"digest\": \"535c9385e038d4c7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned module duals, period rings, projective-resolution Ext and general pairing results do not state this derived-complete complex assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pod-point-perfectness",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-point-perfectness",
+   "place": "Proof Step 2: dual finite projective models, completeness and canonical reductions; returned Steps 8–10",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-integral-point-dual-models",
+  "worker": "stage1",
+  "summary": "Checked the live source and blueprint Step 2, preserved the statement, and supplied six proof steps using existing generic DAG tools. Proved coefficient-ring derived completeness by an explicit geometric-series inverse to the Roos arrow, computed the signed projective dual, verified finite cohomology and completeness, applied canonical perfect-Hom base change, and reversed a uniform finite-free support interval. No new nodes.",
+  "blueprint": "thm-pod-point-perfectness, Step 2 final paragraph on integral duals; supplied the completeness and canonical-map details omitted there.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Coefficient-ring DVR and valuation properties; a generic local-field tool rather than a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-complete",
+    "why": "Metric completeness of the coefficient field used to sum the geometric series; no result of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Countable products of ordinary module complexes are represented termwise, needed to identify the Roos arrow."
+   },
+   {
+    "node": "def-weil-derived-limit",
+    "why": "The Roos triangle defining the multiplication-tower derived limit."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic bounded-above projective Hom model, applicable over both R and every A_n."
+   },
+   {
+    "node": "lem-zl-finite-projective-module-dual-pairing",
+    "why": "Finite projectivity of a module dual, used termwise; no sheaf duality theorem is substituted."
+   },
+   {
+    "node": "lem-pc-base-change-rhom-perfect",
+    "why": "The canonical derived-Hom change-of-rings morphism for a perfect first argument, valid for nonflat quotients."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-derived-limit-existence",
+  "def-weil-derived-limit",
+  "lem-pod-projective-hom-evaluation-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-ca7639675",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-ca7639675 (reviewer sub-agent of L); spot-checked: Read the whole item, the guidance files (coord/dag-sync.md is absent from the snapshot), the blueprint source thm-pod-point-perfectness.proof.md Step 2 (final paragraph on duals) and the cited Stacks tags 091R, 0A66, 07VI, 0A6A and 08TC. The delivery has no new nodes, and the statement is identical to its Q136 creation. All six steps are correct. (1) O_E is a principal ideal domain, hence Noetherian. The geometric series inverse of Δ_f converges because the absolute value is nonarchimedean and E is complete, and the kernel is zero; f=0 also works. (2) Countable products in D(R) are termwise (lem-weil-derived-limit-existence (2)), so the Roos middle arrow is Δ_f[0], an isomorphism, and every derived limit vanishes. So R[0] is derived complete. (3) I recomputed the dual model D^i=Hom(P^{-i},R) and its sign (-1)^{i+1}. Its RHom is the 0A5W internal Hom, which is def-pur on the one-object site. (4) Finitely generated cycles, bounded support, and derived completeness from lem-sf-perfect-over-derived-complete-ring with the Step 2 input. (5) lem-pc-base-change-rhom-perfect gives the canonical map for any ring map, plus unitor and symmetry. (6) Interval reversal; I checked a single term, the zero complex, n=1 and negative intervals. The citer thm-pod-point-perfectness step 4 uses exactly these clauses. Batch-5: lem-pod-projective-hom-evaluation-model is generic Hom-complex algebra, and its 27-node closure has no Poincaré-duality or trace-formula proof nodes; accepted. lem-trf-noetherian-submodule-finitely-presented is a generic Mathlib leaf, but I replaced it with the exact leaf lem-weil-pbc-noetherian-submodule-finite to clear the flag. FIX: (a) B3: the statement used the derived change of rings -⊗^L_R A_n with no citation. I added [lem-pur-derived-change-of-rings] to the statement and stmt_deps, the same convention as lem-pc-base-change-rhom-perfect; the meaning is unchanged and the graph stays acyclic. (b) In step 4, replaced the trace-formula leaf in uses, text and proof_deps, and dropped its tool_uses entry. The corrected file is fixes/dag/nodes/sec-six-functors/lem-sf-integral-point-dual-models.json; details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPointDualModels",
+  "declaration": "WeilConjectures.integral_point_dual_models",
+  "declarations": [
+   "CochainComplex.integralPointSignedDual",
+   "Padic.integralPointReduction",
+   "Padic.integralPointReductionMonoidal",
+   "WeilConjectures.integral_point_dual_models"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralPointDualModels.lean",
+  "statement": "theorem integral_point_dual_models (D : FiniteFieldDatum.{v}) (L : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic L.l) E] [FiniteDimensional (Padic L.l) E] : ModuleCat.IsDerivedComplete (Ideal.span ({Padic.coefficientExtensionUniformizer L.l E} : Set (Padic.coefficientExtensionIntegers L.l E))) (ModuleCat.of (Padic.coefficientExtensionIntegers L.l E) (Padic.coefficientExtensionIntegers L.l E)) ∧ ∀ C : DerivedCategory (ModuleCat.{u} (Padic.coefficientExtensionIntegers L.l E)), DerivedCategory.IsPerfectRingComplex C → DerivedCategory.pointFgComplete (Padic.coefficientExtensionIntegers L.l E) (Ideal.span ({Padic.coefficientExtensionUniformizer L.l E} : Set (Padic.coefficientExtensionIntegers L.l E))) ((ordinaryModuleDerivedInternalHom _).obj (op C, 𝟙_ _)) ∧ DerivedCategory.IsPerfectRingComplex ((ordinaryModuleDerivedInternalHom _).obj (op C, 𝟙_ _)) ∧ (∀ (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers L.l E)) ℤ) (a b : ℤ), P.IsStrictlyGE a → P.IsStrictlyLE b → (∀ i : ℤ, Module.Projective (Padic.coefficientExtensionIntegers L.l E) (P.X i) ∧ Module.Finite (Padic.coefficientExtensionIntegers L.l E) (P.X i)) → Nonempty (DerivedCategory.Q.obj P ≅ C) → Nonempty (DerivedCategory.Q.obj (CochainComplex.integralPointSignedDual P) ≅ (ordinaryModuleDerivedInternalHom _).obj (op C, 𝟙_ _)) ∧ (∀ i : ℤ, Module.Projective (Padic.coefficientExtensionIntegers L.l E) ((CochainComplex.integralPointSignedDual P).X i) ∧ Module.Finite (Padic.coefficientExtensionIntegers L.l E) ((CochainComplex.integralPointSignedDual P).X i)) ∧ ∃ e : ∀ i : ℤ, ((CochainComplex.integralPointSignedDual P).X i) ≃ₗ[ Padic.coefficientExtensionIntegers L.l E] ((P.X (-i)) →ₗ[Padic.coefficientExtensionIntegers L.l E] Padic.coefficientExtensionIntegers L.l E), ∀ (i : ℤ) (f : (CochainComplex.integralPointSignedDual P).X i), e (i + 1) ((CochainComplex.integralPointSignedDual P).d i (i + 1) f) = (i + 1).negOnePow • ((e i f).comp (P.d (-(i + 1)) (-i)).hom)) ∧ (∀ n : ℕ, IsIso (MonoidalClosed.ihomUnitComparison (Padic.integralPointReduction L.l E n) C)) ∧ ∀ a b : ℤ, (∀ n : ℕ, ∃ P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionRing L.l E (n + 1))) ℤ, P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free (Padic.coefficientExtensionRing L.l E (n + 1)) (P.X i) ∧ Module.Finite (Padic.coefficientExtensionRing L.l E (n + 1)) (P.X i)) ∧ Nonempty (DerivedCategory.Q.obj P ≅ (Padic.integralPointReduction L.l E n).obj C)) → ∀ n : ℕ, ∃ Q : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionRing L.l E (n + 1))) ℤ, Q.IsStrictlyGE (-b) ∧ Q.IsStrictlyLE (-a) ∧ (∀ i : ℤ, Module.Free (Padic.coefficientExtensionRing L.l E (n + 1)) (Q.X i) ∧ Module.Finite (Padic.coefficientExtensionRing L.l E (n + 1)) (Q.X i)) ∧ Nonempty (DerivedCategory.Q.obj Q ≅ (Padic.integralPointReduction L.l E n).obj ((ordinaryModuleDerivedInternalHom _).obj (op C, 𝟙_ _)))",
+  "branch": "sheaf-dag",
+  "by": "Q84",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86821e6ad",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Every node clause rendered: IsDerivedComplete span{ϖ} on R[0]; pointFgComplete and IsPerfectRingComplex of the dual ihom C 𝟙; the moduleHomComplex model for any bounded finite projective P, with sign (-1)^{i+1} from the def-sc differential; IsIso of the canonical ihomUnitComparison along reduction to A_{n+1} for all n; the uniform [a,b]→[-b,-a] free-model clause. Edge cases (C=0, a>b, A_1, independent universes u/v) covered; no extra hypotheses. Dependency modules: the internal Hom is an abbreviation for the existing derived closed internal Hom (superset re-export, consistent with Q08 coefficientDerivedDual). The OrdinaryDerivedChangeOfRings universal pair has a monoidal structure pinned by its tensor/unit normalizations on K-flat representatives, so the choice is canonical up to monoidal iso. Existing ordinary derived extensions have no monoidal structure at Category.{u}, so H13 does not apply. Records verbatim; dependency nodes change only in lean; stmt_deps gains landed def-sc-module-total-hom-complex (allowed); the live dependency records are unchanged since base. Docstrings, line widths and imports are OK; only theorems are sorry. Not compiled (no change); worker compile evidence clean. Advisory: the ∃e sign clause does not pin the sign by itself; fixed_by dropped on the lem-pur record; the second reading was by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261023T090703-L-690549",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-space-fppf-covering-calculus",
+ "kind": "statement",
+ "title": "Fppf covering calculus for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. For algebraic spaces over $S$ [def-trf-algebraic-space], call a set-indexed family $\\{f_i:X_i\\to X\\}_{i\\in I}$ fppf if each map is flat and locally of finite presentation on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation] and the family is jointly surjective on field-valued point classes [def-trf-algebraic-space-jointly-surjective-family]. Etale maps mean representable etale maps as in [def-trf-algebraic-space]. (1) Every jointly surjective etale family is fppf. (2) If $\\{f_i:X_i\\to X\\}_{i\\in I}$ is fppf and $v:X'\\to X$ is any algebraic-space morphism, then $\\{X'\\times_X X_i\\to X'\\}_{i\\in I}$ is fppf, using sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. (3) If $\\{f_i:X_i\\to X\\}_{i\\in I}$ is fppf and each $\\{e_{ik}:X_{ik}\\to X_i\\}_{k\\in K_i}$ is fppf, then $\\{f_ie_{ik}:X_{ik}\\to X\\}_{i\\in I,\\,k\\in K_i}$ is fppf. (4) For families all of whose sources and target are schemes, this definition is equivalent to being an fppf covering of schemes [def-pc-fppf-site]. Empty index sets are allowed precisely over the empty target, and empty covering members are allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-topologies.tex",
+  "place": "Tag 03Y8 (definition-fppf-covering), following scheme-comparison paragraph; Tag 0DFC (lemma-zariski-etale-smooth-syntomic-fppf), etale case; Tag 03Y9 (lemma-fppf), parts (2),(3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fppf-site",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For (1), fix a member $f_i:X_i\\to X$ of the jointly surjective representable etale family. Choose a surjective etale scheme atlas $V\\to X$ and a surjective etale scheme atlas $U\\to X_i\\times_XV$ [def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers]. Representability and etaleness of $f_i$ make $X_i\\times_XV\\to V$ an etale scheme map; composing with $U\\to X_i\\times_XV$ is etale by [lem-trf-space-representable-etale-scheme-tests]. By [def-weil-etale-morphism] this scheme map is flat and locally of finite presentation. Apply [lem-sfb-space-local-properties-chart-test] separately to these two properties to get them for $f_i$. Joint surjectivity is the assumed one, so the family is fppf.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-weil-etale-morphism",
+    "lem-sfb-space-local-properties-chart-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 0DFC (lemma-zariski-etale-smooth-syntomic-fppf), etale case; spaces-morphisms.tex Tags 0467 (lemma-etale-flat), 0468 (lemma-etale-locally-finite-presentation), 03MJ (lemma-local-source-target)."
+   }
+  },
+  {
+   "text": "For (2), fix $i$ and put $P_i=X'\\times_XX_i$. Choose an atlas $V\\to X$, an atlas $U\\to X_i\\times_XV$, and an atlas $V'\\to X'\\times_XV$ from schemes. All spaces and pullbacks exist by [def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers]. The scheme map $h:U\\to V$ is flat and locally of finite presentation by [lem-sfb-space-local-properties-chart-test]. The scheme $W=U\\times_VV'$ maps surjective etale to $P_i\\times_{X'}V'$: indeed $P_i\\times_{X'}V'=X_i\\times_XV'$, and this map is the base change of $U\\to X_i\\times_XV$ along $V'\\to V$. Also $V'\\to X'$ is surjective etale, by base change and composition [lem-trf-space-representable-etale-scheme-tests]. The map $W\\to V'$ is the scheme base change of $h$, so it is flat by [lem-weil-pbc-flat-morphism-base-change] and locally of finite presentation by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. The chart test applied to the target atlas $V'\\to X'$ and source atlas $W\\to P_i\\times_{X'}V'$ proves these two properties for $P_i\\to X'$. No assumption on $v$ was used.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 03Y9 (lemma-fppf), part (3), omitted proof expanded using spaces-morphisms.tex Tag 0AMM (remark-base-change-P) and scheme Tags 01U9 (lemma-base-change-flat), 01TS (lemma-base-change-finite-presentation)."
+   }
+  },
+  {
+   "text": "To finish (2), take a representative $x'\\in X'(\\operatorname{Spec}K)$. Apply [def-trf-algebraic-space-jointly-surjective-family] to its image in $X$ to obtain $i$, $K\\hookrightarrow L$, and $y\\in X_i(\\operatorname{Spec}L)$ with $f_i(y)=v(x')|_L$. The compatible pair $(x'|_L,y)$ is a section of the sheaf fibre product $P_i$ [lem-trf-space-fibre-products-etale-covers] and maps to $x'|_L$. This is exactly the extension lift required for joint surjectivity. Together with step 2 it proves (2).",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), compatible field representatives; spaces-topologies.tex Tag 03Y9 (lemma-fppf), part (3)."
+   }
+  },
+  {
+   "text": "For (3), fix $i,k$. Choose an atlas $V\\to X$, an atlas $U\\to X_i\\times_XV$, and an atlas $W\\to X_{ik}\\times_{X_i}U$ from schemes [def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers]. The composites $U\\to X_i$ and $W\\to X_{ik}$ are surjective etale: each is a composite of a chosen atlas and a base change of a surjective etale map [lem-trf-space-representable-etale-scheme-tests]. Applying [lem-sfb-space-local-properties-chart-test] to $f_i$ using $(U,V)$ and to $e_{ik}$ using $(W,U)$ shows that $U\\to V$ and $W\\to U$ are both flat and locally of finite presentation. Their composite $W\\to V$ is flat by [lem-pc-flat-compose] and locally of finite presentation by [lem-sbc-locally-finite-presentation-composition]. The commutative diagram $W\\to V$, $W\\to X_{ik}$, $V\\to X$ is a presentation of $f_ie_{ik}$ with surjective source chart. Use [lem-sfb-scheme-etale-source-target-properties] to check the two scheme properties are etale local on source-and-target, and [lem-sfb-space-etale-presentation-property-criterion], conditions (2) implies (1), to conclude that $f_ie_{ik}$ has both chartwise properties.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-pc-flat-compose",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-sfb-scheme-etale-source-target-properties",
+    "lem-sfb-space-etale-presentation-property-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 03Y9 (lemma-fppf), part (2), omitted proof expanded using spaces-morphisms.tex Tag 0AML (remark-composition-P); scheme Tags 01U7 (lemma-composition-flat), 01TR (lemma-composition-finite-presentation)."
+   }
+  },
+  {
+   "text": "For joint surjectivity in (3), start with $x\\in X(\\operatorname{Spec}K)$. The first covering gives $i$, $K\\hookrightarrow L$, and $y\\in X_i(\\operatorname{Spec}L)$ with $f_i(y)=x|_L$. The covering of $X_i$, applied to $y$, gives $k$, $L\\hookrightarrow M$, and $z\\in X_{ik}(\\operatorname{Spec}M)$ with $e_{ik}(z)=y|_M$. Naturality gives $(f_ie_{ik})(z)=x|_M$. Thus [def-trf-algebraic-space-jointly-surjective-family] holds for the composite family. Its index set is the dependent sum of the given set-indexed families, within [def-weil-size-convention]. Step 4 supplies its flatness and local finite presentation.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 03Y9 (lemma-fppf), part (2); spaces-properties.tex Tag 03BU (definition-points), extension representatives."
+   }
+  },
+  {
+   "text": "For (4), [lem-sfb-space-local-properties-chart-test] identifies each extended flatness and local-finite-presentation condition with the corresponding scheme condition. Scheme points agree naturally with field-valued point classes: [lem-weil-pbc-morphism-from-spec-field] writes each $t:\\operatorname{Spec}K\\to T$ uniquely as $j_x\\circ\\operatorname{Spec}(\\kappa(x)\\to K)$, where $x$ is its image, so $t$ has the same class as $j_x$. Representatives equal after a common extension have the same image point, hence different scheme points cannot have the same class. This identification commutes with scheme morphisms since both send representatives to their composites. Consequently the image-union condition of [def-trf-algebraic-space-jointly-surjective-family] is exactly ordinary joint surjectivity for schemes. With the two morphism properties already compared, the family satisfies precisely the covering definition in [def-pc-fppf-site], in both directions.",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 03Y8 (definition-fppf-covering), following scheme-comparison paragraph; spaces-properties.tex Tag 03BV (lemma-scheme-points), schemes.tex Tag 01J9 (lemma-characterize-points)."
+   }
+  },
+  {
+   "text": "Finally [def-trf-algebraic-space-jointly-surjective-family] makes the empty family jointly surjective exactly when there are no field-valued point classes in the target. An algebraic space with no such classes has no section over any nonempty scheme: a section would restrict along $j_x:\\operatorname{Spec}\\kappa(x)\\to T$ at any point $x\\in T$ [lem-weil-pbc-morphism-from-spec-field]. Over the empty scheme there is exactly one section, since [def-trf-algebraic-space] makes it an fppf sheaf and the empty family covers the empty scheme [def-pc-fppf-site]. Thus this space is the empty scheme's sheaf. Conversely that sheaf has no field-valued points. Maps with empty source satisfy the chartwise flatness and local-finite-presentation conditions vacuously, since any source scheme chart is empty, and the scheme definitions quantify over source points [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Such a member supplies no point lift and imposes no new condition. This proves both empty-family and empty-member assertions.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 03Y8 (definition-fppf-covering), empty image union; scheme comparison paragraph and definition of sheaf on empty covering."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-size-convention",
+  "lem-pc-flat-compose",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sfb-space-etale-presentation-property-criterion",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-topologies.tex",
+  "place": "Tags 03Y8, 0DFC, 03Y9(2),(3). The omitted proofs are supplied explicitly by compatible atlases as in spaces-morphisms.tex Tags 0AML, 0AMM, 03MJ and the field-representative argument of spaces-properties.tex Tag 03H4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fppfPretopology|fppfPrecoverage",
+   "results": "[grep] OK 5 hit(s). Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme precoverages, covers, or etale sites; none states the algebraic-space covering calculus. Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:40-42 defines fppfPrecoverage and its stability only for Scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat locally finitely presented jointly surjective families of algebraic spaces form a pretopology containing the etale coverings and restricting to the scheme fppf topology",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.Scheme.overPretopology; AlgebraicGeometry.Scheme.surjectiveFamiliesPretopology; AlgebraicGeometry.Scheme.smallPretopology; AlgebraicGeometry.Scheme.jointlySurjectivePretopology; AlgebraicGeometry.Scheme.JointlySurjective.mk; AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.zariskiPretopology",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme precoverages, covers, or etale sites; none states the algebraic-space covering calculus. Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:40-42 defines fppfPrecoverage and its stability only for Scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\", \"Pretopology\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme precoverages, covers, or etale sites; none states the algebraic-space covering calculus. Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:40-42 defines fppfPrecoverage and its stability only for Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fppf coverings of algebraic spaces are stable under composition and arbitrary base change, include etale coverings, and agree with fppf coverings of schemes",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.Cover; AlgebraicGeometry.Scheme.grothendieckTopology; AlgebraicGeometry.Scheme.precoverage; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme precoverages, covers, or etale sites; none states the algebraic-space covering calculus. Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:40-42 defines fppfPrecoverage and its stability only for Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change and transitivity axioms for fppf covering families on algebraic spaces including surjective etale scheme atlases",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.instOverXBind; AlgebraicGeometry.Scheme.JointlySurjective; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage; AlgebraicGeometry.Scheme.precoverage; AlgebraicGeometry.Scheme.Cover; AlgebraicGeometry.Scheme.Cover.Over",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme precoverages, covers, or etale sites; none states the algebraic-space covering calculus. Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:40-42 defines fppfPrecoverage and its stability only for Scheme."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|fppfPrecoverage",
+   "results": "{\"t\": \"2026-10-23T13:14:49Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|fppfPrecoverage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"2344da28384896e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme precoverages and generic precoverage axioms do not supply the algebraic-space chart arguments. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-42; it is on Scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fppf covering families of algebraic spaces are stable under base change and composition",
+   "results": "{\"t\": \"2026-10-23T13:14:49Z\", \"tool\": \"leansearch\", \"query\": \"Fppf covering families of algebraic spaces are stable under base change and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.IsStableUnderBaseChange.mk\", \"CategoryTheory.Precoverage.IsStableUnderComposition.mk\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"CategoryTheory.Precoverage.IsStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.overPretopology\", \"CategoryTheory.Precoverage.IsStableUnderComposition\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionPrecoverageOfIsStableUnderComposition\"], \"digest\": \"d62f01db3ccfa896\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme precoverages and generic precoverage axioms do not supply the algebraic-space chart arguments. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-42; it is on Scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fppf\", \"Precoverage\"",
+   "results": "{\"t\": \"2026-10-23T13:14:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"fppf\\\", \\\"Precoverage\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fppfPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeFppfPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderCompositionFppfPrecoverage\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_eq_inf\", \"AlgebraicGeometry.Scheme.fppfPrecoverage_le_fpqcPrecoverage\", \"AlgebraicGeometry.Scheme.zariskiPrecoverage_le_fppfPrecoverage\", \"AlgebraicGeometry.Scheme.Hom.singleton_mem_fppfPrecoverage\"], \"digest\": \"b5f108bc9899021e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme precoverages and generic precoverage axioms do not supply the algebraic-space chart arguments. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-42; it is on Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fppf coverings of algebraic spaces are stable under arbitrary base change and composition and contain representable etale covering families",
+   "results": "{\"t\": \"2026-10-23T13:14:50Z\", \"tool\": \"leanfinder\", \"query\": \"Fppf coverings of algebraic spaces are stable under arbitrary base change and composition and contain representable etale covering families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.grothendieckTopology\", \"AlgebraicGeometry.Scheme.pretopology\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.instOverXBind\", \"AlgebraicGeometry.Scheme.Cover\"], \"digest\": \"e7a077357d3a6945\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme precoverages and generic precoverage axioms do not supply the algebraic-space chart arguments. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-42; it is on Scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat locally finitely presented maps of algebraic spaces with jointly surjective point images form covering families and restrict to scheme fppf covers",
+   "results": "{\"t\": \"2026-10-23T13:14:51Z\", \"tool\": \"leanfinder\", \"query\": \"Flat locally finitely presented maps of algebraic spaces with jointly surjective point images form covering families and restrict to scheme fppf covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.JointlySurjective\", \"AlgebraicGeometry.Scheme.instJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.precoverage\", \"AlgebraicGeometry.Scheme.Cover\", \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"AlgebraicGeometry.Scheme.Hom.cover\", \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\"], \"digest\": \"7c857d8a9207b328\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme precoverages and generic precoverage axioms do not supply the algebraic-space chart arguments. Read Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:38-42; it is on Scheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-fppf-source-locality-transfer",
+  "date": "2026-10-23",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Finite-type calculus and representable compatibility for stacks. Input to the present split: The local-finite-type property satisfies the hypotheses of smooth chart comparison; this is algebraic-space descent, not stack finite-type composition. Supporting input: Scheme-to-space transfer used for source locality of locally finite type in Stacks 06FC(3), through 06EW and 06ER. Covering-calculus input to 06ER: pull back the given fppf family to U and compose with surjective etale scheme atlases (second paragraph of the proof).",
+   "via": [
+    "lem-sfb-space-fppf-source-locality-transfer",
+    "lem-sfb-space-lft-smooth-fpqc-locality",
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-fppf-covering-calculus",
+  "worker": "stage1",
+  "summary": "Proved the four covering clauses using existing scheme-property leaves and explicit compatible atlases, then field-extension lifts and scheme-point comparison. No new nodes and no statement change. Read the Stacks sources and every cited statement; expanded the proofs omitted by 03Y9. Added the existing precise chartwise-properties definition as a statement dependency.",
+  "blueprint": "The inherited from.place locates the covering-calculus input in the scheme-to-space source-locality transfer (Stacks 06ER), beneath det-thm-sf-ctf-stability-direct-images proof (3). Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3): proper/open direct-image assembly. This split supplies the recorded alteration-moduli supporting branch, without changing that route. blueprint_refs.py ancestor returns None, so inherited null from.node and via are preserved. Whole blueprint searches fppf, covering calculus, and algebraic spaces found no matching blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and base changes of etale atlases, used only to construct compatible scheme charts and pointwise compatible pairs."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic representable etale base change/composition and scheme comparison for atlas maps; it supplies no fppf-covering clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-d3b10a8c3",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-d3b10a8c3 (reviewer sub-agent of L); spot-checked: I read the whole item: 7 steps, no new nodes, statement identical to base. Source checked at spaces-topologies.tex 03Y8 plus its scheme-comparison paragraph, 0DFC and 03Y9(2),(3) (proof omitted there, so proof_origin=agent is right). Every step was checked against the cited statements. (1) étale ⇒ flat+lfp via def-weil-etale-morphism and the chart test on (V,U). (2) W=U×_V V' is the base change of U→X_i×_X V, so it is a surjective étale chart of P_i×_{X'}V'=X_i×_X V'; W→V' is flat by the flat-base-change leaf and lfp by qcqs-permanence clause (3); the joint lift is the pair (x'|_L,y) over the same L. (3) Chart test on (U,V) and (W,U), composition leaves, then presentation criterion (2)⇒(1) with étale-locality from lem-sfb-scheme-etale-source-target-properties. (4) |T|≅T via the Spec-field bijection; the image-union equivalence is part of the cited definition's statement. (7) Empty cases correct: F(∅) is a singleton from the empty fppf cover, and empty members are vacuous. No cycle; proof_deps equal the step uses. No duplicate: only lem-trf-fppf-covering-base-change, which is scheme-only. Batch-5 flags are all generic foundations, none a trace-formula or Poincaré-duality step: def-sfb-space-morphism-properties is a definition, the sfb chart and étale-local criteria are generic, and lem-trf-space-representable-etale-scheme-tests is a generic representable-étale calculus. The declared tool_uses (two sk-i-curve-zero space lemmas) are accepted as generic black boxes. Advisory: the added stmt_dep def-sfb-space-morphism-properties is not written in the statement text; harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFppfCoveringCalculus",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isFppfCover_of_isEtale",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsFppfCover",
+   "AlgebraicGeometry.AlgebraicSpace.isFppfCover_of_isEtale",
+   "AlgebraicGeometry.AlgebraicSpace.isFppfCover_pullback",
+   "AlgebraicGeometry.AlgebraicSpace.isFppfCover_comp",
+   "AlgebraicGeometry.AlgebraicSpace.isFppfCover_scheme_iff",
+   "AlgebraicGeometry.AlgebraicSpace.isFppfCover_empty_index_iff",
+   "AlgebraicGeometry.AlgebraicSpace.isFppfCover_remove_empty_member_iff"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFppfCoveringCalculus.lean",
+  "statement": "theorem isFppfCover_of_isEtale {S : Scheme.{u}} {I : Type w} {X : AlgebraicSpace S} {Xᵢ : I → AlgebraicSpace S} (f : ∀ i : I, Xᵢ i ⟶ X) (he : ∀ i : I, IsEtale (f i).hom.hom) (hs : IsJointlySurjective (fun i : I ↦ (f i).hom.hom)) : IsFppfCover f",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The family definition and six theorems jointly state all four numbered clauses and both empty-family/member assertions. Reuses MapIsFlat, MapIsLocallyOfFinitePresentation and IsJointlySurjective. Repair of H2/H12 in returned head fcdc0805625a: stmt_deps cites the existing definition owners def-trf-scheme-algebraic-space (schemeSpace) and def-sfb-space-sheaf-fibre-product (enlargedFibreProduct and enlargedFibreProductFst), instead of lem-trf-space-enlarged-etale-ringed-site-model. These are actual Yoneda sheaf and sheaf-pullback constructions; only their Prop-valued algebraic-space properties use lemmas. The Lean file and all mathematical statements are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-585465734",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-delivery of returned fcdc0805625a: Lean file SHA256 identical (b0a34e52…); the only node-record change replaces theorem stmt_dep lem-trf-space-enlarged-etale-ringed-site-model with def-trf-scheme-algebraic-space (owns schemeSpace) and def-sfb-space-sheaf-fibre-product (owns enlargedFibreProduct and enlargedFibreProductFst), as the return required; both are recorded as existing declarations in EnlargedEtaleRingedSite (publicly imported via SmallEnlargedEtaleModules) and both are on the 2026-10-23 16:15 UTC base. lean.statement matches the file word for word. Independent re-read: IsFppfCover (chart-wise flat and locally finitely presented, jointly surjective on field-valued points), clauses (1)-(4) (any base-change map, pair-indexed composite, two-way comparison with Mathlib fppf covering families) and both empty-case theorems match the node and Stacks 03Y8/0DFC/03Y9; no extra assumptions or universe restrictions; proofs are sorry only; docstrings present; no duplicate notion. No compile because nothing changed. Advisory: the owner module's docstrings still name the old blueprint node."
+ }
+}

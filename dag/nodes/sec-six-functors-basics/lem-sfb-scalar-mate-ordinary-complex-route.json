@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-scalar-mate-ordinary-complex-route",
+ "kind": "statement",
+ "title": "Ordinary scalar mate square on cochain complexes",
+ "statement": "Let $f:Z\\to T$ be a scheme morphism and $a:A\\to B$ a morphism of commutative ring sheaves on the small pro-etale site of $T$. Write $a_Z=f^{-1}a$, $F_A,F_B$ for ordinary inverse image on module sheaves, $E_a,E_{a_Z}$ for scalar extension and $r_T,r_Z$ for restriction [lem-sfb-derived-scalar-tensor-identification]. Let $b:F_A r_T\\cong r_Z F_B$ be the specified restriction comparison [lem-weil-pbc-ring-sheaf-change-adjunction]. Suppose $\\chi:F_B E_a\\cong E_{a_Z} F_A$ satisfies $F_A(\\eta_a(M));b_{E_aM};r_Z(\\chi_M)=\\eta_{a_Z}(F_AM)$ for every module $M$. Let $O_a(P):r_TE_a(P)\\cong\\operatorname{Tot}(P,C_a[0])$ be ordinaryComplexIso, with $C_a$ the restricted regular B-module, and let $j_a(P)$ be tensorScalarOrdinaryPullback, including its fixed single-complex coefficient map [lem-sfb-scalar-tensor-ordinary-pullback]. For every cochain complex $P$ of A-modules, $b^c_{E_a^cP};r_Z^c(\\chi^c_P);O_{a_Z}(F_A^cP)=F_A^c(O_a(P));j_a(P)$. Superscript c means applying the functor or natural transformation in each degree. There is no K-flatness, flat-term or boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback), together with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product). The cochain and single-complex compatibility is an explicit expansion of the canonical total tensor comparison."
+ },
+ "stmt_deps": [
+  "lem-sfb-derived-scalar-tensor-identification",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-scalar-tensor-ordinary-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved single-coefficient tensor pullback component formula. It identifies the prescribed total comparison, in each degree and through the source and target single-factor isomorphisms, with ordinary tensor pullback followed by the fixed coefficient map.",
+   "uses": [
+    "lem-sfb-tensor-scalar-ordinary-single-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), together with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product). The cochain and single-complex compatibility is an explicit expansion of the canonical total tensor comparison."
+   }
+  },
+  {
+   "text": "Apply the ordinary module scalar-mate route to chi and its unit equation in each degree. Conjugate the resulting cochain equality by the source and target single-complex isomorphisms that define ordinaryComplexIso.",
+   "uses": [
+    "lem-sfb-scalar-mate-ordinary-module-route"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), together with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product). The cochain and single-complex compatibility is an explicit expansion of the canonical total tensor comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-tensor-scalar-ordinary-single-pullback",
+  "lem-sfb-scalar-mate-ordinary-module-route"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback), together with sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product). The cochain and single-complex compatibility is an explicit expansion of the canonical total tensor comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "comparison of tensor pullback on cochain complexes with a coefficient in degree zero",
+   "results": "Eight tensor-unit and total-complex hits, including HomologicalComplex.HasTensor and rightUnitor. No sheaf scalar comparison. Project source has the more general mapBifunctorComparison_single2 theorem, which is used.",
+   "date": "2026-10-27",
+   "verdict": "Use the general proved source-library single-complex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.mapBifunctor",
+   "results": "Twelve hits for total bifunctors, their differentials, homogeneous inclusions and maps. The homogeneous inclusion API is used to identify inverse total pullback.",
+   "date": "2026-10-27",
+   "verdict": "Use the homogeneous-summand universal property."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison.*single|single.*mapBifunctorComparison",
+   "results": "No Mathlib hits. Project rg finds WeilConjectures.Algebra.Homology.BifunctorSingleComparison, whose proved single-factor comparison and coefficient naturality give the needed complex calculation.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing source-library comparison; do not rebuild single-complex totalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarMateOrdinaryTensorRoute",
+  "date": "2026-10-27",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof of sk-thm-sf-ctf-stability, direct-images paragraph (3), ordinary scalar and inverse-image tensor comparison: degreewise-to-total-complex step of lem-sfb-scalar-mate-ordinary-tensor-route.",
+   "via": [
+    "lem-sfb-scalar-mate-ordinary-tensor-route",
+    "lem-sfb-derived-scalar-pullback-tensor-normalization",
+    "lem-sfb-derived-scalar-projection-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarMateOrdinaryComplexRoute",
+  "file": "lean/Sheaf/Paper/ScalarMateOrdinaryComplexRoute.lean",
+  "declaration": "AlgebraicGeometry.Scheme.DerivedScalarMate.scalarMate_ordinary_complex_route",
+  "statement": "theorem scalarMate_ordinary_complex_route {Z T : Scheme.{u}} (f : Z ⟶ T)\n    {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)\n    (χ : proEtaleRingExtension a ⋙\n      proEtaleRingModulePullback f B (inverseRing f B) (Iso.refl _) ≅\n      proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _) ⋙\n        proEtaleRingExtension (inverseMap f a))\n    (hχ : ∀ M, (proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)).map\n        ((proEtaleRingExtensionAdjunction a).unit.app M) ≫\n      (proEtaleRingRestrictionPullbackInv f A B (inverseRing f A) (inverseRing f B)\n        a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)).app\n          ((proEtaleRingExtension a).obj M) ≫\n      (restriction (inverseMap f a)).map (χ.hom.app M) =\n      (proEtaleRingExtensionAdjunction (inverseMap f a)).unit.app\n        ((proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)).obj M))\n    (P : CochainComplex (proEtaleRingModules T A) ℤ) :\n    let FA := proEtaleRingModulePullback f A (inverseRing f A) (Iso.refl _)\n    let rZ := restriction (inverseMap f a)\n    let EP := ((proEtaleRingExtension a).mapHomologicalComplex (.up ℤ)).obj P\n    (NatTrans.mapHomologicalComplex\n      (proEtaleRingRestrictionPullbackInv f A B (inverseRing f A) (inverseRing f B)\n        a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)) (.up ℤ)).app EP ≫\n      (rZ.mapHomologicalComplex (.up ℤ)).map\n        ((NatIso.mapHomologicalComplex χ (.up ℤ)).hom.app P) ≫\n      (ordinaryComplexIso (inverseMap f a) ((FA.mapHomologicalComplex (.up ℤ)).obj P)).hom =\n    (FA.mapHomologicalComplex (.up ℤ)).map (ordinaryComplexIso a P).hom ≫\n      tensorScalarOrdinaryPullback f a P",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T123517-L-2314334",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T123517-L-2314334",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

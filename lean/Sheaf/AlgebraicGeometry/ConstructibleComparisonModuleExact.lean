@@ -5,7 +5,7 @@ Authors: SHEAF group J9
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+public import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparisonData
 import Sheaf.CategoryTheory.ModuleInverseImageUnitComparison
 import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf

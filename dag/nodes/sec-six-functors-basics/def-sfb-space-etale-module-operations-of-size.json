@@ -1,0 +1,158 @@
+{
+ "id": "def-sfb-space-etale-module-operations-of-size",
+ "kind": "definition",
+ "title": "Small-etale module operations in an ambient coefficient universe",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $X,Y$ algebraic spaces over $S$ [def-trf-algebraic-space], and $f:X\\to Y$. Use the small etale ring sheaves and the chart category, scalar maps and restriction diagrams of [def-trf-space-etale-module-functors]. For any ambient module universe $r$ containing the small chart site (Lean UnivLE.{u+1,r}), write ModulesOfSize(X) for all module sheaves [def-weil-sheaf-of-modules-category] with carriers in $r$, over the unchanged, unlifted small etale ring sheaf. This is an additional ambient-size interface; the existing scheme-universe Modules and all its canonical operations remain unchanged. Additive sheafification and its locally bijective criterion hold, and these categories have enough injectives [def-sp-injective-resolutions]. Define the normalized direct-image functor by the same compatible-section limit and every chart projection, retaining naturality in both test schemes and modules. Its limit universal property determines the functor up to unique projection-preserving natural isomorphism. Define tensor pullback as the left adjoint to this fixed direct image, retain its unit and counit and the formula $b\\otimes m=b\\pi(\\eta(m))$. For composable maps retain the unique direct-image composition isomorphism preserving every iterated chart projection and its adjunction mate on tensor pullbacks. Direct image and tensor pullback are additive, and tensor pullback preserves finite colimits. No arbitrary map or unconstrained functor is selected.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-etale-module-functors",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M8 compatible sections; spaces-properties.tex Tags 03G8, 03H7; sites-modules.tex Tag 03D7 adjunction, in an ambient coefficient universe."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Module sheaves on the big etale site of a fibred groupoid and the right adjoint of precomposition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[HasWeakSheafify K A] : (G.sheafPushforwardContinuous A J K).IsRightAdjoint\", \"doc\": \"Given a continuous functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the induced sheaf pushforward functor $ F_* $ is a right adjoint, provided th\"}\n  {\"name\": \"CategoryTheory.Sheaf.instIsRightAdjointSheafComposeOfHasWeakSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Adjunction\", \"type\": \"[HasWeakSheafify J D] [F.IsRightAdjoint] : (sheafCompose J F).IsRightAdjoint\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, a category $ \\\\mathcal{A} $, and a right adjoint functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, if weak sheafification exists for $ J $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[Functor.IsContinuous.{v₁} G J K] [HasWeakSheafify K A] : sheafPullback G A J K ⊣ G.sheafPushforwardContinuous A J K\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and assuming the existence of weak sheafifications for $ K $, this constructs\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)).IsRightAdjoint\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \": G.sheafPullback A J K ⊣ G.sheafPushforwardContinuous A J K\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, this defines an adjunction where the sheaf pullback functor (left adjoint) $ \"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pushforward.{v} φ).IsRightAdjoint\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match. Generic continuous-site sheaf pushforward and scheme restriction do not define the total big-etale module operations and chart-normalized coefficient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical coefficient comparison from tensor pullback of a small etale restriction to the restriction of a module on the big etale site of a stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.map_π_eq\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat]\\n  [inst_3 : J.HasSheafCompose (CategoryTheory.forg\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and a colimit-preserving functor $F$ between module categories, the generator morphism of the pr\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).l =\\n    (AlgebraicGeometry.Scheme.Modules.pullback f.as.unop).toCatHom\", \"doc\": \"For any morphism $f: X \\to Y$ between schemes, the left component of the pseudofunctor map applied to $f$ in the bicategory of module adjunctions equals the categorical morphism induced by the pullback\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (S' ⟶ R) → PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))\", \"doc\": \"A presheaf of modules constructed by assigning to each object $X$ in the opposite category the module of Kähler differentials $\\\\Omega_{\\\\phi'(X)/R(X)}$, and to each morphism $f: X \\\\to Y$ the $R(Y)$-lin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match. Generic continuous-site sheaf pushforward and scheme restriction do not define the total big-etale module operations and chart-normalized coefficient comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"sheaf\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match. Generic continuous-site sheaf pushforward and scheme restriction do not define the total big-etale module operations and chart-normalized coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "moduliBigEtale|moduliSmallEtaleTensorComparison|representable.*cohomology",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match. Generic continuous-site sheaf pushforward and scheme restriction do not define the total big-etale module operations and chart-normalized coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg in DAG, Mathlib, WeilConjectures and Sheaf: ModulesOfSize|moduliSmallEtaleRestriction|moduliSmallEtaleTensorComparison; Q22 reviewed big-etale functors source",
+   "results": "Q24 supplies the scheme-universe small-site module interface. Q22 supplies big-etale topology, canonically lifted rings, module category and precomposition/right adjoint; these are reused and retained. No existing ambient-size small-site direct-image interface or normalized restriction/coefficient interface was found.",
+   "date": "2026-10-24",
+   "verdict": "Reuse Q22/Q24; create only missing ambient small-site and restriction notions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-representable-higher-image-restriction",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Cohomology of the representable derived restriction comparison. Supporting interface for the canonical higher-image restriction.",
+   "via": [
+    "lem-sfb-stack-representable-higher-image-restriction",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceModuleOperationsOfSize",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.ModuleDirectImageModelOfSize",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.ModulesOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleOfSize_hasSheafify",
+   "AlgebraicGeometry.AlgebraicSpace.moduleOfSize_wEqualsLocallyBijective",
+   "AlgebraicGeometry.AlgebraicSpace.moduleOfSize_enoughInjectives",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartMap_smulOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartMapOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartMap_idOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartMap_compOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartDiagramOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.ModuleDirectImageModelOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageModel_nonemptyOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageModel_uniqueOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageModelOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImage_isRightAdjointOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorPullbackOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorAdjunctionOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorSectionOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageOfSize_additive",
+   "AlgebraicGeometry.AlgebraicSpace.moduleCompChart",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageCompOfSize_exists",
+   "AlgebraicGeometry.AlgebraicSpace.moduleDirectImageCompOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorCompOfSize",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorPullbackOfSize_additive",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTensorPullbackOfSize_finiteColimits"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceModuleOperationsOfSize.lean",
+  "statement": "structure ModuleDirectImageModelOfSize (f : X ⟶ Y)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b36e3bbee",
+  "group": "Q01",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b36e3bbee",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Rebase of 29b5 (PASS 10-24, sent back at landing because the Q22 node had landed via Q57 2122). All four Lean modules and both new node records are byte-identical to 29b5. Only changes: the Q22 node now has the live reviewed/reviewed_lean records and a reworded lean.note; the item has a reworded lean.note. Q22 node differs from live only in lean (live declaration list kept as prefix plus 19 OfSize names). Q22 module keeps its 185 live lines except two added set_option lines and universe line extended with v' w' r. Base 03f31082 contains the Q22 node, so the merge tool's new-node refusal no longer applies. New nodes absent on base and live; no new declaration name exists in live lean/Sheaf; touched paths unchanged on tip since base. Math reread: IsIso of rightDerivedBaseChange of the ∃!-pinned comparison for all i and M; RepresentableEtaleTest cartesian with an existence theorem; flat clause c_b≫θ_P = b^*θ_Q≫β_i≫R^i(c_a) with only Flat b; no qc/qcqs. Per-degree companion of the separate derived node. Coefficient universe (max..r)+1 forced and not a silent restriction. Report has a real worker report and independent second reading. Nothing compiled (no file changed). Advisory: NY e45f also appends to the Q22 module and record; whichever lands second needs both appends merged (no shared names).; reverted the delivery's change of existing node(s) def-sfb-stack-big-etale-module-functors (--revert-nodes; kept as on sheaf-dag)"
+ }
+}

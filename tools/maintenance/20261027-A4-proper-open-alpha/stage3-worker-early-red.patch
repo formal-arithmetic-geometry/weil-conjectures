@@ -1,0 +1,21 @@
+--- a/briefs/batch1/stage3-worker.md
++++ b/briefs/batch1/stage3-worker.md
+@@ -6,6 +6,18 @@
+ report the actual hole count, including zero; closing another hole is not required. A compiling
+ no-op or a rebase alone does not repair the definition. The normal change-record, consumer,
+ node and independent-reader checks still apply.
++
++Before treating a zero-`sorry` item as already complete, read its current row in
++`coord/queue.tsv` and `coord/build-errors/ITEM.txt`, if present. A stage-3 `rework`
++row can be a repair from the running global build, before quarantine creates a
++row in `coord/rework.tsv`. The queue's reason is the assigned defect even if the
++module was previously landed and has no holes. Read these current server records
++over ssh if the shared snapshot does not have them. A successful compile against
++published artifacts does not clear a failure involving newer dependencies. For
++an import collision, inspect the current sources of both named modules, repair
++their declaration names and callers together, and compile the affected dependency
++chain before the item, one file at a time in import order. Keep the DAG's Lean
++declaration records consistent with any rename.
+ 
+ ## The principle of this stage, before anything else: prove from the targets downward, and prune
+ 

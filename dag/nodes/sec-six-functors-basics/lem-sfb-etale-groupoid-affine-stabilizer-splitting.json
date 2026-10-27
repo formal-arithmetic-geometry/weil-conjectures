@@ -1,0 +1,394 @@
+{
+ "id": "lem-sfb-etale-groupoid-affine-stabilizer-splitting",
+ "kind": "statement",
+ "title": "Affine etale splitting of a scheme groupoid at a finite stabilizer",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with universes [def-weil-size-convention], and let $(V,R,s,t,e,i,c)$ be a groupoid scheme over $S$ [def-a1-groupoid-scheme]. Suppose $V$ is affine, $s,t:R\\to V$ are separated, flat, locally of finite presentation and locally quasi-finite [def-weil-flat-morphism, def-sbc-locally-finite-presentation, pqf-def-quasifinite]. Separated means closed-immersion diagonal [def-weil-closed-immersion]. Let $v\\in V$ and suppose the stabilizer fibre $G_v$ is finite over $\\kappa(v)$ [def-weil-finite-integral-morphism, def-weil-residue-field]. Here $G=R\\times_{V\\times_S V,\\Delta_V}V$, so its test points are the arrows with equal source and target. There are an affine $S$-scheme $V'$, an etale map $h:V'\\to V$ [def-weil-etale-morphism], and a point $v'\\in V'$ over $v$ inducing an isomorphism $\\kappa(v)\\simeq\\kappa(v')$, with the following property. Put $R'=R\\times_{V\\times_S V}(V'\\times_S V')$, with the induced groupoid operations and projections $s',t'$ [def-pc-fibre-product]. There is an open subscheme $P\\subseteq R'$ containing the image of the unit and stable under inverse and composition, giving a groupoid $(V',P)$ with the same objects. The restrictions $s'|_P,t'|_P:P\\to V'$ are finite locally free [def-pc-finite-locally-free]. Let $G'=R'\\times_{V'\\times_SV',\\Delta_{V'}}V'$ be the stabilizer of $R'$. Every point of the stabilizer fibre $G'_{v'}$ belongs to the open $P$; equivalently $G'_{v'}\\times_{R'}P=G'_{v'}$ as schemes. An open subscheme has the restricted structure sheaf [def-weil-open-immersion]; affine means isomorphic to the spectrum of a commutative ring.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 0DTE (lemma-splitting-affine-scheme), in Situation 0DTB (situation-splitting), with Definition 04RK (definition-split-at-point), part (2). Finite flat lfp is finite locally free by morphisms.tex Tag 02KB (lemma-finite-flat). We assume local quasi-finiteness everywhere, which implies its required quasi-finiteness along the stabilizer fibre."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-groupoid-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-quasifinite",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-residue-field",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $k=\\kappa(v)$ and $F=R\\times_{s,V}\\operatorname{Spec}k$. By [lem-weil-pbc-separated-lqf-base-change] its structure map is locally quasi-finite, hence locally of finite type by [lem-weil-pbc-lqf-locally-finite-type]. Applying [lem-weil-pbc-quasi-finite-at-point-isolated] to this map shows every singleton of $F$ is open. Thus $F$ is discrete, has no strict specialization chains, and has dimension at most zero. Apply [lem-sfb-zero-dimensional-field-space-components] to the scheme $F$: its one-point clopen components are spectra of finite-dimensional local Artinian $k$-algebras. The image $E$ of $|G_v|\\to|F|$ is finite by [lem-weil-pbc-finite-closed-map-finite-fibres], applied to the finite map $G_v\\to\\operatorname{Spec}k$. Let $Z_v$ be the union of the components indexed by $E$. It is clopen and finite over $k$, using [lem-weil-pbc-finite-coproduct] finitely many times. The inclusion $G_v\\to F$ factors through $Z_v$ because its points lie there, and $e(v)$ lies there. This factorization is surjective on points by the definition of $E$.",
+   "uses": [
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-sfb-zero-dimensional-field-space-components",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-finite-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0DTC (lemma-splitting), second paragraph, the decomposition F_v=Z_v disjoint union Rest; justification by morphisms.tex Tag 01TH and varieties.tex Tag 06LH."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-scheme-groupoid-universal-finite-part] to $(V,R)$. Its hypotheses are precisely the separatedness, flatness and local finite presentation assumed here. Obtain the separated etale scheme $g:M\\to V$, its universal finite locally free groupoid $(M,Q)$, and the open groupoid immersion $j:Q\\hookrightarrow R_M$. The pair $(v:\\operatorname{Spec}k\\to V,Z_v)$ defines $a:\\operatorname{Spec}k\\to M$. Denote its image by $w$. Then $g(w)=v$. The induced field maps $k\\to\\kappa(w)\\to k$ compose to the identity, so the first map is an isomorphism: the second is an injective field homomorphism fixing $k$, and its image already contains all of $k$. Thus $(M,w)$ is a pointed etale neighbourhood with unchanged residue field. The open $j(Q)$ contains the unit and is stable under inverse and composition, since $j$ is a morphism of groupoids identical on objects.",
+   "uses": [
+    "lem-sfb-scheme-groupoid-universal-finite-part"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tags 0DTC (lemma-splitting), first two paragraphs, and 0DTD (lemma-splitting-scheme), scheme representability and the point (v,Z_v)."
+   }
+  },
+  {
+   "text": "We check containment of the whole stabilizer fibre at $w$, not merely of the unit. Represent a point of that fibre by a field-valued loop $z'$ at $a_K$, for an extension $K/k$; let $z\\in G_v(K)$ be its image. The map $G_v\\to Z_v$ of step 1 is surjective, so [lem-weil-pbc-surjective-base-change] says $|(G_v)_K|=|(Z_v)_K|$ inside $|F_K|$. Right translation $r\\mapsto c(r,i(z))$ is an automorphism of $F_K$, with inverse $r\\mapsto c(r,z)$ by the groupoid laws [def-a1-groupoid-scheme]. It maps the subgroup scheme $(G_v)_K$ onto itself. Consequently it preserves the support of the open subscheme $(Z_v)_K$, and therefore preserves that open subscheme with its restricted structure sheaf [def-weil-open-immersion]. The triple $(a_K,(Z_v)_K,z)$ is a $K$-point of $Q$: $(z,1_K)$ factors through $(G_v)_K$, hence through $(Z_v)_K$ by the factorization of step 1 base changed to $K$. The target formula in [lem-sfb-scheme-groupoid-universal-finite-part] now gives $t_Q(a_K,(Z_v)_K,z)=a_K$. This triple has source $a_K$ too. Its image under $j$ has exactly the same arrow $z$ and endpoints as $z'$, hence equals $z'$ by the fibre-product universal property [def-pc-fibre-product]. Every stabilizer point is therefore in $j(Q)$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "def-a1-groupoid-scheme",
+    "def-weil-open-immersion",
+    "lem-sfb-scheme-groupoid-universal-finite-part",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0DTC (lemma-splitting), final paragraph, with the translation-invariance verification for the triple made explicit."
+   }
+  },
+  {
+   "text": "Since $g:M\\to V$ is etale it is unramified [def-weil-etale-morphism], so [lem-weil-pbc-unramified-quasi-finite-at-points] makes it locally quasi-finite. The finite locally free source $s_Q:Q\\to M$ is finite by [def-pc-finite-locally-free], so [lem-weil-pbc-finite-closed-map-finite-fibres] makes the orbit $O=t_Q(s_Q^{-1}(w))$ finite. Apply [lem-sfb-separated-lqf-affine-finite-set] to the separated locally quasi-finite map $g$, its affine target $V$, and $O$. It gives an affine open containing $O$. Applying [lem-sfb-locally-free-groupoid-invariant-affine] to $(M,Q)$ and $w$ then gives an affine open $B\\subseteq M$ containing $O$ and satisfying $s_Q^{-1}(B)=t_Q^{-1}(B)$. In particular $w\\in B$, since the unit arrow places $w$ in its orbit.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sfb-separated-lqf-affine-finite-set",
+    "lem-sfb-locally-free-groupoid-invariant-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0DTE (lemma-splitting-affine-scheme) through the proof of Tag 04RZ (lemma-strong-splitting-affine-scheme), invariant affine shrinking; more-morphisms.tex Tag 07S0 and groupoids.tex Tag 03JE."
+   }
+  },
+  {
+   "text": "Set $V'=B$, $v'=w$, and $h=g|_B$. The map $h$ is etale by [lem-weil-pbc-etale-composition-cancellation], since an open immersion is etale. Set $Q_B=s_Q^{-1}(B)=t_Q^{-1}(B)$. By [lem-a1-groupoid-invariant-open-restriction-degree] the groupoid operations restrict to $(B,Q_B)$. Its two projections are the base changes of $s_Q,t_Q$ along $B\\hookrightarrow M$: the equality of the inverse images ensures that restriction of both endpoints removes no additional arrows. They remain finite by [lem-weil-pbc-finite-morphism-permanence], flat by [lem-weil-pbc-flat-morphism-base-change], and locally of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence](3). Thus they are finite locally free by the exact definition [def-pc-finite-locally-free], without any Noetherian hypothesis.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-a1-groupoid-invariant-open-restriction-degree",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0DTE through Tag 04RZ, final paragraph: invariant restriction is a base change on each finite projection; morphisms.tex Tags 02KB, 01WG, 01UB, 01TS."
+   }
+  },
+  {
+   "text": "The fibre-product universal property [def-pc-fibre-product] identifies $R'=R|_B$ with $B\\times_M R_M\\times_M B$ by retaining the arrow in $R$ and its two endpoints in $B$. Pull back $j:Q\\hookrightarrow R_M$ along $R'\\to R_M$. By [lem-weil-pbc-open-immersion-base-change] its image $P\\subseteq R'$ is open. Its domain is $Q_B$, because $B$ is $Q$-invariant; hence $P$ has the finite locally free projections of step 5. The restricted groupoid morphism is identical on objects, so $P$ contains the full unit and is stable under inverse and composition. A loop at $v'$ in $R'$ is exactly a loop at $w$ in $R_M$ with both endpoints in $B$. Step 3 places every such point in $Q$, and therefore in $Q_B$. Thus the open inverse image of $P$ in $G'_{v'}$ is the whole underlying space. An open subscheme with that underlying space has the entire restricted structure sheaf [def-weil-open-immersion], so $G'_{v'}\\times_{R'}P=G'_{v'}$ as schemes. Open restriction changes neither the point nor its residue field; all requested properties now hold.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0DTE through Tag 04RZ, final paragraph with splitting in place of strong splitting; preservation of stabilizer containment and the scheme equality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "lem-a1-groupoid-invariant-open-restriction-degree",
+  "lem-sfb-locally-free-groupoid-invariant-affine",
+  "lem-sfb-scheme-groupoid-universal-finite-part",
+  "lem-sfb-separated-lqf-affine-finite-set",
+  "lem-sfb-zero-dimensional-field-space-components",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-coproduct",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tags 0DTE, 04RZ, 0DTD and 0DTC; supporting finite-part construction 04RU, 04RI, 04RR, and invariant affine lemma 03JE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine groupoid scheme with separated etale source and target and finite stabilizer at a point has after elementary etale localization an open finite subgroupoid containing that stabilizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.nhds_one_has_basis_stabilizers\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  (nhds 1).HasBasis (fun x => True) fun X => ↑(MulAction.stabilizer (CategoryTheory.Aut F) X.pt)\", \"doc\": \"The neighborhood filter at the identity element of the automorphism group $\\\\mathrm{Aut}(F)$ (for a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$ from a pre-Galois category $\\\\mathcal{C}$) has a basis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splitting a flat locally finitely presented locally quasi finite separated groupoid near a finite stabilizer by an affine etale neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*split|split.*groupoid|subgroupoid.*etale|etale.*subgroupoid",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/EpiMono.lean\", \"line\": \"157\", \"text\": \"noncomputable def Groupoid.ofTruncSplitMono\"}\n  {\"file\": \"Mathlib/CategoryTheory/EpiMono.lean\", \"line\": \"158\", \"text\": \"    (all_split_mono : ∀ {X Y : C} (f : X ⟶ Y), Trunc (IsSplitMono f)) : Groupoid.{v₁} C := by\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale localization of a scheme groupoid admits a finite open subgroupoid containing the stabilizer fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"CategoryTheory.Localization.groupoid\", \"module\": \"Mathlib.CategoryTheory.Localization.Predicate\", \"type\": \": Groupoid (⊤ : MorphismProperty C).Localization\", \"doc\": \"For any category $\\\\mathcal{C}$, the localization of $\\\\mathcal{C}$ at the top morphism property (which includes all morphisms) forms a groupoid. This means every morphism in the localized category is a\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ etaleLocus R A ↔ Algebra.Etale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and only if the localization $\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": IsOpen (etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"Topology.IsOpenEmbedding.singleton_hasGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"{f : α → H} (h : IsOpenEmbedding f) (G : StructureGroupoid H) [ClosedUnderRestriction G] :\\n  @HasGroupoid _ _ _ _ h.singletonChartedSpace G\", \"doc\": \"Given a topological space $\\\\alpha$ and a model space $H$, if $f : \\\\alpha \\\\to H$ is an open embedding and $G$ is a structure groupoid on $H$ closed under restriction, then the charted space structure o\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme etaleness/separation, ordinary subgroupoids, ring etale loci and topological stabilizers do not assert this algebraic-stack or scheme-groupoid result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme groupoid with separated flat locally quasi finite projections has an etale local finite open subgroupoid containing the stabilizer fibre",
+   "results": {
+    "t": "2026-10-23T13:09:56Z",
+    "tool": "leanfinder",
+    "query": "An affine scheme groupoid with separated flat locally quasi finite projections has an etale local finite open subgroupoid containing the stabilizer fibre",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.Scheme.instCategoryEtale"
+    ],
+    "digest": "09332ed7bb83b81b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no scheme-groupoid splitting or finite stabilizer preservation theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*split|split.*groupoid|finitePartGroupoid",
+   "results": {
+    "t": "2026-10-23T13:11:41Z",
+    "tool": "grep",
+    "query": "groupoid.*split|split.*groupoid|finitePartGroupoid",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/EpiMono.lean",
+     "Mathlib/CategoryTheory/EpiMono.lean"
+    ],
+    "digest": "9e69522b0fc9024f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no scheme-groupoid splitting or finite stabilizer preservation theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine groupoid scheme admits a pointed etale neighborhood with finite flat open subgroupoid containing its stabilizer",
+   "results": {
+    "t": "2026-10-23T13:11:42Z",
+    "tool": "leansearch",
+    "query": "An affine groupoid scheme admits a pointed etale neighborhood with finite flat open subgroupoid containing its stabilizer",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_isAffineOpen_mem_and_subset",
+     "AlgebraicGeometry.Scheme.local_affine",
+     "AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset",
+     "AlgebraicGeometry.IsAffineOpen",
+     "MulAction.stabilizer",
+     "AlgebraicGeometry.isAffineOpen_top",
+     "AlgebraicGeometry.Scheme.affineOpens",
+     "AddAction.stabilizer"
+    ],
+    "digest": "7879a341f97c65b2"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no scheme-groupoid splitting or finite stabilizer preservation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsEtale\"",
+   "results": {
+    "t": "2026-10-23T13:11:42Z",
+    "tool": "loogle",
+    "query": "\"Groupoid\", \"IsEtale\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no scheme-groupoid splitting or finite stabilizer preservation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme groupoid splitting after etale localization at a finite stabilizer using the finite part of the source morphism",
+   "results": {
+    "t": "2026-10-23T13:30:16Z",
+    "tool": "leanfinder",
+    "query": "Affine scheme groupoid splitting after etale localization at a finite stabilizer using the finite part of the source morphism",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+     "AlgebraicGeometry.Scheme.etaleTopology",
+     "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology"
+    ],
+    "digest": "168cc97336b85314"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no scheme-groupoid splitting or finite stabilizer preservation theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+  "date": "2026-10-23",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Pointed finite-groupoid etale neighbourhoods of finite-inertia DM stacks. Substep: Tag 0DU4 application of the affine scheme groupoid splitting lemma; this node gives no stack quotient or neighbourhood of a stack.",
+   "via": [
+    "lem-sfb-dm-pointed-finite-groupoid-neighbourhood",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-groupoid-affine-stabilizer-splitting",
+  "worker": "stage1",
+  "summary": "Constructed the stabilizer-supported finite clopen source fibre, used the universal finite-part scheme/groupoid, verified translation invariance and containment of every stabilizer point, and shrank along an invariant affine open. One new statement-only universal construction; all remaining non-elementary inputs reuse existing nodes. Statement unchanged.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli support chain, at the finite-inertia groupoid splitting prerequisite (Stacks 0DU4 uses 0DTE). The latest blueprint direct-images proof has replaced the older alteration discussion by proper/open preservation; this item retains its assigned historical support route and does not edit the chapter or unit.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-groupoid-invariant-open-restriction-degree",
+    "why": "Generic scheme/groupoid tool, used only for its stated Restriction of a groupoid to an invariant open and transport of degree. No node of this unit replaces this input; the finite-part splitting and invariant-affine route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic scheme/groupoid tool, used only for its stated A locally quasi-finite morphism is locally of finite type (Stacks, remark after 01TD). No node of this unit replaces this input; the finite-part splitting and invariant-affine route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic scheme/groupoid tool, used only for its stated Quasi-finite at a point implies isolated in the fibre. No node of this unit replaces this input; the finite-part splitting and invariant-affine route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Generic scheme/groupoid tool, used only for its stated Separated and locally quasi-finite morphisms are stable under base change (Stacks 01KU, 01TM). No node of this unit replaces this input; the finite-part splitting and invariant-affine route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme/groupoid tool, used only for its stated An unramified morphism is quasi-finite at every point. No node of this unit replaces this input; the finite-part splitting and invariant-affine route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-groupoid-invariant-open-restriction-degree",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-b7aaffb49",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-b7aaffb49 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-more-groupoids 04RI, 04RR, section-finite-part-groupoid/04RU, 04RK(2), 0DTB, the full 0DTC proof, 0DTD, 0DTE and the 04RZ proof. The item statement, stmt_deps and blueprint are unchanged against live and side-live, where the item is still unsplit, so the delivery is not superseded. There is no cycle and no SGA. The new node lem-sfb-scheme-groupoid-universal-finite-part is a statement-only node and its construction is correct: the functor is (R_s/U,e)_fin; 04RI with 04RR(4) makes M separated etale; Q=Z_univ is clopen; the t'/i'/c' formulas agree with Stacks (translation checked: c(r,i z) has source tz); s_Q is finite locally free as an open of the base change of s, and t_Q=s_Q∘i_Q; j is etale and a monomorphism, hence an open immersion (0DTC paragraph 1). It is not a duplicate: the only neighbours are 04S0 quasisplitting, which has no universal family, and an SGA XVII finite-parts sheaf presentation, which is unrelated. It is strictly below the item. Steps 1-6 are checked against every cited statement. Step 1: F is discrete via lqf, lft and isolated points; zero-dimensional components give Spec of Artinian algebras; Z_v is finite and clopen. Step 2: the residue field is unchanged. Step 3: translation fixes (G_v)_K and hence the open (Z_v)_K. Step 4: an affine open containing the finite orbit comes from separated-lqf-affine-finite-set, with no quasi-compactness needed, then the invariant affine from locally-free-groupoid-invariant-affine. Steps 5-6: the invariant restriction gives base changes, so the projections stay finite, flat and lfp; P is the pullback of j and is open; the stabilizer lies in P as schemes. FIX: step 3 used the triple (a_K,(Z_v)_K,z) as a K-point of Q without justification. I added the sentence that (z,1_K) factors through (G_v)_K and therefore, by step 1, through (Z_v)_K. Corrected item at fixes/dag/nodes/sec-six-functors-basics/. Tool_uses are 5 generic scheme facts, accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGroupoidAffineStabilizerSplitting",
+  "declaration": "AlgebraicGeometry.IsGroupoidScheme.exists_affine_etale_stabilizer_splitting",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGroupoidAffineStabilizerSplitting.lean",
+  "statement": "theorem IsGroupoidScheme.exists_affine_etale_stabilizer_splitting {S V R : Scheme.{u}} (p : V ⟶ S) (s t : R ⟶ V) (e : V ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) (hp : s ≫ p = t ≫ p) [IsAffine V] [IsClosedImmersion (pullback.diagonal s)] [IsClosedImmersion (pullback.diagonal t)] [Flat s] [Flat t] [LocallyOfFinitePresentation s] [LocallyOfFinitePresentation t] (hqs : s.IsLocallyQuasiFinite) (hqt : t.IsLocallyQuasiFinite) (v : V) [IsFinite ((equalizer.ι s t ≫ s).fiberToSpecResidueField v)] : ∃ (V' : Scheme.{u}) (h : V' ⟶ V) (v' : V'), IsAffine V' ∧ Etale h ∧ h v' = v ∧ IsIso (h.residueFieldMap v') ∧ ∃ (A R' : Scheme.{u}) (a : A ⟶ R) (b : A ⟶ V') (r : R' ⟶ A) (t' : R' ⟶ V'), IsPullback a b s h ∧ IsPullback r t' (a ≫ t) h ∧ ∃ (e' : V' ⟶ R') (i' : R' ⟶ R') (c' : pullback (r ≫ b) t' ⟶ R') (hs : (r ≫ b) ≫ h = (r ≫ a) ≫ s) (ht : t' ≫ h = (r ≫ a) ≫ t), IsGroupoidScheme (r ≫ b) t' e' i' c' ∧ e' ≫ (r ≫ a) = h ≫ e ∧ i' ≫ (r ≫ a) = (r ≫ a) ≫ i ∧ c' ≫ (r ≫ a) = pullback.map (r ≫ b) t' s t (r ≫ a) (r ≫ a) h hs ht ≫ c ∧ ∃ (P : R'.Opens) (eP : V' ⟶ P.toScheme) (iP : P.toScheme ⟶ P.toScheme) (cP : pullback (P.ι ≫ (r ≫ b)) (P.ι ≫ t') ⟶ P.toScheme), IsGroupoidScheme (P.ι ≫ (r ≫ b)) (P.ι ≫ t') eP iP cP ∧ eP ≫ P.ι = e' ∧ iP ≫ P.ι = P.ι ≫ i' ∧ cP ≫ P.ι = pullback.map (P.ι ≫ (r ≫ b)) (P.ι ≫ t') (r ≫ b) t' P.ι P.ι (𝟙 V') (Category.comp_id _) (Category.comp_id _) ≫ c' ∧ (P.ι ≫ (r ≫ b)).IsFiniteLocallyFree ∧ (P.ι ≫ t').IsFiniteLocallyFree ∧ ∀ z : (equalizer.ι (r ≫ b) t' ≫ (r ≫ b)).fiber v', ((equalizer.ι (r ≫ b) t' ≫ (r ≫ b)).fiberι v' ≫ equalizer.ι (r ≫ b) t') z ∈ P",
+  "branch": "newtargets-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30df6caa2",
+  "group": "Q149",
+  "result": "pass",
+  "note": "Only the item lean record changes; statement verbatim = file signature; theorem is sorry-only. Renders 04RK(2) splitting (equalizer-stabilizer fibre in P), not strong/quasi-splitting. All node hypotheses (affine V, closed-immersion diagonals, flat, lfp, IsLocallyQuasiFinite for s and t, IsFinite stabilizer fibre over κ(v)) map to recorded dep declarations, none stronger. Conclusion: affine V', Etale h, h v'=v, IsIso residueFieldMap; R' via two IsPullback squares; induced e',i',c' and eP,iP,cP uniquely determined by compatibility equations (pullback.map orientation checked); IsFiniteLocallyFree projections; stabilizer fibre at v' in P. Edge cases (empty V, identity groupoid, nonreduced fibres) fine; single universe u. No duplicate (AffineGroupoidPointedQuasisplitting is the weaker 04S0 node); docstrings/source/blueprint/proof steps present; imports exist; report sections present. No findings."
+ }
+}

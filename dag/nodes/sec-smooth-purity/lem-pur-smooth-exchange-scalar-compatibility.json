@@ -22,101 +22,40 @@
   "def-pc-base-change",
   "def-pur-smooth-pullback-exchange",
   "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-pod-separated-finite-type-base-change"
+  "lem-pod-separated-finite-type-base-change",
+  "def-pur-smooth-exchange-geometry",
+  "def-pur-canonical-tate-comparisons",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-rational-scalar-comparison-data",
+  "def-pur-twisted-pullback-square-maps",
+  "def-wf-tensor-unit-square-data"
  ],
  "proof": [
   {
-   "text": "All four schemes are Noetherian and finite-dimensional: apply [lem-weil-pbc-finite-type-over-noetherian] to their structure morphisms over the field $k$, and [lem-kun-dimension-finite-type]. Since $\\ell\\ne p$, $\\ell$ is invertible on them. By [lem-sbc-smooth-relative-dimension-permanence] and [lem-pod-separated-finite-type-base-change], $f'$ is smooth separated finite type of pure relative dimension $d$, including when $X'$ is empty. Thus both $f$ and $f'$ satisfy the geometric hypotheses of the simultaneous purity family. The raw rationalization [def-weil-pbc-rational-category] gives an integral representative for every rational object. The characterization [lem-weil-pbc-integral-stratified-perfect-characterization] identifies that integral category with the one in purity, and [lem-coef-integral-residue-tor] gives its uniform finite-Tor condition. Pullbacks used below preserve integral constructibility by [lem-pur-integral-operations-preserve-constructible], so this applies also to $Lv_E^*K$. No restriction on $v$ beyond the displayed scheme setting is used.",
+   "text": "Apply [lem-pur-rational-purity-exchange-endpoints]. Its domain assertion supplies integral finite-Tor representatives for $K$ and $Lv_E^*K$ and the geometric hypotheses for $f'$, without a condition on $v$. Use its notation $s_R=Lu_R^*(\\gamma_{f,R}^{-1})$, $t^\\gamma_R=\\gamma_{f',R,Lv_R^*(-)}$, $r_A,r_B$. Its equations (A), (B) give\n$$r_A T(s_E)=s_L\\beta_A,\\qquad \\beta_B T(t^\\gamma_E)=t^\\gamma_Lr_B.$$\nThe endpoint comparisons $\\beta_A,\\beta_B$ are exactly those in the statement, since the cited lemma uses the same rationalized counit-normalized $b$.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-kun-dimension-finite-type",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "lem-pod-separated-finite-type-base-change",
-    "def-weil-pbc-rational-category",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-coef-integral-residue-tor",
-    "lem-pur-integral-operations-preserve-constructible"
+    "lem-pur-rational-purity-exchange-endpoints"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
+    "place": "base-change coherence transported along the same exact functors; assembly of the endpoint and twisted pullback scalar squares"
    }
   },
   {
-   "text": "For $h=f,f'$, denote by $a_{h,M}:T H_{h,E}M\\to H_{h,L}TM$ the rationalization of the comparison $a$ in [lem-pur-adic-purity-scalar-naturality]. Its purity square, after applying [prop-weil-pbc-rational-transport], is\n$$b_{h,M}\\circ T(\\gamma_{h,E,M})=\\gamma_{h,L,TM}\\circ a_{h,M}.\\tag{P}$$\nHere $b$ is exactly the counit-normalized comparison named in the item, not an independently chosen isomorphism. By [thm-pur-rational-and-qbar-purity], these rationalized $\\gamma$ are the purity maps used in the item. Localization preserves the equality on each integral representative and extends naturality to localized morphisms. It also preserves the unit, successive-extension and shift equations in the simultaneous integral family. In particular (P) holds at every rational $M$ required below.",
+   "text": "Apply [lem-pur-twisted-pullback-square-scalars] to this square and $K$. Its factorization $a_h=D^L(p_h)q$ identifies its $r_A,r_B$ with those of step 1. For its actual twisted pullback middle arrow $m_R=D^R(t_R)z^R$, equation (M) gives\n$$r_B T(m_E)=m_Lr_A.$$\nThis uses the specified pullback-composition and twist comparisons, including their scalar square (Z), with no exceptional base-change assertion. The proved tensorComparisonUnique determines the natural pullback/tensor comparison by all its components. tensorExchangeIso pastes it with the fixed shifted root-line map and naturality of t. middleFunctor specializes this construction; middle_component proves equality with the original canonical composite, and middle_naturality follows. Identification with the twisted presentation, its scalar equation, and the supplied endpoint shift structures still require normalization.",
    "uses": [
-    "lem-pur-adic-purity-scalar-naturality",
-    "prop-weil-pbc-rational-transport",
-    "thm-pur-rational-and-qbar-purity"
+    "lem-pur-twisted-pullback-square-scalars",
+    "lem-pur-derived-pullback-tensor-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
+    "place": "base-change coherence transported along the same exact functors; assembly of the endpoint and twisted pullback scalar squares"
    }
   },
   {
-   "text": "Write $D_W^R(M)=M(d)[2d]$ and let $q_{W,M}:T_WD_W^E M\\to D_W^L T_WM$ be the tensor/twist/shift comparison. The comparison $a$ of step 2 factors, by its specified pullback/tensor/twist/shift construction, as\n$$a_{h,M}=D_{\\mathrm{source}(h)}^L(p_{h,M})\\circ q_{\\mathrm{source}(h),Lh_E^*M}.$$\nLet $z^R_{u,M}:Lu_R^*D_X^R M\\to D_{X'}^R Lu_R^*M$ be the pullback/twist/shift comparison occurring in the definition of the middle arrow. The tensor comparisons commute with scalar extension by [lem-pur-derived-pullback-tensor-iso]. The twist-line pullback of [det-prop-sfb-cartesian-coefficients-twists] commutes with scalar extension directly from [def-coefficient-twists-detailed]: for $d\\geq0$ both routes send a tensor of $d$ roots-of-unity sections with coefficient $e\\in E$ to the same pulled-back tensor with coefficient the image of $e$ in $L$; for $d=0$ this is the unit map. Tensor balancing gives equality of these line maps. Together with the shift comparisons this gives\n$$z^L_{u,T_XM}\\circ Lu_L^*(q_{X,M})\\circ p_{u,D_X^E M}=D_{X'}^L(p_{u,M})\\circ q_{X',Lu_E^*M}\\circ T_{X'}(z^E_{u,M}).\\tag{Z}$$\nThis uses the scalar compatibility of the actual tensor comparison, not detection of equality from unrelated finite reductions.",
-   "uses": [
-    "lem-pur-adic-purity-scalar-naturality",
-    "prop-weil-pbc-scalar-extension",
-    "lem-pur-derived-pullback-tensor-iso",
-    "det-prop-sfb-cartesian-coefficients-twists",
-    "def-coefficient-twists-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
-   }
-  },
-  {
-   "text": "Put $U_R=Lu_R^*Lf_R^*$ and $V_R=Lf'_R{}^*Lv_R^*$. Let $t_R:U_R\\to V_R$ be the untwisted comparison of the commutative square, namely $c_{f',v}\\circ c_{u,f}^{-1}$. Here these are the transported pullback composition comparisons in [def-pur-smooth-pullback-exchange]. Define\n$$P_U=Lu_L^*(p_f)\\circ p_{u,Lf_E^*(-)},\\qquad P_V=Lf'_L{}^*(p_v)\\circ p_{f',Lv_E^*(-)}.$$\nThe composition compatibility of the canonical scalar pullback comparisons in [prop-weil-pbc-scalar-extension], applied first to $(u,f)$ and then to $(f',v)$, gives\n$$P_V\\circ T_{X'}(t_E)=t_L\\circ P_U.\\tag{C}$$\nIndeed the two composition squares have the common third side $p_{f\\circ u}=p_{v\\circ f'}$. Reverse the first composition square (all its arrows are isomorphisms) and paste the second. This proves (C) for the specified comparisons.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "def-pur-smooth-pullback-exchange"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
-   }
-  },
-  {
-   "text": "Let $m_R:Lu_R^*H_{f,R}\\to H_{f',R}Lv_R^*$ denote the middle arrow of the transported purity composite. Thus\n$$m_R=D_{X'}^R(t_R)\\circ z^R_{u,Lf_R^*(-)}.$$\nSet\n$$r_A=Lu_L^*(a_f)\\circ p_{u,H_{f,E}(-)},\\qquad r_B=H_{f',L}(p_v)\\circ a_{f',Lv_E^*(-)}.$$\nUsing the factorization of $a$ in step 3 and naturality of $q$, equation (Z) says\n$$z^L_{u,Lf_L^*T_Y(-)}\\circ r_A=D_{X'}^L(P_U)\\circ q_{X',U_E(-)}\\circ T_{X'}(z^E_{u,Lf_E^*(-)}),$$\nwhereas $r_B=D_{X'}^L(P_V)\\circ q_{X',V_E(-)}$. Therefore naturality of $q$ at $t_E$, followed by (C), gives\n$$r_B\\circ T_{X'}(m_E)=m_L\\circ r_A.\\tag{M}$$\nThese identities are pastings of (Z), (C), and naturality; in particular no exceptional base-change theorem is used to identify this middle arrow.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
-   }
-  },
-  {
-   "text": "Let $s_R=(Lu_R^*\\gamma_{f,R})^{-1}$. Invert the isomorphisms in (P) for $h=f$ to obtain\n$$a_{f,K}\\circ T_X(\\gamma_{f,E,K}^{-1})=\\gamma_{f,L,T_YK}^{-1}\\circ b_{f,K}.$$\nNaturality of $p_u$ at $\\gamma_{f,E,K}^{-1}$, followed by this equality, gives\n$$r_{A,K}\\circ T_{X'}(s_{E,K})=s_{L,T_YK}\\circ\\beta_{A,K}.\\tag{A}$$\nIn detail the left side is\n$$Lu_L^*(a_{f,K})\\circ Lu_L^*T_X(\\gamma_{f,E,K}^{-1})\\circ p_{u,G_{f,E}K},$$\nwhich becomes $Lu_L^*(\\gamma_{f,L,T_YK}^{-1})\\circ Lu_L^*(b_{f,K})\\circ p_{u,G_{f,E}K}$, exactly the right side.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
-   }
-  },
-  {
-   "text": "For the final purity factor, use (P) at $h=f'$ and $M=Lv_E^*K$, and then naturality of $\\gamma_{f',L}$ at the actual morphism $p_{v,K}:T_{Y'}Lv_E^*K\\to Lv_L^*T_YK$. This yields\n$$\\begin{aligned}\n\\beta_{B,K}\\circ T_{X'}(\\gamma_{f',E,Lv_E^*K})\n&=G_{f',L}(p_{v,K})\\circ\\gamma_{f',L,T_{Y'}Lv_E^*K}\\circ a_{f',Lv_E^*K}\\\\\n&=\\gamma_{f',L,Lv_L^*T_YK}\\circ H_{f',L}(p_{v,K})\\circ a_{f',Lv_E^*K}\\\\\n&=\\gamma_{f',L,Lv_L^*T_YK}\\circ r_{B,K}.\\tag{B}\n\\end{aligned}$$\nThe naturality used here is the rationalization of the natural transformation in [lem-pur-adic-purity-scalar-naturality], extended to all rational morphisms by [prop-weil-pbc-rational-transport].",
-   "uses": [
-    "lem-pur-adic-purity-scalar-naturality",
-    "prop-weil-pbc-rational-transport"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
-   }
-  },
-  {
-   "text": "The finite exchange is defined in [def-pur-smooth-pullback-exchange] by $\\gamma_{f'}\\circ m\\circ s$. The reconstruction of [prop-pur-adic-reconstruction-trace-coherence] and the rational transport [prop-weil-pbc-rational-transport] carry that specified composite to the actual $\\operatorname{Ex}^{!,\\mathrm{sm}}_R$ of the item, since functors preserve composition and inverses. Thus (B), (M), and (A), in order, give\n$$\\begin{aligned}\n\\beta_B\\circ T_{X'}(\\operatorname{Ex}^{!,\\mathrm{sm}}_E)\n&=\\gamma_{f',L}\\circ r_B\\circ T_{X'}(m_E)\\circ T_{X'}(s_E)\\\\\n&=\\gamma_{f',L}\\circ m_L\\circ r_A\\circ T_{X'}(s_E)\\\\\n&=\\gamma_{f',L}\\circ m_L\\circ s_L\\circ\\beta_A\n=\\operatorname{Ex}^{!,\\mathrm{sm}}_L\\circ\\beta_A.\n\\end{aligned}$$\nEvery component here is evaluated at $K$, and the $L$-exchange at $T_YK$. This is the asserted component equation.",
+   "text": "The finite exchange is $t^\\gamma m s$ by [def-pur-smooth-pullback-exchange]. Reconstruction [prop-pur-adic-reconstruction-trace-coherence] and rationalization [prop-weil-pbc-rational-transport] preserve this composite and inverses. Substitute the endpoint and middle squares to obtain $\\beta_B T(t^\\gamma_E m_E s_E)=t^\\gamma_L r_B T(m_E)T(s_E)=t^\\gamma_Lm_Lr_AT(s_E)=t^\\gamma_Lm_Ls_L\\beta_A$. The proved private assembleExchange checks this typed paste and identifies every component with exchange. Its normalized endpoint families, canonical gamma identifications and middle equations remain explicit premises, not assertions of existence for arbitrary System.",
    "uses": [
     "def-pur-smooth-pullback-exchange",
     "prop-pur-adic-reconstruction-trace-coherence",
@@ -125,46 +64,34 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
+    "place": "base-change coherence transported along the same exact functors; assembly of the endpoint and twisted pullback scalar squares"
    }
   },
   {
-   "text": "All the factors in (P), (Z), (C), and the purity composite are natural in their arguments, so the component equation of step 8 is an equality of natural transformations. The unit and successive coefficient-extension equations for $a,b$ are those of [lem-pur-adic-purity-scalar-naturality], rationalized as in step 2; those for $p$ are in [prop-weil-pbc-scalar-extension]. The tensor comparisons respect associators and units and commute with scalar extension by [lem-pur-derived-pullback-tensor-iso]. Under one more extension, substitute these equations for each factor in the displayed pasting: intermediate associators occur consecutively with their inverses and cancel. The remaining external associators are precisely those of $\\beta_A$ and $\\beta_B$. For the identity extension all these factors are identities. The same substitution with the shift comparisons, which the cited $a,b,p$ respect, gives the shifted equation. Twists use tensor powers of a degree-zero line, so the comparison (Z) introduces no extra shift sign. This proves the last coherence clause with exactly the specified identifications.",
+   "text": "Naturality makes the paste an equation of natural transformations. The endpoint unit and tower laws transfer directly to betaA and betaB. The proved pasteScalar composes the three scalar squares, and pasteShift composes shiftS, the middle shift equation and shiftT. assembleExchange checks all six conclusion clauses. Obtaining these normalized data for arbitrary System, including compatibility of the supplied shift structures, remains open and is marked STATEMENT-DISPUTED at the original theorem.",
    "uses": [
-    "lem-pur-adic-purity-scalar-naturality",
-    "prop-weil-pbc-scalar-extension",
-    "lem-pur-derived-pullback-tensor-iso"
+    "lem-pur-rational-purity-exchange-endpoints",
+    "lem-pur-twisted-pullback-square-scalars"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-    "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
+    "place": "base-change coherence transported along the same exact functors; assembly of the endpoint and twisted pullback scalar squares"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-kun-dimension-finite-type",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-pod-separated-finite-type-base-change",
-  "def-weil-pbc-rational-category",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-coef-integral-residue-tor",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-pur-adic-purity-scalar-naturality",
-  "prop-weil-pbc-rational-transport",
-  "thm-pur-rational-and-qbar-purity",
-  "prop-weil-pbc-scalar-extension",
+  "lem-pur-rational-purity-exchange-endpoints",
+  "lem-pur-twisted-pullback-square-scalars",
   "lem-pur-derived-pullback-tensor-iso",
-  "det-prop-sfb-cartesian-coefficients-twists",
-  "def-coefficient-twists-detailed",
   "def-pur-smooth-pullback-exchange",
-  "prop-pur-adic-reconstruction-trace-coherence"
+  "prop-pur-adic-reconstruction-trace-coherence",
+  "prop-weil-pbc-rational-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/prop-pur-rational-purity-trace-coherence.proof.md",
-  "place": "base-change coherence transported along the same exact functors; explicit scalar-square calculation for the purity composite"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "F9 stage 3 2026-10-27: middle construction with proved canonical component and naturality, and conditional typed assembly of Steps 2–4. The original theorem remains sorry: arbitrary-system endpoint and shift normalization is disputed."
  },
  "mathlib_searches": [
   {
@@ -256,59 +183,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-smooth-exchange-scalar-compatibility",
   "worker": "stage1",
-  "summary": "Expanded scalar compatibility of the actual purity-defined smooth exchange into the rationalized simultaneous purity square, explicit pullback/twist and pullback-composition squares, and a typed pasting calculation. Checked all input categories and arbitrary base change. No new nodes and no change of statement.",
-  "blueprint": "prop-pur-rational-purity-trace-coherence.proof.md, the phrase base-change coherence transported along the same exact functors: steps 1-2 establish the rational coefficient setting; steps 3-5 expand the middle comparison; steps 6-8 prove the specified exchange equation; step 9 verifies natural and coefficient coherence.",
+  "summary": "Repair of the 7747-character proof: extracted two comparable independent statement-only arguments, for the rational purity endpoint squares and twisted pullback square, preserving the parent statement verbatim. The parent is only the short typed pasting and its coefficient coherence. The report preserves all nine former arguments and maps them to the new statements.",
+  "blueprint": "The base-change transport paragraph of prop-pur-rational-purity-trace-coherence: rational endpoints carry old steps 1,2,6,7; twisted pullback carries old steps 3,4,5; both explicitly carry step 9 coherence; parent step 3 retains the exact-composite identification and pasting from old step 8.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic scheme-domain or integral-category input used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Generic scheme-domain or integral-category input used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "lem-sbc-smooth-relative-dimension-permanence",
-    "why": "Generic scheme-domain or integral-category input used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "lem-pod-separated-finite-type-base-change",
-    "why": "Generic scheme-domain or integral-category input used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "why": "Generic scheme-domain or integral-category input used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "lem-coef-integral-residue-tor",
-    "why": "Generic scheme-domain or integral-category input used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "lem-pur-integral-operations-preserve-constructible",
-    "why": "Generic scheme-domain or integral-category input used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "lem-pur-adic-purity-scalar-naturality",
-    "why": "Generic canonical coefficient, tensor, or localization comparison used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
     "node": "prop-weil-pbc-rational-transport",
-    "why": "Generic canonical coefficient, tensor, or localization comparison used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "prop-weil-pbc-scalar-extension",
-    "why": "Generic canonical coefficient, tensor, or localization comparison used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "lem-pur-derived-pullback-tensor-iso",
-    "why": "Generic canonical coefficient, tensor, or localization comparison used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
-   },
-   {
-    "node": "det-prop-sfb-cartesian-coefficients-twists",
-    "why": "Generic canonical coefficient, tensor, or localization comparison used with its stated hypotheses; it supplies a tool for the fixed purity-transport route, not a replacement of that route."
+    "why": "Generic scalar-localization tool transporting the specified integral composite, on the exact integral functors supplied by purity reconstruction; it does not replace the purity route."
    }
   ]
  },
@@ -327,12 +210,73 @@
   "det-prop-sfb-cartesian-coefficients-twists"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q75-c3b923e01",
-  "group": "Q75",
+  "reviewer": "NT-cc-Q69-730236fce",
+  "group": "Q69",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-c3b923e01 (reviewer sub-agent of L); spot-checked: PASS: the item checks out and nothing needed fixing. I read the item and the main-20261015 prop-pur-rational-purity-trace-coherence statement and proof (the base-change coherence is 'transported along the same exact functors'), the unit record, the parent node, and the statement of every cited node. The delivery has no new nodes and leaves the statement unchanged. Ex is the purity composite of def-pur-smooth-pullback-exchange, not a mate; v is arbitrary; and gamma is the rationalized simultaneous family the parent fixes, so Ex and gamma use the same lift. I recomputed by hand the scalar-compatibility equations the steps call (C), (M), (A), (B) and the final pasting. Step 3's factorization a = D(p) after q is a sound reading of 'the pullback, tensor, twist and shift comparison' (both orders agree by naturality of q). The twist-line check holds because O_F(d) is generated locally by the image of Z_l(1)^d tensor 1. Step 1's hypotheses hold: Spec k is Noetherian, the schemes are finite-dimensional, l != p, residue-tor gives D^b_c = D^b_ctf, and Lv^*K stays integral-constructible. Small cases checked: E=L, v=id, d=0, X' empty, K=0. No SGA source, no cycle, and the searches are recorded (one Loogle pattern honestly marked invalid). I accept the off-unit tool_uses; the two Mathlib leaves and lem-pur-derived-pullback-tensor-iso, which is on route, need none. One minor note, not a fault: the completed pullback and the integral pullback are treated as the same, as the parent does. No changes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-730236fce (reviewer sub-agent of L); spot-checked: Re-split under the human's note of 2026-10-21 (released 2026-10-22): at least 2 new nodes of comparable size, assembly at most 3000 characters. The item is not superseded: live and side-live still have the 9-step base. Only proof, proof_deps and split_report changed; the statement and stmt_deps are verbatim. Every old step became a clause of a new node or the parent's assembly. Old steps 1, 2, 6 and 7 (domains, localized purity square (P), endpoint squares (A) and (B)) are clauses of lem-pur-rational-purity-exchange-endpoints. Old steps 3, 4 and 5 ((Z), (C), (M)) are clauses of lem-pur-twisted-pullback-square-scalars. Old step 9's coherence is split between the tower/unit/shift clauses of both nodes and parent step 4. Old step 8 is parent step 3. The two statements are 3855 and 3985 characters, carrying about 3041 and 2763 characters of old proof, and neither contains the item's equation. The parent proof is 2171 characters in 4 steps. I recomputed (A), (B), (Z)→(M) and the final paste by hand. I checked that m_R = D(t_R)∘z^R is the middle identification of def-pur-smooth-pullback-exchange: its b_□ is c_{f',v}∘c_{u,f}^{-1}∘a_u, the composite is the purity composite and not a mate, and v is arbitrary. b is the rationalized counit-normalized transpose from lem-pur-adic-purity-scalar-naturality. (C) uses the composition compatibility stated in prop-weil-pbc-scalar-extension. Tower-equation types match lem-pur-adic's convention. Small cases checked: E=L, v=id, d=0, K=0, X' empty. No duplicates against det-sp-reduction-exceptional, sk-lem-sp-field-extension, lem-weil-integral-twist-derived-scalar, lem-pur-derived-pullback-tensor-iso, det-prop-sfb-cartesian-coefficients-twists or the sibling composition node. The new nodes are statement-only with five searches each; node B's LeanSearch is honestly recorded as unavailable (rate limit). No SGA source is cited. Tool use of prop-weil-pbc-rational-transport accepted. Advisory: the a_h identification and the r_A/r_B tower clauses are asserted in both new nodes, a harmless overlap."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothExchangeScalarCompatibility",
+  "declaration": "WeilConjectures.SmoothExchangeScalarCompatibility.smoothExchangeScalarCompatibility",
+  "declarations": [
+   "WeilConjectures.SmoothExchangeScalarCompatibility.setting",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.gamma",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.A",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.B",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.middle",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.exchange",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.betaA",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.betaB",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.aShift",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.bShift",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.Conclusion",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.smoothExchangeScalarCompatibility",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.tensorMiddle_naturality",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.tensorExchangeIso",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.tensorExchangeIso_app",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.tensorComparisonUnique",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.middleFunctor",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.middle_component",
+   "WeilConjectures.SmoothExchangeScalarCompatibility.middle_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothExchangeScalarCompatibility.lean",
+  "statement": "theorem smoothExchangeScalarCompatibility (cartesian : IsPullback u f' f v) : ∃ g : TwistedPullbackScalars.Geometry D C f f' d, Conclusion D C u f f' v d cartesian.w g",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-26",
+  "existing": false,
+  "note": "The actual smooth exchange uses the published canonical rational purity and the localized pullback/tensor/root-line square in its shifted-line-first source presentation. Conclusion gives naturality, the scalar equation and endpoint unit/tower/shift equations, with geometric consequences as conclusions. Repair of returned heads ba69f6c5deeb and 88a93a578326: Geometry and finiteResidueInverse have definition-node owner def-pur-smooth-exchange-geometry with existing:true, reusing their original declarations from the publicly imported TwistedPullbackSquareScalars module. No separate defining module is delivered. Scalar coordinate declarations are owned by def-pur-rational-scalar-comparison-data; Identification stays a private proof import."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f8ce5d4a",
+  "group": "NF",
+  "result": "pass",
+  "note": "NF rebase of NH 933c (2× PASS, unlanded) onto side-live HEAD bda59d7. SmoothExchangeScalarCompatibility.lean byte-identical to 933c; TwistedPullbackSquareScalars/WfTensorUnitSquareData differ only by a trailing blank line (vs main: elaboration-only transparency/attribute changes and explicit EssentiallySmall.{u+1} letI, signatures and universes unchanged); AffineSpaceZeroSectionPurity correctly dropped (main split it), clearing 933c advisory. Own reading: gamma = published rationalIso at the canonical compactification; exchange = Lu*(γ_f⁻¹) ≫ canonical middle (pullback-tensor, shifted root-line pull, TwistedPullbackScalars.t) ≫ γ_f'; betaA = Lu*_L(b_f)∘p_u and betaB = G_f',L(p_v)∘b_f'; whiskerRight e_E T ≫ betaB = betaA ≫ whiskerLeft T e_L with e pinned at every K; unit/tower/shift clauses present; v arbitrary; f' properties concluded via ∃ Geometry (all Prop fields); E=L, d=0, empty, K=0 covered; lean.statement verbatim; sorry only. Geometry/finiteResidueInverse owned by def-pur-smooth-exchange-geometry existing:true (18 fields match); theorem node drops them and cites the owner; its statement record matches lines 257–258. Advisory: def-wf-tensor-unit-square-data cited only as repair record; rationalIso/compactification def owners uncited; stage 3 must identify middle with TwistedPullbackScalars.m. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T021324-L-2757149",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

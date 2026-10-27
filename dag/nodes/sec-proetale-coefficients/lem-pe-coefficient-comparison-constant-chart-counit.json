@@ -1,0 +1,149 @@
+{
+ "id": "lem-pe-coefficient-comparison-constant-chart-counit",
+ "kind": "lemma",
+ "title": "Comparison counit on a single constant etale chart",
+ "statement": "Let X be a scheme, A an independently sized commutative ring, F a module sheaf on the coefficient-sized pro-etale site, and V an object of its coefficient-sized etale site. Use the canonical comparison inclusion i and its Kan-extension/sheafification adjunction [def-weil-pbc-site-comparison-morphism, def-weil-proetale-inverse-image], and constant module sheaves [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. If F restricted to i(V) is isomorphic to the constant sheaf of some A-module M, then restriction of the comparison counit at F to i(V) is an isomorphism. No finite-presentation or local constancy condition on F elsewhere, and no covering family, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R, 099T and 099Y, comparison with etale localization and constant models"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For a continuous finite-limit-preserving functor between small sites, restriction to a slice commutes with direct image by the identity on sections. Take its mate under the restriction/star adjunctions. At an object it is the image of the product comparison isomorphism, hence invertible. Iterated mates give invertibility of the pullback/restriction mate. The mate counit identity then reduces invertibility of the restricted global counit to that of the counit on the slice. Apply this directly to the AsSmall coefficient-sized comparison inclusion; its finite-limit preservation is transported from the original inclusion through the two equivalences.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Give M the discrete topology. Continuous functions into M form a module presheaf on schemes whose underlying presheaf is an fpqc sheaf, hence a pro-etale sheaf. On both the etale and pro-etale sites the map from the constant presheaf sending a section to its constant function is locally bijective. Local surjectivity follows from the cover by open fibres, indexed by points of the scheme so no coefficient-size bound is needed. For local injectivity, either the two values agree or equality of their constant functions forces the scheme to be empty, where the empty covering applies. Cocontinuity of AsSmall.down and of slice forgetful functors transports these local bijections to the coefficient-sized slice sites. The sheafification maps are locally bijective, so their universal factorizations identify both constant sheaves with the same continuous-function sheaf and prove the canonical constant direct-image map invertible.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The adjoint of this constant direct-image map is invertible: compose the constant-sheaf/evaluation adjunction with comparison, identify evaluation at the image of the terminal object, and use uniqueness of left adjoints. The explicit sheafification unit equation identifies the resulting isomorphism with the adjoint of the canonical direct-image map. Since that adjoint is the comparison pullback of the direct-image map followed by the counit, and both the adjoint and the direct-image map are invertible, the counit on constant M is invertible.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-maps-global-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the slice counit transports its invertibility from constant M across the supplied chart isomorphism. The localization calculation gives the displayed restriction of the global counit. The empty chart and zero module are included throughout.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R, 099T and 099Y; constant continuous-function model and comparison localized directly on slice sites (B7)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant proetale sheaf of finitely presented modules is pulled back from etale sheaf with arbitrary coefficient universe",
+   "results": [
+    "CompHausLike.LocallyConstantModule.functor",
+    "SheafOfModules.isFinitePresentation",
+    "LightCondMod.LocallyConstant.functorToPresheaves",
+    "CondensedMod.LocallyConstant.functor",
+    "SheafOfModules.IsFinitePresentation",
+    "LightCondMod.ofSheafLightProfinite"
+   ],
+   "date": "2026-10-26",
+   "verdict": "No etale/pro-etale comparison for independently sized module coefficients. Condensed discrete functors concern different sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\", \"sheafPullback\"",
+   "results": [],
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientFpLocalSystem|finiteLocalSystemsTwist|isIso_of_coversTop",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/LocalProperties.lean:35 Sheaf.isIso_of_coversTop",
+    "Mathlib/CategoryTheory/Sites/LocalProperties.lean:70 Sheaf.isIso_iff_of_coversTop"
+   ],
+   "date": "2026-10-26",
+   "verdict": "The generic local isomorphism theorem assembles the parent proof but does not produce etale charts or the restricted comparison counit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale covering trivializes any locally constant proetale sheaf of finitely presented modules, and the etale proetale comparison counit is an isomorphism on a constant etale chart.",
+   "results": [
+    "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app",
+    "CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app'",
+    "CondensedMod.isDiscrete_tfae",
+    "CondensedSet.LocallyConstant.functorFullyFaithful",
+    "AlgebraicGeometry.Scheme.smallEtaleTopology"
+   ],
+   "date": "2026-10-26",
+   "verdict": "Constant-sheaf adjunction counits are not etale/pro-etale comparison counits. No exact comparison statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoefficientFpLocalSystemOrigin",
+  "date": "2026-10-26",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-pe-constructible-comparison",
+   "place": "Proof first sentence: finite local-system comparison handles a single stratum; Tags 099R, 099T and 099Y, comparison with etale localization and constant models",
+   "via": [
+    "lem-pe-coefficient-fp-local-system-origin",
+    "lem-pe-coefficient-stratified-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-thm-pe-constructible-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoefficientComparisonConstantChartCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientComparisonConstantChartCounit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientComparison_counit_isIso_of_constant_over",
+  "statement": "theorem coefficientComparison_counit_isIso_of_constant_over (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)\n      (ModuleCat.{max v (u + 1)} A))\n    (V : Scheme.smallModelComparisonEtaleSite.{u, v} X)\n    (M : ModuleCat.{max v (u + 1)} A)\n    (e : F.over ((Scheme.smallModelComparisonInclusion.{u, v} X).obj V) ≅\n      (constantSheaf ((Scheme.coefficientProEtaleModelTopology.{u, v} X).over\n        ((Scheme.smallModelComparisonInclusion.{u, v} X).obj V))\n        (ModuleCat.{max v (u + 1)} A)).obj M) :\n    IsIso (((Scheme.coefficientProEtaleModelTopology.{u, v} X).overPullback\n      (ModuleCat.{max v (u + 1)} A)\n      ((Scheme.smallModelComparisonInclusion.{u, v} X).obj V)).map\n        ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n          (Scheme.smallModelComparisonInclusion.{u, v} X) (ModuleCat.{max v (u + 1)} A)\n          (Scheme.smallModelComparisonEtaleTopology.{u, v} X)\n          (Scheme.coefficientProEtaleModelTopology.{u, v} X)).counit.app F))",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261025T201447-L-2525296",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261026T001013-L-4162391",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

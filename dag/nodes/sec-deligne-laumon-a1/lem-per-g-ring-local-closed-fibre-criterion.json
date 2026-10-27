@@ -1,0 +1,294 @@
+{
+ "id": "lem-per-g-ring-local-closed-fibre-criterion",
+ "kind": "statement",
+ "title": "Local closed-fibre criterion when the source completion map is regular",
+ "statement": "Let $(R,\\mathfrak m)$ and $(S,\\mathfrak n)$ be commutative Noetherian local rings [def-weil-pbc-noetherian-ring], and let $f:R\\to S$ be a local ring homomorphism, meaning $f(\\mathfrak m)\\subseteq\\mathfrak n$. Put $k=R/\\mathfrak m$ and $\\widehat R=\\varprojlim_{n\\geq1}R/\\mathfrak m^n$ [def-weil-pbc-adic-completion]. Assume the canonical map $R\\to\\widehat R$ is regular [def-weil-pbc-g-ring]. Then $f$ is regular if and only if it is flat [def-weil-pbc-flat-ring-map] and $S/\\mathfrak mS$ is geometrically regular over $k$ [def-weil-pbc-g-ring]. Here geometrically regular means Noetherian and remaining regular after every finite purely inseparable extension of $k$, and regular ring means Noetherian with regular local rings at every prime. No completeness or finite-type assumption on $R$ or $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H7U, more-algebra-theorem-fs-regular (Andre), equivalence (1) and (2), lines 12118-12156."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "If $f$ is regular, [def-weil-pbc-g-ring] gives flatness and geometric regularity of its fibre at $\\mathfrak m$. The residue field there is $k$. The canonical identification $S\\otimes_R k\\cong S/\\mathfrak mS$ sends $s\\otimes\\bar r$ to the class of $sf(r)$, with inverse $\\bar s\\mapsto s\\otimes1$: changing $s$ by a sum of $f(a)t$, $a\\in\\mathfrak m$, changes the latter by zero. Thus the closed fibre has exactly the required $k$-algebra structure.",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H7U, theorem-fs-regular, (1) implies (2)."
+   }
+  },
+  {
+   "text": "Conversely suppose $f$ is flat and $\\overline S=S/\\mathfrak mS$ is geometrically regular over $k$. Locality gives $\\mathfrak mS\\subseteq\\mathfrak n$, so [lem-weil-pbc-quotient-local-structure] makes $\\overline S$ a nonzero local ring with maximal ideal $\\mathfrak n/\\mathfrak mS$. It is Noetherian by its assumed geometric regularity. Apply [lem-sfb-geometrically-regular-local-field-adic-smooth] to this $k$-algebra. Then [lem-weil-pbc-flat-formally-smooth-closed-fibre-adic], using the assumed flatness of $f$, makes $S$ formally smooth over $R$ for the $\\mathfrak n$-adic topology.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-sfb-geometrically-regular-local-field-adic-smooth",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07EL, theorem-regular-fs, (1) implies (2); 07NQ, proposition-fs-flat-fibre-fs, (2) implies (3), as used in 0H7U."
+   }
+  },
+  {
+   "text": "Put $\\widehat S=\\varprojlim_jS/\\mathfrak n^j$ and let $\\widehat f:\\widehat R\\to\\widehat S$ be the map induced by $f$ on quotient levels, supplied by [lem-weil-pbc-fs-adic-complete-source-target]. Both completions are Noetherian by [lem-weil-pbc-adic-completion-noetherian], local with maximal ideals $\\mathfrak m\\widehat R$ and $\\mathfrak n\\widehat S$ by [lem-weil-pbc-local-completion-local-ring], and complete by [lem-weil-pbc-module-completion-complete] applied to each ring as its own module. The ideals are finitely generated since the original rings are Noetherian. The extended-ideal powers are $\\mathfrak m^j\\widehat R$ and $\\mathfrak n^j\\widehat S$, so this is also completeness for their maximal ideals. The induced map is local: it sends each generator from $\\mathfrak m$ into $\\mathfrak n\\widehat S$, and hence sends $\\mathfrak m\\widehat R$ into that maximal ideal. The same completion lemma makes $\\widehat f$ formally smooth for the $\\mathfrak n\\widehat S$-adic topology.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-complete-source-target",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07ED, lemma-formally-smooth-completion, (1) implies (3); completion structure: Algebra Tags 0316, 05GI and 05GG."
+   }
+  },
+  {
+   "text": "The local homomorphism $\\widehat f$ is now between complete Noetherian local rings and is formally smooth for the target maximal-ideal-adic topology. Therefore [lem-weil-pbc-formally-smooth-complete-local-regular] proves that $\\widehat f$ is regular.",
+   "uses": [
+    "lem-weil-pbc-formally-smooth-complete-local-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PM, proposition-fs-regular, (4) implies (1), as used in 0H7U."
+   }
+  },
+  {
+   "text": "The canonical map $c_R:R\\to\\widehat R$ is regular by hypothesis. Check the extra hypothesis of [lem-weil-pbc-regular-composition]: for every prime $\\mathfrak p\\subset R$, the fibre $\\widehat S\\otimes_R\\kappa(\\mathfrak p)$ is the quotient by $\\mathfrak p$ of the localization of $\\widehat S$ at the image of $R\\setminus\\mathfrak p$. Writing $h=\\widehat f c_R$, the identification sends $s\\otimes(\\bar a/\\bar b)$ to $sh(a)/h(b)$ modulo $\\mathfrak p$, with inverse $s/h(b)\\mapsto s\\otimes1/\\bar b$. This localization is Noetherian by [lem-weil-pbc-localization-noetherian]; its quotient is Noetherian by [lem-weil-pbc-surjective-image-noetherian]. Hence regular composition gives $\\widehat f c_R:R\\to\\widehat S$ regular.",
+   "uses": [
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-surjective-image-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QI, lemma-regular-composition, used in the proof of 0H7U; Algebra Tag 00FN for Noetherian fibres."
+   }
+  },
+  {
+   "text": "Let $c_S:S\\to\\widehat S$ be the completion map. On every quotient level both $c_Sf$ and $\\widehat f c_R$ send $r$ to the class of $f(r)$, so these maps agree. By [lem-weil-pbc-local-completion-faithfully-flat], $c_S$ is flat and induces a surjection on spectra. Apply [lem-weil-pbc-regular-permanence] to $R\\xrightarrow f S\\xrightarrow{c_S}\\widehat S$ and the regular composite from Step 5. It follows that $f$ is regular, proving the converse.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-regular-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NT, lemma-regular-permanence, and Algebra Tag 00MC, lemma-completion-faithfully-flat, as used in 0H7U."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-sfb-geometrically-regular-local-field-adic-smooth",
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-regular-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H7U, theorem-fs-regular, proof of (1) iff (2), via 07EL and 07NQ, completion (07ED), complete case (07PM), composition (07QI), and descent (07NT)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GeometricallyRegular|geometrically.regular|regular.*closed.fib|closed.fib.*regular",
+   "results": "0 hits: ; ; logged digest 4f53cda18c2baa0c; directory RingTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: returned smooth or formally smooth algebra localization, flatness, adic completion, or regular-sequence facts; none states the asserted regular-ring-map criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"Flat\"",
+   "results": "0 hits: ; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: returned smooth or formally smooth algebra localization, flatness, adic completion, or regular-sequence facts; none states the asserted regular-ring-map criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-g-ring-local-closed-fibre-criterion: Andre theorem regularity of local homomorphism from G ring equivalent flat and geometrically regular special fibre",
+   "results": "8 hits: Module.FaithfullyFlat.of_flat_of_isLocalHom, RingHom.Flat.propertyIsLocal, RingHom.Flat.localRingHom, RingHom.Smooth.ofLocalizationSpanTarget, IsLocalRing.isLocalHom_iff_comap_closedPoint, AlgebraicGeometry.flat_iff, AlgebraicGeometry.HasRingHomProperty.isLocal_ringHomProperty_of_isZariskiLocalAtSource_of_isZariskiLocalAtTarget, AlgebraicGeometry.sourceAffineLocally_isLocal; ; logged digest f35112f1b3709c03",
+   "date": "2026-10-24",
+   "verdict": "no match: returned smooth or formally smooth algebra localization, flatness, adic completion, or regular-sequence facts; none states the asserted regular-ring-map criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-g-ring-local-closed-fibre-criterion: a flat local homomorphism of Noetherian local rings whose source has geometrically regular formal fibres is regular if its closed fibre is geometrically regular",
+   "results": "8 hits: RingHom.Smooth.propertyIsLocal, Algebra.IsSmoothAt, RingHom.Smooth.holdsForLocalizationAway, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.Smooth.flat_of_isNoetherianRing, RingHom.Smooth.ofLocalizationSpanTarget, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension; ; logged digest cbebec6b250192d2",
+   "date": "2026-10-24",
+   "verdict": "no match: returned smooth or formally smooth algebra localization, flatness, adic completion, or regular-sequence facts; none states the asserted regular-ring-map criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-g-ring-local-closed-fibre-criterion: regularity localizes for formally smooth local ring maps when completion of source is regular",
+   "results": "8 hits: RingHom.FormallySmooth.holdsForLocalizationAway, RingHom.FormallySmooth.localizationPreserves, RingHom.Smooth.holdsForLocalizationAway, RingHom.Smooth.propertyIsLocal, RingHom.isStandardSmooth_holdsForLocalizationAway, RingHom.Smooth.ofLocalizationSpanTarget, Algebra.basicOpen_subset_smoothLocus_iff, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway; ; logged digest e8316f3e122353b7",
+   "date": "2026-10-24",
+   "verdict": "no match: returned smooth or formally smooth algebra localization, flatness, adic completion, or regular-sequence facts; none states the asserted regular-ring-map criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local map of Noetherian local rings with geometrically regular closed fibre is regular if the source completion map is regular",
+   "results": "8 hits: Algebra.Smooth.flat_of_isNoetherianRing, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, RingHom.Smooth.ofLocalizationSpanTarget, RingHom.Smooth.holdsForLocalizationAway, RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves, Algebra.IsSmoothAt, RingTheory.Sequence.IsRegular.of_faithfullyFlat, RingTheory.Sequence.IsWeaklyRegular.of_flat; logged digest 1be8b6b62647dc8c",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness results have different hypotheses; regular-sequence results concern sequences, not regular ring homomorphisms; no closed-fibre criterion with regular source completion was found"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyRegular|regular.*closed.[Ff]ib|[Ff]ormal.*[Ss]mooth.*[Rr]egular",
+   "results": "0 hits: ; logged digest 4f53cda18c2baa0c; directory RingTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness results have different hypotheses; regular-sequence results concern sequences, not regular ring homomorphisms; no closed-fibre criterion with regular source completion was found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Andre criterion local homomorphism regular if flat with geometrically regular special fibre and regular source completion",
+   "results": "8 hits: Module.FaithfullyFlat.of_flat_of_isLocalHom, RingHom.Flat.propertyIsLocal, RingHom.Flat, Module.flat_of_isLocalized_span, RingHom.Smooth, Module.flat_of_isLocalized_maximal, RingHom.Smooth.propertyIsLocal, IsSMulRegular.of_flat_of_isBaseChange; logged digest 1e2b2476f78f36dd",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness results have different hypotheses; regular-sequence results concern sequences, not regular ring homomorphisms; no closed-fibre criterion with regular source completion was found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\", \"Flat\"",
+   "results": "0 hits: ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness results have different hypotheses; regular-sequence results concern sequences, not regular ring homomorphisms; no closed-fibre criterion with regular source completion was found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity of a local ring homomorphism descends from regularity of the completed homomorphism when the source has regular formal fibres",
+   "results": "8 hits: RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem, RingHom.Smooth.propertyIsLocal, RingHom.Smooth.holdsForLocalizationAway, RingHom.isStandardSmooth_holdsForLocalizationAway, RingHom.FormallySmooth.holdsForLocalizationAway, RingHom.FormallySmooth.localizationPreserves, RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves; logged digest 637e1347e26b271c",
+   "date": "2026-10-24",
+   "verdict": "no match: smoothness results have different hypotheses; regular-sequence results concern sequences, not regular ring homomorphisms; no closed-fibre criterion with regular source completion was found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-completed-base-regularity",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3 (duality direction), via the small-singular-locus resolution route: Temkin Lemma 2.4.4, proof, passage from flatness and the geometrically regular closed fibre of C_p to B_q to regularity; Andre criterion, Stacks 0H7U (2) implies (1).",
+   "via": [
+    "lem-per-completed-base-regularity",
+    "lem-per-regular-morphism-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-g-ring-local-closed-fibre-criterion",
+  "worker": "stage1",
+  "summary": "Retained the statement and its statement dependencies. Split Stacks 0H7U along its completion/formal-smoothness proof, reusing all existing nodes. Explicitly checked the closed-fibre algebra, completion structure, locality, Noetherian fibres for composition and faithful-flat descent. No new nodes, no Lean changes.",
+  "blueprint": "Ancestor Step 3 (duality direction), via the small-singular-locus resolution route: Temkin Lemma 2.4.4, proof, passage from flatness and the geometrically regular closed fibre of C_p to B_q to regularity; Andre criterion, Stacks 0H7U (2) implies (1).",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-geometrically-regular-local-field-adic-smooth",
+    "why": "Generic commutative algebra input in the Stacks 0H7U completion proof: A geometrically regular local field algebra is adically formally smooth. The perverse unit provides no alternative to this local algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "why": "Generic commutative algebra input in the Stacks 0H7U completion proof: Flatness and an adically formally smooth closed fibre imply adic formal smoothness. The perverse unit provides no alternative to this local algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-complete-source-target",
+    "why": "Generic commutative algebra input in the Stacks 0H7U completion proof: Adic formal smoothness passes to the completions of source and target. The perverse unit provides no alternative to this local algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative algebra input in the Stacks 0H7U completion proof: The completion of a Noetherian ring is Noetherian. The perverse unit provides no alternative to this local algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "why": "Generic commutative algebra input in the Stacks 0H7U completion proof: Formally smooth local maps of complete Noetherian local rings are regular. The perverse unit provides no alternative to this local algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-composition",
+    "why": "Generic commutative algebra input in the Stacks 0H7U completion proof: Composition of regular ring maps. The perverse unit provides no alternative to this local algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-permanence",
+    "why": "Generic commutative algebra input in the Stacks 0H7U completion proof: Regularity descends along flat maps surjective on spectra. The perverse unit provides no alternative to this local algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-geometrically-regular-local-field-adic-smooth",
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-regular-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-b58cad925",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-b58cad925 (reviewer sub-agent of L); spot-checked: Shape: one commit containing the item and its report (with ## Review by Q154). No new nodes. The statement and stmt_deps are byte-identical to the live clone. The base item was unsplit with no repair note, so the re-split rule does not apply. The item is Stacks 0H7U (1)<=>(2), checked at more-algebra.tex 12118-12156. All hypotheses are kept: Noetherian local rings, a local map, and A->A^ regular. Nothing is weakened. The six steps follow the source proof, and I read every cited statement against how it is used. Step 1 (elementary): kappa(m)=R/m and S(x)k=S/mS, with both maps written out. Step 2: quotient-local-structure, then 07EL (lem-sfb-geometrically-regular-local-field-adic-smooth: Noetherian local geometrically regular k-algebra, no characteristic restriction), then 07NQ (flat plus formally smooth closed fibre with the induced algebra structure) give n-adic formal smoothness. Step 3: 07ED gives f^. Completions are Noetherian (0316) and local with maximal ideals mR^ and nS^ (05GI). They are complete by 05GG with I=m finitely generated, using m^jR^=(mR^)^j. Locality is shown on the generators c_R(m). Step 4: 07PM (4)=>(1), with all four hypotheses established. Step 5: 07QI, including the Noetherian-fibre hypothesis that the source passes over; it is checked through the localization of S^ at h(R minus p) modulo p, using 00FN for the localization and the quotient. Step 6: c_S f = f^ c_R levelwise, 00MC gives flat and surjective on Spec, and 07NT applies. Edge cases tested: a field source, k[[t]]->k (not flat), k->k[eps]/eps^2, imperfect k, and empty fibres. All are correct. rg for 0H7U and Andre finds no duplicate. Batch-5 flag: I walked the full closure of lem-sfb-geometrically-regular-local-field-adic-smooth (150 nodes). Its only sec-trace-formula nodes are lem-trf-regular-complete-coefficient-coordinates (Cohen structure 0C0S) and lem-trf-surjective-kernel-nonzerodivisor-dimension-drop (Krull dimension). Both are generic commutative algebra, not steps of the trace-formula or Poincare-duality proofs, and no trace-transport, pod or batch-4 node is in the closure, so I accepted it. I accept the 7 tool_uses (07EL, 07NQ, 07ED, 0316, 07PM, 07QI, 07NT): they are the source proof's own lemmas, and the perverse unit has no alternative."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalClosedFibreCriterion",
+  "declaration": "RingHom.isRegular_iff_flat_isGeometricallyRegular_closedFiber_of_completion",
+  "file": "lean/Sheaf/RingTheory/LocalClosedFibreCriterion.lean",
+  "statement": "theorem isRegular_iff_flat_isGeometricallyRegular_closedFiber_of_completion (R : Type u) (S : Type v) [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] [IsLocalRing R] [IsLocalRing S] [Algebra R S] [IsLocalHom (algebraMap R S)] (hcompletion : (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R)).IsRegular) : (algebraMap R S).IsRegular ↔ (algebraMap R S).Flat ∧ Algebra.IsGeometricallyRegular (IsLocalRing.maximalIdeal R).ResidueField ((IsLocalRing.maximalIdeal R).Fiber S)",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8aeeeb03c",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Stacks 0H7U (1)<=>(2) read in more-algebra.tex. Lean: Noetherian local R:Type u, S:Type v, [Algebra R S] [IsLocalHom], hcompletion = RingHom.IsRegular of algebraMap R (AdicCompletion m R); conclusion IsRegular <-> Flat and IsGeometricallyRegular m.ResidueField (m.Fiber S). The fibre k⊗_R S equals the source's B⊗_A k. All hypotheses present, none stronger. lean.statement equals the file signature verbatim (script check). Item node identical to side-live except lean; the 4 stmt_dep records byte-identical. RingHom.IsRegular, IsGeometricallyRegular and their universes (max u v) read in GRing.lean. Edge cases: field R, identity map, imperfect k, zero ring excluded by IsLocalRing as in the source. No duplicate (rg 0H7U/isRegular_iff_flat; Mathlib has no regular ring maps). No definitions, sorry-only proof, source/blueprint docstrings, 6-step proof docstring, all imports exist. Report has Worker report and Second reading sections (the latter the worker's own pass, disclosed). No compile run (no change); worker reports a clean compile."
+ }
+}

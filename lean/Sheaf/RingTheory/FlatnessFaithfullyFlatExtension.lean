@@ -57,6 +57,33 @@ theorem iff_flat_tensorProduct_of_faithfullyFlat_extension
     [AddCommGroup N] [Module A N] [Module B N] [IsScalarTower A B N]
     [Module.FaithfullyFlat B C] :
     Module.Flat A N ↔ Module.Flat A (C ⊗[B] N) := by
-  sorry
+  have tensor_injective_iff
+      {P Q : Type (max u w t)} [AddCommGroup P] [AddCommGroup Q]
+      [Module A P] [Module A Q] (f : P →ₗ[A] Q) :
+      Function.Injective (f.lTensor (C ⊗[B] N)) ↔
+        Function.Injective (f.lTensor N) := by
+    let g := TensorProduct.AlgebraTensorModule.lTensor B N f
+    have h : g.lTensor C =
+        (TensorProduct.AlgebraTensorModule.assoc A B B C N Q).toLinearMap ∘ₗ
+          TensorProduct.AlgebraTensorModule.lTensor B (C ⊗[B] N) f ∘ₗ
+          (TensorProduct.AlgebraTensorModule.assoc A B B C N P).symm.toLinearMap := by
+      ext c n p
+      rfl
+    have hi := Module.FaithfullyFlat.lTensor_injective_iff_injective B C g
+    rw [h] at hi
+    simpa only [g, LinearMap.coe_comp, LinearEquiv.coe_coe,
+      EquivLike.injective_comp, EquivLike.comp_injective,
+      TensorProduct.AlgebraTensorModule.coe_lTensor] using hi
+  constructor
+  · intro h
+    let := h
+    refine Module.Flat.iff_lTensor_preserves_injective_linearMap'.mpr
+      (fun {P Q : Type (max u w t)} _ _ _ _ f hf ↦ ?_)
+    exact (tensor_injective_iff f).mpr (lTensor_preserves_injective_linearMap f hf)
+  · intro h
+    let := h
+    refine Module.Flat.iff_lTensor_preserves_injective_linearMap'.mpr
+      (fun {P Q : Type (max u w t)} _ _ _ _ f hf ↦ ?_)
+    exact (tensor_injective_iff f).mp (lTensor_preserves_injective_linearMap f hf)
 
 end Module.Flat

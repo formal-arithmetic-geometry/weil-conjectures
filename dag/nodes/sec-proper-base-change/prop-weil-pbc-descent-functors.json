@@ -39,9 +39,9 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sbc-coherent-pair-functor-descent] to $\\mathcal A_E=\\mathcal C_E(T)$, $\\mathcal B_E=\\mathcal C_E(S)$, $U=T^T$, $V=T^S$, $b=\\beta$. Its unit and tower hypotheses are precisely the assumed ones. It gives the additive functor $(E,K)\\mapsto(E,\\Phi_EK)$ with the displayed representative formula, including independence of common stage and representative.",
+   "text": "Use the already proved native StageSystem.Morphism.functor and functor_map_mkHom from WeilConjectures.CategoryTheory.StageSystem.Functor. They give the object and representative formulas. Prove additivity directly: represent two arrows at one common stage, use the normalized pair-category addition supplied by [prop-weil-pbc-common-stage-calculus], apply stage additivity and bilinearity of composition, and return by the target addition formula. No separate existence theorem for a replacement pair-category functor is needed.",
    "uses": [
-    "lem-sbc-coherent-pair-functor-descent"
+    "prop-weil-pbc-common-stage-calculus"
    ],
    "elementary": false,
    "source": {
@@ -50,13 +50,11 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-pair-functor-shift-coherence] to this functor, with the given exact stage shift comparisons: it supplies coherent shifts and shift-compatible $\\kappa_E:\\Phi j_E^T\\simeq j_E^S\\Phi_E$. By [lem-weil-pbc-distinguished-diagram-lifting], any distinguished triangle is isomorphic to $j_E^T\\Delta$ for a distinguished stage triangle $\\Delta$. Its image is isomorphic to $j_E^S\\Phi_E\\Delta$ via $\\kappa_E$ on the vertices: the first two squares are naturality and the last is precisely shift compatibility. The latter triangle is distinguished since $\\Phi_E$ and $j_E^S$ are exact, the inclusion by [thm-weil-pbc-verdier-axioms]. Distinguishedness is invariant under triangle isomorphism, so $\\Phi$ is exact. [def-weil-pbc-qbar-category] identifies these pair categories with the stated coefficient categories.",
+   "text": "Construct the compatible stage shift transformation using each stage functor commShiftIso and betaCommShift. Descend it with the native StageSystem.Morphism.descNatTrans and conjugate by the composition isomorphisms. Check the shift zero and addition laws on (E,K), where the descent inclusion-comparison isomorphism has identity components; the normalized shifts and faithful local inclusions of [prop-weil-pbc-common-stage-calculus] give these equations. For exactness, [thm-weil-pbc-verdier-axioms] characterizes a distinguished source triangle as the image of a single distinguished stage triangle using [def-weil-pbc-common-stage-cones]. Map that triangle by the exact stage functor. The shift-compatible inclusion comparison identifies its image with the descended image triangle, and the target inclusion is exact by the same Verdier theorem. This single-triangle argument does not use simultaneous lifting of an arbitrary finite diagram. The category is the recorded pair category of [def-weil-pbc-qbar-category].",
    "uses": [
-    "lem-weil-pbc-pair-functor-shift-coherence",
-    "lem-weil-pbc-distinguished-diagram-lifting",
+    "prop-weil-pbc-common-stage-calculus",
     "thm-weil-pbc-verdier-axioms",
-    "def-weil-triangulated-category",
-    "def-weil-pbc-triangles-with-shift",
+    "def-weil-pbc-common-stage-cones",
     "def-weil-pbc-qbar-category"
    ],
    "elementary": false,
@@ -66,21 +64,20 @@
    }
   },
   {
-   "text": "For compatible transformations use [lem-sbc-coherent-pair-functor-descent], whose compatibility equation gives the components $[E,\\eta_{E,K}]$ and their naturality. Identities and vertical composites have components $[E,1]$ and $[E,\\theta_{E,K}\\circ\\eta_{E,K}]$. Its compatibility with composition of functor families identifies descended composites; applying the component formula to whiskerings gives horizontal composition. Equations hold componentwise already at $E$. The same argument applies to composites on different schemes.",
-   "uses": [
-    "lem-sbc-coherent-pair-functor-descent"
-   ],
-   "elementary": false,
+   "text": "Use the already proved native StageSystem.Morphism.descNatTrans and descNatTrans_app from WeilConjectures.CategoryTheory.StageSystem.Functor. They give the component formula. Transformation extensionality proves the descent of all componentwise equations. Apply the existing descNatTrans_id and descNatTrans_comp for identities and vertical composites. functorCompIso supplies the composition comparisons used in the concrete application. These are direct applications of proved source-library declarations, with no new existence result.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
     "place": "Proof, compatible natural transformations and their equations"
    }
   },
   {
-   "text": "[prop-weil-pbc-rational-transport] gives the exact rationalized direct images, completed pullbacks and exchange for the supplied constructibility-preserving integral operations. [prop-weil-pbc-scalar-extension] gives their coherent comparisons and compatibility of the exchange with coefficient extension. Apply steps 1–3 to these families and their composites to obtain the claimed functors and exchange on the categories of [def-weil-pbc-qbar-category].",
+   "text": "Apply [lem-weil-pbc-direct-image-coherent-family] to f and f' and [lem-weil-pbc-pullback-coherent-family] to g and g'. They supply the four canonical normalized exact families with their BetaSpec equations. Apply the already proved general pbcDescentFunctors theorem to each family for the four ExactDescent clauses. [lem-weil-pbc-exchange-compatible-family] supplies the compatible finite-stage exchange with its localized ambient component. Descend this Hom with Morphism.descNatTrans and conjugate by functorCompIso on the two sides. Both composition isomorphisms have identity components, so descNatTrans_app gives exactly the final displayed component formula.",
    "uses": [
-    "prop-weil-pbc-rational-transport",
-    "prop-weil-pbc-scalar-extension",
+    "lem-weil-pbc-direct-image-coherent-family",
+    "lem-weil-pbc-pullback-coherent-family",
+    "lem-weil-pbc-exchange-compatible-family",
     "def-weil-pbc-qbar-category"
    ],
    "elementary": false,
@@ -91,20 +88,18 @@
   }
  ],
  "proof_deps": [
-  "lem-sbc-coherent-pair-functor-descent",
-  "lem-weil-pbc-pair-functor-shift-coherence",
-  "lem-weil-pbc-distinguished-diagram-lifting",
+  "prop-weil-pbc-common-stage-calculus",
   "thm-weil-pbc-verdier-axioms",
-  "def-weil-triangulated-category",
-  "def-weil-pbc-triangles-with-shift",
+  "def-weil-pbc-common-stage-cones",
   "def-weil-pbc-qbar-category",
-  "prop-weil-pbc-rational-transport",
-  "prop-weil-pbc-scalar-extension"
+  "lem-weil-pbc-direct-image-coherent-family",
+  "lem-weil-pbc-pullback-coherent-family",
+  "lem-weil-pbc-exchange-compatible-family"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
-  "place": "Proof, re-split on 2026-10-21: existing coherent additive descent, extracted shift-coherence node, common-stage triangle lifting, and finite-stage operation application."
+  "place": "2026-10-22: the existing Lean proof directly uses the proved native StageSystem functor and transformation API, constructs shift coherence privately, and obtains single-triangle stage lifting from the Verdier characterization. Preserve this proof and make its actual dependencies explicit. The concrete application is assembled from the three separate finite-stage inputs."
  },
  "mathlib_searches": [
   {
@@ -165,7 +160,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -223,30 +229,23 @@
   "existing": false,
   "branch": "newtargets-dag",
   "declarations": [
-   "CategoryTheory.StageSystem.CoherentExactMorphism",
    "CategoryTheory.StageSystem.Morphism.ExactDescent",
    "CategoryTheory.StageSystem.Morphism.DescentSpec",
    "AlgebraicGeometry.Scheme.pbcDescentFunctors",
-   "AlgebraicGeometry.Scheme.pbcDescentDirectImage",
-   "AlgebraicGeometry.Scheme.pbcDescentPullback",
-   "AlgebraicGeometry.Scheme.PbcDirectImageBetaSpec",
-   "AlgebraicGeometry.Scheme.PbcPullbackBetaSpec",
    "AlgebraicGeometry.Scheme.pbcDescentOperations"
   ],
-  "note": "Repair of immutable return 4e84050ba384 H3: pbcDescentOperations now concludes canonical component specifications for all four beta families, using PbcDirectImageBetaSpec and PbcPullbackBetaSpec. These predicates compare the actual beta components, conjugated by the recorded integral/scalar normalization, with the unique rational scalar-operation comparisons at pbcFiniteField. Pullback uses beta inverse. Equal fields and independent scheme/coefficient universes are retained. Actual stage-functor and canonical exchange formulas are unchanged. The primary theorem remains exact descent on the recorded Qbar pair categories with the representative and all compatible-equation formulas. All nine declarations belong to this node; there are no dependency restatements or mathematical node changes.",
+  "note": "Repair of immutable return 4e84050ba384 H3: pbcDescentOperations now concludes canonical component specifications for all four beta families, using PbcDirectImageBetaSpec and PbcPullbackBetaSpec. These predicates compare the actual beta components, conjugated by the recorded integral/scalar normalization, with the unique rational scalar-operation comparisons at pbcFiniteField. Pullback uses beta inverse. Equal fields and independent scheme/coefficient universes are retained. Actual stage-functor and canonical exchange formulas are unchanged. The primary theorem remains exact descent on the recorded Qbar pair categories with the representative and all compatible-equation formulas. All nine declarations belong to this node; there are no dependency restatements or mathematical node changes. A4 2026-10-22: CoherentExactMorphism and the four concrete operation/BetaSpec definitions move verbatim to Sheaf.Paper.PbcDescentInterfaces, publicly re-exported here to break the dependency on the assembly theorem. Their names, signatures, attributes and bodies are unchanged. The two descent conclusions remain in this module. The moved direct-image definitions remain attached to def-per-rational-direct-image-family; the other three interface definitions attach to def-weil-pbc-descent-interfaces. The parent retains only its four descent declarations. This keeps the finite-stage input nodes independent of the theorem they support.",
   "fixed_by": "NT-stage2-Codex-445b5f782"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
+  "reviewer": "C-f13bb",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261019T002513-L-2143196",
+  "landing": "20261022T113810-L-253425",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered PbcDescentFunctors + 8 new modules and nodes against the clone (moved defs byte-identical), the item/sorry statements against PbcScalarExtension exchange routes, and the 9 direct importers compiled against the delivered modules (all rc 0); #print axioms only upstream sorryAx"
  },
- "tool_uses": [
-  "lem-sbc-coherent-pair-functor-descent"
- ]
+ "tool_uses": []
 }

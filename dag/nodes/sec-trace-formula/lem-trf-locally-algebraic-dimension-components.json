@@ -1,0 +1,268 @@
+{
+ "id": "lem-trf-locally-algebraic-dimension-components",
+ "kind": "statement",
+ "title": "Local dimension as the maximum of component dimensions on a locally algebraic scheme",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a scheme [def-pc-scheme], and let $f:X\\to\\operatorname{Spec}k$ be locally of finite type [def-weil-finite-type-morphism]. For every point $x\\in X$, the local topological dimension [def-kun-topological-dimension-at-point] is the maximum of the topological Krull dimensions [def-kun-topological-krull-dimension] of the irreducible components [def-weil-irreducible-components] containing $x$: $$\\dim_x X=\\max\\{\\dim C:C\\text{ is an irreducible component of }X,\\ x\\in C\\}.$$ Each $C$ has its subspace topology [def-kun-subspace-topology]; the displayed family is nonempty and its maximum is attained. No irreducibility, equidimensionality, separatedness or quasi-compactness of $X$ is assumed. For empty $X$ there is no point $x$, so the assertion is vacuous.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B1B (item-dimension-irreducibles-passing-through in lemma-dimension-locally-algebraic), first equality."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-dimension-at-point",
+  "def-kun-topological-krull-dimension",
+  "def-weil-irreducible-components",
+  "def-kun-subspace-topology"
+ ],
+ "proof": [
+  {
+   "text": "For an inducing map g:A→B and a∈A, dim_a A≤dim_g(a) B: pull back each open neighbourhood V of g(a), then use subspace dimension monotonicity on its inducing restriction and take infima. In particular homeomorphisms preserve local dimension, by applying this inequality in both directions.",
+   "uses": [
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-open-subspace-dimension-monotone",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B1B (item-dimension-irreducibles-passing-through in lemma-dimension-locally-algebraic), first equality."
+   }
+  },
+  {
+   "text": "Let C be a component through x. Give C its reduced induced closed scheme structure j:Y→X, with Y homeomorphic to C. The scheme Y is irreducible and its composite to Spec k is locally of finite type. Lift x to y∈Y. The irreducible locally algebraic dimension theorem gives dim C=dim Y=dim_y Y. The inducing inequality from step 1 gives dim_y Y≤dim_x X. This proves the bound for every component.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-dimension-locally-algebraic",
+    "lem-weil-pbc-homeomorphism-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B1B (item-dimension-irreducibles-passing-through in lemma-dimension-locally-algebraic), first equality."
+   }
+  },
+  {
+   "text": "Choose an affine open neighbourhood U of x. Its ring R=Γ(U, O_X) is finite type over k by the definition of locally finite type. The affine homeomorphism U≅Spec R and open-subspace invariance identify dim_x X with dim_p Spec R at the corresponding prime p. The affine component theorem supplies a component D through p whose dimension is this value.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "lem-weil-pbc-dimension-at-point-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B1B (item-dimension-irreducibles-passing-through in lemma-dimension-locally-algebraic), first equality."
+   }
+  },
+  {
+   "text": "Map D into X along the open embedding Spec R≅U→X. Its image is irreducible, so it is contained in a maximal irreducible subset C of X, by the general existence theorem for components. This C contains x. The induced embedding D→C gives dim_x X=dim D≤dim C, while step 2 gives the reverse inequality. Hence C attains the required maximum. Empty X has no x.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-open-subspace-dimension-monotone"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B1B (item-dimension-irreducibles-passing-through in lemma-dimension-locally-algebraic), first equality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-open-subspace-dimension-monotone",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "def-weil-irreducible-components",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sc-dimension-locally-algebraic",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-at-point-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B1B (item-dimension-irreducibles-passing-through in lemma-dimension-locally-algebraic), first equality. Lean variation of the affine reduction: use inducing monotonicity for the component bound and extend an attaining affine component to a global component, instead of proving the component bijection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local Krull dimension is the maximum of dimensions of irreducible components passing through the point for a locally algebraic scheme",
+   "results": "8 hits; top: topologicalKrullDim, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, Ideal.primeHeight_eq_ringKrullDim_iff, Ideal.sup_primeHeight_eq_ringKrullDim, Ring.KrullDimLE.of_isLocalization, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, Ideal.sup_height_eq_ringKrullDim, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; digest=4e333d6cd62ed837. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*(irreducible|component)|dimension.*components|topologicalKrullDimAt",
+   "results": "0 hits; top: none; digest=4f53cda18c2baa0c. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme locally of finite type over a field the dimension at a point equals the maximum of the dimensions of irreducible components containing that point",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.height_of_isClosed, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.instFieldCarrierFunctionField; digest=b6a4b08bc5857f68. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The local dimension at x of a locally algebraic k scheme is the maximum of the dimensions of its irreducible components containing x; this maximum exists and is finite",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.height_of_isClosed, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.Scheme.local_affine, Module.rankAtStalk, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.stalkFunctionFieldAlgebra, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral; digest=5365cbbfb98a6fcb. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt|local.*dimension|dimension.*component",
+   "results": "2 hits; top: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; digest=a9feeab06846fbb0. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim, irreducibleComponents",
+   "results": "0 hits; top: none; digest=4f53cda18c2baa0c. Read the hits: generic-point existence, point height, local-ring dimension and Artinian criteria do not identify local topological dimension with component dimensions. Mathlib/Topology/KrullDimension.lean defines global dimension and proves subspace monotonicity, not this locally algebraic maximum formula. Smooth relative-dimension base change assumes smoothness and does not apply to arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*(iUnion|union|irreducibleComponents)|topologicalKrullDimAt",
+   "results": "0 hits; top: none; digest=4f53cda18c2baa0c. Read the hits: no local topological component-maximum theorem; the Smooth.lean matches concern smooth relative dimension, not arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension at a point of a locally algebraic scheme is maximum of dimensions of components through the point",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.mk.noConfusion, AlgebraicGeometry.Scheme.height_of_isClosed, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, irreducibleComponent_mem_irreducibleComponents, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed, genericPoints, IsLocalization.AtPrime.ringKrullDim_eq_height; digest=82b358f790084f26. Read the hits: point height, component membership, local affine charts and global dimension definitions do not state the local topological dimension/component-maximum formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim, irreducibleComponents",
+   "results": "0 hits; top: none; digest=4f53cda18c2baa0c. Read the hits: point height, component membership, local affine charts and global dimension definitions do not state the local topological dimension/component-maximum formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme locally of finite type over a field local topological dimension at a point equals the maximum dimension of irreducible components containing it",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.height_of_isClosed, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType, topologicalKrullDim, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, Module.rankAtStalk, AlgebraicGeometry.instFieldCarrierFunctionField; digest=a4c1cd8ce9d0b8f5. Read the hits: point height, component membership, local affine charts and global dimension definitions do not state the local topological dimension/component-maximum formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dimension.*component|local.*dimension|topologicalKrullDimAt",
+   "results": "2 hits; top: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; digest=a9feeab06846fbb0. Read the hits: no local topological component-maximum theorem; the Smooth.lean matches concern smooth relative dimension, not arbitrary locally finite type schemes.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra over a field the dimension at a point of its spectrum is the maximum dimension of components passing through it",
+   "results": "8 hits; top: Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmooth.relativeDimension, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, Algebra.Presentation.localizationAway_dimension_zero, IsLocalRing.finrank_quotient_map, IsLocalization.AtPrime.ringKrullDim_eq_height, ringKrullDim_quotient, Ideal.inertiaDeg_bot; digest=40da38ebdcd0a80e. Read the hits: algebra presentation dimension, global spectrum dimension, localization height and quotient dimension do not give local topological dimension as a component maximum.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-field-extension-component-local-dimension",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: after ILO X Theorem 3.4 Step 2 flatifies the curve and horizontal boundary, their dense generic fibres determine pure relative dimensions 1 and 0. Field-extension local and component dimensions (old steps 5--6). The component-generic-point equality is obtained from the maximum over components through a point.",
+   "via": [
+    "lem-trf-field-extension-component-local-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-locally-algebraic-dimension-components",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0B1B: choose a finite-type affine chart, restrict components by the irreducible-closed-subset correspondence, compare each component dimension using its closed scheme structure and 0A21(3), and apply the existing affine 00OT node. Statement unchanged; no new nodes. Verified all dependency statements and repeated logged Mathlib searches.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: after ILO X Theorem 3.4 Step 2 flatifies the curve and horizontal boundary, their dense generic fibres determine pure relative dimensions 1 and 0. Field-extension local and component dimensions (old steps 5--6). The component-generic-point equality is obtained from the maximum over components through a point.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dimension-at-point-components",
+    "why": "Generic affine dimension theorem (00OT), used after choosing a finite-type chart; the unit has no affine component-maximum theorem."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Generic irreducible locally algebraic open-dimension invariance (0A21(3)), applied to the closed scheme structure on a component; the unit has no such dimension tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-at-point-components",
+  "lem-sc-dimension-locally-algebraic"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-873e7492f",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-873e7492f (reviewer sub-agent of L); spot-checked: Read in full against Stacks varieties.tex lemma-dimension-locally-algebraic (0A21), item (5) (0B1B), proof at lines 3894-3904. The statement is the first equality of the source with the same hypotheses (k a field, X locally of finite type over k), with nonemptiness and attainment made explicit; it is unchanged. The four steps follow the source exactly. Step 1: a finite-type affine chart from the cover definition, then open-subspace invariance of dim_x. Step 2: the IrreducibleCloseds order isomorphism, with maximality checked both ways and membership of x preserved. Step 3: closed subscheme structure on the component, homeomorphism, lft of the immersion and of the composite, then 0A21(3) on the nonempty open j^-1(U), then homeomorphism invariance of Krull dimension. Step 4: 00OT, reindexed along the bijection. Every cited statement was opened and says what its step uses; proof_deps equals the union of uses; there is no cycle. Edge cases checked: empty X, a point, plane plus line, nonreduced thickening, infinite disjoint union of A^n. There are no new nodes. No duplicate exists: rg finds 0B1B only in the item and its citer. There is no slopmaster2 Lean for the statement. The item is still unsplit on live and side-live and has no repair note. Nothing cites SGA. Accepted tool uses: lem-weil-pbc-dimension-at-point-components (00OT, generic affine) and lem-sc-dimension-locally-algebraic (0A21(3), generic)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyAlgebraicDimensionComponents",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_eq_max_component_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyAlgebraicDimensionComponents.lean",
+  "statement": "theorem topologicalKrullDimAt_eq_max_component_dimension {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] (x : X) : (∀ C : Set X, C ∈ irreducibleComponents X → x ∈ C → topologicalKrullDim C ≤ topologicalKrullDimAt x) ∧ (∃ C : Set X, C ∈ irreducibleComponents X ∧ x ∈ C ∧ topologicalKrullDim C = topologicalKrullDimAt x)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85c490bcb",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Node unchanged apart from lean; lean.statement verbatim. Binders Field k, X : Scheme.{u}, f : X ⟶ Spec (.of k), [LocallyOfFiniteType f], x match the node; no extra hypotheses (qc/separated/irreducible/reduced). Conclusion = ∀ component C ∋ x, dim C ≤ topologicalKrullDimAt x, plus ∃ component attaining it; this is the attained maximum, nonemptiness included. topologicalKrullDimAt verified as the inf over open nbhds (KrullDimension.lean:343); subspace topology via subtype. All 7 stmt_deps recorded (Field/irreducibleComponents Mathlib status). No definitions, sorry-only proof, source 0B1B + blueprint docstrings with 4 proof steps, autoImplicit false. Edge cases: empty X vacuous, generic point, line∪plane, infinite disjoint union, nonreduced. rg finds no duplicate in WeilConjectures/Sheaf. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T071323-L-3913748",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

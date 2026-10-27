@@ -1,0 +1,392 @@
+{
+ "id": "lem-trf-affinoid-quotient-norm-topology",
+ "kind": "statement",
+ "title": "Quotient Gauss norm and Banach topology of a Tate quotient",
+ "statement": "Let $K$ be a complete field [def-weil-field] with a nontrivial real-valued nonarchimedean absolute value. Write $T_r=K\\langle T_1,\\ldots,T_r\\rangle$ for the restricted-series ring [def-trf-restricted-series-presentation], with Gauss norm $\\|\\sum_\\nu a_\\nu T^\\nu\\|_G=\\sup_\\nu|a_\\nu|$, where coefficients tend to zero. Let $C\\ne0$ be a commutative unital Banach $K$-algebra with nonarchimedean submultiplicative norm $\\|\\cdot\\|_C$ satisfying $\\|ac\\|_C=|a|\\|c\\|_C$, and let $q:T_r\\to C$ be a continuous surjective $K$-algebra homomorphism. Then $\\|c\\|_q=\\inf\\{\\|f\\|_G:q(f)=c\\}$ is a complete nonarchimedean submultiplicative $K$-algebra norm, induces the quotient topology, and is equivalent to $\\|\\cdot\\|_C$: there are positive real constants $A,B$ with $\\|c\\|_q\\le A\\|c\\|_C$ and $\\|c\\|_C\\le B\\|c\\|_q$ for all $c\\in C$.",
+ "source": {
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.4, Proposition 4(i)-(ii), printed p.23, and Proposition 19, printed p.31, alternative proof by the Banach open mapping theorem (not its proof using Theorem 16). Primary PDF read online 2026-10-24; archival copy WANTED.",
+  "url": "https://www.uni-muenster.de/IVV5WS/WebHop/user/weckerm/heft378.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-restricted-series-gauss-completion] with $F=K$ and $n=r$. It gives a complete Gauss-normed ring $T_r$ with ultrametric triangle inequality, $\\|1\\|_G=1$ and $\\|fg\\|_G\\le\\|f\\|_G\\|g\\|_G$. The coefficient formula gives $\\|af\\|_G=|a|\\|f\\|_G$ for $a\\ne0$ by taking the supremum after multiplying every coefficient value by $|a|>0$; for $a=0$ both sides vanish. Thus $T_r$ is a Banach $K$-vector space. The assumptions make $C$ a Banach $K$-vector space too, and the given algebra homomorphism $q$ is a continuous surjective linear map.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Proposition 4(i)–(ii), printed p.23; alternative Banach open mapping route following Proposition 19, printed p.31. Agent proof using the cited Mathlib and DAG statements; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-continuous-linear-map-norm-bound] to $q$ to get $B>0$ with $\\|q(f)\\|_C\\le B\\|f\\|_G$ for every $f$. Apply [lem-trf-banach-surjective-bounded-lifts] to the same map between the Banach spaces of step 1 to get $A>0$ such that every $c$ has a lift $f$ with $\\|f\\|_G\\le A\\|c\\|_C$. Both results apply over the same nontrivially normed field $K$; the second result uses completeness of both spaces, already checked. No finite-dimensionality or discrete valuation is used.",
+   "uses": [
+    "lem-trf-continuous-linear-map-norm-bound",
+    "lem-trf-banach-surjective-bounded-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Proposition 4(i)–(ii), printed p.23; alternative Banach open mapping route following Proposition 19, printed p.31. Agent proof using the cited Mathlib and DAG statements; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For each $c$, the set $S_c=\\{\\|f\\|_G:q(f)=c\\}$ is nonempty by surjectivity and bounded below by zero. Put $N(c)=\\inf S_c$. It is finite and nonnegative, and for every $\\epsilon>0$ there is a lift of $c$ with norm less than $N(c)+\\epsilon$: otherwise that larger number would be a lower bound for $S_c$. For every lift of $c$, step 2 gives $\\|c\\|_C/B\\le\\|f\\|_G$. Taking the infimum gives $\\|c\\|_C\\le B N(c)$. Its bounded lift gives $N(c)\\le A\\|c\\|_C$. Since zero lifts zero, $N(0)=0$; the first inequality implies $N(c)=0$ only for $c=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Proposition 4(i)–(ii), printed p.23; alternative Banach open mapping route following Proposition 19, printed p.31. Agent proof using the cited Mathlib and DAG statements; local PDF WANTED."
+   }
+  },
+  {
+   "text": "Negation bijects lifts of $c$ and $-c$ without changing their Gauss norms, so $N(-c)=N(c)$. For $a\\ne0$, multiplication by $a$ bijects lifts of $c$ and $ac$, scaling their norms by $|a|$; consequently $N(ac)=|a|N(c)$ by the defining greatest-lower-bound property. For $a=0$ the identity follows from $N(0)=0$. Given $\\epsilon>0$, take lifts $f,g$ of $c,d$ with norms less than $N(c)+\\epsilon,N(d)+\\epsilon$. Their sum lifts $c+d$, so the Gauss ultrametric bound of step 1 gives $N(c+d)\\le\\max(N(c),N(d))+\\epsilon$. Letting $\\epsilon$ decrease to zero gives the ultrametric inequality for $N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Proposition 4(i)–(ii), printed p.23; alternative Banach open mapping route following Proposition 19, printed p.31. Agent proof using the cited Mathlib and DAG statements; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For the same approximate lifts, $fg$ lifts $cd$ and step 1 gives $N(cd)\\le(N(c)+\\epsilon)(N(d)+\\epsilon)$. Let $\\epsilon$ decrease to zero to obtain $N(cd)\\le N(c)N(d)$. The lift $1\\in T_r$ gives $N(1)\\le1$. Since $C\\ne0$, definiteness implies $N(1)>0$; submultiplicativity applied to $1=1\\cdot1$ gives $N(1)\\le N(1)^2$, hence $N(1)\\ge1$. Thus $N(1)=1$, and scalar homogeneity also gives $N(a1)=|a|$. These calculations establish all algebra-norm axioms without requiring any infimum to be attained.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Proposition 4(i)–(ii), printed p.23; alternative Banach open mapping route following Proposition 19, printed p.31. Agent proof using the cited Mathlib and DAG statements; local PDF WANTED."
+   }
+  },
+  {
+   "text": "For $t>0$ one has $q(\\{f:\\|f\\|_G<t\\})=\\{c:N(c)<t\\}$. One inclusion follows from $N(q(f))\\le\\|f\\|_G$; for the other, choose $0<\\epsilon<t-N(c)$ in step 3. Translation gives the same equality for balls centered at any $f_0$ and $q(f_0)$. Therefore $q$ is open for the $N$-topology, since balls form a basis, and it is continuous by $N(q(f)-q(g))\\le\\|f-g\\|_G$. A surjective continuous open map induces the quotient topology: if $q^{-1}(U)$ is open then $U=q(q^{-1}(U))$ is open, and the converse is continuity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Proposition 4(i)–(ii), printed p.23; alternative Banach open mapping route following Proposition 19, printed p.31. Agent proof using the cited Mathlib and DAG statements; local PDF WANTED."
+   }
+  },
+  {
+   "text": "The two inequalities in step 3 applied to differences show that the $N$ and original $C$ norm topologies coincide (each ball contains an appropriately scaled ball for the other norm). They also prove completeness directly: an $N$-Cauchy sequence is Cauchy for $\\|\\cdot\\|_C$ by $\\|c-d\\|_C\\le BN(c-d)$; it has a limit $c$ in the given Banach algebra, and $N(c_n-c)\\le A\\|c_n-c\\|_C\\to0$. Thus the $N$ metric is complete. Together with steps 3–6 this proves the stated equivalence, quotient topology and complete nonarchimedean submultiplicative algebra norm.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+    "place": "Section 1.4, Proposition 4(i)–(ii), printed p.23; alternative Banach open mapping route following Proposition 19, printed p.31. Agent proof using the cited Mathlib and DAG statements; local PDF WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-continuous-linear-map-norm-bound",
+  "lem-trf-banach-surjective-bounded-lifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-formal-rigid-geometry-2008.pdf",
+  "place": "Section 1.4, Proposition 4(i)–(ii), printed p.23; alternative Banach open mapping route following Proposition 19, printed p.31. Agent proof using the cited Mathlib and DAG statements; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*[Gg]auss|[Gg]auss.*quotient|affinoid|residue.norm",
+   "results": {
+    "t": "2026-10-24T08:02:27Z",
+    "tool": "grep",
+    "query": "quotient.*[Gg]auss|[Gg]auss.*quotient|affinoid|residue.norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.Quotient.norm_mk_lt gives approximate lifts only, and normedCommRing assumes a closed ideal. Neither it nor GaussNorm supplies all analytic Tate-quotient and norm-equivalence assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every residue class of a Tate algebra modulo an ideal has a representative attaining the quotient Gauss norm",
+   "results": {
+    "t": "2026-10-24T08:02:28Z",
+    "tool": "leansearch",
+    "query": "Every residue class of a Tate algebra modulo an ideal has a representative attaining the quotient Gauss norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PowerSeries.gaussNorm",
+     "QuotientGroup.norm_lt_iff",
+     "Ideal.Quotient.norm_mk_le",
+     "Ideal.Quotient.semiNormedCommRing",
+     "Ideal.Quotient.normedCommRing",
+     "Ideal.Quotient.norm_mk_lt",
+     "Ideal.Quotient.normedAlgebra",
+     "Submodule.Quotient.normedSpace"
+    ],
+    "digest": "c4aea3fe4bb39299"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.Quotient.norm_mk_lt gives approximate lifts only, and normedCommRing assumes a closed ideal. Neither it nor GaussNorm supplies all analytic Tate-quotient and norm-equivalence assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"gaussNorm\"",
+   "results": {
+    "t": "2026-10-24T08:02:28Z",
+    "tool": "loogle",
+    "query": "\"MvPowerSeries\", \"gaussNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "MvPowerSeries.HasGaussNorm",
+     "MvPowerSeries.gaussNorm",
+     "MvPowerSeries.AchievesGaussNorm",
+     "MvPowerSeries.gaussNorm_nonneg",
+     "MvPowerSeries.gaussNorm_zero",
+     "MvPowerSeries.gaussNorm_neg",
+     "MvPowerSeries.gaussNorm_eq_zero_iff",
+     "MvPowerSeries.gaussNorm_add_le_max"
+    ],
+    "digest": "0dbc0cc868afe6f0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.Quotient.norm_mk_lt gives approximate lifts only, and normedCommRing assumes a closed ideal. Neither it nor GaussNorm supplies all analytic Tate-quotient and norm-equivalence assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quotient of a Tate algebra the quotient Gauss norm is complete induces the affinoid topology and every quotient norm has a norm minimizing lift",
+   "results": {
+    "t": "2026-10-24T08:02:30Z",
+    "tool": "leanfinder",
+    "query": "For a quotient of a Tate algebra the quotient Gauss norm is complete induces the affinoid topology and every quotient norm has a norm minimizing lift",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.Quotient.norm_mk_lt",
+     "IsAdicComplete.henselianRing",
+     "Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete",
+     "NumberField.instNormedFieldValuedAdicCompletion",
+     "AdicCompletion.factorₐ_evalₐ_one",
+     "IsAdicComplete.of_liftRingHom",
+     "AdicCompletion.factor_evalₐ_eq_eval",
+     "IsAdicComplete.mk_liftRingHom"
+    ],
+    "digest": "aa596d778459985f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.Quotient.norm_mk_lt gives approximate lifts only, and normedCommRing assumes a closed ideal. Neither it nor GaussNorm supplies all analytic Tate-quotient and norm-equivalence assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cosets of ideals in a restricted convergent power series ring have representatives of minimal Gauss norm",
+   "results": {
+    "t": "2026-10-24T08:04:11Z",
+    "tool": "leanfinder",
+    "query": "Cosets of ideals in a restricted convergent power series ring have representatives of minimal Gauss norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.Quotient.norm_mk_lt",
+     "PowerSeries.IsWeierstrassDivisorAt.mod",
+     "PowerSeries.IsWeierstrassDivisorAt",
+     "PowerSeries.IsWeierstrassDivisorAt.mod'_mk_eq_mod",
+     "PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self",
+     "PowerSeries.IsWeierstrassDivisorAt.mod_coe_eq_self",
+     "PowerSeries.IsWeierstrassDivisorAt.mod'",
+     "PowerSeries.IsWeierstrassDivisorAt.divCoeff"
+    ],
+    "digest": "11b324974b03dbc5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: Ideal.Quotient.norm_mk_lt gives approximate lifts only, and normedCommRing assumes a closed ideal. Neither it nor GaussNorm supplies all analytic Tate-quotient and norm-equivalence assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient Gauss norm on a continuous surjective Tate algebra presentation is a complete nonarchimedean algebra norm equivalent to the target Banach norm",
+   "results": {
+    "t": "2026-10-24T08:32:23Z",
+    "tool": "leanfinder",
+    "query": "The quotient Gauss norm on a continuous surjective Tate algebra presentation is a complete nonarchimedean algebra norm equivalent to the target Banach norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralMulAlgNorm",
+     "spectralNorm.normedAddCommGroup",
+     "spectralNorm.normedSpace",
+     "spectralNorm.normedField",
+     "spectralNorm.seminormedAddCommGroup",
+     "NumberField.instNormedFieldValuedAdicCompletion",
+     "spectralMulAlgNorm_def",
+     "isNonarchimedean_spectralNorm"
+    ],
+    "digest": "cc899dc87f25a703"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: GaussNorm supplies coefficient inequalities and quotient modules supply abstract quotient norms, but neither states all assertions for this restricted-series presentation; the Banach comparison requires the separate bounded-preimage theorem. Second semantic phrasing checked."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Gg]auss|[Gg]auss.*quotient|norm_mk_lt",
+   "results": {
+    "t": "2026-10-24T08:33:47Z",
+    "tool": "grep",
+    "query": "quotient.*[Gg]auss|[Gg]auss.*quotient|norm_mk_lt",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Normed/Group/Quotient.lean",
+     "Mathlib/Analysis/Normed/Group/Quotient.lean",
+     "Mathlib/Analysis/Normed/Group/Quotient.lean",
+     "Mathlib/Analysis/Normed/Group/Quotient.lean",
+     "Mathlib/Analysis/Normed/Group/Quotient.lean",
+     "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+     "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean",
+     "Mathlib/MeasureTheory/Function/LpSpace/Basic.lean"
+    ],
+    "digest": "a4be1158d183cc5f"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: GaussNorm supplies coefficient inequalities and quotient modules supply abstract quotient norms, but neither states all assertions for this restricted-series presentation; the Banach comparison requires the separate bounded-preimage theorem. Second semantic phrasing checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient seminorm of a Tate algebra by a continuous surjection to a Banach algebra is complete and equivalent to its original norm",
+   "results": {
+    "t": "2026-10-24T08:33:48Z",
+    "tool": "leansearch",
+    "query": "The quotient seminorm of a Tate algebra by a continuous surjection to a Banach algebra is complete and equivalent to its original norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "QuotientAddGroup.instNorm",
+     "Submodule.Quotient.completeSpace",
+     "LinearIsometry.isComplete_map_iff",
+     "LinearIsometry.completeSpace_map",
+     "Submodule.Quotient.seminormedAddCommGroup",
+     "SeparationQuotient.completeSpace_iff",
+     "AddSubgroup.normedMk",
+     "Submodule.Quotient.normedAddCommGroup"
+    ],
+    "digest": "e3b9201a79fb1d9c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: GaussNorm supplies coefficient inequalities and quotient modules supply abstract quotient norms, but neither states all assertions for this restricted-series presentation; the Banach comparison requires the separate bounded-preimage theorem. Second semantic phrasing checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"gaussNorm\"",
+   "results": {
+    "t": "2026-10-24T08:33:48Z",
+    "tool": "loogle",
+    "query": "\"gaussNorm\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "MvPowerSeries.HasGaussNorm",
+     "MvPowerSeries.gaussNorm",
+     "MvPowerSeries.AchievesGaussNorm",
+     "MvPowerSeries.gaussNorm_nonneg",
+     "MvPowerSeries.gaussNorm_zero",
+     "MvPowerSeries.gaussNorm_neg",
+     "MvPowerSeries.gaussNorm_eq_zero_iff",
+     "MvPowerSeries.gaussNorm_add_le_max"
+    ],
+    "digest": "0dbc0cc868afe6f0"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: GaussNorm supplies coefficient inequalities and quotient modules supply abstract quotient norms, but neither states all assertions for this restricted-series presentation; the Banach comparison requires the separate bounded-preimage theorem. Second semantic phrasing checked."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affinoid-powerbounded-integral",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Power-bounded elements are integral over a presentation unit ball. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic input: Quotient Gauss norm and Banach topology of a Tate quotient.",
+   "via": [
+    "lem-trf-affinoid-powerbounded-integral",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-affinoid-quotient-norm-topology",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing Gauss-norm completeness and continuous-linear norm bound, plus one new Mathlib leaf for controlled preimages. Infimum calculus supplies norm axioms, exact images of open balls, and the two uniform norm bounds; completeness is transferred by those bounds. Statement unchanged; no norm-attainment assertion and no use of powerbounded-integrality.",
+  "blueprint": "Historical analytic input in the inherited from.place below lem-trf-local-term-locality: quotient topology/completeness for Tate presentations, supporting the old normalization chain. The latest contracting-correspondence proof is not replaced or modified. Whole-blueprint searches found no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-b06a05049",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-b06a05049 (reviewer sub-agent of L); spot-checked: I read the item and the new Mathlib leaf in full. The item statement is unchanged and true; I tested r=0 (C≅K), the identity presentation, the nonreduced quotient K<T>/(T^2) and a rescaled C-norm. Step 1 cites the statement of lem-trf-restricted-series-gauss-completion: completeness, ultrametric bound, ‖1‖=1 and submultiplicativity over a complete nonarchimedean field. Scalar homogeneity is proved inside the step. Step 2 gets B from lem-trf-continuous-linear-map-norm-bound (ContinuousLinearMap.bound, Basic.lean:132–133) and A from the new leaf. Steps 3–7 are correct elementary infimum calculus. Strict ε-lifts give definiteness, ±/scalar invariance, the ultrametric bound and submultiplicativity. N(1)=1 follows from N(1)>0, which uses C≠0. The step-6 open-ball image identity gives an open continuous surjection, hence the quotient topology. In step 7 the two-sided bounds give norm equivalence and transfer completeness. New leaf lem-trf-banach-surjective-bounded-lifts: I checked ContinuousLinearMap.exists_preimage_norm_le at Banach.lean:162–163. Its hypotheses are a nontrivially normed field and normed spaces (27–29), σ=id (64), CompleteSpace F (81) and CompleteSpace E (155). The node is a one-line specialization, self-contained, with four search kinds recorded. The `how` field cites lines 28–30 where the hypotheses are at 27–29; this is cosmetic. I searched the DAG and found no duplicate: the spectral-banach-norm, tate-reduction-norm-lifting, tate-banach-substitution and compact-remainder-coercivity nodes are all different. There is no cycle, all citations are in the same unit or are Mathlib leaves, and no tool_uses are needed. The Bosch PDF named as source is not in literature/ (WANTED). The proof is honestly marked agent-written and checked on its own merits. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffinoidQuotientNormTopology",
+  "declaration": "RestrictedSeries.affinoid_quotient_norm_topology",
+  "file": "lean/Sheaf/RingTheory/AffinoidQuotientNormTopology.lean",
+  "statement": "theorem affinoid_quotient_norm_topology (K : Type u) [NontriviallyNormedField K] [IsUltrametricDist K] [CompleteSpace K] (r : ℕ) (C : Type v) [NormedCommRing C] [Nontrivial C] [NormedAlgebra K C] [IsUltrametricDist C] [CompleteSpace C] (q : (MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* C) (hscalar : q.comp (constants K r) = algebraMap K C) (hsurj : Function.Surjective q) (hcont : ∀ s, ∀ ε : ℝ, 0 < ε → ∃ δ : ℝ, 0 < δ ∧ ∀ t, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (t.val - s.val) < δ → ‖q t - q s‖ < ε) : ∃ N : AlgebraNorm K C, (∀ c : C, N c = sInf {a : ℝ | ∃ s, q s = c ∧ a = MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) s.val}) ∧ N 1 = 1 ∧ (∀ c d : C, N (c + d) ≤ max (N c) (N d)) ∧ @CompleteSpace C N.toRingNorm.toNormedRing.toUniformSpace ∧ (∀ U : Set C, @IsOpen C N.toRingNorm.toNormedRing.toUniformSpace.toTopologicalSpace U ↔ ∀ s, q s ∈ U → ∃ ε : ℝ, 0 < ε ∧ ∀ t, MvPowerSeries.gaussNorm (norm : K → ℝ) (fun _ : Fin r ↦ 1) (t.val - s.val) < ε → q t ∈ U) ∧ ∃ A B : ℝ, 0 < A ∧ 0 < B ∧ ∀ c : C, N c ≤ A * ‖c‖ ∧ ‖c‖ ≤ B * N c",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-329fc3028",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Only the lean record changed; statement unchanged. Hypotheses: NontriviallyNormedField+IsUltrametricDist+CompleteSpace K; IsRestricted.subring at radius 1 with gaussNorm (sup|a_nu|); NormedCommRing+Nontrivial+NormedAlgebra+IsUltrametricDist+CompleteSpace C (no norm_one); q ring hom with hscalar via dep's constants, hsurj, Gauss-metric eps-delta continuity. Conclusion: AlgebraNorm N pinned pointwise to sInf of lift Gauss norms, N 1 = 1 (node step 5), ultrametric, CompleteSpace for N's metric, N-open iff Gauss-open preimage (quotient topology), A,B>0 two-sided bounds. All exact; edge cases r=0, c=0, zero scalar, C=0 excluded, independent universes. No duplicate in side-live lean or Mathlib (GrauertRemmert/AffinoidPolynomial modules state other results). Docstrings with Bosch place, blueprint tag and 7 steps; sorry only; report has Worker report and Second reading sections. No compile needed (no change)."
+ }
+}

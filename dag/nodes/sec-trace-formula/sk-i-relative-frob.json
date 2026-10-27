@@ -1,0 +1,89 @@
+{
+ "id": "sk-i-relative-frob",
+ "kind": "statement",
+ "title": "Relative Frobenius comparison",
+ "statement": "Here $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $A$ is a finite\ncommutative $\\ell$-primary ring, and $\\Phi_X$ denotes the scheme Frobenius of\n$X=X_0\\times_{k_0}k$, as in Definition [sk-d-weil].\n\nLet $f_0:X_0\\to Y_0$ be a morphism of separated schemes of finite\ntype over $k_0$, write $f:X\\to Y$ for its geometric base change, and\nlet $m\\geq1$. Put\n\n$$\n X'_m=Y\\times_{\\Phi_Y^m,Y,f}X,\n \\quad p_m:X'_m\\to X,\\quad f'_m:X'_m\\to Y,\n \\quad r_m=(f,\\Phi_X^m):X\\to X'_m,\n$$\n\nwhere $p_m$ and $f'_m$ are the two projections.\n\n1. **(1)** The relative Frobenius $r_m$ is a finite universal homeomorphism,\n$p_mr_m=\\Phi_X^m$ and $f'_mr_m=f$, and there are natural isomorphisms\nof functors $\\Dctf(X,A)\\to\\Dctf(Y,A)$\n\n$$\n\\begin{aligned}\n \\theta_{f,m}:(\\Phi_Y^m)^*Rf_!K\n &\\simeq Rf'_{m!}p_m^*K\n \\xrightarrow{Rf'_{m!}\\eta_{r_m}}\n Rf'_{m!}Rr_{m*}r_m^*p_m^*K\\\\\n &\\simeq Rf_!(\\Phi_X^m)^*K,\n\\end{aligned}\n$$\n\ncompatible with iteration in $m$.\n\n1. **(2)** For a Frobenius correspondence $\\psi:\\Phi_X^*K\\to K$ on\n$K\\in\\Dctf(X,A)$, the object $L=Rf_!K$ of $\\Dctf(Y,A)$ carries the\nFrobenius correspondence $\\psi'=Rf_!\\psi\\circ\\theta_{f,1}:\\Phi_Y^*L\\to L$,\nand its iterates are\n\n$$\n \\psi'_m=Rf_!\\psi_m\\circ\\theta_{f,m}.\n$$\n\n1. **(3)** The composition isomorphism\n$R\\Gamma_c(Y,L)\\simeq R\\Gamma_c(X,K)$ in $D^b(A)$ intertwines the\nglobal operators $T_{c_m}(\\psi'_m)$ on $Y$ and $T_{c_m}(\\psi_m)$ on\n$X$ of Definition [sk-d-weil].\n\n1. **(4)** At $y\\in Y_0(\\mathbf F_{q^m})$, compact-support base change\nidentifies $(L_{\\bar y},\\psi'_{m,\\bar y})$ with\n\n$$\n \\left(R\\Gamma_c(X_{\\bar y},K|_{X_{\\bar y}}),\n T_{c_1}(\\psi_m|_{X_{\\bar y}})\\right),\n$$\n\nwhere the fibre is regarded as a scheme over $\\mathbf F_{q^m}$, with\nthe $q^m$-power Frobenius as its scheme Frobenius.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-i-relative-frob/_section.md",
+  "place": "node sk-i-relative-frob, order 2631",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0CCB"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-d-weil",
+  "sk-d-relative-frob",
+  "sk-d-setup"
+ ],
+ "proof": [
+  {
+   "text": "*Item (1).* The map $r_m$ is the geometric base change of the\nrelative $q^m$-power Frobenius of $X_0/Y_0$. It is integral, radicial\nand surjective\n([Stacks, Tag 0CCB](https://stacks.math.columbia.edu/tag/0CCB)), and finite because it is integral and of\nfinite type. For affine $Y_0=\\operatorname{Spec}R$ and\n$X_0=\\operatorname{Spec}S$, with $F$ the $q$-power Frobenius of $R$,\nit is given on coordinate rings by\n\n$$\n R\\otimes_{F^m,R}S\\longrightarrow S,\n \\qquad b\\otimes a\\longmapsto f^\\#(b)a^{q^m}.\n$$\n\nBy topological invariance on classical finite-Tor objects, $r_m^*$\nis an equivalence, so the unit $\\eta_{r_m}$ in the construction is\nan isomorphism. The first arrow is compact-support base change, and\nthe last is composition of $!$-pushforward, using that $r_m$ is\nproper.\nPasting the Cartesian squares defining $X'_m$ and $X'_n$ gives the\ncomparison for $m+n$: the relative Frobenii compose, and the unit of\ntheir composite is the composite of the units. Thus\n\n$$\n \\theta_{f,m+n,K}=\n \\theta_{f,m,(\\Phi_X^n)^*K}\\circ\n (\\Phi_Y^m)^*\\theta_{f,n,K},\n$$\n\nwhich is the compatibility with iteration.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Item (2).* The displayed iteration identity and the naturality\nof $\\theta$ give the formula for $\\psi'_m$ by induction on $m$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Item (3).* Write $h^\\sharp$ for compact pullback along\na finite map $h$, defined by its ordinary unit. Compatibility of base\nchange with these units identifies compact pullback along\n$\\Phi_Y^m$, followed by the base-change isomorphism\n$\\operatorname{Ex}_!$, with compact pullback along $p_m$, and the\nnext arrow in $\\theta_{f,m}$ becomes $r_m^\\sharp$. Their composite is\n$r_m^\\sharp p_m^\\sharp=(p_mr_m)^\\sharp=(\\Phi_X^m)^\\sharp$, and\npostcomposing with $R\\Gamma_c(\\psi_m)$ gives the intertwining of the\noperators.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Item (4).* Pull the construction back to the fixed point $y$. The base\nchange of $r_m$ to this fibre is its $q^m$-power scheme Frobenius,\nand proper base change carries its unit to the fibre unit. The same\ncalculation therefore identifies $\\psi'_{m,\\bar y}$ with the compact\nFrobenius operator of the fibre. Its stalk map at a rational point\n$x$ of the fibre is $\\psi_{m,\\bar x}$, by composition of pullbacks.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-i-relative-frob/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_not_found",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2631,
+ "blueprint_uses": [
+  "sk-d-relative-frob",
+  "sk-d-setup",
+  "sk-d-weil"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.isFinite_relativeFrobenius",
+  "AlgebraicGeometry.ProEtale.isUniversalHomeomorphism_relativeFrobenius"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.isFinite_relativeFrobenius",
+  "AlgebraicGeometry.ProEtale.isUniversalHomeomorphism_relativeFrobenius"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-d-relative-frob",
+  "sk-d-setup"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "sk-i-relative-frob",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-relative-frob"
+}

@@ -11,20 +11,12 @@ public import Sheaf.Paper.DerivedPullbackTensorIso
 public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 
+import Mathlib.CategoryTheory.Adjunction.Additive
+import all Sheaf.Paper.IsomorphismReductionTower
 import Sheaf.Paper.PurInverseImageTensorHom
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.HomComplex
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
-import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 public import Sheaf.Paper.CoefficientRingedTensorHomModel
 public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
@@ -32,15 +24,16 @@ import Sheaf.Paper.FiniteFreeCompletedScalarComparison
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.PodReindexingHomCoefficientDescent
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
 import Sheaf.Paper.CompletedOperationTowerSubstitution
 import Sheaf.Paper.ConstantCompletionEquivalence
 import Sheaf.Paper.WeilCompletedTensorReflector
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
 public import Sheaf.Paper.SfRationalizationKaroubi
-import Sheaf.Paper.IntegralOperationsScalarComparisons
-import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import all Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
+import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
@@ -80,6 +73,10 @@ universe u v a b c d
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures
+
+attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
+  HasDerivedCategory.standard
+attribute [-instance] isoReductionAbSheafify isoReductionAbBijective isoReductionSiteSmall
 
 /-- Partial closed data on precisely the pairs for which internal Hom is permitted.
 Source: Stacks 08J9 and the integral qualification in the node
@@ -214,6 +211,31 @@ theorem podFiniteHomComparison_laws (n : ℕ) :
 end Finite
 
 
+private def podClosedTransposeAdditive
+    {D : Type a} [Category.{b} D] [Preadditive D] [HasZeroObject D]
+    [HasBinaryProducts D] {H : Dᵒᵖ × D ⥤ D}
+    (S : CoefficientClosedStructure H) (L M N : D) :
+    (S.tensor.obj (L, M) ⟶ N) ≃+ (L ⟶ H.obj (op M, N)) := by
+  let := S.monoidal
+  have : (Prod.sectR (op M) D ⋙ H).IsRightAdjoint := (S.adjunction M).isRightAdjoint
+  have : (Prod.sectR (op M) D ⋙ H).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  have : (MonoidalCategory.tensorRight M).Additive := (S.adjunction M).left_adjoint_additive
+  exact (S.adjunction M).homAddEquiv L N
+
+private theorem podPartialClosed_ext
+    {C : Type a} [Category.{b} C] [Preadditive C]
+    {T : C × C ⥤ C} {J : ObjectProperty (Cᵒᵖ × C)} {H : J.FullSubcategory ⥤ C}
+    (S S' : PodPartialClosed T J H)
+    (h : ∀ L P, S.transpose L P = S'.transpose L P) : S = S' := by
+  cases S with
+  | mk tr hn =>
+    cases S' with
+    | mk tr' hn' =>
+      have he : tr = tr' := funext (fun L ↦ funext (fun P ↦ h L P))
+      cases he
+      rfl
+
 section IntegralClosed
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})
@@ -251,7 +273,73 @@ theorem podIntegralClosed_existsUnique :
         HEq ((S.transpose L P f).hom)
           ((pullbackTensorCalculus l E W).integralClosed.transpose L.obj P.obj.1.unop.obj
             P.obj.2.obj (podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ f.hom)) := by
-  sorry
+  let S := (pullbackTensorCalculus l E W).integralClosed
+  let η : S.tensor ⟶ integralCompletedTensor l E W :=
+    (Functor.rightUnitor _).inv ≫
+      Functor.whiskerLeft _ (pullbackTensorCalculus l E W).adjunction.unit ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (pullbackTensorCalculus l E W).reductionTensor.hom
+        (coefficientSequenceLimit l E W) ≫
+      (pullbackTensorIntegralTensorModel l E W).inv
+  let tr (L : sfIntegralConstructibleCategory l E W)
+      (P : (constructibleIntegralHomPairs l E W).FullSubcategory) :
+      ((constructibleIntegralTensor l E W).obj (L, P.obj.1.unop) ⟶ P.obj.2) ≃+
+        (L ⟶ (constructibleIntegralHom l E W).obj P) :=
+    (InducedCategory.homAddEquiv).trans
+      ((AddEquiv.ofBijective
+        ({ toFun := fun f ↦ podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ f
+           map_zero' := by simp
+           map_add' := fun f g ↦ by simp only [Preadditive.comp_add] } :
+          ((integralCompletedTensor l E W).obj (L.obj, P.obj.1.unop.obj) ⟶ P.obj.2.obj) →+
+            (S.tensor.obj (L.obj, P.obj.1.unop.obj) ⟶ P.obj.2.obj))
+        (PodCompletedReflection.precompose_bijective l E W L P.obj.1.unop P.obj.2)).trans
+          ((podClosedTransposeAdditive S L.obj P.obj.1.unop.obj P.obj.2.obj).trans
+            (show (L.obj ⟶ ((constructibleIntegralHom l E W).obj P).obj) ≃+
+                (L ⟶ (constructibleIntegralHom l E W).obj P) from
+              (InducedCategory.homAddEquiv (X := L)
+                (Y := (constructibleIntegralHom l E W).obj P)).symm)))
+  have htr (L : sfIntegralConstructibleCategory l E W)
+      (P : (constructibleIntegralHomPairs l E W).FullSubcategory)
+      (f : (constructibleIntegralTensor l E W).obj (L, P.obj.1.unop) ⟶ P.obj.2) :
+      (tr L P f).hom = S.transpose L.obj P.obj.1.unop.obj P.obj.2.obj
+        (podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ f.hom) := rfl
+  let R : PodPartialClosed (constructibleIntegralTensor l E W)
+      (constructibleIntegralHomPairs l E W) (constructibleIntegralHom l E W) := {
+    transpose := tr
+    parameter_naturality := by
+      intro L L' P f h
+      apply ObjectProperty.hom_ext
+      change (tr L' P ((constructibleIntegralTensor l E W).map
+        (Prod.mkHom f (𝟙 P.obj.1.unop)) ≫ h)).hom = f.hom ≫ (tr L P h).hom
+      rw [htr, htr]
+      have hn : S.tensor.map (Prod.mkHom f.hom (𝟙 P.obj.1.unop.obj)) ≫
+          podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj =
+        podCompletedTensorUnit l E W L'.obj P.obj.1.unop.obj ≫
+          (integralCompletedTensor l E W).map (Prod.mkHom f.hom (𝟙 _)) := by
+        simpa [η, podCompletedTensorUnit, S, CoefficientClosedStructure.tensor,
+          Category.assoc] using η.naturality (Prod.mkHom f.hom (𝟙 P.obj.1.unop.obj))
+      change S.transpose _ _ _ (podCompletedTensorUnit l E W L'.obj _ ≫
+        ((integralCompletedTensor l E W).map (Prod.mkHom f.hom (𝟙 _)) ≫ h.hom)) = _
+      erw [← Category.assoc, ← hn, Category.assoc]
+      let := S.monoidal
+      change (S.adjunction P.obj.1.unop.obj).homEquiv _ _
+        (S.tensor.map (Prod.mkHom f.hom (𝟙 _)) ≫
+          podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ h.hom) =
+        f.hom ≫ (S.adjunction P.obj.1.unop.obj).homEquiv _ _
+          (podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ h.hom)
+      simpa only [CoefficientClosedStructure.tensor, MonoidalCategory.tensor,
+        MonoidalCategory.tensorHom_id, MonoidalCategory.tensorRight,
+        MonoidalCategory.curriedTensor, Functor.flip] using
+        (S.adjunction P.obj.1.unop.obj).homEquiv_naturality_left f.hom
+          (podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ h.hom) }
+  refine ⟨R, fun L P f ↦ HEq.rfl, ?_⟩
+  intro R' hR'
+  apply podPartialClosed_ext
+  intro L P
+  apply AddEquiv.ext
+  intro f
+  apply ObjectProperty.hom_ext
+  exact eq_of_heq (hR' L P f)
 
 /-- Completed transposition with its unique ordinary-unit normalization.
 Source: Stacks 099B (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
@@ -277,7 +365,7 @@ theorem podIntegralPairs_pullback
     constructibleIntegralHomPairs l E X
       (((constructibleIntegralPullback l E g).op.prod
         (constructibleIntegralPullback l E g)).obj P.obj) := by
-  sorry
+  exact PodCoefficientDescent.integral_pair_permitted l E g P
 
 /-- The integral comparison is the transpose of completed pullback of evaluation.
 Source: node proof steps 10--11, Stacks 0GMX
@@ -355,7 +443,7 @@ theorem podRationalPairs_pullback
     (P : (constructibleRationalHomPairs l E Y).FullSubcategory) :
     constructibleRationalHomPairs l E X
       (((rationalDerivedPullback l E g).op.prod (rationalDerivedPullback l E g)).obj P.obj) := by
-  sorry
+  exact PodCoefficientDescent.rational_pair_permitted l E g P
 
 /-- The rational comparison uses precisely localized tensor and evaluation.
 Source: node proof step 14 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
@@ -458,7 +546,16 @@ theorem podCommonPairs_pullback
     commonStageHomPairs l Ω X
       (((commonStageDerivedPullback l Ω g).op.prod
         (commonStageDerivedPullback l Ω g)).obj P.obj) := by
-  sorry
+  have h := PodCoefficientDescent.common_pair_permitted l Ω g P
+  have hobj := (commonStageDerivedPullback_existsUnique l Ω g).exists.choose_spec.1
+  change commonStageHomPairs l Ω X
+    (op ((commonStageDerivedPullback l Ω g).obj P.obj.1.unop),
+      (commonStageDerivedPullback l Ω g).obj P.obj.2)
+  change commonStageHomPairs l Ω X
+    (op ((commonStageDerivedPullback_existsUnique l Ω g).exists.choose.obj P.obj.1.unop),
+      (commonStageDerivedPullback_existsUnique l Ω g).exists.choose.obj P.obj.2)
+  rw [hobj P.obj.1.unop, hobj P.obj.2]
+  exact h
 
 /-- The common-stage comparison is the transpose of the prescribed common-stage
 tensor/evaluation composite on the actual pair category.
@@ -484,6 +581,28 @@ theorem podCommonHomComparison_laws :
         (canonicalCommonStagePullbackTensor l Ω g) := by
   sorry
 end CommonTransport
+
+private theorem baseChangeHom_evaluation
+    {A : Type a} {B : Type c} [Category.{b} A] [Category.{d} B]
+    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
+    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
+    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) (P Q : A) :
+    μ.hom.app (HA.obj (op P, Q), P) ≫
+      SB.tensor.map (Prod.mkHom (coefficientBaseChangeHom SA SB F μ P Q) (𝟙 _)) ≫
+      SB.evaluation (F.obj P) (F.obj Q) = F.map (SA.evaluation P Q) := by
+  let := SB.monoidal
+  have h := ((SB.adjunction (F.obj P)).homEquiv _ _).symm_apply_apply
+    (μ.inv.app (HA.obj (op P, Q), P) ≫ F.map (SA.evaluation P Q))
+  rw [Adjunction.homEquiv_counit] at h
+  change (MonoidalCategory.tensorRight (F.obj P)).map
+    (coefficientBaseChangeHom SA SB F μ P Q) ≫ SB.evaluation (F.obj P) (F.obj Q) = _ at h
+  change μ.hom.app (HA.obj (op P, Q), P) ≫
+    (MonoidalCategoryStruct.tensorHom
+      (coefficientBaseChangeHom SA SB F μ P Q) (𝟙 (F.obj P))) ≫
+    SB.evaluation (F.obj P) (F.obj Q) = F.map (SA.evaluation P Q)
+  erw [MonoidalCategory.tensorHom_id]
+  erw [h]
+  exact Iso.hom_inv_id_app_assoc μ _ _
 
 section Systems
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -544,7 +663,10 @@ Compose these two naturality equations.
 theorem podCompletedRingProjection_naturality {m n : ℕᵒᵖ} (f : m ⟶ n) :
     podCompletedRingProjection l E g m ≫ (integralCoefficientSheafSystem l E X).map f =
       podCompletedRingProjection l E g n := by
-  sorry
+  have hπ := (isoReductionCompletedMap_existsUnique l E g).exists.choose_spec
+  dsimp only [podCompletedRingProjection]
+  rw [← hπ m.unop, ← hπ n.unop]
+  simp only [Category.assoc, limit.w]
 
 /-- The actual completed coefficient transport, constructed by the limit lift
 of all finite projections. Source: node proof step 1, Stacks 0038
@@ -566,12 +688,20 @@ comparison is invertible. The induced map of limit cones is therefore invertible
 Its composites with the projections are the defining limit-lift equations.
 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
 theorem podCompletedRingMap_isIso : IsIso (podCompletedRingMap l E g) := by
-  sorry
+  have he : podCompletedRingMap l E g = (isoReductionCompletedMap l E g).hom := by
+    apply limit.hom_ext
+    intro n
+    rw [podCompletedRingMap, limit.lift_π]
+    exact ((isoReductionCompletedMap_existsUnique l E g).exists.choose_spec n.unop).symm
+  rw [he]
+  infer_instance
 
 /-- Use the proved invertibility of the actual limit-lift map.
 Source: Stacks 0038 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
 instance podCompletedRingMapIsIso : IsIso (podCompletedRingMap l E g) :=
   podCompletedRingMap_isIso l E g
+
+attribute [local irreducible] podCompletedRingMap
 
 /-- Exact inverse image on modules over the completed ring sheaf, sectionwise
 with the transported coefficient action. Source: node proof step 1
@@ -619,7 +749,12 @@ unit and counit. Deriving preserves their inverse identities.
 theorem podCompletedInverseImage_equivalence :
     (podCompletedModuleInverseImage l E g).IsEquivalence ∧
       (podCompletedDerivedInverseImage l E g).IsEquivalence := by
-  sorry
+  have h : (podCompletedModuleInverseImage l E g).IsEquivalence :=
+    isoReduction_equivalence.{u, u} g (podCompletedRingMap l E g)
+  let := h
+  refine ⟨h, ?_⟩
+  exact Functor.isEquivalence_mapDerivedCategory.{u + 2, u + 2, u + 1, u + 1,
+    u + 2, u + 2} (podCompletedModuleInverseImage l E g)
 
 /-- Restriction and reindexing agree by the inverse-image unit on every local
 section. This specifies the ordinary comparison before passing to derived maps.
@@ -817,6 +952,8 @@ def podCompletedToTower (K : DerivedCategory (integralTowerModules l E Y)) :
     (podLimitReindexing l E g).inv.app ((pullbackTensorCalculus l E Y).reduction.obj K) ≫
     (pullbackTensorIntegralPullbackModel l E g).inv.app K
 
+attribute [local irreducible] pullbackTensorCalculus
+
 /-- The identification with tower-defined pullback is natural, and is invertible
 on exactly the complete constructible inputs used here.
 Source: node proof step 8.
@@ -831,7 +968,38 @@ theorem podCompletedToTower_laws :
       (podCompletedDerivedInverseImage l E g).map f ≫ podCompletedToTower l E g L =
         podCompletedToTower l E g K ≫ (integralDerivedPullback l E g).map f) ∧
     (∀ K : sfIntegralConstructibleCategory l E Y, IsIso (podCompletedToTower l E g K.obj)) := by
-  sorry
+  constructor
+  · intro K L f
+    let SY := pullbackTensorCalculus l E Y
+    let F := podCompletedDerivedInverseImage l E g
+    have hη := congrArg F.map (SY.adjunction.unit.naturality f)
+    have hlim := (podLimitReindexing l E g).inv.naturality (SY.reduction.map f)
+    have hrho := (pullbackTensorIntegralPullbackModel l E g).inv.naturality f
+    dsimp only [Functor.comp_map, Functor.id_map] at hη hlim hrho
+    simp only [Functor.map_comp] at hη
+    dsimp only [podCompletedToTower]
+    change F.map f ≫ F.map (SY.adjunction.unit.app L) ≫ _ ≫ _ = _
+    rw [← Category.assoc (F.map f), hη]
+    rw [Category.assoc, ← Category.assoc (F.map
+      ((coefficientSequenceLimit l E Y).map (SY.reduction.map f))), hlim]
+    simpa only [Category.assoc, pullbackTensorReferencePullback, Functor.comp_map] using
+      congrArg (fun k ↦ F.map (SY.adjunction.unit.app K) ≫
+        (podLimitReindexing l E g).inv.app (SY.reduction.obj K) ≫ k) hrho
+  · intro K
+    obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
+    let : Fact p.Prime := ⟨hp⟩
+    let D : FiniteFieldDatum.{0} := {
+      p := p, a := 1, q := p, prime := hp, exponent_pos := le_refl 1,
+      cardinality_eq := (pow_one p).symm, k₀ := ZMod p,
+      card_base := by simp [Nat.card_eq_fintype_card]
+      k := AlgebraicClosure (ZMod p) }
+    have hlp : l ≠ D.p := by change l ≠ p; omega
+    have hK : IntegralOnSlice.IsComplete l E Y none K.obj :=
+      ⟨D, hlp, (sfDerivedComplete_iff_legacy l E Y D hlp K.obj).mp K.property.1⟩
+    have : IsIso ((pullbackTensorCalculus l E Y).adjunction.unit.app K.obj) :=
+      (purNormalizedReconstructionOfScheme l E Y (pullbackTensorCalculus l E Y)).2 K.obj hK
+    dsimp only [podCompletedToTower]
+    infer_instance
 
 /-- The canonical complete-input identification, retaining its specified map.
 Source: node proof step 8 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
@@ -893,6 +1061,7 @@ theorem podHomReductionSquare
 end ReductionNormalization
 
 section SignedShifts
+attribute [local irreducible] homComplexFunctor
 universe r s t w
 variable {C : Type s} [Category.{t} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max s t r}]
@@ -924,7 +1093,56 @@ theorem podHomComplexShift_existsUnique
             SheafOfModules.homObjMap.{max s t r, t, s, max s t r}
               (K.shiftFunctorObjXIso m p (p + m) rfl).hom
               (I.shiftFunctorObjXIso n q (q + n) rfl).inv := by
-  sorry
+  classical
+  obtain ⟨SR, _, hR, _⟩ := CategoryTheory.RingedHomUniverses.ordinaryRightShift.{s, t, r} J A
+  obtain ⟨SL, hL⟩ := CategoryTheory.RingedHomUniverses.ordinaryLeftShift.{s, t, r} J A m
+  let H := homComplex.{s, t, max s t r, max s t r} (R := A) K I
+  let eR := ((SR K).commShiftIso n).symm.app I
+  let eL := SL.app (op K, I⟦n⟧)
+  let e : H⟦n - m⟧ ≅
+      homComplex.{s, t, max s t r, max s t r} (R := A) (K⟦m⟧) (I⟦n⟧) :=
+    (shiftFunctorAdd' _ n (-m) (n - m) (sub_eq_add_neg n m).symm).app H ≪≫
+      (shiftFunctor _ (-m)).mapIso eR ≪≫ eL
+  have hπeq (i j p q : ℤ) (hij : i = j) (h : p + i = q) (h' : p + j = q) :
+      (H.XIsoOfEq hij).hom ≫ homComplexπ (R := A) K I j p q h' =
+        homComplexπ (R := A) K I i p q h := by
+    subst j
+    simp only [HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.id_comp]
+  have he (k p q : ℤ) (h : p + k = q)
+      (h' : p + m + (k + (n - m)) = q + n) :
+      e.hom.f k ≫ coefficientHomComponent.{r, s, t} J A (K⟦m⟧) (I⟦n⟧) k p q h =
+        (m * k).negOnePow •
+          (H.shiftFunctorObjXIso (n - m) k (k + (n - m)) rfl).hom ≫
+          coefficientHomComponent.{r, s, t} J A K I
+            (k + (n - m)) (p + m) (q + n) h' ≫
+          SheafOfModules.homObjMap.{max s t r, t, s, max s t r}
+            (K.shiftFunctorObjXIso m p (p + m) rfl).hom
+            (I.shiftFunctorObjXIso n q (q + n) rfl).inv := by
+    have hl := hL K (I⟦n⟧) k p q h
+    have hr := hR K I n (k + -m) (p + m) q (by omega)
+    dsimp only [e, eL, eR, H, Iso.trans_hom, HomologicalComplex.comp_f,
+      coefficientHomComponent]
+    simp only [Category.assoc]
+    rw [hl]
+    simp only [Functor.mapIso_hom, CochainComplex.shiftFunctor_map_f',
+      Linear.comp_units_smul, ← Category.assoc, hr]
+    simp only [CochainComplex.shiftFunctorObjXIso,
+      HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom]
+    simp only [smul_left_cancel_iff]
+    change (H.XIsoOfEq (by omega : k + (n - m) = k + -m + n)).hom ≫
+      homComplexπ (R := A) K I (k + -m + n) (p + m) (q + n) _ =
+        𝟙 _ ≫ homComplexπ (R := A) K I (k + (n - m)) (p + m) (q + n) h'
+    rw [Category.id_comp]
+    exact hπeq _ _ _ _ _ _ _
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply HomologicalComplex.hom_ext
+  intro k
+  apply homComplex_hom_ext
+  intro p q h
+  exact (he' k p q h (by omega)).trans (he k p q h (by omega)).symm
+
 
 /-- The unique signed product-reindexing map.
 Source: Stacks 08JA (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
@@ -959,7 +1177,26 @@ theorem podKInjectiveHomModel_existsUnique
           DerivedCategory.Q.obj (homComplex.{s, t, max s t r, max s t r} (R := A) K I),
       e.hom ≫ DerivedCategory.Q.map (podHomAugmentation.{r, s, t} J A K I) =
         (coefficientHomResolutionIso.{r, s, t, w} J A K I).hom := by
-  sorry
+  let :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{s, t, r}
+      J A).1
+  let η := (CochainComplex.toKInjectiveResolution _).app I
+  have : QuasiIso η := (CochainComplex.monoQuasiIso_toKInjectiveResolution_app _ I).2
+  have : ((coefficientHomResolution.{r, s, t} J A).obj I).IsKInjective :=
+    CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj _ I
+  have hq : QuasiIso (podHomAugmentation.{r, s, t} J A K I) := by
+    simpa [podHomAugmentation, η] using
+      (quasiIso_homComplex_mapOfUniverses.{s, t, r} (R := A)
+        (I' := I) (I := (coefficientHomResolution.{r, s, t} J A).obj I) η (𝟙 K))
+  let : IsIso (DerivedCategory.Q.map (podHomAugmentation.{r, s, t} J A K I)) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hq
+  refine ⟨coefficientHomResolutionIso.{r, s, t, w} J A K I ≪≫
+    (asIso (DerivedCategory.Q.map (podHomAugmentation.{r, s, t} J A K I))).symm, ?_, ?_⟩
+  · simp
+  · intro e he
+    apply Iso.ext
+    apply (cancel_mono (DerivedCategory.Q.map (podHomAugmentation.{r, s, t} J A K I))).mp
+    simpa using he
 
 /-- Canonical K-injective representative comparison.
 Source: Stacks 0A95 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
@@ -1084,6 +1321,7 @@ def podIntegralAmbientHomShift (W : Scheme.{u}) :=
   podDerivedHomShift.{u, u+1, u} (ProEt.topology W)
     (completedIntegralCommRingSheafUnrestricted l E W)
 
+set_option linter.unusedSectionVars false in
 /-- The permitted integral pairs are stable under both argument shifts.
 Source: node proof step 6, Stacks 08JA.
 Proof: shift stability of the constructible subcategory gives both inputs.
@@ -1093,7 +1331,7 @@ constructible Hom; shift stability and isomorphism closure give its property.
 theorem podIntegralPair_shift_property
     (P : (constructibleIntegralHomPairs l E Y).FullSubcategory) (a b : ℤ) :
     constructibleIntegralHomPairs l E Y (op (P.obj.1.unop⟦a⟧), P.obj.2⟦b⟧) := by
-  sorry
+  exact PodCoefficientDescent.shifted_pair_permitted l E Y P a b
 
 /-- The actual shifted pair, with its established Hom constructibility.
 Source: Stacks 08JA (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
@@ -1277,6 +1515,7 @@ theorem podSystemHomComparison_fiber
             ((pullbackTensorDerivedEvaluation l E g n).inv.app N)) := by
   sorry
 
+set_option linter.unusedSectionVars false in
 /-- The system evaluation identity holds in its functorial total-limit realization.
 Source: node proof steps 12--13.
 Proof: apply the functorial derived limit to the already established system
@@ -1297,7 +1536,12 @@ theorem podSystemHomComparison_realizedEvaluation
       (coefficientSequenceLimit l E X).map
         ((pullbackTensorSequenceDerived l E g).map
           ((pullbackTensorCalculus l E Y).systemClosed.evaluation M N)) := by
-  sorry
+  apply congrArg ((coefficientSequenceLimit l E X).map)
+  exact baseChangeHom_evaluation
+    (pullbackTensorCalculus l E Y).systemClosed
+    (pullbackTensorCalculus l E X).systemClosed (pullbackTensorSequenceDerived l E g)
+    (pullbackTensorSystemComparison l E g) M N
+
 end SystemFibers
 
 /-- The argument-first evaluation convention of the statement, obtained by the
@@ -1333,6 +1577,8 @@ def PodArgumentFirstLaws {C : Type a} {D : Type c}
         podPartialHomComparison SC SD F h μ P
 
 section ArgumentFirstStages
+attribute [local irreducible] pullbackTensorBraiding canonicalFinitePullbackTensor
+  finiteIntrinsicClosed finiteIntrinsicTensorModels podFiniteHomComparison
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -1382,7 +1628,36 @@ theorem podArgumentFirst_finite (n : ℕ)
       podFiniteArgumentFirstEvaluation l E X n
         ((finiteDerivedPullback l E n g).obj M) ((finiteDerivedPullback l E n g).obj N) =
     (finiteDerivedPullback l E n g).map (podFiniteArgumentFirstEvaluation l E Y n M N) := by
-  sorry
+  let F := finiteDerivedPullback l E n g
+  let HY := finiteIntrinsicDerivedInternalHom l E Y n
+  let βY : finiteIntrinsicDerivedTensor l E Y n ≅
+      pullbackTensorSwap _ ⋙ finiteIntrinsicDerivedTensor l E Y n :=
+    pullbackTensorBraiding.{u} (ProEt.topology Y)
+    (integralCoefficientCommRingSheaf l E Y n)
+    (finiteIntrinsicClosed l E Y n) (finiteIntrinsicTensorModels l E Y n)
+  let βX : finiteIntrinsicDerivedTensor l E X n ≅
+      pullbackTensorSwap _ ⋙ finiteIntrinsicDerivedTensor l E X n :=
+    pullbackTensorBraiding.{u} (ProEt.topology X)
+    (integralCoefficientCommRingSheaf l E X n)
+    (finiteIntrinsicClosed l E X n) (finiteIntrinsicTensorModels l E X n)
+  have hn := βX.hom.naturality
+    (Prod.mkHom (𝟙 (F.obj M)) (podFiniteHomComparison l E g n M N))
+  have hb := canonicalFinitePullbackTensor_braiding l E g n M (HY.obj (op M, N))
+  have he := (podFiniteHomComparison_laws l E g n).2.2.1 M N
+  change _ ≫ _ ≫ (βX.hom.app _ ≫ _) = F.map (βY.hom.app _ ≫ _)
+  dsimp only [Functor.comp_map, pullbackTensorSwap] at hn
+  have hn' := congrArg
+    (fun k ↦ (canonicalFinitePullbackTensor l E g n M (HY.obj (op M, N))).hom ≫
+      k ≫ finiteIntrinsicEvaluation l E X n (F.obj M) (F.obj N)) hn
+  have hb' := congrArg (fun k ↦ k ≫
+    (finiteIntrinsicDerivedTensor l E X n).map
+      (Prod.mkHom (podFiniteHomComparison l E g n M N) (𝟙 _)) ≫
+    finiteIntrinsicEvaluation l E X n (F.obj M) (F.obj N)) hb
+  have hlast := congrArg
+    (fun k ↦ F.map (βY.hom.app (M, HY.obj (op M, N))) ≫ k) he
+  have hmiddle : _ := hb'.symm
+  simp only [Category.assoc] at hn' hmiddle hlast
+  simpa only [Functor.map_comp] using hn'.trans (hmiddle.trans hlast)
 /-- The finite transpose equation with the tensor arguments in the node's order.
 Source: node proof steps 4--5.
 Proof: swap the two tensor factors by their fixed signed braiding, apply finite
@@ -1404,7 +1679,29 @@ theorem podArgumentFirst_finite_transpose (n : ℕ)
               (finiteIntrinsicClosed l E Y n) (finiteIntrinsicTensorModels l E Y n)).hom.app
               (L, M) ≫ b)) ≫
         podFiniteHomComparison l E g n M N := by
-  sorry
+  let F := finiteDerivedPullback l E n g
+  let βY : finiteIntrinsicDerivedTensor l E Y n ≅
+      pullbackTensorSwap _ ⋙ finiteIntrinsicDerivedTensor l E Y n :=
+    pullbackTensorBraiding.{u} (ProEt.topology Y)
+    (integralCoefficientCommRingSheaf l E Y n)
+    (finiteIntrinsicClosed l E Y n) (finiteIntrinsicTensorModels l E Y n)
+  let βX : finiteIntrinsicDerivedTensor l E X n ≅
+      pullbackTensorSwap _ ⋙ finiteIntrinsicDerivedTensor l E X n :=
+    pullbackTensorBraiding.{u} (ProEt.topology X)
+    (integralCoefficientCommRingSheaf l E X n)
+    (finiteIntrinsicClosed l E X n) (finiteIntrinsicTensorModels l E X n)
+  have hb := canonicalFinitePullbackTensor_braiding l E g n L M
+  have hs : βX.hom.app (F.obj L, F.obj M) ≫
+      (canonicalFinitePullbackTensor l E g n M L).inv =
+      (canonicalFinitePullbackTensor l E g n L M).inv ≫ F.map (βY.hom.app (L, M)) := by
+    apply (cancel_epi (canonicalFinitePullbackTensor l E g n L M).hom).mp
+    simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id,
+      Category.id_comp, Category.comp_id] using
+      congrArg (fun k ↦ k ≫ (canonicalFinitePullbackTensor l E g n M L).inv) hb.symm
+  change finiteIntrinsicTranspose l E X n _ _ _
+    (βX.hom.app _ ≫ (canonicalFinitePullbackTensor l E g n M L).inv ≫ F.map b) = _
+  rw [← Category.assoc, hs, Category.assoc, ← F.map_comp]
+  exact (podFiniteHomComparison_laws l E g n).2.2.2 L M N (βY.hom.app (L, M) ≫ b)
 end ArgumentFirstStages
 
 section ArgumentFirstCommon
@@ -1530,7 +1827,18 @@ theorem podIntegralHomShift_existsUnique
           (Prod.mkHom (((sfIntegralConstructible l E Y).ι.commShiftIso a).hom.app
             P.obj.1.unop).op
             (((sfIntegralConstructible l E Y).ι.commShiftIso b).inv.app P.obj.2)) := by
-  sorry
+  let H (k : ℤ) := (sfIntegralConstructible l E Y).ι.commShiftIso k
+  let e : (((constructibleIntegralHom l E Y).obj P)⟦b - a⟧).obj ≅
+      ((constructibleIntegralHom l E Y).obj (podIntegralShiftPair l E P a b)).obj :=
+    (H (b - a)).app ((constructibleIntegralHom l E Y).obj P) ≪≫
+      podIntegralAmbientHomShift l E Y P.obj.1.unop.obj P.obj.2.obj a b ≪≫
+      (integralDerivedInternalHom l E Y).mapIso
+        (((H a).app P.obj.1.unop).op.prod ((H b).symm.app P.obj.2))
+  refine ⟨(sfIntegralConstructible l E Y).isoMk e, rfl, ?_⟩
+  intro f hf
+  apply Iso.ext
+  apply ObjectProperty.hom_ext
+  exact hf
 
 /-- The restricted signed Hom shift, with its actual ambient normalization.
 Source: Stacks 08JA (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
@@ -1556,7 +1864,20 @@ theorem podIntegralPullbackShift_existsUnique
         ((podCompletedToTowerIso l E g M).hom)⟦a⟧' ≫
         ((sfIntegralConstructible l E X).ι.commShiftIso a).inv.app
           ((constructibleIntegralPullback l E g).obj M) := by
-  sorry
+  let e : ((constructibleIntegralPullback l E g).obj (M⟦a⟧)).obj ≅
+      (((constructibleIntegralPullback l E g).obj M)⟦a⟧).obj :=
+    (podCompletedToTowerIso l E g (M⟦a⟧)).symm ≪≫
+      (podCompletedDerivedInverseImage l E g).mapIso
+        (((sfIntegralConstructible l E Y).ι.commShiftIso a).app M) ≪≫
+      ((podCompletedDerivedInverseImage l E g).commShiftIso a).app M.obj ≪≫
+      (shiftFunctor _ a).mapIso (podCompletedToTowerIso l E g M) ≪≫
+      (((sfIntegralConstructible l E X).ι.commShiftIso a).symm.app
+        ((constructibleIntegralPullback l E g).obj M))
+  refine ⟨(sfIntegralConstructible l E X).isoMk e, rfl, ?_⟩
+  intro f hf
+  apply Iso.ext
+  apply ObjectProperty.hom_ext
+  exact hf
 
 /-- The canonical shift identification of the tower-defined pullback.
 Source: Stacks 08JA (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
@@ -1638,7 +1959,10 @@ theorem podCommonHomComparison_shift
       (inclusion F : Stage l Ω X F ⥤ generalAlgebraicallyClosedConstructibleCategory l Ω X).map
         ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω F) X).map
           (podIntegralShiftRouteRight l (Coefficient.{u} l Ω F) g P a b)) := by
-  sorry
+  exact congrArg
+    (fun f ↦ (inclusion F : Stage l Ω X F ⥤
+      generalAlgebraicallyClosedConstructibleCategory l Ω X).map f)
+    (podIntegralRationalHomComparison_shift l (Coefficient.{u} l Ω F) g P a b).2
 end CommonShiftImages
 
 /-- Evaluation-defined natural isomorphisms at all four coefficient stages,
@@ -1869,6 +2193,38 @@ theorem derivedAutomorphismHomEvaluation
     CoefficientEvaluationCompatible (pullbackTensorCalculus l E Y).systemClosed
       (pullbackTensorCalculus l E X).systemClosed (pullbackTensorSequenceDerived l E g)
       (pullbackTensorSystemComparison l E g) := by
-  sorry
+  have hf := podFiniteHomComparison_laws l E g n
+  have hi := podIntegralHomComparison_laws l E g
+  have hr := (podRationalHomComparison_laws l E g).1
+  have hc := podCommonHomComparison_laws l Ω g
+  refine ⟨?_, ?_, ?_, ?_, hi, hr, hc, podSystemHomComparison_laws l E g⟩
+  · let e : finiteIntrinsicDerivedInternalHom l E Y n ⋙ finiteDerivedPullback l E n g ≅
+        ((finiteDerivedPullback l E n g).op.prod (finiteDerivedPullback l E n g)) ⋙
+          finiteIntrinsicDerivedInternalHom l E X n :=
+      NatIso.ofComponents (fun P ↦ @asIso _ _ _ _
+        (podFiniteHomComparison l E g n P.1.unop P.2) (hf.1 _ _))
+        (fun f ↦ hf.2.1 _ _ _ _ f.1.unop f.2)
+    exact ⟨e, fun _ _ ↦ rfl⟩
+  · let e : constructibleIntegralHom l E Y ⋙ constructibleIntegralPullback l E g ≅
+        podPairPullback (constructibleIntegralPullback l E g) _ _
+          (podIntegralPairs_pullback l E g) ⋙ constructibleIntegralHom l E X :=
+      NatIso.ofComponents (fun P ↦ @asIso _ _ _ _
+        (podIntegralHomComparison l E g P) (hi.isIso P))
+        (fun f ↦ hi.naturality _ _ f)
+    exact ⟨e, fun _ ↦ rfl⟩
+  · let e : rationalDerivedInternalHom l E Y ⋙ rationalDerivedPullback l E g ≅
+        podPairPullback (rationalDerivedPullback l E g) _ _
+          (podRationalPairs_pullback l E g) ⋙ rationalDerivedInternalHom l E X :=
+      NatIso.ofComponents (fun P ↦ @asIso _ _ _ _
+        (podRationalHomComparison l E g P) (hr.isIso P))
+        (fun f ↦ hr.naturality _ _ f)
+    exact ⟨e, fun _ ↦ rfl⟩
+  · let e : commonStageDerivedInternalHom l Ω Y ⋙ commonStageDerivedPullback l Ω g ≅
+        podPairPullback (commonStageDerivedPullback l Ω g) _ _
+          (podCommonPairs_pullback l Ω g) ⋙ commonStageDerivedInternalHom l Ω X :=
+      NatIso.ofComponents (fun P ↦ @asIso _ _ _ _
+        (podCommonHomComparison l Ω g P) (hc.isIso P))
+        (fun f ↦ hc.naturality _ _ f)
+    exact ⟨e, fun _ ↦ rfl⟩
 
 end WeilConjectures

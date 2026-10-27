@@ -149,7 +149,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4 (lemma-pullback-tensor-product), with more-algebra.tex Tag 0FNH (item-shift-tensor) and the cochain action-unit calculation of lem-pur-cochain-pullback-tensor-coherence; agent expansion to normalized shift/unit equations. Lean realization C7: normalized representative descent, additive bifunctor comparison shifts and localization of the cochain action units. The naturality and action-unit inputs use the proved cochainComparison_monoidal component API. C7 uses canonicalDerivedTensor, a transparent alias of the published derivedTensor, and canonicalRepresentativeIso, the original representativeIso with that target spelling. These presentation names are locally irreducible during the proof. The public shift hypotheses and existential witnesses still use the original derivedTensor; canonicalDerivedTensorCommShift is the identity conversion of the supplied shift structure, registered as an instance only locally in this module. Every public predicate and action normalization is definitionally the original one; no tensor, comparison or shift data is reselected and no global instance is added."
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), with more-algebra.tex Tag 0FNH (item-shift-tensor) and the cochain action-unit calculation of lem-pur-cochain-pullback-tensor-coherence; agent expansion to normalized shift/unit equations. Lean realization C7: normalized representative descent, additive bifunctor comparison shifts and localization of the cochain action units. The naturality and action-unit inputs use the proved cochainComparison_monoidal component API. C7 uses canonicalDerivedTensor, a transparent alias of the published derivedTensor, and canonicalRepresentativeIso, the original representativeIso with that target spelling. These presentation names are locally irreducible during the proof. The public shift hypotheses and existential witnesses still use the original derivedTensor; canonicalDerivedTensorCommShift is the identity conversion of the supplied shift structure, registered as an instance only locally in this module. Every public predicate and action normalization is definitionally the original one; no tensor, comparison or shift data is reselected and no global instance is added. C6 exposes the existing, fully proved joint representative naturality calculation as canonicalRepresentativeIso_naturality; its proof composes the two fixed-factor naturality squares. Existing statements and proofs are unchanged."
  },
  "mathlib_searches": [
   {
@@ -274,7 +274,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-aaab742a6 (reviewer sub-agent of L); spot-checked: All 8 steps of the item, every cited statement, Stacks 07A4 and 0FNH(item-shift-tensor) were read. The delivery has no new nodes and the item is not in its own dependency closure. Steps 3-4 check: the first input is unsigned and the second carries (-1)^{np}, with p the first-factor degree; both match 0FNH and the integer-shift leaf, including negative n. Step 6 (A[0] is flat-term K-flat, and j: b⊗a↦b·c(a) is an isomorphism) and step 7 (the explicit right and left unit calculations, with no Koszul sign) are correct, and no flatness of c is used. Small case checked: Z→Z/2 on a point. Fault (C3/B3): the item's equations hold only for the specific mu. Composing mu with -1 keeps it natural but breaks both unit equations. The cited lem-weil-pbc-ringed-topoi-derived-tensor-pullback states only an unspecified canonical natural isomorphism, so step 2 took the representative normalization from that node's proof and from the Tag 07A4 construction. The derived action unitors rho and ell also had no definition anywhere. FIX: the item statement now writes out the 07A4 normalization, mu_{QP,QQ}=(e_P^{-1}⊗e_Q^{-1}) r_{f*P,f*Q} Q(c_{P,Q}) e_V L(r_{P,Q}^{-1}), and defines rho and ell by localizing the chain unitors. Four stmt_deps were added: the pc flat, K-flat and total-tensor definitions, and the cochain-coherence node, which is already a declared tool use. Step 2 now constructs this mu by the extension clause of tensor descent. It is invertible because every pair of objects is isomorphic to a representative pair. This makes the statement precise without weakening it, and the parent mate node is unaffected. Scheme-only nodes such as lem-pc-derived-pullback-tensor-unit-kflat-coherence are special cases, not duplicates. Both tool_uses (cochain-pullback-tensor-coherence and kflat-total-tensor-model) are accepted as generic model computations.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.PullbackTensorCanonicalShiftUnit",
   "declaration": "SheafOfModules.PullbackTensorCanonical.pullback_tensor_canonical_shift_unit",
@@ -287,7 +298,8 @@
    "SheafOfModules.PullbackTensorCanonical.pullback_tensor_canonical_shift_unit",
    "SheafOfModules.PullbackTensorCanonical.canonicalDerivedTensor",
    "SheafOfModules.PullbackTensorCanonical.canonicalRepresentativeIso",
-   "SheafOfModules.PullbackTensorCanonical.canonicalDerivedTensorCommShift"
+   "SheafOfModules.PullbackTensorCanonical.canonicalDerivedTensorCommShift",
+   "SheafOfModules.PullbackTensorCanonical.canonicalRepresentativeIso_naturality"
   ],
   "file": "lean/Sheaf/Paper/PullbackTensorCanonicalShiftUnit.lean",
   "statement": "theorem pullback_tensor_canonical_shift_unit (hL : L.IsLeftDerivedFunctor epsilon (HomologicalComplex.quasiIso (Modules R) (ComplexShape.up ℤ))) : ∃ (_ : L.CommShift ℤ) (_ : (derivedTensor R).CommShift₂Int) (_ : (derivedTensor S).CommShift₂Int), NatTrans.CommShift epsilon ℤ ∧ HasCanonicalTensorShifts (R := R) ∧ HasCanonicalTensorShifts (R := S) ∧ (∀ (P : CochainComplex (Modules R) ℤ), P.IsKFlatIndependentCoefficients → (∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)) → IsIso (epsilon.app P)) ∧ ∃ mu : Phi L ≅ Psi L, IsNormalized f k L epsilon mu.hom ∧ (∀ tau : Phi L ⟶ Psi L, IsNormalized f k L epsilon tau → tau = mu.hom) ∧ ∃ (aR : ActionUnits (R := R)) (aS : ActionUnits (R := S)) (u : L.obj (DerivedCategory.Q.obj (HomologicalComplex.tensorUnit (Modules R) (.up ℤ))) ≅ DerivedCategory.Q.obj (HomologicalComplex.tensorUnit (Modules S) (.up ℤ))), Subsingleton (ActionUnits (R := R)) ∧ Subsingleton (ActionUnits (R := S)) ∧ u.hom = epsilon.app (HomologicalComplex.tensorUnit (Modules R) (.up ℤ)) ≫ DerivedCategory.Q.map (CategoryTheory.CochainPullback.unit.{r, uC, vC, uD, vD} f k).hom ∧ (∀ (n : ℤ) (M N : DerivedCategory (Modules R)), mu.hom.app (M⟦n⟧, N) ≫ ((derivedTensor S).map ((L.commShiftIso n).hom.app M)).app (L.obj N) ≫ (((derivedTensor S).flip.obj (L.obj N)).commShiftIso n).hom.app (L.obj M) = L.map ((((derivedTensor R).flip.obj N).commShiftIso n).hom.app M) ≫ (L.commShiftIso n).hom.app (((derivedTensor R).obj M).obj N) ≫ (mu.hom.app (M, N))⟦n⟧') ∧ (∀ (n : ℤ) (M N : DerivedCategory (Modules R)), mu.hom.app (M, N⟦n⟧) ≫ ((derivedTensor S).obj (L.obj M)).map ((L.commShiftIso n).hom.app N) ≫ (((derivedTensor S).obj (L.obj M)).commShiftIso n).hom.app (L.obj N) = L.map ((((derivedTensor R).obj M).commShiftIso n).hom.app N) ≫ (L.commShiftIso n).hom.app (((derivedTensor R).obj M).obj N) ≫ (mu.hom.app (M, N))⟦n⟧') ∧ (∀ M : DerivedCategory (Modules R), mu.hom.app (M, DerivedCategory.Q.obj (HomologicalComplex.tensorUnit (Modules R) (.up ℤ))) ≫ ((derivedTensor S).obj (L.obj M)).map u.hom ≫ aS.rho.hom.app (L.obj M) = L.map (aR.rho.hom.app M)) ∧ (∀ N : DerivedCategory (Modules R), mu.hom.app (DerivedCategory.Q.obj (HomologicalComplex.tensorUnit (Modules R) (.up ℤ)), N) ≫ ((derivedTensor S).map u.hom).app (L.obj N) ≫ aS.ell.hom.app (L.obj N) = L.map (aR.ell.hom.app N))",
@@ -308,11 +320,11 @@
  "reviewed_proof": {
   "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-c968b",
-  "group": "C7",
+  "reviewer": "COMPILER",
+  "group": "C6",
   "result": "pass",
-  "landing": "20261022T013357-L-3556675",
+  "landing": "20261022T040151-L-2818727",
   "kind": "interface",
-  "note": "independent cc review: delivered item/helper modules and item node vs live clone and node statement; alias defs vs derivedTensor/representativeIso (rfl); direct importer ExactPullbackSignedComparison compiled against delivered oleans; #print axioms of the 3 theorems"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

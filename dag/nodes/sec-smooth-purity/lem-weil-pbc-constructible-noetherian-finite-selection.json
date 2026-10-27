@@ -135,7 +135,18 @@
   "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "split_report": {
@@ -187,5 +198,25 @@
   "landing": "20261021T111327-L-74481",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a Noetherian scheme, let $\\Lambda$ be a finite commutative ring, let\n$F$ be a constructible sheaf of $\\Lambda$-modules on $X_{\\Et}$\n[def-weil-pbc-etale-constructible-sheaf], [def-weil-pbc-etale-sheaves], and let\n$(\\phi_\\lambda:F\\to G_\\lambda)_{\\lambda\\in L}$ be a family of morphisms to\narbitrary sheaves of $\\Lambda$-modules. Assume that for every point $x\\in X$,\nwith $\\bar x$ the geometric point given by an algebraic closure of\n$\\kappa(x)$ [def-weil-pbc-geometric-stalks], and every $0\\neq v\\in F_{\\bar x}$,\nsome $\\lambda$ satisfies $(\\phi_\\lambda)_{\\bar x}(v)\\neq0$. Then a finite subset\n$L_0\\subset L$ makes\n\n$$\n (\\phi_\\lambda)_{\\lambda\\in L_0}:\n F\\longrightarrow\\prod_{\\lambda\\in L_0}G_\\lambda\n$$\n\na monomorphism. In particular, the conclusion holds if at each point some\nsingle $\\phi_\\lambda$ is injective on the geometric stalk.",
+  "proof": [
+   {
+    "text": "Choose the finite partition of [lem-weil-pbc-irreducible-lisse-strata], and for each $S_i$\nthe geometric point $\\bar\\eta_i$ over its generic point given by an algebraic\nclosure of the residue field. The module\n$F_{\\bar\\eta_i}$ is finite ($\\Lambda$ being finite and the stalks finitely generated). For each of its nonzero elements choose one\n$\\phi_\\lambda$ detecting it, and let $L_i$ be the resulting finite set of\nindices. The map\n\n$$\n F|_{S_i}\\longrightarrow\n \\bigoplus_{\\lambda\\in L_i}G_\\lambda|_{S_i}\n$$\n\nis injective at $\\bar\\eta_i$, hence is a monomorphism on all of $S_i$ by\n[lem-weil-pbc-lisse-generic-kernel]. Take $L_0=\\bigcup_iL_i$. At the geometric\npoint $\\bar x$ of every point of $X$, projection to the summands indexed by its stratum's $L_i$ shows\nthat the $L_0$-map is injective. Exactness of the geometric stalk functors\nmakes every stalk of its kernel zero; conservativity of geometric stalks then\nmakes the kernel zero. No finiteness or constructibility of the target sheaves\nis needed.",
+    "uses": [
+     "lem-weil-pbc-irreducible-lisse-strata",
+     "lem-weil-pbc-lisse-generic-kernel"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

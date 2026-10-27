@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-scheme-base-change-residue-transcendence-lifts",
+ "kind": "statement",
+ "title": "Residue transcendence degree decreases under scheme base change and has an equality lift",
+ "statement": "Let $f:U\\to B$ be a locally finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], and let $g:B'\\to B$ be any scheme morphism. Form $U'=U\\times_BB'$ with projections $q:U'\\to U$ and $f':U'\\to B'$ [def-pc-fibre-product]. Residue fields and their induced maps are [def-weil-residue-field], and transcendence degrees are [def-kun-transcendence-degree]. For every $u'\\in U'$, put $u=q(u')$, $b'=f'(u')$ and $b=f(u)$. Then $$\\operatorname{trdeg}_{\\kappa(b')}\\kappa(u')\\leq\\operatorname{trdeg}_{\\kappa(b)}\\kappa(u).$$ Conversely, for every $u\\in U$ and $b'\\in B'$ satisfying $g(b')=f(u)$, there exists $u'\\in U'$ with $q(u')=u$, $f'(u')=b'$, and $$\\operatorname{trdeg}_{\\kappa(b')}\\kappa(u')=\\operatorname{trdeg}_{\\kappa(f(u))}\\kappa(u).$$ No flatness, surjectivity, separation, quasi-compactness or Noetherian hypothesis on $g$, $U$ or $B$ is imposed. Empty schemes are allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), parts (2) and (3)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Fix compatible $u,b'$ and put $b=f(u)=g(b')$, $k=\\kappa(b)$ and $K=\\kappa(b')$. The residue-field map makes $K/k$ a field extension [def-weil-residue-field]. Choose an affine open $V=\\operatorname{Spec}R$ about $b$ and a finite-type affine chart $W=\\operatorname{Spec}S$ about $u$ in $f^{-1}(V)$, using the definition of locally finite type [def-weil-finite-type-morphism]. Choose an affine open $V'=\\operatorname{Spec}R'$ about $b'$ in $g^{-1}(V)$. Fibre-product pasting and the affine-spectrum tensor-product theorem identify the open chart $W\\times_VV'$ of $U'$ with $\\operatorname{Spec}C$, $C=S\\otimes_RR'$, compatibly with both projections [lem-weil-pbc-cartesian-square-pasting, lem-weil-pbc-fibre-product-affine-spectra]. For a prescribed $u'$ this chart contains $u'$; for the existence assertion it suffices to produce a point in this chart. Explicitly, the open subset $q^{-1}(W)\\cap(f')^{-1}(V')$ has the same universal property as $W\\times_VV'$: maps into it are exactly pairs of maps into $W,V'$ agreeing in $V$, since factorization through an open subscheme is unique. Thus the chart identification follows from [def-pc-fibre-product]. Restriction to an open neighbourhood preserves residue fields because neighbourhoods inside that open are cofinal in the stalk colimit.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), parts (2),(3); reduction to Algebra Tag 0CWE (lemma-inequalities-under-field-extension)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak r\\subset R$ and $\\mathfrak r'\\subset R'$ represent $b,b'$. Set $A=S\\otimes_Rk$ and $T=A\\otimes_kK$. The defining bilinear relations give $T\\simeq S\\otimes_RK\\simeq C\\otimes_{R'}K$: $(s\\otimes a)\\otimes\\lambda\\mapsto s\\otimes a\\lambda$ and $(s\\otimes r')\\otimes\\lambda\\mapsto s\\otimes\\overline{r'}\\lambda$, with inverses inserting units. Apply [lem-weil-pbc-fibre-ring-primes-residue-fields] to $R\\to S$ over $\\mathfrak r$, and to $R'\\to C$ over $\\mathfrak r'$. It identifies $u$ with a prime $\\mathfrak p$ of $A$ and the points of $\\operatorname{Spec}C$ over $b'$ with primes $P$ of $T$, with their residue fields identified over $k$ and $K$, respectively. Contraction $P\\cap A=\\mathfrak p$ is exactly the requirement that the corresponding point projects to $u$: the explicit inverse kernels $s\\otimes a\\mapsto\\overline s\\,\\overline a$ in the cited theorem commute with the two displayed tensor maps. Thus it remains to compare $\\operatorname{trdeg}_K\\kappa(P)$ with $\\operatorname{trdeg}_k\\kappa(\\mathfrak p)$ and to choose $P$ above $\\mathfrak p$ attaining equality.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), parts (2),(3); reduction to Algebra Tag 0CWE (lemma-inequalities-under-field-extension)"
+   }
+  },
+  {
+   "text": "A finite set of $R$-algebra generators of $S$ gives $k$-algebra generators of $A$; tensoring once more gives $K$-algebra generators of $T$ [def-weil-pbc-finite-type-algebra]. Hence both $A$ and $T$ are Noetherian by [lem-wf-affine-noetherian-components]. The map $j:A\\to T$, $a\\mapsto a\\otimes1$, is faithfully flat by [lem-weil-pbc-field-extension-base-change-faithfully-flat], and therefore flat by [def-weil-pbc-faithfully-flat-ring-map]. These assertions require no Noetherian hypothesis on $R,R'$ or on either original base scheme.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-wf-affine-noetherian-components",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), parts (2),(3); reduction to Algebra Tag 0CWE (lemma-inequalities-under-field-extension)"
+   }
+  },
+  {
+   "text": "For every prime $P$ of $T$ contracting to $\\mathfrak p$, put $h=\\dim A_{\\mathfrak p}$, $h'=\\dim T_P$, $r=\\operatorname{trdeg}_k\\kappa(\\mathfrak p)$ and $r'=\\operatorname{trdeg}_K\\kappa(P)$. Apply [lem-weil-pbc-dimension-at-point-field-extension] to the finite-type $k$-algebra $A$ and $K/k$. Apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] to $(k,A,\\mathfrak p)$ and $(K,T,P)$. They give the finite-integer equality $h+r=h'+r'$. Apply [lem-weil-pbc-flat-height-formula] to the flat map $A\\to T$ of Noetherian rings: it gives $h'=h+e$, where $e=\\operatorname{ht}(P/\\mathfrak pT)\\geq0$. Here $\\mathfrak pT\\subset P$ by contraction. The height is the supremum of prime-chain lengths below $P/\\mathfrak pT$, so its nonnegativity follows from the length-zero chain at that prime, as in the cited height formula. Finiteness of $h'$ also makes $e$ finite.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-field-extension",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-flat-height-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), parts (2),(3); reduction to Algebra Tag 0CWE (lemma-inequalities-under-field-extension)"
+   }
+  },
+  {
+   "text": "Substitution and cancellation in the finite integers give $r=e+r'$, hence $r'\\leq r$. For a prescribed $u'$, its prime $P$ in step 2 contracts to $\\mathfrak p$, so the residue-field identifications there give exactly the required inequality. No claim that all lifts have equality is made: the nonnegative term $e$ measures their possible loss of transcendence degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), parts (2),(3); reduction to Algebra Tag 0CWE (lemma-inequalities-under-field-extension)"
+   }
+  },
+  {
+   "text": "To attain equality, use [lem-weil-pbc-faithfully-flat-surjective-spectrum] for $j$ to choose a prime $P_0$ of $T$ above $\\mathfrak p$. The ideal $\\mathfrak pT$ lies in $P_0$. By [lem-weil-pbc-prime-contains-minimal-prime], there is a prime $P\\subseteq P_0$ minimal over $\\mathfrak pT$. Its contraction contains $\\mathfrak p$ because $\\mathfrak pT\\subseteq P$, and is contained in $\\mathfrak p$ because $P\\subseteq P_0$. Thus it contracts exactly to $\\mathfrak p$. There is no strictly smaller prime of $T/\\mathfrak pT$ contained in $P/\\mathfrak pT$, by this minimality; consequently its height is zero by the prime-chain definition in [lem-weil-pbc-flat-height-formula]. Applying the calculation of step 4 to this $P$ gives $h'=h$ and then $r'=r$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-flat-height-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), parts (2),(3); reduction to Algebra Tag 0CWE (lemma-inequalities-under-field-extension)"
+   }
+  },
+  {
+   "text": "By the bijection and residue-field isomorphism of [lem-weil-pbc-fibre-ring-primes-residue-fields] used in step 2, this $P$ gives a point $u'$ of $\\operatorname{Spec}C\\subset U'$ mapping to $b'$, and contraction to $\\mathfrak p$ gives $q(u')=u$. Its $K$-residue field is $\\kappa(P)$, so $r'=r$ is precisely the stated equality. If no compatible pair $u,b'$ exists, the existence assertion has no instance. If $U'$ is empty the inequality is vacuous; a compatible pair would produce the point just constructed. Thus empty schemes and arbitrary $g$ cause no exception.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), parts (2),(3); reduction to Algebra Tag 0CWE (lemma-inequalities-under-field-extension)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-residue-field",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-wf-affine-noetherian-components",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-prime-contains-minimal-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0CWE (lemma-inequalities-under-field-extension), expanded through Tags 00P4, 00P1 and 00ON, with the affine reduction of morphisms.tex Tag 02FY (2),(3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Residue field transcendence degree decreases after base change of a locally finite type scheme morphism and an equal transcendence degree lift exists",
+   "results": "8 hits; AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, RingHom.EssFiniteType.residueFieldMap, lift_trdeg_add_le, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.EssFiniteType.isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trdeg\", \"pullback\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|transcendence",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a locally finite type morphism residue field transcendence degree decreases under base change and there exists a point with equal transcendence degree",
+   "results": "8 hits; lift_trdeg_le_of_surjective, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, IsTranscendenceBasis.lift_cardinalMk_eq_trdeg, trdeg_le_of_injective, RingHom.EssFiniteType.residueFieldMap, Algebra.QuasiFinite.baseChange, trdeg_lt_aleph0, IsTranscendenceBasis.lift_cardinalMk_eq",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a scheme point and a field extension of the base residue field there is a point above it with the same transcendence degree",
+   "results": "8 hits; AlgebraicGeometry.Scheme.residue_surjective, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, AlgebraicGeometry.Scheme.instFieldCarrierResidueField",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trdeg\", \"residue\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "transcendence|trdeg|transcendenceDegree",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg.*base|base.*trdeg|trdeg.*tensor|tensor.*trdeg",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: ring/module flatness, abstract transcendence degree, or scheme residue-field constructions do not state the pointwise scheme base-change inequality and equality-lift assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue field transcendence degree under arbitrary base change of a locally finite type scheme morphism, with a lift attaining equality",
+   "results": "8 hits; AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, RingHom.EssFiniteType.residueFieldMap, AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, lift_trdeg_add_eq, AlgebraicGeometry.Scheme.residueFieldMap_comp, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field constructions, tower formulas, and results requiring quasi-finiteness or integrality do not assert the arbitrary scheme-base-change inequality and equality lift"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|transcendence",
+   "results": "0 hits; ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field constructions, tower formulas, and results requiring quasi-finiteness or integrality do not assert the arbitrary scheme-base-change inequality and equality lift"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a scheme base change residue field transcendence degrees decrease and equality is attained above every original point and compatible base point",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.residueFieldMap, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.residue_descResidueField, IsTranscendenceBasis.lift_cardinalMk_eq_trdeg, AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.residueFieldCongr, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field constructions, tower formulas, and results requiring quasi-finiteness or integrality do not assert the arbitrary scheme-base-change inequality and equality lift"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trdeg\", \"pullback\"",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field constructions, tower formulas, and results requiring quasi-finiteness or integrality do not assert the arbitrary scheme-base-change inequality and equality lift"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg.*(baseChange|tensor|residue)|((baseChange|tensor|residue).*)trdeg",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field constructions, tower formulas, and results requiring quasi-finiteness or integrality do not assert the arbitrary scheme-base-change inequality and equality lift"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type algebra over a field, scalar extension decreases residue transcendence degree and some prime over each prime preserves it",
+   "results": "8 hits; Ideal.inertiaDeg_le_finrank, Algebra.QuasiFinite.instFiniteResidueField, instIsAlgebraicResidueFieldOfIsIntegral, Algebra.isUnramifiedAt_iff_map_eq, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.QuasiFinite.instResidueField, Algebra.instIsSeparableResidueFieldOfFormallyUnramified",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field constructions, tower formulas, and results requiring quasi-finiteness or integrality do not assert the arbitrary scheme-base-change inequality and equality lift"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-dimension-flatness-base-change-sheaf",
+  "date": "2026-10-24",
+  "group": "Q119"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tags 0CWS (lemma-pre-flat-dimension-n), 0CWT (definition-flat-dimension-n), and 0CWW (lemma-flat-dimension-n), part (1). Pointwise scheme input: Tag 02FY (2),(3), used to transport the dimension cutoff and lift a violating point.",
+   "via": [
+    "lem-sfb-space-dimension-flatness-base-change-sheaf",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-base-change-residue-transcendence-lifts",
+  "worker": "stage1",
+  "summary": "Expanded 02FY (2),(3) through its algebra proof 0CWE using existing nodes only: affine fibre-ring residue identifications, finite-type Noetherian field base change, dimension-at-point and flat-height formulas, and a prime minimal over the extended ideal for equality. Normalized overescaped imported TeX. No new nodes.",
+  "blueprint": "Supporting input to det-thm-sf-ctf-stability-direct-images, direct-image preservation, through the recorded proper-support flattening chain; pointwise 02FY (2),(3) for transporting dimension cutoffs and lifting a violating point. The ancestor command returns None because the imported created.item chain is broken; retained the inherited null from.node and its detailed place/via rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "why": "Generic affine commutative-algebra input to the proof of Stacks 02FY via 0CWE; used only for its stated comparison or residue-field identification, not to replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-field-extension",
+    "why": "Generic affine commutative-algebra input to the proof of Stacks 02FY via 0CWE; used only for its stated comparison or residue-field identification, not to replace a unit-level six-functor argument."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic affine commutative-algebra input to the proof of Stacks 02FY via 0CWE; used only for its stated comparison or residue-field identification, not to replace a unit-level six-functor argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-e84a61b31",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-e84a61b31 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement matches morphisms.tex Tag 02FY (2) (trdeg inequality) and (3) (a lift with equal trdeg): f locally of finite type, g arbitrary. It equals the live base statement apart from the \\prime → ' normalization; live is still unsplit, so the delivery is not superseded and no repair note applies. The 7 steps follow 02FY's reduction to algebra.tex Tag 0CWE. Step 1 builds the affine chart W×_V V' = Spec(S⊗_R R') from the open universal property, pasting and pullbackSpecIso. Step 2 uses the fibre-ring prime bijection and residue-field isomorphism twice; I checked that the contraction P∩A=𝔭 matches q(u')=u because S→A→T equals S→C→T. Step 3: A and T are Noetherian (finite type over fields) and A→T is faithfully flat. Step 4: 00P4 and 00P1 give h+r=h'+r', and the flat height formula (Mathlib leaf) gives h'=h+e with e≥0. Step 5 is correctly elementary: r=e+r'. Step 6 takes P_0 from faithfully flat surjectivity and P minimal over 𝔭T inside P_0; both inclusions of the contraction are written, so e=0. Step 7 returns to the scheme and handles empty cases. proof_deps equals the union of the uses. My small cases: k[t], 𝔭=0, K=k(a) with a transcendental: (t−a) gives r'=0<r=1 and (0) gives equality; also A=k and k[t]/(t²). Duplicate scan over DAG source places for 0CWE, 02FY(2)/(3) and 04NS found only the 02FY(1)/04NS dimension nodes. There are no new nodes and no SGA. I accept the 3 declared tool_uses (fibre-ring-primes-residue-fields, dimension-at-point-field-extension, dimension-at-point-local-ring-trdeg): generic commutative algebra used as black boxes, replacing no six-functor step. blueprint.from.node null is inherited from the base chain, not a delivery fault. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeResidueTranscendenceLifts",
+  "declaration": "AlgebraicGeometry.residue_trdeg_base_change_le_and_exists_eq",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeResidueTranscendenceLifts.lean",
+  "statement": "theorem residue_trdeg_base_change_le_and_exists_eq {U B B' : Scheme.{u}} (f : U ⟶ B) [LocallyOfFiniteType f] (g : B' ⟶ B) : (∀ u' : (pullback f g : Scheme.{u}), @Algebra.trdeg (B'.residueField ((pullback.snd f g) u')) ((pullback f g).residueField u') _ _ (((pullback.snd f g).residueFieldMap u').hom.toAlgebra) ≤ @Algebra.trdeg (B.residueField (f ((pullback.fst f g) u'))) (U.residueField ((pullback.fst f g) u')) _ _ ((f.residueFieldMap ((pullback.fst f g) u')).hom.toAlgebra)) ∧ (∀ (u : U) (b' : B'), g b' = f u → ∃ u' : (pullback f g : Scheme.{u}), (pullback.fst f g) u' = u ∧ (pullback.snd f g) u' = b' ∧ @Algebra.trdeg (B'.residueField ((pullback.snd f g) u')) ((pullback f g).residueField u') _ _ (((pullback.snd f g).residueFieldMap u').hom.toAlgebra) = @Algebra.trdeg (B.residueField (f u)) (U.residueField u) _ _ ((f.residueFieldMap u).hom.toAlgebra))",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ce44376d",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Statement matches Stacks 02FY (2),(3) (morphisms.tex:5425) and the node clause by clause: [LocallyOfFiniteType f], g arbitrary, pullback.fst→U, pullback.snd→B', canonical residueFieldMap.hom.toAlgebra in all four @Algebra.trdeg, ≤ for every u', ∃ lift with fst/snd equalities and trdeg equality (stated at snd u' = b'). Single scheme universe u, Cardinal.{u}, no extra hypotheses; empty, strict-inequality and identity cases checked. lean.statement verbatim in file; docstrings give source, blueprint id and 7 proof steps; only sorry, no defs. Imports match the proof_dep lean records and the files exist. Live node has no lean, so not superseded; 02FY hits in live Lean are dimension-only (part 1), no H4 duplicate. Report has Worker report and Second reading sections. No findings; no compile, since no file was changed."
+ }
+}

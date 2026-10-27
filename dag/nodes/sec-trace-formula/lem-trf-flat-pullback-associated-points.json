@@ -17,90 +17,43 @@
  ],
  "proof": [
   {
-   "text": "Fix $y\\in Y$ and put $z=h(y)$, $A=\\mathcal O_{Z,z}$, $B=\\mathcal O_{Y,y}$, $M=\\mathcal G_z$, with maximal ideals $\\mathfrak m_A,\\mathfrak m_B$. The stalk homomorphism $\\varphi:A\\to B$ is local and $B$ is flat over $A$ by [def-weil-flat-morphism]. Choose a Noetherian affine neighbourhood of $z$ from [pqf-def-locnoeth]. By [lem-weil-pbc-affine-open-stalk-localization](c), $A$ is a prime localization of its coordinate ring; [lem-weil-pbc-localization-noetherian] makes $A$ Noetherian. No assertion about Noetherianity of $B$ or finiteness of $M$ has been made.",
+   "text": "Fix $y\\in Y$ and put $z=h(y)$, $A=\\mathcal O_{Z,z}$, $B=\\mathcal O_{Y,y}$ and $M=\\mathcal G_z$. Apply [lem-trf-flat-association-stalk-dictionary] to $h,\\mathcal G,y$. It gives a flat local map $A\\to B$, a Noetherian base ring $A$, the tensor description of the pullback stalk, and the closed-fibre quotient $C=B/\\mathfrak m_A B$. It also identifies association of $y$, of $z$, and of the unique fibre point $y_z$ with the three maximal-ideal association conditions. All hypotheses are precisely those of the item.",
    "uses": [
-    "def-weil-flat-morphism",
-    "pqf-def-locnoeth",
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "lem-weil-pbc-localization-noetherian"
+    "lem-trf-flat-association-stalk-dictionary"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 05DB (lemma-bourbaki), proof: set A, B, M and specialize F=O_Y"
+    "place": "Tag 05DB (lemma-bourbaki), proof: local rings and the geometric/algebraic dictionary"
    }
   },
   {
-   "text": "By [lem-weil-pbc-module-stalk-pullback], $(h^*\\mathcal G)_y\\cong M\\otimes_A B$ as $B$-modules. An isomorphism preserves the annihilator of each element, so [def-trf-relative-assassin] identifies $y\\in\\operatorname{Ass}_Y(h^*\\mathcal G)$ with $\\mathfrak m_B\\in\\operatorname{Ass}_B(M\\otimes_A B)$, always using exact element-annihilators. By [lem-sbc-scheme-fibre-stalk-quotient], the unique point $y_z$ of $Y_z$ above $y$ has local ring $C=B/\\mathfrak m_A B$, compatibly with the quotient map. Since $\\varphi$ is local, $\\mathfrak m_A B\\subseteq\\mathfrak m_B$, and the maximal ideal of $C$ is $\\mathfrak m_B/\\mathfrak m_A B$. Thus the fibre association condition is that this ideal is the annihilator of an element of $C$.",
+   "text": "The rings $A,B$ are nonzero local rings since they are scheme stalks at points; step 1 supplies locality, flatness and Noetherianity of $A$. Apply [lem-trf-flat-local-maximal-associated-tensor] to $A,B,M$ and $C=B/\\mathfrak m_A B$. If $y\\in\\operatorname{Ass}_Y(h^*\\mathcal G)$, [lem-trf-flat-association-stalk-dictionary](2) gives $\\mathfrak m_B\\in\\operatorname{Ass}_B(M\\otimes_A B)$. The forward algebra implication gives $\\mathfrak m_A\\in\\operatorname{Ass}_A(M)$ and $\\mathfrak m_B\\in\\operatorname{Ass}_B(C)$, which the dictionary translates to $z\\in\\operatorname{Ass}_Z(\\mathcal G)$ and $y_z\\in\\operatorname{Ass}_{Y_z}(\\mathcal O_{Y_z})$. Conversely these two geometric conditions give those same two algebraic conditions by the dictionary; the reverse algebra implication followed by dictionary (2) gives $y\\in\\operatorname{Ass}_Y(h^*\\mathcal G)$. Thus both directions use the criterion with exactly its stated hypotheses.",
    "uses": [
-    "lem-weil-pbc-module-stalk-pullback",
-    "def-trf-relative-assassin",
-    "lem-sbc-scheme-fibre-stalk-quotient"
+    "lem-trf-flat-local-maximal-associated-tensor",
+    "lem-trf-flat-association-stalk-dictionary"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 05DB, proof: stalk of pullback and local ring of fibre; Schemes Tag 0HA1"
+    "place": "Tag 05DB (lemma-bourbaki), proof: Bourbaki closed-fibre criterion and substitution"
    }
   },
   {
-   "text": "Apply the equality clause of [lem-weil-pbc-associated-primes-flat-base-change] with $R=A$, $S=B$, and $N=B$. Step 1 verifies both hypotheses, and its statement allows arbitrary $M$ and arbitrary $B$. Hence\n$$\\mathfrak m_B\\in\\operatorname{Ass}_B(M\\otimes_A B)\\quad\\Longleftrightarrow\\quad\n\\text{there is }\\mathfrak p\\in\\operatorname{Ass}_A(M)\\text{ with }\\mathfrak m_B\\in\\operatorname{Ass}_B(B/\\mathfrak pB).$$\nWe next identify which $\\mathfrak p$ can occur, rather than assuming it equals $\\mathfrak m_A$.",
+   "text": "By [def-pc-scheme-fibre], $j_t$ is a homeomorphism onto $h^{-1}(t)$ for every $t\\in Z$. If $y=j_t(v)$ with $t\\in\\operatorname{Ass}_Z(\\mathcal G)$ and $v\\in\\operatorname{Ass}_{Y_t}(\\mathcal O_{Y_t})$, then $t=h(y)=z$ and injectivity gives $v=y_z$. Conversely, if $z\\in\\operatorname{Ass}_Z(\\mathcal G)$ and $y_z\\in\\operatorname{Ass}_{Y_z}(\\mathcal O_{Y_z})$, the witness $j_z(y_z)=y$ puts $y$ in the union. Thus membership in that union is exactly the right side of step 2, and extensionality proves the equality.",
    "uses": [
-    "lem-weil-pbc-associated-primes-flat-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 05DB via Algebra Tag 05C2 (lemma-bourbaki-fibres); expand its reference to Tag 0312 (lemma-bourbaki)"
-   }
-  },
-  {
-   "text": "Suppose $\\mathfrak m_B=\\operatorname{Ann}_B(v)$ for $v\\in B/\\mathfrak pB$, where $\\mathfrak p$ is prime in $A$. The element $v$ is nonzero because $\\mathfrak m_B$ is proper. For $a\\notin\\mathfrak p$, multiplication by $a$ on $A/\\mathfrak p$ is injective: $ar\\in\\mathfrak p$ implies $r\\in\\mathfrak p$. By [lem-weil-pbc-flat-tensor-exact], tensoring this injection with the $A$-flat module $B$ stays injective. The isomorphism [lem-weil-pbc-tensor-over-quotient-ring](1) identifies the tensor module with $B/\\mathfrak pB$ by $\\bar r\\otimes b\\mapsto\\varphi(r)b$; on these generators the tensor map is multiplication by $\\varphi(a)$. Consequently $\\varphi(a)$ cannot annihilate $v$. If $a\\in\\mathfrak m_A\\setminus\\mathfrak p$, locality gives $\\varphi(a)\\in\\mathfrak m_B$, contradicting this conclusion. Hence $\\mathfrak m_A\\subseteq\\mathfrak p$. Every proper ideal of the local ring $A$ is contained in $\\mathfrak m_A$ (each element outside it is a unit), so $\\mathfrak p=\\mathfrak m_A$.",
-   "uses": [
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-tensor-over-quotient-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra Tags 0312 and 05C1 (lemma-post-bourbaki), nonzerodivisor calculation on the prime quotient; used in 05C2"
-   }
-  },
-  {
-   "text": "For $C=B/\\mathfrak m_A B$ and $v\\in C$, the $B$-annihilator is the inverse image of the $C$-annihilator under the surjection $B\\to C$. Therefore\n$$\\operatorname{Ann}_B(v)=\\mathfrak m_B\\quad\\Longleftrightarrow\\quad\n\\operatorname{Ann}_C(v)=\\mathfrak m_B/\\mathfrak m_A B.$$\nIndeed the preimage of the displayed quotient ideal is $\\mathfrak m_B$, and surjectivity makes ideals of $C$ equal when their preimages are equal. By the definition [def-trf-relative-assassin] and step 2, this proves\n$$\\mathfrak m_B\\in\\operatorname{Ass}_B(B/\\mathfrak m_A B)\n\\quad\\Longleftrightarrow\\quad y_z\\in\\operatorname{Ass}_{Y_z}(\\mathcal O_{Y_z}).$$\nIt holds even if $B$ and $C$ are non-Noetherian.",
-   "uses": [
-    "def-trf-relative-assassin"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 05DB, proof: closed-fibre association; Algebra Tag 05BY (lemma-ass-quotient-ring), direct annihilator calculation"
-   }
-  },
-  {
-   "text": "Steps 3–5 give the equivalence\n$$\\mathfrak m_B\\in\\operatorname{Ass}_B(M\\otimes_A B)\\quad\\Longleftrightarrow\\quad\n\\bigl(\\mathfrak m_A\\in\\operatorname{Ass}_A(M)\\text{ and }y_z\\in\\operatorname{Ass}_{Y_z}(\\mathcal O_{Y_z})\\bigr).$$\nFor the forward implication choose $\\mathfrak p$ in step 3, identify it by step 4, and apply step 5. For the reverse implication use step 5 and take $\\mathfrak p=\\mathfrak m_A$ in step 3. By [def-trf-relative-assassin], the first condition on the right is exactly $z\\in\\operatorname{Ass}_Z(\\mathcal G)$. Step 2 identifies the left condition with association of $y$ to $h^*\\mathcal G$. Finally [def-pc-scheme-fibre] says $j_z$ identifies the points of $Y_z$ with $h^{-1}(z)$. Thus a fixed $y$ lies in the union in the statement precisely when these two right-hand conditions hold for $z=h(y)$. Since this holds for every $y$, the required equality of subsets follows.",
-   "uses": [
-    "def-trf-relative-assassin",
     "def-pc-scheme-fibre"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 05DB, conclusion of the stalkwise equivalence"
+    "place": "Tag 05DB (lemma-bourbaki), proof: pointwise equivalence gives the union equality"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-flat-morphism",
-  "pqf-def-locnoeth",
-  "lem-weil-pbc-affine-open-stalk-localization",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-module-stalk-pullback",
-  "def-trf-relative-assassin",
-  "lem-sbc-scheme-fibre-stalk-quotient",
-  "lem-weil-pbc-associated-primes-flat-base-change",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-trf-flat-association-stalk-dictionary",
+  "lem-trf-flat-local-maximal-associated-tensor",
   "def-pc-scheme-fibre"
  ],
  "proof_origin": {
@@ -227,25 +180,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-flat-pullback-associated-points",
   "worker": "stage1",
-  "summary": "Proved the 05DB specialization stalkwise, expanding 05C2 through the existing arbitrary-module Bourbaki formula 0312. Locality and flat tensor exactness force its auxiliary prime to be the base maximal ideal. All facts reused from existing nodes; no new nodes. Statement, arbitrary quasi-coherent coefficients, and absence of Noetherianity of Y are preserved.",
-  "blueprint": "Proof (1)--(2) of lem-trf-local-term-locality, flat-family component-closure input through relative associated specialization; in the proof of Stacks 05DC used there, the displayed associated-point formula for the flat morphism of fibres. The six steps supply the flat pullback formula used in 05DC through relative assassin base change. Whole-blueprint searches for associated points, Bourbaki, and 05DB found no equivalent blueprint node.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-module-stalk-pullback",
-    "why": "Generic stalk formula for pullback, needed to translate this geometric claim into local algebra; no node of sk-i-curve-zero states it."
-   },
-   {
-    "node": "lem-sbc-scheme-fibre-stalk-quotient",
-    "why": "Generic fibre local-ring quotient, needed to interpret fibre association; no node of sk-i-curve-zero states it."
-   },
-   {
-    "node": "lem-weil-pbc-associated-primes-flat-base-change",
-    "why": "General ring-theoretic Bourbaki formula 0312 for arbitrary modules; no node of sk-i-curve-zero supplies it without additional finite-type and Noetherian hypotheses."
-   }
-  ]
+  "summary": "Repair of the mandatory re-split: extracted two independent statement-only tasks, the geometric stalk dictionary (old steps 1,2,5) and the local maximal-associated tensor criterion (old steps 3,4 and the implications in 6). All six old steps are retained verbatim with their allocation in report.md. The unchanged parent statement now has a short three-step assembly; neither new task states the geometric union formula. Rebased the returned Q68 repair against the current DAG on 2026-10-22, re-read all current cited statements, and made the dictionary dependency explicit also in assembly step 2; the original statement and all non-stage-1 metadata remain unchanged. On the latest landing-repair retry, checked the fresh dry-run head 41c32cc9fb0 and expanded assembly step 3 into explicit forward and reverse union-membership witnesses against the current scheme-fibre statement. Landing repair on 2026-10-23: initial current-base dry run ff50c379740 passed; re-read current assembly and helper definition dependencies and retained source arguments, and expanded assembly step 2 into explicit forward and reverse uses of the local criterion and dictionary. The delivery tool rebases this adjusted split on origin/sheaf-dag; live-queue promotion remains the maintainer operation named in the return.",
+  "blueprint": "Proof (1)--(2) of lem-trf-local-term-locality, flat-family component-closure input through relative associated specialization; in the proof of Stacks 05DC used there, the displayed associated-point formula for the flat morphism of fibres. The six steps supply the flat pullback formula used in 05DC through relative assassin base change. Whole-blueprint searches for associated points, Bourbaki, and 05DB found no equivalent blueprint node. The new nodes retain this ancestry and divide its stalkwise associated-point input into geometry and local algebra.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-module-stalk-pullback",
@@ -253,12 +193,12 @@
   "lem-weil-pbc-associated-primes-flat-base-change"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N8-7a740c49e",
-  "group": "N8",
+  "reviewer": "NT-cc-Q68-c2759cb04",
+  "group": "Q68",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-7a740c49e (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full; the delivery adds no new nodes. The statement is Stacks divisors 05DB (l.311) taken with F=O_Y and checked against its stalkwise proof: equality needs only Z locally Noetherian, G stays any quasi-coherent module and Y need not be Noetherian, so it is not weakened. Step 1: the flat-morphism definition gives the local stalk map, and the locnoeth definition, clause (c) of affine-open-stalk-localization and localization-noetherian make A Noetherian. Step 2: module-stalk-pullback holds for any module, and fibre-stalk-quotient (0HA1) gives O_{Y_z,y_z}=B/m_A B. Step 3: the 0312 node (algebra.tex l.15774) allows any M and S with N flat, applied with R=A and S=N=B. Step 4: I checked the argument that p=m_A: injectivity of multiplication by a on A/p carries over to B/pB by flat-tensor-exact and part (1) of tensor-over-quotient, and locality then forces m_A⊆p. Step 5 is the elementary annihilator correspondence along B→C. Step 6 uses that j_z maps onto h^{-1}(z). Small cases hold: A^1 over k[[t]] with G=O_Z or G=k, G=0, Y empty, h=id, and Z=Spec k with Y non-Noetherian. There is no duplicate: the related nodes need Noetherian rings and finite modules, or finite presentation with WeakAss. The proof closure (79 nodes) has no cycle. I accept the three declared tool_uses (module-stalk-pullback, scheme-fibre-stalk-quotient, the 0312 node) as generic black boxes. No SGA is cited."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c2759cb04 (reviewer sub-agent of L); spot-checked: Fourth push of the 2026-10-21 re-split. The three earlier heads (7162fb8b, ec674bb9, 82ca925e) each passed review. Each landing was then refused only because L had not promoted the side completion to the live DAG. Compared with 82ca925e, both new nodes are byte-identical. In the item, only the wording of proof step 2 changed, now giving the forward and reverse uses of the criterion and dictionary explicitly; it is correct. The statement and the dependency lists are unchanged. All six old proof steps are carried into the two new nodes: the stalk dictionary takes old steps 1, 2 and 5; the local criterion takes old steps 3 and 4 and the algebra of old step 6; the rest of old step 6 became item step 3, so nothing was dropped or summarised. The two nodes are of comparable size, and neither states the union formula. I reread the math. In the local criterion (A Noetherian, B flat and local over A, M arbitrary), the forward direction uses the Bourbaki equality from lem-weil-pbc-associated-primes-flat-base-change, then shows p = m_A: multiplication by an element outside p stays injective after flat tensoring (lem-weil-pbc-flat-tensor-exact and lem-weil-pbc-tensor-over-quotient-ring(1)), and locality does the rest. The reverse direction is the containment with p = m_A. Small cases checked: k[x]_(x) with M = A/(x) and M = A, M = 0, and A a field. In the dictionary, the tensor stalk comes from lem-weil-pbc-module-stalk-pullback and the fibre stalk C = B/m_A B from lem-sbc-scheme-fibre-stalk-quotient. Ann_B(v) is the preimage of Ann_C(v), and m_A B lies inside m_B by locality, so the comparison holds with no Noetherian hypothesis on B. Item step 3 uses the homeomorphism statement in def-pc-scheme-fibre. Sources read: Stacks divisors.tex 05DB (lemma-bourbaki and its proof) and algebra.tex 05C2. The item equals 05DB with F = O_Y, not weakened. A duplicate search over the current 27455-node snapshot found no duplicate: the nearest candidates are the general Bourbaki node, the flat-quotient node (Noetherian B), the fibre-bound node (finite modules), the fibre module-ring node (only part of dictionary (3)) and the weak-association node. No SGA, no fixes, no tool_uses. Maintainer note: landing still needs L's live-DAG promotion of the side completion."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FlatPullbackAssociatedPoints",
@@ -278,5 +218,16 @@
   "result": "pass",
   "note": "Matches Stacks 05DB (divisors l.310) with F=O_Y and locally Noetherian base: Flat h, IsLocallyNoetherian Z, arbitrary G with IsQuasicoherent.{u} (the predicate the pqf-def-coherent record builds on), nothing on Y, no finite type. Conclusion uses the recorded Scheme.Modules.associatedPoints (exact element annihilators), tensorPullback, h.fiber/fiberι and unit (h.fiber z).ringCatSheaf, as an equality of subsets of Y. lean.statement matches the file exactly; only the item's lean field changed; the six stmt_dep copies equal side. Public imports are the stmt_dep modules and plain imports the proof_dep modules (brief l.104). Docstrings carry source, blueprint id and the six steps; lines <=100; proof is only sorry. No duplicate (grep side/live lean; the scheme-level AlgebraicGeometry.associatedPoints is a separate node). Edge cases G=0, Y empty, h=id, non-Noetherian Y, Z=Spec k, empty union all covered. nt_compile --json: 3.1 s, clean; a broken control copy reports its error."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

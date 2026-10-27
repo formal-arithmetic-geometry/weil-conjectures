@@ -1,0 +1,114 @@
+{
+ "id": "def-sf-relative-kunneth-constructions",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Displayed six arrows; coherence (iii); final closed-subscheme formula",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Relative Kunneth maps, cubes and closed restrictions",
+ "statement": "For the fixed finite-field and coefficient datum [def-sf-datum] and a normalized relative-product presentation [def-sf-relative-product-factors], define the relative map as the hom of the ordered composite of its six natural isomorphisms. Define pullback composition across a commutative square, the canonical finite tensor-model comparison, and normalization of tensor pullback at each coefficient stage. A geometric cube records its three Cartesian faces, four horizontal maps, and equality with the three supplied compactified squares. Its primitive comparisons consist of normalized tensor pullback, pullback composition and the three exchanges. Define its exterior, source and target isomorphisms by the displayed primitive composites. For ordinary closed immersions over the geometric point, define the compact-support formula using the actual restrictions and the four recorded compact-section constructions [def-weil-ordinary-compact-cohomology]. These are the original RelativeKunneth construction declarations, extracted without changing their data, signatures or namespace.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/_section.md",
+  "place": "Displayed six arrows; coherence (iii); final closed-subscheme formula"
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "def-sf-relative-product-factors",
+  "def-weil-ordinary-compact-cohomology",
+  "def-pur-support-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative Kunneth base change commuting factor squares closed subscheme compact cohomology",
+   "results": "8 hits: CategoryTheory.TwoSquare.lanBaseChange, KaehlerDifferential.tensorKaehlerEquiv, KaehlerDifferential.cotangentComplexBaseChange_tmul, KaehlerDifferential.tensorKaehlerEquivBase, CategoryTheory.TwoSquare.lanBaseChange_app, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatPullbackSchemeOfQuasiCompact_1, Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex",
+   "date": "2026-10-25",
+   "verdict": "no match: the specified four-stage presentations and their normalized comparisons are not Mathlib declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kunneth\"",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: the specified four-stage presentations and their normalized comparisons are not Mathlib declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|kunneth|RelativeKunnethCube",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "no match: the specified four-stage presentations and their normalized comparisons are not Mathlib declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RelativeKunneth",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RelativeKunnethConstructions",
+  "file": "lean/Sheaf/Paper/RelativeKunnethConstructions.lean",
+  "declaration": "WeilConjectures.relativeKunnethIso",
+  "statement": "def relativeKunnethIso\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    {S : SixFunctorDatum D C E n hn} {s : PodCoefficientStage}\n    {Q : SixFunctorCompactifiedSquare D}\n    [IsSeparated Q.g.hom.left] [IsSeparated Q.g'.hom.left] [IsSeparated Q.f'.hom.left]\n    (R : RelativeProductPresentation S s Q)\n    (cg : Compactification Q.g.hom.left)\n    (ch : Compactification (Q.f' ≫ Q.g).hom.left)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.relativeKunnethIso",
+   "WeilConjectures.relativeKunnethMap",
+   "WeilConjectures.relativeKunnethPullSquare",
+   "WeilConjectures.relativeKunnethFiniteTensorComparison",
+   "WeilConjectures.relativeKunnethTensorNormalized",
+   "WeilConjectures.RelativeKunnethCube",
+   "WeilConjectures.RelativeKunnethCubeComparisons",
+   "WeilConjectures.RelativeKunnethCubeComparisons.externalIso",
+   "WeilConjectures.RelativeKunnethCubeComparisons.sourceIso",
+   "WeilConjectures.RelativeKunnethCubeComparisons.targetIso",
+   "WeilConjectures.RelativeKunnethClosedSquare",
+   "WeilConjectures.relativeKunnethClosedFormula"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b2e9",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261025T201243-L-2368212",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b2e9",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261025T201243-L-2368212",
+  "kind": "interface",
+  "note": "independent cc review: relativeKunneth statement byte-identical to published; 12 moved declarations have identical type and value Expr hashes in the sandbox and published builds; two new sorry lemmas checked against the item's closed and base-change clauses and their nodes; 3 direct importers compiled against the delivered modules"
+ }
+}

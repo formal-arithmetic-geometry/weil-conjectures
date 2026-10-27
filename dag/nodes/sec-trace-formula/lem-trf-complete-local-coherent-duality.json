@@ -55,30 +55,18 @@
    }
   },
   {
-   "text": "For each integer $n$, $\\tau_{\\leq n}K$ has finitely generated cohomology and vanishes above $n$. The Noetherian pseudo-coherence criterion [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] makes it pseudo-coherent. Apply [lem-trf-derived-evaluation-finite-injective] with $L=M=\\Omega$: both have bounded injective representatives; their derived Hom is isomorphic via $h$ to $R[0]$ and hence has Tor amplitude $[0,0]$, since $R[0]\\otimes_R^{\\mathbf L}N[0]=N[0]$ for every module $N$. It follows that the composite $K\\cong R[0]\\otimes_R^{\\mathbf L}K\\xrightarrow{h\\otimes1}R\\operatorname{Hom}_R(\\Omega,\\Omega)\\otimes_R^{\\mathbf L}K\\longrightarrow\\mathbb D\\mathbb D(K)$ is an isomorphism.",
+   "text": "Apply [lem-trf-homothety-evaluation-biduality] with $L=\\Omega$. Step 2 supplies a bounded injective representative and scalar-action isomorphism; $R$ is Noetherian. Thus, for every $K\\in D_{\\mathrm{fg}}(R)$, the canonical evaluation-transpose map $\\delta_K:K\\to\\mathbb D\\mathbb D(K)$ is an isomorphism, naturally in $K$.",
    "uses": [
-    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-    "lem-trf-derived-evaluation-finite-injective"
+    "lem-trf-homothety-evaluation-biduality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0A7C, lemma-dualizing, second paragraph; more-algebra.tex Tag 0A69, lemma-internal-hom-evaluate-isomorphism-technical."
+    "place": "Tag 0A7C, lemma-dualizing, second proof paragraph, using more-algebra.tex Tag 0A69, lemma-internal-hom-evaluate-isomorphism-technical; Tag 0A67, lemma-internal-hom-evaluate, for the canonical map; Tag 066E, lemma-Noetherian-pseudo-coherent, for the truncation hypothesis. The displayed specialization does not need finite cohomology of L."
    }
   },
   {
-   "text": "This composite is the canonical biduality map $\\delta_K$. Indeed, by the stated transpose description of the evaluation comparison, its transpose is evaluation $R\\operatorname{Hom}_R(K,\\Omega)\\otimes_R^{\\mathbf L}K\\to\\Omega$: the scalar $1$ is sent by $h$ to $\\operatorname{id}_\\Omega$, so composing with that endomorphism changes nothing. Naturality in $K$ follows from naturality of the evaluation comparison and $h\\otimes1$. Thus the isomorphisms are the required canonical, natural maps, rather than a choice of objectwise isomorphisms.",
-   "uses": [
-    "lem-trf-derived-evaluation-finite-injective"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0A67, lemma-internal-hom-evaluate, definition of the map; its specialization in dualizing.tex Tag 0A7C."
-   }
-  },
-  {
-   "text": "The functor $\\mathbb D:D_{\\mathrm{fg}}(R)^{\\mathrm{op}}\\to D_{\\mathrm{fg}}(R)$ and its opposite each have the other as a quasi-inverse: the natural isomorphisms from the two composites to the identity are supplied by $\\delta$ and its opposite. This is precisely an anti-equivalence. All the objects involved belong to the indicated category by Step 3.",
+   "text": "Step 3 defines $\\mathbb D:D_{\\mathrm{fg}}(R)^{\\mathrm{op}}\\to D_{\\mathrm{fg}}(R)$. Step 4 gives $\\operatorname{Id}\\cong\\mathbb D\\mathbb D$ naturally. This isomorphism and its opposite identify both composites of $\\mathbb D$ and its opposite with the identity, making them quasi-inverse.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -87,20 +75,18 @@
    }
   },
   {
-   "text": "Choose $a\\leq b$ with $J^i=0$ outside $[a,b]$. By [lem-weil-pbc-bounded-below-injectives-kinjective] and [def-pur-derived-internal-hom], $\\mathbb D(K)$ is computed by $\\operatorname{Hom}^\\bullet_R(P,J)$ for any representative $P$ of $K$. If $K\\in D^{\\leq c}$, replace $P$ by its good truncation at $c$, with term $\\ker(d^c)$ at $c$ and zero terms above: this is quasi-isomorphic to $P$. In degree $n<a-c$ every factor $\\operatorname{Hom}_R(P^p,J^{p+n})$ is zero, since $p\\leq c$ gives $p+n<a$. Thus $\\mathbb D(K)\\in D^{\\geq a-c}$. If $K\\in D^{\\geq c}$, good truncation with term $\\operatorname{coker}(d^{c-1})$ at $c$ gives a representative zero below $c$. For $n>b-c$, each nonzero source term has $p\\geq c$, hence $p+n>b$, so the Hom complex vanishes in that degree. Thus $\\mathbb D(K)\\in D^{\\leq b-c}$.",
+   "text": "Choose $a\\leq b$ supporting the bounded injective representative $J$ of $\\Omega$ from Step 2. By [lem-trf-bounded-injective-rhom-amplitude], $K\\in D^{\\leq c}$ implies $\\mathbb D(K)\\in D^{\\geq a-c}$, and $K\\in D^{\\geq c}$ implies $\\mathbb D(K)\\in D^{\\leq b-c}$.",
    "uses": [
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex"
+    "lem-trf-bounded-injective-rhom-amplitude"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0A7C, lemma-dualizing, boundedness clauses; degree calculation from a bounded injective representative (more-algebra.tex Tag 0A5S)."
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A5S, definition-injective-dimension, bounded injective representatives, and dualizing.tex Tag 0A7C, lemma-dualizing, the boundedness clauses; explicit Hom-complex degree calculation after good truncation (old item Step 7)."
    }
   },
   {
-   "text": "Step 7 proves that $\\mathbb D$ sends bounded-above objects to bounded-below objects and bounded-below objects to bounded-above objects, and sends bounded objects to bounded objects. Since $\\delta_K:K\\xrightarrow{\\sim}\\mathbb D\\mathbb D(K)$ is an isomorphism, the restricted functors are still quasi-inverse. They therefore exchange $D^+_{\\mathrm{fg}}(R)$ and $D^-_{\\mathrm{fg}}(R)$ and give an anti-equivalence on $D^b_{\\mathrm{fg}}(R)$, as required.",
+   "text": "Step 6 gives the forward boundedness implications. For the converses, if $\\mathbb D(K)\\in D^{\\leq d}$ then $K\\cong\\mathbb D\\mathbb D(K)\\in D^{\\geq a-d}$; if $\\mathbb D(K)\\in D^{\\geq d}$ then $K\\in D^{\\leq b-d}$. Thus $\\mathbb D$ exchanges $D^+_{\\mathrm{fg}}$ and $D^-_{\\mathrm{fg}}$ and preserves $D^b_{\\mathrm{fg}}$. The quasi-inverse data of Step 5 restrict to these subcategories.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -116,9 +102,8 @@
   "def-pur-derived-internal-hom",
   "lem-trf-finite-map-dualizing-transfer",
   "lem-trf-coherent-rhom-finite-injective-dimension",
-  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-  "lem-trf-derived-evaluation-finite-injective",
-  "def-pur-hom-complex"
+  "lem-trf-homothety-evaluation-biduality",
+  "lem-trf-bounded-injective-rhom-amplitude"
  ],
  "proof_origin": {
   "by": "document",
@@ -204,19 +189,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-complete-local-coherent-duality",
   "worker": "stage1",
-  "summary": "Preserved the complete-local coherent-duality statement including unbounded complexes and the canonical natural biduality map. Reused the existing Cohen presentation and Noetherian pseudo-coherence criterion. Isolated regular-local finite self-injective dimension, finite-map transfer, coherent RHom finiteness, and the general unbounded evaluation comparison as four smaller statement-only nodes. Checked sources, hypotheses, node citations, ordinary-module typing, small cases and logged Mathlib searches.",
-  "blueprint": "Auxiliary algebraic input at the recorded from.place of lem-trf-local-term-locality via the existing semidualizing-conservativity chain. Steps 1-2 realize the existence input of 0BFR; Steps 3-6 realize canonical unbounded coherent biduality in 0A7C; Steps 7-8 give its boundedness clauses. The item is not the key statement of sk-i-curve-zero, so the unit realization is unchanged.",
+  "summary": "Repair of the human re-split return: retain the complete-local statement unchanged and the original existence and coherence arguments. Extract old Steps 4--5 into a general canonical homothety-evaluation biduality node and old Step 7 into a uniform bounded-injective RHom amplitude node. Both new nodes are unsplit and statement-only, with logged searches. The parent is a short assembly; the report retains every old argument and maps it to its new location. Landing-return repair: rechecked the current DAG statements of all direct dependencies and both extracted lemmas against their sources; retained the valid 2999-character assembly, refreshed its route description, and rebased through the delivery tool on the current origin/sheaf-dag. Existing proof inputs now marked split retain the precise statements used here; literal citation quotes remain valid. Resumed current-DAG audit: the first dry run identified the newly present def-trf-ringed-hom-representative-comparison sharing tag 0A67; its statement only defines representative comparison maps and does not assert biduality. The report now distinguishes this pair explicitly. Revalidated all literal citation quotes and retained the statement-only extracted tasks and unchanged assembly. Current-return repair (2026-10-23, returned head e36107a18bc): re-read all direct proof and statement dependencies against the current DAG and the Stacks sources; the first resumed server dry run passed at fac2ba43869. Clarified the directions of the quasi-inverse natural isomorphisms in Step 5 and made the converse boundedness implications explicit in Step 7, retaining all previous arguments in the report. The statement, extracted tasks, searches, and literal citation pairs are unchanged. The delivery tool rebases this refreshed assembly onto current origin/sheaf-dag. Latest landing-return repair (2026-10-23, returned head 076f746b0ca): re-read the current cited statements and their Stacks sources after the resumed server dry run b67a5ab843f passed. Step 7 now spells out the converse bounds a-d and b-d by applying Step 6 to D(K); Step 5 explicitly assembles the natural isomorphism and its opposite. The 2867-character proof retains the two independent statement-only tasks, and no statement, citation pair, or search question changes. Current-base statement fingerprints and the return-specific review are recorded in report.md.",
+  "blueprint": "Auxiliary algebraic input at the recorded from.place of lem-trf-local-term-locality via the existing semidualizing-conservativity chain. Current Steps 1--2 realize existence in 0BFR(2), Steps 3--5 realize coherent closure and canonical unbounded biduality in 0A7C, and Steps 6--7 realize the boundedness restrictions. Old Steps 4--5 and 7 are assigned to the two new statement-only tasks; old Steps 1--3, 6 and 8 retain their arguments in the parent. This auxiliary item is not the key statement of sk-i-curve-zero, so no unit realization changes.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-cohen-power-series-presentation",
     "why": "Generic complete-local presentation theorem used only for a regular local ring surjecting onto R; this unit has no such commutative-algebra input."
-   },
-   {
-    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-    "why": "Generic algebraic criterion applied to each bounded-above coherent truncation; this unit has no pseudo-coherence criterion."
    },
    {
     "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
@@ -230,12 +211,12 @@
   "lem-weil-pbc-bounded-below-injectives-kinjective"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q61-e9478cc76",
+  "reviewer": "NT-cc-Q61-c48d49bf2",
   "group": "Q61",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-e9478cc76 (reviewer sub-agent of L); spot-checked: Pass with no changes; the delivery is correct as delivered. The item keeps its statement unchanged and it matches Stacks 0BFR(2)+0A7C: existence of Omega in D^b_fg, an anti-equivalence on unbounded D_fg, the D+/D- exchange, preservation of D^b, and canonical natural biduality. That covers what the parent semidualizing-conservativity node uses, including biduality for D^- objects. Nothing is weakened. I checked each step against the statements it cites. S1: the Cohen presentation gives a complete Noetherian regular local A surjecting onto R. S2: the homothety for A[0] holds via the K-injectivity of bounded-below injective complexes and evaluation at 1, so every hypothesis of the finite-map transfer node holds. S3: the coherent-RHom node applies to unbounded K. S4: the truncations of K are pseudo-coherent by the Noetherian criterion 066E(2), and all three hypotheses of the 0A69 evaluation node hold, with RHom(Omega,Omega) isomorphic to R[0] and so of tor amplitude [0,0]. S5: the transpose description agrees with the map of Stacks lemma-evaluate-and-more, phi(x)k goes to (psi to phi(psi(k))), so the composite is the canonical biduality map. S7: I recomputed the degree bounds a-c and b-c from the bounded injective model J and the good truncations. S6 and S8 are elementary. I read the sources at dualizing.tex 0BFR/0A7C/0A7B/0AWX/0AX0/0G4H and more-algebra.tex 0A67/0A69/0A5S/definition-tor-amplitude. The four new nodes are statement-only and true, and each matches its source exactly: 0AWX (tested on a field and a DVR), 0AX0 (tested on B=A and on Z_p to F_p, which gives F_p[-1]), 0G4H, and 0A69 (its tor-dimension definition is Stacks' word for word). None of them restates a clause of the item. The 0AX0 proof needs biduality over A, but the two general new nodes can supply it, so no cycle arises. Duplicate search: I grepped the DAG for the tags and for terms such as Gorenstein, injective dimension and dualizing, and searched blueprint main-20261015; the only hits are this delivery's chain and étale dualizing complexes. Every node records searches of all three kinds; the evaluation node's failed Loogle query is recorded as unavailable and was rerun. No SGA source is cited. I accept the declared tool_uses: lem-weil-pbc-cohen-power-series-presentation, lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion and lem-weil-pbc-bounded-below-injectives-kinjective. The missing lean_audit on the new nodes is not a fault: most other recent nodes lack it too, because tools fill it."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-c48d49bf2 (reviewer sub-agent of L); spot-checked: This is the fifth push of the human re-split. Heads 4cd98921, 70794bd3, e36107a1 and 076f746b were each PASSed and each refused at landing as 'not in the live DAG'; promotion is L's step. In clones/live and clones/side-live the item still has the old 8-step proof (4460 characters) and neither new id exists, so no other group has superseded the split. Compared with 076f, both new nodes are byte-identical (sha256 b0dff617, 302cc8a5). In the item only proof Steps 5 and 7 and split_report changed; the statement, stmt_deps, source, lean record, blueprint and tool_uses are unchanged. New Step 5: the natural isomorphism Id≅𝔻𝔻 and its opposite make 𝔻 and 𝔻^op quasi-inverse, which is correct. New Step 7: if 𝔻K∈D^{≤d}, Step 6 applied to 𝔻K (in D_fg by Step 3) gives K≅𝔻𝔻K∈D^{≥a−d}, and if 𝔻K∈D^{≥d} it gives K∈D^{≤b−d}. The signs are correct. Re-read of the cited statements in this snapshot: the Cohen presentation gives a surjective local q from a complete regular A; regular-local gives a bounded injective model of A[0]; bounded-below injectives are K-injective; finite-map transfer applies with L=A[0] (all its hypotheses hold) and gives a bounded injective J and the homothety h; coherent RHom allows unbounded K. Biduality node, checked against Stacks more-algebra 0A69 (l.28617): (1) L=M has the bounded injective model, (2) RHom(L,L)≅R[0] has Tor amplitude [0,0], (3) τ≤nK is pseudo-coherent by 066E. Fg cohomology of L is correctly not assumed, and h(1)=id gives δ_K. Amplitude node: the degree count in the product Hom complex gives n≥a−c and n≤b−c over any ring, both sharp (J=k[−a], K=k[−c]). The re-split is sound: old Steps 4–5 and old Step 7 became two nodes of comparable size, the assembly is 7 steps and 2867 characters, and neither node restates an item clause. Duplicate scan of the ~600 node files added since the 076f snapshot (0A69/0A7C/0A5S/homothety/biduality) found no duplicate; lem-sfb-proper-field-algebraic-dualizing differs. The category is ordinary D(R), no target is weakened, and no SGA source is cited. I accept the Cohen presentation and K-injectivity tool_uses. No fixes."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.CompleteLocalCoherentDuality",
@@ -260,5 +241,16 @@
   "result": "pass",
   "note": "Statement matches node and Stacks 0BFR(2)+0A7C clause by clause: Omega in D^b_fg (finite H^i, vanishing interval); exists e : D_fg^op ≌ D_fg with e.functor ⋙ ι ≅ ι.op ⋙ RHom(-,Omega) on the recorded derivedInternalHomOfUniverses; D+/D- exchange as iffs and D^b preservation for coherent K; IsIso of canonical bidual = homEquiv-transpose of braiding ≫ counit (evaluation); naturality f ≫ δ_L = δ_K ≫ D.map (D.map f.op).op. Hypotheses CommRing/IsNoetherianRing/IsLocalRing/IsAdicComplete maximalIdeal exactly; unbounded inline D_fg predicate; one universe u as in the landed parent semidualizing-rhom-conservative; no extra assumptions. Mechanical theorem-stmt_dep finding: PASS on the point, since SignedRingedHom.adjunction is the .choose of theorem normalizedAdjunction_existsUnique and derivedBraiding is Eq.mp along theorem derivedMonoidal_eq_localization, both needed for the canonical biduality clause; same dep and decls in the landed parent; no cycle in the added stmt_deps. Helpers are real defs with source/blueprint docstrings; 8-step proof docstring; sorry only; lean.statement verbatim; node statement unchanged. No D_fg/ordinary biduality duplicate (etale biduality nodes differ). nt_compile --json rc 0, clean, 2.0 s; control error compile detected. Observation: the second reading is self-declared author reread."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

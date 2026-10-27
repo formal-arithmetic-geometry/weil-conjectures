@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-completed-pullback-reduction-arrow-isIso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "Clause (1), the named finite projection and compatibility with quotient transitions.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility of the projection-induced finite completed-pullback arrow",
+ "statement": "Let g:X→Y be a scheme morphism, d a Noetherian adic coefficient datum on A, and f a finite tuple generating its ideal I (the tuple may be empty). For any derived I-complete K over the completed coefficient sheaf on Y, any representative C and representing isomorphism e, and each natural n encoding the positive exponent n+1, the actual projection-induced scalar adjunct completedPullbackReductionArrow g d K n is invertible. This asserts only invertibility of these specified arrows, not completeness of the output, naturality, or quotient coherence.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Clause (1): completion, finite quotient comparison, and compatibility with transitions; explicit scalar-adjunction refinement of Stacks Tag 099N (5)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-completed-pullback",
+  "def-cbc-completed-reduction-finite-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Use the normalized strict tower comparison after coefficient restriction to identify the pulled reduction tower with the quotient tower of ordinary pullback. The comparison preserves the augmentation, every transition, and each finite limit projection.",
+   "uses": [
+    "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+    "lem-weil-pbc-pulled-reduction-normalization-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the limit and its unit to constant coefficients using the joint quotient/Koszul presentation. Restricted finite quotient objects are complete: the ideal acts nilpotently, so its localized derived Hom vanishes. The completion reflector is a Hom bijection into each such target; by scalar adjunction and coyoneda, every finite reduction of the completion unit is therefore invertible.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-presentation-transport",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized finite comparison carries the actual projection composed with the augmentation to the finite quotient unit. Applying scalar adjunction says that the projection-induced arrow composed with the reduced unit is the identity. The arrow is its inverse, and exact coefficient restriction reflects invertibility. This argument needs no output-completeness or coherence conclusion.",
+   "uses": [
+    "lem-weil-pbc-pulled-reduction-normalization-comparison",
+    "lem-weil-pbc-flat-coefficient-reduction-adjunct"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pulled-reduction-strict-tower-comparison",
+  "lem-weil-pbc-pulled-reduction-normalization-comparison",
+  "lem-weil-pbc-completed-constant-presentation-transport",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-flat-coefficient-reduction-adjunct"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-proper-base-change/sk-prop-pbc-complete/lemma-weil-pbc-completed-pullback-reduction.proof.md",
+  "place": "Clause (1): completion, finite quotient comparison, and compatibility with transitions; explicit scalar-adjunction refinement of Stacks Tag 099N (5).",
+  "by": "K7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite projection from a derived completion induces a scalar-adjunction map to the finite quotient",
+   "results": "AdicCompletion.evalOneₐ; AdicCompletion.evalₐ; AdicCompletion.kerProj; AdicCompletion.incl; AdicCompletion.eval; Profinite.toProfiniteAdjToCompHaus; AdicCompletion.mkₐ; AdicCompletion.ofTensorProduct_surjective_of_finite",
+   "date": "2026-10-25",
+   "verdict": "No theorem with the specified derived sheaf projection and quotient normalizations; ordinary adic completion is different."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of derived adic completion becomes an isomorphism after derived reduction modulo a power of the ideal",
+   "results": "AdicCompletion.eval_of; AdicCompletion.mk_smul_top_ofAlgEquiv_symm; AdicCompletion.mk_ofAlgEquiv_symm; AdicCompletion.of_apply; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; AdicCompletion.ofAlgEquiv_apply; AdicCompletion.exists_smodEq_pow_add_one_smul; AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ",
+   "date": "2026-10-25",
+   "verdict": "No theorem with the specified derived sheaf projection and quotient normalizations; ordinary adic completion is different."
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit.*[Ii]so|completedPullbackReductionArrow.*[Ii]so",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No theorem with the specified derived sheaf projection and quotient normalizations; ordinary adic completion is different."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackReduction",
+  "date": "2026-10-25",
+  "group": "K7"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackReductionArrowIsIso",
+  "declaration": "AlgebraicGeometry.Scheme.completedPullbackReductionArrow_isIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedPullbackReductionArrow_isIso"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedPullbackReductionArrowIsIso.lean",
+  "by": "K7",
+  "date": "2026-10-25",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "statement": "theorem completedPullbackReductionArrow_isIso (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = d.ideal) (K : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))) (C : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ) (e : DerivedCategory.Q.obj C ≅ K) (_hK : IsDerivedCompleteIntrinsic Y d r f hf K C e) : ∀ n : ℕ, IsIso (completedPullbackReductionArrow g d K n)"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f62e",
+  "group": "K7",
+  "result": "fix",
+  "landing": "20261026T070212-L-3457743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f62e",
+  "group": "K7",
+  "result": "fix",
+  "landing": "20261026T070212-L-3457743",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to clone; Data module vs old CompletedPullbackReduction (rebuilt PulledModelMap/normalization predicates proved equivalent to the old by scratch rfl/iff); new ArrowIsIso sorry = clause 2 of item; Coherence proved (axioms: sorryAx only from published upstream holes); 16 direct importers compiled against the sandbox build"
+ }
+}

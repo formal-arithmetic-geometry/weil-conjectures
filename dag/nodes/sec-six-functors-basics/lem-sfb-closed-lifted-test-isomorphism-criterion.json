@@ -1,0 +1,403 @@
+{
+ "id": "lem-sfb-closed-lifted-test-isomorphism-criterion",
+ "kind": "statement",
+ "title": "Closed lifted-test criterion and coherence for derived exchange",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and on every small pro-etale site put $\\Lambda_Y=p_Y^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients, def-weil-pbc-proetale-site]. Use internal module objects, exact module inverse images and ordinary unbounded total right derived direct images computed on K-injectives [sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull], in compatible small-site and coefficient universes [def-weil-size-convention]. Let $s:Z=\\operatorname{Spec}(A/I)\\hookrightarrow U=\\operatorname{Spec}A$ be a closed immersion of affine schemes [def-pc-scheme, def-weil-closed-immersion]. Write $v$ for the specified closed-site lift on affine ind-etale bases [def-exc-closed-site-lift, def-weil-pbc-ind-etale-basis]. Let $\\mathscr T_s$ consist of all affine ind-etale objects $V=\\operatorname{Spec}\\overline C\\to Z$ such that both $V$ and $W=v(V)=\\operatorname{Spec}C$ are w-contractible [sk-def-pe-wlocal].\n\nEvery affine ind-etale object of $Z$ admits a covering by objects of $\\mathscr T_s$. For each such $V$, the specified quotient identifies $C/IC=\\overline C$ and $W\\times_U Z=V$, and $(C,IC)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Evaluation at these $V$ is exact on module sheaves. The functors $R\\Gamma(V,-):D(\\operatorname{Mod}_{\\Lambda_Z})\\to D(\\mathbf{Ab})$, for $V\\in\\mathscr T_s$, jointly detect isomorphisms.\n\nLet $f:X\\to U$ be any morphism with $X$ affine, $X_Z=X\\times_UZ$, and projections $h:X_Z\\to X$ and $f_Z:X_Z\\to Z$. Let $K\\in D(\\operatorname{Mod}_{\\Lambda_X})$ be bounded below. For $V\\in\\mathscr T_s$ put $T=X\\times_Uv(V)$ and $T_0=X\\times_U V$, with $a:T_0\\hookrightarrow T$. If every canonical unit-induced restriction\n$$R\\Gamma(T,K|_T)\\longrightarrow R\\Gamma(T_0,a^*(K|_T))$$\nis an isomorphism, then the specified exchange\n$$\\beta_{f,s,K}:s^*Rf_*K\\longrightarrow R(f_Z)_*h^*K$$\nis an isomorphism. The specified exchange is the adjunct of $f_Z^*s^*Rf_*K\\cong h^*f^*Rf_*K\\xrightarrow{h^*\\varepsilon}h^*K$, with canonical coefficient and composition comparisons.\n\nThese canonical exchanges are natural in $K$, in isomorphisms of the cartesian square, and under pro-etale base change of $U$. The same equations hold on the entire objects $U[Q]\\to U$ for arbitrary profinite $Q$ [def-sfb-profinite-test-objects] and after further such parametrization. For any condensed ring map $\\Lambda\\to\\Lambda'$ and actual degree-zero module map $M\\to\\operatorname{Res}N$, the exchanges for $M[0]$ and $N[0]$ commute after scalar restriction with the derived maps induced by that map. The direct-image comparisons are the canonical right-derived ones induced by $f_*\\operatorname{Res}=\\operatorname{Res}f_*$, without an invertibility assertion. In particular the ordinary scalar-extension unit $x\\mapsto1\\otimes x$ has this compatibility. No integrality or lisseness of $f$ or $K$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BK (lemma-closed-immersion-affines) and 09BL (lemma-closed-immersion-affines-apply); Hemo–Richarz–Scholbach Corollary 4.4 and Lemma 4.1; Bhatt–Scholze Lemmas 6.1.1–6.1.2. Agent-extracted conservative-test criterion and global mate/coefficient coherence, retaining returned proof steps 1, 6 and 7; derived local arrow model is the existing lem-sfb-closed-test-derived-exchange-model."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-exc-closed-site-lift",
+  "def-weil-pbc-ind-etale-basis",
+  "sk-def-pe-wlocal",
+  "def-weil-pbc-henselian-terminology",
+  "def-sfb-profinite-test-objects"
+ ],
+ "proof": [
+  {
+   "text": "For any affine ind-etale object $V=\\operatorname{Spec}\\overline C$ of $Z$, the specified lift is $v(V)=\\operatorname{Spec}H_A(\\overline C)$. The closed-site functor theorem identifies its closed fibre with $V$, and the reduction theorem identifies the specified algebra map $C/IC\\to\\overline C$ as an isomorphism. The henselian-lift theorem applies to this very colimit algebra, so $(C,IC)$ is henselian. Consequently the w-contractibility equivalence for henselian quotients says that $V$ is w-contractible if and only if $v(V)$ is. This uses no finite generation of $I$.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "lem-exc-closed-lift-reduction",
+    "lem-zl-henselian-indetale-closed-lift",
+    "lem-zl-condensed-henselian-lisse-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BK (lemma-closed-immersion-affines), Tag 097P (lemma-lift-ind-etale); HRS Corollary 4.4(2) and Bhatt–Scholze Lemmas 6.1.1–6.1.2"
+   }
+  },
+  {
+   "text": "Let $V_0=\\operatorname{Spec}B\\to Z$ be an affine ind-etale object. Choose a faithfully flat ind-etale $B$-algebra $D$ that is w-contractible. Composition of ind-etale maps makes $\\operatorname{Spec}D\\to Z$ another affine ind-etale object, and faithful flatness makes $\\operatorname{Spec}D\\to V_0$ a pro-etale cover. Step 1 makes its specified closed lift w-contractible as well. Thus this cover belongs to $\\mathscr T_s$. Since the affine ind-etale basis covers the full site, every site object is covered by tests from $\\mathscr T_s$.",
+   "uses": [
+    "sk-thm-pe-wc-cover",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-ind-etale-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098F (lemma-w-contractible-proetale-cover) and lemma-affine-alternative: ind-etale w-contractible covers and basis comparison"
+   }
+  },
+  {
+   "text": "Use the equivalence between internal modules and section-ring module sheaves, identical on underlying sheaves, sections and restriction maps. Exact evaluation at any w-contractible affine $V$ then applies to the internal modules here. For every unbounded complex $L$, the derived-section theorem identifies $R\\Gamma(V,L)$ with its termwise section complex. Exactness gives $H^q(R\\Gamma(V,L))=\\Gamma(V,\\mathcal H^qL)$: apply evaluation to the kernel defining cycles and the cokernel of boundaries. If all these derived sections vanish, each $\\mathcal H^qL$ vanishes on all tests. For a section over any site object, restrict to a covering by tests from step 2; all restrictions are zero, so separatedness in the sheaf axiom makes the section zero. Thus every $\\mathcal H^qL=0$. The map from the zero complex to a representative of $L$ is a quasi-isomorphism, hence $L=0$ in the derived localization. For a morphism $b$, apply this argument to its cone: evaluation is triangulated by exact-functor descent, so invertibility of every $R\\Gamma(V,b)$ makes the evaluated cones zero, and hence the cone of $b$ zero. The distinguished-cone criterion makes $b$ invertible. This proves joint detection for unbounded objects without any convergence assertion.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-pe-wc-sections-exact",
+    "det-pe-wc-sections-derived",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098H (lemma-w-contractible-is-weakly-contractible), exact evaluation and derived localization; HRS Lemma 4.1(1), agent cone-and-sheaf-axiom argument"
+   }
+  },
+  {
+   "text": "For the given affine $f$ and bounded-below $K$, apply the closed-test derived exchange model at each $V\\in\\mathscr T_s$. Its hypotheses are precisely affineness, bounded-below $K$, and w-contractibility of $V$ and $v(V)$, supplied above. Its two derived isomorphisms identify $R\\Gamma(V,\\beta_{f,s,K})$ with the specified unit-induced restriction from $T$ to $T_0$. The hypothesis of the item therefore makes every evaluated exchange invertible. Step 3 makes $\\beta_{f,s,K}$ invertible. The model explicitly uses the counit-adjunct exchange in the statement, so this proves invertibility of that arrow.",
+   "uses": [
+    "lem-sfb-closed-test-derived-exchange-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL (lemma-closed-immersion-affines-apply), and sites-cohomology.tex Tag 0D6F (lemma-unbounded-cohomology-of-open): the existing derived arrow model"
+   }
+  },
+  {
+   "text": "Write $\\theta:f_Z^*s^*\\cong h^*f^*$ for the canonical pullback comparison. By the square-exchange definition, the transpose of $\\beta_K$ is $e_K=h^*\\varepsilon_K\\circ\\theta_{Rf_*K}$. For $t:K\\to L$, naturality of $\\theta$ and $\\varepsilon$ gives\n$$h^*t\\circ e_K=e_L\\circ f_Z^*s^*Rf_*(t).$$\nThe adjunction bijection makes this the naturality equation for $\\beta$. An isomorphism of cartesian squares identifies the two composites of inverse images and hence their $\\theta$; conjugate the displayed transpose by those identifications. The counit is transported to the counit, so the same equation proves square-isomorphism naturality. For restriction to any pro-etale object of $U$, use derived slice localization, whose comparisons explicitly preserve units and counits. After those comparisons the restricted transpose is again $h'^*\\varepsilon'\\circ\\theta'$, hence its adjunct is the exchange for the restricted square. Composition comparisons here have the specified adjunction normalization; no arbitrary adjunction on an isomorphic functor is substituted.",
+   "uses": [
+    "def-weil-pbc-adjunction-square-exchange",
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sites-cohomology.tex Tag 07A7 (remark-base-change): transpose formula; Tag 0D6F and canonical slice comparisons"
+   }
+  },
+  {
+   "text": "For a condensed ring map, denote scalar restriction on each corner by $r$, the coefficient pullback identification by $p_u:u_R^*r\\cong r u_S^*$, and the canonical direct comparison by $d_u:rRu_{*,S}\\to Ru_{*,R}r$. At the underived level restriction is the identity on underlying sheaves and maps, and $u_*r=ru_*$ sectionwise. Since the ordinary adjunction Hom bijection on an actual section is unchanged after forgetting scalars, this identity is the ordinary mate of the underived $p_u$. Applying the right-derived comparison unit to this identity constructs $d_u$; since that unit is invertible on K-injective complexes and every object has a K-injective model, this formula determines $d_u$ uniquely. The module categories are Grothendieck abelian by the small-site ring-module Grothendieck theorem and the internal/section-module equivalence, so they have functorial K-injective resolutions. Apply the exact unbounded derived-mate theorem with $L,L'$ the two exact module inverse images, $R,R'$ the two direct images, $G,H$ the two exact scalar restrictions, $\\sigma=p_u$, and $\\theta=D(p_u)$, which is normalized by $p_u$ on every complex model because all four functors act termwise. Its formula says that the mate of $D(p_u)$ for the unbounded derived adjunctions, precomposed with $r$ of the right-derived unit, is the localized ordinary mate (the identity) followed by the right-derived unit. By the uniqueness just noted this mate is $d_u$, so the counit equation holds:$$r\\varepsilon_{u,S}=\\varepsilon_{u,R}\\circ u_R^*(d_u)\\circ p_u^{-1}.$$It holds on all unbounded objects. No preservation of K-injectives by $r$ and no inverse to $d_u$ is used. The closed-test model independently records this comparison and its compatibility with actual coefficient maps.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-right-derived-functor",
+    "def-weil-pbc-adjunction-mate",
+    "lem-pur-exact-derived-mate",
+    "lem-sfb-closed-test-derived-exchange-model",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sites-cohomology.tex Tag 07A7; existing exact unbounded derived-mate theorem for exact scalar restriction, and the coefficient paragraph of the closed-test model"
+   }
+  },
+  {
+   "text": "For an actual map $t:M\\to r_XN$, first prove the coefficient equation at $N[0]$ and then compose with $Rf_{*,R}(t)$. Suppressing only the canonical $p$'s, the equation at $N[0]$ is\n$$d_{f_Z}\\circ r_Z(\\beta_S)=\\beta_R\\circ s_R^*(d_f).$$\nTake both transposes under $f_{Z,R}^*\\dashv R(f_Z)_{*,R}$. On the left, substitute the counit equation of step 6 for $u=f_Z$ and the transpose $h_S^*\\varepsilon_{f,S}\\circ\\theta_S$; this gives $h_R^*(r_X\\varepsilon_{f,S})\\circ\\theta_S$ with the $p$ identifications. On the right the transpose is $h_R^*\\varepsilon_{f,R}\\circ\\theta_R\\circ f_{Z,R}^*s_R^*(d_f)$. Naturality of $\\theta$ moves $d_f$ across it; substitute step 6 for $u=f$. Both expressions become the same composite. The pullback $p$'s commute with $\\theta$ because all act by the same coefficient-ring action and the same pullback composition on underlying sheaves. Injectivity of the adjunction bijection proves the equation. Naturality from step 5 now gives the asserted square for $t$. The ordinary extension unit is the actual map $x\\mapsto1\\otimes x$, so it is a special case, with no flatness assumption on scalar extension.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sites-cohomology.tex Tag 07A7: agent transpose calculation with the noninvertible derived coefficient comparison"
+   }
+  },
+  {
+   "text": "Finally $U[Q]\\to U$ is an entire pro-etale test object for every profinite $Q$, by the profinite-test-object definition; no choice of a point of $Q$ enters. Apply the slice-localization conclusion of step 5 to this object. Applying it again to a further parametrization gives the same equations, since the composition comparisons preserve the composite adjunctions. The coefficient equation of step 7 also restricts along these functors, so it holds on the entire parameter objects and their further parametrizations. None of the arguments of steps 4–7 uses integrality of $f$ or lisseness of $K$.",
+   "uses": [
+    "def-sfb-profinite-test-objects",
+    "lem-weil-pbc-ringed-derived-slice-localization",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Definition of X[Q] and sites-cohomology.tex Tag 0D6F: restriction to whole pro-etale objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-profinite-test-objects",
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-adjunction-square-exchange",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-pe-wc-sections-derived",
+  "det-pe-wc-sections-exact",
+  "lem-exc-closed-lift-reduction",
+  "lem-kun-distinguished-cone-zero",
+  "lem-pur-exact-derived-mate",
+  "lem-sfb-closed-test-derived-exchange-model",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-zl-condensed-henselian-lisse-rigidity",
+  "lem-zl-henselian-indetale-closed-lift",
+  "sk-def-sfb-change-of-scalars",
+  "sk-thm-pe-wc-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BK–09BL, HRS Corollary 4.4(2) and Lemma 4.1(1), combined with the existing derived exchange model; global coherence by explicit adjunction transposes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(proetale|proEtale|ProEt).*(conservative|exchange|[Ii]sIso)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(closed|henselian).*(wContract|contractible|derivedExchange)|(derivedExchange|wContract).*closed",
+   "results": "2 hits: Mathlib/Analysis/Normed/Module/Connected.lean, Mathlib/Analysis/Normed/Module/Connected.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived exchange along a closed immersion is invertible when restriction of derived sections is invertible on every weakly contractible closed lifted pro etale test",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.IsOpenImmersion.isoRestrict, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsIso\"",
+   "results": "12 hits: CategoryTheory.Presheaf.instIsIsoFunctorOfIsLeftKanExtensionOppositeType, CategoryTheory.Presheaf.isIso_of_isLeftKanExtension, CategoryTheory.Presheaf.instIsIsoFunctorLeftKanExtensionUnitOppositeTypeUliftYoneda, CategoryTheory.GrothendieckTopology.isIso_toPlus_of_isSheaf, CategoryTheory.GrothendieckTopology.isIso_toSheafify, CategoryTheory.isIso_toSheafify, CategoryTheory.isIso_sheafificationAdjunction_counit, CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion of affine schemes enough w contractible ind etale tests with henselian closed lifts detect derived exchange isomorphisms for internal condensed modules",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, CondensedMod.IsSolid, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.isClosedImmersion_of_comp_eq_id, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, LightCondMod.isDiscrete_tfae, CondensedMod.isDiscrete_tfae",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conservative family of weakly contractible affine closed lifts tests derived base change and canonical mate naturality with change of coefficients",
+   "results": "8 hits: RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.AffineSpace.map_over",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphism properties, generic sheafification, solid or discrete condensed modules, or henselian algebra; none states this internal pro-etale module assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-lisse-closed-base-change",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: closed-base-change input for the full integral root morphism; conservative henselian closed lifts and canonical exchange coherence (returned steps 1, 6, 7).",
+   "via": [
+    "lem-sfb-integral-lisse-closed-base-change",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-closed-lifted-test-isomorphism-criterion",
+  "worker": "stage1",
+  "summary": "Assemble henselian lifted w-contractible tests, prove unbounded joint detection by exact evaluation and cones, apply the existing bounded-below derived exchange model, and verify global square/localization/coefficient naturality by transposes. No new nodes and no statement change.",
+  "blueprint": "Inherited ancestor query returns None. Realizes paragraph (3), open direct image, through the inherited via chain and returned steps 1, 6 and 7 of lem-sfb-integral-lisse-closed-base-change. Whole-blueprint searches for henselian, w-contractible and exchange found no duplicate of this criterion.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-profinite-test-objects",
+    "why": "Generic The test objects $X[S]$ used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic Right derived functor on the unbounded derived category used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic Derived category of an abelian category used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic Mate of a transformation under two adjunctions used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-square-exchange",
+    "why": "Generic Exchange transformations presented by their adjuncts used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic Internal abelian module sheaves as sectionwise module sheaves used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "det-pe-wc-sections-derived",
+    "why": "Generic Derived sections over a w-contractible affine used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "Generic Sections over a w-contractible affine are exact used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-exc-closed-lift-reduction",
+    "why": "Generic Reduction of the ind-etale lift used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-kun-distinguished-cone-zero",
+    "why": "Generic Zero cone criterion for a distinguished triangle used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-pur-exact-derived-mate",
+    "why": "Generic Mates of exact unbounded derived squares on complex models used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic Derived composition preserves the specified adjunction normalization used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-weil-pbc-affine-closed-site-functor-properties",
+    "why": "Generic Affine closed immersion site functor properties used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-basis",
+    "why": "Generic The ind-etale subsite is a basis used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic Stability and diagonal of an ind-etale algebra used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic Functorial K-injective resolutions in Grothendieck abelian categories used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic Module sheaves over arbitrary ring sheaves are Grothendieck used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-derived-slice-localization",
+    "why": "Generic Derived slice compatibility and pullback of section localizations used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-zl-condensed-henselian-lisse-rigidity",
+    "why": "Generic Henselian rigidity for w-contractible lisse condensed sheaves used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "lem-zl-henselian-indetale-closed-lift",
+    "why": "Generic Henselian property of the existing ind-etale closed lift used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "sk-def-sfb-change-of-scalars",
+    "why": "Generic Restriction, extension and coextension of scalars used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   },
+   {
+    "node": "sk-thm-pe-wc-cover",
+    "why": "Generic Existence of contractible covers used for its stated interface in the proof; no node of the constructible-finite-Tor stability unit replaces this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-profinite-test-objects",
+  "def-sfb-right-derived-functor",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-adjunction-square-exchange",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-pe-wc-sections-derived",
+  "det-pe-wc-sections-exact",
+  "lem-exc-closed-lift-reduction",
+  "lem-kun-distinguished-cone-zero",
+  "lem-pur-exact-derived-mate",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ind-etale-basis",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lem-zl-condensed-henselian-lisse-rigidity",
+  "lem-zl-henselian-indetale-closed-lift",
+  "sk-def-sfb-change-of-scalars",
+  "sk-thm-pe-wc-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-f31b00576",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-f31b00576 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, no new nodes, statement and stmt_deps byte-identical to live, item still unsplit in live and side-live, no repair note, no SGA anywhere. Sources checked: Stacks 09BK/09BL (proetale.tex 4801-4935) and HRS Cor 4.4(2) (henselian pair: Spec A is w-contractible iff Spec A/I is, via BS 2.2.13, with no finite generation of I). Step 1 combines closed-site-functor-properties, closed-lift-reduction, henselian-indetale-closed-lift and the geometric clause of the zl rigidity node. Step 2 uses wc-cover, ind-etale composition and the ind-etale basis to cover every object by T_s. Step 3 proves unbounded detection correctly from exact evaluation, derived sections, sheaf separatedness and the cone criterion (advisory: det-pe-sections-conservative could have been cited). Step 4 applies the closed-test derived exchange model, and all its hypotheses hold. Steps 5 and 8 are formal transposes using slice localization, which preserves units and counits. I recomputed both transposes in step 7 and they agree. Edge cases I=0, I=A, X empty and Λ=0 are fine. One C4 fault, repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-closed-lifted-test-isomorphism-criterion.json: step 6 needs the counit equation for d_u on the item's unbounded K-injective derived adjunctions, but cited lem-trf-bounded-below-derived-mate-model, which states it only for D+ adjunctions, and no cited node bridges the two. Step 6 now cites the existing Lean-closed unbounded lem-pur-exact-derived-mate, plus lem-weil-pbc-kinjective-functorial-existence for K-injective resolutions; uniqueness comes from the right-derived unit being invertible on K-injectives. In proof_deps, lem-trf-bounded-below-derived-mate-model and lem-sp-grothendieck-enough-injectives are replaced by these two nodes; tool_uses updated to match; no cycle; statement unchanged. Batch-5 flags: the trf mate model is removed by the fix (and was generic anyway; the pur replacement has a 9-node closure with no trf, pod or pd node). The rigidity flag is accepted: its closure has only generic trf/pod nodes (0H74 smooth lifting, 04JC, geometric-morphism definitions, localization ess. surjective, a formal exact-square node), and no thm-trf, trace-transport or pd node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedLiftedTestIsomorphismCriterion",
+  "declaration": "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.closed_lifted_test_isomorphism_criterion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.closed_lifted_tests_cover",
+   "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.closed_lifted_test_geometry",
+   "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.closed_lifted_test_evaluation_exact",
+   "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.closed_lifted_tests_detect_isomorphisms",
+   "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.closed_lifted_test_isomorphism_criterion",
+   "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.closed_exchange_naturality",
+   "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.closed_exchange_base_change_naturality",
+   "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.degreeZeroCoefficientMap",
+   "AlgebraicGeometry.ProEtale.ClosedLiftedTestIsomorphismCriterion.closed_exchange_coefficient_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedLiftedTestIsomorphismCriterion.lean",
+  "statement": "theorem closed_lifted_test_isomorphism_criterion (A : Type u) [CommRing A] (I : Ideal A) {X XZ : Scheme.{u}} [IsAffine X] (f : X ⟶ Spec (.of A)) (h : XZ ⟶ X) (fZ : XZ ⟶ Spec (.of (A ⧸ I))) (w : IsPullback h fZ f (closedMap A I)) (K : DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (hK : ∀ (V : (Spec (.of (A ⧸ I))).AffineProEt), IsWContractibleRing Γ(V.left, ⊤) → IsWContractibleRing Γ(((Scheme.AffineProEt.closedSiteLift A I).obj V).left, ⊤) → IsIso ((testRestriction Λ A I w.toCommSq V).app K.obj)) : IsIso ((exchange Λ w.toCommSq).app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q151",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The nine declarations together render every clause: test covering; canonical quotient, pullback and henselianity; exact internal-module evaluation; unbounded joint detection; bounded-below exchange criterion; complex, square/localization and arbitrary-coefficient naturality. All canonical exchange, restriction and noninvertible scalar direct-image comparisons are reused from ClosedTestDerivedExchangeModel. The sole helper constructs the map induced by an actual ordinary degree-zero module map; no new independent notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-38357c9a4",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Every clause matches the node. Covering; cartesian closed fibre, HenselianRing (C, IC) and C/IC≃C̄ pinned to the inclusion's appTop; exact evaluation; unbounded joint detection via sectionsOver; criterion with testRestriction hypothesis and the counit-adjunct exchange for D+ K and affine X; NatTrans naturality; full base-change cube with WeaklyEtale v, covering square isos and U[Q] with no point chosen; nontrivial coefficient square at N[0] via restrictPush (not asserted invertible) plus naturality at degreeZeroCoefficientMap, which with the extension unit has scalarUnit's body. Records: item changed only in lean; statement verbatim; 8 sorry theorems and 1 def with data; docstrings and line widths fine. No compile run (no file changed; report records clean scompile). Advisories: (A1) plain defs from the theorem node lem-sfb-closed-test-derived-exchange-model's module, a proof_dep not in stmt_deps; a def node should own them. (A2) Second reading is the author's own (H11 advisory). (A3) U[Q] coefficient equation follows via the affine quotient presentation and the general cube."
+ }
+}

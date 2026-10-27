@@ -1,0 +1,237 @@
+{
+ "id": "def-coef-specified-integral-mapping-adjunction",
+ "kind": "definition",
+ "title": "The specified integral mapping-complex adjunction interface",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with its valuation ring $R$, uniformizer $\\varpi$ and quotients $A_{n+1}=R/\\varpi^{n+1}$, $n\\in\\mathbf N$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a separated finite-type morphism of separated finite-type $k$-schemes with fixed compactification $f=pj$ [def-weil-scheme-morphism-properties, def-weil-integral-rational-qbar-compact-support]. Use fixed small pro-etale sites with the recorded size convention and completed coefficient sheaves [def-weil-pbc-proetale-site, def-weil-size-convention, def-weil-completed-integral-coefficients]. For $W=X,Y$ write $\\mathcal C_W=D^b_c(W,R)$ for the derived-complete bounded constructible category [def-weil-derived-complete-integral-detailed], and $\\mathscr N_W$ for normalized strict coefficient systems with finite-Tor constructible levels, with no common bound imposed on all levels [def-coef-normalized-dvr-tower, def-weil-finite-tor-amplitude, def-weil-finite-torsion-constructibility]. Fix the coherent derived-system calculi $S_X,S_Y$ (and the calculus on the compactification), their actual reduction/limit adjunctions $\\mathcal R_W\\dashv\\mathcal L_W$ with unit $u$ and counit $e$, their global mapping complexes $\\operatorname{RHom}_W$, mapping systems $\\mathcal H_W$, and the specified enriched comparison $\\gamma$ [lem-coef-derived-system-evaluation-calculus]. Fix a finite-operation realization $r=(\\mathcal F:\\mathscr N_X\\rightleftarrows\\mathscr N_Y:\\mathcal E)$ and the geometric pullback/direct-image, sections-push and symmetric tensor data defining its specified enriched isomorphism $\\mathcal A$ [def-coef-finite-adjunction-system-data, lem-coef-finite-adjunction-diagram-realization].\n\nDefine $\\operatorname{Domains}(r)$ as the proposition that: $\\mathcal R_W$ sends $\\mathcal C_W$ to $\\mathscr N_W$; the literal composites $F=\\mathcal L_Y\\mathcal F\\mathcal R_X$ and $G=\\mathcal L_X\\mathcal E\\mathcal R_Y$ take values in $\\mathcal C_Y$ and $\\mathcal C_X$; $u_K$ is invertible for every $K\\in\\mathcal C_W$; $e_N$ is invertible for every $N\\in\\mathscr N_W$; and the literal map\n$$\\lambda_{P,Q}=\\gamma_{P,\\mathcal R_WQ}\\circ\\operatorname{RHom}_W(1,u_Q)$$\nis invertible for every $P,Q\\in\\mathcal C_W$. These are properties of actual functors and reconstruction maps [lem-pur-normalized-reconstruction-adjunction-calculus], not choices of replacements. Given such proof data $h$, define $F,G$ on the full constructible subcategories by these literal composites. For $K\\in\\mathcal C_X$, $M\\in\\mathcal C_Y$, set $B=\\mathcal F\\mathcal R_XK$ and $T=\\mathcal E\\mathcal R_YM$, and define\n$$\\Psi_{K,M}=\\mathcal H_X(1,e_T^{-1})\\circ\\mathcal A_{\\mathcal R_XK,\\mathcal R_YM}\\circ\\mathcal H_Y(e_B^{-1},1),\\qquad \\Theta_{K,M}=\\lambda_{K,GM}^{-1}\\circ R\\lim(\\Psi_{K,M})\\circ\\lambda_{FK,M}.$$\nDefine its degree-zero Hom action using the recorded identifications $H^0\\operatorname{RHom}(P,Q)=\\operatorname{Hom}(P,Q)$. An adjunction $a:F\\dashv G$ is specified if its Hom bijection is this $H^0(\\Theta_{K,M})$ for every $K,M$ and every arrow $FK\\to M$. For the above coherent calculi and enriched realization, such domain proof data exist, the literal $F$ is naturally isomorphic to the recorded integral compact-support functor, and for each domain witness obtained this way there is a unique adjunction specified by this Hom action. The final assertion is expressed as $\\exists h:\\operatorname{Domains}(r),\\ (F_h\\cong Rf_!)\\ \\text{exists}\\ \\land\\ \\exists!a:F_h\\dashv G_h,\\ a\\ \\text{is specified}$. No comparison with the descended adjunction is part of this definition.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "lem-coef-finite-adjunction-diagram-realization",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "def-coef-finite-adjunction-system-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/_section.md",
+  "place": "Integral compact support and its right adjoint; explicit mapping-complex interface for the inherited detailed proof, as retained in lem-coef-integral-exceptional-descended-counit proof steps 1–2 and prop-coef-integral-exceptional-adjoint proof paragraphs 1–3. The latest sketch omits those detailed paragraphs; this is the accepted DAG interface, not a new assertion about the unit."
+ },
+ "proof": [
+  {
+   "text": "Use reduction_domain and support_and_counits of lem-coef-integral-exceptional-mapping-system for actual reduction membership and compact-support preservation. Apply lem-coef-integral-exceptional-limit-constructible for exceptional-limit preservation. Actual reconstruction inverts counits on normalized systems. Convert intrinsic completeness of integral constructible inputs to legacy completeness and apply unrestricted actual reconstruction to invert units. The auxiliary finite field of characteristic different from l is used only for the legacy completeness presentation, not to change the schemes. RHom sends the product of the identity and each unit isomorphism to an isomorphism; gamma is an isomorphism by construction. These give every field of Domains.",
+   "uses": [
+    "lem-coef-integral-exceptional-mapping-system",
+    "lem-coef-integral-exceptional-limit-constructible",
+    "lem-pur-normalized-actual-reconstruction-maps",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build lambda as a natural isomorphism on the product of full integral constructible categories. Naturality of the actual reconstruction unit and gamma_naturality give its naturality. Whisker lambda_Y along the literal left functor, follow with total limit of the already defined three-factor system psi, and then the inverse of lambda_X whiskered along the literal right functor. Expanding the components gives exactly mappingMap, including both inverse actual reconstruction counits. The domain proof witnesses are propositions, hence do not change the literal functors or components. This constructs a natural total mapping-complex isomorphism before any H-zero is taken.",
+   "uses": [
+    "lem-coef-integral-exceptional-mapping-system",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-enriched-global-shift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply H-zero and the forgetful functor to the total mapping-complex isomorphism, and conjugate by the recorded coefficientIntegralHomEquiv on the two schemes and the fully faithful inclusion Hom equivalences. This produces genuine Hom equivalences with forward map exactly homMap. Naturality of coefficientHomZeroEquiv and the mapping-complex naturality square proves simultaneous precomposition and postcomposition naturality. All inverse laws come from the composed equivalences, not from finite projection tests.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-coef-hom-zero-cycle-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Supply the Hom equivalences to Mathlib Adjunction.mkOfHomEquiv. Its recorded homEquiv equation gives IsSpecified. For any other specified adjunction evaluate the equality of Hom actions on each identity of F K. The adjunction Hom-unit formula then identifies their units; Adjunction.ext identifies the adjunctions. This proves existence and uniqueness of the normalized adjunction without choosing arbitrary adjunction data.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved ambient compact-support comparison lem-coef-integral-support-realization-comparison, transferred from a geometric realization by uniqueness of the reduction, open-extension and proper-image adjoints. Its source is precisely the ambient inclusion of the literal left functor. Cancel the fully faithful inclusion of the constructible target category to obtain left isomorphic to the recorded compact-support functor. Pair this with Domains and the unique specified adjunction.",
+   "uses": [
+    "lem-coef-integral-support-realization-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-exceptional-mapping-system",
+  "lem-coef-integral-exceptional-limit-constructible",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-enriched-global-shift",
+  "def-coef-hom-zero-cycle-class",
+  "lem-coef-integral-support-realization-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-brown/_section.md",
+  "place": "Accepted specified mapping-adjunction interface, exists_unique proof, paragraphs 1–3; explicit Lean construction by T6 on 2026-10-26. The latest sketch omits the detailed paragraphs as recorded in the existing source field."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mappingLimit|[Ii]ntegral.*[Aa]djunction",
+   "results": [],
+   "date": "2026-10-24",
+   "verdict": "No hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfHomEquiv",
+   "results": [
+    "CategoryTheory.Adjunction.mkOfHomEquiv",
+    "CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv",
+    "CategoryTheory.Adjunction.mkOfHomEquiv_unit_app",
+    "CategoryTheory.Adjunction.mkOfHomEquiv_counit_app"
+   ],
+   "date": "2026-10-24",
+   "verdict": "No matching coefficient-system mapping-adjunction interface; generic adjunction or unrelated normalization results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral adjunction specified by the derived inverse limit of finite coefficient mapping complex adjunctions",
+   "results": [
+    "CategoryTheory.Adjunction.derived",
+    "CategoryTheory.Adjunction.derived'",
+    "CategoryTheory.Limits.constLimAdj",
+    "CategoryTheory.Adjunction.derivedη",
+    "CategoryTheory.adjunctionOfCostructuredArrowTerminals",
+    "CategoryTheory.Localization.HasProductsOfShapeAux.adj",
+    "CategoryTheory.Adjunction.functorialityAdjunction",
+    "Topology.IsInducing.adjunction"
+   ],
+   "date": "2026-10-24",
+   "verdict": "No matching coefficient-system mapping-adjunction interface; generic adjunction or unrelated normalization results only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral mapping complex adjunction normalized coefficient systems reduction total limit gamma",
+   "results": [
+    "AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex",
+    "AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty",
+    "AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀",
+    "AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand",
+    "AlgebraicTopology.DoldKan.Γ₀.Obj.summand",
+    "AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f",
+    "AlgebraicTopology.DoldKan.Γ₀_obj_termwise_mapMono_comp_PInfty",
+    "AlgebraicTopology.DoldKan.Γ₀_obj_termwise_mapMono_comp_PInfty_assoc"
+   ],
+   "date": "2026-10-24",
+   "verdict": "No matching coefficient-system mapping-adjunction interface; generic adjunction or unrelated normalization results only."
+  },
+  {
+   "tool": "rg",
+   "query": "IntegralExceptionalMapping|integralMappingLimitMap|specified.*mapping.*adjunction in lean/WeilConjectures and lean/Sheaf",
+   "results": "Sheaf/SixFunctors/IntegralExceptionalMappingSystem.lean defines the system Psi and candidate functors; Sheaf/Paper/IntegralMappingLimitProjections.lean defines lambda. No Domains or specified integral mapping-adjunction interface. Reuse their recorded calculus; inline their actual composites.",
+   "date": "2026-10-24",
+   "verdict": "No matching definition; existing ingredients reused."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "mapping-complex adjunction",
+   "results": "0 blueprint nodes match",
+   "date": "2026-10-24",
+   "verdict": "No matching blueprint definition."
+  },
+  {
+   "tool": "rg",
+   "query": "specified.*mapping.complex adjunction|specified integral.*adjunction|IntegralExceptionalMapping in dag/nodes",
+   "results": "Found the item, exceptional-mapping-system, and generic unrelated adjunction consumers; the full exceptional-adjoint proposition is a theorem, not this definition of its mapping-complex interface.",
+   "date": "2026-10-24",
+   "verdict": "No existing definition node for the interface; created on explicit review option (b)."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-integral-exceptional-descended-counit",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "paragraph 'The integral exceptional adjunction, its units and counits, ... are [prop-coef-integral-exceptional-adjoint]' together with paragraph 8, fourth sentence: 'the adjunction formula uses exactly the evaluations and counits preserved by the duality comparisons'; step 1 of lem-coef-ramified-scalar-counit-limit: the specified integral counit is the descended reconstruction counit; interface for the specified total mapping-complex adjunction, without the descended-counit conclusion.",
+   "via": [
+    "lem-coef-integral-exceptional-descended-counit",
+    "lem-coef-ramified-scalar-counit-limit",
+    "lem-coef-finite-scalar-mate-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralExceptionalMappingAdjunction",
+  "declaration": "WeilConjectures.IntegralExceptionalMapping.IsSpecified",
+  "declarations": [
+   "WeilConjectures.IntegralExceptionalMapping.Domains",
+   "WeilConjectures.IntegralExceptionalMapping.reductionX",
+   "WeilConjectures.IntegralExceptionalMapping.reductionY",
+   "WeilConjectures.IntegralExceptionalMapping.left",
+   "WeilConjectures.IntegralExceptionalMapping.right",
+   "WeilConjectures.IntegralExceptionalMapping.mappingMap",
+   "WeilConjectures.IntegralExceptionalMapping.homMap",
+   "WeilConjectures.IntegralExceptionalMapping.IsSpecified",
+   "WeilConjectures.IntegralExceptionalMapping.exists_unique"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralExceptionalMappingAdjunction.lean",
+  "statement": "def IsSpecified (h : Domains l E D hl f c SX SZ SY r) (a : r.mappingSource ≅ r.mappingTarget) (adj : left r h ⊣ right r h) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51307baba",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51307baba",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after the 7cbb RETURN (H13+H2), using option (b). The prop-coef-integral-exceptional-adjoint record is identical to live. New def node def-coef-specified-integral-mapping-adjunction owns IntegralExceptionalMappingAdjunction: Domains, literal left/right, mappingMap = λ_X⁻¹∘Rlim Ψ∘λ_Y, homMap, IsSpecified, exists_unique (∃ h, F≅Rf_! ∧ ∃! specified adj). Its clauses match the node statement and the factor endpoints check. integralMappingLimitMap is inlined as globalHom.map(1,u)≫gamma; no psi duplicate. Item module byte-identical to the accepted 7cbb version; the item gains only the lean record and the new stmt_dep; statement, proof and proof_deps unchanged. Both lean.statement fields verbatim; no cycles; no hollow defs; no extra hypotheses; f=id, zero, empty schemes and n=0 covered. Advisory: def owners def-weil-compact-support-finite-action and def-coef-ringed-sequence-site uncited (reached through cited nodes); finiteFieldDatumPrimeUnit is a Prop IsUnit proof argument, as in the cited realization node; the def node's exists_unique is left for stage 3."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T203239-L-2794847",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-space-quasiaffine-affine-factorization",
+ "kind": "statement",
+ "title": "Quasi-affine space morphisms have affine envelopes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A space is quasi-compact if it admits a surjective etale atlas from a quasi-compact scheme, and quasi-separated if its absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. A morphism is quasi-compact if its pullback along every affine scheme test has quasi-compact source, and quasi-separated if its relative diagonal is quasi-compact. An affine morphism is representable by schemes and has affine scheme source after every affine scheme test. An open immersion is a representable morphism that is an open immersion on every scheme test [def-a1-space-open-subspace]. Let $f:X\\to Y$ be quasi-affine, meaning representable by schemes with every pullback along an affine scheme test a quasi-compact open subscheme of an affine scheme. Then there exist an algebraic space $Z$, a quasi-compact open immersion $j:X\\hookrightarrow Z$, and an affine morphism $p:Z\\to Y$ with $p\\circ j=f$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 086S (lemma-characterize-quasi-affine), affine factorization consequence used in Tag 0871"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-open-subspace",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-quasi-compact-presheaf-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose a jointly surjective affine etale family $u_a:U_a\\to Y$ using [lem-a1-space-affine-etale-cover], and put $X_a=X\\times_YU_a$. By the hypothesis, $X_a$ is a quasi-affine scheme. By [lem-trf-quasi-affine-canonical-affine-embedding], it is quasi-compact and absolutely separated. The affine scheme $U_a$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-weil-pbc-qcqs-morphism-permanence](1) makes $f_a:X_a\\to U_a$ quasi-compact. It is separated: its diagonal is the pullback of the absolute closed diagonal of $X_a$ along $X_a\\times_{U_a}X_a\\to X_a\\times_{\\operatorname{Spec}\\mathbf Z}X_a$, hence is closed by [lem-weil-pbc-closed-immersion-base-change]. The equivalence in [lem-trf-space-qc-separated-etale-local] now gives that $f$ is quasi-compact and separated.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-space-qc-separated-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 086S (lemma-characterize-quasi-affine), reduction to affine etale charts; Tags 03KG and 03KM; scheme quasi-affineness Tag 01P9"
+   }
+  },
+  {
+   "text": "The structure module $\\mathcal O_X$ is quasi-coherent: in the presentation definition [def-trf-space-quasi-coherent-module], use the identity presentation with one generator and no relations. Apply [lem-trf-space-qc-separated-quasi-coherent-pushforward] to the quasi-compact separated $f$ from step 1. Thus $\\mathcal A=f_*\\mathcal O_X$ is quasi-coherent. Its multiplication and unit are those of sections of $\\mathcal O_X$, compatible with restriction, so it is a commutative $\\mathcal O_Y$-algebra. By [lem-sfb-space-relative-spec-correspondence], set $Z=\\operatorname{Spec}_Y\\mathcal A$ with affine structural morphism $p:Z\\to Y$.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-sfb-space-relative-spec-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081X (remark-factorization-quasi-compact-quasi-separated), first two sentences; Tags 03M9 and 081V"
+   }
+  },
+  {
+   "text": "Construct the map, rather than merely choosing chartwise embeddings. For the pullback/direct-image adjunction [def-trf-space-etale-module-functors], the identity of $\\mathcal A=f_*\\mathcal O_X$ corresponds to the evaluation counit $\\epsilon:f^*\\mathcal A\\to\\mathcal O_X$. On local tensors it sends $b\\otimes a$ to $b$ times the section obtained by evaluating $a$ on the source chart; this respects products and the unit. The pullback algebra is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. Apply [lem-sfb-space-relative-spec-correspondence] over $X$ to $\\epsilon$: contravariance gives a map $X=\\operatorname{Spec}_X\\mathcal O_X\\to\\operatorname{Spec}_X(f^*\\mathcal A)=X\\times_YZ$ over $X$, where the last identification is the stated base-change compatibility. Compose with the projection to $Z$ to obtain $j:X\\to Z$. Its other projection is $\\mathrm{id}_X$, so $p\\circ j=f$.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-relative-spec-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081X (remark-factorization-quasi-compact-quasi-separated), construction from the algebra evaluation map; Tag 081V"
+   }
+  },
+  {
+   "text": "For each $U_a$, [lem-trf-space-etale-module-pushforward-restriction] identifies $\\mathcal A|_{U_a}$ with $(f_a)_*\\mathcal O_{X_a}$ by the identity on compatible sections. These identifications preserve multiplication and the unit because both are computed on the same sections. Write $C_a=\\Gamma(X_a,\\mathcal O_{X_a})$. The affine-chart and base-change assertions of [lem-sfb-space-relative-spec-correspondence] identify $Z_a=Z\\times_YU_a$ with $\\operatorname{Spec}C_a$. Under these identifications, the map $j_a:X_a\\to Z_a$ constructed in step 3 sends a global function $a\\in C_a$ to that same function on $X_a$: its algebra map is exactly evaluation of $1\\otimes a$. Therefore its map on global sections is $\\mathrm{id}_{C_a}$. The uniqueness assertion of [lem-weil-pbc-morphism-into-affine-scheme] identifies $j_a$ with the canonical morphism $X_a\\to\\operatorname{Spec}\\Gamma(X_a,\\mathcal O_{X_a})$.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 086S (lemma-characterize-quasi-affine), proof; Tag 03LX (spaces-properties.tex, lemma-pushforward-etale-base-change-modules) and Tag 081V"
+   }
+  },
+  {
+   "text": "By [lem-trf-quasi-affine-canonical-affine-embedding] and step 4, every $j_a$ is an open immersion and its source $X_a$ is quasi-compact and absolutely separated. Its target $Z_a=\\operatorname{Spec}C_a$ is affine, hence quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-weil-pbc-qcqs-morphism-permanence](1) to conclude that $j_a$ is quasi-compact. Also $j_a$ is separated: as in step 1 its relative diagonal is the pullback of the absolute closed diagonal of $X_a$, so use [lem-weil-pbc-closed-immersion-base-change].",
+   "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01P9 (lemma-quasi-affine), forward implication; scheme quasi-compact permanence Tag 03GI"
+   }
+  },
+  {
+   "text": "The family $Z_a=Z\\times_YU_a\\to Z$ is jointly surjective and etale by [lem-trf-space-fibre-products-etale-covers], and each $Z_a$ is an affine scheme. The pullback of $j$ to $Z_a$ is $j_a$, since $X\\times_Z(Z\\times_YU_a)=X\\times_YU_a$. By [lem-trf-space-open-immersion-etale-local], the open-immersion assertion of step 5 descends to $j$. By [lem-trf-space-qc-separated-etale-local], the quasi-compact and separated assertions of step 5 descend as well. In particular $j$ is a quasi-compact open immersion. Together with the affine $p$ of step 2 and $p\\circ j=f$ from step 3, this supplies the required factorization.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-open-immersion-etale-local",
+    "lem-trf-space-qc-separated-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 086S (lemma-characterize-quasi-affine), etale descent using Tags 03M4, 03KG, 03KM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-sfb-space-relative-spec-correspondence",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-open-immersion-etale-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 086S (lemma-characterize-quasi-affine), forward implication, with canonical factorization Tag 081X and explicit quasi-compactness from scheme Tag 01P9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi affine morphism of algebraic spaces factors as a quasi compact open immersion followed by an affine morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine], X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], AlgebraicGeometry.IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"A predicate that assigns a proposition to each morphism of schemes $ X \\\\to Y $ where the target scheme $ Y $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate on morphisms of schemes, asserting that a given morphism from scheme $ X $ to scheme $ Y $ is affine.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi affine algebraic space embeds as a quasi compact open subspace in an affine algebraic space over its target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], AlgebraicGeometry.IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], CompactSpace ↥X\", \"doc\": \"Every quasi-affine scheme has an underlying topological space that satisfies the compactness property (every open cover has a finite subcover).\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine], X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffineHom\", \"IsOpenImmersion\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.affine.*factor|factor.*quasi.affine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi affine morphism factors into a quasi compact open immersion and an affine morphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[X.IsQuasiAffine] : IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffine X] : X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffineHom f] [Y.IsQuasiAffine] : X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : X.IsQuasiAffine → Sort u_1} →\\n    ([toCompactSpace : CompactSpace ↥X] → [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ] → motive ⋯) →\\n      (t : X.IsQuasiAffine) → motive t\", \"doc\": \"For any scheme $X$, given a type family over the property of $X$ being quasi-affine, if we can construct an element of this type when $X$ is compact and the canonical morphism $X \\\\to \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : X.IsQuasiAffine → Sort u_1} →\\n    (t : X.IsQuasiAffine) →\\n      ([toCompactSpace : CompactSpace ↥X] → [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ] → motive ⋯) →\\n        motive t\", \"doc\": \"For any scheme $X$, given a type family over the property of $X$ being quasi-affine, if we can construct an element of this type when $X$ is compact and the canonical morphism $X \\\\to \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [toCompactSpace : CompactSpace ↥X]\\n  [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ], X.IsQuasiAffine\", \"doc\": \"If $ X $ is a compact topological space and the canonical morphism $ X \\\\to \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"[IsAffineHom f] : QuasiCompact f\", \"doc\": \"Every affine morphism of schemes is quasi-compact.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: retrieved declarations concern schemes or general categorical limits, not the asserted morphisms of algebraic spaces. In particular Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:40-64 has Scheme variables; the open-immersion instance at line 62 is scheme-only."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.affine.*factor|factor.*quasi.affine",
+   "results": "{\"t\": \"2026-10-23T19:48:22Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|quasi.affine.*factor|factor.*quasi.affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme-only quasi-affine, affine spectrum or affine morphism declarations (QuasiAffine.lean:34-56, 105), not the asserted algebraic-space factorization; both phrasing searches were inspected. No algebraic-space hit in the source grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi affine morphism factors into a quasi compact open immersion and an affine morphism",
+   "results": "{\"t\": \"2026-10-23T19:48:22Z\", \"tool\": \"leansearch\", \"query\": \"A quasi affine morphism factors into a quasi compact open immersion and an affine morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.rec\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.recOn\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.mk\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\"], \"digest\": \"b42484c21fe1f508\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme-only quasi-affine, affine spectrum or affine morphism declarations (QuasiAffine.lean:34-56, 105), not the asserted algebraic-space factorization; both phrasing searches were inspected. No algebraic-space hit in the source grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiAffineHom\", \"IsOpenImmersion\"",
+   "results": "{\"t\": \"2026-10-23T19:48:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsQuasiAffineHom\\\", \\\"IsOpenImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme-only quasi-affine, affine spectrum or affine morphism declarations (QuasiAffine.lean:34-56, 105), not the asserted algebraic-space factorization; both phrasing searches were inspected. No algebraic-space hit in the source grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi affine morphism of algebraic spaces factors as a quasi compact open immersion followed by an affine morphism",
+   "results": "{\"t\": \"2026-10-23T19:48:23Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi affine morphism of algebraic spaces factors as a quasi compact open immersion followed by an affine morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.AffineTargetMorphismProperty\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.IsAffineHom\"], \"digest\": \"208a6aaee6ee7200\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme-only quasi-affine, affine spectrum or affine morphism declarations (QuasiAffine.lean:34-56, 105), not the asserted algebraic-space factorization; both phrasing searches were inspected. No algebraic-space hit in the source grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical relative spectrum of the direct image structure algebra gives an affine envelope of a quasi affine algebraic space morphism",
+   "results": "{\"t\": \"2026-10-23T19:48:56Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical relative spectrum of the direct image structure algebra gives an affine envelope of a quasi affine algebraic space morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.essImage_Spec\"], \"digest\": \"8a55365a1f33f02e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are scheme-only quasi-affine, affine spectrum or affine morphism declarations (QuasiAffine.lean:34-56, 105), not the asserted algebraic-space factorization; both phrasing searches were inspected. No algebraic-space hit in the source grep."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasiaffine-fp-envelope",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, openness and base-change compatibility of canonical ampleness, including representability by a scheme over that open. Supporting input: 0A0X: replace the proper family over an affine open by a proper finite-presentation inverse system. Supporting input to 0A0X: Tag 0A0W (lemma-proper-limit-of-proper-finite-presentation), specialized to a scheme base; 0A0W proof, first sentence: choose a separated finite-presentation closed envelope; 0873 proof, first sentence: the finite-presentation envelope before enforcing separatedness; supporting input: 0872 proof: apply the quasi-affine envelope lemma to the chosen finite-stage map; 0871 proof, first sentence: factor the quasi-affine map through an affine morphism",
+   "via": [
+    "lem-sfb-space-quasiaffine-fp-envelope",
+    "lem-sfb-space-finite-type-fp-envelope",
+    "lem-sfb-space-separated-finite-type-fp-envelope",
+    "lem-sfb-proper-space-fixed-base-fp-limit",
+    "lem-sfb-space-proper-noetherian-approximation",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-quasiaffine-affine-factorization",
+  "worker": "stage1",
+  "summary": "Checked Tag 086S and 081X against the current library and DAG. Gave the canonical relative-spectrum construction and its exact affine-etale chart maps, proved quasi-compactness as well as openness, and reused all supporting nodes; no new nodes or statement changes. Preserved the existing blueprint ancestry, whose created.item chain is broken above lem-sfb-admissible-direct-image.",
+  "blueprint": "Supports the recorded det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration/approximation chain: Tag 0871 first sentence requires the quasi-affine affine factorization. The latest blueprint still has direct-image stability as clause (3); this is a generic geometric prerequisite of the recorded route, not a replacement of a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Supplies an affine etale atlas for the space target; this is a generic presentation tool, not a replacement of the direct-image unit route."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "Descends quasi-compactness and separatedness along the chosen etale charts, a generic geometric locality criterion."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "Provides quasi-coherence of the direct-image structure module for the now verified quasi-compact separated space map."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Identifies the direct-image algebra on an etale chart by the identity on sections, needed to compute the canonical chart morphism."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Base changes the chosen etale covering to the affine envelope; this is a generic sheaf fibre-product tool."
+   },
+   {
+    "node": "lem-trf-space-open-immersion-etale-local",
+    "why": "Descends the canonical chart open immersions, including representability. This is a generic geometric tool not supplied by the direct-image stability unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-open-immersion-etale-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-13f674e64",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-13f674e64 (reviewer sub-agent of L); spot-checked: Read Stacks 086S (spaces-morphisms l.4054) and 081X (l.3849), plus the parent's use in 0871. The six steps follow 081X's construction (counit f^*f_*O→O, relative spec base change) and 086S's chart reduction. The item statement, stmt_deps and source match live exactly; the live node is still unsplit, there are 0 new nodes, proof_deps equals the union of step uses, no cycle, no SGA. Step 1 derives f quasi-compact and separated from the quasi-affine hypothesis: the 01P9 leaf, permanence clause (1), the relative diagonal as a base change of the absolute diagonal (I checked the cartesian square), then 03KG/03KM locality. This supplies 03M9's hypothesis in step 2. Step 4 identifies j_a with the canonical embedding via 03LX restriction, the relative-spec chart formula and the uniqueness in 01I1. The use of the chart formula on the quasi-affine X_a is closed in two lines by restricting to affine opens. Steps 5-6 descend openness (03M4) and quasi-compactness (03KG) along Z_a→Z. Edge cases checked: empty X or Y, f affine, Y neither quasi-compact nor quasi-separated (no intersections of charts or finite cover used). The duplicate search over space-level quasi-affine nodes (0423 descent, 07V5 affinization, 0ABS, 03XW, the parent 0871) found no duplicate. I accept the 6 tool_uses as generic algebraic-space foundations. Batch-5: every flagged trf citation is a generic definition or an étale-locality/quasi-coherent fact (03G9, 03M9, 03LX, 03M4, 03KG/03KM, 01P9) or reaches the chapter only through def-trf-algebraic-space. None is part of the trace formula or Poincaré duality, so I keep them. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiAffineAffineFactorization",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_quasiCompact_openImmersion_affine_factorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQuasiAffineAffineFactorization.lean",
+  "statement": "theorem exists_quasiCompact_openImmersion_affine_factorization {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hrep : IsRepresentable f.hom.hom) (hqa : ∀ (T : Over S) (_ : IsAffine T.left) (a : yoneda.obj T ⟶ Y.obj.obj), ∃ (U : Over S) (_ : U.left.IsQuasiAffine) (p : U ⟶ T) (q : yoneda.obj U ⟶ X.obj.obj), IsPullback q (yoneda.map p) f.hom.hom a) : ∃ (Z : AlgebraicSpace S) (j : X ⟶ Z) (p : Z ⟶ Y), IsQuasiCompactPresheafMap j.hom.hom ∧ IsRepresentableWith (fun _ _ q ↦ IsOpenImmersion q.left) j.hom.hom ∧ MapIsAffine p ∧ j ≫ p = f",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c76ebbb18",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 0c9b6921bf00 (H2). The Lean is byte-identical to that delivery. The node differs from live only in lean + stmt_deps: the theorem lem-trf-space-qc-separated-etale-local is replaced by def-sfb-space-quasi-compact-presheaf-map (Q97 existing:true owner of IsQuasiCompactPresheafMap) next to def-sfb-space-affine-quasifinite-properties (MapIsAffine), and the theorem stays in proof_deps. All dependency nodes are identical to live; the item has no live lean record. Clause check: hrep IsRepresentable + hqa actual IsPullback with U.left.IsQuasiAffine (= qc open subscheme of an affine scheme) give the node's quasi-affine f; the conclusion IsQuasiCompactPresheafMap j ∧ IsRepresentableWith IsOpenImmersion j ∧ MapIsAffine p ∧ j ≫ p = f matches 086S/081X. No extra hypotheses, single universe u. Edge cases: empty X/Y, affine f, non-qcqs Y. lean.statement verbatim; one sorry theorem; docstrings with source, blueprint id and 6 steps; report sections present; no duplicate. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,469 @@
+{
+ "id": "lem-sfb-profinite-invariants-sheafified-cohomology",
+ "kind": "statement",
+ "title": "Sheafified action-site cohomology computes higher internal invariants naturally",
+ "statement": "Let $R$ be a commutative condensed ring on the small site $P$ of profinite sets with finite jointly surjective covers [sk-def-sfb-condensed-ring, def-weil-size-convention], and let $J$ be a compact Hausdorff totally disconnected topological group. Write $\\mathcal A_J(R)$ for internal $R$-modules with natural $R$-linear actions of $\\underline J(S)=C(S,J)$ [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Let $\\Gamma_{R,J}$ be the invariant submodule functor whose sections are fixed after every profinite base change; use its ordinary total right derived functor and put $R^q\\Gamma_{R,J}(M)=H^q(R\\Gamma_{R,J}(M[0]))$ [lem-sfb-condensed-derived-restriction-calculus, def-weil-abstract-derived-category].\n\nLet $P_J$ be the site of profinite continuous left $J$-spaces with finite jointly surjective equivariant coverings, $t:P\\to P_J$ the trivial-action functor, and $\\Phi:\\mathcal A_J(R)\\simeq\\operatorname{Mod}(\\mathcal R_J)$ the normalized exact additive equivalence, with $\\mathcal R_J=\\Phi(R)$, in [lem-sfb-profinite-action-coherent-presentation]. Thus $\\Phi(M)(tS)=\\Gamma_{R,J}(M)(S)$ naturally in $M$ and $S$. For $M\\in\\mathcal A_J(R)$ and $q\\geq0$, define the abelian presheaf\n$$P^q_M(S)=H^q(tS,\\Phi(M)_{ab})$$\nusing object cohomology and its restriction maps [def-weil-pbc-sites-and-cohomology]; the suffix $ab$ forgets the ring-sheaf module structure [def-weil-sheaf-of-modules-category].\n\nFor every nonnegative injective resolution $M\\to Q^\\bullet$ in $\\mathcal A_J(R)$ [def-sp-injective-resolutions], the canonical acyclic-resolution comparison gives an isomorphism of presheaves\n$$\\bigl(S\\longmapsto H^q(\\Gamma_{R,J}(Q^\\bullet)(S))\\bigr)\\xrightarrow{\\sim}P^q_M.$$\nThis comparison is independent of resolution up to the canonical comparison isomorphisms and is natural in equivariant coefficient maps and continuous maps of profinite parameters. In particular, writing $U$ for forgetting an internal $R$-module to its abelian sheaf and $\\#$ for abelian sheafification [def-weil-pbc-sheafification], it induces a natural isomorphism\n$$\\alpha_M^q:(P^q_M)^\\#\\xrightarrow{\\sim}U(R^q\\Gamma_{R,J}(M)).$$\nFor every equivariant map $f:M\\to M'$, its naturality is the equality\n$$U(R^q\\Gamma_{R,J}(f))\\circ\\alpha_M^q=\\alpha_{M'}^q\\circ(P^q_f)^\\#,$$\nwhere $P^q_f(S)=H^q(tS,\\Phi(f)_{ab})$. No exactness of section evaluation at arbitrary profinite $S$, no discreteness and no cohomological-dimension bound are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 072W, lemma-higher-direct-images, injective-resolution sheafification argument, with the agent-formulated normalized action-module and underlying-abelian acyclic comparison. Blueprint main-20261015, direct-images proof paragraph (3), relative comparison needed for filtered internal invariants."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-profinite-action-coherent-presentation",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=\\Phi(M)$ and $I^\\bullet=\\Phi(Q^\\bullet)$. The normalized equivalence is exact and additive by [lem-sfb-profinite-action-coherent-presentation]; [lem-weil-pbc-equivalence-injective-resolutions] therefore makes $F\\to I^\\bullet$ a nonnegative module-injective resolution. Its augmentation is a quasi-isomorphism and is degreewise monomorphic: the degree-zero map is the kernel inclusion, and in other degrees its source is zero. The normalization gives a natural identification of underlying abelian complexes $I^\\bullet(tS)=\\Gamma_{R,J}(Q^\\bullet)(S)$, compatible with the differentials and every parameter restriction: apply the stated natural section identification in each degree.",
+   "uses": [
+    "lem-sfb-profinite-action-coherent-presentation",
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W (lemma-higher-direct-images), first sentence; transport uses homology.tex Tag 015Z (lemma-adjoint-preserve-injectives)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-module-resolution-derived-presheaf-comparison] on the small site $P_J$ with commutative ring sheaf $\\mathcal R_J$, coefficient $F$, and this resolution. Choose an abelian injective resolution $F_{ab}\\to A^\\bullet$. That node gives a comparison $b:I^\\bullet_{ab}\\to A^\\bullet$ whose underlying presheaf map is a quasi-isomorphism, independent up to homotopy. Evaluate at $tS$. Presheaf cohomology is objectwise by [lem-weil-pbc-site-module-presheaf-sheafification-exact](1), with constant ring $\\mathbf Z$. Thus $H^q(b(tS))$ is an isomorphism to $H^q(tS,F_{ab})$, the latter computed by $A^\\bullet$ as in [def-weil-pbc-sites-and-cohomology](2). Together with step 1 it is the required acyclic comparison $\\beta_Q:B_Q^q\\xrightarrow{\\sim}P_M^q$, where $B_Q^q(S)=H^q(\\Gamma_{R,J}Q^\\bullet(S))$. For $a:S'\\to S$, the equation $A^\\bullet(ta)b(tS)=b(tS')I^\\bullet_{ab}(ta)$ is naturality of $b$. Taking cohomology proves compatibility with the cohomological restrictions, hence gives an isomorphism of presheaves.",
+   "uses": [
+    "lem-sfb-module-resolution-derived-presheaf-comparison",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), injective-module acyclicity; derived.tex Tag 015E (lemma-leray-acyclicity); restriction mapping preceding Tag 072W."
+   }
+  },
+  {
+   "text": "For $f:M\\to M'$ and a resolution $Q'^\\bullet$, lift $\\Phi(f)$ between the transported module-injective resolutions by [lem-sfb-module-resolution-derived-presheaf-comparison]. Full faithfulness of $\\Phi$ lifts that chain map back to $\\widetilde f:Q^\\bullet\\to Q'^\\bullet$: the equations for differentials and augmentations hold because they do after applying the faithful functor. The same comparison node asserts $c_{\\Phi Q'}\\,Q(\\iota U\\Phi\\widetilde f)=R\\iota(U\\Phi f)\\,c_{\\Phi Q}$. Taking cohomology and evaluating at $tS$ gives $\\beta_{Q'}H^q(\\Gamma_{R,J}\\widetilde f)(S)=P_f^q(S)\\beta_Q$. Its homotopy uniqueness makes this independent of the lift and, with $f=\\mathrm{id}$, independent of the resolution. These are comparisons of the entire presheaf complexes, so the equalities also commute with every parameter restriction.",
+   "uses": [
+    "lem-sfb-module-resolution-derived-presheaf-comparison",
+    "lem-sfb-profinite-action-coherent-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), normalized derived comparison; derived.tex Tags 013P (lemma-morphisms-lift) and 013S (lemma-morphisms-equal-up-to-homotopy)."
+   }
+  },
+  {
+   "text": "Set $K^\\bullet=\\Gamma_{R,J}(Q^\\bullet)$, a complex of internal $R$-modules representing $R\\Gamma_{R,J}(M[0])$ by [lem-sfb-condensed-derived-restriction-calculus]. The monoidal sheafification in [sk-def-sfb-sheaf-tensor] supplies the monoidal-localization hypothesis of [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. That equivalence identifies internal modules with sectionwise module sheaves and preserves their underlying abelian sheaves identically. Under this equivalence scalar forgetting is exact by [lem-weil-pbc-module-sheaves-colimits-forgetful](1), so $UH^q(K)=H^q(UK)$. Apply [lem-weil-pbc-site-module-presheaf-sheafification-exact](2) with $\\mathbf Z$ to the underlying presheaf complex $UK$: its cohomology presheaf is $B_Q^q$, and termwise sheafification recovers $UK$. Consequently there is a canonical isomorphism $\\eta_Q:(B_Q^q)^\\#\\xrightarrow{\\sim}U(R^q\\Gamma_{R,J}(M))$. Define $\\alpha_M^q=\\eta_Q\\circ(\\beta_Q^\\#)^{-1}$. This proves the sheafified comparison without asserting exactness of evaluation on sheaves.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W (lemma-higher-direct-images), cohomology sheaf as associated presheaf of kernels modulo images; Tag 03FD, exactness of scalar forgetting."
+   }
+  },
+  {
+   "text": "The resolution formula [lem-weil-pbc-derived-functor-map-via-lift], applied to the additive left exact invariant functor, identifies $R^q\\Gamma_{R,J}(f)$ with the map induced by $\\Gamma_{R,J}(\\widetilde f)$. Naturality of the sheafification/cohomology isomorphism in [lem-weil-pbc-site-module-presheaf-sheafification-exact](2) therefore gives $U(R^q\\Gamma_{R,J}(f))\\eta_Q=\\eta_{Q'}(H^q\\Gamma_{R,J}\\widetilde f)^\\#$. Step 3 gives $(H^q\\Gamma_{R,J}\\widetilde f)^\\#(\\beta_Q^\\#)^{-1}=(\\beta_{Q'}^\\#)^{-1}(P_f^q)^\\#$. Composing these equalities proves exactly $U(R^q\\Gamma_{R,J}(f))\\alpha_M^q=\\alpha_{M'}^q(P_f^q)^\\#$. Taking $f=\\mathrm{id}$ proves independence for $\\alpha$ as well. All constructions are defined for every $q\\geq0$ and all parameters in the fixed small sites.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W (lemma-higher-direct-images), functorial injective-resolution construction; derived.tex Tag 015B (lemma-higher-derived-functors)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-profinite-action-coherent-presentation",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-sfb-module-resolution-derived-presheaf-comparison",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 072W and 03FD; agent assembly through the normalized action-site equivalence and existing derived-presheaf comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher internal derived invariants are the sheafification of the presheaf cohomology of the trivial profinite parameter in the coherent action site",
+   "results": {
+    "t": "2026-10-22T06:06:01Z",
+    "tool": "leanfinder",
+    "query": "Higher internal derived invariants are the sheafification of the presheaf cohomology of the trivial profinite parameter in the coherent action site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightCondAb.ofSheafLightProfinite",
+     "LightCondMod.ofSheafLightProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "LightProfinite.hasSheafify_type",
+     "CompHausLike.LocallyConstantModule.functor",
+     "CategoryTheory.Sheaf.cohomologyPresheaf",
+     "CondensedMod.ofSheafCompHaus"
+    ],
+    "digest": "266e829ce2824ef2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct condensed sheaves, define the abelian cohomology presheaf, or identify degree-zero continuous cohomology for TopRep. None compares ordinary derived internal invariants with normalized action-site cohomology by a coefficient-natural acyclic resolution."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariants\", \"sheafification\"",
+   "results": {
+    "t": "2026-10-22T06:05:47Z",
+    "tool": "loogle",
+    "query": "\"invariants\", \"sheafification\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct condensed sheaves, define the abelian cohomology presheaf, or identify degree-zero continuous cohomology for TopRep. None compares ordinary derived internal invariants with normalized action-site cohomology by a coefficient-natural acyclic resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "(invariants|fixedPoint).*(sheafif|cohomolog)|(sheafif|cohomolog).*(invariants|fixedPoint)",
+   "results": {
+    "t": "2026-10-22T06:05:46Z",
+    "tool": "grep",
+    "query": "(invariants|fixedPoint).*(sheafif|cohomolog)|(sheafif|cohomolog).*(invariants|fixedPoint)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean"
+    ],
+    "digest": "73ac0e919dc0630f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct condensed sheaves, define the abelian cohomology presheaf, or identify degree-zero continuous cohomology for TopRep. None compares ordinary derived internal invariants with normalized action-site cohomology by a coefficient-natural acyclic resolution."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of cohomology over trivial action spaces computes higher internal invariants of condensed modules naturally in coefficients",
+   "results": {
+    "t": "2026-10-22T06:05:46Z",
+    "tool": "leansearch",
+    "query": "Sheafification of cohomology over trivial action spaces computes higher internal invariants of condensed modules naturally in coefficients",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective equivariant condensed module resolution gives after evaluation on trivial action spaces the presheaf computing derived fixed points after sheafification",
+   "results": {
+    "t": "2026-10-22T06:06:50Z",
+    "tool": "leanfinder",
+    "query": "An injective equivariant condensed module resolution gives after evaluation on trivial action spaces the presheaf computing derived fixed points after sheafification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "CondensedMod.LocallyConstant.functor",
+     "Condensed.free",
+     "CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor",
+     "LightCondensed.free",
+     "CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf",
+     "CompHausLike.LocallyConstantModule.functor_obj_val",
+     "LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf"
+    ],
+    "digest": "19044d1bb1f4b083"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct condensed sheaves, define the abelian cohomology presheaf, or identify degree-zero continuous cohomology for TopRep. None compares ordinary derived internal invariants with normalized action-site cohomology by a coefficient-natural acyclic resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "(rightDerived|higherDirectImage|higher_direct_image).*(sheaf|presheaf)|(sheaf|presheaf).*(rightDerived|higherDirectImage)",
+   "results": {
+    "t": "2026-10-22T06:06:39Z",
+    "tool": "grep",
+    "query": "(rightDerived|higherDirectImage|higher_direct_image).*(sheaf|presheaf)|(sheaf|presheaf).*(rightDerived|higherDirectImage)",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits construct condensed sheaves, define the abelian cohomology presheaf, or identify degree-zero continuous cohomology for TopRep. None compares ordinary derived internal invariants with normalized action-site cohomology by a coefficient-natural acyclic resolution."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf|sheafify.*homology|homology.*sheafify",
+   "results": {
+    "t": "2026-10-22T12:06:50Z",
+    "tool": "grep",
+    "query": "cohomologyPresheaf|sheafify.*homology|homology.*sheafify",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean",
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean"
+    ],
+    "digest": "ec35eb47dbe2392a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: cohomology presheaves and condensed constructions are ingredients only; topological representations and degree-zero invariants do not give this normalized internal-action comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher derived invariants of condensed modules are sheafified cohomology on the site of profinite group actions",
+   "results": {
+    "t": "2026-10-22T12:06:51Z",
+    "tool": "leansearch",
+    "query": "Higher derived invariants of condensed modules are sheafified cohomology on the site of profinite group actions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.instLinearActionTopModuleCatInvariants",
+     "CondensedMod.isDiscrete_tfae",
+     "CondensedMod",
+     "instHasColimitsOfShapeCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+     "LightCondensed",
+     "instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+     "Condensed.isSheafProfinite",
+     "Condensed"
+    ],
+    "digest": "469cda606af088a8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: cohomology presheaves and condensed constructions are ingredients only; topological representations and degree-zero invariants do not give this normalized internal-action comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariants\", \"sheaf\"",
+   "results": {
+    "t": "2026-10-22T12:06:51Z",
+    "tool": "loogle",
+    "query": "\"invariants\", \"sheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: cohomology presheaves and condensed constructions are ingredients only; topological representations and degree-zero invariants do not give this normalized internal-action comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification of object cohomology on a profinite action site computes the right derived internal invariant functor naturally in coefficients",
+   "results": {
+    "t": "2026-10-22T12:07:00Z",
+    "tool": "leanfinder",
+    "query": "The sheafification of object cohomology on a profinite action site computes the right derived internal invariant functor naturally in coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightProfinite.hasSheafify",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightProfinite.hasSheafify_type",
+     "Condensed.lanSheafProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "continuousCohomology",
+     "LightCondAb.ofSheafLightProfinite"
+    ],
+    "digest": "b6651553bf2f6724"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: cohomology presheaves and condensed constructions are ingredients only; topological representations and degree-zero invariants do not give this normalized internal-action comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(invariants|fixedPoint).*(sheafif|cohomolog)|(sheafif|cohomolog).*(invariants|fixedPoint)",
+   "results": {
+    "t": "2026-10-22T12:07:50Z",
+    "tool": "grep",
+    "query": "(invariants|fixedPoint).*(sheafif|cohomolog)|(sheafif|cohomolog).*(invariants|fixedPoint)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree.lean",
+     "Mathlib/RepresentationTheory/Homological/GroupCohomology/Functoriality.lean"
+    ],
+    "digest": "73ac0e919dc0630f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: cohomology presheaves and condensed constructions are ingredients only; topological representations and degree-zero invariants do not give this normalized internal-action comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective resolution of a sheaf of modules computes underlying abelian object cohomology and sheafifying its cohomology presheaf computes derived direct image",
+   "results": {
+    "t": "2026-10-22T12:07:52Z",
+    "tool": "leanfinder",
+    "query": "An injective resolution of a sheaf of modules computes underlying abelian object cohomology and sheafifying its cohomology presheaf computes derived direct image",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.cohomologyPresheaf",
+     "CategoryTheory.Sheaf.H",
+     "PresheafOfModules.instIsLocallyInjectiveToSheafify",
+     "CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+     "PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective",
+     "CochainComplex.cm5b.I_X",
+     "SheafOfModules.instAbelian",
+     "CategoryTheory.Presheaf.isLocallyInjective_toSheafify'"
+    ],
+    "digest": "3b454b712c8c4f92"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: cohomology presheaves and condensed constructions are ingredients only; topological representations and degree-zero invariants do not give this normalized internal-action comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-invariants-filtered-continuity",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), quasi-compact open direct image: filtered internal-invariant passage. Original step 4: normalized module-to-abelian injective/acyclic resolution comparison and exact sheafification, natural in coefficients and profinite restrictions.",
+   "via": [
+    "lem-sfb-profinite-invariants-filtered-continuity",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-invariants-sheafified-cohomology",
+  "worker": "stage1",
+  "summary": "Repair L: replay the retained five-step split onto the current DAG, where the item is unsplit; re-read all statement and proof dependencies and revalidate every citation against their current statements. Make the monomorphic-augmentation hypothesis for the comparison explicit and clarify the internal-to-sectionwise module equivalence. Preserve the item statement, dependency route, all searches and blueprint provenance; no new nodes.",
+  "blueprint": "Main-20261015 direct-images proof paragraph (3), filtered internal-invariant passage: realizes the relative cohomology comparison required by the parent filtered-continuity split.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Use only its general exact scalar-forgetting assertion on the small profinite site; no lemma of this unit separately states that assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-d326d4dd3",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-d326d4dd3 (reviewer sub-agent of L); spot-checked: I read the item and all 10 cited statements in full. The 10 citations are identical in clones/live, so they still hold on the current DAG. This head repairs an L return: landing of the earlier head 0e22cde9, which a reader had PASSed, was refused because the side-DAG completion had not been promoted to live. The item is still unsplit with no proof in live and side-live, and there is no repair note on it; the parent's re-split note is what created it. Compared with side-live, the statement, stmt_deps, blueprint and created fields are identical, all 6 inherited searches are kept, and proof_deps equals the union of the uses. Compared with 0e22, only steps 1 and 4 changed. The new sentence in step 1 says the augmentation is degreewise monomorphic, which is correct (M→I^0 is injective; the other degrees have source 0) and is exactly the hypothesis on r in the comparison node. Step 4 reworded a sentence that was missing a connective; its content is the same. Source: Stacks 072W (sites-cohomology l.746-782). Its implicit use of 03FD acyclicity is handled through lem-sfb-module-resolution-derived-presheaf-comparison, which states ι-acyclicity and never claims abelian injectivity. Step 1: the coherent presentation gives an exact additive Φ with Φ(N)(tS)=Γ(N)(S); the equivalence-injective-resolutions leaf, clause (3), transports the resolution. Step 2: P_J is small and R_J commutative, so the comparison node gives b with ιb a quasi-isomorphism; objectwise cohomology (sheafification-exact (1), ℤ) and def-sites-and-cohomology (2) identify its value at tS, and naturality of b gives the restrictions. Step 3: the node's c_r equation and homotopy uniqueness, pulled back by full faithfulness of Φ. Step 4: the derived calculus gives K=Γ(Q); the strong monoidal sheafification of sk-def-sfb-sheaf-tensor supplies the monoidal-localization hypothesis; the module equivalence preserves underlying sheaves, so forgetting is exact by colimits-forgetful (1); sheafification-exact (2) gives η, and α=η∘(β^#)^{-1} points the right way. Step 5: derived-functor-map-via-lift plus the two naturalities give the exact equation. I accept the tool use of lem-weil-pbc-module-sheaves-colimits-forgetful (clause (1) only). Edge cases: q=0 gives the identity; for trivial J the sheafified higher presheaves vanish; M=0 and R=0 give zero. No SGA, no new nodes, no duplicates, no changes. Maintainer note: this is an L-promotion replay of a PASSed split, to be landed after side promotion."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteInvariantsSheafifiedCohomology",
+  "declaration": "Profinite.CondensedAction.SheafifiedCohomology.profiniteInvariants_sheafifiedCohomology",
+  "declarations": [
+   "Profinite.CondensedAction.SheafifiedCohomology.underlyingModule",
+   "Profinite.CondensedAction.SheafifiedCohomology.parameters",
+   "Profinite.CondensedAction.SheafifiedCohomology.presentationAdditive",
+   "Profinite.CondensedAction.SheafifiedCohomology.presentedAbelian",
+   "Profinite.CondensedAction.SheafifiedCohomology.presentedAbelianAdditive",
+   "Profinite.CondensedAction.SheafifiedCohomology.actionSiteHasExt",
+   "Profinite.CondensedAction.SheafifiedCohomology.objectPresheaf",
+   "Profinite.CondensedAction.SheafifiedCohomology.invariantComplex",
+   "Profinite.CondensedAction.SheafifiedCohomology.invariantPresheafComplex",
+   "Profinite.CondensedAction.SheafifiedCohomology.presentedComplex",
+   "Profinite.CondensedAction.SheafifiedCohomology.presentedAugmentation",
+   "Profinite.CondensedAction.SheafifiedCohomology.restrictedComplex",
+   "Profinite.CondensedAction.SheafifiedCohomology.computation",
+   "Profinite.CondensedAction.SheafifiedCohomology.sheafifiedComplexMap",
+   "Profinite.CondensedAction.SheafifiedCohomology.sheafifiedComputation",
+   "Profinite.CondensedAction.SheafifiedCohomology.freeParameterSheaf",
+   "Profinite.CondensedAction.SheafifiedCohomology.generatorSection",
+   "Profinite.CondensedAction.SheafifiedCohomology.cycleClass",
+   "Profinite.CondensedAction.SheafifiedCohomology.invariantPresheafMap",
+   "Profinite.CondensedAction.SheafifiedCohomology.profiniteInvariants_sheafifiedCohomology"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteInvariantsSheafifiedCohomology.lean",
+  "statement": "theorem profiniteInvariants_sheafifiedCohomology (q : ℕ) : ∃ (e : ∀ (M : CategoryTheory.CondensedBar.Equivariant A J) (Q : InjectiveResolution M), invariantPresheafComplex Q ≅ restrictedComplex D Q) (beta : ∀ (M : CategoryTheory.CondensedBar.Equivariant A J) (Q : InjectiveResolution M), (invariantPresheafComplex Q).homology (q : ℤ) ≅ (objectPresheaf D q).obj M) (alpha : objectPresheaf D q ⋙ presheafToSheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1} ≅ ((DerivedCategory.singleFunctor (CategoryTheory.CondensedBar.Equivariant A J) 0 ⋙ derived A J) ⋙ DerivedCategory.homologyFunctor (CategoryTheory.CondensedBar.Modules A) (q : ℤ)) ⋙ underlyingModule A), (∀ (M : CategoryTheory.CondensedBar.Equivariant A J) (Q : InjectiveResolution M) (n : ℤ) (S : Profinite.{u}) (x : ((invariantPresheafComplex Q).X n).obj (op S)), ((invariants A J).inclusion.app (Q.cochainComplex.X n)).hom.hom.app (op S) x = D.data.moduleSection (Q.cochainComplex.X n) ((parameters J).obj S) (((e M Q).hom.f n).app (op S) x)) ∧ (∀ (M : CategoryTheory.CondensedBar.Equivariant A J) (Q : InjectiveResolution M) (I : InjectiveResolution ((presentedAbelian D).obj M)) (b : presentedComplex D Q ⟶ I.cochainComplex) (_hb : presentedAugmentation D Q ≫ b = I.ι') (S : Profinite.{u}) (z : Cocycle ((CochainComplex.singleFunctor _ 0).obj (freeParameterSheaf (J := J) S)) (presentedComplex D Q) (q : ℤ)) (y : ((restrictedComplex D Q).asFunctor.obj (op S)).cycles (q : ℤ)), (((restrictedComplex D Q).asFunctor.obj (op S)).iCycles (q : ℤ)).hom y = generatorSection S (Cochain.fromSingleEquiv (zero_add (q : ℤ)) z.val) → ((beta M Q).hom.app (op S)).hom (((HomologicalComplex.homologyMap (e M Q).inv (q : ℤ)).app (op S)).hom (cycleClass (restrictedComplex D Q) q S y)) = I.extEquivCohomologyClass.symm (CohomologyClass.mk (z.postcomp b))) ∧ (∀ (M N : CategoryTheory.CondensedBar.Equivariant A J) (f : M ⟶ N) (Q : InjectiveResolution M) (Q' : InjectiveResolution N) (g : Q.cochainComplex ⟶ Q'.cochainComplex), Q.ι' ≫ g = (CochainComplex.singleFunctor _ 0).map f ≫ Q'.ι' → HomologicalComplex.homologyMap (invariantPresheafMap g) (q : ℤ) ≫ (beta N Q').hom = (beta M Q).hom ≫ (objectPresheaf D q).map f) ∧ (∀ (M : CategoryTheory.CondensedBar.Equivariant A J) (Q : InjectiveResolution M), (presheafToSheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}).map (beta M Q).hom ≫ alpha.hom.app M = sheafifiedComputation Q q) ∧ (∀ (M N : CategoryTheory.CondensedBar.Equivariant A J) (f : M ⟶ N), alpha.hom.app M ≫ (underlyingModule A).map ((DerivedCategory.homologyFunctor _ (q : ℤ)).map ((derived A J).map ((DerivedCategory.singleFunctor _ 0).map f))) = (presheafToSheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}).map ((objectPresheaf D q).map f) ≫ alpha.hom.app N)",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74c6a1afa",
+  "group": "Q27",
+  "result": "fix",
+  "note": "Lean and record correct: A CondensedBar.Ring, J compact T2 totally disconnected group, Equivariant A J, invariants (FixedAll image) and derived = rightDerivedFunctor; for every ModulePresentation D (spec of the ∃ presentation theorem), objectPresheaf = Φ ⋙ toSheaf ⋙ Mathlib cohomologyPresheafFunctor ∘ t^op. e pinned by inclusion = moduleSection (unique: both injective, same FixedAll image); beta pinned on every cycle class by I.extEquivCohomologyClass.symm[z≫b] for every injective resolution I and every b over the augmentation (canonical 072W comparison, not vacuous); conjunct 3 gives naturality for every lift (f = id gives resolution independence); alpha pinned by sheafify(beta) ≫ alpha = eta_Q, a canonical composite (sheafification/homology iso, counit, forget-scalars homology iso, unit invertible by boundedBelowComputation); final conjunct is the node's equation. Edge cases q=0, empty S, zero ring/module, trivial J covered; lean.statement verbatim; node differs only in lean; no hollow definition, only sorry. Sole fault H11: the 'Second reading by Q27' is the worker's self-reread → fixes/lem-sfb-profinite-invariants-sheafified-cohomology.report.md keeps the worker report and Validation verbatim and replaces the second reading with an independent one. Advisories: Space/coverage/trivialParameter, CondensedBar.* and invariants/derived are owned by def nodes not in stmt_deps (reached through the cited theorems); the comparison proof_dep now has a Lean module for stage 3. No compile (no Lean changed)."
+ }
+}

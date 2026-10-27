@@ -1,0 +1,139 @@
+{
+ "id": "lem-pbc-coefficient-restriction-tensor-chain-square",
+ "kind": "statement",
+ "title": "Normalized coefficient restriction commutes with the signed-total geometric tensor map",
+ "statement": "Let $f:X\\to Y$ be a scheme morphism, $R,S$ commutative ring sheaves on their small pro-etale sites, and $c:f^{-1}R\\simeq S$ [def-weil-pbc-proetale-operations]. Put $A=f^{-1}R$, let $U$ denote termwise scalar restriction along $c$, and $C,I$ termwise geometric module pullback with coefficients $c$ and the identity of $A$. Write $t_R,t_S,t_A$ for signed direct-sum total tensor [def-sfb-proetale-tensor-model]. Let $o$ be any RingIsoTensorTransport for $c$ [lem-sfb-ring-isomorphism-tensor-transport], whose tensor map fixes pure tensors and whose totalIso is normalized on every bidegree summand. Its totalIso and total_naturality fields give $\\sigma:t_SU\\simeq(U\\times U)t_A$. Let $\\beta:CU\\simeq I$ be the termwise canonical restriction/pullback mate with identity base restriction removed [lem-pbc-coefficient-pullback-factorization, lem-weil-pbc-ring-sheaf-change-adjunction]. Let $\\mu_c:t_RC\\simeq(C\\times C)t_S$ and $\\mu_i:t_RI\\simeq(I\\times I)t_A$ be the inverses of the specified total tensor pullback comparisons [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, def-sp-proetale-ordinary-tensor-pullback-total]. Then for every pair of cochain complexes $P,Q$ of $R$-module sheaves, $\\beta_{t_R(P,Q)};\\mu_i(P,Q)=U(\\mu_c(P,Q));\\sigma_{CP,CQ};t_A(\\beta_P,\\beta_Q)$. This is an equality of chain maps, without localization, derived tensor models or flatness assumptions.",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-sfb-proetale-tensor-model",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "lem-pbc-coefficient-pullback-factorization",
+  "def-pbc-coefficient-restriction-tensor-iso"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback and its bilinear-map proof; Tag 07A4, lemma-pullback-tensor-product and its signed-total construction."
+ },
+ "proof": [
+  {
+   "text": "Use the proved ordinary coefficient restriction tensor square for every pair of terms P.X a,Q.X b. This is proved by the mate-unit identity and pure-tensor normalization, before any totalization.",
+   "uses": [
+    "lem-pbc-coefficient-restriction-ordinary-tensor-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved generic tensorTotalComparisonSquare to the ordinary square, the two geometric signed-total isomorphisms and their summand equations, the degreewise ordinaryPullback comparison, and o.total_summand. Scalar restriction is an equivalence by o.functor_eq and o.equivalence. The generic theorem cancels the two total isomorphisms and proves the forward square on every preserved bidegree coproduct injection, using naturality of ordinaryPullback and the ordinary square. Its tensor-map summand equation finishes the comparison. The unchanged tensorIso definition and its naturality are publicly re-exported from the supporting tensor-isomorphism module; its proved tensorIso_summand API supplies the normalized summand equation without unfolding the selected monoidal presentation at this use.",
+   "uses": [
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "lem-pbc-tensor-total-comparison-square",
+    "def-pbc-coefficient-restriction-tensor-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply DerivedCategory.Q.map to the established equality of chain maps and use preservation of composition to obtain restriction_tensor_localized_square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-coefficient-restriction-ordinary-tensor-square",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "lem-pbc-tensor-total-comparison-square",
+  "def-pbc-coefficient-restriction-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback and its bilinear-map proof; Tag 07A4, lemma-pullback-tensor-product and its signed-total construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An isomorphism of sheaves of commutative rings induces a tensor equivalence on module sheaves compatible with inverse image and signed total complexes",
+   "results": "Eight hits including HomologicalComplex₂.total.mapIso, sheaf pullback on free modules, and PresheafOfModules.isoMk. No coefficient restriction tensor coherence theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of natural transformations can be checked on a fully faithful resolving subcategory of flat K-flat complexes",
+   "results": "Found Localization.natTrans_ext and derived-functor extensionality. Use the already proved project representative descent theorem for the derived step. No ordinary coefficient tensor square.",
+   "date": "2026-10-27",
+   "verdict": "generic extensionality only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": "Found exact-derived composition comparisons. The source library supplies their factorization normalization, used in the proved pullback_factors helper.",
+   "date": "2026-10-27",
+   "verdict": "used existing exact-derived comparison API"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*restrictScalars|restrictScalars.*tensor",
+   "results": "Mathlib hits on ordinary scalar tensor algebra, no sheaf chain restriction/pullback square. Project searches found FlatScalarRestrictionKFlat and the canonical geometric tensor comparison; no duplicate of the chain square.",
+   "date": "2026-10-27",
+   "verdict": "reuse canonical maps and flat scalar restriction"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCoefficientTensorCompatibility",
+  "date": "2026-10-27",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-coefficient-restriction-tensor-comparison-compatibility",
+   "place": "The ordinary signed-total square in step 1, before any derived tensor representative comparisons.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleCoefficientTensorChainData",
+  "file": "lean/Sheaf/Paper/ProEtaleCoefficientTensorChainData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientTensorChain.restriction_tensor_chain_square",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CoefficientTensorChain.restriction_tensor_chain_square",
+   "AlgebraicGeometry.Scheme.CoefficientTensorChain.restriction_tensor_localized_square"
+  ],
+  "statement": "theorem restriction_tensor_chain_square (o : SheafOfModules.RingIsoTensorTransport\n    (J := ProEt.topology X)\n    (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c) :\n    ∀ P Q : CochainComplex (proEtaleRingModules Y R) ℤ,\n        (complexPullback f R S c).hom.app ((total Y R).obj (P, Q)) ≫\n            (proEtaleTensorPullbackTotalIso f R\n              ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)\n              (Iso.refl _) P Q).inv =\n          ((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).map\n              (proEtaleTensorPullbackTotalIso f R S c P Q).inv ≫\n            (tensorIso f R S c o).hom.app\n              (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj P,\n                ((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj Q) ≫\n            (total X ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)).map\n              (Prod.mkHom ((complexPullback f R S c).hom.app P)\n                ((complexPullback f R S c).hom.app Q))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dade8",
+  "group": "J1",
+  "result": "fix",
+  "landing": "20261027T072146-L-2804008",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "independent cc review: restriction_tensor_chain_square proof (ordinary_square + tensorTotalComparisonSquare + tensorIso_summand) against item node and RingIsoTensorTransport fields; relocated tensorIso/tensorIso_naturality diffed verbatim vs clone and publicly re-exported; adapted RepresentativeSquare proof-only (unclaimed); 3b importer Compatibility OK"
+ }
+}

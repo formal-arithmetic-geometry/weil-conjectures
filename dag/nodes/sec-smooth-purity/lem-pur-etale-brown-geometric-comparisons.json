@@ -1,0 +1,154 @@
+{
+ "id": "lem-pur-etale-brown-geometric-comparisons",
+ "kind": "statement",
+ "title": "Normalized coefficient projection and singleton comparisons before Brown representability",
+ "statement": "Let D be a finite-field datum [def-weil-finite-field-fiber], l != D.p prime, O a commutative ring, and t in O. Assume each positive quotient A_n=O/(t)^(n+1) is finite and killed by a power of l. Let f:X -> Y be a separated finite-type morphism between finite-type D.k-schemes, without separatedness of Y, and c a compactification. Fix any strict ordinary etale compact-support presentation S [def-per-strict-etale-system-interfaces]. There are normalized constant-coefficient realizations at X,Z,Y, with section, localization-unit and adjunction equations of [def-pur-etale-brown-projection-realization]; their proper/open comparisons assemble to the fixed-ring compact-support functor. The open and proper coefficient projection isomorphisms are the prescribed derived adjunction mates, their composite inverse is the published compactScalarMap [lem-pur-etale-system-coefficient-projection] after realization. Conjugating S.properDerived.directEvaluation and S.openDerived.inverseEvaluation under the composite singleton/geometric adjunctions gives the explicitly defined properInsertion and openInsertion. The evaluation of the explicitly constructed proper mate is invertible below the selected level. A proved helper supplies the above-level cases and joint detection, constructing the full proper mate isomorphism. Its inverse composed with openInsertion explicitly defines leftExtension; its evaluation at m<=n is the composite coefficient projection, precisely the leftExtension_below square in StrictEtaleBrownGeometry. No Brown right adjoint, Grothendieck assertion, coproduct assertion or coefficient completeness is part of this conclusion.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 4.1 and 5.14–5.15, Lemma 5.16 and the Brown adjoint immediately following it (printed pp. 21, 34–35); agent extraction of returned item steps 1 and 3. The nonuniformizer t version uses t equal to a unit times a positive uniformizer power."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-compactifications-refinements",
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-etale-brown-projection-realization",
+  "lem-pur-etale-system-coefficient-projection"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized finite-level realizations, proper/open comparisons, and scalar projections from the level-only construction. No singleton comparison is included in that construction.",
+   "uses": [
+    "lem-pur-etale-brown-level-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proper singleton evaluation identity expresses the evaluated canonical mate, after composing with two isomorphisms, as derivedBelow followed by the proper scalar projection inverse. Cancel those isomorphisms to prove below-level invertibility. Above the chosen level the existing derivedAbove argument gives zero source and target. Joint detection constructs strictEtaleBrownProperInsertionMate.",
+   "uses": [
+    "lem-pur-etale-brown-proper-singleton-evaluation",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-pur-system-level-left-extension",
+    "lem-pur-system-single-derived-evaluation",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the proper evaluation equality with the evaluated mate isomorphism inverse, then cancel the proper projection inverse to obtain the inverse-mate evaluation square. Expand the defined leftExtension into openInsertion and the inverse proper mate. Naturality of directEvaluation moves openInsertion through proper image; the open singleton evaluation identity then yields the open/proper composite projection. This proves leftExtension_below by functoriality and associativity.",
+   "uses": [
+    "lem-pur-etale-brown-open-singleton-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-brown-level-comparisons",
+  "lem-pur-etale-brown-proper-singleton-evaluation",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-single-derived-evaluation",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "lem-pur-etale-brown-open-singleton-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Lemma 5.13 and Constructions 5.14–5.15/Lemma 5.16. Lean assembly by cancellation of the proper singleton evaluation square and naturality pasting with the open singleton evaluation square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived left extension commutes with compact support proper direct image for inverse systems of sheaves",
+   "results": "[\"CategoryTheory.Functor.leftKanExtension\", \"CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension\", \"CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves_inv_fac_assoc\", \"CategoryTheory.Functor.lanCompIsoOfPreserves_inv_app\", \"CategoryTheory.Functor.IsLeftDerivedFunctor.mk\", \"CategoryTheory.Functor.leftKanExtensionCompIsoOfPreserves\", \"CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension\", \"CategoryTheory.Functor.LeftExtension\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic lemmas are used in the formal proof or the stated comparison argument."
+  },
+  {
+   "tool": "grep",
+   "query": "properInsertion|etaleBrownGeometric|constantModule.*equivalence|constantModule.*IsEquivalence",
+   "results": "[]",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic lemmas are used in the formal proof or the stated comparison argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper pushforward of sheaves on an inverse system of quotient coefficient rings commutes with derived left extension from a single level by the projection formula",
+   "results": "[\"localCohomology.diagram\", \"Condensed.profiniteSolid\", \"Condensed.lanSheafProfinite\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\", \"Condensed.profiniteSolidification\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic lemmas are used in the formal proof or the stated comparison argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized constant coefficient realization and projection formula identify derived singleton extension with proper compact support for sheaves on inverse systems",
+   "results": "[\"IsLocalization.integerNormalization\", \"CategoryTheory.Sheaf.IsConstant.recOn\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CompHausLike.LocallyConstant.counit_app_val\", \"CompHausLike.LocallyConstant.unitIso\", \"CategoryTheory.Sheaf.IsConstant.mk\", \"CategoryTheory.Sheaf.isConstant_of_isIso_counit_app\", \"LightCondensed.lanLightCondSet\"]",
+   "date": "2026-10-24",
+   "verdict": "No exact match; generic lemmas are used in the formal proof or the stated comparison argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemBrownConstruction",
+  "date": "2026-10-25",
+  "group": "F2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps of lem-pur-etale-system-brown-construction, in the ordinary etale Brown construction of sk-def-sf-operations.",
+   "via": [
+    "lem-pur-etale-system-brown-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleBrownGeometricComparisons",
+  "file": "lean/Sheaf/Paper/EtaleBrownGeometricComparisons.lean",
+  "declaration": "AlgebraicGeometry.etaleBrownGeometricComparisons",
+  "statement": "theorem etaleBrownGeometricComparisons\n    (D : WeilConjectures.FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (O : Type (u + 1)) [CommRing O] (t : O)\n    (hfinite : ∀ n : ℕ, Finite (strictEtaleBrownRing O t n))\n    (htorsion : ∀ n : ℕ, ∃ a : ℕ, (l ^ a : strictEtaleBrownRing O t n) = 0)\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]\n    [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f) (S : StrictEtaleCompactSupport O t c) :\n    Nonempty (StrictEtaleBrownGeometry O t c S)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.strictEtaleBrownProperInsertion",
+   "AlgebraicGeometry.strictEtaleBrownProperInsertion_conjugate",
+   "AlgebraicGeometry.strictEtaleBrownOpenInsertion",
+   "AlgebraicGeometry.strictEtaleBrownOpenInsertion_conjugate",
+   "AlgebraicGeometry.strictEtaleBrownProperInsertionMap",
+   "AlgebraicGeometry.strictEtaleBrownProperInsertionMap_above",
+   "AlgebraicGeometry.strictEtaleBrownEvaluation_detectsIso",
+   "AlgebraicGeometry.strictEtaleBrownProperInsertionMate",
+   "AlgebraicGeometry.strictEtaleBrownLeftExtension",
+   "AlgebraicGeometry.StrictEtaleBrownGeometry",
+   "AlgebraicGeometry.etaleBrownGeometricComparisons"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261025T030510-L-2852930",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261025T180724-L-4024248",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

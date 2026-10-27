@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-character-eigenspaces-independent",
+ "kind": "statement",
+ "title": "Independence and finiteness of character eigenspaces",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be an affine group scheme [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism]. Let $V$ be a finite-dimensional $k$-vector space and $r:G\\to\\operatorname{GL}(V)$ a homomorphism of group schemes, where $\\operatorname{GL}(V)$ is the general linear group [def-sc-general-linear-group] after choosing a basis when $\\dim_kV>0$; for $V=0$, $\\operatorname{GL}(V)$ denotes the trivial group scheme, with $\\operatorname{GL}(V)(A)=\\operatorname{Aut}_A(0)=\\{1\\}$. Tensor products are those of [def-weil-pbc-module-tensor-product], and finite-dimensionality means [def-weil-finite-dimensional-subspace]. A subspace $W\\subseteq V$ is $G$-stable if $r_A(g)(A\\otimes_kW)\\subseteq A\\otimes_kW$ for every commutative $k$-algebra $A$ and $g\\in G(A)$. A character is a group-scheme homomorphism $\\chi:G\\to\\mathbf G_m$, with $\\mathbf G_m=\\operatorname{GL}_1$. For each character $\\chi$, define $V_\\chi=\\{v\\in V: r_A(g)(1\\otimes v)=\\chi_A(g)(1\\otimes v)\\text{ for every commutative }k\\text{-algebra }A\\text{ and }g\\in G(A)\\}$. The family of subspaces $(V_\\chi)_\\chi$ is independent: for any pairwise distinct characters $\\chi_1,\\ldots,\\chi_t$ and vectors $v_i\\in V_{\\chi_i}$, the equality $\\sum_i v_i=0$ implies $v_i=0$ for every $i$. Consequently only finitely many $V_\\chi$ are nonzero, and the sum of all the character eigenspaces is their internal direct sum. Neither commutativity, smoothness nor connectedness of $G$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.25 and Corollary 4.24, printed pp.93–94; finite-dimensionality gives finiteness of the nonzero independent summands."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-general-linear-group",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=k[G]$, so $G=\\operatorname{Spec}C$. The maps $\\Delta,\\varepsilon$ induced by multiplication and identity make $C$ a coalgebra by [lem-sfb-affine-group-coordinate-hopf]. For a character $\\chi$, let $a_\\chi=\\chi^*(t)\\in C^\\times$, where $k[\\mathbf G_m]=k[t,t^{-1}]$. The multiplication and identity formulas for $\\operatorname{GL}_1$ give $\\Delta(a_\\chi)=a_\\chi\\otimes a_\\chi$ and $\\varepsilon(a_\\chi)=1$, since $\\chi$ respects multiplication and identity. Distinct characters give distinct $a_\\chi$: a $k$-algebra map from $k[t,t^{-1}]$ is determined by its value on $t$, and affine-spectrum duality says that equal coordinate maps give equal scheme morphisms.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-affine-spectrum",
+    "def-sc-general-linear-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 4(g), printed pp.92–93: characters and group-like elements, before Proposition 4.23."
+   }
+  },
+  {
+   "text": "Let $u\\in G(C)$ be the point corresponding to $\\mathrm{id}_C$. Define $\\rho:V\\to C\\otimes_kV$ by $\\rho(v)=r_C(u)(1\\otimes v)$. This is $k$-linear because $v\\mapsto1\\otimes v$ is $k$-linear and the fixed operator $r_C(u)$ is $C$-linear. The point $\\chi_C(u)$ is $a_\\chi$, by evaluation of $\\chi^*$ at $\\mathrm{id}_C$. Taking $A=C$ and $g=u$ in the defining all-algebras condition for $V_\\chi$ gives $\\rho(v)=a_\\chi\\otimes v$ for every $v\\in V_\\chi$. For $V=0$ the same map is the zero map. Thus no construction of a coaction, nor any reducedness or density of $G(k)$, is needed.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-sc-general-linear-group",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 4.22 and equation (28), printed p.92; the coaction on vectors is evaluated at the universal point."
+   }
+  },
+  {
+   "text": "Fix pairwise distinct $\\chi_1,\\ldots,\\chi_t$ and $v_i\\in V_{\\chi_i}$ with $\\sum_i v_i=0$. Linearity and step 2 give $\\sum_i a_{\\chi_i}\\otimes v_i=0$. For any $k$-linear form $f:V\\to k$, the tensor universal property gives the linear map $C\\otimes_kV\\to C$, $c\\otimes v\\mapsto f(v)c$. Applying it yields $\\sum_i f(v_i)a_{\\chi_i}=0$. The elements $a_{\\chi_i}$ are pairwise distinct group-like elements by step 1; [lem-sfb-coalgebra-group-like-independent] therefore gives $f(v_i)=0$ for every $i$ and every $f$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-sfb-coalgebra-group-like-independent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.25 proof, printed pp.93–94; Proposition 4.23 supplies the independence used there."
+   }
+  },
+  {
+   "text": "If some $v_i\\ne0$, apply [lem-sfb-linear-map-extension-prescribed-value] with $P=0\\subset V$, the zero map $P\\to k$, $v=v_i$ and prescribed value $1\\in k$. It gives a linear form $f:V\\to k$ with $f(v_i)=1$, contradicting step 3. Thus all $v_i=0$, proving the asserted independence, also for the empty family.",
+   "uses": [
+    "lem-sfb-linear-map-extension-prescribed-value"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.25, printed p.94: the last contradiction, with separation by linear forms made explicit."
+   }
+  },
+  {
+   "text": "Write $d=\\dim_kV$. For any finite set $S$ of characters with $V_\\chi\\ne0$, choose $0\\ne w_\\chi\\in V_\\chi$ for $\\chi\\in S$. These vectors are linearly independent: a scalar relation $\\sum_{\\chi\\in S}c_\\chi w_\\chi=0$ has each $c_\\chi w_\\chi=0$ by step 4, hence each $c_\\chi=0$ over the field $k$. By [lem-weil-independent-family-card-le-dimension], $|S|\\le d$. The set of such characters must be finite: if it were infinite one could successively choose $d+1$ distinct members, giving a finite set violating this bound. This includes $d=0$, when there are no nonzero eigenspaces.",
+   "uses": [
+    "lem-weil-independent-family-card-le-dimension",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.25, pp.93–94, followed by its finite-dimensional consequence; dimension bound as in the cited linear-algebra leaf."
+   }
+  },
+  {
+   "text": "Each $V_\\chi$ is a subspace, since every equation $r_A(g)(1\\otimes v)=\\chi_A(g)(1\\otimes v)$ is $k$-linear in $v$. Let $S$ be the finite set of nonzero eigenspaces from step 5. The sum map $\\bigoplus_{\\chi\\in S}V_\\chi\\to V$, $(v_\\chi)\\mapsto\\sum_\\chi v_\\chi$, has image the sum of all character eigenspaces and has zero kernel by step 4. Its injectivity and this image description are exactly that the sum is an internal direct sum. The empty sum is the zero subspace.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.25, printed pp.93–94: meaning of directness of the sum."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-general-linear-group",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-vector-space-dimension",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-sfb-coalgebra-group-like-independent",
+  "lem-sfb-linear-map-extension-prescribed-value",
+  "lem-weil-independent-family-card-le-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 4(g), Proposition 4.22, Proposition 4.23, Corollary 4.24 and Theorem 4.25, printed pp.92–94. Universal-point matrix evaluation realizes the coaction used in that proof; finite support is its finite-dimensional consequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Eigenspaces of distinct characters in a rational representation of an affine group scheme are linearly independent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AddChar.linearIndependent\", \"module\": \"Mathlib/Analysis/Fourier/FiniteAbelian/Orthogonality\", \"type\": \"∀ (G : Type u_1) (R : Type u_3) [inst : AddCommGroup G] [inst_1 : RCLike R] [Finite G], LinearIndependent R DFunLike.coe\", \"doc\": \"For a finite additive group $G$ and a ring $R$, the set of additive characters $\\\\chi : G \\\\to R$ (group homomorphisms from $G$ to the multiplicative group of $R$) is linearly independent over $R$. That\"}\n  {\"name\": \"Module.End.eigenvectors_linearIndependent'\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Basic\", \"type\": \"∀ {R : Type v} {M : Type w} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {ι : Type u_1}\\n  [IsDomain R] [Module.IsTorsionFree R M] (f : Module.End R M) (μ : ι → R),\\n  Function.Injective μ → ∀ (v : ι → M), (∀ (i : ι), f.HasEigenvector (μ i) (v i)) → LinearIndependent R v\", \"doc\": \"Let $ R $ be a domain and $ M $ a torsion-free $ R $-module. Let $ f $ be an endomorphism of $ M $, and let $ \\\\{v_i\\\\} $ be a family of eigenvectors of $ f $ with distinct eigenvalues $ \\\\{\\\\mu_i\\\\} $ in \"}\n  {\"name\": \"Module.End.eigenvectors_linearIndependent\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Basic\", \"type\": \"∀ {R : Type v} {M : Type w} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsDomain R]\\n  [Module.IsTorsionFree R M] (f : Module.End R M) (μs : Set R) (xs : ↑μs → M),\\n  (∀ (μ : ↑μs), f.HasEigenvector (↑μ) (xs μ)) → LinearIndependent (ι := ↑μs) R xs\", \"doc\": \"Let $ R $ be an integral domain and $ M $ a torsion-free $ R $-module. For an endomorphism $ f $ of $ M $, if each vector in a family is an eigenvector of $ f $ with a distinct eigenvalue, then the fa\"}\n  {\"name\": \"Module.End.independent_genEigenspace\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Basic\", \"type\": \"∀ {R : Type v} {M : Type w} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsDomain R]\\n  [Module.IsTorsionFree R M] (f : Module.End R M) (k : ℕ∞), iSupIndep fun x => (f.genEigenspace x) k\", \"doc\": \"For an endomorphism $ f $ of an $ R $-module $ M $, where $ R $ is a domain and $ M $ is torsion-free over $ R $, the generalized eigenspaces of $ f $ are independent. This means that for any scalar $\"}\n  {\"name\": \"Module.End.eigenspaces_iSupIndep\", \"module\": \"Mathlib/LinearAlgebra/Eigenspace/Basic\", \"type\": \"∀ {R : Type v} {M : Type w} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsDomain R]\\n  [Module.IsTorsionFree R M] (f : Module.End R M), iSupIndep f.eigenspace\", \"doc\": \"For an endomorphism $ f $ of an $ R $-module $ M $, where $ R $ is a domain and $ M $ is torsion-free, the family of eigenspaces of $ f $ forms an independent collection in the complete lattice of sub\"}\n  {\"name\": \"FixedPoints.linearIndependent_smul_of_linearIndependent\", \"module\": \"Mathlib/FieldTheory/Fixed\", \"type\": \"∀ (G : Type u) [inst : Group G] (F : Type v) [inst_1 : Field F] [inst_2 : MulSemiringAction G F] {s : Finset F},\\n  LinearIndepOn (↥(FixedPoints.subfield G F)) id ↑s → LinearIndepOn F ⇑(MulAction.toFun G F) ↑s\", \"doc\": \"If a finite set $ s $ is linearly independent over the subfield of elements fixed by the monoid $ G $, then $ s $ is also linearly independent over the field $ F $ with respect to the action of $ G $.\"}\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [IsAlgClosed k] [inst_3 : Fintype G]\\n  [inst_4 : Invertible ↑(Fintype.card G)] (V W : FDRep k G) [CategoryTheory.Simple V] [CategoryTheory.Simple W],\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n  {\"name\": \"Rep.instInjective\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [NeZero ↑(Fintype.card G)]\\n  (V : Rep k G), CategoryTheory.Injective V\", \"doc\": \"Every representation of a finite group over a field of characteristic zero is an injective object in the category of representations of the group over that field.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give independence for one operator, finite additive characters, or Lie-algebra weights; they do not state the character-eigenspace theorem for affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sum of character subrepresentations of a finite dimensional algebraic group module is a direct sum of finitely many weight spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FDRep.char_orthonormal\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [IsAlgClosed k] [inst_3 : Fintype G]\\n  [inst_4 : Invertible ↑(Fintype.card G)] (V W : FDRep k G) [CategoryTheory.Simple V] [CategoryTheory.Simple W],\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g * W.character g⁻¹ = if Nonempty (V ≅ W) then\", \"doc\": \"For two simple representations $V$ and $W$ of a finite group $G$ over a field $k$, the inner product of their characters is given by $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\chi_W(g^{-1})$, which equa\"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a commutative ring $ K $, the supremum (sum) of all generalized weight spaces associated to weight functions $ \\\\chi : L \\\\to K $ equals the entire module $ \"}\n  {\"name\": \"LieModule.iSup_genWeightSpace_eq_top'\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (K : Type u_1) (L : Type u_3) (M : Type u_4) [inst : LieRing L] [inst_1 : AddCommGroup M] [inst_2 : LieRingModule L M]\\n  [inst_3 : LieRing.IsNilpotent L] [inst_4 : Field K] [inst_5 : LieAlgebra K L] [inst_6 : Module K M]\\n  [inst_7 : LieModule K L M] [FiniteDimensional K M] [LieModule.IsTriangulari\", \"doc\": \"For a triangularizable Lie module $ M $ over a nilpotent Lie algebra $ \\\\mathfrak{g} $, the supremum (sum) of all generalized weight spaces $ \\\\text{Gen}_\\\\chi(M) $ associated to weights $ \\\\chi $ equals \"}\n  {\"name\": \"FDRep.simple_iff_char_is_norm_one\", \"module\": \"Mathlib/RepresentationTheory/FinGroupCharZero\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Fintype G] [inst_2 : Group G] [IsAlgClosed k] [CharZero k]\\n  (V : FDRep k G), CategoryTheory.Simple V ↔ ∑ g, V.character g * V.character g⁻¹ = ↑(Fintype.card G)\", \"doc\": \"For a finitely generated representation $V$ of a finite group $G$ over a field $k$ of characteristic zero, $V$ is simple if and only if $\\\\sum_{g \\\\in G} \\\\chi_V(g) \\\\cdot \\\\chi_V(g^{-1}) = \\\\#G$, where $\\\\c\"}\n  {\"name\": \"FDRep.average_char_eq_finrank_invariants\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [inst_2 : Fintype G]\\n  [inst_3 : Invertible ↑(Fintype.card G)] (V : FDRep k G),\\n  ⅟↑(Fintype.card G) • ∑ g, V.character g = ↑(Module.finrank k ↥(Representation.invariants V.ρ))\", \"doc\": \"For a finite group $ G $ and a finitely generated representation $ V $ of $ G $ over a commutative ring $ k $, the average of the character values of $ V $ over all elements of $ G $, computed as $ \\\\f\"}\n  {\"name\": \"FDRep.scalar_product_char_eq_finrank_equivariant\", \"module\": \"Mathlib/RepresentationTheory/Character\", \"type\": \"∀ {k : Type u} [inst : Field k] {G : Type u} [inst_1 : Group G] [inst_2 : Fintype G]\\n  [inst_3 : Invertible ↑(Fintype.card G)] (V W : FDRep k G),\\n  ⅟↑(Fintype.card G) • ∑ g, W.character g * V.character g⁻¹ = ↑(Module.finrank k (V ⟶ W))\", \"doc\": \"For finite-dimensional representations $V$ and $W$ of a finite group $G$ over a field $k$, the scalar product $\\\\frac{1}{|G|} \\\\sum_{g \\\\in G} \\\\chi_W(g) \\\\cdot \\\\chi_V(g^{-1})$ equals the finite rank (dime\"}\n  {\"name\": \"LieModule.finite_genWeightSpace_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"If $ M $ is a Noetherian $ R $-module over a nilpotent Lie algebra $ \\\\mathfrak{g} $, then the set of weight functions $ \\\\chi : \\\\mathfrak{g} \\\\to R $ for which the generalized weight space $ \\\\text{Gen}_\"}\n  {\"name\": \"LieModule.finite_genWeightSpaceOf_ne_bot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Basic\", \"type\": \"∀ (R : Type u_2) (L : Type u_3) (M : Type u_4) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [inst_7 : LieRing.IsNilpotent L] [IsDomain R] [Module.IsTorsionFree R M] [IsNo\", \"doc\": \"For a Noetherian module $ M $ over a commutative ring $ R $, and for any element $ x $ in a nilpotent Lie algebra $ \\\\mathfrak{g} $ over $ R $ acting on $ M $, the set of scalars $ \\\\chi \\\\in R $ for whi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give independence for one operator, finite additive characters, or Lie-algebra weights; they do not state the character-eigenspace theorem for affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eigenspace\", \"iSupIndep\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Module.End.eigenspaces_iSupIndep\", \"module\": \"Mathlib.LinearAlgebra.Eigenspace.Basic\", \"type\": \" {R : Type v} {M : Type w} [CommRing R] [AddCommGroup M] [Module R M] [IsDomain R] [Module.IsTorsionFree R M] (f : Module.End R M) : iSupIndep f.eigenspace\", \"doc\": \"The eigenspaces of a linear operator form an independent family of subspaces of `M`.  That is,\\nany eigenspace has trivial intersection with the span of all the other eigenspaces.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give independence for one operator, finite additive characters, or Lie-algebra weights; they do not state the character-eigenspace theorem for affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "character.*(independent|eigenspace)|eigenspace.*(character|independent)|weightSpace.*direct",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"line\": \"22\", \"text\": \"  eigenspaces of a compatible family of endomorphisms are independent.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Basic.lean\", \"line\": \"718\", \"text\": \"/-- The eigenspaces of a linear operator form an independent family of subspaces of `M`.  That is,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Basic.lean\", \"line\": \"729\", \"text\": \"  f.eigenspaces_iSupIndep.comp hμ |>.linearIndependent _\"}\n  {\"file\": \"Mathlib/LinearAlgebra/LinearIndependent/Defs.lean\", \"line\": \"556\", \"text\": \"/-- An alternative characterization of a maximal linearly independent family,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Vandermonde.lean\", \"line\": \"61\", \"text\": \"Characterize when `rectVandermonde v w n` has linearly independent rows.\"}\n  {\"file\": \"Mathlib/Algebra/Lie/Weights/Basic.lean\", \"line\": \"47\", \"text\": \"lie character, eigenvalue, eigenspace, weight, weight vector, root, root vector\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/ModularCharacter.lean\", \"line\": \"15\", \"text\": \"homomorphism, called the modular character, and shows that it is independent of the chosen Haar\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/Polynomial.lean\", \"line\": \"59\", \"text\": \"The proof concludes because characteristic polynomials are independent of the chosen basis.\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/Polynomial.lean\", \"line\": \"332\", \"text\": \"2. Use that the characteristic polynomial of a linear map is independent of the choice of basis.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give independence for one operator, finite additive characters, or Lie-algebra weights; they do not state the character-eigenspace theorem for affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Distinct character eigenspaces of a finite dimensional rational algebraic group representation are independent and only finitely many are nonzero",
+   "results": "8 hits: Module.End.disjoint_genEigenspace; Module.End.eigenvectors_linearIndependent; Module.End.independent_genEigenspace; Module.End.eigenvectors_linearIndependent'; AddChar.linearIndependent; iSupIndep.fintypeNeBotOfFiniteDimensional; Module.End.eigenspaces_iSupIndep; LieModule.disjoint_genWeightSpace.",
+   "date": "2026-10-23",
+   "verdict": "no match: single-operator eigenspaces and Lie-module weights do not give independence for distinct group-scheme characters. The finite-support result assumes independence rather than proving it."
+  },
+  {
+   "tool": "grep",
+   "query": "fintypeNeBotOfFiniteDimensional|linearIndepOn_isGroupLikeElem|character.*eigenspace",
+   "results": "Search ran successfully; 7 hits. Read the returned names/types: Mathlib/RingTheory/Coalgebra/GroupLike.lean, Mathlib/RingTheory/Coalgebra/GroupLike.lean, Mathlib/RingTheory/Coalgebra/GroupLike.lean, Mathlib/RingTheory/Bialgebra/MonoidAlgebra.lean, Mathlib/LinearAlgebra/Dimension/Finite.lean, Mathlib/LinearAlgebra/Dimension/Finite.lean, Mathlib/Algebra/Lie/Weights/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item. The group-like and finite-support hits are useful inputs; existing DAG nodes already give group-like independence and the dimension bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iSupIndep\", \"FiniteDimensional\"",
+   "results": "Search ran successfully; 1 hits. Read the returned names/types: iSupIndep.fintypeNeBotOfFiniteDimensional",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: iSupIndep.fintypeNeBotOfFiniteDimensional assumes independence. It does not prove independence of group-scheme character eigenspaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The character weight spaces of a finite dimensional affine group scheme representation form an independent family",
+   "results": "Search ran successfully; 8 hits. Read the returned names/types: LieModule.iSupIndep_genWeightSpace', LieModule.iSupIndep_genWeightSpaceOf, LieModule.iSupIndep_genWeightSpace, LieModule.disjoint_genWeightSpace, LieModule.weightSpace, LieModule.weightSpaceOfIsLieTower, LieModule.weightSpace.congr_simp, AffineIndependent",
+   "date": "2026-10-23",
+   "verdict": "No match: LieModule weight spaces require Lie-algebra hypotheses and do not cover group schemes, especially nonreduced ones."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Distinct character eigenspaces of a rational representation of an affine group scheme are independent",
+   "results": "Search ran successfully; 8 hits. Read the returned names/types: Module.End.independent_genEigenspace, Module.End.eigenspaces_iSupIndep, FDRep.char_orthonormal, AddChar.linearIndependent, Module.End.disjoint_iInf_maxGenEigenspace, Module.End.independent_maxGenEigenspace, sSupIndep_isotypicComponents, Module.End.independent_iInf_maxGenEigenspace_of_forall_mapsTo",
+   "date": "2026-10-23",
+   "verdict": "No match: single-operator eigenspaces, abstract finite-group characters and isotypic modules do not state this group-scheme assertion or specialize to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational algebraic group module has a direct sum of its character subspaces with finitely many nonzero summands in finite dimension",
+   "results": "Search ran successfully; 8 hits. Read the returned names/types: instTwoUniqueSumsOfModuleRat, FDRep.instFiniteDimensionalCarrierVFGModuleCat, FDRep.char_one, FDRep.scalar_product_char_eq_finrank_equivariant, FDRep.simple_iff_char_is_norm_one, AddChar.instFintype, FDRep.char_orthonormal, MonoidAlgebra.Submodule.instIsSemisimpleModule",
+   "date": "2026-10-23",
+   "verdict": "No match: single-operator eigenspaces, abstract finite-group characters and isotypic modules do not state this group-scheme assertion or specialize to it in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lie-kolchin-triangular-embedding",
+  "date": "2026-10-23",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Unipotent part and torus quotient of a smooth connected solvable group over a perfect field. Supporting input in the present split: Milne Theorem 16.33 proof, first sentence: triangularize over the algebraic closure, in present proof step 1. In the Lie–Kolchin proof: Theorem 4.25 supplies the finite independent family of character eigenspaces in Theorem 16.30.",
+   "via": [
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-character-eigenspaces-independent",
+  "worker": "stage1",
+  "summary": "Read Milne Chapter 4(g), pp.92–94; proved the finite-relation assertion by universal-point evaluation, group-like independence, and linear forms; proved finite support using the existing dimension-bound leaf and wrote out the internal-direct-sum map. Reused existing nodes throughout, with no new nodes. Clarified GL(0) and cited tensor products and finite-dimensionality explicitly. No project attachment was found.",
+  "blueprint": "This non-blueprint supporting item realizes Milne Theorem 4.25 in the Lie–Kolchin input of lem-sfb-lie-kolchin-triangular-embedding. The inherited chain serves the direct-image proof (3) of det-thm-sf-ctf-stability-direct-images (latest blueprint now sk-thm-sf-ctf-stability-direct-images.proof.md). The ancestor command returns None; inherited from.node=null and via are retained, and same_as=[] after whole-blueprint searches for character eigenspaces, eigenspace, group-like, coaction and character. The current direct-image paragraph (3) itself has no character-eigenspace assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-0adee7a76",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-0adee7a76 (reviewer sub-agent of L); spot-checked: PASS. I read the whole item, its 6 steps and every cited statement; the delivery adds no new nodes. Source: Milne iAG2017 Theorem 4.25 at printed pp.93-94 (PDF 105-106), read from the PDF text. The proof is the source's proof: apply the coaction, then a linear form, then independence of group-like elements. Here the coaction is realized by evaluating r at the universal point u=id_C in G(C). Statement changes against live are not weakenings: an explicit V=0 convention (GL(0) is the trivial group scheme, as citer lem-sfb-normal-subgroup-character-inversion already says) and citations for tensor product and finite-dimensional. Step checks: (1) the Hopf node holds for any affine G over a field; the GL_1 formulas m*(t)=t⊗t and ε(t)=1 make a_χ group-like; χ↦a_χ is injective by affine-spectrum duality. (2) χ_C(u)=a_χ, and taking A=C, g=u in the definition gives ρ(v)=a_χ⊗v. (3) id⊗f gives Σf(v_i)a_i=0; the group-like leaf linearIndepOn_isGroupLikeElem (GroupLike.lean:98-103, domain and torsion-free conditions hold over a field) gives f(v_i)=0. (4) exists_extend_of_notMem (VectorSpace.lean:294) with P=0 and value 1. (5) fintype_card_le_finrank (Finite.lean:161) gives finitely many nonzero V_χ. (6) The sum map is injective, so the sum is internal direct. Edge cases tested: V=0, empty relation, trivial G, nonreduced μ_p in char p (k-points alone would fail, the universal point does not), G_m acting by diag(t,t^{-1}). Duplicate search with rg -L over eigenspace, group-like and V_χ found nothing equivalent. No SGA, no repair note, no re-split rules apply, the item is still unsplit live and no tool_uses are needed (cross-unit inputs are definitions or Mathlib leaves). Advisory only: step 5 uses closure of V_χ under scalars, which step 6 states later; this is elementary and not circular."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CharacterEigenspaces",
+  "declaration": "AlgebraicGeometry.CharacterEigenspaces.independent_and_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CharacterEigenspaces.lean",
+  "statement": "theorem independent_and_finite [IsAlgClosed k] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [FiniteDimensional k V] (b : Module.Basis n k V) (r : G ⟶ GeneralLinearGroup n k) [IsMonHom r] : iSupIndep (eigenspace b r) ∧ Set.Finite {χ | eigenspace b r χ ≠ ⊥} ∧ Function.Injective (DirectSum.coeLinearMap (eigenspace b r))",
+  "branch": "newtargets-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.CharacterEigenspaces.action",
+   "AlgebraicGeometry.CharacterEigenspaces.IsStable",
+   "AlgebraicGeometry.CharacterEigenspaces.characterValue",
+   "AlgebraicGeometry.CharacterEigenspaces.eigenspace",
+   "AlgebraicGeometry.CharacterEigenspaces.independent_and_finite"
+  ],
+  "note": "The finite chosen basis identifies GL(V) with the existing upstream general linear group, including the empty basis. Helpers construct its actual tensor-extended action, the stated stability predicate, character values via GL_1, and eigenspaces as intersections of linear equalizers over all algebra-valued points. The theorem states independence, finite nonzero support and injectivity of the canonical direct-sum map. No assumption that the character spaces span V."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30526115a",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Read item node, 7 stmt_dep records, module, report, upstream GeneralLinearGroup/homMulEquiv. Hypotheses match records (Field+IsAlgClosed, GrpObj+IsAffine, LOFT+QC finite type, FiniteDimensional V, basis n:Type u incl. empty = trivial GL, r with IsMonHom). action = canonical homMulEquiv matrix action conjugated by b.baseChange A; characters = Grp homs to GL_(Index 1) as the node defines G_m=GL_1; V_χ = exact iInf of eqLocus over all A:Type u and all points (nonreduced G ok); conclusion iSupIndep ∧ Set.Finite nonzero ∧ coeLinearMap injective = independence, finiteness, internal direct sum (no spanning claim). Edge cases V=0, empty relation, zero algebra, μ_p, noncommutative/disconnected G. Other characterValue/Character helpers belong to other nodes and are not cited, no duplicate theorem. Docstrings with source+blueprint, proof steps in docstring, sorry only, statement verbatim, report sections present. No fixes; no compile (unchanged)."
+ }
+}

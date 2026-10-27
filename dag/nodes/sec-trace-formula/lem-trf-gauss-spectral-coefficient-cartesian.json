@@ -1,0 +1,346 @@
+{
+ "id": "lem-trf-gauss-spectral-coefficient-cartesian",
+ "kind": "statement",
+ "title": "Coefficient-field orthogonality in a Gauss spectral extension",
+ "statement": "Let $k$ be a field [def-weil-field], complete for a nontrivial real-valued multiplicative nonarchimedean absolute value, and stable [def-trf-stable-nonarchimedean-field]. Fix $n\\ge1$, put $R=k(X_1,\\ldots,X_n)=\\operatorname{Frac}(k[X_1,\\ldots,X_n])$ [def-weil-pbc-mv-polynomial-ring], and give $R$ the Gauss absolute value $|f/g|=\\max_\\nu|f_\\nu|/\\max_\\nu|g_\\nu|$. For every finite field extension $E/R$ let $s=s_{E/R}$ be the minimal-polynomial spectral norm [lem-trf-incomplete-spectral-algebra-norm]. Every finite-dimensional $k$-linear subspace $V\\subset E$ has a $k$-basis $v_1,\\ldots,v_d$ with $s(\\sum_i a_iv_i)=\\max_i|a_i|s(v_i)$ for all $a_i\\in k$. For $V=0$ the basis is empty and the maximum is $0$. The dimension here is over $k$, not over $R$; no assertion that $E$ has an orthogonal $R$-basis is included.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 5.3.3/2, printed pp.214–215 (scan PDF pp.220–221). Primary scan read online 2026-10-24; local archival copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-stable-nonarchimedean-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=k\\langle X\\rangle$, $Q=\\operatorname{Frac}(T)$, and $H=\\widehat R$. By [lem-trf-restricted-series-gauss-completion] polynomial truncations are Gauss-dense in $T$; by [lem-trf-tate-gauss-multiplicative] the Gauss norm is multiplicative. Consequently $Q$ embeds isometrically into $H$: approximate numerator and nonzero denominator by polynomials. An approximation $g_j\\to g\\ne0$ has $G(g_j)=G(g)$ eventually, and $|g_j^{-1}-g_l^{-1}|=G(g_j-g_l)/(G(g_j)G(g_l))\\to0$, so these fractions define the embedding. Apply [lem-trf-spectral-completion-scalar-envelope] with $F=R$ to form $E\\subset M\\subset\\mathcal C$. Write $\\sigma=\\sigma_{M/Q}$. Its statement gives $\\sigma|_E=s$ and $N(qz)=|q|_QN(z)$.",
+   "uses": [
+    "lem-trf-restricted-series-gauss-completion",
+    "lem-trf-tate-gauss-multiplicative",
+    "lem-trf-spectral-completion-scalar-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.3.3/2, p.215: diagram and comparison of spectral norms."
+   }
+  },
+  {
+   "text": "Choose an $R$-basis $e_1,\\ldots,e_m$ of $E$. For each $e_i$ choose its monic minimal relation $e_i^{r_i}+\\sum_j c_{ij}e_i^{r_i-j}=0$, and a nonzero polynomial $h_i\\in k[X]$ clearing all $c_{ij}$ denominators. Then $l_i=h_ie_i$ satisfies the monic relation with coefficients $h_i^jc_{ij}\\in k[X]$. Thus $l_i$ is integral over $T$. Put $A=T[l_1,\\ldots,l_m]\\subset M$. Reducing powers by these monic relations shows that the finitely many monomials $\\prod_i l_i^{b_i}$ with $0\\le b_i<r_i$ span $A$ over $T$. It is reduced since $M$ is, and torsion-free since nonzero elements of $T$ are units in $Q$. Its localization by $T\\setminus\\{0\\}$ equals $Q[l_1,\\ldots,l_m]=M$: the $l_i$ span $E$ over $R$, and products of elements of $E$ stay in $E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.3.3/2, p.215: choose integral generators and form the finite Tate model."
+   }
+  },
+  {
+   "text": "Use [lem-trf-tate-finite-algebra-norming-evaluations] for this $T\\hookrightarrow A$. Every $0\\ne a\\in A$ has a $k$-linear evaluation $\\chi_a:A\\to k_a$ contractive for $\\sigma$ and attaining $\\sigma(a)$. The restricted function $\\sigma|_A$ is a definite ultrametric $k$-vector norm: for each $a$ its evaluation attains its value, hence $\\sigma(a)=\\sup_\\chi s_{k_\\chi/k}(\\chi(a))$ over these contractive maps; the norm axioms follow from those of [lem-trf-incomplete-spectral-algebra-norm] in each target, and definiteness also follows from the strict positivity asserted by the evaluation lemma. Since $k$ is stable, [def-trf-stable-nonarchimedean-field] gives an orthogonal $k$-basis of each finite $k_a$. Therefore [lem-trf-norming-maps-cartesian-criterion] applies to $(A,\\sigma)$: every finite $k$-subspace of $A$ is orthogonally based.",
+   "uses": [
+    "lem-trf-tate-finite-algebra-norming-evaluations",
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "def-trf-stable-nonarchimedean-field",
+    "lem-trf-norming-maps-cartesian-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.3.3/2, p.215: application of Proposition 3.8.1/11, expanded using 3.8.1/7 and 3.8.1/10."
+   }
+  },
+  {
+   "text": "Let $V\\subset E$ have finite $k$-basis $v_1,\\ldots,v_d$. Each $v_i$ is an $R$-linear combination of the $l_j$, since $(l_j)$ is an $R$-basis of $E$. Clear the finitely many denominators of these coefficients to obtain $0\\ne t\\in k[X]$ with $tV\\subset A\\cap E$. By step 3, $tV$ has an orthogonal $k$-basis $b_1,\\ldots,b_d$ for $\\sigma$. Since these vectors and all their $k$-linear combinations lie in $E$, step 1 identifies this with orthogonality for $s$. By [lem-trf-incomplete-spectral-algebra-norm], $s(t^{-1}z)=|t|_R^{-1}s(z)$ for $z\\in E$. Thus $v'_i=t^{-1}b_i$ is a $k$-basis of $V$ and $$s(\\sum_i a_iv'_i)=|t|_R^{-1}\\max_i |a_i|s(b_i)=\\max_i|a_i|s(v'_i).$$ For $V=0$ choose the empty basis and use $s(0)=0$.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.3.3/2, p.215: restriction to L; explicit common-denominator argument for a prescribed finite k-subspace."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-restricted-series-gauss-completion",
+  "lem-trf-tate-gauss-multiplicative",
+  "lem-trf-spectral-completion-scalar-envelope",
+  "lem-trf-tate-finite-algebra-norming-evaluations",
+  "lem-trf-incomplete-spectral-algebra-norm",
+  "def-trf-stable-nonarchimedean-field",
+  "lem-trf-norming-maps-cartesian-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 5.3.3/2, pp.214-215, with 3.8.1/7 and the norming-map argument of 3.8.1/10, pp.171-174; finite-subspace denominator assembly supplied by O2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a complete stable nonarchimedean field k each finite dimensional k subspace of a finite spectral extension of k(X) has an exact orthogonal basis",
+   "results": {
+    "t": "2026-10-24T15:47:12Z",
+    "tool": "leanfinder",
+    "query": "For a complete stable nonarchimedean field k each finite dimensional k subspace of a finite spectral extension of k(X) has an exact orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.completeSpace",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "LinearMap.exists_basis_basis_of_span_eq_top_of_mem_algebraMap",
+     "Module.Basis.ofIsCoprimeDifferentIdeal",
+     "ClassGroup.fintypeOfAdmissibleOfFinite",
+     "Field.Emb.Cardinal.wellOrderedBasis",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "FiniteDimensional.exists_is_basis_integral"
+    ],
+    "digest": "0e8e107d7590b686"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm and completeSpace give norm axioms or completeness over a complete base; GramSchmidt requires an inner product. No coefficient-field cartesianness theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"Basis\"",
+   "results": {
+    "t": "2026-10-24T15:47:13Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"Basis\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm and completeSpace give norm axioms or completeness over a complete base; GramSchmidt requires an inner product. No coefficient-field cartesianness theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian|orthogonal.*spectral|stableField",
+   "results": {
+    "t": "2026-10-24T15:47:13Z",
+    "tool": "grep",
+    "query": "cartesian|orthogonal.*spectral|stableField",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/CartesianClosed.lean",
+     "Mathlib/Condensed/CartesianClosed.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Topology/ClopenBox.lean",
+     "Mathlib/Condensed/Light/CartesianClosed.lean",
+     "Mathlib/Condensed/Light/Monoidal.lean"
+    ],
+    "digest": "bcf216cb1712df21"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm and completeSpace give norm axioms or completeness over a complete base; GramSchmidt requires an inner product. No coefficient-field cartesianness theorem was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a complete stable nonarchimedean field k each finite dimensional k subspace of a finite spectral extension of k(X) has an exact nonarchimedean orthogonal basis",
+   "results": {
+    "t": "2026-10-24T15:47:13Z",
+    "tool": "leansearch",
+    "query": "For a complete stable nonarchimedean field k each finite dimensional k subspace of a finite spectral extension of k(X) has an exact nonarchimedean orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralAlgNorm",
+     "InnerProductSpace.gramSchmidtBasis",
+     "Submodule.HasOrthogonalProjection.ofCompleteSpace",
+     "InnerProductSpace.gramSchmidtOrthonormalBasis",
+     "spectralNorm_eq_invariantExtension",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm.completeSpace",
+     "isNonarchimedean_spectralNorm"
+    ],
+    "digest": "84546edef89492fd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm and completeSpace give norm axioms or completeness over a complete base; GramSchmidt requires an inner product. No coefficient-field cartesianness theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian normed vector spaces over the coefficient field underlying finite extensions of multivariate Gauss function fields",
+   "results": {
+    "t": "2026-10-24T15:52:04Z",
+    "tool": "leanfinder",
+    "query": "Cartesian normed vector spaces over the coefficient field underlying finite extensions of multivariate Gauss function fields",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.normedSpace",
+     "spectralNorm.completeSpace",
+     "spectralNorm.normedAddCommGroup",
+     "spectralNorm.normedField",
+     "NumberField.mixedEmbedding.euclidean.instRingMixedSpace",
+     "spectralNorm.seminormedAddCommGroup",
+     "spectralNorm.nontriviallyNormedField",
+     "spectralNorm.metricSpace"
+    ],
+    "digest": "a2e670ecce7eb801"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: spectralAlgNorm and completeSpace give norm axioms or completeness over a complete base; GramSchmidt requires an inner product. No coefficient-field cartesianness theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional coefficient field subspace in a finite spectral extension of a Gauss rational function field has an orthogonal basis",
+   "results": {
+    "t": "2026-10-24T16:28:21Z",
+    "tool": "leanfinder",
+    "query": "Every finite dimensional coefficient field subspace in a finite spectral extension of a Gauss rational function field has an orthogonal basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Basis.ofIsCoprimeDifferentIdeal",
+     "ClassGroup.fintypeOfAdmissibleOfFinite",
+     "IsGalois.normalBasis",
+     "FiniteDimensional.exists_is_basis_integral",
+     "AdjoinRoot.powerBasisAux",
+     "exists_linearIndependent_algEquiv_apply",
+     "isLiouville_of_finiteDimensional",
+     "Field.Emb.Cardinal.instFiniteDimensionalSubtypeMemIntermediateFieldAdjoinImageToTypeOrdRankCompCoeBasisWellOrderedBasisLeastExtIioSingletonSet"
+    ],
+    "digest": "4c404fd4b2311b0d"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: algebraic bases and spectral norm structures do not assert exact orthogonality over the coefficient field in a finite Gauss extension."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesian.*norm|orthogonal.*spectral|stableField",
+   "results": {
+    "t": "2026-10-24T16:28:56Z",
+    "tool": "grep",
+    "query": "cartesian.*norm|orthogonal.*spectral|stableField",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: algebraic bases and spectral norm structures do not assert exact orthogonality over the coefficient field in a finite Gauss extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional subspaces of algebraic extensions of Gauss norm rational function fields over stable complete nonarchimedean fields are cartesian",
+   "results": {
+    "t": "2026-10-24T16:28:56Z",
+    "tool": "leansearch",
+    "query": "Finite dimensional subspaces of algebraic extensions of Gauss norm rational function fields over stable complete nonarchimedean fields are cartesian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NumberField.instFiniteDimensional",
+     "Subalgebra.finiteDimensional_toSubmodule",
+     "FiniteDimensional.finiteDimensional_subalgebra",
+     "IntermediateField.finiteDimensional_right",
+     "FiniteDimensional.of_subalgebra_toSubmodule",
+     "Submodule.complete_of_finiteDimensional",
+     "exists_nonarchimedean_pow_mul_seminorm_of_finiteDimensional",
+     "spectralAlgNorm_of_finiteDimensional_normal"
+    ],
+    "digest": "e07e0c3a6ccd81e1"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: algebraic bases and spectral norm structures do not assert exact orthogonality over the coefficient field in a finite Gauss extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"Basis\"",
+   "results": {
+    "t": "2026-10-24T16:28:57Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"Basis\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: algebraic bases and spectral norm structures do not assert exact orthogonality over the coefficient field in a finite Gauss extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-gauss-rational-function-stability",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Proposition 5.3.3/2, printed pp.214–215 (scan PDF pp.220–221).",
+   "via": [
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-gauss-spectral-coefficient-cartesian",
+  "worker": "stage1",
+  "summary": "O2 read the BGR primary scan at pp.214-215 and 171-175. The coefficient-field statement is retained. Construct a finite reduced Tate model inside the spectral completion, use norm-attaining evaluations and stability of k, then clear polynomial denominators for the prescribed finite k-subspace. Three statement-only support nodes; no Mathlib leaf or Lean attachment. No circular use of Gauss-field stability.",
+  "blueprint": "Historical analytic support below lem-trf-local-term-locality through lem-trf-gauss-rational-function-stability, its Step 3 invoking BGR Proposition 5.3.3/2. The latest blueprint proof of lem-trf-local-term-locality instead uses contracting correspondences; this descendant split changes neither that unit nor its chapter. Whole-blueprint searches for cartesian, orthogonal basis, spectral norm, maximum modulus, norming and spectral completion found no matching blueprint statement. Steps 1-2 realize the BGR completion diagram and finite Tate model; steps 3-4 expand its cartesianness and restriction argument."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-8aa09915b",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-8aa09915b (reviewer sub-agent of L); spot-checked: I read the item, all 3 new nodes and every cited statement, and checked the maths myself. BGR is not in literature/ (the worker recorded WANTED and the proof is marked by:agent), so I could not open BGR 5.3.3/2, 3.8.1/7 or 3.8.1/10. (1) scalar-envelope is true. C=H·E is finite and closed over H. N is power-multiplicative and definite, so M is reduced. N<=sigma follows from the monic relation. sigma_{M/Q}(e)=s(e) because the minimal polynomial over Q divides the one over R, and the spectral value is the largest root absolute value. It differs from weak-spectral-completion-product and power-multiplicative-algebra-norm-unique. (2) Tate norming-evaluations is true. A splits into minimal-prime components, sigma equals the sup over Max A (fibre-polynomial and supremum-calculus nodes exist for this), the maximum modulus principle gives attainment, and positivity follows from reducedness. n=0 checked. It is not a duplicate of supremum-calculus, minimal-component or fibre-polynomial. (3) The norming criterion holds over any valued field. A coordinate functional of the orthogonal basis of W_u, pulled back along f_u, splits off ku orthogonally, and induction on dim V finishes. The test norm |a+b xi| with xi in k-hat minus k is not cartesian and admits no norming maps, which is consistent. It differs from cartesian-subspace and cartesian-subspace-scalar-tower. Item steps 1-4 are correct: the isometric embedding of Q in R-hat; h_i^j c_ij in k[X], so A is finite, reduced and torsion-free with (T\\0)^{-1}A=M; sigma|_A as a sup of contractive attaining seminorms, plus stability of k, then the criterion; and the denominator t in k[X] with tV inside A∩E and s(t^{-1}z)=|t|^{-1}s(z). No cycle (BFS). All citations are within unit sk-i-curve-zero, so no tool_uses. The item statement is unchanged, and the new nodes carry blueprint from/via, same_as=[] and 4 search kinds. No fixes."
+ }
+}

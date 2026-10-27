@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-tame-inertia-derived-tensor-computation",
+ "kind": "statement",
+ "title": "Derived scalar tensor computes the finite continuous Koszul model",
+ "statement": "Let E and Omega be normed fields in one universe, with a continuous E-algebra inclusion h. Let p,ell,r be natural numbers. Take the exact scalar restriction, action abelianness and ordinary derived invariant contexts of [lem-sfb-tame-inertia-continuous-koszul], and a normalized all-continuous E-coefficient realization dE for its admissible representations M. There exists a unit-normalized universal total left derived scalar tensor s [def-sfb-tame-inertia-scalar-mate-data] such that its comparison at the homotopy image of dE.koszul(M) is invertible for every M. This asserts existence and computation of derived scalar tensor; it asserts neither invertibility of a coefficient adjunct nor any comparison with derived Omega-invariants.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted finite-coordinate scalar argument; steps 1-3 of lem-sfb-tame-inertia-scalar-mate-isomorphism. Agent-written calculation; Stacks 06YQ and 07A6 supply the generic derived facts."
+ },
+ "stmt_deps": [
+  "def-sfb-tame-inertia-scalar-mate-data",
+  "lem-sfb-tame-inertia-continuous-koszul"
+ ],
+ "proof": [
+  {
+   "text": "Choose a basis of the finite-dimensional fixed subspace N. Continuous sections of the scalar-extended space identify with the finite product of coefficient rings. Subset coordinates identify every Koszul term with a finite free module, including zero rank.",
+   "uses": [
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport internal modules to sectionwise module sheaves. Finite free modules are flat, since tensoring with them is a finite direct sum. The complex vanishes outside [0,r], so apply the bounded-above flat K-flat theorem.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the existing universal derived change-of-rings pair and its normalized adjunction back to internal modules. Adjoint uniqueness identifies ordinary tensor and its actual unit. The canonical comparison is invertible on the K-flat Koszul representatives. The normalized unit identity on all homotopy objects is the derived adjunction fraction formula with identity denominators.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-tame-inertia-continuous-koszul"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), extracted finite-coordinate scalar argument; steps 1-3 of lem-sfb-tame-inertia-scalar-mate-isomorphism. Agent-written calculation; Stacks 06YQ and 07A6 supply the generic derived facts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars on a bounded finite free complex computes derived tensor with the usual adjunction unit",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-26",
+   "verdict": "No direct match for the normalized internal continuous-coefficient computation; related ordinary module results only."
+  },
+  {
+   "tool": "grep",
+   "query": "(derivedExtendMapDerivedCategoryAdjunction|ringedSiteFreeMatrixScalarExtension|mapHomotopyCategory_unit_app_quotient)",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No direct match for the normalized internal continuous-coefficient computation; related ordinary module results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars on finite free internal sheaf modules is a finite direct sum and computes derived tensor on bounded complexes",
+   "results": "8 hits: ModuleCat.ExtendScalars.obj', ModuleCat.extendScalars, TensorProduct.directSumLeft, TensorProduct.finsuppLeft, Algebra.TensorProduct.basisAux, TensorProduct.directSumRight'_restrict, Algebra.TensorProduct.instFree, instFinitePresentationTensorProduct",
+   "date": "2026-10-26",
+   "verdict": "No direct match for the normalized internal continuous-coefficient computation; related ordinary module results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TameInertiaScalarMate",
+  "date": "2026-10-26",
+  "group": "C6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), extracted finite-coordinate scalar argument; steps 1-3 of lem-sfb-tame-inertia-scalar-mate-isomorphism. Agent-written calculation; Stacks 06YQ and 07A6 supply the generic derived facts.",
+   "via": [
+    "lem-sfb-tame-inertia-scalar-mate-isomorphism",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TameInertiaDerivedTensorComputation",
+  "file": "lean/Sheaf/Paper/TameInertiaDerivedTensorComputation.lean",
+  "declaration": "Profinite.TameInertiaScalarMate.derived_tensor_computation",
+  "statement": "theorem derived_tensor_computation : ∃ s : DerivedTensor E Ω h, ∀ M : Inputs E p ℓ r, IsIso (s.comparison.app ((HomotopyCategory.quotient _ (.up ℤ)).obj (dE.koszul.obj M)))",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-26",
+  "declarations": [
+   "Profinite.TameInertiaScalarMate.derived_tensor_computation"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8ffc8",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261026T081251-L-1904281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8ffc8",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261026T081251-L-1904281",
+  "kind": "interface",
+  "note": "independent cc review: item Lean (Computes/theorem signatures byte-identical, moved defs verbatim to publicly re-exported Data module, zero importers) and two new sorry statements against their nodes, the Realization/CoefficientMaps pinning and sheafRingDerivedCoefficientAdjunction; item node changes only proof/proof_deps/proof_origin/lean"
+ }
+}

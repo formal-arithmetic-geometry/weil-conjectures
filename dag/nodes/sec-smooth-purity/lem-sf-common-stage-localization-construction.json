@@ -1,0 +1,133 @@
+{
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "W4",
+  "item": "Sheaf.Paper.SfLocalizationAllStages",
+  "date": "2026-10-25"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization triangle for complementary closed and open immersions on constructible derived categories",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; CategoryTheory.Functor.isHomological_of_localization; DerivedCategory.TStructure.t; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Localization.isTriangulated; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.triangleOfSESIso",
+   "date": "2026-10-25",
+   "verdict": "No matching all-stage construction; the results concern generic localization or adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Construct integral supported localization with finite quotient comparisons and transport through scalar localization and common coefficient stages",
+   "results": "IsLocalization.exists_isIntegral_smul_of_isIntegral_map; instIsScalarTowerAtPrimeFractionRing; isIntegral_localization'; IsLocalization.instIsScalarTowerAtPrimeFractionRing; IsLocalization.Away.isIntegral_of_isIntegral_map; IsLocalization.Away.integralClosure; isIntegral_localization; instIsLocalizedModuleQuotientSubmoduleLocalizedModuleLocalizationLocalizedToLocalizedQuotient",
+   "date": "2026-10-25",
+   "verdict": "No matching all-stage construction; the results concern generic localization or adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "Sf.*Localization|supported.*recollement",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Unramified.lean; Mathlib/NumberTheory/RamificationInertia/Unramified.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/FunctionField.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "date": "2026-10-25",
+   "verdict": "No matching all-stage construction; the results concern generic localization or adjunctions."
+  }
+ ],
+ "id": "lem-sf-common-stage-localization-construction",
+ "title": "Descend rational supported localizations to common-stage coefficients",
+ "statement": "Fix a field $k$, a prime $\\ell$ and a proof $h_\\ell$ that $\\ell$ is invertible in $k$. Let $t:X\\to\\operatorname{Spec}k$ be separated and of finite type, and let $i:Z\\hookrightarrow X$ be a closed immersion with complementary open immersion $j:U\\hookrightarrow X$. Use the records of [def-sf-localization-stage-data]. Let $\\Omega$ be an algebraic closure of $\\mathbf Q_\\ell$. Suppose for every finite coefficient field $L$ in its common-stage index category the rational localization record at $L$ is nonempty. Then the algebraically closed localization record $\\mathrm{SfAlgebraicallyClosedLocalization}(\\ell,\\Omega,k,h_\\ell,t,i,j)$ is nonempty.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Algebraically closed coefficient passage in (2) and (3)."
+ },
+ "stmt_deps": [
+  "def-sf-localization-stage-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose one supplied rational record at each finite field. Apply lem-sf-supported-localization-finite-coherence to obtain FiniteData D, Hypotheses D, geometric normalization and literal equalities with those supplied records. These choices occur only in this proof of nonemptiness, not in any definition.",
+   "uses": [
+    "lem-sf-supported-localization-finite-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exceptionalCommonStageDescent to D. Its Descent supplies the five functors, three adjunctions, natural boundary, distinguishedness and cross-object shifted closed-to-open orthogonality. The canonical pullback representative specification uniquely identifies the two descended pullbacks with commonStageDerivedPullback: compare objects and every mkHom representative.",
+   "uses": [
+    "lem-sf-exceptional-common-stage-descent",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use triangle_morphism_extension with identity middle component and shift-one orthogonality to obtain uniqueness of the descended boundary. The finite closed counits are invertible by Hypotheses; their inclusion images equal the descended closed counit, so the latter is invertible. Thus descended closed pushforward is fully faithful, and its exceptional adjunction unit is invertible. For G on U set H=exceptional(openPush G). Shift-zero orthogonality and the exceptional adjunction make End(H) a subsingleton, so identity equals zero and H is zero.",
+   "uses": [
+    "lem-weil-pbc-triangle-morphism-extension",
+    "lem-sf-exceptional-common-stage-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the four ιCompFunctorIso comparisons. Their components are identities. After transport through the finite functor and adjunction equalities, the scalar exceptional counit, open unit and exceptional unit equations reduce by map_id to the respective three Descent normalization equations. Assemble SfAlgebraicallyClosedLocalization with the original finite records and these comparisons.",
+   "uses": [
+    "lem-sf-exceptional-common-stage-descent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-supported-localization-finite-coherence",
+  "lem-sf-exceptional-common-stage-descent",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-triangle-morphism-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V4",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite coefficient input (step 12), followed by common-stage descent and consequences (step 13).",
+  "note": "Finite coherence separated from the complete Lean common-stage assembly; one hole closed and one strictly finite-stage hole added."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Algebraically closed coefficient passage in (2) and (3).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfCommonStageLocalizationConstruction",
+  "file": "lean/Sheaf/Paper/SfCommonStageLocalizationConstruction.lean",
+  "declaration": "WeilConjectures.sfCommonStageLocalizationConstruction",
+  "declarations": [
+   "WeilConjectures.sfCommonStageLocalizationConstruction"
+  ],
+  "statement": "theorem sfCommonStageLocalizationConstruction (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : k)) (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X : Scheme.{u}) (t : X ⟶ Spec (.of k)) [IsSeparated t] [LocallyOfFiniteType t] [QuasiCompact t] {Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hij : Set.range j = (Set.range i)ᶜ) (stages : ∀ L : AlgebraicallyClosedCoefficients.Index l Ω, Nonempty (SfRationalLocalization l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) k hl t i j)) : Nonempty (SfAlgebraicallyClosedLocalization l Ω k hl t i j)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b23e8",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261025T101804-L-3736516",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T164554-L-1036225",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

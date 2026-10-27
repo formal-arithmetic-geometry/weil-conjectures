@@ -1,0 +1,123 @@
+{
+ "id": "lem-pod-isomorphism-field-transport-rational-scalar",
+ "kind": "statement",
+ "title": "Localization of the normalized inverse scalar square",
+ "statement": "Let l,E,L,g,hX,hY be as in [def-pod-isomorphism-field-transport-clauses], let iota:E→L be a Q_l-algebra homomorphism, and let SE and SL be normalized single-field transport packages at E and L. Assume isomorphismFieldTransportScalarLaw(l,E,L,iota,g), the integral inverse/scalar equation. Then isomorphismFieldTransportRationalScalarLaw(l,E,L,iota,g,hX,hY,SE,SL) holds on every raw rational object. This only localizes the one given equation and does not construct transport packages or descend a family to Ω.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+ },
+ "stmt_deps": [
+  "def-pod-isomorphism-field-transport-clauses"
+ ],
+ "proof": [
+  {
+   "text": "Write each rational object as the localization of its underlying integral object. The stage formulas identify its rational epsilon with localization of integral epsilon. The specified rational scalar comparison identifies alpha with localization of the integral scalar comparison.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  },
+  {
+   "text": "Apply the integral-to-rational functor to the assumed scalar equation. The pure-tensor pullback formula at coefficient one, and the semilinear scalar-extension formula at coefficient one, identify each resulting factor with the stated rational factors. Use functorial preservation of composition. The object equalities provide the HEq endpoint transports; the result is the displayed equality on each rational object. Naturality is that of the existing rational transformations, so it covers all localized arrows.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+    "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse comparison of a linear equivalence of categories remains a natural isomorphism after scalar localization, compatible with extension of scalars",
+   "results": "LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply; LinearEquiv.extendScalarsOfIsLocalization_symm_apply; CategoryTheory.Localization.liftNatIso_inv. These are generic algebra/localization tools, not the prescribed completed constructible functors or their normalized inverse comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match; use the project normalization and scalar-localization declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral scalar compatibility equation for inverse pullback counits remains true after raw scalar localization of constructible sheaves",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv. These do not state the raw rational equation for the prescribed completed comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg commonStage|rationalDerivedPullback|pullbackIdentityEpsilon|coefficientPairFunctor|inverseImageIntegralModules Mathlib/CategoryTheory Mathlib/AlgebraicGeometry; rg the same names in lean/Sheaf and lean/WeilConjectures",
+   "results": "No Mathlib occurrences. Project IsomorphismPullbackRawStage supplies normalized integral/rational exactness but no inverse-comparison package; PullbackIdentitiesScalarExtension gives the integral scalar square; StageSystemFunctorDescent gives functor descent but no specialized inverse and exactness package.",
+   "date": "2026-10-26",
+   "verdict": "no exact existing declaration; retain these generic tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismFieldTransport",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "First paragraph, inverse automorphism squares and “Since g* is an equivalence”; expanded steps of lem-pod-isomorphism-field-transport.",
+   "via": [
+    "lem-pod-isomorphism-field-transport",
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismFieldTransportRationalScalar",
+  "file": "lean/Sheaf/Paper/IsomorphismFieldTransportRationalScalar.lean",
+  "declaration": "WeilConjectures.isomorphismFieldTransportRationalScalar",
+  "statement": "theorem isomorphismFieldTransportRationalScalar (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (SE : IsomorphismFieldTransportStage l E g hX hY) (SL : IsomorphismFieldTransportStage l L g hX hY) (h : isomorphismFieldTransportScalarLaw l E L ι g) : isomorphismFieldTransportRationalScalarLaw l E L ι g hX hY SE SL",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6eabd",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T065118-L-2694757",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6eabd",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261026T065118-L-2694757",
+  "kind": "interface",
+  "note": "independent cc review: Delivered Clauses decls vs clone originals (identical), item statement vs clone (identical), CommonStage sorry vs original item claim (equivalent since stage data pinned), 12 direct importers compiled against sandbox build of delivered modules (all OK), #print axioms (sorryAx only from upstream sorried decls)"
+ }
+}

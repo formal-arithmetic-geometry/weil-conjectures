@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-open-semilinear-ordinary-comparison",
+ "kind": "statement",
+ "title": "Ordinary generator-normalized open scalar comparison",
+ "statement": "Let l be prime, E a finite extension of Q_l and j:U→X an open immersion. Use the actual completed coefficient sheaves, their quotient sequence sites and the interfaces of [def-sf-open-semilinear-tensor-model-data]. Given the section-normalized open systems of [lem-coef-semilinear-derived-sections], there exist concrete coefficient transports o, ordinary simultaneous quotient reductions AX and AU, the finite scalar tensor comparisons tc, and an ordinary tensor projection family μ. The open-system operations equal the supplied ones. The family μ is natural in both module arguments and sends every extension-sheafification generator [x] tensor y to [x tensor y], using the actual slice equivalence counit. There is one natural isomorphism extension⋙AX ≅ AU⋙systemExtension of ordinary strict coefficient systems. At every level its component, after the recorded extension evaluation and AU evaluation, equals AX evaluation followed by tc.ordinary. All comparisons are before localization; no completeness, flatness or quasi-compactness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK and 0E8I; strict generator normalization of the open projection formula."
+ },
+ "stmt_deps": [
+  "def-sf-open-semilinear-tensor-model-data",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Construct the coefficient operations with the supplied localization, retaining invertibility of the completed coefficient map.",
+   "uses": [
+    "lem-sf-open-coefficient-operations-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Retain pullback, additivity, tensor evaluations and quotient compatibility from the existing ordinary sequence adjoints on X and U.",
+   "uses": [
+    "lem-pur-sequence-ordinary-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the natural ordinary tensor projection family and its original-summand normalization from the completed coefficient tensor transport.",
+   "uses": [
+    "lem-sf-open-ordinary-tensor-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the supplied section-normalization hypothesis through the equality of openSystems and apply strict scalar transport to the two ordinary reductions.",
+   "uses": [
+    "lem-sf-open-strict-scalar-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define tc.ordinary by evaluating the single strict isomorphism and conjugating by the recorded evaluations. The scalar transport normalization supplies tc.generators. The requested component identity follows by cancellation of AX.evaluation with its inverse; no additional finite comparison is chosen.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-coefficient-operations-existence",
+  "lem-pur-sequence-ordinary-factorization",
+  "lem-sf-open-ordinary-tensor-transport",
+  "lem-sf-open-strict-scalar-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK and 0E8I; strict generator normalization of the open projection formula. V4: supplied reductions from the ordinary sequence factorization; finite comparisons defined by evaluation of the strict isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived coefficient reduction as a natural strict semilinear system with K flat models",
+   "results": "8 hits: IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.StrictMono.extend, IsAdicComplete.StrictMono.extend_eq, IsAdicComplete.StrictMono.of_lift, IsAdicComplete.StrictMono.of_comp_lift, Module.Baer.ExtensionOfMaxAdjoin.extensionToFun, Module.Baer.ExtensionOfMaxAdjoin.extensionToFun_wd, Module.Baer.ExtensionOfMaxAdjoin.snd",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringedSlice|semilinear.*[Ss]calar",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between derived reduction of a flat K-flat complex and simultaneous ordinary quotient tensor, normalized by the strict scalar-unit augmentation",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.tfae_equational_criterion, Module.Flat.lTensor_exact, Module.FaithfullyFlat.range_le_ker_of_exact_rTensor, Module.Flat.iff_rTensor_exact', Module.FaithfullyFlat.rTensor_exact_iff_exact",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenSemilinearTensorModel",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; integral open factor, returned lem-sf-integral-open-reduction-comparison arguments 5-6",
+   "via": [
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenSemilinearOrdinaryComparison",
+  "file": "lean/Sheaf/SixFunctors/OpenSemilinearOrdinaryComparison.lean",
+  "declaration": "WeilConjectures.OpenSemilinearTensor.openSemilinearOrdinaryComparison",
+  "statement": "theorem openSemilinearOrdinaryComparison\n    (sections : SemilinearDerivedSectionsData.{t + 1, t, max u (t + 1)}\n      (ProEt.topology X) (IntegralOpenReduction.rings l E X)\n      (IntegralOpenReduction.transitions l E X))\n    (hsections : ∀ (n : ℕ) N V x,\n      HEq ((((sections.localization (IntegralOpenReduction.openObject j)).restrictionEvaluation\n        n).hom.app N).val.app V x) x) :\n    ∃ (o : Operations l E j) (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)\n      (tc : IntegralOpenReduction.TensorComparison l E j o)\n      (μ : OrdinaryTensorComparison l E j o)\n      (ordinary : IntegralOpenReduction.extension l E j o ⋙ AX.functor ≅\n        AU.functor ⋙ IntegralOpenReduction.systemExtension l E j o),\n      o.openSystems = sections.localization (IntegralOpenReduction.openObject j) ∧\n      OrdinaryNaturality l E j o μ ∧ OrdinaryGenerators l E j o μ ∧\n      (∀ (M : scalarReductionSource l E U) (n : ℕ),\n        (coefficientSequenceEvaluation l E X n).map (ordinary.hom.app M) ≫\n            (IntegralOpenReduction.extensionEvaluation l E j o n).hom.app (AU.functor.obj M) ≫\n            (IntegralOpenReduction.finiteExtension l E j o n).map\n              ((AU.evaluation n).hom.app M) =\n          (AX.evaluation n).hom.app ((IntegralOpenReduction.extension l E j o).obj M) ≫\n            (tc.ordinary n).hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-421b5",
+  "group": "A7",
+  "result": "fix",
+  "landing": "20261025T043154-L-1688691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T222804-L-696166",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

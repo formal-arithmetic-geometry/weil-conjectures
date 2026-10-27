@@ -1,0 +1,111 @@
+{
+ "id": "def-sfb-complete-intersection-fibres",
+ "kind": "definition",
+ "title": "Complete-intersection local rings of all scheme-theoretic fibres",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. For $s\\in S$ let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be its scheme-theoretic fibre [def-pc-scheme-fibre] [def-weil-residue-field]. At a point $y\\in X_s$, the fibre complete-intersection condition means that $\\mathcal O_{X_s,y}$ is a complete-intersection local $\\kappa(s)$-algebra [def-trf-complete-intersection-local-algebra], with scalar action induced by $X_s\\to\\operatorname{Spec}\\kappa(s)$ and the germ map. The morphism $f$ has complete-intersection fibres if this condition holds for every $s\\in S$ and every $y\\in X_s$. No flatness or local finite type hypothesis is part of this definition. Empty fibres impose no condition, and the empty source is allowed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-trf-complete-intersection-local-algebra"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02V3 (lemma-set-points-where-fibres-lci), fibre local-ring condition; Tag 01UE (lemma-syntomic-locally-standard-syntomic); local-algebra meaning from algebra.tex Tag 00SD (definition-lci-local-ring)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every local ring of every scheme theoretic fibre is a complete intersection local algebra over its residue base field",
+   "results": "{\"t\": \"2026-10-24T12:06:50Z\", \"tool\": \"leansearch\", \"query\": \"Every local ring of every scheme theoretic fibre is a complete intersection local algebra over its residue base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.instCommRingResidueField\", \"IsLocalRing.ResidueField\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.residueField\", \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"AlgebraicGeometry.Scheme.Hom.fiber\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalRing\"], \"digest\": \"cdef70b73d0c0ea5\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib definition of complete-intersection fibres. Local project grep finds exactly these two definitions in SyntomicLocusBaseChange, recorded only under its theorem node; move them rather than create a second definition. No upstream match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme morphism has complete intersection fibres at every fibre point over the residue field",
+   "results": "{\"t\": \"2026-10-24T12:06:51Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme morphism has complete intersection fibres at every fibre point over the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsPreimmersionFiberι\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField\", \"AlgebraicGeometry.Scheme.instIsOverMapResidueFieldMapOverInferInstanceOverClass\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\"], \"digest\": \"89730be8019728f4\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib definition of complete-intersection fibres. Local project grep finds exactly these two definitions in SyntomicLocusBaseChange, recorded only under its theorem node; move them rather than create a second definition. No upstream match."
+  },
+  {
+   "tool": "grep",
+   "query": "HasCompleteIntersectionFibres|IsCompleteIntersectionAtFiberPoint|CompleteIntersection",
+   "results": "{\"t\": \"2026-10-24T12:06:50Z\", \"tool\": \"grep\", \"query\": \"HasCompleteIntersectionFibres|IsCompleteIntersectionAtFiberPoint|CompleteIntersection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib definition of complete-intersection fibres. Local project grep finds exactly these two definitions in SyntomicLocusBaseChange, recorded only under its theorem node; move them rather than create a second definition. No upstream match."
+  },
+  {
+   "tool": "grep project and DAG",
+   "query": "rg -n HasCompleteIntersectionFibres|IsCompleteIntersectionAtFiberPoint lean/WeilConjectures lean/Sheaf dag/nodes; blueprint_refs.py search \"complete intersection fibres\"",
+   "results": "Only the two definitions in SyntomicLocusBaseChange.lean and its theorem-node lean.declarations; no definition node owns them. No WeilConjectures match. Blueprint search: 0 matches. The existing fibres-limit-descent theorem is a theorem about families, not this definition.",
+   "date": "2026-10-24",
+   "verdict": "Extract the existing definitions under the maintainer H2 instruction; do not duplicate their bodies in consumers."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-syntomic-etale-source-locality",
+  "date": "2026-10-24",
+  "group": "Q51"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The complete-intersection fibre condition in syntomic source locality, supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images. The ancestor tool returns None for this inherited non-blueprint chain.",
+   "via": [
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompleteIntersectionFibres",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.HasCompleteIntersectionFibres",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.IsCompleteIntersectionAtFiberPoint",
+   "AlgebraicGeometry.Scheme.Hom.HasCompleteIntersectionFibres"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompleteIntersectionFibres.lean",
+  "statement": "def Scheme.Hom.HasCompleteIntersectionFibres {X S : Scheme.{u}} (f : X ⟶ S) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Extracted verbatim from SyntomicLocusBaseChange.lean at the maintainer H2 return request; only the owning blueprint docstring tags change. The old module publicly imports this module and no longer declares these predicates."
+ }
+}

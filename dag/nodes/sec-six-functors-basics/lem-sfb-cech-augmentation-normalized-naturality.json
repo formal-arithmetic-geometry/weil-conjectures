@@ -1,0 +1,360 @@
+{
+ "id": "lem-sfb-cech-augmentation-normalized-naturality",
+ "kind": "statement",
+ "title": "Counit normalization and resolution/refinement naturality of the Cech augmentation",
+ "statement": "Let $\\mathcal X,\\mathcal Y$ be topoi presented by small sites in fixed larger coefficient universes [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], with sheaves of commutative rings $R_X,R_Y$ and module categories [def-weil-sheaf-of-modules-category]. Let $f:(\\mathcal X,R_X)\\to(\\mathcal Y,R_Y)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism] with Cartesian coefficient identification and exact module inverse image. Let $V\\to1_{\\mathcal X}$ be an epimorphism of sheaves of sets, $V_n=V^{\\times(n+1)}$, and $v_n:\\mathcal X/V_n\\to\\mathcal X$ the slice localizations with rings $v_n^*R_X$ [def-pur-localized-ringed-site, def-sfb-element-site-localization, lem-weil-pbc-ringed-sheaf-slice-adjunction]. All diagrams are small. Use ordinary unbounded module derived categories with localization functor $Q$ [def-weil-abstract-derived-category], and finite-diagonal total complexes with differential $d_{\\mathrm{Cech}}+(-1)^n d_I$ in Cech degree $n$ [def-sp-double-complex-total]. Let $a:K[0]\\to I$ and $c:L[0]\\to J$ be nonnegative injective resolutions [def-sp-injective-resolutions]. For any such $I$ set $B_V(I)^{n,q}=(fv_n)_*v_n^*I^q$ with the canonical coherent element-site restrictions [def-sfb-coherent-cech-image-model], and let $b_{V,I}:f_*I\\to\\operatorname{Tot}B_V(I)$ be the localization-unit augmentation into $(0,q)$. Write $e_I:Q(f_*I)\\xrightarrow{\\sim}Rf_*(K[0])$ for the canonical resolution comparison and define\n$$\\alpha_{V,K,I}=Q(b_{V,I})e_I^{-1}:Rf_*(K[0])\\longrightarrow Q(\\operatorname{Tot}B_V(I)).$$\nFor every $u:K\\to L$ there exists a chain lift $t:I\\to J$ of $u$. Every such lift induces a map $\\operatorname{Tot}B_V(t)$ satisfying\n$$Q(\\operatorname{Tot}B_V(t))\\alpha_{V,K,I}=\\alpha_{V,L,J}Rf_*(u[0]).$$\nThis map in the derived category is independent of the lift. More explicitly, any chain homotopy $s:t_0\\simeq t_1$ gives a total homotopy whose $(n,q)$ component is $(-1)^n(fv_n)_*v_n^*(s^q)$. Comparisons for the identity on $K$ are isomorphisms on the total derived objects, obey identity and composition, and identify the displayed augmentation for all resolutions. For every epimorphism $V'\\to1_{\\mathcal X}$ and refinement $r:V'\\to V$ over $1$, the actual restrictions on fibre powers induce $\\rho_r:\\operatorname{Tot}B_V(I)\\to\\operatorname{Tot}B_{V'}(I)$ and\n$$Q(\\rho_r)\\alpha_{V,K,I}=\\alpha_{V',K,I};$$\nthese restrictions obey identities and composition and commute with resolution comparisons. Finally the Cech-degree-zero map is $f_*(\\eta_I):f_*I\\to f_*v_{0*}v_0^*I$, where $\\eta_I:I\\to v_{0*}v_0^*I$ is restriction of sections along $v_0$. Before applying $f_*$, the adjoint transpose of $\\eta_I$ under $v_0^*\\dashv v_{0*}$ is the identity on $v_0^*I$, and evaluation on the slice is the direct-image counit: termwise it satisfies $\\varepsilon_{v_0^*I}\\,v_0^*\\eta_I=\\mathrm{id}$. In the derived adjunction $v_0^*\\dashv Rv_{0*}$ the unit and counit have these termwise representatives after the canonical right-derived comparisons; hence the same normalization holds for the Cech-degree-zero component of $\\alpha_{V,K,I}$ under the displayed resolution comparisons. Here the total map is projected to its degree-zero Cech column before making this assertion.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 09T5 (lemma-derived-adjoint-functors), 070I (lemma-K-injective); agent Cech specialization with the signed total homotopy, returned proof steps 6-7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "def-sfb-element-site-localization",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "def-sfb-coherent-cech-image-model"
+ ],
+ "proof": [
+  {
+   "text": "Construct the unique chain augmentation from its prescribed components: use the coherent augmentation into the (0,q) summand. The two degree-zero cofaces have equal composites with the unit, so their alternating sum vanishes. The total differential on column zero therefore gives the chain-map identity. Nonnegative complexes of injectives extend to K-injective complexes by Mathlib. The source right-derived unit and mapExtendIso give exactly the comparison isomorphism in the statement; the separate Cech injective-column model is unnecessary.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model",
+    "def-sp-double-complex-total",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IE/04J4; explicit augmentation calculation; Mathlib K-injectivity of extended nonnegative injective complexes."
+   }
+  },
+  {
+   "text": "Use Mathlib InjectiveResolution.desc and desc_commutes for the lift of u. Mathlib InjectiveResolution.descHomotopy gives a homotopy between any two such lifts directly, so the more general uniqueness-into-injectives lemma is unnecessary.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013G (section-injective-resolutions), comparison construction; Tag 013S (lemma-morphisms-equal-up-to-homotopy)."
+   }
+  },
+  {
+   "text": "Write $F_n=(fv_n)_*v_n^*$ and $T_V(t)^{n,q}=F_n(t^q)$. The coherent model makes each $F_n$ additive and every coface restriction a natural transformation in the module. Consequently $T_V(t)$ commutes with both differentials. On each finite diagonal its direct sum is a chain map $T_V(t):\\operatorname{Tot}B_V(I)\\to\\operatorname{Tot}B_V(J)$; these maps preserve identities and composition term by term. Naturality of the localization unit gives $T_V(t)b_{V,I}=b_{V,J}f_*t$: in the $(0,q)$ summand it is precisely $F_0(t^q)f_*(\\eta_{I^q})=f_*(\\eta_{J^q})f_*(t^q)$, and every other summand is zero.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IE and 04J4; agent finite-diagonal calculation from the coherent restriction model."
+   }
+  },
+  {
+   "text": "Bundle the additive functors M ↦ G(E_n(M)) and their horizontal differentials as a nonnegative complex E of additive functors. Evaluate E on I using the additive bifunctor given by the forgetful functor from bundled additive functors. This bicomplex is componentwise canonically isomorphic to the specified flipped coherent bicomplex. Transport Mathlib mapBifunctorMapHomotopy₂ along the totalizations of these identity-component isomorphisms. Its summand formula is precisely (-1)^n G(E_n(s^{q+1})); its bottom row is zero because s^{0,0}=0. Extend the resulting homotopy by zero and apply Q_map_eq_of_homotopy.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model",
+    "def-sp-double-complex-total",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-derived-category); agent signed-total calculation in the specified convention."
+   }
+  },
+  {
+   "text": "Naturality of rightDerivedFunctorUnitQ, with the unit identified as the inverse of rightDerivedFunctorObjQIso at the two K-injective resolutions, gives the naturality square for the inverses. Combine it with the naturality of mapExtendIso and the chain-lift equation I.ι ≫ t = single₀(u) ≫ I'.ι. Associativity and functoriality give comparison_naturality. Precompose the localized chain-augmentation square with the comparison to obtain the claimed alpha square.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), canonical comparison on computing resolutions; naturality of the right-derived unit."
+   }
+  },
+  {
+   "text": "Choose a reverse lift of the identity using InjectiveResolution.desc. The two composites and the corresponding identity maps lift the same identity. Apply descHomotopy and the signed-total homotopy above to show that their localized total maps coincide with identities. They are inverse maps, proving IsIso. Identity and composition laws are the strict functor laws of totalization and extension.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "def-sp-double-complex-total",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013S (lemma-morphisms-equal-up-to-homotopy); agent application to two compositions of lifts."
+   }
+  },
+  {
+   "text": "For $r:V'\\to V$, the maps $r_n=(r,\\ldots,r):V'^{n+1}\\to V^{n+1}$ commute with deleting and repeating coordinates. The coherent model assigns actual restriction transformations $E_{V_n}\\to E_{V'_n}$, natural in the module, and commuting with its augmentations. Apply $f_*$ in every resolution degree. This produces a bicomplex map, hence a total chain map $\\rho_r$. On the $(0,q)$ summand augmentation compatibility is $\\operatorname{res}_{r_0}\\eta_{V,I^q}=\\eta_{V',I^q}$, so $\\rho_rb_{V,I}=b_{V',I}$. Multiplying its localized equality by $e_I^{-1}$ gives $Q(\\rho_r)\\alpha_{V,K,I}=\\alpha_{V',K,I}$.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J4 (lemma-relocalize-ringed-topos); actual nerve restrictions and the coherent-model unit compatibility."
+   }
+  },
+  {
+   "text": "Restrictions for the identity are identities and restrictions for a composite are composites, because $A\\mapsto E_A$ is a contravariant functor. Thus the same is true of $\\rho$ after finite-diagonal summation. For a lift $t$, naturality of $E_{V_n}\\to E_{V'_n}$ at the module map $t^q$ reads $\\operatorname{res}_{r_n}F_n(t^q)=F'_n(t^q)\\operatorname{res}_{r_n}$. Summing gives $\\rho_r T_V(t)=T_{V'}(t)\\rho_r$. These equalities remain equalities after $Q$, and lift independence from step 4 makes them compatible with every resolution comparison.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J4 (lemma-relocalize-ringed-topos); functoriality and naturality of actual restrictions."
+   }
+  },
+  {
+   "text": "For every nonnegative bicomplex, define the degree-k projection by totalDesc, identity on its (0,k) summand and zero on all other summands. Verify the chain-map equation on each summand: the horizontal differential raises the first index, so its projected part vanishes; the vertical part has sign 1 at first index zero and projects to zero elsewhere. Apply this to the coherent bicomplex. The prescribed augmentation components give b ≫ projection = columnUnit. D.unit gives both the identification with the ordinary adjunction unit and its identity transpose, and the ordinary adjunction triangle gives the termwise counit normalization.",
+   "uses": [
+    "def-sfb-coherent-cech-image-model",
+    "def-sp-double-complex-total",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IE (lemma-localize-ringed-topos); derived.tex Tag 08BJ, termwise adjunction on homotopy categories."
+   }
+  },
+  {
+   "text": "Use the element-module extension adjunction to see that slice pullback is also a right adjoint. Together with D.adj this gives exactness and additivity. The element module category is Grothendieck abelian by the ring-sheaves Grothendieck theorem; the source Grothendieck K-injective theorem gives unbounded K-injective resolutions. For any additive functor, quasi-isomorphisms between K-injectives are homotopy equivalences (Mathlib), hence the mapped Q functor inverts them. The K-injective localizer therefore proves that rightDerivedFunctor with rightDerivedFunctorUnitQ is right-derived directly on complexes. Since slice pullback is exact, mapDerivedCategory and its right-derived whiskering are left-derived by the inversion criterion. Its whiskering with the right-derived functor is right-derived by the same K-injective criterion. Apply Mathlib Adjunction.derived to the ordinary termwise adjunction, and use derivedη_fac_app and derivedε_fac_app to obtain the Hom, unit, and counit formulas. The triangle is the derived adjunction triangle. Finally element_module_presheaf_extension proves that extension by zero is left exact. Its right adjoint, slice pullback, therefore preserves injectives. The restricted nonnegative injective resolution extends to a K-injective complex; transport this along mapExtendIso. The separate resolving-derived-adjunction theorem, arbitrary-universe commutative-ring resolution theorem, and Cech injective-column theorem are not needed.",
+   "uses": [
+    "lem-weil-pbc-element-presheaf-extension",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 and 070I, sites-modules.tex Tags 04IE/04J4; Mathlib derivedη_fac_app and derivedε_fac_app; exact extension adjunction and Grothendieck K-injective existence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "def-sfb-coherent-cech-image-model",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-element-presheaf-extension",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 013S, 070I, 09T5 and sites-modules.tex Tags 04IE/04J4; A3 Lean proof using Mathlib resolution comparison and bifunctor homotopy, explicit zero-column projection, and the exact-case derived adjunction on complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Cech augmentation is natural in injective resolution comparison maps and refinements and normalized by the localization adjunction counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X Y : C} (f : X ⟶ Y)\\n  (P : CategoryTheory.InjectiveResolution X) (Q : CategoryTheory.InjectiveReso\", \"doc\": \"Given abelian category $\\\\mathcal{C}$, objects $X,Y \\\\in \\\\mathcal{C}$, morphism $f:X\\\\to Y$, injective resolutions $P\\\\to X$ and $Q\\\\to Y$, morphism $\\\\phi:P\\\\to Q$ of cochain complexes satisfying $\\\\phi_0 \\\\c\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X Y : C} (f : X ⟶ Y)\\n  (P : CategoryTheory.InjectiveResolution X) (Q : CategoryTheory.InjectiveReso\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, objects $X,Y \\\\in \\\\mathcal{C}$, their injective resolutions $P$ and $Q$, a morphism $f : X \\\\to Y$, and an additive functor $F : \\\\mathcal{C} \\\\to\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, objects $X,Y \\\\in \\\\mathcal{C}$ with injective resolutions $I$ and $J$, and a morphism $\\\\\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, there exists an isomorphism in $\\\\mathcal{D}$ between \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an additive functor $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, objects $X,Y \\\\in \\\\mathcal{C}$ with injective resolutions $I$ and $J$, a morphism $f: X \\\\\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addit\", \"doc\": \"For additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, an object $ X \\\\in \\\\mathcal{C} $, its injective resolutio\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (I : CategoryTheory.InjectiveResolution X)\\n \", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ I $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural transformation from $ F $ to its 0t\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.iso_hom_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasInjectiveResolutions C] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveResolution X)\\n  (J : CategoryTheory.InjectiveResolution Y) (φ : I.cocomplex ⟶ J.cocomplex),\\n  Category\", \"doc\": \"For objects $X, Y$ in an abelian category $\\\\mathcal{C}$ with injective resolutions $I, J$ respectively, and a morphism $\\\\phi: I.\\\\text{cocomplex} \\\\to J.\\\\text{cocomplex}$ satisfying $I.\\\\iota_0 \\\\circ \\\\ph\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: resolution lift homotopies and ordinary right-derived cohomology naturality do not include the coherent Cech total, signed homotopy, refinement maps and derived counit normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homotopy of maps of Cech injective resolutions induces the signed total homotopy and preserves the derived restriction augmentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.descHomotopy\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"{Y Z : C} (f : Y ⟶ Z) {I : InjectiveResolution Y} {J : InjectiveResolution Z} (g h : I.cocomplex ⟶ J.cocomplex)\\n  (g_comm : I.ι ≫ g = (CochainComplex.single₀ C).map f ≫ J.ι)\\n  (h_comm : I.ι ≫ h = (CochainComplex.single₀ C).map f ≫ J.ι) : Homotopy g h\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, given objects $Y,Z$ with injective resolutions $I,J$ and chain maps $g,h : I.\\\\text{cocomplex} \\\\to J.\\\\text{cocomplex}$ that both satisfy the commutativity conditio\"}\n  {\"name\": \"CategoryTheory.injectiveResolutions\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \": C ⥤ HomotopyCategory C (ComplexShape.up ℕ)\", \"doc\": \"The functor from an abelian category $\\\\mathcal{C}$ to its homotopy category of cochain complexes, which assigns to each object its injective resolution's cochain complex and to each morphism the homot\"}\n  {\"name\": \"Homotopy.shift\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Shift\", \"type\": \"{K L : CochainComplex C ℤ} {φ₁ φ₂ : K ⟶ L} (h : Homotopy φ₁ φ₂) (n : ℤ) : Homotopy (φ₁⟦n⟧') (φ₂⟦n⟧')\", \"doc\": \"Given cochain complexes $K, L$ over a preadditive category and a homotopy $h$ between chain maps $\\\\phi_1, \\\\phi_2: K \\\\to L$, the shifted homotopy $h[n]$ for integer $n$ is defined by multiplying each h\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.comp_descHomotopyZeroSucc\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"{Y Z : C} {I : InjectiveResolution Y} {J : InjectiveResolution Z} (f : I.cocomplex ⟶ J.cocomplex) (n : ℕ)\\n  (g : I.cocomplex.X (n + 1) ⟶ J.cocomplex.X n) (g' : I.cocomplex.X (n + 2) ⟶ J.cocomplex.X (n + 1))\\n  (w : f.f (n + 1) = I.cocomplex.d (n + 1) (n + 2) ≫ g' + g ≫ J.cocomplex.d n (n + 1)) :\\n  I.\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, given injective resolutions $I$ and $J$ of objects $Y$ and $Z$, a chain map $f: I.\\\\text{cocomplex} \\\\to J.\\\\text{cocomplex}$, and morphisms $g, g'$ satisfying $f_{n\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.descHomotopyZeroOne.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {Y Z : C}\\n  {I : CategoryTheory.InjectiveResolution Y} {J : CategoryTheory.InjectiveResolution Z}\\n  (f f_1 : I.cocomplex ⟶ J.cocomplex) (e_f : f = f_1) (comm : CategoryTheory.CategoryStruct.comp I.ι f = 0),\\n\", \"doc\": \"Given injective resolutions $I$ of $Y$ and $J$ of $Z$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: I.\\\\text{cocomplex} \\\\to J.\\\\text{cocomplex}$ satisfying $I.\\\\iota \\\\circ f = 0$, this constru\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.descHomotopyZeroSucc.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {Y Z : C}\\n  {I : CategoryTheory.InjectiveResolution Y} {J : CategoryTheory.InjectiveResolution Z}\\n  (f f_1 : I.cocomplex ⟶ J.cocomplex) (e_f : f = f_1) (n : ℕ) (g g_1 : I.cocomplex.X (n + 1) ⟶ J.cocomplex.X \", \"doc\": \"In an abelian category $\\\\mathcal{C}$, given injective resolutions $I$ and $J$ of objects $Y$ and $Z$, a chain map $f: I^{\\\\bullet} \\\\to J^{\\\\bullet}$, and morphisms $g, g'$ satisfying $f_{n+1} = d_I \\\\cir\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.descHomotopyZeroOne\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"{Y Z : C} {I : InjectiveResolution Y} {J : InjectiveResolution Z} (f : I.cocomplex ⟶ J.cocomplex)\\n  (comm : I.ι ≫ f = (0 : _ ⟶ J.cocomplex)) : I.cocomplex.X 2 ⟶ J.cocomplex.X 1\", \"doc\": \"Given injective resolutions $I$ of $Y$ and $J$ of $Z$ in an abelian category $\\\\mathcal{C}$, and a morphism $f: I.\\\\text{cocomplex} \\\\to J.\\\\text{cocomplex}$ satisfying the commutativity condition $I.\\\\iot\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.liftHomotopy\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Resolution\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {Y Z : C} →\\n        (f : Y ⟶ Z) →\\n          {P : CategoryTheory.ProjectiveResolution Y} →\\n            {Q : CategoryTheory.ProjectiveResolution Z} →\\n              (g h : P.complex ⟶ Q.complex)\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, given objects $Y,Z \\\\in \\\\mathcal{C}$, a morphism $f:Y \\\\to Z$, and projective resolutions $P \\\\to Y$, $Q \\\\to Z$, if two chain maps $g,h:P.\\\\text{complex} \\\\to Q.\\\\text{\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: resolution lift homotopies and ordinary right-derived cohomology naturality do not include the coherent Cech total, signed homotopy, refinement maps and derived counit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"total\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: resolution lift homotopies and ordinary right-derived cohomology naturality do not include the coherent Cech total, signed homotopy, refinement maps and derived counit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|Cech).*(naturality|[Hh]omotopy)|(counit|[Hh]omotopy).*(cech|Cech)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: resolution lift homotopies and ordinary right-derived cohomology naturality do not include the coherent Cech total, signed homotopy, refinement maps and derived counit normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|Cech).*(augmentation|naturality|homotopy)",
+   "results": "[grep] OK 0 hit(s).  Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: resolution comparison and bifunctor homotopy hits do not state the canonical slice Cech total, refinement squares and derived counit normalization together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived Cech augmentation under refinement and chain homotopies of injective resolutions",
+   "results": "[leansearch] OK 8 hit(s).  Hits: CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.injectiveResolutions, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: resolution comparison and bifunctor homotopy hits do not state the canonical slice Cech total, refinement squares and derived counit normalization together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"naturality\"",
+   "results": "[loogle] OK 0 hit(s).  Hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: resolution comparison and bifunctor homotopy hits do not state the canonical slice Cech total, refinement squares and derived counit normalization together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech total augmentation for sheaves is natural in injective resolution lifts and cover refinements with signed total homotopy and adjunction counit normalization",
+   "results": "[leanfinder] OK 8 hit(s).  Hits: CategoryTheory.GrothendieckTopology.plusMap_plusLift, CategoryTheory.GrothendieckTopology.toPlus_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.GrothendieckTopology.toPlus_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: resolution comparison and bifunctor homotopy hits do not state the canonical slice Cech total, refinement squares and derived counit normalization together."
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedToHomotopyCategoryObj_hom_naturality|descHomotopy",
+   "results": "[grep] OK 8 hit(s).  Hits: Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: resolution comparison and bifunctor homotopy hits do not state the canonical slice Cech total, refinement squares and derived counit normalization together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Totalization of a first quadrant cosimplicial complex preserves vertical chain homotopies with sign minus one to the cosimplicial degree",
+   "results": "[leanfinder] OK 8 hit(s).  Hits: AlgebraicTopology.DoldKan.hσ'_eq, AlgebraicTopology.DoldKan.homotopyPInftyToId, AlgebraicTopology.DoldKan.hσ'_eq', HomologicalComplex.mapBifunctorMapHomotopy.hom₁, HomologicalComplex.mapBifunctorMapHomotopy.ιMapBifunctor_hom₁, HomologicalComplex.mapBifunctorMapHomotopy.comm₁_aux, HomologicalComplex.mapBifunctorMapHomotopy.hom₂, HomologicalComplex.mapBifunctorMapHomotopy₂",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: resolution comparison and bifunctor homotopy hits do not state the canonical slice Cech total, refinement squares and derived counit normalization together."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-cech-image-totalization",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; Normalized derived Cech descent followed by exact inverse image; Returned proof steps 6-7: counit normalization, resolution-lift independence and covering-refinement naturality.",
+   "via": [
+    "lem-sfb-derived-cech-image-totalization",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-cech-augmentation-normalized-naturality",
+  "worker": "stage1",
+  "summary": "Ten-step proof reusing existing resolution, coherent Cech and normalized derived adjunction nodes. Explicit sign cancellation, comparison-unit algebra, refinement squares and counit transposes; clarified the type of the underlying degree-zero unit. No new nodes.",
+  "blueprint": "Realizes the created-item chain through lem-sfb-derived-cech-image-totalization, returned steps 6--7, and the open-direct-image paragraph (3) of det-thm-sf-ctf-stability-direct-images. The ancestor tool returns None, retained as imported; no equal blueprint node found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "General comparison existence for injective resolutions; used for K to L, without changing the Cech descent route."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "General uniqueness into bounded-below injectives; supplies a homotopy before the explicit signed Cech calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Generic element-site localization for arbitrary sheaves, giving the exact small slice restriction needed for the Cech model."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of unbounded K-injective module resolutions on small sites; verifies the resolving-adjunction theorem hypothesis."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic right-derived Hom transpose formula; no result of the constructible direct-image route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic additive adjunction on complexes; identifies the actual counit representative."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NA-703d2a2d6",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-703d2a2d6 (reviewer sub-agent of L); spot-checked: Ten-step split with no new nodes. Read in full against every cited statement. Steps 1-3: the slice-adjunction lemma (small element site, exact j^*, relocalization along B→A) and the column model (existence of the coherent model, K-injectivity of I and v_n^*I, comparisons from the right-derived units) supply the setup. Lift existence (h=u) and lift uniqueness (α=a, bounded-below injective target J, t0a=t1a) have all their hypotheses. Strict functoriality comes from the contravariant E_A functor and the natural unit. Steps 4-6, redone by hand: H=(-1)^nF_n(s) gives the vertical part F(ds+sd), and the horizontal part (-1)^n[d_hF_n(s)-F_{n+1}(s)d_h] vanishes by coface naturality; q=0 maps into J^{-1}=0. e_I=Rf_*(Qa)^{-1}δ_I with naturality of δ gives e_JQ(f_*t)=Rf_*(u[0])e_I. Inverse comparisons come from uniqueness plus step 4. Steps 7-8: refinement squares, identity and composition follow from the coherent model's natural restrictions that commute with the augmentation. Steps 9-10: the coherent model's identity transpose and the termwise counit are used; the resolving-normalization lemma is applied with G=v^* (exact, so P=K(A)), and B=Mod(X/V0) has K-injective resolutions by prop-pur-kinjective-resolutions-exist since the element site is small. The transpose of id is Q(η_I)δ, and the transpose of Q(ε) is δ, invertible because v^*I is K-injective. Statement edits are named in the report and do not weaken anything. The old degree-zero transpose was applied to a map on Y and did not typecheck; it is now taken of η_I on X before f_*, with the column-zero projection checked to be a chain map (d_h raises the Cech degree). The epimorphism hypothesis on V' was already implicit in α_{V'}. The parent's step 4 is still served. The Stacks tags 013S/070I/070J/08BJ/09T5/0FND/04IE/04J4/07A6 exist with the cited labels; there is no SGA citation. The duplicate search (cech-refinement-square(-rest), cech-localization-unit-totalization, cech-coefficient-derived-comparison, cech-injective-image-augmentation, trf total augmentation) found none. Live and side-live have the item unsplit, and it has no repair note of its own. The declared generic tool_uses are accepted. Advisory: the statement now cites lem-weil-pbc-ringed-sheaf-slice-adjunction as a stmt_dep; stage 2 should take the definitions from the def nodes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CechAugmentationNormalizedNaturality",
+  "declaration": "CategoryTheory.CechAugmentationNormalized.cech_augmentation_normalized_naturality",
+  "declarations": [
+   "CategoryTheory.CechAugmentationNormalized.QN",
+   "CategoryTheory.CechAugmentationNormalized.totalMap",
+   "CategoryTheory.CechAugmentationNormalized.comparison",
+   "CategoryTheory.CechAugmentationNormalized.alpha",
+   "CategoryTheory.CechAugmentationNormalized.cech_augmentation_normalized_naturality",
+   "CategoryTheory.CechAugmentationNormalized.signed_total_homotopy",
+   "CategoryTheory.CechAugmentationNormalized.lift_independence",
+   "CategoryTheory.CechAugmentationNormalized.resolution_comparison_laws",
+   "CategoryTheory.CechAugmentationNormalized.refinement_laws",
+   "CategoryTheory.CechAugmentationNormalized.alpha_refinement",
+   "CategoryTheory.CechAugmentationNormalized.augmentation_exists",
+   "CategoryTheory.CechAugmentationNormalized.columnUnit_comm",
+   "CategoryTheory.CechAugmentationNormalized.columnUnit",
+   "CategoryTheory.CechAugmentationNormalized.projection_normalization",
+   "CategoryTheory.CechAugmentationNormalized.alpha_projection",
+   "CategoryTheory.CechAugmentationNormalized.SliceNormalization",
+   "CategoryTheory.CechAugmentationNormalized.slice_normalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CechAugmentationNormalizedNaturality.lean",
+  "statement": "theorem cech_augmentation_normalized_naturality (f : RingedToposMorphism R S) [IsIso f.ringMap] (_hR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (_hS : ∀ (U : Xᵒᵖ) (a b : S.obj.obj U), a * b = b * a) (fInverse : ringedSiteModules.{u} S ⥤ ringedSiteModules.{u} R) [fInverse.Additive] [PreservesFiniteLimits fInverse] [PreservesFiniteColimits fInverse] (_fAdj : fInverse ⊣ f.modules) (D : CoherentCechImageModel R) (V : Sheaf J (Type u)) [Epi (terminal.from V)] {K K' : ringedSiteModules.{u} R} (I : InjectiveResolution K) (I' : InjectiveResolution K') (u : K ⟶ K') : (∃ t : I.cocomplex ⟶ I'.cocomplex, I.ι ≫ t = (CochainComplex.single₀ _).map u ≫ I'.ι) ∧ ∀ (t : I.cocomplex ⟶ I'.cocomplex) (_ht : I.ι ≫ t = (CochainComplex.single₀ _).map u ≫ I'.ι) (b : (f.modules.mapHomologicalComplex (.up ℕ)).obj I.cocomplex ⟶ (D.totalFunctor f.modules V).obj I.cocomplex) (b' : (f.modules.mapHomologicalComplex (.up ℕ)).obj I'.cocomplex ⟶ (D.totalFunctor f.modules V).obj I'.cocomplex), D.IsAugmentation f.modules V I.cocomplex b → D.IsAugmentation f.modules V I'.cocomplex b' → ((f.modules.mapHomologicalComplex (.up ℕ)).map t ≫ b' = b ≫ (D.totalFunctor f.modules V).map t) ∧ (alpha D f.modules V I b ≫ DerivedCategory.Q.map (totalMap D f.modules V t) = f.modules.rightDerivedFunctor.map ((QN (ringedSiteModules.{u} R)).map ((CochainComplex.single₀ _).map u)) ≫ alpha D f.modules V I' b')",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The declarations together state all clauses: canonical comparison and alpha; lift existence and naturality; signed total homotopy, lift independence and comparison laws; actual refinement laws; unique augmentation, zero-column projection and ordinary/derived counit normalization. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9593f4551",
+  "group": "Q58",
+  "result": "pass",
+  "note": "First S2 delivery; only the item's lean record changed; statement verbatim; 17 declarations match the file; 11 sorry theorems; no line over 100 chars. Every node clause is rendered: lift existence and derived naturality square for every lift (comparison = RF(Qι) then inverse right-derived unit at K-injective I then Q mapExtendIso, i.e. e_I^{-1}; alpha = comparison then QN(b), with b pinned by IsAugmentation, ∃! in augmentation_exists); lift_independence; signed_total_homotopy (-1)^n G(E_n(s^{q+1})) on the (n,q+1) summand plus a zero bottom row, hand-checked in Mathlib's Homotopy convention (f-g=dh+hd) with ε₂=(-1)^p on the flipped (Čech-outer) bicomplex; resolution_comparison_laws (IsIso for lifts of 𝟙, strict id/comp); refinement_laws and alpha_refinement (contravariant, both covers epi); columnUnit and projection_normalization (π pinned id/zero, chain map, η=unit, transpose 𝟙, termwise triangle); alpha_projection; SliceNormalization pinned by the 09T5 hom_formula (determines the adjunction) with unit/counit formulas, exactness and slice resolutions as conclusions. Extra binders HasSheafify, WEqualsLocallyBijective and HasKInjectiveResolutions are Prop classes valid on small sites; universes wX, wY, wA independent. Advisories: rightDerivedFunctor owner def-sfb-right-derived-functor not in stmt_deps (stage-1 gap); comparison and three clauses overlap the downstream parent DerivedCechImageTotalization, which cites this item, so not H4; triangle and transpose clauses restate adjunction identities as the node does; worker compile 55.8-57.3 s, near the 60 s landing limit. No compile by the reviewer (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261024T184519-L-3059081",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

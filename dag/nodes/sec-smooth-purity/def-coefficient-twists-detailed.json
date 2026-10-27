@@ -28,7 +28,9 @@
   "def-pur-sheaf-hom"
  ],
  "proof": [],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-route-intrinsic-integral-coefficient-twist-mem"
+ ],
  "proof_origin": null,
  "mathlib_searches": [
   {
@@ -62,7 +64,18 @@
  "uses_not_cited": [
   "def-weil-finite-tor-amplitude"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-coefficient-twists-detailed",
@@ -119,5 +132,15 @@
    "WeilConjectures.sfIntegralTwistingObject_mem"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$ with uniformizer $\\pi_E$, an\ninteger $n\\in\\mathbf Z_{\\geq1}$, and a scheme $S$ on which $\\ell$ is\ninvertible. Use the small pro-étale site [def-weil-pbc-proetale-site] of $S$\nand the derived tensor product [def-weil-derived-tensor]. For every integer\n$r\\geq1$, define the pro-étale sheaf $\\mu_{\\ell^r,S}$ by\n\n$$\n \\mu_{\\ell^r,S}(U)=\n \\{u\\in\\Gamma(U,\\mathcal O_U^\\times):u^{\\ell^r}=1\\}\n \\qquad(U\\to S).\n$$\n\nFor every coefficient ring\n$\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$, with $A_{E,n}=\\mathcal O_E/\\pi_E^n$,\nthe coefficient sheaf is the pulled-back condensed ring\n$\\Lambda_S=p_S^*\\Lambda$ of [det-def-sfb-pulled-back-coefficients]. The twists\n$\\Lambda(1)_S$ are\n\n$$\n A_{E,n}(1)_S=\\mu_{\\ell^r,S}\\otimes_{\\mathbf Z/\\ell^r\\mathbf Z}(A_{E,n})_S\n \\quad(\\ell^rA_{E,n}=0),\n \\qquad\n \\mathcal O_E(1)_S=\\varprojlim_n A_{E,n}(1)_S,\n$$\n\nthe first independent of $r$ by the Kummer maps $u\\mapsto u^\\ell$, and\n\n$$\n E(1)_S=\\mathcal O_E(1)_S\\otimes_{\\mathcal O_{E,S}}E_S,\n \\qquad\n \\Qlb(1)_S=\\overline{\\mathbf Q}_{\\ell,S}\\otimes_{\\mathbf Z_{\\ell,S}}\\mathbf Z_\\ell(1)_S,\n$$\n\nusing $E_S=\\mathcal O_{E,S}[1/\\ell]$ from [det-prop-sfb-qlbar-colimit-x-invert-ell]. Here\n$\\mathbf Z_\\ell(1)_S=\\varprojlim_r\\mu_{\\ell^r,S}$ is the limit, in the category of\n$\\mathbf Z_{\\ell,S}$-modules, of the free $\\mathbf Z_{\\ell,S}$-modules\n$\\mathbf Z_{\\ell,S}\\otimes\\mu_{\\ell^r,S}$ along the maps induced by $u\\mapsto u^\\ell$, and\n$\\Qlb(1)_S$ is its extension of scalars along $\\mathbf Z_{\\ell,S}\\to\\overline{\\mathbf Q}_{\\ell,S}$. Each $\\Lambda(1)_S$ is an invertible\n$\\Lambda_S$-module, locally isomorphic to $\\Lambda_S$. Define the twist for\nevery $m\\in\\mathbf Z$ by\n\n$$\n \\Lambda(m):=\n \\begin{cases}\n   \\Lambda_S,&m=0,\\\\\n   \\Lambda(1)_S^{\\otimes_{\\Lambda_S}m},&m>0,\\\\\n   \\operatorname{Hom}_{\\Lambda_S}\\bigl(\\Lambda(-m),\\Lambda_S\\bigr),&m<0.\n \\end{cases}\n$$\n\nFor every $m\\in\\mathbf Z$ and every $K\\in D(S_{\\mathrm{proét}},\\Lambda)$, set\n\n$$\n K(m)=K\\otimes^L_{\\Lambda_S}\\Lambda(m).\n$$",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

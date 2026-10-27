@@ -1,0 +1,222 @@
+{
+ "id": "lem-trf-formal-hom-cotangent-linearization",
+ "kind": "statement",
+ "title": "Cotangent coefficient bases and functorial linearization of formal algebra maps",
+ "statement": "Let $F$ be a field, $m,n\\ge0$, $S=F[[t_1,\\ldots,t_m]]$, $T=F[[z_1,\\ldots,z_n]]$ [def-weil-pbc-multivariate-power-series], and $\\mathfrak a=(t_1,\\ldots,t_m)$, $\\mathfrak b=(z_1,\\ldots,z_n)$. Regard the quotients $\\mathfrak a/\\mathfrak a^2$ and $\\mathfrak b/\\mathfrak b^2$ as $F$-vector spaces; a class means the class of an element of the indicated ideal modulo its square. Their coefficient maps $[h]\\mapsto([t_i]h)_i$ and $[g]\\mapsto([z_j]g)_j$ are $F$-linear isomorphisms to $F^m$ and $F^n$, sending the variable classes to the standard bases. Here $[t_i]h$ and $[z_j]g$ denote the respective linear coefficients. Let $\\psi:S\\to T$ be an $F$-algebra homomorphism satisfying $\\psi(\\mathfrak a)\\subseteq\\mathfrak b$. It preserves constant coefficients and induces an $F$-linear map $\\bar\\psi:\\mathfrak a/\\mathfrak a^2\\to\\mathfrak b/\\mathfrak b^2$. Define the $m\\times n$ matrix $L_\\psi$ [def-weil-matrix] by $(L_\\psi)_{ij}=[z_j]\\psi(t_i)$. In the coefficient bases this map sends a coefficient row $v$ to $vL_\\psi$; equivalently, for every $h\\in\\mathfrak a$,\n$$[z_j]\\psi(h)=\\sum_{i=1}^m([t_i]h)(L_\\psi)_{ij}.$$\nFor every $r\\ge0$, $U=F[[w_1,\\ldots,w_r]]$, $\\mathfrak c=(w_1,\\ldots,w_r)$ and $F$-algebra homomorphism $\\theta:T\\to U$ with $\\theta(\\mathfrak b)\\subseteq\\mathfrak c$, the induced quotient maps compose and\n$$L_{\\theta\\circ\\psi}=L_\\psi L_\\theta,\\qquad L_{\\mathrm{id}_S}=I_m.$$\nAll statements include zero variables, zero-dimensional quotients and the corresponding empty matrices.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph: Invertible-Jacobian detail in the final coordinate-change paragraph: coefficient bases on the maximal ideals modulo their squares and matrices of the induced coordinate maps and their composites. The explicit auxiliary statement supplies details omitted there."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-matrix"
+ ],
+ "proof": [
+  {
+   "text": "Write $c(f)$ for the constant coefficient and $\\ell_i(f)$ for the coefficient of the $i$th variable. The Cauchy product in [def-weil-pbc-multivariate-power-series] gives $c(fg)=c(f)c(g)$ and $\\ell_i(fg)=c(f)\\ell_i(g)+\\ell_i(f)c(g)$: the only decompositions of the exponent $e_i$ are $(0,e_i)$ and $(e_i,0)$. Coefficients are additive and $F$-linear. Work first in $S$, with variable ideal $\\mathfrak a$. Every element of $\\mathfrak a$ is a finite sum of multiples of the $t_i$, hence has zero constant coefficient. The displayed formula shows that products of two such elements have zero linear coefficients as well. Since an element of $\\mathfrak a^2$ is a finite sum of these products, both its constant and all its linear coefficients vanish. The identical argument applies in $T$ and $U$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph; agent-supplied details of the cotangent linearization implicit in the invertible-Jacobian assertion."
+   }
+  },
+  {
+   "text": "For any $h\\in S$, set $q=h-c(h)-\\sum_i\\ell_i(h)t_i$, viewing scalars as constant series. Direct coefficient extraction gives $c(q)=0$ and $\\ell_i(q)=0$ for every $i$. Apply [lem-weil-pbc-power-series-quadratic-ideal] to obtain $q\\in\\mathfrak a^2$. In particular, $c(h)=0$ implies $h\\in\\mathfrak a$, and therefore $\\mathfrak a=\\ker c$. For $h\\in\\mathfrak a$, the resulting identity $[h]=\\sum_i\\ell_i(h)[t_i]$ proves that the coefficient map on $\\mathfrak a/\\mathfrak a^2$ has inverse $v\\mapsto[\\sum_i v_it_i]$. Step 1 ensures it is well-defined, and direct extraction of coefficients proves that the two maps are inverse and $F$-linear and take variable classes to the standard basis. Repeat with the finite variable sets for $T$ and $U$.",
+   "uses": [
+    "lem-weil-pbc-power-series-quadratic-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph; agent-supplied details of the cotangent linearization implicit in the invertible-Jacobian assertion."
+   }
+  },
+  {
+   "text": "For any $h\\in S$, Step 2 gives $h-c(h)\\in\\mathfrak a$. Its image lies in $\\mathfrak b$, whose elements have zero constant coefficient by Step 1. Since $\\psi$ fixes $F$, this gives $c(\\psi(h))=c(h)$. Moreover $\\psi(\\mathfrak a^2)\\subseteq\\mathfrak b^2$: write an element as a finite sum $\\sum_k a_ka'_k$ with $a_k,a'_k\\in\\mathfrak a$ and apply multiplicativity and additivity. Thus $[h]\\mapsto[\\psi(h)]$ is independent of the representative and is an $F$-linear map, because $\\psi$ is additive and fixes scalar multiplication. This constructs the asserted $\\bar\\psi$. The same argument constructs $\\bar\\theta$ and the quotient map of $\\theta\\circ\\psi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph; agent-supplied details of the cotangent linearization implicit in the invertible-Jacobian assertion."
+   }
+  },
+  {
+   "text": "For $h\\in\\mathfrak a$, the remainder formula of Step 2 reads $h=\\sum_i\\ell_i(h)t_i+q$ with $q\\in\\mathfrak a^2$. Applying $\\psi$ gives $\\psi(h)=\\sum_i\\ell_i(h)\\psi(t_i)+\\psi(q)$, where $\\psi(q)\\in\\mathfrak b^2$ by Step 3. Step 1 says its linear coefficients vanish. Taking the $z_j$ coefficient therefore gives $[z_j]\\psi(h)=\\sum_i\\ell_i(h)[z_j]\\psi(t_i)=\\sum_i\\ell_i(h)(L_\\psi)_{ij}$. By the coefficient isomorphisms of Step 2 this is exactly the row formula $v\\mapsto vL_\\psi$.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph; agent-supplied details of the cotangent linearization implicit in the invertible-Jacobian assertion."
+   }
+  },
+  {
+   "text": "On a representative $h\\in\\mathfrak a$, both $\\overline{\\theta\\circ\\psi}([h])$ and $(\\bar\\theta\\circ\\bar\\psi)([h])$ are $[\\theta(\\psi(h))]$, so the quotient maps compose. Apply Step 4 to $\\theta$ and the element $\\psi(t_i)\\in\\mathfrak b$: for every $i,k$, $[w_k]\\theta(\\psi(t_i))=\\sum_j([z_j]\\psi(t_i))([w_k]\\theta(z_j))=\\sum_j(L_\\psi)_{ij}(L_\\theta)_{jk}$. By the definition of matrix multiplication this gives $L_{\\theta\\circ\\psi}=L_\\psi L_\\theta$. Finally $[t_j]t_i=\\delta_{ij}$ gives $L_{\\mathrm{id}_S}=I_m$. If any variable set is empty, its ideal and cotangent quotient are zero, all corresponding sums are empty, and the same formulas give the unique maps and the appropriate empty matrices. No continuity of $\\psi$ or $\\theta$ has been used.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph; agent-supplied details of the cotangent linearization implicit in the invertible-Jacobian assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-quadratic-ideal",
+  "def-weil-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4B (lemma-fitting-ideal-well-defined), final coordinate-change paragraph; agent-supplied details of the cotangent linearization implicit in the invertible-Jacobian assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The map on cotangent spaces induced by a local algebra homomorphism of multivariate formal power series rings has matrix the linear coefficients of the images of variables, functorially under composition",
+   "results": "LeanFinder: Algebra.Generators.repr_CotangentSpaceMap (Extension/Cotangent/Basic.lean:508), PreSubmersivePresentation.cotangentComplexAux_apply and aevalDifferential_toMatrix′_eq_mapMatrix_jacobiMatrix. Read the former: it treats the free cotangent module of a polynomial generator presentation, not the variable ideal modulo its square in a formal power-series ring.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal.Cotangent",
+   "results": "Loogle: 0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|linearCoeff|coeff.*single|constantCoeff.*pderiv",
+   "results": "Mathlib/RingTheory/MvPowerSeries: 21 hits, coefficient identities in Rename, Substitution, Basic, Equiv and Derivative; coeff_pderiv at Derivative.lean:130. No cotangent-basis or arbitrary-local-hom linearization statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The linear coefficient matrix of a homomorphism of formal power series rings represents its induced map on the maximal ideal modulo its square",
+   "results": "LeanSearch: PowerSeries.map.isLocalHom, MvPowerSeries.map and coeff_map, MvPowerSeries.map.isLocalHom; these apply a ring map to coefficients, rather than an arbitrary map sending variables to series.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|linearCoeff|coeff.*single|constantCoeff.*pderiv",
+   "results": "21 hits in Mathlib/RingTheory/MvPowerSeries, including coeff_pderiv (Derivative.lean:130), coeff_index_single_X (Basic.lean:381), and coefficient formulas in Rename and Substitution. No arbitrary local-hom cotangent linearization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local algebra map of formal power series rings induces a map on maximal ideals modulo squares represented by its linear coefficient matrix",
+   "results": "8 hits including MvPowerSeries.map and mapAlgHom, PowerSeries.mapAlgHom, map.isLocalHom and Algebra.FormallyUnramified.map_maximalIdeal. Read MvPowerSeries.Basic.lean:513-543: map applies a ring hom to coefficients with the same variable set, so it does not state the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, Ideal.Cotangent",
+   "results": "0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The linear coefficients of a local algebra homomorphism of finite variable formal power series rings give the induced linear map on the variable ideal modulo its square",
+   "results": "8 hits including MvPowerSeries.map.isLocalHom, univariate PowerSeries.ker_coeff_eq_max_ideal and Weierstrass quotient maps. Read MvPowerSeries/Inverse.lean:171-183: the local map is coefficientwise. No match to the combined statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra map preserving augmentation ideals induces a functorial map on cotangent quotients; for formal power series compute it from degree one coefficients",
+   "results": "8 hits including Ideal.mapCotangent_toCotangent and Algebra.Generators.repr_CotangentSpaceMap. Read Ideal/Cotangent.lean:211-234 and Extension/Cotangent/Basic.lean:508-514: the former computes the induced map on a representative but gives no power-series coefficient bases; the latter uses polynomial-presentation cotangentSpaceBasis, not the variables ideal in a power-series ring.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-jacobian-coordinate-chain-rule",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Invertible-Jacobian detail in the final coordinate-change paragraph: coefficient bases on the maximal ideals modulo their squares and matrices of the induced coordinate maps and their composites.",
+   "via": [
+    "lem-trf-formal-jacobian-coordinate-chain-rule",
+    "lem-trf-formal-jacobian-minor-invariance",
+    "lem-trf-formal-jacobian-quadratic-criterion",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-hom-cotangent-linearization",
+  "worker": "stage1",
+  "summary": "Retained the statement. Reused the existing quadratic-ideal lemma rather than creating any cotangent-basis or functoriality nodes. Wrote the coefficient product calculation, normal form, quotient-map construction, row-matrix formula and composition entries explicitly, including empty variable sets. Mathlib and upstream searches supply related maps but no declaration covering every clause.",
+  "blueprint": "Supplies the cotangent coefficient and functoriality detail of the formal-Jacobian coordinate-chain-rule split, inherited through lem-trf-local-term-locality. Source 0C4B final coordinate-change paragraph omits these details; steps 1-2 establish the coordinate bases, 3-4 the induced map, and 5 its composition and identity laws. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-quadratic-ideal",
+    "why": "Generic finite-variable coefficient criterion for membership in the square of the variables ideal; it supplies only the remainder membership in step 2. No node in sk-i-curve-zero gives this coefficient criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-quadratic-ideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O3-dbd8eeaeb",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-dbd8eeaeb (reviewer sub-agent of L); spot-checked: I read the whole item at dbd8eeae: 5 steps, statement unchanged, no new nodes. Live and side-live still have the item unsplit with an empty proof, so no other group has superseded it. Source: Stacks curves.tex 0C4B (lemma-fitting-ideal-well-defined); its final 'matrix (∂y_j/∂x_i) is invertible ... details omitted' is what this item supplies to the parent coordinate-chain-rule, whose Step 2 uses the row convention L_{θψ}=L_ψL_θ. Step 1: Cauchy-product formulas for constant and linear coefficients show that 𝔞 and 𝔞² have zero constant and zero linear coefficients; elementary and correct. Step 2: the remainder q=h−c(h)−Σℓ_i t_i has zero constant and linear coefficients, so lem-weil-pbc-power-series-quadratic-ideal (any commutative R, finite σ, empty allowed; it cites only the power-series definition, so no cycle) gives q∈𝔞². This yields 𝔞=ker c and the coefficient isomorphism with inverse v↦[Σv_i t_i]. Step 3: constant coefficients are preserved and ψ(𝔞²)⊆𝔟², so the quotient map is well-defined and F-linear, with no continuity used. Step 4: the row formula follows from ψ(q)∈𝔟². Step 5: the (i,k) entry gives L_{θψ}=L_ψL_θ, and L_id=I_m. Small cases tested: m=n=1 with ψ(t)=az+bz², a 2×2 example where t1t2 has no linear image, composition entry ac, characteristic p with z^p (L=0), and m=0 / n=0. Duplicates: power-series-first-order-coordinates gives existence only. The basis clause of cotangent-quadratic-relation-invariance overlaps partly but has no maps or matrices, and neither node is cited here. No blueprint node states the item. Accepted tool use: lem-weil-pbc-power-series-quadratic-ideal (sk-thm-p1), a generic coefficient criterion used only in Step 2. Advisory: def-weil-matrix does not define the matrix product (a standard finite sum, named in Step 5), and citations.json / searches.jsonl named in the report are not in the commit. No SGA; proof_deps equals the union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalHomCotangentLinearization",
+  "declaration": "MvPowerSeries.formal_hom_cotangent_linearization",
+  "declarations": [
+   "MvPowerSeries.linearCoefficientMatrix",
+   "MvPowerSeries.formal_hom_cotangent_linearization"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormalHomCotangentLinearization.lean",
+  "statement": "theorem formal_hom_cotangent_linearization (F : Type u) [Field F] (m n : ℕ) (ψ : MvPowerSeries (Fin m) F →ₐ[F] MvPowerSeries (Fin n) F) (hψ : Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F)) ≤ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))).comap ψ) : ∃ (eS : (Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))).Cotangent ≃ₗ[F] (Fin m → F)) (eT : (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))).Cotangent ≃ₗ[F] (Fin n → F)), (∀ h : Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F)), eS ((Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))).toCotangent h) = fun i ↦ coeff (Finsupp.single i 1) (h : MvPowerSeries (Fin m) F)) ∧ (∀ h : Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F)), eT ((Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))).toCotangent h) = fun j ↦ coeff (Finsupp.single j 1) (h : MvPowerSeries (Fin n) F)) ∧ (∀ i : Fin m, eS ((Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))).toCotangent ⟨X i, Ideal.subset_span ⟨i, rfl⟩⟩) = Pi.single i 1) ∧ (∀ j : Fin n, eT ((Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))).toCotangent ⟨X j, Ideal.subset_span ⟨j, rfl⟩⟩) = Pi.single j 1) ∧ (∀ h : MvPowerSeries (Fin m) F, constantCoeff (ψ h) = constantCoeff h) ∧ (∀ v : (Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))).Cotangent, eT (Ideal.mapCotangent (Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))) (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ψ hψ v) = Matrix.vecMul (eS v) (linearCoefficientMatrix ψ)) ∧ (∀ h : Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F)), ∀ j : Fin n, coeff (Finsupp.single j 1) (ψ h) = ∑ i : Fin m, coeff (Finsupp.single i 1) (h : MvPowerSeries (Fin m) F) * linearCoefficientMatrix ψ i j) ∧ (∀ (r : ℕ) (θ : MvPowerSeries (Fin n) F →ₐ[F] MvPowerSeries (Fin r) F) (hθ : Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F)) ≤ (Ideal.span (Set.range (X : Fin r → MvPowerSeries (Fin r) F))).comap θ), Ideal.mapCotangent (Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))) (Ideal.span (Set.range (X : Fin r → MvPowerSeries (Fin r) F))) (θ.comp ψ) (fun h hh ↦ hθ (hψ hh)) = (Ideal.mapCotangent (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) (Ideal.span (Set.range (X : Fin r → MvPowerSeries (Fin r) F))) θ hθ).comp (Ideal.mapCotangent (Ideal.span (Set.range (X : Fin m → MvPowerSeries (Fin m) F))) (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) F))) ψ hψ) ∧ linearCoefficientMatrix (θ.comp ψ) = linearCoefficientMatrix ψ * linearCoefficientMatrix θ) ∧ linearCoefficientMatrix (AlgHom.id F (MvPowerSeries (Fin m) F)) = (1 : Matrix (Fin m) (Fin m) F)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The coefficient isomorphisms are characterized on every representative by the first two conjuncts; the canonical induced quotient map is Mathlib Ideal.mapCotangent. The helper linearCoefficientMatrix gives the actual coefficient matrix."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7cf535b6e",
+  "group": "NI",
+  "result": "pass",
+  "note": "Node differs from side-live only in lean; lean.statement verbatim in file; stmt_deps MvPowerSeries/Matrix used directly; proof_dep module PowerSeriesQuadraticIdeal imported non-public (exists in side-live). Clause-by-clause: eS/eT ≃ₗ[F] pinned on every representative by linear coeffs (unique, not arbitrary), Pi.single basis, constantCoeff preservation for all h, canonical Ideal.mapCotangent, vecMul row convention (Mul.lean:717), coefficient sum, composition of mapCotangent with hθ∘hψ, L_{θψ}=L_ψ L_θ (m×n·n×r), L_id=1. Edge cases m/n/r=0 and char p z^p fine; no extra assumptions, universe u free. Source curves.tex 0C4B l.4088-4091 read. Helper linearCoefficientMatrix real data; proof sorry only; docstrings with source+blueprint+5 steps; report sections present. No duplicate in Mathlib or project (parent jacobianP/Q are derivative series, different object). Not recompiled per instructions."
+ }
+}

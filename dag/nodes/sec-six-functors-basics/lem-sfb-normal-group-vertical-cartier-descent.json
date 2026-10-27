@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-normal-group-vertical-cartier-descent",
+ "kind": "statement",
+ "title": "Vertical Cartier divisors of a smooth connected group over a normal base",
+ "statement": "Let $S$ be a normal integral locally Noetherian scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth], where normal means that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $p:G\\to S$ be a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with identity $e$. The addition, inverse and identity are $S$-morphisms satisfying the commutative group identities; separated means that the diagonal is a closed immersion. Assume the geometric fibres of $p$ are connected. Let $U\\subseteq S$ be a dense open subscheme [def-weil-open-immersion], and put $G_U=G\\times_SU$. Then $G$ is normal and integral, and $G_U$ is dense in $G$. A Cartier divisor on an integral scheme means local nonzero rational functions modulo regular units, with the ratios on overlaps regular units. Its support is the locus where these local functions are not regular units. Every Cartier divisor $D$ on $G$ supported in $G\\setminus G_U$ has a well-defined pullback $e^*D$, supported in $S\\setminus U$, and satisfies $D=p^*(e^*D)$. In particular $e^*D=0$ implies $D=0$. If $L$ is an invertible module on $G$ and $s$ is a nonzero rational section (a nonzero element of its one-dimensional fibre over the function field), its Cartier divisor is given in a local frame by the rational coefficient of $s$. Such a section is an everywhere invertible regular section if and only if its Cartier divisor is zero.",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "II 3.2.1--3.2.3, normal-base uniqueness input; agent-formulated vertical-Cartier-divisor lemma. Local original WANTED. Normality and the divisor dictionary are part of the stated geometric input, not inferred from regularity of S."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-open-immersion",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-integral-cartier-divisor"
+ ],
+ "proof": [
+  {
+   "text": "The identity section makes $p$ surjective and $G$ nonempty. Apply [lem-sbc-smooth-connected-generic-geometry-core] to $p$: the normal integral base and geometrically connected fibres give normal integral $G$. By [lem-trf-smooth-connected-fibre-normal-integrality] every fibre $G_t$ is integral and nonempty (nonemptiness also follows from $e(t)$). By [lem-pc-smooth-flat] $p$ is flat and locally of finite presentation. Such a morphism is locally of finite type directly from its finite-presentation affine equations; [pqf-lem-locnoeth-lft] therefore makes $G$ locally Noetherian. Its local rings are Noetherian since they are localizations of Noetherian affine rings (localizing finite generators of the contraction generates any ideal). As $p$ is surjective and $G,S$ are integral, the generic point of $G$ maps to the generic point of $S$: its image specializes to every point of $S$. Hence $G_U$ contains the generic point of $G$ and is dense.",
+   "uses": [
+    "lem-sbc-smooth-connected-generic-geometry-core",
+    "lem-trf-smooth-connected-fibre-normal-integrality",
+    "lem-pc-smooth-flat",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, proof: local factorization followed by comparison over an irreducible fibre; applied to local Cartier equations with the given section."
+   }
+  },
+  {
+   "text": "Fix $x\\in G$ and $t=p(x)$. Set $A=\\mathcal O_{S,t}$ and $B=\\mathcal O_{G,x}$. The stalk map is flat and local by [def-weil-flat-morphism]. Both are Noetherian domains and $A$ is normal, by step 1 and the assumptions. The fibres of $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ are localizations of the integral fibres of $p$ and are nonempty: the flat local map is faithfully flat, by [lem-weil-pbc-flat-local-hom-faithfully-flat], which gives surjectivity on spectra. Each resulting fibre ring is a localization of a domain. A local equation $f_x\\in k(G)^\\times$ for $D$ is a unit on the generic fibre of $\\operatorname{Spec}B$, since that fibre lies over $U$. Thus $f_x\\in B_K^\\times$: its regular local representatives, and those of its inverse, agree as fractions and glue on this affine generic fibre. Apply [lem-sfb-local-generic-unit-factorization] to write $f_x=p^*h_x\\,u_x$ with $h_x\\in k(S)^\\times$ and $u_x\\in B^\\times$. A unit germ and its inverse have regular representatives on a neighbourhood, so $D=\\operatorname{div}(p^*h_x)$ on an open neighbourhood $W_x$ of $x$.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-sfb-local-generic-unit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, proof: local factorization followed by comparison over an irreducible fibre; applied to local Cartier equations with the given section."
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ and take the equation $h=h_{e(s)}$ and neighbourhood $W=W_{e(s)}$ from step 2. Put $V=e^{-1}W$, an open neighbourhood of $s$. We claim $D=\\operatorname{div}(p^*h)$ throughout $G_V$. For $t\\in V$ and $x\\in G_t$, choose $h_x,W_x$ as in step 2. The nonempty opens $W\\cap G_t$ and $W_x\\cap G_t$ intersect since $G_t$ is integral; choose $z$ in their intersection. Near $z$, both $p^*h$ and $p^*h_x$ represent $D$, so $p^*(h_x/h)$ is a regular unit at $z$. The final assertion of [lem-sfb-local-generic-unit-factorization], for $\\mathcal O_{S,t}\\to\\mathcal O_{G,z}$ with the same hypotheses verified in step 2, gives $h_x/h\\in\\mathcal O_{S,t}^\\times$. Pulling this unit to $\\mathcal O_{G,x}$ shows that $p^*h$ and $p^*h_x$ have the same Cartier class at $x$. This proves the claim. This comparison uses unit reflection, not the false assertion that an arbitrary rational function on $G$ restricts along $e$.",
+   "uses": [
+    "lem-sfb-local-generic-unit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, proof: local factorization followed by comparison over an irreducible fibre; applied to local Cartier equations with the given section."
+   }
+  },
+  {
+   "text": "For each $s$, step 3 gives $V_s$ and $h_s\\in k(S)^\\times$ such that $D|_{G_{V_s}}=\\operatorname{div}(p^*h_s)$. On an overlap $V_s\\cap V_{s'}$, the rational function $p^*(h_s/h_{s'})$ is a regular unit on its whole inverse image. Its restriction along $e$ is consequently a regular unit, with rational value $h_s/h_{s'}$. Thus the equations $h_s$ glue to a Cartier divisor $E$ on $S$, and their pullbacks show $D=p^*E$. These very equations define the pullback along $e$: write $h_s=a_s/b_s$ locally with $a_s,b_s$ nonzero regular base functions; their pullbacks along $p$ and then $e$ are again $a_s,b_s$, so no zero rational denominator is introduced. Therefore $e^*D=E$. Over $U$, $D=0$, hence $p^*h_s$ is a unit there and restriction by $e$ makes $h_s$ a unit on $U\\cap V_s$. It follows that $E$ is supported in $S\\setminus U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, proof: local factorization followed by comparison over an irreducible fibre; applied to local Cartier equations with the given section."
+   }
+  },
+  {
+   "text": "The established identity is exactly $D=p^*(e^*D)$. If $e^*D=0$, its local equations are units; pulling these units back makes every local equation of $D$ a unit, so $D=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, proof: local factorization followed by comparison over an irreducible fibre; applied to local Cartier equations with the given section."
+   }
+  },
+  {
+   "text": "Choose regular frames $v_i$ for the invertible module $L$, and write the given rational section as $s=f_i v_i$ with $f_i\\in k(G)^\\times$. On an overlap, changing the frame multiplies $f_i$ by a regular unit, so these functions define its Cartier divisor. This divisor is zero precisely when every $f_i$ is a regular unit. In that case the sections $f_i v_i$ are regular generators and agree on overlaps: their rational values agree and the structure sheaf on an integral scheme injects into its function field. They glue to an everywhere invertible regular section. Conversely the coefficients of any such section in regular frames are units, so its Cartier divisor is zero.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0B8Z and 0BE8, rational sections in local frames; the Cartier (rather than Weil) zero-divisor assertion is immediate from the local unit definition in the item."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-pc-smooth-flat",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-sfb-local-generic-unit-factorization",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD7, lemma-in-image-pullback, proof: retain its local generic-unit factorization and irreducible-fibre comparison; the given section selects and glues the base Cartier equations. Last assertion is the local-frame definition, cf. Tag 0B8Z."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A vertical Cartier divisor on a smooth group scheme with geometrically connected fibres over a normal integral base is pulled back from the base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"Given a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the morphisms $\\\\operatorname{Spec}(\\\\kappa(T.x)) \\to \\\\operatorname{Spec}(T.tensor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g),\\n  CategoryTheory.IsPullback (AlgebraicGeometry.Spec.map T.tensorInl) (AlgebraicGeometry.Spec.map T.tensorInr)\\n    (AlgebraicGeometry.Spec.map\\n      (CategoryTheory.CategoryStruct.comp (A\", \"doc\": \"For any pullback triplet in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the Spec maps of the left/right inclusions into the pushout of residue fields $T.te\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap T.SpecTensorTo p))\\n      (\", \"doc\": \"For a pullback triplet $T$ in the category of schemes and a point $p$ in the spectrum of $T.tensor$, the composition of the morphisms $\\\\mathrm{Spec.map}(\\\\mathrm{Hom.residueFieldMap}(T.\\\\mathrm{SpecTens\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_SpecTensorTo\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (T : AlgebraicGeometry.Scheme.Pullback.Triplet f g)\\n  (p : ↥(AlgebraicGeometry.Spec T.tensor)),\\n  AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint ((CategoryTheory.ConcreteCategory.hom T.SpecTensorTo.base) p) = T\", \"doc\": \"For a pullback triplet $ T $ in the category of schemes and a point $ p $ in the spectrum of $ T.tensor $, applying the $ ofPoint $ function to the morphism $ T.SpecTensorTo(p) $ yields the original t\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartier divisors supported over the complement of a dense open descend along smooth morphisms with integral fibres and a section",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": (toOpensFunctor X).IsDenseSubsite (grothendieckTopology X) (Opens.grothendieckTopology X)\", \"doc\": \"The inclusion functor from the affine Zariski site of a scheme $X$ to its open subsets category is a dense subsite with respect to the Zariski topology. This means that the collection of affine open s\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": (isomorphisms Scheme.{u}).DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \": DescendsAlong @UniversallyClosed (@Surjective ⊓ @Flat ⊓ @QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CartierDivisor\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "grep",
+   "query": "[Vv]ertical.*[Dd]ivisor|[Dd]ivisor.*[Vv]ertical|CartierDivisor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of restriction of the Picard group of a smooth group scheme to the generic fibre consists of line bundles pulled back from the normal base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.ker_unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : Semiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], (Submodule.unitsToPic R A).ker = (Units.map ↑(Submodule.spanSingleton R)).range\", \"doc\": \"The kernel of the monoid homomorphism from invertible submodules of an $ R $-module $ A $ to the Picard group $ \\\\mathrm{Pic}(R) $ consists precisely of the principal invertible submodules, which are t\"}\n  {\"name\": \"CommRing.relPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] → (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → Subgroup (CommRing.Pic R)\", \"doc\": \"The subgroup of $ \\\\mathrm{Pic}(R) $ consisting of isomorphism classes of invertible $ R $-semimodules that become trivial when extended to the $ R $-algebra $ A $ via the tensor product. This is defin\"}\n  {\"name\": \"Submodule.range_unitsToPic\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], (Submodule.unitsToPic R A).range = CommRing.relPic R A\", \"doc\": \"The image of the monoid homomorphism from invertible submodules of an $ R $-module $ A $ to the Picard group $ \\\\mathrm{Pic}(R) $ is equal to the relative Picard subgroup $ \\\\mathrm{relPic}(R, A) $, whi\"}\n  {\"name\": \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ (R : Type u) (A : Type u_4) [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : Algebra R A]\\n  [inst_3 : FaithfulSMul R A], Function.MulExact ⇑(Submodule.unitsToPic R A) ⇑(CommRing.Pic.mapAlgebra R A)\", \"doc\": \"The group homomorphism from the Picard group of $ R $ to the Picard group of $ A $, induced by an $ R $-algebra structure, satisfies the multiplicative exactness condition with respect to the monoid h\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerFunctor_obj\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ (Y : AlgebraicGeometry.Scheme) (f : (CategoryTheory.Over Y)ᵒᵖ),\\n  Y.kerFunctor.obj f = AlgebraicGeometry.Scheme.Hom.ker (Opposite.unop f).hom\", \"doc\": \"The functor assigns to each object in the opposite category of the over category over a scheme $ Y $ the kernel of its structure morphism as an ideal sheaf on $ Y $. For morphisms, it maps a morphism \"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.valuation_ker_eq\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [inst_4 : IsFractionRing R K] {S : Set (IsDedekindDomain.HeightOneSpectrum R)} {n : ℕ},\\n  IsDedekindDomain.selmerGroup.valuation.ker = IsDedekindDomain.selmerGroup.subgroupOf IsD\", \"doc\": \"The kernel of the valuation homomorphism from the Selmer group $ K^\\times/(K^\\times)^n $ with respect to a set $ S $ of height one prime ideals is equal to the subgroup of the Selmer group corresponding\"}\n  {\"name\": \"CommRing.Pic.mapAlgebra\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"(R : Type u) →\\n  [inst : CommSemiring R] →\\n    (A : Type u_7) → [inst_1 : CommSemiring A] → [Algebra R A] → CommRing.Pic R →* CommRing.Pic A\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-algebra $ A $, this defines a group homomorphism from the Picard group $ \\\\mathrm{Pic}(R) $ to $ \\\\mathrm{Pic}(A) $. It maps each isomorphism class of inver\"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDedekindDomain R] {K : Type v} [inst_2 : Field K] [inst_3 : Algebra R K]\\n  [inst_4 : IsFractionRing R K] {n : ℕ} [hn : Fact (0 < n)],\\n  IsDedekindDomain.selmerGroup.fromUnit.ker = (powMonoidHom n).range\", \"doc\": \"The kernel of the homomorphism from the group of units $ R^\\times $ to the Selmer group $ K^\\times/(K^\\times)^n $ is equal to the subgroup of $ R^\\times $ consisting of all $ n $-th powers of units in $ R\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations and types. The hits concern ordinary sections/localization, ring Picard groups, tensor powers of modules, abstract group objects, generic smooth/flat morphisms, or quadratic forms; none states this relative group-scheme line/divisor or multiplication theorem. A second semantic phrasing also gave no match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-symmetric-cubical-extension",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Vertical Cartier divisors of a smooth connected group over a normal base",
+   "via": [
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-group-vertical-cartier-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split via one strictly local commutative-algebra input extracted from Stacks 0BD7, existing normal/smooth/fibre geometry, and an explicit fibre-overlap comparison using the section. Proved existence of e-pullback by constructing base equations first, rather than assuming arbitrary meromorphic functions restrict to the identity. No regularity of the normal base is used. Original Moret-Bailly PDF is absent; a complete alternative local divisor argument follows Stacks. One new unsplit node, no Mathlib leaves.",
+  "blueprint": "Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3): supporting geometric input on the inherited alteration/plurinodal/Picard/cubical-extension chain. This auxiliary is below the unit route; no unit or chapter step is replaced. The inherited computed blueprint.from.node=null and via chain are retained; from.place specifies the exact supporting use.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry-core",
+    "why": "Normal integral geometry for the smooth connected family; a generic geometric tool, absent from this unit."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Integrality of each smooth geometrically connected fibre; a generic geometry tool, absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "Surjectivity on spectra of the flat local stalk map, to verify nonempty fibres of the local algebra lemma; absent from this unit."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Flatness of smooth morphisms; a generic geometry tool, absent from this unit."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Local Noetherianity of the finite-type total space; a generic geometry tool, absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-pc-smooth-flat",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-23bf1ce39",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-23bf1ce39 (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item, its 6 steps and the new node lem-sfb-local-generic-unit-factorization in full, together with Stacks divisors.tex lemma-in-image-pullback (0BD7: full statement and proof). New node: it is the 0BD7 affine paragraph for a flat local map of Noetherian domains A->B with A normal and integral nonempty fibres. Every unit of the generic fibre is a base fraction times a unit of B, the base factor is unique mod A^x, and units reflect. I checked the proof myself. p_iB is prime because B/p_iB is torsion-free and its localization is a domain. B_{p_iB} is a DVR with e=1. The symbolic-power intersections I, I' satisfy II'=(rr') by faithful flatness, so they are invertible and principal since A is local. Unit reflection follows from dB∩A=dA. Small cases: field base, DVR base, the normal non-UFD cone xy=z^2, and B=A[t]/(t^2-pi), which shows the integral-fibre hypothesis is needed. B1-B7 pass (statement only, searches recorded, no SGA). It is strictly smaller than the item, not a restated clause. Duplicate search: rg over the DAG for 0BD7, symbolic powers, vertical Cartier and generic-fibre units. I read lem-sfb-smooth-integral-fibre-vertical-divisors (regular base), lem-sfb-smooth-generic-trivial-line-descent (regular base, line bundles) and lem-per-vertical-symbolic-powers-completion; none is a duplicate. Step 1: geometric-core gives G normal and integral, the lem-trf node gives integral fibres, and smooth gives flat and lft, so G is locally Noetherian. Density: p surjective forces the generic point of G onto the generic point of S. Step 2: the hypotheses of the new node hold at every stalk; nonempty fibres come from flat local implies faithfully flat. f_x lies in B_K^x because D is trivial over U and B_K is the intersection of its localizations. Step 3: the irreducible fibre G_t gives a common point z, then unit reflection at O_{S,t}->O_{G,z}, exactly as in Stacks. Steps 4-6 are elementary gluing, the definition of e^*D through the base equations, the support check, and local frames. proof_deps equals the union of the step uses. Batch-5 flag: lem-trf-smooth-connected-fibre-normal-integrality is accepted. It is generic scheme geometry (smooth base change plus the sbc smooth-connected core). Its closure reaches only the generic Mathlib base-change leaf lem-pod-separated-finite-type-base-change and no trace-formula or Poincaré-duality proof node, and five other nodes already cite it. The worker-written split_report.tool_uses lists five generic geometry tools. I accept them all; under C8 that field belongs to the maintainer."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalGroupVerticalCartierDescent",
+  "declaration": "AlgebraicGeometry.Scheme.normal_group_vertical_cartier_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalGroupVerticalCartierDescent.lean",
+  "statement": "theorem normal_group_vertical_cartier_descent (S : Scheme.{u}) [IsIntegral S] [IsLocallyNoetherian S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x)) (G : Over S) [GrpObj G] [IsCommMonObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFinitePresentation G.hom] [QuasiCompact G.hom] [GeometricallyConnected G.hom] (U : S.Opens) (hU : Dense (U : Set S)) : IsIntegral G.left ∧ (∀ x : G.left, IsDomain (G.left.presheaf.stalk x) ∧ IsIntegrallyClosed (G.left.presheaf.stalk x)) ∧ Dense (G.hom ⁻¹' (U : Set S)) ∧ ∀ [IsIntegral G.left], (∀ D : IntegralCartierDivisor G.left, integralCartierSupport D ⊆ (G.hom ⁻¹' (U : Set S))ᶜ → ∃ E : IntegralCartierDivisor S, integralCartierPullback? (X := S) ((Over.mkIdTerminal.uniqueUpToIso CartesianMonoidalCategory.isTerminalTensorUnit).hom ≫ MonObj.one (X := G)).left D = some E ∧ integralCartierSupport E ⊆ (U : Set S)ᶜ ∧ integralCartierPullback? G.hom E = some D ∧ (E = integralCartierZero S → D = integralCartierZero G.left)) ∧ (∀ (L : G.left.Modules) [L.IsInvertible] (s : ↑(TopCat.Presheaf.stalk L.val.presheaf (genericPoint G.left))), s ≠ 0 → ∃ D : IntegralCartierDivisor G.left, (∀ D' : IntegralCartierDivisor G.left, HasIntegralCartierDivisor L s D' ↔ D' = D) ∧ (IsInvertibleRegularRationalSection L s ↔ D = integralCartierZero G.left))",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-23",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-a2d8353e8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2d8353e8",
+  "group": "Q51",
+  "result": "fix",
+  "note": "H3: rational-section clause `∃! D, Has L s D ∧ (Inv ↔ D=0)` restricted uniqueness to divisors that also satisfy the iff, so it did not state that s has a unique Cartier divisor. FIX rewrites it as `∃ D, (∀ D', Has L s D' ↔ D' = D) ∧ (Inv ↔ D = 0)` in fixes/NormalGroupVerticalCartierDescent.lean, with the verbatim statement in fixes/lem-sfb-normal-group-vertical-cartier-descent.lean-record.json; nt_compile --json clean, error control rejected. All other hypotheses and clauses checked against the node: normal integral base, smooth separated finite-presentation commutative GrpObj over S, GeometricallyConnected (nonemptiness supplied by e), dense U, G normal integral, G_U dense, e = mkIdTerminal iso ≫ MonObj.one, canonical partial Cartier pullback (fraction class independent of representative), support in Uᶜ, p^*E = D, E=0→D=0. New node def-sfb-integral-cartier-divisor justified: no scheme Cartier-divisor notion in Mathlib, side-live or slopmaster2 (only curve Weil divisors, effective Cartier ideals, algebraic-space Cartier divisors with flat pullback only, K_X); real data, docstrings present. Advisory: stage-1 stmt_dep def-pc-module-pullback unused in the Lean statement."
+ }
+}

@@ -1,0 +1,185 @@
+{
+ "id": "lem-sf-exact-closed-derived-hom",
+ "kind": "statement",
+ "title": "Exact closed functors preserve unbounded derived internal Hom",
+ "statement": "Let C,D be closed braided monoidal Grothendieck abelian categories with additive tensor and functorial flat resolutions. Let F:C→D be an additive exact strong monoidal left adjoint preserving flat objects. Suppose F also has an additive exact left adjoint L, and its ordinary canonical internal-Hom comparisons F[X,Y]→[FX,FY] are isomorphisms. Then the unbounded exact derived functor D(F), with the strong monoidal structure transported from the canonical K-flat left-derived tensor comparison, has invertible canonical internal-Hom comparison at every pair of derived objects.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 07A4; exact-functor and tensor-Hom localization argument made explicit below."
+ },
+ "proof": [
+  {
+   "text": "The exact left adjoint of F implies that F sends K-injective complexes to K-injectives. On complexes, ordinary closedness gives the canonical Hom-complex comparison isomorphism, using the adjunction to preserve the products in the Hom complex. Pass to the homotopy categories. The quotient functor preserves internal Hom because its closed adjunction is induced by the complex adjunction; the evaluation transpose is precisely the quotient comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 07A4; exact-functor and tensor-Hom localization argument made explicit below."
+   }
+  },
+  {
+   "text": "On a K-injective target, the comparison from homotopy internal Hom to derived internal Hom is invertible. Prove the factorization square for the derived functor monoidal by its canonical tensor/counit equation. Naturality and composition of internal-Hom comparisons identify the ordinary comparison transported through the quotient and localization with the derived evaluation transpose. Cancel the three known invertible arrows in this square.",
+   "uses": [
+    "new-integral-residue-derived-monoidal-counit",
+    "new-lem-kun-exact-monoidal-equivalence-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 07A4; exact-functor and tensor-Hom localization argument made explicit below."
+   }
+  },
+  {
+   "text": "Every first derived input has a complex representative; every second input has a K-injective representative. Naturality of the canonical comparison under the two representing isomorphisms transports invertibility to every pair.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB (lemma-restriction-RHom-to-U) and 07A4; exact-functor and tensor-Hom localization argument made explicit below."
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-derived-monoidal-counit",
+  "new-lem-kun-exact-monoidal-equivalence-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-24",
+  "note": "Complete Lean proof using the existing ordinary Hom-complex, derived tensor/counit and localization APIs; no new holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The internal Hom comparison of an exact monoidal functor commutes with shifts and its isomorphism locus is triangulated",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift; CategoryTheory.Functor.IsHomological.exact; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated; CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated; CategoryTheory.Adjunction.IsTriangulated.mk'; CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated; CategoryTheory.Adjunction.IsTriangulated.mk''",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomComparison\"",
+   "results": "No matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison.*[Ss]hift|[Ss]hift.*ihomComparison",
+   "results": "No matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact closed strong monoidal functor with an exact left adjoint preserves internal Hom in unbounded derived categories",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Mm]onoidal|[Mm]onoidal.*mapDerivedCategory",
+   "results": "No matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal\" \"IsMonoidal\"",
+   "results": "loogle: Function expected at\n  \"Monoidal\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"IsMonoidal\"",
+   "date": "2026-10-24",
+   "verdict": "invalid query; not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal natural isomorphism between composites of exact monoidal functors induces a monoidal natural isomorphism of derived functors",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.IsMonoidal",
+   "results": "CategoryTheory.NatTrans.IsMonoidal.id; CategoryTheory.NatTrans.IsMonoidal; CategoryTheory.LaxMonoidalFunctor.Hom.isMonoidal; CategoryTheory.NatTrans.IsMonoidal.instHomFunctorLeftUnitor; CategoryTheory.NatTrans.IsMonoidal.instHomFunctorRightUnitor; CategoryTheory.Functor.Monoidal.natTransIsMonoidal_of_transport; CategoryTheory.Iso.instIsMonoidalInvFunctor; CategoryTheory.LaxMonoidalFunctor.Hom.mk",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison",
+   "results": "No matching declarations.",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact closed monoidal functor with an exact left adjoint preserves internal Hom on unbounded derived categories",
+   "results": "CategoryTheory.ihom; CategoryTheory.MonoidalClosed.internalHom; CategoryTheory.MonoidalClosed.FunctorCategory.monoidalClosed; CategoryTheory.MonoidalClosed.closed; CategoryTheory.exactFunctor; CategoryTheory.MonoidalClosedFunctor.mk",
+   "date": "2026-10-24",
+   "verdict": "no exact Mathlib match; general constructions do not identify the derived tensor square or closed comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SiteHomComparisonThick",
+  "date": "2026-10-24",
+  "group": "M2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, first paragraph: comparison commutes with restrictions; evaluation-transpose compatibility on the étale slice.",
+   "via": [
+    "lem-sf-site-hom-comparison-thick"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ExactClosedDerivedHom",
+  "file": "lean/Sheaf/Algebra/Homology/ExactClosedDerivedHom.lean",
+  "declaration": "CategoryTheory.Functor.isIso_ihomComparison_exactDerived",
+  "statement": "theorem isIso_ihomComparison_exactDerived (K : DerivedCategory C) :\n    letI := exactClosedDerivedMonoidal F\n    IsIso (Functor.LaxMonoidal.ihomComparison F.mapDerivedCategory K).natTrans",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-24",
+  "declarations": [
+   "CategoryTheory.Functor.closedComparison",
+   "CategoryTheory.Functor.exactClosedDerivedMonoidal",
+   "CategoryTheory.Functor.isIso_ihomComparison_exactDerived",
+   "CategoryTheory.closedComparison_square",
+   "CategoryTheory.Functor.isIso_closedComparison_exactDerived"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261025T002522-L-3122912",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261025T002522-L-3122912",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

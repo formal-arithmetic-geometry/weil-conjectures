@@ -144,5 +144,52 @@
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.subsingleton_fibreTensor_sectionCokernel"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.subsingleton_fibreTensor_sectionCokernel",
+     "module": "WeilConjectures.AlgebraicGeometry.FiniteFibreCokernelTensor",
+     "lines": [
+      29,
+      90
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to S$ be a finite morphism of schemes [def-pc-scheme], $U\\subseteq S$ an affine open, and $s\\in U$. Set $A=\\Gamma(U,\\mathcal O_S)$, $B=\\Gamma(f^{-1}U,\\mathcal O_X)$, and let $\\varphi:A\\to B$ be the section map. Let $\\mathfrak p\\in\\operatorname{Spec}A$ correspond to $s$. If $X_s\\to\\operatorname{Spec}\\kappa(s)$ is a closed immersion, then $\\kappa(\\mathfrak p)\\otimes_A (B/\\operatorname{im}\\varphi)=0$, where the image is taken as an $A$-submodule.",
+  "proof": [
+   {
+    "text": "Since $f$ is finite, $f^{-1}U$ is affine, and $f^{-1}U\\to U$ is $\\operatorname{Spec}\\varphi:\\operatorname{Spec}B\\to\\operatorname{Spec}A$. The point $s$ corresponds to $\\mathfrak p$ and $\\kappa(s)\\cong\\kappa(\\mathfrak p)$. By the affine description of fibres, the fibre $X_s\\to\\operatorname{Spec}\\kappa(s)$ is identified with $\\operatorname{Spec}(\\kappa(\\mathfrak p)\\otimes_AB)\\to\\operatorname{Spec}\\kappa(\\mathfrak p)$, the spectrum of the scalar map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p)\\otimes_AB$. A closed immersion of affine schemes is surjective on global sections, so this scalar map is surjective.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Let $q:B\\to B/\\operatorname{im}\\varphi$ be the quotient map of $A$-modules. Since $1\\in\\operatorname{im}\\varphi$ and every element of $\\kappa(\\mathfrak p)\\otimes_AB$ has the form $c\\otimes1$, the map $\\mathrm{id}\\otimes q:\\kappa(\\mathfrak p)\\otimes_AB\\to\\kappa(\\mathfrak p)\\otimes_A(B/\\operatorname{im}\\varphi)$ is zero. It is also surjective, by right exactness of $\\kappa(\\mathfrak p)\\otimes_A-$. Hence $\\kappa(\\mathfrak p)\\otimes_A(B/\\operatorname{im}\\varphi)=0$. If the fibre is empty, $\\kappa(\\mathfrak p)\\otimes_AB=0$ and the argument still applies.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

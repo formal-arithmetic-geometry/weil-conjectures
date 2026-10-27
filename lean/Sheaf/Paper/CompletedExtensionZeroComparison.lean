@@ -16,27 +16,15 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.Paper.ExactFunctorDerivedLimit
-import WeilConjectures.Algebra.Homology.RoosComplex
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
-import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
+import all Sheaf.Paper.CompletedTowerPullback
+import all Sheaf.AlgebraicGeometry.ProEtaleOperations
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Limits
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Mathlib.CategoryTheory.Sites.CoverLifting
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 /-! # Completed open-immersion base change
@@ -53,6 +41,133 @@ set_option backward.isDefEq.respectTransparency false
 set_option synthInstance.maxSize 2048
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
+/-- The counit equation determining a derived exchange on specified representatives.
+Naming the generic condition avoids repeated expansion in its concrete module instances.
+Source: universal derived counits (blueprint: lem-cbc-completed-extension-zero-comparison). -/
+def CategoryTheory.Functor.DerivedExchangeCounitNormalization
+    {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D']
+    [Abelian C] [Abelian C'] [Abelian D] [Abelian D']
+    [HasDerivedCategory C] [HasDerivedCategory C']
+    [HasDerivedCategory D] [HasDerivedCategory D']
+    (F : C ⥤ C') (G : D ⥤ D') (J : C ⥤ D) (J' : C' ⥤ D')
+    [F.Additive] [G.Additive] [J.Additive] [J'.Additive]
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    [PreservesFiniteLimits J'] [PreservesFiniteColimits J']
+    (LF : DerivedCategory C ⥤ DerivedCategory C')
+    (LG : DerivedCategory D ⥤ DerivedCategory D')
+    (ε : ∀ P : CochainComplex C ℤ, LF.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P))
+    (δ : ∀ P : CochainComplex D ℤ, LG.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj P))
+    (b : F ⋙ J' ⟶ J ⋙ G) (Good : CochainComplex C ℤ → Prop)
+    (α : LF ⋙ J'.mapDerivedCategory ⟶ J.mapDerivedCategory ⋙ LG) : Prop :=
+  ∀ P, Good P → α.app (DerivedCategory.Q.obj P) ≫
+      LG.map (J.mapDerivedCategoryFactors.hom.app P) ≫
+      δ ((J.mapHomologicalComplex (.up ℤ)).obj P) =
+    J'.mapDerivedCategory.map (ε P) ≫
+      J'.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex b (.up ℤ)).app P)
+
+/-- Derive a square using exact presentations and their normalized counits.
+Source: composition-factorization equations for exact derived functors
+(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+private theorem exactExchange_normalization
+    {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D']
+    [Abelian C] [Abelian C'] [Abelian D] [Abelian D']
+    [HasDerivedCategory C] [HasDerivedCategory C']
+    [HasDerivedCategory D] [HasDerivedCategory D']
+    (F : C ⥤ C') (G : D ⥤ D') (J : C ⥤ D) (J' : C' ⥤ D')
+    [F.Additive] [G.Additive] [J.Additive] [J'.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    [PreservesFiniteLimits J'] [PreservesFiniteColimits J']
+    (LF : DerivedCategory C ⥤ DerivedCategory C')
+    (LG : DerivedCategory D ⥤ DerivedCategory D')
+    (ε : ∀ P : CochainComplex C ℤ, LF.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P))
+    (δ : ∀ P : CochainComplex D ℤ, LG.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj P))
+    (e : LF ≅ F.mapDerivedCategory) (f : LG ≅ G.mapDerivedCategory)
+    (he : ∀ P, e.hom.app (DerivedCategory.Q.obj P) ≫
+      F.mapDerivedCategoryFactors.hom.app P = ε P)
+    (hf : ∀ P, f.hom.app (DerivedCategory.Q.obj P) ≫
+      G.mapDerivedCategoryFactors.hom.app P = δ P)
+    (b : F ⋙ J' ≅ J ⋙ G) (Good : CochainComplex C ℤ → Prop) :
+    Functor.DerivedExchangeCounitNormalization F G J J' LF LG ε δ b.hom Good
+      (Functor.whiskerRight e.hom J'.mapDerivedCategory ≫
+        (Functor.mapDerivedCategorySquareIso b).hom ≫
+        Functor.whiskerLeft J.mapDerivedCategory f.inv) := by
+  intro P _
+  have hs : (Functor.mapDerivedCategorySquareIso b).hom.app (DerivedCategory.Q.obj P) ≫
+      G.mapDerivedCategory.map (J.mapDerivedCategoryFactors.hom.app P) ≫
+      G.mapDerivedCategoryFactors.hom.app ((J.mapHomologicalComplex (.up ℤ)).obj P) =
+    J'.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫
+      J'.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex b.hom (.up ℤ)).app P) := by
+    dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app]
+    simp only [Category.assoc]
+    rw [Functor.mapDerivedCategoryCompIso_hom_app_factors,
+      Functor.mapDerivedCategoryNatIso_fac,
+      ← Functor.mapDerivedCategoryCompIso_hom_app_factors F J' P]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  rw [← hf]
+  have hn := f.inv.naturality (J.mapDerivedCategoryFactors.hom.app P)
+  simp only [Category.assoc]
+  rw [← reassoc_of% hn]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rw [hs, ← Functor.map_comp_assoc, he]
+
+/-- A normalized exchange is invertible if the counits and the underived exchange are.
+Source: cancellation and naturality on derived representatives
+(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+private theorem derivedExchange_isIso
+    {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D']
+    [Abelian C] [Abelian C'] [Abelian D] [Abelian D']
+    [HasDerivedCategory C] [HasDerivedCategory C']
+    [HasDerivedCategory D] [HasDerivedCategory D']
+    (F : C ⥤ C') (G : D ⥤ D') (J : C ⥤ D) (J' : C' ⥤ D')
+    [F.Additive] [G.Additive] [J.Additive] [J'.Additive]
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    [PreservesFiniteLimits J'] [PreservesFiniteColimits J']
+    (LF : DerivedCategory C ⥤ DerivedCategory C')
+    (LG : DerivedCategory D ⥤ DerivedCategory D')
+    (ε : ∀ P : CochainComplex C ℤ, LF.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P))
+    (δ : ∀ P : CochainComplex D ℤ, LG.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj P))
+    (b : F ⋙ J' ⟶ J ⋙ G) [IsIso b] (Good : CochainComplex C ℤ → Prop)
+    (hε : ∀ P, IsIso (ε P)) (hδ : ∀ P, IsIso (δ P))
+    (hrep : ∀ K, ∃ P, Good P ∧ Nonempty (DerivedCategory.Q.obj P ≅ K))
+    (α : LF ⋙ J'.mapDerivedCategory ⟶ J.mapDerivedCategory ⋙ LG)
+    (hα : Functor.DerivedExchangeCounitNormalization F G J J' LF LG ε δ b Good α) :
+    IsIso α := by
+  have hP (P : CochainComplex C ℤ) (hP : Good P) :
+      IsIso (α.app (DerivedCategory.Q.obj P)) := by
+    have := hε P
+    have := hδ ((J.mapHomologicalComplex (.up ℤ)).obj P)
+    have : IsIso ((NatTrans.mapHomologicalComplex b (.up ℤ)).app P) := by
+      change IsIso ((NatIso.mapHomologicalComplex (asIso b) (.up ℤ)).hom.app P)
+      infer_instance
+    have : IsIso (α.app (DerivedCategory.Q.obj P) ≫
+        LG.map (J.mapDerivedCategoryFactors.hom.app P) ≫
+        δ ((J.mapHomologicalComplex (.up ℤ)).obj P)) := by
+      rw [hα P hP]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      (LG.map (J.mapDerivedCategoryFactors.hom.app P) ≫
+        δ ((J.mapHomologicalComplex (.up ℤ)).obj P))
+  have (K : DerivedCategory C) : IsIso (α.app K) := by
+    obtain ⟨P, hflat, ⟨e⟩⟩ := hrep K
+    have := hP P hflat
+    have : IsIso ((LF ⋙ J'.mapDerivedCategory).map e.hom ≫ α.app K) := by
+      rw [α.naturality]
+      infer_instance
+    exact IsIso.of_isIso_comp_left ((LF ⋙ J'.mapDerivedCategory).map e.hom) _
+  exact NatIso.isIso_of_isIso_app _
+
 namespace AlgebraicGeometry.Scheme
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
@@ -110,7 +225,49 @@ theorem cbcModulePullbackAdjunction_exists {X Y : Scheme.{t}} (g : X ⟶ Y) :
                 ((proEtaleModuleToModel
                   (reductionModuleRing Y (pbcAdicCompletion Y d))).obj M)).val.app
                     (op ((AsSmall.up : Y.ProEt ⥤ proEtaleSiteModel Y).obj V)) x) := by
-  sorry
+  let R := pbcAdicCompletion Y d
+  let ai := proEtaleModuleInverseImageAdjunction g R
+  let a := ai.comp (pbcScalarAdjunction (completedCoefficientMap g d))
+  let er : (pbcRestrict (completedCoefficientMap g d) ⋙
+      proEtaleRingModuleDirectImage g R
+        ((proEtaleSheafInverseImage g CommRingCat.{t + 1}).obj R) (Iso.refl _)) ≅
+      cbcCompletedModuleDirectImage d g := by
+    refine NatIso.ofComponents (fun M ↦ ?_) ?_
+    · apply (SheafOfModules.fullyFaithfulForget _).preimageIso
+      exact PresheafOfModules.isoMk (fun V ↦ Iso.refl _)
+        (by intros; rfl)
+    · intro M N f
+      ext V x
+      rfl
+  let adj : completedModulePullback g d ⊣ cbcCompletedModuleDirectImage d g :=
+    a.ofNatIsoRight er
+  have hu (M : pbcModules Y R) (V : Y.ProEt) (x : M.val.obj (op V)) :
+      (adj.unit.app M).val.app (op V) x =
+        pbcTensorSection (completedCoefficientMap g d)
+          ((proEtaleModuleInverseImage g R).obj M)
+          (op ((proEtaleBaseChange g).obj V)) 1
+          (((cbcModelPullbackAdjunction d g).unit.app
+            ((proEtaleModuleToModel (reductionModuleRing Y R)).obj M)).val.app
+              (op ((AsSmall.up : Y.ProEt ⥤ proEtaleSiteModel Y).obj V)) x) := by
+    change ((pbcScalarAdjunction (completedCoefficientMap g d)).unit.app
+        ((proEtaleModuleInverseImage g R).obj M)).val.app
+        (op ((proEtaleBaseChange g).obj V)) ((ai.unit.app M).val.app (op V) x) = _
+    refine ((pbcScalarAdjunction_exists (completedCoefficientMap g d)).exists.choose_spec
+      ((proEtaleModuleInverseImage g R).obj M)
+      (op ((proEtaleBaseChange g).obj V)) ((ai.unit.app M).val.app (op V) x)).trans ?_
+    congr 1
+    change ((proEtaleModuleInverseImage g R).obj M).val.map (𝟙 _)
+      ((((cbcModelPullbackAdjunction d g).unit.app
+        ((proEtaleModuleToModel (reductionModuleRing Y R)).obj M)).val.app
+          (op ((AsSmall.up : Y.ProEt ⥤ proEtaleSiteModel Y).obj V)))
+            (M.val.map (𝟙 _) x)) = _
+    simp only [PresheafOfModules.map_id]
+    rfl
+  refine ⟨adj, hu, ?_⟩
+  intro adj' hadj'
+  apply Adjunction.ext
+  ext M V x
+  exact (hadj' M V.unop x).trans (hu M V.unop x).symm
 
 /-- The tensor-unit normalized adjunction for the recorded pullback construction.
 Source: Tag 03D7 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
@@ -132,7 +289,12 @@ theorem cbcCompletedPullbackComparison_naturality {X Y : Scheme.{t}} (g : X ⟶ 
     {K L : DerivedCategory (pbcModules Y (pbcAdicCompletion Y d))} (f : K ⟶ L) :
     (completedOrdinaryPullback g d).map f ≫ completedPullbackComparison g d L =
       completedPullbackComparison g d K ≫ (cbcCompletedPullback d g).map f := by
-  sorry
+  let η : completedOrdinaryPullback g d ⟶ cbcCompletedPullback d g :=
+    Functor.whiskerLeft (completedOrdinaryPullback g d) (completedConstantRlimUnit d X) ≫
+      Functor.whiskerRight ((completedPullbackConstantIso g d).hom ≫
+        Functor.whiskerRight (completedReductionTowerUnit d Y) (completedTowerPullback g d))
+        (completedTowerRlim d X)
+  exact η.naturality f
 
 /-- The recorded completion-unit comparison with its naturality statement.
 Source: Tag 099N (blueprint: lem-cbc-completed-extension-zero-comparison). -/
@@ -146,7 +308,8 @@ Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison).
 Proof: an open immersion is etale, and etale morphisms are weakly etale. -/
 theorem cbcOpenWeaklyEtale {U T : Scheme.{t}} (j : U ⟶ T)
     (_hj : IsOpenImmersion j) : WeaklyEtale j := by
-  sorry
+  let := _hj
+  infer_instance
 
 /-- Forget the ambient structure map in a pro-etale slice object.
 Source: Tag 0951 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
@@ -166,7 +329,77 @@ identification in weaklyEtale_localization, with its concrete underlying maps. -
 @[instance] theorem cbcSliceFunctor_continuous (T : Scheme.{t}) (W : T.ProEt) :
     (cbcSliceFunctor T W).IsContinuous ((ProEt.topology T).over W)
       (ProEt.topology W.left) := by
-  sorry
+  have : (ProEt.sliceEquiv T W).symm.functor.IsCocontinuous (ProEt.topology W.left)
+      ((ProEt.topology T).over W) := ProEt.sliceFrom_cocont T W
+  exact (ProEt.sliceEquiv T W).symm.toAdjunction.isContinuous_of_isCocontinuous
+    (ProEt.topology W.left) ((ProEt.topology T).over W)
+
+-- These private coefficient constructions also occur in RingedOpenStrictReduction.
+-- That module imports this one, so we construct them here without importing it.
+private local instance sliceFunctor_cocontinuous (T : Scheme.{t}) (W : T.ProEt) :
+    (cbcSliceFunctor T W).IsCocontinuous ((ProEt.topology T).over W)
+      (ProEt.topology W.left) :=
+  ( (ProEt.sliceEquiv T W).toAdjunction.isCocontinuous_iff_coverPreserving
+    ((ProEt.topology T).over W) (ProEt.topology W.left)).mpr (ProEt.sliceFrom_cover T W)
+
+private def finiteSliceIso {T : Scheme.{t}} (W : T.ProEt)
+    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
+    (reductionCoefficient T d n).over W ≅
+      ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
+        ((ProEt.topology T).over W) (ProEt.topology W.left)).obj
+          (reductionCoefficient W.left d n) :=
+  (((Over.forget W).pushforwardContinuousSheafificationCompatibility CommRingCat.{t + 1}
+    ((ProEt.topology T).over W) (ProEt.topology T)).app
+      (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))).symm ≪≫
+    ((cbcSliceFunctor T W).pushforwardContinuousSheafificationCompatibility
+      CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology W.left)).app
+        (AdicCoefficients.functionPresheaf W.left (A ⧸ d.ideal ^ (n + 1)))
+
+private theorem finiteSliceIso_unit {T : Scheme.{t}} (W : T.ProEt)
+    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) (V : Over W) :
+    (toSheafify (ProEt.topology T)
+      (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))).app (op V.left) ≫
+        (finiteSliceIso W d n).hom.hom.app (op V) =
+    (toSheafify (ProEt.topology W.left)
+      (AdicCoefficients.functionPresheaf W.left (A ⧸ d.ideal ^ (n + 1)))).app
+        (op ((cbcSliceFunctor T W).obj V)) := by
+  have h₁ := (Over.forget W).toSheafify_pullbackSheafificationCompatibility
+    CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology T)
+    (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))
+  have h₂ := (cbcSliceFunctor T W).toSheafify_pullbackSheafificationCompatibility
+    CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology W.left)
+    (AdicCoefficients.functionPresheaf W.left (A ⧸ d.ideal ^ (n + 1)))
+  have h₁' := NatTrans.congr_app h₁ (op V)
+  have h₂' := NatTrans.congr_app h₂ (op V)
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at h₁' h₂'
+  dsimp only [finiteSliceIso, Iso.trans_hom, Iso.symm_hom,
+    ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
+  have hid := congrArg (fun f ↦ f.hom.app (op V))
+    (((Over.forget W).pushforwardContinuousSheafificationCompatibility
+      CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology T)).app
+        (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))).hom_inv_id
+  dsimp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app] at hid
+  let α := ((Over.forget W).pushforwardContinuousSheafificationCompatibility
+    CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology T)).app
+      (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))
+  let β := ((cbcSliceFunctor T W).pushforwardContinuousSheafificationCompatibility
+    CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology W.left)).app
+      (AdicCoefficients.functionPresheaf W.left (A ⧸ d.ideal ^ (n + 1)))
+  calc
+    _ = ((toSheafify ((ProEt.topology T).over W)
+        ((Over.forget W).op ⋙
+          AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))).app (op V) ≫
+        α.hom.hom.app (op V)) ≫ α.inv.hom.app (op V) ≫ β.hom.hom.app (op V) :=
+      congrArg (fun f ↦ f ≫ α.inv.hom.app (op V) ≫ β.hom.hom.app (op V)) h₁'.symm
+    _ = _ := by
+      simp only [Category.assoc] at hid ⊢
+      rw [← Category.assoc (α.hom.hom.app _) (α.inv.hom.app _) _, hid,
+        Category.id_comp]
+      exact h₂'
+
+attribute [local irreducible] finiteSliceIso
+
 
 /-- The finite ring identification in the slice is fixed by local function sections.
 Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison).
@@ -185,12 +418,137 @@ theorem cbcFiniteSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) (n : ℕ) :
         (toSheafify (ProEt.topology W.left)
           (AdicCoefficients.functionPresheaf W.left (A ⧸ d.ideal ^ (n + 1)))).app
             (op ((cbcSliceFunctor T W).obj V)) := by
-  sorry
+  refine ⟨(finiteSliceIso W d n).hom, finiteSliceIso_unit W d n, ?_⟩
+  intro φ hφ
+  apply Sheaf.hom_ext
+  let α := ((Over.forget W).pushforwardContinuousSheafificationCompatibility
+    CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology T)).app
+      (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))
+  apply (cancel_epi α.hom.hom).mp
+  apply sheafify_hom_ext ((ProEt.topology T).over W) _ _
+    (((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
+      ((ProEt.topology T).over W) (ProEt.topology W.left)).obj
+        (reductionCoefficient W.left d n)).property
+  have hα := (Over.forget W).toSheafify_pullbackSheafificationCompatibility
+    CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology T)
+    (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))
+  apply NatTrans.ext
+  funext V
+  have hV := NatTrans.congr_app hα V
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hV
+  simp only [NatTrans.comp_app, ← Category.assoc]
+  exact (congrArg (fun f ↦ f ≫ φ.hom.app V) hV).trans
+    (((hφ V.unop).trans (finiteSliceIso_unit W d n V.unop).symm).trans
+      (congrArg (fun f ↦ f ≫ (finiteSliceIso W d n).hom.hom.app V) hV.symm))
 
 /-- The finite slice coefficient map with the specified function normalization.
 Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
 def cbcFiniteSliceMap (T : Scheme.{t}) (W : T.ProEt) (n : ℕ) :=
   (cbcFiniteSliceMap_exists d T W n).exists.choose
+
+private def finiteSliceSystemMap {T : Scheme.{t}} (W : T.ProEt)
+    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    reductionCoefficientSystem T d ⋙ (ProEt.topology T).overPullback CommRingCat.{t + 1} W ⟶
+      reductionCoefficientSystem W.left d ⋙
+        (cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
+          ((ProEt.topology T).over W) (ProEt.topology W.left) :=
+  NatTrans.ofOpSequence (fun n ↦ (finiteSliceIso W d n).hom) (by
+    intro n
+    simp only [Functor.comp_map, reductionCoefficientSystem,
+      AdicCoefficients.ringSystem, Functor.ofOpSequence_map_homOfLE_succ,
+      finiteSliceIso, Iso.trans_hom, Iso.symm_hom]
+    let α := (Over.forget W).pushforwardContinuousSheafificationCompatibility
+      CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology T)
+    let β := (cbcSliceFunctor T W).pushforwardContinuousSheafificationCompatibility
+      CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology W.left)
+    let f := AdicCoefficients.functionPresheafMap T
+      (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
+    let g := AdicCoefficients.functionPresheafMap W.left
+      (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
+    have ha := α.inv.naturality f
+    have hb := β.hom.naturality g
+    dsimp only [Functor.comp_map] at ha hb
+    change _ ≫ (α.inv.app
+        (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1))) ≫
+        β.hom.app (AdicCoefficients.functionPresheaf W.left (A ⧸ d.ideal ^ (n + 1)))) =
+      (α.inv.app (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1 + 1))) ≫
+        β.hom.app (AdicCoefficients.functionPresheaf W.left
+          (A ⧸ d.ideal ^ (n + 1 + 1)))) ≫ _
+    let a₀ := α.inv.app
+      (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))
+    let a₁ := α.inv.app
+      (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1 + 1)))
+    let b₀ := β.hom.app
+      (AdicCoefficients.functionPresheaf W.left (A ⧸ d.ideal ^ (n + 1)))
+    let b₁ := β.hom.app
+      (AdicCoefficients.functionPresheaf W.left (A ⧸ d.ideal ^ (n + 1 + 1)))
+    let m := (presheafToSheaf ((ProEt.topology T).over W) CommRingCat.{t + 1}).map
+      (Functor.whiskerLeft (Over.forget W).op f)
+    have ha' : ((ProEt.topology T).overPullback CommRingCat.{t + 1} W).map
+        (AdicCoefficients.coefficientMap T (Ideal.Quotient.factorPowSucc d.ideal (n + 1))) ≫
+        a₀ = a₁ ≫ m := ha
+    have hb' : m ≫ b₀ = b₁ ≫
+        ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
+          ((ProEt.topology T).over W) (ProEt.topology W.left)).map
+            (AdicCoefficients.coefficientMap W.left
+              (Ideal.Quotient.factorPowSucc d.ideal (n + 1))) := hb
+    calc
+      _ = (_ ≫ a₀) ≫ b₀ := (Category.assoc _ _ _).symm
+      _ = (a₁ ≫ m) ≫ b₀ := congrArg (fun t ↦ t ≫ b₀) ha'
+      _ = a₁ ≫ (m ≫ b₀) := Category.assoc _ _ _
+      _ = a₁ ≫ (b₁ ≫ _) := congrArg (fun t ↦ a₁ ≫ t) hb'
+      _ = _ := (Category.assoc _ _ _).symm)
+
+
+private theorem finiteSliceMap_eq {T : Scheme.{t}} (W : T.ProEt)
+    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
+    cbcFiniteSliceMap d T W n = (finiteSliceIso W d n).hom :=
+  (cbcFiniteSliceMap_exists d T W n).unique
+    (cbcFiniteSliceMap_exists d T W n).exists.choose_spec (finiteSliceIso_unit W d n)
+
+private local instance overRing_limits {T : Scheme.{t}} (W : T.ProEt) :
+    PreservesLimitsOfShape ℕᵒᵖ ((ProEt.topology T).overPullback CommRingCat.{t + 1} W) := by
+  exact preservesLimitsOfShape_of_reflects_of_preserves _
+    (sheafToPresheaf ((ProEt.topology T).over W) CommRingCat.{t + 1})
+
+private local instance sliceRing_limits {T : Scheme.{t}} (W : T.ProEt) :
+    PreservesLimitsOfShape ℕᵒᵖ
+      ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
+        ((ProEt.topology T).over W) (ProEt.topology W.left)) := by
+  exact preservesLimitsOfShape_of_reflects_of_preserves _
+    (sheafToPresheaf ((ProEt.topology T).over W) CommRingCat.{t + 1})
+
+private def completedSliceIso {T : Scheme.{t}} (W : T.ProEt)
+    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    (completedReductionCoefficient T d).over W ≅
+      ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
+        ((ProEt.topology T).over W) (ProEt.topology W.left)).obj
+          (completedReductionCoefficient W.left d) :=
+  letI (n : ℕᵒᵖ) : IsIso ((finiteSliceSystemMap W d).app n) := by
+    change IsIso (finiteSliceIso W d n.unop).hom
+    infer_instance
+  letI : IsIso (finiteSliceSystemMap W d) := NatIso.isIso_of_isIso_app _
+  preservesLimitIso ((ProEt.topology T).overPullback CommRingCat.{t + 1} W)
+      (reductionCoefficientSystem T d) ≪≫
+    lim.mapIso (asIso (finiteSliceSystemMap W d)) ≪≫
+    (preservesLimitIso ((cbcSliceFunctor T W).sheafPushforwardContinuous
+      CommRingCat.{t + 1} ((ProEt.topology T).over W) (ProEt.topology W.left))
+        (reductionCoefficientSystem W.left d)).symm
+
+private theorem completedSliceIso_projection {T : Scheme.{t}} (W : T.ProEt)
+    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
+    (completedSliceIso W d).hom ≫
+      ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
+        ((ProEt.topology T).over W) (ProEt.topology W.left)).map
+          (completedReductionProjection W.left d n) =
+    ((ProEt.topology T).overPullback CommRingCat.{t + 1} W).map
+        (completedReductionProjection T d n) ≫ cbcFiniteSliceMap d T W n := by
+  simp only [completedSliceIso, Iso.trans_hom, Iso.symm_hom, Category.assoc,
+    completedReductionProjection, preservesLimitIso_inv_π, lim_map, limMap_π,
+    Functor.mapIso_hom, asIso_hom, finiteSliceMap_eq]
+  rw [← Category.assoc, preservesLimitIso_hom_π]
+  rfl
+
 
 /-- The completed coefficient identification is fixed by every finite projection.
 Source: Tags 098K, 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
@@ -208,7 +566,14 @@ theorem cbcCompletedSliceMap_exists (T : Scheme.{t}) (W : T.ProEt) :
             ((completedReductionProjection W.left d n)) =
         ((ProEt.topology T).overPullback CommRingCat.{t + 1} W).map
           ((completedReductionProjection T d n)) ≫ cbcFiniteSliceMap d T W n := by
-  sorry
+  refine ⟨(completedSliceIso W d).hom, completedSliceIso_projection W d, ?_⟩
+  intro φ hφ
+  apply (isLimitOfPreserves
+    ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{t + 1}
+      ((ProEt.topology T).over W) (ProEt.topology W.left))
+    (limit.isLimit (reductionCoefficientSystem W.left d))).hom_ext
+  intro n
+  exact (hφ n.unop).trans (completedSliceIso_projection W d n.unop).symm
 
 /-- The completed ring map identifying the ringed slice site.
 Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
@@ -247,7 +612,15 @@ Proof: the slice transport keeps addition of maps; direct sums and module
 sheafification are additive. Their composite is therefore additive. -/
 @[instance] theorem cbcOpenShriek_additive {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) : (cbcOpenShriek d j hj).Additive := by
-  sorry
+  have : (cbcModuleToSlice d T (cbcOpenObject j hj)).Additive := by
+    constructor
+    intro M N f g
+    ext V x
+    rfl
+  change (cbcModuleToSlice d T (cbcOpenObject j hj) ⋙
+    SheafOfModules.localizedSystemExtension.{t + 1, t, t + 1}
+      (completedReductionCoefficient T d) (cbcOpenObject j hj)).Additive
+  infer_instance
 
 /-- Extension by zero is exact, without any quasi-compactness assumption.
 Source: Tag 03DJ (blueprint: lem-cbc-completed-extension-zero-comparison).
@@ -257,7 +630,24 @@ unchanged at distinct site object and Hom universes; equivalently transport to
 AsSmall at t+1, apply the recorded localization theorem, and transport back. -/
 @[instance] theorem cbcOpenShriek_finiteLimits {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) : PreservesFiniteLimits (cbcOpenShriek d j hj) := by
-  sorry
+  have : (cbcSliceFunctor T (cbcOpenObject j hj)).IsContinuous
+      ((ProEt.topology T).over (cbcOpenObject j hj)) (ProEt.topology U) :=
+    cbcSliceFunctor_continuous T (cbcOpenObject j hj)
+  let F := cbcModuleToSlice d T (cbcOpenObject j hj)
+  let G := SheafOfModules.toSheaf
+    ((reductionModuleRing T (completedReductionCoefficient T d)).over (cbcOpenObject j hj))
+  have : PreservesFiniteLimits (F ⋙ G) := by
+    change PreservesFiniteLimits
+      (SheafOfModules.toSheaf (reductionModuleRing U (completedReductionCoefficient U d)) ⋙
+        (cbcSliceFunctor T (cbcOpenObject j hj)).sheafPushforwardContinuous
+          AddCommGrpCat.{t + 1} ((ProEt.topology T).over (cbcOpenObject j hj))
+            (ProEt.topology U))
+    infer_instance
+  have : PreservesFiniteLimits F := preservesFiniteLimits_of_reflects_of_preserves F G
+  change PreservesFiniteLimits (F ⋙
+    SheafOfModules.localizedSystemExtension.{t + 1, t, t + 1}
+      (completedReductionCoefficient T d) (cbcOpenObject j hj))
+  infer_instance
 
 /-- Extension by zero preserves finite colimits.
 Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison).
@@ -265,7 +655,25 @@ Proof: it is left adjoint to restriction, via the direct-sum Hom bijection and
 sheafification. Hence it preserves colimits, in particular finite colimits. -/
 @[instance] theorem cbcOpenShriek_finiteColimits {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) : PreservesFiniteColimits (cbcOpenShriek d j hj) := by
-  sorry
+  have h : cbcCompletedSliceMap d T (cbcOpenObject j hj) =
+      (completedSliceIso (cbcOpenObject j hj) d).hom :=
+    (cbcCompletedSliceMap_exists d T (cbcOpenObject j hj)).unique
+      (cbcCompletedSliceMap_exists d T (cbcOpenObject j hj)).exists.choose_spec
+      (completedSliceIso_projection (cbcOpenObject j hj) d)
+  have : IsIso (cbcCompletedSliceMap d T (cbcOpenObject j hj)) := by
+    rw [h]
+    infer_instance
+  have : (cbcSliceFunctor T (cbcOpenObject j hj)).IsEquivalence :=
+    inferInstanceAs (ProEt.sliceEquiv T (cbcOpenObject j hj)).functor.IsEquivalence
+  let F := cbcModuleToSlice d T (cbcOpenObject j hj)
+  have : F.IsLeftAdjoint := by
+    dsimp only [F, cbcModuleToSlice]
+    infer_instance
+  have : PreservesFiniteColimits F := inferInstance
+  change PreservesFiniteColimits (F ⋙
+    SheafOfModules.localizedSystemExtension.{t + 1, t, t + 1}
+      (completedReductionCoefficient T d) (cbcOpenObject j hj))
+  infer_instance
 
 /-- The exact extension functor applied termwise and descended to the derived category.
 Source: Tag 03DJ (blueprint: lem-cbc-completed-extension-zero-comparison). -/
@@ -288,7 +696,8 @@ fpqc covering condition. This is the inverse side of slice-site localization. -/
 @[instance] theorem cbcOpenSiteFunctor_continuous {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) :
     (cbcOpenSiteFunctor j hj).IsContinuous (ProEt.topology U) (ProEt.topology T) := by
-  sorry
+  let := hj
+  exact ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
 
 /-- The finite restriction coefficient map identifies the very same local functions.
 Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison).
@@ -307,13 +716,111 @@ theorem cbcFiniteRestrictionMap_exists {U T : Scheme.{t}}
         (toSheafify (ProEt.topology T)
           (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))).app
             ((cbcOpenSiteFunctor j hj).op.obj V) := by
-  sorry
+  let := hj
+  have : (cbcOpenSiteFunctor j hj).IsCocontinuous (ProEt.topology U)
+      (ProEt.topology T) := ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale j)
+  let e := ((cbcOpenSiteFunctor j hj).pushforwardContinuousSheafificationCompatibility
+    CommRingCat.{t + 1} (ProEt.topology U) (ProEt.topology T)).app
+      (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))
+  have he := (cbcOpenSiteFunctor j hj).toSheafify_pullbackSheafificationCompatibility
+    CommRingCat.{t + 1} (ProEt.topology U) (ProEt.topology T)
+    (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))
+  refine ⟨e.hom, ?_, ?_⟩
+  · intro V
+    exact NatTrans.congr_app he V
+  · intro φ hφ
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext (ProEt.topology U) _ _
+      (((cbcOpenSiteFunctor j hj).sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T)).obj (reductionCoefficient T d n)).property
+    apply NatTrans.ext
+    funext V
+    exact (hφ V).trans (NatTrans.congr_app he V).symm
 
 /-- The finite restriction map fixed by local functions.
 Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
 def cbcFiniteRestrictionMap {U T : Scheme.{t}}
     (j : U ⟶ T) (hj : IsOpenImmersion j) (n : ℕ) :=
   (cbcFiniteRestrictionMap_exists d j hj n).exists.choose
+
+private local instance openSiteFunctor_cocontinuous {U T : Scheme.{t}}
+    (j : U ⟶ T) (hj : IsOpenImmersion j) :
+    (cbcOpenSiteFunctor j hj).IsCocontinuous (ProEt.topology U) (ProEt.topology T) :=
+  ProEt.isCocontinuous_overMap (cbcOpenWeaklyEtale j hj)
+
+private def finiteRestrictionIso {U T : Scheme.{t}}
+    (j : U ⟶ T) (hj : IsOpenImmersion j) (n : ℕ) :
+    reductionCoefficient U d n ≅
+      ((cbcOpenSiteFunctor j hj).sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T)).obj (reductionCoefficient T d n) :=
+  ((cbcOpenSiteFunctor j hj).pushforwardContinuousSheafificationCompatibility
+    CommRingCat.{t + 1} (ProEt.topology U) (ProEt.topology T)).app
+      (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))
+
+private theorem finiteRestrictionIso_unit {U T : Scheme.{t}}
+    (j : U ⟶ T) (hj : IsOpenImmersion j) (n : ℕ) :
+    toSheafify (ProEt.topology U)
+        (AdicCoefficients.functionPresheaf U (A ⧸ d.ideal ^ (n + 1))) ≫
+      (finiteRestrictionIso d j hj n).hom.hom =
+    Functor.whiskerLeft (cbcOpenSiteFunctor j hj).op
+      (toSheafify (ProEt.topology T)
+        (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))) :=
+  (cbcOpenSiteFunctor j hj).toSheafify_pullbackSheafificationCompatibility
+    CommRingCat.{t + 1} (ProEt.topology U) (ProEt.topology T)
+    (AdicCoefficients.functionPresheaf T (A ⧸ d.ideal ^ (n + 1)))
+
+private theorem finiteRestrictionMap_eq {U T : Scheme.{t}}
+    (j : U ⟶ T) (hj : IsOpenImmersion j) (n : ℕ) :
+    cbcFiniteRestrictionMap d j hj n = (finiteRestrictionIso d j hj n).hom :=
+  (cbcFiniteRestrictionMap_exists d j hj n).unique
+    (cbcFiniteRestrictionMap_exists d j hj n).exists.choose_spec
+    (fun V ↦ NatTrans.congr_app (finiteRestrictionIso_unit d j hj n) V)
+
+private def finiteRestrictionSystemMap {U T : Scheme.{t}}
+    (j : U ⟶ T) (hj : IsOpenImmersion j) :
+    reductionCoefficientSystem U d ⟶ reductionCoefficientSystem T d ⋙
+      (cbcOpenSiteFunctor j hj).sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T) :=
+  NatTrans.ofOpSequence (fun n ↦ (finiteRestrictionIso d j hj n).hom) (by
+    intro n
+    simp only [Functor.comp_map, reductionCoefficientSystem, AdicCoefficients.ringSystem,
+      Functor.ofOpSequence_map_homOfLE_succ, finiteRestrictionIso]
+    exact ((cbcOpenSiteFunctor j hj).pushforwardContinuousSheafificationCompatibility
+      CommRingCat.{t + 1} (ProEt.topology U) (ProEt.topology T)).hom.naturality
+        (AdicCoefficients.functionPresheafMap T
+          (Ideal.Quotient.factorPowSucc d.ideal (n + 1))))
+
+private local instance openRing_limits {U T : Scheme.{t}}
+    (j : U ⟶ T) (hj : IsOpenImmersion j) :
+    PreservesLimitsOfShape ℕᵒᵖ
+      ((cbcOpenSiteFunctor j hj).sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T)) := by
+  exact preservesLimitsOfShape_of_reflects_of_preserves _
+    (sheafToPresheaf (ProEt.topology U) CommRingCat.{t + 1})
+
+private def completedRestrictionIso {U T : Scheme.{t}}
+    (j : U ⟶ T) (hj : IsOpenImmersion j) :
+    completedReductionCoefficient U d ≅
+      ((cbcOpenSiteFunctor j hj).sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T)).obj (completedReductionCoefficient T d) :=
+  have (n : ℕᵒᵖ) : IsIso ((finiteRestrictionSystemMap d j hj).app n) :=
+    inferInstanceAs (IsIso (finiteRestrictionIso d j hj n.unop).hom)
+  have : IsIso (finiteRestrictionSystemMap d j hj) := NatIso.isIso_of_isIso_app _
+  lim.mapIso (asIso (finiteRestrictionSystemMap d j hj)) ≪≫
+    (preservesLimitIso ((cbcOpenSiteFunctor j hj).sheafPushforwardContinuous
+      CommRingCat.{t + 1} (ProEt.topology U) (ProEt.topology T))
+        (reductionCoefficientSystem T d)).symm
+
+private theorem completedRestrictionIso_projection {U T : Scheme.{t}}
+    (j : U ⟶ T) (hj : IsOpenImmersion j) (n : ℕ) :
+    (completedRestrictionIso d j hj).hom ≫
+      ((cbcOpenSiteFunctor j hj).sheafPushforwardContinuous CommRingCat.{t + 1}
+        (ProEt.topology U) (ProEt.topology T)).map (completedReductionProjection T d n) =
+    completedReductionProjection U d n ≫ cbcFiniteRestrictionMap d j hj n := by
+  simp only [completedRestrictionIso, Iso.trans_hom, Iso.symm_hom, Category.assoc,
+    completedReductionProjection, preservesLimitIso_inv_π, lim_map, limMap_π,
+    Functor.mapIso_hom, asIso_hom, finiteRestrictionMap_eq]
+  rfl
 
 /-- The completed restriction map is fixed by its finite projections.
 Source: Tags 098K, 099N (blueprint: lem-cbc-completed-extension-zero-comparison).
@@ -329,7 +836,15 @@ theorem cbcCompletedRestrictionMap_exists {U T : Scheme.{t}}
         ((cbcOpenSiteFunctor j hj).sheafPushforwardContinuous CommRingCat.{t + 1}
           (ProEt.topology U) (ProEt.topology T)).map ((completedReductionProjection T d n)) =
         (completedReductionProjection U d n) ≫ cbcFiniteRestrictionMap d j hj n := by
-  sorry
+  refine ⟨(completedRestrictionIso d j hj).hom,
+    completedRestrictionIso_projection d j hj, ?_⟩
+  intro φ hφ
+  apply (isLimitOfPreserves
+    ((cbcOpenSiteFunctor j hj).sheafPushforwardContinuous CommRingCat.{t + 1}
+      (ProEt.topology U) (ProEt.topology T))
+    (limit.isLimit (reductionCoefficientSystem T d))).hom_ext
+  intro n
+  exact (hφ n.unop).trans (completedRestrictionIso_projection d j hj n.unop).symm
 
 /-- The canonical inverse of the open's completed coefficient identification.
 Source: Tag 098K (blueprint: lem-cbc-completed-extension-zero-comparison). -/
@@ -426,39 +941,151 @@ is invertible. Its adjoint conjugate is invertible. This is the usual finite
 coefficient open base-change map, with completed coefficient scalar actions. -/
 @[instance] theorem cbcUnderivedInverseExchange_isIso :
     IsIso (cbcUnderivedInverseExchange d sq) := by
-  sorry
+  have hsq := IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback
+    sq.hom_fst sq.hom_snd
+  have := MorphismProperty.Over.isIso_pullbackMapComparison_of_isPullback
+    (cbcOpenWeaklyEtale j sq.isOpenImmersion)
+    (cbcOpenWeaklyEtale j' sq.isOpenImmersion') hsq
+  have hη (M : pbcModules X' (pbcAdicCompletion X' d)) (V : U.ProEtᵒᵖ) :
+      IsIso (((cbcRightExchange d sq).app M).val.app V) := by
+    apply (ConcreteCategory.isIso_iff_bijective _).mpr
+    have hb := ConcreteCategory.bijective_of_isIso
+      (M.val.presheaf.map
+        ((MorphismProperty.Over.pullbackMapComparison
+          (cbcOpenWeaklyEtale j sq.isOpenImmersion)
+          (cbcOpenWeaklyEtale j' sq.isOpenImmersion') sq.toCommSq).app V.unop).op)
+    have he : ⇑(((cbcRightExchange d sq).app M).val.app V) =
+        ⇑(M.val.presheaf.map
+          ((MorphismProperty.Over.pullbackMapComparison
+            (cbcOpenWeaklyEtale j sq.isOpenImmersion)
+            (cbcOpenWeaklyEtale j' sq.isOpenImmersion') sq.toCommSq).app V.unop).op) := by
+      funext x
+      exact (cbcRightExchange_exists d sq).exists.choose_spec M V x
+    exact he ▸ hb
+  have hM (M : pbcModules X' (pbcAdicCompletion X' d)) :
+      IsIso ((cbcRightExchange d sq).app M) := by
+    let e := PresheafOfModules.isoMk
+      (fun V ↦ asIso (((cbcRightExchange d sq).app M).val.app V))
+      (fun {_ _} f ↦ ((cbcRightExchange d sq).app M).val.naturality f)
+    have he : e.hom = ((cbcRightExchange d sq).app M).val := by
+      ext V x
+      rfl
+    have : IsIso ((SheafOfModules.forget _).map ((cbcRightExchange d sq).app M)) := by
+      change IsIso (((cbcRightExchange d sq).app M).val)
+      rw [← he]
+      infer_instance
+    exact isIso_of_reflects_iso ((cbcRightExchange d sq).app M) (SheafOfModules.forget _)
+  have : IsIso (cbcRightExchange d sq) := NatIso.isIso_of_isIso_app _
+  dsimp only [cbcUnderivedInverseExchange]
+  infer_instance
+
+/-- The K-flat counit condition determining the derived inverse exchange.
+Naming the condition shares the predicate used by its unique choice.
+Source: blueprint order 1587, Steps 2, 3, 7
+(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+def cbcDerivedInverseExchangeNormalization
+    (α : completedOrdinaryPullback gU d ⋙ cbcDerivedOpenShriek d j' sq.isOpenImmersion' ⟶
+        cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ completedOrdinaryPullback g d) : Prop :=
+  Functor.DerivedExchangeCounitNormalization
+    (completedModulePullback gU d) (completedModulePullback g d)
+    (cbcOpenShriek d j sq.isOpenImmersion) (cbcOpenShriek d j' sq.isOpenImmersion')
+    (completedOrdinaryPullback gU d) (completedOrdinaryPullback g d)
+    (completedOrdinaryPullbackComplexCounit gU d)
+    (completedOrdinaryPullbackComplexCounit g d) (cbcUnderivedInverseExchange d sq)
+    (CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d)) α
+
+/-- Exactness makes the ordinary pullback counit invertible on every complex.
+Source: universal left-derived uniqueness
+(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+private theorem ordinaryComplexCounit_isIso {S T : Scheme.{t}} (f : S ⟶ T)
+    (P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
+    IsIso (completedOrdinaryPullbackComplexCounit f d P) := by
+  have := completedModulePullback_finiteLimits f d
+  have := completedModulePullback_finiteColimits f d
+  have := pullbackOrdinaryUniversal f d
+  have := exactPullbackCounit_isIso (completedModulePullback f d)
+    (completedOrdinaryPullback f d) (completedOrdinaryPullbackCounit f d)
+  exact exactComplexCounit_isIso (completedModulePullback f d)
+    (completedOrdinaryPullback f d) (completedOrdinaryPullbackCounit f d) P
 
 /-- The derived inverse exchange is fixed by the actual underived exchange on
 K-flat representatives and the universal pullback counits.
 Source: blueprint order 1587, Steps 2, 3, 7
 (blueprint: lem-cbc-completed-extension-zero-comparison).
-Proof: extension by zero is exact and commutes with tensor by restriction of the
-other factor. Thus it preserves K-flat representatives; it also preserves flat
-terms. On these representatives derive the underived adjoint mate termwise.
-Both comparison maps in the equation are invertible. Resolve every object by
-K-flat complexes, and descend along quasi-isomorphisms. Naturality and uniqueness
-follow from the universal left-derived property and the displayed equation. -/
+Proof: the recorded completed module pullbacks are exact. Universal left-derived
+uniqueness compares them with their termwise exact derived functors, compatibly
+with their counits. Derive the underived adjoint mate and conjugate by these
+comparisons. Composition factorization and naturality give the displayed counit
+normalization. Every derived object has a K-flat representative. On those
+representatives cancel the invertible target counit to prove uniqueness, then
+transport the equality to every object by naturality. -/
 theorem cbcDerivedInverseExchange_exists :
     ∃! α : completedOrdinaryPullback gU d ⋙ cbcDerivedOpenShriek d j' sq.isOpenImmersion' ⟶
         cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ completedOrdinaryPullback g d,
-      ∀ (P : CochainComplex ((pbcModules U (pbcAdicCompletion U d))) ℤ)
-        (_hP : CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d) P),
-        α.app (DerivedCategory.Q.obj P) ≫
-          (completedOrdinaryPullback g d).map
-            ((cbcOpenShriek d j sq.isOpenImmersion).mapDerivedCategoryFactors.hom.app P) ≫
-          completedOrdinaryPullbackComplexCounit g d
-            (((cbcOpenShriek d j sq.isOpenImmersion).mapHomologicalComplex (.up ℤ)).obj P) =
-        (cbcDerivedOpenShriek d j' sq.isOpenImmersion').map
-          (completedOrdinaryPullbackComplexCounit gU d P) ≫
-          (cbcOpenShriek d j' sq.isOpenImmersion').mapDerivedCategoryFactors.hom.app
-            (((completedModulePullback gU d).mapHomologicalComplex (.up ℤ)).obj P) ≫
-          DerivedCategory.Q.map
-            (((cbcUnderivedInverseExchange d sq).mapHomologicalComplex (.up ℤ)).app P) := by
-  sorry
+      cbcDerivedInverseExchangeNormalization d sq α := by
+  let F := completedModulePullback gU d
+  let G := completedModulePullback g d
+  let J := cbcOpenShriek d j sq.isOpenImmersion
+  let J' := cbcOpenShriek d j' sq.isOpenImmersion'
+  let LF := completedOrdinaryPullback gU d
+  let LG := completedOrdinaryPullback g d
+  have := completedModulePullback_finiteLimits gU d
+  have := completedModulePullback_finiteColimits gU d
+  have := completedModulePullback_finiteLimits g d
+  have := completedModulePullback_finiteColimits g d
+  have := pullbackOrdinaryUniversal gU d
+  have := pullbackOrdinaryUniversal g d
+  let e := (exactDerivedCounitComparison F LF
+    (completedOrdinaryPullbackCounit gU d)).exists.choose
+  let f := (exactDerivedCounitComparison G LG
+    (completedOrdinaryPullbackCounit g d)).exists.choose
+  let b := asIso (cbcUnderivedInverseExchange d sq)
+  let α : LF ⋙ J'.mapDerivedCategory ⟶ J.mapDerivedCategory ⋙ LG :=
+    Functor.whiskerRight e.hom J'.mapDerivedCategory ≫
+      (Functor.mapDerivedCategorySquareIso b).hom ≫
+      Functor.whiskerLeft J.mapDerivedCategory f.inv
+  have hα : cbcDerivedInverseExchangeNormalization d sq α :=
+    exactExchange_normalization F G J J' LF LG
+      (completedOrdinaryPullbackComplexCounit gU d)
+      (completedOrdinaryPullbackComplexCounit g d) e f
+      (exactDerivedCounitComparison F LF
+        (completedOrdinaryPullbackCounit gU d)).exists.choose_spec
+      (exactDerivedCounitComparison G LG
+        (completedOrdinaryPullbackCounit g d)).exists.choose_spec b _
+  refine ⟨α, hα, ?_⟩
+  intro β hβ
+  change LF ⋙ J'.mapDerivedCategory ⟶ J.mapDerivedCategory ⋙ LG at β
+  apply NatTrans.ext
+  funext K
+  let : EssentiallySmall.{t + 1} U.ProEt := essentiallySmallSelf.{0, t, t + 1} _
+  let : HasSheafify (ProEt.topology U) AddCommGrpCat.{t + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{t, 0} U
+  let : (ProEt.topology U).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} U
+  obtain ⟨P, hP, ⟨eP⟩⟩ := independentKFlatRepresentatives (pbcAdicCompletion U d) K
+  have he : β.app (DerivedCategory.Q.obj P) = α.app (DerivedCategory.Q.obj P) := by
+    have := ordinaryComplexCounit_isIso d g ((J.mapHomologicalComplex (.up ℤ)).obj P)
+    apply (cancel_mono (LG.map (J.mapDerivedCategoryFactors.hom.app P) ≫
+      completedOrdinaryPullbackComplexCounit g d
+        ((J.mapHomologicalComplex (.up ℤ)).obj P))).1
+    exact (hβ P hP).trans (hα P hP).symm
+  apply (cancel_epi ((LF ⋙ J'.mapDerivedCategory).map eP.hom)).1
+  rw [β.naturality, α.naturality, he]
 
 /-- The canonical derived inverse exchange.
 Source: blueprint order 1587 (blueprint: lem-cbc-completed-extension-zero-comparison). -/
 def cbcDerivedInverseExchange := (cbcDerivedInverseExchange_exists d sq).exists.choose
+
+/-- Equality with the chosen exchange is checked by its defining normalization.
+Source: uniqueness in the derived counit characterization
+(blueprint: lem-cbc-completed-extension-zero-comparison). -/
+theorem cbcDerivedInverseExchange_eq
+    (α : completedOrdinaryPullback gU d ⋙ cbcDerivedOpenShriek d j' sq.isOpenImmersion' ⟶
+      cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ completedOrdinaryPullback g d)
+    (hα : cbcDerivedInverseExchangeNormalization d sq α) :
+    cbcDerivedInverseExchange d sq = α :=
+  (cbcDerivedInverseExchange_exists d sq).unique
+    (cbcDerivedInverseExchange_exists d sq).exists.choose_spec hα
 
 /-- The derived mate remains an isomorphism.
 Source: blueprint order 1587, Step 7 (blueprint: lem-cbc-completed-extension-zero-comparison).
@@ -468,7 +1095,23 @@ isomorphism. Every derived object has such a representative; hence every
 component is an isomorphism, so the natural transformation is an isomorphism. -/
 @[instance] theorem cbcDerivedInverseExchange_isIso :
     IsIso (cbcDerivedInverseExchange d sq) := by
-  sorry
+  have hrep (K : DerivedCategory (pbcModules U (pbcAdicCompletion U d))) :
+      ∃ P, CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d) P ∧
+        Nonempty (DerivedCategory.Q.obj P ≅ K) := by
+    let : EssentiallySmall.{t + 1} U.ProEt := essentiallySmallSelf.{0, t, t + 1} _
+    let : HasSheafify (ProEt.topology U) AddCommGrpCat.{t + 1} :=
+      WeilConjectures.integralCoefficientAbSheafify.{t, 0} U
+    let : (ProEt.topology U).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
+      WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} U
+    exact independentKFlatRepresentatives (pbcAdicCompletion U d) K
+  exact derivedExchange_isIso (completedModulePullback gU d)
+    (completedModulePullback g d) (cbcOpenShriek d j sq.isOpenImmersion)
+    (cbcOpenShriek d j' sq.isOpenImmersion') (completedOrdinaryPullback gU d)
+    (completedOrdinaryPullback g d) (completedOrdinaryPullbackComplexCounit gU d)
+    (completedOrdinaryPullbackComplexCounit g d) (cbcUnderivedInverseExchange d sq)
+    (CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d))
+    (ordinaryComplexCounit_isIso d gU) (ordinaryComplexCounit_isIso d g) hrep
+    (cbcDerivedInverseExchange d sq) (cbcDerivedInverseExchange_exists d sq).exists.choose_spec
 
 /-- Ordinary derived exchange in the direction used by the completed comparison.
 Source: blueprint order 1587 (blueprint: lem-cbc-completed-extension-zero-comparison). -/

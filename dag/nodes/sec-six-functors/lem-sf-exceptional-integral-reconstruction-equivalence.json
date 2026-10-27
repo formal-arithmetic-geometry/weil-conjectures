@@ -1,0 +1,197 @@
+{
+ "id": "lem-sf-exceptional-integral-reconstruction-equivalence",
+ "kind": "statement",
+ "title": "Actual reconstruction restricted to uniform finite-Tor bounds",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a finite-field datum D, a prime l different from its characteristic, a finite extension E/Q_l, and a finite-type scheme T over D.k. The actual coefficient reduction/total-limit adjunction restricts to the equivalence in Reconstruction l E T [def-sf-exceptional-integral-reconstruction-interfaces]; in particular Nonempty (Reconstruction l E T). Its comparison isomorphisms, unit, counit, sequence resolutions and shifts are those of that actual adjunction.",
+ "stmt_deps": [
+  "def-sf-exceptional-integral-reconstruction-interfaces"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+ },
+ "proof": [
+  {
+   "text": "Identify the recorded Roos completeness predicate with global slice completeness by sfDerivedComplete_iff_legacy. A prime different from l supplies the auxiliary characteristic-zero-universe datum, independently of T.",
+   "uses": [
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+   }
+  },
+  {
+   "text": "Transport intrinsic constructibility, common cohomological support and Tor amplitude across each reductionEvaluation isomorphism. Thus the integral finite-Tor predicate is precisely completeness plus LevelBounds of reduction. Isomorphisms preserve homology and its zero objects; the Tor argument transports the input representative isomorphism.",
+   "uses": [
+    "lem-weil-proetale-dbc-triangulated",
+    "def-weil-finite-tor-amplitude",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+   }
+  },
+  {
+   "text": "Reduction is normalized. On a normalized system actual reconstruction gives completeness of its limit and an invertible counit; evaluate that counit to transport the same intervals to the reductions of the limit. Restrict both functors and the ambient adjunction along their full inclusions. Its unit and counit map to the original ambient maps, so the full inclusions reflect their invertibility. Mathlib Adjunction.toEquivalence now produces the equivalence and exactly the required map equations.",
+   "uses": [
+    "lem-pur-normalized-actual-reconstruction-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+   }
+  },
+  {
+   "text": "Take the coherence of the fixed calculus, the corresponding sequence resolutions with their shifts, and the reduction/limit shift-adjunction data. Package them with the restricted equivalence.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-sequence-adjoint-resolution-shifts",
+    "lem-pur-reduction-limit-shift-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Integral reconstruction steps in the existing exceptional coefficient construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-normalized-actual-reconstruction-maps",
+  "lem-pur-sequence-adjoint-resolution-shifts",
+  "lem-pur-reduction-limit-shift-adjunction",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Formal assembly of the existing actual-map declarations, following the integral reconstruction proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An adjunction restricts to an equivalence of full subcategories when its unit and counit are isomorphisms",
+   "results": "8 hits: Adjunction.toEquivalence, Functor.isEquivalence_of_isRightAdjoint, toEquivalence unit/counit and functor/inverse equations, map_restrictFullyFaithful_unit_app, and instIsIsoFunctorCounitOfIsEquivalence. The categorical restriction and upgrade are used in the proved reconstruction; none supplies the geometric normalization or realization.",
+   "date": "2026-10-27",
+   "verdict": "Use the abstract adjunction APIs; retain the geometric obligations as source-specific steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction and total inverse limit restrict to an equivalence on normalized constructible coefficient systems with uniform Tor bounds",
+   "results": "8 hits, including InverseSystem.globalEquiv, InverseSystem.pEquivOnLim, InverseSystem.invLimEquiv and AdicCompletion.transitionMap_comp_reduceModIdeal; none concerns derived sheaf coefficient systems.",
+   "date": "2026-10-27",
+   "verdict": "No geometric match; reuse the existing project reconstruction declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Adjunction.restrictFullyFaithful; CategoryTheory.Adjunction.ofNatIsoLeft",
+   "results": "toEquivalence upgrades an adjunction with invertible unit/counit; restrictFullyFaithful supplies restriction and its map equations; ofNatIsoLeft transports an adjunction. These carry the categorical steps but not geometric bounds, origins or actual proper/open normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use these abstract categorical results where their hypotheses have been verified."
+  },
+  {
+   "tool": "grep",
+   "query": "(exceptionalIntegral|IntegralReconstruction|LevelBounds)",
+   "results": "msearch Mathlib grep: 0 hits. Repository rg finds the assigned theorem and its structures; generic actual reconstruction is in PurNormalizedReconstructionAdjunctionCalculus; exceptional transport is in ExceptionalSystemTransport. LevelBounds and primitive realization interfaces are project-specific.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of the fixed-coordinate restriction/assembly; preserve the existing interfaces verbatim."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ExceptionalIntegralReconstruction",
+  "date": "2026-10-27",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Actual reconstruction restricted to uniform finite-Tor bounds; existing integral reconstruction proof, without changing the compatibility unit route.",
+   "via": [
+    "lem-sf-exceptional-integral-reconstruction",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ExceptionalIntegralReconstructionEquivalence",
+  "file": "lean/Sheaf/SixFunctors/ExceptionalIntegralReconstructionEquivalence.lean",
+  "declaration": "WeilConjectures.ExceptionalIntegralReconstruction.exceptionalIntegralReconstructionEquivalence",
+  "declarations": [
+   "WeilConjectures.ExceptionalIntegralReconstruction.exceptionalIntegralReconstructionEquivalence"
+  ],
+  "statement": "theorem exceptionalIntegralReconstructionEquivalence\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (T : Scheme.{u})\n    [T.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))] :\n    Nonempty (Reconstruction l E T)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "split_report": {
+  "blueprint": "Actual reconstruction restricted to uniform finite-Tor bounds; existing integral reconstruction proof, without changing the compatibility unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-derived-complete-legacy-comparison",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-weil-proetale-dbc-triangulated",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-pur-normalized-actual-reconstruction-maps",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-pur-sequence-adjoint-resolution-shifts",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   },
+   {
+    "node": "lem-pur-reduction-limit-shift-adjunction",
+    "why": "Use the existing reconstruction, bounds, site-origin, exactness or actual-map interface as a generic tool for the same integral reconstruction step as in the parent; no replacement of another blueprint unit proof."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d6d43",
+  "group": "Z7",
+  "result": "fix",
+  "landing": "20261027T013018-L-2358518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d6d43",
+  "group": "Z7",
+  "result": "fix",
+  "landing": "20261027T013018-L-2358518",
+  "kind": "interface",
+  "note": "independent cc review: delivered Interfaces module vs clone item module (verbatim move + withTransport), item theorem signature vs clone, new/changed node records vs Lean declarations and owner nodes"
+ }
+}

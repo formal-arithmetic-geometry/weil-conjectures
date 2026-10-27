@@ -1,0 +1,474 @@
+{
+ "id": "lem-sfb-free-finite-space-quotient-separated",
+ "kind": "statement",
+ "title": "Separatedness of a free finite quotient algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention, def-weil-affine-spectrum]. Let $W$ be a scheme over $S$ which is separated in the absolute sense: its diagonal $W\\to W\\times_{\\operatorname{Spec}\\mathbf Z}W$ is a closed immersion [def-weil-closed-immersion]. Let $G$ be a finite abstract group acting on $W$ by scheme automorphisms over $S$. Write $G_T=\\coprod_{g\\in G}T$ for the constant group scheme on a test scheme $T$. Assume the action is free on all scheme tests: $G_S\\times_SW\\to W\\times_SW$, $(g,w)\\mapsto(gw,w)$, is a monomorphism, that is, injective on sections over every $S$-scheme $T$. Let $Q$ be the fppf sheafification on $(\\mathit{Sch}/S)_{fppf}$ of the orbit presheaf $T\\mapsto W(T)/G_T(T)$ [def-pc-fppf-site, def-weil-pbc-sheafification], and assume $Q$ is an algebraic space over $S$ [def-trf-algebraic-space]. Then $Q$ is separated in the absolute sense: regard $Q$ as the sheaf $T\\mapsto\\coprod_{\\varphi:T\\to S}Q(T\\xrightarrow{\\varphi}S)$ on schemes over $\\operatorname{Spec}\\mathbf Z$; its diagonal $Q\\to Q\\times_{\\operatorname{Spec}\\mathbf Z}Q$ is representable by closed immersions on every scheme test. In particular $Q\\to S$ is separated [def-sfb-presheaf-map-separated-diagonal]: its diagonal $Q\\to Q\\times_SQ$ is representable by closed immersions on every $S$-scheme test. Neither an affine neighbourhood for each orbit, Noetherianity, nor invertibility of $|G|$ is assumed. For $S=\\operatorname{Spec}\\mathbf Z$ this is the plain absolute statement.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02Z4, lemma-quotient-finite-separated, part (2), absolute version (as invoked in the proof of Tag 072C), with the free quotient notation of Tag 02Z2, lemma-quotient; change of base to Spec Z as in Tag 03I4."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sheafification",
+  "def-trf-algebraic-space",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\coprod_{g\\in G}W$, with $s(g,w)=gw$ and $t(g,w)=w$. On a test scheme $T$, $R(T)$ is $G_T(T)\\times W(T)$: the first coordinate is a locally constant $G$-valued function, not necessarily a single element of $G$. The assumed monomorphism therefore identifies its image with precisely the orbit equivalence relation. Reflexivity, symmetry and transitivity follow from $1$, inversion and multiplication of these locally constant functions. On each open-and-closed component $W\\subset R$, $t$ is the identity and $s$ is an automorphism; they are etale, as is checked locally on the source directly from the definition (an isomorphism is locally a ring isomorphism, hence flat, finitely presented and unramified). Thus $R\\rightrightarrows W$ is an etale equivalence relation.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02Z2, lemma-quotient, construction of the action relation and its proof"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-relation-quotient] to this relation over $S$. Its presheaf quotient is exactly $T\\mapsto W(T)/G_T(T)$ from the statement, so its sheaf quotient is the specified $Q$ (uniquely compatibly with the quotient maps). Consequently $q:W\\to Q$ is representable, surjective and etale, and the canonical map $R\\to W\\times_QW$ is an isomorphism. This proves the precise kernel-pair identity needed below; algebraicity alone would not supply it.",
+   "uses": [
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02Z2, lemma-quotient, using Tag 02WW, theorem-presentation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-change-base-to-integers] with $S\\to\\operatorname{Spec}\\mathbf Z$. Write $\\overline Q=j_!Q$, with exactly the section formula in the statement. It is an algebraic space, $W\\to\\overline Q$ is still representable surjective etale, and preservation of fibre products identifies $W\\times_{\\overline Q}W$ with the same scheme $R$. Set $Z=W\\times_{\\operatorname{Spec}\\mathbf Z}W$. The pullback of $\\Delta_{\\overline Q}$ along $(q,q):Z\\to\\overline Q\\times\\overline Q$ is therefore $j:R\\to Z$, $j(g,w)=(gw,w)$: on a test scheme a point of this pullback is a pair with equal images under $q$. Since $\\overline Q$ is algebraic, its diagonal is representable. Also $j$ is a monomorphism: equality of two pairs as absolute maps to $W$ forces their structure maps to $S$ to agree, after which the given relative monomorphism applies.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 03I4, lemma-change-base-scheme, and Tag 02Z4, lemma-quotient-finite-separated, reduction to the relation morphism"
+   }
+  },
+  {
+   "text": "For $g\\in G$ the component $j_g:W\\to Z$, $w\\mapsto(gw,w)$, is a closed immersion. Indeed the square with upper map $1_W:W\\to W$, vertical maps $j_g$ and $\\Delta_W$, and lower map $Z\\to Z$, $(x,y)\\mapsto(g^{-1}x,y)$, is Cartesian by the fibre-product universal property. The right vertical map is closed by the absolute separatedness hypothesis; [lem-weil-pbc-closed-immersion-base-change] applies. The closed images $A_g=j_g(W)$ are pairwise disjoint. If $A_g$ and $A_h$ shared a point for $g\\ne h$, the residue-field point of the closed subscheme $j_g$ at that point would also factor through $j_h$ (its defining ideal is contained in the point prime). It would give two distinct $\\operatorname{Spec}K$-points of $R$ with equal images in $Z$, contradicting the monomorphism from step 3.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02Z4, lemma-quotient-finite-separated, last two sentences; Tag 01QR, morphisms-lemma-base-change-closed-immersion"
+   }
+  },
+  {
+   "text": "The finite coproduct $j:R\\to Z$ is itself a closed immersion, as follows explicitly without any affine-orbit hypothesis. Let $O_g=Z\\setminus\\bigcup_{h\\ne g}A_h$ and $O_\\emptyset=Z\\setminus\\bigcup_hA_h$. These are open because $G$ is finite, and cover $Z$ because the $A_g$ are pairwise disjoint. Over $O_g$ all components except $g$ are empty, so $j$ restricts to the base change of $j_g$, a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Over $O_\\emptyset$ the source is empty and is a closed subscheme by the definition. Closed immersions are local on the target by clause (1) of [lem-weil-pbc-closed-finite-etale-zariski-local], hence $j$ is closed. This includes $W=\\emptyset$ and the trivial group.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-finite-etale-zariski-local"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02Z4, lemma-quotient-finite-separated, finite coproduct of closed immersions with disjoint images"
+   }
+  },
+  {
+   "text": "Descend this closed immersion to the absolute diagonal using [lem-trf-space-closed-immersion-cover-descent] twice. First pull $\\Delta_{\\overline Q}$ back along $q\\times1:W\\times\\overline Q\\to\\overline Q\\times\\overline Q$, obtaining the representable map $a:W\\to W\\times\\overline Q$, $w\\mapsto(w,q(w))$. In the cited descent statement take $Y=\\overline Q$, $B=W\\times\\overline Q$, $b=\\operatorname{pr}_2$, $E=W$, and the one-member etale cover $W\\to\\overline Q$. Then $B_i=W\\times W=Z$, and $E_i=W\\times_{\\overline Q}W=R$; its map to $B_i$ is $j$ (possibly with the two coordinates interchanged). Every scheme test is closed by the base-change lemma. Thus $a$ is closed on every scheme test. Apply the descent statement again with $Y=\\overline Q$, $B=\\overline Q\\times\\overline Q$, $b=\\operatorname{pr}_1$, $E=\\overline Q$, and the same cover: its local map is just $a$, so $\\Delta_{\\overline Q}$ is closed on every scheme test. All fibre products used here exist by [lem-trf-space-fibre-products-etale-covers]; representability of the two maps being descended follows from representability of the diagonal and its base change. This proves the asserted absolute separatedness.",
+   "uses": [
+    "lem-trf-space-closed-immersion-cover-descent",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02Z4, lemma-quotient-finite-separated, first sentence of proof; Tag 03KD, lemma-descent-representable-transformations-property"
+   }
+  },
+  {
+   "text": "Finally $\\Delta_{Q/S}$ is the pullback of $\\Delta_{\\overline Q/\\operatorname{Spec}\\mathbf Z}$ along $Q\\times_SQ\\to\\overline Q\\times_{\\operatorname{Spec}\\mathbf Z}\\overline Q$: on each test the two diagonals both impose equality of the two maps to $Q$, and the former test already fixes their common map to $S$. The sheaf fibre-product universal property gives this Cartesian square. Its pullback to any scheme test is a base change of the closed immersion just proved, hence closed by [lem-weil-pbc-closed-immersion-base-change]. Thus $Q\\to S$ is separated [def-sfb-presheaf-map-separated-diagonal], with $G=Q$ and $F=h_S$. No assumption about separatedness of $S$, or about characteristic, has been used.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-sfb-presheaf-map-separated-diagonal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02Z4, lemma-quotient-finite-separated, conclusion; Tag 03I4, lemma-change-base-scheme, absolute interpretation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "lem-trf-etale-relation-quotient",
+  "lem-sfb-space-change-base-to-integers",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-finite-etale-zariski-local",
+  "lem-trf-space-closed-immersion-cover-descent",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02Z4, lemma-quotient-finite-separated, proof of (2); absolute interpretation via Tag 03I4, lemma-change-base-scheme. The disjoint closed-image gluing and the two descent applications are written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient algebraic space of a separated scheme by a free finite group action is separated and is quasi compact when the scheme is quasi compact",
+   "results": {
+    "t": "2026-10-23T21:11:53Z",
+    "tool": "leanfinder",
+    "query": "The quotient algebraic space of a separated scheme by a free finite group action is separated and is quasi compact when the scheme is quasi compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+     "AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+     "AlgebraicGeometry.IsSeparated.hasAffineProperty",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine",
+     "AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine"
+    ],
+    "digest": "b2bf290e86612e5e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A free action of a finite constant group on a separated scheme has a separated quotient algebraic space without any affine orbit assumption",
+   "results": {
+    "t": "2026-10-23T21:12:41Z",
+    "tool": "leanfinder",
+    "query": "A free action of a finite constant group on a separated scheme has a separated quotient algebraic space without any affine orbit assumption",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SeparationQuotient.instIsPretransitiveSMul",
+     "t2Space_of_properlyDiscontinuousSMul_of_t2Space",
+     "t2Space_quotient_mulAction_of_properSMul",
+     "isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul",
+     "CategoryTheory.PreGaloisCategory.has_decomp_quotients",
+     "SeparationQuotient.instIsPretransitiveVAdd",
+     "isCoveringMapOn_quotientMk_of_properlyDiscontinuousSMul",
+     "t2Space_of_properlyDiscontinuousVAdd_of_t2Space"
+    ],
+    "digest": "7372e9535edc2f89"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\", \"quotient\"",
+   "results": {
+    "t": "2026-10-23T21:12:10Z",
+    "tool": "loogle",
+    "query": "\"IsSeparated\", \"quotient\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "grep",
+   "query": "(finite|Finite).*(quotient|Quotient)|quotient.*(separated|Separated)",
+   "results": {
+    "t": "2026-10-23T21:12:10Z",
+    "tool": "grep",
+    "query": "(finite|Finite).*(quotient|Quotient)|quotient.*(separated|Separated)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free finite group quotient of a quasi compact separated scheme is a quasi compact separated algebraic space",
+   "results": {
+    "t": "2026-10-23T21:12:11Z",
+    "tool": "leansearch",
+    "query": "The free finite group quotient of a quasi compact separated scheme is a quasi compact separated algebraic space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+     "AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.QuasiSeparated.mk",
+     "AlgebraicGeometry.quasiSeparated_iff",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift",
+     "AlgebraicGeometry.instQuasiSeparatedOfMonoScheme",
+     "DiscreteQuotient.instFiniteQuotientOfCompactSpace"
+    ],
+    "digest": "e1425b24c2d77552"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|Quotient|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T21:40:21Z",
+    "tool": "grep",
+    "query": "quotient|Quotient|AlgebraicSpace",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+     "Mathlib/AlgebraicGeometry/EffectiveEpi.lean",
+     "Mathlib/AlgebraicGeometry/EffectiveEpi.lean",
+     "Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+     "Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean"
+    ],
+    "digest": "adba53f7b90e7a64"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes or topological/ring quotients, not algebraic-space quotients; returned types read"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The algebraic space quotient of a separated scheme by a free finite constant group action is separated",
+   "results": {
+    "t": "2026-10-23T21:40:22Z",
+    "tool": "leansearch",
+    "query": "The algebraic space quotient of a separated scheme by a free finite constant group action is separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSeparated.instCompScheme",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated",
+     "AlgebraicGeometry.IsSeparated.hasAffineProperty",
+     "AlgebraicGeometry.IsSeparated.instRespectsIsoScheme",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty",
+     "AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated"
+    ],
+    "digest": "3fd0a40e0986b210"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes or topological/ring quotients, not algebraic-space quotients; returned types read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparated\", \"quotient\"",
+   "results": {
+    "t": "2026-10-23T21:40:22Z",
+    "tool": "loogle",
+    "query": "\"IsSeparated\", \"quotient\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient algebraic space of an absolutely separated scheme by a free action of a finite group is absolutely separated",
+   "results": {
+    "t": "2026-10-23T21:40:22Z",
+    "tool": "leanfinder",
+    "query": "A quotient algebraic space of an absolutely separated scheme by a free action of a finite group is absolutely separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated",
+     "AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+     "AlgebraicGeometry.IsSeparated.hasAffineProperty",
+     "AlgebraicGeometry.Proj.instIsSeparated",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine",
+     "AlgebraicGeometry.Scheme.IsSeparated",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine",
+     "AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated"
+    ],
+    "digest": "2eea7361e2b5d736"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes or topological/ring quotients, not algebraic-space quotients; returned types read"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Qq]uotient.*[Ss]eparated|[Ss]eparated.*[Qq]uotient",
+   "results": {
+    "t": "2026-10-23T21:41:23Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|[Qq]uotient.*[Ss]eparated|[Ss]eparated.*[Qq]uotient",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale equivalence relation on a scheme the algebraic space quotient is separated if the relation morphism is a closed immersion",
+   "results": {
+    "t": "2026-10-23T21:41:26Z",
+    "tool": "leanfinder",
+    "query": "For an etale equivalence relation on a scheme the algebraic space quotient is separated if the relation morphism is a closed immersion",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion",
+     "AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated",
+     "AlgebraicGeometry.isSeparated_iff",
+     "AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift",
+     "AlgebraicGeometry.IsSeparated",
+     "AlgebraicGeometry.Scheme.IsSeparated",
+     "AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal",
+     "AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion"
+    ],
+    "digest": "93687d7bb06d3c82"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern schemes or topological/ring quotients, not algebraic-space quotients; returned types read"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qcoh-cohomology-finite-bound",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections. Ordinary-sheaf input: Stacks 072C, lemma-vanishing-quasi-separated, finite bound independent of the quasi-coherent module. Supporting input: Tag 072C proof, absolute separatedness of U_p=W_p/S_(p+1), supplied by Tag 02Z4(2).",
+   "via": [
+    "lem-sfb-space-qcoh-cohomology-finite-bound",
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-free-finite-space-quotient-separated",
+  "worker": "stage1",
+  "summary": "Checked Stacks 02Z4(2), 02Z2, and 03I4 against the absolute statement and 072C usage. Reused the general etale relation quotient, change-of-base, closed-immersion base-change/locality, and descent nodes. Wrote out the finite disjoint graph argument and descended the absolute diagonal in two steps; no new nodes and no statement change. No matching project declaration or Mathlib theorem found.",
+  "blueprint": "Supporting input to det-thm-sf-ctf-stability-direct-images proof (3), via the existing chain and the 072C cohomological bound: the absolute separatedness of the finite free quotients W_p/S_(p+1). Latest blueprint direct-images proof (3) read; no chapter or unit route change. The existing ancestor resolver returns None for this inherited chain, and the existing blueprint.from record is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "Generic presentation theorem for an etale equivalence relation, needed to identify the quotient atlas and kernel pair; no node of this unit provides it."
+   },
+   {
+    "node": "lem-trf-space-closed-immersion-cover-descent",
+    "why": "Generic descent of a representable closed immersion along an auxiliary etale scheme cover, used twice for the absolute diagonal; no node of this unit provides it."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and pointwise interpretation of algebraic-space fibre products used to form the diagonal tests; no node of this unit supplies the general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-closed-immersion-cover-descent",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-6361c03b3",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-6361c03b3 (reviewer sub-agent of L); spot-checked: Read all 7 steps against Stacks 02Z2, 02Z4 and 03HK, and against the statements of every cited node. The route is faithful: (s,t)=j is the monomorphism étale relation, and the trf quotient node gives R≅W×_QW. j_! (03I4) moves this to Spec Z. Each graph j_g is closed (I checked the Cartesian square against Δ_W by hand), and the graphs are disjoint (residue-field point argument against the absolute monomorphism). The finite union is closed by the target-open-cover argument (checked for G trivial and W empty). Δ_Q̄ is descended twice with the 03KD node: I checked the substitutions and computed both a_i, which are j and (1,q). The relative diagonal is the pullback of the absolute one. No hypothesis is missing. Duplicate search: rg over 02Z4/02Z2/03HK/03KD/02WW/kernel-pair/separated-quotient found no existing node with this statement. There are 0 new nodes. Tool uses accepted: three generic sk-i-curve-zero spaces nodes (02WW, 03KD, 02X2). Batch-5: all four flagged citations are generic algebraic-space foundations or definitions, not steps of the trace formula or Poincaré duality, so accepted. FIX (B3): the statement's 'in particular Q→S is separated' cited no definition. I cited the same-unit plain def node def-sfb-presheaf-map-separated-diagonal (03HL) in the statement and in step 7, and added it to stmt_deps and proof_deps. It is on the base and does not create a cycle. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeFiniteSpaceQuotientSeparated",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.free_finite_space_quotient_separated",
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeFiniteSpaceQuotientSeparated.lean",
+  "statement": "theorem free_finite_space_quotient_separated {S : Scheme.{u}} (W : Over S) [W.left.IsSeparated] (G : Type v) [Group G] [Finite G] (a : G →* Aut W) [Mono (prod.lift (Sigma.desc (fun g : G ↦ (a g).hom)) (Sigma.desc (fun _ : G ↦ 𝟙 W)))] (Q : AlgebraicSpace S) (η : coequalizer (yoneda.map (Sigma.desc (fun g : G ↦ (a g).hom))) (yoneda.map (Sigma.desc (fun _ : G ↦ 𝟙 W))) ⟶ Q.obj.obj) (hη : ∀ F : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun f : Q.obj.obj ⟶ F.obj ↦ η ≫ f)) : (∀ (U V : Over S) (b : yoneda.obj U ⟶ Q.obj.obj) (c : yoneda.obj V ⟶ Q.obj.obj), ∃ (P : Over S) (p : P ⟶ U) (q : P ⟶ V), IsPullback (yoneda.map p) (yoneda.map q) b c ∧ IsClosedImmersion (prod.lift p.left q.left)) ∧ IsSeparatedPresheafMap (terminal.from Q.obj.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The action relation is the coproduct of copies of W in Over S; its coequalizer is the full orbit presheaf, including locally constant labels on disconnected tests. The specified universal arrow η is sheafification at this presheaf. The first conjunct is the equivalent absolute scheme-pair closed-immersion criterion (Stacks 0AHS), with the product in Scheme over Spec Z, not in Over S; the second uses the recorded relative separatedness predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7082fea7b",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Clause check vs node/02Z4(2)/02Z2/03I4/0AHS: [W.left.IsSeparated] absolute; G:Type v finite group, a:G→*Aut W in Over S; Mono of prod.lift(Sigma.desc (a g).hom, Sigma.desc 𝟙) in Over S = freeness on all S-tests (∐_G W ≅ G_S×_S W); η + hη = sheafification universal property of the presheaf coequalizer (= orbit presheaf with locally constant labels), same encoding as landed etale_relation_quotient; Q:AlgebraicSpace S. Conclusion: pair test ∀U V b c ∃P, IsPullback ∧ IsClosedImmersion(prod.lift p.left q.left) in Scheme is equivalent to the absolute diagonal of j_!Q being closed (U×_{Q̄}V=U×_QV; converse via base change along Δ_T, different S-structures allowed); IsSeparatedPresheafMap(terminal.from Q) is the exact recorded relative predicate. No extra hypotheses; edge cases (W empty, trivial G, disconnected tests, char | |G|, universes) fine. Only lean field changed; statement verbatim; the 8 dep records identical to live; by sorry; docstrings with source/blueprint/proof steps; no duplicate notion (constant-group-scheme node is abelian and not cited; admissible quotient needs affine orbits). Not recompiled (no change). Minor: unused Etale import."
+ }
+}

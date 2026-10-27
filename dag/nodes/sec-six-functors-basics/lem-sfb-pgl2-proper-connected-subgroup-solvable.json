@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-pgl2-proper-connected-subgroup-solvable",
+ "kind": "statement",
+ "title": "Proper reduced connected subgroups of PGL2 are solvable",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Let $I\\subsetneq\\operatorname{PGL}_{2,F}$ be a proper closed subgroup scheme, where $\\operatorname{PGL}_{2,F}$ is the projective matrix group of [lem-sfb-projective-matrix-central-cover]. Assume $I$ is reduced [def-pc-reduced-scheme] and connected [def-weil-connected-scheme]. Then $I$ is smooth [def-sbc-smooth-morphisms] and solvable, meaning that successive scheme-theoretic commutator subgroup schemes eventually become trivial. No characteristic restriction is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.27, printed p.360, together with the smooth reduction theorem over a perfect field and dimension three of PGL2; used in Theorem 20.16 (c) implies (d), printed p.413."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-projective-matrix-central-cover",
+  "def-pc-reduced-scheme",
+  "def-weil-connected-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-locally-algebraic-group-identity-component] to $I$. Since $I$ is connected, its identity component $I^0$, with the open-subscheme structure supplied there, is all of $I$. Since $I$ is reduced, its nilradical is zero, so $(I^0)_{\\mathrm{red}}=I$ by [def-weil-pbc-scheme-reduction]. The cited identity-component theorem says that this reduced component is smooth and integral. In particular $I$ is smooth; no characteristic-zero theorem is being used.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, proposition-connected-component; Tags 047R, lemma-reduced-subgroup-scheme-perfect, 047P, lemma-reduced-group-scheme-prefect-field-characteristic-p-smooth, and 047N, lemma-group-scheme-characteristic-zero-smooth; Milne Proposition 1.26, printed p.13."
+   }
+  },
+  {
+   "text": "Put $P=\\operatorname{PGL}_{2,F}$. By [lem-sfb-projective-matrix-central-cover], $P$ is affine, smooth, connected and of dimension $2^2-1=3$. Applying [lem-sfb-locally-algebraic-group-identity-component] to the connected group $P$ shows that $P=P^0$ is irreducible. Smoothness gives reducedness by [sbc-lem-smooth-geometrically-reduced]. The identity section makes $P$ nonempty, so it is integral by [def-pc-integral-scheme]. The underlying closed subset $|I|$ is proper in $|P|$: otherwise write the closed immersion into the affine scheme $P=\\operatorname{Spec}A$ as $\\operatorname{Spec}(A/J)$ by [def-weil-closed-immersion]. The ring $A$ is a domain by integrality. If $V(J)=\\operatorname{Spec}A$, its prime ideal $(0)$ contains $J$, so $J=0$; this would give $I=P$, contrary to the hypothesis. Every chain of irreducible closed subsets of $|I|$ is a chain of closed subsets of $|P|$, and appending the strictly larger irreducible closed subset $|P|$ increases its length by one. Thus the definition of Krull dimension [def-kun-topological-krull-dimension] gives $\\dim I+1\\leq3$, so $\\dim I\\leq2$.",
+   "uses": [
+    "lem-sfb-projective-matrix-central-cover",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-integral-scheme",
+    "def-weil-closed-immersion",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 20.16(c) implies (d), printed p.413, proper-image dimension argument made explicit. Stacks Tag 056T, lemma-smooth-geometrically-normal, for reducedness; Tag 01QO, lemma-closed-immersion, for the quotient-ring description."
+   }
+  },
+  {
+   "text": "The group $I$ is affine and of finite type by hypothesis, connected by hypothesis, smooth by step 1, and has dimension at most two by step 2. Apply [lem-sfb-connected-group-dimension-two-solvable] with $k=F$ and $G=I$. Its conclusion is termination of the scheme-theoretic derived series, exactly the solvability required here. Together with step 1 this proves both assertions.",
+   "uses": [
+    "lem-sfb-connected-group-dimension-two-solvable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.27, printed p.360, as applied in Theorem 20.16(c) implies (d), printed p.413."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "def-weil-pbc-scheme-reduction",
+  "lem-sfb-projective-matrix-central-cover",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-connected-group-dimension-two-solvable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 20.16(c) implies (d), printed p.413, expanded using Corollary 17.27, printed p.360, and Proposition 1.26, printed p.13; identity-component formulation from Stacks 0B7R."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PGL|ProjectiveGeneralLinear|solvable.*[Ss]ubgroup|[Ss]ubgroup.*solvable",
+   "results": "{\"t\": \"2026-10-23T21:49:19Z\", \"tool\": \"grep\", \"query\": \"PGL|ProjectiveGeneralLinear|solvable.*[Ss]ubgroup|[Ss]ubgroup.*solvable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\"], \"digest\": \"dc6350b77a9ccfce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract solvable groups, Lie-algebra solvability and arithmetic matrix subgroups are different from connected algebraic subgroup schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected linear algebraic group of dimension at most two is solvable, hence so are proper connected subgroups of the projective general linear group of degree two",
+   "results": "{\"t\": \"2026-10-23T21:49:20Z\", \"tool\": \"leansearch\", \"query\": \"A connected linear algebraic group of dimension at most two is solvable, hence so are proper connected subgroups of the projective general linear group of degree two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"IsSolvable.mk\", \"isSolvable_of_comm\", \"isSolvable_of_top_eq_bot\", \"subgroup_solvable_of_solvable\", \"IsNilpotent.to_isSolvable\", \"IsSolvable.recOn\", \"CommGroup.isSolvable\"], \"digest\": \"4b2a9c831adedaa7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract solvable groups, Lie-algebra solvability and arithmetic matrix subgroups are different from connected algebraic subgroup schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\"",
+   "results": "{\"t\": \"2026-10-23T21:49:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.IsSolvable\", \"LieAlgebra.ofAbelianIsSolvable\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"LieAlgebra.IsSolvable.mk\", \"LieAlgebra.IsSolvable.mk_int\", \"LieAlgebra.IsSolvable.solvable\", \"LieAlgebra.IsSolvable.solvable_int\", \"LieAlgebra.isSolvable_iff\"], \"digest\": \"dbd9bb31c6b2dc63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract solvable groups, Lie-algebra solvability and arithmetic matrix subgroups are different from connected algebraic subgroup schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every proper reduced connected closed algebraic subgroup of PGL2 over an algebraically closed field is smooth and solvable",
+   "results": "{\"t\": \"2026-10-23T21:49:21Z\", \"tool\": \"leanfinder\", \"query\": \"Every proper reduced connected closed algebraic subgroup of PGL2 over an algebraically closed field is smooth and solvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.IsRegularAtInfty\", \"Subgroup.IsArithmetic\", \"Subgroup.isRegularAtInfty_of_neg_one_mem\", \"Subgroup.IsArithmetic.is_commensurable\", \"SpecialLinearGroup.SL2Z_generators\", \"CongruenceSubgroup.finiteIndex_conjGL\", \"Subgroup.IsArithmetic.discreteTopology\", \"Subgroup.widthInfty\"], \"digest\": \"6e1bb781b41a85ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract solvable groups, Lie-algebra solvability and arithmetic matrix subgroups are different from connected algebraic subgroup schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "(solvab.*(finrank|dimension|krull)|((finrank|dimension|krull).*solvab))",
+   "results": "{\"t\": \"2026-10-23T22:24:57Z\", \"tool\": \"grep\", \"query\": \"(solvab.*(finrank|dimension|krull)|((finrank|dimension|krull).*solvab))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\"], \"digest\": \"7c0337af45c5db79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected linear algebraic group of dimension less than three is solvable",
+   "results": "{\"t\": \"2026-10-23T22:24:58Z\", \"tool\": \"leansearch\", \"query\": \"A connected linear algebraic group of dimension less than three is solvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"IsNilpotent.to_isSolvable\", \"isSolvable_of_comm\", \"IsSolvable.mk\", \"IsSimpleGroup.comm_iff_isSolvable\", \"isSolvable_of_top_eq_bot\", \"LieAlgebra.isSolvable_of_isNilpotent\", \"IsSolvable.solvable\"], \"digest\": \"194113a0bc013227\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\"",
+   "results": "{\"t\": \"2026-10-23T22:24:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.IsSolvable\", \"LieAlgebra.ofAbelianIsSolvable\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"LieAlgebra.IsSolvable.mk\", \"LieAlgebra.IsSolvable.mk_int\", \"LieAlgebra.IsSolvable.solvable\", \"LieAlgebra.IsSolvable.solvable_int\", \"LieAlgebra.isSolvable_iff\"], \"digest\": \"dbd9bb31c6b2dc63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected affine algebraic group of dimension at most two over an algebraically closed field is solvable in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-23T22:24:59Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected affine algebraic group of dimension at most two over an algebraically closed field is solvable in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"CommGroup.isSolvable\", \"isSolvable_of_subsingleton\", \"gal_one_isSolvable\", \"isSolvable_def\", \"IsSolvable.solvable\", \"IsNilpotent.to_isSolvable\", \"isSolvable_of_top_eq_bot\"], \"digest\": \"1b3ed1a0355dcf37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "solvab|Borel",
+   "results": "{\"t\": \"2026-10-23T22:25:28Z\", \"tool\": \"grep\", \"query\": \"solvab|Borel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-one-adjoint-projective-linear",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Corollary 17.27, printed p.360, together with the smooth reduction theorem over a perfect field and dimension three of PGL2; used in Theorem 20.16 (c) implies (d), printed p.413.",
+   "via": [
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-pgl2-proper-connected-subgroup-solvable",
+  "worker": "stage1",
+  "summary": "Retained the exact item statement; checked arbitrary characteristic, distinguished proper subgroup scheme from proper support, supplied smoothness from the existing reduced-neutral-component theorem, and proved the strict Krull dimension drop directly by extending closed chains. One new general Corollary 17.27 input, statement-only and searched; no duplicate smoothness or dimension lemma.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Corollary 17.27, printed p.360, together with the smooth reduction theorem over a perfect field and dimension three of PGL2; used in Theorem 20.16 (c) implies (d), printed p.413.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "General scheme-theoretic smoothness tool for the ambient projective matrix group; no constructible-direct-image argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-a821550de",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-a821550de (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, every cited statement, and the sources. Milne iAG2017: Cor 17.27 and its proof (p.360) with the §17b hypothesis (connected group variety over an algebraically closed field, p.353), Prop 1.26 (p.13), Prop 6.30 (p.132) and Thm 20.16(c)⇒(d) (p.413), where the proper subgroup is the image of a connected group. Stacks labels 0B7R, 047R/047P/047N, 056T and 01QO all exist. Step 1: by the identity-component lemma I^0=I because I is connected, and I_red=I because I is reduced, so I is smooth. Step 2: projective-matrix-central-cover with r=2 gives PGL2 affine, smooth, connected, of dimension 3. It is irreducible via its identity component, reduced by the declared tool sbc-lem-smooth-geometrically-reduced (accepted as a generic fact), hence integral. With I=Spec(A/J) and A a domain, V(J)=Spec A forces J=0, so |I|≠|P|; appending |P| to any chain in |I| then gives dim I≤2 with no catenarity used. Step 3: every hypothesis of the new node is checked before it is applied. The new node is exactly Milne 17.27, a general theorem (no PGL2, no embedding) and not a restatement of the item. It holds in dimensions 0, 1 and 2 (G_a, G_m, G_a⋊G_m, W_2 in char p) and fails in dimension 3 (SL2). rg -L over the DAG finds no duplicate: central-maximal-torus-nilpotent (17.23) and smooth-unipotent-solvable are different theorems. Blueprint from/via, unit and searches are fine, and no SGA is cited. FIX (B3): the new node said 'closed subgroup scheme' without citing its definition; I added [def-sc-group-scheme-subgroup] to its statement and stmt_deps (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-connected-group-dimension-two-solvable.json).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.PGL2ProperConnectedSubgroupSolvable",
+  "declaration": "AlgebraicGeometry.pgl2_properConnectedSubgroup_smooth_solvable",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/PGL2ProperConnectedSubgroupSolvable.lean",
+  "statement": "theorem pgl2_properConnectedSubgroup_smooth_solvable (F : Type u) [Field F] [IsAlgClosed F] (P : Grp (Over (Spec (.of F)))) (π : GeneralLinearGroup (LinearGroupSchemes.Index.{u} 2) F ⟶ P.X) (j : StandardGroupSchemes.roots F 2 ⟶ LinearGroupSchemes.specialLinear F 2) (hP : ProjectiveMatrixCentralCover.Presentation F 2 (Nat.le_refl 2) P π j) (I : Over (Spec (.of F))) [GrpObj I] [IsAffine I.left] [LocallyOfFiniteType I.hom] [QuasiCompact I.hom] (i : I ⟶ P.X) [IsClosedSubgroupScheme i] (hproper : ¬ IsIso i) [IsReduced I.left] [ConnectedSpace I.left] : Smooth I.hom ∧ IsSolvableGroupScheme I",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Quantifies over the recorded degree-two ProjectiveMatrixCentralCover.Presentation, with no choice of PGL from bare existence. Proper closed containment is non-isomorphism of the inclusion. Uses the landed scheme-theoretic derived-series definition from def-sfb-semisimple-group-scheme, added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18c258916",
+  "group": "NI",
+  "result": "pass",
+  "note": "Checked each Lean clause against the node: Presentation F 2 pins PGL2 up to unique iso and fixes its group law; IsClosedSubgroupScheme i plus ¬IsIso i (closed immersion) gives proper closed subgroup; IsAffine/LocallyOfFiniteType/QuasiCompact, IsReduced, ConnectedSpace; conclusion Smooth ∧ IsSolvableGroupScheme (derived-series form, Semisimple.lean l.31-62) is the node's wording. No extra hypotheses, single universe u. Edge cases (trivial, PGL2 itself, char 2/mu2) fine; statement true by Milne 17.27. lean.statement verbatim; only change vs live is lean + added landed stmt_dep def-sfb-semisimple-group-scheme (allowed, needed). Proof-dep dimension-two node uses the same solvable notion. No defs, sorry only, docstrings and 3 proof steps present. Note: the second reading was done by the same worker. No files changed; no compile."
+ }
+}

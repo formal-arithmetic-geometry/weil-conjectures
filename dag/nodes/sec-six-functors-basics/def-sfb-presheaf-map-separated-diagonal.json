@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-presheaf-map-separated-diagonal",
+ "kind": "definition",
+ "title": "Presheaf diagonal and separated morphisms on scheme tests",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $G,F$ be presheaves of sets on schemes over $S$, with the test schemes and universes of [def-trf-algebraic-space], and let $g:G\\to F$ be a morphism. Its diagonal $\\delta_g:G\\to G\\times_FG$ is the unique map to the presheaf fibre product whose two projections are $\\operatorname{id}_G$. Say that $g$ is separated if $\\delta_g$ is representable by closed immersions: for every scheme $T$ over $S$ and every map $h_T\\to G\\times_FG$, the presheaf fibre product $h_T\\times_{G\\times_FG}G$ is represented by a scheme $V$ over $S$ whose projection $V\\to T$ is a closed immersion [def-weil-closed-immersion], in the sense of representability with a scheme-test property of [def-trf-algebraic-space].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03HL (definition-separated), clause (1); Tag 03HK (lemma-properties-diagonal); Tag 03KM (lemma-separated-local), using representable scheme-test properties."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of presheaves on schemes is separated if its diagonal is representable by closed immersions",
+   "results": "{\"t\": \"2026-10-23T13:35:22Z\", \"tool\": \"leansearch\", \"query\": \"A morphism of presheaves on schemes is separated if its diagonal is representable by closed immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.mk\", \"AlgebraicGeometry.isSeparated_iff\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\"], \"digest\": \"b406e2b2b9305514\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib hits are scheme-only; reuse the exact presheaf definitions already landed in Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal, lines 49-58. No new Lean definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.pullback.lift, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-23T13:35:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Limits.pullback.lift, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\"], \"digest\": \"97ad10998aba5dfd\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib hits are scheme-only; reuse the exact presheaf definitions already landed in Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal, lines 49-58. No new Lean definition."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalPresheafMap|IsSeparatedPresheafMap|isSeparated_iff",
+   "results": "{\"t\": \"2026-10-23T13:35:22Z\", \"tool\": \"grep\", \"query\": \"diagonalPresheafMap|IsSeparatedPresheafMap|isSeparated_iff\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\"], \"digest\": \"2abc84956d95dc37\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib hits are scheme-only; reuse the exact presheaf definitions already landed in Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal, lines 49-58. No new Lean definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"diagonalPresheafMap|IsSeparatedPresheafMap|presheaf.*separated.*diagonal\" dag/nodes; blueprint_refs.py search \"separated diagonal\"; rg -n \"diagonalPresheafMap|IsSeparatedPresheafMap\" lean/WeilConjectures lean/Sheaf",
+   "results": "No definition-node lean.declaration or lean.declarations owns either declaration (all DAG JSON records inspected). blueprint search: 0 matching nodes. No WeilConjectures hits. Sheaf definitions occur only in TraceFormula/SpaceQCSeparatedEtaleLocal.lean:49,56; other Sheaf hits are uses. The existing theorem node lem-trf-space-qc-separated-etale-local records only quasiCompact_separated_etaleLocal.",
+   "date": "2026-10-23",
+   "verdict": "Add a definition node recording the two existing declarations; do not move, copy, or redefine them."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-separated-etale-diagonal-complement",
+  "date": "2026-10-23",
+  "group": "Q32"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: degree one base case of the induction. Supporting definition: separatedness and the canonical relative diagonal used in the clopen-diagonal degree-one criterion.",
+   "via": [
+    "lem-sfb-space-separated-etale-diagonal-complement",
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsSeparatedPresheafMap",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.diagonalPresheafMap",
+   "AlgebraicGeometry.AlgebraicSpace.IsSeparatedPresheafMap"
+  ],
+  "statement": "def IsSeparatedPresheafMap {G F : (Over S)ᵒᵖ ⥤ Type u} (g : G ⟶ F) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Records the existing canonical presheaf diagonal and its scheme-test closed-immersion predicate at lines 49-58. S : Scheme.{u} is the explicit surrounding variable. The diagonal is pullback.lift of two identity maps, and separatedness is IsRepresentableWith closed immersions of that diagonal. Neither definition uses or chooses data from quasiCompact_separated_etaleLocal. No declaration is moved, copied, or redefined."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af4624675",
+  "group": "Q32",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af4624675",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Re-delivery of 294d: Lean statement byte-identical. R1 repaired: the theorem node lem-trf-space-qc-separated-etale-local is replaced in stmt_deps by the new existing:true node def-sfb-presheaf-map-separated-diagonal, owning diagonalPresheafMap and IsSeparatedPresheafMap in Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal; no other live owner; §5 fields OK. R2 repaired: real second reading. def-a1-algebraic-space-point-classes (landed) added to stmt_deps. Clause check OK: hsep/het hypotheses; open and closed diagonal; ∃ C, j open+closed with pointImage j = complement (pinned, not hollow); point surjectivity + singleton Point(pullback a x) for all algebraically closed Ω : Type u ⇒ IsIso a. True by 05W1/03HK/02G7/040X/05W5. Edge cases (empty, identity, X⊔X, separable/inseparable L/k) OK. lean.statement verbatim; docstrings with source, blueprint and proof steps; imports follow rule 7; no file changed, so no compile. Advisory: the stage-1 Q24 source.place FIX (05W1/03HK(1),(3)/040X) is missing on live; the item source still credits 03HK with an etale diagonal; maintainer should re-apply."
+ }
+}

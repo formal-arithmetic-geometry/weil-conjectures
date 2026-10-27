@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-chern-comparison",
+ "kind": "statement",
+ "title": "Finite realization of the positive tower Chern adjunct",
+ "statement": "Fix a prime l, a finite extension E of Q_l, Noetherian schemes X and S, the actual tower base b, f:X→S, and an isomorphism e:X≅P¹_S over S [def-sp-tower-shriek-data, def-sp-tower-class-diagonal]. Let g be its normalized tower geometry, cp its coefficient pullback, and cX Chern data satisfying FiniteChernNormalization [def-sp-tower-class-finite]. Suppose l is invertible on S and the level n+1 quotient R is finite; its annihilating exponent is the quotient equation [def-sp-tower-class-coefficients]. Write A=ULift R and F for the canonical fixed-scalar associated-module realization [def-sp-finite-intrinsic-direct-adjunction]. There are isomorphisms a from the evaluated tower coefficient unit to D(F)(geoP1Unit A S), and v from the evaluated direct image of the positive tower Tate line shifted by two to D(F)(Rp_*geoP1Twist A P¹_S 1 2). They give the arrow equality Ev(adjunct(cp;c₁(e*O(1))));v = a;D(F)(inr;geoP1TwistedMap), where the right side is the specified positive Kummer Chern adjunct in [sk-lem-geo-p1-cohomology]. This asserts only a comparison of positive adjuncts, with no negative twist, no H², and no invertibility of G2.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), the unit and Chern components of finite projective-line cohomology (G2)"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-class-finite",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "sk-lem-geo-p1-cohomology",
+  "def-sp-tower-class-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Choose the constant/root-section coefficient coordinates and the finite realization pull/push isomorphisms p,q. Their unit equation and coefficient equation fix the adjunction and coefficient pullback. Independently realize the unadjointed normalized Kummer Chern class on X using those same coordinates, obtaining the target-line isomorphism t.",
+   "uses": [
+    "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+    "lem-sfb-finite-p1-kummer-chern-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the tower adjunct as the adjunction unit followed by push of the arrow. Naturality of pushEvaluation and geometry_adjunction_evaluation give the finite adjunct of inverse pullEvaluation followed by the evaluated arrow. This is the proved generic helper evaluation_adjunct, applied to cp.derivedIso followed by firstChern.",
+   "uses": [
+    "lem-sp-tower-geometry-adjunction-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose pushEvaluation, finite direct image of t, and q to form v. The scalar Chern square and coefficient square identify its finite unadjointed arrow with L_fin(a);p;H(unitPullback;positiveChern). Naturality of the finite adjunction unit and of q, followed by its unit equation, give a;F of the ordinary adjunct. The proved helper finiteP1PositiveClass_adjunct identifies that adjunct with inr;geoP1TwistedMap by expanding the specified etale Chern component and the site-comparison mate.",
+   "uses": [
+    "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+    "lem-sfb-finite-p1-kummer-chern-realization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-p1-coefficient-adjunction-coordinates",
+  "lem-sfb-finite-p1-kummer-chern-realization",
+  "lem-sp-tower-geometry-adjunction-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1); categorical evaluation, normalized coefficient transport, and scalar Kummer comparison combined explicitly in Lean by F7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of a coefficient tower identifies the untwisted Chern adjunct with the second component of the ordinary projective line decomposition",
+   "results": "Eight unrelated linear algebra, mapping-cone, and local-frame results. No coefficient-tower Chern realization comparison.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first Chern class of O(1) generates the second cohomology sheaf of the projective line with finite coefficients",
+   "results": "Eight unrelated group-cohomology, Picard-group, and general Ext results. No finite tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_chern_component_comparison|evaluatedChern|geoP1DecompositionMap",
+   "results": "msearch grep returned zero hits. Direct rg in lean/Sheaf found evaluatedChern and FiniteChernNormalization in TowerClassFinite, the normalized adjunction theorem in TowerGeometryAdjunctionEvaluation, and the ordinary G2 maps in GeoP1Cohomology; no theorem compares the evaluated positive Chern adjunct with the ordinary one. Blueprint search for finite Chern component returned zero matching blueprint nodes.",
+   "date": "2026-10-27",
+   "verdict": "No existing comparison statement; retain the existing definitions and adjunction evaluation as dependencies."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteChernCohomology",
+  "date": "2026-10-27",
+  "group": "J5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), identification of the finite Chern component before negative twisting",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-chern-cohomology",
+    "lem-sfb-diagonal-trace-finite-splitting",
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteChernComparison",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteChernComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finite_chern_comparison",
+  "statement": "theorem diagonalTrace_finite_chern_comparison\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]\n    (b : SpTowerShriek.Base l E) {f : X ⟶ S}\n    (e : X ≅ ProjectiveLine S) (he : e.hom ≫ (ProjectiveLine S ↘ S) = f)\n    (g : SpTowerShriek.Geometry l E b f)\n    (cp : CoefficientPullback l E b f g)\n    (cX : Chern l E X) (hc : FiniteChernNormalization l E cX)\n    (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) [Finite (SpTowerShriek.R l E n)] :\n    let A := FiniteRing l E n\n    let hA : ((l ^ (n + 1) : ℕ) : A) = 0 :=\n      ULift.ext _ _ (coefficient_annihilates l E n)\n    let hNS : IsUnit ((l ^ (n + 1) : ℕ) : Γ(S, ⊤)) := by\n      simpa only [Nat.cast_pow] using hS.pow (n + 1)\n    let F := (Scheme.sfIntrinsicModuleEquivalence S (SpTowerShriek.R l E n)).functor\n    let adjunct := (SpTowerShriek.adjunction l E b g).homEquiv _ _\n      ((cp.derivedIso l E).hom ≫\n        firstChern l E cX (Scheme.Pic.mapHom e.hom (hyperplanePic S)))\n    ∃ (a : (SpTowerShriek.Ev l E S n).obj (unit S (Arings l E S)) ≅\n        F.mapDerivedCategory.obj (geoP1Unit A S))\n      (v : (SpTowerShriek.Ev l E S n).obj\n          ((SpTowerShriek.push l E b g).obj ((line l E cX)⟦(2 : ℤ)⟧)) ≅\n        F.mapDerivedCategory.obj\n          ((geoP1Pushforward A (ProjectiveLine S ↘ S)).obj\n            (geoP1Twist A (l ^ (n + 1)) hA (ProjectiveLine S) 1 2))),\n      (SpTowerShriek.Ev l E S n).map adjunct ≫ v.hom =\n        a.hom ≫ F.mapDerivedCategory.map\n          (biprod.inr ≫ geoP1TwistedMap A (l ^ (n + 1))\n            (pow_pos (Fact.out : l.Prime).pos _) hA S hNS)",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T012853-L-2342536",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261027T034641-L-3670441",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

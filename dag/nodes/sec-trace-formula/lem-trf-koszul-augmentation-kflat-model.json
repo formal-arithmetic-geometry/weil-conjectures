@@ -1,0 +1,217 @@
+{
+ "id": "lem-trf-koszul-augmentation-kflat-model",
+ "kind": "statement",
+ "title": "The augmented Koszul resolution computes the derived scalar-extension counit",
+ "statement": "Let $A,S$ be commutative rings, $\\varphi:A\\to S$ a ring homomorphism, $r\\geq0$, and $g_1,\\ldots,g_r\\in A$ a Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence]. Put $I=(g_1,\\ldots,g_r)$ and let $K_A(g)$ be the Koszul complex [def-weil-pbc-koszul-complex], with chain degree $q$ placed in cochain degree $-q$. Define $\\epsilon_g:K_A(g)\\to(A/I)[0]$ to be the quotient $A\\to A/I$ in degree zero and zero in negative cochain degrees. This is a bounded finite free K-flat resolution [def-pc-module-kflat-complex] of $(A/I)[0]$, supported in degrees $[-r,0]$. Let $Q_A,Q_S$ denote the localization functors defining $D(A),D(S)$ [def-weil-abstract-derived-category], and put $F(E)=\\operatorname{Tot}(E\\otimes_A S[0])$, with the $S$-action through $S[0]$ [def-pc-mixed-total-tensor]. For any left derived extension of scalars $(L,\\eta)$ of this functor, with counit $\\eta:LQ_A\\to Q_SF$ as in [lem-pc-derived-tensor-second-factor-functor], there is an isomorphism $\\alpha:LQ_A((A/I)[0])\\xrightarrow{\\sim}Q_SF(K_A(g))$ in $D(S)$ such that $$\\eta_{(A/I)[0]}=Q_S(F(\\epsilon_g))\\circ\\alpha.$$ No flatness of $S$ over $A$, properness of $I$, or nontriviality of either ring is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SJ (lemma-mod-regular-sequence), first proof paragraph: free Koszul resolution and derived tensor computation; its K-flat and counit details in more-algebra.tex, lemma-derived-tor-quasi-isomorphism and section-derived-base-change (lemma-derived-base-change)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-koszul-complex",
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "def-pc-mixed-total-tensor",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-koszul-complex] and [lem-weil-pbc-exterior-power-free-basis], $K_A(g)^{-q}=\\bigwedge_A^q A^r$ has the finite basis indexed by increasing $q$-tuples from $\\{1,\\ldots,r\\}$, and is zero unless $0\\leq q\\leq r$. Every term is flat: tensoring an exact sequence with a finite free module is, in basis coordinates, a finite direct sum of that exact sequence, whose kernels and images are computed coordinatewise. The zero terms satisfy the same assertion. Consequently [lem-pc-module-bounded-flat-kflat] applies with upper bound zero and makes this complex K-flat, in the ordinary-module sense of [def-pc-module-kflat-complex].",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0623 (definition-koszul-complex), 064K (lemma-derived-tor-quasi-isomorphism), and 06XZ (definition-K-flat); exterior basis in algebra.tex Tag 00DM (section-tensor-algebra)."
+   }
+  },
+  {
+   "text": "The differential into degree zero sends $\\sum_i a_i e_i$ to $\\sum_i a_i g_i$ [def-weil-pbc-koszul-complex]. Its image is precisely $I$, so the quotient map kills this differential; all other augmentation components are zero, proving that $\\epsilon_g$ is a cochain map. Its degree-zero cohomology map is the identity of $A/I=\\operatorname{coker}(A^r\\xrightarrow{(g_i)}A)$. In negative degrees the source cohomology vanishes by Koszul-regularity [def-weil-pbc-koszul-regular-sequence]; in positive degrees the source terms vanish. The target has only degree-zero cohomology. Thus $\\epsilon_g$ is a quasi-isomorphism [def-weil-abstract-derived-category] and, with step 1, the asserted bounded finite free K-flat resolution.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0623 (definition-koszul-complex), 062E (definition-koszul-regular-sequence); cotangent.tex Tag 08SJ (lemma-mod-regular-sequence), first proof paragraph."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-mixed-tensor-pointwise-left-derived] with $R=A$, coefficient ring $S$, $f=\\varphi$, and $N=S[0]$. In ordinary composition notation its universal counit has type $\\eta^0:L_0\\circ Q_A\\to Q_S\\circ F$ and is invertible on ordinary-module K-flat inputs. The universal properties of this pair and the specified $(L,\\eta)$ give $t:L\\to L_0$ and $u:L_0\\to L$ with $\\eta^0\\circ(tQ_A)=\\eta$ and $\\eta\\circ(uQ_A)=\\eta^0$. Substitution gives $\\eta\\circ((ut)Q_A)=\\eta$ and $\\eta^0\\circ((tu)Q_A)=\\eta^0$; uniqueness for the respective universal pairs gives $ut=1_L$ and $tu=1_{L_0}$. Thus $t$ is invertible, and $\\eta_P=\\eta^0_P\\circ t_{Q_A(P)}$ is invertible on every K-flat $P$. In particular this holds for $P=K_A(g)$ by step 1. The coefficient action is through $S[0]$, and no flatness of $S$ is required.",
+   "uses": [
+    "lem-pc-mixed-tensor-pointwise-left-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change), K-flat computation; derived.tex Tag 06XN (lemma-find-existence-computes), followed by the elementary uniqueness argument for universal pairs."
+   }
+  },
+  {
+   "text": "Write $K=K_A(g)$, $B=(A/I)[0]$, and $v=L(Q_A(\\epsilon_g))$. Since localization inverts the quasi-isomorphism of step 2 [def-weil-abstract-derived-category], its image under the functor $L$ is invertible, so $v$ is invertible. Define $\\alpha=\\eta_K\\circ v^{-1}$; step 3 shows that this is an isomorphism $LQ_A(B)\\to Q_SF(K)$. Naturality of the specified counit at $\\epsilon_g:K\\to B$ says $\\eta_B\\circ v=Q_S(F(\\epsilon_g))\\circ\\eta_K$. Composing on the right with $v^{-1}$ gives exactly $\\eta_B=Q_S(F(\\epsilon_g))\\circ\\alpha$. For $r=0$ the complex is $A[0]$ and the augmentation is $A\\to A/(0)$; if $I=A$ the quotient is zero and the same quasi-isomorphism argument applies. The proof includes zero rings and imposes no properness or scalar-flatness assumption.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change), universal counit and K-flat computation; explicit naturality and inversion argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-abstract-derived-category",
+  "lem-pc-mixed-tensor-pointwise-left-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SJ (lemma-mod-regular-sequence), expanded using more-algebra.tex Tags 0623, 062E, 064K, 06Y6; explicit counit naturality and universal-pair uniqueness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Koszul regular sequence gives a bounded finite free K-flat quotient resolution computing derived scalar extension and its comparison to ordinary tensor",
+   "results": "8 hits; top=['RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_rTensor', 'RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_lTensor', 'Module.Flat.tfae_equational_criterion', 'RingTheory.Sequence.IsWeaklyRegular.of_flat', 'RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange', 'RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange', 'RingTheory.Sequence.IsRegular.of_faithfullyFlat', 'Algebra.Extension.tensorH1Cotangent']; ; digest=bf8a35da9ace6906. The weak-regularity and flat-base-change hits do not construct this augmented Koszul derived model; the Tor hits describe homology-derived functors, not this comparison in D(S).",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. The weak-regularity and flat-base-change hits do not construct this augmented Koszul derived model; the Tor hits describe homology-derived functors, not this comparison in D(S).",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszulComplex|derivedTensorProduct",
+   "results": "3 hits; top=['Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean', 'Mathlib/Algebra/Homology/LocalCohomology.lean', 'Mathlib/RingTheory/Regular/RegularSequence.lean']; ; digest=1be0dcfcdad1f87f. The weak-regularity and flat-base-change hits do not construct this augmented Koszul derived model; the Tor hits describe homology-derived functors, not this comparison in D(S).",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul regular quotient resolution derived base change counit comparison",
+   "results": "8 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', 'KaehlerDifferential.tensorKaehlerEquiv', 'KaehlerDifferential.tensorKaehlerEquivBase', 'KaehlerDifferential.mapBaseChange', \"KaehlerDifferential.moduleBaseChange'.congr_simp\", 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'KaehlerDifferential.range_mapBaseChange', 'CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_hom']; ; digest=4d6e9f329fd83f8d. The weak-regularity and flat-base-change hits do not construct this augmented Koszul derived model; the Tor hits describe homology-derived functors, not this comparison in D(S).",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The left derived tensor comparison for a quotient is represented by the augmentation of its Koszul resolution",
+   "results": "8 hits; top=['tensorKaehlerQuotKerSqEquiv_tmul_D', 'KaehlerDifferential.D_tensorProductTo', \"CategoryTheory.Tor'_obj_obj\", 'Algebra.Extension.tensorCotangent', 'CategoryTheory.Tor', 'KaehlerDifferential.tensorKaehlerEquivBase', \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'\"]; ; digest=a0fe648ed7bb5bfa. The weak-regularity and flat-base-change hits do not construct this augmented Koszul derived model; the Tor hits describe homology-derived functors, not this comparison in D(S).",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszulComplex|derivedTensorProduct",
+   "results": "3 hits; top=['Mathlib/RingTheory/Regular/RegularSequence.lean', 'Mathlib/Algebra/Homology/LocalCohomology.lean', 'Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean']; ; digest=9706780db8ec98b2. Inspected the regular-sequence TODO and generic derived-counit API: none gives the Koszul augmentation model and its counit factorization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul regular sequence augmentation derived tensor counit comparison",
+   "results": "8 hits; top=['CategoryTheory.Adjunction.derivedε', 'KaehlerDifferential.ideal', 'tensorKaehlerQuotKerSqEquiv', 'CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_counitIso_hom', 'CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.counitIso', 'CochainComplex.augmentTruncate', 'Algebra.Extension.Cotangent.of', \"HomologicalComplex.rightUnitor'\"]; ; digest=0e0a2761700e7580. Inspected the regular-sequence TODO and generic derived-counit API: none gives the Koszul augmentation model and its counit factorization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Inspected the regular-sequence TODO and generic derived-counit API: none gives the Koszul augmentation model and its counit factorization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left derived scalar extension counit is an isomorphism on K-flat complexes and natural for a resolution",
+   "results": "8 hits; top=['CategoryTheory.Functor.totalLeftDerivedCounit', \"CategoryTheory.Adjunction.derived'_counit\", 'CategoryTheory.instIsIsoAppFromLeftDerivedZero', 'CategoryTheory.instIsIsoFunctorFromLeftDerivedZero', 'CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc', 'CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc', 'CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc', 'CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc']; ; digest=900b94ac4642273c. Inspected the regular-sequence TODO and generic derived-counit API: none gives the Koszul augmentation model and its counit factorization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Koszul regular sequence gives a finite free resolution of its quotient and computes the derived extension of scalars counit",
+   "results": "8 hits; top=['Algebra.Generators.Cotangent.exact', 'Algebra.Generators.CotangentSpace.exact', 'Algebra.SubmersivePresentation.free_cotangent', 'Algebra.PreSubmersivePresentation.cotangentComplexAux', 'Algebra.FormallySmooth.projective_kaehlerDifferential', 'retractionKerToTensorEquivSection', 'Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType', 'ModuleCat.projectiveResolution']; ; digest=614cb88c0844955f. Inspected the regular-sequence TODO and generic derived-counit API: none gives the Koszul augmentation model and its counit factorization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-koszul-derived-quotient",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Full cotangent complex of a Koszul-regular quotient. Supporting ring/sheaf input: the Koszul-regular sequence identifies the quotient with the derived tensor product of the polynomial augmentation. Re-split component: Original proof steps 2--3: fixed quotient augmentation, finite free K-flat resolution, and counit formula for derived scalar extension.",
+   "via": [
+    "lem-trf-koszul-derived-quotient",
+    "lem-trf-koszul-quotient-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-koszul-augmentation-kflat-model",
+  "worker": "stage1",
+  "summary": "Verified the exact quotient augmentation, finite exterior bases, all cohomological degrees and ordinary-module K-flatness. Reused existing exterior-basis, bounded-flat K-flatness and pointwise derived-tensor nodes; wrote the universal-pair uniqueness and counit naturality calculations explicitly. No new nodes, statement change, Lean writing or builds. Repair of landing return ebd7d6bc5ea: compared all nine cited node files against current sheaf-dag 6a3ffc7971aefab547f664ba50a91ec78c914d6d (none changed), re-read their statements and Stacks sources, typed the universal comparison explicitly, and wrote out the two composite counit identities before applying uniqueness. The delivery tool rebases onto current live sheaf-dag.",
+  "blueprint": "Supporting Koszul derived-quotient component of the recorded lem-trf-local-term-locality ancestor: establishes the bounded free augmentation model and its actual scalar-extension counit, the component inherited through lem-trf-koszul-derived-quotient.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "General ordinary-module bounded-above flat K-flatness, used with the explicit finite exterior-power terms; the trace unit has no replacement for this homological algebra tool."
+   },
+   {
+    "node": "lem-pc-mixed-tensor-pointwise-left-derived",
+    "why": "General mixed tensor derivation and invertibility of its counit on K-flat complexes, specialized to N=S[0]; this preserves the inherited Koszul computation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-mixed-tensor-pointwise-left-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-a36f68c2b",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-a36f68c2b (reviewer sub-agent of L); spot-checked: This is a re-delivery after the landing returned head ebd7d6bc5ea5, which an earlier reader passed. It changes only the wording of steps 3 and 4 and split_report.summary: step 3 now writes out the substitutions for the composites u∘t and t∘u before using uniqueness, and step 4 says the functor L preserves isomorphisms. There are no new nodes, and the statement and stmt_deps are identical to clones/live, where the item is still unsplit with an empty proof, so no other group has superseded it. There is no repair note for this item. I reread every step against the cited statements. Step 1: the exterior-power node gives finite free terms in degrees [-r,0]; finite free modules are flat by the elementary coordinate argument; lem-pc-module-bounded-flat-kflat needs only bounded-above and termwise flat, and its conclusion is the ordinary-module K-flatness of def-pc-module-kflat-complex. Step 2: d1(e_i)=g_i gives im d1 = I, so ε_g is a cochain map that is the identity of A/I on H^0; Koszul-regularity (clause 3) kills negative-degree cohomology, so ε_g is a quasi-isomorphism. Step 3: lem-pc-mixed-tensor-pointwise-left-derived with (R,A,N):=(A,S,S[0]) gives B_N=F; comparing the given pair with that one through both universal properties makes t invertible, so η is invertible on K-flat complexes. Step 4: α=η_K∘v^{-1} with v=L Q_A(ε_g), and naturality gives η_B=Q_S F(ε_g)∘α; I checked the directions. Source: Stacks cotangent.tex 08SJ, lemma-mod-regular-sequence, first proof paragraph; no SGA is cited. Edge cases checked: r=0, I=A, zero rings, and A=Z, g=2, S=Z/2 (the statement correctly does not claim η_B is an isomorphism); g=0 is excluded by H_1≠0. Not duplicates: new-j3 and new-d3 (resolutions only), the sheaf version lem-sc-affine-koszul-finite-free-resolution, and the sibling lem-trf-koszul-augmented-scalar-extension. I accept both generic Picard-framework tool_uses. Maintainer note: the statement of lem-pc-mixed-tensor-pointwise-left-derived writes ε: Q_R L → B_N Q_A, which is garbled for L Q_R → Q_A B_N."
+ }
+}

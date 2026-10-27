@@ -19,122 +19,72 @@
  ],
  "proof": [
   {
-   "text": "Choose an $E$-basis of $W$, of size $d\\geq0$. Its coordinate maps and their inverse are continuous by [lem-sfb-finite-dimensional-linear-map-continuous], since $E$ is a complete nontrivially normed field and $W$ has its finite-dimensional norm topology. Hence $\\underline W\\cong A^d$. A finite free module in degree zero is K-flat by [def-pc-kflat-complex]: tensoring an acyclic complex with $A^d$ is a finite direct sum of that complex and is acyclic. Consequently $R\\otimes_A^L\\underline W$ is represented by the actual action module $N_R=R^d$ in degree zero, for $R=C,B$. Its action is the matrix $\\rho(g)\\in\\mathrm{GL}_d(E)$ extended to $R$; its coefficient map is entrywise $c$. These basis choices are used only to prove invertibility of the specified morphism. For $d=0$ both sides and the comparison are zero.",
+   "text": "Choose an $E$-basis of $W$ of size $d$. By [lem-sfb-finite-dimensional-linear-map-continuous] its coordinates give $\\underline W\\cong A^d$. This degree-zero module is K-flat [def-pc-kflat-complex]: tensor with it is a finite direct sum, preserving acyclicity. Thus $R\\otimes_A^L\\underline W=N_R=R^d$ with the given $E$-matrix action and entrywise coefficient inclusion, for $R=C,B$. When $d=0$ the assertion is the zero comparison.",
    "uses": [
     "lem-sfb-finite-dimensional-linear-map-continuous",
     "def-pc-kflat-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), arithmetic coefficient-topology input; agent proof, not a proof present in the blueprint."
-   }
-  },
-  {
-   "text": "For every profinite $P$, put $A[P]$ for the free internal $A$-module on $P$. The actual scalar extensions $R\\otimes_A^L A[P]$ are $R[P]$: the sheafification of $S\\mapsto\\bigoplus_{S\\to P}A(S)$ has maps to $M$ in bijection with $M(P)$, by sending the generator of $f:S\\to P$ to $f^*m$. It is therefore both $A[P]$ and $j_{P!}A_P$. Hence $A[P]$ is flat by [lem-pc-sites-modules-j-shriek-flat], and the ordinary scalar-extension identification follows by the free-module adjunction. Apply [lem-sfb-dc-hom-scalar-adjunction] to identify the derived internal-function columns over $R$ with those over $A$ after restriction. For $B$ and for each finite $E\\subseteq F\\subseteq\\Omega$, [lem-sfb-normed-scalar-profinite-hom-acyclic], applied also with its finite intermediate field equal to $F$, identifies the corresponding column for a rank-$d$ module with continuous $V_F$-valued functions on $P$, in degree zero. These are finite direct sums of the scalar calculation. The comparison is the canonical map from ordinary to derived Hom, not an arbitrary object isomorphism.",
-   "uses": [
-    "lem-pc-sites-modules-j-shriek-flat",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-sfb-normed-scalar-profinite-hom-acyclic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), arithmetic coefficient-topology input; agent proof, not a proof present in the blueprint."
-   }
-  },
-  {
-   "text": "The finite extensions containing $E$ are cofinal among all finite subextensions: take the compositum with $E$, as in [det-def-sfb-qlbar-condensed-subextensions]. By [lem-sfb-qlbar-point-abelian-colimit] the actual finite-subextension-valued $C$ is their colimit; the same holds as $A$-modules, since its sectionwise module operations commute with the coprojections. Apply [lem-sfb-profinite-derived-functions-filtered-colimit] to the restricted $A$-module diagram $(\\underline F)^d$. In conjunction with step 2 it identifies the $C$ column with $\\operatorname{colim}_{F\\supseteq E} C(-\\times P,V_F)[0]$. Its sections are exactly continuous functions whose coordinates all lie in one finite $F$: filtered sectionwise colimits on the coherent profinite site satisfy sheaf descent, since any covering refines a finite one and the matching condition uses finite fibre products. A finite family of coordinates has a common $F$ by compositum. The comparison from this column to the $B$ column is the literal inclusion into all continuous $V_\\Omega$-valued functions. Both column identifications are normalized by evaluation and natural in $P$ and in coefficient maps.",
-   "uses": [
-    "det-def-sfb-qlbar-condensed-subextensions",
-    "lem-sfb-qlbar-point-abelian-colimit",
-    "lem-sfb-profinite-derived-functions-filtered-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), arithmetic coefficient-topology input; agent proof, not a proof present in the blueprint."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-condensed-derived-invariant-bar] to $N_C,N_B$ and set $P=G^n$ in the preceding steps. The ordinary-to-derived column maps form a cosimplicial comparison: interior and last faces are parameter precomposition, and the first is pullback followed by the action matrix $\\rho(g_1)$ over $E$. Evaluation normalization makes these squares commute; the latter equality is $c(\\rho(g_1)v)=\\rho(g_1)c(v)$, also for continuously varying $g_1$. Resolve the two bar diagrams compatibly in nonnegative vertical degrees. Their column maps are quasi-isomorphisms by steps 2–3, so [lem-sc-first-quadrant-total-column-comparison] identifies their total complexes. Only finite diagonals occur. Evaluation at the one-point profinite set is exact by [lem-zl-contractible-derived-sections-tensor], with $T=*$, and commutes with these finite sums. Thus the actual $\\alpha_{\\underline W[0]}$ is represented, after forgetting scalars, by the cochain inclusion\n$$i:C^\\bullet_{\\mathrm{fin}}(G,V_\\Omega)\\hookrightarrow C^\\bullet_{\\mathrm{cts}}(G,V_\\Omega).$$\nHere $C^n_{\\mathrm{fin}}$ consists of continuous functions $G^n\\to V_\\Omega$ with image in some $V_F$, with one $F$ for the whole function; $C^n_{\\mathrm{cts}}$ has no such restriction. Both differentials are exactly the formula in [lem-sfb-local-norm-algcl-cocycle-descent]. Scalar naturality and the degree-zero invariant augmentation in the bar lemma ensure that this represents the stipulated inclusion-induced derived morphism.",
-   "uses": [
-    "lem-sfb-condensed-derived-invariant-bar",
-    "lem-sc-first-quadrant-total-column-comparison",
-    "lem-zl-contractible-derived-sections-tensor",
-    "lem-sfb-local-norm-algcl-cocycle-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), arithmetic coefficient-topology input; agent proof, not a proof present in the blueprint."
-   }
-  },
-  {
-   "text": "The degree-zero terms of both complexes are the same $V_\\Omega$: any one vector has finitely many coordinates, all in a finite field. Their differentials agree, and the degree-one inclusion is injective. Their kernels in degree zero therefore coincide, so $H^0(i)$ is the identity on $V_\\Omega^G$. All negative cohomology groups vanish because the complexes are nonnegative.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), arithmetic coefficient-topology input; agent proof, not a proof present in the blueprint."
+    "place": "Paragraph (3), agent arithmetic input; repair of the eight-step profinite comparison below the geometric finiteness reduction."
    }
   },
   {
-   "text": "Let $n\\geq1$ and let $z\\in C^n_{\\mathrm{fin}}(G,V_\\Omega)$ be a cocycle which is $db$ for a continuous $V_\\Omega$-valued $(n-1)$-cochain. Choose $F\\supseteq E$ with $z(G^n)\\subseteq V_F$. By [lem-sfb-finite-subfield-continuous-linear-retraction] choose a continuous $E$-linear $p_F:\\Omega\\to F$ restricting to the identity on $F$. Apply it coordinatewise to obtain $p:V_\\Omega\\to V_F$. Every $\\rho(g)$ has entries in $E$, so $p(\\rho(g)v)=\\rho(g)p(v)$. Consequently $p$ commutes with every summand of the displayed differential, and $d(pb)=p(db)=pz=z$. The cochain $pb$ is continuous and takes all its values in this one $V_F$. Hence $z$ is already a boundary in $C^\\bullet_{\\mathrm{fin}}$, proving injectivity of $H^n(i)$. For $n=1$, $b$ is a single vector and the same argument applies.",
+   "text": "Apply [lem-sfb-finite-subextension-derived-function-columns] at $P=G^n$. The normalized maps assemble over the group nerve: the first face uses the continuous matrix $\\rho(g_1)$, the others precompose parameter maps. By [lem-sfb-condensed-derived-invariant-bar] and [lem-sc-first-quadrant-total-column-comparison], the $C$-column isomorphisms yield a total isomorphism. Exact point evaluation [lem-zl-contractible-derived-sections-tensor], at $T=*$, preserves finite diagonals. We obtain the canonical isomorphism $j_C:Q(C^\\bullet_{\\mathrm{fin}}(G,V_\\Omega))\\xrightarrow{\\sim}\\operatorname{ev}_*R\\Gamma_G(N_C[0])$. Here each cochain has image in one finite $F^d$, and its differential is the displayed inhomogeneous formula in the cochain lemma below.",
    "uses": [
-    "lem-sfb-finite-subfield-continuous-linear-retraction"
+    "lem-sfb-finite-subextension-derived-function-columns",
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-sc-first-quadrant-total-column-comparison",
+    "lem-zl-contractible-derived-sections-tensor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), arithmetic coefficient-topology input; agent proof, not a proof present in the blueprint."
+    "place": "Paragraph (3), agent arithmetic input; repair of the eight-step profinite comparison below the geometric finiteness reduction."
    }
   },
   {
-   "text": "Let $n\\geq1$ and let $z\\in C^n_{\\mathrm{cts}}(G,V_\\Omega)$ be a cocycle. Apply [lem-sfb-local-norm-algcl-cocycle-descent] to obtain an open $H$, a finite $F\\supseteq E$, and $u\\in Z^n_{\\mathrm{cts}}(H,V_F)$ with $[u]=\\mathrm{res}[z]$ after inclusion. Put $m=[G:H]$, a positive finite integer. Apply [lem-sfb-continuous-cochain-finite-index-transfer] simultaneously to $V_F\\hookrightarrow V_\\Omega$, using the same coset representatives. The continuous cochain $\\mathrm{cor}(u)$ takes values in $V_F$; its class therefore comes from $C^\\bullet_{\\mathrm{fin}}(G,V_\\Omega)$. Naturality and the stated homotopy give\n$$i_*[\\mathrm{cor}(u)]=\\mathrm{cor}\\,\\mathrm{res}[z]=m[z].$$\nSince $E$ has characteristic zero, $m^{-1}\\in E\\subseteq F$. The finite-field cocycle $m^{-1}\\mathrm{cor}(u)$ maps to $[z]$. This proves surjectivity of $H^n(i)$ without any bound on $n$ or any restriction on $G$.",
+   "text": "Use [lem-sfb-norm-algcl-evaluated-bar-augmentation] for the canonical isomorphism $j_B:Q(C^\\bullet_{\\mathrm{cts}}(G,V_\\Omega))\\xrightarrow{\\sim}\\operatorname{ev}_*R\\Gamma_G(N_B[0])$. The coefficient square in [lem-sfb-finite-subextension-derived-function-columns] and scalar naturality of [lem-sfb-condensed-derived-invariant-bar] give $\\alpha_{\\underline W[0]}j_C=j_B Q(i)$, where $i$ is the literal cochain inclusion. In particular the square concerns the specified coefficient map, including its invariant augmentation. This uses the evaluated total augmentation for $B$, without asserting acyclicity of its individual columns.",
    "uses": [
-    "lem-sfb-local-norm-algcl-cocycle-descent",
-    "lem-sfb-continuous-cochain-finite-index-transfer"
+    "lem-sfb-norm-algcl-evaluated-bar-augmentation",
+    "lem-sfb-finite-subextension-derived-function-columns",
+    "lem-sfb-condensed-derived-invariant-bar"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), arithmetic coefficient-topology input; agent proof, not a proof present in the blueprint."
+    "place": "Paragraph (3), agent arithmetic input; repair of the eight-step profinite comparison below the geometric finiteness reduction."
    }
   },
   {
-   "text": "Steps 5–7 show that the actual cochain map $i$ induces an isomorphism in every degree. By the definition of quasi-isomorphism and of the ordinary derived category [def-weil-abstract-derived-category], its image is invertible in $D(\\mathbf{Ab})$. Step 4 identifies that image with $\\alpha_{\\underline W[0]}$, which proves the statement for this specified morphism. The use of the bar and acyclicity inputs is part of the proof, rather than an assumed identification with topological cohomology. No assertion is made for the internal condensed comparison prior to evaluation.",
+   "text": "By [lem-sfb-finite-subextension-continuous-cochain-quasi-isomorphism], $i$ is a quasi-isomorphism. Localization [def-weil-abstract-derived-category] makes $Q(i)$ invertible. The square therefore gives $\\alpha_{\\underline W[0]}=j_B Q(i)j_C^{-1}$ invertible in $D(\\mathbf{Ab})$. The tensor and derived-invariant maps used throughout are the stipulated ones, so their given shift-compatible natural transformation is unchanged. No internal condensed isomorphism before evaluation is concluded.",
    "uses": [
+    "lem-sfb-finite-subextension-continuous-cochain-quasi-isomorphism",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), arithmetic coefficient-topology input; agent proof, not a proof present in the blueprint."
+    "place": "Paragraph (3), agent arithmetic input; repair of the eight-step profinite comparison below the geometric finiteness reduction."
    }
   }
  ],
  "proof_deps": [
   "lem-sfb-finite-dimensional-linear-map-continuous",
   "def-pc-kflat-complex",
-  "lem-pc-sites-modules-j-shriek-flat",
-  "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-sfb-normed-scalar-profinite-hom-acyclic",
-  "det-def-sfb-qlbar-condensed-subextensions",
-  "lem-sfb-qlbar-point-abelian-colimit",
-  "lem-sfb-profinite-derived-functions-filtered-colimit",
+  "lem-sfb-finite-subextension-derived-function-columns",
   "lem-sfb-condensed-derived-invariant-bar",
   "lem-sc-first-quadrant-total-column-comparison",
   "lem-zl-contractible-derived-sections-tensor",
-  "lem-sfb-local-norm-algcl-cocycle-descent",
-  "lem-sfb-finite-subfield-continuous-linear-retraction",
-  "lem-sfb-continuous-cochain-finite-index-transfer",
+  "lem-sfb-norm-algcl-evaluated-bar-augmentation",
+  "lem-sfb-finite-subextension-continuous-cochain-quasi-isomorphism",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-  "place": "Paragraph (3), arithmetic coefficient-topology obligation: bar-column calculation, continuous linear detection of boundaries, local cocycle descent and finite-index transfer. This argument is not supplied in the blueprint."
+  "place": "Paragraph (3), arithmetic obligation. Three independent statement-only tasks replace the eight-step proof. The incomplete-field column citation is repaired to an evaluated total bar augmentation obligation; no complete-field acyclicity is applied to Omega."
  },
  "mathlib_searches": [
   {
@@ -367,21 +317,13 @@
   "date": "2026-10-22",
   "item": "lem-sfb-profinite-algcl-derived-invariants-comparison",
   "worker": "stage1",
-  "group": "NN",
-  "summary": "Statement unchanged. Computes the specified map using compatible derived bar columns, then proves injectivity by a continuous finite-field linear retraction and surjectivity by local cocycle descent followed by finite-index transfer. Reuses the normed-scalar profinite Hom acyclicity input and the point evaluation theorem. Four new statement-only inputs, none claimed proved or in Mathlib. Exact analytic references remain WANTED.",
-  "blueprint": "Realizes the arithmetic coefficient-topology obligation below paragraph (3), without changing the proper/open/compactification unit route. The ancestor command returns None; the inherited null ancestor and via chain are retained.",
+  "group": "Q27",
+  "summary": "Repair of the 7140-character re-split order: statement and statement dependencies unchanged, three comparable unsplit tasks for finite-subextension columns, the evaluated norm-coefficient bar augmentation, and the explicit cochain quasi-isomorphism. All eight inherited arguments are preserved verbatim with task allocation in report.md. The former step-2 citation no longer covers Omega; the new B task asserts only the evaluated total comparison and does not repeat the false column-acyclicity claim.",
+  "blueprint": "Direct-images proof paragraph (3), arithmetic coefficient-topology obligation below geometric finiteness. The ancestor command returns None; inherited null ancestor and full via chain retained. Unit and chapter routes unchanged.",
   "tool_uses": [
    {
     "node": "lem-sfb-finite-dimensional-linear-map-continuous",
     "why": "Continuity of finite-dimensional E-coordinate maps; E is complete. This generic linear-topology tool does not replace a geometric route."
-   },
-   {
-    "node": "lem-sfb-dc-hom-scalar-adjunction",
-    "why": "Generic derived scalar/internal-Hom adjunction, normalized by evaluation, used only on free profinite modules."
-   },
-   {
-    "node": "lem-pc-sites-modules-j-shriek-flat",
-    "why": "Flatness of the free module on a profinite representable, needed to identify its derived scalar extension."
    },
    {
     "node": "lem-sc-first-quadrant-total-column-comparison",
@@ -401,12 +343,12 @@
   "lem-zl-contractible-derived-sections-tensor"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NN-254ff753e",
-  "group": "NN",
+  "reviewer": "NT-cc-Q27-4916b85c7",
+  "group": "Q27",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-254ff753e (reviewer sub-agent of L); spot-checked: First delivery of the item: no prior run and no repair note, so the 2026-10-21 re-split rules do not apply. Item statement unchanged, route is direct-images proof paragraph (3), no SGA. I read the item and all 4 new nodes in full.\n\nSteps 1-4 reduce alpha_W to the cochain inclusion C_fin(G,V_Omega) -> C_cts(G,V_Omega). Inputs, each checked against its cited statement: finite-dimensional continuity gives W = A^d, which is K-flat; A[P] = j_P!A_P is flat; the scalar adjunction (no flatness hypothesis); normed-scalar acyclicity for Omega and, renaming its finite field, for each F; the qlbar colimit with compositum cofinality; the new filtered-colimit node; the bar lemma with scalar-restriction naturality; the first-quadrant comparison; exact evaluation at T=*.\n\nSteps 5-8 are correct. In step 6, p = p_F^d commutes with E-matrices and hence with d. In step 7, cor(u) is V_F-valued by naturality, cor res = m up to homotopy, and m^-1 lies in E.\n\nNew nodes:\n- local-norm-algcl-cocycle-descent is true, checked myself: Omega is a countable union of closed F_k, Baire on G^n gives a box of cosets of a normal open H, and the coboundary shift z' = z - d(z(.,b)) plus the cocycle identity at (a,.,.) makes z' F-valued on H^n. A bilinear counterexample attempt on prod Z_ell fails because its values would leave Omega. Not a restatement: weaker than surjectivity, and the transfer step is genuine.\n- The transfer node is standard Shapiro/coinduction; open H makes coset maps locally constant.\n- The retraction node follows from Ingleton Hahn-Banach (E is spherically complete).\n- The filtered-colimit node is true via Stacks 0GN3 (sites-cohomology l.2630) on S x P slices.\n\nDuplicate search (corestriction, Hahn-Banach, Baire, continuous cochain, filtered colimit, and the 10-22 sfb neighbours) found no duplicates; lem-sfb-dc-hom-filtered-colimit assumes this continuity rather than proving it.\n\nBatch-5 flag: def-pod-l-adic-representations is a general definition whose 23-node closure contains no trace-formula or Poincare-duality node, so I accept it. I accept the listed generic tool_uses. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-4916b85c7 (reviewer sub-agent of L); spot-checked: Re-split under the released human note (2026-10-22, 7140 characters, 8 steps). Live still holds the NN 8-step version, so no other group has superseded it. The item statement and stmt_deps are unchanged, the source is main-20261015 direct-images paragraph (3) as an agent obligation, and no SGA is cited. The proof is now a 4-step assembly of 2302 characters giving α = j_B Q(i) j_C^-1, with three statement-only nodes of comparable size (2310, 2161, 2464 characters). (1) finite-subextension-derived-function-columns is true. A[P] = j_P!A_P is flat (03EV). For finite F the normed-scalar node, with its field renamed to F (a complete finite extension), gives the F columns. C^d is the sectionwise filtered colimit, which the filtered-colimit node commutes with H_P. The coefficient square holds by naturality, and no B-column invertibility is claimed. That is correct, since cech-exact(1) gives H^1(V,C(-,Ω)) ≠ 0. (2) continuous-cochain-quasi-isomorphism is old steps 5-7 (H^0, coordinatewise E-linear retraction, local descent plus transfer, m^-1 in E); I checked each input statement. (3) norm-algcl-evaluated-bar-augmentation is the B-side core. It is well formed and passes d=0, G=1 and finite G. Old step 2 had misquoted the finite-only normed-scalar node for Ω (C4); the worker reports this and replaces it with this node. It is not a restatement, because C, descent and α are carried by separate nodes. Old steps 1 and 8 and the C-half of step 4 are kept whole in the assembly. The Q58 ce5b RETURN counterexample (G=Z_ℓ, W=E) fails: its ψ is not a section of Ĉ/Ω over Z_ℓ. Take a nonprincipal ultrafilter of integers converging to x₁. There f̃ = 0, while f̃(x₁) ≡ c is not in Ω, so descent on β×_{Z_ℓ}β fails. For trivial Z_ℓ the claim reduces to additive sections of Q being x ↦ ax mod Ω. A countable image is excluded by Baire. The remaining case is a plausible Borel-rigidity question that stays the WANTED core. No duplicates found: bar-augmentation (internal Z_ℓ, rank 1), procyclic-scalar-cochain-evaluation, prime-to-ell acyclicity and equivariant-resolution-bar-normalization differ. I accept the split_report tool_uses. Advisory: the item tool_uses still lists the scalar-adjunction and j-shriek-flat nodes, which only the columns node uses now. Maintainer note: the proof of lem-sfb-norm-algcl-bar-augmentation (NF), step 2, relies on positive Čech exactness for Ω, which the current cech-exact(1) denies, so that proof looks stale. No fixes written."
  },
  "lean": {
   "module": "Sheaf.RepresentationTheory.ProfiniteAlgclDerivedInvariantsComparison",
@@ -441,5 +383,17 @@
   "group": "NZ",
   "result": "pass",
   "note": "Read item, 8 stmt_deps, report (Worker report + Second reading by NZ present), module and side-live interfaces (CondensedBar Ring/Modules/Equivariant/Invariants/ActionAbelian/ScalarModel, Mod relative monoidal tensor, pureTensor). Clause match: prime ℓ, PadicAlgCl Ω, finite intermediate E, arbitrary profinite G : Type u, A = continuousMapRingObj E, C = padicAlgClRingObj restricted along recorded padicSubfieldRingObjToPadicAlgCl, B = C(-,Ω) restricted along ring-sheaf map of algebraMap; c pinned sectionwise to subtype inclusion; TensorModel = relative tensor over A with trivial coefficient action on pure tensors; η pinned to c ▷ M; DerivedTensor = IsLeftDerivedFunctor + counit-compatible CommShift + K-flat counit iso; α = Mathlib leftDerivedNatTrans whiskered with R(Γ ⋙ ev); CommShift of α asserted; W finite-dim normed with jointly continuous ρ; RepresentationModel pins underline W up to equivariant iso; IsIso in D(Ab) at W[0] (derived form). All existentials are pinned up to arrow-isomorphism (underlying isos forced equivariant by the action clause), so not hollow; no strengthened hypotheses. Computing over A instead of R is justified by the bar lemma's scalar-restriction clause, exact ev and exact restriction. Edge cases W=0, finite G, E=Q_ℓ, empty S, universes (W in u+1 loses nothing) ok. stmt_deps unchanged vs live; statement verbatim; docstrings and 8-step proof present; single sorry. No compile (2026-10-21 rule), no files changed. Advisories: scalarRing is a local bundle because def-sfb-bundled-continuous-scalar-ring only accepts F : Type u; ∃ N could read ∀ N; W hypotheses do not cite def-pod-l-adic-representations."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

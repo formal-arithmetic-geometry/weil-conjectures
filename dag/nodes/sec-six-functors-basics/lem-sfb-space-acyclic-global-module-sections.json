@@ -1,0 +1,354 @@
+{
+ "id": "lem-sfb-space-acyclic-global-module-sections",
+ "kind": "statement",
+ "title": "Global module sections on an H1-acyclic qcqs algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $X$ be an algebraic space over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-trf-algebraic-space], quasi-compact and quasi-separated: its point space is quasi-compact and its absolute diagonal is quasi-compact on scheme tests [def-a1-space-point-topology]. Let $H^q$ mean right-derived global sections of underlying additive sheaves [def-weil-pbc-sites-and-cohomology]. Suppose $H^1(X,F)=0$ for every quasi-coherent $\\mathcal O_X$-module on the small etale ringed site [def-trf-space-quasi-coherent-module]. Put $A=\\Gamma(X,\\mathcal O_X)$ and let $p:X\\to\\operatorname{Spec}A$ induce the identity on $A$ [def-weil-affine-spectrum]. For any $A$-module $M$, let $\\widetilde M_{\\mathrm{et}}$ be the small etale sheaf associated to the usual quasi-coherent module $\\widetilde M$ on $\\operatorname{Spec}A$ [lem-weil-pbc-spec-module-tilde-sections, def-sc-etale-qcoherent-module]. Set $M\\otimes_A\\mathcal O_X=p^*\\widetilde M_{\\mathrm{et}}$, using tensor pullback [def-trf-space-etale-module-functors]. Then the canonical map $$u_M:M\\longrightarrow\\Gamma(X,M\\otimes_A\\mathcal O_X),\\qquad m\\longmapsto m\\otimes1,$$ is an isomorphism of $A$-modules, natural in $A$-linear maps of $M$. Here $u_M$ is the global-section unit for $p^*\\dashv p_*$ after the canonical identification $M=\\Gamma(\\operatorname{Spec}A,\\widetilde M_{\\mathrm{et}})$; its local tensor formula is as in [lem-trf-space-chart-adjunction-tensor-realization]. No finite generation of $M$, Noetherian hypothesis on $X$, or flatness hypothesis on $p$ is assumed. The zero ring, the zero module and the empty space are allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UZ (lemma-vanishing-compute), global-sections assertion under Situation 07UY (situation-vanishing), with the canonical map given by the free-presentation proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-sc-etale-qcoherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-represented-scheme-zariski-etale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Choose the following explicit free presentation, with small indexing sets in the fixed universe. Let $I$ be the underlying set of $M$, let $F_0=A^{(I)}$, and define $e:F_0\\to M$ by $e(e_m)=m$. This is surjective since $m=e(e_m)$. Let $K=\\ker(e)$, let $J$ be its underlying set, and define $d:F_1=A^{(J)}\\to F_0$ by $d(e_k)=k$. Its image is exactly $K$: every $k\\in K$ is an image, and every finite linear combination of such elements lies in $K$. Hence $F_1\\xrightarrow d F_0\\xrightarrow e M\\to0$ is exact. This is a free presentation, not a claim that $d$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UZ (lemma-vanishing-compute), free-presentation proof, under Situation 07UY (situation-vanishing)."
+   }
+  },
+  {
+   "text": "Put $Y=\\operatorname{Spec}A$ and $T(N)=p^*\\widetilde N_{\\mathrm{et}}$. The affine tilde-Gamma adjunction gives that $N\\mapsto\\widetilde N$ preserves small colimits in all Zariski module sheaves. The Zariski-etale quasi-coherent equivalence carries these to colimits in quasi-coherent etale modules: a map out of a candidate colimit corresponds, under the inverse equivalence, to a compatible family of maps out of the diagram. The kernels-colimits node says that inclusion of quasi-coherent etale modules in all etale modules preserves these colimits, so they are ambient colimits too. Finally $p^*$ is a left adjoint, so preserves small colimits. Thus $T$ preserves direct sums and cokernels. The tilde construction and the Zariski-etale comparison identify $\\widetilde A_{\\mathrm{et}}$ with $\\mathcal O_Y$. For its pullback the chart tensor formula gives $b\\otimes a\\mapsto b\\,p^\\sharp(a)$, inverse $b\\mapsto b\\otimes1$; the balancing relation proves these are inverse. Consequently $T(A)=\\mathcal O_X$, $T(A^{(L)})=\\mathcal O_X^{(L)}$ for every small set $L$, and $T(F_1)\\to T(F_0)\\to T(M)\\to0$ is exact. Each of these three modules is quasi-coherent: $\\mathcal O_X$ has the identity free presentation, and arbitrary sums and cokernels preserve quasi-coherence.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "def-trf-space-etale-module-functors",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UZ (lemma-vanishing-compute), free-presentation proof, under Situation 07UY (situation-vanishing)."
+   }
+  },
+  {
+   "text": "For a small set $L$, the finite subsets $E\\subseteq L$, ordered by inclusion, form a small nonempty filtered category: $\\varnothing$ is an object and $E\\cup E\\prime$ dominates any two. The coproduct $\\mathcal O_X^{(L)}$ is the filtered colimit of its finite subsums, since compatible maps from all finite subsums are exactly families of maps from its summands. The forgetful functor to abelian sheaves preserves this colimit. Apply the cohomology-filtered-colimit node in degree zero; its hypotheses are exactly the assumed quasi-compactness and quasi-separatedness of $X$. Additivity of global sections identifies the sections of the finite subsum with $A^E$. The same finite-support universal property identifies $\\varinjlim_E A^E=A^{(L)}$. We obtain $\\Gamma(X,\\mathcal O_X^{(L)})=A^{(L)}$, with the comparison induced by the actual summand injections. Under the identification in step 2, $u_{A^{(L)}}$ sends a basis vector $e_l$ to the section $1$ in the $l$th summand, by the chart-unit formula. Therefore $u_{A^{(L)}}$ is this isomorphism, not merely an abstract module isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-space-cohomology-filtered-colimit",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UZ (lemma-vanishing-compute), free-presentation proof, under Situation 07UY (situation-vanishing)."
+   }
+  },
+  {
+   "text": "For any short exact sequence $0\\to Q\\to P\\to R\\to0$ of quasi-coherent $\\mathcal O_X$-modules, forget the module structure. The forgetful functor is exact, so this is a short exact sequence of abelian sheaves. By the sites-and-cohomology node, the abelian sheaf category has enough injectives, global sections is left exact and additive, and $R^0\\Gamma=\\Gamma$. The derived-functor long exact sequence therefore gives $0\\to\\Gamma(Q)\\to\\Gamma(P)\\to\\Gamma(R)\\to H^1(X,Q)$. Its last term vanishes by hypothesis. Thus $\\Gamma(P)\\to\\Gamma(R)$ is surjective, and global sections is exact on such short exact sequences. All these maps are $A$-linear because they come from module-sheaf morphisms.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UZ (lemma-vanishing-compute), free-presentation proof, under Situation 07UY (situation-vanishing)."
+   }
+  },
+  {
+   "text": "Let $B=\\operatorname{im}(T(d))=\\ker(T(e))$ and $C=\\ker(T(F_1)\\to B)$. The kernels-colimits node ensures that $B$ and $C$ are quasi-coherent, so step 4 applies to $0\\to C\\to T(F_1)\\to B\\to0$ and $0\\to B\\to T(F_0)\\to T(M)\\to0$. Hence $\\Gamma(T(F_1))\\to\\Gamma(T(F_0))\\to\\Gamma(T(M))\\to0$ is exact: the first map surjects onto $\\Gamma(B)$, which is the kernel of the second. The unit maps give a commuting diagram from the free presentation of step 1 to this row. Indeed, on each local unit tensor a linear map $v:N\\to N\\prime$ sends $1\\otimes n$ to $1\\otimes v(n)$ by the chart formula. Step 3 identifies the first two vertical maps with the isomorphisms $u_{F_1}$ and $u_{F_0}$. Thus they identify the images of $d$ and $\\Gamma(T(d))$, and induce an isomorphism of the two cokernel quotients. The third vertical map is $u_M$, by commutativity with the surjections from $F_0$, so $u_M$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UZ (lemma-vanishing-compute), free-presentation proof, under Situation 07UY (situation-vanishing)."
+   }
+  },
+  {
+   "text": "For every $A$-linear $v:M\\to N$, the same local formula gives $\\Gamma(T(v))u_M(m)=1\\otimes v(m)=u_N(v(m))$. Thus the proved isomorphisms are natural, and they are exactly the specified global-section adjunction units. Their inverses are natural as well by composing this equality with the inverse maps. If $M=0$, both presentation and conclusion are zero. If $X=\\varnothing$, then $A=0$ and every unital $A$-module is zero, so the same argument applies. Arbitrary index sets were allowed throughout; neither flatness nor finite generation nor a Noetherian hypothesis was used.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UZ (lemma-vanishing-compute), free-presentation proof, under Situation 07UY (situation-vanishing)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-space-cohomology-filtered-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UZ (lemma-vanishing-compute), free-presentation proof, under Situation 07UY (situation-vanishing)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs algebraic space X with H1 vanishing for all quasi coherent modules and A its global functions every A module M has Gamma X of M tensor O_X canonically equal to M",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, ModuleCat.tilde, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.isSheaf, ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType, SheafOfModules.unitHomEquiv, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, Sheaf, cohomology",
+   "results": "Search note: loogle: unknown identifier 'AlgebraicGeometry'. Returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "vanishing.base.change|vanishing.compute|cohomologically.affine|AlgebraicSpace",
+   "results": "Returned 0 hits: . Source subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of module tensor structure sheaf on a quasi compact quasi separated algebraic space with vanishing first cohomology",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.Scheme.ΓSpecIso_inv, SheafOfModules.sections, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.termΓ(_,_), AlgebraicGeometry.Scheme.Γ_def, ModuleCat.tildeInModuleCat, AlgebraicGeometry.StructureSheaf.to_global_factors_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map M to global sections of pullback of the associated sheaf of M along X to Spec Gamma X is bijective if all quasi coherent modules on X have vanishing H1",
+   "results": "Returned 8 hits: SheafOfModules.bijective_pushforwardSections, SheafOfModules.QuasicoherentData.I, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "Returned 6 hits: SheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections|adjunction|unitHomEquiv",
+   "results": "Returned 10 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean. Source subdirectory Mathlib/AlgebraicGeometry/Modules",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine morphisms of algebraic spaces preserve vanishing first cohomology of quasi coherent modules and arbitrary affine base change over global functions computes the new global ring",
+   "results": "Returned 8 hits: AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.affineAnd_apply, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.targetAffineLocally_affineAnd_iff', AlgebraicGeometry.HasRingHomProperty.iff_of_isAffine, AlgebraicGeometry.HasRingHomProperty.appTop, AlgebraicGeometry.HasAffineProperty.iff_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomologically affine algebraic spaces affine base change global sections",
+   "results": "Returned 8 hits: AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.AffineScheme.Γ, AlgebraicGeometry.IsAffine.casesOn, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.IsAffine.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "6 hits: SheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine tilde adjunction on Spec and general section/pushforward interfaces do not give the H1-acyclic algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|cohomologically.affine|vanishing.compute",
+   "results": "0 hits:  (Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-24",
+   "verdict": "no match: no algebraic-space or cohomologically affine declaration found in the searched source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated algebraic space X with H1 zero for every quasi coherent module, global sections of M tensor O_X equal M over the ring of global functions",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.Modules.isSheaf, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine tilde adjunction on Spec and general section/pushforward interfaces do not give the H1-acyclic algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of pullback of an arbitrary module to a cohomologically affine algebraic space",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.termΓ(_,_), SheafOfModules.sectionsFunctor_obj, SheafOfModules.sections, AlgebraicGeometry.AffineScheme.Γ, AlgebraicGeometry.LocallyRingedSpace.Γ_def",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine tilde adjunction on Spec and general section/pushforward interfaces do not give the H1-acyclic algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "tilde.adjunction|unitHomEquiv|cohomology",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean (Mathlib/AlgebraicGeometry/Modules)",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine tilde adjunction on Spec and general section/pushforward interfaces do not give the H1-acyclic algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical adjunction unit M to Gamma X of the pullback of tilde M is bijective when X has vanishing first cohomology for all quasi coherent sheaves",
+   "results": "8 hits: SheafOfModules.bijective_pushforwardSections, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_bijective_toPullbackObj, LightCondSet.topCatAdjunctionCounit_bijective, SheafOfModules.unitHomEquiv, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, CategoryTheory.Sheaf.isLocallyBijective_iff_isIso",
+   "date": "2026-10-24",
+   "verdict": "no match: the affine tilde adjunction on Spec and general section/pushforward interfaces do not give the H1-acyclic algebraic-space assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-h1-vanishing-affine-base-change",
+  "date": "2026-10-23",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Geometric prerequisites to Tag 07V6: separatedness and universal injectivity of the absolute canonical map, before the affine presentation argument. Tag 07V4 first reduction to field base change, and Tag 07V5 transfer of H1 vanishing to the integral scheme cover, using Tag 07V0. Supporting module computation for Tag 07V0(2): Tag 07UZ, before the field-base-change reductions in Tags 07V4 and 07V5.",
+   "via": [
+    "lem-sfb-space-h1-vanishing-affine-base-change",
+    "lem-sfb-space-acyclic-affinization-geometry",
+    "lem-sfb-space-serre-affineness",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-acyclic-global-module-sections",
+  "worker": "stage1",
+  "summary": "Checked Stacks 07UY/07UZ and followed its free-presentation argument, using existing DAG nodes only. Made explicit colimit preservation of tensor pullback, the finite-subsum computation, exactness on quasi-coherent short exact sequences, and identification and naturality of the actual adjunction unit. Statement unchanged; no new nodes.",
+  "blueprint": "Supporting module calculation 07UZ in the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration chain, specifically the 07V0(2) prerequisite before the 07V4/07V5 reductions. Latest blueprint direct-images proof read; inherited null blueprint ancestor retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic affine associated-module adjunction and ambient colimit preservation on Spec A; no same-unit node supplies this Zariski input."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic comparison carrying the affine tilde construction to the small etale module category; no replacement of the unit route."
+   },
+   {
+    "node": "def-trf-space-etale-module-functors",
+    "why": "The statement already uses this definition of tensor pullback and its specified unit."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic categorical preservation theorem applied to the specified tensor pullback."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic local tensor realization identifies T(A) and the actual unit maps; no same-unit node supplies those formulas."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Existing affine tilde construction used to identify the free rank-one sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exactness and colimit preservation for the forgetful module-sheaf functor, needed because cohomology is defined on additive sheaves."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Existing cohomology definition and its additive, left-exact global-sections interface, already a statement dependency."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic long exact sequence on underlying abelian sheaves, used only in degrees zero and one."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q80-e3ef952f7",
+  "group": "Q80",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-e3ef952f7 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-cohomology.tex 07UY (situation-vanishing, l.2774), 07UZ (lemma-vanishing-compute, l.2792-2817) and 073E (lemma-colimits, l.450). The item statement, stmt_deps and blueprint are byte-identical to side-live, and the item is still unsplit in live. There are no new nodes. Six steps follow 07UZ's presentation proof. Step 1 is an explicit free presentation (it does not claim d is injective). Step 2 shows T=p^*(~)_et preserves sums and cokernels: tilde adjunction (4), then the Zariski-etale QCoh equivalence, then qcoh-kernels-colimits (inclusion preserves colimits), then left-adjoint preservation; T(A)=O_X comes from the chart realization plus tensor balancing; quasi-coherence comes from the qcoh closure node. Step 3 gets Gamma(O_X^(L))=A^(L) from finite subsums, forgetful colimit preservation, and cohomology-filtered-colimit in degree 0 with S=Spec Z (same qcqs hypotheses); u on basis vectors follows from unit naturality. Step 4: exact forgetful functor + long exact sequence + H^1(Q)=0 for quasi-coherent Q. Step 5: B=im T(d) and C=ker T(d) are quasi-coherent, both short exact sequences give an exact Gamma-row, and the cokernel comparison is u_M. Step 6: naturality. proof_deps equals the union of uses; no cycle; no SGA. Edge cases checked: X empty / A=0, M=0, infinite rank, non-flat A/I; P^1 is excluded by the hypothesis. The 07UZ siblings (serre-affineness, affinization-geometry, h1-vanishing-affine-base-change) are not duplicates, and the last one cites the item. Batch-5: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is the general Descent 03DX/03LC equivalence and is not a trace-formula or Poincare step; qcoh-kernels-colimits and cohomology-filtered-colimit reach sec-trace-formula only through the general definition def-trf-algebraic-space. All accepted. All 9 declared tool_uses are generic and accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAcyclicGlobalModuleSections",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isIso_acyclic_global_module_unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAcyclicGlobalModuleSections.lean",
+  "statement": "theorem isIso_acyclic_global_module_unit (X : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) [HasSheafify X.etaleTopology AddCommGrpCat.{u}] [HasExt.{u + 1} (Sheaf X.etaleTopology AddCommGrpCat.{u})] (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) (hH : ∀ (F : X.Modules) (_ : F.IsQuasicoherent), Subsingleton (Sheaf.H ((SheafOfModules.toSheaf X.structureSheaf).obj F) 1)) (A : CommRingCat.{u}) (p : X ⟶ schemeSpace (Over.mk (specULiftZIsTerminal.from (Spec A)))) (πA : (Functor.const X.EtaleSiteᵒᵖ).obj A ⟶ X.etaleForget.op ⋙ Scheme.Γ) (hA : IsLimit (Cone.mk A πA)) (hp : ∀ T : X.EtaleSite, πA.app (op T) = (Scheme.ΓSpecIso A).inv ≫ (yoneda.preimage (T.obj.hom ≫ p.hom.hom)).left.appTop) : IsIso (((affineEtaleAssociatedAdjunction A).comp (moduleTensorAdjunction p)).unit)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affineEtaleAssociated",
+   "AlgebraicGeometry.AlgebraicSpace.affineEtaleAssociatedAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.isIso_acyclic_global_module_unit"
+  ],
+  "note": "Repair of 45fa0bda24d9 (H2): the item uses only the represented-scheme Zariski/etale constructions, now owned in place by def-sfb-represented-scheme-zariski-etale-modules, rather than the graded-evaluation theorem conclusion. The item module and theorem signature are unchanged. E1 dependency record remains unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fe85199c",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Re-delivery after 45fa0bda (H2). Item Lean file byte-identical (sha 1d26477b), statement unchanged; stmt_deps now cite new def node def-sfb-represented-scheme-zariski-etale-modules (existing:true, owns the 8 evaluation* declarations in place in GradedEvaluationZariskiEtaleComparison; read against Lean lines 47-117 and Stacks 03FH/03DX/0GN7; sorries are Prop-only; deps are def nodes, no cycle; no other owner in side-live, blueprint-index or other pending runs) plus def-sfb-space-absolute-quasi-separated; theorem node dropped. Other dependency nodes identical to side-live (E1 record not rebound). Clause check of the statement re-confirmed (qcqs, H1 hypothesis for all quasi-coherent F, A pinned by limit cone and hp, unit of composite tilde/extension/tensor adjunction, IsIso natural); edge cases M=0, X empty (A=0), infinite rank, no flatness. Advisories: schemeSpace and ZariskiEtaleModuleContext.adjunction reached only through the new node's def deps; reused docstrings keep the old blueprint tag. No compile (nothing changed)."
+ }
+}

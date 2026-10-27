@@ -1,0 +1,304 @@
+{
+ "id": "lem-pur-coherent-tensor-tower",
+ "kind": "statement",
+ "title": "Strict coherent tensor tower comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and schemes in a universe $u$ [def-pc-scheme]. For a scheme $W$, use its small pro-etale ringed sequence site $\\mathbf N\\times W_{\\mathrm{proet}}$, whose index $n\\geq0$ means $B_{W,n}=(\\mathcal O_E/\\varpi^{n+1})_W$, with actual quotient ring maps; put $A_W=\\lim_nB_{W,n}$ and let $\\mathscr S_W$ be its category of module sheaves, equivalently strict quotient-semilinear systems [def-coef-ringed-sequence-site]. Write $e_{W,n}$ for exact evaluation, $\\operatorname{Res}_{W,n}$ for restriction along $A_W\\to B_{W,n}$ and $U_W:\\mathscr S_W\\to\\operatorname{Tow}(\\operatorname{Mod}(A_W))$ for their simultaneous exact scalar restriction. Use ordinary unbounded integer-indexed cochain and derived categories, with localization $q_W$ for $A_W$-modules, $q^s_W$ for sequence modules and $q^t_W$ for towers [def-weil-abstract-derived-category]. Use the fixed derived adjunction $\\mathcal R_W\\dashv\\mathcal L_W$, with $\\mathcal L_W=R\\lim\\circ D(U_W)$, and the specified derived tensor and cochain tensor models on the sequence site [lem-coef-derived-system-evaluation-calculus]. A good integral complex is K-flat with flat terms; K-flat means that its direct-sum total tensor with every acyclic module complex is acyclic [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. All comparisons below use the actual chosen adjunctions, not arbitrary isomorphisms between their objects. No boundedness, constructibility, completeness of inputs, or invertibility of $\\ell$ on the schemes is assumed. Write $L^0_W=\\lim\\circ U_W$ and $r_W=\\operatorname{leftAdjoint}(L^0_W)$ for ordinary coherent reduction, equipped with its specified adjunction $r_W\\dashv L^0_W$ and unit $\\eta^0_W$; concretely its components are quotient extension $B_{W,n}\\otimes_{A_W}M$ and its transitions are induced by the actual quotient maps. A superscript $c$ means termwise application to cochain complexes. For a coherent complex $C$, let $\\lambda_C:q_W((L^0_W)^c C)\\to\\mathcal L_W(q^s_WC)$ be the canonical right-derived limit unit, with the exact-restriction/localization factorization inserted (the map named pullbackTensorLimitUnit). Let $a_{W,n}:B_{W,n}\\otimes_{A_W}(-)\\xrightarrow{\\sim}e_{W,n}r_W$ be the finite evaluation of ordinary reduction fixed in [def-pur-completed-pullback-tower-core]: the unique natural isomorphism whose transpose under the quotient-extension/restriction adjunction is, for every $A_W$-module $M$, exactly $\\pi_n\\circ\\eta^0_{W,M}:M\\to\\operatorname{Res}_{W,n}e_{W,n}r_WM$, where $\\pi_n$ is the actual $n$th limit projection of $U_Wr_WM$ followed by its recorded evaluation/scalar-restriction identification; it is also applied termwise to complexes. For arbitrary complexes $P,Q$ of $A_W$-modules, let $\\operatorname{Tot}_s$ be the ordinary direct-sum total tensor on $\\mathscr S_W$ with differential $d(x\\otimes y)=dx\\otimes y+(-1)^{\\deg x}x\\otimes dy$. Let $T(P,Q)=J_W(U_W^c\\operatorname{Tot}_s(r_W^cP,r_W^cQ))$ and let $B_\\otimes^0(P,Q)_n=\\operatorname{Res}_{W,n}\\operatorname{Tot}_{B_{W,n}}(B_{W,n}\\otimes_{A_W}P,B_{W,n}\\otimes_{A_W}Q)$ with actual quotient transitions [def-pur-integral-derived-operations]. At level $n$ define $d_{P,Q,n}$ by reordering, the prescribed evaluation/total-tensor isomorphism of the coherent calculus, and the tensor of the two inverse reduction-evaluation maps $a_{W,n,P}^{-1},a_{W,n,Q}^{-1}$, all under $\\operatorname{Res}_{W,n}$. There exists a unique strict tower isomorphism $d_{P,Q}:T(P,Q)\\xrightarrow{\\sim}B_\\otimes^0(P,Q)$ with exactly these components for every $n$. This is pullbackTensorTensorTower_existsUnique for arbitrary unbounded $P,Q$, without K-flatness or termwise-flatness hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (ringed sequence-site construction preceding lemma-derived-limit-is-ok), Tag 07A4 (lemma-pullback-tensor-product); strict evaluation/total-tensor components, with the specified actual quotient maps.",
+  "lean_module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "lean_file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+  "lean_line": 134,
+  "declaration": "WeilConjectures.pullbackTensorTensorTower_existsUnique"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-integral-derived-operations",
+  "def-pur-completed-pullback-tower-core"
+ ],
+ "proof": [
+  {
+   "text": "Suppress $W$, and write $\\tau_n:B_{n+1}\\to B_n$ and $t_n$ for actual horizontal transitions. For an $A$-module $M$ put $\\nu_n=\\pi_n\\eta^0_M$. The limit-cone identity gives $t_n\\nu_{n+1}=\\nu_n$. The stipulated scalar-adjunction transpose of $a_{n,M}$ says precisely $a_{n,M}(b\\otimes x)=b\\nu_n(x)$ on local pure tensors. Consequently\n$$t_n a_{n+1,M}(b\\otimes x)=\\tau_n(b)\\nu_n(x)=a_{n,M}(\\tau_n(b)\\otimes x).$$\nPure tensors generate the presheaf tensor, and the sheafification universal property extends this equality to the sheaf tensor. Thus $a_n$ intertwines the actual quotient transition with that of $rM$, and its inverse does too, by composing the square with $a_{n+1}^{-1}$ and $a_n^{-1}$. Apply this to every $P^k$ and $Q^k$; naturality of $a_n$ for the differentials makes these comparisons cochain isomorphisms with the same transition squares.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; the scalar-unit and cone calculation uses exactly the adjunction normalization in the item."
+   }
+  },
+  {
+   "text": "Put $C=r^cP$ and $D=r^cQ$. Evaluation $e_n$ is the inverse image of the vertical inclusion with its identity coefficient identification. Apply lem-pur-cochain-pullback-tensor-coherence to this ringed-topos morphism to obtain a cochain isomorphism\n$$\\kappa_n:e_n\\operatorname{Tot}_s(C,D)\\xrightarrow{\\sim}\\operatorname{Tot}_{B_n}(e_nC,e_nD).$$\nThis is the prescribed evaluation/total-tensor isomorphism: lem-coef-semilinear-tensor-evaluation fixes the ordinary evaluation comparison and its chain summands for the chosen models. On every $(p,q)$ summand both comparisons are that ordinary evaluation comparison; the direct-sum universal property makes the chain maps equal. In particular the inverse-model-chain convention and the displayed forward $\\kappa_n$ agree. The cochain theorem applies to arbitrary unbounded complexes, with the same $(-1)^p$ differential and no flatness assumption.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-coef-semilinear-tensor-evaluation",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, ordinary total-complex comparison in its proof; representative normalization supplied by the cited semilinear evaluation node."
+   }
+  },
+  {
+   "text": "Apply lem-pur-system-cochain-tensor-reduction to $C,D$ and $n\\le n+1$. Its identity identifies the horizontal scalar-extension adjoint of the total-system transition with the scalar tensor comparison followed by the tensor of the two horizontal adjoints, under the prescribed evaluation comparisons. Transpose through the scalar-extension/restriction adjunction. Equivalently, on every evaluated tensor summand the resulting transition is\n$$x\\otimes y\\longmapsto t_n^C(x)\\otimes t_n^D(y).$$\nThus $\\kappa_n$ intertwines the actual total-system transition with this tensor transition, before localization. This uses the cochain identity of the cited node, not a claim that maps of derived evaluations lift. Restrict scalars along $A\\to B_n$: the underlying section maps are unchanged, and $A\\to B_n$ is $A\\to B_{n+1}\\to B_n$, so the same square is an equality of $A$-linear cochain maps.",
+   "uses": [
+    "lem-pur-system-cochain-tensor-reduction",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 ordinary total-complex construction and the ringed sequence site preceding Tag 0941; the horizontal tensor-adjoint identity is the statement of the cited cochain-reduction node."
+   }
+  },
+  {
+   "text": "After the specified reordering $J$, define $d_n$ to be $\\operatorname{Res}_n$ of $\\kappa_n$ followed by $\\operatorname{Tot}_{B_n}(a_{n,P}^{-1},a_{n,Q}^{-1})$. This is exactly the component prescribed in the item. Tensor the two transition squares from step 1 and paste them with step 3. The result is\n$$d_n\\,t_n^T=t_n^{B_\\otimes^0}\\,d_{n+1}.$$\nThe target transition is the actual quotient transition: on a $(p,q)$ summand it sends $(b\\otimes x)\\otimes(c\\otimes y)$ to $(\\tau_n(b)\\otimes x)\\otimes(\\tau_n(c)\\otimes y)$. Functoriality of total tensor gives the pasted equality on complexes. The reordering just evaluates the same section maps in the opposite order. Identities and composites of adjacent transitions give the equality for every arrow of $\\mathbf N^{op}$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-integral-derived-operations",
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, ringed sequence-site construction preceding lemma-derived-limit-is-ok; elementary pasting of steps 1 and 3 with the specified tower definitions."
+   }
+  },
+  {
+   "text": "The maps $d_n$ therefore form a strict tower morphism. Each is an isomorphism, since its factors are cochain isomorphisms and scalar restriction is a functor. From $d_nt_n^T=t_n^{B_\\otimes^0}d_{n+1}$, compose with the two component inverses to obtain the transition square for $(d_n^{-1})_n$. These inverses form an inverse tower morphism, since both composites are identities at every level. Finally any tower isomorphism with the stipulated components has the same forward natural transformation, hence the same inverse. This proves existence and uniqueness for the arbitrary $P,Q$ fixed above.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, the identification of sequence sheaves with inverse systems; elementary construction and componentwise equality of strict tower maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-coef-semilinear-tensor-evaluation",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-system-cochain-tensor-reduction",
+  "def-pur-integral-derived-operations",
+  "def-pur-completed-pullback-tower-core"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Ordinary strict-tower refinement of the sequence-site construction before Tag 0941 and the total-complex comparison in the proof of Tag 07A4; assembled from the explicitly cited existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "{\"t\": \"2026-10-27T06:10:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso.ofComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatIso.ofComponents\", \"CategoryTheory.NatIso.ofComponents.app\", \"CategoryTheory.NatIso.ofComponents_hom_app\", \"CategoryTheory.NatIso.ofComponents_inv_app\", \"CategoryTheory.opOpEquivalence_counitIso\", \"CategoryTheory.opOpEquivalence_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_counitIso\"], \"digest\": \"d0d45c50c87b1b36\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Tt]ensor|tensor.*[Ee]valuation|SequenceModule",
+   "results": "{\"t\": \"2026-10-27T06:10:13Z\", \"tool\": \"grep\", \"query\": \"evaluation.*[Tt]ensor|tensor.*[Ee]valuation|SequenceModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean\"], \"digest\": \"20eae7954cc5c471\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite evaluation tensor comparisons of coherent coefficient systems assemble into a unique strict quotient tower isomorphism on unbounded complexes",
+   "results": "{\"t\": \"2026-10-27T06:10:14Z\", \"tool\": \"leansearch\", \"query\": \"The finite evaluation tensor comparisons of coherent coefficient systems assemble into a unique strict quotient tower isomorphism on unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"quasiIso_of_isIso\", \"CochainComplex.isStrictlyGE_of_iso\", \"CategoryTheory.ShortComplex.quasiIso_of_isIso\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"HomotopyCategory.singleFunctorPostcompQuotientIso\", \"HomologicalComplex.instPreservesFiniteLimitsEvalOfHasFiniteLimits\", \"CochainComplex.quasiIso_truncGEMap_iff\"], \"digest\": \"009921c40a7856ca\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "{\"t\": \"2026-10-27T06:10:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso.ofComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatIso.ofComponents\", \"CategoryTheory.NatIso.ofComponents.app\", \"CategoryTheory.NatIso.ofComponents_hom_app\", \"CategoryTheory.NatIso.ofComponents_inv_app\", \"CategoryTheory.opOpEquivalence_counitIso\", \"CategoryTheory.opOpEquivalence_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_counitIso\"], \"digest\": \"d0d45c50c87b1b36\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite evaluation tensor comparisons of coherent coefficient systems assemble into a unique strict quotient tower isomorphism on unbounded complexes",
+   "results": "{\"t\": \"2026-10-27T06:10:16Z\", \"tool\": \"leanfinder\", \"query\": \"The finite evaluation tensor comparisons of coherent coefficient systems assemble into a unique strict quotient tower isomorphism on unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"AlgebraicTopology.DoldKan.Q_is_eventually_constant\", \"InverseSystem.globalEquiv_compatibility\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\"], \"digest\": \"d63d65094bf2e7f6\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of total tensor of two ordinary coherent reductions is the strict tower of finite coefficient tensor complexes with quotient transitions",
+   "results": "{\"t\": \"2026-10-27T06:10:19Z\", \"tool\": \"leanfinder\", \"query\": \"Reduction of total tensor of two ordinary coherent reductions is the strict tower of finite coefficient tensor complexes with quotient transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Relations.tensor\", \"Module.Relations.Solution.tensor\", \"Module.Relations.Solution.isPresentationCoreTensor\", \"Module.Relations.Solution.IsPresentation.tensor\", \"Module.Relations.tensor_relation\", \"Module.Relations.Solution.tensor_var\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\"], \"digest\": \"d46a85b5405ce6c3\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Tt]ensor|tensor.*[Ee]valuation|coherent.*[Tt]ower",
+   "results": "{\"t\": \"2026-10-27T07:14:06Z\", \"tool\": \"grep\", \"query\": \"evaluation.*[Tt]ensor|tensor.*[Ee]valuation|coherent.*[Tt]ower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Coevaluation.lean\", \"Mathlib/LinearAlgebra/Coevaluation.lean\", \"Mathlib/LinearAlgebra/Coevaluation.lean\", \"Mathlib/LinearAlgebra/Coevaluation.lean\", \"Mathlib/LinearAlgebra/Coevaluation.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean\"], \"digest\": \"12e098aa84893c93\"}",
+   "date": "2026-10-27",
+   "verdict": "No match for the full normalized coherent reduction tensor tower: the hits concern ordinary categorical assembly, tensor-complex construction, or scalar towers, not this prescribed ringed sequence-site comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary evaluation tensor comparison and the scalar extension unit comparison of unbounded complexes assemble into a strict quotient coefficient tower isomorphism",
+   "results": "{\"t\": \"2026-10-27T07:14:06Z\", \"tool\": \"leansearch\", \"query\": \"The ordinary evaluation tensor comparison and the scalar extension unit comparison of unbounded complexes assemble into a strict quotient coefficient tower isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.Quotient.isScalarTower\", \"ComplexShape.Embedding.extendHomotopyFunctorFactors\", \"HomotopyCategory.singleFunctorPostcompQuotientIso\", \"HomologicalComplex.rightUnitor'\", \"Submodule.Quotient.restrictScalarsEquiv\", \"CategoryTheory.ShortComplex.QuasiIso.isIso\", \"Con.instIsScalarTower\", \"HomologicalComplex.tensorUnitIso\"], \"digest\": \"cb372f3a7be353f1\"}",
+   "date": "2026-10-27",
+   "verdict": "No match for the full normalized coherent reduction tensor tower: the hits concern ordinary categorical assembly, tensor-complex construction, or scalar towers, not this prescribed ringed sequence-site comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "{\"t\": \"2026-10-27T07:14:07Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso.ofComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatIso.ofComponents\", \"CategoryTheory.NatIso.ofComponents.app\", \"CategoryTheory.NatIso.ofComponents_hom_app\", \"CategoryTheory.NatIso.ofComponents_inv_app\", \"CategoryTheory.opOpEquivalence_counitIso\", \"CategoryTheory.opOpEquivalence_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_counitIso\"], \"digest\": \"d0d45c50c87b1b36\"}",
+   "date": "2026-10-27",
+   "verdict": "No match for the full normalized coherent reduction tensor tower: the hits concern ordinary categorical assembly, tensor-complex construction, or scalar towers, not this prescribed ringed sequence-site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary unbounded complexes the normalized tensor evaluation of coherent coefficient reductions commutes with quotient transitions and defines a unique strict tower isomorphism",
+   "results": "{\"t\": \"2026-10-27T07:14:08Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary unbounded complexes the normalized tensor evaluation of coherent coefficient reductions commutes with quotient transitions and defines a unique strict tower isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso\", \"rTensor.inverse_comp_rTensor\", \"CategoryTheory.FreeMonoidalCategory.normalizeIso\", \"rTensor.inverse_apply\"], \"digest\": \"81cf30d83c9587c1\"}",
+   "date": "2026-10-27",
+   "verdict": "No match for the full normalized coherent reduction tensor tower: the hits concern ordinary categorical assembly, tensor-complex construction, or scalar towers, not this prescribed ringed sequence-site comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation on the vertical slices of a ringed sequence site preserves direct sum total tensor and its canonical comparison is compatible with semilinear coefficient transitions",
+   "results": "{\"t\": \"2026-10-27T07:14:39Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation on the vertical slices of a ringed sequence site preserves direct sum total tensor and its canonical comparison is compatible with semilinear coefficient transitions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"TensorProduct.directLimitLeft_rTensor_of\", \"TensorProduct.toDirectLimit_tmul_of\", \"TensorProduct.fromDirectLimit_of_tmul\", \"TensorProduct.toDirectLimit\"], \"digest\": \"dc1cc11ec078d0fb\"}",
+   "date": "2026-10-27",
+   "verdict": "No match for the full normalized coherent reduction tensor tower: the hits concern ordinary categorical assembly, tensor-complex construction, or scalar towers, not this prescribed ringed sequence-site comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-completed-pullback-tower-realizations",
+  "date": "2026-10-27",
+  "group": "NF"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.pullbackTensorTensorTower_existsUnique",
+   "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+   "file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+   "line": 134,
+   "statement": "theorem pullbackTensorTensorTower_existsUnique (W : Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) :\n    ∃! e : pullbackTensorRestrictedTower l E W\n      ((coefficientTotalTensor.{u, u + 1, u}\n        (coefficientSequenceTopology (ProEt.topology W))\n        (coefficientSequenceCommRingSheaf l E W)).obj\n        ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P),\n          (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q))) ≅\n      (integralOperationsTensorTowerFunctor l E W).obj (P,Q),\n      ∀ n : ℕ, e.app (op n) = pullbackTensorTensorTowerLevel l E W P Q n",
+   "proposed_module": "Sheaf.Paper.CoherentTensorTower",
+   "note": "Existing local declaration ownership for the released stage-1 re-split, not a closed-proof attachment. Current module is authoritative; proposed module is a future stage-2/3 extraction only."
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-coherent-tensor-tower",
+  "worker": "stage1",
+  "summary": "NC split the tensor-tower obligation using existing ordinary unbounded cochain pullback/tensor, prescribed semilinear tensor evaluation, and cochain horizontal-reduction identities. The scalar-unit normalization forces the reduction comparison transition square by the limit-cone identity. Strict tower assembly and uniqueness are elementary. No new nodes or statement changes; all inherited provenance and construction material retained.",
+  "blueprint": "The live latest blueprint def-weil-frobenius-coefficient-twists says finite reduction commutes with coefficient actions. This item is an extracted supporting tensor-tower normalization, not a blueprint lemma. Steps 1-5 justify the inherited retained_arguments old step 9. The ancestor computation still returns None because the parent creation chain is broken; the original documentary association in blueprint.from.place is retained.",
+  "retained_arguments_status": "Unverified inherited argument, not an accepted proof. Kept verbatim to satisfy the repair order; further splitting must justify every non-elementary inference.",
+  "retained_arguments": [
+   {
+    "old_step": 9,
+    "step": {
+     "text": "pullbackTensorTensorTower_existsUnique: the reduction comparisons preserve scalar-extension units and the evaluation\ntensor map sends pure tensors to their two evaluated factors. Across every quotient\ntransition both routes send x tensor y to its two reduced factors. Tensor generators,\nsheafification and total-summand injections give strict equality. The displayed\ncomponents therefore define a tower isomorphism and determine it uniquely.",
+     "uses": [
+      "lem-coef-derived-system-evaluation-calculus",
+      "def-coef-ringed-sequence-site",
+      "def-sf-strict-roos-functor",
+      "def-a1-integral-finite-pullback-tower"
+     ],
+     "elementary": false
+    }
+   }
+  ],
+  "blueprint_ancestry_note": "The documented blueprint.from.node=null represents the broken created.item chain. The parent’s historical from.node association and exact declaration obligation remain in from.place; parent provenance fields are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-tensor-evaluation",
+    "why": "Fixes the chosen ordinary evaluation tensor and cochain summands on an arbitrary ringed sequence site; no purity-unit statement supplies that representative normalization."
+   },
+   {
+    "node": "lem-pur-system-cochain-tensor-reduction",
+    "why": "Supplies the actual ordinary cochain horizontal tensor-adjoint identity for arbitrary strict systems, needed before localization; it is a generic tool, not a replacement of any purity argument."
+   }
+  ]
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The computed created.item ancestry is broken at the parent module name; blueprint_refs.py ancestor returns None. Documentary association retained from the parent: def-weil-frobenius-coefficient-twists, The coefficient twists commute with finite reduction and scalar extension; the coherent reduction and strict tower normalizations are the data used in the completed tensor/pullback comparison. Extracted obligation: pullbackTensorTensorTower_existsUnique.",
+   "via": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-pur-system-cochain-tensor-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NC-a43830e4c",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-a43830e4c (reviewer sub-agent of L); spot-checked: Verdict PASS: I read the full mathematics; no fixes were written. The delivery has 0 new nodes and the statement is unchanged; the 5 steps carry out all of the retained old step 9. Step 1 holds: the stipulated transpose forces a_n(b⊗x)=b·ν_n(x), and the limit-cone identity t_nπ_{n+1}=π_n with τ-semilinearity gives the quotient-transition square, extended to the sheaf tensor via the presheaf-tensor and sheafification uniqueness. Step 2 holds: lem-pur-cochain-pullback-tensor-coherence gives an unbounded chain iso for e_n, the vertical inverse image (def-coef-ringed-sequence-site). It agrees on generators with the prescribed iso; Lean coefficientEvaluationTensorIso is pinned by x⊗y↦x⊗y (CoefDerivedSystemEvaluationCalculus.lean:702). The u^*-vs-e_n unitor gloss is harmless. Step 3 holds: transposing the cochain identity of lem-pur-system-cochain-tensor-reduction is a chain-level statement with no derived lifting. Step 4 holds: d_n matches pullbackTensorTensorTowerLevel (CompletedPullbackTowerRealizations.lean:108); target transitions are the actual quotient maps (def-pur-integral-derived-operations); pasting is correct. Step 5 is elementary. Sources: Stacks sites-cohomology Tag 07A4 (l.3684) and the C×N site before Tag 0941 (l.5020-5070). Edge cases checked: zero complexes, degree (0,0), signs (-1)^p in all degrees, and the index convention O_E/ϖ^{n+1}. No cycle was found over the snapshot's 39040 nodes. No duplicate found; lem-coef-tensor-reduction-ordinary-transpose uses this tower and does not restate it. tool_uses accepted: lem-coef-semilinear-tensor-evaluation and lem-pur-system-cochain-tensor-reduction, both generic ordinary sheaf identities. The report wrongly places the latter in the item's unit (it is sk-thm-sf-compatibility), but it is declared, so nothing needs to change. Inherited null blueprint.from.node is advisory."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "declaration": "WeilConjectures.pullbackTensorTensorTower_existsUnique",
+  "statement": "theorem pullbackTensorTensorTower_existsUnique (W : Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules l E W) ℤ) :\n    ∃! e : pullbackTensorRestrictedTower l E W\n      ((coefficientTotalTensor.{u, u + 1, u}\n        (coefficientSequenceTopology (ProEt.topology W))\n        (coefficientSequenceCommRingSheaf l E W)).obj\n        ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P),\n          (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q))) ≅\n      (integralOperationsTensorTowerFunctor l E W).obj (P,Q),\n      ∀ n : ℕ, e.app (op n) = pullbackTensorTensorTowerLevel l E W P Q n",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Exact existing statement at CompletedPullbackTowerRealizations.lean:134. Arbitrary unbounded integral module complexes; unique strict tower isomorphism with every component equal to pullbackTensorTensorTowerLevel, using the actual quotient transitions and the fixed ordinary-adjunction evaluation comparisons. No new module or mathematical change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a82e4635",
+  "group": "NA",
+  "result": "pass",
+  "note": "existing:true record only; statement verbatim (CompletedPullbackTowerRealizations.lean:134, sorry proof); node otherwise unchanged. Arbitrary unbounded P,Q, no flatness or other hypotheses, site universes u+1/u. Source tower = restricted, reordered total tensor of the ordinary reduction (leftAdjoint of lim∘U); target = integralOperationsTensorTowerFunctor with pinned quotient transitions; the level component is reordering + evaluation/total-tensor iso pinned x⊗y↦x⊗y + Tot of the inverse unit-normalized evaluations (Core:408 transpose = unit≫limit.π≫eqToIso). ∃! strict tower iso with every component prescribed matches the node. Owner of pullbackTensorTensorTowerLevel is the realizations parent, which proof-depends on the item (citing it would be a cycle; the component is spelled out in the item) → accepted. Advisory: the theorem is also listed in the parent's lean.declarations; the existing docstring names the parent blueprint id. No compile (no files changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T112410-L-1579585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
+   "WeilConjectures.pullbackTensorReductionGood",
+   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceGood",
+   "WeilConjectures.pullbackTensorSystemComparison_existsUnique",
+   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
+   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
+  ]
+ }
+}

@@ -17,6 +17,21 @@
  ],
  "proof": [
   {
+   "text": "Work in the common universe using canonical ULift ring equivalences. A map R→K to a field has prime kernel p and factors through the algebraic residue field κ(p), by Ideal.ResidueField.lift. Scheme.Spec.residueFieldIso and Scheme.Spec.algebraMap_residueFieldIso_inv identify this factorization with the hypothesis stated using Γevaluation. Thus B tensor_R K is a domain for every field-valued R-algebra. Tensor equivalences for compatible scalar actions transport this to the lifted rings. The affine pullbackSpecIso and integrality of the spectrum of a domain prove GeometricallyIntegral of Spec B→Spec R. Base change, again identified by pullbackSpecIso, gives the geometrically integral algebraic fibres required by approximation.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-residue-field",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05DX, definition-geometrically-integral; residue-field universal property and tensor universal property"
+   }
+  },
+  {
    "text": "Apply [lem-trf-local-noetherian-approximation], which is the Noetherian approximation paragraph of Tag 05FT. It supplies a cocartesian diagram with R₀ of finite type over ℤ, a finite type flat map R₀→S₀, geometrically integral fibres at every prime of R₀, and S≅S₀⊗_{R₀}R. The approximation lemma applies because the given map is finitely presented and flat and all its fibres are geometrically integral.",
    "uses": [
     "lem-trf-local-noetherian-approximation"
@@ -55,6 +70,11 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-residue-field",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-pc-geometrically-irreducible",
   "lem-trf-local-noetherian-approximation",
   "lem-weil-pbc-finite-type-algebra-noetherian",
   "lem-trf-local-noetherian-fibres-projective",
@@ -63,7 +83,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 05FT, lemma-fibres-irreducible-flat-projective-nonnoetherian"
+  "place": "Tag 05FT, lemma-fibres-irreducible-flat-projective-nonnoetherian: Noetherian approximation, Tag 05FS, and scalar extension of projectivity; field-to-scheme bridges implemented by Z6"
  },
  "mathlib_searches": [
   {
@@ -160,5 +180,26 @@
   "result": "fix",
   "note": "Reviewed immutable statements, dependencies, sources, universes and edge cases; both per-file compile reproductions passed. Complete fixes restore the existing equivalent declaration (H4) and supply an independent second reading (H11). Findings recorded in review.md; replacement files are in fixes/.; left out new module(s) lean/Sheaf/AlgebraicGeometry/LocalFibresIntegralProjective.lean (--drop-files, or a record fixed to existing: true)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261023T132551-L-2301129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

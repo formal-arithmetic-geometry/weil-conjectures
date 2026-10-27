@@ -1,0 +1,152 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (derived pullback), 0G7D (resolving descent); homology.tex Tag 012Z (total complex signs); original comparison proof steps 6–7."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurSequenceKFlatComparisonShifts",
+  "date": "2026-10-25",
+  "group": "J8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-pur-sequence-reduction-shifts",
+ "kind": "statement",
+ "title": "Prescribed shifts descend through the normalized quotient comparison",
+ "statement": "Fix the finite-field datum, $\\ell\\ne p$, $E$ and finite-type $W$ of [def-weil-finite-field-fiber]. Let $S$ be a coherent coefficient calculus and $O$ the ordinary quotient-sequence adjoints. For any universal normalized comparison $A$ of [def-pur-sequence-kflat-comparison-data], there exists its PurSequenceKFlatShiftComparison: coherent shifts on the left derived functor, reduction and every finite extension, satisfying the comparison, counit, identity-on-terms, signed-differential, quotient-transition, finite-resolution and finite-evaluation equations recorded there. This asserts compatibility for an already supplied universal comparison, not existence of that comparison or resolution comparison data.",
+ "stmt_deps": [
+  "def-pur-sequence-kflat-comparison-data",
+  "def-weil-finite-field-fiber"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical tensor-shift isomorphism of [def-pc-tensor-complex-sheaves]: tensoring an acyclic test complex with Q[r] is a shift of its tensor with Q. Acyclicity is stable under shifts, so Q[r] is K-flat. Its flat terms are reindexed and quasi-isomorphisms shift to quasi-isomorphisms.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN, definition-K-flat; direct application of the tensor-shift isomorphism and the definition of cohomology."
+   }
+  },
+  {
+   "text": "Ordinary additive pullback and each finite scalar extension commute with shifts by identity on reindexed terms: both differentials are (-1)^r times the mapped differential. Quotient transitions and resolution maps commute with these identities before localization. Using stability of the resolving class from step 1, descend these ordinary maps through [lem-sp-strict-coefficient-tensor-descent]. The universal counits in the supplied comparison A characterize shifts on A.L and S.reduction. A.alpha satisfies the counit equation; universal uniqueness therefore gives its shift square, without assuming it is literally identity. Apply exact evaluation and the representative presentation of A to identify the finite shift comparison with the canonical finite computation counit. The same uniqueness proves the reductionEvaluation square on every derived input.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-sp-strict-coefficient-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; termwise additive pullback and quotient scalar-extension comparisons, computed on the shifted resolution."
+   }
+  },
+  {
+   "text": "At zero the ordinary term maps are identity. For successive shifts r,s the differential signs multiply to (-1)^(r+s), and the term maps remain identity. Descending these strict equations by uniqueness gives the zero and addition equations of CommShift on A.L, reduction and the finite scalar extensions, under the standard reindexing identifications [def-weil-abstract-derived-category]. Taking s=-r also gives inverse shifts. These maps and the finite-evaluation equations supply exactly PurSequenceKFlatShiftComparison. No flatness of the coefficient quotient map, boundedness, completeness, or normalization of systems is used.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sp-strict-coefficient-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z, definition-associated-simple-complex; multiplication of the explicit shift signs and normalized resolving descent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sp-strict-coefficient-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Prescribed shifts descend through the normalized quotient comparison; specialization of the parent proof steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The comparison between left derived functors preserves coherent shifts and canonical scalar extension computation counits",
+   "results": "8 hits: CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, ModuleCat.RestrictionCoextensionAdj.counit', CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Adjunction.derivedε, CategoryTheory.NatTrans.leftDerived",
+   "date": "2026-10-25",
+   "verdict": "Generic derived-functor or shift infrastructure; no quotient-system normalization with the specified finite comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "12 hits: CategoryTheory.Functor.CommShift.id, CategoryTheory.Functor.CommShift, CategoryTheory.Functor.CommShift.ofIso, CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.comp, CategoryTheory.NatTrans.CommShiftCore",
+   "date": "2026-10-25",
+   "verdict": "Generic derived-functor or shift infrastructure; no quotient-system normalization with the specified finite comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|commShiftIso",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/ShiftAdditive.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Induced.lean",
+   "date": "2026-10-25",
+   "verdict": "Generic derived-functor or shift infrastructure; no quotient-system normalization with the specified finite comparisons."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient transport through reduction/total-limit adjunction, compatibility clause (7); Prescribed shifts descend through the normalized quotient comparison",
+   "via": [
+    "lem-pur-sequence-kflat-comparison-shifts",
+    "lem-pur-sequence-adjoint-resolution-shifts",
+    "lem-pur-reduction-limit-shift-adjunction",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurSequenceReductionShifts",
+  "file": "lean/Sheaf/Paper/PurSequenceReductionShifts.lean",
+  "declaration": "WeilConjectures.purSequenceReductionShifts",
+  "statement": "theorem purSequenceReductionShifts (F : FiniteFieldDatum.{t}) (hl : l ≠ F.p) [W.Over (Spec (.of F.k))] [LocallyOfFiniteType (W ↘ Spec (.of F.k))] [QuasiCompact (W ↘ Spec (.of F.k))] (S : CoefficientDerivedSystemCalculus l E W) (hS : CoefficientDerivedSystemCoherence l E W S) (O : PurSequenceOrdinaryAdjoints l E W) (A : PurSequenceKFlatComparison l E W S O) : Nonempty (PurSequenceKFlatShiftComparison l E W S O A)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-57002",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T204752-L-3007079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-57002",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T204752-L-3007079",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); six data declarations moved to PurSequenceKFlatComparisonData vs the clone originals (verbatim except blueprint ids); the two new sorry statements vs the original conjuncts and nodes; direct importers PurSequenceComparisonTranspose and BasicRealizationShiftSquare compiled against the delivered modules (exit 0); #print axioms = propext, sorryAx, Classical.choice, Quot.sound"
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-coordinate-ratio-chart-completion",
+ "kind": "statement",
+ "title": "Completion of a coordinate-ratio chart at an exceptional rational point",
+ "statement": "Let $L$ be any field, $n\\ge1$, $A=L[[X_1,\\ldots,X_n]]$ [def-weil-pbc-multivariate-power-series], and $\\varnothing\\ne J\\subseteq\\{1,\\ldots,n\\}$. Choose $h\\in J$, put $e=X_h$, and inside the localization $A[1/e]$ (fractions $a/e^m$, with the usual fraction operations) put\n$$C=A[X_j/e:j\\in J\\setminus\\{h\\}],\\qquad r_j=X_j/e.$$\nFor scalars $\\xi_j\\in L$ let $\\mathfrak n=(e,X_k\\ (k\\notin J),r_j-\\xi_j\\ (j\\in J\\setminus\\{h\\}))C$. This is a maximal ideal with $C/\\mathfrak n=L$. Put $B=L[[X'_1,\\ldots,X'_n]]$. The continuous substitution $X_h\\mapsto X'_h$, $X_j\\mapsto X'_h(\\xi_j+X'_j)$ for $j\\in J\\setminus\\{h\\}$, and $X_k\\mapsto X'_k$ for $k\\notin J$, extended by $r_j\\mapsto\\xi_j+X'_j$, induces an isomorphism\n$$\\varprojlim_{m\\ge1}C/\\mathfrak n^m\\ \\xrightarrow{\\sim}\\ B$$\n[def-weil-pbc-adic-completion]. It takes the completion map $C\\to\\varprojlim_m C/\\mathfrak n^m$ to the displayed substitution on $C$, and takes $\\mathfrak n$ to $(X'_1,\\ldots,X'_n)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0G8S, lemma-affine-blowup-quotient-description, coordinate specialization followed by completion and elimination of X_j-e(ξ_j+X′_j). The explicit completion comparison is an agent-written consequence, not the literal statement of the tag. Also compare Bierstone--Milman (1997), section 7.2, formal blowing-up chart substitutions preceding Theorem 7.20, printed pp.267--268."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-adic-completion",
+  "def-nagata-blowup-chart-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathfrak a=(X_1,\\ldots,X_n)A$, $\\mathfrak q=(X'_1,\\ldots,X'_n)B$, and $t_h=e$, $t_j=r_j-\\xi_j$ for $j\\in J\\setminus\\{h\\}$, $t_k=X_k$ for $k\\notin J$. Thus $\\mathfrak n=(t_1,\\ldots,t_n)C$. In either power-series ring, the $m$th power of the variable ideal consists exactly of series with no terms of total degree less than $m$: products of $m$ variables have this property; conversely assign each monomial of degree at least $m$ to a chosen degree-$m$ divisor, and group the remaining coefficients into one series for each of the finitely many degree-$m$ divisors. Consequently every series equals its finite truncation below degree $m$ modulo this ideal power. Also $\\mathfrak aC\\subseteq\\mathfrak n$, since $X_j=e r_j$ for $j\\in J\\setminus\\{h\\}$ and all the other $X_i$ are among the $t_i$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G8S (lemma-affine-blowup-quotient-description), coordinate specialization; explicit agent-written finite-truncation comparison. Completion is Definition 0317 (definition-complete)."
+   }
+  },
+  {
+   "text": "The ring $B$ is $\\mathfrak q$-adically complete by the cited completeness statement. Apply the cited evaluation theorem with coefficient map $L\\to B$ and entries $b_h=X'_h$, $b_j=X'_h(\\xi_j+X'_j)$, $b_k=X'_k$. Every $b_i$ belongs to $\\mathfrak q$, including when $\\xi_j\\ne0$. It gives a ring homomorphism $\\sigma:A\\to B$ with exactly these values, and, for every $m\\ge1$, $\\sigma(a)\\equiv\\sum_{|\\nu|<m}a_\\nu b^\\nu\\pmod{\\mathfrak q^m}$. Thus the substitution is defined on all formal series, in arbitrary characteristic.",
+   "uses": [
+    "lem-weil-pbc-power-series-variables-complete",
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NL (lemma-power-series-ring-over-Cohen-fs), proof invoking the universal property of power series rings; explicit evaluation theorem as stated by the cited DAG node."
+   }
+  },
+  {
+   "text": "Apply the chart-presentation statement to $R=A$, $a=e$, and the other generators $X_j$ for $j\\in J\\setminus\\{h\\}$. It presents $C$ as the image of $Q=A[Y_j]/(eY_j-X_j)$, with kernel precisely the $e$-power torsion of $Q$. The map from $Q$ to $B$ given by $\\sigma$ on $A$ and $Y_j\\mapsto\\xi_j+X'_j$ respects the relations. Multiplication by $X'_h$ on $B$ is injective: the coefficient at $\\nu+\\mathbf e_h$ of $X'_hF$ is the coefficient at $\\nu$ of $F$. Hence this map kills the entire $e$-power-torsion kernel, and factors through a ring map $\\phi:C\\to B$. It sends $r_j$ to $\\xi_j+X'_j$ and each $t_i$ to $X'_i$, so $\\phi(\\mathfrak n^m)\\subseteq\\mathfrak q^m$. Denote its induced map by $\\phi_m:C/\\mathfrak n^m\\to B/\\mathfrak q^m$.",
+   "uses": [
+    "lem-trf-blowup-chart-presentation-power-torsion",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G8S (lemma-affine-blowup-quotient-description), coordinate specialization; explicit agent-written finite-truncation comparison. Completion is Definition 0317 (definition-complete)."
+   }
+  },
+  {
+   "text": "For $m\\ge1$ define $\\psi_m:B\\to C/\\mathfrak n^m$ by $\\psi_m(\\sum_\\nu c_\\nu X'^\\nu)=\\sum_{|\\nu|<m}c_\\nu t^\\nu\\bmod\\mathfrak n^m$. This is a ring map: the sum is finite, addition is coefficientwise, and in a product every term of degree at least $m$ evaluates to zero because all $t_i$ belong to $\\mathfrak n$; the remaining terms are exactly the finite Cauchy-product sums. The degree criterion in step 1 shows that $\\psi_m$ kills $\\mathfrak q^m$, giving $\\overline\\psi_m:B/\\mathfrak q^m\\to C/\\mathfrak n^m$. These formulas also show that both families $\\phi_m$ and $\\overline\\psi_m$ commute with the reduction maps as $m$ varies.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G8S (lemma-affine-blowup-quotient-description), coordinate specialization; explicit agent-written finite-truncation comparison. Completion is Definition 0317 (definition-complete)."
+   }
+  },
+  {
+   "text": "The composite $\\phi_m\\overline\\psi_m$ sends a series class to its truncation below degree $m$, which is the same class by step 1. For the other composite, let $a=\\sum a_\\nu X^\\nu\\in A$. Step 2 computes $\\sigma(a)$ modulo $\\mathfrak q^m$ as a finite sum in the $b_i$. Substituting $X'_i\\mapsto t_i$ in this sum sends $b_h$ to $e$, $b_j$ to $e(\\xi_j+t_j)=e r_j=X_j$, and $b_k$ to $X_k$. Thus $\\overline\\psi_m\\phi_m(a)=\\sum_{|\\nu|<m}a_\\nu X^\\nu=a\\bmod\\mathfrak n^m$, since the omitted tail lies in $\\mathfrak a^mC\\subseteq\\mathfrak n^m$. On $r_j$ the same composite gives $\\xi_j+t_j=r_j$. Since $C$ is generated as an $A$-algebra by these $r_j$, the composite is the identity on $C/\\mathfrak n^m$. This proves that the two displayed maps are inverse ring isomorphisms for every $m$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G8S (lemma-affine-blowup-quotient-description), coordinate specialization; explicit agent-written finite-truncation comparison. Completion is Definition 0317 (definition-complete)."
+   }
+  },
+  {
+   "text": "For $m=1$ the preceding isomorphism gives $C/\\mathfrak n\\cong B/\\mathfrak q=L$, where the latter map is the constant coefficient: its kernel is $\\mathfrak q$ by step 1. Thus $\\mathfrak n$ is maximal, and the residue-field isomorphism is the identity on $L$. In particular the proposed ideal is proper, without any assumption that the scalars $\\xi_j$ vanish.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G8S (lemma-affine-blowup-quotient-description), coordinate specialization; explicit agent-written finite-truncation comparison. Completion is Definition 0317 (definition-complete)."
+   }
+  },
+  {
+   "text": "By the definition of completion, a compatible family $z_m\\in C/\\mathfrak n^m$ is sent coordinatewise to $(\\phi_m(z_m))_m$; the inverse is coordinatewise $\\overline\\psi_m$. Compatibility was checked in step 4, and the inverse identities in step 5, so this gives $\\widehat C\\cong\\varprojlim_m B/\\mathfrak q^m$. The completeness of $B$, with the definition of adic completeness, identifies the latter limit with $B$. On a class coming from $c\\in C$ its coordinates are $\\phi(c)\\bmod\\mathfrak q^m$, so this isomorphism identifies the completion map with precisely $\\phi$. Its inverse sends $X'_i$ to the completed image of $t_i$. The ideal generated by $\\mathfrak n$ in $\\widehat C$ therefore maps to $\\mathfrak q$. Both maps preserve every power of these ideals, hence are continuous. For $J=\\{h\\}$ the lists of $r_j,Y_j,\\xi_j$ are empty and the same formulas give the identity completion of $A$; for $J=\\{1,\\ldots,n\\}$ there are no unaffected variables. This covers these cases and $n=1$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-power-series-variables-complete",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0G8S (lemma-affine-blowup-quotient-description), coordinate specialization; explicit agent-written finite-truncation comparison. Completion is Definition 0317 (definition-complete)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-variables-complete",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-trf-blowup-chart-presentation-power-torsion",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0G8S, lemma-affine-blowup-quotient-description, together with Tag 0317, definition-complete; explicit finite-truncation argument, using the power-series evaluation underlying More on Algebra Tag 07NL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-coordinate-ratio-chart-completion: completion of the coordinate blowup affine chart at a rational point of the exceptional divisor is a formal power series ring with substitution x_j=x_h*(xi_j+y_j)",
+   "results": "{\"t\": \"2026-10-22T06:45:07Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-coordinate-ratio-chart-completion: completion of the coordinate blowup affine chart at a rational point of the exceptional divisor is a formal power series ring with substitution x_j=x_h*(xi_j+y_j)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.coe_X_compare\", \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"LaurentSeries.comparePkg_eq_extension\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.ratfuncAdicComplPkg\", \"LaurentSeries.ratfuncAdicComplRingEquiv_apply\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.mem_integers_of_powerSeries\"], \"digest\": \"d2639db089d6fd39\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) completes a polynomial ring at its variables; it does not identify the completion of the ratio subring C, its rational exceptional point, or the chart substitution. LaurentSeries completion and univariate Weierstrass quotients are different."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, MvPowerSeries",
+   "results": "{\"t\": \"2026-10-22T06:45:07Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, MvPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"MvPowerSeries.toAdicCompletionInv\", \"MvPowerSeries.toAdicCompletion\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\", \"MvPowerSeries.toAdicCompletion_coe\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"494e5200ee9779cb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) completes a polynomial ring at its variables; it does not identify the completion of the ratio subring C, its rational exceptional point, or the chart substitution. LaurentSeries completion and univariate Weierstrass quotients are different."
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*MvPowerSeries|MvPowerSeries.*AdicCompletion|blowup.*complet|complet.*blowup",
+   "results": "{\"t\": \"2026-10-22T06:45:07Z\", \"tool\": \"grep\", \"query\": \"AdicCompletion.*MvPowerSeries|MvPowerSeries.*AdicCompletion|blowup.*complet|complet.*blowup\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"882ad92353fe72b5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) completes a polynomial ring at its variables; it does not identify the completion of the ratio subring C, its rational exceptional point, or the chart substitution. LaurentSeries completion and univariate Weierstrass quotients are different."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-coordinate-ratio-chart-completion: formal power series algebra blowup coordinate chart completed at rational exceptional point is isomorphic to power series in exceptional parameter ratios and unaffected variables",
+   "results": "{\"t\": \"2026-10-22T06:45:29Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-coordinate-ratio-chart-completion: formal power series algebra blowup coordinate chart completed at rational exceptional point is isomorphic to power series in exceptional parameter ratios and unaffected variables\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-coordinate-ratio-chart-completion: let A be a multivariate formal power series ring over a field and C=A[x_j/x_h] its coordinate blowup chart, identify the completion at (x_h, x_j/x_h-c_j, x_k) with a power series ring",
+   "results": "{\"t\": \"2026-10-22T06:45:46Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-coordinate-ratio-chart-completion: let A be a multivariate formal power series ring over a field and C=A[x_j/x_h] its coordinate blowup chart, identify the completion at (x_h, x_j/x_h-c_j, x_k) with a power series ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.coe_X_compare\", \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.comparePkg_eq_extension\", \"LaurentSeries.ratfuncAdicComplRingEquiv_apply\", \"LaurentSeries.comparePkg\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\"], \"digest\": \"722982b4dc83582c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) completes a polynomial ring at its variables; it does not identify the completion of the ratio subring C, its rational exceptional point, or the chart substitution. LaurentSeries completion and univariate Weierstrass quotients are different."
+  },
+  {
+   "tool": "grep",
+   "query": "toAdicCompletionAlgEquiv|toAdicCompletion_coe",
+   "results": "{\"t\": \"2026-10-22T06:45:47Z\", \"tool\": \"grep\", \"query\": \"toAdicCompletionAlgEquiv|toAdicCompletion_coe\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"66e79a32337b7e7f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: MvPowerSeries.toAdicCompletionAlgEquiv (Equiv.lean:344) completes a polynomial ring at its variables; it does not identify the completion of the ratio subring C, its rational exceptional point, or the chart substitution. LaurentSeries completion and univariate Weierstrass quotients are different."
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*MvPowerSeries|MvPowerSeries.*AdicCompletion|blowup.*complet|complet.*blowup",
+   "results": "{\"t\": \"2026-10-23T13:08:35Z\", \"tool\": \"grep\", \"query\": \"AdicCompletion.*MvPowerSeries|MvPowerSeries.*AdicCompletion|blowup.*complet|complet.*blowup\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\"], \"digest\": \"882ad92353fe72b5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern univariate Laurent/Weierstrass series or completion of a polynomial ring; MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) does not identify the ratio subring or its exceptional-point ideal."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The completion of a coordinate blowup chart of a formal power series ring at a rational point of the exceptional divisor is a formal power series ring with shifted ratio coordinates",
+   "results": "{\"t\": \"2026-10-23T13:08:36Z\", \"tool\": \"leansearch\", \"query\": \"The completion of a coordinate blowup chart of a formal power series ring at a rational point of the exceptional divisor is a formal power series ring with shifted ratio coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RatFunc.laurent_X\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.instLaurentSeriesComplete\", \"LaurentSeries.LaurentSeriesAlgEquiv\", \"LaurentSeries.RatFuncAdicCompl\", \"LaurentSeries.coe_X_compare\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.powerSeries_ext_subring\"], \"digest\": \"34eaf9cf5579e136\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern univariate Laurent/Weierstrass series or completion of a polynomial ring; MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) does not identify the ratio subring or its exceptional-point ideal."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, MvPowerSeries",
+   "results": "{\"t\": \"2026-10-23T13:08:36Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, MvPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"MvPowerSeries.toAdicCompletionInv\", \"MvPowerSeries.toAdicCompletion\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\", \"MvPowerSeries.toAdicCompletion_coe\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"494e5200ee9779cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern univariate Laurent/Weierstrass series or completion of a polynomial ring; MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) does not identify the ratio subring or its exceptional-point ideal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a coordinate blowup chart L[[x_1,...,x_n]][x_j/x_h] at the ideal (x_h,x_k,x_j/x_h-c_j) is the formal power series ring in the exceptional parameter and shifted ratios",
+   "results": "{\"t\": \"2026-10-23T13:08:37Z\", \"tool\": \"leanfinder\", \"query\": \"Completion of a coordinate blowup chart L[[x_1,...,x_n]][x_j/x_h] at the ideal (x_h,x_k,x_j/x_h-c_j) is the formal power series ring in the exceptional parameter and shifted ratios\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\"], \"digest\": \"047f18218267e7c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern univariate Laurent/Weierstrass series or completion of a polynomial ring; MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) does not identify the ratio subring or its exceptional-point ideal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series coordinate ratios after blowing up a coordinate ideal: the completed affine chart at a rational exceptional point has coordinates x_h, x_j/x_h-c_j, x_k",
+   "results": "{\"t\": \"2026-10-23T13:11:14Z\", \"tool\": \"leanfinder\", \"query\": \"Formal power series coordinate ratios after blowing up a coordinate ideal: the completed affine chart at a rational exceptional point has coordinates x_h, x_j/x_h-c_j, x_k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivisorAt.seq_one\", \"PowerSeries.IsWeierstrassDivisorAt.mk_mod'_eq_self\", \"PowerSeries.IsWeierstrassDivisorAt.isUnit_shift\", \"PowerSeries.weierstrassMod\"], \"digest\": \"c93e3f6a65e745f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern univariate Laurent/Weierstrass series or completion of a polynomial ring; MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) does not identify the ratio subring or its exceptional-point ideal."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coordinate-blowup-division-generators",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Coordinate chart comparison needed to interpret the formal blowup in the formal coefficient-transform criterion; BM section 7.2, pp.267--268, and Corollary 7.24: passage from the ratio chart to its completed local coordinates.",
+   "via": [
+    "lem-trf-coordinate-blowup-division-generators",
+    "lem-trf-formal-coefficient-transform-criterion",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coordinate-ratio-chart-completion",
+  "worker": "stage1",
+  "summary": "Q97 constructs the substitution via the existing chart power-torsion presentation, proves mutually inverse maps at every finite ideal-power quotient by explicit truncation, and passes coordinatewise to the inverse limit. Reuses all required facts; no new nodes. Verified nonzero ratio scalars, arbitrary characteristic, singleton and full coordinate centres. Statement unchanged; the final ideal assertion is interpreted as the extended ideal in the completion.",
+  "blueprint": "The current latest blueprint lem-trf-local-term-locality proof, (1) and (2), uses the contracting-correspondence normal-cone route. This inherited descendant supplies the coordinate-completion comparison in the existing formal-transform/resolution branch; its seven steps realize the precise chart-completion place already recorded in blueprint.from, without altering the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Generic evaluation of formal series in a complete ring is needed to define the coordinate substitution. No node of sk-i-curve-zero supplies this algebraic universal property; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-adic-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-eab9ef6a7",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-eab9ef6a7 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full; there are no new nodes and no fixes. The statement and stmt_deps are unchanged, and proof_deps is exactly the union of the step uses. Step 1 proves elementarily that the m-th power of the variable ideal is the set of series with no terms of degree below m, and that aC is contained in n. Step 2 applies lem-weil-pbc-power-series-adic-evaluation with T=B, I=q and b_j=X'_h(xi_j+X'_j) in q; this node is a generic tool from unit sk-thm-p1, declared in split_report.tool_uses, and I accept it. Step 3 applies lem-trf-blowup-chart-presentation-power-torsion (Stacks 0G8S, algebra.tex:17250, checked) with R=A, a=e, a_i=X_j; A[I/e]=A[X_j/e] in one line, and the map kills the e-power-torsion kernel because X'_h is a nonzerodivisor. Steps 4-5 give truncation inverses psi_m; I checked that psi(b_j)=e(xi_j+t_j)=X_j, that the tail of a lies in a^mC, contained in n^m, and that r_j is sent back to r_j, so the nonzero shift is handled explicitly. Step 6 gives C/n=L, so n is maximal. Step 7 passes to the limit using the completeness of B; the completion map goes to phi and the extended ideal of n goes to q. Edge cases checked: n=1, J={h}, J = all coordinates, xi nonzero, characteristic p. The Mathlib no-match is right: toAdicCompletionAlgEquiv (Equiv.lean:344) completes a polynomial ring only. A statement search of the DAG and blueprint_refs found no duplicate (only toric/monoid completions). The sole citer, coordinate-blowup-division-generators, uses exactly what is proved. No SGA citation; no repair note, so the re-split rule does not apply."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CoordinateRatioChartCompletion",
+  "declaration": "MvPowerSeries.exists_coordinateRatioChartCompletion",
+  "declarations": [
+   "MvPowerSeries.CoordinateRatioChart",
+   "MvPowerSeries.coordinateRatioChartRatio",
+   "MvPowerSeries.coordinateRatioChartParameter",
+   "MvPowerSeries.coordinateRatioChartIdeal",
+   "MvPowerSeries.coordinateRatioChartSubstitution",
+   "MvPowerSeries.exists_coordinateRatioChartCompletion"
+  ],
+  "file": "lean/Sheaf/RingTheory/CoordinateRatioChartCompletion.lean",
+  "statement": "theorem exists_coordinateRatioChartCompletion (J : Set (Fin n)) (h : Fin n) (hh : h ∈ J) (ξ : {j : Fin n // j ∈ J ∧ j ≠ h} → L) : (coordinateRatioChartIdeal L J h ξ).IsMaximal ∧ (∃ ρ : (CoordinateRatioChart L J h ⧸ coordinateRatioChartIdeal L J h ξ) ≃+* L, ∀ c : L, ρ (Ideal.Quotient.mk _ (algebraMap (MvPowerSeries (Fin n) L) (CoordinateRatioChart L J h) (C c))) = c) ∧ ∃ (φ : CoordinateRatioChart L J h →+* MvPowerSeries (Fin n) L) (E : AdicCompletion (coordinateRatioChartIdeal L J h ξ) (CoordinateRatioChart L J h) ≃+* MvPowerSeries (Fin n) L), (∀ c : L, φ (algebraMap (MvPowerSeries (Fin n) L) _ (C c)) = C c) ∧ (∀ i : Fin n, φ (algebraMap (MvPowerSeries (Fin n) L) _ (X i)) = coordinateRatioChartSubstitution L J h ξ i) ∧ (∀ j : {j : Fin n // j ∈ J ∧ j ≠ h}, φ (coordinateRatioChartRatio L J h ⟨j.val, j.property.1⟩) = C (ξ j) + X j.val) ∧ (∀ (F : MvPowerSeries (Fin n) L) (m : ℕ), φ (algebraMap (MvPowerSeries (Fin n) L) _ F) - MvPolynomial.eval₂ C (coordinateRatioChartSubstitution L J h ξ) (F.truncTotal m) ∈ (Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) L))) ^ m) ∧ (∀ c : CoordinateRatioChart L J h, E (AdicCompletion.of (coordinateRatioChartIdeal L J h ξ) _ c) = φ c) ∧ Ideal.map E.toRingHom ((coordinateRatioChartIdeal L J h ξ).map (algebraMap (CoordinateRatioChart L J h) (AdicCompletion (coordinateRatioChartIdeal L J h ξ) (CoordinateRatioChart L J h)))) = Ideal.span (Set.range (X : Fin n → MvPowerSeries (Fin n) L))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9492216b7",
+  "group": "N8",
+  "result": "pass",
+  "note": "Every clause matches the node. C = chartRing(span(X''J), X h); 𝔫 = span of the centred parameters; φ is pinned by the constant, variable and ratio values plus truncTotal congruences mod q^m; E∘AdicCompletion.of = φ; Ideal.map E (𝔫Ĉ) = span X (extended ideal; with 𝔫 finitely generated, E is continuous). IsMaximal plus ρ: C/𝔫 ≃+* L fixing L. Edge cases n=1, J={h}, J=all, ξ≠0, char p, universe u all fine. lean.statement verbatim, one sorry. Added stmt_dep def-nagata-blowup-chart-ring is a landed node, allowed by brief-stage2 l.177. Docstrings and the 7-step proof present, no duplicate declarations, report sections present. No findings; no compile needed since no file was changed."
+ }
+}

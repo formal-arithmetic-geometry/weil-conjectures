@@ -22,40 +22,30 @@
  ],
  "proof": [
   {
-   "text": "On a flat-term K-flat representative, pullback of the strict quotient diagram is the quotient diagram of ordinary pullback, by the strict tensor balancing comparison. The comparison carries the constant quotient augmentation to the pulled-back augmentation.",
+   "text": "Transport the constant-site quotient completion reflector through completed_constant_presentation_transport. For each ambient K its quotient comparison q identifies F(comp_K) followed by q with the actual constant-site unit. Full faithfulness therefore identifies invertibility of comp_K with intrinsic completeness. Completeness of the constant reflector output and naturality of its unit along q prove completeness of every ambient quotient completion. Its Hom bijection transports back by full faithfulness, precomposing with q inverse.",
    "uses": [
-    "prop-weil-pbc-direct-image-limits"
+    "lem-weil-pbc-completed-constant-presentation-transport",
+    "lem-weil-pbc-constant-completion-equivalence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N, lemma-functoriality-derived-completion, proof of (2),(5); Tag 099M; strict K-flat quotient construction. Source mathematical argument is also written in the declaration docstring."
-   }
+   "elementary": false
   },
   {
-   "text": "The Koszul/quotient reconstruction and the completion reflector identify this strict quotient limit and its unit with derived completion. Thus its output is complete and unit precomposition into every complete object is bijective. Transport along the unit-preserving constant-coefficient comparison; scalar restriction on complete objects is an equivalence.",
+   "text": "Use stratumReductionIso for the arbitrary scheme morphism u; this comparison and its augmentation theorem have no stratum-restriction hypothesis. Apply completedRlim to this strict tower isomorphism. Its augmentation equation, together with cancellation of the derivedConstantPullbackIso inverse/hom pair, identifies ordinaryToCompleted followed by this isomorphism with completionUnit at ordinary pullback. Completeness is invariant under the isomorphism by naturality of the completion unit. Transport the quotient-reflector Hom bijection along this same isomorphism: injectivity cancels its inverse, and surjectivity postcomposes the lifted arrow with its hom.",
    "uses": [
-    "prop-weil-pbc-koszul-reconstruction",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-sp-completed-pullback-adjunction"
+    "lem-weil-pbc-stratum-completion-unit-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N, lemma-functoriality-derived-completion, proof of (2),(5); Tag 099M; strict K-flat quotient construction. Source mathematical argument is also written in the declaration docstring."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-completed-constant-presentation-transport",
   "lem-weil-pbc-constant-completion-equivalence",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-koszul-reconstruction"
+  "lem-weil-pbc-stratum-completion-unit-restriction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "099N proof of clauses (2) and (5); blueprint coherence proof step 1, complete intermediate objects"
+  "place": "Tag 099N (2),(5) and Tag 099M; unit-preserving strict quotient presentation and pullback augmentation; formal categorical transport by V1, 2026-10-25"
  },
  "mathlib_searches": [
   {
@@ -124,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-4ddf9",
-  "group": "S9",
+  "reviewer": "COMPILER",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261021T165936-L-2309985",
-  "kind": "interface",
-  "note": "independent cc review: item proof (5 clauses + completedPullComp/Id uniqueness) against node lemma-weil-pbc-completed-exchange-coherence; relocated ordinary comparisons byte-identical to base; split statements completedPull_reflection / integralExchange_coherence against their new nodes and Stacks 099M/099N, 07A7"
+  "landing": "20261025T101555-L-3708827",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

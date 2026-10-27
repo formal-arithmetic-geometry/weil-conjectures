@@ -13,9 +13,85 @@
   "def-sfb-modobj-relative-tensor",
   "sk-def-sfb-change-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\gamma_N=\\mu_B\\circ(\\varphi\\otimes1_B)$, by restriction of the regular action. Naturality of the braiding and commutativity of $B$ give the following equality of morphisms $B\\otimes R\\to B$:\n$$\\rho_N:=\\gamma_N\\circ\\beta_{B,R}=\\mu_B\\circ\\beta_{B,B}\\circ(1_B\\otimes\\varphi)=\\mu_B\\circ(1_B\\otimes\\varphi).$$\nThis computes the right action used in the relative tensor; no sectionwise tensor identification is involved.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
+    "place": "Restriction clause 1; relative-tensor definition, right action on the first factor"
+   }
+  },
+  {
+   "text": "For each $M$, put $D_M=(B\\otimes R)\\otimes UM$, $V_M=B\\otimes UM$, and\n$$a_M=\\rho_N\\otimes1_{UM},\\qquad b_M=(1_B\\otimes\\gamma_M)\\circ\\alpha_{B,R,UM}:D_M\\rightrightarrows V_M.$$\nThe relative-tensor definition says $t_M:=t_{N,M}$ is a coequalizer of this pair. The extension definition and step 1 say that $p_M$ is a coequalizer of exactly the same pair. Restriction leaves the underlying object and projection unchanged.",
+   "uses": [
+    "def-sfb-modobj-relative-tensor",
+    "def-sfb-modobj-extension",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
+    "place": "Displayed coequalizer, compared with the displayed relative-tensor coequalizer"
+   }
+  },
+  {
+   "text": "For each M, descend the tensor projection t_M through the extension coequalizer p_M to obtain f_M, and descend p_M through t_M to obtain g_M. Step 2 identifies the balancing pairs, so both descents exist. Their normalization equations are p_M f_M = t_M and t_M g_M = p_M. Precomposing f_M g_M and g_M f_M with p_M and t_M, respectively, makes each the identity. Cancel the coequalizer projections. In Lean these are extendDescHom, coequalizer.desc, extendπ_extendDescHom, coequalizer.π_desc and cancel_epi.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-relative-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, coequalizer universal property and uniqueness"
+   }
+  },
+  {
+   "text": "The forward comparison is R-linear. Precompose its action equation with R tensor p_M, which is epic because tensor preserves colimits by [sk-def-sfb-sheaf-tensor]. Restriction writes the extension action as (phi tensor 1) followed by its B-action. Move phi past the tensor of p_M by bifunctoriality and use whiskerLeft_extendπ_smul. On the relative-tensor side use whiskerLeft_tensorπ_smul. Substitute p_M f_M = t_M; associator naturality identifies the remaining composites with the action gamma_N = mu_B (phi tensor 1). Cancel R tensor p_M. Apply Mod.isoMk to the underlying isomorphism to obtain an R-module isomorphism; the inverse is linear by the inverse identities.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-relative-tensor",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
+    "place": "First-factor action and restriction formula; relative-tensor first-factor action"
+   }
+  },
+  {
+   "text": "For an R-module morphism u:M to M\\prime, precompose the naturality equation with p_M. By extendπ_extendScalarsMap the extension map sends p_M to (1_B tensor u) p_M\\prime; by tensorObjπ_whiskerLeft the relative tensor map sends t_M to (1_B tensor u) t_M\\prime. The factorization equation p_M f_M = t_M now identifies the composites, so cancellation of p_M proves naturality. NatIso.ofComponents assembles the module isomorphisms. The normalization equations from step 3 give both displayed assertions. No colimit over the module category and no freeness hypothesis is used.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-relative-tensor",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
+    "place": "Induced morphisms, compared with the relative-tensor induced morphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-modobj-extension",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "Last sentence, tensor inference, using direct coequalizer descent and cancellation (Stacks Tag 002A). Lean argument adapted from the proved private scalarTensorIso, scalarTensorIso_hom, scalarTensorIso_inv and scalarTensorIso_naturality in Sheaf.CategoryTheory.FiniteFreeScalarCoordinates; no finite-free or abelian hypothesis is used by that comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +127,52 @@
    "results": "8 hits: π_tensor_id_preserves_coequalizer_inv_desc; π_tensor_id_preserves_coequalizer_inv_colimMap_desc; id_tensor_π_preserves_coequalizer_inv_desc; id_tensor_π_preserves_coequalizer_inv_colimMap_desc; Rep.coinvariantsTensor_hom_ext; TensorProduct.isTensorProduct; Rep.coinvariantsTensor_hom_ext_iff; ModuleCat.free_δ_freeMk; result digest 3cda9b011646298f",
    "date": "2026-10-21",
    "verdict": "no match: the hits give ordinary ModuleCat scalar adjunctions and abstract coequalizer calculus, not the natural comparison of the two internal-module tensors with its projection normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of extension of scalars for internal modules over commutative ring objects is naturally the relative tensor with the restricted algebra",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.ExtendRestrictScalarsAdj.unit_app; subdirectory (whole source); result digest 0a86276c3cb3e216",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module scalar/tensor statements and restriction of internal modules do not give the normalized natural isomorphism of internal R-module valued functors; read Mathlib/CategoryTheory/Monoidal/Mod.lean:350-412 for the restriction-only hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"tensor\"",
+   "results": "1 hits: LieAlgebra.ExtendScalars.instBracketTensorProduct; subdirectory (whole source); result digest e0a36c84cd2a1bfe",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module scalar/tensor statements and restriction of internal modules do not give the normalized natural isomorphism of internal R-module valued functors; read Mathlib/CategoryTheory/Monoidal/Mod.lean:350-412 for the restriction-only hits"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|tensorObjπ|tensorObjPi",
+   "results": "0 hits: ; subdirectory CategoryTheory/Monoidal; result digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module scalar/tensor statements and restriction of internal modules do not give the normalized natural isomorphism of internal R-module valued functors; read Mathlib/CategoryTheory/Monoidal/Mod.lean:350-412 for the restriction-only hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal scalar extension restricted back is naturally relative tensor product with the algebra as a module",
+   "results": "8 hits: RestrictScalars; TensorProduct.AlgebraTensorModule.restrictScalars_rTensor; RestrictScalars.algebra; RestrictScalars.moduleOrig; IsLocalization.moduleLid; RestrictScalars.isScalarTower; RestrictScalars.module; TensorProduct.AlgebraTensorModule.restrictScalars_lTensor; subdirectory (whole source); result digest 0c177f0fe3fb42c1",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module scalar/tensor statements and restriction of internal modules do not give the normalized natural isomorphism of internal R-module valued functors; read Mathlib/CategoryTheory/Monoidal/Mod.lean:350-412 for the restriction-only hits"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|scalarRestriction|comap|tensor",
+   "results": "5 hits: 147; 351; 363; 377; 387; subdirectory CategoryTheory/Monoidal/Mod.lean; result digest fc97694c7ab1c8b0",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module scalar/tensor statements and restriction of internal modules do not give the normalized natural isomorphism of internal R-module valued functors; read Mathlib/CategoryTheory/Monoidal/Mod.lean:350-412 for the restriction-only hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison of coequalizers defining internal extension of scalars and relative tensor product preserves module actions and quotient projections",
+   "results": "8 hits: rTensor.toFun; ModuleCat.extendScalarsComp_hom_app_one_tmul; TensorProduct.quotTensorEquivQuotSMul_comp_mk; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; TensorProduct.tensorQuotEquivQuotSMul_comp_mk; TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor; TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor; lTensor.toFun; subdirectory (whole source); result digest dbb77b5a700c92d6",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module scalar/tensor statements and restriction of internal modules do not give the normalized natural isomorphism of internal R-module valued functors; read Mathlib/CategoryTheory/Monoidal/Mod.lean:350-412 for the restriction-only hits"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-free-scalar-coordinates",
@@ -73,5 +191,68 @@
   },
   "same_as": [],
   "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-restricted-extension-relative-tensor",
+  "worker": "stage1",
+  "summary": "Identified the two balancing arrows using braiding naturality and commutativity of B, checked the functorial quotient projections and restricted first-factor actions, then applied the existing equivariant coequalizer comparison. Statement unchanged; no new nodes. Existing underlying-object Lean comparison is only a partial match and has stronger ambient assumptions.",
+  "blueprint": "Realizes the implicit identification of restricted scalar extension with tensor by the restricted regular algebra in the last sentence of lem-sfb-subfield-flat.proof.md, before its finite-free coordinates argument. Steps 1-2 identify the balancing pair, 3-4 check naturality and module actions, 5 supplies the normalized natural comparison. Whole-blueprint searches found no node stating this complete normalized internal-module comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-equivariant-coequalizer-comparison",
+    "why": "General uniqueness, linearity and naturality of equivariant coequalizers is used as a categorical tool after identifying both balancing pairs and actions. It replaces no coefficient-field step of the unit and no node of this unit states this general comparison."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NY-0762dd252",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-0762dd252 (reviewer sub-agent of L); spot-checked: Read in full: the item and every cited statement: lem-sfb-equivariant-coequalizer-comparison, def-sfb-modobj-relative-tensor, def-sfb-modobj-extension, sk-def-sfb-change-of-scalars, sk-def-sfb-module-objects, sk-def-sfb-sheaf-tensor. Also read the blueprint source lem-sfb-subfield-flat.proof.md (last sentence) and the citer lem-sfb-finite-free-scalar-coordinates. Compared with live and side-live: the statement, stmt_deps and blueprint are unchanged, the item is still unsplit there, and there is no repair note. Step 1: braiding naturality plus commutativity of B give γ_Nβ_{B,R}=μ_B(1⊗φ). B is commutative by the hypothesis. Step 2: the relative-tensor pair and the extension pair are then the same, and Res is the identity on underlying objects. Step 3: D and V are functors and λ_M is an R-action. I checked that naturality of b uses the R-linearity of f. Step 4: I checked δ^E(1⊗p)=p(γ_N⊗1)α⁻¹=pλ via naturality of α, and δ^T(1⊗t)=tλ from the first-factor action. Step 5: comparison-lemma hypotheses (1)-(3) are met, with (3) from sheaf-tensor clause 2. With Q=E, P=T, r=p, q=t the lemma gives κ with both normalizations, linearity, inverses and naturality. Edge cases: M=0, φ=id, B=0, and nonflat Z→Z/2, where both sides are M/2M. No duplicate: the nearby nodes are derived, adjunction-unit, iso-only, composition or the sectionwise comparison. No cycle: the tool's 261-node closure excludes the item. Accepted the tool_use of the generic coequalizer comparison from another unit. No new nodes, no SGA, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RestrictedExtensionRelativeTensor",
+  "declaration": "CategoryTheory.Mod.exists_restrictedExtension_relativeTensor",
+  "file": "lean/Sheaf/CategoryTheory/RestrictedExtensionRelativeTensor.lean",
+  "statement": "theorem exists_restrictedExtension_relativeTensor {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] (J : GrothendieckTopology C) (R B : Sheaf J Ab.{w}) [MonObj R] [MonObj B] [IsCommMonObj R] [IsCommMonObj B] (φ : R ⟶ B) [IsMonHom φ] : ∃ κ : extendScalars φ ⋙ comap φ ≅ tensorLeft ((comap φ).obj (regular B)), (∀ M : Mod (Sheaf J Ab.{w}) R, extendπ φ M ≫ (κ.hom.app M).hom = tensorObjπ ((comap φ).obj (regular B)) M) ∧ (∀ M : Mod (Sheaf J Ab.{w}) R, tensorObjπ ((comap φ).obj (regular B)) M ≫ (κ.inv.app M).hom = extendπ φ M)",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Natural isomorphism in the category of R-module objects, with both canonical coequalizer projection equations. Reuses the existing sfbRegularAbMonoidal, sfbRegularAbSymmetric, and tensor-colimit instances, which specialize sfbSheafTensorStructure to abelian sheaves; no new monoidal structure or quotient map is defined. Naturality, linearity and inverse identities are part of the natural module isomorphism type. All site and coefficient universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f10e904c",
+  "group": "NU",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: essentially small site in universe w, with uC/vC/w independent; Sheaf J Ab.{w} with the canonical sfbSheafTensorStructure tensor (sfbRegularAb* instances are definitional specializations of the stmt_dep); commutative R and B, IsMonHom φ; E = extendScalars φ ⋙ comap φ; N = (comap φ).obj (regular B); target tensorLeft N in Mod R. ∃ natural module iso κ with both projection equations (extendπ ≫ κ = tensorObjπ, tensorObjπ ≫ κ⁻¹ = extendπ). Naturality, linearity and inverses come from the NatIso type. κ is pinned uniquely because extendπ is epi. Truth checked: the two coequalizer pairs agree by braiding naturality and commutativity of B (upstream restrictedRegular_rightAction). Edge cases checked: M=0, B=0, φ=id, nonflat Z→Z/2, general sites. No H4 duplicate: extendForgetTensorIso and Mod.extendComapTensorIso are defs that assume abelian, closed, Grothendieck and functorial flat resolutions. Statement verbatim in the file, docstrings with source and blueprint tag and the 5 proof steps, sorry only, node diff is lean only, report has both sections, no cycle. Advisory: the sfbRegularAb* instances are owned by theorem node lem-sfb-regular-scalar-extension-multiplication, which is not a stmt_dep. No compile run (no change; worker's compiles clean)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261023T132541-L-2298983",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

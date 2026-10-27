@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-common-stage-descent-fixed-rational",
+ "kind": "statement",
+ "title": "Common-field adjunction descent of fixed rational stages",
+ "statement": "Fix the prime, coefficient closure, finite-field datum, schemes, morphism and RingStageAssembly A of [def-sf-ring-stage-assembly-data], with no absolute separatedness hypothesis. Given any RationalStageAssembly P over A [lem-sf-rational-stage-localization], there exists CommonStageAssembly A P: closed operations at every compactification, counit-normalized comparisons from the supplied rational operations under each common-field inclusion, identity left comparison on literal pair objects, inclusion shifts independent of compactification, and the common-transition equation sending the inverse source transition to inverse target transition followed by the supplied rational scalar q. The rational operations, their realizations and their scalar comparisons are fixed inputs, not existential outputs. The full representative-arrow normalization and rational-localization existence are not conclusions of this statement.",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data",
+  "lem-sf-rational-stage-localization"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 6.6; coefficient construction step 5, common-field pair descent of an already supplied normalized rational family only"
+ },
+ "proof": [
+  {
+   "text": "Fix A and the supplied rational-stage family P; none of its operations or comparisons will be replaced. Residue Tor represents every rational object by an integral finite-Tor object. P.action fixes the left functor on these objects and all localized integral arrows; P.scalar_normalized fixes q on them. The normalized proper/open coefficient cocycle and tensor multiplication units therefore give the rational scalar identity and balanced composition equations on all localized arrows. Taking counit transposes gives right coherence.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-pur-coefficient-scalar-units",
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each finite subfield of Ω take the given P.operation left and right functors. The published scalar transitions have their literal unit and associator/pentagon laws. Bundle the rational scalar comparisons as morphisms of these stage systems using the preceding cocycle. Apply coherent pair functor descent to the actual published pair categories: keep the stage of each object and map a representative at M by q_source, the stage functor at M, and q_target inverse. This preserves eventual equality, addition and composition.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a Hom represented at a common field use that stage adjunction bijection. The scalar mate-unit equation proves compatibility of this map with enlargement; the counit equation does the same for its inverse. The maps are inverse and natural at one common field, hence on the quotient Hom groups. Apply the natural-Hom-bijection adjunction constructor; its triangles are the represented stage triangles.",
+   "uses": [
+    "lem-pur-mate-unit-compatibility",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the endpoint localization shift structures to normalize the stage shifts before descending them. The localization q identity and its shift equation compare the supplied rational shifts with the integral ones; the latter commute with the ambient realization A.leftShift. Thus this normalization is independent of c. Distinguished triangles are represented at finite stages, so the descended functors are exact and the represented unit/counit commute with shifts. Transport the inclusion shifts back with the same endpoint comparisons to retain the supplied P.operation structures. No new rational operation is chosen.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The inclusion comparison on literal pair objects is identity; its right mate is the counit transpose. Evaluate the quotient functor formula on the inverse common-transition arrow. Cancelling its stage tensor-unit comparisons gives exactly CommonStageAssembly.transition. Choose the endpoint inclusion shifts once independently of compactification, giving shiftX and shiftY. Only the closed operation, comparisons, identity and transition equations are returned; the consumer proves the full representativeAction by naturality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-integral-residue-tor",
+  "lem-pur-coefficient-scalar-units",
+  "lem-pur-mate-unit-compatibility",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-mate-pasting",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 6.6; coefficient construction step 5, common-field pair descent of an already supplied normalized rational family only; fixed-input transport and normalization details as written in the proof steps."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible adjunctions at finite coefficient fields descend to an adjunction on the category with pairs as objects and filtered colimit morphisms",
+   "results": "CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Limits.colimitLimitIso, CategoryTheory.Subobject.lowerAdjunction, CategoryTheory.Limits.Types.FilteredColimit.Rel, CategoryTheory.Limits.Types.FilteredColimit.isColimitOf, CategoryTheory.abelianOfAdjunction, CategoryTheory.Localization.HasProductsOfShapeAux.adj",
+   "date": "2026-10-27",
+   "verdict": "Generic tools only; none constructs these fixed geometric coefficient stages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunctions descend along a directed system of additive categories with coherent coefficient scalar extension comparisons",
+   "results": "AddCommGroup.DirectLimit.directedSystem, ModuleCat.directLimitIsColimit, ModuleCat.directLimitCocone, CategoryTheory.OrthogonalReflection.isRightAdjoint_ι, ModuleCat.directLimitIsColimit_desc, Module.DirectLimit.of_f, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.directLimitCocone_ι_app",
+   "date": "2026-10-27",
+   "verdict": "Generic tools only; none constructs these fixed geometric coefficient stages."
+  },
+  {
+   "tool": "grep",
+   "query": "adjunction.*[Pp]air|[Pp]air.*adjunction|[Cc]ommon[Ss]tage|coefficientPairFunctor|liftAdjunction (Mathlib, WeilConjectures and Sheaf)",
+   "results": "No Mathlib match. The source has a private ScalarLocalization.liftAdjunction; Sheaf has generic StageSystem.coefficientPairFunctor_exists and the normalized ExceptionalFieldDescent.exists_field_descent. None states the raw fixed-assembly transport. The existing ExceptionalCommonStageDescent is for complementary closed/open immersions with absolute separatedness; SfPackageQbarAdjunctionMapDescent also requires absolute separatedness. Blueprint-wide search found no matching localization/adjunction or common-field descent node.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the named generic and normalized tools; retain the fixed-data localization and common-stage transport as separate obligations."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalFieldStageCompletion",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Construction 6.6; coefficient construction step 5, common-field pair descent of an already supplied normalized rational family only",
+   "via": [
+    "lem-sf-field-stage-completion",
+    "lem-sf-constructible-exceptional-coefficient-stages",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalCommonStageFromRational",
+  "file": "lean/Sheaf/Paper/ExceptionalCommonStageFromRational.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.exists_common_stage_descent",
+  "declarations": [
+   "WeilConjectures.ConstructibleExceptionalCoefficients.CommonStageAssembly",
+   "WeilConjectures.ConstructibleExceptionalCoefficients.exists_common_stage_descent"
+  ],
+  "statement": "theorem exists_common_stage_descent\n    (A : RingStageAssembly.{u, v} l Ω D hl (f := f))\n    (P : RationalStageAssembly.{u, v} l Ω D hl A) :\n    Nonempty (CommonStageAssembly.{u, v} l Ω D hl A P)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T021404-L-2764373",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T021404-L-2764373",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "id": "lem-pur-system-evaluation-scalar-restriction-normalization",
+ "kind": "statement",
+ "title": "Scalar restriction normalizes the singleton direct-image evaluation comparison",
+ "statement": "Let $u:\\mathscr X\\to\\mathscr Y$ be a geometric morphism of topoi presented by sites small in the module universe, let $A_Y$ be a sheaf of commutative rings and put $A_X=u^{-1}A_Y$ [def-weil-size-convention], [def-weil-pbc-ringed-topos-morphism]. Let $B_Y$ be an inverse sequence of commutative ring sheaves, with a compatible map $\\Delta A_Y\\to B_Y$, and put $B_X=u^{-1}B_Y$ with its pulled-back algebra structure. Strict $B_T$-systems and constant-$A_T$ towers are modules on the vertical diagram sites [lem-pur-system-ringed-sequence-site], [lem-weil-pbc-diagram-site-realization]. Work in ordinary unbounded derived module categories [def-weil-sheaf-of-modules-category], [def-weil-abstract-derived-category]. Let $U_T$ forget $B_T$ to constant-$A_T$ towers, let $r_{T,n}$ forget $B_{T,n}$ to $A_T$, and let $e_n^T,e_n^A$ be exact evaluations. Write $P_B=Ru_{*,B_\\bullet}$, $P_A^J=Ru_{*,A}^{J}$, $P_A=Ru_{*,A}$ and $P_n=Ru_{*,B_n}$ for the canonical derived direct images, with module-induced adjunctions. Let $G_B,u_n^*$ be the corresponding exact inverse images.\n\nLet $L_n^T\\dashv e_n^T$ be the singleton derived adjunctions. Define $\\beta^B_{n,Z}:e_n^YP_BZ\\xrightarrow{\\sim}P_ne_n^XZ$ by the natural Hom bijections\n$$\\operatorname{Hom}(V,e_n^YP_BZ)\\cong\\operatorname{Hom}(G_BL_n^YV,Z)\\cong\\operatorname{Hom}(L_n^Xu_n^*V,Z)\\cong\\operatorname{Hom}(V,P_ne_n^XZ),$$\nwhere the middle bijection uses $c_n^{-1}$ from [lem-pur-system-singleton-geometric-pullback]. Use the singleton/scalar isomorphisms $S_\\bullet L_n\\cong L_nS_n$ of [lem-pur-system-singleton-scalar-extension], normalized as conjugates of commuting exact scalar restriction and evaluation, for the maps $\\Delta A_T\\to B_T$. Let $\\delta:U_YP_B\\xrightarrow{\\sim}P_A^JU_X$ be the two-factorization comparison of [lem-pur-diagram-ring-restriction-pushforward], let $\\kappa_n:r_{Y,n}P_n\\xrightarrow{\\sim}P_Ar_{X,n}$ be the coefficient-restriction/direct-image comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], and let $\\beta^A_n:e_n^AP_A^J\\xrightarrow{\\sim}P_Ae_n^A$ be the constant-ring tower comparison of [lem-weil-pbc-tower-derived-evaluation-normalization]. Then, under the ordinary restriction/evaluation identifications,\n$$\\kappa_{n,e_n^XZ}\\circ r_{Y,n}(\\beta^B_{n,Z})=\\beta^A_{n,U_XZ}\\circ e_n^A(\\delta_Z).$$\nThe singleton Hom construction also has counit identity\n$$e_n^X(\\varepsilon^B_Z)=\\varepsilon^{(n)}_{e_n^XZ}\\circ u_n^*(\\beta^B_{n,Z}).$$\nFor $m\\ge n$, $\\beta^B_m,\\beta^B_n$ intertwine the actual restriction-form transition of $P_BZ$ with $P_m$ of the transition of $Z$, followed by the canonical restriction/direct-image comparison from $B_m$ to $B_n$. These identities hold naturally for all derived $Z$, using the specified adjunctions, without preservation of K-injectives by varying-ring evaluation or flatness of any coefficient map.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; agent evaluation/scalar-restriction mate-pasting normalization auxiliary.",
+  "note": "The square normalization is agent-formulated, using Zheng Construction 4.1 and the singleton scalar-extension comparison; the tag supplies derived composition, not the whole claim."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-single-derived-extension",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-pur-system-singleton-geometric-pullback",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "lem-pur-system-singleton-scalar-extension",
+  "lem-weil-pbc-diagram-site-realization"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized level scalar and transition squares from inverse-image scalar restriction. Extend them to the whole system and use the invertible derived restriction mates and their scalar/transition coherence.",
+   "uses": [
+    "lem-pur-inverse-image-scalar-restriction-comparison",
+    "lem-pur-system-restriction-mate-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the specified geometric singleton conjugate with the actual derived evaluation mate.",
+   "uses": [
+    "lem-pur-system-singleton-evaluation-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define delta and kappa as the isomorphisms of their derived mates, and chi as the inverse. The general derived exact mate factorization proves all resolution-unit equations. Conjugate counit and naturality prove the Hom clause. Mate-counit transposition proves the evaluated counit, and substitution into the two coherence identities proves the remaining scalar and transition clauses.",
+   "uses": [
+    "lem-pur-exact-derived-mate",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-inverse-image-scalar-restriction-comparison",
+  "lem-pur-system-restriction-mate-coherence",
+  "lem-pur-system-singleton-evaluation-mate",
+  "lem-pur-exact-derived-mate",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6E; direct exact-mate normalization and two independent intermediate results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived evaluation direct image comparison agrees after scalar restriction with constant ring tower evaluation",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.ExtendRestrictScalarsAdj.counit_app; ModuleCat.ExtendRestrictScalarsAdj.counit; PresheafOfModules.restriction; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.Unit.map",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit concerns an already supplied general derived adjunction; ordinary scalar counits and sheaf restriction do not identify the two derived evaluation/scalar-restriction pastings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of evaluation Beck Chevalley mates with restriction of ring sheaf coefficients in unbounded derived categories",
+   "results": "ModuleCat.Tilde.toOpen_res; SheafOfModules.unitHomEquiv_symm_comp; CategoryTheory.Sheaf.ΓRes_map; LightCondensed.ihomPoints_symm_comp; SheafOfModules.unitHomEquiv_comp_apply; SheafOfModules.Presentation.map_π_eq; CategoryTheory.Sheaf.ΓRes_map_assoc; ModuleCat.Tilde.res_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit concerns an already supplied general derived adjunction; ordinary scalar counits and sheaf restriction do not identify the two derived evaluation/scalar-restriction pastings."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit concerns an already supplied general derived adjunction; ordinary scalar counits and sheaf restriction do not identify the two derived evaluation/scalar-restriction pastings."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_counit|evaluation.*counit|restrictScalars.*derived",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: derived_counit concerns an already supplied general derived adjunction; ordinary scalar counits and sheaf restriction do not identify the two derived evaluation/scalar-restriction pastings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Beck Chevalley evaluation for derived module pushforward compatible with forgetting coefficients",
+   "results": "none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a derived direct image of inverse systems of module sheaves agrees with derived direct image of evaluation compatibly with restriction of coefficient rings",
+   "results": "SheafOfModules.evaluationPreservesLimit; SheafOfModules.Presentation.map_π_eq; PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; SheafOfModules.evaluation; PresheafOfModules.evaluationJointlyReflectsLimits; localCohomology.diagram; LightCondensed.forget_obj_val_map; PresheafOfModules.restriction",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: the returned underived module/sheaf evaluations, scalar adjunctions and general derived adjunction equations do not state the specified system evaluation, coefficient square and transition normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*evaluation|evaluation.*derived|restrictScalars.*derived",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: the returned underived module/sheaf evaluations, scalar adjunctions and general derived adjunction equations do not state the specified system evaluation, coefficient square and transition normalization.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, conjugateEquiv",
+   "results": "none; loogle: unknown identifier 'conjugateEquiv'",
+   "date": "2026-10-22",
+   "verdict": "no match: the query was rejected for an unknown identifier; the fully qualified query was run separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of ring sheaf systems commutes with evaluation and restriction of scalars",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; PresheafOfModules.pushforward_obj_map_apply'; PresheafOfModules.restrictScalarsObj; SheafOfModules.restrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply; AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality_assoc; PresheafOfModules.pushforward_obj_obj; AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: the returned underived module/sheaf evaluations, scalar adjunctions and general derived adjunction equations do not state the specified system evaluation, coefficient square and transition normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of Beck Chevalley evaluation mates with change of ring restriction in unbounded derived module categories",
+   "results": "ModuleCat.RestrictionCoextensionAdj.unit'; ModuleCat.homEquiv_extendScalarsComp; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.RestrictionCoextensionAdj.app'; ModuleCat.RestrictionCoextensionAdj.unit'_app; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.ExtendRestrictScalarsAdj.counit",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: the returned underived module/sheaf evaluations, scalar adjunctions and general derived adjunction equations do not state the specified system evaluation, coefficient square and transition normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary ringed topoi the canonical unbounded derived direct image composition comparison is the adjoint conjugate of the K flat normalized derived pullback compositor",
+   "results": "SheafOfModules.sheafificationCompPullback; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility; SheafOfModules.pullbackComp; CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.sheafComposeNatIso; CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: the returned underived module/sheaf evaluations, scalar adjunctions and general derived adjunction equations do not state the specified system evaluation, coefficient square and transition normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|mateEquiv_hcomp|mateEquiv_vcomp|homEquiv_extendScalarsComp",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: these are generic mate-pasting and ordinary scalar-extension identities, reused through existing DAG nodes; they do not state the derived system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "CategoryTheory.conjugateEquiv; CategoryTheory.conjugateEquiv_id; CategoryTheory.conjugateEquiv_iso; CategoryTheory.conjugateEquiv_of_iso; CategoryTheory.conjugateEquiv_symm_id; CategoryTheory.conjugateEquiv_symm_iso; CategoryTheory.conjugateEquiv_symm_of_iso; CategoryTheory.conjugateEquiv_adjunction_id",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: the returned underived module/sheaf evaluations, scalar adjunctions and general derived adjunction equations do not state the specified system evaluation, coefficient square and transition normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-quotient-diagram-projection-evaluation",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Proof Step 2 of thm-pur-rational-and-qbar-purity: independence of finite coefficient extension; sk-thm-sf-compatibility clause (7). Extracted from quotient-diagram-projection-evaluation, old proof steps 3–4 and 9, actual evaluated counit, restriction/direct-image normalization and lower-level transitions.",
+   "via": [
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-system-evaluation-scalar-restriction-normalization",
+  "worker": "stage1",
+  "group": "Q46",
+  "summary": "Nine-step proof using existing normalized singleton adjunctions, ringed-topos path conjugacy, and a common K-flat tensor calculation. Proves the specified scalar square, actual evaluated counit and restriction-form transition identity, without evaluating varying-ring K-injectives. No statement change and no new nodes.",
+  "blueprint": "thm-pur-rational-and-qbar-purity proof Step 2 (finite coefficient extension independence), through the existing adic scalar-naturality / integral compact-support comparison chain; sk-thm-sf-compatibility clause (7), coefficient comparisons preserve evaluation, units and counits.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "Generic ringed-topos two-path comparison identifies the resolution-normalized direct-image map with the conjugate of its pullback map, including nonexact coefficient extensions; no singleton node of this unit supplies this normalization."
+   },
+   {
+    "node": "lem-weil-pbc-tower-derived-evaluation-normalization",
+    "why": "Generic constant-ring inverse-tower counit normalization identifies the constant comparison used in the scalar square; this is a fixed input to the item, not an alternative purity route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of a common flat-term K-flat representative for the elementary tensor comparison; no purity or geometric theorem is substituted."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic preservation of flat-term K-flat complexes by ringed-topos pullback permits computing all tensor comparisons on the same representative."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic derived pullback on a ringed topos: computed termwise on flat-term K-flat complexes via epsilon_P, compatibly with composition; this fixes the representatives of the pullback-composition comparisons lambda, lambda_n used in Step 6."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-b51d2975c",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-b51d2975c (reviewer sub-agent of L); spot-checked: Read the nine-step split in full; it has no new nodes. The statement is pinned throughout (β^B_n by the singleton Hom chain; δ, κ_n, β^A_n by named nodes). It holds in the small cases u=id, B=ΔA, j>n, m=n and nonflat Z→Z/2. I recomputed every conjugation direction. Step 1: β^B_n is the conjugate of c_n^{-1}. Step 2: the counit identity follows from e_n c_n=1 and the triangle identity. Step 3: under lem-sfb-ringed-comparison-tensor-adjunction applied to the two paths, (λ^{-1})^c=δ and (λ_n^{-1})^c=κ_n; the square of ring maps commutes because B_X=u^{-1}B_Y. Step 4: β̃^A=β^A by uniqueness of the adjunct under the tower-normalization counit equation. Steps 6-7: the left square equals b⊗u^{-1}q on both paths at j≤n, and mate pasting gives κ r(β^B)=β^A e^A(δ). Steps 8-9: the conjugate of the transition is the lower-singleton map, by systemSingleDerivedTranspose (read in lean/Sheaf/CategoryTheory/SystemSingleDerivedEvaluation.lean). χ=(λ_{m,n})^c: P_m R_X→R_Y P_n, and conjugating gives R_Y(β_n)t^Y=χP_m(t^X)β_m. Fault fixed (C1/C4): Step 6 computes the pullback-composition comparisons λ, λ_n by their ordinary maps on flat-term K-flat complexes, but no step cited lem-weil-pbc-ringed-topoi-derived-pullback, which states this (ε_P iso, compatible with composition). I added it to Step 5 (text, uses, proof_deps) and declared it as a tool use. Adding it creates no cycle. Accepted tool_uses: sfb ringed comparison, tower-evaluation normalization, kflat-resolution, tensor-pullback, plus the added derived-pullback; all generic. No duplicate: lem-coef-semilinear-derived-sections overlaps the counit and transition clauses only for an unpinned comparison and not the main square (advisory). No SGA is cited. review_split's 'no such node' messages are an artefact of the symlinked chapter directories; every cited node exists.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SystemEvaluationScalarRestrictionNormalization",
+  "declaration": "SheafOfModules.systemEvaluationScalarRestrictionNormalization",
+  "declarations": [
+   "SheafOfModules.systemEvaluationScalarRestrictionNormalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SystemEvaluationScalarRestrictionNormalization.lean",
+  "statement": "theorem systemEvaluationScalarRestrictionNormalization (htransition : ∀ {n m : ℕ} (h : n ≤ m), uTop.inverse.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map (BY.map (homOfLE h).op)) ≫ (IB n).ringUnderlying.hom = (IB m).ringUnderlying.hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map (BX.map (homOfLE h).op)) (halgebra : ∀ n : ℕ, uTop.inverse.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{w})).map (aY.app (op n))) ≫ (IB n).ringUnderlying.hom = IA.ringUnderlying.hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{w})).map (aX.app (op n))) : ∃ d : SystemNormalizationSquares AY AX BY BX aY aX uTop IA IB FB FA, ∃ (delta : HB.rightDerivedFunctor ⋙ (systemNormalizationRestriction aY).mapDerivedCategory ≅ (systemNormalizationRestriction aX).mapDerivedCategory ⋙ HA.rightDerivedFunctor) (kappa : ∀ n : ℕ, (Hn n).rightDerivedFunctor ⋙ (singletonLevelRestriction aY n).mapDerivedCategory ≅ (singletonLevelRestriction aX n).mapDerivedCategory ⋙ H0.rightDerivedFunctor) (chi : ∀ {n m : ℕ} (h : n ≤ m), (systemRestriction BX h).mapDerivedCategory ⋙ (Hn m).rightDerivedFunctor ≅ (Hn n).rightDerivedFunctor ⋙ (systemRestriction BY h).mapDerivedCategory), delta.hom = CategoryTheory.SystemEvaluationNormalization.derivedMate adjB adjA d.scalar ∧ (∀ n : ℕ, (kappa n).hom = CategoryTheory.SystemEvaluationNormalization.derivedMate (adjn n) adj0 (d.level n)) ∧ (∀ {n m : ℕ} (h : n ≤ m), (chi h).inv = CategoryTheory.SystemEvaluationNormalization.derivedMate (adjn n) (adjn m) (d.restriction h)) ∧ CategoryTheory.SystemEvaluationNormalization.UnitNormalized adjB adjA d.scalar ∧ (∀ n : ℕ, CategoryTheory.SystemEvaluationNormalization.UnitNormalized (adjn n) adj0 (d.level n)) ∧ (∀ {n m : ℕ} (h : n ≤ m), CategoryTheory.SystemEvaluationNormalization.UnitNormalized (adjn n) (adjn m) (d.restriction h)) ∧ (∀ n : ℕ, (systemNormalizationEvaluation SY TY SX TX FA HA adjA (fun _ ↦ H0) (fun _ ↦ adj0) hFA n).hom = CategoryTheory.SystemEvaluationNormalization.derivedMate adjA adj0 (FA.evaluation n)) ∧ (∀ n : ℕ, CategoryTheory.SystemEvaluationNormalization.UnitNormalized adjA adj0 (FA.evaluation n)) ∧ (∀ (n : ℕ) (V : DerivedCategory (systemLevel BY n)) (Z : DerivedCategory (StrictRingSystem BX)) (f : V ⟶ (derivedSystemEvaluation BY n).obj (HB.rightDerivedFunctor.obj Z)), ((adjn n).mapDerivedCategoryRightDerivedAdjunction.comp (systemSingleDerivedExtension BX n SX TX).adjunction).homEquiv V Z ((systemNormalizationSingleton SY TY SX TX FB hFB n).inv.app V ≫ (((systemSingleDerivedExtension BY n SY TY).adjunction.comp adjB.mapDerivedCategoryRightDerivedAdjunction).homEquiv V Z).symm f) = f ≫ (systemNormalizationEvaluation SY TY SX TX FB HB adjB Hn adjn hFB n).hom.app Z) ∧ (∀ (n : ℕ) (Z : DerivedCategory (StrictRingSystem BX)), (singletonLevelRestriction aY n).mapDerivedCategory.map ((systemNormalizationEvaluation SY TY SX TX FB HB adjB Hn adjn hFB n).hom.app Z) ≫ (kappa n).hom.app ((derivedSystemEvaluation BX n).obj Z) = (systemNormalizationDerivedRestrictionEvaluation aY n).inv.app (HB.rightDerivedFunctor.obj Z) ≫ (derivedSystemEvaluation ((Functor.const ℕᵒᵖ).obj AY) n).map (delta.hom.app Z) ≫ (systemNormalizationEvaluation SY TY SX TX FA HA adjA (fun _ ↦ H0) (fun _ ↦ adj0) hFA n).hom.app ((systemNormalizationRestriction aX).mapDerivedCategory.obj Z) ≫ H0.rightDerivedFunctor.map ((systemNormalizationDerivedRestrictionEvaluation aX n).hom.app Z)) ∧ (∀ (n : ℕ) (Z : DerivedCategory (StrictRingSystem BX)), (derivedSystemEvaluation BX n).map (adjB.mapDerivedCategoryRightDerivedAdjunction.counit.app Z) = (FB.derivedEvaluation n).hom.app (HB.rightDerivedFunctor.obj Z) ≫ (FB.levelFunctor n).mapDerivedCategory.map ((systemNormalizationEvaluation SY TY SX TX FB HB adjB Hn adjn hFB n).hom.app Z) ≫ (adjn n).mapDerivedCategoryRightDerivedAdjunction.counit.app ((derivedSystemEvaluation BX n).obj Z)) ∧ (∀ {n m : ℕ} (h : n ≤ m) (Z : DerivedCategory (StrictRingSystem BX)), (systemDerivedTransition BY h).app (HB.rightDerivedFunctor.obj Z) ≫ (systemRestriction BY h).mapDerivedCategory.map ((systemNormalizationEvaluation SY TY SX TX FB HB adjB Hn adjn hFB n).hom.app Z) = (systemNormalizationEvaluation SY TY SX TX FB HB adjB Hn adjn hFB m).hom.app Z ≫ (Hn m).rightDerivedFunctor.map ((systemDerivedTransition BX h).app Z) ≫ (chi h).hom.app ((derivedSystemEvaluation BX n).obj Z))",
+  "branch": "sheaf-dag",
+  "by": "Q78",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The direct images are the canonical total right derived functors of ordinary module right adjoints, with the induced derived adjunctions. The beta comparisons are actual conjugateIsoEquiv constructions from the fully normalized geometric singleton comparison. The conclusion constructs the ordinary scalar/restriction squares with fixed underlying maps and supplies delta, kappa and chi with both mate and resolution-unit characterizations; it then states the scalar square, evaluated counit and actual strict transition identities. Constant-ring systems use their ringed-sequence-site presentation of ordinary towers. Site universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6cd4690e",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Read node, Stacks 0D6E/Zheng 4.1 places, the single module, report and dep decls (SystemGeometricInverseImageData, SystemSingletonGeometricComparisons, diagramRingRestrictionPushforward, exists_unique_towerDerivedEvaluation_normalized, StrictRingSystem, systemDerivedTransition, mapDerivedCategoryRightDerivedAdjunction). beta_B = conjugateIsoEquiv of c_n.symm, Hom-chain clause stated; c_n chosen from a uniquely-pinned Prop. delta/kappa/chi pinned as derivedMate of underlying-pinned ordinary squares plus UnitNormalized (= 0D6E unit equation, verified true via the Adjunction.derived Hom formula); beta_A pinned to the mate of the evaluation square. Scalar square, counit and transition clauses match the node in direction and types; m=n, nonflat and unbounded cases included; universes independent. Only lean changed, dep nodes identical, statement verbatim, docstrings/H9 OK, only sorry is the theorem proof. Advisories: systemDerivedTransition owner nodes absent from stmt_deps (S1 gap); dep declarations characterized on the StrictRingSystem presentation rather than applied; second-reading section brief. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c595",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261025T143323-L-980706",
+  "kind": "interface",
+  "note": "independent cc review: item stmt + 12 moved decls byte-identical to live clone; new sorried statements read against SystemGeometricInverseImageData/SystemSingletonGeometricComparisons; 5 direct importers of the adapted SystemSingleDerivedExtension compiled against the delivered module"
+ }
+}

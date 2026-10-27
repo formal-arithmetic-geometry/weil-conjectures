@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-koszul-polynomial-presentation-principal-gluing",
+ "kind": "statement",
+ "title": "Koszul polynomial presentations glue over a principal target cover",
+ "statement": "For an ideal $L$ in a commutative ring $T$, say that $L$ is locally Koszul-regular if for every prime $\\mathfrak a\\subset T$ containing $L$ there are $u\\in T\\setminus\\mathfrak a$, $r\\geq0$, and $a_1,\\ldots,a_r\\in T_u$ with $LT_u=(a_1,\\ldots,a_r)$ and $H_i(K_\\bullet(T_u;a_1,\\ldots,a_r))=0$ for all $i>0$ [def-weil-ring-localization-away, def-weil-pbc-koszul-regular-sequence]. Let $R\\to S$ be a homomorphism of commutative rings for which $S$ is a finitely generated $R$-algebra (there is a surjective $R$-algebra map $R[z_1,\\ldots,z_N]\\twoheadrightarrow S$ for some finite $N\\geq0$) [def-weil-pbc-mv-polynomial-ring]. Let $g_1,\\ldots,g_t\\in S$ generate the unit ideal, where $t\\geq0$. Suppose that for each $j$ there are $n_j\\geq0$ and a surjective $R$-algebra map $\\alpha_j:R[x_1,\\ldots,x_{n_j}]\\twoheadrightarrow S_{g_j}$ whose kernel is locally Koszul-regular. Then there are $n\\geq0$ and a surjective $R$-algebra map $\\alpha:R[x_1,\\ldots,x_n]\\twoheadrightarrow S$ whose kernel is locally Koszul-regular. No flatness or Noetherian hypothesis is imposed; an empty cover is allowed and forces $S=0$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D1 (lemma-lci-local)."
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sfb-locally-koszul-regular-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite polynomial surjection $\\alpha:P=R[x_1,\\ldots,x_n]\\twoheadrightarrow S$ supplied by finite generation and put $I=\\ker\\alpha$. For each $j$ lift $g_j$ to $h_j\\in P$. We will prove that this fixed $I$ is locally Koszul-regular; it is unnecessary to glue the different sets of polynomial variables.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D1 (lemma-lci-local), proof."
+   }
+  },
+  {
+   "text": "For each $j$ let $\\beta_j:P[z]\\to S_{g_j}$ send $z$ to $g_j^{-1}$ and restrict on $P$ to $\\alpha$ followed by localization. By [lem-weil-pbc-localization-away-polynomial-quotient], $S[z]\\to S_{g_j}$ is surjective with kernel $(g_jz-1)$. The coefficient map $P[z]\\to S[z]$ is surjective with kernel $IP[z]$: a polynomial maps to zero exactly when each coefficient belongs to $I$. Consequently $\\beta_j$ is surjective and has kernel $J_j=IP[z]+(h_jz-1)$. Indeed, a multiple of $g_jz-1$ lifts to a multiple of $h_jz-1$, and its difference from the original polynomial has all coefficients in $I$. Regard $P[z]$ as the polynomial ring over $R$ in $n+1$ variables.",
+   "uses": [
+    "lem-weil-pbc-localization-away-polynomial-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D1 (lemma-lci-local), proof."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-koszul-polynomial-presentation-independence] to the given $\\alpha_j:R[x_1,\\ldots,x_{n_j}]\\twoheadrightarrow S_{g_j}$ and the presentation $\\beta_j$ of Step 2. Its hypothesis on the first kernel is precisely the hypothesis of the item. It follows that $J_j$ is locally Koszul-regular. This application imposes neither flatness nor a Noetherian assumption.",
+   "uses": [
+    "lem-sfb-koszul-polynomial-presentation-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D1 (lemma-lci-local), proof."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q\\subset P$ containing $I$. Some $h_j$ lies outside $\\mathfrak q$: otherwise a relation $1=\\sum_j s_jg_j$ in $S$, lifted coefficient by coefficient to $P$, would imply $1\\in\\mathfrak q$. For this $j$, the ideal $\\mathfrak q'=\\mathfrak q P[z]+(h_jz-1)$ is prime, since its quotient is the nonzero domain $(P/\\mathfrak q)[1/\\overline h_j]$; the inverse-variable quotient is given by [lem-weil-pbc-localization-away-polynomial-quotient]. It contains $J_j$. Unpack Step 3 at this prime to obtain $v\\notin\\mathfrak q'$ and finite Koszul-regular generators for $(J_j)_v$. Apply [lem-sfb-koszul-inverse-equation-elimination] with $A=P$, $h=h_j$, and this witness. It yields $d\\notin\\mathfrak q$ and finite Koszul-regular generators for $IP_d$, exactly the required neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-localization-away-polynomial-quotient",
+    "lem-sfb-koszul-inverse-equation-elimination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D1 (lemma-lci-local), proof."
+   }
+  },
+  {
+   "text": "Step 4 supplies the witnesses at every prime containing $I$, so $I$ is locally Koszul-regular and $\\alpha$ proves the conclusion. If the cover is empty, its unit-ideal hypothesis says $1=0$ in $S$. Then $S=0$, $I=P$, and there are no prime ideals containing $I$; the same condition is vacuous. Zero-variable presentations and empty sequences remain allowed throughout.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07D1 (lemma-lci-local), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-away-polynomial-quotient",
+  "lem-sfb-koszul-polynomial-presentation-independence",
+  "lem-sfb-koszul-inverse-equation-elimination"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07D1 (lemma-lci-local), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A ring map is a local complete intersection if it is so on a finite principal open cover of the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.Locally\", \"module\": \"Mathlib/RingTheory/RingHom/Locally\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Let $R$ and $S$ be commutative rings and $f: R \\\\to S$ a ring homomorphism. For a property $P$ of ring homomorphisms, this proposition holds if there exists a subset $s \\\\subseteq S$ generating the unit\"}\n  {\"name\": \"RingHom.locally_iff_finite\", \"module\": \"Mathlib/RingTheory/RingHom/Locally\", \"type\": \"∀ (P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {R S : Type u}\\n  [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => P) f ↔\\n    ∃ s, ∃ (_ : Ideal.span ↑s = ⊤), ∀ t ∈ s, P ((algebraMap S (Localizati\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is locally $ P $ if and only if there exists a finite set $ s \\\\subset S $ such that the ideal generated by $ s $ is the entire ring $ S $, and for each $ t \\\\in s $,\"}\n  {\"name\": \"RingHom.locally_of_exists\", \"module\": \"Mathlib/RingTheory/RingHom/Locally\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {R S : Type u}\\n  [inst : CommRing R] [inst_1 : CommRing S],\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ (f : R →+* S) {ι : Type u_1} (s : ι → S),\\n      Ideal.span (Set.range s) = ⊤ →\\n\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ and a property $ P $ invariant under ring isomorphisms, if there exists a family of elements $ \\\\{s_i\\\\} $ in $ S $ generating the unit ideal such that for each $\"}\n  {\"name\": \"RingHom.OfLocalizationFiniteSpanTarget\", \"module\": \"Mathlib/RingTheory/LocalProperties/Basic\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) → Prop\", \"doc\": \"This defines the notion of a property $P$ of ring homomorphisms being local on the target. A property $P$ is local on the target if for any homomorphism $f: R \\\\to S$ between commutative rings, $P(f)$ \"}\n  {\"name\": \"RingHom.OfLocalizationFiniteSpan\", \"module\": \"Mathlib/RingTheory/LocalProperties/Basic\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) → Prop\", \"doc\": \"A property $ P $ of ring homomorphisms $ f : R → S $ between commutative rings holds for $ f $ if there exists a finite set $ s ⊆ R $ generating the unit ideal (i.e., $ \\\\langle s \\\\rangle = R $) such t\"}\n  {\"name\": \"RingHom.finitePresentation_isLocal\", \"module\": \"Mathlib/RingTheory/RingHom/FinitePresentation\", \"type\": \"RingHom.PropertyIsLocal @RingHom.FinitePresentation\", \"doc\": \"The property of a ring homomorphism between commutative rings being finitely presented is local, meaning it can be checked after localization at prime ideals or on an open cover.\"}\n  {\"name\": \"RingHom.locally_iff_exists\", \"module\": \"Mathlib/RingTheory/RingHom/Locally\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {R S : Type u}\\n  [inst : CommRing R] [inst_1 : CommRing S],\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ (f : R →+* S),\\n      RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => P)\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ satisfies the local property $ P $ if and only if there exists a family of elements $ \\\\{s_i\\\\} \\\\subset S $ generating the unit ideal (i.e., $ \\\\text{Ideal.span}(\\\\{s_i\"}\n  {\"name\": \"RingHom.finiteType_isLocal\", \"module\": \"Mathlib/RingTheory/RingHom/FiniteType\", \"type\": \"RingHom.PropertyIsLocal @RingHom.FiniteType\", \"doc\": \"The property of a ring homomorphism $ f : A \\\\to B $ having $ B $ as a finitely generated $ A $-algebra is a local property, meaning it can be checked after localization or on an open cover.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Locally and locally_of_exists only encode a local property; they do not prove that existence of a Koszul-regular polynomial presentation descends from a principal cover. Finite-presentation locality is insufficient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of polynomial presentations with locally Koszul regular kernel glues over principal localizations generating the unit ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.Locally\", \"module\": \"Mathlib.RingTheory.RingHom.Locally\", \"type\": \"{R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Let $R$ and $S$ be commutative rings and $f: R \\\\to S$ a ring homomorphism. For a property $P$ of ring homomorphisms, this proposition holds if there exists a subset $s \\\\subseteq S$ generating the unit\"}\n  {\"name\": \"Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.RingHom.FinitePresentation\", \"type\": \"{ι : Type*} (s : ι → S) (hs : Ideal.span (Set.range s) = ⊤) (T : ι → Type*) [∀ i, CommRing (T i)]\\n  [∀ i, Algebra R (T i)] [∀ i, Algebra S (T i)] [∀ i, IsScalarTower R S (T i)] [∀ i, IsLocalization.Away (s i) (T i)]\\n  [∀ i, Algebra.FinitePresentation R (T i)] : Algebra.FinitePresentation R S\", \"doc\": \"If the ideal generated by the elements $ s_i $ in $ S $ equals the entire ring $ S $, and for each $ i $, $ T_i $ is a localization of $ R $ at $ s_i $ with $ T_i $ finitely presented over $ R $, then\"}\n  {\"name\": \"Algebra.FinitePresentation.of_span_eq_top_target\", \"module\": \"Mathlib.RingTheory.RingHom.FinitePresentation\", \"type\": \"(s : Set S) (hs : Ideal.span (s : Set S) = ⊤) (h : ∀ i ∈ s, Algebra.FinitePresentation R (Localization.Away i)) :\\n  Algebra.FinitePresentation R S\", \"doc\": \"If the ideal generated by a set $ s $ in $ S $ equals the entire ring $ S $, and for every element $ i $ in $ s $, the localization of $ S $ away from $ i $ is finitely presented over $ R $, then $ S \"}\n  {\"name\": \"instFinitePresentationLocalizationLocalizedModule\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"(S : Submonoid R) [Module.FinitePresentation R M] : Module.FinitePresentation (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a finitely presented module over a semiring $ R $, then the localization of $ M $ at a submonoid $ S $ of $ R $ is a finitely presented module over the localization of $ R $ at $ S $. This\"}\n  {\"name\": \"RingHom.ker_fg_of_localizationSpan\", \"module\": \"Mathlib.RingTheory.Localization.Finiteness\", \"type\": \"(t : Set R) (ht : Ideal.span t = ⊤) (H : ∀ g : t, (RingHom.ker (Localization.awayMap f g.val)).FG) : (RingHom.ker f).FG\", \"doc\": \"Let $ f : R \\\\to P $ be a ring homomorphism between commutative semirings. Suppose there exists a subset $ t \\\\subseteq R $ such that the ideal generated by $ t $ equals $ R $, and for every element $ g\"}\n  {\"name\": \"RingHom.finitePresentation_holdsForLocalizationAway\", \"module\": \"Mathlib.RingTheory.RingHom.FinitePresentation\", \"type\": \": HoldsForLocalizationAway @FinitePresentation\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism $ R \\to S $ is finitely presented. This means $ S $ is isomorphi\"}\n  {\"name\": \"instFinitePresentationAway\", \"module\": \"Mathlib.RingTheory.Localization.Away.AdjoinRoot\", \"type\": \"{S : Type*} [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S] (f : S) :\\n  Algebra.FinitePresentation R (Localization.Away f)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra, then the localization of $ S $ away from an element $ f $ is also a finitely presented $ R $-algebra. This instance asserts that localizing a commutativ\"}\n  {\"name\": \"Algebra.FinitePresentation.iff_quotient_mvPolynomial'\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \":\\n  FinitePresentation R A ↔\\n    ∃ (ι : Type*) (_ : Fintype ι) (f : MvPolynomial ι R →ₐ[R] A), Surjective f ∧ (RingHom.ker f.toRingHom).FG\", \"doc\": \"A commutative semiring $ R $-algebra $ A $ is finitely presented over $ R $ if and only if there exists a finite set $ \\\\iota $ and a surjective algebra homomorphism $ f : R[\\\\iota] \\\\to A $ such that th\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Locally and locally_of_exists only encode a local property; they do not prove that existence of a Koszul-regular polynomial presentation descends from a principal cover. Finite-presentation locality is insufficient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Locally\", \"Regular\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"instRegularSpaceOfWeaklyLocallyCompactSpaceOfR1Space\", \"module\": \"Mathlib.Topology.Separation.Regular\", \"type\": \" {X : Type u_1} [TopologicalSpace X] [WeaklyLocallyCompactSpace X] [R1Space X] : RegularSpace X\", \"doc\": \"A weakly locally compact R₁ space is regular.\"}\n  {\"name\": \"MeasureTheory.Measure.Regular.of_sigmaCompactSpace_of_isLocallyFiniteMeasure\", \"module\": \"Mathlib.MeasureTheory.Measure.Regular\", \"type\": \" {X : Type u_3} [TopologicalSpace X] [TopologicalSpace.PseudoMetrizableSpace X] [SigmaCompactSpace X] [MeasurableSpace X] [BorelSpace X] (μ : MeasureTheory.Measure X) [MeasureTheory.IsLocallyFiniteMeasure μ] : μ.Regular\", \"doc\": \"Any locally finite measure on a `σ`-compact pseudometrizable space is regular.\"}\n  {\"name\": \"MeasureTheory.Measure.WeaklyRegular.of_pseudoMetrizableSpace_secondCountable_of_locallyFinite\", \"module\": \"Mathlib.MeasureTheory.Measure.Regular\", \"type\": \" {X : Type u_3} [TopologicalSpace X] [TopologicalSpace.PseudoMetrizableSpace X] [SecondCountableTopology X] [MeasurableSpace X] [BorelSpace X] (μ : MeasureTheory.Measure X) [MeasureTheory.IsLocallyFiniteMeasure μ] : μ.WeaklyRegular\", \"doc\": \"Any locally finite measure on a second countable metrizable space\\n(or even a pseudometrizable space) is weakly regular.\"}\n  {\"name\": \"CategoryTheory.regularTopology.isLocallySurjective_sheaf_of_types\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.LocallySurjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Preregular C] [CategoryTheory.FinitaryPreExtensive C] {F G : CategoryTheory.Functor Cᵒᵖ (Type w)} (f : F ⟶ G) [CategoryTheory.Limits.PreservesFiniteProducts F] [CategoryTheory.Limits.PreservesFiniteProducts G] (h : CategoryTheory\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.regularTopology.isLocallySurjective_iff\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.LocallySurjective\", \"type\": \" {C : Type u_1} (D : Type u_2) [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] {FD : D → D → Type u_3} {CD : D → Type w} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [CategoryTheory.ConcreteCategory D FD] [CategoryTheory.Preregular C] {F G : CategoryTheory.Functor Cᵒᵖ D\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Locally and locally_of_exists only encode a local property; they do not prove that existence of a Koszul-regular polynomial presentation descends from a principal cover. Finite-presentation locality is insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ocal[Cc]omplete[Ii]ntersection|[Kk]oszul[Rr]egular|[Kk]oszul.*[Ll]ocal",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Locally and locally_of_exists only encode a local property; they do not prove that existence of a Koszul-regular polynomial presentation descends from a principal cover. Finite-presentation locality is insufficient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski locality on the target of Koszul complete intersection ring homomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.locally_of_exists\", \"module\": \"Mathlib/RingTheory/RingHom/Locally\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {R S : Type u}\\n  [inst : CommRing R] [inst_1 : CommRing S],\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ (f : R →+* S) {ι : Type u_1} (s : ι → S),\\n      Ideal.span (Set.range s) = ⊤ →\\n\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ and a property $ P $ invariant under ring isomorphisms, if there exists a family of elements $ \\\\{s_i\\\\} $ in $ S $ generating the unit ideal such that for each $\"}\n  {\"name\": \"RingHom.Smooth.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The property of a ring homomorphism between commutative rings being smooth (i.e., flat with the module of differentials $\\\\Omega_{S/R}$ locally free of finite rank) is local, meaning it can be checked \"}\n  {\"name\": \"RingHom.Smooth.ofLocalizationSpanTarget\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.OfLocalizationSpanTarget fun {R S} [CommRing R] [CommRing S] => RingHom.Smooth\", \"doc\": \"The canonical ring homomorphism from a ring $ R $ to its localization $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally free of finite rank.\"}\n  {\"name\": \"RingHom.locally_iff_exists\", \"module\": \"Mathlib/RingTheory/RingHom/Locally\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {R S : Type u}\\n  [inst : CommRing R] [inst_1 : CommRing S],\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => P) →\\n    ∀ (f : R →+* S),\\n      RingHom.Locally (fun {R S} [CommRing R] [CommRing S] => P)\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ satisfies the local property $ P $ if and only if there exists a family of elements $ \\\\{s_i\\\\} \\\\subset S $ generating the unit ideal (i.e., $ \\\\text{Ideal.span}(\\\\{s_i\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to its localization at an element $ r $ satisfies the standard smoothness condition, meaning the localization map is standard smooth as de\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RingHom.Locally and locally_of_exists only encode a local property; they do not prove that existence of a Koszul-regular polynomial presentation descends from a principal cover. Finite-presentation locality is insufficient."
+  },
+  {
+   "tool": "grep",
+   "query": "KoszulRegular|Koszul.*[Ll]ocal|[Ll]ocalCompleteIntersection",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide locality definitions, smoothness, or finite-presentation locality, not existence of a polynomial presentation with locally Koszul-regular kernel. No Mathlib Koszul-regularity declaration was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local complete intersection ring map glues from principal localizations of the target",
+   "results": "OK 8 hit(s): Localization.existsUnique_algebraMap_eq_of_span_eq_top, RingHom.locally_iff_finite, RingHom.OfLocalizationFiniteSpanTarget, RingHom.FormallyUnramified.ofLocalizationSpanTarget, RingHom.Smooth.ofLocalizationSpanTarget, PrimeSpectrum.toPiLocalization, RingHom.FormallySmooth.holdsForLocalizationAway, RingHom.PropertyIsLocal.StableUnderCompositionWithLocalizationAwayTarget",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide locality definitions, smoothness, or finite-presentation locality, not existence of a polynomial presentation with locally Koszul-regular kernel. No Mathlib Koszul-regularity declaration was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"Regular\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide locality definitions, smoothness, or finite-presentation locality, not existence of a polynomial presentation with locally Koszul-regular kernel. No Mathlib Koszul-regularity declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of finite polynomial presentations with locally Koszul regular kernel is local on a principal open cover of the target",
+   "results": "OK 8 hit(s): RingHom.finitePresentation_isLocal, Algebra.IsSmoothAt.exists_notMem_isStandardSmooth, RingHom.locally_iff_finite, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, RingHom.finitePresentation_ofLocalizationSpanTarget, RingHom.locally_of_exists, AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.of_basicOpenCover, RingHom.Smooth.propertyIsLocal",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide locality definitions, smoothness, or finite-presentation locality, not existence of a polynomial presentation with locally Koszul-regular kernel. No Mathlib Koszul-regularity declaration was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated algebra with local complete intersection polynomial presentations on a principal cover has a global polynomial presentation whose kernel is locally Koszul regular",
+   "results": "OK 8 hit(s): Algebra.SubmersivePresentation.isStandardSmooth, Algebra.IsStandardSmooth.out, Algebra.FinitePresentation.of_span_eq_top_target, Algebra.IsStandardSmooth.finitePresentation, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsStandardSmooth, Algebra.SubmersivePresentation.ofHasCoeffs, Algebra.Smooth.finitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits provide locality definitions, smoothness, or finite-presentation locality, not existence of a polynomial presentation with locally Koszul-regular kernel. No Mathlib Koszul-regularity declaration was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-syntomic-polynomial-kernel-koszul-regular",
+  "date": "2026-10-24",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, second half, the zero on the left of Jacobi-Zariski for A to B to its strict henselization. Component for the ind-etale left-injectivity argument: Syntomic polynomial presentation kernels are locally Koszul-regular. The target-principal-cover gluing input in the forward proof of Tag 07D3, with Definition 07D0 expanded.",
+   "via": [
+    "lem-sfb-syntomic-polynomial-kernel-koszul-regular",
+    "lem-sfb-ind-etale-jacobi-zariski-left-injective",
+    "lem-sfb-strict-henselization-naive-cotangent",
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-koszul-polynomial-presentation-principal-gluing",
+  "worker": "stage1",
+  "summary": "Read Stacks 07D1 and the invoked local algebra; retained the statement, used the existing presentation-independence and inverse-variable quotient nodes, and isolated the strictly local elimination of one inverse equation as a statement-only node. Verified the zero algebra and empty cover without a Noetherian or flatness assumption.",
+  "blueprint": "The current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), via the supporting alteration and naive-cotangent chain already recorded in blueprint.from.place; the local algebra required by 07D3 is realized by Steps 1-5 following 07D1. tools/blueprint_refs.py ancestor returns None for this legacy chain, retained explicitly rather than inventing an imported ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-f4c6c5ac7",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-f4c6c5ac7 (reviewer sub-agent of L); spot-checked: Read Stacks 07D1 (lemma-lci-local) in full, plus 066A(3), 068M and algebra 08JZ; 08JZ holds for any base ring, so it covers the new node's arbitrary ring A. The statement is unchanged and there is no repair note, so the re-split rule does not apply. Step 2: the kernel of beta_j is IP[z]+(h_j z-1), from the cited Mathlib leaf at R=S, r=g_j and the coefficientwise kernel IP[z]. Step 3: presentation-independence applied to alpha_j and beta_j, both onto S_{g_j}, with the same locally-Koszul-regular definition. Step 4: the lifted unit relation gives some h_j outside q; q' is prime because P[z]/q' is (P/q) localized at the nonzero image of h_j; the new node is applied with A=P, h=h_j and the witness v, and its J and q' match exactly. Step 5: an empty cover forces I=P, so the condition is vacuous. New node lem-sfb-koszul-inverse-equation-elimination is true: J_v finitely generated, 08JZ conormal fibre, Nakayama, e=r+1 by quasi-regularity, 066A, hz-1 a nonzerodivisor so 068M applies, and the quotient is A_d with d outside q. Edge cases I=0, I=A, zero ring and h in q all behave correctly. B1-B7 hold and all four search kinds were run with verdicts. The DAG search for 07D1, 066A, 068M, 08JZ and Koszul plus inverse equation found no duplicate: the trf hits are over a field or Noetherian local, and the pbc hits are about conormal modules. The new node is not a restated clause; the item keeps the presentation construction, the transfer and the chart selection. The citer lem-sfb-syntomic-polynomial-kernel-koszul-regular is consistent with the item. No tool_uses, no SGA, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KoszulPolynomialPresentationPrincipalGluing",
+  "declaration": "Algebra.exists_koszulRegular_polynomial_presentation_of_principal_cover",
+  "file": "lean/Sheaf/RingTheory/KoszulPolynomialPresentationPrincipalGluing.lean",
+  "statement": "theorem exists_koszulRegular_polynomial_presentation_of_principal_cover {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (hfinite : ∃ (N : ℕ) (φ : MvPolynomial (Fin N) R →ₐ[R] S), Function.Surjective φ) (t : ℕ) (g : Fin t → S) (hg : Ideal.span (Set.range g) = ⊤) (hlocal : ∀ j : Fin t, ∃ (n : ℕ) (α : MvPolynomial (Fin n) R →ₐ[R] Localization.Away (g j)), Function.Surjective α ∧ (RingHom.ker α.toRingHom).IsLocallyKoszulRegular) : ∃ (n : ℕ) (α : MvPolynomial (Fin n) R →ₐ[R] S), Function.Surjective α ∧ (RingHom.ker α.toRingHom).IsLocallyKoszulRegular",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a2fa8d63",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Signature matches node clause by clause: Algebra R S at universes u,v; hfinite ∃N surjective MvPolynomial(Fin N) R→ₐS; t:ℕ, g:Fin t→S, span range g=⊤; hlocal per j ∃n surjective α to Localization.Away (g j) with locally Koszul-regular kernel; conclusion the same for S; no Noetherian/flat assumption. New def node def-sfb-locally-koszul-regular-ideal = Stacks 07CV(2): ∀ prime p ⊇ L ∃ u∉p, a:Fin r→T_u, L.map = span range a ∧ IsKoszulRegular a (i≠0 homology, read in KoszulRegularSequence.lean:50); real def, fields complete, import_flags present. No existing DAG/Lean/parallel definition of the notion (only scheme-level IsKoszulImmersion/SchemeLci; siblings and the citer inline the same predicate). Node diff vs side-live: only lean record and the added stmt_dep on the new def. Edge cases t=0 (S=0, vacuous), N=n=r=0 covered. lean.statement verbatim in both files; source/blueprint docstrings; Steps 1-5 in docstring; proof only sorry; report has Worker report and Second reading sections. No recompile per instructions; no findings."
+ }
+}

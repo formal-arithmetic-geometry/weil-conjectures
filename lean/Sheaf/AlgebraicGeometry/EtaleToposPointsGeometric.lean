@@ -9,11 +9,8 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.CategoryTheory.CofilteredSystem
-import Sheaf.AlgebraicGeometry.GeometricStalkToposPoint
+import Sheaf.AlgebraicGeometry.EtaleToposPointStalkReconstruction
+import Sheaf.AlgebraicGeometry.EtaleToposPointComparisonBijective
 
 /-!
 # Every point of the small etale topos is geometric
@@ -93,6 +90,15 @@ theorem etaleToposPoint_isGeometric (S : Scheme.{u})
       (Sheaf S.smallEtaleTopology (Type (u + 1)))) :
     ∃ (Ω : Type u) (_ : Field Ω) (_ : IsAlgClosed Ω) (s : Spec (.of Ω) ⟶ S),
       Nonempty (p.inverse ≅ (pointSmallEtale s).sheafFiber (A := Type (u + 1))) := by
-  sorry
+  -- The geometric steps are split below; reconstruction uses Mathlib density and localization.
+  obtain ⟨Ω, hΩ, hAlg, s, c, hsupport⟩ := exists_etale_point_comparison S p
+  let : Field Ω := hΩ
+  let : IsAlgClosed Ω := hAlg
+  have hc := etale_point_comparison_bijective S p Ω s c hsupport
+  have : ∀ U : S.Etale, IsIso (c.app U) := fun U ↦
+    (isIso_iff_bijective (c.app U)).mpr (hc U)
+  have : IsIso c := NatIso.isIso_of_isIso_app c
+  exact ⟨Ω, hΩ, hAlg, s,
+    etale_point_fiber_iso_to_stalk S p Ω s ⟨(asIso c).symm⟩⟩
 
 end AlgebraicGeometry.Scheme

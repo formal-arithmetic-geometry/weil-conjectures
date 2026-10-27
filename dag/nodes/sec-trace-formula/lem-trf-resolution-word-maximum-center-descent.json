@@ -1,0 +1,277 @@
+{
+ "id": "lem-trf-resolution-word-maximum-center-descent",
+ "kind": "statement",
+ "title": "Etale descent and coherent geometry of normalized-word maximum centers",
+ "statement": "Over $\\mathbf Q$, let $X\\hookrightarrow P$ be a closed embedding with $X$ reduced and $P$ smooth, separated and of finite type [def-weil-closed-immersion, def-pc-reduced-scheme, def-sbc-smooth-morphisms, def-weil-proper-morphism, def-weil-finite-type-morphism]. Fix the simultaneous normalized word assignment of [lem-trf-normalized-resolution-word-gluing]: $w_H(x)=\\bot$ at regular points and $w_H(x)=(A_x,t_x)$ otherwise, where $A_x=(c_x,\\Delta^{q_x}h_x)$ is the normalized local Hilbert--Samuel head and $t_x$ is the marked-ideal word with its leading $1$ removed. Let $H$ be any finite admissible history for this assignment [def-trf-admissible-embedded-history]. Suppose its current ambient scheme $P_H$ is smooth, separated and of finite type and its strict transform $X_H$ is reduced. If $X_H$ is nonregular, let $m>\\bot$ be the greatest value of $w_H$ and put $T=\\{x:w_H(x)=m\\}$.\n\nThe reduced induced closed subscheme $M=T_{\\mathrm{red}}\\hookrightarrow X_H$ is nonempty and regular [lem-weil-pbc-reduced-induced-closed-subscheme, def-weil-regular-scheme]. More precisely, on etale neighbourhoods carrying the local Hilbert--Samuel presentations, its scheme-theoretic pullback is the smooth full-maximum center of the presenting marked-ideal word; these local centers have normal crossings with the ordered exceptional data [def-weil-etale-morphism, lem-trf-hilbert-samuel-local-presentations, lem-trf-marked-ideal-numerical-resolution-engine]. The closed set $T$ meets no regular point and contains no irreducible component of $X_H$; in particular it contains no nonempty open subset. The ideals defining $M$ in both $X_H$ and $P_H$ are coherent [pqf-def-coherent]. The local center identifications concern the reduced ideal structures, not only their underlying point sets.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11, p.93; etale descent of the full maximum center, old step 3 and the Noetherian coherence part of step 4. Supporting Stacks Tags 02GO (morphisms.tex lemma-base-change-etale), 033B (algebra.tex lemma-reduced-goes-up), 00FN (algebra.tex lemma-Noetherian-permanence), 00FP (algebra.tex lemma-Noetherian-finite-type-is-finite-presentation)."
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-trf-admissible-embedded-history",
+  "def-weil-regular-scheme",
+  "lem-trf-normalized-resolution-word-gluing",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-etale-morphism",
+  "lem-trf-hilbert-samuel-local-presentations",
+  "lem-trf-marked-ideal-numerical-resolution-engine",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "The current ambient is locally Noetherian by its finite-type map to Spec Q [lem-weil-pbc-finite-type-over-noetherian]. Its closed strict transform and all reduced closed subschemes are locally Noetherian by quotient permanence [def-weil-closed-immersion, lem-weil-pbc-surjective-image-noetherian]. A nonregular stage therefore has a point with nonregular stalk. The finite image, closed upper levels and bottom characterization in [lem-trf-normalized-resolution-word-gluing] give a greatest attained value m strictly above bottom. Its equality set is the closed m-upper level. The reduced induced structure is nonempty by its range formula [lem-weil-pbc-reduced-induced-closed-subscheme].",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-trf-normalized-resolution-word-gluing",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-trf-resolution-word-local-maximum-models] to this specified m and T. The resulting local extensions give exactly the required reduced smooth normal-crossings centers and cartesian squares. The final intrinsic map is etale since it is the chart etale map composed with the isomorphism transporting its last index [def-weil-etale-morphism].",
+   "uses": [
+    "lem-trf-resolution-word-local-maximum-models",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any z in the reduced center use the range formula to put its image in T. A chart supplied by the preceding step contains a specified lift of that image: the pointed-chart equation, followed by the final-index transport, is the identity stage map. Surjectivity of scheme points onto a fiber product gives a point w of the local smooth center mapping to z. The map from that center to the reduced global center is etale by base change [lem-weil-pbc-etale-scheme-base-change], hence flat [def-weil-flat-morphism]. Its source is regular by [lem-weil-pbc-smooth-scheme-over-field-regular]. On stalks apply [lem-weil-pbc-flat-under-regular], using the already established local Noetherianity of the target. Thus the global center is regular [def-weil-regular-scheme].",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-weil-pbc-flat-under-regular",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib isField_stalk_of_closure_mem_irreducibleComponents says directly that every component generic stalk of a reduced scheme is a field, hence regular. The bottom characterization and positivity of m exclude these points from T. Each component contains its generic point, so none is contained in T. Generic points are dense (Mathlib genericPoints.closure); hence the complement of T is dense and the interior of T is empty. This replaces the detour through the Serre criterion.",
+   "uses": [
+    "lem-trf-normalized-resolution-word-gluing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For every ideal sheaf on a locally Noetherian scheme the adopted source library already proves Scheme.Modules.isQuasicoherent_toModules and Scheme.Modules.isFinitePresentation_toModules in Modules.HilbertPolynomial. In particular both the intrinsic vanishing ideal and the kernel of its composite immersion into the ambient scheme are quasi-coherent and finite type. The equivalence [pqf-lem-coherent-ft-locnoeth] proves their coherence directly.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-trf-normalized-resolution-word-gluing",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-trf-resolution-word-local-maximum-models",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-flat-under-regular",
+  "def-weil-regular-scheme",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 2.3.11 and 2.3.13, pp.93--94; local comparison remains isolated in lem-trf-resolution-word-local-maximum-models. Finite maxima, flat-local regularity descent, generic-point density and coherence are assembled explicitly in Lean by N3 on 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "maximum.*strat|resolution.*center|desingulari",
+   "results": "{\"t\": \"2026-10-22T06:15:07Z\", \"tool\": \"grep\", \"query\": \"maximum.*strat|resolution.*center|desingulari\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-resolution-word-maximum-center-descent: Descent of smooth resolution centers from etale charts, reduced maximum locus with coherent defining ideal",
+   "results": "{\"t\": \"2026-10-22T06:15:07Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-resolution-word-maximum-center-descent: Descent of smooth resolution centers from etale charts, reduced maximum locus with coherent defining ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"Algebra.smoothLocus\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\"], \"digest\": \"d80d526c6062a933\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-22T06:15:07Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-resolution-word-maximum-center-descent: Reduced maximum stratum of a desingularization invariant descends from smooth etale local marked ideal centers to a regular nowhere dense closed subscheme with coherent ideals",
+   "results": "{\"t\": \"2026-10-22T06:15:19Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-resolution-word-maximum-center-descent: Reduced maximum stratum of a desingularization invariant descends from smooth etale local marked ideal centers to a regular nowhere dense closed subscheme with coherent ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.etaleLocus\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"cda1873b6c7b9b1e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\"",
+   "results": "{\"t\": \"2026-10-22T06:17:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"Hilbert\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Metric.PiNatEmbed.exists_embedding_to_hilbert_cube\", \"HilbertSpace\", \"HilbertSpace.mk\", \"HilbertBasis\", \"HilbertBasis.instFunLike\", \"HilbertBasis.toOrthonormalBasis\", \"HilbertBasis.toSchauderBasis\", \"HilbertBasis.toUnconditionalSchauderBasis\"], \"digest\": \"a29075003a41958e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures concern general smoothness, descent, group or homological words, Hilbert spaces or unrelated termination; none states this normalized Hilbert--Samuel/marked-ideal assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "HilbertSamuel|desingulari|maximum.*center|marked.*ideal",
+   "results": "{\"t\": \"2026-10-23T09:29:15Z\", \"tool\": \"grep\", \"query\": \"HilbertSamuel|desingulari|maximum.*center|marked.*ideal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results concern general reduced schemes, smooth or etale loci, not Hilbert--Samuel or marked-ideal maximum centers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced maximum stratum of a Hilbert Samuel resolution invariant is a regular closed subscheme with coherent ideal and etale local smooth centers",
+   "results": "{\"t\": \"2026-10-23T09:29:15Z\", \"tool\": \"leansearch\", \"query\": \"A reduced maximum stratum of a Hilbert Samuel resolution invariant is a regular closed subscheme with coherent ideal and etale local smooth centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.IsReduced.of_openCover\", \"AlgebraicGeometry.IsReduced.casesOn\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.IsReduced.recOn\", \"AlgebraicGeometry.IsReduced.mk\"], \"digest\": \"8791923ca805c2e0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results concern general reduced schemes, smooth or etale loci, not Hilbert--Samuel or marked-ideal maximum centers"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsRegular, AlgebraicGeometry.Etale",
+   "results": "{\"t\": \"2026-10-23T09:29:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsRegular, AlgebraicGeometry.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsRegular'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Loogle rejected the project-only name AlgebraicGeometry.IsRegular; semantic searches and source grep cover the item independently"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal locus of a desingularization invariant descends from etale local marked ideal maximum centers",
+   "results": "{\"t\": \"2026-10-23T09:29:26Z\", \"tool\": \"leanfinder\", \"query\": \"The maximal locus of a desingularization invariant descends from etale local marked ideal maximum centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsEtaleAt\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"18329c6fdff3ecff\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results concern general reduced schemes, smooth or etale loci, not Hilbert--Samuel or marked-ideal maximum centers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert Samuel function desingularization smooth maximal invariant stratum",
+   "results": "{\"t\": \"2026-10-23T09:29:56Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert Samuel function desingularization smooth maximal invariant stratum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.smoothLocus\", \"Algebra.smoothLocus_eq_univ_iff\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"Algebra.mvPolynomial\", \"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"Algebra.smoothLocus_comap_of_isLocalization\"], \"digest\": \"593d9ee5e71506e5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected results concern general reduced schemes, smooth or etale loci, not Hilbert--Samuel or marked-ideal maximum centers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Re-split: ILO VIII 2.3.11, p.93; etale descent of the full maximum center, old step 3 and the Noetherian coherence part of step 4. Supporting Stacks Tags 02GO (morphisms.tex lemma-base-change-etale), 033B (morphisms.tex lemma-etale-over-reduced), 00FN (algebra.tex lemma-Noetherian-permanence), 00FP (algebra.tex lemma-Noetherian-finite-type-is-finite-presentation).",
+   "via": [
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-resolution-word-maximum-center-descent",
+  "worker": "stage1",
+  "summary": "Split into seven explicit steps using existing normalized-head/presentation/marked-word inputs, etale reduced-structure uniqueness, flat-local regularity descent, generic regularity, and affine Noetherian ideal coherence. No new nodes and no statement change. Removed two transitive statement dependencies; retained all imported metadata and historical searches.",
+  "blueprint": "Historical resolution branch of lem-trf-local-term-locality proof (1)--(2), via the existing ancestor chain: ILO VIII 2.3.11 maximum-center part, old invariant-calculus step 3 and coherence in step 4. Current latest blueprint uses contracting correspondences instead; this split only discharges the assigned historical descendant.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic reduced induced closed subscheme structure on a closed subset: existence and uniqueness used as stated in the maximum-center proof; no node of this unit provides this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-sc-smooth-algebra-reduced-field",
+    "why": "Generic a smooth algebra over a field is reduced used as stated in the maximum-center proof; no node of this unit provides this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic a scheme smooth over a field is regular used as stated in the maximum-center proof; no node of this unit provides this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-under-regular",
+    "why": "Generic regularity descends along flat local homomorphisms used as stated in the maximum-center proof; no node of this unit provides this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-serre-criterion-reduced",
+    "why": "Generic serre's criterion for reducedness: reduced iff (r_0) and (s_1) used as stated in the maximum-center proof; no node of this unit provides this algebraic-geometric tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic coherence on locally noetherian schemes used as stated in the maximum-center proof; no node of this unit provides this algebraic-geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-smooth-algebra-reduced-field",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-flat-under-regular",
+  "lem-weil-pbc-serre-criterion-reduced",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-f81894dc8",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-f81894dc8 (reviewer sub-agent of L); spot-checked: Ordinary one-level split of a statement-only node created by Q153's re-split (no repair note on this item, so the re-split rules do not apply). Statement, source and blueprint are unchanged from the Q153 snapshot; the dropped stmt_deps (nagata blowup and strict transform) reach the statement through def-trf-admissible-embedded-history, accepted as advisory. Steps checked against each cited statement. (1) P_H is Noetherian as finite type over Spec Q (01T6) and quotients stay Noetherian (00FN). (2) Finite image, closed upper level sets and bottom only at regular points (gluing statement) give a greatest m>bottom and a nonempty closed T disjoint from the regular locus. (3) Removing larger heads by upper semicontinuity and comparing the engine word (1,t_y) with the global maximum makes the engine's full maximum set exactly the preimage of T; the engine gives a smooth center with normal crossings, with no termination used. (4) Reduced pullback along etale maps (first clause of lem-trf-etale-reduced-cartier-descent), C_a reduced, and the factorization through U by vanishing in reduced rings give scheme equality through reduced-induced uniqueness, also in P_H. (5) The smooth center is regular, the etale base change is flat, both stalks are Noetherian, and flat-under-regular (00OF) gives M regular. (6) Serre reduced implies R_0 (031R) puts generic points outside T; the open-set argument is right. (7) Ideals are quasi-coherent, of finite type and coherent (01XZ) in X_H and P_H. ILO VIII 2.3.11 (p.93) and 2.3.12(ii) (p.94) were read: regular centers in the singular locus; proof_origin agent with BMT WANTED is correct. Small cases checked: empty or regular X_H, node xy=0, a chart missing T, point components. No new nodes and no cycle (1519-node walk); the one missing id is deep in the base closure, not from this delivery. No SGA. The six declared tool_uses are generic and accepted. Advisory: the inherited blueprint.from.place names 033B with the wrong TeX label. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ResolutionWordMaximumCenterDescent",
+  "declaration": "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_maximum_center_descent",
+  "declarations": [
+   "AlgebraicGeometry.EmbeddedResolutionHistory.ResolutionWordChart.finalMap",
+   "AlgebraicGeometry.EmbeddedResolutionHistory.resolution_word_maximum_center_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionWordMaximumCenterDescent.lean",
+  "statement": "theorem resolution_word_maximum_center_descent (R : MarkedIdeal.NumericalResolution.{u}) (ν : ValueFamily.{u} HilbertSamuel.ResolutionWord) (hν : ∀ {B : EmbeddedResolutionPair.{u}} {k : ℕ} (G : EmbeddedResolutionHistory B k), Admissible ν G → (∀ x : G.X, ¬ IsRegularLocalRing (G.X.presheaf.stalk x) → Nonempty (ResolutionWordChart R G x)) ∧ (∀ (x : G.X) (C : ResolutionWordChart R G x), (R.value C.history ⟨C.supportPoint, C.cosupport⟩).head? = some (MarkedIdeal.rational 1) ∧ ν G x = C.word) ∧ (Set.range (ν G)).Finite ∧ (∀ v : HilbertSamuel.ResolutionWord, IsClosed {x : G.X | v ≤ ν G x}) ∧ (∀ x : G.X, ν G x = ⊥ ↔ IsRegularLocalRing (G.X.presheaf.stalk x)) ∧ ∀ (D : ℕ) (_hD : topologicalKrullDim G.X ≤ (D : WithBot ℕ∞)) (x y : G.X), (HilbertSamuel.sumResolutionWord D (ν G x) ≤ HilbertSamuel.sumResolutionWord D (ν G y) ↔ ν G x ≤ ν G y) ∧ (HilbertSamuel.sumResolutionWord D (ν G x) = HilbertSamuel.sumResolutionWord D (ν G y) ↔ ν G x = ν G y)) {A : EmbeddedResolutionPair.{u}} {n : ℕ} (H : EmbeddedResolutionHistory A n) (hH : Admissible ν H) (hP : Smooth H.base ∧ IsSeparated H.base ∧ LocallyOfFiniteType H.base ∧ QuasiCompact H.base) (hX : IsReduced H.X) (hNR : ¬ IsRegularScheme H.X) : ∃ (m : HilbertSamuel.ResolutionWord) (T : TopologicalSpace.Closeds H.X), IsGreatest (Set.range (ν H)) m ∧ ⊥ < m ∧ (T : Set H.X) = {x | ν H x = m} ∧ Nonempty (Scheme.IdealSheafData.vanishingIdeal T).subscheme ∧ IsRegularScheme (Scheme.IdealSheafData.vanishingIdeal T).subscheme ∧ (∀ x ∈ T, ¬ IsRegularLocalRing (H.X.presheaf.stalk x)) ∧ (∀ Z ∈ irreducibleComponents H.X, ¬ Z ⊆ (T : Set H.X)) ∧ interior (T : Set H.X) = ∅ ∧ RingedSpace.IsCoherent H.X.toRingedSpace (Scheme.IdealSheafData.vanishingIdeal T).toModules ∧ RingedSpace.IsCoherent H.P.toRingedSpace ((Scheme.IdealSheafData.vanishingIdeal T).subschemeι ≫ H.inclusion.app (op (Fin.last n))).ker.toModules ∧ (∀ x ∈ T, ∃ C : ResolutionWordChart R H x, Etale C.finalMap ∧ ∃ (K : MarkedIdeal.History (C.length + 1)) (E : MarkedIdeal.Extension C.history K), MarkedIdeal.IsMaximumStep R.value E ∧ IsReduced (K.step (Fin.last C.length)).step.center.subscheme ∧ Smooth (E.centerMap ≫ C.history.last.marked.j ≫ C.history.last.ambient.p) ∧ HasAdaptedNormalCrossingsCenter (E.centerMap ≫ C.history.last.marked.j).ker (fun i ↦ C.history.last.ambient.boundary.get i) ∧ ∃ i : (K.step (Fin.last C.length)).step.center.subscheme ⟶ C.history.last.ambient.X, IsClosedImmersion i ∧ i ≫ C.history.last.ambient.i = E.centerMap ≫ C.history.last.marked.j ∧ i.ker = (Scheme.IdealSheafData.vanishingIdeal T).comap C.finalMap ∧ ∃ c : (K.step (Fin.last C.length)).step.center.subscheme ⟶ (Scheme.IdealSheafData.vanishingIdeal T).subscheme, IsPullback i c C.finalMap (Scheme.IdealSheafData.vanishingIdeal T).subschemeι)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0130bb4a6",
+  "group": "NE",
+  "result": "pass",
+  "note": "Read item node, report (Worker report + Second reading by NE present), module, and the exact declarations used: ResolutionWordChart, normalized_resolution_word_gluing, EmbeddedResolutionHistory (X/P/base/inclusion/Admissible), MarkedIdeal History/Extension/centerMap/maximumLocus/IsMaximumStep, HasAdaptedNormalCrossingsCenter, reduced_induced_closed_subscheme/vanishingIdeal, RingedSpace.IsCoherent (recorded in pqf-def-coherent). hν is verbatim the gluing witness predicate, which pins ν (⊥ iff regular, ν=C.word on every chart, charts exist at singular points), so ν is not an arbitrary map. Hypotheses on P_H/X_H are exactly smooth, separated, LOFT+QC (finite type) over Q, reduced, nonregular; no stronger assumptions; single universe u. Conclusions cover: greatest m>⊥; closed T; M=vanishingIdeal T nonempty and regular; no regular point in T; no irreducible component in T; empty interior; coherent ideals in X_H and P_H (kernel of the composite to P_H); for each x∈T an étale chart with an IsMaximumStep whose center is reduced, smooth, ANC with the ordered boundary, ideal equal to the comap of M's ideal, and a cartesian square (i and c are monos, so unique). finalMap helper is real data. lean.statement is verbatim in the file; node unchanged vs live except lean; not superseded (no live lean record, no importers); all 19 imports resolve; sorry only. Edge cases: empty/regular X_H excluded by hNR; n=0 included; no equidimensionality. No compile, since no file changed. Advisories: per-point ∃ chart (matches proof step 3), not ∀ chart; Etale finalMap clause is redundant; second reading is the author's own pass."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261026T092122-L-3402027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

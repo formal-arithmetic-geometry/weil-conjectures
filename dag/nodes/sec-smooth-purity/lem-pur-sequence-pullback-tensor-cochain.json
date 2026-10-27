@@ -1,0 +1,329 @@
+{
+ "id": "lem-pur-sequence-pullback-tensor-cochain",
+ "kind": "statement",
+ "title": "Unit-normalized coherent pullback tensor cochain comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and schemes in a universe $u$ [def-pc-scheme]. For a scheme $W$, use its small pro-etale ringed sequence site $\\mathbf N\\times W_{\\mathrm{proet}}$, whose index $n\\geq0$ means $B_{W,n}=(\\mathcal O_E/\\varpi^{n+1})_W$, with actual quotient ring maps; put $A_W=\\lim_nB_{W,n}$ and let $\\mathscr S_W$ be its category of module sheaves, equivalently strict quotient-semilinear systems [def-coef-ringed-sequence-site]. Write $e_{W,n}$ for exact evaluation, $\\operatorname{Res}_{W,n}$ for restriction along $A_W\\to B_{W,n}$ and $U_W:\\mathscr S_W\\to\\operatorname{Tow}(\\operatorname{Mod}(A_W))$ for their simultaneous exact scalar restriction. Use ordinary unbounded integer-indexed cochain and derived categories, with localization $q_W$ for $A_W$-modules, $q^s_W$ for sequence modules and $q^t_W$ for towers [def-weil-abstract-derived-category]. Use the fixed derived adjunction $\\mathcal R_W\\dashv\\mathcal L_W$, with $\\mathcal L_W=R\\lim\\circ D(U_W)$, and the specified derived tensor and cochain tensor models on the sequence site [lem-coef-derived-system-evaluation-calculus]. A good integral complex is K-flat with flat terms; K-flat means that its direct-sum total tensor with every acyclic module complex is acyclic [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. All comparisons below use the actual chosen adjunctions, not arbitrary isomorphisms between their objects. No boundedness, constructibility, completeness of inputs, or invertibility of $\\ell$ on the schemes is assumed. For a scheme morphism $f:X\\to Y$, let $b_f$ on sequence sites be $(n,V)\\mapsto(n,X\\times_Y V)$. Its ring map is the actual constant-section coefficient map at every $n$; let $f^s_*:\\mathscr S_X\\to\\mathscr S_Y$ be its module direct image, $F_f:\\mathscr S_Y\\to\\mathscr S_X$ its specified left adjoint, $\\eta^f$ the unit, and $D_f=D(F_f)$ the exact induced derived inverse image [def-trf-integral-comparison-sequence-systems]. Finite module pullback $f_n^*$ is equipped with its actual adjunction unit. The direct-image/evaluation comparison is identity on sections; the fixed inverse-image/evaluation isomorphism $v_{f,n}:f_n^* e_{Y,n}\\xrightarrow{\\sim}e_{X,n}F_f$ is its inverse mate under the specified finite and sequence adjunctions. Let $\\operatorname{Tot}_W$ be the ordinary direct-sum total tensor of unbounded sequence complexes, with the usual signed cochain differential. There exists a unique natural isomorphism\n$$z_f:F_f^c\\operatorname{Tot}_Y(-,-)\\xrightarrow{\\sim}\\operatorname{Tot}_X(F_f^c(-),F_f^c(-))$$\nwith the following formula. For any sequence complexes $P,Q$, integers $p,q,k$ with $p+q=k$, object $V=(n,U)$ of the source sequence site, and sections $x\\in P^p(V)$, $y\\in Q^q(V)$, write $g_{p,q,k,V}(x,y)$ for the pure-tensor generator followed by its total-summand injection, and $\\eta^f$ for the actual ordinary sequence adjunction unit on that degree module. Then\n$$z^k_{f,P,Q}(b_fV)\\bigl(\\eta^f_{\\operatorname{Tot}_Y(P,Q)^k,V}(g_{p,q,k,V}(x,y))\\bigr)\n=g_{p,q,k,b_fV}(\\eta^f_{P^p,V}(x),\\eta^f_{Q^q,V}(y)).$$\nThe quantifiers include all unbounded complexes and all degrees; no flatness or K-flatness is assumed. This is pullbackTensorSequenceCochain_existsUnique, including naturality, invertibility and uniqueness of the whole cochain natural isomorphism, not only a degreewise module isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03EL (sites-modules.tex, lemma-tensor-product-pullback), Tag 07A4 (lemma-pullback-tensor-product, final total-complex comparison); prescribed adjunction-unit tensor-generator normalization.",
+  "lean_module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "lean_file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+  "lean_line": 352,
+  "declaration": "WeilConjectures.pullbackTensorSequenceCochain_existsUnique"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-trf-integral-comparison-sequence-systems"
+ ],
+ "proof": [
+  {
+   "text": "Put $C_W=\\mathbf N\\times W_{\\mathrm{proet}}$ and $F=F_f$. Check the site hypotheses before using an ordinary tensor theorem. A sequence-site sheaf is precisely a presheaf whose restriction to each vertical slice is a sheaf, since the covering sieves are defined slice by slice. Thus precomposition by $b_f=\\mathrm{id}_{\\mathbf N}\\times u_f$ preserves sheaves: on every slice it is the pro-etale direct image. This proves continuity. The functor $u_f$ preserves terminal objects and pullbacks, hence finite limits. For each $T\\in X_{\\mathrm{proet}}$, the category of arrows $T\\to u_f(V)$ is cofiltered: for any finite diagram take the limit of its $V$'s and the induced arrow from $T$; the empty diagram uses the terminal object. For $(n,T)\\in C_X$, the category of arrows $(n,T)\\to b_f(m,V)$ is the product of this category with $(n\\downarrow\\mathrm{id}_{\\mathbf N})$. The latter has initial object $(n,\\mathrm{id})$. Choose cones in the two factors to obtain a cone on any finite diagram in the product. This is exactly representable flatness of $b_f$. The sites and all these indices are small in the stipulated module universe.",
+   "uses": [
+    "def-coef-ringed-sequence-site",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5, section-morphism; vertical sequence topology of def-coef-ringed-sequence-site; explicit finite-cone verification"
+   }
+  },
+  {
+   "text": "Use the sequence ring sheaves $R_Y,R_X$ and their specified constant-section structural map $R_Y\\to (b_f)_*R_X$. The module direct image is exactly $f^s_*$, with scalar restriction through that map, and $F\\dashv f^s_*$ is the specified additive adjunction. Apply the ordinary tensor clause of [lem-sf-site-pullback-tensor-generators] to these sites, rings and this very adjunction. It gives isomorphisms $\\mu_{M,N}:F(M\\otimes_{R_Y}N)\\xrightarrow{\\sim}FM\\otimes_{R_X}FN$, natural in both module sheaves. Taking the restricted generator with arrow $\\mathrm{id}_{b_fV}$ and coefficient $1$ in that theorem gives\n$$\\mu_{M,N,b_fV}\\bigl(\\eta^f_{M\\otimes N,V}(x\\otimes y)\\bigr)=\\eta^f_{M,V}(x)\\otimes\\eta^f_{N,V}(y).$$\nNo choice of a different adjunction or of a finite-evaluation identification enters this application. Only the ordinary tensor clause is used; the theorem's additional K-flat conclusion is unnecessary.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-sf-site-pullback-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, with the actual-adjunction normalization in lem-sf-site-pullback-tensor-generators"
+   }
+  },
+  {
+   "text": "For fixed arbitrary $P,Q$ let $B^{p,q}=P^p\\otimes_{R_Y}Q^q$, with its two commuting differentials. For each $k$ the diagonal set $\\{(p,q)\\in\\mathbf Z^2:p+q=k\\}$ is small; its coproduct exists by the total-tensor definition. Since $F$ is a left adjoint, [lem-weil-pbc-left-adjoint-preserves-colimits] shows that it preserves each of these coproducts. Apply [lem-sfb-left-resolution-map-total-iso] to this bicomplex and the additive functor $F$. It gives a natural chain isomorphism\n$$a_B:\\operatorname{Tot}(FB)\\xrightarrow{\\sim}F^c\\operatorname{Tot}(B),\\qquad a_B^k\\iota^{FB}_{p,q}=F(\\iota^B_{p,q}).$$\nIts inverse therefore satisfies $(a_B^k)^{-1}F(\\iota^B_{p,q})=\\iota^{FB}_{p,q}$. The cited result applies to all integer-indexed bicomplexes with these diagonal coproducts; no finite diagonal or boundedness assumption has been introduced.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-left-resolution-map-total-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, final total-complex comparison; explicit totalization naturality in the cited mapTotalIso result"
+   }
+  },
+  {
+   "text": "Naturality of $\\mu$ with the two differentials gives\n$$\\mu_{P^{p+1},Q^q}F(d_P^p\\otimes1)=(Fd_P^p\\otimes1)\\mu_{P^p,Q^q},\\qquad \\mu_{P^p,Q^{q+1}}F(1\\otimes d_Q^q)=(1\\otimes Fd_Q^q)\\mu_{P^p,Q^q}.$$\nThus the direct sum of the $\\mu_{P^p,Q^q}$ is a chain map $m:\\operatorname{Tot}(FB)\\to\\operatorname{Tot}(F^cP\\otimes F^cQ)$: multiply the second displayed equality by $(-1)^p$ and add the first. The direct sum of their inverses is its inverse, since the two composites restrict to the identity on every coproduct summand. The same calculation with a pair of chain maps, using module naturality of $\\mu$, proves naturality of $m$ in $P,Q$. Define $z_{f,P,Q}=m\\circ a_B^{-1}$; the naturality of $a_B$ and $m$ makes this a natural isomorphism of the two cochain bifunctors in the statement. In every degree it satisfies\n$$z^k_{f,P,Q}\\,F(\\iota^B_{p,q})=\\iota'_{p,q}\\mu_{P^p,Q^q}.$$\nEvery operation takes place in module sheaves on the entire sequence site, so these are also morphisms for all horizontal restrictions.",
+   "uses": [
+    "lem-sf-site-pullback-tensor-generators",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, constituents of the final comparison; both signed differential summands written explicitly"
+   }
+  },
+  {
+   "text": "Write $t_{p,q}(x,y)$ for the pure tensor before its total-summand injection. Naturality of the actual unit for the module map $\\iota^B_{p,q}$ gives\n$$\\eta^f_{\\operatorname{Tot}(P,Q)^k,V}(\\iota^B_{p,q}t_{p,q}(x,y))=F(\\iota^B_{p,q})_{b_fV}\\bigl(\\eta^f_{P^p\\otimes Q^q,V}(t_{p,q}(x,y))\\bigr).$$\nApply the summand identity from step 4 and then the unit formula from step 2. The result is $\\iota'_{p,q}(\\eta^f_{P^p,V}(x)\\otimes\\eta^f_{Q^q,V}(y))$, which is exactly the displayed generator $g_{p,q,k,b_fV}$ in the statement. This proves the required equation for every integer triple and every site object, including the first quotient level.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-sf-site-pullback-tensor-generators",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, ordinary unit normalization, composed with total-summand injections"
+   }
+  },
+  {
+   "text": "Let $e$ be any other natural cochain isomorphism satisfying the required equation. Fix $P,Q,k$ and transpose $e^k$ and $z^k$ under the specified $F\\dashv f^s_*$; their transposes are $(f^s_*e^k)\\eta^f$ and $(f^s_*z^k)\\eta^f$, maps from $\\operatorname{Tot}_Y(P,Q)^k$ to $f^s_*\\operatorname{Tot}_X(F^cP,F^cQ)^k$. The normalization says these maps agree on every pure tensor followed by every summand injection, at every $V$. On one summand, precompose with the presheaf-to-sheaf tensor unit. The resulting linear maps on $P^p(V)\\otimes_{R_Y(V)}Q^q(V)$ agree because pure tensors generate the algebraic tensor product. The uniqueness in module sheafification then gives equality on the sheaf tensor summand. The coproduct universal property gives equality of the transposes on the entire degree. Injectivity of the adjunction bijection yields $e^k=z^k$. This holds for all $k,P,Q$, so their chain maps, natural transformations and isomorphisms agree. This proves uniqueness of the whole natural cochain isomorphism.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-category-colimit",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, section-tensor-product, and Tag 03CY, lemma-sheafification-presheaf-modules; adjunction transpose and coproduct universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-proetale-inverse-image",
+  "lem-sf-site-pullback-tensor-generators",
+  "lem-sfb-left-resolution-map-total-iso",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final ordinary total-complex comparison, using Tag 03EL; explicit extension to arbitrary unbounded complexes and uniqueness for the prescribed adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|tensor.*[Pp]ullback",
+   "results": "{\"t\": \"2026-10-27T06:10:11Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Tt]ensor|tensor.*[Pp]ullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/CategoryTheory/Dialectica/Monoidal.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\"], \"digest\": \"72673bfb21dab969\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "{\"t\": \"2026-10-27T06:10:11Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackId\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackIso\"], \"digest\": \"646c13e3272a1a2c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary inverse image on coherent sequence sheaf module complexes commutes with total tensor uniquely by the adjunction unit pure tensor formula",
+   "results": "{\"t\": \"2026-10-27T06:10:12Z\", \"tool\": \"leansearch\", \"query\": \"Ordinary inverse image on coherent sequence sheaf module complexes commutes with total tensor uniquely by the adjunction unit pure tensor formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"CategoryTheory.Sheaf.adjunction_unit_app_val\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"4eac509895b158e0\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary inverse image on coherent sequence sheaf module complexes commutes with total tensor uniquely by the adjunction unit pure tensor formula",
+   "results": "{\"t\": \"2026-10-27T06:10:17Z\", \"tool\": \"leanfinder\", \"query\": \"Ordinary inverse image on coherent sequence sheaf module complexes commutes with total tensor uniquely by the adjunction unit pure tensor formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\"], \"digest\": \"408ad62c426948bd\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ringed site inverse image carries total cochain tensor to tensor of inverse images preserving the unit sections and Koszul differential",
+   "results": "{\"t\": \"2026-10-27T06:10:18Z\", \"tool\": \"leanfinder\", \"query\": \"A ringed site inverse image carries total cochain tensor to tensor of inverse images preserving the unit sections and Koszul differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\"], \"digest\": \"711b207459fa5f1c\"}",
+   "date": "2026-10-27",
+   "verdict": "No exact match: general categorical/module tools do not state the prescribed sequence-site operations and full normalization equation."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Tt]ensor|[Tt]ensor.*pullback",
+   "results": "{\"t\": \"2026-10-27T06:46:25Z\", \"tool\": \"grep\", \"query\": \"pullback.*[Tt]ensor|[Tt]ensor.*pullback\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean\", \"Mathlib/CategoryTheory/Dialectica/Monoidal.lean\"], \"digest\": \"4f6a41791ba7a501\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected the returned declarations; the sheaf pullback, free-module unit, direct-sum tensor and HomologicalComplex tensor tools do not state the full sequence-site cochain natural isomorphism with its specified adjunction-unit normalization and uniqueness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ringed site inverse image commutes with the direct sum total tensor of unbounded cochain complexes with adjunction unit pure tensor formula",
+   "results": "{\"t\": \"2026-10-27T06:46:26Z\", \"tool\": \"leansearch\", \"query\": \"Ringed site inverse image commutes with the direct sum total tensor of unbounded cochain complexes with adjunction unit pure tensor formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directSumLeft_symm_lof_tmul\", \"TensorProduct.directSum_symm_lof_tmul\", \"TensorProduct.finsuppLeft\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"TensorProduct.directSumRight_symm_lof_tmul\", \"SheafOfModules.pullbackObjUnitToUnit\", \"HomologicalComplex.rightUnitor'_inv\", \"TensorProduct.directSumRight'\"], \"digest\": \"cb00ba144c67f65f\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected the returned declarations; the sheaf pullback, free-module unit, direct-sum tensor and HomologicalComplex tensor tools do not state the full sequence-site cochain natural isomorphism with its specified adjunction-unit normalization and uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "{\"t\": \"2026-10-27T06:46:26Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackId\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackIso\"], \"digest\": \"646c13e3272a1a2c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected the returned declarations; the sheaf pullback, free-module unit, direct-sum tensor and HomologicalComplex tensor tools do not state the full sequence-site cochain natural isomorphism with its specified adjunction-unit normalization and uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image on ringed site module sheaves commutes with unbounded total cochain tensor uniquely normalized by the adjunction unit on pure tensors",
+   "results": "{\"t\": \"2026-10-27T06:46:27Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image on ringed site module sheaves commutes with unbounded total cochain tensor uniquely normalized by the adjunction unit on pure tensors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.unitToPushforwardObjUnit\"], \"digest\": \"f9f7afdb5f1e3c88\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected the returned declarations; the sheaf pullback, free-module unit, direct-sum tensor and HomologicalComplex tensor tools do not state the full sequence-site cochain natural isomorphism with its specified adjunction-unit normalization and uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tensor|tensor.*pullback|tensor.*hom_ext",
+   "results": "{\"t\": \"2026-10-27T06:46:36Z\", \"tool\": \"grep\", \"query\": \"pullback.*tensor|tensor.*pullback|tensor.*hom_ext\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected the returned declarations; the sheaf pullback, free-module unit, direct-sum tensor and HomologicalComplex tensor tools do not state the full sequence-site cochain natural isomorphism with its specified adjunction-unit normalization and uniqueness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal additive left adjoint lifts to unbounded cochain complexes with direct sum tensor preserving pure tensor inclusions",
+   "results": "{\"t\": \"2026-10-27T06:46:37Z\", \"tool\": \"leanfinder\", \"query\": \"Strong monoidal additive left adjoint lifts to unbounded cochain complexes with direct sum tensor preserving pure tensor inclusions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Monoidal.inducingFunctorData\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.leftUnitor'\", \"HomologicalComplex.monoidalCategory\", \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"HomologicalComplex.leftUnitor\"], \"digest\": \"66bd3f0bbba026f8\"}",
+   "date": "2026-10-27",
+   "verdict": "no match: inspected the returned declarations; the sheaf pullback, free-module unit, direct-sum tensor and HomologicalComplex tensor tools do not state the full sequence-site cochain natural isomorphism with its specified adjunction-unit normalization and uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-completed-pullback-tower-realizations",
+  "date": "2026-10-27",
+  "group": "NF"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean_candidates": [
+  {
+   "declaration": "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
+   "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+   "file": "lean/Sheaf/Paper/CompletedPullbackTowerRealizations.lean",
+   "line": 352,
+   "statement": "theorem pullbackTensorSequenceCochain_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃! e : coefficientTotalTensor.{u, u + 1, u}\n        (coefficientSequenceTopology (ProEt.topology Y))\n        (coefficientSequenceCommRingSheaf l E Y) ⋙\n        (pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ) ≅\n      (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).prod\n        ((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology X))\n          (coefficientSequenceCommRingSheaf l E X),\n      ∀ (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n        (p q k : ℤ) (h : p + q = k) (V : ℕ × Y.ProEt)\n        (x : (P.X p).val.obj (op V)) (y : (Q.X q).val.obj (op V)),\n        ((e.hom.app (P,Q)).f k).val.app\n          (op ((pullbackTensorSequenceBase f).obj V))\n          (((pullbackTensorSequenceAdjunction l E f).unit.app\n            (((coefficientTotalTensor.{u, u + 1, u}\n              (coefficientSequenceTopology (ProEt.topology Y))\n              (coefficientSequenceCommRingSheaf l E Y)).obj (P,Q)).X k)).val.app (op V)\n            (coefficientTensorGenerator.{u, u + 1, u}\n              (coefficientSequenceTopology (ProEt.topology Y))\n              (coefficientSequenceCommRingSheaf l E Y) P Q p q k h (op V) x y)) =\n        coefficientTensorGenerator.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology X))\n          (coefficientSequenceCommRingSheaf l E X)\n          (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj P)\n          (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj Q)\n          p q k h (op ((pullbackTensorSequenceBase f).obj V))\n          (((pullbackTensorSequenceAdjunction l E f).unit.app (P.X p)).val.app (op V) x)\n          (((pullbackTensorSequenceAdjunction l E f).unit.app (Q.X q)).val.app (op V) y)",
+   "proposed_module": "Sheaf.Paper.SequencePullbackTensorCochain",
+   "note": "Existing local declaration ownership for the released stage-1 re-split, not a closed-proof attachment. Current module is authoritative; proposed module is a future stage-2/3 extraction only."
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-sequence-pullback-tensor-cochain",
+  "worker": "stage1",
+  "summary": "Revalidated and reused the prior NO six-step ordinary tensor/totalization split against the live statement, cited-node statements and Stacks sources. The signed differential, actual-unit normalization and adjunction-transpose uniqueness are explicit. No new nodes and no changed hypotheses. The metadata candidate source is absent from the current read clone, so no completed Lean attachment is claimed.",
+  "blueprint": "The latest def-weil-frobenius-coefficient-twists sentence \"These actions commute with finite reduction and scalar extension\" is the documentary association inherited from the parent. This extracted obligation supplies its ordinary whole-sequence tensor/pullback normalization. The created.item chain is broken upstream and blueprint_refs.py ancestor returns None; retain the documented null from.node and via chain. Steps 1-6 justify the formerly retained old step 14 without using its irrelevant resolution dependencies.",
+  "retained_arguments_status": "Unverified inherited argument, not an accepted proof. Kept verbatim to satisfy the repair order; further splitting must justify every non-elementary inference.",
+  "retained_arguments": [
+   {
+    "old_step": 14,
+    "step": {
+     "text": "pullbackTensorSequenceCochain_existsUnique: use the ordinary ringed-topos pullback/tensor comparison on each pair of\nterms. Its pure-tensor formula is the displayed unit equation. Totalization\nrespects both differential summands. Tensor generators and total-summand\ninjections prove uniqueness; the ordinary inverse gives invertibility.",
+     "uses": [
+      "lem-coef-derived-system-evaluation-calculus",
+      "def-coef-ringed-sequence-site",
+      "def-sf-strict-roos-functor",
+      "def-weil-derived-pullback-tensor-hom",
+      "lem-weil-pbc-resolving-representative-whiskering",
+      "lem-pc-kflat-resolution"
+     ],
+     "elementary": false
+    }
+   }
+  ],
+  "blueprint_ancestry_note": "The documented blueprint.from.node=null represents the broken created.item chain. The parent’s historical from.node association and exact declaration obligation remain in from.place; parent provenance fields are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-site-pullback-tensor-generators",
+    "why": "Generic ordinary ringed-site tensor theorem for any specified additive left adjoint, including its actual-unit pure-tensor formula. Applied on the sequence site; no finite-type or invertibility restrictions from geometric six-functor units are imported."
+   },
+   {
+    "node": "lem-sfb-left-resolution-map-total-iso",
+    "why": "Generic additive-functor/direct-sum totalization comparison, including summand formula and naturality. Its diagonal coproduct hypotheses are verified by the left-adjoint colimit theorem; the purity unit has no separate generic totalization theorem."
+   }
+  ],
+  "evidence_provenance": {
+   "prior_group": "NO",
+   "prior_sandbox": "/home/ubuntu/weil-newtargets-sandbox/NO/lem-pur-sequence-pullback-tensor-cochain",
+   "searches": "Six original NO search records copied unchanged to searches.jsonl; five NF creation records retained in the item; none claimed as run by NG."
+  }
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The computed created.item ancestry is broken at the parent module name; blueprint_refs.py ancestor returns None. Documentary association retained from the parent: def-weil-frobenius-coefficient-twists, The coefficient twists commute with finite reduction and scalar extension; the coherent reduction and strict tower normalizations are the data used in the completed tensor/pullback comparison. Extracted obligation: pullbackTensorSequenceCochain_existsUnique.",
+   "via": [
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pur-completed-pullback-tensor-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "tool_uses": [
+  "lem-sf-site-pullback-tensor-generators",
+  "lem-sfb-left-resolution-map-total-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NG-863d1fe04",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-863d1fe04 (reviewer sub-agent of L); spot-checked: Read the item and all 11 cited statements in full. The statement, stmt_deps and the base-change setup are unchanged and match the Lean candidate pullbackTensorSequenceCochain_existsUnique: b_f(n,V)=(n,X×_YV), the constant-section coefficient map, and F_f the specified left adjoint of f^s_*. The source is Stacks 07A4 (sites-cohomology l.3684), whose final total-complex comparison is built from the 03EL tensorators (sites-modules l.3649); this item is that ordinary comparison for all unbounded complexes, plus the unit formula and uniqueness. Step 1: I re-derived both directions of 'sheaf ⇔ every vertical slice is a sheaf'. Since u_f is left exact and (n↓N) has an initial object, b_f is representably flat, so the hypotheses of lem-sf-site-pullback-tensor-generators hold. Step 2 uses that lemma's generator clause with arrow id and coefficient 1. Step 3: the hypotheses of lem-sfb-left-resolution-map-total-iso hold; coproducts exist on both sides by def-pc-tensor-complex-sheaves, and the left adjoint preserves them. Step 4: I rechecked the chain-map computation with the (-1)^p sign and the summand identity. Step 5 follows from unit naturality, then step 4, then step 2. Step 6: uniqueness follows from the transpose, pure-tensor generation, sheafification uniqueness, the coproduct property and adjunction injectivity. Edge cases checked: zero complexes, infinite diagonals, n=0, empty schemes, non-flat terms. Accepted the two declared tool uses; both are generic off-unit lemmas. No duplicate: lem-sfb-ringed-complex-tensor-pullback gives existence only, with no normalization or uniqueness. No cycle. blueprint.from.node is null, inherited from the broken parent chain. The report names citations.json and searches.jsonl, which are not in the commit; this is advisory."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "declaration": "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
+  "statement": "theorem pullbackTensorSequenceCochain_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃! e : coefficientTotalTensor.{u, u + 1, u}\n        (coefficientSequenceTopology (ProEt.topology Y))\n        (coefficientSequenceCommRingSheaf l E Y) ⋙\n        (pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ) ≅\n      (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).prod\n        ((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ))) ⋙\n        coefficientTotalTensor.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology X))\n          (coefficientSequenceCommRingSheaf l E X),\n      ∀ (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)\n        (p q k : ℤ) (h : p + q = k) (V : ℕ × Y.ProEt)\n        (x : (P.X p).val.obj (op V)) (y : (Q.X q).val.obj (op V)),\n        ((e.hom.app (P,Q)).f k).val.app\n          (op ((pullbackTensorSequenceBase f).obj V))\n          (((pullbackTensorSequenceAdjunction l E f).unit.app\n            (((coefficientTotalTensor.{u, u + 1, u}\n              (coefficientSequenceTopology (ProEt.topology Y))\n              (coefficientSequenceCommRingSheaf l E Y)).obj (P,Q)).X k)).val.app (op V)\n            (coefficientTensorGenerator.{u, u + 1, u}\n              (coefficientSequenceTopology (ProEt.topology Y))\n              (coefficientSequenceCommRingSheaf l E Y) P Q p q k h (op V) x y)) =\n        coefficientTensorGenerator.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology X))\n          (coefficientSequenceCommRingSheaf l E X)\n          (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj P)\n          (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj Q)\n          p q k h (op ((pullbackTensorSequenceBase f).obj V))\n          (((pullbackTensorSequenceAdjunction l E f).unit.app (P.X p)).val.app (op V) x)\n          (((pullbackTensorSequenceAdjunction l E f).unit.app (Q.X q)).val.app (op V) y)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Exact existing theorem, read at lines 352–381 of the live source. Its complete bifunctor natural-isomorphism existence and uniqueness and its adjunction-unit pure-tensor total-summand equation are precisely this extracted node; no duplicate module is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd86cc54e",
+  "group": "ND",
+  "result": "pass",
+  "note": "Existing:true delivery; only the item's lean field changes, and lean.statement matches the source signature verbatim (script check). Clause-by-clause check of pullbackTensorSequenceCochain_existsUnique against the node: base change (𝟭 ℕ).prod proEtaleBaseChange; constant-section ring map at level n+1, proved equal to integralComparisonSequenceRingMap; F_f = leftAdjoint of the pushforward with Adjunction.ofIsRightAdjoint unit, proved equal to integralComparisonSequencePullback; coefficientTotalTensor is map₂HomologicalComplex with shapes up ℤ (signed differential, unbounded); the iso T_Y⋙F^c ≅ (F^c×F^c)⋙T_X has the right direction, with naturality and uniqueness of the whole iso; generator formula with the actual units, quantified over all P,Q,p,q,k,V,x,y. Edge cases n=0, empty scheme, zero complexes, infinite diagonals and identity f all admitted. No hollow def, no new nodes, no pro-etale substitute; no compile needed. Advisory: theorem docstring carries the parent's blueprint tag and old step-14 proof sketch; owner nodes def-pur-completed-pullback-tower-core and def-coef-ringed-tensor-hom-model not in stmt_deps (prose matches the cited def-trf/def-pc nodes; H2 forbids adding existing nodes); second reading is a thin self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T112410-L-1579585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
+   "WeilConjectures.pullbackTensorReductionGood",
+   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceGood",
+   "WeilConjectures.pullbackTensorSystemComparison_existsUnique",
+   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
+   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
+   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
+  ]
+ }
+}

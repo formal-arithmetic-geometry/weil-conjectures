@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-direct-image-limit-comparison",
+ "kind": "statement",
+ "title": "Normalized direct image and total limit on quotient systems",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, and $f:X\\to Y$ any morphism of schemes. Use the strict quotient-system module categories and their actual direct image $F$ [def-trf-integral-comparison-sequence-systems]. Write $T_W$ for exact restriction to completed-coefficient towers followed by ordinary limit, $L_W$ for exact derived restriction followed by total derived limit, $P_f$ for ordinary completed-coefficient direct image and $RP_f$ for its total derived functor [def-weil-derived-direct-image]. There exists a LimitComparison [def-weil-strict-mixed-unit-data]: an ordinary natural isomorphism $c:F T_Y\\simeq T_X P_f$ which, on every section, preserves each specified limit projection (at the base-changed site object), and a natural isomorphism $d:RF L_Y\\simeq L_X RP_f$. If $u_W$ is the whole-complex total-limit unit (including exact-restriction localization factors) and $v_F,v_P$ are universal right-derived units, then for every cochain complex $A$ of quotient systems,\n$$u_Y(FA);L_Y(v_F(A));d_{QA}=Q(c_A);v_P(T_XA);RP_f(u_X(A)).$$\nThis is the full structure StrictDirectImageMixedUnit.LimitComparison, including its ordinary sectionwise projection equations and derived-unit equation on all complexes. No properness, boundedness, constructibility or finite-type hypothesis is imposed.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-derived-direct-image",
+  "def-weil-strict-mixed-unit-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Direct-image reduction paragraph: realizing the coherent quotient-system direct image by total inverse limit; Stacks Tags 0D6E, 0941 and 0A07."
+ },
+ "proof": [
+  {
+   "text": "The completed structural map is fixed by every quotient projection [def-weil-derived-direct-image]. Ordinary direct image and coefficient restriction leave sections unchanged except for precomposition by base change. A section of either ordinary composite is the same compatible tuple. Identity on tuples is linear by that structural-map equation, natural, and inverse to itself. Composing it with the nth projection gives the same section in either order.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Treat the varying quotient rings as one ring sheaf on the product site and the completed coefficient restriction as a ringed-topos morphism. Its inverse-image sheaf functor is the identity, and its module direct image is exact coefficient restriction. Total inverse limit is the direct image from the constant-ring tower topos. Both composites with geometric direct image represent the same ringed-topos map; the ordinary comparison in Step 1 identifies their structural maps. Apply the normalized unbounded composition theorem [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] successively. Exact coefficient restriction has its termwise derived functor, yielding the specified L_W, while the geometric factor gives the actual RF. The resulting composite isomorphism gives d. This does not require restriction to preserve K-injectives.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalizations of the compositors identify their maps on every complex with the two composites of universal units. Substitution of the total-limit unit, including the inverse exact-restriction factor, gives exactly the displayed equation. Ordinary projections were already fixed in Step 1, so c,d and these proofs form LimitComparison. Stacks sites-cohomology.tex, lemma-derived-pushforward-composition, lemma-derived-limit-is-ok and lemma-Rf-commutes-with-Rlim supply the same common-pushforward calculation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-strict-mixed-unit-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-direct-image",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-strict-mixed-unit-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "Direct-image reduction paragraph: realizing the coherent quotient-system direct image by total inverse limit; Stacks Tags 0D6E, 0941 and 0A07. Expanded using the cited normalized ringed-topos and scalar constructions; R8, 2026-10-27."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image commutes with inverse limit of coefficient systems with normalized derived functor units",
+   "results": "Eight hits: totalRightDerivedUnit, derived adjunction unit/counit and module direct-limit congruences; no normalized comparison on quotient sequence modules.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived direct image commutes with inverse limit of sheaves of modules on a ringed sequence site",
+   "results": "Eight hits including SheafOfModules.createsLimit, presheaf limit formulas and sheaf global sections; no derived quotient-system comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "directImageLimitComparison|directImageScalarRealizationSquare|coefficientExchange",
+   "results": "msearch: zero Mathlib hits. Project search found LimitComparison as data in StrictDirectImageMixedUnitData, and its existence only with additional properness and absolute separatedness hypotheses in StrictMixedSystemModels. Generic RingedTowerPushforwardLimitComparison handles constant-ring towers, not the varying quotient ring system. Blueprint search direct image limit comparison: zero matches.",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem supplies this general normalized varying-ring comparison."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DirectImageCoefficientExchangeInvertible",
+  "date": "2026-10-27",
+  "group": "R8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Direct-image reduction paragraph: realizing the coherent quotient-system direct image by total inverse limit; Stacks Tags 0D6E, 0941 and 0A07.",
+   "via": [
+    "lem-weil-direct-image-coefficient-exchange-invertible",
+    "def-weil-operation-exchange-coefficient-descent",
+    "def-weil-frobenius-square-exchange",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DirectImageLimitComparison",
+  "file": "lean/Sheaf/Paper/DirectImageLimitComparison.lean",
+  "declaration": "WeilConjectures.directImageLimitComparison",
+  "statement": "theorem directImageLimitComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    Nonempty (StrictDirectImageMixedUnit.LimitComparison l E f)",
+  "branch": "sheaf-dag",
+  "by": "R8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T021402-L-2764041",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T021402-L-2764041",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

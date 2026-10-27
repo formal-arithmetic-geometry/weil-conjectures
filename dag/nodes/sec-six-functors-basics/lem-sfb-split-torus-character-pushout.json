@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-split-torus-character-pushout",
+ "kind": "statement",
+ "title": "Character pushout of a split-torus group extension",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $G$ and $B$ be smooth separated commutative group schemes of finite type over $k$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], with separated meaning that the diagonal is a closed immersion. Let $r\\geq0$ and $T=(\\mathbf G_{m,k})^r$, where $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$ with multiplication [def-sc-gm-ga]. Let $i:T\\to G$ and $q:G\\to B$ be homomorphisms forming an exact sequence $1\\to T\\xrightarrow{i}G\\xrightarrow{q}B\\to1$ of fppf sheaves [def-pc-fppf-site]: $i$ identifies $T$ with the kernel and sections of $B$ lift fppf locally to $G$. Let $\\chi:T\\to\\mathbf G_{m,k}$ be a group-scheme homomorphism. Define $E_\\chi$ to be the fppf sheafification of the presheaf quotient of $G\\times_k\\mathbf G_m$ by the right action $(g,z)\\cdot t=(g\\,i(t),\\chi(t)^{-1}z)$; fibre products are [def-pc-fibre-product]. Then $E_\\chi$ is represented by a smooth separated commutative finite-type $k$-group scheme, whose multiplication is induced by $(g,z)(h,w)=(gh,zw)$. The maps $z\\mapsto[1,z]$ and $[g,z]\\mapsto q(g)$ give an exact sequence of fppf sheaves $1\\to\\mathbf G_m\\to E_\\chi\\to B\\to1$. There is an invertible $\\mathcal O_B$-module $M_\\chi$ [def-sc-invertible-module] and a $\\mathbf G_m$-equivariant $B$-isomorphism $M_\\chi^\\times\\simeq E_\\chi$, where $M_\\chi^\\times$ represents frames $\\mathcal O_U\\xrightarrow{\\sim}f^*M_\\chi$ on $B$-schemes $f:U\\to B$, scalar multiplication acts on frames, and $z\\in\\mathbf G_m$ acts on $E_\\chi$ by multiplication by $[1,z]$, that is $[g,w]\\mapsto[g,zw]$. Under this isomorphism, $g\\mapsto[g,1]$ is a frame $\\sigma_\\chi$ of $q^*M_\\chi$ [def-pc-module-pullback] satisfying the equality of frames $\\sigma_\\chi(g\\,i(t))=\\chi(t)\\sigma_\\chi(g)$ on $G\\times_kT$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 049C (remark-fun-with-torsors), affine representability of fppf torsors. Agent-extracted contracted-product group extension and associated frame module, using fpqc descent as read in literature/stacks-project/descent.tex, proposition-fpqc-descent-quasi-coherent. The character-pushout refinement is not a verbatim assertion of 049C."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-gm-ga",
+  "def-pc-fppf-site",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-split-torus-frame-model"
+ ],
+ "proof": [
+  {
+   "text": "Work on the bounded big fppf site, with a small skeleton and set values in the larger universe. For any $k$-scheme $S$, the group $H=\\mathbf G_{m,S}$ is affine and locally of finite presentation: over $\\operatorname{Spec}A\\subset S$ it is $\\operatorname{Spec}A[x,y]/(xy-1)$. Being affine, $H\\to S$ is quasi-compact and quasi-separated by affine permanence, so it is of finite presentation by the cited definition. It is formally smooth: if $R\\twoheadrightarrow R/I$ has $I^2=0$ and $\\bar u$ is a unit, lift $\\bar u$ and its inverse to $u,v$. Then $uv=1+a$ with $a\\in I$, and $u$ has inverse $v(1-a)$. This gives the required lift in every affine first-order thickening over $S$. The definition of smoothness now gives smoothness. These checks use no condition on the field or the base $S$.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-sc-gm-ga",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "def-sbc-formally-smooth",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H0, definition-formally-smooth; elementary unit-lifting calculation"
+   }
+  },
+  {
+   "text": "Choose an fppf cover $U_a\\to B$ and lifts $s_a:U_a\\to G$ of its structure maps, using the assumed sheaf exactness. On every $V\\to U_a$, each $g\\in G(V)$ over the specified point of $B(V)$ has a unique expression $g=s_a i(t)$: indeed $s_a^{-1}g$ lies in the sheaf kernel, which is $T$. The invariant formula $[s_a i(t),z]\\mapsto\\chi(t)z$ has inverse $z\\mapsto[s_a,z]$. Replacing $(g,z)$ by $(g i(u),\\chi(u)^{-1}z)$ leaves it unchanged. Sections of the sheafification have local quotient representatives, and equality of such representatives is local, by the cited sections theorem. The formulas therefore give inverse isomorphisms $E_\\chi\\times_B U_a\\simeq h_{\\mathbf G_{m,U_a}}$, equivariant for scalar multiplication. Here maps into $B$ and $\\mathbf G_m$ are fppf sheaves: an fppf cover is fpqc and the cited representable-descent theorem glues their morphisms. Thus $E_\\chi$ is an fppf $\\mathbf G_{m,B}$-torsor.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 049C, remark-fun-with-torsors, question (2); local contracted-product calculation; sites.tex Tags 00WB and 00WK"
+   }
+  },
+  {
+   "text": "Apply the smooth affine group torsor representability theorem over $S=B$ with $H=\\mathbf G_{m,B}$, whose hypotheses were checked in step 1 and whose local torsor trivializations are step 2. It represents $E_\\chi$ by $p:E\\to B$, affine, smooth and surjective, and represents the scalar action with its torsor isomorphism. Smoothness implies flatness and local finite presentation by the cited smooth criterion. Affineness implies quasi-compactness and quasi-separatedness by affine permanence; hence $p$ is of finite presentation by definition. Since the group is commutative the left scalar action is also a right action, and swapping the two factors in the supplied torsor isomorphism gives $(e,z)\\mapsto(e,ez)$ from $E\\times_k\\mathbf G_m$ to $E\\times_BE$.",
+   "uses": [
+    "lem-sfb-smooth-affine-group-torsor-representability",
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 049C, remark-fun-with-torsors; descent.tex Tag 02VL, lemma-descending-property-smooth; affine permanence and definition of finite presentation"
+   }
+  },
+  {
+   "text": "Apply split-torus torsor frame geometry with $S=B$, $Y=E$, and rank $1$. Step 3 supplies faithful flatness, finite presentation and the specified right-action torsor isomorphism. It gives an invertible module $M_\\chi$ and an equivariant $B$-isomorphism $E\\simeq M_\\chi^\\times$; invert this isomorphism for the orientation in the statement. Its frame functor is the one in that cited statement, on arbitrary $B$-schemes. As $B$ is smooth separated and of finite type over $k$, the same theorem says $E=Y_1$ is smooth separated and of finite type over $k$.",
+   "uses": [
+    "lem-sfb-split-torus-torsor-frame-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 023T, proposition-fpqc-descent-quasi-coherent, and 05B2, lemma-finite-locally-free-descends; rank-one frame-geometry specialization"
+   }
+  },
+  {
+   "text": "The quotient presheaf is a presheaf of abelian groups: the image of $t\\mapsto(i(t),\\chi(t)^{-1})$ is a subgroup of $G\\times\\mathbf G_m$. Thus $[g,z][h,w]=[gh,zw]$, inverse $[g^{-1},z^{-1}]$, and unit $[1,1]$ are well-defined. Explicitly, changing the two inputs by $t,u$ changes their product by $tu$, since $G$ is commutative and $\\chi(tu)=\\chi(t)\\chi(u)$. Sheafification preserves finite products and the final object, so these operations and all group identities pass to $E_\\chi$. Yoneda represents the natural operations by $k$-morphisms on $E$ and detects their group identities. The maps $j(z)=[1,z]$ and $p([g,z])=q(g)$ are homomorphisms. Over the identity of $B$ take the lift $1\\in G(k)$ in step 2: its isomorphism identifies the entire sheaf fibre $p^{-1}(1)$ with $\\mathbf G_m$, with inverse $j$. Thus $j$ is injective and identifies the kernel. Every $B$-section lifts fppf locally by $b=q(g)\\mapsto[g,1]$, so the asserted sequence is exact. Multiplication by $j(z)$ is exactly the scalar action of steps 2--4.",
+   "uses": [
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-galois-yoneda-fully-faithful",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WJ, lemma-sheafification-exact; explicit quotient group operations and kernel calculation"
+   }
+  },
+  {
+   "text": "The natural map $a:G\\to E$, $g\\mapsto[g,1]$, lies over $q$. Under step 4's frame-functor isomorphism, its value on the $B$-scheme $G$ is an isomorphism $\\sigma_\\chi:\\mathcal O_G\\xrightarrow{\\sim}q^*M_\\chi$. On $G\\times_kT$ the defining orbit relation gives $[g i(t),1]=[g,\\chi(t)]$: apply $t$ to $(g,\\chi(t))$. Equivariance of the frame isomorphism makes the right side $\\chi(t)\\sigma_\\chi(g)$. Naturality on this test scheme identifies these as the pullback frames in the statement, using the canonical composition comparisons for module pullback. This proves the required equality, with the positive character rather than its inverse.",
+   "uses": [
+    "lem-sfb-split-torus-torsor-frame-geometry",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 049C, remark-fun-with-torsors; agent-written associated-frame calculation following descent.tex Tag 023T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-sc-gm-ga",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-formally-smooth",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-smooth-affine-group-torsor-representability",
+  "sbc-lem-smooth-criterion",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-split-torus-torsor-frame-geometry",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-galois-yoneda-fully-faithful",
+  "def-sc-group-scheme",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 049C, remark-fun-with-torsors, combined with the cited existing torsor representability and rank-one frame geometry; explicit character-pushout and frame-sign calculation by Q04"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pushout of an extension of commutative algebraic groups by a torus character is represented by a multiplicative line bundle torsor",
+   "results": "8 hits: CommRing.Pic.functor, RootDatum, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf, AlgebraicGeometry.Scheme.GrpObjAsOverPullback, instCommGroupPic, CategoryTheory.PresheafOfGroups.H1, CharacterModule.homEquiv_apply_apply, CharacterModule",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension sections, affine-space AddTorsor instances, scheme base-change group instances and ring Picard functors do not construct this represented sheaf quotient or its equivariant line frame."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushing out a commutative group scheme extension by a character of a split torus yields a Gm extension represented by the associated line bundle",
+   "results": "8 hits: GroupExtension.Splitting, AddGroupExtension.rightHom, GroupExtension.Splitting.toSection, CharacterModule, GroupExtension.Splitting.mk, MulChar.commGroup, GroupExtension.Splitting.instMonoidHomClass, AddGroupExtension.quotientRangeInlEquivRight",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension sections, affine-space AddTorsor instances, scheme base-change group instances and ring Picard functors do not construct this represented sheaf quotient or its equivariant line frame."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated line bundles to characters of a split torus kernel carry group extensions by the multiplicative group via contracted products",
+   "results": "8 hits: GroupExtension.Splitting, GroupExtension.Section.exists_mul_eq_mul_mul_inl, GroupExtension.Section.exists_eq_mul_inl, GroupExtension.Section.exists_eq_inl_mul, GroupExtension.Splitting.semidirectProductToGroupExtensionEquiv, SemidirectProduct.toGroupExtension, GroupExtension.Splitting.toMonoidHom, GroupExtension.Splitting.semidirectProductMulEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension sections, affine-space AddTorsor instances, scheme base-change group instances and ring Picard functors do not construct this represented sheaf quotient or its equivariant line frame."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"map\"",
+   "results": "5 hits: AffineMap.instAddTorsor, ContinuousAffineMap.instAddTorsor, AddTorsor.convexCombPair_eq_lineMap, ContinuousAffineMap.instIsTopologicalAddTorsor, ContinuousAffineMap.instNormedAddTorsor",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension sections, affine-space AddTorsor instances, scheme base-change group instances and ring Picard functors do not construct this represented sheaf quotient or its equivariant line frame."
+  },
+  {
+   "tool": "grep",
+   "query": "(pushout|contracted).*(torus|character)|(torus|character).*(pushout|contracted)",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract GroupExtension sections, affine-space AddTorsor instances, scheme base-change group instances and ring Picard functors do not construct this represented sheaf quotient or its equivariant line frame."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A character of a split torus defines an associated line bundle to a torsor and a pushout extension of commutative group schemes",
+   "results": "8 hits: RootDatum, CommRing.Pic.functor, CharacterModule, CharacterModule.ofSpanSingleton, CharacterModule.homEquiv_apply_apply, AlgebraicGeometry.AffineSpace.homOfVector, CharacterModule.dual, CharacterModule.instLinearMapClassIntAddCircleRatOfNat",
+   "date": "2026-10-24",
+   "verdict": "no match: root data, additive character modules, topological vector bundles, abstract group pushouts and affine-map torsors do not state the represented algebraic-group extension with its equivariant frame line."
+  },
+  {
+   "tool": "grep",
+   "query": "(pushout|contracted).*(torus|character)|(torus|character).*(pushout|contracted)",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: root data, additive character modules, topological vector bundles, abstract group pushouts and affine-map torsors do not state the represented algebraic-group extension with its equivariant frame line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pushout of an exact sequence of commutative group schemes along a torus character represented by the frame torsor of a line bundle",
+   "results": "8 hits: Monoid.PushoutI.instGroup, CategoryTheory.Abelian.hasPushouts, CommRingCat.isPushout_tensorProduct, CategoryTheory.Square.pushoutCocone, CategoryTheory.Limits.Types.Pushout.cocone, CategoryTheory.IsPushout.mk, CategoryTheory.IsPushout.exact_shortComplex, Algebra.pushoutDesc",
+   "date": "2026-10-24",
+   "verdict": "no match: root data, additive character modules, topological vector bundles, abstract group pushouts and affine-map torsors do not state the represented algebraic-group extension with its equivariant frame line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"map\"",
+   "results": "5 hits: AffineMap.instAddTorsor, ContinuousAffineMap.instAddTorsor, AddTorsor.convexCombPair_eq_lineMap, ContinuousAffineMap.instIsTopologicalAddTorsor, ContinuousAffineMap.instNormedAddTorsor",
+   "date": "2026-10-24",
+   "verdict": "no match: root data, additive character modules, topological vector bundles, abstract group pushouts and affine-map torsors do not state the represented algebraic-group extension with its equivariant frame line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated line bundle of a principal multiplicative group torsor obtained by pushing out an extension of algebraic groups",
+   "results": "8 hits: hom_trivializationAt, Trivialization.linearEquivAt, Trivialization.pullback_linear, Bundle.ContinuousLinearMap.memTrivializationAtlas, trivialization_linear, Trivialization.IsLinear, Trivialization.IsLinear.linear, Bundle.Trivial.trivialization.isLinear",
+   "date": "2026-10-24",
+   "verdict": "no match: root data, additive character modules, topological vector bundles, abstract group pushouts and affine-map torsors do not state the represented algebraic-group extension with its equivariant frame line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-picard-pullback-kernel",
+  "date": "2026-10-24",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Algebraically trivial lines on a semiabelian variety: inversion and ampleness. Structural input before inversion: realize a geometrically algebraically trivial line as a multiplicative frame torsor. Supporting input: Picard-zero square defect on a semiabelian group is trivial over the ground field. Supporting input: The kernel of abelian-quotient Picard pullback is algebraically trivial. Supporting input: Character pushout of a split-torus group extension.",
+   "via": [
+    "lem-sfb-semiabelian-picard-pullback-kernel",
+    "lem-sfb-semiabelian-picard-square-triviality",
+    "lem-sfb-semiabelian-picard-multiplicative-torsor",
+    "lem-sfb-semiabelian-algebraic-equivalence-norm",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-character-pushout",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Reused smooth affine torsor representability and split-torus frame geometry; wrote quotient trivializations, group operations, sheaf exactness and positive-character frame relation explicitly. No new nodes. Checked the hypotheses and statements of every cited tool, including finite presentation and the big-site size bound.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Algebraically trivial lines on a semiabelian variety: inversion and ampleness. Structural input before inversion: realize a geometrically algebraically trivial line as a multiplicative frame torsor. Supporting input: Picard-zero square defect on a semiabelian group is trivial over the ground field. Supporting input: The kernel of abelian-quotient Picard pullback is algebraically trivial. Supporting input: Character pushout of a split-torus group extension. The present six steps supply this character-pushout supporting input without changing the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-1e876e269",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-1e876e269 (reviewer sub-agent of L); spot-checked: The item lem-sfb-split-torus-character-pushout is read in full: statement kept verbatim, 6 steps, no new nodes. The base had no proof and both live clones have it unsplit, so this is a first split with no supersession. Every step checks out. Step 2: the coordinate [s_a i(t),z]↦χ(t)z is invariant under (g i(u),χ(u)^{-1}z), its inverse is z↦[s_a,z], and it descends via sections-local plus fpqc representable descent. Step 3 meets the hypotheses of lem-sfb-smooth-affine-group-torsor-representability and correctly adds finite presentation (smooth criterion plus affine permanence). Step 4 meets the hypotheses of lem-sfb-split-torus-torsor-frame-geometry at rank 1 (faithfully flat, fp, Y×_kT≅Y×_SY); smooth/separated/finite type follow from B. Step 5: group law via finite-product preservation of sheafification and Yoneda; kernel from the fibre over e with the lift 1; local lifting gives the epimorphism. Step 6: (g,χ(t))·t=(g i(t),1) gives σ(g i(t))=χ(t)σ(g), matching the stated sign and its use in the citer lem-sfb-semiabelian-picard-pullback-kernel steps 3 and 5. Small cases r=0, χ=1, G=T with B=Spec k (including χ=t^p) all behave. Route: same-unit nodes, sk-thm-p1 on route, sbc-lem-smooth-criterion Lean-closed, everything else definitions or Mathlib leaves; no tool_uses. Batch 5: the closures of all three flagged citations (fppf-is-fpqc, torsor representability via def-trf-scheme-cover-descent-datum, frame geometry via lem-trf-projective-bundle-quotient-geometry) contain only generic descent, algebraic-space, smoothness and projective-bundle nodes, with no trace-transport, PD or nt- assumption nodes, so I accept them. No duplicate found in the DAG. Sources checked: Stacks 049C groupoids.tex l.2208, 02H0. No SGA. FIX (one C-type fault): step 1 was marked elementary but used affine ⇒ qc+qs to get finite presentation without citing it. Step 1 now cites lem-weil-pbc-affine-morphism-permanence (already in proof_deps) and is set elementary:false; corrected file at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-split-torus-character-pushout.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusCharacterPushout",
+  "declaration": "AlgebraicGeometry.SplitTorusCharacterPushout.character_pushout",
+  "declarations": [
+   "AlgebraicGeometry.SplitTorusCharacterPushout.action",
+   "AlgebraicGeometry.SplitTorusCharacterPushout.orbitPresheaf",
+   "AlgebraicGeometry.SplitTorusCharacterPushout.pushoutSheaf",
+   "AlgebraicGeometry.SplitTorusCharacterPushout.classMap",
+   "AlgebraicGeometry.SplitTorusCharacterPushout.bracket",
+   "AlgebraicGeometry.SplitTorusCharacterPushout.pointOverBase",
+   "AlgebraicGeometry.SplitTorusCharacterPushout.sectionOver",
+   "AlgebraicGeometry.SplitTorusCharacterPushout.Geometry",
+   "AlgebraicGeometry.SplitTorusCharacterPushout.character_pushout"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTorusCharacterPushout.lean",
+  "statement": "theorem character_pushout {k : Type u} [Field k] (r : ℕ) (G B : Grp (Over (Spec (.of k)))) [IsCommMonObj G.X] [IsCommMonObj B.X] [Smooth G.X.hom] [Smooth B.X.hom] [IsClosedImmersion (pullback.diagonal G.X.hom)] [IsClosedImmersion (pullback.diagonal B.X.hom)] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [LocallyOfFiniteType B.X.hom] [QuasiCompact B.X.hom] (i : MultiplicativeType.splitTorus k r ⟶ G) (q : G ⟶ B) (_hkernel : IsPullback i.hom.hom (toUnit (MultiplicativeType.splitTorus k r).X) q.hom.hom η[B.X]) (_hlocallySurjective : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of k))) (yoneda.map q.hom.hom)) (chi : (MultiplicativeType.splitTorus k r).X ⟶ StandardGroupSchemes.multiplicative k) [IsMonHom chi] : Geometry r G B i q chi",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical action, orbit coequalizer, fppf sheafification and quotient classes are constructed explicitly. Geometry reuses FrameModel and Good owned by def-sfb-split-torus-frame-model; the frame-geometry theorem remains a proof dependency. H2 repair changes no mathematical statement or Lean declaration."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92b65a1c7",
+  "group": "Q18",
+  "result": "fix",
+  "note": "Re-delivery of 558e64ce H2 RETURN; item Lean byte-identical (sha a4858ab4), math re-checked (field, comm Grp objects, smooth/closed diagonal/LFT+QC, kernel IsPullback, fppf local surjectivity, IsMonHom chi; action/coequalizer/sheafify/classMap; representability, group law, exactness, invertible M + FrameModel, equivariance, positive-sign frame relation; r=0, chi=1, G=T edge cases). New def-sfb-split-torus-frame-model existing:true on unchanged SplitTorusTorsorFrameGeometry owns unitComparison/pullFrame/FrameModel/.at/Good; statement verbatim; check_existing and check_new_node clean; theorem moved to proof_deps only. FIX: new node lacked body owner def-sc-tensor-pullback-power-comparison (boundaryPullbackComparison used in unitComparison); fixes/def-sfb-split-torus-frame-model.json adds stmt_dep and TeX cite. No Lean change, no compile needed. Advisory: ∃ sigma, sigma = F.at(...) clause is tautological."
+ }
+}

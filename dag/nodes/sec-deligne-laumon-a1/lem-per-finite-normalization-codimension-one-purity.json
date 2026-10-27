@@ -19,9 +19,111 @@
   "def-weil-finite-integral-morphism",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}C$, $Y=\\operatorname{Spec}A$, and let $f:X\\to Y$ be the structural map. Module finiteness makes $f$ finite, hence quasi-finite (in particular locally of finite type). The finite-algebra Noetherian lemma makes $C$ Noetherian, so $X,Y$ are locally Noetherian. The integral-closure lemma makes $C$ a normal domain with fraction field $L$; its prime localizations are normal domains. Regularity makes $A$ a normal ring; since $A$ is a domain, local normality makes it an integrally closed domain. Every $A_{\\mathfrak p}$ is regular local by the hypothesis on $A$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-finite-qf",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 034L (lemma-integral-closure-in-normal), 00GY (lemma-localize-normal-domain), 0567 (lemma-regular-normal), 030B (lemma-normality-is-local); morphisms.tex Tag 02NU (lemma-finite-quasi-finite)."
+   }
+  },
+  {
+   "text": "For any prime $\\mathfrak q\\subset C$, set $\\mathfrak p=\\mathfrak q\\cap A$. Then $\\operatorname{ht}\\mathfrak q=\\operatorname{ht}\\mathfrak p$. Indeed, $A\\subset C$ is integral by the definition of $C$. Incomparability sends each strict chain of primes ending at $\\mathfrak q$ to a strict chain ending at $\\mathfrak p$, giving one inequality of heights. Conversely, start a chain ending at $\\mathfrak p$ with the chosen prime $\\mathfrak q$ above its last term, and repeatedly apply going down to lift its terms backwards. Distinct contractions force distinct lifted terms, giving the reverse inequality. Chains not ending at the chosen prime can be enlarged by it. The dimension-of-localization lemma identifies these heights with $\\dim C_{\\mathfrak q}$ and $\\dim A_{\\mathfrak p}$.",
+   "uses": [
+    "lem-weil-pbc-going-down-normal-integral",
+    "lem-weil-pbc-integral-incomparability",
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00H8 (proposition-going-down-normal-integral), 00GT (lemma-integral-no-inclusion); height comparison written out by lifting and contracting chains, as used in pione-lemma-purity."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q'$ have height one in $C$. The preceding comparison shows that $\\mathfrak p'=\\mathfrak q'\\cap A$ has height one. The hypothesis therefore gives $\\Omega_{C_{\\mathfrak q'}/A_{\\mathfrak p'}}=0$. The formal-unramifiedness criterion makes the local ring map $A_{\\mathfrak p'}\\to C_{\\mathfrak q'}$ formally unramified. Apply the stalk-neighbourhood lemma to the locally finite type $f$: it gives an open neighbourhood of $\\mathfrak q'$ on which $f$ is formally unramified. A formally unramified morphism locally of finite type is unramified, so $f$ is unramified at $\\mathfrak q'$. This treats every height-one point of $X$, hence every height-one generalization required by local purity.",
+   "uses": [
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "lem-sbc-formally-unramified-stalk-neighbourhood",
+    "lem-weil-pbc-lft-formally-unramified-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF (lemma-unramified-at-point), with Algebra Tag 00UO (lemma-characterize-formally-unramified) and More on Morphisms Tag 02HE for locally finite type formal unramifiedness."
+   }
+  },
+  {
+   "text": "The generic point also has an etale source neighbourhood. Finite module generators generate $C$ as an $A$-algebra, so the Noetherian finite-type lemma makes $C$ finitely presented over $A$. At $(0)\\subset C$, its stalk is $L$ and the base stalk is $K$; these are the fraction fields from the hypotheses and Step 1. The $K$-module $L$ is flat and $\\Omega_{L/K}=0$ by separability. By localization of differentials, $(\\Omega_{C/A})_{(0)}\\cong\\Omega_{L/A}$. An $A$-derivation of $L$ kills $K$: it kills $a/b$ for $a,b\\in A$, $b\\ne0$, since $D(b^{-1})=-b^{-2}D(b)=0$. Thus the universal properties identify $\\Omega_{L/A}=\\Omega_{L/K}=0$. The etale-at-a-prime criterion now gives an etale neighbourhood of $(0)$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-trf-separable-field-differentials-vanish",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-weil-pbc-kahler-differentials",
+    "lem-sc-etale-at-prime-flat-unramified-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FP (lemma-Noetherian-finite-type-is-finite-presentation), 00RT (lemma-differentials-localize), 090W (lemma-characterize-separable-algebraic-field-extensions), 08WD (lemma-etale-flat-unramified-finite-presentation); the equality of A- and K-derivations is written explicitly."
+   }
+  },
+  {
+   "text": "Finally fix a nonzero prime $\\mathfrak q\\subset C$ and let $\\mathfrak p=\\mathfrak q\\cap A$. Since $C$ is a domain, $(0)\\subsetneq\\mathfrak q$ shows that its height is at least one. Step 2 gives equality of the two local dimensions. Step 1 gives a normal source stalk, a regular target stalk, locally Noetherian schemes, and quasi-finiteness at this point. Step 3 gives unramifiedness at all its generalizations whose source local dimension is one. Local purity of branch locus therefore says that $f$ is etale at $\\mathfrak q$. Together with Step 4 this gives etale neighbourhoods covering every point of $X$; the source-local definition of etaleness makes $f$ etale. Finiteness was already proved in Step 1, so $f$ is finite etale. This also covers the case that $A$ is a field: then Step 2 forces every prime of $C$ to have height zero and Step 4 is the only pointwise case.",
+   "uses": [
+    "lem-per-local-quasi-finite-branch-purity",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMB (pione-lemma-purity), applied after the chain-height comparison; the dimension-zero case is treated separately by the generic stalk calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "pqf-lem-finite-qf",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+  "lem-sbc-formally-unramified-stalk-neighbourhood",
+  "lem-weil-pbc-lft-formally-unramified-unramified",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-trf-separable-field-differentials-vanish",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sc-etale-at-prime-flat-unramified-criterion",
+  "lem-per-local-quasi-finite-branch-purity",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BMB (pione-lemma-purity), affine finite-normalization application; the height comparison and generic-point case are expanded using the cited Algebra and Morphisms results."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +159,136 @@
    "results": "Logged results: AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, Algebra.exists_etale_of_isEtaleAt, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.IsEtale.instFormallyUnramified; 8 hits; digest 2fe6bc7612ba546c. ",
    "date": "2026-10-18",
    "verdict": "no match: the hits define etale morphisms/loci, spread out an already-etale point, or construct normal closures; none proves purity from codimension-one unramifiedness."
+  },
+  {
+   "tool": "grep",
+   "query": "purity|ramificationLocus",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*branch|branch.*locus|codimension.*[ée]tale",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Purity of branch locus: quasi-finite morphism normal source regular target equal positive local dimensions unramified in codimension one is etale at the point",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.Scheme.Etale, Algebra.unramifiedLocus, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.IsEtaleAt, Algebra.etaleLocus; digest cbb5c80c82b4106c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsNormal\"",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsRegular\"",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-finite morphism of locally Noetherian schemes is etale at a point with normal source stalk regular target stalk equal positive dimensions and no ramification at codimension one generalizations",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsEtale, Algebra.IsEtaleAt, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale, Algebra.etaleLocus, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus; digest 9fb784284126ee8c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a regular Noetherian domain in a finite separable field extension is etale if the local Kahler differentials vanish over all height one primes",
+   "results": "Logged 8 hits: Algebra.Etale, Algebra.FormallyEtale.of_isSeparable_aux, RingHom.Etale.ofLocalizationSpan, StandardEtalePair.instEtaleRing, Algebra.IsEtaleAt, RingHom.Etale.ofLocalizationSpanTarget, Algebra.instEtaleOfIsStandardEtale, StandardEtalePair.instFormallyEtaleRing; digest 9e7777f9f77be7f0. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite integral closure over a regular Noetherian ring is etale when it is unramified at height one primes",
+   "results": "Logged 8 hits: Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth, Algebra.FormallyEtale.iff_unramified_and_smooth, integralClosure.AlgebraIsIntegral, RingHom.Etale, RingHom.etale_iff_formallyUnramified_and_smooth, Algebra.instEtaleOfIsStandardEtale, integralClosure.isIntegrallyClosedOfFiniteExtension, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth; digest be2c83f20c7fe3e1. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "grep",
+   "query": "IsEtale|IsRegular",
+   "results": "Logged 1 hits: 48; digest d80bfe55910a3d7e. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "grep",
+   "query": "purity|ramificationLocus",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*branch|branch.*locus|codimension.*[ée]tale",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Purity of branch locus: quasi-finite morphism normal source regular target equal positive local dimensions unramified in codimension one is etale at the point",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.Scheme.Etale, Algebra.unramifiedLocus, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.IsEtaleAt, Algebra.etaleLocus; digest cbb5c80c82b4106c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsNormal\"",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsRegular\"",
+   "results": "Logged 0 hits: none; digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi-finite morphism of locally Noetherian schemes is etale at a point with normal source stalk regular target stalk equal positive dimensions and no ramification at codimension one generalizations",
+   "results": "Logged 8 hits: AlgebraicGeometry.IsEtale, Algebra.IsEtaleAt, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.Scheme.Etale, Algebra.etaleLocus, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus; digest 9fb784284126ee8c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite normalization of a regular Noetherian domain in a finite separable field extension is etale if the local Kahler differentials vanish over all height one primes",
+   "results": "Logged 8 hits: Algebra.Etale, Algebra.FormallyEtale.of_isSeparable_aux, RingHom.Etale.ofLocalizationSpan, StandardEtalePair.instEtaleRing, Algebra.IsEtaleAt, RingHom.Etale.ofLocalizationSpanTarget, Algebra.instEtaleOfIsStandardEtale, StandardEtalePair.instFormallyEtaleRing; digest 9e7777f9f77be7f0. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite integral closure over a regular Noetherian ring is etale when it is unramified at height one primes",
+   "results": "Logged 8 hits: Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth, Algebra.FormallyEtale.iff_unramified_and_smooth, integralClosure.AlgebraIsIntegral, RingHom.Etale, RingHom.etale_iff_formallyUnramified_and_smooth, Algebra.instEtaleOfIsStandardEtale, integralClosure.isIntegrallyClosedOfFiniteExtension, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth; digest be2c83f20c7fe3e1. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
+  },
+  {
+   "tool": "grep",
+   "query": "IsEtale|IsRegular",
+   "results": "Logged 1 hits: 48; digest d80bfe55910a3d7e. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the results define etaleness or its locus, give a separable-field case or localization criterion, or prove normality of integral closure; none gives branch-locus purity."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-snc-root-punctured-torsor-splitting",
@@ -90,5 +318,73 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-finite-normalization-codimension-one-purity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Verified the finite-normalization application of Stacks 0BMB in five steps: normal/noetherian setup, both chain-height inequalities, codimension-one stalk unramifiedness, generic-point etaleness, and local purity at every remaining prime. Reused existing DAG lemmas; added just the general pointwise purity theorem, searched in Mathlib and left statement-only. No SGA source used.",
+  "blueprint": "Inherited uniformization input of lem-per-artin-gabber-affine-curve through the parameter-root quotient and punctured-torsor splitting: the purity invocation at ILO IX Proposition 2.1, printed p.134. Current latest ancestor proof is Artin–Gabber; this auxiliary algebraic branch retains its existing ancestry and unit.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-finite-qf",
+    "why": "Generic local algebra or scheme-theoretic criterion used exactly as stated in the finite-normalization application of Stacks 0BMB; no node of this Fourier/perverse unit supplies this criterion."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic local algebra or scheme-theoretic criterion used exactly as stated in the finite-normalization application of Stacks 0BMB; no node of this Fourier/perverse unit supplies this criterion."
+   },
+   {
+    "node": "lem-sbc-formally-unramified-stalk-neighbourhood",
+    "why": "Generic local algebra or scheme-theoretic criterion used exactly as stated in the finite-normalization application of Stacks 0BMB; no node of this Fourier/perverse unit supplies this criterion."
+   },
+   {
+    "node": "lem-sc-etale-at-prime-flat-unramified-criterion",
+    "why": "Generic local algebra or scheme-theoretic criterion used exactly as stated in the finite-normalization application of Stacks 0BMB; no node of this Fourier/perverse unit supplies this criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-finite-qf",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-sbc-formally-unramified-stalk-neighbourhood",
+  "lem-sc-etale-at-prime-flat-unramified-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-0e3e1c803",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-0e3e1c803 (reviewer sub-agent of L); spot-checked: I read Stacks pione 0BMB (lemma-purity, l.5118-5147). The new node lem-per-local-quasi-finite-branch-purity states exactly its five hypotheses: normal and regular stalks, quasi-finite at x, dim equal and >=1, and unramified at dim-1 generalizations, with the specialization direction correct. It is statement-only, unsplit and searched. An rg -L search over dag/nodes for 0BMB and purity found no duplicate: the sbc purity and extension nodes, the sbc smooth-depth-two nodes and the per-snc nodes all differ. The node is not a restatement of the item. The item statement is unchanged and agrees with the 0BMB application. Step 1: finite gives finite type and quasi-finite (02NU); unwinding quasi-finite at x to the fibre ring is acceptable inside the step. 00FN gives C Noetherian, 034L and 00GY give normal C and C_q, 0567 and 030B make A a normal domain (needed for going down), and A_p is regular. Step 2: 00GT plus going down 00H8 (A normal domain, C a domain integral over A, A in C) give ht q = ht p for every q, via 00KF/00E3. Step 3: a height-one q' contracts to a height-one p', and 00UO, 02GF and 02HE give unramified at q', as hypothesis (5) needs. Step 4: 00FP gives finite presentation, C_(0)=L, L is flat over K, Omega_{L/A}=Omega_{L/K} (the derivation argument checks), Omega_{L/K}=0, and 00U6 (3)=>(2) gives an etale neighbourhood. Step 5: nonzero q has height >=1, purity applies, the cover is local on the source, and finiteness comes from Step 1. Edge cases checked: A a field, L=K, dimension 1, the ramified t=u^e example, and inseparable extensions excluded. There is no cycle. The four tool_uses are generic and accepted. No SGA source is used. Batch-5: lem-trf-separable-field-differentials-vanish is a Mathlib leaf (Algebra.FormallyUnramified.of_isSeparable, Stacks 090W) with empty proof_deps. It is a general field fact outside the trace-formula and Poincare-duality assumptions; the only nearby non-trf node, lem-weil-pbc-fg-field-zero-differentials-separable, states the converse. Accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteNormalizationCodimensionOnePurity",
+  "declaration": "AlgebraicGeometry.finite_normalization_etale_of_codimension_one_differentials_vanish",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteNormalizationCodimensionOnePurity.lean",
+  "statement": "theorem finite_normalization_etale_of_codimension_one_differentials_vanish (A : Type u) [CommRing A] [IsDomain A] [IsRegularRing A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type u) [Field L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] [FiniteDimensional K L] [Algebra.IsSeparable K L] [Module.Finite A (integralClosure A L)] (hunram : ∀ (p : Ideal A) [p.IsPrime], p ≠ ⊥ → (∀ r : Ideal A, r.IsPrime → r < p → r = ⊥) → ∀ (q : Ideal (integralClosure A L)) [q.IsPrime] (hpq : p = q.comap (algebraMap A (integralClosure A L))), Subsingleton (@KaehlerDifferential (Localization.AtPrime p) (Localization.AtPrime q) _ _ (Localization.localRingHom p q (algebraMap A (integralClosure A L)) hpq).toAlgebra)) : IsFinite (Spec.map (CommRingCat.ofHom (algebraMap A (integralClosure A L)))) ∧ Etale (Spec.map (CommRingCat.ofHom (algebraMap A (integralClosure A L))))",
+  "branch": "newtargets-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54ad0e4d8",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Clause-by-clause match vs node and Stacks 0BMB (pione.tex l.5137-5147): IsDomain+IsRegularRing (Noetherian included, the recorded ring clause of def-weil-regular-scheme), IsFractionRing K, finite separable L with IsScalarTower A K L, C = integralClosure A L, Module.Finite, height one as p≠⊥ ∧ no prime strictly between, all q with p = q.comap, Subsingleton Ω via canonical localRingHom, conclusion IsFinite ∧ Etale of Spec.map. Shared universe u for A and L is forced by Spec.map and loses no generality (L has a copy in A's universe); documented. Edge cases ok: field A, L=K, dim 1, ramified t=s^2, zero ring, inseparable. The statement appears verbatim in the file. Node differs from live only in lean; live has no Lean record, so no supersession. Docstrings and proof plan present, sorry only, no definitions, imports exist, report sections present. No compile because no file changed. No findings."
+ }
 }

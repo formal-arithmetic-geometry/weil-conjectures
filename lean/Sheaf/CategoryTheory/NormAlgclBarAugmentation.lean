@@ -21,6 +21,7 @@ import WeilConjectures.CategoryTheory.DoubleComplexTotal
 import WeilConjectures.Algebra.Homology.FirstQuadrantTotalComparison
 import Sheaf.CategoryTheory.DerivedInjectiveResolutionNaturality
 import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! # The noncomplete scalar bar augmentation
 

@@ -1,0 +1,427 @@
+{
+ "id": "lem-sfb-countable-simple-extension-embedding",
+ "kind": "statement",
+ "title": "Embedding a countable simple extension in an uncountable algebraically closed field",
+ "statement": "Let $E\\subseteq L$ be fields [def-pc-field-extension], let $a\\in L$, and assume that the underlying set of $E$ is countable (admits an injection into $\\mathbf N$). Write $E(a)\\subseteq L$ for the intersection of all subfields containing $E$ and $a$. Let $\\Omega$ be an uncountable algebraically closed field [def-weil-algebraic-closure], where uncountable means that its underlying set admits no injection into $\\mathbf N$, and let $\\tau:E\\hookrightarrow\\Omega$ be a field embedding. Then the underlying set of $E(a)$ is countable, and there is a field embedding $\\widetilde\\tau:E(a)\\hookrightarrow\\Omega$ whose restriction to $E$ is $\\tau$. No algebraicity or characteristic assumption is made on $L/E$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09G1, lemma-field-extension-generated-by-one-element, proof of the algebraic quotient and transcendental rational-function cases; apply those presentations to a specified base-field embedding. Countability and availability of a transcendental target element are the polynomial-counting argument expanded in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "For $c\\in L$ put $S_c=\\{P(c)/Q(c):P,Q\\in E[T],\\ Q(c)\\ne0\\}$. This is a subfield of $L$: sums and products have denominators $Q(c)V(c)\\ne0$, negation negates the numerator, and the inverse of a nonzero $P(c)/Q(c)$ is $Q(c)/P(c)$. It contains $E$ (constant numerators and denominator $1$) and $c$ (numerator $T$). Conversely every subfield containing $E,c$ contains all these quotients. Thus the intersection defining $E(c)$ equals $S_c$. Polynomial evaluation here is the finite sum $P(c)=\\sum_i p_ic^i$, with the polynomial operations of [def-weil-polynomial-ring].",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09G1, lemma-field-extension-generated-by-one-element, proof, rational-function case; explicit rational expressions."
+   }
+  },
+  {
+   "text": "Fix an injection $E\\hookrightarrow\\mathbf N$. Finite coefficient lists encode $E[T]$ injectively in $\\mathbf N$: encode their entries using this injection and encode a finite list of natural numbers by its length and repeated pairing. Pairs of polynomials are therefore countable. Step 1 presents every element of $E(a)$ by a pair $(P,Q)$ with $Q(a)\\ne0$. Assign to each element the least natural-number code of such a pair representing it; different elements have different least codes. This is an injection $E(a)\\hookrightarrow\\mathbf N$, including when $a\\in E$ and when $E$ is finite.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09G1, lemma-field-extension-generated-by-one-element, proof, rational-function case; explicit rational expressions."
+   }
+  },
+  {
+   "text": "First suppose $a$ is algebraic over $E$, meaning that a nonzero polynomial over $E$ vanishes at $a$ [def-weil-algebraic-element]. By [lem-weil-pbc-simple-algebraic-extension-power-basis], $E(a)$ has a finite $E$-basis of size $d$. For any $x\\in E(a)$ the $d+1$ vectors $1,x,\\ldots,x^d$ are linearly dependent: their $d$ coordinates give a homogeneous system of $d$ linear equations in $d+1$ unknowns, with a nonzero solution by elimination. The resulting relation $\\sum_{i=0}^d e_ix^i=0$, with some $e_i\\ne0$, proves that $x$ is algebraic over $E$. Thus $E(a)/E$ is algebraic.",
+   "uses": [
+    "def-weil-algebraic-element",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GN, lemma-degree-minimal-polynomial, and Tag 09G1, lemma-field-extension-generated-by-one-element, algebraic case; finite-dimensional dependence argument of lemma-finite-is-algebraic."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] to the algebraic extension $E(a)/E$ from step 3, the given algebraically closed field $\\Omega$, and the specified homomorphism $\\tau:E\\to\\Omega$. It supplies a field homomorphism $\\widetilde\\tau:E(a)\\to\\Omega$ restricting to $\\tau$. It is injective: if $x\\ne0$ mapped to $0$, then $1=x x^{-1}$ would map to $0$, contradicting preservation of $1$. Together with step 2 this proves both conclusions in the algebraic case.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GU, lemma-map-into-algebraic-closure; extension of the prescribed base embedding, as stated by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Now suppose no nonzero polynomial in $E[T]$ vanishes at $a$. Regard $\\Omega$ as an $E$-extension through $\\tau$. By [lem-sfb-algebraic-elements-countable], the subset of $\\Omega$ consisting of elements algebraic over $E$ for this scalar structure is countable. It is not all of $\\Omega$, since otherwise its injection into $\\mathbf N$ would contradict the assumed uncountability of $\\Omega$. Choose $b$ outside this subset. By [def-weil-algebraic-element], for every nonzero $P\\in E[T]$ one has $P^\\tau(b)\\ne0$, where $P^\\tau$ applies $\\tau$ coefficientwise. Also $P(a)\\ne0$ for every such $P$, by the case assumption.",
+   "uses": [
+    "lem-sfb-algebraic-elements-countable",
+    "def-weil-algebraic-element"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GK, lemma-size-algebraic-extension, polynomial-counting bound, in the algebraic-subset form stated by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Using step 1 define $\\widetilde\\tau(P(a)/Q(a))=P^\\tau(b)/Q^\\tau(b)$ whenever $Q(a)\\ne0$. Step 5 ensures $Q\\ne0$ and $Q^\\tau(b)\\ne0$. If $P(a)/Q(a)=R(a)/V(a)$, then $(PV-RQ)(a)=0$, so $PV-RQ=0$ by the case assumption. Applying $\\tau$ to coefficients and evaluating at $b$ gives $P^\\tau(b)V^\\tau(b)=R^\\tau(b)Q^\\tau(b)$, which proves independence of the presentation. The formulas $(P/Q)+(R/V)=(PV+RQ)/(QV)$ and $(P/Q)(R/V)=PR/(QV)$ prove preservation of addition and multiplication after applying $\\tau$ coefficientwise; $1/1$ maps to $1$ and $e/1$ maps to $\\tau(e)$. Finally, if the image of $P(a)/Q(a)$ is zero, then $P^\\tau(b)=0$, whence $P=0$ by step 5 and the source element is zero. This gives the required embedding extending $\\tau$ in the remaining case. The countability conclusion was already proved in step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09G1, lemma-field-extension-generated-by-one-element, proof, rational-function case; explicit rational expressions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-algebraic-element",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-sfb-algebraic-elements-countable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tags 09G1, 09GK, 09GN and 09GU; explicit rational-expression, coding, and transcendental substitution arguments assembled using existing DAG leaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extend an embedding of a countable field into an uncountable algebraically closed field to a simple field extension generated by one element, with countable source",
+   "results": "OK 8 hits: Field.Emb.Cardinal.succEquiv, Field.Emb.Cardinal.leastExt, Field.Emb.Cardinal.succEquiv_coherence, Field.Emb.Cardinal.adjoin_image_leastExt, Field.Emb.Cardinal.deg_lt_aleph0, Field.Emb.Cardinal.factor, Field.Emb.Cardinal.isLeast_leastExt, Field.Emb.Cardinal.iSup_adjoin_eq_top. ",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-extension root parametrizations and rational-function equivalences are ingredients; none states countability plus extension of a specified embedding for both algebraic and transcendental generators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A simple extension of a countable field remains countable and every embedding of its base in an uncountable algebraically closed field extends to that simple extension",
+   "results": "OK 8 hits: Field.Emb.Cardinal.deg_lt_aleph0, Field.Emb.Cardinal.succEquiv, Field.Emb.Cardinal.leastExt, Algebraic.countable, FirstOrder.Field.ACF_categorical, Field.Emb.Cardinal.iSup_adjoin_eq_top, Field.Emb.cardinal_separableClosure, Field.infinite_emb_of_transcendental. ",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-extension root parametrizations and rational-function equivalences are ingredients; none states countability plus extension of a specified embedding for both algebraic and transcendental generators"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An embedding from a countable field into an uncountable algebraically closed field extends to any one generated field extension",
+   "results": "OK 8 hits: NumberField.ComplexEmbedding.Extension, Field.Emb, Field.Emb.Cardinal.deg_lt_aleph0, NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed, NumberField.Embeddings.instNonemptyRingHom, Field.embEquivOfIsAlgClosed, IntermediateField.Lifts.exists_lift_of_splits, Field.embEquivOfAdjoinSplits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-extension root parametrizations and rational-function equivalences are ingredients; none states countability plus extension of a specified embedding for both algebraic and transcendental generators"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"algHomAdjoinIntegralEquiv\"",
+   "results": "OK 2 hits: IntermediateField.algHomAdjoinIntegralEquiv, IntermediateField.algHomAdjoinIntegralEquiv_symm_apply_gen. ",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-extension root parametrizations and rational-function equivalences are ingredients; none states countability plus extension of a specified embedding for both algebraic and transcendental generators"
+  },
+  {
+   "tool": "grep",
+   "query": "mem_adjoin_simple_iff|algHomAdjoinIntegralEquiv|equiv.*(Transcendental|RatFunc)|ratFunc.*(equiv|Equiv)",
+   "results": "OK 23 hits: Mathlib/FieldTheory/Extension.lean, Mathlib/FieldTheory/Extension.lean, Mathlib/FieldTheory/Extension.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/Normal/Basic.lean, Mathlib/FieldTheory/PrimitiveElement.lean, Mathlib/FieldTheory/SeparableDegree.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-extension root parametrizations and rational-function equivalences are ingredients; none states countability plus extension of a specified embedding for both algebraic and transcendental generators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A countable field simple extension is countable and an embedding into an uncountable algebraically closed field extends to it",
+   "results": {
+    "t": "2026-10-24T00:22:03Z",
+    "tool": "leanfinder",
+    "query": "A countable field simple extension is countable and an embedding into an uncountable algebraically closed field extends to it",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Field.Emb.Cardinal.deg_lt_aleph0",
+     "Field.Emb.Cardinal.succEquiv_coherence",
+     "Field.Emb.Cardinal.succEquiv",
+     "Algebraic.countable",
+     "Field.Emb.Cardinal.leastExt",
+     "Field.Emb.Cardinal.iSup_adjoin_eq_top",
+     "FirstOrder.Field.ACF_categorical",
+     "Field.Emb.cardinal_separableClosure"
+    ],
+    "digest": "386e77d87700cd29"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: results supply only algebraic-extension or rational-expression ingredients, not the combined countability and prescribed embedding extension for an arbitrary generator"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField.mem_adjoin_simple_iff",
+   "results": {
+    "t": "2026-10-24T00:22:31Z",
+    "tool": "loogle",
+    "query": "IntermediateField.mem_adjoin_simple_iff",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "IntermediateField.mem_adjoin_simple_iff"
+    ],
+    "digest": "1a6894a973b0b97e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: results supply only algebraic-extension or rational-expression ingredients, not the combined countability and prescribed embedding extension for an arbitrary generator"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a field embedding from a countable field to a simple field extension into an uncountable algebraically closed field",
+   "results": {
+    "t": "2026-10-24T00:22:31Z",
+    "tool": "leansearch",
+    "query": "Extend a field embedding from a countable field to a simple field extension into an uncountable algebraically closed field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NumberField.ComplexEmbedding.Extension",
+     "Field.instInhabitedEmb",
+     "NumberField.ComplexEmbedding.lift",
+     "Field.Emb",
+     "Field.embEquivOfIsAlgClosed",
+     "Field.Emb.Cardinal.deg_lt_aleph0",
+     "IntermediateField.Lifts.exists_lift_of_splits",
+     "Field.infinite_emb_of_transcendental"
+    ],
+    "digest": "6cc194ddba4f2ffd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: results supply only algebraic-extension or rational-expression ingredients, not the combined countability and prescribed embedding extension for an arbitrary generator"
+  },
+  {
+   "tool": "grep",
+   "query": "mem_adjoin_simple_iff|isAlgebraic_adjoin_simple|countable.*adjoin",
+   "results": {
+    "t": "2026-10-24T00:22:31Z",
+    "tool": "grep",
+    "query": "mem_adjoin_simple_iff|isAlgebraic_adjoin_simple|countable.*adjoin",
+    "sub": "FieldTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/PrimitiveElement.lean",
+     "Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean",
+     "Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean",
+     "Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean",
+     "Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean",
+     "Mathlib/FieldTheory/RatFunc/IntermediateField.lean",
+     "Mathlib/FieldTheory/RatFunc/IntermediateField.lean",
+     "Mathlib/FieldTheory/RatFunc/IntermediateField.lean"
+    ],
+    "digest": "766bfa133277f293"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: results supply only algebraic-extension or rational-expression ingredients, not the combined countability and prescribed embedding extension for an arbitrary generator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intermediate field generated by one element is the set of quotients of two polynomials evaluated at that element",
+   "results": {
+    "t": "2026-10-24T00:23:02Z",
+    "tool": "leanfinder",
+    "query": "Intermediate field generated by one element is the set of quotients of two polynomials evaluated at that element",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IntermediateField.mem_adjoin_simple_iff",
+     "IntermediateField.mem_adjoin_iff",
+     "IntermediateField.mem_adjoin_range_iff",
+     "IntermediateField.AdjoinSimple.gen",
+     "IntermediateField.mem_adjoin_simple_self",
+     "IntermediateField.mem_adjoin_iff_div",
+     "IntermediateField.AdjoinPair.gen₁",
+     "IntermediateField.AdjoinSimple.coe_gen"
+    ],
+    "digest": "9ddffbf65c457171"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: results supply only algebraic-extension or rational-expression ingredients, not the combined countability and prescribed embedding extension for an arbitrary generator"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elements in a simple field extension are quotients of polynomial evaluations at its generator",
+   "results": {
+    "t": "2026-10-24T00:23:03Z",
+    "tool": "leansearch",
+    "query": "Elements in a simple field extension are quotients of polynomial evaluations at its generator",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IntermediateField.mem_adjoin_simple_iff",
+     "IntermediateField.mem_adjoin_iff_div",
+     "IntermediateField.adjoinRootEquivAdjoin",
+     "IntermediateField.mem_adjoin_range_iff",
+     "IntermediateField.mem_adjoin_iff",
+     "IntermediateField.finrank_adjoin_simple_eq_one_iff",
+     "AdjoinRoot.powerBasisAux",
+     "IntermediateField.AdjoinSimple.gen"
+    ],
+    "digest": "29451ba38ecd50bf"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: results supply only algebraic-extension or rational-expression ingredients, not the combined countability and prescribed embedding extension for an arbitrary generator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field generated by an algebraic element is an algebraic extension",
+   "results": {
+    "t": "2026-10-24T00:25:15Z",
+    "tool": "leanfinder",
+    "query": "A field generated by an algebraic element is an algebraic extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IntermediateField.isAlgebraic_adjoin_simple",
+     "IntermediateField.isAlgebraic_adjoin",
+     "IntermediateField.algebraAdjoinAdjoin.instIsAlgebraicSubtypeMemSubalgebraAdjoinAdjoin",
+     "IntermediateField.isAlgebraic_adjoin_iff_isAlgebraic",
+     "Algebra.isAlgebraic_adjoin_singleton_iff",
+     "IntermediateField.isAlgebraic_adjoin_pair",
+     "Algebra.adjoin_eq_top_of_primitive_element",
+     "IntermediateField.adjoin_simple_eq_top_iff_of_isAlgebraic"
+    ],
+    "digest": "4237c6deb5dd450a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: results supply only algebraic-extension or rational-expression ingredients, not the combined countability and prescribed embedding extension for an arbitrary generator"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField.isAlgebraic_adjoin_simple",
+   "results": {
+    "t": "2026-10-24T00:25:16Z",
+    "tool": "loogle",
+    "query": "IntermediateField.isAlgebraic_adjoin_simple",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "IntermediateField.isAlgebraic_adjoin_simple"
+    ],
+    "digest": "90f227e6fabf0bf2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: results supply only algebraic-extension or rational-expression ingredients, not the combined countability and prescribed embedding extension for an arbitrary generator"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every embedding of a countable field into an uncountable algebraically closed field extends after adjoining one arbitrary element and the resulting field is countable",
+   "results": {
+    "t": "2026-10-24T00:28:08Z",
+    "tool": "leanfinder",
+    "query": "Every embedding of a countable field into an uncountable algebraically closed field extends after adjoining one arbitrary element and the resulting field is countable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Field.Emb.Cardinal.deg_lt_aleph0",
+     "Field.Emb.Cardinal.leastExt",
+     "Field.Emb.Cardinal.succEquiv",
+     "FirstOrder.Field.ACF_categorical",
+     "Field.Emb.Cardinal.two_le_deg",
+     "Field.Emb.Cardinal.factor",
+     "Field.Emb.Cardinal.iSup_adjoin_eq_top",
+     "Field.infinite_emb_of_transcendental"
+    ],
+    "digest": "cff60d97efa8239b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: results supply only algebraic-extension or rational-expression ingredients, not the combined countability and prescribed embedding extension for an arbitrary generator"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-projective-complex-field-model",
+  "date": "2026-10-24",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: A smooth projective scheme has an embeddable finite field model. Supporting one-generator induction for the complex embedding: adjoining a single field generator preserves countability and permits extension of the embedding.",
+   "via": [
+    "lem-sfb-smooth-projective-complex-field-model",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-countable-simple-extension-embedding",
+  "worker": "stage1",
+  "summary": "Q13: proved countability by rational expressions with least-code representatives, separated the algebraic and transcendental cases, and reused the existing power-basis, algebraic-embedding and algebraic-elements-countable Mathlib leaves. No statement correction, new node, Lean writing or compilation. Checked prescribed-base-map compatibility, nonzero denominators, inseparable and finite-field cases.",
+  "blueprint": "Supporting one-generator induction of lem-sfb-smooth-projective-complex-field-model, along the inherited blueprint.from.place chain to direct-image stability (3): this proof provides both countability and extension of the chosen embedding. The current blueprint direct-images proof (3) is unchanged by this local supporting argument. Whole-blueprint searches for simple extension, rational expression, countable, 09G1, and field embedding found no equivalent blueprint node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-c1af7816a",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-c1af7816a (reviewer sub-agent of L); spot-checked: I read the statement in full and it is unchanged from base. It serves the parent lem-sfb-smooth-projective-complex-field-model step 6 exactly (E=E_j, a=b_{j+1}, Ω=ℂ). Neither live nor side-live has split the item (both unsplit), there is no repair note, and the delivery adds no new nodes. Steps: (1) E(c) equals the set of rational expressions P(c)/Q(c), elementary, with def-weil-polynomial-ring. (2) Countability by least codes of pairs of coefficient lists, elementary; a code fixes the pair, which fixes the element. (3) The power-basis Mathlib leaf (IntermediateField.adjoin.powerBasis, which needs only algebraicity) gives a finite E-basis; d+1 dependent powers then make E(a)/E algebraic. (4) The IsAlgClosed.lift leaf is applied with the given τ as φ; injectivity via x·x⁻¹=1. (5) Algebraic.countable is applied to Ω viewed as an E-extension through τ; Ω is uncountable, so some b is not algebraic and P^τ(b)≠0 for every nonzero P. (6) The 09G1 rational-function map P(a)/Q(a) ↦ P^τ(b)/Q^τ(b): well defined because PV−RQ vanishes at a and so is 0; it is a ring map, restricts to τ and is injective. The two cases are exhaustive and proof_deps equals the union of all uses. I checked Stacks fields.tex Tag 09G1 (line 357, both kernel cases) and the 09GK counting lemma (line 769). All cited nodes are Mathlib leaves or Mathlib definitions, so no off-unit tool uses arise; nothing cites SGA. The DAG has no duplicate: the nearby nodes on countable-base transcendence cardinality, large algebraically closed extensions and the prime subfield state other facts. Edge cases checked: a∈E, finite E, inseparable a, and the counterexample E=Ω=F̄_p with L=E(t), which shows the uncountability hypothesis is needed. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.CountableSimpleExtensionEmbedding",
+  "declaration": "IntermediateField.countable_adjoin_simple_and_exists_embedding",
+  "file": "lean/Sheaf/FieldTheory/CountableSimpleExtensionEmbedding.lean",
+  "statement": "theorem countable_adjoin_simple_and_exists_embedding {E : Type u} {L : Type v} {Ω : Type w} [Field E] [Field L] [Field Ω] [Algebra E L] [Countable E] [IsAlgClosed Ω] [Uncountable Ω] (a : L) (τ : E →+* Ω) : Countable (adjoin E {a}) ∧ ∃ τ' : adjoin E {a} →+* Ω, ∀ x : E, τ' (algebraMap E (adjoin E {a}) x) = τ x",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dfeb6c895",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Only change vs live/side-live is the new lean record; statement verbatim in file. Clauses match node: [Algebra E L] (def-pc-field-extension), [Countable E], adjoin E {a} = Subfield.closure intersection, [IsAlgClosed Ω] (def-weil-algebraic-closure mathlib_match), [Uncountable Ω], τ : E →+* Ω; conclusion Countable ∧ ∃ τ' extending τ via algebraMap. Independent universes, no extra hypotheses; edge cases a∈E, finite E, inseparable a, transcendental a covered. No duplicate in Mathlib or lean/Sheaf. Docstrings have source tags, blueprint id and six-step proof plan; proof is sorry only; Worker report and Second reading by Q139 present. No compile (no FIX)."
+ }
+}

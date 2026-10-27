@@ -1,0 +1,271 @@
+{
+ "id": "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+ "kind": "statement",
+ "title": "Evaluation of a cartesian algebra-diagram adjunction respects counits and coefficient restriction",
+ "statement": "Let $u:\\operatorname{Sh}(\\mathcal X)\\to\\operatorname{Sh}(\\mathcal Y)$ be a geometric morphism between topoi presented by sites small in the module universe, let $A$ be a commutative ring and let $J$ be a small category [def-weil-size-convention]. Let $B_Y:J\\to\\operatorname{CAlg}(\\operatorname{Sh}(\\mathcal Y))$ be a diagram of commutative algebras over the constant sheaf $\\underline A_Y$, and set $B_X=u^{-1}B_Y$, with the induced algebra structures and all actual diagram transitions. Use the small diagram sites of [lem-weil-pbc-diagram-site-realization], module sheaves [def-weil-sheaf-of-modules-category], constant ring sheaves [def-weil-pbc-constant-sheaf], and ordinary unbounded derived categories [def-weil-abstract-derived-category]. Write $D_A^J(T)$ for the derived category of $J$-diagrams of $\\underline A_T$-modules and $D_B(T)$ for the derived category of semilinear $B_T$-module diagrams. Let $U_T:D_B(T)\\to D_A^J(T)$ be exact restriction of scalars [def-pc-sheaf-restrict-scalars], and let $G_A\\dashv P_A$, $G_B\\dashv P_B$ be the canonical derived diagram inverse-image/direct-image adjunctions. The structural coefficient maps for $u$ are isomorphisms, so $G_A,G_B$ are exact inverse images.\nAll derived adjunctions below are induced from the module adjunctions. For $j\\in J$ let $e^B_{T,j}:D_B(T)\\to D(B_{T,j})$ and $e^A_{T,j}:D_A^J(T)\\to D(\\underline A_T)$ be exact evaluations. Write $G_j\\dashv P_j$ for the canonical derived adjunction on $B_{T,j}$-coefficients, $G\\dashv P$ for that on constant-$A$ coefficients, and $U_{T,j}$ for restriction from $B_{T,j}$ to $\\underline A_T$. There are canonical natural isomorphisms\n$$\\lambda_j:e^B_{X,j}G_B\\xrightarrow{\\sim}G_j e^B_{Y,j},\\qquad \\beta_j:e^B_{Y,j}P_B\\xrightarrow{\\sim}P_j e^B_{X,j},\\qquad \\delta_j:e^A_{Y,j}P_A\\xrightarrow{\\sim}P e^A_{X,j}.$$\nThe left comparison is localization of the componentwise inverse-image identification; the right comparisons use the derived adjunctions induced from the module evaluation adjunctions. If $\\varepsilon_B,\\varepsilon_j$ are the indicated counits, then\n$$e^B_{X,j}(\\varepsilon_{B,N})=\\varepsilon_{j,e^B_{X,j}N}\\,G_j(\\beta_{j,N})\\,\\lambda_{j,P_BN}.$$\nEquivalently, for every $t:M\\to P_BN$ with transpose $t^\\flat:G_BM\\to N$,\n$$(\\beta_{j,N}e^B_{Y,j}(t))^\\flat=e^B_{X,j}(t^\\flat)\\lambda_{j,M}^{-1}.$$\nLet $d:U_YP_B\\xrightarrow{\\sim}P_AU_X$ and $d_j:U_{Y,j}P_j\\xrightarrow{\\sim}PU_{X,j}$ be the canonical coefficient-restriction/direct-image comparisons, normalized by the common derived-composition maps of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Under $e^A_{T,j}U_T=U_{T,j}e^B_{T,j}$ their compatibility is the equality\n$$\\delta_{j,U_XN}\\,e^A_{Y,j}(d_N)=d_{j,e^B_{X,j}N}\\,U_{Y,j}(\\beta_{j,N}).$$\nThese comparisons are natural in $N$ and in the semilinear diagram transitions (after the corresponding restrictions of scalars). No preservation of K-injectives by varying-ring evaluation, coefficient flatness, perfectness or completeness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0941 (lemma-derived-limit-is-ok, exact evaluation adjoints); agent extraction of the evaluation/restriction normalization, original item steps 1 and 3.",
+  "note": "Agent-formulated intermediate coherence statement; not a separately numbered Stacks theorem."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized ordinary evaluation and coefficient restriction comparisons and the inverse-image mate, including its ordinary counit equation.",
+   "uses": [
+    "lem-pur-algebra-diagram-normalized-ordinary-comparisons",
+    "def-pur-algebra-diagram-normalization-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use exact scalar restriction and the common-composite right-derived normalization to construct d, dj and the comparisons for ring-transition restriction.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The free diagram left adjoint is the coproduct over arrows from the vertex and is exact in the Grothendieck category of module sheaves. Thus constant-ring evaluation preserves K-injectives. Derived comparison existence gives delta.",
+   "uses": [
+    "lem-weil-pbc-evaluation-free-diagram-adjunction",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-pur-algebra-diagram-normalized-derived-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a K-injective B-diagram, coefficient acyclicity gives invertibility of the fA right-derived unit after total restriction. The normalized constant-evaluation square transports this invertibility to the s unit at the constant evaluation. The vertex restriction square and conservativity of exact scalar restriction then give invertibility of the fj unit at the varying evaluation. Apply normalized derived-square existence to construct beta.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply unit-normalized derived comparison coherence to obtain the counit, arbitrary transpose, coefficient cube and both actual-arrow transition equations, and assemble the original existential assertion.",
+   "uses": [
+    "lem-pur-algebra-diagram-derived-comparison-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-algebra-diagram-normalization-interface",
+  "lem-pur-algebra-diagram-derived-comparison-coherence",
+  "lem-pur-algebra-diagram-normalized-derived-square",
+  "lem-pur-algebra-diagram-normalized-ordinary-comparisons",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-weil-pbc-evaluation-free-diagram-adjunction",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0D6E; normalized units and conservative exact scalar restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "evaluation.*(adjunction|counit|rightDerived)|((adjunction|counit|rightDerived).*[Ee]valuation)",
+   "results": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf comparisons do not give the normalized derived strict-diagram comparison and its stated coherence equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived evaluation direct image comparison for a diagram of sheaf algebras preserves the counit and is compatible with forgetting coefficients",
+   "results": "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; SheafOfModules.evaluation; HomologicalComplex.forgetEval; smoothSheafCommRing.forgetStalk_hom_comp_evalHom_apply; smoothSheafCommRing.forgetStalk_hom_comp_evalHom; smoothSheafCommRing.forgetStalk_inv_comp_eval_apply; SheafOfModules.evaluationPreservesLimit; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.hasLimit_cospan_forget_of_right",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf comparisons do not give the normalized derived strict-diagram comparison and its stated coherence equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"counit\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf comparisons do not give the normalized derived strict-diagram comparison and its stated coherence equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived direct image on modules over a varying algebra diagram commutes with the finite coefficient adjunction counit and restriction of scalars",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.counit_app; ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.ExtendRestrictScalarsAdj.Counit.map; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.RestrictionCoextensionAdj.counit'_app; ModuleCat.RestrictionCoextensionAdj.unit'; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf comparisons do not give the normalized derived strict-diagram comparison and its stated coherence equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoints induced on ringed diagram sites commute with evaluation; the comparison is compatible with adjunction transposes and changing rings",
+   "results": "CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.sheafComposeNatTrans; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; CategoryTheory.sheafComposeNatIso; CategoryTheory.Sheaf.adjunction_counit_app_val; CategoryTheory.plusPlusAdjunction_counit_app_val",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module or sheaf comparisons do not give the normalized derived strict-diagram comparison and its stated coherence equations."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*(adjunction|counit|rightDerived)|((adjunction|counit|rightDerived).*[Ee]valuation)",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Adjunction/Evaluation.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary evaluation and scalar restriction do not state the derived varying-ring comparison with these normalization equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"evaluation\", \"counit\"",
+   "results": "CategoryTheory.evaluationAdjunctionLeft_counit_app; CategoryTheory.evaluationAdjunctionRight_counit_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary evaluation and scalar restriction do not state the derived varying-ring comparison with these normalization equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image for a ringed diagram topos commutes with evaluation and restriction of scalars",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt; AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc; PresheafOfModules.pushforward_obj_map_apply'; PresheafOfModules.restrictScalarsObj; AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality; PresheafOfModules.pushforward_obj_obj; SheafOfModules.restrictScalars; PresheafOfModules.restrictScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary evaluation and scalar restriction do not state the derived varying-ring comparison with these normalization equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived direct image for modules over a small diagram of sheaf algebras preserves the adjunction counit and scalar restriction",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.unitToPushforwardObjUnit; PresheafOfModules.sheafificationAdjunction; LightCondensed.freeForgetAdjunction; PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary evaluation and scalar restriction do not state the derived varying-ring comparison with these normalization equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-perfect-quotient-exchange-normalization",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof steps 6-7 and 10). Original normalization proof steps 3: evaluation of the specified derived adjunction and compatibility with scalar restriction.",
+   "via": [
+    "lem-pur-perfect-quotient-exchange-normalization",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-algebra-diagram-evaluation-adjunction-normalization",
+  "worker": "stage1",
+  "summary": "Split by constant-coefficient evaluation and normalized ring-restriction resolutions: direct-image acyclicity of evaluated K-injective diagrams, construction of beta, actual derived transpose calculation, common-resolution coefficient equality, and actual transition naturality. Statement unchanged; no new nodes.",
+  "blueprint": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof steps 6-7 and 10). Original normalization proof steps 3: evaluation of the specified derived adjunction and compatibility with scalar restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-diagram-ring-restriction-pushforward",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-square-derived-counit",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   },
+   {
+    "node": "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General module/derived-category tool used with its stated small-site or exact-functor hypotheses for resolution, comparison, or Hom normalization in the ringed-topos route; not an alternative geometric purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-exact-square-derived-counit",
+  "lem-weil-pbc-restriction-ringed-topos-module-direct-image",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-ba04423f6",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-ba04423f6 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged and the proof is 8 steps (7606 characters) with no new nodes. Shape: one commit touching only the item and its report; proof_deps equals the union of the step uses; the dependency closure (252 nodes) has no cycle; there is no SGA source. The item has no re-split note and is not in any dropped list. Live and side-live still show it unsplit, so the delivery is not superseded. Sources checked: Stacks sites-cohomology 07A6 lemma-adjoint (l.3990), 0D6E lemma-derived-pushforward-composition (l.4011) and 0941 lemma-derived-limit-is-ok (l.5067); 0941 concerns constant abelian towers only, and the proof correctly does not use it for varying rings. Step 1 unpacks the varying-ring diagram site, which is elementary; restriction of scalars reflects quasi-isomorphisms because it keeps the underlying abelian sheaf. Step 2: the free-diagram left adjoint L_j is exact (finite subsums plus exact filtered colimits in a Grothendieck category), so constant-A evaluation preserves K-injectives by right-adjoint-preserves-kinjective; the hypotheses of exact-square-derived-counit hold. Step 3: the composition normalization (f = restriction along ΔA_X→B_X, g = u) gives d_QI = Qf_A(a), and f(c) gives d_j. Step 4 is the key step and I verified it: H_j is K-injective; h·a_j ≃ cU(b) by the K-injective Hom bijection; two-out-of-three on f(h)f(a_j) = f(c)f(Ub) makes f_j(b) a quasi-isomorphism, so η_{f_j,I_j} is invertible without claiming I_j is K-injective. This is sound for non-flat transitions such as ℤ→ℤ/2. Step 5: β is defined by η-normalization; it is natural and resolution-independent by kinjective-derived-map-computation. Step 6: the Hom formula of exact-square-derived-counit, specialized to identities, pins both adjunctions and gives the transpose identity and the counit identity e(ε_B) = ε_j·G_j(β)·λ in the printed directions; this makes β the mate of λ. Step 7: both sides are represented by Qf(a_j) and Qf(cUb), and the identification uses the unique transition class k = h. Step 8: the transitions go through η_{f_j,r_X I_k}, which is invertible by step 4 at k and the composition normalization; the δ case is the special case B = ΔA, and d is automatically compatible with transitions. Edge cases checked: empty J, J = {∗}, discrete J, parallel arrows, monoid categories, zero ring. I accept the worker-written tool_uses (generic K-injective, derived-functor and ringed-topos tools). Maintainer note: lem-pur-system-evaluation-scalar-restriction-normalization (Q95, unsplit, N-sequences with a general ring sheaf A_Y) overlaps this item but is not a one-line specialization of it; once both are split, check whether it can cite this item. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AlgebraDiagramEvaluationAdjunctionNormalization",
+  "declaration": "CategoryTheory.AlgebraDiagramAdjunctionPresentation.evaluationAdjunctionNormalization",
+  "declarations": [
+   "CategoryTheory.AlgebraDiagramAdjunctionPresentation.evaluationAdjunctionNormalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AlgebraDiagramEvaluationAdjunctionNormalization.lean",
+  "statement": "theorem evaluationAdjunctionNormalization : p.EvaluationAdjunctionNormalization",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "The theorem signature and all ordinary and derived normalization clauses are retained. The interface is publicly reexported from the Defs module; explicit constant-slice instance bindings preserve the chosen localizations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-216a27d2a",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read the node, 8 stmt_deps, module (855 lines), report, and side-live RingedToposMorphism/DiagramRingRestrictionPushforward/DiagramSite*/derived-adjunction sources. All clauses match: lambda0 pinned by the mate equation with cB; beta/delta/d/dj/ca/qa pinned by derived-unit squares over ordinary comparisons pinned on underlying sheaves; counit, transpose, coefficient equality and transition naturality have correct types and composition order. Varying-ring evaluation is new (diagramSiteModuleComponent is constant-ring only); general restrictScalars exactness has no public declaration, so sorry clauses OK. HEq presentation fields relate propositionally equal objects (same pattern as the landed dependency), so satisfiable. Edge cases (empty J, loops, zero rings, non-flat maps) covered. Declarations list = 51 file decls, statement verbatim, only the lean field changed, docstrings ok, no compile needed. Advisory: RingedToposMorphism and the diagramCoefficient* defs (proof_dep theorem module) have owners outside stmt_deps; S2 cannot add them."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dda57",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261025T122446-L-1774038",
+  "kind": "interface",
+  "note": "independent cc review: dda572889e4d vs passed delivery 983832b9a42f (diff -r: only module/node rename + one local irreducible attr) and vs clone original module/node (Defs interface line-diffed; item node field-diffed: only lean/proof/proof_deps/proof_origin); 0 importers by grep"
+ }
+}

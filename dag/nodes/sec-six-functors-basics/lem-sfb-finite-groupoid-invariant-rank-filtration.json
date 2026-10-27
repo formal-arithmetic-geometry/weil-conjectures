@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-finite-groupoid-invariant-rank-filtration",
+ "kind": "statement",
+ "title": "Invariant closed rank filtration of a finite groupoid",
+ "statement": "Let $(U,R,s,t,e,i,c)$ be a groupoid scheme [def-a1-groupoid-scheme], and assume that $s,t:R\\to U$ are finite [def-weil-finite-integral-morphism]. Then there are closed subschemes [def-weil-closed-immersion] $U=Z_0\\supseteq Z_1\\supseteq Z_2\\supseteq\\cdots$ with $\\bigcap_{n\\geq0}|Z_n|=\\varnothing$, such that $s^{-1}(Z_n)=t^{-1}(Z_n)$ as closed subschemes of $R$ for every $n$. For every integer $r\\geq1$, put $D_r=Z_{r-1}\\setminus Z_r$, the open subscheme [def-weil-open-immersion] of $Z_{r-1}$ obtained by removing $|Z_r|$. The projection $R\\times_{s,U}D_r\\to D_r$ [def-pc-fibre-product] is finite locally free of degree $r$ [def-pc-finite-locally-free]. No Noetherian, quasi-compact, flatness or finite-presentation assumption on $U,s,t$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0AB9 (lemma-finite-stratify), statement."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=s_*\\mathcal O_R$. It is finite-type quasi-coherent and $s$ is affine by [def-weil-finite-integral-morphism]. Form $I_n=\\operatorname{Fit}_n(E)$ and its closed subscheme $Z_n$ using [lem-trf-fitting-ideal-sheaf-pullback]. Locally, for a surjection $A^m\\twoheadrightarrow E(V)$ on $V=\\operatorname{Spec}A$, $I_n(V)$ consists of the $(m-n)$-minors of kernel rows, with unit ideal for $n\\geq m$. Laplace expansion expresses each size $k$ minor as a sum of entries times size $k-1$ minors, so $I_n\\subseteq I_{n+1}$ and $Z_{n+1}\\subseteq Z_n$ as closed subschemes. Every point has an affine neighbourhood with a finite such generating family by [lem-weil-pbc-quasi-coherent-finite-type-affine](a). On it $I_m=\\mathcal O$, hence $Z_m$ is empty there. Thus $\\bigcap_{n\\geq0}|Z_n|=\\varnothing$, without a global generator bound.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-trf-fitting-ideal-sheaf-pullback",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, first paragraph; divisors.tex 05P8(1), with the affine minor construction 0C3C."
+   }
+  },
+  {
+   "text": "The identity section satisfies $se=\\mathrm{id}_U$ by [def-a1-groupoid-scheme], so on every affine $V=\\operatorname{Spec}A\\subset U$ the structure map $A\\to B=E(V)$ has a retraction $B\\to A$ and is injective. Choose $m$ generators $b_j$ of $B$. Any $m$ kernel rows give a square matrix $N$ with $N(b_j)_j=0$. Multiplying by its adjugate shows $\\det(N)b_j=0$ for every $j$, hence $\\det(N)$ annihilates $1_B$, since the $b_j$ generate $B$. Injectivity of $A\\to B$ gives $\\det(N)=0$. All generating minors of $I_0$ therefore vanish. The affine description in [lem-trf-fitting-ideal-sheaf-pullback] gives $I_0=0$ and $Z_0=U$. This also handles an empty affine open (its ring is zero).",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "lem-trf-fitting-ideal-sheaf-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, omitted detail establishing Z_0=U; replace the printed O_S summand by O_U."
+   }
+  },
+  {
+   "text": "Let $P=R\\times_{s,U,t}R$ and $Q=R\\times_{s,U,s}R$, both over $R$ by the second projections $p_2,q_2$. The first clause of [lem-a1-groupoid-source-pullback-translation] gives an isomorphism $F:P\\xrightarrow{\\sim}Q$ over $R$, $F(a,b)=(c(a,b),b)$, with inverse $(d,b)\\mapsto(c(d,i(b)),b)$. We use this clause without any local-freeness assumption. Apply [lem-weil-pbc-affine-pushforward-base-change](2) to $s$ along $t$ and along $s$. It identifies $t^*E$ with $p_{2,*}\\mathcal O_P$ and $s^*E$ with $q_{2,*}\\mathcal O_Q$. Pullback of functions along the displayed isomorphism over $R$ identifies these two direct-image algebras, hence $t^*E\\cong s^*E$ as $\\mathcal O_R$-modules.",
+   "uses": [
+    "lem-a1-groupoid-source-pullback-translation",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, comparison through the two lower Cartesian squares of more-groupoids.tex equation-diagram; groupoids.tex 02YE and coherent.tex 02KG."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fitting-ideal-sheaf-pullback] to $s,t$ and $E$: the closed subschemes $s^{-1}(Z_n)$ and $t^{-1}(Z_n)$ are respectively the closed Fitting subschemes for $s^*E$ and $t^*E$. Under the isomorphism of Step 3, a generating surjection to one module becomes a generating surjection to the other with exactly the same kernel, so their kernel-minor ideals agree on every affine open. Their defining ideals, and therefore their closed subschemes of $R$, are equal. This is scheme-theoretic invariance, even for nonreduced $U$.",
+   "uses": [
+    "lem-trf-fitting-ideal-sheaf-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, invariance paragraph; divisors.tex 0C3D, using invariance of kernel presentations under a module isomorphism."
+   }
+  },
+  {
+   "text": "Fix $r\\geq1$ and put $W_r=U\\setminus|Z_r|$. By [lem-trf-fitting-ideal-generate-locally](1), $E|_{W_r}$ is locally generated by at most $r$ sections. The subscheme $D_r=Z_{r-1}\\setminus|Z_r|$ is the closed subscheme of $W_r$ defined by $I_{r-1}|_{W_r}$: on affine charts both descriptions are the quotient by this ideal followed by restriction to the open complement. By [lem-trf-fitting-ideal-sheaf-pullback] for the open inclusion $W_r\\to U$, this ideal is $\\operatorname{Fit}_{r-1}(E|_{W_r})$. Its image after pullback to $D_r$ is zero, since its elements map to zero in the quotient rings. Apply [lem-sfb-bounded-generators-fitting-pullback-criterion] to $E|_{W_r}$ and $D_r\\to W_r$. Thus $E|_{D_r}$, meaning ordinary pullback, is locally free of constant rank $r$.",
+   "uses": [
+    "lem-trf-fitting-ideal-generate-locally",
+    "lem-trf-fitting-ideal-sheaf-pullback",
+    "lem-sfb-bounded-generators-fitting-pullback-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, last paragraph; divisors.tex 05P8(3), via 0C3G / more-algebra.tex 07ZD."
+   }
+  },
+  {
+   "text": "Put $f_r:R\\times_{s,U}D_r\\to D_r$. By [lem-weil-pbc-affine-morphism-permanence](1), $f_r$ is affine. By [lem-weil-pbc-affine-pushforward-base-change](2), $f_{r,*}\\mathcal O\\cong E|_{D_r}$. Choose an affine open cover $(V_a=\\operatorname{Spec}A_a)$ of $D_r$ trivializing this rank-$r$ module (Step 5). Affineness gives $f_r^{-1}(V_a)=\\operatorname{Spec}B_a$; taking sections of the trivialization gives an $A_a$-module basis of $B_a$ with $r$ elements. By [lem-weil-pbc-finite-free-algebra-spectrum], $f_r$ over $V_a$ is finite, flat and locally of finite presentation. At every $v\\in V_a$, [lem-pc-finite-affine-fibre-sections] identifies its fibre algebra with $B_a\\otimes_{A_a}\\kappa(v)\\cong\\kappa(v)^r$, as $\\kappa(v)$-vector spaces, so its degree is $r$. The open inclusions $V_a\\to D_r$ are etale by [lem-weil-pbc-open-immersion-etale] and cover $D_r$. Apply [lem-weil-pbc-finite-locally-free-degree-etale-descent] to conclude that $f_r$ is finite locally free of degree $r$. This includes empty $D_r$ with its empty cover. Steps 1--5 supply the other assertions.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-pc-finite-affine-fibre-sections",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "0AB9, final sentence; morphisms.tex 02KA and 02KB, and coherent.tex 02KG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-trf-fitting-ideal-sheaf-pullback",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-a1-groupoid-scheme",
+  "lem-a1-groupoid-source-pullback-translation",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-trf-fitting-ideal-generate-locally",
+  "lem-sfb-bounded-generators-fitting-pullback-criterion",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-pc-finite-affine-fibre-sections",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-finite-locally-free-degree-etale-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0AB9 (lemma-finite-stratify), expanded through Divisors 05P8 and the source-pullback translation of Groupoids 02YE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "groupoid.*(stratif|saturat|rank)|invariant.*Fitting",
+   "results": "{\"t\": \"2026-10-23T09:32:46Z\", \"tool\": \"grep\", \"query\": \"groupoid.*(stratif|saturat|rank)|invariant.*Fitting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits give finite morphisms, finite fibres, the empty closed subscheme and representation invariants, not an invariant rank filtration of an arbitrary finite scheme groupoid; Loogle and grep give no scheme-groupoid filtration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite groupoid scheme admits invariant Fitting rank strata on which source is finite locally free of each rank",
+   "results": "{\"t\": \"2026-10-23T09:32:54Z\", \"tool\": \"leanfinder\", \"query\": \"A finite groupoid scheme admits invariant Fitting rank strata on which source is finite locally free of each rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\"], \"digest\": \"dbc6aa5e1bfe6a38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits give finite morphisms, finite fibres, the empty closed subscheme and representation invariants, not an invariant rank filtration of an arbitrary finite scheme groupoid; Loogle and grep give no scheme-groupoid filtration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite groupoid scheme invariant closed rank stratification by Fitting ideals with empty intersection",
+   "results": "{\"t\": \"2026-10-23T09:33:59Z\", \"tool\": \"leansearch\", \"query\": \"Finite groupoid scheme invariant closed rank stratification by Fitting ideals with empty intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.instIsEmptyCarrierCarrierCommRingCatSubschemeTop\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"Representation.invariants_eq_inter\", \"FDRep.average_char_eq_finrank_invariants\", \"AlgebraicGeometry.IsFinite\", \"FundamentalGroupoid.isEmpty_iff\", \"frattini\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\"], \"digest\": \"46d293e08b3da78b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits give finite morphisms, finite fibres, the empty closed subscheme and representation invariants, not an invariant rank filtration of an arbitrary finite scheme groupoid; Loogle and grep give no scheme-groupoid filtration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T09:33:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fitting\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the semantic hits give finite morphisms, finite fibres, the empty closed subscheme and representation invariants, not an invariant rank filtration of an arbitrary finite scheme groupoid; Loogle and grep give no scheme-groupoid filtration."
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(stratif|rank)|invariant.*Fitting|fittingIdeal",
+   "results": "{\"t\": \"2026-10-23T11:53:53Z\", \"tool\": \"grep\", \"query\": \"groupoid.*(stratif|rank)|invariant.*Fitting|fittingIdeal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-power filtrations, finite morphisms, manifold groupoids, or flat module ranks, not Fitting stratification of scheme groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite groupoid scheme has invariant closed strata with source finite locally free of fixed rank",
+   "results": "{\"t\": \"2026-10-23T11:53:54Z\", \"tool\": \"leansearch\", \"query\": \"A finite groupoid scheme has invariant closed strata with source finite locally free of fixed rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"StructureGroupoid.mk\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"StructureGroupoid.isLocalStructomorphWithinAt_localInvariantProp\", \"StructureGroupoid.LocalInvariantProp.rec\"], \"digest\": \"1a29d1387969419b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-power filtrations, finite morphisms, manifold groupoids, or flat module ranks, not Fitting stratification of scheme groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fitting\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T11:53:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fitting\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-power filtrations, finite morphisms, manifold groupoids, or flat module ranks, not Fitting stratification of scheme groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite scheme groupoid invariant closed rank filtration from Fitting ideals of the source algebra",
+   "results": "{\"t\": \"2026-10-23T11:54:00Z\", \"tool\": \"leanfinder\", \"query\": \"Finite scheme groupoid invariant closed rank filtration from Fitting ideals of the source algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.stableFiltration\", \"Ideal.Filtration\", \"Ideal.Filtration.Stable\", \"Ideal.Filtration.N\", \"Ideal.Filtration.submodule_fg_iff_stable\", \"Ideal.Filtration.Stable.exists_pow_smul_eq\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"Ideal.Filtration.Stable.bounded_difference\"], \"digest\": \"57feb2236f7161a8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-power filtrations, finite morphisms, manifold groupoids, or flat module ranks, not Fitting stratification of scheme groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fitting subschemes of a finite algebra with a groupoid action are invariant and their rank differences are flat",
+   "results": "{\"t\": \"2026-10-23T11:56:48Z\", \"tool\": \"leanfinder\", \"query\": \"Fitting subschemes of a finite algebra with a groupoid action are invariant and their rank differences are flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArithFrobAt.exists_of_isInvariant\", \"Algebra.HasGoingDown.of_flat\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.isLocallyConstant_rankAtStalk\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"Module.free_of_flat_of_finrank_eq\", \"Algebra.Smooth.flat\", \"Submodule.LinearDisjoint.rank_le_one_of_flat_of_self\"], \"digest\": \"8279921a7ba44ed3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-power filtrations, finite morphisms, manifold groupoids, or flat module ranks, not Fitting stratification of scheme groupoids."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-almost-dense-flat-locus",
+  "date": "2026-10-23",
+  "group": "Q68"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-finite-flat-over-almost-dense-subscheme. Supporting Tag 0ABA, first paragraph: the invariant filtration furnished by Tag 0AB9.",
+   "via": [
+    "lem-sfb-finite-groupoid-almost-dense-flat-locus",
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-groupoid-invariant-rank-filtration",
+  "worker": "stage1",
+  "summary": "Read Stacks 0AB9 and 05P8, 02YE, 02KB and 02KG. Expanded the zero-Fitting determinant argument, arbitrary-pullback invariance, fixed-rank generator criterion, and finite local freeness using existing affine finite-free, fibre-comparison and etale-descent nodes. No new nodes. Statement unchanged; corrected the source notation O_S to O_U in the proof. No Lean declaration matches the whole item.",
+  "blueprint": "Supporting input along the recorded ancestry for det-thm-sf-ctf-stability-direct-images proof (3): Tag 0ABA uses precisely the invariant closed filtration of 0AB9. Current latest blueprint direct-image proof (3) retains the open/proper reduction. No blueprint node states this filtration or the new generic affine criterion; keep from.node=null exactly as blueprint_refs.py ancestor reports for this pre-existing chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fitting-ideal-sheaf-pullback",
+    "why": "Generic Fitting ideal construction, affine realization and arbitrary pullback, needed for the 0AB9 proof; the unit does not supply a different Fitting construction."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic finite-generation-on-affines criterion used to obtain a local, not global, generator bound."
+   },
+   {
+    "node": "lem-a1-groupoid-source-pullback-translation",
+    "why": "Use only its hypothesis-free source-pullback isomorphism, not its finite-locally-free rank consequence; the unit has no groupoid Cartesian-square lemma."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Use the arbitrary affine structure-algebra base-change isomorphism, not a cohomology theorem; the unit has no such algebra comparison."
+   },
+   {
+    "node": "lem-trf-fitting-ideal-generate-locally",
+    "why": "Generic bounded-generator locus for a finite-type quasi-coherent module, as in Divisors 05P8(2); no corresponding unit lemma."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic stability of affineness under arbitrary base change, used only to check the hypothesis of the affine structure-algebra criterion; no alternative construction of the unit is involved."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic finite-free algebra theorem, applied to the structure algebra on each trivializing affine open; it supplies finite, flat and locally finitely presented without Noetherianity."
+   },
+   {
+    "node": "lem-pc-finite-affine-fibre-sections",
+    "why": "Generic fibre tensor comparison identifies the degree on each affine trivializing open with the r-element basis rank."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic fact that each open trivializing chart is etale, checking the covering hypothesis of degree descent."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "why": "Generic descent of the fixed-degree morphism property from the trivializing open cover, used as an etale cover; no unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fitting-ideal-sheaf-pullback",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-a1-groupoid-source-pullback-translation",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-trf-fitting-ideal-generate-locally",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-pc-finite-affine-fibre-sections",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-finite-locally-free-degree-etale-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-e91d4a790",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-e91d4a790 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. First S1 split; no repair note, so the re-split rule does not apply. The statement matches Stacks 0AB9 (more-groupoids.tex l.2421) and divisors 05P8 (l.1384) hypothesis by hypothesis; Z_n=V(Fit_n) as in Stacks, with U=Z_0. Step checks: (1) monotonicity by Laplace on minors of matrices with rows in K, and the empty intersection from local generator bounds (quasi-coherent-finite-type-affine (a)); (2) se=id gives a retraction B->A, the adjugate gives det N·1_B=0, so I_0=0 (correctly elementary; also fixes the source's O_S misprint); (3) only the hypothesis-free first clause of groupoid-source-pullback-translation is used, s(c(a,b))=s(b) checked against sc=s pr_1, and affine-pushforward-base-change(2) gives t*E≅s*E; (4) the Fitting sheaf pullback image ideal gives s^-1(Z_n)=t^-1(Z_n) scheme-theoretically; (5) generate-locally(1) on W_r=U\\|Z_r| plus the same-unit bounded-generators criterion along D_r=V(I_{r-1}|W_r) gives rank r; (6) affine permanence, finite-free algebra spectrum, fibre sections (degree r), open⇒étale and degree étale descent; empty D_r is covered. Edge cases tested: a finite group scheme over a field; Spec k[x] with an extra non-flat involution at the origin (Fit_1=(x), D_2 = origin of rank 2); empty U; unbounded ranks. Duplicates: rg -L for 0AB9 / Fitting with groupoid finds only the item and its parent; lem-a1-affine-groupoid-invariant-rank-strata needs finite locally free s and t, so it is a different statement. The parent almost-dense-flat-locus uses exactly the stated clauses. Batch-5: lem-trf-fitting-ideal-sheaf-pullback, lem-trf-fitting-ideal-generate-locally and the closure of the bounded-generators criterion (reaching def-trf-fitting-ideal-sheaf) contain only generic minor and Fitting algebra (13–14 trf nodes, no poincare, assume, trace-transport or batch-4 node); neither assumption gives them, so they are accepted. I accept all 10 declared tool_uses as generic black boxes. No SGA. Advisory only: lem-trf-fitting-ideal-minor-inclusions could replace the inline Laplace argument. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGroupoidInvariantRankFiltration",
+  "declaration": "AlgebraicGeometry.groupoid_exists_rank_filtration",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGroupoidInvariantRankFiltration.lean",
+  "statement": "theorem groupoid_exists_rank_filtration {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) [IsFinite s] [IsFinite t] : ∃ J : ℕ → U.IdealSheafData, J 0 = ⊥ ∧ Monotone J ∧ (⋂ n : ℕ, ((J n).support : Set U)) = ∅ ∧ (∀ n : ℕ, (J n).comap s = (J n).comap t) ∧ ∀ n : ℕ, (pullback.snd s (Scheme.Opens.ι ((J n).subschemeι ⁻¹ᵁ (J (n + 1)).support.compl) ≫ (J n).subschemeι)).IsFiniteLocallyFreeOfDegree (n + 1)",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-714ed15f3",
+  "group": "O4",
+  "result": "pass",
+  "note": "Only the item node changed (only its new lean record) plus the new module; lean.statement verbatim in file. Statement matches node and Stacks 0AB9 clause by clause: IsGroupoidScheme + IsFinite s,t only; Z_n = subscheme of J n with J 0 = ⊥ (Z_0 = U scheme-theoretically); Monotone J gives Z_{n+1} ⊆ Z_n; ⋂ supports = ∅; comap s = comap t is scheme-theoretic invariance (comap = ker of base-changed closed immersion); D_{n+1} = open of Z_n off |Z_{n+1}|; pullback.snd s IsFiniteLocallyFreeOfDegree (n+1) (finite+flat+LOFP+fibre degree). Edge cases checked: r=1, empty U/strata, unbounded ranks, nonreduced U, single universe u, not trivially satisfiable. No duplicate: only related decl is the finite-presentation variant with extra hypotheses, same encoding. No definitions, sorry only, docstrings with source place and blueprint tag, six-step proof plan, imported modules exist. No compile run (no file changed)."
+ }
+}

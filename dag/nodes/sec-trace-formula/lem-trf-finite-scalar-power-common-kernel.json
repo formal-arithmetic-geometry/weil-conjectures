@@ -1,0 +1,211 @@
+{
+ "id": "lem-trf-finite-scalar-power-common-kernel",
+ "kind": "statement",
+ "title": "Positive powers preserve a finite family with zero common kernel",
+ "statement": "Let $A$ be a commutative ring and $M$ an $A$-module: an abelian group with scalar multiplication satisfying $1m=m$, $(ab)m=a(bm)$, $(a+b)m=am+bm$ and $a(m+m')=am+am'$. Let $n\\geq0$ and $f_1,\\ldots,f_n\\in A$. Write $M^{\\oplus n}$ for the finite direct sum [def-weil-pbc-direct-sum-modules]. Assume that the additive map $M\\to M^{\\oplus n}$, $m\\mapsto(f_1m,\\ldots,f_nm)$, is injective; equivalently, for every $m\\in M$, the equations $f_i m=0$ for all $1\\leq i\\leq n$ imply $m=0$. Then for every tuple of integers $e_1,\\ldots,e_n\\geq1$ and every $m\\in M$, the equations $f_i^{e_i}m=0$ for all $i$ imply $m=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Tag 0565 (lemma-when-injective-covering), the induction on the sum of the exponents in the converse proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-direct-sum-modules], the zero tuple is the family all of whose coordinates are zero. Thus injectivity of the displayed additive map gives the hypothesis in the form: if $f_i z=0$ for every $i$, then $z=0$. For $n=0$ the direct sum has just the empty tuple, so injectivity forces $M=0$ and the conclusion holds. Henceforth fix $n>0$ and the scalar family.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0565 (lemma-when-injective-covering), converse proof: induction on the sum of the positive exponents."
+   }
+  },
+  {
+   "text": "We prove the assertion for all positive exponent tuples and all $z\\in M$ by strong induction on the nonnegative integer $s=\\sum_{i=1}^n(e_i-1)$. If $s=0$, each summand is nonnegative and hence $e_i=1$ for every $i$. The equations $f_i^{e_i}z=0$ are then $f_i z=0$, so Step 1 gives $z=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0565 (lemma-when-injective-covering), converse proof: induction on the sum of the positive exponents."
+   }
+  },
+  {
+   "text": "Let $s>0$ and assume the assertion for every tuple whose sum of excess exponents is less than $s$, and for every element of $M$. Choose $k$ with $e_k>1$ and set $z=f_k m$. Define $d_k=e_k-1$ and $d_j=e_j$ for $j\\ne k$. All $d_j$ are positive and $\\sum_j(d_j-1)=s-1$. For $j=k$, $f_k^{d_k}z=f_k^{e_k}m=0$. For $j\\ne k$, commutativity of $A$ and associativity of the action give $f_j^{d_j}z=f_j^{e_j}(f_km)=f_k(f_j^{e_j}m)=0$. The induction hypothesis applied to $(d_j)$ and $z$ therefore gives $f_km=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0565 (lemma-when-injective-covering), converse proof: induction on the sum of the positive exponents."
+   }
+  },
+  {
+   "text": "Now define $c_k=1$ and $c_j=e_j$ for $j\\ne k$. Step 3 gives $f_k^{c_k}m=f_km=0$, and every other equation $f_j^{c_j}m=0$ is an original hypothesis. The tuple is positive and $\\sum_j(c_j-1)=s-(e_k-1)<s$. Apply the same strong induction hypothesis to $(c_j)$ and $m$ to obtain $m=0$. This closes the induction and proves the assertion for every positive exponent tuple.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0565 (lemma-when-injective-covering), converse proof: induction on the sum of the positive exponents."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0565 (lemma-when-injective-covering), converse proof: induction on the sum of the positive exponents."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "annihilator.*(pow|[Ff]in)|([Ff]in|pow).*annihilator|iInf.*ker|ker.*iInf",
+   "results": "{\"t\": \"2026-10-22T06:46:40Z\", \"tool\": \"grep\", \"query\": \"annihilator.*(pow|[Ff]in)|([Ff]in|pow).*annihilator|iInf.*ker|ker.*iInf\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuotSMulTop.lean\", \"Mathlib/RingTheory/HopkinsLevitzki.lean\", \"Mathlib/RingTheory/Jacobson/Radical.lean\", \"Mathlib/RingTheory/Jacobson/Radical.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Nakayama.lean\"], \"digest\": \"23242dae0340f418\"} Read the hits. IsSMulRegular.pow and pow_iff (Mathlib/Algebra/Regular/SMul.lean:150,158) concern a single scalar acting injectively, which is not assumed here. DirectSum.lmap_injective concerns coordinatewise maps on a direct sum, not one module mapping diagonally into many copies. Torsion-order and Noetherian-domain intersection results do not give joint injectivity for a finite scalar family. The first Loogle query was rejected for unknown identifier pow and is not evidence of absence; the valid IsSMulRegular.pow query was also run and its hit read.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injectivity of the map m to the tuple f_i m implies injectivity of m to the tuple f_i raised to positive exponents times m for a finite family in a commutative ring module",
+   "results": "{\"t\": \"2026-10-22T06:46:40Z\", \"tool\": \"leansearch\", \"query\": \"Injectivity of the map m to the tuple f_i m implies injectivity of m to the tuple f_i raised to positive exponents times m for a finite family in a commutative ring module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectSum.lmap_injective\", \"IsSMulRegular.pow\", \"Module.End.injective_of_iterate_injective\", \"LinearMap.prodOfFinsuppNat_injective\", \"Module.End.iterate_injective\", \"IsRegular.smul_right_injective\", \"LinearIndependent.map_of_injective_injective\", \"Module.Invertible.rTensor_injective_iff\"], \"digest\": \"17e13274d0cc0e7c\"} Read the hits. IsSMulRegular.pow and pow_iff (Mathlib/Algebra/Regular/SMul.lean:150,158) concern a single scalar acting injectively, which is not assumed here. DirectSum.lmap_injective concerns coordinatewise maps on a direct sum, not one module mapping diagonally into many copies. Torsion-order and Noetherian-domain intersection results do not give joint injectivity for a finite scalar family. The first Loogle query was rejected for unknown identifier pow and is not evidence of absence; the valid IsSMulRegular.pow query was also run and its hit read.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.annihilator, pow",
+   "results": "{\"t\": \"2026-10-22T06:46:40Z\", \"tool\": \"loogle\", \"query\": \"Submodule.annihilator, pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'pow'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the hits. IsSMulRegular.pow and pow_iff (Mathlib/Algebra/Regular/SMul.lean:150,158) concern a single scalar acting injectively, which is not assumed here. DirectSum.lmap_injective concerns coordinatewise maps on a direct sum, not one module mapping diagonally into many copies. Torsion-order and Noetherian-domain intersection results do not give joint injectivity for a finite scalar family. The first Loogle query was rejected for unknown identifier pow and is not evidence of absence; the valid IsSMulRegular.pow query was also run and its hit read.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a finite family of scalars on a module has zero common annihilator, then any positive powers of those scalars also have zero common annihilator",
+   "results": "{\"t\": \"2026-10-22T06:46:51Z\", \"tool\": \"leanfinder\", \"query\": \"If a finite family of scalars on a module has zero common annihilator, then any positive powers of those scalars also have zero common annihilator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.isTorsion'_powers_iff\", \"Submodule.pow_pOrder_smul\", \"Submodule.pOrder\", \"Submodule.exists_isTorsionBy\", \"IsSMulRegular.pow_iff\", \"Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree\", \"Submodule.annihilator_top_inter_nonZeroDivisors\", \"IsSMulRegular.pow\"], \"digest\": \"a80b3a1f221dbf0c\"} Read the hits. IsSMulRegular.pow and pow_iff (Mathlib/Algebra/Regular/SMul.lean:150,158) concern a single scalar acting injectively, which is not assumed here. DirectSum.lmap_injective concerns coordinatewise maps on a direct sum, not one module mapping diagonally into many copies. Torsion-order and Noetherian-domain intersection results do not give joint injectivity for a finite scalar family. The first Loogle query was rejected for unknown identifier pow and is not evidence of absence; the valid IsSMulRegular.pow query was also run and its hit read.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSMulRegular.pow",
+   "results": "{\"t\": \"2026-10-22T06:46:59Z\", \"tool\": \"loogle\", \"query\": \"IsSMulRegular.pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsSMulRegular.pow\"], \"digest\": \"84f847b2024615cd\"} Read the hits. IsSMulRegular.pow and pow_iff (Mathlib/Algebra/Regular/SMul.lean:150,158) concern a single scalar acting injectively, which is not assumed here. DirectSum.lmap_injective concerns coordinatewise maps on a direct sum, not one module mapping diagonally into many copies. Torsion-order and Noetherian-domain intersection results do not give joint injectivity for a finite scalar family. The first Loogle query was rejected for unknown identifier pow and is not evidence of absence; the valid IsSMulRegular.pow query was also run and its hit read.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*pow|pow.*annihilator|IsSMulRegular",
+   "results": "{\"t\": \"2026-10-22T06:48:14Z\", \"tool\": \"grep\", \"query\": \"annihilator.*pow|pow.*annihilator|IsSMulRegular\", \"sub\": \"Algebra/Regular\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Regular/Prod.lean\", \"Mathlib/Algebra/Regular/Prod.lean\", \"Mathlib/Algebra/Regular/Pi.lean\", \"Mathlib/Algebra/Regular/Pi.lean\", \"Mathlib/Algebra/Regular/ULift.lean\", \"Mathlib/Algebra/Regular/ULift.lean\", \"Mathlib/Algebra/Regular/SMul.lean\", \"Mathlib/Algebra/Regular/SMul.lean\"], \"digest\": \"a21e458ec76d988a\"} Read the hits. IsSMulRegular.pow and pow_iff (Mathlib/Algebra/Regular/SMul.lean:150,158) concern a single scalar acting injectively, which is not assumed here. DirectSum.lmap_injective concerns coordinatewise maps on a direct sum, not one module mapping diagonally into many copies. Torsion-order and Noetherian-domain intersection results do not give joint injectivity for a finite scalar family. The first Loogle query was rejected for unknown identifier pow and is not evidence of absence; the valid IsSMulRegular.pow query was also run and its hit read.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of commuting scalars with zero common kernel on a module still has zero common kernel after replacing each scalar by any positive power",
+   "results": "{\"t\": \"2026-10-23T23:43:34Z\", \"tool\": \"leanfinder\", \"query\": \"A finite family of commuting scalars with zero common kernel on a module still has zero common kernel after replacing each scalar by any positive power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.pow_iff\", \"Module.End.ker_pow_constant\", \"IsSMulRegular.pow\", \"Module.End.genEigenspace_zero_nat\", \"LinearMap.eventually_iSup_ker_pow_eq\", \"Module.End.eventually_disjoint_ker_pow_range_pow\", \"Module.End.pow_map_zero_of_le\", \"Module.End.submodule_pow_eq_zero_of_pow_eq_zero\"], \"digest\": \"372beb568a6e16f1\"} Read the returned types and the local source of IsSMulRegular.pow/pow_iff (Algebra/Regular/SMul.lean:150,158), Ideal.iInf_ker_le (RingTheory/LocalProperties/Basic.lean:555) and the Fitting decomposition (RingTheory/Artinian/Module.lean:326). Single-scalar injectivity, localization-at-all-primes criteria, and stabilization requiring extra hypotheses do not state joint injectivity for this finite scalar family.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*pow|pow.*annihilator|IsSMulRegular",
+   "results": "{\"t\": \"2026-10-23T23:44:02Z\", \"tool\": \"grep\", \"query\": \"annihilator.*pow|pow.*annihilator|IsSMulRegular\", \"sub\": \"Algebra/Regular\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Regular/Prod.lean\", \"Mathlib/Algebra/Regular/Prod.lean\", \"Mathlib/Algebra/Regular/Pi.lean\", \"Mathlib/Algebra/Regular/Pi.lean\", \"Mathlib/Algebra/Regular/ULift.lean\", \"Mathlib/Algebra/Regular/ULift.lean\", \"Mathlib/Algebra/Regular/SMul.lean\", \"Mathlib/Algebra/Regular/SMul.lean\"], \"digest\": \"a21e458ec76d988a\"} Read the returned types and the local source of IsSMulRegular.pow/pow_iff (Algebra/Regular/SMul.lean:150,158), Ideal.iInf_ker_le (RingTheory/LocalProperties/Basic.lean:555) and the Fitting decomposition (RingTheory/Artinian/Module.lean:326). Single-scalar injectivity, localization-at-all-primes criteria, and stabilization requiring extra hypotheses do not state joint injectivity for this finite scalar family.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of scalars acts jointly injectively on a module if and only if any family of positive powers acts jointly injectively",
+   "results": "{\"t\": \"2026-10-23T23:44:03Z\", \"tool\": \"leansearch\", \"query\": \"A finite family of scalars acts jointly injectively on a module if and only if any family of positive powers acts jointly injectively\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.pow\", \"IsSMulRegular.pow_iff\", \"Module.End.injective_of_iterate_injective\", \"IsSMulRegular.mul_iff\", \"IsSMulRegular\", \"linearIndependent_iff_injective_fintypeLinearCombination\", \"IsSMulRegular.mul\", \"LinearIndependent\"], \"digest\": \"d17d2c0b225a613a\"} Read the returned types and the local source of IsSMulRegular.pow/pow_iff (Algebra/Regular/SMul.lean:150,158), Ideal.iInf_ker_le (RingTheory/LocalProperties/Basic.lean:555) and the Fitting decomposition (RingTheory/Artinian/Module.lean:326). Single-scalar injectivity, localization-at-all-primes criteria, and stabilization requiring extra hypotheses do not state joint injectivity for this finite scalar family.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSMulRegular.pow",
+   "results": "{\"t\": \"2026-10-23T23:44:03Z\", \"tool\": \"loogle\", \"query\": \"IsSMulRegular.pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsSMulRegular.pow\"], \"digest\": \"84f847b2024615cd\"} Read the returned types and the local source of IsSMulRegular.pow/pow_iff (Algebra/Regular/SMul.lean:150,158), Ideal.iInf_ker_le (RingTheory/LocalProperties/Basic.lean:555) and the Fitting decomposition (RingTheory/Artinian/Module.lean:326). Single-scalar injectivity, localization-at-all-primes criteria, and stabilization requiring extra hypotheses do not state joint injectivity for this finite scalar family.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "iInf.*ker|ker.*iInf|annihilator.*pow|pow.*annihilator",
+   "results": "{\"t\": \"2026-10-23T23:44:57Z\", \"tool\": \"grep\", \"query\": \"iInf.*ker|ker.*iInf|annihilator.*pow|pow.*annihilator\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"Mathlib/RingTheory/LocalProperties/Basic.lean\", \"Mathlib/RingTheory/Support.lean\", \"Mathlib/RingTheory/Ideal/Pure.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/HopkinsLevitzki.lean\"], \"digest\": \"3139ba1c74515b16\"} Read the returned types and the local source of IsSMulRegular.pow/pow_iff (Algebra/Regular/SMul.lean:150,158), Ideal.iInf_ker_le (RingTheory/LocalProperties/Basic.lean:555) and the Fitting decomposition (RingTheory/Artinian/Module.lean:326). Single-scalar injectivity, localization-at-all-primes criteria, and stabilization requiring extra hypotheses do not state joint injectivity for this finite scalar family.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-schematic-density-criterion",
+  "date": "2026-10-22",
+  "group": "Q105"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Affine algebra calculation of Tag 0573 in the Tag 0578 generic-fibre input below lem-trf-local-term-locality: the power-annihilator induction in Tag 0565, formerly Step 2 of lem-trf-affine-schematic-density-criterion.",
+   "via": [
+    "lem-trf-affine-schematic-density-criterion",
+    "lem-trf-schematic-density-generic-fibre-open",
+    "lem-trf-generic-fibre-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-finite-scalar-power-common-kernel",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 0565 and expanded its two uses of strong induction: first on f_k m with e_k decreased by one, then on m with e_k replaced by one. Preserved the full statement and handled the empty family explicitly. All four steps use only definitions, module identities, finite-sum arithmetic and strong induction, so no new node is needed. Searched the project, the whole DAG/blueprint, and Mathlib; single-scalar regularity is not joint regularity.",
+  "blueprint": "Realizes the power-annihilator induction of Tag 0565, formerly Step 2 of lem-trf-affine-schematic-density-criterion, in the inherited Tag 0573/0578 generic-fibre branch below lem-trf-local-term-locality. The latest blueprint source was read and the inherited ancestor/via chain is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-2b6768690",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-2b6768690 (reviewer sub-agent of L); spot-checked: The item statement is exactly the converse direction of Stacks Tag 0565 (algebra.tex lemma-when-injective-covering): any commutative ring, any module, n>=0, all positive exponents, with no hypothesis added or dropped. The statement is unchanged and self-contained, and the TeX is single-escaped. Step 1 uses only the zero family from def-weil-pbc-direct-sum-modules, whose statement I read; it also handles n=0, where the empty sum forces M=0. Steps 2-4 are a properly set-up strong induction on s=sum(e_i-1). The base case s=0 is Step 1. The first application to z=f_k m uses exponents e-delta_k; I checked the kth equation f_k^{e_k-1}f_k m=f_k^{e_k}m and the j!=k equations via commutativity, so the measure is s-1. The second application to m uses c_k=1, measure s-(e_k-1)<s. This is the source's 'take e_i=1' written out. All steps are genuinely elementary and nothing is circular or relabelled. Small cases tested: n=0, M=0, all e_i=1, n=1, Z/6 with (2,3) and e=(2,1), and the dual numbers excluded by the hypothesis. A grep over the snapshot DAG for 0565, the label, common kernel, scalar powers, f_i^{e_i} and M_{f_i} found no duplicate. The only citer is step 1 of the parent lem-trf-affine-schematic-density-criterion, which uses the lemma with M=A, consistent with the statement. There are no new nodes, no repair note, no SGA source and no tool_uses. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteScalarPowerCommonKernel",
+  "declaration": "Module.finite_scalar_power_common_kernel",
+  "file": "lean/Sheaf/RingTheory/FiniteScalarPowerCommonKernel.lean",
+  "statement": "theorem finite_scalar_power_common_kernel (A : Type u) [CommRing A] (M : Type v) [AddCommGroup M] [Module A M] (n : ℕ) (f : Fin n → A) (hinj : Function.Injective (fun m : M ↦ (DirectSum.linearEquivFunOnFintype A (Fin n) (fun _ ↦ M)).symm (fun i ↦ f i • m))) (e : Fin n → ℕ) (he : ∀ i, 1 ≤ e i) (m : M) (hm : ∀ i, f i ^ e i • m = 0) : m = 0",
+  "branch": "newtargets-dag",
+  "by": "Q152",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e25216dd",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Fresh delivery: node same as side-live apart from the new lean record; lean.statement word-for-word the file signature. The Lean matches the node and Stacks 0565 converse (algebra.tex 4404-4431): CommRing A, Module A M with independent universes u,v, f : Fin n → A, hinj = injectivity of m ↦ (DirectSum.linearEquivFunOnFintype A (Fin n) (fun _ ↦ M)).symm (fun i ↦ f i • m), the canonical map into the def-weil-pbc-direct-sum-modules DirectSum; e with 1 ≤ e i, hm : f i ^ e i • m = 0 ⊢ m = 0. No extra instances. Edge cases n=0 (Fin 0 forces M=0), zero ring/module, all e_i=1, n=1, Z/6 with (2,3) covered. Theorem-only module, proof sorry, docstrings give source, blueprint tag and proof steps 1-4. Report has Worker report and Second reading by Q152. No existing Mathlib/project duplicate. No compile run (no file changed); worker reports clean compiles. No findings."
+ }
+}

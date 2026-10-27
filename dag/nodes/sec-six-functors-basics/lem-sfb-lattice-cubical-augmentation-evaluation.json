@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-lattice-cubical-augmentation-evaluation",
+ "kind": "statement",
+ "title": "Internal cubical lattice augmentation and signed Koszul evaluation",
+ "statement": "Let $R$ be a commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], let $r\\geq0$, and put $D=\\mathbf Z^r$, $\\mathcal M=\\operatorname{Mod}_R$ and $\\mathcal E=\\mathcal A_R(D)$ [sk-def-sfb-module-objects, def-sfb-condensed-action-module]. Write $t:\\mathcal M\\to\\mathcal E$ for trivial action and $\\Gamma$ for invariants [lem-sfb-condensed-derived-restriction-calculus]. Use ordinary derived categories and localization $Q$ [def-weil-abstract-derived-category]. For equivariant cochain complexes use the finite Koszul complex of [lem-sfb-discrete-lattice-koszul-resolution] and its total $K(P)^n=\\bigoplus_{a+b=n}K_R(P^b;T)^a$, with differential $d_K+(-1)^a d_P$. Let $L^{-a}=\\bigoplus_{|I|=a,v\\in D}R[v,I]$ for $0\\leq a\\leq r$, zero otherwise, with translation in $v$, differential\n$$\\partial[v,I]=\\sum_{i\\in I}(-1)^{\\#\\{j\\in I:j<i\\}}([v+u_i,I\\setminus\\{i\\}]-[v,I\\setminus\\{i\\}]),$$\nand augmentation $\\varepsilon:L\\to tR[0]$ sending every vertex to $1$. Here $u_i$ is the $i$th basis vector. The integral contraction of [lem-sfb-integral-lattice-cubical-contraction] extends to internal $R$-modules: after forgetting the action it gives a homotopy $\\partial h+h\\partial=1-s\\varepsilon$, where $s(1)=[0,\\varnothing]$. The complex $L$ is K-flat in $\\mathcal E$ (tensoring with any acyclic equivariant complex has acyclic total), and $1\\otimes\\varepsilon:tX\\otimes_R L\\to tX$ is a quasi-isomorphism for every cochain complex $X$ in $\\mathcal M$. Set $c_a=(-1)^{a(a+1)/2}$ and $T^v=\\prod_iT_i^{v_i}$. For every bounded-below equivariant complex $P$, the formulas\n$$E_P:tK(P)\\otimes_R L\\longrightarrow P,\\qquad E_P(x\\otimes[v,I])=(-1)^{ab}c_a T^v x_I\\quad(x\\in K^a(P^b),\\ |I|=a),$$\nand zero for $|I|\\ne a$, define a natural equivariant chain map. The scaling $\\theta_{a,b}=(-1)^{ab}c_a$ identifies the Koszul-total differential with the Hom differential $df=d_Pf-(-1)^{a+b}f\\partial$ on equivariant maps $L^{-a}\\to P^b$. If $b_P:\\Gamma(P)\\to K(P)$ denotes the degree-zero inclusion and $\\iota_P:t\\Gamma(P)\\to P$ the invariant inclusion, then\n$$E_P\\circ(tb_P\\otimes1)=\\iota_P\\circ(1\\otimes\\varepsilon).$$\nAll maps are internal-module morphisms, natural under profinite base change. At $r=0$ the augmentation and evaluation reduce to the identity and ordinary evaluation.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; agent-formulated lattice expansion, returned proof steps 7–8: internalized cubical contraction, K-flat augmentation and signed evaluation. The blueprint supplies the route, not this structural calculation."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "def-sfb-condensed-action-tensor",
+  "lem-sfb-koszul-functor-preserves-zero",
+  "def-sfb-lattice-cubical-model"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-lattice-cubical-sheaf-resolution] with $Q=R$: its $L_a(R)=\\bigoplus_{|I|=a,v\\in D}R$ with coproduct maps $[v,I]$, boundary, augmentation and translation are exactly the $L$, $\\partial$, $\\varepsilon$ and action of the statement, and it supplies internal $R$-linear maps $s=s_R$ and $h_a$, obtained from the column-finite integral matrices of [lem-sfb-integral-lattice-cubical-contraction] by replacing each integer $m$ by $m1_R$, with $\\epsilon s=1$ and $\\partial h+h\\partial=1-s\\epsilon$; also $\\partial^2=0$ and $\\epsilon\\partial=0$, since $L_\\bullet(R)\\to R$ is an augmented chain complex. Translation commutes with $\\partial,\\epsilon$, so on the underlying modules these are translation-compatible maps; equivariance for all generalized sections of $\\underline D$ in $\\mathcal A_R(D)$ [def-sfb-condensed-action-module] is the clopen-local check of step 3. Thus $L\\to tR[0]$ is an equivariant chain map. Only the underlying-module maps $h,s$ are needed; no equivariance of them is claimed. Each coefficient is an integer multiple of the unit, so all these maps commute with profinite restriction.",
+   "uses": [
+    "lem-sfb-lattice-cubical-sheaf-resolution",
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "sk-def-sfb-module-objects",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion of the ordinary open-direct-image input; cubical augmentation/evaluation calculation, step 1"
+   }
+  },
+  {
+   "text": "For any equivariant complex $A$, forget the action. Under the internal-to-section tensor comparison [lem-pe-internal-section-tensor-comparison], use the direct-sum total convention [def-pc-tensor-complex-sheaves]. On a homogeneous total summand put $H(z\\otimes\\ell)=(-1)^p z\\otimes h(\\ell)$ for $z\\in A^p$. Expanding gives $dH+Hd=1_A\\otimes(\\partial h+h\\partial)=1-(1\\otimes s)(1\\otimes\\epsilon)$: the two $d_Az\\otimes h\\ell$ coefficients are $(-1)^p$ and $(-1)^{p+1}$, and the other two coefficients are both $1$. Also $(1\\otimes\\epsilon)(1\\otimes s)=1$. Consequently the underlying augmentation $A\\otimes_R L\\to A$ is a homotopy equivalence. Homotopic maps induce equal cohomology maps: on a cocycle their difference is the boundary $dH(z)$. Therefore if $A$ is acyclic, so is $A\\otimes_R L$. Exactness is detected after forgetting the action by [lem-sfb-condensed-derived-restriction-calculus]; hence $L$ is K-flat in the stated sense. Taking $A=tX$ proves the claimed quasi-isomorphism for arbitrary, including unbounded, $X$. The homotopy is defined on each total summand, so no infinite summation or convergence is used.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion of the ordinary open-direct-image input; cubical augmentation/evaluation calculation, step 2"
+   }
+  },
+  {
+   "text": "The differential in [lem-sfb-discrete-lattice-koszul-resolution] is the signed sum of the commuting operators $T_i-1$. It squares to zero because deleting two distinct indices in opposite orders gives opposite signs and the same operator. Each $T_i$ commutes with $d_P$, so $d_K+(-1)^a d_P$ squares to zero as well. Before the scaling, identify a Koszul tuple $x=(x_I)\\in K^a(P^b)$ with the equivariant graded map $F_x:L^{-a}\\to P^b$ given by $F_x[v,I]=T^v x_I$. The coproduct universal property gives the map and its inverse evaluates at $[0,I]$. The same construction in every profinite slice identifies the internal modules of equivariant maps, rather than merely their global Hom groups. Locally constant $D$-valued generalized elements act by these formulas locally; a continuous map from a profinite set to discrete $D$ has finite image, so the finite clopen pieces glue. This checks equivariance also for generalized group sections.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion of the ordinary open-direct-image input; cubical augmentation/evaluation calculation, step 3"
+   }
+  },
+  {
+   "text": "Put $n=a+b$ and $f_x=\\theta_{a,b}F_x$, supported on $L^{-a}$. Its Hom differential, by the formula stated in the item, has a vertical component $\\theta_{a,b}F_{d_Px}$ and a horizontal component $(-1)^{a+b+1}\\theta_{a,b}F_{d_Kx}$. Indeed on $[v,J]$ the latter precomposition uses $F_x\\partial[v,J]=T^v\\sum_{i\\in J}(-1)^{\\#\\{j\\in J:j<i\\}}(T_i-1)x_{J\\setminus\\{i\\}}$. Now $c_{a+1}=(-1)^{a+1}c_a$ gives $\\theta_{a+1,b}=(-1)^{a+b+1}\\theta_{a,b}$, while $\\theta_{a,b+1}=(-1)^a\\theta_{a,b}$. These equalities identify the displayed Hom differential with $d_K+(-1)^a d_P$. Each $\\theta$ is a unit with inverse itself. Since $0\\leq a\\leq r$, in each total degree there are finitely many Hom components, so product and direct-sum totals coincide in this identification.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion of the ordinary open-direct-image input; cubical augmentation/evaluation calculation, step 4"
+   }
+  },
+  {
+   "text": "Define $E_P$ on total tensor summands by the formula in the statement. It is balanced over $R$, hence defines an internal linear morphism, since $T^v$ and coordinate projections are $R$-linear. To check the chain equation let $x\\in K^a(P^b)$ and $k=|I|$. For $k=a$, only the vertical differential contributes to $E_Pd$, with coefficient $(-1)^a\\theta_{a,b+1}=\\theta_{a,b}$, exactly the coefficient in $d_PE_P$. For $k=a+1$, $E_P(x\\otimes[v,I])=0$; the horizontal differential and the lattice boundary contribute respectively $\\theta_{a+1,b}$ and $(-1)^{a+b}\\theta_{a,b}$ times the same expression $T^v\\sum_{i\\in I}(-1)^{\\#\\{j\\in I:j<i\\}}(T_i-1)x_{I\\setminus\\{i\\}}$. Their sum is zero by the preceding recurrence. For every other $k$ both sides vanish. These checks include the extreme Koszul degrees by the zero convention. The tensor differential used here is precisely [def-pc-tensor-complex-sheaves]. Thus the evaluation is a chain map, with no flatness assumption on $P$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion of the ordinary open-direct-image input; cubical augmentation/evaluation calculation, step 5"
+   }
+  },
+  {
+   "text": "For a lattice element $w$, translation in $L$ changes the nonzero evaluation to $\\theta_{a,b}T^{v+w}x_I=T^w(\\theta_{a,b}T^v x_I)$, proving equivariance since the first tensor factor has trivial action. For an equivariant cochain map $g:P\\to P'$, the identities $gT^v=T'^vg$ and $g(x_I)=(K(g)x)_I$ prove naturality on every summand. All these formulas commute with coefficient restriction and with profinite pullback, because they use only finite sums, module maps and the natural action maps. The same clopen-local check as in step 3 verifies the action of all generalized sections.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion of the ordinary open-direct-image input; cubical augmentation/evaluation calculation, step 6"
+   }
+  },
+  {
+   "text": "The invariant inclusion is killed by every $T_i-1$, so its inclusion in Koszul degree zero is the chain map $b_P$. On an invariant homogeneous element $x\\in\\Gamma(P^b)$ and a vertex $[v,\\varnothing]$, evaluation is $\\theta_{0,b}T^vx=x$, which equals $\\iota_P(x)\\epsilon[v,\\varnothing]$. On cells of positive dimension both composites are zero. The coproduct and balanced tensor universal properties give the claimed equality of chain maps. Here [lem-sfb-condensed-derived-restriction-calculus] supplies the invariant inclusion fixed after every profinite base change. For $r=0$ there is only $[0,\\varnothing]$, $c_0=1$ and $K(P)=P$; the augmentation is $R\\to R$, and $E_P$ is the unit evaluation $P\\otimes_R R\\to P$. For the zero ring all the maps are the unique maps between zero modules. No argument used invertibility of an integer other than $-1$.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent lattice expansion of the ordinary open-direct-image input; cubical augmentation/evaluation calculation, step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-lattice-cubical-sheaf-resolution",
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-discrete-lattice-koszul-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image; explicit finite-column internalization and total differential calculation, with integral contraction as cited input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cubical lattice resolution of the trivial internal module is K flat and has a signed evaluation chain map from Koszul cochains",
+   "results": "{\"t\": \"2026-10-22T06:02:07Z\", \"tool\": \"leanfinder\", \"query\": \"Cubical lattice resolution of the trivial internal module is K flat and has a signed evaluation chain map from Koszul cochains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution_complex\", \"SimplicialObject.Splitting.nondegComplex\", \"Rep.standardComplex.x_projective\", \"Rep.standardComplex.forget₂ToModuleCat\", \"CategoryTheory.Abelian.LeftResolution.chainComplexFunctor\", \"CategoryTheory.Abelian.LeftResolution.chainComplexXIso\", \"CategoryTheory.Abelian.LeftResolution.chainComplex\", \"CategoryTheory.ProjectiveResolution.cochainComplex\"], \"digest\": \"35879ff2c75bbec2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.standardResolution and bar resolutions concern ordinary module representations and different chain models; none constructs the internal cubical lattice augmentation and the signed Koszul evaluation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"eval\"",
+   "results": "{\"t\": \"2026-10-22T06:02:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomComplex\\\", \\\"eval\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"NumberField.InfinitePlace.LiesOver.instLiesOverRealValAbsoluteValueExistsRingHomComplexEqPlaceMkOfLiesOver\", \"NumberField.InfinitePlace.Completion.instCoeWithAbsRealValAbsoluteValueExistsRingHomComplexEqPlace\", \"NumberField.InfinitePlace.instCompletableTopFieldWithAbsRealValAbsoluteValueExistsRingHomComplexEqPlace\"], \"digest\": \"031650ad167c99fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.standardResolution and bar resolutions concern ordinary module representations and different chain models; none constructs the internal cubical lattice augmentation and the signed Koszul evaluation"
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|koszul.*eval|eval.*koszul",
+   "results": "{\"t\": \"2026-10-22T06:02:07Z\", \"tool\": \"grep\", \"query\": \"cubical|koszul.*eval|eval.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.standardResolution and bar resolutions concern ordinary module representations and different chain models; none constructs the internal cubical lattice augmentation and the signed Koszul evaluation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cubical lattice resolution of the trivial internal module is K flat and has a signed evaluation chain map from Koszul cochains",
+   "results": "{\"t\": \"2026-10-22T06:02:08Z\", \"tool\": \"leansearch\", \"query\": \"Cubical lattice resolution of the trivial internal module is K flat and has a signed evaluation chain map from Koszul cochains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.resolution\", \"Module.Flat.tfae_equational_criterion\", \"Rep.standardResolution\", \"Module.Flat.iff_forall_isTrivialRelation\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"Rep.barResolution\", \"CategoryTheory.ProjectiveResolution.cochainComplexXIso.congr_simp\"], \"digest\": \"fdfa0c25638a7f0f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.standardResolution and bar resolutions concern ordinary module representations and different chain models; none constructs the internal cubical lattice augmentation and the signed Koszul evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free abelian group cubical chains tensor contraction and Hom evaluation with total differential signs",
+   "results": "{\"t\": \"2026-10-22T06:02:17Z\", \"tool\": \"leanfinder\", \"query\": \"Free abelian group cubical chains tensor contraction and Hom evaluation with total differential signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.ιTensorObj\", \"groupHomology.inhomogeneousChains.d\", \"HomologicalComplex.tensor_unit_d₂\", \"groupHomology.inhomogeneousChains.d_eq\", \"groupHomology.inhomogeneousChains.d_single\", \"Rep.standardComplex.d_of\", \"Rep.standardComplex.d\"], \"digest\": \"34e7fab990a6ca82\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Rep.standardResolution and bar resolutions concern ordinary module representations and different chain models; none constructs the internal cubical lattice augmentation and the signed Koszul evaluation"
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|koszul.*eval|eval.*koszul",
+   "results": "{\"t\": \"2026-10-22T12:01:27Z\", \"tool\": \"grep\", \"query\": \"cubical|koszul.*eval|eval.*koszul\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary representation resolutions, general Hom differentials or unrelated declarations; no internal cubical lattice augmentation with the prescribed Koszul evaluation signs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cubical lattice resolution K flat tensor augmentation and Koszul evaluation chain map",
+   "results": "{\"t\": \"2026-10-22T12:01:27Z\", \"tool\": \"leansearch\", \"query\": \"Cubical lattice resolution K flat tensor augmentation and Koszul evaluation chain map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.PInfty\", \"CategoryTheory.Abelian.LeftResolution.chainComplexMap\", \"Module.Flat.ker_lTensor_eq\", \"CategoryTheory.ProjectiveResolution.Hom.hom\", \"AlgebraicTopology.DoldKan.P\", \"CategoryTheory.Abelian.LeftResolution.chainComplexMap_comp\", \"LinearMap.kerLTensorEquivOfSurjective\", \"HomologicalComplex.tensorHom\"], \"digest\": \"19d1a44e9987f3fd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary representation resolutions, general Hom differentials or unrelated declarations; no internal cubical lattice augmentation with the prescribed Koszul evaluation signs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"eval\"",
+   "results": "{\"t\": \"2026-10-22T12:01:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"HomComplex\\\", \\\"eval\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"NumberField.InfinitePlace.LiesOver.instLiesOverRealValAbsoluteValueExistsRingHomComplexEqPlaceMkOfLiesOver\", \"NumberField.InfinitePlace.Completion.instCoeWithAbsRealValAbsoluteValueExistsRingHomComplexEqPlace\", \"NumberField.InfinitePlace.instCompletableTopFieldWithAbsRealValAbsoluteValueExistsRingHomComplexEqPlace\"], \"digest\": \"031650ad167c99fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary representation resolutions, general Hom differentials or unrelated declarations; no internal cubical lattice augmentation with the prescribed Koszul evaluation signs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cubical free abelian lattice resolution signed Koszul total cochain evaluation into internal modules",
+   "results": "{\"t\": \"2026-10-22T12:01:38Z\", \"tool\": \"leanfinder\", \"query\": \"Cubical free abelian lattice resolution signed Koszul total cochain evaluation into internal modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.AlternatingCofaceMapComplex.map\", \"AlgebraicTopology.AlternatingCofaceMapComplex.obj\", \"AlgebraicTopology.alternatingCofaceMapComplex\", \"inhomogeneousCochains.d_eq\", \"inhomogeneousCochains.d\", \"AlgebraicTopology.alternatingCofaceMapComplex_obj\", \"Rep.standardComplex.d_of\", \"inhomogeneousCochains.d_hom_apply\"], \"digest\": \"e33a931274f7f8d5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary representation resolutions, general Hom differentials or unrelated declarations; no internal cubical lattice augmentation with the prescribed Koszul evaluation signs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom cochain differential signed evaluation and tensoring a chain homotopy equivalence",
+   "results": "{\"t\": \"2026-10-22T12:03:21Z\", \"tool\": \"leanfinder\", \"query\": \"Hom cochain differential signed evaluation and tensoring a chain homotopy equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.δ_ofHomotopy\", \"CochainComplex.HomComplex.δ_neg_one_cochain\", \"CochainComplex.HomComplex.δ_v\", \"CochainComplex.HomComplex.Cochain.ofHomotopy\", \"Homotopy.shift\", \"Homotopy.mkCoinductive\", \"CochainComplex.HomComplex.δ\", \"CochainComplex.MappingConeCompHomotopyEquiv.homotopyInvHomId\"], \"digest\": \"0eda21370f97a640\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: only ordinary representation resolutions, general Hom differentials or unrelated declarations; no internal cubical lattice augmentation with the prescribed Koszul evaluation signs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), ordinary open direct image; agent lattice expansion: returned proof steps 7–8: internalized cubical contraction, K-flat augmentation and signed evaluation.",
+   "via": [
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lattice-cubical-augmentation-evaluation",
+  "worker": "stage1",
+  "summary": "Reused the integral cubical contraction; internalized its finite-column matrices and tensor homotopy explicitly. Proved K-flatness by contraction after forgetting the action, without an unstated flatness criterion. Checked the signed Hom identification, evaluation chain equation, invariant normalization and profinite naturality on all total summands. No new nodes and no statement correction. Repair of returned head b596e2c13f3: compared the retained split with the current live unsplit node, re-read all seven proof-dependency statements, and verified all twelve citation quotations still match. The live statement, statement dependencies, source and ancestry agree with the retained version; the reviewed seven-step argument is reapplied by the delivery tool on the current DAG for live promotion.",
+  "blueprint": "Realizes paragraph (3) of the current direct-images proof, through the ordinary lattice expansion in the parent comparison proof steps 7–8: cubical contraction, augmentation and signed evaluation.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic tensor dictionary for internal modules on any small ringed site; identifies the underlying total tensor and reflects acyclicity. This unit supplies no alternative tensor dictionary."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-f7a5f1135",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-f7a5f1135 (reviewer sub-agent of L); spot-checked: FIX: the mathematics is correct, and I re-applied one citation repair (C5). Shape: one commit on e6c19e9 with the item and the report. No new nodes, statement and stmt_deps unchanged, no repair note, no SGA. Live (clones/live and side-live) still has the item unsplit, so nothing supersedes this delivery. This head is previous head b596e2c with only split_report changed: the proof is byte-identical. The b596e2c review gave FIX, and that FIX was lost across the promotion return. Source: blueprint main-20261015 direct-images proof, paragraph (3), which gives the route only; proof_origin=agent is correct. I read all eight cited statements in full and recomputed the signs. Step 2: with H=(−1)^p 1⊗h, dH+Hd=1⊗(∂h+h∂)=1−(1⊗s)(1⊗ε) on each total summand. K-flatness follows because forgetting the action detects exactness (restriction-calculus). Step 3: d_K²=0, and T^w F_x[v,I]=F_x[v+w,I]. Generalized sections are covered because a continuous map from a profinite set to D has finite image and clopen fibres. Step 4: c_{a+1}/c_a=(−1)^{a+1}, so θ_{a+1,b}=(−1)^{a+b+1}θ_{a,b} and θ_{a,b+1}=(−1)^aθ_{a,b}. Step 5: for k=a, (−1)^aθ_{a,b+1}=θ_{a,b}. For k=a+1, θ_{a+1,b}+(−1)^{a+b}θ_{a,b}=0. Step 7: θ_{0,b}=1 and T^v x=x on invariants, and positive cells give 0 on both sides. I checked r=0, r=1, the extreme Koszul degrees, the zero ring and unbounded X. Tool use lem-pe-internal-section-tensor-comparison is generic and accepted. Repair (C5): step 1 re-derived what the same-unit sibling lem-sfb-lattice-cubical-sheaf-resolution states (split, reviewed by Q05 on 2026-10-23): L_a(Q), s_Q and h from the integral matrices, εs=1, ∂h+h∂=1−sε, and the augmented complex. Step 1 now cites it with Q=R, and it is added to proof_deps. There is no cycle: a transitive search from the sibling does not reach the item. Equivariance in A_R(D) stays with step 3's clopen check. lem-sfb-lattice-injective-koszul-acyclicity (unsigned, single module, Fun(BD)) is not a duplicate. The citers multiplication-roof and evaluation-derived-counit use L, ε, E_P and c_a consistently. Maintainer: please apply this FIX at landing; it was lost once already.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LatticeCubicalAugmentationEvaluation",
+  "declaration": "Profinite.DiscreteLattice.CubicalEvaluation.lattice_cubical_augmentation_evaluation",
+  "declarations": [
+   "Profinite.DiscreteLattice.CubicalEvaluation.Evaluation",
+   "Profinite.DiscreteLattice.CubicalEvaluation.RankZero",
+   "Profinite.DiscreteLattice.CubicalEvaluation.lattice_cubical_augmentation_evaluation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LatticeCubicalAugmentationEvaluation.lean",
+  "statement": "theorem lattice_cubical_augmentation_evaluation : ∃ C : CubicalModel A r, (∀ P : CochainComplex (CondensedBar.Equivariant A (D r)) ℤ, P.Acyclic → (HomologicalComplex.tensorObj P C.L).Acyclic) ∧ (∀ X : CochainComplex (CondensedBar.Modules A) ℤ, QuasiIso (tensorAugmentation A r C.ε ((trivialComplex A r).obj X))) ∧ Nonempty (DiscreteComparison A r) ∧ ∀ (B : DiscreteComparison A r) (K : KoszulModel A.toMon r), ∃ F : Evaluation A r B K C, RankZero A r B K C F",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main existential theorem specifies the cubical complex, integral contraction, ordinary acyclic-tensor test, augmentation quasi-isomorphism, signed evaluation, full internal equivariant Hom identification with its two differential components, invariant normalization and rank-zero identity. Auxiliary data are characterized by actual coproduct universal properties and local coordinates, and are never chosen from the concluding existence assertion. The discrete-action comparison retains the original section action. Reviewer FIX (2026-10-24): the cubical model is chosen first and independently of the comparison and the Koszul model; the evaluation clauses hold for every normalized DiscreteComparison B (whose existence is still asserted), so a citer may instantiate the canonical constant-section comparison rather than an unknown one pinned only up to a central automorphism such as -1. H1: auxiliary data declarations are publicly reexported from LatticeCubicalEvaluationCore and LatticeCubicalEvaluationModel, with their Lean attachments recorded on lem-sfb-koszul-functor-preserves-zero and def-sfb-lattice-cubical-model. The main theorem statement and proof plan are unchanged.",
+  "fixed_by": "NT-stage2-cc-90628f6b1"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90628f6b1",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Read item, 9 stmt_deps (KoszulModel, integral cubical Chains/contraction, ActionModule/Invariants, actionTensor), module and report (Worker report + Second reading present). Only lean + stmt_deps changed (gains landed def-sfb-condensed-action-tensor). All clauses faithful: L by coproduct/boundary signs/translation/ε/s/Homotopy/integral realization; K-flat for all acyclic P; QuasiIso 1⊗ε for unbounded X; E pinned by θ_{a,b}=(-1)^{|ab|}c_a T^v x_I and offDiagonal zero; Hom components recomputed (vertical (-1)^a, horizontal (-1)^{a+b+1}); normalization; rank zero. Edge cases r=0,1, extreme degrees, zero ring, char 2. Fault H3: ∃ B : DiscreteComparison pinned only up to central automorphism (−1, T^w) of forgetAction, so E/b signs relative to a hidden B. FIX: statement restructured to ∃ C, Kflat ∧ QIso ∧ Nonempty (DiscreteComparison A r) ∧ ∀ B K, ∃ F, RankZero (stronger, true by transport), docstring step 3 updated, lean-record with verbatim statement. nt_compile --json timed out at 60 s twice at load ~90; lcompile.run(timeout=560) rc 0 in 46.8 s. Advisory: DiscreteComparison parallels landed Bridge over ULift (Group r) vs D r; Q57 sheaf-resolution proof-dep module landed after the delivery, so not imported; global irreducible attributes and instance aliases."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-4faf4",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261026T091658-L-3363427",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 4faf vs prior reviewed 178863bc (Lean/nodes byte-identical); Core/Model/item/Roof compiled against live build; item node vs clone; change record users vs packet computed users"
+ }
+}

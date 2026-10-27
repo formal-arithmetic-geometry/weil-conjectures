@@ -1,0 +1,54 @@
+## Worker report
+
+Files written:
+- `dag/nodes/sec-six-functors-basics/lem-sfb-space-qcoh-groupoid-equivalence.json`: the item, now split into six steps; statement unchanged; no Mathlib match.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-space-qcoh-cartesian-chart-family.json`: statement-only lemma, unsplit; no Mathlib match. It states Stacks 03LZ/03LY for all charts and compatible morphisms, not descent from one atlas.
+- `citations.json`: twenty step/node citations with verbatim statement passages.
+
+Attachments: none. Searched `lean/WeilConjectures/` by the item's exact blueprint tag and by groupoid, quasi-coherent descent, and cartesian-module/chart characterization. No declaration states the complete algebraic-space equivalence or the new chartwise lemma. Existing quasi-coherent scheme and etale comparison results do not supply the algebraic-space assertion. No Lean was written or compiled.
+
+WANTED: none. All sources used are in the local Stacks checkout.
+
+The item had no proof or proof dependencies. I retained its entire statement, including the locally Noetherian condition only for coherence. The source proof omits transition compatibility and both inverse identities; Steps 3–5 supply them using the full faithfulness already asserted by the existing scheme descent node. None of the new nodes restates an atlas-equivalence clause: the single new lemma is the independent description of a sheaf by data on every etale chart.
+
+Unfinished work: none for this stage-1 split. The new lemma intentionally has no proof or proof sketch in its statement and remains a stage-1 item.
+
+## Blueprint and searches
+
+Read the chapter record and unit record, and the current files under `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/`: `_section.md` and `sk-thm-sf-ctf-stability-direct-images.proof.md`. The inherited creation chain has no resolvable blueprint ancestor: `tools/blueprint_refs.py ancestor lem-sfb-space-qcoh-groupoid-equivalence` prints `None`. I preserved the null and inherited via list; the new lemma extends that list by this item. The inherited place names direct-image proof paragraph (3), and the latest paragraph (3) is still proper/open direct-image preservation. These are lower-level scheme-descent inputs to the existing coherent-approximation subroute, not a change to the chapter or unit.
+
+Whole-DAG searches used tags 03M3, 07UB, 03LZ, 03LY, 023T and 01XZ and keywords for cartesian families, groupoid modules, fpqc descent, coherence and etale/Zariski comparison. Whole imported-blueprint searches used `quasi-coherent`, `descent`, `coherent`, `cartesian`, `03LZ`, `cartesian family`, and `presentation groupoid`. There was no all-chart module-characterization node. I reused the existing scheme descent and scheme comparison nodes instead of making new ones.
+
+The required search-command log is `searches.jsonl`. Searches for the new chart-family statement used two LeanFinder phrasings, Loogle, grep and LeanSearch. I read their hits: `SheafOfModules.QuasicoherentData` is local generators/relations presentation data (Mathlib `Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean`, lines 202–257), not a cartesian family on all scheme charts, and `Scheme.Modules` defines the scheme module category. Loogle and the relevant source grep had no hits. No match is a one-line specialization. Item searches include the pre-existing records plus a fresh atlas/groupoid phrasing and source grep, giving the same non-match. All newly recorded searches actually ran; no service failure is treated as absence.
+
+## Not duplicates
+
+lem-sfb-space-qcoh-cartesian-chart-family vs lem-sfb-space-qcoh-groupoid-equivalence: the new node describes compatibility on every small etale chart and does not restrict to a single atlas or identify its relation-groupoid modules; the item constructs that descent equivalence.
+
+lem-sfb-space-qcoh-cartesian-chart-family vs lem-sfb-qcoh-presentation-tensor-equivalence: that node begins with already cartesian modules on all scheme-valued points of a Deligne–Mumford stack and restricts them to one presentation, with tensor constraints; it does not identify module sheaves on the small etale ringed site with cartesian chart families.
+
+lem-sfb-space-qcoh-cartesian-chart-family vs lem-trf-scheme-zariski-etale-quasi-coherent-equivalence: the existing node compares two module categories on a scheme; the new node assembles families on all etale charts of a potentially nonschematic algebraic space.
+
+lem-sfb-space-qcoh-cartesian-chart-family vs def-sfb-stack-quasi-coherent-algebra: that definition concerns commutative algebra sheaves on the big fppf site of a fibred category, not a categorical assembly theorem for small-etale module sheaves.
+
+## Source error
+
+The proof of Stacks 03M3 in `spaces-properties.tex` has two transcription/type errors. It says both `t = pr_0` and `s = pr_0`, whereas the presentation uses `t = pr_0`, `s = pr_1`. For the cover of a scheme by two copies of itself, the two projections are distinct even on points, so they cannot both be `pr_0`. It also prints a transition `F_{V_1} -> F_{V_2}` for a map `f:V_1 -> V_2`; these are modules on different schemes, so this is not a module morphism in one category. The correctly typed transition is `f^*F_{V_2} -> F_{V_1}`, exactly as stated by 03LZ. The item's statement already has the right projections and is unchanged. Step 3 uses the correctly typed transition and explicitly proves its composition law. There is no statement dispute in the item itself.
+
+## Review by Q30
+
+I read Stacks `spaces-properties.tex` Tag 03M3 (`proposition-quasi-coherent`), including the full omitted-verification paragraph, Tag 03LZ (`lemma-characterize-quasi-coherent-small-etale`) and Tag 03LY (`lemma-characterize-module-small-etale`), and `spaces-cohomology.tex` Tag 07UB (`lemma-coherent-Noetherian`). For the only new node I compared its data, transition direction, identity/composition laws and compatible-map condition with 03LZ and 03LY. It imposes no Noetherian assumption. The morphism part is the categorical data description: restrictions of a module map give compatible maps, and component maps reconstruct a unique sheaf map. This is independent of descent from one atlas. The statement names its site, rings, quasi-coherence, morphisms and universe convention; it contains no proof. I read every cited node's statement, not its proof, before constructing `citations.json`.
+
+Step 1 uses the new chart-family lemma's restriction and transition isomorphisms, and the existing scheme comparison's equivalence and comparison for *every* scheme morphism. I do not take its stronger direct-image clause. The formula `c_s^{-1} c_t` has source `t^*M` and target `s^*M`; the cocycle follows by cancelling the middle comparison on the triple product. This avoids citing the scheme-only composition node for a morphism to a nonschematic space. Groupoid morphism compatibility is part of the chart-family statement.
+
+Step 2 uses `lem-trf-space-fibre-products-etale-covers` for the representable base change and surjective etale scheme cover, `lem-weil-pbc-fpqc-finer-than-etale` to meet the fpqc hypothesis, `lem-weil-pbc-module-pullback-quasi-coherent` for `a_V^*M`, and `lem-pc-fpqc-descent` for both effectivity and compatible overlap identification. The latter explicitly states an equivalence, so its full faithfulness is available; it is not merely an existence assertion. No quasi-compactness of the atlas is assumed: the cited fpqc-covering statement uses finite affine refinements on target affine opens and applies to arbitrary small-etale covers.
+
+Step 3 uses scheme pullback composition, whose hypotheses hold because `V_i` and `E_{V_i}` are schemes, and the full faithfulness from the scheme descent statement. I checked the covered transition `theta_1^{-1} d^*theta_2`, its overlap square and the cancellation of `theta_1` under composition. Its inverse descends too. This makes the transition an isomorphism, gives the identity, and gives exactly `c_{fg}=c_g g^*c_f` without appealing to the source's omitted verification.
+
+Step 4 uses the scheme comparison to enter the small-etale chart category, then the new chart-family lemma's existence and unique-map clauses to assemble it. The descent equivalence gives the maps `h_V`; the compatibility square and preservation of identity and composition follow by equality after the covering and full faithfulness. Thus the argument constructs a functor, not just objects up to unspecified choices.
+
+Step 5 uses the same descent equivalence and chart-family characterization to construct *natural* inverse identifications. I checked that the canonical datum for `F` becomes the datum in Step 2. In the other direction the cover is `s:R -> U`, and its identification with `t^*M` is `alpha^{-1}`, so the direction matters. On the triple overlap its descent compatibility is the cocycle, and the equivariance square for `N_U -> M` is checked after `U x_X R -> R`, where the same equation applies. Uniqueness gives naturality. No further descent theorem for spaces or tensor equivalence is silently used.
+
+Step 6 uses the chart lemma and scheme comparison for `b_V^*F_V = a_V^*M`, the base-change and etale-to-fpqc statements for `b_V`, `pqf-lem-coherent-ft-locnoeth` for coherence iff quasi-coherent finite type on `U` and `V`, `lem-weil-pbc-module-pullback-finite-type` for `a_V`, and the same-unit `lem-sfb-fpqc-finite-type-module-descent` to reflect finite type on `V`. I checked these against Stacks `coherent.tex` Tag 01XZ (`lemma-coherent-Noetherian`), `modules.tex` Tag 01B6 (`lemma-pullback-finite-type`) and `descent.tex` Tag 05AZ (`lemma-finite-type-descends`). Local Noetherianity is used only on the scheme charts in this last step. This proves detection on the *chosen* atlas from the definition quantifying over *all* charts, without adding a new node for a clause of the item.
+
+The generic off-unit inputs are declared individually in `split_report.tool_uses`; they supply scheme descent, comparisons and finite-type facts and do not replace the inherited route. I checked no citation depends on the item by using the server DAG check. All steps are non-elementary because they use those substantive lemmas; their remaining cancellation and uniqueness arguments are written out. Each step is shorter than 2000 characters. The new statement was tested on the empty space, a scheme with its identity chart, zero modules, and compatible identity maps. The item was checked on the identity atlas, an atlas with disconnected overlap, the empty atlas over the empty space, and non-quasi-compact surjective etale atlases. In the empty case every etale chart is empty and the module categories are terminal/zero; all arguments still apply. No separatedness, finite presentation, finite-rank or nonemptiness assumption is hidden.

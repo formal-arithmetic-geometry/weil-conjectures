@@ -1,0 +1,384 @@
+{
+ "id": "lem-sfb-relative-duality-polynomial-base-change",
+ "kind": "statement",
+ "title": "Normalized polynomial models compute intrinsic relative-duality base change",
+ "statement": "Let $f:X\\to S$ be a separated, flat, locally finitely presented morphism of schemes [def-pc-scheme, def-weil-proper-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation], with $S$ locally Noetherian [pqf-def-locnoeth]. Let $(D_f,\\xi_f)$ be its coherent relative dualizing pair [def-trf-coherent-relative-dualizing-pair] with the normalized polynomial-chart comparisons of [lem-trf-relative-duality-polynomial-chart]. For a morphism $a:S'\\to S$ with $S'$ locally Noetherian, put $X'=X\\times_SS'$, $b:X'\\to X$ and $f':X'\\to S'$ [def-pc-fibre-product]. There is a unique isomorphism in the derived category of module sheaves [def-pc-derived-category]\n$$\\beta_a:Lb^*D_f\\xrightarrow{\\sim}D_{f'}$$\nsending the derived pullback of $\\xi_f$ to $\\xi_{f'}$; derived pullback uses [def-pc-derived-pullback]. These isomorphisms respect identities and composition and are natural under isomorphisms of $S$-families. On affine charts $U=\\operatorname{Spec}B$ over $V=\\operatorname{Spec}R$ and a polynomial presentation $P=R[t_1,\\ldots,t_n]\\twoheadrightarrow B$, for every affine $\\operatorname{Spec}R'\\subset S'$ mapping to $V$, set $P'=P\\otimes_RR'$ and $B'=B\\otimes_RR'$. Under the specified polynomial-chart comparisons, $\\beta_a$ is the derived-Hom comparison\n$$R\\operatorname{Hom}_P(B,\\Omega^n_{P/R})[n]\\otimes_B^{\\mathbf L}B'\\xrightarrow{\\sim}R\\operatorname{Hom}_{P'}(B',\\Omega^n_{P'/R'})[n].$$\nDifferentials and their top exterior powers use [def-weil-pbc-kahler-differentials, def-weil-pbc-exterior-algebra], and derived Hom uses [def-pur-derived-internal-hom] with its natural $B$-action. If $F^\\bullet\\to B[0]$ is a bounded finite projective $P$-resolution, the map is represented, after forgetting to $P'$, by extension of scalars of $\\operatorname{Hom}_P(F^\\bullet,\\Omega^n_{P/R})$: a pure tensor $h\\otimes r'$ acts by $z\\otimes s'\\mapsto r's'(h(z)\\otimes1)$. It commutes with open restriction and the normalized ordered polynomial-refinement comparisons, including the contraction of the extra equation $t-u$ with $\\mathrm d(t-u)$ to $1$. If $f$ is also proper [def-weil-proper-morphism], these pair comparisons agree with those of $f^!\\mathcal O_S$, where $f^!$ is the right adjoint of derived quasi-coherent direct image [def-pc-derived-direct-image], under the intrinsic proper-duality identification of [lem-sfb-proper-flat-dualizing-polynomial-model]. In particular, if $f$ is proper and $f^!\\mathcal O_S\\simeq\\omega_f[d]$, $f'^!\\mathcal O_{S'}\\simeq\\omega_{f'}[d]$ for finite locally free modules $\\omega_f=H^{-d}(f^!\\mathcal O_S)$ and $\\omega_{f'}=H^{-d}(f'^!\\mathcal O_{S'})$, then the base-change isomorphism $b^*\\omega_f\\simeq\\omega_{f'}$ of relative dualizing modules, namely $H^{-d}$ of the base-change isomorphism $Lb^*f^!\\mathcal O_S\\simeq f'^!\\mathcal O_{S'}$, is $H^{-d}(\\beta_a)$, using $H^{-d}(Lb^*(\\omega_f[d]))=b^*\\omega_f$ for locally free $\\omega_f$. No local complete-intersection, nodal, dimension or Gorenstein hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2Y (lemma-base-change-relative-dualizing), 0E2W (lemma-uniqueness-relative-dualizing), 0E2Z (lemma-flat-proper-relative-dualizing), 0E4P (remark-relative-dualizing-complex-bis); dualizing.tex Tags 0BZR (lemma-bc), 0BZS (lemma-bc-flat), 0BZJ (lemma-well-defined), including its top-differential normalization footnote. Agent-formulated coherence statement combining these constructions."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-locnoeth",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-trf-relative-duality-polynomial-chart",
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-exterior-algebra",
+  "def-pur-derived-internal-hom",
+  "def-pc-derived-direct-image",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "def-sfb-polynomial-koszul-diagonal-data",
+  "def-sfb-polynomial-koszul-diagonal-system",
+  "lem-sfb-relative-dualizing-pair-base-change",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "def-pc-module-pullback",
+  "def-trf-affine-diagonal-module-data",
+  "def-sfb-affine-relative-dualizing-comparison-data",
+  "def-sfb-perfect-coinduction-exchange-data",
+  "def-sfb-module-base-change-map",
+  "def-sfb-tensor-pullback-structure-sheaf-map",
+  "def-trf-polynomial-duality-affine-realization",
+  "def-trf-derived-coinduction",
+  "def-sc-module-total-hom-complex",
+  "lem-pc-recorded-pullback-composition",
+  "lem-weil-pbc-pushforward-spec-global-sections"
+ ],
+ "proof": [
+  {
+   "text": "Fix $U=\\operatorname{Spec}B\\subset X$ above $V=\\operatorname{Spec}R\\subset S$ and $V'=\\operatorname{Spec}R'\\subset S'$ mapping to $V$. The affine pair comparison gives precisely flatness, finite presentation and Noetherianity of $R\\to B$. The polynomial-quotient perfection theorem supplies a bounded finite projective $P$-resolution $F\\to B[0]$, for every chosen polynomial presentation $P\\twoheadrightarrow B$. Write $L=\\Omega^n_{P/R}$ and $C=C_B^P(L)[n]$. The specified chart comparison identifies $D_f|_U$ with $C$ as a normalized pair, not merely with its underlying complex.",
+   "uses": [
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-trf-relative-duality-polynomial-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0E2E and 0BZS; more-algebra.tex Tags 067J and 068Y."
+   }
+  },
+  {
+   "text": "Here $B'=B\\otimes_RR'$ and $P'=P\\otimes_RR'$. The pair $(B,P')$ is Tor independent over $P$: if $G\\to R'[0]$ is a free $R$-resolution, then $P\\otimes_RG$ is a free $P$-resolution of $P'$, and $B\\otimes_RG\\to B'$ is exact since $B$ is $R$-flat. Hence the exchange lemma applies to $(P,B,P')$ and $L$, without requiring $R\\to R'$ flat. Its coefficient is $L\\otimes_PP'\\cong\\Omega^n_{P'/R'}$: polynomial derivations have basis $dx_i$, and the isomorphism sends each ordered wedge to the same ordered wedge after extending coefficients. We obtain an isomorphism $c:C\\otimes_B^{\\mathbf L}B'\\to C'$ in $D(B')$, with the required $B'$-action. The affine derived-pullback comparison identifies its source with $(Lb^*D_f)|_{U\\times_VV'}$.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0BZR and 0BZS; the Tor-independent tensor comparison of Tag 0661."
+   }
+  },
+  {
+   "text": "The same exchange statement gives the claimed representative after forgetting to $P'$: $(h\\otimes r')(z\\otimes s')=r's'(h(z)\\otimes1)$. Indeed its counit at the unit is evaluation of $h$ extended by $R'$, so this is the prescribed derived-Hom map, rather than an arbitrary isomorphism of its source and target. The bounded finite projective Hom complex and its extension compute the two underlying derived objects by that statement. Shifting both sides by $n$ keeps the formula unchanged. Thus the representative applies to every such $F$, independently of its choice.",
+   "uses": [
+    "lem-sfb-perfect-coinduction-tor-independent-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZP, equation-base-change, with the finite-projective Hom representative."
+   }
+  },
+  {
+   "text": "Let $Q=B\\otimes_RB$ and $Q'=B'\\otimes_{R'}B'$. The derived pullback of the diagonal object is $B\\otimes_Q^{\\mathbf L}Q'\\simeq B'$: resolve $R'$ freely over $R$, extend to $Q$ (which is $R$-flat), then tensor with the $R$-flat $B$. Derived-pullback composition identifies the pulled-back target of the diagonal class with $Lp_1'^*(Lb^*D_f)$. On the affine charts the class is therefore the $v'$ of the scalar-naturality lemma. Apply that lemma with $T=C$. Both $C$ and $C'$ have the required pseudo-coherence and relative Tor bounds by the polynomial-chart theorem. Since $\\rho_C(\\xi_C)=1_C$, the lemma gives $\\rho'_{C\\otimes_B^{\\mathbf L}B'}(\\xi_C')=c^{-1}$. Naturality in the target now gives $\\rho'_{C'}((c\\otimes_{B',p_1'}Q')\\xi_C')=1_{C'}=\\rho'_{C'}(\\xi_{C'})$. The bijection implies equality of these classes. Thus the explicit $c$ is class preserving, including its normalization by $1$, not only preservation of the rank-one span.",
+   "uses": [
+    "lem-sfb-polynomial-diagonal-adjunction-scalar-naturality",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0E2E and 0E2F; scalar-naturality refinement of the diagonal adjunction."
+   }
+  },
+  {
+   "text": "The formula of Step 3 commutes with localization: both paths send $(h\\otimes r')$ evaluated on $z\\otimes s'$ to the localized value of $r's'h(z)$. The tensor and Hom open-restriction comparisons identify this calculation with restriction of the sheaf objects. For a one-coordinate refinement use the two-term graph resolution with differential $t-u$. Its extension has differential $t-u'$ and the dual evaluation sends $(t-u)^\\vee\\otimes d(t-u)$ to $1$, hence after extension sends $(t-u')^\\vee\\otimes d(t-u')$ to $1$. For several coordinates the tensor formula retains their order and degrees, so every sign $(-1)^{ij}$ agrees before and after extension. The polynomial-chart theorem supplies the normalized refinement maps and their cocycles; the displayed calculation verifies commutation with each generating refinement. Two presentations compare through their combined-variable presentation, so the comparison commutes with all the specified ordered refinements.",
+   "uses": [
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZJ and the top-differential footnote of 0BZI; normalized graph contraction."
+   }
+  },
+  {
+   "text": "Put $K=Lb^*D_f$ and $L=D_{f'}$. Steps 2 and 4 identify $(K,\\xi')$ locally with the normalized polynomial pair for $f'$. Consequently $K$ is pseudo-coherent, has locally finite relative Tor amplitude, and multiplication by $\\xi'$ is an isomorphism: each of these conditions is checked on the displayed local models, with derived Hom restricted by the open-restriction comparison. The base-changed affine charts form a cover; taking affine refinements gives a basis, and no intersection is assumed affine. Thus $(K,\\xi')$ and $(L,\\xi_{f'})$ are both supplied relative dualizing pairs. Rigidity gives their unique class-preserving isomorphism $\\beta_a$. On every such chart rigidity again applies, so its restriction is exactly $c$. This obtains the global map and the polynomial formula simultaneously; no descent of arbitrary derived morphisms from their local values is assumed.",
+   "uses": [
+    "def-trf-coherent-relative-dualizing-pair",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "duality.tex Tags 0E2T, 0E2W and 0E2Y."
+   }
+  },
+  {
+   "text": "For the identity base map, the identity of the pair preserves its class and hence equals $\\beta_{1}$. For $S''\\xrightarrow{a'}S'\\xrightarrow{a}S$, the composite $\\beta_{a'}\\circ Lb'^*(\\beta_a)$ sends the twice-pulled diagonal class to $\\xi_{f''}$. Under the unital associative pullback comparisons, twice-pulled and directly pulled classes agree. The composite therefore equals $\\beta_{aa'}$ by rigidity. An isomorphism of $S$-families takes the diagonal, its multiplication and the projections to their counterparts; pullback transports the defining pair condition. The two comparisons in the resulting naturality square are class-preserving isomorphisms between the same supplied pairs, so rigidity makes them equal. These arguments include empty schemes and do not require globally finite covers.",
+   "uses": [
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "duality.tex Tags 0E2W and 0E4P; uniqueness proves identity, composition and isomorphism naturality."
+   }
+  },
+  {
+   "text": "Suppose $f$ is proper. The intrinsic proper-duality polynomial-model theorem identifies $f^!\\mathcal O_S$ and $f'^!\\mathcal O_{S'}$ with their relative dualizing pairs and with the same normalized chart models. Transport $\\beta_a$ along these pair identifications. It is the unique class-preserving isomorphism from $Lb^*f^!\\mathcal O_S$ to $f'^!\\mathcal O_{S'}$. This is precisely the intrinsic pair comparison of proper duality; uniqueness rules out an additional unit or sign. On charts it is the same $c$ already computed, so all the restriction and refinement compatibilities persist.",
+   "uses": [
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-trf-relative-dualizing-pair-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "duality.tex Tags 0E2Z and 0E4P, with the supplied intrinsic proper-duality identification."
+   }
+  },
+  {
+   "text": "Finally assume the stated concentration and finite local freeness. On an open where $\\omega_f\\cong\\mathcal O_X^r$, its degree-zero complex is a flat model, so $Lb^*(\\omega_f[d])\\cong(b^*\\omega_f)[d]$. Taking $H^{-d}$ gives $b^*\\omega_f$; the same calculation identifies $H^{-d}(f'^!\\mathcal O_{S'})$ with $\\omega_{f'}$. Cohomology is a functor, so the equality of derived comparisons in Step 8 gives equality of the induced module comparisons. These identifications are independent of the trivialization because ordinary pullback and cohomology act on transition matrices by the same entrywise ring map. Hence the module base-change map is exactly $H^{-d}(\\beta_a)$ under the stated identifications.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Degree-zero flat model and functoriality of cohomology; consequence of Step 8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-relative-dualizing-comparison",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-trf-relative-duality-polynomial-chart",
+  "lem-sfb-perfect-coinduction-tor-independent-exchange",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-exterior-algebra",
+  "lem-sfb-polynomial-diagonal-adjunction-scalar-naturality",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-trf-relative-dualizing-pair-rigidity",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "def-pc-derived-pullback",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2Y, 0E2W, 0E2Z and 0E4P, assembled with dualizing.tex Tags 0BZP, 0BZR, 0BZS, 0E2E and 0E2F; explicit ordered-volume scalar compatibility is an agent refinement, not asserted verbatim by those sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|relative_dualizing|dualityBaseChange|dualizing.*base.change",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state coherent relative duality or normalized polynomial-model base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived base change for relative dualizing complexes of flat schemes agrees with the finite projective resolution Hom base change map",
+   "results": "IsBaseChange.dual; Module.Dual.baseChange; IsBaseChange.toDualBaseChange; IsBaseChange.toDual; IsBaseChange.toDual_apply; IsBaseChange.linearMapLeftRightHom.congr_simp; IsBaseChange.toDualBaseChange_tmul; RingHom.FaithfullyFlat.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state coherent relative duality or normalized polynomial-model base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"baseChange\"",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state coherent relative duality or normalized polynomial-model base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing pairs of flat finitely presented morphisms admit a unique diagonal class preserving derived base change isomorphism computed by derived Hom on polynomial presentations",
+   "results": "AlgebraicGeometry.diagonal_SpecMap; AlgebraicGeometry.diagonal_Spec_map; AlgebraicGeometry.Flat; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; Algebra.Extension.tensorH1Cotangent; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state coherent relative duality or normalized polynomial-model base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality on a flat family of schemes commutes with change of base ring and the polynomial presentation comparison is the tensor Hom comparison",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo; AlgebraicGeometry.pullbackSpecIso_hom_base_assoc; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc; AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits do not state coherent relative duality or normalized polynomial-model base change"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*dualizing|dualizing.*base|relativeDualizing|relative_dualizing",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"baseChange\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck relative duality base change on polynomial presentations computed by a finite projective resolution",
+   "results": "OK: 8 hits; IsBaseChange.dual, Module.Dual.baseChange, IsBaseChange.toDualBaseChange, Module.Dual.baseChange_baseChange, ModuleCat.projectiveResolution, IsBaseChange.toDual_apply, FinitePresentation.of_isBaseChange, Module.dual_finite",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative dualizing pairs on flat finitely presented schemes have a unique diagonal class preserving base change isomorphism computed on polynomial charts",
+   "results": "OK: 8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.diagonal_Spec_map, AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary module dual base change, generic derived adjunction identities, polynomial presentations and flatness stability do not state this derived coinduction/diagonal normalization comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-dualizing-adjunction-line-comparison",
+  "date": "2026-10-23",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Proper nodal dualizing line over an arbitrary base. Within that prerequisite: steps 6-8 and 12-13 of lem-sfb-proper-nodal-dualizing-base-change, the identification of the relative dualizing module with the Koszul adjunction line at a Noetherian stage and its compatibility with both base-change comparison systems. General prerequisite: the intrinsic relative-duality base-change map has the normalized polynomial derived-Hom expression, before the nodal Koszul computation.",
+   "via": [
+    "lem-sfb-nodal-dualizing-adjunction-line-comparison",
+    "lem-sfb-proper-nodal-dualizing-base-change",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-duality-polynomial-base-change",
+  "worker": "stage1",
+  "summary": "Proved the normalized coherent base-change comparison by affine perfect coinduction exchange, a polynomial-diagonal adjunction naturality square, and supplied-pair rigidity. Two strictly algebraic supporting statements are left unsplit. Checked arbitrary nonflat Noetherian base change, exact class normalization, open/refinement compatibility, proper-duality transport and the locally free cohomology clause. Statement and maintainer metadata unchanged.",
+  "blueprint": "The recorded det-thm-sf-ctf-stability-direct-images proof (3) alteration/nodal-family supporting chain: provides intrinsic coherent polynomial base-change compatibility before any nodal Koszul calculation. Current latest blueprint and the recorded unit were read; this item is not the unit key statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-affine-relative-dualizing-comparison",
+    "why": "Translates the supplied coherent pair on affines, giving the exact flat finite-presentation and Noetherian hypotheses needed by the algebra; the unit supplies no affine coherent-duality replacement."
+   },
+   {
+    "node": "lem-trf-flat-polynomial-quotient-perfect",
+    "why": "Supplies the bounded finite projective polynomial resolution; this is a general algebra tool, not an lci or nodal alternative route."
+   },
+   {
+    "node": "lem-trf-relative-duality-polynomial-chart",
+    "why": "The statement already fixes these normalized coherent polynomial models; the proof uses their pair normalization and their ordered refinements."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Identifies the sheaf derived pullback with module scalar extension and its restrictions; a generic affine-derived tool."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Supplies unital associative composition of coherent module derived pullbacks, used for diagonal classes and the cocycle."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Checks the pair condition and explicit maps on open charts using actual derived internal-Hom restriction."
+   },
+   {
+    "node": "lem-trf-relative-dualizing-pair-rigidity",
+    "why": "Supplies global uniqueness and existence between already supplied coherent pairs, after the local algebra has verified the pulled pair condition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-affine-relative-dualizing-comparison",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-trf-relative-duality-polynomial-chart",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-trf-relative-dualizing-pair-rigidity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-c279f80f2",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-c279f80f2 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the sources: Stacks dualizing 0BZP, 0E2E and 0E2F; duality 0E2Y, 0E2Z and 0E4P. The item statement is unchanged from live and side-live, where it is still unsplit and unreviewed. New node 1 (perfect Tor-independent coinduction exchange) is 0BZP with the coinduction counit mate, an explicit finite-projective formula and transitivity in T→T'. It is true for unbounded M. It is more general than lem-trf-coinduction-flat-quotient-base-change (flat P→P') and lem-pc-affine-morphism-hom-out-of-perfect (underlying RHom only). It is needed because P→P⊗R' is not flat. New node 2 (scalar naturality of the polynomial-diagonal adjunction): A⊗^L_Q Q'=A' holds by flatness. By Yoneda the node amounts to class preservation of c on one affine chart. That is strictly smaller than the item, which still needs the gluing of the pulled pair, the uniqueness/existence of β, the cocycle, the proper clause and the H^{-d} clause, so it is not a D1 relabelling. Steps: Step 2 gets Tor independence without assuming R→R' flat. I recomputed Step 4: c^{-1}, then naturality along c, then injectivity of ρ' gives c_*ξ=ξ'. Step 6 uses the existence and uniqueness of rigidity for supplied pairs and assumes no affine intersections. Step 7 uses unital/associative pullback. Step 8 meets the finite-presentation hypothesis from proper plus lfp, and the unique class-preserving map is the 0E4P comparison. Step 9 is elementary. Batch-5: def-trf-derived-coinduction, lem-trf-derived-coinduction-adjunction, lem-trf-polynomial-diagonal-rhom-reduction, lem-trf-relative-duality-polynomial-chart, lem-trf-affine-relative-dualizing-comparison, lem-trf-flat-polynomial-quotient-perfect and lem-trf-relative-dualizing-pair-rigidity are generic coherent-duality and commutative-algebra nodes of unit sk-i-curve-zero. Neither assumption gives any of them. Their closure (1681 nodes) contains no trace-formula or Poincaré-duality theorem. I accept them and the tool_uses as generic tools. No SGA is used. Maintainer note: the statement of lem-trf-relative-duality-polynomial-chart pins only the underlying object on charts, not ξ_f against the canonical class. The item's base statement and node 2 assume that pinning. Please sharpen the chart statement, and have stage 2 define D_f and ξ_f so that the pinning holds. This is inherited, not a fault of this delivery. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDualityPolynomialBaseChange",
+  "declaration": "AlgebraicGeometry.relativeDualityPolynomialBaseChange_unique",
+  "declarations": [
+   "AlgebraicGeometry.polynomialBaseChangePullbackCounit",
+   "AlgebraicGeometry.polynomialBaseChangeExtensionCounit",
+   "AlgebraicGeometry.polynomialBaseChangeTildeFactors",
+   "AlgebraicGeometry.polynomialBaseChangeTildeSingle",
+   "AlgebraicGeometry.polynomialBaseChangeOrdinaryTilde",
+   "AlgebraicGeometry.IsPolynomialBaseChangeTildeComparison",
+   "AlgebraicGeometry.polynomialBaseChangeDiagonalTildeMap",
+   "AlgebraicGeometry.polynomialBaseChangeDiagonalTilde",
+   "AlgebraicGeometry.polynomialBaseChangeDiagonalSquare",
+   "AlgebraicGeometry.polynomialBaseChangeAffineDiagonal",
+   "AlgebraicGeometry.polynomialBaseChangeAffineTarget",
+   "AlgebraicGeometry.IsPolynomialBaseChangeNormalizedChart",
+   "AlgebraicGeometry.IsRelativeDualityBaseChange",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_unique",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_id",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_comp",
+   "AlgebraicGeometry.exists_polynomialBaseChangeTildeComparison",
+   "AlgebraicGeometry.exists_polynomialBaseChangeNormalizedChart",
+   "AlgebraicGeometry.polynomialBaseChangeChartSquare",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_affine",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_model",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_restriction",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_refinement",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_resolution",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_isoNaturality",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_proper",
+   "AlgebraicGeometry.polynomialBaseChangeSingleMap",
+   "AlgebraicGeometry.polynomialBaseChangeSingleMap_isIso",
+   "AlgebraicGeometry.polynomialBaseChangeSingleHomology",
+   "AlgebraicGeometry.relativeDualityPolynomialBaseChange_homology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDualityPolynomialBaseChange.lean",
+  "statement": "theorem relativeDualityPolynomialBaseChange_unique {X S X' S' : Scheme.{u}} (f : X ⟶ S) (f' : X' ⟶ S') [IsSeparated f] [Flat f] [LocallyOfFinitePresentation f] [IsLocallyNoetherian S] [IsSeparated f'] [Flat f'] [LocallyOfFinitePresentation f'] [IsLocallyNoetherian S'] (a : S' ⟶ S) (b : X' ⟶ X) (sq : IsPullback b f' f a) (K : schemeDerivedCategory X) (ξ : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f) ⟶ (derivedPullback (pullback.fst f f)).obj K) (hK : IsCoherentRelativeDualizingPair f K ξ) (L : schemeDerivedCategory X') (η : DerivedCategory.Q.obj (relativeDualizingDiagonalComplex f') ⟶ (derivedPullback (pullback.fst f' f')).obj L) (hL : IsCoherentRelativeDualizingPair f' L η) : ∃! β : (derivedPullback b).obj K ≅ L, IsRelativeDualityBaseChange f f' a b sq K ξ L η β",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations jointly render all clauses: class-preserving unique comparison and its identity/composition/family naturality; counit-normalized native tilde and graph-class chart comparisons; affine derived coinduction, every finite-projective Hom formula, restriction and ordered refinement; proper intrinsic transport and H^(-d) on locally free concentrations. Same-notion canonical comparison helpers are included in this owning module. No statement correction. Repair of returned immutable head 4930a72f2e5b: plain definition references now cite their landed definition-owner nodes; genuine chosen/asIso comparison owners remain cited. The Lean source and all signatures are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77dc2fce8",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery of returned head 4930a72f2e5b. Lean byte-identical; node differs from live only in lean note and stmt_deps; proof_deps = live; lean.statement verbatim. R1 fixed exactly: lem-trf-affine-relative-dualizing-comparison → def-trf-affine-diagonal-module-data + def-sfb-affine-relative-dualizing-comparison-data; lem-sfb-perfect-coinduction-tor-independent-exchange → def-sfb-perfect-coinduction-exchange-data; added module-base-change-map, tensor-pullback-structure-sheaf-map, polynomial-duality-affine-realization, derived-coinduction, module-total-hom-complex owners (all existing records). Mechanical theorem stmt_deps judged genuine: relativeDualizingDiagonalBaseChangeMap_isIso term + chosen relativeDualizingPullbackId; Classical.choose exists_tensorPullback_tilde_iso; recordedDerivedPullbackComposition = asIso; pushforwardSpecMapCompΓIso is the natural iso that lem-weil-pbc-pushforward-spec-global-sections constructs (no def owner), with justification in report. R2 fixed: second reading is a 13-point clause match. Maths unchanged from prior full review (re-read _unique/_id/_comp/IsRelativeDualityBaseChange); gates ok; no compile (no change)."
+ }
+}

@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-affine-stack-stabilizer-etale-comparison",
+ "kind": "statement",
+ "title": "Etale comparison above a finite flat affine-covered stack",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Deligne--Mumford stacks, representability by algebraic spaces, stacks in groupoids, and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. A finite flat affine cover of a stack $\\mathcal A$ means an affine scheme $U$ and a representable surjective morphism $U\\to\\mathcal A$ which is finite, flat and locally of finite presentation, tested after scheme base change using [def-weil-finite-integral-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A morphism $q:\\mathcal A\\to M$ to an algebraic space over $S$ is uniform categorical when, for every flat map $M_1\\to M$ of algebraic spaces over $S$ and every algebraic space $Z/S$, composition with $q_1:\\mathcal A\\times_M M_1\\to M_1$ is a bijection $\\operatorname{Hom}_S(M_1,Z)\\xrightarrow{\\sim}\\operatorname{Hom}_S(\\mathcal A\\times_M M_1,Z)$; flatness is tested on scheme charts [def-weil-flat-morphism]. A morphism of stacks is separated when its relative diagonal is proper, with properness tested on scheme charts using [def-weil-proper-morphism]. Let $\\mathcal A/S$ and $\\mathcal B/S$ be Deligne--Mumford stacks, let $\\mathcal A$ admit a finite flat affine cover, and let $q:\\mathcal A\\to M$ be a uniform categorical morphism with $M$ an affine scheme. Suppose $h:\\mathcal B\\to\\mathcal A$ is representable, separated and etale, and for every scheme $T/S$ and $b\\in\\mathcal B(T)$ the map $\\operatorname{Aut}_T(b)\\to\\operatorname{Aut}_T(hb)$ of sheaves is an isomorphism. There are a scheme $N/S$, a separated etale morphism $N\\to M$, and an $S$-map $q_B:\\mathcal B\\to N$ such that the square with rows $h:\\mathcal B\\to\\mathcal A$ and $N\\to M$ and columns $q_B,q$ is 2-cartesian. Etale means [def-weil-etale-morphism] on scheme charts.",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUS, lemma-etale-separated-over-well-nigh-affine, with Tag 0DUR, lemma-moduli-space-finite-affine. Any uniform categorical q with affine target is uniquely isomorphic to the canonical invariant quotient, so the statement is independent of its chosen presentation."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-flat-affine-stack-invariant-quotient] to the given affine cover $U\\to\\mathcal A$. It gives the canonical invariant-spectrum quotient $q_0:\\mathcal A\\to M_0$. The categorical properties of $q$ and $q_0$ give maps $a:M\\to M_0$, $b:M_0\\to M$ with $aq=q_0$, $bq_0=q$. Uniqueness gives $ba=1_M$ and $ab=1_{M_0}$. Replace $M_0$ by $M$ using this unique isomorphism. In particular $q$ is a universal homeomorphism, and hence every open substack of $\\mathcal A$ is the inverse image of a unique open subscheme of $M$: use the inclusion-preserving open-substack correspondence and the homeomorphism on points. The same assertions apply to each finite-flat affine-covered open stack used below.",
+   "uses": [
+    "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+    "lem-sfb-stack-topology-open-substacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tags 0DUP and 0DUR; categorical uniqueness."
+   }
+  },
+  {
+   "text": "Put $V=\\mathcal B\\times_{\\mathcal A}U$. Representability of $h$ makes $V$ an algebraic space, etale over $U$ by chartwise base change. For every scheme test of its relative diagonal, the resulting map is a test of the proper diagonal of $h$, and is universally closed. This remains true after every base change; etale charts detect closed subsets in the point topology of [lem-sfb-space-separated-diagonal-closed]. That criterion gives a closed diagonal, so [lem-a1-separated-etale-space-scheme] makes $V$ a scheme separated etale over $U$. By [lem-a1-etale-space-locally-quasi-finite] it is locally quasi-finite. Thus [lem-sfb-separated-lqf-affine-finite-set] puts every finite subset of $V$ in an affine open. The pulled-back cover $V\\to\\mathcal B$ is surjective finite flat lfp by its scheme tests. Its kernel pair $R_V$ is a scheme (test this finite cover on $V$); the projections are finite flat lfp, hence finite locally free by [def-pc-finite-locally-free]. By [lem-sfb-fppf-groupoid-stack-presentations](2), $[V/R_V]\\simeq\\mathcal B$. Each orbit is finite, being the image of a finite source fibre. Apply [lem-sfb-locally-free-groupoid-invariant-affine] to obtain a small cover $V=\\bigcup V_i$ by invariant affine opens. By [lem-sfb-finite-flat-groupoid-quotient-open-geometry], applied through the displayed equivalence (so the quotient is Deligne--Mumford), these descend to an open cover $\\mathcal B_i$; each $V_i\\to\\mathcal B_i$ is finite flat lfp surjective, its relation is finite locally free, and $\\mathcal B_i\\simeq[V_i/R_i]$.",
+   "uses": [
+    "lem-sfb-space-separated-diagonal-closed",
+    "lem-a1-separated-etale-space-scheme",
+    "lem-a1-etale-space-locally-quasi-finite",
+    "lem-sfb-separated-lqf-affine-finite-set",
+    "lem-sfb-locally-free-groupoid-invariant-affine",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-pc-finite-locally-free",
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-finite-flat-groupoid-quotient-open-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUS, first paragraph; 03XX, 03XU, 07S0 and 03JE."
+   }
+  },
+  {
+   "text": "Write $R=U\\times_{\\mathcal A}U$ and $R_i=V_i\\times_{\\mathcal B_i}V_i$. The presentation equivalences from step 2 and [lem-sfb-fppf-groupoid-stack-presentations](2), together with the invariant-quotient node, make these affine groupoids with finite locally free source and target. The maps $V_i\\to U$ and $R_i\\to R$ form a groupoid morphism. Both its source and target squares are cartesian, as can be checked on objects of the 2-fibre products: an object of $V$ is $(b,u,\\alpha:hb\\simeq pu)$. Given this object and an arrow $r:pu\\simeq pu_1$ of $R$, its lifted target is $(b,u_1,r\\alpha)$, with identity on $b$. Any other lift is uniquely isomorphic to this one in the fibre product, since an arrow $b\\simeq b_1$ with prescribed image under $h$ is unique by representability (faithfulness). This constructs an inverse to the source comparison; interchange endpoints for the target comparison. Restriction to $V_i$ works because its invariance means every such target stays in $V_i$. The stabilizer square is cartesian directly from the assumed automorphism-sheaf isomorphism. Apply [lem-sfb-affine-groupoid-etale-invariant-comparison]: the invariant spectra $N_i\\to M$ are etale and $V_i=U\\times_MN_i$. It follows also that $R_i=R\\times_MN_i$, compatibly with all operations, by the source square. By [lem-sfb-quotient-stack-invariant-base-change] and the presentation equivalences, $\\mathcal B_i\\simeq\\mathcal A\\times_MN_i$. Their maps $q_i:\\mathcal B_i\\to N_i$ are uniform categorical universal homeomorphisms by the invariant-quotient node.",
+   "uses": [
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+    "lem-sfb-affine-groupoid-etale-invariant-comparison",
+    "lem-sfb-quotient-stack-invariant-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUQ, presentation and Groupoids 0DT9 argument; corrected relation base change."
+   }
+  },
+  {
+   "text": "Let $\\mathcal B_{ij}=\\mathcal B_i\\cap\\mathcal B_j$. Since $q_i$ is a universal homeomorphism, its point image is an open $W_{ij}\\subseteq N_i$ and $q_i^{-1}W_{ij}=\\mathcal B_{ij}$ by the open-substack correspondence. Restriction of uniform categorical $q_i$ to $W_{ij}$ is categorical: this is its flat base change by the open immersion. Similarly obtain $W_{ji}\\subseteq N_j$. Their universal properties give unique mutually inverse $\\phi_{ij}:W_{ij}\\to W_{ji}$ commuting with the maps from $\\mathcal B_{ij}$. On triple overlaps the domain is precisely the open corresponding to $\\mathcal B_i\\cap\\mathcal B_j\\cap\\mathcal B_k$. Both $\\phi_{jk}\\phi_{ij}$ and $\\phi_{ik}$ have the same composite from this stack, so categorical uniqueness gives equality. Likewise $\\phi_{ii}=1$ and $\\phi_{ji}=\\phi_{ij}^{-1}$. These are exactly the open-domain and cocycle conditions of [lem-weil-pbc-glue-schemes]. Glue the $N_i$ to a scheme $N$. The maps $N_i\\to M$ agree on overlaps by the same uniqueness, and hence glue to $u:N\\to M$.",
+   "uses": [
+    "lem-sfb-stack-topology-open-substacks",
+    "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+    "lem-weil-pbc-glue-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUS, overlap and cocycle paragraphs, with the omitted cocycle computation written out."
+   }
+  },
+  {
+   "text": "The maps $\\mathcal B_i\\to N_i\\to N$ agree on overlaps by construction of $\\phi_{ij}$. For a scheme $T\\to\\mathcal B$, they give agreeing scheme morphisms on the open covering $T\\times_{\\mathcal B}\\mathcal B_i$; the scheme sheaf axiom glues them to $T\\to N$, naturally in $T$. This defines $q_B$. Moreover $q_B^{-1}(N_i)=\\mathcal B_i$: on every $\\mathcal B_j$, the preimage of $N_i\\cap N_j=W_{ji}$ is exactly $\\mathcal B_{ji}$. The resulting comparison $\\mathcal B\\to\\mathcal A\\times_MN$ restricts over $N_i$ to the equivalence constructed in step 3. Equivalences of stacks are checked on an open cover (full faithfulness is the sheaf condition for isomorphisms; local essential surjectivity glues objects by stack descent), so the comparison is an equivalence. Finally $u$ is etale since its restrictions to the open cover $N_i$ are etale.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-pc-scheme",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUS, gluing the morphism and checking the cartesian property on the open covering."
+   }
+  },
+  {
+   "text": "It remains to prove separatedness. The scheme map $p:V\\to N$ restricts over $N_i$ to $V_i\\to N_i$. Each is surjective: $V_i\\to\\mathcal B_i$ and $q_i$ are surjective. It is integral by [lem-a1-affine-groupoid-integral-invariants], and therefore universally closed by [pqf-lem-integral-univclosed]. Surjectivity and universal closedness hold globally for $p$: after any base change, the images of closed sets are closed on the open covering pulled back from the $N_i$, and their union is the global image. The map $V\\to M$ is separated: $V\\to U$ is separated and $U\\to M$ is separated because $U$ is affine, so apply composition of separated morphisms. Now [lem-weil-pbc-surjective-universally-closed-separated] applied to $V\\to N\\to M$ makes $u$ separated. The square, all structural maps and the gluing are over $S$, as required.",
+   "uses": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "pqf-lem-integral-univclosed",
+    "lem-weil-pbc-surjective-universally-closed-separated",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUS, last paragraph; 03BJ, 01WM and 09MQ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-flat-affine-stack-invariant-quotient",
+  "lem-sfb-stack-topology-open-substacks",
+  "lem-sfb-space-separated-diagonal-closed",
+  "lem-a1-separated-etale-space-scheme",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-sfb-separated-lqf-affine-finite-set",
+  "lem-sfb-locally-free-groupoid-invariant-affine",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "def-pc-finite-locally-free",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-sfb-finite-flat-groupoid-quotient-open-geometry",
+  "lem-sfb-affine-groupoid-etale-invariant-comparison",
+  "lem-sfb-quotient-stack-invariant-base-change",
+  "lem-weil-pbc-glue-schemes",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-pc-scheme",
+  "lem-a1-affine-groupoid-integral-invariants",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-surjective-universally-closed-separated",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-space-separated-fp-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUS, using the affine groupoid argument of 0DUQ and quotient uniqueness from 0DUR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated etale stabilizer preserving map to an algebraic stack with finite flat affine cover is a pullback from an etale map of coarse schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"etale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "stabilizer.preserving|well.nigh.affine|moduli.space.*etale",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian comparison of categorical quotients for an etale inertia preserving morphism over a stack admitting a finite flat affine presentation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale @IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"CategoryTheory.Limits.instIsIsoCoequalizerComparison\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers\", \"type\": \": IsIso (coequalizerComparison f g G)\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and parallel morphisms $f, g : X \\\\to Y$ in $\\\\mathcal{C}$ with coequalizer $\\\\pi : Y \\\\to Q$, the comparison\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"CategoryTheory.CartesianMonoidalCategory.isIso_prodComparison_of_preservesLimit_pair\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Basic\", \"type\": \": IsIso (prodComparison F A B)\", \"doc\": \"Given a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ in a Cartesian monoidal category $\\\\mathcal{C}$, if $F$ preserves the product of objects $A$ and $B$, then the canonical product comparison morphism $F\"}\n  {\"name\": \"CategoryTheory.Quotient.ext\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {r : HomRel C} {x y : CategoryTheory.Quotient r},\\n  x.as = y.as → x = y\", \"doc\": \"In the quotient category $\\\\mathcal{C}/R$, two elements $x$ and $y$ are equal if their canonical projections to the original category $\\\\mathcal{C}$ are equal.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits are scheme morphisms, affine spectra, finite-group invariant rings or unrelated quotients; none states this stack theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separated etale inertia preserving morphism above an algebraic stack with a finite flat affine cover descends to a scheme etale over the categorical quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ordinary categorical groupoids or unrelated affine results; no declaration gives the stated geometric assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ordinary categorical groupoids or unrelated affine results; no declaration gives the stated geometric assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "well.nigh.affine|stabilizer.preserving|moduli.*[Ee]tale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ordinary categorical groupoids or unrelated affine results; no declaration gives the stated geometric assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale stabilizer preserving stack morphism is the pullback of a separated etale morphism of coarse schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsSeparated f] : IsSeparated (pullback.snd f g)\", \"doc\": \"Given schemes $X, Y, S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $f$ is a separated morphism, then the second projection morphism from the pullback $X \\times_S Y$ to $Y$ is also a separated mor\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X Y S : Scheme} (f : X ⟶ S) (g : Y ⟶ S) [IsSeparated g] : IsSeparated (pullback.fst f g)\", \"doc\": \"If a morphism $ g: Y \\to S $ is separated, then the first projection morphism from the pullback of $ f: X \\to S $ and $ g $ is also separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \": W.Cover (precoverage P)\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and schemes $ X $ and $ W $ over $ S $, if $ \\\\mathcal{U} $ is a $ P $-precover\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{S T : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (i : S ⟶ T) [IsSeparated i] : IsClosedImmersion (pullback.mapDesc f g i)\", \"doc\": \"If $ i: S \\to T $ is a separated morphism of schemes, then the morphism between the pullbacks induced by $ i $ is a closed immersion. Specifically, given morphisms $ f: X \\to S $ and $ g: Y \\to S $, the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism properties, ordinary categorical groupoids or unrelated affine results; no declaration gives the stated geometric assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-keel-mori-finite-inertia-quotient",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Etale comparison above a finite flat affine-covered stack.",
+   "via": [
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-stack-stabilizer-etale-comparison",
+  "worker": "stage1",
+  "summary": "Repaired the returned stale citation against the current DAG: reread the diagonal and composition criteria; made the diagonal argument explicit before applying schemehood; replaced three superseded proposed inputs by existing general-base groupoid comparison, finite-subset, fppf presentation and open-geometry nodes. Preserved the statement and six-step proof route. One remaining statement-only input is quotient-stack invariant base change; all citation quotes refreshed against current statements.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images: inherited alteration and stable-level-moduli prerequisite, Keel--Mori etale descent. Current latest blueprint read; no change to unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-separated-etale-space-scheme",
+    "why": "Generic scheme/groupoid tool used with its stated hypotheses in the 0DUS construction; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-a1-etale-space-locally-quasi-finite",
+    "why": "Generic scheme/groupoid tool used with its stated hypotheses in the 0DUS construction; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-a1-affine-groupoid-integral-invariants",
+    "why": "Generic scheme/groupoid tool used with its stated hypotheses in the 0DUS construction; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-universally-closed-separated",
+    "why": "Generic scheme/groupoid tool used with its stated hypotheses in the 0DUS construction; the unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-separated-etale-space-scheme",
+  "lem-a1-etale-space-locally-quasi-finite",
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-weil-pbc-surjective-universally-closed-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NW-b1135e23e",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-b1135e23e (reviewer sub-agent of L); spot-checked: Re-delivery after the 6a70 PASS whose landing was refused: the cited statement of lem-sfb-space-separated-diagonal-closed had changed. Against 6a70, the item statement and steps 1 and 4-6 are unchanged. Step 2 now gets the closed diagonal from the current 04Y0 point-topology criterion before invoking 03XX schemehood. Steps 2 and 3 replace the three dropped proposals with nodes that have since landed. lem-sfb-separated-lqf-affine-finite-set (07S0) needs separated, locally quasi-finite and an affine target; nothing more is assumed. lem-sfb-fppf-groupoid-stack-presentations(2) gives [V/R_V]≃B because B is DM and V→B is representable, surjective, flat and lfp. R_V is finite locally free over V by def-pc-finite-locally-free. lem-sfb-finite-flat-groupoid-quotient-open-geometry descends the 03JE invariant affines to B_i≃[V_i/R_i]; its DM hypothesis holds through the equivalence with B. lem-sfb-affine-groupoid-etale-invariant-comparison (0DT9) has exactly the hypotheses the step 3 squares supply. The new node lem-sfb-quotient-stack-invariant-base-change is unchanged and matches groupoids-quotients.tex 0DTG with B=S. rg -L for 0DTG finds only this node; the 04M9 quotient hits and the field-only 0DUV node lem-sfb-keel-mori-stabilizer-preserving-etale are not duplicates. All 30 statements it cites match clones/live, so there is no remaining drift. proof_deps equals the union of the uses, and every step is under 2000 characters. The 0DUQ R'=M'×_M R typo correction is confirmed. The four a1/pbc tool_uses are generic and accepted. Every batch-5 flag reaches sec-trace-formula only through the general definitions def-trf-algebraic-space and def-trf-projective-bundle-morphism, which are not steps of the trace formula or Poincare duality, so none forces a RETURN. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineStackStabilizerEtaleComparison",
+  "declaration": "AlgebraicGeometry.exists_affineStack_stabilizer_etale_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineStackStabilizerEtaleComparison.lean",
+  "statement": "theorem exists_affineStack_stabilizer_etale_comparison {S : Scheme.{u}} (A : BasedCategory.{v₁, w₁} (Over S)) (B : BasedCategory.{v₂, w₂} (Over S)) (hA : IsDeligneMumfordModuliStack A) (hB : IsDeligneMumfordModuliStack B) (U : Over S) (hU : IsAffine U.left) (p : BasedFunctor (discreteModuli (yoneda.obj U)) A) (hp : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) A), ∃ (V : Over S) (f : V ⟶ T) (e : BasedFunctor (discreteModuli (yoneda.obj V)) (moduliTwoFiberProduct t p)), e.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (e.comp (moduliTwoFiberFst t p)) (discreteModuliMap (yoneda.map f))) ∧ IsFinite f.left ∧ Flat f.left ∧ LocallyOfFinitePresentation f.left ∧ Surjective f.left) (M : Over S) (hM : IsAffine M.left) (q : BasedFunctor A (discreteModuli (yoneda.obj M))) (hq : ∀ (M₁ : AlgebraicSpace S) (a : M₁.obj.obj ⟶ yoneda.obj M), (∀ (T : Over S) (b : yoneda.obj T ⟶ M₁.obj.obj), AlgebraicSpace.IsEtale b → Flat (yoneda.preimage (b ≫ a)).left) → ∀ Z : AlgebraicSpace S, Function.Bijective (fun f : M₁.obj.obj ⟶ Z.obj.obj ↦ (moduliTwoFiberFst (discreteModuliMap a) q).comp (discreteModuliMap f))) (h : BasedFunctor B A) (hrep : IsRepresentableByAlgebraicSpaces h) (het : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) A) (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange h T t Z a → SpaceMapIsEtale Z T a) (hsep : ∀ (T : Over S) (t : BasedFunctor (discreteModuli (yoneda.obj T)) A) (Z : AlgebraicSpace S) (a : Z.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange h T t Z a → AlgebraicSpace.IsRepresentableWith (fun _ _ f ↦ IsProper f.left) (pullback.diagonal a)) (haut : ∀ (T : Over S) (b : Functor.Fiber B.p T), Function.Bijective (fun α : b ≅ b ↦ (moduliFiberMap h T).mapIso α)) : ∃ (N : Over S) (f : N ⟶ M), IsSeparated f.left ∧ Etale f.left ∧ ∃ (qB : BasedFunctor B (discreteModuli (yoneda.obj N))) (e : BasedFunctor B (moduliTwoFiberProduct (discreteModuliMap (yoneda.map f)) q)), e.toFunctor.IsEquivalence ∧ e.comp (moduliTwoFiberFst (discreteModuliMap (yoneda.map f)) q) = qB ∧ e.toFunctor ⋙ ObjectProperty.ι _ ⋙ Comma.snd (discreteModuliMap (yoneda.map f)).toFunctor q.toFunctor = h.toFunctor",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-591c669c1",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, Stacks 0DUS/0DUR source, the delivered module and the stmt_dep declarations (IsDeligneMumfordModuliStack, moduliTwoFiberProduct = iso-comma full subcategory over identities, HasSpaceBaseChange, SpaceMapIsEtale, moduliFiberMap, AlgebraicSpace.IsEtale/IsRepresentableWith). All clauses match: hp = representable finite flat lfp surjective cover tested on scheme base changes; hq = flat (on étale charts) base change over all algebraic spaces M₁, bijection to Hom(A×_M M₁, Z), strict BasedFunctor equality correct for discrete targets; het/hsep = étale and proper relative diagonal on every space base change; haut = bijection on fibre automorphisms; conclusion N, separated étale f, qB, equivalence e with fst = qB and snd = h (canonical comparison, not stronger). No extra hypotheses, no universe restriction, empty cases allowed. Statement verbatim; node differs from live only in lean; non-public imports = existing proof_dep modules; docstrings carry source, blueprint tag and 6 proof steps; sorry only; report has Worker report and Second reading sections. No findings, no fixes."
+ }
+}

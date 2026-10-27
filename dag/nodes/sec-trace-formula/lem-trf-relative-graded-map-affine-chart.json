@@ -1,0 +1,160 @@
+{
+ "id": "lem-trf-relative-graded-map-affine-chart",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the ampleness/projectivity input lem-trf-proper-fibrewise-ample-projective, Step 4. This is the arbitrary graded-algebra immersion criterion used by 01VN inside the proof of 01VU. This node supplies the affine restriction and canonical fraction formulas of Step 1 of the graded immersion criterion.",
+   "via": [
+    "lem-trf-graded-immersion-ample-criterion",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine canonical-map basic opens and homogeneous fractions",
+ "statement": "Let h:Z→S be a scheme morphism [def-pc-scheme], L an invertible module [def-sc-invertible-module], A a graded quasi-coherent algebra [def-weil-pbc-graded-sheaf-structures], psi a relative graded line map [def-trf-relative-graded-line-map], and r its canonical map to relative Proj [def-nagata-relative-proj]. Fix an affine V in S, put T=h^{-1}(V), M=h|_T^*L, and let B_n be the underlying additive subgroup of A(V)_n. Suppose rho:T→Proj(B) lifts r|_T through the identity-grading isomorphism and the relative-Proj chart. Let phi:B→Gamma_*(T,M) [def-sc-invertible-section-ring] be a graded map normalized on every homogeneous a of degree n by the degree-n inclusion of psi evaluated on T. Assume its positive-degree nonvanishing loci [def-weil-pbc-ample-invertible-module] cover T. Then rho^{-1}D_+(a) equals the nonvanishing locus of phi(a), and on this open rho^#(b/a^q) times phi(a)^q equals phi(b), for every positive-degree homogeneous a and homogeneous b of degree q deg(a), including q=0. No immersion or quasi-compactness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01O9 (lemma-invertible-map-into-relative-proj), characterization (3), affine restriction; Tag 01NK (lemma-invertible-map-into-proj), canonical homogeneous-fraction construction."
+ },
+ "stmt_deps": [
+  "def-trf-relative-graded-line-map",
+  "def-sc-invertible-section-ring",
+  "def-weil-pbc-ample-invertible-module",
+  "def-nagata-relative-proj",
+  "def-sc-invertible-module",
+  "def-pc-scheme",
+  "def-weil-pbc-graded-sheaf-structures"
+ ],
+ "proof": [
+  {
+   "text": "Trivialize the pulled-back line on an open cover. Express the normalized evaluations in the frame powers. Their unit and multiplication equations give a ring map alpha to functions. The assumed positive nonvanishing cover makes the image of the irrelevant ideal the unit ideal: at every point one of the coefficients has unit germ. The defining IsCanonicalMap equation identifies the relative morphism with fromOfGlobalSections(alpha). Cancel the relative-Proj chart open immersion and transport the identity grading isomorphism to identify the supplied lift rho. The ordinary Proj inverse-image formula identifies rho inverse-image D_+(a) with the basic open of alpha(a); in a frame this is precisely the nonvanishing locus of phi(a). These set equalities glue.",
+   "uses": [
+    "def-trf-relative-graded-line-map",
+    "def-trf-space-line-module-proj-input",
+    "def-sc-invertible-module",
+    "lem-sc-nonvanishing-iff-generates-at"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O9 (lemma-invertible-map-into-relative-proj), characterization (3), affine restriction; Tag 01NK (lemma-invertible-map-into-proj), canonical homogeneous-fraction construction."
+   }
+  },
+  {
+   "text": "On the same line-trivializing cover, the map on the homogeneous fraction b/a^n is alpha(b)/alpha(a)^n. Multiply by the frame expression of phi(a)^n. Tensor-power coherence and the assumed normalization on homogeneous elements give the asserted section identity, including n=0. Sheaf separatedness glues it over the preimage of D_+(a). Empty charts are allowed, as are arbitrary degree-zero algebras and generators in arbitrary positive degrees.",
+   "uses": [
+    "def-trf-relative-graded-line-map",
+    "def-sc-invertible-section-ring",
+    "def-trf-space-line-module-proj-input"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O9 (lemma-invertible-map-into-relative-proj), characterization (3), affine restriction; Tag 01NK (lemma-invertible-map-into-proj), canonical homogeneous-fraction construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-sc-invertible-section-ring",
+  "def-trf-relative-graded-line-map",
+  "def-trf-space-line-module-proj-input",
+  "lem-sc-nonvanishing-iff-generates-at"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01O9 (lemma-invertible-map-into-relative-proj), characterization (3), affine restriction; Tag 01NK (lemma-invertible-map-into-proj), canonical homogeneous-fraction construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relative.*(chart|graded)|graded.*(section|Proj)",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Proj restriction formulas do not provide the relative graded line-module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "Proj.fromOfGlobalSections",
+   "results": "loogle: unknown identifier 'Proj.fromOfGlobalSections'",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Proj restriction formulas do not provide the relative graded line-module comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restrict canonical relative Proj morphism to an affine base open and obtain the absolute graded section ring morphism",
+   "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.basicOpenToSpec, AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Proj restriction formulas do not provide the relative graded line-module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical relative Proj affine restriction graded homomorphism into powers of invertible module homogeneous fraction formula",
+   "results": "AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply, AlgebraicGeometry.Proj.fromOfGlobalSections_resLE, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.awayToSection",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary Proj restriction formulas do not provide the relative graded line-module comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.GradedImmersionAmpleCriterion",
+  "date": "2026-10-23",
+  "group": "S2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-lem-trf-graded-immersion-ample-criterion",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.RelativeGradedMapAffineChart",
+  "file": "lean/Sheaf/TraceFormula/RelativeGradedMapAffineChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.RelativeGradedLineMap.affine_chart_formulas",
+  "statement": "theorem RelativeGradedLineMap.affine_chart_formulas\n    {Z S : Scheme.{u}} {h : Z ⟶ S} {L : Z.Modules} [L.IsInvertible]\n    {A : S.GradedAlgebraData} (ψ : RelativeGradedLineMap h A L)\n    (r : Z ⟶ A.relProj) (hr : ψ.IsCanonicalMap r)\n    (V : S.affineOpens)\n    (hM : ((tensorPullback (h ⁻¹ᵁ V.1).ι).obj L).IsInvertible) :\n    let T := (h ⁻¹ᵁ V.1).toScheme\n    let M := (tensorPullback (h ⁻¹ᵁ V.1).ι).obj L\n    let 𝒜 : ℕ → AddSubgroup (A.obj V) := fun n ↦ (A.grading V n).toAddSubgroup\n    letI : GradedRing 𝒜 := { (inferInstance : GradedRing (A.grading V)) with }\n    let γ : A.grading V →+*ᵍ 𝒜 :=\n      { toRingHom := RingHom.id _\n        map_mem := fun ha ↦ ha }\n    ∀ (ρ : T ⟶ Proj 𝒜),\n      ρ ≫ Proj.map γ (by\n        intro a ha\n        exact Ideal.mem_map_of_mem γ.toRingHom ha) ≫ A.relProjι V = (h ⁻¹ᵁ V.1).ι ≫ r →\n      ∀ (φ : 𝒜 →+*ᵍ sectionRingGrade M),\n        (∀ (n : ℕ) (a : A.grading V n),\n          φ.toRingHom a = (DirectSum.of (SectionRingComponent M) n)\n            (ψ.evaluate (h ⁻¹ᵁ V.1).ι V (by simp) n a)) →\n        (∀ z : T, ∃ (n : ℕ) (a : A.obj V) (ha : a ∈ 𝒜 n),\n          0 < n ∧ z ∈ nonvanishingLocus (M.tensorPow n) ((φ.toRingHom a) n)) →\n        (∀ (d : ℕ) (_hd : 0 < d) (a : A.obj V) (_ha : a ∈ 𝒜 d),\n          (ρ ⁻¹ᵁ Proj.basicOpen 𝒜 a : Set T) =\n            nonvanishingLocus (M.tensorPow d) ((φ.toRingHom a) d)) ∧\n        (∀ (d : ℕ) (_hd : 0 < d) (a : A.obj V) (ha : a ∈ 𝒜 d),\n          ∀ (n : ℕ) (b : A.obj V) (_hb : b ∈ 𝒜 (n • d)),\n            (ρ.app (Proj.basicOpen 𝒜 a)\n              (Proj.awayToSection 𝒜 a (HomogeneousLocalization.Away.mk 𝒜 ha n b _hb))) •\n              (M.tensorPow (n • d)).presheaf.map\n                (homOfLE (le_top : ρ ⁻¹ᵁ Proj.basicOpen 𝒜 a ≤ ⊤)).op\n                (((φ.toRingHom a) ^ n) (n • d)) =\n              (M.tensorPow (n • d)).presheaf.map\n                (homOfLE (le_top : ρ ⁻¹ᵁ Proj.basicOpen 𝒜 a ≤ ⊤)).op\n                ((φ.toRingHom b) (n • d)))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6ccea",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T191003-L-203224",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-6ccea",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261024T191003-L-203224",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/definition/affine-chart modules and 3 node files vs clone live (verbatim move diff, unchanged item statement); new sorry affine_chart_formulas vs IsCanonicalMap and the hypotheses of exists_proj_canonical_map_twist_comparison; 3 direct importers compiled against the delivered modules"
+ }
+}

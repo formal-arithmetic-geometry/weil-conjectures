@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-composition-iterated-mate-expansion",
+ "kind": "statement",
+ "title": "Expansion of the iterated purity route",
+ "statement": "Fix a finite purity datum P [def-pur-conventions]. Let f:X\\to Y and g:Y\\to Z be smooth separated k-morphisms of pure relative dimensions d,e\\geq0 between finite-type k-schemes. Let K\\in D^b_{ctf}(Z,A). Write E_T for intrinsic realization, M=E_Z^{-1}K, S_h=Lh^*, G_h=Rh^!, and o_h for the single-map orientation in standing coefficient-unit coordinates [def-pur-composition-model-orientation-coordinates]. Let I_K:T_{gf}^{d+e}K\\cong T_f^dT_g^eK be exactly the eight-factor source comparison of [def-pur-composition-comparisons]. Let J_{gf,d+e,K} be the shift reassociation followed by the inverse exact/left-derived pullback comparison, realized intrinsically (the source change of [lem-pur-composition-single-mate-presentation]). Let mu be ordered Tate-power concatenation after Tate pullback, and put V=o_f\\otimes S_f(o_g), the specified tensor of isomorphisms of [lem-pur-composition-compatible-dnc-charts], so mu^{-1};V^{-1} maps the composite Tate power to W=\\omega_f\\otimes S_f\\omega_g. Put R_K=r_K;(S_f\\theta_{g,M}\\otimes1);\\theta_{f,G_gM}, the right side of the tensor-mate identity [lem-pur-composition-tensor-mate]. Finally let U_K=G_f(\\eta_{Y,G_gM}), where eta is the unit of E_Y. Then the iterated purity route, before applying the inverse exceptional compositor, is\n\\[I_K;T_f^d(\\gamma_{g,K});\\gamma_{f,E_Y(G_gM)}\n=J_{gf,d+e,K};E_X((1_{S_{gf}M}\\otimes(\\mu^{-1};V^{-1}));R_K;U_K).\\]\nThe argument is an expansion of the two individual maps. It neither identifies V with the composite orientation nor uses equality of the two tensor-mate routes.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-smooth-purity-map",
+  "def-pur-composition-comparisons",
+  "def-pur-composition-model-orientation-coordinates",
+  "lem-pur-composition-tensor-mate",
+  "lem-pur-composition-compatible-dnc-charts",
+  "lem-pur-composition-single-mate-presentation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 2: the K-form; Expansion of the iterated purity route"
+ },
+ "proof": [
+  {
+   "text": "Apply the single-map presentation to g at K and to f at the intrinsic realization of G_gM. All maps retain the original K and its specified constructible finite-Tor proof; smooth preservation supplies the second domain.",
+   "uses": [
+    "lem-pur-composition-single-mate-presentation",
+    "def-pur-composition-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the eight canonical source factors. Naturality of shift reassociation cancels the inverse shift factors next to the two purity sources. The pullback compositor, tensor associator and monoidal pullback comparison give precisely r_K; the ordered power and Tate pullback factors give mu inverse.",
+   "uses": [
+    "def-pur-composition-comparisons",
+    "def-pur-composition-model-orientation-coordinates",
+    "def-pur-smooth-purity-map",
+    "lem-pur-composition-tensor-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use tensor and theta naturality to move the separate orientation insertions to the source, obtaining V inverse, and move the intermediate realization unit to the target, obtaining U_K. The remaining morphisms are pulled-back theta_g followed by theta_f, hence R_K. All equalities use the canonical signed derived maps; zero dimensions use the unit constraints.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "lem-pur-composition-tensor-mate",
+    "thm-sf-ambient-adjoint-class"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-composition-single-mate-presentation",
+  "def-pur-composition-comparisons",
+  "def-pur-composition-model-orientation-coordinates",
+  "def-pur-smooth-purity-map",
+  "lem-pur-composition-tensor-mate",
+  "thm-sf-ambient-adjoint-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 2, interface expansion of the specified canonical maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of tensor shift comparison and pullback tensor comparison expands iterated smooth purity maps",
+   "results": "8 hits, including pullbackObjFreeIso_hom_naturality and PullbackShift.natIsoComp; no iterated purity expansion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.whiskerLeft_comp",
+   "results": "One hit: whiskerLeft_comp; useful elementary tensor functoriality, not this comparison.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*shift.*naturality|whiskerLeft_comp",
+   "results": "25 Mathlib hits, including whiskerLeft_comp; no smooth purity expansion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of tensor shift isomorphism under composition of inverse image functors",
+   "results": "8 hits, including commShiftIso_inv_naturality; no purity expansion.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 2: the tensor formula is compatible with composition by its definition; twist isomorphisms are compatible with pullback composition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityCompositionCoherence",
+  "date": "2026-10-26",
+  "group": "F3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompositionIteratedMateExpansion",
+  "file": "lean/Sheaf/Paper/CompositionIteratedMateExpansion.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.composition_iterated_mate_expansion",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.composition_iterated_mate_expansion"
+  ],
+  "statement": "theorem composition_iterated_mate_expansion (f : X ⟶ Y) (g : Y ⟶ Z)\n    [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]\n    (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g]\n    (K : Scheme.proEtaleDerivedCategory Z P.Ring)\n    (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Z K) :\n    letI := P.noetherian (Z ↘ Spec (.of P.field.k))\n    letI := P.noetherian (Y ↘ Spec (.of P.field.k))\n    letI := Dnc.compactifiable P f (Y ↘ Spec (.of P.field.k))\n    letI := Dnc.compactifiable P g (Z ↘ Spec (.of P.field.k))\n    letI := Dnc.compactifiable P (f ≫ g) (Z ↘ Spec (.of P.field.k))\n    letI : IsNoetherianRing P.Coefficient := isNoetherian_of_finite _ _\n    letI := ProEtale.upperStarPreservesFlat_moduleCat P.Coefficient\n    letI : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace\n      (Y ↘ Spec (.of P.field.k))\n    letI : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace\n      (Z ↘ Spec (.of P.field.k))\n    let M := (Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.obj K\n    let V := P.compatibleTensorIso (P.modelOrientation d f (Y ↘ Spec (.of P.field.k)))\n      ((S P.Coefficient f).mapIso (P.modelOrientation e g (Z ↘ Spec (.of P.field.k))))\n    (P.compositionSourceIdentification f g d e K).hom ≫\n        (P.compositionShiftedPullback f d).map (P.smoothPurityMap g e K hK) ≫\n        P.smoothPurityMap f d ((P.compositionExceptional g).obj K)\n          (P.compositionExceptional_ctf g e K hK) =\n      (P.compositionMateSource (f ≫ g) (d + e) K).hom ≫\n        (Scheme.sfIntrinsicDerivedEquivalence X P.Ring).functor.map\n          ((S P.Coefficient (f ≫ g)).obj M ◁\n            ((P.modelOrientationMu d e f (Y ↘ Spec (.of P.field.k))).inv ≫ V.inv) ≫\n              rhs P.Coefficient f g M ≫\n                (G P.Coefficient f).map\n                  ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).unitIso.hom.app\n                    ((G P.Coefficient g).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6e650",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261026T001447-L-738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6e650",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261026T001447-L-738",
+  "kind": "interface",
+  "note": "independent cc review: thm-pur-composition-coherence node and its two new lemma nodes against PurityCompositionCoherence / CompositionSingleMatePresentation / CompositionIteratedMateExpansion; PurityCompositionComparisons against the clone's old item module (verbatim extraction); all 14 direct importers compiled in sandbox"
+ }
+}

@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-space-tor-independence-etale-chart-criterion",
+ "kind": "statement",
+ "title": "Etale scheme-chart criterion for geometric Tor independence of algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $F,G,H$ be algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], with morphisms $F\\to H$ and $G\\to H$. Their geometric local rings are stalks of the small etale structure sheaves. Say that $F$ and $G$ are geometrically Tor independent over $H$ if for every pair $\\bar f:\\operatorname{Spec}\\Omega\\to F$, $\\bar g:\\operatorname{Spec}\\Omega\\to G$ over the same $\\bar h:\\operatorname{Spec}\\Omega\\to H$, with $\\Omega$ algebraically closed, $\\operatorname{Tor}^{\\mathcal O_{H,\\bar h}}_i(\\mathcal O_{F,\\bar f},\\mathcal O_{G,\\bar g})=0$ for all $i>0$ [def-weil-pbc-tor-modules]. Let $W\\to H$ be a surjective etale morphism from a scheme, and let $U\\to F\\times_HW$ and $V\\to G\\times_HW$ be surjective etale morphisms from schemes [lem-trf-space-fibre-products-etale-covers]. Then $F$ and $G$ are geometrically Tor independent over $H$ if and only if for every pair of ordinary points $u\\in U$, $v\\in V$ with common image $w\\in W$, one has\n$$\\operatorname{Tor}^{\\mathcal O_{W,w}}_i(\\mathcal O_{U,u},\\mathcal O_{V,v})=0\\qquad(i>0).$$\nThis holds for every such choice of the three scheme atlases. In particular, for schemes $F,G,H$, geometric Tor independence is equivalent to this ordinary local-ring condition on $F,G,H$ themselves. No flatness, quasi-compactness, separation or finiteness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 08IP (definition-tor-independent) and 08IQ (lemma-tor-independent), equivalence (1) and (4), and the scheme comparison in its proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-pbc-tor-modules",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-geometric-stalk-models",
+  "def-pc-pullback-stalk-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the following specialization of the cited flat-ring-diagram cohomology comparison: for compatible rings $R,A,B,R_1,A_1,B_1$ satisfying its three flatness assumptions, put $D=A\\otimes_RB$, $D_1=A_1\\otimes_{R_1}B_1$. Taking $M=A[0]$ and cohomological degree $-i$ gives\n$$\\operatorname{Tor}_i^R(A,B)\\otimes_DD_1\\cong\\operatorname{Tor}_i^{R_1}(A_1,B_1).$$\nIndeed $A\\otimes_A^{\\mathbf L}A_1=A_1[0]$; a projective resolution in homological degrees $i\\ge0$, placed in cohomological degrees $-i$, identifies the two displayed cohomology groups with precisely these Tor groups. This also supplies their commuting factor actions and the induced $D\\to D_1$ map; those actions are part of the cited comparison's statement.",
+   "uses": [
+    "lem-sfb-flat-ring-diagram-tensor-cohomology",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IQ (lemma-tor-independent), displayed Tor comparison; more-algebra.tex Tag 0DJD (lemma-lemma-tor-independent-flat-compare), specialized to M=A[0]."
+   }
+  },
+  {
+   "text": "First work with schemes $X,Y,Z$ and maps $X\\to Z\\leftarrow Y$. Fix compatible geometric points over $x,y,z$, and write $R=\\mathcal O_{Z,z}$, $A=\\mathcal O_{X,x}$, $B=\\mathcal O_{Y,y}$ and $\\widetilde R,\\widetilde A,\\widetilde B$ for their geometric local rings. The chart-stalk identification identifies these with compatible strict henselizations. The ordinary local homomorphisms $R\\to A,B$ give local strict-henselization maps, and strict-local refinement makes $A\\otimes_R\\widetilde R\\to\\widetilde A$ and $B\\otimes_R\\widetilde R\\to\\widetilde B$ flat. Also $R\\to\\widetilde R$ is faithfully flat. Thus step 1 applies. If every ordinary local Tor group in the statement is zero, the resulting geometric Tor groups are zero. This proves the ordinary-to-geometric direction for schemes without any Noetherian assumption.",
+   "uses": [
+    "lem-sfb-space-strict-local-flatness",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-sfb-strict-local-refinement-flat",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IQ (lemma-tor-independent), scheme comparison, forward implication; algebra.tex Tag 08HV (lemma-strictly-henselian-functorial-improve); more-algebra.tex Tag 07QM (lemma-dumb-properties-henselization)."
+   }
+  },
+  {
+   "text": "For the converse assume geometric Tor independence for schemes. Restrict to affine open neighbourhoods $X_0=\\operatorname{Spec}A$, $Y_0=\\operatorname{Spec}B$ mapping into $Z_0=\\operatorname{Spec}R$; their geometric local rings agree with those of $X,Y,Z$ by the etale chart-stalk isomorphisms. Fix $i>0$ and set $D=A\\otimes_RB$, $N=\\operatorname{Tor}_i^R(A,B)$ with its $D$-action from step 1. For $s\\in\\operatorname{Spec}D$ write $p,q,r$ for its contractions to $A,B,R$, and put $E=A_p\\otimes_{R_r}B_q$, $L=\\operatorname{Tor}_i^{R_r}(A_p,B_q)$. The maps $R\\to R_r$, $A\\otimes_RR_r\\to A_p$, and $B\\otimes_RR_r\\to B_q$ are localizations: on fractions the latter maps invert the remaining elements outside $p,q$. Hence they are flat. Step 1 gives $N\\otimes_DE\\cong L$. Every denominator used in $D\\to E$ lies outside $s$, so the map extends to $E\\to D_s$; tensoring the displayed isomorphism with $D_s$ yields\n$$N_s\\cong L\\otimes_ED_s.$$\nThe localization and tensor identifications are the fraction maps $(a/u)\\otimes(b/v)\\mapsto(a\\otimes b)/(u\\otimes v)$.",
+   "uses": [
+    "lem-sfb-space-strict-local-flatness",
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-sfb-flat-ring-diagram-tensor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IQ (lemma-tor-independent), affine converse; more-algebra.tex Tags 08HW (lemma-tor-independent-flat), 08HX (lemma-tor-independent), localization formula in its proof."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $\\Omega$ of $\\kappa(s)$. The affine fibre-product identification gives a geometric point $\\bar s$ of $X_0\\times_{Z_0}Y_0=\\operatorname{Spec}D$ and its compatible images $\\bar x,\\bar y,\\bar z$. Put $C=(D_s)^{\\mathrm{sh}}$, $T=\\widetilde A\\otimes_{\\widetilde R}\\widetilde B$, where tildes are the strict henselizations of $A_p,B_q,R_r$ for these points. Functoriality of strict henselization for the projections gives compatible maps $\\widetilde A,\\widetilde B\\to C$. They agree on $\\widetilde R$: their composites are the local map for the same morphism and the same residue-field embedding, hence equal by uniqueness. The tensor universal property gives $T\\to C$, compatible with $E\\to D_s\\to C$. Step 2's application of step 1 gives $L\\otimes_ET\\cong\\operatorname{Tor}_i^{\\widetilde R}(\\widetilde A,\\widetilde B)=0$. Therefore\n$$N_s\\otimes_{D_s}C\\cong L\\otimes_EC\\cong(L\\otimes_ET)\\otimes_TC=0.$$\nFaithful flatness of $D_s\\to C$ implies $N_s=0$: apply the defining reflection of exactness to $0\\to N_s\\to0$. This holds for every $s$. Apply local detection of bijectivity to $0\\to N$ at all maximal ideals of $D$ to conclude $N=0$.",
+   "uses": [
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IQ (lemma-tor-independent), affine converse, detecting the localized Tor groups; schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); more-algebra.tex Tag 07QM (lemma-dumb-properties-henselization)."
+   }
+  },
+  {
+   "text": "For any $x\\in X$, $y\\in Y$ with common image $z$, choose affine neighbourhoods $X_0,Y_0$ inside the inverse images of an affine neighbourhood $Z_0$ of $z$. This only uses that affine opens form a basis of a scheme. With rings $A,B,R$ as in step 3, the previous step gives $\\operatorname{Tor}_i^R(A,B)=0$ for every $i>0$. Apply step 1 to the localization diagram $R\\to R_r$, $A\\to A_p$, $B\\to B_q$, whose flatness was checked in step 3. It follows that $\\operatorname{Tor}_i^{R_r}(A_p,B_q)=0$. The ordinary affine-open stalk-localization isomorphisms identify these rings and their maps with $\\mathcal O_{Z,z},\\mathcal O_{X,x},\\mathcal O_{Y,y}$. This proves the converse for schemes. No intersections of affine opens are assumed affine.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-flat",
+    "lem-sfb-flat-ring-diagram-tensor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IQ (lemma-tor-independent), conclusion of the affine converse; more-algebra.tex Tag 08HX (lemma-tor-independent), implication (1) to (2)."
+   }
+  },
+  {
+   "text": "Now use the atlases of the statement. Base change and composition of representable etale maps show that $U\\to F$ and $V\\to G$ are etale, as is $W\\to H$. For compatible geometric points $\\bar u,\\bar v$ over $\\bar w$, their three geometric local rings and the maps between them are identified with those on $F,G,H$ by the etale chart-stalk isomorphisms. Thus geometric Tor independence on $F,G,H$ implies it on $U,V,W$. Conversely fix any $\\bar f,\\bar g$ over $\\bar h$, all defined over one algebraically closed field $\\Omega$. Surjectivity chooses a point of $W$ over the image of $\\bar h$, and the specified-point lifting lemma lifts $\\bar h$ to $\\bar w:\\operatorname{Spec}\\Omega\\to W$. The fibre-product universal property gives points $(\\bar f,\\bar w)$ and $(\\bar g,\\bar w)$ of $F\\times_HW$ and $G\\times_HW$. Use surjectivity and the same lifting lemma to lift them to $\\bar u$ and $\\bar v$. All lifts use the original $\\Omega$ and have the same image $\\bar w$. The same three stalk isomorphisms identify their Tor groups with those of the original triple. Hence geometric Tor independence on $U,V,W$ implies it on $F,G,H$.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-sfb-etale-geometric-point-specified-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IQ (lemma-tor-independent), first two paragraphs, using spaces-properties.tex Tags 04KF (lemma-describe-etale-local-ring), 05VN (lemma-geometric-lift-to-usual)."
+   }
+  },
+  {
+   "text": "Step 6 identifies geometric Tor independence on $F,G,H$ with geometric Tor independence on the schemes $U,V,W$. Steps 2--5 identify the latter with exactly the stated ordinary local-ring condition on every pair $u,v$ over $w$. The atlases were arbitrary, proving independence of their choice. For schemes take all three atlas maps to be identities, giving the last assertion. The proof nowhere requires the original morphisms to be flat, or the spaces to satisfy any quasi-compactness, separation or finiteness condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IQ (lemma-tor-independent), equivalence of (1) and (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-ring-diagram-tensor-cohomology",
+  "def-weil-pbc-tor-modules",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-sfb-strict-local-refinement-flat",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-etale-geometric-point-specified-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IQ (lemma-tor-independent), equivalence (1) and (4); its converse support test is expanded using the strict local ring of each fibre-product point."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tor independence of algebraic spaces is equivalent to Tor independence on surjective etale scheme charts",
+   "results": "Read 8 returned hits: AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.exists_subalgebra_fg.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|tor_independent|AlgebraicSpace",
+   "results": "Read 0 returned hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independence is etale local and agrees for schemes and their associated algebraic spaces",
+   "results": "Read 8 returned hits: RingHom.Etale.propertyIsLocal, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.of_isLocalizationAway, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, Algebra.Etale.formallyEtale.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces higher Tor of geometric stalk rings vanishes if and only if the ordinary local rings on etale scheme atlases are Tor independent",
+   "results": "Read 8 returned hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.mem_etaleLocus_iff, Algebra.IsEtaleAt, Algebra.Etale.formallyEtale, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus, Algebra.etaleLocus_eq_univ_iff, Algebra.FormallyEtale.of_isLocalization.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Ee]tale|[Ee]tale.*Tor|AlgebraicSpace",
+   "results": "Read 20 returned hits: Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean, Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor",
+   "results": "Read 4 returned hits: CategoryTheory.Tor, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.Tor_obj, CategoryTheory.Tor_map.",
+   "date": "2026-10-24",
+   "verdict": "no match: the results concern scheme flatness, etale morphisms, generic categorical Tor or linear independence; none gives the algebraic-space geometric-stalk versus ordinary-chart Tor comparison or the product-square theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Tor, Algebra.Etale",
+   "results": "Read 0 returned hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: etale morphism and etale-site results do not compare higher Tor of ordinary and geometric local rings on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independence of algebraic spaces can be checked on ordinary local rings of etale scheme charts",
+   "results": "Read 8 returned hits: RingHom.Etale.propertyIsLocal, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.mem_etaleLocus_iff, RingHom.Etale.ofLocalizationSpan, AlgebraicGeometry.Scheme.Etale, RingHom.Etale.ofLocalizationSpanTarget, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-24",
+   "verdict": "no match: etale morphism and etale-site results do not compare higher Tor of ordinary and geometric local rings on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|tor_independent|AlgebraicSpace",
+   "results": "Read 0 returned hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: etale morphism and etale-site results do not compare higher Tor of ordinary and geometric local rings on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher Tor vanishing of geometric local rings is equivalent to Tor vanishing of ordinary local rings on etale atlases",
+   "results": "Read 8 returned hits: Algebra.Etale.of_isLocalizationAway, RingHom.Etale.ofLocalizationSpanTarget, RingHom.Etale.propertyIsLocal, RingHom.Etale, RingHom.FormallyEtale, Algebra.Etale.of_isLocalization_Away, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.of_isLocalization",
+   "date": "2026-10-24",
+   "verdict": "no match: etale morphism and etale-site results do not compare higher Tor of ordinary and geometric local rings on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independence for schemes agrees with Tor independence of strict henselizations at compatible geometric points",
+   "results": "Read 8 returned hits: AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, RingHom.FormallyUnramified.propertyIsLocal, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.unramifiedLocus, Algebra.FormallySmooth.iff_injective_lTensor_residueField",
+   "date": "2026-10-24",
+   "verdict": "no match: etale morphism and etale-site results do not compare higher Tor of ordinary and geometric local rings on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "Tor.*[Ee]tale|[Ee]tale.*Tor|AlgebraicSpace",
+   "results": "Read 8 returned hits: Mathlib/AlgebraicGeometry/Morphisms/Etale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: etale morphism and etale-site results do not compare higher Tor of ordinary and geometric local rings on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-product-tor-independence",
+  "date": "2026-10-24",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence; Tag 08IR, lemma-compare-base-change, applied to a closed immersion and its structure sheaf. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence: the full arbitrary commutative-square assertion, before specializing to a closed immersion. Etale reduction input: Tag 08IQ, equivalence of geometric-stalk Tor independence with the ordinary local-ring test on scheme atlases.",
+   "via": [
+    "lem-sfb-space-product-tor-independence",
+    "lem-sfb-space-relative-flat-closed-kernel-base-change",
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-tor-independence-etale-chart-criterion",
+  "worker": "stage1",
+  "summary": "Kept the statement and all maintainer fields. Reused existing nodes only. Wrote the Tor comparison as a specialization of the existing flat-ring-diagram cohomology comparison, proved both scheme implications with explicit fibre-product-point faithful-flat detection, and then proved arbitrary-atlas equivalence by specified-field lifts and etale stalk isomorphisms. No Noetherian hypothesis was added.",
+  "blueprint": "Realizes the inherited Tag 08IQ etale-reduction prerequisite in blueprint.from.place. The inherited ancestor is null; whole-blueprint searches found no blueprint statement of this criterion. Current latest chapter route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-flat-ring-diagram-tensor-cohomology",
+    "why": "Generic derived tensor cohomology under a flat change of ring diagram input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-sfb-space-strict-local-flatness",
+    "why": "Generic etale local rings on charts and flat morphisms of algebraic spaces input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic strict henselizations at a geometric point and their functoriality input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-sfb-strict-local-refinement-flat",
+    "why": "Generic flatness of strict-local refinement over a strict-local base input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic strict henselization is faithfully flat input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic a localization is a flat algebra input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-weil-pbc-localization-tensor-over-base",
+    "why": "Generic localization over s commutes with tensoring over r input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-weil-pbc-localization-tensor-product",
+    "why": "Generic localization commutes with tensor products input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-pc-algebraic-closure-exists-unique",
+    "why": "Generic existence and uniqueness of algebraic closures input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic the fibre product of affine schemes is the spectrum of the tensor product input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic the tensor product of commutative algebras is their pushout input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+    "why": "Generic a linear map that is bijective at every maximal ideal is bijective input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic stalk of a scheme at a point of an affine open: the canonical open immersion and the localization input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic scheme tests and comparison maps for representable etale morphisms input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic fibre products of algebraic spaces and pullback of etale coverings input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   },
+   {
+    "node": "lem-sfb-etale-geometric-point-specified-lift",
+    "why": "Generic lift an algebraic-space geometric point over a specified etale chart point input for the local-ring/etale-atlas comparison of Tag 08IQ; reused as a black box, without replacing a six-functor stability argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-flat-ring-diagram-tensor-cohomology",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-sfb-strict-local-refinement-flat",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-localization-tensor-product",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-etale-geometric-point-specified-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-90366666a",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-90366666a (reviewer sub-agent of L); spot-checked: Read Stacks 08IP/08IQ (spaces-perfect.tex) with the full proof, perfect.tex definition-tor-independent and more-algebra 08HW/0DJD. The item statement is 08IQ (1)<=>(4) for every scheme-atlas triple, plus the identity-atlas case for schemes. It adds no hypotheses and drops none, and it matches how both citers use it (product-tor-independence step 4, tor-independent-base-change step 3). There are no new nodes and no repair note. proof_deps equals the union of the uses, and all three search kinds are recorded. Step 1 is lem-sfb-flat-ring-diagram-tensor-cohomology at M=A[0] (the derived form of 08HW), so elementary is right. Step 2 (ordinary implies geometric for schemes) gets its three flatness hypotheses from strict-local-flatness, strict-local-refinement-flat (no Noetherian hypothesis) and strict-henselization faithful flatness. Steps 3-5 replace Stacks' image-on-spectra plus 08HX argument with a valid one. For each prime s of D=A⊗_R B, with E=A_p⊗_{R_r}B_q, the localizations give N_s=L⊗_E D_s. With C=(D_s)^sh, the maps Ã and B̃ to C agree on R̃ by uniqueness in functoriality clause 3, so T→C exists and N_s⊗C=(L⊗_E T)⊗_T C=0. Faithful flatness then gives N_s=0, so N=0, and localizing gives the ordinary local Tor vanishing. No affine intersections are used. Step 6 is the 08IQ lifting paragraph: étale composition and base change, then specified-point lifts over the same Ω (05VN). Small cases checked: k[t]→k twice (Tor_1≠0 survives), flat factors, D=0, empty atlas. Batch-5: strict-local-flatness, lem-trf-space-representable-etale-scheme-tests and etale-geometric-point-specified-lift are general algebraic-space foundations. Their closures reach only def-trf-algebraic-space and sk-i-curve-zero/sk-lem-finite foundation nodes, never a trace-formula or Poincaré-duality statement or an nt-assume leaf, and the base statement already depends on def-trf-algebraic-space. Accepted, as are the declared generic tool_uses. Confirmed the worker's 08IQ Γ(X)/Γ(Y) typo note. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceTorIndependenceEtaleChart",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.torIndependent_iff_etale_chart",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsGeometricallyTorIndependent",
+   "AlgebraicGeometry.AlgebraicSpace.torIndependent_iff_etale_chart",
+   "AlgebraicGeometry.AlgebraicSpace.torIndependent_iff_scheme_local"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceTorIndependenceEtaleChart.lean",
+  "statement": "theorem torIndependent_iff_etale_chart {S : Scheme.{u}} {F G H : AlgebraicSpace S} (f : F ⟶ H) (g : G ⟶ H) (U V W : Over S) (a : yoneda.obj W ⟶ H.obj.obj) (b : yoneda.obj U ⟶ F.obj.obj) (c : yoneda.obj V ⟶ G.obj.obj) (p : U ⟶ W) (q : V ⟶ W) (hb : b ≫ f.hom.hom = yoneda.map p ≫ a) (hc : c ≫ g.hom.hom = yoneda.map q ≫ a) (hae : IsEtale a) (has : IsSurjective a) (hbe : IsEtale (Limits.pullback.lift b (yoneda.map p) hb)) (hbs : IsSurjective (Limits.pullback.lift b (yoneda.map p) hb)) (hce : IsEtale (Limits.pullback.lift c (yoneda.map q) hc)) (hcs : IsSurjective (Limits.pullback.lift c (yoneda.map q) hc)) : IsGeometricallyTorIndependent f g ↔ PullbackStalkTensor.IsTorIndependent p.left q.left",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The predicate is exactly the geometric-stalk Tor vanishing introduced in this node; the two theorems give the arbitrary-atlas criterion and its representable scheme specialization. Reuses the published geometric stalk and scheme local Tor interfaces; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2ac509f1",
+  "group": "O1",
+  "result": "pass",
+  "note": "Read the item, 7 stmt_deps, the module, the report and Stacks 08IP/08IQ (spaces-perfect.tex l.4725-4790). The predicate uses landed SingleComplex.stalkRing/stalkMap (unique germ map) with eqToHom transport of the common target stalk, and Tor' for positive i over a common Omega:Type u (forced by Over S) and a common s. The atlas hypotheses are IsEtale/IsSurjective on a and on pullback.lift b (yoneda.map p) hb and pullback.lift c (yoneda.map q) hc. The RHS reuses PullbackStalkTensor.IsTorIndependent p.left q.left. Atlases are arbitrary binders, the scheme case is a separate theorem with Yoneda presentations, and no extra flatness/qc/separation/finiteness is assumed. lean.statement is verbatim. The added stmt_deps are landed def nodes that own the used declarations. Proof-dep modules are imported. No H4 duplicate in Sheaf/WeilConjectures, no hollow def, theorems are by sorry, and docstrings have source and blueprint. Report sections are present. No file changed, so no compile."
+ }
+}

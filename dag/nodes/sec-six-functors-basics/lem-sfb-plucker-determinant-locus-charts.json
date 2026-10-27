@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-plucker-determinant-locus-charts",
+ "kind": "statement",
+ "title": "Homogeneous determinant locus and its normalized affine chart rings",
+ "statement": "Let $N,r$ be integers with $0<r<N$, and let $\\mathcal I$ be the increasing $r$-subsets of $\\{1,\\ldots,N\\}$. Put $B=\\mathbf Z[p_J:J\\in\\mathcal I]$, with every $p_J$ of degree one [def-weil-pbc-mv-polynomial-ring]. For an arbitrary ordered $r$-tuple, let $p_{j_1\\ldots j_r}$ be the sorting sign times the corresponding increasing coordinate, or zero if indices repeat. For $I,K\\in\\mathcal I$ define\n$$C_{I,K}(a,b)=p_{i_1\\ldots i_{a-1}k_bi_{a+1}\\ldots i_r},\\qquad F_{I,K}=p_I^{r-1}p_K-\\det C_{I,K}.$$\nHere determinants use [def-weil-pbc-matrix-determinant]. Put $H=(F_{I,K}:I,K\\in\\mathcal I)$, $A=B/H$ with its induced grading [def-weil-pbc-algebra-hom-quotient], and $X=\\operatorname{Proj}(A)$ [def-pc-proj], with $U_I=D_+(p_I)$. On $U_I$ let $M^{(I)}$ be the $r\\times N$ matrix with identity columns indexed by $I$ and off-pivot entries\n$$x^{(I)}_{aj}=p_{i_1\\ldots i_{a-1}ji_{a+1}\\ldots i_r}/p_I\\quad(j\\notin I).$$\nEvery $F_{I,K}$ is homogeneous of degree $r$, and for every commutative ring $R$ and $r\\times N$ matrix $M$ over $R$, evaluation $p_J\\mapsto\\det M_J$ annihilates all $F_{I,K}$, including when the pivot minors are zero divisors. The graded quotient induces a closed immersion\n$$j:X\\hookrightarrow\\operatorname{Proj}(B)=\\mathbf P^{\\binom Nr-1}_{\\mathbf Z}$$\n[def-weil-closed-immersion, def-nagata-projective-space-base-change]. The $U_I$ cover $X$, and the homomorphism\n$$\\mathbf Z[X_{aj}:1\\leq a\\leq r,\\ j\\notin I]\\longrightarrow A_{(p_I),0},\\qquad X_{aj}\\longmapsto x^{(I)}_{aj}$$\nis an isomorphism. Its inverse sends each $p_J/p_I$ to the $J$-minor of the matrix with identity columns at $I$ and entries $X_{aj}$ elsewhere. In particular $\\det M^{(I)}_J=p_J/p_I$ for every $J$, and $U_I$ is affine space of dimension $r(N-r)$ with these exact coordinate functions.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 089T (lemma-gkn-representable, normalized quotient charts), 01N0 (lemma-surjective-graded-rings-map-proj), 01M4 (lemma-standard-open). Agent-written homogeneous-equation and inverse chart-ring completion; extracted from former proof steps 2--4 of lem-sfb-free-quotient-grassmann-projective."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-proj",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-homogeneous-localization-degree-zero"
+ ],
+ "proof": [
+  {
+   "text": "Each ordered coordinate is zero or a signed degree-one variable. Thus each product in the Leibniz expansion of $\\det C_{I,K}$ has degree $r$, as does $p_I^{r-1}p_K$, and $F_{I,K}$ is homogeneous (zero is allowed). The ideal $H$ is homogeneous: if $h=\\sum_{I,K}b_{I,K}F_{I,K}$, its degree-$d$ component is $\\sum_{I,K}(b_{I,K})_{d-r}F_{I,K}$, taking negative components to be zero. Consequently $A_d$ is the image of $B_d$ in $B/H$; these images form a direct sum since every homogeneous component of an element of $H$ is in $H$. Products respect degrees. This constructs the asserted quotient grading and makes $B\\twoheadrightarrow A$ degree preserving.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Agent completion of the homogeneous determinant presentation underlying the normalized charts of Tag 089T (lemma-gkn-representable)."
+   }
+  },
+  {
+   "text": "Let $M$ be an $r\\times N$ matrix over an arbitrary commutative ring $R$, and fix increasing $I,K$. Set $P=M_I$ and $Q=M_K$. Under evaluation by maximal minors, the $(a,b)$ entry of $C_{I,K}$ is $\\det(P[a\\leftarrow M_{k_b}])$. Indeed sorting columns multiplies the determinant by the sorting sign; repeated columns give zero by pairing the Leibniz summands with the transposition of those columns. By the column-replacement formula of [lem-sfb-matrix-cramer-determinant-identities], the evaluated matrix is $\\operatorname{adj}(P)Q$. The two determinant formulas of that node give\n$$\\det(\\operatorname{adj}(P)Q)=\\det(\\operatorname{adj}(P))\\det Q=(\\det P)^{r-1}\\det Q.$$\nThis is exactly evaluation of $F_{I,K}=0$. It holds without division or cancellation, for every $I,K$, so polynomial evaluation annihilates $H$ even when a pivot minor is a zero divisor.",
+   "uses": [
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Agent determinant-coordinate completion of Tag 089T, using the cited Cramer identities (Mathlib Matrix.cramer_eq_adjugate_mulVec, Matrix.det_adjugate and Matrix.det_mul)."
+   }
+  },
+  {
+   "text": "Apply the surjective graded-map clause (3) of [prop-nagata-relative-proj-functoriality] in its affine-base case to $B\\twoheadrightarrow A$. Its affine restriction clause (1) identifies these Proj schemes with the absolute Proj schemes in the item. This gives the canonical closed immersion $j:X\\hookrightarrow\\operatorname{Proj}(B)$. The target is the specified projective space by [def-nagata-projective-space-base-change], with its homogeneous coordinates indexed by $\\mathcal I$. The images of the variables generate the irrelevant ideal of $A$: every positive-degree monomial has a variable factor. Therefore [prop-nagata-proj-standard-open] gives the covering $X=\\bigcup_I U_I$ and the canonical identifications $U_I=\\operatorname{Spec}(A_{(p_I),0})$.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "def-nagata-projective-space-base-change",
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N0 (lemma-surjective-graded-rings-map-proj), affine-base case; Tag 01M4 (lemma-standard-open), standard chart identifications and covering."
+   }
+  },
+  {
+   "text": "Fix $I$, and put $E=A_{(p_I),0}$ and $z_J=p_J/p_I\\in E$, so $z_I=1$. By [def-nagata-homogeneous-localization-degree-zero], every element of $E$ is $a/p_I^n$ for a homogeneous $a\\in A_n$. Lift $a$ to $b\\in B_n$ using the quotient grading from Step 1. Expanding $b$ as a sum of degree-$n$ monomials shows that $a/p_I^n$ is the corresponding integer polynomial in the $z_J$: a monomial $p_{J_1}\\cdots p_{J_n}/p_I^n$ is $z_{J_1}\\cdots z_{J_n}$. Thus the $z_J$ generate $E$ over $\\mathbf Z$, including its degree-zero constants. This uses only the fraction relation and the polynomial expansion, and requires no regularity of $p_I$.",
+   "uses": [
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Agent explicit homogeneous-fraction calculation on the standard chart of Tag 01M4."
+   }
+  },
+  {
+   "text": "For the matrix $M^{(I)}$ of the item, its entry at $(a,j)$, including $j\\in I$, equals $p_{i_1\\ldots i_{a-1}ji_{a+1}\\ldots i_r}/p_I$: this is $1$ if $j=i_a$, and zero for the other pivot columns because an index repeats. Hence the entries of its $J$-submatrix are precisely $C_{I,J}(a,b)/p_I$. Expanding the determinant and combining the $r$ denominators gives\n$$\\det M^{(I)}_J=\\frac{\\det C_{I,J}}{p_I^r}=\\frac{p_I^{r-1}p_J}{p_I^r}=z_J.$$\nThe middle equality is $F_{I,J}=0$ in $A$; the last is equality of localization fractions. In particular every $z_J$ is an integer polynomial in the off-pivot entries of $M^{(I)}$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Agent normalized-minor calculation completing the normalized affine charts in Tag 089T; fraction convention of Tag 01M4."
+   }
+  },
+  {
+   "text": "Put $D=\\mathbf Z[X_{aj}:1\\leq a\\leq r,\\ j\\notin I]$ and let $T$ be the $r\\times N$ matrix over $D$ with identity columns at $I$ and off-pivot entries $X_{aj}$. Evaluation $p_J\\mapsto d_J=\\det T_J$ is a ring map $B\\to D$. Step 2, with $R=D$ and $M=T$, says that it kills every $F_{L,K}$ and hence $H$. It therefore descends to $e:A\\to D$, by $e([b])=b(d_J)$; changing $b$ by an element of $H$ changes this value by zero. Since $e(p_I)=\\det(1_r)=1$, define $A[1/p_I]\\to D$ by $a/p_I^n\\mapsto e(a)$. This is well defined: a relation $p_I^k(ap_I^m-bp_I^n)=0$ evaluates to $e(a)-e(b)=0$; addition and multiplication follow from the fraction formulas. Restricting gives $\\psi:E\\to D$, with $\\psi(z_J)=d_J$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-ring-localization-away",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-pbc-matrix-determinant",
+    "lem-sfb-matrix-cramer-determinant-identities"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Agent construction of the inverse chart homomorphism by the polynomial, quotient and localization definitions; the determinant identity used here was proved in Step 2."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-mv-polynomial-ring], evaluation $X_{aj}\\mapsto x^{(I)}_{aj}$ defines $\\phi:D\\to E$. The determinant of the identity matrix with its $a$-th column replaced by the $j$-th column of $T$ is $X_{aj}$: every other identity column forces its corresponding row in the Leibniz product. Sorting this ordered minor supplies exactly the sign in the ordered-coordinate convention. Thus $\\psi\\phi(X_{aj})=X_{aj}$, and polynomial homomorphism uniqueness gives $\\psi\\phi=1_D$. Conversely $\\phi\\psi(z_J)=\\det M^{(I)}_J=z_J$ by Step 5, since evaluating the Leibniz polynomial commutes with its finite sums and products. The generation proved in Step 4 gives $\\phi\\psi=1_E$. These are the required inverse homomorphisms, with the claimed formula on every $p_J/p_I$. Together with Step 3 this identifies $U_I$ with $\\operatorname{Spec}D$, affine $r(N-r)$-space over $\\mathbf Z$, and identifies its exact coordinate functions with the displayed $x^{(I)}_{aj}$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-matrix-determinant",
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Agent inverse-map verification completing the affine-space description of the normalized charts in Tag 089T (lemma-gkn-representable)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-sfb-matrix-cramer-determinant-identities",
+  "prop-nagata-relative-proj-functoriality",
+  "def-nagata-projective-space-base-change",
+  "prop-nagata-proj-standard-open",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Agent-written homogeneous-equation and inverse chart-ring completion of Tag 089T (lemma-gkn-representable), with the Proj construction of Tags 01N0 and 01M4. The determinant presentation is not asserted to be the literal statement of 089T."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The homogeneous equations relating maximal minors define a closed projective scheme with polynomial affine charts",
+   "results": "{\"t\": \"2026-10-22T06:02:52Z\", \"tool\": \"leanfinder\", \"query\": \"The homogeneous equations relating maximal minors define a closed projective scheme with polynomial affine charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum\", \"ProjectiveSpectrum.zeroLocus\", \"ProjectiveSpectrum.asHomogeneousIdeal\", \"ProjectiveSpectrum.isClosed_zeroLocus\", \"ProjectiveSpectrum.top\", \"ProjectiveSpectrum.isClosed_iff_zeroLocus\", \"ProjectiveSpectrum.vanishingIdeal\"], \"digest\": \"84e25ccf4cf33bf4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj/localization declarations do not compute this specific determinant quotient or its chart-ring inverse; Grassmannian scheme charts remain TODO in RingTheory/Grassmannian.lean:46--53."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grassmannian\"",
+   "results": "{\"t\": \"2026-10-22T06:02:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grassmannian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Grassmannian.«termG(_,_;_)»\", \"Module.Grassmannian\", \"Module.Grassmannian.functor\", \"Module.Grassmannian.toSubmodule\", \"Module.Grassmannian.instCoeOutSubmodule\", \"Module.Grassmannian.ext\", \"Module.Grassmannian.ext_iff\", \"Module.Grassmannian.finite_quotient\"], \"digest\": \"a8145fe36309621c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj/localization declarations do not compute this specific determinant quotient or its chart-ring inverse; Grassmannian scheme charts remain TODO in RingTheory/Grassmannian.lean:46--53."
+  },
+  {
+   "tool": "grep",
+   "query": "Grassmann|Plucker|plucker|minor.*chart",
+   "results": "{\"t\": \"2026-10-22T06:02:52Z\", \"tool\": \"grep\", \"query\": \"Grassmann|Plucker|plucker|minor.*chart\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj/localization declarations do not compute this specific determinant quotient or its chart-ring inverse; Grassmannian scheme charts remain TODO in RingTheory/Grassmannian.lean:46--53."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree zero localization of the homogeneous Plucker determinant quotient is a polynomial ring",
+   "results": "{\"t\": \"2026-10-22T06:02:53Z\", \"tool\": \"leansearch\", \"query\": \"Degree zero localization of the homogeneous Plucker determinant quotient is a polynomial ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization\", \"IsLocalization.Away.mvPolynomialQuotientEquiv\", \"HomogeneousLocalization.fromZeroRingHom\", \"HomogeneousLocalization.instAlgebraSubtypeMemOfNat\", \"HomogeneousLocalization.AtPrime\", \"HomogeneousLocalization.NumDenSameDeg.mk\", \"HomogeneousLocalization.Away\", \"HomogeneousLocalization.algebraMap_eq\"], \"digest\": \"84288914884aa497\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj/localization declarations do not compute this specific determinant quotient or its chart-ring inverse; Grassmannian scheme charts remain TODO in RingTheory/Grassmannian.lean:46--53."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized maximal minors reconstruct a matrix with identity pivot columns and give affine charts on a Proj quotient",
+   "results": "{\"t\": \"2026-10-22T06:03:05Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized maximal minors reconstruct a matrix with identity pivot columns and give affine charts on a Proj quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\", \"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv\", \"Algebra.PreSubmersivePresentation.jacobiMatrix_naive\", \"Algebra.SubmersivePresentation.jacobianRelations\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\"], \"digest\": \"a57b1df9e2754361\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj/localization declarations do not compute this specific determinant quotient or its chart-ring inverse; Grassmannian scheme charts remain TODO in RingTheory/Grassmannian.lean:46--53."
+  },
+  {
+   "tool": "grep",
+   "query": "Grassmann|Plucker|plucker|minor.*chart",
+   "results": "{\"t\": \"2026-10-23T04:11:47Z\", \"tool\": \"grep\", \"query\": \"Grassmann|Plucker|plucker|minor.*chart\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and homogeneous localization interfaces do not compute this determinant quotient; Module.Grassmannian does not provide its scheme charts (RingTheory/Grassmannian.lean:46--53, read)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree zero localization of the homogeneous determinant relations for maximal minors is a polynomial ring in normalized matrix entries",
+   "results": "{\"t\": \"2026-10-23T04:11:48Z\", \"tool\": \"leansearch\", \"query\": \"Degree zero localization of the homogeneous determinant relations for maximal minors is a polynomial ring in normalized matrix entries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousLocalization\", \"HomogeneousLocalization.AtPrime\", \"HomogeneousLocalization.fromZeroRingHom\", \"eval_det_add_X_smul\", \"MvPolynomial.isLocalization\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.ToSpec.carrier\", \"HomogeneousLocalization.mk_eq_zero_of_den\", \"HomogeneousLocalization.Away\"], \"digest\": \"41d23ad5a999348c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and homogeneous localization interfaces do not compute this determinant quotient; Module.Grassmannian does not provide its scheme charts (RingTheory/Grassmannian.lean:46--53, read)."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousLocalization.Away, MvPolynomial",
+   "results": "{\"t\": \"2026-10-23T04:11:48Z\", \"tool\": \"loogle\", \"query\": \"HomogeneousLocalization.Away, MvPolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and homogeneous localization interfaces do not compute this determinant quotient; Module.Grassmannian does not provide its scheme charts (RingTheory/Grassmannian.lean:46--53, read)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The determinant relations among maximal minors have polynomial degree zero localization charts on Proj",
+   "results": "{\"t\": \"2026-10-23T04:11:56Z\", \"tool\": \"leanfinder\", \"query\": \"The determinant relations among maximal minors have polynomial degree zero localization charts on Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isLocalization_atPrime\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.mem_carrier_iff_of_mem_mul\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.num_mem_carrier_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.mk_mem_toSpec_base_apply\"], \"digest\": \"1f6d2f2c9083fea8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and homogeneous localization interfaces do not compute this determinant quotient; Module.Grassmannian does not provide its scheme charts (RingTheory/Grassmannian.lean:46--53, read)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized maximal minors of a matrix with identity pivot columns define affine Grassmannian charts",
+   "results": "{\"t\": \"2026-10-23T04:11:57Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized maximal minors of a matrix with identity pivot columns define affine Grassmannian charts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian\", \"Algebra.Norm.Transitivity.auxMat\", \"FixedDetMatrices.reps\", \"FixedDetMatrices.reduce_mem_reps\", \"FixedDetMatrices.reduce\", \"FixedDetMatrices.reduceStep\", \"Module.Basis.SmithNormalForm.a\", \"AffineBasis.isUnit_toMatrix\"], \"digest\": \"873fdec45639f64b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic Proj and homogeneous localization interfaces do not compute this determinant quotient; Module.Grassmannian does not provide its scheme charts (RingTheory/Grassmannian.lean:46--53, read)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-quotient-grassmann-projective",
+  "date": "2026-10-22",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Free quotient Grassmannians and their projective Plücker embedding; normalized Grassmannian construction: former proof steps 2, 3, 4 (Homogeneous determinant locus and its normalized affine chart rings)",
+   "via": [
+    "lem-sfb-free-quotient-grassmann-projective",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-plucker-determinant-locus-charts",
+  "worker": "stage1",
+  "summary": "Unchanged statement; seven explicit proof steps, using existing Cramer determinant identities and Proj functoriality/standard opens. Proves the determinant identity without cancellation and constructs both inverse normalized chart-ring maps, checking localization well-definedness and polynomial generation. No new nodes or Lean files. Searches made with the logged command and checked against the pinned Mathlib source.",
+  "blueprint": "Realizes the homogeneous determinant-locus and normalized affine chart-ring completion (former steps 2--4 of lem-sfb-free-quotient-grassmann-projective) at the inherited blueprint.from.place. This is a prerequisite in the recorded Hilbert-scheme/de Jong route serving det-thm-sf-ctf-stability-direct-images, proof (3). The ancestor command returns no imported ancestor, as already recorded by the parent; the inherited null ancestor and via chain are unchanged. Full imported-blueprint searches for Grassmann and Plücker found no equivalent node. The generic Proj nodes cover only the ambient construction, not this determinant chart isomorphism.",
+  "tool_uses": [
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Only its affine-base surjective graded-map closed-immersion clause and affine restriction clause are used. This is a generic Proj construction tool; the present unit supplies no such theorem, and the determinant/Grassmannian argument stays on its own route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-e7fc47c12",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-e7fc47c12 (reviewer sub-agent of L); spot-checked: I read the item's statement and all 7 steps, the statements of the 11 cited nodes, and Stacks 089T (constructions.tex:4994, the 'Representability of F_i' paragraph; its quotient rank n-k is the item's r), 01N0 (:2166) and 01M4 (:955). The steps hold. Step 1: the ideal H and the quotient grading are homogeneous. Step 2: under minor evaluation, C_{I,K} = adj(M_I)M_K by the column-replacement identity of the Cramer leaf, so det = (det P)^{r-1} det Q with no division; for r=1 the exponent is 0. Step 3: clauses (3) and (1) of prop-nagata-relative-proj-functoriality over Spec Z give the closed immersion, and the standard-open node gives the cover by the degree-1 p_I and the Spec identification. I accept this declared tool_use; the same unit already uses that node the same way. Step 4: the z_J generate the chart ring, using x/f^m with x in R_m from the homogeneous-localization definition. Step 5: the entries of M^(I) are 1, 0 (repeated index) or x_aj, and det M_J = p_I^{r-1}p_J/p_I^r = z_J by F_{I,J}=0 and the localization relation, without cancellation in A. Step 6: the evaluation map to D kills H, sends p_I to 1, and its well-definedness on fractions is written out. Step 7: the two maps are inverse, checked on X_aj with the sign convention and on the generators z_J; there are r(N-r) variables. Small cases: for r=2, N=4, F_{12,34} is exactly the Plücker relation p12p34 - p13p24 + p14p23; r=1 gives the charts of projective space; a zero-divisor pivot over Z/4 works. No new nodes. No cycle: the two sibling chart nodes cite the item and the item cites neither. No duplicate of this item in the DAG (grep for Plücker/Grassmann, 089T and 01N0). proof_deps equals the union of the steps' uses. The added statement dependency def-nagata-homogeneous-localization-degree-zero is justified. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PluckerDeterminantLocusCharts",
+  "declaration": "AlgebraicGeometry.PluckerDeterminantLocus.closedImmersion_and_charts",
+  "declarations": [
+   "AlgebraicGeometry.PluckerDeterminantLocus.Index",
+   "AlgebraicGeometry.PluckerDeterminantLocus.PolynomialRing",
+   "AlgebraicGeometry.PluckerDeterminantLocus.columns",
+   "AlgebraicGeometry.PluckerDeterminantLocus.orderedCoordinate",
+   "AlgebraicGeometry.PluckerDeterminantLocus.replacementMatrix",
+   "AlgebraicGeometry.PluckerDeterminantLocus.relation",
+   "AlgebraicGeometry.PluckerDeterminantLocus.relationsIdeal",
+   "AlgebraicGeometry.PluckerDeterminantLocus.CoordinateRing",
+   "AlgebraicGeometry.PluckerDeterminantLocus.quotientGrade",
+   "AlgebraicGeometry.PluckerDeterminantLocus.polynomialGradedRing",
+   "AlgebraicGeometry.PluckerDeterminantLocus.quotientGrade_exists",
+   "AlgebraicGeometry.PluckerDeterminantLocus.quotientGradedRing",
+   "AlgebraicGeometry.PluckerDeterminantLocus.quotientMap",
+   "AlgebraicGeometry.PluckerDeterminantLocus.coordinate_mem",
+   "AlgebraicGeometry.PluckerDeterminantLocus.orderedCoordinate_mem",
+   "AlgebraicGeometry.PluckerDeterminantLocus.irrelevant_le_map",
+   "AlgebraicGeometry.PluckerDeterminantLocus.immersion",
+   "AlgebraicGeometry.PluckerDeterminantLocus.fraction",
+   "AlgebraicGeometry.PluckerDeterminantLocus.normalizedMatrix",
+   "AlgebraicGeometry.PluckerDeterminantLocus.ChartIndex",
+   "AlgebraicGeometry.PluckerDeterminantLocus.universalMatrix",
+   "AlgebraicGeometry.PluckerDeterminantLocus.chartMap",
+   "AlgebraicGeometry.PluckerDeterminantLocus.relations_homogeneous_and_evaluate_zero",
+   "AlgebraicGeometry.PluckerDeterminantLocus.closedImmersion_and_charts"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PluckerDeterminantLocusCharts.lean",
+  "statement": "theorem closedImmersion_and_charts (N r : ℕ) (h : r + 1 < N) : IsClosedImmersion (immersion N r) ∧ (⨆ I : Index N r, Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))) = ⊤ ∧ Nonempty (Proj (MvPolynomial.homogeneousSubmodule (Index N r) ℤ) ≅ ProjectiveSpace (Index N r) (Spec (.of ℤ))) ∧ ∀ I : Index N r, (∀ a b : Fin (r + 1), normalizedMatrix I a (columns I b) = if a = b then 1 else 0) ∧ Fintype.card (ChartIndex I) = (r + 1) * (N - (r + 1)) ∧ ∃ e : MvPolynomial (ChartIndex I) ℤ ≃+* HomogeneousLocalization.Away (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I)), e.toRingHom = chartMap I ∧ (∀ J : Index N r, e.symm (fraction I (columns J)) = ((universalMatrix I).submatrix id (columns J)).det) ∧ (∀ J : Index N r, (Matrix.submatrix (normalizedMatrix I) id (columns J)).det = fraction I (columns J)) ∧ Nonempty ((Proj.basicOpen (quotientGrade N r) (Ideal.Quotient.mk (relationsIdeal N r) (MvPolynomial.X I))).toScheme ≅ Spec (.of (MvPolynomial (ChartIndex I) ℤ)))",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The positive rank is r+1. All setup constructions and both assertion theorems are in this module; quotientGrade_exists supplies only the grading structure on the explicitly constructed image components, whose decomposition is unique. No node statement or dependency was changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36d4c8fa7",
+  "group": "Q118",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, module (24 decls), report, and the ProjectiveSpace/Proj.map upstream sources. Clause by clause: Index = card-(r+1) finsets, r+1<N covers ranks 1..N-1; orderedCoordinate = sum of permutation-matrix dets = sorting sign, 0 on repeats; replacementMatrix/relation X_I^r X_K - det C correct; relationsIdeal is the plain span; quotientGrade = image of B_d, GradedRing chosen by Classical.choice but unique (Decomposition is Subsingleton), not hollow; immersion = canonical Proj.map of the quotient map; evaluation clause over arbitrary R : Type u; cover, e.toRingHom = chartMap I, inverse on every p_J/p_I, det normalized minors, pivot identity columns and card (r+1)(N-r-1) all stated. Edge cases: rank 1, rank N-1, zero-divisor pivots, universes. Item still split on live, node changed only in lean, statement verbatim, declarations list exact, no line over 100 chars, docstrings and proof steps present, plain imports are proof_dep modules. Searches: no existing Plucker or graded-quotient construction. Second-reading section is the accepted placeholder. Advisory: the Nonempty isos Proj B ≅ ProjectiveSpace and U_I ≅ Spec could be pinned to the canonical isomorphisms; content is already carried by e and immersion. No recompile (no file changed)."
+ }
+}

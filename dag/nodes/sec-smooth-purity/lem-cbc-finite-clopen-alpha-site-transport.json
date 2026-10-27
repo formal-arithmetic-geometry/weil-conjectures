@@ -1,0 +1,154 @@
+{
+ "id": "lem-cbc-finite-clopen-alpha-site-transport",
+ "kind": "statement",
+ "title": "Site comparison respects the specified clopen alpha",
+ "statement": "Let $\\Lambda$ be a finite commutative ring. Let $k:V\\hookrightarrow W$ and $i:S\\hookrightarrow T$ be quasi-compact open immersions, let $r:V\\to S$ and $p:W\\to T$ be proper, and suppose $pk=ir$. Write $A_X=\\nu_X^*$ for exact etale/proetale comparison, $G_f^e,G_f^p$ for inverse image and $J_j^e,J_j^p$ for extension by zero on bounded-below derived categories. Take the specified alphas $\\alpha_Q^e$ [def-cbc-etale-clopen-mate-normalization-data] and $\\alpha_Q^p$ [def-cbc-proetale-clopen-mate-data]. Let $o_j:A_{cod(j)}J_j^e\\cong J_j^pA_{dom(j)}$ be the canonical open comparison [def-weil-pbc-proper-open-site-extension], and $a_f:A_{dom(f)}G_f^e\\cong G_f^pA_{cod(f)}$ the canonical pullback comparison [lem-weil-pbc-comparison-pullback], realized by the fixed bounded-below pullback comparison [lem-weil-pbc-comparison-direct-image-canonical-mate]. For every $M\\in D^+(S_{et},\\Lambda)$ one has $J_k^p(a_{r,M})\\circ o_{k,G_r^eM}\\circ A_W(\\alpha^e_{Q,M})=\\alpha^p_{Q,A_SM}\\circ G_p^p(o_{i,M})\\circ a_{p,J_i^eM}$. This asserts only alpha transport, before taking proper mates; it includes the identity/zero normalization of the clopen projection.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R and 09AF, with more-etale.tex Tag 0F7B; the original finite-clopen-mate-site-transport construction and proof steps 2--4."
+ },
+ "stmt_deps": [
+  "def-cbc-proetale-clopen-mate-data",
+  "def-cbc-etale-clopen-mate-normalization-data",
+  "def-weil-pbc-proper-open-site-extension",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "Factor both specified sheaf alphas as inverse cartesian open base change followed by the clopen projection and outgoing compositors. Apply beta site transport to the first factor and tail site transport to the remaining factors, then compose the two equalities. This proves the complete ordinary sheaf alpha equation without changing either alpha.",
+   "uses": [
+    "lem-cbc-finite-clopen-beta-site-transport",
+    "lem-cbc-finite-clopen-tail-site-transport",
+    "lem-cbc-etale-clopen-mate-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing right-derived-plus cube to the ordinary sheaf equation, with G,H the two etale open extensions, G0,H0 their proetale counterparts, and P,Q,P0,Q0 the corresponding inverse images. For an exact square, prove its right-derived base-change expression equals the canonical exact localization by comparing their homotopy factorization equations. Use this equality at the proetale alpha and the canonical exact square comparison at the four site-comparison faces. Naturality and cancellation of the exact right-derived comparison isomorphisms reduce the cube to precisely the requested equality on D+. This step is completely proved in Lean and uses no faithfulness of derived evaluation.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-cube",
+    "def-cbc-localized-clopen-square",
+    "def-cbc-etale-clopen-mate-normalization-data",
+    "def-cbc-proetale-clopen-mate-data",
+    "def-weil-pbc-proper-open-site-extension",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-finite-clopen-beta-site-transport",
+  "lem-cbc-finite-clopen-tail-site-transport",
+  "lem-cbc-etale-clopen-mate-normalization",
+  "lem-weil-pbc-right-derived-plus-cube",
+  "def-cbc-localized-clopen-square",
+  "def-cbc-etale-clopen-mate-normalization-data",
+  "def-cbc-proetale-clopen-mate-data",
+  "def-weil-pbc-proper-open-site-extension",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AF and 099R, and more-etale.tex Tag 0F7B; M6 factors the two geometric compatibility steps and proves their composition and complete exact-localization step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale to proetale comparison preserves the clopen projection and canonical proper open alpha",
+   "results": "8 hits: TopologicalSpace.Clopens.coe_toOpens, TopologicalSpace.Clopens.Simps.coe, Profinite.exists_isClopen_of_cofiltered, AlgebraicGeometry.Scheme.Etale, TopologicalSpace.Clopens.toCloseds, DiscreteQuotient.isClopen_preimage, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.instTensorProduct.",
+   "date": "2026-10-23",
+   "verdict": "No site comparison, extension by zero, or derived clopen alpha statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale to proetale comparison preserves the clopen identity zero projection and the alpha for a proper open square",
+   "results": "8 hits, headed by StandardEtalePresentation.toSubmersivePresentation_map and AlgebraicGeometry.Scheme.Etale.forget; no site-comparison or clopen-alpha theorem.",
+   "date": "2026-10-23",
+   "verdict": "No matching construction or comparison theorem in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: mateEquiv, mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, unit_mateEquiv_symm and pasting/iterated mate formulas.",
+   "date": "2026-10-23",
+   "verdict": "Generic mate calculus is used for the parent proof; it does not construct or compare the geometric clopen alphas."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Cc]omparison|[Cc]omparison.*clopen",
+   "results": "0 Mathlib hits. Source-library/DAG searches found the original finite-clopen-mate item, the etale normalization, and proetale-internal strict-tower clopen projectors, but no separate etale/proetale alpha transport theorem. blueprint_refs.py search clopen found 12 blueprint nodes, none the site-comparison alpha assertion.",
+   "date": "2026-10-23",
+   "verdict": "No duplicate alpha transport or finite proetale clopen data node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteClopenMateSiteTransport",
+  "date": "2026-10-23",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "final compatibility paragraph: finite etale/pro-etale clopen comparison, alpha before proper adjunction mating",
+   "via": [
+    "lem-cbc-finite-clopen-mate-site-transport",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteClopenAlphaSiteTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClopenAlphaSiteTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteClopenAlphaSiteTransport",
+  "statement": "theorem finiteClopenAlphaSiteTransport\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :\n    ∀ (M : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))),\n      (comparisonUpperStar (ModuleCat.{u + 1} Λ) W).mapDerivedCategoryPlus.map\n          ((Etale.ClopenMateNormalization.derivedAlphaPlus Λ k r p i h).app M) ≫\n        (properOpenSiteExtensionIso Λ k).hom.app\n          ((Etale.upperStar (ModuleCat.{u + 1} Λ) r).mapDerivedCategoryPlus.obj M) ≫\n        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.map\n          ((fixedComparisonPullbackPlus Λ r).hom.app M) =\n      (fixedComparisonPullbackPlus Λ p).hom.app\n          ((Etale.openImmersionLowerShriek\n            (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.obj M) ≫\n        (upperStar (ModuleCat.{u + 1} Λ) p).mapDerivedCategoryPlus.map\n          ((properOpenSiteExtensionIso Λ i).hom.app M) ≫\n        (cbcClopenAlphaPlus Λ k i r p h).app\n          ((comparisonUpperStar (ModuleCat.{u + 1} Λ) S).mapDerivedCategoryPlus.obj M)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-eae58",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261024T020314-L-2580794",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-88b21",
+  "group": "M6",
+  "result": "fix",
+  "landing": "20261027T050621-L-245698",
+  "kind": "interface",
+  "note": "independent cc review: item proof, beta/tail sorry statements and the additive EtaleClopenMateNormalization wrappers vs clone sheaf-dag sources, cbcClopenProjection/projection defs, DAG owner records; 3b importers 6/6 OK"
+ }
+}

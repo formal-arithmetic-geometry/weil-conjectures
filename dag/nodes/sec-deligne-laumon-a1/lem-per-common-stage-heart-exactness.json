@@ -1,0 +1,177 @@
+{
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; common-stage heart and fibre descent"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Formal assembly of Proposition 6.8.14 and Remark 6.8.15, following the parent node numbered proof steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite diagrams and exact geometric fibre functors to a filtered colimit of abelian categories with normalized scalar extension comparisons",
+   "results": "8 results: Condensed.hasExactColimitsOfShape, GrothendieckTopology.Point exact colimits, CondensedMod AB5/AB4/AB4Star, AddCommGrpCat filtered colimit exactness, AB4.of_AB5, AB5OfSize.ofShape. None is the specified adic construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesHomology",
+   "results": "12 results about preservation of homology, kernels and cokernels; no normalized adic descent or finite-stage representation theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommonStageHeartExactness|CommonStageFibreDescent|common_stage_fibre",
+   "results": "0 hits from remote Mathlib search. Local project search finds only the item records and its theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact functors and zero morphism detection for filtered common-stage categories of finite coefficient sheaves",
+   "results": "8 results: ShortComplex.LeftHomologyData.exact_map_iff, RightHomologyData.exact_map_iff, Exact.map and Exact.map_of_preservesRightHomologyOf, Functor.IsHomological.toPreservesZeroMorphisms, preservesZeroMorphisms_of_additive, preservesZeroMorphisms_of_full, ExactFunctor.of. These do not give the specified common-stage descent or comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedFibreCommonStage",
+  "date": "2026-10-25",
+  "group": "G6"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "id": "lem-per-common-stage-heart-exactness",
+ "kind": "statement",
+ "title": "Exact finite-stage representatives in the common heart",
+ "statement": "Let k be a field, l a prime invertible in k, and Ω an algebraic closure of Q_l, with independent universes for k, Ω and finite complex indices. For separated finite-type k-schemes, use the actual finite scalar system and standard hearts of [def-weil-pbc-finite-stage-pair-category, lem-per-adic-common-stage-truncations]. Then the interface CommonStageHeartExactness of [def-per-common-stage-fibre-descent-interfaces] is inhabited: finite heart inclusions preserve kernels, cokernels, images and homology with their maps; finite-stage objects vanish in the common category iff they vanish after one enlargement; every finite heart complex and every short exact heart sequence has a finite-stage representative, the latter short exact; field tensor to Ω is additive, faithful, preserves homology and has injective unit.",
+ "stmt_deps": [
+  "def-per-common-stage-fibre-descent-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\Omega=\\overline{\\mathbf Q}_\\ell$ and $j_E(F)=(E,F)$. The common category is triangulated and $j_E$ is exact by [thm-weil-pbc-verdier-axioms]. By [lem-per-adic-common-stage-truncations], $j_E$ preserves the standard halves, the truncation maps and $H^r$. For a heart arrow $u:F\\to G$, take its finite-stage cone triangle. By [def-weil-pbc-common-stage-cones] its image is a distinguished cone triangle with the same first arrow. Apply clause 3 of [lem-weil-heart-short-exact-triangles] at both stages. The comparisons $H^rj_E\\cong j_EH^r$ identify $j_EH^{-1}C(u)$ with the common kernel and $j_EH^0C(u)$ with the common cokernel, including the maps obtained from the cone and truncation maps. Thus the heart restriction of $j_E$ preserves kernels and cokernels.",
+   "uses": [
+    "thm-weil-pbc-verdier-axioms",
+    "lem-per-adic-common-stage-truncations",
+    "def-weil-pbc-common-stage-cones",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; formal cone/truncation argument for the pair heart"
+   }
+  },
+  {
+   "text": "For a finite heart complex, an image is $\\ker(\\operatorname{coker}u)$ and its homology is the cokernel of the induced map from the preceding image to the next kernel. Apply the kernel and cokernel comparisons just proved, successively, to these arrows. They identify all images, the induced image-to-kernel maps and their cokernels with their finite-stage representatives. The transitions $T_{N/M}$ are exact triangulated functors [prop-weil-pbc-scalar-extension] and t-exact with natural $\\mathcal H^r$ comparisons [lem-per-adic-common-stage-truncations], so they carry a finite-stage cone triangle of a heart arrow to one of its image and, by clause 3 of [lem-weil-heart-short-exact-triangles], preserve kernels and cokernels; the same formulas then show that they preserve these images, homology objects and maps. This proves the asserted representation of images and homology without assuming a chosen integral lattice sequence is exact.",
+   "uses": [
+    "lem-per-adic-common-stage-truncations",
+    "prop-weil-pbc-scalar-extension",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; elementary assembly from kernel and cokernel formulas"
+   }
+  },
+  {
+   "text": "If the image of a finite-stage object $K$ is zero, then $[E,1_K]=[E,0]$. The eventual-equality clause of [prop-weil-pbc-common-stage-calculus] gives a finite $N\\supset E$ where $1_{T_{N/E}K}=0$; hence that object is zero (every map to or from it equals its composite with its zero identity). Conversely a zero object at a further stage has zero image. For any finite list of such objects one compositum of the witnessing stages kills all of them. This argument uses only finitely many identity equations, not a simultaneous choice of stages over all geometric points.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; eventual equality of identity and zero"
+   }
+  },
+  {
+   "text": "Let $0\\to A\\xrightarrow fB\\xrightarrow gC\\to0$ be short exact in the common heart. Choose finite-heart presentations of its three objects by [lem-per-adic-common-stage-truncations]. The finite-diagram and eventual-equality clauses of [prop-weil-pbc-common-stage-calculus] put the two arrows and $gf=0$ at one stage $M$. At that stage form the three defect objects $\\ker f_M$, $H_M=\\ker g_M/\\operatorname{im}f_M$, and $\\operatorname{coker}g_M$. Their common images are zero by the kernel, cokernel and homology comparisons above and the assumed short exactness. The previous identity argument kills these three objects after one finite enlargement. Scalar transition preserves their descriptions by its t-exactness, so at that stage $f$ is monic, $g$ is epic and the middle homology is zero. This is the required short exact finite-stage representative.",
+   "uses": [
+    "lem-per-adic-common-stage-truncations",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; finite-stage descent of a short exact heart sequence"
+   }
+  },
+  {
+   "text": "For any field extension $M\\subset\\Omega$, extend $\\{1\\}$ to an $M$-basis of $\\Omega$ and take the coordinate functional $\\epsilon:\\Omega\\to M$ with $\\epsilon(1)=1$. For any $M$-space $W$, the map $1_W\\otimes\\epsilon$ is a left inverse to $w\\mapsto w\\otimes1$, so that map is injective. If $f\\otimes1=0$, then $f(w)\\otimes1=0$ for every $w$, hence $f=0$; thus scalar extension is faithful and detects zero spaces. Exactness is [lem-weil-field-scalar-extension-exact]. In particular it identifies the tensor of a kernel with the kernel of the tensored map and the tensor of an image with its image; taking the quotient $\\ker d/\\operatorname{im}d'$ gives the asserted homology identification. It therefore reflects vanishing homology and short exactness as well.",
+   "uses": [
+    "lem-weil-field-scalar-extension-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; elementary field-linear retraction and exact tensor calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-verdier-axioms",
+  "lem-per-adic-common-stage-truncations",
+  "def-weil-pbc-common-stage-cones",
+  "lem-weil-heart-short-exact-triangles",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-weil-field-scalar-extension-exact"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, common-stage exactness needed for the geometric-fibre test; parent proof steps 1, 2, 5, 6 and 8.",
+   "via": [
+    "lem-per-adic-normalized-fibre-common-stage",
+    "lem-per-adic-normalized-fibre-comparisons",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCommonStageHeartExactness",
+  "file": "lean/Sheaf/Paper/AdicCommonStageHeartExactness.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicFibreComparison.common_stage_heart_exactness",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AdicFibreComparison.common_stage_heart_exactness"
+  ],
+  "statement": "theorem common_stage_heart_exactness :\n    Nonempty (CommonStageHeartExactness.{u, v, w} l Ω (k := k))",
+  "branch": "sheaf-dag",
+  "by": "G6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-522a5",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T162456-L-462047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-522a5",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261025T162456-L-462047",
+  "kind": "interface",
+  "note": "independent cc review: item proof against the three new sorried lemmas; moved CommonStageHeartExactness/CommonStageFibreDescent against the published records (field bodies identical, no other users in the clone); the lemma statements against their nodes, CommonPoint and NormalizedFibre.Assertions.detects_zero_map; the item node fields against the Lean proof"
+ }
+}

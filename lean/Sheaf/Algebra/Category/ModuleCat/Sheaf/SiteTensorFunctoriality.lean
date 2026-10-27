@@ -37,10 +37,22 @@ The forgetful functor and additive module sheafification preserve zero maps as w
 theorem siteSheafTensorRight_preservesZeroMorphisms
     (N : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)) :
     (siteSheafTensorRight N).PreservesZeroMorphisms := by
-  sorry
+  have : (siteTensorRight N.val).PreservesZeroMorphisms := by
+    refine ⟨?_⟩
+    intro M M'
+    ext U : 1
+    apply ModuleCat.hom_ext
+    apply TensorProduct.ext'
+    intro x y
+    change (0 : M.obj U →ₗ[A.obj.obj U] M'.obj U) x ⊗ₜ[A.obj.obj U] y = 0
+    simp
+  dsimp only [siteSheafTensorRight]
+  infer_instance
 
 attribute [instance] siteSheafTensorRight_preservesZeroMorphisms
 
+-- Keep the existing sheafification parameters in this theorem's public signature.
+set_option linter.unusedSectionVars false in
 /-- The map on tensor presheaves in the second variable commutes with restrictions.
 Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product).
 Proof: both composites send `x ⊗ y` to the tensor of the restriction of `x` and
@@ -56,7 +68,12 @@ theorem siteTensorSecondMap_naturality
             (g.app V).hom)) =
       ModuleCat.ofHom (TensorProduct.map (LinearMap.id : M.obj U →ₗ[A.obj.obj U] M.obj U)
         (g.app U).hom) ≫ (siteTensorPresheaf M N').map f := by
-  sorry
+  apply ModuleCat.hom_ext
+  apply TensorProduct.ext'
+  intro x y
+  change M.map f x ⊗ₜ[A.obj.obj V] (g.app V) (N.map f y) =
+    M.map f x ⊗ₜ[A.obj.obj V] N'.map f (g.app U y)
+  rw [PresheafOfModules.naturality_apply]
 
 /-- Tensor a presheaf morphism in the second variable, sectionwise `id ⊗ g`.
 Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product). -/
@@ -91,7 +108,17 @@ theorem siteSheafTensorSecondMap_naturality
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)} (f : M ⟶ M') (g : N ⟶ N') :
     (siteSheafTensorRight N).map f ≫ siteSheafTensorSecondMap M' g =
       siteSheafTensorSecondMap M g ≫ (siteSheafTensorRight N').map f := by
-  sorry
+  let S := PresheafOfModules.sheafification
+    (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj A) (𝟙 _)
+  change S.map (siteTensorHom f.val N.val) ≫ S.map (siteTensorSecondMap M'.val g.val) =
+    S.map (siteTensorSecondMap M.val g.val) ≫ S.map (siteTensorHom f.val N'.val)
+  rw [← S.map_comp, ← S.map_comp]
+  apply congrArg S.map
+  ext U : 1
+  apply ModuleCat.hom_ext
+  apply TensorProduct.ext'
+  intro x y
+  rfl
 
 /-- The canonical natural transformation `- ⊗ N → - ⊗ N'` induced by `g`.
 Source: Stacks, Section 03EK (blueprint: def-pur-sheaf-tensor-product). -/

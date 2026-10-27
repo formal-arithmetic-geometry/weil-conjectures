@@ -1,0 +1,166 @@
+{
+ "id": "lem-sp-mixed-compact-support-scalar",
+ "kind": "statement",
+ "title": "Mixed scalar compatibility for the specified compact-support exchange",
+ "statement": "For any Cartesian square h:X′→X, f′:X′→Y′, f:X→Y and g:Y′→Y, a compactification c of f, finite commutative rings A and B, a homomorphism φ:A→B and an arbitrary derived A-module M on X, the coefficient comparison b [def-sp-reduction-direct-image-comparison], the specified compact-support exchange beta [def-sp-mixed-base-change-operations], the canonical tensor/pullback maps lambda [def-sp-constant-scalar-pullback-comparison], and scalar extension S [det-sp-scalar-extension-functor] satisfy lambda_Y(F_A M)^{-1} g_B^*(b(M)) beta_B(S_X M) = S_Y′(beta_A(M)) b′(h_A^*M) F_B′(lambda_X(M)^{-1}). This is only the direct-image part of mixed base change: there are no exceptional adjoints or constructible-input conclusions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+  "place": "Direct-image proof, Steps 1--5: proper/open pasting before inverse scalar comparisons"
+ },
+ "stmt_deps": [
+  "def-sp-mixed-base-change-operations",
+  "def-sp-reduction-direct-image-comparison",
+  "def-sp-constant-scalar-pullback-comparison",
+  "det-sp-scalar-extension-functor"
+ ],
+ "proof": [
+  {
+   "text": "Expand b as chi followed by proper pushforward of the open tensor map, and beta as proper exchange followed by proper pushforward of transported ordinary open exchange. Naturality moves the open tensor map across proper exchange.",
+   "uses": [
+    "def-sp-reduction-direct-image-comparison",
+    "def-sp-mixed-base-change-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary/intrinsic realization equivalences preserve the sectionwise open units. Thus the transported ordinary open exchange and the canonical open-adjunction mate have equal transposes and are equal. Conjugate openScalarExchange by reductionOpenModel and push its equality through the proper direct image.",
+   "uses": [
+    "lem-fix-open-scalar-exchange",
+    "def-sp-reduction-direct-image-comparison",
+    "def-sp-mixed-base-change-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply directImageScalarExchange to the proper Cartesian square at j_A!M. Naturality of chi at the open exchange finishes the four-arrow pasting; associativity yields the stated forward mixed square. Precompose the forward identity with the inverse target scalar/pullback comparison and postcompose with the inverse source comparison. Associativity and the inverse identities give the displayed inverse-comparison form.",
+   "uses": [
+    "lem-fix-direct-image-scalar-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-reduction-direct-image-comparison",
+  "def-sp-mixed-base-change-operations",
+  "lem-fix-open-scalar-exchange",
+  "lem-fix-direct-image-scalar-exchange"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+  "place": "Direct-image proof, Steps 1--5: proper/open pasting before inverse scalar comparisons",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero base change compatible with derived scalar extension",
+   "results": "8 hits, including Function.ExtendByZero.linearMap and LinearMap.baseChange_zero; none concerns derived pro-etale open exchange.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper base change on bounded constructible finite Tor pro etale module complexes",
+   "results": "8 hits, including AlgebraicGeometry.IsProper.isStableUnderBaseChange and AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; none is the module-derived exchange.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits, including mateEquiv, mateEquiv_counit, mateEquiv_vcomp and mateEquiv_hcomp. These give the formal mate calculations, not the specialized comparisons.",
+   "date": "2026-10-27",
+   "verdict": "generic formal tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|openScalarExchange",
+   "results": "25 hits for topological compact support, no categorical openScalarExchange. Local project search found directImageScalarExchange and openScalarExchange; their coordinate-model difference is retained explicitly.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper base change and pullback preserve bounded constructible complexes of finite Tor amplitude on the pro etale site",
+   "results": "8 hits for stability under geometric/site base change, including IsProper.isStableUnderBaseChange and GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage; none concerns these derived modules.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero base change commutes with derived scalar extension along a homomorphism of finite rings",
+   "results": "8 hits, including ModuleCat.extendScalarsComp and IsBaseChange.comp; ordinary module scalar extension, not this derived open exchange.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived scalar extension commutes with compact support base change for a proper and open factorization",
+   "results": "8 hits, including ModuleCat.extendScalarsComp and Scheme.Modules.pushforwardComp; none concerns the specified derived compact-support scalar square.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "mateEquiv_hcomp: mates commute with horizontal composition of abstract squares.",
+   "date": "2026-10-27",
+   "verdict": "generic pasting tool; no specialized normalization statement"
+  },
+  {
+   "tool": "grep",
+   "query": "whisker_exchange|whiskerRight_comp",
+   "results": "25 hits for generic categorical whiskering and mate coherence, including CategoryTheory/Adjunction/Mates.lean; none identifies the specified ordinary/intrinsic open comparison.",
+   "date": "2026-10-27",
+   "verdict": "generic algebra only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.MixedBaseChange",
+  "date": "2026-10-27",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-mixed-base-change",
+   "place": "Direct-image proof, Steps 1--5: proper/open pasting before inverse scalar comparisons",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.MixedCompactSupportScalar",
+  "file": "lean/Sheaf/SecSmoothPurity/MixedCompactSupportScalar.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.mixedCompactSupportScalar",
+  "statement": "theorem mixedCompactSupportScalar\n    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)\n    (cpt : Compactification f)\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (M : proEtaleDerivedCategory X A) :\n    (directImageScalarPullbackIso φ g).inv.app\n        ((reductionCompactSupport A cpt.i cpt.g).obj M) ≫\n      (proEtaleConstantRingDerivedPullback B g).map\n        ((reductionDirectImageComparison φ cpt.i cpt.g).app M) ≫\n      (mixedCompactSupportExchange B sq cpt).app\n        ((scalarExtensionFunctor φ X).obj M) =\n    (scalarExtensionFunctor φ Y').map ((mixedCompactSupportExchange A sq cpt).app M) ≫\n      (reductionDirectImageComparison φ (mixedPullbackCompactification sq cpt).i\n        (mixedPullbackCompactification sq cpt).g).app\n          ((proEtaleConstantRingDerivedPullback A g').obj M) ≫\n      (reductionCompactSupport B (mixedPullbackCompactification sq cpt).i\n        (mixedPullbackCompactification sq cpt).g).map\n          ((directImageScalarPullbackIso φ g').inv.app M)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8d00c",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261026T222750-L-693083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8d00c",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261026T222750-L-693083",
+  "kind": "interface",
+  "note": "independent cc review: item mixedBaseChange proof, moved defs and two new sorry statements against node det-sp-mixed-base-change, the clone source and the change record; direct importer SmoothPurityTowerMateEvaluationReduction and transitive user ExceptionalBaseChangeIntegralComparisons compiled OK against the delivered modules"
+ }
+}

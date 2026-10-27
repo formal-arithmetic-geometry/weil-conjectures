@@ -1,0 +1,196 @@
+{
+ "id": "lem-fix-constructible-residue-tree",
+ "kind": "statement",
+ "title": "Finite residue-lisse refinement stable on qcqs pro-etale objects",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a quasi-compact quasi-separated scheme W with l invertible [def-pc-scheme, def-weil-quasi-separated-morphism], with completed integral coefficient sheaves and ordinary uncompleted derived pullback [def-weil-l-adic-coefficient-extension, def-weil-completed-integral-coefficients, def-sf-ordinary-integral-derived-pullback]. Work with module sheaves on the small pro-etale site and their derived category [def-weil-pbc-proetale-site, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let M,N be integral bounded constructible derived-complete complexes [def-weil-derived-complete-integral-detailed]. Give finitely many finite partitions by constructible immersed locally closed subschemes, on which both residue cohomologies are locally constant [def-weil-finite-torsion-constructibility, def-weil-proetale-locally-constant-sheaf]. There is a finite binary tree of qcqs immersed subschemes rooted isomorphically at W, with parents strictly earlier except at the root. Each internal vertex splits into a quasi-compact open and its complementary closed child, with the displayed structural morphisms composing to W; leaves are precisely vertices without children. Every nonempty leaf factors scheme-theoretically through a stratum of every given partition. For every qcqs weakly etale Y over such a leaf, and K equal to M or N, its ordinary pullback to Y is derived complete [def-weil-derived-complete] and its exponent-one reduction [def-weil-integral-derived-reduction] has cohomology [def-weil-derived-cohomology-sheaves] zero outside one finite ordered interval and locally constant finite module models in every degree. The pullbacks use the canonical inverse image on the pro-etale sites [def-weil-proetale-inverse-image]. Empty leaves impose no condition; a finite list of partitions may be empty.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-finite-torsion-constructibility",
+  "def-sf-ordinary-integral-derived-pullback",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, local structure of constructible complexes, finite constructibility stratification and ordinary restriction; original proof steps 1-3 and residue part of step 4."
+ },
+ "proof": [
+  {
+   "text": "Take the common finite residue support interval from the two sfIntegralConstructible hypotheses. For each of its degrees and each input complex, take the constructibility stratification of its residue homology. Append these finitely many stratifications to the supplied partitions and reindex the finite sum by a Fin type. Apply the existing finite open-closed refinement with scheme-theoretic factorizations. Keep all its tree data, discard only extra charts, and reorder its conjunctions.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-torsion-constructibility",
+    "lem-fix-constructible-open-closed-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the two ordinary coefficient maps by uniqueness of their finite projections; uniqueness of left adjoints and total left derived functors identifies their ordinary pullbacks. Convert sf completeness to legacy completeness using an auxiliary prime strictly larger than l. The completion-unit criterion makes the input unit invertible. Its image under ordinary pullback is invertible, and ordinaryCompositeCompletionUnit_isIso gives an invertible output unit on every qcqs weakly etale object over an immersed leaf. The same criterion and the ordinary-pullback comparison give the required completeness.",
+   "uses": [
+    "def-sf-ordinary-integral-derived-pullback",
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-fix-qcqs-completion-unit-criterion",
+    "lem-fix-qcqs-completion-unit-restriction",
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each residue cohomology stratum, local constancy and finite geometric stalks give finite fixed-module constant models. Fully faithful restriction to constant scalars lifts their slice isomorphisms to ringed-module constant models. A module with finite underlying set is finitely generated. Exact constant-coefficient pullback transports these models to a qcqs weakly etale object over a leaf, through the retained stratum factorization and pullback composition. The ordinary integral finite-reduction homology comparison identifies the desired sheaf with that pullback. Outside the common interval, exact pullback of the zero source homology is zero and has the zero finite local models.",
+   "uses": [
+    "lem-fix-ordinary-integral-reduction-homology",
+    "lem-exc-proetale-pullback-locally-constant",
+    "lem-pur-proetale-module-pullback-composition",
+    "lem-pur-proetale-constant-module-pullback-homology",
+    "lem-weil-proetale-dbc-triangulated",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-proetale-finite-model-local-constancy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-sf-ordinary-integral-derived-pullback",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-torsion-constructibility",
+  "lem-exc-proetale-pullback-locally-constant",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-fix-ordinary-integral-reduction-homology",
+  "lem-fix-qcqs-completion-unit-criterion",
+  "lem-fix-qcqs-completion-unit-restriction",
+  "lem-pur-proetale-constant-module-pullback-homology",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-weil-proetale-dbc-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "lemma-describe-constructible-complexes and lemma-local-structure-constructible-complex (Tag 09C3); ordinary finite reduction and constructibility stratifications in the residue part of the argument.",
+  "note": "Q7 realizes the finite tree and finite models. Completion is obtained directly on the composite weakly etale/immersion morphism, without a separate induction along the tree. The missing generic ordinary finite-reduction homology comparison is isolated as a strictly smaller step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Complete constructible proetale integral complexes admit common bounded finite projective local sheaf models",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the integral pro-etale refinement or its normalized ordinary pullbacks. The homology and clopen-topology hits provide constituent operations only."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*projective|projective.*constructible",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the integral pro-etale refinement or its normalized ordinary pullbacks. The homology and clopen-topology hits provide constituent operations only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"projective\"",
+   "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isFractionPrelocal; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing_obj_carrier; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the integral pro-etale refinement or its normalized ordinary pullbacks. The homology and clopen-topology hits provide constituent operations only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete constructible complex on the proetale site admits locally bounded finite projective sheaf representatives",
+   "results": "CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.QuasicoherentData.IsFinitePresentation; CategoryTheory.regularTopology.isSheafFor_regular_of_projective; SheafOfModules.IsFiniteType.mk; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.isFinitePresentation; CategoryTheory.Sheaf.isSheaf_of_isRepresentable",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the integral pro-etale refinement or its normalized ordinary pullbacks. The homology and clopen-topology hits provide constituent operations only."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible_residue_tree|affine_common_projective_charts",
+   "results": "No matches",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the integral pro-etale refinement or its normalized ordinary pullbacks. The homology and clopen-topology hits provide constituent operations only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"homologyFunctor\"",
+   "results": "DerivedCategory.homologyFunctor; DerivedCategory.instShiftSequenceHomologyFunctorOfNatInt; DerivedCategory.instIsHomologicalHomologyFunctor; DerivedCategory.shift_homologyFunctor; DerivedCategory.homologyFunctorFactors; DerivedCategory.homologyFunctorFactorsh; DerivedCategory.homologyFunctorFactors_hom_naturality; DerivedCategory.homologyFunctorFactors_hom_naturality_assoc",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the integral pro-etale refinement or its normalized ordinary pullbacks. The homology and clopen-topology hits provide constituent operations only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two complete integral complexes with bounded finite locally constant residue admit a common finite clopen partition with projective sheaf models",
+   "results": "Profinite.NobelingProof.fin_comap_jointlySurjective; CompHausLike.LocallyConstant.presheaf_ext; Profinite.exists_locallyConstant_fin_two; exists_clopen_partition_of_clopen_cover; Profinite.exists_locallyConstant_finite_aux; Profinite.NobelingProof.CC_exact; Profinite.NobelingProof.factors; Profinite.NobelingProof.GoodProducts.smaller",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the integral pro-etale refinement or its normalized ordinary pullbacks. The homology and clopen-topology hits provide constituent operations only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite open closed refinement of constructible partitions makes residue cohomology finite locally constant and preserves derived completeness on weakly etale objects",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; Algebra.FormallyEtale.instForallOfFinite; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; Algebra.isOpen_etaleLocus; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.Etale.exists_subalgebra_fg; Algebra.etaleLocus_eq_compl_support",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the integral pro-etale refinement or its normalized ordinary pullbacks. The homology and clopen-topology hits provide constituent operations only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite clopen refinements preserve bounded complexes of retracts of finite free completed coefficient sheaves under ordinary derived pullback",
+   "results": "Profinite.NobelingProof.succ_exact; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.ofSheafProfinite; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; Profinite.NobelingProof.CC_exact",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the integral pro-etale refinement or its normalized ordinary pullbacks. The homology and clopen-topology hits provide constituent operations only."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleProjectiveChartRefinement",
+  "date": "2026-10-25",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-constructible-projective-chart-refinement",
+   "place": "Tag 09C3, local structure of constructible complexes, finite constructibility stratification and ordinary restriction; original proof steps 1-3 and residue part of step 4."
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleResidueTree",
+  "file": "lean/Sheaf/Paper/ConstructibleResidueTree.lean",
+  "declaration": "WeilConjectures.constructible_residue_tree",
+  "statement": "theorem constructible_residue_tree\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (W : Scheme.{u}) [CompactSpace W] [QuasiSeparatedSpace W]\n    (_hl : IsUnit (l : Γ(W, ⊤)))\n    (M N : DerivedCategory (scalarReductionSource.{u, u} l E W))\n    (_hM : sfIntegralConstructible l E W M)\n    (_hN : sfIntegralConstructible l E W N)\n    (m : ℕ) (n : Fin m → ℕ)\n    (S : ∀ a : Fin m, Fin (n a) → Scheme.{u})\n    (s : ∀ (a : Fin m) (j : Fin (n a)), S a j ⟶ W)\n    (_hs : ∀ (a : Fin m) (j : Fin (n a)), IsImmersion (s a j))\n    (_hc : ∀ (a : Fin m) (j : Fin (n a)),\n      Topology.IsConstructible (Set.range (s a j).base))\n    (_hcover : ∀ a : Fin m,\n      (⋃ j : Fin (n a), Set.range (s a j).base) = Set.univ)\n    (_hdisjoint : ∀ a : Fin m, Pairwise (fun j k : Fin (n a) ↦\n      Disjoint (Set.range (s a j).base) (Set.range (s a k).base)))\n    (_hlisse : ∀ (a : Fin m) (j : Fin (n a))\n      (K : DerivedCategory (scalarReductionSource.{u, u} l E W)),\n      K = M ∨ K = N → ∀ q : ℤ,\n      IsLocallyConstantProEtaleModuleSheafOfUniverses (S a j)\n        (Padic.coefficientExtensionRing l E 1)\n        (proEtaleConstantModulePullback (s a j) (Padic.coefficientExtensionRing l E 1)\n          ((DerivedCategory.homologyFunctor _ q).obj\n            ((scalarReductionDerivedExtension l E W 0).obj K)))) :\n    ∃ (d : ℕ) (T : Fin d → Scheme.{u}) (toW : ∀ v : Fin d, T v ⟶ W)\n      (root : Fin d) (parent left right : Fin d → Fin d)\n      (leftEdge : ∀ v : Fin d, T (left v) ⟶ T v)\n      (rightEdge : ∀ v : Fin d, T (right v) ⟶ T v)\n      (leaf : Fin d → Prop),\n      (∃ e : T root ≅ W, e.hom = toW root) ∧ parent root = root ∧\n      (∀ v, v ≠ root → (parent v).val < v.val) ∧\n      (∀ v, CompactSpace (T v)) ∧ (∀ v, QuasiSeparatedSpace (T v)) ∧\n      (∀ v, IsImmersion (toW v)) ∧\n      (∀ v, v ≠ root → left (parent v) = v ∨ right (parent v) = v) ∧\n      (∀ v, leaf v ↔ ∀ w, w ≠ root → parent w ≠ v) ∧\n      (∀ v, ¬ leaf v →\n        left v ≠ right v ∧ v.val < (left v).val ∧ v.val < (right v).val ∧\n        parent (left v) = v ∧ parent (right v) = v ∧\n        leftEdge v ≫ toW v = toW (left v) ∧\n        rightEdge v ≫ toW v = toW (right v) ∧\n        IsOpenImmersion (leftEdge v) ∧ QuasiCompact (leftEdge v) ∧\n        IsClosedImmersion (rightEdge v) ∧\n        Set.range (leftEdge v).base ∪ Set.range (rightEdge v).base = Set.univ ∧\n        Disjoint (Set.range (leftEdge v).base) (Set.range (rightEdge v).base)) ∧\n      (∀ v, leaf v → Nonempty (T v) →\n        (∀ a : Fin m, ∃ j : Fin (n a), ∃ f : T v ⟶ S a j, f ≫ s a j = toW v) ∧\n        (∀ (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y]\n          (r : Y ⟶ T v) [WeaklyEtale r],\n          ∀ K : DerivedCategory (scalarReductionSource.{u, u} l E W),\n          K = M ∨ K = N →\n          IntegralOnSlice.IsComplete l E Y none\n            ((ordinaryIntegralDerivedPull l E (r ≫ toW v)).obj K) ∧\n          ∃ a b : ℤ, a ≤ b ∧\n            (∀ q : ℤ, q < a ∨ b < q → IsZero\n              ((DerivedCategory.homologyFunctor _ q).obj\n                ((scalarReductionDerivedExtension l E Y 0).obj\n                  ((ordinaryIntegralDerivedPull l E (r ≫ toW v)).obj K)))) ∧\n            (∀ q : ℤ, IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses Y\n              (Padic.coefficientExtensionRing l E 1)\n              (fun L ↦ Module.Finite (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)) L)\n              ((DerivedCategory.homologyFunctor _ q).obj\n                ((scalarReductionDerivedExtension l E Y 0).obj\n                  ((ordinaryIntegralDerivedPull l E (r ≫ toW v)).obj K))))))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261025T041249-L-1121711",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T012922-L-2347812",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -26,7 +26,8 @@ universe u v r
 open CategoryTheory Opposite
 namespace CategoryTheory
 
-private lemma homObjMap_section_component
+/-- Evaluating the internal Hom map on a section is componentwise composition. -/
+lemma homObjMap_section_component
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max u v r}]
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}]

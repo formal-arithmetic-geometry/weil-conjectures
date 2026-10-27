@@ -12,9 +12,73 @@
   "def-weil-abstract-derived-category",
   "def-pur-saturated-triangulated-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T^q(N)=H^q(LV(Q(N[0])))$. By [lem-trf-total-left-derived-object-ses-triangle], the given short exact sequence gives a distinguished triangle with first two arrows $LV(Q(i[0]))$ and $LV(Q(p[0]))$. Its assumptions, including everywhere-definedness, are precisely those of the item.",
+   "uses": [
+    "lem-trf-total-left-derived-object-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015D (lemma-F-acyclic-ses), proof, dualized: distinguished triangle construction and exactness of total left derivation (old Steps 2--3); supporting lemma-additive-exact-homotopy-category, lemma-acyclic, lemma-derived-canonical-delta-functor and proposition-derived-functor."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-left-derived-ses-cohomology-normalization] to this triangle. For every integer $q$ we obtain the exact consecutive terms $T^{q-1}(M\\prime\\prime)\\to T^q(M\\prime)\\to T^q(M)\\to T^q(M\\prime\\prime)\\to T^{q+1}(M\\prime)$ and the exact tail $T^{-1}(M\\prime\\prime)\\to V(M\\prime)\\xrightarrow{V(i)}V(M)\\xrightarrow{V(p)}V(M\\prime\\prime)\\to0$. The normalization uses the actual counit and its naturality, so these are the specified image arrows.",
+   "uses": [
+    "lem-trf-left-derived-ses-cohomology-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015D (lemma-F-acyclic-ses), proof, dualized: cohomology sequence, positive-degree vanishing and identification of the degree-zero arrows (old Steps 1 and 4); supporting lemma-cohomology-homological, lemma-negative-vanishing, lemma-left-exact-higher-derived and lemma-irrelevant."
+   }
+  },
+  {
+   "text": "Put $T^q(A)=H^q(LV(Q(A[0])))$. By [lem-trf-left-derived-object-cohomology], $T^q(A)=0$ for $q>0$ and the actual counit gives natural isomorphisms $c_A:T^0(A)\\xrightarrow{\\sim}V(A)$. Also $A$ is left $V$-acyclic exactly when $T^q(A)=0$ for all $q<0$. Its hypotheses hold by the assumptions above, including pointwise definedness on unbounded complexes. We will use integer cohomological indices throughout, so the usual higher left derived functors occur in negative degrees.",
+   "uses": [
+    "lem-trf-left-derived-object-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Duals of Tags 05TC, 05TD and 015C, using Tag 05T5 (3)-(4)."
+   }
+  },
+  {
+   "text": "For clause (1), suppose $M'$ and $M''$ are left $V$-acyclic. Step 3 makes $T^q(M')=T^q(M'')=0$ for every $q<0$. Exactness of $T^q(M')\\to T^q(M)\\to T^q(M'')$ from Step 2 forces $T^q(M)=0$: its identity factors through the zero object, since both the image and the kernel at this term are zero. By [lem-trf-left-derived-object-cohomology], $M$ is left $V$-acyclic. In addition $T^{-1}(M'')=0$, so the tail in Step 2 starts with $0\\to V(M')$ and ends with $V(M'')\\to0$. This is exactly the asserted short exact image sequence.",
+   "uses": [
+    "lem-trf-left-derived-object-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Dual of Tag 015D (lemma-F-acyclic-ses), clause (1)."
+   }
+  },
+  {
+   "text": "For clause (2), suppose $M$ and $M''$ are left $V$-acyclic. For every $q<0$, the sequence in Step 2 contains $T^{q-1}(M'')\\to T^q(M')\\to T^q(M)$ with both outside objects zero, since $q-1<0$ and $q<0$. Exactness forces $T^q(M')=0$, hence [lem-trf-left-derived-object-cohomology] shows that $M'$ is left $V$-acyclic. Again $T^{-1}(M'')=0$, so the same degree-zero tail is $0\\to V(M')\\xrightarrow{V(i)}V(M)\\xrightarrow{V(p)}V(M'')\\to0$. This proves every assertion in clause (2).",
+   "uses": [
+    "lem-trf-left-derived-object-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Dual of Tag 015D (lemma-F-acyclic-ses), clause (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-total-left-derived-object-ses-triangle",
+  "lem-trf-left-derived-ses-cohomology-normalization",
+  "lem-trf-left-derived-object-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015D (lemma-F-acyclic-ses), proof, dualized; the supporting normalization and exactness inputs are made explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +114,45 @@
    "results": "{\"t\": \"2026-10-18T23:59:11Z\", \"tool\": \"grep\", \"query\": \"acyclic|leftDerived|ShortExact\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Ext.lean\"], \"digest\": \"b2eb2451414c054f\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits describe exact functors, short-complex preservation, individual leftDerived n or the abstract Kan-extension comparison; none gives closure of the total-counit acyclic class under extensions and kernels. Read Mathlib/CategoryTheory/Abelian/LeftDerived.lean:150-156, 338-369 and CategoryTheory/Functor/Derived/LeftDerived.lean:45-58."
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|leftDerived|ShortExact",
+   "results": "{\"t\": \"2026-10-22T04:22:04Z\", \"tool\": \"grep\", \"query\": \"acyclic|leftDerived|ShortExact\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/ShortExact.lean\", \"Mathlib/CategoryTheory/Abelian/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Ext.lean\"], \"digest\": \"8c986d1cb0532099\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give exact-functor preservation, the abstract total-left-derived interface, and vanishing on projective objects. None states both closures for the class defined by invertibility of the total counit. The second LeanFinder phrasing was also read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Acyclic objects of a right exact additive functor are closed under extensions and kernels of surjections",
+   "results": "{\"t\": \"2026-10-22T04:22:04Z\", \"tool\": \"leansearch\", \"query\": \"Acyclic objects of a right exact additive functor are closed under extensions and kernels of surjections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.IsClosedUnderExtensions.mk\", \"CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits\", \"CategoryTheory.rightExactFunctor_le_additiveFunctor\", \"CategoryTheory.Functor.mapExtAddHom\", \"instAB4AddCommGrpCat\", \"HomologicalComplex.Acyclic\", \"CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsTop\", \"CategoryTheory.exactFunctor_le_additiveFunctor\"], \"digest\": \"5b9e56111bd32c25\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give exact-functor preservation, the abstract total-left-derived interface, and vanishing on projective objects. None states both closures for the class defined by invertibility of the total counit. The second LeanFinder phrasing was also read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\"",
+   "results": "{\"t\": \"2026-10-22T04:22:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"leftDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.HasLeftDerivedFunctor\", \"CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension'\", \"CategoryTheory.Functor.HasLeftDerivedFunctor.mk\", \"CategoryTheory.Functor.totalLeftDerived\", \"CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension\", \"CategoryTheory.Functor.hasLeftDerivedFunctor_iff\", \"CategoryTheory.Functor.hasLeftDerivedFunctor_iff_of_iso\", \"CategoryTheory.Functor.IsLeftDerivedFunctor\"], \"digest\": \"b298bf732f456e3a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give exact-functor preservation, the abstract total-left-derived interface, and vanishing on projective objects. None states both closures for the class defined by invertibility of the total counit. The second LeanFinder phrasing was also read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an additive right exact functor between abelian categories, objects with zero higher left derived functors are closed under extensions and kernels of epimorphisms",
+   "results": "{\"t\": \"2026-10-22T04:22:15Z\", \"tool\": \"leanfinder\", \"query\": \"For an additive right exact functor between abelian categories, objects with zero higher left derived functors are closed under extensions and kernels of epimorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_zero\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ\", \"CategoryTheory.Functor.preservesFiniteColimits_tfae\"], \"digest\": \"cc98fa816f325f5f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give exact-functor preservation, the abstract total-left-derived interface, and vanishing on projective objects. None states both closures for the class defined by invertibility of the total counit. The second LeanFinder phrasing was also read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Long exact sequence of left derived functors and closure of acyclic objects for a right exact functor",
+   "results": "{\"t\": \"2026-10-22T04:22:23Z\", \"tool\": \"leanfinder\", \"query\": \"Long exact sequence of left derived functors and closure of acyclic objects for a right exact functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.IsHomological.exact\"], \"digest\": \"064ad50ff9b4d813\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give exact-functor preservation, the abstract total-left-derived interface, and vanishing on projective objects. None states both closures for the class defined by invertibility of the total counit. The second LeanFinder phrasing was also read."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-bounded-above-acyclic-derived-computation",
@@ -86,5 +185,56 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-left-acyclic-short-exact",
+  "worker": "stage1",
+  "summary": "Repair of the batch5 re-split return: retain the exact statement and all old arguments, distributing old Steps 2--3 into the statement-only total-derived object SES triangle node and old Steps 1/4 into the statement-only counit-normalized cohomology node. The parent assembles these and the existing acyclicity criterion, then retains both explicit zero-flanked closure arguments. The report preserves the full original six-step argument as the work map. Rebased the returned Q83 delivery onto the current DAG after the side/live completion refusal; reread all current cited statements and revalidated the five verbatim citations. The two child tasks are still absent from the current base. Current retry addresses the later landing refusal at returned head 274c238a508: the retained split is compared with the current six-step parent and the current cited statements; no mathematical statement or dependency substitution is required. Repair of returned head 029c58cee8a on the current DAG: initial dry run exposed the newly present resolving-class-cycle-acyclicity node sharing tag 015D; its statement was read and distinguished from both children in the report. Reread every current assembly citation and generic input, including the live cone-step triangulation citation; five verbatim citation entries and both closure arguments remain valid. Rebuild delivery on the freshly fetched DAG.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Supporting object-level input: closure of left-acyclic objects under extensions and kernels of epimorphisms, dual of Stacks 015D. This split supplies the object-level closure input used by the bounded-above acyclic-computation node in that existing chain; it does not alter the trace-formula unit route. The two re-split components serve the same generic homological input; no geometric route change."
+ },
+ "tool_uses": [
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-left-derived-exact-when-defined",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-3fa701a35",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-3fa701a35 (reviewer sub-agent of L); spot-checked: Fourth push of the released batch5 re-split. The three earlier heads (ecb9b6b4827, 274c238a508, 029c58cee8a) were each PASSed and then refused at landing with 'completed in this project's DAG but not in the live DAG'. Apart from split_report, the item and both new nodes are byte-identical to all three earlier snapshots. Live and side-live still have the old six-step proof and neither new id, and the item statement equals live, so nothing superseded this delivery. I read the item against derived.tex 5644-5678 (015D). Clause (1) is the dual of 015D(1). Clause (2) is the dual of 015D(2) on the reversed sequence (A_op=M'', B_op=M, C_op=M'). 015D(3) is not used. Every old step is preserved. Old 1 is item Step 3. Old 2-3 (014X exactness of K(V), 05S8, the 0152 triangle, 05SE exactness of everywhere-defined LV) became lem-trf-total-left-derived-object-ses-triangle. Old 4 (the long exact sequence and the degree-0 tail through naturality of the counit) became lem-trf-left-derived-ses-cohomology-normalization. Old 5-6 are verbatim as Steps 4-5. The children carry about 1574 and 1043 characters of old work, and the assembly is about 2206 characters. Both new statements are true without acyclicity. The triangle's third arrow is sigma∘LV(delta). The tail is exact at V(M'') because T^1(M')=0, and exact at V(M') because c_{M'} is an isomorphism. Each child's hypotheses match the item and the cited lem-trf-left-derived-object-cohomology. I checked q=-1 in the zero-flank arguments. Edge cases: zero objects, V=id, a split sequence, and -⊗Z/2 on 0->Z->Z->Z/2->0, where Tor_1≠0 and V(i)=0 and no node falsely claims short exactness. The rg -L duplicate search found no duplicate. I compared def-sfb-left-derived-exact, lem-pur-total-left-derived-localization, lem-pur-left-derived-exact-when-defined, lem-sf-derived-ses-triangle, lem-trf-resolving-class-cycle-acyclicity and lem-trf-bounded-above-acyclic-derived-computation. No SGA is cited. Advisory: the normalization node repeats the object-cohomology facts as supporting conclusions; item Step 2 has M\\prime\\prime typography; the triangle node could add lem-sf-derived-ses-triangle to its stmt_deps. Maintainer: this is the promotion loop; L should promote the re-split or relax the landing check rather than re-dispatching."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.LeftAcyclicShortExact",
+  "declaration": "CategoryTheory.leftAcyclic_shortExact",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/LeftAcyclicShortExact.lean",
+  "statement": "theorem leftAcyclic_shortExact (A : Type uA) (B : Type uB) [Category.{vA} A] [Category.{vB} B] [Abelian A] [Abelian B] [EnoughProjectives A] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] (V : A ⥤ B) [V.Additive] [PreservesFiniteColimits V] (LV : DerivedCategory A ⥤ DerivedCategory B) (ε : DerivedCategory.Q ⋙ LV ⟶ V.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) (hLV : LV.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))) (hdefined : ∀ X : HomotopyCategory A (ComplexShape.up ℤ), ∃ Y : DerivedCategory B, IsEssentiallyConstantProDiagram (MorphismProperty.Over.forget (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ⊤ X ⋙ Over.forget X ⋙ V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) Y) (S : ShortComplex A) (hS : S.ShortExact) : (IsIso (ε.app ((CochainComplex.singleFunctor A 0).obj S.X₁)) → IsIso (ε.app ((CochainComplex.singleFunctor A 0).obj S.X₃)) → IsIso (ε.app ((CochainComplex.singleFunctor A 0).obj S.X₂)) ∧ (S.map V).ShortExact) ∧ (IsIso (ε.app ((CochainComplex.singleFunctor A 0).obj S.X₂)) → IsIso (ε.app ((CochainComplex.singleFunctor A 0).obj S.X₃)) → IsIso (ε.app ((CochainComplex.singleFunctor A 0).obj S.X₁)) ∧ (S.map V).ShortExact)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the universal total-left-derived counit on cochain complexes and the expanded pointwise essential-constancy condition on homotopy-category denominator diagrams, exactly as the existing boundedAbove_acyclic_leftDerived_computation interface. Acyclicity is written inline as IsIso of the counit at the single complex; neither classical individual leftDerived functors nor a new acyclicity definition are substituted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-037a9359d",
+  "group": "N8",
+  "result": "pass",
+  "note": "Node copy changes only lean (live lean null); lean.statement verbatim in file, single sorry, no defs/new nodes. Hypotheses match node: Abelian A/B, EnoughProjectives A, V additive + PreservesFiniteColimits, independent universes, ε fixed by IsLeftDerivedFunctor (universal counit), hdefined = literal body of IsTriangulatedLeftDerivedDefinedAt at quasiIso for all X (same interface as landed boundedAbove_acyclic_leftDerived_computation). Acyclicity = IsIso ε.app(single 0). Clause (1) X1,X3⇒X2∧(S.map V).ShortExact; clause (2) X2,X3⇒X1∧same; dual of derived.tex 015D (5644-5661), with clause (2) the dual of 015D(3), no surjectivity hypothesis needed. Docstrings have source + blueprint + six proof steps; proof-only imports exist with published oleans. Advisory: IsEssentiallyConstantProDiagram owned by non-stmt_dep def-pc-essentially-constant-pro-diagram but only as body of cited def (as in landed consumer); Second-reading section is the worker's self-reread. No compile (no changes)."
+ }
 }

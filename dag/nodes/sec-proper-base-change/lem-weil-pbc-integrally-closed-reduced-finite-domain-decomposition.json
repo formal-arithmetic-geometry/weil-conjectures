@@ -97,7 +97,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
@@ -130,5 +141,32 @@
   "landing": "20261012T095851-L-312043",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a reduced commutative ring with finitely many minimal prime ideals. Suppose $R$ is integrally closed in its total ring of fractions $Q(R)$ (the localization of $R$ at its nonzerodivisors). Then for some integer $n\\ge 0$ there are commutative integral domains $A_1,\\dots,A_n$ and a ring isomorphism $R\\simeq\\prod_{i=1}^nA_i$. No integral closedness of the factors is asserted.",
+  "proof": [
+   {
+    "text": "For a minimal prime p, let S be the finite set of the other minimal primes. Minimality implies p is not contained in any r in S. Finite prime avoidance gives b in p outside all r in S. The finite intersection of S is not contained in p: otherwise primality of p implies one r in S is contained in p, contradicting minimality. Choose a in this intersection outside p. Every minimal prime contains ab, so ab=0 by reducedness, since the intersection of the minimal primes is the nilradical. The sum a+b avoids every minimal prime, hence is a nonzerodivisor, since in a reduced ring the set of zero divisors is the union of the minimal primes.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Set x=a/(a+b) in the total fraction ring. Clearing the invertible denominator twice and using ab=0 proves x*x=x. Thus x is integral, being a root of the monic polynomial T(T-1). Integral closedness gives e in R mapping to x, and injectivity yields e(a+b)=a and (1-e)(a+b)=b. For every other minimal prime q, primality and a+b not in q imply e in q. Likewise 1-e is in p. Hence p and q are coprime, with the explicit witnesses 1-e and e. This constructs the separating coordinate idempotents directly, without first decomposing the entire total fraction ring.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Enumerate the minimal primes as $\\mathfrak p_1,\\dots,\\mathfrak p_n$. Their intersection is the nilradical and hence zero by reducedness. By the Chinese remainder theorem for the pairwise coprime family $(\\mathfrak p_i)$, $R=R/(\\mathfrak p_1\\cap\\dots\\cap\\mathfrak p_n)\\cong\\prod_{i=1}^nR/\\mathfrak p_i$. Every quotient $A_i=R/\\mathfrak p_i$ is a domain because $\\mathfrak p_i$ is prime. The Chinese remainder theorem also covers the empty family (then $R=0$ and $n=0$), so no nontriviality assumption or separate zero-ring argument is required.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

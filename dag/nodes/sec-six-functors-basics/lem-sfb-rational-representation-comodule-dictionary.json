@@ -1,0 +1,371 @@
+{
+ "id": "lem-sfb-rational-representation-comodule-dictionary",
+ "kind": "statement",
+ "title": "Rational representations and coordinate Hopf comodules",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be an affine finite-type $k$-group scheme [def-sc-group-scheme, def-weil-finite-type-morphism], and let $A=k[G]$ with its coordinate Hopf maps $\\Delta,\\epsilon,S$ [lem-sfb-affine-group-coordinate-hopf]. For a $k$-vector space $V$ of arbitrary dimension, put $V_R=V\\otimes_kR$ [def-weil-module-base-change]. A rational representation on $V$ means a family of group homomorphisms $r_R:G(R)\\to\\operatorname{Aut}_R(V_R)$ natural in commutative $k$-algebras $R$, where $G(R)=\\operatorname{Hom}_{k\\text{-alg}}(A,R)$ [def-weil-affine-spectrum]. These representations correspond bijectively to $k$-linear maps $c:V\\to V\\otimes_kA$ satisfying $(c\\otimes1)c=(1\\otimes\\Delta)c$ and $(1\\otimes\\epsilon)c=1_V$. Explicitly, $r_R(x)(v\\otimes b)=\\sum_i v_i\\otimes x(a_i)b$ when $c(v)=\\sum_i v_i\\otimes a_i$, and $c(v)=r_A(\\mathrm{id}_A)(v\\otimes1)$. A linear map $f:V\\to W$ intertwines all these actions if and only if $(f\\otimes1)c_V=c_Wf$. For finite-dimensional $V$ these natural representations are precisely homomorphisms of $k$-group schemes $G\\to\\operatorname{GL}(V)$, with $\\operatorname{GL}(V)(R)=\\operatorname{Aut}_R(V_R)$, as in [def-wf-algebraic-representations]. The trivial representation has coaction $v\\mapsto v\\otimes1$, and the tensor representation has coaction $v\\otimes w\\mapsto\\sum_{i,j}(v_i\\otimes w_j)\\otimes a_ib_j$ if $c_V(v)=\\sum_i v_i\\otimes a_i$ and $c_W(w)=\\sum_j w_j\\otimes b_j$. Tensor products are universal for bilinear maps [def-weil-pbc-module-tensor-product]. All vector spaces lie in one fixed universe; families of such objects may lie in a containing universe.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Remark 4.1, equations (24)--(25), printed p.84; Chapter 4(a), printed p.83; tensor operations in Chapter 4(e), printed pp.87--88."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "def-weil-module-base-change",
+  "def-weil-affine-spectrum",
+  "def-wf-algebraic-representations",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-general-linear-group",
+  "def-weil-finite-dimensional-subspace",
+  "def-sfb-hopf-action-module-data",
+  "def-sfb-affine-coordinate-hopf-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Use the tensor universal property [def-weil-pbc-module-tensor-product] throughout: pure tensors generate, so maps specified on them are unique. In particular the maps $(v\\otimes a)\\otimes b\\leftrightarrow v\\otimes(a\\otimes b)$, $v\\otimes t\\mapsto tv$ for $t\\in k$, and $a\\otimes v\\leftrightarrow v\\otimes a$ give the associativity, unit and symmetry identifications; their inverse composites fix every pure tensor. By [lem-weil-pbc-algebra-tensor-pushout-universal-property], $A\\otimes_kA$ is a commutative $k$-algebra with maps $\\iota_1(a)=a\\otimes1$, $\\iota_2(a)=1\\otimes a$, and for points $x,y:A\\to R$ there is the algebra map $m_{x,y}(a\\otimes b)=x(a)y(b)$. By [lem-weil-pbc-fibre-product-affine-spectra], $G\\times_kG=\\operatorname{Spec}(A\\otimes_kA)$ with projections $\\operatorname{Spec}\\iota_1,\\operatorname{Spec}\\iota_2$, so the pair $(x,y)$ is the point $m_{x,y}$ of $G\\times_kG$ (it is the unique algebra map with $m_{x,y}\\iota_1=x$, $m_{x,y}\\iota_2=y$). Since the maps in [lem-sfb-affine-group-coordinate-hopf] are pullbacks of the given group operations, their pointwise formulas are $xy=m_{x,y}\\Delta$, $e_R=u_R\\epsilon$, and $x^{-1}=xS$. In particular $\\iota_1\\iota_2=\\Delta$ as points of $G(A\\otimes_kA)$, because $m_{\\iota_1,\\iota_2}$ is the identity.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, multiplication calculation following (25); Proposition 3.5 for pointwise multiplication. Tensor identifications written explicitly."
+   }
+  },
+  {
+   "text": "Start with a natural family of $R$-linear endomorphisms $t_R(x)$ of $V_R$; for this step no group law is assumed. Set $d(v)=t_A(\\mathrm{id}_A)(v\\otimes1)$. This is $k$-linear. Naturality along the algebra map $x:A\\to R$ says\n$$(1\\otimes x)t_A(\\mathrm{id}_A)=t_R(x)(1\\otimes x).$$\nApplying it to $v\\otimes1$ and using $R$-linearity gives $t_R(x)(v\\otimes b)=b(1\\otimes x)d(v)$. Thus $d$ determines every operator, since the $v\\otimes b$ generate. Restriction to $v\\otimes1$ and extension by $b$ are precisely [lem-weil-pbc-module-base-change-universal-property], after the symmetry identification of Step 1; [def-weil-module-base-change] specifies the scalar action. The maps $1\\otimes x$ exist by the tensor universal property. This applies without a dimension bound on $V$.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-universal-property",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, universal element and restriction to a k-linear homomorphism."
+   }
+  },
+  {
+   "text": "Conversely, given any $k$-linear $d:V\\to V\\otimes_kA$, define $t_R(x)$ to be the unique $R$-linear extension of $(1\\otimes x)d:V\\to V_R$, using [lem-weil-pbc-module-base-change-universal-property] and Step 1. Hence for any finite presentation $d(v)=\\sum_i v_i\\otimes a_i$,\n$$t_R(x)(v\\otimes b)=\\sum_i v_i\\otimes x(a_i)b.$$\nThis formula is independent of the tensor presentation because it is the composite of the tensor map $1\\otimes x$ and scalar multiplication, rather than a choice of presentation. For an algebra map $\\alpha:R\\to R'$, applying $1\\otimes\\alpha$ to the formula gives $\\sum_i v_i\\otimes\\alpha(x(a_i))\\alpha(b)$, which is $t_{R'}(\\alpha x)(v\\otimes\\alpha(b))$. The equality extends to all tensors by generation. It proves naturality. At $R=A,x=\\mathrm{id}_A,b=1$ the formula recovers $d$; Step 2 recovers $t$ from its restriction. Thus these constructions are inverse before imposing the group and comodule identities.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-universal-property",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, coaction-to-action formula and the finite sums in (25)."
+   }
+  },
+  {
+   "text": "Now let $d=c$ be coassociative. For $c(v)=\\sum_i v_i\\otimes a_i$ and $c(v_i)=\\sum_j v_{ij}\\otimes a_{ij}$, coassociativity says\n$$\\sum_{i,j}v_{ij}\\otimes a_{ij}\\otimes a_i=\\sum_i v_i\\otimes\\Delta(a_i).$$\nApply the linear map $v\\otimes a\\otimes b\\mapsto v\\otimes x(a)y(b)$, furnished by [def-weil-pbc-module-tensor-product] and [lem-weil-pbc-algebra-tensor-pushout-universal-property]. By Step 3 its left side is $t_R(x)t_R(y)(v\\otimes1)$; by Step 1 its right side is $t_R(xy)(v\\otimes1)$. Both operators are $R$-linear, so agreement on $v\\otimes1$ proves $t_R(xy)=t_R(x)t_R(y)$. Every displayed sum is finite for the particular vector in question; there is no uniform finite-basis assumption.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-affine-group-coordinate-hopf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, equations (24)-(25) and the computation of r(g1 g2)."
+   }
+  },
+  {
+   "text": "The counit identity gives $t_R(e_R)(v\\otimes b)=\\sum_i v_i\\otimes u_R(\\epsilon(a_i))b=v\\otimes b$, using [def-weil-module-base-change] and the point formula $e_R=u_R\\epsilon$ of Step 1. Thus $t_R(e_R)=1$. By Step 4, $t_R(x)t_R(xS)=t_R(xx^{-1})=1$ and $t_R(xS)t_R(x)=1$, since [lem-sfb-affine-group-coordinate-hopf] identifies $S$ with inversion. Consequently each $t_R(x)$ is an automorphism with inverse $t_R(xS)$. Together with Step 3 these are the required natural group homomorphisms $r_R$.",
+   "uses": [
+    "def-weil-module-base-change",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, (24)-(25); inverse follows from the group law and the coordinate antipode."
+   }
+  },
+  {
+   "text": "For the reverse implication start with a representation $r$ and its $c$ from Step 2. Put $C=A\\otimes_kA$ and take the two generic points $\\iota_1,\\iota_2:A\\to C$ of Step 1. The formula of Step 2 gives\n$$r_C(\\iota_1)r_C(\\iota_2)(v\\otimes1)=\\sum_{i,j}v_{ij}\\otimes(a_{ij}\\otimes a_i),$$\nwhich identifies with $(c\\otimes1)c(v)$ under Step 1. On the other hand the homomorphism law and $\\iota_1\\iota_2=\\Delta$ give\n$$r_C(\\iota_1)r_C(\\iota_2)(v\\otimes1)=r_C(\\Delta)(v\\otimes1)=\\sum_i v_i\\otimes\\Delta(a_i).$$\nThe last expression is $(1\\otimes\\Delta)c(v)$. This proves coassociativity by equality of the actual tensors in $V\\otimes_k(A\\otimes_kA)$; no test on field-valued or rational points is used.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, necessity of (25), made explicit at the two universal points."
+   }
+  },
+  {
+   "text": "Apply the Step 2 formula to $R=k$ and $x=\\epsilon$, the identity point of $G(k)$ by [lem-sfb-affine-group-coordinate-hopf]. Since $r_k(\\epsilon)=1$, it gives $(1\\otimes\\epsilon)c(v)=v$ under $V\\otimes_kk=V$. This is the counit identity. Steps 2-3 already proved that the two formulas are inverse for all natural endomorphism families. Steps 4-6 and this calculation show that they restrict to inverse bijections between representations and coactions, with exactly the displayed formulas in the statement.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, the counit equation in (24) and the one-to-one correspondence."
+   }
+  },
+  {
+   "text": "Let $f:V\\to W$ be $k$-linear. If $f_Rr_{V,R}(x)=r_{W,R}(x)f_R$ for every $R,x$, evaluate at $R=A,x=\\mathrm{id}_A$ and $v\\otimes1$ to obtain $(f\\otimes1)c_V(v)=c_Wf(v)$. Conversely apply $1\\otimes x$ to this identity and multiply by $b\\in R$. The Step 3 formula gives $f_Rr_{V,R}(x)(v\\otimes b)=r_{W,R}(x)f_R(v\\otimes b)$, and pure-tensor generation proves equality of the operators. The base-changed $f_R$ and the tensor maps used here are exactly those specified in [def-weil-module-base-change] and [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 4.1, printed p.84, coordinate description; compare Remark 4.18, printed p.90, for equivariant maps as comodule maps."
+   }
+  },
+  {
+   "text": "Suppose $V$ is finite-dimensional and nonzero. Delete dependent vectors from a finite spanning set, solving each dependence for a vector with nonzero coefficient; this gives a basis of size $n\\geq1$ [def-weil-finite-dimensional-subspace]. Under this basis $V_R=R^n$: the mutually inverse maps send $e_i\\otimes b$ to $b$ in coordinate $i$, and $(b_i)$ to $\\sum_i e_i\\otimes b_i$, by the tensor universal property. Endomorphisms are their matrices of basis images, and automorphisms are invertible matrices. Thus [def-sc-general-linear-group] represents $R\\mapsto\\operatorname{Aut}_R(V_R)$ by the affine group $\\operatorname{GL}(V)=\\operatorname{GL}_{n,k}$. Apply [lem-galois-yoneda-fully-faithful] to the category $(k\\text{-alg})^{\\mathrm{op}}$: a natural map from $\\operatorname{Hom}_{k\\text{-alg}}(A,-)$ to $\\operatorname{Hom}_{k\\text{-alg}}(k[\\operatorname{GL}(V)],-)$ is uniquely a $k$-algebra map $k[\\operatorname{GL}(V)]\\to A$. By [def-weil-affine-spectrum] it is a morphism $G\\to\\operatorname{GL}(V)$ over $k$. Its compatibility with multiplication follows from the group-homomorphism law on all algebra-valued points: $G\\times_kG$ is affine by [lem-weil-pbc-fibre-product-affine-spectra], and the same Yoneda injectivity detects equality of the two multiplication composites. Conversely a group-scheme homomorphism induces natural group homomorphisms on points by composition [def-sc-group-scheme]. This is exactly the finite-dimensional representation notion of [def-wf-algebraic-representations].",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "def-weil-pbc-module-tensor-product",
+    "def-sc-general-linear-group",
+    "lem-galois-yoneda-fully-faithful",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-group-scheme",
+    "def-wf-algebraic-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 4(a), printed p.83, finite-dimensional assertion; Remark 4.1, printed p.84, final paragraph. Representability: Stacks Tag 022W (example-general-linear-group); Yoneda: Tag 001P (lemma-yoneda)."
+   }
+  },
+  {
+   "text": "When $V=0$, each $V_R$ is zero, since every generating tensor is $0\\otimes b=0$. Its automorphism group is the one-element group. The functor of one-element groups is represented by $\\operatorname{Spec}k$, since there is exactly one $k$-algebra map $k\\to R$ [def-weil-affine-spectrum]. Thus $\\operatorname{GL}(0)=\\operatorname{Spec}k$, and the unique representation corresponds to the structural group-scheme map $G\\to\\operatorname{Spec}k$. This verifies the zero-dimensional case without applying the positive-rank convention in [def-sc-general-linear-group].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 4(a), printed p.83, finite-dimensional assertion, with the zero-vector-space case written out."
+   }
+  },
+  {
+   "text": "For the trivial action every $r_A(\\mathrm{id}_A)$ is the identity, so its coaction is $v\\mapsto v\\otimes1$. For two representations use the identification\n$$(V\\otimes_kW)\\otimes_kR\\ \\simeq\\ (V\\otimes_kR)\\otimes_R(W\\otimes_kR),\\quad(v\\otimes w)\\otimes b\\mapsto(v\\otimes1)\\otimes_R(w\\otimes b).$$\nThe inverse sends $(v\\otimes a)\\otimes_R(w\\otimes b)$ to $(v\\otimes w)\\otimes ab$; both maps are well-defined by bilinearity and balancing, and their composites fix the displayed generators [def-weil-pbc-module-tensor-product, def-weil-module-base-change]. Acting on the two factors defines a natural action: the identity and composition laws follow by applying the laws in each factor to a generating tensor, and the inverse acts by the two inverse operators. For $\\alpha:R\\to R'$ the identification commutes with $1\\otimes\\alpha$ on generators, and each factor action is natural, so both composites agree on each $(v\\otimes w)\\otimes b$. At $R=A,x=\\mathrm{id}_A$ its value on $(v\\otimes w)\\otimes1$ is $\\sum_{i,j}(v_i\\otimes w_j)\\otimes a_ib_j$ by the inverse map above. The established dictionary therefore yields exactly the tensor coaction in the statement, in arbitrary dimension.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 4, printed p.83, action description; Remark 4.1, printed p.84, universal-element formula; Chapter 4(e), printed pp.88-89, tensor-product construction, expanded directly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-weil-pbc-module-base-change-universal-property",
+  "def-weil-module-base-change",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-general-linear-group",
+  "lem-galois-yoneda-fully-faithful",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-group-scheme",
+  "def-wf-algebraic-representations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 4(a), printed pp.83-84, Remark 4.1 and equations (24)-(25); equivariant maps compared with Remark 4.18, printed p.90. Tensor products expanded from the universal-element construction, in the setting of Chapter 4(e), printed pp.88-89."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Comodule|coaction|Tannaka",
+   "results": "5 hits: Mathlib/RepresentationTheory/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean, Mathlib/RepresentationTheory/Tannaka.lean. Subdirectory: RepresentationTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-scheme equivalence and affine-space coordinates do not assert the rational-representation/comodule correspondence; FDRep concerns abstract monoids, Tannaka concerns finite abstract groups. Coalgebra.Repr is a finite tensor presentation of a coalgebra element, not a comodule."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-scheme equivalence and affine-space coordinates do not assert the rational-representation/comodule correspondence; FDRep concerns abstract monoids, Tannaka concerns finite abstract groups. Coalgebra.Repr is a finite tensor presentation of a coalgebra element, not a comodule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational representations of an affine group scheme over a field correspond to comodules over its coordinate Hopf algebra with equivariant maps and tensor products",
+   "results": "8 hits: AlgebraicGeometry.AffineScheme.ΓIsEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.homOverEquiv_apply, AlgebraicGeometry.AffineSpace.coord, AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-scheme equivalence and affine-space coordinates do not assert the rational-representation/comodule correspondence; FDRep concerns abstract monoids, Tannaka concerns finite abstract groups. Coalgebra.Repr is a finite tensor presentation of a coalgebra element, not a comodule."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|coaction|rational.*representation|representation.*Hopf",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-scheme equivalence and affine-space coordinates do not assert the rational-representation/comodule correspondence; FDRep concerns abstract monoids, Tannaka concerns finite abstract groups. Coalgebra.Repr is a finite tensor presentation of a coalgebra element, not a comodule."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional rational representations of an affine algebraic group correspond to comodules over its coordinate ring",
+   "results": "8 hits: Coalgebra.Repr, Coalgebra.Repr.ι, FDRep.instLinear, Coalgebra.toCoalgebraStruct, CoalgCat.instComonObjModuleCatOfCarrier, CoalgCat.ofComonObj, CoalgCat.toComonObj, FDRep.instAddCommGroupCarrierVFGModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-scheme equivalence and affine-space coordinates do not assert the rational-representation/comodule correspondence; FDRep concerns abstract monoids, Tannaka concerns finite abstract groups. Coalgebra.Repr is a finite tensor presentation of a coalgebra element, not a comodule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional comodules over the coordinate Hopf algebra of an affine algebraic group are equivalent to algebraic representations and linear maps intertwine the actions exactly when they commute with coactions",
+   "results": "8 hits: TannakaDuality.FiniteGroup.algHomOfRightFDRepComp, FDRep.of_ρ, TannakaDuality.FiniteGroup.ofRightFDRep, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, TannakaDuality.FiniteGroup.ofRightFDRep_hom, TannakaDuality.FiniteGroup.map_mul_toRightFDRepComp, TannakaDuality.FiniteGroup.mulRepHom, Rep.coindVEquiv_apply_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-scheme equivalence and affine-space coordinates do not assert the rational-representation/comodule correspondence; FDRep concerns abstract monoids, Tannaka concerns finite abstract groups. Coalgebra.Repr is a finite tensor presentation of a coalgebra element, not a comodule."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|coaction|structure Repr|def Repr",
+   "results": "6 hits: Mathlib/RingTheory/Finiteness/Cardinality.lean, Mathlib/RingTheory/Finiteness/Cardinality.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/AlgebraicIndependent/Adjoin.lean, Mathlib/RingTheory/AlgebraicIndependent/Defs.lean, Mathlib/RingTheory/Coalgebra/Hom.lean. Subdirectory: RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: affine-scheme equivalence and affine-space coordinates do not assert the rational-representation/comodule correspondence; FDRep concerns abstract monoids, Tannaka concerns finite abstract groups. Coalgebra.Repr is a finite tensor presentation of a coalgebra element, not a comodule."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational representations of an affine group scheme over a field correspond to comodules over its coordinate Hopf algebra, for arbitrary dimensional vector spaces",
+   "results": "8 hits: AlgebraicGeometry.AffineScheme.ΓIsEquiv, AlgebraicGeometry.AffineSpace.coord, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.SpecIso, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine schemes/affine spaces, abstract-monoid representations, or tensor presentations of coalgebra elements, not natural group-scheme actions equivalent to coordinate comodules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comodule\"",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine schemes/affine spaces, abstract-monoid representations, or tensor presentations of coalgebra elements, not natural group-scheme actions equivalent to coordinate comodules."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|coaction|rational.*representation|representation.*Hopf",
+   "results": "0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine schemes/affine spaces, abstract-monoid representations, or tensor presentations of coalgebra elements, not natural group-scheme actions equivalent to coordinate comodules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural actions of an affine group scheme on a vector space are equivalent to coactions of its coordinate Hopf algebra",
+   "results": "8 hits: AffineBasis.instMulAction, AffineMap.coe_smul, Rep.linearizationOfMulActionIso, AffineBasis.basisOf_smul, AffineBasis.instAddAction, AffineBasis.coe_smul, AffineEquiv.linearHom, AffineBasis.instIsScalarTower. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine schemes/affine spaces, abstract-monoid representations, or tensor presentations of coalgebra elements, not natural group-scheme actions equivalent to coordinate comodules."
+  },
+  {
+   "tool": "grep",
+   "query": "Comodule|coaction|structure Repr|def Repr",
+   "results": "6 hits: Mathlib/RingTheory/Finiteness/Cardinality.lean, Mathlib/RingTheory/Finiteness/Cardinality.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/Coalgebra/Hom.lean, Mathlib/RingTheory/AlgebraicIndependent/Adjoin.lean, Mathlib/RingTheory/AlgebraicIndependent/Defs.lean. Subdirectory: RingTheory. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine schemes/affine spaces, abstract-monoid representations, or tensor presentations of coalgebra elements, not natural group-scheme actions equivalent to coordinate comodules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear maps V to tensor product V with A satisfying coassociativity and counit correspond to functorial representations of Spec A",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec.adjunction, AlgebraicGeometry.Scheme.Spec, AlgebraicGeometry.Spec.reflective, AlgebraicGeometry.Spec.homEquiv, AlgebraicGeometry.ΓSpec.adjunction_unit_app, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ, TensorProduct.counit_def, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction. ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine schemes/affine spaces, abstract-monoid representations, or tensor presentations of coalgebra elements, not natural group-scheme actions equivalent to coordinate comodules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tannaka-rational-point-reconstruction",
+  "date": "2026-10-23",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Example 19.19, printed p.401, with Corollary 19.18 and Lemma 19.16; Section 2.42, printed p.53 (connectedness). Fixed-vector input in Milne 19.16: a nonzero rational representation of a unipotent group has nonzero invariants; made precise using 14.3 and 14.12. Pointwise prerequisite for the fixed-vector input: Milne 9.19 identifies unipotence in a faithful representation with unipotence in every rational representation. Supporting input: Theorem 9.2 and conditions (a), (b), (c), printed pp.164--165, specialized to R=K and invertible maps; algebraic groups are affine by the convention at the end of Chapter 8, printed p.162. Supporting coordinate dictionary in Milne Remark 4.1 used in Theorem 9.2.",
+   "via": [
+    "lem-sfb-tannaka-rational-point-reconstruction",
+    "lem-sfb-rational-representation-unipotent-point",
+    "lem-sfb-unipotent-rational-representation-fixed-vector",
+    "lem-sfb-general-linear-reductive",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-representation-comodule-dictionary",
+  "worker": "stage1",
+  "summary": "Expanded Milne Remark 4.1 using universal algebra-valued points and tensor universal properties, proving both directions, morphisms, finite-dimensional representability (including dimension zero), trivial and tensor representations. Reused existing Hopf, tensor, affine-product and Yoneda nodes; no new nodes. The statement is unchanged. Added the existing GL and finite-dimensional notion dependencies. Rechecked Mathlib with six logged searches and no match.",
+  "blueprint": "Supporting coordinate dictionary in the inherited det-thm-sf-ctf-stability-direct-images proof (3) chain, specifically Milne Remark 4.1 as used by Theorem 9.2 in the Tannaka rational-point reconstruction prerequisite. Retained the existing null blueprint ancestor and via chain: blueprint_refs.py ancestor reports None. The latest main-20261023-1620 contains references to sk-thm-sf-ctf-stability but no file for that legacy unit, and no node states this dictionary. Whole-blueprint searches for comodule, rational representations, Hopf and general linear found no equivalent node. No unit route or realization is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-98ed3ebc9",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-98ed3ebc9 (reviewer sub-agent of L); spot-checked: I read the item in full against Milne iAG 2017: Ch.4(a) p.83, (24) and Remark 4.1/(25) p.84, and Ch.4(e) pp.88-89. The comodule convention (c⊗1)c=(1⊗Δ)c matches Milne's. The statement is byte-identical to live and still unsplit live and side-live, so no other group has split it. There is no re-split note. The two stmt_deps added (def-sc-general-linear-group, def-weil-finite-dimensional-subspace) name notions the statement uses. There are no new nodes. No cycle (closure of 85 nodes), no SGA, no tool_uses. Duplicate search over comodule/coaction/rational-representation nodes: hopf-coaction-linearization, rational-linear-hom, comodule-finite-subrepresentation, finite-comodule-coefficient-coalgebra and hopf-action-module-data all differ from the dictionary. All 11 steps recomputed. Step 2 naturality gives t_R(x)(v⊗b)=b(1⊗x)d(v). Step 4 gives r(x)r(y)=r(xy) as a left action. Step 6 checks coassociativity at the universal pair over A⊗A, with no reducedness used. Step 8 checks intertwiners both ways. Step 9 applies Yoneda on (k-alg)^op with G×G affine. Step 10 handles V=0 via GL(0)=Spec k. Step 11 inverts the tensor identification via β_A. Edge cases tested: V=0, trivial G, G_m, standard GL_2 index order, infinite sums, R=0, alpha_p/k[ε]. FIX (proof only): Step 1 now cites lem-weil-pbc-fibre-product-affine-spectra for the identification of (x,y) with m_{x,y} that the point formula xy=m_{x,y}Δ needs. Step 11 now proves that the tensor action is natural in R, not only the identity and composition laws.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalRepresentationComoduleDictionary",
+  "declaration": "AlgebraicGeometry.RationalRepresentation.dictionary",
+  "declarations": [
+   "AlgebraicGeometry.RationalRepresentation.NaturalRepresentation",
+   "AlgebraicGeometry.RationalRepresentation.genericPoint",
+   "AlgebraicGeometry.RationalRepresentation.coordinatePoint",
+   "AlgebraicGeometry.RationalRepresentation.genericCoaction",
+   "AlgebraicGeometry.RationalRepresentation.CoordinateComodule",
+   "AlgebraicGeometry.RationalRepresentation.dictionary",
+   "AlgebraicGeometry.RationalRepresentation.intertwines_iff",
+   "AlgebraicGeometry.RationalRepresentation.FiniteIndex",
+   "AlgebraicGeometry.RationalRepresentation.finiteBasis",
+   "AlgebraicGeometry.RationalRepresentation.finite_dictionary",
+   "AlgebraicGeometry.RationalRepresentation.trivial_coaction",
+   "AlgebraicGeometry.RationalRepresentation.tensor_coaction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalRepresentationComoduleDictionary.lean",
+  "statement": "theorem dictionary [LocallyOfFiniteType (G ↘ Spec (.of k))] [QuasiCompact (G ↘ Spec (.of k))] : ∃ E : NaturalRepresentation (k := k) G V ≃ CoordinateComodule (k := k) G V, (∀ r, (E r).val = genericCoaction (k := k) G V r) ∧ (∀ (c : CoordinateComodule (k := k) G V) (R : Type u) [CommRing R] [Algebra k R] (x : Γ(G, ⊤) →ₐ[k] R) (v : V) (b : R) (n : ℕ) (vi : Fin n → V) (ai : Fin n → Γ(G, ⊤)), c.val v = ∑ i, vi i ⊗ₜ[k] ai i → (E.symm c).action R (coordinatePoint (k := k) G R x) (b ⊗ₜ[k] v) = ∑ i, (x (ai i) * b) ⊗ₜ[k] vi i)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main theorem is the bijection with both generic-element formulas. The other theorem declarations state the intertwiner, finite-dimensional scheme-map, trivial and tensor clauses of this same node. Real-data helpers give natural families, actual coordinate points, their generic coaction and a finite basis. Scalar extensions use the recorded Mathlib R tensor V convention, with TensorProduct.comm explicit in the coaction. The existing HopfAction coordinate instance and coassociativity/counit laws are reused through two added landed-node dependencies. No statement correction or new independent notion is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1597f60b",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Re-delivery after the 140a H2 RETURN. The Lean module is byte-identical to the 140a head. The only change replaces stmt_dep lem-sfb-hopf-coaction-linearization (theorem node) by the landed definition node def-sfb-affine-coordinate-hopf-algebra (Q08, identical to side-live), an existing:true record owning HopfAction.affineCoordinateHopfAlgebra/coordinateHopfAlgebra in the unchanged HopfCoactionLinearization module; nothing moved or duplicated; no cycle; def-sfb-hopf-action-module-data kept. The item node equals live apart from lean and stmt_deps, and live lean is unset. Re-confirmed Coassociative/Counital = Milne (24), points/RationalHom usage, and all clauses (dictionary with both formulas, intertwines_iff, finite_dictionary with rank 0, trivial/tensor ∃! pinned by actions), edge cases and gates; report sections present. No compile because no file changed. Advisory: the helpers' docstring blueprint tag still names the theorem node (owned by Q08's module)."
+ }
+}

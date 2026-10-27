@@ -27,9 +27,11 @@
    }
   },
   {
-   "text": "Assume for contradiction that $J\\subsetneq K$. The exact sequence of $R$-modules $JR\\to KR\\to KR/JR\\to0$, after tensoring with $A$, is right exact. For each of the monoid ideals $J$ and $K$, the Tor-vanishing statement [lem-trf-kato-tor-independence-chart] applied to $R/IR$ identifies $IR\\otimes_R A$ with its multiplication image $IA\\subseteq A$. Thus the first map has image $JA=KA$, so the right-exact sequence forces $(KR/JR)\\otimes_R A=0$.",
+   "text": "For $I=J,K$, apply [lem-trf-kato-tor-independence-chart] to get $\\operatorname{Tor}_1^R(R/IR,A)=0$. Apply [lem-weil-pbc-tor-long-exact-first-variable] to $0\\to IR\\to R\\to R/IR\\to0$; its exactness makes $IR\\otimes_RA\\to R\\otimes_RA=A$ injective, with multiplication image $IA$. Apply [lem-weil-pbc-tensor-right-exact] to $JR\\to KR\\to KR/JR\\to0$. Under the multiplication identifications its first map is the inclusion $JA\\to KA$. By the definition $K=a^{-1}(JA)$, $KA\\subseteq JA$, and $J\\subseteq K$ gives the reverse inclusion. Hence this first map is surjective and $(KR/JR)\\otimes_RA=0$.",
    "uses": [
-    "lem-trf-kato-tor-independence-chart"
+    "lem-trf-kato-tor-independence-chart",
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "lem-weil-pbc-tensor-right-exact"
    ],
    "elementary": false,
    "source": {
@@ -38,10 +40,10 @@
    }
   },
   {
-   "text": "Since $J\\subsetneq K$, some element of $K$ lies outside $J$. The monomials $e_q$ ($q\\in P$) form a $\\mathbf Z$-basis of $R$, and for a monoid ideal $I$ the ideal $IR$ is the $\\mathbf Z$-span of the $e_q$ with $q\\in I$ (this span contains the generators and is stable under multiplication by monomials because $I+P\\subseteq I$); so $KR/JR$ is free over $\\mathbf Z$ on the classes of $e_k$, $k\\in K\\setminus J$. Because $P$ is finitely generated [lem-trf-log-regular-sharp-chart], $R$ is a finite-type $\\mathbf Z$-algebra and hence Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]. A finite generating set of $KR$ consists of $\\mathbf Z$-combinations of monomials from $K$, so finitely many $k_1,\\dots,k_m\\in K$ generate $KR$, and comparing coefficients of $e_k$ for $k\\in K$ gives $K=\\bigcup_i(k_i+P)$. Write $P^+=P\\setminus\\{0\\}$; by sharpness and integrality $P^+$ is a monoid ideal, and $k_j\\in k_i+P$, $k_i\\in k_j+P$ force $k_i=k_j$ (cancel to get $q+q'=0$, so $q=q'=0$). Pick $k_i\\notin J$ (one exists, else $K\\subseteq J$) and, among the finitely many $k_j$ with $k_i\\in k_j+P$, a $p=k_j$ that is minimal for this order. Then $p\\notin J$ (else $k_i\\in J$), and $p\\notin K+P^+$: if $p=k+q$ with $k\\in K$, $q\\ne0$, then $k\\in k_l+P$ for some $l$, so $p\\in k_l+P^+$ with $k_l\\ne p$ by cancellation and sharpness, contradicting minimality. Let $\\varepsilon:R\\to\\mathbf Z$ send $e_0\\mapsto1$ and $e_q\\mapsto0$ for $q\\ne0$; it is a ring map with kernel $\\mathfrak m_PR$ because $P^+$ is an ideal, so $R/\\mathfrak m_PR\\cong\\mathbf Z$. Define $\\varphi:KR/JR\\to\\mathbf Z$ by $\\varphi(e_p)=1$ and $\\varphi(e_k)=0$ for the other $k\\in K\\setminus J$. It is $R$-linear for $\\varepsilon$: for $q\\ne0$ and $k\\in K$, $q+k\\in K+P^+$ is never $p$, so $\\varphi(e_qe_k)=0=\\varepsilon(e_q)\\varphi(e_k)$. It is surjective. Since $\\otimes_RA$ is right exact, it gives a surjection $(KR/JR)\\otimes_R A\\twoheadrightarrow (R/\\mathfrak m_P R)\\otimes_R A\\cong A/\\mathfrak m_P A$. This covers $J=\\varnothing$, where $KR/JR=KR$.",
+   "text": "If $J\\subsetneq K$, apply [lem-trf-sharp-monoid-ideal-minimal-generators] to the finitely generated cancellative sharp monoid $P$ from step 1. It gives a finite monoid-ideal generating set for $K$ and an element $p\\in K\\setminus J$ outside $K+P^+$. Now [lem-trf-monomial-quotient-residue-surjection], applied to this $p$ and $f(e_q)=a(q)$, gives a surjection $(KR/JR)\\otimes_RA\\twoheadrightarrow A/\\mathfrak m_PA$. The monoid ideal $J$ may be empty in both cited statements.",
    "uses": [
-    "lem-trf-log-regular-sharp-chart",
-    "lem-weil-pbc-finite-type-algebra-noetherian"
+    "lem-trf-sharp-monoid-ideal-minimal-generators",
+    "lem-trf-monomial-quotient-residue-surjection"
    ],
    "elementary": false,
    "source": {
@@ -63,7 +65,10 @@
   "def-trf-fs-log-blowup",
   "lem-trf-log-regular-sharp-chart",
   "lem-trf-kato-tor-independence-chart",
-  "lem-weil-pbc-finite-type-algebra-noetherian"
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-trf-sharp-monoid-ideal-minimal-generators",
+  "lem-trf-monomial-quotient-residue-surjection"
  ],
  "proof_origin": {
   "by": "document",
@@ -135,20 +140,25 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-log-regular-monoidal-ideal-contraction",
   "worker": "stage1",
-  "summary": "Specialized Exposé VIII, Lemma 3.4.3 to the strict henselian stalk and wrote the chart proof. The contraction K is a monoid ideal containing J; Kato 6.1(ii) gives Tor-independence so tensor multiplication identifies monomial ideals with their generated ring ideals, and a minimal monomial generator of K outside J (Z[P] Noetherian) yields a quotient by the sharp monoid maximal ideal. Its tensor is A modulo the proper ideal generated by nonunit chart monomials, contradicting equality of generated ideals. The empty ideal is included. Added one statement-only Kato Tor-independence node; no Mathlib match.",
+  "summary": "Repair of the 2026-10-21/22 re-split return: preserve the statement and the complete reviewed argument, distribute the Noetherian finite monoid-generation/minimal-exponent argument and the coefficient-functional/residue-base-change argument to two separate statement-only unsplit nodes. The parent retains the contraction/properness setup, Tor calculation and final contradiction. Explicitly cite the existing Tor exact sequence and tensor right exactness rather than hide them. The complete old proof and the assignment of every argument to a new node are retained in report.md.",
   "blueprint": "Realizes the proof (1)--(2) ancestry of lem-trf-local-term-locality at Exposé VIII, 3.4.3: the monomial-ideal contraction input used by the regularity criterion.",
-  "tool_uses": []
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tor-long-exact-first-variable",
+    "why": "Generic Tor exact-sequence tool on 0 -> IR -> Z[P] -> Z[P]/IR -> 0 needed to turn the same-unit Kato Tor vanishing into tensor injectivity; the trace-formula unit supplies no separate exact-sequence statement."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NY-353097cbe",
-  "group": "NY",
+  "reviewer": "NT-cc-NL-c583956cf",
+  "group": "NL",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-353097cbe (reviewer sub-agent of L); spot-checked: Read the delivery in full against ILO Exposé VIII 3.4.1–3.4.3 (pp. 110–111). The item's statement is right as the stalk form of 3.4.3, checked against the chart definition and the sharp-chart lemma; I tested it on P=0, N, N^2 and the empty J. The new statement-only node lem-trf-kato-tor-independence-chart is the stalk specialization of Kato 6.1(ii) as ILO quotes it (Kato himself is WANTED). It is true on small cases, has no duplicate in the DAG (rg for Kato/Tor/monoid ideal) and is not a restatement of the item. Steps 1, 2 and 4 are correct. Step 3 as delivered was false (E3): it claims the class of a 'minimal' p in K\\J is killed by every nonzero monomial, which fails for J empty, K=P, the case the delivery says it covers, and for P=N^2, J=(x), K=P. It was also marked elementary although it needs Noetherianity. FIX: the corrected item in fixes/ rewrites step 3 as the source's quotient sentence written out. Z[P] is Noetherian (lem-weil-pbc-finite-type-algebra-noetherian, a Mathlib leaf), so K has finitely many monomial generators. Sharpness and integrality give a minimal generator p not in J and not in K+P^+. The functional e_p -> 1 is then an R-linear surjection onto R/m_P R = Z, and right exactness passes it to A/m_P A. proof_deps is now the union of the step uses. No change to the statement or the new node, no tool_uses, unit route intact, no SGA.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-c583956cf (reviewer sub-agent of L); spot-checked: I read the re-split in full against the human re-split note of 2026-10-22, which asks for at least 2 comparable new nodes and a parent proof of at most 3000 characters with nothing shortened. The base proof in clones/live is identical to the report's 'Original step' texts. Steps 1 and 4 are kept verbatim. Step 2 is expanded, not shortened: it now cites the first-variable Tor long exact sequence to turn Kato's Tor_1 vanishing into IR⊗A≅IA, then uses tensor right exactness to get (KR/JR)⊗A=0. The 2011-character step 3 is spread over two statement-only unsplit nodes of comparable size. lem-trf-sharp-monoid-ideal-minimal-generators holds the Noetherian finite generation of the ideal and the choice of p∉J, p∉K+P^+, using the order from cancellation and sharpness. lem-trf-monomial-quotient-residue-surjection holds the monomial basis, ε as a ring map with kernel m (by sharpness), the well-definedness, R-linearity and surjectivity of φ_p, and the base change to A/mA. The parent proof is now a 2089-character assembly. Both new statements are true and self-contained: integrality is defined inline via the group completion of def-trf-fs-log-blowup, and the tensor product cites def-weil-pbc-module-tensor-product. I tested them on P=0, P=N, and P=N² with J=(x), K=P (φ_0 is linear although x does not kill [1], so the earlier E3 annihilation error does not come back), on K=(x,y) with J=(x,y)², and on the monoid generated by 2 and 3. Neither node restates the parent. I searched the DAG with rg -L for monoid ideal, monomial ideal and Z[P]; the candidates lem-weil-pbc-polynomial-ideal-coefficients-monomial, lem-trf-coherent-log-ideal-chart-construction, lem-per-log-regular-chart-monomial-tor and lem-per-monomial-module-tor-devissage are not duplicates. The Mathlib search records contain real outputs. Source: ILO VIII 3.4.3, printed p. 110 (PDF p. 116), whose sentence 'Z[P]/m_P Z[P] is a quotient of JZ[P]/IZ[P]' the new nodes spell out. No SGA is used. I accept the tool_use of lem-weil-pbc-tor-long-exact-first-variable; its orientation is correct. No changes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -173,5 +183,19 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tor-long-exact-first-variable"
+ ]
 }

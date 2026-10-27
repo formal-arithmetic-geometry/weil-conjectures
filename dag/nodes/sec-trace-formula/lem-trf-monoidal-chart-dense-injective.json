@@ -1,0 +1,228 @@
+{
+ "id": "lem-trf-monoidal-chart-dense-injective",
+ "kind": "statement",
+ "title": "Sharp charts with ideal contraction detect a dense trivial locus and injectivity",
+ "statement": "Let $(X,M,\\alpha)$ be a locally Noetherian fs log scheme [def-trf-fs-log-blowup, pqf-def-locnoeth], without assuming log regularity. At every geometric point $\\bar x$ [def-weil-geometric-point], let $A=\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$ [def-weil-pbc-strict-henselization-limit], and suppose that $A$ is a domain. Suppose also that there is an affine pointed etale neighbourhood $W\\to X$ [def-weil-etale-morphism] with a chart $P\\to M|_W$ identifying $P$ with $M_{\\bar x}/A^\\times$, where $P$ is finitely generated, integral and sharp (only $0$ is invertible), written additively. Write $a_W:P\\to\\Gamma(W,\\mathcal O_W)$ for the chart and $a:P\\to A$ for its germ. Assume that for every monoid ideal $J\\subseteq P$ (a subset with $J+P\\subseteq J$, including $\\varnothing$), one has $a^{-1}((a(j):j\\in J)A)=J$. Let $V\\subseteq X$ be the locus of zero characteristic monoid. For any such chart and any finite generating list $p_1,\\ldots,p_r$ of $P$, put $s_W=\\prod_i a_W(p_i)$ and $s=\\prod_i a(p_i)$, allowing $r=0$ and empty product $1$. Then $a(p)\\neq0$ for every $p\\in P$, $s\\neq0$, $V\\times_X W=D(s_W)$, and its pullback to $\\operatorname{Spec}A$ is $D(s)$. The locus $V$ is open dense in $X$. The chart identifies $M_{\\bar x}=P\\oplus A^\\times$, and the structural map $(p,u)\\mapsto u a(p)$ on this stalk is injective. Every section of $M$ restricts to a unit on $V$. Here $D(t)$ denotes the open set of prime ideals not containing $t$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent-extracted chart criterion underlying Expose VI 1.4, printed p. 69, and VIII 3.4.1--3.4.3, printed p. 110; parent split, original steps 3--4. The stated contraction and domain hypotheses replace log regularity."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-etale-morphism",
+  "def-trf-chart-strict-henselization-map",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-finite-chart-triviality-locus] to obtain the open U, its exact triviality-locus equality, the two principal-open formulas for every finite chart list, and restriction of every log section to a unit on U.",
+   "uses": [
+    "lem-trf-finite-chart-triviality-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply contraction to the empty monoid ideal. Its generated ring ideal is zero, so no chart monomial vanishes. In each domain strict henselization, every finite product of chart monomials is nonzero, including the empty product 1. This is the private Lean helper contracting_nonzero and Finset.prod_ne_zero_iff.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent argument for the extracted criterion; compare VI 1.4, printed p. 69, and VIII 3.4.1--3.4.3, printed p. 110."
+   }
+  },
+  {
+   "text": "Suppose $u a(p)=v a(q)$. Then $a(p)\\in(a(q))A$, so contraction for the principal monoid ideal $q+P$ gives $p=q+r$ for some $r\\in P$. Reversing the roles gives $q=p+t$ for $t\\in P$. Cancellation in the integral monoid gives $r+t=0$; sharpness gives $r=t=0$, hence $p=q$. Cancelling the nonzero $a(p)$ in the domain gives $u=v$. This proves injectivity on the stated stalk.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent argument for the extracted criterion; compare VI 1.4, printed p. 69, and VIII 3.4.1--3.4.3, printed p. 110."
+   }
+  },
+  {
+   "text": "The sharp characteristic identification is not needed for the remaining product identification: ideal contraction and sharpness already made the structural product map injective. Apply the log-stalk structural map and the canonical ring comparison to equality of chart-with-unit images, using that unitsIn is the inverse on unit groups, to get equality of their structural products and hence of the pairs. The chart condition gives surjectivity after adjoining units in the geometric stalk ring; transport those units along the canonical ring isomorphism to obtain surjectivity for strict-henselization units. Combine this bijectivity and the structural injection with the nonvanishing, finite-product nonvanishing, density, and the geometric formulas.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-trf-chart-strict-henselization-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each geometric point, choose one of its contracting sharp charts and enumerate a finite generating set by Fin r. The product s is nonzero by empty-ideal contraction and the domain hypothesis. The geometric lemma gives the pullback formula for U. Construct the compatible evaluation homomorphism from the affine pointed-neighbourhood colimit A to the geometric field Omega, by taking the colimit of the prescribed marked evaluations. Its spectrum gives a lift l with l followed by the structural morphism rho equal to the given geometric point, as proved by the colimit coprojection formula. Let q=l(default); it lies above x. In the domain A the zero prime eta generalizes q. Therefore rho(eta) lies in every open neighbourhood of x, by continuity. Since s is nonzero, eta belongs to D(s), hence rho(eta) belongs to U. Choose a geometric point above each x in an arbitrary nonempty open by algebraically closing its residue field. The preceding construction gives a point of that open in U. Thus U is dense. Combine this with the algebra, stalk bijection, and geometric formulas and section restriction to obtain every conclusion.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-trf-finite-chart-triviality-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent argument for the extracted criterion; compare VI 1.4, printed p. 69, and VIII 3.4.1--3.4.3, printed p. 110."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-chart-triviality-locus",
+  "def-trf-fs-log-blowup",
+  "def-trf-chart-strict-henselization-map",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Geometric chart argument underlying Exposé VI 1.4, printed p. 69, and VIII 3.4.1--3.4.3, printed p. 110; parent proof steps 3, 4, and 6.",
+  "note": "E7 Lean reduction: proves the empty/principal-ideal algebra, product-stalk bijection, and density directly; splits off only the geometric chart locus argument. The unit route and the target statement are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sharp monoidal chart with monoidal ideal contraction on domain geometric stalks has dense open trivial characteristic locus and injective structural map.",
+   "results": "{\"t\": \"2026-10-22T05:58:00Z\", \"tool\": \"leanfinder\", \"query\": \"A sharp monoidal chart with monoidal ideal contraction on domain geometric stalks has dense open trivial characteristic locus and injective structural map.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"AlgebraicGeometry.Scheme.IsGermInjectiveAt.cond\", \"AlgebraicGeometry.Scheme.exists_germ_injective\", \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"AlgebraicGeometry.Scheme.IsGermInjective\", \"AlgebraicGeometry.Scheme.exists_le_and_germ_injective\"], \"digest\": \"73a060944127689d\"}; Read hits: germ-injective schemes and ringed-space stalk maps do not concern a log structure, sharp characteristic charts or contraction of monoid ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a fine log structure with sharp cancellative charts and contraction of monoid ideals, the structural map is injective and the zero characteristic locus is open dense if strict local rings are domains.",
+   "results": "{\"t\": \"2026-10-22T05:58:58Z\", \"tool\": \"leansearch\", \"query\": \"For a fine log structure with sharp cancellative charts and contraction of monoid ideals, the structural map is injective and the zero characteristic locus is open dense if strict local rings are domains.\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: germ-injective schemes and ringed-space stalk maps do not concern a log structure, sharp characteristic charts or contraction of monoid ideals.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "trivialityLocus|MonoidalIdeal|monoidal.*contraction|LogStructure",
+   "results": "{\"t\": \"2026-10-22T05:58:58Z\", \"tool\": \"grep\", \"query\": \"trivialityLocus|MonoidalIdeal|monoidal.*contraction|LogStructure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: germ-injective schemes and ringed-space stalk maps do not concern a log structure, sharp characteristic charts or contraction of monoid ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-22T05:58:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: germ-injective schemes and ringed-space stalk maps do not concern a log structure, sharp characteristic charts or contraction of monoid ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated sharp integral chart for a logarithmic structure on a scheme with domain geometric stalks, recovering each monoid ideal by contraction, gives nonzero chart monomials, injective log structure map, and a dense principal open where all generators are units.",
+   "results": "{\"t\": \"2026-10-22T05:59:56Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated sharp integral chart for a logarithmic structure on a scheme with domain geometric stalks, recovering each monoid ideal by contraction, gives nonzero chart monomials, injective log structure map, and a dense principal open where all generators are units.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.Scheme.exists_germ_injective\"], \"digest\": \"b151382eb83869c2\"}; Read hits: germ-injective schemes and ringed-space stalk maps do not concern a log structure, sharp characteristic charts or contraction of monoid ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|MonoidalIdeal|monoid.*ideal.*contraction|trivialityLocus",
+   "results": "{\"t\": \"2026-10-23T09:28:55Z\", \"tool\": \"grep\", \"query\": \"LogStructure|MonoidalIdeal|monoid.*ideal.*contraction|trivialityLocus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: ordinary ring/scheme germ injectivity, units of number fields, DVR powers and polynomial monomials do not state a logarithmic chart criterion under monoid-ideal contraction. No log-structure declarations were found by grep or Loogle.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a fine log scheme with domain strict local rings and contraction of monoid ideals, a sharp chart gives a dense principal open triviality locus and an injective map to the structure sheaf.",
+   "results": "{\"t\": \"2026-10-23T09:28:56Z\", \"tool\": \"leansearch\", \"query\": \"For a fine log scheme with domain strict local rings and contraction of monoid ideals, a sharp chart gives a dense principal open triviality locus and an injective map to the structure sheaf.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap\", \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"AlgebraicGeometry.Scheme.IsGermInjective\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"AlgebraicGeometry.Scheme.toLocallyRingedSpace\"], \"digest\": \"0dc06e6d2298b341\"}; Read returned hits: ordinary ring/scheme germ injectivity, units of number fields, DVR powers and polynomial monomials do not state a logarithmic chart criterion under monoid-ideal contraction. No log-structure declarations were found by grep or Loogle.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-23T09:28:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned hits: ordinary ring/scheme germ injectivity, units of number fields, DVR powers and polynomial monomials do not state a logarithmic chart criterion under monoid-ideal contraction. No log-structure declarations were found by grep or Loogle.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sharp integral logarithmic chart satisfying contraction of all monoid ideals in a domain has injective structural map and dense open triviality locus.",
+   "results": "{\"t\": \"2026-10-23T09:29:06Z\", \"tool\": \"leanfinder\", \"query\": \"A sharp integral logarithmic chart satisfying contraction of all monoid ideals in a domain has injective structural map and dense open triviality locus.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"NumberField.Units.logEmbeddingQuot_injective\", \"injective_of_isLocalization_isMaximal\", \"NumberField.mixedEmbedding.fundamentalCone.injective_expMap\", \"AlgebraicGeometry.injective_isZariskiLocalAtTarget\", \"NumberField.mixedEmbedding.fundamentalCone.injective_expMapBasis\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\"], \"digest\": \"759f01e93b6b208f\"}; Read returned hits: ordinary ring/scheme germ injectivity, units of number fields, DVR powers and polynomial monomials do not state a logarithmic chart criterion under monoid-ideal contraction. No log-structure declarations were found by grep or Loogle.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cancellative sharp additive monoid P mapped to a domain A, if the inverse image of every generated monomial ideal is its monoid ideal, two chart monomials differing by a unit have equal exponents.",
+   "results": "{\"t\": \"2026-10-23T09:29:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a cancellative sharp additive monoid P mapped to a domain A, if the inverse image of every generated monomial ideal is its monoid ideal, two chart monomials differing by a unit have equal exponents.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.unit_mul_pow_congr_pow\", \"MonomialOrder.mk.inj\", \"IsDiscreteValuationRing.unit_mul_pow_congr_unit\", \"MvPolynomial.monomial_left_inj\", \"Polynomial.monomial_one_eq_iff\", \"MvPolynomial.monomial_eq_monomial_iff\", \"MonomialOrder.span_leadingTerm_eq_span_monomial\", \"Polynomial.monomial_left_inj\"], \"digest\": \"d100dbd36bc23a67\"}; Read returned hits: ordinary ring/scheme germ injectivity, units of number fields, DVR powers and polynomial monomials do not state a logarithmic chart criterion under monoid-ideal contraction. No log-structure declarations were found by grep or Loogle.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-regular-divisorial-structure",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), retained nearby-duality alteration ancestry, via the log-blowup normalization argument: Agent-extracted chart criterion underlying Expose VI 1.4, printed p. 69, and VIII 3.4.1--3.4.3, printed p. 110; parent split, original steps 3--4. The stated contraction and domain hypotheses replace log regularity.",
+   "via": [
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoidal-chart-dense-injective",
+  "worker": "stage1",
+  "summary": "Direct proof from empty/principal monoid-ideal contraction, the chart pushout and domain cancellation. Reuse the flat-lfp openness Mathlib leaf; prove density by the zero prime of the strict-local domain. No new nodes and no change of statement. Read ILO VI 1.4 and VIII 3.4.1--3.4.3; the extracted criterion is agent proved.",
+  "blueprint": "Retains the recorded ancestry from lem-trf-local-term-locality proof (1)--(2), via nearby-duality alteration and the log-blowup normalization branch. Realizes parent lem-trf-log-regular-divisorial-structure step 2 (formerly steps 3--4): dense triviality locus, principal chart opens, injectivity, and restriction to units."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-a9084ab23",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-a9084ab23 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes, and its statement and stmt_deps match live, where the item is still unsplit with no repair note. Sources: ILO Exp. VI 1.4 (PDF p.75) and VIII 3.4.1-3.4.3 (PDF p.116). The item is an agent-extracted criterion: contraction for all monoid ideals plus a domain strict henselization replace log regularity. proof_origin=agent is correct, and there is no cycle. Step 1: contraction with J=∅ gives a(p)≠0. The unit face is {0}, by sharpness and the isomorphism P≅M̄, so the chart pushout of def-trf-fs-log-blowup is P×A^×. Step 2: principal contraction, cancellativity and sharpness give p=q, and the domain A gives u=v. A non-sharp counterexample shows sharpness is needed. Step 3: characteristic zero holds iff the generator images are units. A unit in the strict-henselization colimit means nonzero residue; this follows from the cofiltered colimit in the cited limit definition, and I accept it as elementary. The pullback along π_W is D(s). Step 4: étale implies flat and lfp, which is open by the Mathlib leaf lem-weil-pbc-flat-lfp-open (01UA), so V is a union of open images. Step 5: the kernel of A→Ω maps to x, (0) generalizes it, and s≠0, so ρ((0))∈V∩O; this gives density. Step 6: by the log axiom α^{-1}(O^×)≅O^×, units are étale-locally invertible and glue. proof_deps equals the union of step uses. The proof uses only definitions and Mathlib leaves, so no tool_uses are needed and there is no SGA citation. An rg -L search found no duplicate node. Edge cases checked: r=0, P=0, N→k[t] at 0, xy=0 (excluded by the domain hypothesis), non-sharp P=Z. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonoidalChartDenseInjective",
+  "declaration": "AlgebraicGeometry.FineSaturatedLogScheme.monoidalChart_dense_injective",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogStructure.IsContractingSharpChart",
+   "AlgebraicGeometry.EtaleLogStructure.strictHenselizationUnitsIn",
+   "AlgebraicGeometry.FineSaturatedLogScheme.monoidalChart_dense_injective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MonoidalChartDenseInjective.lean",
+  "statement": "theorem FineSaturatedLogScheme.monoidalChart_dense_injective (X : FineSaturatedLogScheme.{u}) (hdom : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), IsDomain (Scheme.strictHenselizationRing t)) (hcharts : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), ∃ (P : Type u) (_ : AddCancelCommMonoid P) (W : X.scheme.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (c : Multiplicative P →* X.logStructure.monoidSheaf.obj.obj (op W)), X.logStructure.IsContractingSharpChart t W w c) : ∃ U : X.scheme.Opens, (U : Set X.scheme) = X.logStructure.trivialityLocus ∧ Dense (U : Set X.scheme) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (P : Type u) [AddCancelCommMonoid P] (W : X.scheme.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (c : Multiplicative P →* X.logStructure.monoidSheaf.obj.obj (op W)), X.logStructure.IsContractingSharpChart t W w c → (∀ p : P, X.logStructure.chartStrictHenselizationMap t W w c (Multiplicative.ofAdd p) ≠ 0) ∧ (∀ (r : ℕ) (p : Fin r → P), AddSubmonoid.closure (Set.range p) = ⊤ → (∏ i : Fin r, X.logStructure.chartStrictHenselizationMap t W w c (Multiplicative.ofAdd (p i))) ≠ 0 ∧ W.hom ⁻¹' (U : Set X.scheme) = (W.left.basicOpen (∏ i : Fin r, X.logStructure.alpha.app (op W) (c (Multiplicative.ofAdd (p i)))) : Set W.left) ∧ Scheme.strictHenselizationStructuralMap t ⁻¹' (U : Set X.scheme) = ((PrimeSpectrum.basicOpen (∏ i : Fin r, X.logStructure.chartStrictHenselizationMap t W w c (Multiplicative.ofAdd (p i)))).carrier : Set (Spec (Scheme.strictHenselizationRing t)))) ∧ Function.Bijective (((X.logStructure.toEtalePrelogStructure.germ t W w).hom.comp c).coprod (X.logStructure.strictHenselizationUnitsIn t)) ∧ Function.Injective (fun z : Multiplicative P × (Scheme.strictHenselizationRing t)ˣ ↦ (z.2 : Scheme.strictHenselizationRing t) * X.logStructure.chartStrictHenselizationMap t W w c z.1)) ∧ ∀ (W : X.scheme.Etale) (m : X.logStructure.monoidSheaf.obj.obj (op W)), IsUnit ((pullback.fst W.hom U.ι).appTop (X.logStructure.alpha.app (op W) m))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7827b36cd",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN at 47219ed7a55c. stmt_deps now cite the landed definition owner def-trf-chart-strict-henselization-map (Q85, existing:true, in the snapshot blueprint index) instead of the theorem lem-trf-log-regular-monoidal-ideal-contraction. All other node fields are identical to side-live, so proof_deps are unchanged. The Lean differs from the returned head only in a module docstring naming the definition owner. I re-checked against FineSaturatedLogBlowup and the chartStrictHenselizationMap/strictLocalRingIsoStrictHenselization definitions: the hypotheses (fs, locally Noetherian, no log regularity, domain A, affine sharp FG cancellative chart with canonical P≅M̄, contraction for all J including ∅) and every conclusion clause (open dense V, a(p)≠0, s≠0, W⁻¹V=D(s_W), ρ⁻¹V=D(s), P⊕A^× bijective, injective u·a(p), sections are units on W×_X V) match the node. Edge cases r=0, J=∅, P=0, empty X and the zero ring are handled; one universe u. Helpers are not hollow, the only proof is sorry, and docstrings carry source and blueprint. Report sections are present. No fix, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261026T081655-L-2038232",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

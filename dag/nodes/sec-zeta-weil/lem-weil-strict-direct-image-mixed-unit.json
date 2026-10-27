@@ -1,0 +1,315 @@
+{
+ "id": "lem-weil-strict-direct-image-mixed-unit",
+ "kind": "statement",
+ "title": "Mixed tensor-unit normalization of the strict integral direct-image scalar comparison",
+ "statement": "Let $k$ be a field, $\\ell$ a prime invertible in $k$, $\\Omega$ an algebraic closure of $\\mathbf Q_\\ell$, and $f:X\\to Y$ a proper morphism of separated finite-type $k$-schemes [def-weil-scheme-morphism-properties, def-weil-proper-morphism]. For every finite subextension $H\\subset\\Omega$ choose its valuation ring $R_H=\\mathcal O_H$, uniformizer $t_H$, and quotients $A_{H,n}=R_H/t_H^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Use small pro-etale sites and completed coefficient sheaves $\\widehat R_{H,W}=\\varprojlim_n(A_{H,n})_W$, for $W=X,Y$ [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients]. Write $\\mathcal C_H(W)=D^b_c(W,R_H)$ for the derived-complete bounded constructible category [def-weil-derived-complete-integral-detailed]. Let $I_H=Rf_{*,H}:\\mathcal C_H(X)\\to\\mathcal C_H(Y)$ be the strict-tower direct image [def-weil-derived-direct-image]. Its reduction comparison $r^H_{n,K}:(I_HK)_n\\xrightarrow{\\sim}Rf_{*,A_{H,n}}K_n$ is the adjunct of the actual total-limit projection, with $K_n=K\\otimes^L_{\\widehat R_{H,X}}(A_{H,n})_X$ [lem-sf-integral-direct-image-constructible, lem-weil-derived-scalar-extension-restriction-adjunction].\n\nFor $E\\subset L$ let $T_W=T^W_{L/E}$ be completed integral scalar extension [def-weil-integral-scalar-extension]. Let $b_*:T_YI_E\\xrightarrow{\\sim}I_LT_X$ be the inverse of the integral comparison in [lem-sf-strict-direct-image-scalar-comparison]: thus it is the ambient completed-ring counit/tensor mate transported through the normalized reconstruction comparisons and the canonical ordinary-to-completed scalar maps. Put $A=A_{E,n}$, $B=A_{L,n}$, $\\phi_n:A\\to B$ for the induced quotient-ring map, and $\\operatorname{Res}_{\\phi_n}$ for exact restriction of scalars. Let\n$$\\eta_{W,n,M}:M_n\\longrightarrow\\operatorname{Res}_{\\phi_n}(T_WM)_n$$\nbe the mixed completed reduction unit [def-weil-mixed-reduction-unit], using $n-1$ for that definition's nonnegative index. Under the canonical coherent identification $(T_WM)_n\\cong M_n\\otimes_A^LB$ of [lem-pur-coefficient-extension-reduction-model], this is the universal scalar-extension unit. Let $\\rho_{*,n}:Rf_{*,A}\\operatorname{Res}_{\\phi_n}\\xrightarrow{\\sim}\\operatorname{Res}_{\\phi_n}Rf_{*,B}$ be the normalized ordinary restriction comparison [lem-weil-proetale-direct-image-restriction-of-scalars].\n\nFor every $K\\in\\mathcal C_E(X)$ the following equality holds as a morphism of $A_Y$-module derived objects:\n$$\\operatorname{Res}_{\\phi_n}\\!\\left(r^L_{n,T_XK}\\circ(b_{*,K})_n\\right)\\circ\\eta_{Y,n,I_EK}\n=\\rho_{*,n,(T_XK)_n}\\circ Rf_{*,A}(\\eta_{X,n,K})\\circ r^E_{n,K}.$$\nEquivalently, $r^L_{n,T_XK}\\circ(b_{*,K})_n$ is the unique $B_Y$-linear lift of the displayed right side through the universal source tensor unit. These normalizations hold simultaneously as an equality of morphisms of coherent derived quotient systems, including their quotient transitions and derived scalar-association comparisons, with the actual reduction/total-limit unit and counit of [lem-coef-derived-system-evaluation-calculus]. They do not assert that an arbitrary family of evaluated equalities detects a derived system morphism. No flatness of $\\phi_n$ or uniform finite Tor-amplitude of $K_n$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56, equation-projection-formula-map (counit-transpose construction); agent-extracted coherent mixed-quotient normalization of the reconstruction-transported comparison in lem-sf-strict-direct-image-scalar-comparison, using the specified system units and counits."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-proper-morphism",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-integral-scalar-extension",
+  "lem-sf-strict-direct-image-scalar-comparison",
+  "def-weil-mixed-reduction-unit",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pc-sheaf-restrict-scalars",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-weil-system-operation-exchange-realization",
+  "def-weil-strict-mixed-unit-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-strict-mixed-system-models] to obtain actual reduction calculi, coherent scalar models, normalized limit and restriction comparisons, all their finite evaluations, strict projections, and invertible reduction maps. These do not yet include the scalar mixed-unit square.",
+   "uses": [
+    "lem-weil-strict-mixed-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the scalar-linear equation of [lem-weil-strict-mixed-scalar-square]. Apply the scalar-adjunction Hom equivalence. Its naturality moves S_Y(r_E) to precomposition by r_E, and its inverse cancels on q. Expand the Hom equivalence as unit followed by restriction of the map. Naturality of the restriction/direct-image comparison then moves the source coefficient isomorphism across direct image. Cancel its invertible restricted direct image. This gives the mixed-unit equation on entire systems. In Lean this is scalar_square_unit, proved by the Hom-equivalence identities, functoriality and cancellation.",
+   "uses": [
+    "lem-weil-strict-mixed-scalar-square"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The map sending z to mixedUnit followed by restriction(z) is exactly the composite of precomposition by the inverse coefficient reduction isomorphism with the scalar-adjunction Hom equivalence. Both factors are equivalences, so the map is bijective; this is the proved helper mixedUnit_bijective. Package these results with the constructed witnesses to obtain CoherentLaws.",
+   "uses": [
+    "def-weil-strict-mixed-unit-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-strict-mixed-finite-evaluation] to the constructed CoherentLaws. Pair its FiniteLaws with CoherentLaws, proving the original conjunction unchanged.",
+   "uses": [
+    "lem-weil-strict-mixed-finite-evaluation"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-strict-mixed-system-models",
+  "lem-weil-strict-mixed-scalar-square",
+  "def-weil-strict-mixed-unit-data",
+  "lem-weil-strict-mixed-finite-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expansion of Steps 1--6 of lem-weil-strict-direct-image-mixed-unit, using the cited Stacks adjunction and projection-formula constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mixed.*[Uu]nit|[Uu]nit.*mixed|[Pp]ushforward.*[Ss]calar|[Ss]calar.*[Pp]ushforward",
+   "results": "0 hits; top results: none.  Read the returned signatures: ordinary module units, rigid dual mates and ordinary adic-completion maps do not state the coherent derived-direct-image mixed-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward scalar extension comparison commutes with the mixed reduction tensor unit and coherent quotient projections",
+   "results": "8 hits; top results: PresheafOfModules.pushforward_obj_map_apply', PresheafOfModules.pushforward_obj_obj, PresheafOfModules.pushforward, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, PresheafOfModules.pullbackPushforwardAdjunction, ModuleCat.ExtendRestrictScalarsAdj.counit_app.  Read the returned signatures: ordinary module units, rigid dual mates and ordinary adic-completion maps do not state the coherent derived-direct-image mixed-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjoint\", \"mate\"",
+   "results": "9 hits; top results: CategoryTheory.rightAdjointMate, CategoryTheory.rightAdjointMate_id, CategoryTheory.comp_rightAdjointMate, CategoryTheory.comp_rightAdjointMate_assoc, CategoryTheory.coevaluation_comp_rightAdjointMate, CategoryTheory.rightAdjointMate_comp_evaluation, CategoryTheory.coevaluation_comp_rightAdjointMate_assoc, CategoryTheory.rightAdjointMate_comp_evaluation_assoc.  Read the returned signatures: ordinary module units, rigid dual mates and ordinary adic-completion maps do not state the coherent derived-direct-image mixed-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed scalar extension comparison for derived direct image is the unique lift of the mixed coefficient tensor unit on coherent quotient reduction systems",
+   "results": "8 hits; top results: Algebra.Extension.tensorCotangentInvFun, Algebra.Extension.tensorCotangent, IsBaseChange.of_lift_unique, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_naturality, Algebra.Generators.CotangentSpace.compEquiv_symm_inr, IsAdicComplete.StrictMono.of_comp_lift.  Read the returned signatures: ordinary module units, rigid dual mates and ordinary adic-completion maps do not state the coherent derived-direct-image mixed-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Pp]ush|[Pp]ush.*derived|[Rr]eduction.*[Uu]nit|[Uu]nit.*[Rr]eduction",
+   "results": "0 hits; top results: none.  Read the returned signatures: ordinary module units, rigid dual mates and ordinary adic-completion maps do not state the coherent derived-direct-image mixed-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical direct image comparison for extension of coefficient rings is normalized by the scalar adjunction unit after derived adic reduction",
+   "results": "8 hits; top results: AdicCompletion.factor_eval_eq_evalₐ, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMapₐ, AdicCompletion.factor_evalₐ_eq_eval, IsAdicComplete.StrictMono.factorPow_comp_extend, AdicCompletion.map_val_apply, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AdicCompletion.factorₐ_evalₐ_one.  Read the returned signatures: ordinary module units, rigid dual mates and ordinary adic-completion maps do not state the coherent derived-direct-image mixed-unit normalization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed coefficient extension of derived direct image commutes with the mixed reduction unit as a coherent quotient system morphism",
+   "results": "8 hits; PreTilt.mk_comp_untilt_eq_coeff_zero, AdicCompletion.transitionMap_comp_reduceModIdeal, IsAdicComplete.mkQ_comp_lift, IsAdicComplete.StrictMono.mkQ_comp_lift, AdicCompletion.map_val_apply, IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.of_comp_lift, IsAdicComplete.StrictMono.of_comp_lift. Read the returned types: ordinary module units/counits, general categorical adjunction formulas and ordinary adic completion do not identify the prescribed strict-tower direct image and its coherent mixed reduction unit.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mixed.*reduction|reduction.*mixed|completed.*pushforward|pushforward.*completed",
+   "results": "2 hits; Mathlib/Algebra/CharP/MixedCharZero.lean, Mathlib/Algebra/CharP/MixedCharZero.lean. Read the returned types: ordinary module units/counits, general categorical adjunction formulas and ordinary adic completion do not identify the prescribed strict-tower direct image and its coherent mixed reduction unit.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image comparison for completed scalar extension preserves the quotient reduction tensor unit",
+   "results": "8 hits; ModuleCat.ExtendRestrictScalarsAdj.unit, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, KaehlerDifferential.tensorKaehlerEquiv, IsAdicComplete.StrictMono.of_comp_lift, Derivation.coe_restrictScalars, Ideal.qoutMapEquivTensorQout, Module.FinitePresentation.isLocalizedModule_mapExtendScalars. Read the returned types: ordinary module units/counits, general categorical adjunction formulas and ordinary adic completion do not identify the prescribed strict-tower direct image and its coherent mixed reduction unit.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"unit\"",
+   "results": "12 hits; CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoLeft_unit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit. Read the returned types: ordinary module units/counits, general categorical adjunction formulas and ordinary adic completion do not identify the prescribed strict-tower direct image and its coherent mixed reduction unit.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar extension pushforward counit mate with quotient ring homomorphisms and derived tensor adjunction units",
+   "results": "8 hits; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.Unit.map. Read the returned types: ordinary module units/counits, general categorical adjunction formulas and ordinary adic completion do not identify the prescribed strict-tower direct image and its coherent mixed reduction unit.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_unit|unit_comp_map|homEquiv.*naturality",
+   "results": "25 hits; Mathlib/CategoryTheory/Adjunction/AdjointFunctorTheorems.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean. Read the returned types: ordinary module units/counits, general categorical adjunction formulas and ordinary adic completion do not identify the prescribed strict-tower direct image and its coherent mixed reduction unit.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-proper-coefficient-descent",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-input-weights",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-proper-compact-coincidence",
+   "place": "Proof, first paragraph: passage from the identity compactification to the ordinary derived direct image; hidden coefficient compatibility when this identification passes to rational and algebraically closed coefficients. Ordinary scalar-map normalization needed in the coefficient-descent subargument.",
+   "via": [
+    "lem-weil-proper-coefficient-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-weil-strict-direct-image-mixed-unit",
+  "worker": "stage1",
+  "summary": "Q95 writes the system-level mate calculation: identify actual reconstruction counits, compare mixed units with scalar units via the completion triangle, paste coefficient/reduction squares before evaluation, and calculate the unit equation and unique lift. No new nodes or statement changes. Existing Mathlib searches retained and six logged searches added.",
+  "blueprint": "prop-weil-proper-compact-coincidence.proof.md, first paragraph: identity compactification and identification with ordinary derived direct image; this split supplies the hidden coefficient normalization in its coefficient-descent subargument. It changes no unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Simultaneous unbounded operations and transposes on varying-ring sequence sites, without flatness or equality detection by evaluations. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Actual derived extension/restriction Hom bijection, units and their representative normalization for arbitrary ring maps. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "K-injective normalization of the finite restriction/direct-image comparison rho. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Comparison of the factorizations of the same coefficient/geometry ringed-topos map. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Specified completed direct-image reconstruction and its entire-tower projection normalization. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Direct-image/limit comparison on strict towers, including projections. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-coef-sequence-pushforward-limit-projections",
+    "why": "Reduction/limit adjunction interpreted as sequence-site pullback/direct image, with actual counits. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Actual reduction/limit adjunction and triangle identities in derived system categories. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Invertibility of actual finite-reduction comparisons on the specified integral constructible inputs. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Formal horizontal and vertical pasting of square mates, also for sequence sites. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-pur-coefficient-extension-reduction-model",
+    "why": "Coherent scalar reduction comparison s with its normalized counit and associations. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Derived tensor association and unit normalization natural in arbitrary composable ring maps. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Canonical ordinary-to-completed scalar isomorphism chi and its explicit quotient augmentation. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-trf-completion-unit-strict-quotient-model",
+    "why": "Identification of the zero-shifted-coordinate augmentation with the actual system adjunction unit. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-trf-iterated-square-mates",
+    "why": "Identifies coefficient and geometric transpositions of the same square, before evaluation. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sf-strict-direct-image-scalar-comparison",
+    "why": "Specifies the strict-tower comparison as transport of the ambient comparison through psi and chi. This is a generic coefficient/adjunction tool; the zeta unit does not supply such a construction."
+   },
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "States that the direct-image comparison of two factorizations of one ringed-topos map, built from the K-injective composition isomorphisms, is the conjugate of the derived pullback comparison; used to identify d and the tower comparison with conjugates before taking iterated mates (reviewer FIX). Generic ringed-topos tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-trf-completion-unit-strict-quotient-model",
+  "lem-trf-iterated-square-mates",
+  "lem-sf-strict-direct-image-scalar-comparison",
+  "lem-sfb-ringed-comparison-tensor-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-91a0a3c4c",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-91a0a3c4c (reviewer sub-agent of L); spot-checked: FIX for one missing citation (C1/C4); the item's math is otherwise correct. I read the item in full (6 steps, no new nodes; statement and stmt_deps the same as on live and side-live, which still list it as unsplit, so it is not superseded), every cited statement, and Stacks sites-cohomology 0B56/07A6/0D6D/0D6E. Fault: steps 1, 2 and 4 take iterated mates of d and of the tower/limit comparison, but both are built from the K-injective κ of lem-weil-pbc-ringed-topoi-derived-pushforward-composition, and no cited node says these are conjugates of the pullback comparison. Step 1 also argued d_n=ρ_{*,n} from K-injective normalizations, which lem-coef-semilinear-derived-sections does not allow for evaluated systems. Fix: steps 1, 2 and 4 now cite lem-sfb-ringed-comparison-tensor-adjunction. It covers any ringed topoi with no exactness assumption and matches Stacks 0D6E, which defines the composition by uniqueness of adjoints. Step 1 now gets d_n from levelwise transposes, step 4 states that α_H is the geometric mate, and the node is added to proof_deps and tool_uses. Other checks: I recomputed step 3 (s∘R(χ)=e by the completion-unit model and the triangle identity; U(s)η=ζR_E on representatives), the step 4 pasting (mate-pasting clauses 1 and 3) and the step 5 cancellation; all are correct. Edge cases: ramified quadratic L/E with n=2 (φ_n not flat; nothing needs flatness), L=E, and K=0. No SGA is cited; no cycle; proof_deps equal the union of step uses; all steps are under 2000 characters. Advisory: prop-weil-pbc-scalar-extension's statement does not pin its direct-image comparison as the counit/tensor mate; that formula is only in its proof step 5.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictDirectImageMixedUnit",
+  "declaration": "WeilConjectures.StrictDirectImageMixedUnit.strictDirectImageMixedUnit",
+  "declarations": [
+   "WeilConjectures.StrictDirectImageMixedUnit.strictDirectImageMixedUnit"
+  ],
+  "file": "lean/Sheaf/Paper/StrictDirectImageMixedUnit.lean",
+  "statement": "theorem strictDirectImageMixedUnit (k : Type u) [Field k] (_hl : IsUnit (l : k)) (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] (D : IntegralComparisons l Ω f) (_hD : HasIntegralLaws l Ω f D) (e j : AlgebraicallyClosedCoefficients.Index l Ω) (h : e ≤ j) : FiniteLaws l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) f (D.integral e) (D.integral j) (D.integralComparison e j h).symm ∧ CoherentLaws l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω e) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω e j h) f (D.integral e) (D.integral j) (D.integralComparison e j h).symm",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite mixed-unit normalization and the same equality on whole ringed quotient systems. Helpers specify actual reduction/limit and restriction normalizations; all their data are conclusions, not additional hypotheses. Uses the intrinsic ringed-module restriction comparison already listed in the dependency lean.declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96b50e4f6",
+  "group": "NO",
+  "result": "pass",
+  "note": "Statement verbatim and node matches clause by clause. Hypotheses: field, l invertible, Ω alg closure, separated finite-type X,Y, proper f; nothing extra. b = (D.integralComparison e j h).symm : I_E⋙T_Y ≅ T_X⋙I_L (direction checked); (D, HasIntegralLaws) is universal over the comparison data, which IsIntegralNormalization pins. r = R(ψ⁻¹)≫adjunct(F(unit)≫sfDerivedRestrictionComparison) (node Step 2); the projection clause is ∃ SfIntegralDirectImage R, ∃ q, acceptable because a Roos limit is non-canonical. ρ = proEtaleDerivedDirectImage_restrictScalars.choose, pinned by its K-injective equation and in the dep's declarations, direction Rf_*A∘Res ≅ Res∘Rf_*B. η is sfMixedCompletedReductionUnit with index n = exponent n+1. Displayed equation and unique-lift bijection over all Z are correct. CoherentLaws: LimitComparison and RestrictionComparison pinned by derived-unit normalizations; evaluation clauses tie them to the finite η/r/ρ; system r iso; d.inv direction correct; ∃ witnesses consistent with the ∃/Nonempty dependencies; no flatness, Tor-amplitude or equality-detection assumption. Added stmt_deps are 2 landed def nodes on base; proof_deps unchanged. No hollow defs, one sorry, docstrings OK, lines ≤100, imports OK. Edge cases n=0, e=j, K=0, ramified L/E, universes OK. Advisory: ordinaryLimit duplicates pullbackTensorOrdinaryLimit/ordinarySystemLimit; the rho dep's recorded module is not imported directly (the declaration's own module is). No files changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-017f5",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261025T202159-L-2688115",
+  "kind": "interface",
+  "note": "independent cc review: old StrictDirectImageMixedUnit defs vs StrictDirectImageMixedUnitData (verbatim); item theorem signature vs base; three split statements vs their nodes and the old CoherentLaws/FiniteLaws; item node proof/proof_deps vs Lean assembly"
+ }
+}

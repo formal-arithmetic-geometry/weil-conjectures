@@ -1,0 +1,157 @@
+{
+ "id": "lem-sfb-adic-residue-cech-quotient-cone",
+ "kind": "statement",
+ "title": "Comparison of Cech completion with the constructed quotient Roos cone",
+ "statement": "Let X be a scheme, A a commutative Noetherian ring, J an ideal and U a coefficient-sized pro-etale object. Write R for the completed coefficient ring on the slice and q_0 for its residue projection [def-sfb-adic-residue-lift-comparisons]. Let K -> R[0] be any augmented complex with the local extended Cech description for ker(q_0) [def-weil-pbc-local-extended-cech-description], and M any object of D(R). Then RHom(K,M) is the point of a homotopy-limit cone over the specific adjoint quotient tower of [lem-sfb-adic-residue-adjoint-tower]. Its n-th leg composed after the actual Cech completion unit equals the normalized scalar unit adj_n.unit(M). No completeness, boundedness, perfectness, or constructibility hypothesis on M is made.",
+ "stmt_deps": [
+  "def-sfb-adic-residue-lift-comparisons",
+  "lem-sfb-adic-residue-adjoint-tower",
+  "def-weil-pbc-local-extended-cech-description",
+  "def-weil-pbc-ringed-completion-unit",
+  "def-weil-derived-limit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, proof of lemma-naive-completion; Algebraization Tag 0A0E, lemma-derived-completion-koszul; Cohomology on Sites Tags 0940 and 0941."
+ },
+ "proof": [
+  {
+   "text": "The kernel inclusion is monic and its module is finite type. Apply the Cech reflector properties to the given augmented K. For each finite quotient object, restrict a complex representative and use the complete-elements ideal: the sectionwise residue kernel is spanned by images of J, whose (n+1)-st powers vanish in the nth quotient. The scalar-restriction section-completeness criterion and the nilpotent localization argument prove completeness of every quotient term.",
+   "uses": [
+    "lem-sfb-adic-residue-completion-model",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-extended-cech-reflector-properties",
+    "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+    "lem-weil-pbc-restriction-section-completeness",
+    "lem-weil-pbc-local-completeness-models",
+    "lem-sf-completion-finite-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A reflector complete locus is closed under existing products: uniquely factor each projection through its unit, assemble a retraction, and use injectivity of the mapping bijection for the other inverse identity. Exact derived restriction followed by internal Hom from each local section localization carries the Roos triangle to a distinguished triangle with zero second and third objects. Thus every Roos cone point of the quotient tower is complete.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-reflector-properties",
+    "lem-route-ringed-internal-hom-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Countable products in the derived category exist by the proved source-library instance DerivedCategory.hasLimitsOfShape_discrete (WeilConjectures.Algebra.Homology.HomotopyCategory.Products), specialized in one line using the Grothendieck property of module sheaves. Complete one minus the tower shift to obtain a Roos cone c. Its Milnor Hom map is surjective by coyoneda exactness and the product universal property. Apply it to the already compatible scalar units to obtain a:M -> c.pt with the required legs. The mapping-property theorem for this normalized unit supplies universality into every complete object.",
+   "uses": [
+    "lem-sfb-adic-residue-adjoint-tower",
+    "lem-sfb-adic-residue-quotient-unit-universal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the Cech mapping bijection to factor a through the Cech unit, obtaining f:Cech(M) -> c.pt. Use the quotient-unit mapping bijection to factor the Cech unit in the reverse direction, obtaining g. Completeness proved above makes both applications valid; injectivity gives fg=id and gf=id. Transport c along this explicit isomorphism. Associativity, the factorization equation and the normalized-unit leg equations give the stated equation for every n.",
+   "uses": [
+    "lem-weil-pbc-extended-cech-reflector-properties",
+    "lem-sfb-adic-residue-quotient-unit-universal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-route-ringed-internal-hom-exact",
+  "lem-sf-completion-finite-reduction",
+  "lem-sfb-adic-residue-adjoint-tower",
+  "lem-sfb-adic-residue-completion-model",
+  "lem-sfb-adic-residue-quotient-unit-universal",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-extended-cech-reflector-properties",
+  "lem-weil-pbc-local-completeness-models",
+  "lem-weil-pbc-restriction-section-completeness",
+  "lem-weil-pbc-ringed-derived-complete-elements-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M and algebraization.tex Tag 099F; E7 proves finite-term and Roos-limit completeness, lifts the scalar units by Milnor exactness, and compares the two universal arrows."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex is the homotopy limit of its reductions modulo powers of an ideal",
+   "results": "8 hits: BDeRhamPlus, AdicCompletion, AdicCompletion.pi_apply_coe, IsAdicComplete, Hausdorffification, AdicCompletion.of_apply, IsAdicComplete.toIsPrecomplete, IsAdicComplete.henselianRing",
+   "date": "2026-10-26",
+   "verdict": "No derived ringed-site quotient cone or normalized scalar transpose theorem. The adjunction API is used in the proved tower construction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsHomotopyLimit|completionUnit",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No derived ringed-site quotient cone or normalized scalar transpose theorem. The adjunction API is used in the proved tower construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "12 hits: CategoryTheory.Adjunction.CoreHomEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit, CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.homEquiv', CategoryTheory.Adjunction.CoreHomEquiv.homEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.homEquiv, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit",
+   "date": "2026-10-26",
+   "verdict": "No derived ringed-site quotient cone or normalized scalar transpose theorem. The adjunction API is used in the proved tower construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quotient tower homotopy limit computes derived completion with the canonical scalar extension units",
+   "results": "8 hits: IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.module, AdicCompletion.mkₐ, AdicCompletion.instSMul.congr_simp, AdicCompletion.instModuleOfIsScalarTower.congr_simp, AdicCompletion.instIsScalarTower, AdicCompletion, AdicCompletion.val_smul",
+   "date": "2026-10-26",
+   "verdict": "No derived ringed-site quotient cone or normalized scalar transpose theorem. The adjunction API is used in the proved tower construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompleteReductionCone",
+  "date": "2026-10-26",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Local perfect lifting, normalized quotient-cone step serving the complete-object inverse-limit morphism in Stacks Tag 09C6. Tag 099M, proof of lemma-naive-completion; Algebraization Tag 0A0E, lemma-derived-completion-koszul; Cohomology on Sites Tags 0940 and 0941.",
+   "via": [
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueCechQuotientCone",
+  "file": "lean/Sheaf/Paper/AdicResidueCechQuotientCone.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicResidue_cech_quotient_cone",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicResidue_cech_quotient_cone"
+  ],
+  "statement": "theorem adicResidue_cech_quotient_cone\n    (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]\n    (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)\n    (M : AdicResidueLocalDerived.{u, v} X J U)\n    (K : ringedSiteComplex\n      ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))\n    (ε : K ⟶ ringedSiteRingComplex\n      ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))\n    (hK : HasLocalExtendedCechDescription\n      ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U)\n      (kernelIdeal (adicResidueLocalProjection.{u, v} X J U 0)).module\n      (kernelIdeal (adicResidueLocalProjection.{u, v} X J U 0)).inclusion K ε) :\n    ∃ π : (Functor.const ℕᵒᵖ).obj\n        ((ringedCechCompletionFunctor\n          ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U) K).obj M) ⟶\n        adicResidueAdjointTower.{u, v} X J U M,\n      Pretriangulated.IsHomotopyLimit ⟨_, π⟩ ∧\n      ∀ n : ℕ, ringedCechCompletionUnit\n          ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U) K ε M ≫\n          π.app (op n) = (adicResidueScalarAdjunction.{u, v} X J U n).unit.app M",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T201559-L-2582137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261026T001345-L-4186450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

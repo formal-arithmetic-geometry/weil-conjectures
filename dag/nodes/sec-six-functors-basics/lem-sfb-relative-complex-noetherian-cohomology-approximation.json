@@ -1,0 +1,346 @@
+{
+ "id": "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+ "kind": "statement",
+ "title": "Finite-degree Noetherian cohomological approximation of a relative complex",
+ "statement": "Let $A$ be a commutative ring, let $f:X\\to\\operatorname{Spec}A$ be a separated finite type morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], and let $E\\in D(\\mathcal O_X)$ be pseudo-coherent relative to $\\operatorname{Spec}A$ [def-pc-derived-category, def-sfb-relative-pseudo-coherent-complex]. Then $E$ has quasi-coherent cohomology and $H^i(E)=0$ for all sufficiently large $i$. For each integer $n$, there exist a commutative Noetherian ring $A_0$ [def-weil-pbc-noetherian-ring], a ring map $A_0\\to A$, a separated finite type morphism $f_0:X_0\\to\\operatorname{Spec}A_0$, a morphism $u:X\\to X_0$ over $\\operatorname{Spec}A_0$, a closed immersion $j:X\\hookrightarrow X_0\\times_{\\operatorname{Spec}A_0}\\operatorname{Spec}A$ [def-weil-closed-immersion, def-pc-fibre-product] whose composite with the projection to $X_0$ is $u$, and $E_0\\in D(\\mathcal O_{X_0})$ with bounded coherent cohomology [pqf-def-coherent], together with a morphism $\\gamma:E_0\\to Ru_*E$ [def-pc-derived-direct-image], such that the adjoint of the induced map on derived global sections is a morphism\n$$\\alpha:A\\otimes^{\\mathbf L}_{A_0}R\\Gamma(X_0,E_0)\\longrightarrow R\\Gamma(X,E)$$\nin $D(A)$ [def-weil-abstract-derived-category], inducing an isomorphism on $H^i$ for $i>n$ and a surjection on $H^n$. Derived tensor means tensoring a K-flat resolution [def-pc-module-kflat-complex]; $R\\Gamma$ means derived global sections of the structure-module sheaves. If $f$ is proper [def-weil-proper-morphism], the data can be chosen with $f_0$ proper. Neither $X$ nor $E$ is required to be the ordinary base change of $X_0$ or $E_0$, and the data may depend on $n$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent-formulated finite-degree descente input for the unnumbered general assertion following Tag 0CSD, lemma-flat-proper-pseudo-coherent-direct-image-general; the assertion cites Kiehl, Ein Descente-Lemma und Grothendiecks Projektionssatz fuer nichtnoethersche Schemata (1972). The Stacks paragraph does not state or prove this approximation lemma; primary source WANTED, as recorded in report.md. The quasi-coherence and upper bound are also in more-morphisms.tex, Tag 09UI, definition-relative-pseudo-coherence, following paragraph, and Tag 0CSU, lemma-relative-pseudo-coherence."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-derived-category",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-coherent",
+  "def-pc-derived-direct-image",
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For each integer i use relative (i-1)-pseudo-coherence and the high-cohomology lemma to obtain quasi-coherence of H^i(E). The source X is qcqs, since f is separated finite type over an affine. For upper boundedness use relative 0-pseudo-coherence: on its affine charts U embedded as closed subschemes of affine spaces over base charts, Ri_*(E|U) admits locally a bounded finite free complex mapping to it isomorphically in degrees >0. Such a complex is zero in sufficiently high degrees. The affine ambient chart is quasi-compact, so finitely many such neighborhoods give a bound there. The closed immersion is affine; now that E|U is in D_QCoh, t-exactness and conservativity of affine derived pushforward transfer this bound to E|U. Quasi-compactness of X gives a finite chart subcover and hence a single upper bound on E. The empty source has E=0.",
+   "uses": [
+    "lem-sfb-relative-m-pseudocoherent-high-qcoh",
+    "def-sfb-relative-pseudo-coherent-complex",
+    "def-sfb-m-pseudo-coherent-complex",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-sc-affine-derived-pushforward-t-exact",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly proof; see the cited node statements and the Kiehl-descente paragraph following Tag 0CSD"
+   }
+  },
+  {
+   "text": "The base Spec A is qcqs. Take the constructed finite-presentation envelope Env_fp(X/Spec A); its properties give a closed immersion X into a separated finitely presented Spec A-scheme V. If f is proper, instead use the proper finite-presentation envelope, so that V is proper and finitely presented over Spec A. Keep this chosen closed immersion throughout the construction. In particular this does not assert X=V.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-nagata-finite-type-closed-in-fp",
+    "prop-nagata-finite-type-closed-in-fp",
+    "lem-weil-pbc-proper-closed-in-proper-fp-envelope-part"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly proof; see the cited node statements and the Kiehl-descente paragraph following Tag 0CSD"
+   }
+  },
+  {
+   "text": "Express Spec A as the inverse limit of spectra of finitely generated Z-subalgebras. Finite-presentation spreading out descends V to a finitely presented Y over one such ring B. These finite type Z-schemes are Noetherian, hence qcqs; the separatedness-descent lemma applies and permits increasing the stage so Y/B is separated. Equivalently V=Y_A, so the chosen immersion becomes j:X into Y_A. In the proper case use proper Noetherian-stage descent for the proper finitely presented V to choose Y/B proper, still with V=Y_A. B is Noetherian and Y is Noetherian and qcqs. No descent of X or E is being asserted at this step.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-separated",
+    "lem-weil-pbc-proper-noetherian-stage",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly proof; see the cited node statements and the Kiehl-descente paragraph following Tag 0CSD"
+   }
+  },
+  {
+   "text": "Choose once and for all N>=1 such that, for every affine h:W to this fixed qcqs Y and every quasi-coherent G on W, H^p(W,G)=0 for p>=N. Fix the requested integer n and put a=n-N+1. Apply prescribed-envelope sheaf descente to B, Y, j, E and a. Its hypotheses hold by steps 1 and 3. Obtain B', Z, F, gamma, theta and C with H^i(C)=0 for i>=a. The map Z to Y is affine: over an affine Spec R in Y, its inverse image is a closed subscheme of Spec(R tensor_B B'), hence is affine by the closed-immersion definition and the affine fibre-product calculation. Thus the SAME N bounds cohomology of every quasi-coherent module on Z, independently of the new coefficient algebra B'. This order of choices avoids a circular cohomology-bound argument.",
+   "uses": [
+    "lem-pc-j2-uniform-affine-pullback-cohomology-bound",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly proof; see the cited node statements and the Kiehl-descente paragraph following Tag 0CSD"
+   }
+  },
+  {
+   "text": "On Mod(O_Z), Gamma(Z,-) commutes with countable products, since limits of module sheaves and their sections are formed sectionwise. Apply the unbounded derived-functor bound with F=Gamma, the N of step 4, and b=a-1=n-N to C. The sheaf-descente conclusion gives C in D_QCoh and H^i(C)=0 for i>b. Therefore H^i(RGamma(Z,C))=0 for i>b+N-1=n-1, in particular for every i>=n. Derived global sections take the cone triangle T -> Ru_*E -> C -> T[1] to a distinguished triangle. In its long exact sequence the two adjacent cone groups vanish for i>n, so RGamma(theta) is an isomorphism there; H^n(RGamma C)=0 gives surjectivity in degree n. This argument allows C to be unbounded below.",
+   "uses": [
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly proof; see the cited node statements and the Kiehl-descente paragraph following Tag 0CSD"
+   }
+  },
+  {
+   "text": "Use the canonical projection mate for q:Z -> Spec B', with M=tilde A and L=F. Both schemes and q are qcqs (Z is closed in the finite type B'-scheme Y_B', and B' is Noetherian). M and F have quasi-coherent cohomology. Since q is qcqs, Rq_*F has quasi-coherent cohomology by qcqs direct-image quasi-coherence; the K-injective global-section/direct-image acyclicity lemma, applied to q and a K-injective resolution of F, gives RGamma(Spec B',Rq_*F)=RGamma(Z,F) and likewise RGamma(Spec B',Rq_*T)=RGamma(Z,T). By the affine derived equivalence, Rq_*F is the associated-sheaf complex of N=RGamma(Z,F) and M is that of A. Choose a K-flat resolution P of A over B'; the affine derived tensor chart comparison gives M tensor^L (N)~ = (Tot(P tensor_B' N))~, and the affine equivalence takes its RGamma to A tensor^L_B' N. Consequently this mate identifies RGamma(Z,T) with A tensor^L_B' RGamma(Z,F). The K-injective global-section/direct-image acyclicity comparison identifies RGamma(Z,Ru_*E) with RGamma(X,E), without requiring u flat. Under these identifications RGamma(theta) is the scalar-extension adjoint of RGamma(gamma): indeed the projection mate is by definition the transpose of pullback tensor the counit; theta was defined using that same counit and the A-action. Composing with the scalar-extension unit x -> 1 tensor x gives RGamma(gamma), because 1 acts as the identity. Uniqueness of the adjoint proves the identification of the actual map alpha. All scalar tensors are derived (K-flat), not ordinary tensors. Forgetting from A-modules to B'-modules is exact and detects bijectivity and surjectivity, so the degree conclusions of step 5 apply in D(A).",
+   "uses": [
+    "lem-pc-qcqs-derived-projection-mate",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-global-sections-direct-image-kinjective-acyclic",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-module-kflat-complex",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-affine-derived-tensor-chart-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly proof; see the cited node statements and the Kiehl-descente paragraph following Tag 0CSD"
+   }
+  },
+  {
+   "text": "Set A_0=B', X_0=Z, E_0=F, f_0=q, and use j' and u supplied by sheaf descente. The morphism Y_B' -> Spec B' is separated finite type by base change. The closed immersion k:Z -> Y_B' is finite, so its composite q is separated finite type. The same local-lemma conclusion supplies j', its required projection u, bounded coherent cohomology of E_0, and gamma. In the proper case Y/B was chosen proper in step 3; proper base change makes Y_B'/B' proper, and the closed-immersion properness lemma makes q proper. Step 6 supplies precisely the required alpha. The choices were made for the fixed n; none forces ordinary base change of X or E or flatness of A over A_0.",
+   "uses": [
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-over-separated-finite-type",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Agent assembly proof; see the cited node statements and the Kiehl-descente paragraph following Tag 0CSD"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-relative-m-pseudocoherent-high-qcoh",
+  "def-sfb-relative-pseudo-coherent-complex",
+  "def-sfb-m-pseudo-coherent-complex",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sc-affine-derived-pushforward-t-exact",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-nagata-finite-type-closed-in-fp",
+  "prop-nagata-finite-type-closed-in-fp",
+  "lem-weil-pbc-proper-closed-in-proper-fp-envelope-part",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-descend-separated",
+  "lem-weil-pbc-proper-noetherian-stage",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-j2-uniform-affine-pullback-cohomology-bound",
+  "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-qcqs-derived-projection-mate",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-global-sections-direct-image-kinjective-acyclic",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "def-pc-module-kflat-complex",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-derived-tensor-chart-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Agent argument reducing finite-degree global cohomological approximation to prescribed-envelope sheaf descente, with Stacks Tags 01ZJ, 09ZR, 01ZM, 01ZQ, 0A0P, 01XJ and 08D4.",
+  "note": "O2 stage-1 split. The new local descente theorem is unsplit and primary source WANTED; this is not a claim of a Lean proof or a proof found in the Stacks Kiehl paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Kiehl descente lemma closed embedding into base extension of a Noetherian scheme and approximation of complex cohomology by derived scalar extension",
+   "results": "Hits read: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative pseudo coherent complexes on separated finite type schemes admit finite degree approximation by derived scalar extensions of coherent cohomology from Noetherian schemes",
+   "results": "Hits read: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian approximation of relative pseudo coherent complexes on a separated finite type scheme in finitely many cohomological degrees",
+   "results": "Hits read: SheafOfModules.QuasicoherentData.IsFinitePresentation, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.IsNoetherian.recOn, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.IsArtinianScheme.isNoetherianScheme, AlgebraicGeometry.IsLocallyNoetherian.recOn, AlgebraicGeometry.IsNoetherian.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "Hits read: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "grep",
+   "query": "Kiehl|pseudo.?coher|cohomolog.*[Aa]pproxim",
+   "results": "Hits read: ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free approximations to derived global sections of complexes relative pseudo coherent on proper schemes",
+   "results": "Hits read: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned statements concern finite presentation, affine transition limits, and morphism properties; none supplies derived cohomological approximation of a relatively pseudo-coherent complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian finite degree approximation of a relatively pseudo coherent derived complex on a separated finite type scheme",
+   "date": "2026-10-24",
+   "results": "Hits read: AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsNoetherian.noetherianSpace",
+   "verdict": "no match: no returned declaration gives this relative derived-complex assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "date": "2026-10-24",
+   "results": "Hits read: ",
+   "verdict": "no match: no returned declaration gives this relative derived-complex assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|Kiehl|descente|cohomolog.*approxim",
+   "date": "2026-10-24",
+   "results": "Hits read: ",
+   "verdict": "no match: no returned declaration gives this relative derived-complex assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free polynomial resolutions and Noetherian descent of relatively pseudo coherent complexes preserving derived cohomology in a finite degree range",
+   "date": "2026-10-24",
+   "results": "service unavailable: ",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively pseudo coherent complex on a separated finite type scheme admits Noetherian bounded coherent approximations to its derived global sections",
+   "date": "2026-10-24",
+   "results": "Hits read: AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover",
+   "verdict": "no match: no returned declaration gives this relative derived-complex assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+  "date": "2026-10-24",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion.",
+   "via": [
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+  "worker": "stage1",
+  "summary": "I split the global finite-degree approximation into the high-cohomology consequence of relative pseudo-coherence and a separate sheaf-level descente lemma on a prescribed Noetherian envelope. The seven assembly steps retain envelope construction, coefficient spreading, the uniform affine cohomology bound, cone-to-global-sections truncation, projection-mate identification of the scalar-adjoint map, and the proper case. All new non-elementary dependencies are cited with verbatim statements in citations.json.",
+  "blueprint": "the direct-image approximation route in the inherited from.place: Kiehl finiteness input after Tag 0CSD, with finite-degree Noetherian descente before global sections.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-j2-uniform-affine-pullback-cohomology-bound",
+    "why": "uniform affine-pullback cohomology vanishing is a generic cohomological tool used to pass from sheaf cone truncation to global sections."
+   },
+   {
+    "node": "lem-pc-qcqs-derived-projection-mate",
+    "why": "the canonical projection-formula mate identifies the actual derived scalar-extension map."
+   },
+   {
+    "node": "lem-pc-global-sections-direct-image-kinjective-acyclic",
+    "why": "generic derived direct-image/global-sections acyclicity identifies sections of Ru_*E with sections on X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-j2-uniform-affine-pullback-cohomology-bound",
+  "lem-pc-qcqs-derived-projection-mate",
+  "lem-pc-global-sections-direct-image-kinjective-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O2-92a7f883d",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-92a7f883d (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the citer lem-sfb-kiehl-relative-pseudocoherent-direct-image (its step 2 uses exactly the item's data). Sources checked: Stacks 0CSU (more-morphisms.tex l.16704), 09UI, 0CSD with the Kiehl paragraph after it, and 08DX(2) (perfect.tex l.403). Steps 1-5 and 7 are correct. Step 1: the 0CSU node with m=i-1 gives quasi-coherence; strictly perfect approximations give the upper bound, carried to E by affine t-exactness, with a finite subcover since X is qcqs. Steps 2-3: the 09ZR envelope (proper version in the proper case), the affine Noetherian approximation, spreading out 01ZM, separatedness descent 01ZQ and the 0A0P proper stage all have their hypotheses met. Step 4: N is chosen on the fixed Y before B'; Z->Y is affine. Step 5: the 08D4 bound with b=a-1, a=n-N+1, gives vanishing for i>n-1, hence an isomorphism above n and a surjection at n. Step 7: base change, finiteness and properness of closed immersions. FIX (C1), step 6: it went from the projection mate to RGamma(Z,T)=A tensor^L_B' RGamma(Z,F) by 'consequently', without citing that Rq_* preserves quasi-coherence, the K-injective acyclicity lemma applied to q, or the tilde/derived-tensor compatibility 08DX(2). The repaired item in fixes/ names all three and adds lem-pc-derived-direct-image-preserves-qcoh and lem-pc-affine-derived-tensor-chart-comparison to uses and proof_deps; no statement changed. New nodes: high-qcoh is exactly 0CSU's first assertion and duplicates no node (rg -L for 0CSU and the label). The prescribed-envelope sheaf-descente node does not restate the item: it fixes the Noetherian Y, works at sheaf level and has no global sections, no cohomological-dimension bound and no envelope; it is plausible via the almost-perfect approximation along A=colim B' over Y x^L_B A, with a WANTED Kiehl source, and E=0, empty X, a non-flat A and large a give no counterexample. Batch-5: proper-closed-in-proper-fp-envelope-part (09ZR) and proper-noetherian-stage (0A0P) are generic limit/Nagata lemmas that reach sec-trace-formula only through the definition def-trf-schematically-dense-open; neither is a step of the trace formula or Poincare duality proofs, so both are accepted. The three declared tool uses are accepted as generic. No SGA citation. Advisory: both new nodes lack lean_audit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeComplexNoetherianCohomologyApproximation",
+  "declaration": "AlgebraicGeometry.exists_relative_complex_noetherian_cohomology_approximation",
+  "declarations": [
+   "AlgebraicGeometry.exists_relative_complex_noetherian_cohomology_approximation",
+   "AlgebraicGeometry.relativeApproximationScalarAdjoint"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeComplexNoetherianCohomologyApproximation.lean",
+  "statement": "theorem exists_relative_complex_noetherian_cohomology_approximation {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (E : schemeDerivedCategory X) (hE : X.IsPseudoCoherentRelativeTo f E) : schemeDerivedQCohProperty X E ∧ (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) i).obj E)) ∧ ∀ n : ℤ, ∃ A₀ : CommRingCat.{u}, IsNoetherianRing A₀ ∧ ∃ (g : Spec A ⟶ Spec A₀) (X₀ : Scheme.{u}) (f₀ : X₀ ⟶ Spec A₀), IsSeparated f₀ ∧ LocallyOfFiniteType f₀ ∧ QuasiCompact f₀ ∧ ∃ (u₀ : X ⟶ X₀) (j : X ⟶ pullback f₀ g), IsClosedImmersion j ∧ j ≫ pullback.fst f₀ g = u₀ ∧ j ≫ pullback.snd f₀ g = f ∧ (IsProper f → IsProper f₀) ∧ ∃ E₀ : schemeDerivedCategory X₀, (∀ i : ℤ, RingedSpace.IsCoherent X₀.toRingedSpace ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X₀.toRingedSpace)) i).obj E₀)) ∧ (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X₀.toRingedSpace)) i).obj E₀)) ∧ ∃ γ : E₀ ⟶ (schemeDerivedDirectImage u₀).obj E, ∃ c₀ : RingedSpace.moduleDirectImage u₀.toLRSHom.toShHom ⋙ affineGlobalSections f₀ ≅ affineGlobalSections f ⋙ ModuleCat.restrictScalars.{u} (affineBaseRingMap g), ∃ c : schemeDerivedDirectImage u₀ ⋙ affineDerivedGlobalSections f₀ ≅ affineDerivedGlobalSections f ⋙ (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory, (∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (x : (affineGlobalSections f₀).obj ((RingedSpace.moduleDirectImage u₀.toLRSHom.toShHom).obj M)), (c₀.hom.app M) x = x) ∧ (∀ J : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ), (Functor.rightDerivedFunctorCompUnit (RingedSpace.moduleDirectImage u₀.toLRSHom.toShHom) (affineGlobalSections f₀)).app J ≫ (affineGlobalSectionsDerivedIso f₀).hom.app ((schemeDerivedDirectImage u₀).obj (DerivedCategory.Qh.obj J)) ≫ c.hom.app (DerivedCategory.Qh.obj J) = DerivedCategory.Qh.map ((c₀.hom.mapHomotopyCategory (ComplexShape.up ℤ)).app J) ≫ (affineGlobalSections f ⋙ ModuleCat.restrictScalars.{u} (affineBaseRingMap g) ).rightDerivedFunctorUnit.app J ≫ (Functor.rightDerivedFunctorCompMapDerivedCategoryIso (affineGlobalSections f) (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)) ≪≫ Functor.isoWhiskerRight (affineGlobalSectionsDerivedIso f) (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory).hom.app (DerivedCategory.Qh.obj J)) ∧ (∀ i : ℤ, n < i → IsIso ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).map (relativeApproximationScalarAdjoint f f₀ g u₀ E E₀ γ c))) ∧ Epi ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) n).map (relativeApproximationScalarAdjoint f f₀ g u₀ E E₀ γ c))",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9654a3888",
+  "group": "NS",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: separated finite type f, IsPseudoCoherentRelativeTo E, qcoh cohomology and upper bound, per-n Noetherian A0 via g:Spec A->Spec A0, closed immersion j with fst=u0 and snd=f, bounded coherent E0, gamma, alpha = homEquiv.symm of RGamma(gamma)>>c under the canonical K-flat affineDerivedExtensionAdjunction, IsIso for i>n and Epi at n, IsProper f -> IsProper f0. c0 is pinned by the elementwise identity; c is pinned by the derived-unit equation (same form as exists_affineSectionsCompositionComparisons) and is unique because Ru_* then RGamma is right-derived. Edge cases (empty X, E=0, any n, E unbounded below, non-flat A0->A, non-proper f) are fine. Only the item's lean field changed; the statement is verbatim; there are no new or dependency nodes and no duplicates (rg). Imports match the proof_deps' modules. Docstrings carry the source, blueprint id and 7 proof steps; proof is sorry; the def is real. Advisory: the owner of the affine section/extension helpers, def-pc-affine-global-hom-base-change-map, is not in stmt_deps (an S2 fix cannot add it; maintainer may add it). No compile needed (no change)."
+ }
+}

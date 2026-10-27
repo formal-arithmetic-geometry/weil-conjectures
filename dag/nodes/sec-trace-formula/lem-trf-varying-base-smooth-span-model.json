@@ -1,0 +1,338 @@
+{
+ "id": "lem-trf-varying-base-smooth-span-model",
+ "kind": "statement",
+ "title": "A completed-base etale span and varying base map admit a smooth pointed model",
+ "statement": "Let $S=\\operatorname{Spec}R$ and $T=\\operatorname{Spec}D$ be affine schemes of finite type over $\\operatorname{Spec}\\mathbf Z$, and let $X\\to S$ and $Y\\to T$ be finite type morphisms of affine schemes [def-pc-scheme, def-weil-affine-spectrum, def-weil-finite-type-morphism]. Fix $s\\in S$, put $A=\\mathcal O_{S,s}$, and let $B=\\operatorname{Spec}\\widehat A$ with closed point $b$, using maximal-ideal-adic completion [def-weil-pbc-adic-completion]. Let $\\lambda:B\\to T$ be a morphism and put $t=\\lambda(b)$, $X_B=X\\times_SB$, $Y_B=Y\\times_{T,\\lambda}B$ [def-pc-fibre-product]. Suppose $H$ is affine of finite presentation over $B$ [def-sbc-locally-finite-presentation, def-weil-pbc-scheme-conventions], $h\\in H$ maps to $b$, and $a:H\\to X_B$, $c:H\\to Y_B$ are étale $B$-morphisms [def-weil-etale-morphism] inducing residue-field isomorphisms at $h$. Put $x_B=a(h)$ and $y_B=c(h)$. Then there exist an affine scheme $S'$, a smooth morphism $q:S'\\to S$ [def-sbc-smooth-morphisms], an $S$-morphism $r:B\\to S'$, and a morphism $\\lambda':S'\\to T$ with $\\lambda' r=\\lambda$. Put $s'=r(b)$, $X'=X\\times_SS'$, and $Y'=Y\\times_{T,\\lambda'}S'$. There exist an affine scheme $H'$ of finite presentation over $S'$, étale $S'$-morphisms $a':H'\\to X'$ and $c':H'\\to Y'$, and a $B$-isomorphism $e:H'\\times_{S'}B\\xrightarrow{\\sim}H$ intertwining both arrows with their actual base changes to $X_B,Y_B$. If $h'$ is the projection of $e^{-1}(h)$ and $x'=a'(h')$, $y'=c'(h')$, then $h',x',y'$ lie over $s'$, $\\lambda'(s')=t$, and the induced maps $\\kappa(s)\\to\\kappa(s')\\to\\kappa(b)$, $\\kappa(x')\\to\\kappa(x_B)$, $\\kappa(y')\\to\\kappa(y_B)$, $\\kappa(h')\\to\\kappa(h)$, $\\kappa(x')\\to\\kappa(h')$, and $\\kappa(y')\\to\\kappa(h')$ are all isomorphisms [def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GDX, lemma-relative-map-approximation-pre, second and third proof paragraphs: Popescu smooth limit, factorization of the varying map to T, and descent with both target families fixed."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-adic-completion",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "First verify Noetherianity without treating finite type on schemes as a ring presentation by definition. The ring $\\mathbf Z$ is a G-ring by [lem-weil-pbc-finite-type-z-g-ring] applied to $\\mathbf Z$ itself, hence is Noetherian by [def-weil-pbc-g-ring]. Thus $\\operatorname{Spec}\\mathbf Z$ is locally Noetherian by the one-member affine cover in [pqf-def-locnoeth]. Since $S,T$ are locally of finite type over it, [pqf-lem-locnoeth-lft] makes $S,T$ locally Noetherian. Apply [pqf-lem-affine-open-locnoeth] to their whole affine opens: $R,D$ are Noetherian. Let $\\mathfrak p$ correspond to $s$. By [lem-weil-pbc-affine-open-stalk-localization], $A=\\mathcal O_{S,s}=R_{\\mathfrak p}$ with its canonical $R$-map; [lem-weil-pbc-localization-noetherian] makes $A$ Noetherian. Write $C=\\widehat A$. By [lem-weil-pbc-adic-completion-noetherian], $C$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "def-weil-pbc-g-ring",
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, smooth-limit paragraph; Noetherian prerequisites: Algebra Tag 00FN, lemma-Noetherian-permanence, and Tag 0316, lemma-completion-Noetherian-Noetherian"
+   }
+  },
+  {
+   "text": "The maps $S,T\\to\\operatorname{Spec}\\mathbf Z$ are locally of finite presentation by [pqf-lem-lft-fp-locnoeth]. Applying [lem-weil-pbc-lfp-affine-opens-finite-presentation] to the whole affine source and target gives finite presentations of $R,D$ over $\\mathbf Z$. In particular $R$ is generated as a ring by finitely many elements, so [lem-weil-pbc-finite-type-z-g-ring] makes $R$ a G-ring. Its defining assertion in [def-weil-pbc-g-ring], at $\\mathfrak p$, says exactly that $A\\to C$ is regular. Also $R\\to A$ is regular by [lem-weil-pbc-localization-regular]. For every prime $\\mathfrak q\\subset R$, the fibre $C\\otimes_R\\kappa(\\mathfrak q)$ is the localization $(R\\setminus\\mathfrak q)^{-1}(C/\\mathfrak q C)$: send $c\\otimes(\\bar r/\\bar u)$ to $cr/u$, with inverse $c/u\\mapsto c\\otimes(1/\\bar u)$. The tensor relations and the fraction relations show these are inverse ring maps. This fibre is Noetherian by [lem-weil-pbc-surjective-image-noetherian] and [lem-weil-pbc-localization-noetherian], since $C$ is Noetherian. Thus all hypotheses of [lem-weil-pbc-regular-composition] hold and the canonical map $R\\to C$ is regular.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-regular-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, smooth-limit paragraph; More on Algebra Tags 07PX, proposition-ubiquity-G-ring, and 07QI, lemma-regular-composition"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-popescu-smoothing] to the regular map $R\\to C$ between the Noetherian rings just established. It gives a small filtered diagram of smooth $R$-algebras with colimit $C$ and its actual structural maps. By [lem-weil-pbc-filtered-category-directed-cofinal] reindex this diagram by a nonempty directed set $I$, still with colimit $C$. Denote the resulting algebras by $C_i$, put $S_i=\\operatorname{Spec}C_i$, and let $p_i:B\\to S_i$ be induced by the colimit maps. Each $S_i\\to S$ is smooth, as included in the statement of the Popescu node. The transition maps are affine by [lem-weil-pbc-morphism-affine-schemes-affine]. The affine case of [lem-weil-pbc-limit-affine-transition] identifies $B=\\operatorname{Spec}C$ with $\\varprojlim S_i$, compatibly with these $p_i$. All these are maps over $S$, because the ring diagram and its cocone are over $R$.",
+   "uses": [
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, smooth-limit paragraph; Smoothing Ring Maps Tag 07GC, theorem-popescu; Categories Tag 0032, lemma-directed-category-system; Limits Tag 01YW, lemma-directed-inverse-system-has-limit"
+   }
+  },
+  {
+   "text": "Put $s_i=p_i(b)$. The completion is local and the canonical residue map $\\kappa(s)\\to\\kappa(b)$ is an isomorphism by [lem-weil-pbc-local-completion-local-ring] applied to the Noetherian local ring $A$. For each $i$ it factors as $\\kappa(s)\\to\\kappa(s_i)\\to\\kappa(b)$, by functoriality of residue maps [def-weil-residue-field]. The second map is an injective field map and its image contains the image of the composite, which is all of $\\kappa(b)$; it is therefore surjective as well. The first map, being the composite of the inverse of the second with the displayed isomorphism, is an isomorphism too. In particular every stage has the residue-field property required by fixed-family pointed descent.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, observation about kappa(s_i); Algebra Tags 05GG, lemma-hathat-finitely-generated, and 05GI, lemma-radical-completion"
+   }
+  },
+  {
+   "text": "Each affine $S_i$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], and its transition maps are affine by step 3. The map $T\\to\\operatorname{Spec}\\mathbf Z$ is locally of finite presentation by step 2. All maps to $\\operatorname{Spec}\\mathbf Z$ commute, by [def-weil-affine-spectrum], since ring homomorphisms preserve integers. Apply [lem-weil-pbc-finite-presentation-map-limit-factorization] over $\\operatorname{Spec}\\mathbf Z$ to $\\lambda:B\\to T$. Obtain $i_0$ and $\\lambda_0:S_{i_0}\\to T$ with $\\lambda_0p_{i_0}=\\lambda$. On the tail $i\\ge i_0$ define $\\lambda_i=\\lambda_0\\circ(S_i\\to S_{i_0})$. This tail still has limit $B$: a cone on the tail extends to an arbitrary index $k$ by choosing $j\\ge k,i_0$ and composing its component at $j$ with $S_j\\to S_k$; a common upper bound proves independence and compatibility, and uniqueness follows from the same formula. Thus $\\lambda_i p_i=\\lambda$ on every stage of the tail, and $\\lambda_i(s_i)=\\lambda(b)=t$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-presentation-map-limit-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, factorization of sigma; Limits Tag 01ZC, proposition-characterize-locally-finite-presentation"
+   }
+  },
+  {
+   "text": "Since $S,T$ are locally Noetherian, [pqf-lem-lft-fp-locnoeth] makes $X\\to S$ and $Y\\to T$ locally of finite presentation. They are of finite presentation: their affine sources and targets are quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so use [lem-weil-pbc-qcqs-morphism-permanence] (1). Put $P_0=X\\times_SS_{i_0}$ and $Q_0=Y\\times_{T,\\lambda_0}S_{i_0}$. They are affine by [lem-weil-pbc-fibre-product-affine-spectra] and of finite presentation over $S_{i_0}$ by [lem-weil-pbc-qcqs-morphism-permanence] (3). Their base changes to $B$ are exactly $X_B,Y_B$. Explicitly the comparison maps preserve the projections to $X$ or $Y$ and to $B$; the inverse maps are the corresponding pullback lifts, so their composites are identities by uniqueness [def-pc-fibre-product]. For $j\\ge i_0$ the same comparison identifies $(P_0)_{S_j}$ with $X\\times_SS_j$ and $(Q_0)_{S_j}$ with $Y\\times_{T,\\lambda_j}S_j$.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, fixed X_i,Y_i and finite-stage span; Limits Tag 01ZM, lemma-descend-finite-presentation"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fixed-family-etale-span-descent] to this directed system, $b$, the fixed $P_0,Q_0$, and the given affine finitely presented $H$ with point $h$ and arrows $a,c$. Step 4 verifies the residue-field hypothesis at every stage; step 6 verifies the fixed models and their finite presentation. The two arrows are etale and induce residue-field isomorphisms at $h$ by hypothesis. The cited node yields a single $j\\ge i_0$, an affine finitely presented $H_j\\to S_j$, etale maps $H_j\\to(P_0)_{S_j},(Q_0)_{S_j}$ and a $B$-isomorphism $e:(H_j)_B\\to H$ intertwining the actual pullbacks of both arrows. Take $S'=S_j$, $q:S_j\\to S$, $r=p_j$, $\\lambda'=\\lambda_j$, $H'=H_j$. Use the projection-preserving pullback comparisons of step 6 for the targets of $a',c'$; the two pullback equations are preserved because their projections agree, so [def-pc-fibre-product] gives equality of the induced maps. Smoothness of $q$ comes from step 3, and $\\lambda'r=\\lambda$ from step 5.",
+   "uses": [
+    "lem-trf-fixed-family-etale-span-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, finite-stage span; Limits Tags 01ZM, lemma-descend-finite-presentation, and 07RP, lemma-descend-etale"
+   }
+  },
+  {
+   "text": "The point $h'$ is the projection of $e^{-1}(h)$ by construction; set $x'=a'(h')$ and $y'=c'(h')$. The point assertions in [lem-trf-fixed-family-etale-span-descent] identify these with the projections of $x_B,y_B$ in the fixed target models, and give the canonical isomorphisms $\\kappa(x')\\to\\kappa(x_B)$, $\\kappa(y')\\to\\kappa(y_B)$ and $\\kappa(h')\\to\\kappa(h)$. That node also gives that $a',c'$ induce residue-field isomorphisms at $h'$. Its point equations show all three points lie over $s'=p_j(b)$. Step 4 gives both isomorphisms in $\\kappa(s)\\to\\kappa(s')\\to\\kappa(b)$, and step 5 gives $\\lambda'(s')=t$. These are all the claimed comparisons and point equalities.",
+   "uses": [
+    "lem-trf-fixed-family-etale-span-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GDX, lemma-relative-map-approximation-pre, residue-field chains after finite-stage descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-g-ring",
+  "def-weil-residue-field",
+  "lem-trf-fixed-family-etale-span-descent",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-finite-presentation-map-limit-factorization",
+  "lem-weil-pbc-finite-type-z-g-ring",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth",
+  "pqf-lem-lft-fp-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GDX, lemma-relative-map-approximation-pre, second and third proof paragraphs, with explicit prerequisites for Popescu and pointed fixed-family descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale span over a completed local base descends to a smooth affine model while a map to a finite type integer scheme factors through that model",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: finite-presentation map factorization and Noetherian descent are partial ingredients; none produces a smooth model of the completion together with the varying base map, both fixed target arrows and the pointed residue-field comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Popescu smoothing and finite presentation descent of a diagram with two fixed target families and residue field isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (F : CategoryTheory.Functor J CommRingCat) (α : (CategoryTheory.Functor.const J).obj R ⟶ F) {S : CommRingCat}\\n  (f : R ⟶ S) (c : CategoryTheory.Limits.Cocone F) (hc : CategoryTheory.Limits.I\", \"doc\": \"Let $ f : A \\\\to B $ be a finitely presented ring homomorphism between commutative rings, and let $ c $ be a colimit cocone for a diagram $ F : \\\\mathcal{J} \\\\to \\\\text{CommRing} $. If $ g : S \\\\to c.\\\\text\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any commutative ring $ R $ and a commutative $ R $-algebra $ A $ that is smooth over $ B $, there exists a finitely generated $ R $-subalgebra $ A_0 $ of $ A $ such that $ A_0 $ is smooth over $ B\"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, Algebra.FiniteType R ↥A₀ ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $ and a smooth $ A_0 $-algebra $ B_0 $ such that $ B $ is isomorphic to\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.comp\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u_5) [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type u_6)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallySmooth R A]\\n  [Algebra.FormallySmooth A B], Algebra.FormallySmooth R B\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $ and $ B $ is a formally smooth algebra over $ A $, then $ B $ is a formally smooth algebra over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: finite-presentation map factorization and Noetherian descent are partial ingredients; none produces a smooth model of the completion together with the varying base map, both fixed target arrows and the pointed residue-field comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, AdicCompletion",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: finite-presentation map factorization and Noetherian descent are partial ingredients; none produces a smooth model of the completion together with the varying base map, both fixed target arrows and the pointed residue-field comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "Popescu|descend.*[Ee]tale|[Ee]tale.*descend|smooth.*colimit",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"47\", \"text\": \"instance : DescendsAlong @Etale (@Surjective ⊓ @Flat ⊓ @QuasiCompact) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"line\": \"48\", \"text\": \"  HasRingHomProperty.descendsAlong_flat RingHom.Etale.codescendsAlong_faithfullyFlat\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"13\", \"text\": \"# Etale descends along faithfully flat ring maps\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"22\", \"text\": \"- `Algebra.Etale.of_etale_tensorProduct_of_faithfullyFlat`: Etale descends.\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"108\", \"text\": \"lemma Etale.codescendsAlong_faithfullyFlat : CodescendsAlong Etale FaithfullyFlat := by\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"16\", \"text\": \"# The Gabriel-Popescu theorem\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"18\", \"text\": \"We prove the following Gabriel-Popescu theorem: if `C` is a Grothendieck abelian category and\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"61\", \"text\": \"namespace GabrielPopescuAux\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"111\", \"text\": \"end GabrielPopescuAux\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"113\", \"text\": \"open GabrielPopescuAux\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: finite-presentation map factorization and Noetherian descent are partial ingredients; none produces a smooth model of the completion together with the varying base map, both fixed target arrows and the pointed residue-field comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend a pointed etale span and varying base map to a smooth algebra in a Popescu filtered colimit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Smooth A B] :\\n  ∃ (A₀ : Type u) (B₀ : Type u) (_ : CommRing A₀) (_ : CommRing B₀) (_ : Algebra R A₀) (_ : Algebra A₀ A) (_ :\\n    Algebra A₀ B₀),\\n    Function.Injective (algebraMap A₀ A) ∧ FiniteType R A₀ ∧ Smooth A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.Smooth.mk\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam →\\n    autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam → Algebra.Smooth R A\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is formally smooth over $ R $ and finitely presented over $ R $, then $ A $ is smooth over $ R $.\"}\n  {\"name\": \"Algebra.Smooth.baseChange\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[Smooth R A] : Smooth B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the tensor product $ B \\\\otimes_R A $ is a smooth algebra over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: finite-presentation map factorization and Noetherian descent are partial ingredients; none produces a smooth model of the completion together with the varying base map, both fixed target arrows and the pointed residue-field comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completion of a finite type integer algebra is a filtered colimit of smooth algebras and a pointed etale span descends to a smooth stage",
+   "date": "2026-10-23",
+   "results": "8 hits: Algebra.Smooth.exists_finiteType, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.Smooth, StandardEtalePresentation, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.smooth_iff, Algebra.Smooth.exists_subalgebra_fg, Algebra.Smooth.finitePresentation",
+   "verdict": "No match: hits concern smooth or etale algebras and their Noetherian models; none states completed-base smooth approximation of the given diagram with its two fixed targets and all pointed residue comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "Popescu|varyingBase|smoothSpan|completedBase",
+   "date": "2026-10-23",
+   "results": "5 hits: Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean",
+   "verdict": "No match: hits concern smooth or etale algebras and their Noetherian models; none states completed-base smooth approximation of the given diagram with its two fixed targets and all pointed residue comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pointed etale span over a completed local ring descends to a smooth base with a prescribed map to a finite type scheme",
+   "date": "2026-10-23",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.Scheme.Etale, Algebra.Smooth.exists_finiteType, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth",
+   "verdict": "No match: hits concern smooth or etale algebras and their Noetherian models; none states completed-base smooth approximation of the given diagram with its two fixed targets and all pointed residue comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, AdicCompletion",
+   "date": "2026-10-23",
+   "results": "0 hits: ",
+   "verdict": "No match: hits concern smooth or etale algebras and their Noetherian models; none states completed-base smooth approximation of the given diagram with its two fixed targets and all pointed residue comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Popescu approximation of an etale diagram over an adic completion with two fixed target schemes and a varying base morphism",
+   "date": "2026-10-23",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, StandardEtalePresentation.P, StandardEtalePresentation, StandardEtalePair.hasMap_X, AlgebraicGeometry.Scheme.Etale.forget, StandardEtalePair.HasMap.map, AlgebraicGeometry.IsEtale, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+   "verdict": "No match: hits concern smooth or etale algebras and their Noetherian models; none states completed-base smooth approximation of the given diagram with its two fixed targets and all pointed residue comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-completion-etale-approximation",
+  "date": "2026-10-22",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nodal local-equation input: final paragraph applies relative-map-approximation-pre to the formal model over Spec Z[a]. Auxiliary argument: Tag 0GDX, lemma-relative-map-approximation-pre, second and third proof paragraphs: Popescu smooth limit, factorization of the varying map to T, and descent with both target families fixed.",
+   "via": [
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-varying-base-smooth-span-model",
+  "worker": "stage1",
+  "summary": "Reused existing DAG nodes throughout: verify Noetherianity, regularity of R to the completion including Noetherian fibres, Popescu and directed reindexing, residue-field sandwiches, finite-stage factorization of the varying base map, finite presentation of the two fixed target families, and pointed etale-span descent. The item statement is unchanged. No new nodes or Mathlib leaves.",
+  "blueprint": "Historical auxiliary nodal local-equation route recorded by blueprint.from: realizes precisely the smooth-limit, varying-map factorization, and fixed-family span paragraphs of Stacks 0GDX. The latest lem-trf-local-term-locality is now about contracting correspondences; this is an inherited auxiliary approximation node, not a proposed change to that unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-z-g-ring",
+    "why": "Generic algebraic or scheme-limit tool needed for the Popescu/descent argument of Stacks 0GDX; the trace-formula unit has no statement providing this prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic algebraic or scheme-limit tool needed for the Popescu/descent argument of Stacks 0GDX; the trace-formula unit has no statement providing this prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-localization-regular",
+    "why": "Generic algebraic or scheme-limit tool needed for the Popescu/descent argument of Stacks 0GDX; the trace-formula unit has no statement providing this prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-popescu-smoothing",
+    "why": "Generic algebraic or scheme-limit tool needed for the Popescu/descent argument of Stacks 0GDX; the trace-formula unit has no statement providing this prerequisite."
+   },
+   {
+    "node": "lem-weil-pbc-regular-composition",
+    "why": "Generic algebraic or scheme-limit tool needed for the Popescu/descent argument of Stacks 0GDX; the trace-formula unit has no statement providing this prerequisite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-z-g-ring",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-regular-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-dd380d73f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-dd380d73f (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full; there are no new nodes and no fixes. I checked the item against the source, Stacks 0GDX lemma-relative-map-approximation-pre (statement and proof paragraphs 2-3): the hypotheses match and the statement is unchanged. Every cited statement says what its step takes from it. Step 1: Z is a G-ring and hence Noetherian, so S,T,R,D,A=R_p and C=A-hat are Noetherian (01T6, 00FN, 0316). Step 2: R is a finitely generated ring, so it is a G-ring and A->C is regular; R->A is regular, and the extra Noetherian-fibre hypothesis of 07QI is checked explicitly via C⊗_R κ(q) ≅ (R∖q)^{-1}(C/qC). Step 3: Popescu, reindexed to a directed set (0032), gives B = lim S_i by 01YW with smooth S-stages. Step 4: residue fields agree by the field sandwich with 05GI. Step 5: lambda factors through some stage by 01ZC over Spec Z, and the tail-limit argument is written out. Step 6: X,Y are finitely presented, and the fixed models P_0,Q_0 are affine and finitely presented, with projection-preserving comparisons. Steps 7-8: the existing same-unit node lem-trf-fixed-family-etale-span-descent is used only through its statement; all its hypotheses are met and it does not cite the item, so there is no cycle. No existing node states the item (checked the completed-base-affine-etale-span, smooth-span-etale-slice and local-map-completion-approximation nodes). Edge cases checked: s generic, h not rational over κ(b), and characteristics 0, p and mixed. No SGA source is used. I accept the 5 declared off-unit tool_uses; adic-completion-noetherian and filtered-category-directed-cofinal are further generic off-unit tools for the maintainer to record (C8)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VaryingBaseSmoothSpanModel",
+  "declaration": "AlgebraicGeometry.exists_varyingBase_smooth_span_model",
+  "declarations": [
+   "AlgebraicGeometry.varyingBaseSpanProjection",
+   "AlgebraicGeometry.exists_varyingBase_smooth_span_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingBaseSmoothSpanModel.lean",
+  "statement": "theorem exists_varyingBase_smooth_span_model (R D : CommRingCat.{u}) (X Y : Scheme.{u}) [IsAffine X] [IsAffine Y] (sZ : Spec R ⟶ Spec (.of (ULift.{u} ℤ))) (tZ : Spec D ⟶ Spec (.of (ULift.{u} ℤ))) [LocallyOfFiniteType sZ] [QuasiCompact sZ] [LocallyOfFiniteType tZ] [QuasiCompact tZ] (f : X ⟶ Spec R) (g : Y ⟶ Spec D) [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType g] [QuasiCompact g] (s : Spec R) (b : Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s)))) (hb : IsClosed ({b} : Set (Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s)))))) (lam : Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s))) ⟶ Spec D) (H : Scheme.{u}) [IsAffine H] (p : H ⟶ Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s)))) [LocallyOfFinitePresentation p] (h : H) (hh : p h = b) (a : H ⟶ pullback f ((Spec.map (CommRingCat.ofHom (algebraMap ((Spec R).presheaf.stalk s) (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s)))) ≫ (Spec R).fromSpecStalk s))) (c : H ⟶ pullback g lam) [Etale a] [Etale c] (ha : a ≫ pullback.snd f ((Spec.map (CommRingCat.ofHom (algebraMap ((Spec R).presheaf.stalk s) (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s)))) ≫ (Spec R).fromSpecStalk s)) = p) (hc : c ≫ pullback.snd g lam = p) (haκ : IsIso (a.residueFieldMap h)) (hcκ : IsIso (c.residueFieldMap h)) : ∃ (V : Scheme.{u}) (q : V ⟶ Spec R), IsAffine V ∧ Smooth q ∧ ∃ (r : Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s))) ⟶ V) (lam' : V ⟶ Spec D) (hr : r ≫ q = (Spec.map (CommRingCat.ofHom (algebraMap ((Spec R).presheaf.stalk s) (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s)))) ≫ (Spec R).fromSpecStalk s)) (hlam : r ≫ lam' = lam) (H' : Scheme.{u}) (p' : H' ⟶ V), IsAffine H' ∧ LocallyOfFinitePresentation p' ∧ ∃ (a' : H' ⟶ pullback f q) (c' : H' ⟶ pullback g lam'), Etale a' ∧ Etale c' ∧ a' ≫ pullback.snd f q = p' ∧ c' ≫ pullback.snd g lam' = p' ∧ ∃ e : pullback p' r ≅ H, e.hom ≫ p = pullback.snd p' r ∧ e.hom ≫ a ≫ varyingBaseSpanProjection f q r ((Spec.map (CommRingCat.ofHom (algebraMap ((Spec R).presheaf.stalk s) (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s)))) ≫ (Spec R).fromSpecStalk s)) hr = pullback.fst p' r ≫ a' ∧ e.hom ≫ c ≫ varyingBaseSpanProjection g lam' r lam hlam = pullback.fst p' r ≫ c' ∧ q (r b) = s ∧ lam' (r b) = lam b ∧ p' ((e.inv ≫ pullback.fst p' r) h) = r b ∧ pullback.snd f q (a' ((e.inv ≫ pullback.fst p' r) h)) = r b ∧ pullback.snd g lam' (c' ((e.inv ≫ pullback.fst p' r) h)) = r b ∧ IsIso (q.residueFieldMap (r b)) ∧ IsIso (r.residueFieldMap b) ∧ IsIso (Scheme.Hom.residueFieldMap (varyingBaseSpanProjection f q r ((Spec.map (CommRingCat.ofHom (algebraMap ((Spec R).presheaf.stalk s) (AdicCompletion (IsLocalRing.maximalIdeal ((Spec R).presheaf.stalk s)) ((Spec R).presheaf.stalk s)))) ≫ (Spec R).fromSpecStalk s)) hr) (a h)) ∧ IsIso ((varyingBaseSpanProjection g lam' r lam hlam).residueFieldMap (c h)) ∧ IsIso ((e.inv ≫ pullback.fst p' r).residueFieldMap h) ∧ IsIso (a'.residueFieldMap ((e.inv ≫ pullback.fst p' r) h)) ∧ IsIso (c'.residueFieldMap ((e.inv ≫ pullback.fst p' r) h))",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "H2 repair: the canonical completed-base map is written explicitly as Spec.map of the completion algebraMap followed by fromSpecStalk. No theorem node is added to stmt_deps. The canonical pullback projection helper contains real data; the projection equations characterize the actual base changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b7de66ff",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Re-delivery of 63041f55 (RETURN H2) repaired as asked: theorem node lem-trf-completed-local-base-change dropped, stmt_deps equal main's original 10, only lean differs from main; canonical B->S map inlined as Spec.map(algebraMap A Â) ≫ fromSpecStalk s, no CompletedLocalBaseChange import. lean.statement verbatim, one sorry, universe u bound, autoImplicit off, imports exist, report sections present. All hypothesis/conclusion clauses checked against node and Stacks 0GDX: finite type via ULift Z, closed b unique (Â local), LFP with affine bases = finite presentation, B-equation + two projection equations pin the actual base changes, point equations and 7 residue maps have correct sources/directions. varyingBaseSpanProjection is real pullback.map data, not a duplicate. No file changed, so no compile; relied on worker's clean compile evidence."
+ }
+}

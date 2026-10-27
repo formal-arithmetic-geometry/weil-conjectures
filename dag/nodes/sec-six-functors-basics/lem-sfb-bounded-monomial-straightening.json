@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-bounded-monomial-straightening",
+ "kind": "statement",
+ "title": "Degree control and leading products for a bounded ordered monomial basis",
+ "statement": "Let $F$ be a field [def-weil-field], and let $A$ be a unital associative $F$-algebra, meaning an $F$-vector space with an associative $F$-bilinear multiplication and an identity $1$. Let $n\\geq0$, $q\\geq2$ be integers and let $y_1,\\ldots,y_n\\in A$. For $a=(a_1,\\ldots,a_n)$ put $y^a=y_1^{a_1}\\cdots y_n^{a_n}$ and $|a|=\\sum_i a_i$, with empty product $1$. Assume that the $y^a$ with $0\\leq a_i<q$ form an $F$-basis of $A$. Put $W=\\operatorname{span}_F\\{1,y_1,\\ldots,y_n\\}$ [def-weil-submodule-span] and assume $y_jy_i-y_iy_j\\in W$ for all $i,j$ and $y_i^q\\in W$ for all $i$. For an integer $d$ let $P_d$ be the span of those bounded basis monomials with $|a|\\leq d$, so $P_d=0$ for $d<0$. Every product of $m$ generators $y_i$ lies in $P_m$, and $P_rP_s\\subseteq P_{r+s}$ for $r,s\\geq0$, where the left side is the span of products. More precisely, for bounded exponent vectors $a,b$ and $m=|a|+|b|$, one has\n$$y^ay^b-y^{a+b}\\in P_{m-1}\\quad\\text{if }a_i+b_i<q\\text{ for every }i,$$\nand\n$$y^ay^b\\in P_{m-1}\\quad\\text{if }a_i+b_i\\geq q\\text{ for some }i.$$\nFor $n=0$ the assertions include $A=F\\cdot1$ and $1\\cdot1=1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 10.36 and its degree/inversion reordering proof, printed pp.200--204; Theorem 10.40, printed p.207, reducing a pth power to degree one. Agent formulation of the degree-tracking input, assuming the bounded basis; no new PBW independence claim."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-submodule-span"
+ ],
+ "proof": [
+  {
+   "text": "We use spans in the sense of [def-weil-submodule-span]. Their elements are exactly finite linear combinations of their generators: those combinations form a submodule containing the generators, and every such submodule contains the combinations. Thus each $P_d$ is closed under addition, subtraction and scalar multiplication, and $P_d\\subseteq P_e$ for $d\\le e$, by inclusion of the generating sets. The empty word evaluates to $1=y^0\\in P_0$, and $P_{-1}=0$. We prove by strong induction on word length $m$ that every word of length $m$ evaluates into $P_m$; at the same induction stage we prove that its value differs from its nondecreasing rearrangement by an element of $P_{m-1}$. At $m=0$ the rearrangement is the same empty word, so both claims hold.",
+   "uses": [
+    "def-weil-submodule-span",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.200--202 (degree, inversions, adjacent reductions and spanning); Theorem 10.40, printed p.207 (power relation). Elementary degree-tracking adaptation with bounded basis assumed."
+   }
+  },
+  {
+   "text": "Fix $m>0$ and assume the degree claim for every length $t<m$. For a word $w=(i_1,\\ldots,i_m)$ put $I(w)=\\#\\{(h,k):h<k,\\ i_h>i_k\\}$. If $w$ is not nondecreasing, it has adjacent letters $j>i$: otherwise transitivity of all adjacent inequalities would make it nondecreasing. Swap these letters to get $w'$. For any position outside the two letters the total number of its inversions with that pair is unchanged, since the pair has the same two labels before and after the swap. The inversion between the pair disappears. Hence $I(w')=I(w)-1$, while every label multiplicity is unchanged.",
+   "uses": [
+    "def-weil-submodule-span"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.200--202 (degree, inversions, adjacent reductions and spanning); Theorem 10.40, printed p.207 (power relation). Elementary degree-tracking adaptation with bounded basis assumed."
+   }
+  },
+  {
+   "text": "Write the word with the adjacent inverted pair as $u(j,i)v$, with context lengths $a,b$, so $a+b=m-2$. Its evaluation minus that of $u(i,j)v$ is $\\operatorname{ev}(u)(y_jy_i-y_iy_j)\\operatorname{ev}(v)$. The commutator hypothesis and Step 1 express this as a finite linear combination of context words of lengths $a+b=m-2$ or $a+b+1=m-1$. By the outer induction hypothesis these belong to $P_{m-2}$ or $P_{m-1}$, hence their sum belongs to $P_{m-1}$. Induction on $I(w)$ now gives $\\operatorname{ev}(w)-y^c\\in P_{m-1}$, where $c_i$ counts the occurrences of $i$. Indeed at inversion zero the word already equals $y^c$; otherwise add the swap difference just computed to the induction assertion for $w'$, whose sorted word has the same multiplicities. This proves the rearrangement claim using only smaller lengths, before proving the degree claim at length $m$.",
+   "uses": [
+    "def-weil-submodule-span"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.200--202 (degree, inversions, adjacent reductions and spanning); Theorem 10.40, printed p.207 (power relation). Elementary degree-tracking adaptation with bounded basis assumed."
+   }
+  },
+  {
+   "text": "The sorted word $y^c$ has $\\sum_i c_i=m$. If every $c_i<q$, it is a defining generator of $P_m$. Otherwise choose $i$ with $c_i\\ge q$ and factor its consecutive $q$ copies as $y^c=\\operatorname{ev}(u)y_i^q\\operatorname{ev}(v)$, where the contexts together have length $m-q$. Expanding $y_i^q\\in W$ gives a linear combination of words of lengths $m-q$ or $m-q+1$. Because $q\\ge2$, both lengths are at most $m-1$; the outer induction hypothesis and monotonicity put their values in $P_{m-1}$. Thus in either case $y^c\\in P_m$. Add the rearrangement error from Step 3, which lies in $P_{m-1}\\subseteq P_m$. This proves the degree claim for length $m$ and completes the outer induction. The same calculation proves the stronger conclusion $\\operatorname{ev}(w)\\in P_{m-1}$ whenever some multiplicity of $w$ is at least $q$.",
+   "uses": [
+    "def-weil-submodule-span"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.200--202 (degree, inversions, adjacent reductions and spanning); Theorem 10.40, printed p.207 (power relation). Elementary degree-tracking adaptation with bounded basis assumed."
+   }
+  },
+  {
+   "text": "Apply the established rearrangement assertion to the concatenation of the ordered words for $y^a$ and $y^b$, of length $m=|a|+|b|$. Its multiplicity vector is $a+b$. If $a+b$ is bounded, its sorted value is exactly the ordered product $y^{a+b}$, so $y^ay^b-y^{a+b}\\in P_{m-1}$. If it is not bounded, the last assertion of Step 4 gives $y^ay^b\\in P_{m-1}$. At $m=0$ both vectors are zero, only the bounded case occurs, and its difference is $1\\cdot1-1=0\\in P_{-1}$. No commutativity of $A$ is used: every sorting error was evaluated in its original left and right contexts.",
+   "uses": [
+    "def-weil-submodule-span"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.200--202 (degree, inversions, adjacent reductions and spanning); Theorem 10.40, printed p.207 (power relation). Elementary degree-tracking adaptation with bounded basis assumed."
+   }
+  },
+  {
+   "text": "For $r,s\\ge0$, expand $x\\in P_r$ and $z\\in P_s$ as finite sums $x=\\sum_a\\alpha_a y^a$ and $z=\\sum_b\\beta_b y^b$ with bounded exponents and $|a|\\le r$, $|b|\\le s$. Bilinearity gives $xz=\\sum_{a,b}(\\alpha_a\\beta_b)y^ay^b$. Each summand's word has length $|a|+|b|\\le r+s$, so Step 4 and monotonicity put it in $P_{r+s}$. Closure under finite linear combinations gives $xz\\in P_{r+s}$; taking the span of all such products proves $P_rP_s\\subseteq P_{r+s}$. This also covers $r=0$ or $s=0$.",
+   "uses": [
+    "def-weil-submodule-span"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.200--202 (degree, inversions, adjacent reductions and spanning); Theorem 10.40, printed p.207 (power relation). Elementary degree-tracking adaptation with bounded basis assumed."
+   }
+  },
+  {
+   "text": "If $n=0$, there is exactly one bounded exponent vector, the empty vector, whose monomial is $1$. The assumed basis therefore says that every element of $A$ is a scalar multiple of $1$, so $A=F\\cdot1$. There are no positive-length generator words. The only pair of bounded monomials is $1,1$, with product $1\\cdot1=1$ by the unital-algebra hypothesis. Thus the preceding conclusions include all the asserted empty-family cases.",
+   "uses": [
+    "def-weil-submodule-span"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 10.36, printed pp.200--202 (degree, inversions, adjacent reductions and spanning); Theorem 10.40, printed p.207 (power relation). Elementary degree-tracking adaptation with bounded basis assumed."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-submodule-span",
+  "def-weil-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 10.36, printed pp.200--202 (degree, inversions, adjacent reductions and spanning); Theorem 10.40, printed p.207 (power relation). Elementary degree-tracking adaptation with bounded basis assumed. The source treats enveloping algebras; the proof here writes out the abstract assumed-relations calculation, without PBW independence or confluence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PBW|[Ss]traighten|[Tt]runcated",
+   "results": "{\"t\": \"2026-10-23T23:33:58Z\", \"tool\": \"grep\", \"query\": \"PBW|[Ss]traighten|[Tt]runcated\", \"sub\": \"RingTheory/FilteredAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered noncommutative algebra with bounded PBW monomial basis has truncated polynomial leading multiplication",
+   "results": "{\"t\": \"2026-10-23T23:33:58Z\", \"tool\": \"leansearch\", \"query\": \"A filtered noncommutative algebra with bounded PBW monomial basis has truncated polynomial leading multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.symmetricAlgebra\", \"Polynomial.degreeLT.basis\", \"MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictTotalDegreeOfFinite\", \"MvPowerSeries.truncFun\", \"FreeAlgebra.basisFreeMonoid\", \"Filter.BoundedAtFilter.mul\", \"MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite\", \"RingFilterBasis.recOn\"], \"digest\": \"76aec4eba063131e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingFiltration, AssociatedGraded",
+   "results": "{\"t\": \"2026-10-23T23:33:58Z\", \"tool\": \"loogle\", \"query\": \"RingFiltration, AssociatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'RingFiltration'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: query identifiers were not recognized; subsequent searches use the actual IsRingFiltration naming and broader semantic queries."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an algebra with an ordered bounded monomial basis and commutators and powers of smaller degree the leading term of a product is the truncated monomial product",
+   "results": "{\"t\": \"2026-10-23T23:33:59Z\", \"tool\": \"leanfinder\", \"query\": \"In an algebra with an ordered bounded monomial basis and commutators and powers of smaller degree the leading term of a product is the truncated monomial product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.leadingCoeff_mul\", \"MonomialOrder.sPolynomial_leadingTerm_mul'\", \"MonomialOrder.degree_leadingTerm_mul\", \"MonomialOrder.leadingCoeff_mul\", \"MonomialOrder.coeff_prod_sum_degree\", \"MonomialOrder.degree_mul_leadingTerm\", \"MonomialOrder.C_mul_leadingCoeff_monomial_degree\", \"MonomialOrder.coeff_mul_of_add_of_degree_le\"], \"digest\": \"ac064892cc1ac8cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "grep",
+   "query": "commutator|[Ss]traighten|PBW|Poincar|[Tt]runcated",
+   "results": "{\"t\": \"2026-10-23T23:34:36Z\", \"tool\": \"grep\", \"query\": \"commutator|[Ss]traighten|PBW|Poincar|[Tt]runcated\", \"sub\": \"RingTheory/GradedAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AssociatedGraded",
+   "results": "{\"t\": \"2026-10-23T23:34:36Z\", \"tool\": \"loogle\", \"query\": \"AssociatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AssociatedGraded'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: query identifiers were not recognized; subsequent searches use the actual IsRingFiltration naming and broader semantic queries."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normal ordering generators with commutators linear in the generators and power relations of smaller degree yields a multiplicative degree filtration and truncated polynomial symbols",
+   "results": "{\"t\": \"2026-10-23T23:34:40Z\", \"tool\": \"leanfinder\", \"query\": \"Normal ordering generators with commutators linear in the generators and power relations of smaller degree yields a multiplicative degree filtration and truncated polynomial symbols\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsRingFiltration.mk_int\", \"IsRingFiltration.toGradedMonoid\", \"IsModuleFiltration.mk_int\", \"MvPolynomial.supDegree_esymmAlgHomMonomial\", \"TensorAlgebra.gradedAlgebra\", \"Ideal.Filtration.submodule\", \"AddMonoidAlgebra.gradeBy\", \"MvPolynomial.monomial_mem_homogeneousSubmodule_pow_degree\"], \"digest\": \"ea1f25994dffb62f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "grep",
+   "query": "namespace|class|def ",
+   "results": "{\"t\": \"2026-10-23T23:35:00Z\", \"tool\": \"grep\", \"query\": \"namespace|class|def \", \"sub\": \"RingTheory/FilteredAlgebra\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/FilteredAlgebra/Basic.lean\", \"Mathlib/RingTheory/FilteredAlgebra/Basic.lean\", \"Mathlib/RingTheory/FilteredAlgebra/Basic.lean\"], \"digest\": \"e1a23b7e12e8c889\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"filtration\"",
+   "results": "{\"t\": \"2026-10-23T23:35:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"filtration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Ideal.Filtration\", \"Ideal.Filtration.Stable\", \"Ideal.Filtration.instBot\", \"Ideal.Filtration.instCompleteLattice\", \"Ideal.Filtration.instInfSet\", \"Ideal.Filtration.instInhabited\", \"Ideal.Filtration.instMax\", \"Ideal.Filtration.instMin\"], \"digest\": \"87f4b2a47cb88721\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: polynomial leading terms, symmetric/free algebra bases and abstract filtration constructors do not establish normal ordering for a possibly noncommutative algebra with bounded monomial basis and lower-degree relations."
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*monomial|ordered.*monomial|PBW|straightening",
+   "results": "{\"t\": \"2026-10-24T00:03:44Z\", \"tool\": \"grep\", \"query\": \"bounded.*monomial|ordered.*monomial|PBW|straightening\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Free.lean\", \"Mathlib/Algebra/MvPolynomial/SchwartzZippel.lean\", \"Mathlib/Algebra/MvPolynomial/Degrees.lean\"], \"digest\": \"0277b66b1c06e9e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtration structures assume multiplicativity; commutative-polynomial leading terms and free-group reductions do not prove the claimed noncommutative bounded normal-order calculation. Read FilteredAlgebra/Basic.lean:45--93 and Algebra/Lie/Free.lean:36--44."
+  },
+  {
+   "tool": "grep",
+   "query": "PBW|straighten|commutator",
+   "results": "{\"t\": \"2026-10-24T00:03:44Z\", \"tool\": \"grep\", \"query\": \"PBW|straighten|commutator\", \"sub\": \"RingTheory/FilteredAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtration structures assume multiplicativity; commutative-polynomial leading terms and free-group reductions do not prove the claimed noncommutative bounded normal-order calculation. Read FilteredAlgebra/Basic.lean:45--93 and Algebra/Lie/Free.lean:36--44."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reordering a word in noncommuting generators with linear commutators reduces its length by one",
+   "results": "{\"t\": \"2026-10-24T00:03:45Z\", \"tool\": \"leansearch\", \"query\": \"Reordering a word in noncommuting generators with linear commutators reduces its length by one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeGroup.Red.sizeof_of_step\", \"FreeGroup.reduce.red\", \"FreeGroup.Red.length_le\", \"FreeGroup.IsReduced.not_step\", \"FreeAddGroup.IsReduced.not_step\", \"FreeGroup.Red.Step.recOn\", \"FreeGroup.Red.Step.rec\", \"FreeGroup.invRev_length\"], \"digest\": \"af3e97fd5bfc5575\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtration structures assume multiplicativity; commutative-polynomial leading terms and free-group reductions do not prove the claimed noncommutative bounded normal-order calculation. Read FilteredAlgebra/Basic.lean:45--93 and Algebra/Lie/Free.lean:36--44."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRingFiltration\"",
+   "results": "{\"t\": \"2026-10-24T00:03:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRingFiltration\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"IsRingFiltration\", \"IsRingFiltration.toIsFiltration\", \"IsRingFiltration.toGradedMonoid\", \"IsRingFiltration.mk\", \"IsRingFiltration.mk_int\"], \"digest\": \"a91c41c593c110d5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtration structures assume multiplicativity; commutative-polynomial leading terms and free-group reductions do not prove the claimed noncommutative bounded normal-order calculation. Read FilteredAlgebra/Basic.lean:45--93 and Algebra/Lie/Free.lean:36--44."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An associative algebra with bounded ordered monomial basis and linear commutator and power relations has multiplicative total degree filtration",
+   "results": "{\"t\": \"2026-10-24T00:03:47Z\", \"tool\": \"leanfinder\", \"query\": \"An associative algebra with bounded ordered monomial basis and linear commutator and power relations has multiplicative total degree filtration\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsRingFiltration\", \"IsRingFiltration.mk_int\", \"IsRingFiltration.toGradedMonoid\", \"GradedAlgebra\", \"IsModuleFiltration\", \"IsRingFiltration.toIsFiltration\", \"IsModuleFiltration.mk_int\", \"IsModuleFiltration.toGradedSMul\"], \"digest\": \"5fa731b6038a2fc0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtration structures assume multiplicativity; commutative-polynomial leading terms and free-group reductions do not prove the claimed noncommutative bounded normal-order calculation. Read FilteredAlgebra/Basic.lean:45--93 and Algebra/Lie/Free.lean:36--44."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sorting words by adjacent swaps preserves the leading ordered monomial when commutators have smaller degree",
+   "results": "{\"t\": \"2026-10-24T00:03:48Z\", \"tool\": \"leanfinder\", \"query\": \"Sorting words by adjacent swaps preserves the leading ordered monomial when commutators have smaller degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonomialOrder.degree_reduce_lt\", \"MonomialOrder.sPolynomial_lt_of_degree_ne_zero_of_degree_eq\", \"MonomialOrder.leadingTerm_leadingTerm\", \"MonomialOrder.degree_sub_LTerm_lt\", \"MonomialOrder.syn\", \"MonomialOrder.degree_sub_LTerm_le\", \"MonomialOrder.degree_sub_leadingTerm_lt_degree\", \"MonomialOrder.degree_sub_leadingTerm_le\"], \"digest\": \"75dc39ffa027ff99\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract filtration structures assume multiplicativity; commutative-polynomial leading terms and free-group reductions do not prove the claimed noncommutative bounded normal-order calculation. Read FilteredAlgebra/Basic.lean:45--93 and Algebra/Lie/Free.lean:36--44."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-restricted-pbw-top-pairing",
+  "date": "2026-10-24",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Theorem 2.6(i), printed pp.156--157: the Weyl module A((p-1)rho) is free of rank one over u(u^-), generated by its highest-weight vector. The proof there uses the lowest PBW weight and the Frobenius-algebra pairing, before Kempf vanishing and the Weyl character formula. Supporting algebra input for Theorem 2.6(i): restricted PBW and the top-coefficient Frobenius pairing (Theorem 1.2, Corollary 1.3). Degree tracking in the PBW reordering argument, before the complementary-exponent calculation.",
+   "via": [
+    "lem-sfb-restricted-pbw-top-pairing",
+    "lem-sfb-steinberg-weyl-restricted-freeness",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bounded-monomial-straightening",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Wrote the elementary nested length/inversion induction with explicit contextual length bounds, power reduction, both leading-product cases, bilinear span multiplication and empty-family case. No new nodes: each step is a direct calculation from the assumed relations, elementary induction, and the existing span definition. Rechecked live Lean, DAG, whole blueprint and Mathlib.",
+  "blueprint": "Supports the inherited restricted-PBW top-pairing input below det-thm-sf-ctf-stability-direct-images proof (3). The current latest blueprint direct-images proof (3) is the distant route; this abstract calculation stays below it. blueprint_refs ancestor returns None and whole-blueprint monomial, PBW and filtered-algebra searches found no identical node. The inherited from.place and via are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-9fbcaf1d8",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-9fbcaf1d8 (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps in full. Source checked: Milne iAG2017 Thm 10.36 proof (printed pp.201-202: inversions, simple reductions σ_{r,s}, spanning Steps 1-2) and Thm 10.40 (p.207, degree-lowering p-power). Only the spanning/degree half is used, and the bounded basis is assumed, so proof_origin agent is correct. There is no SGA. The statement is unchanged and matches its only citer, lem-sfb-restricted-pbw-top-pairing (y_i=e_i, q=p, commutators and e_i^p in span(e)). Small cases tested: n=0; F[t]/(t^2); F[t]/(t^2-t); a noncommutative example with [y2,y1]=y1; a=b=0; overflow needs m>=q>=2. No false or missing hypothesis. The nested induction is sound: the outer induction is on word length, and the inner induction on inversions uses only lengths <m (commutator errors have length m-2 or m-1). The power reduction gives lengths m-q and m-q+1, which are <=m-1 since q>=2. This avoids circular multiplicativity. Steps 5-7 are correct, including m=0 and n=0. I accept the elementary marking: everything is substitution into the assumed relations plus induction, written out, with no hidden lemma. proof_deps equals the union of the uses. Duplicate search: I read restricted-pbw-basis, rational-pbw, sl2-divided-straightening, weyl-relations-free-normal-form, borel-graded-bialgebra-monomial-basis and associative-jacobson-identities; none is a duplicate or a generalisation. FIX (B3/stmt_deps): the statement uses span_F without citing def-weil-submodule-span. I added the citation after W's span and added the node to stmt_deps. This makes no mathematical change and creates no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BoundedMonomialStraightening",
+  "declaration": "Algebra.bounded_monomial_straightening",
+  "declarations": [
+   "Algebra.orderedGeneratorMonomial",
+   "Algebra.boundedMonomialDegreeSpan",
+   "Algebra.bounded_monomial_straightening"
+  ],
+  "file": "lean/Sheaf/RingTheory/BoundedMonomialStraightening.lean",
+  "statement": "theorem bounded_monomial_straightening (F : Type u) [Field F] (A : Type v) [Ring A] [Algebra F A] (n q : ℕ) (hq : 2 ≤ q) (y : Fin n → A) (hbasis : ∃ b : Module.Basis (Fin n → Fin q) F A, ∀ a : Fin n → Fin q, b a = orderedGeneratorMonomial y (fun i ↦ (a i : ℕ))) (hcomm : ∀ i j : Fin n, y j * y i - y i * y j ∈ Submodule.span F (insert (1 : A) (Set.range y))) (hpower : ∀ i : Fin n, y i ^ q ∈ Submodule.span F (insert (1 : A) (Set.range y))) : (∀ d : ℤ, d < 0 → boundedMonomialDegreeSpan F y q d = ⊥) ∧ (∀ w : List (Fin n), (w.map y).prod ∈ boundedMonomialDegreeSpan F y q (w.length : ℤ)) ∧ (∀ r s : ℤ, 0 ≤ r → 0 ≤ s → Submodule.span F {z | ∃ x ∈ boundedMonomialDegreeSpan F y q r, ∃ t ∈ boundedMonomialDegreeSpan F y q s, z = x * t} ≤ boundedMonomialDegreeSpan F y q (r + s)) ∧ (∀ a b : Fin n → Fin q, ((∀ i : Fin n, (a i : ℕ) + (b i : ℕ) < q) → orderedGeneratorMonomial y (fun i ↦ (a i : ℕ)) * orderedGeneratorMonomial y (fun i ↦ (b i : ℕ)) - orderedGeneratorMonomial y (fun i ↦ (a i : ℕ) + (b i : ℕ)) ∈ boundedMonomialDegreeSpan F y q (((∑ i : Fin n, (a i : ℕ)) : ℤ) + (∑ i : Fin n, (b i : ℕ)) - 1)) ∧ ((∃ i : Fin n, q ≤ (a i : ℕ) + (b i : ℕ)) → orderedGeneratorMonomial y (fun i ↦ (a i : ℕ)) * orderedGeneratorMonomial y (fun i ↦ (b i : ℕ)) ∈ boundedMonomialDegreeSpan F y q (((∑ i : Fin n, (a i : ℕ)) : ℤ) + (∑ i : Fin n, (b i : ℕ)) - 1))) ∧ (n = 0 → (⊤ : Submodule F A) = Submodule.span F {(1 : A)} ∧ (1 : A) * 1 = 1)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0110af884",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Read the item node (unchanged vs live except the lean record), the module, the report and both stmt_deps (Field, Submodule.span), plus the citer lem-sfb-restricted-pbw-top-pairing. Every hypothesis matches the node and none is stronger: Field F, Ring A + Algebra F A with no commutativity, q>=2, an existing basis indexed by Fin n -> Fin q equal to the ordered monomials, hcomm and hpower in span(insert 1 (range y)), independent universes. Every conclusion matches: P_d=bot for d<0, words lie in P_length, span of products of P_r and P_s lies in P_(r+s), both leading formulas with an integer bound m-1 and unrestricted N exponents for y^(a+b), n=0 gives top=span{1} and 1*1=1. Edge cases n=0, a=b=0, q=2 and noncommutative A are covered. Helpers are real List-product and span definitions with source/blueprint docstrings; the docstring has all 7 steps; proof is only sorry; lean.statement is verbatim. No duplicate in Mathlib or the project. No files changed, no compile. No findings."
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-common-projection-proper-on-stage",
+ "kind": "statement",
+ "title": "The common-stage projection proper equation on finite models",
+ "statement": "Fix finite-field datum $D$, coefficient datum $C$, and $H:\\mathrm{SixFunctorCommonStages}(D,C)$ [def-sf-operation-stages]. Write $S=H.\\mathrm{commonStage}$, $T_X=H.\\mathrm{commonStageTensor}(X)$, $\\pi_{f,c}(K,L)$ for the specified compact-support projection [def-sf-constructible-projection-mates], and $\\iota_{E,X}$ for the common-stage inclusion [def-weil-algebraically-closed-coefficients]. Fix one finite coefficient field $E$ and suppose its rational stage satisfies CompactSupportProjectionCoherence on every second input [def-sf-projection-comparison-equations]. Let $f:X\\to Y$ be proper between SixFunctorSpace objects, and $c$ any compactification of $f$. For $K_E\\in\\mathrm{Stage}_E(X)$ and $L_E\\in\\mathrm{Stage}_E(Y)$, set $K=\\iota_{E,X}K_E$ and $L=\\iota_{E,Y}L_E$. Write $j$ for the hom component of $S.\\mathrm{properIdentification}_{f,c}$ and $\\pi_f^{\\mathrm{proper}}$ for the specified proper-counit projection [def-sf-constructible-projection-mates]. Then\n$$T_Y(j_K,1_L);\\pi_f^{\\mathrm{proper}}(K,L)=\\pi_{f,c}(K,L);j_{T_X(K,S.\\mathrm{pull}_fL)}.$$\nSemicolon denotes composition in displayed order. This asserts only the proper equation on the included models, with no invertibility, composition or pentagon conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and finite/common coefficient-field paragraphs, together with the coherence sentence of fix-prop-projection-formula"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-sf-projection-comparison-equations",
+  "def-weil-algebraically-closed-coefficients",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [
+  {
+   "text": "Obtain one tensor endpoint comparison for coefficient inclusion and the two individual-map comparison squares from lem-sf-common-projection-proper-tensor-compatibility. Its hypotheses contain no projection coherence equations. The existential witness is used only in this proposition proof. The compact-support square is valid for every f and is specialized here to proper f; the proper square is an additional conjunct for the same t.",
+   "uses": [
+    "lem-sf-common-projection-proper-tensor-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the coefficient comparison compactification square and properIdentity square to show inclusion(j_c) followed by the direct-image comparison equals the support comparison followed by the common-stage j_c. Tensor naturality gives the corresponding source square; naturality of j_c at the inner tensor comparison gives the target square. These are the private proper_identification, source_proper and target_proper calculations.",
+   "uses": [
+    "def-sf-operation-stages",
+    "lem-sf-rational-projection-tensor-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the desired equation with the invertible compact-support source comparison. Rewrite its left side using source_proper and the proper projection square. Use inclusion.map_comp and the finite-stage proper equation supplied by hH. Rewrite the result with target_proper and the compact-support projection square, and cancel the source comparison. This is the generic private proper_transfer proof applied to K0 and L0.",
+   "uses": [
+    "def-sf-projection-comparison-equations",
+    "lem-sf-rational-projection-tensor-compatibility",
+    "lem-sf-common-projection-proper-tensor-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-common-projection-proper-tensor-compatibility",
+  "def-sf-operation-stages",
+  "lem-sf-rational-projection-tensor-compatibility",
+  "def-sf-projection-comparison-equations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility paragraph; explicit proper-identification and endpoint-cancellation calculation, with the individual-map comparison isolated independently of finite-stage coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport a natural transformation equation along a coefficient functor preserving tensor products and adjunction units and counits",
+   "results": "NatTrans.tensor_naturality, NatTrans.IsMonoidal.tensor, Functor.Monoidal.transport_δ, transport_μ, natTransIsMonoidal_of_transport, transport_ε, transport_η and NatTrans.mk.",
+   "date": "2026-10-26",
+   "verdict": "These provide generic tensor naturality and monoidal transport, but do not identify this specified compact-support projection mate under coefficient inclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport natural transformation commutative diagrams through essentially surjective functor and natural isomorphisms",
+   "results": "CategoryTheory.Functor.objObjPreimageIso, essSurj_of_iso, and comma-category essential-surjectivity results.",
+   "date": "2026-10-26",
+   "verdict": "These transport input objects, but do not identify the canonical projection mate with its coefficient image."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.naturality",
+   "results": "msearch returned no hits, reporting unknown identifier NatTrans.naturality; local Mathlib and the existing projection_natural proof supply naturality.",
+   "date": "2026-10-26",
+   "verdict": "Naturality is proved in the parent module; the missing step is the finite-model comparison calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportProjectionCoherence|SixFunctorCoefficientComparison",
+   "results": "msearch returned zero hits. Local rg found CompactSupportProjectionFieldStages, RationalProjectionComparisonEquations, CompactSupportProjectionCoherence and SixFunctorOperationDatumStages. The field-stage consumer imports the parent theorem, so cannot supply it.",
+   "date": "2026-10-26",
+   "verdict": "No existing theorem gives this finite-model proper equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionComparisonEquations",
+  "group": "P3",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Finite-model proper comparison in coefficient transport of the projection equations",
+   "via": [
+    "lem-sf-common-projection-comparison-equations",
+    "lem-sf-projection-field-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionProperOnStage",
+  "file": "lean/Sheaf/Paper/CommonProjectionProperOnStage.lean",
+  "declaration": "WeilConjectures.commonProjectionProper_onStage",
+  "statement": "theorem commonProjectionProper_onStage\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C)\n    (E₀ : Padic.FiniteCoefficientFields C.l C.Qbar)\n    (hH : CompactSupportProjectionCoherence (H.coefficientStages E₀).rational\n      (H.coefficientStages E₀).rationalTensor (H.coefficientStages E₀).rationalExchange\n      (fun _ _ ↦ True))\n    {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsProper f.hom.left]\n    (c : Compactification f.hom.left)\n    (K₀ : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar X.obj.left E₀)\n    (L₀ : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar Y.obj.left E₀) :\n    let K := (GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀).obj K₀;\n    let L := (GeneralAlgebraicallyClosedCoefficients.inclusion\n      (l := C.l) (Ω := C.Qbar) (Y := Y.obj.left) E₀).obj L₀;\n      ((H.commonStageTensor Y).map ((H.commonStage.properIdentification f c).hom.app K)).app L ≫\n          compactSupportProperProjection H.commonStageExchange f K L =\n        compactSupportProjectionComponent H.commonStageExchange f c K L ≫\n          (H.commonStage.properIdentification f c).hom.app\n            (((H.commonStageTensor X).obj K).obj ((H.commonStage.pull f).obj L))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T070434-L-3588485",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T235908-L-1466635",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "id": "lem-zl-simple-frobenius-eigenembedding",
+ "kind": "statement",
+ "title": "An eigenembedding for a periodic simple geometric local system",
+ "statement": "Let k₀ be a finite field, ℓ a different prime, and X/k₀ a scheme with irreducible geometric fiber. Let V be a lisse Weil sheaf [def-weil-weil-sheaf-complex, def-pod-lisse-l-adic-sheaves], and let S be an irreducible geometric local system admitting an embedding j:S → V̄. For any d≥0 and isomorphism e:(Fr^d)^*S ≅ S, there exist a monomorphism j′:S → V̄ and an isomorphism e′:(Fr^d)^*S ≅ S satisfying e′;j′ = (Fr^d)^*(j′);φ_d. No irreducibility or semisimplicity of V is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-geometric-constituents/lem-zl-geometric-constituents-any-base.proof.md",
+  "place": "Paragraphs 1--2: the eigenline of the multiplicity operator, expressed as an eigenvector in Hom(S,V̄)."
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-pod-lisse-l-adic-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Give morphisms of adic sheaves their coefficient-vector-space structure using scalar endomorphisms and the faithful forgetful functor to sheaves. Pushforward is linear; its left adjoint pullback is linear too. Consequently evaluation at a geometric point is linear. A nonzero morphism out of S is mono, since its lisse kernel must be zero by simplicity. If its stalk is zero this contradicts the nonzero stalk rank of S. Thus stalk evaluation on Hom(S,V̄) is injective. Finite-dimensionality of the two lisse stalks makes Hom(S,V̄) finite dimensional; the supplied embedding makes it nonzero.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let Q=(Fr^d)^* and define the coefficient-linear endomorphism B(f)=e^{-1};Q(f);φ_d on Hom(S,V̄). It is injective, since Q is faithful and the two outer arrows are isomorphisms. Mathlib Module.End.exists_eigenvalue and HasEigenvalue.exists_hasEigenvector supply a nonzero eigenvector v with eigenvalue c. Injectivity implies c≠0.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The nonzero eigenvector v:S→V̄ is mono by the kernel argument. Set e′ to the isomorphism with hom c•e.hom and inverse c^{-1}•e.inv. The two inverse identities follow by coefficient linearity and c≠0. Composing the eigenvector equation with e.hom gives precisely e′.hom;v=Q(v);φ_d. This also covers d=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H9",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-lem-wgen-geometric-constituents/lem-zl-geometric-constituents-any-base.proof.md",
+  "place": "Paragraphs 1--2, adapted to the Hom space of sheaf morphisms, using the existing lisse-kernel and stalk-rank API and Mathlib eigenvalues."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An invertible linear operator on a nonzero finite dimensional vector space over an algebraically closed field has a nonzero eigenvector with nonzero eigenvalue",
+   "results": "Module.End.exists_eigenvalue; Module.End.HasEigenvalue.exists_hasEigenvector; LinearMap.not_hasEigenvalue_zero_tfae. The first two are used directly; the nonzero eigenvalue is proved from injectivity.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.exists_eigenvalue",
+   "results": "Exact eigenvalue-existence theorem in Mathlib.LinearAlgebra.Eigenspace.Triangularizable; sheaf Hom-space and Frobenius compatibility still require proof.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_eigenvalue|simple.*eigenembedding",
+   "results": "Seven Mathlib hits, including Triangularizable.lean:63; no sheaf eigenembedding theorem.",
+   "date": "2026-10-27",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.GeometricMultiplicityOne",
+  "date": "2026-10-27",
+  "group": "H9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-geometric-multiplicity-one",
+   "place": "The periodic simple factor and multiplicity eigenline in proof steps 2--3.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.SimpleFrobeniusEigenembedding",
+  "file": "lean/Sheaf/DeligneLaumon/SimpleFrobeniusEigenembedding.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_simple_frobenius_eigenembedding",
+  "statement": "theorem exists_simple_frobenius_eigenembedding\n    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}\n    [X.Over (Spec (CommRingCat.of k₀))]\n    [IrreducibleSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]\n    (V : WeilSheaf k₀ l X) (hV : V.IsLisse)\n    (S : AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n    (hS : IsIrreducibleAdicLocalSystem S) (j : S ⟶ V.obj.carrier) [Mono j]\n    (d : ℕ) (e : (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X d).obj S ≅ S) :\n    ∃ (j' : S ⟶ V.obj.carrier), Mono j' ∧\n      ∃ e' : (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X d).obj S ≅ S,\n        e'.hom ≫ j' =\n          (ProEtaleWeilSheaf.frobeniusPowPullback k₀ l X d).map j' ≫\n            (V.obj.frobeniusPowIso d).hom",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T222716-L-685280",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T222716-L-685280",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

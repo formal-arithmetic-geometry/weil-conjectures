@@ -1,0 +1,154 @@
+{
+ "id": "lem-pur-integral-scalar-tensor-chain-quasi-iso",
+ "kind": "statement",
+ "title": "Quasi-isomorphism of the specified scalar tensor chain comparison",
+ "statement": "Let ell be prime, E,L finite extensions of Q_ell and iota:E→L a coefficient embedding. For any scheme W and good complexes P,Q of completed E-coefficient sheaves (K-flat with flat terms), the specified map scalarTensorChain [lem-pur-integral-scalar-finite-comparison-models] is a quasi-isomorphism. Its source is ordinary scalar extension of the strict Roos tensor of P,Q; its target is the strict Roos tensor of their ordinary scalar extensions. The map is the prescribed scalarRoosMap followed by integralOperationsRoosMap of scalarTensorTower, without any choice of derived comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; sites-modules.tex Tag 03EL; derived.tex Tag 08TC; Bhatt--Scholze, Proposition 3.5.1 (finite-free completion exchange)."
+ },
+ "stmt_deps": [
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-integral-scalar-finite-comparison-models"
+ ],
+ "proof": [
+  {
+   "text": "For each finite level n use the normalized ramified tensor-level isomorphism d:C_n≅D_m at some m≥n. Test morphisms from scalar-extended finite tensors using the scalar adjunction and finite tensor generator extensionality. Induction on m-n gives the generator formula for every recorded tower transition. The specified normalization of scalarTensorTower and d then proves alpha_m followed by d.inv is C(m→n), and d.inv followed by alpha_n is D(m→n). This uses no goodness hypothesis.",
+   "uses": [
+    "lem-pur-integral-scalar-tensor-ramified-level",
+    "lem-pur-integral-scalar-finite-comparison-models",
+    "lem-pur-integral-scalar-tensor-level-reduction",
+    "lem-pur-integral-tensor-transition-compatibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the diagonal cone-transition homotopy to these two factorizations. Every sufficiently late transition in the mapping-cone tower is nullhomotopic and therefore zero in the derived category. The ringed strict-tower homotopy-limit theorem makes its derived-limit cone vanish. Compare this derived limit with the explicit strict Roos functor using its right-derived universal property; hence integralOperationsRoosMap alpha is a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-diagonal-cone-transition-homotopy",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-strict-roos-derivation",
+    "lem-weil-strict-roos-comparison",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "def-sf-strict-roos-coordinate-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A finite-free coefficient basis identifies ordinary scalar extension followed by restriction with a finite power functor, so scalar extension preserves countable products. Its canonical product comparison is invertible, and its additive biproduct comparison is invertible. The two prescribed coordinates of scalarRoosMap identify every degree with the composite of these isomorphisms, so scalarRoosMap is an isomorphism of complexes. Compose with the quasi-isomorphism of step 2. By definition this composite is exactly scalarTensorChain.",
+   "uses": [
+    "lem-weil-completed-integral-finite-free",
+    "lem-pur-finite-free-scalar-extension",
+    "lem-pur-finite-power-complex",
+    "def-sf-additive-roos-map",
+    "lem-weil-pbc-finite-free-strict-tower-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-tensor-ramified-level",
+  "lem-pur-integral-scalar-finite-comparison-models",
+  "lem-pur-integral-scalar-tensor-level-reduction",
+  "lem-pur-integral-tensor-transition-compatibility",
+  "lem-pur-diagonal-cone-transition-homotopy",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-strict-roos-derivation",
+  "lem-weil-strict-roos-comparison",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "def-sf-strict-roos-coordinate-interface",
+  "lem-weil-completed-integral-finite-free",
+  "lem-pur-finite-free-scalar-extension",
+  "lem-pur-finite-power-complex",
+  "def-sf-additive-roos-map",
+  "lem-weil-pbc-finite-free-strict-tower-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, strict-tower derived-limit comparison; sites-modules.tex Tag 03EL; finite diagonal cone homotopy from ramified quotient levels."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite scalar extension commutes with completed tensor product via the normalized Roos comparison",
+   "results": "Eight results about ordinary algebraic adic completion, including AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; none concern these unbounded sheaf complexes or specified strict Roos maps.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"IsLocalization\"",
+   "results": "Results about ring localization base change, including IsLocalization.tensor and IsLocalization.moduleTensorEquiv; no categorical completion/Roos comparison.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorChain|scalarOperationsOrdinary_tower",
+   "results": "msearch: no Mathlib hits. rg on lean/Sheaf and lean/WeilConjectures finds scalarTensorChain only as the existing model definition and in the assigned module; no tensor-chain quasi-isomorphism theorem. The pullback-specific chain theorem does not accept tensor pairs.",
+   "date": "2026-10-27",
+   "verdict": "Use the recorded finite tensor models; isolate only the missing cofinal-filtration chain step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with derived completed tensor through a normalized Roos quasi-isomorphism",
+   "results": "Eight results: ModuleCat.ExtendScalars.obj′, algebraic adic-completion tensor/scalar lemmas, ring-localization scalar extension; none concerns the specified sheaf Roos maps or normalized representative descent.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement. Retain the stated strict-model comparison and generic functor-square localization descent."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "date": "2026-10-27",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final coefficient compatibility paragraph; scalar comparison tensor proof step, via scalar/tensor strict quotient towers and cofinal uniformizer filtrations.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralScalarTensorChainQuasiIso",
+  "file": "lean/Sheaf/Paper/IntegralScalarTensorChainQuasiIso.lean",
+  "declaration": "WeilConjectures.scalarTensorChainQuasiIso",
+  "statement": "theorem scalarTensorChainQuasiIso (W : AlgebraicGeometry.Scheme.{u})\n    (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :\n    QuasiIso (scalarTensorChain l E L ι W P.obj Q.obj)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-27"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T112413-L-1580371",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261027T123445-L-2301241",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

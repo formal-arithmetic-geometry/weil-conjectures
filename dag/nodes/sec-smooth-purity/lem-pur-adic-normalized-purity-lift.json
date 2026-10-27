@@ -1,0 +1,298 @@
+{
+ "id": "lem-pur-adic-normalized-purity-lift",
+ "kind": "statement",
+ "title": "Normalized finite-purity systems and their coherent strict-tower lift",
+ "statement": "Fix the global finite-field and coefficient datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ has characteristic $p$, $\\ell\\ne p$ is prime, $E/\\mathbf Q_\\ell$ is finite, $\\mathcal O_E$ is its valuation ring, $\\varpi_E$ is a uniformizer, and $A_n=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $X,Y$ be separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], let $f:X\\to Y$ be smooth separated of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms], and let $K\\in D^b_{ctf}(Y,\\mathcal O_E)$ [def-weil-finite-tor-amplitude, def-weil-derived-complete-integral-detailed]. On the small pro-etale sites [def-weil-pbc-proetale-site] put $R_W=\\widehat{\\mathcal O}_{E,W}=\\lim_n(A_n)_W$ and $B_{n,W}=(A_n)_W$, for $W=X,Y$. Write $K_n=K\\otimes^L_{R_Y}B_{n,Y}$ [def-weil-integral-derived-reduction], and let $f_n$ denote $f$ with coefficients $B_{n,Y},B_{n,X}$. For $m\\geq n\\geq1$ and $W=X,Y$ write $\\operatorname{red}_{m,n,W}=-\\otimes^L_{B_{m,W}}B_{n,W}$ for derived change of rings [lem-pur-derived-change-of-rings, def-pur-finite-reduction-root-charts]. Use integral pullback and completed tensor [def-pur-integral-derived-operations] and the twists [def-coefficient-twists-detailed]. Put $U=Lf^*K(d)[2d]$ and $U_n=Lf_n^*K_n(d)[2d]$.\n\nUse the exceptional inverse image of [def-weil-exceptional-inverse-image], the specified finite smooth-purity maps [def-pur-smooth-purity-map], the canonical maps $b^U_n$ of [def-pur-adic-source-reduction], and the strict reduction tower of $U$ [def-weil-integral-reduction-tower]. Put $V_n=Rf_n^!K_n$ and $g_n=\\gamma_{f,K_n}:U_n\\to V_n$. There are normalized DVR towers $\\mathcal U_\\bullet,\\mathcal V_\\bullet$ in the sense of [def-coef-normalized-dvr-tower], whose finite-level objects are $U_n,V_n$: $\\mathcal U_\\bullet$ is the strict reduction tower of $U$ with evaluations identified by the canonical $b^U_n$, and $\\mathcal V_\\bullet$ is the actual strict exceptional system used in defining $Rf^!K=R\\lim\\mathcal V_\\bullet$. For $m\\geq n\\geq1$, write $\\rho^U_{m,n},\\rho^V_{m,n}$ for their quotient-linear normalization isomorphisms. The exceptional one is the finite-reduction compatibility $\\operatorname{red}_{m,n,X}(Rf_m^!K_m)\\simeq Rf_n^!(\\operatorname{red}_{m,n,Y}K_m)$ of [def-pur-finite-reduction-comparisons] followed by $Rf_n^!$ of the normalization of $K$. The maps $g_n$ are isomorphisms and satisfy\n$$\\rho^V_{m,n}\\circ\\operatorname{red}_{m,n,X}(g_m)=g_n\\circ\\rho^U_{m,n}.$$\nAfter restriction along $R_X\\to B_{n,X}$, there exists a morphism $G:\\mathcal U_\\bullet\\to\\mathcal V_\\bullet$ in $D(\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(R_X)))$ whose evaluation at every $n$ is $\\operatorname{Res}_n(g_n)$. Equivalently, writing $t^U_n,t^V_n$ for the evaluated transition maps of $\\mathcal U_\\bullet,\\mathcal V_\\bullet$ from level $n+1$ to level $n$, its evaluated maps satisfy $t^V_n\\circ\\operatorname{Res}_{n+1}(g_{n+1})=\\operatorname{Res}_n(g_n)\\circ t^U_n$. No uniqueness or natural choice of $G$, and no common stratification or integral local model, is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.proof.md",
+  "place": "Proof, sentences \"comparisons are compatible with the transition maps\" and \"a morphism of normalized systems\"; retained returned proof steps 2-3: actual normalized systems, quotient cocycle, naturality and coherent lift."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-integral-derived-reduction",
+  "def-pur-integral-derived-operations",
+  "def-coefficient-twists-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-smooth-purity-map",
+  "def-pur-adic-source-reduction",
+  "def-weil-integral-reduction-tower",
+  "def-coef-normalized-dvr-tower",
+  "lem-pur-derived-change-of-rings",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-finite-reduction-comparisons",
+  "def-pur-adic-exceptional-reduction",
+  "def-pur-adic-purity-objects",
+  "def-pur-adic-finite-source-normalization",
+  "def-coef-ringed-sequence-site",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-pur-adic-exceptional-system-realization",
+  "def-pur-composition-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-adic-actual-systems-normalized] to retain the actual strict source and target towers, finite objects, evaluations and transitions.",
+   "uses": [
+    "lem-pur-adic-actual-systems-normalized"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite smooth purity at every positive quotient exponent to the reduction of K, using purAdicReductionFiniteTor.",
+   "uses": [
+    "thm-pur-finite-coefficient-smooth-purity",
+    "def-pur-adic-purity-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each quotient, extract the defining source normalization composite. Paste [thm-pur-finite-reduction-of-purity] with [prop-pur-smooth-purity-naturality-cover] at the input quotient normalization. Associativity gives the required finite compatibility square.",
+   "uses": [
+    "def-pur-adic-finite-source-normalization",
+    "thm-pur-finite-reduction-of-purity",
+    "prop-pur-smooth-purity-naturality-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-pur-adic-exceptional-normalization-mate] and the definition of the source transition. Each tower normalization says precomposition by its transition is bijective. Postcomposition with the quotient restriction isomorphism and the tensor/restriction Hom equivalence identify this with precomposition by the finite normalization. Coyoneda detects its invertibility.",
+   "uses": [
+    "lem-pur-adic-exceptional-normalization-mate",
+    "def-coef-normalized-dvr-tower",
+    "def-pur-adic-finite-source-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transpose the finite square under the tensor/restriction adjunction. Hom-equivalence naturality gives g_m;tauV=tauU;Res(g_n). Apply completed scalar restriction and naturality of its composition comparison to obtain the stated adjacent transition equation.",
+   "uses": [
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport U.tower_tau and V.tower_tau along the recorded equalities and heterogeneous evaluation/transition equalities. Conjugate Res(g_n) by sourceEvaluation and inverse targetEvaluation. Cancel targetEvaluation to verify adjacent compatibility from the restricted square. Apply [lem-pur-normalized-dvr-tower-evaluation-full] to obtain G, then cancel the evaluation inverse to get its required equation. Assemble the five clauses by conjunction.",
+   "uses": [
+    "lem-pur-normalized-dvr-tower-evaluation-full",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-pur-adic-finite-source-normalization",
+  "def-pur-adic-purity-objects",
+  "lem-pur-adic-actual-systems-normalized",
+  "lem-pur-adic-exceptional-normalization-mate",
+  "lem-pur-normalized-dvr-tower-evaluation-full",
+  "prop-pur-smooth-purity-naturality-cover",
+  "thm-pur-finite-coefficient-smooth-purity",
+  "thm-pur-finite-reduction-of-purity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Formal assembly of the original seven proof steps; normalization and exceptional-mate comparisons are split into their genuine component lemmas; finite purity, finite square, adjunction transposition, and lifting assembly are proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite coefficient smooth purity isomorphisms between normalized reduction towers lift to a morphism in the derived category of strict towers",
+   "results": "{\"t\": \"2026-10-22T06:04:07Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible finite coefficient smooth purity isomorphisms between normalized reduction towers lift to a morphism in the derived category of strict towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\"], \"digest\": \"8bf327b7ccf1d3a1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf-tower assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.IsIso",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans, CategoryTheory.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf-tower assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*[Tt]ower|[Pp]urity|sequential.*evaluation",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"grep\", \"query\": \"normalized.*[Tt]ower|[Pp]urity|sequential.*evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\"], \"digest\": \"f02a2c970e81d667\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf-tower assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized exceptional inverse image tower and pullback Tate twist tower admit a coherent lift of finite purity maps",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"leansearch\", \"query\": \"A normalized exceptional inverse image tower and pullback Tate twist tower admit a coherent lift of finite purity maps\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fullness of evaluation from the derived category of inverse sequences to inverse sequences of the derived category lifts compatible isomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:04:35Z\", \"tool\": \"leanfinder\", \"query\": \"Fullness of evaluation from the derived category of inverse sequences to inverse sequences of the derived category lifts compatible isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instFullSingleFunctor\", \"DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"HomotopyCategory.instFullFunctorHomologicalComplexObjWhiskeringLeftQuotient\", \"CochainComplex.instFullIntSingleFunctor\", \"HomotopyCategory.instFullHomologicalComplexQuotient\", \"CategoryTheory.Localization.instFullFunctorWhiskeringLeftFunctor'\", \"CategoryTheory.Abelian.full_comp_preadditiveCoyonedaObj\", \"instFullLightDiagram'LightDiagramToLightFunctor\"], \"digest\": \"dc450d2e0ba2510b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf-tower assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erived.*[Tt]ower|[Tt]ower.*[Dd]erived|[Ee]valuation.*[Ff]ull",
+   "results": "{\"t\": \"2026-10-22T06:04:25Z\", \"tool\": \"grep\", \"query\": \"[Dd]erived.*[Tt]ower|[Tt]ower.*[Dd]erived|[Ee]valuation.*[Ff]ull\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf-tower assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible finite coefficient smooth purity maps between normalized inverse systems lift to a morphism in the derived category of strict inverse sequences",
+   "results": "{\"t\": \"2026-10-22T06:54:50Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible finite coefficient smooth purity maps between normalized inverse systems lift to a morphism in the derived category of strict inverse sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.transitionMap\", \"InverseSystem.globalEquiv_compatibility\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"InverseSystem.pEquivOnLim\", \"LightProfinite.transitionMapLE\", \"InverseSystem.globalEquiv\", \"InverseSystem.pEquivOnGlue\", \"AdicCompletion.eval_lift\"], \"digest\": \"185fe7b8242c888a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary inverse systems, smooth ring maps, normalized field traces, single-term derived embeddings or localization whiskering; none states geometric purity or evaluation fullness for derived strict towers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity morphisms commute with the transition maps of normalized coefficient towers",
+   "results": "{\"t\": \"2026-10-22T06:55:07Z\", \"tool\": \"leansearch\", \"query\": \"Smooth purity morphisms commute with the transition maps of normalized coefficient towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"Algebra.Smooth.comp\", \"CategoryTheory.instHomIsOverOfIsOverTower_1\", \"AlgebraicGeometry.IsSmooth.recOn\", \"RingHom.Smooth.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"d2ba1348063ce494\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary inverse systems, smooth ring maps, normalized field traces, single-term derived embeddings or localization whiskering; none states geometric purity or evaluation fullness for derived strict towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, DerivedCategory",
+   "results": "{\"t\": \"2026-10-22T06:55:07Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.Full, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"DerivedCategory.instFullSingleFunctor\"], \"digest\": \"e97266ed602d55b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary inverse systems, smooth ring maps, normalized field traces, single-term derived embeddings or localization whiskering; none states geometric purity or evaluation fullness for derived strict towers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fullness of evaluation from the derived category of inverse sequences to inverse sequences in the derived category lifting compatible families of morphisms",
+   "results": "{\"t\": \"2026-10-22T06:56:24Z\", \"tool\": \"leanfinder\", \"query\": \"Fullness of evaluation from the derived category of inverse sequences to inverse sequences in the derived category lifting compatible families of morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instFullSingleFunctor\", \"DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"HomotopyCategory.instFullFunctorHomologicalComplexObjWhiskeringLeftQuotient\", \"CategoryTheory.Abelian.full_comp_preadditiveCoyonedaObj\", \"CochainComplex.instFullIntSingleFunctor\", \"CategoryTheory.Localization.instFullFunctorWhiskeringLeftFunctor'\", \"instFullLightDiagram'LightDiagramToLightFunctor\", \"HomologicalComplex.instFullSingle\"], \"digest\": \"a1b3538ff6cb696c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary inverse systems, smooth ring maps, normalized field traces, single-term derived embeddings or localization whiskering; none states geometric purity or evaluation fullness for derived strict towers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-adic-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Proof, sentences \"comparisons are compatible with the transition maps\" and \"a morphism of normalized systems\"; retained returned proof steps 2-3: actual normalized systems, quotient cocycle, naturality and coherent lift.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-adic-normalized-purity-lift",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split the normalized source and actual exceptional systems, identify the canonical quotient comparisons by their adjunction mates, paste finite reduction with input naturality, transpose the equality explicitly and apply the existing sequential evaluation fullness theorem. No new nodes and no Lean changes.",
+  "blueprint": "thm-pur-adic-reconstruction.proof.md: first sentence realized by steps 1-5, the sentence that the maps form a morphism of normalized systems realized by steps 6-7. No reconstruction, effectivity or common-stratification assertion is imported into this item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sequential-tower-evaluation-full",
+    "why": "Generic morphism-lifting theorem for derived strict sequences on a small ringed site; fills the coherence gap in forming the morphism of normalized systems without assuming a unique or natural lift."
+   },
+   {
+    "node": "lem-coef-finite-exceptional",
+    "why": "Generic finite-coefficient exceptional comparison with quotient cocycle and counit equation; identifies the actual system normalization with the very comparison used in finite reduction of purity."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic etale/pro-etale comparison on actual strict coefficient systems, including evaluated units/counits/transitions and preservation of bounded-below normalization."
+   },
+   {
+    "node": "lem-pur-etale-coefficient-system-adjoint",
+    "why": "Actual strict-system exceptional right adjoint with normalized output and evaluations identified including transition mates; used in the defining integral construction, not as a replacement route."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic etale-origin theorem for bounded constructible finite-coefficient objects; checks the origin hypothesis of the system comparison."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NU-5312cec02",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-5312cec02 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps in full, against every cited statement. Statement and stmt_deps are unchanged, there are no new nodes, proof_deps equals the union of uses, every step is under 2000 characters, and there is no cycle. The item is still unsplit live and is not in the drop list (route-pivot-dropped.txt only retains coefficient-system-adjoint as active). Step 1: the uniform bounds come from def-weil-derived-complete-integral-detailed and def-weil-finite-tor-amplitude. The actual tower comes from def-weil-pbc-adic-coefficient-datum, whose hypotheses I checked (O_E Noetherian, residue field torsion, A_n finite and perfect). The source-finiteness node supplies the b^U_n, so ρ^U=b_n c^U red(b_m^{-1}) is well typed. Step 2 follows the integral construction of def-weil-exceptional-inverse-image verbatim. The comparison lemma's last clause applies: ν^* is fully faithful on D^+, and constructible-origin (ii) gives the essential-image hypothesis. The adjoint lemma keeps the system normalized, and the evaluations are Rf_n^!K_n. Step 3: finite-reduction-of-purity takes its exceptional vertical map b from lem-coef-finite-exceptional (its proof step 1). The counit equation and injectivity of the adjunction bijection then give ρ^V=J_n(a)b. Step 4 applies finite smooth purity at A_n; all hypotheses are present. Step 5: I recomputed both endpoints of the pasting of finite reduction (larger index m) with naturality in a: red K_m→K_n; this fixes the blueprint's one-line reduction claim. Step 6 is a genuine elementary unit-naturality calculation, using τ=Res(α)η from def-coef-normalized-dvr-tower. Step 7 applies sequential-tower-evaluation-full on the small pro-étale skeleton with R_X, with no uniqueness claimed, as the item says. Edge cases m=n, n=1, d=0, K=0 and X=∅ all check out, and no flatness is assumed. Accepted tool_uses: sequential-tower-evaluation-full, lem-coef-finite-exceptional, the coefficient-system comparison and adjoint lemmas, and proetale-constructible-origin; all are generic black boxes from the defining construction. No SGA is used. Maintainer note: the unsplit sibling lem-pur-adic-source-finiteness-reductions says b^U 'intertwines successive and direct quotient normalization maps' without naming the U_n normalization (H_n(a)h). Its split should make that map explicit, because step 3 relies on it."
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "Q04 stage 2",
+  "old_statement": "Fix the global finite-field and coefficient datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$ has characteristic $p$, $\\ell\\ne p$ is prime, $E/\\mathbf Q_\\ell$ is finite, $\\mathcal O_E$ is its valuation ring, $\\varpi_E$ is a uniformizer, and $A_n=\\mathcal O_E/\\varpi_E^n$ for $n\\geq1$. Let $X,Y$ be separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], let $f:X\\to Y$ be smooth separated of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms], and let $K\\in D^b_{ctf}(Y,\\mathcal O_E)$ [def-weil-finite-tor-amplitude, def-weil-derived-complete-integral-detailed]. On the small pro-etale sites [def-weil-pbc-proetale-site] put $R_W=\\widehat{\\mathcal O}_{E,W}=\\lim_n(A_n)_W$ and $B_{n,W}=(A_n)_W$, for $W=X,Y$. Write $K_n=K\\otimes^L_{R_Y}B_{n,Y}$ [def-weil-integral-derived-reduction], and let $f_n$ denote $f$ with coefficients $B_{n,Y},B_{n,X}$. For $m\\geq n\\geq1$ and $W=X,Y$ write $\\operatorname{red}_{m,n,W}=-\\otimes^L_{B_{m,W}}B_{n,W}$ for derived change of rings [lem-pur-derived-change-of-rings]. Use integral pullback and completed tensor [def-pur-integral-derived-operations] and the twists [def-coefficient-twists-detailed]. Put $U=Lf^*K(d)[2d]$ and $U_n=Lf_n^*K_n(d)[2d]$.\n\nUse the exceptional inverse image of [def-weil-exceptional-inverse-image], the specified finite smooth-purity maps [def-pur-smooth-purity-map], the canonical maps $b^U_n$ of [def-pur-adic-source-reduction], and the strict reduction tower of $U$ [def-weil-integral-reduction-tower]. Put $V_n=Rf_n^!K_n$ and $g_n=\\gamma_{f,K_n}:U_n\\to V_n$. There are normalized DVR towers $\\mathcal U_\\bullet,\\mathcal V_\\bullet$ in the sense of [def-coef-normalized-dvr-tower], whose finite-level objects are $U_n,V_n$: $\\mathcal U_\\bullet$ is the strict reduction tower of $U$ with evaluations identified by the canonical $b^U_n$, and $\\mathcal V_\\bullet$ is the actual strict exceptional system used in defining $Rf^!K=R\\lim\\mathcal V_\\bullet$. For $m\\geq n\\geq1$, write $\\rho^U_{m,n},\\rho^V_{m,n}$ for their quotient-linear normalization isomorphisms. The exceptional one is the finite-reduction compatibility $\\operatorname{red}_{m,n,X}(Rf_m^!K_m)\\simeq Rf_n^!(\\operatorname{red}_{m,n,Y}K_m)$ of [thm-pur-finite-reduction-of-purity] followed by $Rf_n^!$ of the normalization of $K$. The maps $g_n$ are isomorphisms and satisfy\n$$\\rho^V_{m,n}\\circ\\operatorname{red}_{m,n,X}(g_m)=g_n\\circ\\rho^U_{m,n}.$$\nAfter restriction along $R_X\\to B_{n,X}$, there exists a morphism $G:\\mathcal U_\\bullet\\to\\mathcal V_\\bullet$ in $D(\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(R_X)))$ whose evaluation at every $n$ is $\\operatorname{Res}_n(g_n)$. Equivalently, writing $t^U_n,t^V_n$ for the evaluated transition maps of $\\mathcal U_\\bullet,\\mathcal V_\\bullet$ from level $n+1$ to level $n$, its evaluated maps satisfy $t^V_n\\circ\\operatorname{Res}_{n+1}(g_{n+1})=\\operatorname{Res}_n(g_n)\\circ t^U_n$. No uniqueness or natural choice of $G$, and no common stratification or integral local model, is asserted.",
+  "what": "Citation/definition ownership correction required by the independent H2 return at 9e093de28be7. The exceptional finite-reduction map is defined by def-pur-finite-reduction-comparisons, with scalar extension and its adjunction owned by def-pur-finite-reduction-root-charts; the theorem thm-pur-finite-reduction-of-purity is used in the proof, not to define this map. Only the two bracketed definition citations and their statement dependencies change. All mathematical prose, hypotheses, conclusions, proof steps and proof dependencies are preserved. This maintainer record repair resolves the conflict between the return and the additive-only stage-2 delivery gate.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.proof.md",
+   "place": "Proof, sentences \"comparisons are compatible with the transition maps\" and \"a morphism of normalized systems\"; retained returned proof steps 2-3: actual normalized systems, quotient cocycle, naturality and coherent lift."
+  },
+  "citers": [
+   {
+    "id": "thm-pur-adic-reconstruction",
+    "holds": true,
+    "note": "Its first proof step still obtains the same normalized towers, compatibility square, finite purity isomorphisms and coherent lift; only the citation identifying the pre-existing comparison map changes."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pur-conventions",
+   "def-weil-scheme-morphism-properties",
+   "def-sbc-smooth-morphisms",
+   "def-weil-finite-tor-amplitude",
+   "def-weil-derived-complete-integral-detailed",
+   "def-weil-pbc-proetale-site",
+   "def-weil-integral-derived-reduction",
+   "def-pur-integral-derived-operations",
+   "def-coefficient-twists-detailed",
+   "def-weil-exceptional-inverse-image",
+   "def-pur-smooth-purity-map",
+   "def-pur-adic-source-reduction",
+   "def-weil-integral-reduction-tower",
+   "def-coef-normalized-dvr-tower",
+   "lem-pur-derived-change-of-rings",
+   "thm-pur-finite-reduction-of-purity"
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicNormalizedPurityLift",
+  "declaration": "WeilConjectures.AdicNormalizedPurity.normalized_purity_lift",
+  "declarations": [
+   "WeilConjectures.AdicNormalizedPurity.normalized_purity_lift"
+  ],
+  "file": "lean/Sheaf/Paper/AdicNormalizedPurityLift.lean",
+  "statement": "theorem normalized_purity_lift (K : DerivedCategory (scalarReductionSource C.l E Y)) (hK : finiteTorConstructibleIntegral C.l E Y K) : (∀ n : ℕ, IsIso (purAdicFiniteArrow D C E f d K hK n).hom) ∧ (∀ {m n : ℕ} (h : n ≤ m), IsIso (purAdicFiniteSourceNormalization D C E f d K hK h) ∧ IsIso (exceptionalNormalization D C E f d K hK h) ∧ HEq (((purAdicFiniteSetting D C E m).finiteReductionAdjunction (n + 1) (Nat.succ_pos n) (Nat.add_le_add_right h 1) X).homEquiv _ _ (exceptionalNormalization D C E f d K hK h)) (exceptionalTransition D C E f d K hK h ≫ (purAdicQuotientRestrictionIso D C E X h).hom.app _) ∧ ((purAdicFiniteSetting D C E m).finiteReduction (n + 1) (Nat.succ_pos n) (Nat.add_le_add_right h 1) X).map (purAdicFiniteArrow D C E f d K hK m).hom ≫ exceptionalNormalization D C E f d K hK h = purAdicFiniteSourceNormalization D C E f d K hK h ≫ (purAdicFiniteArrow D C E f d K hK n).hom) ∧ (∃ U V : NormalizedDVRTower C.l E X D C.different, U.tower = sourceTower D C E f d K ∧ V.tower = targetTower D C E f K ∧ (∀ n : ℕ, HEq (U.M n) (purAdicFiniteArrow D C E f d K hK n).left ∧ HEq (V.M n) (purAdicFiniteArrow D C E f d K hK n).right ∧ HEq (U.evaluationIso n).hom (sourceEvaluation D C E f d K hK n) ∧ HEq (V.evaluationIso n).hom (targetEvaluation D C E f d K hK n).hom) ∧ (∀ {m n : ℕ} (h : n ≤ m), HEq (U.tau h) (purAdicFiniteSourceTransition D C E f d K hK h) ∧ HEq (V.tau h) (exceptionalTransition D C E f d K hK h))) ∧ (∀ n : ℕ, (normalizedDVRResCompleted C.l E X D C.different (n + 1)).map (purAdicFiniteArrow D C E f d K hK (n + 1)).hom ≫ targetRestrictedTransition D C E f d K hK (Nat.le_succ n) = sourceRestrictedTransition D C E f d K hK (Nat.le_succ n) ≫ (normalizedDVRResCompleted C.l E X D C.different n).map (purAdicFiniteArrow D C E f d K hK n).hom) ∧ (∃ G : sourceTower D C E f d K ⟶ targetTower D C E f K, ∀ n : ℕ, (normalizedDVRTowerEvaluation C.l E X D C.different n).map G ≫ (targetEvaluation D C E f d K hK n).hom = sourceEvaluation D C E f d K hK n ≫ (normalizedDVRResCompleted C.l E X D C.different n).map (purAdicFiniteArrow D C E f d K hK n).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "P3 stage-3 reduction: canonical definitions move verbatim to publicly reexported AdicNormalizedPuritySystems; theorem signature unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd4934c81",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 9e09. Lean body is byte-identical apart from imports. New def-pur-adic-finite-source-normalization is an existing:true re-export of AdicPuritySourceFiniteness; its statement matches the Lean (direct quotient diagram, J, a, rho^U pinned via ExistsUnique.choose, tau^U), its lean.statement is verbatim in the module, and there is no duplicate owner on live. Every declaration in the statement and helpers maps to a cited def owner (purity-objects, exceptional-reduction, source-reduction, normalized-dvr-tower, ringed-sequence-site, completed-pullback-tensor, exceptional-system-realization, composition-comparisons, root-charts, finite-reduction-comparisons, integral-derived-reduction, finite-tor). The item differs from base only in lean and added stmt_deps; the maintainer statement_change is already on base and carried verbatim. Mathematics as in the 9e09 clause-by-clause reading; one sorry; no hollow defs; edge cases kept. No compile (no file changed). Advisory H11: second reading is an author self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60f67",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261025T095710-L-3469215",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live (identical); 10 moved defs vs old item bodies (identical); 2 new sorry lemmas vs item clauses 2.3 and 3 (verbatim); tower-full copy vs SequentialTowerEvaluationFull (universe-general re-proof, axioms clean)"
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "id": "def-trf-realized-pullback-comparisons",
+ "kind": "definition",
+ "title": "Constructible and rational forms of normalized integral pullback comparisons",
+ "status": "split",
+ "statement": "Let $\\ell$ be a prime, let $E$ and $M$ be finite extensions of $\\mathbf Q_\\ell$ with their coefficient rings [def-weil-l-adic-coefficient-extension], and let $\\iota:E\\to M$ be a $\\mathbf Q_\\ell$-algebra homomorphism. Fix a normalized comparison system $C$ of [lem-trf-integral-pullback-comparison-realization]. Use the constructible integral pullbacks and the raw rational pullbacks of [def-weil-derived-pullback-tensor-hom], with raw localization $Q_E$ of [def-weil-rationalization-karoubi]. For $Z\\xrightarrow hW\\xrightarrow kV$, with $\\ell$ invertible in every residue field, define the constructible compositor as the full-subcategory lift of the specified integral compositor $c^C_{h,k}$. Define its rational compositor at $K\\in D^b_c(V,E)$ by $\\theta_{h k,K}\\,Q_E(c^C_{h,k,K.obj})\\,\\theta_{h,Q_E(k^*K.obj)}^{-1}\\,h^*(\\theta_{k,K}^{-1})$ in left-to-right composition order, where $\\theta_{f,K}:f^*K\\simeq Q_E(f^*K.obj)$ is the prescribed raw-localization object comparison [def-weil-local-frobenius-trace]. For any $f:X\\to Y$ with $\\ell$ invertible, define the rational scalar natural isomorphism $f_E^*\\mathbin{\\circ}T_X\\simeq T_Y\\mathbin{\\circ}f_M^*$ in left-to-right functor notation as the natural isomorphism whose component at every $K$ is, under the prescribed object formulas of rational pullback and rational scalar extension (identities of objects), $Q_M(a^C_{f,K.obj})$; its naturality for every rational morphism is a stated property of these components. Here $T$ is the recorded raw rational scalar extension and $a^C$ is the specified integral scalar comparison, restricted to the constructible subcategories. The components are these localized integral comparisons themselves; no independent natural isomorphism is chosen, and they determine the natural isomorphism uniquely.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "def-weil-local-frobenius-trace"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "Final common-stage Frobenius transport sentence, via the specified integral comparison family and its raw rationalization; Stacks 099N, 0D6D, 06YY for the underlying realization and localization constructions."
+ },
+ "proof": [
+  {
+   "text": "For the specified system C, express lambda and mu as components of composites of whiskered realization and counit natural transformations. Their component formulas are precisely integralComparisonLambda and integralComparisonMu. Cancel the invertible mu component to obtain naturality of lambda followed by mu inverse, i.e. integralComparisonScalar. This holds for every C, without choosing another coherent system.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The object and pure-tensor clauses for rational pullback and rational scalar extension identify the two composite functors with the raw localizations of their integral composites, including the image of each scalar under E into M. The prescribed scalar component is heterogeneously equal to the localization of the integral comparison.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on a rational morphism in its tensor-product Hom group. The zero and sum cases follow from additivity. On a pure tensor, the localized composition formula reduces the two composites to the image scalar tensored with the two sides of integral naturality from the first step. Thus the prescribed components are natural. NatIso.ofComponents supplies the specified rational scalar natural isomorphism.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+  "place": "The recorded raw-localization naturality argument, implemented by V9 on 2026-10-25. Integral naturality is proved directly from the existing counit-built lambda and mu natural transformations; rational naturality follows by tensor induction."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rationalization of the normalized integral pullback composition and scalar natural isomorphisms",
+   "results": "8 hits: CategoryTheory.Over.pullbackComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, CategoryTheory.Limits.CategoricalPullback.mkNatIso, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, PresheafOfModules.pullback_id_comp, PresheafOfModules.pullback_comp_id, CategoryTheory.GrothendieckTopology.overMapPullbackComp, CategoryTheory.NatTrans.PullbackShift.natIsoComp",
+   "date": "2026-10-22",
+   "verdict": "No exact comparison for the specified normalized integral system and raw rationalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "integralComparisonRationalScalar",
+   "results": "0 hits; loogle: unknown identifier 'integralComparisonRationalScalar'",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib declaration of the normalized rational scalar comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "integralComparison(Rational|ConstructibleComposition)",
+   "results": "msearch grep: 0 Mathlib hits. Direct rg in lean/Sheaf, lean/WeilConjectures and dag/nodes: 0 hits for integralComparisonRationalScalar, integralComparisonRationalComposition or integralComparisonConstructibleComposition. blueprint_refs.py search rational pullback comparison and normalized pullback: no exact owning definition node.",
+   "date": "2026-10-22",
+   "verdict": "The integral dependency provides the underlying maps; the new node owns their full-subcategory restriction and raw rationalization. localPullbackComposition is not parameterized by the specified normalized system C."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-iterated-return-transport-scalar-calculus",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final common-stage Frobenius transport sentence: the specified constructible and rational pullback comparison families used in the return-square scalar calculus.",
+   "via": [
+    "lem-trf-iterated-return-transport-scalar-calculus",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "module": "Sheaf.Paper.RealizedPullbackComparisons",
+  "declaration": "WeilConjectures.integralComparisonRationalScalar",
+  "declarations": [
+   "WeilConjectures.integralComparisonConstructibleComposition",
+   "WeilConjectures.integralComparisonRationalComposition",
+   "WeilConjectures.integralComparisonRationalScalarComponent",
+   "WeilConjectures.integralComparisonRationalScalarComponent_naturality",
+   "WeilConjectures.integralComparisonRationalScalar"
+  ],
+  "file": "lean/Sheaf/Paper/RealizedPullbackComparisons.lean",
+  "statement": "def integralComparisonRationalScalar {X Y : Scheme.{u}} (f : X ⟶ Y) [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] : rationalDerivedPullback l E f ⋙ sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) M ι ≅ sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) M ι ⋙ rationalDerivedPullback l M f",
+  "branch": "sheaf-dag",
+  "by": "Q65",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The constructible and rational compositor definitions restrict and localize the original integral system. The rational scalar comparison is NatIso.ofComponents of the localized integral comparison integralComparisonScalar between the prescribed object formulas (eqToIso of the recorded rationalDerivedPullback and sfRationalScalarExtension object clauses); its naturality is the postponed theorem integralComparisonRationalScalarComponent_naturality. Reviewer FIX (Q65 e81ad744): the module no longer imports Sheaf.Paper.LocalFrobeniusTransportNormalization, whose node lem-trf-local-frobenius-transport-normalization has the citing item as a proof dependency (import/DAG cycle); no word-for-word duplicate of LocalFrobeniusTransport.rationalScalar_existsUnique is stated. All formulas are unchanged.",
+  "fixed_by": "NT-stage2-cc-e81ad7445"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e81ad7445",
+  "group": "Q65",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e81ad7445",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Item module unchanged since ed72 (PASS). The repair of the L duplicate return made def-trf-realized-pullback-comparisons publicly import Sheaf.Paper.LocalFrobeniusTransportNormalization and use LocalFrobeniusTransport.rationalScalar_existsUnique. That module's node lem-trf-local-frobenius-transport-normalization has this item in proof_deps: an import cycle at stage 3, plus an uncited owner (H12) whose citation closes a DAG cycle (C6). FIX: fixes/RealizedPullbackComparisons.lean drops the import and defines integralComparisonRationalScalar as NatIso.ofComponents of integralComparisonRationalScalarComponent (eqToIso of the recorded rationalDerivedPullback/sfRationalScalarExtension object clauses, Q_M.mapIso of isoMk(integralComparisonScalar C f), eqToIso), the same components as the old HEq pin, with a named sorry theorem …Component_naturality (not a duplicate). fixes/def-trf-realized-pullback-comparisons.json updates the statement sentence, declarations (+2), full signature and note; stmt_deps unchanged and cover all uses. nt_compile --json: fixed module 20.3 s clean; with the unchanged item module 19.0 s + 18.0 s clean. Mechanical theorem-stmt_dep finding: sfRationalScalarUnit/Comp and fieldScalarUnit are .choose of ∃! theorems, objects constructed → PASS on that point. Mathematics re-checked (m=r+1, v via eqToIso w, I recursion, naturality at 3 stages, both scalar identities incl. whole systems, unit/tower, edge cases m=1, z=id, E=M, n=0)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261025T164631-L-1046017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

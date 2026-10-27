@@ -57,95 +57,48 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathcal O_E$, $\\pi=\\pi_E$ and $B_T=\\mathcal O_{E,T}=\\varprojlim_n(R/\\pi^n)_T$. The Noetherian scheme setting and coefficient identification are [sk-lem-integral-models]. By [lem-weil-l-adic-extension-integers-dvr], $R$ is a local PID with maximal ideal $\\pi R$, hence Noetherian (each ideal has one generator). By [lem-sfb-integers-profinite-tower](1), the reduction map $R\\to\\varprojlim_nR/\\pi^n$ is a ring isomorphism, so $R$ is $(\\pi)$-adically complete.",
+   "text": "Normalize coefficient monoid instances by their definitional equality. The existing integral constant-model heart theorem supplies truncation constructibility and the degree-zero constructibility of every cohomology module.",
    "uses": [
-    "sk-lem-integral-models",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-sfb-integers-profinite-tower"
+    "det-lem-int-integral-heart-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
-    "place": "Clause (1), coefficient hypotheses for the adic local-structure theorem"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-sfb-integral-cohomological-adic-criterion](1)$\\Rightarrow$(2), $K$ is locally derived $(\\pi)$-complete and its residue reduction is pulled back from a bounded étale constructible complex of finite Tor amplitude. These are condition (a) of [lem-sfb-adic-stratified-perfect]. Apply (a)$\\Rightarrow$(b), with the ring and scheme hypotheses of step 1, to obtain strata and charts with $K|_U\\simeq B_U\\otimes_R P^\\bullet$ for bounded finite projective scalar complexes.",
+   "text": "The scheme is Noetherian by finite type over a field. Apply the projective local-model transport lemma. Each projective scalar term embeds in a free module and is torsion-free; since the scalar DVR is a PID and the term is finite, Mathlib makes it free without changing the complex or support bounds.",
    "uses": [
-    "lem-sfb-integral-cohomological-adic-criterion",
-    "lem-sfb-adic-stratified-perfect",
-    "sk-lem-integral-models"
+    "lem-sfb-integral-heart-projective-local-models",
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.5.1, Proposition 6.6.11; Proposition 6.8.11(3)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-dvr-projective-complex-matrix-model] to each scalar complex $P^\\bullet$ of step 2 over the DVR of step 1. It gives a bounded finite free matrix complex $M^\\bullet\\simeq P^\\bullet$ with the same support bounds. Termwise scalar extension carries this complex isomorphism to the chart, giving (1).",
+   "text": "On exactly these charts use integralHeartRealization_exact_free and exact cartesian inverse image. Compose the derived-functor cohomology isomorphism with the chosen model isomorphism, the Q-to-complex homology isomorphism and exact scalar realization homology. Cycles embed in a finite term over a Noetherian PID; homology is their quotient and is finite.",
    "uses": [
-    "lem-sfb-dvr-projective-complex-matrix-model"
+    "lem-integral-heart-realization-exact",
+    "sk-prop-sfb-cartesian-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
-    "place": "Clause (1), finite free models over the discrete valuation ring; Stacks Tag 0AUW(3)"
-   }
+   "elementary": false
   },
   {
-   "text": "By [sk-def-sfb-constructible], $H^q(K)[0]$ is bounded constructible: its other cohomology sheaves are zero, with zero finite constant model. Apply [sk-lem-integral-models](2) to this degree-zero object. It is derived complete in the canonical derived-limit sense of [sk-def-pe-derived-completion], proving the first assertions of (2).",
+   "text": "Apply the constructible-module Roos-completeness lemma to H^q(K). Combine its completeness with degree-zero constructibility and the two truncation assertions from the first step.",
    "uses": [
-    "sk-def-sfb-constructible",
-    "sk-lem-integral-models",
-    "sk-def-pe-derived-completion"
+    "lem-sfb-integral-heart-constructible-module-complete"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
-    "place": "Clause (2), *Completeness*; realized by sk-lem-integral-models(2) applied to the degree-zero object H^q(K)[0] instead of Stacks Tags 0990 and 099Q(5)"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-local-integral-perfect-model-cohomology] to $g:S\\hookrightarrow X$, each original chart $U$, and $P^\\bullet$ of step 2. It gives $H^q(K)|_U\\simeq B_U\\otimes_R H^q(P^\\bullet)$ with finitely presented scalar cohomology. The complex isomorphism $M^\\bullet\\simeq P^\\bullet$ of step 3 identifies their cohomology, giving $H^q(K)|_U\\simeq B_U\\otimes_R H^q(M^\\bullet)$ with finitely generated scalar cohomology. Together with step 4 this proves (2) on the original strata and charts.",
-   "uses": [
-    "lem-sfb-local-integral-perfect-model-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
-    "place": "Clause (2), local cohomology of finite free models; Stacks Tags 093J, 093M, 00IK"
-   }
-  },
-  {
-   "text": "By [def-kun-truncations], the two good truncations retain $H^i(K)$ respectively for $i\\leq q$ and $i\\geq q$, and are zero elsewhere. Both lists vanish outside a finite interval and are constructible (including zero). By [sk-def-sfb-constructible] both truncations lie in $\\Dbc$, proving (3).",
-   "uses": [
-    "def-kun-truncations",
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
-    "place": "Clause (3), elementary truncation argument using the bounded-constructible definition"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-kun-truncations",
-  "lem-sfb-adic-stratified-perfect",
-  "lem-sfb-dvr-projective-complex-matrix-model",
-  "lem-sfb-integers-profinite-tower",
-  "lem-sfb-integral-cohomological-adic-criterion",
-  "lem-sfb-local-integral-perfect-model-cohomology",
+  "det-lem-int-integral-heart-triangulated",
+  "lem-integral-heart-realization-exact",
+  "lem-sfb-integral-heart-constructible-module-complete",
+  "lem-sfb-integral-heart-projective-local-models",
   "lem-weil-l-adic-extension-integers-dvr",
-  "sk-def-pe-derived-completion",
-  "sk-def-sfb-constructible",
-  "sk-lem-integral-models"
+  "sk-prop-sfb-cartesian-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
-  "place": "Clauses (1)–(3), using Bhatt–Scholze Proposition 6.6.11 and the existing integral cohomological criterion"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Clauses (1)--(3), exact-functor assembly with two coefficient comparison steps"
  },
  "mathlib_searches": [
   {
@@ -265,34 +218,22 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-efb90aa7b (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the new node, every cited statement, the repair note and the earlier Q71 RETURN 5a5c275b. The statement is unchanged and nothing cycles back to the item. Re-split check against the 5912-char base proof: every argument now sits in a node that a step cites. The duplicate node from R1 is gone and step 5 cites the Q55 node lem-sfb-local-integral-perfect-model-cohomology. Its hypotheses (g: S into X locally closed, a chart U, bounded f.g. projective P, j_U^*g^*K ≅ T_U(P)) are exactly what step 2 produces. The old step-3 argument (split surjection, torsion-free, free via lem-sc-dvr-fg-torsionfree-free, matrices) is the new unsplit node lem-sfb-dvr-projective-complex-matrix-model. That node is true and adds no hypotheses. I tested it on P=0, a single term, [R --pi--> R] with its torsion H^0, [R --1--> R], rectangular differentials and negative degrees. It is not a duplicate: lem-pc-finite-projective-complex-free-model is only an upper-bounded quasi-isomorphic replacement, and lem-sc-dvr-fg-torsionfree-free is about one module. Stacks 05CF and 0AUW labels match the tags file, and the blueprint proof file exists. Steps 2, 4 and 6 check out. Criterion (1)⇒(2) matches stratified-perfect (a): same completeness notion, and finite-dimensional over the field k is the same as finitely presented. sk-lem-integral-models(2) gives derived completeness for H^q(K)[0]. def-kun-truncations explicitly gives the good-truncation cohomology. The parent is about 2.4k characters. Batch-5 finding: lem-trf-restricted-quotient-complete is generic Bosch 2.3 Cor. 9 algebra with an empty closure. It is still a sec-trace-formula node created for the trace-formula proof, and the item only needs its trivial case (zero variables, J=0). FIX: step 1 now cites lem-sfb-integers-profinite-tower(1) for O_E ≅ lim O_E/pi_E^n with the same uniformizer. That node is split, its 9-node closure has no trf or Poincaré-duality nodes, and it does not contain the item. The citations to lem-weil-l-adic-extension-complete and -absolute-value were only needed for the trf node and are dropped. proof_deps and split_report.tool_uses are updated to match. Corrected file: fixes/dag/nodes/sec-six-functors-basics/det-lem-int-integral-heart-local-model.json. No SGA cited, coefficient category unchanged, no target weakened.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.IntegralHeartLocalModel",
   "declaration": "AlgebraicGeometry.ProEtale.integralHeartLocalModel",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.integralHeartScalars",
-   "AlgebraicGeometry.ProEtale.integralHeartPointRing",
-   "AlgebraicGeometry.ProEtale.integralHeartScalarSection",
-   "AlgebraicGeometry.ProEtale.integralHeartScalarSection_one",
-   "AlgebraicGeometry.ProEtale.integralHeartScalarSection_mul",
-   "AlgebraicGeometry.ProEtale.integralHeartConstantMap",
-   "AlgebraicGeometry.ProEtale.integralHeartConstantPresheaf",
-   "AlgebraicGeometry.ProEtale.integralHeartConstantPresheaf_additive",
-   "AlgebraicGeometry.ProEtale.integralHeartConstantRing",
-   "AlgebraicGeometry.ProEtale.integralHeartConstantUnit",
-   "AlgebraicGeometry.ProEtale.integralHeartConstantUnit_isLocallyInjective",
-   "AlgebraicGeometry.ProEtale.integralHeartConstantUnit_isLocallySurjective",
-   "AlgebraicGeometry.ProEtale.integralHeartScalarMap",
-   "AlgebraicGeometry.ProEtale.integralHeartConstantModules",
-   "AlgebraicGeometry.ProEtale.integralHeartExtension_laws",
-   "AlgebraicGeometry.ProEtale.integralHeartExtension",
-   "AlgebraicGeometry.ProEtale.integralHeartPointRealization",
-   "AlgebraicGeometry.ProEtale.integralHeartPointRealization_additive",
-   "AlgebraicGeometry.ProEtale.integralHeartRealization",
-   "AlgebraicGeometry.ProEtale.integralHeartRealization_additive",
-   "AlgebraicGeometry.ProEtale.integralHeartDerivedCategory",
-   "AlgebraicGeometry.ProEtale.integralHeartCohomology",
-   "AlgebraicGeometry.ProEtale.integralHeartFiniteFreeLocalModel",
    "AlgebraicGeometry.ProEtale.integralHeartLocalModel"
   ],
   "file": "lean/Sheaf/Paper/IntegralHeartLocalModel.lean",
@@ -310,5 +251,15 @@
   "group": "NA",
   "result": "fix",
   "note": "Item statement correct clause by clause: recorded completed coefficients; IsConstantModelConstructible C; any stratification and stratum a; pro-etale cover with a finite N per chart via integralHeartRealization; dual = derivedHom(K, unit); ExactPairing gives ev/coev and both triangles; torAmplitudeIn [-1,0] and [0,1] over all module sheaves; residue example finiteModule S 0 (= O/pi) dual is iso to itself shifted by -1, i.e. degree 1. No extra hypotheses, universes independent, docstrings and verbatim statement OK. Compile with live dep texts in the overlay: rc 0, item 3.7 s (deps 53.0 s and 7.5 s); compiling the item alone fails only on the missing published IntegralHeartLocalModel.olean. Mechanical fault: the delivery re-pushes landed IntegralHeartLocalModel and SmallCoefficientDerivedCompletion (live text plus a trailing blank line) and rewrites by/note of records det-lem-int-integral-heart-local-model and def-sfb-small-coefficient-derived-completion from Q06 to NA (no declaration change). FIX: fixes/ holds the exact live texts of both modules (sha256 = live). Maintainer: --revert-nodes for those two records to keep the live attribution."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0ab01",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261025T203442-L-2818468",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clone (identical); IntegralHeartLocalModelData vs old item module (verbatim relocation); new sorry lemmas' hypotheses vs integral_cohomological_adic_criterion/adic_stratified_perfect (IsNoetherian only); node proof_deps vs Lean imports/uses; delivered modules + 3 direct importers compiled in sandbox"
  }
 }

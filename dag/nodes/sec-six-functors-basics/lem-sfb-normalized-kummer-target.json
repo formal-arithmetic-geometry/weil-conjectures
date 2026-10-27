@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-normalized-kummer-target",
+ "kind": "statement",
+ "title": "Normalized Kummer target from its unshifted positive boundary comparison",
+ "statement": "For a prime l, a scheme T with l invertible, Kummer data k and any Reduction r for Rrings l T, there are a module system M, an isomorphism i from its underlying tower to roots l T, and an isomorphism b from r applied to units[1] to M[2], satisfying exactly targetNormalization for the positive boundary of k. No reduction functor or integer-source comparison is constructed.",
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7"
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-kummer-reduction-unit] to the given r to obtain M, i and the unshifted comparison c with its positive boundary adjunct.",
+   "uses": [
+    "lem-sfb-kummer-reduction-unit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7"
+   }
+  },
+  {
+   "text": "Construct the shift structure on r.derived as the one induced by its adjunction to exact forgetting, using Mathlib Adjunction.leftAdjointCommShift and commShift_of_rightAdjoint. Compose the shift comparison of r.derived with c[1] and the inverse of shiftFunctorAdd(1,1) to define b. The private shift_mate lemma uses the adjunction-unit shift identity and shift naturality to identify its adjunct. The private shift_add_map lemma uses commShiftIso_add to commute forgetting with the shift-addition map. The generic private shift_normalization lemma combines these identities with naturality of shiftFunctorAdd and the unshifted normalization. The private derived_target_normalization adapter carries out the single-functor and targetNormalization conversions over abstract abelian categories. Pass the three short-complex endpoints explicitly when applying that adapter to the derived tower categories, avoiding kernel reduction through the localization construction to compare a short-complex projection and obtaining exactly targetNormalization. Return M, i and b with that target normalization. Store the comparison and its normalization in the private TargetNormalizationData record. The generic normalize_targets helper performs the existential assembly over abstract abelian categories, so the scheme-specific theorem is a direct application and does not unpack the derived comparisons at concrete localization types.",
+   "uses": [
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-kummer-reduction-unit",
+  "def-sp-tower-class-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7; G8 separates the integral-unit and unshifted-target computations; G8 proves the adjunction and shift assembly in a separate module to keep every file within 60 seconds"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The left adjoint of forgetting sheaves of modules sends the constant integer sheaf to the coefficient ring, including derived extension",
+   "results": "constantSheafΓAdj, constantSheafAdj, PullbackConstruction.adjunction, forgetToSheafModuleCat; no normalized derived extension on abelian towers",
+   "date": "2026-10-27",
+   "verdict": "Ordinary sheaf adjunction APIs only; no match for these tower comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with quotient ring applied to multiplicative units sheaf is Kummer roots of unity shifted by one",
+   "results": "CommRing.Pic.mapAlgebra, CommRing.Pic.mk_tensor, relativeDifferentials_obj and tensorH1CotangentOfIsLocalization; no Kummer-derived-system comparison",
+   "date": "2026-10-27",
+   "verdict": "No match for the unshifted system comparison or the integer source."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCommShift",
+   "results": "leftAdjointCommShift, commShift_of_rightAdjoint, leftAdjointCommShift_commShiftIso",
+   "date": "2026-10-27",
+   "verdict": "Used for the proved assembly after the unshifted comparisons; does not supply either existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_normalizedKummerReduction|DerivedExtension|sourceNormalization|targetNormalization|IntegerModules",
+   "results": "TowerClassReduction defines normalizations. ReductionSingleCohomologyNormalization treats one constant exponent on a site. SystemScalarModel supplies normalized derived adjunctions for ringed-site module endpoints. No theorem identifies the present variable-exponent system.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the generic APIs in the source plan; retain the variable-exponent Kummer step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedKummerReduction",
+  "date": "2026-10-27",
+  "group": "G8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proved normalized Kummer target comparison",
+   "via": [
+    "lem-sfb-normalized-kummer-reduction",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedKummerTarget",
+  "file": "lean/Sheaf/Paper/NormalizedKummerTarget.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.exists_normalizedKummerTarget",
+  "statement": "theorem exists_normalizedKummerTarget (l : ℕ) [Fact l.Prime]\n    (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (k : Kummer l T)\n    (r : Reduction T (Rrings l T)) :\n    ∃ (M : Systems T (Rrings l T)) (i : r.forget.F.obj M ≅ roots l T)\n      (b : r.derived.obj (((DerivedCategory.singleFunctor (Ab T) 0).obj\n        (units T))⟦(1 : ℤ)⟧) ≅\n        ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj M)⟦(2 : ℤ)⟧),\n      r.model.targetNormalization (ShortComplex.mk k.inclusion k.power k.zero)\n        k.exact b i",
+  "branch": "sheaf-dag",
+  "by": "G8",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.NormalizedKummerReduction",
+  "worker": "stage3",
+  "summary": "Proved shifted Kummer target; extracted from the item to bound single-file kernel checking time; no new hole.",
+  "blueprint": "clause (2), simultaneous integral reduction; expanded SmoothPurityTowerClasses proof, steps 3--7",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T034652-L-3672577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261027T034652-L-3672577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

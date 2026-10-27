@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-dvr-perfect-residue-algebraic-tower",
+ "kind": "statement",
+ "title": "An algebraic index-one DVR extension with perfect residue field",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], with fraction field $K$ and residue field $k=A/\\mathfrak m_A$ of characteristic $p>0$. There is an algebraic field extension $P/K$ [def-pc-field-extension] such that the integral closure $A'$ of $A$ in $P$ [def-weil-pbc-integral-closure] is a discrete valuation ring, $\\mathfrak m_AA'=\\mathfrak m_{A'}$, and $A'/\\mathfrak m_{A'}$ is perfect and purely inseparable algebraic over $k$. Algebraic means that each element satisfies a nonzero polynomial over the base; purely inseparable means that some $p$-power of each element lies in the base; perfect means that every element has a $p$th root. The field $P$ is a directed union of finite subextensions $P_j/K$ whose integral closures $A_j$ are discrete valuation rings with $\\mathfrak m_AA_j=\\mathfrak m_{A_j}$, and $A'=\\bigcup_j A_j$. No completeness, finite $p$-basis, or characteristic assumption on $K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II, proposition-epp-essentially-finite-type, proof paragraph constructing A' by adjoining all p-power roots of lifts of a residue p-base, lines 35980–35993."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$ of $A$. By [lem-weil-pbc-p-basis-exists], choose a $p$-basis $(b_i)_{i\\in I}$ of $k$ and lifts $x_i\\in A$. The characteristic of the field $k$ makes $p$ prime. Choose an algebraic closure $\\Omega/K$ by [lem-pc-algebraic-closure-exists-unique]. For every $i$, recursively choose $\\alpha_{i,0}=x_i$ and $\\alpha_{i,n+1}\\in\\Omega$ with $\\alpha_{i,n+1}^p=\\alpha_{i,n}$; the defining root property in [def-weil-algebraic-closure] applies to the monic polynomial $T^p-\\alpha_{i,n}$. Thus $\\alpha_{i,n}^{p^n}=x_i$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-p-basis-exists",
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof, p-base preparation: choice of lifts of a residue p-base; compatible roots made explicit"
+   }
+  },
+  {
+   "text": "For finite $J\\subseteq I$ and $n\\geq1$ form $B_{J,n}=A[T_i:i\\in J]/(T_i^{p^n}-x_i)$. Apply [lem-weil-pbc-monic-quotient-free] successively, in any ordering of $J$. It gives the finite free basis $\\prod_{i\\in J}T_i^{e_i}$, $0\\leq e_i<p^n$, and reduction $B_{J,n}/\\pi B_{J,n}=k[T_i:i\\in J]/(T_i^{p^n}-b_i)$. Every finite subfamily of the p-basis is p-independent. By [lem-sfb-p-independent-root-quotient-field], this reduction is a field and every element of it has its $p^n$th power in $k$. The empty $J$ gives $B_{\\varnothing,n}=A$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-sfb-p-independent-root-quotient-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof, p-base preparation: finite subsets of the displayed root presentation and their closed fibres"
+   }
+  },
+  {
+   "text": "The basis in Step 2 has positive finite cardinality $p^{n|J|}$. All hypotheses of [lem-sfb-finite-free-field-fibre-dvr] therefore hold, so $B_{J,n}$ is a DVR with uniformizer $\\pi$ and injective map from $A$. Evaluation $T_i\\mapsto\\alpha_{i,n}$ defines an $A$-algebra map $B_{J,n}\\to\\Omega$. It is injective: by [lem-weil-pbc-dvr-unit-times-uniformizer-power] a nonzero element is $u\\pi^a$, whose image is nonzero since a unital map sends a unit to a unit and $\\pi\\ne0$ in $K\\subseteq\\Omega$. Identify $B_{J,n}$ with this image.",
+   "uses": [
+    "lem-sfb-finite-free-field-fibre-dvr",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof, p-base preparation: the finite algebras are DVR extensions, with their realization in one field"
+   }
+  },
+  {
+   "text": "If $J\\subseteq J_1$ and $n\\leq m$, the formula $\\alpha_{i,n}=\\alpha_{i,m}^{p^{m-n}}$ gives $B_{J,n}\\subseteq B_{J_1,m}$. These inclusions preserve units and $\\pi$ is a nonunit in both DVRs. Writing a nonzero element as $u\\pi^a$ shows that it belongs to $\\pi B_{J_1,m}$ exactly when $a>0$, hence exactly when it belongs to $\\pi B_{J,n}$. Thus the inclusions are local and induce injective residue-field maps. The pairs $(J,n)$ are directed by $(J\\cup J_1,\\max(n,m))$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof, p-base preparation: injective compatible transitions and index one"
+   }
+  },
+  {
+   "text": "Put $A^*=\\bigcup_{J,n}B_{J,n}$ inside $\\Omega$ and $P_{J,n}=\\operatorname{Frac}(B_{J,n})$. A nonzero denominator in a finite stage is $u\\pi^a$, so $P_{J,n}=B_{J,n}[1/\\pi]$. Its monomial basis from Step 2 spans it over $K=A[1/\\pi]$, hence $P_{J,n}/K$ is finite. Set $P=\\bigcup_{J,n}P_{J,n}$; directedness makes this a field, algebraic over $K$, and $P=\\operatorname{Frac}(A^*)$. Every nonzero element of $A^*$ has the form $u\\pi^a$ with $u\\in(A^*)^\\times$. Also $\\pi$ is not invertible in $A^*$, since an inverse would lie at a finite stage, contradicting Step 4. Hence $A^*$ is local with nonunits precisely $\\pi A^*$. For a nonzero ideal $H\\subseteq A^*$, choose the least exponent $a$ occurring among its nonzero elements. A corresponding $u\\pi^a\\in H$ gives $\\pi^a\\in H$, and all elements of $H$ are divisible by $\\pi^a$, so $H=\\pi^aA^*$. The domain $A^*$ is therefore a DVR by [def-sc-discrete-valuation-ring], and $\\mathfrak m_AA^*=\\pi A^*=\\mathfrak m_{A^*}$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof, p-base preparation: directed union is a DVR; explicit ideal argument instead of assuming filtered unions are Noetherian"
+   }
+  },
+  {
+   "text": "Each $B_{J,n}$ is integral over $A$ by [lem-weil-pbc-finite-algebra-is-integral] and Step 2. Since it is a PID, [lem-weil-pbc-pid-noetherian-normal] makes it integrally closed in $P_{J,n}$. An element of $P_{J,n}$ integral over $A$ satisfies the same monic equation over $B_{J,n}$, so lies in $B_{J,n}$. Thus $B_{J,n}$ is exactly the integral closure $A_j$ specified in the statement. Similarly $A^*$ is integral over $A$ element by element and is integrally closed in $P$ by the same PID theorem. Every element of $P$ integral over $A$ is then in $A^*$, so the requested integral closure $A^{\\prime}$ equals $A^*$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof, p-base preparation: identification with the integral closures, both finite and infinite"
+   }
+  },
+  {
+   "text": "Step 4 identifies $k^*=A^*/\\pi A^*$ with the union of the finite-stage residue fields: surjectivity is representation at a finite stage, and if an element of one stage equals $\\pi y$ in the union, put it and $y$ in a common later stage and use the contraction calculation. Each residue $z$ lies in some $B_{J,n}/\\pi$ and has $z^{p^n}\\in k$ by Step 2, proving pure inseparability and algebraicity. To prove perfection, first let $a\\in k$. The p-basis expansion is $a=\\sum_E c_E^p b^E$ with finitely many terms and $c_E\\in k$. In $k^*$ the element $\\sum_E c_E\\prod_i\\bar\\alpha_{i,1}^{E_i}$ has pth power $a$. Every element of $k^*$ is a finite $k$-linear combination of monomials in the $\\bar\\alpha_{i,n}$ by Step 2. Choose pth roots of its finitely many coefficients by the preceding formula and replace each $\\bar\\alpha_{i,n}$ by $\\bar\\alpha_{i,n+1}$; the resulting finite sum has pth power the original element, since Frobenius preserves sums and products in characteristic $p$. All terms belong to one common finite stage. Thus $k^*$ is perfect. Together with Steps 5–6 this proves every clause, without assuming $I$ finite or completing $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09II, proposition-epp-essentially-finite-type, proof, p-base preparation: residue field is the perfection, with the coefficient-root calculation written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-p-basis-exists",
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sfb-p-independent-root-quotient-field",
+  "lem-sfb-finite-free-field-fibre-dvr",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-pid-noetherian-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09II, proposition-epp-essentially-finite-type, proof, the p-base preparation paragraph; implicit finite-stage and union arguments expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every discrete valuation ring of residue characteristic p has an algebraic extension of its fraction field whose integral closure is a DVR with the same uniformizer and perfect residue field",
+   "results": "{\"t\": \"2026-10-24T04:06:22Z\", \"tool\": \"leanfinder\", \"query\": \"Every discrete valuation ring of residue characteristic p has an algebraic extension of its fraction field whose integral closure is a DVR with the same uniformizer and perfect residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"Tilt.instField\", \"PreTilt.isDomain\", \"WittVector.isDiscreteValuationRing\", \"Algebra.instFormallyUnramifiedResidueField\", \"IsDiscreteValuationRing.TFAE\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"Algebra.instFormallyUnramifiedResidueField_1\"], \"digest\": \"1cd7ff24b3b952fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tilt and Witt-vector DVRs and separable-residue consequences do not construct an algebraic index-one extension of an arbitrary DVR with perfect residue field."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, PerfectField",
+   "results": "{\"t\": \"2026-10-24T04:06:21Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, PerfectField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tilt and Witt-vector DVRs and separable-residue consequences do not construct an algebraic index-one extension of an arbitrary DVR with perfect residue field."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*residue|residue.*perfect|pBasis|pBasis.*valuation",
+   "results": "{\"t\": \"2026-10-24T04:06:21Z\", \"tool\": \"grep\", \"query\": \"perfect.*residue|residue.*perfect|pBasis|pBasis.*valuation\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/Ideal/Quotient/HasFiniteQuotients.lean\"], \"digest\": \"526e2ef102ce2b17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tilt and Witt-vector DVRs and separable-residue consequences do not construct an algebraic index-one extension of an arbitrary DVR with perfect residue field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoin p power roots of lifts of a residue p basis to a discrete valuation ring to obtain an algebraic weakly unramified DVR extension with perfect residue field",
+   "results": "{\"t\": \"2026-10-24T04:06:21Z\", \"tool\": \"leansearch\", \"query\": \"Adjoin p power roots of lifts of a residue p basis to a discrete valuation ring to obtain an algebraic weakly unramified DVR extension with perfect residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.powerBasisAux\", \"PadicInt.instIsDiscreteValuationRing\", \"IsAdjoinRootMonic.powerBasis\", \"AdjoinRoot.powerBasis'\", \"AdjoinRoot.powerBasis'.congr_simp\", \"AdjoinRoot.powerBasis\", \"WittVector.isDiscreteValuationRing\", \"PowerSeries.instIsDiscreteValuationRing\"], \"digest\": \"ab5014a2b75e0760\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tilt and Witt-vector DVRs and separable-residue consequences do not construct an algebraic index-one extension of an arbitrary DVR with perfect residue field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A DVR admits an algebraic extension with ramification index one and residue field the perfection of its residue field",
+   "results": "{\"t\": \"2026-10-24T04:06:24Z\", \"tool\": \"leanfinder\", \"query\": \"A DVR admits an algebraic extension with ramification index one and residue field the perfection of its residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.isUnramifiedAt_iff_of_isDedekindDomain\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\"], \"digest\": \"ad58848c73938033\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tilt and Witt-vector DVRs and separable-residue consequences do not construct an algebraic index-one extension of an arbitrary DVR with perfect residue field."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*residue|residue.*perfect|pBasis|pBasis.*valuation",
+   "results": "{\"t\": \"2026-10-24T04:42:21Z\", \"tool\": \"grep\", \"query\": \"perfect.*residue|residue.*perfect|pBasis|pBasis.*valuation\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/Ideal/Quotient/HasFiniteQuotients.lean\"], \"digest\": \"526e2ef102ce2b17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tilt, residue separability, and DVR valuation criteria do not construct this algebraic perfect-residue index-one tower."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic weakly unramified extension of a discrete valuation ring with residue field its perfection",
+   "results": "{\"t\": \"2026-10-24T04:42:22Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic weakly unramified extension of a discrete valuation ring with residue field its perfection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified\", \"Algebra.Unramified\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.Unramified.formallyUnramified\", \"Algebra.Unramified.of_equiv\", \"Algebra.Unramified.of_isLocalization_Away\", \"Algebra.Unramified.finiteType\", \"Algebra.Unramified.recOn\"], \"digest\": \"722762cf8d1292b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tilt, residue separability, and DVR valuation criteria do not construct this algebraic perfect-residue index-one tower."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, PerfectField",
+   "results": "{\"t\": \"2026-10-24T04:42:22Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, PerfectField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tilt, residue separability, and DVR valuation criteria do not construct this algebraic perfect-residue index-one tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every DVR has an algebraic extension of its fraction field with DVR integral closure the same uniformizer and perfect purely inseparable residue extension",
+   "results": "{\"t\": \"2026-10-24T04:42:23Z\", \"tool\": \"leanfinder\", \"query\": \"Every DVR has an algebraic extension of its fraction field with DVR integral closure the same uniformizer and perfect purely inseparable residue extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"Algebra.instFormallyUnramifiedResidueField\", \"Tilt.instField\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\", \"instIsAlgebraicResidueFieldOfIsIntegral\", \"Algebra.instFormallyUnramifiedResidueField_1\"], \"digest\": \"a934046858b5d539\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: tilt, residue separability, and DVR valuation criteria do not construct this algebraic perfect-residue index-one tower."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-essentially-finite-type-traits",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Perfect-residue algebraic preparation for the local Epp input.",
+   "via": [
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-perfect-residue-algebraic-tower",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 09II p-base preparation into seven steps using two strictly smaller finite-algebra inputs; proved the common-uniformizer union is a DVR by its ideals, identified both finite and infinite integral closures, and wrote the residue perfection calculation. Statement unchanged; no Lean attachment.",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Perfect-residue algebraic preparation for the local Epp input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-p-basis-exists",
+    "why": "Generic characteristic-p field p-basis existence for the residue field; not a replacement for any six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-p-basis-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-8ba49114d",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-8ba49114d (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, and Stacks more-algebra.tex 09II (proposition-epp-essentially-finite-type, p-base paragraph, lines 35980-35993). There is no repair note, so this is an ordinary one-level split. The statement is unchanged and matches 09II and the parent's use in lem-sfb-epp-essentially-finite-type-traits. Steps: (1) p-basis, lifts and compatible p-power roots in Omega are correct. (2) Iterated monic quotients give the basis T^e with e_i<p^n and the reduction k[T]/(T^{p^n}-b); a finite subfamily of the p-basis is p-independent. (3) The finite-free criterion gives a DVR with maximal ideal pi B; evaluation into Omega is injective via u*pi^a, with Noetherian coming from PID. (4) Inclusions are local through the u*pi^a computation. (5) The directed union is a DVR by a direct ideal argument; P_{J,n}=B[1/pi] is finite over K. (6) Integral closures are identified through finite implies integral and PID implies normal. (7) Residue union, pure inseparability and perfection via the p-basis expansion and alpha_{n+1} are all correct. New node lem-sfb-finite-free-field-fibre-dvr is true (injectivity from a nonzero coordinate of 1; maximal ideals contract to m_A, so B is local with m=piB; Noetherian; nonzerodivisor; domain). Tests: B=A holds; A[e]/e^2 and A[t]/(t^2-pi) are excluded by the field-fibre hypothesis. New node lem-sfb-p-independent-root-quotient-field is true (p^n-independence by Frobenius; finite domain; z^{p^n} lies in k). Tests: r=0 holds; b=a^p is excluded. Neither node restates the item. Searched the DAG with rg -L for p-independent, p-basis, finite-free DVR and weakly unramified nodes: no duplicates (pth-roots-extension-degree is n=1 under a differentials hypothesis; uniformizer-root-algebra is the ramified case). Mathlib searches cover all three kinds. The tool_use lem-weil-pbc-p-basis-exists (generic) is accepted; the other off-unit inputs are mathlib leaves. Edge cases: k perfect, infinite p-basis, either characteristic of K. Minor: the report mentions a citations.json that is not in the commit. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrPerfectResidueAlgebraicTower",
+  "declaration": "IsDiscreteValuationRing.exists_algebraic_perfect_residue_tower",
+  "file": "lean/Sheaf/RingTheory/DvrPerfectResidueAlgebraicTower.lean",
+  "statement": "theorem exists_algebraic_perfect_residue_tower (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (p : ℕ) (hp : 0 < p) [CharP (IsLocalRing.ResidueField A) p] : ∃ (P : Type (max u v)) (_ : Field P) (_ : Algebra K P) (_ : Algebra A P) (_ : IsScalarTower A K P), Algebra.IsAlgebraic K P ∧ ∃ hC : IsDiscreteValuationRing (integralClosure A P), ∃ (_ : IsLocalHom (algebraMap A (integralClosure A P))), (IsLocalRing.maximalIdeal A).map (algebraMap A (integralClosure A P)) = @IsLocalRing.maximalIdeal (integralClosure A P) _ hC.toIsLocalRing ∧ PerfectField (IsLocalRing.ResidueField (integralClosure A P)) ∧ @Algebra.IsAlgebraic (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField (integralClosure A P)) _ _ (IsLocalRing.ResidueField.map (algebraMap A (integralClosure A P))).toAlgebra ∧ @IsPurelyInseparable (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField (integralClosure A P)) _ _ (IsLocalRing.ResidueField.map (algebraMap A (integralClosure A P))).toAlgebra ∧ ∃ (I : Type (max u v)) (_ : Nonempty I) (F : I → IntermediateField K P), Directed (· ≤ ·) F ∧ (∀ j : I, Module.Finite K (F j)) ∧ (∀ x : P, ∃ j : I, x ∈ F j) ∧ (∀ j : I, ∃ hj : IsDiscreteValuationRing (integralClosure A (F j)), (IsLocalRing.maximalIdeal A).map (algebraMap A (integralClosure A (F j))) = @IsLocalRing.maximalIdeal (integralClosure A (F j)) _ hj.toIsLocalRing) ∧ (∀ x : P, x ∈ integralClosure A P ↔ ∃ (j : I) (y : integralClosure A (F j)), algebraMap (F j) P (y : F j) = x)",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-497a9b250",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Delivery adds only the lean record and one sorried theorem module; statement is verbatim. Checked every clause against the node, the three Mathlib-leaf statement dependencies (IsDiscreteValuationRing, Algebra, integralClosure) and Stacks 09II lines 35980-35993: DVR A with fraction field K and residue CharP p>0; existential P algebraic over K with scalar tower A-K-P; integralClosure A P is a DVR with m_A A' = m_A'; residue field perfect and purely inseparable algebraic via the canonical residue map; directed nonempty covering family of finite intermediate fields with DVR integral closures of index one; A' is the union of the A_j. The IsLocalHom witness follows from the ideal equality and only types the residue map. Edge cases checked: perfect k, infinite p-basis, char K arbitrary, p=0 excluded. Universe max u v fits the citer. No duplicate (the only similar hit, exists_common_finite_trait_extension, assumes a perfect residue field). Docstrings carry the source place, blueprint tag and 7-step proof. No definitions, nothing proved, private imports exist. No compile run (no file changed)."
+ }
+}

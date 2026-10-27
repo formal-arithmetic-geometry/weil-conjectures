@@ -1,0 +1,378 @@
+{
+ "id": "lem-sfb-finite-strata-completion-detection",
+ "kind": "statement",
+ "title": "Finite-stratum detection of strict completion and cohomological vanishing",
+ "statement": "Fix a prime $\\ell$, a finite extension $F/\\mathbf Q_\\ell$, its valuation ring $A=\\mathcal O_F$ with its induced $\\ell$-adic norm topology, and a uniformizer $\\pi$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$, put $B_T=p_T^*\\underline A$ and $k_{n,T}=(A/\\pi^n)_T$ for $n\\ge1$. Use the small pro-étale sites and universes of [def-weil-size-convention] and the ordinary unbounded derived module categories [sk-def-sfb-module-derived-pushpull]. Write $C_T(K)=R\\varprojlim_{n\\ge1}\\operatorname{Res}_n(K\\otimes^L_{B_T}k_{n,T})$ and $c_{T,K}:K\\to C_T(K)$ for the specified strict-tower completion unit [sk-def-pe-derived-completion, lem-pe-completion-triangle-comparison].\nLet $W$ be qcqs, with a finite partition by constructible locally closed subschemes $s_\\alpha:S_\\alpha\\hookrightarrow W$ [def-constructible-stratification]. Choose a pro-étale cover $\\{U_{\\alpha i}\\to S_\\alpha\\}_i$ for each stratum. For $K\\in D(B_W)$ write $K_{\\alpha i}$ for its iterated inverse image on $U_{\\alpha i}$. Then $c_{W,K}$ is an isomorphism if and only if every $c_{U_{\\alpha i},K_{\\alpha i}}$ is an isomorphism. For every integer $q$, $H^q(K)=0$ if and only if every $H^q(K_{\\alpha i})=0$.\nThese assertions can be tested on a finite rooted binary tree of qcqs locally closed subschemes with root $W$, each internal vertex split into a quasi-compact open subscheme and its closed complement. The nonempty leaves partition $W$; each leaf $L$ has an actual morphism $t_L:L\\to S_{\\alpha(L)}$ whose composite with $s_{\\alpha(L)}$ is its branch morphism to $W$. The base changes $U_{\\alpha(L)i}\\times_{S_{\\alpha(L)}}L$ form covering families of the leaves. If a $B_W$-module $M$ has scalar models $M|_{U_{\\alpha i}}\\simeq B_{U_{\\alpha i}}\\otimes_{\\underline A}\\underline{P_{\\alpha i}}$, with finitely presented $A$-modules $P_{\\alpha i}$, its restrictions on these leaf covers have the same scalar modules and the same finite scalar presentation matrices. Empty leaves contribute the zero module category. Thus these leaf-cover restrictions detect both the vanishing of the cone of the specified completion unit and cohomological vanishing of any given complex. No ordering of the original strata with a globally open stratum, Noetherianity, or invertibility of $\\ell$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Strata paragraph of the finite-model proof; returned proof steps 5--6, and the vanishing descent in step 9. Agent coefficient-and-completion refinement of Stacks Tags 005H (lemma-constructible), 09YH (lemma-constructible-is-retrocompact), 09Y4 (lemma-constructible-partition-refined-by-stratification), using the existing qcqs refinement theorem."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-derived-completion",
+  "lem-pe-completion-triangle-comparison",
+  "def-constructible-stratification",
+  "sk-def-sfb-constructible",
+  "def-fix-scheme-refinement-tree",
+  "det-def-sfb-constructible-local-model"
+ ],
+ "proof": [
+  {
+   "text": "Convert the indexed finite constructible open/closed refinement into the recursive SchemeRefinementTree by strong induction on the remaining number of vertices. Transport its root isomorphism and retain the actual nonempty-leaf stratum factors. The leaf covers are the given pullback₂ covers, hence retain the full pro-etale covering condition.",
+   "uses": [
+    "lem-fix-constructible-open-closed-refinement",
+    "sk-def-pe-site",
+    "def-fix-scheme-refinement-tree",
+    "sk-lem-pe-weakly-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 005H, lemma-constructible; 09YH, lemma-constructible-is-retrocompact; 09Y4, lemma-constructible-partition-refined-by-stratification; scheme refinement supplied by the cited node. Cover base change: topologies.tex Tag 022D, lemma-fpqc."
+   }
+  },
+  {
+   "text": "For module zero-detection on an arbitrary given pro-etale cover, forget the module action, identify inverse image with localized restriction, and apply the adopted cover-local isomorphism criterion to the zero endomorphism. For original strata, constructibility and qcqs imply each immersion is quasi-compact; finite jointly surjective quasi-compact abelian-sheaf detection then detects zero. For the refinement tree, induct using the adopted internal-module open/closed zero criterion. Empty leaves are zero by the empty-site sheaf axiom.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-constructible-is-retrocompact",
+    "lem-pod-finite-qc-proetale-abelian-detection",
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "lem-exc-open-closed-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AH, lemma-ses-associated-to-open; 09BM, lemma-closed-immersion-complement-retrocompact-exact; cover-local morphisms from sites.tex Tag 04TQ, lemma-glue-maps."
+   }
+  },
+  {
+   "text": "Exact pullback commutes with each homology functor. Apply the preceding module criteria to H^q(K), keeping q arbitrary. Pullback composition identifies the leaf-cover branch restrictions, and the identity comparison returns the tree root to K. This proves both degreewise detection assertions and, by homology detection in the derived category, zero-detection for arbitrary unbounded objects.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-abstract-derived-category",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, iterated on the finite tree; derived-category localization is derived.tex Tag 05RU, definition-unbounded-derived-category."
+   }
+  },
+  {
+   "text": "Use the existing strict_completion_restriction_comparison. Its IsIntegral clause identifies its unit with the specified strict Roos augmentation on every K-flat representative; its Comparison.unit clause identifies the pulled unit for each immersion, weakly etale morphism and their composites. Choose a flat K-flat representative P of K. The distinguished mapping-cone triangle shows completeness of each restriction is equivalent to vanishing of the corresponding restriction of completionCone P. Apply the zero-detection from the preceding step to that cone, both on original strata covers and on the recursive leaf covers. This uses the unit equation, not just finite quotient comparisons.",
+   "uses": [
+    "lem-sfb-strict-completion-restriction-comparison",
+    "sk-def-pe-derived-completion",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-abstract-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones paragraph, strict principal-cone and Roos formulas, with the zero shifted-product augmentation retained."
+   }
+  },
+  {
+   "text": "For each supplied scalar presentation, the existing scalar free and matrix comparisons identify extension of its scalar cokernel with the cokernel of the same scalarMatrix. Realize the latter as inverse image from the point of the condensed cokernel of the same entries. The adopted point pullback comparison preserves this condensed cokernel. Choose a finite presentation only to prove existence of the scalar-model pullback isomorphism; for every separately supplied matrix use the same entries, ranks and cokernel comparisons. Compose with the pullback-square equality and module pullback composition. Rank-zero presentations use the same biproduct and cokernel formulas.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "new-unbounded-pullback-finite-constant-local-model",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sfb-constructible/sk-def-sfb-constructible-local-model.md",
+    "place": "Scalar-model/cokernel equivalence; preservation of the actual finite matrices under exact inverse image."
+   }
+  },
+  {
+   "text": "The completion-cone clause is a further instance of tree zero-detection. Its forward direction is preservation of zero; its reverse direction applies the proved degreewise detection to every homology object. It does not require exchanging arbitrary inverse image with completion or any extra boundedness hypothesis.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, iterated on the finite tree; derived-category localization is derived.tex Tag 05RU, definition-unbounded-derived-category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-open-closed-refinement",
+  "sk-def-pe-site",
+  "def-fix-scheme-refinement-tree",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-constructible-is-retrocompact",
+  "lem-pod-finite-qc-proetale-abelian-detection",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-exc-open-closed-detection",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-strict-completion-restriction-comparison",
+  "sk-def-pe-derived-completion",
+  "det-def-sfb-constructible-local-model",
+  "new-unbounded-pullback-finite-constant-local-model",
+  "lem-sfb-abstract-kflat-resolution",
+  "sk-lem-pe-weakly-etale-stability",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Y6: recursive refinement and module/homology conservativity; reuse of the existing normalized strict completion restriction comparison and finite scalar matrix cokernel APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a qcqs scheme a finite constructible stratification can be refined by a finite open closed tree detecting derived completeness on proetale local scalar models",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, PrespectralSpace ↥X\", \"doc\": \"Every scheme, when considered as a topological space, is a prespectral space, meaning it satisfies the inductive conditions related to compactness and a basis of compact open sets specified by the pre\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : Type u_1} (U : I → X.Opens),\\n  TopologicalSpace.IsOpenCover U →\\n    (∀ (i : I), AlgebraicGeometry.IsAffineOpen (U i)) →\\n      (∀ (i j : I), IsCompact (↑(U i) ∩ ↑(U j))) → QuasiSeparatedSpace ↥X\", \"doc\": \"If a scheme $X$ has an open cover consisting of affine open subsets such that the intersection of any two elements of the cover is quasi-compact, then $X$ is a quasi-separated space.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite open closed decompositions of a scheme detect vanishing and canonical derived adic completion after restriction to covering objects",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.compactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.OpenCover) [Finite 𝒰.I₀] [H : ∀ i, CompactSpace (𝒰.X i)] : CompactSpace X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that the index set is finite and each open subscheme $U_i$ is compact, then $X$ itself is a compact topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} {U : X.Opens} (s : Γ(X, U)) (𝒰 : X.OpenCover) [Finite 𝒰.I₀]\\n  (h : ∀ i : 𝒰.I₀, IsNilpotent ((𝒰.f i).app U s)) : IsNilpotent s\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf of $ X $ over $ U $. If there exists a finite open cover $ \\\\mathcal{U} $ of $ X $ such that for every o\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{𝒰 : Scheme.OpenCover.{v, u} X} [Finite 𝒰.I₀] [∀ i, IsAffine (𝒰.X i)] :\\n  IsNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"For a scheme $X$ with a finite affine open cover $\\\\{U_i\\\\}$, $X$ is Noetherian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for every $i$.\"}\n  {\"name\": \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \"[IsAffine X] {U : Set X} : IsCompact U ∧ IsOpen U ↔ ∃ s : Set Γ(X, ⊤), s.Finite ∧ U = ⋃ i ∈ s, X.basicOpen i\", \"doc\": \"For an affine scheme $ X $, an open subset $ U $ is compact and open if and only if there exists a finite set $ S $ of global sections of the structure sheaf on $ X $ such that $ U $ is the union of t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.restrict_I₀\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (U : X.Opens), (𝒰.restrict U).I₀ = 𝒰.I₀\", \"doc\": \"For any scheme $ X $, open cover $ \\\\mathcal{U} $ of $ X $, and open subset $ U \\\\subseteq X $, the zeroth component of the restricted open cover $ \\\\mathcal{U}|_U $ coincides with the zeroth component o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} {U : X.Opens} (s : Γ(X, U)) (𝒰 : X.OpenCover) (h : ∀ i : 𝒰.I₀, (𝒰.f i).app U s = 0) : s = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ \\\\mathcal{U} $ is an open cover of $ X $ consisting of open immersion\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Artinian\", \"type\": \"{ι : Type*} {U : ι → X.Opens} (hU : TopologicalSpace.IsOpenCover U) (hU' : ∀ i, IsAffineOpen (U i)) :\\n  IsLocallyArtinian X ↔ ∀ i, IsArtinianRing Γ(X, U i)\", \"doc\": \"For a scheme $X$ with an open cover $\\\\{U_i\\\\}$ consisting of affine open subsets, $X$ is locally Artinian if and only if the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is an Artinian ring for\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced.of_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"(𝒰 : X.OpenCover) [∀ i, IsReduced (𝒰.X i)] : IsReduced X\", \"doc\": \"If a scheme $X$ admits an open cover $\\\\{U_i\\\\}$ such that each open subscheme $U_i$ is reduced (i.e., has no nonzero nilpotent elements in its local rings), then $X$ itself is a reduced scheme.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyClosed\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"IsLocallyClosed\", \"module\": \"Mathlib.Topology.Defs.Basic\", \"type\": \" {X : Type u} [TopologicalSpace X] (s : Set X) : Prop\", \"doc\": \"A set is locally closed if it is the intersection of some open set and some closed set.\\nAlso see `isLocallyClosed_tfae` and other lemmas in `Mathlib/Topology/LocallyClosed.lean`.\"}\n  {\"name\": \"IsLocallyClosedAt\", \"module\": \"Mathlib.Topology.Defs.Filter\", \"type\": \" {X : Type u_1} [TopologicalSpace X] (s : Set X) (x : X) : Prop\", \"doc\": \"A set `s` is locally closed at a point `x` if there is a neighborhood `U` of `x` and a closed set\\n`Z` such that `U ∩ s = U ∩ Z`.\\nAlso see `isLocallyClosedAt_tfae` and other lemmas in `Mathlib/Topology\"}\n  {\"name\": \"IsClosed.isLocallyClosed\", \"module\": \"Mathlib.Topology.Basic\", \"type\": \" {X : Type u} {s : Set X} [TopologicalSpace X] (hs : IsClosed s) : IsLocallyClosed s\", \"doc\": \"\"}\n  {\"name\": \"IsOpen.isLocallyClosed\", \"module\": \"Mathlib.Topology.Basic\", \"type\": \" {X : Type u} {s : Set X} [TopologicalSpace X] (hs : IsOpen s) : IsLocallyClosed s\", \"doc\": \"\"}\n  {\"name\": \"IsLocallyClosed.locallyCompactSpace\", \"module\": \"Mathlib.Topology.Compactness.LocallyCompact\", \"type\": \" {X : Type u_1} [TopologicalSpace X] [LocallyCompactSpace X] {s : Set X} (hs : IsLocallyClosed s) : LocallyCompactSpace ↑s\", \"doc\": \"\"}\n  {\"name\": \"IsLocallyClosed.isOpen_coborder\", \"module\": \"Mathlib.Topology.LocallyClosed\", \"type\": \" {X : Type u_1} [TopologicalSpace X] {s : Set X} : IsLocallyClosed s → IsOpen (coborder s)\", \"doc\": \"**Alias** of the forward direction of `isLocallyClosed_iff_isOpen_coborder`.\"}\n  {\"name\": \"isLocallyClosed_iff_isOpen_coborder\", \"module\": \"Mathlib.Topology.LocallyClosed\", \"type\": \" {X : Type u_1} [TopologicalSpace X] {s : Set X} : IsLocallyClosed s ↔ IsOpen (coborder s)\", \"doc\": \"\"}\n  {\"name\": \"isLocallyClosedAt_iff_closure_eventuallyLE\", \"module\": \"Mathlib.Topology.LocallyClosed\", \"type\": \" {X : Type u_1} [TopologicalSpace X] {s : Set X} {x : X} : IsLocallyClosedAt s x ↔ closure s ≤ᶠ[nhds x] s\", \"doc\": \"**Alias** of `isLocallyClosedAt_iff_closure_eventuallySubset`.\"}\n  {\"name\": \"isLocallyClosedAt_iff_closure_eventuallySubset\", \"module\": \"Mathlib.Topology.LocallyClosed\", \"type\": \" {X : Type u_1} [TopologicalSpace X] {s : Set X} {x : X} : IsLocallyClosedAt s x ↔ closure s ≤ᶠ[nhds x] s\", \"doc\": \"\"}\n  {\"name\": \"isLocallyClosedAt_iff_eventuallyEqSet_closure\", \"module\": \"Mathlib.Topology.LocallyClosed\", \"type\": \" {X : Type u_1} [TopologicalSpace X] {s : Set X} {x : X} : IsLocallyClosedAt s x ↔ s =ᶠ[nhds x] closure s\", \"doc\": \"\"}\n  {\"name\": \"isLocallyClosedAt_iff_eventuallyEq_closure\", \"module\": \"Mathlib.Topology.LocallyClosed\", \"type\": \" {X : Type u_1} [TopologicalSpace X] {s : Set X} {x : X} : IsLocallyClosedAt s x ↔ s =ᶠ[nhds x] closure s\", \"doc\": \"**Alias** of `isLocallyClosedAt_iff_eventuallyEqSet_closure`.\"}\n  {\"name\": \"IsLocallyClosed.isLocallyClosedAt\", \"module\": \"Mathlib.Topology.LocallyClosed\", \"type\": \" {X : Type u_1} [TopologicalSpace X] {s : Set X} (hs : IsLocallyClosed s) {x : X} (hx : x ∈ s) : IsLocallyClosedAt s x\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*stratif|stratif.*constructible|IsLocallyClosed.*IsConstructible",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite stratified integral scalar presentations pull back to leaf covers of an open closed tree and completeness descends from all leaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this constructs an open cover of the object $D(i')\"}\n  {\"name\": \"Profinite.exists_locallyConstant_finite_aux\", \"module\": \"Mathlib/Topology/Category/Profinite/CofilteredLimit\", \"type\": \"∀ {J : Type v} [inst : CategoryTheory.SmallCategory J] [CategoryTheory.IsCofiltered J]\\n  {F : CategoryTheory.Functor J Profinite} (C : CategoryTheory.Limits.Cone F) {α : Type u_1} [Finite α]\\n  (hC : CategoryTheory.Limits.IsLimit C) (f : LocallyConstant (↑C.pt.toTop) α),\\n  ∃ j g,\\n    LocallyConstant.\", \"doc\": \"Given a finite set $\\\\alpha$, a limit cone $C$ in the category of profinite spaces, and a locally constant function $f : C.\\\\text{apex} \\\\to \\\\alpha$, there exists an index $j$ in the diagram category and\"}\n  {\"name\": \"Profinite.NobelingProof.fin_comap_jointlySurjective\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Span\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I],\\n  IsClosed C →\\n    ∀ (f : LocallyConstant ↑C ℤ),\\n      ∃ s g,\\n        f =\\n          LocallyConstant.comap\\n            { toFun := Profinite.NobelingProof.ProjRestrict C fun x => x ∈ s, continuous_toFun := ⋯ } g\", \"doc\": \"For any closed set $ C $ and any locally constant function $ f : C \\\\to \\\\mathbb{Z} $, there exists a finite subset $ s \\\\subseteq I $ and a locally constant function $ g : \\\\prod_{i \\\\in s} \\\\{\\\\bot, \\\\top\\\\}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰X : X.OpenCover) (𝒰Y : Y.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z),\\n  (AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight 𝒰X 𝒰Y f g).I₀ = (𝒰X.I₀ × 𝒰Y.I₀)\", \"doc\": \"Given schemes $X, Y, Z$ with open covers $\\\\mathcal{U}_X$ of $X$ and $\\\\mathcal{U}_Y$ of $Y$, and morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, the zeroth component $I_0$ of the open cover of the pullback sc\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : Z.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z),\\n  (AlgebraicGeometry.Scheme.Pullback.openCoverOfBase 𝒰 f g).I₀ = 𝒰.I₀\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $Z$ and morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, the zeroth component $I_0$ of the open cover constructed on the pullback scheme $X \\\\times_Z Y$ coincides \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase'_f\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : Z.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  (ij :\\n    (i :\\n      (AlgebraicGeometry.Scheme.Pullback.openCoverOfLeft (CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰) f\\n          g).I₀) ×\\n      ((fun i =>\\n            ((fun i =>\\n                  AlgebraicG\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $Z$ and morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, this constructs an open cover of the pullback scheme $X \\\\times_Z Y$ by pulling back each open set in $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.openCoverOfLeft_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z),\\n  (AlgebraicGeometry.Scheme.Pullback.openCoverOfLeft 𝒰 f g).I₀ = 𝒰.I₀\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, and morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, the zeroth component $I_0$ of the open cover of the pullback scheme $X \\\\times_Z Y$ constructed from $\\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.openCoverOfRight_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : Y.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z),\\n  (AlgebraicGeometry.Scheme.Pullback.openCoverOfRight 𝒰 f g).I₀ = 𝒰.I₀\", \"doc\": \"For schemes $X$, $Y$, $Z$ with morphisms $f : X \\\\to Z$ and $g : Y \\\\to Z$, and an open cover $\\\\mathcal{U}$ of $Y$, the zeroth component $I_0$ of the pullback open cover $X \\\\times_Z Y$ constructed from \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scalar adic completion, finite presentations, topological locally closed sets and generic complex limits do not state this pro-etale coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adic completeness and cohomological vanishing detected on finite locally closed constructible strata and pro-etale covers",
+   "results": "8 hits; BDeRhamPlus, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.etaleLocus_eq_compl_support; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected search results concern scalar adic completion, basic pro-etale sites, free-module pullbacks or local finite presentation; none states strict completion-unit and cohomological detection on qcqs constructible strata."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\"",
+   "results": "12 hits; AdicCompletion, AdicCompletion.AdicCauchySequence, AdicCompletion.IsAdicCauchy, AdicCompletion.instAdd, AdicCompletion.instAddCommGroup, AdicCompletion.instNeg, AdicCompletion.instSub, AdicCompletion.instZero; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected search results concern scalar adic completion, basic pro-etale sites, free-module pullbacks or local finite presentation; none states strict completion-unit and cohomological detection on qcqs constructible strata."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|proEtale|ProEtale",
+   "results": "10 hits; Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected search results concern scalar adic completion, basic pro-etale sites, free-module pullbacks or local finite presentation; none states strict completion-unit and cohomological detection on qcqs constructible strata."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf complexes completion along an ideal is detected on finite constructible strata",
+   "results": "8 hits; SheafOfModules.GeneratingSections.IsFiniteType.mk, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, SheafOfModules.IsFiniteType.mk, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected search results concern scalar adic completion, basic pro-etale sites, free-module pullbacks or local finite presentation; none states strict completion-unit and cohomological detection on qcqs constructible strata."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of pro-etale module sheaves preserves countable products and derived completion units and finite-stratum restrictions jointly detect zero",
+   "results": "8 hits; LightCondMod.ofSheafLightProfinite, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AlgebraicGeometry.Scheme.instHasPullbacksEtale, SheafOfModules.pullbackObjFreeIso, CondensedMod.ofSheafProfinite, PresheafOfModules.pullbackObjIsDefined, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected search results concern scalar adic completion, basic pro-etale sites, free-module pullbacks or local finite presentation; none states strict completion-unit and cohomological detection on qcqs constructible strata."
+  },
+  {
+   "tool": "grep",
+   "query": "completion|complete|stratif|conservative",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean; Mathlib subdirectory AlgebraicGeometry/Sites; ",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected search results concern scalar adic completion, basic pro-etale sites, free-module pullbacks or local finite presentation; none states strict completion-unit and cohomological detection on qcqs constructible strata."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-integral-finite-model-completeness",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Strata paragraph of the finite-model proof; returned proof steps 5--6, and the vanishing descent in step 9. Agent coefficient-and-completion refinement of Stacks Tags 005H (lemma-constructible), 09YH (lemma-constructible-is-retrocompact), 09Y4 (lemma-constructible-partition-refined-by-stratification), using the existing qcqs refinement theorem.",
+   "via": [
+    "lem-sfb-qcqs-integral-finite-model-completeness",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-finite-strata-completion-detection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reuse the existing qcqs constructible open/closed refinement tree, arbitrary-ring open/closed sequence, covering criterion and general exact inverse-image/cone/Roos statements. Give explicit preservation of the specified strict completion augmentation, degreewise and unbounded detection, and entrywise preservation of the same scalar matrices. No new nodes. No Noetherian or invertibility hypothesis added.",
+  "blueprint": "Refinement isomorphisms, (2): the closed-complement proper-base-change calculation on bounded constructible finite-Tor generators; Adic completeness and classical reductions of qcqs finite-model integral inputs. Subargument: Strata paragraph of the finite-model proof; returned proof steps 5--6, and the vanishing descent in step 9. Agent coefficient-and-completion refinement of Stacks Tags 005H (lemma-constructible), 09YH (lemma-constructible-is-retrocompact), 09Y4 (lemma-constructible-partition-refined-by-stratification), using the existing qcqs refinement theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-constructible-open-closed-refinement",
+    "why": "Generic qcqs constructible partition refinement supplies the finite tree with actual stratum factorizations; no node of this compactification-coherence unit gives its topology. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Weakly etale base-change stability for the leaf-cover fibre products. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Fpqc base-change stability retains the full pro-etale covering condition. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "sk-def-pe-site",
+    "why": "Defines covering families with their finite affine refinement condition. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Untwisted condensed coefficient comparison and exact module inverse image for arbitrary schemes. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic product preservation for locally closed immersion inverse images, without Noetherianity. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies covering-domain pro-etale sites with covering slice sites. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact slice restriction and its left adjoint supply product preservation for arbitrary ring sheaves. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor comparison in each cohomological degree. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-pe-principal-reduction-cone-calculus",
+    "why": "The strict principal reduction tower, transitions and augmentation for the actual pulled-back condensed integral ring. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-pe-roos-cone-calculus",
+    "why": "Explicit strict Roos coordinates and augmentations permit checking the actual completion unit. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-pe-completion-triangle-comparison",
+    "why": "Identifies the explicit principal/Roos augmentation with the specified strict-tower completion unit. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic arbitrary-ring open/closed short exact sequence, with the tree edge quasi-compactness hypothesis. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Abstract derived pair-reflection for the exact open/closed functors supplied by the preceding node. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-sfb-sheaf-cover-local-isomorphism",
+    "why": "Generic covering-slice detection for sheaf morphisms, applied to underlying abelian sheaves. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Definition of cohomology, quasi-isomorphisms and their localization. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "def-sfb-module-upper-star-comp",
+    "why": "Canonical actual module pullback composition identifies the two routes to each leaf-cover domain. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "det-def-sfb-constructible-local-model",
+    "why": "Finite scalar local models are exactly cokernels of matrices over the scalar ring, as needed for matrix preservation. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-sfb-finite-colimit-matrix-cokernels",
+    "why": "Generic entrywise finite matrix and cokernel comparison under exact inverse image, including rank zero. This is a below-unit tool, not a replacement for the compactification route."
+   },
+   {
+    "node": "lem-weil-pbc-immersion-base-change-lft",
+    "why": "Generic base-change stability of immersions identifies the restrictions from the original cover domains to leaf-cover domains. This supplies a below-unit categorical/geometric tool."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic cone acyclicity criterion applied to the actual chain representative of the strict completion unit. This supplies a below-unit categorical/geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-constructible-open-closed-refinement",
+  "sk-lem-pe-weakly-etale-stability",
+  "sk-def-pe-site",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "def-weil-abstract-derived-category",
+  "det-def-sfb-constructible-local-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-e1fd9b324",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-e1fd9b324 (reviewer sub-agent of L); spot-checked: I read all of the following in full: the item's statement and its 8 steps, the statements of all 21 cited nodes, the stmt_deps, the parent lem-sfb-qcqs-integral-finite-model-completeness (step 2 cites the item), the unit record, the blueprint main-20261015 ctf-equals-bc Strata/Locality paragraphs, and Stacks 09Y4 and 01JY. There is no repair note, so this is a first split. The statement is unchanged and the delivery has no new nodes. The source's open-stratum Noetherian induction fails for qcqs W, because a finite locally closed partition need not have an open stratum. The split replaces it with the existing qcqs open/closed tree (lem-fix-constructible-open-closed-refinement). That is a valid correction below the unit and is named in the report. Step 1: leaf covers are covers by weakly-etale plus fpqc base change (fpqc-covering-axioms (3)). Step 2: the untwisted cartesian-coefficients clause has no ell-invertibility; immersion inverse image preserves limits without Noetherianity; slice restriction is a right adjoint, so it preserves products even for non-qcqs cover domains. Step 3: the unit is checked in the cited D_n/Roos coordinates, (x,y)->(x,pi y), augmentation (m,0), and 1-s commuting with the product comparison; no Rlim exchange is assumed. Step 4: ringed-open-closed needs a quasi-compact open, which is exactly the tree edge, and it feeds lem-sfb-exact-open-closed-unbounded-calculus for joint reflection. The i^{-1}-|i_* adjunction and the 'iso implies unit iso' step are implicit but standard; I accept them as a citation-precision point. Steps 5-6: the degreewise induction is set up explicitly. L = S_alpha x_W L via the monomorphism argument, so t_L and V->U are immersions by 01JY, and composition goes through upper-star-comp. Step 7: the same scalar matrices are kept via local-model plus matrix-cokernel. Step 8: empty cases. Edge cases tested: point, Spec Z_(p), a product of fields, empty W/strata/leaves, unbounded K, ell not invertible. Not duplicates: the Noetherian stratum-completion nodes. lem-fix-qcqs-completion-unit-locality (unsplit, same day) assumes ell invertible, uses lim(A_n) coefficients and qcqs domains; maintainer note to relate it to the item, which is the more general statement. All 21 tool_uses are generic tools and I accept them. No SGA; proof_deps equals the union of uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteStrataCompletionDetection",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteStrataCompletion.finite_strata_completion_detection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteStrataCompletion.pull",
+   "AlgebraicGeometry.ProEtale.FiniteStrataCompletion.completionCone",
+   "AlgebraicGeometry.ProEtale.FiniteStrataCompletion.leafCover",
+   "AlgebraicGeometry.ProEtale.FiniteStrataCompletion.leafCoverTest",
+   "AlgebraicGeometry.ProEtale.FiniteStrataCompletion.leafScalarModels",
+   "AlgebraicGeometry.ProEtale.FiniteStrataCompletion.finite_strata_completion_detection"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteStrataCompletionDetection.lean",
+  "statement": "theorem finite_strata_completion_detection [CompactSpace W] [QuasiSeparatedSpace W] (_hc : ∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) : (∀ K : DerivedCategory (AdicCompletion.Modules l E W), (IsDerivedComplete l E W K ↔ ∀ (a : Fin S.n) (i : (𝒰 a).I₀), IsDerivedComplete l E ((𝒰 a).X i) ((pull l E ((𝒰 a).f i)).obj ((pull l E (S.immersion a)).obj K))) ∧ (∀ q : ℤ, IsZero ((DerivedCategory.homologyFunctor _ q).obj K) ↔ ∀ (a : Fin S.n) (i : (𝒰 a).I₀), IsZero ((DerivedCategory.homologyFunctor _ q).obj ((pull l E ((𝒰 a).f i)).obj ((pull l E (S.immersion a)).obj K))))) ∧ ∃ tree : Scheme.SchemeRefinementTree W (fun _ _ _ _ _ _ ↦ True) W (𝟙 W), tree.AllLeaves (fun L branch ↦ (Nonempty L → ∃ (a : Fin S.n) (t : L ⟶ S.domain a), t ≫ S.immersion a = branch) ∧ (IsEmpty L → ∀ M : AdicCompletion.Modules l E L, IsZero M) ∧ leafScalarModels l E S 𝒰 L branch) ∧ (∀ K : DerivedCategory (AdicCompletion.Modules l E W), (IsDerivedComplete l E W K ↔ tree.AllLeaves (leafCoverTest S 𝒰 (fun T r ↦ IsDerivedComplete l E T ((pull l E r).obj K)))) ∧ (∀ q : ℤ, IsZero ((DerivedCategory.homologyFunctor _ q).obj K) ↔ tree.AllLeaves (leafCoverTest S 𝒰 (fun _ r ↦ IsZero ((DerivedCategory.homologyFunctor _ q).obj ((pull l E r).obj K)))))) ∧ (∀ (P : CochainComplex (AdicCompletion.Modules l E W) ℤ) (_hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E W) (.up ℤ)).kFlat P), IsZero (completionCone l E W P) ↔ tree.AllLeaves (leafCoverTest S 𝒰 (fun _ r ↦ IsZero ((pull l E r).obj (completionCone l E W P)))))",
+  "branch": "sheaf-dag",
+  "by": "Q114",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The conclusion uses the recorded strict-augmentation completeness predicate and its cone, exact levelwise derived inverse image, the existing recursive qcqs scheme refinement tree and actual base-changed pro-etale covers. Leaf models retain the original scalar module and each supplied finite scalar presentation matrix. No hypothesis of Noetherianity, boundedness, globally open original stratum, or invertibility of l is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ffa14980",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. IsDerivedComplete = the specified unit is invertible (by completion_triangle_comparison); pull = canonical exact derived pullback (leftDerivedUpperStarIsoMapDerivedCategory); qcqs W with constructible FiniteLocallyClosedStratification and arbitrary proetalePrecoverage covers; cover restrictions taken on the stratum first; completion and per-q H^q equivalences for every K and q; existing SchemeRefinementTree with actual leaf factorizations, pullback₂ leaf covers, same P and same scalarMatrix A (rank 0 included); empty-leaf zero category; cone of the actual augmentation on K-flat P. No Noetherian, boundedness or l-invertibility hypothesis. statement verbatim; declarations complete; added stmt_deps def-fix-scheme-refinement-tree and det-def-sfb-constructible-local-model are landed definition nodes (allowed). Helpers are real definitions, only the theorem is sorry, docstrings and proof steps present, both report sections present. Advisory: redundant public import of CondensedConstantConstructibility. No compile needed (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261024T022442-L-2992400",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

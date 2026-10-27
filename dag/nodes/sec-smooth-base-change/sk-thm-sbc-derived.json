@@ -43,5 +43,50 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-smooth-base-change",
  "unit": "sk-thm-sbc-derived",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Consider a cartesian square with $u:X'\\to X$, $f':X'\\to Y'$, $f:X\\to Y$, $g:Y'\\to Y$, and\nthe exchange map $\\operatorname{Ex}_{g,f}(K):g^*Rf_*K\\to Rf'_*u^*K$ of\n[sk-lem-sbc-exchange-compatibility].\nLet $g$ be smooth and $f$ quasi-compact and\nquasi-separated. Let $\\Lambda$ be a discrete commutative ring\nannihilated by an integer $n$ invertible on $Y$. For every\n\n$$\n K\\in D^+_{\\mathrm{class}}(X_{\\mathrm{pro\\acute et}},\\Lambda)\n$$\n\nthe canonical map $\\operatorname{Ex}_{g,f}(K)$ is an isomorphism in\n$D^+_{\\mathrm{class}}(Y'_{\\mathrm{pro\\acute et}},\\Lambda)$.\n\nIn particular, for a classical $\\Lambda$-module sheaf $F$ and all $q$,\n\n$$\n g^*R^qf_*F\\xrightarrow{\\sim}R^qf'_*u^*F.\n$$\n\n*Complement.* In the Cartesian square of the complement of [sk-thm-smooth-base-change], with\n$f$ smooth and $g$ quasi-compact and quasi-separated, let $\\mathcal P$ be the set of primes\ninvertible on the base. The base-change map of [sk-def-bc] is an isomorphism\n\n$$\nLf^*Rg_*K\\xrightarrow{\\ \\sim\\ }Rh_*Le^*K\n$$\n\nfor bounded constructible $K$ ([sbc-thm-bounded-derived-smooth-base-change]),\nfor bounded $\\mathcal P$-torsion $K$ ([sbc-thm-bounded-allowable-torsion]), and\nfor every $K\\in D^+_{\\mathcal P\\text{-tor}}(T_{\\Et})$\n([sbc-thm-bounded-below-derived-smooth-base-change]).",
+  "proof": [
+   {
+    "text": "For a classical sheaf the assertion is\n[sk-thm-smooth-base-change], applied to the underlying\nabelian sheaf, which is killed by $n$. The exchange map is\n$\\Lambda$-linear by its unit–counit construction, so it is an\nisomorphism of $\\Lambda$-module sheaves.",
+    "uses": [
+     "sk-thm-smooth-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For a complex, choose $a$ with $K\\in D^{\\geq a}$. The hypercohomology\nspectral sequences of the two sides have terms\n\n$$\n g^*R^pf_*H^q(K),\\qquad R^pf'_*u^*H^q(K),\n \\qquad p\\geq0,\\quad q\\geq a,\n$$\n\nand the exchange map induces on them the sheaf comparison, an\nisomorphism by the preceding paragraph. In each total degree only\nfinitely many pairs $(p,q)$ occur, so these shifted first-quadrant\nspectral sequences converge and the map on abutments is an isomorphism;\nalternatively, truncate $K$ above the relevant total degree first. Finally,\n[sk-thm-pe-direct-image-comparison] and\n[sk-cor-pe-classical-derived] show that the direct and inverse\nimages involved are classical, and\n[sk-lem-sbc-exchange-compatibility] identifies the comparison with\nthe exchange map $\\operatorname{Ex}_{g,f}(K)$.",
+    "uses": [
+     "sk-thm-pe-direct-image-comparison",
+     "sk-lem-sbc-exchange-compatibility"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Complement.* Each of the three étale statements is reduced to the degreewise statement of\n[sk-thm-smooth-base-change] by a finite-range comparison and a truncation criterion.",
+    "uses": [
+     "sk-thm-smooth-base-change"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,0 +1,84 @@
+{
+ "id": "lem-sfb-continuous-connected-component-lift",
+ "kind": "statement",
+ "title": "Continuous maps into totally disconnected spaces descend through components",
+ "statement": "Use the universe convention of [def-weil-size-convention], with the spaces and function sets formed in the containing universe. Let $T,B$ be arbitrary topological spaces, and suppose $B$ is totally disconnected, meaning that every connected subset has at most one point. Let $\\pi_0(T)$ be the quotient by belonging to the same connected component (maximal connected subset), with the quotient topology, and let $q_T:T\\to\\pi_0(T)$ be the quotient map. The map $q_T$ is continuous and surjective. For every continuous $f:T\\to B$ there is a continuous $\\bar f:\\pi_0(T)\\to B$ satisfying $\\bar f\\circ q_T=f$; any function $v:\\pi_0(T)\\to B$ satisfying $v\\circ q_T=f$ equals $\\bar f$. Empty spaces are allowed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, final proof paragraph, component factorization; arbitrary-space form: Mathlib/Topology/Connected/TotallyDisconnected.lean:255,259,269,277 and Mathlib/Topology/Connected/Clopen.lean:538,545."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map to a totally disconnected space factors uniquely and continuously through the quotient by connected components",
+   "results": "OK: 8 hits; Continuous.connectedComponentsLift_unique, Continuous.connectedComponentsLift, Continuous.connectedComponentsLift_apply_coe, Continuous.connectedComponentsLift_comp_coe, Continuous.connectedComponentsLift_continuous, Continuous.image_eq_of_connectedComponent_eq, Continuous.connectedComponentsMap, connectedComponents_lift_unique'",
+   "date": "2026-10-22",
+   "verdict": "match: Continuous.connectedComponentsLift and its continuity, composite and uniqueness theorems; quotient-map continuity and surjectivity at Clopen.lean:538,545. Sources and every hypothesis read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"connectedComponentsLift\"",
+   "results": "OK: 5 hits; Continuous.connectedComponentsLift, Continuous.connectedComponentsLift_apply_coe, Continuous.connectedComponentsLift_continuous, Continuous.connectedComponentsLift_comp_coe, Continuous.connectedComponentsLift_unique",
+   "date": "2026-10-22",
+   "verdict": "match: Continuous.connectedComponentsLift and its continuity, composite and uniqueness theorems; quotient-map continuity and surjectivity at Clopen.lean:538,545. Sources and every hypothesis read."
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponentsLift",
+   "results": "OK: 5 hits; Mathlib/Topology/Connected/TotallyDisconnected.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean ; Mathlib/Topology/Connected",
+   "date": "2026-10-22",
+   "verdict": "match: Continuous.connectedComponentsLift and its continuity, composite and uniqueness theorems; quotient-map continuity and surjectivity at Clopen.lean:538,545. Sources and every hypothesis read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous maps into totally disconnected spaces descend uniquely to the quotient by connected components",
+   "results": "OK: 8 hits; Continuous.connectedComponentsLift_unique, Continuous.connectedComponentsMap, Continuous.connectedComponentsLift_apply_coe, Continuous.connectedComponentsLift_comp_coe, Continuous.connectedComponentsLift, Continuous.image_eq_of_connectedComponent_eq, Continuous.connectedComponentsMap_continuous, DiscreteQuotient.proj_continuous",
+   "date": "2026-10-22",
+   "verdict": "match: Continuous.connectedComponentsLift and its continuity, composite and uniqueness theorems; quotient-map continuity and surjectivity at Clopen.lean:538,545. Sources and every hypothesis read."
+  },
+  {
+   "tool": "grep",
+   "query": "TotallySeparatedSpace.totallyDisconnectedSpace|connectedComponentsLift_(unique|comp_coe)|continuous_coe|surjective_coe",
+   "results": "OK: 15 hits; Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean, Mathlib/Topology/Connected/TotallyDisconnected.lean ; Mathlib/Topology/Connected",
+   "date": "2026-10-22",
+   "verdict": "match: Continuous.connectedComponentsLift and its continuity, composite and uniqueness theorems; quotient-map continuity and surjectivity at Clopen.lean:538,545. Sources and every hypothesis read."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Continuous.connectedComponentsLift",
+  "file": "Mathlib/Topology/Connected/TotallyDisconnected.lean",
+  "line": 255,
+  "how": "exact, one declaration per clause: Continuous.connectedComponentsLift (line 255) constructs the factor; Continuous.connectedComponentsLift_continuous (259) gives continuity; Continuous.connectedComponentsLift_comp_coe (269) gives its composite with q_T; Continuous.connectedComponentsLift_unique (277) gives uniqueness even without assuming v continuous. All are in Mathlib/Topology/Connected/TotallyDisconnected.lean and assume only TopologicalSpace T, TopologicalSpace B and TotallyDisconnectedSpace B. ConnectedComponents.surjective_coe (Mathlib/Topology/Connected/Clopen.lean:538) and ConnectedComponents.continuous_coe (same file:545) give the quotient-map clauses. ConnectedComponents has exactly the quotient topology by the same-component equivalence, defined in Clopen.lean:535."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ultrametric-component-map-extension",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Generic restriction of continuous coefficient sections on a normal scheme; returned proof steps 5-6: ultrametric total disconnectedness, continuous component factorization and the explicit inverse ring map; Lemma 4.2.12, final proof paragraph, component factorization; arbitrary-space form: Mathlib/Topology/Connected/TotallyDisconnected.lean:255,259,269,277 and Mathlib/Topology/Connected/Clopen.lean:538,545.",
+   "via": [
+    "lem-sfb-ultrametric-component-map-extension",
+    "lem-sfb-normal-generic-continuous-sections",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

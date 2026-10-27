@@ -1,0 +1,161 @@
+{
+ "id": "lem-sp-tower-chern-ordinary-scalar-pullback",
+ "kind": "statement",
+ "title": "Ordinary scalar association with coefficient and root normalization",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, schemes $X,Y$ with $\\ell$ invertible, $f:X\\to Y$, normalized Chern data $c_Y,c_X$ [def-sp-tower-class-chern], geometric tower data $b,g$ [det-sp-tower-shriek-levels], and section-normalized coefficient and line comparisons $\\theta_0,\\theta_1$ [def-sp-tower-class-diagonal, def-sp-tower-class-pullback]. Put $E_T=c_T.\\mathrm{scalar.model.E}$ and $q_T=\\mathrm{scalarSingleCounit}(c_T)$ [def-sp-tower-scalar-single-counit]. There exist intermediate integral pullback data $d$ [def-sp-tower-chern-pullback-intermediate], an ordinary natural isomorphism $\\alpha:E_Yg^*\\simeq d^*E_X$, and arrows $e_T:E_T(R_T)\\to A_T$ for $T=X,Y$. The exact functor $d^*$ carries flat-term K-flat complexes to K-flat complexes [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. At the coefficient module, $q_{T,R_T}\\,s_{A_T}(e_T)=c_T.\\mathrm{scalarUnit.hom}$. In the abelian category of whole $A_X$-systems, $\\alpha_{R_Y}\\,E_X(d.\\mathrm{unitIso.hom})\\,e_X=g^*(e_Y)\\,\\theta_0.\\mathrm{iso.hom}$ and $\\alpha_{M_Y}\\,E_X(d.\\mathrm{rootIso.hom})=\\theta_1.\\mathrm{iso.hom}$, where $M_T=c_T.\\mathrm{rootModule}$. Compositions are read from left to right. No derived scalar/pullback transformation is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-chern-pullback-intermediate",
+  "det-sp-tower-shriek-levels",
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-class-pullback",
+  "def-sp-tower-scalar-single-counit",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Choose integral geometric inverse image d with its actual middle Kummer component and its preservation of flat-term K-flat complexes.",
+   "uses": [
+    "lem-sp-tower-integral-coefficient-pullback-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Define eY and eX as the inverse ordinary scalar-adjunction transposes of scalarGenerator. Their adjunct equations hold by the inverse laws of the Hom equivalence. Apply ordinaryScalarAssociation_exists to d, its middle Kummer equation and these two maps, obtaining alpha and the two ordinary compatibility equations.",
+   "uses": [
+    "lem-sp-tower-ordinary-scalar-association",
+    "def-sp-tower-class-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "The coefficient module in degree zero is K-flat: tensoring an acyclic complex with it is the identity up to the cochain right unitor. For each of Y and X apply ScalarData.transpose_model to its single complex and the chain map induced by e. The degree-zero component calculation singleAdjunct identifies this cochain transpose with the single of the ordinary adjunct scalarGenerator. The exact restriction single comparison converts the representative formula into unitNormalization. The third Chern normalization has the same transpose. Cancel the single comparison and use injectivity of the derived Hom equivalence to identify the counit composite with scalarUnit.hom. Combine these two equalities with the previously obtained flatness and ordinary compatibility equations.",
+   "uses": [
+    "lem-sp-tower-scalar-counit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-integral-coefficient-pullback-existence",
+  "lem-sp-tower-ordinary-scalar-association",
+  "def-sp-tower-class-coefficients",
+  "lem-sp-tower-scalar-counit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P2",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar extension counit on derived singles and exact inverse image",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.counit, CategoryTheory.Functor.ranCounit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, CategoryTheory.Functor.totalLeftDerivedCounit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.RestrictionCoextensionAdj.counit'. ",
+   "date": "2026-10-27",
+   "verdict": "Related general tools only; no normalized tower scalar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of module towers compatible with scalar extension and coefficient unit",
+   "results": "8 hits: Algebra.Generators.CotangentSpace.exact, KaehlerDifferential.exact_mapBaseChange_map, Algebra.Generators.Cotangent.exact, Algebra.H1Cotangent.exact_δ_mapBaseChange, LocalizedModule.map_exact, Algebra.Generators.H1Cotangent.exact_δ_map, Module.Presentation.restrictScalars, KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange. ",
+   "date": "2026-10-27",
+   "verdict": "Related general tools only; no normalized tower scalar comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map. ",
+   "date": "2026-10-27",
+   "verdict": "Related general tools only; no normalized tower scalar comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquare|leftDerived.*NatTrans|commShift.*app",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean. ",
+   "date": "2026-10-27",
+   "verdict": "Related general tools only; no normalized tower scalar comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerChernScalarPullback",
+  "group": "W2",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Base change of the trace, via classes proof (2): Ordinary scalar association with coefficient and root normalization",
+   "via": [
+    "lem-sp-tower-chern-scalar-pullback",
+    "lem-sp-tower-chern-realization-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerChernOrdinaryScalarPullback",
+  "file": "lean/Sheaf/Paper/TowerChernOrdinaryScalarPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.tower_chernOrdinaryScalar_pullback",
+  "statement": "theorem tower_chernOrdinaryScalar_pullback\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤)))\n    (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)\n    (cY : Chern l E Y) (cX : Chern l E X)\n    (nY : cY.Normalized l E) (nX : cX.Normalized l E)\n    (θ₀ : CoefficientPullback l E b f g) (θ₁ : LinePullback l E f g cY cX) :\n    ∃ d : IntegralCoefficientPullback l E f cY cX,\n    ∃ α : cY.scalar.model.E ⋙ g.pull ≅ d.pull ⋙ cX.scalar.model.E,\n    ∃ eY : cY.scalar.model.E.obj (coefficient Y (Rrings l Y)) ⟶\n        coefficient Y (Arings l E Y),\n    ∃ eX : cX.scalar.model.E.obj (coefficient X (Rrings l X)) ⟶\n        coefficient X (Arings l E X),\n      (∀ (P : CochainComplex (Systems Y (Rrings l Y)) ℤ),\n        CochainComplex.IsKFlatIndependentCoefficients\n          (R := WeilConjectures.SemilinearSections.systemRing\n            (Scheme.ProEt.topology Y) (fun n ↦ (Rrings l Y).obj (Opposite.op n))\n              (fun n ↦ (Rrings l Y).map (homOfLE (Nat.le_succ n)).op)) P →\n        (∀ i : ℤ, SheafOfModules.IsFlatOnSite\n          (J := WeilConjectures.coefficientSequenceTopology (Scheme.ProEt.topology Y))\n          (R := WeilConjectures.SemilinearSections.systemRing\n            (Scheme.ProEt.topology Y) (fun n ↦ (Rrings l Y).obj (Opposite.op n))\n              (fun n ↦ (Rrings l Y).map (homOfLE (Nat.le_succ n)).op)) (P.X i)) →\n        CochainComplex.IsKFlatIndependentCoefficients\n          (R := WeilConjectures.SemilinearSections.systemRing\n            (Scheme.ProEt.topology X) (fun n ↦ (Rrings l X).obj (Opposite.op n))\n              (fun n ↦ (Rrings l X).map (homOfLE (Nat.le_succ n)).op))\n          ((d.pull.mapHomologicalComplex (.up ℤ)).obj P)) ∧\n      (scalarSingleCounit cY).app (coefficient Y (Rrings l Y)) ≫\n          (DerivedCategory.singleFunctor (Systems Y (Arings l E Y)) 0).map eY =\n        cY.scalarUnit.hom ∧\n      (scalarSingleCounit cX).app (coefficient X (Rrings l X)) ≫\n          (DerivedCategory.singleFunctor (Systems X (Arings l E X)) 0).map eX =\n        cX.scalarUnit.hom ∧\n      α.hom.app (coefficient Y (Rrings l Y)) ≫ cX.scalar.model.E.map d.unitIso.hom ≫ eX =\n        g.pull.map eY ≫ θ₀.iso.hom ∧\n      α.hom.app cY.rootModule ≫ cX.scalar.model.E.map d.rootIso.hom = θ₁.iso.hom",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261027T103522-L-1097051",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T123510-L-2311676",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

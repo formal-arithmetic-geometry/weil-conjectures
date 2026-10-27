@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-ordinary-line-scalar-presentations",
+ "kind": "statement",
+ "title": "Normalized scalar presentations and multiplication unitors",
+ "statement": "Let X be a scheme with an essentially small small pro-etale site, and suppose the module categories of all coefficient ring sheaves have the specified unbounded derived categories. There exists a simultaneous family p_alpha of universal ordinary and derived scalar-extension presentations for all ring maps alpha, with a normalized composition datum of [lem-sfb-successive-derived-quotient-normalization]. For every coefficient ring R, its identity-map presentation admits UnitData(p,R) in the sense of [def-pur-ordinary-line-scalar-data]: the ordinary unitor sends s tensor x to sx, and its derived unitor on Q(P) is the fixed scalar computation map followed by Q of degreewise multiplication. The ordinary and derived functors, computation maps and normalization equations are exactly those recorded in the cited definitions.",
+ "stmt_deps": [
+  "def-pur-ordinary-line-scalar-data",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0D6D: universal derived scalar extension, normalized composition and identity multiplication; original parent exists_presentations clause."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves commutes with tensoring by a locally free rank one sheaf",
+   "results": "8 hits including SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-27",
+   "verdict": "No exact match: the hits concern free sheaves and ordinary pullback, without the representative-normalized unbounded comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedNatIso",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso, leftDerivedNatIso_hom, leftDerivedNatIso_inv",
+   "date": "2026-10-27",
+   "verdict": "Useful universal uniqueness API; it does not provide the ordinary balanced formula or the normalized evaluation square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorBinaryIso|tensorComparison|scalarTensorComparison_natural",
+   "results": "0 hits in the Mathlib search service; local rg finds the project scalar tensor core and ordinary tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project tensor comparison; no matching Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OrdinaryLineDerivedScalarComparison",
+  "date": "2026-10-27",
+  "group": "M1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), exact signed-line twists and actual evaluation; ordinary coefficient comparison.",
+   "via": [
+    "lem-pur-ordinary-line-derived-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "proof": [
+  {
+   "text": "Use successive_derived_quotient_normalization to obtain the universal scalar presentations and their tower normalization.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For identity coefficients, adjoint uniqueness identifies ordinary scalar extension with the identity. The adjunction unit and scalar linearity give multiplication s tensor x maps to sx. Universal left-derived uniqueness localizes this unitor, and quotient comparison naturality proves its specified cochain computation formula.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Existing proved parent prerequisite, extracted unchanged by M1 after profiling; exists_presentations"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OrdinaryLineScalarPresentations",
+  "file": "lean/Sheaf/Algebra/Homology/OrdinaryLineScalarPresentations.lean",
+  "declaration": "SheafOfModules.OrdinaryLineScalar.exists_presentations",
+  "statement": "theorem exists_presentations :\n    ∃ p : ∀ {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}\n      (α : R ⟶ S), SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}\n        (J := Scheme.ProEt.topology X) α,\n      Nonempty (SuccessiveDerivedQuotient.Normalization.{t + 1, t, max a (t + 1), w}\n        (J := Scheme.ProEt.topology X) p) ∧\n      ∀ R, Nonempty (UnitData p R)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "independent cc review: the deleted blocks of the original module against the new Data/Presentations/LineData modules (verbatim apart from blueprint tags), the item signature against the clone, the four direct importers and #print axioms compiled in sandbox /tmp/m1sb, the timing of the published original (106.6 s) against the delivered item (34 s), and the evaluation hole against its node and the Comparison.evaluation field"
+ }
+}

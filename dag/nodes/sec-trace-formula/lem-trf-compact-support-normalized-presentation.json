@@ -1,0 +1,141 @@
+{
+ "id": "lem-trf-compact-support-normalized-presentation",
+ "kind": "statement",
+ "title": "Normalized presentations of the actual compact-support system operations",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and schemes $X,Z,Y$ with $\\ell$ invertible, an open immersion $j:X\\to Z$, and a morphism $p:Z\\to Y$. Use the actual operation and evaluation functors of [def-trf-compact-support-system-evaluation-diagram]. There exists presentation data $D$ such that: (i) its ordinary coefficient restriction comparison is the identity on every section; (ii) its derived coefficient comparison satisfies CompactSupportDerivedSquareNormalization on every K-injective source and every K-injective resolution of its restriction; (iii) the open system restriction evaluation is the identity on sections; (iv) its left open evaluation is compactSupportCanonicalJEvaluation; (v) its ordinary direct-image evaluation is the identity on sections; (vi) its derived direct-image evaluation satisfies CompactSupportDerivedSquareNormalization on arbitrary evaluated resolutions; and (vii) its open and direct-image comparison pairs carry the units and counits of the canonical system adjunctions to those of their canonical finite-level adjunctions. No tower transition comparison is asserted.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; specialization of coherence proof steps 1--3 and 6"
+ },
+ "stmt_deps": [
+  "def-trf-compact-support-system-evaluation-diagram",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the section-normalized open-slice calculus from normalizedOpenSections and transport it to IntegralOpenReduction.Operations using openCoefficientOperationsExistence. The transport preserves restrictionEvaluation, hence its identity-on-sections normalization.",
+   "uses": [
+    "lem-sf-normalized-open-section-existence",
+    "lem-sf-open-coefficient-operations-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the operation-instance record: direct images are additive by sectionwise addition; the actual ringed module categories are Grothendieck abelian and have K-injective resolutions; the actual coefficient pullbacks are exact and additive left adjoints. Obtain the canonical finite quotient adjunctions from coefficientDerivedSystemEvaluationCalculus.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pur-coefficient-pullback-exact",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the finite-coefficient presentation for ordinary and derived coefficient squares. Use direct-image evaluation for its ordinary, derived, unit and counit normalizations. These two independent statements contain no open-immersion operations.",
+   "uses": [
+    "lem-trf-compact-support-finite-coefficient-presentation",
+    "lem-trf-compact-support-direct-image-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the ordinary open evaluation right square and identify its inverse mate with extensionEvaluation.inv. Exact localization preserves this mate. Its localized left square is exactly compactSupportCanonicalJEvaluation.inv. The general unit and counit equations of inverse mates give the two required open-adjunction formulas. Assemble the ten normalization clauses into the unchanged existential presentation.",
+   "uses": [
+    "lem-trf-compact-support-open-ordinary-mate",
+    "lem-sf-exact-localization-inverse-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-normalized-open-section-existence",
+  "lem-sf-open-coefficient-operations-existence",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-coefficient-pullback-exact",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-compact-support-finite-coefficient-presentation",
+  "lem-trf-compact-support-direct-image-evaluation",
+  "lem-trf-compact-support-open-ordinary-mate",
+  "lem-sf-exact-localization-inverse-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Explicit section-normalized open construction and exact-localization mate calculation; independent finite-coefficient and direct-image specialization steps split off by E6, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation on a sequence site commutes with derived direct image and with the units and counits of the componentwise adjunction",
+   "results": "Eight hits, including Adjunction.derived_unit, Adjunction.derived and module pushforward adjunction unit/counit formulas; no specialization to these actual system functors.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived direct image of semilinear coefficient systems commutes with transition maps and adjunction units and counits",
+   "results": "Eight hits, including SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app and its counit analogue; no full normalized geometric presentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*(evaluation|transition)|evaluation.*rightDerivedFunctor",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.CompactSupportSystemEvaluationCoherence",
+  "date": "2026-10-27",
+  "group": "T4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Proof Step 1 (Global powers), compatibility with composition before rationalization; the comparison prerequisite of prop-trf-rational-frobenius-integral-model.proof.md (2)-(3). Coherence proof steps 1--3, 6.",
+   "via": [
+    "lem-trf-compact-support-system-evaluation-coherence",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.CompactSupportSystemNormalizedPresentation",
+  "file": "lean/Sheaf/TraceFormula/CompactSupportSystemNormalizedPresentation.lean",
+  "declaration": "WeilConjectures.compactSupportSystemNormalizedPresentation",
+  "statement": "theorem compactSupportSystemNormalizedPresentation\n    {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]\n    [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n    [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]\n    [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))] :\n    ∃ D : CompactSupportSystemEvaluationData l E X Z Y j p,\n      (∀ {m n : ℕ} (h : n ≤ m)\n              (N : normalizedDVRModules l E Z n) (V : Y.ProEtᵒᵖ),\n              HEq (fun x ↦ ((D.operations.ordinaryCoefficientComparison h).hom.app N).val.app V x)\n                (fun x : N.val.obj ((Scheme.proEtaleBaseChange p).op.obj V) ↦ x)) ∧\n      (∀ {m n : ℕ} (h : n ≤ m),\n        letI := normalizedDVRModuleRes_limits l E Z h\n        letI := normalizedDVRModuleRes_colimits l E Z h\n        letI := normalizedDVRModuleRes_limits l E Y h\n        letI := normalizedDVRModuleRes_colimits l E Y h\n        CompactSupportDerivedSquareNormalization\n            (compactSupportLevelDirectImage l E p n) (compactSupportLevelDirectImage l E p m)\n            (normalizedDVRModuleRes l E Z h) (normalizedDVRModuleRes l E Y h)\n            (D.operations.ordinaryCoefficientComparison h)\n              (D.operations.derivedCoefficientComparison h)) ∧\n      (∀ (n : ℕ) N V x,\n            HEq (((D.operations.instances.jOperations.openSystems.restrictionEvaluation n).hom.app\n              N).val.app V x) x) ∧\n      (∀ n : ℕ, D.jLeftEvaluation n =\n          compactSupportCanonicalJEvaluation l E j D.operations.instances.jOperations n) ∧\n      (∀ (n : ℕ) (N : coefficientSequenceModules l E Z)\n              (V : Y.ProEtᵒᵖ)\n              (x : ((integralComparisonSequenceDirectImage l E p ⋙\n                coefficientSequenceEvaluation l E Y n).obj N).val.obj V),\n              HEq (((D.pOrdinaryEvaluation n).hom.app N).val.app V x) x) ∧\n      (∀ n : ℕ,\n        letI := coefficientSequenceEvaluation_additiveInstance l E Z n\n        letI := coefficientSequenceEvaluation_additiveInstance l E Y n\n        letI := coefficientSequenceEvaluation_limits l E Z n\n        letI := coefficientSequenceEvaluation_colimits l E Z n\n        letI := coefficientSequenceEvaluation_limits l E Y n\n        letI := coefficientSequenceEvaluation_colimits l E Y n\n        CompactSupportDerivedSquareNormalization\n            (integralComparisonSequenceDirectImage l E p) (compactSupportLevelDirectImage l E p n)\n            (coefficientSequenceEvaluation l E Z n) (coefficientSequenceEvaluation l E Y n)\n            (D.pOrdinaryEvaluation n).symm (D.pRightEvaluation n).symm) ∧\n      (∀ (n : ℕ) M,\n          (coefficientSequenceDerivedEvaluation l E X n).map\n            ((IntegralOpenReduction.systemAdjunction l E j\n            D.operations.instances.jOperations).unit.app M) ≫\n            (D.jRightEvaluation n).hom.app ((compactSupportCanonicalJSystem l E j\n              D.operations.instances.jOperations).obj M) ≫\n            ((IntegralOpenReduction.finiteRestriction l E j\n              D.operations.instances.jOperations n).mapDerivedCategory).map ((D.jLeftEvaluation\n                n).hom.app M) =\n              (compactSupportCanonicalJLevelAdjunction l E j D.operations.instances.jOperations\n                n).unit.app ((coefficientSequenceDerivedEvaluation l E X n).obj M)) ∧\n      (∀ (n : ℕ) N,\n          (compactSupportCanonicalJLevel l E j D.operations.instances.jOperations n).map\n            ((D.jRightEvaluation n).hom.app N) ≫\n            (compactSupportCanonicalJLevelAdjunction l E j D.operations.instances.jOperations\n              n).counit.app ((coefficientSequenceDerivedEvaluation l E Z n).obj N) =\n              (D.jLeftEvaluation n).inv.app ((IntegralOpenReduction.P l E j\n                D.operations.instances.jOperations).obj N) ≫\n                (coefficientSequenceDerivedEvaluation l E Z n).map\n                  ((IntegralOpenReduction.systemAdjunction l E j\n                  D.operations.instances.jOperations).counit.app N)) ∧\n      (∀ (n : ℕ) M,\n          (coefficientSequenceDerivedEvaluation l E Y n).map ((compactSupportCanonicalPAdjunction l\n            E p).unit.app M) ≫\n            (D.pRightEvaluation n).hom.app ((integralComparisonDerivedSequencePullback l E p).obj\n              M) ≫\n            ((compactSupportLevelDirectImage l E p n).rightDerivedFunctor).map ((D.pLeftEvaluation\n              n).hom.app M) =\n              (compactSupportCanonicalPLevelAdjunction l E p n).unit.app\n                ((coefficientSequenceDerivedEvaluation l E Y n).obj M)) ∧\n      (∀ (n : ℕ) N,\n          ((compactSupportLevelPullback l E p n).mapDerivedCategory).map ((D.pRightEvaluation\n            n).hom.app N) ≫\n            (compactSupportCanonicalPLevelAdjunction l E p n).counit.app\n              ((coefficientSequenceDerivedEvaluation l E Z n).obj N) =\n              (D.pLeftEvaluation n).inv.app (((integralComparisonSequenceDirectImage l E\n                p).rightDerivedFunctor).obj N) ≫\n                (coefficientSequenceDerivedEvaluation l E Z n).map\n                  ((compactSupportCanonicalPAdjunction l E p).counit.app N))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261026T235940-L-1472900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261027T034634-L-3668344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

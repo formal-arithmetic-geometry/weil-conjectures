@@ -1,0 +1,213 @@
+{
+ "id": "lem-trf-cotangent-diagonal-tor-comparison",
+ "kind": "statement",
+ "title": "Tor-independent diagonal cotangent comparison with specified factor maps",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings with $\\operatorname{Tor}^A_i(B,B)=0$ for all $i>0$ [def-weil-pbc-tor-modules]. Put $D=B\\otimes_A B$, $\\iota_1(b)=b\\otimes1$ and $\\iota_2(b)=1\\otimes b$. Use the ordinary-module derived categories [def-weil-abstract-derived-category] and derived extension of scalars (the universal total left derived functor of termwise tensor extension [def-weil-module-base-change]). The canonical comparison $\\gamma:B\\otimes_A^{\\mathbf L}B\\to D[0]$ is an isomorphism in $D(B)$, where the target $B$-action is through the second factor. For the standard cotangent complexes [lem-trf-cotangent-resolution-coherence], the canonical square-induced base-change morphism $\\beta:L_{B/A}\\otimes_{B,\\iota_1}^{\\mathbf L}D\\longrightarrow L_{D/B}$ is an isomorphism in $D(D)$, where $L_{D/B}$ refers to $\\iota_2$. Here $\\beta$ is the extension-of-scalars adjoint of the standard functoriality map for the square $(A\\to B)\\to(B\\xrightarrow{\\iota_2}D)$ with vertical maps $A\\to B$ and $\\iota_1$. No flatness of $A\\to B$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08R1 (lemma-bootstrap), first sentence invoking Tag 08QQ (lemma-flat-base-change-cotangent-complex); the Tor-to-derived-comparison argument of returned Step 1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules",
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "lem-trf-cotangent-resolution-coherence",
+  "def-trf-ring-cotangent-base-change-maps"
+ ],
+ "proof": [
+  {
+   "text": "Choose the standard polynomial resolution $P_\\bullet\\to B$ of [lem-trf-cotangent-resolution-coherence], and put $C=s(P_\\bullet)$ with augmentation $q:C\\to B[0]$. It is zero in positive degrees and $q$ is a quasi-isomorphism. By [lem-trf-polynomial-simplicial-tensor-model], its terms are free $A$-modules on monomials and are flat. Apply [lem-trf-flat-resolution-canonical-tensor-comparison] to $A\\to B$, $N=B$ and $q$. For the universal derived scalar-extension pair in the statement it gives an isomorphism $j_q:Q_B(C\\otimes_A B)\\xrightarrow{\\sim}B\\otimes_A^{\\mathbf L}B$ with $\\gamma j_q=Q_B(q\\otimes1)$. All tensors and the target localization here have the $B$-action on the second tensor factor.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-polynomial-simplicial-tensor-model",
+    "lem-trf-flat-resolution-canonical-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), free resolution s(P) and its tensor augmentation; Tag 08QI (remark-resolution)."
+   }
+  },
+  {
+   "text": "Reindex $C$ homologically by $F_i=C^{-i}$. It is a free resolution of $B$, so [def-weil-pbc-tor-modules] identifies $H^{-i}(C\\otimes_A B)$ with $\\operatorname{Tor}^A_i(B,B)$ for $i>0$. These vanish by hypothesis; positive cohomology vanishes because the complex is nonpositive. The exact sequence $C^{-1}\\to C^0\\xrightarrow{q^0}B\\to0$ remains right exact after tensoring by [lem-weil-pbc-tensor-right-exact]. Thus $H^0(q\\otimes1)$ is precisely the isomorphism $\\operatorname{coker}(d_C^{-1}\\otimes1)\\to D$, $[x\\otimes b]\\mapsto q^0(x)\\otimes b$. Consequently $q\\otimes1:C\\otimes_A B\\to D[0]$ is a quasi-isomorphism. Localization in [def-weil-abstract-derived-category] makes $Q_B(q\\otimes1)$ invertible. Step 1 now gives $\\gamma=Q_B(q\\otimes1)j_q^{-1}$ invertible in $D(B)$, with the prescribed second-factor action.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/cotangent.tex",
+    "place": "Tag 00LY (section-tor), definition by a free resolution; Tag 00DF (lemma-tensor-product-exact); Tag 08R1 (lemma-bootstrap), hypothesis needed for its first sentence."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cotangent-flat-base-change] with its $C=B$, $A'=B$, $C'=D$, its upper horizontal map $A\\to B$, lower horizontal map $\\iota_2:B\\to D$, and vertical maps $A\\to B$ and $\\iota_1:B\\to D$. The square commutes since $f(a)\\otimes1=1\\otimes f(a)$. Its canonical derived multiplication has ordinary tensor map $b\\otimes b'\\mapsto\\iota_1(b)\\iota_2(b')=b\\otimes b'$, so it is exactly $\\gamma$ from Step 2. The cited theorem therefore makes its base-change morphism invertible. Its source extends scalars along $\\iota_1$ and its target is $L_{D/B}$ for $\\iota_2$. Moreover its morphism is, by its statement, the derived extension-of-scalars adjunct of the square-induced standard functoriality morphism. Hence it is the specified $\\beta$, proving the remaining assertion without a flatness assumption.",
+   "uses": [
+    "lem-trf-cotangent-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ (lemma-flat-base-change-cotangent-complex), specialized to the diagonal square in the first sentence of Tag 08R1 (lemma-bootstrap)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-tor-modules",
+  "lem-trf-cotangent-flat-base-change",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-flat-resolution-canonical-tensor-comparison",
+  "lem-trf-polynomial-simplicial-tensor-model",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08QP (lemma-flat-base-change), 08QQ (lemma-flat-base-change-cotangent-complex), 08R1 (lemma-bootstrap); algebra.tex Tags 00LY (section-tor) and 00DF (lemma-tensor-product-exact)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For commutative ring maps A to B and A to C the canonical derived tensor to ordinary tensor comparison is an isomorphism if and only if all positive Tor groups Tor over A of B C vanish",
+   "results": "8 hits; top=['CategoryTheory.isZero_Tor_succ_of_projective', \"CategoryTheory.isZero_Tor'_succ_of_projective\", 'Rep.isZero_Tor_succ_of_projective', 'Module.Flat.iff_rTensor_preserves_shortComplex_exact', 'Module.Flat.iff_lTensor_preserves_shortComplex_exact', \"CategoryTheory.Tor'_obj_obj\", 'CategoryTheory.Tor_obj', 'Module.Flat.rTensor_shortComplex_exact']; note=; digest=1fc6bcfab5db319d. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*baseChange|cotangentComplex.*[Tt]ensor",
+   "results": "25 hits; top=['Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean']; note=; digest=3f9cb49fb7157566. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.cotangentComplex, TensorProduct",
+   "results": "8 hits; top=['Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.Generators.H1Cotangent.δ_C', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.FormallySmooth.iff_injective_lTensor_residueField', 'Algebra.Extension.tensorToH1Cotangent_tmul']; note=; digest=2475de219dc5047c. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor independent diagonal cotangent base change derived complex",
+   "results": "8 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.H1Cotangent.exact_δ_mapBaseChange', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.Extension.tensorCotangentSpace', 'KaehlerDifferential.tensorKaehlerEquivBase', 'CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal']; note=; digest=4d84f28a2e63579a. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Tor independent commutative ring map A to B, D equals B tensor over A B, the canonical cotangent base change map from L B over A derived tensor along the first inclusion to D to L D over B along the second inclusion is an isomorphism",
+   "results": "8 hits; top=['Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.tensorH1Cotangent', 'KaehlerDifferential.tensorKaehlerEquivBase', 'Algebra.Extension.tensorCotangent', 'KaehlerDifferential.tensorKaehlerEquiv', 'Algebra.Extension.tensorCotangentInvFun']; note=; digest=525cc2efa28906f6. Read the returned signatures. Mathlib Extension.cotangentComplex is the presentation linear map (Extension/Cotangent/Basic.lean:60), not the full derived cotangent complex. Tensor cancellation in TensorProduct/Tower.lean:436-459 is for individual modules, not derived scalar extensions of the standard complex.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*baseChange|cotangentComplex.*[Tt]ensor",
+   "results": "25 hits; top=['Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Basic.lean', 'Mathlib/RingTheory/Smooth/Fiber.lean', 'Mathlib/RingTheory/Smooth/Fiber.lean']; note=; digest=001691c7fc76f4fa. Read returned types and Extension/Cotangent/Basic.lean:60-63, 339-340. Matches describe a presentation linear map, Kahler differentials, Tor functors or flatness, not both full derived comparison assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of positive Tor gives canonical derived tensor product comparison isomorphism and base change of the cotangent complex",
+   "results": "8 hits; top=['KaehlerDifferential.tensorKaehlerEquiv', 'CategoryTheory.isZero_Tor_succ_of_projective', 'KaehlerDifferential.cotangentComplexBaseChange', 'TensorProduct.AlgebraTensorModule.cancelBaseChange', 'IsBaseChange.tensorEquiv', 'Algebra.TensorProduct.cancelBaseChange', 'Algebra.IsPushout.cancelBaseChangeAux', 'KaehlerDifferential.cotangentComplexBaseChange_tmul']; note=; digest=05eb38b0cec77282. Read returned types and Extension/Cotangent/Basic.lean:60-63, 339-340. Matches describe a presentation linear map, Kahler differentials, Tor functors or flatness, not both full derived comparison assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.cotangentComplex, TensorProduct",
+   "results": "8 hits; top=['Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.Generators.H1Cotangent.δ_C', 'Algebra.Generators.H1Cotangent.δ_eq_δAux', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', 'Algebra.Generators.H1Cotangent.δ_eq', 'Algebra.FormallySmooth.iff_injective_lTensor_residueField', 'Algebra.Extension.tensorToH1Cotangent_tmul']; note=; digest=2475de219dc5047c. Read returned types and Extension/Cotangent/Basic.lean:60-63, 339-340. Matches describe a presentation linear map, Kahler differentials, Tor functors or flatness, not both full derived comparison assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independent base change for the full cotangent complex of commutative rings with canonical derived scalar extension map",
+   "results": "8 hits; top=['Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'Algebra.Extension.tensorH1Cotangent', 'Algebra.Extension.tensorCotangent', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', 'Algebra.Extension.tensorCotangentSpace']; note=; digest=a2488c7d20b8b0dd. Read returned types and Extension/Cotangent/Basic.lean:60-63, 339-340. Matches describe a presentation linear map, Kahler differentials, Tor functors or flatness, not both full derived comparison assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor to ordinary tensor is an isomorphism when positive Tor groups vanish without flatness",
+   "results": "8 hits; top=['Module.Flat.iff_rTensor_preserves_shortComplex_exact', 'Module.Flat.iff_lTensor_preserves_shortComplex_exact', 'Module.Flat.rTensor_shortComplex_exact', 'Module.Flat.lTensor_shortComplex_exact', 'CategoryTheory.isZero_Tor_succ_of_projective', \"Module.Flat.iff_lTensor_exact'\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.isZero_Tor'_succ_of_projective\"]; note=; digest=54fb6ae1ffce9969. Read returned types and Extension/Cotangent/Basic.lean:60-63, 339-340. Matches describe a presentation linear map, Kahler differentials, Tor functors or flatness, not both full derived comparison assertions.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-bootstrap",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Vanishing of the full cotangent complex for etale ring maps (Step 3 there): the Tor-vanishing bootstrap from the diagonal cotangent complex to $L_{B/A}$ (Stacks Tag 08R1). Re-split argument: Tag 08R1 (lemma-bootstrap), first sentence invoking Tag 08QQ (lemma-flat-base-change-cotangent-complex); the Tor-to-derived-comparison argument of returned Step 1.",
+   "via": [
+    "lem-trf-cotangent-bootstrap",
+    "lem-trf-etale-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cotangent-diagonal-tor-comparison",
+  "worker": "stage1",
+  "summary": "Proved the canonical derived self-tensor comparison by a monomial-free standard resolution, the definition of Tor, right exactness and the existing counit-compatible flat-resolution comparison. Specialized the existing general cotangent base-change theorem with the two factor maps explicitly fixed. Statement unchanged; no new nodes.",
+  "blueprint": "The inherited nearby-cycle semistable-modification branch of lem-trf-local-term-locality, Proof (1)--(2), reaches the etale-cotangent bootstrap. These steps supply exactly the Tor-independent diagonal comparison used in the first sentence of Stacks 08R1, the place already specified in blueprint.from.place. No unit or chapter route changes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-475f0db51",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-475f0db51 (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited node's statement, and the Stacks sources. Sources checked in cotangent.tex: 08R1 (lemma-bootstrap), 08QQ (lemma-flat-base-change-cotangent-complex), 08QP (lemma-flat-base-change), 08QI (remark-resolution); in algebra.tex: 00LY (section-tor), 00DF (lemma-tensor-product-exact). The statement matches 08R1's first sentence: Tor-independence of B with itself and no flatness. It works in ordinary-module D(B) and D(D), with B acting on D[0] through ι2, and β is the extension-of-scalars adjunct of the standard square functoriality, as in 08QQ. Step 1: the standard P^std is a polynomial resolution with surjective ε_n, so polynomial-simplicial-tensor-model gives flat terms. flat-resolution-canonical-tensor-comparison then applies with A'=B, N=B and b=0, and gives γ j_q=Q(q⊗1). Step 2: s(P) is a free A-resolution, so the Tor leaf kills H^{-i} for i>0. Right exactness (rTensor_exact) gives H^0(q⊗1): coker→B⊗B, an isomorphism, so q⊗1 is a quasi-isomorphism and γ=Q(q⊗1)j_q^{-1} is invertible. Step 3: cotangent-flat-base-change applies with C=A'=B, C'=D and vertical maps f and ι1. The square commutes, and μ is represented by q⊗1, which is invertible. Its conclusion is the item's β along ι1 to L_{D/B} via ι2. There are no new nodes and no cycle. proof_deps equals the union of uses. All citations are same-unit or Mathlib leaves, no SGA is cited, and tool_uses is empty. There is no re-split repair note. The only citer, cotangent-bootstrap, uses both clauses. Edge cases: B=0, A=B, Z→Q and A[x] hold; Z→F_p and k[e]/(e²)→k are excluded. The rg duplicate search found nothing. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CotangentDiagonalTorComparison",
+  "declaration": "Algebra.CotangentResolution.isIso_diagonal_cotangent_comparisons",
+  "declarations": [
+   "Algebra.CotangentResolution.cotangentDiagonalSquare",
+   "Algebra.CotangentResolution.isIso_diagonal_cotangent_comparisons"
+  ],
+  "file": "lean/Sheaf/RingTheory/CotangentDiagonalTorComparison.lean",
+  "statement": "theorem isIso_diagonal_cotangent_comparisons [∀ R : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} R)] (C : Coherence.{u}) (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] (hTor : ∀ i : ℕ, 0 < i → IsZero (((CategoryTheory.Tor' (ModuleCat.{u} A) i).obj (ModuleCat.of A B)).obj (ModuleCat.of A B))) : IsIso (derivedSquareMultiplication (cotangentDiagonalSquare A B)) ∧ IsIso (cotangentBaseChange C (cotangentDiagonalSquare A B))",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65478b6f5",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 9708a8dc68c5: theorem stmt_dep lem-trf-cotangent-flat-base-change replaced by new def node def-trf-ring-cotangent-base-change-maps (existing:true record on Sheaf.RingTheory.CotangentFlatBaseChange, 5 plain defs, statement verbatim, status split, TeX matches 08QL/08QQ and the Lean defs; no rival owner in live DAG). Item node equals live except lean/stmt_deps. Lean: cotangentDiagonalSquare concrete (left algebraMap, right ι1=includeLeft, lower ι2=includeRight); derivedSquareMultiplication = canonical γ B⊗ᴸ_A B→D[0] in D(B) via ι2; cotangentBaseChange = adjunct β L_{ι1}L_{B/A}→L_{D/B} in D(D); hTor = Tor'_i^A(B,B)=0 for i>0, no flatness; conclusion IsIso∧IsIso. Edge cases B=0, A=B, localizations covered; Z→F_p excluded. sorry only, docstrings/source/blueprint present. Module byte-identical to the worker-compiled earlier delivery; no compile run, no fixes."
+ }
+}

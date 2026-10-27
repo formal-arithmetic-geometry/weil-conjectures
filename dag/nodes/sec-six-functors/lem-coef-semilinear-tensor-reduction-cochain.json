@@ -1,0 +1,135 @@
+{
+ "id": "lem-coef-semilinear-tensor-reduction-cochain",
+ "kind": "statement",
+ "title": "Ordinary and cochain tensor reduction from tensor models alone",
+ "statement": "Let C,J,B,tau be as in [def-coef-semilinear-system-models] and let A be tensor-only normalized model data [def-coef-semilinear-tensor-reduction-models]. Transpose the actual ordinary horizontal transition through the ordinary scalar adjunction to define ordinaryReduction. Its degreewise components form cochainReduction. For any indices n<=m and arbitrary unbounded system complexes P,Q, scalar tensor chain comparison followed by scalar extension of evaluation tensor comparison and cochainReduction of their total tensor equals the total tensor of the two cochainReductions followed by evaluation tensor comparison at n. No internal-Hom data, flatness or cartesianness is assumed. The precise equation is lean.statement.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21 (singleton extension and below-level scalar extension); Proposition 4.17(a), printed pp.25-26 (tensor projection). Stacks Tags 03EK, 06YY, 07A4, 06YT and 0FND supply the module tensor and normalized derived-adjunction constructions."
+ },
+ "stmt_deps": [
+  "def-coef-semilinear-tensor-reduction-models"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the ordinary equation through the scalar adjunction. Precompose with inverse evaluation tensor comparison. Sheafification and pure tensors detect equality. The ordinary scalar unit sends x to its extension section; ordinary evaluation tensor and scalar tensor comparison have the specified pure-section formulas. Horizontal restriction of a pure tensor is the tensor of its two restrictions, so the two transposes agree.",
+   "uses": [
+    "def-coef-semilinear-tensor-reduction-models",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the ordinary transpose proves that its degreewise components commute with differentials. This is the induced cochain-adjunction transpose. Precompose the asserted total-tensor identity with every degree summand. The two comparison-model summand equations and the preceding ordinary identity identify these maps. Total summand extensionality gives equality of the cochain maps.",
+   "uses": [
+    "def-coef-semilinear-tensor-reduction-models",
+    "lem-pur-independent-ringed-tensorator-existence",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-tensor-reduction-models",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-pur-independent-ringed-tensorator-existence",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p.21 (singleton extension and below-level scalar extension); Proposition 4.17(a), printed pp.25-26 (tensor projection). Stacks Tags 03EK, 06YY, 07A4, 06YT and 0FND supply the module tensor and normalized derived-adjunction constructions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived scalar extension and evaluation of singleton extension below a coefficient vertex",
+   "results": "8 hits: LinearPMap.supSpanSingleton_apply_smul_self, Algebra.SubmersivePresentation.ofSubsingleton_algebra_smul, Algebra.Generators.extendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, Algebra.Generators.extendScalars_val, ModuleCat.RestrictionCoextensionAdj.counit'_app, AlgHom.extendScalars, IntermediateField scalar-tower instance. No derived sequence-site result.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; ordinary scalar adjunction only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived reduction of a tensor of semilinear module systems is the tensor of their two reductions after scalar extension tensor comparison",
+   "results": "Module.Relations tensor presentation and ordinary tensor/scalar compatibility lemmas; no derived sequence-site comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "The unit-compatible uniqueness theorem for two left adjoints to the same right adjoint.",
+   "date": "2026-10-26",
+   "verdict": "Used for the categorical transport; no singleton or tensor-reduction statement."
+  },
+  {
+   "tool": "grep",
+   "query": "cochain.*reduction|reduction.*cochain|tensor.*reduction",
+   "results": "0 Mathlib hits. Local library search found SystemOrdinaryTensorReduction, SystemCochainTensorReduction and SystemTensorReductionFormula, all requiring full Data (including internal-Hom evaluation data). Their proofs are reused here with only their tensor fields.",
+   "date": "2026-10-26",
+   "verdict": "Existing full-Data signatures cannot be used to construct the internal-Hom data consuming this item. A tensor-only interface is needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearProjectionBelowFactorization",
+  "date": "2026-10-26",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Step 2 of lem-coef-semilinear-cartesian-projection: Ordinary and cochain tensor reduction from tensor models alone, before cartesianness is used.",
+   "via": [
+    "lem-coef-semilinear-projection-below-factorization",
+    "lem-coef-semilinear-cartesian-projection",
+    "lem-coef-semilinear-system-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization",
+    "lem-coef-semilinear-cartesian-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SemilinearTensorReductionCochain",
+  "file": "lean/Sheaf/Paper/SemilinearTensorReductionCochain.lean",
+  "declaration": "WeilConjectures.SemilinearSections.ProjectionTensorCore.cochain_tensor_reduction",
+  "statement": "theorem cochain_tensor_reduction\n    (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)\n    (P Q : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :\n    (A.scalarTensorModel h).chain\n        (((evaluation.{c, v, max c v r} J B τ m).mapHomologicalComplex (.up ℤ)).obj P)\n        (((evaluation.{c, v, max c v r} J B τ m).mapHomologicalComplex (.up ℤ)).obj Q) ≫\n      ((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).map\n        ((A.tensorEvaluationModel m).chain P Q) ≫\n      cochainReduction.{c, v, r} J B τ A h\n        ((totalTensor.{c, v, r} (coefficientSequenceTopology J)\n          (systemRing.{c, v, max c v r} J B τ)).obj (P, Q)) =\n    (totalTensor.{c, v, r} J (B n)).map\n        (Prod.mkHom (cochainReduction.{c, v, r} J B τ A h P)\n          (cochainReduction.{c, v, r} J B τ A h Q)) ≫\n      (A.tensorEvaluationModel n).chain P Q",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.ProjectionTensorCore.cochain_tensor_reduction",
+   "WeilConjectures.SemilinearSections.ProjectionTensorCore.ordinaryReduction",
+   "WeilConjectures.SemilinearSections.ProjectionTensorCore.cochainReduction",
+   "WeilConjectures.SemilinearSections.ProjectionTensorCore.cochainReduction_eq_transpose"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T114155-L-2271281",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261026T114155-L-2271281",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

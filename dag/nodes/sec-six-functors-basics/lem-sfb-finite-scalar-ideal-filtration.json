@@ -1,0 +1,114 @@
+{
+ "id": "lem-sfb-finite-scalar-ideal-filtration",
+ "kind": "statement",
+ "title": "Image-cokernel filtration for a finite ideal of scalars",
+ "statement": "Let $A$ be a commutative ring and let $\\mathcal C$ be an abelian $A$-linear category [def-weil-linear-category]. Let $r:\\iota\\to A$ be a finite family, set $I=(r_i\\mid i\\in\\iota)$, and let $m\\in\\mathbf N$. Suppose an object $F$ satisfies $a\\operatorname{id}_F=0$ for every $a\\in I^{m+1}$. Then there is a short exact sequence $0\\to F_1\\to F\\to F_3\\to0$ such that $a\\operatorname{id}_{F_1}=0$ for every $a\\in I^m$ and $a\\operatorname{id}_{F_3}=0$ for every $a\\in I$. This includes the empty family and $m=0$.",
+ "stmt_deps": [
+  "def-weil-linear-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1T, lemma-derived-vanishing-mod-I, finite scalar-ideal filtration; explicit categorical construction is already proved in WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidueIdeal."
+ },
+ "proof": [
+  {
+   "text": "Form the finite sum of copies of F and the morphism phi whose i-th component is r_i times the identity. Take F1=image(phi) and F3=cokernel(image.ι phi). The canonical image-cokernel sequence is short exact. If a lies in I^m, then a phi is zero, because each a r_i lies in I^(m+1); cancel the image epimorphism and monomorphism to conclude a id_F1=0. Each r_i id_F factors through image(phi), so is zero on F3 after canceling its cokernel epimorphism. Linear combinations then show that every element of I acts as zero on F3.",
+   "uses": [
+    "def-weil-linear-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0G1T, lemma-derived-vanishing-mod-I, finite scalar-ideal filtration; explicit categorical construction is already proved in WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidueIdeal."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In an abelian category linear over a commutative ring, an object annihilated by the successor power of a finitely generated ideal is an extension of an object annihilated by the ideal by an object annihilated by the preceding power",
+   "date": "2026-10-26",
+   "results": "8 hits. localCohomology.ideal_powers_initial; Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow; Ideal.Quotient.factorPowSucc; Submodule.factorPowSucc",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category linear over a commutative ring, an object annihilated by the successor power of a finitely generated ideal is an extension of an object annihilated by the ideal by an object annihilated by the preceding power",
+   "date": "2026-10-26",
+   "results": "8 hits. CategoryTheory.Abelian.Ext.covariant_sequence_exact₃; CategoryTheory.Abelian.Ext.covariant_sequence_exact₁; localCohomology.ofSelfLERadical; CategoryTheory.Abelian.Ext.covariant_sequence_exact₂",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact\", \"smul\"",
+   "date": "2026-10-26",
+   "results": "1 hits. IsSMulRegular.smulShortComplex_shortExact",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_shortExact.*(smul|pow)|smul_id.*(image|cokernel)",
+   "date": "2026-10-26",
+   "results": "0 hits. No matching declaration.",
+   "verdict": "No exact Mathlib theorem; use existing source results and the explicit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FiniteKoszulResidueAcyclic",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Finite ideal-power filtration in the Tag 0G1T coefficient-module argument inside the Tag 0G1U residue-zero detection proof.",
+   "via": [
+    "lem-sfb-finite-koszul-residue-acyclic",
+    "lem-sfb-adic-residue-koszul-nakayama",
+    "lem-sfb-adic-residue-quotient-unit-universal",
+    "lem-sfb-adic-residue-cech-quotient-cone",
+    "lem-sfb-adic-complete-reduction-cone"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeResidueIdeal",
+  "declaration": "CategoryTheory.exists_shortExact_of_smul_eq_zero_of_mem_pow_succ",
+  "statement": "lemma exists_shortExact_of_smul_eq_zero_of_mem_pow_succ {ι : Type*} [Finite ι] (r : ι → R)\n    {m : ℕ} {F : C} (hF : ∀ x ∈ Ideal.span (Set.range r) ^ (m + 1), x • 𝟙 F = 0) :\n    ∃ (S : ShortComplex C) (_ : S.ShortExact) (_ : S.X₂ = F),\n      (∀ x ∈ Ideal.span (Set.range r) ^ m, x • 𝟙 S.X₁ = 0) ∧\n        ∀ x ∈ Ideal.span (Set.range r), x • 𝟙 S.X₃ = 0",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T092804-L-3466917",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261026T092804-L-3466917",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

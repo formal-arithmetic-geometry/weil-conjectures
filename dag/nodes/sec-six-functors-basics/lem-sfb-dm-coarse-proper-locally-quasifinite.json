@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-dm-coarse-proper-locally-quasifinite",
+ "kind": "statement",
+ "title": "Properness and local quasi-finiteness of a Deligne--Mumford coarse morphism",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $\\mathcal X$ be a finite-type Deligne--Mumford stack over $k$ whose diagonal is finite: every scheme base change of its diagonal is a finite scheme morphism [def-weil-finite-integral-morphism]. Let $q:\\mathcal X\\to Q$ be a coarse moduli scheme in the convention of [def-sfb-stable-pointed-moduli-groupoids]; thus $Q$ is a $k$-scheme, $q$ is initial for maps to algebraic spaces, and it gives a bijection on isomorphism classes over every algebraically closed field. Then $q$ is proper and locally quasi-finite as a morphism of stacks. There is no linear-reductivity assumption on the geometric stabilizers. Stack, Deligne--Mumford stack, algebraic space and 2-fibre product have the conventions of [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. For morphisms of these stacks, locally of finite type is tested on smooth scheme charts using [def-weil-finite-type-morphism], and finite type additionally requires quasi-compactness. Proper means finite type, universally closed, and having proper relative diagonal. Universally closed means that every base change induces a closed map of underlying point spaces. Locally quasi-finite means locally of finite type, with locally quasi-finite relative diagonal and discrete underlying point space of every field fibre. The point space of a stack consists of its field-valued objects up to isomorphism and common field extension, with the topology detected by a smooth scheme atlas. Properties of representable diagonals are tested on scheme charts; on schemes the proper and locally quasi-finite notions are [def-weil-proper-morphism, pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUT (theorem-keel-mori), with stacks-morphisms.tex Tag 06U9 (lemma-finite-type-permanence), Tag 06PU (definition-locally-quasi-finite), Tag 0CL5 (definition-proper) and Tag 050E (lemma-trivial-implications). Agent-formulated DM consequence of the separated, quasi-compact universal-homeomorphism coarse morphism; not a verbatim statement of 0DUT."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-proper-morphism",
+  "def-weil-field",
+  "def-weil-finite-integral-morphism",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "For an object $x\\in\\mathcal X(T)$ over a scheme $T$, the pullback of the inertia projection to $T$ is the automorphism sheaf $\\operatorname{Isom}_T(x,x)$. This is exactly the scheme base change of $\\Delta_{\\mathcal X/k}$ by the pair $(x,x):T\\to\\mathcal X\\times_k\\mathcal X$: the 2-fibre product description of [def-sfb-stable-pointed-moduli-groupoids] has as its objects an isomorphism between the two copies of $x$. The finite-diagonal hypothesis therefore says directly that this is a finite $T$-scheme [def-weil-finite-integral-morphism]. This checks finiteness of the inertia projection on every scheme test, with no hypothesis about stabilizer reductivity.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT, theorem-keel-mori, and definition-categorical-quotient; agent-written DM consequence"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-keel-mori-finite-inertia-quotient] with $S=\\operatorname{Spec}k$ and the inertia finiteness just checked. It gives an algebraic space $M/k$ and a categorical map $p:\\mathcal X\\to M$ which is separated, quasi-compact and a universal homeomorphism. In particular the relative diagonal of $p$ is proper. The theorem requires finite inertia, not a tame or linearly reductive stabilizer.",
+   "uses": [
+    "lem-sfb-keel-mori-finite-inertia-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT, theorem-keel-mori, and definition-categorical-quotient; agent-written DM consequence"
+   }
+  },
+  {
+   "text": "The coarse initial property in [def-sfb-stable-pointed-moduli-groupoids] gives a unique $k$-map $a:Q\\to M$ with $aq=p$; the categorical property in [lem-sfb-keel-mori-finite-inertia-quotient] gives a unique $k$-map $b:M\\to Q$ with $bp=q$. Now $(ba)q=q$ and $(ab)p=p$. The same two uniqueness properties imply $ba=1_Q$ and $ab=1_M$. Thus $a$ is an isomorphism identifying $q$ with $p$. Under this isomorphism every base-change diagram, relative diagonal, and underlying point space for $q$ is the corresponding one for $p$. Hence $q$ has proper relative diagonal, is quasi-compact, and is a universal homeomorphism. The argument uses only initiality of the assumed coarse map, so needs no claim that arbitrary base change preserves a coarse moduli universal property.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-keel-mori-finite-inertia-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT, theorem-keel-mori, and definition-categorical-quotient; agent-written DM consequence"
+   }
+  },
+  {
+   "text": "Choose a smooth scheme atlas $u:U\\to\\mathcal X$ in the chart definition of local finite type for $\\mathcal X/k$. Thus $U\\to\\operatorname{Spec}k$ is locally of finite type. Apply clause (a) of [lemma-nagata-finite-type-to-separated-target] to the scheme maps $qu:U\\to Q$ and $Q\\to\\operatorname{Spec}k$: their composite is the structure map of $U$, so $qu$ is locally of finite type. By the chart convention in the item this is precisely local finite type of $q$, with the identity chart on the scheme $Q$. Together with quasi-compactness from step 3 it gives finite type by [def-weil-finite-type-morphism] and the stack convention in the statement. Clause (b), which requires a separated second arrow, is not used: $Q/k$ need not be assumed separated.",
+   "uses": [
+    "lemma-nagata-finite-type-to-separated-target",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06U9, lemma-finite-type-permanence, specialized to scheme target and base; its chart proof uses scheme cancellation Tag 01T8"
+   }
+  },
+  {
+   "text": "After every base change $\\mathcal Z\\to Q$, step 3 gives a homeomorphism $|\\mathcal X\\times_Q\\mathcal Z|\\to|\\mathcal Z|$. A homeomorphism sends closed sets to closed sets, so $q$ is universally closed. Step 4 gives finite type and step 3 gives a proper relative diagonal. These are exactly the three conditions defining properness in the item, so $q$ is proper.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL5, definition-proper; definition-universal-homeomorphism"
+   }
+  },
+  {
+   "text": "To test the relative diagonal $\\Delta_q$ on a scheme $T\\to\\mathcal X\\times_Q\\mathcal X$, write its datum as objects $x,y\\in\\mathcal X(T)$ with equal images in $Q(T)$. Because $Q$ is a sheaf of sets regarded as a discrete groupoid, every isomorphism $x\\to y$ automatically induces the unique identity between these equal images. Thus the pullback of $\\Delta_q$ is exactly $\\operatorname{Isom}_T(x,y)$, also the pullback of $\\Delta_{\\mathcal X/k}$ by $(x,y)$. It is a finite scheme over $T$ by hypothesis. By [pqf-lem-finite-qf] it is quasi-finite, and by the forward implication of [pqf-lem-qf-locqf-qc] it is therefore locally quasi-finite in the sense of [pqf-def-quasifinite]. This proves local quasi-finiteness of $\\Delta_q$ on all scheme tests; the identification is the explicit 2-fibre product calculation of [def-sfb-stable-pointed-moduli-groupoids].",
+   "uses": [
+    "pqf-lem-finite-qf",
+    "pqf-lem-qf-locqf-qc",
+    "pqf-def-quasifinite",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06PU, definition-locally-quasi-finite; direct calculation of the relative diagonal; finite scheme morphisms are quasi-finite"
+   }
+  },
+  {
+   "text": "For every field $K$ and every $\\operatorname{Spec}K\\to Q$, the universal-homeomorphism assertion of step 3 gives $|\\mathcal X\\times_Q\\operatorname{Spec}K|\\simeq|\\operatorname{Spec}K|$. The latter is a one-point space and is discrete. Thus all field fibres have discrete underlying point spaces, including for non-algebraically closed $K$. Combining this with local finite type from step 4 and local quasi-finiteness of the relative diagonal from step 6 gives exactly local quasi-finiteness of $q$ as defined in the statement. If $\\mathcal X$ is empty, the categorical uniqueness argument gives $Q$ empty, and the field-fibre condition is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 06PU, definition-locally-quasi-finite, and definition-universal-homeomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-keel-mori-finite-inertia-quotient",
+  "lemma-nagata-finite-type-to-separated-target",
+  "def-weil-finite-type-morphism",
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-locqf-qc",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUT, theorem-keel-mori; explicit DM consequence using the chart proof of Tag 06U9 and definitions 06PU and 0CL5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Keel Mori coarse space morphism is separated quasi compact universal homeomorphism finite type for a Deligne Mumford stack",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "grep",
+   "query": "KeelMori|coarse.moduli|CoarseModuli|DeligneMumford",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coarse moduli morphism of a finite type Deligne Mumford stack with finite diagonal is proper and locally quasi finite",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyQuasiFinite\", \"doc\": \"The property of being locally quasi-finite is multiplicative, meaning that the composition of two locally quasi-finite morphisms of schemes is again locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Deligne Mumford stack with finite inertia maps properly and quasi finitely to its coarse moduli space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is a proper morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] : IsProperMap ⇑f\", \"doc\": \"[Stacks Tag 04XU](https://stacks.math.columbia.edu/tag/04XU)\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is proper if it is separated, universally closed and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations are about schemes, scheme morphisms, or generic representable functors, not this assertion about Deligne--Mumford stacks; no one-line specialization applies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-inertia-free-finite-cover-coarse",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover.",
+   "via": [
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-dm-coarse-proper-locally-quasifinite",
+  "worker": "stage1",
+  "summary": "Checked finite inertia on scheme tests, applied finite-inertia Keel--Mori, identified the categorical space by two universal properties, deduced local finite type on a scheme atlas using the existing Mathlib cancellation node, and checked both properness and all field fibres. Only the categorical quotient theorem is new; no Lean is written.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Steps 1--7 supply precisely the coarse-morphism input to the inertia-free finite-cover argument in the inherited proof-(3) alteration/moduli route. The inherited nearest ancestor returned by blueprint_refs.py is null; its via chain and exact recorded place are retained.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-finite-qf",
+    "why": "Finite scheme tests of the relative diagonal are quasi-finite. This generic scheme lemma supplies a chart-level property, not a replacement for the alteration or moduli route."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Passes from quasi-finite (finite type, isolated fibre points) to locally quasi-finite for the finite scheme tests of the relative diagonal; a generic scheme lemma, not a replacement for the alteration or moduli route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-finite-qf",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-319fc8048",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-319fc8048 (reviewer sub-agent of L); spot-checked: FIX: one missing citation (C1/C4) in step 6. The mathematics is otherwise correct. Snapshot checks: the item is still unsplit on live and side-live, its statement is identical to live, it is not on the dropped list and it has no repair note. Its only citer, lem-sfb-inertia-free-finite-cover-coarse, uses the unchanged statement. Sources read: Stacks 0DUT theorem-keel-mori (only hypothesis: inertia finite) and 0DUG definition-categorical-quotient; stacks-morphisms definition-separated and definition-universal-homeomorphism; criteria lemma-stacks-etale (an étale-topology DM stack is an fppf algebraic stack, so the def-sfb DM convention falls under 0DUT). Steps: (1) Isom_T(x,x) is the base change of the finite diagonal, so inertia is finite. (2) The new node is applied over Spec k. (3) Q≅M by the two uniqueness clauses, the coarse initiality of q and the categorical property of p. (4) Clause (a) of the existing Mathlib leaf lemma-nagata-finite-type-to-separated-target is applied to an atlas U→Q→k; this gives local finite type, and with quasi-compactness from KM, finite type. (5) Base-change homeomorphisms are closed maps, so q is universally closed, hence proper. (6) Because Q is discrete, the base change of Δ_q is Isom_T(x,y), a finite scheme. Fault: the passage from quasi-finite to locally quasi-finite in pqf-def-quasifinite (Stacks 01TJ) had no citation. Fixed by citing the existing pqf-lem-qf-locqf-qc, adding it to proof_deps and declaring it in split_report.tool_uses. (7) The field fibres are one-point spaces, so with steps 4 and 6 q is locally quasi-finite in the sense of 06PU. The new node lem-sfb-keel-mori-finite-inertia-quotient is a faithful DM specialization of 0DUT (uniformity omitted) and statement-only. It is self-contained, with inertia, algebraic stack and point space defined inline. Searches: the node records five Mathlib searches of the three required kinds, all no match. A full-DAG duplicate scan (open-restriction, inertia-free cover, abelian-level coarse) found no duplicate. Tested on schemes, BG for a finite constant group (including order p in characteristic p), the empty stack and a nonseparated scheme. Batch-5 flags: def-sfb-stable-pointed-moduli-groupoids (reaching def-trf-projective-bundle-morphism) and def-trf-algebraic-space are general definitions, not parts of the trace-formula or Poincaré-duality statements or proofs. Accepted, as in NQ 259273ef and Q25. Tool uses pqf-lem-finite-qf and pqf-lem-qf-locqf-qc accepted as generic. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmCoarseProperLocallyQuasiFinite",
+  "declaration": "AlgebraicGeometry.dmCoarseProperLocallyQuasiFinite",
+  "declarations": [
+   "AlgebraicGeometry.dmCoarseProperLocallyQuasiFinite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DmCoarseProperLocallyQuasiFinite.lean",
+  "statement": "theorem dmCoarseProperLocallyQuasiFinite (k : Type u) [Field k] (X : BasedCategory.{v, w} (Over (Spec (.of k)))) (hX : IsDeligneMumfordModuliStack X) (hft : HasFiniteTypeEtaleModuliAtlas X) (hdiag : HasFiniteModuliDiagonal X) (Q : Over (Spec (.of k))) (q : BasedFunctor X (discreteModuli (yoneda.obj Q))) (hq : IsCoarseModuliScheme X Q q) : IsProperModuliMap q ∧ IsLocallyQuasiFiniteModuliMap q",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the landed finite-type atlas and finite-diagonal predicates. Stack properness and local quasi-finiteness are stated with their full source definitions in the two new definition nodes; no representability or reductivity hypothesis is added. The unstated Keel--Mori proof dependency is retained in the DAG and the proof docstring; it has no module to import yet."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50328ac26",
+  "group": "Q69",
+  "result": "pass",
+  "note": "The re-delivery applies the b096 H12/H4 return exactly. The duplicate nodes def-sfb-moduli-point-topology and def-sfb-scheme-target-moduli-properties and their modules are dropped. stmt_deps add the landed def-sfb-dm-stack-morphism-properties and def-sfb-finite-stack-scheme-tests; the dep record is identical to live. The module imports DmStackMorphismProperties and concludes IsProperModuliMap q ∧ IsLocallyQuasiFiniteModuliMap q. lean.statement is verbatim, dated 2026-10-23. Hypotheses match the node: Field k, IsDeligneMumfordModuliStack, HasFiniteTypeEtaleModuliAtlas, HasFiniteModuliDiagonal, IsCoarseModuliScheme; none stronger. The conclusions are Q01's 0CL5/06PU definitions. Fibre fields are Type u, the universe of k. The citer inertiaFreeFiniteCoverCoarse has identical hypotheses, and the composition theorem consumes the same predicates. One sorry; docstrings carry the 7 proof steps; plain imports are the proof_dep modules (pqf-lem-finite-qf, pqf-lem-qf-locqf-qc); the Keel-Mori node has no lean. The report sections are present; the second reading is a self-check (advisory). No file changed, so no compile."
+ }
+}

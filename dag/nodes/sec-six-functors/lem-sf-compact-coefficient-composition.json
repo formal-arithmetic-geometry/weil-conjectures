@@ -37,190 +37,87 @@
  ],
  "proof": [
   {
-   "text": "We first check the domains, independently of exceptional adjoints. A finite-type scheme over k is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian, and is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. All morphisms between the finite-type schemes used here are qcqs by [lem-weil-pbc-qcqs-morphism-permanence]. Choose a compactification (i:Y→Ybar,s:Ybar→Z) of g by [thm-nagata-compactification]. Apply [lem-weil-pbc-compatible-compactification-triangle] to obtain a:X→Xbar and p:Xbar→Ybar compactifying if, V=Xbar×_{Ybar}Y with b:V→Xbar open and r:V→Y proper, and j:X→V open, with bj=a and rj=f. Thus (j,r), (i,s), (a,sp) compactify f,g,gf. These ambient schemes are finite type over k: proper maps are finite type, and each ambient scheme is proper over a finite-type k-scheme. The open subscheme V is Noetherian and quasi-compact, and its immersion is quasi-compact as stipulated by the triangle lemma.\n\nIn a compactification h=t v, extension by zero takes finite-Tor constructible input to finite-Tor constructible input by [lem-trf-open-ctf]. The ambient scheme has a finite dimension bound by [lem-kun-dimension-finite-type] (choose bound 0 if empty). Apply [cor-sf-direct-image-ctf-proetale] to the proper map t. It follows that F_{h,m}K is finite-Tor constructible. In particular F_{f,m}K is an allowed argument of q_g; this check does not use any exceptional or Verdier coefficient theorem.",
+   "text": "Choose compatible compactifications by Nagata and the triangle lemma. Their proper ambient schemes remain finite type over the field, hence Noetherian. Here $A_m,A_n$ are finite $\\ell$-power rings. The domain lemma gives bounded finite-Tor inputs, outputs and actual reductions; thus $q_g$ applies to $F_fK$. For intrinsic pro-etale input choose bounded constructible etale origin and reflect its Tor interval by the cited comparison lemma.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-qcqs-morphism-permanence",
     "thm-nagata-compactification",
     "lem-weil-pbc-compatible-compactification-triangle",
-    "lem-trf-open-ctf",
-    "lem-kun-dimension-finite-type",
-    "cor-sf-direct-image-ctf-proetale"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J (lemma-shriek-composition), first compactification diagram; domain checks for its finite-field specialization"
-   }
-  },
-  {
-   "text": "Reduction has the required bounded domain even though A→B need not be flat. By [lem-sf-flat-model] and [lem-sf-reduction-flat-model], a bounded flat representative P of K gives QK=P⊗_A B, bounded and flat over B in the same interval. On the pro-etale site, [lem-pur-finite-tensor-constructible-cohomology] applied to K and the constant finite A-module B gives constructible underlying A-cohomology. Since A→B is surjective, a trivialization of such an A-module sheaf is B-linear: the B-action is the action of any A-lift, independent of the lift because the kernel acts as zero. Thus this is constructibility over B as well. The tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies this with ν_T^*(QK) for an etale input. Apply [lem-sf-bounded-below-ctf-reflection] to conclude that this bounded etale reduction is finite-Tor constructible. For an etale compact-support output C, its bounded-below witness and its pro-etale realization are supplied by [lem-sf-class-compact-support-comparison]. Step 1 proves that realization finite-Tor constructible; the same reflection lemma therefore applies to C. Conversely [lem-sf-proetale-constructible-origin] supplies bounded constructible etale representatives of pro-etale inputs, and [lem-sf-comparison-tor-amplitude] identifies their Tor intervals. We may now work in the ordinary etale derived categories; the ambient maps below do not require finite-Tor bounds, which are used for the displayed q maps and final site comparison.",
-   "uses": [
-    "lem-sf-flat-model",
-    "lem-sf-reduction-flat-model",
-    "lem-pur-finite-tensor-constructible-cohomology",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-bounded-below-ctf-reflection",
-    "lem-sf-class-compact-support-comparison",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sp-finite-compact-support-domains",
     "lem-sf-proetale-constructible-origin",
     "lem-sf-comparison-tor-amplitude"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings); bounded finite-Tor specialization and site-domain checks"
+    "place": "Tag 0F7J (lemma-shriek-composition): compatible triangle and coefficient domains"
    }
   },
   {
-   "text": "Fix the normalization of the coefficient maps. Write L_{u,D}=u_D^{-1}, R_{u,D}=Ru_{*,D}, and I_{v,D}=v_{!,D} for D=A,B. The derived scalar extension Q is the ringed-topos pullback for the identity topos with coefficient map A→B [lem-pur-derived-change-of-rings, lem-weil-pbc-ringed-projection-mate-exact]. For any u let\n$$\\lambda_u:L_{u,B}Q_T\\xrightarrow{\\sim}Q_WL_{u,A},\\qquad u:W\\to T.$$\nOn K-flat representatives it is the coefficient-linear identification u^{-1}(x⊗b)↦u^{-1}x⊗b, using [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Its mate is the B-linear map\n$$\\chi_{u,M}:Q_TR_{u,A}M\\to R_{u,B}Q_WM,$$\nwhose transpose is Q_W(ε_{u,A,M}) λ_{u,R_{u,A}M}. This is precisely the normalization in [lem-coef-finite-direct-image], not just an underlying-A projection map.\n\nFor an open v:W→T define β_v:Q_TI_{v,A}→I_{v,B}Q_W by the identity between the right adjoints of these two composite left adjoints: restriction of scalars and open restriction commute on the underlying sheaf. The inverse δ_v has transpose under I_{v,B}⊣L_{v,B}\n$$Q_WM\\xrightarrow{Q_W\\eta_{v,A,M}}Q_WL_{v,A}I_{v,A}M\\xrightarrow{\\lambda_v^{-1}}L_{v,B}Q_TI_{v,A}M.$$\nThe open adjunction and its exact derived descent are supplied by [lem-amb-etale-adjoint-locality]. Transposing the inverse identity and applying the triangle identities gives an inverse, so β_v is an isomorphism. On tensor representatives its underlying map is the open tensor comparison: both restrict to x⊗b↦x⊗b on the open and are zero off it. For a compactification h=t v, put\n$$q_h^{(v,t)}=R_{t,B}(\\beta_v)\\circ\\chi_t I_{v,A}.$$\nThis is the canonical tensor coefficient comparison of [lem-fix-compact-support-coefficient-change]: the proper factor is the counit-defined projection arrow, and the open factor is extension-by-zero tensor comparison, exactly the two factors of [def-exchange-projection]. This identification is made in D(B) by the displayed adjunction transposes. Equality of underlying A-arrows alone is not used.",
+   "text": "Apply the composition and refinement clauses of the cited etale/pro-etale coefficient-compatibility lemma with $A=A_m\\to B=A_n$ (finite, killed by a power of $\\ell$; $k=\\overline{\\mathbf F}_q$ has characteristic $p\\ne\\ell$; all schemes separated of finite type over $k$) and $L=K$. Step 1 shows that $F_{f,m}K$ is again an allowed input, as its term $q_g(F_{f,A}L)$ requires. Its etale map $\\beta_h$ is the proper counit-mate scalar map followed by the extension-by-zero tensor identification: these are the two factors of the projection construction, normalized as in the finite direct-image lemma, so $\\beta_h$ is the canonical comparison $q_h$ of the statement. Its etale $\\alpha$ and refinement maps are those of the etale compact-comparison theorem. Its composition equation is therefore the asserted etale equation, and its refinement square makes this independent of the chosen compactifications.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-coef-finite-direct-image",
-    "lem-amb-etale-adjoint-locality",
+    "lem-sp-et-proet-coefficient-compatibility",
     "lem-fix-compact-support-coefficient-change",
-    "def-exchange-projection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6 and Tag 0GL5 (lemma-projection-formula-Rf-lower-shriek), proper/open construction of the coefficient map; agent-explicit B-linear normalization"
-   }
-  },
-  {
-   "text": "The elementary inverse-image/coefficient squares λ commute with composition: on K-flat representatives both paths identify (vu)^{-1}(x⊗b) with u^{-1}v^{-1}x⊗b. Pasting along adjunctions in [lem-weil-pbc-mate-pasting](2) therefore gives\n$$\\chi_{vu}=R_{v,B}(\\chi_u)\\circ\\chi_vR_{u,A}$$\nafter the direct-image compositors. On the finite-Tor objects this is also the explicit composition assertion of [lem-coef-finite-direct-image]. For two opens v,w, transposing β_{wv} and (I_{w,B}β_v)(β_w I_{v,A}) gives the same identity of the three right-adjoint factors, so they agree. The canonical open compositor is [lem-cbc-extension-zero-composition]. These are equations of B-linear transformations and remain valid with arbitrary extra functors whiskered on either side.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
     "lem-coef-finite-direct-image",
-    "lem-cbc-extension-zero-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, second equality of its four-line calculation; canonical direct-image and open-extension compositors"
-   }
-  },
-  {
-   "text": "We need the compatibility for the middle proper/open interchange, not merely for a pair of proper maps. For the cartesian square (b:V→Xbar,r:V→Y,i:Y→Ybar,p:Xbar→Ybar), let E_D:L_{i,D}R_{p,D}→R_{r,D}L_{b,D} be the ordinary open-restriction exchange. It is the adjunction mate of the inverse-image square by [def-kun-unbounded-exchange]. The two pastings of this inverse-image square with the four λ squares agree: they apply the same inverse images to x and leave its coefficient b unchanged. Apply both pasting laws in [lem-weil-pbc-mate-pasting] to this equality. Their mates give the typed identity, for N on Xbar,\n$$\\chi_{r,L_{b,A}N}\\,Q_Y(E_{A,N})\\,\\lambda_{i,R_{p,A}N}\n=R_{r,B}(\\lambda_{b,N})\\,E_{B,Q_{Xbar}N}\\,L_{i,B}(\\chi_{p,N}).\\tag{1}$$\nBoth sides go from L_{i,B}Q_{Ybar}R_{p,A}N to R_{r,B}Q_VL_{b,A}N. This is formal mate pasting, and requires no assertion that an arbitrary coefficient change is a geometric base change.",
-   "uses": [
-    "def-kun-unbounded-exchange",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B (lemma-shriek-proper-and-open) and 0F7J; agent expansion of inverse-image mate naturality under coefficient change"
-   }
-  },
-  {
-   "text": "Write γ_D:I_{i,D}R_{r,D}→R_{p,D}I_{b,D} for the normalized proper/open interchange. By [lem-amb-unbounded-proper-open-interchange], it is the I_{i,D}⊣L_{i,D} transpose of t_D^{-1}, where\n$$t_D=R_{r,D}(\\eta_{b,D}^{-1})\\,E_DI_{b,D}:L_{i,D}R_{p,D}I_{b,D}\\xrightarrow{\\sim}R_{r,D}.$$\nIn particular t_D L_{i,D}(γ_D)=1, with the canonical open unit inserted. Use (1) with N=I_{b,A}M. The formula for δ_b in step 3 gives the precise unit identity\n$$Q_V(\\eta_{b,A,M}^{-1})\\,\\lambda_{b,I_{b,A}M}\n=\\eta_{b,B,Q_VM}^{-1}\\,L_{b,B}(\\beta_{b,M}).$$\nPostcompose (1) at N=I_{b,A}M with R_{r,B}Q_V(η_{b,A,M}^{-1}). Naturality of χ_r changes its left side to χ_{r,M} Q_Y(t_{A,M}) λ_{i,R_{p,A}I_{b,A}M}. On its right side substitute the displayed unit identity, and then use naturality of E_B at β_{b,M}. This gives the fully typed cancellation identity\n$$t_{B,Q_VM}\\,L_{i,B}\\bigl(R_{p,B}(\\beta_{b,M})\\,\\chi_{p,I_{b,A}M}\\bigr)\n=\\chi_{r,M}\\,Q_Y(t_{A,M})\\,\\lambda_{i,R_{p,A}I_{b,A}M}.$$\nBoth sides go from L_{i,B}Q_{Ybar}R_{p,A}I_{b,A}M to R_{r,B}Q_VM. For i, step 3 likewise gives\n$$L_{i,B}(\\beta_{i,N})\\,\\lambda_{i,I_{i,A}N}^{-1}\\,Q_Y(\\eta_{i,A,N})\n=\\eta_{i,B,Q_YN}.$$\nUsing these two identities and t_A L_{i,A}(γ_A)η_{i,A}R_{r,A}=1 gives\n$$R_{p,B}(\\beta_b)\\,\\chi_p I_{b,A}\\,Q_{Ybar}(\\gamma_A)\n=(\\gamma_BQ_V)\\,I_{i,B}(\\chi_r)\\,\\beta_iR_{r,A}.\\tag{2}$$\nTo check that no isomorphism cancellation is hidden, transpose both sides under I_{i,B}⊣L_{i,B}, identifying their source with I_{i,B}Q_YR_{r,A} by β_i. Postcompose both transposes with t_B. On the left, (1) and t_A L_iγ_A=1 reduce this composite to χ_r; on the right, t_B L_iγ_B=1 gives χ_r directly. Since t_B is an isomorphism and the adjunction is a bijection, the two original arrows are equal. This proves (2) in D(Ybar_et,B).",
-   "uses": [
-    "lem-amb-unbounded-proper-open-interchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B, Cartesian open-square normalization of lemma-shriek-proper-and-open; Tag 0F7J, middle interchange"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-proper-open-coefficient-refinement] to a proper refinement u:T_1→T_2 with uj_1=j_2. The ambient schemes are Noetherian by step 1. The input is bounded below, and its reduction is bounded below by step 2. The χ and β of step 3 have exactly the adjunction normalizations in that lemma, as does the refinement arrow of [def-weil-pbc-proper-open-comparison]. Its equation therefore makes the coefficient square for this arrow commute, without assuming that the refinement square is cartesian. A compact-support refinement comparison is proper composition followed by this arrow or its inverse. Step 4 gives the proper-composition coefficient square; paste the two squares, and invert them when necessary. Thus q_h^c commutes with each refinement. The cocycle and common-refinement assertion of [lem-amb-etale-compact-comparisons] extends this to the canonical comparison between any two compactifications. This is the required change-of-model assertion.",
-   "uses": [
-    "lem-sf-proper-open-coefficient-refinement",
-    "def-weil-pbc-proper-open-comparison",
+    "def-exchange-projection",
     "lem-amb-etale-compact-comparisons"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7I (lemma-shriek-well-defined), refinement comparison; Tag 0F7J, independence of compactifications"
+    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings) and Tags 0F7I, 0F7J: coefficient change compatible with refinement and composition of compactifications"
    }
   },
   {
-   "text": "Compute on the compatible triangle of step 1. The normalized composition comparison of [lem-amb-unbounded-compact-support-comparisons] is the following three-arrow composite, restricted to bounded-below inputs:\n$$R_{s,D}I_{i,D}R_{r,D}I_{j,D}\n\\xrightarrow{R_{s,D}\\gamma_DI_{j,D}}R_{s,D}R_{p,D}I_{b,D}I_{j,D}\n\\xrightarrow{\\mathrm{direct\\ composition}}R_{sp,D}I_{b,D}I_{j,D}\n\\xrightarrow{\\mathrm{open\\ composition}}R_{sp,D}I_{a,D}.$$\nIt agrees on D^+ with the α of [lem-amb-etale-compact-comparisons]. Step 4 says that the coefficient comparison for each proper-composition or open-composition arrow commutes with that arrow. Step 6, whiskered by R_s and I_j, says the same for its first arrow. Naturality moves the coefficient comparisons for s and j across these whiskered arrows. Hence the rectangle of these three squares commutes. More explicitly, for a word W=H_t⋯H_1 in proper direct images and open extensions, define c_W by successively inserting χ_{H_i} or β_{H_i} from the outside inward. Naturality gives c_{UV}=U_B(c_V)c_UV_A. For composable arrows v:W→W' and w:W'→W'', the two equalities c_{W'}Q(v)=v_Bc_W and c_{W''}Q(w)=w_Bc_{W'} imply c_{W''}Q(wv)=(wv)_Bc_W by substitution. Applying this to the three displayed arrows gives\n$$q_{gf,K}^{(a,sp)}Q_Z(\\alpha_{g,f,m,K})\n=\\alpha_{g,f,n,Q_XK}\\,F_{g,n}^{(i,s)}(q_{f,K}^{(j,r)})\\,q_{g,F_{f,m}K}^{(i,s)}.$$\nThe formula for each c at an endpoint is exactly step 3, together with step 4's proper/open composition equations. All four intermediate functor words are the ones displayed here; no exceptional adjunction is involved.",
+   "text": "For pro-etale input choose, by step 1, a bounded constructible finite-Tor etale origin $L$ with witness $w:N_XL\\cong K$. The pro-etale clause of the same lemma gives the composition equation at $N_XL$ for $q_h=b_h$, the proper adjoint transpose followed by extension-by-zero tensor comparison, which is the statement's pro-etale $q_h$; there $\\alpha$ and the refinement maps are the transports through the site comparison $C$. Finite compact site coherence identifies these transports with the proper/open pastes computed on the pro-etale site, and the class compact-support comparison with the composition theorem identifies them with the canonical $\\alpha$ of the statement. Conjugate by $w$: naturality of both sides gives the equation at $K$, and a change of witness or of common refinement cancels adjacent inverse comparisons.",
    "uses": [
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-amb-etale-compact-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J (lemma-shriek-composition), complete four-line proper/open computation, oriented Rg_!Rf_!→R(gf)_!"
-   }
-  },
-  {
-   "text": "Conjugate the equality in step 8 by the canonical comparisons from its three compactifications to the chosen compactifications for f,g,gf. Step 7 moves each q through these comparisons. The composition comparison commutes with these same comparisons by [lem-amb-etale-compact-comparisons]. Naturality moves the input comparison for f through the functor for g. Adjacent inverse comparisons cancel. The result is exactly the equation in the statement on the small etale sites, with both sides from Q_ZF_{g,m}F_{f,m}K to F_{gf,n}Q_XK.",
-   "uses": [
-    "lem-amb-etale-compact-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, common-refinement independence and the canonical comparison of the three compactifications"
-   }
-  },
-  {
-   "text": "Finally verify that this is the asserted equation for the finite constructible pro-etale realization as well. The compactification functors compare by [lem-sf-class-compact-support-comparison]. The individual proper direct-image site comparisons are the specified counit mates of [lem-weil-pbc-comparison-direct-image-canonical-mate], and compose by [prop-weil-pbc-comparison-direct-image]. Open extensions compare by [lem-cbc-proetale-extension-zero-comparison]. Derived scalar extension commutes with comparison pullback: on a K-flat representative both give ν^{-1}P⊗_A B; K-flat pullback and its tensor identification are [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Applying [lem-weil-pbc-mate-pasting] to these inverse-image identities identifies the proper χ, the open β, and the exchanges E on the two sites. Thus the transpose calculation of steps 5–6 identifies their proper/open γ maps too. For refinement maps, [lem-sf-proper-open-comparison-site-normalization] explicitly identifies the named etale and pro-etale maps under these same comparisons. At the level of full compact supports the resulting composition comparison is the specified choice-independent α of [thm-sf-comp-composition]. Every factor of step 8 and every refinement map of step 7 is therefore its prescribed pro-etale factor, conjugated by the same site comparisons. Pulling back the etale equality and cancelling these comparisons gives the required pro-etale equality. All its arguments have bounded-below etale-origin witnesses by steps 1–2, so every invoked site comparison applies. This transports equality of B-linear arrows, not equality after forgetting their coefficients.",
-   "uses": [
+    "lem-sp-et-proet-coefficient-compatibility",
+    "det-sp-reduction-direct-image",
+    "lem-sp-finite-compact-site-coherence",
     "lem-sf-class-compact-support-comparison",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-mate-pasting",
-    "thm-sf-comp-composition",
-    "lem-sf-proper-open-comparison-site-normalization"
+    "thm-sf-comp-composition"
    ],
    "elementary": false,
    "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R (section-comparison) and Tag 09AF; more-etale.tex Tags 0F7I, 0F7J: transport of the etale equation along the site comparison"
+   }
+  },
+  {
+   "text": "For the ordinary-etale declaration, the proved tensor_compositor calculation applies to the four universal tensor models. The defining inverse-bijection equations identify their adjuncts. Naturality of the compositor and restriction comparison, followed by lem-sf-etale-restriction-compositor, equates the paths. Injectivity of P.universal reflects equality in the B-linear category. The pro-etale declaration retains the preceding original proof plan and remains unproved.",
+   "uses": [
+    "lem-fix-compact-support-coefficient-change",
+    "lem-amb-etale-compact-comparisons",
+    "lem-sf-etale-restriction-compositor"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7J and 0GL6 with proetale.tex Tags 09AF and 099R: transport of the normalized proper/open construction"
+    "place": "Tags 0F7J and 0GL6: composition and scalar restriction comparisons."
    }
   }
  ],
  "proof_deps": [
-  "cor-sf-direct-image-ctf-proetale",
   "def-exchange-projection",
-  "def-kun-unbounded-exchange",
-  "def-weil-pbc-proper-open-comparison",
-  "lem-amb-etale-adjoint-locality",
+  "det-sp-reduction-direct-image",
   "lem-amb-etale-compact-comparisons",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-amb-unbounded-proper-open-interchange",
-  "lem-cbc-extension-zero-composition",
-  "lem-cbc-proetale-extension-zero-comparison",
   "lem-coef-finite-direct-image",
   "lem-fix-compact-support-coefficient-change",
-  "lem-kun-dimension-finite-type",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-finite-tensor-constructible-cohomology",
-  "lem-sf-bounded-below-ctf-reflection",
   "lem-sf-class-compact-support-comparison",
   "lem-sf-comparison-tor-amplitude",
-  "lem-sf-flat-model",
   "lem-sf-proetale-constructible-origin",
-  "lem-sf-proper-open-coefficient-refinement",
-  "lem-sf-proper-open-comparison-site-normalization",
-  "lem-sf-reduction-flat-model",
-  "lem-trf-open-ctf",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-sp-finite-compact-support-domains",
   "lem-weil-pbc-compatible-compactification-triangle",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "prop-weil-pbc-comparison-direct-image",
   "thm-nagata-compactification",
-  "thm-sf-comp-composition"
+  "thm-sf-comp-composition",
+  "lem-sf-etale-restriction-compositor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7J (lemma-shriek-composition), 0F7B (lemma-shriek-proper-and-open), 0F7I (lemma-shriek-well-defined), 0GL6 (remark-Rf-lower-shriek-change-of-rings). Agent expansion writes the coefficient/mate rectangles explicitly; the displayed square is not asserted verbatim by these tags."
+  "place": "Tags 0F7J and 0GL6: universal-arrow calculation for the ordinary-etale clause; original route retained for pro-etale."
  },
  "mathlib_searches": [
   {
@@ -416,10 +313,10 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-sf-compact-coefficient-composition",
   "worker": "stage1",
-  "summary": "Expanded the compactification proper/open construction into ten steps, with B-linear adjunction normalizations, the mixed interchange square, noncartesian refinement compatibility, and explicit site transport. Reused existing normalized interchange and composition nodes; no new nodes or Mathlib leaves. Checked the finite-Tor domains independently of exceptional duality, all cited statements, source passages, edge cases and dependency closure. Fresh Mathlib searches were run and recorded. Statement and hypotheses are unchanged. Independent second reading expanded the mixed-interchange unit cancellation into typed equations; source, citation and fresh search checks confirmed the remaining steps. Maintainer reading added the existing bounded-below fully faithful site comparison to step 2 and wrote the isomorphism-lifting argument for reflection of constructibility, including the etale compact-support output. Repair Q42: kept the statement, stage-2 Lean record, route and eight other proof steps unchanged. Extracted the bounded-below constructibility/Tor reflection from step 2 and the noncartesian proper-refinement coefficient square from step 7 into two new statement-only unsplit nodes. Replaced each long step by its short application, with all ten steps below 2000 characters. The quotient-specific B-module structure in step 2 is now checked directly using surjectivity A→B. Retained searches were read and reused; fresh second phrasings and all required search kinds were run for the reflection input.",
+  "summary": "N7 C5/D1 repair (reviewer FIX): the item's equation, on both sites, is the composition clause of the reviewed existing lem-sp-et-proet-coefficient-compatibility specialized to A_m->A_n; the delivered site-mate node duplicated lem-sfb-etale-proetale-scalar-mate and was dropped. Three-step assembly: compactifications and domains, etale clause, pro-etale clause with witness conjugation. Statement and imported records unchanged.",
   "blueprint": "Realizes lem-coef-finite-exceptional Proof paragraph 2, the claim that transposes of evaluation/tensor/counit arrows give the same compact-support coefficient comparison: supplies precisely its compact-support composition rectangle, used for the absolute structure maps. This is a tool calculation below the unit's biduality route.",
   "tool_uses": [
    {
@@ -561,6 +458,62 @@
    {
     "node": "def-weil-pbc-proper-open-comparison",
     "why": "Structural input for the prescribed proper/open coefficient proof; the biduality unit has no replacement for this comparison or domain statement."
+   },
+   {
+    "node": "lem-sp-finite-compact-support-domains",
+    "why": "Generic compactification/domain/site comparison tool for the compact-support coefficient rectangle below the biduality unit; its statement is used without replacing the unit route."
+   },
+   {
+    "node": "def-sp-open-coefficient-unit-iso",
+    "why": "Only the prescribed open-unit inverse and proper/open coefficient factorization are used, as generic normalization tools below biduality; no exceptional theorem or alternative route is invoked."
+   },
+   {
+    "node": "lem-pur-etale-compact-scalar-coherence",
+    "why": "Use its full normalized etale compact-support coefficient COMPOSITION and REFINEMENT clauses on the verified D+ witnesses, as a structural tool below biduality; no exceptional comparison is used."
+   },
+   {
+    "node": "lem-sp-finite-compact-site-coherence",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "lem-sp-open-scalar-site-coherence",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "def-pc-scheme",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "def-weil-quasi-separated-morphism",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "def-weil-pbc-derived-categories",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "def-weil-pbc-proetale-modules",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "def-weil-pbc-site-comparison-morphism",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "def-weil-pbc-inverse-image",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic coefficient-domain, counit normalization or site-comparison identity for compact support below the biduality unit; the unit has no statement providing this structural comparison."
    }
   ]
  },
@@ -599,15 +552,29 @@
   "thm-weil-pbc-site-comparison",
   "def-exchange-projection",
   "def-kun-unbounded-exchange",
-  "def-weil-pbc-proper-open-comparison"
+  "def-weil-pbc-proper-open-comparison",
+  "lem-sp-finite-compact-support-domains",
+  "def-sp-open-coefficient-unit-iso",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-sp-open-scalar-site-coherence",
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-adjunction-mate"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q42-86165bb8d",
-  "group": "Q42",
+  "reviewer": "NT-cc-N7-1977c810a",
+  "group": "N7",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-86165bb8d (reviewer sub-agent of L); spot-checked: I read all the mathematics in full. Steps 2 and 7 are the only ones replaced, and the hidden arguments are now carried by cited nodes. Step 2: the flat model and its reduction give bounded, B-flat QK in the same Tor interval (lem-sf-flat-model, lem-sf-reduction-flat-model). lem-pur-finite-tensor-constructible-cohomology with constant L=B gives constructible A-cohomology, and the B-linear trivialisation follows from surjectivity of A→B. The tensor/pullback lemma identifies the result with ν*(QK). The new reflection lemma then applies to QK, and to the D+ compact-support output through lem-sf-class-compact-support-comparison. Step 7: the new refinement lemma has exactly step 3's χ and δ transposes and the α of def-weil-pbc-proper-open-comparison, whose θ=c·Rp_*(e)·r I read in full. I pasted the squares myself (naturality of χ_p2, the lemma whiskered by R_p2, and step 4's χ composition). This gives the refinement square without a cartesian hypothesis, matching Stacks 0F7I l.3114-3122; lem-amb-etale-compact-comparisons extends it to any two compactifications. New node lem-sf-bounded-below-ctf-reflection is true: proetale-constructible-origin(ii), then full faithfulness on D+ (thm-weil-pbc-site-comparison) gives G≅C, then comparison-tor-amplitude(ii). Small cases checked: T empty, A[0], shifted free, unbounded C excluded. Nearest existing nodes (lem-exc-comparison-tor-interval, origin, lem-weil-finite-duality-site-comparison) each give only part of it, so it is not a duplicate. New node lem-sf-proper-open-coefficient-refinement is well typed: every R_B argument is I_{j1,B}Q_XK in D+. The hypothesis QK in D+ is genuinely needed (Z/ℓ²→Z/ℓ). Small cases checked: u=id, A=B, K=0, an extra disjoint component. None of the 18 nodes citing the proper-open definition states this B-linear α_u square. Both new nodes are statement-only, in the item's unit, with three search kinds, correct blueprint from/via and no cycles; proof_deps equals the union of the step uses; no SGA. For the maintainer, not a fault of this delivery: unsplit lem-sp-et-proet-coefficient-compatibility (Q17) already contains the item's composition equation as a clause for general finite A→B, so it should cite this item when it is split. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-1977c810a (reviewer sub-agent of L); spot-checked: Two C5/D1 citation faults, both repaired in fixes/dag/nodes/sec-six-functors/lem-sf-compact-coefficient-composition.json. (1) The item's equation, on both sites, is already the composition clause of lem-sp-et-proet-coefficient-compatibility (existing, split, reviewed pass by L/Q58 on 2026-10-21). That node covers any A→B of finite ℓ-power rings, a field of characteristic p≠ℓ, separated finite-type schemes and bounded ctf input L. On the étale site it states q_gf∘T(α_A)=α_B∘F_g(q_f)∘q_g(F_f L) with q=β_h, and on the pro-étale site at ν^*L with q=b_h (det-sp-reduction-direct-image), together with the refinement squares. β_h is the proper counit transpose followed by the extension-by-zero tensor map, which is lem-fix's canonical q: the two factors of def-exchange-projection, normalized as in lem-coef-finite-direct-image. Its proof already contains the delivered steps 2–5 (lem-pur-etale-compact-scalar-coherence, lem-sp-finite-compact-site-coherence, lem-sp-open-scalar-site-coherence). Its closure does not contain the item, so there is no cycle. (2) The only new node, lem-sf-coefficient-site-mate-interchange, is lem-sfb-etale-proetale-scalar-mate (Q124, split): precomposing that node's equation with T(β^A) gives the same equation, with the same δ, the same γ=χ, and β^R equal to the counit mate d_r. The new node only extends it to unbounded input without invertibility, and the item uses it only at bounded I_vK. The FIX rewrites the proof as 3 steps of 2175 characters: step 1 (compatibility triangle, domains, étale origin and Tor) is kept verbatim; step 2 is the étale clause; step 3 is the pro-étale clause, with α identified through lem-sp-finite-compact-site-coherence, lem-sf-class-compact-support-comparison and thm-sf-comp-composition, then conjugation by the witness. proof_deps are recomputed and the new node is dropped (the item was its only citer). The statement, stmt_deps, Lean records and tool_uses are unchanged. Every argument of the old 10-step base proof has an existing carrier (table in review.md). I checked m=n, the non-flat Z/ℓ²→Z/ℓ, zero input and empty schemes. Sources: Stacks more-etale 0GL6 (l.3739), 0F7I, 0F7J; proetale 099R, 09AF; no SGA. Batch-5 flags: I accept all four (lem-pur-etale-compact-scalar-coherence, lem-sp-finite-compact-site-coherence, lem-sp-finite-compact-support-domains, lem-sp-open-scalar-site-coherence) and also the new lem-sp-et-proet-coefficient-compatibility. They are coefficient-change, site-coherence and finiteness/domain statements, not LTF or PD statements or proof steps. The reached lem-pod-derived-exact-square-composition, lem-pod-lisse-module-sheaves-as-module-objects and lem-trf-site-functorial-flat-resolution were already in the base closure. Closures: base 12685 nodes (77 PD/TRF), delivered 13990 (141), fixed 14007 (141); the added PD/TRF nodes are lisse, lattice, section-module and point-system lemmas, and no nt-assume or trace-transport node is reached. Maintainer note: the fix leaves 0 new nodes, below the note's ≥4, because the item is a direct specialisation of lem-sp-et-proet-coefficient-compatibility. Please close the re-split for this item or mark it as that node's corollary; otherwise re-deliveries will keep looping.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.SixFunctors.CompactCoefficientComposition",
@@ -635,5 +602,26 @@
   "result": "fix",
   "note": "Wrote review.md and complete replacements under fixes/. Mathematics and canonical maps checked on both sites; verbatim signatures verified. Replaced one inline tactic proof with direct equality transport. All four fixed modules passed scompile.py server confirmation. Branch unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f8ed0",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T164929-L-1133303",
+  "kind": "interface",
+  "note": "independent cc review: delivered item and new EtaleRestrictionCompositor module vs clone, nodes and unit sk-prop-sf-biduality-general (realized empty); signatures unchanged; 5 direct importers compiled against the delivered modules; axioms checked"
+ }
 }

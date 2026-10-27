@@ -1,0 +1,143 @@
+{
+ "id": "lem-trf-coherent-quotient-reduction-comparison",
+ "kind": "statement",
+ "title": "Coherent quotient presentations and the canonical derived reduction comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $W$ with $\\ell$ invertible in every residue field. Let $S$ be a coefficient derived-system calculus [lem-coef-derived-system-evaluation-calculus]. There exist an ordinary quotient tensor/limit model $M$ and a compatible derived model $D$ [def-trf-completion-unit-models] with the following property. For every flat-term K-flat complex $P$ [def-a1-flat-term-kflat-complex] and every simultaneous quotient presentation $(C,e,\\kappa)$ of $P$ whose comparison $e$ is whole-system adjunction-coherent [def-trf-integral-comparison-realization-models], there is a strict complex isomorphism $a:M(P)\\xrightarrow{\\sim}C$ such that $D.\\mathrm{reductionComparison}_P\\,;\\,Q(a)=e$ in the derived system category and $\\operatorname{ev}_n(a)\\,;\\,\\kappa_n=M.\\mathrm{evaluation}_{n,P}$ for every $n\\geq0$ (index $n$ denotes exponent $n+1$). The equality is asserted before applying total derived limit.",
+ "stmt_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-trf-completion-unit-models",
+  "def-a1-flat-term-kflat-complex",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), strict finite quotient pullback; sites-cohomology.tex Tags 06YY and 0941, derived adjunction and whole strict tower limit. This is the normalized quotient-system refinement of the original primitive-realization proof, not a verbatim Stacks statement."
+ },
+ "proof": [
+  {
+   "text": "Choose the existing canonical models for a calculus S0. Transport their reduction comparison to the supplied S using Adjunction.leftAdjointUniq. Transport the universal left-derived property and invertibility on good complexes along this natural isomorphism. The left-adjoint unit identity preserves the whole-Hom normalization. Apply the existing finiteComparison_of_unit theorem to recover the prescribed finite evaluations for S, keeping the same ordinary model and normalized right-derived limit data.",
+   "uses": [
+    "lem-trf-completion-unit-canonical-models",
+    "lem-trf-completion-unit-finite-mate-comparison",
+    "def-trf-completion-unit-models",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each whole-system coherent presentation, apply the proved fixed-model comparison to the transported models M and D. It reconstructs the strict quotient isomorphism by ordinary adjunction and proves the whole-derived-system comparison by normalized double transposition. Its finite comparison identities are exactly the required ones. The extra good-complex and reduction-presentation hypotheses remain unchanged in the item statement.",
+   "uses": [
+    "lem-trf-coherent-quotient-model-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-completion-unit-canonical-models",
+  "lem-trf-completion-unit-finite-mate-comparison",
+  "def-trf-completion-unit-models",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-coherent-quotient-model-comparison"
+ ],
+ "proof_origin": {
+  "by": "K8 stage 3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099N(5), strict finite quotient pullback; sites-cohomology.tex Tags 06YY and 0941, derived adjunction and whole strict tower limit. This is the normalized quotient-system refinement of the original primitive-realization proof, not a verbatim Stacks statement. Ordinary reconstruction uses the strict tensor-unit map already furnished by whole-system coherence, rather than separately assembling horizontal comparisons. The ordinary reconstruction and fixed-model derived comparison are fully proved in their own modules after profiling and simplifying the section calculations; no new proof obligation is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived reduction system is represented by a strict quotient tensor complex, with the comparison fixed by the whole system adjunction",
+   "results": "Only generic Adjunction.derived and derived adjunction normalization ingredients; no strict quotient-system comparison or simultaneous normalization theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism of functors out of a derived category determined on K-flat resolutions",
+   "results": "Eight generic derived-functor factorization hits, including mapDerivedCategoryFactors; no normalized strict quotient comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Generic unique comparison of left adjoints is available, but not the strict quotient-system representative or its tensor-unit formulas.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientSequenceEvaluation.*pull|pull.*coefficientSequenceEvaluation",
+   "results": "msearch returned zero hits. Repository search finds finite evaluation comparisons private to AmbientPullbackTensorCoherence and no theorem with the required strict transition and generator equations.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrimitiveQuotientPullbackModelExistence",
+  "date": "2026-10-26",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final sentence of prop-trf-karoubi-independence: common-stage Frobenius transport; integral normalized comparison construction. This refinement carries former model-existence steps 3, 4. Ancestor was removed from latest blueprint; current trace-transport proof uses sk-thm-tf-uniform-formula; no rerouting. Genuine substep: Coherent quotient presentations and the canonical derived reduction comparison.",
+   "via": [
+    "lem-trf-primitive-quotient-pullback-model-existence",
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoherentQuotientReductionComparison",
+  "file": "lean/Sheaf/Paper/CoherentQuotientReductionComparison.lean",
+  "declaration": "WeilConjectures.coherentQuotientReductionComparison",
+  "statement": "theorem coherentQuotientReductionComparison (W : Scheme.{t})\n    (_hlW : ∀ x : W, IsUnit (l : W.residueField x))\n    (S : CoefficientDerivedSystemCalculus l E W) :\n    ∃ (M : CompletionUnit.OrdinaryModel l E W)\n      (D : CompletionUnit.DerivedModel l E W S M),\n    ∀ (P : (integralOperationsGoodComplex l E W).FullSubcategory)\n      (C : CochainComplex (coefficientSequenceModules l E W) ℤ)\n      (e : S.reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C)\n      (κ : ∀ n : ℕ,\n        ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅\n          (unrestrictedIntegralFiniteComplex l E W n).obj P.obj),\n      CoefficientReductionPresentation l E W S.toCoefficientDerivedSystemReduction\n        P.obj P.property.1 C e κ →\n      IsIntegralComparisonPresentationCoherent l E W S P.obj C e κ →\n      ∃ a : (M.quotient l E W).obj P.obj ≅ C,\n        D.reductionComparison.app P.obj ≫ DerivedCategory.Q.map a.hom = e.hom ∧\n        ∀ n : ℕ,\n          ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).mapIso a ≪≫\n            κ n = (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P.obj",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-71156",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T071021-L-3770140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T100316-L-4178483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,156 @@
+{
+ "id": "def-sfb-integral-cartier-divisor",
+ "kind": "definition",
+ "title": "Cartier divisors, partial pullback, and rational sections on integral schemes",
+ "status": "split",
+ "statement": "Let $X$ be an integral scheme [def-pc-scheme] [def-pc-integral-scheme], with generic point $\\eta$ [def-sc-generic-point] and function field $K(X)=\\mathcal O_{X,\\eta}$ [def-sc-function-field]. At $x$, the Cartier class of $f\\in K(X)^\\times$ is its coset $f\\mathcal O_{X,x}^\\times$ inside $K(X)$. A Cartier divisor is a function assigning such a class to every point, locally represented by one nonzero rational function. Equality is equality of all these classes. The zero divisor has equation $1$; support consists of points with nonunit class. For a scheme morphism $f:X\\to Y$ between integral schemes, a divisor $E$ is the pullback of $D$ if at every $x$ there are $a,b\\in\\mathcal O_{Y,f(x)}$, with $a,b,f^\\sharp a,f^\\sharp b$ all nonzero, such that $a/b$ represents $D$ at $f(x)$ and $f^\\sharp a/f^\\sharp b$ represents $E$ at $x$. The canonical partial pullback returns that unique divisor when it exists uniquely, and is undefined otherwise. For an invertible module $L$ [def-sc-invertible-module], a rational section is an element of its generic stalk [def-weil-pbc-module-stalk]. It has Cartier divisor $D$ if at each $x$ a generator $t$ of $L_x$ has a nonzero rational coefficient $a$ with $s=a t_\\eta$ and Cartier class $D_x$. It is an everywhere invertible regular section if it is the generic germ of a global regular section whose germ generates every stalk.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-sc-function-field",
+  "def-sc-invertible-module",
+  "def-weil-pbc-module-stalk"
+ ],
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 01X5 (lemma-meromorphic-functions-integral-scheme), rational functions and sections; the local Cartier-equation definition explicitly supplied in lem-sfb-normal-group-vertical-cartier-descent and its 0BD7 proof."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cartier divisors on an integral scheme as locally representable classes of nonzero rational functions modulo regular units",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.sectionsSubring\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(U : (Opens (PrimeSpectrum.Top R))ᵒᵖ) : Subring (∀ x : U.unop, Localizations R x)\", \"doc\": \"For a commutative ring $ R $ and an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the subring of the structure sheaf over $ U $ consisting of functions that are locally\"}\n  {\"name\": \"MeromorphicOn.divisor\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"(f : 𝕜 → E) (U : Set 𝕜) : Function.locallyFinsuppWithin U ℤ\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, this constructs the divisor of $ f $ as a locally finite fo\"}\n  {\"name\": \"MeromorphicOn.divisor_def\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"(f : 𝕜 → E) (U : Set 𝕜) : divisor f U z = if MeromorphicOn f U ∧ z ∈ U then (meromorphicOrderAt f z).untop₀ else 0\", \"doc\": \"For a meromorphic function $ f : \\\\mathbb{K} \\\\to E $ on a set $ U \\\\subseteq \\\\mathbb{K} $ (where $ \\\\mathbb{K} $ is a nontrivially normed field and $ E $ is a normed vector space over $ \\\\mathbb{K} $), th\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"{U : Opens (PrimeSpectrum.Top R)} (f : ∀ x : U, Localizations R x) : Prop\", \"doc\": \"A function $ f $ defined on an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ is called a fraction if there exist elements $ r, s \\\\in R $ such that for every prime ideal $ \\\\mathfra\"}\n  {\"name\": \"RatFunc.noConfusionType\", \"module\": \"Mathlib.FieldTheory.RatFunc.Defs\", \"type\": \"Sort u_1 →\\n  {K : Type u} → [inst : CommRing K] → RatFunc K → {K' : Type u} → [inst' : CommRing K'] → RatFunc K' → Sort u_1\", \"doc\": \"The type of rational functions over a commutative ring $ K $, defined as the fraction ring of the polynomial ring $ K[X] $ by localizing at its non-zero divisors. This construction generalizes the fie\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(X Y : Scheme.{u}) : Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isLocallyFraction\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \": LocalPredicate (Localizations R)\", \"doc\": \"The local predicate on the localization rings of $\\\\operatorname{Spec}(R)$ obtained by sheafifying the prelocal predicate that declares a function to be a fraction $r/s$ with $r,s \\\\in R$ and $s$ non-va\"}\n  {\"name\": \"AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"[IsIntegral X] (U : X.Opens) (hU : IsAffineOpen U) [Nonempty U] : IsFractionRing Γ(X, U) X.functionField\", \"doc\": \"For an integral scheme $X$ and a non-empty affine open subset $U$ of $X$, the function field of $X$ is the fraction field of the ring of sections $\\\\Gamma(X, U)$. This follows from the fact that every \"}\n",
+   "date": "2026-10-23",
+   "verdict": "No matching integral-scheme Cartier divisor or partial pullback. Returned scheme localizations, ideal sheaf pullback, analytic divisors, rational maps, or normalization declarations do not supply this notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartier divisor on an integral scheme and its pullback along a morphism defined by pulling back local fraction equations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → Y.IdealSheafData → (X ⟶ Y) → X.IdealSheafData\", \"doc\": \"For a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the comap is the ideal sheaf data on $X$ obtained as the kernel of the firs\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.IdealSheafData → (X ⟶ Y) → Y.IdealSheafData\", \"doc\": \"Given an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and a morphism $f: X \\\\to Y$, this function constructs the ideal sheaf on $Y$ as the kernel of the composition of the canonical morphism $\\\\iota: \\\\text\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom (CategoryTheory.Limits.pullback.snd f I.subschemeι) =\\n    (I.comap f).subschemeMap I f ⋯\", \"doc\": \"Given a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the homomorphism component of the isomorphism between the comap subscheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.preimage_zeroLocus\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {U : Y.Opens} (s : Set ↑(Y.presheaf.obj (Opposite.op U))),\\n  ⇑(CategoryTheory.ConcreteCategory.hom f.base) ⁻¹' Y.zeroLocus s =\\n    X.zeroLocus (⇑(CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)) '' s)\", \"doc\": \"For schemes $X$ and $Y$, a morphism $f : X \\to Y$, an open subset $U$ of $Y$, and a set $s$ of sections of the structure sheaf over $U$, the preimage of the zero locus of $s$ in $Y$ under $f$ is equal \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (I : Y.IdealSheafData) → (f : X ⟶ Y) → (I.comap f).subscheme ≅ CategoryTheory.Limits.pullback f I.subschemeι\", \"doc\": \"For a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the closed subscheme of $X$ defined by the comap of $\\\\mathcal{I}$ along $f$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom (CategoryTheory.Limits.pullback.fst f I.subschemeι) =\\n    (I.comap f).subschemeι\", \"doc\": \"For a scheme $ Y $ with ideal sheaf data $ \\\\mathcal{I} $ defining a closed subscheme $ Z \\\\subset Y $, and a morphism $ f: X \\\\to Y $, the composition of the homomorphism component of the isomorphism be\"}\n",
+   "date": "2026-10-23",
+   "verdict": "No matching integral-scheme Cartier divisor or partial pullback. Returned scheme localizations, ideal sheaf pullback, analytic divisors, rational maps, or normalization declarations do not supply this notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, CartierDivisor",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CartierDivisor'\n",
+   "date": "2026-10-23",
+   "verdict": "No matching integral-scheme Cartier divisor or partial pullback. Returned scheme localizations, ideal sheaf pullback, analytic divisors, rational maps, or normalization declarations do not supply this notion."
+  },
+  {
+   "tool": "grep",
+   "query": "CartierDivisor|RationalSection",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "No matching integral-scheme Cartier divisor or partial pullback. Returned scheme localizations, ideal sheaf pullback, analytic divisors, rational maps, or normalization declarations do not supply this notion."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"IntegralCartierDivisor|CartierDivisor|RationalSection\" dag/nodes",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-quasiaffine-line-effective-divisor.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/def-sfb-space-divisor-operations.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-cartier-extension-factorial-complement.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-deligne-laumon-a1/lem-a1-adic-section-closed-support.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-trace-formula/lem-trf-curve-section-degree-positivity.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/lem-pc-cartier-divisor-finite-over-field.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/lem-pc-nonzero-section-integral-cartier.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-factorial-affine-rational-poles.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-pur-twist-frobenius-scalar.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-smooth-marking-normalization-twist.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/lem-pc-invertible-ideal-complement-schematic-dominance.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-pur-cartier-relative-boundary-realization.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-trace-formula/lem-trf-dnc-principal-generic-smooth-reduction.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-trace-formula/lem-trf-etale-reduced-cartier-descent.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-trace-formula/lem-trf-snc-divisorial-log-chart.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-pur-cartier-class-agreement.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/lem-pc-cartier-divisor-nowhere-dense.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-nodal-trait-twister-extremal-degree.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/lem-pc-zero-scheme-divisor-iso.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-weil-point-sections-scalar-extension.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/def-sc-rational-section-divisor.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-single-cartier-divisorial-part.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/lem-sc-hilb-to-pic-surjective.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/lem-sc-rational-section-order.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/def-sfb-space-total-fractions.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-picard-framework/lem-pc-regular-curve-divisor-calculus.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-regular-space-divisor-line-dictionary.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-factorial-cartier-prime-decomposition.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/lem-sfb-normal-group-vertical-cartier-descent.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-six-functors-basics/def-sfb-space-divisors.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/def-weil-finite-coefficient-point.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-weil-point-rational-sections-hom.json\n/home/ubuntu/weil-conjectures-sheaf-shared/dag/nodes/sec-smooth-purity/lem-weil-point-rational-sections-lattice.json\n",
+   "date": "2026-10-23",
+   "verdict": "No integral-scheme Cartier divisor interface. Existing RationalSectionDivisor is restricted to smooth curves over an algebraically closed field. SpaceDivisorDefinitions is on an algebraic-space small etale model; SpaceDivisorPullback only pulls back along flat maps and cannot supply the nondominant identity-section pullback required here. Effective Cartier ideal sheaves and curve Weil divisors are different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"IntegralCartierDivisor|CartierDivisor|RationalSection\" lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/RationalSectionDivisor.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CartierDivisorFinite.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/CurveSectionDegreePositivity.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/SpaceDivisorPullback.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/SixFunctors/FrobeniusPointTransportNatural.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/PointRationalSectionsLattice.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/SpaceDivisorDefinitions.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/NagataBoundaryDivisor.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/PointFibreEquivalence.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/PointRationalSectionsHom.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/PointTransformationRationalNormalization.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/PointAutomorphismTransportScalarExtension.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/FiniteCoefficientPoint.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/SpaceTotalFractions.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/MarkedNodalInfinitesimalFields.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/RegularSpaceDivisorLineDictionary.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/Paper/PointSectionsScalarExtension.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/NormalCrossingsStrictification.lean\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/NagataBoundaryDivisorCartier.lean\n",
+   "date": "2026-10-23",
+   "verdict": "No integral-scheme Cartier divisor interface. Existing RationalSectionDivisor is restricted to smooth curves over an algebraically closed field. SpaceDivisorDefinitions is on an algebraic-space small etale model; SpaceDivisorPullback only pulls back along flat maps and cannot supply the nondominant identity-section pullback required here. Effective Cartier ideal sheaves and curve Weil divisors are different objects."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"IntegralCartierDivisor|CartierDivisor|RationalSection\" lean/WeilConjectures",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "No integral-scheme Cartier divisor interface. Existing RationalSectionDivisor is restricted to smooth curves over an algebraically closed field. SpaceDivisorDefinitions is on an algebraic-space small etale model; SpaceDivisorPullback only pulls back along flat maps and cannot supply the nondominant identity-section pullback required here. Effective Cartier ideal sheaves and curve Weil divisors are different objects."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-group-vertical-cartier-descent",
+  "date": "2026-10-23",
+  "group": "Q51"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Local Cartier equations and identity-section pullback in the normal-base vertical-divisor input.",
+   "via": [
+    "lem-sfb-normal-group-vertical-cartier-descent",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralCartierDivisor",
+  "declaration": "AlgebraicGeometry.Scheme.IntegralCartierDivisor",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralCartierDivisor.lean",
+  "statement": "def IntegralCartierDivisor (X : Scheme.{u}) [IsIntegral X]",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.integralCartierClass",
+   "AlgebraicGeometry.Scheme.IntegralCartierDivisor",
+   "AlgebraicGeometry.Scheme.integralCartierZero",
+   "AlgebraicGeometry.Scheme.integralCartierSupport",
+   "AlgebraicGeometry.Scheme.IsIntegralCartierPullback",
+   "AlgebraicGeometry.Scheme.integralCartierPullback?",
+   "AlgebraicGeometry.Scheme.HasIntegralCartierDivisor",
+   "AlgebraicGeometry.Scheme.IsInvertibleRegularRationalSection"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2d8353e8",
+  "group": "Q51",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2d8353e8",
+  "group": "Q51",
+  "result": "fix",
+  "note": "H3: rational-section clause `∃! D, Has L s D ∧ (Inv ↔ D=0)` restricted uniqueness to divisors that also satisfy the iff, so it did not state that s has a unique Cartier divisor. FIX rewrites it as `∃ D, (∀ D', Has L s D' ↔ D' = D) ∧ (Inv ↔ D = 0)` in fixes/NormalGroupVerticalCartierDescent.lean, with the verbatim statement in fixes/lem-sfb-normal-group-vertical-cartier-descent.lean-record.json; nt_compile --json clean, error control rejected. All other hypotheses and clauses checked against the node: normal integral base, smooth separated finite-presentation commutative GrpObj over S, GeometricallyConnected (nonemptiness supplied by e), dense U, G normal integral, G_U dense, e = mkIdTerminal iso ≫ MonObj.one, canonical partial Cartier pullback (fraction class independent of representative), support in Uᶜ, p^*E = D, E=0→D=0. New node def-sfb-integral-cartier-divisor justified: no scheme Cartier-divisor notion in Mathlib, side-live or slopmaster2 (only curve Weil divisors, effective Cartier ideals, algebraic-space Cartier divisors with flat pullback only, K_X); real data, docstrings present. Advisory: stage-1 stmt_dep def-pc-module-pullback unused in the Lean statement."
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-smooth-open-schematic-generic-density",
+ "kind": "statement",
+ "title": "Schematic generic density and fibre properties of the smooth open",
+ "statement": "Let $f:X\\to Y$ be a finite type, flat, locally finitely presented morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Assume $Y$ is irreducible with generic point $\\eta$ [def-weil-irreducible-components, def-sc-generic-point] and $X_\\eta$ is geometrically reduced over $\\kappa(\\eta)$ [def-pc-scheme-fibre, def-weil-residue-field, def-pc-geometrically-irreducible]. Define $U\\subseteq X$ to be the union of all open subschemes $T\\subseteq X$ on which $f|_T$ is smooth [def-sbc-smooth-morphisms]. Then $U_\\eta$ is topologically dense in $X_\\eta$ and, for its open immersion $j_\\eta$, the natural sheaf map $\\mathcal O_{X_\\eta}\\to(j_\\eta)_*\\mathcal O_{U_\\eta}$ is injective. For every $y\\in Y$, $X_y$ is a finite type $\\kappa(y)$-scheme whose underlying topological space is Noetherian, meaning that every descending sequence of closed subsets stabilizes; every open immersion into $X_y$ is quasi-compact and quasi-separated [def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]. For every $y\\in Y$, $U_y$ is geometrically reduced over $\\kappa(y)$. Empty fibres are allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0578, lemma-geometrically-reduced-generic-fibre, second proof paragraph through the assertion that all fibres of the smooth open are geometrically reduced; varieties.tex Tag 056V, lemma-geometrically-reduced-dense-smooth-open; morphisms.tex Tags 01V9 (lemma-smooth-at-point) and 056D (lemma-reduced-scheme-theoretically-dense)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-pc-geometrically-irreducible",
+  "def-sbc-smooth-morphisms",
+  "def-weil-quasi-separated-morphism",
+  "def-trf-schematically-dense-open"
+ ],
+ "proof": [
+  {
+   "text": "Fix $y\\in Y$. Base change of the finite-type morphism $f$ along $\\operatorname{Spec}\\kappa(y)\\to Y$ gives a finite-type morphism $h_y:X_y\\to\\operatorname{Spec}\\kappa(y)$ by [lem-sfb-finite-type-composition-base-change]. A field is Noetherian since its only ideals are zero and the unit ideal; hence its one-point spectrum is Noetherian. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $X_y$ Noetherian. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], closed subsets satisfy the minimal condition, so any descending sequence stabilizes: choose a minimal member among its terms. Every open immersion into $X_y$ is quasi-compact by [lem-sfb-noetherian-open-immersion-qc] and separated by [lem-weil-pbc-separated-cancellation](a), hence quasi-separated: its diagonal is a closed immersion, which is quasi-compact since inverse images of affine opens are affine closed subschemes. Finally [pqf-lem-lft-fp-locnoeth] makes $h_y$ locally finitely presented. These facts apply also to $y=\\eta$.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-weil-pbc-separated-cancellation",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, proof, finite-type fibres; morphisms.tex Tag 01T6; Properties Tag 01OY; Schemes Tag 01L7"
+   }
+  },
+  {
+   "text": "The open subschemes $T$ in the definition of $U$ cover $U$. Restricting $f|_T$ to its open domain inside $U$ gives exactly the restrictions of $f|_U$. Hence [lem-weil-pbc-smooth-local-on-source] shows that $f|_U:U\\to Y$ is smooth. This also covers $U=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, proof, the smooth open $U$"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-geometrically-reduced-dense-smooth-open] to $h_\\eta:X_\\eta\\to\\operatorname{Spec}\\kappa(\\eta)$: its local finite presentation was proved in step 1, and geometric reducedness is a hypothesis. Its smooth locus $V$ is dense in $X_\\eta$. For each $w\\in V$, [lem-trf-flat-fibre-smooth-locus-image] applies to $f$, since $f$ is flat and locally finitely presented. It gives an open neighbourhood of the image of $w$ on which $f$ is smooth. That image therefore lies in the union $U$. Consequently $V\\subseteq U_\\eta$, so $U_\\eta$ is dense in $X_\\eta$.",
+   "uses": [
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "lem-trf-flat-fibre-smooth-locus-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, proof, dense smooth generic open; varieties.tex Tag 056V (lemma-geometrically-reduced-dense-smooth-open); morphisms.tex Tag 01V9 (lemma-smooth-at-point)"
+   }
+  },
+  {
+   "text": "Geometric reducedness of $X_\\eta$ implies reducedness by taking the identity field extension in [def-pc-geometrically-irreducible]. The open immersion $j_\\eta:U_\\eta\\hookrightarrow X_\\eta$ is quasi-compact and quasi-separated by step 1 and has dense image by step 3. Therefore [lemma-nagata-reduced-dense-image-schematic] says that its scheme-theoretic image inclusion is an isomorphism. The injectivity assertion of [lemma-nagata-scheme-image-ideal-qc], applied to this quasi-compact map, now gives $\\mathcal O_{X_\\eta}\\to(j_\\eta)_*\\mathcal O_{U_\\eta}$ injective after identifying the scheme-theoretic image with $X_\\eta$. This is precisely schematic density as defined in [def-trf-schematically-dense-open].",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "def-trf-schematically-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, proof, schematic density; morphisms.tex Tag 056D (lemma-reduced-scheme-theoretically-dense)"
+   }
+  },
+  {
+   "text": "Apply [sbc-lem-smooth-geometrically-reduced] to the smooth morphism $f|_U$ from step 2. It gives geometric reducedness of its fibre $U_y$ for every $y\\in Y$. An empty fibre is reduced after every field extension, and density and the sheaf injection over an empty generic fibre are vacuous, so none of the preceding steps requires nonempty fibres.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0578, proof, all fibres of the smooth open are geometrically reduced; varieties.tex Tag 056T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-separated-cancellation",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-trf-flat-fibre-smooth-locus-image",
+  "def-pc-geometrically-irreducible",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "def-trf-schematically-dense-open",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0578 (lemma-geometrically-reduced-generic-fibre), second proof paragraph; the two schematic-image lemmas express the Tag 056D inference using existing DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finite type locally finitely presented family with geometrically reduced generic fibre its smooth locus has schematically dense generic fibre and geometrically reduced fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat family with geometrically reduced generic fibre has a smooth open whose generic fibre is schematically dense",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"GeometricallyReduced\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*locus|locus.*smooth|schematical.*dense",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"43\", \"text\": \"  rw [← Scheme.Hom.smoothLocus_eq_top_iff, ← TopologicalSpace.Opens.coe_eq_univ,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"47\", \"text\": \"    nonempty_inter_closedPoints H f.smoothLocus.2.isClosed_compl.isLocallyClosed\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"48\", \"text\": \"  obtain ⟨y, hy : y ∈ f.smoothLocus, hyc⟩ := nonempty_inter_closedPoints\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"49\", \"text\": \"    f.dense_smoothLocus_of_perfectField.nonempty f.smoothLocus.2.isLocallyClosed\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"line\": \"60\", \"text\": \"  rw! [← hα', ← α.hom.left.mem_preimage, Scheme.Hom.preimage_smoothLocus_eq,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"251\", \"text\": \"      hV.primeIdealOf ⟨x, hx⟩ ∈ Algebra.smoothLocus Γ(Y, U) Γ(X, V) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"296\", \"text\": \"lemma Scheme.Hom.isOpen_smoothLocus [LocallyOfFinitePresentation f] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"305\", \"text\": \"def Scheme.Hom.smoothLocus (f : X ⟶ Y) [LocallyOfFinitePresentation f] : X.Opens :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"306\", \"text\": \"  ⟨{ x | (f.stalkMap x).hom.FormallySmooth }, f.isOpen_smoothLocus⟩\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"308\", \"text\": \"lemma Scheme.Hom.mem_smoothLocus {f : X ⟶ Y} [LocallyOfFinitePresentation f] {x : X} :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The smooth locus of a flat finitely presented morphism is schematically dense in its geometrically reduced generic fibre",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "schematicallyDense|schematically_dense|smoothLocus|smooth_locus|geometricallyReduced",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give related smooth-locus definitions or algebra facts, not the full generic-fibre assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The smooth locus of a flat finitely presented family with geometrically reduced generic fibre is dense in that fibre",
+   "results": "Algebra.smoothLocus; AlgebraicGeometry.IsSmooth.casesOn; Algebra.isOpen_smoothLocus; Algebra.smoothLocus_eq_univ; AlgebraicGeometry.IsSmooth.recOn; Algebra.smoothLocus_eq_univ_iff; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.IsSmooth.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give related smooth-locus definitions or algebra facts, not the full generic-fibre assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.Hom.fiber",
+   "results": "; loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'",
+   "date": "2026-10-23",
+   "verdict": "no match: Loogle did not recognize the queried identifier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented morphism with geometrically reduced generic fibre, the smooth locus is schematically dense in the generic fibre",
+   "results": "Algebra.smoothLocus_eq_univ; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; Algebra.smoothLocus; Algebra.isOpen_smoothLocus; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension; Algebra.smoothLocus_eq_univ_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give related smooth-locus definitions or algebra facts, not the full generic-fibre assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over an arbitrary imperfect field a geometrically reduced variety has a dense smooth locus; a dense open in a reduced scheme induces an injective map of structure sheaves",
+   "results": "Algebra.IsGeometricallyReduced; Algebra.smoothLocus; Algebra.smoothLocus_eq_univ; AlgebraicGeometry.isReduced_of_isOpenImmersion; Algebra.isReduced_of_isGeometricallyReduced; Algebra.isOpen_smoothLocus; AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give related smooth-locus definitions or algebra facts, not the full generic-fibre assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-fibre-geometrically-reduced-open",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input in the descendant Tag 0578 argument: the second proof paragraph, dense smooth generic open, schematic density, and geometrically reduced fibres of the smooth open. The current lem-trf-local-term-locality proof invokes the contracting-correspondence theorem; this item supplies the retained constructibility branch below that ancestor.",
+   "via": [
+    "lem-trf-generic-fibre-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-smooth-open-schematic-generic-density",
+  "worker": "stage1",
+  "summary": "Read Stacks 0578, 056V, 01V9 and 056D; assembled every clause using existing nodes, distinguishing schematic-image equality from injectivity. No new nodes, statement correction or route replacement. No project Lean declaration states the complete item without sorry. Two semantic phrasings and source grep found no Mathlib leaf for the full item.",
+  "blueprint": "The retained descendant constructibility branch of lem-trf-local-term-locality, specifically Tag 0578 proof paragraph 2. Steps 1-5 give fibre finiteness, smoothness of the union, generic density, schematic density, and geometric reducedness of all smooth-open fibres.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-geometrically-reduced-dense-smooth-open",
+    "why": "Generic field-scheme density input of Stacks 056V; no node of this unit states it."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Convert finite type over the residue field to local finite presentation for the density lemma; a generic Noetherian-base tool."
+   },
+   {
+    "node": "lem-trf-flat-fibre-smooth-locus-image",
+    "why": "Pointwise smooth fibre to smooth source under flatness and local finite presentation, exactly the Stacks 01V9 step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-trf-flat-fibre-smooth-locus-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-31d83b67a",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-31d83b67a (reviewer sub-agent of L); spot-checked: Zero-new-node split: the item's statement and stmt_deps are unchanged against clones/live, where it is still unsplit, and no repair note exists. I read Stacks 0578 proof paragraph 2, 056V, set-points-where-fibres-smooth(1) and 056D, and the steps follow them exactly. Step 1: finite type by base change; Spec κ(y) is Noetherian, so X_y is Noetherian and descending chains stabilize via the minimal condition; open immersions into X_y are qc (locally Noetherian) and separated, hence qs; lft becomes lfp. Step 2: smooth is local on the source over the cover {T} of U. Step 3: the dense smooth locus of h_η (arbitrary field; node Lean-closed) lies in U_η by the flat+lfp fibre criterion. Step 4: X_η is reduced and j_η is qc, qs and dense, so SIm≅X_η; the injectivity of O_SIm→g^im_*O comes from lemma-nagata-scheme-image-ideal-qc, which correctly separates image equality from injectivity. Step 5: smooth ⇒ geometrically reduced fibres (Lean-closed). Edge cases checked: X empty, empty generic fibre, imperfect residue field, nonreduced Y. No duplicate of the item in the DAG and no SGA. The undeclared off-unit statements have closed Lean, so they are not route departures. Declared tool_uses accepted: 056V density; the lfp leaf and the same-unit fibre criterion are superfluous but harmless. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothOpenSchematicGenericDensity",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.smoothOpen_schematicGenericDensity",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothOpenSchematicGenericDensity.lean",
+  "statement": "theorem Scheme.Hom.smoothOpen_schematicGenericDensity {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [Flat f] [LocallyOfFinitePresentation f] [IrreducibleSpace Y] (η : Y) (hη : IsGenericPoint η Set.univ) [GeometricallyReduced (f.fiberToSpecResidueField η)] : Dense (((f.fiberι η) ⁻¹ᵁ f.smoothLocus) : Set (f.fiber η)) ∧ SchematicallyDenseOpen ((f.fiberι η) ⁻¹ᵁ f.smoothLocus) ∧ (∀ y : Y, LocallyOfFiniteType (f.fiberToSpecResidueField y) ∧ QuasiCompact (f.fiberToSpecResidueField y) ∧ TopologicalSpace.NoetherianSpace (f.fiber y) ∧ (∀ (T : Scheme.{u}) (j : T ⟶ f.fiber y), IsOpenImmersion j → QuasiCompact j ∧ QuasiSeparated j)) ∧ (∀ y : Y, GeometricallyReduced (((f.fiberι y) ⁻¹ᵁ f.smoothLocus).ι ≫ f.fiberToSpecResidueField y))",
+  "branch": "sheaf-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad6bd6d3e",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node and Stacks 0578 ¶2/056V/01V9/056D: finite type as LocallyOfFiniteType+QuasiCompact, Flat, LocallyOfFinitePresentation, IrreducibleSpace with IsGenericPoint η univ, GeometricallyReduced generic fibre; U = Mathlib f.smoothLocus (equals the union of smooth opens via preimage_smoothLocus_eq/smoothLocus_eq_top_iff); U_y = fiberι⁻¹ᵁ smoothLocus; Dense and SchematicallyDenseOpen generically; fibre finite type, NoetherianSpace and qc+qs open immersions; geometrically reduced U_y. No extra hypotheses or universe restriction; empty X, fibres and U are covered. Item differs from live only in lean and stmt_deps, which add the landed def-trf-schematically-dense-open (allowed, H2). lean.statement is verbatim; proof is sorry only; docstrings carry source and blueprint; report sections present. Advisory: sibling lem-trf-schematic-density-generic-fibre-open uses the pullback form of U_y; consumers need the standard pullbackRestrictIsoRestrict transport."
+ }
+}

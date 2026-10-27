@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-relative-regular-ideal-generation",
+ "kind": "statement",
+ "title": "Relative generation and polynomial multiplication from fibre regularity",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $n\\geq0$, $m\\geq1$, and $i:Z\\hookrightarrow X=\\mathbf P^n_T$ a closed immersion [def-weil-closed-immersion, def-nagata-projective-space-base-change], with $Z\\to T$ flat [def-weil-flat-morphism] and finitely presented (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated). Put $p:X\\to T$, $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$, $K_b=p_*\\mathcal I(b)$ and $V_e=\\mathcal O_T[x_0,\\ldots,x_n]_e$, using twists [def-pc-projective-space-twist] and ordinary pullback [def-pc-module-pullback]. Suppose $\\mathcal I$ is quasi-coherent of finite type and its canonical pullback to each geometric fibre is the ideal $\\mathcal I_{\\bar t}$ of $Z_{\\bar t}\\subset\\mathbf P^n_k$ [def-weil-geometric-fibre]. Assume these fibre ideals are coherent [pqf-def-coherent] and $m$-regular, meaning $H^j(\\mathbf P^n_k,\\mathcal I_{\\bar t}(m-j))=0$ for $1\\leq j\\leq n$ [pqf-def-cohomology]. Suppose, for every integer $b\\geq m$, that $K_b$ is finite locally free (locally a finite direct sum of $\\mathcal O_T$) and the canonical map $\\bar t^*K_b\\to H^0(\\mathbf P^n_k,\\mathcal I_{\\bar t}(b))$ is an isomorphism. Then the canonical evaluation map\n$$p^*K_m\\otimes\\mathcal O_X(-m)\\longrightarrow\\mathcal I$$\nis surjective, and for every integer $d\\geq m$ the canonical multiplication map\n$$V_{d-m}\\otimes_{\\mathcal O_T}K_m\\longrightarrow K_d$$\nis surjective. The multiplication map here is the one induced by multiplying sections of $\\mathcal O_X(d-m)$ with sections of $\\mathcal I(m)$, using the monomial identification $p_*\\mathcal O_X(d-m)=V_{d-m}$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 08A6 (lemma-m-regular-up), 08A7 (lemma-m-regular-multiply), 08A8 (lemma-m-regular-globally-generated), 00DV (lemma-NAK); fibrewise evaluation and iterated multiplication descended by local Nakayama"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "pqf-def-coherent",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\bar t:\\operatorname{Spec}k\\to T$ and write $q:X_{\\bar t}\\to X$, $\\mathcal F=\\mathcal I_{\\bar t}$. The hypotheses identify $q^*\\mathcal I$ with $\\mathcal F$ and $\\bar t^*K_m$ with $H^0(\\mathbf P^n_k,\\mathcal F(m))$. The twist transition functions pull back to the same functions $(x_i/x_j)^b$; thus $q^*\\mathcal O_X(b)=\\mathcal O_{X_{\\bar t}}(b)$. Pullback commutes with tensor products. Consequently the pullback of the evaluation map, after tensoring by $\\mathcal O(m)$, is the evaluation $H^0(\\mathcal F(m))\\otimes_k\\mathcal O\\to\\mathcal F(m)$. This identifies the actual map: on a standard chart its value on a pulled-back section $s$ and the local basis of $\\mathcal O(-m)$ is the restriction of $s$ times that basis. The canonical section base-change map in the hypothesis sends $s$ to exactly this restriction. The regularity node, applied with $a=b=m$, makes this evaluation surjective. Tensoring by the inverse local basis untwists it, so $q^*$ of the original evaluation is surjective.",
+   "uses": [
+    "lem-sfb-m-regular-coherent-sheaf-consequences",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pc-module-pullback",
+    "def-pc-projective-space-twist",
+    "lem-pc-twist-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/modules.tex",
+    "place": "08A8 (lemma-m-regular-globally-generated); 01CD (lemma-tensor-product-pullback); twist chart calculation"
+   }
+  },
+  {
+   "text": "Let $\\mathcal C$ be the cokernel of the original evaluation, and fix $x\\in X$. Its stalk $C_x$ is a quotient of the finite $\\mathcal O_{X,x}$-module $\\mathcal I_x$, hence finite. Choose an algebraic closure $\\Omega$ of $\\kappa(x)$ and the corresponding point $a:\\operatorname{Spec}\\Omega\\to X$. Its composite with $p$ is a geometric point of $T$, so $a$ factors through a geometric fibre where step 1 gives a surjective evaluation. Pullback preserves this surjectivity: its stalk maps are scalar extensions, and tensor is right exact. By the natural pullback-stalk formula and right exactness, $C_x\\otimes_{\\mathcal O_{X,x}}\\Omega=0$. The local-ring map to $\\Omega$ factors through $\\kappa(x)$, so this tensor product is $(C_x/\\mathfrak m_x C_x)\\otimes_{\\kappa(x)}\\Omega$. The nonzero-vector-space tensor lemma forces $C_x/\\mathfrak m_x C_x=0$. Apply the submodule form of local Nakayama to $0\\subset C_x$ to conclude $C_x=0$. Stalk exactness and the Zariski stalkwise surjectivity criterion now prove that the evaluation is surjective on $X$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-module-stalk-finite",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-pur-field-vector-space-tensor-nontrivial",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-locally-surjective-iff-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+    "place": "00DV (lemma-NAK), part (4); 00DF (lemma-tensor-product-exact); 0098 (lemma-stalk-pullback-modules); 01AG (lemma-abelian); 01B5 (definition-finite-type); 0H7H (lemma-characterize-epi-mono)"
+   }
+  },
+  {
+   "text": "Still on $\\mathbf P^n_k$, put $W_r=H^0(\\mathcal F(m+r))$ for $r\\geq0$. The regularity node makes each $W_r\\otimes_k H^0(\\mathcal O(1))\\to W_{r+1}$ surjective. By the projective twist cohomology formula, $H^0(\\mathcal O(1))$ has basis $x_0,\\ldots,x_n$. Inductively every element of $W_r$ is a finite sum $\\sum_{|\\alpha|=r}x^\\alpha s_\\alpha$ with $s_\\alpha\\in W_0$: for $r=0$ use $1\\cdot s$; for the successor first write a section as $\\sum_i x_i t_i$, expand each $t_i$ by induction, and collect the monomials $x_i x^\\alpha$. Therefore $k[x_0,\\ldots,x_n]_r\\otimes_k W_0\\to W_r$ is surjective. This includes $n=0$, with the single coordinate $x_0$; the induction uses only nonnegative polynomial degrees.",
+   "uses": [
+    "lem-sfb-m-regular-coherent-sheaf-consequences",
+    "lem-pc-projective-space-twist-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex; literature/stacks-project/coherent.tex",
+    "place": "08A6 (lemma-m-regular-up), 08A7 (lemma-m-regular-multiply), iterated; 01XT (lemma-cohomology-projective-space-over-ring)"
+   }
+  },
+  {
+   "text": "Fix $d\\geq m$ and put $r=d-m$. Under $\\bar t^*K_b=H^0(\\mathcal F(b))$ for $b=m,d$, the pullback of $\\mu_d:V_r\\otimes K_m\\to K_d$ is the polynomial multiplication of step 3. Indeed $V_r$ is free on the finitely many degree-$r$ monomials; tensoring its coefficients gives $\\bar t^*V_r=k[x_0,\\ldots,x_n]_r$. Pullback of the source tensor is the tensor of the pullbacks. For a local section $s$ of $K_m$ and a monomial $x^\\alpha$, the section base-change map sends $\\mu_d(x^\\alpha\\otimes s)=x^\\alpha s$ to $x^\\alpha\\bar s$, since restriction preserves scalar multiplication and the twist pairing has the chart formula of step 1. Thus the two maps agree on generators, hence on all tensors. In particular $\\bar t^*\\mu_d$ is surjective for every geometric point.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-pc-twist-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex; literature/stacks-project/coherent.tex",
+    "place": "01CD (lemma-tensor-product-pullback); 01XT (lemma-cohomology-projective-space-over-ring); defining section formula for multiplication"
+   }
+  },
+  {
+   "text": "Let $\\mathcal D=\\operatorname{Coker}(\\mu_d)$ on $T$ and fix $t\\in T$. Its stalk $D_t$ is a quotient of $(K_d)_t$, which is finite free by hypothesis, so $D_t$ is finite. Choose $\\Omega=\\overline{\\kappa(t)}$. Step 4, the natural pullback-stalk formula and right exactness give $D_t\\otimes_{\\mathcal O_{T,t}}\\Omega=0$, equivalently $(D_t/\\mathfrak m_tD_t)\\otimes_{\\kappa(t)}\\Omega=0$. The nonzero-vector-space tensor lemma implies $D_t/\\mathfrak m_tD_t=0$, and local Nakayama gives $D_t=0$. Stalk exactness and the Zariski stalkwise criterion prove $\\mu_d$ surjective. This holds separately for every $d\\geq m$. When $d=m$, its fibre calculation is simply multiplication by $1$; when $T$ is empty, both claims are vacuous because all the sheaves are zero.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-pur-field-vector-space-tensor-nontrivial",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-locally-surjective-iff-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+    "place": "00DV (lemma-NAK), part (4); 00DF (lemma-tensor-product-exact); 0098 (lemma-stalk-pullback-modules); 01AG (lemma-abelian); 0H7H (lemma-characterize-epi-mono)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-m-regular-coherent-sheaf-consequences",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-pc-module-pullback",
+  "def-pc-projective-space-twist",
+  "lem-pc-twist-tensor",
+  "lem-weil-pbc-finite-type-module-stalk-finite",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-pur-field-vector-space-tensor-nontrivial",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-locally-surjective-iff-stalks",
+  "lem-pc-projective-space-twist-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex; literature/stacks-project/algebra.tex",
+  "place": "08A6--08A8, followed by explicit local Nakayama descent (00DV); canonical-map comparisons on sections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "globally.generated|globalGeneration|[Rr]egularity|[Mm]ultiplication.*[Ss]urject",
+   "results": "{\"t\": \"2026-10-22T07:21:35Z\", \"tool\": \"grep\", \"query\": \"globally.generated|globalGeneration|[Rr]egularity|[Mm]ultiplication.*[Ss]urject\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, generating-section data or algebraic localization of a surjective map; none supplies the fibre-regularity argument and relative section multiplication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ideal sheaf generated by degree m sections and higher degrees are products of polynomials using fibrewise regularity",
+   "results": "{\"t\": \"2026-10-22T07:21:36Z\", \"tool\": \"leansearch\", \"query\": \"Relative ideal sheaf generated by degree m sections and higher degrees are products of polynomials using fibrewise regularity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop\", \"SheafOfModules.GeneratingSections.ofEpi_s\", \"SheafOfModules.GeneratingSections.mk\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"Ideal.degreeLE\", \"SheafOfModules.GeneratingSections.ctorIdx\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_radical\"], \"digest\": \"bc6e550ad9d4a2b3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, generating-section data or algebraic localization of a surjective map; none supplies the fibre-regularity argument and relative section multiplication."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-22T07:21:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.epi_of_surjective\", \"PresheafOfModules.surjective_of_epi\", \"PresheafOfModules.epi_iff_surjective\", \"PresheafOfModules.mono_iff_surjective\", \"PresheafOfModules.ModuleColimit.ιR_jointly_surjective\", \"PresheafOfModules.ModuleColimit.ιM_jointly_surjective\", \"PresheafOfModules.ModuleColimit.jointly_surjective₂\", \"PresheafOfModules.ModuleColimit.jointly_surjective₃\"], \"digest\": \"3446c69ed50484b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, generating-section data or algebraic localization of a surjective map; none supplies the fibre-regularity argument and relative section multiplication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nakayama descent of surjectivity of evaluation and multiplication of sections from geometric fibres",
+   "results": "{\"t\": \"2026-10-22T07:21:47Z\", \"tool\": \"leanfinder\", \"query\": \"Nakayama descent of surjectivity of evaluation and multiplication of sections from geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.pointsPi_surjective\", \"surjective_of_localized_maximal\", \"surjective_of_isLocalized_span\", \"RingHom.SurjectiveOnStalks.baseChange'\", \"RingHom.surjectiveOnStalks_iff_forall_ideal\", \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"surjective_of_isLocalized_maximal\", \"surjective_of_localized_span\"], \"digest\": \"54e72a939db98064\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, generating-section data or algebraic localization of a surjective map; none supplies the fibre-regularity argument and relative section multiplication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise Castelnuovo Mumford regularity gives relative global generation of projective ideal and surjective section multiplication",
+   "results": "{\"t\": \"2026-10-22T07:21:48Z\", \"tool\": \"leanfinder\", \"query\": \"Fibrewise Castelnuovo Mumford regularity gives relative global generation of projective ideal and surjective section multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"Module.basicOpen_subset_freeLocus_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\"], \"digest\": \"3f32ff7755441963\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern Proj charts, generating-section data or algebraic localization of a surjective map; none supplies the fibre-regularity argument and relative section multiplication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise Castelnuovo Mumford regularity gives relative global generation of projective ideal and surjective section multiplication",
+   "results": "{\"t\": \"2026-10-23T09:56:42Z\", \"tool\": \"leanfinder\", \"query\": \"Fibrewise Castelnuovo Mumford regularity gives relative global generation of projective ideal and surjective section multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"Module.basicOpen_subset_freeLocus_iff\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\"], \"digest\": \"3f32ff7755441963\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj chart maps, free-locus criterion, ideal-sheaf constructors and abstract generating-section data do not assert fibre regularity or relative generation and multiplication."
+  },
+  {
+   "tool": "grep",
+   "query": "Castelnuovo|[Mm]Regular|[Rr]egularity|[Mm]ultiplication.*[Ss]urject",
+   "results": "{\"t\": \"2026-10-23T09:57:43Z\", \"tool\": \"grep\", \"query\": \"Castelnuovo|[Mm]Regular|[Rr]egularity|[Mm]ultiplication.*[Ss]urject\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj chart maps, free-locus criterion, ideal-sheaf constructors and abstract generating-section data do not assert fibre regularity or relative generation and multiplication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative ideal sheaf generated by degree m sections and higher degrees are products of polynomials using fibrewise regularity",
+   "results": "{\"t\": \"2026-10-23T09:57:43Z\", \"tool\": \"leansearch\", \"query\": \"Relative ideal sheaf generated by degree m sections and higher degrees are products of polynomials using fibrewise regularity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop\", \"SheafOfModules.GeneratingSections.ofEpi_s\", \"SheafOfModules.GeneratingSections.mk\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"Ideal.degreeLE\", \"SheafOfModules.GeneratingSections.ctorIdx\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_radical\"], \"digest\": \"bc6e550ad9d4a2b3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj chart maps, free-locus criterion, ideal-sheaf constructors and abstract generating-section data do not assert fibre regularity or relative generation and multiplication."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-23T09:57:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.epi_of_surjective\", \"PresheafOfModules.surjective_of_epi\", \"PresheafOfModules.epi_iff_surjective\", \"PresheafOfModules.mono_iff_surjective\", \"PresheafOfModules.ModuleColimit.ιR_jointly_surjective\", \"PresheafOfModules.ModuleColimit.ιM_jointly_surjective\", \"PresheafOfModules.ModuleColimit.jointly_surjective₂\", \"PresheafOfModules.ModuleColimit.jointly_surjective₃\"], \"digest\": \"3446c69ed50484b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj chart maps, free-locus criterion, ideal-sheaf constructors and abstract generating-section data do not assert fibre regularity or relative generation and multiplication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity of evaluation and multiplication of homogeneous sections on projective space descends from geometric fibres for finite type ideal sheaves",
+   "results": "{\"t\": \"2026-10-23T09:57:46Z\", \"tool\": \"leanfinder\", \"query\": \"Surjectivity of evaluation and multiplication of homogeneous sections on projective space descends from geometric fibres for finite type ideal sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_surjective\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"HomogeneousLocalization.mk_surjective\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\"], \"digest\": \"eaa109c8c6c7d0d9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned Proj chart maps, free-locus criterion, ideal-sheaf constructors and abstract generating-section data do not assert fibre regularity or relative generation and multiplication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hilbert-uniform-section-bound",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; returned uniform-section-bound proof steps 7, 8",
+   "via": [
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-regular-ideal-generation",
+  "worker": "stage1",
+  "summary": "Reused the existing full field-regularity theorem and the existing stalk, tensor, finite-generation and Nakayama nodes. Wrote both canonical fibre comparisons, the induction expressing higher sections as polynomial products, and the two finite-cokernel descent arguments. No new nodes or statement changes. Checked n=0, d=m, empty base, zero and unit fibre ideals; no Noetherian hypothesis used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; returned uniform-section-bound proof steps 7, 8; this split realizes relative evaluation and iterated multiplication in the Hilbert prerequisite. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-module-stalk-finite",
+    "why": "Generic finite-stalk consequence of finite local generation, needed for Nakayama on the evaluation cokernel. This unit has no separate statement supplying it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-module-stalk-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-4c39f126a",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-4c39f126a (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full against Stacks 08A6/08A7/08A8 (varieties.tex ~l.6680-6760) and 00DV, and every cited statement. Statement, stmt_deps, source and blueprint are unchanged from live (live is still unsplit and this is the first delivery). No new nodes; proof_deps is exactly the union of the steps' uses; no SGA. Step 1: the canonical fibre evaluation is checked on charts, then the regularity node with b=m. Step 2: finite stalk C_x, a geometric point through the algebraic closure of kappa(x) factoring through X_tbar, right exactness of pullback (0098 + 00DF), field-tensor leaf, Nakayama, Zariski stalk criterion. Step 3: monomial induction from the multiplication clause with b=m+r, basis from twist-cohomology, n=0 included. Step 4: generator comparison of tbar^*mu_d using both base-change hypotheses (d>=m). Step 5: same descent with (K_d)_t finite free. Edge cases checked: Z empty, Z=X, n=0, d=m, T empty. Batch-5: def-sc-tensor-pullback-power-comparison is a general tensor/ordinary pullback comparison definition, not part of the trace formula or Poincare duality, so it is outside both assumptions. tool_use lem-weil-pbc-finite-type-module-stalk-finite accepted as generic. Advisory only: step 3's uses omit lem-pc-twist-tensor (associativity of the pairing); the node is in proof_deps. The source's typo in the 08A8 proof (H^0(F) for H^0(F(m))) is correctly noted and does not matter here."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeRegularIdealGeneration",
+  "declaration": "AlgebraicGeometry.HilbertSectionBound.relative_regular_ideal_generation",
+  "declarations": [
+   "AlgebraicGeometry.HilbertSectionBound.regularIdealMonomialMultiplier",
+   "AlgebraicGeometry.HilbertSectionBound.relative_regular_ideal_generation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeRegularIdealGeneration.lean",
+  "statement": "theorem relative_regular_ideal_generation {T Z : Scheme.{u}} (n : ℕ) (m : ℤ) (hm : 1 ≤ m) (i : Z ⟶ ℙ(ULift.{u} (Fin (n + 1)); T)) [IsClosedImmersion i] [Flat (i ≫ projection T n)] [LocallyOfFinitePresentation (i ≫ projection T n)] [QuasiCompact (i ≫ projection T n)] [QuasiSeparated (i ≫ projection T n)] (hfinite : Scheme.Modules.IsQuasiCoherentFiniteType i.ker.toModules) (hideal : ∀ (k : Type u) [Field k] [IsAlgClosed k] (g : Spec (.of k) ⟶ T), ∃ c : (Scheme.Modules.tensorPullback (ProjectiveSpace.map (ULift.{u} (Fin (n + 1))) g)).obj i.ker.toModules ≅ (pullback.snd i (ProjectiveSpace.map (ULift.{u} (Fin (n + 1))) g)).ker.toModules, c.hom ≫ (pullback.snd i (ProjectiveSpace.map (ULift.{u} (Fin (n + 1))) g)).ker.toModulesι = (Scheme.Modules.tensorPullback (ProjectiveSpace.map (ULift.{u} (Fin (n + 1))) g)).map i.ker.toModulesι ≫ Scheme.Modules.tensorPullbackObjUnitToUnit (ProjectiveSpace.map (ULift.{u} (Fin (n + 1))) g)) (hcoherent : ∀ (k : Type u) [Field k] [IsAlgClosed k] (g : Spec (.of k) ⟶ T), RingedSpace.IsCoherent (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace (pullback.snd i (ProjectiveSpace.map (ULift.{u} (Fin (n + 1))) g)).ker.toModules) (hregular : ∀ (k : Type u) [Field k] [IsAlgClosed k] (g : Spec (.of k) ⟶ T) (j : ℕ), 1 ≤ j → j ≤ n → Subsingleton ((RingedSpace.moduleCohomology (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace j).obj ((pullback.snd i (ProjectiveSpace.map (ULift.{u} (Fin (n + 1))) g)).ker.toModules ⊗ₘ twist (Spec (.of k)) n (m - (j : ℤ))))) (hfree : ∀ b : ℤ, m ≤ b → (idealSections i b).IsFiniteLocallyFree) (hbase : ∀ (b : ℤ), m ≤ b → ∀ (k : Type u) [Field k] [IsAlgClosed k] (g : Spec (.of k) ⟶ T), IsIso (Scheme.Modules.moduleBaseChangeMap (projection T n) (projection (Spec (.of k)) n) g (ProjectiveSpace.map (ULift.{u} (Fin (n + 1))) g) (ProjectiveSpace.map_over (ULift.{u} (Fin (n + 1))) g) (idealTwist i b))) : Epi (evaluation i m) ∧ ∀ e : ℕ, ∃ μ : polynomialModule T n e ⊗ idealSections i m ⟶ idealSections i (m + (e : ℤ)), Epi μ ∧ ∀ a : RelativeProjectiveSpace.monomials.{u} n e, (λ_ (idealSections i m)).inv ≫ MonoidalCategory.whiskerRight (C := T.Modules) (Sigma.ι (fun _ : RelativeProjectiveSpace.monomials.{u} n e ↦ 𝟙_ T.Modules) a) (idealSections i m) ≫ μ = regularIdealMonomialMultiplier i m e a",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Reuses the existing ideal/twist/section/evaluation/monomial constructions in HilbertUniformSectionBound; does not use its uniform-bound theorem. The canonical fibre ideal comparison is normalized by its inclusion, and the actual base-change map is used. Polynomial multiplication is specified on every monomial summand of the literal free homogeneous polynomial module. The index e : Nat parametrizes exactly all integers d=m+e >=m."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95e3c7818",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Snapshot node differs from live only by the new lean record; the 10 stmt_dep files equal live; lean.statement is verbatim; no name clash; module absent from live. Hypotheses match the node: closed immersion into the base-change P^n with Flat/LocallyOfFinitePresentation/QuasiCompact/QuasiSeparated on i≫projection; IsQuasiCoherentFiniteType ideal; hideal iso tied to the inclusions (independent of the adjunction choice); RingedSpace.IsCoherent fibre ideals; Subsingleton moduleCohomology j of I'⊗ₘO(m-j); IsFiniteLocallyFree K_b; IsIso of moduleBaseChangeMap on idealTwist b, which stays equivalent to the H^0 form after composing with canonical isos. Conclusions: Epi of the existing counit-based evaluation; for e:ℕ (exactly d≥m) an Epi μ fixed on every monomial summand by regularIdealMonomialMultiplier (multiplication by the actual monomial section, then the normalized twist pairing), unique since tensoring preserves coproducts. Edge cases n=0, e=0, T empty, Z=X, Z empty covered; k in Type u is not vacuous. A1: quantifying over all algebraically closed k is equivalent to κ(t)-bar (flatness, Noetherian fibre, field-extension invariance). M1 maintainer note: plain helpers come from the parent theorem's HilbertUniformSectionBound module (the parent's proof_deps cite the item), a stage-3 import cycle; no definition node owns them; extract them into a definition-node module (precedent Q129/Q99/Q120 PASS). M2: RingedSpace.IsCoherent vs the IsQuasiCoherentFiniteType record, the same as proof dep MRegularConsequences and equivalent on P^n_k. No file changed, so no compile; the worker reports a clean compile."
+ }
+}

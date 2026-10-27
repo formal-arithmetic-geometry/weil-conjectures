@@ -84,7 +84,18 @@
   "lem-weil-pbc-ind-etale-stability"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -175,5 +186,39 @@
   "landing": "20261015T212950-L-2073991",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $S$ be a scheme, $\\Lambda$ a ring, and $F$ a sheaf of $\\Lambda$-modules on\n$S_{\\Et}$. Let $(U_i)_{i\\in I}$ be a cofiltered diagram of quasi-compact\nquasi-separated etale $S$-schemes with affine transition maps, and let $U$ be\nan object of $S_{\\Proet}$ with compatible maps $U\\to U_i$ exhibiting\n$U=\\varprojlim_iU_i$ as a limit of schemes. Then the restriction maps of\n$\\nu_S^*F$ along $U\\to U_i$ induce an isomorphism\n\n$$\n \\varinjlim_i F(U_i)\\xrightarrow{\\ \\sim\\ }(\\nu_S^*F)(U).\n$$",
+  "proof": [
+   {
+    "text": "Let $P$ be the presheaf inverse image of $F$, the left Kan extension along the\ninclusion of [def-weil-pbc-site-comparison-morphism], so that $\\nu_S^*F$ is\nthe sheafification of $P$ and $P(V)=F(V)$ on etale objects.",
+    "uses": [
+     "def-weil-pbc-site-comparison-morphism"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Affine stages.* Suppose first that every $U_i$ is affine. Maps from the\ncofiltered limit $U$ of quasi-compact quasi-separated schemes with affine\ntransition maps into an etale, hence locally finitely presented, $S$-scheme\n$V$ form the filtered colimit of the sets of maps $U_i\\to V$, by the descent of\nfinite-presentation data in [lem-weil-pbc-etale-finite-data-descent]. Hence\nthe system $(U_i)$ is cofinal in the category computing $P(U)$, and\n$P(U)=\\varinjlim_iF(U_i)$. Restricted to such affine pro-etale objects, $P$ is\nalready a sheaf. A covering of an affine pro-etale object is refined by a finite\ncovering by affine pro-etale objects; writing its members as limits of affine\netale maps by [lem-weil-pbc-ind-etale-stability], its Cech diagram is the\nfiltered colimit of the Cech diagrams of etale coverings at the finite stages.\nThe sheaf condition for $F$ holds at every stage, and filtered colimits of\nmodules commute with the finite products and equalizers involved. The affine\npro-etale objects form a dense subsite of $S_{\\Proet}$\n([def-weil-pbc-ind-etale-basis], [lem-weil-pbc-ind-etale-basis], applied over\nthe affine opens of $S$), so sheafification does not change the sections of\na presheaf which is already a sheaf on that subsite. Thus\n$(\\nu_S^*F)(U)=P(U)=\\varinjlim_iF(U_i)$.",
+    "uses": [
+     "lem-weil-pbc-etale-finite-data-descent",
+     "lem-weil-pbc-ind-etale-stability",
+     "def-weil-pbc-ind-etale-basis",
+     "lem-weil-pbc-ind-etale-basis"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*General stages.* Fix $i_0$. As $U_{i_0}$ is quasi-compact and\nquasi-separated, choose a finite cover by affine opens $O_k$ together with\nfinite affine open covers $W_{klm}$ of the intersections $O_k\\cap O_l$. Their\npreimages in the $U_i$, $i\\to i_0$, are affine, so their preimages in $U$ are\naffine pro-etale objects presented by affine stages. They form a finite\n$1$-hypercover of $U$ and compatible etale $1$-hypercovers of the $U_i$. The\nsheaf conditions for $\\nu_S^*F$ on $U$ and for $F$ on each $U_i$ are equalizers\nof finite products; the affine case identifies the terms for $U$ with the\nfiltered colimits of the terms for the $U_i$, and filtered colimits commute with\nfinite limits. Hence $\\varinjlim_iF(U_i)\\to(\\nu_S^*F)(U)$ is an isomorphism.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

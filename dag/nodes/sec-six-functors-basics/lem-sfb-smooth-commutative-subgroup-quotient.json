@@ -1,0 +1,298 @@
+{
+ "id": "lem-sfb-smooth-commutative-subgroup-quotient",
+ "kind": "statement",
+ "title": "Smooth quotient by a smooth subgroup of a commutative group variety",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $G$ and $H$ be commutative $k$-group schemes [def-sc-group-scheme] that are smooth [def-sbc-smooth-morphisms], separated and of finite type [def-weil-pbc-scheme-conventions], and geometrically integral, meaning that their base changes to every field extension of $k$ are nonempty integral schemes [def-pc-integral-scheme, def-pc-base-change]. Let $i:H\\hookrightarrow G$ be a closed immersion of group schemes. There exist a smooth separated geometrically integral commutative $k$-group scheme $Q$ of finite type and a smooth surjective homomorphism $p:G\\to Q$ of finite presentation such that $p\\circ i=0$, $i$ identifies $H$ with the scheme-theoretic kernel of $p$, and the morphism\n$$G\\times_k H\\longrightarrow G\\times_QG,\\qquad(g,h)\\longmapsto(g,g+i(h))$$\nis an isomorphism [def-pc-fibre-product]. In particular, for every $k$-scheme $T\\to Q$, the pullback $G_T\\to T$ is faithfully flat and the corresponding morphism $G_T\\times_T H_T\\to G_T\\times_TG_T$ is an isomorphism. Here faithfully flat means flat and surjective, and finite presentation means locally of finite presentation, quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.14 (normal-subgroup quotient); Corollary 5.27 (torsor); Proposition 1.63 (smoothness with smooth kernel). Applied to commutative smooth geometrically integral group varieties. Geometric integrality of Q follows after field extension from the surjective quotient and its smoothness."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-pc-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-algebraic-group-homogeneous-quotient] with $L=H$ and $j=i$; its hypotheses hold because $G$ is separated and of finite type and $i$ is a closed immersion of group schemes, so $H$ is a closed subgroup scheme of $G$. No normality, smoothness or affineness is needed. Obtain a separated finite-type $k$-scheme $Q$ and a flat, surjective, finitely presented $k$-morphism $p:G\\to Q$ such that, for every $k$-scheme $U$ and $g,g'\\in G(U)$, $p(g)=p(g')$ in $Q(U)$ if and only if $g'=g+i(h)$ for some $h\\in H(U)$. This $h$ is unique: a closed immersion is locally defined by a surjective ring map, so two maps $U\\to H$ with equal composites to $G$ agree on each affine open of $U$, hence agree. Therefore $(g,h)\\mapsto(g,g+i(h))$ is a bijection $G(U)\\times H(U)\\to(G\\times_QG)(U)$ [def-pc-fibre-product]; its inverse sends $(g,g')$ to $(g,h)$ with $i(h)=g'-g$, and uniqueness makes both maps natural in $U$. Applying [lem-galois-yoneda-fully-faithful] on the category of $k$-schemes, the morphism $\\theta:G\\times_kH\\to G\\times_QG$, $(g,h)\\mapsto(g,g+i(h))$, is an isomorphism. The one-member family $\\{p\\}$ is an fpqc covering of $Q$ [def-weil-pbc-fpqc-covering]: $p$ is flat, and for an affine open $V\\subseteq Q$ the preimage $p^{-1}(V)$ is quasi-compact because $p$ is quasi-compact, so finitely many affine opens cover it, and their images cover $V$ because $p$ is surjective.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-galois-yoneda-fully-faithful",
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 5.28 with Definition 5.20, Proposition 5.24 and Proposition 5.25, printed pp.104-105"
+   }
+  },
+  {
+   "text": "Universal property with parameters. Let $T$ be a $k$-scheme and $p_T=p\\times_k\\mathrm{id}_T:G\\times_kT\\to Q\\times_kT$. Since $p_T$ is the base change of $p$ along the projection $Q\\times_kT\\to Q$, [lem-galois-fpqc-covering-base-change] makes $\\{p_T\\}$ an fpqc covering of $Q\\times_kT$. Its kernel pair $(G\\times_kT)\\times_{Q\\times_kT}(G\\times_kT)$ is $(G\\times_QG)\\times_kT$, which $\\theta\\times\\mathrm{id}_T$ of step 1 identifies with $G\\times_kH\\times_kT$, the two projections becoming $(g,h,t)\\mapsto(g,t)$ and $(g,h,t)\\mapsto(g+i(h),t)$. Hence a morphism $a:G\\times_kT\\to Y$ to a $T$-scheme $Y$ has equal composites with the two projections of the kernel pair exactly when $a(g+i(h),t)=a(g,t)$ on $G\\times_kH\\times_kT$. For such an $a$ which is a $T$-morphism, [lem-weil-pbc-fpqc-representable-descent] applied to the covering $\\{p_T\\}$ gives a unique morphism $\\bar a:Q\\times_kT\\to Y$ with $\\bar a\\circ p_T=a$; it is a $T$-morphism because its composite with $Y\\to T$ and the projection $Q\\times_kT\\to T$ agree after precomposition with $p_T$, so they agree by the uniqueness part of the same lemma applied with target $T$. The uniqueness part also shows that two morphisms out of $Q\\times_kT$ which agree after precomposition with $p_T$ are equal.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Q (lemma-fpqc-universal-effective-epimorphisms) for the covering p_T; Milne Proposition 5.21, printed p.104, is the case T = Spec k"
+   }
+  },
+  {
+   "text": "Write the law on $G$ additively. The map $(g_1,g_2)\\mapsto p(g_1+g_2)$ is unchanged when $g_1$ is replaced by $g_1+i(h_1)$. The universal property of step 2 with parameter $T=G$ therefore gives a unique morphism $b:Q\\times_kG\\to Q$. It is invariant under translation by $H$ in the second variable: after precomposing with $p\\times\\mathrm{id}_{G\\times H}$ the two maps are $p(g_1+g_2+i(h))$ and $p(g_1+g_2)$, equal by commutativity in $G$ and $H$-invariance of $p$; the uniqueness clause of step 2 with $T=G\\times_kH$ makes them equal before precomposition. Applying step 2 again, with parameter $T=Q$ and the factors interchanged, gives $m_Q:Q\\times_kQ\\to Q$ with $m_Q(p(g_1),p(g_2))=p(g_1+g_2)$. The map $g\\mapsto p(-g)$ is $H$-invariant since $-(g+i(h))=-g+i(-h)$, so it descends to $v_Q:Q\\to Q$. Set $e_Q=p\\circ e_G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.12 and the paragraph proving Theorem 5.14 after Theorem 5.28, printed pp.101,105; explicit parameterwise descent"
+   }
+  },
+  {
+   "text": "Precomposition with each map $p\\times\\mathrm{id}_T$ is injective on morphisms by the uniqueness clause of step 2. Repeatedly using this injectivity in each variable shows that maps out of $Q^r$ are equal whenever their composites with $p^r:G^r\\to Q^r$ are equal. Pull the associativity, commutativity, unit and inverse diagrams for $(m_Q,e_Q,v_Q)$ back along $p^3$, $p^2$, $p$ and $p$, respectively. They become the corresponding identities on $G$, followed by $p$, so they commute. These operations thus define a commutative group scheme [def-sc-group-scheme], and the defining identity for $m_Q$ says that $p$ is a homomorphism.",
+   "uses": [
+    "def-sc-group-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.12, printed p.101: checking the group diagrams by the quotient universal property"
+   }
+  },
+  {
+   "text": "Invariance gives $p\\circ i=p\\circ e_G\\circ(H\\to\\operatorname{Spec}k)=e_Q\\circ(H\\to\\operatorname{Spec}k)$, that is $p\\circ i=0$. For a $k$-scheme $U$ and $g\\in G(U)$, step 1 with $g'=0$ shows that $p(g)=e_Q$ exactly when $g=i(h)$ for a unique $h\\in H(U)$, naturally in $U$. Thus $i$ induces a natural bijection from $H(U)$ to the $U$-points of $\\ker p=G\\times_{Q,p,e_Q}\\operatorname{Spec}k$ [def-sc-group-scheme], and [lem-galois-yoneda-fully-faithful] identifies $i$ with the scheme-theoretic kernel inclusion. The isomorphism $\\theta:G\\times_kH\\simeq G\\times_QG$ of the statement is the one of step 1.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.24, printed pp.104-105, with Definition 1.1 and the scheme-theoretic kernel of Section 1(e)"
+   }
+  },
+  {
+   "text": "The base change of $p:G\\to Q$ along itself, namely the second projection $G\\times_QG\\to G$, is identified by $\\theta$ with $G\\times_kH\\to G$, $(g,h)\\mapsto g+i(h)$. This is the first projection $G\\times_kH\\to G$ composed with the automorphism $(g,h)\\mapsto(g+i(h),h)$ of $G\\times_kH$ (inverse $(g,h)\\mapsto(g-i(h),h)$), and the first projection is smooth by [lem-pc-proper-base-change](2), since $H\\to\\operatorname{Spec}k$ is smooth. The cover $p$ is flat, quasi-compact and surjective by step 1, so [lem-trf-smooth-fpqc-base-descent] applied with $f=p$ and $g=p$ makes $p$ smooth. To prove $Q$ smooth over $k$, apply [lem-sbc-smooth-flat-surjective-source-descent] with $q=p$ and $f:Q\\to\\operatorname{Spec}k$: $p$ is flat, surjective and locally of finite presentation, and $f\\circ p:G\\to\\operatorname{Spec}k$ is smooth by hypothesis.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-fpqc-base-descent",
+    "lem-sbc-smooth-flat-surjective-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VL (lemma-descending-property-smooth); Tag 05B5 (lemma-smooth-permanence), smooth case; Milne Proposition 1.62 and Proposition 1.63"
+   }
+  },
+  {
+   "text": "For every field extension $K/k$, [lem-weil-pbc-surjective-base-change] makes $p_K:G_K\\to Q_K$ surjective. Since $G$ is geometrically integral, $G_K$ is nonempty and irreducible. Thus $Q_K$ is nonempty and irreducible: if it were the union of two proper closed subsets, their inverse images under the continuous surjection would be two proper closed subsets covering $G_K$. Smoothness of $Q\\to\\operatorname{Spec}k$ implies that $Q$ is geometrically reduced by [sbc-lem-smooth-geometrically-reduced], hence $Q_K$ is reduced. It is therefore integral by [def-pc-integral-scheme]. As $K$ was arbitrary, $Q$ is geometrically integral.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T (lemma-smooth-geometrically-normal); morphisms.tex Tag 01S1 (lemma-base-change-surjective)"
+   }
+  },
+  {
+   "text": "Finally take an arbitrary $k$-scheme $T\\to Q$. The projection $G_T=G\\times_QT\\to T$ is flat by [lem-weil-pbc-flat-morphism-base-change] and surjective by [lem-weil-pbc-surjective-base-change], so it is faithfully flat. Pull back $\\theta$ along $T\\to Q$. The fibre-product universal property identifies its two sides with $G_T\\times_TH_T$ and $G_T\\times_TG_T$, where $H_T=H\\times_kT$, and the pulled-back map is exactly $(g,h)\\mapsto(g,g+i_T(h))$. Pullback preserves an isomorphism because the pullback of its inverse is an inverse. This proves the last clause with the stated map, including for empty or nonreduced $T$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1 (lemma-base-change-surjective) and Tag 01U9 (lemma-base-change-flat); Milne Corollary 5.27"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-galois-yoneda-fully-faithful",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-sc-group-scheme",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-weil-pbc-surjective-base-change",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-flat-morphism-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 5.28, Definition 5.20 and Propositions 5.12, 5.21, 5.24-5.27; explicit commutative descent and geometric-integrality argument, with Stacks Tags 023Q, 02VL, 05B5, 056T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth closed subgroup of a smooth connected commutative algebraic group has a smooth quotient and the quotient morphism is a torsor",
+   "results": "8 hits; ; logged top results: Subgroup.isQuotientCoveringMap_of_comm, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, AddSubgroup.isAddQuotientCoveringMap_of_comm, CategoryTheory.PreGaloisCategory.has_decomp_quotients, AddSubgroup.isAddQuotientCoveringMap, QuotientGroup.instT3Space, QuotientGroup.instT2Space, QuotientAddGroup.instT2Space",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group quotients and topological quotients do not construct a quotient group scheme; Scheme.Hom.liftQuotient concerns quotient coordinate rings, and Flat.isQuotientMap_of_surjective only a topological map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of a commutative algebraic group by a smooth closed subgroup is a smooth faithfully flat torsor",
+   "results": "8 hits; ; logged top results: QuotientAddGroup.instHasQuotientAddSubgroup, QuotientGroup.instT2Space, QuotientGroup.Quotient.commGroup, QuotientAddGroup.Quotient.addCommGroup, Con.commGroup, UnitAddTorus.span_mFourier_closure_eq_top, QuotientAddGroup.divisibleBy, LieSubmodule.Quotient.mk_eq_zero'",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group quotients and topological quotients do not construct a quotient group scheme; Scheme.Hom.liftQuotient concerns quotient coordinate rings, and Flat.isQuotientMap_of_surjective only a topological map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotient\"",
+   "results": "6 hits; ; logged top results: AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group quotients and topological quotients do not construct a quotient group scheme; Scheme.Hom.liftQuotient concerns quotient coordinate rings, and Flat.isQuotientMap_of_surjective only a topological map"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient|torsor",
+   "results": "25 hits; ; logged top results: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group quotients and topological quotients do not construct a quotient group scheme; Scheme.Hom.liftQuotient concerns quotient coordinate rings, and Flat.isQuotientMap_of_surjective only a topological map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of the quotient scheme of a commutative group variety by a smooth subgroup with the difference isomorphism G times H equals G times over Q G",
+   "results": "8 hits; ; logged top results: Subgroup.QuotientDiff, CommGrpCat.forget_isCorepresentable, Subgroup.instInhabitedQuotientDiff, CategoryTheory.yonedaGrpObjRepresentableBy, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, Rep.ofQuotient, CategoryTheory.CommGrp_Class.ofRepresentableBy",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract group quotients and topological quotients do not construct a quotient group scheme; Scheme.Hom.liftQuotient concerns quotient coordinate rings, and Flat.isQuotientMap_of_surjective only a topological map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of an algebraic group by a closed subgroup is represented by a separated scheme of finite type with a faithfully flat quotient morphism",
+   "results": "{\"t\": \"2026-10-23T13:18:16Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of an algebraic group by a closed subgroup is represented by a separated scheme of finite type with a faithfully flat quotient morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"QuotientGroup.instT2Space\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"QuotientGroup.instT1Space\", \"QuotientGroup.instT3Space\", \"QuotientAddGroup.instT2Space\", \"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\"], \"digest\": \"96190846ab35416f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem constructs the homogeneous or smooth commutative quotient group scheme; the hits concern topological or abstract group quotients, scheme coordinate-ring quotients, or generic smoothness instances."
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uotient|[Hh]omogeneous|[Tt]orsor",
+   "results": "{\"t\": \"2026-10-23T13:19:42Z\", \"tool\": \"grep\", \"query\": \"[Qq]uotient|[Hh]omogeneous|[Tt]orsor\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem constructs the homogeneous or smooth commutative quotient group scheme; the hits concern topological or abstract group quotients, scheme coordinate-ring quotients, or generic smoothness instances."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homogeneous space G modulo a closed subgroup H is represented by a finite type scheme and the quotient map is faithfully flat",
+   "results": "{\"t\": \"2026-10-23T13:19:43Z\", \"tool\": \"leansearch\", \"query\": \"A homogeneous space G modulo a closed subgroup H is represented by a finite type scheme and the quotient map is faithfully flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"QuotientAddGroup.isClosedMap_coe\", \"QuotientGroup.borelSpace\", \"QuotientGroup.instT2Space\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"Action.FintypeCat.quotientToQuotientOfLE\", \"QuotientGroup.isClosedMap_coe\", \"AlgebraicGeometry.Flat\"], \"digest\": \"b640eec0781cea6f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem constructs the homogeneous or smooth commutative quotient group scheme; the hits concern topological or abstract group quotients, scheme coordinate-ring quotients, or generic smoothness instances."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-23T13:19:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.eq_bot_of_comp_quotientMk_eq_sigmaSpec\"], \"digest\": \"89e96788b3d05575\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem constructs the homogeneous or smooth commutative quotient group scheme; the hits concern topological or abstract group quotients, scheme coordinate-ring quotients, or generic smoothness instances."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability of right cosets of a closed subgroup of a nonaffine algebraic group by a homogeneous scheme",
+   "results": "{\"t\": \"2026-10-23T13:19:44Z\", \"tool\": \"leanfinder\", \"query\": \"Representability of right cosets of a closed subgroup of a nonaffine algebraic group by a homogeneous scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Rep.ofQuotient\", \"Representation.ofQuotient\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Rep.quotientToInvariants\", \"Rep.quotientToCoinvariants\", \"MulAction.isPretransitive_quotient\", \"Action.FintypeCat.term_⧸ₐ_\"], \"digest\": \"f0fbea6d690eaae6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem constructs the homogeneous or smooth commutative quotient group scheme; the hits concern topological or abstract group quotients, scheme coordinate-ring quotients, or generic smoothness instances."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth closed subgroup of a commutative group scheme over a field has a geometrically integral smooth quotient group scheme and a smooth torsor projection",
+   "results": "{\"t\": \"2026-10-23T13:45:54Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth closed subgroup of a commutative group scheme over a field has a geometrically integral smooth quotient group scheme and a smooth torsor projection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.isSmooth_iff\"], \"digest\": \"5632fab7eb0cf987\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no theorem constructs the homogeneous or smooth commutative quotient group scheme; the hits concern topological or abstract group quotients, scheme coordinate-ring quotients, or generic smoothness instances."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-inclusion-multiple-retraction",
+  "date": "2026-10-23",
+  "group": "Q103"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: An abelian inclusion retracts up to a positive integer. Supporting input: Theorem 5.14 (normal-subgroup quotient); Corollary 5.27 (torsor); Proposition 1.63 (smoothness with smooth kernel). Applied to commutative smooth geometrically integral group varieties. Geometric integrality of Q follows after field extension from the surjective quotient and its smoothness.",
+   "via": [
+    "lem-sfb-abelian-inclusion-multiple-retraction",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-commutative-subgroup-quotient",
+  "worker": "stage1",
+  "summary": "Read Milne 5.12, 5.20-5.28 and B.37; the homogeneous quotient is the existing node lem-sfb-algebraic-group-homogeneous-quotient; the parametrised universal property is derived from it by fpqc descent of morphisms (Tag 023Q), then the explicit commutative group-law construction, pointwise kernel and torsor calculation, fpqc smoothness descent, and geometric-integrality argument. Reused existing smoothness, descent and base-change nodes; no new node. Statement unchanged. (Reviewer FIX: duplicate new node lem-sfb-algebraic-homogeneous-quotient-existence dropped.)",
+  "blueprint": "Auxiliary quotient input on the existing from.place chain of det-thm-sf-ctf-stability-direct-images proof (3), used by lem-sfb-abelian-inclusion-multiple-retraction. Latest blueprint direct-images proof (3) and the inherited unit route retained. Ancestor helper prints None for this created-node chain; retained the item ancestor null and the complete inherited via list.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-flat-surjective-source-descent",
+    "why": "Generic smoothness descent along a flat surjective locally finitely presented source; used solely to show Q is smooth, not as a replacement for any unit argument."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Uses only clause (2), stability of smoothness under arbitrary scheme base change, to make the projection G times H to G smooth; this is a generic geometry tool, not the proper-base-change route of another unit."
+   },
+   {
+    "node": "lem-trf-smooth-fpqc-base-descent",
+    "why": "Generic Stacks Tag 02VL (smoothness is fpqc local on the base, Mathlib status); used only to make p smooth; neither the trace formula nor Poincare duality is used."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic Stacks Tag 023Q descent of morphisms along the fpqc covering p_T; gives the parametrised quotient universal property."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic base change of fpqc coverings, to make p times id_T an fpqc covering."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-flat-surjective-source-descent",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-fpqc-base-descent",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-fpqc-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-d86be5764",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-d86be5764 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement, and checked them against Milne iAG pp.24-25 and 101-105 (1.62/1.63, 5.12, 5.14 and its proof, 5.20-5.28) and Stacks 02VL, 05B5, 056T, 01S1, 01U9, 023Q. Main fault: the new node lem-sfb-algebraic-homogeneous-quotient-existence duplicates the existing lem-sfb-algebraic-group-homogeneous-quotient (Q43, on base). The existing node already gives the same Milne 5.28 result with a separated finite-type X, p flat, surjective and of finite presentation, and the coset criterion for every k-scheme T. The only extra clause, the universal property with parameters, follows from it by fpqc descent of morphisms. FIX: dropped the node. In the rewritten item, step 1 applies the existing node, gets the inverse of theta by Yoneda (h is unique because i is a monomorphism), and shows {p} is an fpqc covering. A new step 2 proves the universal property for all T: lem-galois-fpqc-covering-base-change makes {p_T} a covering, and lem-weil-pbc-fpqc-representable-descent (Tag 023Q) descends along it through the kernel pair, which is G x H x T. The old steps 2-7 are kept as steps 3-8. The kernel step is simpler because the coset criterion now holds for all U. In the smoothness step I made explicit that theta turns the base change into (g,h)->g+i(h), which is the first projection composed with an automorphism. Group law, axioms, kernel, smoothness, geometric integrality and the T-pullback are all correct. I checked the cases H=0, H=G and the diagonal G_a in G_a^2. No SGA citation. Batch-5: lem-trf-smooth-fpqc-base-descent is the generic Stacks 02VL result (mathlib status, no proof deps). It is neither assumption and not a step of either assumption's proof, so it is accepted and recorded in tool_uses. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

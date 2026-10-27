@@ -18,149 +18,50 @@
  ],
  "proof": [
   {
-   "text": "First verify that $\\underline D$ is a sheaf on the profinite site. Continuous maps out of a finite disjoint union are exactly tuples of continuous maps; the empty union gives a singleton. For a continuous surjection $q:S\\to T$ of profinite spaces, use the compact-to-Hausdorff quotient theorem. A continuous map $b:S\\to D$ equal on $S\\times_T S$ defines a unique function $c:T\\to D$ with $cq=b$. For every open $O\\subset D$, $q^{-1}(c^{-1}O)=b^{-1}O$ is open, hence $c^{-1}O$ is open by the quotient property. Thus the equalizer condition holds, and the profinite coherent-sheaf criterion applies. Independently, the fpqc continuous-map sheaf theorem, restricted to the small pro-etale site (whose covers are fpqc), gives the sheaf $F_{D,X}$.",
+   "text": "Restrict Mathlib's fpqc continuous-map sheaf along the small pro-etale forgetful functor, using that pro-etale coverings are fpqc. This proves continuousSetPresheaf_isSheaf before bundling continuousSetSheaf. The component formula is definitionally the inverse of Mathlib's connected-component factorization equivalence; the discrete comparison is the last clause of continuousSet_descent_components.",
    "uses": [
-    "lem-sfb-compact-hausdorff-surjection-quotient",
-    "lem-sfb-profinite-coherent-sheaf-criterion",
-    "lem-sfb-set-continuous-functions-fpqc-sheaf",
-    "def-weil-pbc-proetale-site"
+    "lem-sfb-continuous-set-proetale-descent",
+    "lem-sfb-continuous-set-descent-components"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 4.3.2(1) and 4.2.12, quotient-map descent; Example 3.1 of Hemo--Richarz--Scholbach."
-   }
+   "elementary": false
   },
   {
-   "text": "For a qcqs object $U$, its space is spectral and therefore its component quotient $q_U:|U|\\to\\pi_0(U)$ is profinite, by the two cited statements. A continuous $s:|U|\\to D$ is constant on each connected component: its image there is connected, and a totally disconnected space has no connected subset with two points. Consequently $s=\\bar s q_U$ uniquely. The quotient topology makes $\\bar s$ continuous, since $q_U^{-1}(\\bar s^{-1}O)=s^{-1}O$ for each open $O$. Conversely composition with $q_U$ is continuous. These inverse operations give the asserted component formula; they commute with precomposition in $U$ and postcomposition in $D$.",
+   "text": "The normalized Kan-evaluation theorem gives a unique normalized morphism sigma and a bijection on every affine object weakly contractible for set sheaves. Convert the epimorphism-surjectivity property of the affine covering-family theorem into its locally-surjective definition of weak contractibility using Mathlib's equivalence between locally surjective set-sheaf maps and epimorphisms.",
    "uses": [
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "lem-pe-spectral-components-profinite"
+    "lem-sfb-normalized-continuous-set-kan-evaluation",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.12, second assertion; proof, last paragraph."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $X[S]$ for the relative test object of the cited functor theorem. Its canonical identification with $X\\times_{\\operatorname{Spec}\\mathbf Z}a(S)$ follows from its finite-quotient presentation: pulling back $\\coprod_{S_i}\\operatorname{Spec}\\mathbf Z$ gives $\\coprod_{S_i}X$, because the summands are a disjoint open covering. These identifications commute with the transition maps. The pullback of the limit has the same universal property as the limit of these pullbacks: a map into either is precisely a compatible family of maps to the stages over $X$. Thus the identification is canonical and natural in $S$ and $X$. The inverse of the spectrum homeomorphism in the third citation, for $R=\\mathbf Z$, followed by projection to $S$ gives a continuous map $|a(S)|\\to S$, hence $r_{X,S}:|X[S]|\\to S$. On finite clopen partitions this sends a prime to the unique summand containing it; precomposition of locally constant functions carries that label to its image. Hence $r_{X,T}|X[v]|=v r_{X,S}$ for $v:S\\to T$, and $r_{X,S}$ commutes with base change in $X$.",
+   "text": "For an arbitrary object choose its affine weakly contractible covering. Every arrow of this cover lies in the equalizer sieve for two sections with equal sigma image, by injectivity on that affine and naturality. Every arrow likewise lies in the image sieve of any target section, by surjectivity on that affine. Their generated covering sieves therefore prove local injectivity and local surjectivity. Apply the set-sheaf local-bijection criterion to obtain IsIso sigma. The uniqueness already supplied by Kan evaluation proves unique existence with normalization and IsIso, and its specification proves continuousSetRealizationHom_spec.",
    "uses": [
-    "lem-weil-pbc-profinite-test-object-functor",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-locally-constant-prime-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1, relative profinite test objects and the projection to their profinite index; compare Bhatt--Scholze Lemma 4.2.13 proof."
-   }
-  },
-  {
-   "text": "Let $a_X(S)=X[S]$ and let $P_F=\\operatorname{Lan}_{a_X^{op}}F$. The site inverse-image theorem applies to $a_X$, by its finite-limit and covering properties. Its sheafified Kan extension is the actual $p_X^*$ in the statement: for every sheaf $G$ on $X_{\\mathrm{proet}}$, the composite adjunction for $\\pi_X^{-1}a^*$ gives $\\operatorname{Hom}(p_X^*F,G)=\\operatorname{Hom}(F,(S\\mapsto G(X\\times a(S))))$, whereas the Kan/sheafification adjunction gives $\\operatorname{Hom}(P_F^\\#,G)=\\operatorname{Hom}(F,(S\\mapsto G(X[S])))$. Step 3 identifies the right sides, with their units. Applying these two natural bijections to identity maps yields inverse maps $p_X^*F\\leftrightarrows P_F^\\#$; their composites are identities because their adjoints are identities. This fixes the comparison uniquely with its unit normalization.",
-   "uses": [
-    "lem-weil-pbc-profinite-test-object-functor",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-weil-pbc-profinite-point-pullback",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-composite-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1, interpretation of pullback from the point; explicit adjunction calculation for the fixed inverse image."
-   }
-  },
-  {
-   "text": "The maps $b\\mapsto b\\circ r_{X,S}$ define a natural transformation $\\underline D(S)\\to F_{D,X}(X[S])$ by the naturality equation of step 3. Kan extension and sheafification therefore give a morphism $\\sigma_{D,X}:p_X^*\\underline D\\to F_{D,X}$, normalized by sending each test function $b$ to $b\\circ r_{X,S}$. This is a genuine morphism of set sheaves, using step 1, rather than a comparison only of section sets. The adjunction bijection shows that these equations on all $S,b$ determine $\\sigma_{D,X}$ uniquely.",
-   "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1, continuous-function realization; canonical test-function map made explicit."
-   }
-  },
-  {
-   "text": "Let $U$ be a weakly contractible affine object and $T=\\pi_0(|U|)$; $U$ is qcqs, so $T$ is profinite and every continuous map $|U|\\to S$ to a profinite $S$ is $gq_U$ for a unique $g\\in C(T,S)$ (step 2 with $D=S$). Claim: $\\phi\\mapsto r_{X,S}|\\phi|$ is a bijection from $\\operatorname{Hom}_X(U,X[S])$ onto $C(|U|,S)$. For finite $S$, $X[S]=\\coprod_SX$ with disjoint open summands covering it and $r_{X,S}$ the summand label (step 3); an $X$-map $\\phi:U\\to\\coprod_SX$ gives the open disjoint covering $U_s=\\phi^{-1}(\\iota_s X)$, on which $\\phi=\\iota_s\\circ(U_s\\to X)$, and conversely a continuous $g:|U|\\to S$ gives open disjoint $U_s=g^{-1}(s)$ and the glued map $\\iota_s\\circ(U_s\\to X)$ on them. For $S=\\varprojlim S_i$ over its finite quotients, $X$-maps to the limit $X[S]$ and continuous maps to $S$ are compatible families over the $S_i$, matched by the naturality $r_{X,S_i}|X[p_i]|=p_ir_{X,S}$ of step 3. Let $\\phi_0:U\\to X[T]$ be the map with $r_{X,T}|\\phi_0|=q_U$. If $r_{X,S}|\\phi|=gq_U$, naturality gives $r_{X,S}|X[g]\\phi_0|=gq_U$, so $\\phi=X[g]\\phi_0$ by the claim. Hence every element $[(S,\\phi),b]$ of the Kan colimit $P_{\\underline D}(U)=\\operatorname{colim}_{(U\\to X[S])}C(S,D)$ equals $[(T,\\phi_0),bg]$. By step 5, the presheaf adjunct of $\\sigma_{D,X}$ sends $[(S,\\phi),b]$ to $\\phi^*(br_{X,S})=br_{X,S}|\\phi|$, hence $[(T,\\phi_0),c]$ to $cq_U$. This map $P_{\\underline D}(U)\\to C(|U|,D)$ is surjective by step 2 and injective since $c\\mapsto cq_U$ is injective ($q_U$ surjective). It is $\\sigma_{D,X}(U)$ composed with $P_{\\underline D}(U)\\to P_{\\underline D}^\\#(U)\\cong(p_X^*\\underline D)(U)$ (step 4), which is bijective by the sheafification-sections theorem; so $\\sigma_{D,X}(U)$ is bijective. Every site object has a covering by such affines. Thus $\\sigma_{D,X}$ is locally surjective and locally injective, and the set-sheaf local-bijection theorem makes it an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
+    "lem-sfb-normalized-continuous-set-kan-evaluation",
     "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
     "lem-galois-set-sheaf-local-bijection-isomorphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1, second paragraph: factorization through U -> pi_0 U on w-contractible affines; Bhatt--Scholze Lemma 4.2.13(1) proof, (S (x) X)(U) = Map_cont(pi_0(U),S)."
-   }
+   "elementary": false
   },
   {
-   "text": "For a continuous map $h:D\\to D^{\\prime}$, both ways around the naturality square for $\\sigma$ send a test function $b:S\\to D$ to $hbr_{X,S}$, so uniqueness in step 5 gives equality. Finite products of the function sheaves are computed by $(b_i)\\mapsto(s\\mapsto(b_i(s))_i)$, on both the profinite and the scheme sites. The site inverse-image theorem gives finite-product preservation for $p_X^*$. The projections of the proposed product comparison are the preceding naturality squares, so they determine the comparison uniquely. For the one-point space there is exactly one section on every object; this also proves the empty-product assertion.",
+   "text": "Apply the normalized-comparison coherence theorem to continuousSetRealizationHom and its normalization specification. Project its coefficient, finite-product, scheme-square, identity and composition clauses, reversing the displayed equations where needed. In the scheme square, both normalized realization maps and the point comparison are isomorphisms, so IsIso.of_isIso_comp_left proves invertibility of the actual continuousSetPullbackMap. Its direct-image naturality prerequisite is proved directly by the first-projection identity for the base-change pullback map.",
    "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+    "lem-sfb-normalized-continuous-set-comparison-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1, naturality in the topological coefficient; finite-product refinement by the displayed function formulas."
-   }
-  },
-  {
-   "text": "For $f:Y\\to X$, define $\\rho_f:F_{D,X}\\to f_*F_{D,Y}$ by $s\\mapsto s\\circ|\\operatorname{pr}_X|$ on $V\\times_X Y$. Let $c_f:f^{-1}F_{D,X}\\to F_{D,Y}$ be its adjunct. Under $\\sigma_{D,X}$ and $\\sigma_{D,Y}$ this is the canonical comparison $f^{-1}p_X^*\\underline D\\to p_Y^*\\underline D$ of the point-pullback theorem: transpose both maps through the composite adjunction and evaluate on $b:S\\to D$. Each sends $b$ to $br_{Y,S}$, because $r_{X,S}|\\operatorname{pr}_X|=r_{Y,S}$ under $Y\\times_X X[S]=Y[S]$ (step 3). Injectivity of the adjunction hom bijection proves equality. Consequently $c_f$ is an isomorphism. For the identity, $s\\circ\\mathrm{id}=s$. For $Z\\xrightarrow{g}Y\\xrightarrow{f}X$, the two adjuncts act by $s\\mapsto s\\circ\\operatorname{pr}_{VX}\\circ\\operatorname{pr}_{VY}$ and $s\\mapsto s\\circ\\operatorname{pr}_{VX}$ on the canonically identified iterated pullback, hence agree. Equivalently use the identity/composition coherence already asserted for the point-pullback comparison.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-profinite-point-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1 and following paragraph, arbitrary scheme pullback; normalization against the actual inverse-image adjunction."
-   }
-  },
-  {
-   "text": "If $D$ is discrete, map the constant presheaf with value $D$ into $F_{D,X}$ by constant functions. Any $s:|U|\\to D$ is locally in its image: the open fibres $s^{-1}\\{d\\}$ cover $U$, and on each fibre $s$ is the constant $d$. For two constants $d,e$ with identical functions on $U$, either $U$ is nonempty and evaluation at a point gives $d=e$, or $U$ is empty and the empty covering makes them locally equal. Thus the presheaf map is locally bijective, including $D=\\varnothing$. The cited set-valued sheafification criterion and the definition of constant sheaf identify its sheafification with $F_{D,X}$. This proves the discrete clause without a finiteness assumption on $D$.",
-   "uses": [
-    "lem-cbc-set-presheaf-sheafification-local-bijection",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.12, last assertion, expanded using the open fibres and the empty covering."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-sheafification",
-  "def-weil-proetale-inverse-image",
-  "lem-cbc-set-presheaf-sheafification-local-bijection",
   "lem-galois-set-sheaf-local-bijection-isomorphism",
-  "lem-pe-spectral-components-profinite",
-  "lem-sfb-compact-hausdorff-surjection-quotient",
-  "lem-sfb-profinite-coherent-sheaf-criterion",
-  "lem-sfb-set-continuous-functions-fpqc-sheaf",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-locally-constant-prime-spectrum",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-profinite-test-object-functor",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-scheme-coproduct-family"
+  "lem-sfb-continuous-set-descent-components",
+  "lem-sfb-continuous-set-proetale-descent",
+  "lem-sfb-normalized-continuous-set-comparison-coherence",
+  "lem-sfb-normalized-continuous-set-kan-evaluation",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Example 3.1, set-valued adaptation with explicit test-function normalization; Bhatt--Scholze Lemmas 4.2.12, 4.2.13 and 4.3.2(1)."
+  "place": "Example 3.1, p. 6, assembly of the existing normalized Kan-evaluation and comparison-coherence lemmas; Bhatt--Scholze Lemma 4.2.12, pp. 30--31. Lean assembly by J1, 2026-10-23."
  },
  "mathlib_searches": [
   {
@@ -260,121 +161,46 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-totally-disconnected-coefficient-realization",
   "worker": "stage1",
-  "summary": "Proved the set-valued comparison by normalized test-function adjunction and evaluation on weakly contractible affines, with explicit target naturality, finite products, arbitrary scheme pullback coherence, and discrete/empty edge cases. Reused all general Kan, sheafification, component, and covering lemmas. Added only the exact Mathlib leaf for fpqc descent of continuous set-valued functions; no ring or field structure is imposed on D. Statement unchanged.",
+  "summary": "Repair of the 7989-character proof: four independently workable statement-only nodes preserve the descent/components/discrete argument, label geometry, normalized Kan evaluation, and coherence; assembly below 3000 characters. Statement unchanged. Original steps and their complete mapping are retained in report.md.",
   "blueprint": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), continuous coefficient realization before monodromy and finite-model arguments; Hemo--Richarz--Scholbach Example 3.1, first two paragraphs, and Bhatt--Scholze Lemma 4.2.12.",
   "tool_uses": [
-   {
-    "node": "lem-cbc-set-presheaf-sheafification-local-bijection",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
    {
     "node": "lem-galois-set-sheaf-local-bijection-isomorphism",
     "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
    },
    {
-    "node": "lem-pe-spectral-components-profinite",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-sfb-compact-hausdorff-surjection-quotient",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-sfb-profinite-coherent-sheaf-criterion",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-locally-constant-prime-spectrum",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
     "node": "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-profinite-point-pullback",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-profinite-test-object-functor",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-qcqs-scheme-spectral",
-    "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
-   },
-   {
-    "node": "lem-weil-pbc-scheme-coproduct-family",
     "why": "Generic site, profinite test-object, component-topology or sheaf-locality infrastructure for the continuous-coefficient realization in Example 3.1; no finite-model or monodromy argument is replaced."
    }
   ]
  },
  "tool_uses": [
-  "lem-cbc-set-presheaf-sheafification-local-bijection",
   "lem-galois-set-sheaf-local-bijection-isomorphism",
-  "lem-pe-spectral-components-profinite",
-  "lem-sfb-compact-hausdorff-surjection-quotient",
-  "lem-sfb-profinite-coherent-sheaf-criterion",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-locally-constant-prime-spectrum",
-  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
-  "lem-weil-pbc-proetale-sheafification-wcontractible-sections",
-  "lem-weil-pbc-profinite-point-pullback",
-  "lem-weil-pbc-profinite-test-object-functor",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-scheme-coproduct-family"
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NY-4251c005b",
-  "group": "NY",
+  "reviewer": "NT-cc-NV-11c5bfb4f",
+  "group": "NV",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-4251c005b (reviewer sub-agent of L); spot-checked: FIX: one C3 repair, in step 6. I read the item, the new leaf, every cited statement, HRS Example 3.1 (p. 6), Bhatt–Scholze Lemmas 4.2.12 and 4.2.13 (pp. 30–31), and Mathlib Sites/ConstantSheaf.lean lines 44-46 and 68-85.\n\nNew node lem-sfb-set-continuous-functions-fpqc-sheaf: it is an exact Mathlib leaf (isSheaf_fpqcTopology_continuousMapPresheaf; arbitrary topological T, set-valued). It is not a duplicate: lem-cbc-continuous-functions-fpqc-sheaf is the abelian ...Ab declaration, and the other continuous-function nodes are ring-valued. It does not restate a clause of the item.\n\nSteps 1-5 and 7-9 hold:\n- step 1: quotient-map descent on profinite sets, and the fpqc leaf restricted to X_proet;\n- step 2: the component formula for qcqs objects through the spectral to profinite π0 nodes;\n- step 3: X[S] = X x_Z a(S), and the naturality of r, checked on evaluation primes;\n- step 4: p_X^* is identified with the sheafified Kan extension along a_X because their right adjoints agree;\n- step 5: σ is the adjunct of b ↦ b∘r;\n- step 7: naturality in D, finite products and the one-point space;\n- step 8: pullback along f, by transposing through f^{-1}π_X^{-1}a^* with r_X∘pr = r_Y;\n- step 9: the discrete case by the presheaf local-bijection criterion, including D empty and U empty.\n\nC3 fault in step 6: the step identified σ(U) with b ↦ b∘q_U only through the explicit forms in the proofs of lem-weil-pbc-point-lan-affine-evaluation and lem-weil-pbc-proetale-point-components-maps; their statements say only 'canonical isomorphism' and 'natural bijection'. Step 6 now proves Hom_X(U,X[S]) ≅ C(|U|,S), φ ↦ r∘|φ|, for finite S from the coproduct-family node and step 3, then for profinite S by compatible families. From this it shows that every Kan-colimit class equals one at (π0 U, φ0), so the adjunct of σ is c ↦ c∘q_U, which is bijective. The step then concludes with the sheafification-sections, weakly contractible covering and local-bijection nodes. The two nodes it no longer cites were removed from proof_deps and from split_report.tool_uses.\n\nOther checks: the remaining off-unit citations are generic site, Kan and profinite tools, accepted as tool uses. No cycle (BFS over 201 nodes). No SGA source. Not a re-split item.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-11c5bfb4f (reviewer sub-agent of L); spot-checked: Re-split (human note of 2026-10-21, applied 2026-10-22) is done properly. The item's nine steps (7989 chars) map onto four statement-only unsplit nodes of comparable size, about 1.6-2.4k chars of old proof each: (1) descent-components takes old steps 1, 2 and 9; (2) relative-profinite-test-labels takes step 3 and the Hom-bijection half of step 6; (3) normalized-continuous-set-kan-evaluation takes steps 4, 5 and the Kan/sheafification half of step 6; (4) normalized-continuous-set-comparison-coherence takes steps 7 and 8. The item's assembly is 4 steps and 1573 chars. Nothing is dropped, and none of the new nodes is the whole item: the global iso and the invertibility of c_f are assembled only in the item. Sources checked: HRS Example 3.1 p.6 and Bhatt-Scholze Lemmas 4.2.12 and 4.2.13(1) and the proof of 4.3.2(1), pp.30-31; no SGA. Each new statement was checked mathematically: quotient descent for arbitrary D; the pi0 factorization needs only total disconnectedness; the Hom bijection phi -> r|phi| holds for any affine U (clopen partitions for finite S, then limits for profinite S); P_H^# = p_X^*H by comparing right adjoints through X[S] = X x_Z a(S); the Kan normal form [(T,phi_U),c] -> c q_U is bijective; coherence follows by transposing with r_X o pr = r_Y. Edge cases checked: D, S, U, X empty, the one-point space, and infinite discrete D. The item's steps cite what they use. Tool uses accepted: lem-galois-set-sheaf-local-bijection-isomorphism and lem-weil-pbc-proetale-affine-wcontractible-covering-family. Overlaps are advisory only: the X[S] = X x a(S) clause is also in sk-def-sfb-pullback-from-point and def-sfb-profinite-test-objects; the existing unnormalized point-components and Lan-evaluation nodes are made explicit here, as the earlier NY C3 repair required. FIX (B3): descent-components used 'quasi-compact quasi-separated' without definition nodes; I added def-weil-pbc-quasi-compact-scheme and def-weil-quasi-separated-morphism to its statement and stmt_deps. The item is not superseded live (side-live still has the 9-step proof) and is not on the dropped list.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.TotallyDisconnectedCoefficientRealization",
   "declaration": "AlgebraicGeometry.ProEtale.existsUnique_continuousSetRealization",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.continuousSetPresheaf",
-   "AlgebraicGeometry.ProEtale.continuousSetPresheaf_isSheaf",
-   "AlgebraicGeometry.ProEtale.continuousSetSheaf",
-   "AlgebraicGeometry.ProEtale.continuousSetSheafMap",
-   "AlgebraicGeometry.ProEtale.continuousSetProfiniteFunctor",
-   "AlgebraicGeometry.ProEtale.continuousSetProfiniteSheaf",
-   "AlgebraicGeometry.ProEtale.continuousSetTestProjection",
-   "AlgebraicGeometry.ProEtale.continuousSetRelativeTestProjection",
-   "AlgebraicGeometry.ProEtale.continuousSetPointAdjunction",
-   "AlgebraicGeometry.ProEtale.IsContinuousSetRealization",
    "AlgebraicGeometry.ProEtale.existsUnique_continuousSetRealization",
    "AlgebraicGeometry.ProEtale.continuousSetRealizationHom",
    "AlgebraicGeometry.ProEtale.continuousSetRealizationHom_spec",
    "AlgebraicGeometry.ProEtale.continuousSetRealizationIso",
-   "AlgebraicGeometry.ProEtale.continuousSetDirectImage_naturality",
-   "AlgebraicGeometry.ProEtale.continuousSetDirectImageMap",
-   "AlgebraicGeometry.ProEtale.continuousSetPullbackMap",
    "AlgebraicGeometry.ProEtale.continuousSetRealization_natural",
    "AlgebraicGeometry.ProEtale.continuousSetRealization_products",
    "AlgebraicGeometry.ProEtale.continuousSetRealization_pullback",
    "AlgebraicGeometry.ProEtale.continuousSetRealization_coherence",
-   "AlgebraicGeometry.ProEtale.continuousSetConstantPresheafMap",
-   "AlgebraicGeometry.ProEtale.continuousSetConstantMap",
    "AlgebraicGeometry.ProEtale.continuousSetRealization_discrete",
    "AlgebraicGeometry.ProEtale.continuousSetRealization_components"
   ],
@@ -393,5 +219,27 @@
   "group": "NB",
   "result": "pass",
   "note": "Read the item, 7 stmt_dep records, the module (25 decls), HRS Ex 3.1 p6, BS 4.2.12 p30, the ProfinitePointPullback/ProEtaleInverseImage/LocallyConstant deps and the Mathlib ConstantSheaf/TopComparison sources. Realization is ∃! σ, normalized via the actual composite adjunction (left adjoint defeq profinitePointSetSchemeInverseImage) by b ↦ b∘r with r = fst∘homeomorphPrimeSpectrum.symm∘pullback.fst, so σ is pinned and the .choose is not hollow. Naturality uses C(D,E); products take any Finite I incl. empty; pullback is the adjunct of s∘|pullback.fst| under proEtaleSheafAdjunction, with IsIso and agreement with profinitePointSetSchemeComp; identity/comp coherence uses profinitePointSetIdentity/Comp; discrete IsIso from constantSheaf with no finiteness; the component clause pins Mathlib's continuousMapPresheafEquivOfTotallyDisconnectedSpace with qcqs on U.left. Universes compatible (u / Type (u+1)). All bodies sorry, docstrings present, statement verbatim, node differs from live only in lean, both report sections present. Advisory: products third conjunct is redundant with naturality; component clause content comes from the Mathlib Equiv; possibly unused non-public imports. No compile: no fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-3795d",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261023T102928-L-3007894",
+  "kind": "interface",
+  "note": "independent cc review: item proofs vs node steps and the Kan-evaluation/coherence/descent-components dependency statements; 15 moved declarations vs the base item text (identical apart from 2 sorrys now filled); 3 import-only adaptations vs the import cycle; 8 direct importers compiled against the delivered modules in a sandbox"
  }
 }

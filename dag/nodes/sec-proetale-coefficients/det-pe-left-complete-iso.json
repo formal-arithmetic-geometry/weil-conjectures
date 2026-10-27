@@ -287,7 +287,18 @@
   "result": "pass",
   "note": "Statement, dependencies, constructions, universes, edge cases, docstrings, report sections, and pro-etale framework checked; scompile.py passed locally and with library confirmation."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
   "date": "2026-10-19",
   "by": "L",
@@ -297,5 +308,30 @@
   "landing": "20261019T034318-L-420157",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ be an abelian category with K-injective resolutions in which countable\nproducts exist and are exact; for instance the sheaves of $\\Lambda$-modules on\n$X_{\\mathrm{proét}}$ ($\\Lambda$ a ring). For every object $K$ of $D(\\mathcal C)$, the\ntruncation maps $K\\to\\tau_{\\geq-n}K$ exhibit $K$ as a homotopy limit of the tower\n$\\cdots\\to\\tau_{\\geq-1}K\\to\\tau_{\\geq0}K$: with $T$ the transition endomorphism of\n$\\prod_n\\tau_{\\geq-n}K$, there is a distinguished triangle\n\n$$\nK\\longrightarrow\\prod_n\\tau_{\\geq-n}K\\xrightarrow{\\,1-T\\,}\\prod_n\\tau_{\\geq-n}K\n\\longrightarrow K[1]\n$$\n\nwhose first map has the truncation maps as components. In other words,\n$K\\to R\\varprojlim_n\\tau_{\\geq-n}K$ is an isomorphism.",
+  "proof": [
+   {
+    "text": "Write $P=\\prod_n\\tau_{\\geq-n}K$ and let $\\ell\\colon K\\to P$ have the truncation maps as\ncomponents. Since the truncation maps are compatible with the transitions,\n$(1-T)\\circ\\ell=0$. Complete $1-T$ to a distinguished triangle\n$L\\xrightarrow{\\iota}P\\xrightarrow{1-T}P\\to L[1]$; as $(1-T)\\circ\\ell=0$, the map $\\ell$\nfactors as $\\ell=\\iota\\circ u$ for some $u\\colon K\\to L$. Then $L$ is a homotopy limit\n$R\\varprojlim_n\\tau_{\\geq-n}K$, and it suffices to show that $u$ is an isomorphism, i.e. that\n$H^q(u)$ is an isomorphism for every $q$; replacing $L$ by $K$ along $u$ then gives the\ndisplayed triangle.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "By [det-pe-milnor-sequence] there is a short exact sequence\n$0\\to R^1\\varprojlim_nH^{q-1}(\\tau_{\\geq-n}K)\\to H^q(L)\\to\n\\varprojlim_nH^q(\\tau_{\\geq-n}K)\\to0$, whose second map is induced by $\\iota$ and the\nprojections. By [det-pe-left-complete-truncation-tower] (applied in degrees $q-1$ and $q$) the\nfirst term vanishes, so $H^q(L)\\to\\varprojlim_nH^q(\\tau_{\\geq-n}K)$ is an isomorphism, and\nthe composite\n$H^q(K)\\xrightarrow{H^q(u)}H^q(L)\\to\\varprojlim_nH^q(\\tau_{\\geq-n}K)$, which is induced by the\ntruncation maps, is an isomorphism. Hence $H^q(u)$ is an isomorphism for every $q$.",
+    "uses": [
+     "det-pe-milnor-sequence",
+     "det-pe-left-complete-truncation-tower"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

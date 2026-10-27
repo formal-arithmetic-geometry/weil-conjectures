@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-space-proper-support-derived-projection-formula",
+ "kind": "statement",
+ "title": "Proper-support derived projection formula without quasi-compactness",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ with their small etale structure sheaves [def-trf-algebraic-space]. Use module sheaves [def-weil-sheaf-of-modules-category], the unbounded derived categories $D(\\mathcal O_Z)$ [def-weil-abstract-derived-category], quasi-coherent modules [def-trf-space-quasi-coherent-module], and canonical module functors [def-trf-space-etale-module-functors]. Derived tensor and pullback use K-flat resolutions with flat terms; derived direct image uses K-injective resolutions. Noetherian means quasi-compact, quasi-separated and locally Noetherian on etale scheme charts. Coherent means quasi-coherent and, on Noetherian affine etale charts, associated to finitely generated modules. Proper means separated, of finite type and universally closed. The support of a cohomology module is its closed locus of nonzero geometric stalks; it is proper over a base if its reduced induced closed subspace is proper over that base. Let $Y$ be Noetherian, let $f:X\\to Y$ be locally of finite type and quasi-separated, and let $E\\in D(\\mathcal O_X)$ have coherent cohomology, zero outside a finite interval, with each $\\operatorname{Supp}H^i(E)$ proper over $Y$. For every quasi-coherent $\\mathcal O_Y$-module $F$, there is a natural isomorphism in $D(\\mathcal O_Y)$\n$$ (Rf_*E)\\otimes^{\\mathbf L}_{\\mathcal O_Y}F[0]\\ \\cong\\ Rf_*\\left(E\\otimes^{\\mathbf L}_{f^{-1}\\mathcal O_Y}(f^{-1}F)[0]\\right). $$\nThe tensor inside direct image carries its $\\mathcal O_X$-module structure through the first factor. The displayed isomorphism is the canonical projection comparison $ (Rf_*E)\\otimes^{\\mathbf L}F\\to Rf_*(E\\otimes^{\\mathbf L}_{\\mathcal O_X}Lf^*F)$ followed by the canonical scalar-restriction tensor identification. No relative Tor condition, flatness or quasi-compactness of $f$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IS (lemma-perfect-direct-image), proper-support reduction and the two displayed tensor identifications in its proof, using Tag 08IN (lemma-cohomology-base-change); scalar-restriction identification: sites-cohomology.tex Tag 08I6 (lemma-variant-derived-pullback)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-relative-derived-projection",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-module-support",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-reduced-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Choose $a\\le b$ outside which $H^i(E)=0$, and put $T=\\bigcup_{i=a}^b\\operatorname{Supp}H^i(E)$. The finite-union assertion of [lem-sfb-space-proper-support-closed-operations] makes $T$ proper over $Y$. Thus $T$ is quasi-compact, since a proper morphism is quasi-compact and $Y$ is quasi-compact. Choose an etale scheme atlas of $X$ and cover it by affine opens. Their images are quasi-compact open subspaces by [lem-a1-space-etale-open-image]. Finitely many cover $T$; their union is a quasi-compact open $j:U\\hookrightarrow X$ containing $T$ (take $U=\\varnothing$ if $T=\\varnothing$). Set $g=fj$. Since $f$ and $Y$ are quasi-separated, [lem-sfb-space-qcqs-source-products] makes $X$ quasi-separated. The open subspace $U$ is quasi-separated as well: its diagonal is the base change of the diagonal of $X$ to $U\\times U$. Now [lem-sfb-space-qcqs-permanence] makes $g$ quasi-compact and quasi-separated. No quasi-compactness of $X$ or $f$ was used.",
+   "uses": [
+    "lem-sfb-space-proper-support-closed-operations",
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-space-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS, lemma-perfect-direct-image, support-union and quasi-compact-open reduction; spaces-properties.tex Tags 03E4, 03BZ, 03IR."
+   }
+  },
+  {
+   "text": "Put $W=X\\setminus T$. All cohomology sheaves of $E|_W$ vanish: exact etale restriction identifies them with $H^i(E)|_W$, whose geometric stalks vanish, and [lem-sfb-space-etale-conservative-geometric-points] detects zero. Apply [lem-sfb-space-elementary-shriek-exact] to the open cover $(W,U)$ of $X$. Its overlap and $W$ terms vanish on $E$, so its exact functor sequence gives the canonical counit isomorphism $j_!(E|_U)\\xrightarrow{\\sim}E$. The reduced complement of $W$ is contained in $U$, so this is an elementary distinguished square, and $E|_U$ is zero on $W\\cap U$. By [lem-sfb-space-supported-etale-excision], $j_!(E|_U)\\xrightarrow{\\sim}Rj_*(E|_U)$ is canonical. The composite $E\\to Rj_*(E|_U)$ is the open-adjunction unit: its $j^*\\dashv Rj_*$ transpose is the identity, by the normalization of the excision map and the triangular identity for $j_!\\dashv j^*$. With the composition comparison of [lem-sfb-space-derived-etale-chart-calculus], applying $Rf_*$ gives a natural isomorphism $a_E:Rf_*E\\xrightarrow{\\sim}Rg_*(E|_U)$. This argument applies to every unbounded derived object zero on $W$.",
+   "uses": [
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "lem-sfb-space-elementary-shriek-exact",
+    "lem-sfb-space-supported-etale-excision"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS, support reduction; Tag 08GG, lemma-pushforward-with-support-in-open; Tag 08GV, lemma-exact-sequence-lower-shriek."
+   }
+  },
+  {
+   "text": "Write $K=F[0]$ and $M=E\\otimes_{\\mathcal O_X}^{\\mathbf L}Lf^*K$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and exact etale restriction and pullback composition in [lem-sfb-space-derived-etale-chart-calculus], $M|_W=(E|_W)\\otimes^{\\mathbf L}(Lf^*K)|_W=0$ and $M|_U\\cong(E|_U)\\otimes^{\\mathbf L}Lg^*K$. Tensor with zero is zero: its K-flat representative is the zero complex. The preceding support argument therefore gives a natural isomorphism $a_M:Rf_*M\\xrightarrow{\\sim}Rg_*((E|_U)\\otimes^{\\mathbf L}Lg^*K)$. In particular no boundedness or coherence of $M$ is required.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-space-derived-etale-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS, tensor displayed formula after the proper-support reduction; sites-cohomology.tex Tag 07A4, lemma-pullback-tensor-product."
+   }
+  },
+  {
+   "text": "Coherent cohomology is quasi-coherent by the stated convention. Exact restriction preserves quasi-coherence, as can be checked on the same etale affine charts in $U$. Thus $E|_U\\in D_{\\mathrm{QCoh}}(\\mathcal O_U)$, and $K=F[0]\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$. Apply [lem-sfb-space-qcqs-derived-projection-formula] to $g$, which was verified qcqs in step 1. The definitions of the cited qcqs node are met: the diagonal $\\Delta_g$ of $g$ is a monomorphism of sheaves, so its own diagonal is an isomorphism; hence $\\Delta_g$ is quasi-separated, and $g$ is quasi-separated in the sense of [lem-sfb-space-qcqs-derived-projection-formula]. If $C\\to Y$ has $C$ quasi-compact, the last clause of [lem-a1-space-etale-open-image] gives a surjective etale map $V\\to C$ from a quasi-compact scheme, a finite disjoint union of affine schemes; $U\\times_YV$ is then a finite union of the quasi-compact pullbacks to the affine pieces, quasi-compact by step 1, and surjects onto $|U\\times_YC|$, so $U\\times_YC$ is quasi-compact. Its canonical comparison $\\pi_g:(Rg_*(E|_U))\\otimes^{\\mathbf L}K\\xrightarrow{\\sim}Rg_*((E|_U)\\otimes^{\\mathbf L}Lg^*K)$ is an isomorphism. Consequently $a_M^{-1}\\pi_g(a_E\\otimes1_K)$ is an isomorphism from $(Rf_*E)\\otimes^{\\mathbf L}K$ to $Rf_*M$.",
+   "uses": [
+    "lem-sfb-space-qcqs-derived-projection-formula",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, lemma-cohomology-base-change; applied in Tag 08IS, first tensor equality."
+   }
+  },
+  {
+   "text": "This composite is the specified projection comparison $\\pi_f$, not merely an unspecified isomorphism of its endpoints. Write $E_U=j^*E$, $\\eta_j,\\varepsilon_j$ for the unit and counit of $j^*\\dashv Rj_*$ (etale pullback is exact restriction, so $Lj^*=j^*$), $c:Rf_*Rj_*\\cong Rg_*$ and $c':j^*Lf^*\\cong Lg^*$ for the composition comparisons of [lem-sfb-space-derived-etale-chart-calculus], and $\\mu_j:j^*(E\\otimes^{\\mathbf L}Lf^*K)\\cong E_U\\otimes^{\\mathbf L}j^*Lf^*K$ for the tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. By construction in steps 2-3, $a_E=c\\circ Rf_*(\\eta_{j,E})$ and $a_M=Rg_*((1\\otimes c')\\mu_j)\\circ c\\circ Rf_*(\\eta_{j,M})$. All projection maps $\\pi_h$ here are the adjuncts of the counit on the first factor after the tensor comparison, as in [lem-sfb-ringed-projection-tensor-composition]. Its composition identity for $U\\xrightarrow jX\\xrightarrow fY$ gives, with $c,c'$ understood, $\\pi_{g,E_U,K}=Rf_*(\\pi_{j,E_U,Lf^*K})\\circ\\pi_{f,Rj_*E_U,K}$. Naturality of $\\pi_f$ in its first argument along $\\eta_{j,E}$ gives $\\pi_{f,Rj_*E_U,K}\\circ(Rf_*\\eta_{j,E}\\otimes1)=Rf_*(\\eta_{j,E}\\otimes1)\\circ\\pi_{f,E,K}$. It remains to see $\\pi_{j,E_U,Lf^*K}\\circ(\\eta_{j,E}\\otimes1)=Rj_*(\\mu_j)\\circ\\eta_{j,M}$ as maps $M\\to Rj_*(E_U\\otimes^{\\mathbf L}j^*Lf^*K)$. Their $j^*\\dashv Rj_*$ adjuncts are $(\\varepsilon_{j,E_U}\\otimes1)\\mu_j\\,j^*(\\eta_{j,E}\\otimes1)$, which by naturality of $\\mu_j$ equals $((\\varepsilon_{j,j^*E}\\circ j^*\\eta_{j,E})\\otimes1)\\mu_j=\\mu_j$ by the triangular identity, and $\\mu_j$. Combining, $c^{-1}\\pi_g(a_E\\otimes1_K)=Rf_*(Rj_*(\\mu_j)\\eta_{j,M})\\circ\\pi_f$, that is $\\pi_g(a_E\\otimes1_K)=a_M\\pi_f$, after identifying $j^*Lf^*K$ with $Lg^*K$ by $c'$. Hence the composite in step 4 is $\\pi_f$. Naturality in $E,K$ follows from that of $\\pi_f$; although $U$ was chosen using $E$, the resulting map is the intrinsically defined $\\pi_f$.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-sfb-space-derived-etale-chart-calculus",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IN, opening adjunction-mate definition; Tag 08IS, canonical support reduction; sites-cohomology.tex Tag 0B56 (equation-projection-formula-map) composition of projection maps."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ringed-topos-relative-tensor-pullback] to the small etale ringed-topos morphism of $f$, with $E$ and $K=F[0]$. It identifies $M$ canonically with $E\\otimes_{f^{-1}\\mathcal O_Y}^{\\mathbf L}(f^{-1}F)[0]$, retaining the $\\mathcal O_X$-action through $E$. Applying $Rf_*$ and composing this natural identification with the invertible $\\pi_f$ from steps 4-5 gives exactly the displayed isomorphism in the item. The relative-tensor identification is valid without a Tor or flatness condition, and the support argument was valid for the possibly unbounded-below tensor object. Thus none of the excluded extra hypotheses has entered.",
+   "uses": [
+    "lem-sfb-ringed-topos-relative-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IS, second tensor equality; sites-cohomology.tex Tag 08I6, lemma-variant-derived-pullback."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-derived-etale-chart-calculus",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-sfb-space-elementary-shriek-exact",
+  "lem-sfb-space-supported-etale-excision",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-space-qcqs-derived-projection-formula",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-sfb-ringed-topos-relative-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IS (lemma-perfect-direct-image), support reduction and both tensor identifications, with Tag 08IN and sites-cohomology.tex Tag 08I6; expanded adjunction verification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for a bounded coherent derived complex with proper support along a locally finite type quasi separated map to a Noetherian algebraic space without quasi compactness of the map",
+   "results": "{\"t\": \"2026-10-23T15:32:03Z\", \"tool\": \"leanfinder\", \"query\": \"Projection formula for a bounded coherent derived complex with proper support along a locally finite type quasi separated map to a Noetherian algebraic space without quasi compactness of the map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\"], \"digest\": \"700a0945beb318bb\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern affine limits, ordinary scheme properness or topological projections; none gives this proper-support derived projection comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper support derived projection formula on algebraic spaces without a quasi compact morphism",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"leansearch\", \"query\": \"Proper support derived projection formula on algebraic spaces without a quasi compact morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.support_ker\", \"isProperMap_fst_of_compactSpace\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_map\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.IsProper.of_comp_of_isSeparated\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper.toIsSeparated\"], \"digest\": \"ca981091ee1417fa\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern affine limits, ordinary scheme properness or topological projections; none gives this proper-support derived projection comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "{\"t\": \"2026-10-23T15:31:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"projectionFormula\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern affine limits, ordinary scheme properness or topological projections; none gives this proper-support derived projection comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojection[Ff]ormula|properSupport|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T15:31:58Z\", \"tool\": \"grep\", \"query\": \"[Pp]rojection[Ff]ormula|properSupport|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern affine limits, ordinary scheme properness or topological projections; none gives this proper-support derived projection comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived projection formula for bounded coherent complexes with proper support on a non quasi compact algebraic space morphism",
+   "results": "{\"t\": \"2026-10-23T18:40:01Z\", \"tool\": \"leanfinder\", \"query\": \"Derived projection formula for bounded coherent complexes with proper support on a non quasi compact algebraic space morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc\"], \"digest\": \"6d153ac5a5acd3e7\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern scheme limits, ordinary properness, or underived module pullback/direct image; none states the canonical proper-support algebraic-space projection isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "{\"t\": \"2026-10-23T18:42:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"projectionFormula\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern scheme limits, ordinary properness, or underived module pullback/direct image; none states the canonical proper-support algebraic-space projection isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|properSupport|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T18:42:49Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|properSupport|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern scheme limits, ordinary properness, or underived module pullback/direct image; none states the canonical proper-support algebraic-space projection isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula derived direct image quasicoherent complexes proper support algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T18:42:50Z\", \"tool\": \"leansearch\", \"query\": \"Projection formula derived direct image quasicoherent complexes proper support algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_comp\", \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"AlgebraicGeometry.Scheme.Hom.support_ker\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_comap\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.comp_iff\", \"AlgebraicGeometry.IsProper.instCompScheme\", \"AlgebraicGeometry.IsProper.instMorphismRestrict\"], \"digest\": \"1a922f5410ae939c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern scheme limits, ordinary properness, or underived module pullback/direct image; none states the canonical proper-support algebraic-space projection isomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasicoherent derived projection formula Rf pushforward tensor derived pullback without Tor hypothesis",
+   "results": "{\"t\": \"2026-10-23T18:43:25Z\", \"tool\": \"leansearch\", \"query\": \"Quasicoherent derived projection formula Rf pushforward tensor derived pullback without Tor hypothesis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pushforward₀\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.pushforward_obj_val\", \"SheafOfModules.pushforwardComp\", \"PresheafOfModules.pushforward₀_obj_obj_isModule\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"PresheafOfModules.pushforward₀_obj\"], \"digest\": \"d6b9443748a6042a\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: hits concern scheme limits, ordinary properness, or underived module pullback/direct image; none states the canonical proper-support algebraic-space projection isomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+  "date": "2026-10-23",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image). Supporting input: Tag 08IS, applied to the tensor object only after verifying all three hypotheses. Supporting input: Tag 08IS (lemma-perfect-direct-image), proper-support reduction and the two displayed tensor identifications in its proof, using Tag 08IN (lemma-cohomology-base-change); scalar-restriction identification: sites-cohomology.tex Tag 08I6 (lemma-variant-derived-pullback).",
+   "via": [
+    "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-support-derived-projection-formula",
+  "worker": "stage1",
+  "summary": "Verified the proper-support reduction without any Tor bound; reuse existing algebraic-space excision, qcqs permanence and qcqs projection nodes. Extract only the general ringed-topos relative-tensor identification. Identify the constructed isomorphism with the canonical projection mate by its adjoint, rather than asserting an arbitrary isomorphism.",
+  "blueprint": "Nearest ancestor command returns None, retained as in the imported chain. The inherited det-thm-sf-ctf-stability-direct-images paragraph (3) route passes through proper flat coherent duality; steps realize the supporting Tag 08IS finite-union/open-restriction reduction and its two tensor identities. Current latest blueprint paragraph (3) was read; no alternate blueprint node states the algebraic-space result.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic quasi-compact open-image and open-subspace facts used to choose the finite atlas neighbourhood; no definition alone supplies this topology theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic monoidality of ringed-topos derived pullback, needed for tensor restriction and its canonical mate; applies to structure sheaves, not constant coefficients."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic ringed-topos coherence: composition identity and naturality of canonical projection mates, needed in step 5 to identify the support-reduced isomorphism with pi_f; no node of the unit states it. (Added by the maintainer reader.)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-projection-tensor-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-cefb21bb7",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-cefb21bb7 (reviewer sub-agent of L); spot-checked: Read Stacks 08IS in full (this item is its support reduction and the two tensor equalities; hypothesis (3), finite Tor dimension, is used only afterwards, so dropping it is right), 08IN (same adjunct-of-counit normalization) and 08I6 (lines 3728-3760). The new node lem-sfb-ringed-topos-relative-tensor-pullback states 08I6 exactly. It checks on f=id, A=f^{-1}B, a nonflat affine ring map and zero objects, and duplicates nothing: lem-trf-site-derived-tensor-restriction and lem-pc-relative-tensor-pullback-kflat-model state different things. Steps 1-3 and 6 check against every cited statement. In step 2 the composite E -> Rj_*E_U is the unit, by the triangle identity. Three faults, fixed in fixes/: (1) Step 5 was marked elementary but needs the tensor-pullback comparisons to be compatible with pullback composition, which naturality alone does not give. It now cites lem-sfb-ringed-projection-tensor-composition, whose identity pi_{gf}=Rg_*(pi_f)pi_g is applied to U->X->Y and then naturality and the triangle identity are written out; elementary is now false and the tool use is declared. (2) Step 4: the cited qcqs projection node defines quasi-separated as diagonal qc and qs, and quasi-compact as qc against qc spaces, while step 1 had only proved the weaker notions. Added the bridge: the diagonal is a monomorphism, and an affine etale cover comes from lem-a1. (3) The new node now cites def-pur-sheaf-tensor-product. Batch-5 finding: all seven listed citations reach sec-trace-formula only through algebraic-space and K-flat foundations (def-trf-algebraic-space, trf etale-relation lemmas, lem-trf-ringed-kflat-word-comparison-descent, def-trf-scalar-tensor-section, the Mathlib leaf lem-trf-adjoint-composition-coherence). None reaches a trace-formula or Poincare theorem, an nt-assume leaf or a batch-4 target, so they are general foundations outside the assumptions. No SGA is cited, no cycle is created, and the statements are unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperSupportDerivedProjectionFormula",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.spaceProperSupportDerivedProjectionFormula",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceProperSupportDerivedProjectionFormula"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperSupportDerivedProjectionFormula.lean",
+  "statement": "theorem spaceProperSupportDerivedProjectionFormula {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} Y.SmallModules] (hYln : ∀ T : Y.EtaleSite, IsLocallyNoetherian (Y.etaleForget.obj T)) (hYqc : CompactSpace (Point Y.obj.obj)) (hYqs : IsAbsolutelyQuasiSeparated Y) (hflft : MapIsLocally (@LocallyOfFiniteType) f) (hfqs : MapIsQuasiCompact (Limits.pullback.diagonal f.hom.hom)) (E : X.DerivedModules) (hEcoh : ∀ n : ℤ, SheafOfModules.IsFinitePresentation (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules n).obj E))) (hEb : ∃ a b : ℤ, a ≤ b ∧ ∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor X.SmallModules n).obj E)) (hEsupp : ∀ n : ℤ, ∃ C : ClosedSubspace X, IsReduced (C.val : AlgebraicSpace S) ∧ pointImage C.val.arrow.hom.hom = moduleSupport (X.smallModuleEquivalence.inverse.obj ((DerivedCategory.homologyFunctor X.SmallModules n).obj E)) ∧ MapIsProper (C.val.arrow ≫ f)) (F : Y.QCoh) : IsIso (spaceRelativeProjectionComparison f E ((DerivedCategory.singleFunctor Y.SmallModules 0).obj (Y.smallModuleRestriction.obj F.obj)))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-54396b4df",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Item clauses match node/Stacks 08IS: Noetherian Y as hYln+hYqc+IsAbsolutelyQuasiSeparated; f lft (MapIsLocally) and qs (MapIsQuasiCompact of relative diagonal); E coherent = IsFinitePresentation (equivalent on locally Noetherian X, landed convention), finite interval a≤b, per-degree reduced ClosedSubspace with pointImage = moduleSupport and MapIsProper (C→X→Y); all F : Y.QCoh in degree 0; conclusion IsIso of the specified π_f followed by Rf_* of the balanced 08I6 identification, naturality theorem present; no Tor/flat/qc hypothesis. New def node def-sfb-space-relative-derived-projection: real totalLeftDerived of P⊗f*Q along Q.prod Q, ∃!-pinned comparison by flat-K-flat representative equation, projection = homEquiv of normalized spaceDerivedAdjunction on (moduleDerivedPullbackTensor ≫ counit⊗1); fields OK, no duplicate on side-live, not raced. Only item (lean, stmt_deps + landed def nodes, allowed) and new node differ from side-live. Advisories: MapIsQuasiCompact/pointImage/FlatKFlat owners reached transitively; unused public import ReducedClosedSubspaceSupport; same-worker second reading. No files changed, no compile."
+ }
+}

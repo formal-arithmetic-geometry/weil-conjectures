@@ -1,0 +1,142 @@
+{
+ "id": "lem-sfb-integral-models-residue-transport",
+ "kind": "statement",
+ "title": "First-residue origin under integral realization",
+ "statement": "For a prime l, a finite extension E of Q_l, a Noetherian scheme X and an internal continuous integral complex K, suppose its completed section realization F K [def-sfb-integral-constant-model-realization] is complete. Then the first derived residue of Res K has constant-model constructible cohomology and finite relative Tor amplitude [def-sfb-integral-models-stacks-data] if and only if F K satisfies IsSfbAdicConstructible [def-sfb-adic-stratified-perfect-data]. The completeness hypothesis supplies only the completeness conjunct of that predicate; the result compares its remaining residue-origin clauses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1)–(2): coefficient-presentation comparison in det-lem-integral-models-stacks"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-adic-stratified-perfect-data",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "The DVR theorem identifies the specified uniformizer ideal with the maximal ideal. Map this ideal along ULift.ringEquiv.symm to prove that the lifted ideal is maximal, and use Ideal.Quotient.field to give its first quotient the field and Noetherian instances.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let T be the literal sfbResidueComplex of the canonical realization, k the lifted first quotient, and M its fixedScalarDerivedModel. Apply integral_residue_coefficient_transport to rewrite residueCondition as affine-locally constructible homology and finite global Tor amplitude of M.",
+   "uses": [
+    "lem-sfb-integral-residue-coefficient-transport",
+    "def-sfb-fixed-scalar-complex-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use hasFiniteCoefficientProEtaleTorAmplitude_iff_locally in both directions to convert the global Tor interval to the local condition. Apply constructible_localTor_iff_etaleOrigin to obtain, or recover from, a bounded constructible finite-Tor etale antecedent of M.",
+   "uses": [
+    "lem-sfb-proetale-tor-local-global",
+    "lem-sfb-constructible-local-tor-etale-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply fixedScalar_etaleOrigin to transport that antecedent to the fixed-scalar original-site witness. Pair it with hcomplete to produce IsSfbAdicConstructible. Conversely discard completeness, apply the inverse presentation comparison and reverse the preceding equivalences.",
+   "uses": [
+    "lem-sfb-fixed-scalar-etale-origin",
+    "def-sfb-adic-stratified-perfect-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integral-residue-coefficient-transport",
+  "def-sfb-fixed-scalar-complex-model",
+  "lem-sfb-proetale-tor-local-global",
+  "lem-sfb-constructible-local-tor-etale-origin",
+  "lem-sfb-fixed-scalar-etale-origin",
+  "def-sfb-adic-stratified-perfect-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Unit proof (1)--(2), following the first-residue coefficient comparison and the existing constructible local-Tor/etale-origin theorem. The two remaining presentation changes are separate statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructible finite Tor residue complexes descend from the etale to the proetale site",
+   "date": "2026-10-24",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.Etale, Condensed.lanSheafProfinite, AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology",
+   "verdict": "No exact match for the specified coefficient presentation comparison; generic constant-sheaf, scalar-restriction or etale declarations do not identify these local predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible finite Tor residue complexes descend from the etale to the proetale site",
+   "date": "2026-10-24",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.instForallOfFinite, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.exists_subalgebra_fg",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finiteTorAmplitude\"",
+   "date": "2026-10-24",
+   "results": "0 hits: ",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "etaleOrigin|finiteTorAmplitude",
+   "date": "2026-10-24",
+   "results": "0 hits: ",
+   "verdict": "No exact match: these generic Mathlib declarations do not give the specified integral coefficient presentation comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralModelsStacks",
+  "date": "2026-10-24",
+  "group": "W6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Unit proof (1)–(2): First-residue origin under integral realization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralModelsResidueTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralModelsResidueTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residue_transport",
+  "statement": "theorem residue_transport (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [IsNoetherian X]\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integersObj l E) X)))\n    (hcomplete : Scheme.IsSfbAdicComplete X (IntegralConstantCompletion.ideal l E)\n      ((IntegralConstantModel.derived l E X).functor.obj K)) :\n    residueCondition l E X ((restriction l E X).obj K) ↔\n    Scheme.IsSfbAdicConstructible X (IntegralConstantCompletion.ideal l E)\n      ((IntegralConstantModel.derived l E X).functor.obj K)",
+  "branch": "sheaf-dag",
+  "by": "W6",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-bcd0e",
+  "group": "W6",
+  "result": "fix",
+  "landing": "20261024T021935-L-2879228",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T144020-L-1152388",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

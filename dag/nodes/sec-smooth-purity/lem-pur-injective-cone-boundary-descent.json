@@ -1,0 +1,244 @@
+{
+ "id": "lem-pur-injective-cone-boundary-descent",
+ "kind": "statement",
+ "title": "Signed cone boundary and descent for functor rows exact on injectives",
+ "statement": "Let $A$ be a commutative ring and $\\mathcal C$ an abelian category with enough injectives [def-sp-abelian, def-sp-injective-resolutions, def-sp-enough-injectives]. Let $S,F,G:\\mathcal C\\to\\operatorname{Mod}(A)$ be additive functors [def-sp-left-exact-additive], and let $u:S\\to F$ and $v:F\\to G$ be natural transformations with $vu=0$. Assume $0\\to S(J)\\xrightarrow{u_J}F(J)\\xrightarrow{v_J}G(J)\\to0$ is short exact for every injective $J$. Use bounded-below derived functors and their units [lem-weil-pbc-right-derived-plus-injective] and the cone convention [def-weil-abstract-derived-category]. For a bounded-below injective complex $I$, apply the functors termwise and set $P_I=\\operatorname{Cone}(u_I)$, $q_I:P_I\\to G(I)$, $q_I(b,a)=v_I(b)$. Thus $d(b,a)=(db+u_I(a),-da)$. $q_I$ is a quasi-isomorphism. The roofs $(-\\operatorname{pr}_{S(I)})q_I^{-1}$ descend, by the right-derived-unit identifications, to a natural transformation $RG\\to RS[1]$ on $D^+(\\mathcal C)$ [def-weil-pbc-bounded-derived-subcategories], independent of the injective representative. Its cohomology maps are exactly the natural transformations normalized by the injective snake boundary in [lem-pur-derived-injective-boundary]. Explicitly, for every integer $n$, every cocycle $c\\in G(I)^n$ and every lift $b\\in F(I)^n$ of $c$, the unique $a\\in S(I)^{n+1}$ with $u_I(a)=db$ is a cocycle and\n$$H^n((-\\operatorname{pr}_{S(I)})q_I^{-1})([c])=[a].$$\nThis formula is independent of the lift and of the cocycle representative, and is $A$-linear, with the positive sign displayed. For a chain map $h:I\\to I'$, the induced cone map $(b,a)\\mapsto(F(h)b,S(h)a)$ commutes with $q_I$ and negative projection, and the cohomology boundary square commutes. The resulting comparisons and boundary squares depend only on the homotopy class of $h$; every derived morphism between the represented objects has such a representative, uniquely up to homotopy. They are therefore natural for every morphism of $D^+(\\mathcal C)$ and for changes of injective resolution.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014Z, section-canonical-delta-functor, negative projection and functoriality; Tag 070I, lemma-K-injective; Tag 070J, lemma-bounded-below-injectives-K-injective; homology.tex Tag 0117, lemma-long-exact-sequence-cochain"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-enough-injectives",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-pur-derived-injective-boundary"
+ ],
+ "proof": [
+  {
+   "text": "For each integer $r$, $I^r$ is injective, so the assumed row evaluated at $I^r$ is short exact. Naturality of $u,v$ makes these rows a short exact sequence of complexes $0\\to S(I)\\to F(I)\\to G(I)\\to0$. Additivity preserves zero objects, hence all three complexes and $P_I$ are bounded below. The cone differential is the displayed one by [def-weil-abstract-derived-category], and $d_Gq_I(b,a)=v(db)=q_Id(b,a)$ since $vu=0$. Apply [lem-pc-cone-short-exact-quasi-iso] to this exact row: its canonical map is precisely $q_I$, so $q_I$ is a quasi-isomorphism. Thus $\\beta_I=(-\\operatorname{pr}_{S(I)})q_I^{-1}$ is defined in $D^+(\\operatorname{Mod}(A))$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pc-cone-short-exact-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014Z, section-canonical-delta-functor, cone-to-quotient construction"
+   }
+  },
+  {
+   "text": "Let $c\\in G(I)^n$ be closed. Surjectivity of $v^n$ gives $b$ with $v(b)=c$. Then $v(db)=dc=0$, so exactness and injectivity of $u^{n+1}$ give a unique $a$ with $u(a)=db$. Since $u(da)=d^2b=0$, $da=0$. The element $(b,-a)\\in P_I^n$ is closed: $d(b,-a)=(db-u(a),da)=0$. It maps to $c$ under $q_I$, and to $a$ under negative projection. Since $H^n(q_I)$ is invertible, $H^n(\\beta_I)[c]=[a]$ under $H^n(S(I)[1])=H^{n+1}(S(I))$. This proves the positive sign directly.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014Z, section-canonical-delta-functor, negative projection; explicit module chase"
+   }
+  },
+  {
+   "text": "If $b$ is replaced by $b+u(t)$, the unique $a$ is replaced by $a+dt$, so its class is unchanged. If $c$ is replaced by $c+de$, lift $e$ to $f\\in F(I)^{n-1}$ and replace $b$ by $b+df$; its differential and hence $a$ are unchanged. Combining this with the first observation handles every possible lift. Lifts $b+b\\prime$ and $\\lambda b$ show additivity and $A$-linearity. For the snake boundary of [lem-weil-pbc-complex-ses-homology-long-exact], use the diagram in Tag 0117: lift $[c]$ from $G(I)^n/\\operatorname{im}d$ to $[b]$ in $F(I)^n/\\operatorname{im}d$, take its vertical image $db$, and lift that through $u$ to the cycle $a$. Its image in $H^{n+1}(S(I))$ is $[a]$. Thus the cone boundary agrees with that snake boundary, without assuming a splitting of the module row.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117, lemma-long-exact-sequence-cochain, snake diagram and its lift chase"
+   }
+  },
+  {
+   "text": "For a chain map $h:I\\to I\\prime$, define $C_h(b,a)=(F(h)b,S(h)a)$. Commutation with differentials follows from the chain-map identities and $F(h)u=u\\prime S(h)$. Naturality of $v$ gives $q_{I\\prime}C_h=G(h)q_I$; projection gives $(-\\operatorname{pr}_{S(I\\prime)})C_h=S(h)[1](-\\operatorname{pr}_{S(I)})$. Invert the two $q$ maps in the derived category to obtain $S(h)[1]\\beta_I=\\beta_{I\\prime}G(h)$. Taking cohomology gives the boundary square. If $h-h\\prime=dk+kd$, [lem-weil-pbc-homotopic-maps-equal-cohomology] applies to each of $S,F,G$. In fact the cone maps themselves are homotopic via $H(b,a)=(F(k)b,-S(k)a)$: $dH+Hd=C_h-C_{h\\prime}$, with cross terms cancelling by naturality of $u$ at $k$. All quotient, projection and induced boundary squares therefore depend only on the homotopy class.",
+   "uses": [
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014Z, lemma-derived-canonical-delta-functor, functorial cone calculation; Tag 014X, homotopies"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-dplus-injective-representative], choose for each $K\\in D^+(\\mathcal C)$ an injective complex $I_K$ and $e_K:QI_K\\xrightarrow{\\sim}K$; these complexes are K-injective. By [lem-weil-pbc-kinjective-hom-derived], for every $f:K\\to L$ there is a chain map $h:I_K\\to I_L$ with $Qh=e_L^{-1}fe_K$, uniquely up to homotopy. For $T=S,G$ write $c_{T,K}=RT(e_K)\\alpha_{T,I_K}:Q(TI_K)\\xrightarrow{\\sim}RT(K)$; the units are invertible here by [lem-weil-pbc-right-derived-plus-injective]. Their naturality gives $RT(f)c_{T,K}=c_{T,L}Q(T h)$. Define $\\beta_K=c_{S,K}[1]\\beta_{I_K}c_{G,K}^{-1}$. Substituting the two unit identities and the square of Step 4 proves $RS(f)[1]\\beta_K=\\beta_L RG(f)$, hence $\\beta:RG\\to RS[1]$ is natural for every derived morphism.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, lemma-K-injective; 070J, lemma-bounded-below-injectives-K-injective; 05TI and 05TH, derived units"
+   }
+  },
+  {
+   "text": "For another representative $e\\prime:QI\\prime\\xrightarrow{\\sim}K$, apply the same Hom bijection to $(e\\prime)^{-1}e_K$. The resulting chain map is a homotopy equivalence: lift its inverse by the bijection and use injectivity of that bijection to identify both composites with identities up to homotopy. The unit naturality and Step 4 with $f=1_K$ show that transport of $\\beta_{I\\prime}$ is exactly $\\beta_K$. Thus the construction is independent of representatives, including specified resolution comparisons. By [lem-pur-derived-injective-boundary], the normalized cohomology transformations are the snake boundaries under these same derived-unit comparisons. Step 3 identifies our cohomology maps with those boundaries on every injective model. For each $K$, conjugation by the invertible comparisons proves equality with the normalized transformation at $K$. The equality is therefore an equality of natural transformations in every integer degree.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-pur-derived-injective-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 05TH, comparison independence; Tag 0117, snake normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-pur-derived-injective-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 014Z cone and sign calculation, Tags 070I/070J and 05TH/05TI for descent; homology.tex Tag 0117 for the snake lift chase"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homologySequenceδ_triangleh|homologySequenceδ_quotient_mapTriangle_obj|InjectiveBoundaryNormalized",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the cone homology lemma is a component; it does not give the functor-row derived transformation, the elementwise lift formula, and descent through injective representatives on all of D^+"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"homologySequenceδ\"",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh",
+   "date": "2026-10-22",
+   "verdict": "no match: the cone homology lemma is a component; it does not give the functor-row derived transformation, the elementwise lift formula, and descent through injective representatives on all of D^+"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additive functors with a short exact row on injectives give a derived cone connecting map equal to the positive differential of a cocycle lift naturally for all derived morphisms",
+   "results": "CochainComplex.mappingCone.map_δ; CochainComplex.cm5b.i_f_comp_assoc; CochainComplex.mappingCone.lift_desc_f; CochainComplex.mappingCone.lift_f_snd_v; CochainComplex.mappingCone.lift_f_fst_v; CochainComplex.cm5b.i; CochainComplex.mappingCone.lift_f_fst_v_assoc; CochainComplex.cm5b.i_f_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the cone homology lemma is a component; it does not give the functor-row derived transformation, the elementwise lift formula, and descent through injective representatives on all of D^+"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived connecting morphism for additive functors exact on injectives agrees with cocycle lift differential and descends naturally modulo homotopy",
+   "results": "CategoryTheory.ShortComplex.ShortExact.singleδ; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.InjectiveResolution.extMk_hom; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.Functor.rightDerivedToHomotopyCategory; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id",
+   "date": "2026-10-22",
+   "verdict": "no match: the cone homology lemma is a component; it does not give the functor-row derived transformation, the elementwise lift formula, and descent through injective representatives on all of D^+"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connecting map of a natural sequence exact on injectives is minus cone projection inverse quotient and equals differential of a lift independent of injective resolution",
+   "results": "CategoryTheory.InjectiveResolution.descFSucc; CategoryTheory.InjectiveResolution.descFOne_zero_comm; CategoryTheory.InjectiveResolution.exact₀; CategoryTheory.InjectiveResolution.descFOne; CategoryTheory.InjectiveResolution.ofCocomplex_d_0_1; CochainComplex.isKInjective_of_injective_aux; CategoryTheory.InjectiveResolution.exact_succ; CategoryTheory.InjectiveResolution.descHomotopyZeroSucc",
+   "date": "2026-10-22",
+   "verdict": "no match: the cone homology lemma is a component; it does not give the functor-row derived transformation, the elementwise lift formula, and descent through injective representatives on all of D^+"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived connecting morphism of functors exact on injectives agrees with the differential of a cocycle lift and is independent of injective representatives",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.extMk_hom; CategoryTheory.ShortComplex.ShortExact.singleδ; CategoryTheory.ShortComplex.ShortExact.singleδ.congr_simp; CochainComplex.ConnectData.mk.inj; DerivedCategory.triangleOfSESδ; CategoryTheory.injectiveResolutions; CategoryTheory.Functor.rightDerivedToHomotopyCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: component cone, derived-functor or single-object results do not state the whole signed functor-row construction and descent on D^+"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additive functors short exact on injectives yield a derived connecting morphism by minus cone projection with positive cocycle lift boundary and homotopy descent",
+   "results": "CategoryTheory.ShortComplex.ShortExact.singleδ; DerivedCategory.triangleOfSESδ; CochainComplex.mappingCone.map_δ; CochainComplex.cm5b.i_f_comp_assoc; CategoryTheory.Functor.comp_homologySequenceδ; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.Functor.homologySequenceδ_comp; CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: component cone, derived-functor or single-object results do not state the whole signed functor-row construction and descent on D^+"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation between total right derived functors constructed from a short exact sequence of additive functors on injective complexes using the mapping cone",
+   "results": "CategoryTheory.NatTrans.rightDerived; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.NatTrans.rightDerived_comp; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq; CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: component cone, derived-functor or single-object results do not state the whole signed functor-row construction and descent on D^+"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-proetale-support-global-boundary",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "Proof Steps 1 and 3; sk-prop-a1 first localization triangle and global supported-class paragraph; Tag 09XP, section-cohomology-support, first triangle and long exact sequence; cone-to-quotient normalization (old item Step 8); extracted argument from returned global-boundary proof steps 6--8",
+   "via": [
+    "lem-pur-proetale-support-global-boundary",
+    "lem-pur-retracted-support-localization-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-injective-cone-boundary-descent",
+  "worker": "stage1",
+  "summary": "Retained the statement and proved the cone sign by the closed representative (b,-a), wrote lift and representative independence explicitly, and descended the entire derived morphism through existing K-injective and unit results. No new nodes or stronger exactness/splitting hypotheses.",
+  "blueprint": "prop-pur-affine-line-orientation-uniqueness Steps 1 and 3, via the supported-class/global-boundary nodes: makes precise the signed connecting map used in the sk-prop-a1 localization triangle and its change-of-resolution compatibility."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NM-d28fea52f",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-d28fea52f (reviewer sub-agent of L); spot-checked: Read in full: the item, its 6 steps and all 12 cited statements; the delivery adds no new nodes. Live node still unsplit with the same statement and stmt_deps; no repair note, so this is an ordinary first split. Route: lem-pur-derived-injective-boundary is in sk-prop-a1-kummer, which sk-prop-a1 uses; every other citation is a Mathlib leaf; no SGA. Sources: Stacks derived.tex section-canonical-delta-functor (014Z) has C(a)^n=B^n⊕A^{n+1}, d=(d_B,a;0,-d_A), q=b∘pr and δ=-p∘q^{-1}, matching def-weil-abstract-derived-category. Sign: (b,-a) is closed, q(b,-a)=c and -pr(b,-a)=a, so H^n(β)[c]=+[a]. Cone maps C_h commute with d, q and -pr. Homotopy H=(F(k),-S(k)): cross terms cancel by naturality of u. Descent: RT(f)c_{T,K}=c_{T,L}Q(Th) from unit naturality, which gives naturality of β and independence of the representative. The normalization agrees with the Lean injectiveHomologyModelIso (homologyFunctorObjQIso^{-1}, then rightDerivedFunctorPlusUnit, then RT(e)), and injective models determine δ at every K. Small cases: S=0, G=0, a zero row, and the nonsplit Γ_Z/Γ/Γ(U) row of the citer. Advisory: step 3 reads the 0117 snake δ through its defining lift chase (Mathlib ShortExact.δ_apply), not through the existence-only leaf; accepted as elementary. No duplicate found (only the cohomology-level lem-pur-derived-injective-boundary, which the item cites). FIX (B3): 'enough injectives' cited def-sp-injective-resolutions, which does not define it; added def-sp-enough-injectives to the statement bracket and stmt_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InjectiveConeBoundaryDescent",
+  "declaration": "CategoryTheory.Functor.exists_injectiveConeBoundaryDescent",
+  "declarations": [
+   "CategoryTheory.Functor.injectiveConeModelIso",
+   "CategoryTheory.Functor.injectiveConeVector",
+   "CategoryTheory.Functor.injectiveConeHomology",
+   "CategoryTheory.Functor.injectiveBoundaryConeMap",
+   "CategoryTheory.Functor.InjectiveConeRowProperties",
+   "CategoryTheory.Functor.exists_injectiveConeBoundaryDescent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InjectiveConeBoundaryDescent.lean",
+  "statement": "theorem exists_injectiveConeBoundaryDescent (h : ∀ (J : C) [Injective J], (ShortComplex.mk (ι.app J) (π.app J) (NatTrans.congr_app w₀ J)).ShortExact) : ∃ (β : G.rightDerivedFunctorPlus ⟶ S.rightDerivedFunctorPlus ⋙ shiftFunctor (DerivedCategory.Plus (ModuleCat.{m} A)) 1) (δ : ∀ n : ℤ, G.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor (ModuleCat.{m} A) n ⟶ S.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor (ModuleCat.{m} A) (n + 1)), InjectiveBoundaryNormalized S F G ι π w₀ h δ ∧ (∀ (K : DerivedCategory.Plus C) (n : ℤ), (δ n).app K = (DerivedCategory.homologyFunctor (ModuleCat.{m} A) 0).shiftMap (DerivedCategory.Plus.ι.map (β.app K) ≫ (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app (S.rightDerivedFunctorPlus.obj K)) n (n + 1) (by omega)) ∧ (∀ (I : CochainComplex.Plus C) [∀ n : ℤ, Injective (I.obj.X n)], InjectiveConeRowProperties (injectiveBoundaryRow S F G ι π w₀ I) (injectiveBoundaryRow_shortExact S F G ι π w₀ h I) ∧ ∀ (K : DerivedCategory.Plus C) (e : DerivedCategory.Plus.Q.obj I ≅ K), (injectiveConeModelIso G I K e).hom ≫ DerivedCategory.Plus.ι.map (β.app K) ≫ (DerivedCategory.Plus.ι.commShiftIso (1 : ℤ)).hom.app (S.rightDerivedFunctorPlus.obj K) = DerivedCategory.triangleOfSESδ (injectiveBoundaryRow_shortExact S F G ι π w₀ h I) ≫ (shiftFunctor (DerivedCategory (ModuleCat.{m} A)) (1 : ℤ)).map (injectiveConeModelIso S I K e).hom) ∧ (∀ (I J : CochainComplex.Plus C) [∀ n : ℤ, Injective (I.obj.X n)] [∀ n : ℤ, Injective (J.obj.X n)] (b : I ⟶ J), (∀ (n : ℤ) (x : (F.obj (I.obj.X n))) (a : S.obj (I.obj.X (n + 1))), (injectiveBoundaryConeMap S F G ι π w₀ I J b).f n (injectiveConeVector (injectiveBoundaryRow S F G ι π w₀ I) n x a) = injectiveConeVector (injectiveBoundaryRow S F G ι π w₀ J) n (F.map (b.hom.f n) x) (S.map (b.hom.f (n + 1)) a)) ∧ injectiveBoundaryConeMap S F G ι π w₀ I J b ≫ CochainComplex.mappingCone.descShortComplex (injectiveBoundaryRow S F G ι π w₀ J) = CochainComplex.mappingCone.descShortComplex (injectiveBoundaryRow S F G ι π w₀ I) ≫ (G.mapHomologicalComplex (.up ℤ)).map b.hom ∧ injectiveBoundaryConeMap S F G ι π w₀ I J b ≫ (CochainComplex.mappingCone.triangle (injectiveBoundaryRow S F G ι π w₀ J).f).mor₃ = (CochainComplex.mappingCone.triangle (injectiveBoundaryRow S F G ι π w₀ I).f).mor₃ ≫ ((S.mapHomologicalComplex (.up ℤ)).map b.hom)⟦(1 : ℤ)⟧' ∧ (∀ n : ℤ, HomologicalComplex.homologyMap ((G.mapHomologicalComplex (.up ℤ)).map b.hom) n ≫ injectiveConeHomology (injectiveBoundaryRow S F G ι π w₀ J) (injectiveBoundaryRow_shortExact S F G ι π w₀ h J) n = injectiveConeHomology (injectiveBoundaryRow S F G ι π w₀ I) (injectiveBoundaryRow_shortExact S F G ι π w₀ h I) n ≫ HomologicalComplex.homologyMap ((S.mapHomologicalComplex (.up ℤ)).map b.hom) (n + 1)) ∧ ∀ (b' : I ⟶ J) (_hb : Homotopy b.hom b'.hom), Nonempty (Homotopy (injectiveBoundaryConeMap S F G ι π w₀ I J b) (injectiveBoundaryConeMap S F G ι π w₀ I J b')) ∧ DerivedCategory.Plus.Q.map b = DerivedCategory.Plus.Q.map b') ∧ (∀ (I J : CochainComplex.Plus C) [∀ n : ℤ, Injective (I.obj.X n)] [∀ n : ℤ, Injective (J.obj.X n)] (K L : DerivedCategory.Plus C) (e : DerivedCategory.Plus.Q.obj I ≅ K) (e' : DerivedCategory.Plus.Q.obj J ≅ L) (f : K ⟶ L), ∃ b : I ⟶ J, DerivedCategory.Plus.Q.map b ≫ e'.hom = e.hom ≫ f ∧ ∀ (b' : I ⟶ J) (_hb : DerivedCategory.Plus.Q.map b' ≫ e'.hom = e.hom ≫ f), Nonempty (Homotopy b.hom b'.hom))",
+  "branch": "sheaf-dag",
+  "by": "Q136",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7fdf0904",
+  "group": "Q136",
+  "result": "pass",
+  "note": "Read the node, all 8 stmt_deps, the DerivedInjectiveBoundary module and the delivered module. Signs checked against Mathlib: inl_v_d gives d(b,a)=(db+u a,-da); inl_v_triangle_mor3_f gives -pr; triangleOfSESδ is the canonical roof inv Q(q)≫Q(mor3)≫commShift; homologySequenceδ_triangleh gives the positive snake sign. β is pinned by roof normalization for every injective I and every e via the actual rightDerivedFunctorPlusUnit; δ is pinned by InjectiveBoundaryNormalized and as shiftMap of β. Lift/∃! a/cocycle/positive [a] clauses, cone map with q/−pr/homology squares, homotopy invariance and lift-uniqueness-up-to-homotopy clauses all present. No extra hypotheses; universes independent. Node diff vs live: lean only. No duplicate found; docstrings carry the source place and blueprint tag; proof is only sorry. No compile run (no file changed; worker reports a clean compile)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261023T131805-L-2151947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Functor.exists_injectiveConeBoundaryDescent"
+  ],
+  "sorry_after": []
+ }
+}

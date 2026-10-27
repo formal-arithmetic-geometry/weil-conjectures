@@ -1,0 +1,353 @@
+{
+ "id": "lem-per-formal-affine-principal-refinement",
+ "kind": "statement",
+ "title": "Principal refinements and local algebra of Noetherian formal affine charts",
+ "statement": "A locally Noetherian adic formal scheme $\\mathfrak T$ is a ringed space covered by $\\operatorname{Spf}R$, for commutative Noetherian rings $R$ [def-weil-pbc-noetherian-ring] complete and separated for powers of a finitely generated ideal $K$ [def-weil-pbc-adic-completion]; the points of $\\operatorname{Spf}R$ are the primes containing $K$, with the subspace topology from $\\operatorname{Spec}R$, and its structure sheaf is the inverse limit of those of $\\operatorname{Spec}(R/K^n)$. For $s\\in R$ write $R_{\\{s\\}}=\\varprojlim_n(R/K^n)_s$, equivalently the $KR_s$-adic completion of the ring localization $R_s$ [def-weil-ring-localization-away]. The principal open $D(s)\\cap\\operatorname{Spf}R$ is canonically $\\operatorname{Spf}R_{\\{s\\}}$; its ring $R_{\\{s\\}}$ is Noetherian, and restriction of sections is the canonical map $R\\to R_s\\to R_{\\{s\\}}$. These identifications commute with restrictions and continuous ring maps. For any two formal affine opens $U,V\\subseteq\\mathfrak T$, any point $x\\in U\\cap V$ and any open neighbourhood $N\\subseteq U\\cap V$ of $x$, there is a neighbourhood $W\\subseteq N$ of $x$ that is principal in both $U$ and $V$. Finally, every maximal ideal $\\mathfrak m\\subset R$ contains $K$. If $s\\notin\\mathfrak m$, there is an open maximal ideal $\\mathfrak n\\subset R_{\\{s\\}}$ contracting to $\\mathfrak m$, and the induced map $R_{\\mathfrak m}\\to(R_{\\{s\\}})_{\\mathfrak n}$ is faithfully flat: flat with surjective map on prime spectra [def-weil-pbc-localization-at-prime, def-weil-pbc-faithfully-flat-ring-map]. No quasi-excellence or regularity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/formal-spaces.tex",
+  "place": "Tag 0AHY, section-formal-schemes-EGA, formula for sections on D(f) and equation 0AHZ, equation-morphisms-affine-formal-schemes. Common principal neighbourhood argument is the formal counterpart of schemes.tex Tag 01IW, lemma-standard-open-two-affines, via the same restrictions argument. Local faithful flatness follows from the displayed completed localization, algebra.tex completion-flat and its quotient modulo the ideal of definition."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-affine-spectrum",
+  "def-per-adic-formal-geometry",
+  "def-per-adic-principal-chart-data"
+ ],
+ "proof": [
+  {
+   "text": "Use positive indices $n\\geq1$. By the definition of a locally Noetherian adic formal scheme, work on a chart with $R\\cong\\varprojlim_nR/K^n$. An open prime contains some $K^n$, hence contains $K$, and conversely a prime containing $K$ is open. Thus the underlying space is $V(K)$, with its subspace topology, also the underlying space of every $\\operatorname{Spec}(R/K^n)$. A principal open of this space is $D(s)\\cap V(K)$; these form a basis because a Zariski open is a union of complements of vanishing sets of single elements. Regard the quotient structure sheaves as sheaves on this common space and use their inverse limit as the structure sheaf, exactly as in the formal-spectrum construction in Tag 0AHY. All operations are componentwise; the topologies on sections are the inverse-limit topologies of the discrete quotient section rings.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA, definition of Spf and its structure sheaf"
+   }
+  },
+  {
+   "text": "The inverse system here is indexed by the small category of positive integers, with arrows from larger indices to smaller ones. Apply sectionwise limits of sheaves of sets to its underlying sheaves. Componentwise addition and multiplication make this the limit ring sheaf as well. On $D(s)\\cap V(K)$ the affine scheme section formula at level $n$ gives $(R/K^n)_s$. Consequently its section ring is $C_s:=\\varprojlim_n(R/K^n)_s$. The restriction from the whole chart sends $r$ to $(r\\bmod K^n)_n$ followed by localization at each level; it is the canonical composite $R\\to R_s\\to C_s$. Restrictions between smaller basis opens are likewise the compatible quotient-localization maps, rather than arbitrarily chosen ring isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, displayed formula for sections on D(f); Tags 00W2 (sites.tex lemma-limit-sheaf) and 01HV/01I3 (schemes.tex lemma-spec-sheaves/lemma-standard-open-affine)"
+   }
+  },
+  {
+   "text": "Localization commutes with quotient, so $R_s/(KR_s)^n\\cong(R/K^n)_s$, with $r/s^e$ mapping to $(r\\bmod K^n)/s^e$. This identifies $C_s$ with the $KR_s$-adic completion of $R_s$. The ideal $KR_s$ is finitely generated by the images of any finite generating set of $K$. The completion-quotient theorem, applied with module $M=R_s$, gives $C_s/(KC_s)^n\\cong(R/K^n)_s$ with the displayed projections, and completeness and separatedness of $C_s$. Localization preserves Noetherianity and Noetherian completion preserves it, so $C_s$ is Noetherian. The special-fibre isomorphism identifies $V(KC_s)$ with $D(s)\\cap V(K)$. These identifications identify all thickening structure sheaves: on the basis given by the images of $a\\in R$, the level-$n$ section map is precisely $((R/K^n)_s)_a\\cong(R/K^n)_{sa}$. This basis suffices since every element of $C_s/KC_s=(R/K)_s$ is $\\bar a/\\bar s^e$. Taking the componentwise limits from Step 2 identifies the sheaves, including their topologies, and proves $D(s)\\cap\\operatorname{Spf}R\\cong\\operatorname{Spf}C_s$.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CT (proposition-localize-quotient), 05GG (lemma-hathat-finitely-generated), 00FN (lemma-Noetherian-permanence), 0316 (lemma-completion-Noetherian-Noetherian); formal-spaces.tex Tag 0AHY"
+   }
+  },
+  {
+   "text": "For a continuous ring map $\\varphi:(R,K)\\to(S,L)$, for each $n$ choose $m(n)$ with $\\varphi(K^{m(n)})\\subseteq L^n$. Enlarge the choices to make them nondecreasing. The induced maps $R/K^{m(n)}\\to S/L^n$ induce $(R/K^{m(n)})_s\\to(S/L^n)_{\\varphi(s)}$, sending $\\bar r/\\bar s^e$ to $\\overline{\\varphi(r)}/\\overline{\\varphi(s)}^e$. For a compatible tuple, use its $m(n)$ component to define the $n$ component of the image. The quotient transition maps make these images compatible. Two choices agree after passing to the larger index, so the map is independent of the choices. Restriction squares commute since both paths have the displayed fraction formula at each quotient. Composites of continuous maps give the composite fraction formula after enlarging indices; identities do also. Thus the principal-chart identifications and the restriction maps commute with continuous ring maps, including maps which do not carry $K$ itself into $L$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-ring-localization-away",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tags 0AHY and 0AHZ (equation-morphisms-affine-formal-schemes); construction on quotients, with reindexing for continuity"
+   }
+  },
+  {
+   "text": "On any of these charts, $D(s)$ is intrinsically the locus where the germ of $s$ is invertible: on $D(s)$ the inverses in all quotient localizations give an inverse section by Step 2. Conversely, the projection to the first quotient sheaf and then to the residue field at a prime $\\mathfrak p\\supseteq K$ sends an invertible germ to a nonzero element, forcing $s\\notin\\mathfrak p$. This characterization is unchanged under restriction to an open ringed subspace, since its germs are the same. Thus the principal loci computed in two overlapping charts agree whenever their sections agree after restriction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-spaces.tex",
+    "place": "Tag 0AHY, section-formal-schemes-EGA, quotient-sheaf construction and principal sections; explicit germ argument"
+   }
+  },
+  {
+   "text": "Write $U=\\operatorname{Spf}R$, $V=\\operatorname{Spf}S$. Choose $f\\in R$ with $x\\in U'=D_U(f)\\subseteq N$, using the basis in Step 1. By Step 3, $U'=\\operatorname{Spf}C_f$ with section ring $C_f$. Choose $g\\in S$ with $x\\in W=D_V(g)\\subseteq U'$. Let $t$ be the restriction of $g$ to $U'$. By Step 5 its invertibility locus on $U'$ is exactly $W$. The quotient formula of Step 3 writes $t\\bmod KC_f=\\bar a/\\bar f^e$ for some $a\\in R$. For the primes of $C_f$ containing $KC_f$, nonvanishing of $t$ is therefore nonvanishing of $a$, since $f$ is invertible. Hence $W=D_U(fa)$ as a subset of $U$, while $W=D_V(g)$ by construction. These are open ringed subspaces with the inherited structure sheaf. Thus $W$ contains $x$, lies in $N$, and is principal in both original charts. Notice that only the reduction of $t$ is written as a fraction; $t$ itself need not belong to the ordinary localization $R_f$.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IW, lemma-standard-open-two-affines, adapted using the completed-localization reduction of algebra.tex Tag 05GG; explicit argument"
+   }
+  },
+  {
+   "text": "Apply the complete-ring Jacobson-radical lemma to $(R,K)$. Every maximal ideal $\\mathfrak m$ of $R$ therefore contains $K$. If $s\\notin\\mathfrak m$, the first-quotient projection gives the surjection $C_s\\to(R/K)_s\\to R/\\mathfrak m$, the second arrow being $\\bar a/\\bar s^e\\mapsto(a\\bmod\\mathfrak m)(s\\bmod\\mathfrak m)^{-e}$. This composite is surjective since its restriction to $R$ is the residue map. Its kernel $\\mathfrak n$ is maximal (its quotient is the field $R/\\mathfrak m$), contains $KC_s$, and contracts to $\\mathfrak m$. In particular it is an open maximal ideal of $C_s$.",
+   "uses": [
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GI (lemma-radical-completion) and 05GG (lemma-hathat-finitely-generated); explicit residue quotient"
+   }
+  },
+  {
+   "text": "The ring $R_s$ is Noetherian by Step 3. The map $R\\to R_s$ is flat by flatness of localization, and $R_s\\to C_s$ is flat by flatness of Noetherian adic completion, applied to $KR_s$. Composition of flat ring maps gives flatness of $R\\to C_s$. Apply flat localization of a ring map at $\\mathfrak n$, whose preimage is the maximal ideal $\\mathfrak m$ by Step 7, to obtain a flat local homomorphism $R_{\\mathfrak m}\\to(C_s)_{\\mathfrak n}$. The flat-local faithful-flatness lemma makes it faithfully flat and gives surjectivity on prime spectra. This proves the last assertion using just Noetherianity and the adic hypotheses; no regularity or quasi-excellence was used.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HT (lemma-flat-localization), 00MB (lemma-completion-flat), 00HC (lemma-composition-flat), 00HR (lemma-local-flat-ff), 00HQ (lemma-ff-rings)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/formal-spaces.tex",
+  "place": "Tag 0AHY, with the explicit completed version of Tag 01IW and the cited algebra lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-affine-principal-refinement: affine formal schemes have a basis of completed principal localizations and two affine opens admit common principal refinements",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_affine_inter\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V → ∀ x ∈ U ⊓ V, ∃ f g, X.basicOpen f = X.basicOpen g ∧ x ∈ X.basicOpen f\", \"doc\": \"For any affine open subsets $U$ and $V$ of a scheme $X$, and for any point $x$ in their intersection $U \\\\cap V$, there exist sections $f \\\\in \\\\Gamma(U, \\\\mathcal{O}_X)$ and $g \\\\in \\\\Gamma(V, \\\\mathcal{O}_\"}\n  {\"name\": \"AlgebraicGeometry.isBasis_affine_open\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), TopologicalSpace.Opens.IsBasis X.affineOpens\", \"doc\": \"For any scheme $X$, the collection of affine open subsets of $X$ forms a basis for the topology of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(R : CommRingCat) → (AlgebraicGeometry.Spec R).OpenCover\", \"doc\": \"For any commutative ring $ R $, this constructs the open cover of the scheme $ \\\\operatorname{Spec}(R) $ by the standard affine open immersions $ \\\\operatorname{Spec}(R_r) \\\\to \\\\operatorname{Spec}(R) $, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isBasis_affineOpens\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), TopologicalSpace.Opens.IsBasis X.affineOpens\", \"doc\": \"For any scheme $X$, the collection of affine open subsets of $X$ forms a basis for the topology on $X$. This means: (1) Every point of $X$ is contained in at least one affine open subset; (2) The inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isAffine_affineBasisCover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (i : X.affineBasisCover.I₀), AlgebraicGeometry.IsAffine (X.affineBasisCover.X i)\", \"doc\": \"For any scheme $X$, each component in the affine basis cover of $X$ is an affine scheme. This follows from the construction where the affine basis cover consists of standard affine open subsets (local\"}\n  {\"name\": \"AlgebraicGeometry.isBasis_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], TopologicalSpace.Opens.IsBasis (Set.range X.basicOpen)\", \"doc\": \"For an affine scheme $ X $, the collection of basic open subsets $ D(f) = \\\\{ x \\\\in X \\\\mid f \\\\text{ is invertible at } x \\\\} $, where $ f $ ranges over global sections of the structure sheaf $ \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.OpenCover\", \"doc\": \"For any scheme $X$, this constructs an open cover by affine open immersions obtained by taking the standard affine open subsets (localizations at elements) of each affine open subscheme in $X$'s affin\"}\n  {\"name\": \"AlgebraicGeometry.of_affine_open_cover\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : ↑X.affineOpens → Prop} {ι : Sort u_2} (U : ι → ↑X.affineOpens),\\n  ⨆ i, ↑(U i) = ⊤ →\\n    ∀ (V : ↑X.affineOpens),\\n      (∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))), P U → P (X.affineBasicOpen f)) →\\n        (∀ (U : ↑X.affineOpens) (s : Finset ↑\", \"doc\": \"Let $ X $ be a scheme and $ P $ a property of affine open subsets of $ X $. Suppose that: (1) $ \\\\{U_i\\\\}_{i \\\\in I} $ is a cover of $ X $ by affine open subsets such that $ \\\\bigcup_i U_i = X $; (2) $ P \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme affine-refinement results do not apply to formal schemes; completion flatness does not provide the formal-chart comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"IsLocalization\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme affine-refinement results do not apply to formal schemes; completion flatness does not provide the formal-chart comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Spf|FormalScheme|formal.*principal|completed.*localization",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean\", \"line\": \"15\", \"text\": \"defining `ModularForm` and `CuspForm`. We prove several instances for such spaces, in particular\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"74\", \"text\": \"private theorem cuspFunction_eqOn_const_of_nonpos_wt (hk : k ≤ 0) (f : F) :\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"75\", \"text\": \"    Set.EqOn (cuspFunction 1 f) (const ℂ (cuspFunction 1 f 0)) (Metric.ball 0 1) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"77\", \"text\": \"  · exact (ModularFormClass.differentiableAt_cuspFunction f one_pos one_mem_strictPeriods_SL\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"86\", \"text\": \"        by simpa [← SlashInvariantFormClass.eq_cuspFunction f _ one_mem_strictPeriods_SL\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean\", \"line\": \"90\", \"text\": \"    f = Function.const ℍ (cuspFunction 1 f 0) := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.ModularForms.CuspFormSubmodule\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"21\", \"text\": \"* `CuspForm.discriminantEquiv`: `CuspForm 𝒮ℒ k ≃ₗ[ℂ] ModularForm 𝒮ℒ (k - 12)`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"22\", \"text\": \"* `ModularForm.rank_eq_one_add_rank_cuspForm`: `rank M_k = 1 + rank S_k` for even `k ≥ 3`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"34\", \"text\": \"  CuspFormClass MatrixGroups OnePoint Filter EisensteinSeries Asymptotics\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/DimensionFormula.lean\", \"line\": \"44\", \"text\": \"namespace CuspForm\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"46\", \"text\": \"private lemma E₄CubeSubE₆SqForm_isCuspForm : IsCuspForm E₄CubeSubE₆SqForm := by\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"47\", \"text\": \"  simp [isCuspForm_iff_coeffZero_eq_zero, E₄CubeSubE₆SqForm_qExpansion_eq,\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"61\", \"text\": \"  obtain ⟨g, hg⟩ := E₄CubeSubE₆SqForm_isCuspForm\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"62\", \"text\": \"  obtain ⟨c, hc⟩ := CuspForm.exists_smul_discriminant_of_weight_eq_twelve g\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/LevelOne/GradedRing.lean\", \"line\": \"65\", \"text\": \"    have hcΔ : (c • CuspForm.discriminant : ℍ → ℂ) = g := congrArg DFunLike.coe hc\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"13\", \"text\": \"# Cusp form submodule and IsCuspForm predicate\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"16\", \"text\": \"submodule of modular forms, and the `IsCuspForm` predicate. It also provides a direct constructor\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"17\", \"text\": \"`ModularForm.toCuspForm` for building cusp forms from modular forms with vanishing constant\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"22\", \"text\": \"* `CuspForm.toModularFormₗ`: the inclusion `CuspForm Γ k →ₗ[ℂ] ModularForm Γ k`.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/CuspFormSubmodule.lean\", \"line\": \"23\", \"text\": \"* `ModularForm.cuspFormSubmodule`: the submodule of `ModularForm Γ k` consisting of cusp forms.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/NormTrace.lean\", \"line\": \"94\", \"text\": \"protected def CuspForm.trace [CuspFormClass F 𝒢 k] : CuspForm ℋ k where\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"line\": \"199\", \"text\": \"lemma discriminant_cuspFunction_eqOn : Set.EqOn (cuspFunction 1 Δ)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"line\": \"203\", \"text\": \"  · simpa [hq0] using! Periodic.cuspFunction_zero_of_zero_at_inf one_pos\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Discriminant.lean\", \"line\": \"207\", \"text\": \"    simp [cuspFunction, Periodic.cuspFunction_eq_of_nonzero 1 _ hq0,\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme affine-refinement results do not apply to formal schemes; completion flatness does not provide the formal-chart comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-formal-affine-principal-refinement: a formal principal affine open is the adic completion of a localization and at an open prime the map of local rings is faithfully flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.basicOpen_subset_unramifiedLocus_iff\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \"{f : A} : ↑(PrimeSpectrum.basicOpen f) ⊆ unramifiedLocus R A ↔ Algebra.FormallyUnramified R (Localization.Away f)\", \"doc\": \"The basic open set $ D(f) $ in the prime spectrum of $ A $ is contained within the unramified locus of the $ R $-algebra $ A $ if and only if the localization $ A_f $ (localization of $ A $ at the sub\"}\n  {\"name\": \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(v : HeightOneSpectrum R) : v.adicCompletion ℚ ≃A[ℚ] ℚ_[primesEquiv v]\", \"doc\": \"For a height one prime ideal $ v $ in the integral closure of $ \\\\mathbb{Z} $ in $ \\\\mathbb{Q} $, the adic completion of $ \\\\mathbb{Q} $ with respect to the valuation induced by $ v $ is canonically equi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝓤 : X.OpenCover) : X.AffineOpenCover\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs an affine open cover by refining $\\\\mathcal{U}$ with affine open covers of its components. Specifically, it binds the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{R} [CommRing R] (f : R) : IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away f))))\", \"doc\": \"The morphism of schemes $\\\\operatorname{Spec}(R_f) \\\\to \\\\operatorname{Spec}(R)$ induced by the canonical ring homomorphism from a commutative ring $R$ to its localization $R_f$ at the submonoid generate\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": IsLocalization.Away f Γ(X, X.basicOpen f)\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $ and a section $ f $ of the structure sheaf over $ U $, the ring of sections over the basic open set $ D(f) $ (where the germ of $ f $ is a unit) is ca\"}\n  {\"name\": \"Padic.adicCompletionEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(p : Nat.Primes) : ℚ_[p] ≃A[ℚ] ((primesEquiv (R := R)).symm p).adicCompletion ℚ\", \"doc\": \"For a prime number $ p $, there is a continuous algebra equivalence between the field of $ p $-adic numbers $ \\\\mathbb{Q}_p $ and the adic completion of $ \\\\mathbb{Q} $ with respect to the height one pr\"}\n  {\"name\": \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : Scheme.{u}) [IsAffine X] (r : Γ(X, ⊤)) : IsLocalization.Away r Γ(X.basicOpen r, ⊤)\", \"doc\": \"For any affine scheme $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$, the ring of sections over the basic open set $X_{r}$ is canonically isomorphic to the localizati\"}\n  {\"name\": \"PadicInt.adicCompletionIntegersEquiv\", \"module\": \"Mathlib.NumberTheory.Padics.HeightOneSpectrum\", \"type\": \"(p : Nat.Primes) : ℤ_[p] ≃A[ℤ] ((primesEquiv (R := R)).symm p).adicCompletionIntegers ℚ\", \"doc\": \"For any prime number $ p $, there is a continuous algebra equivalence between the ring of $ p $-adic integers $ \\\\mathbb{Z}_p $ and the adic completion integers at the height one prime ideal correspond\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme affine-refinement results do not apply to formal schemes; completion flatness does not provide the formal-chart comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-affine-principal-refinement: common distinguished affine neighborhoods in noetherian formal schemes and maximal ideals of complete adic rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.OpenCover → X.AffineOpenCover\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs an affine open cover by refining $\\\\mathcal{U}$ with affine open covers of its components. Specifically, it binds the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_idx\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), X.affineOpenCover.idx x = ⋯.choose\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the index function of the affine open cover assigns to $x$ an index in the indexing set corresponding to an affine open subscheme containing $x$. This ensur\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.affineOpenCover.I₀ = X.affineCover.I₀\", \"doc\": \"For any scheme $X$, the index type $I_0$ of the affine open cover of $X$ is equal to the index type $I_0$ of the affine cover of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (I : X.IdealSheafData) → I.subscheme.AffineOpenCover\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme $\\\\operatorname{Subscheme}(\\\\mathcal{I})$ admits an affine open cover constructed by taking, for each affine open subset \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.directedAffineCover_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Directed\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), X.directedAffineCover.I₀ = ↑X.affineOpens\", \"doc\": \"For any scheme $ X $, the zeroth component $ I_0 $ of the directed affine cover of $ X $ is equal to the set of affine open subsets of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\\n  ⨆ i, ↑(S i) = ⊤ →\\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))\", \"doc\": \"For a scheme $X$ and a finite family of affine open subsets $\\\\{S_i\\\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\\\Gamma(X, S_i)$ is a Noetherian ring for every $i$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme affine-refinement results do not apply to formal schemes; completion flatness does not provide the formal-chart comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bSpf\\b|\\bFormalScheme\\b|regular.*completion|completion.*regular",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-affine-principal-refinement: completed principal affine formal charts, common principal neighborhoods, faithfully flat maps at open maximal ideals",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"AlgebraicGeometry.Scheme.local_affine\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.exists_lift_of_germInjective\"], \"digest\": \"3e1a0c81e59fbe21\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary schemes or completion flatness only, not the formal-chart statement"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bSpf\\b|\\bFormalScheme\\b|completed.*localization",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary schemes or completion flatness only, not the formal-chart statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-formal-affine-principal-refinement: formal spectrum principal opens are completed localizations, common distinguished neighborhoods in two formal affine opens",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.basicOpen_eq_of_affine\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_basicOpen\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_fromSpec_app\", \"AlgebraicGeometry.basicOpen_eq_of_affine'\"], \"digest\": \"3d24318184d36708\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary schemes or completion flatness only, not the formal-chart statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"IsLocalization\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary schemes or completion flatness only, not the formal-chart statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-formal-affine-principal-refinement: common distinguished neighborhoods in locally Noetherian adic formal schemes and flat local completed localization maps",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\"], \"digest\": \"96b86f53e887221b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover ordinary schemes or completion flatness only, not the formal-chart statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-morphism-formal-completion",
+  "date": "2026-10-24",
+  "group": "Q07"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3 (duality direction), through the existing small-singular-locus resolution dependency: Principal refinements and local algebra of Noetherian formal affine charts. Temkin Corollary 2.4.5 and Lemma 2.4.6 supporting formal completion in the proof of Theorem 3.4.1.",
+   "via": [
+    "lem-per-regular-morphism-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-formal-affine-principal-refinement",
+  "worker": "stage1",
+  "summary": "Expanded the formal chart construction on quotient sheaves, checked all restriction and continuous-map formulas, proved common principal refinement by clearing a denominator only modulo the ideal of definition, and constructed the open maximal ideal explicitly before using existing flatness lemmas. No new nodes: all non-elementary inputs already exist. Statement unchanged.",
+  "blueprint": "Ancestor Step 3 (duality direction), through the existing small-singular-locus resolution dependency: Principal refinements and local algebra of Noetherian formal affine charts. Temkin Corollary 2.4.5 and Lemma 2.4.6 supporting formal completion in the proof of Theorem 3.4.1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "why": "Generic limits of sheaves of sets on a site are computed sectionwise used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Generic sections over an affine open: vanishing at a point iff membership in its prime; basic opens are affine with ring the localization used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-quotient-commute",
+    "why": "Generic localization at an element commutes with passing to a quotient used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic the adic completion of a module along a finitely generated ideal is complete, with quotients m/i^nm used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic localizations of noetherian rings are noetherian used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic the completion of a noetherian ring is noetherian used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-adic-complete-jacobson-radical",
+    "why": "Generic the ideal of a complete ring lies in the jacobson radical used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic a localization is a flat algebra used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-completion-flat",
+    "why": "Generic the adic completion of a noetherian ring is flat used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-comp",
+    "why": "Generic a composition of flat ring maps is flat used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-ring-maps",
+    "why": "Generic a flat ring map induces flat local maps of local rings used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "why": "Generic a flat local homomorphism of local rings is surjective on spectra used on the adic chart rings or quotient sheaves; this formal-local argument is not replaced by a different unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-localization-quotient-commute",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-5784eeff9",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-5784eeff9 (reviewer sub-agent of L); spot-checked: Read the item in full: 8 steps, no new nodes. The statement is unchanged against live, where the item is still unsplit with no repair note. Source checked: Stacks formal-spaces 0AHY/0AHZ, where Spf A is the open primes with structure sheaf lim O_{Spec(A/I_λ)}. All cited tags were confirmed in tags/tags. Every step is correct. S2: sectionwise limit over N plus 01I3 basic opens give C_s=lim(R/K^n)_s. S3: 00CT with J=K^n and 05GG with A=M=R_s, I=KR_s finitely generated give C_s/(KC_s)^n≅(R/K^n)_s; Noetherian by 00FN and 0316; sheaves matched on the basis D(sa). S4: continuity reindexed with nondecreasing m(n). S5: D(s) is the invertibility locus of the germ of s. S6: only t mod KC_f=ā/f̄^e is used, giving W=D_U(fa)=D_V(g); t∈R_f is not assumed and U∩V need not be affine. S7: 05GI gives K⊆m (R is complete); C_s→(R/K)_s→R/m gives an open maximal n contracting to m. S8: 00HT, 00MB on R_s, 00HC, flat-local-ring-maps, then 00HR/00HQ. Edge cases checked: K=0, K nilpotent, s=0 or 1, R=0. No duplicate formal-chart node exists (rg Spf/formal affine). The parent regular-morphism-formal-completion steps 5-6 get exactly what they use. The declared tool_uses of generic sk-thm-p1 algebra lemmas are accepted. No SGA. FIX (B3): the statement uses Spec but stmt_deps lacked def-weil-affine-spectrum; added in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-formal-affine-principal-refinement.json, statement text unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalAffinePrincipalRefinement",
+  "declaration": "AlgebraicGeometry.adicFormalAffine_principal_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalAffinePrincipalRefinement.lean",
+  "statement": "theorem adicFormalAffine_principal_refinement : (∀ (R : CommRingCat.{u}) (K : Ideal R) [IsNoetherianRing R] [IsAdicComplete K R], (∃ e : adicFormalSpec R K ≃ₜ {p : PrimeSpectrum R // K ≤ p.asIdeal}, ∀ x : adicFormalSpec R K, (e x).val = (adicFormalSpecToSpec R K).hom.base x) ∧ (∀ s : R, IsNoetherianRing (adicCompletedAway R K s) ∧ IsAdicComplete (K.map (adicCompletedAwayMap R K s)) (adicCompletedAway R K s) ∧ (∃! e : (adicFormalSpec R K).presheaf.obj (op (adicFormalPrincipalOpen R K s)) ≃+* adicCompletedAway R K s, IsAdicPrincipalSectionComparison R K s e) ∧ (∃ e : adicCompletedAway R K s ≃+* (↑(limit (adicLocalizedQuotientTower R K s))), @IsHomeomorph _ _ (K.map (adicCompletedAwayMap R K s)).adicTopology (⨅ n : ℕ, TopologicalSpace.induced (limit.π (adicLocalizedQuotientTower R K s) (op n)).hom ⊥) e ∧ ∀ (n : ℕ) (r : R), (limit.π (adicLocalizedQuotientTower R K s) (op n)).hom (e (adicCompletedAwayMap R K s r)) = algebraMap (R ⧸ K ^ (n + 1)) (Localization.Away (Ideal.Quotient.mk (K ^ (n + 1)) s)) (Ideal.Quotient.mk (K ^ (n + 1)) r)) ∧ (∃ e : adicFormalSpec (CommRingCat.of (adicCompletedAway R K s)) (K.map (adicCompletedAwayMap R K s)) ≅ (adicFormalSpec R K).restrict (adicFormalPrincipalOpen R K s).isOpenEmbedding, IsAdicFormalSpectrumMap (R := R) (S := CommRingCat.of (adicCompletedAway R K s)) K (K.map (adicCompletedAwayMap R K s)) (adicCompletedAwayMap R K s) (e.hom ≫ (adicFormalSpec R K).ofRestrict (adicFormalPrincipalOpen R K s).isOpenEmbedding))) ∧ (∀ (s t : R) (h : adicFormalPrincipalOpen R K t ≤ adicFormalPrincipalOpen R K s) (es : (adicFormalSpec R K).presheaf.obj (op (adicFormalPrincipalOpen R K s)) ≃+* adicCompletedAway R K s) (et : (adicFormalSpec R K).presheaf.obj (op (adicFormalPrincipalOpen R K t)) ≃+* adicCompletedAway R K t), IsAdicPrincipalSectionComparison R K s es → IsAdicPrincipalSectionComparison R K t et → ∃! ψ : adicCompletedAway R K s →+* adicCompletedAway R K t, @Continuous _ _ (K.map (adicCompletedAwayMap R K s)).adicTopology (K.map (adicCompletedAwayMap R K t)).adicTopology ψ ∧ ψ.comp (adicCompletedAwayMap R K s) = adicCompletedAwayMap R K t ∧ et.toRingHom.comp ((adicFormalSpec R K).presheaf.map (homOfLE h).op).hom = ψ.comp es.toRingHom) ∧ (∀ (m : Ideal R) [m.IsMaximal], K ≤ m ∧ ∀ s : R, s ∉ m → ∃ (n : Ideal (adicCompletedAway R K s)) (_ : n.IsMaximal), K.map (adicCompletedAwayMap R K s) ≤ n ∧ ∃ h : m = n.comap (adicCompletedAwayMap R K s), (Localization.localRingHom m n (adicCompletedAwayMap R K s) h).FaithfullyFlat)) ∧ (∀ (X : RingedSpace.{u}), (∀ x : X, ∃ U : Opens X, x ∈ U ∧ IsAdicFormalAffineOpen X U) → ∀ (U V : Opens X) (_ : IsAdicFormalAffineOpen X U) (_ : IsAdicFormalAffineOpen X V) (x : X) (N : Opens X), x ∈ N → N ≤ U ⊓ V → ∃ (s : X.presheaf.obj (op U)) (t : X.presheaf.obj (op V)), x ∈ X.basicOpen s ∧ X.basicOpen s ≤ N ∧ X.basicOpen s = X.basicOpen t) ∧ (∀ (R S : CommRingCat.{u}) (K : Ideal R) (L : Ideal S) [IsNoetherianRing R] [IsNoetherianRing S] [IsAdicComplete K R] [IsAdicComplete L S] (φ : R →+* S), @Continuous _ _ K.adicTopology L.adicTopology φ → ∃! F : adicFormalSpec S L ⟶ adicFormalSpec R K, IsAdicFormalSpectrumMap K L φ F ∧ ∀ (s : R) (eR : (adicFormalSpec R K).presheaf.obj (op (adicFormalPrincipalOpen R K s)) ≃+* adicCompletedAway R K s) (eS : (adicFormalSpec S L).presheaf.obj (op (adicFormalPrincipalOpen S L (φ s))) ≃+* adicCompletedAway S L (φ s)), IsAdicPrincipalSectionComparison R K s eR → IsAdicPrincipalSectionComparison S L (φ s) eS → ∃ h : (Opens.map F.hom.base).obj (adicFormalPrincipalOpen R K s) = adicFormalPrincipalOpen S L (φ s), ∃! ψ : adicCompletedAway R K s →+* adicCompletedAway S L (φ s), @Continuous _ _ (K.map (adicCompletedAwayMap R K s)).adicTopology (L.map (adicCompletedAwayMap S L (φ s))).adicTopology ψ ∧ ψ.comp (adicCompletedAwayMap R K s) = (adicCompletedAwayMap S L (φ s)).comp φ ∧ eS.toRingHom.comp (((adicFormalSpec S L).presheaf.map (eqToHom h.symm).op).hom.comp (F.hom.c.app (op (adicFormalPrincipalOpen R K s))).hom) = ψ.comp eR.toRingHom)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e467cc224",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read the item, new node def-per-adic-principal-chart-data, all 8 stmt_dep records (7 identical to live; item differs only in lean + 2 added stmt_deps, statement unchanged), both modules, the landed AdicFormalGeometry and Stacks 0AHY/0AHZ. Every clause matches: points ≃ₜ {p ⊇ K} pinned to the canonical map; C_s = AdicCompletion of R_s along KR_s ≅ lim (R/K^{n+1})_s, homeomorphic, with the projection formula; C_s Noetherian and complete; ∃! section comparison (uniqueness true by density of R_s in a Hausdorff ring); D(s)∩Spf R ≅ Spf C_s via IsAdicFormalSpectrumMap; restriction and continuous-map compatibility with unique continuous ψ (canonical maps); ∃! F among all RingedSpace maps (true: base pinned by triangle, sections pinned on a basis); chart-independent common principal refinement via germ-unit basicOpen; K ≤ m, open maximal n contracting to m, localRingHom RingHom.FaithfullyFlat, no excellence/regularity hypothesis. Helper defs carry real data (pseudo-discrete and inverse-limit section topologies as in Stacks); no duplicate; statements verbatim; universe u only; sorry only; docstrings include the 8 steps; report sections present. Edge cases K=0, R=0, s=0/1/nilpotent, empty X, n=0 thickening OK. No compile run (no file changed). Advisories: proof-only imports; adicFormalSpecToSpec parallels AdicFormalCompletion.toScheme of the pre-existing duplicate node."
+ }
+}

@@ -1,0 +1,498 @@
+{
+ "id": "lem-sfb-relative-rational-flat-regularity",
+ "kind": "statement",
+ "title": "Flat detection of the maximal domain of a relative rational map",
+ "statement": "Let $S$ be a Noetherian scheme, meaning that it has a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring, def-weil-affine-spectrum]. Let $X,X',Y$ be smooth finite-type $S$-schemes [def-sbc-smooth-morphisms, def-weil-finite-type-morphism], with $Y$ separated over $S$, meaning that its diagonal is a closed immersion [def-weil-closed-immersion]. Products and fibres are base changes [def-pc-base-change]. An open in an $S$-scheme is $S$-dense when it is dense in every fibre. An $S$-rational map $\\phi:X\\dashrightarrow Y$ is an equivalence class of $S$-morphisms on $S$-dense opens, two representatives being equivalent when they agree on an $S$-dense common open. The union $\\operatorname{dom}(\\phi)$ of all representative domains carries a unique morphism representing $\\phi$ and restricting to each representative. In particular, two morphisms on $X$ representing the same rational map are equal. If $p:X'\\to X$ is a flat $S$-morphism [def-weil-flat-morphism], then $\\phi\\circ p$ is an $S$-rational map and\n$$\\operatorname{dom}(\\phi\\circ p)=p^{-1}\\operatorname{dom}(\\phi).$$\nConsequently, if $p$ is also surjective and $\\phi\\circ p$ is represented by a morphism on all of $X'$, then $\\phi$ is represented by a unique morphism on all of $X$. In particular this applies when $H$ is a smooth finite-type $S$-scheme, $E\\subset H\\times_SX$ is open, and $p:E\\to X$ is the second projection with nonempty fibre over every point of $X$: this projection is flat and surjective, and $E$ is smooth and of finite type over $S$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "2.5, definition and graph description of dom, printed pp.55-57 (PDF pp.61-63); Proposition 5, printed p.58 (PDF p.64); open-product consequence using smoothness and the Noetherian hypothesis; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf, local PDF WANTED"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-flat-morphism",
+  "def-sfb-relative-rational-map"
+ ],
+ "proof": [
+  {
+   "text": "First note the finiteness needed below. By [lem-weil-pbc-finite-type-over-noetherian], $X,X'$ and $Y$ are Noetherian. The product $P=X\\times_SY$ is Noetherian as well: its projection to $X$ is finite type by [lem-sfb-finite-type-composition-base-change], and apply the same Noetherian lemma. Opens in these schemes have quasi-compact inclusions by [lem-sfb-noetherian-open-immersion-qc]. A Noetherian scheme is quasi-separated: on affine charts, intersections of two affine opens are open subsets of a Noetherian affine and hence quasi-compact. Thus a morphism from a quasi-compact one of these opens to a quasi-separated scheme is quasi-compact, by [lem-weil-pbc-qcqs-morphism-permanence]. In particular all graph maps used below, and restrictions of $p$ between these opens, are quasi-compact. Since $X'\\to S$ is locally finite type, cancellation (f) of [lem-weil-pbc-proper-fp-permanence] makes $p$ locally finite type. Its target is locally Noetherian, so [pqf-lem-lft-fp-locnoeth] makes $p$ locally finitely presented.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-noetherian-open-immersion-qc",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5 Proposition 5, finiteness before its first sentence; Stacks 01T6 (lemma-finite-type-noetherian), 01TX (lemma-noetherian-finite-type-finite-presentation), 01OX (lemma-immersion-into-noetherian)."
+   }
+  },
+  {
+   "text": "Two representatives $a:U\\to Y$ and $b:V\\to Y$ agree on an $S$-dense common open $W\\subseteq U\\cap V$. The open $U\\cap V$ is smooth over $S$ by [lem-weil-pbc-smooth-restrict-open-subschemes]. Apply [lem-sfb-smooth-fibrewise-dense-open-base-change] with the identity base change to see that $W$ is schematically dense there. The relative separated-target uniqueness theorem [lemma-nagata-ext-scheme-theoretically-dominant-separated] therefore gives $a=b$ on $U\\cap V$. By [lem-weil-pbc-scheme-morphism-gluing], all representatives glue uniquely on their union $D$. Their structure maps agree over $S$ locally and hence globally by the same gluing uniqueness. The union contains a representative domain, so is $S$-dense, and the glued map represents $\\phi$. This also proves the asserted uniqueness for everywhere-defined representatives.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5, definition on p.55 and graph-domain paragraph on p.57; Stacks 01RH (lemma-equality-of-morphisms)."
+   }
+  },
+  {
+   "text": "Choose a representative $a:U\\to Y$ and let $\\Gamma$ be the scheme-theoretic image of $(j_U,a):U\\to P$. This means the closed subscheme defined by the kernel of restriction to $U$, by [lemma-nagata-scheme-image-ideal-qc]. The image is independent of representative: if $W\\subset U\\cap V$ is an $S$-dense common domain, the density lemma gives an injective restriction sheaf map on $U$ and on $V$. On any open of $P$, restriction from its inverse image in $U$ to its inverse image in $W$ is consequently injective. Hence the kernels defining the images of $U$ and $W$ coincide; likewise for $V$ and $W$. This is an equality of defining ideals, so of closed subschemes. Let $q:\\Gamma\\to X$ be the first projection. By [lemma-nagata-scheme-image-partial-section], $q^{-1}(U)\\to U$ is an isomorphism. Independence allows this conclusion for every representative domain.",
+   "uses": [
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-sfb-smooth-fibrewise-dense-open-base-change",
+    "lemma-nagata-scheme-image-partial-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5, graph construction p.57; kernel description in Stacks 01R8 (lemma-quasi-compact-scheme-theoretic-image)."
+   }
+  },
+  {
+   "text": "The domain $D$ is exactly the union of opens $W\\subset X$ over which $q$ is an isomorphism. Every representative domain has this property by step 3. Conversely, if $q_W$ is an isomorphism, composing its inverse with the second projection gives a morphism $b:W\\to Y$. On $W\\cap U$ this equals $a$, since the restriction of $q_W^{-1}$ is the inverse of $q_U$. The maps $a,b$ therefore glue on $U\\cup W$ by [lem-weil-pbc-scheme-morphism-gluing]. This union is $S$-dense because it contains $U$, so the gluing is a representative of $\\phi$ and $W\\subset D$. In particular, $q_D$ is an isomorphism: its inverses on representative domains agree, being inverses to the same map, and glue, as do the inverse identities.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5, graph-domain characterization p.57."
+   }
+  },
+  {
+   "text": "For every $s\\in S$, the morphism $p_s:X'_s\\to X_s$ is flat by [lem-sfb-pointwise-flatness-base-change] and locally finitely presented by [lem-weil-pbc-qcqs-morphism-permanence]. Thus it is open by [lem-weil-pbc-flat-lfp-open]. If $O'$ is a nonempty open of $X'_s$, its image is a nonempty open of $X_s$, hence meets the dense open $U_s$. Thus $O'$ meets $p_s^{-1}(U_s)$. This proves $p^{-1}U$ is $S$-dense. Pulling back representatives and their common domains now defines $\\phi\\circ p$ independently of choices. Step 2, applied to $X'$, constructs its maximal morphism on $D'$. Pulling back the morphism on $D$ proves $p^{-1}D\\subset D'$.",
+   "uses": [
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5 Proposition 5, first three sentences; Stacks 01UA (lemma-fppf-open)."
+   }
+  },
+  {
+   "text": "The morphism $P'=X'\\times_SY\\to X\\times_SY=P$ is a base change of the flat morphism $p$ and hence flat by [lem-sfb-pointwise-flatness-base-change]. Apply [lem-sfb-scheme-image-flat-base-change] to the quasi-compact graph map $U\\to P$ of step 3. Its pullback is precisely the graph map $p^{-1}U\\to P'$: on a test scheme a point is a pair $(x',u)$ with $p(x')=u$ in $X$, and its $Y$ coordinate is $a(u)$. Therefore the closed graph $\\Gamma'$ of $\\phi\\circ p$ is $\\Gamma\\times_X X'$ as a closed subscheme of $P'$, compatibly with its first projection $q':\\Gamma'\\to X'$. This uses the independence of representatives proved in step 3, now for $X'$.",
+   "uses": [
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-sfb-scheme-image-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5 Proposition 5, graph comparison using Proposition 2; Stacks 081I (lemma-flat-base-change-scheme-theoretic-image)."
+   }
+  },
+  {
+   "text": "Set $V=p(D')$, an open of $X$ by openness of $p$. The map $h:D'\\to V$ is surjective by definition and flat as an open restriction of $p$; the latter is the open-base-change case of [lem-sfb-pointwise-flatness-base-change]. It is quasi-compact by step 1: $D'$ is quasi-compact and $V$ quasi-separated. The base change of $q_V:\\Gamma\\times_XV\\to V$ along $h$ is $q'_{D'}$, using the graph comparison in step 6. By step 4 for $X'$, $q'_{D'}$ is an isomorphism. Apply [lem-weil-pbc-fpqc-descend-isomorphism] with exactly this flat, surjective, quasi-compact $h$ to conclude $q_V$ is an isomorphism. Step 4 gives $V\\subset D$. Every $x'\\in D'$ has $p(x')\\in V\\subset D$, so $D'\\subset p^{-1}D$. Together with step 5 this proves the domain equality.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-weil-pbc-fpqc-descend-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5 Proposition 5, final paragraph; Stacks 02L4 (lemma-descending-property-isomorphism)."
+   }
+  },
+  {
+   "text": "If $p$ is surjective and the composite has an everywhere-defined representative, then $D'=X'$ and the proved equality gives $p^{-1}D=X'$. For any $x\\in X$, choose $x'$ over $x$; then $x'\\in p^{-1}D$ implies $x\\in D$. Hence $D=X$, and step 2 supplies the unique morphism on $X$. This also covers empty schemes: a surjection from the empty scheme forces $X$ empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5 Proposition 5, in particular clause."
+   }
+  },
+  {
+   "text": "Finally put $P_H=H\\times_SX$. Its projection $\\pi:P_H\\to X$ is smooth by [lem-pc-proper-base-change], applied to $H\\to S$, and finite type by [lem-sfb-finite-type-composition-base-change]. Composing $\\pi$ with the smooth $X\\to S$ makes $P_H\\to S$ smooth by [lem-trf-smooth-composition]; composition also makes it finite type. Thus $P_H$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. For the open $E\\subset P_H$, [lem-weil-pbc-smooth-restrict-open-subschemes] makes both $E\\to X$ and $E\\to S$ smooth, and [sbc-lem-smooth-criterion] makes $E\\to X$ flat. Its fibres are nonempty by hypothesis, so it is surjective on points. The open immersion $E\\to P_H$ is quasi-compact by [lem-sfb-noetherian-open-immersion-qc] and locally finite type (on affine principal-open charts it is a localization at one element); hence finite type. Composition gives $E\\to S$ finite type. The hypotheses already proved for $p$ therefore apply with $X'=E$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "sbc-lem-smooth-criterion",
+    "lem-sfb-noetherian-open-immersion-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5 Proposition 5 applied to the open product; Stacks 01VB, 01VA, 01VF, 01OX, 01T3 and 01T4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-noetherian-open-immersion-qc",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-partial-section",
+  "lem-sfb-pointwise-flatness-base-change",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sfb-scheme-image-flat-base-change",
+  "lem-weil-pbc-fpqc-descend-isomorphism",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "sbc-lem-smooth-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 2.5, pp.55-58, especially Proposition 5; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf, PDF pp.61-64; local copy WANTED; proof reconstructed from the primary scan and checked against the cited local Stacks lemmas"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The domain of definition of a relative rational map of smooth schemes with separated target commutes with flat pullback of the source",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsReduced X] [inst_1 : Y.IsSeparated] [S.IsSeparated]\\n  [inst_3 : X.Over S] [inst_4 : Y.Over S] (f : X.RationalMap Y) [AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  AlgebraicGeometry.Scheme.PartialMap.IsOver S f.toPartialMap\", \"doc\": \"Given a rational map $ f $ from a reduced scheme $ X $ to a separated scheme $ Y $, both over a separated base scheme $ S $, the partial map representative of $ f $ is also over $ S $. This instance e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] [AlgebraicGeometry.IsReduced X]\\n  [S.IsSeparated] {f : X.PartialMap Y},\\n  AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap ↔ AlgebraicGeometry.Scheme.PartialMap.IsOver S f\", \"doc\": \"Let $X$ and $Y$ be schemes over a base scheme $S$, with $X$ being reduced and $S$ being separated. For any partial map $f$ from $X$ to $Y$, the rational map obtained from $f$ is over $S$ if and only i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → [AlgebraicGeometry.IsReduced X] → [Y.IsSeparated] → X.RationalMap Y → X.PartialMap Y\", \"doc\": \"Given a rational map $ f $ from a reduced scheme $ X $ to a separated scheme $ Y $, this function constructs a representative partial map defined on a dense open subset of $ X $ that represents the eq\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.toPartialMap_toRationalMap_restrict\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsReduced X] [inst_1 : Y.IsSeparated] (f : X.PartialMap Y),\\n  (f.toRationalMap.toPartialMap.restrict f.domain ⋯ ⋯).hom = f.hom\", \"doc\": \"For a partial map $ f $ from a reduced scheme $ X $ to a separated scheme $ Y $, converting $ f $ to a rational map and then back to a partial map (restricted to the dense domain of $ f $) results in \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.RationalMap Y → X.Opens\", \"doc\": \"For a rational map $f$ between schemes $X$ and $Y$, this function returns the supremum (union) of all open subsets of $X$ where partial maps equivalent to $f$ are defined. This constructs the maximal \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.toRationalMap_toPartialMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsReduced X] [inst_1 : Y.IsSeparated]\\n  (f : X.RationalMap Y), f.toPartialMap.toRationalMap = f\", \"doc\": \"For any rational map $ f $ from a reduced scheme $ X $ to a separated scheme $ Y $, converting $ f $ to a partial map and then back to a rational map yields $ f $ itself, i.e., $ f.\\text{toPartialMap}.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} [inst : X.Over S] [inst_1 : Y.Over S] (f : X.PartialMap Y)\\n  [AlgebraicGeometry.Scheme.PartialMap.IsOver S f], AlgebraicGeometry.Scheme.RationalMap.IsOver S f.toRationalMap\", \"doc\": \"If a partial map $ f $ between schemes $ X $ and $ Y $ over a base scheme $ S $ is compatible with the structure maps to $ S $, then the corresponding rational map obtained by equivalence of partial m\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain and toPartialMap describe a maximal ordinary domain but do not prove its compatibility with flat source pullback for relative rational maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"dom\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : X.Opens\", \"doc\": \"The domain of definition of a rational map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : (↑f.domain).OpenCover\", \"doc\": \"The open cover of the domain of `f : X ⤏ Y`,\\nconsisting of all the domains of the partial maps in the equivalence class.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) : f.domain ≤ f.toRationalMap.domain\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : Dense ↑f.domain\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X.RationalMap Y} {x : ↥X} : x ∈ f.domain ↔ ∃ g, x ∈ g.domain ∧ g.toRationalMap = f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsDominant\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Dominant\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : Prop\", \"doc\": \"A rational map is dominant if some (equivalently, any) representative partial map has\\ndominant underlying morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsDominantToRationalMapOfIsDominantHom\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Dominant\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) [AlgebraicGeometry.IsDominant f.hom] : f.toRationalMap.IsDominant\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.isDominant_toRationalMap_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Dominant\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.PartialMap Y) : f.toRationalMap.IsDominant ↔ AlgebraicGeometry.IsDominant f.hom\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsDominant.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Dominant\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X.RationalMap Y} (out : Quotient.liftOn f (fun g => AlgebraicGeometry.IsDominant g.hom) ⋯) : f.IsDominant\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsDominant.out\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Dominant\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X.RationalMap Y} [self : f.IsDominant] : Quotient.liftOn f (fun g => AlgebraicGeometry.IsDominant g.hom) ⋯\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.isDominant_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Dominant\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y) : f.IsDominant ↔ Quotient.liftOn f (fun g => AlgebraicGeometry.IsDominant g.hom) ⋯\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.instIsDominantComp\", \"module\": \"Mathlib.AlgebraicGeometry.Birational.Composition\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} [PreirreducibleSpace ↥X] [Nonempty ↥Y] (f : X.RationalMap Y) [f.IsDominant] (g : Y.RationalMap Z) [g.IsDominant] : (f.comp g).IsDominant\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain and toPartialMap describe a maximal ordinary domain but do not prove its compatibility with flat source pullback for relative rational maps."
+  },
+  {
+   "tool": "grep",
+   "query": "domain.*(flat|pullback)|dom.*(flat|baseChange)|RationalMap",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"8\", \"line\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\", \"text\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain and toPartialMap describe a maximal ordinary domain but do not prove its compatibility with flat source pullback for relative rational maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational map between smooth schemes extends to a morphism if it does after a faithfully flat morphism of its source",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(X Y : Scheme.{u}) : Type u\", \"doc\": \"The quotient of partial maps between schemes $X$ and $Y$ by the equivalence relation where two partial maps are considered equivalent if they agree on an open subset of the source scheme $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"Sort u_1 →\\n  {X Y : AlgebraicGeometry.Scheme} → X.PartialMap Y → {X' Y' : AlgebraicGeometry.Scheme} → X'.PartialMap Y' → Sort u_1\", \"doc\": \"The type of rational maps between two schemes, defined as equivalence classes of partial maps with dense domains. Two partial maps are considered equivalent if they agree on a dense open subset of the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {inst : X.Over S} {inst_1 : Y.Over S} {f : X.RationalMap Y}\\n  [self : AlgebraicGeometry.Scheme.RationalMap.IsOver S f],\\n  ∃ g, AlgebraicGeometry.Scheme.PartialMap.IsOver S g ∧ g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ over a base scheme $ S $, there exists a partial map $ g \\\\colon X \\\\to Y $ over $ S $ such that the rational map induced by $ g $ is equal to $ f $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : ∃ g : X.PartialMap Y, g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ between schemes $ X $ and $ Y $, there exists a partial map $ g \\\\colon X \\\\to Y $ such that the equivalence class of $ g $ under the rational map i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[IsIntegral X] [LocallyOfFiniteType sY] (f : Spec X.functionField ⟶ Y) (h : f ≫ sY = X.fromSpecStalk _ ≫ sX) : X ⤏ Y\", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"AlgebraicGeometry.flat_and_surjective_SpecMap_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{R S : CommRingCat.{u}} (f : R ⟶ S) : Flat (Spec.map f) ∧ Surjective (Spec.map f) ↔ f.hom.FaithfullyFlat\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R → S $ induces a morphism of schemes $ \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ via $ \\\\operatorname{Spec}.\\\\text{map} $. This \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"[X.Over S] [Y.Over S] [Z.Over S] (f : X ⤏ Y) (g : Y ⟶ Z) [f.IsOver S] [g.IsOver S] : (f.compHom g).IsOver S\", \"doc\": \"A rational map between schemes $X$ and $Y$ is said to be over a base scheme $S$ if it is compatible with the given morphisms from $X$ and $Y$ to $S$. This means that the diagram formed by the rational\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain and toPartialMap describe a maximal ordinary domain but do not prove its compatibility with flat source pullback for relative rational maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximal domain of regularity of a rational scheme morphism is detected by a flat cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.mem_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X.RationalMap Y} {x : ↥X},\\n  x ∈ f.domain ↔ ∃ g, x ∈ g.domain ∧ g.toRationalMap = f\", \"doc\": \"For a rational map $ f $ between schemes $ X $ and $ Y $, an element $ x $ belongs to the domain of $ f $ if and only if there exists a partial map $ g $ from $ X $ to $ Y $ such that $ x $ lies in th\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), ∃ g, g.toRationalMap = f\", \"doc\": \"For any rational map $ f \\\\colon X \\\\dashrightarrow Y $ between schemes $ X $ and $ Y $, there exists a partial map $ g \\\\colon X \\\\to Y $ such that the equivalence class of $ g $ under the rational map i\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: RationalMap.domain, mem_domain and toPartialMap describe a maximal ordinary domain but do not prove its compatibility with flat source pullback for relative rational maps."
+  },
+  {
+   "tool": "grep",
+   "query": "domain|flat|pullback|toPartialMap",
+   "results": "[grep] OK 19 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"40\", \"text\": \"    (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) : IsDominant (f.restrict U hU hU').hom := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"41\", \"text\": \"  dsimp only [restrict_domain, restrict_hom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"47\", \"text\": \"    (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) [H : IsDominant (f.restrict U hU hU').hom] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"53\", \"text\": \"    (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"65\", \"text\": \"  dsimp only [restrict_domain, restrict_hom] at ⊢ e₁ e₂ h\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"160\", \"text\": \"def toPartialMap (f : X.PartialIso Y) : X.PartialMap Y where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"161\", \"text\": \"  domain := f.source\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"162\", \"text\": \"  dense_domain := f.dense_source\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"166\", \"text\": \"abbrev toRationalMap (f : X.PartialIso Y) : X ⤏ Y := f.toPartialMap.toRationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"19\", \"text\": \"  of `g`'s domain under `f`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"46\", \"text\": \"/-- Composition of partial maps. The domain of `f.comp g` is the preimage of `g.domain` under `f`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"47\", \"text\": \"viewed as an open subscheme of `X`. Requires `f.hom` to be dominant so that the domain is dense. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"51\", \"text\": \"  domain := f.domain.ι ''ᵁ f.hom ⁻¹ᵁ g.domain\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"52\", \"text\": \"  dense_domain := (f.domain.ι ''ᵁ f.hom ⁻¹ᵁ g.domain).2.dense <| by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"26\", \"text\": \"* `AlgebraicGeometry.Scheme.RationalMap.toPartialMap`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"28\", \"text\": \"  map on `f.domain`, the domain of definition of `f`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"48\", \"text\": \"  /-- The domain of definition of a partial map. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"49\", \"text\": \"  domain : X.Opens\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"50\", \"text\": \"  dense_domain : Dense (domain : Set X)\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Birational/RationalMap.lean, including equiv_iff_of_isSeparated_of_le and the domain construction; this gives uniqueness on dense opens but no relative flat regularity theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"domain\"",
+   "results": {
+    "t": "2026-10-24T09:39:44Z",
+    "tool": "loogle",
+    "query": "\"RationalMap\", \"domain\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.RationalMap.domain",
+     "AlgebraicGeometry.Scheme.RationalMap.openCoverDomain",
+     "AlgebraicGeometry.Scheme.PartialMap.le_domain_toRationalMap",
+     "AlgebraicGeometry.Scheme.RationalMap.dense_domain",
+     "AlgebraicGeometry.Scheme.RationalMap.mem_domain"
+    ],
+    "digest": "512e7ced8c408477"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary RationalMap domain results require reduced source and/or absolute separation for a global representative; none gives relative maximal-domain equality under flat source pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "domain.*flat|flat.*domain|RationalMap",
+   "results": {
+    "t": "2026-10-24T09:39:45Z",
+    "tool": "grep",
+    "query": "domain.*flat|flat.*domain|RationalMap",
+    "sub": "AlgebraicGeometry/Birational",
+    "ok": true,
+    "n_hits": 17,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/RationalMap.lean"
+    ],
+    "digest": "4e6f756f21aff571"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary RationalMap domain results require reduced source and/or absolute separation for a global representative; none gives relative maximal-domain equality under flat source pullback."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The domain of regularity of a rational map is detected by faithfully flat source covers",
+   "results": {
+    "t": "2026-10-24T09:39:45Z",
+    "tool": "leansearch",
+    "query": "The domain of regularity of a rational map is detected by faithfully flat source covers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.RationalMap.openCoverDomain",
+     "AlgebraicGeometry.Scheme.RationalMap.domain",
+     "AlgebraicGeometry.Scheme.RationalMap.mem_domain",
+     "RingTheory.Sequence.IsRegular.of_faithfullyFlat",
+     "AlgebraicGeometry.Scheme.RationalMap",
+     "AlgebraicGeometry.Scheme.RationalMap.dense_domain",
+     "AlgebraicGeometry.Scheme.PartialMap.domain",
+     "RingHom.FaithfullyFlat.iff_flat_and_comap_surjective"
+    ],
+    "digest": "19f3e8766c38ab8e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary RationalMap domain results require reduced source and/or absolute separation for a global representative; none gives relative maximal-domain equality under flat source pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a relative rational map between smooth schemes the largest domain where it is a morphism commutes with flat pullback of the source",
+   "results": {
+    "t": "2026-10-24T09:39:47Z",
+    "tool": "leanfinder",
+    "query": "For a relative rational map between smooth schemes the largest domain where it is a morphism commutes with flat pullback of the source",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.instIsOverToRationalMapOfIsOver",
+     "AlgebraicGeometry.Scheme.RationalMap.IsOver",
+     "AlgebraicGeometry.Scheme.RationalMap.toPartialMap",
+     "AlgebraicGeometry.Scheme.RationalMap.isOver_iff",
+     "AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over",
+     "AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over",
+     "AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver",
+     "AlgebraicGeometry.Scheme.PartialMap.toPartialMap_toRationalMap_restrict"
+    ],
+    "digest": "d327c65b1c55e4dd"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary RationalMap domain results require reduced source and/or absolute separation for a global representative; none gives relative maximal-domain equality under flat source pullback."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal regular locus of a rational morphism to a separated scheme is invariant under flat morphisms of the source",
+   "results": {
+    "t": "2026-10-24T09:47:06Z",
+    "tool": "leanfinder",
+    "query": "Maximal regular locus of a rational morphism to a separated scheme is invariant under flat morphisms of the source",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.generalizingMap",
+     "AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver",
+     "AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated",
+     "AlgebraicGeometry.Scheme.RationalMap.toPartialMap",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.ext_of_isDominant",
+     "AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.ext_of_isDominant_of_isSeparated"
+    ],
+    "digest": "697aa77e655a5b37"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary RationalMap domain results require reduced source and/or absolute separation for a global representative; none gives relative maximal-domain equality under flat source pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-law-complete-square-group",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; 5.3 Lemma 8, extending product and division from a complete dense open square; auxiliary input to BLR 5.3 Lemma 8: 2.5, definition and graph description of dom, printed pp.55-57 (PDF pp.61-63); Proposition 5, printed p.58 (PDF p.64); open-product consequence using smoothness and the Noetherian hypothesis",
+   "via": [
+    "lem-sfb-strict-law-complete-square-group",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-rational-flat-regularity",
+  "worker": "stage1",
+  "summary": "Followed BLR Proposition 5 via graph closures, fibrewise openness and fpqc descent. All inputs already exist; no new nodes. Wrote graph independence and the maximal-domain criterion explicitly; checked quasi-compactness of the descent cover and the open-product finite-type clause. Corrected doubled TeX escaping only.",
+  "blueprint": "The inherited auxiliary input to BLR 5.3 Lemma 8, via BLR 2.5 Proposition 5 and the graph-domain paragraphs on pp.55-57. Ancestor tool returns null, as inherited from the seed. Latest blueprint main-20261024 searched; no equivalent node. The unit/chapter route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-partial-section",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-isomorphism",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic scheme-theoretic finiteness, graph, descent, smoothness or gluing input in the BLR 2.5 proof; no replacement statement in this unit gives this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-partial-section",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-fpqc-descend-isomorphism",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "sbc-lem-smooth-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NH-d61bd1b57",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d61bd1b57 (reviewer sub-agent of L); spot-checked: PASS: I read the whole split and found nothing to fix. This is the first split of the seed: 9 steps, 0 new nodes, statement and stmt_deps unchanged from live. Source: BLR 2.5, read from a local copy of the scan (PDF pp.61-64): S-density on p.55, Lemma 1(b) and Proposition 2 on pp.55-56, the graph as schematic closure and dom = Omega on p.57, Proposition 5 and its proof on p.58. The item matches hypothesis by hypothesis; Noetherian S was already in the seed and replaces BLR Lemma 3. All 19 cited statements say what their steps take. Step 1: 01T6/01T4 make X, X', Y and P Noetherian, opens are qc, qcqs(1) makes the maps quasi-compact, and (f) plus lft->lfp makes p lfp. Step 2: smooth restriction, then the fibrewise-dense lemma with T'=T gives scheme-theoretic density, then the relative separated rigidity (no reducedness needed), then gluing. Step 3: equal kernel ideals give graph independence, then partial-section with a qc open immersion. Step 4: the characterisation of D is elementary. Step 5: p_s is a base change along X_s->X, flat and lfp, hence open, so p^{-1}U is S-dense. Step 6: 081I with g_U qc and U x_P P' = p^{-1}U gives Gamma' = Gamma x_X X'. Step 7: h: D'->V is flat, surjective and qc (D' is qc and V quasi-separated), Gamma x_X D' = q'^{-1}D', then 02L4. Step 8 is elementary. Step 9: smooth base change and composition, finite type, and the open E is qc and lft, so finite type. Edge cases tested: empty schemes and fibres, p non-surjective or the identity, nonreduced S, and the (T+1)/(T-1) example. No cycle. Batch-5 flags are both accepted as generic: lem-trf-smooth-composition is the Mathlib leaf 01VA (sk-i-curve-zero), and the closure of the fibrewise-dense lemma reaches only the generic smoothness nodes lem-trf-smooth-at-point-fibre-criterion (01V9), lem-trf-smooth-fibre-affine-ring-at-prime and lem-trf-affine-smooth-prime-scheme-neighbourhood, none of them part of the trace formula or Poincare duality. The 15 off-unit tool_uses are accepted as generic scheme tools. Maintainer notes: blueprint.from.node is null, inherited from the seed; BLR is still WANTED in literature/."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeRationalFlatRegularity",
+  "declaration": "AlgebraicGeometry.relative_rational_flat_regularity",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeRationalFlatRegularity.lean",
+  "statement": "theorem relative_rational_flat_regularity {S X X' Y : Scheme.{u}} [IsNoetherian S] (sX : X ⟶ S) (sX' : X' ⟶ S) (sY : Y ⟶ S) [Smooth sX] [LocallyOfFiniteType sX] [QuasiCompact sX] [Smooth sX'] [LocallyOfFiniteType sX'] [QuasiCompact sX'] [Smooth sY] [LocallyOfFiniteType sY] [QuasiCompact sY] [IsSeparated sY] : (∀ φ : Scheme.RelativeRationalMap sX sY, (∃! f : φ.domain.toScheme ⟶ Y, φ.Represents φ.domain f ∧ ∀ (a : Scheme.RelativePartialMap sX sY), a.classOf = φ → ∀ h : a.domain ≤ φ.domain, X.homOfLE h ≫ f = a.hom) ∧ (∀ f g : X ⟶ Y, φ.Represents ⊤ (X.topIso.hom ≫ f) → φ.Represents ⊤ (X.topIso.hom ≫ g) → f = g) ∧ (∀ (p : X' ⟶ X), p ≫ sX = sX' → Flat p → ∃! ψ : Scheme.RelativeRationalMap sX' sY, φ.IsComposite p ψ ∧ ψ.domain = p ⁻¹ᵁ φ.domain ∧ (Surjective p → (∃ f : X' ⟶ Y, ψ.Represents ⊤ (X'.topIso.hom ≫ f)) → ∃! f : X ⟶ Y, φ.Represents ⊤ (X.topIso.hom ≫ f)))) ∧ (∀ (H : Scheme.{u}) (sH : H ⟶ S), Smooth sH → LocallyOfFiniteType sH → QuasiCompact sH → ∀ E : (pullback sH sX).Opens, (∀ x : X, Nonempty ((E.ι ≫ pullback.snd sH sX).fiber x)) → Flat (E.ι ≫ pullback.snd sH sX) ∧ Surjective (E.ι ≫ pullback.snd sH sX) ∧ Smooth (E.ι ≫ pullback.snd sH sX ≫ sX) ∧ LocallyOfFiniteType (E.ι ≫ pullback.snd sH sX ≫ sX) ∧ QuasiCompact (E.ι ≫ pullback.snd sH sX ≫ sX))",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b289c8265",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Read item node, all 9 stmt_dep records, new def-sfb-relative-rational-map node+module, theorem module, report. Clause-by-clause match with node/BLR 2.5 pp.55-58: IsNoetherian S; Smooth+LFT+QC on sX,sX',sY; IsSeparated sY; fibrewise density via Mathlib fiberι; Quot of agreement relation (already an equivalence: finite intersections of fibrewise-dense opens), domain = sSup of rep domains; unique maximal representative restricting to reps; uniqueness of global reps; flat p: ∃! ψ IsComposite ∧ domain = p⁻¹ᵁ domain ∧ surjective descent (bundled ∃! harmless since IsComposite pins ψ via Quot.exists_rep); open-product clause gives flat, surjective, smooth/LFT/QC of E→S composite. No extra hypotheses, single universe u, edge cases (empty schemes/fibres, non-surjective p, nonreduced S) covered. No duplicate notion in side-live/Mathlib (Mathlib RationalMap uses ordinary density). Statement verbatim; docstrings with source/blueprint and 9 proof steps; def module has no sorry; proof only sorry; both report sections present. No compile needed (no change); worker's final two-file scompile was clean."
+ }
+}

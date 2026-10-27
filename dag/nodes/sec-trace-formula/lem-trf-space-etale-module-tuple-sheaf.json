@@ -1,0 +1,261 @@
+{
+ "id": "lem-trf-space-etale-module-tuple-sheaf",
+ "kind": "statement",
+ "title": "Fibre-product compatible tuples form a module sheaf on an algebraic-space etale site",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $F$ an algebraic space over $S$ [def-trf-algebraic-space], and $(q_i:V_i\\to F)_{i\\in I}$ a set-indexed family of etale maps from schemes, not necessarily jointly surjective. Work in a universe containing $I$, all section sets and the products below, and a small skeleton of $F_{\\mathrm{et}}$ [def-weil-size-convention]. Write $R_{ij}=V_i\\times_F V_j$, with projections $p_i,p_j$; all displayed fibre products are schemes by the representable diagonal. Let $L_i$ be sheaves of $\\mathcal O_{(V_i)_{\\mathrm{et}}}$-modules [def-weil-sheaf-of-modules-category]. Restrictions to overlaps are restrictions on localized etale sites. For every pair let $a_{ij}:L_j|_{(R_{ij})_{\\mathrm{et}}}\\to L_i|_{(R_{ij})_{\\mathrm{et}}}$ be a module-sheaf morphism. No invertibility, diagonal identity or cocycle is assumed. For $W\\to F$ in $F_{\\mathrm{et}}$, put $W_i=W\\times_FV_i$ and $W_{ij}=W\\times_FV_i\\times_FV_j$, with the indicated maps to $V_i$ and $R_{ij}$. Then $H_i(W)=L_i(W_i)$ and $K_{ij}(W)=L_i(W_{ij})$, with restrictions induced by fibre products, are sheaves of sets on $F_{\\mathrm{et}}$. The two maps $\\prod_iH_i\\rightrightarrows\\prod_{i,j}K_{ij}$ with coordinates $s_i|_{W_{ij}}$ and $a_{ij}(s_j|_{W_{ij}})$ are morphisms of sheaves. Their equalizer is the sheaf with exact section formula\n$$M(W)=\\{(s_i)\\in\\prod_i L_i(W_i):s_i|_{W_{ij}}=a_{ij}(s_j|_{W_{ij}})\\text{ for all }i,j\\}.$$\nIt is a sheaf of $\\mathcal O_F$-modules with zero, addition and additive inverses coordinatewise and scalar action $(b(s_i))_i=((b|_{W_i})s_i)_i$ for $b\\in\\mathcal O_F(W)$. Restriction along $W'\\to W$ is coordinatewise section restriction and is semilinear over $\\mathcal O_F(W)\\to\\mathcal O_F(W')$. These formulas define the object and its module structure, without assuming $F$ is a scheme or an object of its own small etale site.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR (lemma-glue-sheaves), compatible-tuples formula and omitted sheaf verification, extended sectionwise to modules; Tag 00W2 (lemma-limit-sheaf), products and equalizer."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For two etale scheme objects U and V, apply the scheme-test representability in IsEtale(U → F) to V → F. It supplies a scheme P, an etale projection p : P → V, and a Yoneda pullback square. The scheme-morphism test makes yoneda.map p etale, and composition with V → F makes P an object of the etale site. Lift the other projection through the fully faithful Yoneda functor. The pullback universal property, transported by Yoneda, gives the binary-product cone in the full subcategory of etale objects. This is the Lean proof of etaleSite_hasBinaryProducts.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the explicitly defined tupleChartSheaf and tupleOverlapSheaf: they are Mathlib pushforwards of module sheaves along Over.star and Over.map, with scalar restriction along the projection to W. Their sheaf condition and localization continuity are already supplied by the existing general-site module-sheaf infrastructure; no separate algebraic-space covering lemma is needed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation of module sheaves followed by forgetting to sets preserves the two products. Compare the evaluated limiting fan with the literal type-theoretic dependent product fan. Its unique comparison isomorphism has exactly the canonical projections as coordinates, proving the two coordinate maps bijective.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p : U → T, the adjunction Over.forget T ⊣ Over.star T constructs tupleRestriction. Its composite with the projection to W is prod.snd, by the inverse law of the adjunction hom equivalence. This equation and the over-category commuting triangle prove naturality. Apply the local module restriction to this natural family of arrows; semilinearity and the projection equation prove linearity over O(W). The resulting tupleChartRestriction is a module-sheaf morphism. Take its composites with chart-product projections and, on the right, the pushforward of a_ij. The product universal property supplies f and g, whose coordinate formulas follow from Pi.lift_π. No identity or cocycle is used.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation and forgetting preserve the equalizer, so comparison with the subtype equalizer in Type identifies its section set with {s : P(W) | f(s) = g(s)}. The injective overlap coordinates identify this equality with all the specified compatibility equations. Restrict the bijective chart coordinate map to these equivalent predicates and compose the two equivalences. Its underlying tuple is definitionally the chart coordinates of the equalizer inclusion. The underlying-set functor also preserves this equalizer as a cone of sheaves.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pinned equivalence reduces zero, addition, negation and scalar formulas to linearity of the equalizer inclusion and chart-product projections; the scalar structure of each pushforward is restriction along prod.snd. Naturality of the same inclusion and projections gives the coordinate restriction formula. Semilinearity of the equalizer module presheaf gives the last formula. The proof works for an empty family as well.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR (lemma-glue-sheaves), omitted compatible-tuple restriction and sheaf verification; Tag 00W2 (lemma-limit-sheaf), via existing Mathlib module-sheaf pushforward and sectionwise-limit constructions. Lean proof by U2, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For etale scheme objects of an algebraic space, compatible tuples of sections of local module sheaves form a sheaf of modules with coordinatewise operations",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.isSheaf; AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf; AlgebraicGeometry.Scheme.Modules; ModuleCat.tilde; ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType; AlgebraicGeometry.Scheme.PresheafOfModules; AlgebraicGeometry.Scheme.Etale.forget; Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: general module-sheaf, limit and pushforward infrastructure does not state this fibre-product tuple construction and its module operations on the algebraic-space site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules is obtained as the equalizer of products of pushforwards of local sheaves on an etale algebraic space site",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.isSheaf; SheafOfModules.over; SheafOfModules.QuasicoherentData.I; SheafOfModules.Presentation; SheafOfModules.QuasicoherentData; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'; ModuleCat.tilde; SheafOfModules.IsQuasicoherent",
+   "date": "2026-10-22",
+   "verdict": "no match: general module-sheaf, limit and pushforward infrastructure does not state this fibre-product tuple construction and its module operations on the algebraic-space site"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules, SheafOfModules",
+   "results": "12 hits; SheafOfModules.val; SheafOfModules.forget; SheafOfModules.mk; SheafOfModules.fullyFaithfulForget; SheafOfModules.instFaithfulPresheafOfModulesObjFunctorOppositeRingCatIsSheafForget; SheafOfModules.instFullPresheafOfModulesObjFunctorOppositeRingCatIsSheafForget; SheafOfModules.instReflectsIsomorphismsPresheafOfModulesObjFunctorOppositeRingCatIsSheafForget; SheafOfModules.instAdditivePresheafOfModulesObjFunctorOppositeRingCatIsSheafForget",
+   "date": "2026-10-22",
+   "verdict": "no match: general module-sheaf, limit and pushforward infrastructure does not state this fibre-product tuple construction and its module operations on the algebraic-space site"
+  },
+  {
+   "tool": "grep",
+   "query": "compatibleTuple|glue.*[Ss]heaf|[Ss]heaf.*[Ll]imit",
+   "results": "25 hits; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Light/Epi.lean; Mathlib/Condensed/Limits.lean; Mathlib/Condensed/Epi.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general module-sheaf, limit and pushforward infrastructure does not state this fibre-product tuple construction and its module operations on the algebraic-space site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible tuples in products of pushforwards of local module sheaves on an algebraic space form a sheaf with coordinatewise module operations",
+   "results": "8 hits; SheafOfModules.pushforwardSections; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; SheafOfModules.pushforwardNatTrans_app_val_app; AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforward; PresheafOfModules.pushforward₀_obj_obj_isModule; PresheafOfModules.pushforward₀_obj; SheafOfModules.sections",
+   "date": "2026-10-22",
+   "verdict": "no match: general module-sheaf, limit and pushforward infrastructure does not state this fibre-product tuple construction and its module operations on the algebraic-space site"
+  },
+  {
+   "tool": "grep",
+   "query": "def over|def pushforward|isSheaf|compatibleTuple|[Gg]lue|equalizer",
+   "results": "15 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: general module-sheaf, limit and pushforward infrastructure does not state this fibre-product tuple construction and its module operations on the algebraic-space site"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, PresheafOfModules",
+   "results": "12 hits; SheafOfModules.val; SheafOfModules.forget; SheafOfModules.mk; SheafOfModules.fullyFaithfulForget; SheafOfModules.instFaithfulPresheafOfModulesObjFunctorOppositeRingCatIsSheafForget; SheafOfModules.instFullPresheafOfModulesObjFunctorOppositeRingCatIsSheafForget; SheafOfModules.instReflectsIsomorphismsPresheafOfModulesObjFunctorOppositeRingCatIsSheafForget; SheafOfModules.instAdditivePresheafOfModulesObjFunctorOppositeRingCatIsSheafForget",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general sheaf/module infrastructure or Zariski scheme constructions, not the etale algebraic-space tuple object with all stated formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible tuples of local module sheaf sections on an algebraic space etale site form a sheaf with coordinatewise module operations",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.isSheaf; SheafOfModules.LocalGeneratorsData.X; ModuleCat.tilde; AlgebraicGeometry.Scheme.Modules; ModuleCat.tildeInType; SheafOfModules.sections; AlgebraicGeometry.Scheme.PresheafOfModules; ModuleCat.tildeInModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general sheaf/module infrastructure or Zariski scheme constructions, not the etale algebraic-space tuple object with all stated formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|compatibleTuple|tupleSheaf",
+   "results": "0 hits; none; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general sheaf/module infrastructure or Zariski scheme constructions, not the etale algebraic-space tuple object with all stated formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforward|def over|equalizer|isSheaf",
+   "results": "14 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general sheaf/module infrastructure or Zariski scheme constructions, not the etale algebraic-space tuple object with all stated formulas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible tuples of local module sections form a sheaf on the etale site of an algebraic space",
+   "results": "8 hits; SheafOfModules.sections; PresheafOfModules.sectionsMk; TopCat.Presheaf.IsSheaf; SheafOfModules.GeneratingSections.s; AlgebraicGeometry.Scheme.Modules; ModuleCat.tilde; TopCat.Sheaf.forget; PresheafOfModules.sections",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general sheaf/module infrastructure or Zariski scheme constructions, not the etale algebraic-space tuple object with all stated formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equalizers of products of pushforwards of sheaves of modules along etale scheme charts have compatible tuple sections",
+   "results": "8 hits; SheafOfModules.Presentation.map_π_eq; TopCat.Presheaf.SheafConditionEqualizerProducts.w_apply; TopCat.Presheaf.SheafConditionEqualizerProducts.res_π_apply; TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff; TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd; TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val; TopCat.Presheaf.SheafConditionEqualizerProducts.w",
+   "date": "2026-10-23",
+   "verdict": "no match: hits supply general sheaf/module infrastructure or Zariski scheme constructions, not the etale algebraic-space tuple object with all stated formulas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-invertible-descent",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited polarized-scheme descent input to lem-trf-local-term-locality, descent of the polarization to the quotient: Tag 04TR (lemma-glue-sheaves), compatible-tuples formula and omitted sheaf verification, extended sectionwise to modules; Tag 00W2 (lemma-limit-sheaf), products and equalizer.",
+   "via": [
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-etale-module-tuple-sheaf",
+  "worker": "stage1",
+  "summary": "Filled the omitted compatible-tuples sheaf verification via continuous fibre-product functors and sectionwise limits, and checked each module operation and restriction explicitly. Reused existing geometry, continuity, limit and underlying-set nodes; no new nodes and no statement change.",
+  "blueprint": "Inherited algebraic-space polarization descent input below lem-trf-local-term-locality, through the recorded via chain: the compatible-tuples construction in lem-trf-algebraic-space-invertible-descent. Steps 1–4 supply its sheaf construction; steps 5–6 supply its module structure. The latest ancestor proof itself concerns contracting local terms; this is a lower-level inherited tool, not a new claim that polarization descent appears in that proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "General precomposition theorem for continuous functors, used only after the etale fibre-product functors are checked. No same-unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-4f93b5c3b",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-4f93b5c3b (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full. There are no new nodes, and the statement is identical to live, where the item is still unsplit (not superseded). I checked the cited nodes' statements and Stacks 04TR (lemma-glue-sheaves): its compatible-tuples formula with restrictions and sheafhood omitted, which the steps fill in. The fill uses 00WV/00WW continuity of u_T: W↦W×_F T, checking covering preservation via 041F(3) and the fibre-product iso via the universal property. K_ij comes from u_{R_ij} followed by the forgetful functor along p_i. Products and the equalizer come from the 00W2 sectionwise-limits Mathlib leaf. The module closure is elementary and I re-derived it: b_{ij}a_{ij}=a_{ij}b_{ij} by O(W_ij)-linearity, and both pullbacks of b agree. The abelian sheaf comes from the 00YR(α) leaf. The step quotes match the 04TR, 00W2, 00WW, 00WV, 03EC, 03ED, 041F, 03G7, 03CT, 03CW and 00YR labels. Edge cases: I=∅ gives 0; V=F with a=0 or id gives 0 or L; non-covering families are fine; F is never evaluated as an object. The statement matches its citers (invertible-descent step 2 and tuple-graph-isomorphisms). No duplicate: the pbc/pe site gluing nodes need a cocycle and an object of the site, and etale-base-change-continuous is scheme-only. I accept the declared tool use of lem-weil-pbc-site-continuous-pushforward-sheaf (generic 00WW). No SGA cited; proof_deps equals the union of uses. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleTupleSheaf",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_etale_module_tuple_sheaf",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.etaleSite_hasBinaryProducts",
+   "AlgebraicGeometry.AlgebraicSpace.etaleSiteBinaryProducts",
+   "AlgebraicGeometry.AlgebraicSpace.tupleChartSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.tupleOverlapSheaf",
+   "AlgebraicGeometry.AlgebraicSpace.tupleRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.tupleProduct",
+   "AlgebraicGeometry.AlgebraicSpace.tupleOverlapProduct",
+   "AlgebraicGeometry.AlgebraicSpace.tupleLeftSection",
+   "AlgebraicGeometry.AlgebraicSpace.tupleRightSection",
+   "AlgebraicGeometry.AlgebraicSpace.moduleTupleSections",
+   "AlgebraicGeometry.AlgebraicSpace.tupleUnderlyingSets",
+   "AlgebraicGeometry.AlgebraicSpace.tupleProductCoordinates",
+   "AlgebraicGeometry.AlgebraicSpace.tupleOverlapCoordinates",
+   "AlgebraicGeometry.AlgebraicSpace.exists_etale_module_tuple_sheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleTupleSheaf.lean",
+  "statement": "theorem exists_etale_module_tuple_sheaf {S : Scheme.{u}} (F : AlgebraicSpace S) {I : Type v} (V : I → F.EtaleSite) (L : ∀ i : I, ringedSiteModules.{max (u + 1) v} (F.structureSheaf.over (V i))) (a : ∀ i j : I, (F.etalePullbackMap (prod.snd : V i ⨯ V j ⟶ V j)).obj (L j) ⟶ (F.etalePullbackMap (prod.fst : V i ⨯ V j ⟶ V i)).obj (L i)) : (∀ W : F.EtaleSite, Function.Bijective (tupleProductCoordinates F V L W) ∧ Function.Bijective (tupleOverlapCoordinates F V L W)) ∧ ∃ f g : tupleProduct F V L ⟶ tupleOverlapProduct F V L, (∀ (W : F.EtaleSite) (s : (tupleProduct F V L).val.obj (op W)) (i j : I), tupleOverlapCoordinates F V L W (f.val.app (op W) s) (i, j) = tupleLeftSection F V L W (tupleProductCoordinates F V L W s) i j) ∧ (∀ (W : F.EtaleSite) (s : (tupleProduct F V L).val.obj (op W)) (i j : I), tupleOverlapCoordinates F V L W (g.val.app (op W) s) (i, j) = tupleRightSection F V L a W (tupleProductCoordinates F V L W s) i j) ∧ Nonempty (IsLimit ((tupleUnderlyingSets F).mapCone (limit.cone (parallelPair f g)))) ∧ ∃ e : ∀ W : F.EtaleSite, (equalizer f g).val.obj (op W) ≃ moduleTupleSections F V L a W, (∀ (W : F.EtaleSite) (s : (equalizer f g).val.obj (op W)), (e W s).val = tupleProductCoordinates F V L W ((equalizer.ι f g).val.app (op W) s)) ∧ (∀ W : F.EtaleSite, (e W 0).val = 0) ∧ (∀ (W : F.EtaleSite) (s t : (equalizer f g).val.obj (op W)), (e W (s + t)).val = (e W s).val + (e W t).val) ∧ (∀ (W : F.EtaleSite) (s : (equalizer f g).val.obj (op W)), (e W (-s)).val = -(e W s).val) ∧ (∀ (W : F.EtaleSite) (b : F.structurePresheaf.obj (op W)) (s : (equalizer f g).val.obj (op W)), (e W (b • s)).val = fun i : I ↦ @SMul.smul (F.structurePresheaf.obj (op (V i ⨯ W))) ((L i).val.obj (op ((Over.star (V i)).obj W))) inferInstance (F.structurePresheaf.map (prod.snd : V i ⨯ W ⟶ W).op b) ((e W s).val i)) ∧ (∀ (W W' : F.EtaleSite) (r : W' ⟶ W) (s : (equalizer f g).val.obj (op W)), (e W' ((equalizer f g).val.map r.op s)).val = fun i : I ↦ (tupleChartSheaf F (V i) (L i)).val.map r.op ((e W s).val i)) ∧ (∀ (W W' : F.EtaleSite) (r : W' ⟶ W) (b : F.structurePresheaf.obj (op W)) (s : (equalizer f g).val.obj (op W)), (equalizer f g).val.map r.op (b • s) = F.structurePresheaf.map r.op b • (equalizer f g).val.map r.op s)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded algebraic-space small etale site and localized module categories. The chart and overlap sheaves, canonical restriction arrows, products, and literal compatible-tuple section subtype are explicit constructions. The main theorem gives the two maps by their exact coordinates, their underlying-set equalizer, its canonical section bijections, and all operation/restriction formulas. The auxiliary binary-product existence theorem states the representability clause of this node; its universal property determines the products up to unique isomorphism. No covering or cocycle assumption, no evaluation at F, and no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-034c8de16",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 04TR/00W2. Only the lean field changed; statement verbatim; item not landed elsewhere. Hypotheses: arbitrary family V : I → F.EtaleSite, localized module sheaves L, arbitrary a_ij : L_j|R → L_i|R in the right direction, diagonal pairs included, no cover/cocycle/invertibility/Nonempty/Fintype assumption. H_i and K_ij are pushforwards along Over.star; the restriction arrow comes from the fibre-product universal property, not a choice. Bijective product coordinates determine f and g. Equalizer has a limit statement in sheaves of sets and a uniquely pinned bijection with the literal compatible-tuple set; zero/add/neg/scalar/restriction/semilinearity are coordinatewise. The sorry theorem that the étale site has binary products is the node's own fibre-product claim; it is true and no competing instance exists. Edge cases: empty index set gives 0; non-covering families allowed; a=0 or id on one chart gives 0 or L; F never evaluated. Module universe max(u+1) v is the containing universe the node stipulates (it includes the site skeleton). Advisory: landed citer invertible-descent produces a universe-u module and will need a u to u+1 transport at stage 3. Not recompiled per instruction; no changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T083139-L-2281528",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

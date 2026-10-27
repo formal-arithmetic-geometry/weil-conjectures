@@ -1,0 +1,370 @@
+{
+ "id": "lem-sfb-finite-locally-free-source-factorization-locus",
+ "kind": "statement",
+ "title": "Closed factorization locus for a finite locally free source",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $q:D\\to S$ be finite locally free [def-pc-finite-locally-free], and let $X\\to S$ be affine and of finite presentation [def-sbc-locally-finite-presentation]. Let $i:Z\\hookrightarrow X$ be a finitely presented closed immersion [def-weil-closed-immersion]. For every $S$-scheme $P$ and every $S$-morphism $F:D\\times_SP\\to X$ [def-pc-fibre-product], there exists a finitely presented closed immersion $L\\hookrightarrow P$ such that for every $S$-scheme $T$ and every $t:T\\to P$, the morphism $t$ factors through $L$ if and only if $F\\circ(1_D\\times t):D\\times_ST\\to X$ factors through $Z$. These factorizations are unique. For every morphism $P'\\to P$, the locus for the induced family on $D\\times_SP'$ is $L\\times_PP'$ with its given closed immersion. No smoothness or connectedness hypothesis on $D$, $P$ or $Z$ is imposed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Lemma 2.1.3 and its proof, printed pp.58--59, and proof of Proposition 2.1.2, p.60, closed immersion of Hom functors obtained by coefficient equations for the ideal of the target. Pullback by the specified family gives this parameter-locus formulation. Read online; WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this exact assertion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-finite-locally-free",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-finite-pushforward-locally-free], cover $S$ by affine opens $U=\\operatorname{Spec}A$ on which $q_*\\mathcal O_D$ is free of some finite rank $r$, allowed to vary between charts. The finite morphism $q$ is affine [def-weil-finite-integral-morphism], so $D_U=\\operatorname{Spec}B$ with a chosen $A$-basis $e_1,\\ldots,e_r$ of $B$. Since $X\\to S$ is affine, $X_U=\\operatorname{Spec}C$ [pqf-def-affine-morphism]. Cover the inverse images of these $U$ in $P$ by affine opens $V=\\operatorname{Spec}R$ using [lem-weil-pbc-affine-opens-basis]. By [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra], $D\\times_SV=\\operatorname{Spec}(B\\otimes_A R)$. By [lem-weil-pbc-free-module-base-change-free], $B_R=B\\otimes_A R$ has basis $e_a\\otimes1$. The given family restricts to $F_V:D\\times_SV\\to X_U$, corresponding to an $A$-algebra map $\\phi:C\\to B_R$ by [lem-weil-pbc-morphism-into-affine-scheme]. The map is $A$-linear because $F_V$ is over $U$.",
+   "uses": [
+    "lem-sc-finite-pushforward-locally-free",
+    "def-weil-finite-integral-morphism",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-free-module-base-change-free",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 02KB (lemma-finite-flat); Tag 01JQ (lemma-fibre-product-affines); Conrad Lemma 2.1.3, printed pp.58–59, local finite-free reduction."
+   }
+  },
+  {
+   "text": "Let $\\mathcal I$ be the ideal sheaf of $Z\\hookrightarrow X$ [def-sbc-closed-immersion-ideal-sheaf]. Since this immersion is finitely presented, [lem-trf-closed-immersion-finite-presentation-ideal] says that $\\mathcal I$ is of finite type. Its restriction to $X_U$ is quasi-coherent of finite type. By [lem-weil-pbc-affine-finite-type-generating-sections], choose finitely many $h_1,\\ldots,h_m\\in I=\\mathcal I(X_U)$ generating this ideal. The affine description in [def-weil-closed-immersion] identifies $Z\\times_X X_U$ with $\\operatorname{Spec}(C/I)$. Put $j_\\beta=\\phi(h_\\beta)\\in B_R$ and $J=(j_1,\\ldots,j_m)\\subseteq B_R$.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-trf-closed-immersion-finite-presentation-ideal",
+    "lem-weil-pbc-affine-finite-type-generating-sections",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/properties.tex",
+    "place": "Tag 01TV (lemma-closed-immersion-finite-presentation); Tag 01PB (lemma-finite-type-module)."
+   }
+  },
+  {
+   "text": "Write $j_\\beta=\\sum_{a=1}^r c_{\\beta a}(e_a\\otimes1)$, with $c_{\\beta a}\\in R$, and let $K_V=(c_{\\beta a})\\subseteq R$. This is the coefficient ideal of all of $J$, not only of the listed generators: for $b\\in B_R$, multiplication by $b$ is an $R$-linear matrix, so every coefficient of $bj_\\beta$ is an $R$-linear combination of the $c_{\\beta a}$. Finite sums give the same assertion for every $j\\in J$. Conversely each $c_{\\beta a}$ is a coordinate functional evaluated on $j_\\beta\\in J$. Every $R$-linear functional is a linear combination of the coordinate functionals, so $K_V$ is exactly the ideal generated by all $\\lambda(j)$ for $j\\in J$ and $\\lambda:B_R\\to R$ linear. In particular it is generated by the $mr$ displayed elements. Define $L_V=\\operatorname{Spec}(R/K_V)\\hookrightarrow V$, a closed immersion by [def-weil-closed-immersion].",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B97, lemma-hilb-d-of-closed, final paragraph: coefficients of generators in a finite free basis. Here the pulled-back ideal has finitely many generators, so the coefficient ideal does too."
+   }
+  },
+  {
+   "text": "For any $R$-algebra $R'$, the algebra $B_R$ is finite free, hence finite projective: it is a direct summand of itself [def-weil-pbc-projective-module]. Apply [lem-pc-affine-containment-ideal] to $B_R$ and $J$. It says that $J$ maps to zero in $B_R\\otimes_RR'$ if and only if $K_V$ maps to zero in $R'$. On the one hand, a map $\\operatorname{Spec}R'\\to V$ factors through $L_V$ exactly when $R\\to R'$ kills $K_V$. On the other hand, by [lem-weil-pbc-morphism-into-affine-scheme] and the affine tensor description [lem-weil-pbc-fibre-product-affine-spectra], the map $D\\times_S\\operatorname{Spec}R'\\to X_U$ factors through $\\operatorname{Spec}(C/I)$ exactly when the composite $C\\to B_R\\to B_R\\otimes_RR'$ kills $I$, equivalently its generators $j_\\beta$. Thus the required equivalence holds for affine $V$-tests. No flatness of $R'$ is required. On a base change $R\\to R\\prime$, the composite on sections is explicitly $c\\mapsto\\phi(c)\\otimes1$, so the same ideal $J$ is being tested.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-pc-affine-containment-ideal",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0B97, lemma-hilb-d-of-closed, final paragraph: coefficients of generators in a finite free basis. Here the pulled-back ideal has finitely many generators, so the coefficient ideal does too."
+   }
+  },
+  {
+   "text": "The equivalence just proved holds for every scheme $T\\to V$, not only affine ones. Cover $T$ by affine opens, apply Step 4 on each, and use [lem-weil-pbc-open-fibre-product] to identify the resulting open cover of $D\\times_ST$. Both closed immersions $L_V\\hookrightarrow V$ and $Z\\hookrightarrow X$ are monomorphisms by [lem-pc-proper-monomorphism-closed]. Their local factorizations therefore agree on overlaps. By [lem-weil-pbc-scheme-morphism-gluing], they glue to unique global factorizations in each direction. This proves the equivalence and uniqueness for all $V$-tests.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-pc-proper-monomorphism-closed",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HP (lemma-characterize-closed-subspace), 01JB (lemma-glue), 01JC (lemma-glue-schemes); globalization of the coefficient construction of pic.tex Tag 0B97."
+   }
+  },
+  {
+   "text": "For two chosen parameter charts $V,W$, set $O=V\\cap W$, without assuming $O$ affine. The restrictions $L_V\\times_VO\\hookrightarrow O$ and $L_W\\times_WO\\hookrightarrow O$ are closed immersions by [lem-weil-pbc-closed-immersion-base-change]. Step 5 gives them the same universal property on every $O$-scheme. Test it on each of these two schemes: each inclusion factors uniquely through the other. Their two composites are identities since the inclusions are monomorphisms [lem-pc-proper-monomorphism-closed]. Thus there is a unique isomorphism over $O$ between these restrictions. On triple overlaps the two comparison composites agree by the same uniqueness; hence the cocycle condition holds.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HP (lemma-characterize-closed-subspace), 01JB (lemma-glue), 01JC (lemma-glue-schemes); globalization of the coefficient construction of pic.tex Tag 0B97."
+   }
+  },
+  {
+   "text": "Use the inverse images of $V\\cap W$ in the $L_V$ as overlap opens and the isomorphisms from Step 6 as transitions. They satisfy the hypotheses of [lem-weil-pbc-glue-schemes], so they glue to a scheme $L$. The maps $L_V\\to V\\to P$ agree on overlaps and glue to $l:L\\to P$ by [lem-weil-pbc-scheme-morphism-gluing]. Its inverse image of $V$ is exactly $L_V$: a point in another chart $L_W$ mapping into $V$ lies in the overlap over $W\\cap V$, where it is identified with a point of $L_V$. Since $L_V\\to V$ is affine with surjective coordinate map $R\\to R/K_V$, [lem-weil-pbc-closed-immersion-affine-cover-criterion] shows that $l$ is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HP (lemma-characterize-closed-subspace), 01JB (lemma-glue), 01JC (lemma-glue-schemes); globalization of the coefficient construction of pic.tex Tag 0B97."
+   }
+  },
+  {
+   "text": "The ideal sheaf of $l$ restricts on every chosen $V=\\operatorname{Spec}R$ to $\\widetilde{K_V}$ by [def-sbc-closed-immersion-ideal-sheaf]. Step 3 exhibits finitely many generators of $K_V$, which generate $\\widetilde{K_V}$; hence this ideal sheaf is locally of finite type (also [lem-weil-pbc-quasi-coherent-finite-type-affine]). Apply [lem-trf-closed-immersion-finite-presentation-ideal] to conclude that $L\\hookrightarrow P$ is of finite presentation. This is local finite generation on $P$; no finite open cover of $P$ or Noetherian hypothesis is needed.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-trf-closed-immersion-finite-presentation-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/properties.tex",
+    "place": "Tag 01TV (lemma-closed-immersion-finite-presentation); Tag 01PB (lemma-finite-type-module)."
+   }
+  },
+  {
+   "text": "For any $t:T\\to P$, the opens $t^{-1}(V)$ cover $T$. On each one Step 5 gives the equivalence between factorization through $L_V$ and factorization of the restricted $F_T$ through $Z$. The inverse images $D\\times_St^{-1}(V)$ cover $D\\times_ST$ by [lem-weil-pbc-open-fibre-product]. As in Step 5, the local factorizations agree because $l$ and $i$ are monomorphisms [lem-pc-proper-monomorphism-closed], and [lem-weil-pbc-scheme-morphism-gluing] glues them. This proves exactly the stated universal property on arbitrary $T$, with both factorizations unique.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-pc-proper-monomorphism-closed",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HP (lemma-characterize-closed-subspace), 01JB (lemma-glue), 01JC (lemma-glue-schemes); globalization of the coefficient construction of pic.tex Tag 0B97."
+   }
+  },
+  {
+   "text": "Finally let $P'\\to P$ be arbitrary. Over an affine open $\\operatorname{Spec}R'$ of its inverse image of $V=\\operatorname{Spec}R$, the pulled-back source has basis $e_a\\otimes1$ by [lem-weil-pbc-free-module-base-change-free] and [lem-weil-pbc-fibre-product-affine-spectra]. The pulled-back $j_\\beta$ has coefficients equal to the images of $c_{\\beta a}$ in $R'$. Thus its coefficient ideal is $K_VR'$. By [lem-pc-closed-subscheme-base-change-ideal-image], the given immersion $L\\times_PP'\\hookrightarrow P'$ has exactly these local ideals. They are finitely generated, so [lem-trf-closed-immersion-finite-presentation-ideal] again gives finite presentation. The fibre-product universal property [def-pc-fibre-product] identifies maps to $L\\times_PP'$ over $P'$ with factorizations through $L$ of their composites to $P$. Step 9 identifies these with factorizations of the induced family through $Z$, proving the claimed base-change compatibility, including uniqueness. Empty sources ($r=0$) give $K_V=0$ and $L_V=V$; every calculation remains valid.",
+   "uses": [
+    "lem-weil-pbc-free-module-base-change-free",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-closed-subscheme-base-change-ideal-image",
+    "lem-trf-closed-immersion-finite-presentation-ideal",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 01JU (lemma-fibre-product-immersion), ideal under arbitrary base change; Tag 01JQ (lemma-fibre-product-affines); Tag 0B97 coefficient construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-pushforward-locally-free",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-free-module-base-change-free",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-trf-closed-immersion-finite-presentation-ideal",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-projective-module",
+  "lem-pc-affine-containment-ideal",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pc-closed-subscheme-base-change-ideal-image",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pic.tex",
+  "place": "Tag 0B97, lemma-hilb-d-of-closed, coefficient-ideal proof in its final paragraph, applied to the pullback of the target ideal; finite presentation checked by Tag 01TV. Conrad Lemma 2.1.3 and Proposition 2.1.2, pp.58–60, give the same coefficient-equation construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|weil.?restriction|factorization.?locus",
+   "results": "{\"t\": \"2026-10-24T09:18:22Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|weil.?restriction|factorization.?locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a finite locally free morphism preserves finitely presented closed immersions",
+   "results": "{\"t\": \"2026-10-24T09:18:23Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars along a finite locally free morphism preserves finitely presented closed immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RestrictScalars\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"PresheafOfModules.restrictScalars\", \"SheafOfModules.restrictScalars\", \"Module.Presentation.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"PresheafOfModules.restrictScalarsObj\", \"Submodule.restrictScalars\"], \"digest\": \"4c7a4863d7059a60\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilRestriction\"",
+   "results": "{\"t\": \"2026-10-24T09:18:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilRestriction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The locus where a family of maps from a finite locally free scheme factors through a closed subscheme is closed and finitely presented",
+   "results": "{\"t\": \"2026-10-24T09:18:28Z\", \"tool\": \"leanfinder\", \"query\": \"The locus where a family of maps from a finite locally free scheme factors through a closed subscheme is closed and finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\"], \"digest\": \"4d6c504d5a131f08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a finite flat scheme into an affine scheme lands in a given closed subscheme exactly on a closed parameter subscheme, defined by finitely many equations",
+   "results": "{\"t\": \"2026-10-24T09:23:59Z\", \"tool\": \"leanfinder\", \"query\": \"A map from a finite flat scheme into an affine scheme lands in a given closed subscheme exactly on a closed parameter subscheme, defined by finitely many equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.specTargetImage\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι\", \"AlgebraicGeometry.specTargetImageRingHom\", \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective\", \"AlgebraicGeometry.Flat\"], \"digest\": \"4ed21be54bcb466d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits do not state this relative scheme assertion; smooth algebra descent alone does not descend the group operations, closed subgroup and geometric connectedness together."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|weil.?restriction|factorization.?locus",
+   "results": "{\"t\": \"2026-10-24T09:54:58Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|weil.?restriction|factorization.?locus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit represents the finite-locally-free source factorization subfunctor; affine closed-immersion and finite-presentation facts alone do not state this parameter-locus assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along finite locally free morphisms preserves closed immersions of finite presentation",
+   "results": "{\"t\": \"2026-10-24T09:54:58Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars along finite locally free morphisms preserves closed immersions of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RestrictScalars\", \"SheafOfModules.restrictScalars\", \"Module.Presentation.restrictScalars\", \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"ModuleCat.RestrictScalars.obj'\", \"PresheafOfModules.restrictScalars\", \"LinearMap.restrictScalarsₗ\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\"], \"digest\": \"adb30a9e2c9a3d20\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit represents the finite-locally-free source factorization subfunctor; affine closed-immersion and finite-presentation facts alone do not state this parameter-locus assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilRestriction\"",
+   "results": "{\"t\": \"2026-10-24T09:54:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilRestriction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit represents the finite-locally-free source factorization subfunctor; affine closed-immersion and finite-presentation facts alone do not state this parameter-locus assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of maps from a finite locally free scheme factors through a finitely presented closed subscheme on a finitely presented closed parameter locus",
+   "results": "{\"t\": \"2026-10-24T09:54:59Z\", \"tool\": \"leanfinder\", \"query\": \"A family of maps from a finite locally free scheme factors through a finitely presented closed subscheme on a finitely presented closed parameter locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\"], \"digest\": \"2605651cbb80a307\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit represents the finite-locally-free source factorization subfunctor; affine closed-immersion and finite-presentation facts alone do not state this parameter-locus assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite free algebra B over R the coefficients of the images of a finitely generated ideal define the closed subscheme of parameters where the family of maps factors through a closed immersion",
+   "results": "{\"t\": \"2026-10-24T09:59:50Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite free algebra B over R the coefficients of the images of a finitely generated ideal define the closed subscheme of parameters where the family of maps factors through a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"FGAlgCatSkeleton.I\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"Algebra.SubmersivePresentation.finite_coeffs\", \"AlgebraicGeometry.IsClosedImmersion.Spec_iff\", \"Algebra.SubmersivePresentation\", \"AlgebraicGeometry.specTargetImageIdeal\", \"ax_grothendieck_zeroLocus\"], \"digest\": \"b6a7e539fe5604ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit represents the finite-locally-free source factorization subfunctor; affine closed-immersion and finite-presentation facts alone do not state this parameter-locus assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-smooth-subgroup-normalizer",
+  "date": "2026-10-24",
+  "group": "Q10"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the semisimple local models of the quotient, not the reductive central-torus reconstruction. Specific supporting place: Proposition 4.2.7, construction of B=P_G(lambda), its self-normalizer and G/B, before trivializing the pointed curve. This does not assert a relative matrix-model isomorphism. Supporting input: Proposition 4.2.7, proof, p.123: construct the closed normalizer of B before proving B=N_G(B). Supporting input to the normalizer construction: Conrad, Lemma 2.1.3 and its proof, printed pp.58--59, and proof of Proposition 2.1.2, p.60, closed immersion of Hom functors obtained by coefficient equations for the ideal of the target. Pullback by the specified family gives this parameter-locus formulation. Split realization: Steps 1–4 form coefficient equations on affine free charts, Steps 5–9 glue the resulting finitely presented closed immersion and prove its full test-scheme property, and Step 10 proves arbitrary parameter base change; these support the closed normalizer construction in Conrad Proposition 4.2.7 through Lemma 2.1.3 and Proposition 2.1.2.",
+   "via": [
+    "lem-sfb-relative-smooth-subgroup-normalizer",
+    "lem-sfb-relative-adjoint-rank-one-flag-curve",
+    "lem-sfb-relative-rank-one-semisimple-models",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-source-factorization-locus",
+  "worker": "stage1",
+  "summary": "Q112: proved the item by explicit finite coefficient ideals, reused existing DAG facts without creating nodes, checked arbitrary non-affine tests and overlaps, finite presentation without Noetherian hypotheses, rank zero and arbitrary parameter base change. Statement unchanged.",
+  "blueprint": "The existing ancestry has from.node=null (confirmed by blueprint_refs ancestor). Retained that ancestry and its recorded normalizer prerequisite route. Read the latest sk-thm-sf-ctf-stability-direct-images proof, clause (3); this supporting local algebraic lemma realizes the coefficient-equation input specified in the inherited from.place, without changing any chapter or unit route. No blueprint node found for the same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-pushforward-locally-free",
+    "why": "Uses Tag 02KB to obtain finite free source charts from finite, flat, locally finitely presented; no group, smoothness or cohomology theorem is used. This is a generic tool; the coefficient-equation construction remains the item route, and no node of its unit states this input."
+   },
+   {
+    "node": "lem-trf-closed-immersion-finite-presentation-ideal",
+    "why": "Uses Tag 01TV to convert finite presentation of the target closed immersion to finite ideal generators and to certify finite presentation of the constructed locus over an arbitrary base. This is a generic tool; the coefficient-equation construction remains the item route, and no node of its unit states this input."
+   },
+   {
+    "node": "lem-pc-affine-containment-ideal",
+    "why": "Uses the purely algebraic finite-projective coefficient criterion in Tag 0B97 for arbitrary test algebras; it does not assume a Hilbert functor or that the given family is an immersion. This is a generic tool; the coefficient-equation construction remains the item route, and no node of its unit states this input."
+   },
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "Uses the general ideal-image formula of Tag 01JU to identify the given pullback closed immersion, including non-flat pullback. This is a generic tool; the coefficient-equation construction remains the item route, and no node of its unit states this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-trf-closed-immersion-finite-presentation-ideal",
+  "lem-pc-affine-containment-ideal",
+  "lem-pc-closed-subscheme-base-change-ideal-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-0d025231c",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-0d025231c (reviewer sub-agent of L); spot-checked: I read the whole 10-step proof, all 22 cited node statements, and Stacks pic.tex 0B97 (the coefficient construction at the end of its proof) and morphisms.tex 01TV. The delivery adds no new node and leaves the statement and stmt_deps unchanged. Steps 1-4 build the coefficient ideal K_V of J=(phi(h_beta)) in B_R and apply lem-pc-affine-containment-ideal, the 0B97 criterion, for every ring map R->R' without assuming flatness. Steps 5-9 extend this to arbitrary test schemes using the monomorphism property and gluing, glue L with the cocycle condition coming from uniqueness, show l is a closed immersion by the affine-cover criterion, and get finite presentation from 01TV with no quasi-compactness. Step 10 gives base change from the fibre-product universal property plus Step 9, with the ideal image via 01JU. Edge cases checked: rank 0, Z empty, f-vanishing locus, a dual-number source, varying rank. Batch-5 citation: lem-trf-closed-immersion-finite-presentation-ideal is the general Stacks 01TV fact; its closure is only basic scheme lemmas, it is not a step of the proof of the trace formula or of Poincare duality, and nine sfb nodes already cite it, so I accept it. Possible duplicate: lem-pc-hilb-containment-locus gives a weaker form of the item through the graph (no finite presentation); this is an alternative route, not a fault. The five inherited mathlib_searches entries carry irrelevant verdict prose; noted only. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeSourceFactorizationLocus",
+  "declaration": "AlgebraicGeometry.exists_finiteLocallyFreeSource_closedFactorizationLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeSourceFactorizationLocus.lean",
+  "statement": "theorem exists_finiteLocallyFreeSource_closedFactorizationLocus {S D X Z P : Scheme.{u}} (q : D ⟶ S) [q.IsFiniteLocallyFree] (x : X ⟶ S) [IsAffineHom x] [LocallyOfFinitePresentation x] (i : Z ⟶ X) [IsClosedImmersion i] [LocallyOfFinitePresentation i] (p : P ⟶ S) (F : pullback q p ⟶ X) (hF : F ≫ x = pullback.snd q p ≫ p) : ∃ (L : Scheme.{u}) (l : L ⟶ P), IsClosedImmersion l ∧ LocallyOfFinitePresentation l ∧ (∀ (T : Scheme.{u}) (t : T ⟶ P), (∃! a : T ⟶ L, a ≫ l = t) ↔ ∃! b : pullback q (t ≫ p) ⟶ Z, b ≫ i = pullback.map q (t ≫ p) q p (𝟙 D) t (𝟙 S) (by simp) (by simp) ≫ F) ∧ ∀ (P' : Scheme.{u}) (g : P' ⟶ P), IsClosedImmersion (pullback.snd l g) ∧ LocallyOfFinitePresentation (pullback.snd l g) ∧ ∀ (T : Scheme.{u}) (t : T ⟶ P'), (∃! a : T ⟶ pullback l g, a ≫ pullback.snd l g = t) ↔ ∃! b : pullback q ((t ≫ g) ≫ p) ⟶ Z, b ≫ i = pullback.map q ((t ≫ g) ≫ p) q (g ≫ p) (𝟙 D) t (𝟙 S) (by simp) (by simp [Category.assoc]) ≫ pullback.map q (g ≫ p) q p (𝟙 D) g (𝟙 S) (by simp) (by simp) ≫ F",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d01bb7d51",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsFiniteLocallyFree (recorded FiberDegree class = finite+flat+LFP, varying rank), IsAffineHom+LFP = affine f.p., IsClosedImmersion+LFP = f.p. closed immersion, hF makes F an S-map; conclusion ∃ closed LFP l with ∀ T t, (∃! a, a≫l=t) ↔ ∃! b, b≫i = pullback.map q (t≫p) q p 𝟙 t 𝟙 ≫ F (argument order checked; uniqueness valid since monos), plus base-change clause for pullback.snd l g with arbitrary g and induced family (1_D×g)≫F. Edge cases rank 0/empty D, Z=X, Z=∅, empty P/T, nonreduced, non-flat g, non-qc P covered. Node copy changes only lean; statement verbatim; docstrings with source+blueprint+10 steps; sorry only; no defs; lines ≤100; imports exist in side-live; report sections present. Only near-duplicate ConstantSourceClosedFactorizationLocus (field base, no f.p.) differs. Advisory: IsAffineHom = mathlib-status pqf-def-affine-morphism, uncited in stmt_deps but not addable at stage 2. Not recompiled (no change)."
+ }
+}

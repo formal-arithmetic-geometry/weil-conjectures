@@ -27,137 +27,64 @@
  ],
  "proof": [
   {
-   "text": "Write the bundle as the relative spectrum of the symmetric algebra using [def-pur-vector-bundle-zero-section]. The locally free rank-one module admits a Zariski affine trivializing cover; [def-asd-vector-bundle-zero-section] identifies the projection and zero section on each member $U=\\operatorname{Spec}R$ with $\\operatorname{Spec}R[t]\\to\\operatorname{Spec}R$ and the quotient $R[t]\\to R$, $t\\mapsto0$. A field is Noetherian (its ideals are zero and the unit ideal), so [lem-weil-pbc-finite-type-over-noetherian] makes $B$ Noetherian. Apply [lem-amb-vector-projective-completion] to this rank-one locally free module, transporting its construction through the chosen total-space isomorphism: it gives a projective completion of $E$, and asserts that $\\pi$ is separated and finite type and $E$ Noetherian. These are the compactification and finiteness hypotheses needed below. To check the absolute hypotheses, choose a finite affine trivializing cover of $B$ with coordinate rings finitely generated over $k$. Then $E$ has the corresponding finite affine cover with rings $R[t]$, also finitely generated over $k$, so it is finite type by [def-weil-finite-type-morphism]. Its absolute diagonal factors through $E\\times_BE$: the first arrow is the closed relative diagonal of $\\pi$, and the second is the pullback of the closed diagonal of $B/k$. On affine charts these are quotients of rings; tensoring a surjection and composing surjections preserve surjectivity. Thus $E/k$ is separated by [def-weil-proper-morphism].",
+   "text": "Apply lem-pur-line-zero-geometry. Unpack its geometric conclusions and projective completion. The effective Cartier center characterization supplies invertibility and closedness for every base-changed section; sectionBaseChange is definitionally lineZeroBaseChange. The completion supplies HasCompactification, and the section identity supplies the identity compactification for the composite. Exact closed pro-etale direct image follows from the Noetherian complement via lem-exc-proetale-closed-exact. This proves line_zero_geometry.",
    "uses": [
-    "def-pur-vector-bundle-zero-section",
-    "def-asd-vector-bundle-zero-section",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-amb-vector-projective-completion",
-    "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism"
+    "lem-pur-line-zero-geometry",
+    "lem-exc-proetale-closed-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 1: global Cartier zero divisor and global morphism"
+    "place": "Step 1, global Cartier zero divisor: affine frames, projective completion, smoothness, codimension and arbitrary base change; expanded realization proof steps 1--2"
    }
   },
   {
-   "text": "On the charts in step 1, [sbc-lem-affine-space-smooth] with rank one proves smoothness of relative dimension one. Smoothness and that fibre dimension are affine-local in the equivalent affine-local definition of [def-sbc-smooth-morphisms], so this proves the assertion for $\\pi$. Since $\\pi z=1$, $D\\to B$ is the identity and is smooth of relative dimension zero. Its ideal on a chart is $(t)$; if $tg=0$ in $R[t]$, comparison of coefficients gives $g=0$. Thus it is an effective Cartier divisor by [def-pc-divisor-line-bundle]. At a point of $D$, $t$ stays a nonzerodivisor in the Noetherian local ring of $E$, and quotient by $t$ is the local ring of $D$. Apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] to obtain pure codimension one. For every $B'\\to B$, restrict to affine charts over the cover just used: the pullback equation is again $t$ in $R'[t]$, with quotient $R'$. The same coefficient argument proves the Cartier property without flatness or Noetherianity of $B'$. This is base change of the bundle over $B$, not arbitrary pullback into $E$.",
+   "text": "Apply relativeCartierKummer_realization to the line zero Cartier divisor, obtaining SupportedKummerBoundary and equality of the general divisor and agreement Cartier maps. Apply divisor_class, and identify its uniquely normalized etale family with generalDivisorEtaleClasses to obtain DivisorLocalEquations.",
    "uses": [
-    "sbc-lem-affine-space-smooth",
-    "def-sbc-smooth-morphisms",
-    "def-pc-divisor-line-bundle",
-    "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+    "lem-pur-cartier-relative-kummer-realization",
+    "lem-pur-divisor-class"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 1: global Cartier zero divisor and global morphism"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: identity-normalized compact source of the global zero-divisor morphism"
    }
   },
   {
-   "text": "Put $N=\\ell^n$. Since $\\ell\\in(\\varpi_F)$, $\\ell^n\\in(\\varpi_F^n)$ and $NA=0$; $N$ is invertible on every $k$-scheme under consideration. Apply [lem-asd-finite-etale-twist-line] first with coefficient ring $\\mathbf Z/N$ to see that $\\mu^{\\mathrm{et}}_{N,T}$ is flat over $(\\mathbf Z/N)_T$. Hence its derived tensor with $A_T$ is the ordinary tensor in degree zero, so the $L_T$ in the statement is a bounded-below ordinary etale complex, also when $A$ is not flat over $\\mathbf Z/N$. Apply [lem-amb-finite-tate-site-descent] with annihilating exponent $n$ to obtain the projection-induced isomorphism $\\theta_T:\\nu_T^*L_T\\xrightarrow{\\sim}A_T(1)$. The projection convention is precisely the one specified in [def-pur-frame-class]; this keeps the prescribed pro-etale twist rather than redefining it.",
+   "text": "Apply cartierSupported_comparison_square to the zero section and unfold the degree-zero arrow and comparison wrappers. This is exactly the supported comparison conjunct.",
    "uses": [
-    "lem-asd-finite-etale-twist-line",
-    "lem-amb-finite-tate-site-descent",
-    "def-pur-frame-class"
+    "lem-pur-cartier-supported-comparison-square"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 1: global Cartier zero divisor and global morphism"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: identity-normalized compact source of the global zero-divisor morphism"
    }
   },
   {
-   "text": "Apply [lem-asd-ordinary-supported-kummer] to $D\\hookrightarrow E$, $N$, and $A$; all its hypotheses were checked in steps 1--3. It gives $c^e_{D,A}:z_*A_B\\to L_E[2]$ by the relative line bundle $\\mathcal O_E(D)$ with its canonical section off $D$, followed by derived scalar extension. Apply [lem-amb-cartier-kummer-map] to the same divisor and coefficient ring. Its stated etale witness uses the same roots-of-unity sheaf and the same supported morphism; its definition is etale Kummer followed by comparison pullback and the projection-induced twist identification. Consequently, under its canonical supported-constant source comparison, $c^p_{D,A}=\\theta_E[2]\\circ\\nu_E^*c^e_{D,A}$. This equality compares the actual supported relative construction, not just its image after forgetting support.",
+   "text": "Specialize comparisonImage_closed_section_normalization to the zero section and the bundle projection, giving the compact-source normalization with exactly the named source isomorphisms of this module. Apply naturality of the compact-support site comparison to the etale Cartier map, then use the supported square. Cancel source isomorphisms to substitute the source-normalization equation; postcompose with the bounded-below compatibility inverse. This yields the displayed equality for the actual lineZeroTau and the fixed origin witnesses.",
    "uses": [
-    "lem-asd-ordinary-supported-kummer",
-    "lem-amb-cartier-kummer-map"
+    "lem-pur-comparison-image-closed-section-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 1: global Cartier zero divisor and global morphism"
-   }
-  },
-  {
-   "text": "By [lem-pur-divisor-class], whose hypotheses hold by steps 1--2 ($E\\to B$ smooth of relative dimension one, $D$ smooth over $B$ of pure codimension one, $E$ separated of finite type over $k$), the class $\\operatorname{cl}(D)$ is the relative Kummer boundary of $\\mathcal O_E(D)$ with its canonical trivialization off $D$, in the Yoneda convention of [def-asd-ordinary-supported-kummer-boundary]. Apply [lem-pur-cartier-class-agreement] to the separated finite-type $k$-scheme $T=E$ and the effective Cartier divisor $D$ of step 2: under the natural supported-Hom isomorphism $H^2_D(E,A(1))\\cong\\operatorname{Hom}(z_*A_B,A_E(1)[2])$ of [lem-pur-supported-hom] (at $F=A_E(1)$, in degree zero by step 3, and degree two), $\\operatorname{cl}(D)$ is the morphism $c^p_{D,A}$ of [lem-amb-cartier-kummer-map], with the relative-torsor normalization through derived scalar extension and the roots projection of [def-pur-frame-class] that step 4 uses. For smooth $D$ the general Cartier construction of [lem-pur-divisor-class] used there is the same relative construction as its first paragraph. The local equation on a bundle chart is $t$; the displayed local formula of [lem-pur-divisor-class] gives $-\\partial\\kappa(t)$. The Kummer class here is the prescribed one of [def-pur-frame-class]. In particular the sign is inherited from the already corrected divisor-class statement, not from the older blueprint's positive frame-class formula.",
-   "uses": [
-    "lem-pur-divisor-class",
-    "lem-pur-cartier-class-agreement",
-    "def-asd-ordinary-supported-kummer-boundary",
-    "lem-pur-supported-hom",
-    "def-pur-frame-class"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 1: global Cartier zero divisor and global morphism"
-   }
-  },
-  {
-   "text": "For the closed immersion $z$, use the compactification $(\\mathrm{id}_B,z)$. It is proper by [lem-weil-pbc-closed-immersion-proper](a). The ordinary etale identification $Rz_!\\cong z_*$ is provided by [lem-pur-closed-finite-adjoint-counit-transport]. On the pro-etale site [lem-exc-proetale-closed-exact] gives $Rz_*=z_*$; its quasi-compact-complement hypothesis holds since $E$ is Noetherian. Thus the same identity/proper compactification gives $Rz_!=z_*$. Apply the composition isomorphisms [lem-amb-etale-compact-comparisons] and [thm-sf-comp-composition] to $B\\xrightarrow z E\\xrightarrow\\pi B$. Since $\\pi z=\\mathrm{id}_B$, they identify $R\\pi_!z_*A_B$ with $R(\\pi z)_!A_B=A_B$ in the two topologies, using the canonical identity normalization. The ordinary etale supported source $z_*A_B$ is in degree zero, so these uses lie in $D^+$.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-pur-closed-finite-adjoint-counit-transport",
-    "lem-exc-proetale-closed-exact",
-    "lem-amb-etale-compact-comparisons",
-    "thm-sf-comp-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 1: global Cartier zero divisor and global morphism"
-   }
-  },
-  {
-   "text": "Let $\\beta_M:\\nu_B^*R\\pi_!^{\\mathrm{et}}M\\xrightarrow{\\sim}R\\pi_!\\nu_E^*M$ denote the inverse-direction form of [lem-sf-class-compact-support-comparison], for the projective completion of step 1. Both $M=z_*A_B$ and $M=L_E[2]$ are bounded below. Its naturality applied to $c^e=c^e_{D,A}$ gives\n$$\\beta_{L_E[2]}\\circ\\nu_B^*(R\\pi_!^{\\mathrm{et}}c^e)=R\\pi_!(\\nu_E^*c^e)\\circ\\beta_{z_*A_B}.$$\nBy [lem-pur-compact-support-site-coherence], the source component of this equation respects the composition for $\\pi z$ and the identity, so step 6 identifies it with the canonical constant-sheaf comparison $\\nu_B^*A_B\\cong A_B$. Substitute the equality of step 4 and then the target comparison $R\\pi_!\\theta_E[2]$. The right side is exactly $\\tau_E=R\\pi_!c^p_{D,A}$, with the prescribed source $A_B$. The left side exhibits its etale representative $R\\pi_!^{\\mathrm{et}}c^e:A_B\\to R\\pi_!^{\\mathrm{et}}L_E[2]$. The target is bounded below by the compact-support comparison's $D^+$ assertion. Retaining that representative and these two comparison isomorphisms is the witness of [def-weil-pbc-etale-origin-witness] for the actual map. Nothing in this argument asserts that $\\tau_E$ is invertible.",
-   "uses": [
-    "lem-sf-class-compact-support-comparison",
-    "lem-pur-compact-support-site-coherence",
-    "def-weil-pbc-etale-origin-witness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-    "place": "Step 1: global Cartier zero divisor and global morphism"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: identity-normalized compact source of the global zero-divisor morphism"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-vector-bundle-zero-section",
-  "def-asd-vector-bundle-zero-section",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-amb-vector-projective-completion",
-  "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism",
-  "sbc-lem-affine-space-smooth",
-  "def-sbc-smooth-morphisms",
-  "def-pc-divisor-line-bundle",
-  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-  "lem-asd-finite-etale-twist-line",
-  "lem-amb-finite-tate-site-descent",
-  "def-pur-frame-class",
-  "lem-asd-ordinary-supported-kummer",
-  "lem-amb-cartier-kummer-map",
-  "lem-pur-divisor-class",
-  "lem-pur-cartier-class-agreement",
-  "def-asd-ordinary-supported-kummer-boundary",
-  "lem-pur-supported-hom",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-pur-closed-finite-adjoint-counit-transport",
+  "lem-pur-line-zero-geometry",
   "lem-exc-proetale-closed-exact",
-  "lem-amb-etale-compact-comparisons",
-  "thm-sf-comp-composition",
-  "lem-sf-class-compact-support-comparison",
-  "lem-pur-compact-support-site-coherence",
-  "def-weil-pbc-etale-origin-witness"
+  "lem-pur-cartier-relative-kummer-realization",
+  "lem-pur-divisor-class",
+  "lem-pur-cartier-supported-comparison-square",
+  "lem-pur-comparison-image-closed-section-normalization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
-  "place": "Step 1; expanded using the existing supported Kummer and normalized compact-support site-coherence interfaces"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 1; B5 assembles Cartier realization, uniqueness of the normalized divisor family, supported comparison, and naturality. Only comparison-image compact-source normalization is split off."
  },
  "mathlib_searches": [
   {
@@ -317,73 +244,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-pur-line-zero-class-etale-realization",
   "worker": "stage1",
-  "summary": "Expanded the global divisor, signed relative Kummer realization, ordinary-etale twist witness, and identity-normalized compact source in seven steps. Reused existing geometry and comparison lemmas; no new nodes. Clarified that universal Cartier base change is over the bundle base B. Preserved all inherited search records and added fresh logged searches.",
-  "blueprint": "thm-pur-rank-one-thom, proof Step 1: global Cartier zero divisor, relative Kummer class and induced global morphism; the etale witnesses are made explicit without using Step 2 invertibility.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "sbc-lem-affine-space-smooth",
-    "why": "Generic Affine space is smooth interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-weil-pbc-dimension-quotient-nonzerodivisor",
-    "why": "Generic Dimension drops by one modulo a nonzerodivisor of the maximal ideal interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-asd-finite-etale-twist-line",
-    "why": "Generic Finite torsion Tate twists are etale locally free lines interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-asd-ordinary-supported-kummer",
-    "why": "Generic Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-amb-cartier-kummer-map",
-    "why": "Generic A Cartier divisor gives a supported Kummer map interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-pur-divisor-class",
-    "why": "Generic Kummer class of a divisor and its $c_1$ interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-pur-supported-hom",
-    "why": "Generic Supported cohomology as morphisms interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-pur-closed-finite-adjoint-counit-transport",
-    "why": "Generic Closed finite exceptional adjoint and counit on classical inputs interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-exc-proetale-closed-exact",
-    "why": "Generic Exactness of closed direct image interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-amb-etale-compact-comparisons",
-    "why": "Generic The etale compact-support comparisons interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "thm-sf-comp-composition",
-    "why": "Generic The composition law for $Rf_!$ interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-sf-class-compact-support-comparison",
-    "why": "Generic On the coefficient class the compact-support functor is computed on the étale site interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-pur-compact-support-site-coherence",
-    "why": "Generic Compact-support site comparison respects compactification calculus interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
-   },
-   {
-    "node": "lem-weil-pbc-closed-immersion-proper",
-    "why": "Properness of a closed immersion permits the identity/proper compactification of z. This is a generic scheme-theoretic input, not another purity route."
-   }
-  ]
+  "summary": "Repair of the batch-5 re-split return: extracted three statement-only independent work units of comparable argument size (old steps 1--2, 3--5, 6--7). Kept the item statement byte-for-byte, including the sign and all source/target identifications. The report retains every old step verbatim as handoff material; no argument was discarded. All new nodes have logged Mathlib searches and empty proofs.",
+  "blueprint": "thm-pur-rank-one-thom proof Step 1: global Cartier zero divisor (geometry), global relative Kummer class (supported realization), induced global morphism (normalized compact transport).",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-finite-type-over-noetherian",
@@ -403,12 +269,12 @@
   "lem-weil-pbc-closed-immersion-proper"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q123-1584ee080",
+  "reviewer": "NT-cc-Q123-e96e23339",
   "group": "Q123",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-1584ee080 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 7 steps, its split_report, tool_uses and searches, and all 30 cited statements. I also read base Steps 1-2 of the old 9569-character thm-pur-rank-one-thom proof, which this item carries, and the main-20261015 sk-prop-an thm-pur-rank-one-thom.proof.md Step 1. The item matches Step 1 and stays on route through lem-pur-divisor-class. Live still has the item unsplit, so the delivery is not superseded. The only re-split note is the parent's, and it is resolved. Statement: the Cartier-after-base-change clause is now limited to base changes B'->B. That is a correct clarification, because pulling back along z sends (t) to 0, so the other reading is false. Its only citer, the parent step 1, uses only the Cartier property. The report says the item carries a statement_change record, but the JSON has none; this is advisory only. Small cases checked: empty B, B=Spec k, nonreduced R[t], non-flat and non-Noetherian B', ramified F with n=1. Steps 1-4, 6 and 7 are correct with hypotheses checked: B Noetherian by 01T6; E separated of finite type over k with a quasi-compact complement to D; mu_N flat, so the derived and ordinary tensor agree; site descent at exponent n; c^p = theta o nu^*c^e from the witness clause of lem-amb-cartier-kummer-map; Rz_! = z_* on both sites; composition, compact comparison natural in the witness, and site coherence for pi z = id. Fault (C4/C5), fixed: step 5 equated cl(D) with c^p only as 'the same supported construction'. lem-pur-divisor-class and lem-pur-supported-hom do not give that equality. The existing reviewed same-unit node lem-pur-cartier-class-agreement states exactly that cl(D) is c_D of lem-amb-cartier-kummer-map under lem-pur-supported-hom, for T separated of finite type and D Cartier. Step 5 now cites it with its hypotheses checked, and proof_deps is updated. There is no cycle, and the citation adds no trace-formula or Poincare-duality node. Batch-5 flag on lem-amb-vector-projective-completion: the trf nodes it alone brings in (projective-bundle quotient geometry, Proj separatedness, symmetric graded algebra, algebraic-space def) are generic EGA II scheme theory. They are not part of the trace formula or Poincare duality, and the citation is needed for the compactification in step 7, so I accept it. I accept the declared tool_uses as generic. No SGA is cited. There are no new nodes.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-e96e23339 (reviewer sub-agent of L); spot-checked: Re-split note, released 2026-10-22 (7 steps, 7635 characters): the delivery answers it. The live item still has the 7-step proof and nobody else delivered a re-split. The item's statement, stmt_deps, lean and blueprint fields are unchanged; only proof, proof_deps, proof_origin and split_report changed. The assembly is 3 steps, 1828 characters, one step per new node. Each new node is statement-only and corresponds to one clause of main-20261015 thm-pur-rank-one-thom.proof.md Step 1. Every old step is carried by a new node: steps 1-2 by lem-pur-line-zero-geometry (Noetherian; E/k separated finite type; Proj_B Sym(O+E) compactification with the D+(t) chart; smooth of relative dimension 1/0; dim O_E,x = dim O_D,x + 1; quasi-compact complement; Cartier after B'->B); steps 3-5 by lem-pur-cartier-relative-kummer-realization (NA=0 because l is in (varpi); mu_N flat; L in degree 0; theta; theta∘C(c^e) = c^p∘eps; cl(D) = c^p; -dk(f)); steps 6-7 by lem-pur-closed-section-compact-origin (Rs_!=s_*; sigma_e/sigma_p; source normalization; psi∘C(tau_e) = tau_p∘chi, which I checked by naturality of beta). Handed-off proof sizes are about 2.6k/3.0k/2.0k characters, so comparable. None restates the item: geometry has no Kummer clause, realization is for any smooth Cartier pair of relative dimension d, transport is generic and assumes the supported map equality. Small cases checked: empty B, A^1 over k, nonreduced R, non-flat B', ramified F with n=1, f=s=id, c^e=0 (no invertibility). Hypotheses match lem-pur-divisor-class, def-pur-frame-class codimension, lem-amb-finite-tate-site-descent (any scheme with l invertible), lem-exc-proetale-closed-exact and lem-sf-class-compact-support-comparison (beta direction). No duplicates found by rg -L over the snapshot DAG; no SGA; no cycle. FIX (B3): the TeX of the new nodes cites nodes missing from their stmt_deps. Added def-weil-finite-type-morphism and def-weil-proper-morphism to geometry; def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules, def-sbc-smooth-morphisms and def-pc-divisor-line-bundle to realization; the two derived-category defs plus def-amb-etale-compact-support, def-compact-support-direct-image-detailed, lem-amb-etale-compact-comparisons and thm-sf-comp-composition to transport. Corrected files are in fixes/dag/nodes/sec-smooth-purity/; all added nodes were already in the base closure. Batch-5 flags: the four flagged nodes are already stmt_deps of the item on base, so the closure is unchanged. The leaves reached (pro-etale roots-of-unity local triviality, stalk-of-tensor/scalar extension, local flatness criterion) are generic, not steps of the trace formula or Poincare duality; accepted. Advisory: the item's inherited tool_uses list is now stale (maintainer field).; 3 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.LineZeroClassEtaleRealization",
@@ -466,5 +332,27 @@
   "group": "NL",
   "result": "fix",
   "note": "Re-delivery after e1133fdd H2 RETURN: Lean byte-identical (sha 9c4eb1d2); item stmt_deps = base 15 + new existing:true def node def-pur-cartier-agreement-maps (agreementCartierEtale = .choose of Etale.cartier_kummer_map, agreementCartierMap = functorialCupCompare of it; statement verbatim, check_existing clean); theorem kept in proof_deps. Lean re-read: datum, geometry with base change over B, cl(D)=c^p, DivisorLocalEquations minus sign, SupportedKummerBoundary pin, flat mu_N L_E, supported/source/tau squares with FixedEtaleOriginWitness data, no invertibility; universes and edge cases OK. Finding fixed: new node cited theorem lem-pur-supported-cup-functoriality for plain FunctorialCupH/functorialCupCompare and lacked body owners; fixes/def-pur-cartier-agreement-maps.json swaps to def-pur-supported-class-operations + def-pur-supported-hom-site-comparison, adds def-pur-frame-kummer-class + def-weil-pbc-direct-image (TeX cites updated; check_new_node [] ; no cycle). No compile run (no .lean changed). Advisory: base-era non-stmt_dep owners, unused SfIntrinsicCompactSupport import, self second reading."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T201419-L-2491978",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

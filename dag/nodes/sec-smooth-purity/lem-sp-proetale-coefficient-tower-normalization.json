@@ -1,0 +1,269 @@
+{
+ "id": "lem-sp-proetale-coefficient-tower-normalization",
+ "kind": "statement",
+ "title": "Constant-coefficient tower transport and prescribed scalar-associator normalization",
+ "statement": "Fix a prime $\\ell$, unital maps $A\\xrightarrow{\\varphi}B\\xrightarrow{\\psi}C$ of finite commutative rings killed by powers of $\\ell$, and a morphism of schemes $q:Z\\to Y$. Use the small pro-etale sites, their constant-ring module derived categories [def-weil-pbc-proetale-modules], and the geometric operations [def-weil-pbc-proetale-operations]. Put $u=q_{\\mathrm{proet}}$. For $R=A,B,C$ let $c_R:u^{-1}R_Y\\to R_Z$ be precisely the map adjoint to constant sections [def-weil-proetale-inverse-image]. Write $T_T^{R,S}=(-)\\otimes^L_{R_T}S_T$ and $\\alpha_{T,N}:T_T^{B,C}T_T^{A,B}N\\xrightarrow{\\sim}T_T^{A,C}N$ for the specified functors and associator of [det-sp-scalar-extension-functor]. Let $\\tau_T$ be the balanced associator of [lem-sfb-successive-derived-quotient-normalization], for the tower of constant rings on $T=Y,Z$.\n\nThe maps $c_R$ are isomorphisms, and they identify the entire inverse-image coefficient diagram with the actual constant-ring diagram on $Z$:\n$$c_B\\circ u^{-1}(\\varphi_Y)=\\varphi_Z\\circ c_A,\\qquad c_C\\circ u^{-1}(\\psi_Y)=\\psi_Z\\circ c_B.$$\nUnder transport along these specified ring isomorphisms, scalar extension and the geometric module actions are the identified-coefficient operations just named. On either site, for every unbounded $N\\in D(T_{\\mathrm{proet}},A)$, the resulting $\\tau_{T,N}$ equals $\\alpha_{T,N}$ as a morphism in $D(T_{\\mathrm{proet}},C)$. On any flat-term K-flat representative $P\\to N$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], both successive and direct extension are computed by the same representative tensor complexes, and this common map and its inverse are\n$$(P\\otimes_{A_T}B_T)\\otimes_{B_T}C_T\\longrightarrow P\\otimes_{A_T}C_T,\\quad (x\\otimes b)\\otimes c\\longmapsto x\\otimes\\psi(b)c,\\qquad x\\otimes c\\longmapsto(x\\otimes1)\\otimes c.$$\nThese identifications are natural in $N$ and the coefficient maps, retain the right-factor $C_T$-action, and require neither flatness nor finite projective dimension of the ring maps nor boundedness of $N$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D (lemma-derived-pullback-composition), coefficient-change specialization; agent extraction of returned proof steps 1-2, including the canonical constant-ring transport and equality with the specified blueprint associator."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "det-sp-scalar-extension-functor",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved arbitrary-ring instance proEtaleConstantRingComparison_isIso for the specified adjunct c_R. Both constant coefficient squares follow by applying the sheafification adjunction to the direct-image maps, using naturality of toSheafify on constant generators, and then naturality of the inverse-image adjunction. This includes the empty site.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized scalar-extension-along-ring-isomorphism theorem. Connect changeOfRings to its independent-universe version by the presheaf identity isomorphism; its restrictions agree on pure tensors and sheafification preserves that isomorphism. The resulting comparison sends s tensor x to c inverse(s) times x, and its inverse inserts one. Whiskering with module inverse image proves geometric transport. The direct-image coefficient map is rho because homEquiv applied to its inverse recovers rho.",
+   "uses": [
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any recorded Presentation family, reconstruct the full Normalization using the proved ordinaryComp, derivedComp, normalized adjunction data, representative and coherence lemmas of successive normalization. For a commuting coefficient square with vertical ring isomorphisms, paste inverse vertical extension, the first ordinary associator, equality of the composite ring map, the second inverse associator, and the source vertical relabelling. The ordinary_hom and ordinary_inv equations give s tensor x mapped to c_B(s) tensor x and the stated inverse. Naturality of the adjunction unit supplies naturality on pure tensors.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-sheaf-scalar-extension-ring-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction along each inverse ring isomorphism is an additive equivalence: construct it by pushforwardPushforwardEquivalence for the identity site equivalence. Apply the already proved leftDerivedSquare of ExactEquivalenceDerivedSquares to these two equivalences and the ordinary scalar square. complexCounitNat_kan transports each recorded universal homotopy counit to complex localization. The theorem's universal factorization equation is exactly the displayed counit equation for every unbounded complex; no resolving representative or K-flat assumption is required here.",
+   "uses": [
+    "lem-derived-exact-equivalence-squares",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the constructed Normalization to publishedPresentation on each pro-etale site, retaining every computation, representative, unit, naturality and associativity field. Its derived comparison is derivedComp for the published adjunction data. The already proved normalizedScalarComp_eq and publishedComp_eq identify the prescribed scalarExtensionFunctor_composition with that same derivedComp followed by equality transport of the coefficient map. Evaluating this natural-isomorphism equality proves the required equation at every derived object.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sp-scalar-associator-conjugate",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-derived-exact-equivalence-squares",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sp-scalar-associator-conjugate",
+  "det-sp-scalar-extension-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D, 06YY and 07A6; D8 Lean proof via normalized ordinary adjunctions, exact-equivalence derived squares, ring-isomorphism transport and the published associator interface. Constant section naturality uses sites.tex Tag 0H7J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*(pullback|inverseImage)|extendScalarsComp|extendScalars_assoc",
+   "results": "OK: 1 hits; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; directory CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf pullback and underived ModuleCat scalar associativity do not identify this constant-ring diagram and the specified unbounded derived associator under its normalized K-flat comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, ModuleCat.extendScalarsComp",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf pullback and underived ModuleCat scalar associativity do not identify this constant-ring diagram and the specified unbounded derived associator under its normalized K-flat comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical pro etale constant ring comparisons and K flat scalar associativity commute with a tower of coefficient maps",
+   "results": "OK: 8 hits; LocalSubring.instIsScalarTowerSubtypeMemSubringToSubringOfPrime, IntermediateField.isScalarTower_over_bot, Polynomial.coeff_zero_of_isScalarTower, instIsScalarTowerLocalizationAlgebraMapSubmonoidPrimeCompl_1, IsLocalRing.ResidueField.instIsScalarTower_1, instIsScalarTowerAtPrimeFractionRing_1, IntermediateField.fixedField.isScalarTower, KaehlerDifferential.isLocalizedModule_of_isLocalizedModule",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf pullback and underived ModuleCat scalar associativity do not identify this constant-ring diagram and the specified unbounded derived associator under its normalized K-flat comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical constant ring inverse image comparisons intertwine a coefficient ring tower and identify its K flat derived scalar associator",
+   "results": "OK: 8 hits; RingHom.flat_algebraMap_iff, RingHom.Flat, Module.Flat.trans, Algebra.FormallyUnramified.flat_of_restrictScalars, Algebra.Generators.CotangentSpace.compEquiv_symm_inr, Module.FaithfullyFlat.trans, RingHom.faithfullyFlat_algebraMap_iff, RingHom.FaithfullyFlat",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf pullback and underived ModuleCat scalar associativity do not identify this constant-ring diagram and the specified unbounded derived associator under its normalized K-flat comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of an inverse image constant ring diagram preserves balanced associativity of derived extension of scalars",
+   "results": "OK: 8 hits; ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc', ModuleCat.extendScalarsComp, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, ModuleCat.extendScalars_id_comp_assoc, Algebra.Generators.CotangentSpace.compEquiv_symm_inr, ModuleCat.extendScalarsComp_hom_app_one_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf pullback and underived ModuleCat scalar associativity do not identify this constant-ring diagram and the specified unbounded derived associator under its normalized K-flat comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalars_assoc|conjugateEquiv_pullbackComp",
+   "results": "OK: 8 hits; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; directory Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: constant-sheaf pullback and underived ModuleCat scalar associativity do not identify this constant-ring diagram and the specified unbounded derived associator under its normalized K-flat comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical constant ring inverse image comparisons commute with coefficient ring homomorphisms and identify unbounded derived scalar associativity",
+   "results": "OK: 8 hits; LaurentPolynomial.invert_comp_C, Algebra.PreSubmersivePresentation.ofHasCoeffs_map, MvPolynomial.map_comp_C, MvPolynomial.constantCoeff_comp_map, MvPolynomial.optionEquivLeft_symm_C_C, MvPolynomial.mvPolynomialEquivMvPolynomial, MvPolynomial.comap_comp_apply, MvPolynomial.supportedEquivMvPolynomial_symm_C",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the constant-ring tower transport together with equality to the prescribed unbounded derived scalar associator."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(pullback|inverseImage)|extendScalarsComp|derivedReductionComposition",
+   "results": "OK: 7 hits; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the constant-ring tower transport together with equality to the prescribed unbounded derived scalar associator."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a constant sheaf of rings is naturally the constant sheaf and derived extension of scalars is associative",
+   "results": "OK: 8 hits; CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant.mk, SheafOfModules.ιFree_mapFree_inv_assoc, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, CategoryTheory.constantCommuteCompose, CategoryTheory.constantSheafΓAdj, CategoryTheory.Sheaf.mem_essImage_of_isConstant",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the constant-ring tower transport together with equality to the prescribed unbounded derived scalar associator."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, ModuleCat.extendScalarsComp",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the constant-ring tower transport together with equality to the prescribed unbounded derived scalar associator."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of rings for sheaves of modules is computed by a K flat complex and successive derived extensions of scalars agree with balanced tensor associativity",
+   "results": "OK: 8 hits; CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor_obj, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Tor_map, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the constant-ring tower transport together with equality to the prescribed unbounded derived scalar associator."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-proetale-direct-image-scalar-cocycle",
+  "date": "2026-10-22",
+  "group": "Q09"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Proof Step 4: \"the projection maps of Step 1 compose under the associativity isomorphism\"; Tag 0D6D (lemma-derived-pullback-composition), coefficient-change specialization; agent extraction of returned proof steps 1-2, including the canonical constant-ring transport and equality with the specified blueprint associator.",
+   "via": [
+    "lem-sp-proetale-direct-image-scalar-cocycle"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-proetale-coefficient-tower-normalization",
+  "worker": "stage1",
+  "summary": "Split using existing general constant-ring comparison, K-flat change of rings and successive-extension normalization. Wrote coefficient squares and ring-isomorphism transports explicitly; identified the prescribed alpha by its already stated right-conjugate characterization and uniqueness of unit-preserving left-adjoint comparison. No statement change and no new nodes.",
+  "blueprint": "det-sp-reduction-direct-image, final coefficient-tower sentence (recorded as proof Step 4): supplies the actual constant-ring transport and identifies balanced scalar association with the associator of det-sp-scalar-extension-functor; follows sk-lem-sp-reduction step 1, final sentence.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic constant-ring comparison for the actual small-proetale coefficient sheaves, including its specified constant-section map. This is a generic tool for the fixed coefficient-tower route, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General unbounded flat-term K-flat resolution existence. This is a generic tool for the fixed coefficient-tower route, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "General preservation of flat-term K-flat complexes, applied to identity underlying topos with a coefficient map. This is a generic tool for the fixed coefficient-tower route, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General K-flat computation of actual derived scalar extension, without coefficient flatness. This is a generic tool for the fixed coefficient-tower route, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "General normalized balanced associativity and composite-unit equation for ring sheaves on any small site. This is a generic tool for the fixed coefficient-tower route, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "General normalized unbounded extension/restriction adjunction. This is a generic tool for the fixed coefficient-tower route, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Abstract categorical uniqueness of a unit-preserving comparison of left adjoints. This is a generic tool for the fixed coefficient-tower route, not a replacement of any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-e1a7885ea",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-e1a7885ea (reviewer sub-agent of L); spot-checked: I read all 7 steps of the proof. There are no new nodes, and the statement and stmt_deps are unchanged; on the base the item was statement-only, no re-split note exists and the item is not on a dropped list. Sources are Stacks 0D6D/06YY/06YS/0G7E/07A6/0H7J/00WH; the tags match their labels and no SGA is used. The route is the coefficient-associativity sentence of main-20261015 sk-lem-sp-reduction. Step 1: prop-weil-pbc-proetale-constant-ring-map identifies these specified c_R with c^f_A and covers U empty. Step 2: the adjuncts of rho_B phi_Y = u_*(phi_Z) rho_A give both coefficient squares; I checked this. Step 4: the balancing relation is well defined via Step 2, and relabelling along ring isomorphisms keeps the flat and K-flat tests. Step 5: the hypotheses of the K-flat resolution, the K-flat pullback and change of rings all hold, with no flatness of the coefficient maps. Step 6: I redid the mate calculation. With sigma the conjugate of alpha^{-1}, naturality gives sigma_{L2} R1(alpha) eta1 = eta2, and sigma = delta^{-1} gives R1(alpha) eta1 = delta_{L2} eta2. Uniqueness in lem-weil-pbc-conjugate-iso-unit-equation then gives tau = alpha, and the direction is correct. Maintainer note: the existing node lem-sp-scalar-associator-conjugate should name its unit-normalized adjunctions in its statement. Step 7: I checked the pure-tensor inverses, C-linearity and tower naturality. Edge cases checked: Z empty, phi = id, the nonflat map Z/l^2 to F_l, and C = 0. No duplicates: lem-trf-constant-coefficient-composition and lem-trf-scalar-model-associativity state different things. Batch 5: lem-sp-scalar-associator-conjugate reaches lem-trf-site-functorial-flat-resolution, which is general homological algebra (functorial flat resolutions), not a trace-formula or Poincare-duality step. It is also already in the closure through the base stmt_dep det-sp-scalar-extension-functor, so I accept it. The 7 generic tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProEtaleCoefficientTowerNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleCoefficientTowerNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientTowerPresentation",
+   "AlgebraicGeometry.ProEtale.CoefficientTowerNormalizationData",
+   "AlgebraicGeometry.ProEtale.coefficientTowerBalancedComparison",
+   "AlgebraicGeometry.ProEtale.coefficientTowerRelabel",
+   "AlgebraicGeometry.ProEtale.coefficientTowerDerivedRelabel",
+   "AlgebraicGeometry.ProEtale.coefficientTowerRelabelFactors",
+   "AlgebraicGeometry.ProEtale.coefficientTowerGeometricTransport",
+   "AlgebraicGeometry.ProEtale.coefficientTowerScalarTransport",
+   "AlgebraicGeometry.ProEtale.proEtaleCoefficientTowerNormalization"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ProEtaleCoefficientTowerNormalization.lean",
+  "statement": "theorem proEtaleCoefficientTowerNormalization (ℓ : ℕ) [Fact ℓ.Prime] {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] [Finite A] [Finite B] [Finite C] (_hA : ∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) (_hB : ∃ n : ℕ, ∀ b : B, (ℓ ^ n) • b = 0) (_hC : ∃ n : ℕ, ∀ c : C, (ℓ ^ n) • c = 0) (φ : A →+* B) (ψ : B →+* C) {Z Y : Scheme.{u}} (q : Z ⟶ Y) : IsIso (proEtaleCoefficientInverseImageMap q A) ∧ IsIso (proEtaleCoefficientInverseImageMap q B) ∧ IsIso (proEtaleCoefficientInverseImageMap q C) ∧ (proEtaleSheafInverseImage q CommRingCat.{u + 1}).map (proEtaleConstantRingMap (T := Y) φ) ≫ proEtaleCoefficientInverseImageMap q B = proEtaleCoefficientInverseImageMap q A ≫ proEtaleConstantRingMap (T := Z) φ ∧ (proEtaleSheafInverseImage q CommRingCat.{u + 1}).map (proEtaleConstantRingMap (T := Y) ψ) ≫ proEtaleCoefficientInverseImageMap q C = proEtaleCoefficientInverseImageMap q B ≫ proEtaleConstantRingMap (T := Z) ψ ∧ (∀ T : Scheme.{u}, T = Y ∨ T = Z → ∃ ν : CoefficientTowerNormalizationData T, ∀ N : proEtaleDerivedCategory T A, (coefficientTowerBalancedComparison T ν (proEtaleConstantRingMap (T := T) φ) (proEtaleConstantRingMap (T := T) ψ)).hom.app N ≫ eqToHom (congrArg (fun a : proEtaleConstantRing T A ⟶ proEtaleConstantRing T C ↦ (reductionDerivedChange T a).obj N) (scalarExtensionFunctor_ringMap_comp φ ψ T)) = (scalarExtensionFunctor_composition φ ψ T).hom.app N)",
+  "branch": "sheaf-dag",
+  "by": "Q139",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main theorem supplies the actual constant-ring coefficient squares and equality of the full normalized balanced associator with the prescribed scalar associator on both sites. Two companion statements give the explicit geometric-action transport and scalar transport; the latter includes its canonical derived counit equation. Helpers only repackage published functors, universal counits, normalization data and restriction along the inverse of the actual constant-section comparison; no new tensor, coefficient category, resolution choice or arbitrary comparison is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b510fee1",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Read the node, report (Worker report and Second reading present), the delivered module (9 declarations, sorry only) and the dependency declarations in side-live: Presentation/Normalization, scalarExtensionFunctor_composition (∃!-normalized), proEtaleConstantRingComparison = asIso c_A, proEtaleCoefficientInverseImageMap, proEtaleConstantRingMap. Node changed only in lean; 7 dep node files identical to live; lean.statement verbatim; no line over 100 chars; docstrings with source, blueprint and 7 proof steps; imports = proof_dep modules. Hypotheses exact; Type u for the rings is forced by the dependency interfaces. IsIso of the specified c_R; both coefficient squares in diagrammatic order; geometric and scalar transports pinned by pure-tensor formulas, eD pinned by counits; τ=α for T∈{Y,Z} and all unbounded N via eqToHom along φ_T≫ψ_T=(ψφ)_T. The ∃ν binder is canonical: representative and computed pin Normalization.derived, so τ is ν-independent. Edge cases Z=∅, Y=Z, C=0, A=0, φ=id, non-flat Z/ℓ²→F_ℓ, n=0, unbounded N OK. No duplicate (ScalarInverseImageTowerDiagram is abstract). Advisory only: owner decls outside stmt_deps (adic-coefficient-datum, stratum-scalar-extension, successive-quotient data); stmt_deps unchanged from S1. No compile: no file changed. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261024T184910-L-3252936",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

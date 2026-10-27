@@ -1,0 +1,111 @@
+{
+ "id": "lem-coef-etale-open-cochain-conjugate",
+ "kind": "statement",
+ "title": "The fixed ordinary open/scalar cochain comparison is conjugate to the restriction comparison.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Let A and B be arbitrary commutative rings, φ:A→B a ring homomorphism, and j:U→X an open immersion of schemes. For the ordinary open and scalar adjunctions of lem-coef-etale-open-comparison-data, apply mapHomologicalComplex to each and form their two composites. Conjugation of the cochain comparison induced by openScalarExtensionZero φ j under these two composite cochain adjunctions equals the cochain map induced by openRestrictScalarsIso φ j.",
+ "stmt_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof step 2: ordinary q-zero and the right restriction/scalar square. Stacks 0E8I, 03DI, 03EK and 06YY."
+ },
+ "proof": [
+  {
+   "text": "The definition of the ordinary q-zero comparison is uniqueness of left adjoints after identifying the right adjoints by the ordinary restriction square. Expanding leftAdjointUniq and conjugateEquiv_symm_apply_app identifies its conjugate with the restriction-square hom.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit and counit of each cochain adjunction are their ordinary unit and counit degree by degree. Evaluate the conjugate of the cochain comparison on a complex in each degree, expand the composite units and counits, and apply the ordinary identity from the first step. Equality of cochain morphisms and then natural transformations gives the claim.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Proof step 2: ordinary q-zero and the right restriction/scalar square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mates commute with passage to cochain complexes and localization to the derived category, including the scalar extension unit representative",
+   "results": "Adjunction.derived_unit, derivedη_fac_app and localization_unit_app; these provide generic unit formulas, not the stated normalization of the fixed etale comparisons.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction mate of the exact localization comparison is the inverse restriction localization factor, and left adjoint uniqueness is compatible with cochain complexes",
+   "results": "Adjunction.localization_counit_app, Localization.ε_app and derivedε_fac_app; generic localization formulas only.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugateEquiv|mapHomologicalComplex_unit_app_f|localization_unit_app",
+   "results": "Mathlib CategoryTheory.Adjunction.Mates, Unique and CompositionIso; Localization.Adjunction.localization_unit_app. These prove the categorical ingredients; the fixed etale comparison is not stated there.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenExtensionNormalization",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof step 2: ordinary q-zero and the right restriction/scalar square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleOpenCochainConjugate",
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenCochainConjugate.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenScalarCochainConjugate",
+  "statement": "theorem etaleOpenScalarCochainConjugate\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    conjugateEquiv\n      (((ProEtale.etaleSheafExtendScalarsAdjunction φ U).mapHomologicalComplex (.up ℤ)).comp\n        ((openImmersionLowerShriekUpperStarAdjunction\n      (ModuleCat.{u + 1} B) j).mapHomologicalComplex (.up ℤ)))\n      (((openImmersionLowerShriekUpperStarAdjunction\n      (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).comp\n          ((ProEtale.etaleSheafExtendScalarsAdjunction φ X).mapHomologicalComplex (.up ℤ)))\n      (Functor.mapHomologicalComplexCompIso (openScalarExtensionZero φ j) (.up ℤ)).hom =\n    (Functor.mapHomologicalComplexCompIso (openRestrictScalarsIso φ j) (.up ℤ)).hom",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T112258-L-1567490",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T112258-L-1567490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

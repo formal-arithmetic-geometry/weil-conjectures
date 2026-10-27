@@ -1,0 +1,72 @@
+{
+ "id": "sk-prop-logdet",
+ "kind": "statement",
+ "title": "Logarithm of a determinant",
+ "statement": "Let $L$ be a field of characteristic zero. For an endomorphism $v$ of\na finite-dimensional $L$-vector space $V$,\n\n$$\n \\det(1-Tv\\mid V)^{-1}\n  =\\exp\\left(\\sum_{m\\geq1}\n       \\operatorname{Tr}(v^m\\mid V)\\frac{T^m}{m}\\right)\n \\quad\\text{in }1+TL[[T]].\n \\tag{1}\n$$\n\nFor an endomorphism $v$ of a perfect complex $P$ in $D(L)$, put\n\n$$\n \\det(1-Tv\\mid P)\n  :=\\prod_i\\det(1-Tv\\mid H^i(P))^{(-1)^i}.\n$$\n\nThen (1) holds for $P$, with\n$\\operatorname{Tr}(v^m\\mid V)$ replaced by the categorical trace\n$\\operatorname{tr}_L(v^m\\mid P)$.\n\n*Complement.* Equivalently, for $v$ on $V$ as above,\n\n$$\n\\log\\det(1-Tv\\mid V)=-\\sum_{m\\ge1}\\operatorname{Tr}(v^{m}\\mid V)\\frac{T^{m}}{m}\n\\quad\\text{in }L[[T]].\n$$\n\nIn particular, for a Frobenius module $(V,F)$ of [sk-def-frobmod] (the case\n$L=\\overline{\\mathbf Q}_\\ell$),\n$\\exp\\bigl(\\operatorname{tr}_F(T)\\bigr)=\\det(1-TF\\mid V)^{-1}$ and\n$\\log\\det(1-TF\\mid V)=-\\operatorname{tr}_F(T)$ in $\\overline{\\mathbf Q}_\\ell[[T]]$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-prop-logdet/_section.md",
+  "place": "node sk-prop-logdet, order 2640"
+ },
+ "stmt_deps": [
+  "sk-def-frobmod"
+ ],
+ "proof": [
+  {
+   "text": "In $L[[T]]$ the matrix $1-Tv$ is invertible, with inverse\n$\\sum_{r\\geq0}T^rv^r$. The logarithmic derivative of the\ndeterminant of an invertible matrix $M$ over $L[[T]]$ is\n$\\operatorname{Tr}(M^{-1}M')$, so\n\n$$\n \\frac{d}{dT}\\log\\det(1-Tv)\n   =-\\operatorname{Tr}\\bigl(v(1-Tv)^{-1}\\bigr)\n   =-\\sum_{m\\geq1}\\operatorname{Tr}(v^m)T^{m-1}.\n$$",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Both logarithms have constant coefficient zero, and $L$ has\ncharacteristic zero; integrating and exponentiating gives\n(1). For a perfect complex, the categorical trace\nover a field is the alternating sum of the traces on the finitely many\nnonzero cohomology spaces ([sk-p-trace]), and the\nassertion follows by multiplying the identities for the $H^i(P)$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Complement.* The formal exponential and logarithm are mutually inverse\nbetween $TL[[T]]$ and $1+TL[[T]]$, so (1) is equivalent to the logarithmic\nform. Alternatively, over an algebraic closure $\\bar L$ of $L$ put $v$ in upper\ntriangular form ([sk-p-linear-triangular]) with diagonal\n$(\\lambda_1,\\dots,\\lambda_r)$. Then\n$\\operatorname{Tr}(v^{m}\\mid V)=\\sum_j\\lambda_j^{m}$ and\n$\\det(1-Tv\\mid V)=\\prod_j(1-\\lambda_jT)$; the formal logarithm is additive on\n$1+T\\bar L[[T]]$ (compare derivatives), and\n$\\log(1-\\lambda T)=-\\sum_{m\\ge1}\\lambda^{m}T^{m}/m$, so summing over the finite\nindex range gives the logarithmic form. No semisimplicity is used. For a\nFrobenius module, $\\operatorname{tr}_F(T)$ of [sk-def-frobmod] is the series\non the right, with $L=\\overline{\\mathbf Q}_\\ell$.",
+   "uses": [
+    "sk-def-frobmod"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "sk-def-frobmod"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-prop-logdet/_section.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2640,
+ "blueprint_uses": [
+  "sk-def-frobmod",
+  "sk-p-linear-triangular",
+  "sk-p-trace"
+ ],
+ "blueprint_lean": [
+  "LinearMap.inv_charpolyRev_eq_exp"
+ ],
+ "blueprint_lean_not_found": [
+  "LinearMap.inv_charpolyRev_eq_exp"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "sk-prop-logdet",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-prop-logdet"
+}

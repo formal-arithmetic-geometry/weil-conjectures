@@ -9,6 +9,8 @@ public import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineSectionComparison
+import Mathlib.RingTheory.GradedAlgebra.TensorProduct
 
 /-!
 # Canonical affine-basis symmetric algebra
@@ -16,8 +18,8 @@ public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 Source: Stacks Project, Constructions, Tag 01OB; Modules, Tags 01CG and 01CL
 (blueprint: def-trf-canonical-symmetric-graded-algebra).
 
-The rings, grades and restriction homomorphisms are specified constructions. Only the
-homogeneity and coefficientwise base-change properties are postponed.
+The rings, grades and restriction homomorphisms are specified constructions. Restriction
+preserves the grading and is coefficientwise base change for quasi-coherent modules.
 -/
 
 @[expose] public section
@@ -29,6 +31,8 @@ universe u
 open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.SymmetricAlgebraSheaf
+
+open scoped TensorProduct
 
 /-- The canonical symmetric grading on an affine section algebra. The decomposition is the
 unique inverse of the summation map, using the internality recorded by the symmetric-grading
@@ -58,7 +62,17 @@ theorem restriction_mem_symmetricDegree {X : Scheme.{u}} (E : X.Modules)
     (ha : a ∈ (SymmetricAlgebra.ι Γ(X, V.1) (E.val.obj (op V.1))).range ^ n) :
     restriction E (homOfLE (X := X.Opens) h).op a ∈
       (SymmetricAlgebra.ι Γ(X, U.1) (E.val.obj (op U.1))).range ^ n := by
-  sorry
+  induction ha using Submodule.pow_induction_on_left' with
+  | algebraMap r =>
+    rw [restriction_algebraMap]
+    exact Submodule.algebraMap_mem _
+  | add x y i hx hy ihx ihy =>
+    rw [map_add]
+    exact add_mem ihx ihy
+  | mem_mul m hm i x hx ih =>
+    obtain ⟨m, rfl⟩ := hm
+    rw [map_mul, restriction_ι, pow_succ']
+    exact Submodule.mul_mem_mul (LinearMap.mem_range_self _ _) ih
 
 /-- The actual symmetric-algebra restriction, bundled with its degree-preservation proof.
 Source: Stacks Project, Modules, Tag 01CG; Constructions, Tag 01OB
@@ -69,6 +83,24 @@ noncomputable def gradedRestriction {X : Scheme.{u}} (E : X.Modules)
       (fun n : ℕ ↦ (SymmetricAlgebra.ι Γ(X, U.1) (E.val.obj (op U.1))).range ^ n) where
   toRingHom := restriction E (homOfLE (X := X.Opens) h).op
   map_mem := fun {n} {a} ha ↦ restriction_mem_symmetricDegree E h n a ha
+
+private theorem graded_bijective_degree
+    {R S A B : Type u} [CommRing R] [CommRing S] [CommRing A] [CommRing B]
+    [Algebra R A] [Algebra S B]
+    {D : ℕ → Submodule R A} {D' : ℕ → Submodule S B}
+    [GradedAlgebra D] [GradedAlgebra D']
+    (f : D →+*ᵍ D') (hf : Function.Bijective f) (n : ℕ) :
+    Function.Bijective (f.gradedAddHom n) := by
+  classical
+  constructor
+  · intro a b hab
+    exact Subtype.ext (hf.injective (congrArg Subtype.val hab))
+  · intro b
+    obtain ⟨a, ha⟩ := hf.surjective b
+    refine ⟨DirectSum.decompose D a n, ?_⟩
+    apply Subtype.ext
+    change f (DirectSum.decompose D a n) = (b : B)
+    rw [f.map_directSumDecompose, ha, DirectSum.decompose_of_mem_same D' b.property]
 
 /-- Affine restriction is coefficientwise base change in each symmetric degree.
 Source: Stacks Project, Modules, Tags 01CG and 01CL; Constructions, Tag 01LN
@@ -85,7 +117,47 @@ theorem gradedRestriction_isGradedBaseChangeAlong {X : Scheme.{u}} (E : X.Module
     [E.IsQuasicoherent] {U V : X.affineOpens} (h : U ≤ V) :
     (gradedRestriction E h).IsGradedBaseChangeAlong
       (X.presheaf.map (homOfLE (X := X.Opens) h).op).hom := by
-  sorry
+  classical
+  let R := Γ(X, V.1)
+  let S := Γ(X, U.1)
+  let A := sections E (op V.1)
+  let B := sections E (op U.1)
+  let D : ℕ → Submodule R A := fun n ↦ (SymmetricAlgebra.ι R _).range ^ n
+  let D' : ℕ → Submodule S B := fun n ↦ (SymmetricAlgebra.ι S _).range ^ n
+  let : Algebra R S := (X.presheaf.map (homOfLE (X := X.Opens) h).op).hom.toAlgebra
+  let : Algebra R B := ((algebraMap S B).comp
+    (X.presheaf.map (homOfLE (X := X.Opens) h).op).hom).toAlgebra
+  have : IsScalarTower R S B := .of_algebraMap_eq' rfl
+  let f : D →ₐᵍ[R] (fun n ↦ (D' n).restrictScalars R) :=
+    { toRingHom := restriction E (homOfLE (X := X.Opens) h).op
+      commutes' := restriction_algebraMap E _
+      map_mem := fun {n} {a} ha ↦ restriction_mem_symmetricDegree E h n a ha }
+  let Φ := GradedAlgHom.liftEquiv D D' f
+  obtain ⟨e, he⟩ := exists_sectionTensorEquiv E U.2 V.2 h
+  have hΦ : Function.Bijective Φ := by
+    have heq : (fun t ↦ e t) = Φ := by
+      funext t
+      induction t using TensorProduct.induction_on with
+      | zero => simp only [map_zero]
+      | tmul r a => exact he r a
+      | add t t' ht ht' => simp only [map_add, ht, ht']
+    rw [← heq]
+    exact e.bijective
+  refine ⟨restriction_algebraMap E _, fun n ↦ ?_⟩
+  let l : (D n).baseChange S →ₗ[S] D' n :=
+    (Φ.toAlgHom.toLinearMap.domRestrict ((D n).baseChange S)).codRestrict
+      (D' n) (fun a ↦ Φ.map_mem a.property)
+  have hl : Function.Bijective l := graded_bijective_degree Φ.toGradedRingHom hΦ n
+  let e₁ := LinearEquiv.ofBijective ((D n).toBaseChange S)
+    (DirectSum.toBaseChange_bijective D n)
+  let e₂ := LinearEquiv.ofBijective l hl
+  apply IsBaseChange.of_equiv (e₁.trans e₂)
+  intro a
+  apply Subtype.ext
+  change Φ (1 ⊗ₜ[R] (a : A)) =
+    restriction E (homOfLE (X := X.Opens) h).op (a : A)
+  rw [GradedAlgHom.liftEquiv_tmul, one_smul]
+  rfl
 
 /-- The canonical affine-basis graded algebra of Sym(E). Its section rings are the
 sectionwise symmetric algebras, its degree-n part is the nth power of the degree-one

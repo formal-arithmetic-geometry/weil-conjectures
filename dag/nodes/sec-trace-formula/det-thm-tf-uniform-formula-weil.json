@@ -1,0 +1,101 @@
+{
+ "id": "det-thm-tf-uniform-formula-weil",
+ "kind": "statement",
+ "title": "Grothendieck–Lefschetz formula for Weil complexes over $E$ and $\\Qlb$",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$, where $q=p^a$, and a prime\n$\\ell\\neq p$. Let $X_0$ be a separated finite-type $k_0$-scheme and put\n$X=X_0\\times_{k_0}k$. Let $\\Lambda\\in\\{E,\\Qlb\\}$, with $E/\\Ql$ finite in\n$\\Qlb$ (so $\\Lambda=\\Ql$ is included), regarded as a condensed ring, and let\n$(K,\\theta)$ be a Weil complex in the sense of\n[def-weil-weil-sheaf-complex]: $K\\in\\Dbc(X,\\Lambda)$ and\n$\\theta:g_X^*K\\xrightarrow{\\sim}K$ an isomorphism. For instance $(K,\\theta)$\nmay be a Weil sheaf, or the pair $(\\operatorname{For}(K),\\theta_K)$ of an\nobject of $D^b_{c,\\mathrm W}(X,\\Lambda)$. Since $\\Dctf=\\Dbc$ for rational\ncoefficients, this is a Weil complex in the sense of\n[sk-def-sf-weil-complexes].\n\nWrite $F$ for the global geometric Frobenius of\n[def-weil-global-geometric-frobenius] on\n$H_c^i(X,K)=H^i\\RGammac(X_{\\mathrm{pro\\acute et}},K)$; it is the operator\n$\\operatorname{Frob}_{X,K}$ of [sk-thm-tf-uniform-formula]. For\n$y\\in X_0(\\mathbf F_{q^m})$ with geometric point $\\bar y$, write\n$F_{y,m}=\\operatorname{Frob}_{y,m}$ for the local operator on the stalk\n$K_{\\bar y}$, obtained by iterating $\\theta$ $m$ times as in\n[sk-thm-tf-uniform-formula]. Then:\n\n1. The $\\Lambda$-vector spaces $H_c^i(X,K)$ and $H^j(K_{\\bar y})$ are\n   finite-dimensional, and only finitely many of them are nonzero.\n2. For every $m\\geq1$, the operator induced on $H_c^i(X,K)$ by the $m$-th\n   iterate of $\\theta$ is $F^m$, and in $\\Lambda$\n   $$\n   \\boxed{\n   \\sum_{i\\in\\mathbf Z}(-1)^i\n   \\operatorname{Tr}\\bigl(F^m\\mid H_c^i(X,K)\\bigr)\n   =\\sum_{y\\in X_0(\\mathbf F_{q^m})}\n   \\sum_{j\\in\\mathbf Z}(-1)^j\n   \\operatorname{Tr}\\bigl(F_{y,m}\\mid H^j(K_{\\bar y})\\bigr).}\n   $$\n3. Let $\\Lambda=\\Qlb$, and let $(K',\\theta')$ be a Weil complex over a\n   finite $E'\\subset\\Qlb$ whose extension of scalars is $(K,\\theta)$; such a\n   model exists by the descent paragraph of [def-weil-weil-sheaf-complex].\n   Then $H_c^i(X,K)=H_c^i(X,K')\\otimes_{E'}\\Qlb$ and\n   $H^j(K_{\\bar y})=H^j(K'_{\\bar y})\\otimes_{E'}\\Qlb$, compatibly with the\n   operators. Every trace in (2) is the image along $E'\\hookrightarrow\\Qlb$\n   of the corresponding $E'$-valued trace for $(K',\\theta')$. The identity\n   depends only on $(K,\\theta)$, not on the model.",
+ "source": {
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-thm-tf-uniform-formula/det-thm-tf-uniform-formula-weil.md",
+  "place": "node det-thm-tf-uniform-formula-weil, order 2743"
+ },
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "sk-def-sf-weil-complexes",
+  "def-weil-global-geometric-frobenius",
+  "sk-thm-tf-uniform-formula"
+ ],
+ "proof": [
+  {
+   "text": "The automorphism $g_X$ of [def-weil-weil-sheaf-complex] and the semilinear\nFrobenius $\\operatorname{Fr}_X$ of [sk-def-sf-weil-complexes] are both\ninduced by the geometric Frobenius of $\\operatorname{Gal}(k/k_0)$, so\n$(K,\\theta)$ is a Weil complex in the sense of [sk-def-sf-weil-complexes],\nwith $K\\in\\Dbc(X,\\Lambda)=\\Dctf(X,\\Lambda)$.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "sk-def-sf-weil-complexes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(1) By [sk-lem-finite], $\\RGammac(X_{\\mathrm{pro\\acute et}},K)$ is a perfect\ncomplex over the field $\\Lambda$, so its cohomology is finite-dimensional and\nbounded. The stalk $K_{\\bar y}=\\bar y^*K$ lies in $\\Dctf(\\Spec k,\\Lambda)$,\nwhich [sk-lem-finite] identifies with $\\operatorname{Perf}(\\Lambda)$; the\nsame conclusion follows.",
+   "uses": [
+    "sk-lem-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(2) Write $\\theta^{[m]}=\\theta\\circ g_X^*\\theta\\circ\\cdots\\circ\n(g_X^{m-1})^*\\theta$. The compact-support pullback along the automorphism\n$g_X$ is natural and compatible with composition, so the operator\n$\\RGammac(\\theta^{[m]})\\circ(g_X^m)^\\sharp$ of $\\theta^{[m]}$ equals\n$\\RGammac(\\theta)\\circ g_X^\\sharp\\circ\\RGammac(\\theta^{[\\,m-1]})\\circ\n(g_X^{m-1})^\\sharp$, and by induction it is the $m$-th power of the operator\nof $\\theta$, which is $F$. By [sk-lem-tf-frobenius-convention], extended to\n$\\Lambda$ as in the proof of [sk-thm-tf-uniform-formula], it is the operator\n$\\operatorname{Frob}_{X,K}^m$ of that theorem, and $F_{y,m}$ is its local\noperator $\\operatorname{Frob}_{y,m}$. The boxed identity is therefore the\nidentity (2) of [sk-thm-tf-uniform-formula]. Over the field $\\Lambda$ the\ncategorical trace of an endomorphism of a perfect complex is the alternating\nsum of the traces on cohomology ([sk-p-trace]), so both sides are also the\ncategorical traces of (1) of [sk-thm-tf-uniform-formula].",
+   "uses": [
+    "sk-lem-tf-frobenius-convention",
+    "sk-thm-tf-uniform-formula"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "(3) Extension of scalars $\\Qlb_X\\otimes_{E'_X}-$ is exact, because\n$\\Qlb_X$ is flat over $E'_X$, and it commutes with $g_X^*$, with\n$\\RGammac$ and with stalks ([sk-prop-sfb-finite-extension-compatibility]).\nIt carries the operators of $\\theta'$ to those of $\\theta$. Hence\n$\\RGammac(X,K)\\simeq\\RGammac(X,K')\\otimes_{E'}\\Qlb$ and\n$K_{\\bar y}\\simeq K'_{\\bar y}\\otimes_{E'}\\Qlb$ with the extended operators;\nsince $\\Qlb$ is flat over $E'$, the same holds on cohomology. The trace of\nthe scalar extension of an $E'$-linear endomorphism of a finite-dimensional\nspace is the image of its trace. Both sides of (2) are defined from\n$(K,\\theta)$ alone, so the identity does not depend on the model. Two models\nbecome isomorphic as Weil complexes over a common finite extension\n([sk-thm-sfb-qlbar-two-colimit] (2)), and their operators are then\nconjugate, which gives the same $E'$-valued traces.",
+   "uses": [
+    "sk-thm-sfb-qlbar-two-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-weil-sheaf-complex",
+  "sk-def-sf-weil-complexes",
+  "sk-lem-finite",
+  "sk-lem-tf-frobenius-convention",
+  "sk-thm-tf-uniform-formula",
+  "sk-thm-sfb-qlbar-two-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-thm-tf-uniform-formula/det-thm-tf-uniform-formula-weil.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found",
+  "in_cycle"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2743,
+ "blueprint_uses": [
+  "sk-thm-tf-uniform-formula",
+  "def-weil-weil-sheaf-complex",
+  "sk-def-sf-weil-complexes",
+  "def-weil-global-geometric-frobenius",
+  "sk-lem-tf-frobenius-convention",
+  "sk-lem-finite",
+  "sk-thm-sfb-qlbar-two-colimit",
+  "sk-prop-sfb-finite-extension-compatibility",
+  "sk-p-trace"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.WeilSheaf.sum_trace_compactlySupportedCohomology",
+  "AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction",
+  "AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.WeilSheaf.sum_trace_compactlySupportedCohomology",
+  "AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction",
+  "AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023",
+ "blueprint": {
+  "is": "det-thm-tf-uniform-formula-weil",
+  "from": null,
+  "same_as": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-tf-uniform-formula"
+}

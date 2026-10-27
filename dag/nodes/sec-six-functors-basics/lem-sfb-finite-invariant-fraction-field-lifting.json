@@ -1,0 +1,80 @@
+{
+ "id": "lem-sfb-finite-invariant-fraction-field-lifting",
+ "kind": "statement",
+ "title": "Fixed fractions lift from the fraction field of an invariant base ring",
+ "statement": "Let $G$ be a finite group acting by ring automorphisms on a commutative integral domain $S$, meaning a nonzero commutative ring without zero divisors. Let $R$ be another commutative integral domain and let $f:R\\to S$ be an injective unital ring homomorphism whose image is precisely $S^G=\\{s\\in S:gs=s\\text{ for all }g\\in G\\}$. Let $K$ and $L$ be fraction fields of $R$ and $S$, respectively, with their canonical injective structure maps $\\iota_R:R\\to K$ and $\\iota_S:S\\to L$; thus each element is a quotient of two ring elements with nonzero denominator. Suppose $v:K\\to L$ is a unital ring homomorphism satisfying $v\\circ\\iota_R=\\iota_S\\circ f$. Give $L$ the extended action $g(\\iota_S(s)/\\iota_S(t))=\\iota_S(gs)/\\iota_S(gt)$ for $t\\ne0$. Then every $x\\in L$ fixed by all $g\\in G$ has the form $v(y)$ for some $y\\in K$. The homomorphism $v$ is a field extension in the sense of [def-pc-field-extension].",
+ "source": {
+  "document": "Mathlib/RingTheory/Invariant/Basic.lean",
+  "place": "IsFractionRing.isInvariant, lines 481--484 and 507--512, especially line 510; conclusion expanded using Algebra.IsInvariant in Mathlib/RingTheory/Invariant/Defs.lean:31--32."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "theorem isInvariant",
+   "results": "{\"t\": \"2026-10-23T09:56:12Z\", \"tool\": \"grep\", \"query\": \"theorem isInvariant\", \"sub\": \"RingTheory/Invariant/Basic.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"488\", \"510\"], \"digest\": \"269690a284077bbb\"}",
+   "date": "2026-10-23",
+   "verdict": "match: IsFractionRing.isInvariant, Mathlib/RingTheory/Invariant/Basic.lean:510, with its shared hypotheses at 481--484 and IsInvariant definition in Invariant/Defs.lean:31--32. Other hits concern Galois extensions or integrality rather than this fixed-fraction lifting conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fraction field of the invariant ring of a finite group equals the invariant subfield of the fraction field",
+   "results": "{\"t\": \"2026-10-23T09:56:13Z\", \"tool\": \"leansearch\", \"query\": \"Fraction field of the invariant ring of a finite group equals the invariant subfield of the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.to_isFractionRing\", \"IsGalois.of_fixed_field\", \"IsGaloisGroup.fixedPoints\", \"FixedPoints.isIntegral\", \"IsInvariantSubfield.mk\", \"FixedPoints.finrank_eq_card\", \"Algebra.IsInvariant.isIntegral\", \"IsGaloisGroup.fixedPoints_fixingSubgroup\"], \"digest\": \"71ae0f7291817122\"}",
+   "date": "2026-10-23",
+   "verdict": "match: IsFractionRing.isInvariant, Mathlib/RingTheory/Invariant/Basic.lean:510, with its shared hypotheses at 481--484 and IsInvariant definition in Invariant/Defs.lean:31--32. Other hits concern Galois extensions or integrality rather than this fixed-fraction lifting conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFractionRing.isInvariant",
+   "results": "{\"t\": \"2026-10-23T09:56:13Z\", \"tool\": \"loogle\", \"query\": \"IsFractionRing.isInvariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsFractionRing.isInvariant\"], \"digest\": \"955da16309c7683b\"}",
+   "date": "2026-10-23",
+   "verdict": "match: IsFractionRing.isInvariant, Mathlib/RingTheory/Invariant/Basic.lean:510, with its shared hypotheses at 481--484 and IsInvariant definition in Invariant/Defs.lean:31--32. Other hits concern Galois extensions or integrality rather than this fixed-fraction lifting conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed subrings under finite group actions on domains have fraction fields equal to the fixed subfield of the fraction field",
+   "results": "{\"t\": \"2026-10-23T09:56:20Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed subrings under finite group actions on domains have fraction fields equal to the fixed subfield of the fraction field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.normal\", \"IsGalois.of_fixed_field\", \"FixedPoints.isIntegral\", \"FixedPoints.intermediateField\", \"FixedPoints.isSeparable\", \"IsGaloisGroup.fixedPoints\", \"IsGaloisGroup.fixedPoints_fixingSubgroup\", \"FixedPoints.subfield\"], \"digest\": \"af6d580f4f034ed7\"}",
+   "date": "2026-10-23",
+   "verdict": "match: IsFractionRing.isInvariant, Mathlib/RingTheory/Invariant/Basic.lean:510, with its shared hypotheses at 481--484 and IsInvariant definition in Invariant/Defs.lean:31--32. Other hits concern Galois extensions or integrality rather than this fixed-fraction lifting conclusion."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsFractionRing.isInvariant",
+  "file": "Mathlib/RingTheory/Invariant/Basic.lean",
+  "line": 510,
+  "how": "specializes in one line: apply IsFractionRing.isInvariant G R S K L (line 510, hypotheses 481--484), taking Algebra R S from f and Algebra K L from v, and unfold Algebra.IsInvariant (Mathlib/RingTheory/Invariant/Defs.lean:31--32). The stated equality of the image of f with the fixed elements supplies both Algebra.IsInvariant R S G and SMulCommClass G R S; the quotient action supplies SMulDistribClass G S L. The displayed compatibility supplies both IsScalarTower assumptions. No integrality, normality, characteristic or faithful-action hypothesis is added."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-transitive-domain-product-invariants",
+  "date": "2026-10-23",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Generic fields and component orbits in a finite quotient of a normal scheme. Repair extraction of old proof steps 6 and 8: chosen-factor invariant evaluation and conjugate denominators. Fraction-field clause: fixed fractions lift to the fraction field of the invariant base ring.",
+   "via": [
+    "lem-sfb-transitive-domain-product-invariants",
+    "lem-sfb-finite-quotient-generic-fields",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
